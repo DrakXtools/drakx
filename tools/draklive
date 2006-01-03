@@ -709,9 +709,8 @@ sub copy_wizard {
     require interactive;
     require wizards;
     my $in = 'interactive'->vnew('su');
-    my $w = wizards->new;
     my ($storage, $device, $format);
-    $w->process({
+    my $w = wizards->new({
         name => N("Live system copy wizard"),
         pages => {
             welcome => {
@@ -758,8 +757,9 @@ sub copy_wizard {
                 },
                 end => 1,
             },
-        },
-    }, $in);
+        }
+    });
+    $w->process($in);
 }
 
 sub complete_config {

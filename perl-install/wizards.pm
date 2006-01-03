@@ -11,12 +11,10 @@ wizards - a layer on top of interactive that ensure proper stepping
 
 =head1 SYNOPSIS
 
-    use wizards
-    # global wizard options:
-
     use wizards;
     use interactive;
-    my $wiz = {
+
+    my $wiz = wizards->new({
 
                allow_user => "", # do we need root
                defaultimage => "", # wizard icon
@@ -52,10 +50,9 @@ wizards - a layer on top of interactive that ensure proper stepping
                                    ],
                       },
                      },
-           };
-
-    my $w = wizards->new;
-    $w->process($wiz, $in);
+           });
+    my $in = 'interactive'->vnew;
+    $wiz->process($in);
 
 =head1 DESCRIPTION
 
@@ -85,7 +82,10 @@ extra exception managment such as destroying the wizard window and the like.
 =cut
 
 
-sub new { bless {}, $_[0] }
+sub new {
+    my ($class, $o) = @_;
+    bless $o, $class;
+}
 
 
 sub check_rpm {
@@ -109,7 +109,7 @@ my %default_callback = (changed => sub {}, focus_out => sub {}, complete => sub 
 
 
 sub process {
-    my ($_w, $o, $in) = @_;
+    my ($o, $in) = @_;
     local $::isWizard = 1;
     local $::Wizard_title = $o->{name} || $::Wizard_title;
     local $::Wizard_pix_up = $o->{defaultimage} || $::Wizard_pix_up;
@@ -193,8 +193,8 @@ sub process {
 
 
 sub safe_process {
-    my ($w, $wiz, $in) = @_;
-    eval { $w->process($wiz, $in) };
+    my ($o, $in) = @_;
+    eval { $o->process($in) };
     my $err = $@;
     if ($err =~ /wizcancel/) {
         $in->exit(0);

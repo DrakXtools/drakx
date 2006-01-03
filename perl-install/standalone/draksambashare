@@ -366,10 +366,9 @@ sub printers_section() {
 }
 
 sub add_entry() {
-  use wizards;
+  require wizards;
   my ($wiz_addshare_name, $wiz_addshare_comment, $wiz_addshare_path);
-  my $w = wizards->new;
-  my $wiz = {
+  my $wiz = wizards->new({
 	     name => N("Add a Samba share"),
 	     pages => {
 		       welcome => {
@@ -426,21 +425,20 @@ sub add_entry() {
 				   next => 0,
 				  },
 		      }
-	    };
-  $w->process($wiz, $in);
+	    });
+  $wiz->process($in);
   $::isWizard = 0;
   gtkset_mousecursor_normal();
 }
 
 sub add_printers_entry() {
-  use wizards;
-  my $w = wizards->new;
+  require wizards;
   my %print = (
 	       1 => N("pdf-gen - a PDF generator"),
 	       2 => N("printers - all printers available"),
 	      );
   my $wiz_todo;
-  my $wiz = {
+  my $wiz = wizards->new({
 	     name => N("Add Special Printer share"),
 	     pages => {
 		       welcome => {
@@ -533,8 +531,8 @@ sub add_printers_entry() {
 				   next => 0,
 				  },
 		      }
-	    };
-  $w->process($wiz, $in);
+	    });
+  $wiz->process($in);
   $::isWizard = 0;
   #  gtkset_mousecursor_normal()
 }

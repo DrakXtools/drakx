@@ -63,10 +63,7 @@ sub add_device_wizard {
     my ($in, $config) = @_;
     my ($ups_models, $model_list) = readDriversList();
 
-    use wizards;
     my ($ups, $vendor, $model, $extra, $name, $driver, $port, @new_devices, $opts);
-    my $w = wizards->new;
-    my $wiz;
     my %methods = (
                    # network => N("Connected through the network"), # need SNMP probe
                    # serial => N("Connected through a serial port"),
@@ -75,7 +72,8 @@ sub add_device_wizard {
                    manual => N("Manual configuration"),
                   );
     my $method = $methods{auto};
-    $wiz = {
+    require wizards;
+    my $wiz = wizards->new({
             #defaultimage => "logdrake.png",    # FIXME
             name => N("Add an UPS device"),
             pages => {
@@ -164,8 +162,8 @@ Please fill in its name, its driver and its port.", $model, $vendor);
                               next => 0
                              },
                      },
-           };
-    $w->process($wiz, $in);
+           });
+    $wiz->process($in);
 
     $config->{$name}{driver} = $driver;
     $config->{$name}{port} = $port;

@@ -389,15 +389,14 @@ sub alert_config() {
     my %services_to_check = map { $_ => 1 } split(':', $options{SERVICES});
 
     $::isWizard = 1;
-    use wizards;
-    my $w = wizards->new;
     my $mode;
     my $cron_file = "/etc/cron.hourly/logdrake_service";
     my %modes = (
                    configure => N("Configure the mail alert system"),
                    disable =>  N("Stop the mail alert system"),
                   );
-    my $wiz = {
+    require wizards;
+    my $wiz = wizards->new({
                defaultimage => "logdrake.png",
                name => N("Mail alert"),
                pages => {
@@ -460,8 +459,8 @@ sub alert_config() {
                                   no_back => 1,
                                 },
                         },
-              };
-    $w->process($wiz, $in);
+              });
+    $wiz->process($in);
     return if $mode eq 'disable';
     
     $options{SERVICES} = join ':', grep { $services_to_check{$_} } sort keys %services_to_check;

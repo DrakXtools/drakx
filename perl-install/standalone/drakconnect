@@ -702,7 +702,8 @@ sub del_intf() {
     }
     @all_cards = network::ethernet::get_eth_cards($modules_conf);
     my %ethernet_names = network::ethernet::get_eth_cards_names(@all_cards);
-    my $wiz =
+    require wizards;
+    my $wiz = wizards->new(
       {
        defaultimage => "drakconnect.png",
        name => N("Remove a network interface"),
@@ -747,9 +748,8 @@ sub del_intf() {
                          end => 1,
                         },
                 },
-      };
-    require wizards;
-    wizards->new->safe_process($wiz, $in);
+      });
+    $wiz->safe_process($in);
     $in->exit(0);
 }
 

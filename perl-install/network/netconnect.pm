@@ -243,9 +243,8 @@ sub real_main {
       use locale;
       set_l10n_sort();
 
-      # main wizard:
-      my $wiz;
-      $wiz =
+      require wizards;
+      my $wiz = wizards->new(
         {
          defaultimage => "drakconnect.png",
          name => N("Network & Internet Configuration"),
@@ -1394,7 +1393,8 @@ Test your connection via net_monitor or mcc. If your connection does not work, y
                            end => 1,
                    },
                   },
-        };
+        });
+      $wiz->process($in);
 
       #- keeping the translations in case someone want to restore these texts
       if_(0,
@@ -1413,9 +1413,6 @@ Click on Ok to keep your configuration, or cancel to reconfigure your Internet &
 	  N("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n"),
 	  N("Internet connection"),
 	  );
-
-      require wizards;
-      wizards->new->process($wiz, $in);
 }
 
 sub safe_main {

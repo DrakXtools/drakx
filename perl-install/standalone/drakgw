@@ -68,8 +68,8 @@ my $resolv_conf = network::network::read_resolv_conf_raw();
 my $squid_conf = network::squid::read_squid_conf();
 my $dhcpd_conf = network::dhcpd::read_dhcpd_conf();
 
-my $wiz;
-$wiz =
+require wizards;
+my $wiz = wizards->new(
   {
    defaultimage => "drakgw.png",
    name => N("Internet Connection Sharing"),
@@ -332,9 +332,8 @@ You may now share Internet connection with other computers on your Local Area Ne
 	      end => 1,
 	     },
 	    },
-};
-require wizards;
-wizards->new->safe_process($wiz, $in);
+});
+$wiz->safe_process($in);
 
 
 
