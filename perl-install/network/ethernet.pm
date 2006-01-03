@@ -85,9 +85,8 @@ sub get_eth_cards {
             my $drv = readlink("$dev_path/driver");
             if ($drv && $drv =~ s!.*/!!) {
                 $a = $drv unless $detected_through_ethtool;
-                my %l;
                 my $sysfs_fields = detect_devices::get_sysfs_device_id_map($dev_path);
-                $l{$_} = hex(chomp_(cat_("$dev_path/" . $sysfs_fields->{$_}))) foreach keys %$sysfs_fields;
+                my %l = map { $_ => hex(chomp_(cat_("$dev_path/" . $sysfs_fields->{$_}))) } keys %$sysfs_fields;
                 my @cards = grep { my $dev = $_; every { $dev->{$_} eq $l{$_} } keys %l } detect_devices::probeall();
                 $description ||= $cards[0]{description} if @cards == 1;
             } elsif (!$a && -e "/sys/class/net/$interface/wireless") {
