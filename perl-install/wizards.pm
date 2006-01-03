@@ -54,7 +54,7 @@ wizards - a layer on top of interactive that ensure proper stepping
                      },
            };
 
-    my $w => wizards->new
+    my $w = wizards->new;
     $w->process($wiz, $in);
 
 =head1 DESCRIPTION
