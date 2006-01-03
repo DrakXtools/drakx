@@ -44,7 +44,7 @@ wizards - a layer on top of interactive that ensure proper stepping
                                    {
                                        # usual interactive fields:
                                        label => N("Banner:"),
-                                       val => \$o->{var}{wiz_banner}
+                                       val => \$o->{var}{wiz_banner},
                                        list => [] ,
                                        # wizard layer variables:
                                        boolean_list => "", # provide default status for booleans list
