@@ -203,7 +203,7 @@ sub doPartitionDisksAfter {
 
     if ($::local_install) {
 	my $p = fs::get::mntpoint2part($::prefix, [ fs::read_fstab('', '/proc/mounts') ]);
-	my $part = fs::get::device2part($p->{device}, $o->{fstab});
+	my $part = fs::get::device2part($p->{device}, $o->{fstab}) || $o->{fstab}[0];
 	$part->{mntpoint} = '/';
 	$part->{isMounted} = 1;
     }
