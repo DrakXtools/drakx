@@ -219,7 +219,7 @@ our %l = (
       qw(dm-crypt dm-mirror dm-mod linear lvm-mod multipath raid0 raid1 raid10 raid5),
     ],
     mouse => [
-      qw(atixlmouse busmouse generic_serial inport logibm logibusmouse msbusmouse pcips2 qpmouse synclinkmp),
+      qw(atixlmouse busmouse generic_serial inport ioc3_serial logibm logibusmouse msbusmouse pcips2 qpmouse synclinkmp),
       if_(arch() =~ /ppc/, 'macserial'),
       qw(hid mousedev usbhid usbmouse),
     ],
