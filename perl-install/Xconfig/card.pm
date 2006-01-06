@@ -343,7 +343,6 @@ sub install_server {
 	    log::explanations("Using specific NVIDIA driver and GLX extensions");
 	    $card->{Driver} = 'nvidia';
 	    $card->{DRI_GLX_SPECIAL} = $libglx;
-	    $card->{Options}{IgnoreEDID} = 1;
 	}
     }
     if ($card->{Driver2} eq 'fglrx' &&
