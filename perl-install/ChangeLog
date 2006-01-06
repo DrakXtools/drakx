@@ -1,3 +1,229 @@
+2006/01/06  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* Xconfig/card.pm: option IgnoreEDID is no more needed with nvidia driver
+
+2006/01/04  huftis
+
+	* share/po/nn.po: Updated nn translation.
+
+2006/01/04  Pixel  <pixel at mandriva.com>
+
+	* install_steps.pm: ugly hack to make things work when /proc/mounts says
+	/dev/root is mounted in /mnt
+
+2006/01/03  Olivier Blin <oblin at mandriva.com>
+
+	* wizards.pm: fix typo
+	don't have a useless empty hash in wizards objects, use the wizards hash
+	fix typo
+	fix documentation typo
+
+	* network/netconnect.pm, standalone/draksambashare, standalone/drakups,
+	standalone/drakconnect, standalone/logdrake, standalone/drakgw,
+	tools/draklive: don't have a useless empty hash in wizards objects, use
+	the wizards hash
+
+2006/01/03  shivahuang
+
+	* share/po/zh_TW.po: updated po file
+
+2006/01/03  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* network/ethernet.pm (get_eth_cards) simplify
+
+2006/01/02  Olivier Blin <oblin at mandriva.com>
+
+	* tools/draklive: use -boot prefix in syslinux file only if a specific
+	boot type is specified
+
+	* standalone/service_harddrake.sh: require dkms
+	add parallel init support (Couriousous)
+
+	* drakxtools.spec: refer to DrakXTools on the wiki
+
+2006/01/02  Stew Benedict  <sbenedict at mandriva.com>
+
+	* standalone/drakTermServ: check/sanitize user input MAC addresses, add
+	tooltips (#20384)
+
+2006/01/02  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* install_any.pm: typo fix (#13292)
+
+	* drakxtools.spec: fix URL
+	10.4.9-1mdk
+	10.4.8-1mdk
+
+	* detect_devices.pm: better not dying (#20340) it looks like there do be
+	some devices out
+	for which we failed to get proper data
+
+2005/12/31  xalba
+
+	* share/po/eu.po: osatu gabe
+
+2005/12/30  Stew Benedict  <sbenedict at mandriva.com>
+
+	* standalone/drakTermServ: Add support for custom kernel args in initrd
+	Add support for future unionfs/TS2
+	Perl_checker fixes
+
+2005/12/29  Olivier Blin <oblin at mandriva.com>
+
+	* diskdrake/resize_ext2.pm: remove incorrect and unused check (anyway,
+	e2fsprogs is required by basesystem)
+
+	* tools/draklive: use --inplace option in rsync, to avoid missing space
+	when overwriting an existing live system
+	don't record loopbacks on boot master
+	name the boot cdrom master as boot.iso (and factorize)
+	allow to use --boot-only for master/format/record steps
+	add optionnal boot storage type in $media->{boot} and build a custom
+	syslinux-boot.cfg for it
+	rename refresh_boot_only as boot_only
+	remove --record-boot option, this can be achieved using --boot-only
+	--record now
+	fix spacing
+	add --boot-only option to prepare for special boot images
+	use dashes instead of underscores in command line options
+	require root capabilities
+	sort storage types
+
+2005/12/29  pjetur
+
+	* share/po/is.po: Fix missing, spelling, better translations
+
+2005/12/28  Olivier Blin <oblin at mandriva.com>
+
+	* keyboard.pm, standalone/keyboarddrake: create new function and use it
+	(backport for finish-install)
+
+	* tools/draklive: install packages using urpmi --auto
+	add some minimal help in syslinux
+
+	* network/drakfirewall.pm: remove unused variable
+	don't install and configure mandi-ifw if ifw is disabled
+
+2005/12/28  Pixel  <pixel at mandriva.com>
+
+	* install_steps_interactive.pm: fix titi sucks :)
+
+	* lang.pm (backport) restore behaviour broken in commit 1.371 (nb: {lang}
+	is not always set in {langs} at that time)
+
+	* common.pm: let packages using common.pm to use Locale::gettext without
+	requiring it
+
+2005/12/27  Olivier Blin <oblin at mandriva.com>
+
+	* standalone/finish-install: allow to blacklist steps in
+	/etc/sysconfig/finish-install (backport)
+	locale is now set by any::selectLanguage_standalone
+	add ask_keyboard step (backport)
+
+	* any.pm: fix for localedrake in text mode (backport of patch from Pixel)
+
+	* tools/draklive: check that abs_path doesn't fail to find (rpm/patch)
+	files
+	add missing newline characters
+	add patches config option to apply patches on the installed system
+	remove urpmi media added by drakx-in-chroot, they're unusable
+	perl_checker fix
+	add --post_install option to run post install only (rpms and patches
+	installation)
+	rename patch option as patch_install
+	fix stupid mistake
+	don't allow to go on if no device is selected (thanks to Sylvie \o/)
+
+	* Xconfig/card.pm: check for nvidia_drv.so (as well as nvidia_drv.o)
+	check for nvidia_drv.so (as well as nvidia_drv.o)
+
+	* Makefile: keep install_messages.pm for finish-install (i.e. don't break
+	finish-install in 2006.0)
+
+2005/12/26  Olivier Blin <oblin at mandriva.com>
+
+	* tools/draklive: add a copy wizard
+	umount eventually mounted usb devices before formatting or running
+	syslinux
+	move default prefix in a dedicated hash
+	make options sourced from --config overwrite previous settings
+
+2005/12/22  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* standalone.pm: add support for $::no_global_argv_parsing, enabling to
+	NOT using common option
+	managemnt (eg: when using Getopt)
+
+	* raid.pm: we shouldn't rely on callers to load missing modules...
+
+	* drakxtools.spec: 10.4.7-1mdk
+
+2005/12/21  Olivier Blin <oblin at mandriva.com>
+
+	* tools/draklive: big rework to be able to record live system on multiple
+	media:
+	  - make bootloader/master/record steps media-specific
+	  - build bootloader files for each media (create bootloader files in
+	boot/<storage_type> directory, to ease live duplication)
+	  - merge initrd step in bootloader step
+	  - add extra_media configuration key, to specify alternate
+	media/storage
+	  - create loopbacks files in a loopbacks sub-directory
+	  - duplicate usb bootloader files at root of the usb media (for
+	syslinux to find them)
+	  - create initrd mountpoints in /live and move them in the new root
+	using "mount --move" (requires /bin/mount)
+	  - merge most media defaults in storage settings
+
+2005/12/20  Frederic Lepied  <flepied at mandriva.com>
+
+	* share/rpmsrate: added kdegraphics-kpdf
+
+2005/12/20  Pixel  <pixel at mandriva.com>
+
+	* patch/patch-2006-bad-fonts.pl: some fonts are not seen by fontconfig
+	because of a packaging pb, force a rebuild of fc cache
+
+2005/12/19  Olivier Blin <oblin at mandriva.com>
+
+	* tools/draklive: use rsync to copy files on usb media
+	disable network, authentication and users step in finish-install
+	fix mkisofs options ordering
+
+2005/12/19  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* lang.pm: from Yukiko Bando:
+	  - kasumi is now required by scim-anthy
+	  - uim-anthy is obsolete
+
+	* share/rpmsrate: install uim-qtimmodule too for KDE (Yukiko Bando)
+	kasumi is now required by scim-anthy (Yukiko Bando)
+
+	* detect_devices.pm (getSCSI_26) add a comment
+	(getSCSI_26) be more robust (aka do not silently not detect hard disks
+	when kernel sysfs exports got changed)
+	(getSCSI_26) handle kernel-2.6.14+
+
+	* drakxtools.spec: commit 10.4.6-1mdk's changes that pixel forgot to
+	commit
+
+2005/12/18  Olivier Blin <oblin at mandriva.com>
+
+	* network/adsl.pm: don't overwrite ONBOOT setting when writing adsl
+	configuration (#20089)
+
+2005/12/18  Pixel  <pixel at mandriva.com>
+
+	* standalone/net_applet: replace sprintf_fixutf8 with simple sprintf
+
+	* fsedit.pm: allow auto allocating partitions without giving a {mntpoint}
+
+	* common.pm, standalone.pm: allow common.pm and standalone.pm to be used
+	in drakxtools-backend without perl-Locale-gettext
+
+	* run_program.pm: fix bad typo
+
 2005/12/05  Antoine Ginies  <aginies at mandriva.com> 
 
 	* docs/HACKING: add missgin requires to build GI
