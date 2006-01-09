@@ -6,12 +6,16 @@
 # description: 	This runs the hardware probe, and optionally configures \
 #		changed hardware.
 #
-# X-Parallel-Init
-# X-Parallel-Requires: pcmcia dkms
-# X-Parallel-Interactive
+### BEGIN INIT INFO
+# Provides: harddrake
+# Should-Start: pcmcia dkms
+# Short-Description: The harddrake hardware probe
+# Description: This runs the hardware probe, and optionally configures
+#              changed hardware.
+# X-Mandriva-Interactive
+### END INIT INFO
 
 # This is an interactive program, we need the current locale
-
 [[ -f /etc/profile.d/lang.sh ]] && . /etc/profile.d/lang.sh
 
 # Source function library.
