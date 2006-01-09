@@ -1934,6 +1934,14 @@ sub poll_ppd_base {
 			# Remove the old entry
 			delete $thedb{$ppdkey};
 			my $newkey = $key;
+			# User-added PPD file, mark it
+			if ($ppd =~ m!printerdrake/!i) {
+			    $newkey .= ", " . N("user-supplied");
+			}
+			# Newly added PPD file, mark it
+			if ($ppdfile eq "/usr/share/cups/model/$ppd") {
+			    $newkey .= ", " . N("NEW");
+			}
 			if (!$printer->{expert}) {
 			    # Remove driver part in recommended mode
 			    $newkey =~ s/^([^\|]+\|[^\|]+)\|.*$/$1/;
@@ -1956,6 +1964,12 @@ sub poll_ppd_base {
 				s/^([^\|]+)(\|[^\|]+)(\|.*|)$/$oldmake$2$3/;
 			    $newkey =~
 				s/^([^\|]+\|)([^\|]+)(\|.*|)$/$1$oldmodel$3/;
+			}
+			# Do not overwrite another entry which has the
+			# same key, consider different PPD files with
+			# the same identity as a bug and drop them
+			if ($thedb{$newkey}) {
+			    next;
 			}
 			# Create the new entry
 			$thedb{$newkey}{ppd} = $ppd;
@@ -2078,10 +2092,24 @@ sub poll_ppd_base {
 		    }
 		}
 		
+		# User-added PPD file, mark it
+		if ($ppd =~ m!printerdrake/!i) {
+		    $key .= ", " . N("user-supplied");
+		}
+		# Newly added PPD file, mark it
+		if ($ppdfile eq "/usr/share/cups/model/$ppd") {
+		    $key .= ", " . N("NEW");
+		}
 		# Remove duplicate "recommended" tags and have the
 		# "recommended" tag at the end
 		$key =~ s/(\s*$sprecstr)(.*?)(\s*$sprecstr)/$2$3/;
 		$key =~ s/(\s*$sprecstr)(.+)$/$2$1/;
+		# Do not overwrite another entry which has the same
+		# key, consider different PPD files with the same identity
+		# as a bug and drop them
+		if ($thedb{$key}) {
+		    next;
+		}
 		# Create the new entry
 	        $thedb{$key}{ppd} = $ppd;
 		$thedb{$key}{make} = $mf;
