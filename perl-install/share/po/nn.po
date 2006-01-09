@@ -1,18 +1,18 @@
 # Translation of nn to Norwegian Nynorsk
-# Copyright (C) 2004, 2005 Free Software Foundation, Inc.
+# Copyright (C) 2004, 2005, 2006 Free Software Foundation, Inc.
+# Karl Ove Hufthammer <karl@huftis.org>, 2004, 2005, 2006.
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2004, 2005.
 msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "POT-Creation-Date: 2005-12-08 21:52+0800\n"
-"PO-Revision-Date: 2005-12-31 16:40+0100\n"
+"PO-Revision-Date: 2006-01-09 20:13+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.1\n"
+"X-Generator: KBabel 1.10.2\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: ../move/move.pm:292
@@ -4759,7 +4759,7 @@ msgstr ""
 "\n"
 "   Denne funksjonen er veldig nyttig når du skal installera Mandriva Linux "
 "på\n"
-" fleire like maskiner. Sjå avsnittet om autoinstallering på nettstaden vår "
+" fleire like maskiner. Sjå avsnittet om automatisk installering på nettstaden vår "
 "for\n"
 "meir informasjon.\n"
 "\n"
@@ -16728,7 +16728,7 @@ msgstr "Synkroniserer brukarliste med klientliste, inkludert «root»."
 msgid ""
 "In order to enable changes made for thin clients, the display manager must "
 "be restarted. Restart now?"
-msgstr ""
+msgstr "For at endringane skal trå i kraft for tynnklientane må skjermhandsamaren startast på nytt. Vil du starta han på nytt no?"
 
 #: standalone/drakTermServ:534
 #, c-format
@@ -16998,6 +16998,8 @@ msgid ""
 " the one in the Terminal Server database.\n"
 "Delete/re-add the user to the Terminal Server to enable login."
 msgstr ""
+"!!! Indikerer at passordet i systemdatabasen er ulikt det i terminaltenardatabasen.\n"
+"Du må slett og så leggja brukaren til terminaltenaren på nytt for å kunna logga inn."
 
 #: standalone/drakTermServ:1009
 #, c-format
@@ -17098,11 +17100,13 @@ msgid ""
 "Need to restart the Display Manager for full changes to take effect. \n"
 "(service dm restart - at the console)"
 msgstr ""
+"For at endringane skal trå i kraft må skjermhandsamaren startast på nytt. \n"
+"(«service dm restart» på konsollen.)"
 
 #: standalone/drakTermServ:1250
 #, c-format
 msgid "Thin clients will not work with autologin. Disable autologin?"
-msgstr ""
+msgstr "Tynnklientar fungerer ikkje med automatisk innlogging. Vil du slå av automatisk innlogging?"
 
 #: standalone/drakTermServ:1266
 #, c-format
@@ -17157,7 +17161,7 @@ msgstr "IP-områdeslutt:"
 #: standalone/drakTermServ:1397
 #, c-format
 msgid "Append TS Includes To Existing Config"
-msgstr ""
+msgstr "Legg TP-Includes til eksisterande oppsett"
 
 #: standalone/drakTermServ:1399
 #, c-format
@@ -17176,6 +17180,9 @@ msgid ""
 "from your running system.\n"
 "You can modify as needed."
 msgstr ""
+"Dei fleste av desse verdiane vart henta\n"
+"frå systemet ditt.\n"
+"Du kan endra dei om du ønskjer."
 
 #: standalone/drakTermServ:1419
 #, c-format
@@ -17183,6 +17190,8 @@ msgid ""
 "Dynamic IP Address Pool\n"
 "(needed for PXE clients):"
 msgstr ""
+"Dynamisk IP-adressesamling\n"
+"(nødvendig for PXE-klientar):"
 
 #: standalone/drakTermServ:1572
 #, c-format
@@ -17232,32 +17241,32 @@ msgstr "Noko gjekk galt. Er mkisofs installert?"
 #: standalone/drakTermServ:1638
 #, c-format
 msgid "Need to create /etc/dhcpd.conf first!"
-msgstr ""
+msgstr "Må oppretta /etc/dhcpd.conf først."
 
 #: standalone/drakTermServ:1797
 #, c-format
 msgid "%s passwd bad in Terminal Server - rewriting...\n"
-msgstr ""
+msgstr "%s-passordet i terminaltenaren er ugyldig. Skriver om …\n"
 
 #: standalone/drakTermServ:1810
 #, c-format
 msgid "%s is not a user..\n"
-msgstr ""
+msgstr "%s er ikkje ein brukar …\n"
 
 #: standalone/drakTermServ:1811
 #, c-format
 msgid "%s is already a Terminal Server user\n"
-msgstr ""
+msgstr "%s er allereie ein terminaltenarbrukar\n"
 
 #: standalone/drakTermServ:1813
 #, c-format
 msgid "Addition of %s to Terminal Server failed!\n"
-msgstr ""
+msgstr "Klarte ikkje leggja %s til terminaltenar.\n"
 
 #: standalone/drakTermServ:1815
 #, c-format
 msgid "%s added to Terminal Server\n"
-msgstr ""
+msgstr "%s er no lagt til terminaltenaren.\n"
 
 #: standalone/drakTermServ:1832
 #, c-format
@@ -17272,12 +17281,12 @@ msgstr "Fann ikkje «%s» …\n"
 #: standalone/drakTermServ:1935
 #, c-format
 msgid "/etc/hosts.allow and /etc/hosts.deny already configured - not changed"
-msgstr ""
+msgstr "/etc/hosts.allow og /etc/hosts.deny er allereie sett opp, og vert ikkje endra"
 
 #: standalone/drakTermServ:2075
 #, c-format
 msgid "Configuration changed - restart clusternfs/dhcpd?"
-msgstr ""
+msgstr "Oppsettet er endra. Vil starta clusternfs/dhcpd på nytt?"
 
 #: standalone/drakautoinst:38 standalone/drakhosts:123
 #: standalone/drakhosts:129 standalone/draknfs:84 standalone/draknfs:105
@@ -17292,12 +17301,12 @@ msgstr "Feil"
 #: standalone/drakautoinst:39
 #, c-format
 msgid "I can not find needed image file `%s'."
-msgstr ""
+msgstr "Finn ikkje den nødvendige biletfila «%s»."
 
 #: standalone/drakautoinst:41
 #, c-format
 msgid "Auto Install Configurator"
-msgstr ""
+msgstr "Oppsett av automatisk installering"
 
 #: standalone/drakautoinst:42
 #, c-format
@@ -17314,11 +17323,15 @@ msgid ""
 "\n"
 "Press ok to continue."
 msgstr ""
+"Du er i ferd med å laga ein diskett for automatisk installering. Denne funksjonen er noko risikofylt, og bør brukast med varsemd.\n"
+"\n"
+"Med installasjondisketten kan du køyra heile installasjonen du har gjort på datamaskina på nytt, automatisk. Merk at du vert spurd om relevante opplysingar i nokre av stega.\n\n"
+"Av tryggleiksomsyn vert ikkje partisjoneringa og formateringa gjort automatisk, uavhengig av kva val du gjorde når du først installerte på denne maskina.\n\nTrykk OK for å halda fram."
 
 #: standalone/drakautoinst:60
 #, c-format
 msgid "replay"
-msgstr ""
+msgstr "køyr automatisk"
 
 #: standalone/drakautoinst:60 standalone/drakautoinst:69
 #, c-format
@@ -17328,30 +17341,30 @@ msgstr "manuelt"
 #: standalone/drakautoinst:64
 #, c-format
 msgid "Automatic Steps Configuration"
-msgstr ""
+msgstr "Oppsett av automatiske steg"
 
 #: standalone/drakautoinst:65
 #, c-format
 msgid ""
 "Please choose for each step whether it will replay like your install, or it "
 "will be manual"
-msgstr ""
+msgstr "Vel for kvar steg om du vil køyra installeringa automatisk (som ved først installering) eller velja manuelt"
 
 #: standalone/drakautoinst:77 standalone/drakautoinst:78
 #: standalone/drakautoinst:92
 #, c-format
 msgid "Creating auto install floppy"
-msgstr ""
+msgstr "Lag diskett for automatisk installering"
 
 #: standalone/drakautoinst:90
 #, c-format
 msgid "Insert another blank floppy in drive %s (for drivers disk)"
-msgstr ""
+msgstr "Set inn endå ein tom diskett i stasjon «%s» (drivardiskett)"
 
 #: standalone/drakautoinst:91
 #, c-format
 msgid "Creating auto install floppy (drivers disk)"
-msgstr "Lagar diskett for automatisk installasjon …"
+msgstr "Lagar diskett for automatisk installering (drivardiskett)"
 
 #: standalone/drakautoinst:156
 #, c-format
@@ -17364,7 +17377,7 @@ msgstr ""
 "\n"
 "Velkommen.\n"
 "\n"
-"Vala for autoinstallering finn du i oversikta til venstre"
+"Vala for automatisk installering finn du i oversikta til venstre"
 
 #: standalone/drakautoinst:251
 #, c-format
@@ -17378,7 +17391,7 @@ msgstr ""
 #: standalone/drakautoinst:287
 #, c-format
 msgid "Auto Install"
-msgstr "Autoinstallering"
+msgstr "Automatisk installering"
 
 #: standalone/drakautoinst:356
 #, c-format
@@ -17445,17 +17458,17 @@ msgstr ""
 msgid ""
 "Star should be selected if you want to backup EA or ACLs, otherwise choose "
 "tar"
-msgstr ""
+msgstr "Du bør velja star om du vil lagra reservekopiar EA eller ACL-ar; elles bør du velja tar."
 
 #: standalone/drakbackup:163
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This should be a local user or email address that you want the backup "
 "results sent to. You will need to define a functioning mail server. Multiple "
 "users can be in a comma seperated list"
 msgstr ""
 "Dette bør vera ein lokal brukar eller ei e-postadresse du vil senda "
-"rapporten til. Du må òg velja ein fungerande e-posttenar."
+"rapporten til. Du må òg velja ein fungerande e-posttenar. Du kan velja fleire brukarar ved å bruka ei kommadelt liste."
 
 #: standalone/drakbackup:164
 #, fuzzy, c-format
@@ -17523,7 +17536,7 @@ msgstr "Ingen intervall valt for cron-operasjon."
 #: standalone/drakbackup:393
 #, c-format
 msgid "Interval cron not available as non-root"
-msgstr ""
+msgstr "Intervallcron er ikkje tilgjengeleg som ikkje-root."
 
 #: standalone/drakbackup:477 standalone/logdrake:440
 #, c-format
@@ -17701,7 +17714,7 @@ msgstr "Kopierer systemfiler …"
 #: standalone/drakbackup:1001 standalone/drakbackup:1040
 #, c-format
 msgid "Hard Disk Backup files..."
-msgstr ""
+msgstr "Harddiskreservekopieringsfiler …"
 
 #: standalone/drakbackup:1039
 #, c-format
@@ -17741,11 +17754,13 @@ msgid ""
 " FTP connection problem: It was not possible to send your backup files by "
 "FTP.\n"
 msgstr ""
+"\n"
+" FTP-sambandsproblem: Klarte ikkje senda reservekopifilene med FTP.\n"
 
 #: standalone/drakbackup:1105
 #, c-format
 msgid "Error during sending file via FTP. Please correct your FTP configuration."
-msgstr ""
+msgstr "Feil ved sendinga via FTP. Kontroller at FTP-oppsettet er rett."
 
 #: standalone/drakbackup:1107
 #, c-format
@@ -17790,9 +17805,9 @@ msgid "Can not create catalog!"
 msgstr "Klarte ikkje laga mappe."
 
 #: standalone/drakbackup:1321
-#, fuzzy, c-format
+#, c-format
 msgid "Problem installing %s"
-msgstr "Installerer «%s» …"
+msgstr "Problem ved installering av «%s»"
 
 #: standalone/drakbackup:1409
 #, c-format
@@ -17965,12 +17980,12 @@ msgstr "Reservekopieining:"
 #: standalone/drakbackup:1860
 #, c-format
 msgid "Backup directly to tape"
-msgstr ""
+msgstr "Ta kopi direkte til band"
 
 #: standalone/drakbackup:1866
 #, c-format
 msgid "Use tape hardware compression (EXPERIMENTAL)"
-msgstr ""
+msgstr "Bruk maskinvarekomprimering (EKSPERIMENTELT)"
 
 #: standalone/drakbackup:1872
 #, c-format
@@ -17980,12 +17995,12 @@ msgstr "Ikkje spol bandet tilbake etter kopiering"
 #: standalone/drakbackup:1878
 #, c-format
 msgid "Erase tape before backup"
-msgstr "Slett band før kopiering"
+msgstr "Slett bandet før kopiering"
 
 #: standalone/drakbackup:1884
 #, c-format
 msgid "Eject tape after the backup"
-msgstr "Løys ut band etter kopiering"
+msgstr "Løys ut bandet etter kopiering"
 
 #: standalone/drakbackup:1965
 #, c-format
@@ -17995,7 +18010,7 @@ msgstr "Lagringsmappe:"
 #: standalone/drakbackup:1969
 #, c-format
 msgid "Directory to save to"
-msgstr "Lagringsmappe:"
+msgstr "Lagringsmappe"
 
 #: standalone/drakbackup:1974
 #, c-format
@@ -18003,6 +18018,8 @@ msgid ""
 "Maximum disk space\n"
 " allocated for backups (MB)"
 msgstr ""
+"Maksimum diskplass\n"
+" for reservekopi (MB)"
 
 #: standalone/drakbackup:1978
 #, c-format
@@ -18148,19 +18165,19 @@ msgid "Saturday"
 msgstr "laurdag"
 
 #: standalone/drakbackup:2115
-#, fuzzy, c-format
+#, c-format
 msgid "Delete cron entry"
-msgstr "Slett klient"
+msgstr "Slett cron-oppføring"
 
 #: standalone/drakbackup:2116
-#, fuzzy, c-format
+#, c-format
 msgid "Add cron entry"
-msgstr "Legg til skrivar"
+msgstr "Legg til cron-oppføring"
 
 #: standalone/drakbackup:2174
 #, c-format
 msgid "Use daemon"
-msgstr "Ta automatisk reservekopiar"
+msgstr "Ta teneste"
 
 #: standalone/drakbackup:2178
 #, c-format
@@ -18188,24 +18205,24 @@ msgid "Month"
 msgstr "månad"
 
 #: standalone/drakbackup:2202
-#, fuzzy, c-format
+#, c-format
 msgid "Weekday (start)"
-msgstr "vekedag"
+msgstr "Vekedag (start)"
 
 #: standalone/drakbackup:2206
-#, fuzzy, c-format
+#, c-format
 msgid "Weekday (end)"
-msgstr "vekedag"
+msgstr "Vekedag (slutt)"
 
 #: standalone/drakbackup:2210
-#, fuzzy, c-format
+#, c-format
 msgid "Profile"
-msgstr "Profilar"
+msgstr "Profil"
 
 #: standalone/drakbackup:2216
-#, fuzzy, c-format
+#, c-format
 msgid "Current crontab:"
-msgstr "Gjeldande brukar"
+msgstr "Gjeldande crontab:"
 
 #: standalone/drakbackup:2224
 #, c-format
@@ -18220,12 +18237,12 @@ msgstr "Hugs å sjekka at at cron-tenesta vert starta automatisk."
 #: standalone/drakbackup:2229
 #, c-format
 msgid "If your machine is not on all the time, you might want to install anacron."
-msgstr ""
+msgstr "Viss maskina ikkje står på heile døgnet, bør du vurdera å installera anacron."
 
 #: standalone/drakbackup:2293
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the archive program"
-msgstr "Vel datoen å gjenoppretta frå:"
+msgstr "Vel arkivprogram"
 
 #: standalone/drakbackup:2298
 #, c-format
@@ -18245,7 +18262,7 @@ msgstr "Send rapport på e-post til:"
 #: standalone/drakbackup:2310
 #, c-format
 msgid "Return address for sent mail:"
-msgstr ""
+msgstr "Frå-adresse for e-post:"
 
 #: standalone/drakbackup:2316
 #, c-format
@@ -18400,7 +18417,7 @@ msgstr "\tIkkje bruk meir enn %s MiB\n"
 #: standalone/drakbackup:2606
 #, c-format
 msgid "\tDelete backups older than %s day(s)\n"
-msgstr ""
+msgstr "\tSlett reservekopiar som er eldre enn %s dagar\n"
 
 #: standalone/drakbackup:2609
 #, c-format
@@ -18418,7 +18435,7 @@ msgid ""
 "- Burn to CD"
 msgstr ""
 "\n"
-"– Brenn på CD"
+"– Brenn til CD"
 
 #: standalone/drakbackup:2615
 #, c-format
@@ -18452,7 +18469,7 @@ msgstr "\t\tSlett=%s"
 #: standalone/drakbackup:2621
 #, c-format
 msgid "\tBackup directly to Tape\n"
-msgstr ""
+msgstr "\tTa reservekopi direkte til band\n"
 
 #: standalone/drakbackup:2623
 #, c-format
@@ -18487,19 +18504,19 @@ msgid "\tDo not include System Files\n"
 msgstr "\tIkkje kopier systemfiler\n"
 
 #: standalone/drakbackup:2628
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use %s and bzip2\n"
-msgstr "\tBruk tar og bzip2\n"
+msgstr "\tBruk %s og bzip2\n"
 
 #: standalone/drakbackup:2629
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use %s and gzip\n"
-msgstr "\tBruk tar og gzip\n"
+msgstr "\tBruk %s og gzip\n"
 
 #: standalone/drakbackup:2630
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use %s only\n"
-msgstr "\tBerre bruk tar\n"
+msgstr "\tBerre bruk %s\n"
 
 #: standalone/drakbackup:2632
 #, c-format
@@ -18514,7 +18531,7 @@ msgstr "\tSend e-post til %s\n"
 #: standalone/drakbackup:2634
 #, c-format
 msgid "\tSend mail from %s\n"
-msgstr ""
+msgstr "\tSend e-post frå %s\n"
 
 #: standalone/drakbackup:2635
 #, c-format
@@ -18570,69 +18587,69 @@ msgstr "Det finst ikkje noko oppsett. Vel «Vegvisar» eller «Avansert».\n"
 msgid ""
 "List of data to restore:\n"
 "\n"
-msgstr ""
+msgstr "Oversikt over data som skal gjenopprettast:\n\n"
 
 #: standalone/drakbackup:2652
 #, c-format
 msgid "- Restore System Files.\n"
-msgstr ""
+msgstr "– Gjenopprett systemfiler.\n"
 
 #: standalone/drakbackup:2654 standalone/drakbackup:2664
 #, c-format
 msgid "   - from date: %s %s\n"
-msgstr ""
+msgstr "   – frå datoen: %s %s\n"
 
 #: standalone/drakbackup:2657
 #, c-format
 msgid "- Restore User Files: \n"
-msgstr ""
+msgstr "– Gjenopprett brukarfiler: \n"
 
 #: standalone/drakbackup:2662
 #, c-format
 msgid "- Restore Other Files: \n"
-msgstr ""
+msgstr "– Gjenopprett andre filer: \n"
 
 #: standalone/drakbackup:2841
 #, c-format
 msgid ""
 "List of data corrupted:\n"
 "\n"
-msgstr ""
+msgstr "Oversikt over øydelagde data:\n\n"
 
 #: standalone/drakbackup:2843
 #, c-format
 msgid "Please uncheck or remove it on next time."
-msgstr ""
+msgstr "Vel vekk eller fjern han neste gong."
 
 #: standalone/drakbackup:2853
 #, c-format
 msgid "Backup files are corrupted"
-msgstr ""
+msgstr "Reservekopifilene er øydelagde"
 
 #: standalone/drakbackup:2874
 #, c-format
 msgid "          All of your selected data have been          "
-msgstr ""
+msgstr "          Alle dei merkte dataa er          "
 
 #: standalone/drakbackup:2875
 #, c-format
 msgid "          Successfully Restored on %s       "
-msgstr ""
+msgstr "          gjenoppretta på %s       "
 
 #: standalone/drakbackup:2976
 #, c-format
 msgid "/usr/bin/star not found, using tar..."
-msgstr ""
+msgstr "Fann ikkje /usr/bin/start. Brukar tar i staden for …"
 
 #: standalone/drakbackup:3012
 #, c-format
 msgid "         Restore Configuration       "
-msgstr ""
+msgstr "         Gjenopprett oppsett       "
 
 #: standalone/drakbackup:3040
 #, c-format
 msgid "OK to restore the other files."
-msgstr ""
+msgstr "OK å gjenoppretta dei andre filene."
 
 #: standalone/drakbackup:3056
 #, c-format
@@ -18647,22 +18664,22 @@ msgstr "Vel datoen å gjenoppretta frå:"
 #: standalone/drakbackup:3158
 #, c-format
 msgid "Restore from Hard Disk."
-msgstr ""
+msgstr "Gjenopprett frå harddisk."
 
 #: standalone/drakbackup:3160
 #, c-format
 msgid "Enter the directory where backups are stored"
-msgstr ""
+msgstr "Skriv inn adressa til mappa det reservekopiane ligg"
 
 #: standalone/drakbackup:3164
 #, c-format
 msgid "Directory with backups"
-msgstr ""
+msgstr "Mappe med reservekopiar"
 
 #: standalone/drakbackup:3218
 #, c-format
 msgid "Select another media to restore from"
-msgstr ""
+msgstr "Vel eit anna medium å gjenoppretta frå"
 
 #: standalone/drakbackup:3220
 #, c-format
@@ -18692,17 +18709,17 @@ msgstr "Vel stigen å gjennoppretta (i staden for «/»)"
 #: standalone/drakbackup:3233 standalone/drakbackup:3514
 #, c-format
 msgid "Path To Restore To"
-msgstr ""
+msgstr "Stig å gjenoppretta til"
 
 #: standalone/drakbackup:3236
 #, c-format
 msgid "Do new backup before restore (only for incremental backups.)"
-msgstr ""
+msgstr "Ta ny reservekopi før gjenoppretting (berre for inkrementalkopiering)."
 
 #: standalone/drakbackup:3238
 #, c-format
 msgid "Remove user directories before restore."
-msgstr ""
+msgstr "Fjern brukarmapper før gjenoppretting."
 
 #: standalone/drakbackup:3322
 #, c-format
@@ -18712,7 +18729,7 @@ msgstr ""
 #: standalone/drakbackup:3325
 #, c-format
 msgid "Search Backups"
-msgstr ""
+msgstr "Søk gjennom reservekopiar"
 
 #: standalone/drakbackup:3343
 #, c-format
@@ -18722,7 +18739,7 @@ msgstr "Ingen treff …"
 #: standalone/drakbackup:3347
 #, c-format
 msgid "Restore Selected"
-msgstr "Gjenoppretting valt"
+msgstr "Gjenoppretting vald"
 
 #: standalone/drakbackup:3482
 #, c-format
