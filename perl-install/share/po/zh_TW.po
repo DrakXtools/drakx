@@ -9352,7 +9352,7 @@ msgstr "Microsoft Explorer"
 #: mouse.pm:47 mouse.pm:79
 #, c-format
 msgid "1 button"
-msgstr "一個按鍵"
+msgstr "單鍵式"
 
 #: mouse.pm:48 mouse.pm:57
 #, c-format
@@ -9387,7 +9387,7 @@ msgstr "Microsoft IntelliMouse"
 #: mouse.pm:61
 #, c-format
 msgid "Logitech MouseMan"
-msgstr "Logitech Bus Mouse"
+msgstr "Logitech MouseMan"
 
 #: mouse.pm:62
 #, c-format
@@ -9397,12 +9397,12 @@ msgstr "有滾輪模擬的 Logitech MouseMan"
 #: mouse.pm:63
 #, c-format
 msgid "Mouse Systems"
-msgstr "Mouse Systems"
+msgstr "滑鼠系統"
 
 #: mouse.pm:65
 #, c-format
 msgid "Logitech CC Series"
-msgstr "Logitech CC Series"
+msgstr "Logitech CC 系列"
 
 #: mouse.pm:66
 #, c-format
@@ -9427,7 +9427,7 @@ msgstr "MM HitTablet"
 #: mouse.pm:71
 #, c-format
 msgid "Logitech Mouse (serial, old C7 type)"
-msgstr "Logitech Mouse (serial, old C7 type)"
+msgstr "Logitech Mouse (序列式，舊 C7 型)"
 
 #: mouse.pm:72
 #, c-format
@@ -9472,7 +9472,7 @@ msgstr "任何 PS/2 與 USB 滑鼠"
 #: mouse.pm:89
 #, c-format
 msgid "Microsoft Xbox Controller S"
-msgstr "Microsoft Xbox 控制器"
+msgstr "Microsoft Xbox 控制器 S"
 
 #: mouse.pm:93 standalone/drakconnect:351 standalone/drakvpn:1126
 #, c-format
@@ -9487,7 +9487,7 @@ msgstr "無滑鼠"
 #: mouse.pm:304 mouse.pm:367 mouse.pm:376 mouse.pm:435
 #, c-format
 msgid "Synaptics Touchpad"
-msgstr ""
+msgstr "觸控板"
 
 #: mouse.pm:561
 #, c-format
@@ -9497,7 +9497,7 @@ msgstr "請測試滑鼠"
 #: mouse.pm:563
 #, c-format
 msgid "To activate the mouse,"
-msgstr "為了驅動您的滑鼠"
+msgstr "為了驅動您的滑鼠，"
 
 #: mouse.pm:564
 #, c-format
@@ -9507,12 +9507,12 @@ msgstr "請滾動您的滾輪！"
 #: network/drakfirewall.pm:12 share/compssUsers.pl:85
 #, c-format
 msgid "Web Server"
-msgstr "Web 伺服器"
+msgstr "網頁伺服器 (Web)"
 
 #: network/drakfirewall.pm:17
 #, c-format
 msgid "Domain Name Server"
-msgstr "網域名稱伺服器"
+msgstr "網域名稱伺服器 (DNS)"
 
 #: network/drakfirewall.pm:22
 #, c-format
@@ -9562,7 +9562,7 @@ msgstr "BitTorrent"
 #: network/drakfirewall.pm:74
 #, c-format
 msgid "Port scan detection"
-msgstr ""
+msgstr "連接埠掃描偵測"
 
 #: network/drakfirewall.pm:165
 #, c-format
@@ -9575,9 +9575,9 @@ msgid ""
 msgstr ""
 "drakfirewall 設定程式\n"
 "\n"
-"這是用來設定個人防火牆給 Mandriva Linux 機器.\n"
-"若是您需要很致力強大的防火牆解決方案, 請您參閱\n"
-"專門的 Mandriva Security Firewall distribution 產品資訊."
+"這是用來設定 Mandriva Linux 個人防火牆的程式。\n"
+"若您需要強大而專門的防火牆解決方案，請參考專門的 Mandriva Security\n"
+"Firewall 產品。"
 
 #: network/drakfirewall.pm:171
 #, c-format
@@ -9587,11 +9587,14 @@ msgid ""
 "Make sure you have configured your Network/Internet access with\n"
 "drakconnect before going any further."
 msgstr ""
+"drakfirewall 設定程式\n"
+"\n"
+"請確定在繼續之前您已經使用 drakconnect 來設定過網路/網際網路連線。"
 
 #: network/drakfirewall.pm:188
 #, c-format
 msgid "Which services would you like to allow the Internet to connect to?"
-msgstr "那一種服務您要允許網際網路來連線呢?"
+msgstr "您要允許網際網路連線至何種服務呢？"
 
 #: network/drakfirewall.pm:191
 #, c-format
@@ -9600,9 +9603,9 @@ msgid ""
 "Valid examples are: 139/tcp 139/udp 600:610/tcp 600:610/udp.\n"
 "Have a look at /etc/services for information."
 msgstr ""
-"您可以輸入各種的 port.\n"
-"有效的例子為:  139/tcp 139/udp 600:610/tcp 600:610/udp.\n"
-"查看 /etc/services 以取得資訊."
+"您可以輸入各種通訊埠。\n"
+"有效的例子為：139/tcp 139/udp 600:610/tcp 600:610/udp。\n"
+"請查閱 /etc/services 以取得資訊。"
 
 #: network/drakfirewall.pm:197
 #, c-format
@@ -9613,6 +9616,11 @@ msgid ""
 "\n"
 "You can also give a range of ports (eg: 24300:24350/udp)"
 msgstr ""
+"指定了無法使用的通訊埠：%s。\n"
+"正確的格式是 \"port/tcp\" 或 \"port/udp\"，其中通訊埠號\n"
+"介於 1 到 65535 之間。\n"
+"\n"
+"您也可以指定一個範圍的通訊埠 (例如：24300:24350/udp)"
 
 #: network/drakfirewall.pm:207
 #, c-format
@@ -9622,7 +9630,7 @@ msgstr "全部 (沒有 firewall)"
 #: network/drakfirewall.pm:209
 #, c-format
 msgid "Other ports"
-msgstr "其它埠"
+msgstr "其它通訊埠"
 
 #: network/drakfirewall.pm:251 network/drakfirewall.pm:254
 #: standalone/drakids:33 standalone/drakids:136 standalone/drakids:145
@@ -9640,11 +9648,13 @@ msgid ""
 "into your computer.\n"
 "Please select which network activity should be watched."
 msgstr ""
+"您可以在有人連接到某項服務或試圖侵入您的電腦時收到警告。\n"
+"請選擇要監控的網路活動項目。"
 
 #: network/drakfirewall.pm:257
 #, c-format
 msgid "Use Interactive Firewall"
-msgstr ""
+msgstr "使用互動式防火牆"
 
 #: network/ifw.pm:129
 #, c-format
@@ -9691,7 +9701,7 @@ msgstr "%2$s 試圖發動 \"%1$s\" 攻擊"
 #: network/netconnect.pm:713
 #, c-format
 msgid "Unlisted - edit manually"
-msgstr ""
+msgstr "未列出 - 手動編輯"
 
 #: network/isdn.pm:160 network/netconnect.pm:396
 #, c-format
@@ -9733,12 +9743,12 @@ msgstr "請選取 Windows 驅動程式 (.inf 檔)"
 #: network/ndiswrapper.pm:42
 #, c-format
 msgid "Unable to install the %s ndiswrapper driver!"
-msgstr ""
+msgstr "無法安裝 %s ndiswrapper 驅動程式！"
 
 #: network/ndiswrapper.pm:89
 #, c-format
 msgid "Unable to load the ndiswrapper module!"
-msgstr ""
+msgstr "無法載入 ndiswrapper 模組！"
 
 #: network/ndiswrapper.pm:95
 #, c-format
@@ -9746,11 +9756,13 @@ msgid ""
 "The selected device has already been configured with the %s driver.\n"
 "Do you really want to use a ndiswrapper driver?"
 msgstr ""
+"選取的裝置已經設定為使用 %s 驅動程式。\n"
+"您確定要使用 ndiswrapper 驅動程式？"
 
 #: network/ndiswrapper.pm:101
 #, c-format
 msgid "Unable to find the ndiswrapper interface!"
-msgstr ""
+msgstr "無法找到 ndiswrapper 介面！"
 
 #: network/netconnect.pm:69 network/netconnect.pm:494
 #: network/netconnect.pm:506
@@ -9781,7 +9793,7 @@ msgstr "自動 IP (BOOTP/DHCP/Zeroconf)"
 #: network/netconnect.pm:86
 #, c-format
 msgid "Protocol for the rest of the world"
-msgstr "其他世界的的通訊協定"
+msgstr "其他世界的通訊協定"
 
 #: network/netconnect.pm:88 standalone/drakconnect:563
 #, c-format
@@ -9827,7 +9839,7 @@ msgstr "ECI Hi-Focus 數據機"
 #: network/netconnect.pm:127
 #, c-format
 msgid "Dynamic Host Configuration Protocol (DHCP)"
-msgstr ""
+msgstr "動態主機設定協定 (DHCP)"
 
 #: network/netconnect.pm:128
 #, c-format
@@ -9837,7 +9849,7 @@ msgstr "手動組態設定 TCP/IP"
 #: network/netconnect.pm:129
 #, c-format
 msgid "Point to Point Tunneling Protocol (PPTP)"
-msgstr ""
+msgstr "點對點通道協定 (PPTP)"
 
 #: network/netconnect.pm:130
 #, c-format
@@ -10170,22 +10182,22 @@ msgstr ""
 #: network/netconnect.pm:491
 #, c-format
 msgid "Select the modem to configure:"
-msgstr "選取要設定的數據機:"
+msgstr "選取要設定的數據機："
 
 #: network/netconnect.pm:526
 #, c-format
 msgid "Please choose which serial port your modem is connected to."
-msgstr "請選取您數據機連接的序列埠."
+msgstr "請選取您數據機連接的序列埠。"
 
 #: network/netconnect.pm:555
 #, c-format
 msgid "Select your provider:"
-msgstr "選擇您的提供者:"
+msgstr "選擇您的提供者："
 
 #: network/netconnect.pm:579
 #, c-format
 msgid "Dialup: account options"
-msgstr "撥號: 帳號選項"
+msgstr "撥號：帳號選項"
 
 #: network/netconnect.pm:582
 #, c-format
@@ -10205,7 +10217,7 @@ msgstr "登入的 ID"
 #: network/netconnect.pm:599 network/netconnect.pm:632
 #, c-format
 msgid "Dialup: IP parameters"
-msgstr "撥號: IP 參數"
+msgstr "撥號：IP 參數"
 
 #: network/netconnect.pm:602
 #, c-format
@@ -10287,7 +10299,7 @@ msgstr ""
 #: network/netconnect.pm:739
 #, c-format
 msgid "ADSL connection type:"
-msgstr "ADSL 連線型態:"
+msgstr "ADSL 連線型態："
 
 #: network/netconnect.pm:797
 #, c-format
@@ -10302,7 +10314,7 @@ msgstr ""
 #: network/netconnect.pm:801
 #, c-format
 msgid "Encapsulation:"
-msgstr "封裝:"
+msgstr "封裝："
 
 #: network/netconnect.pm:831
 #, c-format
@@ -10330,6 +10342,7 @@ msgid ""
 "The following protocols can be used to configure a LAN connection. Please "
 "choose the one you want to use"
 msgstr ""
+"下列通訊協定可以用來設定一個區域網路 (LAN) 連線。請選擇一個來使用"
 
 #: network/netconnect.pm:930
 #, c-format
@@ -10381,7 +10394,7 @@ msgstr "公制"
 #: network/netconnect.pm:951
 #, c-format
 msgid "Enable IPv6 to IPv4 tunnel"
-msgstr ""
+msgstr "啟用 IPv6 到 IPv4 通道"
 
 #: network/netconnect.pm:953 standalone/drakconnect:369
 #: standalone/drakconnect:886
@@ -10439,7 +10452,7 @@ msgstr "選擇一個 ndiswrapper 驅動程式"
 #: network/netconnect.pm:1021
 #, c-format
 msgid "Use the ndiswrapper driver %s"
-msgstr ""
+msgstr "使用 ndiswrapper 驅動程式 %s"
 
 #: network/netconnect.pm:1021
 #, c-format
@@ -10449,7 +10462,7 @@ msgstr "安裝一個新的驅動程式"
 #: network/netconnect.pm:1033
 #, c-format
 msgid "Select a device:"
-msgstr ""
+msgstr "選擇一個裝置："
 
 #: network/netconnect.pm:1062
 #, c-format
@@ -10531,7 +10544,7 @@ msgstr "連線速率 (b/s)"
 #: network/netconnect.pm:1081 standalone/drakconnect:420
 #, c-format
 msgid "RTS/CTS"
-msgstr ""
+msgstr "RTS/CTS"
 
 #: network/netconnect.pm:1082
 #, c-format
@@ -10625,7 +10638,7 @@ msgstr ""
 #: network/netconnect.pm:1171
 #, c-format
 msgid "DVB configuration"
-msgstr ""
+msgstr "DVB 設定"
 
 #: network/netconnect.pm:1172
 #, c-format
@@ -10660,10 +10673,10 @@ msgid ""
 "such as ``mybox.mylab.myco.com''.\n"
 "You may also enter the IP address of the gateway if you have one."
 msgstr ""
-"請輸入您的主機名稱.\n"
-"您的主機名稱應該是一個完全合格的主機全名,\n"
-"類似 ``mybox.mylab.myco.com'' 的格式.\n"
-"使用閘道器的話, 也請在這邊輸入閘道器的 IP 位址."
+"請輸入您的主機名稱。\n"
+"您的主機名稱應該是一個完全合格的主機名稱，\n"
+"例如 ``mybox.mylab.myco.com''。\n"
+"如果您有閘道器的話，也請在這邊輸入閘道器的 IP 位址。"
 
 #: network/netconnect.pm:1227
 #, c-format
@@ -10708,7 +10721,7 @@ msgstr ""
 #: network/netconnect.pm:1236
 #, c-format
 msgid "Gateway (e.g. %s)"
-msgstr "閘道器 (比方 %s)"
+msgstr "閘道器 (例如 %s)"
 
 #: network/netconnect.pm:1238
 #, c-format
@@ -10742,42 +10755,42 @@ msgstr "Zeroconf 主機名稱"
 #: network/netconnect.pm:1272
 #, c-format
 msgid "Zeroconf host name must not contain a ."
-msgstr ""
+msgstr "Zeroconf 主機名稱必須包含一個 ."
 
 #: network/netconnect.pm:1282
 #, c-format
 msgid "Do you want to allow users to start the connection?"
-msgstr "您要在允許使用者啟動該連線嗎?"
+msgstr "您要允許使用者啟動該連線嗎?"
 
 #: network/netconnect.pm:1295
 #, c-format
 msgid "Do you want to start the connection at boot?"
-msgstr "您要在開機時自動啟動該連線嗎?"
+msgstr "您要在開機時自動啟動該連線嗎？"
 
 #: network/netconnect.pm:1311
 #, c-format
 msgid "Automatically at boot"
-msgstr "自動於開機時"
+msgstr "開機時自動啟動"
 
 #: network/netconnect.pm:1313
 #, c-format
 msgid "By using Net Applet in the system tray"
-msgstr ""
+msgstr "使用系統列的 Net Applet 啟動"
 
 #: network/netconnect.pm:1315
 #, c-format
 msgid "Manually (the interface would still be activated at boot)"
-msgstr ""
+msgstr "手動 (開機時啟用仍將啟動此介面)"
 
 #: network/netconnect.pm:1324
 #, c-format
 msgid "How do you want to dial this connection?"
-msgstr "您想要如何撥接這個連線?"
+msgstr "您想要如何撥接這個連線？"
 
 #: network/netconnect.pm:1337
 #, c-format
 msgid "Do you want to try to connect to the Internet now?"
-msgstr "現在您想要試著連線到 Internet 上面嗎?"
+msgstr "現在您想要試著連線到 Internet 上面嗎？"
 
 #: network/netconnect.pm:1345 standalone/drakconnect:1023
 #, c-format
@@ -10787,12 +10800,12 @@ msgstr "正在測試您的連線..."
 #: network/netconnect.pm:1370
 #, c-format
 msgid "The system is now connected to the Internet."
-msgstr "系統現在連上 Internet 了."
+msgstr "系統現在連上網際網路了。"
 
 #: network/netconnect.pm:1371
 #, c-format
 msgid "For security reasons, it will be disconnected now."
-msgstr "因為安全因素考量, 它現在將會被切斷連線."
+msgstr "因為安全因素考量，它現在將會被切斷連線。"
 
 #: network/netconnect.pm:1372
 #, c-format
@@ -10800,8 +10813,8 @@ msgid ""
 "The system does not seem to be connected to the Internet.\n"
 "Try to reconfigure your connection."
 msgstr ""
-"系統目前看起來似乎並沒有連上 Internet.\n"
-"請嘗試重新設定您的連線."
+"系統目前看起來似乎並沒有連上網際網路。\n"
+"請嘗試重新設定您的連線。"
 
 #: network/netconnect.pm:1387
 #, c-format
@@ -10818,8 +10831,8 @@ msgid ""
 "After this is done, we recommend that you restart your X environment to "
 "avoid any hostname-related problems."
 msgstr ""
-"在完成這個項目後, 我們建議您重新啟動您的 X 環境\n"
-"以避免因為您調整了主機名稱造成 X 的問題."
+"在完成這個項目後，我們建議您重新啟動您的 X 環境\n"
+"以避免任何關於主機名稱所造成的問題。"
 
 #: network/netconnect.pm:1391
 #, c-format
@@ -10829,8 +10842,8 @@ msgid ""
 "work, you might want to relaunch the configuration."
 msgstr ""
 "設定時發生問題.\n"
-"以 net_monitor 或 mcc 測試您的連線狀態. 若是您發現您的網路連線並不作用, 您或"
-"許需要重新再進行設定."
+"以 net_monitor 或 mcc 測試您的連線狀態。若是您發現您的網路連線沒有作用，您或"
+"許需要重新進行設定。"
 
 #: network/netconnect.pm:1402
 #, c-format
@@ -10861,14 +10874,14 @@ msgid ""
 "Click on Ok to keep your configuration, or cancel to reconfigure your "
 "Internet & Network connection.\n"
 msgstr ""
-"因為您是透過網路安裝, 所以您的網路組態已經設定過了.\n"
-"您可以點選確定 Ok 保留您的設定組態, 或者是選取取消 cancel\n"
-"來重新設定網路 & 網際網路連線.\n"
+"因為您是透過網路安裝，所以您的網路組態已經設定過了。\n"
+"您可以點選確定來保留您的組態設定，或者選取取消"
+"來重新設定網路 & 網際網路連線。\n"
 
 #: network/netconnect.pm:1409
 #, c-format
 msgid "The network needs to be restarted. Do you want to restart it?"
-msgstr "網路需要被重新啟動. 您想要重新啟動它嗎?"
+msgstr "網路需要被重新啟動。您想要重新啟動它嗎？"
 
 #: network/netconnect.pm:1410
 #, c-format
@@ -10877,7 +10890,7 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
-"重新啟動網路時發生了一個問題:\n"
+"重新啟動網路時發生了一個問題：\n"
 "\n"
 "%s"
 
@@ -10889,15 +10902,15 @@ msgid ""
 "\n"
 "Press \"%s\" to continue."
 msgstr ""
-"我們現在正要設定 %s 連線.\n"
+"我們現在正要設定 %s 連線。\n"
 "\n"
 "\n"
-"按 \"%s\" 繼續."
+"請按 \"%s\" 以繼續。"
 
 #: network/netconnect.pm:1412
 #, c-format
 msgid "Configuration is complete, do you want to apply settings?"
-msgstr "設定完成, 您想要套用設定值?"
+msgstr "設定完成，您想要套用設定值？"
 
 #: network/netconnect.pm:1413
 #, c-format
@@ -10906,14 +10919,14 @@ msgid ""
 "Choose the one you want to use.\n"
 "\n"
 msgstr ""
-"您已經選擇設定多個能夠連線到 Internet 的方式.\n"
-"請您選擇其中一個要使用的項目.\n"
+"您已經選擇設定多個能夠連線到網際網路的方式。\n"
+"請選擇其中一個您要使用的項目。\n"
 "\n"
 
 #: network/netconnect.pm:1414
 #, c-format
 msgid "Internet connection"
-msgstr "Internet 連線"
+msgstr "網際網路連線"
 
 #: network/netconnect.pm:1431
 #, c-format
@@ -10921,7 +10934,7 @@ msgid ""
 "An unexpected error has happened:\n"
 "%s"
 msgstr ""
-"發生了一個沒有預料到的錯誤：\n"
+"發生了一個無預期的錯誤：\n"
 "%s"
 
 #: network/network.pm:411
@@ -10935,6 +10948,7 @@ msgid ""
 "Here you can set up your proxies configuration (eg: http://"
 "my_caching_server:8080)"
 msgstr ""
+"您可以設定您的代理伺服器 (例如：http://my_caching_server:8080)"
 
 #: network/network.pm:413
 #, c-format
@@ -10944,12 +10958,12 @@ msgstr "HTTP 代理伺服器"
 #: network/network.pm:414
 #, c-format
 msgid "Use HTTP proxy for HTTPS connections"
-msgstr ""
+msgstr "HTTPS 連線也使用 HTTP 代理伺服器"
 
 #: network/network.pm:415
 #, c-format
 msgid "HTTPS proxy"
-msgstr ""
+msgstr "HTTPS 代理伺服器"
 
 #: network/network.pm:416
 #, c-format
@@ -10981,6 +10995,12 @@ msgid ""
 "\t\teth0, or eth1 for cable connection, \n"
 "\t\tippp+ for a isdn connection.\n"
 msgstr ""
+"請輸入連結到網際網路的介面名稱。\n"
+"\n"
+"例如：\n"
+"\t\tppp+ 用於數據機或 DSL 連線；\n"
+"\t\teth0 或 eth1 用於 cable 連線；\n"
+"\t\tippp+ 用於 ISDN 連線。\n"
 
 #: network/thirdparty.pm:232
 #, c-format
@@ -11004,7 +11024,7 @@ msgstr "無法安裝套件 (%s)！"
 #: network/thirdparty.pm:329
 #, c-format
 msgid "Some packages (%s) are required but aren't available."
-msgstr ""
+msgstr "需要某些套件 (%s) 卻無法使用。"
 
 #: network/thirdparty.pm:330
 #, c-format
@@ -11012,6 +11032,7 @@ msgid ""
 "These packages can be found in Mandriva Club or in Mandriva commercial "
 "releases."
 msgstr ""
+"這些套件無法在  Mandriva Club 或 Mandriva 商業版中找到。"
 
 #: network/thirdparty.pm:332
 #, c-format
@@ -11019,16 +11040,18 @@ msgid ""
 "The required files can also be installed from this URL:\n"
 "%s"
 msgstr ""
+"需要的檔案也可以由以下的 URL 安裝：\n"
+"%s"
 
 #: network/thirdparty.pm:372
 #, c-format
 msgid "Unable to find \"%s\" on your Windows system!"
-msgstr "無法從您的 Windows 系統找到 \"%s\"!"
+msgstr "無法從您的 Windows 系統找到 \"%s\"！"
 
 #: network/thirdparty.pm:374
 #, c-format
 msgid "No Windows system has been detected!"
-msgstr ""
+msgstr "沒有偵測到 Windows 系統！"
 
 #: network/thirdparty.pm:384
 #, c-format
@@ -11076,7 +11099,7 @@ msgstr "韌體複製失敗，找不到檔案 %s"
 #: standalone/drakvpn:888 standalone/scannerdrake:405
 #, c-format
 msgid "Congratulations!"
-msgstr "恭喜!!"
+msgstr "恭喜！"
 
 #: network/thirdparty.pm:424
 #, c-format
@@ -11086,7 +11109,7 @@ msgstr "韌體複製成功"
 #: network/thirdparty.pm:493
 #, c-format
 msgid "Looking for required software and drivers..."
-msgstr ""
+msgstr "正在搜尋需要的軟體與驅動程式..."
 
 #: network/thirdparty.pm:498
 #, c-format
@@ -11111,7 +11134,7 @@ msgstr ""
 #: partition_table.pm:391
 #, c-format
 msgid "mount failed: "
-msgstr "掛載失敗:"
+msgstr "掛載失敗："
 
 #: partition_table.pm:496
 #, c-format
@@ -11151,9 +11174,9 @@ msgid ""
 "It means writing anything on the disk will end up with random, corrupted "
 "data."
 msgstr ""
-"您的磁碟發生了一個嚴重的錯誤.\n"
-"資料完整性檢測已經失敗了.\n"
-"它意旨寫入任何東西到磁碟將會導致胡亂, 腐敗的資料."
+"您的磁碟發生了一個嚴重的錯誤。\n"
+"資料完整性檢測失敗。\n"
+"這表示寫入任何東西到磁碟將會導致錯亂的、損壞的資料。"
 
 #: pkgs.pm:21
 #, c-format
