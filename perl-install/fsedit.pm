@@ -350,6 +350,15 @@ sub suggest_part {
       grep { !$_->{hd} || $_->{hd} eq $part->{rootDevice} }
 	@$suggestions;
 
+    #- this allows specifying the size using a relative size.
+    #- one should rather use {ratio} instead
+    foreach (@local_suggestions) {
+	if ($_->{percent_size} && $_->{percent_size} =~ /(.+?)%?$/) {
+	    $_->{size} = $1 / 100 * fs::get::part2hd($part, $all_hds)->{totalsectors};
+	    log::l("in suggestion, setting size=$_->{size} for percent_size=$_->{percent_size}");
+	}
+    }
+
     my ($best) =
       grep { !$_->{maxsize} || $part->{size} <= $_->{maxsize} }
       grep { $_->{size} <= ($part->{maxsize} || $part->{size}) }
