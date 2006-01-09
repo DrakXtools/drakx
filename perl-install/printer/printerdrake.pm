@@ -69,6 +69,18 @@ sub config_cups {
 		     N("You can also decide here whether printers on remote machines should be automatically made available on this machine."),
 	     },
 	     [
+	      { val => N("Remote CUPS server and no local CUPS daemon") .
+		    ": " .
+		    ($daemonless_cups ? 
+		     N("On") . "; " . N("Server") . ": " . 
+		     $remote_cups_server :
+		     N("Off")),
+		help => N("In this mode the local CUPS daemon will be stopped and all printing requests go directly to the server specified below. Note that it is not possible to define local print queues then and if the specified server is down it cannot be printed at all from this machine."),
+		type => 'button',
+		clicked_may_quit => sub {
+		    $buttonclicked = "daemonlesscups";
+		    1;
+		} },
 	      { text => N("The printers on this machine are available to other computers"), type => 'bool',
 		val => \$printer->{cupsconfig}{localprintersshared},
 		disabled => sub {
@@ -135,18 +147,6 @@ If some of these measures lead to problems for you, turn this option off, but th
                     disabled => sub {
 			$daemonless_cups;
 		    } }),
-	      { val => N("Remote CUPS server and no local CUPS daemon") .
-		    ": " .
-		    ($daemonless_cups ? 
-		     N("On") . "; " . N("Server") . ": " . 
-		     $remote_cups_server :
-		     N("Off")),
-		help => N("In this mode the local CUPS daemon will be stopped and all printing requests go directly to the server specified below. Note that it is not possible to define local print queues then and if the specified server is down it cannot be printed at all from this machine."),
-		type => 'button',
-		clicked_may_quit => sub {
-		    $buttonclicked = "daemonlesscups";
-		    1;
-		} },
 	      ]
 	     )
 	    ) {
