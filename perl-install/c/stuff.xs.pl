@@ -284,9 +284,6 @@ usleep(microseconds)
   unsigned long microseconds
 
 int
-detectSMP()
-
-int
 dmiDetectMemory()
 
 void

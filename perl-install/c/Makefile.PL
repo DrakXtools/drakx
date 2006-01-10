@@ -16,7 +16,7 @@ WriteMakefile(
     'NAME'	=> 'stuff',
     'OPTIMIZE'  => '-Os',
     'MAKEFILE'  => 'Makefile_c',
-    'OBJECT'    => "stuff.o smp.o sbus.o silo.o smp-dmi.o" . ($pcmcia_dir && " probe.o"),
+    'OBJECT'    => "stuff.o sbus.o silo.o " . ($pcmcia_dir && " probe.o"),
     'VERSION_FROM' => 'stuff.pm', # finds $VERSION
     'LIBS'	=> [$libs],   # e.g., '-lm' 
     'DEFINE'	=> '',     # e.g., '-DHAVE_SOMETHING' 
