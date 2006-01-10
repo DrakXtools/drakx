@@ -135,7 +135,6 @@ sub selectLanguage {
 #------------------------------------------------------------------------------
 sub selectKeyboard {
     my ($o) = @_;
-    $o->{keyboard}{KBCHARSET} = lang::l2charset($o->{locale}{lang});
     keyboard::setup_install($o->{keyboard});
 
     addToBeDone {
