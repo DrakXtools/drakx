@@ -12,7 +12,6 @@
 # Short-Description: The harddrake hardware probe
 # Description: This runs the hardware probe, and optionally configures
 #              changed hardware.
-# X-Mandriva-Interactive
 ### END INIT INFO
 
 # This is an interactive program, we need the current locale
