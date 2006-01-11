@@ -155,6 +155,7 @@ foreach my $hw_class (@harddrake::data::tree) {
         modules::load_category($modules_conf, 'bus/usb');
         $modules_conf->write;
     } elsif ($Ident eq "VIDEO") {
+        # explicitely NOT read the existing config (eg: new profile with globetrotter)
         harddrake::autoconf::xconf($modules_conf, {});
         next;
     } elsif ($Ident eq "MOUSE") {
