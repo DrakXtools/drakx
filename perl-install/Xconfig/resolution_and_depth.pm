@@ -154,9 +154,11 @@ sub choices {
 	    put_in_hash($resolution_wanted, $monitors->[0]{preferred_resolution});
 	} elsif ($monitors->[0]{ModelName} =~ /^Flat Panel (\d+)x(\d+)$/) {
 	    put_in_hash($resolution_wanted, { X => $1, Y => $2 });
-	} else {
-	    my ($X, $Y) = split('x', size2default_resolution($monitors->[0]{diagonal_size} * 1.08 || 14));
+	} elsif ($monitors->[0]{diagonal_size}) {
+	    my ($X, $Y) = split('x', size2default_resolution($monitors->[0]{diagonal_size} * 1.08));
 	    put_in_hash($resolution_wanted, { X => $X, Y => $Y });
+	} else {
+	    put_in_hash($resolution_wanted, { X => 1024, Y => 768 });
 	}
     }
     my @matching = grep { $_->{X} eq $resolution_wanted->{X} && $_->{Y} eq $resolution_wanted->{Y} } @resolutions;
