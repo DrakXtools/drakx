@@ -226,7 +226,7 @@ floppy_info(name)
   OUTPUT:
   RETVAL
 
-double
+NV
 total_sectors(fd)
   int fd
   CODE:
