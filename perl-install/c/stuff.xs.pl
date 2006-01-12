@@ -226,13 +226,15 @@ floppy_info(name)
   OUTPUT:
   RETVAL
 
-unsigned int
+double
 total_sectors(fd)
   int fd
   CODE:
   {
-    long s;
-    RETVAL = ioctl(fd, BLKGETSIZE, &s) == 0 ? s : 0;
+    unsigned long long ll;
+    unsigned long l;
+    RETVAL = ioctl(fd, BLKGETSIZE64, &ll) == 0 ? ll / 512 : 
+             ioctl(fd, BLKGETSIZE, &l) == 0 ? l : 0;
   }
   OUTPUT:
   RETVAL
@@ -680,7 +682,7 @@ get_iso_volume_ids(int fd)
 
 @macros = (
   [ qw(int S_IFCHR S_IFBLK S_IFIFO KDSKBENT KT_SPEC K_NOSUCHMAP NR_KEYS MAX_NR_KEYMAPS BLKRRPART TIOCSCTTY
-       HDIO_GETGEO BLKGETSIZE LOOP_GET_STATUS
+       HDIO_GETGEO LOOP_GET_STATUS
        MS_MGC_VAL O_WRONLY O_RDWR O_CREAT O_NONBLOCK F_SETFL F_GETFL WNOHANG
        VT_ACTIVATE VT_WAITACTIVE VT_GETSTATE CDROM_LOCKDOOR CDROMEJECT CDROM_DRIVE_STATUS
        LOG_WARNING LOG_INFO LOG_LOCAL1
