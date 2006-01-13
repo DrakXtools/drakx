@@ -28,6 +28,9 @@ sub new {
 
     interactive::newt->new;
 
+    #- unset DISPLAY so that code testing wether DISPLAY is set can know we don't have or use X
+    delete $ENV{DISPLAY};
+
     banner('');
     Newt::PushHelpLine(
                        #-PO: This string must fit in a 80-char wide text screen
