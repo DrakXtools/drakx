@@ -14,7 +14,7 @@ sub good_default_monitor() {
   detect_devices::is_xbox() ? 'Generic|640x480 @ 60 Hz' :
     arch() =~ /ppc/ ? 
       (detect_devices::get_mac_model() =~ /^iBook/ ? 'Apple|iBook 800x600' : 'Apple|iMac/PowerBook 1024x768') :
-      (detect_devices::isLaptop() ? 'Generic|Flat Panel 1024x768' : 'Generic|1024x768 @ 70 Hz');
+      (detect_devices::isLaptop() ? 'Generic|Flat Panel 1024x768' : 'Generic|1024x768 @ 60 Hz');
 }
 
 my @VertRefresh_ranges = ("50-70", "50-90", "50-100", "40-150");
