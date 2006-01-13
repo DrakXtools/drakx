@@ -38,6 +38,17 @@ my $username = getpwuid($uid);
 my $usage =
 "usage: fileshareset --add <dir>
        fileshareset --remove <dir>";
+
+my $not_enabled =
+qq(File sharing is not enabled.
+To enable file sharing put 
+"FILESHARING=yes" in $authorisation_file);
+       
+my $not_simple_enabled = 
+qq(Simple file sharing is not enabled.
+To enable simple file sharing put
+"SHARINGMODE=simple" in $authorisation_file);
+
 my $non_authorised =
 qq(You are not authorised to use fileshare'ing
 To grant you the rights:
@@ -57,6 +68,10 @@ my %exit_codes = reverse(
   5 => "not exported",
 
   6 => $no_export_method,
+  
+  7 => $not_enabled,
+  
+  8 => $not_simple_enabled,
 
   255 => "various",
 );
@@ -145,7 +160,13 @@ sub check {
     my ($exclusive_lock) = @_;
     my $conf = read_conf($exclusive_lock);
 
-    if (lc($conf->{RESTRICT}) eq 'no') {
+    if (lc($conf->{FILESHARING}) eq 'no') {
+      ::error($not_enabled);
+    } elsif (lc($conf->{SHARINGMODE}) eq 'advanced') {
+      ::error($not_simple_enabled);
+    } elsif ($conf->{FILESHAREGROUP}) {
+      $authorisation_group = $conf->{FILESHAREGROUP};
+    } elsif (lc($conf->{RESTRICT}) eq 'no') {
 	# ok, access granted for everybody
     } else {
 	my @l;
@@ -253,8 +274,8 @@ sub write {
 sub update_server() {
     if (fork()) {
 	system('/usr/sbin/exportfs', '-r');
-	if (system('/sbin/pidof rpc.mountd >/dev/null') != 0 ||
-	    system('/sbin/pidof nfsd >/dev/null') != 0) {
+	if (system('PATH=/bin:/sbin pidof rpc.mountd >/dev/null') != 0 ||
+	    system('PATH=/bin:/sbin pidof nfsd >/dev/null') != 0) {
 	    # trying to start the server...
 	    system('/etc/init.d/portmap start') if system('/etc/init.d/portmap status >/dev/null') != 0;
 	    system('/etc/init.d/nfs', $_) foreach 'stop', 'start';
@@ -372,10 +393,15 @@ sub name_mangle {
 sub update_server() {
     if (fork()) {
 	system('/usr/bin/killall -HUP smbd 2>/dev/null');
-	if (system('/sbin/pidof smbd >/dev/null') != 0 ||
-	    system('/sbin/pidof nmbd >/dev/null') != 0) {
+	if (system('PATH=/bin:/sbin pidof smbd >/dev/null') != 0 ||
+	    system('PATH=/bin:/sbin pidof nmbd >/dev/null') != 0) {
 	    # trying to start the server...
-	    system('/etc/init.d/smb', $_) foreach 'stop', 'start';
+	    my ($f) = grep { -f $_ } map { "/etc/init.d/$_" } 'smb', 'samba', 'rc.samba';
+	    if ($f) {
+		system($f, $_) foreach 'stop', 'start';
+	    } else {
+		print STDERR "Error: Can't find the samba init script \n";
+	    }
 	}
 	exit 0;
     }
