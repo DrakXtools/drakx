@@ -601,6 +601,7 @@ sub main {
     	    die "unknown install type";
 	$o_ and last;
 
+	log::l("$o->{interactive} failed, trying again with newt");
 	$o->{interactive} = "newt";
 	require install_steps_newt;
     }
