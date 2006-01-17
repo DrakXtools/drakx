@@ -7,7 +7,9 @@ my $KMAP_MAGIC = 0x8B39C07F;
 
 BEGIN { @ARGV == 1 or die "usage: kmap2bkmap <keymap>\n" }
 
-system("sudo loadkeys $ARGV[0]") == 0 or die;
+# load unicode keymap
+my $unimap = "$ARGV[0]" . ".uni";
+system("sudo loadkeys $unimap") == 0 or die;
 open F, "dumpkeys -n -f |";
 <F> =~ /^keymaps\s+(.*)/ or die;
 foreach (split ',', $1) {
