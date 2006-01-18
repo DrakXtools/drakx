@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2006-01-17 20:17+0800\n"
-"PO-Revision-Date: 2006-01-03 22:14+0800\n"
+"PO-Revision-Date: 2006-01-19 01:11+0800\n"
 "Last-Translator: Shiva Huang <shivahuang@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -11048,7 +11048,7 @@ msgstr "沒有偵測到 Windows 系統！"
 #: network/thirdparty.pm:384
 #, c-format
 msgid "Insert floppy"
-msgstr "插入軟片"
+msgstr "請插入磁片"
 
 #: network/thirdparty.pm:385
 #, c-format
@@ -11060,7 +11060,7 @@ msgstr "插入一張 FAT 格式化的軟片於磁碟 %s 跟著 %s 於 root 目�
 #: network/thirdparty.pm:395
 #, c-format
 msgid "Floppy access error, unable to mount device %s"
-msgstr "軟片存取錯誤, 無法掛載裝置 %s"
+msgstr "磁片存取錯誤，無法掛載裝置 %s"
 
 #: network/thirdparty.pm:405
 #, c-format
@@ -11140,13 +11140,13 @@ msgid ""
 "The only solution is to move your primary partitions to have the hole next "
 "to the extended partitions."
 msgstr ""
-"您的硬碟分割表中有一個空洞, 我無法使用\n"
-"唯一的解決方法是將您的主分割區的位置搬移, 讓這些空洞與延伸分割區相鄰."
+"您的硬碟分割表中有一個空洞，我無法使用。\n"
+"唯一的解決方法是將您的主分割區的位置搬移，讓這些空洞與延伸分割區相鄰。"
 
 #: partition_table.pm:605
 #, c-format
 msgid "Restoring from file %s failed: %s"
-msgstr "試圖從檔案 %s 恢復時發生錯誤: %s"
+msgstr "試圖從檔案 %s 恢復時發生錯誤：%s"
 
 #: partition_table.pm:607
 #, c-format
@@ -11892,12 +11892,14 @@ msgstr "正在重新啟動 CUPS..."
 msgid ""
 "Allow pop-up windows, printer setup and package installation may be canceled"
 msgstr ""
+"允許彈出式視窗，印表機設定與套件安裝可以藉此中途取消"
 
 #: printer/printerdrake.pm:616
 #, c-format
 msgid ""
 "No pop-up windows, printer setup and package installation cannot be canceled"
 msgstr ""
+"不允許彈出式視窗，印表機設定與套件安裝將無法中途取消"
 
 #: printer/printerdrake.pm:622
 #, c-format
@@ -11910,6 +11912,7 @@ msgid ""
 "Here you can configure printer administration tasks which should be done "
 "automatically."
 msgstr ""
+"在此您可以設定要自動執行那些印表機管理工作。"
 
 #: printer/printerdrake.pm:626
 #, c-format
@@ -12005,7 +12008,7 @@ msgid ""
 msgstr ""
 "\n"
 "位於遠端 CUPS 伺服器的印表機上並不需要在這裡設定；\n"
-"這些印表機將自動偵測到。"
+"這些印表機將被自動偵測到。"
 
 #: printer/printerdrake.pm:751 printer/printerdrake.pm:4911
 #, c-format
@@ -12192,6 +12195,9 @@ msgid ""
 "them up for you. If you do not want to have all of them set up, unselect the "
 "ones which should be skipped, or click \"Cancel\" to set up none of them.\n"
 msgstr ""
+"已經找到下列的新印表機，Printerdrake 可以為您自動設定它們。如果您並不想要把它"
+"們全部設定起來，請把要略過的項目取消選取，或者點擊 \"取消\" 來略過全部的印表"
+"機。\n"
 
 #: printer/printerdrake.pm:987
 #, c-format
@@ -12200,6 +12206,8 @@ msgid ""
 "it up for you. If you do not want to have it set up, unselect it, or click "
 "\"Cancel\".\n"
 msgstr ""
+"已經找到下面的新印表機，Printerdrake 可以為您自動設定它。如果您並不想要把它"
+"設定起來，請將它取消選取，或者點擊 \"取消\"。\n"
 
 #: printer/printerdrake.pm:988
 #, c-format
@@ -12207,6 +12215,7 @@ msgid ""
 "Note that for certain printer models additional packages need to be "
 "installed. So keep your installation media handy.\n"
 msgstr ""
+"請注意有某些印表機型號需要安裝額外的套件，所以請將您的安裝媒體準備好。\n"
 
 #: printer/printerdrake.pm:1024 printer/printerdrake.pm:1066
 #, c-format
@@ -12510,12 +12519,12 @@ msgstr "正在偵測裝置..."
 #: printer/printerdrake.pm:1451
 #, c-format
 msgid ", network printer \"%s\", port %s"
-msgstr ", 網路印表機 \"%s\"，連接埠 %s"
+msgstr "，網路印表機 \"%s\"，連接埠 %s"
 
 #: printer/printerdrake.pm:1454
 #, c-format
 msgid ", printer \"%s\" on SMB/Windows server \"%s\""
-msgstr ", 網路印表機 \"%s\"，位於 SMB/Windows 伺服器 \"%s\""
+msgstr "，網路印表機 \"%s\"，位於 SMB/Windows 伺服器 \"%s\""
 
 #: printer/printerdrake.pm:1458
 #, c-format
@@ -12553,7 +12562,7 @@ msgid ""
 msgstr ""
 "無法找到本地印表機！請手動指定印表機的所在裝置名稱。\n"
 "(並列埠：/dev/lp0, /dev/lp1, ... 相當於 LPT1:, LPT2:..., \n"
-"第一台 USB 印表機是：/dev/usb/lp0, 第二台：/dev/usb/lp1)。"
+"第一台 USB 印表機是：/dev/usb/lp0，第二台：/dev/usb/lp1)。"
 
 #: printer/printerdrake.pm:1555
 #, c-format
@@ -12585,7 +12594,7 @@ msgstr "已偵測到下列的印表機。"
 msgid ""
 "If it is not the one you want to configure, enter a device name/file name in "
 "the input line"
-msgstr "若是找到的項目並不是你要設定的, 那麼請在欄位中輸入裝置名稱/檔案名稱"
+msgstr "若是找到的項目並不是您要設定的，那麼請在欄位中輸入裝置名稱/檔案名稱"
 
 #: printer/printerdrake.pm:1581
 #, c-format
@@ -12610,7 +12619,7 @@ msgstr "請選擇您要設定的印表機，或者在輸入欄位中輸入該裝
 msgid ""
 "Please choose the printer to which the print jobs should go or enter a "
 "device name/file name in the input line"
-msgstr "請選擇您印表機的連接埠, 或者是輸入該裝置的名稱"
+msgstr "請選擇您印表機的連接埠，或者是輸入該裝置的名稱"
 
 #: printer/printerdrake.pm:1589
 #, c-format
@@ -12636,12 +12645,12 @@ msgid ""
 "\"Manual configuration\"."
 msgstr ""
 "請選擇您要設定的印表機。印表機的相關設定將會自動完成。若您的印表機沒有正確的"
-"被偵測到或是您喜歡一個自訂的印表機設定，請打開 「手動設定」。"
+"被偵測到或是您喜歡一個自訂的印表機設定，請打開「手動設定」。"
 
 #: printer/printerdrake.pm:1594
 #, c-format
 msgid "Please choose the printer to which the print jobs should go."
-msgstr "請選取印表工作應該送達的印表機。"
+msgstr "請選取列印工作應該送達的印表機。"
 
 #: printer/printerdrake.pm:1596
 #, c-format
@@ -12662,7 +12671,7 @@ msgid ""
 "1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)."
 msgstr ""
 " (並列埠：/dev/lp0, /dev/lp1, ...... 相當於 LPT1:, LPT2:....\n"
-"第一台 USB 印表機是：/dev/usb/lp0, 第二台：/dev/usb/lp1)。"
+"第一台 USB 印表機是：/dev/usb/lp0，第二台：/dev/usb/lp1)。"
 
 #: printer/printerdrake.pm:1603
 #, c-format
@@ -12689,9 +12698,7 @@ msgid ""
 "To use a remote lpd printer, you need to supply the hostname of the printer "
 "server and the printer name on that server."
 msgstr ""
-"如要使用遠端的 lpd 印表機, 您必須要指定用來提供\n"
-"印表服務的遠端列印伺服主機名稱, 以及分享出來\n"
-"印表機名稱。"
+"若要使用遠端的 lpd 印表機，您必須要提供列印伺服器的主機名稱以及主機上的印表機名稱。"
 
 #: printer/printerdrake.pm:1681
 #, c-format
@@ -12706,12 +12713,12 @@ msgstr "遠端印表機名稱"
 #: printer/printerdrake.pm:1685
 #, c-format
 msgid "Remote host name missing!"
-msgstr "沒有指定遠端主機名稱 !"
+msgstr "沒有指定遠端主機名稱！"
 
 #: printer/printerdrake.pm:1689
 #, c-format
 msgid "Remote printer name missing!"
-msgstr "沒有指定印表機名稱 !"
+msgstr "沒有指定印表機名稱！"
 
 #: printer/printerdrake.pm:1719 printer/printerdrake.pm:2195
 #: printer/printerdrake.pm:2318 standalone/drakTermServ:467
@@ -12740,12 +12747,12 @@ msgstr "掃描網路中..."
 #: printer/printerdrake.pm:1814 printer/printerdrake.pm:1835
 #, c-format
 msgid ", printer \"%s\" on server \"%s\""
-msgstr ", 印表機 \"%s\", 位於主機 \"%s\""
+msgstr "，印表機 \"%s\"，位於主機 \"%s\""
 
 #: printer/printerdrake.pm:1817 printer/printerdrake.pm:1838
 #, c-format
 msgid "Printer \"%s\" on server \"%s\""
-msgstr "印表機 \"%s\", 位於 \"%s\""
+msgstr "印表機 \"%s\"，位於 \"%s\""
 
 #: printer/printerdrake.pm:1859
 #, c-format
@@ -12760,10 +12767,9 @@ msgid ""
 "the print server, as well as the share name for the printer you wish to "
 "access and any applicable user name, password, and workgroup information."
 msgstr ""
-"如要使用網路芳鄰印表機, 您必須要提供主機網芳名稱 \n"
-"(注意! 這個名稱與 TCP/IP 的主機名稱可能並不相同), \n"
-"有時還必須指定列印伺服器的 IP 位址、分享出來的印表\n"
-"機名稱、適當的使用者帳號與密碼, 以及工作群組的資訊。"
+"如要使用網路芳鄰印表機，您必須要提供主機的網芳名稱 (請注意！這個名稱可能與"
+" TCP/IP 的主機名稱不同！)，有時還必須指定列印伺服器的 IP 位址、分享出來的印"
+"表機名稱、適當的使用者帳號與密碼，以及工作群組的資訊。"
 
 #: printer/printerdrake.pm:1861
 #, c-format
@@ -12771,8 +12777,8 @@ msgid ""
 " If the desired printer was auto-detected, simply choose it from the list "
 "and then add user name, password, and/or workgroup if needed."
 msgstr ""
-"如果偵測出來的印表機是您所需要的, 你可以選擇該項目, 並輸入存取的使用者名稱、"
-"密碼, 必要時並輸入群組名稱。"
+"如果已經自動偵測到您要的印表機，您可以簡單的直接從清單中選取它，並輸入使用"
+"者名稱、密碼，必要時並請輸入群組名稱。"
 
 #: printer/printerdrake.pm:1863
 #, c-format
@@ -12807,7 +12813,7 @@ msgstr "伺服器的主機名稱或者是 IP 必須指定"
 #: printer/printerdrake.pm:1884
 #, c-format
 msgid "Samba share name missing!"
-msgstr "Samba 分享的名稱沒指定 !"
+msgstr "Samba 分享的名稱沒指定！"
 
 #: printer/printerdrake.pm:1890
 #, c-format
@@ -12838,17 +12844,17 @@ msgid ""
 "\n"
 msgstr ""
 "您目前打算使用一組帳號與密碼以便於能夠存取 Windows 主機來進行列印的工作。不過"
-"您需要注意的是, 因為系統是呼叫 Samba 的程式軟體連線到 Windows 主機, 所以執行"
-"程式時會在命令列加上您所設定輸入的帳號密碼。這可能會有一些安全性問題, 比方有"
+"您需要注意的是，因為系統是呼叫 Samba 的程式軟體連線到 Windows 主機，所以執行"
+"程式時會在命令列加上您所設定輸入的帳號密碼。這可能會有一些安全性問題，比方有"
 "使用者可以執行 ps aux指令來查看您帳號密碼內容。\n"
 "\n"
 "所以建議您可以使用下面方式：\n"
 "\n"
-"在 Windows 主機設置不需要密碼的帳號, 比方「GUEST」, 然後只有開放該帳號具備列"
-"印的功能。請注意, 千萬不要直接把 administrator 帳號設定為不需要密碼, 然後直接"
-"使用該 administrator 登入, 因為這是很危險的。\n"
+"在 Windows 主機設置不需要密碼的帳號，比方「GUEST」，然後只有開放該帳號具備列"
+"印的功能。請注意，千萬不要直接把 administrator 帳號設定為不需要密碼，然後直接"
+"使用該 administrator 登入，因為這是很危險的。\n"
 "\n"
-"或者是您可以設定您的 Windows 機器能夠讓印表機與 LPD 協定配合, 如此您就可以在 "
+"或者是您可以設定您的 Windows 機器能夠讓印表機與 LPD 協定配合，如此您就可以在"
 "Printerdrake 程式內使用「%s」連線類型進行設定與列印。\n"
 "\n"
 
@@ -12860,7 +12866,7 @@ msgid ""
 "type in Printerdrake.\n"
 "\n"
 msgstr ""
-"請設定好您的 Windows 主機的服務, 確認印表機能夠在 IPP 通訊協定上正常運作, 以"
+"請設定好您的 Windows 主機的服務，確認印表機能夠在 IPP 通訊協定上正常運作，以"
 "便於在 PrinterDrake 程式內使用 \"%s\" 連線能夠存取到。\n"
 
 #: printer/printerdrake.pm:1904
@@ -12874,7 +12880,7 @@ msgstr ""
 "將您的印表機安裝在 Linux 伺服器上且讓您的 Windows 機器以客戶端連線到 Linux 伺"
 "服器\n"
 "\n"
-"您確定要繼續進行設定這台印表機下去嗎?"
+"您確定要繼續進行設定這台印表機嗎？"
 
 #: printer/printerdrake.pm:1983
 #, c-format
@@ -12889,10 +12895,9 @@ msgid ""
 "print queue name for the printer you wish to access and any applicable user "
 "name and password."
 msgstr ""
-"如要使用 NetWare 印表機, 您必須要提供 NetWare\n"
-"列印伺服器的主機名稱 (注意! 這個名稱與 TCP/IP \n"
-"的主機名稱可能並不相同), 還要有分享出來的列印\n"
-"佇列名稱, 以及適當的使用者帳號與密碼。"
+"如要使用 NetWare 印表機，您必須要提供 NetWare列印伺服器的主機名稱 (請注意！"
+"這個名稱與 TCP/IP 的主機名稱可能並不相同)，還要有分享出來的列印佇列名稱，以"
+"及適當的使用者帳號與密碼。"
 
 #: printer/printerdrake.pm:1985
 #, c-format
@@ -12917,12 +12922,12 @@ msgstr "NCP 列印佇列名稱名稱沒指定"
 #: printer/printerdrake.pm:2076 printer/printerdrake.pm:2097
 #, c-format
 msgid ", host \"%s\", port %s"
-msgstr ", 主機 \"%s\", 連接埠 %s"
+msgstr "，主機 \"%s\"，連接埠 %s"
 
 #: printer/printerdrake.pm:2079 printer/printerdrake.pm:2100
 #, c-format
 msgid "Host \"%s\", port %s"
-msgstr "主機 \"%s\", 連接埠 %s"
+msgstr "主機 \"%s\"，連接埠 %s"
 
 #: printer/printerdrake.pm:2122
 #, c-format
@@ -12935,8 +12940,8 @@ msgid ""
 "Choose one of the auto-detected printers from the list or enter the hostname "
 "or IP and the optional port number (default is 9100) in the input fields."
 msgstr ""
-"請由清單內選擇您預期的印表機項目, 並且輸入主機名稱、\n"
-"IP等資訊, 必要時請輸入該連結埠號 (預設使用 port 9100)。"
+"請由清單內選擇已經自動偵測到的印表機或者在輸入欄位中輸入主機名稱或 IP 等資訊，"
+"必要時請輸入該連結埠號 (預設使用 port 9100)。"
 
 #: printer/printerdrake.pm:2125
 #, c-format
@@ -12946,12 +12951,12 @@ msgid ""
 "JetDirect servers the port number is usually 9100, on other servers it can "
 "vary. See the manual of your hardware."
 msgstr ""
-"要透過TCP/socket這類型的印表機進行列印, 您需要\n"
-"提供該印表機的主機名稱, 同時也可能需要選擇性輸入\n"
-"所在Port的位址。在大部分的HP-JetDirect印表機\n"
-"伺服主機所使用的Port多半為9100, 其餘類型的印表機\n"
-"就不一定為這個數值。建議您先閱讀印表機所提供的\n"
-"手冊, 尋找出你目前使用這款印表機的相關硬體資訊。"
+"要透過 TCP/socket 這類型的印表機進行列印，您需要"
+"提供該印表機的主機名稱，同時也可能需要選擇性輸入"
+"所在 Port 的位址。在大部分的 HP-JetDirect 印表機"
+"伺服主機所使用的 Port 多半為 9100，其餘類型的印表機"
+"就不一定為這個數值。建議您先閱讀印表機所提供的"
+"手冊，找出您目前使用這款印表機的相關硬體資訊。"
 
 #: printer/printerdrake.pm:2129
 #, c-format
@@ -12980,9 +12985,9 @@ msgid ""
 "either the CUPS or the Foomatic specifications. Note that not all URI types "
 "are supported by all the spoolers."
 msgstr ""
-"您可以直接使用 URI 的方式存取該印表機。URI 必須完整輸入\n"
-"CUPS伺服器所在位址, 或者是用 Foomatic 規格方式輸入。\n"
-"請注意, 並不是所有的 URI 類型都能夠被所有的 spooler 支援。"
+"您可以直接使用 URI 的方式存取該印表機。URI 必須完整輸入"
+"CUPS 伺服器所在位址或者使用 Foomatic 規格方式輸入。"
+"請注意，並不是所有的 URI 類型都能夠被所有的 spooler 支援。"
 
 #: printer/printerdrake.pm:2249
 #, c-format
@@ -13072,7 +13077,7 @@ msgstr ""
 #: printer/printerdrake.pm:2420
 #, c-format
 msgid "clicking the \"%s\" button, "
-msgstr ""
+msgstr "點擊 \"%s\" 按鈕，"
 
 #. -PO: "Edit" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: printer/printerdrake.pm:2420 standalone/drakperm:124 standalone/drakups:300
@@ -13178,7 +13183,7 @@ msgstr "正在安裝套件 SANE..."
 #: printer/printerdrake.pm:2612
 #, c-format
 msgid "Scanning on the %s will not be possible."
-msgstr ""
+msgstr "無法掃描 %s 。"
 
 #: printer/printerdrake.pm:2627
 #, c-format
@@ -13193,13 +13198,13 @@ msgstr "設定裝置中..."
 #: printer/printerdrake.pm:2678
 #, c-format
 msgid "Making printer port available for CUPS..."
-msgstr ""
+msgstr "讓印表機通訊埠可被 CUPS 所使用..."
 
 #: printer/printerdrake.pm:2688 printer/printerdrake.pm:2962
 #: printer/printerdrake.pm:3115
 #, c-format
 msgid "Reading printer database..."
-msgstr "正在讀取印表機資料 ..."
+msgstr "正在讀取印表機資料..."
 
 #: printer/printerdrake.pm:2920
 #, c-format
