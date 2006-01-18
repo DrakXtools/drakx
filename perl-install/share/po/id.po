@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
 "POT-Creation-Date: 2006-01-17 20:17+0800\n"
-"PO-Revision-Date: 2005-12-09 11:22+0700\n"
+"PO-Revision-Date: 2006-01-18 17:26+0700\n"
 "Last-Translator: Willy Sudiarto Raharjo <willysr@gmail.com>\n"
 "Language-Team: Indonesia <mdk-id@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -2642,7 +2642,7 @@ msgid ""
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
 "Untuk memastikan integritas data setelah ukuran partisi berubah,\n"
-"pengujian sistem file akan dilakukan pada boot berikut dalam Windows(TM)"
+"pengujian sistem file akan dilakukan pada boot berikut dalam Windows®"
 
 #: diskdrake/interactive.pm:852
 #, c-format
@@ -4818,7 +4818,7 @@ msgstr "Gunakan partisi yang sudah ada"
 #: help.pm:374 install_interactive.pm:138
 #, c-format
 msgid "Use the free space on the Microsoft Windows® partition"
-msgstr "Gunakan ruang kosong pada partisi windows"
+msgstr "Gunakan ruang kosong pada partisi Microsoft Windows®"
 
 #: help.pm:374
 #, c-format
@@ -6035,6 +6035,11 @@ msgid ""
 "\n"
 "Do you have a supplementary installation medium to configure?"
 msgstr ""
+"Media berikut ditemukan dan akan digunakan selama installasi: %s.\n"
+"\n"
+"\n"
+"Apakah Anda memiliki media installasi tambahan untuk dikonfigurasi?"
+
 
 #: install_any.pm:422 printer/printerdrake.pm:3188
 #: printer/printerdrake.pm:3195 standalone/scannerdrake:182
@@ -6400,13 +6405,13 @@ msgstr ""
 "PERINGATAN!\n"
 "\n"
 "\n"
-"DrakX sekarang akan mengubah ukuran partisi Windows Anda.\n"
+"Partisi Microsoft Windows® Anda akan diganti ukurannya.\n"
 "\n"
 "\n"
 "Hati-hati: proses ini amat berbahaya. Bila Anda belum pernah melakukannya, "
 "Anda harus keluar dari proses installasi ini, lalu reboot ke windows "
-"jalankan \"chkdsk c:\" dari Command Prompt (hati-hati, menjalankan program "
-"grafis \"scandisk\"\n"
+"jalankan \"chkdsk c:\" dari Command Prompt Microsoft Windows® (hati-hati, "
+"menjalankan program grafis \"scandisk\"\n"
 "tidaklah cukup, pastikan menggunakan \"chkdsk\" dari Command Prompt!), juga "
 "defrag, lalu ulangi installasi. Anda juga harus membackup data Anda.\n"
 "\n"
@@ -6840,7 +6845,7 @@ msgid ""
 "install chapter of the Official Mandriva Linux User's Guide."
 msgstr ""
 "Selamat, installasi selesai.\n"
-"Ambil media boot dan tekan Return/Enter untuk reboot.\n"
+"Ambil media boot dan tekan Enter untuk reboot.\n"
 "\n"
 "\n"
 "Untuk informasi perbaikan yang tersedia untuk rilis Mandriva Linux\n"
@@ -12439,12 +12444,12 @@ msgstr "%s (Port %s)"
 #: printer/main.pm:1939 printer/main.pm:2097
 #, c-format
 msgid "user-supplied"
-msgstr ""
+msgstr "disediakan oleh pengguna"
 
 #: printer/main.pm:1943 printer/main.pm:2101
 #, c-format
 msgid "NEW"
-msgstr ""
+msgstr "BARU"
 
 #: printer/printerdrake.pm:24
 #, c-format
@@ -17453,32 +17458,34 @@ msgstr "%s: %s memerlukan nama host...\n"
 #: standalone/drakTermServ:138
 #, c-format
 msgid "Host name for client"
-msgstr ""
+msgstr "Nama host untuk klien"
 
 #: standalone/drakTermServ:139
 #, c-format
 msgid "MAC address should be in the format 00:11:22:33:44:55"
-msgstr ""
+msgstr "Alamat MAC harus dalam format 00:11:22:33:44:55"
 
 #: standalone/drakTermServ:140
 #, c-format
 msgid "IP address to be assigned to client"
-msgstr ""
+msgstr "Alamat IP yang akan diberikan ke klien"
 
 #: standalone/drakTermServ:141
 #, c-format
 msgid "Kernel/network adapter image to use to boot client"
-msgstr ""
+msgstr "Kernel/image adapter jaringan yang digunakan untuk memboot "
+"klien"
 
 #: standalone/drakTermServ:142
 #, c-format
 msgid "Create masking files to allow configuration tools to run on client"
-msgstr ""
+msgstr "Membuat file mask untuk mengijinkan perkakas konfigurasi untuk "
+"dijalankan pada klien"
 
 #: standalone/drakTermServ:143
 #, c-format
 msgid "Applications will run on server machine"
-msgstr ""
+msgstr "Aplikasi akan berjalan pada komputer server"
 
 #: standalone/drakTermServ:226 standalone/drakTermServ:229
 #, c-format
@@ -18014,12 +18021,12 @@ msgstr "Versi kernel default"
 #: standalone/drakTermServ:753
 #, c-format
 msgid "Create PXE images"
-msgstr ""
+msgstr "Buat image PXE"
 
 #: standalone/drakTermServ:754
 #, c-format
 msgid "Use Unionfs (TS2)"
-msgstr ""
+msgstr "Gunakan Unionfs (TS2)"
 
 #: standalone/drakTermServ:784
 #, c-format
@@ -18057,6 +18064,8 @@ msgid ""
 "Custom\n"
 "kernel args"
 msgstr ""
+"Argumen\n"
+"kernel"
 
 #: standalone/drakTermServ:829
 #, c-format
@@ -18150,7 +18159,7 @@ msgstr "Tambah Klien -->"
 #: standalone/drakTermServ:1169
 #, c-format
 msgid "Unknown MAC address format"
-msgstr ""
+msgstr "Format alamat MAC tidak diketahui"
 
 #: standalone/drakTermServ:1183
 #, c-format
