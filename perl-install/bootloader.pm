@@ -250,6 +250,8 @@ sub read_grub_menu_lst {
 		$e->{mapdrive}{$2} = $1 if $v =~ m/\((.*)\) \((.*)\)/;
             } elsif ($keyword eq 'module') {
 		push @{$e->{modules}}, $v;
+	    } else {
+		$e->{$keyword} = $v eq '' ? 1 : $v;
 	    }
         }
     }
@@ -863,7 +865,8 @@ sub suggest {
 		       type => 'other',
 		       kernel_or_dev => "/dev/$_->{device}",
 		       label => 'windows' . ($::i || ''),
-		       table => "/dev/$_->{rootDevice}"
+		       table => "/dev/$_->{rootDevice}",
+		       makeactive => 1,
 		      });
 	} @windows_boot_parts;
     }
@@ -1407,8 +1410,8 @@ sub write_grub {
 		}
 		if ($_->{mapdrive}) {
 		    push @conf, map_each { "map ($::b) ($::a)" } %{$_->{mapdrive}};
-		    push @conf, "makeactive";
 		}
+		push @conf, "makeactive" if $_->{makeactive};
 		push @conf, "chainloader +1";
 	    }
 	}
