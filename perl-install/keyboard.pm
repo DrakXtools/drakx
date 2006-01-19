@@ -177,7 +177,6 @@ arch() =~ /^sparc/ ? (
  "no" => [ N_("_: keyboard\nNorwegian"),      "sunt4-no-latin1", "no",    0 ],
  "pl" => [ N_("_: keyboard\nPolish"),         "sun-pl-altgraph", "pl",    0 ],
  "ru" => [ N_("_: keyboard\nRussian"),        "sunt5-ru",        "ru",    1 ],
-# TODO: check the console map
  "se" => [ N_("_: keyboard\nSwedish"),        "sunt5-fi-latin1", "se",    0 ],
  "uk" => [ N_("UK keyboard"),    "sunt5-uk",        "gb",    0 ],
  "us" => [ N_("US keyboard"),    "sunkeymap",       "us",    0 ],
@@ -192,7 +191,7 @@ arch() =~ /^sparc/ ? (
  "ben" => [ N_("_: keyboard\nBengali (Inscript-layout)"), "us",  "in(ben)",   1 ],
  "ben2" => [ N_("_: keyboard\nBengali (Probhat)"), "us", "in(ben_probhat)",  1 ],
 "bg_phonetic" => [ N_("_: keyboard\nBulgarian (phonetic)"), "bg", "bg(phonetic)", 1 ],
- "bg" => [ N_("_: keyboard\nBulgarian (BDS)"), "bg",             "bg",    1 ],
+ "bg" => [ N_("_: keyboard\nBulgarian (BDS)"), "bg_bds",         "bg",    1 ],
  "br" => [ N_("_: keyboard\nBrazilian (ABNT-2)"), "br-abnt2",    "br",    0 ],
  "bs" => [ N_("_: keyboard\nBosnian"),	 "croat",           "ba",    0 ],
  "by" => [ N_("_: keyboard\nBelarusian"),     "by-cp1251",       "by",    1 ],
@@ -207,21 +206,17 @@ arch() =~ /^sparc/ ? (
  "dev" => [ N_("_: keyboard\nDevanagari"),     "us",             "in(deva)", 1 ],
  "dk" => [ N_("_: keyboard\nDanish"),         "dk-latin1",       "dk",    0 ],
  "dvorak" => [ N_("_: keyboard\nDvorak (US)"), "pc-dvorak-latin1", "us(dvorak)", 0 ],
-# TODO: console map
- "dvorak_eo" => [ N_("_: keyboard\nDvorak (Esperanto)"), "us",   "dvorak(eo)", 0 ],
-# TODO: console map
- "dvorak_fr" => [ N_("_: keyboard\nDvorak (French)"),    "us",   "fr(dvorak)", 0 ],
-# TODO: console map
+ "dvorak_eo" => [ N_("_: keyboard\nDvorak (Esperanto)"), "eo-dvorak", "dvorak(eo)", 0 ],
+ "dvorak_fr" => [ N_("_: keyboard\nDvorak (French)"),    "fr-dvorak", "fr(dvorak)", 0 ],
  "dvorak_gb" => [ N_("_: keyboard\nDvorak (UK)"),        "pc-dvorak-latin1", "gb(dvorak)", 0 ],
  "dvorak_no" => [ N_("_: keyboard\nDvorak (Norwegian)"), "no-dvorak", "no(dvorak)", 0 ],
-# TODO: console map
- "dvorak_pl" => [ N_("_: keyboard\nDvorak (Polish)"),    "us",   "pl(dvorak)", 0 ],
+ "dvorak_pl" => [ N_("_: keyboard\nDvorak (Polish)"),    "pl-dvorak", "pl(dvorak)", 0 ],
  "dvorak_se" => [ N_("_: keyboard\nDvorak (Swedish)"), "se-dvorak", "se(dvorak)", 0 ],
  "dz" => [ N_("_: keyboard\nDzongkha/Tibetan"), "us",            "bt",    1 ],
  "ee" => [ N_("_: keyboard\nEstonian"),       "ee-latin9",       "ee",    0 ],
  "es" => [ N_("_: keyboard\nSpanish"),        "es-latin1",       "es",    0 ],
  "fi" => [ N_("_: keyboard\nFinnish"),        "fi-latin1",       "fi",    0 ],
- "fo" => [ N_("_: keyboard\nFaroese"),        "is",              "fo",    0 ],
+ "fo" => [ N_("_: keyboard\nFaroese"),        "is-latin1",       "fo",    0 ],
  "fr" => [ N_("_: keyboard\nFrench"),         "fr-latin1",       "fr",    0 ],
  "ge_ru" => [N_("_: keyboard\nGeorgian (\"Russian\" layout)"), "ge_ru-georgian_academy", "ge(ru)",1],
  "ge_la" => [N_("_: keyboard\nGeorgian (\"Latin\" layout)"), "ge_la-georgian_academy", "ge(la)",1],
@@ -231,7 +226,7 @@ arch() =~ /^sparc/ ? (
  "gur" => [ N_("_: keyboard\nGurmukhi"),      "us",              "in(guru)",   1 ],
  "hr" => [ N_("_: keyboard\nCroatian"),       "croat",           "hr",    0 ],
  "hu" => [ N_("_: keyboard\nHungarian"),      "hu-latin2",       "hu",    0 ],
- "ie" => [ N_("_: keyboard\nIrish"),          "uk",              "ie",    0 ],
+ "ie" => [ N_("_: keyboard\nIrish"),          "uk-latin1",       "ie",    0 ],
  "il" => [ N_("_: keyboard\nIsraeli"),        "il-8859_8",       "il",    1 ],
  "il_phonetic" => [ N_("_: keyboard\nIsraeli (phonetic)"), "hebrew", "il(phonetic)", 1 ],
  "ir" => [ N_("_: keyboard\nIranian"),        "ir-isiri_3342",   "ir",    1 ],
@@ -263,8 +258,8 @@ arch() =~ /^sparc/ ? (
  "mk" => [ N_("_: keyboard\nMacedonian"),     "mk",              "mkd",   1 ],
  "mm" => [ N_("_: keyboard\nMyanmar (Burmese)"), "us",           "mm",    1 ],
  "mng" => [ N_("_: keyboard\nMongolian (cyrillic)"), "us",       "mn",    1 ],
- "mt" => [ N_("_: keyboard\nMaltese (UK)"),   "uk",              "mt",    0 ],
- "mt_us" => [ N_("_: keyboard\nMaltese (US)"), "us",             "mt(us)", 0 ],
+ "mt" => [ N_("_: keyboard\nMaltese (UK)"),   "mt",              "mt",    0 ],
+ "mt_us" => [ N_("_: keyboard\nMaltese (US)"), "mt_us",          "mt(us)", 0 ],
  "nl" => [ N_("_: keyboard\nDutch"),          "nl-latin1",       "nl",    0 ],
  "no" => [ N_("_: keyboard\nNorwegian"),      "no-latin1",       "no",    0 ],
  "ori" => [ N_("_: keyboard\nOriya"),         "us",              "in(ori)", 1 ],
@@ -275,7 +270,6 @@ arch() =~ /^sparc/ ? (
  "pt" => [ N_("_: keyboard\nPortuguese"),     "pt-latin1",       "pt",    0 ],
 # old XKB layout; change "ca_enhanced" -> "ca" once we ship new XKB
  "qc" => [ N_("_: keyboard\nCanadian (Quebec)"), "qc-latin1", "ca_enhanced", 0 ],
-#- TODO: write a console kbd map for ro2
  "ro2" => [ N_("_: keyboard\nRomanian (qwertz)"), "ro2",         "ro",    0 ],
  "ro" => [ N_("_: keyboard\nRomanian (qwerty)"), "ro",           "ro(us)", 0 ],
  "ru" => [ N_("_: keyboard\nRussian"),        "ru4",             "ru(winkeys)", 1 ],
@@ -302,10 +296,9 @@ arch() =~ /^sparc/ ? (
  "th_tis" => [ N_("_: keyboard\nThai (TIS-820)"), "th",          "th(tis)", 1 ],
 # TODO: console map
  "th_pat" => [ N_("_: keyboard\nThai (Pattachote)"), "us",       "th(pat)", 1 ],
-# TODO: console map
 # NOTE: we define a triple layout here
- "tifinagh" => [ N_("_: keyboard\nTifinagh (moroccan layout) (+latin/arabic)"), "fr", "fr,tifinagh(basic),ara(azerty)", 1 ],
- "tifinagh_p" => [ N_("_: keyboard\nTifinagh (phonetic) (+latin/arabic)"), "fr", "fr,tifinagh(phonetic),ara(azerty)", 1 ],
+ "tifinagh" => [ N_("_: keyboard\nTifinagh (moroccan layout) (+latin/arabic)"), "fr-tifinagh", "fr,tifinagh(basic),ara(azerty)", 1 ],
+ "tifinagh_p" => [ N_("_: keyboard\nTifinagh (phonetic) (+latin/arabic)"), "fr-tifinaghp", "fr,tifinagh(phonetic),ara(azerty)", 1 ],
 # TODO: console map
  "tj" => [ N_("_: keyboard\nTajik"),         "ru4",             "tj",    1 ],
 # TODO: console map
@@ -314,12 +307,12 @@ arch() =~ /^sparc/ ? (
  "tr_q" => [ N_("_: keyboard\nTurkish (modern \"Q\" model)"), "tr_q-latin5", "tr", 0 ],
 #-"tw => [ N_("_: keyboard\nChineses bopomofo"), "tw",           "tw",    1 ],
  "ua" => [ N_("_: keyboard\nUkrainian"),      "ua",              "ua",    1 ],
- "uk" => [ N_("UK keyboard"),    "uk",              "gb",    0 ],
+ "uk" => [ N_("UK keyboard"),          "uk-latin1",              "gb",    0 ],
 # TODO: console map
  "ur" => [ N_("_: keyboard\nUrdu keyboard"),  "us",              "ur",    1 ],
  "us" => [ N_("US keyboard"),    "us",              "us", 0 ],
  "us_intl" => [ N_("US keyboard (international)"), "us-intl", "us(alt-intl)", 0 ],
- "uz" => [ N_("_: keyboard\nUzbek (cyrillic)"), "uz.uni",         "uz",    1 ],
+ "uz" => [ N_("_: keyboard\nUzbek (cyrillic)"), "uz",            "uz",    1 ],
 # old XKB layout
  "vn" => [ N_("_: keyboard\nVietnamese \"numeric row\" QWERTY"), "vn-tcvn", "vn(toggle)", 0 ], 
  "yu" => [ N_("_: keyboard\nYugoslavian (latin)"), "sr",         "srp(latin)",    0 ],
