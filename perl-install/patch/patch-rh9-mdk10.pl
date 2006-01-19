@@ -105,7 +105,7 @@ use any;
 package any;
 
 undef *fix_broken_alternatives;
-*fix_broken_alternatives = {
+*fix_broken_alternatives = sub {
     #- fix bad update-alternatives that may occurs after upgrade (and sometimes for install too).
     -d "$::prefix/etc/alternatives" or return;
 
