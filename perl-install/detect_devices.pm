@@ -900,12 +900,22 @@ my (@dmis, $dmidecode_already_runned);
 sub dmidecode() {
     return @dmis if $dmidecode_already_runned;
 
-    foreach (run_program::get_stdout('dmidecode')) {
-	if (/^\t\t(.*)/) {
+    my ($ver, @l) = run_program::get_stdout('dmidecode');
+
+    my $tab = "\t";
+    if ($ver =~ /(\d+\.\d+)/ && $1 >= 2.7) {
+	#- new dmidecode output is less indented
+	$tab = '';
+	#- drop header
+	shift @l while $l[0] ne "\n";
+    }
+
+    foreach (@l) {
+	if (/^$tab\t(.*)/) {
 	    $dmis[-1]{string} .= "$1\n";
-	    $dmis[-1]{$1} = $2 if /^\t\t(.*): (.*)$/;
-	} elsif (my ($s) = /^\t(.*)/) {
-	    next if $s =~ /^DMI type /;
+	    $dmis[-1]{$1} = $2 if /^$tab\t(.*): (.*)$/;
+	} elsif (my ($s) = /^$tab(.*)/) {
+	    next if $s =~ /^$/ || $s =~ /\bDMI type \d+/;
 	    $s =~ s/ Information$//;
 	    push @dmis, { name => $s };
 	}
