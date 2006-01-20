@@ -2162,15 +2162,17 @@ sub configure_queue($) {
 			 $printer->{configured}{$printer->{OLD_QUEUE}} ?
 			 ("-C", $printer->{OLD_QUEUE}) : ()),
 			"-c", $quotedconnect,
-			($printer->{currentqueue}{foomatic} ?
-			 ("-p", $printer->{currentqueue}{printer},
-			  "-d", $printer->{currentqueue}{driver}) :
-			 ($printer->{currentqueue}{ppd} ?
-			  ($printer->{currentqueue}{ppd} ne '1' ?
-			   ("--ppd",
-			    ($printer->{currentqueue}{ppd} !~ m!^/! ?
-			     "/usr/share/cups/model/" : "") .
-			    $printer->{currentqueue}{ppd}) : ()) :
+			($printer->{currentqueue}{ppd} ?
+			 ($printer->{currentqueue}{ppd} ne '1' ?
+			  ("--ppd",
+			   ($printer->{currentqueue}{ppd} !~ m!^/! ?
+			    "/usr/share/cups/model/" : "") .
+			   $printer->{currentqueue}{ppd}) : ()) :
+			 ($printer->{currentqueue}{foomatic} ?
+			  ("-p", $printer->{currentqueue}{printer},
+			   "-d",($printer->{currentqueue}{driver} ne "PPD" ?
+				 $printer->{currentqueue}{driver} :
+				 "Postscript")) :
 			  ("-d", "raw"))),
 			"-N", $printer->{currentqueue}{desc},
 			"-L", $printer->{currentqueue}{loc},
