@@ -304,6 +304,30 @@ sub tryConfScanner {
      	$in->ask_warn('Scannerdrake', N("The %s must be configured by printerdrake.\nYou can launch printerdrake from the %s Control Center in Hardware section.", removeverticalbar($model), $shortdistroname));
      	return 0;
     }
+    my @modules = ();
+    if (defined($scanner::scannerDB->{$model}{kernel})) {
+	push(@modules, @{$scanner::scannerDB->{$model}{kernel}});
+    } elsif ((defined($scanner::scannerDB->{$model}{scsikernel})) &&
+	     ($scanner::scannerDB->{$model}{driver} =~ /SCSI/i)) {
+	push(@modules, @{$scanner::scannerDB->{$model}{scsikernel}});
+    } elsif ((defined($scanner::scannerDB->{$model}{usbkernel})) &&
+	     ($scanner::scannerDB->{$model}{driver} =~ /USB/i)) {
+	push(@modules, @{$scanner::scannerDB->{$model}{usbkernel}});
+    } elsif ((defined($scanner::scannerDB->{$model}{parportkernel})) &&
+	     ($scanner::scannerDB->{$model}{driver} =~ /Parport/i)) {
+	push(@modules, @{$scanner::scannerDB->{$model}{parportkernel}});
+    }
+    if ($#modules >= 0) {
+	my $wait = $in->wait_message(N("Scannerdrake"),
+				     N("Setting up kernel modules..."));
+	foreach my $m (@modules) {
+	    eval { modules::load($m) };
+	    if (!$@) {
+		modules::append_to_modules_loaded_at_startup_for_all_kernels
+		    ($m);
+	    }
+	}
+    }
     if ($scanner::scannerDB->{$model}{ask} =~ /DEVICE/ || !$port) {
 	$port ||= N("Auto-detect available ports");
 	$in->ask_from('Scannerdrake',
@@ -376,13 +400,6 @@ sub tryConfScanner {
     if (grep { /FIRMWARELINE/ } @{$scanner::scannerDB->{$model}{lines}} ) {
 	$firmware = installfirmware($model, $server);
 	return 0 if $firmware eq "///";
-    }
-    if (defined($scanner::scannerDB->{$model}{kernel})) {
-	my @modules = @{$scanner::scannerDB->{$model}{kernel}};
-	my $wait = $in->wait_message(N("Scannerdrake"),
-				     N("Setting up kernel modules..."));
-	modules::load(@modules);
-	modules::append_to_modules_loaded_at_startup_for_all_kernels(@modules);
     }
     scanner::confScanner($model, $port, $vendor, $product, $firmware);
     if ($scanner::scannerDB->{$model}{flags}{manual} == 2) {
