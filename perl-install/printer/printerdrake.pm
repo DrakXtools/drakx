@@ -2423,7 +2423,8 @@ sub hplip_bus_warning {
 	     N("What do you want to do?"),
 	     [N("Set up with HPLIP"), 
 	      N("Set up without HPLIP"), 
-	      N("Cancel setup")], N("Cancel setup"));
+	      #N("Cancel setup")
+	      ], N("Set up without HPLIP"));
 	if ($choice eq N("Set up with HPLIP")) {
 	    return 1;
 	} elsif ($choice eq N("Set up without HPLIP")) {
@@ -2525,10 +2526,21 @@ sub setup_common {
 		    if !$printer->{noninteractive};
 
 		if ($isHPLIP && ($device !~ m!^socket://!)) {
+		    # Determine connection type
+		    my $bus;
+		    if ($device =~ /usb/) {
+			$bus = "usb";
+		    } elsif ($device =~ m!/dev/(lp|par.*|printer.*)\d+!) {
+			$bus = "par";
+		    } elsif ($device =~ m!^socket://!) {
+			$bus = "net";
+		    } else {
+			$bus = "@@@";
+		    }
 		    my @uris = printer::main::start_hplip_manual();
 		    my (@menu, %menuhash);
 		    foreach my $item (@uris) {
-			if ($item =~ m!^hp:/(usb|par|net)/(\S*?)(\?\S*|)$!) {
+			if ($item =~ m!^hp:/($bus)/(\S*?)(\?\S*|)$!) {
 			    my $modelname = $2;
 			    $modelname =~ s/_/ /g;
 			    $modelname = "HP " . $modelname 
@@ -2539,26 +2551,37 @@ sub setup_common {
 		    }
 		    undef $w;
 		    local $::isWizard = 0;
-		    my $choice = $in->ask_from_list
-			(N("Add a new printer"),
-			 N("Which printer do you want to set up with HPLIP?"),
-			 \@menu, $menu[0]);
-		    $hplipdevice = $menuhash{$choice};
-		    $hplipentry = 
-			printer::main::hplip_device_entry_from_uri
-			($hplipdevice);
-		    if ($hplipentry) {
-			my $buswarning = 
-			    hplip_bus_warning($printer, $in,
-					      $device, $hplipentry);
-			return 0 if !$buswarning;
-			if ($buswarning == 2) {
+		    if ($#menu >= 0) {
+			my $choice = $in->ask_from_list
+			    (N("Add a new printer"),
+			     N("Which printer do you want to set up with HPLIP?"),
+			     \@menu, $menu[0]);
+			$hplipdevice = $menuhash{$choice};
+			$hplipentry = 
+			    printer::main::hplip_device_entry_from_uri
+			    ($hplipdevice);
+			if ($hplipentry) {
+			    my $buswarning = 
+				hplip_bus_warning($printer, $in,
+						  $device, $hplipentry);
+			    return 0 if !$buswarning;
+			    if ($buswarning == 2) {
+				$hplipaborted = 1;
+				$hplipdevice = "";
+			    } else {
+				$makemodel = $choice;
+			    }
+			} else {
+			    $in->ask_warn(N("Printerdrake"),
+					  N("HPLIP was not able to communicate with the chosen printer!") . " " .
+					  N("Setting up the printer without HPLIP..."));
 			    $hplipaborted = 1;
 			    $hplipdevice = "";
-			} else {
-			    $makemodel = $choice;
 			}
 		    } else {
+			$in->ask_warn(N("Printerdrake"),
+				      N("HPLIP did not find any local printers (Parallel, USB) which it supports!") . " " .
+					  N("Setting up the printer without HPLIP..."));
 			$hplipaborted = 1;
 			$hplipdevice = "";
 		    }
