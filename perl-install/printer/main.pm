@@ -1716,11 +1716,16 @@ sub ppd_entry_str {
 	    $descr =~ s/Foomatic/GhostScript/i;
 	} elsif ($descr =~ /CUPS\+Gimp-Print/i) {
 	    $descr =~ s/CUPS\+Gimp-Print/CUPS + Gimp-Print/i;
+	} elsif ($descr =~ /CUPS\+Gutenprint/i) {
+	    $descr =~ s/CUPS\+Gutenprint/CUPS + Gutenprint/i;
 	} elsif ($descr =~ /Series CUPS/i) {
 	    $descr =~ s/Series CUPS/Series, CUPS/i;
 	} elsif ($descr !~ /(PostScript|GhostScript|CUPS|Foomatic|PCL|PXL)/i) {
 	    $descr .= ", PostScript";
 	}
+	# Avoid duplicate entries produced by ready-made Foomatic PPDs vs.
+	# the Foomatic XML database
+	$descr =~ s!(Foomatic|GhostScript)\s*/\s*(\S+)!$1 + $2!i;
 	# Split model and driver
 	$descr =~ s/\s*Series//i;
 	$descr =~ s/\((.*?(PostScript|PS.*).*?)\)/$1/i;
@@ -1869,6 +1874,7 @@ sub poll_ppd_base {
     printer::services::start_not_running_service("cups");
     my $driversthere = scalar(keys %thedb);
     my $ppdentry = "";
+    $ppdfile = "" if !defined($ppdfile);
     foreach (1..60) {
 	open(my $PPDS, ($::testing ? $::prefix :
 				 "chroot $::prefix/ ") .
@@ -1947,24 +1953,22 @@ sub poll_ppd_base {
 			    $newkey =~ s/^([^\|]+\|[^\|]+)\|.*$/$1/;
 			} else {
 			    # If the Foomatic entry is "recommended" let
-			    # the new PPD entry be "recommended"
+			    # the new PPD entry be "recommended" and
+			    # otherwise not
 			    $newkey =~ s/\s*$sprecstr//g;
 			    $newkey .= " $precstr" 
-				if $ppdkey =~ m!$precstr!;
+				if $ppdkey =~ m!$sprecstr!;
 			    # Remove duplicate "recommended" tags and have 
 			    # the "recommended" tag at the end
 			    $newkey =~
 				s/(\s*$sprecstr)(.*?)(\s*$sprecstr)/$2$3/;
 			    $newkey =~ s/(\s*$sprecstr)(.+)$/$2$1/;
 			}
-			# If the PPD serves for multiple printers, conserve
-			# the make and model of the original entry
-			if (($#{$linkedppds{$filename}} > 0)) {
-			    $newkey =~
-				s/^([^\|]+)(\|[^\|]+)(\|.*|)$/$oldmake$2$3/;
-			    $newkey =~
-				s/^([^\|]+\|)([^\|]+)(\|.*|)$/$1$oldmodel$3/;
-			}
+			# Conserve the make and model of the original entry
+			$newkey =~
+			    s/^([^\|]+)(\|[^\|]+)(\|.*|)$/$oldmake$2$3/;
+			$newkey =~
+			    s/^([^\|]+\|)([^\|]+)(\|.*|)$/$1$oldmodel$3/;
 			# Do not overwrite another entry which has the
 			# same key, consider different PPD files with
 			# the same identity as a bug and drop them
@@ -1973,8 +1977,8 @@ sub poll_ppd_base {
 			}
 			# Create the new entry
 			$thedb{$newkey}{ppd} = $ppd;
-			$thedb{$newkey}{make} = $mf;
-			$thedb{$newkey}{model} = $model;
+			$thedb{$newkey}{make} = $oldmake;
+			$thedb{$newkey}{model} = $oldmodel;
 			$thedb{$newkey}{driver} = $driver;
 			# Recover saved autodetection data
 			$thedb{$newkey}{devidmake} = $devidmake
@@ -1995,7 +1999,6 @@ sub poll_ppd_base {
 		    # Remove driver from printer list entry when in
 		    # recommended mode
 		    $key =~ s/^([^\|]+\|[^\|]+)\|.*$/$1/;
-
 		    # Only replace an existing printer entry if
 		    #  - its driver is not the same as the driver of the
 		    #    new one
