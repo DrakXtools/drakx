@@ -16,12 +16,12 @@ sub ensure_is_installed {
 	$do->in->ask_okcancel('', N("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
 	  or return if !$b_auto && $do->in;
 	if (!$do->install($pkg)) {
-	    $do->in->ask_warn(N("Error"), N("Could not install the %s package!", $pkg));
+	    $do->in->ask_warn(N("Error"), N("Could not install the %s package!", $pkg)) if $do->in;
 	    return;
 	}
     }
     if ($o_file && ! -e "$::prefix$o_file") {
-	$do->in->ask_warn('', N("Mandatory package %s is missing", $pkg));
+	$do->in->ask_warn('', N("Mandatory package %s is missing", $pkg)) if $do->in;
 	return;
     }
     1;
