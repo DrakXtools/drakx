@@ -1397,14 +1397,19 @@ sub selected_leaves {
     my @l = grep { $_->flag_requested || $_->flag_installed } @{$packages->{depslist}};
 
     my %required_ids;
-    foreach (@l) {
-	foreach ($_->requires_nosense) {
-	    my $h = $provides->{$_} or next;
-	    my @provides = keys %$h;
-	    $required_ids{$provides[0]} = 1 if @provides == 1;
+    foreach my $pkg (@l) {
+	foreach my $req ($pkg->requires_nosense) {
+	    my $h = $provides->{$req} or next;
+	    my @provides = my ($provide) = keys %$h;
+	    @provides == 1 or next;
+	    if ($provide != (exists $required_ids{$pkg->id} ? $required_ids{$pkg->id} : $pkg->id)) {
+#		log::l($packages->{depslist}[$provide]->name . " is not a leaf because required by " . $pkg->name . " (through require $req)"); 
+		#- $pkg requires $req, provided by $provide, so we can skip $provide
+		$required_ids{$provide} = $pkg->id;
+	    }
 	}
     }
-    [ map { $_->name } grep { !$required_ids{$_->id} } @l ];    
+    [ map { $_->name } grep { ! exists $required_ids{$_->id} } @l ];    
 }
 
 sub naughtyServers_list {
