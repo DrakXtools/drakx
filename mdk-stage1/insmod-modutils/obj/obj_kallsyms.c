@@ -200,8 +200,8 @@ obj_kallsyms (struct obj_file *fin, struct obj_file **fout_result)
 
     /* Initial contents, header + one entry per input section.  No strings. */
     osec->header.sh_size = sizeof(*a_hdr) + loaded*sizeof(*a_sec);
-    a_hdr = (struct kallsyms_header *) osec->contents =
-    	xmalloc(osec->header.sh_size);
+    a_hdr = (struct kallsyms_header *) (osec->contents =
+    	xmalloc(osec->header.sh_size));
     memset(osec->contents, 0, osec->header.sh_size);
     a_hdr->size = sizeof(*a_hdr);
     a_hdr->sections = loaded;
@@ -275,8 +275,8 @@ obj_kallsyms (struct obj_file *fin, struct obj_file **fout_result)
 	a_hdr->symbol_off +
 	a_hdr->symbols*a_hdr->symbol_size +
 	strings_size - strings_left;
-    a_hdr = (struct kallsyms_header *) osec->contents =
-	xrealloc(a_hdr, a_hdr->total_size);
+    a_hdr = (struct kallsyms_header *) (osec->contents =
+	xrealloc(a_hdr, a_hdr->total_size));
     p = (char *)a_hdr + a_hdr->symbol_off;
     memcpy(p, symbols, a_hdr->symbols*a_hdr->symbol_size);
     free(symbols);

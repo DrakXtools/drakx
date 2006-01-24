@@ -199,7 +199,7 @@ static int new_get_kernel_info(int type)
 			for (j = 0, s = syms; j < nsyms; ++j, ++s)
 				s->name += (unsigned long) syms;
 		}
-		next:
+		next: ;
 	}
 
 	if (type & K_SYMBOLS) { /* Want info about symbols */

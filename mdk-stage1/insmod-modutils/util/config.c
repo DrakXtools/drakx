@@ -1496,7 +1496,7 @@ static int config_add(const char *file, const struct stat *sb)
 				return 1; /* finish xftw */
 			}
 		}
-	    next:
+	    next: ;
 	}
 
 	if (npaths > 0)
