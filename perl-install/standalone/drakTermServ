@@ -69,9 +69,16 @@ my $kcount = @kernels;
 my $cmd_line = 1;
 my $mknbi = "/usr/bin/mknbi-set";
 my %help;
+our $ts_prefix = "/var/lib/terminal-server/";
+our $client_prefix = $ts_prefix . "clients";
+our $common_prefix = $ts_prefix . "common";
+
+read_conf_file();
+my $nfs_daemon = $conf{USE_UNIONFS} ? "nfs" : "clusternfs";
+my $ts_package = $conf{USE_UNIONFS} ? "terminal-server2" : "terminal-server";
 
 #- make sure terminal server and friends are installed
-$in->do_pkgs->ensure_is_installed('terminal-server', '/usr/bin/drakTermServ') or $in->exit(-1);
+$in->do_pkgs->ensure_is_installed($ts_package, '/usr/bin/drakTermServ') or $in->exit(-1);
 
 my $argc = @ARGV;
 
@@ -130,7 +137,6 @@ if ("@ARGV" =~ /--delclient/) {
 	exit(0);	
 }
 
-read_conf_file();	
 interactive_mode() if $argc < 2;
 
 sub setup_tooltips() {
@@ -164,11 +170,13 @@ sub write_conf_file() {
 sub write_thin_inittab {
 	my ($client_ip) = @_;
 	my $suffix;
+	my $prefix = $conf{USE_UNIONFS} ? "$client_prefix/$client_ip" : '';
 	if ($client_ip eq "CLIENT") {
 		$suffix = '$$CLIENT$$';
 	} else {
 		$suffix = "\$\$IP=$client_ip\$\$";
 	}
+	$suffix = '' if $conf{USE_UNIONFS};
 	
 	my $inittab = "
 # /etc/inittab$suffix
@@ -199,7 +207,7 @@ ca::ctrlaltdel:/sbin/reboot -f
 # Connect to X server
 x:5:respawn:/usr/X11R6/bin/X -ac -query $server_ip\n";
 
-	my $inittab_file = "/etc/inittab$suffix";
+	my $inittab_file = "$prefix/etc/inittab$suffix";
 	output_p($inittab_file, $inittab);	
 }
 
@@ -496,10 +504,10 @@ sub check_nbi_space {
 }
 
 sub sync_users() {
-	my $buff = N("Syncing server user list with client list, including root.");
-	my @active_users = cat_("/etc/shadow");
+    my $buff = N("Syncing server user list with client list, including root.");
+    my @active_users = cat_("/etc/shadow");
 
-	my $shadow = '/etc/shadow$$CLIENT$$';
+    my ($shadow, undef) = get_passwd_files();
     my @userlist;
 	
 	#- only users with home dirs, and root
@@ -547,27 +555,29 @@ sub text_view {
 }
 
 sub help() {
-	my $inittab_str = '/etc/inittab$$IP=client_ip$$';
-	my $shadow_str = '/etc/shadow$$CLIENT$$';
-	my $xfconfig_str = '/etc/X11/xorg.conf$$IP=client_ip$$';
+	my $inittab_str = $conf{USE_UNIONFS} ? "$client_prefix/CLIENT_IP/etc/inittab" : '/etc/inittab$$IP=client_ip$$';
+	my ($shadow_str, undef) = get_passwd_files();
+	my $xfconfig_str = $conf{USE_UNIONFS} ? "$client_prefix/CLIENT_IP/etc/X11/xorg.conf" : '/etc/X11/xorg.conf$$IP=client_ip$$';
+	my $filesystem = $conf{USE_UNIONFS} ? "UnionFS" : "ClusterNFS";
+	my $application = "drakTermServ";
 	
     text_view(N("Terminal Server Overview") . "\n\n" .
 N("        - Create Etherboot Enabled Boot Images:
         	To boot a kernel via etherboot, a special kernel/initrd image must be created.
-        	mkinitrd-net does much of this work and drakTermServ is just a graphical 
+        	mkinitrd-net does much of this work and %s is just a graphical 
         	interface to help manage/customize these images. To create the file 
         	/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an include in 
-        	dhcpd.conf, you should create the etherboot images for at least one full kernel.") . "\n\n" .
+        	dhcpd.conf, you should create the etherboot images for at least one full kernel.", $application) . "\n\n" .
 N("        - Maintain /etc/dhcpd.conf:
         	To net boot clients, each client needs a dhcpd.conf entry, assigning an IP 
-        	address and net boot images to the machine. drakTermServ helps create/remove 
+        	address and net boot images to the machine. %s helps create/remove 
         	these entries.
 			
         	(PCI cards may omit the image - etherboot will request the correct image. 
 			You should also consider that when etherboot looks for the images, it expects 
 			names like boot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).
 			 
-        	A typical dhcpd.conf stanza to support a diskless client looks like:") . "\n\n" .
+        	A typical dhcpd.conf stanza to support a diskless client looks like:", $application) . "\n\n" .
 '			host curly {
 				hardware ethernet        00:20:af:2f:f7:9d;
 				fixed-address              192.168.192.3;
@@ -578,56 +588,57 @@ N("        - Maintain /etc/dhcpd.conf:
 			' . "\n" .
 N("        While you can use a pool of IP addresses, rather than setup a specific entry for
         a client machine, using a fixed address scheme facilitates using the functionality
-        of client-specific configuration files that ClusterNFS provides.
+        of client-specific configuration files that %s provides.
 			
-        Note: The '#type' entry is only used by drakTermServ.  Clients can either be 'thin'
+        Note: The '#type' entry is only used by %s.  Clients can either be 'thin'
         or 'fat'.  Thin clients run most software on the server via XDMCP, while fat clients run 
-        most software on the client machine. A special inittab, %s is
-        written for thin clients. System config files xdm-config, kdmrc, and gdm.conf are 
-        modified if thin clients are used, to enable XDMCP. Since there are security issues in 
-        using XDMCP, hosts.deny and hosts.allow are modified to limit access to the local
-        subnet.
+        most software on the client machine. A special inittab, 
+        %s is written for thin clients. 
+        System config files xdm-config, kdmrc, and gdm.conf are modified if thin clients are 
+        used, to enable XDMCP. Since there are security issues in using XDMCP, hosts.deny and 
+        hosts.allow are modified to limit access to the local subnet.
 			
-        Note: The '#hdw_config' entry is also only used by drakTermServ.  Clients can either 
+        Note: The '#hdw_config' entry is also only used by %s.  Clients can either 
         be 'true' or 'false'.  'true' enables root login at the client machine and allows local 
         hardware configuration of sound, mouse, and X, using the 'drak' tools. This is enabled 
         by creating separate config files associated with the client's IP address and creating 
         read/write mount points to allow the client to alter the file. Once you are satisfied 
         with the configuration, you can remove root login privileges from the client.
 			
-        Note: You must stop/start the server after adding or changing clients.", $inittab_str) . "\n\n" .
+        Note: You must stop/start the server after adding or changing clients.", $filesystem, $application, $inittab_str, $application) . "\n\n" .
 N("        - Maintain /etc/exports:
-        	Clusternfs allows export of the root filesystem to diskless clients. drakTermServ
+        	%s allows export of the root filesystem to diskless clients. %s
         	sets up the correct entry to allow anonymous access to the root filesystem from
         	diskless clients.
 
-        	A typical exports entry for clusternfs is:
+        	A typical exports entry for %s is:
         		
         	/					(ro,all_squash)
         	/home				SUBNET/MASK(rw,root_squash)
 			
-        	With SUBNET/MASK being defined for your network.") .
+        	With SUBNET/MASK being defined for your network.", $filesystem, $application, $filesystem) .
         		"\n\n" .
 N("        - Maintain %s:
         	For users to be able to log into the system from a diskless client, their entry in
-        	/etc/shadow needs to be duplicated in %s. drakTermServ
-        	helps in this respect by adding or removing system users from this file.", $shadow_str, $shadow_str) . "\n\n" .
+        	/etc/shadow needs to be duplicated in %s. 
+        	%s helps in this respect by adding or removing system users from this 
+        	file.", $shadow_str, $shadow_str, $application) . "\n\n" .
 N("        - Per client %s:
-        	Through clusternfs, each diskless client can have its own unique configuration files
+        	Through %s, each diskless client can have its own unique configuration files
         	on the root filesystem of the server. By allowing local client hardware configuration, 
-        	drakTermServ will help create these files.", $xfconfig_str) .
+        	%s will help create these files.", $xfconfig_str, $filesystem, $application) .
 "\n\n" .
 N("        - Per client system configuration files:
-        	Through clusternfs, each diskless client can have its own unique configuration files
+        	Through %s, each diskless client can have its own unique configuration files
         	on the root filesystem of the server. By allowing local client hardware configuration, 
         	clients can customize files such as /etc/modules.conf, /etc/sysconfig/mouse, 
         	/etc/sysconfig/keyboard on a per-client basis.
 
         Note: Enabling local client hardware configuration does enable root login to the terminal 
         server on each client machine that has this feature enabled.  Local configuration can be
-        turned back off, retaining the configuration files, once the client machine is configured.") . "\n\n" .
+        turned back off, retaining the configuration files, once the client machine is configured.", $filesystem) . "\n\n" .
 N("        - /etc/xinetd.d/tftp:
-        	drakTermServ will configure this file to work in conjunction with the images created
+        	%s will configure this file to work in conjunction with the images created
         	by mkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up the boot image to 
         	each diskless client.
 
@@ -646,15 +657,15 @@ N("        - /etc/xinetd.d/tftp:
         		
         	The changes here from the default installation are changing the disable flag to
         	'no' and changing the directory path to /var/lib/tftpboot, where mkinitrd-net
-        	puts its images.") . "\n\n" .
+        	puts its images.", $application) . "\n\n" .
 N("        - Create etherboot floppies/CDs:
         	The diskless client machines need either ROM images on the NIC, or a boot floppy
-        	or CD to initiate the boot sequence.  drakTermServ will help generate these
+        	or CD to initiate the boot sequence. %s will help generate these
         	images, based on the NIC in the client machine.
         		
         	A basic example of creating a boot floppy for a 3Com 3c509 manually:
         		
-        	cat /usr/share/etherboot/zdsk/3c509.zdsk > /dev/fd0") . "\n\n", "close");
+        	cat /usr/share/etherboot/zdsk/3c509.zdsk > /dev/fd0", $application) . "\n\n", "close");
 }
 
 sub make_boot() {
@@ -981,10 +992,11 @@ sub get_platform_pxe() {
 }
 
 sub maintain_users() {
-	#- copy users from /etc/shadow to /etc/shadow$$CLIENT$$ to allow ts login
+	#- copy users from /etc/shadow to the client equivalent to allow ts login
 	my $user_box;
 	my @sys_users = cat_("/etc/shadow");
-	my @ts_users = cat_('/etc/shadow$$CLIENT$$');
+	my ($shadow_file, undef) = get_passwd_files();
+	my @ts_users = cat_($shadow_file);
 	my $titer;
 	
 	#- use /homes to filter system daemons
@@ -1295,6 +1307,7 @@ sub client_set {
 	# we need to change some system files to allow the thin clients
 	# to access the server - enabling XDMCP and modify hosts.deny/hosts.allow for some security
 	# we also need to set runlevel to 5 and restart the display manager
+	my $inittab = $conf{USE_UNIONFS} ? "$common_prefix/etc/inittab" : '/etc/initab$$CLIENT$$';
 	if ($conf{ALLOW_THIN} == 1) {
 		if (-f "/etc/sysconfig/autologin") {
 			my $answer = $in->ask_yesorno('', N("Thin clients will not work with autologin. Disable autologin?"));
@@ -1312,9 +1325,8 @@ sub client_set {
 		# just XDMCP in hosts.allow is enough for xdm & kdm, but gdm does not work - x11 does not help either
 		update_hosts_allow("enable");
 		if ($default eq "all") {
-			my $inittab = '/etc/initab$$CLIENT$$';
 			$in->ask_warn(N("Warning"), N("All clients will use %s", $inittab));
-			`mv '/etc/inittab\$\$CLIENT\$\$' '/etc/inittab\$\$CLIENT\$\$.fat'` if -f '/etc/inittab$$CLIENT$$';
+			renamef($inittab, "$inittab.fat") if -f $inittab;
 			write_thin_inittab("CLIENT");
 		}
 	} else {
@@ -1328,7 +1340,7 @@ sub client_set {
 		change_gdm_xdmcp("false");
 		log::explanations("Modified files /etc/inittab, /etc/X11/xdm/xdm-config, /usr/share/config/kdm/kdmrc, /etc/X11/gdm/gdm.conf");
 		update_hosts_allow("disable");
-		`mv '/etc/inittab\$\$CLIENT\$\$.fat' '/etc/inittab\$\$CLIENT\$\$'` if $default eq "all" && -f '/etc/inittab$$CLIENT$$.fat';
+		renamef("$inittab.fat", $inittab) if $default eq "all" && -f "$inittab.fat";
 	}
 	$clients_set = 1;
 }
@@ -1709,9 +1721,10 @@ sub enable_ts() {
 	}
 	$exports .= "/\t$nfs_subnet/$nfs_mask(ro,$squash)\n";
 	$exports .= "/home\t$nfs_subnet/$nfs_mask(rw,root_squash)\n";
-	output_p("/etc/exports", $exports);
+	$exports .= "$client_prefix\t$nfs_mask(rw, $squash)\n" if $conf{USE_UNIONFS};
+	output_p("/etc/exports", $exports); 
 	$buff_index = toggle_chkconfig("on", "portmap", $buff_index+1);
-	$buff_index = toggle_chkconfig("on", "clusternfs", $buff_index+1);
+	$buff_index = toggle_chkconfig("on", $nfs_daemon, $buff_index+1);
 	$buff_index = toggle_chkconfig("on", "tftp", $buff_index);	
 	$buff_index = service_change("xinetd", "restart", $buff_index);
 	$buff[$buff_index] = "\n\tDone!";	
@@ -1736,7 +1749,7 @@ sub disable_ts() {
 	$buff[$buff_index] = "\tRestoring default /etc/exports...\n";
 	cp_af("/etc/exports.mdkTS", "/etc/exports") if -e "/etc/exports.mdkTS";
 	$buff_index = toggle_chkconfig("off", "portmap", $buff_index+1);
-	$buff_index = toggle_chkconfig("off", "clusternfs", $buff_index+1);
+	$buff_index = toggle_chkconfig("off", $nfs_daemon, $buff_index+1);
 	$buff_index = toggle_chkconfig("off", "tftp", $buff_index);
 	$buff_index = service_change("xinetd", "restart", $buff_index);
 	$buff[$buff_index] = "\n\tDone!";	
@@ -1780,7 +1793,7 @@ sub start_ts() {
 		touch("/etc/dhcpd.conf.etherboot.kernel") if ! -f "/etc/dhcpd.conf.etherboot.kernel";
 		my $buff_index = service_change("dhcpd", "start", 2);
 		$buff_index = service_change("portmap", "start", $buff_index);
-		$buff_index = service_change("clusternfs", "start", $buff_index);
+		$buff_index = service_change($nfs_daemon, "start", $buff_index);
 		$buff[$buff_index] = "\n\tDone!";	
 	} else {
 		$buff[0] = "Missing $pcimap - please create net boot images for at least one kernel.";
@@ -1801,7 +1814,7 @@ sub stop_ts() {
 	$buff[0] = "Stopping Terminal Server...\n\n";
 	my $buff_index = service_change("dhcpd", "stop", 2);
 	$buff_index = service_change("portmap", "stop", $buff_index);
-	$buff_index = service_change("clusternfs", "stop", $buff_index);
+	$buff_index = service_change($nfs_daemon, "stop", $buff_index);
 	$buff[$buff_index] = "\n\tDone!";	
 
 	return if $in_wizard;
@@ -1825,11 +1838,18 @@ sub show_status() {
     text_view("@buff", "close");
 }
 
+sub get_passwd_files() {
+	my $shadow = $conf{USE_UNIONFS} ? "$common_prefix/etc/shadow" : '/etc/shadow$$CLIENT$$';
+	my $passwd = $conf{USE_UNIONFS} ? "$common_prefix/etc/passwd" : '/etc/passwd$$CLIENT$$';
+    return $shadow, $passwd;
+}
+
 sub adduser {
 	my ($username) = @_;
 	my @active_users = cat_("/etc/shadow");
 	my @passwd_users = cat_("/etc/passwd");
-	my @ts_users = cat_('/etc/shadow$$CLIENT$$');
+    my ($shadow_file, $passwd_file) = get_passwd_files();
+    my @ts_users = cat_($shadow_file);
 	my $is_user = any { /$username/ } @active_users;
 	my $add_fail = 0;
 	my $in_already;
@@ -1850,8 +1870,8 @@ sub adduser {
 			}
 		} else {
 			# new ts user
-			append_to_file('/etc/shadow$$CLIENT$$', $shadow_entry[0]) or $add_fail = 1;
-			append_to_file('/etc/passwd$$CLIENT$$', $passwd_entry[0]) or $add_fail = 1;
+			append_to_file($shadow_file, $shadow_entry[0]) or $add_fail = 1;
+			append_to_file($passwd_file, $passwd_entry[0]) or $add_fail = 1;
 			$in_already = 0;
 		}
 	}	
@@ -1871,11 +1891,12 @@ sub adduser {
 }
 
 sub deluser {
-	# del a user from the shadow$$CLIENT$$ file
+	# del a user from the client shadow file
 	my ($username) = @_;
 	my $user_deleted;
-	substInFile { $_ = '', $user_deleted = 1 if begins_with($_, "$username:") } '/etc/shadow$$CLIENT$$';                                        
-	substInFile { $_ = '', $user_deleted = 1 if begins_with($_, "$username:") } '/etc/passwd$$CLIENT$$';    
+    my ($shadow_file, $passwd_file) = get_passwd_files();
+	substInFile { $_ = '', $user_deleted = 1 if begins_with($_, "$username:") } $shadow_file;                                        
+	substInFile { $_ = '', $user_deleted = 1 if begins_with($_, "$username:") } $passwd_file;    
 
 	if ($cmd_line == 1) {
 		if ($user_deleted) {
@@ -2030,7 +2051,11 @@ sub format_client_entry {
 	if ($ts_clients{$client}{type} eq "thin") {
 		write_thin_inittab($ts_clients{$client}{address}); 
 	} else {
-		eval { rm_rf("/etc/inittab\$\$IP=$ts_clients{$client}{address}\$\$") };
+        if ($conf{USE_UNIONFS}) {
+            eval { rm_rf("$ts_prefix/$ts_clients{$client}{address}etc/inittab") };
+        } else { 
+            eval { rm_rf("/etc/inittab\$\$IP=$ts_clients{$client}{address}\$\$") };
+        }
 	}
 	$entry;
 }
@@ -2076,35 +2101,43 @@ sub client_hdw_config {
 	# run drak tools locally and modify configs
 	# mode 0 disables root logins but retains configs
 	# mode 1 creates the new template files
+	my $suffix = $conf{USE_UNIONFS} ? "" : "\$\$IP=$client_ip\$\$";
+	my $prefix = $conf{USE_UNIONFS} ? "$client_prefix/$client_ip" : "";
 	if ($mode == 1) {
 		log::explanations("Allowing root access for $client_ip");
-		my $suffix = "\$\$IP=$client_ip\$\$";
-		cp_af('/etc/shadow$$CLIENT$$', "/etc/shadow$suffix");
+		my ($shadow_file, undef) = get_passwd_files();
+		cp_af($shadow_file, "$prefix/etc/shadow$suffix");
 		my @sys_users = cat_("/etc/shadow");
 		foreach (@sys_users) {
 			if (/^root:/) {
 				# need root access to do the hardware config
-				append_to_file("/etc/shadow$suffix", $_);
+				append_to_file("$prefix/etc/shadow$suffix", $_);
 				last;
 			}
 		}
 		# make all the local config files
-		cp_af("/etc/sysconfig/mouse", "/etc/sysconfig/mouse$suffix") if -f "/etc/sysconfig/mouse";
-		cp_af("/etc/X11/XF86Config", "/etc/X11/XF86Config$suffix") if -f "/etc/X11/XF86Config";
-		cp_af('/etc/X11/xorg.conf$$CLIENT$$', "/etc/X11/xorg.conf$suffix") if -f '/etc/X11/xorg.conf$$CLIENT$$';
-		output("/etc/modules.conf$suffix", '');
-		output("/etc/modules$suffix", '');
-		output("/etc/modprobe.conf$suffix", '');
-		output("/etc/modprobe.preload$suffix", '');
+		cp_af("/etc/sysconfig/mouse", "$prefix/etc/sysconfig/mouse$suffix") if -f "/etc/sysconfig/mouse";
+		cp_af("/etc/X11/XF86Config", "$prefix/etc/X11/XF86Config$suffix") if -f "/etc/X11/XF86Config";
+		if ($conf{USE_UNIONFS}) {
+	       cp_af("$common_prefix/etc/X11/xorg.conf", "$prefix/etc/X11/xorg.conf") if -f "$common_prefix/etc/X11/xorg.conf";
+		} else {
+	       cp_af('/etc/X11/xorg.conf$$CLIENT$$', "/etc/X11/xorg.conf$suffix") if -f '/etc/X11/xorg.conf$$CLIENT$$';
+		}
+		output("$prefix/etc/modules.conf$suffix", '');
+		output("$prefix/etc/modules$suffix", '');
+		output("$prefix/etc/modprobe.conf$suffix", '');
+		output("$prefix/etc/modprobe.preload$suffix", '');
 		# create mount points so they can be edited by the client
-		my $mnt_access = "$client_ip(rw,no_root_squash)";
-		append_to_file("/etc/exports", "/etc/sysconfig/mouse$suffix\t$mnt_access\n");
-		append_to_file("/etc/exports", "/etc/modules.conf$suffix\t$mnt_access\n");
-		append_to_file("/etc/exports", "/etc/modules$suffix\t$mnt_access\n");
-		append_to_file("/etc/exports", "/etc/modprobe.conf$suffix\t$mnt_access\n");
-		append_to_file("/etc/exports", "/etc/modprobe.preload$suffix\t$mnt_access\n");
-		append_to_file("/etc/exports", "/etc/X11/XF86Config$suffix\t$mnt_access\n");
-		append_to_file("/etc/exports", "/etc/X11/xorg.conf$suffix\t$mnt_access\n");
+        if (!$conf{USE_UNIONFS}) {
+            my $mnt_access = "$client_ip(rw,no_root_squash)";
+            append_to_file("/etc/exports", "/etc/sysconfig/mouse$suffix\t$mnt_access\n");
+            append_to_file("/etc/exports", "/etc/modules.conf$suffix\t$mnt_access\n");
+            append_to_file("/etc/exports", "/etc/modules$suffix\t$mnt_access\n");
+            append_to_file("/etc/exports", "/etc/modprobe.conf$suffix\t$mnt_access\n");
+            append_to_file("/etc/exports", "/etc/modprobe.preload$suffix\t$mnt_access\n");
+            append_to_file("/etc/exports", "/etc/X11/XF86Config$suffix\t$mnt_access\n");
+            append_to_file("/etc/exports", "/etc/X11/xorg.conf$suffix\t$mnt_access\n");
+        }
 	} else {
 		log::explanations("Removing root access for $client_ip");
 		eval { rm_rf("/etc/shadow\$\$IP=$client_ip\$\$") };
@@ -2116,13 +2149,13 @@ sub create_client_sysnetwork {
 	#- this lets gnome operate properly since udhcpc does not get the hostname from the dhcpd server
 	my ($hostname, $ip) = @_;
 	log::explanations("Adding /etc/sysconfig/network for $ip");
-	my $network_file = "/etc/sysconfig/network\$\$IP=$ip\$\$";
+	my $network_file = $conf{USE_UNIONFS} ? "$client_prefix/$ip/etc/sysconfig/network" : "/etc/sysconfig/network\$\$IP=$ip\$\$";
 	my @net_data = ("HOSTNAME=$hostname\n", "NETWORKING=yes\n", "FORWARD_IPV4=false\n");
 	output_p($network_file, @net_data);
 }
 
 sub restart_server() {
-	my $answer = $in->ask_yesorno('', N("Configuration changed - restart clusternfs/dhcpd?"));
+	my $answer = $in->ask_yesorno('', N("Configuration changed - restart %s/dhcpd?", $nfs_daemon));
 	if ($answer == 1) {
 		stop_ts();
 		start_ts();
@@ -2134,16 +2167,17 @@ sub clean_client_config {
 	my ($client_ip) = @_;
 	# this routine entirely removes local hardware config settings
 	log::explanations("Removing all local hardware config for $client_ip");
-	my $suffix = "\$\$IP=$client_ip\$\$";
-	eval { rm_rf("/etc/shadow$suffix") };
-	eval { rm_rf("/etc/sysconfig/mouse$suffix") };
-	eval { rm_rf("/etc/modules.conf$suffix") };
-	eval { rm_rf("/etc/modules$suffix") };
-	eval { rm_rf("/etc/modprobe.conf$suffix") };
-	eval { rm_rf("/etc/modprobe.preload$suffix") };
-	eval { rm_rf("/etc/X11/XF86Config$suffix") };
-	eval { rm_rf("/etc/X11/xorg.conf$suffix") };
-	eval { rm_rf("/etc/sysconfig/network$suffix") };
+	my $suffix = $conf{USE_UNIONFS} ? "" : "\$\$IP=$client_ip\$\$";
+	my $prefix = $conf{USE_UNIONFS} ? "$client_prefix/$client_ip" : "";
+	eval { rm_rf("$prefix/etc/shadow$suffix") };
+	eval { rm_rf("$prefix/etc/sysconfig/mouse$suffix") };
+	eval { rm_rf("$prefix/etc/modules.conf$suffix") };
+	eval { rm_rf("$prefix/etc/modules$suffix") };
+	eval { rm_rf("$prefix/etc/modprobe.conf$suffix") };
+	eval { rm_rf("$prefix/etc/modprobe.preload$suffix") };
+	eval { rm_rf("$prefix/etc/X11/XF86Config$suffix") };
+	eval { rm_rf("$prefix/etc/X11/xorg.conf$suffix") };
+	eval { rm_rf("$prefix/etc/sysconfig/network$suffix") };
 	remove_client_mounts($client_ip);
 }
 
