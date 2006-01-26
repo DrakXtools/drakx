@@ -169,6 +169,7 @@ sub update_steps_position {
 	}
 	$last_step = $_;
     }
+    mygtk2::flush(); #- for auto_installs which never go through the Gtk2 main loop
 }
 
 #------------------------------------------------------------------------------
