@@ -36,6 +36,7 @@ our %alsa2oss =
      "snd-ad1889"  => [ "ad1889" ],
      "snd-ali5451" => [ "trident" ],
      "snd-als100"  => [ "sb" ], # isa
+     "snd-als300"  => [ "unknown" ],
      "snd-als4000" => [ "unknown" ],
      "snd-asihpi"  => [ "unknown" ],
      "snd-atiixp"  => [ "unknown" ],
