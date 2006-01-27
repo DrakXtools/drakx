@@ -2,7 +2,7 @@
 
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 10.4.9
+Version: 10.4.10
 Release: %mkrel 1
 Url:     http://qa.mandriva.com/twiki/bin/view/Main/DrakXTools
 Source0: %name-%version.tar.bz2
@@ -381,6 +381,60 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Jan 27 2006 Thierry Vignaud <tvignaud@mandriva.com> 10.4.10-1mdk
+- add support for new snd-als300 sound driver
+- handle new dmidecode output (pixel)
+- diskdrake: handle partitions bigger than 2TB (up to 100_000TB)
+- drakboot (pixel):
+  o read all per entry entries (esp. makeactive)
+  o write makeactive
+  o have makeactive for windows entries (#20081)
+- drakkeyboard: updated list of console keyboards (pablo)
+- draksound: prevent some "unlisted sound card" error messages
+- drakTermServ (stew):
+  o add tooltips (#20384)
+  o check/sanitize user input MAC addresses
+  o more support for TS2
+- drakxtv: sync with kernel-2.6.16-rc1-mm2
+- fileshareset (pixel):
+  o put kde's enhancements (backward compatible)
+  o multi distro
+  o new variables in fileshare.conf
+- harddrake: typo fix resulting in undetected sound cards (#20355)
+- harddrake service:
+  o convert parallel init to LSB (blino)
+  o not an interactive service
+  o require dkms (blino)
+- printerdrake:
+  o fixed HPLIP setup when setting up a printer without auto-detection  (#20231)
+  o give priority to custom PPD file if printer queue record in
+    printerdrake is broken, use "Postscript" if Foomatic driver is
+    wrongly set to "PPD" (#20028.)
+  o make sure that when a user supplies an updated PPD file, the new
+    file and not the old one from the system gets used
+  o moved button for daemon-less CUPS client mode to the top of the
+    CUPS configuration dialog to catch accidentally enabling
+  o improve and fix printer model/driver listing:
+    * fix handling of PPD links in Foomatic printer XML files
+    * Avoid duplicate PPD entries for Foomatic-generated PPDs and
+      identical pre-generated Foomatic PPDs when hplip-hpijs-ppds is
+      installed
+     * some polishing of list entries
+- scannerdrake:
+  o load kernel modules before the port checking step (the device file
+    is usually generated when the module is loaded)
+  o support for loading kernel modules only in case of a certain
+    connection type (SCSI, USB, Parport)
+  o let kernel module only be added to /etc/modules and
+    /etc/modprobe.preload if loading of the module with "modprobe"
+    succeeded
+  o do not die when loading of a kernel module does not succeed
+- XFdrake:
+  o defaulting to 1024x768 instead of 800x600 when the monitor size is
+     unknown (pixel, #20304)
+  o 1024x768@70Hz monitor is too high (pixel, #20304)
+  o option IgnoreEDID is no more needed with nvidia driver
+
 * Mon Jan  2 2006 Thierry Vignaud <tvignaud@mandriva.com> 10.4.9-1mdk
 - diskdrake: be more tolerant with devices we cannot guess all info
   about (#20340)
