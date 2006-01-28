@@ -417,7 +417,7 @@ my $cards_lst = {
         "Sedna/MuchTV PC TV Cardbus TV/Radio (ITO25 Rev:2B)" => 79,
         "ASUS|Digimatrix TV" => 80,
         "Philips|Tiger reference design" => 81,
-        "MSI TV\@Anywhere plus" => 82,
+        'MSI TV@Anywhere plus' => 82,
         "Terratec|Cinergy 250 PCI TV" => 83,
         "LifeView|FlyDVB Trio" => 84,
 
