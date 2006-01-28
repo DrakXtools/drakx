@@ -26,7 +26,7 @@ Obsoletes: draksec
 %package newt
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Group: System/Configuration/Other
-Requires: perl-base >= 2:5.8.6-1mdk, urpmi >= 4.6.13, usermode-consoleonly >= 1.44-4mdk, msec >= 0.38-5mdk
+Requires: perl-base >= 2:5.8.6-1mdk, urpmi >= 4.6.13, usermode-consoleonly >= 1.44-4mdk
 Requires: perl-Locale-gettext
 Requires: module-init-tools
 Requires: %{name}-backend = %version-%release
