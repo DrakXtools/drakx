@@ -235,7 +235,7 @@ our %l = (
       qw(i8k sonypi toshiba),
     ],
     serial => [
-      qw(8250_pci 8250 epca esp isicom istallion moxa mxser stallion sx synclink synclinkmp),
+      qw(8250_pci 8250 epca esp isicom istallion jsm moxa mxser stallion sx synclink synclinkmp),
     ],
     other => [
       qw(defxx i810fb ide-floppy ide-scsi ide-tape loop lp nbd sg st),
