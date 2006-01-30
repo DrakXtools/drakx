@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2006-01-26 11:06+0100\n"
-"PO-Revision-Date: 2006-01-19 01:11+0800\n"
+"PO-Revision-Date: 2006-01-30 23:05+0800\n"
 "Last-Translator: Shiva Huang <shivahuang@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -3266,7 +3266,7 @@ msgid ""
 "volumes.\n"
 "You should create a /boot partition first"
 msgstr ""
-"你已經選擇了一塊 LVM Logical Volume 當作為根分割區 (/) 的掛載點。\n"
+"你已經選擇了一塊 LVM Logical Volume 作為根目錄 (/) 的掛載點。\n"
 "沒有 /boot 分割區，開機載入程式不可能處理這種情況。\n"
 "請確定會增加一個 /boot 分割區"
 
@@ -13171,18 +13171,19 @@ msgstr "您要用 HPLIP 設定那個印表機？"
 #: printer/printerdrake.pm:2576
 #, c-format
 msgid "HPLIP was not able to communicate with the chosen printer!"
-msgstr ""
+msgstr "HPLIP 無法與選定的印表機溝通！"
 
 #: printer/printerdrake.pm:2577 printer/printerdrake.pm:2584
-#, fuzzy, c-format
+#, c-format
 msgid "Setting up the printer without HPLIP..."
-msgstr "設定不搭配 HPLIP"
+msgstr "設定此印表機不使用 HPLIP"
 
 #: printer/printerdrake.pm:2583
 #, c-format
 msgid ""
 "HPLIP did not find any local printers (Parallel, USB) which it supports!"
 msgstr ""
+"HPLIP 沒有找到任何支援的本地端 (平行埠、USB) 印表機！"
 
 #: printer/printerdrake.pm:2622
 #, c-format
@@ -13241,6 +13242,8 @@ msgid ""
 "printer unaccessible from Windows clients. Do you really want to use this "
 "name?"
 msgstr ""
+"此印表機名稱 \"%s\" 超過 12 個字元長，這將使它無法被 Windows 客戶端所連結。"
+"您確定要使用這個名稱嗎？"
 
 #: printer/printerdrake.pm:2969
 #, c-format
@@ -13330,7 +13333,7 @@ msgstr ""
 #: printer/printerdrake.pm:3170
 #, c-format
 msgid "Install a manufacturer-supplied PPD file"
-msgstr ""
+msgstr "安裝原廠支援的 PPD 檔案"
 
 #: printer/printerdrake.pm:3202
 #, c-format
@@ -13338,6 +13341,8 @@ msgid ""
 "Every PostScript printer is delivered with a PPD file which describes the "
 "printer's options and features."
 msgstr ""
+"每一個 PostScript 印表機出廠時都會隨附一個描述這台印表機選項與功能的 PPD 檔"
+"案。"
 
 #: printer/printerdrake.pm:3203
 #, c-format
@@ -13345,11 +13350,12 @@ msgid ""
 "This file is usually somewhere on the CD with the Windows and Mac drivers "
 "delivered with the printer."
 msgstr ""
+"這個檔案通常會在印表機出廠時隨附的 Windows 與 Mac 驅動程式光碟內。"
 
 #: printer/printerdrake.pm:3204
 #, c-format
 msgid "You can find the PPD files also on the manufacturer's web sites."
-msgstr ""
+msgstr "您可以在製造商的網站上找到這個 PPD 檔。"
 
 #: printer/printerdrake.pm:3205
 #, c-format
@@ -13357,6 +13363,7 @@ msgid ""
 "If you have Windows installed on your machine, you can find the PPD file on "
 "your Windows partition, too."
 msgstr ""
+"如果您的機器上有安裝 Windows，您也可以在 Windows 磁區內找到這個 PPD 檔。"
 
 #: printer/printerdrake.pm:3206
 #, c-format
@@ -13365,6 +13372,8 @@ msgid ""
 "makes all options of the printer available which are provided by the "
 "printer's hardware"
 msgstr ""
+"設定印表機時安裝並使用此印表機的 PPD 檔案將使這台印表機硬體所提供的所有選項"
+"都可以使用。"
 
 #: printer/printerdrake.pm:3207
 #, c-format
@@ -13372,6 +13381,7 @@ msgid ""
 "Here you can choose the PPD file to be installed on your machine, it will "
 "then be used for the setup of your printer."
 msgstr ""
+"在這裡您可以選擇要安裝到您機器上的 PPD 檔，它將來將被用來設定您的印表機。"
 
 #: printer/printerdrake.pm:3209
 #, c-format
@@ -13400,12 +13410,12 @@ msgstr "選擇 PPD 檔案"
 #: printer/printerdrake.pm:3232
 #, c-format
 msgid "The PPD file %s does not exist or is unreadable!"
-msgstr ""
+msgstr "PPD 檔案 %s 不存在或者無法讀取！"
 
 #: printer/printerdrake.pm:3238
 #, c-format
 msgid "The PPD file %s does not conform with the PPD specifications!"
-msgstr ""
+msgstr "PPD 檔案 %s 沒有通過 PPD 格式驗證！"
 
 #: printer/printerdrake.pm:3249
 #, c-format
@@ -13466,12 +13476,12 @@ msgid ""
 msgstr ""
 "若是希望能夠使用這台 Lexmark 噴墨印表機進行列印的話\n"
 "您需要由 Lexmark 網站 (http://www.lexmark.com) 首頁上\n"
-"尋找相關連結, 下載這台印表機的驅動程式。比方當您連上\n"
-"Lexmark 網站首頁後, 請點選 \"Drivers\" 按鈕, 選擇您\n"
-"目前使用該款印表機型號, 並確認是選取使用 \"Linux\"的\n"
-"版本。一般來說, 您下載回來的檔案, 可能是 RPM 套件檔案\n"
+"尋找相關連結，下載這台印表機的驅動程式。比方當您連上\n"
+"Lexmark 網站首頁後，請點選 \"Drivers\" 按鈕，選擇您\n"
+"目前使用該款印表機型號，並確認是選取使用 \"Linux\"的\n"
+"版本。一般來說，您下載回來的檔案，可能是 RPM 套件檔案\n"
 "或者是幾個 shell script (執行該檔案將會啟動安裝程式)。\n"
-"一般來說, 您並不需要透過圖行化的前端介面來進行相關的\n"
+"一般來說，您並不需要透過圖型化的前端介面來進行相關的\n"
 "的設定。然後使用 \"lexmarkmaintain\" 程式項目來列印噴頭\n"
 "校正的工作設定。"
 
@@ -13532,7 +13542,7 @@ msgstr ""
 #: printer/printerdrake.pm:3520
 #, c-format
 msgid "Firmware-Upload for HP LaserJet 1000"
-msgstr ""
+msgstr "HP LaserJet 1000 的 Firmware-Upload"
 
 #: printer/printerdrake.pm:3670
 #, c-format
@@ -13557,12 +13567,12 @@ msgstr "印表機型號選擇"
 #: printer/printerdrake.pm:3802
 #, c-format
 msgid "Option %s must be an integer number!"
-msgstr "%s 參數需要為整數!"
+msgstr "%s 參數必須為整數！"
 
 #: printer/printerdrake.pm:3806
 #, c-format
 msgid "Option %s must be a number!"
-msgstr "%s 選項一定要為數字!"
+msgstr "%s 選項必須為數字！"
 
 #: printer/printerdrake.pm:3810
 #, c-format
@@ -13574,7 +13584,7 @@ msgstr "%s 參數超出允許範圍！"
 msgid ""
 "Do you want to set this printer (\"%s\")\n"
 "as the default printer?"
-msgstr "您要使用這台印表機 (\"%s\") 為預設印表機嗎？"
+msgstr "您要使用這台印表機 (\"%s\") 作為預設印表機嗎？"
 
 #: printer/printerdrake.pm:3878
 #, c-format
@@ -13589,11 +13599,10 @@ msgid ""
 "laser printers with too low memory it can even not come out. In most cases "
 "it is enough to print the standard test page."
 msgstr ""
-"您選取你要列印的測試頁。\n"
-"注意: 圖形測試頁會花費比較久的時間來列印, \n"
-"若是該印表機硬體可用記憶體很少的話, 列印時間\n"
-"能夠會需要花費更久時間。\n"
-"一般情況來說, 選擇標準的測試頁就很足夠了。"
+"請選取您要列印的測試頁。\n"
+"請注意：圖形測試頁會花費比較久的時間來列印，"
+"某些記憶體太少的雷射印表機甚至可能無法列印。"
+"一般來說，標準的測試頁就很足夠了。"
 
 #: printer/printerdrake.pm:3883
 #, c-format
@@ -13633,7 +13642,7 @@ msgstr "正在列印測試頁..."
 #: printer/printerdrake.pm:3950
 #, c-format
 msgid "Skipping photo test page."
-msgstr "略過照片列印測試頁"
+msgstr "略過照片列印測試頁。"
 
 #: printer/printerdrake.pm:3967
 #, c-format
@@ -13644,9 +13653,9 @@ msgid ""
 "%s\n"
 "\n"
 msgstr ""
-"測試頁已經被送到列印伺服程式了.\n"
-"於印表機開始之前, 它可能需要一點時間.\n"
-"目前的列印狀態:\n"
+"測試頁已經送至印表機。\n"
+"印表機可能需要一些時間才能開始列印。\n"
+"目前的列印狀態：\n"
 "%s\n"
 "\n"
 
@@ -13656,8 +13665,8 @@ msgid ""
 "Test page(s) have been sent to the printer.\n"
 "It may take some time before the printer starts.\n"
 msgstr ""
-"測試頁已經被送到列印伺服程式了, 接著可能需要花\n"
-"一點時間, 印表機才會把結果印出來。\n"
+"測試頁已經送至印表機。\n"
+"印表機可能需要一些時間才能開始列印。\n"
 
 #: printer/printerdrake.pm:3981
 #, c-format
@@ -13677,13 +13686,13 @@ msgid ""
 "\"kprinter <file>\". The graphical tools allow you to choose the printer and "
 "to modify the option settings easily.\n"
 msgstr ""
-"要在終端機命令列環境列印檔案的話, 您可以執行這個指令: \n"
+"要在終端機命令列環境列印檔案的話，您可以執行這個指令：\n"
 "\"%s <檔案名稱>\"\n"
-"或者是使用圖型介面程式:\n"
+"或者是使用圖型介面程式：\n"
 "\"xpp <檔案名稱>\"\n"
 "或者是\n"
 "\"kprinter <檔案名稱>\"\n"
-"即可。您可以透過圖型介面程式簡單的選擇印表機項目, \n"
+"即可。您可以透過圖型介面程式簡單的選擇印表機項目，\n"
 "包含修改相關的列印選項。\n"
 
 #: printer/printerdrake.pm:4029
@@ -13693,9 +13702,9 @@ msgid ""
 "printing dialogs of many applications, but here do not supply the file name "
 "because the file to print is provided by the application.\n"
 msgstr ""
-"這個指令功能, 其實您也可以在許多應用程式列印對話方塊的 \"列印命令\" 使用"
+"這個指令功能，其實您也可以在許多應用程式列印對話方塊的 \"列印命令\" 使用"
 "它。\n"
-"但是這邊不提供所謂的檔案名稱, 因為相關檔案的列印功能是由相關應用程式提供。\n"
+"但是這邊不提供所謂的檔案名稱，因為相關檔案的列印功能是由相關應用程式提供。\n"
 
 #: printer/printerdrake.pm:4032 printer/printerdrake.pm:4049
 #: printer/printerdrake.pm:4059
@@ -13707,8 +13716,8 @@ msgid ""
 "line, e. g. \"%s <file>\". "
 msgstr ""
 "\n"
-"「%s」指令, 能夠讓您修改某個設定列印工作項目的參數設定。\n"
-"簡單一點的方式就是在命令列加上您要填入的設定值, 比方「%s <檔案>」。 "
+"\"%s\" 指令，能夠讓您修改某個設定列印工作項目的參數設定。\n"
+"簡單一點的方式就是在命令列加上您要填入的設定值，比方 \"%s <檔案>\"。"
 
 #: printer/printerdrake.pm:4035 printer/printerdrake.pm:4075
 #, c-format
@@ -13717,8 +13726,8 @@ msgid ""
 "list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
-"要獲得目前這台印表機可用的相關參數選項, 或者是查看下面清單\n"
-"所顯示的項目, 請點選點選『列印選項清單』按鈕。%s%s%s\n"
+"要獲得目前這台印表機可用的相關參數選項，或者是查看下面清單\n"
+"所顯示的項目，請點選點選 \"列印選項清單\" 按鈕。%s%s%s\n"
 "\n"
 
 #: printer/printerdrake.pm:4039
@@ -13727,7 +13736,7 @@ msgid ""
 "Here is a list of the available printing options for the current printer:\n"
 "\n"
 msgstr ""
-"下面包含了目前印表機支援的選項清單:\n"
+"下面包含了目前印表機支援的選項清單：\n"
 "\n"
 
 #: printer/printerdrake.pm:4044 printer/printerdrake.pm:4054
@@ -13736,7 +13745,7 @@ msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
 "<file>\".\n"
 msgstr ""
-"要在命令列環境(終端機視窗)列印檔案的話, 您可以執行這個指令 \"%s <檔案>\".\n"
+"要在命令列環境 (終端機視窗) 列印檔案的話，您可以執行這個指令 \"%s <檔案>\"。\n"
 
 #: printer/printerdrake.pm:4046 printer/printerdrake.pm:4056
 #: printer/printerdrake.pm:4066
@@ -13805,7 +13814,7 @@ msgstr "使用/維護 \"%s\" 印表機"
 #: printer/printerdrake.pm:4082
 #, c-format
 msgid "Printing on the printer \"%s\""
-msgstr "使用「%s」印表機進行列印"
+msgstr "正在使用 \"%s\" 印表機進行列印"
 
 #: printer/printerdrake.pm:4088
 #, c-format
@@ -13813,9 +13822,9 @@ msgid "Print option list"
 msgstr "列印選項清單"
 
 #: printer/printerdrake.pm:4092
-#, fuzzy, c-format
+#, c-format
 msgid "Printing option list..."
-msgstr "列印選項清單"
+msgstr "列印選項清單..."
 
 #: printer/printerdrake.pm:4110
 #, c-format
@@ -13839,6 +13848,8 @@ msgid ""
 "share your scanner on the network.\n"
 "\n"
 msgstr ""
+"執行 Scannerdrake (在 Mandriva Linux 控制中心的 \"硬體/掃描器\" 中) 來在"
+"網路上分享您的掃描器。\n"
 
 #: printer/printerdrake.pm:4118
 #, c-format
@@ -13846,6 +13857,7 @@ msgid ""
 "The memory card readers in your printer can be accessed like a usual USB "
 "mass storage device. "
 msgstr ""
+"您印表機上的記憶卡讀卡機可以用像一般 USB 大量儲存裝置一樣的方式存取。"
 
 #: printer/printerdrake.pm:4119
 #, c-format
@@ -13854,6 +13866,8 @@ msgid ""
 "your desktop.\n"
 "\n"
 msgstr ""
+"插入記憶卡之後，一個讓您可以存取記憶卡的硬碟圖示應該會出現在您的桌面上。\n"
+"\n"
 
 #: printer/printerdrake.pm:4121
 #, c-format
@@ -13884,17 +13898,17 @@ msgstr ""
 #: printer/printerdrake.pm:4126
 #, c-format
 msgid " - Ink level/status info\n"
-msgstr ""
+msgstr " - 墨水色階/狀態資訊\n"
 
 #: printer/printerdrake.pm:4127
 #, c-format
 msgid " - Ink nozzle cleaning\n"
-msgstr ""
+msgstr " - 清潔噴嘴\n"
 
 #: printer/printerdrake.pm:4128
 #, c-format
 msgid " - Print head alignment\n"
-msgstr ""
+msgstr " - 列印頁首對齊\n"
 
 #: printer/printerdrake.pm:4129
 #, c-format
@@ -13905,7 +13919,7 @@ msgstr " - 色彩校正\n"
 #: printer/printerdrake.pm:4232
 #, c-format
 msgid "Transfer printer configuration"
-msgstr "印表機傳送設定"
+msgstr "傳送印表機設定"
 
 #: printer/printerdrake.pm:4171
 #, c-format
@@ -13928,7 +13942,7 @@ msgid ""
 "CUPS does not support printers on Novell servers or printers sending the "
 "data into a free-formed command.\n"
 msgstr ""
-"CUPS 目前並不支援位於Novell主機上的印表機, 包含不使用free-formed\n"
+"CUPS 目前並不支援位於 Novell 主機上的印表機，以及使用 free-formed\n"
 "命令傳送列印資料的印表機。\n"
 
 #: printer/printerdrake.pm:4176
@@ -13937,8 +13951,7 @@ msgid ""
 "PDQ only supports local printers, remote LPD printers, and Socket/TCP "
 "printers.\n"
 msgstr ""
-"PDQ 僅支援本地端印表機, 或者是遠端 LPD 的印表機, 以及\n"
-"TCP/Socket 印表機類型。\n"
+"PDQ 僅支援本地端印表機、遠端 LPD 印表機，以及 TCP/Socket 印表機。\n"
 
 #: printer/printerdrake.pm:4178
 #, c-format
@@ -13962,8 +13975,8 @@ msgid ""
 "or with native CUPS drivers cannot be transferred."
 msgstr ""
 "\n"
-"透過廠商所提供的 PPD 檔案內容或者是原始性的 CUPS 驅動程式\n"
-"設定的印表機無法被進行轉換動作."
+"透過廠商所提供的 PPD 檔案內容或原生的 CUPS 驅動程式\n"
+"設定的印表機無法被進行轉換動作。"
 
 #: printer/printerdrake.pm:4182
 #, c-format
@@ -13973,7 +13986,7 @@ msgid ""
 "\"Transfer\"."
 msgstr ""
 "\n"
-"請點選標記您要傳送的印表機項目, 然後點選 \"傳送\" 即可。"
+"請點選標記您要傳送的印表機項目，然後點選 \"傳送\" 即可。"
 
 #: printer/printerdrake.pm:4185
 #, c-format
