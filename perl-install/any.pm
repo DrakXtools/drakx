@@ -643,7 +643,7 @@ sub ask_user_one {
 		  },
 	          complete => sub { $u->{name} ? &$verif : 0 },
                   canceled => $verif,
-                  ok_disabled => sub { $security >= 4 && !@$users || $options{needauser} && !$u->{name} },
+                  ok_disabled => sub { $security >= 3 && !@$users || $options{needauser} && !$u->{name} },
 	  } }, [ 
 	  { label => N("Real name"), val => \$u->{realname} },
           { label => N("Login name"), val => \$u->{name} },
