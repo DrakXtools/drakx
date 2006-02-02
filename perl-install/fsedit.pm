@@ -144,6 +144,7 @@ sub get_hds {
 
 	eval { partition_table::raw::test_for_bad_drives($hd) if !$flags->{no_bad_drives} };
 	if (my $err = $@) {
+	    log::l("test_for_bad_drives returned $err");
 	    if ($err =~ /write error:/) { 
 		$hd->{readonly} = 1;
 	    } elsif ($err =~ /read error:/) {
