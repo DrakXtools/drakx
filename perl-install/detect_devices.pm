@@ -925,8 +925,20 @@ sub dmidecode() {
 }
 sub dmidecode_category {
     my ($cat) = @_;
-    my @l = find { $_->{name} eq $cat } dmidecode();
+    my @l = grep { $_->{name} eq $cat } dmidecode();
     wantarray() ? @l : $l[0] || {};
+}
+
+#- size in MB
+sub dmi_detect_memory() {
+    my @l1 = map { $_->{'Enabled Size'} =~ /(\d+) MB/ && $1 } dmidecode_category('Memory Module');
+    my @l2 = map { $_->{'Form Factor'} =~ /^(SIMM|SIP|DIP|DIMM|RIMM|SODIMM|SRIMM)$/ && 		     
+		     ($_->{Size} =~ /(\d+) MB/ && $1 || $_->{Size} =~ /(\d+) kB/ && $1 * 1024)
+		 } dmidecode_category('Memory Device');
+    my $s1 = join(' ', grep {$_} @l1);
+    my $s2 = join(' ', grep {$_} @l2);
+    warn "$s1 <|> $s2\n" if $s1 && $s2 && $s1 ne $s2;
+    max(sum(@l1), sum(@l2))
 }
 
 sub computer_info() {
@@ -956,7 +968,7 @@ sub isLaptop() {
 }
 
 sub BIGMEM() {
-    arch() !~ /x86_64|ia64/ && $> == 0 && c::dmiDetectMemory() > 4 * 1024;
+    arch() !~ /x86_64|ia64/ && $> == 0 && dmi_detect_memory() > 4 * 1024;
 }
 
 sub is_i586() {
