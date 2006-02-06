@@ -225,7 +225,7 @@ sub search_windows_font() {
     1;
 }
 
-my @font_extensions = qw(ttf pfa pfb pcf pcf.gz pfm gsf);
+my @font_extensions = qw(ttf ttc pfa pfb pcf pcf.gz pfm gsf);
 
 sub is_a_font($) {
     my ($file) = @_;
