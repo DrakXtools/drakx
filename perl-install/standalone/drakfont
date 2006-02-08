@@ -588,7 +588,7 @@ sub font_choice() {
 
     my $filter = Gtk2::FileFilter->new;
     $filter->set_name(N("Fonts"));
-    $filter->add_pattern("*.$_") foreach @font_extensions;
+    $filter->add_pattern("*.$_") foreach @font_extensions, map { uc($_) } @font_extensions;
     $file_dialog->add_filter($filter);
     $file_dialog->set_filter($filter);
 
