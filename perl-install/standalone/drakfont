@@ -676,14 +676,15 @@ sub show_list_to_remove() {
 
     $model->append_set(undef, [ 0 => $_ ]) foreach @uninstall;
 
-    dialog(N("Uninstall"),
+    dialog(N("Warning"),
 	   [
+            0, Gtk2::Label->new(N("Are you sure you want to uninstall the following fonts?")),
 	    1, gtkpack_(Gtk2::HBox->new(0, 4), 1, create_scrolled_window($list)), 
 	   ],
 	   [
-	    gtksignal_connect(Gtk2::Button->new(N("click here if you are sure.")),
+	    gtksignal_connect(Gtk2::Button->new(N("Yes")),
 			      clicked => sub { import_status_uninstall(); exitdialog() }),
-	    gtksignal_connect(Gtk2::Button->new(N("here if no.")),
+	    gtksignal_connect(Gtk2::Button->new(N("No")),
 			      clicked => \&exitdialog
 			     ),
 	   ],
