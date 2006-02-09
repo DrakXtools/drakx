@@ -433,9 +433,14 @@ sub install_system {
 sub post_install_system {
     my ($live) = @_;
 
-    my @rpms = map { abs_path($_) } @{$live->{system}{rpms}};
-    each_index { !defined $_ and die "unable to find file " . $live->{system}{rpms}[$::i] } @rpms;
-    run_('urpmi', '--auto', '--root', $live->{system}{root}, @rpms) if @rpms;
+    if (@{$live->{system}{rpms}}) {
+        my $rpm_tmp_dir = '/tmp/draklive_rpms';
+        mkdir_p($live->{system}{root} . $rpm_tmp_dir);
+        cp_f(@{$live->{system}{rpms}}, $live->{system}{root} . $rpm_tmp_dir);
+        run_('chroot', $live->{system}{root}, 'urpmi', '--auto',
+             map { $rpm_tmp_dir . '/' . basename($_) } @{$live->{system}{rpms}});
+        rm_rf($live->{system}{root} . $rpm_tmp_dir);
+    }
 
     my @patches = map { abs_path($_) } @{$live->{system}{patches}};
     each_index { !defined $_ and die "unable to find file " . $live->{system}{patches}[$::i] } @patches;
