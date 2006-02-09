@@ -3,13 +3,13 @@
 # Copyright (C) 2000,2003, 2004 Free Software Foundation, Inc.
 # YAMAGATA Hiroo <hiyori13@alum.mit.edu>, 2000.
 # UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2003, 2004.
-# Yukiko Bando <ybando@k6.dion.ne.jp>, 2004, 2005.
+# Yukiko Bando <ybando@k6.dion.ne.jp>, 2004, 2005, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-ja\n"
 "POT-Creation-Date: 2006-01-26 11:06+0100\n"
-"PO-Revision-Date: 2005-12-15 23:30+0900\n"
+"PO-Revision-Date: 2006-02-09 23:00+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -5876,6 +5876,10 @@ msgid ""
 "\n"
 "Do you have a supplementary installation medium to configure?"
 msgstr ""
+"次のインストールメディアを検出しました: %s \n"
+"\n"
+"\n"
+"他に設定するメディアはありますか？"
 
 #: install_any.pm:422 printer/printerdrake.pm:3211
 #: printer/printerdrake.pm:3218 standalone/scannerdrake:182
@@ -13696,18 +13700,18 @@ msgstr "どのプリンタをHPLIPで設定しますか？"
 #: printer/printerdrake.pm:2576
 #, c-format
 msgid "HPLIP was not able to communicate with the chosen printer!"
-msgstr ""
+msgstr "HPLIP 選択されたプリンタと通信できませんでした"
 
 #: printer/printerdrake.pm:2577 printer/printerdrake.pm:2584
-#, fuzzy, c-format
+#, c-format
 msgid "Setting up the printer without HPLIP..."
-msgstr "HPLIPなしで設定"
+msgstr "HPLIPなしでプリンタを設定..."
 
 #: printer/printerdrake.pm:2583
 #, c-format
 msgid ""
 "HPLIP did not find any local printers (Parallel, USB) which it supports!"
-msgstr ""
+msgstr "HPLIP サポートできるローカルプリンタ(パラレル/USB)が見つかりません"
 
 #: printer/printerdrake.pm:2622
 #, c-format
@@ -16957,32 +16961,32 @@ msgstr "%s: %s にはホスト名が必要です..\n"
 #: standalone/drakTermServ:144
 #, c-format
 msgid "Host name for client"
-msgstr ""
+msgstr "クライアントのホスト名"
 
 #: standalone/drakTermServ:145
 #, c-format
 msgid "MAC address should be in the format 00:11:22:33:44:55"
-msgstr ""
+msgstr "MACアドレスの形式は次のようにしてください 00:11:22:33:44:55"
 
 #: standalone/drakTermServ:146
 #, c-format
 msgid "IP address to be assigned to client"
-msgstr ""
+msgstr "クライアントに割り当てるIPアドレス"
 
 #: standalone/drakTermServ:147
 #, c-format
 msgid "Kernel/network adapter image to use to boot client"
-msgstr ""
+msgstr "クライアントの起動に使用するkernel/networkアダプタイメージ"
 
 #: standalone/drakTermServ:148
 #, c-format
 msgid "Create masking files to allow configuration tools to run on client"
-msgstr ""
+msgstr "クライアントでの設定ツールの実行を可能にするマスクファイルを作成"
 
 #: standalone/drakTermServ:149
 #, c-format
 msgid "Applications will run on server machine"
-msgstr ""
+msgstr "アプリケーションはサーバのマシンで実行"
 
 #: standalone/drakTermServ:234 standalone/drakTermServ:237
 #, c-format
@@ -17239,7 +17243,7 @@ msgstr ""
 "        \tdisklessクライアントをサポートするdhcpd.confの典型例:"
 
 #: standalone/drakTermServ:589
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "        While you can use a pool of IP addresses, rather than setup a "
 "specific entry for\n"
@@ -17277,12 +17281,12 @@ msgid ""
 msgstr ""
 "        クライアントマシンそれぞれにエントリーを作成するかわりにIPアドレスの"
 "プールを\n"
-"        使用することも可能ですが、固定アドレスを採用するほうが、%sが提供する"
+"        使用することも可能ですが、固定アドレスを採用するほうが、%s が提供する"
 "クライアント\n"
 "        別設定ファイルの機能をより簡単に利用できます。\n"
 "\t\t\t\n"
-"        注意: '#type'エントリーは%sだけが使用します。クライアントは'thin'また"
-"は\n"
+"        注意: '#type'エントリーは %s だけが使用します。クライアントは'thin'ま"
+"たは\n"
 "        'fat'になります。thinクライアントはXDMCP経由でサーバ上の多くのソフト"
 "を使用します。これに\n"
 "        対して、fatクライアントは殆ど自分のマシンのものを使います。fat\n"
@@ -17294,7 +17298,7 @@ msgstr ""
 "するために、\n"
 "        hosts.denyとhosts.allowも変更されます。\n"
 "\t\t\t\n"
-"        注意: '#hdw_config'エントリーも%sだけが使用します。 クライアントは\n"
+"        注意: '#hdw_config'エントリーも %s だけが使用します。 クライアントは\n"
 "        'true'または'false'になります。'true'の場合は、クライアントマシンへの"
 "rootログイン\n"
 "        を有効にし、draktoolsを使ってサウンド/マウス/Xを設定できるようにしま"
@@ -17339,7 +17343,7 @@ msgstr ""
 "        \tSUBNET/MASKはネットワークに合わせて定義します。"
 
 #: standalone/drakTermServ:621
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "        - Maintain %s:\n"
 "        \tFor users to be able to log into the system from a diskless "
@@ -17352,7 +17356,7 @@ msgstr ""
 "        - %s の管理:\n"
 "        \tdisklessクライアントからシステムにログインするには、/etc/shadowの"
 "ユーザエントリー\n"
-"        \tが %s にコピーされている必要があります。%sは、\n"
+"        \tが %s にコピーされている必要があります。%s は、\n"
 "        \tこのファイルのユーザを追加/削除することによって、ユーザ管理の手助け"
 "をします。"
 
@@ -17509,12 +17513,12 @@ msgstr "デフォルトのカーネルバージョン"
 #: standalone/drakTermServ:764
 #, c-format
 msgid "Create PXE images"
-msgstr ""
+msgstr "PXEイメージを作成"
 
 #: standalone/drakTermServ:765
 #, c-format
 msgid "Use Unionfs (TS2)"
-msgstr ""
+msgstr "Unionfs (TS2) を使う"
 
 #: standalone/drakTermServ:795
 #, c-format
@@ -17645,7 +17649,7 @@ msgstr "クライアントを追加 -->"
 #: standalone/drakTermServ:1181
 #, c-format
 msgid "Unknown MAC address format"
-msgstr ""
+msgstr "不明なMACアドレスの形式"
 
 #: standalone/drakTermServ:1195
 #, c-format
