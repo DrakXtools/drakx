@@ -729,7 +729,7 @@ sub uninstall() { #- TODO : add item to right list with gtksignal_connect
 	    gtksignal_connect(Gtk2::Button->new(N("Selected All")),
 			      clicked => sub { $left_list->get_selection->select_all }
 			     ),
-	    gtksignal_connect(Gtk2::Button->new(N("Remove List")), clicked => sub { exitdialog(); list_to_remove() }),
+	    gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub { exitdialog(); list_to_remove() }),
 	    gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => \&exitdialog),
 	   ],
 	  );
