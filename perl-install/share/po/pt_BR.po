@@ -6116,6 +6116,10 @@ msgid ""
 "\n"
 "Do you have a supplementary installation medium to configure?"
 msgstr ""
+"A mídia a seguir foi encontrada e será usada durante a instalação: %s.\n"
+"\n"
+"\n"
+"Você deseja configurar alguma mídia suplementar?"
 
 #: install_any.pm:422 printer/printerdrake.pm:3211
 #: printer/printerdrake.pm:3218 standalone/scannerdrake:182
@@ -12553,7 +12557,7 @@ msgstr "%s (Porta %s)"
 #: printer/main.pm:1945 printer/main.pm:2100
 #, c-format
 msgid "user-supplied"
-msgstr ""
+msgstr "fornecido pelo usuário"
 
 #: printer/main.pm:1949 printer/main.pm:2104
 #, c-format
@@ -14313,18 +14317,19 @@ msgstr "Qual impressora você deseja configurar com HPLIP?"
 #: printer/printerdrake.pm:2576
 #, c-format
 msgid "HPLIP was not able to communicate with the chosen printer!"
-msgstr ""
+msgstr "HPLIP não conseguiu comunicar-se com a impressora escolhida!"
 
 #: printer/printerdrake.pm:2577 printer/printerdrake.pm:2584
-#, fuzzy, c-format
+#, c-format
 msgid "Setting up the printer without HPLIP..."
-msgstr "Configurar sem HPLIP"
+msgstr "Configurar impressora sem HPLIP"
 
 #: printer/printerdrake.pm:2583
 #, c-format
 msgid ""
 "HPLIP did not find any local printers (Parallel, USB) which it supports!"
 msgstr ""
+"HPLIP não encontrou qualquer impressora local (Paralela, USB) suportada!"
 
 #: printer/printerdrake.pm:2622
 #, c-format
@@ -17699,32 +17704,32 @@ msgstr "%s: %s requer o nome da máquina...\n"
 #: standalone/drakTermServ:144
 #, c-format
 msgid "Host name for client"
-msgstr ""
+msgstr "Nome do host para o cliente"
 
 #: standalone/drakTermServ:145
 #, c-format
 msgid "MAC address should be in the format 00:11:22:33:44:55"
-msgstr ""
+msgstr "Endereço MAC deve ser no formato 00:11:22:33:44:55"
 
 #: standalone/drakTermServ:146
 #, c-format
 msgid "IP address to be assigned to client"
-msgstr ""
+msgstr "Endereço IP a ser designado ao cliente"
 
 #: standalone/drakTermServ:147
 #, c-format
 msgid "Kernel/network adapter image to use to boot client"
-msgstr ""
+msgstr "Image do Kernel/driver de rede para o boot do cliente"
 
 #: standalone/drakTermServ:148
 #, c-format
 msgid "Create masking files to allow configuration tools to run on client"
-msgstr ""
+msgstr "Criar arquivos de máscara para permitir rodar ferramentas de configuração no cliente"
 
 #: standalone/drakTermServ:149
 #, c-format
 msgid "Applications will run on server machine"
-msgstr ""
+msgstr "Applicações irão rodar na máquina servidora"
 
 #: standalone/drakTermServ:234 standalone/drakTermServ:237
 #, c-format
@@ -17984,7 +17989,7 @@ msgstr ""
 "        \tUm típico dhcpd.conf suportando clientes sem disco seria como:"
 
 #: standalone/drakTermServ:589
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "        While you can use a pool of IP addresses, rather than setup a "
 "specific entry for\n"
@@ -18020,41 +18025,27 @@ msgid ""
 "        Note: You must stop/start the server after adding or changing "
 "clients."
 msgstr ""
-"          Você pode utilizar uma zona de endereços IP, em vez de uma entrada "
-"específica para cada \n"
-"          máquina cliente, usando um esquema de endereço fixo que facilita a "
-"utilização das funcionalidades de \n"
-"         arquivos de configuração específicos por cliente que o  %s "
-"fornece.\n"
+"        Pode-se utilizar uma faixa de endereços IP, em vez de uma entrada específica para cada\n"
+"        máquina cliente, porém com um esquema de endereços fixos facilita-se o uso de arquivos de\n"
+"        configuração específicos por cliente que o %s fornece.\n"
 "\t\t\t\n"
-"                Nota : A entrada 'type' só é utilizada pelo %s. Os clientes "
-"podem ser 'thin'\n"
-"            ou 'fat'.  Os clientes do tipo thin utilizam a maioria dos "
-"programas no servidor por XDMCP, enquanto os \n"
-"              clientes do tipo fat lançam os programas na máquina cliente. "
-"Um inittab especial, %s, foi\n"
-"     criado para os thin clients. Os arquivos de configuração do sistema xdm-"
-"config, kdmrc, e gdm.conf \n"
-"            são modificados se são utilizados thin clients, para ativar o "
-"XDMCP. Como existem problemas de\n"
-"           segurança com XDMCP, os arquivos hosts.deny e hosts.allow são "
-"modificados para limitar o acesso à rede local.\n"
+"        Nota: A entrada '#type' só é usada pelo %s. Clientes podem ser 'thin'\n"
+"        ou 'fat'. Clientes do tipo thin executam a maioria dos programas no servidor via XDMCP,\n"
+"        já os clientes do tipo fat executam os programas na máquina cliente. Um inittab especial,\n"
+"        %s, foi criado para os thin clients. Os arquivos de configuração do sistema xdm-config,\n"
+"        kdmrc, e gdm.conf são modificados se são utilizados thin clients, para ativar o XDMCP.\n"
+"        Como existem problemas de segurança com XDMCP, os arquivos hosts.deny e hosts.allow são\n"
+"        modificados para limitar o acesso à rede local.\n"
 "\t\t\t\n"
-"        Nota: a entrada '#hdw_config' também é usada somente pelo %s.  Os "
-"clientes pode ser tanto \n"
-"       'true' como 'false', sendo que 'true' habilita o login do root na "
-"máquina cliente e permite a configuração local do hardware de som, mouse e "
-"X, usando  \n"
-"        as ferramentas 'drak'. Isto é habilitado através da criação de \n"
-"        arquivos de configuração separados, associados aos endereços IP do "
-"cliente e à criação dos pontos de montagem de leitura/escrita, para permitir "
-"ao cliente \n"
-"        alterar o arquivo. Uma vez que você esteja satisfeito com as "
-"configurações, poderá remover os privilégios de login de root \n"
-"        do cliente.\n"
+"        Nota: a entrada '#hdw_config' também é usada somente pelo %s. Os clientes pode ser tanto\n"
+"        'true' como 'false', sendo que 'true' habilita o login do root na máquina cliente e permite\n"
+"        a configuração local do hardware de som, mouse e X, usando as ferramentas 'drak'. Isto é\n"
+"        habilitado através da criação de arquivos de configuração separados, associados aos endereços\n"
+"        IP do cliente e à criação dos pontos de montagem de leitura/escrita, para permitir ao cliente\n"
+"        alterar o arquivo. Uma vez que você esteja satisfeito com as configurações, poderá remover os\n"
+"        privilégios de login de root do cliente.\n"
 "\t\t\t\n"
-"      Nota : É necessário reiniciar o servidor depois de adicionar ou mudar "
-"os clientes."
+"        Nota : É necessário reiniciar o servidor depois de adicionar ou mudar os clientes."
 
 #: standalone/drakTermServ:609
 #, c-format
@@ -18087,7 +18078,7 @@ msgstr ""
 "        \tCom SUB-REDE/MÁSCARA definidos a partir da sua rede."
 
 #: standalone/drakTermServ:621
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "        - Maintain %s:\n"
 "        \tFor users to be able to log into the system from a diskless "
@@ -18098,11 +18089,11 @@ msgid ""
 "        \tfile."
 msgstr ""
 "        - Manutenção de %s:\n"
-"        \tPara que usuários possam acessar o sistema a partir de um cliente "
-"sem disco, a entrada deles em\n"
-"        \t/etc/shadow precisa ser duplicada em %s. O %s\n"
-"        \tajuda nesta tarefa, removendo ou adicionando usuários desse "
-"arquivo."
+"        \tPara que usuários possam acessar o sistema a partir de clientes "
+"sem disco, suas entradas no\n"
+"        \t/etc/shadow precisam ser duplicadas em %s. \n"
+"        \t%s ajuda nesta tarefa, removendo ou adicionando usuários desse\n"
+"        \tarquivo."
 
 #: standalone/drakTermServ:626
 #, c-format
@@ -18258,12 +18249,12 @@ msgstr "Versão padrão do kernel"
 #: standalone/drakTermServ:764
 #, c-format
 msgid "Create PXE images"
-msgstr ""
+msgstr "Criar imagens PXE"
 
 #: standalone/drakTermServ:765
 #, c-format
 msgid "Use Unionfs (TS2)"
-msgstr ""
+msgstr "Usar Unionfs (TS2)"
 
 #: standalone/drakTermServ:795
 #, c-format
@@ -18301,6 +18292,8 @@ msgid ""
 "Custom\n"
 "kernel args"
 msgstr ""
+"Parâmetros\n"
+"para o kernel"
 
 #: standalone/drakTermServ:840
 #, c-format
@@ -18394,7 +18387,7 @@ msgstr "Adicionar Cliente -->"
 #: standalone/drakTermServ:1181
 #, c-format
 msgid "Unknown MAC address format"
-msgstr ""
+msgstr "Formato desconhecido para o endereço MAC"
 
 #: standalone/drakTermServ:1195
 #, c-format
