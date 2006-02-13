@@ -31,7 +31,7 @@ sub resize {
 
     my $s = int($size / ($o->{block_size} / 512));
     log::l("resize2fs $o->{dev} to size $s in block of $o->{block_size} bytes");
-    run_program::run_or_die("resize2fs", "-pf", $o->{dev}, $s);
+    run_program::raw({ timeout => 60 * 60 }, "resize2fs", "-pf", $o->{dev}, $s) or die "resize2fs failed";
 }
 
 1;
