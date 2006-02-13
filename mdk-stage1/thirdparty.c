@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/mount.h>
+#include <sys/utsname.h>
 
 #include "stage1.h"
 #include "log.h"
@@ -312,9 +313,11 @@ static enum return_type thirdparty_autoload_modules(const char *modules_location
 
 static enum return_type thirdparty_try_directory(char * root_directory, int interactive) {
 	char modules_location[100];
+	char modules_location_release[100];
 	char list_filename[50];
 	FILE *f_load, *f_detect;
-	char **modules_list;
+	char **modules_list, **modules_list_release;
+	struct utsname kernel_uname;
 
 	/* look first in the specific third-party directory */
 	strcpy(modules_location, root_directory);
@@ -331,6 +334,19 @@ static enum return_type thirdparty_try_directory(char * root_directory, int inte
 		if (interactive)
 			add_to_env("THIRDPARTY_DIR", THIRDPARTY_DIRECTORY);
         }
+
+	if (uname(&kernel_uname)) {
+		log_perror("uname failed");
+		return RETURN_ERROR;
+	}
+	strcpy(modules_location_release, modules_location);
+	strcat(modules_location_release, "/");
+	strcat(modules_location_release, kernel_uname.release);
+	modules_list_release = list_directory(modules_location_release);
+	if (modules_list_release && modules_list_release[0]) {
+		strcpy(modules_location, modules_location_release);
+		modules_list = modules_list_release;
+	}
 
 	log_message("third party: using modules location %s", modules_location);
 
