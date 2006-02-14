@@ -38,8 +38,7 @@ static int mount_that_cd_device(char * dev_name)
 {
 	char device_fullname[50];
 
-	strcpy(device_fullname, "/dev/");
-	strcat(device_fullname, dev_name);
+	snprintf(device_fullname, sizeof(device_fullname), "/dev/%s", dev_name);
 
 #ifdef MANDRAKE_MOVE
 	return my_mount(device_fullname, IMAGE_LOCATION, "supermount", 0);
