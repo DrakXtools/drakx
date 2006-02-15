@@ -83,7 +83,6 @@ our %l = (
     # ide drivers compiled as modules:
     ide => [
         qw(aec62xx cs5520 cs5530 cs5535 delkin_cb ide-generic),
-        qw(pata_amd pata_mpiix pata_oldpiix pata_opti pata_pdc2027x pata_sil680 pata_triflex pata_via),
         qw(rz1000 sc1200 slc90e66 triflex trm290) ],
     # ide drivers compiled in core kernel:
     all_ide => [
@@ -107,6 +106,8 @@ our %l = (
     sata => [
       # note that ata_piix manage RAID devices on ICH6R
       qw(ahci aic94xx ata_adma ata_piix pata_pdc2027x pdc_adma sata_mv sata_nv sata_promise sata_qstor sata_sil sata_sil24 sata_sis sata_svw sata_sx4 sata_uli sata_via sata_vsc sx8),
+      # new drivers :old ide drivers ported over libata:
+        qw(pata_amd pata_mpiix pata_oldpiix pata_opti pata_pdc2027x pata_sil680 pata_triflex pata_via),
     ],
     hardware_raid => [
       if_(arch() =~ /^sparc/, qw(pluto)),
