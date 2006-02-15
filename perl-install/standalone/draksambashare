@@ -130,7 +130,7 @@ sub sort_by_column {
 #path comment browseable printable print command guest ok writable write list inherit permissions printing lpq command create mode use client driver
 
 
-my $samba = new Libconf::Glueconf::Samba::Smb_conf({ filename => '/etc/samba/smb.conf', show_commented_info => 1 });
+my $samba = new Libconf::Glueconf::Samba::Smb_conf({ filename => '/etc/samba/smb.conf'});
 my (@listshare, @listprinters, @listusers);
 my @yesno = qw(yes no); push @yesno, ""; 
 my @default_case = qw(upper lower); push @default_case, "";
