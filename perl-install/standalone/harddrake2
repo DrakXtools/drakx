@@ -188,7 +188,6 @@ my %menu_options = (
 my @menu_items = 
     (
      [ N("/_File"), undef, undef, undef, '<Branch>' ],
-     [ N("/_File") . N("/_Upload the hardware list"), undef, \&upload, undef, '<Item>' ],
      [ N("/_File") . N("/_Quit"), N("<control>Q"), \&quit_global, undef, '<Item>' ],
      [ join('', @{$menu_options{PRINTERS_DETECTION}}), undef, 
        sub { $options{PRINTERS_DETECTION} = $check_boxes{PRINTERS_DETECTION}->get_active }, undef, '<CheckItem>' ],
@@ -590,47 +589,6 @@ sub popup_menu {
           return 0;
       };
 }
-
-sub upload() {
-    my $dialog = _create_dialog(N("Upload the hardware list"),
-                                { transient => $w->{real_window} }); #, height => 400
-    gtkpack($dialog->vbox,
-            gtkset_markup(Gtk2::Label->new, qq(<span weight="bold">) . N("Upload the hardware list") . "</span>\n"),
-            create_packtable({ col_spacings => 10, row_spacings => 5, mcc => 1 },
-                               [ N("Account:"), my $account_w = Gtk2::Entry->new ],
-                               [ N("Password:"), my $password_w = Gtk2::Entry->new ],
-                               [ N("Hostname:"), my $system_name_w = Gtk2::Entry->new ],
-                           ),
-        );
-$password_w->set_visibility(0); #set_invisible_char('*');
-
-    my ($password, $account, $name);
-    gtkadd($dialog->action_area,
-           create_okcancel(
-               {
-                   cancel_clicked => sub { $dialog->destroy; Gtk2->main_quit },
-                   ok_clicked => sub { 
-                       $name     = $system_name_w->get_text;
-                       $account  = $account_w->get_text;
-                       $password = $password_w->get_text;
-                       $dialog->destroy;
-                       Gtk2->main_quit;
-                   },
-               },
-               undef, undef, '',
-           ),
-       );
-
-    $dialog->set_has_separator(0);
-    $dialog->show_all;
-    Gtk2->main;
-    if ($account) {
-        local $ENV{HWDB_PASSWD} = $password;
-        require run_program;
-        run_program::raw({ detach => 1 }, "/usr/sbin/hwdb_add_system", $account, $name);
-    }
-}
-
 
 sub simple_read_rpmsrate() {
     map { split(' ', $_) } map {
