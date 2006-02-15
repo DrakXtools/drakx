@@ -451,8 +451,7 @@ int kernel_version(void)
 int try_mount(char * dev, char * location)
 {
 	char device_fullname[50];
-	strcpy(device_fullname, "/dev/");
-	strcat(device_fullname, dev);
+	snprintf(device_fullname, sizeof(device_fullname), "/dev/%s", dev);
 
 	if (my_mount(device_fullname, location, "ext2", 0) == -1 &&
 	    my_mount(device_fullname, location, "vfat", 0) == -1 &&

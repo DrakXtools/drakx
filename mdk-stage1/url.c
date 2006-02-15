@@ -136,13 +136,7 @@ static int ftp_command(int sock, char * command, char * param)
 	char buf[500];
 	int rc;
 
-	strcpy(buf, command);
-	if (param) {
-		strcat(buf, " ");
-		strcat(buf, param);
-	}
-	
-	strcat(buf, "\r\n");
+	snprintf(buf, sizeof(buf), "%s%s%s\r\n", command, param ? " " : "", param ? param : "");
      
 	if (write(sock, buf, strlen(buf)) != (ssize_t)strlen(buf)) {
 		return FTPERR_SERVER_IO_ERROR;
