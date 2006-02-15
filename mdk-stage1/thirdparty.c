@@ -320,8 +320,7 @@ static enum return_type thirdparty_try_directory(char * root_directory, int inte
 	struct utsname kernel_uname;
 
 	/* look first in the specific third-party directory */
-	strcpy(modules_location, root_directory);
-	strcat(modules_location, THIRDPARTY_DIRECTORY);
+	snprintf(modules_location, sizeof(modules_location), "%s" THIRDPARTY_DIRECTORY, root_directory);
 	modules_list = list_directory(modules_location);
 
 	/* if it's empty, look in the root of selected device */
@@ -339,9 +338,7 @@ static enum return_type thirdparty_try_directory(char * root_directory, int inte
 		log_perror("uname failed");
 		return RETURN_ERROR;
 	}
-	strcpy(modules_location_release, modules_location);
-	strcat(modules_location_release, "/");
-	strcat(modules_location_release, kernel_uname.release);
+	snprintf(modules_location_release, sizeof(modules_location_release), "%s/%s", modules_location, kernel_uname.release);
 	modules_list_release = list_directory(modules_location_release);
 	if (modules_list_release && modules_list_release[0]) {
 		strcpy(modules_location, modules_location_release);
