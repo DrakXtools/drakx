@@ -957,6 +957,7 @@ enum return_type nfs_prepare(void)
 			results = RETURN_BACK;
 			continue;
 		}
+		free(nfsmount_location); nfsmount_location = NULL;
 
 		results = try_with_directory(nfs_own_mount, "nfs", "nfs-iso");
 		if (results != RETURN_OK)
