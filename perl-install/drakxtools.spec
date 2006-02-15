@@ -2,7 +2,7 @@
 
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 10.4.10
+Version: 10.4.11
 Release: %mkrel 1
 Url:     http://qa.mandriva.com/twiki/bin/view/Main/DrakXTools
 Source0: %name-%version.tar.bz2
@@ -381,6 +381,17 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Feb 15 2006 Thierry Vignaud <tvignaud@mandriva.com> 10.4.11-1mdk
+- do require msec anymore (installed by draksec)
+- diskdrake: enable to resize big ext3 fs
+- drakfont:
+  o handle *.ttc fonts too
+  o fix some confusing labels
+  o enable to select fonts with upcase letters in file extensions
+    (#16948)
+- draksambashare: small bug fix (aginies)
+- harddrake: fix detecting some ATA devices (#21034)
+
 * Fri Jan 27 2006 Thierry Vignaud <tvignaud@mandriva.com> 10.4.10-1mdk
 - add support for new snd-als300 sound driver
 - handle new dmidecode output (pixel)
