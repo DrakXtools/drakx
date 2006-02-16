@@ -139,7 +139,17 @@ foreach my $hw_class (@harddrake::data::tree) {
         network::ethernet::configure_eth_aliases($modules_conf);
         $modules_conf->write;
         next;
-    } elsif (member($Ident, qw(AGP ATA_STORAGE DVB SATA_STORAGE SCSI_CONTROLLER TV))) {
+    } elsif (member($Ident, qw(ATA_STORAGE RAID_STORAGE  SATA_STORAGE SCSI_CONTROLLER))) {
+        # set scsi_hostadapterr in modprobe.conf:
+        modules::load_category($modules_conf, 'disk/' . {
+			ATA_STORAGE => 'ide',
+			SATA_STORAGE => 'sata',
+			SCSI_CONTROLLER => 'scsi',
+			RAID_STORAGE => 'hardware_raid',
+		}->{$Ident});
+        $modules_conf->write;
+        next;
+    } elsif (member($Ident, qw(AGP DVB TV))) {
         my @old_drivers = uniq(map { $_->{driver} } values %$oldconfig);
         my @new_drivers = uniq(map { $_->{driver} } values %ID);
         $modules_conf->remove_module(difference2(\@old_drivers, \@new_drivers));
