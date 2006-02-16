@@ -274,7 +274,7 @@ sub when_load_category {
 
     if ($category =~ m,disk/(ide|scsi|hardware_raid|sata|usb|firewire),) {
 	$conf->add_probeall('scsi_hostadapter', $name);
-	eval { load('sd_mod') };
+	eval { load('sd_mod') } if !$category eq 'disk/ide';
     } elsif ($category eq 'bus/usb') {
 	$conf->add_probeall('usb-interface', $name);
         -f '/proc/bus/usb/devices' or eval {
