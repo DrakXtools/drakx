@@ -805,7 +805,7 @@ sub complete_config {
     } else {
         #- set unsupplied config dirs
         $live->{workdir} ||= '/tmp/draklive';
-        $live->{mnt} ||= $live->{workdir} . "/mnt";
+        $live->{mnt} ||= get_workdir($live) . "/mnt";
 
         #- check for minimum requirements
         ref $live->{media} && $live->{media}{storage} or die "no media storage definition";
