@@ -441,7 +441,8 @@ sub install_system {
          get_system_root($live),
          if_($live->{system}{region}, '--langs', join(':', @{$live->{regions}{$live->{system}{region}}})),
          if_($live->{system}{auto_install}, '--auto_install', abs_path($live->{system}{auto_install})),
-         if_($live->{system}{patch_install}, '--defcfg', abs_path($live->{system}{patch_install})))
+         if_($live->{system}{patch_install}, '--defcfg', abs_path($live->{system}{patch_install})),
+         if_($live->{system}{rpmsrate}, '--rpmsrate', abs_path($live->{system}{rpmsrate})))
       or die "unable to install system chroot";
     #- remove urpmi media added by drakx-in-chroot, they're unusable
     run_('chroot', get_system_root($live), 'urpmi.removemedia', '-a');
@@ -953,6 +954,7 @@ Here's a configuration sample:
         kernel => '2.6.12-12mdk-i586-up-1GB',
         auto_install => 'config/auto_inst.cfg.pl',
         patch_install => 'config/patch-2006-live.pl',
+        rpmsrate => 'config/rpmsrate',
         rpms => [
              'rpms/unionfs-kernel-2.6.12-12mdk-i586-up-1GB-1.1.1.1.20051124.1mdk-1mdk.i586.rpm'
         ],

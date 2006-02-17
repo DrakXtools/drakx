@@ -12,6 +12,7 @@ my $LIVE_LOCATION_REL = 'install/stage2/live/';
 my $CLP_LOCATION_REL = 'install/stage2/';
 my $CLP_FILE_REL = $CLP_LOCATION_REL . 'mdkinst.clp';
 my $AUTO_INSTALL_ROOTED = '/tmp/drakx-in-chroot.cfg.pl';
+my $RPMSRATE_ROOTED = '/tmp/rpmsrate';
 
 @ARGV >= 2 or die "usage: drakx-in-chroot <repository> <dir to install to> [options]\n";
 
@@ -143,6 +144,8 @@ sub copy_auto_install_files() {
         } elsif ($opt eq 'defcfg' && -f $_) {
             $defcfg = $_;
             $ARGV[$::i-1] = $ARGV[$::i] = undef;
+        } elsif ($opt eq 'rpmsrate' && -f $_) {
+            cp_f($_, $SLASH_LOCATION . $RPMSRATE_ROOTED);
         }
         undef $opt;
         /^--?(.*)/ and $opt = $1;
