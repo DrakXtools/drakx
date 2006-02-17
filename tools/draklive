@@ -788,8 +788,17 @@ sub copy_wizard {
 sub complete_config {
     my ($live) = @_;
 
+    my $default_prefix = {
+        media_mnt => '/media',
+        live_mnt => '/live',
+        loopbacks => '/loopbacks',
+        images => '/images',
+        boot => '/boot',
+        initrd => '/initrd',
+    };
+
     if ($live->{copy_wizard}) {
-        add2hash($live{prefix} ||= {}, $default_prefix);
+        add2hash($live->{prefix} ||= {}, $default_prefix);
         #- assumes the current live media is mounted there
         $live->{workdir} = $live->{prefix}{live_mnt} . $live->{prefix}{media_mnt};
         $live->{mnt} = '/tmp/mnt';
@@ -804,7 +813,7 @@ sub complete_config {
         $live->{system}{kernel} or die "no kernel has been configured";
         mkdir_p(get_workdir($live));
 
-        add2hash($live{prefix} ||= {}, $default_prefix);
+        add2hash($live->{prefix} ||= {}, $default_prefix);
     }
 }
 
@@ -812,15 +821,6 @@ sub clean {
     my ($live) = @_;
     rm_rf($_) foreach grep { -e $_ } get_workdir($live), get_system_root($live);
 }
-
-my $default_prefix = {
-    media_mnt => '/media',
-    live_mnt => '/live',
-    loopbacks => '/loopbacks',
-    images => '/images',
-    boot => '/boot',
-    initrd => '/initrd',
-};
 
 my @actions = (
     { name => 'clean', do => \&clean },
