@@ -868,7 +868,7 @@ if ($live{copy_wizard}) {
         pod2usage();
     }
     foreach my $region ($live{all_regions} ? (sort(keys %{$live{regions}})) : $live{system}{region}) {
-        $region and print qq(=== proceeding with region $region"\n);
+        $region and print qq(=== proceeding with region "$region"\n);
         $live{system}{region} = $region;
         complete_config(\%live);
         foreach (grep { $_->{to_run} } @actions) {
