@@ -242,8 +242,9 @@ sub moddeps_closure {
 }
 
 sub run_ {
+    my $options = ref $_[0] eq 'HASH' ? shift @_ : {};
     print STDERR "running " . join(' ', @_) . "\n";
-    run_program::run(@_);
+    run_program::raw($options, @_);
 }
 
 sub get_initrd_path {
