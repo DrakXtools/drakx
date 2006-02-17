@@ -471,6 +471,10 @@ USERS=no
     my $kdm_cfg = '/etc/kde/kdm/kdmrc';
     update_gnomekderc($live->{system}{root} . $kdm_cfg,
                       'X-:0-Greeter' => (PreselectUser => 'Default', DefaultUser => 'guest')) if -f $kdm_cfg;
+    #- don't make kbluetoothdrc display an annoying and useless popup window
+    update_gnomekderc($live->{system}{root} . '/etc/kde/kbluetoothdrc',
+                      'Notification Messages',
+                      'kbluepinLocInfo-usr-lib-kdebluetooth' => 'false');
 }
 
 sub create_loopback_files {
