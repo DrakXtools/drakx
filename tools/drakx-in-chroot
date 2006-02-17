@@ -149,5 +149,5 @@ sub copy_auto_install_files() {
     } @ARGV;
     #- contatenate auto_install and defcfg files into a new auto_install file in install root
     my @auto_inst = grep { -f $_ } $auto_install, $defcfg;
-    output($SLASH_LOCATION . $AUTO_INSTALL_ROOTED, cat_(@auto_inst)) if @auto_inst;
+    output($SLASH_LOCATION . $AUTO_INSTALL_ROOTED, map { cat_($_) } @auto_inst) if @auto_inst;
 }
