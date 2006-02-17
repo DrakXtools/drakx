@@ -847,6 +847,7 @@ GetOptions(
     (map { $_->{name} => \$_->{to_run} } @actions),
     "device:s" => sub { $live{media}{device} = $_[1] },
     "region:s" => sub { $live{system}{region} = $_[1] },
+    "all-regions" => sub { $live{all_regions} = 1 },
     "config:s" => sub {
         my $path = $_[1];
         #- don't use do(), since it can't see lexicals in the enclosing scope
@@ -861,16 +862,20 @@ if ($live{copy_wizard}) {
     complete_config(\%live);
     copy_wizard(\%live);
 } else {
+    every { !$_->{to_run} } @actions and die 'nothing to do';
     unless (keys(%live)) {
         warn 'no live definition';
         pod2usage();
     }
-    complete_config(\%live);
-    every { !$_->{to_run} } @actions and die 'nothing to do';
-    foreach (grep { $_->{to_run} } @actions) {
-        print qq(* entering step "$_->{name}"\n);
-        $_->{do}->(\%live, \%opts);
-        print qq(* step "$_->{name}" done\n);
+    foreach my $region ($live{all_regions} ? (sort(keys %{$live{regions}})) : $live{system}{region}) {
+        $region and print qq(=== proceeding with region $region"\n);
+        $live{system}{region} = $region;
+        complete_config(\%live);
+        foreach (grep { $_->{to_run} } @actions) {
+            print qq(* entering step "$_->{name}"\n);
+            $_->{do}->(\%live, \%opts);
+            print qq(* step "$_->{name}" done\n);
+        }
     }
 }
 
@@ -907,8 +912,10 @@ draklive [options]
    --post-install    run post install only (rpms and patches installation)
 
    --config <file>   use this configuration file as live description
+
    --region <region> use the matching set of langs
                      (from the regions configuration hash)
+   --all-regions     proceed with all configured regions
 
    --copy-wizard     run the copy wizard
 
