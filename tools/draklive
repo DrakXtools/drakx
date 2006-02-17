@@ -867,7 +867,7 @@ if ($live{copy_wizard}) {
         warn 'no live definition';
         pod2usage();
     }
-    foreach my $region ($live{all_regions} ? (sort(keys %{$live{regions}})) : $live{system}{region}) {
+    foreach my $region ($live{all_regions} ? sort(keys %{$live{regions}}) : $live{system}{region}) {
         $region and print qq(=== proceeding with region "$region"\n);
         $live{system}{region} = $region;
         complete_config(\%live);
