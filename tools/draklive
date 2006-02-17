@@ -567,7 +567,7 @@ live <kernel options>
 }
 
 sub get_cdrom_master_path {
-    my ($live, $media, $opts) = @_;
+    my ($live, $opts) = @_;
     get_workdir($live) . $live->{prefix}{images} . '/' . ($opts->{boot_only} ? 'boot' : 'live') . '.iso';
 }
 
@@ -576,7 +576,7 @@ sub create_cdrom_master {
     my $label = get_media_label($media) or die "the source device must be described by a label";
     my @dest;
     unless ($opts->{onthefly}) {
-        @dest = ('-o', get_cdrom_master_path($live, $media, $opts));
+        @dest = ('-o', get_cdrom_master_path($live, $opts));
         mkdir_p(dirname($dest[1]));
     }
     run_('mkisofs', '-pad', '-l', '-R', '-J', '-v', '-v',
@@ -642,7 +642,7 @@ sub format_device {
 sub record_cdrom_master {
     my ($live, $media, $opts) = @_;
     $media->{device} or die "no device defined in media configuration";
-    my $src = $opts->{onthefly} ? '-' : get_cdrom_master_path($live, $media, $opts);
+    my $src = $opts->{onthefly} ? '-' : get_cdrom_master_path($live, $opts);
     run_('cdrecord', '-v', 'dev=' . $media->{device}, $src);
 }
 
