@@ -424,6 +424,7 @@ sub install_system {
          'drakx-in-chroot',
          $live->{system}{repository},
          $live->{system}{root},
+         if_($live->{system}{region}, '--langs', join(':', @{$live->{regions}{$live->{system}{region}}})),
          if_($live->{system}{auto_install}, '--auto_install', abs_path($live->{system}{auto_install})),
          if_($live->{system}{patch_install}, '--defcfg', abs_path($live->{system}{patch_install})))
       or die "unable to install system chroot";
@@ -827,6 +828,7 @@ GetOptions(
     "all" => sub { $_->{to_run} = 1 foreach grep { member($_->{name}, @all) } @actions },
     (map { $_->{name} => \$_->{to_run} } @actions),
     "device:s" => sub { $live{media}{device} = $_[1] },
+    "region:s" => sub { $live{system}{region} = $_[1] },
     "config:s" => sub {
         my $path = $_[1];
         #- don't use do(), since it can't see lexicals in the enclosing scope
@@ -891,6 +893,8 @@ draklive [options]
    --post-install    run post install only (rpms and patches installation)
 
    --config <file>   use this configuration file as live description
+   --region <region> use the matching set of langs
+                     (from the regions configuration hash)
 
    --copy-wizard     run the copy wizard
 
