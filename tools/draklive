@@ -726,9 +726,6 @@ sub record_onthefly {
 
 sub copy_wizard {
     my ($live) = @_;
-    #- assumes the current live media is mounted there
-    $live->{workdir} = $live->{prefix}{live_mnt} . $live->{prefix}{media_mnt};
-    $live->{mnt} = '/tmp/mnt';
     my $root = get_workdir($live) . $live->{prefix}{boot};
     my @available_storage = sort(grep { -d "$root/$_" && exists $storage{$_}{detect} } all($root));
     my @available_devices;
@@ -791,15 +788,24 @@ sub copy_wizard {
 sub complete_config {
     my ($live) = @_;
 
-    #- set unsupplied config dirs
-    $live->{workdir} ||= '/tmp/draklive';
-    $live->{mnt} ||= $live->{workdir} . "/mnt";
+    if ($live->{copy_wizard}) {
+        add2hash($live{prefix} ||= {}, $default_prefix);
+        #- assumes the current live media is mounted there
+        $live->{workdir} = $live->{prefix}{live_mnt} . $live->{prefix}{media_mnt};
+        $live->{mnt} = '/tmp/mnt';
+    } else {
+        #- set unsupplied config dirs
+        $live->{workdir} ||= '/tmp/draklive';
+        $live->{mnt} ||= $live->{workdir} . "/mnt";
 
-    #- check for minimum requirements
-    ref $live->{media} && $live->{media}{storage} or die "no media storage definition";
-    ref $live->{system} or die "no system definition";
-    $live->{system}{kernel} or die "no kernel has been configured";
-    mkdir_p(get_workdir($live));
+        #- check for minimum requirements
+        ref $live->{media} && $live->{media}{storage} or die "no media storage definition";
+        ref $live->{system} or die "no system definition";
+        $live->{system}{kernel} or die "no kernel has been configured";
+        mkdir_p(get_workdir($live));
+
+        add2hash($live{prefix} ||= {}, $default_prefix);
+    }
 }
 
 sub clean {
@@ -850,20 +856,16 @@ GetOptions(
     },
 ) or pod2usage();
 
-unless ($live{copy_wizard}) {
+require standalone;
+if ($live{copy_wizard}) {
+    complete_config(\%live);
+    copy_wizard(\%live);
+} else {
     unless (keys(%live)) {
         warn 'no live definition';
         pod2usage();
     }
     complete_config(\%live);
-}
-add2hash($live{prefix} ||= {}, $default_prefix);
-
-require standalone;
-
-if ($live{copy_wizard}) {
-    copy_wizard(\%live);
-} else {
     every { !$_->{to_run} } @actions and die 'nothing to do';
     foreach (grep { $_->{to_run} } @actions) {
         print qq(* entering step "$_->{name}"\n);
