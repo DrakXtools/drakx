@@ -822,7 +822,7 @@ GetOptions(
     "config:s" => sub {
         my $path = $_[1];
         #- don't use do(), since it can't see lexicals in the enclosing scope
-        my $cfg = eval(cat_($path)) or die "unable to load $path";
+        my $cfg = eval(cat_($path)) or die "unable to load $path: $@";
         put_in_hash(\%live, $cfg);
         print "loaded $path as config file\n";
     },
