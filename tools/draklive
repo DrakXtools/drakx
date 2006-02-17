@@ -468,7 +468,7 @@ USERS=no
 ));
 
     #- preselect guest user in kdm
-    my $kdm_cfg = '/usr/share/config/kdm/kdmrc';
+    my $kdm_cfg = '/etc/kde/kdm/kdmrc';
     update_gnomekderc($live->{system}{root} . $kdm_cfg,
                       'X-:0-Greeter' => (PreselectUser => 'Default', DefaultUser => 'guest')) if -f $kdm_cfg;
 }
