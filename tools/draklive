@@ -420,7 +420,8 @@ label live
 
 sub install_system {
     my ($live) = @_;
-    run_('drakx-in-chroot',
+    run_({ timeout => 3600 },
+         'drakx-in-chroot',
          $live->{system}{repository},
          $live->{system}{root},
          if_($live->{system}{auto_install}, '--auto_install', abs_path($live->{system}{auto_install})),
