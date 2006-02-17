@@ -259,7 +259,7 @@ sub get_workdir {
 
 sub get_system_root {
     my ($live) = @_;
-    $live->{workdir} . get_region_suffix($live);
+    $live->{system}{root} . get_region_suffix($live);
 }
 
 sub get_initrd_path {
