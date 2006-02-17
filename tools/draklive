@@ -247,6 +247,18 @@ sub run_ {
     run_program::raw($options, @_);
 }
 
+sub get_workdir {
+    my ($live) = @_;
+    $live->{copy_wizard} ?
+      $live->{workdir} :
+      $live->{workdir} . '/' . ($live->{system}{region} || 'noregion');
+}
+
+sub get_system_root {
+    my ($live) = @_;
+    $live->{system}{root} . '/' . ($live->{system}{region} || 'noregion');
+}
+
 sub get_initrd_path {
     my ($live, $media) = @_;
     $live->{prefix}{boot} . '/' . $media->{storage} . '/initrd.gz';
@@ -262,13 +274,13 @@ sub create_initrd {
     foreach ($live->{media}, @{$live->{extra_media}}) {
         create_initrd_for_media($live, $_);
     }
-    $live->{copy_initrd} and cp_f($live->{workdir} . get_initrd_path($live, $live->{media}), $live->{copy_initrd});
+    $live->{copy_initrd} and cp_f(get_workdir($live) . get_initrd_path($live, $live->{media}), $live->{copy_initrd});
 }
 
 sub create_initrd_for_media {
     my ($live, $media) = @_;
 
-    my $initrd_tree = $live->{workdir} . $live->{prefix}{initrd} . '/' . $media->{storage};
+    my $initrd_tree = get_workdir($live) . $live->{prefix}{initrd} . '/' . $media->{storage};
     rm_rf($initrd_tree) if -e $initrd_tree;
 
     mkdir_p($initrd_tree . $_) foreach
@@ -278,7 +290,7 @@ sub create_initrd_for_media {
         $live->{mount}{root},
         map { $_->{mountpoint} } @{$live->{mount}{dirs} || []};
 
-    # cp_f($live->{system}{root} . '/sbin/nash', $initrd_tree . '/bin/');
+    # cp_f(get_system_root($live) . '/sbin/nash', $initrd_tree . '/bin/');
     #- use nash from cooker for now, label support
     cp_f('/sbin/nash', $initrd_tree . '/bin/');
     #- needed to mount loopbacks read-only and move mountpoints
@@ -306,7 +318,7 @@ sub create_initrd_for_media {
         (map { "tty$_" } 0..5),
         (map { "loop$_" } 0..7);
 
-    load_moddeps($live->{system}{root}, "/lib/modules/" . $live->{system}{kernel});
+    load_moddeps(get_system_root($live), "/lib/modules/" . $live->{system}{kernel});
 
     my ($modules, $skipped) = partition { exists $moddeps{$_} }
       uniq(map { modules::cond_mapping_24_26($_) } category2modules(get_media_setting($media, 'modules')));
@@ -321,7 +333,7 @@ sub create_initrd_for_media {
     push @$modules, @$extra_modules;
 
     my @module_deps = uniq(map { moddeps_closure($_) } @$modules);
-    run_('gzip', '>', $initrd_tree . "/lib/$_.ko", '-dc', $live->{system}{root} . $moddeps{$_}{full})
+    run_('gzip', '>', $initrd_tree . "/lib/$_.ko", '-dc', get_system_root($live) . $moddeps{$_}{full})
       foreach @module_deps, @$modules;
 
     @$skipped and warn "skipped modules:" . join("\n", '', sort(@$skipped));
@@ -337,7 +349,7 @@ sub create_initrd_linuxrc {
     my $sleep = get_media_setting($media, 'sleep');
     my $pre = get_media_setting($media, 'pre');
     my $fs = get_media_setting($media, 'fs');
-    output_with_perm($live->{workdir} . $live->{prefix}{initrd} . '/' . $media->{storage} . '/linuxrc', 0755,
+    output_with_perm(get_workdir($live) . $live->{prefix}{initrd} . '/' . $media->{storage} . '/linuxrc', 0755,
                      join("\n",
                           "#!/bin/nash",
                           (map { "insmod /lib/$_.ko" } @modules),
@@ -365,11 +377,11 @@ sub create_initrd_linuxrc {
 sub compress_initrd_tree {
     my ($live, $media) = @_;
 
-    my $initrd_tree = $live->{workdir} . $live->{prefix}{initrd} . '/' . $media->{storage};
+    my $initrd_tree = get_workdir($live) . $live->{prefix}{initrd} . '/' . $media->{storage};
     my $size = run_program::get_stdout("du -ks $initrd_tree | awk '{print \$1}'") + 250;
     my $inodes = run_program::get_stdout("find $initrd_tree | wc -l") + 1250;
     $size = int($size + $inodes / 10) + 1; #- 10 inodes needs 1K
-    my $initrd = $live->{workdir} . get_initrd_path($live, $media);
+    my $initrd = get_workdir($live) . get_initrd_path($live, $media);
     $initrd =~ s/.gz$//;
 
     mkdir_p(dirname($initrd));
@@ -387,15 +399,15 @@ sub add_splash {
     my ($live, $media) = @_;
     if ($live->{system}{vga_mode} && $live->{system}{splash} ne 'no') {
 	require bootloader;
-	my $initrd = $live->{workdir} . get_initrd_path($live, $media);
+	my $initrd = get_workdir($live) . get_initrd_path($live, $media);
 	my $tmp_initrd = '/tmp/initrd.gz';
-        cp_f($initrd, $live->{system}{root} . $tmp_initrd);
+        cp_f($initrd, get_system_root($live) . $tmp_initrd);
         {
-            local $::prefix = $live->{system}{root};
+            local $::prefix = get_system_root($live);
             bootloader::add_boot_splash($tmp_initrd, $live->{system}{vga_mode});
         }
-        cp_f($live->{system}{root} . $tmp_initrd, $initrd);
-	unlink($live->{system}{root} . $tmp_initrd);
+        cp_f(get_system_root($live) . $tmp_initrd, $initrd);
+	unlink(get_system_root($live) . $tmp_initrd);
     }
 }
 
@@ -423,13 +435,13 @@ sub install_system {
     run_({ timeout => 3600 },
          'drakx-in-chroot',
          $live->{system}{repository},
-         $live->{system}{root},
+         get_system_root($live),
          if_($live->{system}{region}, '--langs', join(':', @{$live->{regions}{$live->{system}{region}}})),
          if_($live->{system}{auto_install}, '--auto_install', abs_path($live->{system}{auto_install})),
          if_($live->{system}{patch_install}, '--defcfg', abs_path($live->{system}{patch_install})))
       or die "unable to install system chroot";
     #- remove urpmi media added by drakx-in-chroot, they're unusable
-    run_('chroot', $live->{system}{root}, 'urpmi.removemedia', '-a');
+    run_('chroot', get_system_root($live), 'urpmi.removemedia', '-a');
     post_install_system($live);
 }
 
@@ -438,32 +450,32 @@ sub post_install_system {
 
     if (@{$live->{system}{rpms}}) {
         my $rpm_tmp_dir = '/tmp/draklive_rpms';
-        mkdir_p($live->{system}{root} . $rpm_tmp_dir);
-        cp_f(@{$live->{system}{rpms}}, $live->{system}{root} . $rpm_tmp_dir);
-        run_('chroot', $live->{system}{root}, 'urpmi', '--auto',
+        mkdir_p(get_system_root($live) . $rpm_tmp_dir);
+        cp_f(@{$live->{system}{rpms}}, get_system_root($live) . $rpm_tmp_dir);
+        run_('chroot', get_system_root($live), 'urpmi', '--auto',
              map { $rpm_tmp_dir . '/' . basename($_) } @{$live->{system}{rpms}});
-        rm_rf($live->{system}{root} . $rpm_tmp_dir);
+        rm_rf(get_system_root($live) . $rpm_tmp_dir);
     }
     my $erase = join(' ', @{$live->{system}{erase_rpms}});
-    run_('chroot', $live->{system}{root}, 'sh', '-c', "rpm -qa $erase | xargs rpm -e ") if $erase;
+    run_('chroot', get_system_root($live), 'sh', '-c', "rpm -qa $erase | xargs rpm -e ") if $erase;
 
     my @patches = map { abs_path($_) } @{$live->{system}{patches}};
     each_index { !defined $_ and die "unable to find file " . $live->{system}{patches}[$::i] } @patches;
-    run_('patch', '-p0', '-s', '-N', '-F', 0, '-d', $live->{system}{root}, '-r', '/tmp', '-i', $_) foreach @patches;
+    run_('patch', '-p0', '-s', '-N', '-F', 0, '-d', get_system_root($live), '-r', '/tmp', '-i', $_) foreach @patches;
 
     #- make sure harddrake is run
     #- (do it in chroot, or else Storable from the build box may write an incompatible config file)
-    system("chroot $live->{system}{root} " .
+    system("chroot " . get_system_root($live) .
            "perl -MStorable -e \"Storable::store({ UNKNOWN => {} }, '/etc/sysconfig/harddrake2/previous_hw')\"");
 
     #- interactive mode can lead to race in initscripts
     #- (don't use addVarsInSh from MDK::Common, it breaks shell escapes)
-    substInFile { s/^PROMPT=.*/PROMPT=no/ } $live->{system}{root} . '/etc/sysconfig/init';
+    substInFile { s/^PROMPT=.*/PROMPT=no/ } get_system_root($live) . '/etc/sysconfig/init';
 
     #- disable first boot wizard
-    output($live->{system}{root} . '/etc/sysconfig/firstboot', 'FIRSTBOOT=no');
+    output(get_system_root($live) . '/etc/sysconfig/firstboot', 'FIRSTBOOT=no');
     #- enable drakx-finish-install
-    output($live->{system}{root} . '/etc/sysconfig/finish-install', qq(
+    output(get_system_root($live) . '/etc/sysconfig/finish-install', qq(
 FINISH_INSTALL=yes
 NETWORK=no
 AUTHENTICATION=no
@@ -472,25 +484,25 @@ USERS=no
 
     #- preselect guest user in kdm
     my $kdm_cfg = '/etc/kde/kdm/kdmrc';
-    update_gnomekderc($live->{system}{root} . $kdm_cfg,
+    update_gnomekderc(get_system_root($live) . $kdm_cfg,
                       'X-:0-Greeter' => (PreselectUser => 'Default', DefaultUser => 'guest')) if -f $kdm_cfg;
     #- don't make kbluetoothdrc display an annoying and useless popup window
-    update_gnomekderc($live->{system}{root} . '/etc/kde/kbluetoothdrc',
+    update_gnomekderc(get_system_root($live) . '/etc/kde/kbluetoothdrc',
                       'Notification Messages',
                       'kbluepinLocInfo-usr-lib-kdebluetooth' => 'false');
 }
 
 sub create_loopback_files {
     my ($live) = @_;
-    mkdir_p($live->{workdir} . $live->{prefix}{loopbacks});
+    mkdir_p(get_workdir($live) . $live->{prefix}{loopbacks});
     foreach (grep { $_->{build_from} } @{$live->{mount}{dirs} || []}) {
-        my $tree = $live->{system}{root} . $_->{build_from};
-        my $dest = $live->{workdir} . $live->{prefix}{loopbacks} . '/' . $_->{source};
+        my $tree = get_system_root($live) . $_->{build_from};
+        my $dest = get_workdir($live) . $live->{prefix}{loopbacks} . '/' . $_->{source};
         unlink($dest);
         $loop{$_->{type}}{build}->($dest, $tree);
     }
     foreach (grep { $_->{pre_allocate} } @{$live->{mount}{dirs} || []}) {
-        my $dest = $live->{workdir} . $live->{prefix}{loopbacks} . '/' . $_->{source};
+        my $dest = get_workdir($live) . $live->{prefix}{loopbacks} . '/' . $_->{source};
         unlink($dest);
         $loop{$_->{type}}{create}->($dest, $_->{pre_allocate});
     }
@@ -537,10 +549,10 @@ sub get_media_device {
 sub prepare_bootloader {
     my ($live, $opts) = @_;
     create_initrd($live);
-    cp_f($live->{system}{root} . '/boot/vmlinuz-' . $live->{system}{kernel}, $live->{workdir} . $live->{prefix}{boot} . '/vmlinuz');
-    my $msg = $live->{system}{root} . '/boot/message-graphic';
-    cp_f($msg, $live->{workdir} . $live->{prefix}{boot} . '/live.msg') if -f $msg;
-    output($live->{workdir} . $live->{prefix}{boot} . '/help.msg',
+    cp_f(get_system_root($live) . '/boot/vmlinuz-' . $live->{system}{kernel}, get_workdir($live) . $live->{prefix}{boot} . '/vmlinuz');
+    my $msg = get_system_root($live) . '/boot/message-graphic';
+    cp_f($msg, get_workdir($live) . $live->{prefix}{boot} . '/live.msg') if -f $msg;
+    output(get_workdir($live) . $live->{prefix}{boot} . '/help.msg',
            pack("C*", 0x0E, 0x80, 0x03, 0x00, 0xC) . qq(
 Welcome to Mandriva live!
 
@@ -550,13 +562,13 @@ live <kernel options>
 
 ));
     foreach ($live->{media}, @{$live->{extra_media}}) {
-        output($live->{workdir} . get_syslinux_path($live, $_, $opts->{boot_only}), build_syslinux_cfg($live, $_, $opts));
+        output(get_workdir($live) . get_syslinux_path($live, $_, $opts->{boot_only}), build_syslinux_cfg($live, $_, $opts));
     }
 }
 
 sub get_cdrom_master_path {
     my ($live, $media, $opts) = @_;
-    $live->{workdir} . $live->{prefix}{images} . '/' . ($opts->{boot_only} ? 'boot' : 'live') . '.iso';
+    get_workdir($live) . $live->{prefix}{images} . '/' . ($opts->{boot_only} ? 'boot' : 'live') . '.iso';
 }
 
 sub create_cdrom_master {
@@ -576,9 +588,9 @@ sub create_cdrom_master {
          '-graft-points',
          @dest,
          'isolinux/isolinux.bin=/usr/lib/syslinux/isolinux-graphic.bin',
-         'isolinux/isolinux.cfg=' . $live->{workdir} . get_syslinux_path($live, $media, $opts->{boot_only}),
-         $live->{prefix}{boot} . '=' . $live->{workdir} . $live->{prefix}{boot},
-         if_(!$opts->{boot_only}, $live->{prefix}{loopbacks} . '=' . $live->{workdir} . $live->{prefix}{loopbacks}),
+         'isolinux/isolinux.cfg=' . get_workdir($live) . get_syslinux_path($live, $media, $opts->{boot_only}),
+         $live->{prefix}{boot} . '=' . get_workdir($live) . $live->{prefix}{boot},
+         if_(!$opts->{boot_only}, $live->{prefix}{loopbacks} . '=' . get_workdir($live) . $live->{prefix}{loopbacks}),
      );
 }
 
@@ -644,11 +656,11 @@ sub record_usb_master {
     mkdir_p($live->{mnt});
     run_('mount', $device, $live->{mnt})
       or die "unable to mount $device";
-    cp_af($live->{workdir} . $live->{prefix}{boot}, $live->{mnt});
-    cp_f($live->{workdir} . get_syslinux_path($live, $media, $opts->{boot_only}), $live->{mnt});
-    cp_f($live->{workdir} . $_, $live->{mnt}) foreach
+    cp_af(get_workdir($live) . $live->{prefix}{boot}, $live->{mnt});
+    cp_f(get_workdir($live) . get_syslinux_path($live, $media, $opts->{boot_only}), $live->{mnt});
+    cp_f(get_workdir($live) . $_, $live->{mnt}) foreach
       get_initrd_path($live, $media), map { $live->{prefix}{boot} . '/' . $_ } qw(vmlinuz live.msg);
-    run_('rsync', '-vdP', '--inplace', $live->{workdir} . $live->{prefix}{loopbacks} . '/', $live->{mnt} . $live->{prefix}{loopbacks})
+    run_('rsync', '-vdP', '--inplace', get_workdir($live) . $live->{prefix}{loopbacks} . '/', $live->{mnt} . $live->{prefix}{loopbacks})
       unless $opts->{boot_only};
     run_('umount', $live->{mnt});
     maybe_umount_device($device);
@@ -717,7 +729,7 @@ sub copy_wizard {
     #- assumes the current live media is mounted there
     $live->{workdir} = $live->{prefix}{live_mnt} . $live->{prefix}{media_mnt};
     $live->{mnt} = '/tmp/mnt';
-    my $root = $live->{workdir} . $live->{prefix}{boot};
+    my $root = get_workdir($live) . $live->{prefix}{boot};
     my @available_storage = sort(grep { -d "$root/$_" && exists $storage{$_}{detect} } all($root));
     my @available_devices;
     require interactive;
@@ -787,12 +799,12 @@ sub complete_config {
     ref $live->{media} && $live->{media}{storage} or die "no media storage definition";
     ref $live->{system} or die "no system definition";
     $live->{system}{kernel} or die "no kernel has been configured";
-    mkdir_p($live->{workdir});
+    mkdir_p(get_workdir($live));
 }
 
 sub clean {
     my ($live) = @_;
-    rm_rf($_) foreach grep { -e $_ } $live->{workdir}, $live->{system}{root};
+    rm_rf($_) foreach grep { -e $_ } get_workdir($live), get_system_root($live);
 }
 
 my $default_prefix = {
@@ -820,10 +832,10 @@ my @all = qw(install boot loop master);
 
 require_root_capability();
 
-my (%live, %opts, $copy_wizard);
+my (%live, %opts);
 GetOptions(
     "help" => sub { pod2usage('-verbose' => 1) },
-    "copy-wizard" => \$copy_wizard,
+    "copy-wizard" => \$live{copy_wizard},
     "boot-only" => \$opts{boot_only},
     "all" => sub { $_->{to_run} = 1 foreach grep { member($_->{name}, @all) } @actions },
     (map { $_->{name} => \$_->{to_run} } @actions),
@@ -838,7 +850,7 @@ GetOptions(
     },
 ) or pod2usage();
 
-unless ($copy_wizard) {
+unless ($live{copy_wizard}) {
     unless (keys(%live)) {
         warn 'no live definition';
         pod2usage();
@@ -849,7 +861,7 @@ add2hash($live{prefix} ||= {}, $default_prefix);
 
 require standalone;
 
-if ($copy_wizard) {
+if ($live{copy_wizard}) {
     copy_wizard(\%live);
 } else {
     every { !$_->{to_run} } @actions and die 'nothing to do';
