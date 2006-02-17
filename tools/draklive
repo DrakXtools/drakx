@@ -249,7 +249,7 @@ sub run_ {
 
 sub get_region_suffix {
     my ($live) = @_;
-    defined $live->{system}{region} ? $live->{system}{region} . '/' : ref $live->{regions} ? 'noregion/' : '';
+    defined $live->{system}{region} ? '/' . $live->{system}{region} : ref $live->{regions} ? '/noregion' : '';
 }
 
 sub get_workdir {
