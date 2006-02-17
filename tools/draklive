@@ -443,6 +443,8 @@ sub post_install_system {
              map { $rpm_tmp_dir . '/' . basename($_) } @{$live->{system}{rpms}});
         rm_rf($live->{system}{root} . $rpm_tmp_dir);
     }
+    my $erase = join(' ', @{$live->{system}{erase_rpms}});
+    run_('chroot', $live->{system}{root}, 'sh', '-c', "rpm -qa $erase | xargs rpm -e ") if $erase;
 
     my @patches = map { abs_path($_) } @{$live->{system}{patches}};
     each_index { !defined $_ and die "unable to find file " . $live->{system}{patches}[$::i] } @patches;
