@@ -247,16 +247,19 @@ sub run_ {
     run_program::raw($options, @_);
 }
 
+sub get_region_suffix {
+    my ($live) = @_;
+    defined $live->{system}{region} ? $live->{system}{region} . '/' : ref $live->{regions} ? 'noregion/' : '';
+}
+
 sub get_workdir {
     my ($live) = @_;
-    $live->{copy_wizard} ?
-      $live->{workdir} :
-      $live->{workdir} . '/' . ($live->{system}{region} || 'noregion');
+    $live->{workdir} . get_region_suffix($live);
 }
 
 sub get_system_root {
     my ($live) = @_;
-    $live->{system}{root} . '/' . ($live->{system}{region} || 'noregion');
+    $live->{workdir} . get_region_suffix($live);
 }
 
 sub get_initrd_path {
