@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2006-01-26 11:06+0100\n"
-"PO-Revision-Date: 2006-02-18 16:25+0800\n"
+"PO-Revision-Date: 2006-02-20 12:33+0800\n"
 "Last-Translator: Shiva Huang <shivahuang@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1737,7 +1737,7 @@ msgstr "沒有密碼"
 #: authentication.pm:194
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
-msgstr "這個密碼太短了 (一定至少要有 %d 個字元才行)"
+msgstr "這個密碼太短了 (至少要有 %d 個字元才行)"
 
 #: authentication.pm:199 network/netconnect.pm:322 network/netconnect.pm:585
 #: standalone/drakauth:24 standalone/drakauth:26 standalone/drakconnect:481
@@ -1774,17 +1774,17 @@ msgstr "LILO 圖形介面選單"
 #: bootloader.pm:910
 #, c-format
 msgid "LILO with text menu"
-msgstr "LILO 文字選單"
+msgstr "LILO 文字介面選單"
 
 #: bootloader.pm:911
 #, c-format
 msgid "GRUB with graphical menu"
-msgstr ""
+msgstr "GRUB 圖形介面選單"
 
 #: bootloader.pm:912
 #, c-format
 msgid "GRUB with text menu"
-msgstr ""
+msgstr "GRUB 文字介面選單"
 
 #: bootloader.pm:913
 #, c-format
@@ -3128,6 +3128,8 @@ msgid ""
 "Can only be mounted explicitly (i.e.,\n"
 "the -a option will not cause the file system to be mounted)."
 msgstr ""
+"只能手動掛載 (亦即 mount 時使用 -a 參數將不會\n"
+"自動掛載這個檔案系統)。"
 
 #: fs/mount_options.pm:123
 #, c-format
@@ -3218,8 +3220,8 @@ msgid ""
 "\n"
 "Do you agree to lose all the partitions?\n"
 msgstr ""
-"我無法讀取 %s 裝置的磁碟分割表，它已經嚴重毀損：(\n"
-"我可以試著繼續，並清除壞掉的分割區 (將失去所有資料！)。\n"
+"我無法讀取 %s 裝置的磁碟分割表，它已經嚴重毀損：(我\n"
+"可以試著繼續，並清除壞掉的分割區 (將失去所有資料！)。\n"
 "另一種方法是不允許 DrakX 更改磁碟分割表。\n"
 "(錯誤是 %s)\n"
 "\n"
@@ -3247,9 +3249,9 @@ msgid ""
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
-"你已經選擇了一塊軟體磁碟陣列的分割區當作為根分割區 (/) 的掛載點。\n"
-"沒有 /boot 分割區，開機載入程式不可能處理這種情況。\n"
-"請確定會增加一個 /boot 分割區"
+"您選擇了將一塊軟體磁碟陣列的分割區作為根目錄 (/) 的掛載點。\n"
+"但開機載入程式無法處理這種 /boot 目錄不位於實體分割區的情況。\n"
+"請確定會新增一個掛載於實體分割區的 /boot 目錄"
 
 #: fsedit.pm:403
 #, fuzzy, c-format
@@ -3266,9 +3268,9 @@ msgid ""
 "volumes.\n"
 "You should create a /boot partition first"
 msgstr ""
-"你已經選擇了一塊 LVM Logical Volume 作為根目錄 (/) 的掛載點。\n"
-"沒有 /boot 分割區，開機載入程式不可能處理這種情況。\n"
-"請確定會增加一個 /boot 分割區"
+"您已經選擇了一塊 LVM Logical Volume 作為根目錄 (/) 的掛載點。\n"
+"但開機載入程式無法處理這種 /boot 目錄不位於實體分割區的情況。\n"
+"請確定會新增一個掛載於實體分割區的 /boot 目錄"
 
 #: fsedit.pm:409 fsedit.pm:411
 #, c-format
@@ -3510,7 +3512,7 @@ msgstr "滑鼠"
 #: harddrake/data.pm:485
 #, c-format
 msgid "UPS"
-msgstr "UPS"
+msgstr "UPS 不斷電系統"
 
 #: harddrake/data.pm:494
 #, c-format
@@ -3536,7 +3538,7 @@ msgstr "請稍待... 正在套用該設定"
 #: harddrake/sound.pm:229
 #, c-format
 msgid "No alternative driver"
-msgstr "無另外可供選擇的驅動程式"
+msgstr "沒有其他可供選擇的驅動程式"
 
 #: harddrake/sound.pm:230
 #, c-format
@@ -3544,8 +3546,8 @@ msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
 "currently uses \"%s\""
 msgstr ""
-"目前沒有另外可供選擇的 OSS/ALSA 驅動程式支援你的音效卡 (%s)\n"
-"正在使用 \"%s\""
+"您的音效卡 (%s) 正在使用 \"%s\" 驅動程式，目前沒有其他可供選擇的 OSS/ALSA 驅"
+"動程式支援它"
 
 #: harddrake/sound.pm:236
 #, c-format
@@ -3557,7 +3559,7 @@ msgstr "音效設定"
 msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
 "sound card (%s)."
-msgstr "您可以選擇使用另外的 (OSS 或者 ALSA) 的驅動程式給您的音效卡 (%s)"
+msgstr "您可以選擇使用其他的 (OSS 或者 ALSA) 的驅動程式給您的音效卡 (%s)"
 
 #. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
@@ -4730,7 +4732,7 @@ msgstr ""
 #: help.pm:458
 #, c-format
 msgid "Security Administrator"
-msgstr "安全性管理員:"
+msgstr "安全性管理員："
 
 #: help.pm:461
 #, c-format
@@ -5516,7 +5518,7 @@ msgstr "防火牆"
 #: help.pm:855 install_steps_interactive.pm:1095
 #, c-format
 msgid "Bootloader"
-msgstr "開機載入器"
+msgstr "開機載入程式"
 
 #: help.pm:855 install_steps_interactive.pm:1108 services.pm:114
 #: services.pm:157 services.pm:193
@@ -5824,7 +5826,7 @@ msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
 msgstr ""
-"某些在您電腦上的硬體需要 ``版權專有'' 的驅動程式以便於能夠工作。\n"
+"某些在您電腦上的硬體需要 \"專有版權\" 的驅動程式以便於能夠工作。\n"
 "您可以在這裡找到一些相關的資訊： %s"
 
 #: install_interactive.pm:63
@@ -5836,7 +5838,7 @@ msgid ""
 msgstr ""
 "您必須指定一個分割區來放根目錄。\n"
 "請建立一個分割區 (或點選一個已經存在的)，\n"
-"接著選動作 ``掛載點'' 且把它設成 `/'"
+"接著選動作 \"掛載點\" 且把它設成 \"/\""
 
 #: install_interactive.pm:68
 #, c-format
@@ -5999,7 +6001,7 @@ msgstr "刪除所有磁碟內容"
 #: install_interactive.pm:216
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
-msgstr "你有多於一個硬碟, 您打算用那一個安裝 linux?"
+msgstr "您有多個硬碟，您打算用那一個來安裝 linux？"
 
 #: install_interactive.pm:222
 #, c-format
@@ -6470,7 +6472,7 @@ msgid ""
 "If you do not have it, press Cancel to avoid installation from this Cd-Rom."
 msgstr ""
 "更換光碟片！\n"
-"請插入標示為為 \"%s\" 的光碟於您的光碟機中，完成後請按下確定。\n"
+"請插入標示為 \"%s\" 的光碟於您的光碟機中，完成後請按下確定。\n"
 "若是您沒有這片光碟，請點選取消以略過這一片光碟的安裝。"
 
 #: install_steps_gtk.pm:556 install_steps_interactive.pm:730
@@ -6564,7 +6566,7 @@ msgstr "請選取您滑鼠的形式。"
 #: install_steps_interactive.pm:171
 #, c-format
 msgid "Mouse choice"
-msgstr ""
+msgstr "滑鼠選擇"
 
 #: install_steps_interactive.pm:180 standalone/mousedrake:46
 #, c-format
@@ -6786,7 +6788,7 @@ msgstr "安裝後的設定"
 #: install_steps_interactive.pm:755
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
-msgstr ""
+msgstr "請確定更新模組媒體位於磁碟機 %s 中"
 
 #: install_steps_interactive.pm:783
 #, c-format
@@ -6945,7 +6947,7 @@ msgstr "您尚未設定 X。您確定您真的要這樣做？"
 #: install_steps_interactive.pm:1205
 #, c-format
 msgid "Preparing bootloader..."
-msgstr "正在準備開機載入器..."
+msgstr "正在準備開機載入程式..."
 
 #: install_steps_interactive.pm:1215
 #, c-format
@@ -9589,7 +9591,7 @@ msgstr ""
 #: network/drakfirewall.pm:188
 #, c-format
 msgid "Which services would you like to allow the Internet to connect to?"
-msgstr "您要允許網際網路連線至何種服務呢？"
+msgstr "您要允許網路可連線至何種服務呢？"
 
 #: network/drakfirewall.pm:191
 #, c-format
@@ -9728,7 +9730,7 @@ msgstr "手動"
 #: network/ndiswrapper.pm:27
 #, c-format
 msgid "No device supporting the %s ndiswrapper driver is present!"
-msgstr ""
+msgstr "沒有找到支援 %s ndiswrapper 驅動程式的裝置！"
 
 #: network/ndiswrapper.pm:33
 #, c-format
@@ -9955,7 +9957,7 @@ msgstr "Modem 連線"
 #: network/netconnect.pm:262
 #, c-format
 msgid "DVB connection"
-msgstr ""
+msgstr "DVB 連線"
 
 #: network/netconnect.pm:272
 #, c-format
@@ -11008,6 +11010,9 @@ msgid ""
 "\n"
 "You can find a driver on http://eciadsl.flashtux.org/"
 msgstr ""
+"因為二進位驅動程式散佈的問題，我們無法支援 ECI Hi-Focus 數據機。\n"
+"\n"
+"您可以在 http://eciadsl.flashtux.org/ 找到驅動程式"
 
 #: network/thirdparty.pm:321
 #, c-format
@@ -11605,7 +11610,7 @@ msgstr ""
 #: printer/printerdrake.pm:4542
 #, c-format
 msgid "Remote CUPS server and no local CUPS daemon"
-msgstr ""
+msgstr "遠端 CUPS 伺服器並且沒有本地端 CUPS daemon"
 
 #: printer/printerdrake.pm:75
 #, c-format
