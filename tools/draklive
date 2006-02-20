@@ -469,7 +469,7 @@ sub post_install_system {
 
     #- make sure harddrake is run
     #- (do it in chroot, or else Storable from the build box may write an incompatible config file)
-    system("chroot " . get_system_root($live) .
+    system("chroot " . get_system_root($live) . " " .
            "perl -MStorable -e \"Storable::store({ UNKNOWN => {} }, '/etc/sysconfig/harddrake2/previous_hw')\"");
 
     #- interactive mode can lead to race in initscripts
