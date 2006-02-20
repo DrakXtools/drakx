@@ -467,7 +467,8 @@ sub post_install_system {
     each_index { !defined $_ and die "unable to find file " . $live->{system}{patches}[$::i] } @patches;
     run_('patch', '-p0', '-s', '-N', '-F', 0, '-d', get_system_root($live), '-r', '/tmp', '-i', $_) foreach @patches;
 
-    #- make sure harddrake is run
+    #- make sure harddrake is run:
+    #  (if previous HW config file is empty, we assumes DrakX has just completed the installation)
     #- (do it in chroot, or else Storable from the build box may write an incompatible config file)
     system("chroot " . get_system_root($live) . " " .
            "perl -MStorable -e \"Storable::store({ UNKNOWN => {} }, '/etc/sysconfig/harddrake2/previous_hw')\"");
