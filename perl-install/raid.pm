@@ -118,11 +118,13 @@ sub make {
     whereis_binary('mdadm') or die 'mdadm not installed';
 
     my $dev = devices::make($part->{device});
+    my $nb = @{$part->{disks}};
 
     run_program::run_or_die('mdadm', '--create', '--run', $dev, 
+			    if_($nb == 1, '--force'),
 			    '--chunk=' . $part->{'chunk-size'}, 
 			    "--level=$part->{level}", 
-			    '--raid-devices=' . int(@{$part->{disks}}),
+			    "--raid-devices=$nb",
 			    map { devices::make($_->{device}) } @{$part->{disks}});
 
     if (my $raw_part = get_md_info($dev)) {
