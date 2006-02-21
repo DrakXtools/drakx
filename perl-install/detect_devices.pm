@@ -889,7 +889,7 @@ sub get_mac_generation() {
 
 sub hasSMP() { 
     return if $::testing;
-    any { /NR_CPUS limit of 1 reached/ } syslog() ||
+    (any { /NR_CPUS limit of 1 reached/ } syslog()) ||
       any { /\bProcessor #(\d+)\s+(\S*)/ && $1 > 0 && $2 ne 'invalid' } syslog();
 }
 sub hasPCMCIA() { $::o->{pcmcia} } #- because /proc/pcmcia seems not to be present on 2.4 at least (or use /var/run/stab)
