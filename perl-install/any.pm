@@ -595,6 +595,8 @@ sub inspect {
 sub ask_user_one {
     my ($in, $users, $security, $u, %options) = @_;
 
+    $options{needauser} ||= $security >= 3;
+
     my @icons = facesnames();
 
     my %high_security_groups = (
@@ -641,9 +643,8 @@ sub ask_user_one {
 			  $u->{name} ||= lc first($u->{realname} =~ /([a-zA-Z0-9_-]+)/);
 		      }
 		  },
-	          complete => sub { $u->{name} ? &$verif : 0 },
                   canceled => $verif,
-                  ok_disabled => sub { $security >= 3 && !@$users || $options{needauser} && !$u->{name} },
+                  ok_disabled => sub { $options{needauser} && !@$users || $u->{name} },
 	  } }, [ 
 	  { label => N("Real name"), val => \$u->{realname} },
           { label => N("Login name"), val => \$u->{name} },
