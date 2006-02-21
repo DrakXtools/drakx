@@ -675,7 +675,7 @@ CAT_SYSTEM
   
   5 PCMCIA pcmcia-cs
 
-  5 HW"HighPoint Technologies Inc.\|HPT37|Promise Technology.*FastTrak" || DRIVER"ata_piix|i2o_block|megaraid|sata_sil" mdadm dmraid
+  5 HW"HighPoint Technologies Inc.\|HPT37|JMicron 2036|Promise Technology.*FastTrak" || DRIVER"ata_piix|i2o_block|megaraid|sata_sil" mdadm dmraid
   5 HW"American Power Conversion\|Back-UPS Pro 500|MGE UPS Systems\|" nut-server
   5 HW"iKey 3000 Token" rnboifd
   5 HW_CAT"network/slmodem" slmodem
@@ -686,6 +686,7 @@ CAT_SYSTEM
      SMP cm2020-smp
      HIGH_SECURITY cm2020-secure
      BIGMEM cm2020-enterprise
+  # the following could be managed by dmraid rather than by 3rd party binary drivers:
   5 DRIVER"a320raid" || HW"HostRAID" a320raid
   5 DRIVER"a320raid" || HW"HostRAID" a320raid-kernel
      SMP a320raid-kernelsmp
