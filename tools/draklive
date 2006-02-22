@@ -555,8 +555,14 @@ sub prepare_bootloader {
     my ($live, $opts) = @_;
     create_initrd($live);
     cp_f(get_system_root($live) . '/boot/vmlinuz-' . $live->{system}{kernel}, get_workdir($live) . $live->{prefix}{boot} . '/vmlinuz');
-    my $msg = get_system_root($live) . '/boot/message-graphic';
-    cp_f($msg, get_workdir($live) . $live->{prefix}{boot} . '/live.msg') if -f $msg;
+    require bootsplash;
+    my $theme = bootsplash::themes_read_sysconfig([ bootsplash::get_framebuffer_resolution() ]->[0]);
+    my $msg = get_system_root($live) . "/usr/share/bootsplash/themes/$theme->{name}/lilo/syslinux";
+    if (-f $msg) {
+        cp_f($msg, get_workdir($live) . $live->{prefix}{boot} . '/live.msg');
+    } else {
+        warn "unable to find syslinux splash ($msg)";
+    }
     output(get_workdir($live) . $live->{prefix}{boot} . '/help.msg',
            pack("C*", 0x0E, 0x80, 0x03, 0x00, 0xC) . qq(
 Welcome to Mandriva live!
