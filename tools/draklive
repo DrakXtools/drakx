@@ -243,7 +243,7 @@ sub moddeps_closure {
 
 sub run_ {
     my $options = ref $_[0] eq 'HASH' ? shift @_ : {};
-    print STDERR "running " . join(' ', @_) . "\n";
+    print STDERR "running " . (exists $options->{root} && "(in chroot) ") . join(' ', @_) . "\n";
     run_program::raw($options, @_);
 }
 
@@ -445,7 +445,7 @@ sub install_system {
          if_($live->{system}{rpmsrate}, '--rpmsrate', abs_path($live->{system}{rpmsrate})))
       or die "unable to install system chroot";
     #- remove urpmi media added by drakx-in-chroot, they're unusable
-    run_('chroot', get_system_root($live), 'urpmi.removemedia', '-a');
+    run_({ root => get_system_root($live) }, 'urpmi.removemedia', '-a');
     post_install_system($live);
 }
 
@@ -456,22 +456,22 @@ sub post_install_system {
         my $rpm_tmp_dir = '/tmp/draklive_rpms';
         mkdir_p(get_system_root($live) . $rpm_tmp_dir);
         cp_f(@{$live->{system}{rpms}}, get_system_root($live) . $rpm_tmp_dir);
-        run_('chroot', get_system_root($live), 'urpmi', '--auto',
+        run_({ root => get_system_root($live) }, 'urpmi', '--auto',
              map { $rpm_tmp_dir . '/' . basename($_) } @{$live->{system}{rpms}});
         rm_rf(get_system_root($live) . $rpm_tmp_dir);
     }
     my $erase = join(' ', @{$live->{system}{erase_rpms}});
-    run_('chroot', get_system_root($live), 'sh', '-c', "rpm -qa $erase | xargs rpm -e ") if $erase;
+    run_({ root => get_system_root($live) }, 'sh', '-c', "rpm -qa $erase | xargs rpm -e ") if $erase;
 
     my @patches = map { abs_path($_) } @{$live->{system}{patches}};
     each_index { !defined $_ and die "unable to find file " . $live->{system}{patches}[$::i] } @patches;
     run_('patch', '-p0', '-s', '-N', '-F', 0, '-d', get_system_root($live), '-r', '/tmp', '-i', $_) foreach @patches;
 
     #- make sure harddrake is run:
-    #  (if previous HW config file is empty, we assumes DrakX has just completed the installation)
+    #- if previous HW config file is empty, we assumes DrakX has just completed the installation
     #- (do it in chroot, or else Storable from the build box may write an incompatible config file)
-    system("chroot " . get_system_root($live) . " " .
-           "perl -MStorable -e \"Storable::store({ UNKNOWN => {} }, '/etc/sysconfig/harddrake2/previous_hw')\"");
+    run_({ root => get_system_root($live) },
+         "perl -MStorable -e \"Storable::store({ UNKNOWN => {} }, '/etc/sysconfig/harddrake2/previous_hw')\"");
 
     #- interactive mode can lead to race in initscripts
     #- (don't use addVarsInSh from MDK::Common, it breaks shell escapes)
