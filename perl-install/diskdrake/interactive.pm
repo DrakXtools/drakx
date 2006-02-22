@@ -470,7 +470,7 @@ sub part_possible_actions {
     );
     if (isEmpty($part)) {
 	if_(!$hd->{readonly}, N_("Create"));
-    } elsif ($part->{pt_type} == 0xbf) {
+    } elsif ($part->{pt_type} == 0xbf && detect_devices::is_xbox()) {
         #- XBox OS partitions, do not allow anything
         return;    
     } else {
