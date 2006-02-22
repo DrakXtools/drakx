@@ -42,6 +42,7 @@ my $dir_memory = {
     type => 'tmpfs',
 };
 
+# this is not unused (it can be used from config file):
 my %predefined = (
     mounts => {
         simple_union => {
@@ -89,6 +90,7 @@ my %predefined = (
     },
 );
 
+# this is not unused (it can be used from config file):
 my %custom = (
     media => {
         nfs => sub {
@@ -151,7 +153,7 @@ sub progress_show_incr {
     printf("\r%3d%% (%$progress->{maxl}s/%-$progress->{maxl}s), %8s/%8s (ETA)",
            int(100*$progress->{current}/$progress->{total}),
            (map { substr($_, 0, length($_)-$progress->{exp_divide}) } $progress->{current}, $progress->{total}),
-           (map { strftime("%H:%M:%S", gmtime($_)) } $elapsed_time, $eta));
+           (map { POSIX::strftime("%H:%M:%S", gmtime($_)) } $elapsed_time, $eta));
 }
 
 sub progress_end() { print "\n" }
@@ -440,9 +442,9 @@ sub install_system {
          $live->{system}{repository},
          get_system_root($live),
          if_($live->{system}{region}, '--langs', join(':', @{$live->{regions}{$live->{system}{region}}})),
-         if_($live->{system}{auto_install}, '--auto_install', abs_path($live->{system}{auto_install})),
-         if_($live->{system}{patch_install}, '--defcfg', abs_path($live->{system}{patch_install})),
-         if_($live->{system}{rpmsrate}, '--rpmsrate', abs_path($live->{system}{rpmsrate})))
+         if_($live->{system}{auto_install}, '--auto_install', Cwd::abs_path($live->{system}{auto_install})),
+         if_($live->{system}{patch_install}, '--defcfg', Cwd::abs_path($live->{system}{patch_install})),
+         if_($live->{system}{rpmsrate}, '--rpmsrate', Cwd::abs_path($live->{system}{rpmsrate})))
       or die "unable to install system chroot";
     #- remove urpmi media added by drakx-in-chroot, they're unusable
     run_({ root => get_system_root($live) }, 'urpmi.removemedia', '-a');
@@ -463,14 +465,14 @@ sub post_install_system {
     my $erase = join(' ', @{$live->{system}{erase_rpms}});
     run_({ root => get_system_root($live) }, 'sh', '-c', "rpm -qa $erase | xargs rpm -e ") if $erase;
 
-    my @patches = map { abs_path($_) } @{$live->{system}{patches}};
+    my @patches = map { Cwd::abs_path($_) } @{$live->{system}{patches}};
     each_index { !defined $_ and die "unable to find file " . $live->{system}{patches}[$::i] } @patches;
     run_('patch', '-p0', '-s', '-N', '-F', 0, '-d', get_system_root($live), '-r', '/tmp', '-i', $_) foreach @patches;
 
     #- make sure harddrake is run:
     #- if previous HW config file is empty, we assumes DrakX has just completed the installation
     #- (do it in chroot, or else Storable from the build box may write an incompatible config file)
-    run_({ root => get_system_root($live) },
+    run_({ root => get_system_root($live) }, 
          'perl', '-MStorable', '-e', qq(Storable::store({ UNKNOWN => {} }, '/etc/sysconfig/harddrake2/previous_hw')));
 
     #- interactive mode can lead to race in initscripts
@@ -853,7 +855,7 @@ require_root_capability();
 
 my (%live, %opts);
 GetOptions(
-    "help" => sub { pod2usage('-verbose' => 1) },
+    "help" => sub { Pod::Usage::pod2usage('-verbose' => 1) },
     "copy-wizard" => \$live{copy_wizard},
     "boot-only" => \$opts{boot_only},
     "all" => sub { $_->{to_run} = 1 foreach grep { member($_->{name}, @all) } @actions },
@@ -868,7 +870,7 @@ GetOptions(
         put_in_hash(\%live, $cfg);
         print "loaded $path as config file\n";
     },
-) or pod2usage();
+) or Pod::Usage::pod2usage();
 
 require standalone;
 if ($live{copy_wizard}) {
@@ -878,7 +880,7 @@ if ($live{copy_wizard}) {
     every { !$_->{to_run} } @actions and die 'nothing to do';
     unless (keys(%live)) {
         warn 'no live definition';
-        pod2usage();
+        Pod::Usage::pod2usage();
     }
     foreach my $region ($live{all_regions} ? sort(keys %{$live{regions}}) : $live{system}{region}) {
         $region and print qq(=== proceeding with region "$region"\n);
