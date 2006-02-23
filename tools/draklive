@@ -563,7 +563,10 @@ sub prepare_bootloader {
     create_initrd($live);
     cp_f(get_system_root($live) . '/boot/vmlinuz-' . $live->{system}{kernel}, get_workdir($live) . $live->{prefix}{boot} . '/vmlinuz');
     require bootsplash;
-    my $theme = bootsplash::themes_read_sysconfig([ bootsplash::get_framebuffer_resolution() ]->[0]);
+    my $theme = do {
+        local $::prefix = get_system_root($live);
+        bootsplash::themes_read_sysconfig('800x600');
+    };
     my $msg = get_system_root($live) . "/usr/share/bootsplash/themes/$theme->{name}/lilo/syslinux";
     if (-f $msg) {
         print "using $msg as syslinux splash image\n";
