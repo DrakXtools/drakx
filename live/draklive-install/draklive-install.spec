@@ -21,8 +21,13 @@ This tool allows to install Mandriva from a running live system.
 %prep
 %setup -q
 
+%build
+%make -C po
+
 %install
 rm -rf $RPM_BUILD_ROOT
+
+%makeinstall -C po
 
 for d in %_datadir/nautilus/default-desktop %_datadir/apps/kdesktop/DesktopLinks; do
   install -D -m 0644 %name.desktop %buildroot/$d/%name.desktop
@@ -44,6 +49,8 @@ install theme/IC-installone-32.png %buildroot%_iconsdir/%iconname
 install theme/IC-installone-32.png %buildroot%_miconsdir/%iconname
 install theme/IM-INSTALLCDONE2.png %buildroot%_datadir/libDrakX/pixmaps/%imgname
 
+%find_lang %name
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -53,7 +60,7 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 %clean_menus
 
-%files
+%files -f %name.lang
 %defattr(-,root,root)
 %_sbindir/%name
 %_datadir/%name
