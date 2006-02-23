@@ -19,9 +19,7 @@ merge: $(NAME).pot
 	done
 
 $(NAME).pot:
-	xgettext -F -n --from-code --add-comments='I18N' \
-	--keyword=_ --keyword=__ --keyword=N_ --keyword=N \
-	-o $@ $(PL_FILES)
+	perl_checker -q --generate-pot $@ $(PL_FILES)
 
 install: all
 	for l in $(LANGS); do \
