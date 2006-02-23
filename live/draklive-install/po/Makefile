@@ -29,4 +29,4 @@ install: all
 	done
 
 clean:
-	@rm -rf *.mo $(POFILES:%=%t) $(NAME).pot
+	@rm -rf *.mo $(POFILES:%=%t)
