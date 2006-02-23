@@ -172,5 +172,6 @@ $o = {
 			 },
        #- doc takes too much place
        'excludedocs' => 1,
+       #- do not modify it the standard way, since the behaviour would be unexpected during install
        'post_install' => "perl -pi -e 's/META_CLASS=.*/META_CLASS=one/' /etc/sysconfig/system"
      };
