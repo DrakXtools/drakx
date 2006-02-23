@@ -65,7 +65,7 @@ sub create_user {
 		run_program::rooted($::prefix, 'groupadd', '-g', $gid, $u->{name});
 	    }
 	} elsif ($u->{rename_from}) {
-	    run_program::rooted($::prefix, 'groupadd', $u->{name}) and $gid = int getgrnam($u->{name});
+	    run_program::rooted($::prefix, 'groupmod', '-n', $u->{name}, $u->{rename_from});
 	}
 
 	require authentication;
@@ -83,7 +83,7 @@ sub create_user {
 
     my (undef, undef, $uid, $gid, undef, undef, undef, $home) = getpwnam($u->{name});
 
-    if (@existing && $::isInstall && ($uid != $existing[4] || $gid != $existing[5]) || $u->{rename_from}) {
+    if (@existing && $::isInstall && ($uid != $existing[4] || $gid != $existing[5])) {
 	log::l("chown'ing $home from $existing[4].$existing[5] to $uid.$gid");
 	require commands;
 	eval { commands::chown_("-r", "$uid.$gid", "$::prefix$home") };
@@ -722,11 +722,19 @@ sub acceptLicense {
     my ($o) = @_;
     require install_messages;
 
-    $o->{release_notes} = join("\n\n", map { 
-	my $f = install_any::getFile($_);
-	$f && cat__($f);
-    } 'release-notes.txt', 'release-notes.' . arch() . '.txt') if $::isInstall;
+    $o->{release_notes} = join("\n\n", map {
+        if ($::isInstall) {
+            my $f = install_any::getFile($_);
+            $f && cat__($f);
+        } else {
+            my $file = $_;
+            my $d = find { -e "$_/$file" } glob_("/usr/share/doc/*-release-*");
+            print cat_("$d/$file");
+            $d && cat_("$d/$file");
+        }
+    } 'release-notes.txt', 'release-notes.' . arch() . '.txt');
 
+    print $o->{release_notes};
     return if $o->{useless_thing_accepted};
 
     my $r = $::testing ? 'Accept' : 'Refuse';
@@ -736,7 +744,7 @@ sub acceptLicense {
 		     cancel => N("Quit"),
 		     messages => formatAlaTeX(install_messages::main_license() . "\n\n\n" . install_messages::warning_about_patents()),
 		     interactive_help_id => 'acceptLicense',
-		     if_(!$::globetrotter, more_buttons => [ [ N("Release Notes"), sub { $o->ask_warn(N("Release Notes"), $o->{release_notes}) }, 1 ] ]),
+		     more_buttons => [ [ N("Release Notes"), sub { $o->ask_warn(N("Release Notes"), $o->{release_notes}) }, 1 ] ],
 		     callbacks => { ok_disabled => sub { $r eq 'Refuse' } },
 		   },
 		   [ { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list', format => sub { translate($_[0]) } } ])
