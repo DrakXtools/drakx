@@ -1,5 +1,6 @@
 package help;
 use common;
+use utf8;
 
 1;
 
