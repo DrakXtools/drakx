@@ -9,6 +9,8 @@ use install_interactive;
 use fs::type;
 use common;
 
+push @::textdomains, 'draklive-install';
+
 {
     use interactive;
     package interactive;
