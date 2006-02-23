@@ -1,0 +1,11 @@
+--- etc/init.d/netfs.loopfs	2005-09-19 17:34:31.000000000 +0200
++++ etc/init.d/netfs	2005-12-27 19:23:39.000000000 +0100
+@@ -50,7 +50,7 @@
+         # Unmount loopback stuff first
+ 	remaining=`LC_ALL=C awk '!/^#/ && $1 ~ /^\/dev\/loop/ && $2 != "/" {print $2}' /proc/mounts`
+ 	devremaining=`LC_ALL=C awk '!/^#/ && $1 ~ /^\/dev\/loop/ && $2 != "/" {print $1}' /proc/mounts`
+-	[ -n "$remaining" ] && {
++	/bin/false && [ -n "$remaining" ] && {
+ 	        sig=
+ 		retry=3
+ 		while [ -n "$remaining" -a "$retry" -gt 0 ]

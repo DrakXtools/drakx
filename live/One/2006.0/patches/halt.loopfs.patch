@@ -1,0 +1,20 @@
+--- etc/init.d/halt.loopfs	2005-12-27 22:13:48.000000000 +0100
++++ etc/init.d/halt	2005-12-27 22:14:28.000000000 +0100
+@@ -23,7 +23,7 @@
+ }
+ 
+ halt_get_remaining() {
+-	awk '$2 ~ /^\/$|^\/proc|^\/sys|^\/dev/{next}
++	awk '$2 ~ /^\/$|^\/proc|^\/sys|^\/dev|^\/live/{next}
+ 	     $3 == "tmpfs" || $3 == "proc" {print $2 ; next}
+ 	     /(^#|loopfs|autofs|devfs|^none|^\/dev\/ram|^\/dev\/root)/ {next}
+ 	     {print $2}' /proc/mounts
+@@ -139,7 +139,7 @@
+ # Unmount loopback stuff first
+ remaining=`awk '!/^#/ && $1 ~ /^\/dev\/loop/ && $2 != "/" {print $2}' /proc/mounts`
+ devremaining=`awk '!/^#/ && $1 ~ /^\/dev\/loop/ && $2 != "/" {print $1}' /proc/mounts`
+-[ -n "$remaining" ] && {
++/bin/false && [ -n "$remaining" ] && {
+ 	sig=
+ 	retry=3
+ 	while [ -n "$remaining" -a "$retry" -gt 0 ]

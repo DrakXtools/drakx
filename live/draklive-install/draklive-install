@@ -1,0 +1,418 @@
+#!/usr/bin/perl
+
+use lib qw(/usr/lib/libDrakX);
+use standalone;
+use interactive;
+#- err, yes, we're loaded, aren't we? (actually not used by this wizard in install_interactive)
+BEGIN { undef @INC{'install_any.pm', 'install_steps.pm'} };
+use install_interactive;
+use fs::type;
+use common;
+
+{
+    use interactive;
+    package interactive;
+    *ask_mntpoint_s = \&main::ask_mntpoint_s_interactive;
+}
+
+{
+    use diskdrake::interactive;
+    package diskdrake::interactive;
+    my $old = \&hd_possible_actions;
+    undef *hd_possible_actions;
+    *hd_possible_actions = sub {
+	#- for the partition wizard to show the auto-allocate option
+	local $::isInstall = 1;
+	&$old;
+    };
+    undef *Done;
+    #- skip the fstab/reboot checks
+    *Done = \&diskdrake_interactive_Done;
+}
+
+sub umount_all {
+    my ($in) = @_;
+    #- make sure nothing is mounted in the new root
+    foreach (sort { $b cmp $a } grep { /^$in->{prefix}/ } map { (split)[1] } cat_('/proc/mounts')) {
+        system('umount', $_);
+    }
+    #- make sure selected devices aren't mounted, and swap isn't used
+    foreach (grep { isSwap($_) } @{$in->{fstab}}) {
+        eval { fs::mount::swapoff($_->{device}) };
+    }
+    foreach (map { $_->{mntpoint} && !isSwap($_) ? "/dev/$_->{device}" : () } @{$in->{fstab}}) {
+        system('umount', $_);
+    }
+}
+
+my $in = 'interactive'->vnew('su');
+$in->{prefix} = $::prefix = '/mnt/install';
+
+$in->{all_hds} = fsedit::get_hds();
+
+umount_all($in);
+
+$::isWizard = 1;
+$::Wizard_no_previous = 1;
+$::Wizard_pix_up = "MandrivaOne-install-icon";
+my $live_install_img = "MandrivaOne-install";
+my $title = N("Mandriva Live");
+{
+    my $w = ugtk2->new($title);
+    ugtk2::gtkadd($w->{window},
+                  #ugtk2::gtkcreate_img($live_install_img),
+                  ugtk2::gtknew('Label', height => 5),
+                  N("This wizard will help you to install the live distribution."),
+                  ugtk2::create_okcancel($w));
+    $w->{ok}->grab_focus;
+    $w->main;
+}
+
+install_interactive::partitionWizard($in);
+mkdir_p($::prefix) or die "unable to create $::prefix";
+
+doPartitionDisksAfter($in);
+choosePartitionsToFormat_interactive($in, $in->{fstab});
+
+umount_all($in);
+formatMountPartitions($in);
+
+#- copy to disk
+my $_w = do {
+    local $::isInstall = 1; # quick hack to embed the wait message
+    $in->wait_message('', N("Computing total size"));
+};
+my $total = first(split(/\s+/, `du -sbx / 2>/dev/null`));
+
+#- fork interactive::wait_message_with_progress_bar to allow embedding and images
+my $progress_displayed;
+my $progress = Gtk2::ProgressBar->new;
+$progress->hide;
+$progress->signal_connect(expose_event => sub { $progress_displayed = 1; 0 });
+undef $_w;
+$_w = do {
+    local $::isInstall = 1; # quick hack to embed the wait message
+    my $w = $in->wait_messageW('', [ ugtk2::gtkcreate_img($live_install_img), N("Copying in progress"), if_($progress, $progress) ]);
+    before_leaving { $in->wait_message_endW($w) };
+}; #- should be my ($w, $update_progress) = $in->wait_message_with_progress_bar()
+
+open(my $OUTPUT, '-|', 'tar c ' .
+     join(' ', map { ('--exclude', $_) } '/mnt', '/live', '/proc', '/dev', '/sys')
+     . ' / | tar xvv -C ' . $in->{prefix});
+{
+    local $_;
+    my $current = my $previous = 0;
+    while (<$OUTPUT>) {
+	(undef, undef, my $size) = split;
+	$current += $size;
+	if ($current <= $total && $current/$total > $previous/$total + 0.001) {
+            $progress->set_fraction($current / $total);
+            $progress->show;
+            $progress_displayed = 0;
+            mygtk2::flush() while !$progress_displayed; #- these 4 lines should $update_progress->('', $current, $total)
+	    $previous = $current;
+	}
+    }
+}
+undef $_w;
+
+#- FIXME: maybe factorize with draklive, using draklive --clean-chroot ?
+#- remove unwanted files and packages
+unlink(map { $in->{prefix} . $_} '/.autofsck',
+       '/home/guest/Desktop/draklive-copy-wizard.desktop',
+       '/home/guest/Desktop/draklive-install.desktop');
+system('chroot', $in->{prefix}, 'rpm', '-e', 'draklive-install');
+#- enable drakx-finish-install
+output($in->{prefix} . '/etc/sysconfig/finish-install', qq(
+FINISH_INSTALL=yes
+LICENSE=no
+LANGUAGE=no
+KEYBOARD=no
+NETWORK=yes
+AUTHENTICATION=yes
+USERS=yes
+USER_RENAME_FROM=guest
+));
+#- unselect guest user in kdm
+my $kdm_cfg = '/etc/kde/kdm/kdmrc';
+update_gnomekderc($in->{prefix} . $kdm_cfg,
+                  'X-:0-Greeter' => (PreselectUser => 'None', DefaultUser => '')) if -f $kdm_cfg;
+
+#- create required directories and devices
+mkdir_p($in->{prefix} . $_) foreach qw(/dev /etc /proc /sys);
+run_program::run('makedev', $in->{prefix} . '/dev');
+#- write fstab
+fs::write_fstab($in->{all_hds}, $in->{prefix});
+
+
+#- setup bootloader
+#- TODO: factorize with drakboot
+use bootloader;
+my $bootloader = {};
+my $cmdline = cat_('/proc/cmdline');
+bootloader::suggest($bootloader, $in->{all_hds},
+		    vga_fb => first($cmdline =~ /\bvga=(\S+)/), #- don't use $1 here, otherwise perl will hit you because of the other "=~" below
+		    quiet => $cmdline =~ /\bsplash=silent\b/,
+		    );
+lilo_choice();
+
+#- cleanly umount here, it will avoid fs journals to be corrupted after a hackish reboot
+umount_all($in);
+
+$::Wizard_finished = 1;
+$in->ask_okcancel(N("Congratulations"), N("Please halt your computer, remove your live system, and restart your computer."));
+
+$in->exit(0);
+
+
+###
+### duplicate code
+###
+
+#- install_steps::doPartitionDisksAfter
+sub doPartitionDisksAfter {
+    my ($o) = @_;
+    my $hds = $o->{all_hds}{hds};
+    partition_table::write($_) foreach @$hds;
+    if (grep { $_->{rebootNeeded} } @$hds) {
+	#- install_steps_interactive::rebootNeeded
+	$o->ask_warn('', N("You need to reboot for the partition table modifications to take place"));
+	$o->exit(0);
+    }
+    fs::set_removable_mntpoints($o->{all_hds});
+    fs::mount_options::set_all_default($o->{all_hds}, %$o, lang::fs_options($o->{locale}));
+    $o->{fstab} = [ fs::get::fstab($o->{all_hds}) ];
+}
+
+#- install_steps::choosePartitionsToFormat
+sub choosePartitionsToFormat($$) {
+    my ($_o, $fstab) = @_;
+
+    return if $::local_install;
+
+    foreach (@$fstab) {
+        $_->{mntpoint} = "swap" if isSwap($_);
+        $_->{mntpoint} or next;
+
+        add2hash_($_, { toFormat => $_->{notFormatted} }) if $_->{fs_type}; #- eg: do not set toFormat for isRawRAID (0xfd)
+        $_->{toFormatUnsure} ||= member($_->{mntpoint}, '/', '/usr');
+
+        if (!$_->{toFormat}) {
+            my $fs_type = fs::type::fs_type_from_magic($_);
+            if (!$fs_type || $fs_type ne $_->{fs_type}) {
+                log::l("setting toFormatUnsure for $_->{device} because <$_->{fs_type}> ne <$fs
+_type>");
+                $_->{toFormatUnsure} = 1;
+            }
+        }
+    }
+}
+
+#- install_steps_interactive::choosePartitionsToFormat
+sub choosePartitionsToFormat_interactive {
+    my ($o, $fstab) = @_;
+
+    choosePartitionsToFormat($o, $fstab);
+
+    my @l = grep { !$_->{isMounted} && $_->{mntpoint} &&
+                   (!isSwap($_) || $::expert) &&
+                   (!isFat_or_NTFS($_) || $_->{notFormatted} || $::expert) &&
+                   (!isOtherAvailableFS($_) || $::expert || $_->{toFormat});
+               } @$fstab;
+    $_->{toFormat} = 1 foreach grep { isSwap($_) && !$::expert } @$fstab;
+
+    return if @l == 0 || !$::expert && every { $_->{toFormat} } @l;
+
+    #- keep it temporary until the guy has accepted
+    $_->{toFormatTmp} = $_->{toFormat} || $_->{toFormatUnsure} foreach @l;
+
+    $o->ask_from_(
+        { messages => N("Choose the partitions you want to format"),
+          interactive_help_id => 'formatPartitions',
+          advanced_messages => N("Check bad blocks?"),
+        },
+        [ map {
+            my $e = $_;
+            ({
+              text => partition_table::description($e), type => 'bool',
+              val => \$e->{toFormatTmp}
+             }, if_(!isLoopback($_) && !member($_->{fs_type}, 'reiserfs', 'xfs', 'jfs'), {
+              text => partition_table::description($e), type => 'bool', advanced => 1,
+              disabled => sub { !$e->{toFormatTmp} },
+              val => \$e->{toFormatCheck}
+        })) } @l ]
+    ) or die 'already displayed';
+    #- ok now we can really set toFormat
+    foreach (@l) {
+        $_->{toFormat} = delete $_->{toFormatTmp};
+        set_isFormatted($_, 0);
+    }
+}
+
+#- install_steps_interactive::formatMountPartitions
+#- FIXME(?): drop $_fstab
+sub formatMountPartitions {
+    my ($o, $_fstab) = @_;
+    my ($w, $wait_message) = $o->wait_message_with_progress_bar;
+    catch_cdie {
+        fs::format::formatMount_all($o->{all_hds}, $o->{fstab}, $wait_message);
+    } sub {
+        $@ =~ /fsck failed on (\S+)/ or return;
+        $o->ask_yesorno('', N("Failed to check filesystem %s. Do you want to repair the errors?
+ (beware, you can lose data)", $1), 1);
+    };
+    undef $w; #- help perl (otherwise wait_message stays forever in newt)
+    die N("Not enough swap space to fulfill installation, please add some") if availableMemory(
+) < 40 * 1024;
+}
+
+#- install_any::guess_mount_point
+sub guess_mount_point {
+    my ($part, $prefix, $user) = @_;
+
+    my %l = (
+             '/'     => 'etc/fstab',
+             '/boot' => 'vmlinuz',
+             '/tmp'  => '.X11-unix',
+             '/usr'  => 'X11R6',
+             '/var'  => 'catman',
+            );
+
+    require any;
+    my $handle = any::inspect($part, $prefix) or return;
+    my $d = $handle->{dir};
+    my $mnt = find { -e "$d/$l{$_}" } keys %l;
+    $mnt ||= (stat("$d/.bashrc"))[4] ? '/root' : '/home/user' . ++$$user if -e "$d/.bashrc";
+    $mnt ||= (any { -d $_ && (stat($_))[4] >= 500 && -e "$_/.bashrc" } glob_($d)) ? '/home' : '
+';
+    ($mnt, $handle);
+}
+
+#- install_any::suggest_mount_points
+sub suggest_mount_points {
+    my ($fstab, $prefix, $uniq) = @_;
+
+    my $user;
+    foreach my $part (grep { isTrueFS($_) } @$fstab) {
+        $part->{mntpoint} && !$part->{unsafeMntpoint} and next; #- if already found via an fstab
+
+        my ($mnt, $handle) = guess_mount_point($part, $prefix, \$user) or next;
+
+        next if $uniq && fs::get::mntpoint2part($mnt, $fstab);
+        $part->{mntpoint} = $mnt; delete $part->{unsafeMntpoint};
+
+        #- try to find other mount points via fstab
+        fs::merge_info_from_fstab($fstab, $handle->{dir}, $uniq, 'loose') if $mnt eq '/';
+    }
+    $_->{mntpoint} and log::l("suggest_mount_points: $_->{device} -> $_->{mntpoint}") foreach @$fstab;
+}
+
+#- install_steps_interactive::ask_mntpoint_s
+sub ask_mntpoint_s_interactive { #- }{}
+    my ($o, $fstab) = @_;
+
+    my @fstab = grep { isTrueFS($_) } @$fstab;
+    @fstab = grep { isSwap($_) } @$fstab if @fstab == 0;
+    @fstab = @$fstab if @fstab == 0;
+    die N("No partition available") if @fstab == 0;
+
+    {
+        my $_w = $o->wait_message('', N("Scanning partitions to find mount points"));
+        suggest_mount_points($fstab, $o->{prefix}, 'uniq');
+        log::l("default mntpoint $_->{mntpoint} $_->{device}") foreach @fstab;
+    }
+    if (@fstab == 1) {
+        $fstab[0]{mntpoint} = '/';
+    } else {
+        $o->ask_from_({ messages => N("Choose the mount points"),
+                        title => N("Partitioning"),
+                        icon => 'banner-part',
+                        interactive_help_id => 'ask_mntpoint_s',
+                        callbacks => {
+                            complete => sub {
+                                require diskdrake::interactive;
+                                eval { 1, find_index {
+                                    !diskdrake::interactive::check_mntpoint($o, $_->{mntpoint}, $_, $o->{all_hds});
+                                } @fstab };
+                            },
+                        },
+                      },
+                      [ map {
+                          {
+                              label => partition_table::description($_),
+                              val => \$_->{mntpoint},
+                              not_edit => 0,
+                              list => [ '', fsedit::suggestions_mntpoint(fs::get::empty_all_hds()) ],
+                          };
+                        } @fstab ]) or return;
+    }
+    ask_mntpoint_s($o, $fstab);
+}
+
+#- install_steps::ask_mntpoint_s
+sub ask_mntpoint_s {#-}}}
+    my ($_o, $fstab) = @_;
+
+    #- TODO: set the mntpoints
+
+    my %m; foreach (@$fstab) {
+        my $m = $_->{mntpoint};
+
+        $m && $m =~ m!^/! or next; #- there may be a lot of swaps or "none"
+
+        $m{$m} and die N("Duplicate mount point %s", $m);
+        $m{$m} = 1;
+
+        #- in case the type does not correspond, force it to ext3
+        fs::type::set_fs_type($_, 'ext3') if !isTrueFS($_) && !isOtherAvailableFS($_);
+    }
+    1;
+}
+
+#- adapted from drakboot
+sub lilo_choice() {
+    do {
+        my $before = fs::fstab_to_string($in->{all_hds});
+        any::setupBootloader($in, $bootloader, $in->{all_hds}, $in->{fstab}, $ENV{SECURE_LEVEL}) or $in->exit;
+	fs::write_fstab($all_hds);
+    } while !any::installBootloader($in, $bootloader, $all_hds);
+}
+
+#- from disdrake::interactive
+{
+    package diskdrake::interactive;
+  sub diskdrake_interactive_Done {
+    my ($in, $all_hds) = @_;
+    eval { raid::verify($all_hds->{raids}) };
+    if (my $err = $@) {
+	$::expert or die;
+	$in->ask_okcancel('', [ formatError($err), N("Continue anyway?") ]) or return;
+    }
+    foreach (@{$all_hds->{hds}}) {
+	if (!write_partitions($in, $_, 'skip_check_rebootNeeded')) {
+	    return if !$::isStandalone;
+	    $in->ask_yesorno(N("Quit without saving"), N("Quit without writing the partition table?"), 1) or return;
+	}
+    }
+    #- skip that fstab/reboot steps
+    if (!$::isInstall && 0) { 
+	my $new = fs::fstab_to_string($all_hds);
+	if ($new ne $all_hds->{current_fstab} && $in->ask_yesorno('', N("Do you want to save /etc/fstab modifications"), 1)) {
+	    $all_hds->{current_fstab} = $new;
+	    fs::write_fstab($all_hds);
+	}
+	update_bootloader_for_renumbered_partitions($in, $all_hds);
+
+	if (any { $_->{rebootNeeded} } @{$all_hds->{hds}}) {
+	    $in->ask_warn('', N("You need to reboot for the partition table modifications to take place"));
+	    tell_wm_and_reboot();
+	}
+    }
+    if (my $part = find { $_->{mntpoint} && !maybeFormatted($_) } fs::get::fstab($all_hds)) {
+	$in->ask_okcancel('', N("You should format partition %s.
+Otherwise no entry for mount point %s will be written in fstab.
+Quit anyway?", $part->{device}, $part->{mntpoint})) or return if $::isStandalone&& 0; #- no, please
+    }
+    1;
+  }
+}
