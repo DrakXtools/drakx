@@ -64,21 +64,26 @@ sub create_user {
 	    } else {
 		run_program::rooted($::prefix, 'groupadd', '-g', $gid, $u->{name});
 	    }
+	} elsif ($u->{rename_from}) {
+	    run_program::rooted($::prefix, 'groupadd', $u->{name}) and $gid = int getgrnam($u->{name});
 	}
+
 	require authentication;
 	run_program::raw({ root => $::prefix, sensitive_arguments => 1 },
-			    'adduser', 
+			    ($u->{rename_from} ? 'usermod' : 'adduser'), 
 			    '-p', authentication::user_crypted_passwd($u, $isMD5),
 			    if_($uid, '-u', $uid), if_($gid, '-g', $gid), 
 			    if_($u->{realname}, '-c', $u->{realname}),
-			    if_($u->{home}, '-d', $u->{home}),
+			    if_($u->{home}, '-d', $u->{home}, if_($u->{rename_from} ,'-m')),
 			    if_($u->{shell}, '-s', $u->{shell}), 
-			    $u->{name});
+			    ($u->{rename_from}
+			     ? ('-l', $u->{name}, , $u->{rename_from})
+			     : $u->{name}));
     }
 
     my (undef, undef, $uid, $gid, undef, undef, undef, $home) = getpwnam($u->{name});
 
-    if (@existing && $::isInstall && ($uid != $existing[4] || $gid != $existing[5])) {
+    if (@existing && $::isInstall && ($uid != $existing[4] || $gid != $existing[5]) || $u->{rename_from}) {
 	log::l("chown'ing $home from $existing[4].$existing[5] to $uid.$gid");
 	require commands;
 	eval { commands::chown_("-r", "$uid.$gid", "$::prefix$home") };

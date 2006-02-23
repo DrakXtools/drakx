@@ -75,6 +75,13 @@ sub ask_authentication() {
 sub ask_users() {
     my $users = []; 
     any::ask_users($in, $users, $security, []);
+    my $old_user = $conf{USER_RENAME_FROM};
+    if (@$users && $old_user) {
+      $users->[0]{rename_from} = $old_user;
+      $users->[0]{home} ||= '/home/' . $users->[0]{name};
+      my $autologin = any::get_autologin();
+      $autologin->{autologin} eq $old_user and any::set_autologin($users->[0]{name}, $autologin->{desktop});
+    }
     any::add_users($users, $authentication);
 }
 
