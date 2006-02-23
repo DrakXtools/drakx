@@ -73,6 +73,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %changelog
 * Thu Feb 23 2006 Olivier Blin <oblin@mandriva.com> 0.1-2mdk
+- make partition tools not fail finding fs tools (#21260)
 - update po files
 
 * Fri Dec 16 2005 Olivier Blin <oblin@mandriva.com> 0.1-1mdk
