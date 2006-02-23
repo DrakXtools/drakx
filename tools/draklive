@@ -566,6 +566,7 @@ sub prepare_bootloader {
     my $theme = bootsplash::themes_read_sysconfig([ bootsplash::get_framebuffer_resolution() ]->[0]);
     my $msg = get_system_root($live) . "/usr/share/bootsplash/themes/$theme->{name}/lilo/syslinux";
     if (-f $msg) {
+        print "using $msg as syslinux splash image\n";
         cp_f($msg, get_workdir($live) . $live->{prefix}{boot} . '/live.msg');
     } else {
         warn "unable to find syslinux splash ($msg)";
