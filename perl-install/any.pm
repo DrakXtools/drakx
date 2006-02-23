@@ -74,7 +74,7 @@ sub create_user {
 			    '-p', authentication::user_crypted_passwd($u, $isMD5),
 			    if_($uid, '-u', $uid), if_($gid, '-g', $gid), 
 			    if_($u->{realname}, '-c', $u->{realname}),
-			    if_($u->{home}, '-d', $u->{home}, if_($u->{rename_from} ,'-m')),
+			    if_($u->{home}, '-d', $u->{home}, if_($u->{rename_from}, '-m')),
 			    if_($u->{shell}, '-s', $u->{shell}), 
 			    ($u->{rename_from}
 			     ? ('-l', $u->{name}, , $u->{rename_from})
