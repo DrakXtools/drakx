@@ -258,12 +258,10 @@ sub formatMountPartitions {
         fs::format::formatMount_all($o->{all_hds}, $o->{fstab}, $wait_message);
     } sub {
         $@ =~ /fsck failed on (\S+)/ or return;
-        $o->ask_yesorno('', N("Failed to check filesystem %s. Do you want to repair the errors?
- (beware, you can lose data)", $1), 1);
+        $o->ask_yesorno('', N("Failed to check filesystem %s. Do you want to repair the errors? (beware, you can lose data)", $1), 1);
     };
     undef $w; #- help perl (otherwise wait_message stays forever in newt)
-    die N("Not enough swap space to fulfill installation, please add some") if availableMemory(
-) < 40 * 1024;
+    die N("Not enough swap space to fulfill installation, please add some") if availableMemory() < 40 * 1024;
 }
 
 #- install_any::guess_mount_point
@@ -283,8 +281,7 @@ sub guess_mount_point {
     my $d = $handle->{dir};
     my $mnt = find { -e "$d/$l{$_}" } keys %l;
     $mnt ||= (stat("$d/.bashrc"))[4] ? '/root' : '/home/user' . ++$$user if -e "$d/.bashrc";
-    $mnt ||= (any { -d $_ && (stat($_))[4] >= 500 && -e "$_/.bashrc" } glob_($d)) ? '/home' : '
-';
+    $mnt ||= (any { -d $_ && (stat($_))[4] >= 500 && -e "$_/.bashrc" } glob_($d)) ? '/home' : '';
     ($mnt, $handle);
 }
 
