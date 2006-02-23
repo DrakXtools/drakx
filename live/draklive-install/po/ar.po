@@ -182,7 +182,7 @@ msgstr "لا يوجد تجزيء لاستخدامه"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "استخدم تجزيء ويندوز كـloopback"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -206,7 +206,7 @@ msgstr "لا يوجد تجزيء FAT لاستخدامه كـloopback )أو لا 
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "استخدام المساحة الفارغة على تجزيء ويندوز"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -223,7 +223,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "جاري حساب مساحة تجزيء ويندوز"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -235,6 +235,8 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
+"تجزيء ويندوز الخاصّ بك كثير التجزّئات. رجاء أعد تشغيل جهازك إلى ويندوز، شغّل "
+"أداة ``defrag''، ثمّ أعد بدْء تثبيت ماندريبا لينكس."
 
 #: ../install_interactive.pm:166
 msgid ""
@@ -249,10 +251,21 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"تحذير!\n"
+"\n"
+"DrakX سيقوم الآن بتغيير حجم تجزيء ويندوز. كن حذراً:\n"
+"هذه العملية خطرة. فإذا لم تكن فعلت ذلك،\n"
+"يجب عليك أولاً الخروج من التثبيت، ثم تشغيل \"scandisk c:\"\n"
+" من\n"
+"سطر الأوامر في ويندوز (احذر، تشغيل البرنامج الرّسومي\n"
+"\"scandisk\" غير كافي، تأكّد من استخدام \"chkdsk\" في\n"
+"سطر الأوامر!)، اختياريّاً شغّل defrag، ثمّ أعد بدء\n"
+"التثبيت. يجب عليك كذلك عمل نسخة احتياطية من بياناتك.\n"
+"عندما تكون متأكداً، اضغط موافق."
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "ما حجم المساحة التي تريد إبقائها لويندوز على"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -261,7 +274,7 @@ msgstr "التجزيء %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "تغيير حجم تجزيء ويندوز"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -273,6 +286,8 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"للتأكد من صحة البيانات بعد إعادة تحجيم التجزيئات، \n"
+"سيتم الدقيق على نظام الملفات عند التشغيل القادم لويندوز(TM)"
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
@@ -285,7 +300,7 @@ msgstr "مسح كل القرص"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "حذف ويندوز(TM)"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

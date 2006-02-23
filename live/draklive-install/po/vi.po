@@ -178,7 +178,7 @@ msgstr "Không có phân vùng hiện thời để dùng"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "Dùng phân vùng Windows để loopback"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -203,7 +203,7 @@ msgstr ""
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "Dùng phần trống của phân vùng Windows"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -220,7 +220,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "Đang tính toán kích thước của phân vùng Windows"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -232,6 +232,9 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
+"Phân vùng Windows bị phân mảnh quá nhiều. Hãy khởi động lại máy\n"
+"vào Windows, chạy ``defrag'' trước, rồi sau đó mới bắt đầu cài đặt\n"
+"Mandriva Linux."
 
 #: ../install_interactive.pm:166
 msgid ""
@@ -246,10 +249,21 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"CẢNH BÁO!\n"
+"\n"
+"DrakX sẽ chỉnh lại kích thước phân vùng Windows.\n"
+"Hãy thận trọng: quá trình này nguy hiểm. Nếu vẫn bạn\n"
+"chưa hoàn thành, trước hết hãy thoát ra khỏi quá trình\n"
+"cài đặt, chạy lệnh \"chkdsk c:\" từ Command Prompt trong\n"
+"Windows (nên nhớ là chạy lệnh \"scandisk\" chưa đủ mà phải\n"
+"chạy \"chkdsk\" từ Command Prompt), rồi có thể chạy defrag\n"
+"hoặc không, sau đó bắt đầu việc cài đặt.\n"
+"Bạn cũng nên sao lưu dữ liệu.\n"
+"Nếu đã chắc chắn, nhấn OK."
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "Bạn muốn giữ kích thước nào cho Windows"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -258,7 +272,7 @@ msgstr "phân vùng %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "Đang lập lại kích thước phân vùng Windows"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -270,6 +284,9 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"Để bảo đảm tính toàn vẹn dữ liệu sau khi đặt lại kích\n"
+"thước (các) phân vùng, việc kiểm tra hệ thống tập tin sẽ được chạy khi khởi "
+"động vào Windows(TM)"
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
@@ -284,7 +301,7 @@ msgstr "Xoá toàn bộ đĩa"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "Xoá Windows(TM)"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

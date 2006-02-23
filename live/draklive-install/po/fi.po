@@ -183,7 +183,7 @@ msgstr "Ei ole olemassa olevaa osiota käytettäväksi"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "Käytä Windows-osiota loopback-tiedostona"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -209,7 +209,7 @@ msgstr ""
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "Käytä tyhjää tilaa Windows-osiolla"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -226,7 +226,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "Lasken Windows-osion kokoa"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -238,6 +238,9 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
+"Windows-osiosi on liian pirstoutunut, käynnistä koneesi uudelleen, mene "
+"Windowsiin ja aja \"Levyn eheytys\" ensin, ja aloita Mandriva Linuxin "
+"asennus uudestaan sen jälkeen."
 
 #: ../install_interactive.pm:166
 msgid ""
@@ -252,10 +255,21 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"VAROITUS!\n"
+"\n"
+"DrakX aikoo nyt muuttaa Windows-osiosi kokoa. Ole varovainen:\n"
+"tämä toimenpide on vaarallinen. Jos et ole vielä tarkistanut \n"
+"Windows-osioitasi, sinun tulisi poistua asennuksesta, ajaa\n"
+"kiintolevyjen tarkistus \"chkdsk c:\" Windowsissa komentokehotteessa\n"
+"(huomaa että graafisen \"scandisk\" ohjelman käyttö ei riitä), sekä\n"
+"mahdollisesti myös eheyttää levyt käyttäen defrag. Sen jälkeen voit \n"
+"aloittaa asennuksen uudelleen.Samalla suosittelemme ottamaan \n"
+"varmuuskopiot tärkeistä tiedoista.\n"
+"Kun olet varma, paina OK."
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "Kuinka paljon tilaa haluat säilyttää Windowsille"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -264,7 +278,7 @@ msgstr "osio %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "Muutan Windows-osion kokoa"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -276,6 +290,9 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"Tietojen yhtenäisyyden varmistamiseksi osio(ide)n koon\n"
+"muuttamisen jälkeen suoritetaan tiedostojärjestelmän\n"
+"tarkistus seuraavan kerran kun käynnistät Windowsin(TM)."
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
@@ -290,7 +307,7 @@ msgstr "Tyhjennä koko levy"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "Poista Windows(TM)"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

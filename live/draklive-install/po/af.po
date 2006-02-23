@@ -182,7 +182,7 @@ msgstr "Daar is geen bestaande partisies om te gebruik nie"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "Gebruik vir die Windows-partisie vir teruglus"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -208,7 +208,7 @@ msgstr ""
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "Gebruik die beskikbare spasie op die Windows-partisie"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -225,7 +225,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "Bereken die grootte van die Windowspartisie"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -236,7 +236,7 @@ msgid ""
 "Your Windows partition is too fragmented. Please reboot your computer under "
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
-msgstr ""
+msgstr "U Windows-partisie is te gefragmenteer. Loop eers 'defrag' asb."
 
 #: ../install_interactive.pm:166
 msgid ""
@@ -251,10 +251,19 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"WAARSKUWING\n"
+"\n"
+"DrakX gaan nou u Windows-partisie vestel. WEES VERSIGTIG:\n"
+"Hierdie aksie kan gevaarlik wees. Indien nog nie, moet u tog\n"
+"\"chkdsk c:\" loop vanaf die instruksielyn in Windows. (let daarop\n"
+"die grafiese \"scandisk\" is nie voldoende nie - GEBRUIK \"chkdsk\"!)\n"
+"U kan ook gerus \"defrag\" daarna loop, en u data rugsteun\n"
+"Begin dan weer hierdie installasie.\n"
+"Andersins, klik op OK."
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "Watter grootte wil u vir Windows behou?"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -263,7 +272,7 @@ msgstr "partisie %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "Windowslêerstelselgrense word bereken"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -275,6 +284,9 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"Om Data-integriteit te verseker nadat u die partisie(s)\n"
+"verklien het,sal daar toetste op u lêerstelsel(s) gedoen word,\n"
+"volgende keer as Windows(TM) selflaai"
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
@@ -287,7 +299,7 @@ msgstr "Wis hele skyf"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "Verwyder Windows(TM)"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

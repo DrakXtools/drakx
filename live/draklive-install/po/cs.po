@@ -182,7 +182,7 @@ msgstr "Není zde žádný existující oddíl k použití"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "Použít Windows oddíl jako loopback"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -208,7 +208,7 @@ msgstr ""
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "Použít volné místo na Windows oddílu"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -225,7 +225,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "Počítám volné místo na Windows oddílu"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -237,6 +237,8 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
+"Váš diskový oddíl s Windows je příliš fragmentován. Restartujte počítač do "
+"systému Windows, použijte program 'defrag' a potom spusťte opět instalaci."
 
 #: ../install_interactive.pm:166
 msgid ""
@@ -251,10 +253,21 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"VAROVÁNÍ!\n"
+"\n"
+"DrakX nyní musí zmenšit oddíl s Windows. Buďte opatrní: tato operace je\n"
+"nebezpečná. Pokud jste tak již neučinili, měli byste nejprve ukončit "
+"instalaci,\n"
+"spustit \"chkdsk c:\" z příkazové řádky (spuštění programu \"scandisk\" "
+"nestačí, použijte příkaz \"chkdsk\"!), popřípadě i defrag a potom instalaci "
+"spustit znovu.\n"
+"Také byste si měli data zálohovat. Až si budete jistí, že chcete "
+"pokračovat,\n"
+"stiskněte Ok."
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "Jakou velikost oddílu chcete nechat pro Windows na"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -263,7 +276,7 @@ msgstr "diskovém oddílu %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "Počítám hranice souborového systému s Windows"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -275,6 +288,8 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"Pro zachování integrity po provedené změně velikosti oddílu(ů) bude při\n"
+"dalším spuštění systému Windows provedena kontrola souborového systému."
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
@@ -289,7 +304,7 @@ msgstr "Smazat celý disk"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "Odstranit Windows(TM)"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

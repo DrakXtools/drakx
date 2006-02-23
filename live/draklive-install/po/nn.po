@@ -178,7 +178,7 @@ msgstr "Det finst ingen gammal partisjon å bruka"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "Bruk Windows-partisjonen til filmontering"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -204,7 +204,7 @@ msgstr ""
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "Bruk ledig plass på Windows-partisjon"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -221,7 +221,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "Reknar ut storleik på Windows-partisjon"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -233,6 +233,8 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
+"Windows-partisjonen for fragmentert. Start maskina på nytt under Windows, og "
+"køyr defragmenteringsverktøyet. Prøv så å installera Mandriva Linux på nytt."
 
 #: ../install_interactive.pm:166
 msgid ""
@@ -247,10 +249,20 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"ÅTVARING!\n"
+"\n"
+"Du er no i ferd med å endra storleiken på Windows-partisjonen.\n"
+"Dette er ein farleg operasjon. Om du ikkje allereie har gjort det, bør\n"
+"du avslutta installasjonen, køyra «chkdsk c:» frå kommandolinja i\n"
+"Windows (det grafiske programmet «scandisk» er ikkje nok), etterfølgt\n"
+"av defragmentering, og starta installasjonen på nytt. Du bør òg ta\n"
+"ein reservekopi av alle data.\n"
+"\n"
+"Trykk «OK» når du er klar."
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "Kva storleik vil du behalda for Windows på"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -259,7 +271,7 @@ msgstr "partisjon %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "Endrar storleik på Windows-partisjon"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -271,6 +283,8 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"For å sikra dataintegritet på partisjonen/-ane\n"
+"vert det køyrt filsystemkontroll neste gongar du startar Windows™"
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
@@ -284,7 +298,7 @@ msgstr "Slett og bruk heile disken"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "Fjern Windows™"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

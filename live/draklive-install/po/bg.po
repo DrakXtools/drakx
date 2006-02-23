@@ -183,7 +183,7 @@ msgstr "Няма дял, който мога да използвам"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "Използвай за Windows дялът за loopback"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -209,7 +209,7 @@ msgstr ""
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "Използвай свободното място на Windows дяла"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -226,7 +226,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "Изчислява свободното място на Windows дял"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -238,6 +238,7 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
+"Вашият Windows дял е много фрагментиран, моля първо стартирайте ''defrag''"
 
 #: ../install_interactive.pm:166
 msgid ""
@@ -252,10 +253,18 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"ВНИМАНИЕ!\n"
+"\n"
+"DrakX трябва да прераздели Вашия Windows дял. Бъдете внимателни: тази "
+"операция е\n"
+"опасна. Ако още не сте го направили, трябва първо да пуснете scandisk (и\n"
+"евентуално да използвате defrag) под Windows върху този дял, тогава \n"
+"повторете инсталациаята. Би било добре да направите архив на данните си.\n"
+"Когато сте сигурни, натиснете ОК."
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "Колко искате да оставите за windows?"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -264,7 +273,7 @@ msgstr "дял %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "Изчислявам границите на Windows файловата система"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -288,7 +297,7 @@ msgstr "Изтрий целия диск"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "Премахни Windows(TM)"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

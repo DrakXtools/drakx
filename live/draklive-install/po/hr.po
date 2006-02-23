@@ -180,7 +180,7 @@ msgstr "Nema postojećih particija koje bih mogao upotrijebiti"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "Koristi Windows particiju za loopback"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -207,7 +207,7 @@ msgstr ""
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "Iskoristi slobodan prostor na Windows particiji"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -223,8 +223,9 @@ msgstr ""
 "slijedeća greška se dogodila: %s"
 
 #: ../install_interactive.pm:156
+#, fuzzy
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "Iskoristi slobodan prostor na Windows particiji"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -236,8 +237,10 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
+"Vaša Windows particija je prefragmentirana, molim pokrenite ``defrag'' prvo."
 
 #: ../install_interactive.pm:166
+#, fuzzy
 msgid ""
 "WARNING!\n"
 "\n"
@@ -250,10 +253,19 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"UPOZORENJE!\n"
+"\n"
+"DrakX sada mora promijeniti veličinu vaše Windows particije\n"
+"Budite vrlo oprezni budući da je ova operacija\n"
+"izuzetno opasna. Ukoliko još niste mijenjali veličinu particije molim\n"
+"izađite prvo iz instalacije, pokrenite scandisk pod Windowsima (opcionalno "
+"pokrenite defrag), tada ponovno pokrenite instalaciju.\n"
+"Također preporučljivo je da sačuvate vaše podatke (napravite backup).\n"
+"Kada ste sigurni da želite nastaviti, pritisnite U redu."
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "Koliku veličinu želite zadržati za windowse"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -262,7 +274,7 @@ msgstr "particija %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "Izračunavam granice Windows datotečnog sustava"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -289,7 +301,7 @@ msgstr "Obriši cijeli disk"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "Ukloni Windowse(TM)"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

@@ -177,7 +177,7 @@ msgstr "Kasutatavat partitsiooni ei leitud"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "Kasuta Windowsi partitsiooni loopbackina"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -203,7 +203,7 @@ msgstr ""
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "Kasuta vaba ruumi Windowsi partitsioonil"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -220,7 +220,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "Vaba ruumi arvutamine Windowsi partitsioonil"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -232,6 +232,9 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
+"Teie Windowsi partitsioon on fragmenteerunud. Palun tehke arvutile uus "
+"alglaadimine, käivitage Windows ja seejärel utiliit \"defrag\" ning tulge "
+"siis Mandriva Linuxi paigaldamise juurde tagasi."
 
 #: ../install_interactive.pm:166
 msgid ""
@@ -246,10 +249,22 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"HOIATUS!\n"
+"\n"
+"DrakX hakkab Teie Windowsi partitsiooni suurust muutma.\n"
+"Olge ettevaatlik: see operatsioon võib olla ohtlik Teie failidele.\n"
+"Palun käivitage enne seda, kui asute paigaldamise juurde,\n"
+"Windowsis käsurealt \"chkdsk c:\" (arvestage, et graafilisest\n"
+"rakendusest \"scandisk\" ei piisa, seepärast kasutage\n"
+"kindlasti käsurealt käivitatavat \"chkdsk\"!).\n"
+"Lisaks sellele defragmenteerige ketas ja alles siis asuge\n"
+"taas paigaldamise kallale. Kasulik oleks juba Windowsis\n"
+"ka oma andmetest tagavarakoopia teha.\n"
+"Kui olete oma otsuses kindel, klõpsake nupule \"Olgu\"."
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "Kui palju ruumi jätate Windowsi jaoks?"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -258,7 +273,7 @@ msgstr "partitsioon %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "Arvutan Windowsi failisüsteemi piire"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -270,6 +285,8 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"Andmete terviklikkuse tagamiseks pärast partitsiooni(de) suuruse muutmist \n"
+"kontrollitakse järgmisel Windows(TM) alglaadimisel failisüsteemi"
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
@@ -282,7 +299,7 @@ msgstr "Tühjenda kogu ketas"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "Eemalda Windows(TM)"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

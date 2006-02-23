@@ -182,7 +182,7 @@ msgstr "Der er ingen eksisterende partition der kan bruges"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "Brug Windows partitionen til Loopback"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -208,7 +208,7 @@ msgstr ""
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "Brug den frie plads på Windows-partitionen"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -225,7 +225,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "Beregner størrelsen på Windows-partitionen"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -236,7 +236,7 @@ msgid ""
 "Your Windows partition is too fragmented. Please reboot your computer under "
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
-msgstr ""
+msgstr "Din Windows partition er for fragmenteret, kør 'defrag' først"
 
 #: ../install_interactive.pm:166
 msgid ""
@@ -251,10 +251,19 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"ADVARSEL!\n"
+"\n"
+"DrakX vil nu ændre størrelsen på din Windows-partition. Vær forsigtig: denne "
+"operation er farlig. Hvis du ikke allerede har gjort det, bør du først gå ud "
+"af denne installation,  køre 'chkdsk c:' fra en kommandolinje under Windows "
+"(bemærk, det er ikke nok at køre det grafiske program 'scandisk', vær sikker "
+"på at køre 'chkdsk' i en kommandolinje!) og eventuelt defrag) og så "
+"genstarte installationen. Du bør også tage en sikkerhedskopi af dine data. "
+"Tryk på O.k., hvis du er helt sikker."
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "Hvilken størrelse ønsker du at at beholde Windows på?"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -263,7 +272,7 @@ msgstr "partition %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "Udregner Windows-filsystemets grænser"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -275,6 +284,8 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"For at sikre dataintegritet efter ændring af størrelse på partitioner \n"
+"vil filsystemtjek blive kørt ved din næste opstart af Windows(TM)"
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
@@ -288,7 +299,7 @@ msgstr "Slet hele disken og brug den"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "Fjern Windows(TM)"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

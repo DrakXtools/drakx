@@ -181,7 +181,7 @@ msgstr "ไม่มีพาร์ติชั่นที่มีอยู่
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "ใช้ windows partion สำหรับการ Loopback"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -206,7 +206,7 @@ msgstr "ไม่มี พาร์ติชั่น FAT เพื่อทำ
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "ใช้พื้นที่ที่ว่างใน Windows partition"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -222,8 +222,9 @@ msgstr ""
 "มีข้อผิดพลาดนี้เกิดขึ้น: %s"
 
 #: ../install_interactive.pm:156
+#, fuzzy
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "ใช้พื้นที่ที่ว่างใน Windows partition"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -234,9 +235,10 @@ msgid ""
 "Your Windows partition is too fragmented. Please reboot your computer under "
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
-msgstr ""
+msgstr "Windows partition ของคุณกระจัดกระจายมากเกินไป กรุณา Defrag ก่อน"
 
 #: ../install_interactive.pm:166
+#, fuzzy
 msgid ""
 "WARNING!\n"
 "\n"
@@ -249,10 +251,16 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"ระวัง!\n"
+"DrakX กำลังจะลดขนาดพาร์ติชั่นของ windows การทำงานนี้อันตลายมาก\n"
+"ถ้าคุณยังไม่เคยทำมาก่อนคุณควรออกจากการทำงานนี้และรัน Scandisk บน\n"
+"Windows (และ defrag) แล้วค่อยเริ่มทำงานนี้ใหม่  และคุณสมควรที่จะทำการ\n"
+"Backup ข้อมูลสำคัญขึ้นมาก่อน\n"
+"เมื่อคุณแน่ใจแล้ว กด OK"
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "คุณต้องการเก็บ Windows ไว้ในขนาดใหน"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -261,7 +269,7 @@ msgstr "พาร์ติชั่น %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "คำนวณขอบเขตของระบบไฟล์ Windows"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -286,7 +294,7 @@ msgstr "ลบ disk ทั้งหมด"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "ลบ Windows(TM)"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

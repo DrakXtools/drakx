@@ -192,7 +192,7 @@ msgstr "Kullanılabilecek bir bölüm bulunamadı"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "Loopback için Windows bölümü kullanılsın"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -217,7 +217,7 @@ msgstr ""
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "Windows'un bulunduğu bölümdeki boş alan kullanılsın"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -234,7 +234,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "Windows bölümünün boyutu hesaplanıyor"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -246,6 +246,8 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
+"Windows bölümünüz çok dağınık, lütfen önce \"defrag\" ile diskinizdeki "
+"dosyaları bir araya getirin"
 
 #: ../install_interactive.pm:166
 msgid ""
@@ -260,10 +262,20 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"UYARI!\n"
+"\n"
+"DrakX Windows bölümünüzü yeniden boyutlandıracak. Dikkatli olun: \n"
+"bu tehlikeli bir iştir. Hazır olduğunuza emin değilseniz, önce\n"
+"windows komut satırından \"chkdsk c:\" komutunu veriniz ( \n"
+"windows altındaki grafiksel scandiske güvenmeyin ve bunu komut \n"
+"satırından yazıp yapınız), ardından disk birleştirme operasyonunu\n"
+"yapınız(defrag). Tüm bunların ardından kuruluma yeniden başlayınız.\n"
+"Bunların dışında verilerinizi yedeklemiş olmanız tavsiye edilir.\n"
+"Devam etmek için hazır olduğunuzda Tamam tuşuna basınız."
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "Windows için"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -272,7 +284,7 @@ msgstr "%s bölümünde ne kadar yer bırakacaksınız?"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "Windows dosya sistemi sınırları hesaplanıyor"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -296,7 +308,7 @@ msgstr "Tüm disk silinsin"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "MS WindowsTM silinsin"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

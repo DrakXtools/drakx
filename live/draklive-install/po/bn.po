@@ -178,7 +178,7 @@ msgstr "ব্যবহারের জন্য এখানে উপস্থ
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "লুপ ব্যাকের জন্য উইন্ডোজের পার্টিশন ব্যবহার করো"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -202,7 +202,7 @@ msgstr "লুপব্যাকে ব্যবহারের জন্য ক
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "উইন্ডোজ পার্টিশনের খালি জায়গা ব্যবহার করে"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -219,7 +219,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "আপনার উইন্ডোজের পার্টিশনের সাইজ হিসেব করা হচ্ছে"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -231,6 +231,8 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
+"আপনার উইন্ডোজের পার্টিশনটি প্রচন্ড অসম। অনুগ্রহ করে আপনার কম্পিউটারটি উইন্ডোজে রি-বুট "
+"করে, ``defrag'' ইউটিলিটি চালান, পরে  রি-ষ্টার্ট করে আবার মেনড্রক ইনস্টলেশন চালান।"
 
 #: ../install_interactive.pm:166
 msgid ""
@@ -245,10 +247,19 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"সতর্ক বানী!\n"
+"\n"
+"DrakX এখন আপনার উইন্ডোজের পার্টিশন আকার পরিবর্তন করবে। খুবই সাবধান: এই\n"
+"কার্যক্রমটি বিপদজ্জনক। আপনি যদি এরকম আগে করে না থাকেন, তাহলে আপনাকে\n"
+"ইনস্টলেশন থেকে বের হয়ে, উইন্ডোজের কমান্ডপ্রমপ্ট থেকে \"chkdsk c:\" চালাতে হবে\n"
+"(লক্ষ্য রাখবেন, \"scandisk\"-এর মত গ্রাফিক্যাল প্রোগ্রামগুলি যথেষ্ট নয়, আপনাকে\n"
+"অবশ্যই কমান্ডপ্রমপ্ট থেকে \"chkdsk\" চালাতে হবে), ঐচ্ছিকভাবে defrag চালাতে\n"
+"পরেন, পরে ইনস্টলেশন পুনরায় শুরু করবেন। আপনকে আপনার ডাটা ব্যাকআপ করা\n"
+"উচিত্‍‌। নিশ্চিত্‍‌ হলে ঠিক আছে চাপুন।"
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "আপনি কোথায় উইন্ডোজের জন্য কোন সাইজটি রাখতে চান"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -257,7 +268,7 @@ msgstr "পার্টিশনসমূহ %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "উইন্ডোজ পার্টিশন আকার পরিবর্তন করা হচ্ছে"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -269,6 +280,8 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"পার্টিশনের পুনরাকৃতির পর ডাটার সম্পূর্ণতা নিশ্চিত করার জন্য, \n"
+"উইন্ডোজে(TM) আপনার পরবর্তী বুটে ফাইলসিস্টেম পরীক্ষা চলবে"
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
@@ -282,7 +295,7 @@ msgstr "সম্পূর্ণ ডিস্ক মুছে ফেলো"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "উইন্ডোজ(TM) মুছে ফেলো"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

@@ -180,7 +180,7 @@ msgstr "Nincs olyan már létező partíció, amit használhatnék"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "A loopback-hez a windowsos partíció használata"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -204,7 +204,7 @@ msgstr "Nincs loopback-ként használható FAT partíció, vagy nincs elég hely
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "A windowsos partíción levő szabad hely felhasználása"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -221,7 +221,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "A windowsos partíció méretének meghatározása"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -233,6 +233,9 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
+"A windowsos partíció túlzottan töredezett. Indítsa újra a gépet Windowsszal, "
+"majd futtassa a \"defrag\" programot. Ennek végeztével indítsa el újra a "
+"Mandriva Linux telepítését."
 
 #: ../install_interactive.pm:166
 msgid ""
@@ -247,10 +250,21 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"FIGYELEM!\n"
+"\n"
+"A telepítő most átméretezi a windowsos partíciót. Ez a művelet veszélyes.\n"
+"Ha még nem tette meg, adjon ki egy \"chkdsk c:\" parancsot egy windowsos\n"
+"parancssorból (a \"scandisk\" nevű grafikus program futtatása nem "
+"elegendő).\n"
+"Esetleg futtassa le a \"defrag\" programot is Windows alatt. Ezeknek a\n"
+"végrehajtásához természetesen ki kell lépnie a telepítőből.\n"
+"Lehetőleg mentse le az adatokat, mielőtt újra elindítaná a telepítőt.\n"
+"Ha biztos abban, hogy folytatni szeretné a telepítést, nyomja meg az \"OK\"-"
+"t."
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "Mekkora helyet szeretne fenntartani a Windowsnak itt:"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -259,7 +273,7 @@ msgstr "%s partíció"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "Windowsos partíció átméretezése"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -271,6 +285,9 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"Az adatok épségének biztosítása érdekében a legközelebbi Windows-"
+"indításnál \n"
+"fájlrendszer-ellenőrzés lesz végezve"
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
@@ -283,7 +300,7 @@ msgstr "A teljes lemez törlése"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "A Windows(TM) eltávolítása"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

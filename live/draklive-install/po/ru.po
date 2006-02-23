@@ -183,7 +183,7 @@ msgstr "Нет существующих для использования раз
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "Использовать раздел Windows для loopback"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -209,7 +209,7 @@ msgstr ""
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "Использовать свободное место на разделе Windows"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -226,7 +226,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "Вычисляется размер раздела Windows"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -238,6 +238,9 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
+"Ваш раздел Windows слишком фрагментирован. Пожалуйста, перезагрузите свой "
+"компьютер под Windows, запустите утилиту ``defrag'', а затем повторно "
+"запустите установку Mandriva Linux."
 
 #: ../install_interactive.pm:166
 msgid ""
@@ -252,10 +255,21 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"ПРЕДУПРЕЖДЕНИЕ!\n"
+"\n"
+"Сейчас DrakX изменит размер вашего раздела Windows. Будьте\n"
+"осторожны: эта операция опасна. Если вы еще этого не сделали,\n"
+"вам стоит выйти из инсталляции, запустить \"chkdsk c:\" в\n"
+"командной строке под Windows (имейте в виду, что запуска \n"
+"графической программы \"scandisk\" недостаточно, обязательно\n"
+"запустите \"chkdsk\" в командной строке), по желанию выполнить\n"
+"дефрагментацию (defrag), затем начать установку снова. \n"
+"Вы также должны сделать резервную копию данных.\n"
+"Если уверены, нажмите Ok."
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "Какой объем вы хотите оставить для Windows"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -264,7 +278,7 @@ msgstr "раздел %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "Изменяется размер раздела Windows"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -276,6 +290,9 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"Для гарантии целостности данных после изменения размера \n"
+"раздела(ов), проверка файловой системы будет запущена при\n"
+"следующей загрузке в Windows(TM)"
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
@@ -288,7 +305,7 @@ msgstr "Очистить весь диск"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "Удалить Windows(TM)"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

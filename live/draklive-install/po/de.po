@@ -192,7 +192,7 @@ msgstr "Es gibt keine existierende Partition, die ich verwenden kann."
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "Auf der Windows-Partition Loopbacks anlegen"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -219,7 +219,7 @@ msgstr ""
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "Den freien Platz der Windows-Partition verwenden"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -236,7 +236,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "Berechne die Größe der Windows-Partition"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -248,6 +248,8 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
+"Ihre Windows-Partition ist zu sehr fragmentiert.\n"
+"Starten Sie bitte erst „defrag“ unter Windows."
 
 #: ../install_interactive.pm:166
 msgid ""
@@ -262,10 +264,22 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"WARNUNG!\n"
+"\n"
+"DrakX wird nun die Größe Ihrer Windows-Partition verändern.\n"
+"Seien Sie vorsichtig: Diese Aktion ist gefährlich. Falls Sie es noch\n"
+"nicht getan haben, sollten Sie nun die Installation abbrechen, um\n"
+"„chkdsk c:“ von einem DOS Prompt unter Windows auf die\n"
+"Partition anzuwenden (Achtung:scandisk unter der grafischen\n"
+"Windows Oberfläche reicht nicht aus, bitte „chkdsk“ in einem DOS Prompt "
+"ausführen!)\n"
+"Defragmentieren. Anschließend können Sie die Installation erneut starten.\n"
+"Sie sollten natürlich generell Sicherheitskopien Ihrer Daten angelegt\n"
+"haben. Falls dies der Fall ist, können Sie mit OK fortfahren."
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "Wieviel Platz benötigen sie noch für Windows auf"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -274,7 +288,7 @@ msgstr "Partition %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "Größe der Windows-Partition wird geändert"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -286,6 +300,9 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"Um nach der Größenänderung der Partition(en) die Datenintegrität\n"
+"zu gewährleisten, wird Windows™ beim nächsten Hochfahren eine\n"
+"Dateisystemprüfung durchführen."
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
@@ -301,7 +318,7 @@ msgstr "Komplette Platte löschen"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "Windows™ löschen"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

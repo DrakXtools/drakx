@@ -177,7 +177,7 @@ msgstr "قسمت‌بندیی برای استفاده وجود ندارد"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "استفاده از قسمت‌بندی ویندوز برای loopback"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -203,7 +203,7 @@ msgstr ""
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "استفاده از فضای آزاد بر قسمت‌بندی ویندوز"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -220,7 +220,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "حساب کردن اندازه‌ی قسمت‌بندی ویندوز"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -232,6 +232,9 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
+"قسمت‌بندی ویندوز شما خیلی درهم ریخته است. لطفا رایانه‌ی خود را با ویندوز "
+"آغازگری مجدد کرده، برنامه‌ی نظم بخشی ``defrag'' را اجرا کرده و سپس نصبلینوکس "
+"ماندریبا را دوباره راه‌اندازی کنید."
 
 #: ../install_interactive.pm:166
 msgid ""
@@ -246,10 +249,20 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"هشدار!\n"
+"\n"
+"برنامه درایک‌ایکس اکنون قسمت‌بندی ویندوز شما را تغییر اندازه می‌دهد. دقت کنید:\n"
+"این عملیات خطرناکی است. اگر قبلًا این کار را نکرده‌اید، باید نخست از\n"
+"نصب خارج شده، برنامه‌ی \"chkdsk c:\" را از یک اعلان فرمان در\n"
+"ویندوز اجرا کرده (توجه داشته باشید که اجرای برنامه‌ی گرافیکی \"scandisk\"کافی "
+"نیست، مطمئن شوید که از \"chkdsk\" در یک اعلان فرمان استفاده می‌کنید), بد نیست "
+"که برنامه‌ی defrag را نیز اجرا کنید، سپس نصب را\n"
+"راه‌اندازی مجدد کنید. شما باید داده‌های خود را ذخیره پشتیبانی کنید.\n"
+"وقتی مطمئن شدید، تأیید را فشار دهید."
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "چه اندازه‌ای را می‌خواهید برای ویندوز نگهدارید"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -258,7 +271,7 @@ msgstr "قسمت‌بندی %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "تغییر اندازه‌ی قسمت‌بندی ویندوز"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -270,6 +283,8 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"برای اطمینان از صحت داده‌ها بعد از تغییراندازه‌ی قسمت‌بندی(ها)، \n"
+"در آغازگری بعدی بدرون ویندوز کنترل سیستم‌پرونده اجرا خواهد شد"
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
@@ -283,7 +298,7 @@ msgstr "تمام دیسک پاک شود"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "برداشتن Windows(TM)"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

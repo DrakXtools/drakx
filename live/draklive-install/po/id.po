@@ -186,7 +186,7 @@ msgstr "Tidak ada partisi yang bisa digunakan"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "Gunakan partisi Windows untuk loopback"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -210,7 +210,7 @@ msgstr "Tidak ada partisi FAT untuk loopback (atau tidak ada ruang tersisa)"
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "Gunakan ruang kosong pada partisi windows"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -227,7 +227,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "Menghitung ukuran partisi Windows"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -239,6 +239,8 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
+"Partisi Windows Anda terlalu terfragmen. Harap reboot komputer Anda pada "
+"Windows, jalankan utilitas ``defrag'', lalu ulangi installasi Mandriva Linux."
 
 #: ../install_interactive.pm:166
 msgid ""
@@ -253,10 +255,21 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"PERINGATAN!\n"
+"\n"
+"DrakX sekarang akan mengubah ukuran partisi Windows Anda.\n"
+"Hati-hati: proses ini amat berbahaya. Bila Anda belum pernah\n"
+"melakukannya, Anda harus keluar dari proses installasi ini,\n"
+"lalu reboot ke windows jalankan \"chkdsk c:\" dari Command\n"
+"Prompt (hati-hati, menjalankan program grafis \"scandisk\"\n"
+"tidaklah cukup, pastikan menggunakan \"chkdsk\" dari Command\n"
+"Prompt!), juga defrag, lalu ulangi installasi. Anda juga\n"
+"harus membackup data Anda.\n"
+"Jika yakin, tekan Ok."
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "Ukuran mana yang hendak Anda gunakan untuk Windows"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -265,7 +278,7 @@ msgstr "partisi %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "Mengubah ukuran partisi Windows"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -277,6 +290,8 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"Untuk memastikan integritas data setelah ukuran partisi berubah,\n"
+"pengujian sistem file akan dilakukan pada boot berikut dalam Windows(TM)"
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
@@ -289,7 +304,7 @@ msgstr "Hapus dan gunakan seluruh disk"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "Hapus Windows(TM)"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

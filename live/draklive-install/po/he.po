@@ -188,7 +188,7 @@ msgstr "אין מחיצה קיימת לשימוש"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "שימוש במחיצת חלונות ל-loopback"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -212,7 +212,7 @@ msgstr "אין מחיצת FAT לשימוש כ-loopback או אין מספיק מ
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "שימוש בשטח החופשי שעל מחיצת חלונות"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -229,7 +229,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "חישוב השטח החופשי על מחיצת חלונות"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -241,6 +241,9 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
+"מחיצת החלונות אינה מאוחה. עליך להפעיל מחדש את המחשב ולהיכנס לחלונות, ושם "
+"להפעיל את תוכנת איחוי המחיצות (defrag). לאחר מכן יש להפעיל מחדש את התקנת "
+"מנדריבה לינוקס."
 
 #: ../install_interactive.pm:166
 msgid ""
@@ -255,10 +258,17 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"אזהרה!\n"
+"\n"
+"התכנית DrakX תשנה עכשיו את גודל מחיצת חלונות. נא לשים לב\n"
+"שפעולה זאת מסוכנת. אם לא עשית כן, עליך לצאת מההתקנה, להריץ scandisk\n"
+"תחת חלונות (וכנראה גם defrag) ואז לאתחל את ההתקנה.\n"
+"עליך לדאוג גם לגיבויים של המידע שלך.\n"
+"אם ניתן להמשיך כעת, נא ללחוץ על \"אישור\"."
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "איזה גודל שטח ברצונך להשאיר לחלונות ב-"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -267,7 +277,7 @@ msgstr "מחיצת %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "שינוי גודל של מחיצת חלונות"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -279,6 +289,8 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"על מנת להבטיח את שלמות הנתונים אחרי שינוי גודל המחיצה(ות) \n"
+"תiפעל בדיקה של מערכת הקבצים באתחול הבא של חלונות"
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
@@ -291,7 +303,7 @@ msgstr "מחיקת כל המידע הקיים בכונן הקשיח"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "הסרת מערכת חלונות"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

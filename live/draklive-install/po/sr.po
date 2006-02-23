@@ -179,7 +179,7 @@ msgstr "Нема ни једне паритиције за рад"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "Користи Windows партицију за loopback"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -205,7 +205,7 @@ msgstr ""
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "Корисити слободан простор на Windows партицији"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -223,7 +223,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "Прорачунавам величину Windows партиције"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -235,8 +235,10 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
+"Ваша Windows партиција је превише фрагментирана, прво покрените ``defrag''"
 
 #: ../install_interactive.pm:166
+#, fuzzy
 msgid ""
 "WARNING!\n"
 "\n"
@@ -249,10 +251,17 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"УПОЗОРЕЊЕ!\n"
+"\n"
+"DrakX треба да измени величину Windows партиције. Будите пажљиви: ова\n"
+"операција је опасна. Уколико то до сада нисте радили, прво треба да изађете\n"
+"из инсталације,покренете под Windows-ом\n"
+"scandisk (евентуално и defrag), а онда поново покрените инсталацију.\n"
+"Ако сте сигурни, притисните ОК (У реду)."
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "Коју величину желите да задржите за прозоре"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -261,7 +270,7 @@ msgstr "партиција %s "
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "Прорачунавам границе Windows фајл-система"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -273,6 +282,9 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"Да би осигурали интегритет након промене величине партиције(а), \n"
+"провера фајл система ће бити покренута када се следећи пут улогујете у "
+"Windows(TM)"
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
@@ -287,7 +299,7 @@ msgstr "Избриши цели диск"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "Уклони Windows(TM)"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

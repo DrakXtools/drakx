@@ -185,7 +185,7 @@ msgstr "það eru engar núverandi disksneiðar til að nota"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "Nota Windows disksneiðina fyrir sýndardisk"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -211,7 +211,7 @@ msgstr ""
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "Nota laust pláss á Windows disksneiðinni"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -229,7 +229,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "Reikna stærð Windows disksneiðar"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -241,6 +241,9 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
+"Windows disk-sneiðin þín er of sundurslitin. Vinsamlega endurræstu tölvuna "
+"þín undir Windows, keyrðu ``defrag'' forritið, endurræstu síðan Mandriva "
+"Linux uppsetninguna."
 
 #: ../install_interactive.pm:166
 msgid ""
@@ -255,10 +258,21 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"AÐVÖRUN\n"
+"\n"
+"DrakX ætlar nú að breyta stærð Windows sneiðarinnar. Athugið:\n"
+"Þetta getur verið hættulegt. Ef þú ert ekki búin(n) að því, þá\n"
+"ættir þú fyrst að hætta við uppsetninguna, keyra \"chkdsk c:\"\n"
+"frá skipanalínunni (DOS)\n"
+"(Varúð: það er ekki nóg að keyra grafíska forritið \"scandisk\",\n"
+"verið viss um að nota \"chkdisk\" úr skipanalínunni!),\n"
+"Þið gætuð einnig keyrt defrag. Endurræsið síðan uppsetninguna.\n"
+"Þú ættir einnig að taka afrit af gögnunum þínum.\n"
+"Þegar þú ert viss, sláðu á \"Í lagi\" til að halda áfram."
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "Hvaða stærð viltu skilja eftir fyrir Windows á"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -267,7 +281,7 @@ msgstr "disksneið %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "Breyta stærð Windows skráakerfis"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -279,6 +293,8 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"Til að staðfesta að gögn séu í lagi eftir að disksneiðum hefur verið \n"
+"breytt verður að keyra diskaprófun þegar þú ræsir Windows(tm) næst"
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
@@ -290,7 +306,7 @@ msgstr "Eyða og nota allan diskinn"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "Fjarlægja Windows(TM)"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

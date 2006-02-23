@@ -186,7 +186,7 @@ msgstr "No hi ha cap partició que es pugui utilitzar"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "Utilitza la partició Windows per al loopback"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -212,7 +212,7 @@ msgstr ""
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "Utilitza l'espai lliure de la partició de Windows"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -229,7 +229,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "S'està calculant la mida de la partició de Windows"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -241,7 +241,11 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
+"La partició de Windows està massa fragmentada. Si us plau, reinicieu "
+"l'ordinador sota Windows i executeu l'eina \"defrag\". Llavors, torneu a "
+"començar la instal·lació del Mandriva Linux."
 
+#
 #: ../install_interactive.pm:166
 msgid ""
 "WARNING!\n"
@@ -255,10 +259,22 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"ATENCIÓ!\n"
+"\n"
+"Tot seguit, DrakX canviarà la mida de la vostra partició de Windows. Aneu\n"
+"amb compte: aquesta operació és perillosa. Si encara no ho heu fet, sortiu "
+"de\n"
+"la instal·lació, executeu \"chkdsk c:\" a la línia de comandes sota Windows\n"
+"(atenció el programa gràfic\"scandisk\" no és suficient, assegura't d'usar\n"
+"\"chkdsk\" en una línia de comandes), opcionalment executeu defrag, després\n"
+"torneu a començar la instal·lació. També haurieu de fer una còpia de "
+"seguretat\n"
+"de les vostres dades.\n"
+"Quan estigueu segur, premeu D'acord."
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "Quina mida voleu deixar per a la partició de Windows?"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -267,7 +283,7 @@ msgstr "partició %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "S'està redimensionant la partició de Windows"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -279,6 +295,10 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"Per assegurar la integritat de les dades després de canviar la mida de la o "
+"les particions,\n"
+"les comprovacions del sistema de fitxers es realitzaran el proper cop que "
+"arrenqueu en Windows(TM)"
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
@@ -292,7 +312,7 @@ msgstr "Esborra tot el disc"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "Elimina el Windows(TM)"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

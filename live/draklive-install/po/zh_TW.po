@@ -191,7 +191,7 @@ msgstr "沒有已經存在的分割區可供使用"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "使用 Windows 分割區作為 loopback"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -215,7 +215,7 @@ msgstr "沒有可用的 FAT 分割區能當成 loopback 使用 (或者是沒有�
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "使用 Windows 分割區所剩餘的可用空間"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -232,7 +232,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "計算 Windows 分割區大小"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -244,6 +244,8 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
+"您的 Windows 分割區太支離破碎。請先用 Windows 重新開機，執行  ``defrag'' 工具"
+"程式，然後重新開始安裝 Mandriva Linux 。"
 
 #: ../install_interactive.pm:166
 msgid ""
@@ -258,10 +260,18 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"警告！\n"
+"\n"
+"DrakX 現在將要重新調整您 Windows 分割區的大小。請注意：這個動作\n"
+"是很危險的。如果您不曾做過，您必須先離開安裝程式，在 Windows 命\n"
+"令提示字元下執行 \"chkdsk c:\" (請注意，執行圖形介面的程式 \n"
+"\"scandisk\" 並不夠，請確定是在命令提示下使用 \"chkdsk\" ！)，\n"
+"您還可以額外執行 defrag，然後重新開始安裝。您也應該備份您的資料\n"
+"。當您確定之後，請按下確定。"
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "您要保留多少空間給 Windows 使用"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -270,7 +280,7 @@ msgstr "分割區 %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "正在重新調整 Windows 分割區大小"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -282,6 +292,8 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"為確保重新調整分割區大小後的資料正確性，當您下次從 Windows(TM)\n"
+"開機時便會執行檔案系統檢查。"
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
@@ -294,7 +306,7 @@ msgstr "刪除所有磁碟內容"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "移除 Windows(TM)"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"

@@ -181,7 +181,7 @@ msgstr "कोई विद्यमान विभाजन उपयोगा
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
-msgstr ""
+msgstr "लूपबैक के लिए विण्डो विभाजन का उपयोग करें"
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
@@ -207,7 +207,7 @@ msgstr ""
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
-msgstr ""
+msgstr "विण्डो विभाजन पर उपलब्ध मुक्त स्थान का उपयोग करें"
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
@@ -224,7 +224,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "विण्डो विभाजन के आकार की गणना की जा रही है"
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
@@ -236,6 +236,8 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
+"आपका विण्डो विभाजन अति खंडित है । कृपया अपने कम्प्यूटर को विण्डो के अन्तर्गत पुनः आरम्भ "
+"करें, ``defrag'' कार्यक्रम को चलायें, और फ़िर मैनड्रिव लिनक्स संसाधन को पुनः आरम्भ करें ।"
 
 #: ../install_interactive.pm:166
 msgid ""
@@ -250,10 +252,20 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"चेतावनी!\n"
+"\n"
+"ड्रैकएक्स अब आपके विण्डो विभाजन को पुनःआकार देगा। सावधान रहें: \n"
+"यह कार्य खतरनाक है । यदि आप पहिले से ऐसा नहीं चुके है, तो आपको\n"
+"पहले संसाधन प्रक्रिया से बाहर निकलने की आवश्यकता है, फ़िर विण्डो के अन्तर्गत एक\n"
+"कॉमाण्ड प्रॉम्पट से \"chkdsk c:\" को चलना होगा (सावधान, सचित्र कार्यक्रम\n"
+"\"scandisk\" को चलाना काफ़ी नहीं है, \"chkdsk\" को कॉमाण्ड प्रॉम्पट से ही चलायें !)\n"
+", वैकल्पिक रूप से defrag को चलायें, और फ़िर संसाधन प्रक्रिया को पुनः आरम्भ करें ।\n"
+"आपको अपनी सूचनाओं का बैक-अप भी ले लेना चाहिए । \n"
+"जब यह सब सुनिश्चित कर लें, तब ठीक को दबायें।"
 
 #: ../install_interactive.pm:178
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "विण्डो के लिए आप क्या आकार रखना चाहते है"
 
 #: ../install_interactive.pm:179
 #, perl-format
@@ -262,7 +274,7 @@ msgstr "विभाजन %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
-msgstr ""
+msgstr "विण्डो विभाजन का पुनः आकारीकरण किया जा रहा है"
 
 #: ../install_interactive.pm:193
 #, perl-format
@@ -274,6 +286,9 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"विभाजन(विभाजनों) के पुनःआकारीकरण के उपरान्त, डाटा की स्थिरता एकनिष्टता को सुनिश्चत "
+"करने हेतु, \n"
+"विण्डो(TM) में आपके अगले बूट के समय संचिकाप्रणाली जाँच प्रक्रियाएँ चलगी "
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
@@ -286,7 +301,7 @@ msgstr "सम्पूर्ण डिस्क को मिटायें"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "विण्डो (TM) को हटायें"
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"
