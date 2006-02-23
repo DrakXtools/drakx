@@ -1,3 +1,581 @@
+2006/02/22  Gwenole Beauchesne  <gbeauchesne at mandriva.com>
+
+	* c/smp-dmi.c: Check the socket is populated during dmi smp detection. I
+	know, the code is
+	no longer used, but let's make it as "don't get gb depressed for reading
+	SMBIOS spec for nothing"
+
+2006/02/22  Olivier Blin <oblin at mandriva.com>
+
+	* tools/draklive: remove spurious space
+	make sure mtab and fstab don't contain build-machine specific
+	configuration
+	make sure kbluetoothdrc is readable (useful when building with a
+	paranoid secure level)
+	use syslinux splash from theme
+	use run_program::raw({ root => ... }, ...) instead of various chroot
+	commands
+
+2006/02/22  Pixel  <pixel at mandriva.com>
+
+	* share/list.xml: add monitor-get-edid-using-vbe (introduced in
+	monitor-edid 1.9)
+
+	* fs/format.pm: it seems -y is needed for mkfs.reiser4 to work without
+	prompting
+
+2006/02/22  Stew Benedict  <sbenedict at mandriva.com>
+
+	* diskdrake/interactive.pm: Allow user to modify xbox partitions on
+	non-xbox (thx Pixel)
+	Allow user to modify xbox partitions on non-xbox (thx Pixel)
+
+2006/02/22  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* tools/draklive: perl_checker cleanups
+	make generating the previous HW config file somewhat more readable
+
+	* tools/.perl_checker: blacklist a few modules in order to let
+	perl_checker parse draklive
+
+2006/02/21  Pixel  <pixel at mandriva.com>
+
+	* any.pm: only accept users using "Accept user" button, and disable "Next"
+	when the
+	login name is filled (bugzilla #20712)
+
+	* detect_devices.pm: fix typo
+	fix typo
+
+2006/02/21  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/rpmsrate: since 1.0.0.rc10 dmraid supports JMicron JMB36x and
+	Adaptec HostRAID
+
+2006/02/20  Pixel  <pixel at mandriva.com>
+
+	* raid.pm: use --force when creating a md with only one device (bugzilla
+	#21214)
+
+2006/02/20  shivahuang
+
+	* share/po/zh_TW.po: updated po file
+
+2006/02/20  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* tools/draklive (post_install_system) explain
+	(post_install_system) fix auto configuration on live boot (aka fix
+	creating a dummy previous HW configuration)
+
+2006/02/19  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
+2006/02/18  Keld J�rn Simonsen  <keld at dkuug.dk>
+
+	* share/po/da.po: updates
+	soft/initscripts/po/da.po soft/rpmdrake/po/da.po
+	gi/perl-install/share/po/da.po
+
+2006/02/18  shivahuang
+
+	* share/po/zh_TW.po: updated po file
+
+2006/02/17  Olivier Blin <oblin at mandriva.com>
+
+	* tools/draklive: allow to use a local rpmsrate
+	fix yet another typo
+	fix region suffix
+	don't use 'noregion' subdir if $live->{regions} doesn't exist
+	remove useless parentheses
+	add missing quote
+	add the all-regions option to proceed with all regions
+	remove unused variable
+	move mountpoint in regional workdir
+	fix errors from previous commit
+	move code in complete_config
+	use regional chroots and workdirs
+	pass a set of langs to drakx-in-chroot according to region settings
+	allow to erase rpms after install (aka the lazy rpmsrate patch)
+	don't make kbluetoothdrc display an annoying and useless popup window
+	use /etc path to kdm config file
+	run drakx-in-chroot with enough timeout slack
+	allow to pass run_program options to run_
+	try to display an error message when the config file can't be opened
+
+	* tools/drakx-in-chroot: allow to use a local rpmsrate
+	cat_ didn't handle multiple args in 2006.0 (thanks to Warly for
+	reminding me to fix that)
+
+2006/02/17  pjetur
+
+	* share/po/is.po: Latest additions
+
+2006/02/17  Pixel  <pixel at mandriva.com>
+
+	* commands.pm: enhance "bug" command to allow saving report.bug on usb key
+
+2006/02/16  Pablo Saratxaga  <pablo at mandriva.com>
+
+	* share/fonts.tar.bz2: updated version of Nimbus Sans (with proper gyphs
+	for extended cyrillic;
+	and the font properly identifies itself as suitable for Vietnamese)
+
+2006/02/16  Pixel  <pixel at mandriva.com>
+
+	* modules.pm: very titypo
+
+2006/02/16  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* modules.pm (when_load_category) do not bother preloading sd_mod for ide
+	drivers
+
+	* standalone/service_harddrake: 
+	  - fix adding storage controllers: set scsi_hostadapter like DrakX does
+	instead
+	   of trying preloading the driver
+	  - manage hardware_raid class too
+
+2006/02/15  Antoine Ginies  <aginies at mandriva.com> 
+
+	* standalone/draksambashare: fix problem "atom 0 is not a section"
+
+2006/02/15  Olivier Blin <oblin at mandriva.com>
+
+	* mdk-stage1/thirdparty.c: fix potential buffer overflows (thanks to
+	Rafael for the advice)
+
+2006/02/15  Rafael Garcia-Suarez <rgarciasuarez at mandriva.com>
+
+	* mdk-stage1/network.c: Fix minor memory leak
+
+	* mdk-stage1/tools.c, mdk-stage1/url.c: Fix another couple of potential
+	buffer overflows
+
+2006/02/15  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* standalone/harddrake2: uploading the hw status to hcl.mandriva.com is
+	now done in mcc
+
+	* drakxtools.spec: 10.4.11-1mdk
+
+2006/02/14  Rafael Garcia-Suarez <rgarciasuarez at mandriva.com>
+
+	* mdk-stage1/cdrom.c: Remove another potential buffer overflow
+
+2006/02/13  Gwenole Beauchesne  <gbeauchesne at mandriva.com>
+
+	* install_steps.pm: fix acpi initializer (pixel)
+
+2006/02/13  Olivier Blin <oblin at mandriva.com>
+
+	* mdk-stage1/thirdparty.h: use /Mandrake/thirdparty in 10.0 branch
+
+	* mdk-stage1/thirdparty.c: try to find modules in a sub-directory named by
+	the kernel release
+	try to find modules in a sub-directory named by the kernel release
+
+	* mdk-stage1/cdrom.c: fallback on ide-generic if needed (requested by
+	support team for the Equilinux project)
+
+2006/02/13  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* diskdrake/resize_ext2.pm (resize) run_program's 10mn timeout is catching
+	resize2fs in real word, let's bump it to 60mn
+
+2006/02/10  cavassin
+
+	* share/po/pt_BR.po: More pt_BR translations.
+
+2006/02/10  Gwenole Beauchesne  <gbeauchesne at mandriva.com>
+
+	* Newt/Newt.xs: fix varargs
+
+2006/02/09  Olivier Blin <oblin at mandriva.com>
+
+	* tools/draklive: copy rpms in chroot and use rpm from the chroot (to
+	avoid rpm version mismatch)
+
+	* mdk-stage1/Makefile, mdk-stage1/thirdparty.h, mdk-stage1/disk.c,
+	mdk-stage1/partition.c, mdk-stage1/tools.c, mdk-stage1/stage1.h,
+	mdk-stage1/tools.h, mdk-stage1/thirdparty.c, mdk-stage1/stage1.c,
+	mdk-stage1/partition.h, mdk-stage1/probing.h, mdk-stage1/probing.c:
+	backport thirdparty support
+
+2006/02/09  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/po/ja.po: update (Yukiko Bando)
+
+	* standalone/drakfont (uninstall) "Uninstall List" is both confusing and
+	wrong since the
+	button really offer to select font directories to uninstall (it
+	doesn't offer to uninstall the whole list or the list of selected
+	fonts)
+	(show_list_to_remove) nicer GUI:
+	  - use standard verbs on button
+	  - use a standard & meaningfull title
+	  - add a sentence explaining the purpose of the dialog
+	bump copyright
+
+2006/02/08  Gwenole Beauchesne  <gbeauchesne at mandriva.com>
+
+	* rescue/make_rescue_img: fix operator
+	add possibility to use non -BOOT kernels for isolinux boot
+
+	* pkgs.pm: Fix CD0 support (warly)
+
+	* share/rpmsrate: remove duplicates
+
+	* share/rpmsrate.corpo-desktop: Poor man's way (old style) to install
+	additionnal packages for laptops. Here,
+	that's cpufreq (older HP laptop program)
+
+	* install_steps.pm: handle cases where with booted with a full acpi
+	capable kernel
+
+2006/02/08  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* standalone/drakfont (font_choice) enable to select fonts with upcase
+	letters in file extensions (#16948)
+
+2006/02/07  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* harddrake/data.pm: fix detecting some ATA devices (#21034)
+
+2006/02/06  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* standalone/drakfont: handle *.ttc fonts too
+
+2006/02/05  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/it.po: Updated Italian translations from Andrea Celli
+	<andrea.celli@libero.it>.
+
+2006/02/03  Pixel  <pixel at mandriva.com>
+
+	* detect_devices.pm: oops, perl_checker compliance
+	  - fix dmidecode_category() (returning a list)
+	  - c::dmiDetectMemory() was in smp-dmi.c which is dropped, creating
+	dmi_detect_memory instead
+
+2006/02/02  Pixel  <pixel at mandriva.com>
+
+	* fsedit.pm: log test_for_bad_drives errors
+
+2006/01/30  Pixel  <pixel at mandriva.com>
+
+	* any.pm: force creation of a non-root user on standard security level
+	(esp. since kdm doesn't permit root login anymore by default)
+	(thanks to Neoclust)
+
+2006/01/30  shivahuang
+
+	* share/po/zh_TW.po: updated po file
+
+2006/01/29  berthy
+
+	* share/po/fr.po: Update french translation
+
+2006/01/28  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* drakxtools.spec: drop msec requires so that python is not part of
+	basesystem (anyway
+	it's installed by rpmsrate at a higher priority than drakxtools is
+	(through drakconf))
+
+	* standalone/draksec: install msec if needed
+
+	* harddrake/v4l.pm: perl_checko cleanup
+
+	* share/po/br.po: update
+
+2006/01/27  Olivier Blin <oblin at mandriva.com>
+
+	* install_steps_interactive.pm: fix titi sucks :) (backport from cooker,
+	fixed by Pixel)
+
+2006/01/27  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* drakxtools.spec: 10.4.10-1mdk
+
+	* share/po/fr.po: update
+
+	* harddrake/sound.pm: add support for new snd-als300 sound driver
+	prevent some "unlisted driver" errors in harddrake
+
+	* harddrake/v4l.pm: sync bttv, cx88 and saa7134 driver model lists with
+	kernel-2.6.16-rc1-mm2
+
+2006/01/27  willysr
+
+	* share/po/id.po: Updated
+
+2006/01/26  Pablo Saratxaga  <pablo at mandriva.com>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: updated pot file
+
+2006/01/26  Pixel  <pixel at mandriva.com>
+
+	* install_gtk.pm: display & update steps during graphical auto_installs
+	(which never go through
+	the Gtk2 main loop)
+	for auto_installs which never go through the Gtk2 main loop
+
+2006/01/25  Stew Benedict  <sbenedict at mandriva.com>
+
+	* standalone/drakTermServ: More support for TS2
+
+2006/01/24  Pixel  <pixel at mandriva.com>
+
+	* mdk-stage1/insmod-modutils/util/config.c,
+	mdk-stage1/insmod-modutils/obj/obj_kallsyms.c,
+	mdk-stage1/insmod-modutils/util/modstat.c: be compliant with recent gcc
+	(from peroyvind)
+
+	* pkgs.pm: fix selected_leaves() dropping all packages in a circular
+	reference
+	(including short circular references like amarok-engine-arts ->
+	libamarokarts.so -> amarok-engine-arts)
+	fix selected_leaves(): it was dropping all packages in a circular
+	reference
+	(including short circular references like amarok-engine-arts ->
+	libamarokarts.so -> amarok-engine-arts)
+
+	* do_pkgs.pm: protect against no $do->in
+
+2006/01/21  Till Kamppeter  <till at mandriva.com>
+
+	* printer/main.pm: 
+	  - Improvements and fixes on printer model/driver listing in
+	printerdrake
+	   o Corrected handling of PPD links in Foomatic printer XML files,
+	     no the prinyer list entries have the correct model names of the
+	     Foomatic printer XML files and so PPDs linked to multiple
+	     printers appear with each linked printer in printerdrake. This
+	     also avoids duplicate "(Recommended)" tags for one printer
+	     (problem occured with HP LaserJet 1200).
+	   o Avoid duplicate PPD entries for Foomatic-generated PPDs and
+	     identical pre-generated Foomatic PPDs in /usr/share/cups/model.
+	     This problem occured when the hplip-hpijs-ppds package is
+	     installed.
+	   o Some polishing of list entries.
+	   o Reduced Perl warnings.
+
+2006/01/20  Pixel  <pixel at mandriva.com>
+
+	* detect_devices.pm: handle new dmidecode output
+	handle new dmidecode output
+
+2006/01/20  Till Kamppeter  <till at mandriva.com>
+
+	* scanner.pm, standalone/scannerdrake: 
+	  - Moved loading of kernel modules before the port checking step, the
+	device file is usually generated when the module is loaded
+	  - Support for loading kernel modules only in case of a certain
+	  connection type (SCSI, USB, Parport).
+	  - Let kernel module only be added to /etc/modules and
+	  /etc/modprobe.preload if loading of the module with "modprobe"
+	  succeeded.
+	  - Do not die when loading of a kernel module does not succeed.
+	  - s/Hewlett Packard/Hewlett-Packard/ when generating ScannerDB.
+
+	* printer/printerdrake.pm: 
+	  - Fixed HPLIP setup when setting up a printer without auto-detection
+	(bug #20231).
+
+	* printer/main.pm: 
+	  - Give priority to custom PPD file if printer queue record in
+	printerdrake is broken, use "Postscript" if Foomatic driver is
+	  wrongly set to "PPD", should fix bug #20028.
+
+2006/01/19  Pablo Saratxaga  <pablo at mandriva.com>
+
+	* keyboard.pm: updated list of console keyboards
+
+2006/01/19  Pixel  <pixel at mandriva.com>
+
+	* patch/patch-rh9-mdk10.pl: fix typo
+
+2006/01/18  Pixel  <pixel at mandriva.com>
+
+	* bootloader.pm: 
+	  - read all per entry entries (esp. makeactive)
+	  - write makeactive
+	  - have makeactive for windows entries (bugzilla #20081)
+
+2006/01/18  shivahuang
+
+	* share/po/zh_TW.po: updated po file
+
+2006/01/18  willysr
+
+	* share/po/id.po: Updated
+
+2006/01/17  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: Updated POT file
+
+2006/01/17  Pablo Saratxaga  <pablo at mandriva.com>
+
+	* share/kmap2bkmap, share/keymaps.tar.bz2: updated console map files
+	(also, using utf-8 maps for non-ascii chars)
+
+2006/01/17  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/rpmsrate: drop scim-m17n from list of alternatives since it's
+	selected for "vi"
+
+2006/01/13  huftis
+
+	* share/po/nn.po: Updated translation.
+
+2006/01/13  Pixel  <pixel at mandriva.com>
+
+	* share/list.xml: monitor-edid now needs File::Find
+
+	* install_steps_newt.pm: unset DISPLAY so that code testing wether DISPLAY
+	is set can know we don't have or use X (thanks to gégé)
+
+	* standalone/fileshareset: put kde's enhancements (backward compatible)
+	  - multi distro
+	  - new variables in fileshare.conf
+
+	* Xconfig/monitor.pm: 1024x768@70Hz monitor is too high (cf #20304)
+
+	* install2.pm: be more explicit in the log about defaulting to newt
+
+2006/01/12  Pixel  <pixel at mandriva.com>
+
+	* patch/patch-2006-above-2TB.pl: use BLKGETSIZE64 to allow detecting
+	partitions bigger than 2TB, and use
+	"double" instead of "unsigned int" (nb: it means we will use doubles
+	instead
+	of ints for computing things, this works quite nicely up to 100_000TB
+	doing this in perl so that there is no need to recompile stuff.so
+
+	* Xconfig/resolution_and_depth.pm: defaulting to 1024x768 instead of
+	800x600 when the monitor size is unknown
+	(since a lot of people expect this, and that's what fedora is doing, cf
+	#20304)
+
+	* c/stuff.xs.pl: replacing double with NV as suggested by rafael:
+	NV is the portable typedef perl's Configure figures out for floating
+	point
+	values. And since it's an internal type the typemap is easier. See:
+	$ perl -V:nvtype
+	nvtype='double';
+	use BLKGETSIZE64 to allow detecting partitions bigger than 2TB, and use
+	"double" instead of "unsigned int" (nb: it means we will use doubles
+	instead
+	of ints for computing things, this works quite nicely up to 100_000TB
+
+	* c.pm: less verbose
+	use BLKGETSIZE64 to allow detecting partitions bigger than 2TB, and use
+	"double" instead of "unsigned int" (nb: it means we will use doubles
+	instead
+	of ints for computing things, this works quite nicely up to 100_000TB
+	doing this in perl so that there is no need to recompile stuff.so
+
+2006/01/12  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/po/br.po: update
+
+2006/01/11  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* standalone/service_harddrake: add a comment
+
+2006/01/10  huftis
+
+	* share/po/nn.po: Updated Norwegian Nynorsk translation.
+
+2006/01/10  Pixel  <pixel at mandriva.com>
+
+	* c/stuff.xs.pl, c/smp-dmi.c, c/smp.h, c/smp.c, c/README, c/smp-test.c,
+	c/Makefile.PL: look for "NR_CPUS limit of 1 reached" instead of looking
+	MP tables by hand, or using DMI info (often broken)
+
+	* install_steps.pm: don't set KBCHARSET in /etc/sysconfig/keyboard, this
+	is not useful
+	(and we don't modify it in keyboarddrake)
+
+	* detect_devices.pm: look for "NR_CPUS limit of 1 reached" instead of
+	looking MP tables by hand, or using DMI info (often broken)
+	look for "NR_CPUS limit of 1 reached" instead of looking MP tables by
+	hand, or using DMI info (often broken)
+
+2006/01/10  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* standalone/service_harddrake.sh: this service is *NOT* interactive
+
+2006/01/09  huftis
+
+	* share/po/nn.po: Updated nn translation.
+
+2006/01/09  Olivier Blin <oblin at mandriva.com>
+
+	* standalone/service_harddrake.sh: convert parallel init to LSB
+
+2006/01/09  Pixel  <pixel at mandriva.com>
+
+	* fsedit.pm: allow giving {percent_size} instead of {size}
+
+2006/01/09  shivahuang
+
+	* share/po/zh_TW.po: updated po file
+
+2006/01/09  Till Kamppeter  <till at mandriva.com>
+
+	* printer/printerdrake.pm: 
+	  - Moved button for daemon-less CUPS client mode to the top of the CUPS
+	configuration dialog, to make it more visible, so that the user sees
+	  more easily when he has activated this mode accidentally.
+
+	* printer/main.pm: 
+	  - Make sure that when a user supplies an updated PPD file, the new
+	file and not the old one from the system gets used.
+
+2006/01/06  cavassin
+
+	* share/po/pt_BR.po: More pt_BR fixes.
+
+2006/01/06  Pixel  <pixel at mandriva.com>
+
+	* tools/mailchangelog.pl: update to new mailing list name
+
 2006/01/06  Thierry Vignaud  <tvignaud at mandriva.com>
 
 	* Xconfig/card.pm: option IgnoreEDID is no more needed with nvidia driver
