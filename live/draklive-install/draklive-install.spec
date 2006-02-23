@@ -1,6 +1,6 @@
 %define name draklive-install
 %define version 0.1
-%define release %mkrel 1
+%define release %mkrel 2
 %define iconname MandrivaOne-install-icon.png
 %define imgname MandrivaOne-install.png
 
@@ -72,5 +72,8 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/libDrakX/pixmaps/%imgname
 
 %changelog
+* Thu Feb 23 2006 Olivier Blin <oblin@mandriva.com> 0.1-2mdk
+- update po files
+
 * Fri Dec 16 2005 Olivier Blin <oblin@mandriva.com> 0.1-1mdk
 - initial release
