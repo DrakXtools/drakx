@@ -848,7 +848,7 @@ sub selectLanguage_and_more_standalone {
 	local $::Wizard_no_previous = 1;
 	my $old_lang = $locale->{lang};
 	selectLanguage_standalone($in, $locale);
-	$locale->{IM} = lang::get_default_im($locale->{lang}) if $old_lang ne $locale->{lang};
+	lang::lang_changed($locale) if $old_lang ne $locale->{lang};
 	undef $::Wizard_no_previous;
 	selectCountry($in, $locale) or goto language;
     };

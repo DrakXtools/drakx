@@ -983,6 +983,14 @@ sub system_locales_to_ourlocale {
     $locale;
 }
 
+sub lang_changed {
+    my ($locale) = @_;
+    my $h = analyse_locale_name(l2locale($locale->{lang}));
+    $locale->{country} = $h->{country} if $h->{country};
+
+    $locale->{IM} = get_default_im($locale->{lang});
+}
+
 sub read {
     my ($b_user_only) = @_;
     my ($f1, $f2) = ("$::prefix$ENV{HOME}/.i18n", "$::prefix/etc/sysconfig/i18n");
