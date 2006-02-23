@@ -95,7 +95,10 @@ call('license');
 call('language');
 call('keyboard');
 call('network');
-$::WizardWindow->destroy; undef $::WizardWindow;
+if (defined $::WizardWindow) {
+    $::WizardWindow->destroy;
+    undef $::WizardWindow;
+}
 $::Wizard_pix_up = 'redhat-config-users';
 call('authentication');
 call('users');
