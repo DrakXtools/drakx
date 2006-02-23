@@ -1,3 +1,23 @@
+# Translation of cs.po to Czech
+# Translation of DrakX-cs.po to Czech
+# Copyright (C) 1999,2003, 2004, 2005 Free Software Foundation, Inc.
+# Radek Vybiral <Radek.Vybiral@vsb.cz>, 2000, 2001-2003.
+# Michal Bukovjan <bukm@centrum.cz>, 2002-2003, 2004, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: cs\n"
+"POT-Creation-Date: 2006-01-26 11:06+0100\n"
+"PO-Revision-Date: 2005-09-19 00:26+0200\n"
+"Last-Translator: Michal Bukovjan <bukm@centrum.cz>\n"
+"Language-Team: Czech <cs@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: KBabel 1.10.2\n"
+
 #: ../draklive-install:59
 msgid "Mandriva Live"
 msgstr ""
@@ -12,11 +32,11 @@ msgstr ""
 
 #: ../draklive-install:95
 msgid "Copying in progress"
-msgstr ""
+msgstr "Probíhá kopírování"
 
 #: ../draklive-install:163
 msgid "Congratulations"
-msgstr ""
+msgstr "Gratulujeme"
 
 #: ../draklive-install:163
 msgid ""
@@ -26,15 +46,15 @@ msgstr ""
 
 #: ../draklive-install:179 ../draklive-install:407
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr ""
+msgstr "Aby se projevily změny v tabulce oddílů, musíte restartovat počítač"
 
 #: ../draklive-install:230
 msgid "Choose the partitions you want to format"
-msgstr ""
+msgstr "Zvolte diskové oddíly které chcete naformátovat"
 
 #: ../draklive-install:232
 msgid "Check bad blocks?"
-msgstr ""
+msgstr "Otestovat na vadné stopy?"
 
 #: ../draklive-install:261
 #, c-format
@@ -47,7 +67,7 @@ msgstr ""
 
 #: ../draklive-install:265
 msgid "Not enough swap space to fulfill installation, please add some"
-msgstr ""
+msgstr "Není dostatek odkládacího prostoru k instalaci, prosím přidejte nějaký"
 
 #: ../draklive-install:284
 msgid "$d/$l{$_}"
@@ -59,44 +79,44 @@ msgstr ""
 
 #: ../draklive-install:317
 msgid "No partition available"
-msgstr ""
+msgstr "Nejsou dostupné žádné diskové oddíly"
 
 #: ../draklive-install:320
 msgid "Scanning partitions to find mount points"
-msgstr ""
+msgstr "Hledám oddíly, které lze připojit"
 
 #: ../draklive-install:327
 msgid "Choose the mount points"
-msgstr ""
+msgstr "Zvolte si přípojné(mount) body"
 
 #: ../draklive-install:328
 msgid "Partitioning"
-msgstr ""
+msgstr "Rozdělení disku"
 
 #: ../draklive-install:361
 msgid "none"
-msgstr ""
+msgstr "Žádná"
 
 #: ../draklive-install:363
 #, c-format
 msgid "Duplicate mount point %s"
-msgstr ""
+msgstr "Zdvojený přípojný bod %s"
 
 #: ../draklive-install:389
 msgid "Continue anyway?"
-msgstr ""
+msgstr "Přesto chcete pokračovat?"
 
 #: ../draklive-install:394
 msgid "Quit without saving"
-msgstr ""
+msgstr "Konec bez uložení"
 
 #: ../draklive-install:394
 msgid "Quit without writing the partition table?"
-msgstr ""
+msgstr "Chcete skončit bez zapsání do tabulky oddílů?"
 
 #: ../draklive-install:400
 msgid "Do you want to save /etc/fstab modifications"
-msgstr ""
+msgstr "Chcete uložit úpravy souboru /etc/fstab?"
 
 #: ../draklive-install:412
 #, c-format
@@ -115,6 +135,9 @@ msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
 msgstr ""
+"Některé části vašeho hardware potřebují pro svoji práci 'speciální' "
+"ovladače.\n"
+"Další informace můžete nalézt na: %s"
 
 #: ../install_interactive.pm:62
 msgid ""
@@ -122,6 +145,10 @@ msgid ""
 "For this, create a partition (or click on an existing one).\n"
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
+"Musíte mít kořenový oddíl.\n"
+"K jeho vytvoření musíte zvolit jeden existující oddíl\n"
+"(nebo vytvořit nový), zvolit 'Přípojný bod'\n"
+"a nastavit ho na '/'"
 
 #: ../install_interactive.pm:67
 msgid ""
@@ -129,26 +156,29 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
+"Nemáte odkládací oddíl\n"
+"\n"
+"Chcete přesto pokračovat?"
 
 #: ../install_interactive.pm:70
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr ""
+msgstr "Musíte mít FAT oddíl připojený na /boot/efi"
 
 #: ../install_interactive.pm:95
 msgid "Use free space"
-msgstr ""
+msgstr "Použít volné místo"
 
 #: ../install_interactive.pm:97
 msgid "Not enough free space to allocate new partitions"
-msgstr ""
+msgstr "Není dostatek místa pro vytvoření nového diskového oddílu"
 
 #: ../install_interactive.pm:105
 msgid "Use existing partitions"
-msgstr ""
+msgstr "Použít existující oddíl"
 
 #: ../install_interactive.pm:107
 msgid "There is no existing partition to use"
-msgstr ""
+msgstr "Není zde žádný existující oddíl k použití"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
@@ -156,23 +186,25 @@ msgstr ""
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
-msgstr ""
+msgstr "Který diskový oddíl chcete použít pro Linux4Win?"
 
 #: ../install_interactive.pm:119
 msgid "Choose the sizes"
-msgstr ""
+msgstr "Zvolte velikosti"
 
 #: ../install_interactive.pm:120
 msgid "Root partition size in MB: "
-msgstr ""
+msgstr "Velikost kořenového oddílu v MB:"
 
 #: ../install_interactive.pm:121
 msgid "Swap partition size in MB: "
-msgstr ""
+msgstr "Velikost odkládacího oddílu v MB: "
 
 #: ../install_interactive.pm:130
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
+"Nejsou zde žádné FAT oddíly, které by bylo použít pro loopback (nebo není "
+"dostatek místa)"
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
@@ -180,7 +212,7 @@ msgstr ""
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
-msgstr ""
+msgstr "Na kterém oddílu chcete měnit velikost?"
 
 #: ../install_interactive.pm:153
 #, perl-format
@@ -188,6 +220,8 @@ msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
 msgstr ""
+"Změnu velikost FAT není možné provést, \n"
+"vyskytla se následující chyba: %s"
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
@@ -195,7 +229,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
-msgstr ""
+msgstr "Měním velikost"
 
 #: ../install_interactive.pm:163
 msgid ""
@@ -225,7 +259,7 @@ msgstr ""
 #: ../install_interactive.pm:179
 #, perl-format
 msgid "partition %s"
-msgstr ""
+msgstr "diskovém oddílu %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
@@ -234,7 +268,7 @@ msgstr ""
 #: ../install_interactive.pm:193
 #, perl-format
 msgid "FAT resizing failed: %s"
-msgstr ""
+msgstr "Změna FAT oddílu neuspěla: %s"
 
 #: ../install_interactive.pm:196
 msgid ""
@@ -245,10 +279,13 @@ msgstr ""
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
+"Nejsou zde žádné FAT oddíly, které by bylo možné změnit (nebo není dostatek "
+"místa)"
 
 #: ../install_interactive.pm:213
+#, fuzzy
 msgid "Erase and use entire disk"
-msgstr ""
+msgstr "Smazat celý disk"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
@@ -256,20 +293,20 @@ msgstr ""
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"
-msgstr ""
+msgstr "Máte více než jeden pevný disk, na který chcete instalovat Linux?"
 
 #: ../install_interactive.pm:219
 #, perl-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr ""
+msgstr "VŠECHNY diskové oddíly a data na disku %s budou zrušena"
 
 #: ../install_interactive.pm:228
 msgid "Custom disk partitioning"
-msgstr ""
+msgstr "Vlastní rozdělení disku"
 
 #: ../install_interactive.pm:232
 msgid "Use fdisk"
-msgstr ""
+msgstr "Použít fdisk"
 
 #: ../install_interactive.pm:235
 #, perl-format
@@ -277,24 +314,26 @@ msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
 msgstr ""
+"Nyní můžete rozdělit váš pevný disk %s.\n"
+"Až skončíte, nezapomeňte uložit změny pomocí 'w'"
 
 #: ../install_interactive.pm:271
 msgid "I can not find any room for installing"
-msgstr ""
+msgstr "Nemůžu najít žádné volné místo pro instalaci"
 
 #: ../install_interactive.pm:275
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr ""
+msgstr "Průvodce DrakX našel následující řešení rozdělení disku:"
 
 #: ../install_interactive.pm:281
 #, perl-format
 msgid "Partitioning failed: %s"
-msgstr ""
+msgstr "Vytváření diskových oddílů selhalo: %s"
 
 #: ../install_interactive.pm:288
 msgid "Bringing up the network"
-msgstr ""
+msgstr "Startuji síť"
 
 #: ../install_interactive.pm:293
 msgid "Bringing down the network"
-msgstr ""
+msgstr "Zastavuji síť"

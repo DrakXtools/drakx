@@ -1,3 +1,25 @@
+# translation of DrakX.po to Arabic
+# Amr Fathy <amr10@menanet.net>, 2001.
+# Mohammed Gamal <f2c2001@yahoo.com>, 2002.
+# Youcef Rabah Rahal <rahal@arabeyes.org>, 2004.
+# Ossama M. Khayat <okhayat@yahoo.com>, 2004, 2005.
+# Munzir Taha <munzir@kacst.edu.sa>, 2004.
+# Abdulaziz Al-Arfaj <alarfaj@arabeyes.org>, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DrakX\n"
+"POT-Creation-Date: 2006-01-26 11:06+0100\n"
+"PO-Revision-Date: 2005-03-03 01:06+0300\n"
+"Last-Translator: Ossama M. Khayat <okhayat@yahoo.com>\n"
+"Language-Team: Arabic <support@arabeyes.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9.1\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 0 : n==2 ? 1 : n>=3 && n<=10 ? 2 : "
+"3\n"
+
 #: ../draklive-install:59
 msgid "Mandriva Live"
 msgstr ""
@@ -12,11 +34,11 @@ msgstr ""
 
 #: ../draklive-install:95
 msgid "Copying in progress"
-msgstr ""
+msgstr "جاري النسخ"
 
 #: ../draklive-install:163
 msgid "Congratulations"
-msgstr ""
+msgstr "تهانينا"
 
 #: ../draklive-install:163
 msgid ""
@@ -26,15 +48,15 @@ msgstr ""
 
 #: ../draklive-install:179 ../draklive-install:407
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr ""
+msgstr "تحتاج إلى إعادة التثبيت لتفعيل التعديلات على جدول التجزئة"
 
 #: ../draklive-install:230
 msgid "Choose the partitions you want to format"
-msgstr ""
+msgstr "اختيار التجزيئات التي تريد تنسيقها"
 
 #: ../draklive-install:232
 msgid "Check bad blocks?"
-msgstr ""
+msgstr "تحقق من الكتل السيئة؟"
 
 #: ../draklive-install:261
 #, c-format
@@ -47,7 +69,7 @@ msgstr ""
 
 #: ../draklive-install:265
 msgid "Not enough swap space to fulfill installation, please add some"
-msgstr ""
+msgstr "لا توجد مساحة تبديل كافية للقيام بالتثبيت، الرجاء زيادة مساحة التبديل"
 
 #: ../draklive-install:284
 msgid "$d/$l{$_}"
@@ -59,44 +81,44 @@ msgstr ""
 
 #: ../draklive-install:317
 msgid "No partition available"
-msgstr ""
+msgstr "لا يوجد تجزيء"
 
 #: ../draklive-install:320
 msgid "Scanning partitions to find mount points"
-msgstr ""
+msgstr "جاري عمل مسح للتجزئات لإيجاد أماكن التركيب"
 
 #: ../draklive-install:327
 msgid "Choose the mount points"
-msgstr ""
+msgstr "اختيار أماكن التركيب"
 
 #: ../draklive-install:328
 msgid "Partitioning"
-msgstr ""
+msgstr "التجزئة"
 
 #: ../draklive-install:361
 msgid "none"
-msgstr ""
+msgstr "لاشئ"
 
 #: ../draklive-install:363
 #, c-format
 msgid "Duplicate mount point %s"
-msgstr ""
+msgstr "نقطة تركيب مكررّة %s"
 
 #: ../draklive-install:389
 msgid "Continue anyway?"
-msgstr ""
+msgstr "استمرار على أي حال؟"
 
 #: ../draklive-install:394
 msgid "Quit without saving"
-msgstr ""
+msgstr "الخروج بدون حفظ"
 
 #: ../draklive-install:394
 msgid "Quit without writing the partition table?"
-msgstr ""
+msgstr "هل تريد الخروج بدون كتابة جدول التجزئة؟"
 
 #: ../draklive-install:400
 msgid "Do you want to save /etc/fstab modifications"
-msgstr ""
+msgstr "هل تريد حفظ تعديلات /etc/fstab"
 
 #: ../draklive-install:412
 #, c-format
@@ -115,6 +137,8 @@ msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
 msgstr ""
+"بعض العتاد الموجود على جهازك يحتاج إلى مشغلات ``تجارية'' كي تعمل.\n"
+"يمكنك ايجاد مزيد من المعلومات عنها في: %s"
 
 #: ../install_interactive.pm:62
 msgid ""
@@ -122,6 +146,9 @@ msgid ""
 "For this, create a partition (or click on an existing one).\n"
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
+"يجب أن تكون لديك تجزيء جذرية.\n"
+"لهذا الغرض انشئ تجزيء (أو اضغط على تجزيء موجودة).\n"
+"ثم اختر ``مكان التركيب'' و اجعله `/'"
 
 #: ../install_interactive.pm:67
 msgid ""
@@ -129,26 +156,29 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
+"ليست لديك تجزيء تبديل.\n"
+"\n"
+"هل تريد المتابعة على أي حال؟"
 
 #: ../install_interactive.pm:70
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr ""
+msgstr "لديك تجزيء FAT تم تحميلها على /boot/efi"
 
 #: ../install_interactive.pm:95
 msgid "Use free space"
-msgstr ""
+msgstr "استخدام المساحة الفارغة"
 
 #: ../install_interactive.pm:97
 msgid "Not enough free space to allocate new partitions"
-msgstr ""
+msgstr "لا توجد مساحة فارغة لعمل التجزيئات الجديدة"
 
 #: ../install_interactive.pm:105
 msgid "Use existing partitions"
-msgstr ""
+msgstr "استخدم التجزيئات الموجودة"
 
 #: ../install_interactive.pm:107
 msgid "There is no existing partition to use"
-msgstr ""
+msgstr "لا يوجد تجزيء لاستخدامه"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
@@ -156,23 +186,23 @@ msgstr ""
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
-msgstr ""
+msgstr "أي تجزيء تريد استخدامه من أجل Linux4Win"
 
 #: ../install_interactive.pm:119
 msgid "Choose the sizes"
-msgstr ""
+msgstr "اختيار الأحجام"
 
 #: ../install_interactive.pm:120
 msgid "Root partition size in MB: "
-msgstr ""
+msgstr "حجم التجزيء الجذري بالميغابايت:"
 
 #: ../install_interactive.pm:121
 msgid "Swap partition size in MB: "
-msgstr ""
+msgstr "حجم تجزيء التبديل بالميغابايت:"
 
 #: ../install_interactive.pm:130
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
-msgstr ""
+msgstr "لا يوجد تجزيء FAT لاستخدامه كـloopback )أو لا توجد مساحة كافية متبقية)"
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
@@ -180,7 +210,7 @@ msgstr ""
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
-msgstr ""
+msgstr "أي تجزيء تريد تغيير حجمه؟"
 
 #: ../install_interactive.pm:153
 #, perl-format
@@ -188,6 +218,8 @@ msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
 msgstr ""
+"لم تتمكن أداة تغيير حجم FAT من التعامل مع تجزيئك، \n"
+"ظهر الخطأ التالي: %s"
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
@@ -195,7 +227,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
-msgstr ""
+msgstr "تغيير الحجم"
 
 #: ../install_interactive.pm:163
 msgid ""
@@ -225,7 +257,7 @@ msgstr ""
 #: ../install_interactive.pm:179
 #, perl-format
 msgid "partition %s"
-msgstr ""
+msgstr "التجزيء %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
@@ -234,7 +266,7 @@ msgstr ""
 #: ../install_interactive.pm:193
 #, perl-format
 msgid "FAT resizing failed: %s"
-msgstr ""
+msgstr "فشل تغيير حجم FAT: %s"
 
 #: ../install_interactive.pm:196
 msgid ""
@@ -244,11 +276,12 @@ msgstr ""
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
-msgstr ""
+msgstr "لا توجد تجزيء FAT قابل لتغيير حجمها (أو لا توجد مساحة كافية متبقية)"
 
 #: ../install_interactive.pm:213
+#, fuzzy
 msgid "Erase and use entire disk"
-msgstr ""
+msgstr "مسح كل القرص"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
@@ -256,20 +289,20 @@ msgstr ""
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"
-msgstr ""
+msgstr "لديك أكثر من قرص صلب، في أيهم تريد تثبيت لينكس؟"
 
 #: ../install_interactive.pm:219
 #, perl-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr ""
+msgstr "كل التجزيئات و بياناتها ستضيع من على السواقة %s"
 
 #: ../install_interactive.pm:228
 msgid "Custom disk partitioning"
-msgstr ""
+msgstr "تجزئة قرص مخصصة"
 
 #: ../install_interactive.pm:232
 msgid "Use fdisk"
-msgstr ""
+msgstr "استخدام fdisk"
 
 #: ../install_interactive.pm:235
 #, perl-format
@@ -277,24 +310,26 @@ msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
 msgstr ""
+"يمكنك الآن تجزئة %s.\n"
+"عندما تنتهي لا تنس الحفظ باستخدام `w'"
 
 #: ../install_interactive.pm:271
 msgid "I can not find any room for installing"
-msgstr ""
+msgstr "لا يمكنني العثور على مساحة فارغة للتثبيت"
 
 #: ../install_interactive.pm:275
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr ""
+msgstr "عثر معالج التجزئة في DrakX على الحلول التالية:"
 
 #: ../install_interactive.pm:281
 #, perl-format
 msgid "Partitioning failed: %s"
-msgstr ""
+msgstr "فشلت التجزئة: %s"
 
 #: ../install_interactive.pm:288
 msgid "Bringing up the network"
-msgstr ""
+msgstr "جاري تشغيل الشبكة"
 
 #: ../install_interactive.pm:293
 msgid "Bringing down the network"
-msgstr ""
+msgstr "جاري اغلاق الشبكة"

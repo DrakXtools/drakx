@@ -1,3 +1,20 @@
+# Korean translation of drakbootdisk.
+# Copyright (C) 2001 Free Software Foundation, Inc.
+# Jaegeum Choe <baedaron@hananet.net>, 2001.
+#
+# changes asked by HP people -- pablo 2003-01-23
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DrakX\n"
+"POT-Creation-Date: 2006-01-26 11:06+0100\n"
+"PO-Revision-Date: 2002-09-09 09:08+0900\n"
+"Last-Translator: Jaegeum Cze <baedaron@hanafos.com>\n"
+"Language-Team: Korean <beadaron@hanafos.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
 #: ../draklive-install:59
 msgid "Mandriva Live"
 msgstr ""
@@ -11,12 +28,13 @@ msgid "Computing total size"
 msgstr ""
 
 #: ../draklive-install:95
+#, fuzzy
 msgid "Copying in progress"
-msgstr ""
+msgstr "검색 진행 중"
 
 #: ../draklive-install:163
 msgid "Congratulations"
-msgstr ""
+msgstr "축하합니다."
 
 #: ../draklive-install:163
 msgid ""
@@ -26,15 +44,15 @@ msgstr ""
 
 #: ../draklive-install:179 ../draklive-install:407
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr ""
+msgstr "파티션 테이블 변경사항을 적용하려면 리부팅을 해야 합니다."
 
 #: ../draklive-install:230
 msgid "Choose the partitions you want to format"
-msgstr ""
+msgstr "포맷할 파티션을 선택하세요"
 
 #: ../draklive-install:232
 msgid "Check bad blocks?"
-msgstr ""
+msgstr "배드 블럭 검사를 합니까?"
 
 #: ../draklive-install:261
 #, c-format
@@ -47,7 +65,7 @@ msgstr ""
 
 #: ../draklive-install:265
 msgid "Not enough swap space to fulfill installation, please add some"
-msgstr ""
+msgstr "스왑 메모리가 부족합니다. 좀 더 추가하세요."
 
 #: ../draklive-install:284
 msgid "$d/$l{$_}"
@@ -59,44 +77,45 @@ msgstr ""
 
 #: ../draklive-install:317
 msgid "No partition available"
-msgstr ""
+msgstr "사용가능한 파티션이 없습니다."
 
 #: ../draklive-install:320
 msgid "Scanning partitions to find mount points"
-msgstr ""
+msgstr "마운트 위치를 찾기위해 파티션들을 검색 중"
 
 #: ../draklive-install:327
 msgid "Choose the mount points"
-msgstr ""
+msgstr "마운트 위치를 선택해 주세요."
 
 #: ../draklive-install:328
+#, fuzzy
 msgid "Partitioning"
-msgstr ""
+msgstr "인쇄"
 
 #: ../draklive-install:361
 msgid "none"
-msgstr ""
+msgstr "없음"
 
 #: ../draklive-install:363
 #, c-format
 msgid "Duplicate mount point %s"
-msgstr ""
+msgstr "마운트 포인트 중복 %s"
 
 #: ../draklive-install:389
 msgid "Continue anyway?"
-msgstr ""
+msgstr "계속하시겠습니까?"
 
 #: ../draklive-install:394
 msgid "Quit without saving"
-msgstr ""
+msgstr "저장하지 않고 종료하시겠습니까?"
 
 #: ../draklive-install:394
 msgid "Quit without writing the partition table?"
-msgstr ""
+msgstr "파티션을 기록하지 않고 종료하시겠습니까?"
 
 #: ../draklive-install:400
 msgid "Do you want to save /etc/fstab modifications"
-msgstr ""
+msgstr "「/etc/fstab」의 변경사항을 저장하시겠습니까?"
 
 #: ../draklive-install:412
 #, c-format
@@ -115,6 +134,8 @@ msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
 msgstr ""
+"「상업용」드라이버를 필요로하는 일부 하드웨어가 시스템상에 있습니다.\n"
+"자세한 정보는 다음을 참조하세요: %s"
 
 #: ../install_interactive.pm:62
 msgid ""
@@ -122,6 +143,9 @@ msgid ""
 "For this, create a partition (or click on an existing one).\n"
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
+"루트 파티션이 반드시 필요합니다.\n"
+"이를 위해서, 파티션을 생성하세요. (이미 있는 파티션을 클릭하거나).\n"
+"그리고 나서, ``마운트 위치''를 클릭한후 '/'으로 설정하세요."
 
 #: ../install_interactive.pm:67
 msgid ""
@@ -129,26 +153,29 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
+"스왑 파티션이 없습니다.\n"
+"\n"
+"계속 진행합니까?"
 
 #: ../install_interactive.pm:70
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr ""
+msgstr "「/boot/efi」에 마운트된 FAT 파티션이 있어야만 합니다."
 
 #: ../install_interactive.pm:95
 msgid "Use free space"
-msgstr ""
+msgstr "빈 공간 사용"
 
 #: ../install_interactive.pm:97
 msgid "Not enough free space to allocate new partitions"
-msgstr ""
+msgstr "새로운 파티션을 만들 수 있는 공간이 부족합니다."
 
 #: ../install_interactive.pm:105
 msgid "Use existing partitions"
-msgstr ""
+msgstr "기존의 파티션 사용"
 
 #: ../install_interactive.pm:107
 msgid "There is no existing partition to use"
-msgstr ""
+msgstr "사용할 기존의 파티션이 없습니다."
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
@@ -156,23 +183,26 @@ msgstr ""
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
-msgstr ""
+msgstr "어느 파티션을 Linux4Win용으로 사용하겠습니까?"
 
 #: ../install_interactive.pm:119
 msgid "Choose the sizes"
-msgstr ""
+msgstr "크기 선택"
 
 #: ../install_interactive.pm:120
 msgid "Root partition size in MB: "
-msgstr ""
+msgstr "루트 파티션 크기(MB): "
 
 #: ../install_interactive.pm:121
 msgid "Swap partition size in MB: "
-msgstr ""
+msgstr "스왑 파티션 크기(MB): "
 
 #: ../install_interactive.pm:130
+#, fuzzy
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
+"loopback로 사용하거나 크기를 조정할 FAT 파티션이 없습니다. (또는 디스크 공간"
+"이 부족합니다.)"
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
@@ -180,7 +210,7 @@ msgstr ""
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
-msgstr ""
+msgstr "어떤 파티션의 크기를 조정하시겠습니까?"
 
 #: ../install_interactive.pm:153
 #, perl-format
@@ -188,6 +218,8 @@ msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
 msgstr ""
+"FAT 크기 조정기가 님의 파티션을 처리할 수 없습니다.\n"
+"다음의 오류가 발생했습니다: %s"
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
@@ -195,7 +227,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
-msgstr ""
+msgstr "크기변경"
 
 #: ../install_interactive.pm:163
 msgid ""
@@ -225,7 +257,7 @@ msgstr ""
 #: ../install_interactive.pm:179
 #, perl-format
 msgid "partition %s"
-msgstr ""
+msgstr "파티션 %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
@@ -234,7 +266,7 @@ msgstr ""
 #: ../install_interactive.pm:193
 #, perl-format
 msgid "FAT resizing failed: %s"
-msgstr ""
+msgstr "FAT크기조정 실패: %s"
 
 #: ../install_interactive.pm:196
 msgid ""
@@ -243,12 +275,16 @@ msgid ""
 msgstr ""
 
 #: ../install_interactive.pm:208
+#, fuzzy
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
+"loopback로 사용하거나 크기를 조정할 FAT 파티션이 없습니다. (또는 디스크 공간"
+"이 부족합니다.)"
 
 #: ../install_interactive.pm:213
+#, fuzzy
 msgid "Erase and use entire disk"
-msgstr ""
+msgstr "전체 디스크 삭제"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
@@ -257,19 +293,20 @@ msgstr ""
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr ""
+"하드 드라이브가 하나 이상 있습니다. 어느 것에 리눅스를 설치하시겠습니까?"
 
 #: ../install_interactive.pm:219
 #, perl-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr ""
+msgstr "%s 드라이브 상의 모든 기존 파티션과 데이터가 손실될 것입니다."
 
 #: ../install_interactive.pm:228
 msgid "Custom disk partitioning"
-msgstr ""
+msgstr "사용자 정의 파티션 나누기"
 
 #: ../install_interactive.pm:232
 msgid "Use fdisk"
-msgstr ""
+msgstr "fdisk 사용"
 
 #: ../install_interactive.pm:235
 #, perl-format
@@ -277,24 +314,26 @@ msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
 msgstr ""
+"이제 %s의 파티션 작업을 할 수 있습니다.\n"
+"마친 후, 'w'를 눌러 저장하는것을 잊지마세요."
 
 #: ../install_interactive.pm:271
 msgid "I can not find any room for installing"
-msgstr ""
+msgstr "설치에 필요한 공간을 찾을 수 없습니다."
 
 #: ../install_interactive.pm:275
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr ""
+msgstr "드레이크X 파티션 마법사가 다음의 솔루션을 발견했습니다:"
 
 #: ../install_interactive.pm:281
 #, perl-format
 msgid "Partitioning failed: %s"
-msgstr ""
+msgstr "파티션 나누기 실패: %s"
 
 #: ../install_interactive.pm:288
 msgid "Bringing up the network"
-msgstr ""
+msgstr "네트웍 활성화 중..."
 
 #: ../install_interactive.pm:293
 msgid "Bringing down the network"
-msgstr ""
+msgstr "네트웍 해제 중..."

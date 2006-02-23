@@ -1,3 +1,20 @@
+# drakx messages in Simplified Chinese
+# Danny Zeng <danny@zeng.com.cn>, 2000, 2002
+# Jesse Kuang <kjx@mandriva.com>, 2002
+# Shiyu Tang <shiyutang@netscape.net>, 2003, 2004
+# Funda Wang <fundawang@linux.net.cn>, 2002, 2003, 2004, 2005
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DrakX 2006\n"
+"POT-Creation-Date: 2006-01-26 11:06+0100\n"
+"PO-Revision-Date: 2005-11-30 17:44+0800\n"
+"Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
+"Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
 #: ../draklive-install:59
 msgid "Mandriva Live"
 msgstr ""
@@ -12,11 +29,11 @@ msgstr ""
 
 #: ../draklive-install:95
 msgid "Copying in progress"
-msgstr ""
+msgstr "复制进行中"
 
 #: ../draklive-install:163
 msgid "Congratulations"
-msgstr ""
+msgstr "恭喜"
 
 #: ../draklive-install:163
 msgid ""
@@ -26,15 +43,15 @@ msgstr ""
 
 #: ../draklive-install:179 ../draklive-install:407
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr ""
+msgstr "对分区表的更改要等到重新启动后才能生效"
 
 #: ../draklive-install:230
 msgid "Choose the partitions you want to format"
-msgstr ""
+msgstr "选择您要格式化的分区"
 
 #: ../draklive-install:232
 msgid "Check bad blocks?"
-msgstr ""
+msgstr "是否检查坏磁块?"
 
 #: ../draklive-install:261
 #, c-format
@@ -47,7 +64,7 @@ msgstr ""
 
 #: ../draklive-install:265
 msgid "Not enough swap space to fulfill installation, please add some"
-msgstr ""
+msgstr "交换空间太少, 无法完成安装, 请扩大交换分区。"
 
 #: ../draklive-install:284
 msgid "$d/$l{$_}"
@@ -59,44 +76,44 @@ msgstr ""
 
 #: ../draklive-install:317
 msgid "No partition available"
-msgstr ""
+msgstr "没有可用的硬盘分区"
 
 #: ../draklive-install:320
 msgid "Scanning partitions to find mount points"
-msgstr ""
+msgstr "正在扫描各个分区以查找挂载点"
 
 #: ../draklive-install:327
 msgid "Choose the mount points"
-msgstr ""
+msgstr "选择挂载点"
 
 #: ../draklive-install:328
 msgid "Partitioning"
-msgstr ""
+msgstr "分区"
 
 #: ../draklive-install:361
 msgid "none"
-msgstr ""
+msgstr "无"
 
 #: ../draklive-install:363
 #, c-format
 msgid "Duplicate mount point %s"
-msgstr ""
+msgstr "重复的挂载点 %s"
 
 #: ../draklive-install:389
 msgid "Continue anyway?"
-msgstr ""
+msgstr "仍然继续吗?"
 
 #: ../draklive-install:394
 msgid "Quit without saving"
-msgstr ""
+msgstr "退出而不保存更改"
 
 #: ../draklive-install:394
 msgid "Quit without writing the partition table?"
-msgstr ""
+msgstr "退出而不保存分区表吗?"
 
 #: ../draklive-install:400
 msgid "Do you want to save /etc/fstab modifications"
-msgstr ""
+msgstr "您想要保存 /etc/fstab 修改吗?"
 
 #: ../draklive-install:412
 #, c-format
@@ -115,6 +132,8 @@ msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
 msgstr ""
+"您系统中的部分硬件需要“私有”的驱动程序才能工作。\n"
+"有关它们的情况, 请您查看: %s"
 
 #: ../install_interactive.pm:62
 msgid ""
@@ -122,6 +141,9 @@ msgid ""
 "For this, create a partition (or click on an existing one).\n"
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
+"必须指定一个根分区。\n"
+"请先创建一个 Linux 分区(或在图中单击现有的一个)。\n"
+"然后在列表里选择“挂载点”, 设为“/”。"
 
 #: ../install_interactive.pm:67
 msgid ""
@@ -129,26 +151,29 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
+"您还没有交换分区。\n"
+"\n"
+"要继续吗?"
 
 #: ../install_interactive.pm:70
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr ""
+msgstr "您必须有一个FAT分区载入 /boot/efi"
 
 #: ../install_interactive.pm:95
 msgid "Use free space"
-msgstr ""
+msgstr "使用空闲空间"
 
 #: ../install_interactive.pm:97
 msgid "Not enough free space to allocate new partitions"
-msgstr ""
+msgstr "没有足够空闲空间分配给新分区"
 
 #: ../install_interactive.pm:105
 msgid "Use existing partitions"
-msgstr ""
+msgstr "使用现存的分区"
 
 #: ../install_interactive.pm:107
 msgid "There is no existing partition to use"
-msgstr ""
+msgstr "没有可使用的现存分区"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
@@ -156,23 +181,23 @@ msgstr ""
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
-msgstr ""
+msgstr "请问您要在哪一个分区里放 Linux4Win?"
 
 #: ../install_interactive.pm:119
 msgid "Choose the sizes"
-msgstr ""
+msgstr "选择大小"
 
 #: ../install_interactive.pm:120
 msgid "Root partition size in MB: "
-msgstr ""
+msgstr "根分区大小(MB):"
 
 #: ../install_interactive.pm:121
 msgid "Swap partition size in MB: "
-msgstr ""
+msgstr "交换分区大小(MB):"
 
 #: ../install_interactive.pm:130
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
-msgstr ""
+msgstr "没有 FAT 分区来用作回环(或者没有足够剩余空间)"
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
@@ -180,7 +205,7 @@ msgstr ""
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
-msgstr ""
+msgstr "您需要改变哪个分区的大小?"
 
 #: ../install_interactive.pm:153
 #, perl-format
@@ -188,6 +213,8 @@ msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
 msgstr ""
+"改变 FAT 分区大小的程序无法处理这个分区, \n"
+"发生了如下错误: %s"
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
@@ -195,7 +222,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
-msgstr ""
+msgstr "改变大小"
 
 #: ../install_interactive.pm:163
 msgid ""
@@ -225,7 +252,7 @@ msgstr ""
 #: ../install_interactive.pm:179
 #, perl-format
 msgid "partition %s"
-msgstr ""
+msgstr "分区 %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
@@ -234,7 +261,7 @@ msgstr ""
 #: ../install_interactive.pm:193
 #, perl-format
 msgid "FAT resizing failed: %s"
-msgstr ""
+msgstr "FAT 调整大小失败: %s"
 
 #: ../install_interactive.pm:196
 msgid ""
@@ -244,11 +271,11 @@ msgstr ""
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
-msgstr ""
+msgstr "没有 FAT 分区用来调整大小(或者没有足够剩余空间)"
 
 #: ../install_interactive.pm:213
 msgid "Erase and use entire disk"
-msgstr ""
+msgstr "清除并使用整个磁盘"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
@@ -256,20 +283,20 @@ msgstr ""
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"
-msgstr ""
+msgstr "您有不只一个硬盘, 您要在哪个上面安装 Linux?"
 
 #: ../install_interactive.pm:219
 #, perl-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr ""
+msgstr "磁盘 %s 上现存的所有分区及其资料将被清除"
 
 #: ../install_interactive.pm:228
 msgid "Custom disk partitioning"
-msgstr ""
+msgstr "自定义磁盘分区"
 
 #: ../install_interactive.pm:232
 msgid "Use fdisk"
-msgstr ""
+msgstr "使用 fdisk"
 
 #: ../install_interactive.pm:235
 #, perl-format
@@ -277,24 +304,26 @@ msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
 msgstr ""
+"您现在可以在 %s 上分区。\n"
+"做完之后, 不要忘记用“w”命令保存您的修改"
 
 #: ../install_interactive.pm:271
 msgid "I can not find any room for installing"
-msgstr ""
+msgstr "我无法找到安装需要的空间"
 
 #: ../install_interactive.pm:275
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr ""
+msgstr "DrakX 分区向导找到下列解决办法:"
 
 #: ../install_interactive.pm:281
 #, perl-format
 msgid "Partitioning failed: %s"
-msgstr ""
+msgstr "分区失败: %s"
 
 #: ../install_interactive.pm:288
 msgid "Bringing up the network"
-msgstr ""
+msgstr "正在启动网络"
 
 #: ../install_interactive.pm:293
 msgid "Bringing down the network"
-msgstr ""
+msgstr "正在禁用网络"

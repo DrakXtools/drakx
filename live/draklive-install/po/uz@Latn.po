@@ -1,3 +1,20 @@
+# translation of DrakX-uz.po to Uzbek
+# Copyright (C) 2003, 2004 Free Software Foundation, Inc.
+# Copyright (C) 2003 Mandriva.
+# Mashrab Kuvatov <kmashrab@uni-bremen.de>, 2003, 2004.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DrakX-uz\n"
+"POT-Creation-Date: 2006-01-26 11:06+0100\n"
+"PO-Revision-Date: 2004-10-10 00:41+0500\n"
+"Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
+"Language-Team: Uzbek <kmashrab@uni-bremen.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9\n"
+
 #: ../draklive-install:59
 msgid "Mandriva Live"
 msgstr ""
@@ -11,12 +28,13 @@ msgid "Computing total size"
 msgstr ""
 
 #: ../draklive-install:95
+#, fuzzy
 msgid "Copying in progress"
-msgstr ""
+msgstr "Aniqlash ketayapti"
 
 #: ../draklive-install:163
 msgid "Congratulations"
-msgstr ""
+msgstr "Tabriklaymiz!"
 
 #: ../draklive-install:163
 msgid ""
@@ -27,14 +45,16 @@ msgstr ""
 #: ../draklive-install:179 ../draklive-install:407
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
+"Diskning qismlar jadvaliga kiritilgan o'zgarishlar kuchga kirishi uchun "
+"kompyuterni o'chirib-yoqishingiz kerak."
 
 #: ../draklive-install:230
 msgid "Choose the partitions you want to format"
-msgstr ""
+msgstr "Format qilish uchun diskning qismlarini tanlang"
 
 #: ../draklive-install:232
 msgid "Check bad blocks?"
-msgstr ""
+msgstr " Xato bloklarni tekshiraymi?"
 
 #: ../draklive-install:261
 #, c-format
@@ -59,44 +79,44 @@ msgstr ""
 
 #: ../draklive-install:317
 msgid "No partition available"
-msgstr ""
+msgstr "Diskning qismi yo'q."
 
 #: ../draklive-install:320
 msgid "Scanning partitions to find mount points"
-msgstr ""
+msgstr "Ulash nuqtalarini topish uchun diskning qismlari tekshirilmoqda"
 
 #: ../draklive-install:327
 msgid "Choose the mount points"
-msgstr ""
+msgstr "Ulash nuqtalarini tanlang"
 
 #: ../draklive-install:328
 msgid "Partitioning"
-msgstr ""
+msgstr "Diskni bo'lish"
 
 #: ../draklive-install:361
 msgid "none"
-msgstr ""
+msgstr "yo'q"
 
 #: ../draklive-install:363
 #, c-format
 msgid "Duplicate mount point %s"
-msgstr ""
+msgstr "Bir hil ulash nuqtalari %s"
 
 #: ../draklive-install:389
 msgid "Continue anyway?"
-msgstr ""
+msgstr "Bunga qaramasdan davom etishni istaysizmi?"
 
 #: ../draklive-install:394
 msgid "Quit without saving"
-msgstr ""
+msgstr "Saqlamasdan chiqish"
 
 #: ../draklive-install:394
 msgid "Quit without writing the partition table?"
-msgstr ""
+msgstr "Diskning qismlar jadvalini saqlamasdan chiqaymi?"
 
 #: ../draklive-install:400
 msgid "Do you want to save /etc/fstab modifications"
-msgstr ""
+msgstr "/etc/fstab fayliga kiritilgan o'zgarishlarni saqlashni istaysizmi?"
 
 #: ../draklive-install:412
 #, c-format
@@ -122,6 +142,9 @@ msgid ""
 "For this, create a partition (or click on an existing one).\n"
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
+"Sizda diskning tub qismi bo'lishi shart.\n"
+"Buning uchun, diskda yangi qism yarating (yoki borini tanlang).\n"
+"Keyin, \"Ulash niqtasi\" amalini tanlang va uni \"/\"ga o'rnating"
 
 #: ../install_interactive.pm:67
 msgid ""
@@ -129,26 +152,29 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
+"Sizda diskning svop qismi yo'q.\n"
+"\n"
+"Bunga qaramasdan davom etishni istaysizmi?"
 
 #: ../install_interactive.pm:70
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr ""
+msgstr "Sizda /boot/efi nuqtasiga ulangan diskning FAT qismi bo'lishi shart"
 
 #: ../install_interactive.pm:95
 msgid "Use free space"
-msgstr ""
+msgstr "Bo'sh joydan foydalanish"
 
 #: ../install_interactive.pm:97
 msgid "Not enough free space to allocate new partitions"
-msgstr ""
+msgstr "Yangi qism yaratish uchun diskda etarli joy yo'q"
 
 #: ../install_interactive.pm:105
 msgid "Use existing partitions"
-msgstr ""
+msgstr "Diskda bor qismlardan foydalanish"
 
 #: ../install_interactive.pm:107
 msgid "There is no existing partition to use"
-msgstr ""
+msgstr "Foydalanish uchun diskning qismi mavjud emas"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
@@ -156,23 +182,24 @@ msgstr ""
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
-msgstr ""
+msgstr "Linux4Win uchun diskning qaysi qismini ishlatmoqchisiz?"
 
 #: ../install_interactive.pm:119
 msgid "Choose the sizes"
-msgstr ""
+msgstr "Hajmni tanlash"
 
 #: ../install_interactive.pm:120
 msgid "Root partition size in MB: "
-msgstr ""
+msgstr "Diskning tub qismi Mb'da: "
 
 #: ../install_interactive.pm:121
 msgid "Swap partition size in MB: "
-msgstr ""
+msgstr "Diskning swap qismi Mb'da: "
 
 #: ../install_interactive.pm:130
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
+"Loopback sifatida ishlatish uchun diskda FAT qism yo'q (yoki etarli joy yo'q)"
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
@@ -180,7 +207,7 @@ msgstr ""
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
-msgstr ""
+msgstr "Diskning qaysi qismining hajmini o'zgartirmoqchisiz?"
 
 #: ../install_interactive.pm:153
 #, perl-format
@@ -195,7 +222,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
-msgstr ""
+msgstr "Hajm o'zgartirilmoqda"
 
 #: ../install_interactive.pm:163
 msgid ""
@@ -225,7 +252,7 @@ msgstr ""
 #: ../install_interactive.pm:179
 #, perl-format
 msgid "partition %s"
-msgstr ""
+msgstr "diskning %s qismi"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
@@ -234,7 +261,7 @@ msgstr ""
 #: ../install_interactive.pm:193
 #, perl-format
 msgid "FAT resizing failed: %s"
-msgstr ""
+msgstr "Diskning FAT qismining hajmini o'zgartirish muvaffaqiyatsiz tugadi: %s"
 
 #: ../install_interactive.pm:196
 msgid ""
@@ -245,10 +272,13 @@ msgstr ""
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
+"Hajmini o'zgartirish uchu diskda FAT qism mavjud emas (yoki etarli joy "
+"mavjud emas)"
 
 #: ../install_interactive.pm:213
+#, fuzzy
 msgid "Erase and use entire disk"
-msgstr ""
+msgstr "Butun diskni o'chirish"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
@@ -257,19 +287,20 @@ msgstr ""
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr ""
+"Sizda bittadan ko'p qattiq disk mavjud. Ularni qaysiga Linux'ni o'rnatasiz?"
 
 #: ../install_interactive.pm:219
 #, perl-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr ""
+msgstr "%s diskning barcha qismlari va ulardagi barcha ma'lumot o'chiriladi"
 
 #: ../install_interactive.pm:228
 msgid "Custom disk partitioning"
-msgstr ""
+msgstr "Diskni boshqacha bo'lish"
 
 #: ../install_interactive.pm:232
 msgid "Use fdisk"
-msgstr ""
+msgstr "Fdisk dasturidan foydalanish"
 
 #: ../install_interactive.pm:235
 #, perl-format
@@ -277,24 +308,26 @@ msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
 msgstr ""
+"Endi siz %s diskni bo'lishingiz mumkin.\n"
+"Tugatgach \"w\" bilan saqlash esingizdan chiqmasin."
 
 #: ../install_interactive.pm:271
 msgid "I can not find any room for installing"
-msgstr ""
+msgstr "O'rnatish uchun joy topilmadi"
 
 #: ../install_interactive.pm:275
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr ""
+msgstr "DrakX diskni bo'lish yordamchisi quyidagi echimlarni topdi:"
 
 #: ../install_interactive.pm:281
 #, perl-format
 msgid "Partitioning failed: %s"
-msgstr ""
+msgstr "Diskni bo'lish muvaffaqiyatsiz tugadi: %s"
 
 #: ../install_interactive.pm:288
 msgid "Bringing up the network"
-msgstr ""
+msgstr "Tarmoq ishga tushirilmoqda"
 
 #: ../install_interactive.pm:293
 msgid "Bringing down the network"
-msgstr ""
+msgstr "Tarmoq o'chirilmoqda"

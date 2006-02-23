@@ -1,3 +1,18 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2000 Free Software Foundation, Inc.
+# Copyright (c) 2000 Mandriva.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DrakX\n"
+"POT-Creation-Date: 2006-01-26 11:06+0100\n"
+"PO-Revision-Date: 2002-09-27 17:45+0200\n"
+"Last-Translator: Raivo Saars <spaiks@inbox.lv>\n"
+"Language-Team: Latvian <ll10nt@listes.murds.lv>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
 #: ../draklive-install:59
 msgid "Mandriva Live"
 msgstr ""
@@ -11,12 +26,13 @@ msgid "Computing total size"
 msgstr ""
 
 #: ../draklive-install:95
+#, fuzzy
 msgid "Copying in progress"
-msgstr ""
+msgstr "Notiek noteikšana"
 
 #: ../draklive-install:163
 msgid "Congratulations"
-msgstr ""
+msgstr "Apsveicam"
 
 #: ../draklive-install:163
 msgid ""
@@ -26,15 +42,15 @@ msgstr ""
 
 #: ../draklive-install:179 ../draklive-install:407
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr ""
+msgstr "Lai sadaļu tabulas izmaiņas stātos spēkā, jums jāpārstartē dators"
 
 #: ../draklive-install:230
 msgid "Choose the partitions you want to format"
-msgstr ""
+msgstr "Izvēlieties sadaļas, ko vēlaties formatēt"
 
 #: ../draklive-install:232
 msgid "Check bad blocks?"
-msgstr ""
+msgstr "Pārbaudīt sliktos blokus?"
 
 #: ../draklive-install:261
 #, c-format
@@ -47,7 +63,7 @@ msgstr ""
 
 #: ../draklive-install:265
 msgid "Not enough swap space to fulfill installation, please add some"
-msgstr ""
+msgstr "Instalēšanas pabeigšanai nepietiek swap, palieliniet swap"
 
 #: ../draklive-install:284
 msgid "$d/$l{$_}"
@@ -59,44 +75,45 @@ msgstr ""
 
 #: ../draklive-install:317
 msgid "No partition available"
-msgstr ""
+msgstr "Nav pieejamu sadaļu"
 
 #: ../draklive-install:320
 msgid "Scanning partitions to find mount points"
-msgstr ""
+msgstr "Pārmeklēju sadaļas, lai atrastu montēšanas punktus"
 
 #: ../draklive-install:327
 msgid "Choose the mount points"
-msgstr ""
+msgstr "Izvēlieties montēšanas punktus"
 
 #: ../draklive-install:328
+#, fuzzy
 msgid "Partitioning"
-msgstr ""
+msgstr "Drukāšana"
 
 #: ../draklive-install:361
 msgid "none"
-msgstr ""
+msgstr "neviens"
 
 #: ../draklive-install:363
 #, c-format
 msgid "Duplicate mount point %s"
-msgstr ""
+msgstr "Dublēts montēšanas punkts %s"
 
 #: ../draklive-install:389
 msgid "Continue anyway?"
-msgstr ""
+msgstr "Tad turpināt?"
 
 #: ../draklive-install:394
 msgid "Quit without saving"
-msgstr ""
+msgstr "Iziet nesaglabājot"
 
 #: ../draklive-install:394
 msgid "Quit without writing the partition table?"
-msgstr ""
+msgstr "Iziet neierakstot sadaļu tabulu?"
 
 #: ../draklive-install:400
 msgid "Do you want to save /etc/fstab modifications"
-msgstr ""
+msgstr "Vai vēlaties saglabāt /etc/fstab izmaiņas"
 
 #: ../draklive-install:412
 #, c-format
@@ -115,6 +132,8 @@ msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
 msgstr ""
+"Dažu jūsu datora dzelžu darbībai nepieciešami ``firmas'' draiveri.\n"
+"Papildus informāciju varat atrast šeit: %s"
 
 #: ../install_interactive.pm:62
 msgid ""
@@ -122,6 +141,9 @@ msgid ""
 "For this, create a partition (or click on an existing one).\n"
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
+"Jums ir nepieciešama saknes sadaļa.\n"
+"Šim nolūkam izveidojiet sadaļu (vai uzklikšķiniet uz jau esošas).\n"
+"Tad izvēlieties darbību ``Montēšanas punkts'' un norādiet, ka tas ir `/'"
 
 #: ../install_interactive.pm:67
 msgid ""
@@ -129,26 +151,29 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
+"Jums nav swap sadaļas\n"
+"\n"
+"Vai tomēr turpināt?"
 
 #: ../install_interactive.pm:70
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr ""
+msgstr "Jums ir nepieciešama /boot/efi montēta FAT sadaļa"
 
 #: ../install_interactive.pm:95
 msgid "Use free space"
-msgstr ""
+msgstr "Izmantot brīvo vietu"
 
 #: ../install_interactive.pm:97
 msgid "Not enough free space to allocate new partitions"
-msgstr ""
+msgstr "Nepietiek brīvas vietas, lai izvietotu jaunas sadaļas"
 
 #: ../install_interactive.pm:105
 msgid "Use existing partitions"
-msgstr ""
+msgstr "Izmantot jau esošu sadaļu"
 
 #: ../install_interactive.pm:107
 msgid "There is no existing partition to use"
-msgstr ""
+msgstr "Nav nevienas sadaļas, ko varētu izmantot"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
@@ -156,23 +181,26 @@ msgstr ""
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
-msgstr ""
+msgstr "Kuru sadaļu vēlaties izmantot priekš Linux4Win?"
 
 #: ../install_interactive.pm:119
 msgid "Choose the sizes"
-msgstr ""
+msgstr "Izvēlieties izmērus"
 
 #: ../install_interactive.pm:120
 msgid "Root partition size in MB: "
-msgstr ""
+msgstr "Saknes sadaļas izmērs (MB): "
 
 #: ../install_interactive.pm:121
 msgid "Swap partition size in MB: "
-msgstr ""
+msgstr "Swap sadaļas izmērs (MB): "
 
 #: ../install_interactive.pm:130
+#, fuzzy
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
+"Nav FAT sadaļu, lai izmainīto to izmēru vai izmantotu kā loopback (vai "
+"nepietiek brīvas vietas)"
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
@@ -180,7 +208,7 @@ msgstr ""
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
-msgstr ""
+msgstr "Kuras sadaļas izmēru vēlaties izmainīt?"
 
 #: ../install_interactive.pm:153
 #, perl-format
@@ -188,6 +216,8 @@ msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
 msgstr ""
+"FAT izmēra mainītājs nespēj izmainīt jūsu sadaļu,\n"
+"atklāta sekojoša kļūda: %s"
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
@@ -195,7 +225,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
-msgstr ""
+msgstr "Mainu izmēru"
 
 #: ../install_interactive.pm:163
 msgid ""
@@ -225,7 +255,7 @@ msgstr ""
 #: ../install_interactive.pm:179
 #, perl-format
 msgid "partition %s"
-msgstr ""
+msgstr "sadaļa %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
@@ -234,7 +264,7 @@ msgstr ""
 #: ../install_interactive.pm:193
 #, perl-format
 msgid "FAT resizing failed: %s"
-msgstr ""
+msgstr "FAT izmēra maiņa neizdevās: %s"
 
 #: ../install_interactive.pm:196
 msgid ""
@@ -243,12 +273,16 @@ msgid ""
 msgstr ""
 
 #: ../install_interactive.pm:208
+#, fuzzy
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
+"Nav FAT sadaļu, lai izmainīto to izmēru vai izmantotu kā loopback (vai "
+"nepietiek brīvas vietas)"
 
 #: ../install_interactive.pm:213
+#, fuzzy
 msgid "Erase and use entire disk"
-msgstr ""
+msgstr "Izdzēst visu disku"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
@@ -256,20 +290,20 @@ msgstr ""
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"
-msgstr ""
+msgstr "Jums ir vairāk nekā viens cietais disks, uz kura jūs instalējat linux?"
 
 #: ../install_interactive.pm:219
 #, perl-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr ""
+msgstr "VISAS diska %s sadaļas un tajās esošie dati tiks pazaudēti"
 
 #: ../install_interactive.pm:228
 msgid "Custom disk partitioning"
-msgstr ""
+msgstr "Pielāgots disku sadalījums"
 
 #: ../install_interactive.pm:232
 msgid "Use fdisk"
-msgstr ""
+msgstr "Izmantot fdisk"
 
 #: ../install_interactive.pm:235
 #, perl-format
@@ -277,24 +311,26 @@ msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
 msgstr ""
+"Tagad jūs varat sadalīt diska iekārtu %s.\n"
+"Kad esat pabeiguši, neaizmirstiet saglabāt, izmantojot `w'"
 
 #: ../install_interactive.pm:271
 msgid "I can not find any room for installing"
-msgstr ""
+msgstr "Nevaru atrast vietu instalēšanai"
 
 #: ../install_interactive.pm:275
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr ""
+msgstr "DrakX sadaļu veidošanas meistars atrada sekojošus risinājumus:"
 
 #: ../install_interactive.pm:281
 #, perl-format
 msgid "Partitioning failed: %s"
-msgstr ""
+msgstr "Diska sadalīšana neizdevās: %s"
 
 #: ../install_interactive.pm:288
 msgid "Bringing up the network"
-msgstr ""
+msgstr "Iedarbinu tīklu"
 
 #: ../install_interactive.pm:293
 msgid "Bringing down the network"
-msgstr ""
+msgstr "Atslēdzu tīklu"

@@ -1,3 +1,20 @@
+# Translation of DrakX.po to Estonian.
+# Copyright (C) 2003 Free Software Foundation, Inc.
+# Riho Kurg <rx@linux.ee>, 1999-2003.
+# Marek Laane <bald@starman.ee>, 2002-2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DrakX-et\n"
+"POT-Creation-Date: 2006-01-26 11:06+0100\n"
+"PO-Revision-Date: 2005-10-10 14:13+0200\n"
+"Last-Translator: Marek Laane <bald@starman.ee>\n"
+"Language-Team: Estonian <et@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.3\n"
+
 #: ../draklive-install:59
 msgid "Mandriva Live"
 msgstr ""
@@ -12,11 +29,11 @@ msgstr ""
 
 #: ../draklive-install:95
 msgid "Copying in progress"
-msgstr ""
+msgstr "Käib kopeerimine..."
 
 #: ../draklive-install:163
 msgid "Congratulations"
-msgstr ""
+msgstr "Õnnitleme!"
 
 #: ../draklive-install:163
 msgid ""
@@ -26,15 +43,15 @@ msgstr ""
 
 #: ../draklive-install:179 ../draklive-install:407
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr ""
+msgstr "Partitsioonitabeli säilitamiseks vajate alglaadimist"
 
 #: ../draklive-install:230
 msgid "Choose the partitions you want to format"
-msgstr ""
+msgstr "Valige partitsioonid, mida soovite vormindada"
 
 #: ../draklive-install:232
 msgid "Check bad blocks?"
-msgstr ""
+msgstr "Blokkide kontroll?"
 
 #: ../draklive-install:261
 #, c-format
@@ -47,7 +64,7 @@ msgstr ""
 
 #: ../draklive-install:265
 msgid "Not enough swap space to fulfill installation, please add some"
-msgstr ""
+msgstr "Saaleala on paigaldamiseks liiga väike, palun suurendage seda"
 
 #: ../draklive-install:284
 msgid "$d/$l{$_}"
@@ -59,44 +76,44 @@ msgstr ""
 
 #: ../draklive-install:317
 msgid "No partition available"
-msgstr ""
+msgstr "Partitsioone ei leitud"
 
 #: ../draklive-install:320
 msgid "Scanning partitions to find mount points"
-msgstr ""
+msgstr "Partitsioonidelt haakepunktide otsimine"
 
 #: ../draklive-install:327
 msgid "Choose the mount points"
-msgstr ""
+msgstr "Valige haakepunktid"
 
 #: ../draklive-install:328
 msgid "Partitioning"
-msgstr ""
+msgstr "Kõvaketta jagamine"
 
 #: ../draklive-install:361
 msgid "none"
-msgstr ""
+msgstr "puudub"
 
 #: ../draklive-install:363
 #, c-format
 msgid "Duplicate mount point %s"
-msgstr ""
+msgstr "Haakepunkt %s on määratud topelt"
 
 #: ../draklive-install:389
 msgid "Continue anyway?"
-msgstr ""
+msgstr "Kas ikkagi jätkata?"
 
 #: ../draklive-install:394
 msgid "Quit without saving"
-msgstr ""
+msgstr "Välju ilma salvestamata"
 
 #: ../draklive-install:394
 msgid "Quit without writing the partition table?"
-msgstr ""
+msgstr "Kas väljuda partitsioonitabelit salvestamata?"
 
 #: ../draklive-install:400
 msgid "Do you want to save /etc/fstab modifications"
-msgstr ""
+msgstr "Kas salvestada /etc/fstab muudatused"
 
 #: ../draklive-install:412
 #, c-format
@@ -115,6 +132,8 @@ msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
 msgstr ""
+"Osa Teie riistvarast nõuab tarnijapoolseid draivereid.\n"
+"Infot nende kohta saate: %s"
 
 #: ../install_interactive.pm:62
 msgid ""
@@ -122,6 +141,9 @@ msgid ""
 "For this, create a partition (or click on an existing one).\n"
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
+"Teil peab olema juurpartitsioon.\n"
+"Selleks looge uus partitsioon (või valige üks olemasolevatest).\n"
+"Siis valige tegevus \"Haakepunkt\" ja määrake see kui \"/\""
 
 #: ../install_interactive.pm:67
 msgid ""
@@ -129,26 +151,29 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
+"Saaleala ei ole määratud.\n"
+"\n"
+"Kas ikkagi jätkata?"
 
 #: ../install_interactive.pm:70
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr ""
+msgstr "Teil peab olema FAT-partitsioon haagitud asukohas /boot/efi"
 
 #: ../install_interactive.pm:95
 msgid "Use free space"
-msgstr ""
+msgstr "Kasuta vaba ruumi"
 
 #: ../install_interactive.pm:97
 msgid "Not enough free space to allocate new partitions"
-msgstr ""
+msgstr "Ei ole piisavalt ruumi uute partitsioonide jaoks"
 
 #: ../install_interactive.pm:105
 msgid "Use existing partitions"
-msgstr ""
+msgstr "Kasuta olemasolevat partitsiooni"
 
 #: ../install_interactive.pm:107
 msgid "There is no existing partition to use"
-msgstr ""
+msgstr "Kasutatavat partitsiooni ei leitud"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
@@ -156,23 +181,25 @@ msgstr ""
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
-msgstr ""
+msgstr "Millisele partitsioonile soovite paigaldada Linux4Win?"
 
 #: ../install_interactive.pm:119
 msgid "Choose the sizes"
-msgstr ""
+msgstr "Valige suurused"
 
 #: ../install_interactive.pm:120
 msgid "Root partition size in MB: "
-msgstr ""
+msgstr "Juurpartitsiooni suurus (MB): "
 
 #: ../install_interactive.pm:121
 msgid "Swap partition size in MB: "
-msgstr ""
+msgstr "Saaleala suurus (MB): "
 
 #: ../install_interactive.pm:130
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
+"Sobivat FAT-partitsiooni loopback-ina kasutamiseks ei leitud (ei ole "
+"piisavalt ruumi)"
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
@@ -180,7 +207,7 @@ msgstr ""
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
-msgstr ""
+msgstr "Millist partitsiooni soovite muuta?"
 
 #: ../install_interactive.pm:153
 #, perl-format
@@ -188,6 +215,8 @@ msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
 msgstr ""
+"FAT-partitsiooni suurust ei õnnestunud muuta, \n"
+"ilmnes selline viga: %s"
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
@@ -195,7 +224,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
-msgstr ""
+msgstr "Muudan suurust"
 
 #: ../install_interactive.pm:163
 msgid ""
@@ -225,7 +254,7 @@ msgstr ""
 #: ../install_interactive.pm:179
 #, perl-format
 msgid "partition %s"
-msgstr ""
+msgstr "partitsioon %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
@@ -234,7 +263,7 @@ msgstr ""
 #: ../install_interactive.pm:193
 #, perl-format
 msgid "FAT resizing failed: %s"
-msgstr ""
+msgstr "FATi suuruse muutmine ebaõnnestus: %s"
 
 #: ../install_interactive.pm:196
 msgid ""
@@ -244,11 +273,12 @@ msgstr ""
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
-msgstr ""
+msgstr "Sobivat FAT-partitsiooni ei leitud (ei ole piisavalt ruumi)"
 
 #: ../install_interactive.pm:213
+#, fuzzy
 msgid "Erase and use entire disk"
-msgstr ""
+msgstr "Tühjenda kogu ketas"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
@@ -256,20 +286,20 @@ msgstr ""
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"
-msgstr ""
+msgstr "Teil on rohkem kui üks kõvaketas, millisele neist paigaldate Linuxi?"
 
 #: ../install_interactive.pm:219
 #, perl-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr ""
+msgstr "Kettal %s hävivad KÕIK partitsioonid ja andmed"
 
 #: ../install_interactive.pm:228
 msgid "Custom disk partitioning"
-msgstr ""
+msgstr "Jagan ketta ise"
 
 #: ../install_interactive.pm:232
 msgid "Use fdisk"
-msgstr ""
+msgstr "Kasuta fdisk-i"
 
 #: ../install_interactive.pm:235
 #, perl-format
@@ -277,24 +307,26 @@ msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
 msgstr ""
+"Nüüd saate jagada %s kõvaketta\n"
+"Kui olete valmis, salvestage käsuga \"w\""
 
 #: ../install_interactive.pm:271
 msgid "I can not find any room for installing"
-msgstr ""
+msgstr "Paigaldamiseks ei ole üldse ruumi"
 
 #: ../install_interactive.pm:275
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr ""
+msgstr "DrakX kettajagamise nõustaja leidis sellised lahendused:"
 
 #: ../install_interactive.pm:281
 #, perl-format
 msgid "Partitioning failed: %s"
-msgstr ""
+msgstr "Ketta jagamine ebaõnnestus: %s"
 
 #: ../install_interactive.pm:288
 msgid "Bringing up the network"
-msgstr ""
+msgstr "Võrgu aktiveerimine"
 
 #: ../install_interactive.pm:293
 msgid "Bringing down the network"
-msgstr ""
+msgstr "Võrgu seiskamine"

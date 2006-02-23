@@ -1,3 +1,22 @@
+# Translation file of Mandriva Linux graphic install
+# Copyright (c) 2000 Mandriva
+# Florin Grad <florin@mandriva.com>, 1999-2000
+# Dragos Marian Barbu <dragosb@softhome.net>, 2000
+# Ovidiu Constantin <ovidiu.constantin@gmx.net>, 2002, 2003
+# Harald Ersch <harald@ersch.ro>,2003
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DrakX 7.1\n"
+"POT-Creation-Date: 2006-01-26 11:06+0100\n"
+"PO-Revision-Date: 2003-09-11 18:11+0200\n"
+"Last-Translator: Ovidiu Constantin <ovidiu.constantin@gmx.net>\n"
+"Language-Team: Romanian Translators for Free Software <rtfs-project@lists."
+"sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
 #: ../draklive-install:59
 msgid "Mandriva Live"
 msgstr ""
@@ -11,12 +30,13 @@ msgid "Computing total size"
 msgstr ""
 
 #: ../draklive-install:95
+#, fuzzy
 msgid "Copying in progress"
-msgstr ""
+msgstr "Detecţia este în progres..."
 
 #: ../draklive-install:163
 msgid "Congratulations"
-msgstr ""
+msgstr "Felicitări"
 
 #: ../draklive-install:163
 msgid ""
@@ -27,14 +47,15 @@ msgstr ""
 #: ../draklive-install:179 ../draklive-install:407
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
+"Trebuie să redemaraţi pentru a înregistra modificările tabelei de partiţii"
 
 #: ../draklive-install:230
 msgid "Choose the partitions you want to format"
-msgstr ""
+msgstr "Alegeţi partiţiile pe care doriţi sa le formataăi"
 
 #: ../draklive-install:232
 msgid "Check bad blocks?"
-msgstr ""
+msgstr "Să verific blocurile defectuoase?"
 
 #: ../draklive-install:261
 #, c-format
@@ -47,7 +68,7 @@ msgstr ""
 
 #: ../draklive-install:265
 msgid "Not enough swap space to fulfill installation, please add some"
-msgstr ""
+msgstr "Swap insuficient pentru a termina instalarea, mai adăugaţi ceva"
 
 #: ../draklive-install:284
 msgid "$d/$l{$_}"
@@ -59,44 +80,44 @@ msgstr ""
 
 #: ../draklive-install:317
 msgid "No partition available"
-msgstr ""
+msgstr "nici o partiţie disponibilă"
 
 #: ../draklive-install:320
 msgid "Scanning partitions to find mount points"
-msgstr ""
+msgstr "Scanez partiţiile pentru a găsi punctele de montare"
 
 #: ../draklive-install:327
 msgid "Choose the mount points"
-msgstr ""
+msgstr "Alegeţi punctele de montare"
 
 #: ../draklive-install:328
 msgid "Partitioning"
-msgstr ""
+msgstr "Partiţionare"
 
 #: ../draklive-install:361
 msgid "none"
-msgstr ""
+msgstr "nici unul"
 
 #: ../draklive-install:363
 #, c-format
 msgid "Duplicate mount point %s"
-msgstr ""
+msgstr "Punct de montare duplicat %s"
 
 #: ../draklive-install:389
 msgid "Continue anyway?"
-msgstr ""
+msgstr "Continuaţi totuşi?"
 
 #: ../draklive-install:394
 msgid "Quit without saving"
-msgstr ""
+msgstr "Ieşire fără a înregistra"
 
 #: ../draklive-install:394
 msgid "Quit without writing the partition table?"
-msgstr ""
+msgstr "Ieşire din program fără a scrie în tabela de partiţii ?"
 
 #: ../draklive-install:400
 msgid "Do you want to save /etc/fstab modifications"
-msgstr ""
+msgstr "Doriţi să salvaţi modificările în /etc/fstab?"
 
 #: ../draklive-install:412
 #, c-format
@@ -122,6 +143,9 @@ msgid ""
 "For this, create a partition (or click on an existing one).\n"
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
+"Trebuie să aveţi o partiţie root.\n"
+"Pentru aceasta, creaţi o partiţie (sau faceţi clic pe un existentă).\n"
+"Alegeţi apoi acţiunea ``Punct de montare'' şi fixaţi-o la '/'"
 
 #: ../install_interactive.pm:67
 msgid ""
@@ -129,26 +153,29 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
+"Nu aveţi nici o partiţie swap\n"
+"\n"
+"Să continui totuşi?"
 
 #: ../install_interactive.pm:70
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr ""
+msgstr "Trebuie să aveţi o partiţie FAT montată în /boot/efi"
 
 #: ../install_interactive.pm:95
 msgid "Use free space"
-msgstr ""
+msgstr "Foloseşte spaţiul liber"
 
 #: ../install_interactive.pm:97
 msgid "Not enough free space to allocate new partitions"
-msgstr ""
+msgstr "Spaţiu pe disc insuficient pentru alocarea de noi partiţii"
 
 #: ../install_interactive.pm:105
 msgid "Use existing partitions"
-msgstr ""
+msgstr "Foloseşte partiţionarea existentă"
 
 #: ../install_interactive.pm:107
 msgid "There is no existing partition to use"
-msgstr ""
+msgstr "Nu există partiţii utilizabile"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
@@ -156,19 +183,19 @@ msgstr ""
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
-msgstr ""
+msgstr "Ce partiţie doriţi să folosiţi pentru a instala Linux4Win?"
 
 #: ../install_interactive.pm:119
 msgid "Choose the sizes"
-msgstr ""
+msgstr "Alegeţi mărimile"
 
 #: ../install_interactive.pm:120
 msgid "Root partition size in MB: "
-msgstr ""
+msgstr "Mărimea partiţiei root în MB:"
 
 #: ../install_interactive.pm:121
 msgid "Swap partition size in MB: "
-msgstr ""
+msgstr "Mărimea partiţiei swap în MB: "
 
 #: ../install_interactive.pm:130
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
@@ -180,7 +207,7 @@ msgstr ""
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
-msgstr ""
+msgstr "Care partiţie doriţi să o redimensionaţi?"
 
 #: ../install_interactive.pm:153
 #, perl-format
@@ -195,7 +222,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
-msgstr ""
+msgstr "Redimensionare"
 
 #: ../install_interactive.pm:163
 msgid ""
@@ -225,7 +252,7 @@ msgstr ""
 #: ../install_interactive.pm:179
 #, perl-format
 msgid "partition %s"
-msgstr ""
+msgstr "partiţia %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
@@ -234,7 +261,7 @@ msgstr ""
 #: ../install_interactive.pm:193
 #, perl-format
 msgid "FAT resizing failed: %s"
-msgstr ""
+msgstr "Redimensionarea FAT a eşuat: %s"
 
 #: ../install_interactive.pm:196
 msgid ""
@@ -247,8 +274,9 @@ msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 
 #: ../install_interactive.pm:213
+#, fuzzy
 msgid "Erase and use entire disk"
-msgstr ""
+msgstr "Şterge tot discul"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
@@ -257,19 +285,20 @@ msgstr ""
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr ""
+"Aveţi mai multe discuri fixe, pe care din ele doriţi să instalaţi Linux?"
 
 #: ../install_interactive.pm:219
 #, perl-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr ""
+msgstr "TOATE partiţiile existente şi datele lor se vor pierde pe unitatea %s"
 
 #: ../install_interactive.pm:228
 msgid "Custom disk partitioning"
-msgstr ""
+msgstr "Partiţionare disc personalizată"
 
 #: ../install_interactive.pm:232
 msgid "Use fdisk"
-msgstr ""
+msgstr "Foloseşte fdisk"
 
 #: ../install_interactive.pm:235
 #, perl-format
@@ -277,24 +306,26 @@ msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
 msgstr ""
+"Puteţi partiţiona acum discul %s \n"
+"Cînd aţi terminat, nu uitaţi să înregistraţi folosind `w'"
 
 #: ../install_interactive.pm:271
 msgid "I can not find any room for installing"
-msgstr ""
+msgstr "Nu am spaţiu suficient pentru instalare"
 
 #: ../install_interactive.pm:275
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr ""
+msgstr "Asistentul de partiţionare DrakX a găsit următoarele soluţii:"
 
 #: ../install_interactive.pm:281
 #, perl-format
 msgid "Partitioning failed: %s"
-msgstr ""
+msgstr "Partiţionarea a eşuat: %s"
 
 #: ../install_interactive.pm:288
 msgid "Bringing up the network"
-msgstr ""
+msgstr "Pornire reţea"
 
 #: ../install_interactive.pm:293
 msgid "Bringing down the network"
-msgstr ""
+msgstr "Oprire reţea"

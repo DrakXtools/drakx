@@ -1,3 +1,27 @@
+# translation of drakx.po to polish
+# translation of pl.po to polish
+# translation of DrakX-pl.po to polski
+# translation of pl.po to Polish
+# Polish translation file
+# tomek, 2005.
+# Paweł Jabłoński <pj@linux-mandrake.com>, 2001,2002.
+# Arkadiusz Lipiec <arkadiusz.lipiec@gazeta.pl>, 2002-2004.
+# Tomasz Bednarski <bednarski@skrzynka.pl>, 2005.
+# Tomasz Bednarski <tomasz.bednarski@mandriva.pl>, 2005.
+# Maciej Walkowiak <m.walkowiak@computer.org>, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pl\n"
+"POT-Creation-Date: 2006-01-26 11:06+0100\n"
+"PO-Revision-Date: 2005-10-22 14:46+0200\n"
+"Last-Translator: Tomasz Bednarski <tomasz.bednarski@mandriva.pl>\n"
+"Language-Team: polish <pl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.2\n"
+
 #: ../draklive-install:59
 msgid "Mandriva Live"
 msgstr ""
@@ -12,11 +36,11 @@ msgstr ""
 
 #: ../draklive-install:95
 msgid "Copying in progress"
-msgstr ""
+msgstr "Kopiowanie w toku"
 
 #: ../draklive-install:163
 msgid "Congratulations"
-msgstr ""
+msgstr "Gratulacje"
 
 #: ../draklive-install:163
 msgid ""
@@ -27,14 +51,16 @@ msgstr ""
 #: ../draklive-install:179 ../draklive-install:407
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
+"Należy ponownie uruchomić komputer, w celu uaktywnienia zmian w tablicy "
+"partycji"
 
 #: ../draklive-install:230
 msgid "Choose the partitions you want to format"
-msgstr ""
+msgstr "Wybierz partycje do sformatowania"
 
 #: ../draklive-install:232
 msgid "Check bad blocks?"
-msgstr ""
+msgstr "Sprawdzić partycje w poszukiwaniu uszkodzonych sektorów?"
 
 #: ../draklive-install:261
 #, c-format
@@ -47,7 +73,7 @@ msgstr ""
 
 #: ../draklive-install:265
 msgid "Not enough swap space to fulfill installation, please add some"
-msgstr ""
+msgstr "Wielkość partycji wymiany jest niewystarczająca, należy ją zwiększyć"
 
 #: ../draklive-install:284
 msgid "$d/$l{$_}"
@@ -59,44 +85,44 @@ msgstr ""
 
 #: ../draklive-install:317
 msgid "No partition available"
-msgstr ""
+msgstr "Brak dostępnych partycji"
 
 #: ../draklive-install:320
 msgid "Scanning partitions to find mount points"
-msgstr ""
+msgstr "Przeszukiwanie partycji w celu określenia punktów montowania"
 
 #: ../draklive-install:327
 msgid "Choose the mount points"
-msgstr ""
+msgstr "Wybierz punkty montowania"
 
 #: ../draklive-install:328
 msgid "Partitioning"
-msgstr ""
+msgstr "Partycjonowanie"
 
 #: ../draklive-install:361
 msgid "none"
-msgstr ""
+msgstr "brak"
 
 #: ../draklive-install:363
 #, c-format
 msgid "Duplicate mount point %s"
-msgstr ""
+msgstr "Powielony punkt montowania %s"
 
 #: ../draklive-install:389
 msgid "Continue anyway?"
-msgstr ""
+msgstr "Kontynuować mimo to?"
 
 #: ../draklive-install:394
 msgid "Quit without saving"
-msgstr ""
+msgstr "Wyjście bez zapisywania"
 
 #: ../draklive-install:394
 msgid "Quit without writing the partition table?"
-msgstr ""
+msgstr "Czy opuścić program bez zapisywania tablicy partycji?"
 
 #: ../draklive-install:400
 msgid "Do you want to save /etc/fstab modifications"
-msgstr ""
+msgstr "Czy chcesz zapisać modyfikacje pliku /etc/fstab?"
 
 #: ../draklive-install:412
 #, c-format
@@ -115,6 +141,8 @@ msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
 msgstr ""
+"Część sprzętu w Twoim komputerze wymaga \"firmowych\" sterowników.\n"
+"Więcej informacji na ten temat uzyskasz z %s"
 
 #: ../install_interactive.pm:62
 msgid ""
@@ -122,6 +150,9 @@ msgid ""
 "For this, create a partition (or click on an existing one).\n"
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
+"Wymagana jest obecność partycji root.\n"
+"W tym celu, należy utworzyć partycję (lub kliknąć istniejącą),\n"
+"a następnie wybrać \"Punkt montowania\" `/'"
 
 #: ../install_interactive.pm:67
 msgid ""
@@ -129,26 +160,29 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
+"Brak partycji wymiany (swap).\n"
+"\n"
+"Czy chcesz mimo to kontynuować?"
 
 #: ../install_interactive.pm:70
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr ""
+msgstr "Partycja FAT musi być zamontowana w /boot/efi"
 
 #: ../install_interactive.pm:95
 msgid "Use free space"
-msgstr ""
+msgstr "Wykorzystaj wolne miejsce"
 
 #: ../install_interactive.pm:97
 msgid "Not enough free space to allocate new partitions"
-msgstr ""
+msgstr "Brak wolnego miejsca do utworzenia nowych partycji"
 
 #: ../install_interactive.pm:105
 msgid "Use existing partitions"
-msgstr ""
+msgstr "Użyj istniejących partycji"
 
 #: ../install_interactive.pm:107
 msgid "There is no existing partition to use"
-msgstr ""
+msgstr "Brak istniejących partycji do wykorzystania"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
@@ -156,23 +190,25 @@ msgstr ""
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
-msgstr ""
+msgstr "Którą partycję chcesz użyć dla Linux4Win?"
 
 #: ../install_interactive.pm:119
 msgid "Choose the sizes"
-msgstr ""
+msgstr "Określ rozmiary"
 
 #: ../install_interactive.pm:120
 msgid "Root partition size in MB: "
-msgstr ""
+msgstr "Rozmiar partycji root w MB: "
 
 #: ../install_interactive.pm:121
 msgid "Swap partition size in MB: "
-msgstr ""
+msgstr "Rozmiar partycji swap w MB: "
 
 #: ../install_interactive.pm:130
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
+"Brak partycji FAT do użycia jako plikopartycji (lub brak wystarczającej "
+"ilości wolnego miejsca)"
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
@@ -180,7 +216,7 @@ msgstr ""
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
-msgstr ""
+msgstr "Rozmiar której partycji chcesz zmienić?"
 
 #: ../install_interactive.pm:153
 #, perl-format
@@ -188,6 +224,8 @@ msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
 msgstr ""
+"Program zmniejszający partycję FAT nie potrafi obsłużyć\n"
+"Twojej partycji. Wystąpił następujący błąd: %s"
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
@@ -195,7 +233,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
-msgstr ""
+msgstr "Zmiana rozmiaru"
 
 #: ../install_interactive.pm:163
 msgid ""
@@ -225,7 +263,7 @@ msgstr ""
 #: ../install_interactive.pm:179
 #, perl-format
 msgid "partition %s"
-msgstr ""
+msgstr "partycja %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
@@ -234,7 +272,7 @@ msgstr ""
 #: ../install_interactive.pm:193
 #, perl-format
 msgid "FAT resizing failed: %s"
-msgstr ""
+msgstr "Zmiana rozmiaru partycji FAT nie powiodła się: %s"
 
 #: ../install_interactive.pm:196
 msgid ""
@@ -245,10 +283,11 @@ msgstr ""
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
+"Brak partycji FAT do zmiany rozmiaru (lub brak wystarczającej ilości miejsca)"
 
 #: ../install_interactive.pm:213
 msgid "Erase and use entire disk"
-msgstr ""
+msgstr "Wymaż i wykorzystaj cały dysk"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
@@ -257,19 +296,23 @@ msgstr ""
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr ""
+"Masz więcej niż jeden dysk twardy. Na którym z nich ma być zainstalowany "
+"Linux?"
 
 #: ../install_interactive.pm:219
 #, perl-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr ""
+"WSZYSTKIE istniejące partycje i dane na nich zapisane zostaną usunięte z "
+"dysku %s"
 
 #: ../install_interactive.pm:228
 msgid "Custom disk partitioning"
-msgstr ""
+msgstr "Zaawansowany podział na partycje"
 
 #: ../install_interactive.pm:232
 msgid "Use fdisk"
-msgstr ""
+msgstr "Użyj programu fdisk"
 
 #: ../install_interactive.pm:235
 #, perl-format
@@ -277,24 +320,26 @@ msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
 msgstr ""
+"Możesz teraz tworzyć partycje  %s \n"
+"Gdy skończysz, pamiętaj o zapisaniu używając \"w\""
 
 #: ../install_interactive.pm:271
 msgid "I can not find any room for installing"
-msgstr ""
+msgstr "Brak miejsca na instalację"
 
 #: ../install_interactive.pm:275
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr ""
+msgstr "Druid podziału na partycje proponuje następujące rozwiązania:"
 
 #: ../install_interactive.pm:281
 #, perl-format
 msgid "Partitioning failed: %s"
-msgstr ""
+msgstr "Partycjonowanie nie powiodło się: %s"
 
 #: ../install_interactive.pm:288
 msgid "Bringing up the network"
-msgstr ""
+msgstr "Uruchamianie sieci"
 
 #: ../install_interactive.pm:293
 msgid "Bringing down the network"
-msgstr ""
+msgstr "Zatrzymywanie sieci"

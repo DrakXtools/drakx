@@ -1,3 +1,88 @@
+# translation of DrakX-fr.po to Français
+# Translation file of Mandriva Linux graphic install
+# Copyright (C) 1999 Mandriva
+#
+# Veuillez ne pas mettre à jour ce fichier à moins d'être
+# certain tant de vos traductions que de votre grammaire et
+# de votre orthographe. Ces dernières sont trop souvent
+# approximatives. Elles nécessitent alors des relectures et
+# des corrections qui n'ont d'autre conséquence que de faire
+# perdre du temps à tout le monde (à vous si votre travail est
+# imparfait et aux relecteurs qui doivent rechercher puis corriger
+# vos éventuelles fautes).
+#
+# VEUILLEZ RESPECTER LA TYPOGRAPHIE FRANÇAISE !
+# Les majuscules doivent être accentuées si besoin est. Respectez
+# les espaces nécessaires pour la ponctuation (espace après la virgule et
+# le point, espace insécables avant les points d'interrogation,
+# d'exclamation, les deux-points et le point virgule, espace aussi après
+# le point virgule).
+# N'enlevez pas l'espace qui suit un signe de ponctuation en fin de
+# phrase; vous devez respecter la version originale.  Dans ce type de
+# cas, il est extrèmement probable que le programme va afficher
+# quelque chose d'autre à la fin.  En enlevant l'espace, vous allez
+# accoller deux mots.
+#
+# ESPACES INSÉCABLES
+# Vous devez utiliser un espace insécable (c'est un espace qui ne peut
+# pas servir de rupture à la ligne) avant le point d'exclamation, le
+# point d'interrogation, le deux-points, le point virgules, et pour les
+# "quantités", entre le nombre et l'unité abbrégée (par exemple "10 g").
+# L'espace normal en ISO et UTF8 est le caractere 0x20 tandis que l'espace
+# insécable est le caractère 0xA0. Sous Emacs en utilisant le po mode
+# livré avec gettext >= 0.10.40-4mdk vous pouvez voir celui-ci avec un
+# fond de couleur spécial. Sous Vi celui-ci est normalement affiché
+# précédé du caractère pipe "|". Pour le taper sous la plupart des
+# éditeurs, vous pouvez utiliser la touche "Compose" puis en tapant
+# deux espaces. Si vous n'avez pas de touche compose, vous pouvez
+# donner cette fonction à la touche "Windows" droite de votre clavier
+# avec la commande suivante :
+#   xmodmap -e 'keycode 116 = Multi_key'
+#
+# Les guillemets françaises sont « et » et non ". La guillemet ouvrante
+# « est suivie d'un espace insécable et la guillemet fermante » est
+# précédée du même type d'espace. Pour le taper, vous pouvez utiliser
+# la combinaison Compose < <, et Compose > > (ou alt-z et alt-x).
+#
+# Enfin, traduisez INTELLIGEMMENT et non mot à mot. Certaines traductions
+# n'ont aucun sens en français.
+#
+# MOTS À ÉVITER
+#  - application. Ce terme n'étant pas compris par le grand public, il est
+#    préférable de le remplacer par le mot "programme".
+#
+# Nous vous remercions de votre compréhension.
+#
+#
+#
+# Stéphane Teletchéa, 2005.
+# David BAUDENS <baudens@mandriva.com>, 1999-2004.
+# David ODIN <odin@mandriva.com>, 2000.
+# Pablo Saratxaga <pablo@mandriva.com>, 2001, 2005.
+# KAtiOS <katios@nolabel.net>, 2001.
+# Guillaume Cottenceau <gc@mandriva.com>, 2001-2002.
+# Thierry Vignaud <tvignaud@mandriva.com>, 2001-2004.
+# Christophe Combelles <ccomb@free.fr>, 2002,2003.
+# Adrien REZER <monsieurdidi@free.fr>, 2003.
+# RICHARD Nicolas <richardnicolas22@yahoo.fr>, 2004.
+# Lecureuil Nicolas <n1c0l4s.l3@wanadoo.fr>, 2004.
+# Teletchéa <steletch@free.fr>, 2004, 2005.
+# Christophe Berthelé <cpjc@free.fr>, 2005, 2006.
+# Didier Hérisson <didier.herisson@angstrom.uu.se>, 2005.
+# Nicolas Lécureuil <neoclust@mandriva.org>, 2005.
+msgid ""
+msgstr ""
+"Project-Id-Version: DrakX-fr\n"
+"POT-Creation-Date: 2006-01-26 11:06+0100\n"
+"PO-Revision-Date: 2006-01-29 21:51+0100\n"
+"Last-Translator: Christophe Berthelé <cpjc@free.fr>\n"
+"Language-Team: Français <cooker-i18n@mandrivalinux.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11\n"
+"Plural-Forms: nplurals=2;plural=(n>1);\n"
+
 #: ../draklive-install:59
 msgid "Mandriva Live"
 msgstr ""
@@ -12,11 +97,11 @@ msgstr ""
 
 #: ../draklive-install:95
 msgid "Copying in progress"
-msgstr ""
+msgstr "Copie en cours"
 
 #: ../draklive-install:163
 msgid "Congratulations"
-msgstr ""
+msgstr "Félicitations"
 
 #: ../draklive-install:163
 msgid ""
@@ -27,14 +112,16 @@ msgstr ""
 #: ../draklive-install:179 ../draklive-install:407
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
+"Vous devez redémarrer pour que les modifications apportées à la\n"
+"table des partitions soient prises en compte"
 
 #: ../draklive-install:230
 msgid "Choose the partitions you want to format"
-msgstr ""
+msgstr "Sélectionnez les partitions que vous souhaitez formater"
 
 #: ../draklive-install:232
 msgid "Check bad blocks?"
-msgstr ""
+msgstr "Vérifier la présence de secteurs endommagés ?"
 
 #: ../draklive-install:261
 #, c-format
@@ -48,6 +135,8 @@ msgstr ""
 #: ../draklive-install:265
 msgid "Not enough swap space to fulfill installation, please add some"
 msgstr ""
+"La partition d'échange (swap) est insuffisante pour achever l'installation, "
+"veuillez en ajouter."
 
 #: ../draklive-install:284
 msgid "$d/$l{$_}"
@@ -59,44 +148,44 @@ msgstr ""
 
 #: ../draklive-install:317
 msgid "No partition available"
-msgstr ""
+msgstr "Aucune partition disponible"
 
 #: ../draklive-install:320
 msgid "Scanning partitions to find mount points"
-msgstr ""
+msgstr "Examen des partitions afin d'identifier les points de montage"
 
 #: ../draklive-install:327
 msgid "Choose the mount points"
-msgstr ""
+msgstr "Choix des points de montage"
 
 #: ../draklive-install:328
 msgid "Partitioning"
-msgstr ""
+msgstr "Partitionnement"
 
 #: ../draklive-install:361
 msgid "none"
-msgstr ""
+msgstr "aucun"
 
 #: ../draklive-install:363
 #, c-format
 msgid "Duplicate mount point %s"
-msgstr ""
+msgstr "Point de montage en double : %s"
 
 #: ../draklive-install:389
 msgid "Continue anyway?"
-msgstr ""
+msgstr "Désirez-vous tout de même continuer ?"
 
 #: ../draklive-install:394
 msgid "Quit without saving"
-msgstr ""
+msgstr "Quitter sans sauvegarder"
 
 #: ../draklive-install:394
 msgid "Quit without writing the partition table?"
-msgstr ""
+msgstr "Désirez-vous réellement quitter sans écrire la table des partitions ?"
 
 #: ../draklive-install:400
 msgid "Do you want to save /etc/fstab modifications"
-msgstr ""
+msgstr "Désirez-vous sauvegarder les modifications de /etc/fstab"
 
 #: ../draklive-install:412
 #, c-format
@@ -115,6 +204,9 @@ msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
 msgstr ""
+"Certains périphériques présents sur votre système nécessitent des\n"
+"pilotes « propriétaires » pour pouvoir fonctionner. Vous pouvez\n"
+"trouver plus d'informations les concernant ici : %s"
 
 #: ../install_interactive.pm:62
 msgid ""
@@ -122,6 +214,9 @@ msgid ""
 "For this, create a partition (or click on an existing one).\n"
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
+"Vous devez avoir une partition racine.\n"
+"Pour la définir, créez une partition (ou choisissez-en une déjà\n"
+"existante) puis cliquez sur « Point de montage » et choisissez « / »."
 
 #: ../install_interactive.pm:67
 msgid ""
@@ -129,26 +224,29 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
+"Vous n'avez pas de partition d'échange (swap).\n"
+"\n"
+"Désirez-vous tout de même continuer ?"
 
 #: ../install_interactive.pm:70
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr ""
+msgstr "Vous devez disposer d'une partition FAT montée en /boot/efi"
 
 #: ../install_interactive.pm:95
 msgid "Use free space"
-msgstr ""
+msgstr "Utiliser l'espace libre"
 
 #: ../install_interactive.pm:97
 msgid "Not enough free space to allocate new partitions"
-msgstr ""
+msgstr "Pas assez d'espace libre pour créer de nouvelles partitions"
 
 #: ../install_interactive.pm:105
 msgid "Use existing partitions"
-msgstr ""
+msgstr "Utiliser une partition existante"
 
 #: ../install_interactive.pm:107
 msgid "There is no existing partition to use"
-msgstr ""
+msgstr "Pas de partition existante à utiliser"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
@@ -156,23 +254,25 @@ msgstr ""
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
-msgstr ""
+msgstr "Quelle partition désirez-vous utiliser pour Linux4Win ?"
 
 #: ../install_interactive.pm:119
 msgid "Choose the sizes"
-msgstr ""
+msgstr "Choix des tailles"
 
 #: ../install_interactive.pm:120
 msgid "Root partition size in MB: "
-msgstr ""
+msgstr "Taille de la partition racine en Mo : "
 
 #: ../install_interactive.pm:121
 msgid "Swap partition size in MB: "
-msgstr ""
+msgstr "Taille de la partition d'échange (swap) en Mo : "
 
 #: ../install_interactive.pm:130
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
+"Il n'y a aucune partition FAT à utiliser pour le bouclage (ou trop peu "
+"d'espace est disponible)"
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
@@ -180,7 +280,7 @@ msgstr ""
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
-msgstr ""
+msgstr "Quelle partition désirez-vous redimensionner ?"
 
 #: ../install_interactive.pm:153
 #, perl-format
@@ -188,6 +288,8 @@ msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
 msgstr ""
+"Le programme de redimensionnement des partitions FAT ne peut gérer votre\n"
+"partition. L'erreur suivante est survenue : %s"
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
@@ -195,7 +297,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
-msgstr ""
+msgstr "Redimensionnement"
 
 #: ../install_interactive.pm:163
 msgid ""
@@ -225,7 +327,7 @@ msgstr ""
 #: ../install_interactive.pm:179
 #, perl-format
 msgid "partition %s"
-msgstr ""
+msgstr "partition %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
@@ -234,7 +336,7 @@ msgstr ""
 #: ../install_interactive.pm:193
 #, perl-format
 msgid "FAT resizing failed: %s"
-msgstr ""
+msgstr "Le redimensionnement de la partition FAT a échoué : %s"
 
 #: ../install_interactive.pm:196
 msgid ""
@@ -245,10 +347,12 @@ msgstr ""
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
+"Il n'y a aucune partition FAT à redimensionner (ou trop peu d'espace est "
+"disponible)"
 
 #: ../install_interactive.pm:213
 msgid "Erase and use entire disk"
-msgstr ""
+msgstr "Effacer et utiliser tout le disque"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
@@ -257,19 +361,23 @@ msgstr ""
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr ""
+"Vous possédez plus d'un disque dur.\n"
+"Sur lequel désirez-vous installer Linux ?"
 
 #: ../install_interactive.pm:219
 #, perl-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr ""
+"TOUTES les partitions et les données présentes sur le disque %s seront "
+"perdues"
 
 #: ../install_interactive.pm:228
 msgid "Custom disk partitioning"
-msgstr ""
+msgstr "Partitionnement personnalisé"
 
 #: ../install_interactive.pm:232
 msgid "Use fdisk"
-msgstr ""
+msgstr "Utiliser fdisk"
 
 #: ../install_interactive.pm:235
 #, perl-format
@@ -277,24 +385,28 @@ msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
 msgstr ""
+"Vous pouvez maintenant partitionner %s.\n"
+"\n"
+"Lorsque vous aurez terminé, n'oubliez pas d'enregistrer vos\n"
+"modifications en appuyant sur la touche « w »."
 
 #: ../install_interactive.pm:271
 msgid "I can not find any room for installing"
-msgstr ""
+msgstr "Pas de place disponible pour l'installation"
 
 #: ../install_interactive.pm:275
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr ""
+msgstr "L'assistant de partitionnement a trouvé les solutions suivantes : "
 
 #: ../install_interactive.pm:281
 #, perl-format
 msgid "Partitioning failed: %s"
-msgstr ""
+msgstr "Le partitionnement a échoué : %s"
 
 #: ../install_interactive.pm:288
 msgid "Bringing up the network"
-msgstr ""
+msgstr "Démarrage de l'interface réseau..."
 
 #: ../install_interactive.pm:293
 msgid "Bringing down the network"
-msgstr ""
+msgstr "Arrêt de l'interface réseau..."

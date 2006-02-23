@@ -1,3 +1,19 @@
+# translation of DrakX-hi.po to हिन्दी, भारत (Hindi, India)
+# Copyright (C) 2003,2004 Free Software Foundation, Inc.
+# धनञ्जय शर्मा (Dhananjaya Sharma) <dysxhi@yahoo.co.in>, 2003, 2004.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DrakX-hi\n"
+"POT-Creation-Date: 2006-01-26 11:06+0100\n"
+"PO-Revision-Date: 2004-04-04 21:54+0530\n"
+"Last-Translator: धनञ्जय शर्मा (Dhananjaya Sharma) <dysxhi@yahoo.co.in>\n"
+"Language-Team: हिन्दी (Hindi) <dysxhi@yahoo.co.in>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.3\n"
+
 #: ../draklive-install:59
 msgid "Mandriva Live"
 msgstr ""
@@ -11,12 +27,13 @@ msgid "Computing total size"
 msgstr ""
 
 #: ../draklive-install:95
+#, fuzzy
 msgid "Copying in progress"
-msgstr ""
+msgstr "खोज जारी है"
 
 #: ../draklive-install:163
 msgid "Congratulations"
-msgstr ""
+msgstr "बधाई हो"
 
 #: ../draklive-install:163
 msgid ""
@@ -27,14 +44,16 @@ msgstr ""
 #: ../draklive-install:179 ../draklive-install:407
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
+"विभाजन तालिका परिवर्तनों को लागू करने के लिए आपको तंत्र को पुनः आरम्भ (रीबूट) करना "
+"आवश्यक है"
 
 #: ../draklive-install:230
 msgid "Choose the partitions you want to format"
-msgstr ""
+msgstr "उन विभाजनों का चयन करें जिनको फ़ार्मेट करना चाहते है"
 
 #: ../draklive-install:232
 msgid "Check bad blocks?"
-msgstr ""
+msgstr "निकृष्ट भागों की जाँच ?"
 
 #: ../draklive-install:261
 #, c-format
@@ -47,7 +66,7 @@ msgstr ""
 
 #: ../draklive-install:265
 msgid "Not enough swap space to fulfill installation, please add some"
-msgstr ""
+msgstr "संसाधन की आवश्यकता को परिपूर्ण करने योग्य स्वैप स्थान नहीं है, कृपया कुछ बढ़ायें"
 
 #: ../draklive-install:284
 msgid "$d/$l{$_}"
@@ -59,44 +78,44 @@ msgstr ""
 
 #: ../draklive-install:317
 msgid "No partition available"
-msgstr ""
+msgstr "कोई विभाजन उपलब्ध नहीं है"
 
 #: ../draklive-install:320
 msgid "Scanning partitions to find mount points"
-msgstr ""
+msgstr "आरोह बिन्दुओं को खोजने के लिए विभाजनों को स्कैन किया जा रहा है"
 
 #: ../draklive-install:327
 msgid "Choose the mount points"
-msgstr ""
+msgstr "आरोह बिन्दुओं का चयन करें"
 
 #: ../draklive-install:328
 msgid "Partitioning"
-msgstr ""
+msgstr "विभाजनीकरण"
 
 #: ../draklive-install:361
 msgid "none"
-msgstr ""
+msgstr "कुछ भी नहीं"
 
 #: ../draklive-install:363
 #, c-format
 msgid "Duplicate mount point %s"
-msgstr ""
+msgstr "दोहरा आरोहण बिन्दु %s"
 
 #: ../draklive-install:389
 msgid "Continue anyway?"
-msgstr ""
+msgstr "कुछ भी हो जारी रहा जायें?"
 
 #: ../draklive-install:394
 msgid "Quit without saving"
-msgstr ""
+msgstr "बिना सुरक्षित किये निकास"
 
 #: ../draklive-install:394
 msgid "Quit without writing the partition table?"
-msgstr ""
+msgstr "विभाजन तालिका को लिखें बिना ही बाहर निकला जायें?"
 
 #: ../draklive-install:400
 msgid "Do you want to save /etc/fstab modifications"
-msgstr ""
+msgstr "क्या आप /etc/fstab परिवर्तनों को सुरक्षित करना चाहते है"
 
 #: ../draklive-install:412
 #, c-format
@@ -115,6 +134,9 @@ msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
 msgstr ""
+"आपके कम्प्यूटर पर स्थित कुछ हार्डवेयरों कार्य करने के लिए ``स्वामिक'' चालकों की आवश्यकता है "
+"।\n"
+"आप इनके बारे में कुछ सूचना उपरोक्त पर पा सकते है: %s"
 
 #: ../install_interactive.pm:62
 msgid ""
@@ -122,6 +144,10 @@ msgid ""
 "For this, create a partition (or click on an existing one).\n"
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
+"आपके पास एक रूट विभाजन होना चाहिए ।\n"
+"इसके लिए, एक नवीन विभाजन का निर्माण करें (या पहिले से विद्यमान विभाजन पर क्लिक करें) "
+"।\n"
+"और फ़िर ``आरोह बिन्दु'' क्रिया का चयन करें और इसे `/' पर स्थापित करें ।"
 
 #: ../install_interactive.pm:67
 msgid ""
@@ -129,26 +155,29 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
+"आपके पास एक स्वैप विभाजन नहीं है । \n"
+"\n"
+"क्या फ़िर भी जारी रहा जायें ?"
 
 #: ../install_interactive.pm:70
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr ""
+msgstr "/boot/efi में आपके पास एक फ़ैट विभाजन आरोहित होना चाहिए"
 
 #: ../install_interactive.pm:95
 msgid "Use free space"
-msgstr ""
+msgstr "मुक्त स्थान का उपयोग करें"
 
 #: ../install_interactive.pm:97
 msgid "Not enough free space to allocate new partitions"
-msgstr ""
+msgstr "नये विभाजनों को देने के लिए इतना मुक्त स्थान उपलब्ध नहीं है "
 
 #: ../install_interactive.pm:105
 msgid "Use existing partitions"
-msgstr ""
+msgstr "विद्यमान विभाजनों का उपयोग करें"
 
 #: ../install_interactive.pm:107
 msgid "There is no existing partition to use"
-msgstr ""
+msgstr "कोई विद्यमान विभाजन उपयोगार्थ नहीं है"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
@@ -156,23 +185,25 @@ msgstr ""
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
-msgstr ""
+msgstr "लिनक्स-४-विन के लिए आप किस विभाजन का उपयोग करना चाहते है?"
 
 #: ../install_interactive.pm:119
 msgid "Choose the sizes"
-msgstr ""
+msgstr "आकारों का चयन करें"
 
 #: ../install_interactive.pm:120
 msgid "Root partition size in MB: "
-msgstr ""
+msgstr "रूट विभाजन का आकार एमबी में: "
 
 #: ../install_interactive.pm:121
 msgid "Swap partition size in MB: "
-msgstr ""
+msgstr "स्वैप विभाजन का आकार एमबी में: "
 
 #: ../install_interactive.pm:130
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
+"लूपबैक की भांति उपयोग करने के लिए कोई फ़ैट विभाजन नहीं है (या और अधिक स्थान बाकी नहीं "
+"रहा है)"
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
@@ -180,7 +211,7 @@ msgstr ""
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
-msgstr ""
+msgstr "आप किस विभाजन का पुनः आकारीकरण करना चाहते है?"
 
 #: ../install_interactive.pm:153
 #, perl-format
@@ -188,6 +219,8 @@ msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
 msgstr ""
+"फ़ैट पुनःआकारीकरण आपके विभाजन को जानने में असमर्थ है, \n"
+"निम्नलिखित त्रुटि उत्पन्न हो गयी है: %s"
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
@@ -195,7 +228,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
-msgstr ""
+msgstr "पुनः आकारीकरण"
 
 #: ../install_interactive.pm:163
 msgid ""
@@ -225,7 +258,7 @@ msgstr ""
 #: ../install_interactive.pm:179
 #, perl-format
 msgid "partition %s"
-msgstr ""
+msgstr "विभाजन %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
@@ -234,7 +267,7 @@ msgstr ""
 #: ../install_interactive.pm:193
 #, perl-format
 msgid "FAT resizing failed: %s"
-msgstr ""
+msgstr "फ़ैट का पुनः आकारीकरण असफ़ल: %s "
 
 #: ../install_interactive.pm:196
 msgid ""
@@ -244,11 +277,12 @@ msgstr ""
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
-msgstr ""
+msgstr "पुनः आकारीकरण के लिए कोई फ़ैट विभाजन नहीं है (या और अधिक स्थान नहीं बचा है)"
 
 #: ../install_interactive.pm:213
+#, fuzzy
 msgid "Erase and use entire disk"
-msgstr ""
+msgstr "सम्पूर्ण डिस्क को मिटायें"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
@@ -256,20 +290,20 @@ msgstr ""
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"
-msgstr ""
+msgstr "आपके पास एक से ज्यादा हार्ड-डिस्क है, आप किस पर लिनक्स का संसाधन करना चाहते है?"
 
 #: ../install_interactive.pm:219
 #, perl-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr ""
+msgstr "%s ड्राइव पर स्थित सभी विद्यमान विभाजन और उनकी सूचनायें विलुप्त हो जायेगी"
 
 #: ../install_interactive.pm:228
 msgid "Custom disk partitioning"
-msgstr ""
+msgstr "ऐच्छिक डिस्क विभाजनीकरण"
 
 #: ../install_interactive.pm:232
 msgid "Use fdisk"
-msgstr ""
+msgstr "एफ़डिस्क का उपयोग करें"
 
 #: ../install_interactive.pm:235
 #, perl-format
@@ -277,24 +311,26 @@ msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
 msgstr ""
+"अब आप विभाजन कर सकते है %s.\n"
+"जब आप कर लें, तो `w' का उपयोग करके सुरक्षित करना ना भूलें ।"
 
 #: ../install_interactive.pm:271
 msgid "I can not find any room for installing"
-msgstr ""
+msgstr "मै संसाधन करने लिये कोई स्थान नहीं खोज पा रहा हूँ"
 
 #: ../install_interactive.pm:275
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr ""
+msgstr "ड्रैक-एक्स विभाजनीकरण विज़ार्ड को निम्नलिखित समाधान मिलें:"
 
 #: ../install_interactive.pm:281
 #, perl-format
 msgid "Partitioning failed: %s"
-msgstr ""
+msgstr "विभाजनीकरण असफ़ल: %s "
 
 #: ../install_interactive.pm:288
 msgid "Bringing up the network"
-msgstr ""
+msgstr "नेटवर्क को लाया जा रहा है"
 
 #: ../install_interactive.pm:293
 msgid "Bringing down the network"
-msgstr ""
+msgstr "नेटवर्क को लाया जा रहा है"

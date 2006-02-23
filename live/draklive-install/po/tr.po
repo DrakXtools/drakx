@@ -1,3 +1,28 @@
+# translation of DrakX-tr.po to Turkish
+# Copyright (C) 2000,2003 Free Software Foundation, Inc.
+# Copyright (c) 2000 Mandriva
+# ############################################
+#
+# Ömer Fadıl USTA <omer_fad@hotmail.com> , 1999-2003.
+# Tuncay YENİAY <tuncayyeniay@mynet.com>,2002.
+# Nazmi Savga <nsavga@doruk.net.tr>,2001.
+# Durmuş Celep <durmusc_tr@yahoo.com>,2002.
+# Erçin EKER <erc.caldera@gmx.net>, 2003.
+#
+# #############################################
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DrakX-tr\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-01-26 11:06+0100\n"
+"PO-Revision-Date: 2004-09-15 13:35+0200\n"
+"Last-Translator: Ömer Fadıl USTA <omer_fad@hotmail.com>\n"
+"Language-Team: Turkish <tr@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
 #: ../draklive-install:59
 msgid "Mandriva Live"
 msgstr ""
@@ -11,12 +36,13 @@ msgid "Computing total size"
 msgstr ""
 
 #: ../draklive-install:95
+#, fuzzy
 msgid "Copying in progress"
-msgstr ""
+msgstr "Algılama sürüyor"
 
 #: ../draklive-install:163
 msgid "Congratulations"
-msgstr ""
+msgstr "Tebrikler"
 
 #: ../draklive-install:163
 msgid ""
@@ -27,14 +53,16 @@ msgstr ""
 #: ../draklive-install:179 ../draklive-install:407
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
+"Bölümlendirme tablosundaki değişikliklerin geçerli olması için makinanızı "
+"yeniden başlatmalısınız."
 
 #: ../draklive-install:230
 msgid "Choose the partitions you want to format"
-msgstr ""
+msgstr "Biçemlendirilecek disk bölümlerini seçin"
 
 #: ../draklive-install:232
 msgid "Check bad blocks?"
-msgstr ""
+msgstr "Hatalı bloklar sınansın mı?"
 
 #: ../draklive-install:261
 #, c-format
@@ -47,7 +75,7 @@ msgstr ""
 
 #: ../draklive-install:265
 msgid "Not enough swap space to fulfill installation, please add some"
-msgstr ""
+msgstr "Kurulumu tamamlamak için yeterli takas alanı yok, lütfen ekleme yapın"
 
 #: ../draklive-install:284
 msgid "$d/$l{$_}"
@@ -59,44 +87,44 @@ msgstr ""
 
 #: ../draklive-install:317
 msgid "No partition available"
-msgstr ""
+msgstr "hiç bölüm bulunamadı"
 
 #: ../draklive-install:320
 msgid "Scanning partitions to find mount points"
-msgstr ""
+msgstr "Bağlama noktalarını bulmak için bölümler taranıyor"
 
 #: ../draklive-install:327
 msgid "Choose the mount points"
-msgstr ""
+msgstr "Bağlama noktalarını seçin"
 
 #: ../draklive-install:328
 msgid "Partitioning"
-msgstr ""
+msgstr "Bölümlendirme"
 
 #: ../draklive-install:361
 msgid "none"
-msgstr ""
+msgstr "hiçbiri"
 
 #: ../draklive-install:363
 #, c-format
 msgid "Duplicate mount point %s"
-msgstr ""
+msgstr "Çok sayıda %s bağlama noktası"
 
 #: ../draklive-install:389
 msgid "Continue anyway?"
-msgstr ""
+msgstr "Yine de devam edilsin mi?"
 
 #: ../draklive-install:394
 msgid "Quit without saving"
-msgstr ""
+msgstr "Kaydetmeden Çık"
 
 #: ../draklive-install:394
 msgid "Quit without writing the partition table?"
-msgstr ""
+msgstr "Bölümlendirme tablosunu kaydetmeden mi çıkıyorsunuz?"
 
 #: ../draklive-install:400
 msgid "Do you want to save /etc/fstab modifications"
-msgstr ""
+msgstr "/etc/fstab değişikliklerini kaydetmek istiyor musunuz ?"
 
 #: ../draklive-install:412
 #, c-format
@@ -115,6 +143,8 @@ msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
 msgstr ""
+"Bilgisayarınızdaki bazı donanımlar çalışmak için \"özgün\" sürücüler\n"
+"gerektiriyor. Bunlar hakkında bilgi bulabileceğiniz adres: %s"
 
 #: ../install_interactive.pm:62
 msgid ""
@@ -122,6 +152,10 @@ msgid ""
 "For this, create a partition (or click on an existing one).\n"
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
+"Bir kök disk bölümüne ihtiyacınız var.\n"
+"Bunun için mevcut bir disk bölümünü seçebileceğiniz gibi\n"
+"yeni birini de oluşturabilirsiniz.\n"
+"Bundan sonra da \"Bağlama Noktası\"nı '/' olarak değiştirmelisiniz."
 
 #: ../install_interactive.pm:67
 msgid ""
@@ -129,26 +163,32 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
+"Bir takas disk bölümünüz yok\n"
+"\n"
+"Takas alanı çok önemlidir ve bilhassa 2.4 çekirdekler için belleğin\n"
+"iki katına kadar bir takas alanı önerilir!\n"
+"\n"
+"Devam edilsin mi?"
 
 #: ../install_interactive.pm:70
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr ""
+msgstr "/boot/efi ye bağlanmış bir FAT bölümüne ihtiyacınız var"
 
 #: ../install_interactive.pm:95
 msgid "Use free space"
-msgstr ""
+msgstr "Boş alan kullanılsın"
 
 #: ../install_interactive.pm:97
 msgid "Not enough free space to allocate new partitions"
-msgstr ""
+msgstr "Yeni bölümleri açmak için yeterli yer yok"
 
 #: ../install_interactive.pm:105
 msgid "Use existing partitions"
-msgstr ""
+msgstr "Mevcut disk bölümü kullanılsın"
 
 #: ../install_interactive.pm:107
 msgid "There is no existing partition to use"
-msgstr ""
+msgstr "Kullanılabilecek bir bölüm bulunamadı"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
@@ -156,23 +196,24 @@ msgstr ""
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
-msgstr ""
+msgstr "Linux4Win için hangi disk bölümünü kullanmak istiyorsunuz?"
 
 #: ../install_interactive.pm:119
 msgid "Choose the sizes"
-msgstr ""
+msgstr "Boyutları seçiniz"
 
 #: ../install_interactive.pm:120
 msgid "Root partition size in MB: "
-msgstr ""
+msgstr "Kök bölümü boyutu (MB): "
 
 #: ../install_interactive.pm:121
 msgid "Swap partition size in MB: "
-msgstr ""
+msgstr "Takas bölümü boyutu (MB): "
 
 #: ../install_interactive.pm:130
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
+"loopback olarak kullanılacak hiç FAT bölümü yok (ya da boş alan kalmamış)"
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
@@ -180,7 +221,7 @@ msgstr ""
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
-msgstr ""
+msgstr "Hangi bölümü yeniden boyutlandırmak istiyorsunuz?"
 
 #: ../install_interactive.pm:153
 #, perl-format
@@ -188,6 +229,8 @@ msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
 msgstr ""
+"FAT boyutlandırıcısı bölümü boyutlandıramıyor, \n"
+"şu hata oluştu: %s"
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
@@ -195,7 +238,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
-msgstr ""
+msgstr "Yeniden boyutlandırılma"
 
 #: ../install_interactive.pm:163
 msgid ""
@@ -225,7 +268,7 @@ msgstr ""
 #: ../install_interactive.pm:179
 #, perl-format
 msgid "partition %s"
-msgstr ""
+msgstr "%s bölümünde ne kadar yer bırakacaksınız?"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
@@ -234,7 +277,7 @@ msgstr ""
 #: ../install_interactive.pm:193
 #, perl-format
 msgid "FAT resizing failed: %s"
-msgstr ""
+msgstr "FAT yeniden boyutlandırması başarısız: %s"
 
 #: ../install_interactive.pm:196
 msgid ""
@@ -244,11 +287,12 @@ msgstr ""
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
-msgstr ""
+msgstr "Yeniden boyutlandırılacak hiç FAT bölümü yok (ya da boş alan kalmamış)"
 
 #: ../install_interactive.pm:213
+#, fuzzy
 msgid "Erase and use entire disk"
-msgstr ""
+msgstr "Tüm disk silinsin"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
@@ -256,20 +300,20 @@ msgstr ""
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"
-msgstr ""
+msgstr "Birden çok sabit diskiniz var, hangisine linux kurmak istiyorsunuz?"
 
 #: ../install_interactive.pm:219
 #, perl-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr ""
+msgstr "%s diski üzerindeki TÜM bölümler ve veriler silinecektir"
 
 #: ../install_interactive.pm:228
 msgid "Custom disk partitioning"
-msgstr ""
+msgstr "Özel Disk Bölümlendirme"
 
 #: ../install_interactive.pm:232
 msgid "Use fdisk"
-msgstr ""
+msgstr "Fdisk kullanılsın"
 
 #: ../install_interactive.pm:235
 #, perl-format
@@ -277,24 +321,26 @@ msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
 msgstr ""
+"Şimdi %s'i bölümlendirebilirsiniz.\n"
+"İşiniz bittiğinde `w'yi kullanarak değişiklikleri kaydetmeyi unutmayın."
 
 #: ../install_interactive.pm:271
 msgid "I can not find any room for installing"
-msgstr ""
+msgstr "Kurulum için boş yer bulunamıyor"
 
 #: ../install_interactive.pm:275
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr ""
+msgstr "DrakX Bölümlendirme sihirbazı şu çözümleri buldu:"
 
 #: ../install_interactive.pm:281
 #, perl-format
 msgid "Partitioning failed: %s"
-msgstr ""
+msgstr "Bölümlendirme başarısız: %s"
 
 #: ../install_interactive.pm:288
 msgid "Bringing up the network"
-msgstr ""
+msgstr "Ağ bağlanıyor"
 
 #: ../install_interactive.pm:293
 msgid "Bringing down the network"
-msgstr ""
+msgstr "Ağ ayrılıyor"

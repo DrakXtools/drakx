@@ -1,3 +1,23 @@
+# translation of DrakX-bg.po to Bulgarian
+# Copyright (C) 2000,2003 Free Software Foundation, Inc.
+# Copyright (c) 2000 Mandriva
+# Bozhan Boiadzhiev <bozhan@plov.omega.bg>, 2000.
+# Borislav Aleksandrov <B.Aleksandrov@cnsys.bg>, 2003.
+# Boyan Ivanov <boyan17@bulgaria.com>, 2003.
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DrakX-bg\n"
+"POT-Creation-Date: 2006-01-26 11:06+0100\n"
+"PO-Revision-Date: 2004-09-15 13:27+0200\n"
+"Last-Translator: Boyan Ivanov <boyan17@bulgaria.com>\n"
+"Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.0.2\n"
+
 #: ../draklive-install:59
 msgid "Mandriva Live"
 msgstr ""
@@ -11,12 +31,13 @@ msgid "Computing total size"
 msgstr ""
 
 #: ../draklive-install:95
+#, fuzzy
 msgid "Copying in progress"
-msgstr ""
+msgstr "Откриване в прогрес"
 
 #: ../draklive-install:163
 msgid "Congratulations"
-msgstr ""
+msgstr "Поздравления"
 
 #: ../draklive-install:163
 msgid ""
@@ -26,15 +47,15 @@ msgstr ""
 
 #: ../draklive-install:179 ../draklive-install:407
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr ""
+msgstr "Налага се ра рестартирате, преди модификациите да предизвикат ефект"
 
 #: ../draklive-install:230
 msgid "Choose the partitions you want to format"
-msgstr ""
+msgstr "Изберете дяловете, които искате да форматирате"
 
 #: ../draklive-install:232
 msgid "Check bad blocks?"
-msgstr ""
+msgstr "Проверка за лоши сектори ?"
 
 #: ../draklive-install:261
 #, c-format
@@ -48,6 +69,7 @@ msgstr ""
 #: ../draklive-install:265
 msgid "Not enough swap space to fulfill installation, please add some"
 msgstr ""
+"Няма достатъчно swap за приключване на инсталацията, моля добавете малко"
 
 #: ../draklive-install:284
 msgid "$d/$l{$_}"
@@ -59,44 +81,44 @@ msgstr ""
 
 #: ../draklive-install:317
 msgid "No partition available"
-msgstr ""
+msgstr "няма дялове на разположение"
 
 #: ../draklive-install:320
 msgid "Scanning partitions to find mount points"
-msgstr ""
+msgstr "Претърсване на дяловете за намиране на точки на монтиране"
 
 #: ../draklive-install:327
 msgid "Choose the mount points"
-msgstr ""
+msgstr "Изберете места за монтиране"
 
 #: ../draklive-install:328
 msgid "Partitioning"
-msgstr ""
+msgstr "Разделяне на дялове"
 
 #: ../draklive-install:361
 msgid "none"
-msgstr ""
+msgstr "няма"
 
 #: ../draklive-install:363
 #, c-format
 msgid "Duplicate mount point %s"
-msgstr ""
+msgstr "Дублирай точката на монтиране %s"
 
 #: ../draklive-install:389
 msgid "Continue anyway?"
-msgstr ""
+msgstr "Продължение въпреки всичко ?"
 
 #: ../draklive-install:394
 msgid "Quit without saving"
-msgstr ""
+msgstr "Изход без запис"
 
 #: ../draklive-install:394
 msgid "Quit without writing the partition table?"
-msgstr ""
+msgstr "Изход, без да запис на таблицата на дяловете ?"
 
 #: ../draklive-install:400
 msgid "Do you want to save /etc/fstab modifications"
-msgstr ""
+msgstr "Искате ли да запазите промените в /etc/fstab"
 
 #: ../draklive-install:412
 #, c-format
@@ -115,6 +137,9 @@ msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
 msgstr ""
+"Част от хардуера на компютъра ви се нуждае от ``собствените си'' драйвери, "
+"за да работи.\n"
+"Можете да намерите повече информация за това на: %s"
 
 #: ../install_interactive.pm:62
 msgid ""
@@ -122,6 +147,9 @@ msgid ""
 "For this, create a partition (or click on an existing one).\n"
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
+"Трябва да имате root-дял.\n"
+"Затова създайте дял (или цъкнете на съществуващ).\n"
+"Тогава изберете действие ``Място на монтиране'' и го сложете `/'"
 
 #: ../install_interactive.pm:67
 msgid ""
@@ -129,26 +157,29 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
+"Нямате swap-дял\n"
+"\n"
+"Да продължа ли все пак ?"
 
 #: ../install_interactive.pm:70
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr ""
+msgstr "Трябва да имате FAT дял монтиран в /boot/efi"
 
 #: ../install_interactive.pm:95
 msgid "Use free space"
-msgstr ""
+msgstr "Използвай свободното място"
 
 #: ../install_interactive.pm:97
 msgid "Not enough free space to allocate new partitions"
-msgstr ""
+msgstr "Няма достатъчно място за създаване на нов дял"
 
 #: ../install_interactive.pm:105
 msgid "Use existing partitions"
-msgstr ""
+msgstr "Изпозване на съществуващ дял"
 
 #: ../install_interactive.pm:107
 msgid "There is no existing partition to use"
-msgstr ""
+msgstr "Няма дял, който мога да използвам"
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
@@ -156,23 +187,25 @@ msgstr ""
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
-msgstr ""
+msgstr "Кой дял искате да използвате за Linux4Win ?"
 
 #: ../install_interactive.pm:119
 msgid "Choose the sizes"
-msgstr ""
+msgstr "Изберете големините"
 
 #: ../install_interactive.pm:120
 msgid "Root partition size in MB: "
-msgstr ""
+msgstr "Големина на root-дяла в MB: "
 
 #: ../install_interactive.pm:121
 msgid "Swap partition size in MB: "
-msgstr ""
+msgstr "Големина на swap-дяла в MB: "
 
 #: ../install_interactive.pm:130
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
+"Няма FAT дялове за използване като loopback (или няма достатъчно място на "
+"диска)"
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
@@ -180,7 +213,7 @@ msgstr ""
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
-msgstr ""
+msgstr "Кой дял желаете да промените?"
 
 #: ../install_interactive.pm:153
 #, perl-format
@@ -188,6 +221,8 @@ msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
 msgstr ""
+"Не възможност за работа с вашия FAT дял, \n"
+"поради получената грешка: %s"
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
@@ -195,7 +230,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
-msgstr ""
+msgstr "Промяна на големината"
 
 #: ../install_interactive.pm:163
 msgid ""
@@ -225,7 +260,7 @@ msgstr ""
 #: ../install_interactive.pm:179
 #, perl-format
 msgid "partition %s"
-msgstr ""
+msgstr "дял %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
@@ -234,7 +269,7 @@ msgstr ""
 #: ../install_interactive.pm:193
 #, perl-format
 msgid "FAT resizing failed: %s"
-msgstr ""
+msgstr "Неуспешно преразделяне на FAT: %s"
 
 #: ../install_interactive.pm:196
 msgid ""
@@ -244,11 +279,12 @@ msgstr ""
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
-msgstr ""
+msgstr "Няма FAT дялове за смяна на големината (или няма достаъчно място)"
 
 #: ../install_interactive.pm:213
+#, fuzzy
 msgid "Erase and use entire disk"
-msgstr ""
+msgstr "Изтрий целия диск"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
@@ -256,20 +292,20 @@ msgstr ""
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"
-msgstr ""
+msgstr "имате повече от един твърди дискове, кой да използвам за инсталацията?"
 
 #: ../install_interactive.pm:219
 #, perl-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr ""
+msgstr "ВСИЧКИ съществуващи дялове и данните върху тях на %s ще бъдат загубени"
 
 #: ../install_interactive.pm:228
 msgid "Custom disk partitioning"
-msgstr ""
+msgstr "Клиентско разделяне на диска"
 
 #: ../install_interactive.pm:232
 msgid "Use fdisk"
-msgstr ""
+msgstr "Използвай fdisk"
 
 #: ../install_interactive.pm:235
 #, perl-format
@@ -277,24 +313,26 @@ msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
 msgstr ""
+"Сега можете да разделите %s.\n"
+"Когато сте готови, не забравяйте да запишете използвайки `w'"
 
 #: ../install_interactive.pm:271
 msgid "I can not find any room for installing"
-msgstr ""
+msgstr "Не мога да намеря никакво място за инсталация"
 
 #: ../install_interactive.pm:275
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr ""
+msgstr "Помощникът за разделине на дялове на DrakX намери следните решения:"
 
 #: ../install_interactive.pm:281
 #, perl-format
 msgid "Partitioning failed: %s"
-msgstr ""
+msgstr "Неуспешно разделяне на: %s"
 
 #: ../install_interactive.pm:288
 msgid "Bringing up the network"
-msgstr ""
+msgstr "Включвам мрежата"
 
 #: ../install_interactive.pm:293
 msgid "Bringing down the network"
-msgstr ""
+msgstr "Изключване на мрежата"

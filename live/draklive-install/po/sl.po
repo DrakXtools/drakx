@@ -1,3 +1,26 @@
+# translation of DrakX.po to Slovenian
+# translation of DrakX-sl.po to Slovenian
+# translation of DrakX-sl.po to Slovenščina
+# Copyright (C) 2004, 2005 Free Software Foundation, Inc.
+# Matjaž Kaše <matjaz.kase@g-kabel.si>, 2004.
+# Aljoša Ločičnik <aljosa.locicnik@mandrakeprinas.org>, 2005.
+# Gregor Pirnaver <gregor.pirnaver@sdm-si.org>, 2002,2004,2005.
+# Jure Repinc <jlp@holodeck1.com>, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DrakX-sl\n"
+"POT-Creation-Date: 2006-01-26 11:06+0100\n"
+"PO-Revision-Date: 2005-09-20 07:29+0200\n"
+"Last-Translator: Gregor Pirnaver <gregor.pirnaver@sdm-si.org>\n"
+"Language-Team:  <sl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9.1\n"
+"Plural-Forms:  nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3);\n"
+
 #: ../draklive-install:59
 msgid "Mandriva Live"
 msgstr ""
@@ -12,11 +35,11 @@ msgstr ""
 
 #: ../draklive-install:95
 msgid "Copying in progress"
-msgstr ""
+msgstr "Kopiranje poteka"
 
 #: ../draklive-install:163
 msgid "Congratulations"
-msgstr ""
+msgstr "Čestitke"
 
 #: ../draklive-install:163
 msgid ""
@@ -27,14 +50,16 @@ msgstr ""
 #: ../draklive-install:179 ../draklive-install:407
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
+"Da bi uveljavili spremembe razdelitvene tabele, morate ponovno zagnati "
+"računalnik."
 
 #: ../draklive-install:230
 msgid "Choose the partitions you want to format"
-msgstr ""
+msgstr "Izberite razdelek, ki ga želite formatirati:"
 
 #: ../draklive-install:232
 msgid "Check bad blocks?"
-msgstr ""
+msgstr "Želite preveriti slabe bloke?"
 
 #: ../draklive-install:261
 #, c-format
@@ -48,6 +73,8 @@ msgstr ""
 #: ../draklive-install:265
 msgid "Not enough swap space to fulfill installation, please add some"
 msgstr ""
+"Za nadaljevanje namestitve je premalo izmenjalnega prostora (swap);treba ga "
+"je dodati. "
 
 #: ../draklive-install:284
 msgid "$d/$l{$_}"
@@ -59,44 +86,44 @@ msgstr ""
 
 #: ../draklive-install:317
 msgid "No partition available"
-msgstr ""
+msgstr "Ne najdem nobenega razdelka."
 
 #: ../draklive-install:320
 msgid "Scanning partitions to find mount points"
-msgstr ""
+msgstr "Pregledovanje priklopnih točk razdelkov."
 
 #: ../draklive-install:327
 msgid "Choose the mount points"
-msgstr ""
+msgstr "Izberite priklopne točke"
 
 #: ../draklive-install:328
 msgid "Partitioning"
-msgstr ""
+msgstr "Razdelitev diska"
 
 #: ../draklive-install:361
 msgid "none"
-msgstr ""
+msgstr "nič"
 
 #: ../draklive-install:363
 #, c-format
 msgid "Duplicate mount point %s"
-msgstr ""
+msgstr "Podvojena priklopna točka %s"
 
 #: ../draklive-install:389
 msgid "Continue anyway?"
-msgstr ""
+msgstr "Vseeno nadaljujem?"
 
 #: ../draklive-install:394
 msgid "Quit without saving"
-msgstr ""
+msgstr "Zapri brez shranjevanja sprememb"
 
 #: ../draklive-install:394
 msgid "Quit without writing the partition table?"
-msgstr ""
+msgstr "Zapri brez zapisovanja razdelitvene tabele?"
 
 #: ../draklive-install:400
 msgid "Do you want to save /etc/fstab modifications"
-msgstr ""
+msgstr "Želite shraniti spremembe v /etc/fstab?"
 
 #: ../draklive-install:412
 #, c-format
@@ -115,6 +142,9 @@ msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
 msgstr ""
+"Nekateri deli vaše strojne opreme potrebujejo za pravilno delovanje "
+"»lastniške« gonilnike.\n"
+"Nekaj informacij o tem dobite na: %s"
 
 #: ../install_interactive.pm:62
 msgid ""
@@ -122,6 +152,9 @@ msgid ""
 "For this, create a partition (or click on an existing one).\n"
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
+"Potrebujete korenski razdelek.\n"
+"Ustvarite nov razdelek (ali izberite obstoječega).\n"
+"Nato izberite ``Priklopna točka'' in jo nastavite na `/'."
 
 #: ../install_interactive.pm:67
 msgid ""
@@ -129,26 +162,29 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
+"Nimate izmenjalnega razdelka ``swap''\n"
+"\n"
+"Naj vseeno nadaljujem?"
 
 #: ../install_interactive.pm:70
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr ""
+msgstr "Imeti morate priklopljen FAT razdelek na /boot/efi"
 
 #: ../install_interactive.pm:95
 msgid "Use free space"
-msgstr ""
+msgstr "Uporabi razpoložljivi prostor"
 
 #: ../install_interactive.pm:97
 msgid "Not enough free space to allocate new partitions"
-msgstr ""
+msgstr "Za nov razdelek ni dovolj prostega prostora."
 
 #: ../install_interactive.pm:105
 msgid "Use existing partitions"
-msgstr ""
+msgstr "Uporabi obstoječe razdelke"
 
 #: ../install_interactive.pm:107
 msgid "There is no existing partition to use"
-msgstr ""
+msgstr "Nobenega obstoječega razdelka ni mogoče uporabiti."
 
 #: ../install_interactive.pm:114
 msgid "Use the Windows partition for loopback"
@@ -156,23 +192,23 @@ msgstr ""
 
 #: ../install_interactive.pm:117
 msgid "Which partition do you want to use for Linux4Win?"
-msgstr ""
+msgstr "Kateri razdelek želite uporabiti za Linux4Win?"
 
 #: ../install_interactive.pm:119
 msgid "Choose the sizes"
-msgstr ""
+msgstr "Izberite velikosti"
 
 #: ../install_interactive.pm:120
 msgid "Root partition size in MB: "
-msgstr ""
+msgstr "Velikost korenskega razdelka v MB: "
 
 #: ../install_interactive.pm:121
 msgid "Swap partition size in MB: "
-msgstr ""
+msgstr "Velikost izmenjalnega razdelka v MB: "
 
 #: ../install_interactive.pm:130
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
-msgstr ""
+msgstr "Ni razdelka FAT, ki bi ga bilo mogoče uporabiti za povratno zanko."
 
 #: ../install_interactive.pm:137
 msgid "Use the free space on the Windows partition"
@@ -180,7 +216,7 @@ msgstr ""
 
 #: ../install_interactive.pm:139
 msgid "Which partition do you want to resize?"
-msgstr ""
+msgstr "Kateremu razdelku želite spremeniti velikost?"
 
 #: ../install_interactive.pm:153
 #, perl-format
@@ -188,6 +224,8 @@ msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
 msgstr ""
+"Orodje za spreminjanje velikosti FAT na vašem razdelku ne deluje. \n"
+"Prišlo je do naslednje napake: %s"
 
 #: ../install_interactive.pm:156
 msgid "Computing the size of the Windows partition"
@@ -195,7 +233,7 @@ msgstr ""
 
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
 msgid "Resizing"
-msgstr ""
+msgstr "Spreminjanje velikosti"
 
 #: ../install_interactive.pm:163
 msgid ""
@@ -225,7 +263,7 @@ msgstr ""
 #: ../install_interactive.pm:179
 #, perl-format
 msgid "partition %s"
-msgstr ""
+msgstr "razdelek %s"
 
 #: ../install_interactive.pm:188
 msgid "Resizing Windows partition"
@@ -234,7 +272,7 @@ msgstr ""
 #: ../install_interactive.pm:193
 #, perl-format
 msgid "FAT resizing failed: %s"
-msgstr ""
+msgstr "Spreminjanje velikosti FAT je spodletelo: %s"
 
 #: ../install_interactive.pm:196
 msgid ""
@@ -244,11 +282,12 @@ msgstr ""
 
 #: ../install_interactive.pm:208
 msgid "There is no FAT partition to resize (or not enough space left)"
-msgstr ""
+msgstr "Ni razdelka FAT, ki bi mu bilo mogoče spremeniti velikost."
 
 #: ../install_interactive.pm:213
+#, fuzzy
 msgid "Erase and use entire disk"
-msgstr ""
+msgstr "Izbriši celoten disk"
 
 #: ../install_interactive.pm:213
 msgid "Remove Windows(TM)"
@@ -256,20 +295,20 @@ msgstr ""
 
 #: ../install_interactive.pm:215
 msgid "You have more than one hard drive, which one do you install linux on?"
-msgstr ""
+msgstr "Imate več trdih diskov; na katerega želite namestiti Linux?"
 
 #: ../install_interactive.pm:219
 #, perl-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr ""
+msgstr "VSI razdelki in podatki na disku %s bodo izgubljeni."
 
 #: ../install_interactive.pm:228
 msgid "Custom disk partitioning"
-msgstr ""
+msgstr "Ročno razdeljevanje diska"
 
 #: ../install_interactive.pm:232
 msgid "Use fdisk"
-msgstr ""
+msgstr "Uporabi fdisk"
 
 #: ../install_interactive.pm:235
 #, perl-format
@@ -277,24 +316,26 @@ msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
 msgstr ""
+"Sedaj lahko razdelite %s.\n"
+"Po končanem delu ne pozabite shraniti sprememb z ukazom `w'"
 
 #: ../install_interactive.pm:271
 msgid "I can not find any room for installing"
-msgstr ""
+msgstr "Za namestitev ni dovolj prostora."
 
 #: ../install_interactive.pm:275
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr ""
+msgstr "Čarovnik za razdeljevanje DrakX je našel naslednje rešitve:"
 
 #: ../install_interactive.pm:281
 #, perl-format
 msgid "Partitioning failed: %s"
-msgstr ""
+msgstr "Razdeljevanje je spodletelo: %s"
 
 #: ../install_interactive.pm:288
 msgid "Bringing up the network"
-msgstr ""
+msgstr "Vklapljanje omrežja"
 
 #: ../install_interactive.pm:293
 msgid "Bringing down the network"
-msgstr ""
+msgstr "Izklapljanje omrežja"
