@@ -60,7 +60,7 @@ my $title = N("Mandriva Live");
 {
     my $w = ugtk2->new($title);
     ugtk2::gtkadd($w->{window},
-                  #ugtk2::gtkcreate_img($live_install_img),
+                  ugtk2::gtkcreate_img($live_install_img),
                   ugtk2::gtknew('Label', height => 5),
                   N("This wizard will help you to install the live distribution."),
                   ugtk2::create_okcancel($w));
