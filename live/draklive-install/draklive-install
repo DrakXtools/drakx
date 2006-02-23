@@ -123,6 +123,7 @@ undef $_w;
 unlink(map { $in->{prefix} . $_ } '/.autofsck',
        '/home/guest/Desktop/draklive-copy-wizard.desktop',
        '/home/guest/Desktop/draklive-install.desktop');
+eval{ rm_rf($in->{prefix} . '/home/guest/.mdk-folders') };
 system('chroot', $in->{prefix}, 'rpm', '-e', 'draklive-install');
 #- enable drakx-finish-install
 output($in->{prefix} . '/etc/sysconfig/finish-install', qq(
