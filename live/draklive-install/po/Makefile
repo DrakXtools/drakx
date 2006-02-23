@@ -2,7 +2,8 @@ NAME = draklive-install
 localedir = ${prefix}/share/locale
 PL_FILES = ../$(NAME) $(shell find .. -type f -name "*pm")
 
-POFILES = $(shell for i in ../../../perl-install/share/po/*.po; do basename $$i; done)
+MERGE_POFILES = $(shell for i in ../../../perl-install/share/po/*.po; do basename $$i; done)
+POFILES = $(wildcard *.po)
 MOFILES = $(POFILES:%.po=%.mo)
 LANGS = $(POFILES:%.po=%)
 
@@ -12,7 +13,7 @@ all: $(NAME).pot $(POFILES) $(MOFILES)
 	msgfmt -o $@ $<
 
 merge: $(NAME).pot
-	@for n in $(POFILES); do \
+	@for n in $(MERGE_POFILES); do \
 		echo "Merging $$n"; \
 		msgmerge "$$n" $< > "$$n"t; \
 		mv -f "$$n"t "$$n"; \
