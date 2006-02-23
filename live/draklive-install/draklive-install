@@ -4,7 +4,7 @@ use lib qw(/usr/lib/libDrakX);
 use standalone;
 use interactive;
 #- err, yes, we're loaded, aren't we? (actually not used by this wizard in install_interactive)
-BEGIN { undef @INC{'install_any.pm', 'install_steps.pm'} };
+BEGIN { undef @INC{'install_any.pm', 'install_steps.pm'} }
 use install_interactive;
 use fs::type;
 use common;
@@ -118,7 +118,7 @@ undef $_w;
 
 #- FIXME: maybe factorize with draklive, using draklive --clean-chroot ?
 #- remove unwanted files and packages
-unlink(map { $in->{prefix} . $_} '/.autofsck',
+unlink(map { $in->{prefix} . $_ } '/.autofsck',
        '/home/guest/Desktop/draklive-copy-wizard.desktop',
        '/home/guest/Desktop/draklive-install.desktop');
 system('chroot', $in->{prefix}, 'rpm', '-e', 'draklive-install');
@@ -411,7 +411,7 @@ sub lilo_choice() {
     if (my $part = find { $_->{mntpoint} && !maybeFormatted($_) } fs::get::fstab($all_hds)) {
 	$in->ask_okcancel('', N("You should format partition %s.
 Otherwise no entry for mount point %s will be written in fstab.
-Quit anyway?", $part->{device}, $part->{mntpoint})) or return if $::isStandalone&& 0; #- no, please
+Quit anyway?", $part->{device}, $part->{mntpoint})) or return if $::isStandalone && 0; #- no, please
     }
     1;
   }
