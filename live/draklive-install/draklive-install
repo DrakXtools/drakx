@@ -174,7 +174,7 @@ sub doPartitionDisksAfter {
     my ($o) = @_;
     my $hds = $o->{all_hds}{hds};
     partition_table::write($_) foreach @$hds;
-    if (grep { $_->{rebootNeeded} } @$hds) {
+    if (any { $_->{rebootNeeded} } @$hds) {
 	#- install_steps_interactive::rebootNeeded
 	$o->ask_warn('', N("You need to reboot for the partition table modifications to take place"));
 	$o->exit(0);
