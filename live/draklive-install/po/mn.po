@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2006-01-26 11:06+0100\n"
+"POT-Creation-Date: 2006-02-23 13:25+0100\n"
 "PO-Revision-Date: 2004-01-02 00:35+0100\n"
 "Last-Translator: Sanlig Badral <Badral@openmn.org>\n"
 "Language-Team: Mongolian <openmn-core@lists.sf.net>\n"
@@ -17,133 +17,126 @@ msgstr ""
 "X-Generator: KBabel 1.0.2\n"
 
 #: ../draklive-install:59
+#, c-format
 msgid "Mandriva Live"
 msgstr ""
 
 #: ../draklive-install:65
+#, c-format
 msgid "This wizard will help you to install the live distribution."
 msgstr ""
 
 #: ../draklive-install:83
+#, c-format
 msgid "Computing total size"
 msgstr ""
 
 #: ../draklive-install:95
-#, fuzzy
+#, fuzzy, c-format
 msgid "Copying in progress"
 msgstr "ямх"
 
 #: ../draklive-install:163
-#, fuzzy
+#, fuzzy, c-format
 msgid "Congratulations"
 msgstr "Баяр хүргэе!"
 
 #: ../draklive-install:163
+#, c-format
 msgid ""
 "Please halt your computer, remove your live system, and restart your "
 "computer."
 msgstr ""
 
-#: ../draklive-install:179 ../draklive-install:407
-#, fuzzy
+#: ../draklive-install:179 ../draklive-install:404
+#, fuzzy, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr "Та хүснэгт"
 
 #: ../draklive-install:230
-#, fuzzy
+#, fuzzy, c-format
 msgid "Choose the partitions you want to format"
 msgstr "вы"
 
 #: ../draklive-install:232
-#, fuzzy
+#, fuzzy, c-format
 msgid "Check bad blocks?"
 msgstr "Gá?"
 
 #: ../draklive-install:261
 #, c-format
-msgid "Failed to check filesystem %s. Do you want to repair the errors?"
+msgid ""
+"Failed to check filesystem %s. Do you want to repair the errors? (beware, "
+"you can lose data)"
 msgstr ""
 
-#: ../draklive-install:262
-msgid ", $1), 1);"
-msgstr ""
-
-#: ../draklive-install:265
+#: ../draklive-install:264
+#, c-format
 msgid "Not enough swap space to fulfill installation, please add some"
 msgstr ""
 
-#: ../draklive-install:284
-msgid "$d/$l{$_}"
-msgstr ""
-
-#: ../draklive-install:285
-msgid "$d/.bashrc"
-msgstr ""
-
-#: ../draklive-install:317
-#, fuzzy
+#: ../draklive-install:314
+#, fuzzy, c-format
 msgid "No partition available"
 msgstr "Үгүй"
 
-#: ../draklive-install:320
+#: ../draklive-install:317
+#, c-format
 msgid "Scanning partitions to find mount points"
 msgstr "Холболтын цэгүүдийг олохын тулд хуваалтуудыг шалгаж байна"
 
-#: ../draklive-install:327
-#, fuzzy
+#: ../draklive-install:324
+#, fuzzy, c-format
 msgid "Choose the mount points"
 msgstr "Сонгох"
 
-#: ../draklive-install:328
+#: ../draklive-install:325
+#, c-format
 msgid "Partitioning"
 msgstr ""
 
-#: ../draklive-install:361
-msgid "none"
-msgstr "аль нь ч үгүй (none)"
-
-#: ../draklive-install:363
+#: ../draklive-install:360
 #, fuzzy, c-format
 msgid "Duplicate mount point %s"
 msgstr "Цэг"
 
-#: ../draklive-install:389
+#: ../draklive-install:386
+#, c-format
 msgid "Continue anyway?"
 msgstr "Ямар ч байсан үргэлжлүүлэх үү?"
 
-#: ../draklive-install:394
+#: ../draklive-install:391
+#, c-format
 msgid "Quit without saving"
 msgstr "Хадгалахгүйгээр гарах"
 
-#: ../draklive-install:394
-#, fuzzy
+#: ../draklive-install:391
+#, fuzzy, c-format
 msgid "Quit without writing the partition table?"
 msgstr "Гарах хүснэгт?"
 
-#: ../draklive-install:400
-#, fuzzy
+#: ../draklive-install:397
+#, fuzzy, c-format
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "вы"
 
-#: ../draklive-install:412
+#: ../draklive-install:409
 #, c-format
-msgid "You should format partition %s."
-msgstr ""
-
-#: ../draklive-install:414
 msgid ""
-", $part->{device}, $part->{mntpoint})) or return if $::isStandalone && 0; #- "
-"no, please"
+"You should format partition %s.\n"
+"Otherwise no entry for mount point %s will be written in fstab.\n"
+"Quit anyway?"
 msgstr ""
 
 #: ../install_interactive.pm:22
-#, perl-format
+#, c-format
 msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
 msgstr ""
 
 #: ../install_interactive.pm:62
+#, c-format
 msgid ""
 "You must have a root partition.\n"
 "For this, create a partition (or click on an existing one).\n"
@@ -151,6 +144,7 @@ msgid ""
 msgstr ""
 
 #: ../install_interactive.pm:67
+#, c-format
 msgid ""
 "You do not have a swap partition.\n"
 "\n"
@@ -158,88 +152,98 @@ msgid ""
 msgstr ""
 
 #: ../install_interactive.pm:70
+#, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr ""
 
 #: ../install_interactive.pm:95
+#, c-format
 msgid "Use free space"
 msgstr "Сул зайг ашиглах"
 
 #: ../install_interactive.pm:97
+#, c-format
 msgid "Not enough free space to allocate new partitions"
 msgstr "Шинэ хуваалтуудыг хуваарилахад хангалттай зай байхгүй"
 
 #: ../install_interactive.pm:105
+#, c-format
 msgid "Use existing partitions"
 msgstr ""
 
 #: ../install_interactive.pm:107
+#, c-format
 msgid "There is no existing partition to use"
 msgstr "Энд хэрэглэх ямар нэгэн хуваалт алга"
 
 #: ../install_interactive.pm:114
-#, fuzzy
+#, fuzzy, c-format
 msgid "Use the Windows partition for loopback"
 msgstr "Цонхнууд"
 
 #: ../install_interactive.pm:117
+#, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Linux4Win-ийн хувьд ямар хуваалт хэрэглэхийг та хүсэж байна?"
 
 #: ../install_interactive.pm:119
+#, c-format
 msgid "Choose the sizes"
 msgstr "Хэмжээнүүдийг сонго"
 
 #: ../install_interactive.pm:120
+#, c-format
 msgid "Root partition size in MB: "
 msgstr "Суурь хуваалын хэмжээ МБ-р:"
 
 #: ../install_interactive.pm:121
-#, fuzzy
+#, fuzzy, c-format
 msgid "Swap partition size in MB: "
 msgstr "Солилт хэмжээ ямх МБ "
 
 #: ../install_interactive.pm:130
-#, fuzzy
+#, fuzzy, c-format
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr "бол үгүй зүүн"
 
 #: ../install_interactive.pm:137
-#, fuzzy
+#, fuzzy, c-format
 msgid "Use the free space on the Windows partition"
 msgstr "Цонхнууд"
 
 #: ../install_interactive.pm:139
-#, fuzzy
+#, fuzzy, c-format
 msgid "Which partition do you want to resize?"
 msgstr "вы?"
 
 #: ../install_interactive.pm:153
-#, fuzzy, perl-format
+#, fuzzy, c-format
 msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
 msgstr "бол"
 
-#: ../install_interactive.pm:156
-#, fuzzy
-msgid "Computing the size of the Windows partition"
-msgstr "хэмжээ аас Цонхнууд"
-
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
+#, c-format
 msgid "Resizing"
 msgstr "Хэмжээгөөрчилж байна"
 
+#: ../install_interactive.pm:156
+#, fuzzy, c-format
+msgid "Computing the size of the Windows partition"
+msgstr "хэмжээ аас Цонхнууд"
+
 #: ../install_interactive.pm:163
-#, fuzzy
+#, fuzzy, c-format
 msgid ""
 "Your Windows partition is too fragmented. Please reboot your computer under "
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr "Цонхнууд бол Цонхнууд."
 
+#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: ../install_interactive.pm:166
-#, fuzzy
+#, fuzzy, c-format
 msgid ""
 "WARNING!\n"
 "\n"
@@ -254,90 +258,98 @@ msgid ""
 msgstr "АНХААРУУЛГА г Цонхнууд бол вы Хийгдсэн вы Цонхнууд Та Ок."
 
 #: ../install_interactive.pm:178
-#, fuzzy
+#, fuzzy, c-format
 msgid "Which size do you want to keep for Windows on"
 msgstr "хэмжээ вы Цонхнууд"
 
 #: ../install_interactive.pm:179
-#, perl-format
+#, c-format
 msgid "partition %s"
 msgstr ""
 
 #: ../install_interactive.pm:188
-#, fuzzy
+#, fuzzy, c-format
 msgid "Resizing Windows partition"
 msgstr "Цонхнууд"
 
 #: ../install_interactive.pm:193
-#, perl-format
+#, c-format
 msgid "FAT resizing failed: %s"
 msgstr "FAT хэмжээ өөрчлөлт бүтэлгүйтэв: %s"
 
 #: ../install_interactive.pm:196
-#, fuzzy
+#, fuzzy, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr "тийш с Цонхнууд"
 
 #: ../install_interactive.pm:208
-#, fuzzy
+#, fuzzy, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr "бол үгүй зүүн"
 
 #: ../install_interactive.pm:213
-#, fuzzy
-msgid "Erase and use entire disk"
-msgstr "Устгах"
-
-#: ../install_interactive.pm:213
+#, c-format
 msgid "Remove Windows(TM)"
 msgstr "Виндоусыг (ХТ) устгах"
 
+#: ../install_interactive.pm:213
+#, fuzzy, c-format
+msgid "Erase and use entire disk"
+msgstr "Устгах"
+
 #: ../install_interactive.pm:215
-#, fuzzy
+#, fuzzy, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "Та вы?"
 
 #: ../install_interactive.pm:219
-#, fuzzy, perl-format
+#, fuzzy, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "Нээх"
 
 #: ../install_interactive.pm:228
-#, fuzzy
+#, fuzzy, c-format
 msgid "Custom disk partitioning"
 msgstr "Хэрэглэгчийн"
 
 #: ../install_interactive.pm:232
+#, c-format
 msgid "Use fdisk"
 msgstr ""
 
 #: ../install_interactive.pm:235
-#, fuzzy, perl-format
+#, fuzzy, c-format
 msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
 msgstr "Та с вы Хийгдсэн"
 
 #: ../install_interactive.pm:271
-#, fuzzy
+#, fuzzy, c-format
 msgid "I can not find any room for installing"
 msgstr "Би өшөө илүү хуваалт нэмж чадахгүйI"
 
 #: ../install_interactive.pm:275
+#, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr ""
 
 #: ../install_interactive.pm:281
-#, perl-format
+#, c-format
 msgid "Partitioning failed: %s"
 msgstr ""
 
 #: ../install_interactive.pm:288
+#, c-format
 msgid "Bringing up the network"
 msgstr ""
 
 #: ../install_interactive.pm:293
+#, c-format
 msgid "Bringing down the network"
 msgstr ""
+
+#~ msgid "none"
+#~ msgstr "аль нь ч үгүй (none)"

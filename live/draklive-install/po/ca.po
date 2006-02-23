@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
-"POT-Creation-Date: 2006-01-26 11:06+0100\n"
+"POT-Creation-Date: 2006-02-23 13:25+0100\n"
 "PO-Revision-Date: 2005-09-13 23:24+0200\n"
 "Last-Translator: Albert Astals Cid <astals11@terra.es>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -18,124 +18,125 @@ msgstr ""
 "X-Generator: KBabel 1.9.1\n"
 
 #: ../draklive-install:59
+#, c-format
 msgid "Mandriva Live"
 msgstr ""
 
 #: ../draklive-install:65
+#, c-format
 msgid "This wizard will help you to install the live distribution."
 msgstr ""
 
 #: ../draklive-install:83
+#, c-format
 msgid "Computing total size"
 msgstr ""
 
 #: ../draklive-install:95
+#, c-format
 msgid "Copying in progress"
 msgstr "Còpia en procés"
 
 #: ../draklive-install:163
+#, c-format
 msgid "Congratulations"
 msgstr "Felicitats"
 
 #: ../draklive-install:163
+#, c-format
 msgid ""
 "Please halt your computer, remove your live system, and restart your "
 "computer."
 msgstr ""
 
-#: ../draklive-install:179 ../draklive-install:407
+#: ../draklive-install:179 ../draklive-install:404
+#, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
 "Us caldrà tornar a arrencar per tal que les modificacions de la taula de "
 "particions tinguin efecte"
 
 #: ../draklive-install:230
+#, c-format
 msgid "Choose the partitions you want to format"
 msgstr "Escolliu les particions que voleu formatar"
 
 #: ../draklive-install:232
+#, c-format
 msgid "Check bad blocks?"
 msgstr "Voleu comprovar els blocs incorrectes?"
 
 #: ../draklive-install:261
 #, c-format
-msgid "Failed to check filesystem %s. Do you want to repair the errors?"
+msgid ""
+"Failed to check filesystem %s. Do you want to repair the errors? (beware, "
+"you can lose data)"
 msgstr ""
 
-#: ../draklive-install:262
-msgid ", $1), 1);"
-msgstr ""
-
-#: ../draklive-install:265
+#: ../draklive-install:264
+#, c-format
 msgid "Not enough swap space to fulfill installation, please add some"
 msgstr ""
 "No hi ha prou espai d'intercanvi per completar la instal·lació; si us plau, "
 "afegiu-ne"
 
-#: ../draklive-install:284
-msgid "$d/$l{$_}"
-msgstr ""
-
-#: ../draklive-install:285
-msgid "$d/.bashrc"
-msgstr ""
-
-#: ../draklive-install:317
+#: ../draklive-install:314
+#, c-format
 msgid "No partition available"
 msgstr "No hi ha particions disponibles"
 
-#: ../draklive-install:320
+#: ../draklive-install:317
+#, c-format
 msgid "Scanning partitions to find mount points"
 msgstr "S'estan explorant les particions per trobar els punts de muntatge"
 
-#: ../draklive-install:327
+#: ../draklive-install:324
+#, c-format
 msgid "Choose the mount points"
 msgstr "Escolliu els punts de muntatge"
 
 #
-#: ../draklive-install:328
+#: ../draklive-install:325
+#, c-format
 msgid "Partitioning"
 msgstr "Particionament"
 
-#: ../draklive-install:361
-msgid "none"
-msgstr "cap"
-
-#: ../draklive-install:363
+#: ../draklive-install:360
 #, c-format
 msgid "Duplicate mount point %s"
 msgstr "Duplica el punt de muntatge %s"
 
-#: ../draklive-install:389
+#: ../draklive-install:386
+#, c-format
 msgid "Continue anyway?"
 msgstr "Voleu continuar igualment?"
 
-#: ../draklive-install:394
+#: ../draklive-install:391
+#, c-format
 msgid "Quit without saving"
 msgstr "Surt sense desar"
 
-#: ../draklive-install:394
+#: ../draklive-install:391
+#, c-format
 msgid "Quit without writing the partition table?"
 msgstr "Voleu sortir sense escriure la taula de particions?"
 
 #
-#: ../draklive-install:400
+#: ../draklive-install:397
+#, c-format
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "Voleu desar les modificacions a /etc/fstab"
 
-#: ../draklive-install:412
+#: ../draklive-install:409
 #, c-format
-msgid "You should format partition %s."
-msgstr ""
-
-#: ../draklive-install:414
 msgid ""
-", $part->{device}, $part->{mntpoint})) or return if $::isStandalone && 0; #- "
-"no, please"
+"You should format partition %s.\n"
+"Otherwise no entry for mount point %s will be written in fstab.\n"
+"Quit anyway?"
 msgstr ""
 
 #: ../install_interactive.pm:22
-#, perl-format
+#, c-format
 msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
@@ -144,6 +145,7 @@ msgstr ""
 "\"registrats\" per poder funcionar. Podeu trobar-ne informació a: %s"
 
 #: ../install_interactive.pm:62
+#, c-format
 msgid ""
 "You must have a root partition.\n"
 "For this, create a partition (or click on an existing one).\n"
@@ -154,6 +156,7 @@ msgstr ""
 "Després, trieu l'acció \"Punt de muntatge\" i doneu-li el valor '/'"
 
 #: ../install_interactive.pm:67
+#, c-format
 msgid ""
 "You do not have a swap partition.\n"
 "\n"
@@ -165,61 +168,74 @@ msgstr ""
 
 #
 #: ../install_interactive.pm:70
+#, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "Heu de tenir una partició FAT muntada en /boot/efi"
 
 #: ../install_interactive.pm:95
+#, c-format
 msgid "Use free space"
 msgstr "Utilitza l'espai lliure"
 
 #: ../install_interactive.pm:97
+#, c-format
 msgid "Not enough free space to allocate new partitions"
 msgstr "No hi ha prou espai lliure per assignar noves particions"
 
 #: ../install_interactive.pm:105
+#, c-format
 msgid "Use existing partitions"
 msgstr "Utilitza les particions existents"
 
 #: ../install_interactive.pm:107
+#, c-format
 msgid "There is no existing partition to use"
 msgstr "No hi ha cap partició que es pugui utilitzar"
 
 #: ../install_interactive.pm:114
+#, c-format
 msgid "Use the Windows partition for loopback"
 msgstr "Utilitza la partició Windows per al loopback"
 
 #: ../install_interactive.pm:117
+#, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Quina partició voleu utilitzar per al Linux4Win?"
 
 #: ../install_interactive.pm:119
+#, c-format
 msgid "Choose the sizes"
 msgstr "Escolliu les mides"
 
 #: ../install_interactive.pm:120
+#, c-format
 msgid "Root partition size in MB: "
 msgstr "Mida de la partició arrel en MB: "
 
 #: ../install_interactive.pm:121
+#, c-format
 msgid "Swap partition size in MB: "
 msgstr "Mida de la partició d'intercanvi en MB: "
 
 #: ../install_interactive.pm:130
+#, c-format
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
 "No hi ha cap partició FAT per utilitzar com a loopback (o no queda prou "
 "espai)"
 
 #: ../install_interactive.pm:137
+#, c-format
 msgid "Use the free space on the Windows partition"
 msgstr "Utilitza l'espai lliure de la partició de Windows"
 
 #: ../install_interactive.pm:139
+#, c-format
 msgid "Which partition do you want to resize?"
 msgstr "A quina partició voleu canviar-li la mida?"
 
 #: ../install_interactive.pm:153
-#, perl-format
+#, c-format
 msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
@@ -227,15 +243,18 @@ msgstr ""
 "El redimensionador de la FAT no pot gestionar la vostra partició. \n"
 "S'ha produït l'error següent: %s"
 
-#: ../install_interactive.pm:156
-msgid "Computing the size of the Windows partition"
-msgstr "S'està calculant la mida de la partició de Windows"
-
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
+#, c-format
 msgid "Resizing"
 msgstr "S'està canviant la mida"
 
+#: ../install_interactive.pm:156
+#, c-format
+msgid "Computing the size of the Windows partition"
+msgstr "S'està calculant la mida de la partició de Windows"
+
 #: ../install_interactive.pm:163
+#, c-format
 msgid ""
 "Your Windows partition is too fragmented. Please reboot your computer under "
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
@@ -246,7 +265,9 @@ msgstr ""
 "començar la instal·lació del Mandriva Linux."
 
 #
+#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: ../install_interactive.pm:166
+#, c-format
 msgid ""
 "WARNING!\n"
 "\n"
@@ -273,24 +294,27 @@ msgstr ""
 "Quan estigueu segur, premeu D'acord."
 
 #: ../install_interactive.pm:178
+#, c-format
 msgid "Which size do you want to keep for Windows on"
 msgstr "Quina mida voleu deixar per a la partició de Windows?"
 
 #: ../install_interactive.pm:179
-#, perl-format
+#, c-format
 msgid "partition %s"
 msgstr "partició %s"
 
 #: ../install_interactive.pm:188
+#, c-format
 msgid "Resizing Windows partition"
 msgstr "S'està redimensionant la partició de Windows"
 
 #: ../install_interactive.pm:193
-#, perl-format
+#, c-format
 msgid "FAT resizing failed: %s"
 msgstr "Ha fallat el redimensionament de la FAT: %s"
 
 #: ../install_interactive.pm:196
+#, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
@@ -301,39 +325,44 @@ msgstr ""
 "arrenqueu en Windows(TM)"
 
 #: ../install_interactive.pm:208
+#, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "No hi ha cap partició FAT a la qual canviar la mida (o no queda prou espai)"
 
 #: ../install_interactive.pm:213
-#, fuzzy
-msgid "Erase and use entire disk"
-msgstr "Esborra tot el disc"
-
-#: ../install_interactive.pm:213
+#, c-format
 msgid "Remove Windows(TM)"
 msgstr "Elimina el Windows(TM)"
 
+#: ../install_interactive.pm:213
+#, fuzzy, c-format
+msgid "Erase and use entire disk"
+msgstr "Esborra tot el disc"
+
 #: ../install_interactive.pm:215
+#, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "Teniu més d'un disc dur; en quin voleu instal·lar el Linux?"
 
 #: ../install_interactive.pm:219
-#, perl-format
+#, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr ""
 "Es perdran TOTES les particions, i les dades que contenen, de la unitat %s"
 
 #: ../install_interactive.pm:228
+#, c-format
 msgid "Custom disk partitioning"
 msgstr "Particionament personalitzat de disc"
 
 #: ../install_interactive.pm:232
+#, c-format
 msgid "Use fdisk"
 msgstr "Utilitza l'fdisk"
 
 #: ../install_interactive.pm:235
-#, perl-format
+#, c-format
 msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
@@ -342,23 +371,30 @@ msgstr ""
 "Quan acabeu, no oblideu desar-les utilitzant 'w'"
 
 #: ../install_interactive.pm:271
+#, c-format
 msgid "I can not find any room for installing"
 msgstr "No es pot trobar espai per a la instal·lació"
 
 #: ../install_interactive.pm:275
+#, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr ""
 "L'auxiliar de particionament del DrakX ha trobat les solucions següents:"
 
 #: ../install_interactive.pm:281
-#, perl-format
+#, c-format
 msgid "Partitioning failed: %s"
 msgstr "Ha fallat el particionament: %s"
 
 #: ../install_interactive.pm:288
+#, c-format
 msgid "Bringing up the network"
 msgstr "S'està activant la xarxa"
 
 #: ../install_interactive.pm:293
+#, c-format
 msgid "Bringing down the network"
 msgstr "S'està desactivant la xarxa"
+
+#~ msgid "none"
+#~ msgstr "cap"

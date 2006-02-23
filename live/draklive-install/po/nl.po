@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-nl\n"
-"POT-Creation-Date: 2006-01-26 11:06+0100\n"
+"POT-Creation-Date: 2006-02-23 13:25+0100\n"
 "PO-Revision-Date: 2005-09-20 00:24+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -20,119 +20,120 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../draklive-install:59
+#, c-format
 msgid "Mandriva Live"
 msgstr ""
 
 #: ../draklive-install:65
+#, c-format
 msgid "This wizard will help you to install the live distribution."
 msgstr ""
 
 #: ../draklive-install:83
+#, c-format
 msgid "Computing total size"
 msgstr ""
 
 #: ../draklive-install:95
+#, c-format
 msgid "Copying in progress"
 msgstr "Bezig met kopiëren"
 
 #: ../draklive-install:163
+#, c-format
 msgid "Congratulations"
 msgstr "Gefeliciteerd"
 
 #: ../draklive-install:163
+#, c-format
 msgid ""
 "Please halt your computer, remove your live system, and restart your "
 "computer."
 msgstr ""
 
-#: ../draklive-install:179 ../draklive-install:407
+#: ../draklive-install:179 ../draklive-install:404
+#, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
 "U dient te herstarten om de wijzigingen in de partitietabel te activeren."
 
 #: ../draklive-install:230
+#, c-format
 msgid "Choose the partitions you want to format"
 msgstr "Kies de partities die u wenst te formatteren"
 
 #: ../draklive-install:232
+#, c-format
 msgid "Check bad blocks?"
 msgstr "Slechte blocks checken?"
 
 #: ../draklive-install:261
 #, c-format
-msgid "Failed to check filesystem %s. Do you want to repair the errors?"
+msgid ""
+"Failed to check filesystem %s. Do you want to repair the errors? (beware, "
+"you can lose data)"
 msgstr ""
 
-#: ../draklive-install:262
-msgid ", $1), 1);"
-msgstr ""
-
-#: ../draklive-install:265
+#: ../draklive-install:264
+#, c-format
 msgid "Not enough swap space to fulfill installation, please add some"
 msgstr "Niet genoeg swap voor de installatie, voeg er wat toe"
 
-#: ../draklive-install:284
-msgid "$d/$l{$_}"
-msgstr ""
-
-#: ../draklive-install:285
-msgid "$d/.bashrc"
-msgstr ""
-
-#: ../draklive-install:317
+#: ../draklive-install:314
+#, c-format
 msgid "No partition available"
 msgstr "Geen beschikbare partities"
 
-#: ../draklive-install:320
+#: ../draklive-install:317
+#, c-format
 msgid "Scanning partitions to find mount points"
 msgstr "Bezig met scannen van partities om koppelpunten te vinden"
 
-#: ../draklive-install:327
+#: ../draklive-install:324
+#, c-format
 msgid "Choose the mount points"
 msgstr "Selecteer de koppelpunten"
 
-#: ../draklive-install:328
+#: ../draklive-install:325
+#, c-format
 msgid "Partitioning"
 msgstr "Partitionering"
 
-#: ../draklive-install:361
-msgid "none"
-msgstr "geen"
-
-#: ../draklive-install:363
+#: ../draklive-install:360
 #, c-format
 msgid "Duplicate mount point %s"
 msgstr "Dubbel koppelpunt %s"
 
-#: ../draklive-install:389
+#: ../draklive-install:386
+#, c-format
 msgid "Continue anyway?"
 msgstr "Toch doorgaan?"
 
-#: ../draklive-install:394
+#: ../draklive-install:391
+#, c-format
 msgid "Quit without saving"
 msgstr "Afsluiten zonder opslaan"
 
-#: ../draklive-install:394
+#: ../draklive-install:391
+#, c-format
 msgid "Quit without writing the partition table?"
 msgstr "Afsluiten zonder de partitietabel weg te schrijven?"
 
-#: ../draklive-install:400
+#: ../draklive-install:397
+#, c-format
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "Wilt u de /etc/fstab aanpassingen bewaren"
 
-#: ../draklive-install:412
+#: ../draklive-install:409
 #, c-format
-msgid "You should format partition %s."
-msgstr ""
-
-#: ../draklive-install:414
 msgid ""
-", $part->{device}, $part->{mntpoint})) or return if $::isStandalone && 0; #- "
-"no, please"
+"You should format partition %s.\n"
+"Otherwise no entry for mount point %s will be written in fstab.\n"
+"Quit anyway?"
 msgstr ""
 
 #: ../install_interactive.pm:22
-#, perl-format
+#, c-format
 msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
@@ -141,6 +142,7 @@ msgstr ""
 "nodig om te kunnen functioneren. U kunt informatie hierover vinden op: %s"
 
 #: ../install_interactive.pm:62
+#, c-format
 msgid ""
 "You must have a root partition.\n"
 "For this, create a partition (or click on an existing one).\n"
@@ -151,6 +153,7 @@ msgstr ""
 "teklikken). Daarna kiest u de actie ``Koppelpunt'' en stelt u dit i nop `/'"
 
 #: ../install_interactive.pm:67
+#, c-format
 msgid ""
 "You do not have a swap partition.\n"
 "\n"
@@ -161,62 +164,75 @@ msgstr ""
 "Toch verdergaan?"
 
 #: ../install_interactive.pm:70
+#, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr ""
 "U moet een partitie met FAT-bestandssysteem gekoppeld hebben aan /boot/efi"
 
 #: ../install_interactive.pm:95
+#, c-format
 msgid "Use free space"
 msgstr "Vrije ruimte benutten"
 
 #: ../install_interactive.pm:97
+#, c-format
 msgid "Not enough free space to allocate new partitions"
 msgstr "Niet genoeg vrije ruimte om nieuwe partities te maken"
 
 #: ../install_interactive.pm:105
+#, c-format
 msgid "Use existing partitions"
 msgstr "Gebruik een bestaande partitie"
 
 #: ../install_interactive.pm:107
+#, c-format
 msgid "There is no existing partition to use"
 msgstr "Er is geen bestaande partitie om te gebruiken"
 
 #: ../install_interactive.pm:114
+#, c-format
 msgid "Use the Windows partition for loopback"
 msgstr "Gebruik de Windows partitie voor loopback "
 
 #: ../install_interactive.pm:117
+#, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Welke partitie wenst u te gebruiken voor Linux4Win?"
 
 #: ../install_interactive.pm:119
+#, c-format
 msgid "Choose the sizes"
 msgstr "Kies de grootte"
 
 #: ../install_interactive.pm:120
+#, c-format
 msgid "Root partition size in MB: "
 msgstr "Root-partitie-grootte in MB:"
 
 #: ../install_interactive.pm:121
+#, c-format
 msgid "Swap partition size in MB: "
 msgstr "Swap-partitie-grootte in MB: "
 
 #: ../install_interactive.pm:130
+#, c-format
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
 "Er is geen FAT-partitie om als loopback te gebruiken (of er is te weinig "
 "ruimte over)"
 
 #: ../install_interactive.pm:137
+#, c-format
 msgid "Use the free space on the Windows partition"
 msgstr "Gebruik de vrije ruimte op de Windows partitie"
 
 #: ../install_interactive.pm:139
+#, c-format
 msgid "Which partition do you want to resize?"
 msgstr "Van welke partitie wilt u de grootte veranderen?"
 
 #: ../install_interactive.pm:153
-#, perl-format
+#, c-format
 msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
@@ -224,15 +240,18 @@ msgstr ""
 "De FAT grootte-aanpasser was niet instaat met uw partitie om te gaan, \n"
 "de volgende fout is opgetreden: %s"
 
-#: ../install_interactive.pm:156
-msgid "Computing the size of the Windows partition"
-msgstr "Bezig met berekenen grootte van Windows-partitie"
-
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
+#, c-format
 msgid "Resizing"
 msgstr "Grootte aanpassen"
 
+#: ../install_interactive.pm:156
+#, c-format
+msgid "Computing the size of the Windows partition"
+msgstr "Bezig met berekenen grootte van Windows-partitie"
+
 #: ../install_interactive.pm:163
+#, c-format
 msgid ""
 "Your Windows partition is too fragmented. Please reboot your computer under "
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
@@ -242,7 +261,9 @@ msgstr ""
 "Windows, gebruik het ``defrag''-hulpprogramma, en herstart vervolgens de "
 "installatie van Mandriva Linux."
 
+#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: ../install_interactive.pm:166
+#, c-format
 msgid ""
 "WARNING!\n"
 "\n"
@@ -269,24 +290,27 @@ msgstr ""
 "Wanneer u zeker van uw zaak bent, klik dan OK."
 
 #: ../install_interactive.pm:178
+#, c-format
 msgid "Which size do you want to keep for Windows on"
 msgstr "Welke grootte wilt u behouden voor Windows op"
 
 #: ../install_interactive.pm:179
-#, perl-format
+#, c-format
 msgid "partition %s"
 msgstr "partitie %s"
 
 #: ../install_interactive.pm:188
+#, c-format
 msgid "Resizing Windows partition"
 msgstr "Bezig met grootte aanpassen van Windows-partitie"
 
 #: ../install_interactive.pm:193
-#, perl-format
+#, c-format
 msgid "FAT resizing failed: %s"
 msgstr "FAT grootte-aanpassing mislukt: %s"
 
 #: ../install_interactive.pm:196
+#, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
@@ -296,41 +320,46 @@ msgstr ""
 "de volgende keer dat u Windows(TM) opstart"
 
 #: ../install_interactive.pm:208
+#, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "Er is geen FAT partitie om de grootte van aan te passen (of er is te weinig "
 "ruimte over)"
 
 #: ../install_interactive.pm:213
-#, fuzzy
-msgid "Erase and use entire disk"
-msgstr "Volledige harde schijf wissen"
-
-#: ../install_interactive.pm:213
+#, c-format
 msgid "Remove Windows(TM)"
 msgstr "Windows(TM) verwijderen"
 
+#: ../install_interactive.pm:213
+#, fuzzy, c-format
+msgid "Erase and use entire disk"
+msgstr "Volledige harde schijf wissen"
+
 #: ../install_interactive.pm:215
+#, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "U heeft meer dan één harde schijf, op welke wilt u Linux installeren?"
 
 #: ../install_interactive.pm:219
-#, perl-format
+#, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr ""
 "ALLE bestaande partities en de gegevens die ze bevatten, zullen verloren "
 "gaan op schijf %s"
 
 #: ../install_interactive.pm:228
+#, c-format
 msgid "Custom disk partitioning"
 msgstr "Aangepaste schijfpartitionering"
 
 #: ../install_interactive.pm:232
+#, c-format
 msgid "Use fdisk"
 msgstr "fdisk gebruiken"
 
 #: ../install_interactive.pm:235
-#, perl-format
+#, c-format
 msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
@@ -339,22 +368,29 @@ msgstr ""
 "Vergeet niet op te slaan met `w' wanneer u klaar bent."
 
 #: ../install_interactive.pm:271
+#, c-format
 msgid "I can not find any room for installing"
 msgstr "Er is geen ruimte meer voor installatie"
 
 #: ../install_interactive.pm:275
+#, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "De partitionerings-wizard heeft de volgende oplossingen gevonden:"
 
 #: ../install_interactive.pm:281
-#, perl-format
+#, c-format
 msgid "Partitioning failed: %s"
 msgstr "Partitionering mislukt: %s"
 
 #: ../install_interactive.pm:288
+#, c-format
 msgid "Bringing up the network"
 msgstr "Bezig met opstarten van het netwerk"
 
 #: ../install_interactive.pm:293
+#, c-format
 msgid "Bringing down the network"
 msgstr "Bezig met stoppen van het netwerk"
+
+#~ msgid "none"
+#~ msgstr "geen"

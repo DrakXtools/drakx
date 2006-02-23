@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-sv - Mandriva 2006 Release\n"
-"POT-Creation-Date: 2006-01-26 11:06+0100\n"
+"POT-Creation-Date: 2006-02-23 13:25+0100\n"
 "PO-Revision-Date: 2005-09-18 21:42+0300\n"
 "Last-Translator: Thomas Backlund <tmb@mandriva.org>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -24,122 +24,123 @@ msgstr ""
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: ../draklive-install:59
+#, c-format
 msgid "Mandriva Live"
 msgstr ""
 
 #: ../draklive-install:65
+#, c-format
 msgid "This wizard will help you to install the live distribution."
 msgstr ""
 
 #: ../draklive-install:83
+#, c-format
 msgid "Computing total size"
 msgstr ""
 
 #: ../draklive-install:95
+#, c-format
 msgid "Copying in progress"
 msgstr "Kopiering pågår"
 
 #: ../draklive-install:163
+#, c-format
 msgid "Congratulations"
 msgstr "Gratulerar"
 
 #: ../draklive-install:163
+#, c-format
 msgid ""
 "Please halt your computer, remove your live system, and restart your "
 "computer."
 msgstr ""
 
-#: ../draklive-install:179 ../draklive-install:407
+#: ../draklive-install:179 ../draklive-install:404
+#, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
 "Du behöver starta om datorn för att ändringarna i partitionstabellen ska "
 "aktiveras."
 
 #: ../draklive-install:230
+#, c-format
 msgid "Choose the partitions you want to format"
 msgstr "Välj de partitioner du vill formatera"
 
 #: ../draklive-install:232
+#, c-format
 msgid "Check bad blocks?"
 msgstr "Sök efter felaktiga block?"
 
 #: ../draklive-install:261
 #, c-format
-msgid "Failed to check filesystem %s. Do you want to repair the errors?"
+msgid ""
+"Failed to check filesystem %s. Do you want to repair the errors? (beware, "
+"you can lose data)"
 msgstr ""
 
-#: ../draklive-install:262
-msgid ", $1), 1);"
-msgstr ""
-
-#: ../draklive-install:265
+#: ../draklive-install:264
+#, c-format
 msgid "Not enough swap space to fulfill installation, please add some"
 msgstr ""
 "Ej tillräckligt med växlingsutrymme för att genomföra installationen, lägg "
 "till mer."
 
-#: ../draklive-install:284
-msgid "$d/$l{$_}"
-msgstr ""
-
-#: ../draklive-install:285
-msgid "$d/.bashrc"
-msgstr ""
-
-#: ../draklive-install:317
+#: ../draklive-install:314
+#, c-format
 msgid "No partition available"
 msgstr "Inga tillgängliga partitioner"
 
-#: ../draklive-install:320
+#: ../draklive-install:317
+#, c-format
 msgid "Scanning partitions to find mount points"
 msgstr "Söker av partitioner för att finna monteringspunkter"
 
-#: ../draklive-install:327
+#: ../draklive-install:324
+#, c-format
 msgid "Choose the mount points"
 msgstr "Välj monteringspunkter"
 
-#: ../draklive-install:328
+#: ../draklive-install:325
+#, c-format
 msgid "Partitioning"
 msgstr "Partitionering"
 
-#: ../draklive-install:361
-msgid "none"
-msgstr "ingen"
-
-#: ../draklive-install:363
+#: ../draklive-install:360
 #, c-format
 msgid "Duplicate mount point %s"
 msgstr "Duplicera monteringspunkt %s"
 
-#: ../draklive-install:389
+#: ../draklive-install:386
+#, c-format
 msgid "Continue anyway?"
 msgstr "Fortsätta ändå?"
 
-#: ../draklive-install:394
+#: ../draklive-install:391
+#, c-format
 msgid "Quit without saving"
 msgstr "Avsluta utan att spara"
 
-#: ../draklive-install:394
+#: ../draklive-install:391
+#, c-format
 msgid "Quit without writing the partition table?"
 msgstr "Avsluta utan att skriva partitionstabellen?"
 
-#: ../draklive-install:400
+#: ../draklive-install:397
+#, c-format
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "Vill du spara /etc/fstab-ändringar?"
 
-#: ../draklive-install:412
+#: ../draklive-install:409
 #, c-format
-msgid "You should format partition %s."
-msgstr ""
-
-#: ../draklive-install:414
 msgid ""
-", $part->{device}, $part->{mntpoint})) or return if $::isStandalone && 0; #- "
-"no, please"
+"You should format partition %s.\n"
+"Otherwise no entry for mount point %s will be written in fstab.\n"
+"Quit anyway?"
 msgstr ""
 
 #: ../install_interactive.pm:22
-#, perl-format
+#, c-format
 msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
@@ -148,6 +149,7 @@ msgstr ""
 "fungera. Du kan hitta en del information om dem här: %s"
 
 #: ../install_interactive.pm:62
+#, c-format
 msgid ""
 "You must have a root partition.\n"
 "For this, create a partition (or click on an existing one).\n"
@@ -158,6 +160,7 @@ msgstr ""
 "Välj sedan åtgärden \"monteringspunkt\" och ange den som \"/\"."
 
 #: ../install_interactive.pm:67
+#, c-format
 msgid ""
 "You do not have a swap partition.\n"
 "\n"
@@ -168,61 +171,74 @@ msgstr ""
 "Fortsätta ändå?"
 
 #: ../install_interactive.pm:70
+#, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "Du måste ha en FAT-partition monterad i /boot/efi."
 
 #: ../install_interactive.pm:95
+#, c-format
 msgid "Use free space"
 msgstr "Använd ledigt utrymme"
 
 #: ../install_interactive.pm:97
+#, c-format
 msgid "Not enough free space to allocate new partitions"
 msgstr "Inte tillräckligt med utrymme för att allokera nya partitioner."
 
 #: ../install_interactive.pm:105
+#, c-format
 msgid "Use existing partitions"
 msgstr "Använd existerande partition"
 
 #: ../install_interactive.pm:107
+#, c-format
 msgid "There is no existing partition to use"
 msgstr "Det finns ingen befintlig partition att använda."
 
 #: ../install_interactive.pm:114
+#, c-format
 msgid "Use the Windows partition for loopback"
 msgstr "Använd Windows-partitionen för loopback"
 
 #: ../install_interactive.pm:117
+#, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Vilken partition vill du använda för Linux4Win?"
 
 #: ../install_interactive.pm:119
+#, c-format
 msgid "Choose the sizes"
 msgstr "Välj storlekar"
 
 #: ../install_interactive.pm:120
+#, c-format
 msgid "Root partition size in MB: "
 msgstr "Storleken på rotpartitionen i MB: "
 
 #: ../install_interactive.pm:121
+#, c-format
 msgid "Swap partition size in MB: "
 msgstr "Storleken på växlingspartitionen i MB: "
 
 #: ../install_interactive.pm:130
+#, c-format
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
 "Det finns ingen FAT-partition att använda som loopback (eller ej "
 "tillräckligt utrymme)"
 
 #: ../install_interactive.pm:137
+#, c-format
 msgid "Use the free space on the Windows partition"
 msgstr "Använd ledigt utrymme på Windows-partitionen"
 
 #: ../install_interactive.pm:139
+#, c-format
 msgid "Which partition do you want to resize?"
 msgstr "Vilken partition vill du ändra storlek på?"
 
 #: ../install_interactive.pm:153
-#, perl-format
+#, c-format
 msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
@@ -230,15 +246,18 @@ msgstr ""
 "Det gick inte att ändra storlek på FAT-partitionen, \n"
 "följande fel uppstod: %s"
 
-#: ../install_interactive.pm:156
-msgid "Computing the size of the Windows partition"
-msgstr "Räknar ut storleken på Windows-partitionen"
-
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
+#, c-format
 msgid "Resizing"
 msgstr "Ändrar storlek"
 
+#: ../install_interactive.pm:156
+#, c-format
+msgid "Computing the size of the Windows partition"
+msgstr "Räknar ut storleken på Windows-partitionen"
+
 #: ../install_interactive.pm:163
+#, c-format
 msgid ""
 "Your Windows partition is too fragmented. Please reboot your computer under "
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
@@ -246,7 +265,9 @@ msgid ""
 msgstr ""
 "Windows-partitionen är för fragmenterad, kör \"Defrag\" under Windows först."
 
+#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: ../install_interactive.pm:166
+#, c-format
 msgid ""
 "WARNING!\n"
 "\n"
@@ -270,24 +291,27 @@ msgstr ""
 "När du är säker, klicka OK."
 
 #: ../install_interactive.pm:178
+#, c-format
 msgid "Which size do you want to keep for Windows on"
 msgstr "Vilken storlek vill du behålla för Windows på"
 
 #: ../install_interactive.pm:179
-#, perl-format
+#, c-format
 msgid "partition %s"
 msgstr "partition %s"
 
 #: ../install_interactive.pm:188
+#, c-format
 msgid "Resizing Windows partition"
 msgstr "Ändrar storlek på Windows-partition"
 
 #: ../install_interactive.pm:193
-#, perl-format
+#, c-format
 msgid "FAT resizing failed: %s"
 msgstr "FAT-storleksändring misslyckades: %s"
 
 #: ../install_interactive.pm:196
+#, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
@@ -296,40 +320,45 @@ msgstr ""
 "kommer filsystemskontroller att köras vid nästa Windows(TM)-start."
 
 #: ../install_interactive.pm:208
+#, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "Det finns ingen FAT-partition att ändra storlek på (eller ej tillräckligt "
 "utrymme)"
 
 #: ../install_interactive.pm:213
-#, fuzzy
-msgid "Erase and use entire disk"
-msgstr "Radera hela hårddisken"
-
-#: ../install_interactive.pm:213
+#, c-format
 msgid "Remove Windows(TM)"
 msgstr "Ta bort Windows(TM)"
 
+#: ../install_interactive.pm:213
+#, fuzzy, c-format
+msgid "Erase and use entire disk"
+msgstr "Radera hela hårddisken"
+
 #: ../install_interactive.pm:215
+#, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "Du har mer än en hårddisk, vilken vill du installera Linux på?"
 
 #: ../install_interactive.pm:219
-#, perl-format
+#, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr ""
 "Alla existerande partitioner på %s och dess data kommer att gå förlorade."
 
 #: ../install_interactive.pm:228
+#, c-format
 msgid "Custom disk partitioning"
 msgstr "Anpassad diskpartitionering"
 
 #: ../install_interactive.pm:232
+#, c-format
 msgid "Use fdisk"
 msgstr "Använd fdisk"
 
 #: ../install_interactive.pm:235
-#, perl-format
+#, c-format
 msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
@@ -338,22 +367,29 @@ msgstr ""
 "Glöm inte att spara med \"w\" när du är klar."
 
 #: ../install_interactive.pm:271
+#, c-format
 msgid "I can not find any room for installing"
 msgstr "Kan inte hitta utrymme för installation."
 
 #: ../install_interactive.pm:275
+#, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "DrakXs partitioneringsguide hittade följande lösningar:"
 
 #: ../install_interactive.pm:281
-#, perl-format
+#, c-format
 msgid "Partitioning failed: %s"
 msgstr "Partitionering misslyckades: %s"
 
 #: ../install_interactive.pm:288
+#, c-format
 msgid "Bringing up the network"
 msgstr "Startar nätverket"
 
 #: ../install_interactive.pm:293
+#, c-format
 msgid "Bringing down the network"
 msgstr "Stoppar nätverket"
+
+#~ msgid "none"
+#~ msgstr "ingen"

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX HEAD\n"
-"POT-Creation-Date: 2006-01-26 11:06+0100\n"
+"POT-Creation-Date: 2006-02-23 13:25+0100\n"
 "PO-Revision-Date: 2005-03-19 23:18+0600\n"
 "Last-Translator: Samia <mailsamia2001@yahoo.com>\n"
 "Language-Team: Bangla <mdk-translation@bengalinux.org>\n"
@@ -17,118 +17,119 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../draklive-install:59
+#, c-format
 msgid "Mandriva Live"
 msgstr ""
 
 #: ../draklive-install:65
+#, c-format
 msgid "This wizard will help you to install the live distribution."
 msgstr ""
 
 #: ../draklive-install:83
+#, c-format
 msgid "Computing total size"
 msgstr ""
 
 #: ../draklive-install:95
+#, c-format
 msgid "Copying in progress"
 msgstr "কপি সম্পন্ন হচ্ছে"
 
 #: ../draklive-install:163
+#, c-format
 msgid "Congratulations"
 msgstr "স্বাগতম"
 
 #: ../draklive-install:163
+#, c-format
 msgid ""
 "Please halt your computer, remove your live system, and restart your "
 "computer."
 msgstr ""
 
-#: ../draklive-install:179 ../draklive-install:407
+#: ../draklive-install:179 ../draklive-install:404
+#, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr "পার্টিশন টেবিলের পরিবর্তনগুলি কার্যকর করবার জন্য আপনাকে রা-ষ্টার্ট করতে হবে"
 
 #: ../draklive-install:230
+#, c-format
 msgid "Choose the partitions you want to format"
 msgstr "ফরমেট করার জন্য পার্টিশনটি পছন্দ করুন"
 
 #: ../draklive-install:232
+#, c-format
 msgid "Check bad blocks?"
 msgstr "খারাপ ব্লক চেক করব?"
 
 #: ../draklive-install:261
 #, c-format
-msgid "Failed to check filesystem %s. Do you want to repair the errors?"
+msgid ""
+"Failed to check filesystem %s. Do you want to repair the errors? (beware, "
+"you can lose data)"
 msgstr ""
 
-#: ../draklive-install:262
-msgid ", $1), 1);"
-msgstr ""
-
-#: ../draklive-install:265
+#: ../draklive-install:264
+#, c-format
 msgid "Not enough swap space to fulfill installation, please add some"
 msgstr "ইনস্টলেশন সম্পূর্ন হবার জন্য যথেষ্ট swap জায়গা নেই, অনুগ্রহ করে কিছু যোগ করুন"
 
-#: ../draklive-install:284
-msgid "$d/$l{$_}"
-msgstr ""
-
-#: ../draklive-install:285
-msgid "$d/.bashrc"
-msgstr ""
-
-#: ../draklive-install:317
+#: ../draklive-install:314
+#, c-format
 msgid "No partition available"
 msgstr "কোন পার্টিশন বরাদ্দ নেই"
 
-#: ../draklive-install:320
+#: ../draklive-install:317
+#, c-format
 msgid "Scanning partitions to find mount points"
 msgstr "মাউন্ট পয়েন্ট খোঁজার জন্য পার্টিশনগুলি স্কেন করা হচ্ছে"
 
-#: ../draklive-install:327
+#: ../draklive-install:324
+#, c-format
 msgid "Choose the mount points"
 msgstr "মাউন্ট পয়েন্টগুলি পছন্দ করুন"
 
-#: ../draklive-install:328
+#: ../draklive-install:325
+#, c-format
 msgid "Partitioning"
 msgstr "পার্টিশন করা হচ্ছে"
 
-#: ../draklive-install:361
-msgid "none"
-msgstr "না"
-
-#: ../draklive-install:363
+#: ../draklive-install:360
 #, c-format
 msgid "Duplicate mount point %s"
 msgstr "%s নকল মাউন্ট পয়েন্ট"
 
-#: ../draklive-install:389
+#: ../draklive-install:386
+#, c-format
 msgid "Continue anyway?"
 msgstr "অগ্রসর হবে?"
 
-#: ../draklive-install:394
+#: ../draklive-install:391
+#, c-format
 msgid "Quit without saving"
 msgstr "সংরক্ষণ ছাড়াই বের হও"
 
-#: ../draklive-install:394
+#: ../draklive-install:391
+#, c-format
 msgid "Quit without writing the partition table?"
 msgstr "কোন পার্টিশন টেবিল না লিখেই বের হয়ে যাব?"
 
-#: ../draklive-install:400
+#: ../draklive-install:397
+#, c-format
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "আপনি /etc/fstab -এর পরিবর্তন সেভ করতে চান?"
 
-#: ../draklive-install:412
+#: ../draklive-install:409
 #, c-format
-msgid "You should format partition %s."
-msgstr ""
-
-#: ../draklive-install:414
 msgid ""
-", $part->{device}, $part->{mntpoint})) or return if $::isStandalone && 0; #- "
-"no, please"
+"You should format partition %s.\n"
+"Otherwise no entry for mount point %s will be written in fstab.\n"
+"Quit anyway?"
 msgstr ""
 
 #: ../install_interactive.pm:22
-#, perl-format
+#, c-format
 msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
@@ -137,6 +138,7 @@ msgstr ""
 "আপনি তাদের সম্পর্কে এখান থেকে তথ্য নিতে পারবেন: %s"
 
 #: ../install_interactive.pm:62
+#, c-format
 msgid ""
 "You must have a root partition.\n"
 "For this, create a partition (or click on an existing one).\n"
@@ -147,6 +149,7 @@ msgstr ""
 "তারপর ``Mount point'' বেছে নিন এবং সেটাকে `/' তে সেট করুন"
 
 #: ../install_interactive.pm:67
+#, c-format
 msgid ""
 "You do not have a swap partition.\n"
 "\n"
@@ -157,59 +160,72 @@ msgstr ""
 "তবুও আগাবো?"
 
 #: ../install_interactive.pm:70
+#, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "আপনার /boot/efi -এ অবশ্যই একটি FAT পার্টিশন থাকতে হবে"
 
 #: ../install_interactive.pm:95
+#, c-format
 msgid "Use free space"
 msgstr "শুণ্য স্থান ব্যবহার করো"
 
 #: ../install_interactive.pm:97
+#, c-format
 msgid "Not enough free space to allocate new partitions"
 msgstr "নতুন পার্টিশন তৈরী করার জন্য যথেষ্ট পরিমান খালি জায়গা নেই"
 
 #: ../install_interactive.pm:105
+#, c-format
 msgid "Use existing partitions"
 msgstr "আগের পার্টিশনগুলি ব্যবহার করো"
 
 #: ../install_interactive.pm:107
+#, c-format
 msgid "There is no existing partition to use"
 msgstr "ব্যবহারের জন্য এখানে উপস্থিত কোন পার্টিশন নেই"
 
 #: ../install_interactive.pm:114
+#, c-format
 msgid "Use the Windows partition for loopback"
 msgstr "লুপ ব্যাকের জন্য উইন্ডোজের পার্টিশন ব্যবহার করো"
 
 #: ../install_interactive.pm:117
+#, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Linux4Win-এর জন্য আপনি কোন পার্টিশন ব্যবহার করতে চান?"
 
 #: ../install_interactive.pm:119
+#, c-format
 msgid "Choose the sizes"
 msgstr "সাইজ পছন্দ করো"
 
 #: ../install_interactive.pm:120
+#, c-format
 msgid "Root partition size in MB: "
 msgstr "মেগাবাইটে রুট পার্টিশনের সাইজ:"
 
 #: ../install_interactive.pm:121
+#, c-format
 msgid "Swap partition size in MB: "
 msgstr "মেগাবাইটে সোয়াপ পার্টিশনের সাইজ:"
 
 #: ../install_interactive.pm:130
+#, c-format
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr "লুপব্যাকে ব্যবহারের জন্য কেন FAT পার্টিশন নেই (অথবা পর্যাপ্ত জায়গা নেই)"
 
 #: ../install_interactive.pm:137
+#, c-format
 msgid "Use the free space on the Windows partition"
 msgstr "উইন্ডোজ পার্টিশনের খালি জায়গা ব্যবহার করে"
 
 #: ../install_interactive.pm:139
+#, c-format
 msgid "Which partition do you want to resize?"
 msgstr "আপনি কোন পার্টিশন রি-সাইজ করতে চান?"
 
 #: ../install_interactive.pm:153
-#, perl-format
+#, c-format
 msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
@@ -217,15 +233,18 @@ msgstr ""
 "FAT আকার পরিবর্তক আপনার পার্টিশন হস্তক্ষেপ করতে পারেনি, \n"
 "নিম্নের এই সমস্যাগুলো হয়েছে: %s"
 
-#: ../install_interactive.pm:156
-msgid "Computing the size of the Windows partition"
-msgstr "আপনার উইন্ডোজের পার্টিশনের সাইজ হিসেব করা হচ্ছে"
-
 #: ../install_interactive.pm:156 ../install_interactive.pm:188
+#, c-format
 msgid "Resizing"
 msgstr "আকার পরিবর্তন করা হচ্ছে"
 
+#: ../install_interactive.pm:156
+#, c-format
+msgid "Computing the size of the Windows partition"
+msgstr "আপনার উইন্ডোজের পার্টিশনের সাইজ হিসেব করা হচ্ছে"
+
 #: ../install_interactive.pm:163
+#, c-format
 msgid ""
 "Your Windows partition is too fragmented. Please reboot your computer under "
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
@@ -234,7 +253,9 @@ msgstr ""
 "আপনার উইন্ডোজের পার্টিশনটি প্রচন্ড অসম। অনুগ্রহ করে আপনার কম্পিউটারটি উইন্ডোজে রি-বুট "
 "করে, ``defrag'' ইউটিলিটি চালান, পরে  রি-ষ্টার্ট করে আবার মেনড্রক ইনস্টলেশন চালান।"
 
+#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: ../install_interactive.pm:166
+#, c-format
 msgid ""
 "WARNING!\n"
 "\n"
@@ -258,24 +279,27 @@ msgstr ""
 "উচিত্‍‌। নিশ্চিত্‍‌ হলে ঠিক আছে চাপুন।"
 
 #: ../install_interactive.pm:178
+#, c-format
 msgid "Which size do you want to keep for Windows on"
 msgstr "আপনি কোথায় উইন্ডোজের জন্য কোন সাইজটি রাখতে চান"
 
 #: ../install_interactive.pm:179
-#, perl-format
+#, c-format
 msgid "partition %s"
 msgstr "পার্টিশনসমূহ %s"
 
 #: ../install_interactive.pm:188
+#, c-format
 msgid "Resizing Windows partition"
 msgstr "উইন্ডোজ পার্টিশন আকার পরিবর্তন করা হচ্ছে"
 
 #: ../install_interactive.pm:193
-#, perl-format
+#, c-format
 msgid "FAT resizing failed: %s"
 msgstr "FAT আকার পরিবর্তন ব্যর্থ হয়েছে: %s"
 
 #: ../install_interactive.pm:196
+#, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
@@ -284,38 +308,43 @@ msgstr ""
 "উইন্ডোজে(TM) আপনার পরবর্তী বুটে ফাইলসিস্টেম পরীক্ষা চলবে"
 
 #: ../install_interactive.pm:208
+#, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "রি-সাইজ করার জন্য কোন FAT পার্টিশন নেই (অথবা যথেষ্ট পারিমান ফাঁকা জায়গা নেই)"
 
 #: ../install_interactive.pm:213
-#, fuzzy
-msgid "Erase and use entire disk"
-msgstr "সম্পূর্ণ ডিস্ক মুছে ফেলো"
-
-#: ../install_interactive.pm:213
+#, c-format
 msgid "Remove Windows(TM)"
 msgstr "উইন্ডোজ(TM) মুছে ফেলো"
 
+#: ../install_interactive.pm:213
+#, fuzzy, c-format
+msgid "Erase and use entire disk"
+msgstr "সম্পূর্ণ ডিস্ক মুছে ফেলো"
+
 #: ../install_interactive.pm:215
+#, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "আপনার একের অধিক হার্ড ড্রাইভ আছে, আপনি কোনটাতে লিনাক্স ইনস্টল করতে চান?"
 
 #: ../install_interactive.pm:219
-#, perl-format
+#, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "%s ড্রাইভে উপস্থিত সমস্থ ডাটা এবং পার্টিশন নষ্ট হয়ে যাবে"
 
 #: ../install_interactive.pm:228
+#, c-format
 msgid "Custom disk partitioning"
 msgstr "হাতে হাতে ডিস্ক পার্টিশন"
 
 #: ../install_interactive.pm:232
+#, c-format
 msgid "Use fdisk"
 msgstr "fdisk ব্যবহার করো"
 
 #: ../install_interactive.pm:235
-#, perl-format
+#, c-format
 msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
@@ -324,22 +353,29 @@ msgstr ""
 "যখন হয়ে যাবে, তখন `w' চেপে সেভ করতে ভূলবেননা"
 
 #: ../install_interactive.pm:271
+#, c-format
 msgid "I can not find any room for installing"
 msgstr "আমি ইনস্টল করার জন্য কোন জায়গা পাচ্ছিনা"
 
 #: ../install_interactive.pm:275
+#, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "DrakX পার্টিশন সহায়ক এই সমস্থ সমাধান পেয়েছে:"
 
 #: ../install_interactive.pm:281
-#, perl-format
+#, c-format
 msgid "Partitioning failed: %s"
 msgstr "পার্টিশনে ব্যার্থ: %s"
 
 #: ../install_interactive.pm:288
+#, c-format
 msgid "Bringing up the network"
 msgstr "নেটওয়ার্ককে চালু করা হচ্ছে"
 
 #: ../install_interactive.pm:293
+#, c-format
 msgid "Bringing down the network"
 msgstr "নেটওয়ার্ককে বন্ধ করা হচ্ছে"
+
+#~ msgid "none"
+#~ msgstr "না"
