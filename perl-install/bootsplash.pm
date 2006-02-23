@@ -60,7 +60,7 @@ sub theme_exists_for_resolution {
 }
 
 sub themes_list() {
-    grep { !/^\./ && -d $themes_dir } sort(all($themes_dir));
+    grep { !/^\./ && -d $_ } sort(all($themes_dir));
 }
 
 sub themes_list_for_resolution {
