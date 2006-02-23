@@ -12,7 +12,7 @@ use security::level;
 
 $ENV{SHARE_PATH} ||= "/usr/share";
 my $conf_file = '/etc/sysconfig/finish-install';
-my %steps = getVarsFromSh($conf_file);
+my %conf = getVarsFromSh($conf_file);
 my $authentication = authentication::get();
 my $security = security::level::get();
 my $net = {};
@@ -81,7 +81,7 @@ sub ask_users() {
 sub call {
     my ($step_name) = @_;
     my $f_name = 'ask_' . $step_name;
-    if (member('no', map { lc($steps{$_}) } lc($step_name), uc($step_name))) {
+    if (member('no', map { lc($conf{$_}) } lc($step_name), uc($step_name))) {
         log::l("ignoring $f_name");
     } else {
         log::l("calling $f_name");
