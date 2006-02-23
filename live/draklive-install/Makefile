@@ -9,6 +9,7 @@ check:
 	perl -cw $(NAME)
 
 clean:
+	make -C po clean
 	find -name '*~' -exec rm {} \;
 
 dis ../$(NAME)-$(VERSION).tar.bz2: clean check
