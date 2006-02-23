@@ -8,10 +8,10 @@ our @ISA = qw(Exporter);
 our %EXPORT_TAGS = (drawing => [qw(rectangle2xywh xywh2rectangle distance farthest nearest)]);
 our @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
-my $themes_dir = "$::prefix/usr/share/bootsplash/themes";
-my $themes_config_dir = "$::prefix/etc/bootsplash/themes";
-my $sysconfig_file = "$::prefix/etc/sysconfig/bootsplash";
-my $bootsplash_scripts = "$::prefix/usr/share/bootsplash/scripts";
+my $themes_dir = "/usr/share/bootsplash/themes";
+my $themes_config_dir = "/etc/bootsplash/themes";
+my $sysconfig_file = "/etc/sysconfig/bootsplash";
+my $bootsplash_scripts = "/usr/share/bootsplash/scripts";
 my $default_theme = 'Mandrivalinux';
 our $default_thumbnail = '/usr/share/libDrakX/pixmaps/nosplash_thumb.png';
 our @resolutions = uniq(map { "$_->{X}x$_->{Y}" } Xconfig::resolution_and_depth::bios_vga_modes());
@@ -33,9 +33,9 @@ sub themes_read_sysconfig {
                  enabled => 1,
                  keep_logo => 1
                 );
-    if (-r $sysconfig_file) {
+    if (-r $::prefix . $sysconfig_file) {
         local $_;
-        foreach (cat_($sysconfig_file)) {
+        foreach (cat_($::prefix . $sysconfig_file)) {
             /^SPLASH=no/ and $theme{enabled} = 0;
             /^THEME=(.*)/ && -f theme_get_image_for_resolution($1, $res) and $theme{name} = $1;
             /^LOGO_CONSOLE=(.*)/ and $theme{keep_logo} = $1 ne "no";
@@ -46,12 +46,12 @@ sub themes_read_sysconfig {
 
 sub theme_get_image_for_resolution {
     my ($theme, $res) = @_;
-    $themes_dir . '/' . $theme . '/images/bootsplash-' . $res . ".jpg";
+    $::prefix . $themes_dir . '/' . $theme . '/images/bootsplash-' . $res . ".jpg";
 }
 
 sub theme_get_config_for_resolution {
     my ($theme, $res) = @_;
-    $themes_config_dir . '/' . $theme . '/config/bootsplash-' . $res . ".cfg";
+    $::prefix . $themes_config_dir . '/' . $theme . '/config/bootsplash-' . $res . ".cfg";
 }
 
 sub theme_exists_for_resolution {
@@ -60,7 +60,7 @@ sub theme_exists_for_resolution {
 }
 
 sub themes_list() {
-    grep { !/^\./ && -d $_ } sort(all($themes_dir));
+    grep { !/^\./ && -d $_ } sort(all($::prefix . $themes_dir));
 }
 
 sub themes_list_for_resolution {
@@ -74,7 +74,7 @@ sub switch {
         print "enabling bootsplash theme $theme\n";
     } else {
         #- theme scripts will update SPLASH value in sysconfig file
-        system($bootsplash_scripts . '/switch-themes', $theme);
+        system($::prefix . $bootsplash_scripts . '/switch-themes', $theme);
     }
 }
 
@@ -82,14 +82,14 @@ sub remove() {
     if ($::testing) {
         print "disabling bootsplash theme\n";
     } else {
-        system($bootsplash_scripts . '/remove-theme');
+        system($::prefix . $bootsplash_scripts . '/remove-theme');
     }
 }
 
 sub set_logo_console {
     my ($keep_logo) = @_;
     my $logo_console = $keep_logo ? 'theme' : 'no';
-    substInFile { s/^LOGO_CONSOLE=.*/LOGO_CONSOLE=$logo_console/ } $sysconfig_file;
+    substInFile { s/^LOGO_CONSOLE=.*/LOGO_CONSOLE=$logo_console/ } $::prefix . $sysconfig_file;
 }
 
 sub create_path {
@@ -103,7 +103,7 @@ sub theme_set_image_for_resolution {
     create_path($dest_image);
     #- Append an exclamation point to the geometry to force the image size to exactly the size you specify.
     system('convert', '-geometry', $res . '!', $source_image, $dest_image);
-    system($bootsplash_scripts . '/rewritejpeg',  $dest_image);
+    system($::prefix . $bootsplash_scripts . '/rewritejpeg',  $dest_image);
 }
 
 sub theme_read_config_for_resolution {
