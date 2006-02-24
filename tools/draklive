@@ -107,7 +107,7 @@ my %custom = (
 
 my %storage = (
     cdrom => {
-        modules => 'disk/cdrom|hardware_raid|sata|scsi bus/usb disk/raw',
+        modules => 'disk/cdrom|hardware_raid|ide|raw|sata|scsi bus/usb',
         fs => 'iso9660',
         source => 'LABEL=MDVCDROOT',
         read_only => 1,
