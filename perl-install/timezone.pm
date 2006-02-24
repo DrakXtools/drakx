@@ -9,7 +9,7 @@ use log;
 
 sub getTimeZones() {
     my $prefix = $::testing ? '' : $::prefix;
-    open(my $F, "find $prefix/usr/share/zoneinfo/[A-Z]* -noleaf -type f |");
+    open(my $F, "cd $prefix/usr/share/zoneinfo && find [A-Z]* -noleaf -type f |");
     my @l = difference2([ chomp_(<$F>) ], [ 'ROC', 'PRC' ]);
     close $F or die "cannot list the available zoneinfos";
     sort @l;
