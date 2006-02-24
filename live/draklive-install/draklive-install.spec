@@ -46,7 +46,7 @@ chmod 0755 %buildroot/%_sbindir/%name
 mkdir -p %buildroot{%_miconsdir,%_iconsdir,%_liconsdir,%_menudir,%_datadir/libDrakX/pixmaps/}
 install theme/IC-installone-48.png %buildroot%_liconsdir/%iconname
 install theme/IC-installone-32.png %buildroot%_iconsdir/%iconname
-install theme/IC-installone-32.png %buildroot%_miconsdir/%iconname
+install theme/IC-installone-16.png %buildroot%_miconsdir/%iconname
 install theme/IM-INSTALLCDONE2.png %buildroot%_datadir/libDrakX/pixmaps/%imgname
 
 %find_lang %name
