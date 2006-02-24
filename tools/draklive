@@ -469,6 +469,11 @@ sub post_install_system {
     each_index { !defined $_ and die "unable to find file " . $live->{system}{patches}[$::i] } @patches;
     run_('patch', '-p0', '-s', '-N', '-F', 0, '-d', get_system_root($live), '-r', '/tmp', '-i', $_) foreach @patches;
 
+    foreach (@{$live->{system}{files}}) {
+        my $dest = pop @$_;
+        cp_f(@$_, get_system_root($live) . $dest);
+    }
+
     #- make sure harddrake is run:
     #- if previous HW config file is empty, we assumes DrakX has just completed the installation
     #- (do it in chroot, or else Storable from the build box may write an incompatible config file)
