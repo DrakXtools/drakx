@@ -156,7 +156,10 @@ bootloader::suggest($bootloader, $in->{all_hds},
 		    vga_fb => first($cmdline =~ /\bvga=(\S+)/), #- don't use $1 here, otherwise perl will hit you because of the other "=~" below
 		    quiet => $cmdline =~ /\bsplash=silent\b/,
 		    );
-lilo_choice();
+{
+    local $::Wizard_no_previous = 0;
+    lilo_choice();
+}
 
 #- cleanly umount here, it will avoid fs journals to be corrupted after a hackish reboot
 umount_all($in);
