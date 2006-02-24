@@ -1,6 +1,6 @@
 %define name draklive-install
 %define version 0.1
-%define release %mkrel 3
+%define release %mkrel 4
 %define iconname MandrivaOne-install-icon.png
 %define imgname MandrivaOne-install.png
 
@@ -72,6 +72,11 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/libDrakX/pixmaps/%imgname
 
 %changelog
+* Fri Feb 24 2006 Olivier Blin <oblin@mandriva.com> 0.1-4mdk
+- make sure the cancel button is available in this pseudo-drakboot-boot
+- make the wizard really die when it is cancelled
+- use a smaller welcome image
+
 * Fri Feb 24 2006 Olivier Blin <oblin@mandriva.com> 0.1-3mdk
 - use correct size for small icon
 
