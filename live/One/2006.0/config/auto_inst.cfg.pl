@@ -116,6 +116,9 @@ $o = {
                                'saned',
                                'kdegraphics-kooka',
 
+                               #- drakclock
+                               'ntp',
+
                                #- useful packages
                                'ndiswrapper',
                                'xmoto',
