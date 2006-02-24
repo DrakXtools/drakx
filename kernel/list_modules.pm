@@ -58,7 +58,7 @@ our %l = (
       qw(acx100_pci adm8211 airo airo_cs aironet4500_cs aironet_cs),
       qw(at76c503-i3861 at76c503-i3863 at76c503-rfmd at76c503-rfmd-acc at76c505-rfmd at76c505-rfmd2958 at76c505a-rfmd2958),
       qw(ath_pci atmel_cs atmel_pci dyc_ar5),
-      qw(hostap_pci hostap_plx ipw2100 ipw2200 madwifi_pci netwave_cs orinoco orinoco_cs orinoco_nortel orinoco_pci orinoco_plx orinoco_tmd),
+      qw(hostap_pci hostap_plx ipw2100 ipw2200 ipw3945 madwifi_pci netwave_cs orinoco orinoco_cs orinoco_nortel orinoco_pci orinoco_plx orinoco_tmd),
       qw(prism2_cs prism2_pci prism2_usb prism54 r8180 ray_cs rt2400 rt2500 rt2570 usbvnet_rfmd vt_ar5k wavelan_cs wvlan_cs zd1201),
       if_(arch() =~ /ppc/, qw(airport)),
     ],
