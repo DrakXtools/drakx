@@ -49,7 +49,7 @@ sub check_package_is_installed {
     my ($do_pkgs, $fs_type) = @_;
 
     my ($pkg, $binary) = @{$cmds{$fs_type} || return};
-    $do_pkgs->ensure_binary_is_installed($pkg, $binary);
+    whereis_binary($binary) || $do_pkgs->ensure_binary_is_installed($pkg, $binary); #- ensure_binary_is_installed checks binary chrooted, whereas we run the binary non-chrooted (pb for Mandriva One)
 }
 
 sub part {
