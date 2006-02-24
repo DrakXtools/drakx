@@ -1,6 +1,6 @@
 %define name draklive-install
 %define version 0.1
-%define release %mkrel 2
+%define release %mkrel 3
 %define iconname MandrivaOne-install-icon.png
 %define imgname MandrivaOne-install.png
 
@@ -72,6 +72,9 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/libDrakX/pixmaps/%imgname
 
 %changelog
+* Fri Feb 24 2006 Olivier Blin <oblin@mandriva.com> 0.1-3mdk
+- use correct size for small icon
+
 * Thu Feb 23 2006 Olivier Blin <oblin@mandriva.com> 0.1-2mdk
 - make partition tools not fail finding fs tools (#21260)
 - update po files
