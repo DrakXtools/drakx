@@ -48,7 +48,7 @@ sub umount_all {
 }
 
 my $in = 'interactive'->vnew('su');
-
+$in->{prefix} = $::prefix = '/mnt/install';
 $in->{all_hds} = fsedit::get_hds();
 
 umount_all($in);
@@ -70,7 +70,6 @@ my $title = N("Mandriva Live");
 }
 
 install_interactive::partitionWizard_ask($in);
-$in->{prefix} = $::prefix = '/mnt/install';
 mkdir_p($::prefix) or die "unable to create $::prefix";
 
 doPartitionDisksAfter($in);
