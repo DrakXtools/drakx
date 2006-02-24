@@ -69,7 +69,7 @@ my $title = N("Mandriva Live");
     $w->main;
 }
 
-install_interactive::partitionWizard($in);
+install_interactive::partitionWizard_ask($in);
 $in->{prefix} = $::prefix = '/mnt/install';
 mkdir_p($::prefix) or die "unable to create $::prefix";
 

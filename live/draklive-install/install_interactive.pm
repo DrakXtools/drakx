@@ -251,7 +251,7 @@ When you are done, do not forget to save using `w'", partition_table::descriptio
     %solutions;
 }
 
-sub partitionWizard {
+sub partitionWizard_ask {
     my ($o, $b_nodiskdrake) = @_;
 
     my %solutions = partitionWizardSolutions($o, $o->{all_hds});
@@ -277,9 +277,16 @@ sub partitionWizard {
 		  }, 
 		  [ { val => \$sol, list => \@solutions, format => sub { $_[0][1] }, type => 'list' } ]);
     log::l("partitionWizard calling solution $sol->[1]");
-    my $ok = eval { $sol->[2]->() };
-    $@ and $o->ask_warn('', N("Partitioning failed: %s", formatError($@)));
-    $ok or goto &partitionWizard;
+    $sol->[2]->();
+}
+
+sub partitionWizard {
+    my ($o, $b_nodiskdrake) = @_;
+    eval { &partitionWizard_ask };
+    if ($@) {
+        $o->ask_warn('', N("Partitioning failed: %s", formatError($@)));
+        goto &partitionWizard;
+    }
     1;
 }
 
