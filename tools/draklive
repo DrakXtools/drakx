@@ -484,8 +484,9 @@ sub post_install_system {
     #- (don't use addVarsInSh from MDK::Common, it breaks shell escapes)
     substInFile { s/^PROMPT=.*/PROMPT=no/ } get_system_root($live) . '/etc/sysconfig/init';
 
-    #- make sure mtab and fstab don't contain build-machine specific configuration
-    output(get_system_root($live) . $_, '') foreach qw(/etc/fstab /etc/mtab);
+    #- remove some build-machine specific configuration
+    output(get_system_root($live) . $_, '') foreach qw(/etc/fstab /etc/mtab /etc/modprobe.conf);
+    substInFile { undef $_ if /^[^#]/ } get_system_root($live) . '/etc/modprobe.preload';
 
     #- disable first boot wizard
     output(get_system_root($live) . '/etc/sysconfig/firstboot', 'FIRSTBOOT=no');
