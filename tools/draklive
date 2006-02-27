@@ -465,6 +465,8 @@ sub post_install_system {
     my $erase = join(' ', @{$live->{system}{erase_rpms}});
     run_({ root => get_system_root($live) }, 'sh', '-c', "rpm -qa $erase | xargs rpm -e ") if $erase;
 
+    run_({ root => get_system_root($live) }, 'chkconfig', '--del', $_) foreach @{$live->{system}{disable_services}};
+
     my @patches = map { Cwd::abs_path($_) } @{$live->{system}{patches}};
     each_index { !defined $_ and die "unable to find file " . $live->{system}{patches}[$::i] } @patches;
     run_('patch', '-p0', '-s', '-N', '-F', 0, '-d', get_system_root($live), '-r', '/tmp', '-i', $_) foreach @patches;
