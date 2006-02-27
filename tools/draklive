@@ -480,13 +480,17 @@ sub post_install_system {
     run_({ root => get_system_root($live) },
          'perl', '-MStorable', '-e', qq(Storable::store({ UNKNOWN => {} }, '/etc/sysconfig/harddrake2/previous_hw')));
 
-    #- interactive mode can lead to race in initscripts
-    #- (don't use addVarsInSh from MDK::Common, it breaks shell escapes)
-    substInFile { s/^PROMPT=.*/PROMPT=no/ } get_system_root($live) . '/etc/sysconfig/init';
-
     #- remove some build-machine specific configuration
     output(get_system_root($live) . $_, '') foreach qw(/etc/fstab /etc/mtab /etc/modprobe.conf);
     substInFile { undef $_ if /^[^#]/ } get_system_root($live) . '/etc/modprobe.preload';
+
+    #- run harddrake because a crappy snd-usb-audio workaround may do something at shutdown
+    #- (do it after the modprobe files are cleaned)
+    run_({ root => get_system_root($live) }, '/usr/share/harddrake/service_harddrake', 'stop');
+
+    #- interactive mode can lead to race in initscripts
+    #- (don't use addVarsInSh from MDK::Common, it breaks shell escapes)
+    substInFile { s/^PROMPT=.*/PROMPT=no/ } get_system_root($live) . '/etc/sysconfig/init';
 
     #- disable first boot wizard
     output(get_system_root($live) . '/etc/sysconfig/firstboot', 'FIRSTBOOT=no');
