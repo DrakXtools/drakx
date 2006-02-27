@@ -178,6 +178,9 @@ $o = {
 			 },
        #- doc takes too much place
        'excludedocs' => 1,
-       #- do not modify it the standard way, since the behaviour would be unexpected during install
-       'postInstall' => "perl -pi -e 's/META_CLASS=.*/META_CLASS=one/' /etc/sysconfig/system"
+       'postInstall' => join(";",
+                             #- do not modify it the standard way, since the behaviour would be unexpected during install
+                             "perl -pi -e 's/META_CLASS=.*/META_CLASS=one/' /etc/sysconfig/system",
+                             #- try not to run kat a second time when running kde apps as root (#21308)
+                             "touch /root/.mdv-no_kat"),
      };
