@@ -30,6 +30,9 @@ push @::textdomains, 'draklive-install';
     undef *Done;
     #- skip the fstab/reboot checks
     *Done = \&diskdrake_interactive_Done;
+    #- don't ask whether to Move/Hide old files
+    undef *need_migration;
+    *need_migration = sub { 'hide' };
 }
 
 sub umount_all {
