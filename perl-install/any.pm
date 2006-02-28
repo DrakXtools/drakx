@@ -69,6 +69,7 @@ sub create_user {
 	}
 
 	require authentication;
+        my $symlink_home_from = $u->{rename_from} && (getpwnam($u->{rename_from}))[7];
 	run_program::raw({ root => $::prefix, sensitive_arguments => 1 },
 			    ($u->{rename_from} ? 'usermod' : 'adduser'), 
 			    '-p', authentication::user_crypted_passwd($u, $isMD5),
@@ -79,6 +80,7 @@ sub create_user {
 			    ($u->{rename_from}
 			     ? ('-l', $u->{name}, $u->{rename_from})
 			     : $u->{name}));
+        symlink($u->{home}, $symlink_home_from) if $symlink_home_from;
     }
 
     my (undef, undef, $uid, $gid, undef, undef, undef, $home) = getpwnam($u->{name});
