@@ -116,4 +116,3 @@ _ "$sudo chown root.root -R $tmp/*";
 exit 0 if $ARGV[0];
 
 _ "mkisofs -quiet -D -R $tmp | create_compressed_fs - 65536 $rescue 200 2>/dev/null";
-#_ "$sudo rm -rf $tmp";
