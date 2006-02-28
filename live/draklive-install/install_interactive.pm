@@ -1,7 +1,7 @@
 package install_interactive; # $Id$
 
-use diagnostics;
-use strict;
+
+
 
 use common;
 use partition_table;
