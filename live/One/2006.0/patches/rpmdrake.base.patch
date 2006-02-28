@@ -1,0 +1,11 @@
+--- usr/lib/perl5/vendor_perl/5.8.7/rpmdrake.pm.base    2005-09-12 06:09:30.000000000 -0400
++++ usr/lib/perl5/vendor_perl/5.8.7/rpmdrake.pm 2006-02-27 11:08:58.000000000 -0500
+@@ -456,7 +456,7 @@
+     return 'official' if $want_base_distro && $mandrake_release =~ /official|limited/i;
+     return 'updates'  if $mandrake_release !~ /community/i;
+     (my $v) = split / /, cat_('/etc/version');
+-    return $v =~ /\.0$/ ? 'community' : 'updates';
++    return $want_base || $v =~ /\.0$/ ? 'community' : 'updates';
+ }
+ 
+ sub compat_arch_for_updates($) {
