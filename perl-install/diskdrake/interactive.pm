@@ -1163,7 +1163,7 @@ sub need_migration {
 	my $choice;
 	my @choices = (N_("Move files to the new partition"), N_("Hide files"));
 	$in->ask_from('', N("Directory %s already contains data\n(%s)", $mntpoint, formatList(5, @l)), 
-		      [ { val => \$choice, list => \@choices, type => 'list' } ]) or return;
+		      [ { val => \$choice, list => \@choices, type => 'list', format => sub { translate($_[0]) } } ]) or return;
 	$choice eq $choices[0] ? 'migrate' : 'hide';
     } else {
 	'hide';
