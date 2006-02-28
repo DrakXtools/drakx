@@ -28,7 +28,7 @@ if ($ARGV[0] eq '-s') {
 } 
 my $action = shift @ARGV;
 
-sub usage() { die "partimage_whole_disk [-s <server>] (save_all <dir> | rest_all <dirs>)\n" }
+sub usage() { die "partimage_whole_disk [-s <server>] (save_all <dir> | rest_all <dir>)\n" }
 
 $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 $ENV{HOME} = '/';
