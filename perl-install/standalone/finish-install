@@ -49,6 +49,15 @@ sub ask_keyboard() {
     keyboard::configure_and_set_standalone($keyboard);
 }
 
+sub ask_timezone() {
+    require timezone;
+    my $t = {};
+    $t->{timezone} = timezone::bestTimezone($locale->{country});
+    $t->{timezone} = $in->ask_from_treelist(N("Timezone"), N("Which is your timezone?"), '/', [ timezone::getTimeZones() ], $t->{timezone}) or return;
+    $t->{UTC} = $in->ask_yesorno(N("Timezone"), N("Is your hardware clock set to GMT?"), $t->{UTC});
+    timezone::write($t);
+}
+
 sub ask_network() {
     my $modules_conf = modules::any_conf->read;
     require network::netconnect;
@@ -101,6 +110,7 @@ sub call {
 call('license');
 call('language');
 call('keyboard');
+call('timezone');
 call('network');
 if (defined $::WizardWindow) {
     $::WizardWindow->destroy;
