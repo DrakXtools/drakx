@@ -90,10 +90,13 @@ if ($ENV{PARTIMAGE_RPM}) {
     $server = 'leia';
 
     my $default_dir = '/data/box';
-    my $partimage_dir = $ENV{PARTIMAGE_DIR} || $default_dir;
 
     substInFile {
-	$_ = <<EOF if /^\s*rescue-gui/;
+	$_ = "  server=$server\n" . "  default_dir=$default_dir\n" . <<'EOF' if /^\s*rescue-gui/;
+
+  partimage_dir=`perl -lne 'print $1 if /BOX=(\S+)/' /proc/cmdline`
+  [ -z "$partimage_dir" ] && partimage_dir=$default_dir
+
   if grep -q save_all /proc/cmdline; then
       partimage_whole_disk -s $server save_all $default_dir
   fi
