@@ -91,9 +91,6 @@ if ($ENV{PARTIMAGE_RPM}) {
 
     my $default_dir = '/data/box';
     my $partimage_dir = $ENV{PARTIMAGE_DIR} || $default_dir;
-    my @local_dirs = map { "/tmp/image$_" } split(' ', $partimage_dir);
-    my $local_dir = $local_dirs[0];
-    my $local_dirs = join(' ', @local_dirs);
 
     substInFile {
 	$_ = <<EOF if /^\s*rescue-gui/;
@@ -101,8 +98,8 @@ if ($ENV{PARTIMAGE_RPM}) {
       partimage_whole_disk -s $server save_all $default_dir
   fi
   if grep -q rest_all /proc/cmdline; then
-      if [ -d $local_dir ]; then
-          partimage_whole_disk rest_all $local_dirs
+      if [ -d /tmp/image$partimage_dir ]; then
+          partimage_whole_disk rest_all /tmp/image$partimage_dir
       else
           partimage_whole_disk -s $server rest_all $partimage_dir
       fi
