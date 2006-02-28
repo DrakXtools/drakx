@@ -160,6 +160,7 @@ sub load_category {
 
 	$_->{try} = 1 if member($_->{driver}, 'hptraid', 'ohci1394'); #- do not warn when this fails
     }
+    eval { load_and_configure($conf, 'ide-generic') } if $category eq 'disk/ide';
     grep { !($_->{error} && $_->{try}) } @l;
 }
 
