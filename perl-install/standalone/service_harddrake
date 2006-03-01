@@ -137,6 +137,8 @@ foreach my $hw_class (@harddrake::data::tree) {
         modules::load_category($modules_conf, 'network/main|gigabit|usb|wireless|firewire|pcmcia');
         require network::ethernet;
         network::ethernet::configure_eth_aliases($modules_conf);
+        require network::shorewall;
+        network::shorewall::update_interfaces_list();
         $modules_conf->write;
         next;
     } elsif (member($Ident, qw(ATA_STORAGE RAID_STORAGE  SATA_STORAGE SCSI_CONTROLLER))) {
