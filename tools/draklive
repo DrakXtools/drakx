@@ -343,6 +343,11 @@ sub create_initrd_for_media {
 
     @$skipped and warn "skipped modules:" . join("\n", '', sort(@$skipped));
 
+    #- move ide-generic to end of loaded modules, so that it registers unhandled drives only
+    #- this avoid it to take-over drives which would have been managed by SATA modules
+    my ($head, $tail) =  partition { $_ ne 'ide-generic' } @$modules;
+    @$modules = (@$head, @$tail);
+
     create_initrd_linuxrc($live, $media, @module_deps, @$modules);
     compress_initrd_tree($live, $media);
     add_splash($live, $media);
