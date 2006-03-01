@@ -85,6 +85,8 @@ my %tuners_lst =
      68 => "Philips|TUV1236D ATSC/NTSC dual in",
      69 => "Tena|TNF 5335 MF",
      70 => "Samsung|TCPN 2121P30A",
+     71 => "Xceive xc3028",
+
 
      );
 
@@ -327,6 +329,7 @@ my $cards_lst = {
         "VStream|XPert DVB-T with cx22702" => 43,
         "KWorld|XPert DVB-T with cx22702" => 43,
         "DViCO|FusionHDTV DVB-T Dual Digital" => 44,
+        "KWorld|HardwareMpegTV XPert" => 45,
 
     },
 
@@ -412,7 +415,7 @@ my $cards_lst = {
         "LifeView|FlyTV Platinum Mini2" => 74,
         "AverMedia|AVerTVHD MCE A180" => 75,
         "SKNet|MonsterTV Mobile" => 76,
-        "Pinnacle|PCTV 110i (saa7133)" => 77,
+        "Pinnacle|PCTV 40i/50i/110i (saa7133)" => 77,
         "ASUSTeK P7131 Dual" => 78,
         "Sedna/MuchTV PC TV Cardbus TV/Radio (ITO25 Rev:2B)" => 79,
         "ASUS|Digimatrix TV" => 80,
@@ -420,6 +423,12 @@ my $cards_lst = {
         'MSI TV@Anywhere plus' => 82,
         "Terratec|Cinergy 250 PCI TV" => 83,
         "LifeView|FlyDVB Trio" => 84,
+        "AverTV DVB-T 777" => 85,
+        "LifeView|FlyDVB-T" => 86,
+        "ADS Instant TV Duo Cardbus PTV331" => 87,
+        "Tevion|DVB-T 220RF" => 88,
+        "ELSA|EX-VISION 700TV" => 89,
+        "Kworld|ATSC110" => 90,
 
     }
 };
