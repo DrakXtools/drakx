@@ -170,3 +170,24 @@ undef *doPartitionDisksAfter;
       !any { $_->{mntpoint} eq "/mnt/nfs" } @{$o->{all_hds}{nfss}} and
 	push @{$o->{all_hds}{nfss}}, { fs_type => 'nfs', mntpoint => "/mnt/nfs", device => $1, options => "noauto,ro,nosuid,soft,rsize=8192,wsize=8192" };
 };
+
+use network::network;
+package network::network;
+
+undef *write_zeroconf;
+*write_zeroconf = sub {
+    my ($net, $in) = @_;
+    my $zhostname = $net->{zeroconf}{hostname};
+    my $file = $::prefix . $tmdns_file;
+
+    if ($zhostname) {
+	$in->do_pkgs->ensure_binary_is_installed('tmdns', 'tmdns', 'auto') if !$in->do_pkgs->is_installed('bind');
+	$in->do_pkgs->ensure_binary_is_installed('zcip', 'zcip', 'auto');
+    }
+
+    #- write blank hostname even if disabled so that drakconnect does not assume zeroconf is enabled
+    eval { substInFile { s/^\s*(hostname)\s*=.*/$1 = $zhostname/ } $file } if $zhostname || -f $file;
+
+    require services;
+    services::set_status('tmdns', $net->{zeroconf}{hostname}, $::isInstall);
+};
