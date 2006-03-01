@@ -194,7 +194,7 @@ our %l = (
     scanner => [ qw(scanner microtek) ],
     gameport => [ qw(cs461x ns558 emu10k1-gp fm801-gp lightning ns558 vortex) ],
     usb_sound => [ qw(audio dabusb dsbr100 snd-usb-audio snd-usb-usx2y usb-midi) ],
-    webcam => [ qw(cpia_usb cyber2000fb et61x251 ibmcam konicawc mod_quickcam ov511 ov511-alt ov518_decomp ovfx2 pwc quickcam se401 stv680 sn9c102 ultracam usbvideo usbvision vicam w9968cf) ],
+    webcam => [ qw(cpia_usb cpia2 cyber2000fb et61x251 ibmcam konicawc mod_quickcam ov511 ov511-alt ov518_decomp ovfx2 pwc quickcam se401 stv680 sn9c102 ultracam usbvideo usbvision vicam w9968cf) ],
   },
 
   # USB input stuff get automagically loaded by hotplug and thus
