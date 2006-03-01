@@ -613,10 +613,8 @@ sub configure_network {
 
         any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %{$net->{ifcfg}} and $in->do_pkgs->install('pump');
 
-        #- update interfaces list in shorewall
         require network::shorewall;
-        my $shorewall = network::shorewall::read();
-        $shorewall && !$shorewall->{disabled} and network::shorewall::write($shorewall);
+        network::shorewall::update_interfaces_list();
 
         $net->{network}{HOSTNAME} && !$::isInstall and sethostname($net);
     }
