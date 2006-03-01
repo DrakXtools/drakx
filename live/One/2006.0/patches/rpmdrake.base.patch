@@ -5,7 +5,7 @@
      return 'updates'  if $mandrake_release !~ /community/i;
      (my $v) = split / /, cat_('/etc/version');
 -    return $v =~ /\.0$/ ? 'community' : 'updates';
-+    return $want_base || $v =~ /\.0$/ ? 'community' : 'updates';
++    return $want_base_distro || $v =~ /\.0$/ ? 'community' : 'updates';
  }
  
  sub compat_arch_for_updates($) {
