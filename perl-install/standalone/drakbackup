@@ -123,6 +123,7 @@ my @other_files;
 my @sys_files = "/etc";
 my @files_for_direct_tape;
 my $host_passwd;
+my $index_cmd = "| tee ";
 
 # allow not-root user with own config
 if ($ENV{USER} ne 'root' && $ENV{HOME} ne '/root') {
@@ -831,6 +832,7 @@ sub get_tape_label {
 
 sub build_tape() {
 	my $command;
+	my $dt_list;
 	#- do we have a tape?
 	$command = "mt -f $conf{TAPE_DEVICE} status"; 
 	spawn_progress($command, "Checking for tape");
@@ -884,10 +886,13 @@ sub build_tape() {
 	if ($conf{DIRECT_TAPE}) {
 		$command .= handle_ignores($command !~ /-V/, @files_for_direct_tape);
 		$command .= " @files_for_direct_tape";
+		$dt_list = $conf{PATH_TO_SAVE} . "/list_direct_tape" . $the_time . ".txt";
+		$command .= " $index_cmd $dt_list";
 	} else {
 		$command .= " @file_list_to_send_by_ftp";
 	}
 	spawn_progress($command, "Running tar to tape");
+	gzip($dt_list);
 	
 	#- eject the tape?
 	if ($conf{MEDIA_EJECT}) {
@@ -899,16 +904,17 @@ sub build_tape() {
 sub send_mail {
     my ($result) = @_;
     my $datem = `date`;
-	my $merror = 0;	
     use Mail::Mailer;
 	my @mlist = split(',', $conf{USER_MAIL});
-	foreach (@mlist) {
     	my $mailer = Mail::Mailer->new('smtp', Server => $conf{SMTP_SERVER});
-    	$mailer->open({ From => $conf{FROM_MAIL}, To => $_, Subject => "DrakBackup report on $datem" }) or $merror = 1;
+	foreach (@mlist) {
+		$mailer->open({ From => $conf{FROM_MAIL}, 
+			To => $_,
+			Subject => "DrakBackup report on $datem" }) or return 1;
     	print $mailer $result;
     	$mailer->close;
 	}
-	return $merror;
+	0;
 }
 
 sub build_backup_files() {
@@ -1197,7 +1203,7 @@ sub name_list_file {
 sub check_rm_list {
 	my ($list_file) = @_;
 	$list_file .= ".tmp";
-	if (!cat_($list_file)) {
+	if (!catMaybeCompressed($list_file)) {
 		unlink($list_file);
 		return 0;
 	} else {
@@ -1247,14 +1253,20 @@ sub do_tar {
 		#- if $list_file is undefined, then use the @files list
 		my $list_cmd = $conf{ARCHIVER} eq "tar" ? "-T " : "list=";
 		#- FIXME? no --index-file equiv for star, use pipe to cat for now
-		# $conf{ARCHIVER} eq "tar" ? $index_cmd = "--index-file=" : $index_cmd = " | cat > "; 
-		-e $tmp_list ? system("$tar_cmd -f $full_dest_file $list_cmd$tmp_list | cat > $list_file") : system("$tar_cmd -f $full_dest_file @files | cat > $list_file");
+		-e $tmp_list ? system("$tar_cmd -f $full_dest_file $list_cmd$tmp_list $index_cmd $list_file") : system("$tar_cmd -f $full_dest_file @files $index_cmd $list_file");
 		unlink($tmp_list) if -e $tmp_list;
 	}
-	#- someone on club complained about perms being too open
-	chmod(0600, $list_file) if -e $list_file;
+	gzip($list_file);
 	chmod(0600, $full_dest_file) if -e $full_dest_file;
 	push_list($dest_file);
+}
+
+sub gzip {
+    my ($gz_file) = @_;
+    if (-e $gz_file) {
+        chmod(0600, $gz_file);
+        system("gzip $gz_file");
+    }
 }
 
 sub push_list {
@@ -1271,7 +1283,7 @@ sub files_to_results {
 		$results .= "\nDirect to tape:\n\n";
 	} else {
 		$results .= "\nfile: " . $conf{PATH_TO_SAVE} . "/backup_" . $basename . $the_time . "." . $conf{OPTION_COMP} . "\n\n";
-		$results .= cat_("$conf{PATH_TO_SAVE}/list_" . $basename . $the_time . ".txt");
+		$results .= catMaybeCompressed("$conf{PATH_TO_SAVE}/list_" . $basename . $the_time . ".txt");
 	}
 	$results .= "\nignored:\n" . $ignore_files_list . "\n" if $ignore_files_list;
 }
@@ -3341,7 +3353,8 @@ sub find_files_to_restore() {
 					$model->clear;
 					my $match = 0;
 					foreach my $list (@possible_sources) {
-						my @matches = grep { /$wildcard/ } cat_($list);
+						$list =~ s|.gz||;
+						my @matches = grep { /$wildcard/ } catMaybeCompressed($list);
 						if (@matches) {
 							my $list_entry = $model->append_set(undef, [ 0 => $list, 2 => '' ]);
 							foreach (@matches) {
@@ -3464,8 +3477,9 @@ sub catalog_restore {
 		gtkset_mousecursor_wait();
 		@restore_files = ();
 		$lmodel->clear;
-		foreach my $filename (glob("$conf{PATH_TO_SAVE}/list*$cat_entry.txt")) {
-			my @contents = cat_($filename);
+		foreach my $filename (glob("$conf{PATH_TO_SAVE}/list*$cat_entry.txt*")) {
+			$filename =~ s|.gz||;
+			my @contents = catMaybeCompressed($filename);
 			foreach (@contents) {
 				chop;
 				my $s = $_;
@@ -3550,6 +3564,7 @@ sub restore_catalog_entry {
 	my $username;
 	my $userpass = $conf{PASSWD};
 	my $restore_result = 1;
+	$log_buff = "";
 		
 	my @line_data = split(':', $cat_entry);
 	my $backup_time = $line_data[0];
@@ -3725,6 +3740,7 @@ sub restore_tape {
 			}
 		}
 		spawn_progress($command, "Restoring files from $dev_path to $restore_path.");
+		$results = $log_buff;
 		return 0;
 	}
 		
@@ -3834,7 +3850,7 @@ sub catalog_to_wildcard {
 
 sub wildcard_to_tarfile {
 	my ($wildcard) = @_;
-	my (@tarfile) = glob("$conf{PATH_TO_SAVE}/*$wildcard.txt");
+	my (@tarfile) = glob("$conf{PATH_TO_SAVE}/*$wildcard.txt*");
 	foreach (@tarfile) {
 		$_ = basename($_);
 		s/txt/$conf{OPTION_COMP}/;
@@ -3851,10 +3867,11 @@ sub file_to_tarfile {
 	#- filename with spaces
 	$restore_file = "'" . $restore_file . "'" if $restore_file =~ / /;
 	#- can be in more than one tarfile (misuse of "other")
-	my @tarfiles = `grep -l $restore_file $conf{PATH_TO_SAVE}/*$wildcard.txt`;
+	my @tarfiles = `zgrep -l $restore_file $conf{PATH_TO_SAVE}/*$wildcard.txt*`;
 	chomp @tarfiles;
 	my $tarfile = $tarfiles[0];
 	$tarfile = basename($tarfile);
+	$tarfile =~ s/.gz//;
 	$tarfile =~ s/txt/$conf{OPTION_COMP}/;
 	$tarfile =~ s/list/backup/;
 	$restore_file, $tarfile;
