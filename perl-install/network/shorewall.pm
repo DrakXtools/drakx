@@ -157,5 +157,9 @@ sub write {
     }
 }
 
-1;
+sub update_interfaces_list() {
+    my $shorewall = network::shorewall::read();
+    $shorewall && !$shorewall->{disabled} and network::shorewall::write($shorewall);
+}
 
+1;
