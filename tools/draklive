@@ -107,9 +107,10 @@ my %custom = (
 
 my %storage = (
     cdrom => {
-        modules => 'disk/cdrom|hardware_raid|ide|raw|sata|scsi bus/usb',
+        modules => 'bus/usb disk/cdrom|hardware_raid|ide|raw|sata|scsi|usb',
         fs => 'iso9660',
         source => 'LABEL=MDVCDROOT',
+        sleep => 15,
         read_only => 1,
         detect => \&detect_devices::burners,
         create => \&create_cdrom_master,
