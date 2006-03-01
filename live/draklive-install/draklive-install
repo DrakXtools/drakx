@@ -142,6 +142,8 @@ USER_RENAME_FROM=guest
 my $kdm_cfg = '/etc/kde/kdm/kdmrc';
 update_gnomekderc($in->{prefix} . $kdm_cfg,
                   'X-:0-Greeter' => (PreselectUser => 'None', DefaultUser => '')) if -f $kdm_cfg;
+#- allow to install doc in disk install
+substInFile { undef $_ if /^\%_excludedocs/ } $in->{prefix} . '/etc/rpm/macros';
 
 #- create required directories and devices
 mkdir_p($in->{prefix} . $_) foreach qw(/dev /etc /proc /sys);
