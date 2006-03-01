@@ -120,7 +120,7 @@ sub write_zeroconf {
     eval { substInFile { s/^\s*(hostname)\s*=.*/$1 = $zhostname/ } $file } if $zhostname || -f $file;
 
     require services;
-    services::set_status('tmdns', $net->{zeroconf}{hostname});
+    services::set_status('tmdns', $net->{zeroconf}{hostname}, $::isInstall);
 }
 
 sub write_resolv_conf {
