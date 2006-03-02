@@ -181,6 +181,7 @@ $o = {
        'postInstall' => join(";",
                              #- do not modify it the standard way, since the behaviour would be unexpected during install
                              "perl -pi -e 's/META_CLASS=.*/META_CLASS=one/' /etc/sysconfig/system",
+                             "perl -pi -e 's/\(Community\)/\(Official\)/' /etc/release",
                              #- try not to run kat a second time when running kde apps as root (#21308)
                              "touch /root/.mdv-no_kat",
                              #- remove useless ISDN network configuration file,
