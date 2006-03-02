@@ -479,7 +479,7 @@ sub post_install_system {
 
     foreach (@{$live->{system}{files}}) {
         my $dest = pop @$_;
-        cp_f(@$_, get_system_root($live) . $dest);
+        cp_af(@$_, get_system_root($live) . $dest);
     }
 
     #- make sure harddrake is run:
