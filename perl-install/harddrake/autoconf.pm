@@ -43,4 +43,16 @@ sub pcmcia {
     });
 }
 
+sub bluetooth {
+    my ($enable) = @_;
+#- FIXME: make sure these packages are installed when needed
+#     if ($enable) {
+#         require do_pkgs;
+#         my $do_pkgs = do_pkgs_standalone->new;
+#         $do_pkgs->ensure_is_installed("bluez-utils", "/usr/bin/rfcomm");
+#     }
+    require services;
+    services::set_status("bluetooth", $enable);
+}
+
 1;

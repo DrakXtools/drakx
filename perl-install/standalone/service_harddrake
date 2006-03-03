@@ -163,6 +163,8 @@ foreach my $hw_class (@harddrake::data::tree) {
         $modules_conf->write;
         modules::load(difference2(\@new_drivers, \@old_drivers));
         next;
+    } elsif ($Ident eq "BLUETOOTH") {
+        harddrake::autoconf::bluetooth(scalar keys %ID);
     } elsif ($Ident eq "PCMCIA_CONTROLLER") {
         # obsolete once/since kernel-2.6.14/pcmciautils is used, but kept for compatibility:
         harddrake::autoconf::pcmcia(keys %ID ? first(values(%ID))->{driver} : '');

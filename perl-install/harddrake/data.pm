@@ -257,7 +257,7 @@ our @tree =
       icon => "hw_network.png",
       configurator => "",
       detector => sub { f(modules::probe_category('bus/bluetooth')) },
-      checked_on_boot => 0,
+      checked_on_boot => 1,
      },
 
      {
