@@ -491,6 +491,7 @@ sub post_install_system {
     #- remove some build-machine specific configuration
     substInFile { undef $_ if /^[^#]/ } get_system_root($live) . $_
       foreach qw(/etc/fstab /etc/mtab /etc/modprobe.conf /etc/modprobe.preload /etc/iftab /etc/shorewall/interfaces /etc/mdadm.conf);
+    output_with_perm(get_system_root($live) . '/etc/fstab', 0644, "none / unionfs rw 0 0\n");
 
     #- run harddrake because a crappy snd-usb-audio workaround may do something at shutdown
     #- (do it after the modprobe files are cleaned)
