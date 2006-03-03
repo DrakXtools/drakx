@@ -1,0 +1,11 @@
+--- etc/dynamic/scripts/lp.script.start 2006-03-03 10:15:52.000000000 -0500
++++ etc/dynamic/scripts/lp.script       2006-03-03 10:17:48.000000000 -0500
+@@ -78,6 +78,8 @@
+            # not already running
+            ps auxwww | grep 'perl /usr/sbin/autosetupprintqueues' | grep -vq grep && return
+            ps auxwww | grep 'perl /usr/sbin/printerdrake' | grep -vq grep && return
++           chkconfig --add cups
++           service cups start
+            autosetupprintqueues --$AUTO_SETUP_QUEUES_MODE &
+        fi
+     fi
