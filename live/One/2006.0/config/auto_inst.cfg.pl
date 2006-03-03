@@ -120,7 +120,7 @@ $o = {
                                'ntp',
 
                                #- network
-                               'zcip', 'tmdns', 'ethtool',
+                               'zcip', 'tmdns', 'ethtool', 'rp-pppoe',
 
                                #- useful packages
                                'ndiswrapper',
