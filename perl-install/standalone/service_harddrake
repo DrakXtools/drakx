@@ -111,7 +111,7 @@ foreach my $hw_class (@harddrake::data::tree) {
     log::explanations("removed $Ident: " . harddrake::data::custom_id($oldconfig->{$_}, $item)) foreach @was_removed;
     log::explanations("added $Ident: " . harddrake::data::custom_id($ID{$_}, $item)) foreach @added;
 
-    modules::load_and_configure($modules_conf, 'ohci1394') if $Ident eq 'FIREWIRE_CONTROLLER' && any { $_->{driver} eq 'ohci1394' } @added;
+    modules::load_and_configure($modules_conf, 'ohci1394') if $Ident eq 'FIREWIRE_CONTROLLER' && any { $_->{driver} eq 'ohci1394' } @ID{@added};
     @added || @was_removed or next;
 
     next if $Ident eq 'MOUSE' && $curr_kernel ne $prev_kernel;
