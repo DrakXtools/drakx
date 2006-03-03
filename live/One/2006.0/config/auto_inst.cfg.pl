@@ -119,8 +119,8 @@ $o = {
                                #- drakclock
                                'ntp',
 
-                               #- finish-install (network)
-                               'zcip', 'tmdns',
+                               #- network
+                               'zcip', 'tmdns', 'ethtool',
 
                                #- useful packages
                                'ndiswrapper',
