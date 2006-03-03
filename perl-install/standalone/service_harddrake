@@ -34,16 +34,22 @@ $last_boot_config .= '_X11' if $invert_do_it;
 
 my $modules_conf = modules::any_conf->read;
 
+my $isLaptop = detect_devices::isLaptop();
 my $curr_kernel = c::kernel_version();
 $curr_kernel =~ s/(^\d+\.\d+).*/$1/;
 
 my %previous_kernel_config = getVarsFromSh("$hw_sysconfdir/kernel");
-setVarsInSh("$hw_sysconfdir/kernel", { KERNEL => $curr_kernel });
+setVarsInSh("$hw_sysconfdir/kernel", { KERNEL => $curr_kernel, IS_LAPTOP => bool2text($isLaptop) });
 
 # autoreconfigure the mouse on major kernel change:
 if ($curr_kernel ne $previous_kernel_config{KERNEL}) {
     log::explanations("Autoconfiguring mouse since we switched between 2.4.x and 2.6.x kernels");
     harddrake::autoconf::mouse_conf($modules_conf);
+}
+# autoreconfigure laptop-dependent services when switching from laptop to desktop, and vice versa
+if (!exists $previous_kernel_config{IS_LAPTOP} || $force || $isLaptop ne to_bool($previous_kernel_config{IS_LAPTOP})) {
+    log::explanations("Autoconfiguring laptop tools since we switched between laptop and desktop systems");
+    harddrake::autoconf::laptop($isLaptop);
 }
 
 if (find { $_->{driver} =~ /Card:NVIDIA/ } detect_devices::probeall()) {

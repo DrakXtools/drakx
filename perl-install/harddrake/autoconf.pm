@@ -55,4 +55,23 @@ sub bluetooth {
     services::set_status("bluetooth", $enable);
 }
 
+sub laptop {
+    my ($on_laptop) = @_;
+#- FIXME: make sure these packages are installed when needed
+#     require do_pkgs;
+#     my $do_pkgs = do_pkgs_standalone->new;
+#     if ($on_laptop) {
+#         $do_pkgs->ensure_is_installed("cpufreq", "/etc/rc.d/init.d/cpufreq");
+#         $do_pkgs->ensure_is_installed("apmd", "/usr/bin/apm");
+#         $do_pkgs->ensure_is_installed("hotkeys", "/usr/bin/hotkeys");
+#         $do_pkgs->ensure_is_installed("laptop-mode-tools", "/usr/sbin/laptop_mode");
+#     } else {
+#         $do_pkgs->ensure_is_installed("numlock", "/etc/rc.d/init.d/numlock");
+#     }
+    require services;
+    services::set_status("cpufreq", $on_laptop);
+    services::set_status("apmd", $on_laptop);
+    services::set_status("laptop-mode", $on_laptop);
+}
+
 1;
