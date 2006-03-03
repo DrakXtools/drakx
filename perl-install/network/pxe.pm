@@ -279,7 +279,7 @@ sub remove_profile {
     my ($profiles_conf, $profile) = @_;
     foreach my $type (qw(boot install)) {
 	delete $profiles_conf->{profiles}{$type}{$profile};
-	unlink foreach get_pxelinux_profile_path($profile, $type);
+	unlink(get_pxelinux_profile_path($profile, $type));
     }
 }
 
