@@ -817,8 +817,7 @@ sub dmi_probe() {
 sub probeall() {
     return if $::noauto;
 
-    require sbus_probing::main;
-    pci_probe(), usb_probe(), firewire_probe(), pcmcia_probe(), sbus_probing::main::probe(), dmi_probe();
+    pci_probe(), usb_probe(), firewire_probe(), pcmcia_probe(), dmi_probe();
 }
 sub matching_desc__regexp {
     my ($regexp) = @_;

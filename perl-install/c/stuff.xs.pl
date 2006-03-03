@@ -62,12 +62,6 @@ typedef __uint8_t u8;
 
 #define SECTORSIZE 512
 
-char *prom_getopt();
-void prom_setopt();
-char *prom_getproperty();
-char *disk2PromPath();
-char *promRootName();
-
 ';
 
 $Config{archname} =~ /i.86/ and print '
@@ -561,89 +555,6 @@ kernel_version()
   if (uname(&u) == 0) RETVAL = u.release; else RETVAL = NULL;
   OUTPUT:
   RETVAL
-
-int
-prom_open()
-
-void
-prom_close()
-
-int
-prom_getsibling(node)
-  int node
-
-int
-prom_getchild(node)
-  int node
-
-void
-prom_getopt(key)
-  char *key
-  PPCODE:
-  int lenp = 0;
-  char *value = NULL;
-  value = prom_getopt(key, &lenp);
-  EXTEND(sp, 1);
-  if (value != NULL) {
-    PUSHs(sv_2mortal(newSVpv(value, 0)));
-  } else {
-    PUSHs(&PL_sv_undef);
-  }
-
-void
-prom_setopt(key, value)
-  char *key
-  char *value
-
-void
-prom_getproperty(key)
-  char *key
-  PPCODE:
-  int lenp = 0;
-  char *value = NULL;
-  value = prom_getproperty(key, &lenp);
-  EXTEND(sp, 1);
-  if (value != NULL) {
-    PUSHs(sv_2mortal(newSVpv(value, lenp)));
-  } else {
-    PUSHs(&PL_sv_undef);
-  }
-
-void
-prom_getstring(key)
-  char *key
-  PPCODE:
-  int lenp = 0;
-  char *value = NULL;
-  value = prom_getproperty(key, &lenp);
-  EXTEND(sp, 1);
-  if (value != NULL) {
-    PUSHs(sv_2mortal(newSVpv(value, 0)));
-  } else {
-    PUSHs(&PL_sv_undef);
-  }
-
-int
-prom_getbool(key)
-  char *key
-
-void
-initSilo()
-
-char *
-disk2PromPath(disk)
-  unsigned char *disk
-
-int
-hasAliases()
-
-char *
-promRootName()
-
-void
-setPromVars(linuxAlias, bootDevice)
-  char *linuxAlias
-  char *bootDevice
 
 int
 is_tagged_utf8(s)
