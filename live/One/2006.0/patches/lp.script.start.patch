@@ -5,7 +5,7 @@
  	    ps auxwww | grep 'perl /usr/sbin/autosetupprintqueues' | grep -vq grep && return
  	    ps auxwww | grep 'perl /usr/sbin/printerdrake' | grep -vq grep && return
 +	    chkconfig --add cups
-+	    service cups start
++	    service cups status >/dev/null || service cups start
  	    autosetupprintqueues --$AUTO_SETUP_QUEUES_MODE &
  	fi
      fi
