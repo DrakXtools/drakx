@@ -127,10 +127,11 @@ sub chown_ {
     my ($name, $group) = (split('\.'), $_);
 
     my ($uid, $gid) = (getpwnam($name) || $name, getgrnam($group) || $group);
-
+   
+    require POSIX;
     my $chown; $chown = sub {
 	foreach (@_) {
-	    chown $uid, $gid, $_ or die "chown of file $_ failed: $!\n";
+	    POSIX::lchown($uid, $gid, $_) or die "chown of file $_ failed: $!\n";
 	    -d $_ && $rec and &$chown(glob_($_));
 	}
     };
