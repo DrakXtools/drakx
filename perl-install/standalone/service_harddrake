@@ -34,12 +34,14 @@ $last_boot_config .= '_X11' if $invert_do_it;
 
 my $modules_conf = modules::any_conf->read;
 
-# autoreconfigure the mouse on major kernel change:
-my $prev_kernel = { getVarsFromSh("$hw_sysconfdir/kernel") }->{KERNEL};
 my $curr_kernel = c::kernel_version();
 $curr_kernel =~ s/(^\d+\.\d+).*/$1/;
+
+my %previous_kernel_config = getVarsFromSh("$hw_sysconfdir/kernel");
 setVarsInSh("$hw_sysconfdir/kernel", { KERNEL => $curr_kernel });
-if ($curr_kernel ne $prev_kernel) {
+
+# autoreconfigure the mouse on major kernel change:
+if ($curr_kernel ne $previous_kernel_config{KERNEL}) {
     log::explanations("Autoconfiguring mouse since we switched between 2.4.x and 2.6.x kernels");
     harddrake::autoconf::mouse_conf($modules_conf);
 }
@@ -118,7 +120,7 @@ foreach my $hw_class (@harddrake::data::tree) {
 
     @added || @was_removed or next;
 
-    next if $Ident eq 'MOUSE' && $curr_kernel ne $prev_kernel;
+    next if $Ident eq 'MOUSE' && $curr_kernel ne $previous_kernel_config{KERNEL};
 
     my @configurator_pool;
     if (harddrake::data::is_removable($Ident)) {
