@@ -17,7 +17,6 @@ Conflicts: rpmdrake < 2.1-29mdk
 Conflicts: mandrake_doc-drakxtools-en < 9.2, mandrake_doc-drakxtools-es < 9.2, mandrake_doc-drakxtools-fr < 9.2
 Conflicts: bootloader-utils < 1.8-4mdk, bootsplash < 2.1.7-1mdk
 BuildRequires: gettext, gtk+2-devel, ldetect-devel >= 0.5.3-1mdk, ncurses-devel, newt-devel, perl-devel >= 1:5.8.0-20mdk, libext2fs-devel, perl-MDK-Common-devel >= 1.1.8-3mdk
-BuildRequires: rpm-devel
 BuildRoot: %_tmppath/%name-buildroot
 Provides: draksec
 Obsoletes: draksec
