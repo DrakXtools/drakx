@@ -414,7 +414,7 @@ sub main {
 	unlink $_ foreach "/modules/modules.mar", "/sbin/stage1";
     }
 
-    log::openLog($::testing && 'debug.log');
+    log::openLog();
     log::l("second stage install running (", install_any::drakx_version(), ")");
 
     eval { output('/proc/sys/kernel/modprobe', "\n") } if !$::local_install && !$::testing; #- disable kmod, otherwise we get a different behaviour in kernel vs kernel-BOOT
