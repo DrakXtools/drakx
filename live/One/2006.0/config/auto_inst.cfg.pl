@@ -122,6 +122,9 @@ $o = {
                                #- network
                                'zcip', 'tmdns', 'ethtool', 'rp-pppoe',
 
+                               #- acpi
+                               'acpi', 'acpid',
+
                                #- useful packages
                                'ndiswrapper',
                                'xmoto',
