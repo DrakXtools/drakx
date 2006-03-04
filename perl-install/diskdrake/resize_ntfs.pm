@@ -14,7 +14,8 @@ sub new {
 
 sub check_prog {
     my ($in) = @_;
-    $::isInstall || $in->do_pkgs->ensure_binary_is_installed('ntfsprogs', 'ntfsresize');
+    #- ensure_binary_is_installed checks binary chrooted, whereas we run the binary non-chrooted (pb for Mandriva One)
+    $::isInstall || whereis_binary('ntfsresize') || $in->do_pkgs->ensure_binary_is_installed('ntfsprogs', 'ntfsresize');
 }
 
 sub min_size {
