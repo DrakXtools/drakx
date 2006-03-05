@@ -1,13 +1,13 @@
 # Translation of DrakX.po to Estonian.
 # Copyright (C) 2003 Free Software Foundation, Inc.
 # Riho Kurg <rx@linux.ee>, 1999-2003.
-# Marek Laane <bald@starman.ee>, 2002-2005.
+# Marek Laane <bald@starman.ee>, 2002-2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-et\n"
 "POT-Creation-Date: 2006-03-05 18:57+0800\n"
-"PO-Revision-Date: 2005-10-10 14:13+0200\n"
+"PO-Revision-Date: 2006-03-05 15:57+0200\n"
 "Last-Translator: Marek Laane <bald@starman.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2553,12 +2553,12 @@ msgstr "Ext2 vahetamine ext3 vastu"
 #: diskdrake/interactive.pm:650
 #, c-format
 msgid "Which volume label?"
-msgstr ""
+msgstr "Milline köitenimi?"
 
 #: diskdrake/interactive.pm:666
 #, c-format
 msgid "Where do you want to mount the loopback file %s?"
-msgstr "Kuhu soovite haakida loopback faili %s?"
+msgstr "Kuhu soovite haakida loopback-faili %s?"
 
 #: diskdrake/interactive.pm:667
 #, c-format
@@ -2572,7 +2572,7 @@ msgid ""
 "Remove the loopback first"
 msgstr ""
 "Seda haakepunkti ei saa eemaldada, sest partitsioon on kasutusel\n"
-"loopback-ina. Eemaldage esmalt loopback"
+"loopback'ina. Eemaldage esmalt loopback"
 
 #: diskdrake/interactive.pm:697
 #, c-format
@@ -2583,12 +2583,12 @@ msgstr "Kuhu soovite haakida %s?"
 #: install_interactive.pm:157 install_interactive.pm:189
 #, c-format
 msgid "Resizing"
-msgstr "Muudan suurust"
+msgstr "Muudetakse suurust"
 
 #: diskdrake/interactive.pm:721
 #, c-format
 msgid "Computing FAT filesystem bounds"
-msgstr "Arvutan FAT failisüsteemi piire"
+msgstr "Arvutatakse FAT-failisüsteemi piire"
 
 #: diskdrake/interactive.pm:757
 #, c-format
@@ -3211,7 +3211,7 @@ msgstr "Kogu failisüsteemi I/O sooritatakse sünkroonselt."
 #: fs/mount_options.pm:139
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
-msgstr ""
+msgstr "Tavalisel kasutajal lubatakse haakida failisüsteemi."
 
 #: fs/mount_options.pm:141
 #, c-format
@@ -3223,7 +3223,7 @@ msgstr ""
 #: fs/mount_options.pm:143
 #, c-format
 msgid "Support user. extended attributes"
-msgstr ""
+msgstr "Kasutaja laiendatud atribuutide toetus"
 
 #: fs/mount_options.pm:145
 #, c-format
@@ -4751,32 +4751,32 @@ msgstr ""
 #: help.pm:375 install_interactive.pm:96
 #, c-format
 msgid "Use free space"
-msgstr "Kasuta vaba ruumi"
+msgstr "Vaba ruumi kasutamine"
 
 #: help.pm:375
 #, c-format
 msgid "Use existing partition"
-msgstr "Kasuta olemasolevat partitsiooni"
+msgstr "Olemasolevate partitsioonide kasutamine"
 
 #: help.pm:375 install_interactive.pm:138
 #, c-format
 msgid "Use the free space on the Microsoft Windows® partition"
-msgstr "Kasuta vaba ruumi Windowsi partitsioonil"
+msgstr "Vaba ruumi kasutamine Microsoft Windows® partitsioonil"
 
 #: help.pm:375
 #, c-format
 msgid "Erase entire disk"
-msgstr "Tühjenda kogu ketas"
+msgstr "Kogu ketta tühjendamine"
 
 #: help.pm:375
 #, c-format
 msgid "Remove Windows"
-msgstr "Eemalda Windows"
+msgstr "Windowsi eemaldamine"
 
 #: help.pm:375 install_interactive.pm:233
 #, c-format
 msgid "Custom disk partitioning"
-msgstr "Jagan ketta ise"
+msgstr "Ketta jagamine oma tahtmist mööda"
 
 #: help.pm:378
 #, c-format
@@ -4919,7 +4919,7 @@ msgstr ""
 "paigaldamiseks mõne muu partitsiooni.\n"
 "\n"
 "Klõpsake \"%s\", kui soovite valida partitsioone, millel kontrollitaks\n"
-"vigaste blokkide olemasolu."
+"vigaste plokkide olemasolu."
 
 #: help.pm:432 install_steps_gtk.pm:392 interactive.pm:437
 #: interactive/newt.pm:318 printer/printerdrake.pm:3882
@@ -5998,6 +5998,10 @@ msgid ""
 "\n"
 "Do you have a supplementary installation medium to configure?"
 msgstr ""
+"Leiti järgmised andmekandjad, mida kasutatakse paigaldamisel: %s.\n"
+"\n"
+"\n"
+"Kas Teil on veel paigaldusandmekandjaid?"
 
 #: install_any.pm:422 printer/printerdrake.pm:3211
 #: printer/printerdrake.pm:3218 standalone/scannerdrake:182
@@ -6274,7 +6278,7 @@ msgstr "Ei ole piisavalt ruumi uute partitsioonide jaoks"
 #: install_interactive.pm:106
 #, c-format
 msgid "Use existing partitions"
-msgstr "Kasuta olemasolevat partitsiooni"
+msgstr "Olemasolevate partitsioonide kasutamine"
 
 #: install_interactive.pm:108
 #, c-format
@@ -6284,7 +6288,7 @@ msgstr "Kasutatavat partitsiooni ei leitud"
 #: install_interactive.pm:115
 #, c-format
 msgid "Use the Microsoft Windows® partition for loopback"
-msgstr "Kasuta Windowsi partitsiooni loopbackina"
+msgstr "Microsoft Windows® partitsiooni kasutamine loopback'ina"
 
 #: install_interactive.pm:118
 #, c-format
@@ -6310,7 +6314,7 @@ msgstr "Saaleala suurus (MB): "
 #, c-format
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
-"Sobivat FAT-partitsiooni loopback-ina kasutamiseks ei leitud (ei ole "
+"Sobivat FAT-partitsiooni loopback'ina kasutamiseks ei leitud (ei ole "
 "piisavalt ruumi)"
 
 #: install_interactive.pm:140
@@ -6330,7 +6334,7 @@ msgstr ""
 #: install_interactive.pm:157
 #, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
-msgstr "Vaba ruumi arvutamine Windowsi partitsioonil"
+msgstr "Vaba ruumi arvutamine Microsoft Windows® partitsioonil"
 
 #: install_interactive.pm:164
 #, c-format
@@ -6339,7 +6343,7 @@ msgid ""
 "computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
 "the Mandriva Linux installation."
 msgstr ""
-"Teie Microsoft Windows®i partitsioon on fragmenteerunud. Palun tehke "
+"Teie Microsoft Windows® partitsioon on fragmenteerunud. Palun tehke "
 "arvutile uus alglaadimine, käivitage Microsoft Windows® ja seejärel utiliit "
 "\"defrag\" ning tulge siis Mandriva Linuxi paigaldamise juurde tagasi."
 
@@ -6365,11 +6369,11 @@ msgstr ""
 "HOIATUS!\n"
 "\n"
 "\n"
-"DrakX hakkab Teie Windowsi partitsiooni suurust muutma.\n"
+"DrakX hakkab Teie Microsoft Windows® partitsiooni suurust muutma.\n"
 "\n"
 "\n"
 "Olge ettevaatlik: see operatsioon võib olla ohtlik Teie failidele. Palun "
-"käivitage enne seda, kui asute paigaldamise juurde, Windowsis käsurealt "
+"käivitage enne seda, kui asute paigaldamise juurde, Microsoft Windows® käsurealt "
 "\"chkdsk c:\" (arvestage, et graafilisest rakendusest \"scandisk\" ei piisa, "
 "seepärast kasutage kindlasti käsurealt käivitatavat \"chkdsk\"!). Lisaks "
 "sellele defragmenteerige ketas ja alles siis asuge taas paigaldamise "
@@ -6381,22 +6385,22 @@ msgstr ""
 #: install_interactive.pm:179
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on"
-msgstr "Kui palju ruumi jätate Microsoft Windows®i jaoks?"
+msgstr "Kui palju ruumi jätta Microsoft Windows® jaoks?"
 
 #: install_interactive.pm:180
 #, c-format
 msgid "partition %s"
-msgstr "partitsioon %s"
+msgstr "partitsioonil %s"
 
 #: install_interactive.pm:189
 #, c-format
 msgid "Resizing Microsoft Windows® partition"
-msgstr "Arvutan Microsoft Windows®i failisüsteemi piire"
+msgstr "Arvutatakse Microsoft Windows® failisüsteemi piire"
 
 #: install_interactive.pm:194
 #, c-format
 msgid "FAT resizing failed: %s"
-msgstr "FATi suuruse muutmine ebaõnnestus: %s"
+msgstr "FAT-i suuruse muutmine ebaõnnestus: %s"
 
 #: install_interactive.pm:209
 #, c-format
@@ -6406,12 +6410,12 @@ msgstr "Sobivat FAT-partitsiooni ei leitud (ei ole piisavalt ruumi)"
 #: install_interactive.pm:214
 #, c-format
 msgid "Remove Microsoft Windows®"
-msgstr "Eemalda Microsoft Windows®"
+msgstr "Microsoft Windows® eemaldamine"
 
 #: install_interactive.pm:214
-#, fuzzy, c-format
+#, c-format
 msgid "Erase and use entire disk"
-msgstr "Tühjenda kogu ketas"
+msgstr "Kogu ketta tühjendamine ja kasutamine"
 
 #: install_interactive.pm:216
 #, c-format
@@ -6426,7 +6430,7 @@ msgstr "Kettal %s hävivad KÕIK partitsioonid ja andmed"
 #: install_interactive.pm:237
 #, c-format
 msgid "Use fdisk"
-msgstr "Kasuta fdisk-i"
+msgstr "Fdisk'i kasutamine"
 
 #: install_interactive.pm:240
 #, c-format
@@ -7200,7 +7204,7 @@ msgstr "Valige partitsioonid, mida soovite vormindada"
 #: install_steps_interactive.pm:343
 #, c-format
 msgid "Check bad blocks?"
-msgstr "Blokkide kontroll?"
+msgstr "Plokkide kontroll?"
 
 #: install_steps_interactive.pm:371
 #, c-format
@@ -11560,26 +11564,28 @@ msgid ""
 "Here you can set up your proxies configuration (eg: http://"
 "my_caching_server:8080)"
 msgstr ""
+"Siin saab määrata puhverserverite seadistuse (nt: http://"
+"minu_puhverserver:8080)"
 
 #: network/network.pm:413
 #, c-format
 msgid "HTTP proxy"
-msgstr "HTTP puhverserver"
+msgstr "HTTP-puhverserver"
 
 #: network/network.pm:414
 #, c-format
 msgid "Use HTTP proxy for HTTPS connections"
-msgstr ""
+msgstr "HTTP-puhverserveri kasutamine HTTPS-ühendusteks"
 
 #: network/network.pm:415
 #, c-format
 msgid "HTTPS proxy"
-msgstr ""
+msgstr "HTTPS-puhverserver"
 
 #: network/network.pm:416
 #, c-format
 msgid "FTP proxy"
-msgstr "FTP puhverserver"
+msgstr "FTP-puhverserver"
 
 #: network/network.pm:420
 #, c-format
@@ -11589,12 +11595,12 @@ msgstr "Puhverserver peab olema kujul http://..."
 #: network/network.pm:421
 #, c-format
 msgid "Proxy should be https?://..."
-msgstr ""
+msgstr "Puhverserver peab olema kujul https?://..."
 
 #: network/network.pm:422
 #, c-format
 msgid "URL should begin with 'ftp:' or 'http:'"
-msgstr "URLi alguses peab olema \"ftp:\" või \"http:\""
+msgstr "URL-i alguses peab olema \"ftp:\" või \"http:\""
 
 #: network/shorewall.pm:55
 #, c-format
@@ -12187,12 +12193,12 @@ msgstr "%s (port %s)"
 #: printer/main.pm:1945 printer/main.pm:2100
 #, c-format
 msgid "user-supplied"
-msgstr ""
+msgstr "kasutaja määratud"
 
 #: printer/main.pm:1949 printer/main.pm:2104
 #, c-format
 msgid "NEW"
-msgstr ""
+msgstr "UUS"
 
 #: printer/printerdrake.pm:24
 #, c-format
@@ -13917,18 +13923,19 @@ msgstr "Millise printeri jaoks soovite HPLIP-i kasutada?"
 #: printer/printerdrake.pm:2576
 #, c-format
 msgid "HPLIP was not able to communicate with the chosen printer!"
-msgstr ""
+msgstr "HPLIP ei suutnud suhelda valitud printeriga!"
 
 #: printer/printerdrake.pm:2577 printer/printerdrake.pm:2584
-#, fuzzy, c-format
+#, c-format
 msgid "Setting up the printer without HPLIP..."
-msgstr "Seadista HPLIP-ita"
+msgstr "Printeri seadistamine HPLIP-ita..."
 
 #: printer/printerdrake.pm:2583
 #, c-format
 msgid ""
 "HPLIP did not find any local printers (Parallel, USB) which it supports!"
 msgstr ""
+"HPLIP ei leidnud ühtegi toetatud kohalikku (paralleel-, USB-)printerit!"
 
 #: printer/printerdrake.pm:2622
 #, c-format
@@ -16326,7 +16333,7 @@ msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
 "partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
-"Toorseadmete seostamine blokkseadmetega\n"
+"Toorseadmete seostamine plokkseadmetega\n"
 "(näiteks kõvaketta partitsioonid)\n"
 "selliste rakenduste, nagu Oracle või DVD mängijad tarbeks"
 
@@ -17212,32 +17219,32 @@ msgstr "%s: %s nõuab masina nime...\n"
 #: standalone/drakTermServ:144
 #, c-format
 msgid "Host name for client"
-msgstr ""
+msgstr "Kliendi masina nimi"
 
 #: standalone/drakTermServ:145
 #, c-format
 msgid "MAC address should be in the format 00:11:22:33:44:55"
-msgstr ""
+msgstr "MAC aadress peab olema kujul 00:11:22:33:44:55"
 
 #: standalone/drakTermServ:146
 #, c-format
 msgid "IP address to be assigned to client"
-msgstr ""
+msgstr "Kliendile peab olema omistatud IP-aadress"
 
 #: standalone/drakTermServ:147
 #, c-format
 msgid "Kernel/network adapter image to use to boot client"
-msgstr ""
+msgstr "Kerneli/võrguadapteri tõmmis kliendi algkäivituse jaoks"
 
 #: standalone/drakTermServ:148
 #, c-format
 msgid "Create masking files to allow configuration tools to run on client"
-msgstr ""
+msgstr "Maskifailide loomine seadistusvahendite käivitamise võimaldamiseks kliendil"
 
 #: standalone/drakTermServ:149
 #, c-format
 msgid "Applications will run on server machine"
-msgstr ""
+msgstr "Rakendused töötavad serveris"
 
 #: standalone/drakTermServ:234 standalone/drakTermServ:237
 #, c-format
@@ -17501,7 +17508,7 @@ msgstr ""
 "välja selline:"
 
 #: standalone/drakTermServ:589
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "        While you can use a pool of IP addresses, rather than setup a "
 "specific entry for\n"
@@ -17537,39 +17544,39 @@ msgid ""
 "        Note: You must stop/start the server after adding or changing "
 "clients."
 msgstr ""
-"\t\t\tKuigi võib kasutada ka IP-aadresside valimikku, selle asemel et "
+"        Kuigi võib kasutada ka IP-aadresside valimikku, selle asemel et "
 "määrata igale\n"
-"\t\t\tkliendi masinale eraldi kirje, võimaldab fikseeritud aadress "
+"        kliendi masinale eraldi kirje, võimaldab fikseeritud aadress "
 "kasutamine siiski\n"
-"\t\t\tpruukida %s pakutavaid kliendikeskseid seadistustefaile.\n"
+"        pruukida %s pakutavaid kliendikeskseid seadistustefaile.\n"
 "\t\t\t\n"
-"\t\t\tMärkus: kirjet \"#type\" kasutab ainult %s.  Kliendid võivad olla \n"
-"\t\t\tkas \"thin\" või \"fat\".  \"Õhuke\" klient kasutab enamikku tarkvara "
+"        Märkus: kirjet \"#type\" kasutab ainult %s.  Kliendid võivad olla \n"
+"        kas \"thin\" või \"fat\".  \"Õhuke\" klient kasutab enamikku tarkvara "
 "serveris XDMCP\n"
-"\t\t\tvahendusel, \"paksud\" kliendid aga jooksutavad takrvara enamasti "
+"        vahendusel, \"paksud\" kliendid aga jooksutavad tarkvara enamasti "
 "kliendi\n"
-"\t\t\tmasinas. Õhukeste klientide jaoks kirjutatakse eraldi inittab-fail\n"
-"\t\t\t%s. Õhukeste klientide puhul muudetakse XDMCP\n"
-"\t\t\tvõimaldamiseks süsteemi seadetefaile xdm-config, kdmrc ja gdm.conf. "
+"        masinas. Õhukeste klientide jaoks kirjutatakse eraldi inittab-fail\n"
+"        %s. Õhukeste klientide puhul muudetakse XDMCP\n"
+"        võimaldamiseks süsteemi seadistustefaile xdm-config, kdmrc ja gdm.conf. "
 "Kuivõrd\n"
-"\t\t\tXDMCP kasutamisega kaasnevad teatud turvaprobleemid, muudetakse faile\n"
-"\t\t\thosts.deny ja hosts.allow, et piirata ligipääsu kohalikule "
+"        XDMCP kasutamisega kaasnevad teatud turvaprobleemid, muudetakse faile\n"
+"        hosts.deny ja hosts.allow, et piirata ligipääsu kohalikule "
 "alamvõrgule.\n"
 "\t\t\t\n"
-"\t\t\tNote: Ka kirjet \"#hdw_config\" kasutab ainult %s.  Kliendid võivad "
+"        Märkus: ka kirjet \"#hdw_config\" kasutab ainult %s.  Kliendid võivad "
 "olla kas \n"
-"\t\t\tkas \"true\" või \"false\".  \"true\" lubab administraatori "
+"        kas \"true\" või \"false\".  \"true\" lubab administraatori "
 "sisselogimist kliendi masinas ning \n"
-"\t\t\theli, hiire ja X'i riistvara kohalikku seadistamist \"drak\"-"
+"        heli, hiire ja X'i riistvara kohalikku seadistamist \"drak\"-"
 "vahenditega. See saab võimalikuks \n"
-"\t\t\teraldi seadistustefailide loomisega, mis on seotud kliendi IP "
+"        eraldi seadistustefailide loomisega, mis on seotud kliendi IP-"
 "aadressiga, samuti \n"
-"\t\t\tkirjutamis/lugemisõigusega haakepunktide loomisega, mis lubab kliendil "
+"        kirjutamis/lugemisõigusega haakepunktide loomisega, mis lubab kliendil "
 "faili muuta. \n"
-"\t\t\tKui jääte seadistusega rahule, võite administraatori privileegid "
+"        Kui jääte seadistusega rahule, võite administraatori privileegid "
 "kliendilt ära võtta.\n"
 "\t\t\t\n"
-"\t\t\tMärkus: server tuleb peatada/käivitada pärast kliendi lisamist või "
+"        Märkus: server tuleb peatada/käivitada pärast kliendi lisamist või "
 "muutmist."
 
 #: standalone/drakTermServ:609
@@ -17601,7 +17608,7 @@ msgstr ""
 "\t\t\tkus SUBNET/MASK määrab Teie võrku."
 
 #: standalone/drakTermServ:621
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "        - Maintain %s:\n"
 "        \tFor users to be able to log into the system from a diskless "
@@ -17612,10 +17619,10 @@ msgid ""
 "        \tfile."
 msgstr ""
 "        - %s haldamine:\n"
-"        \t\tEt kasutajad saaksid kettata tööjaamalt süsteemi logida, peab "
+"        \tEt kasutajad saaksid kettata tööjaamast süsteemi logida, peab "
 "nende kirje\n"
-"        \t\tfailis /etc/shadow leiduma ka failis %s.\n"
-"        \t\t%s aitab süsteemi kasutajaid faili lisada või sealt eemaldada."
+"        \tfailis /etc/shadow leiduma ka failis %s.\n"
+"        \t%s aitab süsteemi kasutajaid faili lisada või sealt eemaldada."
 
 #: standalone/drakTermServ:626
 #, c-format
@@ -17628,13 +17635,14 @@ msgid ""
 "        \t%s will help create these files."
 msgstr ""
 "        - Kliendi failid %s:\n"
-"        \t\t%s abil võivad igal kettata tööjaamal olla oma unikaalsed "
+"        \t%s abil võivad igal kettata tööjaamal olla oma unikaalsed "
 "seadetefailid\n"
-"        \t\tserveri juurfailisüsteemis. Kliendi kohalikku riistvara "
-"seadistamist lubades aitab %s neid luua."
+"        \tserveri juurfailisüsteemis. Kliendi kohalikku riistvara "
+"seadistamist \n"
+"        \tlubades aitab %s neid luua."
 
 #: standalone/drakTermServ:631
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "        - Per client system configuration files:\n"
 "        \tThrough %s, each diskless client can have its own unique "
@@ -17771,12 +17779,12 @@ msgstr "Kerneli vaikeversioon"
 #: standalone/drakTermServ:764
 #, c-format
 msgid "Create PXE images"
-msgstr ""
+msgstr "PXE laadefailide loomine"
 
 #: standalone/drakTermServ:765
 #, c-format
 msgid "Use Unionfs (TS2)"
-msgstr ""
+msgstr "Unionfs (TS2) kasutamine"
 
 #: standalone/drakTermServ:795
 #, c-format
@@ -17814,6 +17822,8 @@ msgid ""
 "Custom\n"
 "kernel args"
 msgstr ""
+"Kohandatud\n"
+"kerneli võtmed"
 
 #: standalone/drakTermServ:840
 #, c-format
@@ -17909,7 +17919,7 @@ msgstr "Lisa klient -->"
 #: standalone/drakTermServ:1181
 #, c-format
 msgid "Unknown MAC address format"
-msgstr ""
+msgstr "Tundmatu MAC aadressi vorming"
 
 #: standalone/drakTermServ:1195
 #, c-format
@@ -20781,7 +20791,7 @@ msgstr "Import"
 #: standalone/drakfont:513
 #, c-format
 msgid "Copyright (C) 2001-2006 by Mandriva"
-msgstr ""
+msgstr "Autoriõigus (C) 2001-2006: Mandriva"
 
 #: standalone/drakfont:515
 #, c-format
@@ -20903,7 +20913,7 @@ msgstr "Fontide paigaldamine"
 #: standalone/drakfont:681
 #, c-format
 msgid "Are you sure you want to uninstall the following fonts?"
-msgstr ""
+msgstr "Kas tõesti eemaldada järgmised fondid?"
 
 #: standalone/drakfont:726
 #, c-format
@@ -25518,6 +25528,9 @@ msgid ""
 "operate smoothly. The appropriate packages can be retrieved from the "
 "Mandriva Club. Do you want to subscribe to the Mandriva Club?"
 msgstr ""
+"Järgmised seadmed vajavad korralikuks toimimiseks kommertsdraivereid või "
+"püsivara. Vajalikke pakette saab hankida Mandriva Club'ist. Kas soovite "
+"astuda Mandriva Club'i liikmeks?"
 
 #: standalone/keyboarddrake:45
 #, c-format
@@ -26913,24 +26926,6 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Paigaldamine ebaõnnestus!"
 
-#~ msgid ""
-#~ "Copyright (C) 2001-2002 by Mandriva \n"
-#~ "\n"
-#~ "\n"
-#~ "       DUPONT Sebastien (original version)\n"
-#~ "\n"
-#~ "       CHAUMETTE Damien <dchaumette@mandriva.com>\n"
-#~ "\n"
-#~ "       VIGNAUD Thierry <tvignaud@mandriva.com>"
-#~ msgstr ""
-#~ "Autoriõigus (C) 2001-2002: Mandriva \n"
-#~ "\n"
-#~ "\n"
-#~ "       DUPONT Sebastien (algversioon)\n"
-#~ "\n"
-#~ "       CHAUMETTE Damien <dchaumette@mandriva.com>\n"
-#~ "\n"
-#~ "       VIGNAUD Thierry <tvignaud@mandriva.com>"
 
 #~ msgid "click here if you are sure."
 #~ msgstr "kui olete kindel, klõpsake siia."
