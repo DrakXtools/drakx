@@ -633,6 +633,7 @@ sub create_cdrom_master {
          $live->{prefix}{boot} . '=' . get_workdir($live) . $live->{prefix}{boot},
          if_(!$opts->{boot_only}, $live->{prefix}{loopbacks} . '=' . get_workdir($live) . $live->{prefix}{loopbacks}),
      );
+    run_('mkcd', '--addmd5', $dest) if $dest;
 }
 
 #- $opts:
