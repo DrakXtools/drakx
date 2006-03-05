@@ -615,10 +615,10 @@ sub get_cdrom_master_path {
 sub create_cdrom_master {
     my ($live, $media, $opts) = @_;
     my $label = get_media_label($media) or die "the source device must be described by a label";
-    my @dest;
+    my $dest;
     unless ($opts->{onthefly}) {
-        @dest = ('-o', get_cdrom_master_path($live, $opts));
-        mkdir_p(dirname($dest[1]));
+        $dest = get_cdrom_master_path($live, $opts);
+        mkdir_p(dirname($dest));
     }
     run_('mkisofs', '-pad', '-l', '-R', '-J', '-v', '-v',
          '-V', $label, #'-A', $application, '-p', $preparer, '-P', $publisher,
@@ -627,7 +627,7 @@ sub create_cdrom_master {
          '-hide-rr-moved', '-no-emul-boot',
          '-boot-load-size', 4, '-boot-info-table',
          '-graft-points',
-         @dest,
+         if_($dest, '-o', $dest),
          'isolinux/isolinux.bin=/usr/lib/syslinux/isolinux-graphic.bin',
          'isolinux/isolinux.cfg=' . get_workdir($live) . get_syslinux_path($live, $media, $opts->{boot_only}),
          $live->{prefix}{boot} . '=' . get_workdir($live) . $live->{prefix}{boot},
