@@ -381,8 +381,8 @@ sub lilo_choice() {
     do {
         my $before = fs::fstab_to_string($in->{all_hds});
         any::setupBootloader($in, $bootloader, $in->{all_hds}, $in->{fstab}, $ENV{SECURE_LEVEL}) or $in->exit;
-	fs::write_fstab($all_hds);
-    } while !any::installBootloader($in, $bootloader, $all_hds);
+	fs::write_fstab($in->{all_hds});
+    } while !any::installBootloader($in, $bootloader, $in->{all_hds});
 }
 
 #- from disdrake::interactive
