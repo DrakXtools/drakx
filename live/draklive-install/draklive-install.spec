@@ -1,6 +1,6 @@
 %define name draklive-install
 %define version 0.1
-%define release %mkrel 4
+%define release %mkrel 6
 %define iconname MandrivaOne-install-icon.png
 %define imgname MandrivaOne-install.png
 
@@ -72,6 +72,12 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/libDrakX/pixmaps/%imgname
 
 %changelog
+* Sun Mar  5 2006 Olivier Blin <oblin@mandriva.com> 0.1-6mdk
+- allow to use grub as a bootloader (#21318, fix typo)
+
+* Mon Feb 27 2006 Olivier Blin <oblin@mandriva.com> 0.1-5mdk
+- updates translations
+
 * Fri Feb 24 2006 Olivier Blin <oblin@mandriva.com> 0.1-4mdk
 - make sure the cancel button is available in this pseudo-drakboot-boot
 - make the wizard really die when it is cancelled
