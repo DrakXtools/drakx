@@ -1,35 +1,33 @@
-# translation of DrakX to Hungarian
-# Copyright (C) 2000-2001,2003, 2004, 2005 Free Software Foundation, Inc.
-# Emese Kovacs <emese@gnome.hu>, 2000-2001.
-# Arpad Biro <biro_arpad@yahoo.com>, 2000, 2003, 2004, 2005.
-# Tamas Szanto <tszanto@mol.hu>, 2001.
+# translation of draklive-install to Hungarian
+# Copyright (C) 2006 Free Software Foundation, Inc.
+# Arpad Biro <biro_arpad@yahoo.com>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: DrakX\n"
+"Project-Id-Version: draklive-install\n"
 "POT-Creation-Date: 2006-02-23 13:25+0100\n"
-"PO-Revision-Date: 2005-09-19 22:55+0200\n"
-"Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
+"PO-Revision-Date: 2006-03-05 14:24+0100\n"
+"Last-Translator: Arpad Biro\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: KBabel 1.10.2\n"
 
 #: ../draklive-install:59
 #, c-format
 msgid "Mandriva Live"
-msgstr ""
+msgstr "Mandriva Live"
 
 #: ../draklive-install:65
 #, c-format
 msgid "This wizard will help you to install the live distribution."
-msgstr ""
+msgstr "A varázsló segítséget nyújt a Live rendszer telepítéséhez."
 
 #: ../draklive-install:83
 #, c-format
 msgid "Computing total size"
-msgstr ""
+msgstr "Teljes méret kiszámítása"
 
 #: ../draklive-install:95
 #, c-format
@@ -46,13 +44,12 @@ msgstr "Gratulálunk"
 msgid ""
 "Please halt your computer, remove your live system, and restart your "
 "computer."
-msgstr ""
+msgstr "Állítsa le a számítógépet, távolítsa el a Live rendszert, majd indítsa újra a számítógépet."
 
 #: ../draklive-install:179 ../draklive-install:404
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr ""
-"A partíciós tábla változásai csak a gép újraindítása után lépnek érvénybe"
+msgstr "A partíciós tábla változásai csak a gép újraindítása után lépnek érvénybe"
 
 #: ../draklive-install:230
 #, c-format
@@ -71,13 +68,12 @@ msgid ""
 "you can lose data)"
 msgstr ""
 "A(z) \"%s\" fájlrendszer ellenőrzése hibákat eredményezett. Szeretné "
-"kijavítani a hibákat? (legyen óvatos, mivel ez adatvesztéshez is vezethet)"
+"kijavítani a hibákat? (Legyen óvatos, mivel ez adatvesztéshez is vezethet.)"
 
 #: ../draklive-install:264
 #, c-format
 msgid "Not enough swap space to fulfill installation, please add some"
-msgstr ""
-"A lapozóterület mérete nem elég nagy. Növelje meg a telepítés befejezéséhez."
+msgstr "A lapozóterület mérete nem elég nagy. Növelje meg a telepítés befejezéséhez."
 
 #: ../draklive-install:314
 #, c-format
@@ -122,7 +118,7 @@ msgstr "Ki akar lépni a programból a partíciós tábla mentése nélkül?"
 #: ../draklive-install:397
 #, c-format
 msgid "Do you want to save /etc/fstab modifications"
-msgstr "El szeretné menteni az /etc/fstab fájlban végrehajtott módosításokat?"
+msgstr "El szeretné menteni a /etc/fstab fájlban végrehajtott módosításokat?"
 
 #: ../draklive-install:409
 #, c-format
@@ -142,7 +138,7 @@ msgid ""
 "You can find some information about them at: %s"
 msgstr ""
 "A gép bizonyos hardverelemei speciális meghajtóprogramot igényelnek.\n"
-"Információk: %s"
+"Ezekről itt található információ: %s"
 
 #: ../install_interactive.pm:62
 #, c-format
@@ -169,7 +165,7 @@ msgstr ""
 #: ../install_interactive.pm:70
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr "Szükség van egy FAT partícióra a /boot/efi ponthoz csatolva"
+msgstr "Szükség van egy FAT-partícióra a /boot/efi ponthoz csatolva"
 
 #: ../install_interactive.pm:95
 #, c-format
@@ -189,7 +185,7 @@ msgstr "Már létező partíciók használata"
 #: ../install_interactive.pm:107
 #, c-format
 msgid "There is no existing partition to use"
-msgstr "Nincs olyan már létező partíció, amit használhatnék"
+msgstr "Nincs olyan partíció, amelyet fel lehetne használni"
 
 #: ../install_interactive.pm:114
 #, c-format
@@ -219,7 +215,7 @@ msgstr "A lapozási (swap) partíció mérete MB-ban: "
 #: ../install_interactive.pm:130
 #, c-format
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
-msgstr "Nincs loopback-ként használható FAT partíció, vagy nincs elég hely"
+msgstr "Nincs loopback-ként használható FAT-partíció, vagy nincs elég hely"
 
 #: ../install_interactive.pm:137
 #, c-format
@@ -280,13 +276,12 @@ msgstr ""
 "\n"
 "A telepítő most átméretezi a windowsos partíciót. Ez a művelet veszélyes.\n"
 "Ha még nem tette meg, adjon ki egy \"chkdsk c:\" parancsot egy windowsos\n"
-"parancssorból (a \"scandisk\" nevű grafikus program futtatása nem "
+"parancssorból (a \"scandisk\" nevű grafikus program futtatása nem\n"
 "elegendő).\n"
-"Esetleg futtassa le a \"defrag\" programot is Windows alatt. Ezeknek a\n"
-"végrehajtásához természetesen ki kell lépnie a telepítőből.\n"
-"Lehetőleg mentse le az adatokat, mielőtt újra elindítaná a telepítőt.\n"
-"Ha biztos abban, hogy folytatni szeretné a telepítést, nyomja meg az \"OK\"-"
-"t."
+"Esetleg futtassa le a \"defrag\" programot is Windows alatt. Ezek\n"
+"végeztével indítsa el újra a telepítést. Lehetőleg mentse le az adatokat,\n"
+"mielőtt hozzákezd a fenti műveletekhez. Ha biztos abban, hogy folytatni\n"
+"szeretné a telepítést, nyomja meg az \"OK\"-t."
 
 #: ../install_interactive.pm:178
 #, c-format
@@ -321,17 +316,17 @@ msgstr ""
 #: ../install_interactive.pm:208
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
-msgstr "Nincs átméretezhető FAT partíció, vagy nincs elég hely"
+msgstr "Nincs átméretezhető FAT-partíció, vagy nincs elég hely"
 
 #: ../install_interactive.pm:213
 #, c-format
 msgid "Remove Windows(TM)"
-msgstr "A Windows(TM) eltávolítása"
+msgstr "A Windows eltávolítása"
 
 #: ../install_interactive.pm:213
-#, fuzzy, c-format
+#, c-format
 msgid "Erase and use entire disk"
-msgstr "A teljes lemez törlése"
+msgstr "A teljes lemez törlése és felhasználása"
 
 #: ../install_interactive.pm:215
 #, c-format
@@ -341,8 +336,7 @@ msgstr "Több merevlemeze van. Melyikre kívánja telepíteni a Linuxot?"
 #: ../install_interactive.pm:219
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr ""
-"MINDEN létező partíció és rajtuk minden adat elvész a(z) \"%s\" meghajtón"
+msgstr "MINDEN létező partíció és rajtuk minden adat elvész a(z) \"%s\" meghajtón"
 
 #: ../install_interactive.pm:228
 #, c-format
@@ -376,7 +370,7 @@ msgstr "A telepítő partícionálási varázslója a következőket javasolja:"
 #: ../install_interactive.pm:281
 #, c-format
 msgid "Partitioning failed: %s"
-msgstr "Partícionálási hiba: %s"
+msgstr "A partícionálás nem sikerült: %s"
 
 #: ../install_interactive.pm:288
 #, c-format
@@ -388,5 +382,3 @@ msgstr "A hálózatkezelés elindítása"
 msgid "Bringing down the network"
 msgstr "A hálózatkezelés leállítása"
 
-#~ msgid "none"
-#~ msgstr "egyik sem"
