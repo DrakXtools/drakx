@@ -34,7 +34,9 @@ $gui = "nogui" if (! -x "/usr/X11R6/bin/X");
 
 if ($gui ne "nogui") {
     # Auto-detect whether we go in non-X mode or not
-    my $desktopuser = `cat /var/run/console.lock 2>/dev/null`;
+    my $desktopuser;
+    $desktopuser = `cat /var/run/console.lock 2>/dev/null` or
+	$desktopuser = `cat /var/run/console/console.lock 2>/dev/null`;
     if (!$desktopuser) {
 	if ($gui eq "auto") {
 	    # Non-X mode
