@@ -191,3 +191,11 @@ undef *write_zeroconf;
     require services;
     services::set_status('tmdns', $net->{zeroconf}{hostname}, $::isInstall);
 };
+
+use Xconfig::card;
+package Xconfig::card;
+
+#- don't create (potentially broken) ld.so.conf.d files for X drivers
+#- anyway we don't want to configure it for the live system
+undef *libgl_config;
+*libgl_config = sub {};
