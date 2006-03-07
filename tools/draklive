@@ -461,6 +461,14 @@ sub install_system {
 sub post_install_system {
     my ($live) = @_;
 
+    foreach (@{$live->{system}{additional_media}}) {
+        run_({ root => get_system_root($live) }, 'urpmi.addmedia', ($_->{distrib} ? '--distrib' : 'draklive-media'), $_->{path})
+          or die "unable to add media from $_->{path}";
+        run_({ root => get_system_root($live) }, 'urpmi', '--auto', '--no-verify-rpm', @{$_->{packages}})
+          or die "unable to install packages from $_->{path}";
+        run_({ root => get_system_root($live) }, 'urpmi.removemedia', '-a');
+    }
+
     if (@{$live->{system}{rpms}}) {
         my $rpm_tmp_dir = '/tmp/draklive_rpms';
         mkdir_p(get_system_root($live) . $rpm_tmp_dir);
