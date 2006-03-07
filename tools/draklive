@@ -453,22 +453,23 @@ sub install_system {
          if_($live->{system}{patch_install}, '--defcfg', Cwd::abs_path($live->{system}{patch_install})),
          if_($live->{system}{rpmsrate}, '--rpmsrate', Cwd::abs_path($live->{system}{rpmsrate})))
       or die "unable to install system chroot";
-    #- remove urpmi media added by drakx-in-chroot, they're unusable
-    run_({ root => get_system_root($live) }, 'urpmi.removemedia', '-a');
     post_install_system($live);
 }
 
 sub post_install_system {
     my ($live) = @_;
 
+    #- add all additional media first, there may be some interaction between them
     foreach (@{$live->{system}{additional_media}}) {
-        run_({ root => get_system_root($live) }, 'urpmi.addmedia', ($_->{distrib} ? '--distrib' : 'draklive-media'), $_->{path})
+        run_({ root => get_system_root($live) }, 'urpmi.addmedia', if_($_->{distrib}, '--distrib'), $_->{name}, $_->{path})
           or die "unable to add media from $_->{path}";
-        run_({ root => get_system_root($live) }, 'urpmi', '--auto', '--no-verify-rpm', @{$_->{packages}})
+    }
+    foreach (@{$live->{system}{additional_media}}) {
+        run_({ root => get_system_root($live) }, 'urpmi', '--auto', '--no-verify-rpm', if_(!$_->{distrib}, '--searchmedia', $_->{name}), @{$_->{packages}})
           or die "unable to install packages from $_->{path}";
-        run_({ root => get_system_root($live) }, 'urpmi.removemedia', '-a');
     }
 
+    #- they may have dependencies in addtionnal media
     if (@{$live->{system}{rpms}}) {
         my $rpm_tmp_dir = '/tmp/draklive_rpms';
         mkdir_p(get_system_root($live) . $rpm_tmp_dir);
@@ -478,6 +479,10 @@ sub post_install_system {
           or die "unable to install additionnal system rpms";
         rm_rf(get_system_root($live) . $rpm_tmp_dir);
     }
+
+    #- remove urpmi media added by drakx-in-chroot and additional media, they're unusable
+    run_({ root => get_system_root($live) }, 'urpmi.removemedia', '-a');
+
     my $erase = join(' ', @{$live->{system}{erase_rpms}});
     run_({ root => get_system_root($live) }, 'sh', '-c', "rpm -qa $erase | xargs rpm -e ") if $erase;
 
