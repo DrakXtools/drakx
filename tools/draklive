@@ -466,7 +466,8 @@ sub post_install_system {
         mkdir_p(get_system_root($live) . $rpm_tmp_dir);
         cp_f(@{$live->{system}{rpms}}, get_system_root($live) . $rpm_tmp_dir);
         run_({ root => get_system_root($live) }, 'urpmi', '--auto',
-             map { $rpm_tmp_dir . '/' . basename($_) } @{$live->{system}{rpms}});
+             map { $rpm_tmp_dir . '/' . basename($_) } @{$live->{system}{rpms}})
+          or die "unable to install additionnal system rpms";
         rm_rf(get_system_root($live) . $rpm_tmp_dir);
     }
     my $erase = join(' ', @{$live->{system}{erase_rpms}});
