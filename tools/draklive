@@ -443,11 +443,12 @@ label live
 
 sub install_system {
     my ($live) = @_;
+    my @langs = uniq(@{$live->{regions}{$live->{system}{region}}}, @{$live->{system}{langs_always}});
     run_({ timeout => 3600 },
          'drakx-in-chroot',
          $live->{system}{repository},
          get_system_root($live),
-         if_($live->{system}{region}, '--langs', join(':', @{$live->{regions}{$live->{system}{region}}})),
+         if_($live->{system}{region}, '--langs', join(':', @langs)),
          if_($live->{system}{auto_install}, '--auto_install', Cwd::abs_path($live->{system}{auto_install})),
          if_($live->{system}{patch_install}, '--defcfg', Cwd::abs_path($live->{system}{patch_install})),
          if_($live->{system}{rpmsrate}, '--rpmsrate', Cwd::abs_path($live->{system}{rpmsrate})))
