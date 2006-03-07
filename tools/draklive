@@ -474,7 +474,7 @@ sub post_install_system {
         my $rpm_tmp_dir = '/tmp/draklive_rpms';
         mkdir_p(get_system_root($live) . $rpm_tmp_dir);
         cp_f(@{$live->{system}{rpms}}, get_system_root($live) . $rpm_tmp_dir);
-        run_({ root => get_system_root($live) }, 'urpmi', '--auto',
+        run_({ root => get_system_root($live) }, 'urpmi', '--auto', '--no-verify-rpm',
              map { $rpm_tmp_dir . '/' . basename($_) } @{$live->{system}{rpms}})
           or die "unable to install additionnal system rpms";
         rm_rf(get_system_root($live) . $rpm_tmp_dir);
