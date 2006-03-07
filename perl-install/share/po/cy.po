@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mandriva DrakX.cy\n"
 "POT-Creation-Date: 2006-03-05 18:57+0800\n"
-"PO-Revision-Date: 2005-09-12 18:04+0200\n"
+"PO-Revision-Date: 2006-03-02 21:50-0000\n"
 "Last-Translator: Rhoslyn Prys <post@meddal.com>\n"
 "Language-Team: Cymraeg <post@meddal.com>\n"
 "MIME-Version: 1.0\n"
@@ -1361,7 +1361,7 @@ msgstr ""
 #: any.pm:797
 #, c-format
 msgid "Multi languages"
-msgstr ""
+msgstr "Amlieithog"
 
 #: any.pm:813 any.pm:842 help.pm:648
 #, c-format
@@ -1582,7 +1582,7 @@ msgstr "Cyfeiriadur Byw gyda SFU:"
 #: authentication.pm:70
 #, c-format
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
-msgstr ""
+msgstr "Gyda Kerberos a LDAP ar gyfer dilysiad yn y Gweinydd Cyfeiriadur Byw"
 
 #: authentication.pm:71
 #, c-format
@@ -1595,6 +1595,8 @@ msgid ""
 "Winbind allows the system to authenticate users in a Windows Active "
 "Directory Server."
 msgstr ""
+"Mae Winbind yn caniatáu i'r system ddilysu defnyddwyr mewn Gweinydd "
+"Cyfeiriadur Byw Windows"
 
 #: authentication.pm:96
 #, c-format
@@ -1719,7 +1721,7 @@ msgstr "Dilysu Parth Windows"
 #: authentication.pm:161
 #, c-format
 msgid "Active Directory Realm "
-msgstr ""
+msgstr "Cylch Cyfeiriadur Byw"
 
 #: authentication.pm:164
 #, c-format
@@ -2548,7 +2550,7 @@ msgstr "Newid o ext2 i ext3"
 #: diskdrake/interactive.pm:650
 #, c-format
 msgid "Which volume label?"
-msgstr ""
+msgstr "Pa label cyfrol?"
 
 #: diskdrake/interactive.pm:666
 #, c-format
@@ -2649,11 +2651,14 @@ msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
+"Mae cyfrol %s dan mewn defnydd.\n"
+"Ydych chi am symud ystentiau ffisegol a ddefnyddiwyd o'r gyfrol i gyfrol "
+"arall?"
 
 #: diskdrake/interactive.pm:905
 #, c-format
 msgid "Moving physical extents"
-msgstr ""
+msgstr "Symud ystent corfforol"
 
 #: diskdrake/interactive.pm:923
 #, c-format
@@ -3143,14 +3148,14 @@ msgid "Enabling swap partition %s"
 msgstr "Galluogi rhaniad cyfnewid %s"
 
 #: fs/mount_options.pm:113
-#, fuzzy, c-format
+#, c-format
 msgid "Use an encrypted file system"
-msgstr "Nid oes modd defnyddio Cyfrol Resymegol LVM ar gyfer pwynt gosod %s"
+msgstr "Defnyddiwch system ffeil amgryptiedig"
 
 #: fs/mount_options.pm:115
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
-msgstr ""
+msgstr "Galluogi cyfrifo cwota disg grŵp a dewis gorfodi terfynau"
 
 #: fs/mount_options.pm:117
 #, c-format
@@ -3213,17 +3218,17 @@ msgstr "Dylai pob I/O i'r system ffeil gael ei wneud yn gydamserol"
 #: fs/mount_options.pm:139
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
-msgstr ""
+msgstr "Caniatáu i ddefnyddiwr cyffredin osod system ffeil."
 
 #: fs/mount_options.pm:141
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
-msgstr ""
+msgstr "Galluogi defnyddiwr i gyfrifo cwota disg ac o ddewis gorfodi terfynau."
 
 #: fs/mount_options.pm:143
 #, c-format
 msgid "Support user. extended attributes"
-msgstr ""
+msgstr "Cefnogaeth defnyddiwr, priodweddau pellach"
 
 #: fs/mount_options.pm:145
 #, c-format
@@ -3300,14 +3305,16 @@ msgstr ""
 "Cofiwch ychwanegu rhaniad /boot"
 
 #: fsedit.pm:404
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
-msgstr "Does dim modd defnyddio Cyfrol Resymegol LVM ar gyfer pwynt gosod %s"
+msgstr ""
+"Does dim modd defnyddio Cyfrol Resymegol LVM ar gyfer pwynt gosod %s am ei "
+"fod ar draws cyfrolau ffisegol."
 
 #: fsedit.pm:406
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
 "The bootloader is not able to handle this when the volume spans physical "
@@ -3315,8 +3322,8 @@ msgid ""
 "You should create a /boot partition first"
 msgstr ""
 "Rydych wedi dewis Cyfrol Resymegol LVM fel gwraidd (/)\n"
-"Nid oes cychwynnwr yn gallu trin hwn heb raniad /boot\n"
-"Cofiwch ychwanegu rhaniad /boot"
+"Nid oes cychwynnwr yn gallu trin hwn pan yw ar draws cyfrolau ffisegol.\n"
+"Cofiwch ychwanegu rhaniad /boot yn gyntaf"
 
 #: fsedit.pm:410 fsedit.pm:412
 #, c-format
@@ -5961,6 +5968,11 @@ msgid ""
 "\n"
 "Do you have a supplementary installation medium to configure?"
 msgstr ""
+"Mae'r cyfrwng yma wedi ei ganfod a byddant yn cael eu defnyddio gyda'r "
+"gosodiad nesaf: %s \n"
+"\n"
+"\n"
+"A oes gennych gyfrwng gosod ychwanegol i'w ffurfweddu?"
 
 #: install_any.pm:422 printer/printerdrake.pm:3211
 #: printer/printerdrake.pm:3218 standalone/scannerdrake:182
@@ -6018,12 +6030,12 @@ msgstr "Ffurfweddiad NFS"
 #: install_any.pm:526
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
-msgstr ""
+msgstr "Rhowch enw'r gwesteiwr a chyfeiriadur eich cyfrwng NFS"
 
 #: install_any.pm:527
 #, c-format
 msgid "Hostname of the NFS mount ?"
-msgstr ""
+msgstr "Enw gwesteiwr cosodiad NFS"
 
 #: install_any.pm:527 standalone/draknfs:288
 #, c-format
@@ -6040,7 +6052,7 @@ msgstr "Methu canfod ffeil hdlist ar y drych"
 #: install_any.pm:657
 #, c-format
 msgid "Removing packages prior to upgrade..."
-msgstr ""
+msgstr "Tynnu pecynnau cyn diweddaru..."
 
 #: install_any.pm:699
 #, c-format
@@ -6367,9 +6379,9 @@ msgid "Remove Microsoft Windows®"
 msgstr "Tynnu Microsoft Windows®"
 
 #: install_interactive.pm:214
-#, fuzzy, c-format
+#, c-format
 msgid "Erase and use entire disk"
-msgstr "Dileu'r ddisg gyfan"
+msgstr "Dileu a defnyddio'r ddisg gyfan"
 
 #: install_interactive.pm:216
 #, c-format
@@ -7068,7 +7080,7 @@ msgstr "Dewiswch fath eich llygoden"
 #: install_steps_interactive.pm:171
 #, c-format
 msgid "Mouse choice"
-msgstr ""
+msgstr "Dewis llygoden"
 
 #: install_steps_interactive.pm:180 standalone/mousedrake:46
 #, c-format
@@ -9646,12 +9658,12 @@ msgstr "Croeso i %s"
 #: lvm.pm:83
 #, c-format
 msgid "Moving used physical extents to other physical volumes failed"
-msgstr ""
+msgstr "Methodd symud ystentiau ffisegol i gyfrolau ffisegol eraill"
 
 #: lvm.pm:135
 #, c-format
 msgid "Physical volume %s is still in use"
-msgstr ""
+msgstr "Cyfrol ffisegol %s yn dal i gael ei defnyddio"
 
 #: lvm.pm:145
 #, c-format
@@ -9661,12 +9673,12 @@ msgstr "Tynnu'r cyfrolau rhesymegol yn gyntaf\n"
 #: lvm.pm:178
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
-msgstr ""
+msgstr "Nid yw'r cychwynnydd yn gallu trin /boot ar gyfrolau ffisegol niferus"
 
 #: modules/interactive.pm:19
-#, fuzzy, c-format
+#, c-format
 msgid "This driver has no configuration parameter!"
-msgstr "Ffurfweddiad gyrrwr UPS"
+msgstr "Nid oes gan y gyrrwr baramedrau ffurfweddiad!"
 
 #: modules/interactive.pm:22
 #, c-format
@@ -10093,7 +10105,7 @@ msgstr "BitTorrent"
 #: network/drakfirewall.pm:74
 #, c-format
 msgid "Port scan detection"
-msgstr ""
+msgstr "Canfyddwr sgan porth"
 
 #: network/drakfirewall.pm:165
 #, c-format
@@ -10169,9 +10181,9 @@ msgstr "Pyrth eraill"
 #: standalone/drakids:170 standalone/drakids:179 standalone/drakids:189
 #: standalone/drakids:265 standalone/net_applet:59 standalone/net_applet:202
 #: standalone/net_applet:385 standalone/net_applet:422
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive Firewall"
-msgstr "Mur Cadarn"
+msgstr "Mur Cadarn Rhyngweithiol"
 
 #: network/drakfirewall.pm:254
 #, c-format
@@ -10180,31 +10192,34 @@ msgid ""
 "into your computer.\n"
 "Please select which network activity should be watched."
 msgstr ""
+"Mae modd eich rhybuddio pan fydd rhywun yn ceisio cael mynediad i wasanaeth "
+"neu i'ch cyfrifiadur.\\\\\n"
+"Pennwch pa wasanaeth rhwydwaith dylid ei wylio."
 
 #: network/drakfirewall.pm:259
 #, c-format
 msgid "Use Interactive Firewall"
-msgstr ""
+msgstr "Defnyddio Mur Cadarn Rhyngweithiol"
 
 #: network/ifw.pm:129
-#, fuzzy, c-format
+#, c-format
 msgid "Port scanning"
-msgstr "Peidio rhannu"
+msgstr "Sganio Pyrth"
 
 #: network/ifw.pm:130
-#, fuzzy, c-format
+#, c-format
 msgid "Service attack"
-msgstr "Ymosodwyd ar wasanaeth: %s"
+msgstr "Ymosodiad gwasanaeth"
 
 #: network/ifw.pm:131
-#, fuzzy, c-format
+#, c-format
 msgid "Password cracking"
-msgstr "Cyfrinair (eto)"
+msgstr "Agor cyfrinair"
 
 #: network/ifw.pm:132
 #, c-format
 msgid "\"%s\" attack"
-msgstr ""
+msgstr "Ymosodiad \"%s\" "
 
 #: network/ifw.pm:134
 #, c-format
@@ -10222,9 +10237,9 @@ msgid "A password cracking attack has been attempted by %s."
 msgstr "Gwnaed ymgais i agor cyfrinair gan %s"
 
 #: network/ifw.pm:137
-#, fuzzy, c-format
+#, c-format
 msgid "A \"%s\" attack has been attempted by %s"
-msgstr "Gwnaed ymgais i ymosod ar borth gan %s."
+msgstr "Gwnaed ymgais i greu ymosodiad  \"%s\"gan %s."
 
 #: network/isdn.pm:117 network/netconnect.pm:463 network/netconnect.pm:557
 #: network/netconnect.pm:560 network/netconnect.pm:708
@@ -10830,6 +10845,8 @@ msgid ""
 "Please choose your DSL connection type.\n"
 "If you do not know it, keep the preselected type."
 msgstr ""
+"Dewiswch eich math o gysylltiad DSL.\n"
+"Os nad ydych yn gwybod beth yw cadwch at yr un cyfredol."
 
 #: network/netconnect.pm:738
 #, c-format
@@ -10930,7 +10947,7 @@ msgstr "Metrig"
 #: network/netconnect.pm:950
 #, c-format
 msgid "Enable IPv6 to IPv4 tunnel"
-msgstr ""
+msgstr "Enable IPv6 to IPv4 tunnel"
 
 #: network/netconnect.pm:952 standalone/drakconnect:369
 #: standalone/drakconnect:886
@@ -11055,7 +11072,7 @@ msgstr "Modd Amgryptiedig"
 #: network/netconnect.pm:1074
 #, c-format
 msgid "Allow access point roaming"
-msgstr ""
+msgstr "Caniatáu crwydro pwynt mynediad"
 
 #: network/netconnect.pm:1076 standalone/drakconnect:406
 #, c-format
@@ -11526,6 +11543,8 @@ msgid ""
 "Here you can set up your proxies configuration (eg: http://"
 "my_caching_server:8080)"
 msgstr ""
+"Yma cewch osod ffurfweddiad eich dirprwyon (ee: http://"
+"my_caching_server:8080)"
 
 #: network/network.pm:413
 #, c-format
@@ -11535,12 +11554,12 @@ msgstr "Dirprwy HTTP"
 #: network/network.pm:414
 #, c-format
 msgid "Use HTTP proxy for HTTPS connections"
-msgstr ""
+msgstr "Defnyddiwch ddirprwy HTTP ar gyfer cysylltiadau HTTPS"
 
 #: network/network.pm:415
 #, c-format
 msgid "HTTPS proxy"
-msgstr ""
+msgstr "Dirprwy HTTPS"
 
 #: network/network.pm:416
 #, c-format
@@ -11555,7 +11574,7 @@ msgstr "Dylai dirprwyon fod yn gyfanrif!"
 #: network/network.pm:421
 #, c-format
 msgid "Proxy should be https?://..."
-msgstr ""
+msgstr "Dylai'r dirprwy fod yn httpS?://..."
 
 #: network/network.pm:422
 #, c-format
@@ -11901,9 +11920,9 @@ msgid "Network printer (TCP/Socket)"
 msgstr "Argraffydd rhwydwaith (TCP/Soced)"
 
 #: printer/main.pm:29
-#, fuzzy, c-format
+#, c-format
 msgid "Printer on SMB/Windows server"
-msgstr "Argraffydd ar weinydd SMB/Windows 95/98/NT"
+msgstr "Argraffydd ar weinydd SMB/Windows"
 
 #: printer/main.pm:30
 #, c-format
@@ -12151,12 +12170,12 @@ msgstr "%s (Porth %s)"
 #: printer/main.pm:1945 printer/main.pm:2100
 #, c-format
 msgid "user-supplied"
-msgstr ""
+msgstr "darparwyd gan y defnyddiwr"
 
 #: printer/main.pm:1949 printer/main.pm:2104
 #, c-format
 msgid "NEW"
-msgstr ""
+msgstr "NEWYDD"
 
 #: printer/printerdrake.pm:24
 #, c-format
@@ -12535,17 +12554,21 @@ msgstr "Ail gychwyn CUPS"
 msgid ""
 "Allow pop-up windows, printer setup and package installation may be canceled"
 msgstr ""
+"Caniatáu ffenestri llamlenni, gosod argraffydd a gosod pecynnau i gael eu "
+"diddymu"
 
 #: printer/printerdrake.pm:616
 #, c-format
 msgid ""
 "No pop-up windows, printer setup and package installation cannot be canceled"
 msgstr ""
+"Peidio caniatáu i ffenestri llamlenni, gosod argraffydd a gosod pecynnau "
+"gael eu diddymu"
 
 #: printer/printerdrake.pm:622
-#, fuzzy, c-format
+#, c-format
 msgid "Printer auto administration"
-msgstr "Awto ganfod argraffydd"
+msgstr "Awto weinyddu argraffydd"
 
 #: printer/printerdrake.pm:623
 #, c-format
@@ -12553,42 +12576,43 @@ msgid ""
 "Here you can configure printer administration tasks which should be done "
 "automatically."
 msgstr ""
+"Yma cewch ffurfweddu tasgau gweinyddol argraffydd, ddylai gael ei wneud yn "
+"awtomatig."
 
 #: printer/printerdrake.pm:626
-#, fuzzy, c-format
+#, c-format
 msgid "Do automatic configuration of new printers"
-msgstr "Denyddio  ffurfweddiad awtomatig (DHCP)"
+msgstr "Ffurfweddiad awtomatig argraffydd newydd"
 
 #: printer/printerdrake.pm:627 printer/printerdrake.pm:641
-#, fuzzy, c-format
+#, c-format
 msgid "when a USB printer is connected and turned on"
-msgstr ""
-"(Gwnewch yn siŵr bod eich argraffyddion wedi eu cysylltu â'u troi ymlaen).\n"
+msgstr "pan fydd argraffydd USB wedi ei gysylltu â'u troi ymlaen"
 
 #: printer/printerdrake.pm:630
-#, fuzzy, c-format
+#, c-format
 msgid "when Printerdrake is started"
-msgstr "Mae'r argraffydd wedi ei anablu"
+msgstr "pan mae Printerdrake wedi ei gychwyn"
 
 #: printer/printerdrake.pm:634
 #, c-format
 msgid "Mode for automatic printer setup:"
-msgstr ""
+msgstr "Modd gosod argraffydd yn awtomatig:"
 
 #: printer/printerdrake.pm:640
-#, fuzzy, c-format
+#, c-format
 msgid "Re-enable disabled printers"
-msgstr "Argraffyddion ar gael"
+msgstr "Ail-alluogi argraffydd sydd wedi ei analluogi"
 
 #: printer/printerdrake.pm:644
-#, fuzzy, c-format
+#, c-format
 msgid "when the printing system is started"
-msgstr "Newidiwch y system argraffu"
+msgstr "pan fydd y system argraffu yn cychwyn"
 
 #: printer/printerdrake.pm:680
-#, fuzzy, c-format
+#, c-format
 msgid "Communication error handling for the printer \"%s\""
-msgstr "Defnyddio/Cynnal argraffydd \"%s\""
+msgstr "Gwall trin cyfathrebu argraffydd \"%s\""
 
 #: printer/printerdrake.pm:682
 #, c-format
@@ -12597,26 +12621,28 @@ msgid ""
 "computer and the printer \"%s\" should be handled (for example if the "
 "printer is not turned on)."
 msgstr ""
+"Yma cewch ffurfweddu sut mae trin gwallau mewn cyfathrebu rhwng eich "
+"cyfrifiadur ac argraffydd \"%s\" (ee os nad yw'r argraffydd ymlaen)"
 
 #: printer/printerdrake.pm:686
-#, fuzzy, c-format
+#, c-format
 msgid "The number of retries should be an integer number of at least 1!"
-msgstr "Dylai rhif porth fod yn gyfanrif!"
+msgstr "Dylai rhif ail-geisio fod yn rif cyfanrif o o leiaf 1!"
 
 #: printer/printerdrake.pm:690
-#, fuzzy, c-format
+#, c-format
 msgid "The delay between retries should be a positive integer number!"
-msgstr "Rhaid i'r amser allan fod yn rif cyfanrif positif!"
+msgstr "Dylai'r oedi rhwng ailgeisio fod yn rif cyfanrif positif!"
 
 #: printer/printerdrake.pm:701
-#, fuzzy, c-format
+#, c-format
 msgid "Do not disable the printer"
-msgstr "Anablu'r Argraffydd"
+msgstr "Peidio anablu'r argraffydd"
 
 #: printer/printerdrake.pm:704
 #, c-format
 msgid "Retry infinitely often"
-msgstr ""
+msgstr "Ail-geisio yn aml ac anfeidraidd"
 
 #: printer/printerdrake.pm:707
 #, c-format
@@ -12626,7 +12652,7 @@ msgstr "Nifer ail-geisiau"
 #: printer/printerdrake.pm:712
 #, c-format
 msgid "Delay between retries (in sec)"
-msgstr ""
+msgstr "Oedi rhwng ail-geisio (mewn eil.)"
 
 #: printer/printerdrake.pm:745 printer/printerdrake.pm:765
 #, c-format
@@ -12815,7 +12841,7 @@ msgstr ""
 #: printer/printerdrake.pm:884
 #, c-format
 msgid "Do not setup printer automatically now, and never do it again"
-msgstr ""
+msgstr "Peidio gosod argraffydd yn awtomatig, nawr na byth."
 
 #: printer/printerdrake.pm:928
 #, c-format
@@ -12825,17 +12851,17 @@ msgstr "Chwilio am argraffyddion newydd..."
 #: printer/printerdrake.pm:976
 #, c-format
 msgid "Do not setup printer automatically again"
-msgstr ""
+msgstr "Peidio gosod argraffydd yn awtomatig eto"
 
 #: printer/printerdrake.pm:983
-#, fuzzy, c-format
+#, c-format
 msgid "New printers found"
-msgstr "Heb ganfod argraffydd!"
+msgstr "Wedi canfod argraffydd newydd"
 
 #: printer/printerdrake.pm:984
-#, fuzzy, c-format
+#, c-format
 msgid "New printer found"
-msgstr "Heb ganfod argraffydd!"
+msgstr "Wedi canfod argraffydd newydd"
 
 #: printer/printerdrake.pm:986
 #, c-format
@@ -12844,6 +12870,9 @@ msgid ""
 "them up for you. If you do not want to have all of them set up, unselect the "
 "ones which should be skipped, or click \"Cancel\" to set up none of them.\n"
 msgstr ""
+"Canfuwyd yr argraffyddion canlynol ac mae Printerdrake yn gallu eu gosod ar "
+"eich cyfer. Os nad ydych am eu gosod i gyd, dad ddewiswch y rhai i'w hepgor, "
+"neu glicio \"Diddymu\" i beidio gosod yr un.\n"
 
 #: printer/printerdrake.pm:987
 #, c-format
@@ -12852,6 +12881,9 @@ msgid ""
 "it up for you. If you do not want to have it set up, unselect it, or click "
 "\"Cancel\".\n"
 msgstr ""
+"Canfuwyd yr argraffydd newydd canlynol ac mae Printerdrake yn gallu ei osod "
+"ar eich cyfer. Os nad ydych am eu gosod i gyd, dad ddewiswch, neu glicio "
+"\"Diddymu\" i beidio ei osod.\n"
 
 #: printer/printerdrake.pm:988
 #, c-format
@@ -12859,6 +12891,8 @@ msgid ""
 "Note that for certain printer models additional packages need to be "
 "installed. So keep your installation media handy.\n"
 msgstr ""
+"Sylwch fod angen gosod pecynnau ychwanegol ar gyfer rhai argraffyddion. "
+"Cadwch eich cyfrwng gosod wrth law.\n"
 
 #: printer/printerdrake.pm:1024 printer/printerdrake.pm:1066
 #, c-format
@@ -12923,6 +12957,8 @@ msgid ""
 "Now you have turned off automatic printer setup.\n"
 "\n"
 msgstr ""
+"Nawr rydych wedi diffodd gosod argraffydd yn awtomatig.\n"
+"\n"
 
 #: printer/printerdrake.pm:1112
 #, c-format
@@ -12930,11 +12966,13 @@ msgid ""
 "You can turn it back on again by choosing \"%s\" -> \"%s\" in Printerdrake's "
 "main menu. "
 msgstr ""
+"Gallwch ei ailgychwyn drwy ddewis \"%s\" -> \"%s\" ym mhrif ddewislen "
+"Printerdrake."
 
 #: printer/printerdrake.pm:1112 printer/printerdrake.pm:4984
-#, fuzzy, c-format
+#, c-format
 msgid "Configure Auto Administration"
-msgstr "Gweinyddu Pell"
+msgstr "Ffurfweddu Awto Gweinyddiad"
 
 #: printer/printerdrake.pm:1113
 #, c-format
@@ -12943,6 +12981,9 @@ msgid ""
 "(On Printerdrake startup, on printing system startup, when connecting a new "
 "USB printer)."
 msgstr ""
+"Yno gallwch hefyd ddewis o dan ba amgylchiad y bydd gosod argraffydd yn "
+"awtomatig yn cael ei gyflawni. (Wrth gychwyn Printerdrake, wrth gychwyn y "
+"system argraffu, wrth gysylltu argraffydd USB newydd)."
 
 #: printer/printerdrake.pm:1261 printer/printerdrake.pm:1273
 #: printer/printerdrake.pm:1380 printer/printerdrake.pm:2401
@@ -13709,53 +13750,55 @@ msgstr "Rhaid rhoi llinell gorchymyn!"
 #: printer/printerdrake.pm:2402
 #, c-format
 msgid "Your printer %s is currently connected %s."
-msgstr ""
+msgstr "Mae eich argraffydd %s wedi ei gysylltu i %s."
 
 #: printer/printerdrake.pm:2404 printer/printerdrake.pm:2411
-#, fuzzy, c-format
+#, c-format
 msgid "to a parallel port"
-msgstr " ar borth paralel #\"%s"
+msgstr "i borth paralel"
 
 #: printer/printerdrake.pm:2405 printer/printerdrake.pm:2412
 #, c-format
 msgid "to the USB"
-msgstr ""
+msgstr "i'r USB"
 
 #: printer/printerdrake.pm:2406 printer/printerdrake.pm:2413
-#, fuzzy, c-format
+#, c-format
 msgid "via the network"
-msgstr "Cychwyn y rhwydwaith"
+msgstr "drwy'r rhwydwaith"
 
 #: printer/printerdrake.pm:2407
 #, c-format
 msgid "This type of connection is currently not fully supported by HPLIP."
-msgstr ""
+msgstr "Nid yw'r math yma o gysylltiad wedi ei lwyr gynnal gan HPLI."
 
 #: printer/printerdrake.pm:2409
 #, c-format
 msgid "You get full HPLIP support for your device if you connect it "
-msgstr ""
+msgstr "Byddwch yn cael cefnogaeth HPLIP llawn os wnewch ei gysylltu"
 
 #: printer/printerdrake.pm:2415
 #, c-format
 msgid ""
 "You can now set up your device with HPLIP anyway (works in many cases), "
 msgstr ""
+"Gallwch gysylltu eich dyfais gyda HPLIP beth bynnag (gweithio mewn llawer "
+"achos)"
 
 #: printer/printerdrake.pm:2416
 #, c-format
 msgid "set it up without HPLIP (print-only), "
-msgstr ""
+msgstr "ei osod heb HPLIP (argraffu'n unig)"
 
 #: printer/printerdrake.pm:2416
-#, fuzzy, c-format
+#, c-format
 msgid "or"
-msgstr "Awr"
+msgstr "neu"
 
 #: printer/printerdrake.pm:2417
 #, c-format
 msgid "cancel the setup (for example to reconnect your device)."
-msgstr ""
+msgstr "diddymu'r gosod (e.e. i ail gysylltu'r ddyfais)"
 
 #: printer/printerdrake.pm:2419
 #, c-format
@@ -13763,11 +13806,13 @@ msgid ""
 "You can always revise your choice by clicking your printer's entry in the "
 "main window, "
 msgstr ""
+"Mae modd adolygu eich dewis drwy glicio ar gofnod eich argraffydd yn y brif "
+"ffenestr."
 
 #: printer/printerdrake.pm:2420
 #, c-format
 msgid "clicking the \"%s\" button, "
-msgstr ""
+msgstr "clicio botwm  \"%s\" , "
 
 #. -PO: "Edit" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: printer/printerdrake.pm:2420 standalone/drakperm:124 standalone/drakups:300
@@ -13780,7 +13825,7 @@ msgstr "Golygu"
 #: printer/printerdrake.pm:2421
 #, c-format
 msgid "and choosing \"%s\"."
-msgstr ""
+msgstr "a dewis  \"%s\"."
 
 #: printer/printerdrake.pm:2421 printer/printerdrake.pm:5334
 #: printer/printerdrake.pm:5394
@@ -13796,13 +13841,13 @@ msgstr "Beth hoffech chi ei wneud?"
 #: printer/printerdrake.pm:2424 printer/printerdrake.pm:2428
 #, c-format
 msgid "Set up with HPLIP"
-msgstr ""
+msgstr "Gosod gyda HPLIP"
 
 #: printer/printerdrake.pm:2425 printer/printerdrake.pm:2427
 #: printer/printerdrake.pm:2430
 #, c-format
 msgid "Set up without HPLIP"
-msgstr ""
+msgstr "Gosod heb HPLIP"
 
 #: printer/printerdrake.pm:2461
 #, c-format
@@ -13818,18 +13863,18 @@ msgstr ""
 "argraffyddion gyda darllenwyr cardiau cof."
 
 #: printer/printerdrake.pm:2463
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To access these extra functions on HP printers they must be set up with "
 "HPLIP (HP Linux Imaging and Printing). "
 msgstr ""
 "I gael mynediad at y swyddogaethau ychwanegol hyn ar eich argraffydd HP, "
-"rhaid ei fod wedi ei osod gyda'r feddalwedd bwrpasol."
+"rhaid ei fod wedi ei osod gyda HPLIP (HP Linux Imaging and Printing). "
 
 #: printer/printerdrake.pm:2465
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to use HPLIP (choose \"No\" for non-HP printers)? "
-msgstr "Beth yw eich dewis (dewis \"Dim\" ar gyfer rhai heblaw HP)?"
+msgstr "Hoffech chi ddefnyddio HPLIP (dewis \"Na\" ar gyfer rhai heblaw HP)?"
 
 #: printer/printerdrake.pm:2491
 #, c-format
@@ -13870,18 +13915,20 @@ msgstr "Pa argraffydd hoffech ei osod gyda HPLIP?"
 #: printer/printerdrake.pm:2576
 #, c-format
 msgid "HPLIP was not able to communicate with the chosen printer!"
-msgstr ""
+msgstr "Nid oedd HPLIP yn gallu cyfathrebu gyda'r argraffydd!"
 
 #: printer/printerdrake.pm:2577 printer/printerdrake.pm:2584
-#, fuzzy, c-format
+#, c-format
 msgid "Setting up the printer without HPLIP..."
-msgstr "Gosod modiwlau'r cnewyllyn..."
+msgstr "Gosod yr argraffydd heb HPLIP..."
 
 #: printer/printerdrake.pm:2583
 #, c-format
 msgid ""
 "HPLIP did not find any local printers (Parallel, USB) which it supports!"
 msgstr ""
+"Nid yw HPLIP wedi canfod unrhyw argraffydd lleol (Paralel, USB) mae'n ei "
+"gynnal!"
 
 #: printer/printerdrake.pm:2622
 #, c-format
@@ -14234,22 +14281,22 @@ msgid "Canon LBP-460/660 configuration"
 msgstr "Ffurfweddiad Canon LBP-460/660"
 
 #: printer/printerdrake.pm:3512
-#, fuzzy, c-format
+#, c-format
 msgid "Canon LBP-810/1120 (CAPT) configuration"
-msgstr "Ffurfweddiad Canon LBP-460/660"
+msgstr "Ffurfweddiad Canon 810/1120 (CAPT"
 
 #: printer/printerdrake.pm:3513
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The driver for this printer only supports printers locally connected via "
 "USB, no printers on remote machines or print server boxes or on the parallel "
 "port. Please connect your printer to the USB or configure it on the machine "
 "where it is directly connected to."
 msgstr ""
-"Mae'r gyrwyr argraffydd inkjet sydd wedi eu darparu gan Lexmark yn cynnal "
-"argraffyddion lleol, yn unig wedi eu cysylltu drwy USB, dim argraffyddion ar "
-"beiriannau pell na blychau gweinydd argraffu.. Cysylltwch eich argraffydd i "
-"borth USB lleol neu ei ffurfweddu i'r peiriant mae wedi ei  gysylltu iddo."
+"Mae'r gyrwyr argraffydd yma yn cynnal argraffyddion lleol wedi eu cysylltu "
+"drwy USB yn unig, dim argraffyddion ar beiriannau pell, blychau gweinydd "
+"argraffu nac ar byrth paralel. Cysylltwch eich argraffydd i borth USB neu ei "
+"ffurfweddu i beiriant mae wedi ei  gysylltu iddo."
 
 #: printer/printerdrake.pm:3520
 #, c-format
@@ -14540,9 +14587,9 @@ msgid "Print option list"
 msgstr "Rhestr ddewis argraffu"
 
 #: printer/printerdrake.pm:4092
-#, fuzzy, c-format
+#, c-format
 msgid "Printing option list..."
-msgstr "Rhestr ddewis argraffu"
+msgstr "Rhestr ddewis argraffu..."
 
 #: printer/printerdrake.pm:4110
 #, c-format
@@ -15164,9 +15211,9 @@ msgid "Disable Printer"
 msgstr "Anablu'r Argraffydd"
 
 #: printer/printerdrake.pm:5354 printer/printerdrake.pm:5448
-#, fuzzy, c-format
+#, c-format
 msgid "Printer communication error handling"
-msgstr "Math o gyswllt argraffydd"
+msgstr "Trin gwall cyfathrebu argraffydd"
 
 #: printer/printerdrake.pm:5355 printer/printerdrake.pm:5452
 #, c-format
@@ -16462,142 +16509,142 @@ msgstr "Aros"
 #: share/advertising/01.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: Packs"
-msgstr ""
+msgstr "Mandriva Linux 2006: Pecynnau"
 
 #: share/advertising/02.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: More features"
-msgstr ""
+msgstr "Mandriva Linux 2006: Nodweddion eraill"
 
 #: share/advertising/03.pl:3
 #, c-format
 msgid "Interactive firewall"
-msgstr ""
+msgstr "Mur Cadarn Rhyngweithiol"
 
 #: share/advertising/04.pl:3
 #, c-format
 msgid "Desktop search"
-msgstr ""
+msgstr "Chwilio bwrdd gwaith"
 
 #: share/advertising/05.pl:3
 #, c-format
 msgid "New package manager"
-msgstr ""
+msgstr "Rheolwr pecynnau newydd"
 
 #: share/advertising/06.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: More performances"
-msgstr ""
+msgstr "Mandriva Linux 2006: Perfformiad gwell"
 
 #: share/advertising/07.pl:3
 #, c-format
 msgid "Latest kernel and GCC"
-msgstr ""
+msgstr "Cnewyllyn diweddaraf a GCC"
 
 #: share/advertising/08.pl:3
 #, c-format
 msgid "High Availibility"
-msgstr ""
+msgstr "Argaeledd Hawdd"
 
 #: share/advertising/09.pl:3
 #, c-format
 msgid "Delta RPM"
-msgstr ""
+msgstr "Delta RPM"
 
 #: share/advertising/10.pl:3
 #, c-format
 msgid "Low resources setup"
-msgstr ""
+msgstr "Gosod adnoddau isel"
 
 #: share/advertising/11.pl:3
 #, c-format
 msgid "Boot time reduction"
-msgstr ""
+msgstr "Cychwyn yn gynt"
 
 #: share/advertising/12.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: Easier to use"
-msgstr ""
+msgstr "Mandriva Linux 2006: Haws ei ddefnyddio"
 
 #: share/advertising/13.pl:3
 #, c-format
 msgid "Latest graphical interfaces: KDE and GNOME"
-msgstr ""
+msgstr "Rhyngwynebau graffigol diweddaraf: KDE a GNOME"
 
 #: share/advertising/14.pl:3
 #, c-format
 msgid "auto-installation servers"
-msgstr ""
+msgstr "gweinyddion awto gosod"
 
 #: share/advertising/15.pl:3
 #, c-format
 msgid "Easy and quick installation"
-msgstr ""
+msgstr "Gosod hawdd a sydyn"
 
 #: share/advertising/16.pl:3
 #, c-format
 msgid "Easy configuration thanks to 60 wizards"
-msgstr ""
+msgstr "Ffurfweddu hawdd diolch i 60 dewin"
 
 #: share/advertising/17.pl:3
 #, c-format
 msgid "Look and feel improved"
-msgstr ""
+msgstr "Gwell golwg a theimlad"
 
 #: share/advertising/18.pl:3
 #, c-format
 msgid "New webmin theme"
-msgstr ""
+msgstr "Thema webmin newydd"
 
 #: share/advertising/19.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: More support"
-msgstr ""
+msgstr "Mandriva Linux 2006: Mwy o gefnogaeth"
 
 #: share/advertising/20.pl:3
 #, c-format
 msgid "Better Hardware support"
-msgstr ""
+msgstr "Gwell cefnogaeth caledwedd"
 
 #: share/advertising/21.pl:3
 #, c-format
 msgid "Xen support"
-msgstr ""
+msgstr "Cefnogaeth Xen"
 
 #: share/advertising/22.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: More information"
-msgstr ""
+msgstr "Mandriva Linux 2006: Rhagor o wybodaeth"
 
 #: share/advertising/23.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: Where to buy?"
-msgstr ""
+msgstr "Mandriva Linux 2006: Lle i brynu?"
 
 #: share/advertising/24.pl:3
 #, c-format
 msgid "Where to find technical assistance?"
-msgstr ""
+msgstr "Lle i gael cefnogaeth dechnegol?"
 
 #: share/advertising/25.pl:3
 #, c-format
 msgid "How to join the Mandriva Linux community?"
-msgstr ""
+msgstr "Sut i ymuno â'r gymuned Mandriva?"
 
 #: share/advertising/26.pl:3
 #, c-format
 msgid "How to keep your system up-to-date?"
-msgstr ""
+msgstr "Sut i gadw eich system wedi ei diweddaru?"
 
 #: share/advertising/intel.pl:3
 #, c-format
 msgid "Intel Software"
-msgstr ""
+msgstr "Meddalwedd Intel"
 
 #: share/advertising/skype.pl:3
 #, c-format
 msgid "Skype lets you make calls through the Internet for free."
-msgstr ""
+msgstr "Mae Skype yn gadael ichi wneud galwadau am ddim dros y we."
 
 #: share/compssUsers.pl:26
 #, c-format
@@ -17205,32 +17252,33 @@ msgstr "%s: mae %s angen enw gwesteiwr...\n"
 #: standalone/drakTermServ:144
 #, c-format
 msgid "Host name for client"
-msgstr ""
+msgstr "Enw gwesteiwr ar gyfer y cleient"
 
 #: standalone/drakTermServ:145
 #, c-format
 msgid "MAC address should be in the format 00:11:22:33:44:55"
-msgstr ""
+msgstr "Dylai'r cyfeiriad MAC fod ar fformat 00:11:22:33:44:55"
 
 #: standalone/drakTermServ:146
 #, c-format
 msgid "IP address to be assigned to client"
-msgstr ""
+msgstr "Rhaid dynodi cyfeiriad IP i gleient"
 
 #: standalone/drakTermServ:147
 #, c-format
 msgid "Kernel/network adapter image to use to boot client"
 msgstr ""
+"Y ddelwedd cnewyllyn/addasydd rhwydwaith i'w ddefnyddio i gychwyn y cleient"
 
 #: standalone/drakTermServ:148
 #, c-format
 msgid "Create masking files to allow configuration tools to run on client"
-msgstr ""
+msgstr "Creu ffeiliau masgio i ganiatáu i offer ffurfweddu redeg ar y cleient"
 
 #: standalone/drakTermServ:149
 #, c-format
 msgid "Applications will run on server machine"
-msgstr ""
+msgstr "Bydd rhaglenni'n rhedeg ar beiriant gweinydd"
 
 #: standalone/drakTermServ:234 standalone/drakTermServ:237
 #, c-format
@@ -17238,9 +17286,9 @@ msgid "Terminal Server Configuration"
 msgstr "Enwch Wasanaethwr Ffurfweddiad"
 
 #: standalone/drakTermServ:243
-#, fuzzy, c-format
+#, c-format
 msgid "dhcpd Config"
-msgstr "Ffurfweddu dhcpd..."
+msgstr "Ffurfweddu dhcpd"
 
 #: standalone/drakTermServ:247
 #, c-format
@@ -17364,7 +17412,7 @@ msgid "Sync client X keyboard settings with server."
 msgstr "Cydweddu gosodiadau bysellfwrdd clientX gyda gweinydd"
 
 #: standalone/drakTermServ:454
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please select default client type (Fat is the default type if 'Use thin' is "
 "unchecked).\n"
@@ -17372,7 +17420,8 @@ msgid ""
 "display.\n"
 "    'Fat' clients use their own CPU/RAM but the server's filesystem."
 msgstr ""
-"Dewis y math o gleient rhagosodedig.\n"
+"Dewis y math o gleient rhagosodedig. (Fat yw'r math arferol os yw' Defnyddio "
+"tenau' heb ei dicio)\n"
 "    Cleient 'Tenau' sy'n rhedeg popeth oddi ar CPU/RAM gweinydd, gyda "
 "dangosydd cleient.\n"
 "    Cleient 'Tew' sy'n defnyddio eu CPU/RAM eu hun ond system ffeiliau'r "
@@ -17491,7 +17540,7 @@ msgstr ""
 "edrych fel:"
 
 #: standalone/drakTermServ:589
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "        While you can use a pool of IP addresses, rather than setup a "
 "specific entry for\n"
@@ -17527,13 +17576,13 @@ msgid ""
 "        Note: You must stop/start the server after adding or changing "
 "clients."
 msgstr ""
-"\t\t\tEr bod modd defnyddio casgliad o gyfeiriadau IP, yn lle gosod cofnod "
+"       Er bod modd defnyddio casgliad o gyfeiriadau IP, yn lle gosod cofnod "
 "penodol ar\n"
-"\t\t\t beiriant cleient, mae defnyddio cynllun cyfeiriad sefydlog yn "
+"       beiriant cleient, mae defnyddio cynllun cyfeiriad sefydlog yn "
 "caniatáu defnyddio\n"
-"\t\t\tnodweddion ffeiliau ffurfweddu cleient penodol mae %s yn darparu.\n"
+"      tnodweddion ffeiliau ffurfweddu cleient penodol mae %s yn darparu.\n"
 "\t\t\t\n"
-"\t\t\tSylwer: Mae'r cofnod \"#type\" yn cael ei ddefnyddio gan %s yn unig.  "
+"       Sylwer: Mae'r cofnod \"#type\" yn cael ei ddefnyddio gan %s yn unig.  "
 "Clients can either be 'thin'\n"
 "        or 'fat'.  Thin clients run most software on the server via XDMCP, "
 "while fat clients run \n"
@@ -17592,7 +17641,7 @@ msgstr ""
 "        \tWith SUBNET/MASK being defined for your network."
 
 #: standalone/drakTermServ:621
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "        - Maintain %s:\n"
 "        \tFor users to be able to log into the system from a diskless "
@@ -17604,9 +17653,10 @@ msgid ""
 msgstr ""
 "        - Cynnal %s:\n"
 "        \t\tAr gyfer defnyddwyr sy'n gallu mewngofnodi i system o gleient di "
-"ddisg, rhaid dyblygu eu cofnod \n"
-"        \t\t/etc/shadow yn %s. %s helps\n"
-"        \t\tyn yr achos hwn drwy ychwanegu neu dynnu defnyddwyr o'r ffeil."
+"ddisg,  \n"
+"        \t\trhaid dyblygu eu cofnod/etc/shadow yn %s. \n"
+"        \t\t%s helps yn yr achos hwn drwy ychwanegu neu dynnu defnyddwyr \n"
+"        \t o'r ffeil."
 
 #: standalone/drakTermServ:626
 #, c-format
@@ -17763,17 +17813,17 @@ msgstr "Fersiwn rhagosodedig y cnewyllyn"
 #: standalone/drakTermServ:764
 #, c-format
 msgid "Create PXE images"
-msgstr ""
+msgstr "Creu delweddau PXE"
 
 #: standalone/drakTermServ:765
 #, c-format
 msgid "Use Unionfs (TS2)"
-msgstr ""
+msgstr "Defnyddio Unionfs (TS2)"
 
 #: standalone/drakTermServ:795
 #, c-format
 msgid "Install i586 kernel for older clients"
-msgstr ""
+msgstr "Gosod cnewyllyn i586 ar gyfer cleientiaid hŷn"
 
 #: standalone/drakTermServ:805
 #, c-format
@@ -17806,6 +17856,8 @@ msgid ""
 "Custom\n"
 "kernel args"
 msgstr ""
+"Addasu\n"
+"ym cnewyllyn"
 
 #: standalone/drakTermServ:840
 #, c-format
@@ -17823,9 +17875,9 @@ msgid "Delete All NBIs"
 msgstr "Dileu Pob NBI"
 
 #: standalone/drakTermServ:925
-#, fuzzy, c-format
+#, c-format
 msgid "Building images for kernel:"
-msgstr "Creu delwedd cychwyn rhyngrwyd ar gyfer pob cnewyllyn"
+msgstr "Creu delwedd ar gyfer y cnewyllyn"
 
 #: standalone/drakTermServ:1050
 #, c-format
@@ -17899,7 +17951,7 @@ msgstr "Ychwanegu Cleient -->"
 #: standalone/drakTermServ:1181
 #, c-format
 msgid "Unknown MAC address format"
-msgstr ""
+msgstr "Fformat MAC anhysbys"
 
 #: standalone/drakTermServ:1195
 #, c-format
@@ -18313,9 +18365,11 @@ msgid ""
 "Star should be selected if you want to backup EA or ACLs, otherwise choose "
 "tar"
 msgstr ""
+"Dylech ddewis star os am wneud copi wrth gefn o EA neu ACLau, fel arall "
+"dewiswch tar"
 
 #: standalone/drakbackup:164
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This should be a local user or email address that you want the backup "
 "results sent to. You will need to define a functioning mail server. Multiple "
@@ -18360,6 +18414,8 @@ msgid ""
 "Selecting this option allows you to view the raw output from the restore "
 "process, after a file restore."
 msgstr ""
+"Bydd dewis hwn yn caniatáu i chi weld yr allbwn crai o'r broses adfer, ar ôl "
+"adfer y ffeil"
 
 #: standalone/drakbackup:169
 #, c-format
@@ -18670,9 +18726,9 @@ msgid "Can not create catalog!"
 msgstr "Methu creu catalog!"
 
 #: standalone/drakbackup:1332
-#, fuzzy, c-format
+#, c-format
 msgid "Problem installing %s"
-msgstr "Anhawster wrth osod pecyn %s"
+msgstr "Anhawster gosod %s"
 
 #: standalone/drakbackup:1420
 #, c-format
@@ -18852,7 +18908,7 @@ msgstr "Cadw wrth gefn i Dâp"
 #: standalone/drakbackup:1877
 #, c-format
 msgid "Use tape hardware compression (EXPERIMENTAL)"
-msgstr ""
+msgstr "Defnyddio cywasgiad caledwedd tâp (ARBROFOL)"
 
 #: standalone/drakbackup:1883
 #, c-format
@@ -19035,14 +19091,14 @@ msgid "Saturday"
 msgstr "Sadwrn"
 
 #: standalone/drakbackup:2126
-#, fuzzy, c-format
+#, c-format
 msgid "Delete cron entry"
-msgstr "Diddymu Cleient"
+msgstr "Diddymu cofnod cron"
 
 #: standalone/drakbackup:2127
-#, fuzzy, c-format
+#, c-format
 msgid "Add cron entry"
-msgstr "Ychwanegu Argraffydd"
+msgstr "Ychwanegu cofnod cron"
 
 #: standalone/drakbackup:2185
 #, c-format
@@ -19075,24 +19131,24 @@ msgid "Month"
 msgstr "Mis"
 
 #: standalone/drakbackup:2213
-#, fuzzy, c-format
+#, c-format
 msgid "Weekday (start)"
-msgstr "Diwrnod yr wythnos"
+msgstr "Diwrnod yr wythnos (dechrau)"
 
 #: standalone/drakbackup:2217
-#, fuzzy, c-format
+#, c-format
 msgid "Weekday (end)"
-msgstr "Diwrnod yr wythnos"
+msgstr "Diwrnod yr wythnos (diwedd)"
 
 #: standalone/drakbackup:2221
-#, fuzzy, c-format
+#, c-format
 msgid "Profile"
-msgstr "Proffeiliau"
+msgstr "Proffiliau"
 
 #: standalone/drakbackup:2227
-#, fuzzy, c-format
+#, c-format
 msgid "Current crontab:"
-msgstr "Derbyn presennol"
+msgstr "Crontab presennol:"
 
 #: standalone/drakbackup:2235
 #, c-format
@@ -19113,9 +19169,9 @@ msgstr ""
 "Os nad yw eich cyfrifiadur ymlaen drwy'r amser, byddai'n werth gosod anacron."
 
 #: standalone/drakbackup:2316
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the archive program"
-msgstr "Dewiswch y dyddiad i'w adfer:"
+msgstr "Dewiswch rhaglen archif"
 
 #: standalone/drakbackup:2321
 #, c-format
@@ -19148,9 +19204,9 @@ msgid "Delete Hard Drive tar files after backup to other media."
 msgstr "Dileu ffeiliau tar y Disg Caled wedi cadw cyfrwng arall wrth gefn."
 
 #: standalone/drakbackup:2344
-#, fuzzy, c-format
+#, c-format
 msgid "View restore log after file restore."
-msgstr "Iawn i adfer ffeiliau eraill"
+msgstr "Darllen y cofnod adfer ar ôl adfer ffeil"
 
 #: standalone/drakbackup:2389
 #, c-format
@@ -19377,19 +19433,19 @@ msgid "\tDo not include System Files\n"
 msgstr "\tPeidiwch cynnwys Ffeiliau System\n"
 
 #: standalone/drakbackup:2651
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use %s and bzip2\n"
-msgstr "\t Bydd Cadw wrth gefn yn defnyddio tar a bzip2\n"
+msgstr "\t Bydd Cadw wrth gefn yn defnyddio%s and bzip2\n"
 
 #: standalone/drakbackup:2652
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use %s and gzip\n"
-msgstr "\tBydd Cadw wrth Gefn yn defnyddio tar a gzip\n"
+msgstr "\tBydd Cadw wrth Gefn yn defnyddio %s and bzip2\n"
 
 #: standalone/drakbackup:2653
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use %s only\n"
-msgstr "\tBydd Cadw wrth Gefn yn defnyddio tar yn unig\n"
+msgstr "\tBydd Cadw wrth Gefn yn defnyddio %s yn unig\n"
 
 #: standalone/drakbackup:2655
 #, c-format
@@ -19516,7 +19572,7 @@ msgstr "          Ei adfer yn Llwyddiannus ar %s     "
 #: standalone/drakbackup:2999
 #, c-format
 msgid "/usr/bin/star not found, using tar..."
-msgstr ""
+msgstr "Heb ganfod /usr/bin/star , defnyddio tar..."
 
 #: standalone/drakbackup:3035
 #, c-format
@@ -19897,14 +19953,14 @@ msgstr ""
 "cliciwch Dewin neu Uwch."
 
 #: standalone/drakbackup:4501
-#, fuzzy, c-format
+#, c-format
 msgid "Load profile"
-msgstr "Ffeil leol"
+msgstr "Llwytho proffil"
 
 #: standalone/drakbackup:4510
-#, fuzzy, c-format
+#, c-format
 msgid "Save profile as..."
-msgstr "Cadw fel..."
+msgstr "Cadw proffi fel..."
 
 #: standalone/drakbackup:4532 standalone/drakbackup:4535
 #, c-format
@@ -19914,7 +19970,7 @@ msgstr "Drakbackup"
 #: standalone/drakboot:49
 #, c-format
 msgid "No bootloader found, creating a new configuration"
-msgstr ""
+msgstr "Heb ganfod cychwynnydd, creu ffurfweddiad newydd"
 
 #: standalone/drakboot:84 standalone/harddrake2:190 standalone/harddrake2:191
 #: standalone/logdrake:69 standalone/printerdrake:150
@@ -19974,9 +20030,9 @@ msgid "Graphical boot theme selection"
 msgstr "Dewis themâu cychwyn graffigol"
 
 #: standalone/drakboot:149
-#, fuzzy, c-format
+#, c-format
 msgid "Graphical boot mode:"
-msgstr "Defnyddio cychwyn graffigol"
+msgstr "Modd cychwyn graffigol:"
 
 #: standalone/drakboot:151
 #, c-format
@@ -20758,7 +20814,7 @@ msgstr "Rhestr Ffontiau"
 #: standalone/drakfont:486
 #, c-format
 msgid "Get Windows Fonts"
-msgstr ""
+msgstr "Estyn Ffontiau Windows"
 
 #: standalone/drakfont:492
 #, c-format
@@ -21195,7 +21251,7 @@ msgstr "Ffurfweddu..."
 #: standalone/drakgw:384
 #, c-format
 msgid "Configuring firewall..."
-msgstr ""
+msgstr "Ffurfweddu'r mur cadarn..."
 
 #: standalone/drakhelp:17
 #, c-format
@@ -21244,27 +21300,27 @@ msgstr "Canolfan Gymorth Mandriva Linux"
 #: standalone/drakhelp:51
 #, c-format
 msgid "No Help entry for %s\n"
-msgstr ""
+msgstr "Dim cofnod Cymorth ar gyfer %s\n"
 
 #: standalone/drakhosts:98
 #, c-format
 msgid "Please add an host to be able to modify it."
-msgstr ""
+msgstr "Ychwanegwch westeiwr i allu ei newid."
 
 #: standalone/drakhosts:108
-#, fuzzy, c-format
+#, c-format
 msgid "Please modify information"
-msgstr "Gwybodaeth fanwl"
+msgstr "Newidiwch y wybodaeth"
 
 #: standalone/drakhosts:109
-#, fuzzy, c-format
+#, c-format
 msgid "Please delete information"
-msgstr "Gwybodaeth fanwl"
+msgstr "Dilëwch wybodaeth"
 
 #: standalone/drakhosts:110
-#, fuzzy, c-format
+#, c-format
 msgid "Please add information"
-msgstr "Gwybodaeth fanwl"
+msgstr "Ychwanegwch wybodaeth"
 
 #: standalone/drakhosts:115
 #, c-format
@@ -21279,7 +21335,7 @@ msgstr "Enw gwesteiwr :"
 #: standalone/drakhosts:117
 #, c-format
 msgid "Host Aliases:"
-msgstr ""
+msgstr "Enw arall Gwesteiwr:"
 
 #: standalone/drakhosts:123
 #, c-format
@@ -21289,37 +21345,37 @@ msgstr "Rhowch gyfeiriad IP dilys"
 #: standalone/drakhosts:129
 #, c-format
 msgid "Same IP is already in %s file."
-msgstr ""
+msgstr "Mae'r un IP yn ffeil %s"
 
 #: standalone/drakhosts:197
 #, c-format
 msgid "Host Aliases"
-msgstr ""
+msgstr "Enw arall Gwesteiwyr"
 
 #: standalone/drakhosts:237
 #, c-format
 msgid "DrakHOSTS manage hosts definitions"
-msgstr ""
+msgstr "DrakHOSTS yn rheoli diffiniadau gwesteiwyr"
 
 #: standalone/drakhosts:246
 #, c-format
 msgid "Failed to add host."
-msgstr ""
+msgstr "Methwyd ychwanegu gwesteiwr"
 
 #: standalone/drakhosts:253
 #, c-format
 msgid "Failed to Modify host."
-msgstr ""
+msgstr "Methwyd Newid Gwesteiwr"
 
 #: standalone/drakhosts:260
 #, c-format
 msgid "Failed to remove host."
-msgstr ""
+msgstr "Methwyd tynnu gwesteiwr"
 
 #: standalone/drakids:26
-#, fuzzy, c-format
+#, c-format
 msgid "Allowed addresses"
-msgstr "Caniatáu pob defnyddiwr"
+msgstr "Cyfeiriadau caniatawyd"
 
 #: standalone/drakids:57
 #, c-format
@@ -21327,41 +21383,41 @@ msgid "Log"
 msgstr "Cofnodion"
 
 #: standalone/drakids:61
-#, fuzzy, c-format
+#, c-format
 msgid "Clear logs"
-msgstr "Clirio i gyd"
+msgstr "Clirio cofnodion"
 
 #: standalone/drakids:62 standalone/drakids:67 standalone/net_applet:470
 #, c-format
 msgid "Blacklist"
-msgstr ""
+msgstr "Rhestr Atal"
 
 #: standalone/drakids:63 standalone/drakids:80 standalone/net_applet:475
 #, c-format
 msgid "Whitelist"
-msgstr ""
+msgstr "Rhestr Caniatáu"
 
 #: standalone/drakids:71
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from blacklist"
-msgstr "Tynnu o LVM"
+msgstr "Tynnu o'r rhestr wrthod LVM"
 
 #: standalone/drakids:72
 #, c-format
 msgid "Move to whitelist"
-msgstr ""
+msgstr "Symud i'r rhestr caniatáu"
 
 #: standalone/drakids:84
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from whitelist"
-msgstr "Tynnu o LVM"
+msgstr "Tynnu o'r rhestr caniatáu"
 
 #: standalone/drakids:136 standalone/drakids:145 standalone/drakids:170
 #: standalone/drakids:179 standalone/drakids:189 standalone/drakids:265
 #: standalone/drakroam:182 standalone/net_applet:202 standalone/net_applet:385
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to contact daemon"
-msgstr "Methu canfod drych: %s."
+msgstr "Methu cysylltu â daemon"
 
 #: standalone/drakids:202
 #, c-format
@@ -21369,14 +21425,14 @@ msgid "Date"
 msgstr "Dyddiad"
 
 #: standalone/drakids:203
-#, fuzzy, c-format
+#, c-format
 msgid "Attacker"
-msgstr "Manylion yr ymosodiad"
+msgstr "Ymosodwr"
 
 #: standalone/drakids:204
-#, fuzzy, c-format
+#, c-format
 msgid "Attack type"
-msgstr "Math o ymosodiad:  %s"
+msgstr "Math o ymosodiad"
 
 #: standalone/drakids:205
 #, c-format
@@ -21391,22 +21447,22 @@ msgstr "Rhyngwyneb rhwydwaith"
 #: standalone/draknfs:41
 #, c-format
 msgid "map root user as anonymous"
-msgstr ""
+msgstr "mapio defnyddiwr gwraidd fel dienw"
 
 #: standalone/draknfs:42
 #, c-format
 msgid "map all users to anonymous user"
-msgstr ""
+msgstr "mapio pob defnyddiwr fel defnyddiwr dienw"
 
 #: standalone/draknfs:43
 #, c-format
 msgid "No user UID mapping"
-msgstr ""
+msgstr "Mapio UID dim defnyddiwr"
 
 #: standalone/draknfs:44
 #, c-format
 msgid "allow real remote root access"
-msgstr ""
+msgstr "caniatau mynediad gwraidd real"
 
 #: standalone/draknfs:83
 #, c-format
@@ -21416,17 +21472,17 @@ msgstr "Gweinydd NFS"
 #: standalone/draknfs:83
 #, c-format
 msgid "Restarting/Reloading NFS server..."
-msgstr ""
+msgstr "Ailgychwyn/Ail-lwytho gweinydd NFS..."
 
 #: standalone/draknfs:84
 #, c-format
 msgid "Error Restarting/Reloading NFS server"
-msgstr ""
+msgstr "Gwall Ailgychwyn/Ail-lwytho gweinydd NFS"
 
 #: standalone/draknfs:100 standalone/draksambashare:203
 #, c-format
 msgid "Directory Selection"
-msgstr ""
+msgstr "Dewis Cyfeiriadur"
 
 #: standalone/draknfs:105 standalone/draksambashare:208
 #, c-format
@@ -21459,6 +21515,26 @@ msgid ""
 "either `/255.255.252.0' or  `/22'  appended to the network base address "
 "result.\n"
 msgstr ""
+"<span weight=\"bold\">Cleient NFS </span> - eu pennu::\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">gwesteiwr unigol:</span>gwesteiwr yn ol enw "
+"talfyredig, enw parth llawn neu gyfeiriad IP\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">grwpwiau rhwydwaiths:</span>Grwpiau "
+"rhwydwaith  NIS fel @group.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">cardiau gwyllt:</span> gall enwau peiriannau "
+"gynnwys nodau cardiau gwyllt* a ?, e.e. : *.cs.foo.edu  yn cydweddu pob "
+"gwesteiwr ym mharth cs.foo.edu.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Rhwydweithiau IP:</span> gallwch hefyd "
+"allforio cyfeiriaduron i bob gwestai ar rhwydwaith neu isrwydwaith ar yr un "
+"pryd, e.e. un ai  `/255.255.252.0' neu  `/22'  ar ddiwedd canlyniad "
+"cyfeiriad sail y rhwydwaith.\n"
 
 #: standalone/draknfs:151
 #, c-format
@@ -21485,21 +21561,41 @@ msgid ""
 "<span foreground=\"royalblue3\">anonuid and anongid:</span> explicitly set "
 "the uid and gid of the anonymous account.\n"
 msgstr ""
+"<span weight=\"bold\">Dewisiadau Enw Defnyddiwr</span>\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">mapio defnyddwyr gwraidd fel dienw:</span> "
+"mapio ceisiadau o uid/gid 0 i'r uid/gid dienw (root_squash).\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">caniatau mynediad gwraidd pell real:</span> "
+"dileu atal gwraidd. Mae'r dewis yn bennaf ar gyfer clientiaid diddisg."
+"(no_root_squash).\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">mapio pob defnyddiwr i ddefnyddwyr dienw:</"
+"span> io pob uids a gids i'r defnyddiwr dienw (all_squash). Defnyddiol ar "
+"gyfer cyfeiriaduron cyhoeddus NFS allfor,  cyfeiriaduron sbwl newyddion, "
+"etc. Y gwrthwyneb yw dim mapio enwau (no_all_squash), sef y rheol arferol.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">anonuid ac anongid:</span> yn gosod y uid a "
+"gid y cyfrif dienw.\n"
 
 #: standalone/draknfs:167
 #, c-format
 msgid "Synchronous access:"
-msgstr ""
+msgstr "Mynediad cydamserol"
 
 #: standalone/draknfs:168
 #, c-format
 msgid "Secured Connection:"
-msgstr ""
+msgstr "Cysylltiad a Ddiogelwyd:"
 
 #: standalone/draknfs:169
 #, c-format
 msgid "Read-Only share:"
-msgstr ""
+msgstr "Rhan Darllen yn Unig:"
 
 #: standalone/draknfs:171
 #, c-format
@@ -21513,6 +21609,9 @@ msgid ""
 "requests originate on an internet port less than IPPORT_RESERVED (1024). "
 "This option is on by default."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> mae'r dewis yn gofyn fod "
+"ceisiadau'n dod o borth rhygnrwyd llai na IPPORT_RESERVED (1024). Dyma'r "
+"dewis arferol."
 
 #: standalone/draknfs:173
 #, c-format
@@ -21522,6 +21621,10 @@ msgid ""
 "request which changes the filesystem. This can also be made explicit by "
 "using this option."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> yn caniatau un ai geisiadau "
+"darllen yn unig neu ddarllen ac ysgrifennu ar y gyfrol NFS. Yr arferol yw "
+"atal unrhyw gais sy'n newid y system ffeiliau. Gellir gwneud hynny'n glir "
+"drwy ddefnyddio'r dewis yma."
 
 #: standalone/draknfs:174
 #, c-format
@@ -21530,21 +21633,24 @@ msgid ""
 "violate the NFS protocol and to reply to requests before any changes made by "
 "these requests have been committed to stable storage (e.g. disc drive)."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> yn atal y gweinydd NFS rhag dori "
+"protocol NFS ac ateb i geisiadau cyn bod unrhwy newidiadau wedi eu gwneud "
+"gan y ceisiadau hyn ac wedi eu gosod mewn storfa (e.e. gyrrwr disgiau)."
 
 #: standalone/draknfs:306
 #, c-format
 msgid "Please add an NFS share to be able to modify it."
-msgstr ""
+msgstr "Ychwanegwch ran NFS i allu ei newid."
 
 #: standalone/draknfs:378
-#, fuzzy, c-format
+#, c-format
 msgid "Advanced Options Help"
-msgstr "Ffurfweddiad Uwch"
+msgstr "Cymorth Dewisiadau Uwch"
 
 #: standalone/draknfs:389
 #, c-format
 msgid "NFS directory"
-msgstr ""
+msgstr "Cyfeiriadur NFS"
 
 #: standalone/draknfs:391 standalone/draksambashare:592
 #: standalone/draksambashare:771
@@ -21555,7 +21661,7 @@ msgstr "Cyfeiriadur :"
 #: standalone/draknfs:394
 #, c-format
 msgid "Host access"
-msgstr ""
+msgstr "Mynediad gwesteiwr"
 
 #: standalone/draknfs:396
 #, c-format
@@ -21565,12 +21671,12 @@ msgstr "Cyrchiad :"
 #: standalone/draknfs:396
 #, c-format
 msgid "Hosts Access"
-msgstr ""
+msgstr "Mynediad Gwesteiwr"
 
 #: standalone/draknfs:399
 #, c-format
 msgid "User ID Mapping"
-msgstr ""
+msgstr "Mapio Enw Defnyddiwr"
 
 #: standalone/draknfs:401
 #, c-format
@@ -21580,27 +21686,27 @@ msgstr "Enw Defnyddiwr :"
 #: standalone/draknfs:401
 #, c-format
 msgid "Help User ID"
-msgstr ""
+msgstr "Cymorth Enw Defnyddiwr"
 
 #: standalone/draknfs:402
 #, c-format
 msgid "Anonymous user ID:"
-msgstr ""
+msgstr "Enw defnyddiwr dienw:"
 
 #: standalone/draknfs:403
 #, c-format
 msgid "Anonymous Group ID:"
-msgstr ""
+msgstr "Enw Grŵp Dienw:"
 
 #: standalone/draknfs:444
 #, c-format
 msgid "Can't create this directory."
-msgstr ""
+msgstr "Methu creu'r cyfeiriadur,"
 
 #: standalone/draknfs:447
 #, c-format
 msgid "You must specify hosts access."
-msgstr ""
+msgstr "Rhaid pennu mynediad cyfeiriadur."
 
 #: standalone/draknfs:527
 #, c-format
@@ -21610,7 +21716,7 @@ msgstr "Rhannu Cyfeiriadur"
 #: standalone/draknfs:527
 #, c-format
 msgid "Hosts Wildcard"
-msgstr ""
+msgstr "Cerdyn Gwyllt Gwesteiwr"
 
 #: standalone/draknfs:527
 #, c-format
@@ -21620,38 +21726,38 @@ msgstr "Dewisiadau Cyffredinol"
 #: standalone/draknfs:527
 #, c-format
 msgid "Custom Options"
-msgstr ""
+msgstr "Dewisiadau Addasu"
 
 #: standalone/draknfs:539 standalone/draksambashare:629
 #: standalone/draksambashare:796
 #, c-format
 msgid "Please enter a directory to share."
-msgstr ""
+msgstr "Rhowch gyfeiriadur i'w rannu"
 
 #: standalone/draknfs:546
 #, c-format
 msgid "Please use the modify button to set right access."
-msgstr ""
+msgstr "Defnyddiwch y botwm newid i osod hawl mynediad"
 
 #: standalone/draknfs:600
 #, c-format
 msgid "DrakNFS manage NFS shares"
-msgstr ""
+msgstr "Mae DrakNFS yn rheoli rhanu NFS"
 
 #: standalone/draknfs:609
 #, c-format
 msgid "Failed to add NFS share."
-msgstr ""
+msgstr "Methwyd ychwanegu rhan NFS"
 
 #: standalone/draknfs:616
 #, c-format
 msgid "Failed to Modify NFS share."
-msgstr ""
+msgstr "Methwyd newid rhan NFS"
 
 #: standalone/draknfs:623
 #, c-format
 msgid "Failed to remove an NFS share."
-msgstr ""
+msgstr "Methwyd tynnu rhan NFS"
 
 #: standalone/drakperm:21
 #, c-format
@@ -21884,11 +21990,13 @@ msgid ""
 "The first character of the path must be a slash (\"/\"):\n"
 "\"%s\""
 msgstr ""
+"Rhaid i'r nod cyntaf yn y llwybr fod yn slaes (\"/\"):\n"
+"\"%s\""
 
 #: standalone/drakperm:390
 #, c-format
 msgid "Both the username and the group must valid!"
-msgstr ""
+msgstr "Rhaid i'r enw defnyddiwr a grŵp fod yn ddilys!"
 
 #: standalone/drakperm:391
 #, c-format
@@ -21927,7 +22035,7 @@ msgstr "Amgryptiad"
 #: standalone/drakroam:112
 #, c-format
 msgid "Please enter settings for wireless network \"%s\""
-msgstr ""
+msgstr "Rhowch y gosodiadau ar gyfer rhwydwaith diwyfr \"%s\""
 
 #: standalone/drakroam:123
 #, c-format
@@ -21946,9 +22054,9 @@ msgid "Refresh"
 msgstr "Adnewyddu"
 
 #: standalone/draksambashare:68
-#, fuzzy, c-format
+#, c-format
 msgid "Share directory"
-msgstr "Rhannu Cyfeiriadur"
+msgstr "Cyfeiriadur Cyfran"
 
 #: standalone/draksambashare:69 standalone/draksambashare:102
 #, c-format
@@ -21956,9 +22064,9 @@ msgid "Comment"
 msgstr "Sylwad"
 
 #: standalone/draksambashare:70 standalone/draksambashare:103
-#, fuzzy, c-format
+#, c-format
 msgid "Browseable"
-msgstr "Pori"
+msgstr "Poradwy"
 
 #: standalone/draksambashare:71
 #, c-format
@@ -21971,65 +22079,65 @@ msgid "Writable"
 msgstr "Ysgrifenadwy"
 
 #: standalone/draksambashare:73 standalone/draksambashare:149
-#, fuzzy, c-format
+#, c-format
 msgid "Create mask"
-msgstr "Creu"
+msgstr "Creu masg"
 
 #: standalone/draksambashare:74 standalone/draksambashare:150
-#, fuzzy, c-format
+#, c-format
 msgid "Directory mask"
-msgstr "Cyfeiriadur"
+msgstr "Masg cyfeiriadur"
 
 #: standalone/draksambashare:75
-#, fuzzy, c-format
+#, c-format
 msgid "Read list"
-msgstr "Darllen"
+msgstr "Rhestr Ddarllen"
 
 #: standalone/draksambashare:76 standalone/draksambashare:109
 #: standalone/draksambashare:606
-#, fuzzy, c-format
+#, c-format
 msgid "Write list"
-msgstr "Ysgrifennu"
+msgstr "Rhestr ysgrifennu"
 
 #: standalone/draksambashare:77 standalone/draksambashare:141
-#, fuzzy, c-format
+#, c-format
 msgid "Admin users"
-msgstr "Ychwanegu defnyddiwr"
+msgstr "Defnyddiwr Gwein"
 
 #: standalone/draksambashare:78 standalone/draksambashare:142
-#, fuzzy, c-format
+#, c-format
 msgid "Valid users"
-msgstr "Ychwanegu defnyddiwr"
+msgstr "Defnyddiwr dilys"
 
 #: standalone/draksambashare:79
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit Permissions"
-msgstr "Caniatâd"
+msgstr "Etifeddu Caniatâd"
 
 #: standalone/draksambashare:80 standalone/draksambashare:143
-#, fuzzy, c-format
+#, c-format
 msgid "Hide dot files"
-msgstr "Cuddio ffeiliau"
+msgstr "Cuddio ffeiliau dot"
 
 #: standalone/draksambashare:82 standalone/draksambashare:148
-#, fuzzy, c-format
+#, c-format
 msgid "Preserve case"
-msgstr "Dewisiadau"
+msgstr "Cadw maint"
 
 #: standalone/draksambashare:83
-#, fuzzy, c-format
+#, c-format
 msgid "Force create mode"
-msgstr "Model eich argraffydd"
+msgstr "Gorfodi 'r modd creu"
 
 #: standalone/draksambashare:84
-#, fuzzy, c-format
+#, c-format
 msgid "Force group"
-msgstr "Grŵp PFS"
+msgstr "Gorfodi grŵp"
 
 #: standalone/draksambashare:85 standalone/draksambashare:147
-#, fuzzy, c-format
+#, c-format
 msgid "Default case"
-msgstr "Defnyddiwr rhagosodedig"
+msgstr "Maint rhagosodedig"
 
 #: standalone/draksambashare:100
 #, c-format
@@ -22039,7 +22147,7 @@ msgstr "Enw'r argraffydd:"
 #: standalone/draksambashare:104 standalone/draksambashare:598
 #, c-format
 msgid "Printable"
-msgstr ""
+msgstr "Argraffadwy"
 
 #: standalone/draksambashare:105
 #, c-format
@@ -22049,53 +22157,53 @@ msgstr "Gorchymyn argraffu"
 #: standalone/draksambashare:106
 #, c-format
 msgid "LPQ command"
-msgstr ""
+msgstr "Gorchymyn LPQ"
 
 #: standalone/draksambashare:107
 #, c-format
 msgid "Guest ok"
-msgstr ""
+msgstr "Gwestai'n Ianw"
 
 #: standalone/draksambashare:110 standalone/draksambashare:151
 #: standalone/draksambashare:607
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit permissions"
-msgstr "Caniatâd"
+msgstr "Etifeddu caniatâd"
 
 #: standalone/draksambashare:112
 #, c-format
 msgid "Create mode"
-msgstr ""
+msgstr "Creu modd"
 
 #: standalone/draksambashare:113
 #, c-format
 msgid "Use client driver"
-msgstr ""
+msgstr "Defnyddio gyrrwr cleient"
 
 #: standalone/draksambashare:139
-#, fuzzy, c-format
+#, c-format
 msgid "Read List"
-msgstr "Rhestr Tynnu"
+msgstr "Rhestr Ddarllen"
 
 #: standalone/draksambashare:140
-#, fuzzy, c-format
+#, c-format
 msgid "Write List"
-msgstr "Ysgrifennu"
+msgstr "Rhestr Ysgrifennu"
 
 #: standalone/draksambashare:145
-#, fuzzy, c-format
+#, c-format
 msgid "Force Group"
-msgstr "Grŵp"
+msgstr "Gorfodi Grŵp"
 
 #: standalone/draksambashare:146
 #, c-format
 msgid "Force create group"
-msgstr ""
+msgstr "Gorfodi creu grŵp"
 
 #: standalone/draksambashare:166
 #, c-format
 msgid "About Draksambashare"
-msgstr ""
+msgstr "Ynghylch Draksambashare"
 
 #: standalone/draksambashare:166
 #, c-format
@@ -22106,36 +22214,41 @@ msgid ""
 "\n"
 "This is a simple tool to easily manage Samba configuration."
 msgstr ""
+"Mandriva Linux \n"
+"Ryddhad: %s\n"
+"Awdur: Antoine Ginies\n"
+"\n"
+"Dyma offeryn syml o reoli  ffurfweddu Samba yn hawdd."
 
 #: standalone/draksambashare:186
-#, fuzzy, c-format
+#, c-format
 msgid "Samba server"
 msgstr "Gweinydd Samba"
 
 #: standalone/draksambashare:186
 #, c-format
 msgid "Restarting/Reloading Samba server..."
-msgstr ""
+msgstr "Algychwyn/Ail-lwytho gweinydd Samba..."
 
 #: standalone/draksambashare:187
 #, c-format
 msgid "Error Restarting/Reloading Samba server"
-msgstr ""
+msgstr "Error Restarting/Reloading Samba server"
 
 #: standalone/draksambashare:372
 #, c-format
 msgid "Add a Samba share"
-msgstr ""
+msgstr "Ychwanegu cyfran Samba"
 
 #: standalone/draksambashare:375
 #, c-format
 msgid "Goal of this wizard is to easily create a new Samba share."
-msgstr ""
+msgstr "Nod y dewin yw creu cyfran Samba yn hawdd"
 
 #: standalone/draksambashare:377
-#, fuzzy, c-format
+#, c-format
 msgid "Name of the share:"
-msgstr "Enw'r dystysgrif"
+msgstr "Enw'r gyfran"
 
 #: standalone/draksambashare:378 standalone/draksambashare:591
 #: standalone/draksambashare:772
@@ -22153,18 +22266,18 @@ msgstr "Llwybr:"
 msgid ""
 "Share with the same name already exist or share name empty, please choose "
 "another name."
-msgstr ""
+msgstr "Cyfrannu gyda'r un enw presennol neu enw gwag, dewiswch enw arall."
 
 #: standalone/draksambashare:388 standalone/draksambashare:394
 #, c-format
 msgid "Can't create the directory, please enter a correct path."
-msgstr ""
+msgstr "Methu creu y cyfeiriadur arall, rhowch y llwybr cywir."
 
 #: standalone/draksambashare:391 standalone/draksambashare:627
 #: standalone/draksambashare:794
-#, fuzzy, c-format
+#, c-format
 msgid "Please enter a Comment for this share."
-msgstr "Rhowch baramedrau diwyfr y cerdyn:"
+msgstr "Rhowch Sylw ar gyfer y gyfran"
 
 #: standalone/draksambashare:422
 #, c-format
@@ -22172,52 +22285,54 @@ msgid ""
 "The wizard successfully added the Samba share. Now just double click on it "
 "in treeview to modify it"
 msgstr ""
+"Mae'r dewis wedi ychwanegu cyfran Samba. Nawr rhowch clic dwbl iddo yng "
+"ngholwg coeden i'w newid."
 
 #: standalone/draksambashare:437
 #, c-format
 msgid "pdf-gen - a PDF generator"
-msgstr ""
+msgstr "pdf-gen - cynhyrchydd PDF"
 
 #: standalone/draksambashare:438
 #, c-format
 msgid "printers - all printers available"
-msgstr ""
+msgstr "argraffydd - pob argraffydd"
 
 #: standalone/draksambashare:442
 #, c-format
 msgid "Add Special Printer share"
-msgstr ""
+msgstr "Ychwanegu cyfran Argraffydd Arbennig"
 
 #: standalone/draksambashare:445
 #, c-format
 msgid ""
 "Goal of this wizard is to easily create a new special printer Samba share."
-msgstr ""
+msgstr "Nod y dewin yw creu cyfran argraffydd arbennig newydd Samba ."
 
 #: standalone/draksambashare:453
 #, c-format
 msgid "A PDF generator already exists."
-msgstr ""
+msgstr "Mae cynhyrchydd PDF eisoes yn bod."
 
 #: standalone/draksambashare:477
 #, c-format
 msgid "Printers and print$ already exist."
-msgstr ""
+msgstr "Argraffyddion ac argraff$ yn bodoli eisoes."
 
 #: standalone/draksambashare:528
 #, c-format
 msgid "The wizard successfully added the printer Samba share"
-msgstr ""
+msgstr "Mae'r dewin wedi ychwanegu cyfran argraffydd Samba yn llwyddiannus."
 
 #: standalone/draksambashare:551
 #, c-format
 msgid "Please add or select a Samba printer share to be able to modify it."
-msgstr ""
+msgstr "Ychwanegwch neu ddewis cyfran argraffydd Samba i allu ei newid."
 
 #: standalone/draksambashare:587
 #, c-format
 msgid "Printer share"
-msgstr ""
+msgstr "Cyfran argraffydd"
 
 #: standalone/draksambashare:590
 #, c-format
@@ -22230,9 +22345,9 @@ msgid "Writable:"
 msgstr "Ysgrifenadwy :"
 
 #: standalone/draksambashare:597 standalone/draksambashare:778
-#, fuzzy, c-format
+#, c-format
 msgid "Browseable:"
-msgstr "Pori"
+msgstr "Poradwy:"
 
 #: standalone/draksambashare:602
 #, c-format
@@ -22242,22 +22357,22 @@ msgstr "Gosodiadau uwch"
 #: standalone/draksambashare:604
 #, c-format
 msgid "Printer access"
-msgstr ""
+msgstr "Mynediad argraffydd"
 
 #: standalone/draksambashare:608
 #, c-format
 msgid "Guest ok:"
-msgstr ""
+msgstr "Gwestai'n iawn:"
 
 #: standalone/draksambashare:609
 #, c-format
 msgid "Create mode:"
-msgstr ""
+msgstr "Creu modd:"
 
 #: standalone/draksambashare:613
 #, c-format
 msgid "Printer command"
-msgstr ""
+msgstr "Gorchymyn argraffydd"
 
 #: standalone/draksambashare:615
 #, c-format
@@ -22267,7 +22382,7 @@ msgstr "Gorchymyn argraffu:"
 #: standalone/draksambashare:616
 #, c-format
 msgid "LPQ command:"
-msgstr ""
+msgstr "Gorchymyn LPQ"
 
 #: standalone/draksambashare:617
 #, c-format
@@ -22277,37 +22392,37 @@ msgstr "Argraffu :"
 #: standalone/draksambashare:633
 #, c-format
 msgid "create mode should be numeric. ie: 0755."
-msgstr ""
+msgstr "dylai'r modd creu fod yn rhifol, h.y. 0755."
 
 #: standalone/draksambashare:695
 #, c-format
 msgid "DrakSamba entry"
-msgstr ""
+msgstr "Cofnod DrakSamba"
 
 #: standalone/draksambashare:700
 #, c-format
 msgid "Please add or select a Samba share to be able to modify it."
-msgstr ""
+msgstr "Ychwanegwch neu ddewis cyfran Samba i allu ei newid."
 
 #: standalone/draksambashare:723
-#, fuzzy, c-format
+#, c-format
 msgid "Samba user access"
-msgstr "Gweinydd Samba"
+msgstr "Mynediad defnyddiwr Samba"
 
 #: standalone/draksambashare:731
-#, fuzzy, c-format
+#, c-format
 msgid "Mask options"
-msgstr "Dewisiadau Sylfaenol"
+msgstr "Dewisiadau masg"
 
 #: standalone/draksambashare:745
-#, fuzzy, c-format
+#, c-format
 msgid "Display options"
-msgstr "Enwi dewisiadau"
+msgstr "Dewisiadau masg"
 
 #: standalone/draksambashare:767
-#, fuzzy, c-format
+#, c-format
 msgid "Samba share directory"
-msgstr "Rhannu Cyfeiriadur"
+msgstr "Cyfeiriadur cyfran Samba"
 
 #: standalone/draksambashare:770
 #, c-format
@@ -22323,12 +22438,12 @@ msgstr "Cyhoeddus :"
 #, c-format
 msgid ""
 "Create mask, create mode and directory mask should be numeric. ie: 0755."
-msgstr ""
+msgstr "Dylai creu masg, modd creu a masg cyfeiriadur fod yn rhifol, h.y. 0755"
 
 #: standalone/draksambashare:807
 #, c-format
 msgid "Please create this Samba user: %s"
-msgstr ""
+msgstr "Crëwch y defnyddiwr Samba yma: %s"
 
 #: standalone/draksambashare:930
 #, c-format
@@ -22348,42 +22463,42 @@ msgstr "Cyfrinair:"
 #: standalone/draksambashare:1133
 #, c-format
 msgid "Failed to add Samba share."
-msgstr ""
+msgstr "Methwyd ychwanegu cyfran Samba"
 
 #: standalone/draksambashare:1142
 #, c-format
 msgid "Failed to Modify Samba share."
-msgstr ""
+msgstr "Methwyd newid cyfran Samba"
 
 #: standalone/draksambashare:1151
 #, c-format
 msgid "Failed to remove a Samba share."
-msgstr ""
+msgstr "Methwyd tynnu cyfran Samba."
 
 #: standalone/draksambashare:1158
 #, c-format
 msgid "File share"
-msgstr ""
+msgstr "Cyfran ffeil"
 
 #: standalone/draksambashare:1166
 #, c-format
 msgid "Add printers"
-msgstr ""
+msgstr "Ychwanegu argraffydd"
 
 #: standalone/draksambashare:1172
 #, c-format
 msgid "Failed to add printers."
-msgstr ""
+msgstr "Methwyd ychwanegu argraffydd"
 
 #: standalone/draksambashare:1181
 #, c-format
 msgid "Failed to Modify."
-msgstr ""
+msgstr "Methwyd Newid"
 
 #: standalone/draksambashare:1190
 #, c-format
 msgid "Failed to remove."
-msgstr ""
+msgstr "Methwyd tynnu."
 
 #: standalone/draksambashare:1197
 #, c-format
@@ -22398,32 +22513,32 @@ msgstr "Newid cyfrinair"
 #: standalone/draksambashare:1210
 #, c-format
 msgid "Failed to change user password."
-msgstr ""
+msgstr "Methwyd newid cyfrinair defnyddiwr."
 
 #: standalone/draksambashare:1218
 #, c-format
 msgid "Failed to add user."
-msgstr ""
+msgstr "Methwyd ychwanegu defnyddiwr."
 
 #: standalone/draksambashare:1221
 #, c-format
 msgid "Delete user"
-msgstr ""
+msgstr "Dileu defnyddiwr"
 
 #: standalone/draksambashare:1230
 #, c-format
 msgid "Failed to delete user."
-msgstr ""
+msgstr "Methwyd dileu defnyddiwr."
 
 #: standalone/draksambashare:1242
 #, c-format
 msgid "Samba Users"
-msgstr ""
+msgstr "Defnyddwyr Samba"
 
 #: standalone/draksambashare:1251
 #, c-format
 msgid "DrakSamba manage Samba shares"
-msgstr ""
+msgstr "DrakSamba yn rheoli cyfrannau Samba"
 
 #: standalone/draksec:49
 #, c-format
@@ -22642,17 +22757,17 @@ msgstr ""
 #: standalone/draksplash:30
 #, c-format
 msgid "x coordinate of text box"
-msgstr ""
+msgstr "Cyfesuryn x y blwch testun"
 
 #: standalone/draksplash:31
 #, c-format
 msgid "y coordinate of text box"
-msgstr ""
+msgstr "Cyfesuryn y y blwch testun"
 
 #: standalone/draksplash:32
 #, c-format
 msgid "text box width"
-msgstr ""
+msgstr "lled y blwch testun"
 
 #: standalone/draksplash:33
 #, c-format
@@ -22690,52 +22805,52 @@ msgstr "uchder y bar cynnydd"
 #: standalone/draksplash:38
 #, c-format
 msgid "x coordinate of the text"
-msgstr ""
+msgstr "cyfesuryn x y blwch testun"
 
 #: standalone/draksplash:39
 #, c-format
 msgid "y coordinate of the text"
-msgstr ""
+msgstr "cyfesuryn y y blwch testun"
 
 #: standalone/draksplash:40
 #, c-format
 msgid "text box transparency"
-msgstr ""
+msgstr "tryloywder y blwch testun"
 
 #: standalone/draksplash:41
 #, c-format
 msgid "progress box transparency"
-msgstr ""
+msgstr "tryloywder y blwch cynnydd"
 
 #: standalone/draksplash:42
 #, c-format
 msgid "text size"
-msgstr ""
+msgstr "maint testun"
 
 #: standalone/draksplash:59
 #, c-format
 msgid "Choose progress bar color 1"
-msgstr ""
+msgstr "Dewiswch liw bar cynnydd 1"
 
 #: standalone/draksplash:60
 #, c-format
 msgid "Choose progress bar color 2"
-msgstr ""
+msgstr "Dewiswch liw bar cynnydd 2"
 
 #: standalone/draksplash:61
 #, c-format
 msgid "Choose progress bar background"
-msgstr ""
+msgstr "Dewiswch liw cefndir y bar cynnydd"
 
 #: standalone/draksplash:62
 #, c-format
 msgid "Gradient type"
-msgstr ""
+msgstr "Math o raddiant"
 
 #: standalone/draksplash:63
 #, c-format
 msgid "Choose text color"
-msgstr ""
+msgstr "Dewiswch liw'r testun"
 
 #: standalone/draksplash:65 standalone/draksplash:72
 #, c-format
@@ -22750,7 +22865,7 @@ msgstr "Sgrin croeso tawel"
 #: standalone/draksplash:69
 #, c-format
 msgid "Choose text zone color"
-msgstr ""
+msgstr "Dewiswch liw rhanbarth testun"
 
 #: standalone/draksplash:70
 #, c-format
@@ -22800,7 +22915,7 @@ msgstr "cadw thema Croeso cychwyn..."
 #: standalone/draksplash:162
 #, c-format
 msgid "Unable to load image file %s"
-msgstr ""
+msgstr "Methu llwytho ffeil delwedd %s"
 
 #: standalone/draksplash:173
 #, c-format
@@ -22810,7 +22925,7 @@ msgstr "dewis ymyl"
 #: standalone/draksplash:188
 #, c-format
 msgid "Color selection"
-msgstr ""
+msgstr "Dewis lliw"
 
 #: standalone/drakups:71
 #, c-format
@@ -25473,6 +25588,9 @@ msgid ""
 "operate smoothly. The appropriate packages can be retrieved from the "
 "Mandriva Club. Do you want to subscribe to the Mandriva Club?"
 msgstr ""
+"Mae'r dyfeisiau canlynol angen gyrwyr perchnogol neu gadarnwar i weithio'n "
+"llyfn. Mae modd cael y pecynnau priodol gan y Mandriva Club. Hoffech chi "
+"danysgrifio o'r Mandriva Club?"
 
 #: standalone/keyboarddrake:45
 #, c-format
@@ -25848,7 +25966,7 @@ msgstr "Cymorth Ar-lein"
 #: standalone/net_applet:335
 #, c-format
 msgid "Interactive Firewall automatic mode"
-msgstr ""
+msgstr "Modd awtomatig rhyngweithiol Mur Cadarn"
 
 #: standalone/net_applet:340
 #, c-format
@@ -25856,19 +25974,19 @@ msgid "Always launch on startup"
 msgstr "Cychwyn wrth gychwyn"
 
 #: standalone/net_applet:344
-#, fuzzy, c-format
+#, c-format
 msgid "Wireless networks"
-msgstr "Rheoli rhwydweithiau di-wifr"
+msgstr "Rhwydweithiau diwifr"
 
 #: standalone/net_applet:429
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive Firewall: intrusion detected"
 msgstr "Mur Cadarn Rhyngweithiol: canfod ymwthiad"
 
 #: standalone/net_applet:442
-#, fuzzy, c-format
+#, c-format
 msgid "What do you want to do with this attacker?"
-msgstr "Hoffech chi wahardd yr ymosodwr?"
+msgstr "Beth hoffech wneud gyda'r ymosodwr?"
 
 #: standalone/net_applet:445
 #, c-format
@@ -26109,9 +26227,9 @@ msgid "/_Configure CUPS"
 msgstr "/_Ffurfweddu CUPS"
 
 #: standalone/printerdrake:171
-#, fuzzy, c-format
+#, c-format
 msgid "/Configure _Auto Administration"
-msgstr "Gweinyddu Pell"
+msgstr "/Configure _Auto Administration"
 
 #: standalone/printerdrake:194
 #, c-format
