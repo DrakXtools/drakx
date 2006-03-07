@@ -469,7 +469,7 @@ sub post_install_system {
           or die "unable to install packages from $_->{path}";
     }
 
-    #- they may have dependencies in addtionnal media
+    #- additional rpms may have dependencies in additionnal media
     if (@{$live->{system}{rpms}}) {
         my $rpm_tmp_dir = '/tmp/draklive_rpms';
         mkdir_p(get_system_root($live) . $rpm_tmp_dir);
