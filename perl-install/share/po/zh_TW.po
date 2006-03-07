@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2006-03-05 18:57+0800\n"
-"PO-Revision-Date: 2006-03-03 21:30+0800\n"
+"PO-Revision-Date: 2006-03-06 15:20+0800\n"
 "Last-Translator: You-Cheng Hsieh <yochenhsieh@xuite.net>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -13843,6 +13843,8 @@ msgid ""
 "features of your printer are supported.\n"
 "\n"
 msgstr ""
+"您的 %s 已經用 HP 的 HPLIP 驅動程式設定好了。這樣您的印表機的許多特殊功能才有支援。\n"
+"\n"
 
 #: printer/printerdrake.pm:4113
 #, c-format
@@ -13850,6 +13852,8 @@ msgid ""
 "The scanner in your printer can be used with the usual SANE software, for "
 "example Kooka or XSane (Both in the Multimedia/Graphics menu). "
 msgstr ""
+"您印表機中的掃描器可以藉由一般的 SANE 軟體來使用，例如 Kooka 或 Xsane (皆位於"
+"多媒體/美工繪圖選單中)。"
 
 #: printer/printerdrake.pm:4114
 #, c-format
@@ -13903,6 +13907,9 @@ msgid ""
 "lot of status monitoring and maintenance functions for your %s:\n"
 "\n"
 msgstr ""
+"HP 的印表機工具組 (位於選單：系統/監控/HP 印表機工具組) 為您的 %s 提供許多狀態監控與"
+"維護功能：\n"
+"\n"
 
 #: printer/printerdrake.pm:4126
 #, c-format
@@ -13928,7 +13935,7 @@ msgstr " - 色彩校正\n"
 #: printer/printerdrake.pm:4232
 #, c-format
 msgid "Transfer printer configuration"
-msgstr "傳送印表機設定"
+msgstr "轉移印表機設定"
 
 #: printer/printerdrake.pm:4171
 #, c-format
@@ -13942,8 +13949,8 @@ msgstr ""
 "若是您已經設定過 %s spooler 印表機項目的話, 您可以很簡單\n"
 "將組態設定內容套用給 %s 項目。能夠套用的組態項目, 包含像是\n"
 "印表機的名稱、描述資訊、位置、連線類型、預設參數等等項目, \n"
-"不過不包含傳送要列印的工作項目功能。\n"
-"另外並不是所有的列印工作都能夠被傳輸過來, 因為下面原因：\n"
+"不過不包含轉移要列印的工作項目功能。\n"
+"另外並不是所有的列印工作都能夠被轉移過來, 因為下面原因：\n"
 
 #: printer/printerdrake.pm:4174
 #, c-format
@@ -13972,8 +13979,7 @@ msgid ""
 "In addition, queues not created with this program or \"foomatic-configure\" "
 "cannot be transferred."
 msgstr ""
-"除此之外, queues 無法透過該程式建立, 或者是 \"foomatic-configure\"\n"
-"無法進行傳輸。"
+"此外，不是本程式或 \"foomatic-configure\" 所建立的佇列並無法進行轉移。"
 
 #: printer/printerdrake.pm:4181
 #, c-format
@@ -13984,7 +13990,7 @@ msgid ""
 msgstr ""
 "\n"
 "透過廠商所提供的 PPD 檔案內容或原生的 CUPS 驅動程式\n"
-"設定的印表機無法被進行轉換動作。"
+"設定的印表機也無法進行轉移動作。"
 
 #: printer/printerdrake.pm:4182
 #, c-format
@@ -13994,17 +14000,17 @@ msgid ""
 "\"Transfer\"."
 msgstr ""
 "\n"
-"請點選標記您要傳送的印表機項目，然後點選 \"傳送\" 即可。"
+"請點選標記您要轉移的印表機項目，然後點選 \"轉移\" 即可。"
 
 #: printer/printerdrake.pm:4185
 #, c-format
 msgid "Do not transfer printers"
-msgstr "不傳送印表機"
+msgstr "不轉移印表機"
 
 #: printer/printerdrake.pm:4186 printer/printerdrake.pm:4202
 #, c-format
 msgid "Transfer"
-msgstr "傳送"
+msgstr "轉移"
 
 #: printer/printerdrake.pm:4198
 #, c-format
@@ -14014,7 +14020,7 @@ msgid ""
 "You can also type a new name or skip this printer."
 msgstr ""
 "在 %s 已經存在了一個名稱為 %s 的印表機名稱。\n"
-"請點選『傳送』覆蓋內容。\n"
+"請點選『轉移』覆蓋內容。\n"
 "您也可以另外輸入一個名稱, 或者是略過這台印表機。"
 
 #: printer/printerdrake.pm:4219
@@ -14025,7 +14031,7 @@ msgstr "新印表機名稱"
 #: printer/printerdrake.pm:4222
 #, c-format
 msgid "Transferring %s..."
-msgstr "正在傳送 %s ..."
+msgstr "正在轉移 %s ..."
 
 #: printer/printerdrake.pm:4233
 #, c-format
@@ -14033,6 +14039,7 @@ msgid ""
 "You have transferred your former default printer (\"%s\"), Should it be also "
 "the default printer under the new printing system %s?"
 msgstr ""
+"您已經轉移了您之前的預設印表機 (\"%s\")，是否要在新的列印系統中也以它作為預設的印表機 %s？"
 
 #: printer/printerdrake.pm:4243
 #, c-format
@@ -14279,7 +14286,7 @@ msgstr "您的 CUPS 系統應該如何設定？"
 #: printer/printerdrake.pm:4633 printer/printerdrake.pm:4639
 #, c-format
 msgid "Remote server, specify Name or IP here:"
-msgstr ""
+msgstr "遠端伺服器，請在這裡指定名稱或 IP："
 
 #: printer/printerdrake.pm:4628
 #, c-format
@@ -15738,7 +15745,7 @@ msgstr "Intel 軟體"
 #: share/advertising/skype.pl:3
 #, c-format
 msgid "Skype lets you make calls through the Internet for free."
-msgstr "Skype 讓您免費藉由網路打電話"
+msgstr "Skype 讓您藉由網路打免費電話"
 
 #: share/compssUsers.pl:26
 #, c-format
@@ -15751,8 +15758,8 @@ msgid ""
 "Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets "
 "(OpenOffice.org Calc, Kspread), PDF viewers, etc"
 msgstr ""
-"辦公軟體： 文書處理軟體 (OpenOffice.org Writer、Kword), 試算表 (OpenOffice."
-"org Calc、Kspread), pdf 閱讀程式等等"
+"辦公軟體：文書處理軟體 (OpenOffice.org Writer、Kword)、試算表 (OpenOffice."
+"org Calc、Kspread)、PDF 閱讀程式等等"
 
 #: share/compssUsers.pl:29
 #, c-format
@@ -15760,7 +15767,7 @@ msgid ""
 "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
 "gnumeric), pdf viewers, etc"
 msgstr ""
-"辦公軟體： 文書處理軟體 (kword、abiword), 試算表 (kspread、gnumeric), pdf 閱"
+"辦公軟體：文書處理軟體 (kword、abiword)、試算表 (kspread、gnumeric)、PDF 閱"
 "讀程式等等"
 
 #: share/compssUsers.pl:34
@@ -15771,7 +15778,7 @@ msgstr "遊戲平台"
 #: share/compssUsers.pl:35
 #, c-format
 msgid "Amusement programs: arcade, boards, strategy, etc"
-msgstr "娛樂的一些程式： 紙牌、益智、動作、策略 等"
+msgstr "娛樂的一些程式：紙牌、益智、動作、策略等"
 
 #: share/compssUsers.pl:38
 #, c-format
@@ -15823,12 +15830,12 @@ msgstr "Console 工具"
 #: share/compssUsers.pl:61
 #, c-format
 msgid "Editors, shells, file tools, terminals"
-msgstr "編輯器, shell, 檔案工具, 終端機"
+msgstr "編輯器、shell、檔案工具、終端機"
 
 #: share/compssUsers.pl:66 share/compssUsers.pl:170
 #, c-format
 msgid "C and C++ development libraries, programs and include files"
-msgstr "C/C++ 發展環境, 包含編譯器、程式庫與及一些引入檔案"
+msgstr "C/C++ 發展環境，包含編譯器、程式庫與及一些引入檔"
 
 #: share/compssUsers.pl:70 share/compssUsers.pl:174
 #, c-format
@@ -15838,7 +15845,7 @@ msgstr "文件檔案"
 #: share/compssUsers.pl:71 share/compssUsers.pl:175
 #, c-format
 msgid "Books and Howto's on Linux and Free Software"
-msgstr "Linux 系統與一些免費軟體的書籍、HOWTO 文件"
+msgstr "Linux 系統與自由軟體的書籍、HOWTO 文件"
 
 #: share/compssUsers.pl:75 share/compssUsers.pl:178
 #, c-format
@@ -15848,7 +15855,7 @@ msgstr "LSB"
 #: share/compssUsers.pl:76 share/compssUsers.pl:179
 #, c-format
 msgid "Linux Standard Base. Third party applications support"
-msgstr "LSB 的支援, 包含第三類協力廠商軟體支援"
+msgstr "LSB 的支援，包含第三類協力廠商軟體支援"
 
 #: share/compssUsers.pl:86
 #, c-format
@@ -15943,7 +15950,7 @@ msgstr "Apache、ProFTPD"
 #: share/compssUsers.pl:126
 #, c-format
 msgid "Mail"
-msgstr "電郵"
+msgstr "電子郵件"
 
 #: share/compssUsers.pl:127
 #, c-format
@@ -15963,7 +15970,7 @@ msgstr "網路伺服器"
 #: share/compssUsers.pl:139
 #, c-format
 msgid "NFS server, SMB server, Proxy server, ssh server"
-msgstr "NFS server、SMB server、Proxy server、Ssh server"
+msgstr "NFS 伺服器、SMB 伺服器、Proxy 伺服器、SSH 伺服器"
 
 #: share/compssUsers.pl:147
 #, c-format
@@ -15975,7 +15982,7 @@ msgstr "KDE 環境"
 msgid ""
 "The K Desktop Environment, the basic graphical environment with a collection "
 "of accompanying tools"
-msgstr "KDE 圖形桌面介面環境, 包含許多好用的圖型介面工具程式"
+msgstr "KDE 圖形桌面介面環境，包含許多好用的圖型介面工具程式"
 
 #: share/compssUsers.pl:152
 #, c-format
@@ -16002,7 +16009,7 @@ msgstr "其他圖型桌面軟體"
 #: share/compssUsers.pl:161
 #, c-format
 msgid "Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Window Maker, Enlightenment, Fvwm, 等視窗管理程式"
+msgstr "Window Maker、Enlightenment、Fvwm 等"
 
 #: share/compssUsers.pl:184
 #, c-format
@@ -16318,7 +16325,7 @@ msgstr "停止服務"
 #: standalone/drakTermServ:274
 #, c-format
 msgid "Etherboot Floppy/ISO"
-msgstr "網路開機 Floppy/ISO"
+msgstr "網路開機磁碟/ISO"
 
 #: standalone/drakTermServ:278
 #, c-format
@@ -16338,7 +16345,7 @@ msgstr "新增/刪除用戶端"
 #: standalone/drakTermServ:297
 #, c-format
 msgid "Images"
-msgstr "圖像"
+msgstr "映像檔"
 
 #: standalone/drakTermServ:298
 #, c-format
@@ -16386,7 +16393,7 @@ msgstr "取消精靈"
 #: standalone/drakTermServ:422
 #, c-format
 msgid "Please save dhcpd config!"
-msgstr ""
+msgstr "請儲存 dhcpd 設定！"
 
 #: standalone/drakTermServ:450
 #, c-format
@@ -16436,6 +16443,9 @@ msgid ""
 "NBIs in %s.\n"
 "Needed: %d MB, Free: %d MB"
 msgstr ""
+"空間不足以在\n"
+"%s 上建立 NBI。\n"
+"需要：%d MB；可用：%d MB"
 
 #: standalone/drakTermServ:507
 #, c-format
@@ -16655,7 +16665,7 @@ msgstr "預設核心版本"
 #: standalone/drakTermServ:764
 #, c-format
 msgid "Create PXE images"
-msgstr ""
+msgstr "建立 PXE 核心影像"
 
 #: standalone/drakTermServ:765
 #, c-format
@@ -16745,7 +16755,7 @@ msgstr "格式：%s"
 #: standalone/drakTermServ:1101
 #, c-format
 msgid "local config: %s"
-msgstr ""
+msgstr "本機設定： %s"
 
 #: standalone/drakTermServ:1136
 #, c-format
@@ -16786,7 +16796,7 @@ msgstr "新增用戶端 -->"
 #: standalone/drakTermServ:1181
 #, c-format
 msgid "Unknown MAC address format"
-msgstr ""
+msgstr "未知的 MAC 位址格式"
 
 #: standalone/drakTermServ:1195
 #, c-format
@@ -16816,7 +16826,7 @@ msgstr "<-- 編輯用戶端"
 #: standalone/drakTermServ:1237
 #, c-format
 msgid "Disable Local Config"
-msgstr ""
+msgstr "停用本機設定"
 
 #: standalone/drakTermServ:1244
 #, c-format
@@ -16853,7 +16863,7 @@ msgstr "網路遮罩"
 #: standalone/drakTermServ:1376
 #, c-format
 msgid "Routers:"
-msgstr ""
+msgstr "路由器："
 
 #: standalone/drakTermServ:1383
 #, c-format
@@ -16863,7 +16873,7 @@ msgstr "子網路遮罩："
 #: standalone/drakTermServ:1390
 #, c-format
 msgid "Broadcast Address:"
-msgstr ""
+msgstr "廣播位址："
 
 #: standalone/drakTermServ:1397
 #, c-format
@@ -16878,12 +16888,12 @@ msgstr "網域名稱伺服器："
 #: standalone/drakTermServ:1416
 #, c-format
 msgid "IP Range Start:"
-msgstr ""
+msgstr "IP 範圍始於："
 
 #: standalone/drakTermServ:1417
 #, c-format
 msgid "IP Range End:"
-msgstr ""
+msgstr "IP 範圍止於："
 
 #: standalone/drakTermServ:1459
 #, c-format
@@ -16918,12 +16928,12 @@ msgstr ""
 #: standalone/drakTermServ:1634
 #, c-format
 msgid "Write to %s failed!"
-msgstr ""
+msgstr "寫入 %s 失敗！"
 
 #: standalone/drakTermServ:1647
 #, c-format
 msgid "Please insert floppy disk:"
-msgstr "請插入一張磁片:"
+msgstr "請插入一張磁片："
 
 #: standalone/drakTermServ:1651
 #, c-format
@@ -16933,7 +16943,7 @@ msgstr "無法存取到磁片"
 #: standalone/drakTermServ:1653
 #, c-format
 msgid "Floppy can be removed now"
-msgstr "請移開軟碟機內的磁片"
+msgstr "現在可以取出軟碟機內的磁片"
 
 #: standalone/drakTermServ:1656
 #, c-format
@@ -16958,7 +16968,7 @@ msgstr "網路開機的映像檔案是 %s"
 #: standalone/drakTermServ:1680
 #, c-format
 msgid "Something went wrong! - Is mkisofs installed?"
-msgstr "製作時發生錯誤, 您確認你有安裝 mkisofs 程式"
+msgstr "製作時發生錯誤！您確定有安裝 mkisofs 程式嗎？"
 
 #: standalone/drakTermServ:1700
 #, c-format
@@ -17003,7 +17013,7 @@ msgstr "%s 未找到...\n"
 #: standalone/drakTermServ:2006
 #, c-format
 msgid "/etc/hosts.allow and /etc/hosts.deny already configured - not changed"
-msgstr ""
+msgstr "/etc/hosts.allow 與 /etc/hosts.deny 已經設定過了 - 不改變"
 
 #: standalone/drakTermServ:2158
 #, c-format
@@ -17023,7 +17033,7 @@ msgstr "錯誤！"
 #: standalone/drakautoinst:39
 #, c-format
 msgid "I can not find needed image file `%s'."
-msgstr "我找不到這個重要的檔案 %s 。"
+msgstr "我找不到需要的核心映像檔案 %s 。"
 
 #: standalone/drakautoinst:41
 #, c-format
@@ -17053,7 +17063,7 @@ msgstr ""
 "為了最安全考量, 所有分割區劃分以及格式化動作將不會自動進行，\n"
 "不論您在這部電腦上如何選擇。\n"
 "\n"
-"按下 OK 以繼續。"
+"按下確定以繼續。"
 
 #: standalone/drakautoinst:60
 #, c-format
@@ -17075,13 +17085,13 @@ msgstr "自動化步驟設定"
 msgid ""
 "Please choose for each step whether it will replay like your install, or it "
 "will be manual"
-msgstr "請選擇每一個安裝的步驟, 這些將會是您所操作的安裝過程"
+msgstr "請選擇每一個安裝的步驟，這些將會是您所操作的安裝過程"
 
 #: standalone/drakautoinst:77 standalone/drakautoinst:78
 #: standalone/drakautoinst:92
 #, c-format
 msgid "Creating auto install floppy"
-msgstr "正在製作自動安裝軟片"
+msgstr "正在製作自動安裝磁片"
 
 #: standalone/drakautoinst:90
 #, c-format
@@ -17104,7 +17114,7 @@ msgstr ""
 "\n"
 "歡迎!\n"
 "\n"
-"自動安裝內可用的參數項目都在左邊的區段內"
+"自動安裝可用的參數項目都在左邊的區域內"
 
 #: standalone/drakautoinst:251
 #, c-format
@@ -17112,8 +17122,8 @@ msgid ""
 "The floppy has been successfully generated.\n"
 "You may now replay your installation."
 msgstr ""
-"已經成功建立自動安裝軟片。\n"
-"您可以使用這張軟片進行自動安裝的程序"
+"已經成功建立自動安裝磁片。\n"
+"您可以使用這張磁片進行自動安裝的程序"
 
 #: standalone/drakautoinst:287
 #, c-format
@@ -17140,7 +17150,7 @@ msgstr ""
 #: standalone/drakbackup:158
 #, c-format
 msgid "Store the password for this system in drakbackup configuration."
-msgstr ""
+msgstr "為這個系統的 drakbackup 設定儲存密碼。"
 
 #: standalone/drakbackup:159
 #, c-format
@@ -17155,6 +17165,7 @@ msgid ""
 "This option will save files that have changed.  Exact behavior depends on "
 "whether incremental or differential mode is used."
 msgstr ""
+"這個選項會儲存變更的檔案。實際的情形會依據使用的是遞增或差異模式而有所不同。"
 
 #: standalone/drakbackup:161
 #, c-format
@@ -17162,6 +17173,7 @@ msgid ""
 "Incremental backups only save files that have changed or are new since the "
 "last backup."
 msgstr ""
+"遞增備份只會儲存自從上次備份之後變更或新建立的檔案。"
 
 #: standalone/drakbackup:162
 #, c-format
@@ -17169,6 +17181,7 @@ msgid ""
 "Differential backups only save files that have changed or are new since the "
 "original 'base' backup."
 msgstr ""
+"差異備份只會儲存自從原始的「基礎」備份之後變更或新建的檔案。"
 
 #: standalone/drakbackup:163
 #, c-format
@@ -17176,6 +17189,7 @@ msgid ""
 "Star should be selected if you want to backup EA or ACLs, otherwise choose "
 "tar"
 msgstr ""
+"如果您想要備份 EA 或 ACL 請選擇 star，否則請選擇 tar"
 
 #: standalone/drakbackup:164
 #, c-format
@@ -17184,6 +17198,8 @@ msgid ""
 "results sent to. You will need to define a functioning mail server. Multiple "
 "users can be in a comma seperated list"
 msgstr ""
+"這裡是您想要收到備份結果的本地使用者或郵件位址。您需要指定一個可用的郵件伺服器。"
+"多個使用者間可以用逗號分隔"
 
 #: standalone/drakbackup:165
 #, c-format
@@ -17191,6 +17207,7 @@ msgid ""
 "This should be the return address that you want the backup results sent "
 "from. Default is drakbackup."
 msgstr ""
+"這是您想要寄出備份結果的回信帳號。預設是 drakbackup。"
 
 #: standalone/drakbackup:166
 #, c-format
@@ -17206,6 +17223,8 @@ msgid ""
 "moved to the other media.  Enabling this option will remove the hard drive "
 "tar files after the backup."
 msgstr ""
+"對於儲存到其他媒體，檔案仍然是建立在硬碟，然後移動到其他媒體上。啟用這個選項將會在備份後"
+"移除硬碟中的 tar 檔案。"
 
 #: standalone/drakbackup:168
 #, c-format
@@ -17227,17 +17246,17 @@ msgstr ""
 msgid ""
 "Custom allows you to specify your own day and time.  The other options use "
 "run-parts in /etc/crontab."
-msgstr ""
+msgstr "自訂允許您指定您自己的日期和時間。其他的選項使用 /etc/crontab 中的 run-part 項目。"
 
 #: standalone/drakbackup:344
 #, c-format
 msgid "No media selected for cron operation."
-msgstr ""
+msgstr "沒有為 cron 作業選擇媒體。"
 
 #: standalone/drakbackup:348
 #, c-format
 msgid "No interval selected for cron operation."
-msgstr ""
+msgstr "沒有為 cron 作業選擇時間間隔。"
 
 #: standalone/drakbackup:393
 #, c-format
@@ -17247,29 +17266,29 @@ msgstr "使用非 root 身份時無法使用 Interval Cron"
 #: standalone/drakbackup:477 standalone/logdrake:439
 #, c-format
 msgid "\"%s\" neither is a valid email nor is an existing local user!"
-msgstr ""
+msgstr "\"%s\" 既不是有效的信箱也不是既有的本地使用者！"
 
 #: standalone/drakbackup:481 standalone/logdrake:444
 #, c-format
 msgid ""
 "\"%s\" is a local user, but you did not select a local smtp, so you must use "
 "a complete email address!"
-msgstr ""
+msgstr "\"%s\" 是一位本地使用者，但您沒有選擇一個本地的 smtp，所以您必須使用完整的郵件位址！"
 
 #: standalone/drakbackup:491
 #, c-format
 msgid "Valid user list changed, rewriting config file."
-msgstr ""
+msgstr "有效使用者清單變更，正在重新寫入設定檔。"
 
 #: standalone/drakbackup:493
 #, c-format
 msgid "Old user list:\n"
-msgstr "舊的使用者清單:\n"
+msgstr "舊的使用者清單：\n"
 
 #: standalone/drakbackup:495
 #, c-format
 msgid "New user list:\n"
-msgstr "新的使用者清單:\n"
+msgstr "新的使用者清單：\n"
 
 #: standalone/drakbackup:524
 #, c-format
@@ -17316,9 +17335,9 @@ msgid ""
 "If you've already done this process you'll probably\n"
 " need to purge the entry from authorized_keys on the server."
 msgstr ""
-"%s 已經存在了, 您要刪除該項目嗎？\n"
+"%s 已經存在了，您要刪除該項目嗎？\n"
 "\n"
-"警告：若是您已經完成該工作進度, 也許您可以刪除該主機上\n"
+"警告：若是您已經完成該工作進度，也許您可以刪除該主機上的\n"
 "認證憑證檔案。"
 
 #: standalone/drakbackup:618
@@ -17344,7 +17363,7 @@ msgstr "%s - 錯誤的密碼"
 #: standalone/drakbackup:644
 #, c-format
 msgid "Permission denied transferring %s to %s"
-msgstr "由 %s 傳輸到 %s 發生錯誤, 權限拒絕"
+msgstr "由 %s 傳輸到 %s 發生錯誤，權限不符"
 
 #: standalone/drakbackup:645
 #, c-format
@@ -17367,11 +17386,11 @@ msgid ""
 "without being prompted for a password."
 msgstr ""
 "傳輸成功\n"
-"您也許想要確認您能夠登入伺服器以:\n"
+"您可以使用下面的指令來確認您能夠正確的登入伺服器：\n"
 "\n"
 "ssh -i %s %s@%s\n"
 "\n"
-"這應該不需要輸入任何密碼."
+"這應該不需要輸入任何密碼。"
 
 #: standalone/drakbackup:703
 #, c-format
@@ -17396,7 +17415,7 @@ msgstr "刪除該媒介裝置需要花費一些時間。"
 #: standalone/drakbackup:812
 #, c-format
 msgid "Permission problem accessing CD."
-msgstr "權限的問題無法存取 CD."
+msgstr "權限的問題無法存取光碟。"
 
 #: standalone/drakbackup:840
 #, c-format
@@ -17409,6 +17428,8 @@ msgid ""
 "Backup destination quota exceeded!\n"
 "%d MB used vs %d MB allocated."
 msgstr ""
+"超過備份儲存位置的磁碟空間配額！\n"
+"於分配 %2$d MB 的空間中使用了 %1$d MB。"
 
 #: standalone/drakbackup:973 standalone/drakbackup:1005
 #, c-format
@@ -17448,7 +17469,7 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-"Drakbackup 透過 %s 活動:\n"
+"Drakbackup 透過 %s 進行備份：\n"
 "\n"
 
 #: standalone/drakbackup:1109
@@ -17459,7 +17480,7 @@ msgid ""
 "FTP.\n"
 msgstr ""
 "\n"
-"(!) FTP 連結錯誤：由於 FTP 連線錯誤, 備份檔案將沒透過 FTP 備份傳送出去。\n"
+"FTP 連結錯誤：由於 FTP 連線錯誤，備份檔案將無法透過 FTP 傳送出去。\n"
 
 #: standalone/drakbackup:1110
 #, c-format
@@ -17470,7 +17491,7 @@ msgstr "使用 FTP 上傳檔案時發生錯誤。請修正您的 FTP 設定。"
 #: standalone/drakbackup:1112
 #, c-format
 msgid "file list sent by FTP: %s\n"
-msgstr "FTP 傳送的檔案清單: %s\n"
+msgstr "FTP 傳送的檔案清單：%s\n"
 
 #: standalone/drakbackup:1127
 #, c-format
@@ -17480,7 +17501,7 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-"Drakbackup 使用 CD 方式進行處理：\n"
+"Drakbackup 使用光碟進行備份：\n"
 "\n"
 
 #: standalone/drakbackup:1132
@@ -17491,7 +17512,7 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-"Drakbackup 使用磁帶機方式進行處理：\n"
+"Drakbackup 使用磁帶機進行備份：\n"
 "\n"
 
 #: standalone/drakbackup:1141
@@ -17507,12 +17528,12 @@ msgstr "郵件發送時發生錯誤。\n"
 #: standalone/drakbackup:1172
 #, c-format
 msgid "Can not create catalog!"
-msgstr "無法建立 catalog 資訊"
+msgstr "無法建立 catalog 資訊！"
 
 #: standalone/drakbackup:1332
-#, fuzzy, c-format
+#, c-format
 msgid "Problem installing %s"
-msgstr "安裝 %s 套件發生錯誤"
+msgstr "安裝 %s 時發生錯誤"
 
 #: standalone/drakbackup:1420
 #, c-format
@@ -17535,7 +17556,7 @@ msgstr "使用遞增備份 (不會覆蓋舊有備份)"
 #: standalone/drakbackup:1552
 #, c-format
 msgid "Use Differential Backups"
-msgstr ""
+msgstr "使用差異備份"
 
 #: standalone/drakbackup:1425
 #, c-format
@@ -17555,7 +17576,7 @@ msgstr "不要包含瀏覽器的快取資料檔"
 #: standalone/drakbackup:1537
 #, c-format
 msgid "Select the files or directories and click on 'OK'"
-msgstr "選取檔案或者是目錄, 然後點選 '加入'"
+msgstr "選取檔案或者是目錄，然後點選 '確定'"
 
 #: standalone/drakbackup:1538 standalone/drakfont:650
 #, c-format
@@ -17575,12 +17596,12 @@ msgstr "使用 FTP 連線備份"
 #: standalone/drakbackup:1623
 #, c-format
 msgid "Net Method:"
-msgstr "網路方式:"
+msgstr "網路方式："
 
 #: standalone/drakbackup:1627
 #, c-format
 msgid "Use Expect for SSH"
-msgstr ""
+msgstr "為 SSH 使用 Expect"
 
 #: standalone/drakbackup:1628
 #, c-format
@@ -17600,7 +17621,7 @@ msgstr "其他 (非 drakbackup) 認證憑證檔案已經存在"
 #: standalone/drakbackup:1635
 #, c-format
 msgid "Host name or IP."
-msgstr "主機名稱或 IP."
+msgstr "主機名稱或 IP 位址。"
 
 #: standalone/drakbackup:1640
 #, c-format
@@ -17610,7 +17631,7 @@ msgstr "請輸入要備份到該主機的所在目錄名稱"
 #: standalone/drakbackup:1652
 #, c-format
 msgid "Remember this password"
-msgstr "記住該密碼"
+msgstr "記住這個密碼"
 
 #: standalone/drakbackup:1664
 #, c-format
@@ -17635,12 +17656,12 @@ msgstr "請選取您的 CD/DVD 容量大小"
 #: standalone/drakbackup:1770
 #, c-format
 msgid "Multisession CD"
-msgstr "Multisession CD"
+msgstr "多資料軌光碟"
 
 #: standalone/drakbackup:1772
 #, c-format
 msgid "CDRW media"
-msgstr ""
+msgstr "CDRW 媒體"
 
 #: standalone/drakbackup:1778
 #, c-format
@@ -17650,12 +17671,12 @@ msgstr "清除您的可複寫媒介 (第一個資料軌)"
 #: standalone/drakbackup:1779
 #, c-format
 msgid " Erase Now "
-msgstr " 刪除中 "
+msgstr " 立即抹除 "
 
 #: standalone/drakbackup:1785
 #, c-format
 msgid "DVD+RW media"
-msgstr ""
+msgstr "DVD+RW 媒體"
 
 #: standalone/drakbackup:1787
 #, c-format
@@ -17670,7 +17691,7 @@ msgstr "DVDRAM 裝置"
 #: standalone/drakbackup:1820
 #, c-format
 msgid "No CD device defined!"
-msgstr "尚未定義任何 CD 裝置!"
+msgstr "尚未定義任何光碟裝置！"
 
 #: standalone/drakbackup:1862
 #, c-format
@@ -17685,12 +17706,12 @@ msgstr "請輸入您要用來備份使用的裝置名稱"
 #: standalone/drakbackup:1871
 #, c-format
 msgid "Backup directly to tape"
-msgstr ""
+msgstr "直接備份到磁帶"
 
 #: standalone/drakbackup:1877
 #, c-format
 msgid "Use tape hardware compression (EXPERIMENTAL)"
-msgstr ""
+msgstr "使用磁帶硬體壓縮 (實驗性)"
 
 #: standalone/drakbackup:1883
 #, c-format
@@ -17723,6 +17744,7 @@ msgid ""
 "Maximum disk space\n"
 " allocated for backups (MB)"
 msgstr ""
+"分配給備份用的最大磁碟空間 (MB)"
 
 #: standalone/drakbackup:1989
 #, c-format
@@ -17731,6 +17753,8 @@ msgid ""
 " backups older than N days\n"
 " (0 is keep all backups) to save space"
 msgstr ""
+"刪除 N 天之前的遞增或差異備份以節省空間\n"
+"(0 會保留所有備份)"
 
 #: standalone/drakbackup:2056
 #, c-format
@@ -17775,62 +17799,62 @@ msgstr "自訂"
 #: standalone/drakbackup:2090
 #, c-format
 msgid "January"
-msgstr "1月"
+msgstr "1 月"
 
 #: standalone/drakbackup:2090
 #, c-format
 msgid "February"
-msgstr "2月"
+msgstr "2 月"
 
 #: standalone/drakbackup:2090
 #, c-format
 msgid "March"
-msgstr "3月"
+msgstr "3 月"
 
 #: standalone/drakbackup:2091
 #, c-format
 msgid "April"
-msgstr "4月"
+msgstr "4 月"
 
 #: standalone/drakbackup:2091
 #, c-format
 msgid "May"
-msgstr "5月"
+msgstr "5 月"
 
 #: standalone/drakbackup:2091
 #, c-format
 msgid "June"
-msgstr "6月"
+msgstr "6 月"
 
 #: standalone/drakbackup:2091
 #, c-format
 msgid "July"
-msgstr "7月"
+msgstr "7 月"
 
 #: standalone/drakbackup:2091
 #, c-format
 msgid "August"
-msgstr "8月"
+msgstr "8 月"
 
 #: standalone/drakbackup:2091
 #, c-format
 msgid "September"
-msgstr "9月"
+msgstr "9 月"
 
 #: standalone/drakbackup:2092
 #, c-format
 msgid "October"
-msgstr "10月"
+msgstr "10 月"
 
 #: standalone/drakbackup:2092
 #, c-format
 msgid "November"
-msgstr "11月"
+msgstr "11 月"
 
 #: standalone/drakbackup:2092
 #, c-format
 msgid "December"
-msgstr "12月"
+msgstr "12 月"
 
 #: standalone/drakbackup:2095
 #, c-format
@@ -17868,14 +17892,14 @@ msgid "Saturday"
 msgstr "星期六"
 
 #: standalone/drakbackup:2126
-#, fuzzy, c-format
+#, c-format
 msgid "Delete cron entry"
-msgstr "刪除用戶端"
+msgstr "刪除 cron 項目"
 
 #: standalone/drakbackup:2127
-#, fuzzy, c-format
+#, c-format
 msgid "Add cron entry"
-msgstr "新增"
+msgstr "新增 cron 項目"
 
 #: standalone/drakbackup:2185
 #, c-format
@@ -17908,24 +17932,24 @@ msgid "Month"
 msgstr "月"
 
 #: standalone/drakbackup:2213
-#, fuzzy, c-format
+#, c-format
 msgid "Weekday (start)"
-msgstr "星期"
+msgstr "星期 (開始)"
 
 #: standalone/drakbackup:2217
-#, fuzzy, c-format
+#, c-format
 msgid "Weekday (end)"
-msgstr "星期"
+msgstr "星期  (結束)"
 
 #: standalone/drakbackup:2221
-#, fuzzy, c-format
+#, c-format
 msgid "Profile"
-msgstr "自訂檔案"
+msgstr "自訂"
 
 #: standalone/drakbackup:2227
-#, fuzzy, c-format
+#, c-format
 msgid "Current crontab:"
-msgstr "目前使用者"
+msgstr "目前的 crontab："
 
 #: standalone/drakbackup:2235
 #, c-format
@@ -17941,12 +17965,12 @@ msgstr "請確定您有啟用 cron 排程服務程式。"
 #, c-format
 msgid ""
 "If your machine is not on all the time, you might want to install anacron."
-msgstr ""
+msgstr "如果您的機器並不是一直都開機，您也許想要安裝 anacron。"
 
 #: standalone/drakbackup:2316
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the archive program"
-msgstr "請選取要回存的日期："
+msgstr "請選取要用來備份的檔案"
 
 #: standalone/drakbackup:2321
 #, c-format
@@ -17966,12 +17990,12 @@ msgstr "在每次備份完成後發送郵件通知該使用者："
 #: standalone/drakbackup:2333
 #, c-format
 msgid "Return address for sent mail:"
-msgstr ""
+msgstr "寄出郵件用的回信帳號："
 
 #: standalone/drakbackup:2339
 #, c-format
 msgid "SMTP server for mail:"
-msgstr "電子郵件 SMTP 伺服器名稱：”"
+msgstr "電子郵件 SMTP 伺服器名稱："
 
 #: standalone/drakbackup:2343
 #, c-format
@@ -17979,24 +18003,24 @@ msgid "Delete Hard Drive tar files after backup to other media."
 msgstr "備份成功後刪除硬碟上的 tar 檔案"
 
 #: standalone/drakbackup:2344
-#, fuzzy, c-format
+#, c-format
 msgid "View restore log after file restore."
-msgstr "選取 OK 來回存其他檔案。"
+msgstr "回存檔案之後檢視回存紀錄檔。"
 
 #: standalone/drakbackup:2389
 #, c-format
 msgid "What"
-msgstr "備份項目設定"
+msgstr "備份項目"
 
 #: standalone/drakbackup:2394
 #, c-format
 msgid "Where"
-msgstr "備份儲存位置設定"
+msgstr "備份儲存位置"
 
 #: standalone/drakbackup:2399
 #, c-format
 msgid "When"
-msgstr "備份時間設定"
+msgstr "備份時間"
 
 #: standalone/drakbackup:2404
 #, c-format
@@ -18121,7 +18145,7 @@ msgstr "\t限制磁碟使用量為 %s MB\n"
 #: standalone/drakbackup:2629
 #, c-format
 msgid "\tDelete backups older than %s day(s)\n"
-msgstr ""
+msgstr "\t刪除 %s 天之前的備份\n"
 
 #: standalone/drakbackup:2632
 #, c-format
@@ -18139,7 +18163,7 @@ msgid ""
 "- Burn to CD"
 msgstr ""
 "\n"
-"- 燒錄到 CD 片"
+"- 燒錄到光碟"
 
 #: standalone/drakbackup:2638
 #, c-format
@@ -18149,12 +18173,12 @@ msgstr "讀寫"
 #: standalone/drakbackup:2639
 #, c-format
 msgid " on device: %s"
-msgstr " 位於位置: %s"
+msgstr " 位於裝置：%s"
 
 #: standalone/drakbackup:2640
 #, c-format
 msgid " (multi-session)"
-msgstr ""
+msgstr " (多個資料軌區段)"
 
 #: standalone/drakbackup:2641
 #, c-format
@@ -18182,7 +18206,7 @@ msgid ""
 "- Save via %s on host: %s\n"
 msgstr ""
 "\n"
-"- 儲存 %s 於站台 - %s\n"
+"- 經由 %s 儲存於站台：%s\n"
 
 #: standalone/drakbackup:2647
 #, c-format
@@ -18190,8 +18214,8 @@ msgid ""
 "\t\t user name: %s\n"
 "\t\t on path: %s \n"
 msgstr ""
-"\t\t 使用者名稱: %s\n"
-"\t\t 位於路徑: %s \n"
+"\t\t 使用者名稱：%s\n"
+"\t\t 位於路徑：%s \n"
 
 #: standalone/drakbackup:2648
 #, c-format
@@ -18200,7 +18224,7 @@ msgid ""
 "- Options:\n"
 msgstr ""
 "\n"
-"- 選項:\n"
+"- 選項：\n"
 
 #: standalone/drakbackup:2649
 #, c-format
@@ -18208,19 +18232,19 @@ msgid "\tDo not include System Files\n"
 msgstr "\t不要包含系統檔案\n"
 
 #: standalone/drakbackup:2651
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use %s and bzip2\n"
-msgstr "\t使用 tar 與 bzip2 進行備份\n"
+msgstr "\t使用 %s 與 bzip2 進行備份\n"
 
 #: standalone/drakbackup:2652
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use %s and gzip\n"
-msgstr "\t使用 tar 與 gzip 進行備份\n"
+msgstr "\t使用 %s 與 gzip 進行備份\n"
 
 #: standalone/drakbackup:2653
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use %s only\n"
-msgstr "\t僅使用 tar 進行備份\n"
+msgstr "\t僅使用 %s 進行備份\n"
 
 #: standalone/drakbackup:2655
 #, c-format
@@ -18235,7 +18259,7 @@ msgstr "\t傳送郵件給 %s\n"
 #: standalone/drakbackup:2657
 #, c-format
 msgid "\tSend mail from %s\n"
-msgstr ""
+msgstr "\t從 %s 寄出郵件\n"
 
 #: standalone/drakbackup:2658
 #, c-format
@@ -18249,7 +18273,7 @@ msgid ""
 "- Daemon, %s via:\n"
 msgstr ""
 "\n"
-"- Daemon (%s) 服務程式包含 :\n"
+"- Daemon，%s 透過：\n"
 
 #: standalone/drakbackup:2661
 #, c-format
@@ -18259,7 +18283,7 @@ msgstr "\t-硬碟\n"
 #: standalone/drakbackup:2662
 #, c-format
 msgid "\t-CD-R.\n"
-msgstr "\t-光碟機\n"
+msgstr "\t-光碟\n"
 
 #: standalone/drakbackup:2663
 #, c-format
@@ -18269,22 +18293,22 @@ msgstr "\t-磁帶機\n"
 #: standalone/drakbackup:2664
 #, c-format
 msgid "\t-Network by FTP.\n"
-msgstr "\t-網路 (透過 FTP)\n"
+msgstr "\t-網路 (使用 FTP)\n"
 
 #: standalone/drakbackup:2665
 #, c-format
 msgid "\t-Network by SSH.\n"
-msgstr "\t網路 (透過 SSH)\n"
+msgstr "\t網路 (使用 SSH)\n"
 
 #: standalone/drakbackup:2666
 #, c-format
 msgid "\t-Network by rsync.\n"
-msgstr "\t-網路 (透過 rsync)\n"
+msgstr "\t-網路 (使用 rsync)\n"
 
 #: standalone/drakbackup:2668
 #, c-format
 msgid "No configuration, please click Wizard or Advanced.\n"
-msgstr "尚未設定任何組態項目, 請點選精靈或者是進階模式建立之。\n"
+msgstr "尚未設定任何組態項目，請點選精靈或者是進階模式建立之。\n"
 
 #: standalone/drakbackup:2673
 #, c-format
@@ -18292,7 +18316,7 @@ msgid ""
 "List of data to restore:\n"
 "\n"
 msgstr ""
-"要回存的資料清單:\n"
+"要回存的資料清單：\n"
 "\n"
 
 #: standalone/drakbackup:2675
@@ -18303,7 +18327,7 @@ msgstr "- 回存系統檔案。\n"
 #: standalone/drakbackup:2677 standalone/drakbackup:2687
 #, c-format
 msgid "   - from date: %s %s\n"
-msgstr ""
+msgstr "    - 至日期：%s %s\n"
 
 #: standalone/drakbackup:2680
 #, c-format
@@ -18347,7 +18371,7 @@ msgstr "          成功回存到 %s                    "
 #: standalone/drakbackup:2999
 #, c-format
 msgid "/usr/bin/star not found, using tar..."
-msgstr ""
+msgstr "找不到 /usr/bin/star，使用 tar..."
 
 #: standalone/drakbackup:3035
 #, c-format
@@ -18432,7 +18456,7 @@ msgstr "在回存資料時先刪除使用者的相關目錄"
 #: standalone/drakbackup:3345
 #, c-format
 msgid "Filename text substring to search for (empty string matches all):"
-msgstr ""
+msgstr "要搜尋的檔名字串 (空白字串會顯示全部內容)："
 
 #: standalone/drakbackup:3348
 #, c-format
@@ -18455,6 +18479,8 @@ msgid ""
 "Click date/time to see backup files.\n"
 "Ctrl-Click files to select multiple files."
 msgstr ""
+"按下日期/時間以檢視備份檔案。同時按下 Ctrl\n"
+"鍵以選擇數個檔案。"
 
 #: standalone/drakbackup:3513
 #, c-format
@@ -18462,6 +18488,7 @@ msgid ""
 "Restore Selected\n"
 "Catalog Entry"
 msgstr ""
+"還原選取的 catalog 資訊項目"
 
 #: standalone/drakbackup:3522
 #, c-format
@@ -18588,7 +18615,7 @@ msgstr "自訂回存方式"
 #: standalone/drakbackup:3945 standalone/drakbackup:3994
 #, c-format
 msgid "Restore From Catalog"
-msgstr "使用型錄回存"
+msgstr "使用 catalog 資訊回存"
 
 #: standalone/drakbackup:3966
 #, c-format
@@ -18603,22 +18630,22 @@ msgstr "請確認 %s 是正確的路徑"
 #: standalone/drakbackup:3968
 #, c-format
 msgid " and the CD is in the drive"
-msgstr ""
+msgstr "並且光碟位於光碟機中"
 
 #: standalone/drakbackup:3970
 #, c-format
 msgid "Backups on unmountable media - Use Catalog to restore"
-msgstr ""
+msgstr "備份位於無法掛載的媒體 - 使用 catalog 資訊回存"
 
 #: standalone/drakbackup:3986
 #, c-format
 msgid "CD in place - continue."
-msgstr "CD 片就緒 - 繼續執行。"
+msgstr "光碟片準備就緒 - 繼續執行。"
 
 #: standalone/drakbackup:3991
 #, c-format
 msgid "Browse to new restore repository."
-msgstr ""
+msgstr "瀏覽到新的儲存目錄。"
 
 #: standalone/drakbackup:3992
 #, c-format
@@ -18720,14 +18747,14 @@ msgstr ""
 "精靈或者是進階模式建立之。"
 
 #: standalone/drakbackup:4501
-#, fuzzy, c-format
+#, c-format
 msgid "Load profile"
-msgstr "本地端檔案"
+msgstr "存取自訂檔案"
 
 #: standalone/drakbackup:4510
-#, fuzzy, c-format
+#, c-format
 msgid "Save profile as..."
-msgstr "另存新檔..."
+msgstr "另存自訂檔案為..."
 
 #: standalone/drakbackup:4532 standalone/drakbackup:4535
 #, c-format
@@ -18737,7 +18764,7 @@ msgstr "Drakbackup"
 #: standalone/drakboot:49
 #, c-format
 msgid "No bootloader found, creating a new configuration"
-msgstr ""
+msgstr "找不到開機管理程式，正在建立新的設定"
 
 #: standalone/drakboot:84 standalone/harddrake2:190 standalone/harddrake2:191
 #: standalone/logdrake:69 standalone/printerdrake:150
@@ -18765,7 +18792,7 @@ msgstr "只顯示文字"
 #: standalone/drakboot:126
 #, c-format
 msgid "Verbose"
-msgstr "顯示訊息"
+msgstr "顯示詳細訊息"
 
 #: standalone/drakboot:127
 #, c-format
@@ -18778,6 +18805,8 @@ msgid ""
 "Your system bootloader is not in framebuffer mode. To activate graphical "
 "boot, select a graphic video mode from the bootloader configuration tool."
 msgstr ""
+"您的系統開機管理程式並未使用 framebuffer 模式。要啟用圖形開機，請從開機管理程式設定"
+"工具選擇一種圖形顯示模式。"
 
 #: standalone/drakboot:135
 #, c-format
@@ -18855,6 +18884,8 @@ msgid ""
 "selected below.\n"
 "Be sure your video card supports the mode you choose."
 msgstr ""
+"請選擇顯示模式，它將被用在下列選擇的每一個的開機項目。\n"
+"請確定您的顯示卡支援您選擇的模式。"
 
 #: standalone/drakbug:41
 #, c-format
@@ -18929,7 +18960,7 @@ msgstr "設定精靈"
 #: standalone/drakbug:81
 #, c-format
 msgid "Select Mandriva Tool:"
-msgstr ""
+msgstr "選擇 Mandriva 工具："
 
 #: standalone/drakbug:82
 #, c-format
@@ -18937,6 +18968,8 @@ msgid ""
 "or Application Name\n"
 "(or Full Path):"
 msgstr ""
+"或應用程式名稱\n"
+"(或完整路徑)："
 
 #: standalone/drakbug:85
 #, c-format
@@ -19023,6 +19056,8 @@ msgid ""
 "Your computer can synchronize its clock\n"
 " with a remote time server using NTP"
 msgstr ""
+"您的電腦可以利用 NTP 將它的時鐘與一個遠端的時間\n"
+"伺服器同步"
 
 #: standalone/drakclock:78
 #, c-format
@@ -19037,7 +19072,7 @@ msgstr "伺服器："
 #: standalone/drakclock:124
 #, c-format
 msgid "Could not synchronize with %s."
-msgstr ""
+msgstr "無法與 %s 同步。"
 
 #: standalone/drakclock:146 standalone/drakclock:156
 #, c-format
@@ -19253,6 +19288,7 @@ msgstr ""
 msgid ""
 "Congratulations, the \"%s\" network interface has been successfully deleted"
 msgstr ""
+"恭喜，已經成功刪除了網路介面 \"%s\""
 
 #: standalone/drakconnect:761
 #, c-format
@@ -19419,6 +19455,8 @@ msgid ""
 "into your system with the X Window System running and supports running\n"
 "several different X sessions on your local machine at the same time."
 msgstr ""
+"X11 顯示管理程式讓您從圖形介面登入已經執行 X Window 系統的電腦\n"
+"並且支援同時在您的本地端主機上執行數個不同的 X 作業階段。"
 
 #: standalone/drakedm:72
 #, c-format
@@ -19431,6 +19469,8 @@ msgid ""
 "You are going to close all running programs and lose your current session. "
 "Are you really sure that you want to restart the dm service?"
 msgstr ""
+"您將要關閉所有執行中的程式並結束目前的工作階段。"
+"您真的確定要重新啟動 dm 服務嗎？"
 
 #: standalone/drakfont:182
 #, c-format
@@ -19561,7 +19601,7 @@ msgstr "字型清單"
 #: standalone/drakfont:486
 #, c-format
 msgid "Get Windows Fonts"
-msgstr ""
+msgstr "取得 Windows 字型"
 
 #: standalone/drakfont:492
 #, c-format
@@ -19583,6 +19623,14 @@ msgstr "匯入"
 #, c-format
 msgid "Copyright (C) 2001-2006 by Mandriva"
 msgstr ""
+"Copyright (C) 2001-2002 by Mandriva \n"
+"\n"
+"\n"
+"       DUPONT Sebastien (原始版本)\n"
+"\n"
+"       CHAUMETTE Damien <dchaumette@mandriva.com>\n"
+"\n"
+"       VIGNAUD Thierry <tvignaud@mandriva.com>"
 
 #: standalone/drakfont:515
 #, c-format
@@ -19634,6 +19682,19 @@ msgid ""
 "\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
 "             Convert ttf font files to afm and pfb fonts\n"
 msgstr ""
+"感謝：\n"
+"\n"
+"    -  pfm2afm:   \n"
+"\t by Ken Borgendale:\n"
+"\t    轉換 Windows .pfm  檔案為 .afm (Adobe Font Metrics)\n"
+"\n"
+"    -  type1inst:\n"
+"\t by James Macnicol: \n"
+"\t    type1inst 產生 fonts.dir fonts.scale & Fontmap 檔案。\n"
+"\n"
+"    -  ttf2pt1:   \n"
+"\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             轉換 ttf 字型為 afm 與 pfb 字型\n"
 
 #: standalone/drakfont:550
 #, c-format
@@ -19673,7 +19734,7 @@ msgstr "檔案選取"
 #: standalone/drakfont:583
 #, c-format
 msgid "Fonts"
-msgstr "字形"
+msgstr "字型"
 
 #: standalone/drakfont:646
 #, c-format
