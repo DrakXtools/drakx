@@ -54,7 +54,7 @@ sub bluetooth {
     require services;
     services::set_status("bluetooth", $enable);
     my $kbluetoothd_cfg = '/etc/kde/kbluetoothdrc';
-    update_gnomekderc(get_system_root($live) . $kbluetoothd_cfg,
+    update_gnomekderc($kbluetoothd_cfg,
                       'General',
                       'AutoStart' => bool2text($enable)) if -f $kbluetoothd_cfg;
 }
