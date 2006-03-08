@@ -516,9 +516,9 @@ sub post_install_system {
     #- (don't use addVarsInSh from MDK::Common, it breaks shell escapes)
     substInFile { s/^PROMPT=.*/PROMPT=no/ } get_system_root($live) . '/etc/sysconfig/init';
 
-    #- disable first boot wizard
+    #- disable first boot wizard at live boot
     output(get_system_root($live) . '/etc/sysconfig/firstboot', 'FIRSTBOOT=no');
-    #- enable drakx-finish-install
+    #- enable drakx-finish-install at live boot
     output(get_system_root($live) . '/etc/sysconfig/finish-install', qq(
 FINISH_INSTALL=yes
 NETWORK=no
