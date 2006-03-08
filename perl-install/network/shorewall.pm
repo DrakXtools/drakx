@@ -40,16 +40,20 @@ sub get_ifcfg_interface() {
     network::tools::get_default_gateway_interface($net);
 }
 
+sub dev_to_shorewall {
+    my ($dev) = @_;
+    $dev =~ /^ippp/ && "ippp+" ||
+    $dev =~ /^ppp/ && "ppp+" ||
+    $dev;
+}
+
 sub get_shorewall_interface() {
     #- read shorewall configuration first
     foreach (get_config_file('interfaces')) {
         $_->[0] eq 'net' and return $_->[1];
     }
     #- else try to find the best interface available
-    my $default_dev = get_ifcfg_interface();
-    $default_dev =~ /^ippp/ && "ippp+" ||
-    $default_dev =~ /^ppp/ && "ppp+" ||
-    $default_dev;
+    dev_to_shorewall(get_ifcfg_interface());
 }
 
 our $ask_shorewall_interface_label = N_("Please enter the name of the interface connected to the internet.
@@ -80,8 +84,11 @@ sub read_default_interfaces {
 sub set_net_interface {
     my ($conf, $interface) = @_;
     $conf->{net_interface} = $interface;
+    my $net = {};
+    network::network::read_net_conf($net);
+    my @all_intf = uniq((map { dev_to_shorewall($_) } keys %{$net->{ifcfg}}), detect_devices::getNet());
     #- keep all other interfaces (but alias interfaces) in local zone
-    $conf->{loc_interface} = [  grep { !/:/ && $_ ne $interface } detect_devices::getNet() ];
+    $conf->{loc_interface} = [  grep { !/:/ && $_ ne $interface } @all_intf ];
 }
 
 sub read {
