@@ -110,7 +110,6 @@ my %storage = (
         modules => 'bus/usb disk/cdrom|hardware_raid|ide|raw|sata|scsi|usb',
         fs => 'iso9660',
         source => 'LABEL=MDVCDROOT',
-        sleep => 15,
         read_only => 1,
         detect => \&detect_devices::burners,
         create => \&create_cdrom_master,
@@ -121,7 +120,6 @@ my %storage = (
         modules => 'bus/usb disk/raw|usb',
         fs => 'vfat',
         source => 'LABEL=MDVUSBROOT',
-        sleep => 15,
         detect => sub { grep { detect_devices::isKeyUsb($_) } detect_devices::get() },
         create => undef,
         format => \&format_usb_device,
@@ -302,6 +300,8 @@ sub create_initrd_for_media {
     #- needed to mount loopbacks read-only and move mountpoints
     cp_f('/bin/mount', '/sbin/losetup', $initrd_tree . '/bin/');
     cp_f('/lib/ld-linux.so.2', '/lib/tls/libc.so.6', $initrd_tree . '/lib/');
+    #- busybox is required to detect usb-storage process (we need sh/while/ps/grep)
+    cp_f('/usr/bin/busybox', $initrd_tree . '/bin');
 
     if (get_media_setting($media, 'fs') eq 'nfs') {
         cp_f('/sbin/ifconfig', $initrd_tree . '/bin/');
@@ -312,7 +312,6 @@ sub create_initrd_for_media {
     }
     if ($live->{debug}) {
         cp_f('/usr/bin/strace', $initrd_tree . '/bin/');
-        cp_f('/usr/bin/busybox', $initrd_tree . '/bin');
         my @l = map { /functions:/ .. /^$/ ? do { s/\s//g; split /,/ } : () } `busybox`;
         shift @l;
         symlink('busybox', $initrd_tree . "/bin/$_") foreach @l;
@@ -357,18 +356,17 @@ sub create_initrd_for_media {
 sub create_initrd_linuxrc {
     my ($live, $media, @modules) = @_;
     my $target = $live->{prefix}{live_mnt} . ($live->{mount}{root} || $live->{prefix}{media_mnt});
-    my $sleep = get_media_setting($media, 'sleep');
     my $pre = get_media_setting($media, 'pre');
     my $fs = get_media_setting($media, 'fs');
     output_with_perm(get_workdir($live) . $live->{prefix}{initrd} . '/' . $media->{storage} . '/linuxrc', 0755,
                      join("\n",
                           "#!/bin/nash",
                           (map { "insmod /lib/$_.ko" } @modules),
-                          if_($sleep, "sleep $sleep"),
-                          #- required for labels
+                          #- required for labels and ps
                           "mount -t proc none /proc",
                           #- required for cdrom labels
                           "mount -t sysfs none /sys",
+                          q(busybox sh -c 'while busybox ps | busybox grep -q \\\[usb-stor-scan\\\]; do busybox sleep 1; done'),
                           if_($live->{debug}, "/bin/sh"),
                           if_($pre, deref_array($pre)),
                           ($fs eq 'nfs' ? '/bin/mount -n -o ro,nolock' : 'mount') .
