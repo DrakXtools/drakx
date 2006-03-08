@@ -860,7 +860,6 @@ sub rpmsrate_always_flags {
     $rpmsrate_flags_chosen->{BIGMEM} = 1 if detect_devices::BIGMEM();
     $rpmsrate_flags_chosen->{SMP} = 1 if detect_devices::hasSMP();
     $rpmsrate_flags_chosen->{CDCOM} = 1 if any { $_->{descr} =~ /commercial/i } values %{$o->{packages}{mediums}};
-    $rpmsrate_flags_chosen->{TV} = 1 if detect_devices::getTVcards();
     $rpmsrate_flags_chosen->{'3D'} = 1 if 
       detect_devices::matching_desc__regexp('Matrox.* G[245][05]0') ||
       detect_devices::matching_desc__regexp('Rage X[CL]') ||
