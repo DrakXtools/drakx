@@ -535,6 +535,9 @@ USERS=no
     update_gnomekderc(get_system_root($live) . $kbluetoothd_cfg,
                       'Notification Messages',
                       'kbluepinLocInfo-usr-lib-kdebluetooth' => 'false');
+    update_gnomekderc(get_system_root($live) . $kbluetoothd_cfg,
+                      'General',
+                      'AutoStart' => 'false');
     chmod 0644, get_system_root($live) . $kbluetoothd_cfg;
 }
 
