@@ -56,6 +56,8 @@ sub ask_timezone() {
     $t->{timezone} = $in->ask_from_treelist(N("Timezone"), N("Which is your timezone?"), '/', [ timezone::getTimeZones() ], $t->{timezone}) or return;
     $t->{UTC} = $in->ask_yesorno(N("Timezone"), N("Is your hardware clock set to GMT?"), $t->{UTC});
     timezone::write($t);
+    #- reload sys clock from hc once we know the real timezone
+    timezone::reload_sys_clock($t);
 }
 
 sub ask_network() {

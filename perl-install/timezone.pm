@@ -56,6 +56,12 @@ sub write {
     });
 }
 
+sub reload_sys_clock {
+    my ($t) = @_;
+    require run_program;
+    run_program::run('hwclock', '--hctosys', ($t->{UTC} ? '--utc' : '--localtime'));
+}
+
 #- best guesses for a given country
 my %c2t = (
 'AM' => 'Asia/Yerevan',
