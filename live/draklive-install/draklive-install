@@ -126,7 +126,10 @@ unlink(map { $in->{prefix} . $_ } '/.autofsck',
        '/home/guest/Desktop/draklive-copy-wizard.desktop',
        '/home/guest/Desktop/draklive-install.desktop');
 system('chroot', $in->{prefix}, 'rpm', '-e', 'draklive-install');
-#- enable drakx-finish-install
+
+#- enable first boot wizard at system boot
+output(get_system_root($live) . '/etc/sysconfig/firstboot', 'FIRSTBOOT=yes');
+#- enable drakx-finish-install at system boot
 output($in->{prefix} . '/etc/sysconfig/finish-install', qq(
 FINISH_INSTALL=yes
 LICENSE=no
