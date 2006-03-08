@@ -151,6 +151,9 @@ run_program::run('makedev', $in->{prefix} . '/dev');
 #- write fstab
 fs::write_fstab($in->{all_hds}, $in->{prefix});
 
+# enable back dkms service
+require services;
+services::start_service_on_boot("dkms");
 
 #- setup bootloader
 #- TODO: factorize with drakboot
