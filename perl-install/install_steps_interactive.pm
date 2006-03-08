@@ -582,14 +582,14 @@ Please choose the minimal installation you want:"),
 		      { val => \$docs, type => 'bool', text => N("With basic documentation (recommended!)"), disabled => sub { $minimal } },
 		      { val => \$minimal, type => 'bool', text => N("Truly minimal install (especially no urpmi)") },
 		     ],
-		     changed => sub { $o->{rpmsrate_flags_chosen}{CAT_X} = $docs = 0 if $minimal },
 	) or return &chooseGroups;
 
 	if ($minimal) {
-	    $o->{rpmsrate_flags_chosen}{CAT_X} = $docs = 0; #- redo it in "changed" was not called
+	    $o->{rpmsrate_flags_chosen}{CAT_X} = $docs = 0;
 	    $o->{rpmsrate_flags_chosen}{CAT_SYSTEM} = 0;
 	}
 	$o->{excludedocs} = !$docs;
+	$o->{rpmsrate_flags_chosen}{CAT_MINIMAL_DOCS} = $docs;
 
 	install_any::unselectMostPackages($o);
     }

@@ -840,6 +840,7 @@ sub set_rpmsrate_category_flags {
     $o->{rpmsrate_flags_chosen}{$_} = 0 foreach grep { /^CAT_/ } keys %{$o->{rpmsrate_flags_chosen}};
     $o->{rpmsrate_flags_chosen}{"CAT_$_"} = 1 foreach map { @{$_->{flags}} } grep { $_->{selected} } @$compssUsers;
     $o->{rpmsrate_flags_chosen}{CAT_SYSTEM} = 1;
+    $o->{rpmsrate_flags_chosen}{CAT_MINIMAL_DOCS} = 1;
 }
 
 
@@ -850,7 +851,6 @@ sub rpmsrate_always_flags {
     $rpmsrate_flags_chosen->{qq(META_CLASS"$o->{meta_class}")} = 1;
     $rpmsrate_flags_chosen->{uc($_)} = 1 foreach grep { modules::probe_category("multimedia/$_") } modules::sub_categories('multimedia');
     $rpmsrate_flags_chosen->{uc($_)} = 1 foreach detect_devices::probe_name('Flag');
-    $rpmsrate_flags_chosen->{DOCS} = !$o->{excludedocs};
     $rpmsrate_flags_chosen->{UTF8} = $o->{locale}{utf8};
     $rpmsrate_flags_chosen->{BURNER} = 1 if detect_devices::burners();
     $rpmsrate_flags_chosen->{DVD} = 1 if detect_devices::dvdroms();
