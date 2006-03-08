@@ -531,6 +531,7 @@ USERS=no
     update_gnomekderc(get_system_root($live) . $kdm_cfg,
                       'X-:0-Greeter' => (PreselectUser => 'Default', DefaultUser => 'guest')) if -f $kdm_cfg;
     #- don't make kbluetoothdrc display an annoying and useless popup window
+    #- FIXME: factorize with harddrake::autoconf
     my $kbluetoothd_cfg = '/etc/kde/kbluetoothdrc';
     update_gnomekderc(get_system_root($live) . $kbluetoothd_cfg,
                       'Notification Messages',
