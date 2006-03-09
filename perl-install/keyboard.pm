@@ -268,8 +268,7 @@ arch() =~ /^sparc/ ? (
 # TODO: console map
  "ps" => [ N_("_: keyboard\nPashto"),         "us",              "ps",    1 ],
  "pt" => [ N_("_: keyboard\nPortuguese"),     "pt-latin1",       "pt",    0 ],
-# old XKB layout; change "ca_enhanced" -> "ca" once we ship new XKB
- "qc" => [ N_("_: keyboard\nCanadian (Quebec)"), "qc-latin1", "ca_enhanced", 0 ],
+ "qc" => [ N_("_: keyboard\nCanadian (Quebec)"), "qc-latin1",    "ca",    0 ],
  "ro2" => [ N_("_: keyboard\nRomanian (qwertz)"), "ro2",         "ro",    0 ],
  "ro" => [ N_("_: keyboard\nRomanian (qwerty)"), "ro",           "ro(us)", 0 ],
  "ru" => [ N_("_: keyboard\nRussian"),        "ru4",             "ru(winkeys)", 1 ],
@@ -314,7 +313,7 @@ arch() =~ /^sparc/ ? (
  "us_intl" => [ N_("US keyboard (international)"), "us-intl", "us(alt-intl)", 0 ],
  "uz" => [ N_("_: keyboard\nUzbek (cyrillic)"), "uz",            "uz",    1 ],
 # old XKB layout
- "vn" => [ N_("_: keyboard\nVietnamese \"numeric row\" QWERTY"), "vn-tcvn", "vn(toggle)", 0 ], 
+ "vn" => [ N_("_: keyboard\nVietnamese \"numeric row\" QWERTY"), "vn-tcvn", "vn", 0 ], 
  "yu" => [ N_("_: keyboard\nYugoslavian (latin)"), "sr",         "srp(latin)",    0 ],
 ),
 );
