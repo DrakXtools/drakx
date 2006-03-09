@@ -797,7 +797,8 @@ sub hd_grub {
     my ($img) = @_;
     my $mapfile = '/tmp/device.map.tmp';
 
-    my @grub_files = map { "/boot/grub/$_" } qw(stage1 stage2);
+    my ($grub_dir) = glob("/lib/grub/*-*");
+    my @grub_files = map { "$grub_dir/$_" } qw(stage1 stage2);
     my $size = 40_000 + sum(map { -s $_ } @grub_files);
 
     __ "$sudo umount $tmp_mnt 2>/dev/null";
