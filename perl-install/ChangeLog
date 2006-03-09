@@ -1,3 +1,423 @@
+2006/03/09  Pixel  <pixel at mandriva.com>
+
+	* any.pm: as suggested in bug #21524, display the info on hard drives in
+	the "boot device" choice
+
+2006/03/08  Olivier Blin <oblin at mandriva.com>
+
+	* harddrake/autoconf.pm: fix typo
+	enable kbluetoothd if bluetooth is detected
+	fix typo
+	enable kbluetoothd if bluetooth is detected
+
+	* tools/draklive: don't uselessly sleep for 15 seconds waiting for
+	usb-storage scan in initrd
+	add fixme
+	don't start kbluetooth by default
+	adjust comments
+
+	* network/shorewall.pm: automatically put ppp/ippp interfaces in local
+	zone if needed
+	automatically put ppp/ippp interfaces in local zone if needed (backport
+	from HEAD)
+
+	* standalone/finish-install, timezone.pm: reload sys clock from hc once we
+	know the real timezone (#21511)
+	reload sys clock from hc once we know the real timezone (#21511)
+
+	* Xconfig/card.pm: properly handle switch between nvidia & nvidia_legacy
+	(backport from HEAD)
+
+2006/03/08  Pixel  <pixel at mandriva.com>
+
+	* install_any.pm: this is redundant with: grep {
+	modules::probe_category("multimedia/$_") }
+	modules::sub_categories('multimedia')
+	  - rename DOCS to CAT_MINIMAL_DOCS
+	  - cuz otherwise DOCS is a "always" flag and modifying it afterwise is
+	useless
+	  - CAT_DOCS would be not precise enough
+	  - simplify the "changed" callback
+
+	* share/list.xml: no more xpms in pixmaps/
+
+	* share/rpmsrate, install_steps_interactive.pm: 
+	  - rename DOCS to CAT_MINIMAL_DOCS
+	  - cuz otherwise DOCS is a "always" flag and modifying it afterwise is
+	useless
+	  - CAT_DOCS would be not precise enough
+	  - simplify the "changed" callback
+
+2006/03/07  berthy
+
+	* share/po/fr.po: Update french translation
+
+2006/03/07  mareklaane
+
+	* share/po/et.po: Fixed errors due to not checking files on previous
+	commit...
+
+2006/03/07  Olivier Blin <oblin at mandriva.com>
+
+	* devices.pm: add some useful devices for live systems build (backport
+	from HEAD, useful to build One right from 2006.0)
+
+	* Xconfig/card.pm: backport libgl_config fixes (a bit late since already
+	in drakxtools changelog since november...):
+	  - handle nvidia_legacy
+	  - don't create broken ld.so.conf.d files (and thus don't run ldconfig
+	when not needed)
+
+	* tools/draklive: fix comment
+	don't check signatures when installing additional packages, it's tricky
+	because of media mix
+	add all additional media first, there may be some interaction between
+	them, and allow additional rpms to pull dependencies from additional
+	media
+	add hack to use supplementary media
+	die if additionnal system rpms can't be installed
+	allow to add langs whatever the region
+
+2006/03/07  Pablo Saratxaga  <pablo at mandriva.com>
+
+	* share/po/cy.po, share/po/wa.po: updated Welsh and Walloon files
+
+2006/03/07  pjetur
+
+	* share/po/is.po: Small changes
+	Latest sync
+	Latest sync
+
+2006/03/07  shivahuang
+
+	* share/po/zh_TW.po: updated po file
+
+2006/03/06  cavassin
+
+	* share/po/pt_BR.po: Small fixes for pt_BR.
+
+2006/03/06  Till Kamppeter  <till at mandriva.com>
+
+	* standalone/autosetupprintqueues: 
+	  - Fixed Plug'n'Print: Name of user logged in on the desktop is in
+	/var/run/console/console.lock now.
+
+2006/03/05  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: Updated POT file.
+
+2006/03/05  Keld Jørn Simonsen  <keld at dkuug.dk>
+
+	* share/po/da.po: updates
+	soft/control-center/po/da.po soft/initscripts/po/da.po
+	soft/mdkonline/po/da.po soft/urpmi/po/da.po
+	gi/perl-install/share/po/da.po
+
+2006/03/05  mareklaane
+
+	* share/po/et.po: Updated Estonian translations.
+
+2006/03/05  Olivier Blin <oblin at mandriva.com>
+
+	* tools/draklive: add md5sum to ISO header using mkdcd
+	simplify
+
+2006/03/04  Olivier Blin <oblin at mandriva.com>
+
+	* any.pm: enable acpi/acpid services when needed, disable them otherwise
+	(#21316)
+	enable acpi/acpid services when needed, disable them otherwise (#21316)
+
+	* diskdrake/resize_ntfs.pm: check for ntfsresize in real root first
+	check for ntfsresize in real root first
+
+2006/03/04  shivahuang
+
+	* share/po/zh_TW.po: updated po file
+
+2006/03/03  cavassin
+
+	* share/po/pt_BR.po: pt_BR 100% translated again ;)
+
+2006/03/03  Gwenole Beauchesne  <gbeauchesne at mandriva.com>
+
+	* share/rpmsrate, share/rpmsrate.corpo-server,
+	share/rpmsrate.corpo-desktop: 
+	  - add a320raid & megaide entries
+	  - install icewm to handle the background image (-light version doesn't
+	handle png)
+
+2006/03/03  Olivier Blin <oblin at mandriva.com>
+
+	* standalone/service_harddrake: autoconf laptop services when switching
+	between laptop and desktop
+	keep $hw_sysconfdir/kernel settings in a hash
+	autoconf bluetooth controllers (enable bluetooth service)
+	write modules_conf when a firewire controller is detected
+	really detect firewire controllers (fix typo)
+	backport laptop/bluetooth/firewire autoconf fixes/features from HEAD
+
+	* harddrake/data.pm: autoconf bluetooth controllers (enable bluetooth
+	service)
+	backport laptop/bluetooth/firewire autoconf fixes/features from HEAD
+
+	* tools/draklive: make mount know about / in rc.sysinit
+	clean /etc/mdadm.conf as well
+
+	* share/po/pt_BR.po: remove "Teclado" prefix in pt_BR translation (Till,
+	#21265)
+
+	* harddrake/autoconf.pm: disable numlock on laptops
+	autoconf laptop services when switching between laptop and desktop
+	autoconf bluetooth controllers (enable bluetooth service)
+	backport laptop/bluetooth/firewire autoconf fixes/features from HEAD
+
+2006/03/03  Pixel  <pixel at mandriva.com>
+
+	* pixmaps/stock_exit.xpm, pixmaps/stock_left.xpm,
+	pixmaps/stock_cancel.xpm, pixmaps/stock_right.xpm, pixmaps/stock_ok.xpm:
+	remove obsolete unused
+
+	* tools/gencompss, share/verify_modules.pl, tools/i386/sh,
+	tools/genmodparm, share/makedev.sh, tools/i386/mkreiserfs,
+	tools/alpha/e2fsck.shared, tools/2isdndb.pm, tools/i386/e2fsck.shared,
+	tools/2adsldb.pm, tools/closurepkgs, tools/ia64/e2fsck.shared,
+	tools/ppc/e2fsck.shared, tools/syncrpms: remove obsolete unused stuff
+
+	* network/pxe.pm: simplify (and please perl_checker)
+
+	* drakxtools.spec: buildrequire rpm-devel no more needed (since stuff.xs
+	doesn't use rpmlib directly)
+
+	* install2.pm: no need to open something special since log is done on
+	stderr when testing
+
+	* commands.pm: use lchown instead of chown (otherwise pbs on broken
+	symlinks)
+
+	* c/Makefile.PL, c/sbus.c, c/silo.c, c/stuff.xs.pl, Makefile.drakxtools,
+	detect_devices.pm: remove unused silo&sbus&prom stuff (was for sparc,
+	but untouched for more than 5 years and must be broken
+
+	* Makefile.config: remove unused silo&sbus&prom stuff (was for sparc, but
+	untouched for more than 5 years and must be broken
+	remove unused var VERSION
+
+	* pixmaps/ic82-systemeplus-40.png: many ic82-* are still used (mostly by
+	drakbackup), but this one is unused
+
+	* pixmaps/slpash-drakeprint-2.png: remove unused (and mispelled)
+
+	* docs/porting-ugtk, docs/diskdrake.TODO, docs/mdk-9.2,
+	docs/9.1_errata.txt, docs/draknet_advanced_doc.txt, docs/BUGS,
+	docs/9.0_errata.txt, docs/TODO, docs/spec-DrakX-8.0.html: remove
+	obsolete docs
+
+2006/03/02  Olivier Blin <oblin at mandriva.com>
+
+	* tools/draklive: try to preserve mode when copying files
+
+2006/03/02  Pixel  <pixel at mandriva.com>
+
+	* share/rpmsrate: adapt to lsb split
+	don't have nscd twice with different rate
+
+	* docs/README: update auto_install doc url
+
+2006/03/02  shivahuang
+
+	* share/po/zh_TW.po: updated po file
+
+2006/03/02  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/po/br.po: typo fixes
+
+2006/03/01  Olivier Blin <oblin at mandriva.com>
+
+	* tools/draklive: really fix permissions for kbluetooth conf files
+	load usb-storage and sleep a "small" bit to be able to boot from USB
+	CD-Rom drives
+	move ide-generic to end of loaded modules
+	clean /etc/iftab and /etc/shorewall/interfaces
+
+	* network/network.pm: use network::shorewall::update_interfaces_list()
+	don't start/stop the tmdns service during install
+	don't start/stop the tmdns service during install
+
+	* network/shorewall.pm: add update_interfaces_list
+
+	* standalone/service_harddrake: update shorewall interfaces list when a
+	new interface is detected (#21252)
+	update shorewall interfaces list when a new interface is detected
+	(#21252)
+
+2006/03/01  Stew Benedict  <sbenedict at mandriva.com>
+
+	* standalone/drakbackup: create index files for direct-to-tape too
+	clean up some issues with direct-to-tape that came with the star
+	additions
+	compress the index files
+
+2006/03/01  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* harddrake/v4l.pm: update model & tuner lists
+
+2006/02/28  Antoine Ginies  <aginies at mandriva.com> 
+
+	* mdk-stage1/ka.c: fix path to ka-d-client and typo in tar parameter
+
+2006/02/28  Olivier Blin <oblin at mandriva.com>
+
+	* any.pm: fix indentation
+	symlink old home directory to new one when renaming user (#21384)
+	remove spurious comma
+	symlink old home directory to new one when renaming user (backport from
+	HEAD, #21384)
+
+	* standalone/finish-install: ask license after language (#21266)
+	ask for timezone (#21271)
+	ask license after language (#21266)
+	ask for timezone (#21271)
+
+2006/02/28  Pixel  <pixel at mandriva.com>
+
+	* rescue/make_rescue_img: remove debug code
+	handle BOX=... on cmdline
+	simplify (since partimage_whole_disk rest_all doesn't handle multi dirs
+	anymore)
+
+	* rescue/partimage_whole_disk: multiple dirs is not handled anymore,
+	correct the usage
+
+2006/02/28  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* modules.pm (load_category) load ide-generic for disk/ide (this is a
+	working
+	fallback for quite a lot of machines)
+
+	* diskdrake/interactive.pm (need_migration) fix untranslated messages
+	(#21326)
+	(need_migration) fix untranslated messages (#21326)
+
+2006/02/27  Olivier Blin <oblin at mandriva.com>
+
+	* printer/data.pm: use versionned binary to check for gutenprint-ijs
+	(useful if docs are excluded, like in Mandriva One, #21269)
+
+	* tools/draklive: allow to disable services
+	simplify
+	run harddrake because a crappy snd-usb-audio workaround may do something
+	at shutdown (#21329)
+
+	* bootsplash.pm: don't prepend $::prefix on module load, but when the path
+	is actually used (backport from HEAD)
+
+2006/02/27  Pixel  <pixel at mandriva.com>
+
+	* docs/README: adapt to new cvs web url
+
+2006/02/27  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/rpmsrate: fix matching some devices (we really are looking at
+	drivers here, not devices' description)
+
+	* standalone/service_harddrake: backported from TRUNK for Mandriva One
+	  - fix adding storage controllers: set scsi_hostadapter like DrakX does
+	instead
+	of trying preloading the driver
+	  - manage hardware_raid class too
+
+	* share/po/br.po: update
+
+2006/02/25  shivahuang
+
+	* share/po/zh_TW.po: updated po file
+
+2006/02/24  Olivier Blin <oblin at mandriva.com>
+
+	* timezone.pm: oops, fix timezone listing (thanks Pixel)
+	use -noleaf option when finding timezones (useful over unionfs, #21272)
+	oops, fix timezone listing (thanks Pixel)
+	use -noleaf option when finding timezones (useful over unionfs, backport
+	for #21272)
+
+	* tools/draklive: remove /etc/modprobe.conf and /etc/modprobe.preload
+	build-machine specific stuff
+	load disk/ide as well (Titi)
+	allow to copy files in system chroot
+
+	* fs/format.pm: ensure_binary_is_installed checks binary chrooted, whereas
+	we run the binary non-chrooted (backport from HEAD)
+
+2006/02/24  Pixel  <pixel at mandriva.com>
+
+	* fs/format.pm: ensure_binary_is_installed checks binary chrooted, whereas
+	we run the binary non-chrooted (pb for Mandriva One)
+
+2006/02/23  Olivier Blin <oblin at mandriva.com>
+
+	* tools/draklive: look for bootsplash config in live chroot, and try to
+	find a '800x600' resolution
+	add information message about splash image
+
+	* any.pm: remove untested patch
+	use groupmod to change group when renaming a user
+	perl_checker compliance
+	allow to rename an old user (possibly "guest" from a live distribution)
+	instead of creating a new one, using info from first added user in
+	finish-install
+	use groupmod to change group when renaming a user
+	don't show release notes after install (not handled yet)
+	perl_checker compliance
+	allow to rename an old user (possibly "guest" from a live distribution)
+	instead of creating a new one, using info from first added user in
+	finish-install (backport from HEAD)
+
+	* bootsplash.pm: check for correct themes path
+	don't prepend $::prefix on module load, but when the path is actually
+	used
+	fix typo
+
+	* standalone/finish-install: allow to rename an old user (possibly "guest"
+	from a live distribution) instead of creating a new one, using info from
+	first added user in finish-install
+	rename config hash as it will contain more settings
+	don't try to destroy potentially non-existent wizard window (if some
+	steps are skipped for example)
+	allow to rename an old user (possibly "guest" from a live distribution)
+	instead of creating a new one, using info from first added user in
+	finish-install (backport from HEAD)
+	rename config hash as it will contain more settings
+	don't try to destroy potentially non-existent wizard window (backport
+	from HEAD)
+
+2006/02/23  Pixel  <pixel at mandriva.com>
+
+	* install_steps.pm, any.pm, lang.pm: create lang::lang_changed() to ensure
+	{country} is set according to the lang (useful for finish-install where
+	choosing fr gives fr_US)
+	create lang::lang_changed() to ensure {country} is set according to the
+	lang (useful for finish-install where choosing fr gives fr_US)
+
+	* help.pm: enforce utf8 (since we use the (R) char)
+
 2006/02/22  Gwenole Beauchesne  <gbeauchesne at mandriva.com>
 
 	* c/smp-dmi.c: Check the socket is populated during dmi smp detection. I
