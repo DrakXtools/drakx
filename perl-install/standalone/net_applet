@@ -69,12 +69,9 @@ my %actions = (
                    }
                },
                'setInterface' => {
-                   name => N("Network interface"),
+                   name => N("Active interfaces"),
+                   use_checkbox => 1,
                    choices => sub { sort keys %{$net->{ifcfg}} },
-                   format_choice => sub {
-                       my ($is_up, $_gw) = network::tools::get_interface_status($_[0]);
-                       $is_up ? N("Disconnect %s", $_[0]) : N("Connect %s", $_[0]);
-                   },
                    choice_selected => sub {
                        my ($is_up, $_gw) = network::tools::get_interface_status($_[0]);
                        $is_up;
@@ -304,7 +301,7 @@ sub generate_menu {
                 my $choice = $_;
                 my $w = gtkshow(gtkset_active(Gtk2::CheckMenuItem->new_with_label($format ? $format->($choice) : $choice), $selected->($choice)));
                 gtksignal_connect($w, activate => sub { $launch->($choice) });
-                $w->set_draw_as_radio(1);
+                $w->set_draw_as_radio(!$actions{$action}{use_checkbox});
                 $w;
             } $actions{$action}{choices}->()));
         }
