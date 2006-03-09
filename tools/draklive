@@ -314,6 +314,8 @@ sub create_initrd_for_media {
         cp_f('/usr/bin/strace', $initrd_tree . '/bin/');
         my @l = map { /functions:/ .. /^$/ ? do { s/\s//g; split /,/ } : () } `busybox`;
         shift @l;
+        #- don't override programs we copy in initrd
+        @l = difference2(\@l, [ qw(losetup mount) ]);
         symlink('busybox', $initrd_tree . "/bin/$_") foreach @l;
     }
 
