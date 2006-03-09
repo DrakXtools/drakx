@@ -128,7 +128,7 @@ unlink(map { $in->{prefix} . $_ } '/.autofsck',
 system('chroot', $in->{prefix}, 'rpm', '-e', 'draklive-install');
 
 #- enable first boot wizard at system boot
-output(get_system_root($live) . '/etc/sysconfig/firstboot', 'FIRSTBOOT=yes');
+output($in->{prefix} . '/etc/sysconfig/firstboot', 'FIRSTBOOT=yes');
 #- enable drakx-finish-install at system boot
 output($in->{prefix} . '/etc/sysconfig/finish-install', qq(
 FINISH_INSTALL=yes
