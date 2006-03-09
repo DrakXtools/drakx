@@ -277,6 +277,13 @@ sub setupBootloader__general {
     $b->{password2} ||= $b->{password} ||= '';
     $::Wizard_title = N("Boot Style Configuration");
     if (arch() !~ /ppc/) {
+	my (@boot_devices, %boot_devices);
+	foreach (bootloader::allowed_boot_parts($b, $all_hds)) {
+	    my $dev = "/dev/$_->{device}";
+	    push @boot_devices, $dev;
+	    $boot_devices{$dev} = $_->{info} ? "$dev ($_->{info})" : $dev;
+	}
+
 	$in->ask_from_({ messages => N("Bootloader main options"),
 			 title => N("Bootloader main options"),
 			 icon => 'banner-bootL',
@@ -293,7 +300,7 @@ sub setupBootloader__general {
 		       }, [
             { label => N("Bootloader to use"), val => \$b->{method}, list => \@method_choices, format => \&bootloader::method2text },
                 if_(arch() !~ /ia64/,
-            { label => N("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_->{device}" } bootloader::allowed_boot_parts($b, $all_hds) ], not_edit => !$::expert },
+            { label => N("Boot device"), val => \$b->{boot}, list => \@boot_devices, format => sub { $boot_devices{$_[0]} }, not_edit => !$::expert },
 		),
             { label => N("Delay before booting default image"), val => \$b->{timeout} },
             { text => N("Enable ACPI"), val => \$force_acpi, type => 'bool' },
