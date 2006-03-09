@@ -368,7 +368,10 @@ sub create_initrd_linuxrc {
                           "mount -t proc none /proc",
                           #- required for cdrom labels
                           "mount -t sysfs none /sys",
-                          q(busybox sh -c 'while busybox ps | busybox grep -q \\\[usb-stor-scan\\\]; do busybox sleep 1; done'),
+                          if_(member('usb-storage', @modules),
+                              #- wait some seconds for the usb-stor-scan process to be run
+                              "sleep 2",
+                              q(busybox sh -c 'while busybox ps | busybox grep -q \\\[usb-stor-scan\\\]; do busybox sleep 1; done')),
                           if_($live->{debug}, "/bin/sh"),
                           if_($pre, deref_array($pre)),
                           ($fs eq 'nfs' ? '/bin/mount -n -o ro,nolock' : 'mount') .
