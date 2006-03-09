@@ -2,7 +2,7 @@
 
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 10.4.11
+Version: 10.4.12
 Release: %mkrel 1
 Url:     http://qa.mandriva.com/twiki/bin/view/Main/DrakXTools
 Source0: %name-%version.tar.bz2
@@ -380,6 +380,41 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Mar  9 2006 Thierry Vignaud <tvignaud@mandriva.com> 10.4.12-1mdk
+- adduserdrake: sanitize the GUI (pixel)
+- autosetupprintqueues: fix Plug'n'Print: Name of user logged in on
+  the desktop is in /var/run/console/console.lock now -til()
+- diskdrake (pixel):
+  o allow to modify xbox partitions on non-xbox (stew)
+  o better management of reiserfs4
+  o enable creating a md with only one device (#21214)
+  o fix untranslated messages (me, #21326)
+  o load ide-generic as a fallback (me)
+- drakboot: enable/disable acpi/acpid services when needed
+  (blino, #21316)
+- drakbackup: create index files for direct-to-tape too clean up some
+  issues with direct-to-tape that came with the star additions
+  compress the index files (stew)
+- draksplash.pm: fix listing themes (blino)
+- finish-install (blino):
+  o ask license after language (#21266)
+  o ask for timezone (#21271)
+  o allow to rename an old user instead of creating a new one
+  o fix country selection
+  o reload sys clock from hc once we know the real timezone (#21511)
+  o don't try to destroy potentially non-existent wizard window (if
+    some steps are skipped for example)
+- harddrake: sync v4l lists with latests kernels
+- service_harddrake:
+  o autoconf bluetooth controllers (blino)
+  o autoconf laptop services when switching between laptop and desktop
+    and toggle the numlock service (blino)
+  o fix adding storage controllers
+  o manage hardware_raid too
+  o really detect firewire controllers (blino)
+  o update shorewall interfaces list when a new interface is detected
+    (blino, #21252)
+
 * Wed Feb 15 2006 Thierry Vignaud <tvignaud@mandriva.com> 10.4.11-1mdk
 - do require msec anymore (installed by draksec)
 - diskdrake: enable to resize big ext3 fs
