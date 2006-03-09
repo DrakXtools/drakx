@@ -390,8 +390,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o enable creating a md with only one device (#21214)
   o fix untranslated messages (me, #21326)
   o load ide-generic as a fallback (me)
-- drakboot: enable/disable acpi/acpid services when needed
-  (blino, #21316)
+- drakboot:
+  o enable/disable acpi/acpid services when needed (blino, #21316)
+  o display disk names (pixel, #21524)
 - drakbackup: create index files for direct-to-tape too clean up some
   issues with direct-to-tape that came with the star additions
   compress the index files (stew)
