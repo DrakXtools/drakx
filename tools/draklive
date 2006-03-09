@@ -723,8 +723,9 @@ sub record_usb_master {
       unless $opts->{boot_only};
     run_('umount', $live->{mnt});
     maybe_umount_device($device);
-    #- use syslinux -s, "safe, slow and stupid" version of SYSLINUX
-    run_('syslinux', '-s', $device) or die "unable to run syslinux on $device";
+    #- use syslinux -s, "safe, slow and stupid" version of SYSLINUX, unless specified otherwise
+    run_('syslinux', if_(!$media->{fast_syslinux}, '-s'), $device)
+      or die "unable to run syslinux on $device";
 }
 
 #- $opts:
