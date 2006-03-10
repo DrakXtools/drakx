@@ -37,3 +37,16 @@ booting.  Consequently, I've included the binary for mkhybrid-1.12b5.4, which
 does work.
 
 
+Addendum:       3/10/2005  Christiaan Welvaart <cjw@daneel.dyndns.org>
+-------------------------------------------------------------------------
+
+10.1 and 10.2 ppc isos were generated with mkcd, with the following options
+added to the mkisofs call:
+                         -T --netatalk -hfs -probe -part -no-desktop \\
+                         -hfs-volid "$config->{disc}[$i]->{label}" \\
+                         -map /usr/share/mkcd/hfs_mapping \\
+                         -magic /usr/share/mkcd/hfs_magic \\
+                         -hide '*.MacOS' -hide '*.DOS' \\
+                         -hide-joliet '*.Unix' -hide-joliet '*.MacOS' \\
+                         -hide-hfs '*.Unix' -hide-hfs '*.DOS' \\
+                         '-hfs-bless' $builddir/$i/boot \\
