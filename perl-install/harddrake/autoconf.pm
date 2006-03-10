@@ -41,6 +41,8 @@ sub pcmcia {
      PCIC_OPTS => "",
      CORE_OPTS => "",
     });
+    require services;
+    services::set_status("pcmcia", $pcic);
 }
 
 sub bluetooth {
