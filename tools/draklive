@@ -521,30 +521,10 @@ sub post_install_system {
     #- (don't use addVarsInSh from MDK::Common, it breaks shell escapes)
     substInFile { s/^PROMPT=.*/PROMPT=no/ } get_system_root($live) . '/etc/sysconfig/init';
 
-    #- disable first boot wizard at live boot
-    output(get_system_root($live) . '/etc/sysconfig/firstboot', 'FIRSTBOOT=no');
-    #- enable drakx-finish-install at live boot
-    output(get_system_root($live) . '/etc/sysconfig/finish-install', qq(
-FINISH_INSTALL=yes
-NETWORK=no
-AUTHENTICATION=no
-USERS=no
-));
-
     #- preselect guest user in kdm
     my $kdm_cfg = '/etc/kde/kdm/kdmrc';
     update_gnomekderc(get_system_root($live) . $kdm_cfg,
                       'X-:0-Greeter' => (PreselectUser => 'Default', DefaultUser => 'guest')) if -f $kdm_cfg;
-    #- don't make kbluetoothdrc display an annoying and useless popup window
-    #- FIXME: factorize with harddrake::autoconf
-    my $kbluetoothd_cfg = '/etc/kde/kbluetoothdrc';
-    update_gnomekderc(get_system_root($live) . $kbluetoothd_cfg,
-                      'Notification Messages',
-                      'kbluepinLocInfo-usr-lib-kdebluetooth' => 'false');
-    update_gnomekderc(get_system_root($live) . $kbluetoothd_cfg,
-                      'General',
-                      'AutoStart' => 'false');
-    chmod 0644, get_system_root($live) . $kbluetoothd_cfg;
 }
 
 sub create_loopback_files {
