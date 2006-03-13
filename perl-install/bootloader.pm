@@ -447,6 +447,9 @@ sub add_entry {
 	if ($conflicting) {
 	    #- replacing $conflicting with $to_add
 	    @{$bootloader->{entries}} = map { $_ == $conflicting ? $to_add : $_ } @{$bootloader->{entries}};
+
+	    #- we will keep $conflicting, but not with same symlinks if used by the entry to add
+	    expand_entry_symlinks($bootloader, $conflicting);
 	} else {
 	    #- we have found an unused label
 	    push @{$bootloader->{entries}}, $to_add;
@@ -459,7 +462,6 @@ sub add_entry {
 	$to_add = $conflicting;
 
 	if ($to_add->{label} eq 'linux') {
-	    expand_entry_symlinks($bootloader, $to_add);
 	    $label = kernel_str2label(vmlinuz2kernel_str($to_add->{kernel_or_dev}), 'use_long_name');
 	} else {
 	    $label =~ s/^alt\d*_//;
