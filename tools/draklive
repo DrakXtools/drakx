@@ -446,7 +446,7 @@ label live
 
 sub install_system {
     my ($live) = @_;
-    my @langs = uniq(@{$live->{regions}{$live->{system}{region}}}, @{$live->{system}{langs_always}});
+    my @langs = uniq((ref $live->{regions} ? @{$live->{regions}{$live->{system}{region}}} : ()), @{$live->{system}{langs_always}});
     run_({ timeout => 3600 },
          'drakx-in-chroot',
          $live->{system}{repository},
