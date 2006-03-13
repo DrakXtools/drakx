@@ -1046,9 +1046,11 @@ sub configure_new_printers {
 		# Set model selection cursor onto the "Raw Printer" entry.
 		$printer->{DBENTRY} = N("Raw printer (No driver)");
 		# Info about what was detected
-		my $info = N("(") . if_($p->{val}{DESCRIPTION},
-					$p->{val}{DESCRIPTION} . N(" on ")) .
-					$p->{port} . N(")");
+		my $info = $p->{val}{DESCRIPTION} ?
+            #-PO: this string is "device_description on port_number" formated (eg: "HP printer on 631"):
+            N("(%s on %s)", $p->{val}{DESCRIPTION}, $p->{port}) :
+              #-PO: a port number between round brackets:
+              N("(%s)", $p->{port});
 		# Remove wait message
 		undef $w;
 		# Choose the printer/driver from the list
