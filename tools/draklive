@@ -496,8 +496,10 @@ sub post_install_system {
     run_('patch', '-p0', '-s', '-N', '-F', 0, '-d', get_system_root($live), '-r', '/tmp', '-i', $_) foreach @patches;
 
     foreach (@{$live->{system}{files}}) {
-        my $dest = pop @$_;
-        cp_af(@$_, get_system_root($live) . $dest);
+        my ($source, $dest, $o_perm) = @$_;
+        $dest = get_system_root($live) . $dest;
+        cp_f($source, $dest);
+        chmod $o_perm, $dest if $o_perm;
     }
 
     #- make sure harddrake is run:
