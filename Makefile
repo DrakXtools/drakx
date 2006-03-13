@@ -57,7 +57,7 @@ clean:
 
 check:
 	@badrights=`find $(STAGE2_LIVE) | perl -lne 'print if !((stat)[2] & 4)'`; [ -z "$$badrights" ] || { echo "bad rights for files vvvvvvvvvvvvvvvvvvvvvvvvvv" ; echo "$$badrights" ; echo "bad rights for files ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" ; exit 1; }
-	@missing_kb=`find -name "Entries" | xargs perl -F/ -alne 'print $$ARGV =~ m|(.*)/CVS|, "/$$F[1]" if $$F[1] =~ /\.(png|gif|bmp|xcf|gz|bz2|tar|rdz|so|a|o|mar|img|exe)$$/ && $$F[4] ne "-kb"'` ; [ -z "$$missing_kb" ] || { echo "missing -kb in CVS for files vvvvvvvvvvvvvvvvvvvvvvvvvv" ; echo "$$missing_kb" ; echo "missing -kb in CVS for files ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" ; exit 1; }
+	@missing_kb=`find -name "Entries" | xargs perl -F/ -alne 'print $$ARGV =~ m|(.*)/CVS|, "/$$F[1]" if $$F[1] =~ /\.(png|gif|bmp|xcf|gz|bz2|tar|rdz|so|a|o|mar|img|exe|dia)$$/ && $$F[4] ne "-kb"'` ; [ -z "$$missing_kb" ] || { echo "missing -kb in CVS for files vvvvvvvvvvvvvvvvvvvvvvvvvv" ; echo "$$missing_kb" ; echo "missing -kb in CVS for files ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" ; exit 1; }
 	$(MAKE) -C perl-install check
 
 upload: 
