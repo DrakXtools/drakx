@@ -131,6 +131,17 @@ our @tree =
       checked_on_boot => 0,
      },
 
+     # AGP devices must be detected prior to video cards because some DRM drivers doesn't like be loaded
+     # after agpgart thus order in /etc/modprobe.preload is important (modules.pm should enforce such sorting):
+     {
+      class => "AGP",
+      string => N("AGP controllers"),
+      icon => "memory.png",
+      configurator => "",
+      detector => sub { f(modules::probe_category('various/agpgart')) },
+      checked_on_boot => 1,
+     },
+
      {
       class => "VIDEO",
       string => N("Videocard"),
@@ -308,15 +319,6 @@ our @tree =
       configurator => "",
       detector => sub { grep { member($_->{name}, 'Cache', 'Memory Module') } detect_devices::dmidecode() },
       checked_on_boot => 0,
-     },
-
-     {
-      class => "AGP",
-      string => N("AGP controllers"),
-      icon => "memory.png",
-      configurator => "",
-      detector => sub { f(modules::probe_category('various/agpgart')) },
-      checked_on_boot => 1,
      },
 
      {
