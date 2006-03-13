@@ -2401,6 +2401,8 @@ sub hplip_bus_warning {
 	$modelstr =~ s/_/ /g;
 	my $choice = $in->ask_from_list
 	    (N("Add a new printer"),
+          #-PO: here, the second %s will be replaced by eiher "to a parallel port",
+          #-PO: "to the USB" or "via the the network:
 	     N("Your printer %s is currently connected %s.",
 	       $modelstr,
 	       ($bus eq "par" ? N("to a parallel port") :
