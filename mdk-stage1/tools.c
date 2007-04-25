@@ -612,12 +612,3 @@ int scall_(int retval, char * msg, char * file, int line)
                 log_perror(tmp);
         return retval;
 }
-
-void lowercase(char *s)
-{
-	int i = 0;
-	while (s[i]) {
-		s[i] = tolower(s[i]);
-		i++;
-	}
-}

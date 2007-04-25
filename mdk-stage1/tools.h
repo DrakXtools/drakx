@@ -60,7 +60,6 @@ char * floppy_device(void);
 char * asprintf_(const char *msg, ...);
 int scall_(int retval, char * msg, char * file, int line);
 #define scall(retval, msg) scall_(retval, msg, __FILE__, __LINE__)
-void lowercase(char *s);
 
 struct param_elem
 {

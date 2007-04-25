@@ -240,7 +240,7 @@ void end_progression_raw(void)
 }
 
 
-enum return_type ask_from_list_index(char *msg, char ** elems, char ** elems_comments, int *answer)
+enum return_type ask_from_list_comments(char *msg, char ** elems, char ** elems_comments, char ** choice)
 {
 	int justify_number = 1;
 	void print_choice_number(int i) {
@@ -296,11 +296,17 @@ enum return_type ask_from_list_index(char *msg, char ** elems, char ** elems_com
 		return RETURN_BACK;
 
 	if (j >= 1 && j <= i) {
-		*answer = j - 1;
+		*choice = strdup(sav_elems[j-1]);
 		return RETURN_OK;
 	}
 
 	return RETURN_ERROR;
+}
+
+
+enum return_type ask_from_list(char *msg, char ** elems, char ** choice)
+{
+	return ask_from_list_comments(msg, elems, NULL, choice);
 }
 
 
