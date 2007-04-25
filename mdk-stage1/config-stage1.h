@@ -75,8 +75,8 @@
 
 /* path to mirror list for net install */
 #ifndef DISABLE_NETWORK
-#define MIRRORLIST_HOST "www.mandrivalinux.com"
-#define MIRRORLIST_PATH "/mirrorsfull.list"
+#define MIRRORLIST_HOST "api.mandriva.com"
+#define MIRRORLIST_PATH "/mirrors"
 #endif
 
 #endif
