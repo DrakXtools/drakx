@@ -781,7 +781,7 @@ static enum return_type get_mirrorlist(mirrorlist_t mirrorlist, int start, char 
 
 	int use_http_proxy = http_proxy_host && http_proxy_port && !streq(http_proxy_host, "") && !streq(http_proxy_port, "");
 	lowercase(type);
-	snprintf(path, sizeof(path) -1, "%s/%s.%s.%s.list", MIRRORLIST_PATH, type, version, ARCH);
+	snprintf(path, sizeof(path), "%s/%s.%s.%s.list", MIRRORLIST_PATH, type, version, ARCH);
 
 	fd = http_download_file(MIRRORLIST_HOST, path, &size, use_http_proxy ? "http" : NULL, http_proxy_host, http_proxy_port);
 	if (fd < 0) {
