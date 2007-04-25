@@ -14,6 +14,7 @@
 
 #include <stdlib.h>
 #include <stdarg.h>
+#include <string.h>
 
 #include <probing.h>
 
@@ -42,4 +43,22 @@ void error_message(char *msg, ...)
 	va_start(args, msg);
 	verror_message(msg, args);
 	va_end(args);
+}
+
+enum return_type ask_from_list_comments(char *msg, char ** elems, char ** elems_comments, char ** choice)
+{
+	int answer = 0;
+	enum return_type results;
+
+	results = ask_from_list_index(msg, elems, elems_comments, &answer);
+
+	if (results == RETURN_OK)
+		*choice = strdup(elems[answer]);
+
+	return results;
+}
+
+enum return_type ask_from_list(char *msg, char ** elems, char ** choice)
+{
+	return ask_from_list_comments(msg, elems, NULL, choice);
 }
