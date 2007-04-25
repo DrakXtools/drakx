@@ -23,11 +23,6 @@ sub attach_object {
     $o->{object} = $service->get_object($o->{path}, $o->{interface});
 }
 
-sub dispatch {
-    my ($o) = @_;
-    $o->{bus}{connection}->dispatch;
-}
-
 sub call_method {
     my ($o, $method, @args) = @_;
     $o->{object}->$method(@args);
@@ -41,7 +36,7 @@ sub safe_call_method {
     };
     if ($@) {
         print STDERR "($method) exception: $@\n";
-        $o->dispatch;
+        $o->{bus}{connection}->dispatch;
         return;
     }
     @ret;
@@ -49,8 +44,12 @@ sub safe_call_method {
 
 sub set_gtk2_watch {
     my ($o) = @_;
+    set_gtk2_watch_helper($o->{bus});
+}
 
-    $o->{bus}{connection}->set_watch_callbacks(sub {
+sub set_gtk2_watch_helper {
+    my ($bus) = @_;
+    $bus->{connection}->set_watch_callbacks(sub {
         my ($con, $watch) = @_;
         my $flags = $watch->get_flags;
         require Net::DBus::Binding::Watch;
@@ -65,7 +64,7 @@ sub set_gtk2_watch {
         #- do nothing for WRITABLE watch, we dispatch when needed
     }, undef, undef); #- do nothing when watch is disabled or toggled yet
 
-    $o->dispatch;
+    $bus->{connection}->dispatch;
 }
 
 1;

@@ -17,6 +17,9 @@
 
 #include "frontend.h"
 
+int wireless_open_socket();
+int wireless_close_socket(int socket);
+int wireless_is_aware(int socket, const char *ifname);
 enum return_type configure_wireless(const char *ifname);
 
 #endif

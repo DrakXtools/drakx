@@ -441,8 +441,8 @@ static int _http_download_file(char * hostname, char * remotename, int * size, c
 		return FTPERR_FAILED_CONNECT;
 	}
 
-        buf = proxyprotocol ? asprintf_("GET %s://%s%s HTTP/0.9\r\nHost: %s\r\n\r\n", proxyprotocol, hostname, remotename, hostname)
-                            : asprintf_("GET %s HTTP/0.9\r\nHost: %s\r\n\r\n", remotename, hostname);
+        buf = proxyprotocol ? asprintf_("GET %s://%s%s HTTP/1.0\r\nHost: %s\r\n\r\n", proxyprotocol, hostname, remotename, hostname)
+                            : asprintf_("GET %s HTTP/1.0\r\nHost: %s\r\n\r\n", remotename, hostname);
 
 	write(sock, buf, strlen(buf));
 

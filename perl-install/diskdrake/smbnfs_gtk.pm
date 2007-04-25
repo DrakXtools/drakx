@@ -7,8 +7,9 @@ use fs::get;
 use diskdrake::interactive;
 use common;
 use interactive;
-use network::smb;
-use network::nfs;
+use fs::remote::smb;
+use fs::remote::nfs;
+use mygtk2 qw(gtknew gtkset);
 use ugtk2 qw(:helpers :wrappers :create);
 
 my ($all_hds, $in, $tree_model, $current_entry, $current_leaf, %icons);
@@ -59,7 +60,7 @@ sub per_entry_info_box {
     my ($box, $kind, $entry) = @_;
     my $info = $entry ? diskdrake::interactive::format_raw_hd_info($entry) : '';
     $kind->{per_entry_info_box}->destroy if $kind->{per_entry_info_box};
-    gtkpack($box, $kind->{per_entry_info_box} = gtkadd(Gtk2::Frame->new(N("Details")), gtkset_justify(Gtk2::Label->new($info), 'left')));
+    gtkpack($box, $kind->{per_entry_info_box} = gtknew('Frame', text => N("Details"), child => gtknew('Label', text => $info, justify => 'left')));
 }
 
 sub per_entry_action_box {
@@ -70,7 +71,7 @@ sub per_entry_action_box {
 
     push @buttons, map {
 	  my $s = $_;
-	  gtksignal_connect(Gtk2::Button->new(translate($s)), clicked => sub { try($kind, $s, {}, $entry) });
+	  gtknew('Button', text => translate($s), clicked => sub { try($kind, $s, {}, $entry) });
       } (if_($entry->{isMounted}, N_("Unmount")),
 	 if_($entry->{mntpoint} && !$entry->{isMounted}, N_("Mount"))) if $entry;
 
@@ -82,11 +83,11 @@ sub per_entry_action_box {
 	    );
     push @buttons, map {
         my ($txt, $f) = @$_;
-        $f ? gtksignal_connect(Gtk2::Button->new(translate($txt)), clicked => sub { try_($kind, $txt, $f, $entry) })
-          : Gtk2::Label->new("");
+        $f ? gtknew('Button', text => translate($txt), clicked => sub { try_($kind, $txt, $f, $entry) })
+          : gtknew('Label', text => "");
     } group_by2(@l);
     
-    gtkadd($box, gtkpack(Gtk2::HBox->new(0,0), @buttons));
+    gtkadd($box, gtknew('HBox', children_loose => [ @buttons]));
 }
 
 sub done {
@@ -140,7 +141,7 @@ sub import_tree {
     $tree->set_headers_visible(0);
 
     foreach ('default', 'server', 'has_mntpoint', 'mounted') {
-	$icons{$_} = gtkcreate_pixbuf("smbnfs_$_");
+	$icons{$_} = gtknew('Pixbuf', file => "smbnfs_$_");
     }
 
     my $add_server = sub {
@@ -161,13 +162,13 @@ sub import_tree {
 
 	if ($server->{username}) {
 	    $in->ask_warn('', N("Can not login using username %s (bad password?)", $server->{username}));
-	    network::smb::remove_bad_credentials($server);
+	    fs::remote::smb::remove_bad_credentials($server);
 	} else {
-	    if (my @l = network::smb::authentications_available($server)) {
+	    if (my @l = fs::remote::smb::authentications_available($server)) {
 		my $user = $in->ask_from_list_(N("Domain Authentication Required"),
 					       N("Which username"), [ @l, N_("Another one") ]) or return;
 		if ($user ne 'Another one') {
-		    network::smb::read_credentials($server, $user);
+		    fs::remote::smb::read_credentials($server, $user);
 		    goto $find_exports;
 		}
 	    }
@@ -202,12 +203,12 @@ sub import_tree {
     };
 
     { 
-	my $search = Gtk2::Button->new(N("Search servers"));
+	my $search = gtknew('Button', text => N("Search servers"));
 	gtkpack__($info_box, 
 		  gtksignal_connect($search,
 				    clicked => sub {
 					$add_server->($_) foreach sort { $a->{name} cmp $b->{name} } $kind->find_servers;
-					$search->set_label(N("Search new servers"));
+					gtkset($search, text => N("Search new servers"));
 				    }));
     }
 
@@ -241,16 +242,16 @@ sub add_smbnfs {
     my ($widget, $kind) = @_;
     die if $kind->{main_box};
 
-    $kind->{info_box} = Gtk2::VBox->new(0,0);
-    $kind->{display_box} = create_scrolled_window(import_tree($kind, $kind->{info_box}));
-    $kind->{action_box} = Gtk2::HBox->new(0,0);
+    $kind->{info_box} = gtknew('VBox');
+    $kind->{display_box} = gtknew('ScrolledWindow', child => import_tree($kind, $kind->{info_box}));
+    $kind->{action_box} = gtknew('HBox');
     $kind->{main_box} =
-      gtkpack_(Gtk2::VBox->new(0,7),
-	       1, gtkpack(Gtk2::HBox->new(0,7),
-			  gtkset_size_request($kind->{display_box}, 200, 0),
-			  $kind->{info_box}),
+      gtknew('VBox', spacing => 7, children => [
+	       1, gtknew('HBox', spacing => 7, children_loose => [
+			  gtkset($kind->{display_box}, width => 200),
+			  $kind->{info_box}]),
 	       0, $kind->{action_box},
-	     );
+	     ]);
 
     $widget->add($kind->{main_box});
     $current_entry = undef;
@@ -259,11 +260,11 @@ sub add_smbnfs {
 }
 
 sub nfs2kind() {
-    network::nfs->new({ type => 'nfs', name => 'NFS', val => $all_hds->{nfss}, no_auto => 1 });
+    fs::remote::nfs->new({ type => 'nfs', name => 'NFS', val => $all_hds->{nfss}, no_auto => 1 });
 }
 
 sub smb2kind() {
-    network::smb->new({ type => 'smb', name => 'Samba', val => $all_hds->{smbs}, no_auto => 1 });
+    fs::remote::smb->new({ type => 'smb', name => 'Samba', val => $all_hds->{smbs}, no_auto => 1 });
 }
 
 

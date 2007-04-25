@@ -1,7 +1,7 @@
 #! /usr/bin/perl
 # $Id$
 
-# Copyright (C) 2001-2005 Mandriva
+# Copyright (C) 2001-2006 Mandriva
 # Yves Duret <yduret at mandriva.com>
 # some code is Copyright: (C) 1999, Michael T. Babcock <mikebabcock@pobox.com>
 #
@@ -26,6 +26,7 @@ use lib qw(/usr/lib/libDrakX);
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 use common;
 use interactive;
+use mygtk2 qw(gtknew); #- do not import gtkadd which conflicts with ugtk2 version
 use ugtk2 qw(:create :dialogs :helpers :wrappers);
 
 $ugtk2::wm_icon = "/usr/share/mcc/themes/default/logdrake-mdk.png";
@@ -47,7 +48,7 @@ my $h = chomp_(`hostname -s`);
 
 $ugtk2::wm_icon = "logdrake";
 my $explain_title = N("Mandriva Linux Tools Logs");
-my $my_win = ugtk2->new($isExplain ? $explain_title : N("Logdrake"));
+my $my_win = ugtk2->new($isExplain ? $explain_title : N("Logs"));
 
 unless ($::isEmbedded) {
     $my_win->{window}->set_border_width(5);
@@ -124,16 +125,14 @@ my %toggle;
 
 gtkadd($my_win->{window},
        gtkpack_(Gtk2::VBox->new(0,0),
-		if_(!$isExplain && !$::isEmbedded, 0, N("A tool to monitor your logs")),
-		if_(!$isFile, 0, gtkadd(Gtk2::Frame->new(N("Settings")),
-					  gtkpack__(Gtk2::VBox->new(0,2),
-						    gtkpack__(Gtk2::VBox->new(0,2),
+		if_(!$isExplain && !$::isEmbedded, 0, gtknew('Title1', label => N("A tool to monitor your logs"))),
+		if_(!$isFile, 0, gtkpack__(Gtk2::VBox->new(0,2),
+                                     gtknew('Title2', label => N("Settings")),
 							      # N("Show lines"),
 							      gtkpack__(Gtk2::HBox->new(0,0),
 									" " . N("Matching") . " ", my $e_yes = Gtk2::Entry->new,
 									" " . N("but not matching") . " ", my $e_no = Gtk2::Entry->new
-									)
-							      ),
+									),
 						    gtkpack_(Gtk2::HBox->new(0,0),
 							     1, gtkadd(gtkset_border_width(Gtk2::Frame->new(N("Choose file")),2),
 								       gtkpack(gtkset_border_width(Gtk2::VBox->new(0,0),0),
@@ -155,11 +154,10 @@ gtkadd($my_win->{window},
 							     ),
 						    $yy,
 						    )
-					  )
 		    ),
-		!$isExplain ? (1, gtkadd(Gtk2::Frame->new(N("Content of the file")),
-					   create_scrolled_window($log_text)
-					   )) : (1, create_scrolled_window($log_text)),
+		!$isExplain ? (0, gtknew('Title2', label => N("Content of the file")),
+					   1, create_scrolled_window($log_text)
+					   ) : (1, create_scrolled_window($log_text)),
 		if_(!$isExplain, 0, gtkadd(gtkset_border_width(gtkset_layout(Gtk2::HButtonBox->new, 'end'), 5),
 					      if_(!$isFile, gtksignal_connect(Gtk2::Button->new(N("Mail alert")), 
 										clicked => sub { 

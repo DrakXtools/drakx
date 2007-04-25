@@ -1,0 +1,111 @@
+- fix ext3 formatting with label and progress bar (#30032)
+
+Version 10.4.127 - 30 March 2007, by Olivier "blino" Blin
+
+- don't configure /etc/kde/kdm/kdmrc if it doesn't exist
+  (other kdmrc.rpmnew will be created, many important values will be missing)
+- finish-install: source mandriva-release profile script to get
+  correct gtk theme (Frederic Crozat)
+
+Version 10.4.126 - 29 March 2007, by Olivier "blino" Blin
+
+- use pci_domain when matching sysfs device and computing
+  sysfs device path
+
+Version 10.4.125 - 29 March 2007, by Olivier "blino" Blin
+
+- fix multiple detection of PCI network cards with the same driver (#29688)
+
+Version 10.4.123 - 26 March 2007, by Olivier "blino" Blin
+
+- blacklist ax*, rose*, nr*, bce* and scc* Hamradio devices
+  when detecting network interfaces (#28776)
+- harddrake service: fallback on the right driver for ATI gfx cards
+  when fglrx module is missing
+- introduce shared bootloader functions so that draklive-install and
+  drakboot add correct command line parameters (such as resume=)
+- use grub by default (noticeable in One install)
+
+Version 10.4.121 - 23 March 2007, by Thierry Vignaud
+
+- interactive::curses: 
+  o handle multi-line labels, and wrap too long labels (#29060)
+- do not use bold&big for advanced_messages
+  (fixes authentication choice being big & ugly, #28676)
+
+Version 10.4.118 - 22 March 2007, by Thierry Vignaud
+
+- diskdrake: 
+  o minimal support for switching from ntfs to ntfs-3g
+  o move ntfs in the list of "important" filesystems
+- enable to set up 32bit media on x86_64
+- fix lang configuration in KDE by writting it in current profile
+
+Version 10.4.117 - 21 March 2007, by Thierry Vignaud
+
+- detect all known TV cards (#29633)
+- harddrake service:
+  o load modules for DVB & TV cards (#29633)
+  o switch ATI cards to free driver if binary driver isn't installed
+- use http://api.mandriva.com/mirrors/$type.$version.$arch instead of simply
+  $version.$arch (useful to differentiate CorpoDesktop4)
+
+Version 10.4.116 - 19 March 2007, by Thierry Vignaud
+
+- handle more drivers (dvb, ethernet, gigabit, ide, pcmcia, sata,
+  sound, tv, usb hosts, wan, webcam, wireless)
+- diskdrake: handle mkntfs
+- localedrake: remove error running grub-gfxmenu when /boot/gfxmenu doesn't exit
+
+Version 10.4.114 - 16 March 2007, by Thierry Vignaud
+
+- do not load anymore floppy module (#23158, #25975, #28911, #29280)
+- fix testing success exit of child processes (mdkapplet)
+- localedrake: set grub gfxmenu language
+
+Version 10.4.113 - 16 March 2007, by Pascal "Pixel" Rigaux
+
+- drakboot --boot: allow choosing a non-installed bootloader
+  (ease switching from lilo to grub)
+- use grub-gfxmenu comand to configure /boot/gfxmenu for grub
+
+Version 10.4.112 - 15 March 2007, by Thierry Vignaud
+
+- die on downloading mirror list faillure
+- log using mirror API into explanations
+
+Version 10.4.110 - 15 March 2007, by Thierry Vignaud
+
+- add sizing dialog support for rpmdrake
+- do not buggily use speedstep-centrino on Core2 duo, but use it on
+  P4M (as initially intended?) (blino)
+
+Version 10.4.108 - 13 March 2007, by Thierry Vignaud
+
+- load tifm_sd if needed (#25133)
+- drakbug:
+  o fix finding package for keyboarddrake
+  o fix managing --incident MandrivaUpdate
+  o menudrake was replaced by drakmenustyle
+  o some tools were splited out of drakxtools; enable to lookup the proper package
+
+Version 10.4.105 - 9 March 2007, by Thierry Vignaud
+
+- configure "tifm_7xx1" driven card_reader (#25133)
+- enhance wrapping in some dialogs
+
+Version 10.4.104 - 7 March 2007, by Thierry Vignaud
+
+- do not bother configure old modutils
+- handle SD cards (#24054)
+- harddrake2: list SD card readers in their own category
+
+Version 10.4.102 - 6 March 2007, by Thierry Vignaud
+
+- diskdrake in text mode: when choosing a partition, "Empty space on hdx"
+  instead of "Empty" (#29087) 
+- harddrake service: 
+  o adapt to new nvidia drivers (#29052)
+  o when switching from nvidia to nv, do setup gl_conf alternative
+- symlinkf_update_alternatives: remove broken files for missing slave files
+  (useful for not having a broken /etc/modprobe.d/nvidia.conf (XFdrake))

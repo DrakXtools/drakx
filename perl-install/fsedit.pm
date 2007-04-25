@@ -22,20 +22,20 @@ use fs;
 %suggestions = (
   N_("simple") => [
     { mntpoint => "/",     size => 300 << 11, fs_type => 'ext3', ratio => 5, maxsize => 8000 << 11 },
-    { mntpoint => "swap",  size =>  64 << 11, fs_type => 'swap', ratio => 1, maxsize => 1100 << 11 },
+    { mntpoint => "swap",  size =>  64 << 11, fs_type => 'swap', ratio => 1, maxsize => 4000 << 11 },
     { mntpoint => "/home", size => 300 << 11, fs_type => 'ext3', ratio => 3 },
   ], N_("with /usr") => [
-    { mntpoint => "/",     size => 250 << 11, fs_type => 'ext3', ratio => 1, maxsize => 2000 << 11 },
-    { mntpoint => "swap",  size =>  64 << 11, fs_type => 'swap', ratio => 1, maxsize => 1100 << 11 },
+    { mntpoint => "/",     size => 250 << 11, fs_type => 'ext3', ratio => 1, maxsize => 4000 << 11 },
+    { mntpoint => "swap",  size =>  64 << 11, fs_type => 'swap', ratio => 1, maxsize => 4000 << 11 },
     { mntpoint => "/usr",  size => 300 << 11, fs_type => 'ext3', ratio => 4, maxsize => 8000 << 11 },
     { mntpoint => "/home", size => 100 << 11, fs_type => 'ext3', ratio => 3 },
   ], N_("server") => [
-    { mntpoint => "/",     size => 150 << 11, fs_type => 'ext3', ratio => 1, maxsize => 1600 << 11 },
-    { mntpoint => "swap",  size =>  64 << 11, fs_type => 'swap', ratio => 2, maxsize => 1600 << 11 },
+    { mntpoint => "/",     size => 150 << 11, fs_type => 'ext3', ratio => 1, maxsize => 4000 << 11 },
+    { mntpoint => "swap",  size =>  64 << 11, fs_type => 'swap', ratio => 2, maxsize => 4000 << 11 },
     { mntpoint => "/usr",  size => 300 << 11, fs_type => 'ext3', ratio => 4, maxsize => 8000 << 11 },
     { mntpoint => "/var",  size => 200 << 11, fs_type => 'ext3', ratio => 3 },
     { mntpoint => "/home", size => 150 << 11, fs_type => 'ext3', ratio => 3 },
-    { mntpoint => "/tmp",  size => 150 << 11, fs_type => 'ext3', ratio => 2, maxsize => 2000 << 11 },
+    { mntpoint => "/tmp",  size => 150 << 11, fs_type => 'ext3', ratio => 2, maxsize => 4000 << 11 },
   ],
 );
 foreach (values %suggestions) {
@@ -99,7 +99,7 @@ sub lvms {
 }
 
 sub handle_dmraid {
-    my ($drives) = @_;
+    my ($drives, $o_in) = @_;
 
     @$drives > 1 or return;
 
@@ -110,6 +110,16 @@ sub handle_dmraid {
 
     my @vgs = fs::dmraid::vgs();
     log::l(sprintf('dmraid: ' . join(' ', map { "$_->{device} [" . join(' ', @{$_->{disks}}) . "]" } @vgs)));
+
+    if ($o_in && @vgs && $::isInstall) {
+	@vgs = grep {
+	    $o_in->ask_yesorno('', N("BIOS software RAID detected on disks %s. Activate it?", join(' ', @{$_->{disks}})), 1);
+	} @vgs or do {
+	    fs::dmraid::call_dmraid('-an');
+	    return;
+	};
+    }
+    log::l("using dmraid on " . join(' ', map { $_->{device} } @vgs));
 
     my @used_hds = map {
 	my $part = fs::get::device2part($_, $drives) or log::l("handle_dmraid: can't find $_ in known drives");
@@ -129,7 +139,7 @@ sub get_hds {
     my @drives = detect_devices::hds();
 
     #- replace drives used in dmraid by the merged name
-    handle_dmraid(\@drives) if !$flags->{nodmraid};
+    handle_dmraid(\@drives, $o_in) if !$flags->{nodmraid};
 
     foreach my $hd (@drives) {
 	$hd->{file} = devices::make($hd->{device});
@@ -146,6 +156,7 @@ sub get_hds {
 	if (my $err = $@) {
 	    log::l("test_for_bad_drives returned $err");
 	    if ($err =~ /write error:/) { 
+		log::l("setting $hd->{device} readonly");
 		$hd->{readonly} = 1;
 	    } elsif ($err =~ /read error:/) {
 		next;
@@ -159,11 +170,7 @@ sub get_hds {
 	    partition_table::raw::zero_MBR_and_dirty($hd);
 	} else {
 	    my $handle_die_and_cdie = sub {
-		if ($hd->{readonly}) {
-		    log::l("using /proc/partitions since diskdrake failed :(");
-		    fs::proc_partitions::use_($hd);
-		    1;
-		} elsif (my $type = fs::type::type_subpart_from_magic($hd)) {
+		if (my $type = fs::type::type_subpart_from_magic($hd)) {
 		    #- non partitioned drive?
 		    if (exists $hd->{usb_description} && $type->{fs_type}) {
 			#- USB keys
@@ -181,6 +188,10 @@ sub get_hds {
 		    } else {
 			0;
 		    }
+		} elsif ($hd->{readonly}) {
+		    log::l("using /proc/partitions since diskdrake failed :(");
+		    fs::proc_partitions::use_($hd);
+		    1;
 		} else {
 		    0;
 		}
@@ -410,11 +421,11 @@ You should create a /boot partition first") if $mntpoint eq "/" && isLVM($part) 
     cdie N("This directory should remain within the root filesystem")
       if member($mntpoint, qw(/root));
     die N("This directory should remain within the root filesystem")
-      if member($mntpoint, qw(/bin /dev /etc /lib /sbin /mnt));
+      if member($mntpoint, qw(/bin /dev /etc /lib /sbin /mnt /media));
     die N("You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount point\n")
       if !isTrueLocalFS($part) && $mntpoint eq '/';
     die N("You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount point\n")
-      if !isTrueFS($part) && member($mntpoint, fs::type::directories_needed_to_boot());
+      if !isTrueFS($part) && member($mntpoint, '/home', fs::type::directories_needed_to_boot());
     die N("You can not use an encrypted file system for mount point %s", $mntpoint)
       if $part->{options} =~ /encrypted/ && member($mntpoint, qw(/ /usr /var /boot));
 
@@ -443,7 +454,7 @@ sub allocatePartitions {
 
     my @to_add = @$to_add;
  
-    foreach my $part_ (fs::get::holes($all_hds)) {
+    foreach my $part_ (fs::get::holes($all_hds, 'non_readonly')) {
 	my ($start, $size, $dev) = @$part_{"start", "size", "rootDevice"};
 	my ($part, $suggested);
 	while ($suggested = suggest_part($part = { start => $start, size => 0, maxsize => $size, rootDevice => $dev }, 

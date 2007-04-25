@@ -87,8 +87,7 @@ sub create_user {
 
     if (@existing && $::isInstall && ($uid != $existing[4] || $gid != $existing[5])) {
 	log::l("chown'ing $home from $existing[4].$existing[5] to $uid.$gid");
-	require commands;
-	eval { commands::chown_("-r", "$uid.$gid", "$::prefix$home") };
+	eval { common::chown_('recursive', $uid, $gid, "$::prefix$home") };
     }
 }
 
@@ -104,24 +103,100 @@ sub add_users {
     }
 }
 
-sub hdInstallPath() {
-    my $tail = first(readlink("/tmp/image") =~ m|^(?:/tmp/)?hdimage/*(.*)|);
-    my $head = first(readlink("/tmp/hdimage") =~ m|$::prefix(.*)|);
-    log::l("search HD install path, tail=$tail, head=$head, tail defined=" . to_bool(defined $tail));
-    defined $tail && ($head ? "$head/$tail" : "/mnt/hd/$tail");
-}
-
 sub install_acpi_pkgs {
     my ($do_pkgs, $b) = @_;
 
     my $acpi = bootloader::get_append_with_key($b, 'acpi');
     my $use_acpi = !member($acpi, 'off', 'ht');
     if ($use_acpi) {
-	$do_pkgs->ensure_is_installed('acpi', '/usr/bin/acpi');
-	$do_pkgs->ensure_is_installed('acpid', '/usr/sbin/acpid');
+	$do_pkgs->ensure_is_installed('acpi', '/usr/bin/acpi', $::isInstall);
+	$do_pkgs->ensure_is_installed('acpid', '/usr/sbin/acpid', $::isInstall);
     }
     require services;
     services::set_status($_, $use_acpi, $::isInstall) foreach qw(acpi acpid);
+}
+
+sub setupBootloaderBeforeStandalone {
+    my ($do_pkgs, $b, $all_hds, $fstab) = @_;
+    require keyboard;
+    my $keyboard = keyboard::read_or_default();
+    my $allow_fb = listlength(cat_("/proc/fb"));
+    my $cmdline = cat_('/proc/cmdline');
+    my $vga_fb = first($cmdline =~ /\bvga=(\S+)/);
+    my $quiet = $cmdline =~ /\bsplash=silent\b/;
+    setupBootloaderBefore($do_pkgs, $b, $all_hds, $fstab, $keyboard, $allow_fb, $vga_fb, $quiet);
+}
+
+sub setupBootloaderBefore {
+    my ($do_pkgs, $bootloader, $all_hds, $fstab, $keyboard, $allow_fb, $vga_fb, $quiet) = @_;
+    require bootloader;
+
+    #- auto_install backward compatibility
+    #- one should now use {message_text}
+    if ($bootloader->{message} =~ m!^[^/]!) {
+	$bootloader->{message_text} = delete $bootloader->{message};
+    }
+
+    #- remove previous ide-scsi lines
+    bootloader::modify_append($bootloader, sub {
+	my ($_simple, $dict) = @_;
+	@$dict = grep { $_->[1] ne 'ide-scsi' } @$dict;
+    });
+
+    if (cat_("/proc/cmdline") =~ /mem=nopentium/) {
+	bootloader::set_append_with_key($bootloader, mem => 'nopentium');
+    }
+    if (cat_("/proc/cmdline") =~ /\b(pci)=(\S+)/) {
+	bootloader::set_append_with_key($bootloader, $1, $2);
+    }
+    if (my ($acpi) = cat_("/proc/cmdline") =~ /\bacpi=(\w+)/) {
+	if ($acpi eq 'ht') {
+	    #- the user is using the default, which may not be the best
+	    my $year = detect_devices::computer_info()->{BIOS_Year};
+	    if ($year >= 2002) {
+		log::l("forcing ACPI on recent bios ($year)");
+		$acpi = '';
+	    }
+	}
+	bootloader::set_append_with_key($bootloader, acpi => $acpi);
+    }
+    if (cat_("/proc/cmdline") =~ /\bnoapic/) {
+	bootloader::set_append_simple($bootloader, 'noapic');
+    }
+    my ($MemTotal) = cat_("/proc/meminfo") =~ /^MemTotal:\s*(\d+)/m;
+    if (my ($biggest_swap) = sort { $b->{size} <=> $a->{size} } grep { isSwap($_) } @$fstab) {
+	log::l("MemTotal: $MemTotal < ", $biggest_swap->{size} / 2);
+	if ($MemTotal < $biggest_swap->{size} / 2) {
+	    bootloader::set_append_with_key($bootloader, resume => devices::make($biggest_swap->{device}));
+	}
+    }
+
+    #- check for valid fb mode to enable a default boot with frame buffer.
+    my $vga = $allow_fb && (!detect_devices::matching_desc__regexp('3D Rage LT') &&
+                            !detect_devices::matching_desc__regexp('Rage Mobility [PL]') &&
+                            !detect_devices::matching_desc__regexp('i740') &&
+                            !detect_devices::matching_desc__regexp('Matrox') &&
+                            !detect_devices::matching_desc__regexp('Tseng.*ET6\d00') &&
+                            !detect_devices::matching_desc__regexp('SiS.*SG86C2.5') &&
+                            !detect_devices::matching_desc__regexp('SiS.*559[78]') &&
+                            !detect_devices::matching_desc__regexp('SiS.*300') &&
+                            !detect_devices::matching_desc__regexp('SiS.*540') &&
+                            !detect_devices::matching_desc__regexp('SiS.*6C?326') &&
+                            !detect_devices::matching_desc__regexp('SiS.*6C?236') &&
+                            !detect_devices::matching_desc__regexp('Voodoo [35]|Voodoo Banshee') && #- 3d acceleration seems to bug in fb mode
+                            !detect_devices::matching_desc__regexp('828[14][05].* CGC') #- i810 & i845 now have FB support during install but we disable it afterwards
+                               );
+    my $force_vga = $allow_fb && (detect_devices::matching_desc__regexp('SiS.*630') || #- SiS 630 need frame buffer.
+                                  detect_devices::matching_desc__regexp('GeForce.*Integrated') #- needed for fbdev driver (hack).
+                                 );
+
+    #- propose the default fb mode for kernel fb, if aurora or bootsplash is installed.
+    my $need_fb = $do_pkgs->are_installed('bootsplash');
+    bootloader::suggest($bootloader, $all_hds,
+                        vga_fb => ($force_vga || $vga && $need_fb) && $vga_fb,
+                        quiet => $quiet);
+
+    $bootloader->{keytable} ||= keyboard::keyboard2kmap($keyboard);
 }
 
 sub setupBootloader {
@@ -139,6 +214,18 @@ sub setupBootloader {
 	setupBootloader__entries($in, $b, $all_hds, $fstab) or goto general;
     }
     1;
+}
+
+sub setupBootloaderUntilInstalled {
+    my ($in, $b, $all_hds, $fstab, $security) = @_;
+    do {
+        my $before = fs::fstab_to_string($all_hds);
+        setupBootloader($in, $b, $all_hds, $fstab, $security) or $in->exit;
+        if ($before ne fs::fstab_to_string($all_hds)) {
+            #- for /tmp using tmpfs when "clean /tmp" is chosen
+            fs::write_fstab($all_hds);
+        }
+    } while !installBootloader($in, $b, $all_hds);
 }
 
 sub installBootloader {
@@ -249,6 +336,7 @@ sub setupBootloader__mbr_or_not {
 
 	my $default = find { $_->[1] eq $b->{boot} } @l;
 	$in->ask_from_({ title => N("LILO/grub Installation"),
+			 icon => 'banner-bootL',
 			 messages => N("Where do you want to install the bootloader?"),
 			 interactive_help_id => 'setupBootloaderBeginner',
 		       },
@@ -268,11 +356,12 @@ sub setupBootloader__general {
     return if detect_devices::is_xbox();
     my @method_choices = bootloader::method_choices($all_hds);
     my $prev_force_acpi = my $force_acpi = bootloader::get_append_with_key($b, 'acpi') !~ /off|ht/;
-    my $prev_force_noapic = my $force_noapic = bootloader::get_append_simple($b, 'noapic');
-    my $prev_force_nolapic = my $force_nolapic = bootloader::get_append_simple($b, 'nolapic');
+    my $prev_enable_apic = my $enable_apic = !bootloader::get_append_simple($b, 'noapic');
+    my $prev_enable_lapic = my $enable_lapic = !bootloader::get_append_simple($b, 'nolapic');
     my $memsize = bootloader::get_append_memsize($b);
     my $prev_clean_tmp = my $clean_tmp = any { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special} ||= []};
     my $prev_boot = $b->{boot};
+    my $prev_method = $b->{method};
 
     $b->{password2} ||= $b->{password} ||= '';
     $::Wizard_title = N("Boot Style Configuration");
@@ -284,37 +373,36 @@ sub setupBootloader__general {
 	    $boot_devices{$dev} = $_->{info} ? "$dev ($_->{info})" : $dev;
 	}
 
-	$in->ask_from_({ messages => N("Bootloader main options"),
+	$in->ask_from_({ #messages => N("Bootloader main options"),
 			 title => N("Bootloader main options"),
 			 icon => 'banner-bootL',
 			 interactive_help_id => 'setupBootloader',
-			 callbacks => {
-			     complete => sub {
-				 !$memsize || $memsize =~ /^\d+K$/ || $memsize =~ s/^(\d+)M?$/$1M/i or $in->ask_warn('', N("Give the ram size in MB")), return 1;
-				 #- $security > 4 && length($b->{password}) < 6 and $in->ask_warn('', N("At this level of security, a password (and a good one) in lilo is requested")), return 1;
-				 $b->{restricted} && !$b->{password} and $in->ask_warn('', N("Option ``Restrict command line options'' is of no use without a password")), return 1;
-				 $b->{password} eq $b->{password2} or !$b->{restricted} or $in->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]), return 1;
-				 0;
-			     },
-			 },
 		       }, [
+			 #title => N("Bootloader main options"),
+            { label => N("Bootloader"), title => 1 },
             { label => N("Bootloader to use"), val => \$b->{method}, list => \@method_choices, format => \&bootloader::method2text },
                 if_(arch() !~ /ia64/,
-            { label => N("Boot device"), val => \$b->{boot}, list => \@boot_devices, format => sub { $boot_devices{$_[0]} }, not_edit => !$::expert },
+            { label => N("Boot device"), val => \$b->{boot}, list => \@boot_devices, format => sub { $boot_devices{$_[0]} } },
 		),
+            { label => N("Main options"), title => 1 },
             { label => N("Delay before booting default image"), val => \$b->{timeout} },
             { text => N("Enable ACPI"), val => \$force_acpi, type => 'bool' },
-		if_(!$force_nolapic,
-            { text => N("Force no APIC"), val => \$force_noapic, type => 'bool' }, 
-	        ),
-            { text => N("Force No Local APIC"), val => \$force_nolapic, type => 'bool' },
+            { text => N("Enable APIC"), val => \$enable_apic, type => 'bool', advanced => 1, disabled => sub { !$enable_lapic } }, 
+            { text => N("Enable Local APIC"), val => \$enable_lapic, type => 'bool', advanced => 1 },
 		if_($security >= 4 || $b->{password} || $b->{restricted},
-            { label => N("Password"), val => \$b->{password}, hidden => 1 },
+	    { label => N("Password"), val => \$b->{password}, hidden => 1,
+	      validate => sub { 
+		  my $ok = $b->{password} eq $b->{password2} or $in->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]);
+		  my $ok2 = !($b->{password} && $b->{method} eq 'grub-graphic') or $in->ask_warn('', N("You can not use a password with %s", bootloader::method2text($b->{method})));
+		  $ok && $ok2;
+	      } },
             { label => N("Password (again)"), val => \$b->{password2}, hidden => 1 },
-            { text => N("Restrict command line options"), val => \$b->{restricted}, type => "bool", text => N("restrict") },
+            { text => N("Restrict command line options"), val => \$b->{restricted}, type => "bool", text => N("restrict"),
+	      validate => sub { my $ok = !$b->{restricted} || $b->{password} or $in->ask_warn('', N("Option ``Restrict command line options'' is of no use without a password")); $ok } },
 		),
             { text => N("Clean /tmp at each boot"), val => \$clean_tmp, type => 'bool', advanced => 1 },
-            { label => N("Precise RAM size if needed (found %d MB)", availableRamMB()), val => \$memsize, advanced => 1 },
+            { label => N("Precise RAM size if needed (found %d MB)", availableRamMB()), val => \$memsize, advanced => 1,
+	      validate => sub { my $ok = !$memsize || $memsize =~ /^\d+K$/ || $memsize =~ s/^(\d+)M?$/$1M/i or $in->ask_warn('', N("Give the ram size in MB")); $ok } },
         ]) or return 0;
     } else {
 	$b->{boot} = $partition_table::mac::bootstrap_part;	
@@ -325,7 +413,7 @@ sub setupBootloader__general {
 		       }, [
             { label => N("Bootloader to use"), val => \$b->{method}, list => \@method_choices, format => \&bootloader::method2text },
             { label => N("Init Message"), val => \$b->{'init-message'} },
-            { label => N("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (grep { isAppleBootstrap($_) } @$fstab)) ], not_edit => !$::expert },
+            { label => N("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (grep { isAppleBootstrap($_) } @$fstab)) ] },
             { label => N("Open Firmware Delay"), val => \$b->{delay} },
             { label => N("Kernel Boot Timeout"), val => \$b->{timeout} },
             { label => N("Enable CD Boot?"), val => \$b->{enablecdboot}, type => "bool" },
@@ -343,20 +431,19 @@ sub setupBootloader__general {
 	delete $b->{'raid-extra-boot'} if $b->{'raid-extra-boot'} eq 'mbr';
     }
 
-    if ($b->{method} eq 'grub') {
-	$in->do_pkgs->ensure_binary_is_installed('grub', "grub", 1) or return 0;
-    }
+    bootloader::ensure_pkg_is_installed($in->do_pkgs, $b) or return 0;
+
     bootloader::suggest_message_text($b) if ! -e "$::prefix/boot/message-text"; #- in case we switch from grub to lilo
 
     bootloader::set_append_memsize($b, $memsize);
     if ($prev_force_acpi != $force_acpi) {
 	bootloader::set_append_with_key($b, acpi => ($force_acpi ? '' : 'ht'));
     }
-    if ($prev_force_noapic != $force_noapic) {
-	($force_noapic ? \&bootloader::set_append_simple : \&bootloader::remove_append_simple)->($b, 'noapic');
+    if ($prev_enable_apic != $enable_apic) {
+	($enable_apic ? \&bootloader::remove_append_simple : \&bootloader::set_append_simple)->($b, 'noapic');
     }
-    if ($prev_force_nolapic != $force_nolapic) {
-	($force_nolapic ? \&bootloader::set_append_simple : \&bootloader::remove_append_simple)->($b, 'nolapic');
+    if ($prev_enable_lapic != $enable_lapic) {
+	($enable_lapic ? \&bootloader::remove_append_simple : \&bootloader::set_append_simple)->($b, 'nolapic');
     }
 
     if ($prev_clean_tmp != $clean_tmp) {
@@ -366,11 +453,17 @@ sub setupBootloader__general {
 	    @{$all_hds->{special}} = grep { $_->{mntpoint} ne '/tmp' } @{$all_hds->{special}};
 	}
     }
+
+    if (bootloader::main_method($prev_method) eq 'lilo' && 
+	bootloader::main_method($b->{method}) eq 'grub') {
+	log::l("switching for lilo to grub, ensure we don't read lilo.conf anymore");
+	renamef("$::prefix/etc/lilo.conf", "$::prefix/etc/lilo.conf.unused");
+    }
     1;
 }
 
 sub setupBootloader__entries {
-    my ($in, $b, $_all_hds, $fstab) = @_;
+    my ($in, $b, $all_hds, $fstab) = @_;
 
     require Xconfig::resolution_and_depth;
 
@@ -381,12 +474,22 @@ sub setupBootloader__entries {
 	my $vga = Xconfig::resolution_and_depth::from_bios($e->{vga});
 	my ($append, $netprofile) = bootloader::get_append_netprofile($e);
 
+	my %hd_infos = map { $_->{device} => $_->{info} } fs::get::hds($all_hds);
+	my %root_descr = map { 
+	    my $info = delete $hd_infos{$_->{rootDevice}};
+	    my $dev = "/dev/$_->{device}";
+	    $dev => $info ? "$dev ($info)" : $dev;
+	} @$fstab;
+
 	my @l;
 	if ($e->{type} eq "image") { 
 	    @l = (
 { label => N("Image"), val => \$e->{kernel_or_dev}, list => [ map { "/boot/$_" } bootloader::installed_vmlinuz() ], not_edit => 0 },
-{ label => N("Root"), val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
+{ label => N("Root"), val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @$fstab ], format => sub { $root_descr{$_[0]} }  },
 { label => N("Append"), val => \$append },
+  if_($e->{xen}, 
+{ label => N("Xen append"), val => \$e->{xen_append} }
+  ),
   if_(arch() !~ /ppc|ia64/,
 { label => N("Video mode"), val => \$vga, list => [ '', Xconfig::resolution_and_depth::bios_vga_modes() ], format => \&Xconfig::resolution_and_depth::to_string, advanced => 1 },
 ),
@@ -395,7 +498,7 @@ sub setupBootloader__entries {
 	    );
 	} else {
 	    @l = ( 
-{ label => N("Root"), val => \$e->{kernel_or_dev}, list => [ map { "/dev/$_->{device}" } @$fstab, detect_devices::floppies() ], not_edit => !$::expert },
+{ label => N("Root"), val => \$e->{kernel_or_dev}, list => [ map { "/dev/$_->{device}" } @$fstab, detect_devices::floppies() ] },
 	    );
 	}
 	if (arch() !~ /ppc/) {
@@ -408,9 +511,7 @@ sub setupBootloader__entries {
 	    unshift @l, { label => N("Label"), val => \$e->{label}, list => ['macos', 'macosx', 'darwin'] };
 	    if ($e->{type} eq "image") {
 		@l = ({ label => N("Label"), val => \$e->{label} },
-		$::expert ? @l[1..4] : (@l[1..2], { label => N("Append"), val => \$append }),
-		if_($::expert, { label => N("Initrd-size"), val => \$e->{initrdsize}, list => [ '', '4096', '8192', '16384', '24576' ] }),
-		if_($::expert, $l[5]),
+		(@l[1..2], { label => N("Append"), val => \$append }),
 		{ label => N("NoVideo"), val => \$e->{novideo}, type => 'bool' },
 		{ text => N("Default"), val => \$default, type => 'bool' }
 		);
@@ -431,7 +532,7 @@ sub setupBootloader__entries {
 	$b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
 	$e->{vga} = ref($vga) ? $vga->{bios} : $vga;
 	bootloader::set_append_netprofile($e, $append, $netprofile);
-	bootloader::configure_entry($e); #- hack to make sure initrd file are built.
+	bootloader::configure_entry($b, $e); #- hack to make sure initrd file are built.
 	1;
     };
 
@@ -473,7 +574,7 @@ You can create additional entries or change the existing ones."), [ {
         format => sub {
 	    my ($e) = @_;
 	    ref($e) ? 
-	      "$e->{label} ($e->{kernel_or_dev})" . ($b->{default} eq $e->{label} && "  *") : 
+	      ($b->{default} eq $e->{label} ? "  *  " : "     ") . "$e->{label} ($e->{kernel_or_dev})" : 
 		translate($e);
 	}, list => $b->{entries},
     } ], Add => $Add, Modify => $Modify, Remove => $Remove)) {
@@ -489,10 +590,10 @@ sub get_autologin() {
     my $desktop = $desktop{DESKTOP} || 'KDE';
     my $autologin = do {
 	if (($desktop{DISPLAYMANAGER} || $desktop) eq 'GNOME') {
-	    my %conf = read_gnomekderc("$::prefix/etc/X11/gdm/gdm.conf", 'daemon');
+	    my %conf = read_gnomekderc("$::prefix/etc/X11/gdm/custom.conf", 'daemon');
 	    text2bool($conf{AutomaticLoginEnable}) && $conf{AutomaticLogin};
 	} else { # KDM / MdkKDM
-	    my %conf = read_gnomekderc("$::prefix/usr/share/config/kdm/kdmrc", 'X-:0-Core');
+	    my %conf = read_gnomekderc("$::prefix/etc/kde/kdm/kdmrc", 'X-:0-Core');
 	    text2bool($conf{AutoLoginEnable}) && $conf{AutoLoginUser};
 	}
     };
@@ -500,18 +601,18 @@ sub get_autologin() {
 }
 
 sub set_autologin {
-    my ($o_user, $o_wm) = @_;
+    my ($do_pkgs, $o_user, $o_wm) = @_;
     log::l("set_autologin $o_user $o_wm");
     my $autologin = bool2text($o_user);
 
     #- Configure KDM / MDKKDM
-    eval { update_gnomekderc("$::prefix/usr/share/config/kdm/kdmrc", 'X-:0-Core' => (
+    eval { common::update_gnomekderc_no_create("$::prefix/etc/kde/kdm/kdmrc", 'X-:0-Core' => (
 	AutoLoginEnable => $autologin,
 	AutoLoginUser => $o_user,
     )) };
 
     #- Configure GDM
-    eval { update_gnomekderc("$::prefix/etc/X11/gdm/gdm.conf", daemon => (
+    eval { update_gnomekderc("$::prefix/etc/X11/gdm/custom.conf", daemon => (
 	AutomaticLoginEnable => $autologin,
 	AutomaticLogin => $o_user,
     )) };
@@ -520,8 +621,9 @@ sub set_autologin {
     if (member($o_wm, 'KDE', 'GNOME')) {
 	unlink $xdm_autologin_cfg;
     } else {
+	$do_pkgs->ensure_is_installed('autologin', '/usr/bin/startx.autologin') if $o_user;
 	setVarsInShMode($xdm_autologin_cfg, 0644,
-			{ USER => $o_user, AUTOLOGIN => bool2yesno($o_user), EXEC => '/usr/X11R6/bin/startx.autologin' });
+			{ USER => $o_user, AUTOLOGIN => bool2yesno($o_user), EXEC => '/usr/bin/startx.autologin' });
     }
 
     if ($o_user) {
@@ -611,11 +713,11 @@ sub inspect {
 }
 
 sub ask_user_one {
-    my ($in, $users, $security, $u, %options) = @_;
+    my ($in, $users, $security, $u, $suggested_names, %options) = @_;
 
     $options{needauser} ||= $security >= 3;
 
-    my @icons = facesnames();
+    my @suggested_names = grep { ! defined getpwnam($_) } @$suggested_names;
 
     my %high_security_groups = (
         xgrp => N("access to X programs"),
@@ -631,13 +733,14 @@ sub ask_user_one {
     my $names = @$users ? N("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @$users)) : '';
     
     my %groups;
+
+    require authentication;
     my $verif = sub {
-        $u->{password} eq $u->{password2} or $in->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]), return 1,2;
-        $security > 3 && length($u->{password}) < 6 and $in->ask_warn('', N("This password is too simple")), return 1,2;
-	    $u->{name} or $in->ask_warn('', N("Please give a user name")), return 1,0;
+	authentication::check_given_password($in, $u, $security > 3 ? 6 : 0) or return 1,2;
+	$u->{name} or $in->ask_warn('', N("Please give a user name")), return 1,0;
         $u->{name} =~ /^[a-z]+?[a-z0-9_-]*?$/ or $in->ask_warn('', N("The user name must contain only lower cased letters, numbers, `-' and `_'")), return 1,0;
         length($u->{name}) <= 32 or $in->ask_warn('', N("The user name is too long")), return 1,0;
-        member($u->{name}, 'root', map { $_->{name} } @$users) and $in->ask_warn('', N("This user name has already been added")), return 1,0;
+        defined getpwnam($u->{name}) || member($u->{name}, map { $_->{name} } @$users) and $in->ask_warn('', N("This user name has already been added")), return 1,0;
 	foreach ([ $u->{uid}, N("User ID") ],
 		 [ $u->{gid}, N("Group ID") ]) {
 	    my ($id, $name) = @$_;
@@ -656,24 +759,18 @@ sub ask_user_one {
           if_(!$::isInstall, ok => N("Done")),
           cancel => $options{noaccept} ? '' : N("Accept user"),
           callbacks => {
-	          focus_out => sub {
-		      if ($_[0] eq '0') {
-			  $u->{name} ||= lc first($u->{realname} =~ /([a-zA-Z0-9_-]+)/);
-		      }
-		  },
                   canceled => $verif,
                   ok_disabled => sub { $options{needauser} && !@$users || $u->{name} },
 	  } }, [ 
-	  { label => N("Real name"), val => \$u->{realname} },
-          { label => N("Login name"), val => \$u->{name} },
+	  { label => N("Real name"), val => \$u->{realname}, focus_out => sub {
+		$u->{name} ||= lc first($u->{realname} =~ /([a-zA-Z0-9_-]+)/);
+	    } },
+          { label => N("Login name"), val => \$u->{name}, list => \@suggested_names, not_edit => 0 },
           { label => N("Password"),val => \$u->{password}, hidden => 1 },
           { label => N("Password (again)"), val => \$u->{password2}, hidden => 1 },
-          { label => N("Shell"), val => \$u->{shell}, list => [ shells() ], not_edit => !$::expert, advanced => 1 },
+          { label => N("Shell"), val => \$u->{shell}, list => [ shells() ], advanced => 1 },
 	  { label => N("User ID"), val => \$u->{uid}, advanced => 1 },
 	  { label => N("Group ID"), val => \$u->{gid}, advanced => 1 },
-	    if_($security <= 3 && !$options{noicons} && @icons,
-	  { label => N("Icon"), val => \ ($u->{icon} ||= 'default'), list => \@icons, icon2f => \&face2png, format => \&translate },
-	    ),
 	    if_($security > 3,
                 map {
                     { label => $_, val => \$groups{$_}, text => $high_security_groups{$_}, type => 'bool' };
@@ -693,8 +790,7 @@ sub ask_users {
 
     while (1) {
 	my $u = {};
-	$u->{name} = shift @$suggested_names;
-        ask_user_one($in, $users, $security, $u) and return;
+        ask_user_one($in, $users, $security, $u, $suggested_names) and return;
     }
 }
 
@@ -733,12 +829,19 @@ sub autologin {
 
 sub acceptLicense {
     my ($o) = @_;
-    require install_messages;
+    require messages;
 
-    $o->{release_notes} = join("\n\n", map { 
-	my $f = install_any::getFile($_);
-	$f && cat__($f);
-    } 'release-notes.txt', 'release-notes.' . arch() . '.txt') if $::isInstall;
+    $o->{release_notes} = join("\n\n", grep { $_ } map {
+        if ($::isInstall) {
+            my $f = install::any::getFile_($o->{stage2_phys_medium}, $_);
+            $f && cat__($f);
+        } else {
+            my $file = $_;
+            my $d = find { -e "$_/$file" } glob_("/usr/share/doc/*-release-*");
+            $d && cat_("$d/$file");
+        }
+    } 'release-notes.txt', 'release-notes.' . arch() . '.txt');
+
 
     return if $o->{useless_thing_accepted};
 
@@ -746,10 +849,11 @@ sub acceptLicense {
 
     $o->ask_from_({ title => N("License agreement"), 
                     icon => 'banner-license',
+		    focus_first => 1,
 		     cancel => N("Quit"),
-		     messages => formatAlaTeX(install_messages::main_license() . "\n\n\n" . install_messages::warning_about_patents()),
+		     messages => formatAlaTeX(messages::main_license() . "\n\n\n" . messages::warning_about_patents()),
 		     interactive_help_id => 'acceptLicense',
-		     if_(!$::globetrotter, more_buttons => [ [ N("Release Notes"), sub { $o->ask_warn(N("Release Notes"), $o->{release_notes}) }, 1 ] ]),
+		     if_(!$::globetrotter && $o->{release_notes}, more_buttons => [ [ N("Release Notes"), sub { $o->ask_warn(N("Release Notes"), $o->{release_notes}) }, 1 ] ]),
 		     callbacks => { ok_disabled => sub { $r eq 'Refuse' } },
 		   },
 		   [ { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list', format => sub { translate($_[0]) } } ])
@@ -759,9 +863,11 @@ sub acceptLicense {
 	  if ($::globetrotter) {
            run_program::run('killall', 'Xorg');
 	      exec("/sbin/reboot");
+	  } else {
+	      install::media::umount_phys_medium($o->{stage2_phys_medium});
+	      install::media::openCdromTray($o->{stage2_phys_medium}{device}) if !detect_devices::is_xbox() && $o->{method} eq 'cdrom';
+	      $o->exit;
 	  }
-	  install_any::ejectCdrom();
-	  $o->exit;
       };
 }
 
@@ -796,28 +902,27 @@ sub selectLanguage_install {
 	$lang = first($add_location->($lang));
     }
 
-    my $last_utf8 = $locale->{utf8};
+    my $non_utf8 = 0;
+    my $utf8_forced;
     add2hash($common, { cancel => '',
+			focus_first => 1,
 			advanced_messages => formatAlaTeX(N("Mandriva Linux can support multiple languages. Select
 the languages you would like to install. They will be available
 when your installation is complete and you restart your system.")),
 			advanced_label => N("Multi languages"),
-			callbacks => { advanced => sub { $langs->{$listval2val->($lang)} = 1 },
-				       changed => sub {
-					   if ($last_utf8 == $locale->{utf8}) {
-					       $last_utf8 = $locale->{utf8} = lang::utf8_should_be_needed({ lang => $listval2val->($lang), langs => $langs });
-					   } else {
-					       $last_utf8 = -1;  #- disable auto utf8 once touched
-					   }
-				       } } });
+		    });
 			    
     $in->ask_from_($common, [
 	{ val => \$lang, separator => '|', 
 	  if_($using_images, image2f => sub { $name2l{$_[0]} =~ /^[a-z]/ && "langs/lang-$name2l{$_[0]}" }),
 	  format => sub { $_[0] =~ /(.*\|)(.*)/ ? $1 . lang::l2name($2) : lang::l2name($_[0]) },
-	  list => \@langs, sort => 0 },
+	  list => \@langs, sort => 0, changed => sub { 
+	      #- very special cases for langs which do not like UTF-8
+	      $non_utf8 = $lang =~ /\bzh/ if !$utf8_forced;
+	  }, focus_out => sub { $langs->{$listval2val->($lang)} = 1 } },
       if_(!$::move,
-	  { val => \$locale->{utf8}, type => 'bool', text => N("Use Unicode by default"), advanced => 1 },
+	  { val => \$non_utf8, type => 'bool', text => N("Old compatibility (non UTF-8) encoding"), 
+	    advanced => 1, changed => sub { $utf8_forced = 1 } },
 	  { val => \$langs->{all}, type => 'bool', text => N("All languages"), advanced => 1 },
 	map {
 	    { val => \$langs->{$_->[0]}, type => 'bool', disabled => sub { $langs->{all} },
@@ -827,6 +932,7 @@ when your installation is complete and you restart your system.")),
 	} sort { $a->[1] cmp $b->[1] } map { [ $_, $sort_func->($_) ] } lang::list_langs(),
       ),
     ]) or return;
+    $locale->{utf8} = !$non_utf8;
     %$langs = grep_each { $::b } %$langs;  #- clean hash
     $langs->{$listval2val->($lang)} = 1;
 	
@@ -842,12 +948,13 @@ sub selectLanguage_standalone {
 		   interactive_help_id => 'selectLanguage' };
 
     my @langs = sort { lang::l2name($a) cmp lang::l2name($b) } lang::list_langs(exclude_non_installed => 1);
-    die 'one lang only' if @langs == 1;
+    my $non_utf8 = !$locale->{utf8};
     $in->ask_from_($common, [ 
 	{ val => \$locale->{lang}, type => 'list',
-	  format => sub { lang::l2name($_[0]) }, list => \@langs },
-	{ val => \$locale->{utf8}, type => 'bool', text => N("Use Unicode by default"), advanced => 1 },
+	  format => sub { lang::l2name($_[0]) }, list => \@langs, allow_empty_list => 1 },
+	{ val => \$non_utf8, type => 'bool', text => N("Old compatibility (non UTF-8) encoding"), advanced => 1 },
     ]);
+    $locale->{utf8} = !$non_utf8;
     lang::set($locale);
     Gtk2->set_locale if $in->isa('interactive::gtk');
 }
@@ -866,9 +973,7 @@ sub selectLanguage_and_more_standalone {
 	selectCountry($in, $locale) or goto language;
     };
     if ($@) {
-	if ($@ =~ /^one lang only/) {
-	    selectCountry($in, $locale) or $in->exit(0);
-	} elsif ($@ !~ /wizcancel/) {
+	if ($@ !~ /wizcancel/) {
 	    die;
 	} else {
 	    $in->exit(0);
@@ -888,8 +993,9 @@ sub selectCountry {
     } @lang::locales;
     @best == 1 and @best = ();
 
-    my ($other, $ext_country);
-    member($country, @best) or ($ext_country, $country) = ($country, $ext_country);
+    my $other = !member($country, @best);
+    my $ext_country = $country;
+    $other and @best = ();
 
     $in->ask_from_(
 		  { title => N("Country / Region"), 
@@ -898,13 +1004,11 @@ sub selectCountry {
 		    interactive_help_id => 'selectCountry',
 		    if_(@best, advanced_messages => N("Here is the full list of available countries")),
 		    advanced_label => @best ? N("Other Countries") : N("Advanced"),
-		    advanced_state => $ext_country && scalar(@best),
-		    callbacks => { changed => sub { $_[0] != 2 and $other = $_[0] == 1 } },
 		  },
 		  [ if_(@best, { val => \$country, type => 'list', format => \&lang::c2name,
-				 list => \@best, sort => 1 }),
+				 list => \@best, sort => 1, changed => sub { $other = 0 }  }),
 		    { val => \$ext_country, type => 'list', format => \&lang::c2name,
-		      list => [ @countries ], advanced => scalar(@best) },
+		      list => [ @countries ], advanced => scalar(@best), changed => sub { $other = 1 } },
 		    { val => \$locale->{IM}, type => 'combo', label => N("Input method:"), 
 		      sort => 0, separator => '|',
 		      list => [ '', sort(lang::get_ims()) ], 
@@ -919,7 +1023,7 @@ sub selectCountry {
 sub set_login_serial_console {
     my ($port, $speed) = @_;
 
-    my $line = "s$port:12345:respawn:/sbin/getty ttyS$port DT$speed ansi\n";
+    my $line = "s$port:12345:respawn:/sbin/agetty ttyS$port $speed ansi\n";
     substInFile { s/^s$port:.*//; $_ = $line if eof } "$::prefix/etc/inittab";
 }
 
@@ -938,7 +1042,7 @@ sub report_bug {
       header("dmidecode"), `dmidecode`,
       header("fdisk"), arch() =~ /ppc/ ? `pdisk -l` : `fdisk -l`,
       header("scsi"), cat_("/proc/scsi/scsi"),
-      header("/sys/bus/scsi/devices"), `ls -l /sys/bus/scsi/devices`,
+      header("/sys/bus/scsi/devices"), -d '/sys/bus/scsi/devices' ? `ls -l /sys/bus/scsi/devices` : (),
       header("lsmod"), cat_("/proc/modules"),
       header("cmdline"), cat_("/proc/cmdline"),
       header("pcmcia: stab"), cat_("$::prefix/var/lib/pcmcia/stab") || cat_("$::prefix/var/run/stab"),
@@ -953,53 +1057,16 @@ sub report_bug {
       header("fstab"), cat_("$::prefix/etc/fstab"),
       header("modprobe.conf"), cat_("$::prefix/etc/modprobe.conf"),
       header("lilo.conf"), cat_("$::prefix/etc/lilo.conf"),
-      header("menu.lst"), cat_("$::prefix/boot/grub/menu.lst"),
+      header("grub: menu.lst"), cat_("$::prefix/boot/grub/menu.lst"),
+      header("grub: install.sh"), cat_("$::prefix/boot/grub/install.sh"),
+      header("grub: device.map"), cat_("$::prefix/boot/grub/device.map"),
       header("xorg.conf"), cat_("$::prefix/etc/X11/xorg.conf"),
+      header("urpmi.cfg"), cat_("$::prefix/etc/urpmi/urpmi.cfg"),
       header("modprobe.preload"), cat_("$::prefix/etc/modprobe.preload"),
       header("sysconfig/i18n"), cat_("$::prefix/etc/sysconfig/i18n"),
+      header("/proc/iomem"), cat_("/proc/iomem"),
+      header("/proc/ioport"), cat_("/proc/ioports"),
       map_index { even($::i) ? header($_) : $_ } @other;
-}
-
-sub devfssymlinkf {
-    my ($if_struct, $of) = @_;
-    my $if = $if_struct->{device};
-
-    my $devfs_if = $if_struct->{devfs_device};
-    $devfs_if ||= devices::to_devfs($if);
-    $devfs_if ||= $if;
-
-    #- example: $of is mouse, $if is usbmouse, $devfs_if is input/mouse0
-
-    output_p("$::prefix/etc/devfs/conf.d/$of.conf", 
-"REGISTER	^$devfs_if\$	CFUNCTION GLOBAL mksymlink $devfs_if $of
-UNREGISTER	^$devfs_if\$	CFUNCTION GLOBAL unlink $of
-");
-
-    output_p("$::prefix/etc/devfs/conf.d/$if.conf", 
-"REGISTER	^$devfs_if\$	CFUNCTION GLOBAL mksymlink $devfs_if $if
-UNREGISTER	^$devfs_if\$	CFUNCTION GLOBAL unlink $if
-") if $devfs_if ne $if && $if !~ /^hd[a-z]/ && $if !~ /^sr/ && $if !~ /^sd[a-z]/;
-
-    #- add a specific udev script, we can't do it with a udev rule,
-    #- eg, ttySL0 is a symlink
-    output_with_perm("$::prefix/etc/udev/conf.d/$of.conf", 0755, "ln -sf $if /dev/$of\n")
-      if $of !~ /dvd|mouse/;
-
-    #- when creating a symlink on the system, use devfs name if devfs is mounted
-    symlinkf($devfs_if, "$::prefix/dev/$if") if $devfs_if ne $if && detect_devices::dev_is_devfs();
-    symlinkf($if, "$::prefix/dev/$of");
-}
-sub devfs_rawdevice {
-    my ($if_struct, $of) = @_;
-
-    my $devfs_if = $if_struct->{devfs_device};
-    $devfs_if ||= devices::to_devfs($if_struct->{device});
-    $devfs_if ||= $if_struct->{device};
-
-    output_p("$::prefix/etc/devfs/conf.d/$of.conf", 
-"REGISTER	^$devfs_if\$	EXECUTE /etc/dynamic/scripts/rawdevice.script add /dev/$devfs_if /dev/$of
-UNREGISTER	^$devfs_if\$	EXECUTE /etc/dynamic/scripts/rawdevice.script del /dev/$of
-");
 }
 
 sub fix_broken_alternatives {
@@ -1114,7 +1181,7 @@ sub monitor_full_edid() {
 }
 
 sub running_window_manager() {
-    my @window_managers = qw(kwin gnome-session icewm wmaker afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce blackbox sawfish olvwm fluxbox);
+    my @window_managers = qw(kwin gnome-session icewm wmaker afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce blackbox sawfish olvwm fluxbox compiz);
 
     foreach (@window_managers) {
 	my @pids = fuzzy_pidofs(qr/\b$_\b/) or next;
@@ -1163,6 +1230,23 @@ sub ask_window_manager_to_logout_then_do {
     ), $wm, $pid, $action;
 }
 
+sub ask_for_X_restart {
+    my ($in) = @_;
+
+    $::isStandalone && $in->isa('interactive::gtk') or return;
+
+    my ($wm, $pid) = running_window_manager();
+
+    if (!$wm) {
+    	$in->ask_warn('', N("Please log out and then use Ctrl-Alt-BackSpace"));
+	return;
+    }
+
+    $in->ask_okcancel('', N("You need to log out and back in again for changes to take effect"), 1) or return;
+
+    ask_window_manager_to_logout_then_do($wm, $pid, 'killall X');
+}
+
 sub alloc_raw_device {
     my ($prefix, $device) = @_;
     my $used = 0;
@@ -1178,24 +1262,18 @@ sub alloc_raw_device {
 }
 
 sub config_dvd {
-    my ($prefix, $have_devfsd) = @_;
-
-    #- can not have both a devfs and a non-devfs config
-    #- the /etc/sysconfig/rawdevices solution gives errors with devfs
+    my ($prefix) = @_;
 
     my @dvds = grep { detect_devices::isDvdDrive($_) } detect_devices::cdroms() or return;
 
     log::l("configuring DVD: " . join(" ", map { $_->{device} } @dvds));
     #- create /dev/dvd symlink
     each_index {
-	devfssymlinkf($_, 'dvd' . ($::i ? $::i + 1 : ''));
-	devfs_rawdevice($_, 'rdvd' . ($::i ? $::i + 1 : '')) if $have_devfsd;
+	devices::symlink_now_and_register($_, 'dvd' . ($::i ? $::i + 1 : ''));
     } @dvds;
 
-    if (!$have_devfsd) {
-	my $raw_dev = alloc_raw_device($prefix, 'dvd');
-	symlink($raw_dev, "$prefix/dev/rdvd");
-    }
+    my $raw_dev = alloc_raw_device($prefix, 'dvd');
+    symlink($raw_dev, "$prefix/dev/rdvd");
 }
 
 sub config_mtools {
@@ -1208,6 +1286,44 @@ sub config_mtools {
 	s|drive a: file="(.*?)"|drive a: file="/dev/$f1"|;
 	s|drive b: file="(.*?)"|drive b: file="/dev/$f2"| if $f2;
     } $file;
+}
+
+sub configure_timezone {
+    my ($in, $timezone, $ask_gmt) = @_;
+
+    require timezone;
+    $timezone->{timezone} = $in->ask_from_treelist(N("Timezone"), N("Which is your timezone?"), '/', [ timezone::getTimeZones() ], $timezone->{timezone}) or return;
+
+    my $ntp = to_bool($timezone->{ntp});
+    my $servers = timezone::ntp_servers();
+    $timezone->{ntp} ||= 'pool.ntp.org';
+
+    require POSIX;
+    use POSIX qw(strftime);
+    my $time_format = "%H:%M:%S";
+    local $ENV{TZ} = $timezone->{timezone};
+
+    $in->ask_from_({ interactive_help_id => 'configureTimezoneGMT',
+                       title => N("Date, Clock & Time Zone Settings"), 
+                 }, [
+	  { label => N("Date, Clock & Time Zone Settings"), title => 1 },
+	  { label => N("What is the best time?") },
+	  { val => \$timezone->{UTC},
+            type => 'list', list => [ 0, 1 ], format => sub {
+                $_[0] ?
+                  N("%s (hardware clock set to UTC)", POSIX::strftime($time_format, localtime())) :
+                  N("%s (hardware clock set to local time)", POSIX::strftime($time_format, gmtime()));
+            } },
+          { label => N("NTP Server"), title => 1 },
+	  { text => N("Automatic time synchronization (using NTP)"), val => \$ntp, type => 'bool' },
+          { val => \$timezone->{ntp}, disabled => sub { !$ntp },
+            type => "list", separator => '|',
+            list => [ keys %$servers ], format => sub { $servers->{$_[0]} } },
+    ]) or goto &configure_timezone if $ask_gmt || $ntp;
+
+    $timezone->{ntp} = '' if !$ntp;
+
+    1;
 }
 
 1;

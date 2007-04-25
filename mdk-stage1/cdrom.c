@@ -37,14 +37,13 @@
 static int mount_that_cd_device(char * dev_name)
 {
 	char device_fullname[50];
+	int mount_result;
 
 	snprintf(device_fullname, sizeof(device_fullname), "/dev/%s", dev_name);
 
-#ifdef MANDRAKE_MOVE
-	return my_mount(device_fullname, IMAGE_LOCATION, "supermount", 0);
-#else
-	return my_mount(device_fullname, IMAGE_LOCATION, "iso9660", 0);
-#endif
+	mount_result = my_mount(device_fullname, MEDIA_LOCATION, "iso9660", 0);
+	symlink(MEDIA_LOCATION_REL "/" ARCH, IMAGE_LOCATION);
+	return mount_result;
 }
 
 
@@ -54,7 +53,7 @@ static enum return_type do_with_device(char * dev_name, char * dev_model)
 {
 	if (!image_has_stage2()) {
 		enum return_type results;
-		umount(IMAGE_LOCATION);
+		umount(MEDIA_LOCATION);
 		results = ask_yes_no("That CDROM disc does not seem to be a " DISTRIB_NAME " Installation CDROM.\nRetry with another disc?");
 		if (results == RETURN_OK)
 			return try_with_device(dev_name, dev_model);
@@ -63,13 +62,11 @@ static enum return_type do_with_device(char * dev_name, char * dev_model)
 
 	log_message("found a " DISTRIB_NAME " CDROM, good news!");
 
-#ifndef MANDRAKE_MOVE
-	may_load_clp();
+	may_load_compressed_image();
 
 	if (!KEEP_MOUNTED)
 		/* in rescue mode, we don't need the media anymore */
-		umount(IMAGE_LOCATION);
-#endif
+		umount(MEDIA_LOCATION);
 
         add_to_env("METHOD", "cdrom");
 	return RETURN_OK;
@@ -117,7 +114,7 @@ int try_automatic(char ** medias, char ** medias_models)
 				return i;
 			}
 			else
-				umount(IMAGE_LOCATION);
+				umount(MEDIA_LOCATION);
 		}
 		remove_wait_message();
 
@@ -141,6 +138,10 @@ enum return_type cdrom_prepare(void)
 
 	if (IS_AUTOMATIC) {
 		get_medias(CDROM, &medias, &medias_models, BUS_IDE);
+		if ((i = try_automatic(medias, medias_models)) != -1)
+			return do_with_device(medias[i], medias_models[i]);
+		
+		get_medias(CDROM, &medias, &medias_models, BUS_PCMCIA);
 		if ((i = try_automatic(medias, medias_models)) != -1)
 			return do_with_device(medias[i], medias_models[i]);
 		

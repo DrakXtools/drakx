@@ -27,32 +27,40 @@ our %langs = (
 'as' =>    [ 'Assamese',            'ZZ Assamese',       'as_IN', ' 2   ', 'utf_beng' ],
 'az' =>    [ 'Azeri (Latin)',       'Azerbaycanca',      'az_AZ', ' 2   ', 'utf_az' ],
 'be' =>    [ 'Belarussian',         'Belaruskaya',       'be_BY', '1    ', 'utf_cyr1' ],
-#- ber_MA not yet done, using fr_FR locale instead
-'ber' =>   [ 'Berber',              'ZZ Tamazight',      'fr_FR', '  3  ', 'utf_tfng', 'ber:fr' ],
+'ber' =>   [ 'Berber',              'ZZ Tamazight',      'ber_MA', '  3  ', 'utf_tfng', 'ber_MA:ber:fr' ],
 'bg' =>    [ 'Bulgarian',           'Blgarski',          'bg_BG', '1    ', 'cp1251' ],
 'bn' =>    [ 'Bengali',             'ZZ Bengali',        'bn_BD', ' 2   ', 'utf_beng' ],
+#- bo_CN not yet done, using dz_BT locale instead
+'bo' =>    [ 'Tibetan',             'ZZ Bod skad',       'dz_BT', ' 2   ', 'utf_tibt', 'bo' ],
 'br' =>    [ 'Breton',              'Brezhoneg',         'br_FR', '1    ', 'iso-8859-15', 'br:fr_FR:fr' ],
 'bs' =>    [ 'Bosnian',             'Bosanski',          'bs_BA', '1    ', 'iso-8859-2' ],
 'ca' =>    [ 'Catalan',             'Catala',            'ca_ES', '1    ', 'iso-8859-15', 'ca:es_ES:es' ],
+'ca@valencian' =>  [ 'Catalan (Valencian)', 'Catala (Valencia)', 'ca_ES', '1    ', 'iso-8859-15', 'ca_ES@valencian:ca@valencian:ca:es_ES:es' ],
 'cs' =>    [ 'Czech',               'Cestina',           'cs_CZ', '1    ', 'iso-8859-2' ],
 'cy' =>    [ 'Welsh',               'Cymraeg',           'cy_GB', '1    ', 'utf_lat8',    'cy:en_GB:en' ],
 'da' =>    [ 'Danish',              'Dansk',             'da_DK', '1    ', 'iso-8859-15' ],
 'de' =>    [ 'German',              'Deutsch',           'de_DE', '1    ', 'iso-8859-15' ],
-#-'dz' =>  [ 'Buthanese',           'ZZ Dzhonka',        'dz_BT', ' 2   ', 'unicode' ],
+'dz' =>    [ 'Buthanese',           'ZZ Dzhonka',        'dz_BT', ' 2   ', 'utf_tibt' ],
 'el' =>    [ 'Greek',               'Ellynika',          'el_GR', '1    ', 'iso-8859-7' ],
-'en_GB' => [ 'English',             'English',           'en_GB', '12345', 'iso-8859-15' ],
-'en_US' => [ 'English (American)', 'English (American)', 'en_US', '    5', 'C' ],
+'en_AU' => [ 'English (Australia)', 'English (AU)',      'en_AU', '   4 ', 'iso-8859-1', 'en_AU:en_GB:en' ],
+'en_CA' => [ 'English (Canada)',    'English (Canada)',  'en_CA', '    5', 'iso-8859-15', 'en_CA:en_GB:en' ],
+'en_GB' => [ 'English',             'English',           'en_GB', '123 5', 'iso-8859-15' ],
 'en_IE' => [ 'English (Ireland)',   'English (Ireland)', 'en_IE', '1    ', 'iso-8859-15', 'en_IE:en_GB:en' ],
+'en_NZ' => [ 'English (New-Zealand)', 'English (NZ)',    'en_NZ', '   4 ', 'iso-8859-1', 'en_NZ:en_AU:en_GB:en' ],
+'en_US' => [ 'English (American)', 'English (American)', 'en_US', '    5', 'C' ],
 'eo' =>    [ 'Esperanto',           'Esperanto',         'eo_XX', '12345', 'unicode' ],
 'es' =>    [ 'Spanish',             'Espanol',           'es_ES', '1 3 5', 'iso-8859-15' ],
 'et' =>    [ 'Estonian',            'Eesti',             'et_EE', '1    ', 'iso-8859-15' ],
 'eu' =>    [ 'Euskara (Basque)',    'Euskara',           'eu_ES', '1    ', 'utf_lat1' ],
 'fa' =>    [ 'Farsi (Iranian)',     'AA Farsi',          'fa_IR', ' 2   ', 'utf_ar' ],
 'fi' =>    [ 'Finnish (Suomi)',     'Suomi',             'fi_FI', '1    ', 'iso-8859-15' ],
+#- 'tl' in priority position for now, as 'fil' is not much used.
+#- Monolingual window managers will not see the menus otherwise
+'fil' =>   [ 'Filipino',            'Filipino',          'fil_PH', ' 2   ', 'utf_lat1',  'tl:fil' ],
 'fo' =>    [ 'Faroese',             'Foroyskt',          'fo_FO', '1    ', 'utf_lat1' ],
 'fr' =>    [ 'French',              'Francais',          'fr_FR', '1 345', 'iso-8859-15' ],
 'fur' =>   [ 'Furlan',              'Furlan',            'fur_IT', '1    ', 'utf_lat1', 'fur:it_IT:it' ],
-'fy' =>    [ 'Frisian',             'Frysk',             'fy_NL',  '1    ', 'utf_lat1' ],
+'fy' =>    [ 'Frisian',             'Frysk',             'fy_NL', '1    ', 'utf_lat1' ],
 'ga' =>    [ 'Gaelic (Irish)',      'Gaeilge',           'ga_IE', '1    ', 'utf_lat1', 'ga:en_IE:en_GB:en' ],
 #'gd' =>   [ 'Gaelic (Scottish)',   'Gaidhlig',          'gd_GB', '1    ', 'utf_lat8',    'gd:en_GB:en' ],
 'gl' =>    [ 'Galician',            'Galego',            'gl_ES', '1    ', 'iso-8859-15', 'gl:es_ES:es:pt:pt_BR' ],
@@ -60,6 +68,7 @@ our %langs = (
 'gn' =>    [ 'Guarani',             'Avane-e',           'es_PY', '    5', 'utf_lat1',    'gn:es_PY:es' ],
 'gu' =>    [ 'Gujarati',            'ZZ Gujarati',       'gu_IN', ' 2   ', 'unicode' ],
 #'gv' =>   [ 'Gaelic (Manx)',       'Gaelg',             'gv_GB', '1    ', 'utf_lat8',    'gv:en_GB:en' ],
+'ha' =>    [ 'Hausa',               'Hausa',             'ha_NG', '  3  ', 'utf_yo', 'ha:en_NG' ],
 'he' =>    [ 'Hebrew',              'AA Ivrit',          'he_IL', ' 2   ', 'utf_he' ],
 'hi' =>    [ 'Hindi',               'ZZ Hindi',          'hi_IN', ' 2   ', 'utf_deva' ],
 'hr' =>    [ 'Croatian',            'Hrvatski',          'hr_HR', '1    ', 'iso-8859-2' ],
@@ -68,11 +77,13 @@ our %langs = (
 # locale not done yet
 #'ia' =>   [ 'Interlingua',         'Interlingua',       'ia_XX', '1   5', 'utf_lat1' ],
 'id' =>    [ 'Indonesian',          'Bahasa Indonesia',  'id_ID', ' 2   ', 'utf_lat1' ],
-'is' =>    [ 'Icelandic',           'Islenska',          'is_IS', '1    ', 'iso-8859-1' ],
+'ig' =>    [ 'Igbo',                'Igbo',              'ig_NG', '  3  ', 'utf_yo', 'ig:en_NG' ],
+'is' =>    [ 'Icelandic',           'Islenska',          'is_IS', '1    ', 'iso-8859-15' ],
 'it' =>    [ 'Italian',             'Italiano',          'it_IT', '1    ', 'iso-8859-15' ],
 'iu' =>    [ 'Inuktitut',           'ZZ Inuktitut',      'iu_CA', '    5', 'utf_iu' ],
 'ja' =>    [ 'Japanese',            'ZZ Nihongo',        'ja_JP', ' 2   ', 'jisx0208' ],
 'ka' =>    [ 'Georgian',            'ZZ Georgian',       'ka_GE', ' 2   ', 'utf_geor' ],
+'kk' =>    [ 'Kazakh',              'Kazak',             'kk_KZ', ' 2   ', 'utf_cyr2' ],
 'kl' =>    [ 'Greenlandic (inuit)', 'Kalaallisut',       'kl_GL', '    5', 'utf_lat1' ],
 'km' =>    [ 'Khmer',               'ZZ Khmer',          'km_KH', ' 2   ', 'utf_khmr' ],
 'kn' =>    [ 'Kannada',             'ZZ Kannada',        'kn_IN', ' 2   ', 'utf_knda' ],
@@ -89,27 +100,27 @@ our %langs = (
 #- "ltg" is not a standard lang code, ISO-639 code was refused;
 #- LTG_LV should be used instead (uppercase is for non-standard
 #- langcodes, as defined by locale naming standard
-'ltg' =>   [ 'Latgalian',           'Latgalisu',         'lv_LV', '1    ', 'iso-8859-13', 'ltg:LTG:lv' ],
+'ltg' =>   [ 'Latgalian',           'Latgalisu',         'lv_LV', '1    ', 'utf_lat7', 'ltg:LTG:lv' ],
+#'lu' =>    [ 'Luganda',             'Luganda',           'lg_UG', '  3  ', 'utf_lat1' ],
 'lv' =>    [ 'Latvian',             'Latviesu',          'lv_LV', '1    ', 'iso-8859-13' ],
-'mi' =>    [ 'Maori',               'Maori',             'mi_NZ', '   4 ', 'unicode' ],
+'mi' =>    [ 'Maori',               'Maori',             'mi_NZ', '   4 ', 'utf_lat7' ],
 'mk' =>    [ 'Macedonian',          'Makedonski',        'mk_MK', '1    ', 'utf_cyr1' ],
 'ml' =>    [ 'Malayalam',           'ZZ Malayalam',      'ml_IN', ' 2   ', 'utf_mlym' ],
 'mn' =>    [ 'Mongolian',           'Mongol',            'mn_MN', ' 2   ', 'utf_cyr2' ],
 'mr' =>    [ 'Marathi',             'ZZ Marathi',        'mr_IN', ' 2   ', 'utf_deva' ],
 'ms' =>    [ 'Malay',               'Bahasa Melayu',     'ms_MY', ' 2   ', 'utf_lat1' ],
 'mt' =>    [ 'Maltese',             'Maltin',            'mt_MT', '1 3  ', 'unicode' ],
-'nb' =>    [ 'Norwegian Bokmaal',   'Norsk, Bokmal',     'nb_NO', '1    ', 'iso-8859-1',  'nb:no' ],
-'nds' =>   [ 'Low Saxon',           'Platduutsch',      'nds_DE', '1    ', 'utf_lat1', 'nds_DE:nds' ],
-'ne' =>    [ 'Nepali',              'ZZ Nepali',         'ne_NP', ' 2   ', 'unicode' ],
+#- "my_MM" not yet done, using "en_US" for now
+'my' =>    [ 'Burmese',             'ZZ Bamaca',         'en_US', ' 2   ', 'utf_mymr', 'my_MM:my' ],
+'nb' =>    [ 'Norwegian Bokmaal',   'Norsk, Bokmal',     'nb_NO', '1    ', 'iso-8859-15',  'nb:no' ],
+'nds' =>   [ 'Low Saxon',           'Platduutsch',       'nds_DE', '1    ', 'utf_lat1', 'nds_DE:nds' ],
+'ne' =>    [ 'Nepali',              'ZZ Nepali',         'ne_NP', ' 2   ', 'utf_deva' ],
 'nl' =>    [ 'Dutch',               'Nederlands',        'nl_NL', '1    ', 'iso-8859-15' ],
-'nn' =>    [ 'Norwegian Nynorsk',   'Norsk, Nynorsk',    'nn_NO', '1    ', 'iso-8859-1',  'nn:no@nynorsk:no_NY:no:nb' ],
+'nn' =>    [ 'Norwegian Nynorsk',   'Norsk, Nynorsk',    'nn_NO', '1    ', 'iso-8859-15',  'nn:no@nynorsk:no_NY:no:nb' ],
+'nr' =>    [ 'Ndebele',             'IsiNdebele',        'nr_ZA', '  3  ', 'utf_lat1', 'nr:en_ZA' ],
+'nso' =>   [ 'Northern Sotho',      'Sesotho sa Leboa',  'nso_ZA', '  3  ', 'utf_lat1', 'st:nso:en_ZA' ],
 'oc' =>    [ 'Occitan',             'Occitan',           'oc_FR', '1    ', 'utf_lat1',  'oc:fr_FR:fr' ],
 'pa_IN' => [ 'Punjabi (gurmukhi)',  'ZZ Punjabi',        'pa_IN', ' 2   ', 'utf_guru' ],
-#- 'tl' in priority position for now, as 'fil' is not much used.
-#- Monolingual window managers will not see the menus otherwise
-#- "ph_PH" should change to "fil_PH" in the future ("ph" is not
-#- standard lang code, "fil" is standard)
-'ph' =>    [ 'Filipino',            'Filipino',          'ph_PH', ' 2   ', 'utf_lat1',  'tl:fil' ],
 'pl' =>    [ 'Polish',              'Polski',            'pl_PL', '1    ', 'iso-8859-2' ],
 'pt' =>    [ 'Portuguese',          'Portugues',         'pt_PT', '1 3  ', 'iso-8859-15', 'pt_PT:pt:pt_BR' ],
 'pt_BR' => [ 'Portuguese Brazil', 'Portugues do Brasil', 'pt_BR', '    5', 'iso-8859-1',  'pt_BR:pt_PT:pt' ],
@@ -117,41 +128,44 @@ our %langs = (
 'qu' =>    [ 'Quichua',             'Runa Simi',         'es_PE', '    5', 'utf_lat1', 'qu:es_PE:es' ],
 'ro' =>    [ 'Romanian',            'Romana',            'ro_RO', '1    ', 'iso-8859-2' ],
 'ru' =>    [ 'Russian',             'Russkij',           'ru_RU', '12   ', 'koi8-u' ],
+'rw' =>    [ 'Kinyarwanda',         'Kinyarwanda',       'rw_RW', '  3  ', 'utf_lat1', 'rw' ],
 'sc' =>    [ 'Sardinian',           'Sardu',             'sc_IT', '1    ', 'utf_lat1', 'sc:it_IT:it' ],
 'se' =>    [ 'Saami',               'Samegiella',        'se_NO', '1    ', 'unicode' ], 
 'sk' =>    [ 'Slovak',              'Slovencina',        'sk_SK', '1    ', 'iso-8859-2' ],
 'sl' =>    [ 'Slovenian',           'Slovenscina',       'sl_SI', '1    ', 'iso-8859-2' ],
+'so' =>    [ 'Somali',              'Soomaali',          'so_SO', '  3  ', 'utf_lat1' ], 
 'sq' =>    [ 'Albanian',            'Shqip',             'sq_AL', '1    ', 'iso-8859-1' ], 
 'sr' =>    [ 'Serbian Cyrillic',    'Srpska',            'sr_CS', '1    ', 'utf_cyr1', 'sp:sr' ],
 #- "sh" comes first, because otherwise, due to the way glibc does language
 #- fallback, if "sr@Latn" is not there but a "sr" (whichs uses cyrillic)
 #- is there, "sh" will never be used.
 'sr@Latn' => [ 'Serbian Latin',     'Srpska',            'sr_CS', '1    ', 'unicode',  'sh:sr@Latn' ], 
-#- ss_ZA not yet done, using en_ZA locale instead
-'ss' =>    [ 'Swati',               'SiSwati',           'en_ZA', '  3  ', 'utf_lat1', 'ss:en_ZA' ],
+'ss' =>    [ 'Swati',               'SiSwati',           'ss_ZA', '  3  ', 'utf_lat1', 'ss:en_ZA' ],
 'st' =>    [ 'Sotho',               'Sesotho',           'st_ZA', '  3  ', 'utf_lat1', 'st:nso:en_ZA' ],
-'sv' =>    [ 'Swedish',             'Svenska',           'sv_SE', '1    ', 'iso-8859-1' ],
+'sv' =>    [ 'Swedish',             'Svenska',           'sv_SE', '1    ', 'iso-8859-15' ],
 'ta' =>    [ 'Tamil',               'ZZ Tamil',          'ta_IN', ' 2   ', 'utf_taml' ],
 'te' =>    [ 'Telugu',              'ZZ Telugu',         'te_IN', ' 2   ', 'unicode' ],
 'tg' =>    [ 'Tajik',               'Tojiki',            'tg_TJ', ' 2   ', 'utf_cyr2' ],
 'th' =>    [ 'Thai',                'ZZ Thai',           'th_TH', ' 2   ', 'tis620' ],
 'tk' =>    [ 'Turkmen',             'Turkmence',         'tk_TM', ' 2   ', 'utf_az' ],
+'tn' =>    [ 'Tswana',              'Setswana',          'tn_ZA', '  3  ', 'utf_lat1', 'tn:en_ZA' ],
 'tr' =>    [ 'Turkish',             'Turkce',            'tr_TR', '12   ', 'iso-8859-9' ],
+'ts' =>    [ 'Tsonga',              'Xitsonga',          'ts_ZA', '  3  ', 'utf_lat1', 'ts:en_ZA' ],
 'tt' =>    [ 'Tatar',               'Tatarca',           'tt_RU', ' 2   ', 'utf_lat5' ],
-#- ug_CN locale not done yet, using ar_EG locale instead
-'ug' =>    [ 'Uyghur',              'AA Uyghur',         'ar_EG', ' 2   ', 'utf_ar', 'ug' ],  
+'ug' =>    [ 'Uyghur',              'AA Uyghur',         'ug_CN', ' 2   ', 'utf_ar', 'ug' ],  
 'uk' =>    [ 'Ukrainian',           'Ukrayinska',        'uk_UA', '1    ', 'koi8-u' ],
 'ur' =>    [ 'Urdu',                'AA Urdu',           'ur_PK', ' 2   ', 'utf_ar' ],  
 'uz@Latn' => [ 'Uzbek (latin)',     'Ozbekcha',          'uz_UZ', ' 2   ', 'utf_cyr2', 'uz@Latn:uz' ],
 'uz' =>    [ 'Uzbek (cyrillic)',    'Ozbekcha',          'uz_UZ', ' 2   ', 'utf_cyr2', 'uz@Cyrl:uz' ],
-#- ve_ZA not yet done, using en_ZA locale instead
-'ve' =>    [ 'Venda',               'Venda',             'en_ZA', '  3  ', 'utf_lat1', 've:ven:en_ZA' ],
+'ve' =>    [ 'Venda',               'Tshivenda',         've_ZA', '  3  ', 'utf_lat1', 've:ven:en_ZA' ],
 'vi' =>    [ 'Vietnamese',          'Tieng Viet',        'vi_VN', ' 2   ', 'utf_vi' ],
 'wa' =>    [ 'Walon',               'Walon',             'wa_BE', '1    ', 'utf_lat1', 'wa:fr_BE:fr' ],
-#- locale not done yet
-#'wen' =>   [ 'Sorbian',             'XX Sorbian',       'wen_XX', '1    ', 'utf_lat1' ],
+#- locale "wen_DE" not done yet, using "de_DE" instead
+#- wen disabled until we have a perl-install/pixmaps/langs/lang-wen.png for it
+#'wen' =>   [ 'Sorbian',             'Sorbian',           'de_DE', '1    ', 'utf_lat1', 'wen' ],
 'xh' =>    [ 'Xhosa',               'IsiXhosa',          'xh_ZA', '  3  ', 'utf_lat1', 'xh:en_ZA' ],
 'yi' =>    [ 'Yiddish',             'AA Yidish',         'yi_US', '1    ', 'utf_he' ],
+'yo' =>    [ 'Yoruba',              'Yoruba',            'yo_NG', '  3  ', 'utf_yo', 'yo:en_NG' ],
 'zh_CN' => [ 'Chinese Simplified',  'ZZ ZhongWen',       'zh_CN', ' 2   ', 'gb2312',      'zh_CN.GBK:zh_CN.GB2312:zh_CN:zh' ],
 'zh_TW' => [ 'Chinese Traditional', 'ZZ ZhongWen',       'zh_TW', ' 2   ', 'Big5',        'zh_TW.Big5:zh_TW:zh_HK:zh' ],
 'zu' =>    [ 'Zulu',                 'IsiZulu',          'zu_ZA', '  3  ', 'utf_lat1', 'xh:en_ZA' ],
@@ -160,8 +174,9 @@ sub l2name           { exists $langs{$_[0]} && $langs{$_[0]}[0] }
 sub l2transliterated { exists $langs{$_[0]} && $langs{$_[0]}[1] }
 sub l2locale         { exists $langs{$_[0]} && $langs{$_[0]}[2] }
 sub l2location {
+    my ($lang) = @_;
     my %geo = (1 => 'Europe', 2 => 'Asia', 3 => 'Africa', 4 => 'Oceania/Pacific', 5 => 'America');
-    map { if_($langs{$_[0]}[3] =~ $_, $geo{$_}) } 1..5;
+    map { $geo{$_} } grep { $langs{$lang} && $langs{$lang}[3] =~ $_ } 1..5;
 }
 sub l2charset        { exists $langs{$_[0]} && $langs{$_[0]}[4] }
 sub l2language       { exists $langs{$_[0]} && $langs{$_[0]}[5] }
@@ -192,7 +207,7 @@ sub text_direction_rtl() {
 #- the locale is not the "correct" one. 'en_US' is used when no good choice
 #- is available.
 my %countries = (
-'AD' => [ N_("Andorra"),        'ca_ES', '1' ], #
+'AD' => [ N_("Andorra"),        'ca_AD', '1' ],
 'AE' => [ N_("United Arab Emirates"), 'ar_AE', '2' ],
 'AF' => [ N_("Afghanistan"),    'en_US', '2' ], #
 'AG' => [ N_("Antigua and Barbuda"), 'en_US', '5' ], #
@@ -222,7 +237,7 @@ my %countries = (
 'BO' => [ N_("Bolivia"),        'es_BO', '5' ],
 'BR' => [ N_("Brazil"),         'pt_BR', '5' ],
 'BS' => [ N_("Bahamas"),        'en_US', '5' ], #
-'BT' => [ N_("Bhutan"),         'en_IN', '2' ], # dz_BT
+'BT' => [ N_("Bhutan"),         'dz_BT', '2' ],
 'BV' => [ N_("Bouvet Island"),  'en_US', '3' ], #
 'BW' => [ N_("Botswana"),       'en_BW', '3' ],
 'BY' => [ N_("Belarus"),        'be_BY', '1' ],
@@ -244,7 +259,7 @@ my %countries = (
 'CU' => [ N_("Cuba"),           'es_DO', '5' ], #
 'CV' => [ N_("Cape Verde"),     'pt_PT', '3' ], #
 'CX' => [ N_("Christmas Island"), 'en_US', '4' ], #
-'CY' => [ N_("Cyprus"),         'en_US', '1' ], #
+'CY' => [ N_("Cyprus"),         'el_CY', '1' ],
 'CZ' => [ N_("Czech Republic"), 'cs_CZ', '2' ],
 'DE' => [ N_("Germany"),        'de_DE', '1' ],
 'DJ' => [ N_("Djibouti"),       'en_US', '3' ], #
@@ -311,12 +326,12 @@ my %countries = (
 'KR' => [ N_("Korea"),          'ko_KR', '2' ],
 'KW' => [ N_("Kuwait"),         'ar_KW', '2' ],
 'KY' => [ N_("Cayman Islands"), 'en_US', '5' ], #
-'KZ' => [ N_("Kazakhstan"),     'ru_RU', '2' ], #
+'KZ' => [ N_("Kazakhstan"),     'kk_KZ', '2' ],
 'LA' => [ N_("Laos"),           'lo_LA', '2' ],
 'LB' => [ N_("Lebanon"),        'ar_LB', '2' ],
 'LC' => [ N_("Saint Lucia"),    'en_US', '5' ], #
 'LI' => [ N_("Liechtenstein"),  'de_CH', '1' ], #
-'LK' => [ N_("Sri Lanka"),      'en_IN', '2' ], #
+'LK' => [ N_("Sri Lanka"),      'si_LK', '2' ],
 'LR' => [ N_("Liberia"),        'en_US', '3' ], #
 'LS' => [ N_("Lesotho"),        'en_BW', '3' ], #
 'LT' => [ N_("Lithuania"),      'lt_LT', '1' ],
@@ -326,11 +341,11 @@ my %countries = (
 'MA' => [ N_("Morocco"),        'ar_MA', '3' ],
 'MC' => [ N_("Monaco"),         'fr_FR', '1' ], #
 'MD' => [ N_("Moldova"),        'ro_RO', '1' ], #
-'MG' => [ N_("Madagascar"),     'fr_FR', '3' ], #
+'MG' => [ N_("Madagascar"),     'mg_MG', '3' ],
 'MH' => [ N_("Marshall Islands"), 'en_US', '4' ], #
 'MK' => [ N_("Macedonia"),      'mk_MK', '1' ],
 'ML' => [ N_("Mali"),           'en_US', '3' ], #
-'MM' => [ N_("Myanmar"),        'en_US', '2' ], #
+'MM' => [ N_("Myanmar"),        'en_US', '2' ], # my_MM
 'MN' => [ N_("Mongolia"),       'mn_MN', '2' ],
 'MP' => [ N_("Northern Mariana Islands"), 'en_US', '2' ], #
 'MQ' => [ N_("Martinique"),     'fr_FR', '5' ], #
@@ -347,7 +362,7 @@ my %countries = (
 'NC' => [ N_("New Caledonia"),  'fr_FR', '4' ], #
 'NE' => [ N_("Niger"),          'en_US', '3' ], #
 'NF' => [ N_("Norfolk Island"), 'en_GB', '4' ], #
-'NG' => [ N_("Nigeria"),        'en_US', '3' ], #
+'NG' => [ N_("Nigeria"),        'en_NG', '3' ],
 'NI' => [ N_("Nicaragua"),      'es_NI', '5' ],
 'NL' => [ N_("Netherlands"),    'nl_NL', '1' ],
 'NO' => [ N_("Norway"),         'nb_NO', '1' ],
@@ -360,7 +375,7 @@ my %countries = (
 'PE' => [ N_("Peru"),           'es_PE', '5' ],
 'PF' => [ N_("French Polynesia"), 'fr_FR', '4' ], #
 'PG' => [ N_("Papua New Guinea"), 'en_NZ', '4' ], #
-'PH' => [ N_("Philippines"),    'ph_PH', '2' ],
+'PH' => [ N_("Philippines"),    'fil_PH', '2' ],
 'PK' => [ N_("Pakistan"),       'ur_PK', '2' ],
 'PL' => [ N_("Poland"),         'pl_PL', '1' ],
 'PM' => [ N_("Saint Pierre and Miquelon"), 'fr_CA', '5' ], #
@@ -374,7 +389,7 @@ my %countries = (
 'RE' => [ N_("Reunion"),        'fr_FR', '2' ], #
 'RO' => [ N_("Romania"),        'ro_RO', '1' ],
 'RU' => [ N_("Russia"),         'ru_RU', '1' ],
-'RW' => [ N_("Rwanda"),         'fr_FR', '3' ], # rw_RW
+'RW' => [ N_("Rwanda"),         'rw_RW', '3' ],
 'SA' => [ N_("Saudi Arabia"),   'ar_SA', '2' ],
 'SB' => [ N_("Solomon Islands"), 'en_US', '4' ], #
 'SC' => [ N_("Seychelles"),     'en_US', '4' ], #
@@ -388,7 +403,7 @@ my %countries = (
 'SL' => [ N_("Sierra Leone"),   'en_US', '3' ], #
 'SM' => [ N_("San Marino"),     'it_IT', '1' ], #
 'SN' => [ N_("Senegal"),        'fr_FR', '3' ], #
-'SO' => [ N_("Somalia"),        'en_US', '3' ], # so_SO
+'SO' => [ N_("Somalia"),        'so_SO', '3' ],
 'SR' => [ N_("Suriname"),       'nl_NL', '5' ], #
 'ST' => [ N_("Sao Tome and Principe"), 'en_US', '5' ], #
 'SV' => [ N_("El Salvador"),    'es_SV', '5' ],
@@ -411,7 +426,7 @@ my %countries = (
 'TW' => [ N_("Taiwan"),         'zh_TW', '2' ],
 'TZ' => [ N_("Tanzania"),       'en_US', '3' ], #
 'UA' => [ N_("Ukraine"),        'uk_UA', '1' ],
-'UG' => [ N_("Uganda"),         'en_US', '3' ], # lug_UG
+'UG' => [ N_("Uganda"),         'lg_UG', '3' ],
 'UM' => [ N_("United States Minor Outlying Islands"), 'en_US', '5' ], #
 'US' => [ N_("United States"),  'en_US', '5' ],
 'UY' => [ N_("Uruguay"),        'es_UY', '5' ],
@@ -440,8 +455,8 @@ sub list_countries {
 }
 
 #- this list is built with the following command on the compile cluster:
-#- rpm -qpl /RPMS/locales-* | grep LC_CTYPE | cut -d'/' -f5 | grep '_' | grep -v '\.' | sort | tr '\n' ' ' ; echo
-our @locales = qw(af_ZA am_ET an_ES ar_AE ar_BH ar_DZ ar_EG ar_IN ar_IQ ar_JO ar_KW ar_LB ar_LY ar_MA ar_OM ar_QA ar_SA ar_SD ar_SY ar_TN ar_YE as_IN az_AZ be_BY bg_BG bn_BD bn_IN br_FR bs_BA ca_ES cs_CZ cy_GB da_DK de_AT de_BE de_CH de_DE de_LU el_GR en_AU en_BE en_BW en_CA en_DK en_GB en_HK en_IE en_IN en_NZ en_PH en_SG en_US en_ZA en_ZW eo_XX es_AR es_BO es_CL es_CO es_CR es_DO es_EC es_ES es_GT es_HN es_MX es_NI es_PA es_PE es_PR es_PY es_SV es_US es_UY es_VE et_EE eu_ES fa_IR fi_FI fo_FO fr_BE fr_CA fr_CH fr_FR fr_LU fur_IT fy_DE fy_NL ga_IE gd_GB gez_ER gez_ER@abegede gez_ET gez_ET@abegede gl_ES gu_IN gv_GB he_IL hi_IN hr_HR hu_HU hy_AM id_ID ik_CA is_IS it_CH it_IT iu_CA ja_JP ka_GE kl_GL km_KH kn_IN ko_KR ku_TR kw_GB ky_KG li_BE li_NL lo_LA lt_LT lv_LV mi_NZ mk_MK ml_IN mn_MN mr_IN ms_MY mt_MT nb_NO nds_DE nds_DE@traditional nds_NL ne_NP nl_BE nl_NL nn_NO no_NO oc_FR om_ET om_KE pa_IN ph_PH pl_PL pt_BR pt_PT ro_RO ru_RU ru_UA sc_IT se_NO sid_ET sk_SK sl_SI sq_AL sr_CS sr_CS@Latn sr_YU sr_YU@Latn st_ZA sv_FI sv_SE sw_XX ta_IN te_IN tg_TJ th_TH ti_ER ti_ET tig_ER tk_TM tl_PH tr_TR tt_RU uk_UA ur_PK uz_UZ uz_UZ@Cyrl uz_UZ@Latn vi_VN wa_BE xh_ZA yi_US zh_CN zh_HK zh_SG zh_TW zu_ZA);
+#- rpm -qpl /cooker/RPMS/locales-* | grep LC_CTYPE | grep '\.UTF-8' | cut -d'/' -f5 | sed 's/.UTF-8//' | sort | tr '\n' ' ' ; echo
+our @locales = qw(aa_DJ aa_ER aa_ER@saaho aa_ET af_ZA am_ET an_ES ar_AE ar_BH ar_DZ ar_EG ar_IN ar_IQ ar_JO ar_KW ar_LB ar_LY ar_MA ar_OM ar_QA ar_SA ar_SD ar_SY ar_TN ar_YE as_IN az_AZ be_BY ber_DZ ber_MA bg_BG bn_BD bn_IN br_FR bs_BA byn_ER ca_AD ca_ES ca_FR ca_IT cs_CZ cy_GB da_DK de_AT de_BE de_CH de_DE de_LU dz_BT el_CY el_GR en_AU en_BE en_BW en_CA en_DK en_GB en_HK en_IE en_IN en_NG en_NZ en_PH en_SG en_US en_ZA en_ZW eo_XX es_AR es_BO es_CL es_CO es_CR es_DO es_EC es_ES es_GT es_HN es_MX es_NI es_PA es_PE es_PR es_PY es_SV es_US es_UY es_VE et_EE eu_ES fa_IR fi_FI fil_PH fo_FO fr_BE fr_CA fr_CH fr_FR fr_LU fur_IT fy_DE fy_NL ga_IE gd_GB gez_ER gez_ER@abegede gez_ET gez_ET@abegede gl_ES gu_IN gv_GB ha_NG he_IL hi_IN hr_HR hsb_DE hu_HU hy_AM id_ID ig_NG ik_CA is_IS it_CH it_IT iu_CA ja_JP ka_GE kk_KZ kl_GL km_KH kn_IN ko_KR ku_TR kw_GB ky_KG lg_UG li_BE li_NL lo_LA lt_LT lv_LV mg_MG mi_NZ mk_MK ml_IN mn_MN mr_IN ms_MY mt_MT nb_NO nds_DE nds_DE@traditional nds_NL ne_NP nl_BE nl_NL nn_NO no_NO nr_ZA nso_ZA oc_FR om_ET om_KE pa_IN pa_PK ph_PH pl_PL pt_BR pt_PT ro_RO ru_RU ru_UA rw_RW sc_IT se_NO sh_YU sid_ET si_LK sk_SK sl_SI so_DJ so_ET so_KE so_SO sq_AL sr_CS sr_CS@Latn sr_YU sr_YU@Latn ss_ZA st_ZA sv_FI sv_SE sw_XX ta_IN te_IN tg_TJ th_TH ti_ER ti_ET tig_ER tk_TM tl_PH tn_ZA tr_CY tr_TR ts_ZA tt_RU ug_CN uk_UA ur_PK uz_UZ uz_UZ@Cyrl uz_UZ@Latn ve_ZA vi_VN wa_BE wal_ET xh_ZA yi_US yo_NG zh_CN zh_HK zh_SG zh_TW zu_ZA);
 	
 sub standard_locale {
     my ($lang, $country, $prefer_lang) = @_;
@@ -509,7 +524,7 @@ my @IM_i18n_fields = (
 #-      the module to use for Gtk programs ("xim" to use an X11
 #-	XIM server; or a a native gtk module if exists)
  'XIM_PROGRAM',
-#-      the program to run (usually the same as XIM value, but
+#-      the XIM program to run (usually the same as XIM value, but
 #-	in some cases different, particularly if parameters are needed;
  'QT_IM_MODULE',
 #-     the module to use for Qt programs ("xim" to use an X11
@@ -594,6 +609,14 @@ my %IM_config =
             XMODIFIERS => '@im=nabi',
            },
 
+   oxim => {
+       GTK_IM_MODULE => 'oxim',
+       QT_IM_MODULE => 'oxim',
+       XIM => 'oxim',
+       XIM_PROGRAM => 'oxim',
+       XMODIFIERS => '@im=oxim', # '@im=SCIM' is broken for now
+       packages => { generic => 'oxim' },
+   },
    'scim+(default)' => {
             GTK_IM_MODULE => 'scim',
             QT_IM_MODULE => 'scim',
@@ -739,12 +762,16 @@ my %charsets = (
 "utf_laoo"    => [ undef,            undef,   undef,      "utf8",    undef ],
 "utf_lat1"    => [ "lat0-16",        undef,   undef,      "utf8",    undef ],
 "utf_lat5"    => [ "lat5u-16",       undef,   undef,      "utf8",    undef ],
+"utf_lat7"    => [ "tlat7",          undef,   undef,      "utf8",    undef ],
 "utf_lat8"    => [ "iso14.f16",      undef,   undef,      "utf8",    undef ],
 "utf_mlym"    => [ undef,            undef,   undef,      "utf8",    undef ],
+"utf_mymr"    => [ undef,            undef,   undef,      "utf8",    undef ],
 "utf_taml"    => [ "tamil",          undef,   undef,      "utf8",    undef ],
 # console font still to do
 "utf_tfng"    => [ undef,            undef,   undef,      "utf8",    undef ],
+"utf_tibt"    => [ undef,            undef,   undef,      "utf8",    undef ],
 "utf_vi"      => [ "tcvn8x16",       undef,   undef,      "utf8",    undef ],
+"utf_yo"      => [ undef,            undef,   undef,      "utf8",    undef ],
 # default for utf-8 encodings
 "unicode"     => [ "LatArCyrHeb-16", undef,   undef,      "utf8",    undef ],
 );
@@ -777,16 +804,20 @@ sub get_kde_lang {
     #- get it using 
     #- echo C $(rpm -qp --qf "%{name}\n" /RPMS/kde-i18n-*  | sed 's/kde-i18n-//')
     my @valid_kde_langs = qw(C
-af ar az be bg bn br bs ca cs cy da de el en_GB eo es et eu fa fi fo fr ga gl he hi hr hsb hu id is it ja ko ku lo lt lv mi mk mn ms mt nb nds nl nn nso oc pl pt pt_BR ro ru se sk sl sr ss sv ta tg th tr uk uz ven vi wa wen xh zh_CN zh_TW zu);
+af ar az be bg bn br bs ca cs cy da de el en_GB eo es et eu fa fi fo fr ga gl he hi hr hsb hu id is it ja ko ku lo lt lv mi mk mn ms mt nb nds nl nn nso oc pa pl pt pt_BR ro ru se sk sl sr ss sv ta tg th tr uk uz ven vi wa wen xh zh_CN zh_TW zu);
     my %valid_kde_langs; @valid_kde_langs{@valid_kde_langs} = ();
 
     my $valid_lang = sub {
 	my ($lang) = @_;
 	#- fast & dirty solution to ensure bad entries do not happen
         my %fixlangs = (en => 'C', en_US => 'C',
+                        en_AU => 'en_GB', en_CA => 'en_GB',
+                        en_IE => 'en_GB', en_NZ => 'en_GB',
+                        pa_IN => 'pa',
                         'sr@Latn' => 'sr',
-                        st => 'nso', ve => 'ven',
-                        zh_CN => 'zh_CN', zh_SG => 'zh_CN', zh_TW => 'zh_TW', zh_HK => 'zh_TW');
+                        ve => 'ven',
+                        zh_CN => 'zh_CN', zh_SG => 'zh_CN',
+		       	zh_TW => 'zh_TW', zh_HK => 'zh_TW');
         exists $fixlangs{$lang} ? $fixlangs{$lang} :
 	  exists $valid_kde_langs{$lang} ? $lang :
 	  exists $valid_kde_langs{locale_to_main_locale($lang)} ? locale_to_main_locale($lang) : '';
@@ -824,41 +855,45 @@ my %charset2kde_font = (
   'C' => [ "Sans,10", "Monospace,10" ],
   'iso-8859-1'  => [ "Sans,10", "Monospace,10" ],
   'iso-8859-2'  => [ "Sans,10", "Monospace,10" ],
-  'iso-8859-7'  => [ "Helvetica,12", "courier,10", "Helvetica,11" ],
+  'iso-8859-7'  => [ "DejaVu Sans,10", "FreeMono,10" ],
   'iso-8859-9'  => [ "Sans,10", "Monospace,10" ],
-  'iso-8859-15' => [ "Sans,10", "Monospace,10" ],
   'iso-8859-13' => [ "Sans,10", "Monospace,10" ],
-  'jisx0208' => [ "Sazanami Gothic,13" ],
-  'ksc5601' => [ "Baekmuk Gulim,16" ],
+  'iso-8859-15' => [ "Sans,10", "Monospace,10" ],
+  'jisx0208' => [ "UmePlus P Gothic,12", "UmePlus Gothic,12" ],
+  'ksc5601' => [ "Baekmuk Gulim,12" ],
   'gb2312' => [ "Sans,10", "Monospace,10" ],
   'Big5' => [ "Sans,10", "Monospace,10" ],
   'tis620' => [ "Norasi,16", "Norasi,15" ],
-  'koi8-u' => [ "Nimbus Sans L,10", "Monospace,10" ],
-  'utf_ar' => [ "Terafik,14", "Courier New,13", "Terafik,13" ], 
-  'utf_az' => [ "Nimbus Sans L,12", "Nimbus Mono L,10", "Nimbus Sans L,11" ],
-  'utf_he' => [ "Nachlieli CLM,13", "Miriam Mono CLM,10", "Nachlieli CLM,11" ],
+  'koi8-u' => [ "DejaVu Sans,10", "FreeMono,10" ],
+  'utf_ar' => [ "DejaVu Sans,11", "Courier New,13" ],
+  'utf_az' => [ "DejaVu Sans,10", "FreeMono,10" ],
+  'utf_he' => [ "DejaVu Sans,10", "FreeMono,10" ],
 #-'utf_iu' => [ "????,14", ],
-  'utf_vi' => [ "Nimbus Sans L,12", "Nimbus Mono L,10", "Nimbus Sans L,11" ],
+  'utf_vi' => [ "DejaVu Sans,12", "FreeMono,11", "DejaVu Sans,11" ],
+  'utf_yo' => [ "DejaVu Sans,12", "FreeMono,11", "DejaVu Sans,11" ],
   #- script based
-  'utf_armn' => [ "Artsounk,12", "Monospace,10", "Artsounk,11" ],
-  'utf_cyr2' => [ "Nimbus Sans L,10", "Monospace,10" ],
-  'utf_beng' => [ "Mukti Narrow,14", "Mitra Mono,12", "Mukti Narrow,14" ],
-  'utf_deva' => [ "Raghindi,14", ],
-  'utf_ethi' => [ "GF Zemen Unicode,15" ],
+  'utf_armn' => [ "DejaVu Sans,11", "FreeMono,11" ],
+  'utf_cyr2' => [ "DejaVu Sans,10", "FreeMono,10" ],
+  'utf_beng' => [ "Mukti Narrow,13", "Mitra Mono,13", "Mukti Narrow,12" ],
+  'utf_deva' => [ "Raghindi,12", ],
+  'utf_ethi' => [ "GF Zemen Unicode,13" ],
   'utf_guru' => [ "Lohit Punjab,14", ],
 #-'utf_khmr' => [ "????,14", ],
   'utf_knda' => [ "Sampige,14", ],
   'utf_lat1' => [ "Sans,10", "Monospace,10" ],
   'utf_lat5' => [ "Sans,10", "Monospace,10" ],
-  'utf_lat8' => [ "Sans,10", "Monospace,10" ],
-  'utf_mlym' => [ "malayalam,14", ],
-  'utf_taml' => [ "TSCu_Paranar,14", "Tsc_avarangalfxd,10", "TSCu_Paranar,12", ],
-  'utf_tfng' => [ "Hapax Berbère,14", ],
+  'utf_lat7' => [ "Sans,10", "Monospace,10" ],
+  'utf_lat8' => [ "DejaVu Sans,10", "FreeMono,10" ],
+  'utf_mlym' => [ "malayalam,12", ],
+#-'utf_mymr' => [ "????,14", ],
+  'utf_taml' => [ "TSCu_Paranar,14", "Tsc_avarangalfxd,14", "TSCu_Paranar,13", ],
+  'utf_tfng' => [ "Hapax Berbère,12", ],
+  'utf_tibt' => [ "Tibetan Machine Uni,14", ],
   #- the following should be changed to better defaults when better fonts
   #- get available
-  'utf_geor' => [ "ClearlyU,15" ],
-  'utf_laoo' => [ "ClearlyU,15" ],
-  'default'  => [ "Sans,12", "Monospace,10", "Sans,11" ],
+  'utf_geor' => [ "ClearlyU,13" ],
+  'utf_laoo' => [ "DejaVu Sans,11", "ClearlyU,13" ],
+  'default'  => [ "DejaVu Sans,12", "FreeMono,11", "DejaVu Sans,11" ],
 );
 
 sub charset2kde_font {
@@ -876,21 +911,12 @@ sub charset2kde_font {
 # on the "charset" defined by language array. This allows to selecting
 # an appropriate font for each language for the installer only.
 my %charset2pango_font = (
-  'tis620' =>      "Norasi 17",
-  'utf_ar' =>      "Roya 14",
-  'utf_armn' =>    "Artsounk 14",
-  'utf_cyr2' =>    "Nimbus Sans L 12",
   'utf_geor' =>    "Sans 14",
-  'utf_he' =>      "Sans 12",
-  'utf_laoo' =>    "Sans 14",
   'utf_taml' =>    "TSCu_Paranar 14",
-  'utf_vi' =>      "Sans 14",
-  'iso-8859-7' =>  "Kerkis 14",
   'jisx0208' =>    "Sans 14",
-  #- Nimbus Sans L is missing some chars used by some cyrillic languages,
-  #- but tose have not yet DrakX translations; it also misses vietnamese
-  #- latin chars; all other latin and cyrillic are covered.
-  'default' =>     "Sans 10"
+  'utf_ar' =>      "Sans 15",
+  'tis620' =>      "Norasi 20",
+  'default' =>     "DejaVu Sans 12"
 );
 
 sub charset2pango_font {
@@ -912,36 +938,20 @@ sub l2pango_font {
 sub set {
     my ($locale, $b_translate_for_console) = @_;
     
+    put_in_hash(\%ENV, i18n_env($locale));
+
     if ($::move) {
-	move::handleI18NClp($locale->{lang});
-	put_in_hash(\%ENV, i18n_env($locale));
-	return;
     } elsif (!$::isInstall) {
-	put_in_hash(\%ENV, i18n_env($locale));
 	bindtextdomain();
-	return;
-    }
-
-    my $lang = $locale->{lang};
-    exists $langs{$lang} or log::l("lang::set: trying to set to $lang but I do not know it!"), return;
-
-    #- set all LC_* variables to a unique locale ("C"), and only redefine
-    #- LC_COLLATE (for sorting) and LANGUAGE (for the po files)
-    $ENV{$_} = 'C' foreach qw(LC_NUMERIC LC_TIME LC_MONETARY LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT LC_IDENTIFICATION);
-    
-    $ENV{LC_CTYPE}    = $lang;
-    $ENV{LC_MESSAGES} = $lang;
-    $ENV{LC_COLLATE}  = $lang;
-    $ENV{LANG}        = $lang;
-    
-    if ($b_translate_for_console && $lang =~ /^(ko|ja|zh|th)/) {
-	log::l("not translating in console");
-	$ENV{LANGUAGE}  = 'C';
     } else {
-	$ENV{LANGUAGE}  = getLANGUAGE($lang);
+	$ENV{LC_NUMERIC} = 'C'; #- otherwise eval "1.5" returns 1 in fr_FR
+    
+	if ($b_translate_for_console && $locale->{lang} =~ /^(ko|ja|zh|th)/) {
+	    log::l("not translating in console");
+	    $ENV{LANGUAGE}  = 'C';
+	}
+	load_mo();
     }
-    load_mo();
-    $lang;
 }
 
 sub langs {
@@ -955,9 +965,8 @@ sub langsLANGUAGE {
 }
 
 sub utf8_should_be_needed {
-    my ($locale) = @_; 
-    my @l = uniq(grep { $_ ne 'C' } map { l2charset($_) } langs($locale->{langs}));
-    @l > 1 || any { /utf|unicode/ } @l;
+    my ($_locale) = @_; 
+    1;
 }
 
 sub pack_langs { 
@@ -1031,7 +1040,7 @@ sub i18n_env {
 	(map { $_ => $locale_country } qw(LC_NUMERIC LC_MONETARY LC_ADDRESS LC_MEASUREMENT LC_NAME LC_PAPER LC_IDENTIFICATION LC_TELEPHONE))
     };
 
-    log::l("lang::write: lang:$locale->{lang} country:$locale->{country} locale|lang:$locale_lang locale|country:$locale_country language:$h->{LANGUAGE}");
+    log::l("i18n_env: lang:$locale->{lang} country:$locale->{country} locale|lang:$locale_lang locale|country:$locale_country LANGUAGE:$h->{LANGUAGE}");
 
     $h;
 }
@@ -1042,7 +1051,7 @@ sub write_and_install {
     my @packages = IM2packages($locale);
     if (@packages && !$b_user_only) {
 	log::explanations("Installing IM packages: ", join(', ', @packages));
-	$do_pkgs->install(@packages);
+	$do_pkgs->ensure_are_installed(\@packages, 1);
     }
     &write($locale, $b_user_only, $b_dont_touch_kde_files);
 }
@@ -1108,7 +1117,7 @@ sub write {
     if (member($locale->{lang}, qw(ar bn fa he hi ja kn ko pa_IN ug ur yi zh_TW zh_CN))) {
         #- CONSOLE_NOT_LOCALIZED if defined to yes, disables translations on console
         #-	it is needed for languages not supported by the linux console
-        log::explanations(qq(Disabling tranlsation on console since "$locale->{lang}" is not supported by the console));
+        log::explanations(qq(Disabling translation on console since "$locale->{lang}" is not supported by the console));
         add2hash($h, { CONSOLE_NOT_LOCALIZED => 'yes' });
     }
 
@@ -1116,14 +1125,9 @@ sub write {
     log::explanations(qq(Setting l10n configuration in "$file"));
     setVarsInSh($::prefix . $file, $h);
 
-    if (!$b_user_only) {
-        log::explanations("Set default menu language");
-        substInFile {
-            s!^function lang\b.*!function lang()="$h->{LANG}"!g;
-        } "$::prefix/etc/menu-methods/lang.h" if !$b_user_only;
-    }
-
     configure_hal($locale) if !$b_user_only;
+
+    run_program::rooted($::prefix, 'grub-gfxmenu', '--quiet', '--lang', $locale->{lang});
     
     my $charset = l2charset($locale->{lang});
     my $qtglobals = $b_user_only ? "$ENV{HOME}/.qt/qtrc" : "$::prefix/etc/qtrc";
@@ -1132,7 +1136,8 @@ sub write {
        	          ));
 
     eval {
-	my $confdir = $::prefix . ($b_user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config';
+	my %dir_defaults = read_gnomekderc("$::prefix/etc/kderc", 'Directories-default');
+	my $confdir = $::prefix . ($b_user_only ? "$ENV{HOME}/.kde" : first(split(',', $dir_defaults{prefixes})) || "/etc/kde") . '/share/config';
 
 	-d $confdir or die 'not configuring kde config files since it is not installed/used';
 
@@ -1161,7 +1166,7 @@ sub write {
 		    s/^(FailFont)=.*/$1=$font_small,5,$kde_charset,75,0/;
 		    s/^(GreetFont)=.*/$1=$font_huge,5,$kde_charset,50,0/;
 		}
-	    } "$::prefix/usr/share/config/kdm/kdmrc";
+	    } "$::prefix/etc/kde/kdm/kdmrc";
 	}
 
     } if !$b_dont_touch_kde_files;
@@ -1198,7 +1203,7 @@ EOF
     
     output_p("$::prefix/usr/share/hal/fdi/30osvendor/locale-policy.fdi", 
 	     sprintf(<<'EOF', $options_per_fs, $options->('storage', 'cdrom')));
-<?xml version="1.0" encoding="ISO-8859-1"?> <!-- -*- SGML -*- --> 
+<?xml version="1.0" encoding="UTF-8"?> <!-- -*- SGML -*- --> 
 
 <deviceinfo version="0.2">
 
@@ -1261,9 +1266,10 @@ sub bindtextdomain() {
     my $localedir = "$ENV{SHARE_PATH}/locale" . ($::prefix ? "_special" : '');
 
     c::init_setlocale();
-    $::need_utf8_i18n = 1;
-    Locale::gettext::bind_textdomain_codeset('libDrakX', 'UTF-8');
-    Locale::gettext::bindtextdomain('libDrakX', $localedir);
+    foreach (@::textdomains, 'libDrakX') {
+	Locale::gettext::bind_textdomain_codeset($_, 'UTF-8');
+	Locale::gettext::bindtextdomain($_, $localedir);
+    }
 
     $localedir;
 }
@@ -1294,6 +1300,8 @@ sub console_font_files() {
 
 sub load_console_font {
     my ($locale) = @_;
+    return if $::local_install;
+
     my ($name, $sfm, $acm) = l2console_font($locale, 1);
 
     require run_program;
@@ -1354,7 +1362,7 @@ sub check() {
       foreach grep { !member($_->[1], @locales) } map { [ $_, l2locale($_) ] } list_langs();
 
     $err->("lang image for lang $_->[0] is missing (file $_->[1])")
-      foreach grep { !(-e $_->[1]) } map { [ $_, "pixmaps/langs/lang-$_.png" ] } list_langs();
+      foreach grep { !(-e $_->[1]) } map { [ $_, "install/pixmaps/langs/lang-$_.png" ] } list_langs();
 
     $err->("default locale $_->[1] of country $_->[0] is not listed in \@locales")
       foreach grep { !member($_->[1], @locales) } map { [ $_, c2locale($_) ] } list_countries();

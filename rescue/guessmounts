@@ -12,10 +12,11 @@
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #
 
-use lib qw(../perl-install /usr/lib/libDrakX);
+use lib qw(/usr/lib/libDrakX);
 use common;
 use fs;
 use fs::proc_partitions;
+use fs::type;
 
 
 my @proc_mounts = fs::read_fstab('', '/proc/mounts');
@@ -33,11 +34,24 @@ print STDERR "\nPlease wait, trying to find your root device...\n";
 
 mkdir_p($target);
 
+my @parts = map {
+    $_->{device} = delete $_->{dev};
+    put_in_hash($_, fs::type::type_subpart_from_magic($_));   
+} fs::proc_partitions::read_raw();
+my ($raid_parts, $normal_parts) = partition { isRawRAID($_) } @parts;
+
+if (@$raid_parts) {
+    require raid;
+    raid::detect_during_install_once(@$raid_parts);
+    my $raids = raid::get_existing(@$raid_parts);
+    push @$normal_parts, @$raids;
+}
+
 my @fstab;
 my $root;
 
-foreach (fs::proc_partitions::read_raw()) {
-    my $dev = devices::make($_->{dev});
+foreach (@$normal_parts) {
+    my $dev = devices::make($_->{device});
 
     my $fs = find {
 	system("mount -t $_ $dev $target 2>/dev/null") == 0;

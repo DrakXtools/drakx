@@ -20,12 +20,15 @@
   find
   file md5sum
 
-  gzip <!-- zcat and gunzip are hardlinks, they are handled in aliases to make it more apparent -->
+  gzip zcat gunzip
   bzip2 bunzip2 bzcat
 
   df du
 
-  packdrake parsehdlist
+  <mode copy="dereference">
+    vol_id <!-- needed by libDrakX -->
+  </mode>
+
   cpio ftp tar
   rsync
   ssh scp
@@ -35,7 +38,7 @@
   dmesg
   chroot
   sleep
-  sync update
+  sync
 
   eject
   mount umount
@@ -55,7 +58,7 @@
   fsck.xfs xfs_repair
   resize_reiserfs reiserfsck
   mkswap swapoff swapon
-  <if ARCH="i.86">
+  <if ARCH="i.86|x86_64">
     fsck.jfs
   </if>
   <if ARCH="i.86|x86_64|ia64">
@@ -67,9 +70,14 @@
   </if>
 
   <if-not ARCH="ppc">
-    fdisk gpart sfdisk
+    fdisk gpart
     rescuept
+    testdisk
   </if-not>
+  <if-not ARCH="ppc|sparc">
+    sfdisk
+   </if-not>
+                     
   <if ARCH="ppc">
     pdisk 
   </if>
@@ -144,7 +152,7 @@
   </if>
 
   <from expand="command">
-    perl -Mkeyboard -I../perl-install -le 'print foreach keyboard::loadkeys_files()'
+    perl -Mkeyboard -I/usr/lib/libDrakX -le 'print foreach keyboard::loadkeys_files()'
   </from>
 
   <if set="LANGUAGE_fr_FR">
@@ -194,11 +202,6 @@
   ARCH-linux/POSIX.pm
   ARCH-linux/XSLoader.pm
 </from>
-
-<from expand="perl">
-  packdrake.pm
-  MDV/Packdrakeng.pm
-</from>
 </filter>
 
 <from dir="/etc">
@@ -222,15 +225,8 @@
     *table.gz
 </from>
 
-<from dir="../kernel/all.kernels/$(MAIN_KERNEL)">
-  <to dir="/modules">
-    modules.cz
-    modules.dep
-  </to>
-</from>
-
 <filter command="../tools/simplify-drakx-modules">
-  <from dir="." expand="collect-perl-files ../perl-install /usr/lib/libDrakX">
+  <from dir="." expand="collect-perl-files /usr/lib/libDrakX /usr/lib/libDrakX">
     <to dir="/usr/bin">
       rescue-doc drvinst lsparts
       guessmounts install_bootloader
@@ -242,9 +238,12 @@
       partimage_whole_disk
     </to>
   </from>
+  <from dir="/usr/lib/libDrakX">
+    raid.pm <!-- required when needed in guessmounts -->
+  </from>
 </filter>
 
-<from dir="../mdk-stage1">
+<from dir="/usr/LIB/drakx-installer-binaries">
   <to dir="/usr/bin">
     rescue-gui
   </to>

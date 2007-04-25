@@ -75,11 +75,16 @@ sub _sets() {
     foreach (@sets) {
 	my $name = $_->{name};
 	my @l = grep { begins_with($name, $_->{vg}) } @raid_devices;
+	log::l("ERROR: multiple match for set $name: " . join(' ', map { $_->{vg} } @l)) if @l > 1;
+
+	@l = grep { begins_with($_->{vg}, $name) } @raid_devices if !@l;
+	
 	if (@l) {
-	    log::l("ERROR: multiple match for set $name: " . join(' ', map { $_->{vg} } @l)) if @l > 1;
-	    my ($raid) = @l;
-	    add2hash($_, $raid);
-	    $_->{status} = $raid->{status} if $_->{status} eq 'ok' && $::isInstall;
+	    foreach my $raid (@l) {
+		push @{$_->{disks}}, @{$raid->{disks}};
+		add2hash($_, $raid);
+		$_->{status} = $raid->{status} if $_->{status} eq 'ok' && $::isInstall;
+	    }
 	} else {
 	    log::l("ERROR: no matching raid devices for set $name");
 	}
@@ -180,7 +185,18 @@ EO
 	 # ERROR: multiple match for set nvidia_bcjdbjfa:  nvidia_bcjdbjfa
      },
 
-
+     nvidia_with_subsets => {
+      '-s' => <<'EO',
+nvidia_bfcciffh:625163520:128:raid10:ok:2:4:0
+EO
+       '-r' => <<'EO',
+/dev/sda:nvidia:nvidia_bfcciffh-0:stripe:ok:312581806:0
+/dev/sdb:nvidia:nvidia_bfcciffh-0:stripe:ok:312581806:0
+/dev/sdc:nvidia:nvidia_bfcciffh-1:stripe:ok:312581806:0
+/dev/sdd:nvidia:nvidia_bfcciffh-1:stripe:ok:312581806:0
+EO
+	 # ERROR: multiple match for set nvidia_bcjdbjfa:  nvidia_bcjdbjfa
+     },
     );
     
     *call_dmraid = sub {

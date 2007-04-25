@@ -9,10 +9,15 @@ sub xconf {
     
     require Xconfig::default;
     require do_pkgs;
-    $o->{raw_X} = Xconfig::default::configure(do_pkgs_standalone->new);
+    my $do_pkgs = do_pkgs_standalone->new;
+    $o->{raw_X} = Xconfig::default::configure($do_pkgs);
     
     require Xconfig::main;
-    Xconfig::main::configure_everything_auto_install($o->{raw_X}, do_pkgs_standalone->new, {}, { allowFB => 1 });
+    Xconfig::main::configure_everything_auto_install($o->{raw_X}, $do_pkgs, {}, { allowFB => 1 });
+
+    #- always disable compositing desktop effects when configuring a new video card
+    require Xconfig::glx;
+    Xconfig::glx::write({});
 
     modules::load_category($modules_conf, 'various/agpgart'); 
 }
@@ -33,16 +38,8 @@ sub mouse_conf {
 
 sub pcmcia {
     my ($pcic) = @_;
-
-    #- should be set after installing the package above otherwise the file will be renamed.
-    setVarsInSh("$::prefix/etc/sysconfig/pcmcia", {
-     PCMCIA    => bool2yesno($pcic),
-     PCIC      => $pcic,
-     PCIC_OPTS => "",
-     CORE_OPTS => "",
-    });
-    require services;
-    services::set_status("pcmcia", $pcic);
+    require modules;
+    modules::set_preload_modules("pcmcia", if_($pcic, $pcic));
 }
 
 sub bluetooth {
@@ -79,6 +76,11 @@ sub laptop {
     services::set_status("apmd", $on_laptop);
     services::set_status("laptop-mode", $on_laptop);
     services::set_status("numlock", !$on_laptop);
+}
+
+sub cpufreq() {
+    require cpufreq;
+    modules::set_preload_modules("cpufreq", cpufreq::get_modules());
 }
 
 1;

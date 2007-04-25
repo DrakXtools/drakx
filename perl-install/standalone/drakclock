@@ -6,6 +6,7 @@ use POSIX;
 use common;
 # i18n : IMPORTANT to get correct namespace (drakconf instead of libDrakX)
 BEGIN { unshift @::textdomains, 'drakconf' }
+use mygtk2 qw(gtknew);
 use ugtk2 qw(:all);
 use interactive;
 use standalone;
@@ -26,33 +27,27 @@ $ugtk2::wm_icon = "/usr/share/mcc/themes/default/time-mdk.png";
 my $ntpfile = '/etc/ntp.conf';
 my $ntpdlock = '/var/lock/subsys/ntpd';
 
-my $my_win = ugtk2->new(N("DrakClock"));
+my $my_win = ugtk2->new(N("Date, Clock & Time Zone Settings"));
 
 $my_win->{window}->signal_connect(delete_event => sub { ugtk2->exit(0) });
 
-my $calendar = Gtk2::Calendar->new;
+my $calendar = gtknew('Calendar');
 $calendar->signal_connect($_ => \&cal_changed) foreach 'month-changed', 'day-selected', 'day-selected-double-click', 'prev-month', 'next-month', 'prev-year', 'next-year';
 
-$in->{timezone} = {};
-add2hash($in->{timezone}, timezone::read());
+my $timezone = timezone::read();
 
-my $label_timezone = Gtk2::Label->new(defined($in->{timezone}{timezone}) ? $in->{timezone}{timezone} : N("not defined"));
+my $label_timezone = gtknew('Label', text => $timezone->{timezone}  || N("not defined"));
 
-my $button_time = Gtk2::Button->new(N("Change Time Zone"));
+my $button_time = gtknew('Button', text => N("Change Time Zone"));
 $button_time->signal_connect(clicked => sub {
 				   local $::isEmbedded = 0; # to prevent sub window embedding
-				   my $timezone = $in->{timezone}{timezone};
-				   $in->{timezone}{timezone} = $in->ask_from_treelist(N("Timezone - DrakClock"), N("Which is your timezone?"), '/', [ timezone::getTimeZones() ], $timezone);
-				   if (defined($in->{timezone}{timezone})) {
-					   $in->{timezone}{UTC} = $in->ask_yesorno(N("GMT - DrakClock"), N("Is your hardware clock set to GMT?"), $in->{timezone}{UTC});
-					   timezone::write($in->{timezone});
-                            $label_timezone->set_text($in->{timezone}{timezone});
-				   } else {
-					   $in->{timezone}{timezone} = $timezone;
-                            $label_timezone->set_text($timezone);    
-                        }
+				   if ($timezone->{timezone} = $in->ask_from_treelist(N("Timezone - DrakClock"), N("Which is your timezone?"), '/', [ timezone::getTimeZones() ], $timezone->{timezone})) {
+                                       $timezone->{UTC} = $in->ask_yesorno(N("GMT - DrakClock"), N("Is your hardware clock set to GMT?"), $timezone->{UTC});
+                                       timezone::write($timezone);
+                                   }
+                                   $label_timezone->set_text($timezone->{timezone});
 			       });
-#my $button_ntp = Gtk2::Button->new(N("Use NTP"));
+#my $button_ntp = gtknew('Button', text => N("Use NTP"));
 #$button_time->signal_connect(clicked => sub { ask_ntp($in, $) });
 
 my $drawing_area;
@@ -61,48 +56,48 @@ my $adjh = Gtk2::Adjustment->new(0.0, 0.0, 23.0, 1.0, 5.0, 0.0);
 my $adjm = Gtk2::Adjustment->new(0.0, 0.0, 59.0, 1.0, 5.0, 0.0);
 my $adjs = Gtk2::Adjustment->new(0.0, 0.0, 59.0, 1.0, 5.0, 0.0);
 
-my ($button_reset, $check_ntp, $hb_ntp, $combo_ntpserver, $fullntp, $ntp);
+my ($button_reset, $check_ntp, $hb_ntp, $combo_ntpserver, $ntp);
 my $mode = 0;
 
 my (undef, undef, $h_old, $old_day, $old_month, $old_year) = localtime(time());
 
 my @image_size = (200, 200);
 
-$my_win->{window}->add(gtkpack_(gtkset_border_width(Gtk2::VBox->new, $::isEmbedded ? 0 : 5),
-                                1, gtkpack_(Gtk2::HBox->new,
-                                            1, gtkpack_(Gtk2::VBox->new,
+$my_win->{window}->add(gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, children => [
+                                1, gtknew('HBox', children => [
+                                            1, gtknew('VBox', children => [
                                                         0, $calendar,
-                                                        1, gtkadd(gtkset_shadow_type(Gtk2::Frame->new(N("Network Time Protocol")), 'etched_in'),
-                                                                  gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
-                                                                           0, Gtk2::Label->new(N("Your computer can synchronize its clock\n with a remote time server using NTP")),
-                                                                           0, gtksignal_connect(gtkset_active($check_ntp = Gtk2::CheckButton->new(N("Enable Network Time Protocol")), $mode),  clicked => sub { 
+                                                        1, gtknew('Frame', text => N("Network Time Protocol"), shadow_type => 'etched_in', child => 
+                                                                  gtknew('VBox', border_width => 5, children => [
+                                                                           0, gtknew('Label', text => N("Your computer can synchronize its clock\n with a remote time server using NTP")),
+                                                                           0, gtksignal_connect(gtkset_active($check_ntp = gtknew('CheckButton', text => N("Enable Network Time Protocol")), $mode),  clicked => sub { 
                                                                                                     $mode = !$mode; 
                                                                                                     $hb_ntp->set_sensitive($mode);
                                                                                                     if ($mode == 1 && !$in->do_pkgs->is_installed('ntp')) {
                                                                                                         install_ntp();
                                                                                                     }
                                                                                                 }),
-                                                                           0, gtkpack_(gtkset_border_width($hb_ntp = Gtk2::HBox->new, 5),
-                                                                                       0, Gtk2::Label->new(N("Server:")),
+                                                                           0, $hb_ntp = gtknew('HBox', border_width => 5, children => [
+                                                                                       0, gtknew('Label', text => N("Server:")),
                                                                                        1, $combo_ntpserver = Gtk2::Combo->new
-                                                                                      )
-                                                                          ))
-                                                       ),
-                                            0, gtkpack_(Gtk2::VBox->new,
-                                                        0, gtkpack_(Gtk2::HBox->new,
+                                                                                      ])
+                                                                          ]))
+                                                       ]),
+                                            0, gtknew('VBox', children => [
+                                                        0, gtknew('HBox', children => [
                                                                     0, $drawing_area = gtkset_size_request(Gtk2::DrawingArea->new, @image_size),
-                                                                   ),
-                                                        0, gtkpack_(my $time_box = Gtk2::HBox->new(1,0),
+                                                                   ]),
+                                                        0, my $time_box = gtknew('HBox', homogenous => 1, children => [
                                                                     0, my $spinner_h = Gtk2::SpinButton->new($adjh, 0, 0),
                                                                     0, my $spinner_m = Gtk2::SpinButton->new($adjm, 0, 0),
                                                                     0, my $spinner_s = Gtk2::SpinButton->new($adjs, 0, 0),
-                                                                   ),
-                                                        1, gtkadd(gtkset_shadow_type(Gtk2::Frame->new(N("Timezone")), 'etched_in'),
-                                                                  gtkpack__(gtkset_border_width(Gtk2::VBox->new, 5),
+                                                                   ]),
+                                                        1, gtknew('Frame', text => N("Timezone"), shadow_type => 'etched_in', child => 
+                                                                  gtknew('VBox', border_width => 5, children_tight => [
                                                                             $label_timezone,
-                                                                            $button_time)),
-                                                       ),
-                                           ),
+                                                                            $button_time])),
+                                                       ]),
+                                           ]),
                                 0, create_okcancel(my $w =
                                                    {
                                                     cancel_clicked => sub { ugtk2->exit(0) },
@@ -110,8 +105,12 @@ $my_win->{window}->add(gtkpack_(gtkset_border_width(Gtk2::VBox->new, $::isEmbedd
 							my $need_date = 1;
                                                         if ($check_ntp->get_active) {
                                                             my $choosed_serv = $combo_ntpserver->entry->get_text;
-                                                            $choosed_serv =~ s/(\S+)\s*(.*)$/$1/;
-                                                            timezone::ntp_server($1);
+                                                            $choosed_serv =~ s/^[^:]+: (.+)/$1/;
+                                                            if (!$choosed_serv) {
+                                                                err_dialog(N("Error"), N("Please enter a valid NTP server address."));
+                                                                return;
+                                                            }
+                                                            timezone::set_ntp_server($choosed_serv);
                                                             system("/sbin/chkconfig --level 35 ntpd on");
                                                             system("service ntpd stop");
                                                             #verify that we have a valid hostname (thx sam)
@@ -119,10 +118,14 @@ $my_win->{window}->add(gtkpack_(gtkset_border_width(Gtk2::VBox->new, $::isEmbedd
 							    if (!system("/usr/sbin/ntpdate", $choosed_serv)) {
 								update_time(); #- get the new time before updating the hwclock
 								system("service ntpd start");
-								$need_date = 0
+								$need_date = 0;
 							    } else {
-								warn_dialog(N("Error"), N("Could not synchronize with %s.", $choosed_serv));
-								return
+                                                                $in->ask_from_no_check({
+                                                                    title => N("Error"),
+                                                                    messages => N("Could not synchronize with %s.", $choosed_serv),
+                                                                    ok => N("Quit"),
+                                                                    cancel => N("Retry"),
+                                                                }, []) or return;
 							    }
                                                         } else {
                                                             if (-e $ntpdlock) { 
@@ -151,7 +154,7 @@ $my_win->{window}->add(gtkpack_(gtkset_border_width(Gtk2::VBox->new, $::isEmbedd
                                                          $its_reset = 0;
                                                      } ]
                                                   ),
-                               )
+                               ])
                       );
 $button_reset = $w->{buttons}{N("Reset")};
 
@@ -162,11 +165,13 @@ $combo_ntpserver->set_popdown_strings(@$servers);
 if (-e $ntpfile && -e $ntpdlock) {
     $ntp = timezone::ntp_server();
     $ntp and ntp_widget_state(1);
-    foreach my $s (@$servers) {
-	$s =~ /^\Q$ntp / and $fullntp = $s;
-	$fullntp and last
+    my $fullntp = $ntp;
+    my $short_ntp = $ntp;
+    #- strip digits from \d+.foo.pool.ntp.org
+    $short_ntp =~ s/^\d+\.//;
+    foreach (@$servers) {
+	/^[^:]+: \Q$short_ntp\E$/ and $fullntp = $_, last;
     }
-    $fullntp |= $ntp;
     $combo_ntpserver->entry->set_text($fullntp);
 } else { ntp_widget_state(0) }
   
@@ -221,18 +226,12 @@ sub ntp_widget_state {
 }
 sub install_ntp() {
     $my_win->{window}->set_sensitive(0);
-    if (warn_dialog(N("Warning"), N("We need to install ntp package\n to enable Network Time Protocol
-
-Do you want to install ntp?"))) {
-	$in->do_pkgs->install('ntp');
-    } else {
-	ntp_widget_state(0);
-    }
+    $in->do_pkgs->ensure_is_installed('ntp') or ntp_widget_state(0);
     $my_win->{window}->set_sensitive(1);
 }
 sub get_server() {
     my $servs = timezone::ntp_servers();
-    [ map { "$_  ($servs->{$_})" } sort keys %$servs ]
+    [ map { "$servs->{$_}: $_" } sort { $servs->{$a} cmp $servs->{$b} || $a cmp $b } keys %$servs ];
 }
 sub update_time() {
     my (undef, undef, undef, $mday, $mon, $year) = localtime(time());
@@ -243,7 +242,7 @@ sub update_time() {
     $calendar->select_month($mon, $year);
     $its_reset = $old_its_reset;
     Repaint($drawing_area, 1);
-};
+}
 
 sub cal_changed() {
     !$its_reset and $timer and Glib::Source->remove($timer);
@@ -322,7 +321,7 @@ sub time_to_rad {
 
 sub Repaint {
     my ($drawing_area, $o_update_time) = @_;
-    my ($sec,$min,$hour) = localtime(time());
+    my ($sec, $min, $hour) = localtime(time());
     time_to_rad($sec, $min, $hour) if $o_update_time;
     my ($width, $height) = ($drawing_area->allocation->width, $drawing_area->allocation->height);
     my $dRadians_hour_real = $dRadians_hour + $dRadians_min / 12;
@@ -350,7 +349,7 @@ sub DrawSec {
     $pixmap->draw_line($gc,
 		       $midx+$dec, $midy+$dec,
 		       $midx+$dec + (8/10 * $radius * sin($dRadians)),
-		       $midy+$dec - (8/10 * $radius * cos($dRadians)))
+		       $midy+$dec - (8/10 * $radius * cos($dRadians)));
 }
 
 sub DrawMin {
@@ -389,7 +388,7 @@ sub DrawPointAt {
 
     $pixmap->draw_points($black_gc,
 			$cx + 95/100 * $radius * sin($dRadians),
-			$cy - 95/100 * $radius * cos($dRadians))
+			$cy - 95/100 * $radius * cos($dRadians));
 }
 
 

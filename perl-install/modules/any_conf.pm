@@ -5,13 +5,8 @@ use common;
 
 
 sub vnew {
-    if (c::kernel_version() =~ /^\Q2.6/) {
-	require modules::modprobe_conf;
-	modules::modprobe_conf->new;
-    } else {
-	require modules::modules_conf;
-	modules::modules_conf->new;
-    }    
+    require modules::modprobe_conf;
+    modules::modprobe_conf->new;
 }
 
 

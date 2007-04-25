@@ -1,0 +1,117 @@
+#!/usr/bin/perl
+
+# this script takes kernels rpms from RPMS/ and create various files in all_kernels/
+# for each rpms in RPMS, it does:
+#   RPMS/kernel-VER-*.rpm -> 
+#     all.kernels/VER/all_modules.tar  (used for all.rdz)
+#     all.kernels/VER/modules.dep
+#     all.kernels/VER/modules.alias
+#     all.kernels/VER/vmlinuz
+#
+# if RPMS is empty, this script tries to find kernels in $kernel_repository
+
+use lib '../kernel';
+use MDK::Common;
+use list_modules;
+
+(my $karch = arch()) =~ s/^i.86$/i586/;
+my $kernel_repository = chomp_(cat_('.repository'));
+my $rpm = 'rpm --nosignature';
+
+
+my $MOVE = $ARGV[0] eq '--move' && shift;
+
+@ARGV <= 1 or die "usage: ./update_kernel [--move] [<kernel rpm>]\n";
+
+eval { rm_rf('all.kernels') }; #- remove old things
+mkdir 'all.kernels';
+
+my $main = chomp_(cat_('RPMS/.main'));
+
+if (@ARGV) {
+    install_kernel($ARGV[0]);
+} elsif (! -d 'RPMS' && $kernel_repository) {
+    get_kernels_from_repository();
+}
+
+if (glob("RPMS/*.rpm")) {
+    extract_kernel($_) foreach glob("RPMS/*.rpm");
+} else {
+    my @l = all('/lib/modules');
+    @l = grep { /legacy/ } @l if arch() =~ /i.86/;
+    extract_installed_rpm('/', $_) foreach @l;
+}
+
+sub system_verbose { print join(' ', @_), "\n"; system(@_) }
+sub sys { &system_verbose; $? and die }
+
+sub rpm2version {
+    my ($kernel_rpm) = @_;
+    `$rpm -qpl $kernel_rpm` =~ m!/boot/vmlinuz-(.*)! && $1 or die "can't find vmlinuz in $kernel_rpm\n";
+}
+
+sub get_kernels_from_repository() {
+    sub look_for {
+	my ($name, $repository) = @_;
+	my $rpm_wildcard = 'kernel-' . ($name ? "$name-" : arch() =~ /i.86/ ? 'legacy-' : '') . '2.6*.rpm';
+	my @l = glob("$repository/$rpm_wildcard") or die "no $name kernel found in $repository matching $rpm_wildcard\n";
+	@l;
+    }
+    my @kernels;
+    push @kernels, look_for('', $kernel_repository);
+
+    install_kernel($_) foreach @kernels;
+}
+
+sub install_kernel {
+    my ($kernel_rpm) = @_;
+    my $basename = basename($kernel_rpm);
+    warn "Installing rpm $basename in RPMS\n";
+    mkdir 'RPMS';
+    cp_af($kernel_rpm, "RPMS/$basename");
+
+    if (!$main) {
+	$main = rpm2version($kernel_rpm);
+	output('RPMS/.main', "$main\n");
+    }
+}
+
+sub extract_kernel {
+    my ($kernel_rpm) = @_;
+
+    my $kern_ver = rpm2version($kernel_rpm);
+    my $dir = "all.kernels/$kern_ver";
+
+    warn "Extracting kernel $kern_ver\n";
+
+    eval { rm_rf($dir) };
+    mkdir_p("$dir/modules");
+    sys("rpm2cpio $kernel_rpm | (cd $dir ; cpio -id)");
+
+    extract_installed_rpm($dir, $kern_ver);
+
+    eval { rm_rf("$dir$_") } foreach qw(/boot /lib /usr);
+}
+
+sub extract_installed_rpm {
+    my ($installed_dir, $kern_ver) = @_;
+    my $local_dir = "all.kernels/$kern_ver";
+    mkdir_p("$local_dir/modules");
+
+    sys('cp', "$installed_dir/boot/vmlinuz-$kern_ver", "$local_dir/vmlinuz");
+    sys("cp $installed_dir/lib/modules/$kern_ver/modules.* $local_dir");
+
+    open(my $F, "find $installed_dir/lib/modules/$kern_ver -name '*.ko.gz' |");
+    my $file; while ($file = <$F>) {
+	chomp($file);
+	system('cp', $file, "$local_dir/modules/" . basename($file)) == 0
+	  or warn "conflict for $file\n";
+    }
+
+    sys('perl', '../kernel/modules.pl', 'remove_unneeded_modules', $kern_ver);
+
+    sys('perl', '../kernel/modules.pl', 'make_modules_per_image', $kern_ver);
+    sys('cp', '-f', "$local_dir/modules.description", '.') if $kern_ver eq $main || !$main;
+
+    rm_rf("$local_dir/modules");
+}

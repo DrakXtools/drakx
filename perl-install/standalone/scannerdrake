@@ -3,7 +3,7 @@
 # scannerdrake $Id$
 # Yves Duret <yduret at mandriva.com>
 # Till Kamppeter <till at mandriva.com>
-# Copyright (C) 2001-2005 Mandriva
+# Copyright (C) 2001-2006 Mandriva
 # 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -51,7 +51,7 @@ if (!files_exist(qw(/usr/bin/scanimage
     if (!$in->ask_yesorno(N("Warning"), N("SANE packages need to be installed to use scanners.
 
 Do you want to install the SANE packages?"))) {
-	$in->ask_warn("Scannerdrake", 
+	$in->ask_warn(N("Warning"), 
 		      N("Aborting Scannerdrake."));
 	exit 0;
     }
@@ -63,11 +63,11 @@ Do you want to install the SANE packages?"))) {
     }
 }
 if ($::Manual) { manual(); quit() }
-my $wait = $in->wait_message(N("Scannerdrake"),
+my $wait = $in->wait_message(N("Please wait"),
 			     N("Searching for configured scanners..."));
 my @c = scanner::configured();
 $wait = undef;
-$wait = $in->wait_message(N("Scannerdrake"),
+$wait = $in->wait_message(N("Please wait"),
 			     N("Searching for new scanners..."));
 my @f = scanner::detect(@c);
 $wait = undef;
@@ -75,7 +75,7 @@ my $changed = 0;
 @f and $changed = auto();
 if ($changed) {
     my $_wait =
-	$in->wait_message(N("Scannerdrake"),
+	$in->wait_message(N("Please wait"),
 			  N("Re-generating list of configured scanners..."));
     @c = scanner::configured();
 }
@@ -98,10 +98,10 @@ sub auto() {
 	    my $name = $_->{val}{DESCRIPTION};
 	    $name =~ s/\s$//; # some HP entries have a trailing space, i will correct usbtable asap
 	    if ($scanner::scannerDB->{$name}{flags}{unsupported}) {
-		$in->ask_warn('Scannerdrake', N("The %s is not supported by this version of %s.", removeverticalbar($name), $distroname));
+		$in->ask_warn(N("Error"), N("The %s is not supported by this version of %s.", removeverticalbar($name), $distroname));
 		next;
 	    }
-	    if ($in->ask_yesorno('Scannerdrake', N("%s found on %s, configure it automatically?", removeverticalbar($name), $_->{port}),1)) {
+	    if ($in->ask_yesorno(N("Confirmation"), N("%s found on %s, configure it automatically?", removeverticalbar($name), $_->{port}),1)) {
 		$c = (tryConfScanner($name, $_->{port}, 
 				     $_->{val}{vendor},
 				     $_->{val}{id}) || 
@@ -112,7 +112,7 @@ sub auto() {
 			    $_->{val}{id}, $name);
 	    }
 	} else {
-	    $in->ask_yesorno('Scannerdrake',
+	    $in->ask_yesorno(N("Confirmation"),
 			     N("%s is not in the scanner database, configure it manually?", 
 			       removeverticalbar($_->{val}{DESCRIPTION})),1)
 		and $c =
@@ -127,21 +127,19 @@ sub auto() {
 sub manual {
     my ($port, $vendor, $product, $name) = @_;
     my $s = 
-	$in->ask_from_treelist('Scannerdrake', 
-			       N("Select a scanner model") .
-			       if_($port || $name, N(" (")) .
-			       if_($name, N("Detected model: %s",
-					    removeverticalbar($name))) .
-			       if_($port && $name, N(", ")) .
-			       if_($port, N("Port: %s", $port)) .
-			       if_($port || $name, N(")")),
+	$in->ask_from_treelist(N("Scanner configuration"), 
+			       ($port && $name ? N("Select a scanner model (Detected model: %s, Port: %s)",
+                                          removeverticalbar($name), $port)
+                         : $name ? N("Select a scanner model (Detected model: %s)", removeverticalbar($name))
+                           : $port ? N("Select a scanner model (Port: %s)", $port) : ""
+                      ),
 			       '|', [' None', map { $_ . if_($scanner::scannerDB->{$_}{flags}{unsupported}, N(" (UNSUPPORTED)")) } keys %$scanner::scannerDB],
 			       '') or return 0;
     return 0 if $s eq ' None';
     my $unsuppstr = quotemeta(N(" (UNSUPPORTED)"));
     $s =~ s/$unsuppstr$//;
     if ($scanner::scannerDB->{$s}{flags}{unsupported}) {
-	$in->ask_warn('Scannerdrake', N("The %s is not supported under Linux.", removeverticalbar($s)));
+	$in->ask_warn(N("Error"), N("The %s is not supported under Linux.", removeverticalbar($s)));
 	return 0;
     }
     return tryConfScanner($s, $port, $vendor, $product);
@@ -171,7 +169,7 @@ sub installfirmware {
     my $choice = N("Do not install firmware file");
     while (1) {
 	# Tell user about firmware installation
-	$in->ask_from('Scannerdrake',
+	$in->ask_from(N("Scanner Firmware"),
 		      N("It is possible that your %s needs its firmware to be uploaded everytime when it is turned on.", removeverticalbar($model)) . " " .
 		      N("If this is the case, you can make this be done automatically.") . " " .
 		      N("To do so, you need to supply the firmware file for your scanner so that it can be installed.") . " " .
@@ -221,7 +219,7 @@ sub updatefirmware {
     my ($scannerchoice, $mediachoice);
     while (1) {
 	# Tell user about firmware installation
-	$in->ask_from('Scannerdrake',
+	$in->ask_from(N("Scanner Firmware"),
 		      ($#scanners > 0 ?
 		       N("It is possible that your scanners need their firmware to be uploaded everytime when they are turned on.") :
 		       N("It is possible that your %s needs its firmware to be uploaded everytime when it is turned on.", $scanners[0])) . " " .
@@ -285,7 +283,7 @@ sub updatefirmware {
     }
 
     # Success message
-    $in->ask_warn('Scannerdrake',
+    $in->ask_warn(N("Information"),
 		  N("The firmware file for your %s was successfully installed.",
 		    $scannerchoice));
     
@@ -296,12 +294,12 @@ sub tryConfScanner {
     # take care if interactive output is needed (unsupported, parallel..)
     my ($model, $port, $vendor, $product) = @_;
     if ($scanner::scannerDB->{$model}{flags}{unsupported}) {
-	$in->ask_warn('Scannerdrake', N("The %s is unsupported", 
+	$in->ask_warn(N("Warning"), N("The %s is unsupported", 
 					removeverticalbar($model)));
 	return 0;
     }
     if ($scanner::scannerDB->{$model}{server} =~ /(printerdrake|hpoj|hpaio|hplip)/i) {
-     	$in->ask_warn('Scannerdrake', N("The %s must be configured by printerdrake.\nYou can launch printerdrake from the %s Control Center in Hardware section.", removeverticalbar($model), $shortdistroname));
+     	$in->ask_warn(N("Warning"), N("The %s must be configured by printerdrake.\nYou can launch printerdrake from the %s Control Center in Hardware section.", removeverticalbar($model), $shortdistroname));
      	return 0;
     }
     my @modules = ();
@@ -318,7 +316,7 @@ sub tryConfScanner {
 	push(@modules, @{$scanner::scannerDB->{$model}{parportkernel}});
     }
     if ($#modules >= 0) {
-	my $wait = $in->wait_message(N("Scannerdrake"),
+	my $wait = $in->wait_message(N("Please wait"),
 				     N("Setting up kernel modules..."));
 	foreach my $m (@modules) {
 	    eval { modules::load($m) };
@@ -330,7 +328,7 @@ sub tryConfScanner {
     }
     if ($scanner::scannerDB->{$model}{ask} =~ /DEVICE/ || !$port) {
 	$port ||= N("Auto-detect available ports");
-	$in->ask_from('Scannerdrake',
+	$in->ask_from(N("Device choice"),
 		      N("Please select the device where your %s is attached", removeverticalbar($model)) . " " .
 		      N("(Note: Parallel ports cannot be auto-detected)"),
 		      [
@@ -367,7 +365,7 @@ sub tryConfScanner {
 		       ],
 		      ) or return 0;
 	if ($port eq N("Auto-detect available ports")) {
-	    $wait = $in->wait_message(N("Scannerdrake"),
+	    $wait = $in->wait_message(N("Please wait"),
 				      N("Searching for scanners..."));
 	    my @d = scanner::detect();
 	    undef $wait;
@@ -376,7 +374,7 @@ sub tryConfScanner {
 		    removeverticalbar($_->{val}{DESCRIPTION}) . ")";
 	    } @d;
 	    $port ||= $list[0];
-	    $in->ask_from('Scannerdrake',
+	    $in->ask_from(N("Device choice"),
 			  N("Please select the device where your %s is attached", removeverticalbar($model)),
 			  [
 			   { label => N("choose device"), 
@@ -460,7 +458,7 @@ sub mainwindow {
 	if ($in->ask_from_
 	    (
 	     { 
-		 title => N("Scannerdrake"),
+		 title => N("Scanner Management"),
 		 messages => $msg,
 		 ok => "",
 		 cancel => "",
@@ -504,11 +502,11 @@ sub mainwindow {
 	    if ($buttonclicked eq "autoadd") {
 		# Do scanner auto-detection
 		my $wait =
-		    $in->wait_message(N("Scannerdrake"),
+		    $in->wait_message(N("Please wait"),
 				      N("Searching for configured scanners..."));
 		@configured = scanner::configured();
 		$wait = 
-		    $in->wait_message(N("Scannerdrake"),
+		    $in->wait_message(N("Please wait"),
 				      N("Searching for new scanners..."));
 		my @f = scanner::detect(@configured);
 		$wait = undef;
@@ -530,7 +528,7 @@ sub mainwindow {
 	    }
 	    if ($changed) {
 		my $_wait =
-		    $in->wait_message(N("Scannerdrake"),
+		    $in->wait_message(N("Please wait"),
 				      N("Re-generating list of configured scanners..."));
 		@configured = scanner::configured();
 	    }
@@ -595,7 +593,7 @@ sub sharewindow {
 	if ($in->ask_from_
 	    (
 	     { 
-		 title => N("Scannerdrake"),
+		 title => N("Scanner Sharing"),
 		 messages => N("Here you can choose whether the scanners connected to this machine should be accessible by remote machines and by which remote machines.") .
                      N("You can also decide here whether scanners on remote machines should be made available on this machine."),
 	     },
@@ -957,7 +955,7 @@ sub sharewindow {
 			    if (!$in->ask_yesorno(N("Warning"), N("saned needs to be installed to share the local scanner(s).
 
 Do you want to install the saned package?"))) {
-				$in->ask_warn("Scannerdrake", 
+				$in->ask_warn("Warning", 
 					      N("Your scanner(s) will not be available on the network."));
 			    } elsif (!$in->do_pkgs->install('xinetd', 'saned')) {
 				$in->ask_warn(N("Error"),

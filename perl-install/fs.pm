@@ -22,7 +22,7 @@ sub read_fstab {
     my ($prefix, $file, @reading_options) = @_;
 
     if (member('keep_default', @reading_options)) {
-	push @reading_options, 'freq_passno', 'keep_devfs_name', 'keep_device_LABEL';
+	push @reading_options, 'freq_passno', 'keep_device_LABEL';
     }
 
     my %comments;
@@ -78,19 +78,17 @@ sub read_fstab {
 
 	put_in_hash($h, fs::wild_device::to_subpart($dev));
 
-	if ($h->{device_LABEL} && member('keep_device_LABEL', @reading_options)) {
+	if ($h->{device_LABEL} && !$h->{device_alias} && member('keep_device_LABEL', @reading_options)) {
 	    $h->{prefer_device_LABEL} = 1;
-        } elsif ($h->{devfs_device} && member('keep_devfs_name', @reading_options)) {
-	    $h->{prefer_devfs_name} = 1;
 	}
 
 	if ($h->{options} =~ /credentials=/ && !member('verbatim_credentials', @reading_options)) {
-	    require network::smb;
+	    require fs::remote::smb;
 	    #- remove credentials=file with username=foo,password=bar,domain=zoo
 	    #- the other way is done in fstab_to_string
 	    my ($options, $unknown) = fs::mount_options::unpack($h);
 	    my $file = delete $options->{'credentials='};
-	    my $credentials = network::smb::read_credentials_raw($file);
+	    my $credentials = fs::remote::smb::read_credentials_raw($file);
 	    if ($credentials->{username}) {
 		$options->{"$_="} = $credentials->{$_} foreach qw(username password domain);
 		fs::mount_options::pack($h, $options, $unknown);
@@ -117,8 +115,9 @@ sub merge_fstabs {
 	    add2hash($p, $p2);
 	} else {
 	    $p->{isMounted} ||= $p2->{isMounted};
+	    $p->{real_mntpoint} ||= $p2->{real_mntpoint};
 	}
-	$p->{device_alias} ||= $p2->{device_alias} || $p2->{device} if $p->{device} ne $p2->{device} && $p2->{device} !~ m|/|;
+	$p->{device_alias} ||= $p2->{device_alias} if $p->{device} ne $p2->{device} && $p2->{device} !~ m|/|;
 
 	$p->{fs_type} && $p2->{fs_type} && $p->{fs_type} ne $p2->{fs_type}
 	  && $p->{fs_type} ne 'auto' && $p2->{fs_type} ne 'auto' and
@@ -136,7 +135,7 @@ sub add2all_hds {
 	my $s = 
 	    $_->{fs_type} eq 'nfs' ? 'nfss' :
 	    $_->{fs_type} eq 'smbfs' ? 'smbs' :
-	    $_->{fs_type} eq 'davfs' ? 'davs' :
+	    $_->{fs_type} eq 'davfs2' ? 'davs' :
 	    isTrueLocalFS($_) || isSwap($_) || isOtherAvailableFS($_) ? '' :
 	    'special';
 	push @{$all_hds->{$s}}, $_ if $s;
@@ -166,12 +165,8 @@ sub merge_info_from_mtab {
 
     foreach (@l1, @l2) {
 	log::l("found mounted partition on $_->{device} with $_->{mntpoint}");
-	if ($::isInstall && $_->{mntpoint} =~ m!/tmp/(image|hdimage)!) {
+	if ($::isInstall && $_->{mntpoint} =~ m!^/tmp/\w*image$!) {
 	    $_->{real_mntpoint} = delete $_->{mntpoint};
-	    if ($_->{real_mntpoint} eq '/tmp/hdimage') {
-		log::l("found hdimage on $_->{device}");
-		$_->{mntpoint} = "/mnt/hd"; #- remap for hd install.
-	    }
 	}
 	$_->{isMounted} = 1;
 	set_isFormatted($_, 1);
@@ -232,8 +227,8 @@ sub prepare_write_fstab {
 	    my $options = $_->{options};
 
 	    if ($_->{fs_type} eq 'smbfs' && $options =~ /password=/ && !$b_keep_smb_credentials) {
-		require network::smb;
-		if (my ($opts, $smb_credentials) = network::smb::fstab_entry_to_credentials($_)) {
+		require fs::remote::smb;
+		if (my ($opts, $smb_credentials) = fs::remote::smb::fstab_entry_to_credentials($_)) {
 		    $options = $opts;
 		    push @smb_credentials, $smb_credentials;
 		}
@@ -296,7 +291,7 @@ sub write_fstab {
     my $fstab = [ fs::get::really_all_fstab($all_hds), @{$all_hds->{special}} ];
     my ($s, $smb_credentials) = prepare_write_fstab($fstab, $o_prefix, '');
     output("$o_prefix/etc/fstab", $s);
-    network::smb::save_credentials($_) foreach @$smb_credentials;
+    fs::remote::smb::save_credentials($_) foreach @$smb_credentials;
 }
 
 sub set_removable_mntpoints {
@@ -308,7 +303,7 @@ sub set_removable_mntpoints {
 	$name eq 'zip' and next;
 	
 	my $s = ++$names{$name};
-	$_->{mntpoint} ||= "/mnt/$name" . ($s == 1 ? '' : $s);
+	$_->{mntpoint} ||= "/media/$name" . ($s == 1 ? '' : $s);
     }
 }
 
@@ -323,7 +318,7 @@ sub get_raw_hds {
     my @fstab = read_fstab($prefix, '/etc/fstab', 'keep_default');
     $all_hds->{nfss} = [ grep { $_->{fs_type} eq 'nfs' } @fstab ];
     $all_hds->{smbs} = [ grep { $_->{fs_type} eq 'smbfs' } @fstab ];
-    $all_hds->{davs} = [ grep { $_->{fs_type} eq 'davfs' } @fstab ];
+    $all_hds->{davs} = [ grep { $_->{fs_type} eq 'davfs2' } @fstab ];
     $all_hds->{special} = [
        (grep { $_->{fs_type} eq 'tmpfs' } @fstab),
        { device => 'none', mntpoint => '/proc', fs_type => 'proc' },

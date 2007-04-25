@@ -37,7 +37,11 @@ if nfs/ftp/http:
     if multiple interfaces detected:
 
         `interface' <- (list-of-detected-interfaces)
-         (if "auto", use the first interface with a link beat)
+         if "auto":
+           use the first interface with a link beat
+         if "wired":
+           use the first wired interface with a link beat
+           or the first wired interface if none has a link beat
 
     fi
 

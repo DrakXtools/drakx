@@ -26,11 +26,13 @@ my (%type_name2pt_type, %type_name2fs_type, %fs_type2pt_type, %pt_type2fs_type, 
 if_(arch() =~ /ppc|i.86|ia64|x86_64/, 
   0x83 => 'xfs',      'Journalised FS: XFS',
 ),
-if_(arch() =~ /ppc|i.86/, 
+if_(arch() =~ /ppc|i.86|x86_64/, 
   0x83 => 'jfs',      'Journalised FS: JFS',
 ),
 if_(arch() =~ /i.86|ia64|x86_64/,
   0x0b => 'vfat',     'FAT32',
+  0x07 => 'ntfs',     'NTFS',
+  0x07 => 'ntfs-3g',  'NTFS-3G',
 ),
 if_(arch() =~ /ppc/,
   0x401	=> '',         'Apple Bootstrap',
@@ -78,7 +80,6 @@ if_(arch() =~ /ppc/,
   0x03 => '',         'XENIX usr',
   0x04 => 'vfat',     'FAT16 <32M',
   0x06 => 'vfat',     'FAT16',
-  0x07 => 'ntfs',     'NTFS',
   0x07 => 'hpfs',     'HPFS',
   0x08 => '',         'AIX',
 ),
@@ -123,7 +124,9 @@ if_(arch() !~ /ppc/,
   0x75 => '',         'PC/IX',
   0x80 => '',         'Old Minix',
   0x81 => '',         'Minix / old Linux',
+ if_(!$::isInstall,
   0x83 => 'reiser4',  'Journalised FS: Reiser4',
+ ),
   0x84 => '',         'OS/2 hidden C: drive',
   0x86 => '',         'NTFS volume set',
   0x87 => '',         'NTFS volume set ',
@@ -182,9 +185,10 @@ if_(arch() !~ /ppc/,
 }
 
 
-sub type_names() { 
+sub type_names { 
+    my ($expert) = @_;
     my @l = @{$type_names{important}};
-    push @l, @{$type_names{less_important}}, sort @{$type_names{other}} if $::expert;
+    push @l, @{$type_names{less_important}}, sort @{$type_names{other}} if $expert;
     @l;
 }
 
@@ -276,7 +280,7 @@ sub type_subpart_from_magic {
     my ($part) = @_;
     my $ids = call_vol_id($part);
 
-    $part->{LABEL_from_magic} = $ids->{ID_FS_LABEL_SAFE} if $ids->{ID_FS_LABEL_SAFE};
+    $part->{LABEL_from_magic} = $ids->{ID_FS_LABEL} if $ids->{ID_FS_LABEL};
 
     my $p;
     if ($ids->{ID_FS_USAGE} eq 'raid') {
@@ -307,7 +311,7 @@ sub isRawLVM { $_[0]{pt_type} == 0x8e }
 sub isRawRAID { $_[0]{pt_type} == 0xfd }
 sub isSwap { $_[0]{fs_type} eq 'swap' }
 sub isDos { arch() !~ /^sparc/ && ${{ 1 => 1, 4 => 1, 6 => 1 }}{$_[0]{pt_type}} }
-sub isFat_or_NTFS { member($_[0]{fs_type}, 'vfat', 'ntfs') }
+sub isFat_or_NTFS { member($_[0]{fs_type}, 'vfat', 'ntfs', 'ntfs-3g') }
 sub isApple { $_[0]{pt_type} == 0x401 && defined $_[0]{isDriver} }
 sub isAppleBootstrap { $_[0]{pt_type} == 0x401 && defined $_[0]{isBoot} }
 

@@ -37,7 +37,7 @@ sub options {
 }
 sub mount_point { 
     my ($in, $raw_hd, $all_hds) = @_;
-    diskdrake::interactive::Mount_point_raw_hd($in, $raw_hd, $all_hds, "/mnt/$raw_hd->{device}");
+    diskdrake::interactive::Mount_point_raw_hd($in, $raw_hd, $all_hds, "/media/$raw_hd->{device}");
 }
 sub type {
     my ($in, $raw_hd) = @_;
@@ -45,7 +45,7 @@ sub type {
     my $fs_type = $raw_hd->{fs_type};
     $in->ask_from(N("Change type"),
 			      N("Which filesystem do you want?"),
-			      [ { label => N("Type"), val => \$fs_type, list => [@fs], not_edit => !$::expert } ]) or return;
+			      [ { label => N("Type"), val => \$fs_type, list => [@fs] } ]) or return;
     $raw_hd->{fs_type} = $fs_type;
 }
 

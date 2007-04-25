@@ -17,32 +17,30 @@
 ARCH := $(patsubst i%86,i386,$(shell uname -m))
 ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
- #- default lib is dietlibc (honoured by main Makefile whenever possible)
-L = DIETLIBC
-#L = GLIBC
-
  #- default frontend is newt (honoured by main Makefile whenever possible)
 F = NEWT
 # F = STDIO
 
- #- override in some situations
-ifeq (ia64, $(ARCH))
-L = GLIBC
-endif
+DIET = $(shell test -x /usr/bin/diet && echo diet)
 
-ifeq (DIETLIBC, $(L))
-DIET = diet
+ifeq ($(DIET), diet)
+ #- default lib is dietlibc (honoured by main Makefile whenever possible)
+L = DIETLIBC
+else
+L = GLIBC
 endif
 
 #- flags used by all stuff
 CFLAGS = -Os -pipe -Wall -fomit-frame-pointer -fno-strict-aliasing
 
 ifneq (ppc, $(ARCH))
+ifneq (sparc, $(ARCH))
 CFLAGS += -Werror
 endif
+endif
 
-DIETLIBC_INCLUDES = -I/usr/lib/dietlibc/include -I. -I$(top_dir)/bzlib
-GLIBC_INCLUDES = -I. -I$(top_dir)/bzlib
+DIETLIBC_INCLUDES = -I/usr/lib/dietlibc/include -I.
+GLIBC_INCLUDES = -I.
 INCLUDES = $($(L)_INCLUDES)
 
 GLIBC_LDFLAGS = -static

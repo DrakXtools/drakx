@@ -1,0 +1,67 @@
+#!/usr/bin/perl
+#
+# Copyright (C) 2006 Mandriva
+#                         Pablo Saraxtaga <pablo@mandriva.com>
+#                         Thierry Vignaud <tvignaud@mandriva.com>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+use strict;
+use lib qw(..); # for lang
+# perl_checker: use lib qw(/usr/lib/libDrakX/)
+use MDK::Common;
+use lang;
+
+my $prefix = $ARGV[0];
+
+my $dir = "$prefix/usr/share/X11/locale";
+mkdir_p($dir);
+
+output("$dir/locale.alias",
+qq(# automatically build list; only valid for install
+# since gtk+-2 is used, which uses unicode internally,
+# all locales to UTF-8 ones
+),
+       sort(uniq((map { "$_:\t\t\ten_US.UTF-8\n" } lang::list_langs()),
+                 (map { "$_:\t\t\ten_US.UTF-8\n" } (@lang::locales)),
+                 qq(zh_CN.gb2312:\t\t\ten_US.UTF-8
+zh_CN.GB2312:\t\t\ten_US.UTF-8
+zh_CN.Big5:\t\t\ten_US.UTF-8
+),
+             ),
+        ),
+   );
+
+output("$dir/locale.dir",
+       qq(# automatically build list ; only valid for install
+C/XLC_LOCALE:   C
+en_US.UTF-8/XLC_LOCALE: UTF-8
+iso8859-1/XLC_LOCALE:   ISO8859-1
+),
+       map { s/(.*_..)(\.[^@]*)*(\@.*)*$/${1}.UTF-8${3}/; "en_US.UTF-8/XLC_LOCALE: $_\n" } @lang::locales
+   );
+
+
+output("$dir/compose.dir",
+       qq(# list automatically build list ; only valid for install
+C/Compose:   C
+en_US.UTF-8/Compose: UTF-8
+iso8859-1/Compose:   ISO8859-1
+),
+       map {
+           s/(.*_..)(\.[^@]*)*(\@.*)*$/${1}.UTF-8${3}/; 
+           "en_US.UTF-8/Compose: $_\n";
+       } @lang::locales
+   );

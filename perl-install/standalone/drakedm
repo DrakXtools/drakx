@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # DrakxDM -- Display Manager chooser
-# Copyright (C) 2003-2005 Mandriva (tvignaud@mandriva.com)
+# Copyright (C) 2003-2006 Mandriva (tvignaud@mandriva.com)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@ use common;
 use any;
 use interactive;
 use services;
+use run_program;
 
 $ugtk2::wm_icon = "/usr/share/mcc/themes/default/drakedm-mdk.png";
 
@@ -71,7 +72,7 @@ several different X sessions on your local machine at the same time.")),
     if (any::running_window_manager()) {
         $in->ask_yesorno('', N("The change is done, do you want to restart the dm service?"), 1) and
 				$in->ask_yesorno('', N("You are going to close all running programs and lose your current session. Are you really sure that you want to restart the dm service?"), 1) and
-                      system("nohup /etc/rc.d/init.d/dm restart &>/dev/null");
+                      run_program::raw({ detach => 1 }, '/etc/rc.d/init.d/dm', '>', '/dev/null', '2>', '/dev/null', 'restart');
     }
 }
 

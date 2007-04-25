@@ -1,8 +1,0 @@
-#!/usr/bin/perl -p
-
-if (/^/ ... !/^/) {
-    ($package) = /(.*).pm,/;
-    $package =~ s|/|::|g;
-}
-
-s/(\x7F)(sub\s+)?(\w+)(\([^)]*\))?/$1${package}::$3/;

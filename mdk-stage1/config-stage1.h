@@ -33,57 +33,33 @@
 
 #define KA_MAX_RETRY    5
 
-#define SLASH_LOCATION   "/sysroot"
-
-#ifdef MANDRAKE_MOVE
-
-#define MEM_LIMIT_MOVE 120
-
-#undef DISTRIB_NAME
-#define DISTRIB_NAME "Mandrakemove"
-#undef DISTRIB_DESCR
-#define DISTRIB_DESCR DISTRIB_NAME
-
-#define IMAGE_LOCATION_DIR SLASH_LOCATION "/"
-#define IMAGE_LOCATION_REL "cdrom"
-#define IMAGE_LOCATION IMAGE_LOCATION_DIR IMAGE_LOCATION_REL
-
-#define CLP_LOCATION IMAGE_LOCATION
-
-#define STAGE2_LOCATION_ROOTED "/image"
-#define STAGE2_LOCATION SLASH_LOCATION STAGE2_LOCATION_ROOTED
-
-#define BOOT_LOCATION SLASH_LOCATION "/image_boot"
-#define ALWAYS_LOCATION SLASH_LOCATION "/image_always"
-#define TOTEM_LOCATION SLASH_LOCATION "/image_totem"
-
-#else
-
 #define LIVE_LOCATION_REL "install/stage2/live/"
-#define CLP_LOCATION_REL  "install/stage2/"
-#define CLP_STAGE2_NAME "mdkinst.clp"
-#define CLP_RESCUE_NAME "rescue.clp"
-#define CLP_NAME(prefix) (IS_RESCUE ? prefix CLP_RESCUE_NAME : prefix CLP_STAGE2_NAME)
-#define CLP_FILE_REL(prefix) CLP_NAME(prefix CLP_LOCATION_REL)
+#define COMPRESSED_LOCATION_REL  "install/stage2/"
+#define COMPRESSED_STAGE2_NAME "mdkinst.sqfs"
+#define COMPRESSED_RESCUE_NAME "rescue.sqfs"
+#define COMPRESSED_NAME(prefix) (IS_RESCUE ? prefix COMPRESSED_RESCUE_NAME : prefix COMPRESSED_STAGE2_NAME)
+#define COMPRESSED_FILE_REL(prefix) COMPRESSED_NAME(prefix COMPRESSED_LOCATION_REL)
 
-/* the remote media is mounted in 
-   - IMAGE_LOCATION_DIR "nfsimage", and IMAGE_LOCATION is a symlink image -> nfsimage/mdk/mirror/dir
-   - IMAGE_LOCATION_DIR "hdimage",  and IMAGE_LOCATION is a symlink image -> hdimage/mdk/mirror/dir
-   - directly in IMAGE_LOCATION (for cdroms and .iso images)
+/* the remote media is mounted in MEDIA_LOCATION, and
+   - IMAGE_LOCATION is a symlink image -> image/mdk/mirror/dir
+   - IMAGE_LOCATION is a symlink image -> loop/i586 and iso file is loopback mounted in LOOP_LOCATION
  */
-#define IMAGE_LOCATION_DIR SLASH_LOCATION "/tmp/"
+#define MEDIA_LOCATION_REL "media"
+#define MEDIA_LOCATION IMAGE_LOCATION_DIR MEDIA_LOCATION_REL
+
+#define LOOP_LOCATION_REL "loop"
+#define LOOP_LOCATION IMAGE_LOCATION_DIR LOOP_LOCATION_REL
+
 #define IMAGE_LOCATION_REL "image"
+#define IMAGE_LOCATION_DIR "/tmp/"
 #define IMAGE_LOCATION IMAGE_LOCATION_DIR IMAGE_LOCATION_REL
 
-#define CLP_LOCATION IMAGE_LOCATION "/" CLP_LOCATION_REL
+#define COMPRESSED_LOCATION IMAGE_LOCATION "/" COMPRESSED_LOCATION_REL
 
-/* - if we use a clp   : STAGE2_LOCATION is a the mount point
-   - if we use the live: STAGE2_LOCATION is a relative symlink to IMAGE_LOCATION_REL/install/stage2/live 
+/* - if we use a compressed image   : STAGE2_LOCATION is a the mount point
+   - if we use the live: STAGE2_LOCATION is a relative symlink to image/install/stage2/live 
 */
-#define STAGE2_LOCATION_ROOTED "/tmp/stage2"
-#define STAGE2_LOCATION  SLASH_LOCATION STAGE2_LOCATION_ROOTED
-
-#endif
+#define STAGE2_LOCATION "/tmp/stage2"
 
 
 /* user-definable (in Makefile): DISABLE_NETWORK, DISABLE_DISK, DISABLE_CDROM, DISABLE_PCMCIA */

@@ -2,6 +2,9 @@
 
 use lib qw(/usr/lib/libDrakX);
 
+use standalone;
+$::isStandalone = 0;
+
 use common;
 use interactive;
 use any;
@@ -10,7 +13,6 @@ use network::network;
 use network::netconnect;
 use security::level;
 
-$ENV{SHARE_PATH} ||= "/usr/share";
 my $conf_file = '/etc/sysconfig/finish-install';
 my %conf = getVarsFromSh($conf_file);
 my $authentication = authentication::get();
@@ -51,10 +53,9 @@ sub ask_keyboard() {
 
 sub ask_timezone() {
     require timezone;
-    my $t = {};
-    $t->{timezone} = timezone::bestTimezone($locale->{country});
-    $t->{timezone} = $in->ask_from_treelist(N("Timezone"), N("Which is your timezone?"), '/', [ timezone::getTimeZones() ], $t->{timezone}) or return;
-    $t->{UTC} = $in->ask_yesorno(N("Timezone"), N("Is your hardware clock set to GMT?"), $t->{UTC});
+    my $t = timezone::read();
+    $t->{timezone} = timezone::bestTimezone($locale->{country}) if $locale->{country};
+    any::configure_timezone($in, $t, 'ask_gmt');
     timezone::write($t);
     #- reload sys clock from hc once we know the real timezone
     timezone::reload_sys_clock($t);
@@ -91,9 +92,77 @@ sub ask_users() {
       $users->[0]{rename_from} = $old_user;
       $users->[0]{home} ||= '/home/' . $users->[0]{name};
       my $autologin = any::get_autologin();
-      $autologin->{autologin} eq $old_user and any::set_autologin($users->[0]{name}, $autologin->{desktop});
+      $autologin->{autologin} eq $old_user and any::set_autologin($in->do_pkgs, $users->[0]{name}, $autologin->{desktop});
     }
     any::add_users($users, $authentication);
+}
+
+sub ask_glx() {
+    require Xconfig::glx;
+    my $glx = Xconfig::glx::detect_may_install($in);
+    if ($glx->{supported} && Xconfig::glx::choose_interactive($in, $glx)) {
+        Xconfig::glx::write($glx);
+    }
+}
+
+sub ask_encrypt_home() {
+    my $user = { name => $conf{ENCRYPT_HOME_USER}, device => $conf{ENCRYPT_HOME_DEVICE} };
+    any { !defined $_ } values %$user and return;
+    $in->ask_from(N("Encrypted home partition"), N("Please enter a password for the %s user", $user->{name}),
+                  [
+                      { label => N("Password"), val => \$user->{password},  hidden => 1 },
+                      { label => N("Password (again)"), val => \$user->{password2}, hidden => 1 },
+                  ],
+                  complete => sub {
+                      authentication::check_given_password($in, $user, 6) or return 1,0;
+                      return 0;
+                  });
+    authentication::write_passwd_user($user);
+    encrypt_home($user);
+}
+
+sub encrypt_home {
+    my ($user) = @_;
+    my $device = $user->{device};
+    my $mapper = '/dev/mapper/' . $user->{name};
+    my $home = '/home/' . $user->{name};
+    my $wait = $in->wait_message(N("Encrypted home partition"), N("Creating encrypted home partition"));
+
+    substInFile {
+        s/^volume $user->{name}.*//;
+        $_ .= "volume $user->{name} crypt - $device $home - - -\n" if eof;
+    } $::prefix . '/etc/security/pam_mount.conf';
+    authentication::set_pam_authentication('mount');
+
+    run_program::raw({ root => $::prefix, sensitive_arguments => 1 },
+                     "echo -e $user->{password} | cryptsetup luksFormat $device");
+    run_program::raw({ root => $::prefix, sensitive_arguments => 1 },
+                     "echo -e $user->{password} | cryptsetup luksOpen $device $user->{name}");
+    $wait = $in->wait_message(N("Encrypted home partition"), N("Formatting encrypted home partition"));
+    run_program::rooted($::prefix, 'mke2fs', '-qj', '-m', 0, '-L', 'Home', $mapper);
+
+    my $old_home;
+    if (-d $::prefix . $home) {
+        #- if already existing, move home to a temporary folder
+        require File::Temp;
+        $old_home = File::Temp::tempdir(DIR => dirname($::prefix . $home));
+        rmdir $old_home;
+        rename $::prefix . $home, $old_home;
+    }
+
+    mkdir_p($::prefix . $home);
+    run_program::rooted($::prefix, 'mount', $mapper, $home);
+
+    if ($old_home) {
+        #- copy previous home back
+        require File::Copy::Recursive;
+        File::Copy::Recursive::dirmove($old_home, $::prefix . $home);
+    }
+    run_program::rooted($::prefix, 'chown', '-R', join(':', ($user->{name}) x 2), $home);
+    rmdir $::prefix . $home . '/lost+found';
+
+    run_program::rooted($::prefix, 'umount', $home);
+    run_program::rooted($::prefix, 'cryptsetup', 'luksClose', $user->{name});
 }
 
 sub call {
@@ -111,6 +180,8 @@ sub call {
 
 call('language');
 call('license');
+# "Previous" button isn't functiunnal and acts like "next" (#25349)
+$::Wizard_no_previous = 1;
 call('keyboard');
 call('timezone');
 call('network');
@@ -121,6 +192,8 @@ if (defined $::WizardWindow) {
 $::Wizard_pix_up = 'redhat-config-users';
 call('authentication');
 call('users');
+call('encrypt_home');
+call('glx');
 setVarsInSh($conf_file, { FINISH_INSTALL => 'no' });
 
 $in->exit(0);

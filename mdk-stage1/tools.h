@@ -1,3 +1,4 @@
+
 /*
  * Guillaume Cottenceau (gc@mandrakesoft.com)
  *
@@ -36,13 +37,13 @@ int total_memory(void);
 int image_has_stage2();
 int ramdisk_possible(void);
 enum return_type copy_file(char * from, char * to, void (*callback_func)(int overall));
-enum return_type preload_mount_clp(int clp_fd, int clp_size, char *clp_name, char *location_mount);
-enum return_type mount_clp(char *clp,  char *location_mount);
-enum return_type mount_clp_may_preload(char *clp_name, char *location_mount, int preload);
-#ifndef MANDRAKE_MOVE
-enum return_type load_clp_fd(int fd, int size);
-enum return_type may_load_clp(void);
-#endif
+enum return_type recursiveRemove(char *file);
+enum return_type recursiveRemove_if_it_exists(char *file);
+enum return_type preload_mount_compressed_fd(int compressed_fd, int image_size, char *image_name, char *location_mount);
+enum return_type mount_compressed_image(char *compressed_image,  char *location_mount);
+enum return_type mount_compressed_image_may_preload(char *image_name, char *location_mount, int preload);
+enum return_type load_compressed_fd(int fd, int size);
+enum return_type may_load_compressed_image(void);
 void * memdup(void *src, size_t size);
 void add_to_env(char * name, char * value);
 char ** list_directory(char * direct);

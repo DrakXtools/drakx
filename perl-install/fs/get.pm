@@ -26,13 +26,14 @@ sub really_all_fstab {
 }
 
 sub fstab_and_holes {
-    my ($all_hds) = @_;
-    hds_fstab_and_holes(hds($all_hds)), @{$all_hds->{raids}}, @{$all_hds->{loopbacks}};
+    my ($all_hds, $b_non_readonly) = @_;
+    my @hds = grep { !($b_non_readonly && $_->{readonly}) } hds($all_hds);
+    hds_fstab_and_holes(@hds), @{$all_hds->{raids}}, @{$all_hds->{loopbacks}};
 }
 
 sub holes {
-    my ($all_hds) = @_;
-    grep { isEmpty($_) } fstab_and_holes($all_hds);
+    my ($all_hds, $b_non_readonly) = @_;
+    grep { isEmpty($_) } fstab_and_holes($all_hds, $b_non_readonly);
 }
 sub hds_holes {
     grep { isEmpty($_) } hds_fstab_and_holes(@_);
@@ -141,8 +142,7 @@ sub is_same_hd {
 	my ($s2) = $hd2->{device} =~ m|https?://(.+?)/*$|;
 	$s1 eq $s2;
     } else {
-	$hd1->{devfs_device} && $hd2->{devfs_device} && $hd1->{devfs_device} eq $hd2->{devfs_device}
-	  || $hd1->{device_LABEL} && $hd2->{device_LABEL} && $hd1->{device_LABEL} eq $hd2->{device_LABEL}
+	$hd1->{device_LABEL} && $hd2->{device_LABEL} && $hd1->{device_LABEL} eq $hd2->{device_LABEL}
 	  || $hd1->{device} && $hd2->{device} && $hd1->{device} eq $hd2->{device};
     }
 }

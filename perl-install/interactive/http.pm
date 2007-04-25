@@ -136,15 +136,15 @@ sub p {
 }
 
 sub wait_messageW {
-    my ($_o, $_title, $messages) = @_;
+    my ($_o, $_title, $message, $message_modifiable) = @_;
     cont_stdout();
     print "\n" . CGI::p();
-    p(@$messages);
+    p($message, $message_modifiable);
 }
 
 sub wait_message_nextW {
-    my ($_o, $messages, $_w) = @_;
-    p(@$messages);
+    my ($_o, $message, $_w) = @_;
+    p($message);
 }
 sub wait_message_endW {
     my ($_o, $_w) = @_;

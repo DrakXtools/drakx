@@ -2,8 +2,8 @@
 
 use lib qw(/usr/lib/libDrakX);
 use standalone;
-use network::nfs;
-use network::smb;
+use fs::remote::nfs;
+use fs::remote::smb;
 use MDK::Common::Func qw(if_);
 
 "@ARGV" =~ /-h/ and die "usage: lsnetdrake [-h] [--nfs] [--smb]\n";
@@ -14,7 +14,7 @@ my $smb = !@ARGV || "@ARGV" =~ /-(smb)/;
 $| = 1;
 $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 
-foreach my $class (if_($nfs, network::nfs->new), if_($smb, network::smb->new)) {
+foreach my $class (if_($nfs, fs::remote::nfs->new), if_($smb, fs::remote::smb->new)) {
     foreach my $server (sort_names($class->find_servers)) {
 	foreach (sort_names(eval { $class->find_exports($server) })) {
 	    print $class->to_fullstring($_), "\n";

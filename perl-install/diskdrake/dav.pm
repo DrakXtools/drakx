@@ -9,7 +9,7 @@ sub main {
     my ($in, $all_hds) = @_;
     my $davs = $all_hds->{davs};
 
-    $in->do_pkgs->ensure_binary_is_installed('davfs', 'mount.davfs') or return;
+    $in->do_pkgs->ensure_binary_is_installed('davfs2', 'mount.davfs2') or return;
     
     my $quit;
     do {
@@ -33,7 +33,7 @@ points, select \"New\".")) },
 sub create {
     my ($in, $all_hds) = @_;
 
-    my $dav = { fs_type => 'davfs' };
+    my $dav = { fs_type => 'davfs2' };
     ask_server($in, $dav, $all_hds) or return;
     push @{$all_hds->{davs}}, $dav;
     config($in, $dav, $all_hds);

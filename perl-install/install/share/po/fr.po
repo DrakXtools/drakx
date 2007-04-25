@@ -1,0 +1,1714 @@
+# translation of DrakX-fr.po to Français
+# Translation file of Mandriva Linux graphic install
+# Copyright (C) 1999,2000,2001,2002,2003,2004,2005,2006 Mandriva
+#
+# Veuillez ne pas mettre à jour ce fichier à moins d'être
+# certain tant de vos traductions que de votre grammaire et
+# de votre orthographe. Ces dernières sont trop souvent
+# approximatives. Elles nécessitent alors des relectures et
+# des corrections qui n'ont d'autre conséquence que de faire
+# perdre du temps à tout le monde (à vous si votre travail est
+# imparfait et aux relecteurs qui doivent rechercher puis corriger
+# vos éventuelles fautes).
+#
+# VEUILLEZ RESPECTER LA TYPOGRAPHIE FRANÇAISE !
+# Les majuscules doivent être accentuées si besoin est. Respectez
+# les espaces nécessaires pour la ponctuation (espace après la virgule et
+# le point, espace insécables avant les points d'interrogation,
+# d'exclamation, les deux-points et le point virgule, espace aussi après
+# le point virgule).
+# N'enlevez pas l'espace qui suit un signe de ponctuation en fin de
+# phrase; vous devez respecter la version originale.  Dans ce type de
+# cas, il est extrèmement probable que le programme va afficher
+# quelque chose d'autre à la fin.  En enlevant l'espace, vous allez
+# accoller deux mots.
+#
+# ESPACES INSÉCABLES
+# Vous devez utiliser un espace insécable (c'est un espace qui ne peut
+# pas servir de rupture à la ligne) avant le point d'exclamation, le
+# point d'interrogation, le deux-points, le point virgules, et pour les
+# "quantités", entre le nombre et l'unité abbrégée (par exemple "10 g").
+# L'espace normal en ISO et UTF8 est le caractere 0x20 tandis que l'espace
+# insécable est le caractère 0xA0. Sous Emacs en utilisant le po mode
+# livré avec gettext >= 0.10.40-4mdk vous pouvez voir celui-ci avec un
+# fond de couleur spécial. Sous Vi celui-ci est normalement affiché
+# précédé du caractère pipe "|". Pour le taper sous la plupart des
+# éditeurs, vous pouvez utiliser la touche "Compose" puis en tapant
+# deux espaces. Si vous n'avez pas de touche compose, vous pouvez
+# donner cette fonction à la touche "Windows" droite de votre clavier
+# avec la commande suivante :
+#   xmodmap -e 'keycode 116 = Multi_key'
+#
+# Les guillemets françaises sont « et » et non ". La guillemet ouvrante
+# « est suivie d'un espace insécable et la guillemet fermante » est
+# précédée du même type d'espace. Pour le taper, vous pouvez utiliser
+# la combinaison Compose < <, et Compose > > (ou alt-z et alt-x).
+#
+# Enfin, traduisez INTELLIGEMMENT et non mot à mot. Certaines traductions
+# n'ont aucun sens en français.
+#
+# MOTS À ÉVITER
+#  - application. Ce terme n'étant pas compris par le grand public, il est
+#    préférable de le remplacer par le mot "programme".
+#
+# Nous vous remercions de votre compréhension.
+#
+#
+#
+# Stéphane Teletchéa, 2005.
+# David BAUDENS <baudens@mandriva.com>, 1999-2004.
+# David ODIN <odin@mandriva.com>, 2000.
+# Pablo Saratxaga <pablo@mandriva.com>, 2001, 2005.
+# KAtiOS <katios@nolabel.net>, 2001.
+# Guillaume Cottenceau <gc@mandriva.com>, 2001-2002.
+# Thierry Vignaud <tvignaud@mandriva.com>, 2001-2004.
+# Christophe Combelles <ccomb@free.fr>, 2002,2003.
+# Adrien REZER <monsieurdidi@free.fr>, 2003.
+# RICHARD Nicolas <richardnicolas22@yahoo.fr>, 2004.
+# Lecureuil Nicolas <n1c0l4s.l3@wanadoo.fr>, 2004.
+# Teletchéa <steletch@free.fr>, 2004, 2005.
+# Christophe Berthelé <cpjc@free.fr>, 2005, 2006, 2007.
+# Didier Hérisson <didier.herisson@angstrom.uu.se>, 2005.
+# Nicolas Lécureuil <neoclust@mandriva.org>, 2005.
+msgid ""
+msgstr ""
+"Project-Id-Version: DrakX-fr\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-03-21 12:07+0100\n"
+"PO-Revision-Date: 2007-03-05 15:38+0100\n"
+"Last-Translator: Christophe Berthelé <cpjc@free.fr>\n"
+"Language-Team: Français <cooker-i18n@mandrivalinux.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2;plural=(n>1);\n"
+
+#: any.pm:159
+#, c-format
+msgid "Do you have further supplementary media?"
+msgstr "Possédez-vous d'autres média supplémentaires ?"
+
+#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
+#: any.pm:162
+#, c-format
+msgid ""
+"The following media have been found and will be used during install: %s.\n"
+"\n"
+"\n"
+"Do you have a supplementary installation medium to configure?"
+msgstr ""
+"Le média suivant a été trouvé et sera utilisé pendant l'installation : %s.\n"
+"\n"
+"\n"
+"Souhaitez-vous configurer un autre média d'installation ?"
+
+#: any.pm:170
+#, c-format
+msgid "CD-ROM"
+msgstr "CD-ROM"
+
+#: any.pm:171
+#, c-format
+msgid "Network (HTTP)"
+msgstr "Réseau (HTTP)"
+
+#: any.pm:172
+#, c-format
+msgid "Network (FTP)"
+msgstr "Réseau (FTP)"
+
+#: any.pm:173
+#, c-format
+msgid "Network (NFS)"
+msgstr "Réseau (NFS)"
+
+#: any.pm:212
+#, c-format
+msgid "URL of the mirror?"
+msgstr "URL du miroir ?"
+
+#: any.pm:218
+#, c-format
+msgid "URL must start with ftp:// or http://"
+msgstr "L'URL doit commencer par ftp:// ou http://"
+
+#: any.pm:229
+#, c-format
+msgid ""
+"Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgstr ""
+"Connexion au site Web de Mandriva Linux pour obtenir la liste des serveurs "
+"miroirs disponibles..."
+
+#: any.pm:234
+#, c-format
+msgid ""
+"Failed contacting Mandriva Linux web site to get the list of available "
+"mirrors"
+msgstr ""
+"Echec de la connexion au site web de Mandriva Linux pour obtenir la liste "
+"des miroirs disponibles"
+
+#: any.pm:244
+#, c-format
+msgid "Choose a mirror from which to get the packages"
+msgstr "Choisissez un serveur miroir d'où télécharger les paquetages"
+
+#: any.pm:274
+#, c-format
+msgid "NFS setup"
+msgstr "Configuration NFS"
+
+#: any.pm:275
+#, c-format
+msgid "Please enter the hostname and directory of your NFS media"
+msgstr "Veuillez entrer le nom de machine et le répertoire de votre média NFS"
+
+#: any.pm:279
+#, c-format
+msgid "Hostname missing"
+msgstr "Le nom d'hôte manque"
+
+#: any.pm:280
+#, c-format
+msgid "Directory must begin with \"/\""
+msgstr "Le répertoire doit commencer par « / »"
+
+#: any.pm:284
+#, c-format
+msgid "Hostname of the NFS mount ?"
+msgstr "Nom d'hôte du montage NFS ?"
+
+#: any.pm:285
+#, c-format
+msgid "Directory"
+msgstr "Répertoire"
+
+#: any.pm:307
+#, c-format
+msgid "Supplementary"
+msgstr "Supplémentaire"
+
+#: any.pm:342
+#, c-format
+msgid ""
+"Can't find a package list file on this mirror. Make sure the location is "
+"correct."
+msgstr ""
+"Ne peut trouver le fichier de liste de paquets sur ce miroir. Vérifiez que "
+"l'emplacement est correct."
+
+#: any.pm:376
+#, c-format
+msgid "Looking at packages already installed..."
+msgstr "Recherche des paquetages déjà installés..."
+
+#: any.pm:383
+#, c-format
+msgid "Removing packages prior to upgrade..."
+msgstr "Suppression des paquetages avant la mise à jour ..."
+
+#: any.pm:426
+#, c-format
+msgid "Finding packages to upgrade..."
+msgstr "Recherche des paquetages à mettre à jour..."
+
+#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
+#: any.pm:636
+#, c-format
+msgid ""
+"You have selected the following server(s): %s\n"
+"\n"
+"\n"
+"These servers are activated by default. They do not have any known security\n"
+"issues, but some new ones could be found. In that case, you must make sure\n"
+"to upgrade as soon as possible.\n"
+"\n"
+"\n"
+"Do you really want to install these servers?\n"
+msgstr ""
+"Vous avez sélectionné le(s) serveur(s) suivant(s) : %s\n"
+"\n"
+"\n"
+"Ces serveurs seront activés par défaut.\n"
+"Ils n'ont actuellement aucun problème de sécurité connu,\n"
+"mais si des vulnérabilités sont découvertes par la suite,\n"
+"vous devrez effectuer une mise à jour le plus rapidement possible.\n"
+"\n"
+"\n"
+"Confirmez-vous l'installation de ces serveurs ?\n"
+
+#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
+#: any.pm:659
+#, c-format
+msgid ""
+"The following packages will be removed to allow upgrading your system: %s\n"
+"\n"
+"\n"
+"Do you really want to remove these packages?\n"
+msgstr ""
+"Les paquetages suivants seront désinstallés pour permettre la mise à jour : %"
+"s\n"
+"\n"
+"\n"
+"Souhaitez-vous réellement les désinstaller ?\n"
+
+#: any.pm:1081
+#, c-format
+msgid "The following disk(s) were renamed:"
+msgstr "Les disques suivants ont été renommés :"
+
+#: any.pm:1083
+#, c-format
+msgid "%s (previously named as %s)"
+msgstr "%s (précédemment nommé %s)"
+
+#: any.pm:1140
+#, c-format
+msgid "HTTP"
+msgstr "HTTP"
+
+#: any.pm:1140
+#, c-format
+msgid "FTP"
+msgstr "FTP"
+
+#: any.pm:1140
+#, c-format
+msgid "NFS"
+msgstr "NFS"
+
+#: any.pm:1159 steps_interactive.pm:840
+#, c-format
+msgid "Network"
+msgstr "Réseau"
+
+#: any.pm:1163
+#, c-format
+msgid "Please choose a media"
+msgstr "Veuillez choisir un média"
+
+#: any.pm:1179
+#, c-format
+msgid "File already exists. Overwrite it?"
+msgstr "Le fichier existe déjà. Voulez-vous l'écraser ?"
+
+#: any.pm:1183
+#, c-format
+msgid "Permission denied"
+msgstr "Permission refusée"
+
+#: any.pm:1231
+#, c-format
+msgid "Bad NFS name"
+msgstr "Mauvais nom NFS"
+
+#: any.pm:1252
+#, c-format
+msgid "Bad media %s"
+msgstr "Média %s incorrect"
+
+#: any.pm:1294
+#, c-format
+msgid "Can not make screenshots before partitioning"
+msgstr "Impossible de faire des captures d'écran avant le partitionnement"
+
+#: any.pm:1301
+#, c-format
+msgid "Screenshots will be available after install in %s"
+msgstr "Les captures d'écran seront disponibles après l'installation dans %s"
+
+#: gtk.pm:136
+#, c-format
+msgid "Installation"
+msgstr "Installation"
+
+#: gtk.pm:139 share/meta-task/compssUsers.pl:54
+#, c-format
+msgid "Configuration"
+msgstr "Configuration"
+
+#: install2.pm:165
+#, c-format
+msgid "You must also format %s"
+msgstr "Vous devez aussi formater %s"
+
+#: interactive.pm:16
+#, c-format
+msgid ""
+"Some hardware on your computer needs ``proprietary'' drivers to work.\n"
+"You can find some information about them at: %s"
+msgstr ""
+"Certains périphériques présents sur votre système nécessitent des\n"
+"pilotes « propriétaires » pour pouvoir fonctionner. Vous pouvez\n"
+"trouver plus d'informations les concernant ici : %s"
+
+#: interactive.pm:22
+#, c-format
+msgid "Bringing up the network"
+msgstr "Démarrage de l'interface réseau..."
+
+#: interactive.pm:27
+#, c-format
+msgid "Bringing down the network"
+msgstr "Arrêt de l'interface réseau..."
+
+#: media.pm:697 media.pm:706
+#, c-format
+msgid "Downloading file %s..."
+msgstr "Téléchargement du fichier %s ..."
+
+#: media.pm:798
+#, c-format
+msgid "Copying some packages on disks for future use"
+msgstr ""
+"Copie de certains paquetages sur les disques pour une utilisation future"
+
+#: media.pm:851
+#, c-format
+msgid "Copying in progress"
+msgstr "Copie en cours"
+
+#: pkgs.pm:27
+#, c-format
+msgid "must have"
+msgstr "obligatoire"
+
+#: pkgs.pm:28
+#, c-format
+msgid "important"
+msgstr "important"
+
+#: pkgs.pm:29
+#, c-format
+msgid "very nice"
+msgstr "très utile"
+
+#: pkgs.pm:30
+#, c-format
+msgid "nice"
+msgstr "utile"
+
+#: pkgs.pm:31
+#, c-format
+msgid "maybe"
+msgstr "éventuellement"
+
+#: share/advertising/ARKEIA_EN.pl:3 share/advertising/ARKEIA_FR.pl:3
+#, c-format
+msgid "Arkeia"
+msgstr "Arkeia"
+
+#: share/advertising/FLATOUT.pl:3
+#, c-format
+msgid "Flatout"
+msgstr "Flatout"
+
+#: share/advertising/IM-GWENVIEW.pl:3
+#, c-format
+msgid "Gwenview"
+msgstr "Gwenview"
+
+#: share/advertising/IM_3D.pl:3
+#, c-format
+msgid "3D"
+msgstr "3D"
+
+#: share/advertising/IM_CMSJOOMLA.pl:3
+#, c-format
+msgid "CMS"
+msgstr "CMS"
+
+#: share/advertising/IM_CRM.pl:3
+#, c-format
+msgid "CRM"
+msgstr "CRM"
+
+#: share/advertising/IM_GAMME.pl:3
+#, c-format
+msgid "2007 product line"
+msgstr "Ligne de produits 2007"
+
+#: share/advertising/IM_INVICTUS.pl:3
+#, c-format
+msgid "Invictus Firewall"
+msgstr "Pare-feu Invictus"
+
+#: share/advertising/IM_ONE.pl:3
+#, c-format
+msgid "Discovery Live Mode"
+msgstr "Mode découverte sans installation (Live)"
+
+#: share/advertising/IM_REGISTER.pl:3
+#, c-format
+msgid "How to register"
+msgstr "Comment s'enregistrer"
+
+#: share/advertising/IM_RPMDRAKE.pl:3
+#, c-format
+msgid "Rpmdrake 2"
+msgstr "Rpmdrake 2"
+
+#: share/advertising/IM_SERVICES.pl:3
+#, c-format
+msgid "Mandriva Online Services"
+msgstr "Mandriva Online Services"
+
+#: share/advertising/IM_THEME.pl:3
+#, c-format
+msgid "New Theme"
+msgstr "Nouveau thème"
+
+#: share/advertising/IM_web2.pl:3
+#, c-format
+msgid "Web 2.0"
+msgstr "Web 2.0"
+
+#: share/advertising/Kaspersky.pl:3
+#, c-format
+msgid "Kaspersky"
+msgstr "Kaspersky"
+
+#: share/advertising/LinDVD.pl:3
+#, c-format
+msgid "LinDVD"
+msgstr "LinDVD"
+
+#: share/advertising/Skype.pl:3
+#, c-format
+msgid "Skype"
+msgstr "Skype"
+
+#: share/advertising/TRANSGAMING-CEDEGA.pl:3
+#, c-format
+msgid "Transgaming/Cedega"
+msgstr "Transgaming/Cedega"
+
+#: share/advertising/VPN.pl:3
+#, c-format
+msgid "DrakVPN"
+msgstr "DrakVPN"
+
+#: share/meta-task/compssUsers.pl:23
+#, c-format
+msgid "Workstation"
+msgstr "Station de travail"
+
+#: share/meta-task/compssUsers.pl:25
+#, c-format
+msgid "Office Workstation"
+msgstr "Poste bureautique"
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid ""
+"Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets "
+"(OpenOffice.org Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"Programmes pour la bureautique : traitements de texte (OpenOffice.org "
+"Writer, Kword), tableurs (OpenOffice.org Calc, Kspread), visualiseur pdf, etc"
+
+#: share/meta-task/compssUsers.pl:28
+#, c-format
+msgid ""
+"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
+"gnumeric), pdf viewers, etc"
+msgstr ""
+"Programmes pour la bureautique : traitements de texte (kword, abiword), "
+"tableurs (kspread, gnumeric), visualiseur pdf, etc"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Game station"
+msgstr "Jeux"
+
+#: share/meta-task/compssUsers.pl:34
+#, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc"
+msgstr ""
+"Programmes de divertissement : jeux d'arcade, de plateau, de stratégie, etc"
+
+#: share/meta-task/compssUsers.pl:37
+#, c-format
+msgid "Multimedia station"
+msgstr "Multimédia"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "Programmes pour jouer/éditer du son et de la vidéo"
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "Internet"
+
+#: share/meta-task/compssUsers.pl:44
+#, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"Ensemble d'outils pour lire et envoyer des courriers électroniques et des "
+"messages de forums (mutt, tin, ...), ainsi que pour naviguer sur Internet"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "Ordinateur réseau (client)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "Clients pour différents protocoles, dont ssh"
+
+#: share/meta-task/compssUsers.pl:55
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "Outils pour faciliter la configuration de votre ordinateur"
+
+#: share/meta-task/compssUsers.pl:59
+#, c-format
+msgid "Console Tools"
+msgstr "Utilitaires console"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "Éditeurs, interpréteurs, outils fichiers, terminaux"
+
+#: share/meta-task/compssUsers.pl:64 share/meta-task/compssUsers.pl:166
+#: share/meta-task/compssUsers.pl:168
+#, c-format
+msgid "Development"
+msgstr "Développement"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr ""
+"Bibliothèques de développement C et C++, programmes et fichiers d'en-tête"
+
+#: share/meta-task/compssUsers.pl:69 share/meta-task/compssUsers.pl:173
+#, c-format
+msgid "Documentation"
+msgstr "Documentation"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:174
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Livres et Howto's sur Linux et le Logiciel Libre"
+
+#: share/meta-task/compssUsers.pl:74 share/meta-task/compssUsers.pl:177
+#, c-format
+msgid "LSB"
+msgstr "LSB"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:178
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr "« Linux Standard Base ». Support des programmes tiers"
+
+#: share/meta-task/compssUsers.pl:84
+#, c-format
+msgid "Web Server"
+msgstr "Serveur Web"
+
+#: share/meta-task/compssUsers.pl:85
+#, c-format
+msgid "Apache"
+msgstr "Apache"
+
+#: share/meta-task/compssUsers.pl:88
+#, c-format
+msgid "Groupware"
+msgstr "Groupware"
+
+#: share/meta-task/compssUsers.pl:89
+#, c-format
+msgid "Kolab Server"
+msgstr "Serveur Kolab"
+
+#: share/meta-task/compssUsers.pl:92 share/meta-task/compssUsers.pl:133
+#, c-format
+msgid "Firewall/Router"
+msgstr "Pare Feu/Routeur"
+
+#: share/meta-task/compssUsers.pl:93 share/meta-task/compssUsers.pl:134
+#, c-format
+msgid "Internet gateway"
+msgstr "Passerelle internet"
+
+#: share/meta-task/compssUsers.pl:96
+#, c-format
+msgid "Mail/News"
+msgstr "Courriel/Nouvelles"
+
+#: share/meta-task/compssUsers.pl:97
+#, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "Serveur de courrier Postfix, serveur de nouvelles lnn"
+
+#: share/meta-task/compssUsers.pl:100
+#, c-format
+msgid "Directory Server"
+msgstr "Serveur d'annuaire"
+
+#: share/meta-task/compssUsers.pl:104
+#, c-format
+msgid "FTP Server"
+msgstr "Serveur FTP"
+
+#: share/meta-task/compssUsers.pl:105
+#, c-format
+msgid "ProFTPd"
+msgstr "ProFTPd"
+
+#: share/meta-task/compssUsers.pl:108
+#, c-format
+msgid "DNS/NIS"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:109
+#, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "Serveur de noms de domaine et d'information réseaux"
+
+#: share/meta-task/compssUsers.pl:112
+#, c-format
+msgid "File and Printer Sharing Server"
+msgstr "Serveur pour partage de fichiers et d'imprimantes"
+
+#: share/meta-task/compssUsers.pl:113
+#, c-format
+msgid "NFS Server, Samba server"
+msgstr "Serveur NFS, Serveur Samba"
+
+#: share/meta-task/compssUsers.pl:116 share/meta-task/compssUsers.pl:129
+#, c-format
+msgid "Database"
+msgstr "Base de Données"
+
+#: share/meta-task/compssUsers.pl:117
+#, c-format
+msgid "PostgreSQL and MySQL Database Server"
+msgstr "Serveurs de bases de données PostgreSQL ou MySQL"
+
+#: share/meta-task/compssUsers.pl:121
+#, c-format
+msgid "Web/FTP"
+msgstr "Web/FTP"
+
+#: share/meta-task/compssUsers.pl:122
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "Apache et Pro-ftpd"
+
+#: share/meta-task/compssUsers.pl:125
+#, c-format
+msgid "Mail"
+msgstr "Courriel"
+
+#: share/meta-task/compssUsers.pl:126
+#, c-format
+msgid "Postfix mail server"
+msgstr "Serveur de courrier Postfix"
+
+#: share/meta-task/compssUsers.pl:130
+#, c-format
+msgid "PostgreSQL or MySQL database server"
+msgstr "Serveurs de bases de données PostgreSQL ou MySQL"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Network Computer server"
+msgstr "Serveur réseau"
+
+#: share/meta-task/compssUsers.pl:138
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr "Serveur NFS, serveur SMB, serveur Proxy (mandataire), serveur SSH"
+
+#: share/meta-task/compssUsers.pl:144
+#, c-format
+msgid "Graphical Environment"
+msgstr "Environnement graphique"
+
+#: share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "KDE Workstation"
+msgstr "Station de travail KDE"
+
+#: share/meta-task/compssUsers.pl:147
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"L'environnement graphique KDE (K Desktop Environment) avec sa collection "
+"d'outils"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "GNOME Workstation"
+msgstr "Station de travail GNOME"
+
+#: share/meta-task/compssUsers.pl:152
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr ""
+"Un environnement de bureau avec un ensemble de programmes et d'outils "
+"intuitifs"
+
+#: share/meta-task/compssUsers.pl:155
+#, c-format
+msgid "IceWm Desktop"
+msgstr "Bureau IceWm"
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "Autres Environnements de Bureau"
+
+#: share/meta-task/compssUsers.pl:160
+#, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc"
+msgstr "Window Maker, Enlightenment, Fvwm, etc"
+
+#: share/meta-task/compssUsers.pl:183
+#, c-format
+msgid "Utilities"
+msgstr "Utilitaires"
+
+#: share/meta-task/compssUsers.pl:185 share/meta-task/compssUsers.pl:186
+#, c-format
+msgid "SSH Server"
+msgstr "Serveur SSH"
+
+#: share/meta-task/compssUsers.pl:190
+#, c-format
+msgid "Webmin"
+msgstr "Webmin"
+
+#: share/meta-task/compssUsers.pl:191
+#, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "Serveur de configuration distante webmin"
+
+#: share/meta-task/compssUsers.pl:195
+#, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "Utilitaires réseau/Surveillance du réseau"
+
+#: share/meta-task/compssUsers.pl:196
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr "Outils de surveillance, gestion de processus, tcpdump, nmap, ..."
+
+#: share/meta-task/compssUsers.pl:200
+#, c-format
+msgid "Mandriva Wizards"
+msgstr "Assistants Mandriva"
+
+#: share/meta-task/compssUsers.pl:201
+#, c-format
+msgid "Wizards to configure server"
+msgstr "Assistants pour configurer le serveur"
+
+#: steps.pm:85
+#, c-format
+msgid ""
+"An error occurred, but I do not know how to handle it nicely.\n"
+"Continue at your own risk."
+msgstr ""
+"Une erreur est survenue et semble difficile à résoudre correctement.\n"
+"Vous pouvez continuer, mais à vos risques et périls."
+
+#: steps.pm:426
+#, c-format
+msgid ""
+"Some important packages did not get installed properly.\n"
+"Either your cdrom drive or your cdrom is defective.\n"
+"Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm"
+"\"\n"
+msgstr ""
+"Quelques paquetages importants n'ont pas été correctement installés. Il se\n"
+"peut que le lecteur de CD-ROM ou le CD-ROM lui-même soit défectueux. Vous\n"
+"pouvez vous assurer du bon état de ce dernier en exécutant la commande "
+"suivante\n"
+"sur un ordinateur fonctionnant correctement : « rpm -qpl media/main/*.rpm »\n"
+
+#: steps_auto_install.pm:71 steps_stdio.pm:27
+#, c-format
+msgid "Entering step `%s'\n"
+msgstr "Démarrage de l'étape « %s »\n"
+
+#: steps_curses.pm:22
+#, c-format
+msgid "Mandriva Linux Installation %s"
+msgstr "Installation de Mandriva Linux %s"
+
+#: steps_curses.pm:32
+#, c-format
+msgid "<Tab>/<Alt-Tab> between elements"
+msgstr "<Tab>/<Alt-Tab> entre éléments"
+
+#: steps_gtk.pm:195
+#, c-format
+msgid ""
+"Your system is low on resources. You may have some problem installing\n"
+"Mandriva Linux. If that occurs, you can try a text install instead. For "
+"this,\n"
+"press `F1' when booting on CDROM, then enter `text'."
+msgstr ""
+"Votre ordinateur possède peu de mémoire. Vous aurez peut-être quelques\n"
+"problèmes pour installer Mandriva Linux. Si cela se produit, vous pouvez\n"
+"essayer de procéder à une installation en mode texte. Pour cela, appuyez\n"
+"sur la touche « F1 » après l'amorçage sur CD-ROM puis entrez « text »."
+
+#: steps_gtk.pm:225 steps_interactive.pm:511
+#, c-format
+msgid "Package Group Selection"
+msgstr "Sélection des groupes de paquetages"
+
+#: steps_gtk.pm:246 steps_interactive.pm:529
+#, c-format
+msgid "Individual package selection"
+msgstr "Sélection individuelle des paquetages"
+
+#: steps_gtk.pm:268 steps_interactive.pm:454
+#, c-format
+msgid "Total size: %d / %d MB"
+msgstr "Taille totale : %d / %d Mo"
+
+#: steps_gtk.pm:313
+#, c-format
+msgid "Bad package"
+msgstr "Mauvais paquetage"
+
+#: steps_gtk.pm:315
+#, c-format
+msgid "Version: "
+msgstr "Version : "
+
+#: steps_gtk.pm:316
+#, c-format
+msgid "Size: "
+msgstr "Taille : "
+
+#: steps_gtk.pm:316
+#, c-format
+msgid "%d KB\n"
+msgstr "%d Ko\n"
+
+#: steps_gtk.pm:317
+#, c-format
+msgid "Importance: "
+msgstr "Importance : "
+
+#: steps_gtk.pm:351
+#, c-format
+msgid "You can not select/unselect this package"
+msgstr "Vous ne pouvez pas sélectionner/désélectionner ce paquetage"
+
+#: steps_gtk.pm:355
+#, c-format
+msgid "due to missing %s"
+msgstr "parce que %s manque"
+
+#: steps_gtk.pm:356
+#, c-format
+msgid "due to unsatisfied %s"
+msgstr "car %s n'est pas résolu"
+
+#: steps_gtk.pm:357
+#, c-format
+msgid "trying to promote %s"
+msgstr "Tentative de promouvoir %s"
+
+#: steps_gtk.pm:358
+#, c-format
+msgid "in order to keep %s"
+msgstr "afin de conserver %s"
+
+#: steps_gtk.pm:363
+#, c-format
+msgid ""
+"You can not select this package as there is not enough space left to install "
+"it"
+msgstr "Il n'y a pas assez de place pour installer ce paquetage"
+
+#: steps_gtk.pm:366
+#, c-format
+msgid "The following packages are going to be installed"
+msgstr "Les paquetages suivants vont être installés"
+
+#: steps_gtk.pm:367
+#, c-format
+msgid "The following packages are going to be removed"
+msgstr "Les paquetages suivants vont être désinstallés"
+
+#: steps_gtk.pm:392
+#, c-format
+msgid "This is a mandatory package, it can not be unselected"
+msgstr "Ce paquetage est nécessaire, vous ne pouvez pas le désélectionner"
+
+#: steps_gtk.pm:394
+#, c-format
+msgid "You can not unselect this package. It is already installed"
+msgstr "Vous ne pouvez pas désélectionner ce paquetage. Il est déjà installé"
+
+#: steps_gtk.pm:396
+#, c-format
+msgid "You can not unselect this package. It must be upgraded"
+msgstr ""
+"Vous ne pouvez pas désélectionner ce paquetage, il doit être mis à jour."
+
+#: steps_gtk.pm:400
+#, c-format
+msgid "Show automatically selected packages"
+msgstr "Montrer les paquetages sélectionnés automatiquement"
+
+#: steps_gtk.pm:402 steps_interactive.pm:133
+#, c-format
+msgid "Install"
+msgstr "Installation"
+
+#: steps_gtk.pm:405
+#, c-format
+msgid "Load/Save selection"
+msgstr "Charger/Sauvegarder la sélection"
+
+#: steps_gtk.pm:406
+#, c-format
+msgid "Updating package selection"
+msgstr "Mise à jour de la sélection des paquetages"
+
+#: steps_gtk.pm:411
+#, c-format
+msgid "Minimal install"
+msgstr "Installation minimale"
+
+#: steps_gtk.pm:425
+#, c-format
+msgid "Software Management"
+msgstr "Gestion des paquetages"
+
+#: steps_gtk.pm:425 steps_interactive.pm:373
+#, c-format
+msgid "Choose the packages you want to install"
+msgstr "Choisissez les paquetages que vous voulez installer"
+
+#: steps_gtk.pm:442 steps_interactive.pm:543
+#, c-format
+msgid "Installing"
+msgstr "Installation"
+
+#: steps_gtk.pm:468
+#, c-format
+msgid "No details"
+msgstr "Pas de détails"
+
+#: steps_gtk.pm:483
+#, c-format
+msgid "Time remaining "
+msgstr "Temps restant "
+
+#: steps_gtk.pm:484
+#, c-format
+msgid "Estimating"
+msgstr "Estimation en cours"
+
+#: steps_gtk.pm:511
+#, c-format
+msgid "%d package"
+msgid_plural "%d packages"
+msgstr[0] "%d paquetage"
+msgstr[1] "%d paquetages"
+
+#: steps_gtk.pm:557 steps_interactive.pm:729
+#, c-format
+msgid "Summary"
+msgstr "Résumé"
+
+#: steps_gtk.pm:570
+#, c-format
+msgid "Configure"
+msgstr "Configurer"
+
+#: steps_gtk.pm:580 steps_interactive.pm:725 steps_interactive.pm:852
+#, c-format
+msgid "not configured"
+msgstr "non configuré"
+
+#: steps_gtk.pm:612 steps_interactive.pm:268
+#, c-format
+msgid ""
+"The following installation media have been found.\n"
+"If you want to skip some of them, you can unselect them now."
+msgstr ""
+"Les média d'installation suivants ont été trouvés.\n"
+"Si vous ne désirez pas utiliser certains d'entre eux, vous pouvez les "
+"désélectionner maintenant."
+
+#: steps_gtk.pm:621 steps_interactive.pm:274
+#, c-format
+msgid ""
+"You have the option to copy the contents of the CDs onto the hard drive "
+"before installation.\n"
+"It will then continue from the hard drive and the packages will remain "
+"available once the system is fully installed."
+msgstr ""
+"Vous avez la possibilité de copier le contenu des CDs sur le disque dur "
+"avant l'installation.\n"
+"Celle-ci s'effectuera alors à partir du disque dur et les paquetages "
+"resteront disponibles une fois le système installé."
+
+#: steps_gtk.pm:623 steps_interactive.pm:276
+#, c-format
+msgid "Copy whole CDs"
+msgstr "Copier entièrement les CDs"
+
+#: steps_interactive.pm:38
+#, c-format
+msgid "An error occurred"
+msgstr "Une erreur est survenue"
+
+#: steps_interactive.pm:97
+#, c-format
+msgid "Please choose your keyboard layout."
+msgstr "Veuillez choisir votre type de clavier."
+
+#: steps_interactive.pm:99
+#, c-format
+msgid "Here is the full list of available keyboards"
+msgstr "Voici la liste complète des claviers disponibles"
+
+#: steps_interactive.pm:128
+#, c-format
+msgid "Install/Upgrade"
+msgstr "Installation/Mise à jour"
+
+#: steps_interactive.pm:129
+#, c-format
+msgid "Is this an install or an upgrade?"
+msgstr "Désirez-vous faire une installation ou une mise à jour ?"
+
+#: steps_interactive.pm:135
+#, c-format
+msgid "Upgrade %s"
+msgstr "Mettre à jour %s"
+
+#: steps_interactive.pm:148
+#, c-format
+msgid "Encryption key for %s"
+msgstr "Clé de chiffrement pour %s"
+
+#: steps_interactive.pm:184
+#, c-format
+msgid "IDE"
+msgstr "IDE"
+
+#: steps_interactive.pm:184
+#, c-format
+msgid "Configuring IDE"
+msgstr "Configuration IDE"
+
+#: steps_interactive.pm:221
+#, c-format
+msgid ""
+"No free space for 1MB bootstrap! Install will continue, but to boot your "
+"system, you'll need to create the bootstrap partition in DiskDrake"
+msgstr ""
+"Pas de place libre pour la partition d'amorçage (bootstrap) de 1 Mo."
+"L'installation va\n"
+"continuer, mais pour que votre système puisse démarrer, vous aurez besoin "
+"de\n"
+"créer la partition d'amorçage avec DiskDrake."
+
+#: steps_interactive.pm:226
+#, c-format
+msgid ""
+"You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
+"to boot your system, you'll need to create the bootstrap partition in "
+"DiskDrake"
+msgstr ""
+"Pas de place libre pour la partition d'amorçage (PPC PReP Boot bootstrap) de "
+"1 Mo.L'installation va\n"
+"continuer, mais pour que votre système puisse démarrer, vous aurez besoin "
+"de\n"
+"créer la partition d'amorçage avec DiskDrake."
+
+#: steps_interactive.pm:318
+#, c-format
+msgid ""
+"Change your Cd-Rom!\n"
+"Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when "
+"done.\n"
+"If you do not have it, press Cancel to avoid installation from this Cd-Rom."
+msgstr ""
+"Changez de CD-ROM !\n"
+"Veuillez insérer le CD-ROM nommé « %s » dans votre lecteur puis cliquez sur "
+"« OK ».\n"
+"Si vous ne le possédez pas, cliquez sur « Annuler » afin de ne rien "
+"installer à partir de ce CD-ROM."
+
+#: steps_interactive.pm:340
+#, c-format
+msgid "Looking for available packages..."
+msgstr "Recherche des paquetages disponibles..."
+
+#: steps_interactive.pm:349
+#, c-format
+msgid ""
+"Your system does not have enough space left for installation or upgrade (%"
+"dMB > %dMB)"
+msgstr ""
+"Votre système n'a pas assez d'espace libre pour installer ou de mettre à "
+"jour (%dMo > %dMo)"
+
+#: steps_interactive.pm:385
+#, c-format
+msgid ""
+"Please choose load or save package selection.\n"
+"The format is the same as auto_install generated files."
+msgstr ""
+"Veuillez choisir entre le chargement ou la sauvegarde de la\n"
+"sélection des paquetages. Le format est le même que celui de l'installation "
+"automatisée (auto_install)."
+
+#: steps_interactive.pm:387
+#, c-format
+msgid "Load"
+msgstr "Charger"
+
+#: steps_interactive.pm:387
+#, c-format
+msgid "Save"
+msgstr "Sauvegarder"
+
+#: steps_interactive.pm:395
+#, c-format
+msgid "Bad file"
+msgstr "Mauvais fichier"
+
+#: steps_interactive.pm:468
+#, c-format
+msgid "Selected size is larger than available space"
+msgstr "La taille sélectionnée est plus importante que la place disponible"
+
+#: steps_interactive.pm:483
+#, c-format
+msgid "Type of install"
+msgstr "Type d'installation"
+
+#: steps_interactive.pm:484
+#, c-format
+msgid ""
+"You have not selected any group of packages.\n"
+"Please choose the minimal installation you want:"
+msgstr ""
+"Vous n'avez sélectionné aucun groupe de paquetages.\n"
+"Veuillez choisir l'installation minimale désirée : "
+
+#: steps_interactive.pm:487
+#, c-format
+msgid "With X"
+msgstr "Avec X"
+
+#: steps_interactive.pm:488
+#, c-format
+msgid "With basic documentation (recommended!)"
+msgstr "Avec la documentation de base (recommandé !)"
+
+#: steps_interactive.pm:489
+#, c-format
+msgid "Truly minimal install (especially no urpmi)"
+msgstr "Installation vraiment minimale (et en particulier pas d'urpmi)"
+
+#: steps_interactive.pm:528
+#, c-format
+msgid "All"
+msgstr "Tout"
+
+#: steps_interactive.pm:544
+#, c-format
+msgid "Preparing installation"
+msgstr "Préparation de l'installation"
+
+#: steps_interactive.pm:552
+#, c-format
+msgid "Installing package %s"
+msgstr "Installation du paquetage %s"
+
+#: steps_interactive.pm:576
+#, c-format
+msgid "There was an error ordering packages:"
+msgstr "Erreur lors du tri des paquetages :"
+
+#: steps_interactive.pm:576
+#, c-format
+msgid "Go on anyway?"
+msgstr "Souhaitez-vous tout de même continuer ?"
+
+#: steps_interactive.pm:580
+#, c-format
+msgid "Retry"
+msgstr "Ré-essayer"
+
+#: steps_interactive.pm:581
+#, c-format
+msgid "Skip this package"
+msgstr "Ignorer ce paquetage"
+
+#: steps_interactive.pm:582
+#, c-format
+msgid "Skip all packages from medium \"%s\""
+msgstr "Ignorer tous les paquetages du média « %s »"
+
+#: steps_interactive.pm:583
+#, c-format
+msgid "Go back to media and packages selection"
+msgstr "Retourner à la sélection du média et des paquetages"
+
+#: steps_interactive.pm:586
+#, c-format
+msgid "There was an error installing package %s."
+msgstr "Erreur lors de l'installation du paquetage %s."
+
+#: steps_interactive.pm:604
+#, c-format
+msgid "Post-install configuration"
+msgstr "Configuration post-installation"
+
+#: steps_interactive.pm:611
+#, c-format
+msgid "Please ensure the Update Modules media is in drive %s"
+msgstr ""
+"Assurez vous que le média de mise à jour des modules est dans le lecteur %s"
+
+#: steps_interactive.pm:638
+#, c-format
+msgid "Updates"
+msgstr "Mises à jour"
+
+#: steps_interactive.pm:639
+#, c-format
+msgid ""
+"You now have the opportunity to download updated packages. These packages\n"
+"have been updated after the distribution was released. They may\n"
+"contain security or bug fixes.\n"
+"\n"
+"To download these packages, you will need to have a working Internet \n"
+"connection.\n"
+"\n"
+"Do you want to install the updates?"
+msgstr ""
+"Vous avez maintenant la possibilité de télécharger les mises à jour\n"
+"créées depuis la sortie de cette distribution. Il peut y avoir des "
+"correctifs de\n"
+"sécurité ou des résolutions d'anomalies.\n"
+"\n"
+"Vous devez avoir une connexion internet pour les télécharger.\n"
+"\n"
+"Souhaitez-vous installer les mises à jour ?"
+
+#: steps_interactive.pm:660
+#, c-format
+msgid "Contacting the mirror to get the list of available packages..."
+msgstr "Téléchargement de la liste des paquetages disponibles ..."
+
+#: steps_interactive.pm:666
+#, c-format
+msgid "Unable to contact mirror %s"
+msgstr "Impossible d'accéder au miroir %s"
+
+#: steps_interactive.pm:788 steps_interactive.pm:805 steps_interactive.pm:821
+#: steps_interactive.pm:832
+#, c-format
+msgid "Hardware"
+msgstr "Matériel"
+
+#: steps_interactive.pm:789 steps_interactive.pm:806
+#, c-format
+msgid "Sound card"
+msgstr "Carte son"
+
+#: steps_interactive.pm:809
+#, c-format
+msgid "Do you have an ISA sound card?"
+msgstr "Possédez-vous une carte son ISA ?"
+
+#: steps_interactive.pm:811
+#, c-format
+msgid ""
+"Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
+"card"
+msgstr ""
+"Lancez « alsaconf » ou « sndconfig » après l'installation pour configurer la "
+"carte son"
+
+#: steps_interactive.pm:813
+#, c-format
+msgid "No sound card detected. Try \"harddrake\" after installation"
+msgstr ""
+"Aucune carte son détectée. Essayez avec « harddrake » après l'installation"
+
+#: steps_interactive.pm:822
+#, c-format
+msgid "TV card"
+msgstr "Carte TV"
+
+#: steps_interactive.pm:833
+#, c-format
+msgid "Graphical interface"
+msgstr "Interface graphique"
+
+#: steps_interactive.pm:839 steps_interactive.pm:850
+#, c-format
+msgid "Network & Internet"
+msgstr "Réseau et Internet"
+
+#: steps_interactive.pm:851
+#, c-format
+msgid "Proxies"
+msgstr "Proxys"
+
+#: steps_interactive.pm:852
+#, c-format
+msgid "configured"
+msgstr "configuré"
+
+#: steps_interactive.pm:862
+#, c-format
+msgid "Security Level"
+msgstr "Niveau de sécurité"
+
+#: steps_interactive.pm:876
+#, c-format
+msgid "Firewall"
+msgstr "Pare Feu"
+
+#: steps_interactive.pm:880
+#, c-format
+msgid "activated"
+msgstr "activé"
+
+#: steps_interactive.pm:880
+#, c-format
+msgid "disabled"
+msgstr "désactivé"
+
+#: steps_interactive.pm:891
+#, c-format
+msgid "Boot"
+msgstr "Partition de démarrage"
+
+#. -PO: example: lilo-graphic on /dev/hda1
+#: steps_interactive.pm:895
+#, c-format
+msgid "%s on %s"
+msgstr "%s sur %s"
+
+#: steps_interactive.pm:921
+#, c-format
+msgid "You have not configured X. Are you sure you really want this?"
+msgstr ""
+"Vous n'avez pas configuré le serveur d'affichage (X11). Êtes-vous sûr de ce "
+"que vous faites ?"
+
+#: steps_interactive.pm:967
+#, c-format
+msgid "Preparing bootloader..."
+msgstr "Préparation du programme d'amorçage..."
+
+#: steps_interactive.pm:977
+#, c-format
+msgid ""
+"You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
+"will not work for you. The install will continue, but you'll need to use "
+"BootX or some other means to boot your machine. The kernel argument for the "
+"root fs is: root=%s"
+msgstr ""
+"Il semble que votre machine ne soit pas dotée de l'architecture "
+"« NewWorld ».\n"
+"Le programme d'amorçage « yaboot » ne fonctionnera pas.\n"
+"L'installation va continuer, mais vous aurez besoin de « BootX » ou\n"
+"d'une autre méthode pour démarrer votre machine. Le paramètre pour la racine "
+"du noyau est : root=%s"
+
+#: steps_interactive.pm:983
+#, c-format
+msgid "Do you want to use aboot?"
+msgstr "Désirez-vous utiliser « aboot » ?"
+
+#: steps_interactive.pm:986
+#, c-format
+msgid ""
+"Error installing aboot, \n"
+"try to force installation even if that destroys the first partition?"
+msgstr ""
+"Une erreur est survenue lors de l'installation de « aboot ».\n"
+"Désirez-vous forcer l'installation au risque de détruire la\n"
+"première partition du disque ?"
+
+#: steps_interactive.pm:1003
+#, c-format
+msgid ""
+"In this security level, access to the files in the Windows partition is "
+"restricted to the administrator."
+msgstr ""
+"A ce niveau de sécurité, l'accès aux fichiers de la partition Windows sera "
+"restreint à l'administrateur."
+
+#: steps_interactive.pm:1032
+#, c-format
+msgid "Insert a blank floppy in drive %s"
+msgstr "Insérez une disquette vierge dans le lecteur %s"
+
+#: steps_interactive.pm:1034
+#, c-format
+msgid "Creating auto install floppy..."
+msgstr "Création de la disquette d'auto-installation..."
+
+#: steps_interactive.pm:1045
+#, c-format
+msgid ""
+"Some steps are not completed.\n"
+"\n"
+"Do you really want to quit now?"
+msgstr ""
+"Certaines étapes ne sont pas terminées.\n"
+"\n"
+"Souhaitez-vous vraiment quitter maintenant ?"
+
+#: steps_interactive.pm:1055
+#, c-format
+msgid "Congratulations"
+msgstr "Félicitations"
+
+#: steps_interactive.pm:1059
+#, c-format
+msgid "Reboot"
+msgstr "Redémarrage"
+
+#: steps_interactive.pm:1063 steps_interactive.pm:1064
+#, c-format
+msgid "Generate auto install floppy"
+msgstr "Créer une disquette d'auto-installation"
+
+#: steps_interactive.pm:1065
+#, c-format
+msgid ""
+"The auto install can be fully automated if wanted,\n"
+"in that case it will take over the hard drive!!\n"
+"(this is meant for installing on another box).\n"
+"\n"
+"You may prefer to replay the installation.\n"
+msgstr ""
+"L'auto-installation peut être complètement automatique si nécessaire,\n"
+"dans ce cas elle prend le contrôle du disque dur !!\n"
+"(prévu pour l'installation d'une autre machine).\n"
+"\n"
+"Vous pouvez préférer rejouer l'installation.\n"
+
+#: steps_interactive.pm:1070
+#, c-format
+msgid "Replay"
+msgstr "Rejouer"
+
+#: steps_interactive.pm:1070
+#, c-format
+msgid "Automated"
+msgstr "Automatisée"
+
+#: steps_interactive.pm:1073
+#, c-format
+msgid "Save packages selection"
+msgstr "Sauvegarder la sélection des paquetages"
+
+#. -PO: please keep the following messages very short: they must fit in the left list of the installer!!!
+#: steps_list.pm:16
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Language"
+msgstr "Langue"
+
+#: steps_list.pm:17
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"License"
+msgstr "Licence"
+
+#: steps_list.pm:18
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Mouse"
+msgstr "Souris"
+
+#: steps_list.pm:19
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Hard drive detection"
+msgstr "Détection des disques durs"
+
+#: steps_list.pm:20
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Installation class"
+msgstr "Classe d'installation"
+
+#: steps_list.pm:21
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Keyboard"
+msgstr "Clavier"
+
+#: steps_list.pm:22
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Security"
+msgstr "Sécurité"
+
+#: steps_list.pm:23
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Partitioning"
+msgstr "Partitionnement"
+
+#: steps_list.pm:24
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Formatting"
+msgstr "Formattage"
+
+#: steps_list.pm:25
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Choosing packages"
+msgstr "Choix des paquetages"
+
+#: steps_list.pm:26
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Installing"
+msgstr "Installation"
+
+#: steps_list.pm:27
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Authentication"
+msgstr "Authentification"
+
+#: steps_list.pm:28
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Users"
+msgstr "Utilisateurs"
+
+#: steps_list.pm:29
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Networking"
+msgstr "Réseau"
+
+#: steps_list.pm:30
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Bootloader"
+msgstr "Amorçage"
+
+#: steps_list.pm:31
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Configure X"
+msgstr "Configuration de X"
+
+#: steps_list.pm:32
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Summary"
+msgstr "Résumé"
+
+#: steps_list.pm:33
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Services"
+msgstr "Services"
+
+#: steps_list.pm:34
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Updates"
+msgstr "Mises à jour"
+
+#: steps_list.pm:35
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Exit"
+msgstr "Quitter"
+
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "(%d paquetage, %d Mo)"
+#~ msgstr[1] "(%d paquetages, %d Mo)"
+
+#~ msgid "%d packages"
+#~ msgstr "%d paquetages"
+
+#~ msgid "Language"
+#~ msgstr "Langue"
+
+#~ msgid "License"
+#~ msgstr "Licence"
+
+#~ msgid "Installation class"
+#~ msgstr "Classe d'installation"
+
+#~ msgid "Formatting"
+#~ msgstr "Formattage"
+
+#~ msgid "Choosing packages"
+#~ msgstr "Choix des paquetages"
+
+#~ msgid "Users"
+#~ msgstr "Utilisateurs"
+
+#~ msgid "Networking"
+#~ msgstr "Réseau"
+
+#~ msgid "Configure X"
+#~ msgstr "Configuration de X"
+
+#~ msgid ""
+#~ "Can not access kernel modules corresponding to your kernel (file %s is "
+#~ "missing), this generally means your boot floppy in not in sync with the "
+#~ "Installation medium (please create a newer boot floppy)"
+#~ msgstr ""
+#~ "Impossible d'accéder aux modules correspondant à votre noyau (le fichier %"
+#~ "s est manquant), cela veut généralement dire que votre disquette "
+#~ "d'amorçage n'est plus à jour par rapport à votre périphérique "
+#~ "d'installation (veuillez créer une disquette d'amorçage plus récente)"

@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 # drakupdate_fstab
-# Copyright (C) 2002-2005 Mandriva (pixel@mandrakesoft.com)
+# Copyright (C) 2002-2006 Mandriva (pixel@mandrakesoft.com)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -80,17 +80,7 @@ sub device_name_to_entry {
     }
 
     my $e;
-    if (my ($devfs_prefix, $nb) = $name =~ m,(.*)/(?:cd|disc|part(\d+))$,) {
-	$e = find { $_->{devfs_prefix} eq $devfs_prefix } @l;
-	$e->{part_number} = $nb;
-	$e->{devfs_prefix} ||= $devfs_prefix;
-	$e->{devfs_device} = $e->{devfs_prefix} . '/part' . $nb;
-	if ($e->{devfs_device} eq $name) {
-	    $e->{prefer_devfs_name} = 1;
-	} else {
-	    $e->{devfs_device} = $e->{device} = $name;
-	}
-    } else {
+    {
 	unless ($e = find { $name eq $_->{device} } @l) {
 	    my ($prefix) = $name =~ m/^(.*?)\d*$/;
 	    $e = find { $prefix eq ($_->{prefix} || $_->{device}) } @l;
@@ -121,7 +111,7 @@ sub set_mount_point {
     my ($part, $fstab) = @_;
 
     my $mntpoint = detect_devices::suggest_mount_point($part) or return;
-    $mntpoint = "/mnt/$mntpoint";
+    $mntpoint = "/media/$mntpoint";
 
     foreach ('', 2 .. 10) {
 	next if fs::get::mntpoint2part("$mntpoint$_", $fstab);
@@ -147,7 +137,7 @@ sub main {
 	cp_af('/etc/fstab', $fstab_file = '/tmp/fstab');
     }
 
-    my $fstab = [ fs::read_fstab('', '/etc/fstab', 'keep_freq_passno', 'keep_devfs_name', 'verbatim_credentials') ];
+    my $fstab = [ fs::read_fstab('', '/etc/fstab', 'keep_freq_passno', 'verbatim_credentials') ];
     my ($existing_fstab_entries, $fstab_) = partition { fs::get::is_same_hd($_, $part) } @$fstab;
 
     if ($debug) {

@@ -29,4 +29,7 @@ void thirdparty_load_media_modules(void);
  */
 void thirdparty_load_modules(void);
 
+/* destroy all data structures related to the thirdparty module */
+void thirdparty_destroy(void);
+
 #endif

@@ -21,7 +21,6 @@
 
 #include "stage1.h"
 #include "log.h"
-#include "insmod.h"
 #include "modules.h"
 #include "mount.h"
 #include "frontend.h"
@@ -33,7 +32,8 @@
 
 #define THIRDPARTY_MOUNT_LOCATION "/tmp/thirdparty"
 
-static struct pcitable_entry pcitable[100];
+#define N_PCITABLE_ENTRIES 100
+static struct pcitable_entry pcitable[N_PCITABLE_ENTRIES];
 static int pcitable_len = 0;
 
 static enum return_type thirdparty_choose_device(char ** device, int probe_only)
@@ -218,6 +218,25 @@ static enum return_type thirdparty_prompt_modules(const char *modules_location, 
 }
 
 
+static int pcitable_orderer(const void *a, const void *b)
+{
+	int ret;
+	struct pcitable_entry *ap = (struct pcitable_entry *)a;
+	struct pcitable_entry *bp = (struct pcitable_entry *)b;
+
+	if ((ret = ap->vendor - bp->vendor) != 0)
+		return ret;
+	if ((ret = ap->device - bp->device) != 0)
+		return ret;
+	if ((ret = ap->subvendor - bp->subvendor) != 0)
+		return ret;
+	if ((ret = ap->subdevice - bp->subdevice) != 0)
+		return ret;
+
+	return 0;
+}
+
+
 static void thirdparty_load_pcitable(const char *modules_location)
 {
 	char pcitable_filename[100];
@@ -228,14 +247,21 @@ static void thirdparty_load_pcitable(const char *modules_location)
 		log_message("third_party: no external pcitable found");
 		return;
 	}
-	while (1) {
+	pcitable_len = 0;
+	while (pcitable_len < N_PCITABLE_ENTRIES) {
 		char buf[200];
 		struct pcitable_entry *e;
 		if (!fgets(buf, sizeof(buf), f)) break;
 		e = &pcitable[pcitable_len++];
-		sscanf(buf, "%hx\t%hx\t\"%[^ \"]\"\t\"%[^ \"]\"", &e->vendor, &e->device, e->module, e->description);
+		if (sscanf(buf, "%hx\t%hx\t\"%[^ \"]\"\t\"%[^\"]\"", &e->vendor, &e->device, e->module, e->description) == 4)
+			e->subvendor = e->subdevice = PCITABLE_MATCH_ALL;
+		else
+			sscanf(buf, "%hx\t%hx\t%x\t%x\t\"%[^ \"]\"\t\"%[^\"]\"", &e->vendor, &e->device, &e->subvendor, &e->subdevice, e->module, e->description);
 	}
 	fclose(f);
+
+	/* sort pcitable by most specialised entries first */
+	qsort(pcitable, pcitable_len, sizeof(pcitable[0]), pcitable_orderer);
 }
 
 
@@ -248,8 +274,13 @@ static int thirdparty_is_detected(char *driver) {
 			if (pcitable[j].vendor == detected_devices[i].vendor &&
 			    pcitable[j].device == detected_devices[i].device &&
 			    !strcmp(pcitable[j].module, driver)) {
-				log_message("probing: found device for module %s", driver);
-				return 1;
+				const int subvendor = pcitable[j].subvendor;
+				const int subdevice = pcitable[j].subdevice;
+				if ((subvendor == PCITABLE_MATCH_ALL && subdevice == PCITABLE_MATCH_ALL) ||
+					(subvendor == detected_devices[i].subvendor && subdevice == detected_devices[i].subdevice)) {
+					log_message("probing: found device for module %s", driver);
+					return 1;
+				}
 			}
 		}
 		/* if not found, compare with the detected driver */
@@ -314,7 +345,7 @@ static enum return_type thirdparty_autoload_modules(const char *modules_location
 static enum return_type thirdparty_try_directory(char * root_directory, int interactive) {
 	char modules_location[100];
 	char modules_location_release[100];
-	char list_filename[50];
+	char *list_filename;
 	FILE *f_load, *f_detect;
 	char **modules_list, **modules_list_release;
 	struct utsname kernel_uname;
@@ -353,6 +384,8 @@ static enum return_type thirdparty_try_directory(char * root_directory, int inte
 			stg1_error_message("No modules found on selected device.");
 		return RETURN_ERROR;
         }
+
+	list_filename = alloca(strlen(modules_location) + 10 /* max: "/to_detect" */ + 1);
 
 	sprintf(list_filename, "%s/to_load", modules_location);
 	f_load = fopen(list_filename, "rb");
@@ -417,4 +450,9 @@ void thirdparty_load_modules(void)
 
 	if (results != RETURN_OK)
 		return thirdparty_load_modules();
+}
+
+void thirdparty_destroy(void)
+{
+	probing_destroy();
 }

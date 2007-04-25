@@ -20,7 +20,7 @@ include $(top_dir)/Makefile.common
 
 TARGETS = pppd
 
-BINTARGET = ../pppd-bin
+BINTARGET = ../../pppd
 
 
 all: $(TARGETS)
@@ -29,6 +29,8 @@ clean:
 	rm -f *.o *.a $(BINTARGET) pppd
 
 FLAGS = -Wall -Wno-deprecated-declarations -Werror -Os -fomit-frame-pointer -DDO_BSD_COMPRESS=0 -D_linux_=1 -DHAVE_MMAP -DNO_DRAND48 -D_BSD_SOURCE -D_GNU_SOURCE
+# (blino) for gcc-4.1.1, dereferencing type-punned pointer will break strict-aliasing rules, in options.c:711
+FLAGS += -fno-strict-aliasing
 
 INCS = -I../include -I.
 

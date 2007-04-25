@@ -3,6 +3,7 @@
 use MDK::Common;
 use XML::Parser;
 use Data::Dumper;
+use File::Glob;
 use Config;
 use Cwd 'cwd';
 
@@ -25,6 +26,7 @@ my $LIB = arch() =~ /x86_64/ ? "lib64" : "lib";
 
 my $base_cpio_options = '-pumd --quiet';
 
+my $problem;
 my $tree = XML::Parser->new(Style => 'Tree')->parsefile($xml_file_list);
 
 my $main_node = decompose($tree);
@@ -33,13 +35,21 @@ $main_node->{tag} eq 'list' or die "bad file $xml_file_list (main tag should be 
 
 handle_nodes({}, $main_node);
 
+$problem and exit 1;
+
 install_needed_libraries();
 
 final_cleanup();
 
+sub error {
+    my ($err) = @_;
+    warn "FATAL: $err\n";
+    $problem = 1;
+}
+
 sub final_cleanup() {
     #- cpio creates directory 700, that's not nice
-    system("find $DEST -type d | xargs $sudo chmod 755");
+    system("find $DEST -type d -print0 | xargs -0 $sudo chmod 755");
 }
 
 sub handle_nodes {
@@ -130,7 +140,7 @@ sub collect_needed_libraries {
 	foreach (@l) {
 	    if ($main_node->{attr}{'no-arch-libraries'}) {
 		#- replace /lib/tls or /lib/i686 with /lib
-		s!^(/lib(64)?/).*?/!$1!;
+		s!^(/lib(64)?/).*?/!$1! if arch() !~ /x86_64/;
 	    }
 	}
 	@to_check = grep { !$needed_libraries{$_}++ } @l;	
@@ -155,7 +165,7 @@ sub collect_needed_perl_files {
 	    } elsif (begins_with($f, '/')) {
 		if ($main_node->{attr}{'no-arch-libraries'}) {
 		    #- replace /lib/tls or /lib/i686 with /lib
-		    $f =~ s!^(/lib(64)?/).*?/!$1!;
+		    $f =~ s!^(/lib(64)?/).*?/!$1! if arch() !~ /x86_64/;
 		}
 		$global{$f} = 1;
 	    }
@@ -176,7 +186,7 @@ sub copy_files {
 	}
     } else {
 	my $options = join(' ', $base_cpio_options, @options);
-	warn "cpio $options to_dir $to_dir from $working_dir: @$files\n" if $verbose;
+	warn "cpio $options to_dir=$to_dir from=$working_dir: @$files\n" if $verbose;
 	open(my $F, "| cd $working_dir ; $sudo cpio $options $to_dir");
 	print $F "$_\n" foreach @$files;
 	close($F) or die "cpio $to_dir failed\n";
@@ -203,16 +213,22 @@ sub install {
 	my @l = $f;
 	chdir $working_dir;
 	if ($f =~ /\*/ || $b_full_glob) {
-	    @l = glob($f) or die "no match for $f\n"; 
-
-	    @l == 1 || $b_full_glob or die "multiple match for $f\n";	    
-	} else {
-	    -e $f or die "missing file $f ($rel) in $working_dir\n";
+	    @l = File::Glob::bsd_glob($f); #- using bsd_glob because CORE::glob() splits on whitespace and we don't want this
+	    if (@l == 0) { 
+		error("no match for $f");
+	    } elsif (@l == 1 || $b_full_glob) {
+	    } else { 
+		error("multiple match for $f");
+		@l = ();
+	    }
+	} elsif (! -e $f) {
+	    error("missing file $f ($rel) in $working_dir");
+	    @l = ();
 	}
 	if (@l == 1 && -d $l[0] && $b_recursive_dirs) {
 	    @l = all_files_rec_($l[0]);
 	}
-	@l = grep { !m!/CVS($|/)! } @l;
+	@l = grep { !m!/(\.svn|CVS)($|/)! } @l;
 	if (my $re = $env->{from}{matching}) {
 	    @l = grep { eval $re } @l;
 	}
@@ -223,10 +239,12 @@ sub install {
 	@l;
     };
 
+    my @text_l = $env->{from}{spaces_in_filename} ? $text =~ /^\s*(.*?)\s*$/ : split(' ', $text);
     my @files;
     if ($expand eq 'tar') {
-	foreach (split(' ', $text)) {
-	    system('tar', 'xfj', $from_file->($_), '-C', $to_dir);
+	foreach (@text_l) {
+	    my ($tarball) = $from_file->($_) or next;
+	    system('tar', 'xfj', $tarball, '-C', $to_dir);
 	}
 	# not filling @files, things are already done
 
@@ -235,14 +253,14 @@ sub install {
 
     } elsif ($expand eq 'glob') {
 	#- glob done in $from_file
-	@files = split(' ', $text);
+	@files = @text_l;
 
     } elsif ($expand eq 'binary') {
 	$disallow_from_dir->();
 	my @PATH = qw(/sbin /bin /usr/bin /usr/sbin /usr/X11R6/bin);
-	foreach my $name (map { expand_macros($_) } split(' ', $text)) {
+	foreach my $name (map { expand_macros($_) } @text_l) {
 	    my @l = grep { -x $_ } map { "$_/$name" } @PATH;
-	    @l or die "can't find binary $name\n";
+	    @l or error("can't find binary $name"), next;
 	    if (@l > 1) {
 		my @m = grep { ! -l $_ } @l;
 		if (@m == 1) {
@@ -257,6 +275,7 @@ sub install {
 	    my $f = $l[0];
 	    while (1) {
 		push @files, $f;
+		$copy_mode ne 'dereference' or last;
 		my $l = readlink($f) or last;
 		if ($l =~ m!/! && $l !~ m!^\.\..*/s?bin/[^/]+$!) {
 		    warn "keeping symlink $f -> $l as is\n";
@@ -264,40 +283,40 @@ sub install {
 		}
 		$f = dirname($f) . '/' . $l;
 	    }
-	}
-	$copy_mode = 'keep-links';
+	}	
+	$copy_mode ||= 'keep-links';
 	$env->{filter}{command} ||= 'strip';
 
     } elsif ($expand eq 'rpm') {
 	$disallow_from_dir->();
-	foreach my $rpm (split(' ', $text)) {
-	    my @l = chomp_(`rpm -ql $rpm`) or die "rpm $rpm must be installed\n";
+	foreach my $rpm (@text_l) {
+	    my @l = chomp_(`rpm -ql $rpm`) or error("rpm $rpm must be installed");
 	    push @files, @l;
 	}
 
     } elsif ($expand eq 'perl') {
 	$disallow_from_dir->();
 	$from_dir = '/usr/lib/perl5/vendor_perl/*';
-	@files = split(' ', $text);
+	@files = @text_l;
     } elsif ($expand eq 'main-perl') {
 	$disallow_from_dir->();
 	$from_dir = $Config{privlib};
-	@files = split(' ', $text);
+	@files = @text_l;
     } elsif ($expand =~ /collect-perl-files/) {
 	my (undef, $local, $to) = split(' ', $expand);
 
-	@files = split(' ', $text);
+	@files = @text_l;
 	warn "collect-perl-files $local $to @files ($env->{filter}{command})\n";
 	my ($local_perl_files, $global_perl_files) = collect_needed_perl_files($local, $to, @files);
 	warn "collect-perl-files gave: ", join(' ', @$local_perl_files), "\n";
 #	warn "                    and: ", join(' ', @$global_perl_files), "\n";
-	copy_and_filter("$working_dir/$local", "$DEST$to", $local_perl_files, $env->{filter}, '', '--dereference');
+	copy_and_filter($local =~ m!/! ? $local : "$working_dir/$local", "$DEST$to", $local_perl_files, $env->{filter}, '', '--dereference');
 	copy_and_filter('', $DEST, $global_perl_files, $env->{filter}, '', '--dereference');
 
     } elsif ($expand) {
 	die "unknown expand method $expand\n";
     } else {
-	@files = split(' ', $text);
+	@files = @text_l;
 
 	$env->{filter}{command} ||= 'strip' if $to_dir =~ m!/bin$!;
     }
@@ -312,7 +331,9 @@ sub install {
     my @options = (
 	if_($copy_mode ne 'keep-links', '--dereference'),
     );
-    copy_and_filter($working_dir, $to_dir, \@all_files, $env->{filter}, $env->{to}{flatten}, @options);
+    if (@all_files) {
+	copy_and_filter($working_dir, $to_dir, \@all_files, $env->{filter}, $env->{to}{flatten}, @options);
+    }
 }
 
 sub copy_and_filter {

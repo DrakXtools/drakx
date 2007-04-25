@@ -43,17 +43,20 @@ sub to_subpart {
 	    my $symlink = readlink("$::prefix$dev");
 	    $dev =~ s!/u?dev/!!;
 
-	    if ($symlink && $symlink =~ m|^[^/]+$|) {
-		$part{device_alias} = $dev;
-		$dev = $symlink;
+	    if ($symlink && $symlink !~ m!^/!) {
+		my $keep = 1;
+		if ($symlink =~ m!/!) {
+		    $symlink = MDK::Common::File::concat_symlink("/dev/" . dirname($dev), $symlink);
+		    $symlink =~ s!^/dev/!! or $keep = 0;
+		}
+		if ($keep) {
+		    $part{device_LABEL} = $1 if $dev =~  m!^disk/by-label/(.*)!;
+		    $part{device_alias} = $dev;
+		    $dev = $symlink;
+		}
 	    }
-
-	    if (my (undef, $part_number) = $dev =~ m!/(disc|part(\d+))$!) {
-		$part{part_number} = $part_number if $part_number;
-		$part{devfs_device} = $dev;
-	    } else {
-		my $part_number = devices::part_number(\%part);
-		$part{part_number} = $part_number if $part_number;
+	    if (my $part_number = devices::part_number(\%part)) {
+		$part{part_number} = $part_number;
 	    }
 	    $part{device} = $dev;
 	    return \%part;
@@ -73,8 +76,6 @@ sub from_part {
 
     if ($part->{prefer_device_LABEL}) {
 	'LABEL=' . $part->{device_LABEL};
-    } elsif ($part->{prefer_devfs_name}) {
-	"/dev/$part->{devfs_device}";
     } elsif ($part->{device_alias}) {
 	"/dev/$part->{device_alias}";
     } else {

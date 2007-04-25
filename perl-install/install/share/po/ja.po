@@ -1,0 +1,1617 @@
+# translation of DrakX.po to Japanese
+# Drakbootdisk Japanese translation
+# Copyright (C) 2000,2003, 2004 Free Software Foundation, Inc.
+# YAMAGATA Hiroo <hiyori13@alum.mit.edu>, 2000.
+# UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2003, 2004.
+# Yukiko Bando <ybando@k6.dion.ne.jp>, 2004, 2005, 2006, 2007.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DrakX-ja\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-03-21 12:07+0100\n"
+"PO-Revision-Date: 2007-03-01 20:00+0900\n"
+"Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
+"Language-Team: Japanese <cooker-i18n@mandrivalinux.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.3.1\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: any.pm:159
+#, c-format
+msgid "Do you have further supplementary media?"
+msgstr "他に補助的なメディアがありますか？"
+
+#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
+#: any.pm:162
+#, c-format
+msgid ""
+"The following media have been found and will be used during install: %s.\n"
+"\n"
+"\n"
+"Do you have a supplementary installation medium to configure?"
+msgstr ""
+"次のインストールメディアを検出しました: %s \n"
+"\n"
+"\n"
+"他に設定するメディアはありますか？"
+
+#: any.pm:170
+#, c-format
+msgid "CD-ROM"
+msgstr "CD-ROM"
+
+#: any.pm:171
+#, c-format
+msgid "Network (HTTP)"
+msgstr "ネットワーク (HTTP)"
+
+#: any.pm:172
+#, c-format
+msgid "Network (FTP)"
+msgstr "ネットワーク (FTP)"
+
+#: any.pm:173
+#, c-format
+msgid "Network (NFS)"
+msgstr "ネットワーク (NFS)"
+
+#: any.pm:212
+#, c-format
+msgid "URL of the mirror?"
+msgstr "ミラーの URL"
+
+#: any.pm:218
+#, c-format
+msgid "URL must start with ftp:// or http://"
+msgstr "URL は ftp:// または http:// で始まらなければなりません"
+
+#: any.pm:229
+#, c-format
+msgid ""
+"Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgstr "Mandriva Linux のサイトに接続してミラーのリストを取得しています..."
+
+#: any.pm:234
+#, c-format
+msgid ""
+"Failed contacting Mandriva Linux web site to get the list of available "
+"mirrors"
+msgstr ""
+"Mandriva Linux ウェブサイトへの接続に失敗したため、利用可能なミラーのリストを"
+"取得できませんでした"
+
+#: any.pm:244
+#, c-format
+msgid "Choose a mirror from which to get the packages"
+msgstr "パッケージを取得するミラーを選択"
+
+#: any.pm:274
+#, c-format
+msgid "NFS setup"
+msgstr "NFS の設定"
+
+#: any.pm:275
+#, c-format
+msgid "Please enter the hostname and directory of your NFS media"
+msgstr "NFS メディアのホスト名とディレクトリを入力してください"
+
+#: any.pm:279
+#, c-format
+msgid "Hostname missing"
+msgstr "ホスト名がありません"
+
+#: any.pm:280
+#, c-format
+msgid "Directory must begin with \"/\""
+msgstr "ディレクトリは \"/\" で始まらなければなりません"
+
+#: any.pm:284
+#, c-format
+msgid "Hostname of the NFS mount ?"
+msgstr "NFS マウントのホスト名"
+
+#: any.pm:285
+#, c-format
+msgid "Directory"
+msgstr "ディレクトリ"
+
+#: any.pm:307
+#, c-format
+msgid "Supplementary"
+msgstr "補助"
+
+#: any.pm:342
+#, c-format
+msgid ""
+"Can't find a package list file on this mirror. Make sure the location is "
+"correct."
+msgstr ""
+"パッケージリストのファイルが見つかりません。ミラーの場所が正しいか確認してく"
+"ださい。"
+
+#: any.pm:376
+#, c-format
+msgid "Looking at packages already installed..."
+msgstr "インストール済みパッケージを探しています..."
+
+#: any.pm:383
+#, c-format
+msgid "Removing packages prior to upgrade..."
+msgstr "アップグレードする前にパッケージを削除しています..."
+
+#: any.pm:426
+#, c-format
+msgid "Finding packages to upgrade..."
+msgstr "更新するパッケージを探しています..."
+
+#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
+#: any.pm:636
+#, c-format
+msgid ""
+"You have selected the following server(s): %s\n"
+"\n"
+"\n"
+"These servers are activated by default. They do not have any known security\n"
+"issues, but some new ones could be found. In that case, you must make sure\n"
+"to upgrade as soon as possible.\n"
+"\n"
+"\n"
+"Do you really want to install these servers?\n"
+msgstr ""
+"以下のサーバを選択されました: %s\n"
+"\n"
+"\n"
+"これらのサーバはデフォルトで起動されます。現在、既知のセキュリティ問題\n"
+"はありませんが、新たに発見されるかもしれません。その場合は、できるだけ\n"
+"早急にアップグレードしてください。\n"
+"\n"
+"\n"
+"本当にこれらのサーバをインストールしますか？\n"
+
+#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
+#: any.pm:659
+#, c-format
+msgid ""
+"The following packages will be removed to allow upgrading your system: %s\n"
+"\n"
+"\n"
+"Do you really want to remove these packages?\n"
+msgstr ""
+"システムを更新するため以下のパッケージを削除します: %s\n"
+"\n"
+"\n"
+"これらのパッケージを削除してよろしいですか？\n"
+
+#: any.pm:1081
+#, c-format
+msgid "The following disk(s) were renamed:"
+msgstr "次のディスクの名前は変更されました:"
+
+#: any.pm:1083
+#, c-format
+msgid "%s (previously named as %s)"
+msgstr "%s (変更前の名前は %s)"
+
+#: any.pm:1140
+#, c-format
+msgid "HTTP"
+msgstr "HTTP"
+
+#: any.pm:1140
+#, c-format
+msgid "FTP"
+msgstr "FTP"
+
+#: any.pm:1140
+#, c-format
+msgid "NFS"
+msgstr "NFS"
+
+#: any.pm:1159 steps_interactive.pm:840
+#, c-format
+msgid "Network"
+msgstr "ネットワーク"
+
+#: any.pm:1163
+#, c-format
+msgid "Please choose a media"
+msgstr "メディアを選んでください"
+
+#: any.pm:1179
+#, c-format
+msgid "File already exists. Overwrite it?"
+msgstr "ファイルが既に存在します。上書きしますか？"
+
+#: any.pm:1183
+#, c-format
+msgid "Permission denied"
+msgstr "アクセス許可がありません"
+
+#: any.pm:1231
+#, c-format
+msgid "Bad NFS name"
+msgstr "不正な NFS 名"
+
+#: any.pm:1252
+#, c-format
+msgid "Bad media %s"
+msgstr "不正なメディア %s"
+
+#: any.pm:1294
+#, c-format
+msgid "Can not make screenshots before partitioning"
+msgstr "パーティション設定が終わるまでスクリーンショットは撮れません"
+
+#: any.pm:1301
+#, c-format
+msgid "Screenshots will be available after install in %s"
+msgstr ""
+"スクリーンショットは %s にあります。インストール後に利用可能になります。"
+
+#: gtk.pm:136
+#, c-format
+msgid "Installation"
+msgstr "インストール"
+
+#: gtk.pm:139 share/meta-task/compssUsers.pl:54
+#, c-format
+msgid "Configuration"
+msgstr "設定"
+
+#: install2.pm:165
+#, c-format
+msgid "You must also format %s"
+msgstr "%s もフォーマットしてください"
+
+#: interactive.pm:16
+#, c-format
+msgid ""
+"Some hardware on your computer needs ``proprietary'' drivers to work.\n"
+"You can find some information about them at: %s"
+msgstr ""
+"お使いのハードウェアの中にプロプラエタリ・ドライバが必要なものがあります。\n"
+"詳しくは以下をご参照ください: %s"
+
+#: interactive.pm:22
+#, c-format
+msgid "Bringing up the network"
+msgstr "ネットワークを確立"
+
+#: interactive.pm:27
+#, c-format
+msgid "Bringing down the network"
+msgstr "ネットワークを切断"
+
+#: media.pm:697 media.pm:706
+#, c-format
+msgid "Downloading file %s..."
+msgstr "ファイル %s をダウンロード中..."
+
+#: media.pm:798
+#, c-format
+msgid "Copying some packages on disks for future use"
+msgstr "後で利用するためにパッケージをディスクにコピー"
+
+#: media.pm:851
+#, c-format
+msgid "Copying in progress"
+msgstr "コピーしています"
+
+#: pkgs.pm:27
+#, c-format
+msgid "must have"
+msgstr "必須"
+
+#: pkgs.pm:28
+#, c-format
+msgid "important"
+msgstr "重要"
+
+#: pkgs.pm:29
+#, c-format
+msgid "very nice"
+msgstr "優秀"
+
+#: pkgs.pm:30
+#, c-format
+msgid "nice"
+msgstr "秀"
+
+#: pkgs.pm:31
+#, c-format
+msgid "maybe"
+msgstr "可"
+
+#: share/advertising/ARKEIA_EN.pl:3 share/advertising/ARKEIA_FR.pl:3
+#, c-format
+msgid "Arkeia"
+msgstr "Arkeia"
+
+#: share/advertising/FLATOUT.pl:3
+#, c-format
+msgid "Flatout"
+msgstr "Flatout"
+
+#: share/advertising/IM-GWENVIEW.pl:3
+#, c-format
+msgid "Gwenview"
+msgstr "Gwenview"
+
+#: share/advertising/IM_3D.pl:3
+#, c-format
+msgid "3D"
+msgstr "3D"
+
+#: share/advertising/IM_CMSJOOMLA.pl:3
+#, c-format
+msgid "CMS"
+msgstr "CMS"
+
+#: share/advertising/IM_CRM.pl:3
+#, c-format
+msgid "CRM"
+msgstr "CRM"
+
+#: share/advertising/IM_GAMME.pl:3
+#, c-format
+msgid "2007 product line"
+msgstr "2007 製品ライン"
+
+#: share/advertising/IM_INVICTUS.pl:3
+#, c-format
+msgid "Invictus Firewall"
+msgstr "Invictus ファイアウォール"
+
+#: share/advertising/IM_ONE.pl:3
+#, c-format
+msgid "Discovery Live Mode"
+msgstr "Discovery ライブモード"
+
+#: share/advertising/IM_REGISTER.pl:3
+#, c-format
+msgid "How to register"
+msgstr "製品登録"
+
+#: share/advertising/IM_RPMDRAKE.pl:3
+#, c-format
+msgid "Rpmdrake 2"
+msgstr "Rpmdrake 2"
+
+#: share/advertising/IM_SERVICES.pl:3
+#, c-format
+msgid "Mandriva Online Services"
+msgstr "Mandriva Online サービス"
+
+#: share/advertising/IM_THEME.pl:3
+#, c-format
+msgid "New Theme"
+msgstr "新しいテーマ"
+
+#: share/advertising/IM_web2.pl:3
+#, c-format
+msgid "Web 2.0"
+msgstr "Web 2.0"
+
+#: share/advertising/Kaspersky.pl:3
+#, c-format
+msgid "Kaspersky"
+msgstr "Kaspersky"
+
+#: share/advertising/LinDVD.pl:3
+#, c-format
+msgid "LinDVD"
+msgstr "LinDVD"
+
+#: share/advertising/Skype.pl:3
+#, c-format
+msgid "Skype"
+msgstr "Skype"
+
+#: share/advertising/TRANSGAMING-CEDEGA.pl:3
+#, c-format
+msgid "Transgaming/Cedega"
+msgstr "Transgaming/Cedega"
+
+#: share/advertising/VPN.pl:3
+#, c-format
+msgid "DrakVPN"
+msgstr "DrakVPN"
+
+#: share/meta-task/compssUsers.pl:23
+#, c-format
+msgid "Workstation"
+msgstr "ワークステーション"
+
+#: share/meta-task/compssUsers.pl:25
+#, c-format
+msgid "Office Workstation"
+msgstr "オフィスワークステーション"
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid ""
+"Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets "
+"(OpenOffice.org Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"オフィスソフト: ワープロ (OpenOffice.org Writer, Kword), 表計算 (OpenOffice."
+"org Calc, Kspread), PDF ビューアなど"
+
+#: share/meta-task/compssUsers.pl:28
+#, c-format
+msgid ""
+"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
+"gnumeric), pdf viewers, etc"
+msgstr ""
+"オフィスソフト: ワープロ (kword,abiword), 表計算 (kspread,gnumeric), PDF "
+"ビューアなど"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Game station"
+msgstr "ゲームステーション"
+
+#: share/meta-task/compssUsers.pl:34
+#, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc"
+msgstr "ゲームプログラム: アーケードゲーム, ボードゲーム, 戦略ゲームなど"
+
+#: share/meta-task/compssUsers.pl:37
+#, c-format
+msgid "Multimedia station"
+msgstr "マルチメディアステーション"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "サウンドと動画の再生/編集ソフト"
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "インターネットステーション"
+
+#: share/meta-task/compssUsers.pl:44
+#, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr "メールとニュースの送受信用ツール (mutt,tin..) とウェブブラウズ用ツール"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "ネットワーク (クライアント)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "ssh などの各種プロトコル用クライアント"
+
+#: share/meta-task/compssUsers.pl:55
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "コンピュータの設定を簡単にするツール"
+
+#: share/meta-task/compssUsers.pl:59
+#, c-format
+msgid "Console Tools"
+msgstr "コンソールツール"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "エディタ, シェル, ファイル関連ツール, ターミナル"
+
+#: share/meta-task/compssUsers.pl:64 share/meta-task/compssUsers.pl:166
+#: share/meta-task/compssUsers.pl:168
+#, c-format
+msgid "Development"
+msgstr "開発用"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr "C/C++ の開発ライブラリ, プログラム, include ファイル"
+
+#: share/meta-task/compssUsers.pl:69 share/meta-task/compssUsers.pl:173
+#, c-format
+msgid "Documentation"
+msgstr "ドキュメント"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:174
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Linux/フリーソフト関連の文書とHowto"
+
+#: share/meta-task/compssUsers.pl:74 share/meta-task/compssUsers.pl:177
+#, c-format
+msgid "LSB"
+msgstr "LSB"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:178
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr "Linux Standard Base, サードパーティのアプリケーションをサポート"
+
+#: share/meta-task/compssUsers.pl:84
+#, c-format
+msgid "Web Server"
+msgstr "Web サーバ"
+
+#: share/meta-task/compssUsers.pl:85
+#, c-format
+msgid "Apache"
+msgstr "Apache"
+
+#: share/meta-task/compssUsers.pl:88
+#, c-format
+msgid "Groupware"
+msgstr "グループウェア"
+
+#: share/meta-task/compssUsers.pl:89
+#, c-format
+msgid "Kolab Server"
+msgstr "Kolabサーバ"
+
+#: share/meta-task/compssUsers.pl:92 share/meta-task/compssUsers.pl:133
+#, c-format
+msgid "Firewall/Router"
+msgstr "ファイアウォール/ルータ"
+
+#: share/meta-task/compssUsers.pl:93 share/meta-task/compssUsers.pl:134
+#, c-format
+msgid "Internet gateway"
+msgstr "インターネットゲートウェイ"
+
+#: share/meta-task/compssUsers.pl:96
+#, c-format
+msgid "Mail/News"
+msgstr "メール/ニュース"
+
+#: share/meta-task/compssUsers.pl:97
+#, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "Postfix メールサーバ, Inn ニュースサーバ"
+
+#: share/meta-task/compssUsers.pl:100
+#, c-format
+msgid "Directory Server"
+msgstr "ディレクトリサーバ"
+
+#: share/meta-task/compssUsers.pl:104
+#, c-format
+msgid "FTP Server"
+msgstr "FTP サーバ"
+
+#: share/meta-task/compssUsers.pl:105
+#, c-format
+msgid "ProFTPd"
+msgstr "ProFTPd"
+
+#: share/meta-task/compssUsers.pl:108
+#, c-format
+msgid "DNS/NIS"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:109
+#, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "ドメイン名/ネットワークインフォメーションサーバ"
+
+#: share/meta-task/compssUsers.pl:112
+#, c-format
+msgid "File and Printer Sharing Server"
+msgstr "ファイル/プリンタ共有サーバ"
+
+#: share/meta-task/compssUsers.pl:113
+#, c-format
+msgid "NFS Server, Samba server"
+msgstr "NFS サーバ/Samba サーバ"
+
+#: share/meta-task/compssUsers.pl:116 share/meta-task/compssUsers.pl:129
+#, c-format
+msgid "Database"
+msgstr "データベース"
+
+#: share/meta-task/compssUsers.pl:117
+#, c-format
+msgid "PostgreSQL and MySQL Database Server"
+msgstr "PostgreSQL/MySQLデータベースサーバ"
+
+#: share/meta-task/compssUsers.pl:121
+#, c-format
+msgid "Web/FTP"
+msgstr "Web/FTP"
+
+#: share/meta-task/compssUsers.pl:122
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "Apache, Pro-ftpd"
+
+#: share/meta-task/compssUsers.pl:125
+#, c-format
+msgid "Mail"
+msgstr "メール"
+
+#: share/meta-task/compssUsers.pl:126
+#, c-format
+msgid "Postfix mail server"
+msgstr "Postfix メールサーバ"
+
+#: share/meta-task/compssUsers.pl:130
+#, c-format
+msgid "PostgreSQL or MySQL database server"
+msgstr "PostgreSQL/MySQL データベースサーバ"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Network Computer server"
+msgstr "ネットワークコンピュータサーバ"
+
+#: share/meta-task/compssUsers.pl:138
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr "NFS サーバ, SMB サーバ, プロキシサーバ, SSH サーバ"
+
+#: share/meta-task/compssUsers.pl:144
+#, c-format
+msgid "Graphical Environment"
+msgstr "グラフィカル環境"
+
+#: share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "KDE Workstation"
+msgstr "KDE ワークステーション"
+
+#: share/meta-task/compssUsers.pl:147
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr "KDE - さまざまなツールを含む定番グラフィカル環境"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "GNOME Workstation"
+msgstr "GNOME ワークステーション"
+
+#: share/meta-task/compssUsers.pl:152
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr "使いやすいアプリケーションとデスクトップツールを含むグラフィカル環境"
+
+#: share/meta-task/compssUsers.pl:155
+#, c-format
+msgid "IceWm Desktop"
+msgstr "IceWm デスクトップ"
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "その他のグラフィカルデスクトップ"
+
+#: share/meta-task/compssUsers.pl:160
+#, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc"
+msgstr "Window Maker, Enlightenment, Fvwm など"
+
+#: share/meta-task/compssUsers.pl:183
+#, c-format
+msgid "Utilities"
+msgstr "ユーティリティ"
+
+#: share/meta-task/compssUsers.pl:185 share/meta-task/compssUsers.pl:186
+#, c-format
+msgid "SSH Server"
+msgstr "SSH サーバ"
+
+#: share/meta-task/compssUsers.pl:190
+#, c-format
+msgid "Webmin"
+msgstr "Webmin"
+
+#: share/meta-task/compssUsers.pl:191
+#, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "Webmin リモート設定サーバ"
+
+#: share/meta-task/compssUsers.pl:195
+#, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "ネットワークユーティリティ/モニタリング"
+
+#: share/meta-task/compssUsers.pl:196
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr "モニタリングツール, プロセス管理, tcpdump, nmap..."
+
+#: share/meta-task/compssUsers.pl:200
+#, c-format
+msgid "Mandriva Wizards"
+msgstr "Mandriva ウィザード"
+
+#: share/meta-task/compssUsers.pl:201
+#, c-format
+msgid "Wizards to configure server"
+msgstr "サーバ設定ウィザード"
+
+#: steps.pm:85
+#, c-format
+msgid ""
+"An error occurred, but I do not know how to handle it nicely.\n"
+"Continue at your own risk."
+msgstr ""
+"エラーが発生しました。しかし対処する方法がわかりません。\n"
+"自己責任で続けてください。"
+
+#: steps.pm:426
+#, c-format
+msgid ""
+"Some important packages did not get installed properly.\n"
+"Either your cdrom drive or your cdrom is defective.\n"
+"Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm"
+"\"\n"
+msgstr ""
+"重要なパッケージがインストールされませんでした。\n"
+"CD-ROM ドライブか CD-ROM に問題があります。\n"
+"'rpm -qpl media/main/*.rpm' コマンドで CD-ROM をチェックしてください。\n"
+
+#: steps_auto_install.pm:71 steps_stdio.pm:27
+#, c-format
+msgid "Entering step `%s'\n"
+msgstr "%s を開始\n"
+
+#: steps_curses.pm:22
+#, c-format
+msgid "Mandriva Linux Installation %s"
+msgstr "Mandriva Linux のインストール %s"
+
+#: steps_curses.pm:32
+#, c-format
+msgid "<Tab>/<Alt-Tab> between elements"
+msgstr "<Tab>/<Alt-Tab> 項目間を移動"
+
+#: steps_gtk.pm:195
+#, c-format
+msgid ""
+"Your system is low on resources. You may have some problem installing\n"
+"Mandriva Linux. If that occurs, you can try a text install instead. For "
+"this,\n"
+"press `F1' when booting on CDROM, then enter `text'."
+msgstr ""
+"システムのリソースが十分でないため、Mandriva Linux のインストール中に\n"
+"問題が発生する可能性があります。その場合は次の要領でテキストモードによる\n"
+"インストールを試してみてください。\n"
+"CD-ROM から起動 -> F1 を押す -> 'text' と入力"
+
+#: steps_gtk.pm:225 steps_interactive.pm:511
+#, c-format
+msgid "Package Group Selection"
+msgstr "パッケージグループを選択"
+
+#: steps_gtk.pm:246 steps_interactive.pm:529
+#, c-format
+msgid "Individual package selection"
+msgstr "パッケージを個別に選択"
+
+# Changed "total size" to "total", due to problem of available
+# space on screen.
+#: steps_gtk.pm:268 steps_interactive.pm:454
+#, c-format
+msgid "Total size: %d / %d MB"
+msgstr "合計: %d/%d MB"
+
+#: steps_gtk.pm:313
+#, c-format
+msgid "Bad package"
+msgstr "不正なパッケージ"
+
+#: steps_gtk.pm:315
+#, c-format
+msgid "Version: "
+msgstr "バージョン: "
+
+#: steps_gtk.pm:316
+#, c-format
+msgid "Size: "
+msgstr "サイズ: "
+
+#: steps_gtk.pm:316
+#, c-format
+msgid "%d KB\n"
+msgstr "%d KB\n"
+
+#: steps_gtk.pm:317
+#, c-format
+msgid "Importance: "
+msgstr "重要性: "
+
+#: steps_gtk.pm:351
+#, c-format
+msgid "You can not select/unselect this package"
+msgstr "このパッケージの選択/非選択は変更できません"
+
+#: steps_gtk.pm:355
+#, c-format
+msgid "due to missing %s"
+msgstr "%s がないために"
+
+#: steps_gtk.pm:356
+#, c-format
+msgid "due to unsatisfied %s"
+msgstr "%s が依存を満たしていないために"
+
+#: steps_gtk.pm:357
+#, c-format
+msgid "trying to promote %s"
+msgstr "%s をアップグレードするために"
+
+#: steps_gtk.pm:358
+#, c-format
+msgid "in order to keep %s"
+msgstr "%s を維持するために"
+
+#: steps_gtk.pm:363
+#, c-format
+msgid ""
+"You can not select this package as there is not enough space left to install "
+"it"
+msgstr ""
+"このパッケージは選択できません。インストールに必要な空き容量がありません。"
+
+#: steps_gtk.pm:366
+#, c-format
+msgid "The following packages are going to be installed"
+msgstr "以下のパッケージをインストールします"
+
+#: steps_gtk.pm:367
+#, c-format
+msgid "The following packages are going to be removed"
+msgstr "以下のパッケージを削除します"
+
+#: steps_gtk.pm:392
+#, c-format
+msgid "This is a mandatory package, it can not be unselected"
+msgstr "これは必須パッケージです。選択を解除することはできません。"
+
+#: steps_gtk.pm:394
+#, c-format
+msgid "You can not unselect this package. It is already installed"
+msgstr "このパッケージの選択は解除できません。既にインストールされています。"
+
+#: steps_gtk.pm:396
+#, c-format
+msgid "You can not unselect this package. It must be upgraded"
+msgstr "このパッケージの選択は解除できません。アップグレードが必要です。"
+
+#: steps_gtk.pm:400
+#, c-format
+msgid "Show automatically selected packages"
+msgstr "自動的に選択されたパッケージを表示"
+
+#: steps_gtk.pm:402 steps_interactive.pm:133
+#, c-format
+msgid "Install"
+msgstr "インストール"
+
+#: steps_gtk.pm:405
+#, c-format
+msgid "Load/Save selection"
+msgstr "選択を読み込む/保存する"
+
+#: steps_gtk.pm:406
+#, c-format
+msgid "Updating package selection"
+msgstr "パッケージの選択を更新"
+
+#: steps_gtk.pm:411
+#, c-format
+msgid "Minimal install"
+msgstr "最小インストール"
+
+#: steps_gtk.pm:425
+#, c-format
+msgid "Software Management"
+msgstr "ソフトウェアの管理"
+
+#: steps_gtk.pm:425 steps_interactive.pm:373
+#, c-format
+msgid "Choose the packages you want to install"
+msgstr "インストールするパッケージを選んでください"
+
+#: steps_gtk.pm:442 steps_interactive.pm:543
+#, c-format
+msgid "Installing"
+msgstr "インストール中"
+
+#: steps_gtk.pm:468
+#, c-format
+msgid "No details"
+msgstr "詳細なし"
+
+#: steps_gtk.pm:483
+#, c-format
+msgid "Time remaining "
+msgstr "残り時間 "
+
+#: steps_gtk.pm:484
+#, c-format
+msgid "Estimating"
+msgstr "試算しています"
+
+#: steps_gtk.pm:511
+#, c-format
+msgid "%d package"
+msgid_plural "%d packages"
+msgstr[0] "%d 個のパッケージ"
+
+#: steps_gtk.pm:557 steps_interactive.pm:729
+#, c-format
+msgid "Summary"
+msgstr "まとめ"
+
+#: steps_gtk.pm:570
+#, c-format
+msgid "Configure"
+msgstr "設定"
+
+#: steps_gtk.pm:580 steps_interactive.pm:725 steps_interactive.pm:852
+#, c-format
+msgid "not configured"
+msgstr "設定されていません"
+
+#: steps_gtk.pm:612 steps_interactive.pm:268
+#, c-format
+msgid ""
+"The following installation media have been found.\n"
+"If you want to skip some of them, you can unselect them now."
+msgstr ""
+"次のインストールメディアを検出しました。\n"
+"使用しないものがあればここで選択を解除してください。"
+
+#: steps_gtk.pm:621 steps_interactive.pm:274
+#, c-format
+msgid ""
+"You have the option to copy the contents of the CDs onto the hard drive "
+"before installation.\n"
+"It will then continue from the hard drive and the packages will remain "
+"available once the system is fully installed."
+msgstr ""
+"インストールする前に CD の内容をハードドライブにコピーすることも可能です。\n"
+"そうするとインストーラはハードドライブからインストールを続けます。コピーされ"
+"たパッケージはインストール完了後も利用できます。"
+
+#: steps_gtk.pm:623 steps_interactive.pm:276
+#, c-format
+msgid "Copy whole CDs"
+msgstr "CD 全体をコピー"
+
+#: steps_interactive.pm:38
+#, c-format
+msgid "An error occurred"
+msgstr "エラーが発生しました"
+
+#: steps_interactive.pm:97
+#, c-format
+msgid "Please choose your keyboard layout."
+msgstr "キーボードの配列を選んでください"
+
+#: steps_interactive.pm:99
+#, c-format
+msgid "Here is the full list of available keyboards"
+msgstr "利用可能なすべてのキーボードのリスト"
+
+#: steps_interactive.pm:128
+#, c-format
+msgid "Install/Upgrade"
+msgstr "インストール/更新"
+
+#: steps_interactive.pm:129
+#, c-format
+msgid "Is this an install or an upgrade?"
+msgstr "インストールか更新を選んでください"
+
+#: steps_interactive.pm:135
+#, c-format
+msgid "Upgrade %s"
+msgstr "%s を更新"
+
+#: steps_interactive.pm:148
+#, c-format
+msgid "Encryption key for %s"
+msgstr "%s の暗号鍵"
+
+#: steps_interactive.pm:184
+#, c-format
+msgid "IDE"
+msgstr "IDE"
+
+#: steps_interactive.pm:184
+#, c-format
+msgid "Configuring IDE"
+msgstr "IDE を設定"
+
+#: steps_interactive.pm:221
+#, c-format
+msgid ""
+"No free space for 1MB bootstrap! Install will continue, but to boot your "
+"system, you'll need to create the bootstrap partition in DiskDrake"
+msgstr ""
+"1 MB のブートストラップ用の空き容量がありません。インストールを続けますが、シ"
+"ステムを起動するには、DiskDrake でブートストラップパーティションを作成する必"
+"要があります。"
+
+#: steps_interactive.pm:226
+#, c-format
+msgid ""
+"You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
+"to boot your system, you'll need to create the bootstrap partition in "
+"DiskDrake"
+msgstr ""
+"PPC PReP ブートストラップを作成する必要があります。インストールを続けますが、"
+"システムを起動するには、DiskDrake でブートストラップパーティションを作成する"
+"必要があります。"
+
+#: steps_interactive.pm:318
+#, c-format
+msgid ""
+"Change your Cd-Rom!\n"
+"Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when "
+"done.\n"
+"If you do not have it, press Cancel to avoid installation from this Cd-Rom."
+msgstr ""
+"CD-ROM を交換してください。\n"
+"\"%s\" という CD-ROM をドライブに入れて「OK」を押してください。\n"
+"お持ちでない場合は「キャンセル」を押してください。"
+
+#: steps_interactive.pm:340
+#, c-format
+msgid "Looking for available packages..."
+msgstr "利用可能なパッケージを探しています..."
+
+#: steps_interactive.pm:349
+#, c-format
+msgid ""
+"Your system does not have enough space left for installation or upgrade (%"
+"dMB > %dMB)"
+msgstr ""
+"あなたのシステムにはインストールまたはアップグレードに必要な空き容量がありま"
+"せん (%dMB > %dMB)"
+
+#: steps_interactive.pm:385
+#, c-format
+msgid ""
+"Please choose load or save package selection.\n"
+"The format is the same as auto_install generated files."
+msgstr ""
+"パッケージの選択を読み込むか保存するかを選んでください。\n"
+"形式は auto_install で生成されたファイルと同じです。"
+
+#: steps_interactive.pm:387
+#, c-format
+msgid "Load"
+msgstr "読み込む"
+
+#: steps_interactive.pm:387
+#, c-format
+msgid "Save"
+msgstr "保存する"
+
+#: steps_interactive.pm:395
+#, c-format
+msgid "Bad file"
+msgstr "不正なファイル"
+
+#: steps_interactive.pm:468
+#, c-format
+msgid "Selected size is larger than available space"
+msgstr "指定されたサイズが空き容量を超えています"
+
+#: steps_interactive.pm:483
+#, c-format
+msgid "Type of install"
+msgstr "インストールの種類"
+
+#: steps_interactive.pm:484
+#, c-format
+msgid ""
+"You have not selected any group of packages.\n"
+"Please choose the minimal installation you want:"
+msgstr ""
+"パッケージグループが選択されていません。\n"
+"インストールする最低限のものを選んでください:"
+
+#: steps_interactive.pm:487
+#, c-format
+msgid "With X"
+msgstr "X を使う"
+
+#: steps_interactive.pm:488
+#, c-format
+msgid "With basic documentation (recommended!)"
+msgstr "基本的なドキュメントを入れる (推奨)"
+
+#: steps_interactive.pm:489
+#, c-format
+msgid "Truly minimal install (especially no urpmi)"
+msgstr "最小限のインストール (urpmi も含まれません)"
+
+#: steps_interactive.pm:528
+#, c-format
+msgid "All"
+msgstr "すべて"
+
+#: steps_interactive.pm:544
+#, c-format
+msgid "Preparing installation"
+msgstr "インストールの準備"
+
+#: steps_interactive.pm:552
+#, c-format
+msgid "Installing package %s"
+msgstr "パッケージ %s をインストール"
+
+#: steps_interactive.pm:576
+#, c-format
+msgid "There was an error ordering packages:"
+msgstr "パッケージを並べ替え中にエラーが発生:"
+
+#: steps_interactive.pm:576
+#, c-format
+msgid "Go on anyway?"
+msgstr "続けますか？"
+
+#: steps_interactive.pm:580
+#, c-format
+msgid "Retry"
+msgstr "再試行"
+
+#: steps_interactive.pm:581
+#, c-format
+msgid "Skip this package"
+msgstr "このパッケージを飛ばす"
+
+#: steps_interactive.pm:582
+#, c-format
+msgid "Skip all packages from medium \"%s\""
+msgstr "メディア %s のすべてのパッケージを飛ばす"
+
+#: steps_interactive.pm:583
+#, c-format
+msgid "Go back to media and packages selection"
+msgstr "メディアとパッケージの選択に戻る"
+
+#: steps_interactive.pm:586
+#, c-format
+msgid "There was an error installing package %s."
+msgstr "パッケージ %s のインストール中にエラーが発生しました。"
+
+#: steps_interactive.pm:604
+#, c-format
+msgid "Post-install configuration"
+msgstr "インストール後の設定"
+
+#: steps_interactive.pm:611
+#, c-format
+msgid "Please ensure the Update Modules media is in drive %s"
+msgstr "更新モジュールメディアがドライブ %s に入っていることを確認してください"
+
+#: steps_interactive.pm:638
+#, c-format
+msgid "Updates"
+msgstr "更新"
+
+#: steps_interactive.pm:639
+#, c-format
+msgid ""
+"You now have the opportunity to download updated packages. These packages\n"
+"have been updated after the distribution was released. They may\n"
+"contain security or bug fixes.\n"
+"\n"
+"To download these packages, you will need to have a working Internet \n"
+"connection.\n"
+"\n"
+"Do you want to install the updates?"
+msgstr ""
+"更新されたパッケージをダウンロードすることができます。これらのパッケージは\n"
+"ディストリビューション公開後に更新されたものです。セキュリティ問題や不具合\n"
+"の修正が含まれています。\n"
+"\n"
+"パッケージのダウンロードにはインターネット接続が必要です。\n"
+"\n"
+"更新されたパッケージをインストールしますか？"
+
+#: steps_interactive.pm:660
+#, c-format
+msgid "Contacting the mirror to get the list of available packages..."
+msgstr "ミラーに接続して利用可能なパッケージのリストを取得しています..."
+
+#: steps_interactive.pm:666
+#, c-format
+msgid "Unable to contact mirror %s"
+msgstr "ミラー %s に接続できません"
+
+#: steps_interactive.pm:788 steps_interactive.pm:805 steps_interactive.pm:821
+#: steps_interactive.pm:832
+#, c-format
+msgid "Hardware"
+msgstr "ハードウェア"
+
+#: steps_interactive.pm:789 steps_interactive.pm:806
+#, c-format
+msgid "Sound card"
+msgstr "サウンドカード"
+
+#: steps_interactive.pm:809
+#, c-format
+msgid "Do you have an ISA sound card?"
+msgstr "ISA サウンドカードをお使いですか？"
+
+#: steps_interactive.pm:811
+#, c-format
+msgid ""
+"Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
+"card"
+msgstr ""
+"インストール後に alsaconf か sndconfig を実行してサウンドカードを設定してくだ"
+"さい。"
+
+#: steps_interactive.pm:813
+#, c-format
+msgid "No sound card detected. Try \"harddrake\" after installation"
+msgstr ""
+"サウンドカードが見つかりません。インストール後に harddrake で再度設定を試みて"
+"ください。"
+
+#: steps_interactive.pm:822
+#, c-format
+msgid "TV card"
+msgstr "テレビカード"
+
+#: steps_interactive.pm:833
+#, c-format
+msgid "Graphical interface"
+msgstr "グラフィカルインターフェース"
+
+#: steps_interactive.pm:839 steps_interactive.pm:850
+#, c-format
+msgid "Network & Internet"
+msgstr "ネットワークとインターネット"
+
+#: steps_interactive.pm:851
+#, c-format
+msgid "Proxies"
+msgstr "プロキシ"
+
+#: steps_interactive.pm:852
+#, c-format
+msgid "configured"
+msgstr "設定済み"
+
+#: steps_interactive.pm:862
+#, c-format
+msgid "Security Level"
+msgstr "セキュリティレベル"
+
+#: steps_interactive.pm:876
+#, c-format
+msgid "Firewall"
+msgstr "ファイアウォール"
+
+#: steps_interactive.pm:880
+#, c-format
+msgid "activated"
+msgstr "有効"
+
+#: steps_interactive.pm:880
+#, c-format
+msgid "disabled"
+msgstr "無効"
+
+#: steps_interactive.pm:891
+#, c-format
+msgid "Boot"
+msgstr "起動"
+
+#. -PO: example: lilo-graphic on /dev/hda1
+#: steps_interactive.pm:895
+#, c-format
+msgid "%s on %s"
+msgstr "%2$s の %1$s"
+
+#: steps_interactive.pm:921
+#, c-format
+msgid "You have not configured X. Are you sure you really want this?"
+msgstr "X が設定されていません。本当によろしいですか？"
+
+#: steps_interactive.pm:967
+#, c-format
+msgid "Preparing bootloader..."
+msgstr "ブートローダを準備中..."
+
+#: steps_interactive.pm:977
+#, c-format
+msgid ""
+"You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
+"will not work for you. The install will continue, but you'll need to use "
+"BootX or some other means to boot your machine. The kernel argument for the "
+"root fs is: root=%s"
+msgstr ""
+"OldWorld もしくは不明なアーキテクチャのマシンをお使いのようです。このマシンで"
+"は yaboot は動きません。インストールを続けますが、マシンを起動するには、"
+"BootX もしくは他の方法が必要です。'root fs' のカーネル引数は 'root=%s' です。"
+
+#: steps_interactive.pm:983
+#, c-format
+msgid "Do you want to use aboot?"
+msgstr "aboot を使いますか？"
+
+#: steps_interactive.pm:986
+#, c-format
+msgid ""
+"Error installing aboot, \n"
+"try to force installation even if that destroys the first partition?"
+msgstr ""
+"aboot をインストール中にエラーが発生しました。\n"
+"最初のパーティションを破壊しますが、強制的にインストールしますか？"
+
+#: steps_interactive.pm:1003
+#, c-format
+msgid ""
+"In this security level, access to the files in the Windows partition is "
+"restricted to the administrator."
+msgstr ""
+"このセキュリティレベルでは、Windows パーティションのファイルへのアクセスが管"
+"理者のみに限定されます。"
+
+#: steps_interactive.pm:1032
+#, c-format
+msgid "Insert a blank floppy in drive %s"
+msgstr "空のフロッピーをドライブ %s に入れてください"
+
+#: steps_interactive.pm:1034
+#, c-format
+msgid "Creating auto install floppy..."
+msgstr "インストール自動化フロッピーを作成中..."
+
+#: steps_interactive.pm:1045
+#, c-format
+msgid ""
+"Some steps are not completed.\n"
+"\n"
+"Do you really want to quit now?"
+msgstr ""
+"一部の設定が完了していません。\n"
+"\n"
+"本当に終了しますか？"
+
+#: steps_interactive.pm:1055
+#, c-format
+msgid "Congratulations"
+msgstr "おめでとうございます"
+
+#: steps_interactive.pm:1059
+#, c-format
+msgid "Reboot"
+msgstr "再起動"
+
+#: steps_interactive.pm:1063 steps_interactive.pm:1064
+#, c-format
+msgid "Generate auto install floppy"
+msgstr "インストール自動化フロッピーを作成"
+
+#: steps_interactive.pm:1065
+#, c-format
+msgid ""
+"The auto install can be fully automated if wanted,\n"
+"in that case it will take over the hard drive!!\n"
+"(this is meant for installing on another box).\n"
+"\n"
+"You may prefer to replay the installation.\n"
+msgstr ""
+"「自動」はインストールを完全に自動化することができます。\n"
+"この場合ハードドライブの内容がすべて書き換えられます。\n"
+"(別のマシンにインストールするためのものです。)\n"
+"\n"
+"インストールの「再現」を利用されたほうがいいかもしれません。\n"
+
+#: steps_interactive.pm:1070
+#, c-format
+msgid "Replay"
+msgstr "再現"
+
+#: steps_interactive.pm:1070
+#, c-format
+msgid "Automated"
+msgstr "自動"
+
+#: steps_interactive.pm:1073
+#, c-format
+msgid "Save packages selection"
+msgstr "パッケージの選択を保存する"
+
+#. -PO: please keep the following messages very short: they must fit in the left list of the installer!!!
+#: steps_list.pm:16
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Language"
+msgstr "言語を選択"
+
+#: steps_list.pm:17
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"License"
+msgstr "ライセンス"
+
+#: steps_list.pm:18
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Mouse"
+msgstr "マウス"
+
+#: steps_list.pm:19
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Hard drive detection"
+msgstr "ハードドライブを検出"
+
+#: steps_list.pm:20
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Installation class"
+msgstr "インストールクラス"
+
+#: steps_list.pm:21
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Keyboard"
+msgstr "キーボード"
+
+#: steps_list.pm:22
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Security"
+msgstr "セキュリティ"
+
+#: steps_list.pm:23
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Partitioning"
+msgstr "パーティションの設定"
+
+#: steps_list.pm:24
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Formatting"
+msgstr "フォーマット"
+
+#: steps_list.pm:25
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Choosing packages"
+msgstr "パッケージの選択"
+
+#: steps_list.pm:26
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Installing"
+msgstr "インストール中"
+
+#: steps_list.pm:27
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Authentication"
+msgstr "認証"
+
+#: steps_list.pm:28
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Users"
+msgstr "ユーザ"
+
+#: steps_list.pm:29
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Networking"
+msgstr "ネットワーク"
+
+#: steps_list.pm:30
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Bootloader"
+msgstr "ブートローダ"
+
+#: steps_list.pm:31
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Configure X"
+msgstr "X を設定"
+
+#: steps_list.pm:32
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Summary"
+msgstr "まとめ"
+
+#: steps_list.pm:33
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Services"
+msgstr "サービス"
+
+#: steps_list.pm:34
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Updates"
+msgstr "更新"
+
+#: steps_list.pm:35
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Exit"
+msgstr "終了"
+
+#~ msgid "(%d package, %d MB)"
+#~ msgid_plural "(%d packages, %d MB)"
+#~ msgstr[0] "(%d 個のパッケージ, %d MB)"
+
+#~ msgid "%d packages"
+#~ msgstr "%d 個のパッケージ"
+
+#~ msgid "Language"
+#~ msgstr "言語を選択"
+
+#~ msgid "License"
+#~ msgstr "ライセンス"
+
+#~ msgid "Installation class"
+#~ msgstr "インストールクラス"
+
+#~ msgid "Formatting"
+#~ msgstr "フォーマット"
+
+#~ msgid "Choosing packages"
+#~ msgstr "パッケージの選択"
+
+#~ msgid "Users"
+#~ msgstr "ユーザ"
+
+#~ msgid "Networking"
+#~ msgstr "ネットワーク"
+
+#~ msgid "Configure X"
+#~ msgstr "X を設定"
+
+#~ msgid ""
+#~ "Can not access kernel modules corresponding to your kernel (file %s is "
+#~ "missing), this generally means your boot floppy in not in sync with the "
+#~ "Installation medium (please create a newer boot floppy)"
+#~ msgstr ""
+#~ "カーネルに対応したカーネルモジュールにアクセスできません (ファイル %s があ"
+#~ "りません)。恐らく起動用フロッピーがインストールメディアに対応していませ"
+#~ "ん。新しい起動フロッピーを作成してください。"

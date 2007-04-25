@@ -476,10 +476,6 @@ If your card is misdetected, you can force the right tuner and card types here. 
                       [
                        { label => N("Card model:"), val => \$conf{card}, list => [ keys %cards_list ], default => -1, sort =>1, separator => '|' },
                        { label => N("Tuner type:"), val => \$conf{tuner}, list => [keys %tuners_lst], format => sub { $tuners_lst{$_[0]} }, sort => 1, separator => '|' },
-                       { label => N("Number of capture buffers:"), val => \$conf{gbuffers}, min => $min_gbuffers, max => $max_gbuffers, sort => 1, default => 0, type => 'range', advanced => 1, help => N("number of capture buffers for mmap'ed capture") },                    
-                       if_($driver eq 'bttv',
-                           { label => N("PLL setting:"), val => \$conf{pll}, list => [keys %pll_lst], format => sub { $pll_lst{$_[0]} }, sort => 1, default => 0, advanced =>1 },
-                           { label => N("Radio support:"), val => \$conf{radio}, type => "bool", text => N("enable radio support") }),
                        ]
                       ))
     {

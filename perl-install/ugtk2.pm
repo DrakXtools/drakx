@@ -15,16 +15,16 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $wm_icon $grab $border); #-
                      gtkset_text gtkset_tip gtkset_visibility gtksetstyle gtkshow gtksignal_connect gtksize gtktext_append
                      gtktext_insert ) ],
 
-    helpers => [ qw(add2notebook add_icon_path fill_tiled fill_tiled_coords gtkcolor gtkcreate_img
-                    gtkcreate_pixbuf gtkfontinfo gtkset_background n_line_size set_back_pixbuf set_back_pixmap
-                    string_size string_width string_height wrap_paragraph) ],
+    helpers => [ qw(add2notebook add_icon_path escape_text_for_TextView_markup_format gtkcolor gtkcreate_img
+                    gtkcreate_pixbuf gtkfontinfo gtkset_background gtktreeview_children set_back_pixmap
+                    string_size string_width) ],
 
     create => [ qw(create_adjustment create_box_with_title create_dialog create_factory_menu create_factory_popup_menu
                    create_hbox create_hpaned create_menu create_notebook create_okcancel create_packtable
                    create_scrolled_window create_vbox create_vpaned _create_dialog gtkcreate_frame) ],
 
     ask => [ qw(ask_browse_tree_info ask_browse_tree_info_given_widgets ask_dir ask_from_entry ask_okcancel ask_warn
-                ask_yesorno ) ],
+                ask_yesorno) ],
     dialogs => [ qw(err_dialog info_dialog warn_dialog) ],
 
 );
@@ -129,9 +129,9 @@ sub gtkappend_page {
 }
 
 sub gtkentry {
-    my ($text) = @_;
+    my ($o_text) = @_;
     my $e = gtknew('Entry');
-    $text and $e->set_text($text);
+    $o_text and $e->set_text($o_text);
     $e;
 }
 
@@ -210,7 +210,7 @@ sub gtkpowerpack {
 	ref($_[0]) eq 'HASH' || ref($_[0]) eq 'ARRAY' and $attrs = shift;
 	foreach (@attributes_list) {
 	    if (($default_attrs->{$_} || '') eq 'arg') {
-		ref($_[0]) and die "error in packing definition\n";
+		ref($_[0]) and internal_error "error in packing definition\n";
 		$attr{$_} = shift;
 		ref($attrs) eq 'ARRAY' and shift @$attrs;
 	    } elsif (ref($attrs) eq 'HASH' && defined($attrs->{$_})) {
@@ -235,7 +235,7 @@ sub gtkpowerpack {
 sub gtktreeview_children {
     my ($model, $iter) = @_;
     my @l;
-    $model && $iter or return;
+    $model or return;
     for (my $p = $model->iter_children($iter); $p; $p = $model->iter_next($p)) {
 	push @l, $p;
     }
@@ -268,22 +268,8 @@ sub create_adjustment {
 
 sub create_scrolled_window {
     my ($W, $o_policy, $o_viewport_shadow) = @_;
-    my $w = Gtk2::ScrolledWindow->new(undef, undef);
-    $w->set_policy($o_policy ? @$o_policy : ('automatic', 'automatic'));
-    if (member(ref($W), qw(Gtk2::Layout Gtk2::Html2::View Gtk2::Text Gtk2::TextView Gtk2::TreeView))) {
-	$w->add($W);
-    } else {
-	$w->add_with_viewport($W);
-    }
-    $o_viewport_shadow and gtkset_shadow_type($w->child, $o_viewport_shadow);
-    $W->can('set_focus_vadjustment') and $W->set_focus_vadjustment($w->get_vadjustment);
-    $W->set_left_margin(6) if ref($W) =~ /Gtk2::TextView/;
-    $W->show;
-    if (ref($W) =~ /Gtk2::TextView|Gtk2::TreeView/) {
-    	gtknew('Frame', shadow_type => 'in', child => $w);
-    } else {
-	$w;
-    }
+    gtknew('ScrolledWindow', ($o_policy ? (h_policy => $o_policy->[0], v_policy => $o_policy->[1]) : ()),
+               child => $W, if_($o_viewport_shadow, shadow_type => $o_viewport_shadow));
 }
 
 sub n_line_size {
@@ -291,6 +277,42 @@ sub n_line_size {
     my $spacing = ${{ text => 3, various => 17 }}{$type};
     my %fontinfo = gtkfontinfo($widget);
     round($nbline * ($fontinfo{ascent} + $fontinfo{descent} + $spacing) + 8);
+}
+
+# Glib::Markup::escape_text() if no use for us because it'll do extra
+# s/X/&foobar;/ (such as s/'/&apos;/) that are suitable for
+# Gtk2::Labels but are not for Gtk2::TextViews, resulting in
+# displaying the raw enriched text instead...
+#
+sub escape_text_for_TextView_markup_format {
+    my ($str) = @_;
+    my %rules = ('&' => '&amp;',
+               '<' => '&lt;',
+               '>' => '&gt;',
+           );
+    $str =~ s!([&<>])!$rules{$1}!g; #^(&(amp|lt|gt);)!!) {
+    $str;
+}
+
+sub markup_to_TextView_format {
+    my ($s, $o_default_attrs) = @_;
+    require interactive;
+    my $l = interactive::markup_parse($s) or return $s;
+    
+    foreach (@$l) {
+	my ($_txt, $attrs) = @$_;
+	if ($attrs) {
+         $attrs->{weight} eq 'bold' and $attrs->{weight} = do { require Gtk2::Pango; Gtk2::Pango->PANGO_WEIGHT_BOLD };
+         $attrs->{size} eq 'larger' and do {
+             require Gtk2::Pango;
+             $attrs->{scale} = Gtk2::Pango->PANGO_SCALE_X_LARGE; # equivalent to Label's size => 'larger'
+             delete $attrs->{size};
+         };
+     }
+	#- nb: $attrs may be empty, need special handling if $o_default_attrs is used
+	add2hash_($_->[1] ||= {}, $o_default_attrs) if $o_default_attrs;
+    }
+    $l;
 }
 
 sub create_box_with_title {
@@ -311,10 +333,9 @@ sub create_box_with_title {
 	my $has_scroll = $o->{box_size} < $wanted;
 
 	chomp(my $text = join("\n", @l));
-	my $wtext = gtknew('TextView', text => $text);
+	my $wtext = gtknew('TextView', text => markup_to_TextView_format($text));
 	$wtext->set_left_margin(3);
 	$wtext->can_focus($has_scroll);
-	$wtext->signal_connect(button_press_event => sub { 1 }); #- disable selecting text and popping the contextual menu (GUI team says it's *horrible* to be able to do select text!)
 	my $width = 400;
 	my $scroll = gtknew('ScrolledWindow', child => $wtext, width => $width, height => 200);
 	$scroll->signal_connect(realize => sub {
@@ -326,11 +347,9 @@ sub create_box_with_title {
                             });
 	gtkpack_($box, $o->{box_allow_grow} || 0, $scroll);
     } else {
-	my $a = !$::no_separator;
-	undef $::no_separator;
      my $new_label = sub {
          my ($txt) = @_;
-         ref($txt) ? $txt : gtknew('WrappedLabel', text => $txt);
+         ref($txt) ? $txt : gtknew('WrappedLabel', text_markup => $txt, width=> 490);
      };
 	    gtkpack__($box,
 		      if_($::isWizard, gtknew('Label', height => 10)),
@@ -340,7 +359,6 @@ sub create_box_with_title {
 			              : $w;
 		      } @l),
 		      if_($::isWizard, gtknew('Label', height => 15)),
-		      if_($a, gtknew('HSeparator')),
 		     );
     }
 }
@@ -657,28 +675,6 @@ sub set_back_pixmap {
     $window->set_back_pixmap($pixmap);
 }
 
-sub fill_tiled_coords {
-    my ($widget, $pixbuf, $x_back, $y_back, $width, $height) = @_;
-    my ($x2, $y2) = (0, 0);
-    while (1) {
-	$x2 = 0;
-	while (1) {
-	    $pixbuf->render_to_drawable($widget->window, $widget->style->fg_gc('normal'),
-					0, 0, $x2, $y2, $x_back, $y_back, 'none', 0, 0);
-	    $x2 += $x_back;
-	    $x2 >= $width and last;
-	}
-	$y2 += $y_back;
-	$y2 >= $height and last;
-    }
-}
-
-sub fill_tiled {
-    my ($widget, $pixbuf) = @_;
-    my ($window_width, $window_height) = $widget->window->get_size;
-    fill_tiled_coords($widget, $pixbuf, $pixbuf->get_width, $pixbuf->get_height, $window_width, $window_height);
-}
-
 sub add2notebook {
     my ($n, $title, $book) = @_;
     $n->append_page($book, gtkshow(gtknew('Label', text => $title)));
@@ -698,117 +694,6 @@ sub string_width {
     $width;
 }
 
-sub string_height {
-    my ($widget, $text) = @_;
-    my (undef, $height) = string_size($widget, $text);
-    $height;
-}
-
-sub get_text_coord {
-    my ($text, $widget4style, $max_width, $currentx, $currenty) = @_;
-    my $wrap_char = ' ';
-    my @lines;
-    my $current_text;
-    my @t = split($wrap_char, $text);
-    my @t2;
-    if ($::isInstall && $::o->{locale}{lang} =~ /ja|zh/) {
-	use locale;
-	@t = map { $_ . $wrap_char } @t;
-	$wrap_char = '';
-	foreach (@t) {
-	    my @c = split(/\b/);
-	    my $i = 0;
-	    my $el = '';
-	    while (1) {
-		$i >= @c and last;
-		$el .= $c[$i];
-		if (ord($c[$i]) >= 128) { $el .= $c[$i+1]; $i++; push @t2, $el; $el = '' }
-		$i++;
-	    }
-	    $el ne '' and push @t2, $el;
-	}
-    } else {
-	@t2 = @t;
-    }
-    my $add_line = sub {
-        my ($w, $h) = string_size($widget4style, $current_text);
-        push @lines, { text => $current_text, width => $w, height => $h + 1, 'x' => $currentx, 'y' => $currenty };
-    };
-    my $width;
-    foreach my $word (@t2) {
-	my $w = string_width($widget4style, $word . $wrap_char);
-	if ($currentx + $width + $w > $max_width) {
-            $add_line->();
-            $current_text = $word;
-	    $width = $w;
-            $currentx = 0;
-            $currenty += $lines[-1]{height};
-	} else {
-            $current_text .= ($current_text ne '' ? $wrap_char : '') . $word;
-            $width += $w;
-        }
-    }
-    #- if wrap_char was at the end, do not forget it, for cases when bold/nonbold text follows
-    $text =~ /$wrap_char$/ and $current_text .= $wrap_char;
-    $add_line->();
-
-    return @lines;
-}
-
-sub wrap_paragraph {
-    my ($text, $widget4style, $border, $max_width) = @_;
-
-    $max_width -= 2*$border;
-    my @lines;
-    my $ydec;
-
-    foreach my $paragraph (@$text) {
-        my @paragraph_lines;
-        my $center;
-        if (ref($paragraph) eq 'ARRAY') {
-            my ($text, %options) = @$paragraph;
-            $center = $options{center};
-            $paragraph = $text;
-        }
-        if ($paragraph ne '') {
-            my @elements;
-            while ($paragraph =~ m|(.*?)<b>(.*?)</b>(.*)|) {
-                $1 ne '' and push @elements, [ $1, bold => 0 ];
-                push @elements, [ $2, bold => 1 ];
-                $paragraph = $3;
-            }
-            $paragraph ne '' and push @elements, [ $paragraph, bold => 0 ];
-
-            my $currentx;
-            foreach (@elements) {
-                my ($text, %options) = @$_;
-                #- hack :( if ' ' is at the beginning, do not forget it, substitute
-                #- with an unbreakable space because gtk allocates too much space otherwise
-                if ($text =~ /^ (.*)/) {
-		    use utf8;
-		    $text = ' ' . $1;
-		}
-                my @newlines = get_text_coord($text, $widget4style, $max_width, $currentx, $ydec);
-                $currentx = $newlines[-1]{'x'} + $newlines[-1]{width};
-                $ydec = $newlines[-1]{'y'};
-                $options{bold} and $currentx++;
-                $_->{options} = \%options foreach @newlines;
-                push @paragraph_lines, @newlines;
-            }
-            $ydec = $paragraph_lines[-1]{'y'} + $paragraph_lines[-1]{height};
-        }
-        if ($center) {
-            my %widths;
-            $widths{$_->{'y'}} ||= $_->{x} + $_->{width} foreach reverse @paragraph_lines;
-            $_->{x} += ($max_width - $widths{$_->{'y'}})/2 foreach @paragraph_lines;
-        }
-        $_->{x} += $border foreach @paragraph_lines;
-        push @lines, @paragraph_lines;
-    }
-
-    return @lines;
-}
-
 
 # -=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---
 #                 toplevel window creation helper
@@ -826,15 +711,19 @@ sub new {
     while (my $e = shift @tempory::objects) { $e->destroy }
 
     my $icon = find { _find_imgfile($_) } $opts{icon}, 'banner-generic-ad';
+    my $banner_title = $opts{banner_title};
     my $window = gtknew(
 	'MagicWindow',
 	title => $title || '',
 	pop_it => $o->{pop_it},
 	$::isInstall && $icon ? (banner => Gtk2::Banner->new($icon, $title)) : (),
+	$::isStandalone && $banner_title && $icon ? (banner => Gtk2::Banner->new($icon, $banner_title)) : (),
 	child => gtknew('VBox'),
-	modal => $grab || $o->{grab} || $o->{modal},
+	width => $opts{width}, height => $opts{height}, default_width => $opts{default_width}, default_height => $opts{default_height}, 
+	modal => $opts{modal} || $grab || $o->{grab} || $o->{modal} || $o->{transient},
+	no_Window_Manager => exists $opts{no_Window_Manager} ? $opts{no_Window_Manager} : !$::isStandalone,
 	if_(!$::isInstall, icon_no_error => wm_icon()),
-	if_($o->{transient} && $o->{transient} =~ /Gtk2::Window/, transient_for => $o->{transient}), 
+	if_($o->{transient}, transient_for => $o->{transient}), 
     );
     $window->set_border_width(10) if !$window->{pop_it} && !$::noborderWhenEmbedded;
 
@@ -1009,7 +898,10 @@ sub ask_browse_tree_info {
 			       gtknew('Frame', text => N("Info"), child =>
 				      gtknew('ScrolledWindow', child => my $info = gtknew('TextView')),
 				     ) ]),
-		    0, my $box1 = gtknew('HBox', spacing => 15),
+		    0, my $status = gtknew('Label'),
+		    if_($common->{auto_deps},
+		        0, gtknew('CheckButton', text => $common->{auto_deps}, active_ref => \$common->{state}{auto_deps})
+		    ),
 		    0, my $box2 = gtknew('HBox', spacing => 10),
 		   ]));
     #gtkpack__($box2, my $toolbar = Gtk2::Toolbar->new('horizontal', 'icons'));
@@ -1032,18 +924,13 @@ sub ask_browse_tree_info {
 					   ask_warn(N("Help"), $common->{interactive_help}->());
 				       })) if $common->{interactive_help};
 
-    if ($common->{auto_deps}) {
-	gtkpack__($box1, gtknew('CheckButton', text => $common->{auto_deps}, active_ref => \$common->{state}{auto_deps}));
-    }
-    $box1->pack_end(my $status = gtknew('Label'), 0, 1, 20);
     $status->show;
 
-    $w->{window}->set_size_request(map { $_ - 2 * $border - 4 } $::windowwidth, $::windowheight) if !$::isInstall;
+    $w->{window}->set_size_request(map { $_ - 2 * $border - 4 } $w->{windowwidth}, $w->{windowheight}) if !$::isInstall;
     $buttons[0]->grab_focus;
     $w->{rwindow}->show;
 
-    #- TODO: $tree->queue_draw is a workaround to a bug in gtk-2.2.1; submit it in their bugzilla
-    my @toolbar = (ftout  =>  [ N("Expand Tree"), sub { $tree->expand_all; $tree->queue_draw } ],
+    my @toolbar = (ftout  =>  [ N("Expand Tree"), sub { $tree->expand_all } ],
 		   ftin   =>  [ N("Collapse Tree"), sub { $tree->collapse_all } ],
 		   reload =>  [ N("Toggle between flat and group sorted"), sub { invbool(\$common->{state}{flat}); $common->{rebuild_tree}->() } ]);
     foreach my $ic (@{$common->{icons} || []}) {
@@ -1061,7 +948,7 @@ sub ask_browse_tree_info {
     }
 
     $pixcolumn->{is_pix} = 1;
-    $common->{widgets} = { w => $w, tree => $tree, tree_model => $tree_model, textcolumn => $textcolumn, pixcolumn => $pixcolumn,
+    $common->{widgets} = { w => $w, tree => $tree, tree_model => $tree_model,
                            info => $info, status => $status };
     ask_browse_tree_info_given_widgets($common);
 }
@@ -1209,7 +1096,7 @@ sub ask_browse_tree_info_given_widgets {
     };
     
     $common->{display_info} = sub { gtktext_insert($w->{info}, $common->{get_info}($curr)); 0 };
-    my $children = sub { map { my $v = $w->{tree_model}->get($_, 0); $v } gtktreeview_children($w->{tree_model}, $_[0]) };
+    my $children = sub { map { $w->{tree_model}->get($_, 0) } gtktreeview_children($w->{tree_model}, $_[0]) };
     my $toggle = sub {
 	if (ref($curr) && !$_[0]) {
 	    $w->{tree}->toggle_expansion($w->{tree_model}->get_path($curr));
@@ -1286,7 +1173,7 @@ sub gtk_TextView_get_log {
     my ($log_w, $command, $filter_output, $when_command_is_over) = @_;
 
     my $pid = open(my $F, "$command |") or return;
-    fcntl($F, c::F_SETFL(), c::O_NONBLOCK()) or die "can not fcntl F_SETFL: $!";
+    common::nonblock($F);
 
     my $gtk_buffer = $log_w->get_buffer;
     $log_w->signal_connect(destroy => sub { 
@@ -1536,13 +1423,16 @@ sub new {
     $darea->signal_connect(expose_event => sub {
                                my $style = $darea->get_style;
                                my $height = $darea->{icon}->get_height;
+                               my $width = $darea->{icon}->get_width;
+                               # fix icon position when not using the default height:
+                               (undef, undef, undef, $d_height) = $darea->window->get_geometry;
                                my $padding = int(($d_height - $height)/2);
                                my $d_width = $darea->allocation->width;
-                               my $x_icon = $is_rtl ? $d_width - $padding - $darea->{icon}->get_width : $padding;
-                               my $x_text = $is_rtl ? $x_icon - $padding - $darea->{txt_width} : $height + $padding*2;
+                               my $x_icon = $is_rtl ? $d_width - $padding - $width : $padding;
+                               my $x_text = $is_rtl ? $x_icon - $padding - $darea->{txt_width} : $width + $padding*2;
                                $darea->{icon}->render_to_drawable($darea->window, $style->bg_gc('normal'),
                                                                   0, 0, $x_icon, $padding, -1, -1, 'none', 0, 0);
-                               $darea->window->draw_layout($style->fg_gc('normal'), $x_text, $o_options->{txt_ypos} || $::isInstall ? 13 : 25,
+                               $darea->window->draw_layout($style->fg_gc('normal'), $x_text, $o_options->{txt_ypos} || $::isInstall && 13 || $d_height/3,
                                                            $darea->{layout});
                                1;
                            });
@@ -1550,5 +1440,163 @@ sub new {
     return $darea;
 }
 
+
+package Gtk2::MDV::CellRendererPixWithLabel;
+
+use MDK::Common;
+use Glib::Object::Subclass "Gtk2::CellRenderer",
+  properties => [
+      Glib::ParamSpec->string("label", "Label", "A meaningfull label", "", [qw(readable writable)]),
+      Glib::ParamSpec->object("pixbuf", "Pixbuf file", "Something nice to display", 'Gtk2::Gdk::Pixbuf', [qw(readable writable)]),
+  ];
+
+my $x_padding = 2;
+my $y_padding = 2;
+
+sub INIT_INSTANCE {}
+
+sub pixbuf_size {
+    my ($cell) = @_;
+    my $pixbuf = $cell->get('pixbuf');
+    $pixbuf ? ($pixbuf->get_width, $pixbuf->get_height) : (0, 0);
+}
+
+sub calc_size {
+    my ($cell, $layout) = @_;
+    my ($width, $height) = $layout->get_pixel_size;
+    my ($pwidth, $pheight) = pixbuf_size($cell);
+    
+    return (0, 0,
+            $width + $x_padding * 3 + $pwidth,
+            max($pheight, $height + $y_padding * 2));
+}
+
+sub GET_SIZE {
+  my ($cell, $widget, $_cell_area) = @_;
+
+  my $layout = $cell->get_layout($widget);
+  $layout->set_text($cell->get('label'));
+
+  return calc_size($cell, $layout);
+}
+
+sub get_layout {
+  my ($_cell, $widget) = @_;
+  return $widget->create_pango_layout("");
+}
+
+sub RENDER { # not that efficient...
+  my ($cell, $window, $widget, $_background_area, $cell_area, $_expose_area, $flags) = @_;
+  my $state;
+  if ($flags & 'selected') {
+    $state = $widget->has_focus
+      ? 'selected'
+      : 'active';
+  } else {
+    $state = $widget->state eq 'insensitive'
+      ? 'insensitive'
+      : 'normal';
+  }
+
+  my $layout = $cell->get_layout($widget);
+  $layout->set_text($cell->get('label'));
+
+  my ($x_offset, $y_offset, $_width, $_height) = calc_size($cell, $layout);
+  my $pixbuf = $cell->get('pixbuf');
+    my ($pwidth, $pheight) = pixbuf_size($cell);
+
+  if ($pixbuf) {
+      $pixbuf->render_to_drawable($window, $widget->style->fg_gc('normal'), 
+                                  0, 0,
+                                  $cell_area->x ,#+ $x_padding,
+                                  $cell_area->y, #+ $y_padding,
+                                  $pwidth, $pheight, 'none', 0, 0);
+  }
+  $widget->get_style->paint_layout($window,
+                                       $state,
+                                       1,
+                                       $cell_area,
+                                       $widget,
+                                       "cellrenderertext",
+                                       $cell_area->x + $x_offset + $x_padding * 2 + $pwidth,
+                                       $cell_area->y + $y_offset + $y_padding,
+                                       $layout);
+
+}
+
 1;
 
+
+package Gtk2::NotificationBubble::Queue;
+
+sub new {
+    my ($class) = @_;
+
+    require Gtk2::NotificationBubble;
+
+    my $self = bless {
+        bubble => Gtk2::NotificationBubble->new,
+        queue => [],
+        display => 5000,
+        delay => 500,
+    }, $class;
+    $self->{bubble}->signal_connect(timeout => sub {
+                                        my $info = $self->{queue}[0];
+                                        $info->{timeout}->() if $info->{timeout};
+                                        $self->process_next;
+                                    });
+    $self->{bubble}->signal_connect(clicked => sub {
+                                        $self->{bubble}->hide;
+                                        my $info = $self->{queue}[0];
+                                        if ($info->{clicked}) {
+                                            #- has to call process_next when done
+                                            $info->{clicked}->();
+                                        } else {
+                                            $self->process_next;
+                                        }
+                                    });
+    $self;
+}
+
+sub process_next {
+    my ($self) = @_;
+    shift @{$self->{queue}};
+    #- wait for some time so that the new bubble is noticeable
+    @{$self->{queue}} and Glib::Timeout->add($self->{delay}, sub { $self->show; 0 });
+}
+
+sub add {
+    my ($self, $info) = @_;
+    push @{$self->{queue}}, $info;
+    @{$self->{queue}} == 1 and $self->show;
+}
+
+sub show {
+    my ($self) = @_; # perl_checker: $self = Gtk2::NotificationBubble->new
+    my $info = $self->{queue}[0];
+    $self->{bubble}->set($info->{title}, Gtk2::Image->new_from_pixbuf($info->{pixbuf}), $info->{message});
+    $self->{bubble}->show($self->{display});
+}
+
+1;
+
+
+package Gtk2::GUI_Update_Guard;
+
+use MDK::Common::Func qw(before_leaving);
+use ugtk2;
+
+sub new() {
+    my $old_signal = $SIG{ALRM};
+    $SIG{ALRM} = sub {
+        ugtk2::gtkflush();
+        alarm(1);
+    };
+    alarm(1);
+    return before_leaving {
+        alarm(0);
+        $SIG{ALRM} = $old_signal || 'DEFAULT';   # restore default action
+    };
+}
+
+1;

@@ -7,14 +7,16 @@ my $SLASH_LOCATION = '/tmp/drakx-in-chroot';
 my $verbose = 0;
 my $prefix_ROOTED = '/mnt';
 my $IMAGE_LOCATION_ROOTED = '/tmp/image';
+my $MEDIA_LOCATION_ROOTED = '/tmp/media';
 my $STAGE2_LOCATION_ROOTED = '/tmp/stage2';
 my $LIVE_LOCATION_REL = 'install/stage2/live/';
-my $CLP_LOCATION_REL = 'install/stage2/';
-my $CLP_FILE_REL = $CLP_LOCATION_REL . 'mdkinst.clp';
-my $AUTO_INSTALL_ROOTED = '/tmp/drakx-in-chroot.cfg.pl';
+my $COMPRESSED_LOCATION_REL = 'install/stage2/';
+my $COMPRESSED_FILE_REL = $COMPRESSED_LOCATION_REL . 'mdkinst.sqfs';
+my $AUTO_INSTALL_ROOTED = '/tmp/auto_inst.cfg.pl';
+my $DEFCFG_ROOTED = '/tmp/defcfg.pl';
 my $RPMSRATE_ROOTED = '/tmp/rpmsrate';
 
-@ARGV >= 2 or die "usage: drakx-in-chroot <repository> <dir to install to> [options]\n";
+@ARGV >= 2 or die "usage: drakx-in-chroot <root of distrib> <dir to install to> [options]\n";
 
 (my $repository, my $dir, @ARGV) = @ARGV;
 my $STAGE2_LOCATION = $SLASH_LOCATION . $STAGE2_LOCATION_ROOTED;
@@ -28,41 +30,55 @@ if ($>) {
 undef $ENV{TMPDIR}; # prevent packdrake faillure on creating temporary files
 
 if (-d $SLASH_LOCATION) {
-    umount_all() == 0 or die "$SLASH_LOCATION is busy\n";
+    umount_all() == 0 or exit(1);
     sys("$sudo rm -rf $SLASH_LOCATION/var/lib/rpm $SLASH_LOCATION/dev/mapper");
     rm_rf($SLASH_LOCATION);
 }
 
-mkdir_p("$SLASH_LOCATION$_") foreach '/dev', '/dev/usb', '/etc', '/var', '/proc', $STAGE2_LOCATION_ROOTED, $IMAGE_LOCATION_ROOTED, $prefix_ROOTED;
+mkdir_p("$SLASH_LOCATION$_") foreach '/dev', '/dev/usb', '/etc', '/var', '/proc', $STAGE2_LOCATION_ROOTED, $MEDIA_LOCATION_ROOTED, $prefix_ROOTED;
 
 sys("$sudo rm -rf $dir") if $ENV{CLEAN};
 -e $dir or sys("$sudo mkdir -p $dir");
 
 copy_auto_install_files();
 
-if (-d "$repository/$LIVE_LOCATION_REL") {
+my $remote_repository = $repository =~ m!^(ftp|http)://! && $1;
+if ($remote_repository) {
+    my $local_mdkinst = "$SLASH_LOCATION/tmp/mdkinst.sqfs";
+    sys("curl --silent -o $local_mdkinst $repository/$COMPRESSED_FILE_REL");
+    mount_mdkinst($local_mdkinst);
+} elsif (-d "$repository/$LIVE_LOCATION_REL") {
     sys("$sudo mount -o bind $repository/$LIVE_LOCATION_REL $STAGE2_LOCATION");
-} elsif (-e "$repository/$CLP_FILE_REL") {
-    my $dev = find_free_loop();
-    sys("$sudo modprobe gzloop");
-    sys("$sudo losetup -r -e gz $dev $repository/$CLP_FILE_REL");
-    sys("$sudo mount -r $dev $STAGE2_LOCATION");
+} elsif (-e "$repository/$COMPRESSED_FILE_REL") {
+    mount_mdkinst("$repository/$COMPRESSED_FILE_REL");
 }
 
 sys("$sudo mount -o bind $dir $SLASH_LOCATION$prefix_ROOTED");
-sys("$sudo mount -o bind $repository $SLASH_LOCATION$IMAGE_LOCATION_ROOTED");
+sys("$sudo mount -o bind $repository $SLASH_LOCATION$MEDIA_LOCATION_ROOTED") if !$remote_repository;
 sys("$sudo mount -t proc none $SLASH_LOCATION/proc");
+symlinkf('media', "$SLASH_LOCATION$IMAGE_LOCATION_ROOTED");
 create_initial_symlinks();
 create_initial_devices();
 
+apply_stage2_updates();
+
 output("$SLASH_LOCATION/etc/hosts", "127.0.0.1 localhost\n") if ! -e "$SLASH_LOCATION/etc/hosts";
 
+#- in the chroot, we have no way to know which device corresponds to the "/" partition.
+#- so helping it by giving the device which provide major/minor information
+mkdir_p("$dir/dev");
+eval { cp_af($_, "$dir$_") } foreach qw(/dev/root);
+
+#- if the DISPLAY is remote, we may need to resolve the name:
+eval { cp_af($_, "$SLASH_LOCATION$_") } foreach qw(/etc/resolv.conf);
+
 my $Xnest_pid;
-if (!-f ($SLASH_LOCATION . $AUTO_INSTALL_ROOTED) && whereis_binary('Xnest')) {
+my $Xnest_bin = find { whereis_binary($_) } 'Xnest', 'Xephyr';
+if (!-f ($SLASH_LOCATION . $AUTO_INSTALL_ROOTED) && $Xnest_bin) {
     my $DISPLAY = ':8';
     $Xnest_pid = fork();
     if (!$Xnest_pid) {
-	exec 'Xnest', $DISPLAY, '-ac', '-geometry', '800x600' or die "Xnest failed\n";
+	exec $Xnest_bin, $DISPLAY, '-ac', ($Xnest_bin eq 'Xephyr' ? '-screen' : '-geometry'), '800x600' or die "Xnest failed\n";
     }
     $ENV{DISPLAY} = 'localhost' . $DISPLAY;
 }
@@ -72,26 +88,26 @@ if (my $pid = fork()) {
     umount_all() == 0 or warn "umounting failed\n";
     $Xnest_pid and kill 15, $Xnest_pid;
 } else {
+    $ENV{TERM} = 'linux'; # we only have terminfo for terminal "linux"
     $ENV{HOME} = '/';
     # to kept sync with gi/mdk-stage1/init.c::env:
     $ENV{LD_LIBRARY_PATH}='/lib:/usr/lib:/mnt/lib:/mnt/usr/lib:/usr/X11R6/lib:/mnt/usr/X11R6/lib:/lib64:/usr/lib64:/usr/X11R6/lib64:/mnt/lib64:/mnt/usr/lib64:/mnt/usr/X11R6/lib64';
-    my $cmd = join(' ', "/usr/bin/runinstall2 --local_install", @ARGV);
+    if ($remote_repository) {
+	$ENV{URLPREFIX} = $repository;
+    }
+    my $cmd = join(' ', "/usr/bin/runinstall2 --local_install", 
+		   if_($remote_repository, "--method $remote_repository"),
+		   @ARGV);
     exec "$sudo chroot $SLASH_LOCATION $cmd" or die "exec $cmd in $SLASH_LOCATION failed\n";
 }
 
 sub system_verbose { warn join(' ', @_), "\n" if $verbose; system(@_) }
 sub sys { &system_verbose; $? and die qq(running "@_" failed: $?\n) }
 
-sub find_free_loop() {
-    foreach (0..255) {
-	my $dev = "/dev/loop$_";
-	system("$sudo losetup $dev >/dev/null 2>&1") != 0 or next;
-	warn "found free loop $dev\n";
-	return $dev;
-    }
-    die "no free loop found";
+sub mount_mdkinst {
+    my ($mdkinst) = @_;
+    sys("$sudo mount -t squashfs -o loop,ro $mdkinst $STAGE2_LOCATION");
 }
-
 sub create_initial_symlinks() {
     foreach (cat_or_die("$STAGE2_LOCATION/usr/share/symlinks")) {
 	my ($from, $to_) = split;
@@ -104,16 +120,14 @@ sub create_initial_symlinks() {
 }
 
 sub create_initial_devices() {
-    foreach (cat_or_die("$STAGE2_LOCATION/usr/share/devices")) {
-	my ($node, $type, $major, $minor) = split;
-	sys("$sudo mknod $SLASH_LOCATION$node $type $major $minor") if ! -e "$SLASH_LOCATION$node";
-    }
+    sys("$sudo cp -a /dev/{mem,null} $SLASH_LOCATION/dev");
 }
 
 sub umount_all() {
     my $err;
+    clean_stage2_updates();
     my @procs = ('/proc/bus/usb', '/proc', '/sys');
-    foreach ((map { "$prefix_ROOTED$_" } @procs, ''), @procs, $STAGE2_LOCATION_ROOTED, $IMAGE_LOCATION_ROOTED) {
+    foreach ((map { "$prefix_ROOTED$_" } @procs, ''), @procs, $STAGE2_LOCATION_ROOTED, $MEDIA_LOCATION_ROOTED, $IMAGE_LOCATION_ROOTED) {
 	my $dir = "$SLASH_LOCATION$_";
 	rmdir $dir;
 	if (-d $dir) {
@@ -121,9 +135,7 @@ sub umount_all() {
 		system_verbose "$sudo umount $dir 2>/dev/null";
 		next;
 	    }
-	    my ($loop) = cat_('/proc/mounts') =~ m!^(/dev/loop\d+) .*\Q$dir\E !m;
 	    system_verbose "$sudo umount $dir";
-	    sys("$sudo losetup -d $loop") if $loop;
 	}
 	rmdir $dir;
 	if (-d $dir) {
@@ -131,26 +143,47 @@ sub umount_all() {
 	    $err++;
 	}
     }
+    if (my @remaining = cat_('/proc/mounts') =~ m!($SLASH_LOCATION/mnt/\S+)!g) {
+	warn "umount those mount points first: ", join(' ', @remaining), "\n";
+	$err++;
+    }
     $err;
 }
 
 sub copy_auto_install_files() {
     my ($opt);
-    my ($auto_install, $defcfg);
     each_index {
         if ($opt eq 'auto_install' && -f $_) {
-            $auto_install = $_;
+            cp_f($_, $SLASH_LOCATION . $AUTO_INSTALL_ROOTED);
             $_ = $AUTO_INSTALL_ROOTED;
         } elsif ($opt eq 'defcfg' && -f $_) {
-            $defcfg = $_;
-            $ARGV[$::i-1] = $ARGV[$::i] = undef;
+            cp_f($_, $SLASH_LOCATION . $DEFCFG_ROOTED);
+            $_ = $DEFCFG_ROOTED;
         } elsif ($opt eq 'rpmsrate' && -f $_) {
             cp_f($_, $SLASH_LOCATION . $RPMSRATE_ROOTED);
         }
         undef $opt;
         /^--?(.*)/ and $opt = $1;
     } @ARGV;
-    #- contatenate auto_install and defcfg files into a new auto_install file in install root
-    my @auto_inst = grep { -f $_ } $auto_install, $defcfg;
-    output($SLASH_LOCATION . $AUTO_INSTALL_ROOTED, map { cat_($_) } @auto_inst) if @auto_inst;
+}
+
+my @stage2_updates;
+sub apply_stage2_updates() {
+    each_index {
+        if ($_ eq '--stage2-update') {
+            my $file = $ARGV[$::i+1];
+            my $dest = $ARGV[$::i+2];
+            if (-f $file && $dest) {
+                undef $_;
+                undef $ARGV[$::i+1];
+                undef $ARGV[$::i+2];
+                push @stage2_updates, $dest;
+                sys("$sudo mount --bind $file $STAGE2_LOCATION/$dest");
+            }
+        }
+    } @ARGV;
+}
+
+sub clean_stage2_updates() {
+    sys("$sudo umount $STAGE2_LOCATION/$_") foreach @stage2_updates;
 }

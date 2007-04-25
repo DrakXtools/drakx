@@ -13,7 +13,7 @@ my @devices = detect_devices::probeall();
 
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown() {
-    grep { $_->{media_type} !~ /BRIDGE|class\|Mouse|DISPLAY|Hub|MEMORY_RAM|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|NETWORK|Printer|SERIAL_(USB|SMBUS)|STORAGE_(IDE|OTHER|SCSI)|SYSTEM_OTHER|tape|UPS/
+    grep { $_->{media_type} !~ /BRIDGE|class\|Mouse|DISPLAY|Hub|MEMORY_RAM|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|NETWORK|Printer|SERIAL_(USB|SMBUS)|STORAGE_(IDE|OTHER|RAID|SCSI)|SYSTEM_OTHER|tape|UPS/
 	       && !member($_->{driver}, qw(cpia_usb cyber2000fb forcedeth ibmcam megaraid mod_quickcam nvnet ohci1394 ov511 ov518_decomp scanner ultracam usbvideo usbvision))
 	       && $_->{driver} !~ /^ISDN|Mouse:USB|Removable:zip|class\|Mouse|sata|www.linmodems.org/
 	       && $_->{type} ne 'network'
@@ -23,7 +23,7 @@ sub unknown() {
 
 my @alrd_dected;
 sub f { 
-    my @devs = grep { !member(pciusb_id($_), @alrd_dected) } @_;
+    my @devs = grep { !member(pciusb_id($_), @alrd_dected) } grep { $_ } @_;
     push @alrd_dected, map { pciusb_id($_) } @devs;
     @devs;
 }
@@ -138,7 +138,7 @@ our @tree =
       string => N("AGP controllers"),
       icon => "memory.png",
       configurator => "",
-      detector => sub { f(modules::probe_category('various/agpgart')) },
+      detector => sub { f(detect_devices::probe_category('various/agpgart')) },
       checked_on_boot => 1,
      },
 
@@ -156,7 +156,7 @@ our @tree =
       class => "DVB",
       string => N("DVB card"),
       icon => "tv.png",
-      detector => sub { f(modules::probe_category('multimedia/dvb')) },
+      detector => sub { f(detect_devices::probe_category('multimedia/dvb')) },
       checked_on_boot => 1,
      },
 
@@ -165,7 +165,8 @@ our @tree =
       string => N("Tvcard"),
       icon => "tv.png",
       configurator => "/usr/bin/XawTV",
-      detector => sub { f(grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} eq 'PCI' || $_->{driver} eq 'usbvision' } @devices) },
+      detector => sub { f(detect_devices::probe_category('multimedia/tv')),
+                          f(grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} eq 'PCI' } @devices) },
       checked_on_boot => 1,
      },
      
@@ -198,8 +199,8 @@ our @tree =
       configurator => "",
       detector => sub { 
           require list_modules;
-          my @modules = list_modules::category2modules('multimedia/webcam');
-          f(grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} ne 'PCI' || member($_->{driver}, @modules) } @devices);
+          my @modules = (list_modules::category2modules('multimedia/webcam'), 'Removable:camera');
+          f(grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO|Video\|Video Control/ && $_->{bus} ne 'PCI' || member($_->{driver}, @modules) } @devices);
       },
       # managed by hotplug:
       checked_on_boot => 0,
@@ -212,7 +213,7 @@ our @tree =
       configurator => "",
       detector => sub { detect_devices::getCPUs() },
       # maybe should we install schedutils?
-      checked_on_boot => 0,
+      checked_on_boot => 1,
      },
 
      {
@@ -220,7 +221,7 @@ our @tree =
       string => N("ISDN adapters"),
       icon => "modem.png",
       configurator => "$sbindir/drakconnect",
-      detector => sub { require network::isdn; my $isdn = network::isdn::detect_backend($modules_conf); if_(@$isdn, f(@$isdn)) },
+      detector => sub { require network::connection::isdn; my $isdn = network::connection::isdn::detect_backend($modules_conf); if_(@$isdn, f(@$isdn)) },
       # we do not check these b/c this need user interaction (auth, ...):
       checked_on_boot => 0,
      },
@@ -231,7 +232,7 @@ our @tree =
       string => N("USB sound devices"),
       icon => "sound.png",
       configurator => "",
-      detector => sub { f(modules::probe_category('multimedia/usb_sound')) },
+      detector => sub { f(detect_devices::probe_category('multimedia/usb_sound')) },
       checked_on_boot => 0,
      },
 
@@ -240,7 +241,7 @@ our @tree =
       string => N("Radio cards"),
       icon => "tv.png",
       configurator => "",
-      detector => sub { f(modules::probe_category('multimedia/radio')) },
+      detector => sub { f(detect_devices::probe_category('multimedia/radio')) },
       checked_on_boot => 0,
      },
 
@@ -249,7 +250,7 @@ our @tree =
       string => N("ATM network cards"),
       icon => "hw_network.png",
       configurator => "",
-      detector => sub { f(modules::probe_category('network/atm')) },
+      detector => sub { f(detect_devices::probe_category('network/atm')) },
       checked_on_boot => 0,
      },
 
@@ -258,7 +259,7 @@ our @tree =
       string => N("WAN network cards"),
       icon => "hw_network.png",
       configurator => "",
-      detector => sub { f(modules::probe_category('network/wan')) },
+      detector => sub { f(detect_devices::probe_category('network/wan')) },
       checked_on_boot => 0,
      },
 
@@ -267,7 +268,7 @@ our @tree =
       string => N("Bluetooth devices"),
       icon => "hw_network.png",
       configurator => "",
-      detector => sub { f(modules::probe_category('bus/bluetooth')) },
+      detector => sub { f(detect_devices::probe_category('bus/bluetooth')) },
       checked_on_boot => 1,
      },
 
@@ -303,11 +304,9 @@ our @tree =
       string => N("ADSL adapters"),
       icon => "modem.png",
       configurator => "$sbindir/drakconnect",
-      detector => sub { 
-          require network::adsl;
-          my $a = network::adsl::adsl_detect();
-          $a ? f(map { @$_ } grep { defined($_) } values %$a) : ();
-      },
+      detector => sub { f(detect_devices::get_xdsl_usb_devices()),
+			  f(grep { $_->{description} =~ /Cohiba 3887 rev0/ } @devices);
+		      },
       # we do not check these b/c this need user interaction (auth, ...):
       checked_on_boot => 0,
      },
@@ -340,7 +339,7 @@ our @tree =
       N("Game port controllers"),
       icon => "joystick.png",
       configurator => "",
-      detector => sub { f(modules::probe_category('multimedia/gameport')) },
+      detector => sub { f(detect_devices::probe_category('multimedia/gameport')) },
       checked_on_boot => 0,
      },
 
@@ -349,7 +348,7 @@ our @tree =
       string => N("Joystick"),
       icon => "joystick.png",
       configurator => "",
-      detector => sub { f(modules::probe_category('input/joystick')), f(grep { $_->{description} =~ /Joystick/ } @devices) },
+      detector => sub { f(detect_devices::probe_category('input/joystick')), f(grep { $_->{description} =~ /Joystick/i } @devices) },
       checked_on_boot => 0,
      },
 
@@ -359,7 +358,7 @@ our @tree =
       string => N("SATA controllers"),
       icon => "ide_hd.png",
       configurator => "",
-      detector => sub { f(modules::probe_category('disk/sata')) },
+      detector => sub { f(detect_devices::probe_category('disk/sata')) },
       checked_on_boot => 1,
      },
 
@@ -368,7 +367,8 @@ our @tree =
       string => N("RAID controllers"),
       icon => "ide_hd.png",
       configurator => "",
-      detector => sub { f(modules::probe_category('disk/hardware_raid')) },
+      detector => sub { f(detect_devices::probe_category('disk/hardware_raid')),
+                          f(grep { $_->{media_type} =~ /STORAGE_RAID/ } @devices) },
       checked_on_boot => 1,
      },
 
@@ -377,8 +377,26 @@ our @tree =
       string => N("(E)IDE/ATA controllers"),
       icon => "ide_hd.png",
       configurator => "",
-      detector => sub { f(modules::probe_category('disk/all_ide'), modules::probe_category('disk/ide')),
+      detector => sub { f(detect_devices::probe_category('disk/all_ide'), detect_devices::probe_category('disk/ide')),
                           f(grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ } @devices) },
+      checked_on_boot => 1,
+     },
+
+     {
+      class => "USB_STORAGE",
+      string => N("USB Mass Storage Devices"),
+      icon => "usb.png",
+      configurator => "",
+      detector => sub { f(grep { member($_->{driver}, qw(usb-storage ub)) } @devices) },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "CARD_READER",
+      string => N("Card readers"),
+      icon => "ide_hd.png",
+      configurator => "",
+      detector => sub { f(detect_devices::probe_category('disk/card_reader')) },
       checked_on_boot => 1,
      },
 
@@ -405,7 +423,7 @@ our @tree =
       string => N("SCSI controllers"),
       icon => "scsi.png",
       configurator => "",
-      detector => sub { f(grep { $_->{media_type} =~ /STORAGE_SCSI/ } @devices) },
+      detector => sub { f(detect_devices::probe_category('disk/scsi'), grep { $_->{media_type} =~ /STORAGE_SCSI/ } @devices) },
       checked_on_boot => 1,
      },
 
@@ -441,7 +459,7 @@ our @tree =
       string => N("Bridges and system controllers"),
       icon => "memory.png",
       configurator => "",
-      detector => sub { f(grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM|SYSTEM_OTHER/
+      detector => sub { f(grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM|SYSTEM_OTHER|MEMORY_OTHER|SYSTEM_PIC/
                                  || $_->{description} =~ /Parallel Port Adapter/;
 			 } @devices) },
       checked_on_boot => 0,
@@ -464,7 +482,7 @@ our @tree =
       class => "MISC_INPUT",
       string => N("Tablet and touchscreen"),
       icon => "hw_mouse.png",
-      detector => sub { f(modules::probe_category('input/tablet'), modules::probe_category('input/touchscreen')) },
+      detector => sub { f(detect_devices::probe_category('input/tablet'), detect_devices::probe_category('input/touchscreen')) },
       configurator => "$sbindir/mousedrake",
       checked_on_boot => 0,
      },

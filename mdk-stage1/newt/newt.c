@@ -191,7 +191,7 @@ int newtInit(void) {
     char * MonoValue, * MonoEnv = "NEWT_MONO";
 
     /* use the version variable just to be sure it gets included */
-    strlen(version);
+    (void) strlen(version);
 
     SLtt_get_terminfo();
     SLtt_get_screen_size();

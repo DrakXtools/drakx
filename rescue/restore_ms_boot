@@ -12,15 +12,16 @@
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #
 
-use lib qw(../perl-install /usr/lib/libDrakX);
+use lib qw(/usr/lib/libDrakX);
 use common;
 use bootloader;
 use fs;
 use fs::proc_partitions;
+use partition_table::raw;
 
 
 my @choices = map {
-    my $type = typeFromMagic(devices::make($_->{dev}));
+    my $type = partition_table::raw::typeOfMBR($_->{dev});
     if_($type && member($type, bootloader::main_method_choices()) , [ $_->{dev}, $type ]);
 } fs::proc_partitions::read_raw();
 

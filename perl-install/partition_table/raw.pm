@@ -18,8 +18,16 @@ if_(arch() =~ /ppc/,
     [ 'grub', 0, "\xEBG", 0x17d, "stage1 \0" ],
     [ 'grub', 0, "\xEBH", 0x17e, "stage1 \0" ],
     [ 'grub', 0, "\xEBH", 0x18a, "stage1 \0" ],
-    [ 'grub', 0, "\xEBH", 0x181, "GRUB \0" ],
-    [ 'grub', 0, "\xEBH", 0x176, "GRUB \0" ], #- Conectiva 10
+    sub { my ($F) = @_;
+	  #- standard grub has no good magic (Mandriva's grub is patched to have "GRUB" at offset 6)
+	  #- so scanning a range of possible places where grub can have its string
+	  #- 0x176 found on Conectiva 10
+	  my ($min, $max, $magic) = (0x176, 0x181, "GRUB \0");
+	  my $tmp;
+	  sysseek($F, 0, 0) && sysread($F, $tmp, $max + length($magic)) or return;
+	  substr($tmp, 0, 2) eq "\xEBH" or return;
+	  index($tmp, $magic, $min) >= 0 && "grub";
+      },
     [ 'lilo', 0x2,  "LILO" ],
     [ 'lilo', 0x6,  "LILO" ],
     [ 'lilo', 0x6 + 0x40,  "LILO" ], #- when relocated in lilo's bsect_update(), variable "space" on paragraph boundary gives 0x40
@@ -94,7 +102,9 @@ sub adjustEnd($$) {
 
 sub compute_nb_cylinders {
     my ($geom, $totalsectors) = @_;
-    $geom->{cylinders} = int $totalsectors / $geom->{heads} / $geom->{sectors};
+    if ($geom->{heads} && $geom->{sectors}) {
+	$geom->{cylinders} = int $totalsectors / $geom->{heads} / $geom->{sectors};
+    }
 }
 
 sub keep_non_duplicates {
@@ -158,6 +168,7 @@ sub get_geometry {
     my %geom;
     if (ioctl($F, c::HDIO_GETGEO(), $g)) {
 	@geom{qw(heads sectors cylinders start)} = unpack "CCSL", $g;
+	log::l("HDIO_GETGEO on $dev succeeded: heads=$geom{heads} sectors=$geom{sectors} cylinders=$geom{cylinders} start=$geom{start}");
 	$geom{totalcylinders} = $geom{cylinders};
 
 	#- $geom{cylinders} is no good (only a ushort, that means less than 2^16 => at best 512MB)
@@ -232,7 +243,7 @@ sub test_for_bad_drives {
     my ($hd) = @_;
 
     log::l("test_for_bad_drives($hd->{file})");
-    my $sector = $hd->{geom}{sectors} - 1;
+    my $sector = $hd->{geom} ? $hd->{geom}{sectors} - 1 : 0;
     
     sub error { die "$_[0] error: $_[1]" }
 

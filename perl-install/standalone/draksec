@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 #*****************************************************************************
 #
-# Copyright (c) 2002-2005 Christian Belisle
+# Copyright (c) 2002-2006 Christian Belisle
 #                         Thierry Vignaud <tvignaud@mandrakesoft.com>
 #
 # This program is free software; you can redistribute it and/or modify
@@ -24,6 +24,8 @@ use lib qw(/usr/lib/libDrakX);
 use common;
 use standalone;
 use vars qw($MODE %options);
+use interactive;
+use mygtk2 qw(gtknew gtkset);
 use ugtk2 qw(:helpers :wrappers :ask :create);
 use run_program;
 use security::level;
@@ -37,6 +39,8 @@ use security::l10n;
 
 #/^-?-(\S+)$/ and $options{$1} = 1 foreach @ARGV;
 
+
+my $in = 'interactive'->vnew('su');
 
 $ugtk2::wm_icon = "/usr/share/mcc/themes/default/draksec-mdk.png";
 my ($w, %fields);
@@ -58,7 +62,7 @@ my %inv_translations = reverse %translations;
 
 sub to_i18n { map { $translations{$_} || $_ } @_ }
 sub from_i18n { $inv_translations{$_[0]} || $_[0] }
-sub resize { gtkset_size_request($_[0], 50, -1) }
+sub resize { gtkset($_[0], width => 50) }
 
 %fields = security::l10n::fields();
 my %inv_fields = reverse %fields;
@@ -66,7 +70,7 @@ my %inv_fields = reverse %fields;
 # factorize this with rpmdrake and harddrake2
 sub wait_msg {
     my $mainw = ugtk2->new(N("Please wait"), (modal => 1, transient => $w->{real_window}));
-    $mainw->{window}->add(Gtk2::WrappedLabel->new($_[0]));
+    $mainw->{window}->add(gtknew('WrappedLabel', text => $_[0]));
     $mainw->{rwindow}->show_all;
     gtkset_mousecursor_wait($mainw->{rwindow}->window);
     # ugly workaround for gtk+ not displaying subdialog contents:
@@ -78,25 +82,11 @@ sub wait_msg {
 sub remove_wait_msg { $_[0]->destroy }
 
 sub basic_seclevel_explanations() {
-    my $text = Gtk2::TextView->new;
+    my $text = gtknew('TextView');
     use Gtk2::Pango;
     my %common_opts = ('left-margin' => '10', 'right-margin' => '10');
-    # this is a small parser for a Pango Text Attribute Markup Language-like for TextViews widget
-    gtktext_insert($text, [ map  {
-        if (s!^/span>!!) {
-            [ $_, \%common_opts ];
-        } elsif (s!span !!) {
-            my %tags = %common_opts;
-            while (s!(\w+?)="(\w+?)"!!) {
-                $tags{weight} ||= Gtk2::Pango->PANGO_WEIGHT_BOLD if $1 eq 'foreground';
-                $tags{$1} = $2 eq "bold" ? Gtk2::Pango->PANGO_WEIGHT_BOLD : $2;
-            }
-            s/^>//;
-            [ $_, \%tags ];
-        } else {
-            [ $_, \%common_opts ];
-        }
-    } split("<", formatAlaTeX(
+
+    gtktext_insert($text, ugtk2::markup_to_TextView_format(formatAlaTeX(
 #-PO: Do not alter the <span ..> and </span> tags.
 #-PO: Translate the security levels (Poor, Standard, High, Higher and Paranoid) in the same way, you translated these individuals words.
 #-PO: keep the double empty lines between sections, this is formatted a la LaTeX.
@@ -133,13 +123,14 @@ your machine is only a client on the Internet, you should choose a lower level.
 
 <span foreground=\"royalblue3\">Paranoid</span>: This is similar to the previous
 level, but the system is entirely closed and security features are at their
-maximum"))) ]);
-    create_scrolled_window($text, [ 'never', 'automatic' ]);
+maximum")), \%common_opts));
+
+    gtknew('ScrolledWindow', h_policy => 'never', child => $text);
 }
 
 sub new_nonedit_combo {
     my ($string_list, $o_default_value) = @_;
-    Gtk2::ComboBox->new_with_strings([ to_i18n(@$string_list) ], to_i18n($o_default_value));
+    gtknew('ComboBox', text => to_i18n($o_default_value), list => [ to_i18n(@$string_list) ]);
 }
 
 sub register_help_page {
@@ -172,7 +163,7 @@ sub register_help_entry {
 }
 
 my $msec = new security::msec;
-$w = ugtk2->new('draksec');
+$w = ugtk2->new(N("Security Level and Checks"));
 my $window = $w->{window};
 
 
@@ -188,7 +179,7 @@ unless ($::isEmbedded) {
 $window->signal_connect('delete_event', sub { $window->destroy });
 $window->signal_connect('destroy', sub { ugtk2->exit });
 
-$window->add(my $vbox = gtkshow(Gtk2::VBox->new(0, 0)));
+$window->add(my $vbox = gtkshow(gtknew('VBox')));
 
 # Create the notebook (for bookmarks at the top)
 my $notebook = create_notebook();
@@ -198,7 +189,7 @@ my $common_opts = { col_spacings => 10, row_spacings => 5, mcc => 1 };
 ######################## BASIC OPTIONS PAGE ################################
 my ($seclevel_entry, $secadmin_entry);
 
-$notebook->append_page(gtkshow(gtkpack_(Gtk2::VBox->new(0, 0),
+$notebook->append_page(gtkshow(gtknew('VBox', children => [
                                        1, basic_seclevel_explanations(),
                                        0, create_packtable($common_opts,
                                                         [ 
@@ -209,16 +200,16 @@ $notebook->append_page(gtkshow(gtkpack_(Gtk2::VBox->new(0, 0),
                                                               push(@sec_levels, $current_level) unless member($current_level, @sec_levels);
                                                               $seclevel_entry = new_nonedit_combo(\@sec_levels, $current_level);
                                                               
-                                                              Gtk2::WrappedLabel->new(N("Security Level:")), $seclevel_entry;
+                                                              gtknew('Label_Left', text => N("Security Level:")), $seclevel_entry;
                                                           }
                                                           ],
-                                                        [ Gtk2::WrappedLabel->new(N("Security Alerts:")), 
-                                                          my $secadmin_check = gtksignal_connect(Gtk2::CheckButton->new, toggled => sub {
+                                                        [ gtknew('Label_Left', text => N("Security Alerts:")), 
+                                                          my $secadmin_check = gtksignal_connect(gtknew('CheckButton'), toggled => sub {
                                                                                                      $secadmin_entry->set_sensitive($_[0]->get_active);
                                                                                                  }) ],
-                                                        [ Gtk2::WrappedLabel->new(N("Security Administrator:")),
-                                                          $secadmin_entry = Gtk2::Entry->new_with_text($msec->get_check_value("MAIL_USER")) ]))),
-                               Gtk2::Label->new(N("Basic options")));
+                                                        [ gtknew('Label_Left', text => N("Security Administrator:")),
+                                                          $secadmin_entry = Gtk2::Entry->new_with_text($msec->get_check_value("MAIL_USER")) ]) ])),
+                               gtknew('Label', text => N("Basic options")));
                        
 if ($msec->get_check_value("MAIL_WARN") eq "yes") {
     $secadmin_check->set_active(1);
@@ -236,7 +227,7 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
     my ($domain, $label) = @$_;
     register_help_page($label);
     my %values;
-    gtkappend_page($notebook, gtkshow(gtkpack_(Gtk2::VBox->new,
+    gtkappend_page($notebook, gtkshow(gtknew('VBox', children => [
                                             1, create_scrolled_window(create_packtable($common_opts,
                                                                                        map {
                                                                                            my $i = $_;
@@ -248,19 +239,19 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
                                                                                                $values{$i} = new_nonedit_combo(member($default, @yesno_choices) ? \@yesno_choices : if_(member($default, @alllocal_choices), \@alllocal_choices));
                                                                                                $entry = $values{$i}->entry;
                                                                                            } else {
-                                                                                               $values{$i} = Gtk2::Entry->new;
+                                                                                               $values{$i} = gtknew('Entry');
                                                                                                $entry = $values{$i};
                                                                                            }
                                                                                            $entry->set_text(to_i18n($msec->get_function_value($opt)));
                                                                                            register_help_entry($i, $default, $opt);
-                                                                                           [ Gtk2::WrappedLabel->new($i), resize($values{$i}) ];
+                                                                                           [ gtknew('Label_Left', line_wrap => 1, text => $i), resize($values{$i}) ];
                                                                                        } sort map { $fields{$_} || $_ } $msec->list_functions($domain),
                                                                                       ),
                                                                       [ 'never', 'automatic' ],
                                                                      ),
-                                           )
+                                           ])
                                   ),
-                           Gtk2::WrappedLabel->new($label));
+                           gtknew('Label_Left', text => $label));
     $options_values{$domain} = \%values;
 }
 
@@ -270,16 +261,16 @@ my %security_checks_value;
 my $check_string = N("Periodic Checks");
 
 register_help_page($check_string);
-gtkappend_page($notebook, gtkshow(gtkpack_(Gtk2::VBox->new,
+gtkappend_page($notebook, gtkshow(gtknew('VBox', children => [
                                         1, create_scrolled_window(create_packtable($common_opts,
                                                                                    map {
                                                                                        my $i = $_;
                                                                                        my $opt = $inv_fields{$i} || $i;
                                                                                        $security_checks_value{$i} = new_nonedit_combo([ 'yes', 'no', 'default' ], $msec->get_check_value($opt));
                                                                                        register_help_entry($i, $msec->get_check_default($opt), $opt);
-                                                                                       [ gtkshow(Gtk2::WrappedLabel->new($i)), resize($security_checks_value{$i}) ];
-                                                                                   } sort map { $fields{$_} || $_ } $msec->list_checks)))),
-                       Gtk2::Label->new($check_string));
+                                                                                       [ gtkshow(gtknew('Label_Left', line_wrap => 1, text => $i)), resize($security_checks_value{$i}) ];
+                                                                                   } sort map { $fields{$_} || $_ } $msec->list_checks)) ])),
+                       gtknew('Label', text => $check_string));
 
 
 ####################### OK CANCEL BUTTONS ##################################
@@ -331,10 +322,8 @@ gtkpack_($vbox,
 
                                 remove_wait_msg($w);
 
-                                if ($secadmin_value ne $msec->get_check_value('CHKROOTKIT_CHECK') && ! -f '/usr/sbin/chkrootkit') {
-                                    require do_pkgs;
-                                    my $do_pkgs = do_pkgs_standalone->new;
-                                    $do_pkgs->is_available('chkrootkit') and $do_pkgs->install('chkrootkit');
+                                if ($secadmin_value ne $msec->get_check_value('CHKROOTKIT_CHECK')) {
+                                    $in->do_pkgs->ensure_is_installed_if_available('chkrootkit', '/usr/sbin/chkrootkit');
                                 }
 
                                 ugtk2->exit(0);
@@ -342,7 +331,7 @@ gtkpack_($vbox,
                             },
                             undef, undef, '',
                             [ N("Help"), sub {
-                                  my $text = Gtk2::TextView->new;
+                                  my $text = gtknew('TextView');
                                   create_dialog(N("Help"), 
                                                 gtktext_insert($text,
                                                                [
@@ -367,10 +356,7 @@ $oc->{buttons}{N("Help")}->set_sensitive(0);
 $oc->{cancel}->can_default(1);
 $oc->{cancel}->grab_default;
 
-if (!-x '/usr/sbin/msec') {
-    require do_pkgs;
-    do_pkgs_standalone->new->install('msec');
-}
+$in->do_pkgs->ensure_is_installed('msec', '/usr/sbin/msec');
 
 $w->main;
 ugtk2->exit(0);

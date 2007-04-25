@@ -10,9 +10,9 @@ our %help = (
 
 'accept_bogus_error_responses' => N("Accept/Refuse bogus IPv4 error messages."),
 
-'accept_broadcasted_icmp_echo' => N(" Accept/Refuse broadcasted icmp echo."),
+'accept_broadcasted_icmp_echo' => N("Accept/Refuse broadcasted icmp echo."),
 
-'accept_icmp_echo' => N(" Accept/Refuse icmp echo."),
+'accept_icmp_echo' => N("Accept/Refuse icmp echo."),
 
 'allow_autologin' => N("Allow/Forbid autologin."),
 
@@ -87,15 +87,15 @@ and crontab(1))."),
 
 'enable_msec_cron' => N("Enable/Disable msec hourly security check."),
 
-'enable_pam_wheel_for_su' => N(" Enabling su only from members of the wheel group or allow su from any user."),
+'enable_pam_wheel_for_su' => N("Enable su only from members of the wheel group. If set to no, allows su from any user."),
 
 'enable_password' => N("Use password to authenticate users."),
 
 'enable_promisc_check' => N("Activate/Disable ethernet cards promiscuity check."),
 
-'enable_security_check' => N(" Activate/Disable daily security check."),
+'enable_security_check' => N("Activate/Disable daily security check."),
 
-'enable_sulogin' => N(" Enable/Disable sulogin(8) in single user level."),
+'enable_sulogin' => N("Enable/Disable sulogin(8) in single user level."),
 
 'no_password_aging_for' => N("Add the name as an exception to the handling of password aging by msec."),
 

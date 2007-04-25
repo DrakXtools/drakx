@@ -27,21 +27,16 @@
 #include <string.h>
 #include <stdio.h>
 #include <errno.h>
-#include "insmod.h"
 #include "stage1.h"
 #include "log.h"
-#include "mar/mar-extract-only.h"
 #include "frontend.h"
 #include "mount.h"
 #include "modules_descr.h"
+#include "zlibsupport.h"
 
 #include "modules.h"
 
 static struct module_deps_elem * modules_deps = NULL;
-
-static char archive_name[] = "/modules/modules.mar";
-static char additional_archive_name[] = "/tmp/tmpfs/modules.mar";
-int allow_additional_modules_floppy = 1;
 
 extern long init_module(void *, unsigned long, const char *);
 
@@ -62,160 +57,29 @@ static const char *moderror(int err)
 	}
 }
 
-static void *grab_file(const char *filename, unsigned long *size)
-{
-	unsigned int max = 16384;
-	int ret, fd;
-	void *buffer = malloc(max);
-
-        fd = open(filename, O_RDONLY, 0);
-	if (fd < 0)
-		return NULL;
-
-	*size = 0;
-	while ((ret = read(fd, buffer + *size, max - *size)) > 0) {
-		*size += ret;
-		if (*size == max)
-			buffer = realloc(buffer, max *= 2);
-	}
-	if (ret < 0) {
-		free(buffer);
-		buffer = NULL;
-	}
-	close(fd);
-	return buffer;
-}
-
-static enum return_type ensure_additional_modules_available(void)
-{
-#ifdef ENABLE_ADDITIONAL_MODULES
-        struct stat statbuf;
-        if (stat(additional_archive_name, &statbuf)) {
-                char floppy_mount_location[] = "/tmp/floppy";
-                char floppy_modules_mar[] = "/tmp/floppy/modules.mar";
-                int ret;
-                int automatic = 0;
-
-                if (stat("/tmp/tmpfs", &statbuf)) {
-                        if (scall(mkdir("/tmp/tmpfs", 0755), "mkdir"))
-                                return RETURN_ERROR;
-                        if (scall(mount("none", "/tmp/tmpfs", "tmpfs", MS_MGC_VAL, NULL), "mount tmpfs"))
-                                return RETURN_ERROR;
-                }
-                
-                if (IS_AUTOMATIC) {
-                        unset_automatic();
-                        automatic = 1;
-                }
-          
-        retry:
-                stg1_info_message("Please insert the Additional Drivers floppy.");;
-
-                while (my_mount(floppy_device(), floppy_mount_location, "ext2", 0) == -1) {
-                        enum return_type results = ask_yes_no(errno == ENXIO ?
-                                                              "There is no detected floppy drive, or no floppy disk in drive.\nRetry?"
-                                                              : errno == EINVAL ?
-                                                              "Floppy is not a Linux ext2 floppy in first floppy drive.\nRetry?"
-                                                              : "Can't find a linux ext2 floppy in first floppy drive.\nRetry?");
-                        if (results != RETURN_OK) {
-                                allow_additional_modules_floppy = 0;
-                                if (automatic)
-                                        set_param(MODE_AUTOMATIC);
-                                return results;
-                        }
-                }
-                                
-                if (stat(floppy_modules_mar, &statbuf)) {
-                        stg1_error_message("This is not an Additional Drivers floppy, as far as I can see.");
-                        umount(floppy_mount_location);
-                        goto retry;
-                }
-
-                init_progression("Copying...", file_size(floppy_modules_mar));
-                ret = copy_file(floppy_modules_mar, additional_archive_name, update_progression);
-                end_progression();
-                umount(floppy_mount_location);
-                if (automatic)
-                        set_param(MODE_AUTOMATIC);
-                return ret;
-        } else
-                return RETURN_OK;
-#else
-	allow_additional_modules_floppy = 0;
-	return RETURN_ERROR;
-#endif
-}
-
 int insmod_local_file(char * path, char * options)
 {
-        if (kernel_version() <= 4) {
-                return insmod_call(path, options);
-        } else {
-                void *file;
-                unsigned long len;
-                int rc;
+    void *file;
+    unsigned long len;
+    int rc;
                 
-                file = grab_file(path, &len);
+    file = grab_file(path, &len);
                 
-                if (!file) {
-                        log_perror(asprintf_("\terror reading %s", path));
-                        return -1;
-                }
+    if (!file) {
+        log_perror(asprintf_("\terror reading %s", path));
+        return -1;
+    }
                 
-                rc = init_module(file, len, options ? options : "");
-                if (rc)
-                        log_message("\terror: %s", moderror(errno));
-                return rc;
-        }
+    rc = init_module(file, len, options ? options : "");
+    if (rc)
+        log_message("\terror: %s", moderror(errno));
+    return rc;
 }
 
 static char *kernel_module_extension(void)
 {
-  return kernel_version() <= 4 ? ".o" : ".ko";
+  return ".ko.gz";
 }
-
-/* unarchive and insmod given module
- * WARNING: module must not contain the trailing ".o"
- */
-static enum insmod_return insmod_archived_file(const char * mod_name, char * options, int allow_modules_floppy)
-{
-	char module_name[50];
-	char final_name[50] = "/tmp/";
-	int i, rc;
-
-	strncpy(module_name, mod_name, sizeof(module_name));
-	strcat(module_name, kernel_module_extension());
-	i = mar_extract_file(archive_name, module_name, "/tmp/");
-	if (i == 1) {
-                static int recurse = 0;
-                if (allow_additional_modules_floppy && allow_modules_floppy && !recurse) {
-                        recurse = 1;
-                        if (ensure_additional_modules_available() == RETURN_OK)
-                                i = mar_extract_file(additional_archive_name, module_name, "/tmp/");
-                        recurse = 0;
-                }
-        }
-        if (i == 1) {
-                log_message("file-not-found-in-archive %s (maybe you can try another boot floppy such as 'hdcdrom_usb.img')", module_name);
-                return INSMOD_FAILED_FILE_NOT_FOUND;
-        }
-	if (i != 0)
-		return INSMOD_FAILED;
-
-	strcat(final_name, module_name);
-
-        rc = insmod_local_file(final_name, options);
-
-	unlink(final_name); /* sucking no space left on device */
-
-	if (rc) {
-		log_message("\tfailed");
-		return INSMOD_FAILED;
-	}
-	return INSMOD_OK;
-}
-
-
 
 static int load_modules_dependencies(void)
 {
@@ -380,10 +244,7 @@ static enum insmod_return insmod_with_deps(const char * mod_name, char * options
 	log_message("needs %s", mod_name);
 	{
 		char *file = asprintf_("/modules/%s%s", mod_name, kernel_module_extension());
-		if (access(file, R_OK) == 0)
-			return insmod_local_file(file, options);
-		else
-			return insmod_archived_file(mod_name, options, allow_modules_floppy);
+		return insmod_local_file(file, options);
 	}
 }
 
@@ -409,11 +270,10 @@ static const char * get_name_kernel_26_transition(const char * name)
         int i;
 
         /* pcitable contains 2.4 names. this will need to change if/when it contains 2.6 names! */
-        if (kernel_version() > 4)
-                for (i=0; i<mappings_nb; i++) {
-                        if (streq(name, mappings[i].name_24))
-                                return mappings[i].name_26;
-                }
+        for (i=0; i<mappings_nb; i++) {
+            if (streq(name, mappings[i].name_24))
+                return mappings[i].name_26;
+        }
         return name;
 }
 
@@ -528,8 +388,7 @@ enum return_type ask_insmod(enum driver_type type)
 	snprintf(msg, sizeof(msg), "Which driver should I try to gain %s access?", mytype);
 
 	{
-		char ** modules = mar_list_contents(ensure_additional_modules_available() == RETURN_OK ? additional_archive_name
-                                                                                                       : archive_name);
+		char ** modules = NULL;
 		char ** descrs = malloc(sizeof(char *) * string_array_length(modules));
 		char ** p_modules = modules;
 		char ** p_descrs = descrs;
@@ -538,7 +397,7 @@ enum return_type ask_insmod(enum driver_type type)
 			*p_descrs = NULL;
 			for (i = 0 ; i < modules_descriptions_num ; i++) {
 				if (!strncmp(*p_modules, modules_descriptions[i].module, strlen(modules_descriptions[i].module))
-				    && (*p_modules)[strlen(modules_descriptions[i].module)] == '.') /* one contains '.o' not the other */
+				    && (*p_modules)[strlen(modules_descriptions[i].module)] == '.') /* one contains '.ko.gz' not the other */
 					*p_descrs = modules_descriptions[i].descr;
 			}
 			p_modules++;
@@ -551,7 +410,7 @@ enum return_type ask_insmod(enum driver_type type)
 	}
 
 	if (results == RETURN_OK) {
-		choice[strlen(choice)-strlen(kernel_module_extension())] = '\0'; /* remove trailing .ko or .o */
+		choice[strlen(choice)-strlen(kernel_module_extension())] = '\0'; /* remove trailing .ko.gz */
 		return insmod_with_options(choice, type);
 	} else
 		return results;

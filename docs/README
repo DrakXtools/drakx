@@ -4,22 +4,16 @@ to the RH newt install.
 ********************************************************************************
 * CVS **************************************************************************
 ********************************************************************************
-Like all good free software, DrakX is in CVS :)
+Like all good free software, DrakX is in SVN :)
 
-You can access it at http://cvs.mandriva.com/cgi-bin/cvsweb.cgi/gi
+You can access it at https://cvs.mandriva.com/cgi-bin/viewvc.cgi/soft/drakx/trunk/?root=svn
 
 or via
 
-export CVS_RSH=ssh
-export CVSROOT=:ext:anoncvs@cvs.mandriva.com:/cooker
-cvs checkout gi
- (enter password 'cvs')
+svn co https://cvs.mandriva.com/svn/soft/drakx/trunk drakx
 
 
 This is only read-only access. If you want more, tell me (pixel@mandriva.com)
-
-Alas, all is not in CVS, a lot of things come from rpm packages which you must
-install.
 
 Please note that redoing *all* the stuff is not for the faint of heart. I myself
 sometimes wonder what the whole make does :-%
@@ -111,12 +105,8 @@ install/stage2/rescue.clp
 	rescue ramdisk. create_compressed_fs iso file
 	this is the ramdisk loaded when typing rescue on boot prompt.
 
-install/images/*.img
-	floppy boot images to use with DrakX. Use:
-	- cdrom.img for cdrom install
-	- network.img + network_drivers.img for ftp/nfs install (non-pcmcia devices)
-	- hd_grub.img for hard-disk install (see http://qa.mandriva.com/hd_grub.cgi)
-	- pcmcia.img for pcmcia install (see ``PCMCIA install'' below for more)
+install/images/all.img
+	USB image enabling any install
 
 install/images/boot.iso
 	iso image to burn enabling any install (cdrom/hd/nfs/ftp)
@@ -135,11 +125,6 @@ install/images/boot.iso
   
   Boot from network:
   - all.rdz + vmlinuz via pxe
-  
-  Boot from floppy:
-  - cdrom.img : to install from a cdrom (but not a usb drive)
-  - network.img + network_drivers.img : to install from network
-  - hd_grub.img : to install from hd
 
   dd for windows: http://uranus.it.swin.edu.au/~jn/linux/rawwrite/dd.htm
 
@@ -159,7 +144,7 @@ not interesting.
 - alt-F4: kernel's place. aka the output of dmesg.
 - alt-F7: the graphical install lives there
 
-- command "bug" puts on floppy lots of interesting stuff.
+- command "bug" puts on floppy/usb-key lots of interesting stuff.
 - /tmp/stage1.log: same as alt-F3 part when stage1 run (e.g. actions
   before graphical install really begins)
 - /tmp/ddebug.log: (nearly the) same as latter alt-F3 part
@@ -190,31 +175,12 @@ If the media you use to install is a pcmcia device, use the pcmcia boot disk.
 ********************************************************************************
 * modules **********************************************************************
 ********************************************************************************
-Modules can be found in at least 2 places:
-- in /modules/modules.mar
-- in /lib/modules.cz<KERNEL_VERSION_RELEASE>
-
-/modules/modules.mar is used in mdk-stage1. It contains only modules
-interesting for one kind of install. For example in an hd install, it
-contains scsi modules. For a network install, it contains network card
-modules. (To create, extract or view files in a ``mar'' archive, please
-use gi/mdk-stage1/mar/mar; this is basically an archive format meant to
-be minimalistic)
-
-/lib/modules.cz<KERNEL_VERSION_RELEASE> contains all modules, it is used
-in stage2.
-
+Modules can be found in /modules.
 
 To manually install a module during install, switch to console #2
 and type "modprobe <modulename>". The modprobe program is a perl
 wrapper around /usr/bin/insmod. It uses the dependencies found in
 /modules/modules.dep (stage1).
-
-/usr/bin/insmod is a wrapper around /usr/bin/insmod_. It just extracts the
-module out of /lib/modules.cz in /tmp. Then it calls insmod_.
-
-/usr/bin/insmod_ is the real prog (which you usually find in /sbin/). You need
-to give it the complete path.
 
 ********************************************************************************
 * Making screenshots ***********************************************************
@@ -273,15 +239,6 @@ your auto installs from your server.
 init loads stage1
 stage1 loads stage2, from various medium type
 
-stage2 is too big to fit on a floppy, that's why stage1 exists
-
->    - How each stage relates to the various media access methods
-
-stage1 knows only how to access to the media is compiled for. It
-contains only the kernel modules needed for that media. For eg,
-the nfs/ftp/http stage1 (network.img floppy) doesn't contain scsi
-modules nor ide.
-
 >    - How one stage terminates and another begins. i.e., How does
 >      stage1 find, mount, and launch stage2?
 
@@ -296,5 +253,5 @@ replaces stage1, and init then monitors stage2)
 >  o Text and Graphic mode installers
 >    - Architectural overview of each
 
-have a look at gi/docs/object_class.fig
+have a look at drakx/docs/object_class.fig
 

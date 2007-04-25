@@ -10,7 +10,7 @@ use run_program;
 
 use Exporter;
 our @ISA = qw(Exporter);
-our @EXPORT = qw($SECTORSIZE N N_ check_for_xserver files_exist formatTime formatXiB makedev mandrake_release removeXiBSuffix require_root_capability salt setVirtual set_alternative set_l10n_sort set_permissions translate unmakedev);
+our @EXPORT = qw($SECTORSIZE N P N_ check_for_xserver files_exist formatTime formatXiB makedev mandrake_release removeXiBSuffix require_root_capability setVirtual set_alternative set_l10n_sort set_permissions translate unmakedev);
 
 # perl_checker: RE-EXPORT-ALL
 push @EXPORT, @MDK::Common::EXPORT;
@@ -27,45 +27,49 @@ our $SECTORSIZE  = 512;
 #- Functions
 #-#####################################################################################
 
+sub P {
+    my ($s_singular, $s_plural, $nb, @para) = @_; 
+    sprintf(translate($s_singular, $s_plural, $nb), @para);
+}
+
 sub N {
     my ($s, @para) = @_; 
-    $::one_message_has_been_translated ||= join(':', (caller(0))[1,2]); #- see mygtk2.pm
-    my $t = translate($s);
-    sprintf($t, @para);
+    sprintf(translate($s), @para);
 }
 sub N_ { $_[0] }
 
-
-sub salt {
-    my ($nb) = @_;
-    require devices;
-    open(my $F, devices::make("random")) or die "missing random";
-    my $s; read $F, $s, $nb;
-    $s = pack("b8" x $nb, unpack "b6" x $nb, $s);
-    $s =~ tr|\0-\x3f|0-9a-zA-Z./|;
-    $s;
-}
 
 sub makedev { ($_[0] << 8) | $_[1] }
 sub unmakedev { $_[0] >> 8, $_[0] & 0xff }
 
 sub translate_real {
-    my ($s) = @_;
+    my ($s, $o_plural, $o_nb) = @_;
     $s or return '';
     foreach (@::textdomains, 'libDrakX') {
-	my $s2 = Locale::gettext::dgettext($_, $s);
+	my $s2;
+     if ($o_nb) {
+         $s2 = Locale::gettext::dngettext($_, $s, $o_plural, $o_nb);
+     } else {
+         $s2 = Locale::gettext::dgettext($_, $s);
+     }
+	# when utf8 pragma is in use, Locale::gettext() returns an utf8 string not tagged as such:
+	c::set_tagged_utf8($s2) if !utf8::is_utf8($s2) && utf8::is_utf8($s);
 	return $s2 if $s ne $s2;
     }
     $s;
 }
 
-sub translate {
-    my $s = translate_real(@_);
-    $::need_utf8_i18n and c::set_tagged_utf8($s);
-
+sub remove_translate_context {
+    my ($s) = @_;
     #- translation with context, kde-like 
     $s =~ s/^_:.*\n//;
     $s;
+}
+
+sub translate {
+    my $s = translate_real(@_);
+    $::one_message_has_been_translated ||= join(':', (caller(1))[1,2]); #- see mygtk2.pm
+    remove_translate_context($s);
 }
 
 sub from_utf8 {
@@ -90,15 +94,6 @@ sub set_l10n_sort() {
 }
 
 
-BEGIN { undef *availableRamMB }
-sub availableRamMB()  { 
-    my $s = MDK::Common::System::availableRamMB();
-    #- HACK HACK: if i810 and memsize
-    require detect_devices;
-    return $s - 1 if $s == 128 && detect_devices::matching_driver__regexp('^Card:Intel 810$');
-    $s;
-}
-
 sub setVirtual {
     my ($vt_number) = @_;
     my $vt = '';
@@ -111,7 +106,7 @@ sub setVirtual {
 
 sub nonblock {
     my ($F) = @_;
-    fcntl($F, c::F_SETFL(), fcntl($F, c::F_GETFL(), 0) | c::O_NONBLOCK());
+    fcntl($F, c::F_SETFL(), fcntl($F, c::F_GETFL(), 0) | c::O_NONBLOCK()) or die "can not fcntl F_SETFL: $!";
 }
 
 sub removeXiBSuffix {
@@ -131,7 +126,7 @@ sub formatXiB {
 	($nb, $base) = ($newnb, $newbase);
 	$base >= 1024 ? ($newbase = $base / 1024) : ($newnb = $nb / 1024);
     };
-    foreach ('', N("KB"), N("MB"), N("GB")) {
+    foreach (N("B"), N("KB"), N("MB"), N("GB")) {
 	$decr->(); 
 	if ($newnb < 1 && $newnb * $newbase < 1) {
 	    my $v = $nb * $base;
@@ -176,6 +171,22 @@ sub formatError {
     &MDK::Common::String::formatError($err);
 }
 
+sub group_by(&@) {
+    my $f = shift;
+    @_ or return;
+    my $e = shift;
+    my @l = my $last_l = [$e];
+    foreach (@_) {
+	if ($f->($e, $_)) {
+	    push @$last_l, $_;
+	} else {
+	    push @l, $last_l = [$_];
+	    $e = $_;
+	}
+    }
+    @l;
+}
+
 # Group the list by n. Returns a reference of lists of length n
 sub group_n_lm {
     my $n = shift;
@@ -212,30 +223,46 @@ sub set_alternative {
 
 sub files_exist { and_(map { -f "$::prefix$_" } @_) }
 
+sub open_file {
+    my ($file) = @_;
+    my $F;
+    open($F, $file) ? $F : do { log::l("Can not open $file: $!"); undef };
+}
+
+
 sub secured_file {
     my ($f) = @_;
     c::is_secure_file($f) or die "can not ensure a safe $f";
     $f;
 }
 
+sub chown_ {
+    my ($b_recursive, $name, $group, @files) = @_;
+
+    my ($uid, $gid) = (getpwnam($name) || $name, getgrnam($group) || $group);
+      
+    require POSIX;
+    my $chown; $chown = sub {
+	foreach (@_) {
+	    POSIX::lchown($uid, $gid, $_) or die "chown of file $_ failed: $!\n";
+	    ! -l $_ && -d $_ && $b_recursive and &$chown(glob_($_));
+	}
+    };
+    $chown->(@files);
+}
+
+
 sub set_permissions {
     my ($file, $perms, $o_owner, $o_group) = @_;
     # We only need to set the permissions during installation to be able to
-    # print test pages. After installation the devfsd daemon does the business
-    # automatically.
+    # print test pages. After installation udev does the business automatically.
     return 1 unless $::isInstall;
-    if ($o_owner && $o_group) {
-        run_program::rooted($::prefix, "/bin/chown", "$o_owner.$o_group", $file)
-	    or die "Could not start chown!";
-    } elsif ($o_owner) {
-        run_program::rooted($::prefix, "/bin/chown", $o_owner, $file)
-	    or die "Could not start chown!";
-    } elsif ($o_group) {
-        run_program::rooted($::prefix, "/bin/chgrp", $o_group, $file)
-	    or die "Could not start chgrp!";
+    if ($o_owner || $o_group) {
+	$o_owner ||= (lstat($file))[4];
+	$o_group ||= (lstat($file))[5];
+	chown_(0, $o_owner, $o_group, $file);
     }
-    run_program::rooted($::prefix, "/bin/chmod", $perms, $file)
-	or die "Could not start chmod!";
+    chmod(oct($perms), $file) or die "chmod of file $file failed: $!\n";
 }
 
 sub release_file {
@@ -247,20 +274,28 @@ sub release_file {
     );
 }
 
+sub parse_LDAP_namespace_structure {
+    my ($s) = @_;
+    my %h = map { if_(/(.*?)=(.*)/, $1 => $2) } split(',', $s);
+    \%h;
+}
+
 sub mandrake_release {
     my ($o_dir) = @_;
     my $f = release_file($o_dir);
     $f && chomp_(cat_("$o_dir$f"));
 }
 
+sub wrap_command_for_root {
+    my ($name, @args) = @_;
+    ([ 'consolehelper', $name ], @args);
+}
+
 sub require_root_capability() {
     return if $::testing || !$>; # we're already root
-    if (check_for_xserver()) {
-	if (fuzzy_pidofs(qr/\bkwin\b/) > 0) {
-	    exec("kdesu", "--ignorebutton", "-c", "$0 @ARGV") or die N("kdesu missing");
-	}
-    }
-    exec { 'consolehelper' } $0, @ARGV or die N("consolehelper missing");
+
+    my ($command, @args) = wrap_command_for_root($0, @ARGV);
+    exec { $command->[0] } $command->[1], @args or die N("command %s missing", $command->[0]);
 
     # still not root ?
     die "you must be root to run this program" if $>;
@@ -299,6 +334,7 @@ sub unpack_with_refs {
     @r;
 }
 
+#- used in userdrake and mdkonline
 sub md5file {
     require Digest::MD5;
     my @md5 = map {
@@ -311,6 +347,63 @@ sub md5file {
         $sum;
     } @_;
     return wantarray() ? @md5 : $md5[0];
+}
+
+sub load_modules_from_base {
+    my ($base) = @_;
+    $base =~ s|::|/|g;
+    my $base_file = $base . ".pm";
+    require $base_file;
+    my ($inc_path) = substr($INC{$base_file}, 0, -length($base_file));
+    my @files = map { substr($_, length($inc_path)) } glob_($inc_path . $base . '/*.pm');
+    require $_ foreach @files;
+    #- return the matching modules list
+    map { local $_ = $_; s|/|::|g; s|\.pm$||g; $_ } @files;
+}
+
+sub get_alternatives {
+    my ($name) = @_;
+
+    my $dir = '/var/lib/rpm/alternatives';
+    my ($state, $main_link, @l) = chomp_(cat_("$dir/$name")) or return;
+    my @slaves;
+    while (@l && $l[0] ne '') {
+	my ($name, $link) = splice(@l, 0, 2);
+	push @slaves, { name => $name, link => $link };
+    }
+    shift @l; #- empty line
+    my @alternatives;
+    while (@l && $l[0] ne '') {
+	my ($file, $weight, @slave_files) = splice(@l, 0, 2 + @slaves);
+	
+	push @alternatives, { file => $file, weight => $weight, slave_files => \@slave_files };
+    }
+    { name => $name, link => $main_link, state => $state, slaves => \@slaves, alternatives => \@alternatives };
+}
+
+sub symlinkf_update_alternatives {
+    my ($name, $wanted_file) = @_;
+    my $conf = get_alternatives($name);
+    my $chosen = find { $_->{file} eq $wanted_file } @{$conf->{alternatives}} or return;
+    symlinkf("/etc/alternatives/$name", $::prefix . $conf->{link});
+    symlinkf($wanted_file, "$::prefix/etc/alternatives/$name");
+    mapn {
+	my ($slave, $file) = @_;
+	if ($file) {
+	    symlinkf("/etc/alternatives/$slave->{name}", $::prefix . $slave->{link});
+	    symlinkf($file, "$::prefix/etc/alternatives/$slave->{name}");
+	} else {
+	    unlink $::prefix . $slave->{link};
+	    unlink "$::prefix/etc/alternatives/$slave->{name}";
+	}
+    } $conf->{slaves}, $chosen->{slave_files};
+}
+
+sub update_gnomekderc_no_create {
+    my ($file, $category, %subst_) = @_;
+    if (-e $file) {
+	update_gnomekderc($file, $category, %subst_);
+    }
 }
 
 1;

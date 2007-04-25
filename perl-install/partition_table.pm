@@ -83,7 +83,6 @@ sub verifyPrimary {
 sub compute_device_name {
     my ($part, $hd) = @_;
     $part->{device} = $hd->{prefix} . $part->{part_number};
-    $part->{devfs_device} = $hd->{devfs_prefix} . '/part' . $part->{part_number};
 }
 
 sub assign_device_numbers {
@@ -376,7 +375,7 @@ sub tell_kernel {
 	    } elsif ($action eq 'del') {
 		$force_reboot ||= !c::del_partition(fileno $F, $part_number);
 	    }
-	    log::l("tell kernel $action ($hd->{device} $part_number $o_start $o_size), rebootNeeded is now " . bool2text($hd->{rebootNeeded}));
+	    log::l("tell kernel $action ($hd->{device} $part_number $o_start $o_size) force_reboot=$force_reboot rebootNeeded=$hd->{rebootNeeded}");
 	}
     }
     if ($force_reboot) {
@@ -385,7 +384,7 @@ sub tell_kernel {
 	    syscall_('umount', $_->{real_mntpoint}) or log::l(N("error unmounting %s: %s", $_->{real_mntpoint}, $!));
 	}
 	$hd->{rebootNeeded} = !ioctl($F, c::BLKRRPART(), 0);
-	log::l("tell kernel force_reboot ($hd->{device}), rebootNeeded is now $hd->{rebootNeeded}.");
+	log::l("tell kernel force_reboot ($hd->{device}), rebootNeeded=$hd->{rebootNeeded}");
 
 	foreach (@magic_parts) {
 	    syscall_('mount', $_->{real_mntpoint}, $_->{fs_type}, c::MS_MGC_VAL()) or log::l(N("mount failed: ") . $!);
@@ -397,7 +396,7 @@ sub tell_kernel {
 sub write {
     my ($hd) = @_;
     $hd->{isDirty} or return;
-    $hd->{readonly} and die "a read-only partition table should not be dirty!";
+    $hd->{readonly} and internal_error("a read-only partition table should not be dirty ($hd->{device})!");
 
     #- set first primary partition active if no primary partitions are marked as active.
     if (my @l = @{$hd->{primary}{raw}}) {
@@ -428,7 +427,12 @@ sub write {
     $hd->{hasBeenDirty} = 1; #- used in undo (to know if undo should believe isDirty or not)
 
     if (my $tell_kernel = delete $hd->{will_tell_kernel}) {
-	tell_kernel($hd, $tell_kernel);
+	if (fs::type::is_dmraid($hd)) {
+	    fs::dmraid::call_dmraid('-an');
+	    fs::dmraid::call_dmraid('-ay');
+	} else {
+	    tell_kernel($hd, $tell_kernel);
+	}
     }
 }
 
@@ -590,12 +594,7 @@ sub next_start {
 sub load {
     my ($hd, $file, $b_force) = @_;
 
-    my $F;
-    if (ref $file) {
-	$F = $file;
-    } else {
-	open($F, $file) or die N("Error reading file %s", $file);
-    }
+    my $F = ref $file ? $file : common::open_file($file) || die N("Error reading file %s", $file);
 
     my $h;
     {

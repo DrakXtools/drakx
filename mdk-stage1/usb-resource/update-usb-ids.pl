@@ -38,7 +38,8 @@ int usb_num_ids=sizeof(usb_pci_ids)/sizeof(struct pci_module_map);
 print "struct usb_module_map usb_usb_ids[] = {
 ";
 
-my @modules = chomp_(`perl ../../kernel/modules.pl pci_modules4stage1 "network/usb disk/usb"`);
+my @modules = chomp_(`perl ../../kernel/modules.pl pci_modules4stage1 "network/usb disk/usb"`)
+or die "unable to get USB modules";
 
     foreach my $k (sort keys %$usb) {
 	my $v = $usb->{$k};

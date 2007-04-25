@@ -1,6 +1,7 @@
 include ../../Makefile.config
 
-PMSFILES = $(ALLPMS) standalone/drakvpn ../move/move.pm ../move/tree/mdk_totem
+NAME = libDrakX
+PMSFILES = $(filter-out install/% standalone/%, $(ALLPMS))
 PMSFILES_HERE = $(wildcard $(PMSFILES:%=../../%))
 
 POFILES = $(wildcard *.po)
@@ -10,45 +11,29 @@ LANGS = $(POFILES:%.po=%)
 LOCALEDIR=$(DATADIR)/locale
 
 
-all: help mofiles
-
-mofiles: $(MOFILES)
-
-help:
-	@if [ ! -d doc ]; then \
-		echo "Checking out doc stuff now ..."; \
-		cvs co doc/manualB/{entities,manuals,modules}; \
-		rm -rf doc/CVS; \
-	else \
-		echo "Updating doc stuff now ..."; \
-		cvs update doc/manualB/{entities,manuals,modules}; \
-	fi
-	touch doc/manualB/entities/es/{button,icon,tab,text_field}_list.ent
-	./help_xml2pm.pl
-	mv help-zh_cn.pot help-zh_CN.pot
+all: $(MOFILES)
 
 %.mo: %.po
 	msgfmt -o $@ $<
 
-merge:
-	for i in $(POFILES); do msgmerge -N -C $$i $$i DrakX.pot > $${i}t; mv $${i}t $$i;done
+merge: $(NAME).pot
+	for n in $(POFILES); do \
+	  echo "Merging $$n"; \
+	  msgmerge -C $$n $$n $(NAME).pot > "$$n"t ; \
+	  mv -f "$$n"t $$n ; \
+	done
 
-$(POFILES): DrakX.pot
-	perl -ne 'print unless /^# DO NOT BOTHER TO MODIFY HERE, SEE:|^#.*\Qdrakx-help.xml/ .. /^$$/' $@ > $@t
-	if [ -e help-$@t ]; then perl -pe 's|^#~ ||' -i $@t ; msgmerge -C $@t help-$@t $< > $@; else msgmerge $@t $< > $@; fi
-	rm $@t
-
-DrakX.pot: $(PMSFILES_HERE)
+$(NAME).pot: $(PMSFILES_HERE)
 	cd ../.. ; perl_checker -q --generate-pot share/po/$@ $(PMSFILES)
 
-install:
+install: $(MOFILES)
 	for l in $(LANGS); do \
 		$(SUDO) install -d $(LOCALEDIR)/$$l/LC_MESSAGES; \
 		$(SUDO) install -m 644 $$l.mo $(LOCALEDIR)/$$l/LC_MESSAGES/$(NAME).mo; \
 	done
 
 clean:
-	@rm -rf drakx-help.xml .memdump doc empty.po tmp.* messages tmp.pot *.mo $(POFILES:%=%t)
+	@rm -rf *.mo $(POFILES:%=%t)
 
 verif:
 	perl -ne '/^\s*#/ or $$i += my @l = /\b__?\(/g; END { print "$$i\n" }' $(PMSFILES_HERE)

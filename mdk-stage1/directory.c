@@ -65,10 +65,11 @@ static void choose_iso_in_directory(char *directory, char *location_full)
 		strcat(isofile, "/");
 		strcat(isofile, *file);
 
-		if (lomount(isofile, IMAGE_LOCATION, &loopdev, 0)) {
+		if (lomount(isofile, LOOP_LOCATION, &loopdev, 0)) {
 			log_message("unable to mount iso file \"%s\", skipping", isofile);
 			continue;
 		}
+		symlink(LOOP_LOCATION_REL "/" ARCH, IMAGE_LOCATION);
 
 		if (image_has_stage2()) {
 			log_message("stage2 installer found in ISO image \"%s\"", isofile);
@@ -77,7 +78,8 @@ static void choose_iso_in_directory(char *directory, char *location_full)
 			log_message("ISO image \"%s\" doesn't contain stage2 installer", isofile);
 		}
 
-		umount(IMAGE_LOCATION);
+		unlink(IMAGE_LOCATION);
+		umount(LOOP_LOCATION);
 		del_loop(loopdev);
 	}
 
@@ -122,46 +124,35 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 	unlink(IMAGE_LOCATION);
 	strcpy(location_full, directory);
 
-#ifndef MANDRAKE_MOVE
 	if (!stat(directory, &statbuf) && S_ISDIR(statbuf.st_mode)) {
 		choose_iso_in_directory(directory, location_full);
 	}
-#endif
 
 	loopdev = NULL;
 	if (!stat(location_full, &statbuf) && !S_ISDIR(statbuf.st_mode)) {
 		log_message("%s exists and is not a directory, assuming this is an ISO image", location_full);
-		if (lomount(location_full, IMAGE_LOCATION, &loopdev, 0)) {
+		if (lomount(location_full, LOOP_LOCATION, &loopdev, 0)) {
 			stg1_error_message("Could not mount file %s as an ISO image of the " DISTRIB_NAME " Distribution.", location_full);
 			return RETURN_ERROR;
 		}
+		symlink(LOOP_LOCATION_REL "/" ARCH, IMAGE_LOCATION);
 		add_to_env("ISOPATH", location_full);
 		add_to_env("METHOD", method_iso);
 	} else {
 		int offset = strncmp(location_full, IMAGE_LOCATION_DIR, sizeof(IMAGE_LOCATION_DIR) - 1) == 0 ? sizeof(IMAGE_LOCATION_DIR) - 1 : 0;
 		log_message("assuming %s is a mirror tree", location_full + offset);
 
-		rmdir(IMAGE_LOCATION); /* useful if we loopback mounted it */
 		symlink(location_full + offset, IMAGE_LOCATION);
 		add_to_env("METHOD", method_live);
 	}
 
-#ifdef MANDRAKE_MOVE
-	if (access(IMAGE_LOCATION "/live_tree/etc/fstab", R_OK) && access(IMAGE_LOCATION "/live_tree.clp", R_OK)) {
+	if (access(IMAGE_LOCATION "/" COMPRESSED_LOCATION_REL, R_OK)) {
 		stg1_error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
-				   "(I need the file " IMAGE_LOCATION "/live_tree/etc/fstab" ")\n"
+				   "(I need the subdirectory " COMPRESSED_LOCATION_REL ")\n"
 				   "Here's a short extract of the files in the directory:\n"
 				   "%s", extract_list_directory(IMAGE_LOCATION));
 		ret = RETURN_BACK;
-	}
-#else
-	if (access(IMAGE_LOCATION "/" CLP_LOCATION_REL, R_OK)) {
-		stg1_error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
-				   "(I need the subdirectory " CLP_LOCATION_REL ")\n"
-				   "Here's a short extract of the files in the directory:\n"
-				   "%s", extract_list_directory(IMAGE_LOCATION));
-		ret = RETURN_BACK;
-	} else if (may_load_clp() != RETURN_OK) {
+	} else if (may_load_compressed_image() != RETURN_OK) {
 		stg1_error_message("Could not load program into memory.");
 		ret = RETURN_ERROR;
 	}
@@ -169,10 +160,9 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 	if (ret == RETURN_OK)
 		log_message("found the " DISTRIB_NAME " Installation, good news!");
 
-#endif
 	if (!KEEP_MOUNTED || ret != RETURN_OK) {
 		/* in rescue mode, we don't need the media anymore */
-		umount(IMAGE_LOCATION);
+		umount(LOOP_LOCATION);
 		del_loop(loopdev);
 	}	
 

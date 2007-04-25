@@ -32,6 +32,11 @@
 #define TIOCSCTTY     0x540E
 #endif
 
+
+#define BINARY "/sbin/stage1"
+#define BINARY_STAGE2 "/usr/bin/runinstall2"
+
+
 char * env[] = {
 	"PATH=/usr/bin:/bin:/sbin:/usr/sbin:/mnt/sbin:/mnt/usr/sbin:/mnt/bin:/mnt/usr/bin",
 	"LD_LIBRARY_PATH=/lib:/usr/lib:/mnt/lib:/mnt/usr/lib:/usr/X11R6/lib:/mnt/usr/X11R6/lib"
@@ -347,60 +352,10 @@ void unmount_filesystems(void)
 	
 	for (i = nb = 0; i < numfs; i++)
 		if (fs[i].mounted) {
-#ifdef MANDRAKE_MOVE
-                        if (!strcmp(fs[i].name, "/cdrom") || !strcmp(fs[i].name, "/image_always"))
-                                continue;
-#endif
 			printf("\tumount failed: %s\n", fs[i].name);
 			if (strcmp(fs[i].fs, "ext3") == 0) nb++; /* don't count not-ext3 umount failed */
 		}
 
-#ifdef MANDRAKE_MOVE
-        if (!disallow_eject) {
-                fd = open("/proc/fs/supermount/subfs", O_RDONLY, 0);
-                if (fd > 0) {
-                        char devices[100][100];
-                        int i = 0;
-                        char * ptr1, * ptr2;
-                        size = read(fd, buf, sizeof(buf) - 1);
-                        buf[size] = '\0';
-                        close(fd);
-                        ptr1 = buf;
-                        ptr2 = buf;
-                        while (*ptr1 && *ptr2) {
-                                char * ptrf = ptr1;
-                                while (*ptr2 && *ptr2 != '\n')
-                                        ptr2++;
-                                while (*ptrf && *ptrf != ' ')
-                                        ptrf++;
-                                if (*ptrf)
-                                        *ptrf = '\0';
-                                strcpy(devices[i], ptr1);
-                                i++;
-                                if (*ptr2)
-                                        ptr2++;
-                                ptr1 = ptr2;
-                        }
-                        while (i >= 1) {
-                                i--;
-                                strcat(devices[i], " release force");
-                                fd = open("/proc/fs/supermount/subfs", O_WRONLY, 0);
-                                write(fd, devices[i], strlen(devices[i]));
-                                close(fd);
-                        }
-                }
-                fd = open("/dev/cdrom", O_RDONLY|O_NONBLOCK, 0);
-                if (fd > 0) {
-                        ioctl(fd, CDROM_LOCKDOOR, 0);
-                        close(fd);
-                }
-                fd = open("/dev/cdrom", O_RDONLY|O_NONBLOCK, 0);
-                if (fd > 0) {
-                        ioctl(fd, CDROMEJECT, 0);
-                        close(fd);
-                }
-        }
-#endif
 	
 	if (nb) {
 		printf("failed to umount some filesystems\n");
@@ -437,6 +392,7 @@ int main(int argc, char **argv)
 	pid_t installpid, childpid;
 	int wait_status;
 	int fd;
+	int counter = 0;
 	int abnormal_termination = 0;
 
         if (argc > 1 && argv[1][0] >= '0' && argv[1][0] <= '9') {
@@ -455,20 +411,18 @@ int main(int argc, char **argv)
 
 
 	if (!testing) {
-                mkdir("/proc", 0755);
+		mkdir("/proc", 0755);
 		if (mount("/proc", "/proc", "proc", 0, NULL))
 			fatal_error("Unable to mount proc filesystem");
+		mkdir("/sys", 0755);
+		if (mount("none", "/sys", "sysfs", 0, NULL))
+			fatal_error("Unable to mount sysfs filesystem");
 	}
 	
 
 	/* ignore Control-C and keyboard stop signals */
 	signal(SIGINT, SIG_IGN);
 	signal(SIGTSTP, SIG_IGN);
-
-#ifdef MANDRAKE_MOVE
-        /* disallow Ctrl Alt Del to reboot */
-        reboot(0xfee1dead, 672274793, BMAGIC_SOFT);
-#endif
 
 	if (!testing) {
 		fd = open("/dev/console", O_RDWR, 0);
@@ -506,20 +460,26 @@ int main(int argc, char **argv)
 	*/
 
         do {
+		if (counter == 1) {
+			printf("proceeding, please wait...\n");
+		}
+
                 if (!(installpid = fork())) {
                         /* child */
                         char * child_argv[2];
-                        child_argv[0] = BINARY;
+                        child_argv[0] = counter == 0 ? BINARY : BINARY_STAGE2;
                         child_argv[1] = NULL;
 
                         execve(child_argv[0], child_argv, env);
-                        printf("error in exec of %s :-( [%d]\n", BINARY, errno);
+                        printf("error in exec of %s :-( [%d]\n", child_argv[0], errno);
                         return 0;
                 }
 
                 do {
                         childpid = wait4(-1, &wait_status, 0, NULL);
                 } while (childpid != installpid);
+
+		counter++;
         } while (WIFEXITED(wait_status) && WEXITSTATUS(wait_status) == exit_value_restart);
 
         /* allow Ctrl Alt Del to reboot */
@@ -530,7 +490,12 @@ int main(int argc, char **argv)
 	} else if (WIFEXITED(wait_status) && WEXITSTATUS(wait_status) == exit_value_proceed) {
 		kill(klog_pid, 9);
 		printf("proceeding, please wait...\n");
-		return 0;
+
+		{
+			char * child_argv[2] = { "/sbin/init", NULL };
+			execve(child_argv[0], child_argv, env);
+		}
+		fatal_error("failed to exec /sbin/init");
         } else if (!WIFEXITED(wait_status) || WEXITSTATUS(wait_status) != 0) {
 		printf("exited abnormally :-( ");
 		if (WIFSIGNALED(wait_status))

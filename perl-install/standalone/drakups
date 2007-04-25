@@ -315,7 +315,9 @@ $in = 'interactive'->vnew;
 
 $ugtk2::wm_icon = "drakups";
 
-$in->do_pkgs->ensure_is_installed('nut-server', '/etc/rc.d/init.d/upsd') if !$::testing;
+if (!$::testing) {
+    $in->do_pkgs->ensure_is_installed('nut-server', '/etc/rc.d/init.d/upsd') or $in->exit(1);
+}
 
 if (member('--wizard', @ARGV)) {
     read_nut_config();
@@ -324,7 +326,7 @@ if (member('--wizard', @ARGV)) {
     $in->exit($@ ? 1 : 0);
 }
 
-$w = ugtk2->new(N("DrakUPS"));
+$w = ugtk2->new(N("UPS Management"));
 if (!$::isEmbedded) {
     $::main_window = $w->{real_window};
     $w->{window}->set_size_request(500, 550);

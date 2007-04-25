@@ -3,7 +3,7 @@
 #
 # Guillaume Cottenceau (gc@mandrakesoft.com)
 #
-# Copyright 2001-2005 Mandriva
+# Copyright 2001-2006 Mandriva
 #
 # This software may be freely redistributed under the terms of the GNU
 # public license.
@@ -22,7 +22,6 @@ use interactive;
 use devices;
 use detect_devices;
 use steps;
-use commands;
 use fs;
 use Data::Dumper;
 
@@ -77,7 +76,7 @@ do {
     log::explanations(N("Creating auto install floppy"));
     my $_w = $in->wait_message('', N("Creating auto install floppy"));
     eval {
-	commands::dd("if=$imagefile", "of=$dev", "bs=1440", "count=1024");
+	run_program::run('dd', "if=$imagefile", "of=$dev", "bs=1440", "count=1024");
 	common::sync();
     };
     $again = $@; #- grrr... $@ is localized in code block :-(
@@ -91,7 +90,7 @@ if (-f $imagefile2) {
         log::explanations(N("Creating auto install floppy (drivers disk)"));
         my $_w = $in->wait_message('', N("Creating auto install floppy"));
         eval {
-            commands::dd("if=$imagefile2", "of=$dev", "bs=1440", "count=1024");
+            run_program::run('dd', "if=$imagefile2", "of=$dev", "bs=1440", "count=1024");
             common::sync();
         };
         $again = $@; #- grrr... $@ is localized in code block :-(

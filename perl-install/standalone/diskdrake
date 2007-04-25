@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 # DiskDrake
-# Copyright (C) 1999-2005 Mandriva (pixel@mandrakesoft.com)
+# Copyright (C) 1999-2006 Mandriva (pixel@mandrakesoft.com)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -90,8 +90,7 @@ if ($type eq 'list-hd') {
     partition_table::write($hd);
 } elsif ($type eq 'hd') {
     require diskdrake::interactive;
-    diskdrake::interactive::main($in, $all_hds, 0, '', sub { 
-                                     exec("drakhelp --id diskdrake") unless fork() });
+    diskdrake::interactive::main($in, $all_hds, '');
 } elsif ($type eq 'removable') {
     require diskdrake::removable;
     my ($raw_hd) = $para ?
@@ -100,7 +99,7 @@ if ($type eq 'list-hd') {
 
     if (!$raw_hd->{mntpoint}) {
 	my $mntpoint = detect_devices::suggest_mount_point($raw_hd);
-	$raw_hd->{mntpoint} ||= find { !fs::get::has_mntpoint($_, $all_hds) } map { "/mnt/$mntpoint$_" } '', 2 .. 10;
+	$raw_hd->{mntpoint} ||= find { !fs::get::has_mntpoint($_, $all_hds) } map { "/media/$mntpoint$_" } '', 2 .. 10;
 	$raw_hd->{is_removable} = 1; #- force removable flag
 
 	my $useSupermount = 'magicdev';

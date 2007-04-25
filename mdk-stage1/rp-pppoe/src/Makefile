@@ -20,7 +20,7 @@ include $(top_dir)/Makefile.common
 
 TARGETS = pppoe
 
-BINTARGET = ../pppoe-bin
+BINTARGET = ../../pppoe
 
 
 all: $(TARGETS)

@@ -11,9 +11,9 @@ sub config_window {
     require modules::parameters;
     my @l;
     foreach (modules::parameters::parameters($data->{driver})) {
-	   my ($name, $format, $description) = @$_;
-	   push @l, { label => $name, help => join("\n", $description, if_(c::kernel_version() !~ /^\Q2.6/, "[$format]")),
-                                                val => \$conf{$name}, allow_empty_list => 1 };
+	   my ($name, $description) = @$_;
+	   push @l, { label => $name, help => $description,
+		      val => \$conf{$name}, allow_empty_list => 1 };
     }
     if (!@l) {
         $in->ask_warn(N("Error"), N("This driver has no configuration parameter!"));
@@ -86,7 +86,7 @@ my %category2text = (
 );
 
 sub wait_load_module {
-    my ($in, $category, $text, $module) = @_;
+    my ($in, $category, $text, $_module) = @_;
     my $msg = do {
 	if (my $t = $category2text{$category}) {
 	    sprintf(translate($t), $text);
@@ -96,20 +96,21 @@ sub wait_load_module {
 	    N("Installing driver for %s card %s", $category, $text);
 	}
     };
-    $in->wait_message('', [ $msg, if_($::expert, N("(module %s)", $module)) ]);
+    $in->wait_message('', $msg);
 }
 
 sub load_module__ask_options {
     my ($in, $module_descr, $parameters) = @_;
 
-    my @parameters = map { [ @$_[0, 1, 2] ] } @$parameters;
+    #- deep copying
+    my @parameters = map { [ @$_[0, 1] ] } @$parameters;
 
     if (@parameters) {
 	$in->ask_from('', 
 		      N("You may now provide options to module %s.\nNote that any address should be entered with the prefix 0x like '0x123'", $module_descr), 
-		      [ map { { label => $_->[0] . ($_->[1] ? " ($_->[1])" : ''), help => $_->[2], val => \$_->[3] } } @parameters ],
+		      [ map { { label => $_->[0], help => $_->[1], val => \$_->[2] } } @parameters ],
 		     ) or return;
-	join(' ', map { if_($_->[3], "$_->[0]=$_->[3]") } @parameters);
+	join(' ', map { if_($_->[2], "$_->[0]=$_->[2]") } @parameters);
     } else {
 	my $s = $in->ask_from_entry('',
 N("You may now provide options to module %s.

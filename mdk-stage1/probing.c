@@ -35,7 +35,9 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <dirent.h>
 #include <fcntl.h>
+#include <fnmatch.h>
 #include <sys/socket.h>
 #include <net/if.h>
 #include <sys/ioctl.h>
@@ -49,6 +51,10 @@
 #include "pci-resource/pci-ids.h"
 #ifdef ENABLE_USB
 #include "usb-resource/usb-ids.h"
+#endif
+#ifdef ENABLE_PCMCIA
+#include "sysfs/libsysfs.h"
+#include "pcmcia-resource/pcmcia-ids.h"
 #endif
 
 #include "probing.h"
@@ -121,21 +127,44 @@ char * get_net_intf_description(char * intf_name)
 }
 #endif
 
-struct pcitable_entry detected_devices[50];
+struct pcitable_entry *detected_devices = NULL;
 int detected_devices_len = 0;
+
+static void detected_devices_destroy(void)
+{
+	if (detected_devices)
+		free(detected_devices);
+}
+
+static struct pcitable_entry *detected_device_new(void)
+{
+	static int detected_devices_maxlen = 0;
+	if (detected_devices_len >= detected_devices_maxlen) {
+		detected_devices_maxlen += 32;
+		if (detected_devices == NULL)
+ 			detected_devices = malloc(detected_devices_maxlen * sizeof(*detected_devices));
+		else
+			detected_devices = realloc(detected_devices, detected_devices_maxlen * sizeof(*detected_devices));
+		if (detected_devices == NULL)
+			log_perror("detected_device_new: could not (re)allocate table. Let it crash, sorry");
+	}
+	return &detected_devices[detected_devices_len++];
+}
 
 /* FIXME: factorize with probe_that_type() */
 
-static void add_detected_device(unsigned short vendor, unsigned short device, const char *name, const char *module)
+static void add_detected_device(unsigned short vendor, unsigned short device, unsigned int subvendor, unsigned int subdevice, const char *name, const char *module)
 {
-	struct pcitable_entry *dev = &detected_devices[detected_devices_len++];
+	struct pcitable_entry *dev = detected_device_new();
 	dev->vendor = vendor;
 	dev->device = device;
-	strncpy(dev->module, module, 19);
-	dev->module[19] = '\0';
-	strncpy(dev->description, name, 99);
-	dev->description[99] = '\0';
-	log_message("detected device (%x, %x, %s, %s)", vendor, device, name, module);
+	dev->subvendor = subvendor;
+	dev->subdevice = subdevice;
+	strncpy(dev->module, module, sizeof(dev->module) - 1);
+	dev->module[sizeof(dev->module) - 1] = '\0';
+	strncpy(dev->description, name, sizeof(dev->description) - 1);
+	dev->description[sizeof(dev->description) - 1] = '\0';
+	log_message("detected device (%04x, %04x, %04x, %04x, %s, %s)", vendor, device, subvendor, subdevice, name, module);
 }
 
 static int check_device_full(struct pci_module_map_full * pcidb_full, unsigned int len_full,
@@ -146,7 +175,7 @@ static int check_device_full(struct pci_module_map_full * pcidb_full, unsigned i
 	for (i = 0; i < len_full; i++)
 		if (pcidb_full[i].vendor == vendor && pcidb_full[i].device == device) {
 			if (pcidb_full[i].subvendor == subvendor && pcidb_full[i].subdevice == subdevice) {
-				add_detected_device(pcidb_full[i].vendor, pcidb_full[i].device,
+				add_detected_device(vendor, device, subvendor, subdevice,
 						    pcidb_full[i].name, pcidb_full[i].module);
 				return 1;
 			}
@@ -155,11 +184,13 @@ static int check_device_full(struct pci_module_map_full * pcidb_full, unsigned i
 }
 
 static int check_device(struct pci_module_map * pcidb, unsigned int len,
-			unsigned short vendor, unsigned short device) {
+			unsigned short vendor, unsigned short device,
+			unsigned short subvendor, unsigned short subdevice)
+{
 	int i;
 	for (i = 0; i < len; i++)
 		if (pcidb[i].vendor == vendor && pcidb[i].device == device) {
-			add_detected_device(pcidb[i].vendor, pcidb[i].device,
+			add_detected_device(vendor, device, subvendor, subdevice,
 					    pcidb[i].name, pcidb[i].module);
 			return 1;
 		}
@@ -169,7 +200,7 @@ static int check_device(struct pci_module_map * pcidb, unsigned int len,
 void probing_detect_devices()
 {
 	FILE * f = NULL;
-	char buf[200];
+	char buf[512]; /* XXX the better fix is to readjust on '\n' */
         static int already_detected_devices = 0;
 
 	if (already_detected_devices)
@@ -213,29 +244,34 @@ void probing_detect_devices()
 #ifndef DISABLE_MEDIAS
 		if (check_device_full(medias_pci_ids_full, medias_num_ids_full, vendor, device, subvendor, subdevice))
 			continue;
-		if (check_device(medias_pci_ids, medias_num_ids, vendor, device))
+		if (check_device(medias_pci_ids, medias_num_ids, vendor, device, subvendor, subdevice))
 			continue;
 #endif
 
 #ifndef DISABLE_NETWORK
 		if (check_device_full(network_pci_ids_full, network_num_ids_full, vendor, device, subvendor, subdevice))
 			continue;
-		if (check_device(network_pci_ids, network_num_ids, vendor, device))
+		if (check_device(network_pci_ids, network_num_ids, vendor, device, subvendor, subdevice))
 			continue;
 #endif
 #endif
 
 #ifdef ENABLE_USB
-		if (check_device(usb_pci_ids, usb_num_ids, vendor, device))
+		if (check_device(usb_pci_ids, usb_num_ids, vendor, device, subvendor, subdevice))
 			continue;
 #endif
 
 		/* device can't be found in built-in pcitables, but keep it */
-		add_detected_device(vendor, device, "", "");
+		add_detected_device(vendor, device, subvendor, subdevice, "", "");
 	}
 
 	fclose(f);
 	already_detected_devices = 1;
+}
+
+void probing_destroy(void)
+{
+	detected_devices_destroy();
 }
 
 #ifndef DISABLE_MEDIAS
@@ -266,16 +302,15 @@ static const char * get_alternate_module(const char * name)
 }
 #endif
 
-void discovered_device(enum driver_type type,
-		       unsigned short vendor, unsigned short device, unsigned short subvendor, unsigned short subdevice,
-		       const char * description, const char * driver)
+void discovered_device(enum driver_type type, const char * description, const char * driver)
 {
+
+
 	enum insmod_return failed = INSMOD_FAILED;
-	log_message("PCI: device %04x %04x %04x %04x is \"%s\", driver is %s", vendor, device, subvendor, subdevice, description, driver);
 #ifndef DISABLE_MEDIAS
 	if (type == SCSI_ADAPTERS) {
 		const char * alternate = NULL;
-		wait_message("Loading driver for SCSI adapter:\n \n%s", description);
+		wait_message("Loading driver for media adapter:\n \n%s", description);
 		failed = my_insmod(driver, SCSI_ADAPTERS, NULL, 1);
 		alternate = get_alternate_module(driver);
 		if (!IS_NOAUTO && alternate) {
@@ -440,7 +475,8 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 			continue;
 
 		found_pci_device:
-			discovered_device(type_, vendor, device, subvendor, subdevice, name, module);
+                        log_message("PCI: device %04x %04x %04x %04x is \"%s\", driver is %s", vendor, device, subvendor, subdevice, name, module);
+			discovered_device(type_, name, module);
 		}
 	end_pci_probe:;
 		if (f)
@@ -502,22 +538,102 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 			for (i = 0; i < len; i++) {
 				if (usbdb[i].vendor == vendor && usbdb[i].id == id) {
 					log_message("USB: device %04x %04x is \"%s\" (%s)", vendor, id, usbdb[i].name, usbdb[i].module);
-#ifndef DISABLE_NETWORK
-					if (type == NETWORK_DEVICES) {
-						stg1_info_message("About to load driver for usb network device:\n \n%s", usbdb[i].name);
-						prepare_intf_descr(usbdb[i].name);
-						warning_insmod_failed(my_insmod(usbdb[i].module, NETWORK_DEVICES, NULL, 1));
-						if (intf_descr_for_discover) /* for modules providing more than one net intf */
-							net_discovered_interface(NULL);
-					}
-#endif
-
+					discovered_device(type, usbdb[i].name, usbdb[i].module);
 				}
 			}
 		}
 	end_usb_probe:;
 		if (f)
                         fclose(f);
+	}
+#endif
+
+#ifdef ENABLE_PCMCIA
+	/* ---- PCMCIA probe ---------------------------------------------- */
+	if ((bus == BUS_PCMCIA || bus == BUS_ANY) && !(IS_NOAUTO)) {
+		struct pcmcia_alias * pcmciadb = NULL;
+		unsigned int len = 0;
+		char *base = "/sys/bus/pcmcia/devices";
+		DIR *dir;
+		struct dirent *dent;
+
+		dir = opendir(base);
+		if (dir == NULL)
+			goto end_pcmcia_probe;
+
+		switch (type) {
+#ifndef DISABLE_MEDIAS
+		case SCSI_ADAPTERS:
+			pcmciadb = medias_pcmcia_ids;
+			len      = medias_pcmcia_num_ids;
+			break;
+#endif
+#ifndef DISABLE_NETWORK
+		case NETWORK_DEVICES:
+			pcmciadb = network_pcmcia_ids;
+			len      = network_pcmcia_num_ids;
+			break;
+#endif
+		default:
+			goto end_pcmcia_probe;
+                }
+
+                for (dent = readdir(dir); dent != NULL; dent = readdir(dir)) {
+			struct sysfs_attribute *modalias_attr;
+			char keyfile[256];
+			int i, id;
+
+			if (dent->d_name[0] == '.')
+				continue;
+
+			log_message("PCMCIA: device found %s", dent->d_name);
+
+			snprintf(keyfile, sizeof(keyfile)-1, "%s/%s/modalias", base, dent->d_name);
+			modalias_attr = sysfs_open_attribute(keyfile);
+			if (!modalias_attr)
+				continue;
+			if (sysfs_read_attribute(modalias_attr) != 0 || !modalias_attr->value) {
+				sysfs_close_attribute(modalias_attr);
+				continue;
+			}
+
+			log_message("PCMCIA: device found %s", modalias_attr->value);
+
+			for (i = 0; i < len; i++) {
+				if (!fnmatch(pcmciadb[i].modalias, modalias_attr->value, 0)) {
+					char product[256];
+
+					log_message("PCMCIA: device found %s (%s)", pcmciadb[i].modalias, pcmciadb[i].module);
+					strcpy(product, "");
+					for (id = 1; id <= 4; id++) {
+						struct sysfs_attribute *product_attr;
+						snprintf(keyfile, sizeof(keyfile)-1, "%s/%s/prod_id%d", base, dent->d_name, id);
+						product_attr = sysfs_open_attribute(keyfile);
+						if (!product_attr)
+							continue;
+						if (sysfs_read_attribute(product_attr) || !product_attr->value) {
+							sysfs_close_attribute(product_attr);
+							continue;
+						}
+						snprintf(product + strlen(product), sizeof(product)-strlen(product)-1, "%s%s", product[0] ? " " : "", product_attr->value);
+						if (product[strlen(product)-1] == '\n')
+							product[strlen(product)-1] = '\0';
+						sysfs_close_attribute(product_attr);
+					}
+
+					if (!product[0])
+						strcpy(product, "PCMCIA device");
+
+					log_message("PCMCIA: device found %s (%s)", product, pcmciadb[i].module);
+					discovered_device(type, product, pcmciadb[i].module);
+				}
+			}
+
+			sysfs_close_attribute(modalias_attr);
+		}
+	end_pcmcia_probe:;
+		if (dir)
+			closedir(dir);
 	}
 #endif
 
@@ -549,8 +665,8 @@ static void find_media(enum media_bus bus)
 	if (medias)
 		free(medias); /* that does not free the strings, by the way */
 
-	if (bus == BUS_SCSI || bus == BUS_USB || bus == BUS_ANY) {
-                log_message("looking for SCSI adapters");
+	if (bus == BUS_SCSI || bus == BUS_USB || bus == BUS_PCMCIA || bus == BUS_ANY) {
+                log_message("looking for media adapters");
                 probe_that_type(SCSI_ADAPTERS, bus);
         }
 	/* ----------------------------------------------- */
@@ -626,7 +742,7 @@ static void find_media(enum media_bus bus)
 
  find_media_after_ide:
 	/* ----------------------------------------------- */
-	if (bus != BUS_SCSI && bus != BUS_USB && bus != BUS_ANY)
+	if (bus != BUS_SCSI && bus != BUS_USB && bus != BUS_PCMCIA && bus != BUS_ANY)
 		goto find_media_after_scsi;
 	log_message("looking for scsi media");
 

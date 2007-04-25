@@ -20,23 +20,31 @@ use do_pkgs;
 #- ask_from_ takes global options ($common):
 #-  title                => window title
 #-  messages             => message displayed in the upper part of the window
-#-  advanced_messages    => message displayed when "Advanced" is pressed
 #-  ok                   => force the name of the "Ok"/"Next" button
 #-  cancel               => force the name of the "Cancel"/"Previous" button
-#-  advanced_label       => force the name of the "Advanced" button
-#-  advanced_label_close => force the name of the "Basic" button
-#-  advanced_state       => if set to 1, force the "Advanced" part of the dialog to be opened initially
 #-  focus_cancel         => force focus on the "Cancel" button
-#-  focus_first          => force focus on the first entry
-#-  callbacks            => functions called when something happen: complete canceled advanced changed focus_out ok_disabled
+#-  focus_first          => (deprecated) force focus on the first entry
+#-  ok_disabled          => function returning wether {ok} should be disabled (grayed)
+#-  validate             => function called when {ok} is pressed. If it returns false, the first entry is focused, otherwise it quits
+#-  advanced             => (deprecated) function called when the "advanced" expander is toggled
+#-  advanced_messages    => (deprecated) message displayed when "Advanced" is pressed
+#-  advanced_label       => (deprecated) force the name of the "Advanced" button
+#-  advanced_label_close => (deprecated) force the name of the "Basic" button
+#-  advanced_state       => (deprecated) if set to 1, force the "Advanced" part of the dialog to be opened initially
+#-  callbacks            => (deprecated) functions called when something happen: complete advanced ok_disabled
 
 #- ask_from_ takes a list of entries with fields:
 #-  val      => reference to the value
 #-  label    => description
+#-  title    => a boolean: whether the label should be displayed as a title (see GNOME's HIG)
 #-  icon     => icon to put before the description
 #-  help     => tooltip
-#-  advanced => wether it is shown in by default or only in advanced mode
+#-  advanced => (deprecated) wether it is shown in by default or only in advanced mode
+#-  focus_out => function called when the entry is focused out
+#-  changed  => function called when the entry is modified
+#-  validate => function called when "Ok" is pressed. If it returns false, this entry is focused, otherwise it quits
 #-  disabled => function returning wether it should be disabled (grayed)
+#-  focus    => function returning wether it should be focused
 #-  gtk      => gtk preferences
 #-  type     => 
 #-     button => (with clicked or clicked_may_quit)
@@ -44,7 +52,7 @@ use do_pkgs;
 #-               (val need not be a reference) (if clicked_may_quit return true, it's as if "Ok" was pressed)
 #-     label => (val need not be a reference) (type defaults to label if val is not a reference) 
 #-     bool (with "text" or "image" (which overrides text) giving an image filename)
-#-     range (with min, max)
+#-     range (with min, max, SpinButton)
 #-     combo (with list, not_edit, format)
 #-     list (with list, icon2f (aka icon), separator (aka tree), format (aka pre_format function),
 #-           help can be a hash or a function,
@@ -53,6 +61,7 @@ use do_pkgs;
 #-           allow_empty_list disables the special cases for 0 and 1 element lists
 #-           image2f is a subroutine which takes a value of the list as parameter, and returns image_file_name
 #-     entry (the default) (with hidden)
+#-     expander (with text, expanded, message, children(a list of sub entries))
 #
 #- heritate from this class and you'll get all made interactivity for same steps.
 #- for this you need to provide
@@ -109,15 +118,69 @@ sub vnew {
 	}
     }
 
-    require 'log.pm'; #- "require log" causes some pb, perl thinking that "log" is the log() function
-    undef *log::l;
-    *log::l = sub {}; # otherwise, it will bother us :(
-    require interactive::newt;
-    interactive::newt->new;
+    require interactive::curses;
+    interactive::curses->new;
 }
 
 sub ok { N_("Ok") }
 sub cancel { N_("Cancel") }
+
+sub markup_parse {
+    my ($s) = @_;
+    my @l;
+    my @attrs;
+
+    while ($s) {
+	if ($s =~ s!^<(\w+)(\s+[^>]*?)?>!!s) {
+	    push @attrs, [ $1, $2 ];
+	} elsif ($s =~ s!^</(\w+)>!!) {
+	    my $previous = pop @attrs;
+	    $previous->[0] eq $1 or return;
+	} elsif ($s =~ s!^(&(amp|lt|gt);)!!) {
+	    push @l, [ $1, @attrs ];
+	} elsif ($s =~ s!^([^<>&]+)!!s) {
+	    push @l, [ $1, @attrs ];
+	} else {
+	    return;
+	}
+    }
+    markup_simplify(\@l);
+    \@l;
+}
+
+sub markup_simplify {
+    my ($l) = @_;
+    foreach (@$l) {
+	my ($s, @attrs) = @$_;
+	my %attrs = map {
+	    my ($tag, $attrs) = @$_;
+	    my $long = { b => { weight => "bold" },
+			 i => { style => "italic" },
+			 big => { size => 'larger' },
+		      }->{$tag};   
+	    $long ? %$long : map { /^(.*?)=['"]?(.*?)['"]?$/ } split(' ', $attrs);
+	} @attrs;
+
+	$s = +{ '&amp;' => '&', '&lt;' => '<', '&gt;' => '>' }->{$s} || $s;
+
+	@$_ = ($s, if_(%attrs, \%attrs));
+    }
+}
+
+sub markup_remove {
+    my ($s) = @_;
+    if (my $l = markup_parse($s)) {
+	join('', map { $_->[0] } @$l);
+    } else {
+	$s;
+    }
+}
+
+#- drop markup as fallback
+sub adapt_markup {
+    my ($_o, $s) = @_;
+    markup_remove($s);
+}
 
 sub enter_console {}
 sub leave_console {}
@@ -165,7 +228,6 @@ sub ask_okcancel_ {
     my ($o, $common, $b_def) = @_;
 
     if ($::isWizard) {
-	$::no_separator = 1;
 	$common->{focus_cancel} = !$b_def;
     	ask_from_no_check($o, $common, []);
     } else {
@@ -292,7 +354,7 @@ sub ask_from_entries {
 
     my @l = map { my $i = ''; { label => $_, val => \$i } } @$l;
 
-    $o->ask_from_({ title => $title, messages => $message, callbacks => \%callback, 
+    $o->ask_from_({ title => $title, messages => $message, %callback, 
 		    focus_first => 1 }, \@l) or return;
     map { ${$_->{val}} } @l;
 }
@@ -319,60 +381,70 @@ sub ask_from__add_modify_remove {
 					     $continue = 1;
 					 } } }
 		     N_("Add"), if_(@{$e->{list}} > 0, N_("Modify"), N_("Remove")));
-	    $o->ask_from_({ title => $title, messages => $message, callbacks => \%callback }, \@l) or return;
+	    $o->ask_from_({ title => $title, messages => $message, %callback }, \@l) or return;
 	    return 1 if !$continue;
 	}
     }
 }
 
 
-#- can get a hash of callback: focus_out changed and complete
+#- can get a hash of callback: validate
 #- moreove if you pass a hash with a field list -> combo
 #- if you pass a hash with a field hidden -> emulate stty -echo
 sub ask_from {
     my ($o, $title, $message, $l, %callback) = @_;
-    ask_from_($o, { title => $title, messages => $message, callbacks => \%callback }, $l);
+    ask_from_($o, { title => $title, messages => $message, %callback }, $l);
 }
 
 
-sub ask_from_normalize {
-    my ($o, $common, $l) = @_;
+sub _normalize_entry {
+    my ($o, $e) = @_;
+
+    if (my $li = $e->{list}) {
+	ref($e->{val}) =~ /SCALAR|REF/ or internal_error($e->{val} ? "field {val} must be a reference (it is $e->{val})" : "field {val} is mandatory");	#-#
+	if ($e->{sort} || @$li > 10 && !exists $e->{sort}) {
+	    my @l2 = map { may_apply($e->{format}, $_) } @$li;
+	    my @places = sort { $l2[$a] cmp $l2[$b] } 0 .. $#l2;
+	    $e->{list} = $li = [ map { $li->[$_] } @places ];
+	}
+	$e->{type} = 'iconlist' if $e->{icon2f};
+	$e->{type} = 'treelist' if $e->{separator} && $e->{type} ne 'combo';
+	add2hash_($e, { not_edit => 1 });
+	$e->{type} ||= 'combo';
+
+	if (!$e->{not_edit}) {
+	    die q(when using "not_edit" you must use strings, not a data structure) if ref(${$e->{val}}) || any { ref $_ } @$li;
+	}
+	if ($e->{type} ne 'combo' || $e->{not_edit}) {
+	    ${$e->{val}} = $li->[0] if !member(may_apply($e->{format}, ${$e->{val}}), map { may_apply($e->{format}, $_) } @$li);
+	}
+    } elsif ($e->{type} eq 'range') {
+	$e->{min} <= $e->{max} or die "bad range min $e->{min} > max $e->{max} (called from " . join(':', caller()) . ")";
+	${$e->{val}} = max($e->{min}, min(${$e->{val}}, $e->{max}));
+    } elsif ($e->{type} eq 'button' || $e->{clicked} || $e->{clicked_may_quit}) {
+	$e->{type} = 'button';
+	$e->{clicked_may_quit} ||= $e->{clicked} ? sub { $e->{clicked}(); 0 } : sub {};	    
+	$e->{val} = \ (my $_v = $e->{val}) if !ref($e->{val});
+    } elsif (!$e->{type} && !$e->{val}) {
+	$e->{type} = 'only_label';
+	$e->{val} = \ (my $_v = $o->adapt_markup(delete $e->{label}));
+    } elsif ($e->{type} eq 'label' || !ref($e->{val})) {
+	$e->{type} = 'label';
+	$e->{val} = \ (my $_v = $e->{val}) if !ref($e->{val});
+    } elsif ($e->{type} eq 'expander') {
+	_normalize_entries($o, $e->{children});
+    } else {
+	$e->{type} ||= 'entry';
+    }
+    $e->{label} = $o->adapt_markup($e->{label}) if $e->{label};
+}
+
+sub _normalize_entries {
+    my ($o, $l) = @_;
 
     ref($l) eq 'ARRAY' or internal_error('ask_from_normalize');
-    foreach my $e (@$l) {
-	if (my $li = $e->{list}) {
-	    ref($e->{val}) =~ /SCALAR|REF/ or internal_error($e->{val} ? "field {val} must be a reference (it is $e->{val})" : "field {val} is mandatory"); #-#
-	    if ($e->{sort} || @$li > 10 && !exists $e->{sort}) {
-		my @l2 = map { may_apply($e->{format}, $_) } @$li;
-		my @places = sort { $l2[$a] cmp $l2[$b] } 0 .. $#l2;
-		$e->{list} = $li = [ map { $li->[$_] } @places ];
-	    }
-	    $e->{type} = 'iconlist' if $e->{icon2f};
-	    $e->{type} = 'treelist' if $e->{separator} && $e->{type} ne 'combo';
-	    add2hash_($e, { not_edit => 1 });
-	    $e->{type} ||= 'combo';
 
-	    if (!$e->{not_edit}) {
-		die q(when using "not_edit" you must use strings, not a data structure) if ref(${$e->{val}}) || any { ref $_ } @$li;
-	    }
-	    if ($e->{type} ne 'combo' || $e->{not_edit}) {
-		${$e->{val}} = $li->[0] if !member(may_apply($e->{format}, ${$e->{val}}), map { may_apply($e->{format}, $_) } @$li);
-	    }
-	} elsif ($e->{type} eq 'range') {
-	    $e->{min} <= $e->{max} or die "bad range min $e->{min} > max $e->{max} (called from " . join(':', caller()) . ")";
-	    ${$e->{val}} = max($e->{min}, min(${$e->{val}}, $e->{max}));
-	} elsif ($e->{type} eq 'button' || $e->{clicked} || $e->{clicked_may_quit}) {
-	    $e->{type} = 'button';
-	    $e->{clicked_may_quit} ||= $e->{clicked} ? sub { $e->{clicked}(); 0 } : sub {};	    
-	    $e->{val} = \ (my $_v = $e->{val}) if !ref($e->{val});
-	} elsif ($e->{type} eq 'label' || !ref($e->{val})) {
-	    $e->{type} = 'label';
-	    $e->{val} = \ (my $_v = $e->{val}) if !ref($e->{val});
-	} else {
-	    $e->{type} ||= 'entry';
-	}
-	$e->{disabled} ||= sub { 0 };
-    }
+    _normalize_entry($o, $_) foreach @$l;
 
     #- do not display empty lists and one element lists
     @$l = grep { 
@@ -388,6 +460,14 @@ sub ask_from_normalize {
 	    1;
 	}
     } @$l;
+}
+
+sub ask_from_normalize {
+    my ($o, $common, $l) = @_;
+
+    _normalize_entries($o, $l);
+
+    $l->[0]{focus} = sub { 1 } if $common->{focus_first};
 
     if (!$common->{title} && $::isStandalone) {
 	($common->{title} = $0) =~ s|.*/||;
@@ -395,9 +475,31 @@ sub ask_from_normalize {
     $common->{interactive_help} ||= $o->{interactive_help};
     $common->{interactive_help} ||= $common->{interactive_help_id} && $o->interactive_help_sub_get_id($common->{interactive_help_id});
     $common->{advanced_label} ||= N("Advanced");
-    $common->{advanced_label_close} ||= N("Basic");
-    $common->{$_} = $common->{$_} ? [ deref($common->{$_}) ] : [] foreach qw(messages advanced_messages);
-    add2hash_($common->{callbacks} ||= {}, { changed => sub {}, focus_out => sub {}, complete => sub { 0 }, canceled => sub { 0 }, advanced => sub {} });
+    $common->{advanced_label_close} and log::l("advanced_label_close is not used anymore");
+    $common->{$_} = $common->{$_} ? [ map { $o->adapt_markup($_) } deref($common->{$_}) ] : [] 
+      foreach qw(messages advanced_messages);
+
+    if ($common->{callbacks}) {
+	$common->{callbacks}{changed} and internal_error(q(global "changed" callback is not handled anymore, use a per-entry changed callback));
+	$common->{callbacks}{focus_out} and internal_error(q(global "focus_out" callback is not handled anymore, use a per-entry focus_out callback));
+	add2hash($common, delete $common->{callbacks});
+    }
+    if (my $complete = delete $common->{complete}) {
+	$common->{validate} = sub { !first($complete->()) };
+    }
+    add2hash_($common, { validate => sub { 1 } });
+}
+
+sub migrate_advanced {
+    my ($common, $l) = @_;
+    my ($l1, $l2) = partition { !$_->{advanced} } @$l;
+    my $advanced_message = join("\n", @{$common->{advanced_messages}});
+    [ @$l1, if_(@$l2, { type => 'expander', 
+			if_($advanced_message, message => $advanced_message),
+			text => $common->{advanced_label},
+			expanded => $common->{advanced_state},
+			children => $l2,
+		    }) ];
 }
 
 sub ask_from_ {
@@ -411,15 +513,15 @@ sub ask_from_no_check {
     my ($o, $common, $l) = @_;
     ask_from_normalize($o, $common, $l);
     $common->{cancel} = '' if !defined wantarray();
-    my ($l1, $l2) = partition { !$_->{advanced} } @$l;
-    $o->ask_fromW($common, $l1, $l2);
+    my $l_ = migrate_advanced($common, $l);
+    $o->ask_fromW($common, $l_);
 }
 sub ask_from_real {
     my ($o, $common, $l) = @_;
-    my ($l1, $l2) = partition { !$_->{advanced} } @$l;
-    my $v = $o->ask_fromW($common, $l1, $l2);
+    my $l_ = migrate_advanced($common, $l);
+    my $v = $o->ask_fromW($common, $l_);
 
-    foreach my $e (@$l1, @$l2) {
+    foreach my $e (@$l) {
 	if ($e->{type} eq 'range') {
 	    ${$e->{val}} = max($e->{min}, min(${$e->{val}}, $e->{max}));
 	}
@@ -471,47 +573,29 @@ sub ask_browse_tree_info_refW { #- default definition, do not use with too many 
 sub wait_message {
     my ($o, $title, $message, $b_temp) = @_;
 
-    my $w = $o->wait_messageW($title, [ N("Please wait"), deref($message) ]);
+    my $w = $o->wait_messageW($title, N("Please wait"), $message);
     push @tempory::objects, $w if $b_temp;
     my $b = before_leaving { $o->wait_message_endW($w) };
 
     #- enable access through set
-    MDK::Common::Func::add_f4before_leaving(sub { $o->wait_message_nextW([ deref($_[1]) ], $w) }, $b, 'set');
+    MDK::Common::Func::add_f4before_leaving(sub { $o->wait_message_nextW($_[1], $w) }, $b, 'set');
     $b;
 }
 
 
 sub wait_message_with_progress_bar {
-    my ($in) = @_;
+    my ($in, $o_title) = @_;
 
-    my ($w, $progress, $last_msg, $displayed);
-    my $on_expose = sub { $displayed = 1; 0 }; #- declared here to workaround perl limitation
+    my $w = $in->wait_message($o_title, '');
+    my $last_msg;
     $w, sub {
 	my ($msg, $current, $total) = @_;
 	if ($msg) {
-	    $last_msg = $msg;
-	    if (!$w) {
-		$progress = Gtk2::ProgressBar->new if $in->isa('interactive::gtk');
-		$w = $in->wait_message('', [ '', if_($progress, $progress) ]);
-		if ($progress) {
-		    #- don't show by default, only if we are given progress information
-		    $progress->hide;
-		    $progress->signal_connect(expose_event => $on_expose);
-		}
-	    } else {
-		#- re-hide if visible
-		$progress->hide if $progress;
-	    }
-	    $w->set($msg);
-	} elsif ($total) {
-	    if ($progress) {
-		$progress->set_fraction($current / $total);
-		$progress->show;
-		$displayed = 0;
-		mygtk2::flush() while !$displayed;
-	    } else {
-		$w->set([ $last_msg, "$current / $total" ]);
-	    }
+	    $w->set($last_msg = $msg);
+	}
+	if ($total) {
+	    $w or internal_error('You must first give some text to display');
+	    $w->set(join("\n", $last_msg, "$current / $total"));
 	}
     };
 }
@@ -544,27 +628,16 @@ sub helper_separator_tree_to_tree {
 }
 
 
-sub interactive_help_has_id {
-    my ($_o, $id) = @_;
-    exists $help::{$id};
-}
-
-sub interactive_help_get_id {
-    my ($_o, @l) = @_;
-    @l = map { 
-	join("\n\n", map { s/\n/ /mg; $_ } split("\n\n", translate($help::{$_}->())));
-    } grep { exists $help::{$_} } @l;
-    join("\n\n\n", @l);
-}
-
 sub interactive_help_sub_get_id {
     my ($o, $id) = @_;
-    $o->interactive_help_has_id($id) && sub { $o->interactive_help_get_id($id) };
+    eval { $o->interactive_help_has_id($id) }
+      && sub { $o->interactive_help_get_id($id) };
 }
 
 sub interactive_help_sub_display_id {
     my ($o, $id) = @_;
-    $o->interactive_help_has_id($id) && sub { $o->ask_warn(N("Help"), $o->interactive_help_get_id($id)) };
+    eval { $o->interactive_help_has_id($id) }
+      && sub { $o->ask_warn(N("Help"), $o->interactive_help_get_id($id)) };
 }
 
 1;

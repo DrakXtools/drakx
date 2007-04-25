@@ -1,0 +1,119 @@
+- really allow having name with "/" in media.cfg
+
+Version 10.4.129 - 4 April 2007, by Pascal "Pixel" Rigaux
+
+- move advertising out of drakx-installer-stage2 into drakx-installer-advertising
+
+Version 10.4.128 - 3 April 2007, by Pascal "Pixel" Rigaux
+
+- don't configure /etc/kde/kdm/kdmrc if it doesn't exist
+  (other kdmrc.rpmnew will be created, many important values will be missing)
+- fix ext3 formatting with label and progress bar (#30032)
+- fix taking screenshot
+- prefering libkdebase4-kmenuedit over libkdebase46-kmenuedit to ensure
+  kdebase-kmenuedit is chosen instead of kdebase4-kmenuedit
+
+Version 10.4.126 - 29 March 2007, by Olivier "blino" Blin
+
+- use pci_domain when matching sysfs device and computing
+  sysfs device path
+
+Version 10.4.124 - 29 March 2007, by Olivier "blino" Blin
+
+- correctly mark "update" media in urpmi.cfg
+- fix multiple detection of PCI network cards with the same driver (#29688)
+- rename o->{build_live_system} as more generic o->{match_all_hardware} name
+- automatically install network drivers when matching all hardware
+
+Version 10.4.122 - 29 March 2007, by Thierry Vignaud
+
+- final banner image
+- fix installing kernel-source-stripped
+- include mmc_block for card readers
+
+Version 10.4.120 - 23 March 2007, by Pascal "Pixel" Rigaux
+
+- allow having name with "/" in media.cfg
+- interactive::curses: 
+  o handle multi-line labels, and wrap too long labels (#29060)
+- do not use bold&big for advanced_messages
+  (fixes authentication choice being big & ugly, #28676)
+
+Version 10.4.119 - 22 March 2007, by Pascal "Pixel" Rigaux
+
+- use concat_symlink to get rid of ../../ in urpmi.cfg on x86_64 for main32 medium
+- don't complain about missing pata drivers
+- do not install nspluginwrapper on ia32 (#29808)
+- use http://api.mandriva.com/mirrors/$type.$version.$arch instead of simply
+  $version.$arch (useful to differentiate CorpoDesktop4)
+- fix ati/nvidia drivers installation on One
+
+Version 10.4.116 - 19 March 2007, by Thierry Vignaud
+
+- do not fallback on english HTML help but on on old translated help
+- handle more drivers (dvb, ethernet, gigabit, ide, pcmcia, sata,
+  sound, tv, usb hosts, wan, webcam, wireless)
+- 2007 RC logo
+- diskdrake: handle mkntfs
+
+Version 10.4.115 - 16 March 2007, by Pascal "Pixel" Rigaux
+
+- use kernel-*latest to select the kernel, 
+  and also kernel-source-stripped-latest when dkms is installed on upgrade
+- add some nice code selecting the various kernel-source-stripped (or
+  kernel-.*-devel) corresponding to the chosen kernels
+- allow having rpmsrate on CD0 overriding rpmsrate on CD1 
+  (bugged introduced in rev 37253)
+- when using 2 media_cfg in auto_inst, 
+  allow specifying which rpmsrate will be used
+- for locales with fallback (eg: br:fr), try main language before
+  english
+
+Version 10.4.114 - 16 March 2007, by Pascal "Pixel" Rigaux
+
+- use grub-gfxmenu command to configure /boot/gfxmenu for grub
+
+Version 10.4.111 - 15 March 2007, by Olivier "blino" Blin
+
+- correctly translate Driver2 to package name (fix ati packages installation on One)
+
+Version 10.4.109 - 15 March 2007, by Thierry Vignaud
+
+- display HTML help if availlable
+- load tifm_sd if needed (#25133)
+
+Version 10.4.107 - 13 March 2007, by Pascal "Pixel" Rigaux
+
+- prefer kde3 packages over kde4 packages
+
+Version 10.4.106 - 12 March 2007, by Pascal "Pixel" Rigaux
+
+- move the lib64 symlink in share/symlinks (to fix drakx-in-chroot),
+  this will leave a harmless dangling symlink in most cases though
+- configure "tifm_7xx1" driven card_reader (#25133)
+- do not bother configure old modutils
+- fix PCI descriptions returned from pci_probe()
+- enhance wrapping in wizards
+
+Version 10.4.103 - 6 March 2007, by Pascal "Pixel" Rigaux
+
+- add icons needed by xorg configuration (#29069)
+
+Version 10.4.98 - 22 February 2007, by Thierry Vignaud
+
+- do not install athcool on ia32, it freeze at least some nforce2 machines
+- fix regexp for kernel-2.6.17.10mdv for autoinstall install & liveCD building
+- include fsck.jfs on x86_64 too (#28821)
+- update kernel/list_modules.pm
+
+Version 10.4.96 - 16 February 2007, by Pascal "Pixel" Rigaux
+
+- handle vga=0x3.. instead of vga=7..
+- prefer free-kde-config (otherwise one-kde-config is chosen)
+- use system-wide raghu.ttf (pablo)
+- fix rights on files
+- fix automatic selection of proprietary video kernel packages (blino)
+- modify custom.conf instead of gdm.conf (blino)
+
+10.4.93
+- really fix command bug

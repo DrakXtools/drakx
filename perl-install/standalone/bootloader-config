@@ -7,6 +7,8 @@ use common;
 use bootloader;
 
 $::isStandalone = 1; #- not using standalone which messes with @ARGV and usage
+c::openlog('bootloader-config' . "[$$]");
+
 $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 
 my %options = (
@@ -35,9 +37,11 @@ usage: bootloader-config --action add-kernel (--image <vmlinuz> | --kernel-versi
 
        bootloader-config --action update-splash
        bootloader-config --action remove-splash
+
+       bootloader-config --action rebuild-initrds
 EOF
 
-my @known_actions = qw(add-kernel remove-kernel update-splash remove-splash detectloader add-entry remove-entry);
+my @known_actions = qw(add-kernel remove-kernel update-splash remove-splash rebuild-initrds detectloader add-entry remove-entry add-resume2);
 $action && member($action, @known_actions) or die "<action> must be one of " . join(' ', @known_actions) . "\n";
 
 if ($image) {
@@ -74,6 +78,7 @@ sub remove_now_broken_boot_symlinks() {
 }
 sub remove_kernel() {
     unlink "/lib/modules/$kernel_version/build";
+    unlink "/lib/modules/$kernel_version/source";
     remove_now_broken_boot_symlinks();
 
     my %proposed_labels;
@@ -124,7 +129,7 @@ sub add_kernel() {
 		root => fs::wild_device::from_part('', $root_part), 
 		initrd_options => $initrd_options,
 		if_($label, label => $label),
-		if_($bootloader->{default_vga}, vga => $bootloader->{default_vga}),
+		(grep_each { member($::a, 'vga', 'lock') } %{$bootloader->{default_options}}),
 	       );
     #- short name
     bootloader::add_kernel($bootloader, $kernel_str, { %opts }, 0, $no_initrd) if !$no_short_name;
@@ -157,24 +162,43 @@ sub add_entry() {
     modify_bootloader();
 }
 
-sub remove_entry() {
+sub _get_entry() {
     listlength(grep { $_ } $label, $image, $chainload) == 1 or die "you must give one of --label, --image and --chainload\n";
 
-    my $e = $label ? bootloader::get_label($label, $bootloader) : 
-                     find { $_->{kernel_or_dev} && $_->{kernel_or_dev} eq ($image || $chainload) } @{$bootloader->{entries}};
+    $label ? bootloader::get_label($label, $bootloader) : 
+             find { $_->{kernel_or_dev} && $_->{kernel_or_dev} eq ($image || $chainload) } @{$bootloader->{entries}};
+}
 
-    if ($e) {
-	@{$bootloader->{entries}} = grep { $_ != $e } @{$bootloader->{entries}};
-    }
+sub remove_entry() {
+    my $e = _get_entry() or return;
 
+    @{$bootloader->{entries}} = grep { $_ != $e } @{$bootloader->{entries}};
     modify_bootloader();
+}
+
+sub add_resume2() {
+    my $e = _get_entry() or return;
+   
+    my ($simple, $dict) = bootloader::unpack_append($e->{append});
+    if (my $resume = find { $_->[0] eq 'resume' } @$dict) {
+	if (!any { $_->[0] eq 'resume2' } @$dict) {
+	    push @$dict, [ resume2 => "swap:$resume->[1]" ];
+	    $e->{append} = bootloader::pack_append($simple, $dict);
+
+	    modify_bootloader();
+	}
+    }
+}
+
+#-###############################################################################
+sub rebuild_initrds() {    
+    bootloader::rebuild_initrds($bootloader);
+    bootloader::action($bootloader, 'when_config_changed') if !$no_launch;
 }
 
 #-###############################################################################
 sub update_splash() {
-    foreach (@{$bootloader->{entries}}) {
-	bootloader::add_boot_splash($_->{initrd}, $_->{vga}) if $_->{initrd};
-    }
+    bootloader::update_splash($bootloader);
     bootloader::action($bootloader, 'when_config_changed') if !$no_launch;
 }
 

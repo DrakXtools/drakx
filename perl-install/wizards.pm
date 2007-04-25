@@ -92,7 +92,7 @@ sub check_rpm {
     my ($in, $rpms) = @_;
     foreach my $rpm (@$rpms) {
         next if $in->do_pkgs->is_installed($rpm);
-        if ($in->ask_okcancel(N("Error"), N("%s is not installed\nClick \"Next\" to install or \"Cancel\" to quit", common::from_utf8($rpm)))) {
+        if ($in->ask_okcancel(N("Error"), N("%s is not installed\nClick \"Next\" to install or \"Cancel\" to quit", $rpm))) {
             $::testing and next;
             if (!$in->do_pkgs->install($rpm)) {
                 local $::Wizard_finished = 1;
@@ -105,7 +105,7 @@ sub check_rpm {
 
 
 # sync me with interactive::ask_from_normalize() if needed:
-my %default_callback = (changed => sub {}, focus_out => sub {}, complete => sub { 0 }, canceled => sub { 0 }, advanced => sub {});
+my %default_callback = (complete => sub { 0 });
 
 
 sub process {
@@ -161,7 +161,7 @@ sub process {
         if (ref $data2 eq 'ARRAY' && @$data2) {
             $a = $in->ask_from_({ title => $o->{name}, 
                                  messages => $name, 
-                                 callbacks => { map { $_ => $page->{$_} || $default_callback{$_} } qw(focus_out complete) },
+                                 (map { $_ => $page->{$_} || $default_callback{$_} } qw(complete)),
                                  if_($page->{interactive_help_id}, interactive_help_id => $page->{interactive_help_id}),
                                }, $data2);
         } else {

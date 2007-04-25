@@ -23,6 +23,7 @@ sub find_free_loop() {
 }
 sub set_loop {
     my ($file, $o_encrypt_key, $o_encryption) = @_;
+    require modules;
     eval { modules::load('loop') };
     my $dev = find_free_loop();
 
@@ -34,12 +35,13 @@ sub set_loop {
 	print $F $o_encrypt_key;
 	close $F or die "losetup failed";
     } else {
-	run_program::run("losetup", $dev, $file) or return;
+	run_program::run("losetup", $dev, $file)
+	    || run_program::run("losetup", "-r", $dev, $file) or return;
     }
     $dev;
 }
 
-sub find_clp_loop {
+sub find_compressed_image {
     my ($name) = @_;
     foreach (0..255) {
 	my $dev = make("loop$_");
@@ -56,6 +58,7 @@ sub get_dynamic_major {
 }
 
 sub init_device_mapper() {
+    require modules;
     eval { modules::load('dm-mod') };
     make('urandom');
     my $control = '/dev/mapper/control';
@@ -152,7 +155,6 @@ sub entry {
 		   "tty"      => [ c::S_IFCHR(),  5, 0  ],
 		   "input/mice"
 		              => [ c::S_IFCHR(), 13, 63 ],
-		   "usbmouse" => [ c::S_IFCHR(), 13, 63 ], #- aka /dev/input/mice
 		   "adbmouse" => [ c::S_IFCHR(), 10, 10 ], #- PPC
 		   "vcsa"     => [ c::S_IFCHR(), 7,  128 ],
 		   "zero"     => [ c::S_IFCHR(), 1,  5  ],		     
@@ -180,41 +182,12 @@ sub make($) {
 
     my ($type, $major, $minor) = entry($_);
 
-    if ($file =~ m|/dev/| && -e '/dev/.devfsd') {
-	#- argh, creating devices is no good with devfs...
-	#- return the file even if the device file does not exist
-	#- the caller will fail or not, better compatibility than raising an exception here
-	return $file;
-    }
-
     #- make a directory for this inode if needed.
     mkdir_p(dirname($file));
 
     syscall_('mknod', $file, $type | 0600, makedev($major, $minor)) or die "mknod failed (dev $_): $!";
 
     $file;
-}
-
-
-#- only isomorphic entries are allowed, 
-#- i.e. entries which can go devfs -> normal and normal -> devfs
-my %to_devfs = (
-    psaux => 'misc/psaux',
-    usbmouse => 'input/mice',
-);
-my %to_devfs_prefix = (
-    ttyS => 'tts/',
-);
-
-sub to_devfs {
-    my ($dev) = @_;
-    if (my $r = $to_devfs{$dev}) { 
-	return $r;
-    } elsif ($dev =~ /(.*?)(\d+)$/) {
-	my $r = $to_devfs_prefix{$1};
-	return "$r$2" if $r;
-    }
-    readlink("/dev/" . $dev);
 }
 
 sub simple_partition_scan {
@@ -229,5 +202,18 @@ sub part_prefix {
     my ($part) = @_;
     (simple_partition_scan($part))[0];
 }
+
+sub symlink_now_and_register {
+    my ($if_struct, $of) = @_;
+    my $if = $if_struct->{device};
+
+    #- add a specific udev script, we can't do it with a udev rule,
+    #- eg, ttySL0 is a symlink
+    output_with_perm("$::prefix/etc/udev/conf.d/$of.conf", 0755, "ln -sf $if /dev/$of\n")
+      if $of !~ /dvd|mouse/;
+
+    symlinkf($if, "$::prefix/dev/$of");
+}
+
 
 1;

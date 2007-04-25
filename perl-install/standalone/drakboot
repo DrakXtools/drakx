@@ -2,7 +2,7 @@
 
 # DrakBoot
 # $Id$
-# Copyright (C) 2001-2005 Mandriva
+# Copyright (C) 2001-2006 Mandriva
 # Yves Duret, Thierry Vignaud
 #
 # This program is free software; you can redistribute it and/or modify
@@ -47,21 +47,20 @@ my $cmdline = cat_('/proc/cmdline');
 my $bootloader = bootloader::read($all_hds);
 if (!$bootloader) {
     $in->ask_okcancel('', N("No bootloader found, creating a new configuration"), 0) or $in->exit;
-    bootloader::suggest($bootloader ||= {}, $all_hds, 
-			vga_fb => first($cmdline =~ /\bvga=(\S+)/), #- don't use $1 here, otherwise perl will hit you because of the other "=~" below
-			quiet => $cmdline =~ /\bsplash=silent\b/,
-		    );
+    any::setupBootloaderBeforeStandalone($in->do_pkgs, $bootloader ||= {}, $all_hds, $fstab);
 }
 
 if (!$in->isa('interactive::gtk') || any { /^--boot$/ } @ARGV) {
     $::isWizard = 1;
-    eval { lilo_choice() };
+    eval { any::setupBootloaderUntilInstalled($in, $bootloader, $all_hds, $fstab, $ENV{SECURE_LEVEL}) };
     die if $@ && $@ !~ /^wizcancel/;
     $in->exit(0);
 }
 
 require ugtk2;
 ugtk2->import(qw(:helpers :wrappers :create));
+require mygtk2;
+mygtk2->import(qw(gtknew));
 
 if (any { /^--splash$/ } @ARGV) {
     splash_choice();
@@ -87,7 +86,7 @@ sub run_boot_window {
         create_factory_menu($w->{rwindow}, @menu_items);
         ######### menus end
     }
-    gtkadd($window, gtkpack_(Gtk2::VBox->new(0,0),
+    gtkadd($window, gtknew('VBox', children => [
                              @$pack_list,
                              0, create_okcancel({
                                                  cancel_clicked => sub { ugtk2->exit(0) },
@@ -95,7 +94,7 @@ sub run_boot_window {
                                                      $apply_sub->();
                                                      ugtk2->exit(0);
                                                  }
-                                                })));
+                                                }) ]));
     $window->show_all;
     gtkflush();
     $w->main;
@@ -110,10 +109,10 @@ sub splash_choice() {
     my $theme = bootsplash::themes_read_sysconfig($cur_res);
     $bootsplash_available or $theme->{enabled} = 0;
 
-    my $boot_pic = gtkcreate_img($bootsplash::default_thumbnail);
+    my $boot_pic = gtknew('Image', file => $bootsplash::default_thumbnail);
     change_image($boot_pic, $theme->{name}, $cur_res);
 
-    my $theme_combo = Gtk2::ComboBox->new_with_strings([ bootsplash::themes_list_for_resolution($cur_res) ], $theme->{name});
+    my $theme_combo = gtknew('ComboBox', text => $theme->{name}, list => [ bootsplash::themes_list_for_resolution($cur_res) ]);
     $theme_combo->entry->signal_connect(changed => sub {
                                             $theme->{name} = $theme_combo->entry->get_text;
                                             change_image($boot_pic, $theme->{name}, $cur_res);
@@ -126,7 +125,7 @@ sub splash_choice() {
 		 verbose => N("Verbose"),
 		 silent => N("Silent"),
 		);
-    my $mode_combo = Gtk2::ComboBox->new_with_strings([ values %modes  ], $modes{$theme->{enabled} ? $cmdline =~ /\bsplash=silent\b/ ? 'silent' : 'verbose' : 'text'});
+    my $mode_combo = gtknew('ComboBox', text => $modes{$theme->{enabled} ? $cmdline =~ /\bsplash=silent\b/ ? 'silent' : 'verbose' : 'text'}, list => [ values %modes  ]);
     $mode_combo->entry->signal_connect(changed => sub {
 					    $theme->{enabled} = $mode_combo->entry->get_text ne $modes{text};
 					    if ($boot_warn && !$bootsplash_available && $theme->{enabled}) {
@@ -141,22 +140,22 @@ sub splash_choice() {
 					    $splash_box->set_sensitive($theme->{enabled});
 					});
 
-    my $_thm_button = Gtk2::Button->new(N("Install themes"));
+    my $_thm_button = gtknew('Button', text => N("Install themes"));
 
     run_boot_window(N("Graphical boot theme selection"),
                        [
-                        1, gtkpack_(gtkset_border_width(Gtk2::VBox->new(0, 5), 5),
-				    0, gtkpack__(Gtk2::HBox->new(0, 5), Gtk2::Label->new(N("Graphical boot mode:")), $mode_combo),
-				    0, gtkpack(gtkset_sensitive($splash_box = Gtk2::HBox->new(0, 0), $theme->{enabled}),
+                        1, gtknew('VBox', spacing => 5, border_width => 5, children => [
+				    0, gtknew('HBox', spacing => 5, children_tight => [ gtknew('Label', text => N("Graphical boot mode:")), $mode_combo ]),
+				    0, $splash_box = gtknew('HBox', sensitive => $theme->{enabled}, children_loose => [
 					       gtkadd(gtkcreate_frame(N("Theme")),
-						      gtkpack__(Gtk2::VBox->new(0, 5),
+						      gtknew('VBox', spacing => 5, children_tight => [
 								$theme_combo,
-								gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Display theme\nunder console")),
+								gtksignal_connect(gtkset_active(gtknew('CheckButton', text => N("Display theme\nunder console")),
 												$theme->{keep_logo}),
-										  clicked => sub { invbool(\$theme->{keep_logo}) }))),
-					       Gtk2::VSeparator->new,
-					       gtkpack__(Gtk2::VBox->new(0, 5), $boot_pic)),
-				    0, gtksignal_connect(Gtk2::Button->new(N("Create new theme")), clicked => sub { exec '/usr/sbin/draksplash' })),
+										  clicked => sub { invbool(\$theme->{keep_logo}) }) ])),
+					       gtknew('VSeparator'),
+					       gtknew('VBox', spacing => 5, children_tight => [ $boot_pic ]) ]),
+				    0, gtknew('Button', text => N("Create new theme"), clicked => sub { exec '/usr/sbin/draksplash' }) ]),
                        ],
                        sub {
                            bootsplash::set_logo_console($theme->{keep_logo});
@@ -184,12 +183,12 @@ sub autologin_choice() {
         $user = "root";
         push @users, $user;
     }
-    my $user_combo = Gtk2::ComboBox->new_with_strings(\@users, $user);
+    my $user_combo = gtknew('ComboBox', text => $user, list => \@users);
     my $desktop_combo = Gtk2::ComboBox->new_with_strings(\@sessions, if_(member($auto_mode->{desktop}, @sessions), $auto_mode->{desktop}));
 
-    my $auto_box = create_packtable({ col_spacings => 5, row_spacings => 5, homogenous => 1 },
-                                    [ Gtk2::Label->new(N("Default user")), $user_combo ],
-                                    [ Gtk2::Label->new(N("Default desktop")), $desktop_combo ]);
+    my $auto_box = gtknew('Table', col_spacings => 5, row_spacings => 5, homogeneous => 1, children => [
+                                    [ gtknew('Label_Left', text => N("Default user")), $user_combo ],
+                                    [ gtknew('Label_Left', text => N("Default desktop")), $desktop_combo ] ]);
     $auto_box->set_sensitive($auto_mode->{autologin} ? 1 : 0);
 
     my @auto_buttons = gtkradio((N("No, I do not want autologin")) x 2,
@@ -202,38 +201,27 @@ sub autologin_choice() {
     my $x_box;
     run_boot_window(N("System mode"),
                     [
-                     1, gtkpack__(Gtk2::VBox->new(0, 5),
-                                  gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Launch the graphical environment when your system starts")),
+                     1, gtknew('VBox', spacing => 5, children_tight => [
+                                  gtksignal_connect(gtkset_active(gtknew('CheckButton', text => N("Launch the graphical environment when your system starts")),
                                                                   $x_mode),
                                                     clicked => sub {
                                                         $x_box->set_sensitive(!$x_mode);
                                                         $x_mode = !$x_mode;
                                                     }),
-                                  gtkpack__(gtkset_sensitive($x_box = Gtk2::VBox->new(0, 0), $x_mode),
-                                            gtkpack__(Gtk2::VBox->new(0, 0), @auto_buttons),
+                                  $x_box = gtknew('VBox', sensitive => $x_mode, children_tight => [
+                                            gtknew('VBox', children_tight => [ @auto_buttons ]),
                                             $auto_box
-                                           ))
+                                           ]) ])
                     ],
                     sub {
                         Xconfig::various::runlevel($x_mode ? 5 : 3);
                         $::testing and return;
                         if ($auto_buttons[1]->get_active) {
-                            any::set_autologin($user_combo->entry->get_text, $desktop_combo->entry->get_text);
-                          } else {
-                              any::set_autologin();
-                          }
+                            any::set_autologin($in->do_pkgs, $user_combo->entry->get_text, $desktop_combo->entry->get_text);
+			} else {
+                            any::set_autologin($in->do_pkgs);
+			}
                     });
-}
-
-sub lilo_choice() {
-    do {
-        my $before = fs::fstab_to_string($all_hds);
-        any::setupBootloader($in, $bootloader, $all_hds, $fstab, $ENV{SECURE_LEVEL}) or $in->exit;
-        if ($before ne fs::fstab_to_string($all_hds)) {
-            #- for /tmp using tmpfs when "clean /tmp" is chosen
-            fs::write_fstab($all_hds);
-        }
-    } while !any::installBootloader($in, $bootloader, $all_hds);
 }
 
 
@@ -245,7 +233,7 @@ sub change_image {
     my ($boot_pic, $theme, $res) = @_;
     my $img_file = bootsplash::theme_get_image_for_resolution($theme, $res);
     -f $img_file or return;
-    my $boot_pixbuf = gtkcreate_pixbuf($img_file);
+    my $boot_pixbuf = gtknew('Pixbuf', file => $img_file);
     $boot_pixbuf = $boot_pixbuf->scale_simple(300, 200, 'nearest');
     $boot_pic->set_from_pixbuf($boot_pixbuf);
 }

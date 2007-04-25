@@ -1,0 +1,30 @@
+gtk-button-images=0
+
+style "white-on-blue"
+{
+  base[NORMAL] = { 0.28, 0.38, 0.66 }
+  bg[NORMAL] = "#004594"
+    
+  text[NORMAL] = "#FFFFFF"
+  fg[NORMAL] = "#FFFFFF"
+}
+
+style "step-categories"
+{
+  fg[NORMAL] = "#CADEFA"
+}
+style "banner"
+{
+  fg[NORMAL] = "#21449C"
+}
+
+style "background"
+{
+  bg[NORMAL] = "#004594"
+}
+
+widget "*Steps*" style "white-on-blue"
+widget "*Step-categories*" style "step-categories"
+widget "*logo*" style "white-on-blue"
+widget "*background*" style "background"
+widget "*Banner*" style "banner"

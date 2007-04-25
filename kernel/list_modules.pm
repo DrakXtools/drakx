@@ -3,11 +3,11 @@ package list_modules; # $Id$
 use MDK::Common;
 
 our @ISA = qw(Exporter);
-our @EXPORT = qw(load_dependencies dependencies_closure category2modules module2category sub_categories kernel_is_26 module_extension);
+our @EXPORT = qw(load_dependencies dependencies_closure category2modules module2category sub_categories);
 
 # the categories have 2 purposes
 # - choosing modules to include on stage1's (cf update_kernel and mdk-stage1/pci-resource/update-pci-ids.pl)
-# - performing a load_category or probe_category (modules.pm and many files in perl-install)
+# - performing a load_category or probe_category (detect_devices.pm and many files in perl-install)
 
 our %l = (
   ################################################################################
@@ -20,23 +20,28 @@ our %l = (
       if_(arch() !~ /alpha|sparc/,
         qw(3c501 3c503 3c505 3c507 3c509 3c515 3c990 3c990fx),
         qw(82596 ac3200 acenic aironet4500_card amd8111e at1700 atp),
-        qw(b44 bcm4400 cassini com20020-pci cs89x0 de2104x de600 de620),
-        qw(defxx), # most unused
-        qw(depca dgrs dmfe e100 e2100 eepro eepro100 eexpress epic100 eth16i),
-        qw(ewrk3  fealnx hamachi hp hp-plus hp100),
+        qw(bcm4400 cassini cs89x0 de600 de620),
+        qw(depca dmfe e2100 eepro eexpress eth16i),
+        qw(ewrk3 hp hp-plus hp100),
         qw(iph5526), #- fibre channel
-        qw(lance natsemi ne ne2k-pci ni5010 ni52 ni65 nvnet),
-        qw(pcnet32 plip prism2_plx rcpci rhineget),
-        qw(sb1000 sis900 skfp smc-ultra smc9194 starfire),
-        qw(tc35815 tlan tulip typhoon uli526x via-rhine),
-        qw(wd winbond-840 forcedeth),
+        qw(lance ne ni5010 ni52 ni65 nvnet),
+        qw(prism2_plx rcpci rhineget),
+        qw(sb1000 sc92031 smc-ultra smc9194),
+        qw(tc35815 tlan uli526x),
+      ),
+      if_(arch() !~ /alpha/,
+        qw(b44 com20020-pci de2104x),
+        qw(defxx), # most unused
+        qw(dgrs e100 eepro100 epic100 fealnx hamachi natsemi),
+        qw(ne2k-pci pcnet32 plip sis900 skfp starfire tulip),
+        qw(typhoon via-rhine winbond-840 forcedeth),
         qw(sungem sunhme), # drivers for ultrasparc, but compiled in ix86 kernels...
       ),
       qw(3c59x 8139too 8139cp sundance), #rtl8139
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
-      qw(bnx2 cxgb dl2k e1000 ixgb myri_sbus ns83820 r8169 s2io sis190 sk98lin skge sky2 spidernet tg3 via-velocity yellowfin),
+      qw(atl1 bnx2 cxgb cxgb3 dl2k e1000 ixgb myri_sbus netxen_nic ns83820 qla3xxx r8169 s2io sis190 sk98lin skge sky2 spidernet tg3 via-velocity yellowfin),
       qw(bcm5820 bcm5700), #- encrypted
     ],
 
@@ -52,19 +57,22 @@ our %l = (
    #- protocol reported are not accurate) so we match network adapters against
    #- known drivers :-(
     usb => [ 
-      qw(catc CDCEther kaweth pegasus rtl8150 usbnet),
+      qw(catc cdc_ether kaweth pegasus rtl8150 usbnet),
     ],
     wireless => [
-      qw(acx100_pci adm8211 airo airo_cs aironet4500_cs aironet_cs),
-      qw(at76c503-i3861 at76c503-i3863 at76c503-rfmd at76c503-rfmd-acc at76c505-rfmd at76c505-rfmd2958 at76c505a-rfmd2958),
-      qw(ath_pci atmel_cs atmel_pci dyc_ar5),
-      qw(hostap_pci hostap_plx ipw2100 ipw2200 ipw3945 madwifi_pci netwave_cs orinoco orinoco_cs orinoco_nortel orinoco_pci orinoco_plx orinoco_tmd),
-      qw(prism2_cs prism2_pci prism2_usb prism54 r8180 ray_cs rt2400 rt2500 rt2570 usbvnet_rfmd vt_ar5k wavelan_cs wvlan_cs zd1201),
+      qw(acx-pci acx-usb adm8211 airo airo_cs aironet4500_cs aironet_cs arlan),
+      qw(at76_usb ath_pci atmel_cs atmel_pci bcm43xx com20020_cs dyc_ar5),
+      qw(hostap_cs hostap_pci hostap_plx ipw2100 ipw2200 ipw3945 madwifi_pci netwave_cs orinoco orinoco_cs orinoco_nortel orinoco_pci orinoco_plx orinoco_tmd),
+      qw(ndiswrapper prism2_cs prism2_pci prism2_usb prism54 r8180 ray_cs rt2400 rt2500 rt2570 rt61 rt73 rtusb),
+      qw(spectrum_cs usbvnet_rfmd vt_ar5k wavelan_cs wl3501_cs wvlan_cs zd1201 zd1211rw),
       if_(arch() =~ /ppc/, qw(airport)),
     ],
     isdn => [
       qw(avmfritz c4 cdc-acm b1pci divas hfc4s8s_l1 hfc_usb hfc4s8s_l1 hisax hisax_st5481 hisax_fcpcipnp hysdn sedlfax t1pci tpam w6692pci),
       qw(fcpci fcdsl fcdsl fcdsl2 fcdslsl fcdslslusb fcdslusb fcdslusba fcusb fcusb2 fxusb fxusb_CZ)
+    ],
+    cellular => [
+      qw(nozomi option),
     ],
     modem => [
       qw(ltmodem mwave sm56),
@@ -73,7 +81,7 @@ our %l = (
       qw(slamr slusb snd-ali5451 snd-atiixp-modem snd-intel8x0m snd-via82xx-modem),
     ],
     tokenring => [ qw(3c359 abyss ibmtr lanstreamer olympic proteon skisa smctr tms380tr tmspci) ],
-    wan => [ qw(c101 cosa cyclomx cycx_drv dlci farsync hdlc hostess_sv11 n2 pc300 pci200syn sbni sdla sdladrv sealevel syncppp wanxl z85230) ],
+    wan => [ qw(c101 cosa cyclomx cycx_drv dlci dscc4 farsync hdlc hostess_sv11 lmc n2 pc300 pci200syn sbni sdla sdladrv sealevel syncppp wanxl z85230) ],
     usb_dsl => [ qw(cxacru eagle-usb speedtch ueagle-atm usbatm xusbatm) ],
   },
 
@@ -82,8 +90,8 @@ our %l = (
   {
     # ide drivers compiled as modules:
     ide => [
-        qw(aec62xx cs5520 cs5530 cs5535 delkin_cb ),
-        qw(rz1000 sc1200 slc90e66 triflex trm290 ide-generic) ],
+        qw(aec62xx cs5520 cs5530 cs5535 delkin_cb it8213),
+        qw(rz1000 sc1200 slc90e66 tc86c001 triflex trm290 ide-generic) ],
     # ide drivers compiled in core kernel:
     all_ide => [
         qw(ali14xx amd74xx dtc2278 ht6560b qd65xx umc8672 alim15x3 atiixp cmd64x cy82c693),
@@ -98,42 +106,44 @@ our %l = (
         qw(AM53C974 BusLogic NCR53c406a a100u2w advansys aha152x aha1542 aha1740),
         qw(atp870u dc395x dc395x_trm dmx3191d dtc g_NCR5380 in2000 initio pas16 pci2220i psi240i fdomain),
         qw(qla1280 qla2x00 qla2xxx qlogicfas qlogicfc),
-        qw(seagate wd7000 sim710 sym53c416 t128 tmscsim u14-34f ultrastor),
+        qw(seagate wd7000 shasta sim710 stex sym53c416 t128 tmscsim u14-34f ultrastor),
         qw(eata eata_pio eata_dma nsp32),
       ),
       qw(aic7xxx aic7xxx_old aic79xx pci2000 qlogicfas408 sym53c8xx lpfc lpfcdd), # ncr53c8xx
     ],
     sata => [
       # note that ata_piix manage RAID devices on ICH6R
-      qw(ahci aic94xx ata_adma ata_piix pata_pdc2027x pdc_adma sata_mv sata_nv sata_promise sata_qstor sata_sil sata_sil24 sata_sis sata_svw sata_sx4 sata_uli sata_via sata_vsc sx8),
-      # new drivers :old ide drivers ported over libata:
-        qw(pata_amd pata_mpiix pata_oldpiix pata_opti pata_pdc2027x pata_sil680 pata_triflex pata_via),
+      qw(ahci aic94xx ata_adma ata_piix pata_pdc2027x pdc_adma sata_inic162x sata_mv sata_nv sata_promise sata_qstor sata_sil sata_sil24 sata_sis sata_svw sata_sx4 sata_uli sata_via sata_vsc sx8),
+      # new drivers: old ide drivers ported over libata:
+      qw(pata_ali pata_amd pata_artop pata_atiixp pata_cmd64x pata_cmd640 pata_cs5520 pata_cs5530 pata_cs5535 pata_cypress),
+      qw(pata_efar pata_hpt366 pata_hpt37x pata_hpt3x2n pata_hpt3x3 pata_isapnp pata_it821x pata_it8172 pata_it8213 pata_jmicron),
+      qw(pata_legacy pata_marvell pata_mpiix pata_netcell pata_ns87410 pata_oldpiix pata_opti pata_optidma),
+      qw(pata_pdc2027x pata_pdc202xx_old pata_platform pata_qdi pata_radisys pata_rz1000),
+      qw(pata_sc1200 pata_serverworks pata_sil680 pata_sis pata_sl82c105 pata_triflex pata_via pata_winbond),
     ],
     hardware_raid => [
       if_(arch() =~ /^sparc/, qw(pluto)),
       if_(arch() !~ /alpha/ && arch() !~ /sparc/,
         # 3w-xxxx drives ATA-RAID, 3w-9xxx and arcmsr drive SATA-RAID
-        qw(a320raid),
-        qw(3w-9xxx 3w-xxxx aacraid arcmsr cciss cpqfc cpqarray DAC960 dpt_i2o gdth i2o_block ipr it821x it8212),
-        qw(iteraid megaraid megaraid_mbox megaraid_sas mptfc mptsas mptscsih qla2100 qla2200 qla2300 qla2322 qla4xxx qla6312 qla6322 pdc-ultra),
+        qw(a320raid megaide),
+        qw(3w-9xxx 3w-xxxx aacraid arcmsr cciss cpqfc cpqarray DAC960 dpt_i2o gdth hptiop i2o_block ipr it821x it8212),
+        qw(iteraid megaraid megaraid_mbox megaraid_sas mptfc mptsas mptspi mptscsih qla2100 qla2200 qla2300 qla2322 qla4xxx qla6312 qla6322 pdc-ultra),
         qw(ips ppa imm),
-       if_(c::kernel_version =~ /^\Q2.4/,
-	qw(ataraid hptraid silraid pdcraid)
-       ),
       ),
     ],
-    pcmcia => [ qw(aha152x_cs fdomain_cs nsp_cs qlogic_cs ide-cs) ], #ide_cs
+    pcmcia => [ qw(aha152x_cs fdomain_cs nsp_cs qlogic_cs ide-cs pata_pcmcia sym53c500_cs) ],
     raw => [ qw(sd_mod) ],
     usb => [ qw(usb-storage) ],
     firewire => [ qw(sbp2) ],
     cdrom => [ qw(ide-cd sr_mod) ],
+    card_reader => [ qw(sdhci tifm_sd tifm_7xx1) ],
   },
 
   ################################################################################
 
   bus => 
   {
-    usb => [ qw(usb-uhci usb-ohci ehci-hcd uhci-hcd ohci-hcd) ],
+    usb => [ qw(isp116x-hcd ehci-hcd ohci-hcd uhci-hcd usb-uhci usb-ohci) ],
     bluetooth => [ qw(bcm203x bfusb bpa10x hci_usb) ],
     firewire => [ qw(ohci1394) ],
     i2c => [
@@ -154,7 +164,7 @@ our %l = (
   {
     network => [ qw(af_packet nfs) ],
     cdrom => [ qw(isofs) ],
-    loopback => [ qw(isofs loop cryptoloop gzloop), if_($ENV{MOVE}, qw(supermount)) ],
+    loopback => [ qw(isofs loop squashfs), if_($ENV{MOVE}, qw(supermount)) ],
     local => [
       if_(arch() =~ /^i.86|x86_64/, qw(vfat ntfs)),
       if_(arch() =~ /^ppc/, qw(hfs)),
@@ -168,16 +178,16 @@ our %l = (
   multimedia => 
   {
     sound => [
-      if_(arch() =~ /ppc/, qw(dmasound_pmac snd-powermac)),
+      if_(arch() =~ /ppc/, qw(dmasound_pmac snd-aoa snd-powermac)),
       if_(arch() =~ /sparc/, qw(snd-sun-amd7930 snd-sun-cs4231 snd-sun-dbri)),
       if_(arch() !~ /^sparc/,
-          qw(ad1816 ad1848 ad1889 ali5455 audigy audio awe_wave cmpci cs4232 cs4281 cs46xx),
+          qw(ad1816 ad1848 ad1889 ali5455 audigy audio awe_wave cmpci cs4232 cs4281 cs46xx cx88-alsa),
           qw(emu10k1 es1370 es1371 esssolo1 forte gus i810_audio ice1712 kahlua mad16 maestro),
           qw(maestro3 mpu401 msnd_pinnacle nm256_audio nvaudio opl3 opl3sa opl3sa2 pas2 pss),
           qw(rme96xx sam9407 sb sgalaxy snd-ad1816a snd-ad1848 snd-ad1889 snd-ali5451 snd-als100 snd-als300),
           qw(snd-als4000 snd-atiixp snd-au8810 snd-au8820 snd-au8830 snd-audigyls snd-azt2320 snd-azt3328 snd-azx),
           qw(snd-asihpi snd-bt87x snd-ca0106 snd-cmi8330 snd-cmipci snd-cs4231 snd-cs4232 snd-cs4236 snd-cs4281),
-          qw(snd-cs46xx snd-cs5535audio snd-darla20 snd-darla24 snd-dt019x snd-emu10k1 snd-emu10k1x snd-ens1370 snd-ens1371 snd-es1688 snd-es18xx),
+          qw(snd-cs46xx snd-cs5535audio snd-darla20 snd-darla24 snd-dt019x snd-echo3g snd-emu10k1 snd-emu10k1x snd-ens1370 snd-ens1371 snd-es1688 snd-es18xx),
           qw(snd-es1938 snd-es1968 snd-es968 snd-fm801 snd-gina20 snd-gina24 snd-gina3g snd-gusclassic snd-gusextreme),
           qw(snd-gusmax snd-hda-intel snd-hdsp snd-hdspm snd-ice1712 snd-ice1724 snd-indi snd-indigo snd-indigodj snd-indigoio snd-intel8x0 snd-interwave),
           qw(snd-interwave-stb snd-korg1212 snd-layla20 snd-layla24 snd-layla3g snd-maestro3 snd-mia snd-mixart snd-mona snd-mpu401 snd-nm256),
@@ -187,14 +197,20 @@ our %l = (
           qw(snd-ymfpci sonicvibes sscape trident via82cxxx_audio wavefront ymfpci),
       ),
     ],
-    tv => [ qw(bt878 bttv cx8800 cx88-blackbird dpc7146 ivtv saa7134 zr36067) ],
-    dvb => [ qw(budget budget-av budget-ci cinergyT2 dvb-ttusb-budget dvb-usb-a800 dvb-dibusb dvb-usb-dibusb-mb dvb-ttpci dvb-usb-digitv dvb-usb-dtt200u dvb-usb-nova-t-usb2 dvb-usb-umt-010 dvb-usb-vp7045 hexium_orion hexium_gemini pluto2 skystar2) ],
+    tv => [ qw(bt878 bttv cx8800 cx8802 cx88-blackbird dpc7146 ivtv mxb pvrusb2 saa7134 zr36067) ],
+    dvb => [
+        qw(b2c2-flexcop-pci b2c2-flexcop-usb budget budget-av budget-ci cinergyT2),
+        qw(dvb-dibusb dvb-ttpci dvb-ttusb-budget dvb-usb-a800 dvb-usb-cxusb),
+        qw(dvb-usb-dib0700 dvb-usb-dibusb-mb dvb-usb-dibusb-mc dvb-usb-digitv dvb-usb-dtt200u),
+        qw(dvb-usb-gp8ps dvb-usb-nova-t-usb2 dvb-usb-ttusb2 dvb-usb-umt-010 dvb-usb-vp702x dvb-usb-vp7045),
+        qw(hexium_gemini hexium_orion pluto2 skystar2 ttusb_dec),
+    ],
     photo => [ qw(dc2xx mdc800) ],
-    radio => [ qw(radio-gemtek-pci radio-maxiradio) ],
+    radio => [ qw(radio-gemtek-pci radio-maestro radio-maxiradio) ],
     scanner => [ qw(scanner microtek) ],
     gameport => [ qw(cs461x ns558 emu10k1-gp fm801-gp lightning ns558 vortex) ],
-    usb_sound => [ qw(audio dabusb dsbr100 snd-usb-audio snd-usb-usx2y usb-midi) ],
-    webcam => [ qw(cpia_usb cpia2 cyber2000fb et61x251 ibmcam konicawc mod_quickcam ov511 ov511-alt ov518_decomp ovfx2 pwc quickcam se401 stv680 sn9c102 ultracam usbvideo usbvision vicam w9968cf) ],
+    usb_sound => [ qw(audio dabusb dsbr100 snd-usb-audio snd-usb-caiaq snd-usb-usx2y usb-midi) ],
+    webcam => [ qw(cafe_ccic cpia_usb cpia2 cyber2000fb em28xx et61x251 ibmcam konicawc mod_quickcam ov511 ov511-alt ov518_decomp ovfx2 pwc quickcam quickcam_messenger se401 stv680 sn9c102 ultracam usbvideo usbvision vicam w9968cf zc0301) ],
   },
 
   # USB input stuff get automagically loaded by hotplug and thus
@@ -217,12 +233,12 @@ our %l = (
   # just here for classification, unused categories (nor auto-detect, nor load_thiskind)
   {
     raid => [
-      qw(dm-crypt dm-mirror dm-mod linear lvm-mod multipath raid0 raid1 raid10 raid5),
+      qw(dm-crypt dm-mirror dm-mod linear lvm-mod multipath raid0 raid1 raid10 raid5 raid6),
     ],
     mouse => [
       qw(atixlmouse busmouse generic_serial inport ioc3_serial logibm logibusmouse msbusmouse pcips2 qpmouse synclinkmp),
       if_(arch() =~ /ppc/, 'macserial'),
-      qw(hid mousedev usbhid usbmouse),
+      qw(mousedev usbhid usbmouse),
     ],
     char => [
       if_(arch() =~ /ia64/, qw(efivars)),
@@ -236,14 +252,14 @@ our %l = (
       qw(i8k sonypi toshiba),
     ],
     serial => [
-      qw(8250_pci 8250 epca esp isicom istallion jsm moxa mxser stallion sx synclink synclinkmp),
+      qw(8250_pci 8250 epca esp isicom istallion jsm moxa mxser mxser_new stallion sx synclink synclinkmp),
     ],
     other => [
       qw(defxx i810fb ide-floppy ide-scsi ide-tape loop lp nbd sg st),
       qw(parport_pc parport_serial),
-      qw(btaudio),
+      qw(btaudio mmc_block),
 
-      arch() =~ /i.86/ ? 'aes-i586' : 'aes',
+      'cryptoloop', arch() =~ /i.86/ ? 'aes-i586' : 'aes',
       if_(arch() =~ /sparc/, 'openprom'),
       
       qw(evdev), qw(usblp printer), 'floppy',
@@ -315,9 +331,5 @@ sub sub_categories {
     my ($t1) = @_;
     keys %{$l{$t1}};
 }
-
-sub kernel_is_26 { $_[0] =~ /^2\.6/ }
-
-sub module_extension { kernel_is_26($_[0]) ? 'ko' : 'o' }
 
 1;

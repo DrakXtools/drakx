@@ -19,30 +19,17 @@ sub read {
     my ($hds) = @_;
 
     my @all = read_raw();
-    my ($parts, $disks) = partition { $_->{dev} =~ /\d$/ && $_->{dev} !~ /^(sr|scd)/ } @all;
-
-    my $devfs_like = any { $_->{dev} =~ m|/disc$| } @$disks;
+    my ($parts, $_disks) = partition { $_->{dev} =~ /\d$/ && $_->{dev} !~ /^(sr|scd)/ } @all;
 
     fs::get_major_minor($hds);
 
-    my %devfs2normal = map {
-	my $hd = $_;
-	my $disk = find { $_->{major} == $hd->{major} && $_->{minor} == $hd->{minor} } @$disks;
-	$disk->{dev} => $_->{device};
-    } @$hds;
-
     my $prev_part;
     foreach my $part (@$parts) {
-	my $dev;
-	if ($devfs_like) {
-	    $dev = -e "/dev/$part->{dev}" ? $part->{dev} : sprintf("0x%x%02x", $part->{major}, $part->{minor});
-	    $part->{rootDevice} = $devfs2normal{dirname($part->{dev}) . '/disc'};
-	} else {
-	    $dev = $part->{dev};
-	    if (my $hd = find { $part->{dev} =~ /^\Q$_->{device}\E./ } @$hds) {
-		put_in_hash($part, partition_table::hd2minimal_part($hd));
-	    }
+	my $dev = $part->{dev};
+	if (my $hd = find { $part->{dev} =~ /^\Q$_->{device}\E./ } @$hds) {
+	    put_in_hash($part, partition_table::hd2minimal_part($hd));
 	}
+	
 	undef $prev_part if $prev_part && ($prev_part->{rootDevice} || '') ne ($part->{rootDevice} || '');
 
 	$part->{device} = $dev;

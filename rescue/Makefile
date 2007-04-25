@@ -1,12 +1,26 @@
 include ../Makefile.config
 
-all: rescue.clp
+VERSION=1.4
+PRODUCT=drakx-installer-rescue
 
-install: rescue.clp
+RESCUE = rescue.sqfs
+
+all: $(RESCUE)
+
+install: $(RESCUE)
 	cp -f $< $(STAGE2_DEST)
 
-rescue.clp: list.xml drvinst guessmounts lsparts rescue-doc make_rescue_img
+$(RESCUE): list.xml drvinst guessmounts lsparts rescue-doc make_rescue_img
 	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_rescue_img
 
+tar:
+	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
+	mkdir -p $(PRODUCT)-$(VERSION)/tools
+	svn export -q . $(PRODUCT)-$(VERSION)/rescue
+	cp ../Makefile.config $(PRODUCT)-$(VERSION)/
+	cp ../tools/install-xml-file-list $(PRODUCT)-$(VERSION)/tools
+	tar cfj $(PRODUCT)-$(VERSION).tar.bz2 $(PRODUCT)-$(VERSION)
+	rm -rf $(PRODUCT)-$(VERSION)
+
 clean: 
-	rm -f rescue.clp kernel_read_part
+	rm -f $(RESCUE) kernel_read_part

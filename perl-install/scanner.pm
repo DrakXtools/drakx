@@ -20,7 +20,6 @@ package scanner;
 #
 # pbs/TODO:
 # - scsi mis-configuration (should work better now)
-# - devfs use dev_is_devfs()
 # - with 2 scanners same manufacturer -> will overwrite previous conf -> only 1 conf !! (should work now)
 # - lp: see printerdrake
 # - install: prefix --> done (partially)
@@ -36,7 +35,7 @@ our $scannerDB = readScannerDB("$scannerDBdir/ScannerDB");
 
 sub confScanner {
     my ($model, $port, $vendor, $product, $firmware) = @_;
-    $port ||= detect_devices::dev_is_devfs() ? "$::prefix/dev/usb/scanner0" : "$::prefix/dev/scanner";
+    $port ||= "$::prefix/dev/scanner";
     my $a = $scannerDB->{$model}{server};
     #print "file:[$a]\t[$model]\t[$port]\n| ", (join "\n| ", @{$scannerDB->{$model}{lines}}),"\n";
     my @driverconf = cat_("$sanedir/$a.conf");
@@ -92,7 +91,7 @@ sub installfirmware {
     # Install firmware
     run_program::rooted($::prefix, "mkdir", "-p",
 			"/usr/share/sane/firmware") || do {
-			    $in->ask_warn('Scannerdrake',
+			    $in->ask_warn(N("Error"),
 					  N("Could not create directory /usr/share/sane/firmware!"));
 			    return "";
 			};
@@ -103,21 +102,21 @@ sub installfirmware {
 	run_program::rooted($::prefix, "ln", "-sf",
 			    "/usr/share/sane/firmware",
 			    "/usr/share/sane/$backend") || do {
-				$in->ask_warn('Scannerdrake',
+				$in->ask_warn(N("Error"),
 					      N("Could not create link /usr/share/sane/%s!", $backend));
 				return "";
 			    };
     }
     run_program::rooted($::prefix, "cp", "-f", "$firmware",
 			"/usr/share/sane/firmware") || do {
-			    $in->ask_warn('Scannerdrake',
+			    $in->ask_warn(N("Error"),
 					  N("Could not copy firmware file %s to /usr/share/sane/firmware!", $firmware));
 			    return "";
 			};
     $firmware =~ s!^(.*)(/[^/]+)$!/usr/share/sane/firmware$2!;
     run_program::rooted($::prefix, "chmod", "644",
 			$firmware) || do {
-			    $in->ask_warn('Scannerdrake',
+			    $in->ask_warn(N("Error"),
 					  N("Could not set permissions of firmware file %s!", $firmware));
 			    return "";
 			};

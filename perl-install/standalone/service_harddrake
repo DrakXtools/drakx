@@ -40,6 +40,7 @@ $curr_kernel =~ s/(^\d+\.\d+).*/$1/;
 
 my %previous_kernel_config = getVarsFromSh("$hw_sysconfdir/kernel");
 setVarsInSh("$hw_sysconfdir/kernel", { KERNEL => $curr_kernel, IS_LAPTOP => bool2text($isLaptop) });
+my %cfg = getVarsFromSh("$hw_sysconfdir/service.conf");
 
 # autoreconfigure the mouse on major kernel change:
 if ($curr_kernel ne $previous_kernel_config{KERNEL}) {
@@ -47,13 +48,13 @@ if ($curr_kernel ne $previous_kernel_config{KERNEL}) {
     harddrake::autoconf::mouse_conf($modules_conf);
 }
 # autoreconfigure laptop-dependent services when switching from laptop to desktop, and vice versa
-if (!exists $previous_kernel_config{IS_LAPTOP} || $force || $isLaptop ne to_bool($previous_kernel_config{IS_LAPTOP})) {
+if (!exists $previous_kernel_config{IS_LAPTOP} || $force || $isLaptop != text2bool($previous_kernel_config{IS_LAPTOP})) {
     log::explanations("Autoconfiguring laptop tools since we switched between laptop and desktop systems");
     harddrake::autoconf::laptop($isLaptop);
 }
 
 if (find { $_->{driver} =~ /Card:NVIDIA/ } detect_devices::probeall()) {
-    if (find { -e join('', "/lib/modules/", c::kernel_version(), "/kernel/drivers/$_") }  map { ("extra/$_", "video/$_", "char/$_", "char/drm/$_") } qw(NVdriver nvidia.o nvidia.o.gz nvidia.ko nvidia.ko.gz)) {
+    if (find { -e join('', "/lib/modules/", c::kernel_version(), "/kernel/drivers/$_") }  map { ("extra/$_", "video/$_", "char/$_", "char/drm/$_") } qw(NVdriver nvidia.o nvidia.o.gz), map { $_, "$_.gz" } qw(nvidia.ko nvidia71xx.ko nvidia96xx.ko nvidia97xx.ko)) {
         # do not automatically switch from nv to nvidia (in order to handle
         # cases where nvidia module crashes the system):
         #
@@ -67,6 +68,33 @@ if (find { $_->{driver} =~ /Card:NVIDIA/ } detect_devices::probeall()) {
             log::explanations("switch X.org driver from nvidia to nv") if /Driver "nv.+"/;
             s!Driver "nv.*"!Driver "nv"!g; 
         } $_ foreach grep { -e $_ } "/etc/X11/XF86Config-4", "/etc/X11/XF86Config", "/etc/X11/xorg.conf";
+
+	require Xconfig::card;
+	Xconfig::card::libgl_config_and_more({ Driver => 'nv' });
+    }
+}
+
+if (find { $_->{driver} =~ /ATI Radeon/ } detect_devices::probeall()) {
+    if (find { -e join('', "/lib/modules/", c::kernel_version(), "/kernel/drivers/$_") }  map { ("extra/$_", "video/$_", "char/$_", "char/drm/$_") } map { $_, "$_.gz" } qw(fglrx.ko)) {
+        # do not automatically switch from nv to nvidia (in order to handle
+        # cases where nvidia module crashes the system):
+        #
+        # substInFile {
+        #    log::explanations("switch XFree86 driver from nv to nvidia") if /Driver "nv"/;
+        #    s!Driver "nv.*"!Driver "nvidia"!g;
+        #    s!#*( Load.*glx)!\1!g;
+        # } $_ foreach "/etc/X11/XF86Config-4", "/etc/X11/XF86Config";
+    } else {
+        require Xconfig::card;
+        my @cards = Xconfig::card::probe();
+        my $driver = $cards[0]{Driver};
+        substInFile { 
+            log::explanations("switch X.org driver from fglrx to ati") if /Driver "nv.+"/;
+            s!Driver "fglrx"!Driver "$driver"!g; 
+        } $_ foreach grep { -e $_ } "/etc/X11/XF86Config-4", "/etc/X11/XF86Config", "/etc/X11/xorg.conf";
+
+	require Xconfig::card;
+	Xconfig::card::libgl_config_and_more({ Driver => 'fglrx' });
     }
 }
 
@@ -91,6 +119,8 @@ my $splash_was_silent = cat_('/proc/splash') =~ /, silent : on/;
 # For each hw, class, detect device, compare and offer to reconfigure if needed
 foreach my $hw_class (@harddrake::data::tree) {
     my ($Ident, $item, $configurator, $detector, $do_it) = @$hw_class{qw(class string configurator detector checked_on_boot)};
+    next if member($cfg{"DETECT_$Ident"}, qw(NO no));
+
     $configurator ||= $hw_class->{configurator};
 
     next unless $do_it ^ $invert_do_it;
@@ -124,9 +154,9 @@ foreach my $hw_class (@harddrake::data::tree) {
         $modules_conf->write;
     }
 
-    @added || @was_removed or next;
+    @added || @was_removed or $cfg{"DETECT_$Ident"} ne 'force' and next;
 
-    next if $Ident eq 'MOUSE' && $curr_kernel ne $previous_kernel_config{KERNEL};
+    next if $Ident eq 'MOUSE' && $curr_kernel ne $previous_kernel_config{KERNEL} && $cfg{"DETECT_$Ident"} ne 'force';
 
     my @configurator_pool;
     if (harddrake::data::is_removable($Ident)) {
@@ -147,25 +177,30 @@ foreach my $hw_class (@harddrake::data::tree) {
     } elsif ($Ident eq "ETHERNET") {
         $modules_conf->remove_alias_regexp('^(wlan|eth)[0-9]*$');
         modules::load_category($modules_conf, 'network/main|gigabit|usb|wireless|firewire|pcmcia');
-        require network::ethernet;
-        network::ethernet::configure_eth_aliases($modules_conf);
+        require network::connection::ethernet;
+        network::connection::ethernet::configure_eth_aliases($modules_conf);
+        require network::rfswitch;
+        network::rfswitch::configure();
         require network::shorewall;
         network::shorewall::update_interfaces_list();
         $modules_conf->write;
         next;
-    } elsif (member($Ident, qw(ATA_STORAGE RAID_STORAGE  SATA_STORAGE SCSI_CONTROLLER))) {
+    } elsif (member($Ident, qw(ATA_STORAGE CARD_READER RAID_STORAGE SATA_STORAGE SCSI_CONTROLLER))) {
         # set scsi_hostadapterr in modprobe.conf:
         modules::load_category($modules_conf, 'disk/' . {
 			ATA_STORAGE => 'ide',
 			SATA_STORAGE => 'sata',
 			SCSI_CONTROLLER => 'scsi',
 			RAID_STORAGE => 'hardware_raid',
+			CARD_READER => 'card_reader'
 		}->{$Ident});
         $modules_conf->write;
         next;
     } elsif (member($Ident, qw(AGP DVB TV))) {
         my @old_drivers = uniq(map { $_->{driver} } values %$oldconfig);
         my @new_drivers = uniq(map { $_->{driver} } values %ID);
+        # load DVB & TV drivers (eg: for One), not for AGP (done by X):
+        modules::load_category($modules_conf, 'multimedia/' . lc($Ident)) if member($Ident, qw(DVB TV));
         $modules_conf->remove_module(difference2(\@old_drivers, \@new_drivers));
         # add agpgart and the like modules to modprobe.preload if needed:
         $modules_conf->write;
@@ -174,7 +209,6 @@ foreach my $hw_class (@harddrake::data::tree) {
     } elsif ($Ident eq "BLUETOOTH") {
         harddrake::autoconf::bluetooth(scalar keys %ID);
     } elsif ($Ident eq "PCMCIA_CONTROLLER") {
-        # obsolete once/since kernel-2.6.14/pcmciautils is used, but kept for compatibility:
         harddrake::autoconf::pcmcia(keys %ID ? first(values(%ID))->{driver} : '');
     } elsif ($Ident eq "USB_CONTROLLER") {
         # nearly useless (only mkinitrd uses it):
@@ -187,6 +221,8 @@ foreach my $hw_class (@harddrake::data::tree) {
     } elsif ($Ident eq "MOUSE") {
         harddrake::autoconf::mouse_conf($modules_conf);
         next;
+    } elsif ($Ident eq "CPU") {
+        harddrake::autoconf::cpufreq();
     }
 
     next if $is_globetrotter && !$hw_class->{automatic};

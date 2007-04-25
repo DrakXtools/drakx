@@ -11,7 +11,7 @@ use modules::any_conf;
 
 sub modules_descriptions() {
     my $f = '/lib/modules/' . c::kernel_version() . '/modules.description';
-    -e $f or $f = '/lib/modules.description';
+    -e $f or $f = '/modules/modules.description';
     map { /(\S+)\s+(.*)/ } cat_($f);
 }
 
@@ -47,7 +47,12 @@ sub mapping_26_24 {
 
 sub cond_mapping_24_26 {
     my ($modname) = @_;
-    c::kernel_version() =~ /^\Q2.6/ && $mappings_24_26{$modname} || $modname;
+    $mappings_24_26{$modname} || $modname;
+}
+
+sub module_is_available {
+    my ($module) = @_;
+    find { m!/\Q$module\E\.k?o! } cat_($::prefix . '/lib/modules/' . c::kernel_version() . '/modules.dep');
 }
 
 #-###############################################################################
@@ -99,17 +104,10 @@ sub load {
 sub load_and_configure {
     my ($conf, $module, $o_options) = @_;
 
-    my $category = module2category($module) || '';
-    my $network_devices = $category =~ m!network/(main|gigabit|usb|wireless)! && [ detect_devices::getNet() ];
-
     my @l = remove_loaded_modules(dependencies_closure(cond_mapping_24_26($module)));
     load_raw(\@l, { $module => $o_options });
 
-    if ($network_devices) {
-	$conf->set_alias($_, $module) foreach difference2([ detect_devices::getNet() ], $network_devices);
-    }
-
-    if (c::kernel_version() =~ /^\Q2.6/ && member($module, 'imm', 'ppa') 
+    if (member($module, 'imm', 'ppa') 
 	&& ! -d "/proc/sys/dev/parport/parport0/devices/$module") {
 	log::l("$module loaded but is not useful, removing");
 	unload($module);
@@ -149,7 +147,7 @@ sub load_category {
 	    my $other = { ahci => 'ata_piix', ata_piix => 'ahci' }->{$_->{driver}};
 	    $_->{try} = 1 if $other;
 	    ($_, if_($other, { %$_, driver => $other }));
-	} probe_category($category)),
+	} detect_devices::probe_category($category)),
 	(map { { driver => $_, description => $_, try => 1 } } @try_modules),
     );
 
@@ -175,52 +173,28 @@ sub load_parallel_zip {
     } 'imm', 'ppa';
 }
 
-sub probe_category {
-    my ($category) = @_;
-
-    my @modules = category2modules($category);
-
-    if_($category =~ /sound/ && arch() =~ /ppc/ && detect_devices::get_mac_model() !~ /IBM/,
-	{ driver => 'snd-powermac', description => 'Macintosh built-in' },
-    ),
-    grep {
-	if ($category eq 'network/isdn') {
-	    my $b = $_->{driver} =~ /ISDN:([^,]*),?([^,]*)(?:,firmware=(.*))?/;
-	    if ($b) {
-                $_->{driver} = $1;
-                $_->{type} = $2;
-                $_->{type} =~ s/type=//;
-                $_->{firmware} = $3;
-                $_->{driver} eq "hisax" and $_->{options} .= " id=HiSax";
-	    }
-	    $b;
-	} else {
-	    member($_->{driver}, @modules);
-	}
-    } detect_devices::probeall();
-}
-
-
 #-###############################################################################
 #- modules.conf functions
 #-###############################################################################
 sub write_preload_conf {
     my ($conf) = @_;
     my @l;
+    my $is_laptop = detect_devices::isLaptop();
+    my $manufacturer = detect_devices::dmidecode_category('System')->{Manufacturer};
     push @l, 'scsi_hostadapter' if $conf->get_probeall('scsi_hostadapter');
     push @l, detect_devices::probe_name('Module');
-    push @l, 'nvram' if detect_devices::isLaptop();
-    push @l, map { $_->{driver} } probe_category($_) foreach qw(multimedia/dvb multimedia/tv various/laptop input/joystick various/crypto);
+    push @l, 'nvram' if $is_laptop;
+    push @l, map { $_->{driver} } detect_devices::probe_category($_) foreach qw(multimedia/dvb multimedia/tv various/agpgart various/laptop input/joystick various/crypto disk/card_reader);
     push @l, 'padlock' if cat_("/proc/cpuinfo") =~ /rng_en/;
-    push @l, 'evdev' if detect_devices::getSynapticsTouchpads();
-    my @l_26 = @l;
-    push @l_26, map { $_->{driver} } probe_category('various/agpgart');
-    append_to_modules_loaded_at_startup("$::prefix/etc/modules", @l);
-    append_to_modules_loaded_at_startup("$::prefix/etc/modprobe.preload", @l_26);
+    push @l, 'evdev' if any { $_->{Synaptics} || $_->{ALPS} || $_->{HWHEEL} } detect_devices::getInputDevices();
+    push @l, 'asus_acpi' if $is_laptop && $manufacturer =~ m/^ASUS/;
+    push @l, 'ibm_acpi' if $is_laptop && member($manufacturer, qw(IBM LENOVO));
+    push @l, 'hdaps' if $is_laptop && $manufacturer eq 'LENOVO';
+    append_to_modules_loaded_at_startup("$::prefix/etc/modprobe.preload", @l);
 }
 
 sub append_to_modules_loaded_at_startup_for_all_kernels {
-    append_to_modules_loaded_at_startup($_, @_) foreach "$::prefix/etc/modules", "$::prefix/etc/modprobe.preload";
+    append_to_modules_loaded_at_startup($_, @_) foreach "$::prefix/etc/modprobe.preload";
 }
 
 sub append_to_modules_loaded_at_startup {
@@ -232,6 +206,17 @@ sub append_to_modules_loaded_at_startup {
 	$_ = '' if $l && /$l/;
 	$_ .= join '', map { "$_\n" } @l if eof;
     } $file;
+}
+
+sub set_preload_modules {
+    my ($service, @modules) = @_;
+    my $preload_file = "$::prefix/etc/modprobe.preload.d/$service";
+    if (@modules) {
+        output_p($preload_file, join("\n", @modules, ''));
+    } else {
+        unlink($preload_file);
+    }
+    eval { load(@modules) } if @modules && !$::isInstall;
 }
 
 
@@ -251,11 +236,9 @@ sub read_already_loaded {
     when_load($conf, $_) foreach reverse loaded_modules();
 }
 
-my $module_extension = c::kernel_version() =~ /^\Q2.4/ ? 'o' : 'ko';
-
 sub name2file {
     my ($name) = @_;
-    "$name.$module_extension";
+    "$name.ko";
 }
 
 sub when_load {
@@ -290,30 +273,25 @@ sub when_load_category {
 	my $sound_alias = find { /^sound-slot-[0-9]+$/ && $conf->get_alias($_) eq $name } $conf->modules;
 	$sound_alias ||= 'sound-slot-0';
 	$conf->set_sound_slot($sound_alias, $name);
+    } elsif ($category =~ m!disk/card_reader!) {
+        $conf->set_above($name, 'tifm_sd') if $name =~ /tifm_7xx1/;
+        $conf->set_above($name, 'mmc_block');
     }
 }
 
 #-###############################################################################
 #- isInstall functions
 #-###############################################################################
-sub cz_file() { 
-    "/lib/modules" . (arch() eq 'sparc64' && "64") . ".cz-" . c::kernel_version();
-}
-
 sub extract_modules {
     my ($dir, @modules) = @_;
-    my $cz = cz_file();
-    if (!-e $cz && !$::local_install) {
-	unlink $_ foreach glob_("/lib/modules*.cz*");
-	require install_any;
-        install_any::getAndSaveFile("install/stage2/live$cz", $cz) or die "failed to get modules $cz: $!";
-    }
-    eval {
-	require packdrake;
-	my $packer = new packdrake($cz, quiet => 1);
-	$packer->extract_archive($dir, map { name2file($_) } @modules) if @modules;
-	map { $dir . '/' . name2file($_) } @modules;
-    };
+    map {
+	my $f = name2file($_);
+	if (-e "/modules/$f.gz") {
+	    system("gzip -dc /modules/$f.gz > $dir/$f") == 0
+	      or unlink "$dir/$f";
+	}
+	"$dir/$f";
+    } @modules;
 }
 
 sub load_raw_install {
@@ -324,12 +302,12 @@ sub load_raw_install {
 	my $m = '/tmp/' . name2file($_);
 	if (-e $m) {
             my $stdout;
-            my $rc = run_program::run(["insmod_", "insmod"], '2>', \$stdout, $m, split(' ', $options->{$_}));
+            my $rc = run_program::run('insmod', '2>', \$stdout, $m, split(' ', $options->{$_}));
             log::l(chomp_($stdout)) if $stdout;
             if ($rc) {
                 unlink $m;
                 '';
-            } else {
+            } elsif ($m !~ /pata/) { # FIXME: remove me once cooker is reopened
 		'error';
             }
 	} else {

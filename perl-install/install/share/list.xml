@@ -1,0 +1,414 @@
+<list no-arch-libraries="on">
+
+<from expand="binary">
+  ash echo
+  cpio gzip bzip2
+  <if-not ARCH="ppc">
+    fdisk
+    rescuept
+  </if-not>
+  <if ARCH="ppc">
+    pdisk 
+  </if>
+  insmod-25 modinfo-25 rmmod-25
+  losetup
+  lvm2 mdadm
+  mount umount
+
+  <mode copy="dereference">
+    vol_id <!-- needed by libDrakX -->
+  </mode>
+
+  badblocks
+  mkswap
+  mkfs.ext2 e2fsck tune2fs dumpe2fs resize2fs
+
+  mkfs.reiserfs
+  mkfs.xfs
+  resize_reiserfs
+  <if ARCH="i.86|x86_64|ia64">
+    mkdosfs 
+    ntfsresize
+    dmraid
+  </if>
+  <if ARCH="i.86|x86_64">
+    mkfs.jfs fsck.jfs
+  </if>
+  quotacheck
+
+  consolechars kbd_mode
+  Xorg xmodmap xset
+  fb2png
+  perl
+  monitor-edid monitor-get-edid-using-vbe monitor-parse-edid monitor-get-edid
+
+  <filter subst="s!^echo!/bin/echo!">
+    unicode_start
+  </filter>
+
+  <if ARCH="i.86|x86_64|ia64">
+    dmidecode 
+  </if>
+  <if ARCH="ia64">
+  efibootmgr 
+  </if>
+
+  <if ARCH="ppc">
+    hattrib hcopy hcd
+    hformat hmount humount 
+  </if>
+
+  <if set="DEBUG_INSTALL">
+    strace bash less ps top gdb
+  </if>
+</from>
+
+<from dir="/usr/LIB/xorg/modules">
+  libpcidata.so
+  drivers/fbdev_drv.so
+  input/wacom_drv.so
+  input/mouse_drv.so
+  input/keyboard_drv.so
+  linux/libfbdevhw.so
+  libfb.so
+  libshadow.so
+</from>
+
+<from dir="/usr/share/fonts/">
+  <to flatten="on">
+    misc/cursor.pcf.gz
+    TTF/bengali/MuktiNarrow.ttf
+    TTF/dejavu/DejaVuSans.ttf
+    TTF/dejavu/DejaVuSans-Bold.ttf
+    TTF/dejavu/DejaVuSans-BoldOblique.ttf
+    TTF/devanagari/raghu.ttf
+    TTF/gurmukhi/lohit_pa.ttf
+    TTF/thai/norasi_n.ttf
+  </to>
+</from>
+
+<from dir="/usr/share/locale">
+  <to dir="/usr/share/locale_special">
+    <from expand="glob">
+      */LC_MESSAGES/drakx-net.mo
+      */LC_MESSAGES/drakx-kbd-mouse-x11.mo
+    </from>
+  </to>
+</from>
+
+<from dir="/usr/share/X11/locale">
+  C
+  en_US.UTF-8 
+  iso8859-1
+</from>
+
+<filter command="strip">
+<from dir="/LIB">
+  libnss_nis.so.2
+  libnss_files.so.2
+  libnss_dns.so.2
+  libresolv.so.2
+  ld-linux*.so.2
+</from>
+</filter>
+
+<from>
+  /etc/fonts/fonts.conf
+  /etc/protocols
+  /usr/LIB/xserver/SecurityPolicy
+  /etc/pango/ARCH/pango.modules
+  /usr/LIB/gtk-2.0/*/loaders/libpixbufloader-png.so
+  <!-- XPM loader is needed by Gtk2::Html2 on error -->
+  /usr/LIB/gtk-2.0/*/loaders/libpixbufloader-xpm.so
+  /usr/LIB/gtk-2.0/*/immodules/im-cedilla.so
+  /usr/LIB/gtk-2.0/*/engines/libia_ora.so
+
+  /usr/lib/libDrakX/keyboard.pm
+  /usr/lib/libDrakX/mouse.pm
+  /usr/lib/libDrakX/network
+  /usr/lib/libDrakX/Xconfig
+  /usr/lib/libDrakX/auto/xf86misc
+  /usr/lib/libDrakX/xf86misc
+  /usr/share/libDrakX/pixmaps
+  /usr/share/doc/installer-help/
+  /usr/lib/rpm/rpmrc
+  /usr/lib/rpm/macros
+  /usr/lib/rpm/mandriva/rpmrc
+  /usr/lib/rpm/mandriva/macros
+  /usr/share/pci.ids
+  /usr/share/locale/UTF-8
+  /usr/share/terminfo/l/linux
+  /bin/brltty
+
+  /sbin/pcmcia-socket-startup
+  /etc/pcmcia/config.opts
+
+  <from expand="glob">
+    <from spaces_in_filename="1">
+      /usr/share/themes/Ia Ora*/gtk-2.0/gtkrc
+    </from>
+    /etc/gtk-2.0/gdk-pixbuf.loaders.*
+    /etc/gtk-2.0/gtk.immodules.*
+    /etc/brltty/text.*.tbl
+    /etc/brltty/brltty-??.hlp
+    /lib/brltty/libbrlttyb??.so
+  </from>
+
+  <from expand="command">
+    perl -Mlang -I.. -le 'print foreach lang::console_font_files()'
+  </from>
+
+  <if set="DEBUG_INSTALL">
+    /etc/termcap
+  </if>
+</from>
+
+<from dir="/usr/share/ldetect-lst">
+  dmitable.gz pcitable.gz usbtable.gz
+  <filter command="gzip">
+    Cards+ MonitorsDB isdn.db
+  </filter>
+</from>
+
+<from dir="/usr/LIB/pango/*/modules">
+  pango-basic-fc.so
+  pango-arabic-fc.so
+  pango-hangul-fc.so
+  pango-hebrew-fc.so
+  pango-indic-fc.so
+  pango-thai-fc.so
+</from>
+
+<from dir="/usr/LIB/gconv">
+  BIG5.so
+  EUC-JP.so
+  libGB.so
+  libJIS.so
+  libKSC.so
+  EUC-KR.so
+  ISO8859-15.so
+  ISO8859-14.so
+  ISO8859-13.so
+  ISO8859-9E.so
+  ISO8859-9.so
+  ISO8859-7.so
+  ISO8859-5.so
+  ISO8859-3.so
+  ISO8859-2.so
+  ISO8859-1.so
+  KOI8-K.so
+  KOI8-U.so
+  KOI8-R.so
+  TIS-620.so
+  CP1251.so
+  GEORGIAN-PS.so
+  EUC-CN.so
+  gconv-modules
+</from>
+
+<filter subst="/^__END__/ and $_ = '', close ARGV">
+<from expand="main-perl">
+  AutoLoader.pm
+  Carp.pm
+  Carp/Heavy.pm
+  Exporter.pm
+  Exporter/Heavy.pm
+  FileHandle.pm
+  File/Basename.pm
+  File/Find.pm
+  File/Path.pm
+  File/Spec.pm
+  File/Spec/Unix.pm
+  File/Temp.pm
+  Getopt/Long.pm
+  PerlIO.pm
+  SelectSaver.pm
+  SelfLoader.pm
+  Symbol.pm
+  Time/Local.pm
+  IO/Socket/INET.pm
+  IO/Socket/UNIX.pm
+  base.pm
+  constant.pm
+  locale.pm
+  utf8.pm
+  utf8_heavy.pl
+  unicore/Exact.pl
+  unicore/Canonical.pl
+  unicore/PVA.pl
+  unicore/To/Lower.pl
+  unicore/To/Fold.pl
+  unicore/To/Upper.pl
+  unicore/lib/gc_sc/Word.pl
+  unicore/lib/gc_sc/Digit.pl
+  dumpvar.pl
+  warnings.pm
+  warnings/register.pm
+  ARCH-linux/File/Glob.pm
+  ARCH-linux/auto/File/Glob/Glob.so
+  ARCH-linux/Config.pm
+  ARCH-linux/Data/Dumper.pm
+  ARCH-linux/DynaLoader.pm
+  ARCH-linux/Errno.pm
+  ARCH-linux/Fcntl.pm
+  ARCH-linux/XSLoader.pm
+  ARCH-linux/auto/Fcntl/Fcntl.so
+  ARCH-linux/IO.pm
+  ARCH-linux/IO/File.pm
+  ARCH-linux/IO/Handle.pm
+  ARCH-linux/IO/Seekable.pm
+  ARCH-linux/IO/Select.pm
+  ARCH-linux/IO/Socket.pm
+  ARCH-linux/Socket.pm
+  ARCH-linux/_h2ph_pre.ph
+  ARCH-linux/asm/unistd.ph
+  <if ARCH="ia64">
+  ARCH-linux/asm-i386/unistd.ph 
+  ARCH-linux/asm-x86_64/unistd.ph 
+  ARCH-linux/asm/break.ph 
+  </if>
+  <if ARCH="x86_64">
+  ARCH-linux/asm-i386/unistd.ph 
+  ARCH-linux/asm-x86_64/unistd.ph 
+  </if>
+  ARCH-linux/auto/Data/Dumper/Dumper.so
+  ARCH-linux/auto/IO/IO.so
+  ARCH-linux/auto/Socket/Socket.so
+  ARCH-linux/bits/syscall.ph
+  ARCH-linux/bits/wordsize.ph
+  ARCH-linux/sys/syscall.ph
+  ARCH-linux/syscall.ph
+  ARCH-linux/auto/DynaLoader/dl_findfile.al
+  ARCH-linux/lib.pm
+  ARCH-linux/re.pm
+  ARCH-linux/auto/POSIX/autosplit.ix
+  ARCH-linux/auto/POSIX/load_imports.al
+  ARCH-linux/auto/POSIX/POSIX.so
+  ARCH-linux/Cwd.pm
+  ARCH-linux/auto/Cwd/Cwd.so
+  ARCH-linux/POSIX.pm
+  ARCH-linux/Time/HiRes.pm
+  ARCH-linux/auto/Time/HiRes/HiRes.so
+  bytes.pm
+  integer.pm
+  overload.pm
+  strict.pm
+  vars.pm
+  Net/Cmd.pm
+  Net/Config.pm
+  Net/FTP.pm
+  Net/FTP/A.pm
+  Net/FTP/I.pm
+  Net/FTP/dataconn.pm
+  Net/Netrc.pm
+  Scalar/Util.pm
+  List/Util.pm
+  <if set="DEBUG_INSTALL">
+    perl5db.pl
+    Term/ReadLine.pm
+  </if>
+</from>
+
+<from expand="perl">
+  packdrake.pm
+  Config/IniFiles.pm
+  MDV/Packdrakeng.pm
+  MDV/Distribconf.pm
+  MDK/Common
+  MDK/Common.pm
+  String/ShellQuote.pm
+  ARCH-linux/Locale/gettext.pm
+  ARCH-linux/auto/Locale/gettext/gettext.so
+  ARCH-linux/File/FnMatch.pm
+  ARCH-linux/auto/File/FnMatch/FnMatch.so
+  ARCH-linux/Term/ReadKey.pm
+  ARCH-linux/auto/Term/ReadKey/ReadKey.so
+  ARCH-linux/URPM.pm
+  ARCH-linux/URPM/Build.pm
+  ARCH-linux/URPM/Resolve.pm
+  ARCH-linux/URPM/Signature.pm
+  ARCH-linux/auto/URPM/URPM.so
+  <if set="DEBUG_INSTALL">
+    ARCH-linux/Term/ReadLine/Gnu.pm
+    ARCH-linux/Term/ReadLine/Gnu/XS.pm
+    ARCH-linux/auto/Term/ReadLine/Gnu/Gnu.so
+    ARCH-linux/auto/Term/ReadLine/Gnu/XS/autosplit.ix
+  </if>
+</from>
+
+<from expand="rpm" matching="m!^/usr/lib/perl5! and !/\.pod$/">
+  perl-Gtk2
+  perl-Glib
+  perl-Gtk2-Html2
+  perl-Curses
+  perl-Curses-UI
+</from>
+</filter>
+
+<from dir="..">
+  <to dir="$(REP4PMS)">
+    <filter command="strip">
+      <from expand="command">
+	cd .. ; find auto -follow -name "*.so"
+      </from>
+    </filter>
+  </to>
+</from>
+
+<from dir="../../tools">
+  <to dir="/usr/bin" flatten="on">
+    serial_probe/serial_probe 
+    xhost+
+
+    <mode on-error="ignore">
+      ARCH/busybox
+    </mode>
+  </to>
+</from>
+
+<from dir="share">
+  <from expand="tar">
+    fonts.tar.bz2
+    keyboards.tar.bz2
+    keymaps.tar.bz2
+  </from>
+
+  <to dir="/usr/share">
+    consolefonts symlinks
+    upgrade
+  </to>
+</from>
+
+<from dir="../pixmaps">
+  <to dir="/usr/share">
+    <from expand="glob">
+      *.png
+    </from>
+  </to>
+</from>
+
+<from dir="../share">
+  <to dir="/usr/share">
+    <from expand="glob">
+      *.png
+    </from>
+  </to>
+</from>
+
+<from dir="pixmaps">
+  <to dir="/usr/share">
+    <from expand="glob">
+      *.png
+    </from>   
+  </to>
+</from>
+
+<from dir="pixmaps/langs">
+  <to dir="/usr/share/langs">
+    <from expand="command">
+      perl -I.. -Mlang -le 'print "lang-$_.png" foreach lang::list_langs()'
+    </from>
+  </to>
+</from>
+
+</list>

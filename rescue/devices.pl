@@ -2,8 +2,6 @@
 
 @ARGV == 1 && chdir $ARGV[0] or die "usage: devices.pl <dir>\n";
 
-if ($>) { $sudo = "sudo"; $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}"; }
-
 foreach (<DATA>) {
     chomp;
     my ($typ, $maj, $min, @l) = split;
@@ -15,7 +13,10 @@ foreach (<DATA>) {
 		$_;
 	    }
 	};
-	system("$sudo mknod $_ $typ $maj " . $min++) foreach @l2;
+	foreach (@l2) {
+	    my $cmd = "mknod-m600 $_ $typ $maj " . $min++;
+	    system($cmd) == 0 or die "$cmd failed\n";
+	}
     }
 }
 

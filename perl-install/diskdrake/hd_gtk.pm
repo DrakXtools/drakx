@@ -4,6 +4,7 @@ use diagnostics;
 use strict;
 
 use common;
+use mygtk2 qw(gtknew);
 use ugtk2 qw(:helpers :wrappers :create);
 use partition_table;
 use fs::type;
@@ -43,7 +44,7 @@ notebook current_kind[]
 =cut
 
 sub main {
-    ($in, $all_hds, my $nowizard, $do_force_reload, my $interactive_help) = @_;
+    ($in, $all_hds, $do_force_reload) = @_;
 
     @notebook = ();
 
@@ -74,7 +75,7 @@ sub main {
 	$lock = 1;
 	partition_table::assign_device_numbers($_) foreach fs::get::hds($all_hds);
 	create_automatic_notebooks($notebook_widget);
-	general_action_box($general_action_box, $nowizard, $interactive_help);
+	general_action_box($general_action_box);
 	per_kind_action_box($per_kind_action_box, $current_kind);
 	current_kind_changed($in, $current_kind);
 	current_entry_changed($current_kind, $current_entry);
@@ -89,7 +90,8 @@ sub main {
     });
     $w->sync;
     $done_button->grab_focus;
-    $in->ask_okcancel(N("Read carefully!"), N("Please make a backup of your data first"), 1) or return
+    $in->ask_from_list_(N("Read carefully!"), N("Please make a backup of your data first"), 
+			[ N_("Exit"), N_("Continue") ], N_("Continue")) eq N_("Continue") or return
       if $::isStandalone;
     $in->ask_warn('', 
 N("If you plan to use aboot, be careful to leave a free space (2048 sectors is enough)
@@ -119,7 +121,7 @@ sub try_ {
     $current_entry = '' if !diskdrake::interactive::is_part_existing($current_entry, $all_hds);
     $update_all->();
 
-    Gtk2->main_quit if $v && member($name, 'Done', 'Wizard');
+    Gtk2->main_quit if $v && member($name, 'Done');
 }
 
 ################################################################################
@@ -143,13 +145,23 @@ sub add_kind2notebook {
     $kind;
 }
 
+sub interactive_help {
+    my ($in) = @_;
+    if ($::isInstall) {
+        $in->interactive_help_sub_display_id('partition_with_diskdrake');
+    } else {
+        require run_program;
+        run_program::raw({ detach => 1 }, 'drakhelp', '--id', 'diskdrake');
+    }
+}
+
 sub general_action_box {
-    my ($box, $nowizard, $interactive_help) = @_;
+    my ($box) = @_;
     $_->destroy foreach $box->get_children;
 
-    gtkadd($box, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => $interactive_help)) if $interactive_help;
+    gtkadd($box, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => \&interactive_help));
 
-    my @actions = (if_($::isInstall && !$nowizard, N_("Wizard")), 
+    my @actions = (
 		   diskdrake::interactive::general_possible_actions($in, $all_hds), 
 		   N_("Done"));
     foreach my $s (@actions) {
@@ -202,7 +214,9 @@ sub per_entry_info_box {
     } elsif ($kind->{type} =~ /hd|lvm/) {
 	$info = diskdrake::interactive::format_hd_info($kind->{val});
     }
-    gtkpack($box, gtkadd(Gtk2::Frame->new(N("Details")), gtkset_justify(Gtk2::Label->new($info), 'left')));
+    gtkpack($box, gtkadd(gtkcreate_frame(N("Details")), 
+                         gtknew('HBox', border_width => 5, children_loose => [
+                         gtkset_alignment(gtkset_justify(Gtk2::Label->new($info), 'left'), 0, 0) ])));
 }
 
 sub current_kind_changed {
@@ -274,7 +288,9 @@ sub create_buttons4partitions {
     };
 
     foreach my $entry (@parts) {
-	my $w = Gtk2::ToggleButton->new_with_label($entry->{mntpoint} || '') or die '';
+	my $info = $entry->{mntpoint};
+	$info .= "\n" . ($entry->{size} ? formatXiB($entry->{size}, 512) : N("Unknown")) if $info;
+	my $w = Gtk2::ToggleButton->new_with_label($info) or internal_error('new_with_label');
 	$w->signal_connect(clicked => sub { 
 	    $current_button != $w or return;
 	    current_entry_changed($kind, $entry); 
@@ -354,9 +370,17 @@ sub createOrChangeType {
               { pt_type => 0, start => 1, size => $hd->{totalsectors} - 1 };
     $part or return;
     if ($fs_type eq 'other') {
-	$in->ask_warn('', N("Use ``%s'' instead", isEmpty($part) ? N("Create") : N("Type")));
+        if (isEmpty($part)) {
+            try('Create', $hd, $part);
+        } else {
+            try('Type', $hd, $part);
+        }
     } elsif (!$fs_type) {
-	$in->ask_warn('', N("Use ``%s'' instead", N("Delete"))) if !isEmpty($part);
+        if (isEmpty($part)) {
+            $in->ask_warn(N("Warning"), N("This partition is already empty"));
+        } else {
+            try('Delete', $hd, $part);
+        }
     } elsif (isEmpty($part)) {
 	fs::type::set_fs_type($part, $fs_type);
 	diskdrake::interactive::Create($in, $hd, $part, $all_hds);

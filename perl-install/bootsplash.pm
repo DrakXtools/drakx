@@ -3,10 +3,6 @@ package bootsplash;
 use common;
 use Xconfig::resolution_and_depth;
 
-use Exporter;
-our @ISA = qw(Exporter);
-our %EXPORT_TAGS = (drawing => [qw(rectangle2xywh xywh2rectangle distance farthest nearest)]);
-our @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
 my $themes_dir = "/usr/share/bootsplash/themes";
 my $themes_config_dir = "/etc/bootsplash/themes";
@@ -20,7 +16,7 @@ sub get_framebuffer_resolution() {
     require bootloader;
     require fsedit;
     my $bootloader = bootloader::read(fsedit::get_hds());
-    my $x_res = Xconfig::resolution_and_depth::from_bios($bootloader->{default_vga});
+    my $x_res = Xconfig::resolution_and_depth::from_bios($bootloader->{default_options}{vga});
     $x_res ?
       ($x_res->{X} . 'x' . $x_res->{Y}, 1) :
       (first(@resolutions), 0);

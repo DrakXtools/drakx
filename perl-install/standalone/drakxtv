@@ -2,7 +2,7 @@
 # DrakxTV
 # $Id$
 
-# Copyright (C) 2002-2005 Mandriva (tvignaud@mandriva.com)
+# Copyright (C) 2002-2006 Mandriva (tvignaud@mandriva.com)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -33,86 +33,6 @@ $ugtk2::wm_icon = "/usr/share/mcc/themes/default/tv-mdk.png";
 
 my $in = 'interactive'->vnew;
 
-sub scan4channels() {
-    # xawtv has been installed by DrakX when/if it's detected a tv
-    # card.
-
-    $in->do_pkgs->ensure_binary_is_installed('xawtv', 'scantv');
-
-	   my ($ftable_id, $norm);
-        #   this table must be checked on each xawtv release:
-	   my %freqtables = 
-          ("us-bcast" => N("USA (broadcast)"), "us-cable" => N("USA (cable)"), "us-cable-hrc" => N("USA (cable-hrc)"), "canada-cable" => N("Canada (cable)"),
-           "japan-bcast" => N("Japan (broadcast)"), "japan-cable" => N("Japan (cable)"), "china-bcast" => N("China (broadcast)"),
-           "europe-west" => N("West Europe"), "europe-east" => N("East Europe"), "italy" => N("Italy"), "ireland" => N("Ireland"), "france" => N("France [SECAM]"),
-           "newzealand" => N("Newzealand"), "australia" => N("Australia"),
-           "southafrica" => N("South Africa"),
-           "argentina" => N("Argentina"),
-           "australia-optus" => N("Australian Optus cable TV"),
-           -1 => N("All")
-          );
-        #   Info: HRC means "Harmonically Related Carrier"
-
-        my %countries =
-          (
-           "AR" => [ "argentina" ],
-           "AU" => [ "australia" ],
-           "FR" => [ "france", "SECAM" ],
-           "CA" => [ "canada-cable", "NTSC" ],
-           "IE" => [ "ireland" ],
-           "IT" => [ "italy" ],
-           "JP" => [ "japan-bcast", "NTSC-JP" ],
-           "NZ" => [ "newzealand" ],
-           "AT|BE|CH|DE|ES|GB|SE" => [ "europe-west" ],
-           "US" => [ "us-bcast", "NTSC" ],
-           "ZA" => [ "southafrica" ],
-           "CN|TW" => [ "china-bcast" ]
-          );
-
-        my $tbl;
-        my $locale = lang::read($>);
-        $locale->{country} =~ /$_/ and $tbl = $countries{$_} foreach keys %countries;
-        if ($tbl) {
-            $ftable_id = $tbl->[0];
-            $norm = $tbl->[1] if $tbl->[1];
-        }
-        # default to pal since most people use that
-        $norm ||= "PAL";
-        log::l("[drakxtv] guess country=>$locale->{country}, norm=>$norm, area=>$ftable_id");
-        my %users = map { $_->[6] || $_->[0] => $_->[7] } grep { $_->[2] == 0 || 500 <= $_->[2] } list_passwd();
-        my $user;
-
-	   if ($in->ask_from("TVdrake", N("Please,\ntype in your tv norm and country"),
-                          [
-                           { label => N("TV norm:"), val => \$norm, list => [ "NTSC", "NTSC-JP", "PAL", "PAL-M", "PAL-N", "PAL-NC", "SECAM" ], type => 'combo' },
-					  { label => N("Area:"), val => \$ftable_id, list => [keys %freqtables], format => sub { $freqtables{$_[0]} }, sort => 1 },
-					  { label => N("User:"), val => \$user, list => [ keys %users ], sort => 1 },
-					  ]
-					 )) {
-            my $_wait = $in->wait_message(N("Please wait"),
-								 N("Scanning for TV channels in progress..."));
-            # we provide scantv a bogus table (france) which will
-            # will be ignored since "All" is selected (because of -a)
-		  $ftable_id = "france -a " if $ftable_id eq -1;
-		  # Note that this'll be broken if/when we implement interactive::qt
-		  my $use_X = $in->isa('interactive::gtk') && -x "/usr/X11R6/bin/xvt";
-		  my $home = $users{$user}; #ENV{HOME};
-		  my $is_bttv_loaded = cat_("/proc/modules");
-            # workaround non loaded bttv
-		  run_program::run('/sbin/modprobe', 'bttv') if $< == 0 && $is_bttv_loaded !~ /bttv/;
-		  my $i = system(($use_X ? "xvt -T '" . N("Scanning for TV channels") . " ...' -e " : "") . 
-                           "scantv -n $norm -C /dev/v4l/vbi$::i -c /dev/v4l/video$::i -f $ftable_id -o $home/.xawtv" .
-                           ($use_X ? "" : " &>$home/tmp/scantv.log;"));
-		  if ($i) {
-			 $in->ask_warn(N("Error"), N("There was an error while scanning for TV channels"));
-            } else {
-			 log::explanations("created file $home/.xawtv");
-                $in->ask_warn(N("Have a nice day!"),
-                              N("Now, you can run xawtv (under X Window!) !\n")) unless $use_X;
-            }
-	   }
-}
-
 my @devices = detect_devices::getTVcards();
 push @devices, { driver => 'bttv', description => 'dummy' } if $::testing && !@devices;
 my ($devices, $devices_ok) = partition { detect_devices::isTVcardConfigurable($_) } @devices;
@@ -132,7 +52,6 @@ if (@devices = @$devices) {
 		  $not_canceled &&= harddrake::v4l::config($in, $modules_conf, $_->{driver});
 		  $modules_conf->write;
 	   }
-	   scan4channels() if $not_canceled;
     } @devices;
 }
 
@@ -141,7 +60,6 @@ if (@devices = @$devices_ok) {
     require modules;
     $modules_conf ||= modules::any_conf->read;
     $modules_conf->write;
-    scan4channels();
 }
 
 # we failed to detect any TV card:

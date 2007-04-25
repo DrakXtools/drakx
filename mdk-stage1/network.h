@@ -29,16 +29,15 @@
 enum return_type intf_select_and_up();
 
 enum return_type nfs_prepare(void);
-#ifndef MANDRAKE_MOVE
 enum return_type ftp_prepare(void);
 enum return_type http_prepare(void);
 #ifndef DISABLE_KA
 enum return_type ka_prepare(void);
 #endif
-#endif
 
 
 enum boot_proto_type { BOOTPROTO_STATIC, BOOTPROTO_DHCP, BOOTPROTO_ADSL_PPPOE };
+enum auto_detection_type { AUTO_DETECTION_NONE, AUTO_DETECTION_ALL, AUTO_DETECTION_WIRED };
 
 /* all of these in_addr things are in network byte order! */
 struct interface_info {

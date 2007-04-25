@@ -3,7 +3,7 @@ use strict;
 
 ########################################
 # config files
-$nfs_exports::default_options = '*(ro,all_squash,sync)';
+$nfs_exports::default_options = '*(ro,all_squash,sync,no_subtree_check)';
 $nfs_exports::conf_file = '/etc/exports';
 $smb_exports::conf_file = '/etc/samba/smb.conf';
 my $authorisation_file = '/etc/security/fileshare.conf';
@@ -12,7 +12,7 @@ my $authorisation_group = 'fileshare';
 
 ########################################
 # fileshare utility $Id$
-# Copyright (C) 2001-2005 Mandriva (pixel@mandrakesoft.com)
+# Copyright (C) 2001-2006 Mandriva (pixel@mandrakesoft.com)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

@@ -1,0 +1,1564 @@
+# Korean translation of drakbootdisk.
+# Copyright (C) 2001 Free Software Foundation, Inc.
+# Jaegeum Choe <baedaron@hananet.net>, 2001.
+#
+# changes asked by HP people -- pablo 2003-01-23
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DrakX\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-03-21 12:07+0100\n"
+"PO-Revision-Date: 2002-09-09 09:08+0900\n"
+"Last-Translator: Jaegeum Cze <baedaron@hanafos.com>\n"
+"Language-Team: Korean <beadaron@hanafos.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: any.pm:159
+#, fuzzy, c-format
+msgid "Do you have further supplementary media?"
+msgstr "또 다른것이 설치되어 있습니까?"
+
+#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
+#: any.pm:162
+#, c-format
+msgid ""
+"The following media have been found and will be used during install: %s.\n"
+"\n"
+"\n"
+"Do you have a supplementary installation medium to configure?"
+msgstr ""
+
+#: any.pm:170
+#, c-format
+msgid "CD-ROM"
+msgstr "CD-ROM"
+
+#: any.pm:171
+#, fuzzy, c-format
+msgid "Network (HTTP)"
+msgstr "네트웍"
+
+#: any.pm:172
+#, fuzzy, c-format
+msgid "Network (FTP)"
+msgstr "네트웍"
+
+#: any.pm:173
+#, c-format
+msgid "Network (NFS)"
+msgstr ""
+
+#: any.pm:212
+#, c-format
+msgid "URL of the mirror?"
+msgstr ""
+
+#: any.pm:218
+#, c-format
+msgid "URL must start with ftp:// or http://"
+msgstr ""
+
+#: any.pm:229
+#, c-format
+msgid ""
+"Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgstr "유효한 미러 목록을 받기 위해 맨드리바 리눅스 웹사이트에 접속 중..."
+
+#: any.pm:234
+#, fuzzy, c-format
+msgid ""
+"Failed contacting Mandriva Linux web site to get the list of available "
+"mirrors"
+msgstr "유효한 미러 목록을 받기 위해 맨드리바 리눅스 웹사이트에 접속 중..."
+
+#: any.pm:244
+#, c-format
+msgid "Choose a mirror from which to get the packages"
+msgstr "팩키지를 받을 미러 사이트를 선택해 주세요."
+
+#: any.pm:274
+#, c-format
+msgid "NFS setup"
+msgstr ""
+
+#: any.pm:275
+#, c-format
+msgid "Please enter the hostname and directory of your NFS media"
+msgstr ""
+
+#: any.pm:279
+#, c-format
+msgid "Hostname missing"
+msgstr ""
+
+#: any.pm:280
+#, c-format
+msgid "Directory must begin with \"/\""
+msgstr ""
+
+#: any.pm:284
+#, c-format
+msgid "Hostname of the NFS mount ?"
+msgstr ""
+
+#: any.pm:285
+#, c-format
+msgid "Directory"
+msgstr "디렉토리"
+
+#: any.pm:307
+#, c-format
+msgid "Supplementary"
+msgstr ""
+
+#: any.pm:342
+#, fuzzy, c-format
+msgid ""
+"Can't find a package list file on this mirror. Make sure the location is "
+"correct."
+msgstr "%s를 열 수 없습니다: %s\n"
+
+#: any.pm:376
+#, c-format
+msgid "Looking at packages already installed..."
+msgstr "이미 설치된 팩키지 찾는 중..."
+
+#: any.pm:383
+#, c-format
+msgid "Removing packages prior to upgrade..."
+msgstr ""
+
+#: any.pm:426
+#, c-format
+msgid "Finding packages to upgrade..."
+msgstr "업그레이드할 팩키지를 검색중입니다."
+
+#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
+#: any.pm:636
+#, fuzzy, c-format
+msgid ""
+"You have selected the following server(s): %s\n"
+"\n"
+"\n"
+"These servers are activated by default. They do not have any known security\n"
+"issues, but some new ones could be found. In that case, you must make sure\n"
+"to upgrade as soon as possible.\n"
+"\n"
+"\n"
+"Do you really want to install these servers?\n"
+msgstr ""
+"다음과 같은 서버들이 선택되었습니다: %s\n"
+"\n"
+"\n"
+"이 서버들은 기본적으로 활성화됩니다. 비록 아직까지 알려진 보안 문제는 없지"
+"만,\n"
+"새로운 문제점이 발견될 수도 있습니다. 그럴 경우에는 가능한 한 신속하게\n"
+"업그레이드해야 합니다.\n"
+"\n"
+"\n"
+"정말로 이 서버들을 설치합니까?\n"
+
+#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
+#: any.pm:659
+#, c-format
+msgid ""
+"The following packages will be removed to allow upgrading your system: %s\n"
+"\n"
+"\n"
+"Do you really want to remove these packages?\n"
+msgstr ""
+
+#: any.pm:1081
+#, fuzzy, c-format
+msgid "The following disk(s) were renamed:"
+msgstr "다음 팩키지들이 설치될 것입니다."
+
+#: any.pm:1083
+#, c-format
+msgid "%s (previously named as %s)"
+msgstr ""
+
+#: any.pm:1140
+#, c-format
+msgid "HTTP"
+msgstr "HTTP"
+
+#: any.pm:1140
+#, c-format
+msgid "FTP"
+msgstr "FTP"
+
+#: any.pm:1140
+#, c-format
+msgid "NFS"
+msgstr "NFS"
+
+#: any.pm:1159 steps_interactive.pm:840
+#, c-format
+msgid "Network"
+msgstr "네트웍"
+
+#: any.pm:1163
+#, fuzzy, c-format
+msgid "Please choose a media"
+msgstr "선택하세요"
+
+#: any.pm:1179
+#, fuzzy, c-format
+msgid "File already exists. Overwrite it?"
+msgstr "파일이 이미 존재합니다. 덮어쓸까요?"
+
+#: any.pm:1183
+#, c-format
+msgid "Permission denied"
+msgstr "권한이 없습니다."
+
+#: any.pm:1231
+#, c-format
+msgid "Bad NFS name"
+msgstr ""
+
+#: any.pm:1252
+#, fuzzy, c-format
+msgid "Bad media %s"
+msgstr "파일 %s 읽어들임"
+
+#: any.pm:1294
+#, c-format
+msgid "Can not make screenshots before partitioning"
+msgstr "파티션을 나누기 전에는 스크린샷을 만들 수 없습니다."
+
+#: any.pm:1301
+#, c-format
+msgid "Screenshots will be available after install in %s"
+msgstr "스크린샷은 설치후에 %s에 있습니다."
+
+#: gtk.pm:136
+#, fuzzy, c-format
+msgid "Installation"
+msgstr "설치중"
+
+#: gtk.pm:139 share/meta-task/compssUsers.pl:54
+#, c-format
+msgid "Configuration"
+msgstr "설정"
+
+#: install2.pm:165
+#, c-format
+msgid "You must also format %s"
+msgstr ""
+
+#: interactive.pm:16
+#, c-format
+msgid ""
+"Some hardware on your computer needs ``proprietary'' drivers to work.\n"
+"You can find some information about them at: %s"
+msgstr ""
+"「상업용」드라이버를 필요로하는 일부 하드웨어가 시스템상에 있습니다.\n"
+"자세한 정보는 다음을 참조하세요: %s"
+
+#: interactive.pm:22
+#, c-format
+msgid "Bringing up the network"
+msgstr "네트웍 활성화 중..."
+
+#: interactive.pm:27
+#, c-format
+msgid "Bringing down the network"
+msgstr "네트웍 해제 중..."
+
+#: media.pm:697 media.pm:706
+#, fuzzy, c-format
+msgid "Downloading file %s..."
+msgstr "파일 전송 중 ..."
+
+#: media.pm:798
+#, c-format
+msgid "Copying some packages on disks for future use"
+msgstr ""
+
+#: media.pm:851
+#, fuzzy, c-format
+msgid "Copying in progress"
+msgstr "검색 진행 중"
+
+#: pkgs.pm:27
+#, c-format
+msgid "must have"
+msgstr "필수 팩키지"
+
+#: pkgs.pm:28
+#, c-format
+msgid "important"
+msgstr "중요한 팩키지"
+
+#: pkgs.pm:29
+#, c-format
+msgid "very nice"
+msgstr "훌륭한 팩키지"
+
+#: pkgs.pm:30
+#, c-format
+msgid "nice"
+msgstr "좋은 팩키지"
+
+#: pkgs.pm:31
+#, c-format
+msgid "maybe"
+msgstr "괜찮은 팩키지"
+
+#: share/advertising/ARKEIA_EN.pl:3 share/advertising/ARKEIA_FR.pl:3
+#, c-format
+msgid "Arkeia"
+msgstr ""
+
+#: share/advertising/FLATOUT.pl:3
+#, c-format
+msgid "Flatout"
+msgstr ""
+
+#: share/advertising/IM-GWENVIEW.pl:3
+#, c-format
+msgid "Gwenview"
+msgstr ""
+
+#: share/advertising/IM_3D.pl:3
+#, c-format
+msgid "3D"
+msgstr ""
+
+#: share/advertising/IM_CMSJOOMLA.pl:3
+#, c-format
+msgid "CMS"
+msgstr ""
+
+#: share/advertising/IM_CRM.pl:3
+#, c-format
+msgid "CRM"
+msgstr ""
+
+#: share/advertising/IM_GAMME.pl:3
+#, c-format
+msgid "2007 product line"
+msgstr ""
+
+#: share/advertising/IM_INVICTUS.pl:3
+#, c-format
+msgid "Invictus Firewall"
+msgstr ""
+
+#: share/advertising/IM_ONE.pl:3
+#, c-format
+msgid "Discovery Live Mode"
+msgstr ""
+
+#: share/advertising/IM_REGISTER.pl:3
+#, c-format
+msgid "How to register"
+msgstr ""
+
+#: share/advertising/IM_RPMDRAKE.pl:3
+#, c-format
+msgid "Rpmdrake 2"
+msgstr ""
+
+#: share/advertising/IM_SERVICES.pl:3
+#, c-format
+msgid "Mandriva Online Services"
+msgstr ""
+
+#: share/advertising/IM_THEME.pl:3
+#, c-format
+msgid "New Theme"
+msgstr ""
+
+#: share/advertising/IM_web2.pl:3
+#, c-format
+msgid "Web 2.0"
+msgstr ""
+
+#: share/advertising/Kaspersky.pl:3
+#, c-format
+msgid "Kaspersky"
+msgstr ""
+
+#: share/advertising/LinDVD.pl:3
+#, c-format
+msgid "LinDVD"
+msgstr ""
+
+#: share/advertising/Skype.pl:3
+#, c-format
+msgid "Skype"
+msgstr ""
+
+#: share/advertising/TRANSGAMING-CEDEGA.pl:3
+#, c-format
+msgid "Transgaming/Cedega"
+msgstr ""
+
+#: share/advertising/VPN.pl:3
+#, c-format
+msgid "DrakVPN"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:23
+#, c-format
+msgid "Workstation"
+msgstr "워크스테이션"
+
+#: share/meta-task/compssUsers.pl:25
+#, c-format
+msgid "Office Workstation"
+msgstr "오피스 워크스테이션"
+
+#: share/meta-task/compssUsers.pl:27
+#, c-format
+msgid ""
+"Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets "
+"(OpenOffice.org Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"오피스 프로그램들: 워드프로세서 (OpenOffice.org Writer, Kword), 스프레드쉬트 "
+"(OpenOffice.org Calc, Kspread), pdf 뷰어, 등등"
+
+#: share/meta-task/compssUsers.pl:28
+#, c-format
+msgid ""
+"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
+"gnumeric), pdf viewers, etc"
+msgstr ""
+"오피스 프로그램들: 워드프로세서 (kword, abiword), 스프레드쉬트 (kspread,"
+"gnumeric), pdf 뷰어, 등등"
+
+#: share/meta-task/compssUsers.pl:33
+#, c-format
+msgid "Game station"
+msgstr "게임 스테이션"
+
+#: share/meta-task/compssUsers.pl:34
+#, c-format
+msgid "Amusement programs: arcade, boards, strategy, etc"
+msgstr "장난감 프로그램: arcade, boards, strategy, 등등"
+
+#: share/meta-task/compssUsers.pl:37
+#, c-format
+msgid "Multimedia station"
+msgstr "멀티미디어 스테이션"
+
+#: share/meta-task/compssUsers.pl:38
+#, c-format
+msgid "Sound and video playing/editing programs"
+msgstr "사운드 및 비디오 연주/편집 프로그램"
+
+#: share/meta-task/compssUsers.pl:43
+#, c-format
+msgid "Internet station"
+msgstr "인터넷 스테이션"
+
+#: share/meta-task/compssUsers.pl:44
+#, fuzzy, c-format
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr "메일/뉴스를 일고 보내며 웹검색을 위한 도구모음(pine, mutt, tin...)"
+
+#: share/meta-task/compssUsers.pl:49
+#, c-format
+msgid "Network Computer (client)"
+msgstr "네트웍 컴퓨터 (클라이언트)"
+
+#: share/meta-task/compssUsers.pl:50
+#, c-format
+msgid "Clients for different protocols including ssh"
+msgstr "SSH 및 다른 프로토콜의 클라이언트"
+
+#: share/meta-task/compssUsers.pl:55
+#, c-format
+msgid "Tools to ease the configuration of your computer"
+msgstr "쉬운 컴퓨터 설정을 위한 도구"
+
+#: share/meta-task/compssUsers.pl:59
+#, c-format
+msgid "Console Tools"
+msgstr "콘솔 도구"
+
+#: share/meta-task/compssUsers.pl:60
+#, c-format
+msgid "Editors, shells, file tools, terminals"
+msgstr "에디터, 쉘, 파일도구, 터미널"
+
+#: share/meta-task/compssUsers.pl:64 share/meta-task/compssUsers.pl:166
+#: share/meta-task/compssUsers.pl:168
+#, c-format
+msgid "Development"
+msgstr "개발"
+
+#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:169
+#, c-format
+msgid "C and C++ development libraries, programs and include files"
+msgstr "C/C++ 개발 라이브러리, 프로그램 및 헤더파일"
+
+#: share/meta-task/compssUsers.pl:69 share/meta-task/compssUsers.pl:173
+#, c-format
+msgid "Documentation"
+msgstr "문서"
+
+#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:174
+#, c-format
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "리눅스 및 자유 소프트웨어에 대한 서적과 Howto문서"
+
+#: share/meta-task/compssUsers.pl:74 share/meta-task/compssUsers.pl:177
+#, c-format
+msgid "LSB"
+msgstr "LSB"
+
+#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:178
+#, c-format
+msgid "Linux Standard Base. Third party applications support"
+msgstr "리눅스 표준 기반. 외부 애플리케이션 지원"
+
+#: share/meta-task/compssUsers.pl:84
+#, c-format
+msgid "Web Server"
+msgstr "웹 서버"
+
+#: share/meta-task/compssUsers.pl:85
+#, c-format
+msgid "Apache"
+msgstr "아파치와"
+
+#: share/meta-task/compssUsers.pl:88
+#, fuzzy, c-format
+msgid "Groupware"
+msgstr "그룹"
+
+#: share/meta-task/compssUsers.pl:89
+#, c-format
+msgid "Kolab Server"
+msgstr "Kolab 서버"
+
+#: share/meta-task/compssUsers.pl:92 share/meta-task/compssUsers.pl:133
+#, c-format
+msgid "Firewall/Router"
+msgstr "방화벽/라우터"
+
+#: share/meta-task/compssUsers.pl:93 share/meta-task/compssUsers.pl:134
+#, c-format
+msgid "Internet gateway"
+msgstr "인터넷 게이트웨이"
+
+#: share/meta-task/compssUsers.pl:96
+#, fuzzy, c-format
+msgid "Mail/News"
+msgstr "/파일(F)/새로 만들기(_N)"
+
+#: share/meta-task/compssUsers.pl:97
+#, fuzzy, c-format
+msgid "Postfix mail server, Inn news server"
+msgstr "포스트픽스 메일 서버"
+
+#: share/meta-task/compssUsers.pl:100
+#, fuzzy, c-format
+msgid "Directory Server"
+msgstr "CD로부터 복구"
+
+#: share/meta-task/compssUsers.pl:104
+#, c-format
+msgid "FTP Server"
+msgstr "FTP 서버"
+
+#: share/meta-task/compssUsers.pl:105
+#, c-format
+msgid "ProFTPd"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:108
+#, c-format
+msgid "DNS/NIS"
+msgstr "DNS/NIS"
+
+#: share/meta-task/compssUsers.pl:109
+#, c-format
+msgid "Domain Name and Network Information Server"
+msgstr "도메인 네임 및 네트웍 정보 서버"
+
+#: share/meta-task/compssUsers.pl:112
+#, fuzzy, c-format
+msgid "File and Printer Sharing Server"
+msgstr "프린터 서버"
+
+#: share/meta-task/compssUsers.pl:113
+#, fuzzy, c-format
+msgid "NFS Server, Samba server"
+msgstr "삼바 서비스"
+
+#: share/meta-task/compssUsers.pl:116 share/meta-task/compssUsers.pl:129
+#, c-format
+msgid "Database"
+msgstr "데이터베이스"
+
+#: share/meta-task/compssUsers.pl:117
+#, fuzzy, c-format
+msgid "PostgreSQL and MySQL Database Server"
+msgstr "PostgreSQL 또는 MySQL 데이터베이스 서버"
+
+#: share/meta-task/compssUsers.pl:121
+#, c-format
+msgid "Web/FTP"
+msgstr "웹/FTP"
+
+#: share/meta-task/compssUsers.pl:122
+#, c-format
+msgid "Apache, Pro-ftpd"
+msgstr "아파치와 프로FTPD"
+
+#: share/meta-task/compssUsers.pl:125
+#, c-format
+msgid "Mail"
+msgstr "메일"
+
+#: share/meta-task/compssUsers.pl:126
+#, c-format
+msgid "Postfix mail server"
+msgstr "포스트픽스 메일 서버"
+
+#: share/meta-task/compssUsers.pl:130
+#, c-format
+msgid "PostgreSQL or MySQL database server"
+msgstr "PostgreSQL 또는 MySQL 데이터베이스 서버"
+
+#: share/meta-task/compssUsers.pl:137
+#, c-format
+msgid "Network Computer server"
+msgstr "네트웍 컴퓨터 서버"
+
+#: share/meta-task/compssUsers.pl:138
+#, c-format
+msgid "NFS server, SMB server, Proxy server, ssh server"
+msgstr "NFS 서버, 삼바 서버, 프락시 서버, SSH 서버"
+
+#: share/meta-task/compssUsers.pl:144
+#, c-format
+msgid "Graphical Environment"
+msgstr "그래픽 환경"
+
+#: share/meta-task/compssUsers.pl:146
+#, c-format
+msgid "KDE Workstation"
+msgstr "KDE 워크스테이션"
+
+#: share/meta-task/compssUsers.pl:147
+#, c-format
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr "K Desktop 환경, 여러가지 도구를 수반한 기본 그래픽 환경"
+
+#: share/meta-task/compssUsers.pl:151
+#, c-format
+msgid "GNOME Workstation"
+msgstr "GNOME 워크스테이션"
+
+#: share/meta-task/compssUsers.pl:152
+#, c-format
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr "사용자 친화적 프로그램과 데스크탑 도구를 가진 그래픽 환경"
+
+#: share/meta-task/compssUsers.pl:155
+#, fuzzy, c-format
+msgid "IceWm Desktop"
+msgstr "일터"
+
+#: share/meta-task/compssUsers.pl:159
+#, c-format
+msgid "Other Graphical Desktops"
+msgstr "기타 그래픽 데스크탑"
+
+#: share/meta-task/compssUsers.pl:160
+#, fuzzy, c-format
+msgid "Window Maker, Enlightenment, Fvwm, etc"
+msgstr "Icewm, 윈도우 메이커, 인라이튼먼트, Fvwm, 등등"
+
+#: share/meta-task/compssUsers.pl:183
+#, c-format
+msgid "Utilities"
+msgstr "유틸리티"
+
+#: share/meta-task/compssUsers.pl:185 share/meta-task/compssUsers.pl:186
+#, c-format
+msgid "SSH Server"
+msgstr "SSH 서비스"
+
+#: share/meta-task/compssUsers.pl:190
+#, fuzzy, c-format
+msgid "Webmin"
+msgstr "웹민 서비스"
+
+#: share/meta-task/compssUsers.pl:191
+#, fuzzy, c-format
+msgid "Webmin Remote Configuration Server"
+msgstr "맨드리바 터미널 서버 설정"
+
+#: share/meta-task/compssUsers.pl:195
+#, fuzzy, c-format
+msgid "Network Utilities/Monitoring"
+msgstr "네트웍 환경 설정"
+
+#: share/meta-task/compssUsers.pl:196
+#, c-format
+msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:200
+#, fuzzy, c-format
+msgid "Mandriva Wizards"
+msgstr "맨드리바 제어 센터"
+
+#: share/meta-task/compssUsers.pl:201
+#, fuzzy, c-format
+msgid "Wizards to configure server"
+msgstr "프린터 「%s」 설정 중 ..."
+
+#: steps.pm:85
+#, c-format
+msgid ""
+"An error occurred, but I do not know how to handle it nicely.\n"
+"Continue at your own risk."
+msgstr ""
+"오류가 발생했습니다. 그러나 적절히 처리할 수 없습니다.\n"
+"위헝을 감수할려면 계속하세요."
+
+#: steps.pm:426
+#, c-format
+msgid ""
+"Some important packages did not get installed properly.\n"
+"Either your cdrom drive or your cdrom is defective.\n"
+"Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm"
+"\"\n"
+msgstr ""
+"일부 중요한 팩키지들이 올바르게 설치되지 않았습니다.\n"
+"CDROM 드라이브 또는 미디어가 손상되었습니다.\n"
+"이미 설치가 완료된 컴퓨터에서 「rpm -qpl media/main/*.rpm」명령으로 점검해 보"
+"세요.\n"
+
+#: steps_auto_install.pm:71 steps_stdio.pm:27
+#, c-format
+msgid "Entering step `%s'\n"
+msgstr "%s 단계로 넘어갑니다.\n"
+
+#: steps_curses.pm:22
+#, c-format
+msgid "Mandriva Linux Installation %s"
+msgstr "리눅스-맨드리바 설치 %s"
+
+#: steps_curses.pm:32
+#, c-format
+msgid "<Tab>/<Alt-Tab> between elements"
+msgstr "<Tab>/<Alt-Tab> 항목간 이동"
+
+#: steps_gtk.pm:195
+#, c-format
+msgid ""
+"Your system is low on resources. You may have some problem installing\n"
+"Mandriva Linux. If that occurs, you can try a text install instead. For "
+"this,\n"
+"press `F1' when booting on CDROM, then enter `text'."
+msgstr ""
+"시스템의 자원이 부족합니다. 리눅스 맨드리바를 설치하는데 일부 문제가 발생할\n"
+"수도 있습니다. 만약 문제가 발생하면, 택스트 모드로 설치를 시도해 보세요.\n"
+"텍스트 모드로 설치하려면, CDROM으로 부팅후 「F1」을 누르고 「text」라고 입력"
+"하세요."
+
+#: steps_gtk.pm:225 steps_interactive.pm:511
+#, c-format
+msgid "Package Group Selection"
+msgstr "팩키지 그룹 선택"
+
+#: steps_gtk.pm:246 steps_interactive.pm:529
+#, c-format
+msgid "Individual package selection"
+msgstr "개별 팩키지 선택"
+
+#: steps_gtk.pm:268 steps_interactive.pm:454
+#, c-format
+msgid "Total size: %d / %d MB"
+msgstr "전체 크기: %d / %d MB"
+
+#: steps_gtk.pm:313
+#, c-format
+msgid "Bad package"
+msgstr "잘못된 팩키지"
+
+#: steps_gtk.pm:315
+#, c-format
+msgid "Version: "
+msgstr "버전: "
+
+#: steps_gtk.pm:316
+#, c-format
+msgid "Size: "
+msgstr "크기: "
+
+#: steps_gtk.pm:316
+#, fuzzy, c-format
+msgid "%d KB\n"
+msgstr "크기: %d KB\n"
+
+#: steps_gtk.pm:317
+#, c-format
+msgid "Importance: "
+msgstr "중요도: "
+
+#: steps_gtk.pm:351
+#, c-format
+msgid "You can not select/unselect this package"
+msgstr "이 팩키지를 선택/버림 할수 없습니다."
+
+#: steps_gtk.pm:355
+#, fuzzy, c-format
+msgid "due to missing %s"
+msgstr "kdesu가 없음"
+
+#: steps_gtk.pm:356
+#, c-format
+msgid "due to unsatisfied %s"
+msgstr ""
+
+#: steps_gtk.pm:357
+#, c-format
+msgid "trying to promote %s"
+msgstr ""
+
+#: steps_gtk.pm:358
+#, c-format
+msgid "in order to keep %s"
+msgstr ""
+
+#: steps_gtk.pm:363
+#, c-format
+msgid ""
+"You can not select this package as there is not enough space left to install "
+"it"
+msgstr "디스크 공간이 부족하기 때문에 이 팩키지를 선택할 수 없습니다."
+
+#: steps_gtk.pm:366
+#, c-format
+msgid "The following packages are going to be installed"
+msgstr "다음 팩키지들이 설치될 것입니다."
+
+#: steps_gtk.pm:367
+#, c-format
+msgid "The following packages are going to be removed"
+msgstr "다음 팩키지들이 제거될 것입니다."
+
+#: steps_gtk.pm:392
+#, c-format
+msgid "This is a mandatory package, it can not be unselected"
+msgstr "이것은 필수적인 팩키지입니다. 반드시 선택되어야 합니다."
+
+#: steps_gtk.pm:394
+#, c-format
+msgid "You can not unselect this package. It is already installed"
+msgstr "이 팩키지를 선택해제할 수 없습니다. 이미 설치 되었습니다."
+
+#: steps_gtk.pm:396
+#, c-format
+msgid "You can not unselect this package. It must be upgraded"
+msgstr "이 팩키지를 선택해제할수 없습니다. 반드시 업그레이드되어야 합니다."
+
+#: steps_gtk.pm:400
+#, c-format
+msgid "Show automatically selected packages"
+msgstr "자동으로 선택된 팩키지들 보이기"
+
+#: steps_gtk.pm:402 steps_interactive.pm:133
+#, c-format
+msgid "Install"
+msgstr "설치"
+
+#: steps_gtk.pm:405
+#, fuzzy, c-format
+msgid "Load/Save selection"
+msgstr "선택 이동"
+
+#: steps_gtk.pm:406
+#, c-format
+msgid "Updating package selection"
+msgstr "선택된 팩키지 목록 업데이트 중"
+
+#: steps_gtk.pm:411
+#, c-format
+msgid "Minimal install"
+msgstr "최소 설치"
+
+#: steps_gtk.pm:425
+#, c-format
+msgid "Software Management"
+msgstr "소프트웨어 관리"
+
+#: steps_gtk.pm:425 steps_interactive.pm:373
+#, c-format
+msgid "Choose the packages you want to install"
+msgstr "설치하고자 하는 팩키지를 선택하세요."
+
+#: steps_gtk.pm:442 steps_interactive.pm:543
+#, c-format
+msgid "Installing"
+msgstr "설치중"
+
+#: steps_gtk.pm:468
+#, fuzzy, c-format
+msgid "No details"
+msgstr "상세설명"
+
+#: steps_gtk.pm:483
+#, c-format
+msgid "Time remaining "
+msgstr "남은 시간 "
+
+#: steps_gtk.pm:484
+#, c-format
+msgid "Estimating"
+msgstr "계산 중"
+
+#: steps_gtk.pm:511
+#, c-format
+msgid "%d package"
+msgid_plural "%d packages"
+msgstr[0] "%d 팩키지"
+
+#: steps_gtk.pm:557 steps_interactive.pm:729
+#, c-format
+msgid "Summary"
+msgstr "요약설명"
+
+#: steps_gtk.pm:570
+#, c-format
+msgid "Configure"
+msgstr "설정"
+
+#: steps_gtk.pm:580 steps_interactive.pm:725 steps_interactive.pm:852
+#, fuzzy, c-format
+msgid "not configured"
+msgstr "재설정"
+
+#: steps_gtk.pm:612 steps_interactive.pm:268
+#, c-format
+msgid ""
+"The following installation media have been found.\n"
+"If you want to skip some of them, you can unselect them now."
+msgstr ""
+
+#: steps_gtk.pm:621 steps_interactive.pm:274
+#, c-format
+msgid ""
+"You have the option to copy the contents of the CDs onto the hard drive "
+"before installation.\n"
+"It will then continue from the hard drive and the packages will remain "
+"available once the system is fully installed."
+msgstr ""
+
+#: steps_gtk.pm:623 steps_interactive.pm:276
+#, c-format
+msgid "Copy whole CDs"
+msgstr ""
+
+#: steps_interactive.pm:38
+#, c-format
+msgid "An error occurred"
+msgstr "오류 발생"
+
+#: steps_interactive.pm:97
+#, c-format
+msgid "Please choose your keyboard layout."
+msgstr "키보드 레이아웃 선택을 선택하세요."
+
+#: steps_interactive.pm:99
+#, fuzzy, c-format
+msgid "Here is the full list of available keyboards"
+msgstr "지원되는 키보드 목록이 여기에 있습니다."
+
+#: steps_interactive.pm:128
+#, fuzzy, c-format
+msgid "Install/Upgrade"
+msgstr "설치/업데이트"
+
+#: steps_interactive.pm:129
+#, fuzzy, c-format
+msgid "Is this an install or an upgrade?"
+msgstr "설치합니까 아니면 업데이트 합니까?"
+
+#: steps_interactive.pm:135
+#, fuzzy, c-format
+msgid "Upgrade %s"
+msgstr "업그레이드"
+
+#: steps_interactive.pm:148
+#, fuzzy, c-format
+msgid "Encryption key for %s"
+msgstr "암호화 키"
+
+#: steps_interactive.pm:184
+#, c-format
+msgid "IDE"
+msgstr "IDE"
+
+#: steps_interactive.pm:184
+#, c-format
+msgid "Configuring IDE"
+msgstr "IDE 설정중"
+
+#: steps_interactive.pm:221
+#, c-format
+msgid ""
+"No free space for 1MB bootstrap! Install will continue, but to boot your "
+"system, you'll need to create the bootstrap partition in DiskDrake"
+msgstr ""
+"1MB 부트스트랩 공간 부족! 설치는 계속할 수 있지만, 시스템을 부팅하기 위해서"
+"는 디스크드레이크에서 부트스트랩 파티션을 만들어야 합니다."
+
+#: steps_interactive.pm:226
+#, fuzzy, c-format
+msgid ""
+"You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
+"to boot your system, you'll need to create the bootstrap partition in "
+"DiskDrake"
+msgstr ""
+"1MB 부트스트랩 공간 부족! 설치는 계속할 수 있지만, 시스템을 부팅하기 위해서"
+"는 디스크드레이크에서 부트스트랩 파티션을 만들어야 합니다."
+
+#: steps_interactive.pm:318
+#, c-format
+msgid ""
+"Change your Cd-Rom!\n"
+"Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when "
+"done.\n"
+"If you do not have it, press Cancel to avoid installation from this Cd-Rom."
+msgstr ""
+"CDROM을 바꿔 주세요!\n"
+"\n"
+"「%s」라고 쓰여진 CDROM을 드라이브에 넣은 후, 「확인」을 눌러 주세요.\n"
+"만약 CDROM을 가지고 있지 않다면, 「취소」를 눌러 추가 설치를 취소하세요."
+
+#: steps_interactive.pm:340
+#, c-format
+msgid "Looking for available packages..."
+msgstr "유효한 팩키지를 찾고 있습니다."
+
+#: steps_interactive.pm:349
+#, c-format
+msgid ""
+"Your system does not have enough space left for installation or upgrade (%"
+"dMB > %dMB)"
+msgstr ""
+
+#: steps_interactive.pm:385
+#, fuzzy, c-format
+msgid ""
+"Please choose load or save package selection.\n"
+"The format is the same as auto_install generated files."
+msgstr ""
+"플로피에 팩키지 선택목록을 적재 또는 저장할지를 선택하세요.\n"
+"형식(포맷)은 자동설치 생성 플로피와 동일합니다."
+
+#: steps_interactive.pm:387
+#, c-format
+msgid "Load"
+msgstr "읽어들이기"
+
+#: steps_interactive.pm:387
+#, c-format
+msgid "Save"
+msgstr "저장"
+
+#: steps_interactive.pm:395
+#, fuzzy, c-format
+msgid "Bad file"
+msgstr "파일 읽기"
+
+#: steps_interactive.pm:468
+#, c-format
+msgid "Selected size is larger than available space"
+msgstr "선택된 용량이 사용할 수 있는 공간보다 큽니다."
+
+#: steps_interactive.pm:483
+#, c-format
+msgid "Type of install"
+msgstr ""
+
+#: steps_interactive.pm:484
+#, c-format
+msgid ""
+"You have not selected any group of packages.\n"
+"Please choose the minimal installation you want:"
+msgstr ""
+
+#: steps_interactive.pm:487
+#, c-format
+msgid "With X"
+msgstr ""
+
+#: steps_interactive.pm:488
+#, c-format
+msgid "With basic documentation (recommended!)"
+msgstr ""
+
+#: steps_interactive.pm:489
+#, c-format
+msgid "Truly minimal install (especially no urpmi)"
+msgstr ""
+
+#: steps_interactive.pm:528
+#, c-format
+msgid "All"
+msgstr "모두"
+
+#: steps_interactive.pm:544
+#, c-format
+msgid "Preparing installation"
+msgstr "설치 준비중입니다"
+
+#: steps_interactive.pm:552
+#, c-format
+msgid "Installing package %s"
+msgstr "%s 팩키지 설치중"
+
+#: steps_interactive.pm:576
+#, c-format
+msgid "There was an error ordering packages:"
+msgstr "팩키지를 정렬하는 중 오류발생:"
+
+#: steps_interactive.pm:576
+#, c-format
+msgid "Go on anyway?"
+msgstr "계속 진행합니까?"
+
+#: steps_interactive.pm:580
+#, c-format
+msgid "Retry"
+msgstr ""
+
+#: steps_interactive.pm:581
+#, c-format
+msgid "Skip this package"
+msgstr ""
+
+#: steps_interactive.pm:582
+#, c-format
+msgid "Skip all packages from medium \"%s\""
+msgstr ""
+
+#: steps_interactive.pm:583
+#, fuzzy, c-format
+msgid "Go back to media and packages selection"
+msgstr "선택된 팩키지 목록 저장"
+
+#: steps_interactive.pm:586
+#, fuzzy, c-format
+msgid "There was an error installing package %s."
+msgstr "다음 팩키지를 설치중 오류가 발생했습니다: "
+
+#: steps_interactive.pm:604
+#, c-format
+msgid "Post-install configuration"
+msgstr "설치전 환경설정"
+
+#: steps_interactive.pm:611
+#, c-format
+msgid "Please ensure the Update Modules media is in drive %s"
+msgstr ""
+
+#: steps_interactive.pm:638
+#, c-format
+msgid "Updates"
+msgstr ""
+
+#: steps_interactive.pm:639
+#, c-format
+msgid ""
+"You now have the opportunity to download updated packages. These packages\n"
+"have been updated after the distribution was released. They may\n"
+"contain security or bug fixes.\n"
+"\n"
+"To download these packages, you will need to have a working Internet \n"
+"connection.\n"
+"\n"
+"Do you want to install the updates?"
+msgstr ""
+
+#: steps_interactive.pm:660
+#, c-format
+msgid "Contacting the mirror to get the list of available packages..."
+msgstr "사용가능한 팩키지의 리스트를 미러 사이트에 접속해서 받습니다."
+
+#: steps_interactive.pm:666
+#, fuzzy, c-format
+msgid "Unable to contact mirror %s"
+msgstr "분기할 수 없습니다: %s"
+
+#: steps_interactive.pm:788 steps_interactive.pm:805 steps_interactive.pm:821
+#: steps_interactive.pm:832
+#, c-format
+msgid "Hardware"
+msgstr "하드웨어"
+
+#: steps_interactive.pm:789 steps_interactive.pm:806
+#, c-format
+msgid "Sound card"
+msgstr "사운드 카드"
+
+#: steps_interactive.pm:809
+#, c-format
+msgid "Do you have an ISA sound card?"
+msgstr "ISA 사운드 카드가 있습니까?"
+
+#: steps_interactive.pm:811
+#, c-format
+msgid ""
+"Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
+"card"
+msgstr ""
+
+#: steps_interactive.pm:813
+#, c-format
+msgid "No sound card detected. Try \"harddrake\" after installation"
+msgstr ""
+
+#: steps_interactive.pm:822
+#, c-format
+msgid "TV card"
+msgstr "TV 카드"
+
+#: steps_interactive.pm:833
+#, fuzzy, c-format
+msgid "Graphical interface"
+msgstr "시작시 바로 X 실행"
+
+#: steps_interactive.pm:839 steps_interactive.pm:850
+#, c-format
+msgid "Network & Internet"
+msgstr "네트웍과 인터넷"
+
+#: steps_interactive.pm:851
+#, fuzzy, c-format
+msgid "Proxies"
+msgstr "프로파일: "
+
+#: steps_interactive.pm:852
+#, fuzzy, c-format
+msgid "configured"
+msgstr "재설정"
+
+#: steps_interactive.pm:862
+#, c-format
+msgid "Security Level"
+msgstr "보안 등급"
+
+#: steps_interactive.pm:876
+#, c-format
+msgid "Firewall"
+msgstr "방화벽"
+
+#: steps_interactive.pm:880
+#, fuzzy, c-format
+msgid "activated"
+msgstr "지금 활성화"
+
+#: steps_interactive.pm:880
+#, c-format
+msgid "disabled"
+msgstr "금지"
+
+#: steps_interactive.pm:891
+#, c-format
+msgid "Boot"
+msgstr "부트"
+
+#. -PO: example: lilo-graphic on /dev/hda1
+#: steps_interactive.pm:895
+#, c-format
+msgid "%s on %s"
+msgstr "%s (%s 컴퓨터)"
+
+#: steps_interactive.pm:921
+#, c-format
+msgid "You have not configured X. Are you sure you really want this?"
+msgstr ""
+
+#: steps_interactive.pm:967
+#, c-format
+msgid "Preparing bootloader..."
+msgstr "부트 로더 준비중"
+
+#: steps_interactive.pm:977
+#, c-format
+msgid ""
+"You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
+"will not work for you. The install will continue, but you'll need to use "
+"BootX or some other means to boot your machine. The kernel argument for the "
+"root fs is: root=%s"
+msgstr ""
+
+#: steps_interactive.pm:983
+#, c-format
+msgid "Do you want to use aboot?"
+msgstr "aboot를 사용하시겠습니까?"
+
+#: steps_interactive.pm:986
+#, c-format
+msgid ""
+"Error installing aboot, \n"
+"try to force installation even if that destroys the first partition?"
+msgstr ""
+"aboot 설치 실패. \n"
+"첫번째 파티션을 훼손할지라도 강제 설치할까요?"
+
+#: steps_interactive.pm:1003
+#, c-format
+msgid ""
+"In this security level, access to the files in the Windows partition is "
+"restricted to the administrator."
+msgstr ""
+
+#: steps_interactive.pm:1032
+#, c-format
+msgid "Insert a blank floppy in drive %s"
+msgstr "%s 드라이브에 빈 플로피 디스크를 넣으세요"
+
+#: steps_interactive.pm:1034
+#, c-format
+msgid "Creating auto install floppy..."
+msgstr "자동 설치 플로피 디스크 생성 중"
+
+#: steps_interactive.pm:1045
+#, c-format
+msgid ""
+"Some steps are not completed.\n"
+"\n"
+"Do you really want to quit now?"
+msgstr ""
+"몇몇 단계가 완전히 끝나지 않았습니다.\n"
+"\n"
+"정말 지금 종료 하시겠습니까?"
+
+#: steps_interactive.pm:1055
+#, c-format
+msgid "Congratulations"
+msgstr "축하합니다."
+
+#: steps_interactive.pm:1059
+#, c-format
+msgid "Reboot"
+msgstr "다시 시작"
+
+#: steps_interactive.pm:1063 steps_interactive.pm:1064
+#, c-format
+msgid "Generate auto install floppy"
+msgstr "자동 설치 플로피 디스크 생성"
+
+#: steps_interactive.pm:1065
+#, c-format
+msgid ""
+"The auto install can be fully automated if wanted,\n"
+"in that case it will take over the hard drive!!\n"
+"(this is meant for installing on another box).\n"
+"\n"
+"You may prefer to replay the installation.\n"
+msgstr ""
+"자동 설치는 원한다면 완벽한 자동화가 가능합니다.\n"
+"이럴 경우, 하드 드라이브를 점유해 버립니다!\n"
+"(이것은 또 다른 컴퓨터에 동일하게 설치할 때를 위한 것입니다.)\n"
+"\n"
+"일반적으로 직접 설치하는 것이 좋습니다.\n"
+
+#: steps_interactive.pm:1070
+#, c-format
+msgid "Replay"
+msgstr "재시도"
+
+#: steps_interactive.pm:1070
+#, c-format
+msgid "Automated"
+msgstr "자동"
+
+#: steps_interactive.pm:1073
+#, c-format
+msgid "Save packages selection"
+msgstr "선택된 팩키지 목록 저장"
+
+#. -PO: please keep the following messages very short: they must fit in the left list of the installer!!!
+#: steps_list.pm:16
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Language"
+msgstr "언어 선택"
+
+#: steps_list.pm:17
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"License"
+msgstr "라이센스"
+
+#: steps_list.pm:18
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Mouse"
+msgstr "마우스"
+
+#: steps_list.pm:19
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Hard drive detection"
+msgstr "하드 디스크 선택"
+
+#: steps_list.pm:20
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Installation class"
+msgstr ""
+
+#: steps_list.pm:21
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Keyboard"
+msgstr "키보드"
+
+#: steps_list.pm:22
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Security"
+msgstr "보안"
+
+#: steps_list.pm:23
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Partitioning"
+msgstr ""
+
+#: steps_list.pm:24
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Formatting"
+msgstr "구성중"
+
+#: steps_list.pm:25
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Choosing packages"
+msgstr ""
+
+#: steps_list.pm:26
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Installing"
+msgstr "설치중"
+
+#: steps_list.pm:27
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Authentication"
+msgstr "사용자 인증"
+
+#: steps_list.pm:28
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Users"
+msgstr "사용자들"
+
+#: steps_list.pm:29
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Networking"
+msgstr "네트워크"
+
+#: steps_list.pm:30
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Bootloader"
+msgstr ""
+
+#: steps_list.pm:31
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Configure X"
+msgstr "X 설정"
+
+#: steps_list.pm:32
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Summary"
+msgstr "요약설명"
+
+#: steps_list.pm:33
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Services"
+msgstr "서비스"
+
+#: steps_list.pm:34
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Updates"
+msgstr ""
+
+#: steps_list.pm:35
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Exit"
+msgstr "종료"
+
+#~ msgid "%d packages"
+#~ msgstr "%d 팩키지"
+
+#~ msgid "Language"
+#~ msgstr "언어 선택"
+
+#~ msgid "License"
+#~ msgstr "라이센스"
+
+#, fuzzy
+#~ msgid "Installation class"
+#~ msgstr "설치 클래스 선택"
+
+#~ msgid "Formatting"
+#~ msgstr "구성중"
+
+#, fuzzy
+#~ msgid "Choosing packages"
+#~ msgstr "설치 팩키지 선택"
+
+#~ msgid "Users"
+#~ msgstr "사용자들"
+
+#~ msgid "Networking"
+#~ msgstr "네트워크"
+
+#~ msgid "Configure X"
+#~ msgstr "X 설정"

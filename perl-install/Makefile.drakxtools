@@ -1,10 +1,11 @@
 # -*- Makefile -*-
 include Makefile.config
 
-INLIBDEST_DIRS = Newt c resize_fat xf86misc
-HAVEINST_DIRS = share/po standalone/interactive_http
-DIRS = $(INLIBDEST_DIRS) $(HAVEINST_DIRS) harddrake printer serial_probe
+INLIBDEST_DIRS = c resize_fat xf86misc
+HAVEINST_DIRS = share/po standalone/po standalone/interactive_http
+DIRS = $(INLIBDEST_DIRS) $(HAVEINST_DIRS) harddrake printer ../tools/serial_probe
 NAME = libDrakX
+XSETUPLEVEL=40
 PREFIX = 
 LIBDIR = $(PREFIX)/usr/lib
 MENUDIR= $(LIBDEST)/menu
@@ -13,32 +14,28 @@ ICONSDIR= $(DATADIR)/icons
 BINDEST = $(PREFIX)/usr/bin
 SBINDEST = $(PREFIX)/usr/sbin
 ETCDEST = $(PREFIX)/etc/gtk
-BINX11DEST = $(PREFIX)/usr/X11R6/bin
-LIBX11DEST = $(PREFIX)/usr/X11R6/lib/X11
 LIBDEST = $(LIBDIR)/$(NAME)
 PIXDIR = $(DATADIR)/$(NAME)/pixmaps
 INITDIR =  $(PREFIX)/etc/rc.d/init.d
 .PHONY: $(DIRS)
 
-all: rpcinfo-flushed $(DIRS)
+all: ../tools/rpcinfo-flushed $(DIRS)
 
 $(DIRS):
 	install -d auto
-	rm -f share/po/DrakX.pot # force rebuild of po's
 	[ ! -e $@/Makefile ] || $(MAKE) -C $@
 
 install:
-	mkdir -p $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR)/{harddrake,pixmaps,icons/{large,mini},autostart} $(BINX11DEST) $(LIBX11DEST) $(PIXDIR) $(INITDIR) $(MENUDIR)
+	mkdir -p $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR)/{harddrake,pixmaps,icons/{large,mini},autostart} $(PIXDIR) $(INITDIR) $(MENUDIR)
 	install -d $(INLIBDEST_DIRS:%=$(LIBDEST)/%)
 	install $(STANDALONEPMS) standalone/service_harddrake.sh standalone/convert $(SBINDEST)
-	install -s rpcinfo-flushed serial_probe/serial_probe $(SBINDEST)
-	ln -s ../../$(patsubst $(PREFIX)/usr%,%,$(SBINDEST))/XFdrake $(BINX11DEST)/Xdrakres
+	install -s ../tools/rpcinfo-flushed ../tools/serial_probe/serial_probe $(SBINDEST)
+	ln -s XFdrake $(SBINDEST)/Xdrakres
 	ln -s fileshareset $(SBINDEST)/filesharelist
 	mv -f $(SBINDEST)/lsnetdrake $(BINDEST)
 	mv -f $(SBINDEST)/drakbug $(BINDEST)
 	mv -f $(SBINDEST)/drakhelp $(BINDEST)
 	mv -f $(SBINDEST)/localedrake $(BINDEST)
-	mv -f $(SBINDEST)/net_applet $(BINDEST)
 
 	install -m 644 *.pm $(LIBDEST)
 	for i in $(PMS_DIRS); do install -d $(LIBDEST)/$$i ; install -m 644 $$i/*.pm $(LIBDEST)/$$i/;done
@@ -48,12 +45,12 @@ install:
 	install -d $(PREFIX)/etc/security
 	echo 'RESTRICT=yes' > $(PREFIX)/etc/security/fileshare.conf
 
-	install -D standalone/finish-install.xsetup $(PREFIX)/etc/X11/xsetup.d/finish-install.xsetup
+	install -D standalone/finish-install.xsetup $(PREFIX)/etc/X11/xsetup.d/$(XSETUPLEVEL)finish-install.xsetup
 	install -d $(PREFIX)/etc/sysconfig
 	echo 'FINISH_INSTALL=yes' > $(PREFIX)/etc/sysconfig/finish-install
 
 	for i in $(HAVEINST_DIRS); do \
-		$(MAKE) -C $$i install PREFIX=$(PREFIX) SUDO= DATADIR=$(DATADIR) NAME=$(NAME) ; \
+		$(MAKE) -C $$i install PREFIX=$(PREFIX) SUDO= DATADIR=$(DATADIR) ; \
 	done
 
 	find auto -follow -name .exists -o -name "*.bs" | xargs rm -f
@@ -67,7 +64,6 @@ install:
 	rmdir $(LIBDEST)/icons/harddrake2/menu
 	mv $(LIBDEST)/icons/harddrake2/ $(DATADIR)/pixmaps/
 	mv $(SBINDEST)/service_harddrake.sh $(INITDIR)/harddrake
-	install share/rpmsrate $(DATADIR)/harddrake/
 	mv $(SBINDEST)/convert $(DATADIR)/harddrake
 	mv $(SBINDEST)/service_harddrake $(DATADIR)/harddrake/
 	ln -s {XFdrake,$(SBINDEST)/drakx11}
@@ -78,8 +74,5 @@ install:
 	ln -s {localedrake,$(BINDEST)/draklocale}
 	ln -s {logdrake,$(SBINDEST)/draklog}
 	ln -s {mousedrake,$(SBINDEST)/drakmouse}
-	ln -s {net_monitor,$(SBINDEST)/draknet_monitor}
 	ln -s {printerdrake,$(SBINDEST)/drakprinter}
 	ln -s {scannerdrake,$(SBINDEST)/drakscanner}
-	mkdir -p $(PREFIX)/usr/share/man/man{5,8}
-	for i in 5 8; do install -m 644 standalone/man/C/man$$i/* $(PREFIX)/usr/share/man/man$$i; done

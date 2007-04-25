@@ -2,6 +2,7 @@ package fs::format; # $Id$
 
 use diagnostics;
 use strict;
+use String::ShellQuote;
 
 use run_program;
 use common;
@@ -20,6 +21,7 @@ my %cmds = (
     dos      => [ 'dosfstools', 'mkdosfs' ],
     vfat     => [ 'dosfstools', 'mkdosfs', '-F', '32' ],
     swap     => [ 'util-linux', 'mkswap' ],
+    ntfs     => [ 'ntfsprogs', 'mkntfs' ],
 );
 
 my %LABELs = ( #- option, length, handled_by_mount
@@ -119,7 +121,7 @@ sub part_raw {
     if ($cmd eq 'mkfs.ext2' && $wait_message) {
 	mkfs_ext2($wait_message, @args) or die N("%s formatting of %s failed", $fs_type, $dev);
     } else {
-	run_program::raw({ timeout => 60 * 60 }, @args) or die N("%s formatting of %s failed", $fs_type, $dev);
+	run_program::raw({ timeout => 'never' }, @args) or die N("%s formatting of %s failed", $fs_type, $dev);
     }
 
     if ($fs_type eq 'ext3') {
@@ -132,7 +134,9 @@ sub part_raw {
 sub mkfs_ext2 {
     my ($wait_message, @args) = @_;
 
-    open(my $F, "@args |");
+    my $cmd = shell_quote_best_effort(@args);
+    log::l("running: $cmd");
+    open(my $F, "$cmd |");
 
     local $/ = "\b";
     local $_;
@@ -160,6 +164,14 @@ sub formatMount_part {
     if ($part->{toFormat}) {
 	fs::format::part($all_hds, $part, $wait_message);
     }
+
+    #- setting user_xattr on /home (or "/" if no /home)
+    if (!$part->{isMounted} && $part->{fs_type} eq 'ext3' 
+	  && ($part->{mntpoint} eq '/home' ||
+		!fs::get::has_mntpoint('/home', $all_hds) && $part->{mntpoint} eq '/')) {
+	run_program::run('tune2fs', '-o', 'user_xattr', devices::make($part->{real_device} || $part->{device}));
+    }
+
     fs::mount::part($part, 0, $wait_message);
 }
 

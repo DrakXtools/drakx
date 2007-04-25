@@ -5,9 +5,6 @@ print '
 #include "perl.h"
 #include "XSUB.h"
 
-/* workaround for glibc and kernel header files not in sync */
-#define dev_t dev_t
-
 #include <ctype.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -38,7 +35,6 @@ print '
 #include <net/route.h>
 #include <netinet/in.h>
 #include <linux/sockios.h>
-#include <locale.h>
 
 // for ethtool structs:
 typedef unsigned long long u64;
@@ -54,11 +50,7 @@ typedef __uint8_t u8;
 
 #include <libldetect.h>
 
-#include <langinfo.h>
 #include <string.h>
-#include <iconv.h>
-
-#include <libintl.h>
 
 #define SECTORSIZE 512
 
@@ -69,14 +61,8 @@ char *pcmcia_probe(void);
 ';
 
 print '
-#undef Fflush
-#undef Mkdir
-#undef Stat
 
-';
-
-print '
-
+/* log_message and log_perror are used in stage1 pcmcia probe */
 void log_message(const char * s, ...) {
    va_list args;
    va_list args_copy;
@@ -101,6 +87,10 @@ void log_message(const char * s, ...) {
    fclose(logtty);
    va_end(args_copy);
 }
+void log_perror(const char *msg) {
+   log_message("%s: %s", msg, strerror(errno));
+}
+
 
 ';
 
@@ -234,25 +224,6 @@ total_sectors(fd)
   RETVAL
 
 void
-unlimit_core()
-  CODE:
-  {
-    struct rlimit rlim = { RLIM_INFINITY, RLIM_INFINITY };
-    setrlimit(RLIMIT_CORE, &rlim);
-  }
-
-int
-getlimit_core()
-  CODE:
-  {
-    struct rlimit rlim;
-    getrlimit(RLIMIT_CORE, &rlim);
-    RETVAL = rlim.rlim_cur;
-  }
-  OUTPUT:
-  RETVAL
-
-void
 openlog(ident)
   char *ident
   CODE:
@@ -266,7 +237,7 @@ syslog(priority, mesg)
   int priority
   char *mesg
   CODE:
-  syslog(priority, mesg);
+  syslog(priority, "%s", mesg);
 
 void
 setsid()
@@ -279,9 +250,6 @@ void
 usleep(microseconds)
   unsigned long microseconds
 
-int
-dmiDetectMemory()
-
 void
 pci_probe()
   PPCODE:
@@ -293,9 +261,9 @@ pci_probe()
     EXTEND(SP, entries.nb);
     for (i = 0; i < entries.nb; i++) {
       struct pciusb_entry *e = &entries.entries[i];
-      snprintf(buf, sizeof(buf), "%04x\t%04x\t%04x\t%04x\t%d\t%d\t%d\t%s\t%s\t%s", 
-               e->vendor, e->device, e->subvendor, e->subdevice, e->pci_bus, e->pci_device, e->pci_function,
-               pci_class2text(e->class_), e->module ? e->module : "unknown", e->text);
+      snprintf(buf, sizeof(buf), "%04x\t%04x\t%04x\t%04x\t%d\t%d\t%d\t%d\t%s\t%s\t%s\t%s", 
+               e->vendor, e->device, e->subvendor, e->subdevice, e->pci_domain, e->pci_bus, e->pci_device, e->pci_function,
+               pci_class2text(e->class_id), e->class, e->module ? e->module : "unknown", e->text);
       PUSHs(sv_2mortal(newSVpv(buf, 0)));
     }
     pciusb_free(&entries);
@@ -310,7 +278,7 @@ usb_probe()
     EXTEND(SP, entries.nb);
     for (i = 0; i < entries.nb; i++) {
       struct pciusb_entry *e = &entries.entries[i];
-      struct usb_class_text class_text = usb_class2text(e->class_);
+      struct usb_class_text class_text = usb_class2text(e->class_id);
       snprintf(buf, sizeof(buf), "%04x\t%04x\t%s|%s|%s\t%s\t%s\t%d\t%d", 
                e->vendor, e->device, class_text.usb_class_text, class_text.usb_sub_text, class_text.usb_prot_text, e->module ? e->module : "unknown", e->text, e->pci_bus, e->pci_device);
       PUSHs(sv_2mortal(newSVpv(buf, 0)));
@@ -352,23 +320,6 @@ get_usb_ups_name(int fd)
   RETVAL
 
 
-
-int
-hasNetDevice(device)
-  char * device
-  CODE:
-    struct ifreq req;
-    int s = socket(AF_INET, SOCK_DGRAM, 0);
-    if (s == -1) { RETVAL = 0; return; }
-
-    strncpy(req.ifr_name, device, IFNAMSIZ);
-
-    RETVAL = ioctl(s, SIOCGIFFLAGS, &req) == 0;
-    close(s);
-  OUTPUT:
-  RETVAL
-
-
 int
 isNetDeviceWirelessAware(device)
   char * device
@@ -384,25 +335,6 @@ isNetDeviceWirelessAware(device)
   OUTPUT:
   RETVAL
 
-
-int enable_net_device(device)
-  char * device
-  CODE:
-    struct ifreq ifr;
-    int err;
-    int s = socket(AF_INET, SOCK_DGRAM, 0);
-
-    strncpy(ifr.ifr_name, device, IFNAMSIZ);
-    err = ioctl(s, SIOCGIFFLAGS, &ifr);
-    if (!err && !(ifr.ifr_flags & IFF_UP)) {
-        ifr.ifr_flags |= IFF_UP;
-        err = ioctl(s, SIOCSIFFLAGS, &ifr);
-    }
-    if (err)
-        perror("SIOCSIFFLAGS");
-    RETVAL = err;
-  OUTPUT:
-    RETVAL
 
 void
 get_netdevices()
@@ -556,25 +488,11 @@ kernel_version()
   OUTPUT:
   RETVAL
 
-int
-is_tagged_utf8(s)
-   SV *s
-   CODE:
-   RETVAL = SvUTF8(s);
-   OUTPUT:
-   RETVAL
-
 void
 set_tagged_utf8(s)
    SV *s
    CODE:
    SvUTF8_on(s);
-
-void
-upgrade_utf8(s)
-   SV *s
-   CODE:
-   sv_utf8_upgrade(s);
 
 void
 get_iso_volume_ids(int fd)
@@ -592,10 +510,11 @@ get_iso_volume_ids(int fd)
 ';
 
 @macros = (
-  [ qw(int S_IFCHR S_IFBLK S_IFIFO KDSKBENT KT_SPEC K_NOSUCHMAP NR_KEYS MAX_NR_KEYMAPS BLKRRPART TIOCSCTTY
+  [ qw(int S_IFCHR S_IFBLK S_IFIFO KDSKBENT K_NOSUCHMAP NR_KEYS MAX_NR_KEYMAPS BLKRRPART TIOCSCTTY
        HDIO_GETGEO LOOP_GET_STATUS
        MS_MGC_VAL O_WRONLY O_RDWR O_CREAT O_NONBLOCK F_SETFL F_GETFL WNOHANG
-       VT_ACTIVATE VT_WAITACTIVE VT_GETSTATE CDROM_LOCKDOOR CDROMEJECT CDROM_DRIVE_STATUS
+       VT_ACTIVATE VT_WAITACTIVE VT_GETSTATE
+       CDROMEJECT CDROMCLOSETRAY CDROM_LOCKDOOR
        LOG_WARNING LOG_INFO LOG_LOCAL1
        LC_COLLATE
        ) ],

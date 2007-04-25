@@ -2,7 +2,7 @@ package partition_table::mac; # $Id$
 
 use diagnostics;
 #use strict;   - fixed other PPC code to comply, but program bails on empty partition table - sbenedict
-use vars qw(@ISA $freepart $bootstrap_part $macos_part);
+use vars qw(@ISA $freepart $bootstrap_part $macos_part $new_bootstrap);
 
 @ISA = qw(partition_table::raw);
 
@@ -296,7 +296,7 @@ sub write($$$;$) {
                 $_->{pFlags} = 0x33;
 		$_->{isBoot} = 1;
 		log::l("writing a bootstrap at /dev/$_->{device}");
-		$install_steps_interactive::new_bootstrap = 1 if !(defined $bootstrap_part);
+		$new_bootstrap = 1 if !(defined $bootstrap_part);
 		$bootstrap_part = "/dev/" . $_->{device};
             } elsif (isSwap($_)) {
                 $_->{pType} = "Apple_UNIX_SVR2";

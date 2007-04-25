@@ -60,7 +60,7 @@ struct loop_info
 #define LOOP_GET_STATUS	0x4C03
 
 int
-set_loop (const char *device, const char *file, int gz)
+set_loop (const char *device, const char *file)
 {
 	struct loop_info loopinfo;
 	int fd, ffd, mode;
@@ -79,12 +79,6 @@ set_loop (const char *device, const char *file, int gz)
 	strncpy(loopinfo.lo_name, file, LO_NAME_SIZE);
 	loopinfo.lo_name[LO_NAME_SIZE - 1] = 0;
 	loopinfo.lo_offset = 0;
-        if (gz) {
-                my_insmod("cryptoloop", ANY_DRIVER_TYPE, NULL, 1);
-                my_insmod("zlib_inflate", ANY_DRIVER_TYPE, NULL, 1);
-                my_insmod("gzloop", ANY_DRIVER_TYPE, NULL, 1);
-                loopinfo.lo_encrypt_type = 13; /* LO_CRYPT_GZ */
-        }
 
 #ifdef MCL_FUTURE  
 	/*
@@ -162,7 +156,7 @@ del_loop(char * loopdev)
 }
 
 int
-lomount(char *loopfile, char *where, char **dev, int gz)
+lomount(char *loopfile, char *where, char **dev, int compressed)
 {
   
 	long int flag;
@@ -172,6 +166,9 @@ lomount(char *loopfile, char *where, char **dev, int gz)
 	flag |= MS_RDONLY;
 
 	my_insmod("loop", ANY_DRIVER_TYPE, "max_loop=256", 1);
+	if (compressed) {
+	    my_insmod("squashfs", ANY_DRIVER_TYPE, NULL, 1);
+	}
 
         if (!(loopdev = find_free_loop())) {
 		log_message("could not find a free loop");
@@ -180,12 +177,12 @@ lomount(char *loopfile, char *where, char **dev, int gz)
         if (dev)
                 *dev = loopdev;
 
-	if (set_loop(loopdev, loopfile, gz)) {
+	if (set_loop(loopdev, loopfile)) {
 		log_message("set_loop failed on %s (%s)", loopdev, strerror(errno));
 		return 1;
 	}
   
-	if (my_mount(loopdev, where, "iso9660", 0)) {
+	if (my_mount(loopdev, where, compressed ? "squashfs" : "iso9660", 0)) {
 		del_loop(loopdev);
 		return 1;
 	}

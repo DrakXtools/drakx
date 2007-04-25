@@ -31,7 +31,7 @@ sub unpack {
 		  ntfs => [ qw(umask=0 umask=0022) ],
 		  nfs => [ qw(rsize=8192 wsize=8192) ],
 		  smbfs => [ qw(username= password=) ],
-		  davfs => [ qw(username= password= uid= gid=) ],
+		  davfs2 => [ qw(username= password= uid= gid=) ],
 		  reiserfs => [ 'notail' ],
 		 );
     push @{$per_fs{$_}}, 'usrquota', 'grpquota' foreach 'ext2', 'ext3', 'xfs';
@@ -136,11 +136,13 @@ have suidperl(1) installed.)"),
 
 	'supermount' => '',
 
-	'users' => N("Allow an ordinary user to mount the file system."),         
+	'users' => N("Allow every user to mount and umount the file system."),         
+
+	'user' => N("Allow an ordinary user to mount the file system."),         
 
 	'usrquota' => N("Enable user disk quota accounting, and optionally enforce limits"),
 
-        'user_xattr' => N("Support user. extended attributes"),
+        'user_xattr' => N("Support \"user.\" extended attributes"),
 
         'umask=0' => N("Give write access to ordinary users"),
 

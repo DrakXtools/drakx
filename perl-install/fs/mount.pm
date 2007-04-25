@@ -11,6 +11,7 @@ use log;
 
 sub set_loop {
     my ($part) = @_;
+    $part->{device} ||= fs::get::mntpoint_prefixed($part->{loopback_device}) . $part->{loopback_file};
     $part->{real_device} ||= devices::set_loop(devices::make($part->{device}), $part->{encrypt_key}, $part->{options} =~ /encryption=(\w+)/);
 }
 
@@ -37,7 +38,7 @@ sub mount {
 	my @fs_modules = qw(ext3 hfs jfs nfs ntfs romfs reiserfs ufs xfs vfat);
 	my @types = (qw(ext2 proc sysfs usbfs usbdevfs iso9660 devfs devpts), @fs_modules);
 
-	push @types, 'smb', 'smbfs', 'davfs' if !$::isInstall;
+	push @types, 'smb', 'smbfs', 'davfs2' if !$::isInstall;
 
 	if (!member($fs, @types) && !$::move) {
 	    log::l("skipping mounting $dev partition ($fs)");
@@ -56,6 +57,11 @@ sub mount {
 
     my @mount_opt = split(',', $o_options || '');
 
+    if ($::isInstall) {
+	#- those options need nls_XXX modules, and we don't this at install
+	@mount_opt = grep { $_ ne 'utf8' && !/^iocharset=/ } @mount_opt;
+    }
+
     if ($fs eq 'vfat') {
 	@mount_opt = 'check=relaxed';
     } elsif ($fs eq 'ntfs') {
@@ -70,7 +76,6 @@ sub mount {
 
     push @mount_opt, 'ro' if $b_rdonly;
 
-    log::l("calling mount -t $fs $dev $where @mount_opt");
     $o_wait_message->(N("Mounting partition %s", $dev)) if $o_wait_message;
     run_program::run('mount', '-t', $fs, $dev, $where, if_(@mount_opt, '-o', join(',', @mount_opt))) or die N("mounting partition %s in directory %s failed", $dev, $where);
 }
@@ -108,9 +113,9 @@ sub umount {
     $mntpoint =~ s|/$||;
     log::l("calling umount($mntpoint)");
 
-    syscall_('umount2', $mntpoint, 0) or do {
+    run_program::run('umount', $mntpoint) or do {
 	kill 15, fuzzy_pidofs('^fam\b');
-	syscall_('umount2', $mntpoint, 0) or die N("error unmounting %s: %s", $mntpoint, $!);
+	run_program::run('umount', $mntpoint) or die N("error unmounting %s: %s", $mntpoint, $!);
     };
 
     substInFile { $_ = '' if /(^|\s)$mntpoint\s/ } '/etc/mtab'; #- do not care about error, if we can not read, we will not manage to write... (and mess mtab)
@@ -120,35 +125,37 @@ sub part {
     my ($part, $b_rdonly, $o_wait_message) = @_;
 
     log::l("mount_part: " . join(' ', map { "$_=$part->{$_}" } 'device', 'mntpoint', 'isMounted', 'real_mntpoint'));
-    if ($part->{isMounted} && $part->{real_mntpoint} && $part->{mntpoint}) {
-	log::l("remounting partition on " . fs::get::mntpoint_prefixed($part) . " instead of $part->{real_mntpoint}");
-	if ($::isInstall) { #- ensure partition will not be busy.
-	    require install_any;
-	    install_any::getFile('XXX');
-	}
-	eval {
-	    umount($part->{real_mntpoint});
-	    rmdir $part->{real_mntpoint};
-	    symlinkf fs::get::mntpoint_prefixed($part), $part->{real_mntpoint};
-	    delete $part->{real_mntpoint};
-	    $part->{isMounted} = 0;
-	};
-    }
 
-    return if $part->{isMounted};
+    return if $part->{isMounted} && !($part->{real_mntpoint} && $part->{mntpoint});
 
     unless ($::testing) {
 	if (isSwap($part)) {
 	    $o_wait_message->(N("Enabling swap partition %s", $part->{device})) if $o_wait_message;
 	    swapon($part->{device});
+	} elsif ($part->{real_mntpoint}) {
+	    my $mntpoint = fs::get::mntpoint_prefixed($part);
+
+	    mkdir_p($mntpoint);
+	    run_program::run_or_die('mount', '--move', $part->{real_mntpoint}, $mntpoint);
+
+	    rmdir $part->{real_mntpoint};
+	    symlinkf $mntpoint, $part->{real_mntpoint};
+	    delete $part->{real_mntpoint};
+
+	    my $dev = $part->{real_device} || fs::wild_device::from_part('', $part);
+	    run_program::run_or_die('mount', $dev, $mntpoint, '-o', join(',', 'remount', $b_rdonly ? 'ro' : 'rw'));
 	} else {
 	    $part->{mntpoint} or die "missing mount point for partition $part->{device}";
 
 	    my $mntpoint = fs::get::mntpoint_prefixed($part);
 	    my $options = $part->{options};
-	    if (isLoopback($part) || $part->{encrypt_key}) {
+	    if ($part->{encrypt_key}) {
 		set_loop($part);
-		$options = join(',', grep { !/^(encryption=|encrypted$)/ } split(',', $options)); #- we take care of this, don't let it mount see it
+		$options = join(',', grep { !/^(encryption=|encrypted$|loop$)/ } split(',', $options)); #- we take care of this, don't let it mount see it
+	    } elsif (isLoopback($part)) {
+		#- mount will take care, but we must help it
+		devices::make("loop$_") foreach 0 .. 7;
+		$options = join(',', uniq('loop', split(',', $options))); #- ensure the loop options is used
 	    } elsif ($part->{options} =~ /encrypted/) {
 		log::l("skip mounting $part->{device} since we do not have the encrypt_key");
 		return;
@@ -156,7 +163,19 @@ sub part {
 		$mntpoint = "/initrd/loopfs";
 	    }
 	    my $dev = $part->{real_device} || fs::wild_device::from_part('', $part);
-	    mount($dev, $mntpoint, $part->{fs_type}, $b_rdonly, $options, $o_wait_message);
+	    my $fs_type = $part->{fs_type};
+	    if ($fs_type eq 'auto' && $part->{media_type} eq 'cdrom' && $::isInstall) {
+		$fs_type = 'iso9660';
+	    }
+	    mount($dev, $mntpoint, $fs_type, $b_rdonly, $options, $o_wait_message);
+
+	    if ($options =~ /usrquota|grpquota/ && $part->{fs_type} eq 'ext3') {
+		if (! find { -e "$mntpoint/$_" } qw(aquota.user aquota.group quota.user quota.group)) {
+		    #- quotacheck will create aquota.user and/or aquota.group,
+		    #- needed for quotas on ext3.
+		    run_program::run('quotacheck', $mntpoint);
+		}		
+	    }
 	}
     }
     $part->{isMounted} = 1;
@@ -166,7 +185,7 @@ sub part {
 sub umount_part {
     my ($part) = @_;
 
-    $part->{isMounted} || $part->{real_mntpoint} or return;
+    $part->{isMounted} or return;
 
     unless ($::testing) {
 	if (isSwap($part)) {
@@ -174,7 +193,7 @@ sub umount_part {
 	} elsif (fs::type::carry_root_loopback($part)) {
 	    umount("/initrd/loopfs");
 	} else {
-	    umount(fs::get::mntpoint_prefixed($part) || devices::make($part->{device}));
+	    umount($part->{real_mntpoint} || fs::get::mntpoint_prefixed($part) || devices::make($part->{device}));
 	    devices::del_loop(delete $part->{real_device}) if $part->{real_device};
 	}
     }
@@ -186,8 +205,9 @@ sub umount_all {
 
     log::l("unmounting all filesystems");
 
-    foreach (sort { $b->{mntpoint} cmp $a->{mntpoint} } @$fstab) {
-	$_->{mntpoint} and umount_part($_);
+    foreach (sort { $b->{mntpoint} cmp $a->{mntpoint} } 
+	       grep { $_->{mntpoint} && !$_->{real_mntpoint} } @$fstab) {
+	umount_part($_);
     }
 }
 

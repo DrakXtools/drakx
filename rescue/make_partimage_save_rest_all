@@ -7,9 +7,10 @@
 
 rpm=$1 ; shift
 partimage_dir=$1 ; shift
+data_dir=$1 ; shift
 
 if [ -n "$partimage_dir" ]; then
-    first_data_dir="$partimage_dir$1"
+    first_data_dir="$partimage_dir$data_dir"
 
     [ -d "$first_data_dir" ] || {
 	echo "can't find $first_data_dir"
@@ -25,7 +26,7 @@ rm -rf .tmp
 mkdir -p .tmp/isolinux
 cp -f /usr/lib/syslinux/isolinux.bin ../isolinux/alt0/* .tmp/isolinux
 
-PARTIMAGE_DIR="$@" PARTIMAGE_RPM=$rpm DISTRIB_DESCR="partimage save/restore all" ./make_rescue_img || exit 1
+PARTIMAGE_RPM=$rpm DISTRIB_DESCR="partimage save/restore all" ./make_rescue_img || exit 1
 mkdir -p .tmp/install/stage2
 mv -f rescue.clp .tmp/install/stage2
 
@@ -44,21 +45,19 @@ label save_all
   append initrd=all.rdz $common_para save_all
 label rest_all
   kernel vmlinuz
-  append initrd=all.rdz $common_para rest_all keepmounted
+  append initrd=all.rdz $common_para rest_all keepmounted BOX=$data_dir
 label rescue
   kernel vmlinuz
   append initrd=all.rdz $common_para
 EOF
 
     if [ $action = rest_all -a -n "$partimage_dir" ]; then
-	for i in $*; do 
-	    dir=`dirname $i`
-	    mkdir -p .tmp$dir
-	    ln -s $partimage_dir$i .tmp$dir
-	done
+	dir=`dirname $data_dir`
+	mkdir -p .tmp$dir
+	ln -s $partimage_dir$data_dir .tmp$dir
     fi
 
-    mkisofs -f -o part_$action.iso -r -J -hide-rr-moved -nobak -cache-inodes -publisher Mandriva -V 'mdk part save/rest' -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table .tmp    
+    genisoimage -f -o part_$action.iso -r -J -hide-rr-moved -nobak -cache-inodes -publisher Mandriva -V 'mdk part save/rest' -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table .tmp    
     mkcd --addmd5 part_$action.iso
 done
  

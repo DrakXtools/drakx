@@ -37,10 +37,16 @@ sub vmlinuz2version {
     my ($vmlinuz) = @_;
     expand_vmlinuz_symlink($vmlinuz) =~ /$decompose_vmlinuz_name/ && $2;
 }
-sub vmlinuz2basename {
+sub vmlinuz2kernel_str {
     my ($vmlinuz) = @_;
-    expand_vmlinuz_symlink($vmlinuz) =~ /$decompose_vmlinuz_name/ && $1;
+    my ($basename, $version) = expand_vmlinuz_symlink($vmlinuz) =~ /$decompose_vmlinuz_name/ or return;
+    { 
+	basename => $basename,
+	version => $version, 
+	$version =~ /(.*md[kv])-?(.*)/ ? (ext => $2, version_no_ext => $1) : (version_no_ext => $version),
+    };
 }
+
 sub basename2initrd_basename {
     my ($basename) = @_;
     $basename =~ s!vmlinuz-?!!; #- here we do not use $vmlinuz_regexp since we explictly want to keep all that is not "vmlinuz"
@@ -73,21 +79,12 @@ sub kernel_str2initrd_short {
     }
 }
 
-sub vmlinuz2kernel_str {
-    my ($vmlinuz) = @_;
-    my ($basename, $version) = expand_vmlinuz_symlink($vmlinuz) =~ /$decompose_vmlinuz_name/ or return;
-    { 
-	basename => $basename,
-	version => $version, 
-	$version =~ /(.*mdk)-?(.*)/ ? (ext => $2, version_no_ext => $1) : (version_no_ext => $version),
-    };
-}
 sub kernel_str2label {
     my ($kernel, $o_use_long_name) = @_;
     my $base = $kernel->{basename} eq 'vmlinuz' ? 'linux' : $kernel->{basename};
     $o_use_long_name || $kernel->{use_long_name} ?
       sanitize_ver($base, $kernel) : 
-        $kernel->{ext} ? "$base-$kernel->{ext}" : $base;
+        $kernel->{ext} ? "$base-" . short_ext($kernel) : $base;
 }
 
 sub get {
@@ -102,10 +99,9 @@ sub get_label {
 }
 
 sub mkinitrd {
-    my ($kernel_version, $entry) = @_;
+    my ($kernel_version, $bootloader, $entry, $initrd) = @_;
 
-    my $initrd = $entry->{initrd};
-    $::testing || -e "$::prefix/$initrd" and return 1;
+    $::testing || -e "$::prefix/$initrd" and return $initrd;
 
     my $loop_boot = fs::loopback::prepare_boot();
 
@@ -118,11 +114,23 @@ sub mkinitrd {
 	unlink("$::prefix/$initrd");
 	die "mkinitrd failed:\n(mkinitrd @options))";
     }
-    add_boot_splash($entry->{initrd}, $entry->{vga});
+    add_boot_splash($initrd, $entry->{vga} || $bootloader->{vga});
 
     fs::loopback::save_boot($loop_boot);
 
-    -e "$::prefix/$initrd";
+    -e "$::prefix/$initrd" && $initrd;
+}
+
+sub rebuild_initrd {
+    my ($kernel_version, $bootloader, $entry, $initrd) = @_;
+
+    my $old = $::prefix . $entry->{initrd} . '.old';
+    unlink $old;
+    rename "$::prefix$initrd", $old;
+    if (!mkinitrd($kernel_version, $bootloader, $entry, $initrd)) {
+	log::l("rebuilding initrd failed, putting back the old one");
+	rename $old, "$::prefix$initrd";
+    }
 }
 
 sub remove_boot_splash {
@@ -139,6 +147,13 @@ sub add_boot_splash {
 	run_program::rooted($::prefix, '/usr/share/bootsplash/scripts/make-boot-splash', $initrd, $res->{X});
     } else {
 	log::l("unknown vga bios mode $vga");
+    }
+}
+sub update_splash {
+    my ($bootloader) = @_;
+
+    foreach (@{$bootloader->{entries}}) {
+	bootloader::add_boot_splash($_->{initrd}, $_->{vga} || $bootloader->{vga}) if $_->{initrd};
     }
 }
 
@@ -163,11 +178,8 @@ sub read {
 	    if (m!/fd\d+$!) {
 		warn "not checking the method on floppy, assuming $main_method is right\n";
 		$main_method;
-	    } elsif ($main_method eq 'yaboot') {
-		#- not checking on ppc, there's only yaboot anyway :)
-		$main_method;
-	    } elsif ($main_method eq 'cromwell') {
-		#- XBox
+	    } elsif (member($main_method, qw(yaboot cromwell silo))) {
+		#- not checking, there's only one bootloader anyway :)
 		$main_method;
 	    } elsif (my $type = partition_table::raw::typeOfMBR($_)) {
 		warn "typeOfMBR $type on $_ for method $main_method\n" if $ENV{DEBUG};
@@ -179,9 +191,11 @@ sub read {
 	    my @prefered_entries = map { get_label($_, $bootloader) } $bootloader->{default}, 'linux';
 
 	    if (my $default = find { $_ && $_->{type} eq 'image' } (@prefered_entries, @{$bootloader->{entries}})) {
-		$bootloader->{default_vga} = $default->{vga};
+		$bootloader->{default_options} = $default;
 		$bootloader->{perImageAppend} ||= $default->{append};
 		log::l("perImageAppend is now $bootloader->{perImageAppend}");
+	    } else {
+		$bootloader->{default_options} = {};
 	    }
 	    return $bootloader;
 	}
@@ -234,14 +248,10 @@ sub read_grub_menu_lst {
         } else {
             if ($keyword eq 'kernel') {
                 $e->{type} = 'image';
-                (my $kernel, $e->{append}) = split(' ', $v, 2);
-		$e->{root} = $1 if $e->{append} =~ s/root=(\S*)\s*//;
-		$e->{kernel_or_dev} = grub2file($kernel, $grub2dev, $fstab);
-            } elsif ($keyword eq 'root') {
+		$e->{kernel} = $v;
+            } elsif ($keyword eq 'root' || $keyword eq 'rootnoverify') {
                 $e->{type} = 'other';
-		if ($v !~ /,/) {
-		    $e->{unsafe} = 1;
-		}
+		$e->{grub_noverify} = 1 if $keyword eq 'rootnoverify';
                 $e->{kernel_or_dev} = grub2dev($v, $grub2dev);
                 $e->{append} = "";
             } elsif ($keyword eq 'initrd') {
@@ -257,11 +267,23 @@ sub read_grub_menu_lst {
     }
 
     #- sanitize
-    foreach (@{$b{entries}}) {
-	my ($vga, $other) = partition { /^vga=/ } split(' ', $_->{append});
+    foreach my $e (@{$b{entries}}) {
+	if ($e->{kernel} =~ /xen/ && @{$e->{modules}} == 2 && $e->{modules}[1] =~ /initrd/) {
+	    (my $xen, $e->{xen_append}) = split(' ', $e->{kernel}, 2);
+	    ($e->{kernel}, my $initrd) = @{delete $e->{modules}};
+	    $e->{xen} = grub2file($xen, $grub2dev, $fstab);
+	    $e->{initrd} = grub2file($initrd, $grub2dev, $fstab);
+	}
+	if (my $v = delete $e->{kernel}) {
+	    (my $kernel, $e->{append}) = split(' ', $v, 2);
+	    $e->{append} = join(' ', grep { !/^BOOT_IMAGE=/ } split(' ', $e->{append}));
+	    $e->{root} = $1 if $e->{append} =~ s/root=(\S*)\s*//;
+	    $e->{kernel_or_dev} = grub2file($kernel, $grub2dev, $fstab);
+	}
+	my ($vga, $other) = partition { /^vga=/ } split(' ', $e->{append});
 	if (@$vga) {
-	    $_->{vga} = $vga->[0] =~ /vga=(.*)/ && $1;
-	    $_->{append} = join(' ', @$other);
+	    $e->{vga} = $vga->[0] =~ /vga=(.*)/ && $1;
+	    $e->{append} = join(' ', @$other);
 	}
     }
 
@@ -271,12 +293,7 @@ sub read_grub_menu_lst {
 	$b{default} = min($b{default}, scalar(@{$b{entries}}) - 1);
 	$b{default} = $b{entries}[$b{default}]{label};
     }
-    $b{method} = $b{splashimage} ? 'grub-graphic' :  'grub-menu';
-
-    if ($b{splashimage} =~ m!^/boot! && ! -e "$::prefix$b{splashimage}") {
-	log::l("dropping bootloader splashimage since $b{splashimage} doesn't exist");
-	delete $b{splashimage};
-    }
+    $b{method} = $b{gfxmenu} ? 'grub-graphic' :  'grub-menu';
 
     \%b;
 }
@@ -299,46 +316,70 @@ sub yaboot2file {
     }
 }
 
+sub read_silo() {
+    my $bootloader = read_lilo_like("/boot/silo.conf", sub {
+					my ($f) = @_;
+					"/boot$f";
+				    });
+    $bootloader->{method} = 'silo';
+    $bootloader;
+}
 sub read_cromwell() {
     my %b;
     $b{method} = 'cromwell';
     \%b;
 }
-sub read_yaboot() { &read_lilo }
+sub read_yaboot() { 
+    my $bootloader = read_lilo_like("/etc/yaboot.conf", \&yaboot2file);
+    $bootloader->{method} = 'yaboot';
+    $bootloader;
+}
 sub read_lilo() {
-    my $file = sprintf("$::prefix/etc/%s.conf", arch() =~ /ppc/ ? 'yaboot' : 'lilo');
-    my $global = 1;
-    my ($e, $v);
-    my %b;
-    -e $file or return;
-    foreach (cat_($file)) {
-	next if /^\s*#/ || /^\s*$/;
-	($_, $v) = /^\s*([^=\s]+)\s*(?:=\s*(.*?))?\s*$/ or log::l("unknown line in $file: $_"), next;
+    my $bootloader = read_lilo_like("/etc/lilo.conf", sub { $_[0] });
 
-	if (/^(?:image|other|macos|macosx|bsd|darwin)$/) {
-	    $v = yaboot2file($v) if arch() =~ /ppc/;
-	    push @{$b{entries}}, $e = { type => $_, kernel_or_dev => $v };
+    delete $bootloader->{timeout} unless $bootloader->{prompt};
+    $bootloader->{timeout} = $bootloader->{timeout} / 10 if $bootloader->{timeout};
+
+    my $submethod = member($bootloader->{install}, 'text', 'menu') ? $bootloader->{install} : 'menu';
+    $bootloader->{method} = "lilo-$submethod";
+    
+    $bootloader;
+}
+sub read_lilo_like {
+    my ($file, $filter_file) = @_;
+
+    my $global = 1;
+    my ($e);
+    my %b;
+    -e "$::prefix$file" or return;
+    foreach my $line (cat_("$::prefix$file")) {
+	next if $line =~ /^\s*#/ || $line =~ /^\s*$/;
+	my ($cmd, $v) = $line =~ /^\s*([^=\s]+)\s*(?:=\s*(.*?))?\s*$/ or log::l("unknown line in $file: $line"), next;
+
+	if ($cmd =~ /^(?:image|other|macos|macosx|bsd|darwin)$/) {
+	    $v = $filter_file->($v);
+	    push @{$b{entries}}, $e = { type => $cmd, kernel_or_dev => $v };
 	    $global = 0;
 	} elsif ($global) {
-	    if ($_ eq 'disk' && $v =~ /(\S+)\s+bios\s*=\s*(\S+)/) {
+	    if ($cmd eq 'disk' && $v =~ /(\S+)\s+bios\s*=\s*(\S+)/) {
 		$b{bios}{$1} = $2;
-	    } elsif ($_ eq 'bios') {
+	    } elsif ($cmd eq 'bios') {
 		$b{bios}{$b{disk}} = $v;
-	    } elsif ($_ eq 'init-message') {
+	    } elsif ($cmd eq 'init-message') {
 		$v =~ s/\\n//g; 
 		$v =~ s/"//g;
 		$b{'init-message'} = $v;
 	    } else {
-		$b{$_} = $v eq '' ? 1 : $v;
+		$b{$cmd} = $v eq '' ? 1 : $v;
 	    }
 	} else {
-	    if ((/map-drive/ .. /to/) && /to/) {
+	    if (($cmd eq 'map-drive' .. $cmd eq 'to') && $cmd eq 'to') {
 		$e->{mapdrive}{$e->{'map-drive'}} = $v;
 	    } else {
-		if (arch() =~ /ppc/ && $_ eq 'initrd') {
-		    $v = yaboot2file($v);
+		if ($cmd eq 'initrd') {
+		    $v = $filter_file->($v);
 		}
-		$e->{$_} = $v || 1;
+		$e->{$cmd} = $v || 1;
 	    }
 	}
     }
@@ -359,14 +400,16 @@ sub read_lilo() {
 	foreach ('append', 'root', 'label') {
 	    $entry->{$_} = remove_quotes_and_spaces($entry->{$_}) if $entry->{$_};
 	}
-    }
-
-    if (arch() =~ /ppc/) {
-	$b{method} = 'yaboot';
-    } else {
-	delete $b{timeout} unless $b{prompt};
-	$b{timeout} = $b{timeout} / 10 if $b{timeout};
-	$b{method} = 'lilo-' . (member($b{install}, 'text', 'menu', 'graphic') ? $b{install} : 'graphic');
+	if ($entry->{kernel_or_dev} =~ /\bmbootpack\b/) {
+	    $entry->{initrd} = $entry->{kernel_or_dev};
+	    $entry->{initrd} =~ s/\bmbootpack/initrd/;
+	    $entry->{kernel_or_dev} =~ s/\bmbootpack/vmlinuz/;
+	    $entry->{kernel_or_dev} =~ s/.img$//;
+	    #- assume only xen is configured with mbootpack
+	    $entry->{xen} = '/boot/xen.gz';
+	    $entry->{root} = $1 if $entry->{append} =~ s/root=(\S*)\s*//;
+	    ($entry->{xen_append}, $entry->{append}) = split '\s*--\s*', $entry->{append}, 2;
+	}
     }
 
     # cleanup duplicate labels (in case file is corrupted)
@@ -419,7 +462,7 @@ sub same_entries {
     my ($a, $b) = @_;
 
     foreach (uniq(keys %$a, keys %$b)) {
-	if (member($_, 'label', 'append', 'mapdrive', 'readonly')) {
+	if (member($_, 'label', 'append', 'mapdrive', 'readonly', 'makeactive')) {
 	    next;
 	} else {
 	    next if $a->{$_} eq $b->{$_};
@@ -492,13 +535,17 @@ sub _do_the_symlink {
 	return;
     }
 
-    #- the symlink is going to change! 
-    #- replace all the {$kind} using this symlink to the real file
-    my $old_long_name = $existing_link =~ m!^/! ? $existing_link : "/boot/$existing_link";
-    if (-e "$::prefix$old_long_name") {
-	$bootloader->{old_long_names}{$link} = $old_long_name;
-    } else {
-	log::l("ERROR: $link points to $old_long_name which does not exist");
+    if ($existing_link) {
+	#- the symlink is going to change! 
+	#- replace all the {$kind} using this symlink to the real file
+	my $old_long_name = $existing_link =~ m!^/! ? $existing_link : "/boot/$existing_link";
+	if (-e "$::prefix$old_long_name") {
+	    $bootloader->{old_long_names}{$link} = $old_long_name;
+	} else {
+	    log::l("ERROR: $link points to $old_long_name which does not exist");
+	}
+    } elsif (-e "$::prefix$link") {
+	log::l("ERROR: $link is not a symbolic link");
     }
 
     #- changing the symlink
@@ -518,8 +565,48 @@ sub cmp_kernel_versions {
     $r || $rel_a <=> $rel_b || $rel_a cmp $rel_b;
 }
 
+sub get_mbootpack_filename {
+    my ($entry) = @_;
+    my $mbootpack_file = $entry->{initrd};
+    $mbootpack_file =~ s/\binitrd/mbootpack/;
+    $entry->{xen} && $mbootpack_file;
+}
+
+sub build_mbootpack {
+    my ($entry) = @_;
+
+    my $mbootpack = '/usr/bin/mbootpack';
+    -f $::prefix . $entry->{kernel_or_dev} && -f $::prefix . $entry->{initrd} or return;
+
+    my $mbootpack_file = get_mbootpack_filename($entry);
+    -f ($::prefix . $mbootpack_file) and return 1;
+
+    my $error;
+    my $xen_kernel = '/tmp/xen_kernel';
+    my $xen_vmlinux = '/tmp/xen_vmlinux';
+    my $_b = before_leaving { unlink $::prefix . $_ foreach $xen_kernel, $xen_vmlinux };
+    run_program::rooted($::prefix, '/bin/gzip', '>', $xen_kernel, '2>', \$error, '-dc', $entry->{xen})
+      or die "unable to uncompress xen kernel";
+    run_program::rooted($::prefix, '/bin/gzip', '>', $xen_vmlinux, '2>', \$error, '-dc', $entry->{kernel_or_dev})
+      or die "unable to uncompress xen vmlinuz";
+
+    run_program::rooted($::prefix, $mbootpack,
+                        "2>", \$error,
+                        '-o', $mbootpack_file,
+                        '-m', $xen_vmlinux,
+                        '-m', $entry->{initrd},
+                        $xen_kernel)
+      or die "mbootpack failed: $error";
+
+    1;
+}
+
 sub add_kernel {
     my ($bootloader, $kernel_str, $v, $b_nolink, $b_no_initrd) = @_;
+
+    if (short_ext($kernel_str) eq 'xen' && -f '/boot/xen.gz') {
+	$v->{xen} = '/boot/xen.gz';
+    }
 
     add2hash($v,
 	     {
@@ -530,6 +617,10 @@ sub add_kernel {
     #- normalize append and handle special options
     {
 	my ($simple, $dict) = unpack_append("$bootloader->{perImageAppend} $v->{append}");
+	if ($v->{label} eq 'failsafe') {
+	    #- perImageAppend contains resume=/dev/xxx which we don't want
+	    @$dict = grep { $_->[0] ne 'resume' } @$dict;
+	}
 	if (-e "$::prefix/sbin/udev" && cmp_kernel_versions($kernel_str->{version_no_ext}, '2.6.8') >= 0) {
 	    log::l("it is a recent kernel, so we remove any existing devfs= kernel option to enable udev");
 	    @$dict = grep { $_->[0] ne 'devfs' } @$dict;
@@ -553,8 +644,7 @@ sub add_kernel {
 
     if (!$b_no_initrd) {
 	my $initrd_long = kernel_str2initrd_long($kernel_str);
-	$v->{initrd} = "/boot/$initrd_long";
-	mkinitrd($kernel_str->{version}, $v) or undef $v->{initrd};
+	$v->{initrd} = mkinitrd($kernel_str->{version}, $bootloader, $v, "/boot/$initrd_long");
 	if ($v->{initrd} && !$b_nolink) {
 	    $v->{initrd} = '/boot/' . kernel_str2initrd_short($kernel_str);
 	    _do_the_symlink($bootloader, $v->{initrd}, $initrd_long);
@@ -562,6 +652,19 @@ sub add_kernel {
     }
 
     add_entry($bootloader, $v);
+}
+
+sub rebuild_initrds {
+    my ($bootloader) = @_;
+
+    my %done;
+    foreach my $v (grep { $_->{initrd} } @{$bootloader->{entries}}) {
+	my $kernel_str = vmlinuz2kernel_str($v->{kernel_or_dev});
+	my $initrd_long = '/boot/' . kernel_str2initrd_long($kernel_str);
+	next if $done{$initrd_long}++;
+
+	rebuild_initrd($kernel_str->{version}, $bootloader, $v, $initrd_long);
+    }
 }
 
 sub duplicate_kernel_entry {
@@ -686,12 +789,13 @@ sub set_append_netprofile {
 }
 
 sub configure_entry {
-    my ($entry) = @_;
+    my ($bootloader, $entry) = @_;
     $entry->{type} eq 'image' or return;
 
     if (my $kernel_str = vmlinuz2kernel_str($entry->{kernel_or_dev})) {
-	$entry->{initrd} ||= '/boot/' . kernel_str2initrd_short($kernel_str);
-	mkinitrd($kernel_str->{version}, $entry) or undef $entry->{initrd};
+	$entry->{initrd} = 
+	  mkinitrd($kernel_str->{version}, $bootloader, $entry,
+		   $entry->{initrd} || '/boot/' . kernel_str2initrd_short($kernel_str));
     }
 }
 
@@ -732,26 +836,33 @@ sub get_kernel_labels {
     @kernels_str;
 }
 
+sub short_ext {
+    my ($kernel_str) = @_;
+
+    my $short_ext = {
+	'i586-up-1GB' => 'i586',
+	'i686-up-4GB' => '4GB',
+	'xen0' => 'xen',
+    }->{$kernel_str->{ext}};
+
+    $short_ext || $kernel_str->{ext};
+}
 sub sanitize_ver {
     my ($name, $kernel_str) = @_;
 
     $name = '' if $name eq 'linux';
 
-    my ($v, $ext) = ($kernel_str->{version_no_ext}, $kernel_str->{ext});
+    my $v = $kernel_str->{version_no_ext};
     if ($v =~ s/-\d+\.mm\././) {
 	$name = join(' ', grep { $_ } $name, 'multimedia');
+    } elsif ($v =~ s/-(desktop|server|laptop)-/-/) {
+	$name = join(' ', grep { $_ } $name, $1);
     }
 
-    $v =~ s!mdk$!!;
+    $v =~ s!md[kv]$!!;
     $v =~ s!-0\.(pre|rc)(\d+)\.!$1$2-!;
 
-    my $short_ext = {
-	'i586-up-1GB' => 'i586',
-	'i686-up-4GB' => '4GB',
-    }->{$ext};
-    $ext = $short_ext if $short_ext;
-
-    my $return = join(' ', grep { $_ } $name, $ext, $v);
+    my $return = join(' ', grep { $_ } $name, short_ext($kernel_str), $v);
 
     length($return) < 30 or $return =~ s!secure!sec!;
     length($return) < 30 or $return =~ s!enterprise!ent!;
@@ -773,8 +884,14 @@ wait for default boot.
 
 ");
 	my $msg = translate($msg_en);
-	#- use the english version if more than 20% of 8bits chars
-	$msg = $msg_en if int(grep { $_ & 0x80 } unpack "c*", $msg) / length($msg) > 0.2;
+	#- use the english version if more than 40% of 8bits chars
+	#- else, use the translation but force a conversion to ascii
+	#- to be sure there won't be undisplayable characters
+	if (int(grep { $_ & 0x80 } unpack "c*", $msg) / length($msg) > 0.4) {
+	    $msg = $msg_en;
+	} else {
+	    $msg = Locale::gettext::iconv($msg, "utf-8", "ascii//TRANSLIT");
+	}
 	$bootloader->{message_text} = $msg;
     }
 }
@@ -845,7 +962,7 @@ sub suggest {
     @{$bootloader->{entries}} = grep { $_->{label} ne 'failsafe' } @{$bootloader->{entries}};
 
     add_kernel($bootloader, $kernels[0],
-	       { root => $root, label => 'failsafe', append => 'devfs=nomount failsafe' });
+	       { root => $root, label => 'failsafe', append => 'failsafe' });
 
     if (arch() =~ /ppc/) {
 	#- if we identified a MacOS partition earlier - add it
@@ -878,7 +995,7 @@ sub suggest {
 	$bootloader->{default} ||= $preferred;
     }
     $bootloader->{default} ||= "linux";
-    $bootloader->{method} ||= first(method_choices($all_hds));
+    $bootloader->{method} ||= first(method_choices($all_hds, 1));
 }
 
 sub detect_main_method {
@@ -908,11 +1025,11 @@ sub config_files() {
 sub method2text {
     my ($method) = @_;
     +{
-	'lilo-graphic' => N("LILO with graphical menu"),
 	'lilo-menu'    => N("LILO with text menu"),
 	'grub-graphic' => N("GRUB with graphical menu"),
 	'grub-menu'    => N("GRUB with text menu"),
 	'yaboot'       => N("Yaboot"),
+	'silo'         => N("SILO"),
     }->{$method};
 }
 
@@ -921,24 +1038,25 @@ sub method_choices_raw {
     detect_devices::is_xbox() ? 'cromwell' :
     arch() =~ /ppc/ ? 'yaboot' : 
     arch() =~ /ia64/ ? 'lilo' : 
+    arch() =~ /sparc/ ? 'silo' : 
       (
-       if_(!$b_prefix_mounted || whereis_binary('lilo', $::prefix), 
-	   'lilo-graphic', 'lilo-menu'),
        if_(!$b_prefix_mounted || whereis_binary('grub', $::prefix), 
 	   'grub-graphic', 'grub-menu'),
+       if_(!$b_prefix_mounted || whereis_binary('lilo', $::prefix), 
+	   'lilo-menu'),
       );
 }
 sub method_choices {
-    my ($all_hds) = @_;
+    my ($all_hds, $b_prefix_mounted) = @_;
     my $fstab = [ fs::get::fstab($all_hds) ];
     my $root_part = fs::get::root($fstab);
     my $have_dmraid = find { fs::type::is_dmraid($_) } @{$all_hds->{hds}};
 
     grep {
 	(!/lilo/ || !isLoopback($root_part) && !$have_dmraid)
-	  && (!/lilo-graphic/ || !detect_devices::matching_desc__regexp('ProSavageDDR'))
-	  && (!/grub/ || !isRAID($root_part));
-    } method_choices_raw(1);
+	  && (!/grub/ || !isRAID($root_part))
+	  && (!/grub-graphic/ || cat_("/proc/cmdline") !~ /console=ttyS/);
+    } method_choices_raw($b_prefix_mounted);
 }
 sub main_method_choices {
     my ($b_prefix_mounted) = @_;
@@ -971,6 +1089,8 @@ sub create_link_source() {
 	    -d $_ or next;
 	    log::l("creating symlink $_/build");
 	    symlink "/usr/src/linux-$version", "$_/build";
+	    log::l("creating symlink $_/source");
+	    symlink "/usr/src/linux-$version", "$_/source";
 	}
     }
 }
@@ -1017,7 +1137,7 @@ sub write_yaboot {
     my @conf;
 
     if (!get_label($bootloader->{default}, $bootloader)) {
-	log::l("default bootloader entry $bootloader->{default} is invalid, choose another one");
+	log::l("default bootloader entry $bootloader->{default} is invalid, choosing another one");
 	$bootloader->{default} = $bootloader->{entries}[0]{label};
     }
     push @conf, "# yaboot.conf - generated by DrakX/drakboot";
@@ -1073,7 +1193,7 @@ sub install_yaboot {
 sub when_config_changed_yaboot {
     my ($bootloader) = @_;
     $::testing and return;
-    if (defined $install_steps_interactive::new_bootstrap) {
+    if (defined $partition_table::mac::new_bootstrap) {
 	run_program::run("hformat", $bootloader->{boot}) or die "hformat failed";
     }	
     my $error;
@@ -1093,14 +1213,19 @@ sub when_config_changed_cromwell {
     log::l("XBox/Cromwell - nothing to do...");
 }
 
-sub make_label_lilo_compatible {
+sub simplify_label {
     my ($label) = @_;
 
     length($label) < 31 or $label =~ s/\.//g;
 
     $label = substr($label, 0, 31); #- lilo does not handle more than 31 char long labels
     $label =~ s/ /_/g; #- lilo does not support blank character in image names, labels or aliases
-    qq("$label");
+    $label;
+}
+
+sub make_label_lilo_compatible {
+    my ($label) = @_;
+    '"' . simplify_label($label) . '"';
 }
 
 sub write_lilo {
@@ -1149,20 +1274,22 @@ sub write_lilo {
     foreach my $entry (@{$bootloader->{entries}}) {
 	delete $entry->{restricted} if !$entry->{password} && !$bootloader->{password};
     }
+    if (get_append_with_key($bootloader, 'console') =~ /ttyS(.*)/) {
+	$bootloader->{serial} ||= $1;
+    }
 
     if (!get_label($bootloader->{default}, $bootloader)) {
-	log::l("default bootloader entry $bootloader->{default} is invalid, choose another one");
+	log::l("default bootloader entry $bootloader->{default} is invalid, choosing another one");
 	$bootloader->{default} = $bootloader->{entries}[0]{label};
     }
     push @conf, "# File generated by DrakX/drakboot";
     push @conf, "# WARNING: do not forget to run lilo after modifying this file\n";
     push @conf, "default=" . make_label_lilo_compatible($bootloader->{default}) if $bootloader->{default};
-    push @conf, map { $_ . '=' . $quotes_if_needed->($bootloader->{$_}) } grep { $bootloader->{$_} } qw(boot root map install vga keytable raid-extra-boot menu-scheme);
+    push @conf, map { $_ . '=' . $quotes_if_needed->($bootloader->{$_}) } grep { $bootloader->{$_} } qw(boot root map install serial vga keytable raid-extra-boot menu-scheme);
     push @conf, grep { $bootloader->{$_} } qw(linear geometric compact prompt nowarn restricted static-bios-codes);
     push @conf, "append=" . $quotes->($bootloader->{append}) if $bootloader->{append};
     push @conf, "password=" . $bootloader->{password} if $bootloader->{password}; #- also done by msec
     push @conf, "timeout=" . round(10 * $bootloader->{timeout}) if $bootloader->{timeout};
-    push @conf, "serial=" . $1 if get_append_with_key($bootloader, 'console') =~ /ttyS(.*)/;
     
     push @conf, "message=$bootloader->{message}" if $bootloader->{message};
 
@@ -1171,14 +1298,23 @@ sub write_lilo {
     push @conf, map_each { "disk=$::a bios=$::b" } %{$bootloader->{bios}};
 
     foreach my $entry (@{$bootloader->{entries}}) {
-	push @conf, "$entry->{type}=" . $file2fullname->($entry->{kernel_or_dev});
+	my $mbootpack_file = get_mbootpack_filename($entry);
+        if ($mbootpack_file && !build_mbootpack($entry)) {
+	    warn "mbootpack is required for xen but unavailable, skipping\n";
+	    next;
+	}
+
+	push @conf, "$entry->{type}=" . $file2fullname->($mbootpack_file || $entry->{kernel_or_dev});
 	my @entry_conf;
 	push @entry_conf, "label=" . make_label_lilo_compatible($entry->{label}) if $entry->{label};
 
 	if ($entry->{type} eq "image") {		
-	    push @entry_conf, 'root=' . $quotes_if_needed->($entry->{root}) if $entry->{root};
-	    push @entry_conf, "initrd=" . $file2fullname->($entry->{initrd}) if $entry->{initrd};
-	    push @entry_conf, "append=" . $quotes->($entry->{append}) if $entry->{append};
+	    push @entry_conf, 'root=' . $quotes_if_needed->($entry->{root}) if $entry->{root} && !$entry->{xen};
+	    push @entry_conf, "initrd=" . $file2fullname->($entry->{initrd}) if $entry->{initrd} && !$mbootpack_file;
+	    my $append = join(' ', if_($entry->{xen_append}, $entry->{xen_append}),
+	                           if_($entry->{xen}, '--', 'root=' . $entry->{root}),
+	                           if_($entry->{append}, $entry->{append}));
+	    push @entry_conf, "append=" . $quotes->($append) if $append;
 	    push @entry_conf, "vga=$entry->{vga}" if $entry->{vga};
 	    push @entry_conf, grep { $entry->{$_} } qw(read-write read-only optional);
 	} else {
@@ -1223,10 +1359,15 @@ sub install_lilo {
     if ($bootloader->{message_text}) {
 	output("$::prefix/boot/message-text", $bootloader->{message_text});
     }
-    my $message = "message-" . ($bootloader->{method} ne 'lilo-graphic' ? 'text' : 'graphic');
+    my $message = "message-text";
     if (-r "$::prefix/boot/$message") {
 	symlinkf $message, "$::prefix/boot/message";
 	$bootloader->{message} = '/boot/message';
+    }
+
+    #- ensure message does not contain the old graphic format
+    if ($bootloader->{message} && -s "$::prefix$bootloader->{message}" > 65_000) {
+	output("$::prefix$bootloader->{message}", '');
     }
 
     write_lilo($bootloader, $all_hds);
@@ -1293,9 +1434,13 @@ sub device2grub {
       $device->{rootDevice} ?
 	(fs::get::device2part($device->{rootDevice}, $sorted_hds), $device->{device} =~ /(\d+)$/) :
 	$device;
-    my $bios = find_index { $hd eq $_ } @$sorted_hds;
-    my $part_string = defined $part_nb ? ',' . ($part_nb - 1) : '';    
-    "(hd$bios$part_string)";
+    my $bios = eval { find_index { $hd eq $_ } @$sorted_hds };
+    if (defined $bios) {
+	my $part_string = defined $part_nb ? ',' . ($part_nb - 1) : '';    
+	"(hd$bios$part_string)";
+    } else {
+	undef;
+    }
 }
 
 sub read_grub_device_map() {
@@ -1341,6 +1486,34 @@ sub grub2file {
     }
 }
 
+sub boot_copies_dir() { '/boot/copied' }
+sub create_copy_in_boot {
+    my ($file) = @_;
+
+    my $s = $file;
+    $s =~ s!/!_!g;
+    my $file2 = boot_copies_dir() . "/$s";
+
+    log::l("$file is not available at boot time, creating a copy ($file2)");
+    mkdir_p(boot_copies_dir());
+    output("$file2.link", $file . "\n");
+    update_copy_in_boot("$file2.link");
+
+    $file2;
+}
+sub update_copy_in_boot {
+    my ($link) = @_;
+    my $orig = chomp_(cat_("$::prefix$link"));
+    (my $dest = $link) =~ s/\.link$// or internal_error("update_copy_in_boot: $link");
+    if (-e "$::prefix$orig") {
+	log::l("updating $dest from $orig");
+	cp_af("$::prefix$orig", "$::prefix$dest");
+    } else {
+	log::l("removing $dest since $orig does not exist anymore");
+	unlink "$::prefix$link", "$::prefix$orig";
+    }
+}
+
 sub write_grub {
     my ($bootloader, $all_hds) = @_;
 
@@ -1349,71 +1522,90 @@ sub write_grub {
     my @sorted_hds = sort_hds_according_to_bios($bootloader, $all_hds);
     write_grub_device_map(\@legacy_floppies, \@sorted_hds);
 
-    my $file2grub = sub {
+    my $file2grub; $file2grub = sub {
 	my ($file) = @_;
 	if ($file =~ m!^\(.*\)/!) {
 	    $file; #- it's already in grub format
 	} else {
-	    my ($part, $rel_file) = fs::get::file2part($fstab, $_[0], 'keep_simple_symlinks');
-	    device2grub($part, \@sorted_hds) . $rel_file;
+	    my ($part, $rel_file) = fs::get::file2part($fstab, $file, 'keep_simple_symlinks');
+	    if (my $grub = device2grub($part, \@sorted_hds)) {
+		$grub . $rel_file;
+	    } elsif (!begins_with($file, '/boot/')) {
+		log::l("$file is on device $part->{device} which is not available at boot time. Copying it");
+		$file2grub->(create_copy_in_boot($file));
+	    } else {
+		log::l("ERROR: $file is on device $part->{device} which is not available at boot time. Defaulting to a dumb value");
+		"(hd0,0)$file";
+	    }
 	}
     };
 
     if (get_append_with_key($bootloader, 'console') =~ /ttyS(\d),(\d+)/) {
 	$bootloader->{serial} ||= "--unit=$1 --speed=$2";
 	$bootloader->{terminal} ||= "--timeout=" . ($bootloader->{timeout} || 0) . " console serial";
-    } elsif ($bootloader->{splashimage} eq '' && $bootloader->{method} eq 'grub-graphic') {
-	$bootloader->{splashimage} ||= '/boot/grub/mdv-grub_splash.xpm.gz';
-	$bootloader->{viewport} ||= "3 2 77 22";
-	$bootloader->{shade} ||= "1";
-    } elsif ($bootloader->{method} eq 'grub-menu') {
+    } elsif ($bootloader->{method} eq 'grub-graphic') {
+	my $bin = '/usr/sbin/grub-gfxmenu';
+	if ($bootloader->{gfxmenu} eq '' && -x "$::prefix/usr/sbin/grub-gfxmenu") {
+	    my $locale = $::o->{locale} || do { require lang; lang::read() };
+	    run_program::rooted($::prefix, $bin, '--lang', $locale->{lang}, '--update-gfxmenu');
+	    $bootloader->{gfxmenu} ||= '/boot/gfxmenu';
+	}
+	#- not handled anymore
 	delete $bootloader->{$_} foreach qw(splashimage viewport shade);
+    } else {
+	delete $bootloader->{gfxmenu};
     }
 
     {
 	my @conf;
 
-	push @conf, map { "$_ $bootloader->{$_}" } grep { $bootloader->{$_} } qw(timeout color serial shade terminal viewport background foreground);
-	push @conf, map { $_ . ' ' . $file2grub->($bootloader->{$_}) } grep { $bootloader->{$_} } qw(splashimage);
+	push @conf, map { "$_ $bootloader->{$_}" } grep { $bootloader->{$_} } qw(timeout color password serial shade terminal viewport background foreground);
+	push @conf, map { $_ . ' ' . $file2grub->($bootloader->{$_}) } grep { $bootloader->{$_} } qw(gfxmenu);
 
 	eval {
 	    push @conf, "default " . (find_index { $_->{label} eq $bootloader->{default} } @{$bootloader->{entries}});
 	};
 
-	foreach (@{$bootloader->{entries}}) {
-	    my $title = "\ntitle $_->{label}";
+	foreach my $entry (@{$bootloader->{entries}}) {
+	    my $title = "\ntitle $entry->{label}";
 
-	    if ($_->{type} eq "image") {
-		my $vga = $_->{vga} || $bootloader->{vga};
-		push @conf, $title,
-		  join(' ', 'kernel', $file2grub->($_->{kernel_or_dev}),
-		       if_($_->{root}, $_->{root} =~ /loop7/ ? "root=707" : "root=$_->{root}"), #- special to workaround bug in kernel (see #ifdef CONFIG_BLK_DEV_LOOP)
-		       $_->{append},
-		       if_($_->{'read-write'}, 'rw'),
+	    if ($entry->{type} eq "image") {
+		push @conf, $title;
+		push @conf, grep { $entry->{$_} } 'lock';
+		push @conf, join(' ', 'kernel', $file2grub->($entry->{xen}), $entry->{xen_append}) if $entry->{xen};
+
+		my $vga = $entry->{vga} || $bootloader->{vga};
+		push @conf, join(' ', $entry->{xen} ? 'module' : 'kernel', 
+		       $file2grub->($entry->{kernel_or_dev}),
+		       $entry->{xen} ? '' : 'BOOT_IMAGE=' . simplify_label($entry->{label}),
+		       if_($entry->{root}, $entry->{root} =~ /loop7/ ? "root=707" : "root=$entry->{root}"), #- special to workaround bug in kernel (see #ifdef CONFIG_BLK_DEV_LOOP)
+		       $entry->{append},
+		       if_($entry->{'read-write'}, 'rw'),
 		       if_($vga && $vga ne "normal", "vga=$vga"));
-		push @conf, "module " . $_ foreach @{$_->{modules} || []};
-		push @conf, "initrd " . $file2grub->($_->{initrd}) if $_->{initrd};
+		push @conf, "module " . $_ foreach @{$entry->{modules} || []};
+		push @conf, join(' ', $entry->{xen} ? 'module' : 'initrd', $file2grub->($entry->{initrd})) if $entry->{initrd};
 	    } else {
-		my $dev = eval { device_string2grub($_->{kernel_or_dev}, \@legacy_floppies, \@sorted_hds) };
+		my $dev = eval { device_string2grub($entry->{kernel_or_dev}, \@legacy_floppies, \@sorted_hds) };
 		if (!$dev) {
-		    log::l("dropping bad entry $_->{label} for unknown device $_->{kernel_or_dev}");
+		    log::l("dropping bad entry $entry->{label} for unknown device $entry->{kernel_or_dev}");
 		    next;
 		}
-		push @conf, $title, "root $dev";
+		push @conf, $title;
+		push @conf, join(' ', $entry->{grub_noverify} ? 'rootnoverify' : 'root', $dev);
 
-		if ($_->{table}) {
-		    if (my $hd = fs::get::device2part($_->{table}, \@sorted_hds)) {
+		if ($entry->{table}) {
+		    if (my $hd = fs::get::device2part($entry->{table}, \@sorted_hds)) {
 			if (my $bios = find_index { $hd eq $_ } @sorted_hds) {
 			    #- boot off the nth drive, so reverse the BIOS maps
 			    my $nb = sprintf("0x%x", 0x80 + $bios);
-			    $_->{mapdrive} ||= { '0x80' => $nb, $nb => '0x80' }; 
+			    $entry->{mapdrive} ||= { '0x80' => $nb, $nb => '0x80' }; 
 			}
 		    }
 		}
-		if ($_->{mapdrive}) {
-		    push @conf, map_each { "map ($::b) ($::a)" } %{$_->{mapdrive}};
+		if ($entry->{mapdrive}) {
+		    push @conf, map_each { "map ($::b) ($::a)" } %{$entry->{mapdrive}};
 		}
-		push @conf, "makeactive" if $_->{makeactive};
+		push @conf, "makeactive" if $entry->{makeactive};
 		push @conf, "chainloader +1";
 	    }
 	}
@@ -1430,7 +1622,7 @@ sub write_grub {
 	output_with_perm($f, 0755,
 "grub --device-map=/boot/grub/device.map --batch <<EOF
 root $files_dev
-setup $boot_dev
+setup --stage2=/boot/grub/stage2 $boot_dev
 quit
 EOF
 ");
@@ -1441,7 +1633,7 @@ EOF
 
 sub configure_kdm_BootManager {
     my ($name) = @_;
-    eval { update_gnomekderc("$::prefix/usr/share/config/kdm/kdmrc", 'Shutdown' => (
+    eval { common::update_gnomekderc_no_create("$::prefix/etc/kde/kdm/kdmrc", 'Shutdown' => (
 	BootManager => $name
     )) };
 }
@@ -1468,6 +1660,8 @@ sub install_raw_grub() {
 sub when_config_changed_grub {
     my ($_bootloader) = @_;
     #- do not do anything
+
+    update_copy_in_boot($_) foreach glob($::prefix . boot_copies_dir() . '/*.link');
 }
 
 sub action {
@@ -1487,6 +1681,19 @@ sub install {
     }
     $bootloader->{keytable} = keytable($bootloader->{keytable});
     action($bootloader, 'install', $all_hds);
+}
+
+sub ensure_pkg_is_installed {
+    my ($do_pkgs, $bootloader) = @_;
+
+    my $main_method = bootloader::main_method($bootloader->{method});
+    if ($main_method eq 'grub' || $main_method eq 'lilo') {
+	$do_pkgs->ensure_binary_is_installed($main_method, $main_method, 1) or return 0;
+	if ($bootloader->{method} eq 'grub-graphic') {
+	    $do_pkgs->ensure_is_installed('mandriva-gfxboot-theme', '/usr/share/gfxboot/themes/Mandriva/boot/message', 1) or return 0;
+	}
+    }
+    1;
 }
 
 sub update_for_renumbered_partitions {

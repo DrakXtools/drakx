@@ -99,7 +99,7 @@ xfs => N_("Starts the X Font Server (this is mandatory for Xorg to run)."),
 	$s = cat_($file);
 	$s =~ s/\\\s*\n#\s*//mg;
 	$s = 
-	  $s =~ /^# description:\s+(.*?)^(?:[^#]|# {0,2}\S)/sm ? $1 :
+	  $s =~ /^#\s+(?:Short-)?[dD]escription:\s+(.*?)^(?:[^#]|# {0,2}\S)/sm ? $1 :
 	  $s =~ /^#\s*(.*?)^[^#]/sm ? $1 : '';
 
 	$s =~ s/#\s*//mg;
@@ -108,20 +108,7 @@ xfs => N_("Starts the X Font Server (this is mandatory for Xorg to run)."),
     $s;
 }
 
-sub ask_install_simple {
-    my ($in) = @_;
-    my ($l, $on_services) = services();
-    $in->ask_many_from_list(N("Services"),
-			    N("Choose which services should be automatically started at boot time"),
-			    {
-			     list => $l,
-			     help => sub { description($_[0]) },
-			     values => $on_services,
-			     sort => 1,
-			    });
-}
-
-sub ask_install {
+sub ask_ {
     my ($in) = @_;
     my %root_services = (
 			 N("Printing") => [ qw(cups cupslpd lpr lpd oki4daemon hpoj cups-lpd) ],
@@ -210,7 +197,8 @@ sub ask_standalone_gtk {
     };
     my $b = Gtk2::EventBox->new;
     $b->set_events('pointer_motion_mask');
-    gtkadd($W->{window}, gtkadd($b, gtkpack_($W->create_box_with_title(N("Services and daemons")),
+    gtkadd($W->{window}, gtkadd($b, gtkpack_($W->create_box_with_title,
+	0, mygtk2::gtknew('Title1', label => N("Services and daemons")),
 	1, gtkset_size_request(create_scrolled_window(create_packtable({ col_spacings => 10, row_spacings => 3 },
 	    map {
                 my $service = $_;
@@ -235,6 +223,7 @@ sub ask_standalone_gtk {
 		      gtkpack__(Gtk2::HBox->new(0,0), gtksignal_connect(Gtk2::Button->new(translate($a)),
                           clicked => sub { 
 			      my $action = $a eq "Start" ? 'restart' : 'stop'; 
+			      log::explanations(qq(GP_LANG="UTF-8" service $service $action));
 			      # as we need the output in UTF-8, force it
 			      local $_ = `GP_LANG="UTF-8" service $service $action 2>&1`; s/\033\[[^mG]*[mG]//g;
 			      c::set_tagged_utf8($_);
@@ -259,7 +248,7 @@ sub ask_standalone_gtk {
 
 sub ask {    
     my ($in) = @_;
-    !$::isInstall && $in->isa('interactive::gtk') ? &ask_standalone_gtk : &ask_install;
+    !$::isInstall && $in->isa('interactive::gtk') ? &ask_standalone_gtk : &ask_;
 }
 
 sub doit {

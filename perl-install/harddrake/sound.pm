@@ -260,10 +260,11 @@ To use alsa, one can either use:
                                [
                                 { 
                                     label => N("Driver:"), val => \$new_driver, list => \@alternative, default => $new_driver, sort =>1,
-                                    help => join("\n\n", map { qq("$_": ) . $des{$_} } @alternative),
                                     allow_empty_list => 1, 
                                     format => sub { my ($drv) = @_;
-                                                    sprintf(($des{$drv} ? "$des{$drv} (%s [%s])"  : "%s [%s]"), $drv, $drv =~ /^snd[-_]/ ? 'ALSA' : 'OSS');
+                                                    $drv eq 'unknown' ? $drv :
+                                                      sprintf(($des{$drv} ? "$des{$drv} (%s [%s])"
+                                                                : "%s [%s]"), $drv, $drv =~ /^snd[-_]/ ? 'ALSA' : 'OSS');
                                                 }
                                 },
                                 {
@@ -316,7 +317,7 @@ sub trouble {
 - \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card uses
 by default
 
-- \"grep sound-slot /etc/modules.conf\" will tell you what driver it
+- \"grep sound-slot /etc/modprobe.conf\" will tell you what driver it
 currently uses
 
 - \"/sbin/lsmod\" will enable you to check if its module (driver) is

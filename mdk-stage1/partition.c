@@ -34,7 +34,6 @@
 #include "probing.h"
 #include "log.h"
 #include "mount.h"
-#include "lomount.h"
 #include "automatic.h"
 
 #include "disk.h"

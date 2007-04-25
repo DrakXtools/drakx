@@ -34,7 +34,6 @@
 #include "probing.h"
 #include "log.h"
 #include "mount.h"
-#include "lomount.h"
 #include "automatic.h"
 #include "directory.h"
 #include "partition.h"
@@ -47,8 +46,6 @@ static enum return_type try_with_device(char *dev_name)
 	char * questions_location_auto[] = { "directory", NULL };
 	static char ** answers_location = NULL;
 	char location_full[500];
-
-	char * disk_own_mount = IMAGE_LOCATION_DIR "hdimage";
 
 	char * parts[50];
 	char * parts_comments[50];
@@ -74,8 +71,8 @@ static enum return_type try_with_device(char *dev_name)
                         return results;
         }
 
-	/* in testing mode, assume the partition is already mounted on IMAGE_LOCATION_DIR "hdimage" */
-        if (!IS_TESTING && try_mount(choice, disk_own_mount)) {
+	/* in testing mode, assume the partition is already mounted on MEDIA_LOCATION */
+        if (!IS_TESTING && try_mount(choice, MEDIA_LOCATION)) {
 		stg1_error_message("I can't find a valid filesystem (tried: ext2, vfat, ntfs, reiserfs). "
                                    "Make sure the partition has been cleanly unmounted.");
 		return try_with_device(dev_name);
@@ -85,11 +82,11 @@ static enum return_type try_with_device(char *dev_name)
 	if (ask_from_entries_auto("Please enter the directory (or ISO image file) containing the "
 				  DISTRIB_NAME " Distribution install source.",
 				  questions_location, &answers_location, 24, questions_location_auto, NULL) != RETURN_OK) {
-		umount(disk_own_mount);
+		umount(MEDIA_LOCATION);
 		return try_with_device(dev_name);
 	}
 
-	strcpy(location_full, disk_own_mount);
+	strcpy(location_full, MEDIA_LOCATION);
 	strcat(location_full, "/");
 	strcat(location_full, answers_location[0]);
 
@@ -108,7 +105,7 @@ static enum return_type try_with_device(char *dev_name)
 	}
 
 	if (!KEEP_MOUNTED)
-		umount(disk_own_mount);
+		umount(MEDIA_LOCATION);
 
 	return RETURN_OK;
 }

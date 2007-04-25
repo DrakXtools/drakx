@@ -22,8 +22,6 @@ my %serialprobe;
 #-######################################################################################
 #- Functions
 #-######################################################################################
-sub dev_is_devfs() { -e "/dev/.devfsd" } #- no $::prefix, returns false during install and that's nice :)
-
 
 sub get() {
     #- Detect the default BIOS boot harddrive is kind of tricky. We may have IDE,
@@ -41,25 +39,26 @@ sub cdroms()      { grep { $_->{media_type} eq 'cdrom' } get() }
 sub burners()     { grep { isBurner($_) } cdroms() }
 sub dvdroms()     { grep { isDvdDrive($_) } cdroms() }
 sub raw_zips()    { grep { member($_->{media_type}, 'fd', 'hd') && isZipDrive($_) } get() }
-#-sub jazzs     { grep { member($_->{media_type}, 'fd', 'hd') && isJazzDrive($_) } get() }
 sub ls120s()      { grep { member($_->{media_type}, 'fd', 'hd') && isLS120Drive($_) } get() }
 sub zips()        {
     map { 
 	$_->{device} .= 4; 
-	$_->{devfs_device} = $_->{devfs_prefix} . '/part4'; 
 	$_;
     } raw_zips();
 }
 
-sub floppies() {
+sub floppies {
+    my ($o_not_detect_legacy_floppies) = @_;
     require modules;
     my @fds;
-    eval { modules::load("floppy") if $::isInstall };
-    if (!is_xbox()) {
-        @fds = map {
-            my $info = (!dev_is_devfs() || -e "/dev/fd$_") && c::floppy_info(devices::make("fd$_"));
-            if_($info && $info ne '(null)', { device => "fd$_", devfs_device => "floppy/$_", media_type => 'fd', info => $info });
-        } qw(0 1);
+    if (!$o_not_detect_legacy_floppies) {
+        eval { modules::load("floppy") if $::isInstall };
+        if (!is_xbox()) {
+            @fds = map {
+                my $info = c::floppy_info(devices::make("fd$_"));
+                if_($info && $info ne '(null)', { device => "fd$_", media_type => 'fd', info => $info });
+            } qw(0 1);
+        }
     }
         
     my @ide = ls120s() and eval { modules::load("ide-floppy") };
@@ -105,35 +104,6 @@ sub get_sys_cdrom_info {
     }
 }
 
-sub get_usb_storage_info_24 {
-    my (@l) = @_;
-
-    my %usbs = map {
-	my $s = cat_(glob_("$_/*"));
-	my ($host) = $s =~ /^\s*Host scsi(\d+):/m; #-#
-	my ($vendor_name) = $s =~ /^\s*Vendor: (.*)/m;
-	my ($vendor, $id) = $s =~ /^\s*GUID: (....)(....)/m;
-	if_(defined $host, $host => { vendor_name => $vendor_name, usb_vendor => hex $vendor, usb_id => hex $id });
-    } glob_('/proc/scsi/usb-storage-*') or return;
-
-    #- only the entries matching the following conditions can be usb-storage devices
-    @l = grep { $_->{channel} == 0 && $_->{id} == 0 && $_->{lun} == 0 } @l;
-    my %l; push @{$l{$_->{host}}}, $_ foreach @l;
-
-    foreach my $host (keys %usbs) {
-	my @choices = @{$l{$host} || []} or log::l("weird, host$host from /proc/scsi/usb-storage-*/* is not in /proc/scsi/scsi"), next;
-	if (@choices > 1) {
-	    @choices = grep { $_->{info} =~ /^\Q$usbs{$host}{vendor_name}/ } @choices;
-	    @choices or log::l("weird, can not find the good entry host$host from /proc/scsi/usb-storage-*/* in /proc/scsi/scsi"), next;
-	    @choices == 1 or log::l("argh, can not determine the good entry host$host from /proc/scsi/usb-storage-*/* in /proc/scsi/scsi"), next;
-	}
-	add2hash($choices[0], $usbs{$host});
-    }
-    complete_usb_storage_info(@l);
-
-    @l;
-}
-
 sub complete_usb_storage_info {
     my (@l) = @_;
 
@@ -154,20 +124,6 @@ sub complete_usb_storage_info {
     }
 }
 
-sub get_devfs_devices {
-    my (@l) = @_;
-
-    my %h = (cdrom => 'cd', hd => 'disc');
-
-    foreach (@l) {
-	$_->{devfs_prefix} = sprintf('scsi/host%d/bus%d/target%d/lun%d', $_->{host}, $_->{channel}, $_->{id}, $_->{lun})
-	  if $_->{bus} eq 'SCSI';
-
-	my $t = $h{$_->{media_type}} or next;
-	$_->{devfs_device} = $_->{devfs_prefix} . '/' . $t;
-    }
-}
-
 sub isBurner { 
     my ($e) = @_;
     $e->{capacity} =~ /burner/ and return 1;
@@ -185,9 +141,7 @@ sub isDvdDrive {
     $f && c::isDvdDrive(fileno($f));
 }
 sub isZipDrive { $_[0]{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
-sub isJazzDrive { $_[0]{info} =~ /\bJAZZ?\b/i } #- accept "iomega jaz 1GB"
 sub isLS120Drive { $_[0]{info} =~ /LS-?120|144MB/ }
-sub isRemovableUsb { begins_with($_[0]{usb_media_type} || '', 'Mass Storage') && usb2removable($_[0]) }
 sub isKeyUsb { begins_with($_[0]{usb_media_type} || '', 'Mass Storage') && $_[0]{media_type} eq 'hd' }
 sub isFloppyUsb { $_[0]{usb_driver} && $_[0]{usb_driver} eq 'Removable:floppy' }
 sub may_be_a_hd { 
@@ -197,6 +151,13 @@ sub may_be_a_hd {
            || isLS120Drive($e)
            || begins_with($e->{usb_media_type} || '', 'Mass Storage|Floppy (UFI)')
     );
+}
+
+sub get_sysfs_field_from_link {
+    my ($device, $field) = @_;
+    my $l = readlink("$device/$field");
+    $l =~ s!.*/!!;
+    $l;
 }
 
 sub get_sysfs_usbpath_for_block {
@@ -212,55 +173,11 @@ sub get_scsi_driver {
     foreach (@l) {
 	next if $_->{driver};
 	my $host = get_sysfs_usbpath_for_block($_->{device});
-	$_->{driver} = readlink("/sys/block/$_->{device}/$host/driver");
-	$_->{driver} =~ s!.*/!!;
+	$_->{driver} = get_sysfs_field_from_link("/sys/block/$_->{device}/$host", 'driver');
     }
 }
 
-sub getSCSI_24() {
-    my $err = sub { log::l("ERROR: unexpected line in /proc/scsi/scsi: $_[0]") };
-
-    my ($first, @l) = common::join_lines(cat_("/proc/scsi/scsi")) or return;
-    $first =~ /^Attached devices:/ or $err->($first);
-
-    @l = map_index {
-	my ($host, $channel, $id, $lun) = m/^Host: scsi(\d+) Channel: (\d+) Id: (\d+) Lun: (\d+)/ or $err->($_);
-	my ($vendor, $model) = /^\s*Vendor:\s*(.*?)\s+Model:\s*(.*?)\s+Rev:/m or $err->($_);
-	my ($type) = /^\s*Type:\s*(.*)/m or $err->($_);
-	{ info => "$vendor $model", host => $host, channel => $channel, id => $id, lun => $lun, 
-	  device => "sg$::i", raw_type => $type, bus => 'SCSI' };
-    } @l;
-
-    get_usb_storage_info_24(@l);
-
-    each_index {
-	my $dev = "sd" . chr($::i + ord('a'));
-	put_in_hash $_, { device => $dev, media_type => isFloppyUsb($_) ? 'fd' : 'hd' };
-    } grep { $_->{raw_type} =~ /Direct-Access|Optical Device/ } @l;
-
-    each_index {
-	put_in_hash $_, { device => "st$::i", media_type => 'tape' };
-    } grep { $_->{raw_type} =~ /Sequential-Access/ } @l;
-
-    each_index {
-	put_in_hash $_, { device => "sr$::i", media_type => 'cdrom' };
-    } grep { $_->{raw_type} =~ /CD-ROM|WORM/ } @l;
-
-    # Old hp scanners report themselves as "Processor"s
-    # (see linux/include/scsi/scsi.h and sans-find-scanner.1)
-    each_index {
-	put_in_hash $_, { media_type => 'scanner' };
-    } grep { $_->{raw_type} =~ /Scanner/ || $_->{raw_type} =~ /Processor / } @l;
-
-    delete $_->{raw_type} foreach @l;
-
-    get_devfs_devices(@l);
-    get_sys_cdrom_info(@l);
-    get_scsi_driver(@l);
-    @l;
-}
-
-sub getSCSI_26() {
+sub getSCSI() {
     my $dev_dir = '/sys/bus/scsi/devices';
 
     my @scsi_types = (
@@ -276,37 +193,39 @@ sub getSCSI_26() {
 	"Communications",
     );
 
-    my @l = map {
+    my @l;
+    foreach (all($dev_dir)) {
 	my ($host, $channel, $id, $lun) = split ':' or log::l("bad entry in $dev_dir: $_"), next;
-
 	my $dir = "$dev_dir/$_";
+
+	# handle both old and new kernels:
+	my $node =  -e "$dir/block" ? "$dir/block" : top(glob_("$dir/block*"));
+	my ($device) = readlink($node) =~ m!/block/(.*)!;
+	warn("cannot get info for device ($_)"), next if !$device;
+
+	my $usb_dir = readlink("$node/device") =~ m!/usb! && "$node/device/../../../..";
+	my $get_usb = sub { chomp_(cat_("$usb_dir/$_[0]")) };
+
 	my $get = sub {
 	    my $s = cat_("$dir/$_[0]");
 	    $s =~ s/\s+$//;
 	    $s;
 	};
 
-	my $usb_dir = readlink("$dir/block/device") =~ m!/usb! && "$dir/block/device/../../../..";
-	my $get_usb = sub { chomp_(cat_("$usb_dir/$_[0]")) };
-
-	# handle both old and new kernels:
-	my $node =  -e "$dir/block" ? "$dir/block" : top(glob_("$dir/block*"));
-	my ($device) = readlink($node) =~ m!/block/(.*)!;
-	warn "cannot get info for device ($host, $channel, $id, $lun)" if !$device;
-
-	my $media_type = ${{ st => 'tape', sr => 'cdrom', sd => 'hd' }}{substr($device, 0, 2)};
 	# Old hp scanners report themselves as "Processor"s
 	# (see linux/include/scsi/scsi.h and sans-find-scanner.1)
 	my $raw_type = $scsi_types[$get->('type')];
-	$media_type ||= 'scanner' if $raw_type =~ /Scanner|Processor/;
 
-	{ info =>  $get->('vendor') . ' ' . $get->('model'), host => $host, channel => $channel, id => $id, lun => $lun, 
+	my $media_type = ${{ st => 'tape', sr => 'cdrom', sd => 'hd' }}{substr($device, 0, 2)} ||
+	  $raw_type =~ /Scanner|Processor/ && 'scanner';
+
+	push @l, { info =>  $get->('vendor') . ' ' . $get->('model'), host => $host, channel => $channel, id => $id, lun => $lun, 
 	  bus => 'SCSI', media_type => $media_type, device => $device,
 	    $usb_dir ? (
 	  usb_vendor => hex($get_usb->('idVendor')), usb_id => hex($get_usb->('idProduct')),
 	    ) : (),
         };
-    } all($dev_dir);
+    } 
 
     @l = sort { $a->{host} <=> $b->{host} || $a->{channel} <=> $b->{channel} || $a->{id} <=> $b->{id} || $a->{lun} <=> $b->{lun} } @l;
 
@@ -316,12 +235,10 @@ sub getSCSI_26() {
 	$_->{media_type} = 'fd' if $_->{media_type} eq 'hd' && isFloppyUsb($_);
     }
 
-    get_devfs_devices(@l);
     get_sys_cdrom_info(@l);
     get_scsi_driver(@l);
     @l;
 }
-sub getSCSI() { c::kernel_version() =~ /^\Q2.6/ ? getSCSI_26() : getSCSI_24() }
 
 
 my %eide_hds = (
@@ -373,14 +290,11 @@ sub getIDE() {
 	my $host = $num;
 	($host, my $id) = divide($host, 2);
 	($host, my $channel) = divide($host, 2);
-	my $devfs_prefix = sprintf('ide/host%d/bus%d/target%d/lun0', $host, $channel, $id);
 
 	push @idi, { media_type => $type, device => basename($d), 
-		     devfs_prefix => $devfs_prefix,
 		     info => $info, host => $host, channel => $channel, id => $id, bus => 'ide', 
 		     if_($vendor, Vendor => $vendor), if_($model, Model => $model) };
     }
-    get_devfs_devices(@idi);
     get_sys_cdrom_info(@idi);
     @idi;
 }
@@ -401,6 +315,10 @@ sub getCompaqSmartArray() {
 	my ($name) = m|/(.*)|;
 	for (my $i = 0; -r ($f = "${prefix}$i"); $i++) {
 	    my @raw_devices = cat_($f) =~ m|^\s*($name/.*?):|gm;
+
+	    #- this is ugly and buggy. keeping it for 2007.0
+	    #- on a cciss, cciss/cciss0 didn't contain c0d0, but cciss/cciss1 did contain c0d1
+	    #- the line below adds both c0d0 and c0d1 for cciss0, and so some duplicates
 	    @raw_devices or @raw_devices = grep { m!^$name/! } block_devices();
 
 	    foreach my $raw_device (@raw_devices) {
@@ -411,7 +329,8 @@ sub getCompaqSmartArray() {
 	    }
 	}
     }
-    @idi;
+    #- workaround the buggy code above. this should be safe though
+    uniq_ { $_->{device} } @idi;
 }
 
 sub getDAC960() {
@@ -464,37 +383,128 @@ sub ix86_cpu_frequency() {
     cat_('/proc/cpuinfo') =~ /cpu MHz\s*:\s*(\d+)/ && $1;
 }
 
+sub probe_category {
+    my ($category) = @_;
+
+    require list_modules;
+    my @modules = list_modules::category2modules($category);
+
+    if_($category =~ /sound/ && arch() =~ /ppc/ && get_mac_model() !~ /IBM/,
+	{ driver => 'snd-powermac', description => 'Macintosh built-in' },
+    ),
+    grep {
+	if ($category eq 'network/isdn') {
+	    my $b = $_->{driver} =~ /ISDN:([^,]*),?([^,]*)(?:,firmware=(.*))?/;
+	    if ($b) {
+                $_->{driver} = $1;
+                $_->{type} = $2;
+                $_->{type} =~ s/type=//;
+                $_->{firmware} = $3;
+                $_->{driver} eq "hisax" and $_->{options} .= " id=HiSax";
+	    }
+	    $b;
+	} else {
+	    member($_->{driver}, @modules);
+	}
+    } probeall();
+}
+
 sub getSoundDevices() {
-    modules::probe_category('multimedia/sound');
+    probe_category('multimedia/sound');
 }
 
 sub isTVcardConfigurable { member($_[0]{driver}, qw(bttv cx88 saa7134)) }
 
-sub getTVcards() { modules::probe_category('multimedia/tv') }
+sub getTVcards() { probe_category('multimedia/tv') }
 
 sub getInputDevices() {
     my (@devices, $device);
     foreach (cat_('/proc/bus/input/devices')) {
         if (/^I:/) {
-            push @devices, $device if $device;
             $device = {};
-            $device->{vendor} = $1 if /Vendor=([0-9a-f]+)/;
-            $device->{id} = $1 if /Product=([0-9a-f]+)/;
-        }
-        $device->{description} = "|$1" if /N: Name="(.*)"/;
-        $device->{driver} = $1 if /H: Handlers=(\w+)/;
-        if (/P: Phys=(.*)/) {
+            $device->{vendor} = /Vendor=(\w+)/ && $1;
+            $device->{id} = /Product=(\w+)/ && $1;
+        } elsif (/N: Name="(.*)"/) {
+	    my $descr = $1;
+	    $device->{description} = "|$descr";
+
+	    #- I: Bus=0011 Vendor=0002 Product=0008 Version=7321
+	    #- N: Name="AlpsPS/2 ALPS GlidePoint"
+	    #- P: Phys=isa0060/serio1/input0
+	    #- H: Handlers=mouse1 event2 ts1
+	    #- B: EV=f
+	    #- B: KEY=420 0 70000 0 0 0 0 0 0 0 0 #=> BTN_LEFT BTN_RIGHT BTN_MIDDLE BTN_TOOL_FINGER BTN_TOUCH
+	    #-    or B: KEY=420 0 670000 0 0 0 0 0 0 0 0 #=> same with BTN_BACK
+	    #- B: REL=3       #=> X Y
+	    #- B: ABS=1000003 #=> X Y PRESSURE
+
+	    #- I: Bus=0011 Vendor=0002 Product=0008 Version=2222
+	    #- N: Name="AlpsPS/2 ALPS DualPoint TouchPad"
+	    #- P: Phys=isa0060/serio1/input0
+	    #- S: Sysfs=/class/input/input2
+	    #- H: Handlers=mouse1 ts1 event2 
+	    #- B: EV=f
+	    #- B: KEY=420 0 70000 0 0 0 0 0 0 0 0
+	    #- B: REL=3
+	    #- B: ABS=1000003
+
+	    #- I: Bus=0011 Vendor=0002 Product=0007 Version=0000
+	    #- N: Name="SynPS/2 Synaptics TouchPad"
+	    #- P: Phys=isa0060/serio1/input0
+	    #- S: Sysfs=/class/input/input1
+	    #- H: Handlers=mouse0 event1 ts0
+	    #- B: EV=b
+	    #- B: KEY=6420 0 70000 0 0 0 0 0 0 0 0 #=> BTN_LEFT BTN_RIGHT BTN_MIDDLE BTN_TOOL_FINGER BTN_TOUCH BTN_TOOL_TRIPLETAP
+	    #-    or B: KEY=6420 0 670000 0 0 0 0 0 0 0 0  #=> same with BTN_BACK
+	    #-    or B: KEY=420 30000 670000 0 0 0 0 0 0 0 0 #=> same without BTN_TOOL_TRIPLETAP but with BTN_B
+	    #- B: ABS=11000003 #=> X Y PRESSURE TOOL_WIDTH
+
+	    $device->{Synaptics} = $descr eq 'SynPS/2 Synaptics TouchPad';
+	    $device->{ALPS} = $descr =~ m!^AlpsPS/2 ALPS!;
+
+	} elsif (/H: Handlers=(\w+)/) {
+	    $device->{driver} = $1;
+	} elsif (/P: Phys=(.*)/) {
             $device->{location} = $1;
             $device->{bus} = 'isa' if $device->{location} =~ /^isa/;
             $device->{bus} = 'usb' if $device->{location} =~ /^usb/i;
-        }
+	} elsif (/B: REL=(.* )?(.*)/) {
+	    #- REL=3   #=> X Y
+	    #- REL=103 #=> X Y WHEEL
+	    #- REL=143 #=> X Y HWHEEL WHEEL
+	    #- REL=1c3 #=> X Y HWHEEL DIAL WHEEL
+	    my $REL = hex($2);
+	    $device->{HWHEEL} = 1 if $REL & (1 << 6);
+	    $device->{WHEEL} = 1 if $REL & (1 << 8); #- not reliable ("Mitsumi Apple USB Mouse" says REL=103 and KEY=1f0000 ...)
+
+	} elsif (/B: KEY=(\S+)/) {	   
+	    #- some KEY explained:
+	    #- (but note that BTN_MIDDLE can be reported even if missing)
+	    #- (and "Mitsumi Apple USB Mouse" reports 1f0000)
+	    #- KEY=30000 0 0 0 0 0 0 0 0  #=> BTN_LEFT BTN_RIGHT
+	    #- KEY=70000 0 0 0 0 0 0 0 0  #=> BTN_LEFT BTN_RIGHT BTN_MIDDLE
+	    #- KEY=1f0000 0 0 0 0 0 0 0 0 #=> BTN_LEFT BTN_RIGHT BTN_MIDDLE BTN_SIDE BTN_EXTRA
+	    my $KEY = hex($1);
+	    $device->{SIDE} = 1 if $KEY & (1 << 0x13);
+
+        } elsif (/^\s*$/) {
+	    push @devices, $device if $device;
+	    undef $device;
+	}
     }
-    push @devices, $device if $device;
     @devices;
 }
 
-sub getSynapticsTouchpads() {
-    grep { $_->{description} =~ m,^\|(?:SynPS/2 Synaptics TouchPad$|AlpsPS/2 ALPS), } getInputDevices();
+sub getInputDevices_and_usb() {
+    my @l = getInputDevices();
+
+    foreach my $usb (usb_probe()) {
+	if (my $e = find { hex($_->{vendor}) == $usb->{vendor} && hex($_->{id}) == $usb->{id} } @l) {
+	    $e->{usb} = $usb;
+	}
+    }
+
+    @l;
 }
 
 sub getSerialModem {
@@ -518,26 +528,24 @@ sub getSerialModem {
     foreach my $modem (@modems) {
         #- add an alias for macserial on PPC
         $modules_conf->set_alias('serial', $serdev) if arch() =~ /ppc/ && $modem->{device};
-        foreach (@devs) { $_->{type} =~ /serial/ and $modem->{device} = $_->{device} }
+        foreach (@devs) { $_->{device} and $modem->{device} = $_->{device} }
     }
     @modems;
 }
 
 sub getModem {
     my ($modules_conf) = @_;
-    getSerialModem($modules_conf, {}), matching_driver__regexp('www\.linmodems\.org'),
-      matching_driver(list_modules::category2modules('network/modem'), list_modules::category2modules('network/slmodem'));
+    getSerialModem($modules_conf, {}), get_winmodems();
 }
 
-sub getSpeedtouch() {
-    grep { $_->{description} eq 'Alcatel|USB ADSL Modem (Speed Touch)' } probeall();
+sub get_winmodems() {
+    matching_driver__regexp('www\.linmodems\.org'),
+    matching_driver(list_modules::category2modules('network/modem'),
+    list_modules::category2modules('network/slmodem'));
 }
 
 sub getBewan() {
     matching_desc__regexp('Bewan Systems\|.*ADSL|BEWAN ADSL USB|\[Unicorn\]');
-}
-sub getSagem() {
-    matching_driver(qw(eagle-usb ueagle-atm));
 }
 
 # generate from the following from eci driver sources:
@@ -572,27 +580,34 @@ sub getECI() {
     grep { member(sprintf("%04x%04x%04x%04x", $_->{vendor}, $_->{id}, $_->{subvendor}, $_->{subid}), @ids) } usb_probe();
 }
 
+sub get_xdsl_usb_devices() {
+    my @bewan = detect_devices::getBewan();
+    $_->{driver} = $_->{bus} eq 'USB' ? 'unicorn_usb_atm' : 'unicorn_pci_atm' foreach @bewan;
+    my @eci = detect_devices::getECI();
+    $_->{driver} = 'eciusb' foreach @eci;
+    my @usb = detect_devices::probe_category('network/usb_dsl');
+    $_->{description} = "USB ADSL modem (eagle chipset)" foreach
+      grep { $_->{driver} eq 'ueagle-atm' && $_->{description} eq '(null)' } @usb;
+    @usb, @bewan, @eci;
+}
+
 sub is_lan_interface {
-    # we want LAN like interfaces here (eg: ath|br|eth|fddi|plip|ra|tr|usb|wifi|wlan).
+    # we want LAN like interfaces here (eg: ath|br|eth|fddi|plip|ra|tr|usb|wlan).
     # there's also bnep%d for bluetooth, bcp%d...
     # we do this by blacklisting the following interfaces:
     # - ippp|isdn|plip|ppp (initscripts suggest that isdn%d can be created but kernel sources claim not)
     #   ippp%d are created by drivers/isdn/i4l/isdn_ppp.c
     #   plip%d are created by drivers/net/plip.c
     #   ppp%d are created by drivers/net/ppp_generic.c
-    #
-    # we need both detection schemes since:
-    # - get_netdevices() use the SIOCGIFCONF ioctl that does not list interfaces that are down
-    # - /proc/net/dev does not list VLAN and IP aliased interfaces
-
     is_useful_interface($_[0]) &&
-    $_[0] !~ /^(?:lo|ippp|isdn|plip|ppp|sit0|wifi)/;
+    $_[0] !~ /^(?:ippp|isdn|plip|ppp)/;
 }
 
 sub is_useful_interface {
     # - sit0 which is *always* created by net/ipv6/sit.c, thus is always created since net.agent loads ipv6 module
     # - wifi%d are created by 3rdparty/hostap/hostap_hw.c (pseudo statistics devices, #14523)
-    $_[0] !~ /^(?:lo|sit0|wifi)/;
+    # ax*, rose*, nr*, bce* and scc* are Hamradio devices (#28776)
+    $_[0] !~ /^(?:lo|sit0|wifi|ax|rose|nr|bce|scc)/;
 }
 
 sub is_wireless_interface {
@@ -604,34 +619,64 @@ sub is_wireless_interface {
     #- i.e interfaces for which get_wireless_stats() is available
     c::isNetDeviceWirelessAware($interface) || -e "/sys/class/net/$interface/wireless";
 }
-sub get_wireless_interface() { find { is_wireless_interface($_) } getNet() }
-
-sub is_bridge_interface {
-    my ($interface) = @_;
-    -f "/sys/class/net/$interface/bridge/bridge_id";
-}
-
-sub get_sysfs_device_id_map {
-    my ($dev_path) = @_;
-    my $is_usb = -f "$dev_path/bInterfaceNumber";
-    $is_usb ?
-      { id => '../idProduct', vendor => '../idVendor' } :
-      { id => "device", subid => "subsystem_device", vendor => "vendor", subvendor => "subsystem_vendor" };
-}
 
 sub get_all_net_devices() {
+    # we need both detection schemes since:
+    # - get_netdevices() use the SIOCGIFCONF ioctl that does not list interfaces that are down
+    # - /proc/net/dev does not list VLAN and IP aliased interfaces
     uniq(
         (map { if_(/^\s*([A-Za-z0-9:\.]*):/, $1) } cat_("/proc/net/dev")),
         c::get_netdevices(),
     );
 }
 
-sub getNet() {
-    grep { is_lan_interface($_) } get_all_net_devices();
- }
+sub get_lan_interfaces() { grep { is_lan_interface($_) } get_all_net_devices() }
+sub get_net_interfaces() { grep { is_useful_interface($_) } get_all_net_devices() }
+sub get_wireless_interface() { find { is_wireless_interface($_) } get_lan_interfaces() }
 
-sub get_net_interfaces() {
-    grep { is_useful_interface($_) } get_all_net_devices();
+sub is_bridge_interface {
+    my ($interface) = @_;
+    -f "/sys/class/net/$interface/bridge/bridge_id";
+}
+
+sub get_ids_from_sysfs_device {
+    my ($dev_path) = @_;
+    my $dev_cat = sub { chomp_(cat_("$dev_path/$_[0]")) };
+    my $usb_root = -f "$dev_path/bInterfaceNumber" && "../" || -f "$dev_path/idVendor" && "";
+    my $is_pcmcia = -f "$dev_path/card_id";
+    my $sysfs_ids;
+    my $bus = get_sysfs_field_from_link($dev_path, "bus");
+    #- FIXME: use $bus
+    if ($is_pcmcia) {
+      $sysfs_ids = { modalias => $dev_cat->('modalias') };
+    } else {
+        $sysfs_ids = $bus eq 'ieee1394' ?
+          {
+            version => "../vendor_id",
+            specifier_id => "specifier_id",
+            specifier_version => "version",
+          } :
+        defined $usb_root ?
+          { id => $usb_root . 'idProduct', vendor => $usb_root . 'idVendor' } :
+          { id => "device", subid => "subsystem_device", vendor => "vendor", subvendor => "subsystem_vendor" };
+        $_ = hex($dev_cat->($_)) foreach values %$sysfs_ids;
+        if ($bus eq 'pci') {
+            my $device = basename(readlink $dev_path);
+            my @ids = $device =~ /^(.{4}):(.{2}):(.{2})\.(.+)$/;
+            @{%$sysfs_ids}{qw(pci_domain pci_bus pci_device pci_function)} = map { hex($_) } @ids if @ids;
+        }
+    }
+    $sysfs_ids;
+}
+
+sub device_matches_sysfs_ids {
+    my ($device, $sysfs_ids) = @_;
+    every { defined $device->{$_} && member($device->{$_}, $sysfs_ids->{$_}, 0xffff) } keys %$sysfs_ids;
+}
+
+sub device_matches_sysfs_device {
+  my ($device, $dev_path) = @_;
+  device_matches_sysfs_ids($device, get_ids_from_sysfs_device($dev_path));
 }
 
 #sub getISDN() {
@@ -658,7 +703,7 @@ sub getUPS() {
           $_->{media_type} = 'UPS';
           $_->{driver} = 'newhidups';
           $_;
-      } grep { $_->{driver} =~ /ups$/ && $_->{description} !~ /American Power Conversion\|Back-UPS|Keyboard|Logitech|WingMan/ } @usb_devices);
+      } grep { $_->{driver} =~ /ups$/ && $_->{description} !~ /American Power Conversion\|Back-UPS|Chicony|Keyboard|Logitech|SAITEK|WingMan/ } @usb_devices);
 }
 
 $pcitable_addons = <<'EOF';
@@ -705,9 +750,10 @@ my (@pci, @usb);
 sub pci_probe__real() {
     add_addons($pcitable_addons, map {
 	my %l;
-	@l{qw(vendor id subvendor subid pci_bus pci_device pci_function media_type driver description)} = split "\t";
+	@l{qw(vendor id subvendor subid pci_domain pci_bus pci_device pci_function media_type nice_media_type driver description)} = split "\t";
 	$l{$_} = hex $l{$_} foreach qw(vendor id subvendor subid);
 	$l{bus} = 'PCI';
+	$l{sysfs_device} = sprintf('/sys/bus/pci/devices/%04x:%02x:%02x.%d', $l{pci_domain}, $l{pci_bus}, $l{pci_device}, $l{pci_function});
 	\%l;
     } c::pci_probe());
 }
@@ -727,6 +773,7 @@ sub usb_probe__real() {
 	@l{qw(vendor id media_type driver description pci_bus pci_device)} = split "\t";
 	$l{media_type} = join('|', grep { $_ ne '(null)' } split('\|', $l{media_type}));
 	$l{$_} = hex $l{$_} foreach qw(vendor id);
+	$l{sysfs_device} = "/sys/class/usb_device/usbdev$l{pci_bus}.$l{pci_device}/device";
 	$l{bus} = 'USB';
 	\%l;
     } c::usb_probe());
@@ -778,37 +825,45 @@ sub firewire_probe() {
 }
 
 sub pcmcia_controller_probe() {
-    require list_modules;
-    my @modules = list_modules::category2modules('bus/pcmcia');
-    grep { member($_->{driver}, @modules) } probeall();
-}
-
-sub real_pcmcia_probe() {
-    return if $::testing;
-
-    c::pcmcia_probe() || first(map { $_->{driver} } pcmcia_controller_probe());
+    my ($controller) =  probe_category('bus/pcmcia');
+    if (!$controller && !$::testing && !$::noauto && arch() =~ /i.86/) {
+        my $driver = c::pcmcia_probe();
+        $controller = { driver => $driver, description => "PCMCIA controller ($driver)" } if $driver;
+    }
+    $controller;
 }
 
 sub pcmcia_probe() {
-    -e '/var/run/stab' || -e '/var/lib/pcmcia/stab' or return ();
-
-    my (@devs, $desc);
-    foreach (cat_('/var/run/stab'), cat_('/var/lib/pcmcia/stab')) {
-	if (/^Socket\s+\d+:\s+(.*)/) {
-	    $desc = $1;
-	} else {
-	    my (undef, $type, $module, undef, $device) = split;
-	    push @devs, { description => $desc, driver => $module, type => $type, device => $device };
-	}
-    }
-    @devs;
+    require modalias;
+    require modules;
+    my $dev_dir = '/sys/bus/pcmcia/devices';
+    map {
+        my $dir = "$dev_dir/$_";
+        my $get = sub { chomp_(cat_("$dir/$_[0]")) };
+        my $class_dev = first(glob_("$dir/tty*"));
+        my $device = $class_dev && get_sysfs_field_from_link($dir, basename($class_dev));
+        my $modalias = $get->('modalias');
+        my $driver = get_sysfs_field_from_link($dir, 'driver');
+        #- fallback on modalias result
+        #- but only if the module isn't loaded yet (else, it would already be binded)
+        #- this prevents from guessing the wrong driver for multi-function devices
+        my $module = $modalias && first(modalias::get_modules($modalias));
+        $driver ||= !member($module, modules::loaded_modules()) && $module;
+        {
+            description => join(' ', grep { $_ } map { $get->("prod_id$_") } 1 .. 4),
+            driver => $driver,
+            if_($modalias, modalias => $modalias),
+            if_($device, device => $device),
+            bus => 'PCMCIA',
+        };
+    } all($dev_dir);
 }
 
 my $dmi_probe;
 sub dmi_probe() {
     $dmi_probe ||= [ map {
 	/(.*?)\t(.*)/ && { bus => 'DMI', driver => $1, description => $2 };
-    } c::dmi_probe() ];
+    } $> ? () : c::dmi_probe() ];
     @$dmi_probe;
 }
 
@@ -818,6 +873,10 @@ sub probeall() {
     return if $::noauto;
 
     pci_probe(), usb_probe(), firewire_probe(), pcmcia_probe(), dmi_probe();
+}
+sub probeall__real() {
+    return if $::noauto;
+    pci_probe__real(), usb_probe__real(), firewire_probe(), pcmcia_probe(), dmi_probe();
 }
 sub matching_desc__regexp {
     my ($regexp) = @_;
@@ -845,13 +904,16 @@ sub probe_unique_name {
     $l[0];
 }
 
-sub stringlist() { 
+sub stringlist {
+    my ($b_verbose) = @_;
     map {
+	my $ids = $b_verbose || $_->{description} eq '(null)' ?  sprintf("vendor:%04x device:%04x", $_->{vendor}, $_->{id}) : '';
+	my $subids = $_->{subid} && $_->{subid} != 0xffff ? sprintf("subv:%04x subd:%04x", $_->{subvendor}, $_->{subid}) : '';
 	sprintf("%-16s: %s%s%s", 
 		$_->{driver} || 'unknown', 
-		$_->{description} eq '(null)' ? sprintf("Vendor=0x%04x Device=0x%04x", $_->{vendor}, $_->{id}) : $_->{description},
+		$_->{description},
 		$_->{media_type} ? sprintf(" [%s]", $_->{media_type}) : '',
-		$_->{subid} && $_->{subid} != 0xffff ? sprintf(" SubVendor=0x%04x SubDevice=0x%04x", $_->{subvendor}, $_->{subid}) : '',
+		$ids || $subids ? " ($ids" . ($ids && $subids && " ") . "$subids)" : '',
 	       );
     } probeall(); 
 }
@@ -899,6 +961,7 @@ my (@dmis, $dmidecode_already_runned);
 sub dmidecode() {
     return @dmis if $dmidecode_already_runned;
 
+    return if $>;
     my ($ver, @l) = run_program::get_stdout('dmidecode');
 
     my $tab = "\t";
@@ -906,7 +969,7 @@ sub dmidecode() {
 	#- new dmidecode output is less indented
 	$tab = '';
 	#- drop header
-	shift @l while $l[0] ne "\n";
+	shift @l while @l && $l[0] ne "\n";
     }
 
     foreach (@l) {
@@ -960,7 +1023,10 @@ sub isLaptop() {
 	    matching_desc__regexp('Neomagic.*Magic(Media|Graph)') ||
 	    matching_desc__regexp('ViRGE.MX') || matching_desc__regexp('S3.*Savage.*[IM]X') ||
 	    matching_desc__regexp('ATI.*(Mobility|LT)'))
-	|| cat_('/proc/cpuinfo') =~ /\bmobile\b/i;
+	|| cat_('/proc/cpuinfo') =~ /\bmobile\b/i
+	|| probe_unique_name("Type") eq 'laptop'
+        #- ipw2100/2200/3945 are Mini-PCI (Express) adapters
+	|| (any { member($_->{driver}, qw(ipw2100 ipw2200 ipw3945)) } pci_probe());
 }
 
 sub BIGMEM() {
@@ -974,7 +1040,7 @@ sub is_i586() {
 }
 
 sub is_xbox() {
-    any { $_->{vendor} == 0x10de && $_->{id} == 0x02a5 } detect_devices::pci_probe();
+    any { $_->{vendor} == 0x10de && $_->{id} == 0x02a5 } pci_probe();
 }
 
 sub has_cpu_flag {
@@ -982,17 +1048,14 @@ sub has_cpu_flag {
     cat_('/proc/cpuinfo') =~ /^flags.*\b$flag\b/m;
 }
 
-sub matching_type {
-    my ($type) = @_;
-    if ($type =~ /laptop/i) {
-        return isLaptop();
-    } elsif ($type =~ /wireless/i) {
-        return to_bool(get_wireless_interface());
-    }
+sub matching_types() {
+    +{
+	laptop => isLaptop(),
+	'64bit' => to_bool(arch() =~ /64/),
+	wireless => to_bool(get_wireless_interface() || probe_category('network/wireless')),
+    };
 }
 
-sub usbMice()      { grep { $_->{media_type} =~ /\|Mouse/ && $_->{driver} !~ /wacom/ ||
-			  $_->{driver} =~ /Mouse:USB/ } usb_probe() }
 sub usbWacom()     { grep { $_->{driver} =~ /wacom/ } usb_probe() }
 sub usbKeyboards() { grep { $_->{media_type} =~ /\|Keyboard/ } usb_probe() }
 sub usbStorage()   { grep { $_->{media_type} =~ /Mass Storage\|/ } usb_probe() }

@@ -318,6 +318,12 @@ static int save_netinfo(struct interface_info * intf)
 		fprintf(f, "NETMASK=%s\n", inet_ntoa(intf->netmask));
 		fprintf(f, "NETWORK=%s\n", inet_ntoa(intf->network));
 		fprintf(f, "BROADCAST=%s\n", inet_ntoa(intf->broadcast));
+		if (domain)
+			fprintf(f, "DOMAIN=%s\n", domain);
+		if (dns_server.s_addr != 0)
+			fprintf(f, "DNS1=%s\n", inet_ntoa(dns_server));
+		if (dns_server2.s_addr != 0)
+			fprintf(f, "DNS2=%s\n", inet_ntoa(dns_server2));
 	} else if (intf->boot_proto == BOOTPROTO_ADSL_PPPOE) {
 		fprintf(f, "BOOTPROTO=adsl_pppoe\n");
 		fprintf(f, "USER=%s\n", intf->user);
@@ -602,7 +608,7 @@ static enum return_type bringup_networking(struct interface_info * intf)
 }
 
 
-static char * auto_select_up_intf(void)
+static char * auto_select_up_intf(int detection_mode)
 {
 #define SIOCETHTOOL     0x8946
 #define ETHTOOL_GLINK           0x0000000a /* Get link status (ethtool_value) */
@@ -623,17 +629,34 @@ static char * auto_select_up_intf(void)
 
 	ptr = interfaces;
 	while (ptr && *ptr) {
-		struct ifreq ifr;
-		struct ethtool_value edata;
-		strncpy(ifr.ifr_name, *ptr, IFNAMSIZ);
-		edata.cmd = ETHTOOL_GLINK;
-		ifr.ifr_data = (caddr_t)&edata;
-		if (ioctl(s, SIOCETHTOOL, &ifr) == 0 && edata.data) {
-			close(s);
-                        log_message("NETWORK: choosing interface %s (link beat detected)", *ptr);
-			return *ptr;
+		if (detection_mode != AUTO_DETECTION_WIRED || !wireless_is_aware(s, *interfaces)) {
+			struct ifreq ifr;
+			struct ethtool_value edata;
+			strncpy(ifr.ifr_name, *ptr, IFNAMSIZ);
+			edata.cmd = ETHTOOL_GLINK;
+			ifr.ifr_data = (caddr_t)&edata;
+			if (ioctl(s, SIOCETHTOOL, &ifr) == 0 && edata.data) {
+				close(s);
+				log_message("NETWORK: choosing interface %s (link beat detected)", *ptr);
+				return *ptr;
+			}
 		}
 		ptr++;
+	}
+
+	log_message("NETWORK: no interface has a link beat");
+
+	if (detection_mode == AUTO_DETECTION_WIRED) {
+		ptr = interfaces;
+		while (ptr && *ptr) {
+			if (!wireless_is_aware(s, *interfaces)) {
+				close(s);
+				log_message("NETWORK: choosing interface %s (wired interface)", *ptr);
+				return *ptr;
+			}
+			ptr++;
+		}
+		log_message("NETWORK: no interface is wired");
 	}
 
 	close(s);
@@ -670,11 +693,18 @@ static char * interface_select(void)
 	if (count == 1)
 		return *interfaces;
 
-	/* this can't be done in ask_from_list_comments_auto because "auto" isn't in the interfaces list */
-	if (IS_AUTOMATIC && streq(get_auto_value("interface"), "auto")) {
-		choice = auto_select_up_intf();
-		if (choice)
-			return choice;
+	/* this can't be done in ask_from_list_comments_auto because "auto" and "wired" are not in the interfaces list */
+	if (IS_AUTOMATIC) {
+		enum auto_detection_type auto_detect = AUTO_DETECTION_NONE;
+		if (streq(get_auto_value("interface"), "auto"))
+			auto_detect = AUTO_DETECTION_ALL;
+		else if (streq(get_auto_value("interface"), "wired"))
+			auto_detect = AUTO_DETECTION_WIRED;
+		if (auto_detect != AUTO_DETECTION_NONE) {
+			choice = auto_select_up_intf(auto_detect);
+			if (choice)
+				return choice;
+		}
 	}
 
 	i = 0;
@@ -692,7 +722,6 @@ static char * interface_select(void)
 	return choice;
 }
 
-#ifndef MANDRAKE_MOVE
 static enum return_type get_http_proxy(char **http_proxy_host, char **http_proxy_port)
 {
 	char *questions[] = { "HTTP proxy host", "HTTP proxy port", NULL };
@@ -887,7 +916,6 @@ static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port,
 
 	return results;
 }
-#endif
 
 
 /* -=-=-- */
@@ -931,7 +959,6 @@ enum return_type nfs_prepare(void)
 	char * questions[] = { "NFS server name", DISTRIB_NAME " directory", NULL };
 	char * questions_auto[] = { "server", "directory", NULL };
 	static char ** answers = NULL;
-	char * nfs_own_mount = IMAGE_LOCATION_DIR "nfsimage";
 	char * nfsmount_location;
 	enum return_type results = intf_select_and_up(NULL, NULL);
 
@@ -952,16 +979,16 @@ enum return_type nfs_prepare(void)
 		strcat(nfsmount_location, ":");
 		strcat(nfsmount_location, answers[1]);
 		
-		if (my_mount(nfsmount_location, nfs_own_mount, "nfs", 0) == -1) {
+		if (my_mount(nfsmount_location, MEDIA_LOCATION, "nfs", 0) == -1) {
 			stg1_error_message("I can't mount the directory from the NFS server.");
 			results = RETURN_BACK;
 			continue;
 		}
 		free(nfsmount_location); nfsmount_location = NULL;
 
-		results = try_with_directory(nfs_own_mount, "nfs", "nfs-iso");
+		results = try_with_directory(MEDIA_LOCATION, "nfs", "nfs-iso");
 		if (results != RETURN_OK)
-			umount(nfs_own_mount);
+			umount(MEDIA_LOCATION);
 		if (results == RETURN_ERROR)
                         return RETURN_ERROR;
 	}
@@ -971,7 +998,6 @@ enum return_type nfs_prepare(void)
 }
 
 
-#ifndef MANDRAKE_MOVE
 enum return_type ftp_prepare(void)
 {
 	char * questions[] = { "FTP server", DISTRIB_NAME " directory", "Login", "Password", NULL };
@@ -1038,8 +1064,6 @@ enum return_type ftp_prepare(void)
 		if (use_http_proxy) {
 		        log_message("FTP: don't connect to %s directly, will use proxy", answers[0]);
 		} else {
-			char *kernels_list_file, *kernels_list;
-
 		        log_message("FTP: trying to connect to %s", answers[0]);
 			ftp_serv_response = ftp_open_connection(answers[0], answers[2], answers[3], "");
                         if (ftp_serv_response < 0) {
@@ -1053,32 +1077,9 @@ enum return_type ftp_prepare(void)
                                 results = RETURN_BACK;
                                 continue;
                         }
-			kernels_list_file = asprintf_("%s/" CLP_LOCATION_REL "mdkinst.kernels", location_full);
-
-			log_message("FTP: trying to retrieve %s", kernels_list_file);
-		        fd = ftp_start_download(ftp_serv_response, kernels_list_file, &size);
-
-			if (fd < 0) {
-				char *msg = str_ftp_error(fd);
-				log_message("FTP: error get %d for remote file %s", fd, kernels_list_file);
-				stg1_error_message("Error: %s.", msg ? msg : "couldn't retrieve list of kernel versions");
-				results = RETURN_BACK;
-				continue;
-			}
-
-			kernels_list = alloca(size);
-			size = read(fd, kernels_list, size);
-			close(fd);
-			ftp_end_data_command(ftp_serv_response);
-			
-			if (!strstr(kernels_list, asprintf_("%s\n", kernel_uname.release))) {
-				stg1_info_message("The modules for this kernel (%s) can't be found on this mirror, please update your boot disk", kernel_uname.release);
-				results = RETURN_BACK;
-				continue;
-			}
                 }
 
-		strcat(location_full, CLP_FILE_REL("/"));
+		strcat(location_full, COMPRESSED_FILE_REL("/"));
 
 		log_message("FTP: trying to retrieve %s", location_full);
 
@@ -1107,7 +1108,7 @@ enum return_type ftp_prepare(void)
 
 		log_message("FTP: size of download %d bytes", size);
 		
-		results = load_clp_fd(fd, size);
+		results = load_compressed_fd(fd, size);
 		if (results == RETURN_OK) {
 		        if (!use_http_proxy)
 			        ftp_end_data_command(ftp_serv_response);
@@ -1183,7 +1184,7 @@ enum return_type http_prepare(void)
 
 		strcpy(location_full, answers[1][0] == '/' ? "" : "/");
 		strcat(location_full, answers[1]);
-		strcat(location_full, CLP_FILE_REL("/"));
+		strcat(location_full, COMPRESSED_FILE_REL("/"));
 
 		log_message("HTTP: trying to retrieve %s from %s", location_full, answers[0]);
 		
@@ -1202,7 +1203,7 @@ enum return_type http_prepare(void)
 
 		log_message("HTTP: size of download %d bytes", size);
 		
-		if (load_clp_fd(fd, size) != RETURN_OK) {
+		if (load_compressed_fd(fd, size) != RETURN_OK) {
 			unset_automatic(); /* we are in a fallback mode */
 			return RETURN_ERROR;
                 }
@@ -1239,6 +1240,4 @@ enum return_type ka_prepare(void)
 
 	return perform_ka();
 }
-#endif
-
 #endif

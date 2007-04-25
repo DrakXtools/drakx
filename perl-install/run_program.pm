@@ -62,8 +62,8 @@ sub raw {
     my $stdout = $stdout_raw && (ref($stdout_raw) ? $tmpdir->() . "/.drakx-stdout.$$" : "$root$stdout_raw");
     my $stderr = $stderr_raw && (ref($stderr_raw) ? $tmpdir->() . "/.drakx-stderr.$$" : "$root$stderr_raw");
 
-    #- checking if binary exist to avoid cloberring stdout file
-    my ($rname) = $real_name =~ /(.*?)[\s\|]/;    
+    #- checking if binary exist to avoid clobbering stdout file
+    my $rname = $real_name =~ /(.*?)[\s\|]/ ? $1 : $real_name;    
     if (! ($rname =~ m!^/! 
 	     ? -x "$root$rname" || $root && -l "$root$rname" #- handle non-relative symlink which can be broken when non-rooted
 	     : whereis_binary($rname, $root))) {
@@ -76,12 +76,13 @@ sub raw {
 	    $pid;
 	} else {
 	    my $ok;
+	    add2hash_($options, { timeout => 10 * 60 });
 	    eval {
 		local $SIG{ALRM} = sub { die "ALARM" };
-		alarm($options->{timeout} || 10 * 60);
+		my $remaining = $options->{timeout} && $options->{timeout} ne 'never' &&  alarm($options->{timeout});
 		waitpid $pid, 0;
-		$ok = $? == 0;
-		alarm 0;
+		$ok = $? == -1 || ($? >> 8) == 0;
+		alarm $remaining;
 	    };
 	    if ($@) {
 		log::l("ERROR: killing runaway process (process=$real_name, pid=$pid, args=@args, error=$@)");
@@ -127,7 +128,7 @@ sub raw {
 	}
 
 	$root and chroot $root;
-	chdir "/";
+	chdir($options->{chdir} || "/");
 
 	my $ok = ref $name ? do {
 	    exec { $name->[0] } $name->[1], @args;

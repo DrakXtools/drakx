@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # DrakxSound
-# Copyright (C) 2002-2005 Mandriva (tvignaud@mandriva.com)
+# Copyright (C) 2002-2006 Mandriva (tvignaud@mandriva.com)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -29,10 +29,10 @@ use detect_devices;
 
 my $in = 'interactive'->vnew('su');
 
-
+$ugtk2::wm_icon = 'draksound-16';
 my $modules_conf = modules::any_conf->read;
 
-if (my @devices = modules::probe_category('multimedia/sound')) {
+if (my @devices = detect_devices::probe_category('multimedia/sound')) {
     # TODO: That need some work for multiples sound cards
     map_index {
 	   # allocate sound-slot in the same order as install2.pm

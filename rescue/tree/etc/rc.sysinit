@@ -12,22 +12,11 @@ ln -s /tmp/stage2/etc/* /etc 2>/dev/null
 
 rm -f /dev ; cp -a /tmp/stage2/dev /dev
 
-mkdir /mnt /var/log
-
-mkdir /proc
-action "Mounting proc filesystem" mount -n -t proc /proc /proc
-
-if grep -q sysfs /proc/filesystems; then
-    mkdir /sys
-    action "Mounting sysfs on /sys" mount -t sysfs none /sys
-fi
+mkdir -p /mnt /var/log
 
 >/etc/mtab
 mount -f /
 mount -f /proc
-
-#- free up stage1 memory
-umount /stage1/proc/bus/usb /stage1/proc /stage1
 
 # Set the hostname.
 action "Setting hostname rescue" hostname rescue

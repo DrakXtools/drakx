@@ -4,6 +4,7 @@ use strict;
 use lib qw(/usr/lib/libDrakX);
 use standalone;
 use common;
+use mygtk2 qw(gtknew);
 use ugtk2 qw(:create :dialogs :helpers :wrappers);
 use interactive;
 use bootsplash;
@@ -13,6 +14,7 @@ my $in = 'interactive'->vnew('su');
 $in->do_pkgs->ensure_is_installed('ImageMagick', '/usr/bin/convert') or close_all();
 $in->do_pkgs->ensure_is_installed('netpbm', '/usr/bin/jpegtopnm') or close_all();
 
+$ugtk2::wm_icon = 'draksplash-16';
 my $window = ugtk2->new('DrakSplash');
 $window->{rwindow}->signal_connect(delete_event => \&close_all);
 
@@ -20,26 +22,26 @@ my @image_pixbuf;
 my $current_rect = [];
 my $current_point;
 
-my $preview_window = ugtk2->new('DrakSplash');
+my $preview_window = ugtk2->new(N("Create new theme"));
 my $image_area = create_image_area();
-my $scroll = create_scrolled_window($image_area);
+my $scroll = gtknew('ScrolledWindow', child => $image_area);
 
 switch_to_mode(0);
 
 my %scale_settings = (
-		      tb_x => [ 1/10, N("x coordinate of text box") ],
-		      tb_y => [ 1/10, N("y coordinate of text box") ],
-		      tb_w => [ 8/10, N("text box width") ],
-		      tb_h => [ 8/10, N("text box height") ],
-		      px => [ 2/10, N("the progress bar x coordinate\nof its upper left corner") ],
-		      py => [ 7/10, N("the progress bar y coordinate\nof its upper left corner") ],
-		      pw => [ 6/10, N("the width of the progress bar") ],
-		      ph => [ 1/10, N("the height of the progress bar") ],
-		      text_x => [ 1/10, N("x coordinate of the text") ],
-		      text_y => [ 1/10, N("y coordinate of the text") ],
-		      transp => [ 1/10, N("text box transparency") ],
-		      ptransp => [ 1/10, N("progress box transparency") ],
-		      text_size => [ 1/10, N("text size") ],
+		      tb_x => [ 1/10, N("X coordinate of text box") ],
+		      tb_y => [ 1/10, N("Y coordinate of text box") ],
+		      tb_w => [ 8/10, N("Text box width") ],
+		      tb_h => [ 8/10, N("Text box height") ],
+		      px => [ 2/10, N("The progress bar X coordinate\nof its upper left corner") ],
+		      py => [ 7/10, N("The progress bar Y coordinate\nof its upper left corner") ],
+		      pw => [ 6/10, N("The width of the progress bar") ],
+		      ph => [ 1/10, N("The height of the progress bar") ],
+		      text_x => [ 1/10, N("X coordinate of the text") ],
+		      text_y => [ 1/10, N("Y coordinate of the text") ],
+		      transp => [ 1/10, N("Text box transparency") ],
+		      ptransp => [ 1/10, N("Progress box transparency") ],
+		      text_size => [ 1/10, N("Text size") ],
 		     );
 
 my %adj;
@@ -50,47 +52,45 @@ set_theme('new_theme');
 set_resolution([ bootsplash::get_framebuffer_resolution() ]->[0]);
 
 my $current_mode;
-my $notebook = gtksignal_connect(Gtk2::Notebook->new, switch_page => sub {
+my $notebook = gtksignal_connect(gtknew('Notebook'), switch_page => sub {
 				     my (undef, undef, $mode) = @_;
 				     switch_to_mode($mode);
 				 });
-$notebook->append_page(gtkpack__(Gtk2::VBox->new(0, 5),
+$notebook->append_page(gtknew('VBox', spacing => 5, children_tight => [
 				 create_scale_table('px', 'pw', 'py', 'ph', 'ptransp'),
-				 gtksignal_connect(Gtk2::Button->new(N("Choose progress bar color 1")), clicked => sub { choose_color('pc1') }),
-				 gtksignal_connect(Gtk2::Button->new(N("Choose progress bar color 2")), clicked => sub { choose_color('pc2') }),
-				 gtksignal_connect(Gtk2::Button->new(N("Choose progress bar background")), clicked => sub { choose_color('pbg_c') }),
-				 Gtk2::Label->new(N("Gradient type")), gtksignal_connect(Gtk2::ComboBoxEntry->new_with_strings([ 'vertical', 'horizontal' ], 'vertical'), changed => sub { $theme{conf}{gradient} = $_[0]->get_child->get_text }),
-				 gtksignal_connect(Gtk2::Button->new(N("Choose text color")), clicked => sub { choose_color('text_color') }),
+				 gtknew('Button', text => N("Choose progress bar color 1"), clicked => sub { choose_color('pc1') }),
+				 gtknew('Button', text => N("Choose progress bar color 2"), clicked => sub { choose_color('pc2') }),
+				 gtknew('Button', text => N("Choose progress bar background"), clicked => sub { choose_color('pbg_c') }),
+				 gtknew('Label', text => N("Gradient type")), gtksignal_connect(Gtk2::ComboBoxEntry->new_with_strings([ 'vertical', 'horizontal' ], 'vertical'), changed => sub { $theme{conf}{gradient} = $_[0]->get_child->get_text }),
+				 gtknew('Button', text => N("Choose text color"), clicked => sub { choose_color('text_color') }),
 				 create_scale_table('text_x', 'text_y', 'text_size'),
-				 gtksignal_connect(Gtk2::Button->new(N("Choose picture")), clicked => sub { choose_image('silentjpeg') })),
+				 gtknew('Button', text => N("Choose picture"), clicked => sub { choose_image('silentjpeg') })]),
 		       N("Silent bootsplash"));
-$notebook->append_page(gtkpack__(Gtk2::VBox->new(0, 5),
+$notebook->append_page(gtknew('VBox', spacing => 5, children_tight => [
 				 create_scale_table('tb_x', 'tb_y', 'tb_w', 'tb_h', 'transp'),
-				 gtksignal_connect(Gtk2::Button->new(N("Choose text zone color")), clicked => sub { choose_color('tc') }),
-				 Gtk2::Label->new(N("Text color")), gtksignal_connect(Gtk2::ComboBoxEntry->new_with_strings([ 0 .. 15 ], 1), changed => sub { $theme{conf}{fgcolor} = $_[0]->get_child->get_text }),
-				 Gtk2::Label->new(N("Background color")), gtksignal_connect(Gtk2::ComboBoxEntry->new_with_strings([ 0 .. 15 ], '0'), changed => sub { $theme{conf}{bgcolor} = $_[0]->get_child->get_text }),
-				 gtksignal_connect(Gtk2::Button->new(N("Choose picture")), clicked => sub { choose_image('jpeg') })),
+				 gtknew('Button', text => N("Choose text zone color"), clicked => sub { choose_color('tc') }),
+				 gtknew('Label', text => N("Text color")), gtksignal_connect(Gtk2::ComboBoxEntry->new_with_strings([ 0 .. 15 ], 1), changed => sub { $theme{conf}{fgcolor} = $_[0]->get_child->get_text }),
+				 gtknew('Label', text => N("Background color")), gtksignal_connect(Gtk2::ComboBoxEntry->new_with_strings([ 0 .. 15 ], '0'), changed => sub { $theme{conf}{bgcolor} = $_[0]->get_child->get_text }),
+				 gtknew('Button', text => N("Choose picture"), clicked => sub { choose_image('jpeg') })]),
 		       N("Verbose bootsplash"));
-$notebook->append_page(gtkpack__(Gtk2::VBox->new(0, 5),
-				 gtksignal_connect(Gtk2::CheckButton->new(N("Display logo on Console")), toggled => sub {
-						       $theme{conf}{logo} = bool2yesno($_[0]->get_active);
-						   })),
-		       N("Console bootsplash"));
 
 gtkadd($window->{window},
-       gtkpack(Gtk2::VBox->new(0, 5),
-	      gtkpack__(Gtk2::HBox->new(0, 5),
-			create_packtable({ col_spacings => 10, row_spacings => 5 },
-					 [ Gtk2::Label->new(N("Theme name")),
+       gtknew('VBox', spacing => 5, children_loose => [
+	      gtknew('HBox', spacing => 5, children_tight => [
+			gtknew('Table', col_spacings => 10, row_spacings => 5, children => [
+					 [ gtknew('Label', text => N("Theme name")),
 					   gtksignal_connect(Gtk2::ComboBoxEntry->new_with_strings([ bootsplash::themes_list() ], $theme{name}),
 							     changed => sub { set_theme($_[0]->get_child->get_text) }) ],
-					 [ Gtk2::Label->new(N("final resolution")),
-					   gtksignal_connect(Gtk2::ComboBox->new_with_strings(\@bootsplash::resolutions, $theme{res}),
-							     changed => sub { set_resolution($_[0]->get_text) }) ])),
+					 [ gtknew('Label', text => N("Final resolution")),
+					   gtksignal_connect(gtknew('ComboBox', text => $theme{res}, list => \@bootsplash::resolutions),
+							     changed => sub { set_resolution($_[0]->get_text) }) ]])]),
+	       gtksignal_connect(gtknew('CheckButton', text => N("Display logo on Console")), toggled => sub {
+                                  $theme{conf}{logo} = bool2yesno($_[0]->get_active);
+                              }),
 	       $notebook,
-	       gtkpack(Gtk2::HBox->new(0, 5),
-			 gtksignal_connect(Gtk2::Button->new(N("Save theme")), clicked => \&save_theme),
-			 gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => \&close_all)))),
+	       gtknew('HBox', spacing => 5, children_loose => [
+			 gtknew('Button', text => N("Save theme"), clicked => \&save_theme),
+			 gtknew('Button', text => N("Quit"), clicked => \&close_all)])])),
 gtkshow(gtkadd($preview_window->{window}, $scroll));
 
 $window->{rwindow}->set_border_width(5);
@@ -150,6 +150,13 @@ sub set_theme {
 }
 
 sub save_theme() {
+    if (!$theme{name}) {
+        $in->ask_warn('', N("Please enter a theme name"));
+        return;
+    } elsif (! -e $theme{conf}{silentjpeg}) {
+        $in->ask_warn('', N("Please select a splash image"));
+        return;
+    }
     my $_w = $in->wait_message('', N("saving Bootsplash theme..."));
     bootsplash::theme_set_image_for_resolution($theme{name}, $theme{res}, $theme{conf}{silentjpeg});
     bootsplash::theme_write_config_for_resolution($theme{name}, $theme{res}, $theme{conf});
@@ -157,7 +164,7 @@ sub save_theme() {
 
 sub load_image {
     my ($img, $mode, $o_no_warn) = @_;
-    eval { $image_pixbuf[$mode] = Gtk2::Gdk::Pixbuf->new_from_file($img) };
+    eval { $image_pixbuf[$mode] = gtknew('Pixbuf', file => $img) };
     if ($@) {
         $in->ask_warn(N("Error"), N("Unable to load image file %s", $img)) unless $o_no_warn;
         return;
@@ -212,11 +219,11 @@ sub create_adj_widgets() {
 
 sub create_scale_table {
     my @settings = @_;
-    create_packtable({ col_spacings => 10, row_spacings => 5 }, map {
+    gtknew('Table', col_spacings => 10, row_spacings => 5, children => [ map {
 	my $w = Gtk2::HScale->new($adj{$_});
 	$w->set_digits(0);
-	[ Gtk2::Label->new($scale_settings{$_}[1]), $w ];
-    } @settings);
+	[ gtknew('Label', text => $scale_settings{$_}[1]), $w ];
+    } @settings]);
 }
 
 sub get_scale_max {

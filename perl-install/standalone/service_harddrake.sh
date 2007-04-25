@@ -48,7 +48,7 @@ case "$1" in
 	   fi
         echo
 	;;
- reload)
+ reload|restart)
         ;;
  stop)
 	# dummy

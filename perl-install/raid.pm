@@ -85,9 +85,10 @@ sub updateSize {
     my @l = map { $_->{size} } @{$part->{disks}};
 
     $part->{size} = do {
-	if (/0|linear/) { sum @l        }
-	elsif (/1/)     { min @l        }
-	elsif (/4|5/)   { min(@l) * $#l }
+	if (/0|linear/) { sum @l }
+	elsif (/1/)     { min @l }
+	elsif (/4|5/)   { min(@l) * (@l - 1) }
+	elsif (/6/)     { min(@l) * (@l - 2) }
     };
 }
 
@@ -145,7 +146,8 @@ sub format_part {
 sub verify {
     my ($raids) = @_;
     foreach (@$raids) {
-	@{$_->{disks}} >= ($_->{level} =~ /4|5/ ? 3 : 2) or die N("Not enough partitions for RAID level %d\n", $_->{level});
+	my $nb = $_->{level} =~ /6/ ? 4 : $_->{level} =~ /4|5/ ? 3 : 2;
+	@{$_->{disks}} >= $nb or die N("Not enough partitions for RAID level %d\n", $_->{level});
     }
 }
 
@@ -198,7 +200,7 @@ sub get_existing {
     foreach my $md (active_mds()) {
 	my $raw_part = get_md_info(devices::make($md)) or next;
 
-	$raw_part->{level} =~ s/raid//; #- { linear | raid0 | raid1 | raid5 } -> { linear | 0 | 1 | 5 }
+	$raw_part->{level} =~ s/raid//; #- { linear | raid0 | raid1 | raid5 | raid6 } -> { linear | 0 | 1 | 5 | 6 }
 
 	my @mdparts = 
 	  map { 

@@ -77,7 +77,7 @@ void open_log(void)
 {
 	if (!IS_TESTING) {
 		logtty  = fopen("/dev/tty3", "w");
-		logfile = fopen(SLASH_LOCATION "/tmp/stage1.log", "w");
+		logfile = fopen("/tmp/stage1.log", "w");
 	}
 	else
 		logfile = fopen("debug.log", "w");

@@ -20,32 +20,37 @@ sub read() {
     { timezone => $t{ZONE}, UTC => text2bool($t{UTC}) };
 }
 
-sub ntp_server {
-    my $setting = @_ >= 1;
+my $ntp_conf_file = "/etc/ntp.conf";
+
+sub ntp_server() {
+    find { $_ ne '127.127.1.0' } map { if_(/^\s*server\s+(\S*)/, $1) } cat_($::prefix . $ntp_conf_file);
+}
+
+sub set_ntp_server {
     my ($server) = @_;
+    my $f = $::prefix . $ntp_conf_file;
+    -f $f or return;
 
-    my $f = "$::prefix/etc/ntp.conf";
-    -e $f or return;
+    my $pool_match = qr/\.pool\.ntp\.org$/;
+    my @servers = $server =~ $pool_match  ? (map { "$_.$server" } 0 .. 2) : $server;
 
-    if ($setting) {
-	my $added = 0;
-	substInFile {
-	    if (/^#?\s*server\s+(\S*)/ && $1 ne '127.127.1.0') {
-		$_ = $added ? "#server $1\n" : "server $server\n";
-		$added = 1;
-	    }
-	} $f;
-	output_p("$::prefix/etc/ntp/step-tickers", "$server\n");
-    } else {
-	$server = find { $_ ne '127.127.1.0' } map { if_(/^\s*server\s+(\S*)/, $1) } cat_($f);
-    }
-    $server;
+    my $added = 0;
+    substInFile {
+        if (/^#?\s*server\s+(\S*)/ && $1 ne '127.127.1.0') {
+            $_ = $added ? $_ =~ $pool_match ? undef : "#server $1\n" : join('', map { "server $_\n" } @servers);
+            $added = 1;
+        }
+    } $f;
+    output_p("$::prefix/etc/ntp/step-tickers", join('', map { "$_\n" } @servers));
+
+    require services;
+    services::set_status('ntpd', to_bool($server), $::isInstall);
 }
 
 sub write {
     my ($t) = @_;
 
-    ntp_server($t->{ntp});
+    set_ntp_server($t->{ntp});
 
     eval { cp_af("$::prefix/usr/share/zoneinfo/$t->{timezone}", "$::prefix/etc/localtime") };
     $@ and log::l("installing /etc/localtime failed");
@@ -132,132 +137,127 @@ sub fuzzyChoice {
 }
 sub bestTimezone { $c2t{fuzzyChoice($_[0])} || 'GMT' }
 
-sub ntp_servers() { 
-    +{
-	'time.sinectis.com.ar' => 'Argentina',
-	'tick.nap.com.ar' => 'Argentina',
-	'tock.nap.com.ar' => 'Argentina',
-	'ntp.adelaide.edu.au' => 'Australia',
-	'ntp.saard.net' => 'Australia',
-	'ntp.pop-df.rnp.br' => 'Brazil',
-	'ntp.pop-pr.rnp.br' => 'Brazil',
-	'ntp.on.br' => 'Brazil',
-	'ntp1.belbone.be' => 'Belgium',
-	'ntp2.belbone.be' => 'Belgium',
-	'ntp.cpsc.ucalgary.ca' => 'Canada',
-	'ntp1.cmc.ec.gc.ca' => 'Canada',
-	'ntp2.cmc.ec.gc.ca' => 'Canada',
-	'time.chu.nrc.ca' => 'Canada',
-	'time.nrc.ca' => 'Canada',
-	'timelord.uregina.ca' => 'Canada',
-	'ntp.globe.cz' => 'Czech republic',
-	'ntp.karpo.cz' => 'Czech republic',
-	'ntp1.contactel.cz' => 'Czech republic',
-	'ntp2.contactel.cz' => 'Czech republic',
-	'clock.netcetera.dk' => 'Denmark',
-	'clock2.netcetera.dk' => 'Denmark',
-	'slug.ctv.es' => 'Spain',
-	'tick.keso.fi' => 'Finland',
-	'tock.keso.fi' => 'Finland',
-	'ntp.ndsoftwarenet.com' => 'France',
-	'ntp.obspm.fr' => 'France',
-	'ntp.tuxfamily.net' => 'France',
-	'ntp1.tuxfamily.net' => 'France',
-	'ntp2.tuxfamily.net' => 'France',
-	'ntp.univ-lyon1.fr' => 'France',
-	'zg1.ntp.carnet.hr' => 'Croatia',
-	'zg2.ntp.carnet.hr' => 'Croatia',
-	'st.ntp.carnet.hr' => 'Croatia',
-	'ri.ntp.carnet.hr' => 'Croatia',
-	'os.ntp.carnet.hr' => 'Croatia',
-	'ntp.incaf.net' => 'Indonesia',
-	'ntp.maths.tcd.ie' => 'Ireland',
-	'time.ien.it' => 'Italy',
-	'ntps.net4u.it' => 'Italy',
-	'ntp.cyber-fleet.net' => 'Japan',
-	'time.nuri.net' => 'Korea, republic of',
-	'ntp2a.audiotel.com.mx' => 'Mexico',
-	'ntp2b.audiotel.com.mx' => 'Mexico',
-	'ntp2c.audiotel.com.mx' => 'Mexico',
-	'ntp.doubleukay.com' => 'Malaysia',
-	'ntp1.theinternetone.net' => 'Netherlands',
-	'ntp2.theinternetone.net' => 'Netherlands',
-	'ntp3.theinternetone.net' => 'Netherlands',
-	'fartein.ifi.uio.no' => 'Norway',
-	'info.cyf-kr.edu.pl' => 'Poland',
-	'ntp.ip.ro' => 'Romania',
-	'ntp.psn.ru' => 'Russia',
-	'time.flygplats.net' => 'Sweden',
-	'ntp.shim.org' => 'Singapore',
-	'biofiz.mf.uni-lj.si' => 'Slovenia',
-	'time.ijs.si' => 'Slovenia',
-	'time.ijs.si' => 'Slovenia',
-	'clock.cimat.ues.edu.sv' => 'El salvador',
-	'a.ntp.alphazed.net' => 'United kingdom',
-	'bear.zoo.bt.co.uk' => 'United kingdom',
-	'ntp.cis.strath.ac.uk' => 'United kingdom',
-	'ntp2a.mcc.ac.uk' => 'United kingdom',
-	'ntp2b.mcc.ac.uk' => 'United kingdom',
-	'ntp2c.mcc.ac.uk' => 'United kingdom',
-	'ntp2d.mcc.ac.uk' => 'United kingdom',
-	'tick.tanac.net' => 'United kingdom',
-	'time-server.ndo.com' => 'United kingdom',
-	'sushi.compsci.lyon.edu' => 'United states AR',
-	'ntp.drydog.com' => 'United states AZ',
-	'clock.fmt.he.net' => 'United states CA',
-	'clock.sjc.he.net' => 'United states CA',
-	'ntp.ucsd.edu' => 'United states CA',
-	'ntp1.sf-bay.org' => 'United states CA',
-	'ntp2.sf-bay.org' => 'United states CA',
-	'time.berkeley.netdot.net' => 'United states CA',
-	'ntp1.linuxmedialabs.com' => 'United states CO',
-	'ntp1.tummy.com' => 'United states CO',
-	'louie.udel.edu' => 'United states DE',
-	'rolex.usg.edu' => 'United states GA',
-	'timex.usg.edu' => 'United states GA',
-	'ntp-0.cso.uiuc.edu' => 'United states IL',
-	'ntp-1.cso.uiuc.edu' => 'United states IL',
-	'ntp-1.mcs.anl.gov' => 'United states IL',
-	'ntp-2.cso.uiuc.edu' => 'United states IL',
-	'ntp-2.mcs.anl.gov' => 'United states IL',
-	'gilbreth.ecn.purdue.edu' => 'United states IN',
-	'harbor.ecn.purdue.edu' => 'United states IN',
-	'molecule.ecn.purdue.edu' => 'United states IN',
-	'ntp.ourconcord.net' => 'United states MA',
-	'ns.nts.umn.edu' => 'United states MN',
-	'nss.nts.umn.edu' => 'United states MN',
-	'time-ext.missouri.edu' => 'United states MO',
-	'chronos1.umt.edu' => 'United states MT',
-	'chronos2.umt.edu' => 'United states MT',
-	'chronos3.umt.edu' => 'United states MT',
-	'tick.jrc.us' => 'United states NJ',
-	'tock.jrc.us' => 'United states NJ',
-	'cuckoo.nevada.edu' => 'United states NV',
-	'tick.cs.unlv.edu' => 'United states NV',
-	'tock.cs.unlv.edu' => 'United states NV',
-	'clock.linuxshell.net' => 'United states NY',
-	'clock.nyc.he.net' => 'United states NY',
-	'ntp0.cornell.edu' => 'United states NY',
-	'reva.sixgirls.org' => 'United states NY',
-	'clock.psu.edu' => 'United states PA',
-	'fuzz.psc.edu' => 'United states PA',
-	'ntp-1.cede.psu.edu' => 'United states PA',
-	'ntp-2.cede.psu.edu' => 'United states PA',
-	'ntp-1.ece.cmu.edu' => 'United states PA',
-	'ntp-2.ece.cmu.edu' => 'United states PA',
-	'ntp.cox.smu.edu' => 'United states TX',
-	'ntp.fnbhs.com' => 'United states TX',
-	'ntppub.tamu.edu' => 'United states TX',
-	'ntp-1.vt.edu' => 'United states VA',
-	'ntp-2.vt.edu' => 'United states VA',
-	'ntp.cmr.gov' => 'United states VA',
-	'ntp1.cs.wisc.edu' => 'United states WI',
-	'ntp3.cs.wisc.edu' => 'United states WI',
-	'ntp3.sf-bay.org' => 'United states WI',
-	'ntp.cs.unp.ac.za' => 'South africa',
-	'tock.nml.csir.co.za' => 'South africa',
-        'pool.ntp.org' => 'World Wide',
-    };
+our %ntp_servers;
+
+sub get_ntp_server_tree {
+    my ($zone) = @_;
+    map {
+        $ntp_servers{$zone}{$_} => (
+            exists $ntp_servers{$_} ?
+              $zone ?
+                translate($_) . "|" . N("All servers") :
+                N("All servers") :
+              translate($zone) . "|" . translate($_)
+        ),
+        get_ntp_server_tree($_);
+    } keys %{$ntp_servers{$zone}};
 }
+
+sub ntp_servers() {
+    +{ get_ntp_server_tree() };
+}
+
+sub dump_ntp_zone {
+    my ($zone) = @_;
+    map { if_(/\[\d+\](.+) -- (.+\.ntp\.org)/, $1 => $2) } `lynx -dump http://www.pool.ntp.org/zone/$zone`;
+}
+sub print_ntp_zone {
+    my ($zone, $name) = @_;
+    my %servers = dump_ntp_zone($zone);
+    print qq(\$ntp_servers{"$name"} = {\n);
+    print join('', map { qq(    N_("$_") => "$servers{$_}",\n) } sort(keys %servers));
+    print "};\n";
+    \%servers;
+}
+sub print_ntp_servers() {
+    print_ntp_zone();
+    my $servers = print_ntp_zone('@', "Global");
+    foreach my $name (sort(keys %$servers)) {
+        my ($zone) = $servers->{$name} =~ /^(.*?)\./;
+        print_ntp_zone($zone, $name);
+    }
+}
+
+# perl -Mtimezone -e 'timezone::print_ntp_servers()'
+$ntp_servers{""} = {
+    N_("Global") => "pool.ntp.org",
+};
+$ntp_servers{"Global"} = {
+    N_("Africa") => "africa.pool.ntp.org",
+    N_("Asia") => "asia.pool.ntp.org",
+    N_("Europe") => "europe.pool.ntp.org",
+    N_("North America") => "north-america.pool.ntp.org",
+    N_("Oceania") => "oceania.pool.ntp.org",
+    N_("South America") => "south-america.pool.ntp.org",
+};
+$ntp_servers{"Africa"} = {
+    N_("South Africa") => "za.pool.ntp.org",
+    N_("Tanzania") => "tz.pool.ntp.org",
+};
+$ntp_servers{"Asia"} = {
+    N_("Bangladesh") => "bd.pool.ntp.org",
+    N_("China") => "cn.pool.ntp.org",
+    N_("Hong Kong") => "hk.pool.ntp.org",
+    N_("India") => "in.pool.ntp.org",
+    N_("Indonesia") => "id.pool.ntp.org",
+    N_("Iran") => "ir.pool.ntp.org",
+    N_("Israel") => "il.pool.ntp.org",
+    N_("Japan") => "jp.pool.ntp.org",
+    N_("Korea") => "kr.pool.ntp.org",
+    N_("Malaysia") => "my.pool.ntp.org",
+    N_("Philippines") => "ph.pool.ntp.org",
+    N_("Singapore") => "sg.pool.ntp.org",
+    N_("Taiwan") => "tw.pool.ntp.org",
+    N_("Thailand") => "th.pool.ntp.org",
+    N_("Turkey") => "tr.pool.ntp.org",
+    N_("United Arab Emirates") => "ae.pool.ntp.org",
+};
+$ntp_servers{"Europe"} = {
+    N_("Austria") => "at.pool.ntp.org",
+    N_("Belarus") => "by.pool.ntp.org",
+    N_("Belgium") => "be.pool.ntp.org",
+    N_("Bulgaria") => "bg.pool.ntp.org",
+    N_("Czech Republic") => "cz.pool.ntp.org",
+    N_("Denmark") => "dk.pool.ntp.org",
+    N_("Estonia") => "ee.pool.ntp.org",
+    N_("Finland") => "fi.pool.ntp.org",
+    N_("France") => "fr.pool.ntp.org",
+    N_("Germany") => "de.pool.ntp.org",
+    N_("Greece") => "gr.pool.ntp.org",
+    N_("Hungary") => "hu.pool.ntp.org",
+    N_("Ireland") => "ie.pool.ntp.org",
+    N_("Italy") => "it.pool.ntp.org",
+    N_("Lithuania") => "lt.pool.ntp.org",
+    N_("Luxembourg") => "lu.pool.ntp.org",
+    N_("Netherlands") => "nl.pool.ntp.org",
+    N_("Norway") => "no.pool.ntp.org",
+    N_("Poland") => "pl.pool.ntp.org",
+    N_("Portugal") => "pt.pool.ntp.org",
+    N_("Romania") => "ro.pool.ntp.org",
+    N_("Russian Federation") => "ru.pool.ntp.org",
+    N_("Slovakia") => "sk.pool.ntp.org",
+    N_("Slovenia") => "si.pool.ntp.org",
+    N_("Spain") => "es.pool.ntp.org",
+    N_("Sweden") => "se.pool.ntp.org",
+    N_("Switzerland") => "ch.pool.ntp.org",
+    N_("Ukraine") => "ua.pool.ntp.org",
+    N_("United Kingdom") => "uk.pool.ntp.org",
+    N_("Yugoslavia") => "yu.pool.ntp.org",
+};
+$ntp_servers{"North America"} = {
+    N_("Canada") => "ca.pool.ntp.org",
+    N_("Guatemala") => "gt.pool.ntp.org",
+    N_("Mexico") => "mx.pool.ntp.org",
+    N_("United States") => "us.pool.ntp.org",
+};
+$ntp_servers{"Oceania"} = {
+    N_("Australia") => "au.pool.ntp.org",
+    N_("New Zealand") => "nz.pool.ntp.org",
+};
+$ntp_servers{"South America"} = {
+    N_("Argentina") => "ar.pool.ntp.org",
+    N_("Brazil") => "br.pool.ntp.org",
+    N_("Chile") => "cl.pool.ntp.org",
+};
 
 1;

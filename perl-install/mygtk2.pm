@@ -18,8 +18,7 @@ unless ($::no_ugtk_init) {
     $::one_message_has_been_translated and warn("N() was called from $::one_message_has_been_translated BEFORE gtk2 initialisation, replace it with a N_() AND a translate() later.\n"), c::_exit(1);
 
     Gtk2->init;
-    Locale::gettext::bind_textdomain_codeset($_, 'UTF8') foreach 'libDrakX', @::textdomains;
-    $::need_utf8_i18n = 1;
+    Locale::gettext::bind_textdomain_codeset($_, 'UTF8') foreach 'libDrakX', if_(!$::isInstall, 'libDrakX-standalone'), @::textdomains;
 }
 Gtk2->croak_execeptions if (!$::no_ugtk_init || $::isInstall) && 0.95 < $Gtk2::VERSION;
 
@@ -112,6 +111,8 @@ sub _gtk {
     $w->can_focus(delete $opts->{can_focus}) if exists $opts->{can_focus};
     $w->can_default(delete $opts->{can_default}) if exists $opts->{can_default};
     $w->grab_focus if delete $opts->{grab_focus};
+    $w->set_padding(@{delete $opts->{padding}}) if exists $opts->{padding};
+    $w->set_sensitive(delete $opts->{sensitive}) if exists $opts->{sensitive};
     (delete $opts->{size_group})->add_widget($w) if $opts->{size_group};
     if (my $tip = delete $opts->{tip}) {
 	$global_tooltips ||= Gtk2::Tooltips->new;
@@ -135,25 +136,27 @@ sub _gtk {
 sub _gtk__Button       { &_gtk_any_Button }
 sub _gtk__ToggleButton { &_gtk_any_Button }
 sub _gtk__CheckButton  { &_gtk_any_Button }
+sub _gtk__RadioButton  { &_gtk_any_Button }
 sub _gtk_any_Button {
     my ($w, $opts, $class) = @_;
 
     if (!$w) {
-	if (!$opts->{image}) {
-	    add2hash_($opts, { mnemonic => 1 });
+        my @radio_options;
+        if ($class eq 'RadioButton') {
+            @radio_options = delete $opts->{group};
 	}
-	$w = $opts->{image} ? "Gtk2::$class"->new :
-	  delete $opts->{mnemonic} ? "Gtk2::$class"->new_with_mnemonic(delete $opts->{text} || '') :
-	    "Gtk2::$class"->new_with_label(delete $opts->{text} || '');
+	$w = $opts->{image} || $opts->{child} ? "Gtk2::$class"->new :
+	  delete $opts->{mnemonic} ? "Gtk2::$class"->new_with_mnemonic(@radio_options, delete $opts->{text} || '') :
+	    $opts->{text} ? "Gtk2::$class"->new_with_label(@radio_options, delete $opts->{text} || '') :
+           "Gtk2::$class"->new(@radio_options);
 
 	$w->{format} = delete $opts->{format} if exists $opts->{format};
     }
 
-    if (my $image = delete $opts->{image}) {
-	$w->add($image);
-	$image->show;
+    if (my $widget = delete $opts->{image} || delete $opts->{child}) {
+	$w->add($widget);
+	$widget->show;
     }
-    $w->set_sensitive(delete $opts->{sensitive}) if exists $opts->{sensitive};
     $w->set_relief(delete $opts->{relief}) if exists $opts->{relief};
 
     if (my $text_ref = delete $opts->{text_ref}) {
@@ -316,8 +319,9 @@ sub _gtk__WrappedLabel {
 
 sub _gtk__Label_Left {
     my ($w, $opts) = @_;
-    
-    gtknew('HBox', children_tight => [ _gtk__Label($w, $opts) ]);
+    $opts->{alignment} ||= [ 0, 0 ];
+    $opts->{padding} = [ 20, 0 ];
+    _gtk__Label($w, $opts);
 }
 
 sub _gtk__Label {
@@ -339,8 +343,33 @@ sub _gtk__Label {
 	$set->();
     }
 
-    $w->set_markup(delete $opts->{text_markup}) if exists $opts->{text_markup};
+    if (my $t = delete $opts->{text_markup}) {
+	$w->set_markup($t);
+	if ($w->get_text eq '') {
+	    log::l("invalid markup in $t. not using the markup");
+	    $w->set_text($t);
+	}
+    }
     $w;
+}
+
+sub title1_to_markup {
+	my ($label) = @_;
+	'<b><big>' . $label . '</big></b>';
+}
+
+sub _gtk__Title1 {
+    my ($w, $opts) = @_;
+    $opts ||= {};
+    $opts->{text_markup} = '<b><big>' . delete($opts->{label}) . '</big></b>';
+    _gtk__Label($w, $opts);
+}
+
+sub _gtk__Title2 {
+    my ($w, $opts) = @_;
+    $opts ||= {};
+    $opts->{alignment} = [ 0, 0 ];
+    _gtk__Title1($w, $opts);
 }
 
 sub _gtk__Entry {
@@ -353,6 +382,13 @@ sub _gtk__Entry {
 
     $w->set_text(delete $opts->{text}) if exists $opts->{text};
     $w->signal_connect(key_press_event => delete $opts->{key_press_event}) if exists $opts->{key_press_event};
+
+    if (my $text_ref = delete $opts->{text_ref}) {
+	my $set = sub { $w->set_text($$text_ref) };
+	gtkval_register($w, $text_ref, $set);
+	$set->();
+    }
+
     $w;
 }
 
@@ -381,6 +417,7 @@ sub _gtk__ComboBox {
     my $set_list = sub {
 	$w->{formatted_list} = $w->{format} ? [ map { $w->{format}($_) } @{$w->{list}} ] : $w->{list};
 	$w->get_model->clear;
+	$w->{strings} = $w->{formatted_list};  # used by Gtk2::ComboBox wrappers such as get_text() in ugtk2
 	$w->append_text($_) foreach @{$w->{formatted_list}};
     };
     if (my $list_ref = delete $opts->{list_ref}) {
@@ -428,7 +465,7 @@ sub _gtk__ScrolledWindow {
     my $faked_w = $w;
 
     if (my $child = delete $opts->{child}) {
-	if (member(ref($child), qw(Gtk2::Layout Gtk2::Text Gtk2::TextView Gtk2::TreeView))) {
+	if (member(ref($child), qw(Gtk2::Layout Gtk2::Html2::View Gtk2::SimpleList Gtk2::SourceView::View Gtk2::Text Gtk2::TextView Gtk2::TreeView))) {
 	    $w->add($child);
 	} else {
 	    $w->add_with_viewport($child);
@@ -468,6 +505,24 @@ sub _gtk__Frame {
     $w;
 }
 
+sub _gtk__Expander {
+    my ($w, $opts) = @_;
+
+    if ($w) {
+	$w->set_label(delete $opts->{text}) if exists $opts->{text};
+    } else {
+	$w = Gtk2::Expander->new(delete $opts->{text});
+    }
+
+    $w->signal_connect(activate => delete $opts->{activate}) if exists $opts->{activate};
+
+    if (my $child = delete $opts->{child}) {
+	$w->add($child);
+	$child->show;
+    }
+    $w;
+}
+
 sub _gtk__Window { &_gtk_any_Window }
 sub _gtk__Dialog { &_gtk_any_Window }
 sub _gtk__Plug   { &_gtk_any_Window }
@@ -484,6 +539,7 @@ sub _gtk_any_Window {
 	    $w = "Gtk2::$class"->new;
 	}
 
+	$w->set_modal(1) if exists $opts->{transient_for};
 	$w->set_modal(delete $opts->{modal}) if exists $opts->{modal};
 	$w->set_transient_for(delete $opts->{transient_for}) if exists $opts->{transient_for};
 	$w->set_border_width(delete $opts->{border_width}) if exists $opts->{border_width};
@@ -520,6 +576,7 @@ sub _gtk__MagicWindow {
     my $provided_banner = delete $opts->{banner};
 
     if ($pop_it) {
+	$sub_child = gtknew('VBox', children_tight => [ $provided_banner ]) if $provided_banner;
 	$opts->{child} = $::isInstall ?
 	  gtknew('Frame', shadow_type => 'out', 
 		 child => gtknew('Frame', shadow_type => 'none', border_width => 3, child => $sub_child)) :
@@ -544,6 +601,7 @@ sub _gtk__MagicWindow {
 		    socket_id => $::XID,
 		    child => $::WizardTable,
 		});
+		delete $opts->{no_Window_Manager};
 		$::Plug = $::WizardWindow = _gtk(undef, 'Plug', 'gtknew', $opts);
 		sync($::WizardWindow);
 	    } else {
@@ -568,6 +626,49 @@ sub _gtk__MagicWindow {
 	child => $sub_child, pop_it => $pop_it,
 	if_($provided_banner, banner => $provided_banner),
     }, 'mygtk2::MagicWindow';
+}
+
+# A standard About dialog. Used with:
+# my $w = gtknew('AboutDialog', ...);
+# $w->show_all;
+# $w->run;
+sub _gtk__AboutDialog {
+    my ($w, $opts) = @_;
+
+    if (!$w) {
+        $w = Gtk2::AboutDialog->new;
+        $w->signal_connect(response => sub { $_[0]->destroy });
+        $w->set_name(delete $opts->{name}) if exists $opts->{name};
+        $w->set_version(delete $opts->{version}) if exists $opts->{version};
+        $w->set_icon(gtknew('Pixbuf', file => delete $opts->{icon})) if exists $opts->{icon};
+        $w->set_logo(gtknew('Pixbuf', file => delete $opts->{logo})) if exists $opts->{logo};
+        $w->set_copyright(delete $opts->{copyright}) if exists $opts->{copyright};
+        $w->set_url_hook(sub {
+            my (undef, $url) = @_;
+            run_program::raw({ detach => 1 }, 'www-browser', $url);
+        });
+        $w->set_email_hook(sub {
+            my (undef, $url) = @_;
+            run_program::raw({ detach => 1 }, 'www-browser', $url);
+        });
+
+        if (my $url = delete $opts->{website}) {
+            $url =~ s/^https:/http:/; # Gtk2::About doesn't like "https://..." like URLs
+            $w->set_website($url);
+        }
+        $w->set_license(delete $opts->{license}) if exists $opts->{license};
+        $w->set_wrap_license(delete $opts->{wrap_license}) if exists $opts->{wrap_license};
+        $w->set_comments(delete $opts->{comments}) if exists $opts->{comments};
+        $w->set_website_label(delete $opts->{website_label}) if exists $opts->{website_label};
+        $w->set_authors(delete $opts->{authors}) if exists $opts->{authors};
+        $w->set_documenters(delete $opts->{documenters}) if exists $opts->{documenters};
+        $w->set_translator_credits(delete $opts->{translator_credits}) if exists $opts->{translator_credits};
+        $w->set_artists(delete $opts->{artists}) if exists $opts->{artists};
+        $w->set_modal(delete $opts->{modal}) if exists $opts->{modal};
+        $w->set_transient_for(delete $opts->{transient_for}) if exists $opts->{transient_for};
+        $w->set_position(delete $opts->{position_policy}) if exists $opts->{position_policy};
+    }
+    $w;
 }
 
 sub _gtk__FileSelection {
@@ -596,10 +697,33 @@ sub _gtk__FileChooser {
 	    $w->set_current_folder($dir);
 	}
 	if ($file) {
-	    my $meth = $action =~ /save|create/ ? 'set_current_name' : 'set_filename';
-	    $w->$meth($file);
+	    if ($action =~ /save|create/) {
+		$w->set_current_name(basename($file));
+	    } else {
+		$w->set_filename($file);
+	    }
 	}
     }
+    $w;
+}
+
+sub _gtk__VPaned { &_gtk_any_Paned }
+sub _gtk__HPaned { &_gtk_any_Paned }
+sub _gtk_any_Paned {
+    my ($w, $opts, $class, $action) = @_;
+
+    if (!$w) {
+	$w = "Gtk2::$class"->new;
+	$w->set_border_width(delete $opts->{border_width}) if exists $opts->{border_width};
+    } elsif ($action eq 'gtkset') {
+	$_->destroy foreach $w->get_children;
+    }
+
+    foreach my $opt (qw(resize1 shrink1 resize2 shrink2)) {
+        $opts->{$opt} = 1 if !defined $opts->{$opt};
+    }
+    $w->pack1(delete $opts->{child1}, delete $opts->{resize1}, delete $opts->{shrink1});
+    $w->pack2(delete $opts->{child2}, delete $opts->{resize2}, delete $opts->{shrink2});
     $w;
 }
 
@@ -709,9 +833,10 @@ sub _gtknew_handle_children {
 
     foreach (@child) {
 	my ($fill, $child) = @$_;
-	$fill eq '0' || $fill eq '1' or internal_error("odd {children} parameter must be 0 or 1 (got $fill)");
+	$fill eq '0' || $fill eq '1' || $fill eq 'fill' || $fill eq 'expand' or internal_error("odd {children} parameter must be 0 or 1 (got $fill)");
 	ref $child or $child = Gtk2::WrappedLabel->new($child);
-	$w->pack_start($child, $fill, $fill, $padding || 0);
+	my $expand = $fill && $fill ne 'fill' ? 1 : 0;
+	$w->pack_start($child, $expand, $fill, $padding || 0);
 	$child->show;
     }
 }
@@ -746,7 +871,7 @@ sub mygtk2::MagicWindow::AUTOLOAD {
 sub _create_Window {
     my ($opts) = @_;
 
-    my $no_Window_Manager = !$::isStandalone;
+    my $no_Window_Manager = exists $opts->{no_Window_Manager} ? delete $opts->{no_Window_Manager} : !$::isStandalone;
 
     add2hash($opts, {
 	if_(!$::isInstall && !$::isWizard, border_width => 5),
@@ -755,8 +880,8 @@ sub _create_Window {
 	position_policy => $::isInstall ? 'none' : $no_Window_Manager ? 'center-always' : 'center-on-parent',
 
 	if_($::isInstall, position => [
-	    $::rootwidth - ($::windowwidth + $::real_windowwidth) / 2, 
-	    $::logoheight + ($::windowheight - $::real_windowheight) / 2,
+	    $::rootwidth - ($::o->{windowwidth} + $::real_windowwidth) / 2, 
+	    $::logoheight + ($::o->{windowheight} - $::real_windowheight) / 2,
 	]),
     });
     my $w = _gtk(undef, 'Window', 'gtknew', $opts);
@@ -776,9 +901,9 @@ sub _create_Window {
     }
 
     if ($::isInstall) {
-	require install_gtk; #- for perl_checker
-	install_gtk::handle_unsafe_mouse($::o, $w);
-	$w->signal_connect(key_press_event => \&install_gtk::special_shortcuts);
+	require install::gtk; #- for perl_checker
+	install::gtk::handle_unsafe_mouse($::o, $w);
+	$w->signal_connect(key_press_event => \&install::gtk::special_shortcuts);
 
 	#- force center at a weird position, this can't be handled by position_policy
 	#- because center-on-parent is a window manager hint, and we don't have a WM
@@ -789,8 +914,8 @@ sub _create_Window {
 	    return if $w_size[2] == $wi && $w_size[3] == $he; #BUG
 	    (undef, undef, $wi, $he) = @w_size;
 
-            $w->move(max(0, $::rootwidth - ($::windowwidth + $wi) / 2), 
-		     max(0, $::logoheight + ($::windowheight - $he) / 2));
+            $w->move(max(0, $::rootwidth - ($::o->{windowwidth} + $wi) / 2), 
+		     max(0, $::logoheight + ($::o->{windowheight} - $he) / 2));
 	});
 	#- without this, the focus is broken during install, though this is not needed during X test, why??
 	$w->show;
@@ -807,8 +932,6 @@ sub _force_keyboard_focus {
 	my ($w) = @_;
 	if ($current_window == $w) {
 	    $w->window->XSetInputFocus;
-	} else {
-	    log::l("not XSetInputFocus since already done and not on top");
 	}
 	0;
     }
@@ -869,12 +992,22 @@ sub _text_insert {
     my $gtk_tags = $buffer->{gtk_tags};
     my $tags = $buffer->{tags};
     if (ref($t) eq 'ARRAY') {
-        $opts{append} or $buffer->set_text('');
+        if (!$opts{append}) {
+            $buffer->set_text('');
+            $textview->{anchors} = [];
+        }
         foreach my $token (@$t) {
             my ($item, $tag) = @$token;
             my $iter1 = $buffer->get_end_iter;
             if ($item =~ /^Gtk2::Gdk::Pixbuf/) {
                 $buffer->insert_pixbuf($iter1, $item);
+                next;
+            }
+            if ($item =~ /^Gtk2::/) {
+                my $anchor = $buffer->create_child_anchor($iter1);
+                $textview->add_child_at_anchor($item, $anchor);
+                $textview->{anchors} ||= [];
+                push @{$textview->{anchors}}, $anchor;
                 next;
             }
             if ($tag) {
@@ -896,6 +1029,7 @@ sub _text_insert {
         if ($opts{append}) {
             $buffer->insert($buffer->get_end_iter, $t);
         } else {
+            $textview->{anchors} = [];
             $buffer->set_text($t);
         }
     }
@@ -918,6 +1052,7 @@ sub _allow_scroll_TextView_to_bottom {
 	my ($o_force) = @_;
 	my $adjustment = $scrolledWindow->get_vadjustment;
 	if ($o_force || $adjustment->page_size + $adjustment->value == $adjustment->upper) {
+	    flush(); #- one must flush before scrolling to end, otherwise the text just added *may* not be taken into account correctly, and so it doesn't really scroll to end
 	    $textView->scroll_to_mark($textView->get_buffer->get_mark('end'), 0, 1, 0, 1);
 	}
     };
@@ -933,7 +1068,7 @@ my @icon_paths;
 sub add_icon_path { push @icon_paths, @_ }
 sub _icon_paths() {
    (@icon_paths, (exists $ENV{SHARE_PATH} ? ($ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/icons", "$ENV{SHARE_PATH}/libDrakX/pixmaps") : ()),
-    "/usr/lib/libDrakX/icons", "pixmaps", 'standalone/icons', '/usr/share/rpmdrake/icons');
+    "/usr/lib/libDrakX/icons", "pixmaps", 'data/icons', 'standalone/icons', '/usr/share/rpmdrake/icons');
 }  
 
 sub main {

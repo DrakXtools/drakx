@@ -78,10 +78,8 @@ sub spawn_server {
 }
 
 sub error {
-    my $msg = join '', @_;
-
     print $q->header(), $q->start_html();
-    print $q->h1(_("Error")), @_;
+    print $q->h1(N("Error")), @_;
     print $q->end_html(), "\n";
     exit 0;
 }

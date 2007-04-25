@@ -104,8 +104,8 @@ sub is_geometry_valid_for_the_partition_table {
 	my ($chs_start_v1, $chs_end_v1) = map { join(',', @$_) } CHS_from_part_rawCHS($_) or next;
 	my ($chs_start_v2, $chs_end_v2) = map { join(',', @$_) } map { [ min($_->[0], 1023), $_->[1], $_->[2] ] } CHS_from_part_linear($geom, $_);
 	if (!$no_log) {
-	    $chs_start_v1 eq $chs_start_v2 or log::l("check_geometry_using_the_partition_table failed for ($_->{device}, $_->{start}): $chs_start_v1 vs $chs_start_v2 with geometry " . geometry_to_string($geom));
-	    $chs_end_v1 eq $chs_end_v2 or log::l("check_geometry_using_the_partition_table failed for ($_->{device}, " . ($_->{start} + $_->{size} - 1) . "): $chs_end_v1 vs $chs_end_v2 with geometry " . geometry_to_string($geom));
+	    $chs_start_v1 eq $chs_start_v2 or log::l("is_geometry_valid_for_the_partition_table failed for ($_->{device}, $_->{start}): $chs_start_v1 vs $chs_start_v2 with geometry " . geometry_to_string($geom));
+	    $chs_end_v1 eq $chs_end_v2 or log::l("is_geometry_valid_for_the_partition_table failed for ($_->{device}, " . ($_->{start} + $_->{size} - 1) . "): $chs_end_v1 vs $chs_end_v2 with geometry " . geometry_to_string($geom));
 	}
 	$chs_start_v1 eq $chs_start_v2 && $chs_end_v1 eq $chs_end_v2;
     } @{$hd->{primary}{normal} || []};

@@ -1,29 +1,55 @@
 #!/bin/sh
 
-[ $# != 1 ] && { 
-    echo "usage: mdkinst_stage2_tool <stage2 dir>" ; 
-    echo "  example: misc/mdkinst_stage2_tool install/stage2"
-    exit
+error() {
+    cat <<EOF;
+usage: mdkinst_stage2_tool [--clean] [--compress | --uncompress] <stage2 dir> [<compressed file>]
+EOF
+    exit 1
 }
 
-STAGE2_DIR="$1"
-LIVE_DIR="$STAGE2_DIR/live"
-CLP="$STAGE2_DIR/mdkinst.clp"
+if [ "$1" = "--clean" ]; then
+    CLEAN=1
+    shift
+fi
 
-if [ -d $LIVE_DIR ]; then
-    echo "Creating $CLP from $LIVE_DIR"
+[ $# = 2 -o $# = 3 ] || error
+
+if [ "$1" = "--compress" -o "$1" == "--uncompress" ]; then
+    ACTION=$1
+    shift
+    STAGE2_DIR="$1"
+    shift
+    LIVE_DIR="$STAGE2_DIR/live"
+    if [ -n "$1" ]; then
+	COMPRESSED_IMAGE=$1
+	shift
+    else
+	COMPRESSED_IMAGE="$STAGE2_DIR/mdkinst.sqfs"
+    fi
+else
+    error
+fi
+
+if [ $ACTION = "--compress" ]; then
+    which mksquashfs >/dev/null 2>/dev/null || { echo "missing command mksquashfs (from squashfs-tools)"; exit 1; }
+
+    [ -d "$LIVE_DIR" ] || error
+    echo "Creating $COMPRESSED_IMAGE from $LIVE_DIR"
     rm -f $STAGE2_DIR/.room
-    mkisofs -quiet -D -R $LIVE_DIR | create_compressed_fs - 65536 $CLP 200 2>/dev/null
+    mksquashfs $LIVE_DIR $COMPRESSED_IMAGE -all-root -noappend >/dev/null
+    chmod 755 $COMPRESSED_IMAGE
     echo foo > $STAGE2_DIR/.room
     if [ -s $STAGE2_DIR/.room ]; then
-	rm -rf $LIVE_DIR $STAGE2_DIR/.room
+	rm -f $STAGE2_DIR/.room
+	[ -n "$CLEAN" ] && rm -rf $LIVE_DIR 
     else
 	echo "not enough space"
-	rm -f $CLP
+	rm -f $COMPRESSED_IMAGE
 	exit 1
     fi
 else
-    echo "Creating $LIVE_DIR from $CLP"
+    [ -f "$COMPRESSED_IMAGE" ] || error
+    echo "Creating $LIVE_DIR from $COMPRESSED_IMAGE"
 
     TMPDIR=${TMPDIR=/tmp}
     MNTPOINT=$TMPDIR/stage2_img
@@ -35,10 +61,11 @@ else
 
     $SUDO umount $MNTPOINT 2>/dev/null
     mkdir -p $MNTPOINT
-    extract_compressed_fs $CLP > $CLP.iso 2>/dev/null
+    $SUDO mount -o loop -t squashfs $COMPRESSED_IMAGE $MNTPOINT || { echo "can not loopback mount $COMPRESSED_IMAGE"; exit 1; }
     mkdir $LIVE_DIR || { echo "not enough space"; exit 1; }
-    $SUDO mount -o loop $CLP.iso $MNTPOINT || { echo "can not loopback mount $CLP"; exit 1; }
     cp -a $MNTPOINT/* $LIVE_DIR/ || { rm -rf $LIVE_DIR; exit 1; }
     $SUDO umount $MNTPOINT
-    rm -f $CLP.iso $CLP
+    [ -n "$CLEAN" ] && rm -f $COMPRESSED_IMAGE
 fi
+
+exit 0

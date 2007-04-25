@@ -1,0 +1,10 @@
+1.7:
+- don't kill our init/klogd when running stage2
+  (bug introduced when switching to initramfs)
+
+1.6:
+- write DNS settings in temporary ifcfg file
+  (fixes resolv.conf post install)
+
+1.5:
+- fix infinite loop in wired interface mode

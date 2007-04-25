@@ -26,21 +26,18 @@
 #include "log.h"
 #include "wireless.h"
 
-static int wireless_open_socket();
-static int wireless_close_socket(int socket);
 static int wireless_ioctl(int socket, const char *ifname, int request, struct iwreq *wrq);
-static int wireless_is_aware(int socket, const char *ifname);
 static int wireless_set_mode_managed(int socket, const char *ifname);
 static int wireless_disable_key(int socket, const char *ifname);
 static int wireless_set_restricted_key(int socket, const char *ifname, const char *key);
 static int wireless_set_essid(int socket, const char *ifname, const char *essid);
 
-static int wireless_open_socket()
+int wireless_open_socket()
 {
 	return socket(AF_INET, SOCK_DGRAM, 0);
 }
 
-static int wireless_close_socket(int socket)
+int wireless_close_socket(int socket)
 {
 	return close(socket);
 }
@@ -51,7 +48,7 @@ static int wireless_ioctl(int socket, const char *ifname, int request, struct iw
 	return ioctl(socket, request, wrq);
 }
 
-static int wireless_is_aware(int socket, const char *ifname)
+int wireless_is_aware(int socket, const char *ifname)
 {
 	struct iwreq wrq;
 	return wireless_ioctl(socket, ifname, SIOCGIWNAME, &wrq) == 0;

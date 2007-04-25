@@ -107,7 +107,7 @@ sub ask_parameters {
 	my @srvs = query_srv_names($authentication->{AD_domain});
 	$authentication->{AD_server} ||= $srvs[0] if @srvs;
 
-	my %sub_kinds = my @sub_kinds = (
+	my %sub_kinds = (
 	    simple => N("simple"), 
 	    tls => N("TLS"),
 	    ssl => N("SSL"),
@@ -178,8 +178,9 @@ sub ask_root_password_and_authentication {
     my @kinds = kinds($in->do_pkgs, $meta_class);
 
     $in->ask_from_({
-	 title => N("Set administrator (root) password and network authentication methods"), 
+	 title => N("Authentication"), 
 	 messages => N("Set administrator (root) password"),
+	 icon => 'banner-pw',
 	 advanced_label => N("Authentication method"),
 	 advanced_messages => kind2description(@kinds),
 	 interactive_help_id => "setRootPassword",
@@ -189,9 +190,7 @@ sub ask_root_password_and_authentication {
 	 focus_first => 1,
 	 callbacks => { 
 	     complete => sub {
-		 $superuser->{password} eq $superuser->{password2} or $in->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]), return 1,0;
-		 length $superuser->{password} < 2 * $security
-		   and $in->ask_warn('', N("This password is too short (it must be at least %d characters long)", 2 * $security)), return 1,0;
+		 check_given_password($in, $superuser, 2 * $security) or return 1,0;
 		 return 0;
         } } }, [
 { label => N("Password"), val => \$superuser->{password},  hidden => 1 },
@@ -202,16 +201,36 @@ sub ask_root_password_and_authentication {
     ask_parameters($in, $net, $authentication, $kind) or goto &ask_root_password_and_authentication;
 }
 
+sub check_given_password {
+    my ($in, $u, $min_length) = @_;
+    if ($u->{password} ne $u->{password2}) {
+	$in->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]);
+	0;
+    } elsif (length $u->{password} < $min_length) {
+	$in->ask_warn('', N("This password is too short (it must be at least %d characters long)", $min_length));
+	0;
+    } else {
+	1;
+    }
+}
 
 sub get() {
-    my @pam_kinds = get_pam_authentication_kinds();
-    my @kinds = grep { intersection(\@pam_kinds, $kind2pam_kind{$_}) } keys %kind2pam_kind;
-
     my $system_auth = cat_("/etc/pam.d/system-auth");
-    { 
+    my $authentication = { 
 	md5 => $system_auth =~ /md5/, shadow => $system_auth =~ /shadow/, 
-	if_(@kinds, $kinds[0] => ''),
     };
+
+    my @pam_kinds = get_pam_authentication_kinds();
+    if (my $kind = find { intersection(\@pam_kinds, $kind2pam_kind{$_}) } keys %kind2pam_kind) {
+	$authentication->{$kind} = '';
+    } else {
+	#- we can't use pam to detect NIS
+	if (my $yp_conf = read_yp_conf()) {
+	    $authentication->{NIS} = 1;
+	    map_each { $authentication->{"NIS_$::a"} = $::b } %$yp_conf;
+	}
+    }
+    $authentication;
 }
 
 sub install_needed_packages {
@@ -328,11 +347,21 @@ sub set_raw {
 
     } elsif ($kind eq 'NIS') {
 	my $domain = $net->{network}{NISDOMAIN};
-	$domain || $authentication->{NIS_server} ne "broadcast" or die N("Can not use broadcast with no NIS domain");
-	my $t = $domain ? "domain $domain" . ($authentication->{NIS_server} ne "broadcast" && " server") : "ypserver";
+	my $NIS_server = $authentication->{NIS_server};
+	$domain || $NIS_server ne "broadcast" or die N("Can not use broadcast with no NIS domain");
+	my $t = $domain ? 
+	  ($NIS_server eq 'broadcast' ? 
+	     "domain $domain broadcast" : 
+	     "domain $domain server $NIS_server") :
+	     "server $NIS_server";
+
 	substInFile {
-	    $_ = "#~$_" unless /^#/;
-	    $_ .= "$t $authentication->{NIS_server}\n" if eof;
+	    if (/^#/) {
+		$_ = '' if /^#\Q[PREVIOUS]/;
+	    } else {
+		$_ = "#[PREVIOUS] $_";
+	    }
+	    $_ .= "$t\n" if eof;
 	} "$::prefix/etc/yp.conf";
 
 	#- no need to modify system-auth for nis
@@ -347,8 +376,8 @@ sub set_raw {
 
 	my $domain = uc $authentication->{WINDOMAIN};
 	
-	require network::smb;
-	network::smb::write_smb_conf($domain);
+	require fs::remote::smb;
+	fs::remote::smb::write_smb_conf($domain);
 	run_program::rooted($::prefix, "chkconfig", "--level", "35", "winbind", "on");
 	mkdir_p("$::prefix/home/$domain");
 	run_program::rooted($::prefix, 'service', 'smb', 'restart');
@@ -357,7 +386,8 @@ sub set_raw {
 	#- defer running smbpassword until the network is up
 
 	$when_network_is_up->(sub {
-	    run_program::rooted($::prefix, 'net', 'join', $domain, '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
+	    run_program::raw({ root => $::prefix, sensitive_arguments => 1 },
+			     'net', 'join', $domain, '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
 	});
     } elsif ($kind eq 'SMBKRB') {
 	 $authentication->{AD_server} ||= 'ads.' . $authentication->{AD_domain};
@@ -366,8 +396,8 @@ sub set_raw {
 
 	configure_krb5_for_AD($authentication);
 		
-	require network::smb;
-	network::smb::write_smb_ads_conf($domain,$realm);
+	require fs::remote::smb;
+	fs::remote::smb::write_smb_ads_conf($domain,$realm);
 	run_program::rooted($::prefix, "chkconfig", "--level", "35", "winbind", "on");
 	mkdir_p("$::prefix/home/$domain");
 	run_program::rooted($::prefix, 'net', 'time', 'set', '-S', $authentication->{AD_server});
@@ -375,7 +405,8 @@ sub set_raw {
 	run_program::rooted($::prefix, 'service', 'winbind', 'restart');
 	
 	$when_network_is_up->(sub {
-	    run_program::rooted($::prefix, 'net', 'ads', 'join', '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
+	    run_program::raw({ root => $::prefix, sensitive_arguments => 1 }, 
+			     'net', 'ads', 'join', '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
 	});
     }
     1;
@@ -416,11 +447,12 @@ sub set_pam_authentication {
     my (@authentication_kinds) = @_;
     
     my %special = (
-	auth => \@authentication_kinds,
-	account => [ difference2(\@authentication_kinds, [ 'castella' ]) ],
+	auth => [ difference2(\@authentication_kinds,, [ 'mount' ]) ],
+	account => [ difference2(\@authentication_kinds, [ 'castella', 'mount' ]) ],
 	password => [ intersection(\@authentication_kinds, [ 'ldap', 'krb5' ]) ],
     );
     my %before_first = (
+	auth => member('mount', @authentication_kinds) ? pam_format_line('auth', 'required', 'pam_mount') : '',
 	session => 
 	  intersection(\@authentication_kinds, [ 'winbind', 'krb5', 'ldap' ]) 
 	    ? pam_format_line('session', 'optional', 'pam_mkhomedir', 'skel=/etc/skel/', 'umask=0022') :
@@ -428,7 +460,11 @@ sub set_pam_authentication {
 	    ? pam_format_line('session', 'optional', 'pam_castella') : '',
     );
     my %after_deny = (
-	session => member('krb5', @authentication_kinds) ? pam_format_line('session', 'optional', 'pam_krb5') : '',
+	session =>
+          member('krb5', @authentication_kinds)
+            ? pam_format_line('session', 'optional', 'pam_krb5') :
+          member('mount', @authentication_kinds)
+            ? pam_format_line('session', 'optional', 'pam_mount') : '',
     );
 
     substInFile {
@@ -484,6 +520,18 @@ sub set_nsswitch_priority {
 	    $_ = $database . join(' ', uniq('files', @kinds, @l)) . "\n";
 	}	
     } "$::prefix/etc/nsswitch.conf";
+}
+
+sub read_yp_conf() {
+    my $yp_conf = cat_("$::prefix/etc/yp.conf");
+    
+    if ($yp_conf =~ /^domain\s+(\S+)\s+(\S+)\s*(.*)/m) {
+	{ domain => $1, server => $2 eq 'broadcast' ? 'broadcast' : $3 };
+    } elsif ($yp_conf =~ /^server\s+(.*)/m) {
+	{ server => $1 };
+    } else {
+	undef;
+    }    
 }
 
 my $special_ldap_cmds = join('|', 'nss_map_attribute', 'nss_map_objectclass');
@@ -599,6 +647,7 @@ sub krb5_conf_overwrite_category {
     } $file;
 }
 
+#- same as update_gnomekderc(), but allow spaces around "="
 sub krb5_conf_update {
     my ($file, $category, %subst_) = @_;
 
@@ -655,6 +704,16 @@ sub query_srv_names {
 sub enable_shadow() {
     run_program::rooted($::prefix, "pwconv")  or log::l("pwconv failed");
     run_program::rooted($::prefix, "grpconv") or log::l("grpconv failed");
+}
+
+sub salt {
+    my ($nb) = @_;
+    require devices;
+    open(my $F, devices::make("random")) or die "missing random";
+    my $s; read $F, $s, $nb;
+    $s = pack("b8" x $nb, unpack "b6" x $nb, $s);
+    $s =~ tr|\0-\x3f|0-9a-zA-Z./|;
+    $s;
 }
 
 sub user_crypted_passwd {

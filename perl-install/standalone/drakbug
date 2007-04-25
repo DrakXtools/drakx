@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 # Drak Bug Report 
-# Copyright (C) 2002-2005 Mandriva (daouda at mandriva dot com)
+# Copyright (C) 2002-2006 Mandriva (daouda at mandriva dot com)
 #                          Stew Benedict (sbenedict at mandriva dot com) 
 #
 # This program is free software; you can redistribute it and/or modify
@@ -24,6 +24,7 @@ use lib qw(/usr/lib/libDrakX);
 use any;
 use standalone;
 use common;
+use mygtk2 qw(gtknew);
 use ugtk2 qw(:all);
 use Config;
 
@@ -38,6 +39,7 @@ foreach (@ARGV) {
     /^--incident$/ && shift @ARGV and do { $incident = 1; $prog = shift @ARGV };
 }
 
+$ugtk2::wm_icon = 'drakbug-16';
 my $window = ugtk2->new(N("Mandriva Linux Bug Report Tool"), center => 1);
 $window->{rwindow}->set_border_width(5);
 $window->{window}->signal_connect("delete_event", sub { ugtk2->exit(0) });
@@ -47,21 +49,17 @@ my $mdk_app = {
 	       N("First Time Wizard") => 'drakfw',
 	       N("Synchronization tool") => 'draksync',  
 	       N("Standalone Tools") => 'drakxtools',
-	       N("HardDrake") => 'harddrake2',
+	       "harddrake" => 'harddrake2',
 	       N("Mandriva Online") => 'mdkonline',
-	       N("Menudrake") => 'menudrake',
-	       N("Msec") => 'msec',
 	       N("Remote Control") => 'rfbdrake',
 	       N("Software Manager") => 'rpmdrake',
-	       N("Urpmi") => 'urpmi',
 	       N("Windows Migration tool") => 'transfugdrake',
-	       N("Userdrake") => 'userdrake',
 	       N("Configuration Wizards") => 'wizdrake',
 	      };
 
 my @generic_tool = keys %$mdk_app; 
-my @all_drakxtools = ('adduserdrake', 'diskdrake', 'drakautoinst', 'drakbackup', 'drakboot', 'DrakBug', 'DrakClock', 'DrakConnect', 'drakfloppy', 'drakfirewall', 'drakfont', 'drakhosts', 'draknfs', 'draksambashare', 'drakgw', 'DrakSec', 'draksplash', 'drakvpn', 'drakxservices', 'drakxtools', 'drakxtv', 'keyboardrake', 'logdrake', 'mousedrake', 'net_monitor', 'printerdrake', 'scannerdrake', 'XFdrake');
-push(@generic_tool,@all_drakxtools);
+my @all_drakxtools = qw(adduserdrake diskdrake drakautoinst drakboot drakbug drakclock drakfloppy drakfont draksec drakxservices draksplash drakxtools drakxtv logdrake scannerdrake);
+push @generic_tool, @all_drakxtools, qw(MandrivaUpdate drakbackup drakconnect drakfirewall drakhosts drakmenustyle draknfs draksambashare drakgw drakroam drakvpn keyboarddrake msec mousedrake net_monitor printerdrake urpmi userdrake XFdrake);
 
 my $kernel_release = chomp_(`uname -r`);
 my $mandrake_release = chomp_(cat_('/etc/mandrakelinux-release'));
@@ -78,37 +76,32 @@ $bugzilla = 'http://qa.mandriva.com/enter_bug.cgi';
 $wizard_name = "Bugzilla";
 
 $table = create_packtable({ col_spacings => 5, row_spacings => 10 },
-		          [ Gtk2::Label->new(N("Select Mandriva Tool:")), $comb_app = Gtk2::ComboBox->new_text, $comb_app->set_wrap_width(3) ],
-                          [ Gtk2::Label->new(N("or Application Name\n(or Full Path):")), 
-			  gtkpack_(Gtk2::HBox->new(0,5),
+		          [ gtknew('Label_Left', text => N("Select Mandriva Tool:")), $comb_app = Gtk2::ComboBox->new_text, $comb_app->set_wrap_width(3) ],
+                          [ gtknew('Label_Left', text => N("or Application Name\n(or Full Path):")), 
+			  gtkpack_(Gtk2::HBox->new(0, 5),
 				   1, $com_app = gtkset_editable(Gtk2::Entry->new, 1), 
 				   0, $button_pkg = Gtk2::Button->new(N("Find Package")),
 				  ) ],
-			  [ Gtk2::Label->new(N("Package: ")), $package = Gtk2::Entry->new_with_text("...") ], # complain on gtk-perl@ml
-			  [ Gtk2::Label->new(N("Kernel:")), gtkset_editable(Gtk2::Entry->new_with_text($kernel_release), 0) ]
+			  [ gtknew('Label_Left', text => N("Package: ")), $package = Gtk2::Entry->new_with_text("...") ], # complain on gtk-perl@ml
+			  [ gtknew('Label_Left', text => N("Kernel:")), gtkset_editable(Gtk2::Entry->new_with_text($kernel_release), 0) ]
                          );
 $comb_app->set_popdown_strings("", sort(@generic_tool));
 $comb_app->set_text("");
 
 gtkadd($window->{window},
-       gtkpack_(Gtk2::VBox->new(0,5),
-                0, gtkpack(Gtk2::HBox->new(0,0),
-		           gtkpack(gtkset_justify(Gtk2::WrappedLabel->new($mandrake_release), "left")),
-			 ),
-		0, gtkpack(Gtk2::HSeparator->new),
+       gtkpack_(Gtk2::VBox->new(0, 5),
+                0, gtknew('Title1', label => $mandrake_release),
+                0, gtkset_justify(Gtk2::WrappedLabel->new(formatAlaTeX(N("To submit a bug report, click on the report button.  \nThis will open a web browser window on %s where you'll find a form to fill in.  The information displayed above will be transferred to that server.  \nThings useful to include in your report are the output of lspci, kernel version, and /proc/cpuinfo.", $wizard_name))), "left"),
 		0, gtkadd($table),
-		0, gtkpack(Gtk2::HBox->new(0,0),
-			   gtkpack(gtkset_justify(Gtk2::WrappedLabel->new(formatAlaTeX(N("To submit a bug report, click on the report button.  \nThis will open a web browser window on %s where you'll find a form to fill in.  The information displayed above will be transferred to that server.  \nThings useful to include in your report are the output of lspci, kernel version, and /proc/cpuinfo.", $wizard_name))), "left")),
-			  ),
 		0, gtkpack(Gtk2::HSeparator->new),
-		0, gtkpack_(Gtk2::HBox->new(0,0),
-			    0, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { system("drakhelp --id drakbug &") }),
-			    1, Gtk2::Label->new(""),
-			    0, gtksignal_connect(Gtk2::Button->new(N("Report")), clicked => sub {
+		0, gtkpack(create_hbox('edge'),
+			    gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { system("drakhelp --id drakbug &") }),
+                      gtkpack(create_hbox('end'),
+			       gtksignal_connect(Gtk2::Button->new(N("Report")), clicked => sub {
 							 my $options = "mdkbugreport=1";
 							 $options .= "&incident=1" if $incident;
 							 my $p = $package->get_text;
-							 my ($product, $version) = $p =~ /^(.*)-([^-]+-[^-]+mdk)$/;
+							 my ($product, $version) = $p =~ /^(.*)-([^-]+-[^-]+(mdk|mdv.*))$/; # FIXME: fragile!
 							 my $app = $comb_app->entry->get_text;
 							 my $component = $app ?
 							   if_(member($app, @all_drakxtools), $app) || $mdk_app->{$app} :
@@ -123,8 +116,8 @@ gtkadd($window->{window},
 							 run_program::raw({ detach => 1 }, '/usr/bin/www-browser', "$bugzilla?$options");
 						 }
 						),
-			    0, gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub { ugtk2->exit(0) }),
-			   )));
+			       gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub { ugtk2->exit(0) }),
+			   ))));
 
 if (defined $prog) {
     update_app($prog); 
@@ -149,13 +142,13 @@ sub update_app {
     my ($text) = @_;
     my $app_choice;
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
-    if (member($text,@all_drakxtools) || $text eq N("Standalone Tools")) {
+    if (member($text, @all_drakxtools) || $text eq N("Standalone Tools")) {
 	$app_choice = chomp_(`rpm -q drakxtools`);
     } elsif (exists($mdk_app->{$text})) {
 	$app_choice = get_package($mdk_app->{$text});
     } else {
+        $app_choice = get_package($text);
 	if (my $tool = { reverse %$mdk_app }->{$text}) {
-	    $app_choice = get_package($text);
 	    $prog = $tool;
 	}
     }
@@ -169,6 +162,7 @@ sub get_package {
     my ($rpm_package, $which_app);
     $rpm_package = $packages{$executable};
     if (!defined $rpm_package) {
+        local $ENV{PATH} = "$ENV{PATH}:/sbin:/usr/sbin";
         $which_app = chomp_(`which '$executable' 2> /dev/null`);
         # deush, rpm can takes some time aka it'll sleeps if something has opened rpm db !
         $rpm_package = $which_app eq "" ? N("Package not installed") : chomp_(`rpm -qf '$which_app' 2>&1`);

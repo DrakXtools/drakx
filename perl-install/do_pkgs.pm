@@ -13,7 +13,7 @@ sub ensure_is_installed {
     my ($do, $pkg, $o_file, $b_auto) = @_;
 
     if (! $o_file || ! -e "$::prefix$o_file") {
-	$do->in->ask_okcancel('', N("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
+	$do->in->ask_okcancel(N("Warning"), N("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
 	  or return if !$b_auto && $do->in;
 	if (!$do->install($pkg)) {
 	    $do->in->ask_warn(N("Error"), N("Could not install the %s package!", $pkg)) if $do->in;
@@ -21,7 +21,7 @@ sub ensure_is_installed {
 	}
     }
     if ($o_file && ! -e "$::prefix$o_file") {
-	$do->in->ask_warn('', N("Mandatory package %s is missing", $pkg)) if $do->in;
+	$do->in->ask_warn(N("Error"), N("Mandatory package %s is missing", $pkg)) if $do->in;
 	return;
     }
     1;
@@ -36,7 +36,11 @@ sub ensure_are_installed {
 	  or return if !$b_auto && $do->in;
 
     if (!$do->install(@not_installed)) {
-	$do->in->ask_warn(N("Error"), N("Could not install the %s package!", $not_installed[0]));
+	if ($do->in) {
+	    $do->in->ask_warn(N("Error"), N("Could not install the %s package!", $not_installed[0]));
+	} else {
+	    log::l("Could not install packages: " . join(' ', @not_installed));
+	}
 	return;
     }
     1;
@@ -46,15 +50,15 @@ sub ensure_binary_is_installed {
     my ($do, $pkg, $binary, $b_auto) = @_;
 
     if (!whereis_binary($binary, $::prefix)) {
-	$do->in->ask_okcancel('', N("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
+	$do->in->ask_okcancel(N("Warning"), N("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
 	  or return if !$b_auto && $do->in;
 	if (!$do->install($pkg)) {
-	    $do->in->ask_warn(N("Error"), N("Could not install the %s package!", $pkg));
+            $do->in->ask_warn(N("Error"), N("Could not install the %s package!", $pkg)) if $do->in;
 	    return;
 	}
     }
     if (!whereis_binary($binary, $::prefix)) {
-	$do->in->ask_warn('', N("Mandatory package %s is missing", $pkg));
+        $do->in->ask_warn(N("Error"), N("Mandatory package %s is missing", $pkg)) if $do->in;
 	return;
     }
     1;
@@ -79,20 +83,23 @@ sub is_installed {
     $do->are_installed($name);
 }
 
+#- takes something like "ati-kernel"
+#- returns:
+#- - the various ati-kernel-2.6.XX-XXmdk available for the installed kernels
+#- - dkms-ati if available
 sub check_kernel_module_packages {
-    my ($do, $base_name, $o_ext_name) = @_;
+    my ($do, $base_name) = @_;
     
     require bootloader;
-    my @rpms = $do->are_available(if_($base_name =~ /^(.*)-kernel$/, "dkms-$1"),
-                                  map {
-                                      $base_name . '-' . bootloader::vmlinuz2version($_);
-                                  } bootloader::installed_vmlinuz());
-    my @ext = $o_ext_name ? $do->are_available($o_ext_name) : ();
+    my @rpms = (
+	'dkms-' . $base_name,
+	map { $base_name . '-kernel-' . bootloader::vmlinuz2version($_) } bootloader::installed_vmlinuz()
+    );
+    @rpms = $do->are_available(@rpms) or return;
 
-    log::l("found kernel module packages $_") foreach @rpms, @ext;
+    log::l("those kernel module packages can be installed: " . join(' ', @rpms));
 
-    #- we want at least a kernel package and the ext package if specified
-    @rpms && (!$o_ext_name || @ext) && [ @rpms, @ext ];
+    \@rpms;
 }
 
 ################################################################################
@@ -107,7 +114,7 @@ sub new {
 
     $in->isa('interactive') or undef $in;
 
-    require pkgs;
+    require install::pkgs;
     bless { in => $in, o => $::o }, $type;
 }
 
@@ -121,26 +128,27 @@ sub install {
     log::l("do_pkgs_during_install::install");
     if ($::testing || $::globetrotter) {
 	log::l("i would install packages " . join(' ', @l));
-	return 1;
+	1;
     } else {
 	$do->{o}->pkg_install(@l);
+	1; #- HACK, need better fix in install::steps::pkg_install()
     }
 }
 
 sub what_provides {
     my ($do, $name) = @_;
-    map { $_->name } pkgs::packagesProviding($do->{o}{packages}, $name);
+    map { $_->name } install::pkgs::packagesProviding($do->{o}{packages}, $name);
 }
 
 sub are_available {
     my ($do, @pkgs) = @_;
-    grep { pkgs::packageByName($do->{o}{packages}, $_) } @pkgs;
+    grep { install::pkgs::packageByName($do->{o}{packages}, $_) } @pkgs;
 }
 
 sub are_installed {
     my ($do, @l) = @_;
     grep {
-	my $p = pkgs::packageByName($do->{o}{packages}, $_);
+	my $p = install::pkgs::packageByName($do->{o}{packages}, $_);
 	$p && $p->flag_available;
     } @l;
 }
@@ -149,8 +157,8 @@ sub remove {
     my ($do, @l) = @_;
 
     @l = grep {
-	my $p = pkgs::packageByName($do->{o}{packages}, $_);
-	pkgs::unselectPackage($do->{o}{packages}, $p) if $p;
+	my $p = install::pkgs::packageByName($do->{o}{packages}, $_);
+	install::pkgs::unselectPackage($do->{o}{packages}, $p) if $p;
 	$p;
     } @l;
     run_program::rooted($::prefix, 'rpm', '-e', @l);
@@ -160,7 +168,7 @@ sub remove_nodeps {
     my ($do, @l) = @_;
 
     @l = grep {
-	my $p = pkgs::packageByName($do->{o}{packages}, $_);
+	my $p = install::pkgs::packageByName($do->{o}{packages}, $_);
 	if ($p) {
 	    $p->set_flag_requested(0);
 	    $p->set_flag_required(0);
@@ -185,10 +193,6 @@ sub new {
 
 sub in {
     my ($do) = @_;
-    $do->{in} ||= do {
-	require interactive;
-	interactive->vnew;
-    };
     $do->{in};
 }
 
@@ -202,12 +206,12 @@ sub install {
 	return 1;
     }
 
-    my $_wait = $do->in->wait_message('', N("Installing packages..."));
-    $do->in->suspend;
-    log::explanations("installed packages @l");
+    my $_wait = $do->in && $do->in->wait_message(N("Please wait"), N("Installing packages..."));
+    $do->in->suspend if $do->in;
+    log::explanations("installing packages @l");
     #- --expect-install added in urpmi 4.6.11
     my $ret = system('urpmi', '--allow-medium-change', '--auto', '--no-verify-rpm', '--gui', '--expect-install', @l) == 0;
-    $do->in->resume;
+    $do->in->resume if $do->in;
     $ret;
 }
 
@@ -216,16 +220,15 @@ sub are_available {
     my %pkgs = map { $_ => 1 } @pkgs;
 
     eval {
-	local *_;
-	require urpm;
+	require urpm::media;
 	my $urpm = urpm->new;
-	$urpm->read_config(nocheck_access => 1);
-	foreach (grep { !$_->{ignore} } @{$urpm->{media} || []}) {
-	    $urpm->parse_synthesis("$urpm->{statedir}/synthesis.$_->{hdlist}");
-	}
+	$urpm->{log} = \&log::l;
+	urpm::media::configure($urpm, 
+			       nocheck_access => 1,
+			       no_skiplist => 1,
+			       no_second_pass => 1);
 	map { $_->name } grep { $pkgs{$_->name} } @{$urpm->{depslist} || []};
     };
-    
 }
 
 sub what_provides {
@@ -249,11 +252,11 @@ sub are_installed {
 
 sub remove {
     my ($do, @l) = @_;
-    my $_wait = $do->in->wait_message('', N("Removing packages..."));
-    $do->in->suspend;
-    log::explanations("removed packages @l");
+    my $_wait = $do->in && $do->in->wait_message(N("Please wait"), N("Removing packages..."));
+    $do->in->suspend if $do->in;
+    log::explanations("removing packages @l");
     my $ret = system('rpm', '-e', @l) == 0;
-    $do->in->resume;
+    $do->in->resume if $do->in;
     $ret;
 }
 

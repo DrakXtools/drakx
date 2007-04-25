@@ -13,7 +13,7 @@ sub load_deps($) {
     my ($file) = @_;
 
     local *F;
-    open F, $file or log::l("error opening $file: $!"), return 0;
+    open F, $file or warn "error opening $file: $!\n", return 0;
     foreach (<F>) {
 	my ($f, $deps) = split ':';
 	push @{$deps{$f}}, split ' ', $deps;
@@ -41,7 +41,7 @@ sub load {
     $conf{$name}{loaded} and return;
     eval { load($_, 'prereq') } foreach @{$deps{$name}};
 
-    system("packdrake -x /modules/modules.cz* /tmp $name$module_extension");
+    system("gzip -dc /modules/$name$module_extension.gz > /tmp/$name$module_extension");
     -r "/tmp/$name$module_extension" or die "can't find module $name\n";
     system("/sbin/insmod /tmp/$name$module_extension");
     my $retval = $?;
@@ -49,7 +49,7 @@ sub load {
     $retval and die("insmod $name failed");
 }
 
-!@ARGV || $ARGV[0] =~ /-h/ and die "usage: modprobe <module> [<options...>]\n";
+!@ARGV || $ARGV[0] =~ /^-?-h/ and die "usage: modprobe <module> [<options...>]\n";
 
 read_already_loaded();
 load_deps("/modules/modules.dep");

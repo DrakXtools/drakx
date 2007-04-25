@@ -6,6 +6,7 @@ use lib qw(/usr/lib/libDrakX);
 use standalone;
 
 use common;
+use mygtk2 qw(gtknew gtkset);
 use ugtk2 qw(:create :dialogs :helpers :wrappers);
 
 $ugtk2::wm_icon = "/usr/share/mcc/themes/default/drakperm-mdk.png";
@@ -28,14 +29,14 @@ my ($editable, $modified) = (0, 0);
 my @rules;
 
 #- Widget declaration
-my $w = ugtk2->new('drakperm');
+my $w = ugtk2->new(N("Security Permissions"));
 $w->{rwindow}->set_size_request(620, 400) unless $::isEmbedded;
 my $W = $w->{window};
 $W->signal_connect(delete_event => sub { ugtk2->exit });
 my $model = Gtk2::ListStore->new("Gtk2::Gdk::Pixbuf", ("Glib::String") x 5);
 my $permList = Gtk2::TreeView->new_with_model($model);
 
-my $pixbuf = gtkcreate_pixbuf('non-editable');
+my $pixbuf = gtknew('Pixbuf', file => 'non-editable');
 
 my @column_sizes = (150, 100, 100, 15, -1);
 
@@ -51,7 +52,8 @@ my $index = 0;
 load_perms();
 
 #- widgets settings
-my $combo_perm = Gtk2::ComboBox->new_with_strings([ sort(values %perm_l10n) ]);
+my $combo_perm_value = $perm_l10n{all};
+my $combo_perm = gtknew('ComboBox', list => [ sort(values %perm_l10n) ], text_ref => \$combo_perm_value);
 
 sub add_callback() {
     row_setting_dialog(N("Add a new rule"));
@@ -102,45 +104,43 @@ $permList->signal_connect(button_press_event => sub {
 
 my $tips = Gtk2::Tooltips->new;
 
-$W->add(gtkpack_(Gtk2::VBox->new(0,5),
-                 0, Gtk2::WrappedLabel->new(N("Here you can see files to use in order to fix permissions, owners, and groups via msec.\nYou can also edit your own rules which will owerwrite the default rules."), 0.5),
-                 1, gtkadd(Gtk2::Frame->new,
-                           gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
-                                    0, Gtk2::WrappedLabel->new(N("The current security level is %s.
-Select permissions to see/edit", $level), 0.5),
-                                    0, gtkpack_(gtkset_layout(Gtk2::HButtonBox->new, 'spread'),
+$W->add(gtknew('VBox', spacing => 5, children => [
+                 0, gtknew('Label_Left', text => N("Here you can see files to use in order to fix permissions, owners, and groups via msec.\nYou can also edit your own rules which will owerwrite the default rules."), alignment => [ 0.5, 0 ]),
+                 1, gtknew('VBox', border_width => 0, children => [
+                                    0, gtknew('Label_Left', text => N("The current security level is %s.
+Select permissions to see/edit", $level), alignment => [ 0, 0 ]),
+                                    0, gtknew('HButtonBox', layout => 'start', children => [
                                                 0, $combo_perm,
-                                               ),
-                                    1, create_scrolled_window($permList),
-                                    0, my $up_down_box = gtkadd(Gtk2::HBox->new(0, 5), @buttons =
+                                               ]),
+                                    0, gtknew('Label'), 
+                                    1, gtknew('ScrolledWindow', child => $permList),
+                                    0, my $up_down_box = gtknew('HBox', spacing => 5, children_loose => [ @buttons =
                                                                 map {
                                                                     gtkset_tip($tips, 
-                                                                               gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[2]),
+                                                                               gtknew('Button', text => $_->[0], clicked => $_->[2]),
                                                                                $_->[1]);
                                                                 } ([ N("Up"), N("Move selected rule up one level"), sub { move_callback('up') } ], 
                                                                    [ N("Down"), N("Move selected rule down one level"), sub { move_callback('down') } ], 
                                                                    [ N("Add a rule"), N("Add a new rule at the end"), \&add_callback ],
                                                                    [ N("Delete"), N("Delete selected rule"), \&del_callback ], 
-                                                                   [ N("Edit"), N("Edit current rule"), \&edit_callback ])),
-                                    0, Gtk2::VBox->new,
-                                   ),
-                          ),
+                                                                   [ N("Edit"), N("Edit current rule"), \&edit_callback ])]),
+                                    0, gtknew('VBox'),
+                                   ]),
                  0, create_okcancel({
                                      cancel_clicked => sub { ugtk2->exit },
                                      ok_clicked => \&save_perm,
                                     },
                                     undef, undef, '',
-                                    [ N("Help"), sub { unless (fork()) { exec("drakhelp --id drakperm") } } ],
+                                    [ N("Help"), sub { run_program::raw({ detach => 1 }, 'drakhelp', '--id', 'drakperm') } ],
                                    )
-                )
+                ])
        );
 $W->show_all;
 $w->{rwindow}->set_position('center') unless $::isEmbedded;
 
-$combo_perm->entry->set_text($perm_l10n{all});
 display_perm('all');
 my $_combo_sig = $combo_perm->entry->signal_connect(changed => sub {
-                                                        my $class = $rev_perm_l10n{$combo_perm->entry->get_text};
+                                                        my $class = $rev_perm_l10n{$combo_perm_value};
                                                         $permList->set_reorderable($class eq 'editable');
                                                         display_perm($class , @_);
                                                     });
@@ -234,13 +234,13 @@ sub load_perms() {
 sub row_setting_dialog {
     my ($title, $o_iter) = @_;
     
-    my $dlg = Gtk2::Dialog->new;
+    my $dlg = gtknew('Dialog');
     $dlg->set_transient_for($w->{real_window});
     $dlg->set_title($title);
     $dlg->set_modal(1);
 #    $dlg->set_resizable(0);
-    my $browse = Gtk2::Button->new(N("browse"));
-    my $file        = Gtk2::Entry->new;
+    my $browse = gtknew('Button', text => N("browse"));
+    my $file        = gtknew('Entry');
     my ($other, $group, $user, $s) = $o_iter ? reverse(split(//, $model->get($o_iter, 4))) : ();
     my @bits = qw(sticky gid suid);
     my @rights = qw(read write execute);
@@ -280,22 +280,21 @@ sub row_setting_dialog {
     my $alrd_exsts = defined $o_iter;
     $file->set_text($model->get($o_iter, 1)) if $o_iter;
 
-    my $users  = Gtk2::ComboBox->new_with_strings([ my @users = get_user_or_group('users') ]);
+    my $users  = gtknew('ComboBox', list => [ my @users = get_user_or_group('users') ]);
     $users->entry->set_text($model->get($o_iter, 2)) if $o_iter;
     $users->set_wrap_width(3);
      
-    my $groups = Gtk2::ComboBox->new_with_strings([ my @groups = get_user_or_group('groups') ]);
+    my $groups = gtknew('ComboBox', list => [ my @groups = get_user_or_group('groups') ]);
     $groups->entry->set_text($model->get($o_iter, 3)) if $o_iter;
     $groups->set_wrap_width(3);
 
-    my $id_box = gtkadd(Gtk2::HBox->new,
-                        Gtk2::Label->new(N("User:")),
-                        $users,
-                        Gtk2::Label->new(N("Group:")),
-                        $groups,
+    my $id_box = gtknew('Table', homogeneous => 0, xpadding => 0.1, ypadding => 0, border_width => 0, children => [
+                        [ gtknew('Label_Left', text => N("User:")), $users ],
+                        [ gtknew('Label_Left', text => N("Group:")), $groups ],
+                        ]
                        );
 
-    my $usr_check = gtksignal_connect(gtkset_tip($tips, Gtk2::CheckButton->new(N("Current user")),
+    my $usr_check = gtksignal_connect(gtkset_tip($tips, gtknew('CheckButton', text => N("Current user")),
                                                  N("When checked, owner and group will not be changed")),
                                       clicked => sub { $id_box->set_sensitive(!$_[0]->get_active) });
      
@@ -320,48 +319,47 @@ sub row_setting_dialog {
     my %perms;
 
     gtkpack_($dlg->vbox,
-             0, gtkadd(Gtk2::Frame->new(N("Path")),
-                       gtkpack_(gtkset_border_width(Gtk2::HBox->new, 3),
+             0, gtknew('Title2', label => N("Path")),
+             0, gtknew('HBox', border_width => 18, children => [
                                 1, $file,
                                 0, $browse
-                               )
+                               ]
                       ),
-             0, gtkadd(Gtk2::Frame->new(N("Property")),
-                       gtkadd(gtkset_border_width(Gtk2::VBox->new, 3),
-                              $usr_check,
-                              $id_box,
-                             ),
+             0, gtknew('Title2', label => N("Property")),
+             0, gtknew('VBox', border_width => 18, children => [
+                                0, $usr_check,
+                               ]
                       ),
-             1, gtkadd(Gtk2::Frame->new(N("Permissions")),
-                       gtkpack(gtkset_border_width(Gtk2::HBox->new, 3),
-                               gtkadd(Gtk2::VBox->new,
-                                      Gtk2::Label->new(""),
-                                      map { Gtk2::Label->new($checks{$_}{label}) } @rights,
-                                     ),
+             0, $id_box,
+             0, gtknew('Title2', label => N("Permissions")),
+             1, gtknew('HBox', border_width => 0, children_loose => [
+                               gtknew('VBox', border_width => 0, children_loose => [
+                                      gtknew('Label', text => ""),
+                                      map { gtknew('Label_Left', text => $checks{$_}{label}, alignment => [ 0, 0 ]) } @rights,
+                                     ]),
                                (map {
                                    my $owner = $_;
                                    $perms{$owner} = { get_right($rights{$owner}) };
-                                   my $vbox = gtkadd(Gtk2::VBox->new, 
-                                                     Gtk2::Label->new($rights_labels{$owner}),
+                                   my $vbox = gtknew('VBox', children_loose => [ 
+                                                     gtknew('Label', text => $rights_labels{$owner}),
                                                      map {
                                                          my $c = $_;
                                                          my $active = $perms{$owner}{$c};
-                                                         $perms{$owner}{$c} = Gtk2::CheckButton->new;
+                                                         $perms{$owner}{$c} = gtknew('CheckButton');
                                                          $tips->set_tip($perms{$owner}{$c},
                                                                         $checks{$c}{tip}{$owner},
                                                                        );
                                                          gtkset_active($perms{$owner}{$c}, $active);
                                                      } @rights,
-                                                    );
+                                                    ]);
                                    
                                    $vbox;
                                } @owners),
-                               gtkpack(Gtk2::VBox->new,
-                                       Gtk2::Label->new(' '),
-                                       map { $perms{$_} = gtkset_tip($tips, Gtk2::CheckButton->new($checks{$_}{label}), $checks{$_}{tip}) } @bits,
-                                      ),
-                              ),
-                      ),
+                               gtknew('VBox', children_loose => [
+                                       gtknew('Label', text => ' '),
+                                       map { $perms{$_} = gtkset(gtknew('CheckButton', text => $checks{$_}{label}), tip => $checks{$_}{tip}) } @bits,
+                                      ]),
+                              ]),
             );
     $perms{sticky}->set_active($s_right{execute});
     $perms{gid}->set_active($s_right{write});

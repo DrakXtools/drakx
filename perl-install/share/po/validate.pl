@@ -144,9 +144,9 @@ foreach (get_file("fr.po"))
     /\s*#/ and next;
 
     check('fr', 'ez\s+\S+ez', 'infinitive-form-with-ez');
-    check('fr', 'è[ \.,;:]', 'grave-accent-at-end-of-word');
-    check('fr', '\b\w*[éêè][éêè]\w*\b', 'strange-accents-succession',
-	  map { match($_) } qw(créé réécrire));
+    check('fr', 'Ã¨[ \.,;:]', 'grave-accent-at-end-of-word');
+    check('fr', '\b\w*[Ã©ÃªÃ¨][Ã©ÃªÃ¨]\w*\b', 'strange-accents-succession',
+	  map { match($_) } qw(crÃ©Ã© rÃ©Ã©crire));
     mixed_case($_);
     uppercase_after_comma($_);
     lowercase_after_dot($_);

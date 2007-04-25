@@ -233,12 +233,8 @@ int total_memory(void)
 
 int image_has_stage2()
 {
-#ifdef MANDRAKE_MOVE
-        return access(IMAGE_LOCATION "/live_tree.clp", R_OK) == 0;
-#else
-	return access(CLP_FILE_REL(IMAGE_LOCATION "/"), R_OK) == 0 ||
+	return access(COMPRESSED_FILE_REL(IMAGE_LOCATION "/"), R_OK) == 0 ||
 	       access(IMAGE_LOCATION "/" LIVE_LOCATION_REL, R_OK) == 0;
-#endif
 }
 
 int ramdisk_possible(void)
@@ -251,12 +247,12 @@ int ramdisk_possible(void)
 	}
 }
 
-int clp_preload(void)
+int compressed_image_preload(void)
 {
 	if (total_memory() > (IS_RESCUE ? MEM_LIMIT_RESCUE_PRELOAD : MEM_LIMIT_DRAKX_PRELOAD))
 		return 1;
 	else {
-		log_message("warning, not preloading clp due to low mem");
+		log_message("warning, not preloading compressed due to low mem");
 		return 0;
 	}
 }
@@ -316,73 +312,124 @@ enum return_type copy_file(char * from, char * to, void (*callback_func)(int ove
         }
 }
 
-enum return_type mount_clp(char *clp,  char *location_mount)
+enum return_type recursiveRemove(char *file) 
 {
-	if (lomount(clp, location_mount, NULL, 1)) {
+	struct stat sb;
+
+	if (lstat(file, &sb) != 0) {
+		log_message("failed to stat %s: %d", file, errno);
+		return RETURN_ERROR;
+	}
+
+	/* only descend into subdirectories if device is same as dir */
+	if (S_ISDIR(sb.st_mode)) {
+		char * strBuf = alloca(strlen(file) + 1024);
+		DIR * dir;
+		struct dirent * d;
+
+		if (!(dir = opendir(file))) {
+			log_message("error opening %s: %d", file, errno);
+			return RETURN_ERROR;
+		}
+		while ((d = readdir(dir))) {
+			if (!strcmp(d->d_name, ".") || !strcmp(d->d_name, ".."))
+				continue;
+
+			strcpy(strBuf, file);
+			strcat(strBuf, "/");
+			strcat(strBuf, d->d_name);
+
+			if (recursiveRemove(strBuf) != 0) {
+				closedir(dir);
+				return RETURN_ERROR;
+			}
+		}
+		closedir(dir);
+
+		if (rmdir(file)) {
+			log_message("failed to rmdir %s: %d", file, errno);
+			return RETURN_ERROR;
+		}
+	} else {
+		if (unlink(file) != 0) {
+			log_message("failed to remove %s: %d", file, errno);
+			return RETURN_ERROR;
+		}
+	}
+	return RETURN_OK;
+}
+
+enum return_type recursiveRemove_if_it_exists(char *file) 
+{
+	struct stat sb;
+
+	if (lstat(file, &sb) != 0) {
+		/* if file doesn't exist, simply return OK */
+		return RETURN_OK;
+	}
+
+	return recursiveRemove(file);
+}
+
+enum return_type mount_compressed_image(char *compressed_image,  char *location_mount)
+{
+	if (lomount(compressed_image, location_mount, NULL, 1)) {
                 stg1_error_message("Could not mount compressed loopback :(.");
                 return RETURN_ERROR;
         }
 	return RETURN_OK;
 }
 
-enum return_type preload_mount_clp(int clp_fd, int clp_size, char *clp_name, char *location_mount)
+enum return_type preload_mount_compressed_fd(int compressed_fd, int image_size, char *image_name, char *location_mount)
 {
 	int ret;
-	char *clp_tmpfs = asprintf_("%s/tmp/%s", SLASH_LOCATION, clp_name);
-#ifdef MANDRAKE_MOVE
-	static int count = 0;
-	char buf[5000];
-	sprintf(buf, "Loading program into memory (part %d)...", ++count);
-#else
+	char *compressed_tmpfs = asprintf_("/tmp/%s", image_name);
 	char *buf = "Loading program into memory...";
-#endif
-	init_progression(buf, clp_size);
-	ret = save_fd(clp_fd, clp_tmpfs, update_progression);
+	init_progression(buf, image_size);
+	ret = save_fd(compressed_fd, compressed_tmpfs, update_progression);
 	end_progression();
 	if (ret != RETURN_OK)
 		return ret;
 	
-	return mount_clp(clp_tmpfs, location_mount);
+	return mount_compressed_image(compressed_tmpfs, location_mount);
 }
 
-enum return_type mount_clp_may_preload(char *clp_name, char *location_mount, int preload)
+enum return_type mount_compressed_image_may_preload(char *image_name, char *location_mount, int preload)
 {
-	char *clp = asprintf_("%s/%s", CLP_LOCATION, clp_name);
+	char *compressed_image = asprintf_("%s/%s", COMPRESSED_LOCATION, image_name);
 
-	log_message("mount_clp_may_preload: %s into %s (preload = %d)", clp, location_mount, preload);
+	log_message("mount_compressed_may_preload: %s into %s (preload = %d)", compressed_image, location_mount, preload);
 
-        if (access(clp, R_OK) != 0) return RETURN_ERROR;
+        if (access(compressed_image, R_OK) != 0) return RETURN_ERROR;
 
         if (preload) {
-		int clp_fd = open(clp, O_RDONLY);
-		if (clp_fd != -1) {
-			return preload_mount_clp(clp_fd, file_size(clp), clp_name, location_mount);
+		int compressed_fd = open(compressed_image, O_RDONLY);
+		if (compressed_fd != -1) {
+			return preload_mount_compressed_fd(compressed_fd, file_size(compressed_image), image_name, location_mount);
 		} else {
-			log_perror(clp);
+			log_perror(compressed_image);
 			return RETURN_ERROR;
 		}
 	} else {
-                return mount_clp(clp, location_mount);
+		return mount_compressed_image(compressed_image, location_mount);
 	}
 }
 
-#ifndef MANDRAKE_MOVE
-enum return_type may_load_clp(void)
+enum return_type may_load_compressed_image(void)
 {
 	if (!IS_RESCUE && access(IMAGE_LOCATION "/" LIVE_LOCATION_REL, R_OK) == 0) {
 		/* LIVE install */
 		return RETURN_OK;
 	} else {
-		/* CLP install */
-		return mount_clp_may_preload(CLP_NAME(""), STAGE2_LOCATION, clp_preload());
+		/* compressed install */
+		return mount_compressed_image_may_preload(COMPRESSED_NAME(""), STAGE2_LOCATION, compressed_image_preload());
 	}
 }
 
-enum return_type load_clp_fd(int fd, int size)
+enum return_type load_compressed_fd(int fd, int size)
 {
-	return preload_mount_clp(fd, size, CLP_NAME(""), STAGE2_LOCATION);
+	return preload_mount_compressed_fd(fd, size, COMPRESSED_NAME(""), STAGE2_LOCATION);
 }
-#endif
 
 /* pixel's */
 void * memdup(void *src, size_t size)
@@ -396,7 +443,7 @@ void * memdup(void *src, size_t size)
 
 void add_to_env(char * name, char * value)
 {
-        FILE* fakeenv = fopen(SLASH_LOCATION "/tmp/env", "a");
+        FILE* fakeenv = fopen("/tmp/env", "a");
         if (fakeenv) {
                 char* e = asprintf_("%s=%s\n", name, value);
                 fwrite(e, 1, strlen(e), fakeenv);
@@ -543,9 +590,10 @@ char * asprintf_(const char *msg, ...)
 {
         int n;
         char * s;
+        char dummy;
         va_list arg_ptr;
         va_start(arg_ptr, msg);
-        n = vsnprintf(0, 1000000, msg, arg_ptr);
+        n = vsnprintf(&dummy, sizeof(dummy), msg, arg_ptr);
         va_start(arg_ptr, msg);
         if ((s = malloc(n + 1))) {
                 vsnprintf(s, n + 1, msg, arg_ptr);
