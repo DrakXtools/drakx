@@ -172,54 +172,38 @@ void end_progression_raw(void)
 }
 
 
-enum return_type ask_from_list_comments(char *msg, char ** elems, char ** elems_comments, char ** choice)
+enum return_type ask_from_list_index(char *msg, char ** elems, char ** elems_comments, int * answer)
 {
 	char * items[500];
-	int answer = 0, rc;
-	char ** sav_elems = elems;
-	int i;
+	int rc;
 
-	i = 0;
-	while (elems && *elems) {
-		int j = (*elems_comments) ? strlen(*elems_comments) : 0;
-		items[i] = malloc(sizeof(char) * (strlen(*elems) + j + 4));
-		strcpy(items[i], *elems);
-		if (*elems_comments) {
-			strcat(items[i], " (");
-			strcat(items[i], *elems_comments);
-			strcat(items[i], ")");
-		}
-		elems_comments++;
-		i++;
-		elems++;
+	if (elems_comments) {
+	    int i;
+
+	    i = 0;
+	    while (elems && *elems) {
+		    int j = (*elems_comments) ? strlen(*elems_comments) : 0;
+		    items[i] = malloc(sizeof(char) * (strlen(*elems) + j + 4));
+		    strcpy(items[i], *elems);
+		    if (*elems_comments) {
+			    strcat(items[i], " (");
+			    strcat(items[i], *elems_comments);
+			    strcat(items[i], ")");
+		    }
+		    elems_comments++;
+		    i++;
+		    elems++;
+	    }
+	    items[i] = NULL;
 	}
-	items[i] = NULL;
 
-	rc = newtWinMenu("Please choose...", msg, 52, 5, 5, 7, items, &answer, "Ok", "Cancel", NULL);
-
-	if (rc == 2)
-		return RETURN_BACK;
-
-	*choice = strdup(sav_elems[answer]);
-
-	return RETURN_OK;
-}
-
-
-enum return_type ask_from_list(char *msg, char ** elems, char ** choice)
-{
-	int answer = 0, rc;
-
-	rc = newtWinMenu("Please choose...", msg, 52, 5, 5, 7, elems, &answer, "Ok", "Cancel", NULL);
+	rc = newtWinMenu("Please choose...", msg, 52, 5, 5, 7, elems_comments ? items : elems, answer, "Ok", "Cancel", NULL);
 
 	if (rc == 2)
 		return RETURN_BACK;
 
-	*choice = strdup(elems[answer]);
-
 	return RETURN_OK;
 }
-
 
 enum return_type ask_yes_no(char *msg)
 {

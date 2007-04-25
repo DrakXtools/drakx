@@ -1,5 +1,4 @@
-/*
- * Guillaume Cottenceau (gc@mandrakesoft.com)
+ Cottenceau (gc@mandrakesoft.com)
  *
  * Copyright 2000 Mandrakesoft
  *
@@ -743,100 +742,106 @@ static enum return_type get_http_proxy(char **http_proxy_host, char **http_proxy
 }
 
 
-static int mirrorlist_entry_split(const char *entry, char *mirror[4]) /* mirror = { medium, protocol, host, path } */
+static int url_split(const char *url, const char *protocol, char **host, char **path)
 {
-	char *medium_sep, *protocol_sep, *host_sep, *path_sep;
+	char *protocol_sep, *host_sep;
 
-	medium_sep = strchr(entry, ':');
-	if (!medium_sep || medium_sep == entry) {
-		log_message("NETWORK: no medium in \"%s\"", entry);
+	protocol_sep = strstr(url, "://");
+	if (!protocol_sep) {
+		log_message("NETWORK: no protocol in \"%s\"", url);
 		return -1;
 	}
 
-	mirror[0] = strndup(entry, medium_sep - entry);
-	entry = medium_sep + 1;
+	if (strncmp(protocol, url, protocol_sep - url))
+		return -1;
 
-	protocol_sep = strstr(entry, "://");
-	if (!protocol_sep || protocol_sep == entry) {
-		log_message("NETWORK: no protocol in \"%s\"", entry);
+	url = protocol_sep + 3;
+	host_sep = strchr(url, '/');
+	if (!host_sep || host_sep == url) {
+		log_message("NETWORK: no hostname in \"%s\"", url);
 		return -1;
 	}
 
-	mirror[1] = strndup(entry, protocol_sep - entry);
-	entry = protocol_sep + 3;
-
-	host_sep = strchr(entry, '/');
-	if (!host_sep || host_sep == entry) {
-		log_message("NETWORK: no hostname in \"%s\"", entry);
-		return -1;
-	}
-
-	mirror[2] = strndup(entry, host_sep - entry);
-	entry = host_sep;
-
-	path_sep = strstr(entry, "/media/main");
-	if (!path_sep || path_sep == entry) {
-		log_message("NETWORK: this path isn't valid : \"%s\"", entry);
-		return -1;
-	}
-
-	mirror[3] = strndup(entry, path_sep - entry);
+	*host = strndup(url, host_sep - url);
+	*path = strdup(host_sep);
 
 	return 0;
 }
 
-
 #define MIRRORLIST_MAX_ITEMS 500
-#define MIRRORLIST_MAX_MEDIA 10
+typedef char *mirrorlist_t[2][MIRRORLIST_MAX_ITEMS+1];
 
-static int choose_mirror_from_host_list(char *mirrorlist[][4], const char *protocol, char *medium, char **selected_host, char **filepath)
+static enum return_type get_mirrorlist(mirrorlist_t mirrorlist, int start, char *version, const char *protocol, char *http_proxy_host, char *http_proxy_port) {
+	int fd, size, line_pos = 0;
+	char path[1024];
+	char line[1024];
+	char type[100] = DISTRIB_TYPE;
+	int mirror_idx = start;
+
+	int use_http_proxy = http_proxy_host && http_proxy_port && !streq(http_proxy_host, "") && !streq(http_proxy_port, "");
+	lowercase(type);
+	snprintf(path, sizeof(path) -1, "%s/%s.%s.%s.list", MIRRORLIST_PATH, type, version, ARCH);
+
+	fd = http_download_file(MIRRORLIST_HOST, path, &size, use_http_proxy ? "http" : NULL, http_proxy_host, http_proxy_port);
+	if (fd < 0) {
+		log_message("HTTP: unable to get mirrors list from %s (%s)", MIRRORLIST_HOST, path);
+		return RETURN_ERROR;
+	}
+
+	while (read(fd, line + line_pos, 1) > 0) {
+		if (line[line_pos] == '\n') {
+			char *url;
+			line[line_pos] = '\0';
+			line_pos = 0;
+
+			/* skip medium if it looks like an updates one */
+			if (strstr(line, ",type=updates,"))
+				continue;
+
+			url = strstr(line, ",url=");
+			if (!url)
+				continue;
+			url += 5;
+
+			if (url_split(url, protocol, &mirrorlist[0][mirror_idx], &mirrorlist[1][mirror_idx]) < 0)
+				continue;
+
+			mirror_idx++;
+		} else {
+			line_pos++;
+		}
+
+		if (mirror_idx >= MIRRORLIST_MAX_ITEMS)
+			break;
+	}
+	close(fd);
+
+	mirrorlist[0][mirror_idx] = NULL;
+	mirrorlist[1][mirror_idx] = NULL;
+
+        return RETURN_OK;
+}
+
+static int choose_mirror_from_host_list(mirrorlist_t mirrorlist, char **selected_host, char **filepath)
 {
 	enum return_type results;
-	char *hostlist[MIRRORLIST_MAX_ITEMS+1] = { "Specify the mirror manually", "-----" };
-	int hostlist_index = 2, mirrorlist_index;
-
-	/* select hosts matching medium and protocol */
-	for (mirrorlist_index = 0; mirrorlist[mirrorlist_index][0]; mirrorlist_index++) {
-		if (!strcmp(mirrorlist[mirrorlist_index][0], medium) &&
-		    !strcmp(mirrorlist[mirrorlist_index][1], protocol)) {
-			hostlist[hostlist_index] = mirrorlist[mirrorlist_index][2];
-			hostlist_index++;
-			if (hostlist_index == MIRRORLIST_MAX_ITEMS)
-				break;
-		}
-	}
-	hostlist[hostlist_index] = NULL;
+	int mirror_idx = 0;
 
 	do {
-		results = ask_from_list("Please select a mirror from the list below.",
-					hostlist, selected_host);
+		results = ask_from_list_index("Please select a mirror from the list below.",
+					      mirrorlist[0], NULL, &mirror_idx);
 
 		if (results == RETURN_BACK) {
 			return RETURN_ERROR;
 		} else if (results == RETURN_OK) {
-			if (!strcmp(*selected_host, hostlist[0])) {
+			if (mirror_idx == 0) {
 				/* enter the mirror manually */
 				return RETURN_OK;
-			} else if (!strcmp(*selected_host, hostlist[1])) {
-				/* the separator has been selected */
-				results = RETURN_ERROR;
-				continue;
 			}
+			*selected_host = strdup(mirrorlist[0][mirror_idx]);
+			*filepath = strdup(mirrorlist[1][mirror_idx]);
+			return RETURN_OK;
 		}
-
-		/* select the path according to medium, protocol and host */
-		for (mirrorlist_index = 0; mirrorlist[mirrorlist_index][0]; mirrorlist_index++) {
-			if (!strcmp(mirrorlist[mirrorlist_index][0], medium) &&
-			    !strcmp(mirrorlist[mirrorlist_index][1], protocol) &&
-			    !strcmp(mirrorlist[mirrorlist_index][2], *selected_host)) {
-				*filepath = mirrorlist[mirrorlist_index][3];
-				return RETURN_OK;
-			}
-		}
-
-		stg1_info_message("Unable to find the path for this mirror, please select another one");
-		results = RETURN_ERROR;
-		
 	} while (results == RETURN_ERROR);
 
 	return RETURN_ERROR;
@@ -846,70 +851,29 @@ static int choose_mirror_from_host_list(char *mirrorlist[][4], const char *proto
 static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port, const char *protocol, char **selected_host, char **filepath)
 {
 	enum return_type results;
-	char *mirrorlist[MIRRORLIST_MAX_ITEMS+1][4];
-	int mirrorlist_number = 0;
-	char *medialist[MIRRORLIST_MAX_MEDIA+1] = { "Specify the mirror manually", "-----" };
-	int media_number = 2;
-	char *selected_medium;
-	int fd, size, line_pos = 0;
-	char line[500];
-	int use_http_proxy = http_proxy_host && http_proxy_port && !streq(http_proxy_host, "") && !streq(http_proxy_port, "");
-
-	fd = http_download_file(MIRRORLIST_HOST, MIRRORLIST_PATH, &size, use_http_proxy ? "http" : NULL, http_proxy_host, http_proxy_port);
-	if (fd < 0) {
-		log_message("HTTP: unable to get mirrors list");
-		return RETURN_ERROR;
-	}
-
-	while (read(fd, line + line_pos, 1) > 0) {
-		if (line[line_pos] == '\n') {
-			line[line_pos] = '\0';
-			line_pos = 0;
-
-			/* skip medium if it looks like an updates one */
-			if (strstr(line, "updates"))
-				continue;
-
-			if (mirrorlist_entry_split(line, mirrorlist[mirrorlist_number]) < 0)
-				continue;
-
-			/* add medium in media list if different from previous one */
-			if (media_number == 2 ||
-			    strcmp(mirrorlist[mirrorlist_number][0], medialist[media_number-1])) {
-				medialist[media_number] = mirrorlist[mirrorlist_number][0];
-				media_number++;
-			}
-
-			mirrorlist_number++;
-		} else {
-			line_pos++;
-		}
-
-		if (mirrorlist_number >= MIRRORLIST_MAX_ITEMS || media_number >= MIRRORLIST_MAX_MEDIA)
-			break;
-	}
-	close(fd);
-
-	mirrorlist[mirrorlist_number][0] = NULL;
-	medialist[media_number] = NULL;
+	char *versions[] = { "Specify the mirror manually", DISTRIB_VERSION, "cooker", NULL };
+	char *version = DISTRIB_VERSION;
 
 	do {
-		results = ask_from_list("Please select a medium from the list below.",
-					medialist, &selected_medium);
+		results = ask_from_list("Please select a medium from the list below.", versions, &version);
 
 		if (results == RETURN_BACK) {
 			return RETURN_BACK;
 		} else if (results == RETURN_OK) {
-			if (!strcmp(selected_medium, medialist[0])) {
+			if (!strcmp(version, versions[0])) {
 				/* enter the mirror manually */
 				return RETURN_OK;
-			} else if (!strcmp(selected_medium, medialist[1])) {
-				/* the separator has been selected */
-				results = RETURN_ERROR;
-				continue;
 			} else {
 				/* a medium has been selected */
-				results = choose_mirror_from_host_list(mirrorlist, protocol, selected_medium, selected_host, filepath);
+				mirrorlist_t mirrorlist;
+				mirrorlist[0][0] = "Specify the mirror manually";
+				mirrorlist[1][0] = NULL;
+
+				results = get_mirrorlist(mirrorlist, 1, version, protocol, http_proxy_host, http_proxy_port);
+				if (results == RETURN_ERROR)
+					return RETURN_ERROR;
+
+				results = choose_mirror_from_host_list(mirrorlist, selected_host, filepath);
 			}
 		}
 	} while (results == RETURN_ERROR);
@@ -943,7 +907,7 @@ enum return_type intf_select_and_up()
 		sel_intf->is_up = 0;
 		num_interfaces++;
 	}
-	
+
 	results = bringup_networking(sel_intf);
 
 	if (results == RETURN_OK)
