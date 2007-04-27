@@ -872,6 +872,7 @@ sub _install_raw {
 				my $medium = packageMedium($packages, $pkg);
 				my $f = $pkg && install::media::rel_rpm_file($medium, $pkg->filename);
 				print $LOG "$f\n";
+				undef $fd;
 				$fd = getFile_($medium->{phys_medium}, $f);
 				$fd ? fileno $fd : -1;
 			    }, callback_close => sub {
