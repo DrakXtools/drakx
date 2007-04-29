@@ -1292,7 +1292,7 @@ sub format_part_info {
 
 sub format_part_info_short { 
     my ($hd, $part) = @_;
-    isEmpty($part) ? N("Empty space on %s (%s)", $hd->{device}, formatXiB($part->{size}, 512))
+    isEmpty($part) ? N("Free space on %s (%s)", $hd->{device}, formatXiB($part->{size}, 512))
                    : partition_table::description($part);
 }
 
