@@ -588,7 +588,7 @@ sub next {
 sub next_start {
     my ($hd, $part) = @_;
     my $next = &next($hd, $part);
-    $next ? $next->{start} : $hd->{totalsectors};
+    $next ? $next->{start} : $hd->last_usable_sector;
 }
 
 sub load {
