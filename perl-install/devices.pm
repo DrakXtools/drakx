@@ -208,9 +208,8 @@ sub symlink_now_and_register {
     my $if = $if_struct->{device};
 
     #- add a specific udev script, we can't do it with a udev rule,
-    #- eg, ttySL0 is a symlink
-    output_with_perm("$::prefix/etc/udev/conf.d/$of.conf", 0755, "ln -sf $if /dev/$of\n")
-      if $of !~ /mouse/;
+    #- eg, ttySL0 is a symlink created by a daemon
+    output_with_perm("$::prefix/etc/udev/devices.d/$of.nodes", 0644, "L $of $if\n");
 
     symlinkf($if, "$::prefix/dev/$of");
 }
