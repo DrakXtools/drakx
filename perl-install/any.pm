@@ -1261,21 +1261,6 @@ sub alloc_raw_device {
     $raw_dev;
 }
 
-sub config_dvd {
-    my ($prefix) = @_;
-
-    my @dvds = grep { detect_devices::isDvdDrive($_) } detect_devices::cdroms() or return;
-
-    log::l("configuring DVD: " . join(" ", map { $_->{device} } @dvds));
-    #- create /dev/dvd symlink
-    each_index {
-	devices::symlink_now_and_register($_, 'dvd' . ($::i ? $::i + 1 : ''));
-    } @dvds;
-
-    my $raw_dev = alloc_raw_device($prefix, 'dvd');
-    symlink($raw_dev, "$prefix/dev/rdvd");
-}
-
 sub config_mtools {
     my ($prefix) = @_;
     my $file = "$prefix/etc/mtools.conf";

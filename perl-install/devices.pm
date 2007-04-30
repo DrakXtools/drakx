@@ -210,7 +210,7 @@ sub symlink_now_and_register {
     #- add a specific udev script, we can't do it with a udev rule,
     #- eg, ttySL0 is a symlink
     output_with_perm("$::prefix/etc/udev/conf.d/$of.conf", 0755, "ln -sf $if /dev/$of\n")
-      if $of !~ /dvd|mouse/;
+      if $of !~ /mouse/;
 
     symlinkf($if, "$::prefix/dev/$of");
 }

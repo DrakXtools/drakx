@@ -453,7 +453,6 @@ Consoles 1,3,4,7 may also contain interesting information";
     #- for mandrake_firstime
     touch "$::prefix/var/lock/TMP_1ST";
 
-    any::config_dvd($::prefix);
     any::config_mtools($::prefix);
 
     #- make sure wins is disabled in /etc/nsswitch.conf
