@@ -1127,7 +1127,7 @@ sub write {
 
     configure_hal($locale) if !$b_user_only;
 
-    run_program::rooted($::prefix, 'grub-gfxmenu', '--quiet', '--lang', $locale->{lang});
+    run_program::rooted($::prefix, 'grub-gfxmenu', '--quiet', '--lang', $locale->{lang}) if !$b_user_only;
     
     my $charset = l2charset($locale->{lang});
     my $qtglobals = $b_user_only ? "$ENV{HOME}/.qt/qtrc" : "$::prefix/etc/qtrc";
