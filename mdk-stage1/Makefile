@@ -133,12 +133,12 @@ STAGE1OBJS-FULL = $(subst .c,-FULL.o,$(STAGE1_ALLSRC))
 
 BINS = init stage1 dhcp-client rescue-gui
 
-DIRS += pci-resource pcmcia-resource usb-resource slang newt ppp/pppd rp-pppoe/src
+DIRS += pci-resource usb-resource slang newt ppp/pppd rp-pppoe/src
 ifeq (i386, $(ARCH))
-DIRS += pcmcia sysfs
+DIRS += pcmcia pcmcia-resource sysfs
 endif
 ifeq (x86_64, $(ARCH))
-DIRS += pcmcia sysfs
+DIRS += pcmcia pcmcia-resource sysfs
 endif
 
 
