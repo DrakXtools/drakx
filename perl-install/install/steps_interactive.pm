@@ -635,6 +635,12 @@ sub installUpdates {
     
     $o->hasNetwork or return;
 
+    if (install::any::is_network_install($o) &&
+	find { $_->{update} } install::media::allMediums($o->{packages})) {
+	log::l("installUpdates: skipping since updates were already available during install");
+	return;
+    }
+
     $o->ask_yesorno_({ title => N("Updates"), icon => 'banner-update', messages => formatAlaTeX(
 N("You now have the opportunity to download updated packages. These packages
 have been updated after the distribution was released. They may
