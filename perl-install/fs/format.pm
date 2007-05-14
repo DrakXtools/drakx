@@ -12,7 +12,7 @@ use log;
 
 my %cmds = (
     ext2     => [ 'e2fsprogs', 'mkfs.ext2', '-F' ],
-    ext3     => [ 'e2fsprogs', 'mkfs.ext2', '-F', '-j' ],
+    ext3     => [ 'e2fsprogs', 'mkfs.ext3', '-F' ],
     reiserfs => [ 'reiserfsprogs', 'mkfs.reiserfs', '-ff' ],
     reiser4  => [ 'reiser4progs', 'mkfs.reiser4', '-f', '-y' ],
     xfs      => [ 'xfsprogs', 'mkfs.xfs', '-f', '-q' ],

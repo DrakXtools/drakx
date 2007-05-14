@@ -1,5 +1,9 @@
 - create udev nodes configuration file in /etc/udev/devices.d/ instead
   of conf.d (used for modem and mouse)
+- diskdrake:
+  o use "mkfs.ext3" instead of "mkfs.ext2 -J"
+    (to have dir_index & resize_inode features)
+    (cf Frederik Himpe 23 Apr 2007 mail on cooker)
 - fix ext3 formatting with label and progress bar (#30032)
 - localedrake:
   o don't call grub-gfxmenu when used by simple user

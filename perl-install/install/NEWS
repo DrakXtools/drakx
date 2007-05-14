@@ -3,6 +3,9 @@
 - do not try to configure dvd devices since /dev is wiped out at reboot
 - allow umounting cdrom during a transaction
 - really allow having name with "/" in media.cfg
+- use "mkfs.ext3" instead of "mkfs.ext2 -J"
+  (to have dir_index & resize_inode features)
+  (cf Frederik Himpe 23 Apr 2007 mail on cooker)
 
 Version 10.4.129 - 4 April 2007, by Pascal "Pixel" Rigaux
 
