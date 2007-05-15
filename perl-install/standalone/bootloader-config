@@ -90,7 +90,8 @@ sub remove_kernel() {
     if (!$bootloader) {
 	#- removing the initrd for weird configs where no mdv bootloader is configured
 	my $kernel_str = bootloader::vmlinuz2kernel_str($image) or die "bad kernel name $image\n";
-	unlink bootloader::kernel_str2initrd_long($kernel_str);
+	my $initrd_long = bootloader::kernel_str2initrd_long($kernel_str);
+	unlink "/boot/$initrd_long";
 	return;
     }
 
