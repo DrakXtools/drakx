@@ -61,8 +61,14 @@ if ($image) {
 my $all_hds = fsedit::get_hds();
 fs::get_info_from_fstab($all_hds);
 
-my $bootloader = bootloader::read($all_hds) or die "Cannot find a boot loader installed\n";
-
+my $bootloader = bootloader::read($all_hds);
+if (!$bootloader) {
+    if (member($action, 'add-kernel', 'remove-kernel')) {
+	warn "Cannot find a boot loader installed. Only taking care of initrd\n";
+    } else {
+	die "Cannot find a boot loader installed\n";
+    }
+}
 
 $action =~ s/-/_/g;
 $::{$action}->();
@@ -80,6 +86,13 @@ sub remove_kernel() {
     unlink "/lib/modules/$kernel_version/build";
     unlink "/lib/modules/$kernel_version/source";
     remove_now_broken_boot_symlinks();
+
+    if (!$bootloader) {
+	#- removing the initrd for weird configs where no mdv bootloader is configured
+	my $kernel_str = bootloader::vmlinuz2kernel_str($image) or die "bad kernel name $image\n";
+	unlink bootloader::kernel_str2initrd_long($kernel_str);
+	return;
+    }
 
     my %proposed_labels;
     my @new_entries;
@@ -123,6 +136,15 @@ sub add_kernel() {
     bootloader::create_link_source();
 
     my $kernel_str = bootloader::vmlinuz2kernel_str($image) or die "bad kernel name $image\n";
+
+    if (!$bootloader) {
+	#- building the initrd for weird configs where no mdv bootloader is configured
+	my $fake_bootloader = { vga => undef };
+	my %opts = (initrd_options => $initrd_options);
+	my $initrd_long = bootloader::kernel_str2initrd_long($kernel_str);
+	bootloader::mkinitrd($kernel_str->{version}, $fake_bootloader, { %opts }, "/boot/$initrd_long");
+	return;
+    }
 
     my $root_part = fs::get::root([ fs::get::fstab($all_hds) ]) or die "can not find root partition\n";
     my %opts = (
