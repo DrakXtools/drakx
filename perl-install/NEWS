@@ -1,17 +1,15 @@
 Version 10.4.130 - 16 May 2007, by Thierry Vignaud
 
-- bootloader-config:
-  o do create /boot/initrd-xxx.img when there is no bootloader 
-    (#30771 comment #21)
+- bootloader-config: do create /boot/initrd-xxx.img when there is no
+  bootloader (#30771 comment #21)
 - create udev nodes configuration file in /etc/udev/devices.d/ instead
   of conf.d (used for modem and mouse)
 - diskdrake:
   o use "mkfs.ext3" instead of "mkfs.ext2 -J"
     (to have dir_index & resize_inode features)
     (cf Frederik Himpe 23 Apr 2007 mail on cooker)
-- fix ext3 formatting with label and progress bar (#30032)
-- localedrake:
-  o don't call grub-gfxmenu when used by simple user
+  o fix ext3 formatting with label and progress bar (#30032)
+- localedrake: don't call grub-gfxmenu when used by simple user
 
 Version 10.4.127 - 30 March 2007, by Olivier "blino" Blin
 
