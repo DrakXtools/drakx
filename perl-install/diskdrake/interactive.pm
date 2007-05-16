@@ -799,6 +799,9 @@ sub Resize {
 	    partition_table::adjust_local_extended($hd, $part);
 	    partition_table::adjust_main_extended($hd);
 	    write_partitions($in, $hd) or return if $write_partitions && %nice_resize;
+	    # fix resizing's faillures due to udev's race when writing the partition table
+	    # (deleting then recreating the nodes leaves a race window...)
+	    devices::make($part->{device});
 	}
 	1;
     };
