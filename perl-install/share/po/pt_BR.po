@@ -1,10 +1,10 @@
 # translation of pt_BR.po to
 # translation of pt_BR.po to Brazilian Portuguese
-# translation of DrakX-pt_BR.po to Brazilian Portuguese
 # tradução de DrakX-pt_BR.po para Português do Brasil
 # DRAKX PT_BR PO FILE
-# Copyright (C) 2003, 2004, 2005, 2006 Free Software Foundation, Inc.
+# Copyright (C) 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
 # Lisiane Sztoltz Teixeira <lisiane@mandriva.com>
+#
 # Andrei Bosco Bezerra Torres <andrei_bosco@yahoo.com.br>, 2000, 2003.
 # Bruno Dorfman Buys <brunobuys@zipmail.com.br>, 2002.
 # Tiago da Cruz Bezerra <tiagocruz18@uol.com.br>,2002 2003, 2004.
@@ -14,19 +14,18 @@
 # Cristiano Otto Von Trompczynski <cris@mandriva.com>, 2005.
 # Arthur Renato Mello <renato@conectiva.com.br>, 2005.
 # Wanderlei Antonio Cavassin <cavassin@mandriva.com>, 2006.
-# Felipe Arruda <felipemiguel@gmail.com>, 2006.
-#
+# Felipe Arruda <felipemiguel@gmail.com>, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: pt_BR\n"
 "POT-Creation-Date: 2007-03-21 12:10+0100\n"
-"PO-Revision-Date: 2006-09-14 10:11-0300\n"
+"PO-Revision-Date: 2007-05-21 11:05-0300\n"
 "Last-Translator: Felipe Arruda <felipemiguel@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_br@mail.kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n > 1);\n"
 
 #: any.pm:157 diskdrake/interactive.pm:422 diskdrake/interactive.pm:617
@@ -196,11 +195,9 @@ msgid "Please try again"
 msgstr "Por favor, tente novamente"
 
 #: any.pm:313
-#, fuzzy, c-format
+#, c-format
 msgid "You can not use a password with %s"
-msgstr ""
-"Você não pode usar um sistema de arquivos criptografados como ponto de "
-"montagem %s"
+msgstr "Você não pode usar uma senha com %s"
 
 #: any.pm:316 any.pm:687 authentication.pm:197
 #, c-format
@@ -219,10 +216,8 @@ msgstr "restrito"
 
 #: any.pm:318
 #, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
-msgstr ""
-"A opção \"Restringi opções da linha de comando\" não tem uso sem uma senha"
+msgid "Option ``Restrict command line options'' is of no use without a password"
+msgstr "A opção \"Restringi opções da linha de comando\" não tem uso sem uma senha"
 
 #: any.pm:320
 #, c-format
@@ -415,8 +410,7 @@ msgstr "Por favor, informe um nome de usuário"
 
 #: any.pm:658
 #, c-format
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr ""
 "O nome do usuário deve conter apenas letras minúsculas, números e os "
 "caracteres `-' e `_'"
@@ -666,8 +660,7 @@ msgstr ""
 
 #: any.pm:1039
 #, c-format
-msgid ""
-"You can export using NFS or SMB. Please select which you would like to use."
+msgid "You can export using NFS or SMB. Please select which you would like to use."
 msgstr ""
 "Você pode exportar usando SMB ou NFS. Por favor, seleciona qual você "
 "gostaria de usar."
@@ -787,8 +780,7 @@ msgstr "Arquivo local:"
 
 #: authentication.pm:66
 #, c-format
-msgid ""
-"Use local for all authentication and information user tell in local file"
+msgid "Use local for all authentication and information user tell in local file"
 msgstr ""
 "Use local para todas as autenticações e informações de usuário descritas em "
 "um arquivo local"
@@ -1070,7 +1062,7 @@ msgstr "Yaboot"
 #: bootloader.pm:1032
 #, c-format
 msgid "SILO"
-msgstr ""
+msgstr "SILO"
 
 #: bootloader.pm:1112
 #, c-format
@@ -1080,8 +1072,7 @@ msgstr "sem espaço suficiente em /boot"
 #: bootloader.pm:1679
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
-msgstr ""
-"Você não pode instalar o gerenciador de inicialização em uma partição %s \n"
+msgstr "Você não pode instalar o gerenciador de inicialização em uma partição %s \n"
 
 #: bootloader.pm:1732
 #, c-format
@@ -1669,8 +1660,7 @@ msgstr "Remover o arquivo de loopback?"
 
 #: diskdrake/interactive.pm:596
 #, c-format
-msgid ""
-"After changing type of partition %s, all data on this partition will be lost"
+msgid "After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "Após alterar o tipo da partição %s, todos os dados desta partição serão "
 "perdidos"
@@ -1748,8 +1738,7 @@ msgstr "Você deveria fazer backup de todos os dados desta partição"
 #: diskdrake/interactive.pm:758
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
-msgstr ""
-"Após redimensionar a partição %s, todos os dados da partição serão perdidos"
+msgstr "Após redimensionar a partição %s, todos os dados da partição serão perdidos"
 
 #: diskdrake/interactive.pm:765
 #, c-format
@@ -1894,8 +1883,7 @@ msgstr "A tabela de partição do drive %s está para ser gravada no disco!"
 #: diskdrake/interactive.pm:1153
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
-msgstr ""
-"Após formatar a partição %s, todos os dados desta partição serão perdidos"
+msgstr "Após formatar a partição %s, todos os dados desta partição serão perdidos"
 
 #: diskdrake/interactive.pm:1158 fs/partitioning.pm:49
 #, c-format
@@ -2092,7 +2080,7 @@ msgstr ""
 #: diskdrake/interactive.pm:1285
 #, c-format
 msgid "Empty space on %s (%s)"
-msgstr ""
+msgstr "Espaço vazio em %s (%s)"
 
 #: diskdrake/interactive.pm:1294
 #, c-format
@@ -2199,10 +2187,8 @@ msgstr "Mais uma"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
-msgstr ""
-"Favor digitar seu nome de usuário, senha e domínio para acessar esta máquina."
+msgid "Please enter your username, password and domain name to access this host."
+msgstr "Favor digitar seu nome de usuário, senha e domínio para acessar esta máquina."
 
 #: diskdrake/smbnfs_gtk.pm:180
 #, c-format
@@ -2385,8 +2371,7 @@ msgstr ""
 #: fs/mount_options.pm:139
 #, c-format
 msgid "Allow every user to mount and umount the file system."
-msgstr ""
-"Permitir que todos os usuários montem e desmotem o sistema de arquivos."
+msgstr "Permitir que todos os usuários montem e desmotem o sistema de arquivos."
 
 #: fs/mount_options.pm:141
 #, c-format
@@ -2396,8 +2381,7 @@ msgstr "Permite um usuário comum montar o sistema de arquivos."
 #: fs/mount_options.pm:143
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
-msgstr ""
-"Habilita a quota de disco para usuário e , opcionalmente, limites reforçados"
+msgstr "Habilita a quota de disco para usuário e , opcionalmente, limites reforçados"
 
 #: fs/mount_options.pm:145
 #, c-format
@@ -2451,8 +2435,7 @@ msgstr ""
 #: fs/partitioning.pm:79
 #, c-format
 msgid "Not enough swap space to fulfill installation, please add some"
-msgstr ""
-"Sem swap suficiente para completar a instalação, por favor, adicione mais"
+msgstr "Sem swap suficiente para completar a instalação, por favor, adicione mais"
 
 #: fs/partitioning_wizard.pm:47
 #, c-format
@@ -2608,8 +2591,7 @@ msgstr "Próximo"
 #: fs/partitioning_wizard.pm:163
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
-msgstr ""
-"Quanto de espaço você quer deixar para o Microsoft Windows® na partição %s?"
+msgstr "Quanto de espaço você quer deixar para o Microsoft Windows® na partição %s?"
 
 #: fs/partitioning_wizard.pm:164
 #, c-format
@@ -2646,8 +2628,7 @@ msgstr "Apagar e usar disco inteiro"
 #: fs/partitioning_wizard.pm:200
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
-msgstr ""
-"Você tem mais de um disco rígido; em qual deles você quer instalar o Linux?"
+msgstr "Você tem mais de um disco rígido; em qual deles você quer instalar o Linux?"
 
 #: fs/partitioning_wizard.pm:206
 #, c-format
@@ -2974,9 +2955,9 @@ msgid "USB Mass Storage Devices"
 msgstr "Dispositivos USB Mass Storage"
 
 #: harddrake/data.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "Card readers"
-msgstr "Modelo da placa:"
+msgstr "Leitores de cartão"
 
 #: harddrake/data.pm:404
 #, c-format
@@ -3081,7 +3062,7 @@ msgstr ""
 "Aqui você pode selecionar um driver alternativo (como um OSS ou ALSA) para "
 "sua placa de som (%s)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:246
@@ -5214,8 +5195,7 @@ msgstr "Não foi possível criar o link /usr/share/sane/%s!"
 #: scanner.pm:113
 #, c-format
 msgid "Could not copy firmware file %s to /usr/share/sane/firmware!"
-msgstr ""
-"Não foi possível copiar o arquivo firmware %s para /usr/share/sane/firmware!"
+msgstr "Não foi possível copiar o arquivo firmware %s para /usr/share/sane/firmware!"
 
 #: scanner.pm:120
 #, c-format
@@ -5297,8 +5277,7 @@ msgstr "Permite/nega o login direto do root."
 msgid ""
 "Allow/Forbid the list of users on the system on display managers (kdm and "
 "gdm)."
-msgstr ""
-"Permite/proíbe a lista de usuários no gerenciador gráfico (kdm e  gdm)."
+msgstr "Permite/proíbe a lista de usuários no gerenciador gráfico (kdm e  gdm)."
 
 #: security/help.pm:35
 #, c-format
@@ -5459,8 +5438,7 @@ msgstr "Usa a senha para autenticar os usuários."
 #: security/help.pm:94
 #, c-format
 msgid "Activate/Disable ethernet cards promiscuity check."
-msgstr ""
-"Ativa/desativa a verificação do modo de promiscuidade em placas Ethernet."
+msgstr "Ativa/desativa a verificação do modo de promiscuidade em placas Ethernet."
 
 #: security/help.pm:96
 #, c-format
@@ -5548,8 +5526,7 @@ msgstr ""
 #: security/help.pm:119
 #, c-format
 msgid "if set to yes, run the daily security checks."
-msgstr ""
-"se definido como sim, executa diariamente as verificações de segurança. "
+msgstr "se definido como sim, executa diariamente as verificações de segurança. "
 
 #: security/help.pm:120
 #, c-format
@@ -5592,8 +5569,7 @@ msgstr "se definido como, executa verificações no chkrootkit."
 
 #: security/help.pm:127
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
+msgid "if set, send the mail report to this email address else send it to root."
 msgstr ""
 "Se definido como sim, envia um e-mail com o relatório para este endereço, ou "
 "envia para o root."
@@ -5611,20 +5587,17 @@ msgstr "Não envie e-mails se não houver nada para avisar"
 #: security/help.pm:130
 #, c-format
 msgid "if set to yes, run some checks against the rpm database."
-msgstr ""
-"Se definido como sim, executa algumas verificações no banco de dados rpm."
+msgstr "Se definido como sim, executa algumas verificações no banco de dados rpm."
 
 #: security/help.pm:131
 #, c-format
 msgid "if set to yes, report check result to syslog."
-msgstr ""
-"Se definido como sim, envia os resultados das verificações para o syslog."
+msgstr "Se definido como sim, envia os resultados das verificações para o syslog."
 
 #: security/help.pm:132
 #, c-format
 msgid "if set to yes, reports check result to tty."
-msgstr ""
-"se definido como sim,  envia o resultado das verificações para o terminal. "
+msgstr "se definido como sim,  envia o resultado das verificações para o terminal. "
 
 #: security/help.pm:134
 #, c-format
@@ -5636,8 +5609,7 @@ msgstr ""
 #: security/help.pm:136
 #, c-format
 msgid "Set the shell timeout. A value of zero means no timeout."
-msgstr ""
-"Define o tempo limite do shell. Um valor zero significa sem tempo limite."
+msgstr "Define o tempo limite do shell. Um valor zero significa sem tempo limite."
 
 #: security/help.pm:136
 #, c-format
@@ -5692,8 +5664,7 @@ msgstr "Listar os usuários nas telas de login (kdm e gdm)"
 #: security/l10n.pm:20
 #, c-format
 msgid "Export display when passing from root to the other users"
-msgstr ""
-"Exportar display ao mudar da conta de root para a conta de outros usuários"
+msgstr "Exportar display ao mudar da conta de root para a conta de outros usuários"
 
 #: security/l10n.pm:21
 #, c-format
@@ -6029,8 +6000,7 @@ msgstr "Usar lbsafe para servidores"
 
 #: security/level.pm:64
 #, c-format
-msgid ""
-"A library which defends against buffer overflow and format string attacks."
+msgid "A library which defends against buffer overflow and format string attacks."
 msgstr ""
 "Uma biblioteca que defende o sistema contra ataques de buffer overflow e de "
 "strings formatadas."
@@ -6117,8 +6087,7 @@ msgstr ""
 
 #: services.pm:35
 #, c-format
-msgid ""
-"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
 "O Apache é um servidor Web, usado para servir arquivos\n"
 "HTML e CGI."
@@ -6665,8 +6634,7 @@ msgstr "[teclado]"
 #: standalone.pm:100
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
-msgstr ""
-"[--file=meu_arquivo] [--word=minha_palavra] [--explain=exp_regular] [--alert]"
+msgstr "[--file=meu_arquivo] [--word=minha_palavra] [--explain=exp_regular] [--alert]"
 
 #: standalone.pm:101
 #, c-format
@@ -6876,3 +6844,4 @@ msgstr "Falha na instalação"
 
 #~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
 #~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
+
