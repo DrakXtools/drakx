@@ -21,7 +21,7 @@ my %cmds = (
     dos      => [ 'dosfstools', 'mkdosfs' ],
     vfat     => [ 'dosfstools', 'mkdosfs', '-F', '32' ],
     swap     => [ 'util-linux', 'mkswap' ],
-    ntfs     => [ 'ntfsprogs', 'mkntfs' ],
+    ntfs     => [ 'ntfsprogs', 'mkntfs', '--fast' ],
 );
 
 my %LABELs = ( #- option, length, handled_by_mount
