@@ -862,12 +862,16 @@ sub wait_message_with_progress_bar {
 
 	if ($total) {
 	    $progress or internal_error('You must first give some text to display');
-	    $progress->set_fraction($current / $total);
-	    $progress->show;
-	    $displayed = 0;
-	    mygtk2::flush() while !$displayed;
+	    my $fraction = min(1, $current / $total);
+	    if ($fraction != $progress->get_fraction) {
+		$progress->set_fraction($fraction);
+		$progress->show;
+		$displayed = 0;
+		mygtk2::flush() while !$displayed;
+	    }
 	} else {
-	    $progress->hide if !$total;
+	    $progress->hide;
+	    mygtk2::flush();
 	}
     };
 }
