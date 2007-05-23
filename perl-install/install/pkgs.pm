@@ -141,7 +141,7 @@ sub bestKernelPackage {
       $::build_globetrotter ? '' :
       detect_devices::is_xbox() ? '-xbox' :
       detect_devices::is_i586() ? '-legacy' :
-      detect_devices::dmi_detect_memory() > 3.8 * 1024 ? '-entreprise' :
+      detect_devices::dmi_detect_memory() > 3.8 * 1024 ? '-enterprise' :
       '';
 
     my @kernels = grep { $_ } map { packageByName($packages, "kernel$_-latest") } @preferred_exts, '';
