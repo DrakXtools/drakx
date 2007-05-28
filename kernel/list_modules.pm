@@ -187,7 +187,7 @@ our %l = (
           qw(rme96xx sam9407 sb sgalaxy snd-ad1816a snd-ad1848 snd-ad1889 snd-ali5451 snd-als100 snd-als300),
           qw(snd-als4000 snd-atiixp snd-au8810 snd-au8820 snd-au8830 snd-audigyls snd-azt2320 snd-azt3328 snd-azx),
           qw(snd-asihpi snd-bt87x snd-ca0106 snd-cmi8330 snd-cmipci snd-cs4231 snd-cs4232 snd-cs4236 snd-cs4281),
-          qw(snd-cs46xx snd-cs5535audio snd-darla20 snd-darla24 snd-dt019x snd-echo3g snd-emu10k1 snd-emu10k1x snd-ens1370 snd-ens1371 snd-es1688 snd-es18xx),
+          qw(snd-cs46xx snd-cs5530 snd-cs5535audio snd-darla20 snd-darla24 snd-dt019x snd-echo3g snd-emu10k1 snd-emu10k1x snd-ens1370 snd-ens1371 snd-es1688 snd-es18xx),
           qw(snd-es1938 snd-es1968 snd-es968 snd-fm801 snd-gina20 snd-gina24 snd-gina3g snd-gusclassic snd-gusextreme),
           qw(snd-gusmax snd-hda-intel snd-hdsp snd-hdspm snd-ice1712 snd-ice1724 snd-indi snd-indigo snd-indigodj snd-indigoio snd-intel8x0 snd-interwave),
           qw(snd-interwave-stb snd-korg1212 snd-layla20 snd-layla24 snd-layla3g snd-maestro3 snd-mia snd-mixart snd-mona snd-mpu401 snd-nm256),
