@@ -78,7 +78,9 @@ sub from_utf8 {
 }
 sub to_utf8 { 
     my ($s) = @_;
-    Locale::gettext::iconv($s, undef, "utf-8"); #- undef = locale charmap = nl_langinfo(CODESET)
+    my $str = Locale::gettext::iconv($s, undef, "utf-8"); #- undef = locale charmap = nl_langinfo(CODESET)
+    c::set_tagged_utf8($str);
+    $str;
 }
 
 #- This is needed because text printed by Gtk2 will always be encoded
