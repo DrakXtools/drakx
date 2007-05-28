@@ -42,11 +42,6 @@ my %previous_kernel_config = getVarsFromSh("$hw_sysconfdir/kernel");
 setVarsInSh("$hw_sysconfdir/kernel", { KERNEL => $curr_kernel, IS_LAPTOP => bool2text($isLaptop) });
 my %cfg = getVarsFromSh("$hw_sysconfdir/service.conf");
 
-# autoreconfigure the mouse on major kernel change:
-if ($curr_kernel ne $previous_kernel_config{KERNEL}) {
-    log::explanations("Autoconfiguring mouse since we switched between 2.4.x and 2.6.x kernels");
-    harddrake::autoconf::mouse_conf($modules_conf);
-}
 # autoreconfigure laptop-dependent services when switching from laptop to desktop, and vice versa
 if (!exists $previous_kernel_config{IS_LAPTOP} || $force || $isLaptop != text2bool($previous_kernel_config{IS_LAPTOP})) {
     log::explanations("Autoconfiguring laptop tools since we switched between laptop and desktop systems");
