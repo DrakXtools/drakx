@@ -165,7 +165,7 @@ sub get_package {
         local $ENV{PATH} = "$ENV{PATH}:/sbin:/usr/sbin";
         $which_app = chomp_(`which '$executable' 2> /dev/null`);
         # deush, rpm can takes some time aka it'll sleeps if something has opened rpm db !
-        $rpm_package = $which_app eq "" ? N("Package not installed") : chomp_(`rpm -qf '$which_app' 2>&1`);
+        $rpm_package = $which_app eq "" ? N("Package not installed") : common::to_utf8(chomp_(`rpm -qf '$which_app' 2>&1`));
         $packages{$executable} = $rpm_package;
     }
     $rpm_package;
