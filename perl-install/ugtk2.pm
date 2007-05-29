@@ -290,7 +290,10 @@ sub escape_text_for_TextView_markup_format {
                '<' => '&lt;',
                '>' => '&gt;',
            );
-    $str =~ s!([&<>])!$rules{$1}!g; #^(&(amp|lt|gt);)!!) {
+    eval { $str =~ s!([&<>])!$rules{$1}!g }; #^(&(amp|lt|gt);)!!) {
+    if (my $err = $@) {
+           internal_error("$err\n$str");
+    }
     $str;
 }
 
