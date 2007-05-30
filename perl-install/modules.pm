@@ -75,11 +75,14 @@ sub load_raw {
     } elsif (member('usb-storage', @$l)) {
 	#- usb-storage is only modprobed when we know there is some scsi devices
 	#- so trying hard to wait for devices to be detected
-	my $retry = 10;
-	sleep 1; #- TOREMOVE for compatibility with previous behaviour: wait at least 2 seconds
-	while ($retry--) { 
+
+	#- first sleep the minimum time usb-stor-scan takes
+	sleep 5; #- 5 == /sys/module/usb_storage/parameters/delay_use
+	# then wait for usb-stor-scan to complete
+	my $retry = 0;
+	while ($retry++ < 10) { 
+	    fuzzy_pidofs('usb-stor-scan') or last;
 	    sleep 1;
-	    last if all('/sys/bus/scsi/devices');
 	    log::l("waiting for usb-storage devices to appear (retry = $retry)");
 	}
     }
