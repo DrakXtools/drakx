@@ -44,6 +44,7 @@ if (! -e $instpath) {
 }
 
 if (-e $instpath) {
+    local $ENV{HOME} = '/root';
     system("/usr/bin/www-browser file://$ancpath &");
 } else {
     $ugtk2::wm_icon = "help";
