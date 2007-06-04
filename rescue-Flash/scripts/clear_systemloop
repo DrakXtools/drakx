@@ -1,0 +1,85 @@
+#!/bin/bash
+
+# import functions library
+source rescue_common
+
+tmpdir="/tmp/flash-rescue-root"
+rootdir="$tmpdir/pen"
+
+function prepare() {
+
+    mkdir -p $rootdir
+
+    if ! mount_usbroot $rootdir; then
+        return 1
+    fi
+
+    return 0
+}
+
+function doit() {
+
+    clear
+    echo
+    echo "WARNING!"
+    echo
+    echo "Mandriva Flash will be reseted to factory defaults!"
+    echo -n "All user files, customizations and new packages installed "
+    echo "will be removed."
+    echo
+    echo -n "Do you want to continue? [N/y] "
+    read confirm
+
+    if [ x"$confirm" = x"y" -o x"$confirm" = x"Y" ]; then
+
+        if [ ! -f $loop ]; then
+            dd if=/dev/zero of=$loop bs=4000000 count=100
+        fi
+
+        /sbin/mkfs.ext2 -q -F $loop
+
+        echo
+        if [ $? -ne 0 ]; then
+            echo 'Error reseting device to factory defaults'
+            return 1
+        else
+            echo 'Mandriva Flash was restored to factory defaults!'
+        fi
+    fi
+
+    echo
+
+    return 0
+}
+
+function cleanup() {
+
+    umount $rootdir > /dev/null 2>&1
+    rmdir $rootdir $tmpdir 2> /dev/null
+}
+
+clear
+trap cleanup SIGINT
+
+version=""
+if ! insert_pendrive; then
+    exit 1
+fi
+
+if [ x"$version" = x"1.0" ]; then
+    loop="$rootdir/loopbacks/system.loop"
+else
+    loop="$rootdir/.loopbacks/system.loop"
+fi
+
+if ! prepare; then
+    cleanup
+    exit 1
+fi
+
+if ! doit; then
+    cleanup
+    exit 1
+fi
+
+cleanup

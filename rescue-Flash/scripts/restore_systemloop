@@ -1,0 +1,167 @@
+#!/bin/bash
+
+# import functions library
+source rescue_common
+
+tmpdir="/tmp/flash-rescue-root"
+rootdir="$tmpdir/pen"
+
+function prepare() {
+
+    mkdir -p $rootdir
+
+    if ! mount_usbroot $rootdir; then
+        return 1
+    fi
+
+    if [ x"$version" = x"1.0" ]; then
+        mkdir -p $tmpdir/shared
+        if ! mount_sharedroot $tmpdir/shared; then
+            return 1
+        fi
+    fi
+
+    return 0
+}
+
+function doit() {
+
+    if [ ! -d $dir ]; then
+        echo
+        echo "Can't find a backup directory in the Share partition"
+        echo
+        return 0
+    fi
+
+    cd $dir
+    i=1
+    for file in $(ls -c1 backup-*.bz2 2> /dev/null | sort -r | head -10); do
+            files[$i]="$file"
+            let i++
+    done
+    cd - > /dev/null
+
+    if [ $i -eq 1 ]; then
+        echo
+        echo 'No backup files found!'
+        echo
+        return 0
+    fi
+
+    while [ true ]; do
+
+        clear
+        echo
+        echo "The following backup files were found:"
+        echo
+
+        i=1
+        while [ -n "${files[$i]}" ]; do
+            echo "[$i] ${files[$i]}"
+            let i++
+        done
+        let i--
+        echo
+        echo '[0] Cancel / Return to main menu'
+
+        echo
+        echo 'Select from the list above, the file that you want to restore.'
+        echo 'The most recent files come first in the list.'
+        echo
+        echo -n "What backup file do you want to restore? [1] "
+        read option
+
+        if [ -z "$option" ]; then
+            option=1
+        fi
+        if [ x"$option" = x"0" ]; then
+            return 0
+        fi
+
+        if [ ! -f $dir/${files[$option]} ]; then
+            echo
+            echo "Error reading backup file ${files[$option]}!"
+            echo
+            echo -n 'Do you want to restore another backup file? [N/y] '
+            read confirm
+
+            if [ x"$confirm" = x"y" -o x"$confirm" = x"Y" ]; then
+                continue
+            else
+                return 0
+            fi
+        else
+
+            echo
+            echo -n 'Restoring backup file. This can take some time:  '
+
+            bunzip2 -c $dir/${files[$option]} > $loop \
+                2> /tmp/rescue-backup.err &
+
+            sleep 2
+
+            while ps | grep -q bunzip2; do
+                progress
+            done
+
+            sync
+            echo
+            echo
+
+            errsize=$(ls -la /tmp/rescue-backup.err | cut -d' ' -f5)
+            if [ $errsize -ne 0 ]; then
+                echo 'Error restoring user files!'
+                echo
+                return 1
+            else
+                echo 'Backup file restored!'
+                echo
+                break
+            fi
+        fi
+    done
+
+    return 0
+}
+
+function cleanup() {
+
+    if [ x"$version" = x"1.0" ]; then
+        umount $tmpdir/shared > /dev/null 2>&1
+        rmdir $tmpdir/shared 2> /dev/null
+    fi
+
+    umount $rootdir > /dev/null 2>&1
+    rmdir $rootdir $tmpdir 2> /dev/null
+
+    return 0
+}
+
+clear
+trap cleanup SIGINT
+
+version=""
+if ! insert_pendrive; then
+    exit 1
+fi
+
+if [ x"$version" = x"1.0" ]; then
+    dir="$tmpdir/shared/backup"
+    loop="$rootdir/loopbacks/system.loop"
+else
+    dir="$rootdir/backup"
+    loop="$rootdir/.loopbacks/system.loop"
+fi
+
+if ! prepare; then
+    cleanup
+    exit 1
+fi
+
+if ! doit; then
+    cleanup
+    exit 1
+fi
+
+cleanup
+exit 0

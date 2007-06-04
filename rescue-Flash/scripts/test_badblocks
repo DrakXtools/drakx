@@ -1,0 +1,69 @@
+#!/bin/bash
+
+# import functions library
+source rescue_common
+
+tmpdir="/tmp/flash-rescue-root"
+rootdir="$tmpdir/pen"
+
+function prepare() {
+
+    return 0
+}
+
+function doit() {
+
+    clear
+    echo
+    echo "WARNING!"
+    echo
+    echo "Searching for bad blocks in Mandriva Flash is a slow process."
+    echo
+    echo -n "Do you want to continue? [N/y] "
+    read confirm
+    
+    echo
+    echo
+
+    device=$(cat /tmp/rescue-device)
+
+    if [ x"$confirm" = x"y" -o x"$confirm" = x"Y" ]; then
+
+        /sbin/badblocks -n -v -s ${device}1
+        if [ x"$version" = x"1.0" ]; then
+            /sbin/badblocks -n -v -s ${device}2
+        fi
+    fi
+
+    echo
+    echo 'Bad blocks scan completed!'
+    echo
+
+    return 0
+}
+
+function cleanup() {
+
+    umount $rootdir > /dev/null 2>&1
+    rmdir $rootdir $tmpdir 2> /dev/null
+}
+
+clear
+trap cleanup SIGINT
+
+version=""
+if ! insert_pendrive; then
+    exit 1
+fi
+
+if ! prepare; then
+    cleanup
+    exit 1
+fi
+
+if ! doit; then
+    cleanup
+    exit 1
+fi
+
+cleanup

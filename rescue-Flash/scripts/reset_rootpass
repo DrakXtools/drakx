@@ -1,0 +1,100 @@
+#!/bin/bash
+
+# import functions library
+source rescue_common
+
+tmpdir="/tmp/flash-rescue-root"
+rootdir="$tmpdir/pen"
+
+function prepare() {
+
+    modprobe unionfs > /dev/null 2>&1
+    modprobe squashfs > /dev/null 2>&1
+    modprobe loop > /dev/null 2>&1
+
+    mkdir -p $rootdir
+    mkdir -p $tmpdir/squash
+    mkdir -p $tmpdir/user
+    mkdir -p $tmpdir/union
+
+    if ! mount_usbroot $rootdir; then
+        return 1
+    fi
+
+    mount -t squashfs -o loop $sfs_loop $tmpdir/squash > /dev/null 2>&1
+    if [ $? -ne 0 ]; then
+        echo "Error mounting distrib.sqfs"
+        return 1
+    fi
+
+    mount -t ext2 -o loop $sys_loop $tmpdir/user > /dev/null 2>&1
+    if [ $? -ne 0 ]; then
+        echo "Error mounting system.loop"
+        return 1
+    fi
+
+    mount -t unionfs -o dirs=$tmpdir/user=rw:$tmpdir/squash=ro \
+        none $tmpdir/union
+    if [ $? -ne 0 ]; then
+        echo "Error creating union of distrib.sqfs and system.loop"
+        return 1
+    fi
+
+    chroot $tmpdir/union /etc/init.d/keytable start &> /dev/null
+    chroot $tmpdir/union /usr/bin/unicode_start
+
+    return 0
+}
+
+function doit() {
+
+    clear
+    echo
+    chroot $tmpdir/union passwd root
+    echo
+    echo
+
+    return 0
+}
+
+function cleanup() {
+
+    chroot $tmpdir/union /usr/bin/unicode_stop
+
+    umount $tmpdir/union > /dev/null 2>&1
+    umount $tmpdir/user > /dev/null 2>&1
+    umount $tmpdir/squash > /dev/null 2>&1
+    umount $rootdir > /dev/null 2>&1
+
+    rmdir $tmpdir/union $tmpdir/user $tmpdir/squash 2> /dev/null
+    rmdir $rootdir $tmpdir 2> /dev/null
+}
+
+clear
+trap cleanup SIGINT
+
+version=""
+if ! insert_pendrive; then
+    exit 1
+fi
+
+if [ x"$version" = x"1.0" ]; then
+    sys_loop="$rootdir/loopbacks/system.loop"
+    sfs_loop="$rootdir/loopbacks/distrib.sqfs"
+else
+    sys_loop="$rootdir/.loopbacks/system.loop"
+    sfs_loop="$rootdir/.loopbacks/distrib.sqfs"
+fi
+
+if ! prepare; then
+    cleanup
+    exit 1
+fi
+
+if ! doit; then
+    cleanup
+    exit 1
+fi
+
+cleanup
+exit 0

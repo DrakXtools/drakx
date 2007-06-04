@@ -1,0 +1,149 @@
+#!/bin/bash
+
+function detect_version() {
+
+    _tmpdir="/tmp/$$"
+
+    mkdir -p $_tmpdir
+
+    nash --force > /dev/null 2>&1 <<EOF
+mount -t vfat LABEL=Share $_tmpdir
+EOF
+    if [ $? -eq 0 ]; then
+        version="1.0"
+    else
+        version="1.05"
+    fi
+ 
+    umount $_tmpdir 2> /dev/null
+    rmdir $_tmpdir 2> /dev/null
+}
+
+function check_vendor() {
+
+    # list of supported vendors/models
+
+    # mandriva flash 1.0 (france)
+    vendors[0]="13fe"
+    models[0]="1a00"
+    # mandriva flash 1.0 (brazil)
+    vendors[1]="0930"
+    models[1]="653e"
+    # mandriva flash 4GB (france)
+    vendors[2]="13fe"
+    models[2]="1d00"
+
+    rc=1
+
+    mount -t usbfs none /proc/bus/usb
+
+    i=0
+    while [ ! -z "${vendors[$i]}" ]; do
+
+        grep "P:" /proc/bus/usb/devices | grep -q \
+                "Vendor=${vendors[$i]} ProdID=${models[$i]}"
+        if [ $? -eq 0 ]; then
+            rc=0
+            break
+        fi
+
+        let i++
+    done
+
+    umount /proc/bus/usb
+
+    return $rc
+}
+
+function insert_pendrive() {
+
+    _tmpdir="/tmp/rescue-temp"
+    mkdir -p $_tmpdir
+
+    modprobe usb-storage > /dev/null 2>&1
+    modprobe vfat > /dev/null 2>&1
+
+    echo
+    echo -n 'Please insert your Mandriva Flash pen drive and press ENTER when ready: '
+    read READY
+    echo
+    echo -n 'Detecting pen drive: '
+
+    for ((i=0; $i <= 15 ; i++)); do
+        nash --force > /dev/null 2>&1 <<EOF
+mount -t vfat LABEL=MDVUSBROOT $_tmpdir
+EOF
+        if [ $? -ne 0 ]; then
+            echo -n '.'
+            sleep 1
+        else
+            echo -n ' found!'
+
+            if ! check_vendor; then
+                echo
+                echo "This rescue system only works with Mandriva Flash keys."
+                echo
+                umount $_tmpdir
+                rmdir $_tmpdir 2> /dev/null
+                return 1
+            fi
+
+            cat /proc/mounts | grep $_tmpdir | cut -d' ' -f1 | \
+                sed 's/[0-9]*$//g' > /tmp/rescue-device
+            umount $_tmpdir
+            rmdir $_tmpdir 2> /dev/null
+
+            detect_version
+
+            return 0
+        fi
+    done
+
+    rmdir $_tmpdir 2> /dev/null
+
+    echo
+    echo
+    echo "Couldn't detect Mandriva Flash pen drive!"
+    echo
+
+    return 1
+}
+
+function mount_usbroot() {
+
+    nash --force > /dev/null 2>&1 <<EOF
+mount -t vfat LABEL=MDVUSBROOT $1
+EOF
+    if [ $? -ne 0 ]; then
+        echo "Error mounting device labeled MDVUSBROOT"
+        return 1
+    fi
+
+    return 0
+}
+
+function mount_sharedroot() {
+
+    nash --force > /dev/null 2>&1 <<EOF
+mount -t vfat LABEL=Share $1
+EOF
+    if [ $? -ne 0 ]; then
+        echo "Error mounting device labeled Share"
+        return 1
+    fi
+
+    return 0
+}
+
+function progress() {
+
+    echo -ne '\b|'
+    usleep 100000
+    echo -ne '\b/'
+    usleep 100000
+    echo -ne '\b-'
+    usleep 100000
+    echo -ne '\b\\'
+    usleep 100000
+}
+
