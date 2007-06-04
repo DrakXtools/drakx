@@ -158,7 +158,7 @@ sub register_help_entry {
          formatAlaTeX($label) . ":\n",
          {  foreground => "royalblue3" },
         ],
-        [ join("\n", formatAlaTeX($help), N("(default value: %s)", to_i18n($default)), "\n") ]
+        [ join("\n", formatAlaTeX($help), N("(default value: %s)", map { s/ /, /g; $_ } to_i18n($default)), "\n") ]
        );
 }
 
