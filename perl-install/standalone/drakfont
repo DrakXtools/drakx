@@ -201,10 +201,11 @@ sub search_installed_fonts_full_path() {
 sub search_windows_font() {
     foreach my $fstab_line (grep { /vfat|smbfs|ntfs|fuse/ } cat_('/etc/mtab')) {
         my $win_dir = (split('\s', $fstab_line))[1];
-        my @list_fonts_win   = all("$win_dir/windows/fonts");
+        my @list_fonts_win   = all("$win_dir/windows/fonts"), all("$win_dir/WINDOWS/Fonts");
         my @list_fonts_winnt = all("$win_dir/winnt/fonts");
         my $nb_dir           = @list_fonts_win + @list_fonts_winnt;
         foreach ([ \@list_fonts_win, "windows" ],
+                 [ \@list_fonts_win, "WINDOWS" ],
                  [ \@list_fonts_winnt, "winnt" ]) {
             foreach my $i (@{ $_->[0] }) {
                 if ($interactive) {
@@ -216,7 +217,9 @@ sub search_windows_font() {
                     }
                 }
                 !$replace && any { /$i/ } @installed_fonts and next;
-                any { /$i$/ } @font_list or push @font_list, "$win_dir/$_->[1]/fonts/$i";
+                any { /$i$/ } @font_list or push @font_list,
+                  find { -e $_ } map { "$win_dir/$_->[1]/fonts/$_",
+                                         "$win_dir/$_->[1]/Fonts/$_" } $i;
             }
         }
         $interactive && $nb_dir and progress($pbar, 1, N("done"));
