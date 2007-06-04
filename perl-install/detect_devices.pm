@@ -703,7 +703,7 @@ sub getUPS() {
           $_->{media_type} = 'UPS';
           $_->{driver} = 'newhidups';
           $_;
-      } grep { $_->{driver} =~ /ups$/ && $_->{description} !~ /American Power Conversion\|Back-UPS|Chicony|Keyboard|Logitech|SAITEK|WingMan/ } @usb_devices);
+      } grep { $_->{driver} =~ /ups$/ && $_->{description} !~ /American Power Conversion\|Back-UPS|Chicony|Keyboard|Logitech|Mouse|SAITEK|WingMan/ } @usb_devices);
 }
 
 $pcitable_addons = <<'EOF';
