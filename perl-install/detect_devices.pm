@@ -684,8 +684,6 @@ sub device_matches_sysfs_device {
 #}
 
 sub getUPS() {
-    my @usb_devices = map { ($_->{name} = $_->{description}) =~ s/.*\|//; $_ } grep { $_->{description} !~ /GamePad|IR Combo Device|Joystick|SideWinder/ } usb_probe();
-
     # MGE serial PnP devices:
     (map {
         $_->{port} = $_->{DEVICE};
@@ -696,14 +694,24 @@ sub getUPS() {
         $_->{description} = "MGE UPS SYSTEMS|UPS - Uninterruptible Power Supply" if $_->{MODEL} =~ /000[12]/;
         $_;
     } grep { $_->{DESCRIPTION} =~ /MGE UPS/ } values %serialprobe),
-      # USB UPSs;
-      (map { $_->{driver} = 'hidups'; $_ } grep { $_->{driver} eq 'usbhid' && $_->{description} =~ /American Power Conversion\|Back-UPS/ } @usb_devices),
-      (map {
-          $_->{port} = "auto";
-          $_->{media_type} = 'UPS';
-          $_->{driver} = 'newhidups';
-          $_;
-      } grep { $_->{driver} =~ /ups$/ && $_->{description} !~ /American Power Conversion\|Back-UPS|Chicony|Keyboard|Logitech|Mouse|SAITEK|WingMan/ } @usb_devices);
+    # USB UPSs;
+    (map { ($_->{name} = $_->{description}) =~ s/.*\|//; $_ }
+        map {
+            if ($_->{description} =~ /^American Power Conversion\|Back-UPS/ && $_->{driver} eq 'usbhid') {
+                #- FIXME: should not be hardcoded, use $_->{sysfs_device} . */usb:(hiddev\d+)
+                #- the device should also be assigned to the ups user
+                $_->{port} = "/dev/hiddev0";
+                $_->{driver} = 'hidups';
+                $_;
+            } elsif ($_->{description} =~ /^MGE UPS Systems\|/ && $_->{driver} =~ /ups$/) {
+                $_->{port} = "auto";
+                $_->{media_type} = 'UPS';
+                $_->{driver} = 'newhidups';
+                $_;
+            } else {
+                ();
+            }
+        } usb_probe());
 }
 
 $pcitable_addons = <<'EOF';
