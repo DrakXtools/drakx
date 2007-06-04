@@ -697,7 +697,7 @@ sub getUPS() {
         $_;
     } grep { $_->{DESCRIPTION} =~ /MGE UPS/ } values %serialprobe),
       # USB UPSs;
-      (grep { $_->{driver} = 'hidups' if $_->{driver} eq 'usbhid'; $_->{description} =~ /American Power Conversion\|Back-UPS/ } @usb_devices),
+      (map { $_->{driver} = 'hidups'; $_ } grep { $_->{driver} eq 'usbhid' && $_->{description} =~ /American Power Conversion\|Back-UPS/ } @usb_devices),
       (map {
           $_->{port} = "auto";
           $_->{media_type} = 'UPS';
