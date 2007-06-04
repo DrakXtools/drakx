@@ -32,7 +32,7 @@ my ($opt, $idlabel) = @ARGV;
 
 my ($instpath, $ancpath, $package) = ctxhelp::path2help($opt, $idlabel);
 if (! -e $instpath) {
-    system("/usr/sbin/drakhelp_inst $package");
+    system('/usr/sbin/drakhelp_inst', $package);
 }
 
 if (! -e $instpath) {
@@ -45,7 +45,7 @@ if (! -e $instpath) {
 
 if (-e $instpath) {
     local $ENV{HOME} = '/root';
-    system("/usr/bin/www-browser file://$ancpath &");
+    run_program::raw({ detach => 1 }, '/usr/bin/www-browser', "file://$ancpath");
 } else {
     $ugtk2::wm_icon = "help";
     my $in = interactive->vnew;
