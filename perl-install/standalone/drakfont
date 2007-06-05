@@ -218,8 +218,8 @@ sub search_windows_font() {
                 }
                 !$replace && any { /$i/ } @installed_fonts and next;
                 any { /$i$/ } @font_list or push @font_list,
-                  find { -e $_ } map { "$win_dir/$_->[1]/fonts/$_",
-                                         "$win_dir/$_->[1]/Fonts/$_" } $i;
+                  find { -e $_ } map { ("$win_dir/$_->[1]/fonts/$_",
+                                         "$win_dir/$_->[1]/Fonts/$_") } $i;
             }
         }
         $interactive && $nb_dir and progress($pbar, 1, N("done"));
