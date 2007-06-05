@@ -604,7 +604,9 @@ sub build_mbootpack {
 sub add_kernel {
     my ($bootloader, $kernel_str, $v, $b_nolink, $b_no_initrd) = @_;
 
-    if (short_ext($kernel_str) eq 'xen' && -f '/boot/xen.gz') {
+    #- eg: for /boot/vmlinuz-2.6.17-13mdvxen0 (pkg kernel-xen0-xxx) 
+    #-      or /boot/vmlinuz-2.6.18-xen (pkg kernel-xen-uptodate)
+    if ($kernel_str->{version} =~ /xen/ && -f '/boot/xen.gz') {
 	$v->{xen} = '/boot/xen.gz';
     }
 
