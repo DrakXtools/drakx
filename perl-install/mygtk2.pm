@@ -1060,7 +1060,7 @@ sub _allow_scroll_TextView_to_bottom {
 
 sub set_main_window_size {
     my ($window) = @_;
-    my ($width, $height) = $::isInstall ? ($::real_windowwidth, $::real_windowheight) : $::isWizard ? (540, 360) : (600, 400);
+    my ($width, $height) = $::real_windowwidth ? ($::real_windowwidth, $::real_windowheight) : $::isWizard ? (540, 360) : (600, 400);
     $window->set_size_request($width, $height);
 }
 
