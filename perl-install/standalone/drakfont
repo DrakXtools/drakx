@@ -219,7 +219,7 @@ sub search_windows_font() {
                 !$replace && any { /$i/ } @installed_fonts and next;
                 my $subdir = $_->[1];
                 any { /$i$/ } @font_list or push @font_list,
-                  grep { -e $_ } map { ("$win_dir/w$subdir/fonts/$_",
+                  grep { -e $_ } map { ("$win_dir/$subdir/fonts/$_",
                                          "$win_dir/$subdir/Fonts/$_") } $i;
             }
         }
