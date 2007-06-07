@@ -36,7 +36,9 @@ function doit() {
             dd if=/dev/zero of=$loop bs=4000000 count=100
         fi
 
-        /sbin/mkfs.ext2 -q -F $loop
+        if [ x"$version" = x"1.0" ]; then
+            /sbin/mkfs.ext2 -q -F $loop
+        fi
 
         echo
         if [ $? -ne 0 ]; then
