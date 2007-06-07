@@ -1,0 +1,52 @@
+#!/usr/bin/perl
+
+use MDK::Common;
+
+@ARGV == 2 or die "merge_users <existing files dir> <new files dir>\n";
+
+my ($existing_dir, $new_dir) = @ARGV;
+
+merge('passwd', 'shadow');
+merge('group', 'gshadow');
+
+sub merge {
+    my ($main, $shadow) = @_;
+
+    my @new = cat_("$new_dir/$main");
+    my %new_ids = map { (split ':')[2] => $_ } @new;
+
+    my %names_to_have;
+    foreach (cat_("$existing_dir/$main")) {
+	my @l = split ':';
+	next if $l[0] eq 'nobody' || $l[2] < 500;
+	if (my $e = $new_ids{$l[2]}) {
+	    $_ eq $e or warn "ERROR: conflicting entries:\n  $_  $e";
+	} else {
+	    push @new, $_;
+	    $names_to_have{$l[0]} = 1;
+	}
+    }
+
+    my @new_shadow = grep { !/^root:/ } cat_("$new_dir/$shadow");
+    foreach (cat_("$existing_dir/$shadow")) {
+	my ($name) = split ':';
+	if ($name eq 'root') {
+	    unshift @new_shadow, $_;
+	} elsif ($names_to_have{$name}) {
+	    push @new_shadow, $_;
+	}
+    }
+
+    if (rename "$existing_dir/$main",  "$existing_dir/$main.old") {
+	output("$existing_dir/$main", @new);
+    } else {
+	warn "rename $existing_dir/$main failed: $?\n";
+	<STDIN>;
+    }
+    if (rename "$existing_dir/$shadow",  "$existing_dir/$shadow.old") {
+	output("$existing_dir/$shadow", @new_shadow);
+    } else {
+	warn "rename $existing_dir/$shadow failed: $?\n";
+	<STDIN>;
+    }
+}

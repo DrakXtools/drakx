@@ -1,0 +1,185 @@
+#!/bin/bash
+
+# import functions library
+source rescue_common
+
+tmpdir="/tmp/flash-rescue-root"
+rootdir="$tmpdir/pen"
+
+
+config_files_network_scripts="etc/sysconfig/network-scripts/ifcfg-* \
+                              etc/sysconfig/network-scripts/cellular.d \
+                              etc/sysconfig/network-scripts/vpn.d \
+                              etc/sysconfig/network-scripts/wireless.d"
+
+config_files_users="etc/passwd etc/shadow etc/group etc/gshadow"
+config_files_time="etc/localtime etc/ntp etc/ntp.conf"
+config_files="etc/sysconfig/* $config_files_users $config_files_time \
+              etc/wpa_supplicant.conf etc/shorewall etc/kde \
+              etc/udev/rules.d/61-*_config.rules"
+
+config_files_to_remove="etc/sysconfig/harddrake2"
+
+function prepare() {
+
+    modprobe unionfs > /dev/null 2>&1
+    modprobe squashfs > /dev/null 2>&1
+    modprobe loop > /dev/null 2>&1
+
+    mkdir -p $rootdir
+    mkdir -p $tmpdir/squash
+    mkdir -p $tmpdir/user
+    mkdir -p $tmpdir/union
+
+    if ! mount_usbroot $rootdir; then
+        return 1
+    fi
+
+    mount -t ext2 -o loop $sys_loop $tmpdir/user > /dev/null 2>&1
+    if [ $? -ne 0 ]; then
+        echo "Error mounting system.loop"
+        return 1
+    fi
+
+    return 0
+}
+
+function get_existing_rpms() {
+
+    mount -t squashfs -o loop $sfs_loop $tmpdir/squash > /dev/null 2>&1
+    if [ $? -ne 0 ]; then
+        echo "Error mounting distrib.sqfs"
+        return 1
+    fi
+
+    mount -t unionfs -o dirs=$tmpdir/user=rw:$tmpdir/squash=ro \
+        none $tmpdir/union
+    if [ $? -ne 0 ]; then
+        echo "Error creating union of distrib.sqfs and system.loop"
+        return 1
+    fi
+
+    chroot $tmpdir/union rpm -qa > /tmp/existing_rpms.list
+    if [ $? -ne 0 ]; then
+        echo "Error getting list of rpms installed prior to upgrade"
+        return 1
+    fi
+
+    umount $tmpdir/union > /dev/null 2>&1
+    umount $tmpdir/squash > /dev/null 2>&1
+
+    return 0
+}
+
+function move_files() {
+    for i in $*; do
+	dir=`dirname $i`
+	[ "$dir" = "." ] || mkdir -p ..keep/$dir
+	mv $i ..keep/$dir
+    done
+}
+
+function remove_non_user_nor_config_files() {
+
+    cd $tmpdir/user
+
+    rm -rf $config_files_to_remove
+
+    if [ -e ..keep ]; then
+	mv ..keep ..keep.bak
+    fi
+    if [ -e ..keep ]; then
+	echo "remove_non_user_nor_config_files can't work with existing temp dir"
+	return 1
+    fi
+
+    mkdir ..keep
+
+    move_files $config_files_network_scripts
+    rm -rf etc/sysconfig/network-scripts
+
+    move_files home $config_files
+    rm -rf *
+    rm -rf .[^.]*
+
+    mv ..keep/* .
+    rmdir ..keep
+
+    cd -
+
+    return 0
+}
+
+function copy_new_version() {
+
+    return 0
+}
+
+function merge_config_files() {
+
+    mount -t squashfs -o loop $sfs_loop $tmpdir/squash > /dev/null 2>&1
+    if [ $? -ne 0 ]; then
+        echo "Error mounting distrib.sqfs"
+        return 1
+    fi
+
+    ./upgrade.merge-users $tmpdir/user/etc $tmpdir/squash/etc
+
+    return 0
+}
+
+function doit() {
+
+    if [ -d $tmpdir/user/var/lib/rpm/Packages ]; then
+        get_existing_rpms || return 1
+    fi
+
+    remove_non_user_nor_config_files || return 1
+
+    copy_new_version
+
+    merge_config_files || return 1
+
+    return 0
+}
+
+function cleanup() {
+    cd /
+
+    umount $tmpdir/union > /dev/null 2>&1
+    umount $tmpdir/user > /dev/null 2>&1
+    umount $tmpdir/squash > /dev/null 2>&1
+    umount $rootdir > /dev/null 2>&1
+
+    rmdir $tmpdir/union $tmpdir/user $tmpdir/squash 2> /dev/null
+    rmdir $rootdir $tmpdir 2> /dev/null
+}
+
+clear
+trap cleanup SIGINT
+
+version=""
+if ! insert_pendrive; then
+    exit 1
+fi
+
+if [ x"$version" = x"1.0" ]; then
+    sys_loop="$rootdir/loopbacks/system.loop"
+    sfs_loop="$rootdir/loopbacks/distrib.sqfs"
+else
+    sys_loop="$rootdir/.loopbacks/system.loop"
+    sfs_loop="$rootdir/.loopbacks/distrib.sqfs"
+fi
+
+if ! prepare; then
+    cleanup
+    exit 1
+fi
+
+if ! doit; then
+    cleanup
+    exit 1
+fi
+
+cleanup
+exit 0
