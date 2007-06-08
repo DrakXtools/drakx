@@ -199,14 +199,17 @@ sub search_installed_fonts_full_path() {
 }
 
 sub search_windows_font() {
+    my @fonts;
     foreach my $fstab_line (grep { /vfat|smbfs|ntfs|fuse/ } cat_('/etc/mtab')) {
         my $win_dir = (split('\s', $fstab_line))[1];
-        my @list_fonts_win   = (all("$win_dir/windows/fonts"), all("$win_dir/WINDOWS/Fonts"));
-        my @list_fonts_winnt = all("$win_dir/winnt/fonts");
-        my $nb_dir           = @list_fonts_win + @list_fonts_winnt;
-        foreach ([ \@list_fonts_win, "windows" ],
-                 [ \@list_fonts_win, "WINDOWS" ],
-                 [ \@list_fonts_winnt, "winnt" ]) {
+        foreach my $sys_dir (grep {  /^win(nt|dows)$/i } all($win_dir)) {
+            foreach my $font_dir (grep { /^fonts$/i } map { all($_) } "$win_dir/$sys_dir") {
+                push @fonts, map { "$win_dir/$sys_dir/$font_dir/$_" } all("$win_dir/$sys_dir/$font_dir");
+            }
+        }
+     }
+    my $nb_dir = @fonts;
+    foreach my $font (@fonts) {
             foreach my $i (@{ $_->[0] }) {
                 if ($interactive) {
                     if ($nb_dir) {
@@ -216,15 +219,12 @@ sub search_windows_font() {
                         return 0;
                     }
                 }
-                !$replace && any { /^$i$/ } @installed_fonts and next;
-                my $subdir = $_->[1];
-                any { /^$i$/ } @font_list or push @font_list,
-                  grep { -e $_ } map { ("$win_dir/$subdir/fonts/$_",
-                                         "$win_dir/$subdir/Fonts/$_") } $i;
-            }
-        }
-        $interactive && $nb_dir and progress($pbar, 1, N("done"));
+
+        my $font_name = basename($font);
+        !$replace && any { /^$font_name$/ } @installed_fonts and next;
+        any { /^$font_name$/ } @font_list or push @font_list, $font;
     }
+        $interactive && $nb_dir and progress($pbar, 1, N("done"));
     if (!@font_list) {
         print "[35mdrakfont:: could not find any font in /win*/fonts [0m\n";
         $interactive
