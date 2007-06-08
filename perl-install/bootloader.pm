@@ -1656,7 +1656,7 @@ sub install_grub {
 sub install_raw_grub() {
     log::l("Installing boot loader...");
     my $error;
-    run_program::rooted($::prefix, "sh", '/boot/grub/install.sh', "2>", \$error) or die "grub failed: $error";
+    run_program::rooted($::prefix, "sh", "2>", \$error, '/boot/grub/install.sh') or die "grub failed: $error";
 }
 
 sub when_config_changed_grub {
