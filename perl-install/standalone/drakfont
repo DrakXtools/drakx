@@ -209,17 +209,12 @@ sub search_windows_font() {
         }
      }
     my $nb_dir = @fonts;
+    if (!$nb_dir) {
+        err_dialog(N("Error"), N("No fonts found"));
+        return 0;
+    }
     foreach my $font (@fonts) {
-            foreach my $i (@{ $_->[0] }) {
-                if ($interactive) {
-                    if ($nb_dir) {
-                        progress($pbar, 0.25 / $nb_dir, N("parse all fonts"));
-                    } else {
-                        err_dialog(N("Error"), N("No fonts found"));
-                        return 0;
-                    }
-                }
-
+        progress($pbar, 0.25 / $nb_dir, N("parse all fonts"));
         my $font_name = basename($font);
         !$replace && any { /^$font_name$/ } @installed_fonts and next;
         any { /^$font_name$/ } @font_list or push @font_list, $font;
