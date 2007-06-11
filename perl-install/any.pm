@@ -530,7 +530,11 @@ sub setupBootloader__entries {
 	       } } }, \@l) or return;
 
 	$b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
-	$e->{vga} = ref($vga) ? $vga->{bios} : $vga;
+	my $new_vga = ref($vga) ? $vga->{bios} : $vga;
+	if ($new_vga ne $e->{vga}) {
+	    $e->{vga} = $new_vga;
+	    $e->{initrd} and bootloader::add_boot_splash($e->{initrd}, $e->{vga});
+	}
 	bootloader::set_append_netprofile($e, $append, $netprofile);
 	bootloader::configure_entry($b, $e); #- hack to make sure initrd file are built.
 	1;
