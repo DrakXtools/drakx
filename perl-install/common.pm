@@ -128,15 +128,17 @@ sub formatXiB {
 	($nb, $base) = ($newnb, $newbase);
 	$base >= 1024 ? ($newbase = $base / 1024) : ($newnb = $nb / 1024);
     };
-    foreach (N("B"), N("KB"), N("MB"), N("GB")) {
+    my $suffix;
+    foreach (N("B"), N("KB"), N("MB"), N("GB"), N("TB")) {
 	$decr->(); 
 	if ($newnb < 1 && $newnb * $newbase < 1) {
-	    my $v = $nb * $base;
-	    my $s = $v < 10 && int(10 * $v - 10 * int($v));
-	    return int($v) . ($s ? ".$s" : '') . $_;
+	    $suffix = $_;
+	    last;
 	}
     }
-    int($newnb * $newbase) . N("TB");
+    my $v = $nb * $base;
+    my $s = $v < 10 && int(10 * $v - 10 * int($v));
+    int($v) . ($s ? ".$s" : '') . ($suffix || N("TB"));
 }
 
 sub formatTime {
