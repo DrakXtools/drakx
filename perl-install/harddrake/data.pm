@@ -501,6 +501,14 @@ our @tree =
      },
      
      {
+      class => "BIOMETRIC",
+      string => N("Biometry"),
+      icon => "ups.png",
+      detector => sub { f(grep { $_->{description} =~ /fingerprint/i } @devices) },
+      checked_on_boot => 0,
+     },
+
+     {
       class => "UPS",
       string => N("UPS"),
       icon => "ups.png",
