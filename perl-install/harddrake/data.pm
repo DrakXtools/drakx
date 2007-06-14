@@ -523,7 +523,8 @@ our @tree =
       icon => "scanner.png",
       configurator => "$sbindir/scannerdrake",
       detector => sub { 
-         require scanner; f(scanner::detect()) },
+         require scanner; f(map { $_->{drakx_device} } f(scanner::detect()));
+      },
       checked_on_boot => 0,
      },
      
