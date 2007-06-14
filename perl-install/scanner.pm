@@ -349,6 +349,7 @@ sub detect {
 		id => $productid,
 		vendor => $vendorid,
 		driver => $driver,
+		drakx_device => $device,
 	    } 
 	};
     }
