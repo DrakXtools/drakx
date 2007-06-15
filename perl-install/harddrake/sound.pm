@@ -50,6 +50,7 @@ our %alsa2oss =
      "snd-bt87x"   => [ "btaudio" ],
      "snd-ca0106"  => [ "unknown" ], # pci
      "snd-cmi8330" => [ "sb" ], # isa
+     "snd-cmi8788" => [ "unknown" ], # pci
      "snd-cmipci"  => [ "cmpci" ],
      "snd-cs4231"  => [ "unknown" ], # isa
      "snd-cs4232"  => [ "cs4232" ],  # isa
