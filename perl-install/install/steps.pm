@@ -361,6 +361,12 @@ sub beforeInstallPackages {
     require network::network;
     network::network::add2hosts("localhost", "127.0.0.1");
 
+    #- resolv.conf will be modified at boot time
+    #- the following will ensure we have a working DNS during install
+    if (-e "/etc/resolv.conf" && ! -e "$::prefix/etc/resolv.conf") {
+	cp_af("/etc/resolv.conf", "$::prefix/etc");
+    }
+
     log::l("setting excludedocs to $o->{excludedocs}");
     substInFile { s/%_excludedocs.*//; $_ .= "%_excludedocs yes\n" if eof && $o->{excludedocs} } "$::prefix/etc/rpm/macros";
 
