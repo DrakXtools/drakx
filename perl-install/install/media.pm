@@ -368,7 +368,7 @@ sub get_file_and_size {
 	install::ftp::get_file_and_size($f, $phys_m->{url});
     } elsif ($phys_m->{method} eq "http") {
 	require install::http;
-	install::http::get_file_and_size("$phys_m->{url}/$f");
+	install::http::get_file_and_size_($f, $phys_m->{url});
     } elsif ($f =~ m!^/!) {
 	open_file_and_size($f);
     } elsif ($postinstall_rpms && -e "$postinstall_rpms/$f") {
