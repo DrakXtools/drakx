@@ -53,7 +53,6 @@
   ping hostname ifconfig route
 
   fdformat badblocks
-  /etc/mke2fs.conf
   e2fsck fsck.ext2 fsck.ext3 mke2fs mkfs.ext2 mkfs.ext3 resize2fs
   debugfs dumpe2fs tune2fs
   fsck.xfs xfs_repair
@@ -206,6 +205,7 @@
 </filter>
 
 <from dir="/etc">
+  mke2fs.conf
   inputrc
   termcap
   protocols
