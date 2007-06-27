@@ -10,7 +10,7 @@ use run_program;
 
 use Exporter;
 our @ISA = qw(Exporter);
-our @EXPORT = qw($SECTORSIZE N P N_ check_for_xserver files_exist formatTime formatXiB makedev mandrake_release removeXiBSuffix require_root_capability setVirtual set_alternative set_l10n_sort set_permissions translate unmakedev);
+our @EXPORT = qw($SECTORSIZE N P N_ check_for_xserver files_exist formatTime formatXiB makedev mandrake_release mandrake_release_info removeXiBSuffix require_root_capability setVirtual set_alternative set_l10n_sort set_permissions translate unmakedev);
 
 # perl_checker: RE-EXPORT-ALL
 push @EXPORT, @MDK::Common::EXPORT;
@@ -276,6 +276,10 @@ sub release_file {
 	(map { "/root/drakx/$_.upgrading" } @names), 
 	(map { "/etc/$_" } @names),
     );
+}
+
+sub mandrake_release_info() {
+    parse_LDAP_namespace_structure(cat_('/etc/product.id'));
 }
 
 sub parse_LDAP_namespace_structure {
