@@ -90,11 +90,10 @@ our %l = (
   {
     # ide drivers compiled as modules:
     ide => [
-        qw(aec62xx cs5520 cs5530 cs5535 delkin_cb it8213),
-        qw(rz1000 sc1200 slc90e66 tc86c001 triflex trm290 ide-generic) ],
-        qw(ali14xx amd74xx dtc2278 ht6560b qd65xx umc8672 alim15x3 atiixp cmd64x cy82c693),
-        qw(hpt34x hpt366 ns87415 opti621 pdc202xx_new pdc202xx_old piix serverworks),
-        qw(siimage sis5513 via82cxxx),
+        qw(aec62xx ali14xx alim15x3 amd74xx atiixp cmd64x cy82c693 cs5520 cs5530 cs5535),
+        qw(delkin_cb dtc2278 hpt34x hpt366 ns87415 ht6560b it8213),
+        qw(opti621 pdc202xx_new pdc202xx_old piix qd65xx rz1000 sc1200 serverworks siimage sis5513 slc90e66),
+        qw(tc86c001 triflex trm290 umc8672 via82cxxx ide-generic),
     ],
     scsi => [
       if_(arch() =~ /ppc/, qw(mesh mac53c94)),
