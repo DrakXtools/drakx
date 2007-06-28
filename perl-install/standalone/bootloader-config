@@ -135,7 +135,6 @@ sub remove_kernel() {
 #-###############################################################################
 sub add_kernel() {
     configure_ide_controller();
-    exit;
     bootloader::create_link_source();
 
     my $kernel_str = bootloader::vmlinuz2kernel_str($image) or die "bad kernel name $image\n";
