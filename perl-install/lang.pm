@@ -1021,7 +1021,7 @@ sub read {
 sub write_langs {
     my ($langs) = @_;
     my $s = pack_langs($langs);
-    symlink "$::prefix/etc/rpm", "/etc/rpm" if $::prefix;
+    symlink "$::prefix/etc/rpm/macros", "/etc/rpm/macros" if $::prefix;
     require URPM;
     URPM::add_macro("_install_langs $s");
     substInFile { s/%_install_langs.*//; $_ .= "%_install_langs $s\n" if eof && $s } "$::prefix/etc/rpm/macros";

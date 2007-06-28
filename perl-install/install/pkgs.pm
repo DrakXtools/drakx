@@ -2,6 +2,12 @@ package install::pkgs; # $Id$
 
 use strict;
 
+BEGIN {
+    # needed before "use URPM"
+    mkdir '/etc/rpm';
+    symlink '/tmp/stage2/etc/rpm/platform', '/etc/rpm/platform';
+}
+
 use URPM;
 use URPM::Resolve;
 use URPM::Signature;
