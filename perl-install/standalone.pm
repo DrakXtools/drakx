@@ -17,7 +17,6 @@ $ENV{SHARE_PATH} ||= "/usr/share";
 
 eval { #- allow standalone.pm to be used in drakxtools-backend without perl-Locale-gettext
     c::init_setlocale();
-    push @::textdomains, 'libDrakX-standalone', 'drakx-net', 'drakx-kbd-mouse-x11';
     Locale::gettext::bindtextdomain('libDrakX', "/usr/share/locale");
 };
 
