@@ -134,6 +134,8 @@ sub remove_kernel() {
 
 #-###############################################################################
 sub add_kernel() {
+    configure_ide_controller();
+    exit;
     bootloader::create_link_source();
 
     my $kernel_str = bootloader::vmlinuz2kernel_str($image) or die "bad kernel name $image\n";
@@ -162,6 +164,17 @@ sub add_kernel() {
     bootloader::add_kernel($bootloader, $kernel_str, { %opts }, 1, $no_initrd);
 
     modify_bootloader();
+}
+
+sub configure_ide_controller {
+    my $modules_conf = modules::any_conf->read;
+    if ($modules_conf->get_alias('ide-controller') || 
+        $modules_conf->get_probeall('ide-controller')) {
+	#- already configured
+    } elsif (my @l = detect_devices::probe_category('disk/ide')) {
+	$modules_conf->add_probeall('ide-controller', $_->{driver}) foreach @l;
+	$modules_conf->write;
+    }
 }
 
 sub modify_bootloader() {
