@@ -28,7 +28,7 @@ use fs::type;
 #- list of fields for {mediums} :
 #-	end (last rpm id, undefined iff not selected)
 #-	fakemedium ("$name ($rpmsdir)", used locally by urpmi)
-#-	hdlist
+#-	rel_hdlist
 #-	hdlist_size
 #-	key_ids (hashref, values are key ids)
 #-	name (text description)
@@ -482,7 +482,7 @@ sub parse_media_cfg {
 	my ($size) = $d->getvalue($_, 'size') =~ /(\d+)MB?/i;
 	{ 
 	    rpmsdir => $_,
-	    hdlist => $d->getvalue($_, 'hdlist'),
+	    rel_hdlist => 'media_info/' . $d->getvalue($_, 'hdlist'),
 	    name => $d->getvalue($_, 'name'),
 	    size => $size,
 	    selected => !$d->getvalue($_, 'noauto'),
@@ -511,7 +511,7 @@ sub parse_hdlists {
             or die qq(invalid hdlist description "$_" in hdlists file);
         $name =~ s/\s+$//;
         $size =~ s/MB?$//i;
-        push @hdlists, { hdlist => $hdlist, rpmsdir => $rpmsdir, name => $name, selected => !$noauto, size => $size };
+        push @hdlists, { rel_hdlist => "media_info/$hdlist", rpmsdir => $rpmsdir, name => $name, selected => !$noauto, size => $size };
     }
     (\%main_options, \@hdlists);
 }
@@ -673,14 +673,14 @@ sub get_media_cfg {
 sub get_standalone_medium {
     my ($in, $phys_m, $packages, $m) = @_;
 
-    add2hash($m, { phys_medium => $phys_m, selected => 1, hdlist => 'hdlist.cz' });
+    add2hash($m, { phys_medium => $phys_m, selected => 1, rel_hdlist => 'media_info/hdlist.cz' });
     get_medium($in, $phys_m, $packages, $m);
 }
 
 sub get_medium {
     my ($in_wait, $phys_m, $packages, $m) = @_;
 
-    $m->{selected} or log::l("ignoring packages in $m->{hdlist}"), return;
+    $m->{selected} or log::l("ignoring packages in $m->{rel_hdlist}"), return;
 
     my $medium_id = int @{$packages->{mediums}};
     $m->{fakemedium} = $m->{name} || $phys_m->{method};
@@ -690,30 +690,34 @@ sub get_medium {
 	$m->{fakemedium} =~ s!/!_!g; #- remove "/" from rpmsdir
     }
 
-    log::l("trying to read $m->{hdlist} for medium '$m->{fakemedium}'");
+    log::l("trying to read $m->{rel_hdlist} for medium '$m->{fakemedium}'");
     
     #- copy hdlist file directly to urpmi directory, this will be used
     #- for getting header of package during installation or after by urpmi.
     my $hdlist = hdlist_on_disk($m);
     {
-	getAndSaveFile_progress($in_wait, N("Downloading file %s...", $m->{hdlist}),
-				$phys_m, "media_info/$m->{hdlist}", $hdlist) or die "no $m->{hdlist} found";
+	getAndSaveFile_progress($in_wait, N("Downloading file %s...", $m->{rel_hdlist}),
+				$phys_m, $m->{rel_hdlist}, $hdlist) or die "no $m->{rel_hdlist} found";
 
 	$m->{hdlist_size} = -s $hdlist; #- keep track of size for post-check.
     }
 
     my $synthesis = urpmidir() . "/synthesis.hdlist.$m->{fakemedium}.cz";
     {
+	my $rel_synthesis = $m->{rel_hdlist};
+	$rel_synthesis =~ s!/hdlist!/synthesis.hdlist! or internal_error("bad {rel_hdlist} $m->{rel_hdlist}");
 	#- copy existing synthesis file too.
-	getAndSaveFile_progress($in_wait, N("Downloading file %s...", "synthesis.$m->{hdlist}"),
-				$phys_m, "media_info/synthesis.$m->{hdlist}", $synthesis);
+	getAndSaveFile_progress($in_wait, N("Downloading file %s...", $rel_synthesis),
+				$phys_m, $rel_synthesis, $synthesis);
 	$m->{synthesis_hdlist_size} = -s $synthesis; #- keep track of size for post-check.
     }
 
     #- get all keys corresponding in the right pubkey file,
     #- they will be added in rpmdb later if not found.
     if (!$m->{pubkey}) {
-	if (my $pubkey = getFile_($phys_m, "media_info/pubkey" . ($m->{hdlist} =~ /hdlist(\S*)\.cz/ && $1))) {
+	my $rel_pubkey = $m->{rel_hdlist};
+	$rel_pubkey =~ s!/hdlist(.*)\.cz!/pubkey$1! or internal_error("bad {rel_hdlist} $m->{rel_hdlist}");
+	if (my $pubkey = getFile_($phys_m, $rel_pubkey)) {
 	    $m->{pubkey} = [ $packages->parse_armored_file($pubkey) ];
 	}
     }
@@ -755,7 +759,7 @@ sub get_medium {
 	    unlink $hdlist, $synthesis;
 	    die $error;
 	} else {
-	    log::l("medium " . phys_medium_to_string($phys_m) . ", read " . ($m->{end} - $m->{start} + 1) . " packages in $m->{hdlist}, $nb_suppl_pkg_skipped skipped");
+	    log::l("medium " . phys_medium_to_string($phys_m) . ", read " . ($m->{end} - $m->{start} + 1) . " packages in $m->{rel_hdlist}, $nb_suppl_pkg_skipped skipped");
 	}
     }
 }
