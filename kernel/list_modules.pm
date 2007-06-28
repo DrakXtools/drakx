@@ -92,8 +92,6 @@ our %l = (
     ide => [
         qw(aec62xx cs5520 cs5530 cs5535 delkin_cb it8213),
         qw(rz1000 sc1200 slc90e66 tc86c001 triflex trm290 ide-generic) ],
-    # ide drivers compiled in core kernel:
-    all_ide => [
         qw(ali14xx amd74xx dtc2278 ht6560b qd65xx umc8672 alim15x3 atiixp cmd64x cy82c693),
         qw(hpt34x hpt366 ns87415 opti621 pdc202xx_new pdc202xx_old piix serverworks),
         qw(siimage sis5513 via82cxxx),

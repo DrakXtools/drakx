@@ -376,7 +376,7 @@ our @tree =
       string => N("(E)IDE/ATA controllers"),
       icon => "ide_hd.png",
       configurator => "",
-      detector => sub { f(detect_devices::probe_category('disk/all_ide'), detect_devices::probe_category('disk/ide')),
+      detector => sub { f(detect_devices::probe_category('disk/ide')),
                           f(grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ } @devices) },
       checked_on_boot => 1,
      },
