@@ -1,6 +1,6 @@
 include ../Makefile.config
 
-VERSION=1.9
+VERSION=1.10
 PRODUCT=drakx-installer-images
 
 IMAGES_DEST = $(ROOTDEST)/install/images
