@@ -664,7 +664,7 @@ sub syslinux_all_files {
 
     $default_vga =~ /788/ or die 'we rely on vga=788 for bootsplash';
     my $theme = $ENV{THEME} || 'Mandriva-Free';
-    my $bootspash_cfg = '/etc/bootsplash/themes/$theme/config/bootsplash-800x600.cfg';
+    my $bootspash_cfg = "/etc/bootsplash/themes/$theme/config/bootsplash-800x600.cfg";
     -e $bootspash_cfg or die "can't find $bootspash_cfg";
 
     each_index {
