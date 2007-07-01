@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 2007\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-21 12:08+0100\n"
+"POT-Creation-Date: 2007-07-01 13:42+0200\n"
 "PO-Revision-Date: 2006-09-16 07:01+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
@@ -16,164 +16,42 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: drakautoinst:37
-#, c-format
-msgid "Error!"
-msgstr "错误！"
-
-#: drakautoinst:38
-#, c-format
-msgid "I can not find needed image file `%s'."
-msgstr "无法找到映像文件“%s”。"
-
-#: drakautoinst:40
-#, c-format
-msgid "Auto Install Configurator"
-msgstr "自动安装配置程序"
-
-#: drakautoinst:41
-#, c-format
-msgid ""
-"You are about to configure an Auto Install floppy. This feature is somewhat "
-"dangerous and must be used circumspectly.\n"
-"\n"
-"With that feature, you will be able to replay the installation you've "
-"performed on this computer, being interactively prompted for some steps, in "
-"order to change their values.\n"
-"\n"
-"For maximum safety, the partitioning and formatting will never be performed "
-"automatically, whatever you chose during the install of this computer.\n"
-"\n"
-"Press ok to continue."
-msgstr ""
-"现在配置自动安装软盘。该功能有些危险, 请慎重使用。\n"
-"\n"
-"使用此功能, 您可以重现该机器的安装, 交互提示某些步骤, 修改数值。\n"
-"\n"
-"为安全起见, 分区及格式化不会自动执行。您必须在要安装的机器上选择。\n"
-"\n"
-"请点击确定继续。"
-
-#: drakautoinst:59
-#, c-format
-msgid "replay"
-msgstr "重放"
-
-#: drakautoinst:59 drakautoinst:68
-#, c-format
-msgid "manual"
-msgstr "手动"
-
-#: drakautoinst:63
-#, c-format
-msgid "Automatic Steps Configuration"
-msgstr "自动步骤配置"
-
-#: drakautoinst:64
-#, c-format
-msgid ""
-"Please choose for each step whether it will replay like your install, or it "
-"will be manual"
-msgstr "请指定安装的每一步骤, 是要按照本次安装重放, 还是手工完成"
-
-#: drakautoinst:75
-#, c-format
-msgid "Insert a blank floppy in drive %s"
-msgstr "请在驱动器 %s 中插入一张空白软盘"
-
-#: drakautoinst:76 drakautoinst:77 drakautoinst:91
-#, c-format
-msgid "Creating auto install floppy"
-msgstr "创建自动安装软盘"
-
-#: drakautoinst:89
-#, c-format
-msgid "Insert another blank floppy in drive %s (for drivers disk)"
-msgstr "请在驱动器 %s 中插入一张空白软盘(驱动程序盘)"
-
-#: drakautoinst:90
-#, c-format
-msgid "Creating auto install floppy (drivers disk)"
-msgstr "创建自动安装软盘(驱动程序盘)"
-
-#: drakautoinst:155
-#, c-format
-msgid ""
-"\n"
-"Welcome.\n"
-"\n"
-"The parameters of the auto-install are available in the sections on the left"
-msgstr ""
-"\n"
-"欢迎。\n"
-"\n"
-"左边列出了自动安装可用的选项"
-
-#: drakautoinst:249 scannerdrake:420
-#, c-format
-msgid "Congratulations!"
-msgstr "恭喜!"
-
-#: drakautoinst:250
-#, c-format
-msgid ""
-"The floppy has been successfully generated.\n"
-"You may now replay your installation."
-msgstr ""
-"您的软盘已经成功生成。\n"
-"您可以用它重现这次安装。"
-
-#: drakautoinst:286
-#, c-format
-msgid "Auto Install"
-msgstr "自动安装"
-
-#: drakautoinst:355
-#, c-format
-msgid "Add an item"
-msgstr "添加项目"
-
-#: drakautoinst:362
-#, c-format
-msgid "Remove the last item"
-msgstr "删除最后一项"
-
 #: drakboot:49
 #, c-format
 msgid "No bootloader found, creating a new configuration"
 msgstr "未找到引导程序，创建新配置"
 
-#: drakboot:86 harddrake2:194 harddrake2:195 logdrake:70
+#: drakboot:83 harddrake2:194 harddrake2:195 logdrake:70
 #, c-format
 msgid "/_File"
 msgstr "/文件(_F)"
 
-#: drakboot:87 logdrake:76
+#: drakboot:84 logdrake:76
 #, c-format
 msgid "/File/_Quit"
 msgstr "/文件(F)/退出(_Q)"
 
-#: drakboot:87 harddrake2:195 logdrake:76
+#: drakboot:84 harddrake2:195 logdrake:76
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
 
-#: drakboot:127
+#: drakboot:124
 #, c-format
 msgid "Text only"
 msgstr "只有文本"
 
-#: drakboot:128
+#: drakboot:125
 #, c-format
 msgid "Verbose"
 msgstr "详细"
 
-#: drakboot:129
+#: drakboot:126
 #, c-format
 msgid "Silent"
 msgstr "静默"
 
-#: drakboot:136
+#: drakboot:133
 #, c-format
 msgid ""
 "Your system bootloader is not in framebuffer mode. To activate graphical "
@@ -182,32 +60,32 @@ msgstr ""
 "您的系统引导程序并不位于帧缓存模式。要激活图形化引导程序, 请在引导程序配置工"
 "具中选择图形视频模式。"
 
-#: drakboot:137
+#: drakboot:134
 #, c-format
 msgid "Do you want to configure it now?"
 msgstr "您想要现在配置吗?"
 
-#: drakboot:146
+#: drakboot:143
 #, c-format
 msgid "Install themes"
 msgstr "安装主题"
 
-#: drakboot:148
+#: drakboot:145
 #, c-format
 msgid "Graphical boot theme selection"
 msgstr "图形化启动主题选择"
 
-#: drakboot:151
+#: drakboot:148
 #, c-format
 msgid "Graphical boot mode:"
 msgstr "图形化启动模式:"
 
-#: drakboot:153
+#: drakboot:150
 #, c-format
 msgid "Theme"
 msgstr "主题"
 
-#: drakboot:156
+#: drakboot:153
 #, c-format
 msgid ""
 "Display theme\n"
@@ -216,42 +94,42 @@ msgstr ""
 "在控制台\n"
 "显示主题"
 
-#: drakboot:161 draksplash:25
+#: drakboot:158 draksplash:25
 #, c-format
 msgid "Create new theme"
 msgstr "创建新主题"
 
-#: drakboot:193
+#: drakboot:190
 #, c-format
 msgid "Default user"
 msgstr "默认用户"
 
-#: drakboot:194
+#: drakboot:191
 #, c-format
 msgid "Default desktop"
 msgstr "默认桌面"
 
-#: drakboot:197
+#: drakboot:194
 #, c-format
 msgid "No, I do not want autologin"
 msgstr "否, 不要自动登录"
 
-#: drakboot:198
+#: drakboot:195
 #, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "是, 以指定用户的身份自动登录到指定桌面"
 
-#: drakboot:205
+#: drakboot:202
 #, c-format
 msgid "System mode"
 msgstr "系统模式"
 
-#: drakboot:208
+#: drakboot:205
 #, c-format
 msgid "Launch the graphical environment when your system starts"
 msgstr "系统启动时进入图形环境"
 
-#: drakboot:263
+#: drakboot:260
 #, c-format
 msgid ""
 "Please choose a video mode, it will be applied to each of the boot entries "
@@ -493,93 +371,93 @@ msgstr "搜索已安装的字体"
 msgid "Unselect fonts installed"
 msgstr "不选已安装的文件"
 
-#: drakfont:212
-#, c-format
-msgid "parse all fonts"
-msgstr "分析所有字体"
-
-#: drakfont:214
+#: drakfont:213
 #, c-format
 msgid "No fonts found"
 msgstr "找不到字体"
 
-#: drakfont:222 drakfont:264 drakfont:333 drakfont:374 drakfont:382
-#: drakfont:408 drakfont:426 drakfont:440
+#: drakfont:217
+#, c-format
+msgid "parse all fonts"
+msgstr "分析所有字体"
+
+#: drakfont:222 drakfont:263 drakfont:332 drakfont:373 drakfont:381
+#: drakfont:407 drakfont:425 drakfont:439
 #, c-format
 msgid "done"
 msgstr "完成"
 
-#: drakfont:227
+#: drakfont:226
 #, c-format
 msgid "Could not find any font in your mounted partitions"
 msgstr "在已挂载的分区中找不到任何字体"
 
-#: drakfont:262
+#: drakfont:261
 #, c-format
 msgid "Reselect correct fonts"
 msgstr "重新选择正确字体"
 
-#: drakfont:265
+#: drakfont:264
 #, c-format
 msgid "Could not find any font.\n"
 msgstr "找不到任何字体。\n"
 
-#: drakfont:275
+#: drakfont:274
 #, c-format
 msgid "Search for fonts in installed list"
 msgstr "在安装记录中查找字体"
 
-#: drakfont:294
+#: drakfont:293
 #, c-format
 msgid "%s fonts conversion"
 msgstr "%s 字体转换"
 
-#: drakfont:331
+#: drakfont:330
 #, c-format
 msgid "Fonts copy"
 msgstr "复制字体"
 
-#: drakfont:334
+#: drakfont:333
 #, c-format
 msgid "True Type fonts installation"
 msgstr "TrueType 字体安装"
 
-#: drakfont:342
+#: drakfont:341
 #, c-format
 msgid "please wait during ttmkfdir..."
 msgstr "正在运行 ttmkfdir, 请稍候..."
 
-#: drakfont:343
+#: drakfont:342
 #, c-format
 msgid "True Type install done"
 msgstr "TrueType 字体安装完成"
 
-#: drakfont:349 drakfont:364
+#: drakfont:348 drakfont:363
 #, c-format
 msgid "type1inst building"
 msgstr "正在构造 type1inst"
 
-#: drakfont:358
+#: drakfont:357
 #, c-format
 msgid "Ghostscript referencing"
 msgstr "Ghostscript 引用"
 
-#: drakfont:375
+#: drakfont:374
 #, c-format
 msgid "Suppress Temporary Files"
 msgstr "删除临时文件"
 
-#: drakfont:378 drakfont:436
+#: drakfont:377 drakfont:435
 #, c-format
 msgid "Restart XFS"
 msgstr "重新启动 XFS"
 
-#: drakfont:424 drakfont:434
+#: drakfont:423 drakfont:433
 #, c-format
 msgid "Suppress Fonts Files"
 msgstr "删除字体文件"
 
-#: drakfont:444
+#: drakfont:443
 #, c-format
 msgid ""
 "Before installing any fonts, be sure that you have the right to use and "
@@ -592,164 +470,164 @@ msgstr ""
 "\n"
 "通常字体安装可以正常进行。但有罕见的例外, 有问题的字体会使 X 挂住。"
 
-#: drakfont:484
+#: drakfont:483
 #, c-format
 msgid "Font Installation"
 msgstr "字体安装"
 
-#: drakfont:495
+#: drakfont:494
 #, c-format
 msgid "DrakFont"
 msgstr "Drak 字体"
 
-#: drakfont:496 drakfont:648
+#: drakfont:495 drakfont:647
 #, c-format
 msgid "Font List"
 msgstr "字体列表"
 
-#: drakfont:499
+#: drakfont:498
 #, c-format
 msgid "Get Windows Fonts"
 msgstr "获得 Windows 字体"
 
-#: drakfont:505
+#: drakfont:504
 #, c-format
 msgid "About"
 msgstr "关于"
 
-#: drakfont:507 drakfont:727
+#: drakfont:506 drakfont:726
 #, c-format
 msgid "Uninstall"
 msgstr "卸载"
 
-#: drakfont:508
+#: drakfont:507
 #, c-format
 msgid "Import"
 msgstr "导入"
 
-#: drakfont:526
+#: drakfont:525
 #, c-format
 msgid "Drakfont"
 msgstr "Drakfont"
 
-#: drakfont:528
+#: drakfont:527
 #, c-format
 msgid "Copyright (C) 2001-2006 by Mandriva"
 msgstr "版权 (C) 2001-2006 Mandriva"
 
-#: drakfont:530
+#: drakfont:529
 #, c-format
 msgid "Font installer."
 msgstr "字体安装程序。"
 
-#: drakfont:532 harddrake2:236
+#: drakfont:531 harddrake2:236
 #, c-format
 msgid "Mandriva Linux"
 msgstr "Mandriva Linux"
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:539 harddrake2:241
+#: drakfont:538 harddrake2:241
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr "Funda Wang <fundawang@gmail.com>\n"
 
-#: drakfont:549
+#: drakfont:548
 #, c-format
 msgid "Choose the applications that will support the fonts:"
 msgstr "请选择要支持字体的应用程序: "
 
-#: drakfont:560
+#: drakfont:559
 #, c-format
 msgid "Ghostscript"
 msgstr "Ghostscript"
 
-#: drakfont:561
+#: drakfont:560
 #, c-format
 msgid "OpenOffice.org"
 msgstr "OpenOffice.org"
 
-#: drakfont:562
+#: drakfont:561
 #, c-format
 msgid "Abiword"
 msgstr "Abiword"
 
-#: drakfont:563
+#: drakfont:562
 #, c-format
 msgid "Generic Printers"
 msgstr "通用打印机"
 
-#: drakfont:577
+#: drakfont:576
 #, c-format
 msgid "Select the font file or directory and click on 'Add'"
 msgstr "选择字体文件或目录, 然后单击“添加”"
 
-#: drakfont:578
+#: drakfont:577
 #, c-format
 msgid "File Selection"
 msgstr "选择文件"
 
-#: drakfont:582
+#: drakfont:581
 #, c-format
 msgid "Fonts"
 msgstr "字体"
 
-#: drakfont:646
+#: drakfont:645
 #, c-format
 msgid "Import fonts"
 msgstr "导入字体"
 
-#: drakfont:659
+#: drakfont:658
 #, c-format
 msgid "Install"
 msgstr "安装"
 
-#: drakfont:690
+#: drakfont:689
 #, c-format
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "您确定想要卸载下列字体吗?"
 
-#: drakfont:735
+#: drakfont:734
 #, c-format
 msgid "Unselected All"
 msgstr "全部不选"
 
-#: drakfont:738
+#: drakfont:737
 #, c-format
 msgid "Selected All"
 msgstr "全部选中"
 
-#: drakfont:752 drakfont:771
+#: drakfont:751 drakfont:770
 #, c-format
 msgid "Importing fonts"
 msgstr "导入字体"
 
-#: drakfont:756 drakfont:776
+#: drakfont:755 drakfont:775
 #, c-format
 msgid "Initial tests"
 msgstr "初始测试"
 
-#: drakfont:757
+#: drakfont:756
 #, c-format
 msgid "Copy fonts on your system"
 msgstr "复制系统中的字体"
 
-#: drakfont:758
+#: drakfont:757
 #, c-format
 msgid "Install & convert Fonts"
 msgstr "安装并转换字体"
 
-#: drakfont:759
+#: drakfont:758
 #, c-format
 msgid "Post Install"
 msgstr "安装后的设置"
 
-#: drakfont:777
+#: drakfont:776
 #, c-format
 msgid "Remove fonts on your system"
 msgstr "删除系统中的字体"
 
-#: drakfont:778
+#: drakfont:777
 #, c-format
 msgid "Post Uninstall"
 msgstr "删除后"
@@ -788,12 +666,12 @@ msgid ""
 "frontend)\n"
 msgstr " --doc <link>          - 链接到其他网页 ( 给 WM 欢迎的前端使用)\n"
 
-#: drakhelp:51
+#: drakhelp:52
 #, c-format
 msgid "Mandriva Linux Help Center"
 msgstr "Mandriva Linux 帮助中心"
 
-#: drakhelp:51
+#: drakhelp:52
 #, c-format
 msgid "No Help entry for %s\n"
 msgstr "%s 没有帮助项\n"
@@ -3079,6 +2957,11 @@ msgstr ""
 msgid "edit the configuration file /etc/sane.d/%s.conf. "
 msgstr "请编辑配置文件 /etc/sane.d/%s.conf。"
 
+#: scannerdrake:420
+#, c-format
+msgid "Congratulations!"
+msgstr "恭喜!"
+
 #: scannerdrake:421
 #, c-format
 msgid ""
@@ -3275,27 +3158,27 @@ msgstr ""
 msgid "Your scanner(s) will not be available on the network."
 msgstr "您的扫描仪将不会在网络上出现。"
 
-#: service_harddrake:119
+#: service_harddrake:137
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "删除了一些“%s”类别的设备:\n"
 
-#: service_harddrake:120
+#: service_harddrake:138
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- %s 已删除\n"
 
-#: service_harddrake:123
+#: service_harddrake:141
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "添加了一些设备: %s\n"
 
-#: service_harddrake:124
+#: service_harddrake:142
 #, c-format
 msgid "- %s was added\n"
 msgstr "- %s 已添加\n"
 
-#: service_harddrake:245
+#: service_harddrake:265
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "硬件检测进行中"
@@ -3309,6 +3192,91 @@ msgstr "在“%s”类别更改了硬件(还剩 %s 秒回答)"
 #, c-format
 msgid "Do you want to run the appropriate config tool?"
 msgstr "您想要运行相应的配置工具吗?"
+
+#~ msgid "Error!"
+#~ msgstr "错误！"
+
+#~ msgid "I can not find needed image file `%s'."
+#~ msgstr "无法找到映像文件“%s”。"
+
+#~ msgid "Auto Install Configurator"
+#~ msgstr "自动安装配置程序"
+
+#~ msgid ""
+#~ "You are about to configure an Auto Install floppy. This feature is "
+#~ "somewhat dangerous and must be used circumspectly.\n"
+#~ "\n"
+#~ "With that feature, you will be able to replay the installation you've "
+#~ "performed on this computer, being interactively prompted for some steps, "
+#~ "in order to change their values.\n"
+#~ "\n"
+#~ "For maximum safety, the partitioning and formatting will never be "
+#~ "performed automatically, whatever you chose during the install of this "
+#~ "computer.\n"
+#~ "\n"
+#~ "Press ok to continue."
+#~ msgstr ""
+#~ "现在配置自动安装软盘。该功能有些危险, 请慎重使用。\n"
+#~ "\n"
+#~ "使用此功能, 您可以重现该机器的安装, 交互提示某些步骤, 修改数值。\n"
+#~ "\n"
+#~ "为安全起见, 分区及格式化不会自动执行。您必须在要安装的机器上选择。\n"
+#~ "\n"
+#~ "请点击确定继续。"
+
+#~ msgid "replay"
+#~ msgstr "重放"
+
+#~ msgid "manual"
+#~ msgstr "手动"
+
+#~ msgid "Automatic Steps Configuration"
+#~ msgstr "自动步骤配置"
+
+#~ msgid ""
+#~ "Please choose for each step whether it will replay like your install, or "
+#~ "it will be manual"
+#~ msgstr "请指定安装的每一步骤, 是要按照本次安装重放, 还是手工完成"
+
+#~ msgid "Insert a blank floppy in drive %s"
+#~ msgstr "请在驱动器 %s 中插入一张空白软盘"
+
+#~ msgid "Creating auto install floppy"
+#~ msgstr "创建自动安装软盘"
+
+#~ msgid "Insert another blank floppy in drive %s (for drivers disk)"
+#~ msgstr "请在驱动器 %s 中插入一张空白软盘(驱动程序盘)"
+
+#~ msgid "Creating auto install floppy (drivers disk)"
+#~ msgstr "创建自动安装软盘(驱动程序盘)"
+
+#~ msgid ""
+#~ "\n"
+#~ "Welcome.\n"
+#~ "\n"
+#~ "The parameters of the auto-install are available in the sections on the "
+#~ "left"
+#~ msgstr ""
+#~ "\n"
+#~ "欢迎。\n"
+#~ "\n"
+#~ "左边列出了自动安装可用的选项"
+
+#~ msgid ""
+#~ "The floppy has been successfully generated.\n"
+#~ "You may now replay your installation."
+#~ msgstr ""
+#~ "您的软盘已经成功生成。\n"
+#~ "您可以用它重现这次安装。"
+
+#~ msgid "Auto Install"
+#~ msgstr "自动安装"
+
+#~ msgid "Add an item"
+#~ msgstr "添加项目"
+
+#~ msgid "Remove the last item"
+#~ msgstr "删除最后一项"
 
 #~ msgid "HardDrake"
 #~ msgstr "Drak 硬件管理"
