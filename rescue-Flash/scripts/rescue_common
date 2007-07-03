@@ -81,11 +81,8 @@ EOF
 
             if ! check_vendor; then
                 echo
-                echo "This rescue system only works with Mandriva Flash keys."
+                echo "This is not an official Mandriva Flash key!"
                 echo
-                umount $_tmpdir
-                rmdir $_tmpdir 2> /dev/null
-                return 1
             fi
 
             cat /proc/mounts | grep $_tmpdir | cut -d' ' -f1 | \
