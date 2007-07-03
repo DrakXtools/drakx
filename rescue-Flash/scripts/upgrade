@@ -59,24 +59,35 @@ function get_existing_rpms() {
         return 1
     fi
 
-    chroot $tmpdir/union rpm -qa > /tmp/existing_rpms.list
+    chroot $tmpdir/squash rpm -qa | sort > /tmp/previous_rpms.list
+    if [ $? -ne 0 ]; then
+        echo "Error getting list of vanilla rpms installed on previous key"
+    fi
+
+    chroot $tmpdir/union rpm -qa | sort > /tmp/existing_rpms.list
     if [ $? -ne 0 ]; then
         echo "Error getting list of rpms installed prior to upgrade"
-        return 1
     fi
 
     umount $tmpdir/union > /dev/null 2>&1
     umount $tmpdir/squash > /dev/null 2>&1
+
+    mkdir -p $tmpdir/user/root
+    diff /tmp/previous_rpms.list /tmp/existing_rpms.list | sed -n 's/^> //p' > $tmpdir/user/root/new_existing_rpms.list
 
     return 0
 }
 
 function move_files() {
     for i in $*; do
-	dir=`dirname $i`
-	[ "$dir" = "." ] || mkdir -p ..keep/$dir
-	mv $i ..keep/$dir
+	if [ -e $i ]; then
+	    dir=`dirname $i`
+	    [ "$dir" = "." ] || mkdir -p ..keep/$dir
+	    mv $i ..keep/$dir || { echo "Error moving $i"; return 1; }
+	fi
     done
+
+    return 0
 }
 
 function remove_non_user_nor_config_files() {
@@ -95,17 +106,17 @@ function remove_non_user_nor_config_files() {
 
     mkdir ..keep
 
-    move_files $config_files_network_scripts
+    move_files $config_files_network_scripts || return 1
     rm -rf etc/sysconfig/network-scripts
 
-    move_files home $config_files
+    move_files home root $config_files || return 1
     rm -rf *
     rm -rf .[^.]*
 
     mv ..keep/* .
     rmdir ..keep
 
-    cd -
+    cd - > /dev/null
 
     return 0
 }
