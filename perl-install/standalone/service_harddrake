@@ -47,29 +47,24 @@ if (!exists $previous_kernel_config{IS_LAPTOP} || $force || $isLaptop != text2bo
     harddrake::autoconf::laptop($isLaptop);
 }
 
-if (find { $_->{driver} =~ /Card:NVIDIA/ } detect_devices::probeall()) {
-    if (find { -e join('', "/lib/modules/", c::kernel_version(), "/kernel/drivers/$_") }  map { ("extra/$_", "video/$_", "char/$_", "char/drm/$_") } qw(NVdriver nvidia.o nvidia.o.gz), map { $_, "$_.gz" } qw(nvidia.ko nvidia71xx.ko nvidia96xx.ko nvidia97xx.ko)) {
-        # do not automatically switch from nv to nvidia (in order to handle
-        # cases where nvidia module crashes the system):
-        #
-        # substInFile {
-        #    log::explanations("switch XFree86 driver from nv to nvidia") if /Driver "nv"/;
-        #    s!Driver "nv.*"!Driver "nvidia"!g;
-        #    s!#*( Load.*glx)!\1!g;
-        # } $_ foreach "/etc/X11/XF86Config-4", "/etc/X11/XF86Config";
-    } else {
-        my $done;
-        substInFile { $done ||= s!Driver "nv.*"!Driver "nv"!g } '/etc/X11/xorg.conf';
-        if ($done) {
-            log::explanations("switch X.org driver from nvidia to nv");
-            require Xconfig::card;
-            Xconfig::card::libgl_config_and_more({ Driver => 'nv' });
-        }
+my @cards = (
+    {
+        ldetect_driver_regexp => 'Card:NVIDIA',
+        xorg_driver_regexp => 'nv.+',
+        module_names => [ qw(NVdriver nvidia.o nvidia.ko nvidia71xx.ko nvidia96xx.ko nvidia97xx.ko) ]
+    },
+    {
+        ldetect_driver_regexp => 'Card:ATI Radeon',
+        xorg_driver_regexp => 'fglrx',
+        module_names => [ qw(fglrx.ko) ]
     }
-}
+);
 
-if (find { $_->{driver} =~ /ATI Radeon/ } detect_devices::probeall()) {
-    if (find { -e join('', "/lib/modules/", c::kernel_version(), "/kernel/drivers/$_") }  map { ("extra/$_", "video/$_", "char/$_", "char/drm/$_") } map { $_, "$_.gz" } qw(fglrx.ko)) {
+foreach my $card (@cards) {
+    next if !find { $_->{driver} =~ /$card->{ldetect_driver_regexp}/ } detect_devices::probeall();
+    if (find { -e join('', "/lib/modules/", c::kernel_version(), "/kernel/drivers/$_") }
+          map { ("extra/$_", "video/$_", "char/$_", "char/drm/$_") } map { $_, "$_.gz" } @{$card->{module_names}}) {
+
         # do not automatically switch from nv to nvidia (in order to handle
         # cases where nvidia module crashes the system):
         #
@@ -83,9 +78,9 @@ if (find { $_->{driver} =~ /ATI Radeon/ } detect_devices::probeall()) {
         my @cards = Xconfig::card::probe();
         my $driver = $cards[0]{Driver};
         my $done;
-        substInFile { $done ||= s!Driver "fglrx"!Driver "$driver"!g } '/etc/X11/xorg.conf';
+        substInFile { $done = $1 if s!Driver "($card->{xorg_driver_regexp})"!Driver "$driver"!g } '/etc/X11/xorg.conf';
         if ($done) {
-            log::explanations("switch X.org driver from fglrx to $driver");
+            log::explanations("switch X.org driver from $done to $driver");
             Xconfig::card::libgl_config_and_more({ Driver => $driver });
         }
     }
