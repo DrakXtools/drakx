@@ -77,10 +77,10 @@ foreach my $card (@cards) {
         require Xconfig::card;
         my @cards = Xconfig::card::probe();
         my $driver = $cards[0]{Driver};
-        my $done;
-        substInFile { $done = $1 if s!Driver "($card->{xorg_driver_regexp})"!Driver "$driver"!g } '/etc/X11/xorg.conf';
-        if ($done) {
-            log::explanations("switch X.org driver from $done to $driver");
+        my $new_driver;
+        substInFile { $new_driver = $1 if s!Driver "($card->{xorg_driver_regexp})"!Driver "$driver"!g } '/etc/X11/xorg.conf';
+        if ($new_driver) {
+            log::explanations("switch X.org driver from $new_driver to $driver");
             Xconfig::card::libgl_config_and_more({ Driver => $driver });
         }
     }
