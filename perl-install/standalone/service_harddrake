@@ -63,7 +63,7 @@ if (find { $_->{driver} =~ /Card:NVIDIA/ } detect_devices::probeall()) {
             if (/Driver "nv.+"/) {
                 $done = 1;
                 log::explanations("switch X.org driver from nvidia to nv");
-                s!Driver "nv.*"!Driver "nv"!g;
+                s!Driver "nv.+"!Driver "nv"!g;
             }
         } '/etc/X11/xorg.conf';
 
