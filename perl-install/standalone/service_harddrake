@@ -65,7 +65,7 @@ if (find { $_->{driver} =~ /Card:NVIDIA/ } detect_devices::probeall()) {
                 log::explanations("switch X.org driver from nvidia to nv");
                 s!Driver "nv.*"!Driver "nv"!g;
             }
-        } $_ foreach grep { -e $_ } "/etc/X11/XF86Config-4", "/etc/X11/XF86Config", "/etc/X11/xorg.conf";
+        } '/etc/X11/xorg.conf';
 
 	require Xconfig::card;
 	Xconfig::card::libgl_config_and_more({ Driver => 'nv' }) if $done;
@@ -94,7 +94,7 @@ if (find { $_->{driver} =~ /ATI Radeon/ } detect_devices::probeall()) {
                 s!Driver "fglrx"!Driver "$driver"!g; 
             }
             s!Driver "fglrx"!Driver "$driver"!g; 
-        } $_ foreach grep { -e $_ } "/etc/X11/XF86Config-4", "/etc/X11/XF86Config", "/etc/X11/xorg.conf";
+        } '/etc/X11/xorg.conf';
 
 	require Xconfig::card;
 	Xconfig::card::libgl_config_and_more({ Driver => $driver });
