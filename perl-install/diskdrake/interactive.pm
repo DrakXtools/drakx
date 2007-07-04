@@ -799,9 +799,6 @@ sub Resize {
 	    partition_table::adjust_local_extended($hd, $part);
 	    partition_table::adjust_main_extended($hd);
 	    write_partitions($in, $hd) or return if $write_partitions && %nice_resize;
-	    # fix resizing's faillures due to udev's race when writing the partition table
-	    # (deleting then recreating the nodes leaves a race window...)
-	    devices::make($part->{device});
 	}
 	1;
     };
@@ -1143,6 +1140,9 @@ sub write_partitions {
     $in->ask_okcancel(N("Read carefully!"), N("Partition table of drive %s is going to be written to disk!", $hd->{device}), 1) or return;
     partition_table::write($hd) if !$::testing;
     check_rebootNeeded($in, $hd) if !$b_skip_check_rebootNeeded;
+    # fix resizing's faillures due to udev's race when writing the partition table
+    # (deleting then recreating the nodes leaves a race window...)
+    run_program::run('udevsettle');
     1;
 }
 
