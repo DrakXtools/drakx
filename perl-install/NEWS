@@ -4,6 +4,7 @@
     table (deleting then recreating the nodes leaves a race window...)
 - service_harddrake (blino):
   o do not enable fglrx libraries when disabling fglrx...
+  o only log "switch xorg driver" & do actual GL config if we do need it
   o really log when switching from fglrx to another driver
 
 Version 10.4.140 -  27 June 2007, by Thierry Vignaud
