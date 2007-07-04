@@ -85,7 +85,7 @@ if (find { $_->{driver} =~ /ATI Radeon/ } detect_devices::probeall()) {
         my $done;
         substInFile { $done ||= s!Driver "fglrx"!Driver "$driver"!g } '/etc/X11/xorg.conf';
         if ($done) {
-            log::explanations("switch X.org driver from fglrx to ati");
+            log::explanations("switch X.org driver from fglrx to $driver");
             require Xconfig::card;
             Xconfig::card::libgl_config_and_more({ Driver => $driver });
         }
