@@ -3,8 +3,10 @@
 function detect_version() {
     if has_label Share; then
         version="1.0"
-    else
+    elif has_label MDVUSBROOT; then
         version="1.05"
+    elif has_label MDV_FLASH; then
+        version="2.0"
     fi
 }
 
