@@ -8,6 +8,7 @@ function detect_version() {
     elif has_label MDV_FLASH; then
         version="2.0"
     fi
+    usbroot_device=$_device
 }
 
 function has_label() {
@@ -23,6 +24,9 @@ mount -t vfat LABEL=$_label $_tmpdir
 EOF
 
     rc=$?
+
+    _device=`perl -ne 'my @l = split; $l[1] eq "'$_tmpdir'" and print "$l[0]\n"' /proc/mounts`
+    [ -z "$_device" ] && rc=1
 
     umount $_tmpdir 2> /dev/null
     rmdir $_tmpdir 2> /dev/null
