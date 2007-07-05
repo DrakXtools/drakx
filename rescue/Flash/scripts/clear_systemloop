@@ -34,7 +34,7 @@ function doit() {
 
     if [ x"$confirm" = x"y" -o x"$confirm" = x"Y" ]; then
 
-        if [ ! -f $loop ]; then
+        if [ ! -f $loop ] || [ x"$version" != x"1.0" ]; then
             dd if=/dev/zero of=$loop bs=4000000 count=100
         fi
 
