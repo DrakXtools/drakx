@@ -253,4 +253,16 @@
   </to>
 </from>
 
+<if set="RESCUE_FLASH">
+  <from expand="binary">
+    clear
+    mlabel
+  </from>
+  <from dir="Flash/scripts" expand="glob">
+    <to dir="/usr/bin">
+      *
+    </to>
+  </from>
+</if>
+
 </list>
