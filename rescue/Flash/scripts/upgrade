@@ -147,7 +147,7 @@ function doit() {
 
     remove_non_user_nor_config_files || return 1
 
-    copy_new_version
+    copy_new_version || return 1
 
     merge_config_files || return 1
 
