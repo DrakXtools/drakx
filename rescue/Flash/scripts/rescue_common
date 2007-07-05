@@ -105,6 +105,8 @@ function insert_pendrive() {
     echo -n 'Detecting pen drive: '
 
     for ((i=0; $i <= 15 ; i++)); do
+        detect_version
+
         nash --force > /dev/null 2>&1 <<EOF
 mount -t vfat LABEL=MDVUSBROOT $_tmpdir
 EOF
@@ -124,8 +126,6 @@ EOF
                 sed 's/[0-9]*$//g' > /tmp/rescue-device
             umount $_tmpdir
             rmdir $_tmpdir 2> /dev/null
-
-            detect_version
 
             return 0
         fi
