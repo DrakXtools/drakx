@@ -1,0 +1,60 @@
+#!/bin/sh
+
+NAME=Flash-rescue
+DESCR="Mandriva Flash rescue"
+FLASH_VERSIONS="1.00 1.05 2.00"
+DEFAULT_VERSION=200
+UPGRADE=$1
+
+rm -rf .tmp
+mkdir -p .tmp/isolinux
+cp -f /usr/lib/syslinux/isolinux.bin Flash/isolinux/alt0/* .tmp/isolinux
+[ -n "$UPGRADE" ] && cp -al Flash/upgrade .tmp/
+
+DISTRIB_DESCR=$DESCR RESCUE_FLASH=1 ./make_rescue_img || exit 1
+mkdir -p .tmp/i586/install/stage2
+cp -f rescue.sqfs .tmp/i586/install/stage2
+
+flash_param="fastboot splash=silent vga=788"
+rescue_param="splash=verbose quiet automatic=method:cdrom rescue"
+
+[ -n "$UPGRADE" ] && DEFAULT="upgrade" || DEFAULT=Flash$DEFAULT_VERSION
+
+cat <<EOF > .tmp/isolinux/isolinux.cfg
+default $DEFAULT
+prompt 1
+timeout 150
+display help.msg
+
+label rescue
+  kernel vmlinuz
+  append initrd=all.rdz $rescue_param flash=rescue
+
+EOF
+
+if [ -n "$UPGRADE" ]; then
+    cat <<EOF >> .tmp/isolinux/isolinux.cfg
+label upgrade
+  kernel vmlinuz
+  append initrd=all.rdz $rescue_param flash=upgrade keepmounted
+
+EOF
+fi
+
+for VERSION in $FLASH_VERSIONS; do
+    SVERSION=`echo $VERSION | sed -e 's/\.//'`
+    cat <<EOF >> .tmp/isolinux/isolinux.cfg
+label Flash$SVERSION
+  kernel vmlinuz$SVERSION
+  append initrd=initrd$SVERSION.gz $flash_param
+
+EOF
+done
+
+ISO_NAME=$NAME-$DEFAULT_VERSION
+[ -n "$UPGRADE" ] && ISO_NAME=$ISO_NAME-upgrade
+
+genisoimage -f -o $ISO_NAME.iso -r -J -l -input-charset ISO-8859-1 -hide-rr-moved -nobak -cache-inodes -publisher Mandriva -V "$DESCR" -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table .tmp    
+mkcd --addmd5 $ISO_NAME.iso
+ 
+rm -rf .tmp
