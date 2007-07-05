@@ -200,7 +200,7 @@ localclean:
 	rm -f *.o .depend *.rdz *.img $(BINS)
 
 
-rescue-gui: rescue-gui.o frontend-common.o $(FRONTEND_LINK) $(STAGE1_LIBC)
+rescue-gui: rescue-gui.o frontend-common.o params.o utils.o log.o automatic.o $(FRONTEND_LINK) $(STAGE1_LIBC)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^
 	$(STRIPCMD) $@
 

@@ -59,6 +59,12 @@ static void PAUSE(void) {
 
 
 /* ------ UUURGH this is duplicated from `init.c', don't edit here........ */
+void fatal_error(char *msg)
+{
+	printf("FATAL ERROR IN RESCUE: %s\n\nI can't recover from this.\nYou may reboot your system.\n", msg);
+	while (1);
+}
+
 static inline _syscall3(int, reboot, int, magic, int, magic2, int, flag);
 #define LOOP_CLR_FD	0x4C01
 void del_loop(char *device) 
@@ -152,6 +158,7 @@ void unmount_filesystems(void)
 
 /* ------ UUURGH -- this is dirrrrrttttyyyyyy */
 void probe_that_type(void) {}
+void exit_bootsplash(void) {}
 
 
 int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused)))
