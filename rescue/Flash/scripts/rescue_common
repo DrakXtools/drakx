@@ -108,7 +108,7 @@ function insert_pendrive() {
         detect_version
 
         nash --force > /dev/null 2>&1 <<EOF
-mount -t vfat LABEL=MDVUSBROOT $_tmpdir
+mount -t vfat LABEL=$label $_tmpdir
 EOF
         if [ $? -ne 0 ]; then
             echo -n '.'
@@ -144,10 +144,10 @@ EOF
 function mount_usbroot() {
 
     nash --force > /dev/null 2>&1 <<EOF
-mount -t vfat LABEL=MDVUSBROOT $1
+mount -t vfat LABEL=$label $1
 EOF
     if [ $? -ne 0 ]; then
-        echo "Error mounting device labeled MDVUSBROOT"
+        echo "Error mounting device labeled $label"
         return 1
     fi
 
