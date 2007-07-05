@@ -135,7 +135,6 @@ function copy_new_version() {
     new_label=$(read_version_variables "2.0"; echo $label)
     MTOOLS_SKIP_CHECK=1 mlabel -i $usbroot_device ::$new_label
 
-
     return 0
 }
 
