@@ -1,22 +1,31 @@
 #!/bin/bash
 
 function detect_version() {
+    if has_label Share; then
+        version="1.0"
+    else
+        version="1.05"
+    fi
+}
+
+function has_label() {
+    local _label _tmpdir
+    _label=$1
 
     _tmpdir="/tmp/$$"
 
     mkdir -p $_tmpdir
 
     nash --force > /dev/null 2>&1 <<EOF
-mount -t vfat LABEL=Share $_tmpdir
+mount -t vfat LABEL=$_label $_tmpdir
 EOF
-    if [ $? -eq 0 ]; then
-        version="1.0"
-    else
-        version="1.05"
-    fi
- 
+
+    rc=$?
+
     umount $_tmpdir 2> /dev/null
     rmdir $_tmpdir 2> /dev/null
+
+    return $rc
 }
 
 function check_vendor() {
