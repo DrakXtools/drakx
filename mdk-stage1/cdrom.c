@@ -30,6 +30,8 @@
 #include "probing.h"
 #include "log.h"
 #include "mount.h"
+#include "tools.h"
+#include "utils.h"
 
 #include "cdrom.h"
 

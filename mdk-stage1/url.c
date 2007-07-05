@@ -46,6 +46,7 @@
 #include "dns.h"
 #include "log.h"
 #include "tools.h"
+#include "utils.h"
 
 #include "url.h"
 

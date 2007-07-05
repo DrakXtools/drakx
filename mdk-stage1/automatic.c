@@ -23,6 +23,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "tools.h"
+#include "utils.h"
 #include "stage1.h"
 #include "frontend.h"
 #include "log.h"

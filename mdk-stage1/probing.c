@@ -46,6 +46,7 @@
 #include "stage1.h"
 
 #include "log.h"
+#include "utils.h"
 #include "frontend.h"
 #include "modules.h"
 #include "pci-resource/pci-ids.h"

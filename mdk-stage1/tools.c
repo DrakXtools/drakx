@@ -26,14 +26,12 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <string.h>
-#include <ctype.h>
 #include <stdio.h>
 #include <dirent.h>
 #include <sys/types.h>
 #include <sys/mount.h>
 #include <sys/poll.h>
 #include <errno.h>
-#include <sys/utsname.h>
 #include <sys/ioctl.h>
 #include <linux/fd.h>
 #include "stage1.h"
@@ -43,193 +41,11 @@
 #include "automatic.h"
 
 #include "tools.h"
+#include "utils.h"
+#include "params.h"
 #include "probing.h"
 #include "modules.h"
 #include "lomount.h"
-
-static struct param_elem params[50];
-static int param_number = 0;
-
-void process_cmdline(void)
-{
-	char buf[512];
-	int size, i;
-	int fd = -1; 
-
-	if (IS_TESTING) {
-		log_message("TESTING: opening cmdline... ");
-
-		if ((fd = open("cmdline", O_RDONLY)) == -1)
-			log_message("TESTING: could not open cmdline");
-	}
-
-	if (fd == -1) {
-		log_message("opening /proc/cmdline... ");
-
-		if ((fd = open("/proc/cmdline", O_RDONLY)) == -1)
-			fatal_error("could not open /proc/cmdline");
-	}
-
-	size = read(fd, buf, sizeof(buf));
-	buf[size-1] = '\0'; // -1 to eat the \n
-	close(fd);
-
-	log_message("\t%s", buf);
-
-	i = 0;
-	while (buf[i] != '\0') {
-		char *name, *value = NULL;
-		int j = i;
-		while (buf[i] != ' ' && buf[i] != '=' && buf[i] != '\0')
-			i++;
-		if (i == j) {
-			i++;
-			continue;
-		}
-		name = memdup(&buf[j], i-j + 1);
-		name[i-j] = '\0';
-
-		if (buf[i] == '=') {
-			int k = i+1;
-			i++;
-			while (buf[i] != ' ' && buf[i] != '\0')
-				i++;
-			value = memdup(&buf[k], i-k + 1);
-			value[i-k] = '\0';
-		}
-
-		params[param_number].name = name;
-		params[param_number].value = value;
-		param_number++;
-		if (!strcmp(name, "changedisk")) set_param(MODE_CHANGEDISK);
-		if (!strcmp(name, "updatemodules") ||
-		    !strcmp(name, "thirdparty")) set_param(MODE_THIRDPARTY);
-		if (!strcmp(name, "rescue")) set_param(MODE_RESCUE);
-		if (!strcmp(name, "keepmounted")) set_param(MODE_KEEP_MOUNTED);
-		if (!strcmp(name, "noauto")) set_param(MODE_NOAUTO);
-		if (!strcmp(name, "netauto")) set_param(MODE_NETAUTO);
-		if (!strcmp(name, "debugstage1")) set_param(MODE_DEBUGSTAGE1);
-		if (!strcmp(name, "automatic")) {
-			set_param(MODE_AUTOMATIC);
-			grab_automatic_params(value);
-		}
-		if (buf[i] == '\0')
-			break;
-		i++;
-	}
-
-	if (IS_AUTOMATIC && strcmp(get_auto_value("thirdparty"), "")) {
-		set_param(MODE_THIRDPARTY);
-	}
-
-	log_message("\tgot %d args", param_number);
-}
-
-
-int stage1_mode = 0;
-
-int get_param(int i)
-{
-#ifdef SPAWN_INTERACTIVE
-	static int fd = 0;
-	char buf[5000];
-	char * ptr;
-	int nb;
-
-	if (fd <= 0) {
-		fd = open(interactive_fifo, O_RDONLY);
-		if (fd == -1)
-			return (stage1_mode & i);
-		fcntl(fd, F_SETFL, O_NONBLOCK);
-	}
-
-	if (fd > 0) {
-		if ((nb = read(fd, buf, sizeof(buf))) > 0) {
-			buf[nb] = '\0';
-			ptr = buf;
-			while ((ptr = strstr(ptr, "+ "))) {
-				if (!strncmp(ptr+2, "rescue", 6)) set_param(MODE_RESCUE);
-				ptr++;
-			}
-			ptr = buf;
-			while ((ptr = strstr(ptr, "- "))) {
-				if (!strncmp(ptr+2, "rescue", 6)) unset_param(MODE_RESCUE);
-				ptr++;
-			}
-		}
-	}
-#endif
-
-	return (stage1_mode & i);
-}
-
-char * get_param_valued(char *param_name)
-{
-	int i;
-	for (i = 0; i < param_number ; i++)
-		if (!strcmp(params[i].name, param_name))
-			return params[i].value;
-
-	return NULL;
-}
-
-void set_param_valued(char *param_name, char *param_value)
-{
-	params[param_number].name = param_name;
-	params[param_number].value = param_value;
-	param_number++;
-}
-
-void set_param(int i)
-{
-	stage1_mode |= i;
-}
-
-void unset_param(int i)
-{
-	stage1_mode &= ~i;
-}
-
-void unset_automatic(void)
-{
-	log_message("unsetting automatic");
-	unset_param(MODE_AUTOMATIC);
-	exit_bootsplash();
-}
-
-// warning, many things rely on the fact that:
-// - when failing it returns 0
-// - it stops on first non-digit char
-int charstar_to_int(const char * s)
-{
-	int number = 0;
-	while (*s && isdigit(*s)) {
-		number = (number * 10) + (*s - '0');
-		s++;
-	}
-	return number;
-}
-
-off_t file_size(const char * path)
-{
-	struct stat statr;
-	if (stat(path, &statr))
-		return -1;
-        else
-                return statr.st_size;
-}
-
-int total_memory(void)
-{
-	int value;
-
-	/* drakx powered: use /proc/kcore and rounds every 4 Mbytes */
-	value = 4 * ((int)((float)file_size("/proc/kcore") / 1024 / 1024 / 4 + 0.5));
-	log_message("Total Memory: %d Mbytes", value);
-
-	return value;
-}
-
 
 int image_has_stage2()
 {
@@ -431,70 +247,6 @@ enum return_type load_compressed_fd(int fd, int size)
 	return preload_mount_compressed_fd(fd, size, COMPRESSED_NAME(""), STAGE2_LOCATION);
 }
 
-/* pixel's */
-void * memdup(void *src, size_t size)
-{
-	void * r;
-	r = malloc(size);
-	memcpy(r, src, size);
-	return r;
-}
-
-
-void add_to_env(char * name, char * value)
-{
-        FILE* fakeenv = fopen("/tmp/env", "a");
-        if (fakeenv) {
-                char* e = asprintf_("%s=%s\n", name, value);
-                fwrite(e, 1, strlen(e), fakeenv);
-                free(e);
-                fclose(fakeenv);
-        } else 
-                log_message("couldn't fopen to fake env");
-}
-
-
-char ** list_directory(char * direct)
-{
-	char * tmp[50000]; /* in /dev there can be many many files.. */
-	int i = 0;
-	struct dirent *ep;
-	DIR *dp = opendir(direct);
-	while (dp && (ep = readdir(dp))) {
-		if (strcmp(ep->d_name, ".") && strcmp(ep->d_name, "..")) {
-			tmp[i] = strdup(ep->d_name);
-			i++;
-		}
-	}
-	if (dp)
-		closedir(dp);
-	tmp[i] = NULL;
-	return memdup(tmp, sizeof(char*) * (i+1));
-}
-
-
-int string_array_length(char ** a)
-{
-	int i = 0;
-	if (!a)
-		return -1;
-	while (a && *a) {
-		a++;
-		i++;
-	}
-	return i;
-}
-
-int kernel_version(void)
-{
-        struct utsname val;
-        if (uname(&val)) {
-                log_perror("uname failed");
-                return -1;
-        }
-        return charstar_to_int(val.release + 2);
-}
-
 int try_mount(char * dev, char * location)
 {
 	char device_fullname[50];
@@ -584,40 +336,4 @@ char * floppy_device(void)
                 return asprintf_("/dev/%s", *names);
         else
                 return "/dev/fd0";
-}
-
-char * asprintf_(const char *msg, ...)
-{
-        int n;
-        char * s;
-        char dummy;
-        va_list arg_ptr;
-        va_start(arg_ptr, msg);
-        n = vsnprintf(&dummy, sizeof(dummy), msg, arg_ptr);
-        va_start(arg_ptr, msg);
-        if ((s = malloc(n + 1))) {
-                vsnprintf(s, n + 1, msg, arg_ptr);
-                va_end(arg_ptr);
-                return s;
-        }
-        va_end(arg_ptr);
-        return strdup("");
-}
-
-int scall_(int retval, char * msg, char * file, int line)
-{
-	char tmp[5000];
-        sprintf(tmp, "%s(%s:%d) failed", msg, file, line);
-        if (retval)
-                log_perror(tmp);
-        return retval;
-}
-
-void lowercase(char *s)
-{
-       int i = 0;
-       while (s[i]) {
-               s[i] = tolower(s[i]);
-               i++;
-       }
 }

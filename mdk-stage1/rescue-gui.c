@@ -30,7 +30,7 @@
 
 #include "config-stage1.h"
 #include "frontend.h"
-#include "tools.h"
+#include "utils.h"
 
 #if defined(__i386__) || defined(__x86_64__)
 #define ENABLE_RESCUE_MS_BOOT 1

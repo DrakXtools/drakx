@@ -104,7 +104,7 @@ STAGE1_NETWORK_LIBS = /usr/$(LIB)/libresolv.a
 endif
 
  #- stage1 itself
-STAGE1SRC = stage1.c log.c tools.c modules.c probing.c mount.c automatic.c frontend-common.c lomount.c thirdparty.c zlibsupport.c
+STAGE1SRC = stage1.c log.c utils.c params.c tools.c modules.c probing.c mount.c automatic.c frontend-common.c lomount.c thirdparty.c zlibsupport.c
 CDROMSRC = cdrom.c
 DISKSRC = disk.c directory.c partition.c
 NETWORKSRC = network.c nfsmount.c dhcp.c url.c dns.c adsl.c directory.c wireless.c

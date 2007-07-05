@@ -45,6 +45,8 @@
 
 #include "stage1.h"
 #include "log.h"
+#include "tools.h"
+#include "utils.h"
 #include "network.h"
 #include "frontend.h"
 #include "automatic.h"

@@ -27,6 +27,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include "log.h"
+#include "utils.h"
 #include "modules.h"
 
 #include "mount.h"

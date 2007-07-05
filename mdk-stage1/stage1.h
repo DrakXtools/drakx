@@ -23,7 +23,7 @@
 #define _STAGE1_H_
 
 #include "config-stage1.h"
-#include "tools.h"
+#include "params.h"
 
 
 /* Some global stuff */

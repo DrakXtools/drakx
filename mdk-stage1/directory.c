@@ -28,6 +28,8 @@
 #include "stage1.h"
 #include "frontend.h"
 #include "log.h"
+#include "tools.h"
+#include "utils.h"
 #include "lomount.h"
 
 char * extract_list_directory(char * direct)

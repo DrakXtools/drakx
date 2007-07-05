@@ -24,6 +24,7 @@
 #include "automatic.h"
 #include "stage1.h"
 #include "log.h"
+#include "utils.h"
 #include "wireless.h"
 
 static int wireless_ioctl(int socket, const char *ifname, int request, struct iwreq *wrq);

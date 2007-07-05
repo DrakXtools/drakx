@@ -42,6 +42,7 @@
 #include "frontend.h"
 #include "modules.h"
 #include "tools.h"
+#include "utils.h"
 #include "automatic.h"
 #include "mount.h"
 #include "thirdparty.h"

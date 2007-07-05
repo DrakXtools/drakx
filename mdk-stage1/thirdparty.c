@@ -20,6 +20,8 @@
 #include <sys/utsname.h>
 
 #include "stage1.h"
+#include "tools.h"
+#include "utils.h"
 #include "log.h"
 #include "modules.h"
 #include "mount.h"

@@ -40,6 +40,8 @@
 #include "modules.h"
 #include "probing.h"
 #include "log.h"
+#include "tools.h"
+#include "utils.h"
 #include "mount.h"
 #include "automatic.h"
 #include "dhcp.h"
