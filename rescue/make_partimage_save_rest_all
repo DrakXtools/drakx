@@ -28,7 +28,7 @@ cp -f /usr/lib/syslinux/isolinux.bin ../isolinux/alt0/* .tmp/isolinux
 
 PARTIMAGE_RPM=$rpm DISTRIB_DESCR="partimage save/restore all" ./make_rescue_img || exit 1
 mkdir -p .tmp/install/stage2
-mv -f rescue.clp .tmp/install/stage2
+mv -f rescue.sqfs .tmp/install/stage2
 
 common_para="rescue automatic=method:cdrom"
 # hda=4864,255,63 acpi=ht
