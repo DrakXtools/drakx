@@ -31,6 +31,7 @@
 #include "config-stage1.h"
 #include "frontend.h"
 #include "utils.h"
+#include "params.h"
 
 #if defined(__i386__) || defined(__x86_64__)
 #define ENABLE_RESCUE_MS_BOOT 1
@@ -174,12 +175,34 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	char reboot_[] = "Reboot";
 	char doc[] = "Doc: what's addressed by this Rescue?";
 
-	char * actions[] = { install_bootloader,
+	char upgrade[] = "Upgrade to New Version";
+	char rootpass[] = "Reset Root Password";
+	char userpass[] = "Reset User Password";
+	char factory[] = "Reset to Factory Defaults";
+	char backup[] = "Backup User Files";
+	char restore[] = "Restore User Files from Backup";
+	char badblocks[] = "Test Key for Badblocks";
+
+	char * actions_default[] = { install_bootloader,
 #if ENABLE_RESCUE_MS_BOOT
-			     restore_ms_boot,
+			             restore_ms_boot,
 #endif
-			     mount_parts, go_to_console, reboot_, doc, NULL };
+			             mount_parts, go_to_console, reboot_, doc, NULL };
+	char * actions_flash_rescue[] = { rootpass, userpass, factory, backup, restore,
+					  badblocks, reboot_, NULL };
+	char * actions_flash_upgrade[] = { upgrade, rootpass, userpass, factory, backup, restore,
+					   badblocks, reboot_, NULL };
+
+
+	char * flash_mode;
+	char ** actions;
 	char * choice;
+
+	process_cmdline();
+	flash_mode = get_param_valued("flash");
+	actions = !flash_mode ?
+	    actions_default :
+	    streq(flash_mode, "upgrade") ? actions_flash_upgrade : actions_flash_rescue;
 
 	init_frontend("Welcome to " DISTRIB_NAME " Rescue (" DISTRIB_VERSION ") " __DATE__ " " __TIME__);
 
@@ -213,6 +236,29 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		}
 		if (ptr_begins_static_str(choice, doc)) {
 			binary = "/usr/bin/rescue-doc";
+		}
+
+		/* Mandriva Flash entries */
+		if (ptr_begins_static_str(choice, rootpass)) {
+			binary = "/usr/bin/reset_rootpass";
+		}
+		if (ptr_begins_static_str(choice, userpass)) {
+			binary = "/usr/bin/reset_userpass";
+		}
+		if (ptr_begins_static_str(choice, factory)) {
+			binary = "/usr/bin/clear_systemloop";
+		}
+		if (ptr_begins_static_str(choice, backup)) {
+			binary = "/usr/bin/backup_systemloop";
+		}
+		if (ptr_begins_static_str(choice, restore)) {
+			binary = "/usr/bin/restore_systemloop";
+		}
+		if (ptr_begins_static_str(choice, badblocks)) {
+			binary = "/usr/bin/test_badblocks";
+		}
+		if (ptr_begins_static_str(choice, upgrade)) {
+			binary = "/usr/bin/upgrade";
 		}
 
 		if (binary) {
