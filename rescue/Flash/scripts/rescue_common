@@ -73,7 +73,7 @@ function check_vendor() {
 
     rc=1
 
-    mount -t usbfs none /proc/bus/usb
+    mount -t usbfs none /proc/bus/usb 2> /dev/null
 
     i=0
     while [ ! -z "${vendors[$i]}" ]; do
@@ -88,7 +88,7 @@ function check_vendor() {
         let i++
     done
 
-    umount /proc/bus/usb
+    umount /proc/bus/usb 2> /dev/null
 
     return $rc
 }
