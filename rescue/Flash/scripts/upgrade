@@ -146,7 +146,7 @@ function copy_new_version() {
 
     cp -a $upgrade_dir/* $upgrade_dir/.??* $rootdir
 
-    new_label=$(read_version_variables "2.0"; echo $label)
+    new_label=$(source_version_variables "2.0"; echo $label)
     MTOOLS_SKIP_CHECK=1 mlabel -i $usbroot_device ::$new_label
 
     return 0
