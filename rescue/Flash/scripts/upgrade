@@ -163,7 +163,7 @@ function merge_config_files() {
         return 1
     fi
 
-    ./upgrade.merge-users $tmpdir/user/etc $tmpdir/squash/etc
+    upgrade.merge-users $tmpdir/user/etc $tmpdir/squash/etc
 
     return 0
 }
