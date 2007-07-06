@@ -189,8 +189,8 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 #endif
 			             mount_parts, go_to_console, reboot_, doc, NULL };
 	char * actions_flash_rescue[] = { rootpass, userpass, factory, backup, restore,
-					  badblocks, reboot_, NULL };
-	char * actions_flash_upgrade[] = { upgrade, reboot_, NULL };
+					  badblocks, go_to_console, reboot_, NULL };
+	char * actions_flash_upgrade[] = { upgrade, go_to_console, reboot_, NULL };
 
 
 	char * flash_mode;
