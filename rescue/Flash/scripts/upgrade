@@ -25,6 +25,9 @@ config_files_to_remove="etc/sysconfig/harddrake2"
 
 function prepare() {
 
+    echo "Mounting Mandriva Flash key..."
+    echo
+
     modprobe unionfs > /dev/null 2>&1
     modprobe squashfs > /dev/null 2>&1
     modprobe loop > /dev/null 2>&1
@@ -48,6 +51,9 @@ function prepare() {
 }
 
 function get_existing_rpms() {
+
+    echo "Getting list of installed packages..."
+    echo
 
     mount -t squashfs -o loop $sfs_loop $tmpdir/squash > /dev/null 2>&1
     if [ $? -ne 0 ]; then
@@ -95,6 +101,9 @@ function move_files() {
 
 function remove_non_user_nor_config_files() {
 
+    echo "Filtering system configuration files and user accounts..."
+    echo
+
     cd $tmpdir/user
 
     rm -rf $config_files_to_remove
@@ -125,6 +134,11 @@ function remove_non_user_nor_config_files() {
 }
 
 function copy_new_version() {
+
+    echo "Copying new Mandriva Flash system..."
+    echo "(this can take some dozens of minutes)"
+    echo
+
     rm -rf $rootdir$boot_rel
     rm -f $rootdir$loopbacks_rel/.*sqf
     rm -f $rootdir$loopbacks_rel/.*sqfs
@@ -139,6 +153,9 @@ function copy_new_version() {
 }
 
 function merge_config_files() {
+
+    echo "Merging user and group accounts in new system..."
+    echo
 
     mount -t squashfs -o loop $sfs_loop $tmpdir/squash > /dev/null 2>&1
     if [ $? -ne 0 ]; then
@@ -191,6 +208,8 @@ sys_loop="$rootdir$loopbacks_rel/system.loop"
 sfs_loop="$rootdir$loopbacks_rel/distrib.sqfs"
 
 modules_dir="$rootdir$loopbacks_rel/modules"
+
+echo
 
 if ! prepare; then
     cleanup
