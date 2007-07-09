@@ -454,16 +454,30 @@ sub getInputDevices() {
 	    #- S: Sysfs=/class/input/input1
 	    #- H: Handlers=mouse0 event1 ts0
 	    #- B: EV=b
-	    #- B: KEY=6420 0 70000 0 0 0 0 0 0 0 0 #=> BTN_LEFT BTN_RIGHT BTN_MIDDLE BTN_TOOL_FINGER BTN_TOUCH BTN_TOOL_TRIPLETAP
+	    #- B: KEY=6420 0 70000 0 0 0 0 0 0 0 0 #=> BTN_LEFT BTN_RIGHT BTN_MIDDLE BTN_TOOL_FINGER BTN_TOUCH BTN_TOOL_DOUBLETAP BTN_TOOL_TRIPLETAP
 	    #-    or B: KEY=6420 0 670000 0 0 0 0 0 0 0 0  #=> same with BTN_BACK
 	    #-    or B: KEY=420 30000 670000 0 0 0 0 0 0 0 0 #=> same without BTN_TOOL_TRIPLETAP but with BTN_B
 	    #- B: ABS=11000003 #=> X Y PRESSURE TOOL_WIDTH
 
+	    #- I: Bus=0003 Vendor=056a Product=0065 Version=0108
+	    #- N: Name="Wacom Bamboo"
+	    #- B: KEY=1c63 0 70033 0 0 0 0 0 0 0 0 #=> BTN_0 BTN_1 BTN_4 BTN_5 BTN_LEFT BTN_RIGHT BTN_MIDDLE TOOL_PEN TOOL_RUBBER TOOL_BRUSH TOOL_FINGER TOOL_MOUSE TOUCH STYLUS STYLUS2
+            #- B: ABS=100 3000103 #=> X Y WHEEL PRESSURE DISTANCE MISC
+
+	    #- I: Bus=0003 Vendor=056a Product=0011 Version=0201
+	    #- N: Name="Wacom Graphire2 4x5"
+            #- B: KEY=1c43 0 70000 0 0 0 0 0 0 0 0 #=> BTN_LEFT BTN_RIGHT BTN_MIDDLE TOOL_PEN TOOL_RUBBER TOOL_FINGER TOOL_MOUSE TOUCH STYLUS STYLUS2
+            #- B: ABS=100 3000003 #=> X Y PRESSURE DISTANCE MISC
+
 	    $device->{Synaptics} = $descr eq 'SynPS/2 Synaptics TouchPad';
 	    $device->{ALPS} = $descr =~ m!^AlpsPS/2 ALPS!;
 
-	} elsif (/H: Handlers=(\w+)/) {
-	    $device->{driver} = $1;
+	} elsif (/H: Handlers=(.*)/) {
+	    my @l = split(' ', $1);
+	    $device->{driver} = $l[0]; #- keep it for compatibility
+	    $device->{Handlers} = +{ map { (/^(.*?)\d*$/ ? $1 : $_, $_) } split(' ', $1) };
+	} elsif (/S: Sysfs=(.+)/) {
+	    $device->{sysfs_path} = $1;
 	} elsif (/P: Phys=(.*)/) {
             $device->{location} = $1;
             $device->{bus} = 'isa' if $device->{location} =~ /^isa/;
@@ -1064,7 +1078,8 @@ sub matching_types() {
     };
 }
 
-sub usbWacom()     { grep { $_->{driver} =~ /wacom/ } usb_probe() }
+sub hasWacom()     { find { $_->{vendor} == 0x056a || $_->{driver} =~ /wacom/ } usb_probe() }
+sub usbWacom()     { grep { $_->{vendor} eq '056a' } getInputDevices() }
 sub usbKeyboards() { grep { $_->{media_type} =~ /\|Keyboard/ } usb_probe() }
 sub usbStorage()   { grep { $_->{media_type} =~ /Mass Storage\|/ } usb_probe() }
 sub has_mesh()     { find { /mesh/ } all_files_rec("/proc/device-tree") }
