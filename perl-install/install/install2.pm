@@ -391,6 +391,7 @@ sub main {
 	    useless_thing_accepted => sub { $o->{useless_thing_accepted} = 1 },
 	    alawindows => sub { $o->{security} = 0; $o->{partitioning}{clearall} = 1; $o->{bootloader}{crushMbr} = 1 },
 	    fdisk => sub { $o->{partitioning}{fdisk} = 1 },
+	    rpm_dbapi => sub { $o->{rpm_dbapi} = $v },
 	    nomouseprobe => sub { $o->{nomouseprobe} = $v },
 	    updatemodules => sub { $o->{updatemodules} = 1 },
 	    move  => sub { $::move = 1 },

@@ -373,7 +373,7 @@ sub setPackages {
 	}
 
 	#- open rpm db according to right mode needed (ie rebuilding database if upgrading)
-	$o->{packages}{rpmdb} ||= install::pkgs::rpmDbOpen($o->{isUpgrade});
+	$o->{packages}{rpmdb} ||= install::pkgs::rpmDbOpen($o->{isUpgrade}, $o->{rpm_dbapi});
 
 	{
 	    my $_wait = $o->wait_message('', N("Looking at packages already installed..."));

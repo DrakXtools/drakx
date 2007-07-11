@@ -548,11 +548,17 @@ sub openInstallLog() {
 }
 
 sub rpmDbOpen {
-    my ($b_rebuild_needed) = @_;
+    my ($b_rebuild_needed, $o_rpm_dbapi) = @_;
 
     clean_rpmdb_shared_regions();
+    
+    if (my $wanted_dbapi = $o_rpm_dbapi) {
+	log::l("setting %_dbapi to $wanted_dbapi");
+	substInFile { s/%_dbapi.*//; $_ .= "%_dbapi $wanted_dbapi\n" if eof } "$::prefix/etc/rpm/macros";
+	URPM::add_macro("_dbapi $wanted_dbapi");
+    }
 
-    if ($b_rebuild_needed) {
+    if ($b_rebuild_needed && !$o_rpm_dbapi) {
 	if (my $pid = fork()) {
 	    waitpid $pid, 0;
 	    $? & 0xff00 and die "rebuilding of rpm database failed";
