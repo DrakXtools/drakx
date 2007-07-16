@@ -129,7 +129,7 @@ our %l = (
       ),
     ],
     pcmcia => [ qw(aha152x_cs fdomain_cs nsp_cs qlogic_cs ide-cs pata_pcmcia sym53c500_cs) ],
-    raw => [ qw(sd_mod) ],
+    raw => [ qw(ide-disk sd_mod) ],
     usb => [ qw(usb-storage) ],
     firewire => [ qw(sbp2) ],
     cdrom => [ qw(ide-cd sr_mod) ],
