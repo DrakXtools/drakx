@@ -49,7 +49,7 @@ static char const RCSID[] =
 
 #ifdef HAVE_N_HDLC
 #ifndef N_HDLC
-#include <linux/termios.h>
+#include <termios.h>
 #endif
 #endif
 
