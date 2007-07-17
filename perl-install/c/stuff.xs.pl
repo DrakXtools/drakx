@@ -21,6 +21,7 @@ print '
 #include <sys/utsname.h>
 #include <sys/mount.h>
 #undef __USE_MISC
+#include <linux/if.h>
 #include <linux/wireless.h>
 #include <linux/keyboard.h>
 #include <linux/kd.h>
