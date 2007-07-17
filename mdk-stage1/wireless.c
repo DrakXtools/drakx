@@ -19,6 +19,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <linux/types.h>
+#include <linux/if.h>
 #include <linux/wireless.h>
 
 #include "automatic.h"
