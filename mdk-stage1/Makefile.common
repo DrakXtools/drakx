@@ -40,6 +40,7 @@ endif
 endif
 
 DIETLIBC_INCLUDES = -I/usr/lib/dietlibc/include -I.
+DIETLIBC_LIBC = /usr/lib/dietlibc/lib-$(ARCH)/libcompat.a
 GLIBC_INCLUDES = -I.
 INCLUDES = $($(L)_INCLUDES)
 
