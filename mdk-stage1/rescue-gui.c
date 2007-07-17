@@ -33,6 +33,9 @@
 #include "utils.h"
 #include "params.h"
 
+#include <sys/syscall.h>
+#define reboot(...) syscall(__NR_reboot, __VA_ARGS__)
+
 #if defined(__i386__) || defined(__x86_64__)
 #define ENABLE_RESCUE_MS_BOOT 1
 #endif
@@ -66,7 +69,6 @@ void fatal_error(char *msg)
 	while (1);
 }
 
-static inline _syscall3(int, reboot, int, magic, int, magic2, int, flag);
 #define LOOP_CLR_FD	0x4C01
 void del_loop(char *device) 
 {

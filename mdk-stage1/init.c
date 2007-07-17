@@ -38,8 +38,9 @@
 #include <sys/select.h>
 #include <sys/ioctl.h>
 
-static inline _syscall3(int, syslog, int, type, char *, bufp, int, len);
-static inline _syscall3(int, reboot, int, magic, int, magic2, int, flag);
+#include <sys/syscall.h>
+#define syslog(...) syscall(__NR_syslog, __VA_ARGS__)
+#define reboot(...) syscall(__NR_reboot, __VA_ARGS__)
 #else
 #include INIT_HEADERS
 #endif
