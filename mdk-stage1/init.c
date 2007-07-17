@@ -19,7 +19,6 @@
  *
  */
 
-#ifndef INIT_HEADERS
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -41,9 +40,6 @@
 #include <sys/syscall.h>
 #define syslog(...) syscall(__NR_syslog, __VA_ARGS__)
 #define reboot(...) syscall(__NR_reboot, __VA_ARGS__)
-#else
-#include INIT_HEADERS
-#endif
 
 #include "config-stage1.h"
 #include <linux/cdrom.h>
