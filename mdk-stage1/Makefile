@@ -26,7 +26,7 @@ PRODUCT=drakx-installer-binaries
  # Currently:
  #
  # 	ix86
- # init with minilibc
+ # init with dietlibc
  # stage1 with dietlibc
  #
  # 	ppc
@@ -38,7 +38,7 @@ PRODUCT=drakx-installer-binaries
  # stage1 with glibc
  #
  #	x86-64
- # init with minilibc
+ # init with dietlibc
  # stage1 with dietlibc
  #
  #*****************************************************************************
@@ -58,15 +58,8 @@ DEFS = -DDISTRIB_NAME=\"$(DISTRIB_NAME)\" -DDISTRIB_VERSION=\"$(DISTRIB_VERSION)
 COMPILE = $(CC) $(DEFS) $(CFLAGS)
 
 INIT_DEFS =
-ifeq (DIETLIBC, $(L))
-INIT_DEFS += -DINIT_HEADERS=\"minilibc.h\"
-endif
-
-ifeq (DIETLIBC, $(L))
-INITSRC = minilibc.c init.c
-INIT_DEFS += -fno-builtin
-else
 INITSRC = init.c
+ifneq (DIETLIBC, $(L))
 INIT_DEFS += $(GLIBC_INCLUDES)
 endif
 
@@ -159,7 +152,7 @@ dirs:
 		[ "$$n" = "." ] || make -C $$n || exit 1 ;\
 	done
 
-init: $(INITOBJS)
+init: $(INITOBJS) $(STAGE1_LIBC)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^
 	$(STRIPCMD) $@
 
