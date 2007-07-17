@@ -117,7 +117,7 @@ void doklog()
 	fd_set readset, unixs;
 	int in, out, i;
 	int log;
-	int s;
+	socklen_t s;
 	int sock = -1;
 	struct sockaddr_un sockaddr;
 	char buf[1024];
