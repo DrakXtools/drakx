@@ -57,13 +57,10 @@ DEFS = -DDISTRIB_NAME=\"$(DISTRIB_NAME)\" -DDISTRIB_VERSION=\"$(DISTRIB_VERSION)
 
 COMPILE = $(CC) $(DEFS) $(CFLAGS)
 
+INIT_DEFS =
 ifeq (DIETLIBC, $(L))
-INIT_HEADERS=minilibc.h
-else
-INIT_HEADERS=init-libc-headers.h
+INIT_DEFS += -DINIT_HEADERS=\"minilibc.h\"
 endif
-
-INIT_DEFS = -DINIT_HEADERS=\"$(INIT_HEADERS)\"
 
 ifeq (DIETLIBC, $(L))
 INITSRC = minilibc.c init.c
