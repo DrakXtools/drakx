@@ -145,6 +145,8 @@ function copy_new_version() {
     [ -d "$modules_dir" ] && rm -rf $modules_dir
 
     cp -a $upgrade_dir/* $upgrade_dir/.??* $rootdir
+    chmod -R u+w $rootdir
+    chmod -R u-w $rootdir$boot_rel $rootdir$loopbacks_rel
 
     new_label=$(source_version_variables "2.0"; echo $label)
     MTOOLS_SKIP_CHECK=1 mlabel -i $usbroot_device ::$new_label
