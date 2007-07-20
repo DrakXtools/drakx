@@ -167,6 +167,16 @@ function merge_config_files() {
 
     upgrade.merge-users $tmpdir/user/etc $tmpdir/squash/etc
 
+    mount -t unionfs -o dirs=$tmpdir/user=rw:$tmpdir/squash=ro \
+        none $tmpdir/union
+    if [ $? -ne 0 ]; then
+        echo "Error creating union of distrib.sqfs and system.loop"
+        return 1
+    fi
+
+    #- reapply lang configuration, mostly to rewrite kdeglobals
+    chroot $tmpdir/union perl -I/usr/lib/libDrakX -Mlang -e "lang::write(lang::read())" &>/dev/null
+
     return 0
 }
 
