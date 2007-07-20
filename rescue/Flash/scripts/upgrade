@@ -223,5 +223,9 @@ if ! doit; then
     exit 1
 fi
 
+echo "Congratulations! Your Mandriva Flash system is now upgraded."
+echo -n "Please press ENTER to finish: "
+read READY
+
 cleanup
 exit 0
