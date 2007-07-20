@@ -136,15 +136,15 @@ function remove_non_user_nor_config_files() {
 function copy_new_version() {
 
     echo "Copying new Mandriva Flash system..."
-    echo "(this can take some dozens of minutes)"
-    echo
 
     rm -rf $rootdir$boot_rel
     rm -f $rootdir$loopbacks_rel/.*sqf
     rm -f $rootdir$loopbacks_rel/.*sqfs
     [ -d "$modules_dir" ] && rm -rf $modules_dir
 
-    cp -a $upgrade_dir/* $upgrade_dir/.??* $rootdir
+    tar c -C $upgrade_dir . | pv -s `du -sb $upgrade_dir | cut -f 1` | tar x -C $rootdir
+    echo
+
     chmod -R u+w $rootdir
     chmod -R u-w $rootdir$boot_rel $rootdir$loopbacks_rel
 
