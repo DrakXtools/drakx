@@ -1,25 +1,26 @@
+# translation of libDrakX-standalone.po to Norwegian Nynorsk
 # Translation of nn to Norwegian Nynorsk
-# Copyright (C) 2004, 2005, 2006 Free Software Foundation, Inc.
-# Karl Ove Hufthammer <karl@huftis.org>, 2004, 2005, 2006.
+# Copyright (C) 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
 #
+# Karl Ove Hufthammer <karl@huftis.org>, 2004, 2005, 2006, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: nn\n"
+"Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-07-01 13:42+0200\n"
-"PO-Revision-Date: 2006-01-13 19:46+0100\n"
+"PO-Revision-Date: 2007-07-24 20:45+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: drakboot:49
 #, c-format
 msgid "No bootloader found, creating a new configuration"
-msgstr ""
+msgstr "Fann ingen oppstartslaster. Lagar nytt oppsett."
 
 #: drakboot:83 harddrake2:194 harddrake2:195 logdrake:70
 #, c-format
@@ -44,19 +45,19 @@ msgstr "Berre tekst"
 #: drakboot:125
 #, c-format
 msgid "Verbose"
-msgstr ""
+msgstr "Utvida meldingar"
 
 #: drakboot:126
 #, c-format
 msgid "Silent"
-msgstr ""
+msgstr "Stille"
 
 #: drakboot:133
 #, c-format
 msgid ""
 "Your system bootloader is not in framebuffer mode. To activate graphical "
 "boot, select a graphic video mode from the bootloader configuration tool."
-msgstr ""
+msgstr "Oppstartslastaren er ikkje i framebuffer-modus (grafisk modus). For å bruk grafisk oppstart må du velja ein skjermmodus frå oppsettverktøyet for oppstartslastaren."
 
 #: drakboot:134
 #, c-format
@@ -74,9 +75,9 @@ msgid "Graphical boot theme selection"
 msgstr "Val av grafisk oppstartstema"
 
 #: drakboot:148
-#, fuzzy, c-format
+#, c-format
 msgid "Graphical boot mode:"
-msgstr "Val av grafisk oppstartstema"
+msgstr "Grafisk oppstartsmodus:"
 
 #: drakboot:150
 #, c-format
@@ -134,6 +135,8 @@ msgid ""
 "selected below.\n"
 "Be sure your video card supports the mode you choose."
 msgstr ""
+"Vel ein skjermmodus. Denne vert brukt for kvar av oppstartseiningane merkte nedanfor.\n"
+"Hugs at skjermkortet ditt må støtta skjermmodusen du vel."
 
 #: drakbug:43
 #, c-format
@@ -158,7 +161,7 @@ msgstr "Synkroniseringsverktøy"
 #: drakbug:51 drakbug:145
 #, c-format
 msgid "Standalone Tools"
-msgstr ""
+msgstr "Frittståande verktøy"
 
 #: drakbug:53
 #, c-format
@@ -188,7 +191,7 @@ msgstr "Oppsettvegvisarar"
 #: drakbug:79
 #, c-format
 msgid "Select Mandriva Tool:"
-msgstr ""
+msgstr "Vel Mandriva-verktøy:"
 
 #: drakbug:80
 #, c-format
@@ -222,7 +225,7 @@ msgid ""
 "in.  The information displayed above will be transferred to that server.  \n"
 "Things useful to include in your report are the output of lspci, kernel "
 "version, and /proc/cpuinfo."
-msgstr ""
+msgstr "Trykk «Rapporter»-knappen for å melda frå om ein feil du har funne. \nDette vil opna eit nettlesarvindauge på %s, med eit skjema som du må fylla inn. Informasjonen vist nedanfor vert overført til tenaren. \nNyttige ting å ta med i feilrapporten er utdata frå lspci, kjerneversjonen og «/proc/cpuinfo»."
 
 #: drakbug:100
 #, c-format
@@ -252,12 +255,12 @@ msgstr "Endra tidssone"
 #: drakclock:44
 #, c-format
 msgid "Timezone - DrakClock"
-msgstr ""
+msgstr "Tidssone – DrakClock"
 
 #: drakclock:45
 #, c-format
 msgid "GMT - DrakClock"
-msgstr ""
+msgstr "GMT – DrakClock"
 
 #: drakclock:45
 #, c-format
@@ -267,7 +270,7 @@ msgstr "Brukar maskinvareklokka GMT?"
 #: drakclock:70
 #, c-format
 msgid "Network Time Protocol"
-msgstr ""
+msgstr "Nettverkstidsprotokoll"
 
 #: drakclock:72
 #, c-format
@@ -275,11 +278,13 @@ msgid ""
 "Your computer can synchronize its clock\n"
 " with a remote time server using NTP"
 msgstr ""
+"Datamaskina di kan automatisk synkronisera klokka\n"
+" med ein tidstenar på nettverket ved hjelp av NTP."
 
 #: drakclock:73
 #, c-format
 msgid "Enable Network Time Protocol"
-msgstr ""
+msgstr "Bruk nettverktidsprotokoll"
 
 #: drakclock:81
 #, c-format
@@ -287,14 +292,14 @@ msgid "Server:"
 msgstr "Tenar:"
 
 #: drakclock:110
-#, fuzzy, c-format
+#, c-format
 msgid "Please enter a valid NTP server address."
-msgstr "Skriv inn trådlausinnstillingane for kortet."
+msgstr "Skriv inn ei gyldig NTP-tenaradresse."
 
 #: drakclock:125
 #, c-format
 msgid "Could not synchronize with %s."
-msgstr ""
+msgstr "Klarte ikkje synkronisera med %s."
 
 #: drakclock:127
 #, c-format
@@ -309,17 +314,17 @@ msgstr "Nullstill"
 #: drakedm:41
 #, c-format
 msgid "GDM (GNOME Display Manager)"
-msgstr ""
+msgstr "GDM (GNOME Display Manager)"
 
 #: drakedm:42
 #, c-format
 msgid "KDM (KDE Display Manager)"
-msgstr ""
+msgstr "KDM (KDE Display Manager)"
 
 #: drakedm:43
 #, c-format
 msgid "XDM (X Display Manager)"
-msgstr "XDM (X-innloggingsveljar)"
+msgstr "XDM (X Display Manager)"
 
 #: drakedm:54
 #, c-format
@@ -333,28 +338,31 @@ msgid ""
 "into your system with the X Window System running and supports running\n"
 "several different X sessions on your local machine at the same time."
 msgstr ""
+"X11-innloggingsveljaren lèt deg logga inn grafisk\n"
+"på systemet når X køyrer, og støttar òg fleire\n"
+"X-økter på maskina samtidig."
 
 #: drakedm:73
 #, c-format
 msgid "The change is done, do you want to restart the dm service?"
-msgstr ""
+msgstr "Endringa er no lagra. Vil du starta «dm»-tenesta på nytt?"
 
 #: drakedm:74
 #, c-format
 msgid ""
 "You are going to close all running programs and lose your current session. "
 "Are you really sure that you want to restart the dm service?"
-msgstr ""
+msgstr "Alle program som køyrer vert lukka, og du mistar den gjeldande økta. Er du sikker på at du vil starta «dm»-tenesta på nytt?"
 
 #: drakfont:187
 #, c-format
 msgid "Search installed fonts"
-msgstr ""
+msgstr "Søk gjennom installerte skrifter"
 
 #: drakfont:189
 #, c-format
 msgid "Unselect fonts installed"
-msgstr ""
+msgstr "Vel vekke installerte skrifter"
 
 #: drakfont:213
 #, c-format
@@ -390,7 +398,7 @@ msgstr "Fann ingen skrifter.\n"
 #: drakfont:274
 #, c-format
 msgid "Search for fonts in installed list"
-msgstr ""
+msgstr "Søk etter skrifter i «installert»-lista"
 
 #: drakfont:293
 #, c-format
@@ -405,12 +413,12 @@ msgstr "Skriftkopiering"
 #: drakfont:333
 #, c-format
 msgid "True Type fonts installation"
-msgstr ""
+msgstr "Installering av TrueType-skrifter"
 
 #: drakfont:341
 #, c-format
 msgid "please wait during ttmkfdir..."
-msgstr ""
+msgstr "Vent mens «ttmkfdir» vert køyrd …"
 
 #: drakfont:342
 #, c-format
@@ -430,7 +438,7 @@ msgstr "Ghostscript-referansar"
 #: drakfont:374
 #, c-format
 msgid "Suppress Temporary Files"
-msgstr ""
+msgstr "Ikkje bruk mellombelse filer"
 
 #: drakfont:377 drakfont:435
 #, c-format
@@ -440,7 +448,7 @@ msgstr "Start XFS på nytt"
 #: drakfont:423 drakfont:433
 #, c-format
 msgid "Suppress Fonts Files"
-msgstr ""
+msgstr "Ikkje vis skriftfiler"
 
 #: drakfont:443
 #, c-format
@@ -451,16 +459,19 @@ msgid ""
 "You can install the fonts the normal way. In rare cases, bogus fonts may "
 "hang up your X Server."
 msgstr ""
+"Før du installer nokon skrifter, bør du kontrollera at du har rett til å bruka og installera dei på systemet ditt.\n"
+"\n"
+"Du kan installera skriftene på vanleg måte. I sjeldne tilfeller kan øydelagde skriftfiler få X-tenaren til å henga ved oppstart."
 
 #: drakfont:483
-#, fuzzy, c-format
+#, c-format
 msgid "Font Installation"
-msgstr "Etterinstallering"
+msgstr "Skriftinstallering"
 
 #: drakfont:494
 #, c-format
 msgid "DrakFont"
-msgstr ""
+msgstr "DrakFont"
 
 #: drakfont:495 drakfont:647
 #, c-format
@@ -470,7 +481,7 @@ msgstr "Skriftliste"
 #: drakfont:498
 #, c-format
 msgid "Get Windows Fonts"
-msgstr ""
+msgstr "Hent Windows-skrifter"
 
 #: drakfont:504
 #, c-format
@@ -490,7 +501,7 @@ msgstr "Importer"
 #: drakfont:525
 #, c-format
 msgid "Drakfont"
-msgstr ""
+msgstr "DrakFont"
 
 #: drakfont:527
 #, c-format
@@ -498,9 +509,9 @@ msgid "Copyright (C) 2001-2006 by Mandriva"
 msgstr "Copyright © 2001–2006 Mandriva"
 
 #: drakfont:529
-#, fuzzy, c-format
+#, c-format
 msgid "Font installer."
-msgstr "Ikkje installert"
+msgstr "Skriftinstallering."
 
 #: drakfont:531 harddrake2:236
 #, c-format
@@ -517,7 +528,7 @@ msgstr "Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
 #: drakfont:548
 #, c-format
 msgid "Choose the applications that will support the fonts:"
-msgstr ""
+msgstr "Vel programma du vil kunna bruka skriftene i:"
 
 #: drakfont:559
 #, c-format
@@ -527,7 +538,7 @@ msgstr "Ghostscript"
 #: drakfont:560
 #, c-format
 msgid "OpenOffice.org"
-msgstr ""
+msgstr "OpenOffice.org"
 
 #: drakfont:561
 #, c-format
@@ -542,7 +553,7 @@ msgstr "Generelle skrivarar"
 #: drakfont:576
 #, c-format
 msgid "Select the font file or directory and click on 'Add'"
-msgstr ""
+msgstr "Vel skriftfila eller skriftmappa, og trykk så «Legg til»."
 
 #: drakfont:577
 #, c-format
@@ -567,17 +578,17 @@ msgstr "Installer"
 #: drakfont:689
 #, c-format
 msgid "Are you sure you want to uninstall the following fonts?"
-msgstr ""
+msgstr "Er du sikker på at du vil avinstallera desse skriftene?"
 
 #: drakfont:734
 #, c-format
 msgid "Unselected All"
-msgstr ""
+msgstr "Valde vekk alle"
 
 #: drakfont:737
 #, c-format
 msgid "Selected All"
-msgstr ""
+msgstr "Valde alle"
 
 #: drakfont:751 drakfont:770
 #, c-format
@@ -587,7 +598,7 @@ msgstr "Importerer skrifter"
 #: drakfont:755 drakfont:775
 #, c-format
 msgid "Initial tests"
-msgstr ""
+msgstr "Førtest"
 
 #: drakfont:756
 #, c-format
@@ -607,7 +618,7 @@ msgstr "Etterinstallering"
 #: drakfont:776
 #, c-format
 msgid "Remove fonts on your system"
-msgstr ""
+msgstr "Fjern skrifter frå systemet"
 
 #: drakfont:777
 #, c-format
@@ -624,24 +635,28 @@ msgid ""
 "\n"
 "Usage: \n"
 msgstr ""
+" drakhelp 0.1\n"
+"Copyright © %s Mandriva.\n"
+"Dette er fri programvare, og du kan distribuera det under GNU GPL-lisensen.\n"
+"\n"
+"Bruk: \n"
 
 #: drakhelp:22
 #, c-format
 msgid " --help                - display this help     \n"
-msgstr ""
+msgstr " --help                – Vis denne hjelpeteksten.\n"
 
 #: drakhelp:23
 #, c-format
-msgid ""
-" --id <id_label>       - load the html help page which refers to id_label\n"
-msgstr ""
+msgid " --id <id_label>       - load the html help page which refers to id_label\n"
+msgstr " --id <identifikator>  – Last HTML-hjelpesida som refererer til «identifikator».\n"
 
 #: drakhelp:24
 #, c-format
 msgid ""
 " --doc <link>          - link to another web page ( for WM welcome "
 "frontend)\n"
-msgstr ""
+msgstr " --doc <lenkje>        – Lenkje til ei anna nettside (for velkomstmelding).\n"
 
 #: drakhelp:52
 #, c-format
@@ -651,7 +666,7 @@ msgstr "Mandriva Linux-hjelpesenter"
 #: drakhelp:52
 #, c-format
 msgid "No Help entry for %s\n"
-msgstr ""
+msgstr "Det finst ikkje noko hjelpeoppføring for «%s».\n"
 
 #: drakperm:22
 #, c-format
@@ -661,17 +676,17 @@ msgstr "Systeminnstillingar"
 #: drakperm:23
 #, c-format
 msgid "Custom settings"
-msgstr ""
+msgstr "Sjølvvald oppsett"
 
 #: drakperm:24
 #, c-format
 msgid "Custom & system settings"
-msgstr ""
+msgstr "Sjølvvalde og systemoppsett"
 
 #: drakperm:32
-#, fuzzy, c-format
+#, c-format
 msgid "Security Permissions"
-msgstr "Løyve"
+msgstr "Tryggleiksløyve"
 
 #: drakperm:44
 #, c-format
@@ -701,7 +716,7 @@ msgstr "Løyve"
 #: drakperm:59
 #, c-format
 msgid "Add a new rule"
-msgstr ""
+msgstr "Legg til ny regel"
 
 #: drakperm:66 drakperm:101 drakperm:126
 #, c-format
@@ -715,6 +730,8 @@ msgid ""
 "groups via msec.\n"
 "You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
+"Her kan du sjå filer som du kan retta tilgangsløyve og eigarar til via msec.\n"
+"Du kan òg leggja til eigne reglar, som så vil overstyra standardreglane."
 
 #: drakperm:110
 #, c-format
@@ -722,6 +739,8 @@ msgid ""
 "The current security level is %s.\n"
 "Select permissions to see/edit"
 msgstr ""
+"Gjeldande tryggleiksnivå er «%s».\n"
+"Vel løyva du vil sjå/endra."
 
 #: drakperm:122
 #, c-format
@@ -731,7 +750,7 @@ msgstr "Opp"
 #: drakperm:122
 #, c-format
 msgid "Move selected rule up one level"
-msgstr ""
+msgstr "Flytt den merkte regelen opp eit nivå."
 
 #: drakperm:123
 #, c-format
@@ -741,7 +760,7 @@ msgstr "Ned"
 #: drakperm:123
 #, c-format
 msgid "Move selected rule down one level"
-msgstr ""
+msgstr "Flytt den merkte regelen ned eit nivå."
 
 #: drakperm:124
 #, c-format
@@ -756,7 +775,7 @@ msgstr "Legg til regel på slutten"
 #: drakperm:125
 #, c-format
 msgid "Delete selected rule"
-msgstr ""
+msgstr "Slett den merkte regelen."
 
 #: drakperm:126 drakups:300 drakups:362 drakups:382
 #, c-format
@@ -766,7 +785,7 @@ msgstr "Rediger"
 #: drakperm:242
 #, c-format
 msgid "browse"
-msgstr ""
+msgstr "Bla gjennom …"
 
 #: drakperm:247
 #, c-format
@@ -792,7 +811,7 @@ msgstr "Les"
 #: drakperm:255
 #, c-format
 msgid "Enable \"%s\" to read the file"
-msgstr ""
+msgstr "Tillèt «%s» å lesa fila."
 
 #: drakperm:259
 #, c-format
@@ -803,7 +822,7 @@ msgstr "Skriv"
 #: drakperm:262
 #, c-format
 msgid "Enable \"%s\" to write the file"
-msgstr ""
+msgstr "Tillèt «%s» å endra fila."
 
 #: drakperm:266
 #, c-format
@@ -814,12 +833,12 @@ msgstr "Køyr"
 #: drakperm:269
 #, c-format
 msgid "Enable \"%s\" to execute the file"
-msgstr ""
+msgstr "Tillèt «%s» å køyra fila."
 
 #: drakperm:272
 #, c-format
 msgid "Sticky-bit"
-msgstr ""
+msgstr "Klister-bit"
 
 #: drakperm:272
 #, c-format
@@ -827,26 +846,28 @@ msgid ""
 "Used for directory:\n"
 " only owner of directory or file in this directory can delete it"
 msgstr ""
+"Brukt for mapper:\n"
+"Berre eigaren til mappa eller fil i mappa kan sletta ho."
 
 #: drakperm:273
 #, c-format
 msgid "Set-UID"
-msgstr ""
+msgstr "Set-UID"
 
 #: drakperm:273
 #, c-format
 msgid "Use owner id for execution"
-msgstr ""
+msgstr "Bruk eigar-ID-en ved køyring."
 
 #: drakperm:274
 #, c-format
 msgid "Set-GID"
-msgstr ""
+msgstr "Set-GID"
 
 #: drakperm:274
 #, c-format
 msgid "Use group id for execution"
-msgstr ""
+msgstr "Bruk gruppe-ID-en ved køyring."
 
 #: drakperm:292
 #, c-format
@@ -866,12 +887,12 @@ msgstr "Gjeldande brukar"
 #: drakperm:298
 #, c-format
 msgid "When checked, owner and group will not be changed"
-msgstr ""
+msgstr "Når avkryssa, vert ikkje eigar eller grupper endra."
 
 #: drakperm:308
 #, c-format
 msgid "Path selection"
-msgstr ""
+msgstr "Stigval"
 
 #: drakperm:328
 #, c-format
@@ -884,21 +905,23 @@ msgid ""
 "The first character of the path must be a slash (\"/\"):\n"
 "\"%s\""
 msgstr ""
+"Første teiknet i stigen må vera ein skråstrek («/»):\n"
+"«%s»"
 
 #: drakperm:388
 #, c-format
 msgid "Both the username and the group must valid!"
-msgstr ""
+msgstr "Både brukarnamnet og gruppa må vera gyldig."
 
 #: drakperm:389
 #, c-format
 msgid "User: %s"
-msgstr ""
+msgstr "Brukar: %s"
 
 #: drakperm:390
 #, c-format
 msgid "Group: %s"
-msgstr ""
+msgstr "Gruppe: %s"
 
 #: draksec:53
 #, c-format
@@ -974,6 +997,29 @@ msgid ""
 "level, but the system is entirely closed and security features are at their\n"
 "maximum"
 msgstr ""
+"Her kan du velja tryggleiksnivået og kven som skal vera tryggleiksansvarleg for maskina.\n"
+"\n"
+"\n"
+"<span weight=\"bold\">Tryggleiksansvarleg</span> er den personen som skal motta tryggleiksvarsel viss det er kryssa av for dette. Det kan anten vera eit brukarnamn eller ei e-postadresse.\n"
+"\n"
+"\n"
+"På <span weight=\"bold\">Tryggleiksnivå</span>-menyen kan du velja eit av dei ferdigoppsette tryggleiksnivå i «msec», frå <span weight=\"bold\">dårleg</span> (men brukarvenleg) tryggleik, til\n"
+"<span weight=\"bold\">paranoid</span> tryggleik, for veldig sensitive tenarprogram:\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Dårleg</span>: Dette er fullstendig utrygt, men veldig brukarvenleg. Det bør berre brukast for maskiner som ikkje er kopla til noko nettverk, og som ikkje er tilgjengeleg for andre enn deg.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Standard</span>: Dette er standard tryggleiksnivå, og anbefalt for ei maskin som vert kopla til Internett som ein klient.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Høg</span>: Her vert lagt på fleire avgrensingar, og fleire automatisk kontrollar vert køyrde kvar natt.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Høgare</span>: Dette tryggleiksnivået er no høgt nok til at du kan bruka maskina som ein tenar som kan motta tilkoplingar frå mange klientar. Viss maskina berre vert brukt som ein klient på Internett, bør du velja eit lågare nivå.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Paranoid</span>: Dette liknar på førre nivå, men systemet er fullstendig lukka, og alle tryggleiksfunksjonar køyrer på høgste nivå."
 
 #: draksec:147 harddrake2:211
 #, c-format
@@ -987,12 +1033,12 @@ msgstr ""
 #: draksec:161
 #, c-format
 msgid "(default value: %s)"
-msgstr ""
+msgstr "(standardverdi: %s)"
 
 #: draksec:166
-#, fuzzy, c-format
+#, c-format
 msgid "Security Level and Checks"
-msgstr "Tryggleiksnivå:"
+msgstr "Tryggleiksnivå og -kontrollar"
 
 #: draksec:203
 #, c-format
@@ -1027,17 +1073,17 @@ msgstr "Regelmessige kontrollar"
 #: draksec:291
 #, c-format
 msgid "Please wait, setting security level..."
-msgstr ""
+msgstr "Set tryggleiksnivå. Vent litt …"
 
 #: draksec:297
 #, c-format
 msgid "Please wait, setting security options..."
-msgstr ""
+msgstr "Set tryggleiksval. Vent litt …"
 
 #: draksound:47
 #, c-format
 msgid "No Sound Card detected!"
-msgstr ""
+msgstr "Fann ikkje noko lydkort."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: draksound:50
@@ -1052,6 +1098,9 @@ msgid ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 msgstr ""
+"Fann ikkje noko lydkort kopla til maskina. Kontroller at du har eit lydkort som er støtta i Linux kopla til.\n\n\n"
+"Du finn maskinvaredatabasen vår på:\n\n\n"
+"http://www.mandriva.com/en/hardware/"
 
 #: draksound:57
 #, c-format
@@ -1062,26 +1111,30 @@ msgid ""
 "Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
 "the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console."
 msgstr ""
+"\n"
+"\n"
+"\n"
+"Merk: Viss du har eit ISA PnP-basert lydkort, må du bruka «alsaconf»- eller «sndconfig»-programma. Berre skriv «alsaconf» eller «sndconfig» i ein konsoll."
 
 #: draksplash:32
 #, c-format
 msgid "X coordinate of text box"
-msgstr ""
+msgstr "X-koordinat til tekstboksen"
 
 #: draksplash:33
 #, c-format
 msgid "Y coordinate of text box"
-msgstr ""
+msgstr "Y-koordinat til tekstboksen"
 
 #: draksplash:34
 #, c-format
 msgid "Text box width"
-msgstr ""
+msgstr "Breidd på tekstboks"
 
 #: draksplash:35
 #, c-format
 msgid "Text box height"
-msgstr "Tekstbokshøgd"
+msgstr "Høgd på tekstboks"
 
 #: draksplash:36
 #, c-format
@@ -1089,6 +1142,8 @@ msgid ""
 "The progress bar X coordinate\n"
 "of its upper left corner"
 msgstr ""
+"X-koordinaten til øvre venstre\n"
+"hjørne til framgangsvisaren."
 
 #: draksplash:37
 #, c-format
@@ -1096,81 +1151,83 @@ msgid ""
 "The progress bar Y coordinate\n"
 "of its upper left corner"
 msgstr ""
+"Y-koordinaten til øvre venstre\n"
+"hjørne til framgangsvisaren."
 
 #: draksplash:38
 #, c-format
 msgid "The width of the progress bar"
-msgstr ""
+msgstr "Breidda til tekstboksen."
 
 #: draksplash:39
 #, c-format
 msgid "The height of the progress bar"
-msgstr ""
+msgstr "Høgda til tekstboksen."
 
 #: draksplash:40
 #, c-format
 msgid "X coordinate of the text"
-msgstr ""
+msgstr "X-koordinat til tekst"
 
 #: draksplash:41
 #, c-format
 msgid "Y coordinate of the text"
-msgstr ""
+msgstr "Y-koordinat til tekst"
 
 #: draksplash:42
 #, c-format
 msgid "Text box transparency"
-msgstr ""
+msgstr "Gjennomsikt til tekstboks"
 
 #: draksplash:43
 #, c-format
 msgid "Progress box transparency"
-msgstr ""
+msgstr "Gjennomsikt til framgangslinje"
 
 #: draksplash:44
 #, c-format
 msgid "Text size"
-msgstr ""
+msgstr "Tekststorleik"
 
 #: draksplash:61
 #, c-format
 msgid "Choose progress bar color 1"
-msgstr ""
+msgstr "Vel farge 1 for framgangslinje"
 
 #: draksplash:62
 #, c-format
 msgid "Choose progress bar color 2"
-msgstr ""
+msgstr "Vel farge 2 for framgangslinje"
 
 #: draksplash:63
 #, c-format
 msgid "Choose progress bar background"
-msgstr ""
+msgstr "Vel bakgrunn for framgangslinje"
 
 #: draksplash:64
 #, c-format
 msgid "Gradient type"
-msgstr ""
+msgstr "Fargeovergangtype"
 
 #: draksplash:65
 #, c-format
 msgid "Choose text color"
-msgstr ""
+msgstr "Vel tekstfarge"
 
 #: draksplash:67 draksplash:74
 #, c-format
 msgid "Choose picture"
-msgstr ""
+msgstr "Vel bilete"
 
 #: draksplash:68
 #, c-format
 msgid "Silent bootsplash"
-msgstr ""
+msgstr "Stille oppstart"
 
 #: draksplash:71
 #, c-format
 msgid "Choose text zone color"
-msgstr ""
+msgstr "Vel tekstsonefarge"
 
 #: draksplash:72
 #, c-format
@@ -1185,7 +1242,7 @@ msgstr "Bakgrunnsfarge"
 #: draksplash:75
 #, c-format
 msgid "Verbose bootsplash"
-msgstr ""
+msgstr "Oppstart med utvida meldingar"
 
 #: draksplash:81
 #, c-format
@@ -1195,7 +1252,7 @@ msgstr "Temanamn"
 #: draksplash:84
 #, c-format
 msgid "Final resolution"
-msgstr ""
+msgstr "Endeleg oppløysing"
 
 #: draksplash:87
 #, c-format
@@ -1208,39 +1265,39 @@ msgid "Save theme"
 msgstr "Lagra tema"
 
 #: draksplash:154
-#, fuzzy, c-format
+#, c-format
 msgid "Please enter a theme name"
-msgstr "Skriv inn trådlausinnstillingane for kortet."
+msgstr "Skriv inn temanamn"
 
 #: draksplash:157
-#, fuzzy, c-format
+#, c-format
 msgid "Please select a splash image"
-msgstr "Vel UPS-modell."
+msgstr "Vel oppstartsbilete"
 
 #: draksplash:160
 #, c-format
 msgid "saving Bootsplash theme..."
-msgstr "vel oppstartstema …"
+msgstr "Lagrar oppstartstema …"
 
 #: draksplash:169
 #, c-format
 msgid "Unable to load image file %s"
-msgstr ""
+msgstr "Klarte ikkje opna biletfila «%s»"
 
 #: draksplash:180
 #, c-format
 msgid "choose image"
-msgstr "vel bilete"
+msgstr "Vel bilete"
 
 #: draksplash:195
 #, c-format
 msgid "Color selection"
-msgstr ""
+msgstr "Fargeval"
 
 #: drakups:71
 #, c-format
 msgid "Connected through a serial port or an usb cable"
-msgstr ""
+msgstr "Kopla til gjennom serieport eller USB-kabel"
 
 #: drakups:72
 #, c-format
@@ -1259,6 +1316,8 @@ msgid ""
 "\n"
 "Here, you'll add a new UPS to your system.\n"
 msgstr ""
+"Velkommen til oppsettverktøyet for UPS.\n\n"
+"Her kan du leggja ein ny UPS til systemet.\n"
 
 #: drakups:88
 #, c-format
@@ -1268,16 +1327,18 @@ msgid ""
 "Do you want to autodetect UPS devices connected to this machine or to "
 "manually select them?"
 msgstr ""
+"Me skal no leggja til ei UPS-eining.\n\n"
+"Vil du søkja etter UPS-einingar kopla til maskina, eller velja dei manuelt?"
 
 #: drakups:91
 #, c-format
 msgid "Autodetection"
-msgstr "Oppdag automatisk"
+msgstr "Søk"
 
 #: drakups:99 harddrake2:367
 #, c-format
 msgid "Detection in progress"
-msgstr ""
+msgstr "Søk pågår"
 
 #: drakups:118 drakups:157 logdrake:449 logdrake:455
 #, c-format
@@ -1287,7 +1348,7 @@ msgstr "Gratulerer"
 #: drakups:119
 #, c-format
 msgid "The wizard successfully added the following UPS devices:"
-msgstr ""
+msgstr "Vegvisaren har no lagt til følgjande UPS-eining(ar):"
 
 #: drakups:121
 #, c-format
@@ -1307,7 +1368,7 @@ msgstr "Vel UPS-modell."
 #: drakups:127
 #, c-format
 msgid "Manufacturer / Model:"
-msgstr ""
+msgstr "Produsent/modell:"
 
 #: drakups:138
 #, c-format
@@ -1315,6 +1376,8 @@ msgid ""
 "We are configuring the \"%s\" UPS from \"%s\".\n"
 "Please fill in its name, its driver and its port."
 msgstr ""
+"Set opp «%s»-UPS-en frå «%s».\n"
+"Skriv inn namn, drivar og port."
 
 #: drakups:143
 #, c-format
@@ -1324,12 +1387,12 @@ msgstr "Namn:"
 #: drakups:143
 #, c-format
 msgid "The name of your ups"
-msgstr "NAmnet på UPS-en"
+msgstr "Namnet på UPS-eininga."
 
 #: drakups:144
 #, c-format
 msgid "The driver that manages your ups"
-msgstr ""
+msgstr "Drivaren som styrer UPS-eininga."
 
 #: drakups:145
 #, c-format
@@ -1339,12 +1402,12 @@ msgstr "Port:"
 #: drakups:147
 #, c-format
 msgid "The port on which is connected your ups"
-msgstr ""
+msgstr "Porten som UPS-eininga er kopla til."
 
 #: drakups:157
 #, c-format
 msgid "The wizard successfully configured the new \"%s\" UPS device."
-msgstr ""
+msgstr "Vegvisaren har no sett opp den nye «%s»-UPS-eininga."
 
 #: drakups:248
 #, c-format
@@ -1408,9 +1471,9 @@ msgid "ACL name"
 msgstr "ACL-namn?"
 
 #: drakups:329
-#, fuzzy, c-format
+#, c-format
 msgid "UPS Management"
-msgstr "Skrivarhandtering %s"
+msgstr "UPS-handtering"
 
 #: drakups:333 drakups:342
 #, c-format
@@ -1440,6 +1503,9 @@ msgid ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 msgstr ""
+"Fann ikkje noko fjernsynskort kopla til maskina. Kontroller at du har eit fjernsynskort som er støtta i Linux kopla til.\n\n\n"
+"Du finn maskinvaredatabasen vår på:\n\n\n"
+"http://www.mandriva.com/en/hardware/"
 
 #: finish-install:44
 #, c-format
@@ -1449,22 +1515,22 @@ msgstr "Vel tastaturoppsett"
 #: finish-install:111 finish-install:129 finish-install:141
 #, c-format
 msgid "Encrypted home partition"
-msgstr ""
+msgstr "Kryptert heimepartisjon"
 
 #: finish-install:111
 #, c-format
 msgid "Please enter a password for the %s user"
-msgstr ""
+msgstr "Skriv inn passord for brukaren «%s»"
 
 #: finish-install:129
 #, c-format
 msgid "Creating encrypted home partition"
-msgstr ""
+msgstr "Lagar kryptert heimepartisjon"
 
 #: finish-install:141
 #, c-format
 msgid "Formatting encrypted home partition"
-msgstr ""
+msgstr "Formaterer kryptert heimepartisjon"
 
 #: harddrake2:27
 #, c-format
@@ -1483,9 +1549,8 @@ msgstr "Buss"
 
 #: harddrake2:31
 #, c-format
-msgid ""
-"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
-msgstr ""
+msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgstr "Dette er den fysiske bussen som eininga er kopla til (eksempel: PCI eller USB)."
 
 #: harddrake2:33 harddrake2:146
 #, c-format
@@ -1497,7 +1562,7 @@ msgstr "Bussidentifisering"
 msgid ""
 "- PCI and USB devices: this lists the vendor, device, subvendor and "
 "subdevice PCI/USB ids"
-msgstr ""
+msgstr "– PCI- og USB-einingar: Her står PCI/USB-ID-ar til produsent, eining, underprodusent og undereining."
 
 #: harddrake2:36
 #, c-format
@@ -1511,6 +1576,9 @@ msgid ""
 "- eide devices: the device is either a slave or a master device\n"
 "- scsi devices: the scsi bus and the scsi device ids"
 msgstr ""
+"– PCI-einingar: PCI-sport, eining og funksjon til kortet.\n"
+"– EIDE-einingar: Eininga er anten ein slave- eller ei meistereining.\n"
+"– SCSI-einingar: SCSI-bussen og einings-ID."
 
 #: harddrake2:40
 #, c-format
@@ -2015,8 +2083,7 @@ msgstr "Einingsfil"
 
 #: harddrake2:115
 #, c-format
-msgid ""
-"the device file used to communicate with the kernel driver for the mouse"
+msgid "the device file used to communicate with the kernel driver for the mouse"
 msgstr "einingsfila for musa brukt til å kommunisera med kjernedrivaren"
 
 #: harddrake2:116
@@ -2182,9 +2249,9 @@ msgid "/_About..."
 msgstr "/_Om …"
 
 #: harddrake2:230
-#, fuzzy, c-format
+#, c-format
 msgid "Harddrake"
-msgstr "Harddrake2"
+msgstr "Harddrake"
 
 #: harddrake2:232
 #, c-format
@@ -2194,7 +2261,7 @@ msgstr "Copyright © %s Mandriva"
 #: harddrake2:234
 #, c-format
 msgid "This is HardDrake, a %s hardware configuration tool."
-msgstr ""
+msgstr "Detter er HardDrake – eit oppsettverktøy for %s."
 
 #: harddrake2:267
 #, c-format
@@ -2209,7 +2276,7 @@ msgstr "Informasjon"
 #: harddrake2:272
 #, c-format
 msgid "Set current driver options"
-msgstr ""
+msgstr "Set drivarval"
 
 #: harddrake2:279
 #, c-format
@@ -2218,8 +2285,7 @@ msgstr "Køyr oppsettverktøy"
 
 #: harddrake2:299
 #, c-format
-msgid ""
-"Click on a device in the left tree in order to display its information here."
+msgid "Click on a device in the left tree in order to display its information here."
 msgstr "Trykk på ei eining til venstre for å sjå informasjon om eininga her."
 
 #: harddrake2:319
@@ -2509,8 +2575,7 @@ msgstr "Tenesteoppsett"
 msgid ""
 "You will receive an alert if one of the selected services is no longer "
 "running"
-msgstr ""
-"Du vil motta ei varsling om ei av avmerkte tenestene ikkje lenger køyrer"
+msgstr "Du vil motta ei varsling om ei av avmerkte tenestene ikkje lenger køyrer"
 
 #: logdrake:421
 #, c-format
@@ -2593,8 +2658,7 @@ msgstr "Avbryt skannaroppsett."
 
 #: scannerdrake:60
 #, c-format
-msgid ""
-"Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr "Klarte ikkje installera pakkar nødvendige for å setja opp skannarar."
 
 #: scannerdrake:61
@@ -2633,24 +2697,24 @@ msgid "%s is not in the scanner database, configure it manually?"
 msgstr "%s finst ikkje i skannardatabasen. Vil du setja han opp manuelt?"
 
 #: scannerdrake:130
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner configuration"
-msgstr "Varseloppsett"
+msgstr "Skannaroppsett"
 
 #: scannerdrake:131
 #, c-format
 msgid "Select a scanner model (Detected model: %s, Port: %s)"
-msgstr ""
+msgstr "Vel skannarmodell (funne modell: %s – port: %s)"
 
 #: scannerdrake:133
 #, c-format
 msgid "Select a scanner model (Detected model: %s)"
-msgstr ""
+msgstr "Vel skannarmodell (funne modell: %s)"
 
 #: scannerdrake:134
 #, c-format
 msgid "Select a scanner model (Port: %s)"
-msgstr ""
+msgstr "Vel skannarmodell (port: %s)"
 
 #: scannerdrake:136 scannerdrake:139
 #, c-format
@@ -2668,9 +2732,9 @@ msgid "Do not install firmware file"
 msgstr "Ikkje installer fastvarefil"
 
 #: scannerdrake:172 scannerdrake:222
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner Firmware"
-msgstr "Skannardeling"
+msgstr "Skannarfastvare"
 
 #: scannerdrake:173 scannerdrake:225
 #, c-format
@@ -2802,9 +2866,9 @@ msgid "Auto-detect available ports"
 msgstr "Finn automatisk tilgjengelege portar"
 
 #: scannerdrake:331 scannerdrake:377
-#, fuzzy, c-format
+#, c-format
 msgid "Device choice"
-msgstr "Einingsfil"
+msgstr "Einingsval"
 
 #: scannerdrake:332 scannerdrake:378
 #, c-format
@@ -2932,9 +2996,9 @@ msgid "There are no scanners found which are available on your system.\n"
 msgstr "Fann ingen skannarar tilgjengeleg på systemet ditt.\n"
 
 #: scannerdrake:461
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner Management"
-msgstr "Skrivarhandtering %s"
+msgstr "Skannarhandtering"
 
 #: scannerdrake:467
 #, c-format
@@ -2967,7 +3031,7 @@ msgid "This machine"
 msgstr "Denne maskina"
 
 #: scannerdrake:596
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner Sharing"
 msgstr "Skannardeling"
 
@@ -3229,3 +3293,4 @@ msgstr "Vil du køyra det nødvendige oppsettverktøyet?"
 
 #~ msgid "Userdrake"
 #~ msgstr "Brukaroppsett"
+
