@@ -44,7 +44,7 @@ sub read_nut_config() {
 sub readDriversList() {
     my (%ups, @ups);
     local $_;
-    foreach (cat_(first(glob("/usr/share/doc/nut-*/docs/driver.list")))) {
+    foreach (cat_(first(glob("/usr/share/doc/nut/docs/driver.list")))) {
         /^#/ and next;
         if (my ($vendor, $model, $extra, $driver) = /^"(.*)"\s+"(.*)"\s+"(.*)"\s+"(.*)"/) {
             $ups{$vendor}{$model . $extra} = {
