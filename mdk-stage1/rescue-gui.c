@@ -278,7 +278,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 				return 33;
 			}
 			while (wait4(-1, &wait_status, 0, NULL) != pid) {};
-			printf("<press Enter to return to Rescue GUI>");
+			printf("<press Enter to return to Rescue menu>");
 			PAUSE();
 			resume_from_suspend();
 			if (!WIFEXITED(wait_status) || WEXITSTATUS(wait_status) != 0) {
