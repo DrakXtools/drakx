@@ -8,13 +8,13 @@ use common;
 
 our %help = (
 
-'accept_bogus_error_responses' => N("Accept/Refuse bogus IPv4 error messages."),
+'accept_bogus_error_responses' => N("Accept bogus IPv4 error messages."),
 
-'accept_broadcasted_icmp_echo' => N("Accept/Refuse broadcasted icmp echo."),
+'accept_broadcasted_icmp_echo' => N("Accept broadcasted icmp echo."),
 
-'accept_icmp_echo' => N("Accept/Refuse icmp echo."),
+'accept_icmp_echo' => N("Accept icmp echo."),
 
-'allow_autologin' => N("Allow/Forbid autologin."),
+'allow_autologin' => N("Allow autologin."),
 
 'allow_issues' =>
              #-PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
@@ -24,39 +24,39 @@ If set to NONE, no issues are allowed.
 
 Else only /etc/issue is allowed."),
 
-'allow_reboot' => N("Allow/Forbid reboot by the console user."),
+'allow_reboot' => N("Allow reboot by the console user."),
 
-'allow_remote_root_login' => N("Allow/Forbid remote root login."),
+'allow_remote_root_login' => N("Allow remote root login."),
 
-'allow_root_login' => N("Allow/Forbid direct root login."),
+'allow_root_login' => N("Allow direct root login."),
 
-'allow_user_list' => N("Allow/Forbid the list of users on the system on display managers (kdm and gdm)."),
+'allow_user_list' => N("Allow the list of users on the system on display managers (kdm and gdm)."),
 
-'allow_xauth_from_root' => N("Allow/forbid to export display when
+'allow_xauth_from_root' => N("Allow to export display when
 passing from the root account to the other users.
 
 See pam_xauth(8) for more details.'"),
 
-'allow_x_connections' => N("Allow/Forbid X connections:
+'allow_x_connections' => N("Allow X connections:
 
-- ALL (all connections are allowed),
+- All (all connections are allowed),
 
-- LOCAL (only connection from local machine),
+- Local (only connection from local machine),
 
-- NONE (no connection)."),
+- None (no connection)."),
 
 'allow_xserver_to_listen' => N("The argument specifies if clients are authorized to connect
 to the X server from the network on the tcp port 6000 or not."),
 
 'authorize_services' =>
-             #-PO: here "ALL", "LOCAL" and "NONE" are values in a pull-down menu; translate them the same as they're
+             #-PO: here "ALL", "Local" and "None" are values in a pull-down menu; translate them the same as they're
              N("Authorize:
 
 - all services controlled by tcp_wrappers (see hosts.deny(5) man page) if set to \"ALL\",
 
-- only local ones if set to \"LOCAL\"
+- only local ones if set to \"Local\"
 
-- none if set to \"NONE\".
+- none if set to \"None\".
 
 To authorize the services you need, use /etc/hosts.allow (see hosts.allow(5))."),
 
@@ -69,33 +69,33 @@ The /etc/security/msec/server is used by chkconfig --add to decide to
 add a service if it is present in the file during the installation of
 packages."),
 
-'enable_at_crontab' => N("Enable/Disable crontab and at for users.
+'enable_at_crontab' => N("Enable crontab and at for users.
 
 Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)
 and crontab(1))."),
 
-'enable_console_log' => N("Enable/Disable syslog reports to console 12"),
+'enable_console_log' => N("Enable syslog reports to console 12"),
 
-'enable_dns_spoofing_protection' => N("Enable/Disable name resolution spoofing protection.  If
+'enable_dns_spoofing_protection' => N("Enable name resolution spoofing protection.  If
 \"%s\" is true, also reports to syslog.", N("Security Alerts:")),
 
-'enable_ip_spoofing_protection' => N("Enable/Disable IP spoofing protection."),
+'enable_ip_spoofing_protection' => N("Enable IP spoofing protection."),
 
-'enable_libsafe' => N("Enable/Disable libsafe if libsafe is found on the system."),
+'enable_libsafe' => N("Enable libsafe if libsafe is found on the system."),
 
-'enable_log_strange_packets' => N("Enable/Disable the logging of IPv4 strange packets."),
+'enable_log_strange_packets' => N("Enable the logging of IPv4 strange packets."),
 
-'enable_msec_cron' => N("Enable/Disable msec hourly security check."),
+'enable_msec_cron' => N("Enable msec hourly security check."),
 
 'enable_pam_wheel_for_su' => N("Enable su only from members of the wheel group. If set to no, allows su from any user."),
 
 'enable_password' => N("Use password to authenticate users."),
 
-'enable_promisc_check' => N("Activate/Disable ethernet cards promiscuity check."),
+'enable_promisc_check' => N("Activate ethernet cards promiscuity check."),
 
-'enable_security_check' => N("Activate/Disable daily security check."),
+'enable_security_check' => N("Activate daily security check."),
 
-'enable_sulogin' => N("Enable/Disable sulogin(8) in single user level."),
+'enable_sulogin' => N("Enable sulogin(8) in single user level."),
 
 'no_password_aging_for' => N("Add the name as an exception to the handling of password aging by msec."),
 
