@@ -63,7 +63,7 @@ my %kind2packages = (
 sub kind2description {
     my (@kinds) = @_;
     my %kind2description = (
-	local     => [ N("Local file:"), N("Use local for all authentication and information user tell in local file"), ],
+	local     => [ N("Local file:"), N("Use information stored in local file for all authentication"), ],
 	LDAP      => [ N("LDAP:"), N("Tells your computer to use LDAP for some or all authentication. LDAP consolidates certain types of information within your organization."), ],
 	NIS       => [ N("NIS:"), N("Allows you to run a group of computers in the same Network Information Service domain with a common password and group file."), ],
 	winbind   => [ N("Windows Domain:"), N("Winbind allows the system to retrieve information and authenticate users in a Windows domain."), ],
