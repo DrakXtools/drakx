@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2007-07-01 08:35+0200\n"
+"POT-Creation-Date: 2007-07-30 16:14+0200\n"
 "PO-Revision-Date: 2004-09-15 13:34+0200\n"
 "Last-Translator: Toma Jankovic_<tomaja@net.yu>\n"
 "Language-Team: Serbian <i18n@mandrake.co.yu>\n"
@@ -18,8 +18,8 @@ msgstr ""
 "X-Generator: KBabel 0.9.6\n"
 
 #: any.pm:240 diskdrake/interactive.pm:422 diskdrake/interactive.pm:621
-#: diskdrake/interactive.pm:811 diskdrake/interactive.pm:855
-#: diskdrake/interactive.pm:917 diskdrake/interactive.pm:1201 do_pkgs.pm:209
+#: diskdrake/interactive.pm:808 diskdrake/interactive.pm:852
+#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:1201 do_pkgs.pm:209
 #: do_pkgs.pm:255 harddrake/sound.pm:201 interactive.pm:576
 #, c-format
 msgid "Please wait"
@@ -746,8 +746,7 @@ msgstr "Lokalni fajl :"
 
 #: authentication.pm:66
 #, c-format
-msgid ""
-"Use local for all authentication and information user tell in local file"
+msgid "Use information stored in local file for all authentication"
 msgstr ""
 
 #: authentication.pm:67
@@ -1128,7 +1127,7 @@ msgid "Mount point"
 msgstr "Tačka montiranja"
 
 #: diskdrake/dav.pm:65 diskdrake/interactive.pm:442
-#: diskdrake/interactive.pm:1060 diskdrake/removable.pm:24
+#: diskdrake/interactive.pm:1057 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
@@ -1138,8 +1137,8 @@ msgstr "Opcije"
 #: diskdrake/interactive.pm:242 diskdrake/interactive.pm:398
 #: diskdrake/interactive.pm:416 diskdrake/interactive.pm:547
 #: diskdrake/interactive.pm:552 diskdrake/interactive.pm:670
-#: diskdrake/interactive.pm:935 diskdrake/interactive.pm:1105
-#: diskdrake/interactive.pm:1118 diskdrake/interactive.pm:1121
+#: diskdrake/interactive.pm:932 diskdrake/interactive.pm:1102
+#: diskdrake/interactive.pm:1115 diskdrake/interactive.pm:1118
 #: diskdrake/interactive.pm:1361 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
 #: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:229
 #: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
@@ -1184,8 +1183,8 @@ msgstr "Opcije: %s"
 msgid "Partitioning"
 msgstr "Particionisanje"
 
-#: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1080
-#: diskdrake/interactive.pm:1090 diskdrake/interactive.pm:1143
+#: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1077
+#: diskdrake/interactive.pm:1087 diskdrake/interactive.pm:1140
 #, c-format
 msgid "Read carefully!"
 msgstr "PAŽLJIVO PROČITAJ !"
@@ -1306,8 +1305,8 @@ msgstr "Vrsta fajl sistema:"
 #: diskdrake/hd_gtk.pm:380 diskdrake/interactive.pm:291
 #: diskdrake/interactive.pm:392 diskdrake/interactive.pm:428
 #: diskdrake/interactive.pm:577 diskdrake/interactive.pm:761
-#: diskdrake/interactive.pm:822 diskdrake/interactive.pm:915
-#: diskdrake/interactive.pm:957 diskdrake/interactive.pm:958
+#: diskdrake/interactive.pm:819 diskdrake/interactive.pm:912
+#: diskdrake/interactive.pm:954 diskdrake/interactive.pm:955
 #: diskdrake/interactive.pm:1186 diskdrake/interactive.pm:1224
 #: diskdrake/interactive.pm:1360 do_pkgs.pm:16 do_pkgs.pm:35 do_pkgs.pm:53
 #: harddrake/sound.pm:285
@@ -1331,7 +1330,7 @@ msgid "Use ``%s'' instead"
 msgstr "Umesto toga probajte ``%s''"
 
 #: diskdrake/hd_gtk.pm:389 diskdrake/interactive.pm:441
-#: diskdrake/interactive.pm:615 diskdrake/interactive.pm:1096
+#: diskdrake/interactive.pm:615 diskdrake/interactive.pm:1093
 #: diskdrake/removable.pm:25 diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
@@ -1515,12 +1514,12 @@ msgstr "Promeni veličinu"
 msgid "Format"
 msgstr "Formatiranje"
 
-#: diskdrake/interactive.pm:447 diskdrake/interactive.pm:863
+#: diskdrake/interactive.pm:447 diskdrake/interactive.pm:860
 #, c-format
 msgid "Add to RAID"
 msgstr "Dodaj na RAID"
 
-#: diskdrake/interactive.pm:448 diskdrake/interactive.pm:880
+#: diskdrake/interactive.pm:448 diskdrake/interactive.pm:877
 #, c-format
 msgid "Add to LVM"
 msgstr "Dodaj na LVM"
@@ -1565,12 +1564,12 @@ msgstr "Kreiraj novu particiju"
 msgid "Start sector: "
 msgstr "Početni sektor: "
 
-#: diskdrake/interactive.pm:516 diskdrake/interactive.pm:950
+#: diskdrake/interactive.pm:516 diskdrake/interactive.pm:947
 #, c-format
 msgid "Size in MB: "
 msgstr "Veličina u MB:"
 
-#: diskdrake/interactive.pm:518 diskdrake/interactive.pm:951
+#: diskdrake/interactive.pm:518 diskdrake/interactive.pm:948
 #, c-format
 msgid "Filesystem type: "
 msgstr "Vrsta tatotečnog sistema:"
@@ -1658,7 +1657,7 @@ msgstr ""
 msgid "Where do you want to mount %s?"
 msgstr "Gde biste da montirate %s uređaj ?"
 
-#: diskdrake/interactive.pm:725 diskdrake/interactive.pm:811
+#: diskdrake/interactive.pm:725 diskdrake/interactive.pm:808
 #: fs/partitioning_wizard.pm:141 fs/partitioning_wizard.pm:173
 #, c-format
 msgid "Resizing"
@@ -1704,7 +1703,7 @@ msgstr ""
 msgid "Maximum size: %s MB"
 msgstr ""
 
-#: diskdrake/interactive.pm:822 fs/partitioning_wizard.pm:181
+#: diskdrake/interactive.pm:819 fs/partitioning_wizard.pm:181
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
@@ -1714,109 +1713,109 @@ msgstr ""
 "provera fajl sistema će biti pokrenuta kada se sledeći put ulogujete u "
 "Windows(TM)"
 
-#: diskdrake/interactive.pm:863
+#: diskdrake/interactive.pm:860
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "Izaberi postojeći RAID za dodavanje"
 
-#: diskdrake/interactive.pm:865 diskdrake/interactive.pm:882
+#: diskdrake/interactive.pm:862 diskdrake/interactive.pm:879
 #, c-format
 msgid "new"
 msgstr "novi"
 
-#: diskdrake/interactive.pm:880
+#: diskdrake/interactive.pm:877
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "Izaberi postojeći LVM za dodavanje"
 
-#: diskdrake/interactive.pm:887
+#: diskdrake/interactive.pm:884
 #, c-format
 msgid "LVM name?"
 msgstr "LVM ime?"
 
-#: diskdrake/interactive.pm:915
+#: diskdrake/interactive.pm:912
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
 
-#: diskdrake/interactive.pm:917
+#: diskdrake/interactive.pm:914
 #, c-format
 msgid "Moving physical extents"
 msgstr ""
 
-#: diskdrake/interactive.pm:935
+#: diskdrake/interactive.pm:932
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "Ova particija ne može biti korišćena za loopback "
 
-#: diskdrake/interactive.pm:948
+#: diskdrake/interactive.pm:945
 #, c-format
 msgid "Loopback"
 msgstr "Loopback"
 
-#: diskdrake/interactive.pm:949
+#: diskdrake/interactive.pm:946
 #, c-format
 msgid "Loopback file name: "
 msgstr "Ime Loopback datoteke: "
 
-#: diskdrake/interactive.pm:954
+#: diskdrake/interactive.pm:951
 #, c-format
 msgid "Give a file name"
 msgstr "Odredite ime fajla"
 
-#: diskdrake/interactive.pm:957
+#: diskdrake/interactive.pm:954
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "Fajl se već koristi od strane drugog loopback-a,izaberite drugi"
 
-#: diskdrake/interactive.pm:958
+#: diskdrake/interactive.pm:955
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "Datoteka već postoji.Da li da ga koristim ?"
 
-#: diskdrake/interactive.pm:987 diskdrake/interactive.pm:990
+#: diskdrake/interactive.pm:984 diskdrake/interactive.pm:987
 #, c-format
 msgid "Mount options"
 msgstr "Opcije montiranja"
 
-#: diskdrake/interactive.pm:997
+#: diskdrake/interactive.pm:994
 #, c-format
 msgid "Various"
 msgstr "Razno"
 
-#: diskdrake/interactive.pm:1062
+#: diskdrake/interactive.pm:1059
 #, c-format
 msgid "device"
 msgstr "uređaj"
 
-#: diskdrake/interactive.pm:1063
+#: diskdrake/interactive.pm:1060
 #, c-format
 msgid "level"
 msgstr "nivo"
 
-#: diskdrake/interactive.pm:1064
+#: diskdrake/interactive.pm:1061
 #, fuzzy, c-format
 msgid "chunk size in KiB"
 msgstr "chunk veličina"
 
-#: diskdrake/interactive.pm:1081
+#: diskdrake/interactive.pm:1078
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "PAŽLJIVO,ova operacija je opasna."
 
-#: diskdrake/interactive.pm:1096
+#: diskdrake/interactive.pm:1093
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Koju vrstu particioniranja?"
 
-#: diskdrake/interactive.pm:1134
+#: diskdrake/interactive.pm:1131
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Morate restartovati računar da bi se izmene izvršile"
 
-#: diskdrake/interactive.pm:1143
+#: diskdrake/interactive.pm:1140
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Tabela particija za uređaj %s će biti zapisana na disk!"
@@ -5146,7 +5145,7 @@ msgstr ""
 
 #: security/help.pm:11
 #, fuzzy, c-format
-msgid "Accept/Refuse bogus IPv4 error messages."
+msgid "Accept bogus IPv4 error messages."
 msgstr ""
 "Argumenti: (arg)\n"
 "\n"
@@ -5154,7 +5153,7 @@ msgstr ""
 
 #: security/help.pm:13
 #, fuzzy, c-format
-msgid "Accept/Refuse broadcasted icmp echo."
+msgid "Accept broadcasted icmp echo."
 msgstr ""
 "Argumenti: (arg)\n"
 "\n"
@@ -5162,7 +5161,7 @@ msgstr ""
 
 #: security/help.pm:15
 #, fuzzy, c-format
-msgid "Accept/Refuse icmp echo."
+msgid "Accept icmp echo."
 msgstr ""
 "Argumenti: (arg)\n"
 "\n"
@@ -5170,7 +5169,7 @@ msgstr ""
 
 #: security/help.pm:17
 #, fuzzy, c-format
-msgid "Allow/Forbid autologin."
+msgid "Allow autologin."
 msgstr ""
 "Argumenti: (arg)\n"
 "\n"
@@ -5182,7 +5181,7 @@ msgstr ""
 msgid ""
 "If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
 "\n"
-"If set to NONE, no issues are allowed.\n"
+"If set to \"None\", no issues are allowed.\n"
 "\n"
 "Else only /etc/issue is allowed."
 msgstr ""
@@ -5194,7 +5193,7 @@ msgstr ""
 
 #: security/help.pm:27
 #, fuzzy, c-format
-msgid "Allow/Forbid reboot by the console user."
+msgid "Allow reboot by the console user."
 msgstr ""
 "Argumenti: (arg)\n"
 "\n"
@@ -5202,7 +5201,7 @@ msgstr ""
 
 #: security/help.pm:29
 #, fuzzy, c-format
-msgid "Allow/Forbid remote root login."
+msgid "Allow remote root login."
 msgstr ""
 "Argumenti: (arg)\n"
 "\n"
@@ -5210,7 +5209,7 @@ msgstr ""
 
 #: security/help.pm:31
 #, fuzzy, c-format
-msgid "Allow/Forbid direct root login."
+msgid "Allow direct root login."
 msgstr ""
 "Argumenti: (arg)\n"
 "\n"
@@ -5219,8 +5218,7 @@ msgstr ""
 #: security/help.pm:33
 #, fuzzy, c-format
 msgid ""
-"Allow/Forbid the list of users on the system on display managers (kdm and "
-"gdm)."
+"Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr ""
 "Argumenti: (arg)\n"
 "\n"
@@ -5230,7 +5228,7 @@ msgstr ""
 #: security/help.pm:35
 #, c-format
 msgid ""
-"Allow/forbid to export display when\n"
+"Allow to export display when\n"
 "passing from the root account to the other users.\n"
 "\n"
 "See pam_xauth(8) for more details.'"
@@ -5239,13 +5237,13 @@ msgstr ""
 #: security/help.pm:40
 #, fuzzy, c-format
 msgid ""
-"Allow/Forbid X connections:\n"
+"Allow X connections:\n"
 "\n"
-"- ALL (all connections are allowed),\n"
+"- \"All\" (all connections are allowed),\n"
 "\n"
-"- LOCAL (only connection from local machine),\n"
+"- \"Local\" (only connection from local machine),\n"
 "\n"
-"- NONE (no connection)."
+"- \"None\" (no connection)."
 msgstr ""
 "Argumenti: (arg, listen_tcp=None)\n"
 "\n"
@@ -5264,7 +5262,7 @@ msgstr ""
 "Argument određuje da li klijent autorzivan za konekovanje na\n"
 "X server na tcp portu 6000 ili nije."
 
-#. -PO: here "ALL", "LOCAL" and "NONE" are values in a pull-down menu; translate them the same as they're
+#. -PO: here "ALL", "Local" and "None" are values in a pull-down menu; translate them the same as they're
 #: security/help.pm:53
 #, fuzzy, c-format
 msgid ""
@@ -5273,9 +5271,9 @@ msgid ""
 "- all services controlled by tcp_wrappers (see hosts.deny(5) man page) if "
 "set to \"ALL\",\n"
 "\n"
-"- only local ones if set to \"LOCAL\"\n"
+"- only local ones if set to \"Local\"\n"
 "\n"
-"- none if set to \"NONE\".\n"
+"- none if set to \"None\".\n"
 "\n"
 "To authorize the services you need, use /etc/hosts.allow (see hosts.allow"
 "(5))."
@@ -5314,7 +5312,7 @@ msgstr ""
 #: security/help.pm:72
 #, fuzzy, c-format
 msgid ""
-"Enable/Disable crontab and at for users.\n"
+"Enable crontab and at for users.\n"
 "\n"
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
@@ -5327,13 +5325,13 @@ msgstr ""
 
 #: security/help.pm:77
 #, c-format
-msgid "Enable/Disable syslog reports to console 12"
+msgid "Enable syslog reports to console 12"
 msgstr ""
 
 #: security/help.pm:79
 #, fuzzy, c-format
 msgid ""
-"Enable/Disable name resolution spoofing protection.  If\n"
+"Enable name resolution spoofing protection.  If\n"
 "\"%s\" is true, also reports to syslog."
 msgstr ""
 "Argumenti: (arg, alert=1)\n"
@@ -5348,7 +5346,7 @@ msgstr "Sigurnosni alarmi:"
 
 #: security/help.pm:82
 #, fuzzy, c-format
-msgid "Enable/Disable IP spoofing protection."
+msgid "Enable IP spoofing protection."
 msgstr ""
 "Argumenti: (arg, alert=1)\n"
 "\n"
@@ -5356,7 +5354,7 @@ msgstr ""
 
 #: security/help.pm:84
 #, fuzzy, c-format
-msgid "Enable/Disable libsafe if libsafe is found on the system."
+msgid "Enable libsafe if libsafe is found on the system."
 msgstr ""
 "Argumenti: (arg)\n"
 "\n"
@@ -5364,7 +5362,7 @@ msgstr ""
 
 #: security/help.pm:86
 #, fuzzy, c-format
-msgid "Enable/Disable the logging of IPv4 strange packets."
+msgid "Enable the logging of IPv4 strange packets."
 msgstr ""
 "Argumenti: (arg)\n"
 "\n"
@@ -5372,7 +5370,7 @@ msgstr ""
 
 #: security/help.pm:88
 #, fuzzy, c-format
-msgid "Enable/Disable msec hourly security check."
+msgid "Enable msec hourly security check."
 msgstr ""
 "Argumenti: (arg)\n"
 "\n"
@@ -5398,7 +5396,7 @@ msgstr ""
 
 #: security/help.pm:94
 #, fuzzy, c-format
-msgid "Activate/Disable ethernet cards promiscuity check."
+msgid "Activate ethernet cards promiscuity check."
 msgstr ""
 "Argumenti: (arg)\n"
 "\n"
@@ -5406,7 +5404,7 @@ msgstr ""
 
 #: security/help.pm:96
 #, fuzzy, c-format
-msgid "Activate/Disable daily security check."
+msgid "Activate daily security check."
 msgstr ""
 "Argumenti: (arg)\n"
 "\n"
@@ -5414,7 +5412,7 @@ msgstr ""
 
 #: security/help.pm:98
 #, fuzzy, c-format
-msgid "Enable/Disable sulogin(8) in single user level."
+msgid "Enable sulogin(8) in single user level."
 msgstr ""
 "Argumenti: (arg)\n"
 "\n"
@@ -5458,7 +5456,7 @@ msgstr ""
 
 #: security/help.pm:108
 #, fuzzy, c-format
-msgid "Set the root umask."
+msgid "Set the root's file mode creation mask."
 msgstr ""
 "Argumenti: (umask)\n"
 "\n"
@@ -5598,7 +5596,7 @@ msgstr ""
 
 #: security/help.pm:138
 #, fuzzy, c-format
-msgid "Set the user umask."
+msgid "Set the user's file mode creation mask."
 msgstr ""
 "Argumenti: (umask)\n"
 "\n"
@@ -6821,6 +6819,55 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Instalacija nije uspela"
+
+#, fuzzy
+#~ msgid "Accept/Refuse bogus IPv4 error messages."
+#~ msgstr ""
+#~ "Argumenti: (arg)\n"
+#~ "\n"
+#~ "Prihvati/Odbij IPv4 poruke o greškama."
+
+#, fuzzy
+#~ msgid "Accept/Refuse broadcasted icmp echo."
+#~ msgstr ""
+#~ "Argumenti: (arg)\n"
+#~ "\n"
+#~ " Prihvati/Odbij prenosivi icmp echo."
+
+#, fuzzy
+#~ msgid "Allow/Forbid remote root login."
+#~ msgstr ""
+#~ "Argumenti: (arg)\n"
+#~ "\n"
+#~ "Dozvoli/Ne dozvoli udaljeno root logovanje."
+
+#, fuzzy
+#~ msgid "Enable/Disable IP spoofing protection."
+#~ msgstr ""
+#~ "Argumenti: (arg, alert=1)\n"
+#~ "\n"
+#~ "Omogući/Onemogući IP spoofing zaštitu."
+
+#, fuzzy
+#~ msgid "Enable/Disable libsafe if libsafe is found on the system."
+#~ msgstr ""
+#~ "Argumenti: (arg)\n"
+#~ "\n"
+#~ "Omogući/Onemogući libsafe ako je libsafe pronađen na sistemu."
+
+#, fuzzy
+#~ msgid "Enable/Disable the logging of IPv4 strange packets."
+#~ msgstr ""
+#~ "Argumenti: (arg)\n"
+#~ "\n"
+#~ "Omogući/Onemogući prijavljivanje IPv4 strange paketa."
+
+#, fuzzy
+#~ msgid "Enable/Disable msec hourly security check."
+#~ msgstr ""
+#~ "Argumenti: (arg)\n"
+#~ "\n"
+#~ "Omogući/Onemogući msec proveru sigurnosti na svaki čas."
 
 #~ msgid "Icon"
 #~ msgstr "Ikona"

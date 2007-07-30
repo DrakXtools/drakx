@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
-"POT-Creation-Date: 2007-07-01 08:35+0200\n"
+"POT-Creation-Date: 2007-07-30 16:14+0200\n"
 "PO-Revision-Date: 2007-03-10 22:41+0000\n"
 "Last-Translator: Pjetur G. Hjaltason <pjetur@pjetur.net>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
@@ -22,8 +22,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: any.pm:240 diskdrake/interactive.pm:422 diskdrake/interactive.pm:621
-#: diskdrake/interactive.pm:811 diskdrake/interactive.pm:855
-#: diskdrake/interactive.pm:917 diskdrake/interactive.pm:1201 do_pkgs.pm:209
+#: diskdrake/interactive.pm:808 diskdrake/interactive.pm:852
+#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:1201 do_pkgs.pm:209
 #: do_pkgs.pm:255 harddrake/sound.pm:201 interactive.pm:576
 #, c-format
 msgid "Please wait"
@@ -762,10 +762,8 @@ msgstr "Staðbundin skrá:"
 
 #: authentication.pm:66
 #, c-format
-msgid ""
-"Use local for all authentication and information user tell in local file"
+msgid "Use information stored in local file for all authentication"
 msgstr ""
-"Nota staðbundna skrá fyrir allar auðkenningar og upplýsingar um notanda"
 
 #: authentication.pm:67
 #, c-format
@@ -1158,7 +1156,7 @@ msgid "Mount point"
 msgstr "Tengipunktur"
 
 #: diskdrake/dav.pm:65 diskdrake/interactive.pm:442
-#: diskdrake/interactive.pm:1060 diskdrake/removable.pm:24
+#: diskdrake/interactive.pm:1057 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
@@ -1168,8 +1166,8 @@ msgstr "Valkostir"
 #: diskdrake/interactive.pm:242 diskdrake/interactive.pm:398
 #: diskdrake/interactive.pm:416 diskdrake/interactive.pm:547
 #: diskdrake/interactive.pm:552 diskdrake/interactive.pm:670
-#: diskdrake/interactive.pm:935 diskdrake/interactive.pm:1105
-#: diskdrake/interactive.pm:1118 diskdrake/interactive.pm:1121
+#: diskdrake/interactive.pm:932 diskdrake/interactive.pm:1102
+#: diskdrake/interactive.pm:1115 diskdrake/interactive.pm:1118
 #: diskdrake/interactive.pm:1361 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
 #: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:229
 #: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
@@ -1214,8 +1212,8 @@ msgstr "Valkostir: %s"
 msgid "Partitioning"
 msgstr "Forsníða diska"
 
-#: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1080
-#: diskdrake/interactive.pm:1090 diskdrake/interactive.pm:1143
+#: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1077
+#: diskdrake/interactive.pm:1087 diskdrake/interactive.pm:1140
 #, c-format
 msgid "Read carefully!"
 msgstr "Lestu vandlega!"
@@ -1336,8 +1334,8 @@ msgstr "Tegundir skráakerfa:"
 #: diskdrake/hd_gtk.pm:380 diskdrake/interactive.pm:291
 #: diskdrake/interactive.pm:392 diskdrake/interactive.pm:428
 #: diskdrake/interactive.pm:577 diskdrake/interactive.pm:761
-#: diskdrake/interactive.pm:822 diskdrake/interactive.pm:915
-#: diskdrake/interactive.pm:957 diskdrake/interactive.pm:958
+#: diskdrake/interactive.pm:819 diskdrake/interactive.pm:912
+#: diskdrake/interactive.pm:954 diskdrake/interactive.pm:955
 #: diskdrake/interactive.pm:1186 diskdrake/interactive.pm:1224
 #: diskdrake/interactive.pm:1360 do_pkgs.pm:16 do_pkgs.pm:35 do_pkgs.pm:53
 #: harddrake/sound.pm:285
@@ -1361,7 +1359,7 @@ msgid "Use ``%s'' instead"
 msgstr "Nota ``%s'' í staðin"
 
 #: diskdrake/hd_gtk.pm:389 diskdrake/interactive.pm:441
-#: diskdrake/interactive.pm:615 diskdrake/interactive.pm:1096
+#: diskdrake/interactive.pm:615 diskdrake/interactive.pm:1093
 #: diskdrake/removable.pm:25 diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
@@ -1550,12 +1548,12 @@ msgstr "Breyta stærð"
 msgid "Format"
 msgstr "Forsníða"
 
-#: diskdrake/interactive.pm:447 diskdrake/interactive.pm:863
+#: diskdrake/interactive.pm:447 diskdrake/interactive.pm:860
 #, c-format
 msgid "Add to RAID"
 msgstr "Bæta við RAID"
 
-#: diskdrake/interactive.pm:448 diskdrake/interactive.pm:880
+#: diskdrake/interactive.pm:448 diskdrake/interactive.pm:877
 #, c-format
 msgid "Add to LVM"
 msgstr "Bæta við LVM"
@@ -1600,12 +1598,12 @@ msgstr "Búa til nýja disksneið"
 msgid "Start sector: "
 msgstr "Byrjunar geiri: "
 
-#: diskdrake/interactive.pm:516 diskdrake/interactive.pm:950
+#: diskdrake/interactive.pm:516 diskdrake/interactive.pm:947
 #, c-format
 msgid "Size in MB: "
 msgstr "Stærð í MB: "
 
-#: diskdrake/interactive.pm:518 diskdrake/interactive.pm:951
+#: diskdrake/interactive.pm:518 diskdrake/interactive.pm:948
 #, c-format
 msgid "Filesystem type: "
 msgstr "Tegund skráakerfis: "
@@ -1691,7 +1689,7 @@ msgstr ""
 msgid "Where do you want to mount %s?"
 msgstr "Hvar viltu tengja tæki %s?"
 
-#: diskdrake/interactive.pm:725 diskdrake/interactive.pm:811
+#: diskdrake/interactive.pm:725 diskdrake/interactive.pm:808
 #: fs/partitioning_wizard.pm:141 fs/partitioning_wizard.pm:173
 #, c-format
 msgid "Resizing"
@@ -1738,7 +1736,7 @@ msgstr "Lágmarksstærð: %s MB"
 msgid "Maximum size: %s MB"
 msgstr "Hámarksstærð: %s MB"
 
-#: diskdrake/interactive.pm:822 fs/partitioning_wizard.pm:181
+#: diskdrake/interactive.pm:819 fs/partitioning_wizard.pm:181
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
@@ -1747,27 +1745,27 @@ msgstr ""
 "Til að staðfesta að gögn séu í lagi eftir að disksneiðum hefur verið \n"
 "breytt verður að keyra diskaprófun þegar þú ræsir Windows(tm) næst"
 
-#: diskdrake/interactive.pm:863
+#: diskdrake/interactive.pm:860
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "Veldu RAID sem til er fyrir til að bæta við"
 
-#: diskdrake/interactive.pm:865 diskdrake/interactive.pm:882
+#: diskdrake/interactive.pm:862 diskdrake/interactive.pm:879
 #, c-format
 msgid "new"
 msgstr "ný"
 
-#: diskdrake/interactive.pm:880
+#: diskdrake/interactive.pm:877
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "Veldu LVM sem til er fyrir til að bæta við"
 
-#: diskdrake/interactive.pm:887
+#: diskdrake/interactive.pm:884
 #, c-format
 msgid "LVM name?"
 msgstr "LVM nafn?"
 
-#: diskdrake/interactive.pm:915
+#: diskdrake/interactive.pm:912
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
@@ -1776,82 +1774,82 @@ msgstr ""
 "Diskur með auðkenni %s er enn í notkun.\n"
 "Vilt þú færa notaðar sneiðar á þessum diski yfir á aðra diska?"
 
-#: diskdrake/interactive.pm:917
+#: diskdrake/interactive.pm:914
 #, c-format
 msgid "Moving physical extents"
 msgstr "Flyt disksneiðar"
 
-#: diskdrake/interactive.pm:935
+#: diskdrake/interactive.pm:932
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "Það er ekki hægt að nota þessa sneið fyrir sýndardisk"
 
-#: diskdrake/interactive.pm:948
+#: diskdrake/interactive.pm:945
 #, c-format
 msgid "Loopback"
 msgstr "Sýndardiskur"
 
-#: diskdrake/interactive.pm:949
+#: diskdrake/interactive.pm:946
 #, c-format
 msgid "Loopback file name: "
 msgstr "Skráarnafn sýndardisks: "
 
-#: diskdrake/interactive.pm:954
+#: diskdrake/interactive.pm:951
 #, c-format
 msgid "Give a file name"
 msgstr "Gefðu upp skráarnafn"
 
-#: diskdrake/interactive.pm:957
+#: diskdrake/interactive.pm:954
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "Skrá er þegar notuð sem annar sýndardiskur, veldu annan"
 
-#: diskdrake/interactive.pm:958
+#: diskdrake/interactive.pm:955
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "Skráin er þegar til. Nota hana?"
 
-#: diskdrake/interactive.pm:987 diskdrake/interactive.pm:990
+#: diskdrake/interactive.pm:984 diskdrake/interactive.pm:987
 #, c-format
 msgid "Mount options"
 msgstr "Tengistillingar"
 
-#: diskdrake/interactive.pm:997
+#: diskdrake/interactive.pm:994
 #, c-format
 msgid "Various"
 msgstr "Ýmislegt"
 
-#: diskdrake/interactive.pm:1062
+#: diskdrake/interactive.pm:1059
 #, c-format
 msgid "device"
 msgstr "tæki"
 
-#: diskdrake/interactive.pm:1063
+#: diskdrake/interactive.pm:1060
 #, c-format
 msgid "level"
 msgstr "stig"
 
-#: diskdrake/interactive.pm:1064
+#: diskdrake/interactive.pm:1061
 #, c-format
 msgid "chunk size in KiB"
 msgstr "blokkarstærð í KiB"
 
-#: diskdrake/interactive.pm:1081
+#: diskdrake/interactive.pm:1078
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Varaðu þig: þessi aðgerð er hættuleg."
 
-#: diskdrake/interactive.pm:1096
+#: diskdrake/interactive.pm:1093
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Hvaða tegund af disksneiðingu?"
 
-#: diskdrake/interactive.pm:1134
+#: diskdrake/interactive.pm:1131
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Þú þarft að endurræsa áður en breytingar taka gildi"
 
-#: diskdrake/interactive.pm:1143
+#: diskdrake/interactive.pm:1140
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Disksneiðatafla drifs %s mun verða skrifuð á disk!"
@@ -5180,32 +5178,32 @@ msgid "Your scanner(s) will not be available for non-root users."
 msgstr "Skanninn þinn verður ekki aðgengilegur nema fyrir kerfisstjóra."
 
 #: security/help.pm:11
-#, c-format
-msgid "Accept/Refuse bogus IPv4 error messages."
-msgstr "Leyfa/Hafna gölluðum IPv4 villuskeytum."
+#, fuzzy, c-format
+msgid "Accept bogus IPv4 error messages."
+msgstr "Taka á móti röngum IPv4 villuskeytum"
 
 #: security/help.pm:13
-#, c-format
-msgid "Accept/Refuse broadcasted icmp echo."
-msgstr "Leyfa/hafna útvörpun á 'icmp echo'."
+#, fuzzy, c-format
+msgid "Accept broadcasted icmp echo."
+msgstr "Taka á móti útvörpuðu \"icmp echo\""
 
 #: security/help.pm:15
-#, c-format
-msgid "Accept/Refuse icmp echo."
-msgstr "Leyfa/Hafna icmp endurvörpun."
+#, fuzzy, c-format
+msgid "Accept icmp echo."
+msgstr "Taka á móti \"icmp echo\""
 
 #: security/help.pm:17
-#, c-format
-msgid "Allow/Forbid autologin."
+#, fuzzy, c-format
+msgid "Allow autologin."
 msgstr "Leyfa/Hafna sjálfvirka innskráningu."
 
 #. -PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
 #: security/help.pm:21
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
 "\n"
-"If set to NONE, no issues are allowed.\n"
+"If set to \"None\", no issues are allowed.\n"
 "\n"
 "Else only /etc/issue is allowed."
 msgstr ""
@@ -5216,32 +5214,31 @@ msgstr ""
 "Annars er /etc/issue leyft."
 
 #: security/help.pm:27
-#, c-format
-msgid "Allow/Forbid reboot by the console user."
+#, fuzzy, c-format
+msgid "Allow reboot by the console user."
 msgstr "Leyfa/Banna enduræsingu af notanda á stjórnskjá."
 
 #: security/help.pm:29
-#, c-format
-msgid "Allow/Forbid remote root login."
-msgstr "Leyfa/banna net-innskráningu á kerfisstjóra."
+#, fuzzy, c-format
+msgid "Allow remote root login."
+msgstr "Leyfa \"root\" innstimplun yfir net"
 
 #: security/help.pm:31
-#, c-format
-msgid "Allow/Forbid direct root login."
+#, fuzzy, c-format
+msgid "Allow direct root login."
 msgstr "Leyfa/banna beina innskráningu kerfisstjóra."
 
 #: security/help.pm:33
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Allow/Forbid the list of users on the system on display managers (kdm and "
-"gdm)."
+"Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr ""
 "Leyfa/Banna lista af notendum kerfisins í innskráningar-glugga (kdm og gdm)."
 
 #: security/help.pm:35
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Allow/forbid to export display when\n"
+"Allow to export display when\n"
 "passing from the root account to the other users.\n"
 "\n"
 "See pam_xauth(8) for more details.'"
@@ -5252,15 +5249,15 @@ msgstr ""
 "Sjá meiri upplýsingar í pam_xauth(8).'"
 
 #: security/help.pm:40
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Allow/Forbid X connections:\n"
+"Allow X connections:\n"
 "\n"
-"- ALL (all connections are allowed),\n"
+"- \"All\" (all connections are allowed),\n"
 "\n"
-"- LOCAL (only connection from local machine),\n"
+"- \"Local\" (only connection from local machine),\n"
 "\n"
-"- NONE (no connection)."
+"- \"None\" (no connection)."
 msgstr ""
 "Leyfa/Banna X tengingar:\n"
 "\n"
@@ -5279,18 +5276,18 @@ msgstr ""
 "Þessi breyta skilgreinir hvort biðlar hafi leyfi til að tengjast\n"
 "X-miðlara frá netinu yfir tcp-gátt 6000."
 
-#. -PO: here "ALL", "LOCAL" and "NONE" are values in a pull-down menu; translate them the same as they're
+#. -PO: here "ALL", "Local" and "None" are values in a pull-down menu; translate them the same as they're
 #: security/help.pm:53
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Authorize:\n"
 "\n"
 "- all services controlled by tcp_wrappers (see hosts.deny(5) man page) if "
 "set to \"ALL\",\n"
 "\n"
-"- only local ones if set to \"LOCAL\"\n"
+"- only local ones if set to \"Local\"\n"
 "\n"
-"- none if set to \"NONE\".\n"
+"- none if set to \"None\".\n"
 "\n"
 "To authorize the services you need, use /etc/hosts.allow (see hosts.allow"
 "(5))."
@@ -5329,9 +5326,9 @@ msgstr ""
 "inn."
 
 #: security/help.pm:72
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Enable/Disable crontab and at for users.\n"
+"Enable crontab and at for users.\n"
 "\n"
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
@@ -5342,14 +5339,14 @@ msgstr ""
 "og crontab(1))."
 
 #: security/help.pm:77
-#, c-format
-msgid "Enable/Disable syslog reports to console 12"
+#, fuzzy, c-format
+msgid "Enable syslog reports to console 12"
 msgstr "Virkja/Aftengja syslog færslur á skjá 12"
 
 #: security/help.pm:79
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Enable/Disable name resolution spoofing protection.  If\n"
+"Enable name resolution spoofing protection.  If\n"
 "\"%s\" is true, also reports to syslog."
 msgstr ""
 "Virkja/Aftengja nafnaleit til að varna vélarstuldi.  Ef\n"
@@ -5361,24 +5358,24 @@ msgid "Security Alerts:"
 msgstr "Öryggisviðvaranir:"
 
 #: security/help.pm:82
-#, c-format
-msgid "Enable/Disable IP spoofing protection."
-msgstr "Virkja/Aftengja IP vélastuldar-vörn."
+#, fuzzy, c-format
+msgid "Enable IP spoofing protection."
+msgstr "Verjast IP vélarstuldi"
 
 #: security/help.pm:84
-#, c-format
-msgid "Enable/Disable libsafe if libsafe is found on the system."
-msgstr "Virkja/Aftengja libsafe ef libsafe finnst á kerfinu."
+#, fuzzy, c-format
+msgid "Enable libsafe if libsafe is found on the system."
+msgstr "Virkja libsafe ef libsafe finnst á kerfinu"
 
 #: security/help.pm:86
-#, c-format
-msgid "Enable/Disable the logging of IPv4 strange packets."
-msgstr "Virkja/Aftengja skráningu á undarlegum IPv4 pökkum."
+#, fuzzy, c-format
+msgid "Enable the logging of IPv4 strange packets."
+msgstr "Virkja skráningu undarlegra IPv4 pakka"
 
 #: security/help.pm:88
-#, c-format
-msgid "Enable/Disable msec hourly security check."
-msgstr "Virkja/Aftengja msec athugun á klukkustundar fresti."
+#, fuzzy, c-format
+msgid "Enable msec hourly security check."
+msgstr "Virkja msec öryggisathugun á hverri klukkustund"
 
 #: security/help.pm:90
 #, c-format
@@ -5394,19 +5391,19 @@ msgid "Use password to authenticate users."
 msgstr "Nota lykilorð til að auðkenna notendur."
 
 #: security/help.pm:94
-#, c-format
-msgid "Activate/Disable ethernet cards promiscuity check."
+#, fuzzy, c-format
+msgid "Activate ethernet cards promiscuity check."
 msgstr ""
 "Virkja/Aftengja athugun á hvort ethernet-korta séu í opnum (promiscuous) ham."
 
 #: security/help.pm:96
-#, c-format
-msgid "Activate/Disable daily security check."
+#, fuzzy, c-format
+msgid "Activate daily security check."
 msgstr "Virkja/Aftengja daglega öryggisathugun."
 
 #: security/help.pm:98
-#, c-format
-msgid "Enable/Disable sulogin(8) in single user level."
+#, fuzzy, c-format
+msgid "Enable sulogin(8) in single user level."
 msgstr "Virkja/Aftengja sulogin(8) í eins-notanda ham."
 
 #: security/help.pm:100
@@ -5437,8 +5434,8 @@ msgstr ""
 "lágmarksfjölda upphafsstafa."
 
 #: security/help.pm:108
-#, c-format
-msgid "Set the root umask."
+#, fuzzy, c-format
+msgid "Set the root's file mode creation mask."
 msgstr "Setja 'umask' rótar."
 
 #: security/help.pm:109
@@ -5569,8 +5566,8 @@ msgid "Timeout unit is second"
 msgstr "Tímaeining er sekúndur"
 
 #: security/help.pm:138
-#, c-format
-msgid "Set the user umask."
+#, fuzzy, c-format
+msgid "Set the user's file mode creation mask."
 msgstr "Setja umask notanda."
 
 #: security/l10n.pm:11
@@ -6740,3 +6737,32 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Innsetning mistókst"
+
+#~ msgid ""
+#~ "Use local for all authentication and information user tell in local file"
+#~ msgstr ""
+#~ "Nota staðbundna skrá fyrir allar auðkenningar og upplýsingar um notanda"
+
+#~ msgid "Accept/Refuse bogus IPv4 error messages."
+#~ msgstr "Leyfa/Hafna gölluðum IPv4 villuskeytum."
+
+#~ msgid "Accept/Refuse broadcasted icmp echo."
+#~ msgstr "Leyfa/hafna útvörpun á 'icmp echo'."
+
+#~ msgid "Accept/Refuse icmp echo."
+#~ msgstr "Leyfa/Hafna icmp endurvörpun."
+
+#~ msgid "Allow/Forbid remote root login."
+#~ msgstr "Leyfa/banna net-innskráningu á kerfisstjóra."
+
+#~ msgid "Enable/Disable IP spoofing protection."
+#~ msgstr "Virkja/Aftengja IP vélastuldar-vörn."
+
+#~ msgid "Enable/Disable libsafe if libsafe is found on the system."
+#~ msgstr "Virkja/Aftengja libsafe ef libsafe finnst á kerfinu."
+
+#~ msgid "Enable/Disable the logging of IPv4 strange packets."
+#~ msgstr "Virkja/Aftengja skráningu á undarlegum IPv4 pökkum."
+
+#~ msgid "Enable/Disable msec hourly security check."
+#~ msgstr "Virkja/Aftengja msec athugun á klukkustundar fresti."

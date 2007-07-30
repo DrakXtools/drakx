@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2007-07-01 08:35+0200\n"
+"POT-Creation-Date: 2007-07-30 16:14+0200\n"
 "PO-Revision-Date: 2006-09-23 12:29+0800\n"
 "Last-Translator: Shiva Huang <shivahuang@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
@@ -30,8 +30,8 @@ msgstr ""
 "X-Poedit-Country: TAIWAN\n"
 
 #: any.pm:240 diskdrake/interactive.pm:422 diskdrake/interactive.pm:621
-#: diskdrake/interactive.pm:811 diskdrake/interactive.pm:855
-#: diskdrake/interactive.pm:917 diskdrake/interactive.pm:1201 do_pkgs.pm:209
+#: diskdrake/interactive.pm:808 diskdrake/interactive.pm:852
+#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:1201 do_pkgs.pm:209
 #: do_pkgs.pm:255 harddrake/sound.pm:201 interactive.pm:576
 #, c-format
 msgid "Please wait"
@@ -763,8 +763,7 @@ msgstr "本地端檔案："
 
 #: authentication.pm:66
 #, c-format
-msgid ""
-"Use local for all authentication and information user tell in local file"
+msgid "Use information stored in local file for all authentication"
 msgstr ""
 
 #: authentication.pm:67
@@ -1138,7 +1137,7 @@ msgid "Mount point"
 msgstr "掛載點"
 
 #: diskdrake/dav.pm:65 diskdrake/interactive.pm:442
-#: diskdrake/interactive.pm:1060 diskdrake/removable.pm:24
+#: diskdrake/interactive.pm:1057 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
@@ -1148,8 +1147,8 @@ msgstr "選項"
 #: diskdrake/interactive.pm:242 diskdrake/interactive.pm:398
 #: diskdrake/interactive.pm:416 diskdrake/interactive.pm:547
 #: diskdrake/interactive.pm:552 diskdrake/interactive.pm:670
-#: diskdrake/interactive.pm:935 diskdrake/interactive.pm:1105
-#: diskdrake/interactive.pm:1118 diskdrake/interactive.pm:1121
+#: diskdrake/interactive.pm:932 diskdrake/interactive.pm:1102
+#: diskdrake/interactive.pm:1115 diskdrake/interactive.pm:1118
 #: diskdrake/interactive.pm:1361 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
 #: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:229
 #: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
@@ -1194,8 +1193,8 @@ msgstr "選項： %s"
 msgid "Partitioning"
 msgstr "分割磁區"
 
-#: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1080
-#: diskdrake/interactive.pm:1090 diskdrake/interactive.pm:1143
+#: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1077
+#: diskdrake/interactive.pm:1087 diskdrake/interactive.pm:1140
 #, c-format
 msgid "Read carefully!"
 msgstr "仔細閱讀！"
@@ -1315,8 +1314,8 @@ msgstr "檔案系統格式："
 #: diskdrake/hd_gtk.pm:380 diskdrake/interactive.pm:291
 #: diskdrake/interactive.pm:392 diskdrake/interactive.pm:428
 #: diskdrake/interactive.pm:577 diskdrake/interactive.pm:761
-#: diskdrake/interactive.pm:822 diskdrake/interactive.pm:915
-#: diskdrake/interactive.pm:957 diskdrake/interactive.pm:958
+#: diskdrake/interactive.pm:819 diskdrake/interactive.pm:912
+#: diskdrake/interactive.pm:954 diskdrake/interactive.pm:955
 #: diskdrake/interactive.pm:1186 diskdrake/interactive.pm:1224
 #: diskdrake/interactive.pm:1360 do_pkgs.pm:16 do_pkgs.pm:35 do_pkgs.pm:53
 #: harddrake/sound.pm:285
@@ -1340,7 +1339,7 @@ msgid "Use ``%s'' instead"
 msgstr "用 ``%s'' 代替"
 
 #: diskdrake/hd_gtk.pm:389 diskdrake/interactive.pm:441
-#: diskdrake/interactive.pm:615 diskdrake/interactive.pm:1096
+#: diskdrake/interactive.pm:615 diskdrake/interactive.pm:1093
 #: diskdrake/removable.pm:25 diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
@@ -1525,12 +1524,12 @@ msgstr "重新變更大小"
 msgid "Format"
 msgstr "格式化"
 
-#: diskdrake/interactive.pm:447 diskdrake/interactive.pm:863
+#: diskdrake/interactive.pm:447 diskdrake/interactive.pm:860
 #, c-format
 msgid "Add to RAID"
 msgstr "加入到磁碟陣列"
 
-#: diskdrake/interactive.pm:448 diskdrake/interactive.pm:880
+#: diskdrake/interactive.pm:448 diskdrake/interactive.pm:877
 #, c-format
 msgid "Add to LVM"
 msgstr "加入到 LVM"
@@ -1575,12 +1574,12 @@ msgstr "建立新的分割區"
 msgid "Start sector: "
 msgstr "開始的磁區："
 
-#: diskdrake/interactive.pm:516 diskdrake/interactive.pm:950
+#: diskdrake/interactive.pm:516 diskdrake/interactive.pm:947
 #, c-format
 msgid "Size in MB: "
 msgstr "大小 (MB)："
 
-#: diskdrake/interactive.pm:518 diskdrake/interactive.pm:951
+#: diskdrake/interactive.pm:518 diskdrake/interactive.pm:948
 #, c-format
 msgid "Filesystem type: "
 msgstr "檔案系統格式："
@@ -1666,7 +1665,7 @@ msgstr ""
 msgid "Where do you want to mount %s?"
 msgstr "您要將 %s 掛載在那裡？"
 
-#: diskdrake/interactive.pm:725 diskdrake/interactive.pm:811
+#: diskdrake/interactive.pm:725 diskdrake/interactive.pm:808
 #: fs/partitioning_wizard.pm:141 fs/partitioning_wizard.pm:173
 #, c-format
 msgid "Resizing"
@@ -1712,7 +1711,7 @@ msgstr "最小容量：%s MB"
 msgid "Maximum size: %s MB"
 msgstr "最大容量：%s MB"
 
-#: diskdrake/interactive.pm:822 fs/partitioning_wizard.pm:181
+#: diskdrake/interactive.pm:819 fs/partitioning_wizard.pm:181
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
@@ -1721,27 +1720,27 @@ msgstr ""
 "為確保重新調整分割區大小後的資料正確性，當您下次從 Windows(TM)\n"
 "開機時便會執行檔案系統檢查。"
 
-#: diskdrake/interactive.pm:863
+#: diskdrake/interactive.pm:860
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "選取一存在的磁碟陣列加入到"
 
-#: diskdrake/interactive.pm:865 diskdrake/interactive.pm:882
+#: diskdrake/interactive.pm:862 diskdrake/interactive.pm:879
 #, c-format
 msgid "new"
 msgstr "新增"
 
-#: diskdrake/interactive.pm:880
+#: diskdrake/interactive.pm:877
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "選取一個已經存在的 LVM 以加入"
 
-#: diskdrake/interactive.pm:887
+#: diskdrake/interactive.pm:884
 #, c-format
 msgid "LVM name?"
 msgstr "LVM 名稱？"
 
-#: diskdrake/interactive.pm:915
+#: diskdrake/interactive.pm:912
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
@@ -1750,82 +1749,82 @@ msgstr ""
 "實體磁區 %s 仍然在使用中。\n"
 "您要把位於這個磁區的實體延伸移到另一個磁區嗎？"
 
-#: diskdrake/interactive.pm:917
+#: diskdrake/interactive.pm:914
 #, c-format
 msgid "Moving physical extents"
 msgstr "移動實體延伸"
 
-#: diskdrake/interactive.pm:935
+#: diskdrake/interactive.pm:932
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "這個分割區不能用來作為 loopback"
 
-#: diskdrake/interactive.pm:948
+#: diskdrake/interactive.pm:945
 #, c-format
 msgid "Loopback"
 msgstr "Loopback"
 
-#: diskdrake/interactive.pm:949
+#: diskdrake/interactive.pm:946
 #, c-format
 msgid "Loopback file name: "
 msgstr "Loopback 檔案名稱："
 
-#: diskdrake/interactive.pm:954
+#: diskdrake/interactive.pm:951
 #, c-format
 msgid "Give a file name"
 msgstr "輸入一個檔案名稱"
 
-#: diskdrake/interactive.pm:957
+#: diskdrake/interactive.pm:954
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "檔案已被用來作為其他的 loopback，請選擇其他檔案"
 
-#: diskdrake/interactive.pm:958
+#: diskdrake/interactive.pm:955
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "檔案已經存在了。要使用它嗎？"
 
-#: diskdrake/interactive.pm:987 diskdrake/interactive.pm:990
+#: diskdrake/interactive.pm:984 diskdrake/interactive.pm:987
 #, c-format
 msgid "Mount options"
 msgstr "掛載參數"
 
-#: diskdrake/interactive.pm:997
+#: diskdrake/interactive.pm:994
 #, c-format
 msgid "Various"
 msgstr "各種的"
 
-#: diskdrake/interactive.pm:1062
+#: diskdrake/interactive.pm:1059
 #, c-format
 msgid "device"
 msgstr "裝置"
 
-#: diskdrake/interactive.pm:1063
+#: diskdrake/interactive.pm:1060
 #, c-format
 msgid "level"
 msgstr "階層"
 
-#: diskdrake/interactive.pm:1064
+#: diskdrake/interactive.pm:1061
 #, c-format
 msgid "chunk size in KiB"
 msgstr "組塊大小以 KiB 計量"
 
-#: diskdrake/interactive.pm:1081
+#: diskdrake/interactive.pm:1078
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "請小心：這個動作很危險。"
 
-#: diskdrake/interactive.pm:1096
+#: diskdrake/interactive.pm:1093
 #, c-format
 msgid "What type of partitioning?"
 msgstr "以那種形式分割？"
 
-#: diskdrake/interactive.pm:1134
+#: diskdrake/interactive.pm:1131
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "您需要重新開機以便於讓異動的設定生效"
 
-#: diskdrake/interactive.pm:1143
+#: diskdrake/interactive.pm:1140
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "正在準備將要寫入磁碟 %s 的硬碟分割表！"
@@ -5005,23 +5004,23 @@ msgid "Your scanner(s) will not be available for non-root users."
 msgstr "您的掃描器將只供擁有管理者權限的使用者使用。"
 
 #: security/help.pm:11
-#, c-format
-msgid "Accept/Refuse bogus IPv4 error messages."
-msgstr "接收/拒絕偽造的 IPv4 錯誤訊息。"
+#, fuzzy, c-format
+msgid "Accept bogus IPv4 error messages."
+msgstr "接受偽造的 IPv4 錯誤訊息"
 
 #: security/help.pm:13
-#, c-format
-msgid "Accept/Refuse broadcasted icmp echo."
-msgstr "接收/拒絕廣播的 icmp 回應。"
+#, fuzzy, c-format
+msgid "Accept broadcasted icmp echo."
+msgstr "接收廣播的 icmp 回應"
 
 #: security/help.pm:15
-#, c-format
-msgid "Accept/Refuse icmp echo."
-msgstr "接收/拒絕 icmp 回應。"
+#, fuzzy, c-format
+msgid "Accept icmp echo."
+msgstr "接收 icmp 回應"
 
 #: security/help.pm:17
-#, c-format
-msgid "Allow/Forbid autologin."
+#, fuzzy, c-format
+msgid "Allow autologin."
 msgstr "允許/禁止自動登入。"
 
 #. -PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
@@ -5030,37 +5029,36 @@ msgstr "允許/禁止自動登入。"
 msgid ""
 "If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
 "\n"
-"If set to NONE, no issues are allowed.\n"
+"If set to \"None\", no issues are allowed.\n"
 "\n"
 "Else only /etc/issue is allowed."
 msgstr ""
 
 #: security/help.pm:27
-#, c-format
-msgid "Allow/Forbid reboot by the console user."
+#, fuzzy, c-format
+msgid "Allow reboot by the console user."
 msgstr "允許/禁止 console 使用者重新開機。"
 
 #: security/help.pm:29
-#, c-format
-msgid "Allow/Forbid remote root login."
-msgstr "允許/禁止遠端 root 登入。"
+#, fuzzy, c-format
+msgid "Allow remote root login."
+msgstr "允許遠端 root 登入"
 
 #: security/help.pm:31
-#, c-format
-msgid "Allow/Forbid direct root login."
+#, fuzzy, c-format
+msgid "Allow direct root login."
 msgstr "允許/禁止 root 直接登入。"
 
 #: security/help.pm:33
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Allow/Forbid the list of users on the system on display managers (kdm and "
-"gdm)."
+"Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr "允許/禁止把系統上的使用者列在顯示管理員 (kdm 與 gdm) 上。"
 
 #: security/help.pm:35
 #, c-format
 msgid ""
-"Allow/forbid to export display when\n"
+"Allow to export display when\n"
 "passing from the root account to the other users.\n"
 "\n"
 "See pam_xauth(8) for more details.'"
@@ -5069,13 +5067,13 @@ msgstr ""
 #: security/help.pm:40
 #, c-format
 msgid ""
-"Allow/Forbid X connections:\n"
+"Allow X connections:\n"
 "\n"
-"- ALL (all connections are allowed),\n"
+"- \"All\" (all connections are allowed),\n"
 "\n"
-"- LOCAL (only connection from local machine),\n"
+"- \"Local\" (only connection from local machine),\n"
 "\n"
-"- NONE (no connection)."
+"- \"None\" (no connection)."
 msgstr ""
 
 #: security/help.pm:48
@@ -5087,7 +5085,7 @@ msgstr ""
 "這個參數指定了客戶端是否受到授權可以由網路上透過 TCP 埠 6000\n"
 "連到這個 X 伺服器上。"
 
-#. -PO: here "ALL", "LOCAL" and "NONE" are values in a pull-down menu; translate them the same as they're
+#. -PO: here "ALL", "Local" and "None" are values in a pull-down menu; translate them the same as they're
 #: security/help.pm:53
 #, c-format
 msgid ""
@@ -5096,9 +5094,9 @@ msgid ""
 "- all services controlled by tcp_wrappers (see hosts.deny(5) man page) if "
 "set to \"ALL\",\n"
 "\n"
-"- only local ones if set to \"LOCAL\"\n"
+"- only local ones if set to \"Local\"\n"
 "\n"
-"- none if set to \"NONE\".\n"
+"- none if set to \"None\".\n"
 "\n"
 "To authorize the services you need, use /etc/hosts.allow (see hosts.allow"
 "(5))."
@@ -5120,21 +5118,21 @@ msgstr ""
 #: security/help.pm:72
 #, c-format
 msgid ""
-"Enable/Disable crontab and at for users.\n"
+"Enable crontab and at for users.\n"
 "\n"
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
 msgstr ""
 
 #: security/help.pm:77
-#, c-format
-msgid "Enable/Disable syslog reports to console 12"
+#, fuzzy, c-format
+msgid "Enable syslog reports to console 12"
 msgstr "啟用/停用系統日誌回報到 console 12 上"
 
 #: security/help.pm:79
 #, c-format
 msgid ""
-"Enable/Disable name resolution spoofing protection.  If\n"
+"Enable name resolution spoofing protection.  If\n"
 "\"%s\" is true, also reports to syslog."
 msgstr ""
 
@@ -5145,23 +5143,23 @@ msgstr "安全警示："
 
 #: security/help.pm:82
 #, c-format
-msgid "Enable/Disable IP spoofing protection."
+msgid "Enable IP spoofing protection."
 msgstr ""
 
 #: security/help.pm:84
-#, c-format
-msgid "Enable/Disable libsafe if libsafe is found on the system."
-msgstr "若在系統上找到 libsafe 則啟用/停用 libsafe。"
+#, fuzzy, c-format
+msgid "Enable libsafe if libsafe is found on the system."
+msgstr "若在系統上找到 libsafe 則啟用 libsafe"
 
 #: security/help.pm:86
-#, c-format
-msgid "Enable/Disable the logging of IPv4 strange packets."
-msgstr "啟用/停用記錄奇怪的 IPv4 封包。"
+#, fuzzy, c-format
+msgid "Enable the logging of IPv4 strange packets."
+msgstr "啟用記錄奇怪的 IPv4 封包。"
 
 #: security/help.pm:88
-#, c-format
-msgid "Enable/Disable msec hourly security check."
-msgstr ""
+#, fuzzy, c-format
+msgid "Enable msec hourly security check."
+msgstr "每日安全檢查"
 
 #: security/help.pm:90
 #, c-format
@@ -5177,18 +5175,18 @@ msgid "Use password to authenticate users."
 msgstr "使用密碼來驗證使用者。"
 
 #: security/help.pm:94
-#, c-format
-msgid "Activate/Disable ethernet cards promiscuity check."
-msgstr ""
+#, fuzzy, c-format
+msgid "Activate ethernet cards promiscuity check."
+msgstr "啟用/停用每日安全性檢查。"
 
 #: security/help.pm:96
-#, c-format
-msgid "Activate/Disable daily security check."
+#, fuzzy, c-format
+msgid "Activate daily security check."
 msgstr "啟用/停用每日安全性檢查。"
 
 #: security/help.pm:98
 #, c-format
-msgid "Enable/Disable sulogin(8) in single user level."
+msgid "Enable sulogin(8) in single user level."
 msgstr ""
 
 #: security/help.pm:100
@@ -5214,8 +5212,8 @@ msgid ""
 msgstr "設定密碼的最小長度、最少的數字數及大寫字母數。"
 
 #: security/help.pm:108
-#, c-format
-msgid "Set the root umask."
+#, fuzzy, c-format
+msgid "Set the root's file mode creation mask."
 msgstr "設定 root umask。"
 
 #: security/help.pm:109
@@ -5332,8 +5330,8 @@ msgid "Timeout unit is second"
 msgstr "逾時時間單位為秒"
 
 #: security/help.pm:138
-#, c-format
-msgid "Set the user umask."
+#, fuzzy, c-format
+msgid "Set the user's file mode creation mask."
 msgstr "設定使用者 umask。"
 
 #: security/l10n.pm:11
@@ -6408,6 +6406,24 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "安裝失敗"
+
+#~ msgid "Accept/Refuse bogus IPv4 error messages."
+#~ msgstr "接收/拒絕偽造的 IPv4 錯誤訊息。"
+
+#~ msgid "Accept/Refuse broadcasted icmp echo."
+#~ msgstr "接收/拒絕廣播的 icmp 回應。"
+
+#~ msgid "Accept/Refuse icmp echo."
+#~ msgstr "接收/拒絕 icmp 回應。"
+
+#~ msgid "Allow/Forbid remote root login."
+#~ msgstr "允許/禁止遠端 root 登入。"
+
+#~ msgid "Enable/Disable libsafe if libsafe is found on the system."
+#~ msgstr "若在系統上找到 libsafe 則啟用/停用 libsafe。"
+
+#~ msgid "Enable/Disable the logging of IPv4 strange packets."
+#~ msgstr "啟用/停用記錄奇怪的 IPv4 封包。"
 
 #~ msgid "Icon"
 #~ msgstr "圖示"
