@@ -20,7 +20,7 @@ our %help = (
              #-PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
              N("If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.
 
-If set to NONE, no issues are allowed.
+If set to \"None\", no issues are allowed.
 
 Else only /etc/issue is allowed."),
 
@@ -39,11 +39,11 @@ See pam_xauth(8) for more details.'"),
 
 'allow_x_connections' => N("Allow X connections:
 
-- All (all connections are allowed),
+- \"All\" (all connections are allowed),
 
-- Local (only connection from local machine),
+- \"Local\" (only connection from local machine),
 
-- None (no connection)."),
+- \"None\" (no connection)."),
 
 'allow_xserver_to_listen' => N("The argument specifies if clients are authorized to connect
 to the X server from the network on the tcp port 6000 or not."),
