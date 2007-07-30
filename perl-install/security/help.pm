@@ -105,7 +105,7 @@ and crontab(1))."),
 
 'password_length' => N("Set the password minimum length and minimum number of digit and minimum number of capitalized letters."),
 
-'set_root_umask' => N("Set the root umask."),
+'set_root_umask' => N("Set the root's file mode creation mask."),
 CHECK_OPEN_PORT => N("if set to yes, check open ports."),
 CHECK_PASSWD => N("if set to yes, check for:
 
@@ -135,5 +135,5 @@ TTY_WARN => N("if set to yes, reports check result to tty."),
 
 'set_shell_timeout' => N("Set the shell timeout. A value of zero means no timeout.") . "\n\n" . N("Timeout unit is second"),
 
-'set_user_umask' => N("Set the user umask."),
+'set_user_umask' => N("Set the user's file mode creation mask."),
 );
