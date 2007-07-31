@@ -562,36 +562,4 @@ sub change_type {
     1;
 }
 
-sub rescuept($) {
-    my ($hd) = @_;
-    my ($ext, @hd);
-
-    my $dev = devices::make($hd->{device});
-    open(my $F, "rescuept $dev|");
-    local $_;
-    while (<$F>) {
-	my ($st, $si, $id) = /start=\s*(\d+),\s*size=\s*(\d+),\s*Id=\s*(\d+)/ or next;
-	my $part = { start => $st, size => $si };
-	fs::type::set_pt_type($part, hex($id));
-	if (isExtended($part)) {
-	    $ext = $part;
-	} else {
-	    push @hd, $part;
-	}
-    }
-    close $F or die "rescuept failed";
-
-    partition_table::raw::zero_MBR($hd);
-    foreach (@hd) {
-	my $b = partition_table::verifyInside($_, $ext);
-	if ($b) {
-	    $_->{start}--;
-	    $_->{size}++;
-	}
-	local $_->{notFormatted};
-
-	partition_table::add($hd, $_, ($b ? 'Extended' : 'Primary'), 1);
-    }
-}
-
 1;

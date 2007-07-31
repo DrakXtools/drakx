@@ -361,7 +361,6 @@ sub More {
 	    [
 	     { val => N("Save partition table"),    clicked_may_quit => sub { SaveInFile($in, $hd);   1 } },
 	     { val => N("Restore partition table"), clicked_may_quit => sub { ReadFromFile($in, $hd); 1 } },
-	     { val => N("Rescue partition table"),  clicked_may_quit => sub { Rescuept($in, $hd);     1 } },
 	         if_($::isInstall, 
 	     { val => N("Reload partition table"), clicked_may_quit => sub { $r = 'force_reload'; 1 } }),
 	         if_($::isInstall || 1, 
@@ -415,12 +414,6 @@ sub SaveInFile {
     if (my $err = $@) {
     	$in->ask_warn(N("Error"), formatError($err));
     }
-}
-
-sub Rescuept {
-    my ($in, $hd) = @_;
-    my $_w = $in->wait_message(N("Please wait"), N("Trying to rescue partition table"));
-    fsedit::rescuept($hd);
 }
 
 sub Hd_info {
