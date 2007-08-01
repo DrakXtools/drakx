@@ -72,7 +72,7 @@ if ($mandrake_release =~ /(official|community)/i) {
 } else {
     $distrocode = "cooker";
 }
-my $bugzilla = 'http://qa.mandriva.com/enter_bug.cgi';
+my $bugzilla_url = 'http://qa.mandriva.com/enter_bug.cgi';
 my $wizard_name = "Bugzilla";
 
 $table = create_packtable({ col_spacings => 5, row_spacings => 10 },
@@ -111,9 +111,9 @@ gtkadd($window->{window},
 							 $options .= "&version=$version" if $version;
 							 $options .= "&distro_code=$distrocode";
 							 $options .= "&kernel=$kernel_release" if $kernel_release;
-							 print($bugzilla . "?" . $options . "\n");
+							 print($bugzilla_url . "?" . $options . "\n");
 							 require run_program;
-							 run_program::raw({ detach => 1 }, '/usr/bin/www-browser', "$bugzilla?$options");
+							 run_program::raw({ detach => 1 }, '/usr/bin/www-browser', "$bugzilla_url?$options");
 						 }
 						),
 			       gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub { ugtk2->exit(0) }),
