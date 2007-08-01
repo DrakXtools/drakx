@@ -106,7 +106,7 @@ gtkadd($window->{window},
 							   $product;
 							 my $options = join('&',
                                                        ($product || $version ?
-                                                          'cf_rpmpkg=' . join('-', $product, $version) :()),
+                                                          'cf_rpmpkg=' . join('-', $product, $version) : ()),
                                                          'component=Core%20Packages',
                                                        'classification=Mandriva%20Linux',
                                                        if_($prog, "short_desc=$prog%20crashed"),
