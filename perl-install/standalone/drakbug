@@ -27,15 +27,17 @@ use common;
 use mygtk2 qw(gtknew);
 use ugtk2 qw(:all);
 use Config;
+use URI::Escape;
 
 my $prog;
 my $incident = 0;
-my ($table, $comb_app, $com_app, $button_pkg, $package, $distrocode);
+my ($table, $comb_app, $com_app, $button_pkg, $package, $distrocode, $error);
 
 my $i;
 foreach (@ARGV) {
     next unless defined $_;
     $i++;
+    /^--error$/ and do { $error = splice(@ARGV, $i, 1) };
     /^--report$/ and $prog = splice(@ARGV, $i, 1);
     /^--incident$/ and do { $incident = 1; $prog = splice(@ARGV, $i, 1) };
 }
@@ -111,7 +113,17 @@ gtkadd($window->{window},
                                                           'cf_rpmpkg=' . join('-', $product, $version) : ()),
                                                          'component=Core%20Packages',
                                                        'classification=Mandriva%20Linux',
-                                                       if_($prog, "short_desc=$prog%20crashed"),
+                                                       if_($prog,
+                                                           "short_desc=$prog%20crashed",
+                                                           'comment=' . uri_escape(qq(The "$prog" program crashed.
+
+Please describe what you were doing when it crashed.
+
+) . ($error ? qq(Backtrace was:
+$error) :
+qq(If you can, try to run the "$prog" program from a terminal and copy and paste here any error messages and/or backtrace)),
+                                                                  ),
+                                                       ),
                                                    );
 							 print($bugzilla_url . "?" . $options . "\n");
 							 require run_program;
