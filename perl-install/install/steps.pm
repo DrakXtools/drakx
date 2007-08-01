@@ -263,7 +263,7 @@ sub choosePackages {
     #- selected first, after is used the same scheme as install.
 
     #- make sure we kept some space left for available else the system may
-    #- not be able to start (xfs at least).
+    #- not be able to start
     my $available = install::any::getAvailableSpace($o);
     my $availableCorrected = install::pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
     log::l(sprintf "available size %s (corrected %s)", formatXiB($available), formatXiB($availableCorrected));

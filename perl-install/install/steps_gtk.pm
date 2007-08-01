@@ -110,7 +110,6 @@ sub new($$) {
             require move;
             require run_program;
             move::automatic_xconf($o);
-            run_program::run('/sbin/service', 'xfs', 'start');
             @servers = $::globetrotter ? qw(Driver:fbdev) : qw(X_move);
 	}
 
