@@ -28,7 +28,6 @@ use mygtk2 qw(gtknew);
 use ugtk2 qw(:all);
 use Config;
 
-my ($bugzilla, $wizard_name);
 my $prog;
 my $incident = 0;
 my ($table, $comb_app, $com_app, $button_pkg, $package, $distrocode);
@@ -73,8 +72,8 @@ if ($mandrake_release =~ /(official|community)/i) {
 } else {
     $distrocode = "cooker";
 }
-$bugzilla = 'http://qa.mandriva.com/enter_bug.cgi';
-$wizard_name = "Bugzilla";
+my $bugzilla = 'http://qa.mandriva.com/enter_bug.cgi';
+my $wizard_name = "Bugzilla";
 
 $table = create_packtable({ col_spacings => 5, row_spacings => 10 },
 		          [ gtknew('Label_Left', text => N("Select Mandriva Tool:")), $comb_app = Gtk2::ComboBox->new_text, $comb_app->set_wrap_width(3) ],
