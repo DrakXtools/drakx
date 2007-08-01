@@ -98,19 +98,15 @@ gtkadd($window->{window},
 			    gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { system("drakhelp --id drakbug &") }),
                       gtkpack(create_hbox('end'),
 			       gtksignal_connect(Gtk2::Button->new(N("Report")), clicked => sub {
-							 my $options = "mdkbugreport=1";
-							 $options .= "&incident=1" if $incident;
 							 my $p = $package->get_text;
 							 my ($product, $version) = $p =~ /^(.*)-([^-]+-[^-]+(mdk|mdv.*))$/; # FIXME: fragile!
 							 my $app = $comb_app->entry->get_text;
 							 my $component = $app ?
 							   if_(member($app, @all_drakxtools), $app) || $mdk_app->{$app} :
 							   $product;
-							 $options .= "&product=$product" if $product;
-							 $options .= "&component=$component";
-							 $options .= "&version=$version" if $version;
-							 $options .= "&distro_code=$distrocode";
-							 $options .= "&kernel=$kernel_release" if $kernel_release;
+							 my $options .= 'cf_rpmpkg=' . join('-', $product, $version) if $product || $version;
+							 $options .= '&component=Core%20Packages';
+							 $options .= '&classification=Mandriva%20Linux';
 							 print($bugzilla_url . "?" . $options . "\n");
 							 require run_program;
 							 run_program::raw({ detach => 1 }, '/usr/bin/www-browser', "$bugzilla_url?$options");
