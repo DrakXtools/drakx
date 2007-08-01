@@ -32,10 +32,12 @@ my $prog;
 my $incident = 0;
 my ($table, $comb_app, $com_app, $button_pkg, $package, $distrocode);
 
+my $i;
 foreach (@ARGV) {
     next unless defined $_;
-    /^--report$/ && shift @ARGV and $prog = shift @ARGV;
-    /^--incident$/ && shift @ARGV and do { $incident = 1; $prog = shift @ARGV };
+    $i++;
+    /^--report$/ and $prog = splice(@ARGV, $i, 1);
+    /^--incident$/ and do { $incident = 1; $prog = splice(@ARGV, $i, 1) };
 }
 
 $ugtk2::wm_icon = 'drakbug-16';
