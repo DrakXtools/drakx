@@ -109,8 +109,8 @@ sub syslinux_msg {
 }
 
 sub syslinux_cfg {
-    my ($entries, $o_default) = @_;
-    my $default = $o_default || 'linux';
+    my ($entries, $b_gfxboot) = @_;
+    my $default = 'linux';
 
     my $header = <<EOF;
 default $default
@@ -137,7 +137,7 @@ EOF
 	($_->{initrd} ? "  append initrd=$_->{initrd} $_->{append}\n" : '');
     } @$entries;
 
-    $header . ($o_default eq 'harddisk' ? $header_gfxboot : $header_non_gfxboot) . join('', @l);
+    $header . ($b_gfxboot ? $header_gfxboot : $header_non_gfxboot) . join('', @l);
 }
 
 sub initrd {
@@ -215,7 +215,7 @@ sub syslinux_cfg_all {
 	      append => join(' ', grep {$_} $default_append, $default_acpi, $default_vga) };
 	} @kernels),
 	{ label => 'memtest', kernel => 'memtest' },
-    ], if_($type =~ /cdrom/, 'harddisk'));
+    ], $type =~ /cdrom/ && 'gfxboot');
 }
 sub remove_ending_zero {
     my ($img) = @_;
