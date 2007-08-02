@@ -307,6 +307,7 @@ sub logcolorize {
     $string =~ s/(\D{3} .. (\d\d:\d\d:\d\d ))//;
     my $timestamp = $isExplain ? $2 : $1;
     my @rec = split(/\s/, $string);
+    @rec = map { c::set_tagged_utf8($_); $_ } @rec if utf8::is_utf8($string);
 
     log_output($timestamp,  'Bold', 'darkcyan'); # date & time if any...
     # BUG: $col hasn't yet be reseted
