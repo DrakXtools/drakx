@@ -189,6 +189,10 @@ sub bug_handler {
     return if $error && $^S;
     $error .= common::backtrace() if $error;
     my $progname = $0;
+    if ($progname =~ /drakbug/) {
+    	warn $error;
+    	exit(1);
+    }
     $progname =~ s|.*/||;
     exec('drakbug',  if_($error, '--error', $error), '--incident', $progname,);
 }
