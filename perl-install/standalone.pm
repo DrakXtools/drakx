@@ -187,6 +187,7 @@ our @drakx_modules = qw(Xconfig::card Xconfig::default Xconfig::main Xconfig::mo
 sub bug_handler {
     my ($error) = @_;
     return if $error && $^S;
+    $error .= common::backtrace() if $error;
     my $progname = $0;
     $progname =~ s|.*/||;
     exec('drakbug',  if_($error, '--error', $error), '--incident', $progname,);
