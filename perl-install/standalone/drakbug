@@ -116,6 +116,7 @@ gtkadd($window->{window},
 							 my $component = $app ?
 							   if_(member($app, @all_drakxtools), $app) || $mdk_app->{$app} :
 							   $product;
+                                    my $rel = standalone::real_version();
 							 my $options = join('&',
                                                        ($product || $version ?
                                                           'cf_rpmpkg=' . join('-', $product, $version) : ()),
@@ -123,7 +124,7 @@ gtkadd($window->{window},
                                                        'classification=Mandriva%20Linux',
                                                        if_($prog,
                                                            "short_desc=$prog%20crashed",
-                                                           'comment=' . uri_escape(qq(The "$prog" program crashed.
+                                                           'comment=' . uri_escape(qq(The "$prog" program crashed. Drakbug-$rel catched it.
 
 Please describe what you were doing when it crashed.
 
