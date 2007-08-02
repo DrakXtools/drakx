@@ -732,7 +732,7 @@ my %charsets = (
 "iso-8859-2"  => [ "lat2-16",  undef,   "8859-2",         "iso8859-2",  "852" ],
 "iso-8859-5"  => [ "UniCyr_8x16", undef,   "8859-5",         "iso8859-5",  "866" ],
 "iso-8859-7"  => [ "iso07u-16",   undef,   "8859-7",         "iso8859-7",  "869" ],
-"iso-8859-9"  => [ undef,    undef,   "8859-9",         "iso8859-9",  "857" ],
+"iso-8859-9"  => [ "lat5-16",    undef,   "8859-9",         "iso8859-9",  "857" ],
 "iso-8859-13" => [ "tlat7",       undef,   "8859-13",         "iso8859-13", "775" ],
 "iso-8859-15" => [ "lat0-16",     undef,   "8859-15",         "iso8859-15", "850" ],
 #- japanese needs special console driver for text mode [kon2]
