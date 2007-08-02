@@ -43,8 +43,6 @@ sub unpack {
 
     $non_defaults->{encrypted} = 1;
 
-    $non_defaults->{supermount} = 1 if $part->{fs_type} =~ /:/ || member($part->{fs_type}, 'auto', @auto_fs);
-
     my $defaults = { reverse %$non_defaults };
     my %options = map { $_ => '' } keys %$non_defaults;
     my @unknown;
@@ -134,8 +132,6 @@ have suidperl(1) installed.)"),
 
 	'sync' => N("All I/O to the file system should be done synchronously."),
 
-	'supermount' => '',
-
 	'users' => N("Allow every user to mount and umount the file system."),         
 
 	'user' => N("Allow an ordinary user to mount the file system."),         
@@ -163,7 +159,7 @@ sub rationalize {
 	delete $options->{'codepage='};
     }
     if (member($part->{mntpoint}, fs::type::directories_needed_to_boot())) {
-	foreach (qw(users user noauto supermount)) {
+	foreach (qw(users user noauto)) {
 	    if ($options->{$_}) {
 		$options->{$_} = 0;
 		$options->{$_} = 0 foreach qw(nodev noexec nosuid);
@@ -176,16 +172,15 @@ sub rationalize {
 
 sub set_default {
     my ($part, %opts) = @_;
-    #- opts are: useSupermount security iocharset codepage ignore_is_removable
+    #- opts are: security iocharset codepage ignore_is_removable
 
     my ($options, $unknown) = &unpack($part);
 
     if (!$opts{ignore_is_removable} && $part->{is_removable} 
 	  && !member($part->{mntpoint}, fs::type::directories_needed_to_boot()) 
 	  && (!$part->{fs_type} || $part->{fs_type} eq 'auto' || $part->{fs_type} =~ /:/)) {
-	$options->{supermount} = $opts{useSupermount} && !($opts{useSupermount} eq 'magicdev' && $part->{media_type} eq 'cdrom');
-	$part->{fs_type} = !$options->{supermount} ? 'auto' :
-		    $part->{media_type} eq 'cdrom' ? 'udf:iso9660' : 'ext2:vfat';
+	$options->{supermount} = 0; #- always disable supermount
+	$part->{fs_type} = 'auto';
 	$options->{sync} = 1 if $part->{media_type} ne 'cdrom';
     }
 
@@ -240,7 +235,7 @@ sub set_default {
     }
 
     # rationalize: no need for user
-    if ($options->{autofs} || $options->{supermount}) {
+    if ($options->{autofs}) {
 	$options->{users} = $options->{user} = 0;
     }
 
@@ -258,7 +253,7 @@ sub set_default {
 
 sub set_all_default {
     my ($all_hds, %opts) = @_;
-    #- opts are: useSupermount security iocharset codepage
+    #- opts are: security iocharset codepage
 
     foreach my $part (fs::get::really_all_fstab($all_hds)) {
 	set_default($part, %opts);

@@ -93,11 +93,10 @@ sub device_name_to_entry {
 }
 
 sub set_options {
-    my ($part, $useSupermount, $o_sync) = @_;
+    my ($part, $o_sync) = @_;
 
     $part->{is_removable} = 1; #- force removable flag
     fs::mount_options::set_default($part, 
-			    useSupermount => $useSupermount, 
 			    security => security::level::get(), 
 			    lang::fs_options(lang::read()));
 
@@ -151,8 +150,7 @@ sub main {
 	    return;
 	}
 	my %dynamic = getVarsFromSh('/etc/sysconfig/dynamic');
-	my $useSupermount = $dynamic{SUPERMOUNT} eq 'yes' ? 'magicdev' : '';
-	set_options($part, $useSupermount, to_bool($dynamic{SYNC} ne 'no'));
+	set_options($part, to_bool($dynamic{SYNC} ne 'no'));
 	set_mount_point($part, $fstab) or return;
 
 	my ($line) = fs::prepare_write_fstab([$part]);
@@ -162,7 +160,7 @@ sub main {
 	}
 
 	if ($::auto) {
-	    print $part->{mntpoint}, " ", $useSupermount ? 'supermount' : 'user', "\n";
+	    print $part->{mntpoint}, " user\n";
 	}
     } else {
 	if (!@$existing_fstab_entries) {

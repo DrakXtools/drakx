@@ -75,7 +75,7 @@ if ($root) {
 
 	next if 
 	  !$_->{fs_type} || $_->{device} eq 'none'
-	    || $valued_options->{noauto} || $valued_options->{supermount} 
+	    || $valued_options->{noauto}
 	    || $_->{mntpoint} eq '/'
 	    || member($_->{fs_type}, 'swap', 'nfs', 'ntfs');
 

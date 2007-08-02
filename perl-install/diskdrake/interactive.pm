@@ -350,12 +350,6 @@ sub Auto_allocate {
 sub More {
     my ($in, $hd) = @_;
 
-    my %automounting = (
-	0 => N("No supermount"), 
-	1 => N("Supermount"),
-	magicdev => N("Supermount except for CDROM drives"),
-    );
-
     my $r;
     $in->ask_from(N("More"), '',
 	    [
@@ -363,11 +357,6 @@ sub More {
 	     { val => N("Restore partition table"), clicked_may_quit => sub { ReadFromFile($in, $hd); 1 } },
 	         if_($::isInstall, 
 	     { val => N("Reload partition table"), clicked_may_quit => sub { $r = 'force_reload'; 1 } }),
-	         if_($::isInstall || 1, 
-	     { label => N("Removable media automounting"), val => \$::o->{useSupermount}, 
-	       format => sub { $automounting{$_[0]} }, 
-	       list => [ 0, 'magicdev', 1 ], advanced => 1 },
-		 ),
 	    ],
     ) && $r;
 }
@@ -961,7 +950,7 @@ sub Loopback {
 sub Options {
     my ($in, $hd, $part, $all_hds) = @_;
 
-    my @simple_options = qw(users noauto supermount username= password=);
+    my @simple_options = qw(users noauto username= password=);
 
     my (undef, $user_implies) = fs::mount_options::list();
     my ($options, $unknown) = fs::mount_options::unpack($part);

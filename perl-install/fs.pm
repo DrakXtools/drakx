@@ -50,10 +50,15 @@ sub read_fstab {
 	$options = 'defaults' if $options eq 'rw'; # clean-up for mtab read
 
 	if ($fs_type eq 'supermount') {
-	    # normalize this bloody supermount
-	    $options = join(",", 'supermount', grep {
+	    log::l("dropping supermount");
+	    $options = join(",", grep {
 		if (/fs=(.*)/) {
 		    $fs_type = $1;
+
+		    #- with supermount, the type could be something like ext2:vfat
+		    #- but this can not be done without supermount, so switching to "auto"
+		    $fs_type = 'auto' if $fs_type =~ /:/;
+
 		    0;
 		} elsif (/dev=(.*)/) {
 		    $dev = $1;
@@ -237,18 +242,6 @@ sub prepare_write_fstab {
 	    my $fs_type = $_->{fs_type} || 'auto';
 
 	    s/ /\\040/g foreach $mntpoint, $device, $options;
-
-	    # handle bloody supermount special case
-	    if ($options =~ /supermount/) {
-		my @l = grep { $_ ne 'supermount' } split(',', $options);
-		my ($l1, $l2) = partition { member($_, 'ro', 'exec') } @l;
-		$options = join(",", "dev=$device", "fs=$fs_type", @$l1, if_(@$l2, '--', @$l2));
-		($device, $fs_type) = ('none', 'supermount');
-	    } else {
-		#- if we were using supermount, the type could be something like ext2:vfat
-		#- but this can not be done without supermount, so switching to "auto"
-		$fs_type = 'auto' if $fs_type =~ /:/;
-	    }
 
 	    my $file_dep = $options =~ /\b(loop|bind)\b/ ? $device : '';
 

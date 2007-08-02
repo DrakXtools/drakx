@@ -102,11 +102,9 @@ if ($type eq 'list-hd') {
 	$raw_hd->{mntpoint} ||= find { !fs::get::has_mntpoint($_, $all_hds) } map { "/media/$mntpoint$_" } '', 2 .. 10;
 	$raw_hd->{is_removable} = 1; #- force removable flag
 
-	my $useSupermount = 'magicdev';
 	require security::level;
 	require lang;
 	fs::mount_options::set_default($raw_hd, 
-				useSupermount => $useSupermount, 
 				security => security::level::get(), 
 				lang::fs_options(lang::read()));
     }

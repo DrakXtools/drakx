@@ -350,7 +350,7 @@ sub beforeInstallPackages {
     }
 
     if ($o->{isUpgrade} =~ /redhat|conectiva/) {
-	#- to ensure supermount is removed for cds
+	#- to ensure supermount is removed (???)
 	fs::mount_options::set_all_default($o->{all_hds}, %$o, lang::fs_options($o->{locale}));
     }
 	
@@ -826,7 +826,6 @@ sub miscellaneous {
 }
 sub miscellaneousAfter {
     my ($o) = @_;
-    add2hash_ $o, { useSupermount => $o->{security} < 4 ? 'magicdev' : 0 };
 
     $ENV{SECURE_LEVEL} = $o->{security}; #- deprecated with chkconfig 1.3.4-2mdk, uses /etc/sysconfig/msec
 
