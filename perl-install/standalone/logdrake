@@ -302,12 +302,11 @@ sub parse_file {
 ##########################################################################################
 
 sub logcolorize {
-    local $_ = shift; #my ($data) = @_;
-
+    my ($string) = @_;
     # we get date & time if it is date & time (dmesg)
-    s/(\D{3} .. (\d\d:\d\d:\d\d ))//;
+    $string =~ s/(\D{3} .. (\d\d:\d\d:\d\d ))//;
     my $timestamp = $isExplain ? $2 : $1;
-    my @rec = split;
+    my @rec = split(/\s/, $string);
 
     log_output($timestamp,  'Bold', 'darkcyan'); # date & time if any...
     # BUG: $col hasn't yet be reseted
