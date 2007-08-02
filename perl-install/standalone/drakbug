@@ -103,7 +103,7 @@ gtkadd($window->{window},
                                      . join("\n\n", "\n", split("\n", $error), '')
                                        : N("The \"%s\" program has crashed.", $prog)
                                  ),
-                             N("To submit a bug report, click on the report button.  \nThis will open a web browser window on %s where you'll find a form to fill in.  The information displayed above will be transferred to that server.  \nThings useful to include in your report are the output of lspci, kernel version, and /proc/cpuinfo.", $wizard_name)))), "left"),
+                             N("To submit a bug report, click on the report button.  \nThis will open a web browser window on %s where you'll find a form to fill in.  The information displayed above will be transferred to that server.  \nThings useful to include in your report are the output of lspcidrake -v, kernel version, and /proc/cpuinfo.", $wizard_name)))), "left"),
 		0, gtkadd($table),
 		0, gtkpack(Gtk2::HSeparator->new),
 		0, gtkpack(create_hbox('edge'),
