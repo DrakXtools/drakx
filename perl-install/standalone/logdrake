@@ -24,6 +24,7 @@
 use strict;
 use lib qw(/usr/lib/libDrakX);
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+use c;
 use common;
 use interactive;
 use mygtk2 qw(gtknew); #- do not import gtkadd which conflicts with ugtk2 version
