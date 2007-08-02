@@ -241,7 +241,7 @@ sub parse_file {
       $ey = $months[$month] . "\\s{1,2}$day\\s.*$ey.*\n";
   }
 
-  my @all = catMaybeCompressed($file);
+  my @all = -e $file ? catMaybeCompressed($file) : N("Sorry, log file isn't available!");
 
   if ($isExplain) {
       my (@t, $t);
@@ -278,7 +278,7 @@ sub parse_file {
 
   if ($isTail) {
       close $F if $F;
-      open $F, $file or die "E: $!";
+      if (open $F, $file) {
       local $_;
       while (<$F>) {} #to prevent to output the file twice..
 #      $log_text->set_point($log_text->get_length());
@@ -286,6 +286,14 @@ sub parse_file {
                                        logcolorize($_) while <$F>;
                                        seek $F, 0, 1;
                                    });
+      } else {
+          my $error = $!;
+          my $string = chomp_(`LC_ALL=C date '+%b %d %T'`) . " " .
+            N("Error while opening \"%s\" log file: %s\n", $file, $error);
+          # `` return non utf8 and concat of non utf8 & utf8 is non utf8:
+          c::set_tagged_utf8($string);
+          logcolorize($string);
+      }
   }     
   insert_text_n_scroll();
 }
