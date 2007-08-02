@@ -280,13 +280,13 @@ sub parse_file {
   if ($isTail) {
       close $F if $F;
       if (open $F, $file) {
-      local $_;
-      while (<$F>) {} #to prevent to output the file twice..
-#      $log_text->set_point($log_text->get_length());
-      $timer ||= Glib::Timeout->add(1000, sub {
-                                       logcolorize($_) while <$F>;
-                                       seek $F, 0, 1;
-                                   });
+          local $_;
+          while (<$F>) {}       #to prevent to output the file twice..
+          #      $log_text->set_point($log_text->get_length());
+          $timer ||= Glib::Timeout->add(1000, sub {
+                                            logcolorize($_) while <$F>;
+                                            seek $F, 0, 1;
+                                        });
       } else {
           my $error = $!;
           my $string = chomp_(`LC_ALL=C date '+%b %d %T'`) . " " .
