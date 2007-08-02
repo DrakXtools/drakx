@@ -719,7 +719,7 @@ sub IM2packages {
 
 #- [0]: console font name
 #- [1]: sfm map for console font (if needed)
-#- [2]: acm file for console font (none if utf8)
+#- [2]: obsolete (was acm console font)
 #- [3]: iocharset param for mount (utf8 if utf8)
 #- [4]: codepage parameter for mount (none if utf8)
 my %charsets = (
@@ -729,10 +729,10 @@ my %charsets = (
 "gbk"         => [ undef,         undef,   undef,           "gb2312",     "936" ],
 "C"           => [ "lat0-16",     undef,   "iso15",         "iso8859-1",  "850" ],
 "iso-8859-1"  => [ "lat1-16",     undef,   "iso01",         "iso8859-1",  "850" ],
-"iso-8859-2"  => [ "lat2-sun16",  undef,   "iso02",         "iso8859-2",  "852" ],
+"iso-8859-2"  => [ "lat2-16",  undef,   "iso02",         "iso8859-2",  "852" ],
 "iso-8859-5"  => [ "UniCyr_8x16", undef,   "iso05",         "iso8859-5",  "866" ],
-"iso-8859-7"  => [ "iso07.f16",   undef,   "iso07",         "iso8859-7",  "869" ],
-"iso-8859-9"  => [ "lat5u-16",    undef,   "iso09",         "iso8859-9",  "857" ],
+"iso-8859-7"  => [ undef,   undef,   "iso07",         "iso8859-7",  "869" ],
+"iso-8859-9"  => [ undef,    undef,   "iso09",         "iso8859-9",  "857" ],
 "iso-8859-13" => [ "tlat7",       undef,   "iso13",         "iso8859-13", "775" ],
 "iso-8859-15" => [ "lat0-16",     undef,   "iso15",         "iso8859-15", "850" ],
 #- japanese needs special console driver for text mode [kon2]
@@ -745,8 +745,8 @@ my %charsets = (
 #- I have no console font for Thai...
 "tis620"      => [ undef,         undef,   "trivial.trans", "tis-620",    "874" ],
 # UTF-8 encodings here; they differ in the console font mainly.
-"utf_ar"      => [ "iso06.f16",      undef,   undef,      "utf8",    undef ],
-"utf_armn"    => [ "arm8",           undef,   undef,      "utf8",    undef ],
+"utf_ar"      => [ undef,      undef,   undef,      "utf8",    undef ],
+"utf_armn"    => [ undef,           undef,   undef,      "utf8",    undef ],
 "utf_az"      => [ "tiso09e",        undef,   undef,      "utf8",    undef ],
 "utf_beng"    => [ undef,            undef,   undef,      "utf8",    undef ],
 "utf_cyr1"    => [ "UniCyr_8x16",    undef,   undef,      "utf8",    undef ],
@@ -755,15 +755,15 @@ my %charsets = (
 "utf_ethi"    => [ "Agafari-16",     undef,   undef,      "utf8",    undef ],
 "utf_geor"    => [ "t_geors",        undef,   undef,      "utf8",    undef ],
 "utf_guru"    => [ undef,            undef,   undef,      "utf8",    undef ],
-"utf_he"      => [ "iso08.f16",      undef,   undef,      "utf8",    undef ],
+"utf_he"      => [ undef,      undef,   undef,      "utf8",    undef ],
 "utf_iu"      => [ undef,            undef,   undef,      "utf8",    undef ],
 "utf_khmr"    => [ undef,            undef,   undef,      "utf8",    undef ],
 "utf_knda"    => [ undef,            undef,   undef,      "utf8",    undef ],
 "utf_laoo"    => [ undef,            undef,   undef,      "utf8",    undef ],
 "utf_lat1"    => [ "lat0-16",        undef,   undef,      "utf8",    undef ],
-"utf_lat5"    => [ "lat5u-16",       undef,   undef,      "utf8",    undef ],
+"utf_lat5"    => [ undef,       undef,   undef,      "utf8",    undef ],
 "utf_lat7"    => [ "tlat7",          undef,   undef,      "utf8",    undef ],
-"utf_lat8"    => [ "iso14.f16",      undef,   undef,      "utf8",    undef ],
+"utf_lat8"    => [ undef,      undef,   undef,      "utf8",    undef ],
 "utf_mlym"    => [ undef,            undef,   undef,      "utf8",    undef ],
 "utf_mymr"    => [ undef,            undef,   undef,      "utf8",    undef ],
 "utf_taml"    => [ "tamil",          undef,   undef,      "utf8",    undef ],
@@ -791,11 +791,10 @@ my %charset2kde_charset = (
 #- -------------------
 
 sub l2console_font {
-    my ($locale, $during_install) = @_;
+    my ($locale) = @_;
     my $c = $charsets{l2charset($locale->{lang}) || return} or return;
-    my ($name, $sfm, $acm) = @$c;
-    undef $acm if $locale->{utf8} && !$during_install;
-    ($name, $sfm, $acm);
+    my ($name, $sfm) = @$c;
+    ($name, $sfm);
 }
 
 sub get_kde_lang {
@@ -1063,7 +1062,7 @@ sub write {
 
     my $h = i18n_env($locale);
 
-    my ($name, $sfm, $acm) = l2console_font($locale, 0);
+    my ($name, $sfm) = l2console_font($locale);
     if ($name && !$b_user_only) {
 	my $p = "$::prefix/usr/lib/kbd";
 	if ($name) {
@@ -1084,15 +1083,6 @@ sub write {
 	    };
 	    $@ and log::explanations("missing console unimap file $sfm");
 	}
-	if ($acm) {
-	    eval {
-		log::explanations(qq(Set application-charset map (Unicode mapping table) to "$name"));
-		cp_af(glob_("$p/consoletrans/$acm*"), "$::prefix/etc/sysconfig/console/consoletrans");
-		add2hash $h, { SYSFONTACM => $acm };
-	    };
-	    $@ and log::explanations("missing console acm file $acm");
-	}
-	
     }
 
     add2hash($h, $IM_locale_specific_config{$locale->{lang}});
@@ -1293,20 +1283,18 @@ sub load_mo {
 #- used in share/list.xml during "make get_needed_files"
 sub console_font_files() {
     map { -e $_ ? $_ : "$_.gz" }
-      (map { "/usr/lib/kbd/consolefonts/$_.psf" } uniq grep { $_ } map { $_->[0] } values %charsets),
-      (map { -e $_ ? $_ : "$_.sfm" } map { "/usr/lib/kbd/consoletrans/$_" } uniq grep { $_ } map { $_->[1] } values %charsets),
-      (map { -e $_ ? $_ : "$_.acm" } map { "/usr/lib/kbd/consoletrans/$_" } uniq grep { $_ } map { $_->[2] } values %charsets);
+      (map { my $p = "/usr/lib/kbd/consolefonts/$_"; -e "$p.psfu" || -e "$p.psfu.gz" ? "$p.psfu" : "$p.psf" } uniq grep { $_ } map { $_->[0] } values %charsets),
+      (map { -e $_ ? $_ : "$_.sfm" } map { "/usr/lib/kbd/consoletrans/$_" } uniq grep { $_ } map { $_->[1] } values %charsets);
 }
 
 sub load_console_font {
     my ($locale) = @_;
     return if $::local_install;
 
-    my ($name, $sfm, $acm) = l2console_font($locale, 1);
+    my ($name, $sfm) = l2console_font($locale);
 
     require run_program;
-    run_program::run('consolechars', '-v', '-f', $name || 'lat0-16',
-		     if_($sfm, '-u', $sfm), if_($acm, '-m', $acm));
+    run_program::run('setfont', '-v', $name || 'lat0-16', if_($sfm, '-u', $sfm));
 }
 
 sub fs_options {
