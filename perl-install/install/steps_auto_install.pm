@@ -106,9 +106,9 @@ sub charsetChanged {
     my ($o) = @_;
     lang::load_console_font($o->{locale});
 
-    my ($name, $_sfm) = lang::l2console_font($o->{locale});
+    my ($name, $acm) = lang::l2console_font($o->{locale}, 1);
     my %fs_options = lang::fs_options($o->{locale});
-    $iocharset = $name && $fs_options{iocharset} ne 'utf8' ? $fs_options{iocharset} : '';
+    $iocharset = $name && $acm && $fs_options{iocharset} ne 'utf8' ? $fs_options{iocharset} : '';
 }
 
 sub errorInStep {
