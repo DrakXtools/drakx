@@ -189,9 +189,12 @@ our @drakx_modules = qw(Xconfig::card Xconfig::default Xconfig::main Xconfig::mo
 
 sub bug_handler {
     my ($error) = @_;
+    # exceptions in eval are OK:
     return if $error && $^S;
+    # we want the full backtrace:
     $error .= common::backtrace() if $error;
     my $progname = $0;
+    # do not loop if drakbug crashes:
     if ($progname =~ /drakbug/) {
     	warn $error;
     	exit(1);
