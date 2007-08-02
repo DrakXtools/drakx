@@ -26,6 +26,7 @@ $(DIRS):
 	[ ! -e $@/Makefile ] || $(MAKE) -C $@
 
 install:
+	perl -pi -e "s/\"VER\"(; # version)/\"$(VERSION)\"\1/" standalone.pm
 	mkdir -p $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR)/{harddrake,pixmaps,icons/{large,mini},autostart} $(PIXDIR) $(INITDIR) $(MENUDIR)
 	install -d $(INLIBDEST_DIRS:%=$(LIBDEST)/%)
 	install $(STANDALONEPMS) standalone/service_harddrake.sh standalone/convert $(SBINDEST)

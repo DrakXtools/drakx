@@ -133,9 +133,12 @@ sub __exit {
 }
 
 
+sub real_version {
+    return "VER"; # version automatically set from Makefile
+}
 
 sub version() {
-    print 'Drakxtools version 10
+    print 'Drakxtools version ' . real_version() . '
 Copyright (C) 1999-2006 Mandriva by <install@mandriva.com>
 ',  $::license, "\n";
 }
