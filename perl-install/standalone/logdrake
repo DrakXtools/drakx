@@ -126,7 +126,7 @@ my %toggle;
 
 gtkadd($my_win->{window},
        gtkpack_(Gtk2::VBox->new(0,0),
-		if_(!$isExplain && !$::isEmbedded, 0, gtknew('Title1', label => N("A tool to monitor your logs"))),
+		if_(!$::isEmbedded, 0, gtknew('Title1', label => N("A tool to monitor your logs"))),
 		if_(!$isFile, 0, gtkpack__(Gtk2::VBox->new(0,2),
                                      gtknew('Title2', label => N("Settings")),
 							      # N("Show lines"),
@@ -159,7 +159,7 @@ gtkadd($my_win->{window},
 		!$isExplain ? (0, gtknew('Title2', label => N("Content of the file")),
 					   1, create_scrolled_window($log_text)
 					   ) : (1, create_scrolled_window($log_text)),
-		if_(!$isExplain, 0, gtkadd(gtkset_border_width(gtkset_layout(Gtk2::HButtonBox->new, 'end'), 5),
+		0, gtkadd(gtkset_border_width(gtkset_layout(Gtk2::HButtonBox->new, 'end'), 5),
 					      if_(!$isFile, gtksignal_connect(Gtk2::Button->new(N("Mail alert")), 
 										clicked => sub { 
                                                       eval { alert_config() };
@@ -174,7 +174,6 @@ gtkadd($my_win->{window},
 					      gtksignal_connect(Gtk2::Button->new(N("Save")), clicked => \&save),
 					      gtksignal_connect(Gtk2::Button->new($::isEmbedded ? N("Cancel") : N("Quit")), clicked => \&quit)
 					      )
-		    )
 		)
        );
 
