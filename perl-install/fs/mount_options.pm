@@ -27,7 +27,7 @@ sub unpack {
     my @auto_fs = fs::type::guessed_by_mount();
     my %per_fs = (
 		  iso9660 => [ qw(unhide) ],
-		  vfat => [ qw(umask=0 umask=0022) ],
+		  vfat => [ qw(flush umask=0 umask=0022) ],
 		  ntfs => [ qw(umask=0 umask=0022) ],
 		  nfs => [ qw(rsize=8192 wsize=8192) ],
 		  smbfs => [ qw(username= password=) ],
@@ -110,6 +110,8 @@ sub help() {
 
 	'encrypted' => N("Use an encrypted file system"),
 
+	'flush' => N("Flush write cache on file close"),
+
 	'grpquota' => N("Enable group disk quota accounting and optionally enforce limits"),
 
 	'noatime' => N("Do not update inode access times on this file system
@@ -181,7 +183,7 @@ sub set_default {
 	  && (!$part->{fs_type} || $part->{fs_type} eq 'auto' || $part->{fs_type} =~ /:/)) {
 	$options->{supermount} = 0; #- always disable supermount
 	$part->{fs_type} = 'auto';
-	$options->{sync} = 1 if $part->{media_type} ne 'cdrom';
+	$options->{flush} = 1 if $part->{media_type} ne 'cdrom';
     }
 
     if ($part->{media_type} eq 'cdrom') {
@@ -190,7 +192,7 @@ sub set_default {
 
     if ($part->{media_type} eq 'fd') {
 	# slow device so do not loose time, write now!
-	$options->{sync} = 1;
+	$options->{flush} = 1;
     }
 
     if (isTrueFS($part)) {
