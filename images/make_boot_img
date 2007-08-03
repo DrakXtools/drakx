@@ -204,7 +204,7 @@ sub entries_append {
 }
 
 sub syslinux_cfg_all {
-    my ($type) = @_;
+    my ($type, $b_gfxboot) = @_;
 
     syslinux_cfg([
 	(map {
@@ -215,7 +215,7 @@ sub syslinux_cfg_all {
 	      append => join(' ', grep {$_} $default_append, $default_acpi, $default_vga) };
 	} @kernels),
 	{ label => 'memtest', kernel => 'memtest' },
-    ], $type =~ /cdrom/ && 'gfxboot');
+    ], $b_gfxboot);
 }
 sub remove_ending_zero {
     my ($img) = @_;
@@ -688,7 +688,7 @@ sub isolinux {
     syslinux_all_files('isolinux', $kernels);
 
     _ "cp $isolinux_bin isolinux/isolinux.bin";
-    output("isolinux/isolinux.cfg", syslinux_cfg_all('cdrom'));
+    output("isolinux/isolinux.cfg", syslinux_cfg_all('cdrom', 1));
 
     xbox_stage1() if arch() =~ /i.86/;
 }
@@ -720,7 +720,11 @@ sub boot_iso {
    
     # for the boot iso, use standard isolinux
     _ "cp /usr/lib/syslinux/isolinux.bin .boot_iso/isolinux/isolinux.bin";
-    output('.boot_iso/isolinux/isolinux.cfg', syslinux_cfg_all(''));
+
+    my $with_gfxboot = 0;
+    _ "cp /usr/share/gfxboot/themes/Mandriva/install/* .boot_iso/isolinux" if $with_gfxboot;
+
+    output('.boot_iso/isolinux/isolinux.cfg', syslinux_cfg_all('', $with_gfxboot));
 
     _ "genisoimage -r -f -J -cache-inodes -V 'Mdk Boot ISO' -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso .boot_iso";
     rm_rf('.boot_iso');
