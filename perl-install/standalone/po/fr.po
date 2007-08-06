@@ -74,7 +74,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-01 13:42+0200\n"
+"POT-Creation-Date: 2007-08-06 12:30+0200\n"
 "PO-Revision-Date: 2007-03-06 09:05+0100\n"
 "Last-Translator: Christophe Berthelé <cpjc@free.fr>\n"
 "Language-Team: Français <cooker-i18n@mandrivalinux.org>\n"
@@ -90,17 +90,17 @@ msgid "No bootloader found, creating a new configuration"
 msgstr ""
 "Chargeur de démarrage non trouvé. Création d'une nouvelle configuration"
 
-#: drakboot:83 harddrake2:194 harddrake2:195 logdrake:70
+#: drakboot:83 harddrake2:194 harddrake2:195 logdrake:71
 #, c-format
 msgid "/_File"
 msgstr "/_Fichier"
 
-#: drakboot:84 logdrake:76
+#: drakboot:84 logdrake:77
 #, c-format
 msgid "/File/_Quit"
 msgstr "/Fichier/_Quitter"
 
-#: drakboot:84 harddrake2:195 logdrake:76
+#: drakboot:84 harddrake2:195 logdrake:77
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
@@ -210,62 +210,62 @@ msgstr ""
 "démarrage sélectionnée ci-dessus.\n"
 "Vérifiez que votre carte vidéo est en mesure de supporter le mode choisi."
 
-#: drakbug:43
+#: drakbug:46
 #, c-format
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "Outil de signalement de bogue Mandriva Linux"
 
-#: drakbug:48
+#: drakbug:51
 #, c-format
 msgid "Mandriva Linux Control Center"
 msgstr "Centre de Contrôle Mandriva Linux"
 
-#: drakbug:49
+#: drakbug:52
 #, c-format
 msgid "First Time Wizard"
 msgstr "Assistant de première connexion"
 
-#: drakbug:50
+#: drakbug:53
 #, c-format
 msgid "Synchronization tool"
 msgstr "Outil de synchronisation"
 
-#: drakbug:51 drakbug:145
+#: drakbug:54 drakbug:168
 #, c-format
 msgid "Standalone Tools"
 msgstr "Outils autonomes"
 
-#: drakbug:53
+#: drakbug:56 drakbug:57
 #, c-format
 msgid "Mandriva Online"
 msgstr "Mandriva Online"
 
-#: drakbug:54
+#: drakbug:58
 #, c-format
 msgid "Remote Control"
 msgstr "Contrôle à distance"
 
-#: drakbug:55
+#: drakbug:59
 #, c-format
 msgid "Software Manager"
 msgstr "Gestionnaire de programmes"
 
-#: drakbug:56
+#: drakbug:60
 #, c-format
 msgid "Windows Migration tool"
 msgstr "Outil de migration Windows"
 
-#: drakbug:57
+#: drakbug:61
 #, c-format
 msgid "Configuration Wizards"
 msgstr "Assistants de configuration"
 
-#: drakbug:79
+#: drakbug:83
 #, c-format
 msgid "Select Mandriva Tool:"
 msgstr "Choisissez un outil Mandriva :"
 
-#: drakbug:80
+#: drakbug:84
 #, c-format
 msgid ""
 "or Application Name\n"
@@ -274,48 +274,59 @@ msgstr ""
 "ou nom de l'Application\n"
 "(ou Chemin Complet) :"
 
-#: drakbug:83
+#: drakbug:87
 #, c-format
 msgid "Find Package"
 msgstr "Rechercher des Paquetages"
 
-#: drakbug:85
+#: drakbug:89
 #, c-format
 msgid "Package: "
 msgstr "Paquetage : "
 
-#: drakbug:86
+#: drakbug:90
 #, c-format
 msgid "Kernel:"
 msgstr "Noyau :"
 
-#: drakbug:94
+#: drakbug:102
 #, c-format
+msgid "The \"%s\" program has crashed with the following error:"
+msgstr ""
+
+#: drakbug:104
+#, c-format
+msgid "The \"%s\" program has crashed."
+msgstr ""
+
+#: drakbug:106
+#, fuzzy, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
 "This will open a web browser window on %s where you'll find a form to fill "
 "in.  The information displayed above will be transferred to that server.  \n"
-"Things useful to include in your report are the output of lspcidrake -vdrake -v, kernel "
-"version, and /proc/cpuinfo."
+"Things useful to include in your report are the output of lspcidrake -v, "
+"kernel version, and /proc/cpuinfo."
 msgstr ""
 "Pour soumettre un rapport de bogue, cliquez sur le bouton Signaler.\n"
 "Cela ouvrira une fenêtre de navigateur sur %s où vous trouverez un "
 "formulaire à remplir. L'information affichée ci-dessus sera transférée vers "
 "ce serveur.\n"
 "Il est utile d'inclure dans votre rapport la sortie de la commande "
-"« lspcidrake -vdrake -v », la version du noyau ainsi que le contenu de /proc/cpuinfo."
+"« lspcidrake -vdrake -v », la version du noyau ainsi que le contenu de /proc/"
+"cpuinfo."
 
-#: drakbug:100
+#: drakbug:112
 #, c-format
 msgid "Report"
 msgstr "Signaler"
 
-#: drakbug:155
+#: drakbug:178
 #, c-format
 msgid "Not installed"
 msgstr "Non installé"
 
-#: drakbug:168
+#: drakbug:191
 #, c-format
 msgid "Package not installed"
 msgstr "Paquetage non installé"
@@ -458,8 +469,8 @@ msgstr "Aucune police trouvée"
 msgid "parse all fonts"
 msgstr "Parcourir toutes les polices"
 
-#: drakfont:222 drakfont:263 drakfont:332 drakfont:373 drakfont:381
-#: drakfont:407 drakfont:425 drakfont:439
+#: drakfont:222 drakfont:263 drakfont:332 drakfont:373 drakfont:380
+#: drakfont:406 drakfont:424 drakfont:438
 #, c-format
 msgid "done"
 msgstr "terminé"
@@ -524,17 +535,17 @@ msgstr "Inscription dans ghostscript"
 msgid "Suppress Temporary Files"
 msgstr "Supprimer les fichiers temporaires"
 
-#: drakfont:377 drakfont:435
+#: drakfont:376 drakfont:434
 #, c-format
 msgid "Restart XFS"
 msgstr "Relancer le serveur de polices"
 
-#: drakfont:423 drakfont:433
+#: drakfont:422 drakfont:432
 #, c-format
 msgid "Suppress Fonts Files"
 msgstr "Supprimer les fichiers de polices"
 
-#: drakfont:443
+#: drakfont:442
 #, c-format
 msgid ""
 "Before installing any fonts, be sure that you have the right to use and "
@@ -550,64 +561,64 @@ msgstr ""
 "cas,\n"
 "des polices boguées peuvent bloquer votre serveur d'affichage Xorg."
 
-#: drakfont:483
+#: drakfont:482
 #, c-format
 msgid "Font Installation"
 msgstr "Installation des polices"
 
-#: drakfont:494
+#: drakfont:493
 #, c-format
 msgid "DrakFont"
 msgstr "DrakFont"
 
-#: drakfont:495 drakfont:647
+#: drakfont:494 drakfont:646
 #, c-format
 msgid "Font List"
 msgstr "Liste des polices"
 
-#: drakfont:498
+#: drakfont:497
 #, c-format
 msgid "Get Windows Fonts"
 msgstr "Récupérer les police d'écritures Windows"
 
-#: drakfont:504
+#: drakfont:503
 #, c-format
 msgid "About"
 msgstr "À propos"
 
-#: drakfont:506 drakfont:726
+#: drakfont:505 drakfont:725
 #, c-format
 msgid "Uninstall"
 msgstr "Désinstaller"
 
-#: drakfont:507
+#: drakfont:506
 #, c-format
 msgid "Import"
 msgstr "Importer"
 
-#: drakfont:525
+#: drakfont:524
 #, c-format
 msgid "Drakfont"
 msgstr "Drakfont"
 
-#: drakfont:527
+#: drakfont:526
 #, c-format
 msgid "Copyright (C) 2001-2006 by Mandriva"
 msgstr "Copyright (C) 2001-2006 par Mandriva"
 
-#: drakfont:529
+#: drakfont:528
 #, c-format
 msgid "Font installer."
 msgstr "Installation de polices."
 
-#: drakfont:531 harddrake2:236
+#: drakfont:530 harddrake2:236
 #, c-format
 msgid "Mandriva Linux"
 msgstr "Mandriva Linux"
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:538 harddrake2:241
+#: drakfont:537 harddrake2:241
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr ""
@@ -626,102 +637,102 @@ msgstr ""
 "Didier Hérisson <didier.herisson@angstrom.uu.se>\n"
 "Nicolas Lécureuil <neoclust@mandriva.org>\n"
 
-#: drakfont:548
+#: drakfont:547
 #, c-format
 msgid "Choose the applications that will support the fonts:"
 msgstr "Choisissez les programmes qui utiliseront ces polices :"
 
-#: drakfont:559
+#: drakfont:558
 #, c-format
 msgid "Ghostscript"
 msgstr "Ghostscript"
 
-#: drakfont:560
+#: drakfont:559
 #, c-format
 msgid "OpenOffice.org"
 msgstr "OpenOffice.org"
 
-#: drakfont:561
+#: drakfont:560
 #, c-format
 msgid "Abiword"
 msgstr "Abiword"
 
-#: drakfont:562
+#: drakfont:561
 #, c-format
 msgid "Generic Printers"
 msgstr "Imprimantes génériques"
 
-#: drakfont:576
+#: drakfont:575
 #, c-format
 msgid "Select the font file or directory and click on 'Add'"
 msgstr "Sélectionnez les polices ou dossiers et cliquez sur « Ajouter »"
 
-#: drakfont:577
+#: drakfont:576
 #, c-format
 msgid "File Selection"
 msgstr "Sélection de fichiers ou dossiers"
 
-#: drakfont:581
+#: drakfont:580
 #, c-format
 msgid "Fonts"
 msgstr "Polices"
 
-#: drakfont:645
+#: drakfont:644
 #, c-format
 msgid "Import fonts"
 msgstr "Importer les polices"
 
-#: drakfont:658
+#: drakfont:657
 #, c-format
 msgid "Install"
 msgstr "Installer"
 
-#: drakfont:689
+#: drakfont:688
 #, c-format
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "Voulez-vous réellement désinstaller les polices d'écriture suivantes ?"
 
-#: drakfont:734
+#: drakfont:733
 #, c-format
 msgid "Unselected All"
 msgstr "Désélectionne tout"
 
-#: drakfont:737
+#: drakfont:736
 #, c-format
 msgid "Selected All"
 msgstr "Sélectionne tout"
 
-#: drakfont:751 drakfont:770
+#: drakfont:750 drakfont:769
 #, c-format
 msgid "Importing fonts"
 msgstr "Importation des polices en cours"
 
-#: drakfont:755 drakfont:775
+#: drakfont:754 drakfont:774
 #, c-format
 msgid "Initial tests"
 msgstr "Tests initiaux"
 
-#: drakfont:756
+#: drakfont:755
 #, c-format
 msgid "Copy fonts on your system"
 msgstr "Copier les polices sur votre système"
 
-#: drakfont:757
+#: drakfont:756
 #, c-format
 msgid "Install & convert Fonts"
 msgstr "Installer et convertir des polices"
 
-#: drakfont:758
+#: drakfont:757
 #, c-format
 msgid "Post Install"
 msgstr "Post-installation"
 
-#: drakfont:776
+#: drakfont:775
 #, c-format
 msgid "Remove fonts on your system"
 msgstr "Retirer des polices de votre système"
 
-#: drakfont:777
+#: drakfont:776
 #, c-format
 msgid "Post Uninstall"
 msgstr "Post-désinstallation"
@@ -1480,7 +1491,7 @@ msgstr "Autodétection"
 msgid "Detection in progress"
 msgstr "Détection en cours"
 
-#: drakups:118 drakups:157 logdrake:449 logdrake:455
+#: drakups:118 drakups:157 logdrake:457 logdrake:463
 #, c-format
 msgid "Congratulations"
 msgstr "Félicitations"
@@ -2330,12 +2341,12 @@ msgid "Features"
 msgstr "Fonctionnalités"
 
 #. -PO: please keep all "/" characters !!!
-#: harddrake2:176 logdrake:77
+#: harddrake2:176 logdrake:78
 #, c-format
 msgid "/_Options"
 msgstr "/_Options"
 
-#: harddrake2:177 harddrake2:206 logdrake:79
+#: harddrake2:177 harddrake2:206 logdrake:80
 #, c-format
 msgid "/_Help"
 msgstr "/_Aide"
@@ -2477,173 +2488,173 @@ msgstr "graveur"
 msgid "DVD"
 msgstr "DVD"
 
-#: localedrake:38
+#: localedrake:47
 #, c-format
 msgid "LocaleDrake"
 msgstr "LocaleDrake"
 
-#: localedrake:44
+#: localedrake:53
 #, c-format
 msgid "You should install the following packages: %s"
 msgstr "Vous devriez installer les paquetages suivants : %s"
 
 #. -PO: the following is used to combine packages names. eg: "initscripts, harddrake, yudit"
-#: localedrake:47
+#: localedrake:56
 #, c-format
 msgid ", "
 msgstr ", "
 
-#: localedrake:55
+#: localedrake:64
 #, c-format
 msgid "The change is done, but to be effective you must logout"
 msgstr ""
 "Les changements ont été effectués mais ne seront effectifs qu'après votre "
 "déconnexion"
 
-#: logdrake:50
+#: logdrake:51
 #, c-format
 msgid "Mandriva Linux Tools Logs"
 msgstr "Actions des Outils Mandriva Linux"
 
-#: logdrake:51
+#: logdrake:52
 #, c-format
 msgid "Logs"
 msgstr "Journaux"
 
-#: logdrake:64
+#: logdrake:65
 #, c-format
 msgid "Show only for the selected day"
 msgstr "N'afficher que pour les jours sélectionnés"
 
-#: logdrake:71
+#: logdrake:72
 #, c-format
 msgid "/File/_New"
 msgstr "/Fichier/_Nouveau"
 
-#: logdrake:71
+#: logdrake:72
 #, c-format
 msgid "<control>N"
 msgstr "<control>N"
 
-#: logdrake:72
+#: logdrake:73
 #, c-format
 msgid "/File/_Open"
 msgstr "/Fichier/_Ouvrir"
 
-#: logdrake:72
+#: logdrake:73
 #, c-format
 msgid "<control>O"
 msgstr "<control>O"
 
-#: logdrake:73
+#: logdrake:74
 #, c-format
 msgid "/File/_Save"
 msgstr "/Fichier/Enregi_strer"
 
-#: logdrake:73
+#: logdrake:74
 #, c-format
 msgid "<control>S"
 msgstr "<control>S"
 
-#: logdrake:74
+#: logdrake:75
 #, c-format
 msgid "/File/Save _As"
 msgstr "/Fichier/_Enregistrer sous"
 
-#: logdrake:75
+#: logdrake:76
 #, c-format
 msgid "/File/-"
 msgstr "/Fichier/-"
 
-#: logdrake:78
+#: logdrake:79
 #, c-format
 msgid "/Options/Test"
 msgstr "/Options/Test"
 
-#: logdrake:80
+#: logdrake:81
 #, c-format
 msgid "/Help/_About..."
 msgstr "/Aide/_A propos..."
 
-#: logdrake:109
+#: logdrake:110
 #, c-format
 msgid ""
 "_:this is the auth.log log file\n"
 "Authentication"
 msgstr "Authentification"
 
-#: logdrake:110
+#: logdrake:111
 #, c-format
 msgid ""
 "_:this is the user.log log file\n"
 "User"
 msgstr "Utilisateur"
 
-#: logdrake:111
+#: logdrake:112
 #, c-format
 msgid ""
 "_:this is the /var/log/messages log file\n"
 "Messages"
 msgstr "Messages"
 
-#: logdrake:112
+#: logdrake:113
 #, c-format
 msgid ""
 "_:this is the /var/log/syslog log file\n"
 "Syslog"
 msgstr "Syslog"
 
-#: logdrake:116
+#: logdrake:117
 #, c-format
 msgid "search"
 msgstr "chercher"
 
-#: logdrake:128
+#: logdrake:129
 #, c-format
 msgid "A tool to monitor your logs"
 msgstr "Un outil pour voir vos fichiers journaux"
 
-#: logdrake:130
+#: logdrake:131
 #, c-format
 msgid "Settings"
 msgstr "Paramètres"
 
-#: logdrake:133
+#: logdrake:134
 #, c-format
 msgid "Matching"
 msgstr "Contenant"
 
-#: logdrake:134
+#: logdrake:135
 #, c-format
 msgid "but not matching"
 msgstr "mais ne contenant pas"
 
-#: logdrake:137
+#: logdrake:138
 #, c-format
 msgid "Choose file"
 msgstr "Choisir le fichier"
 
-#: logdrake:149
+#: logdrake:150
 #, c-format
 msgid "Calendar"
 msgstr "Calendrier"
 
-#: logdrake:158
+#: logdrake:159
 #, c-format
 msgid "Content of the file"
 msgstr "Contenu du fichier"
 
-#: logdrake:162 logdrake:399
+#: logdrake:163 logdrake:407
 #, c-format
 msgid "Mail alert"
 msgstr "Alerte par courriel"
 
-#: logdrake:169
+#: logdrake:170
 #, c-format
 msgid "The alert wizard has failed unexpectedly:"
 msgstr "L'assistant des alertes par courriel a échoué de manière imprévue :"
 
-#: logdrake:173
+#: logdrake:174
 #, c-format
 msgid "Save"
 msgstr "Sauvegarder"
@@ -2653,62 +2664,72 @@ msgstr "Sauvegarder"
 msgid "please wait, parsing file: %s"
 msgstr "s'il vous plaît attendez, examen du fichier : %s"
 
-#: logdrake:377
+#: logdrake:244
+#, c-format
+msgid "Sorry, log file isn't available!"
+msgstr ""
+
+#: logdrake:292
+#, c-format
+msgid "Error while opening \"%s\" log file: %s\n"
+msgstr ""
+
+#: logdrake:385
 #, c-format
 msgid "Apache World Wide Web Server"
 msgstr "Serveur web Apache"
 
-#: logdrake:378
+#: logdrake:386
 #, c-format
 msgid "Domain Name Resolver"
 msgstr "Résolveur de Nom de domaine"
 
-#: logdrake:379
+#: logdrake:387
 #, c-format
 msgid "Ftp Server"
 msgstr "Serveur FTP"
 
-#: logdrake:380
+#: logdrake:388
 #, c-format
 msgid "Postfix Mail Server"
 msgstr "Serveur de courrier Postfix"
 
-#: logdrake:381
+#: logdrake:389
 #, c-format
 msgid "Samba Server"
 msgstr "Serveur Samba"
 
-#: logdrake:382
+#: logdrake:390
 #, c-format
 msgid "SSH Server"
 msgstr "Serveur SSH"
 
-#: logdrake:383
+#: logdrake:391
 #, c-format
 msgid "Webmin Service"
 msgstr "Service Webmin"
 
-#: logdrake:384
+#: logdrake:392
 #, c-format
 msgid "Xinetd Service"
 msgstr "Service Xinetd"
 
-#: logdrake:393
+#: logdrake:401
 #, c-format
 msgid "Configure the mail alert system"
 msgstr "Configurer le système d'alerte par courriel"
 
-#: logdrake:394
+#: logdrake:402
 #, c-format
 msgid "Stop the mail alert system"
 msgstr "Arrêter le système d'alerte par courriel"
 
-#: logdrake:402
+#: logdrake:410
 #, c-format
 msgid "Mail alert configuration"
 msgstr "Configuration des alertes par courriel"
 
-#: logdrake:403
+#: logdrake:411
 #, c-format
 msgid ""
 "Welcome to the mail configuration utility.\n"
@@ -2719,17 +2740,17 @@ msgstr ""
 "\n"
 "Vous allez pouvoir configurer ici les alertes système.\n"
 
-#: logdrake:406
+#: logdrake:414
 #, c-format
 msgid "What do you want to do?"
 msgstr "Que désirez-vous faire ?"
 
-#: logdrake:413
+#: logdrake:421
 #, c-format
 msgid "Services settings"
 msgstr "Configuration des services"
 
-#: logdrake:414
+#: logdrake:422
 #, c-format
 msgid ""
 "You will receive an alert if one of the selected services is no longer "
@@ -2737,46 +2758,46 @@ msgid ""
 msgstr ""
 "Vous recevrez une alerte si l'un des services sélectionnés ne tourne plus"
 
-#: logdrake:421
+#: logdrake:429
 #, c-format
 msgid "Load setting"
 msgstr "Chargement des paramètres"
 
-#: logdrake:422
+#: logdrake:430
 #, c-format
 msgid "You will receive an alert if the load is higher than this value"
 msgstr "Vous recevrez une alerte si la charge machine dépasse cette valeur"
 
-#: logdrake:423
+#: logdrake:431
 #, c-format
 msgid ""
 "_: load here is a noun, the load of the system\n"
 "Load"
 msgstr "Charge"
 
-#: logdrake:428
+#: logdrake:436
 #, c-format
 msgid "Alert configuration"
 msgstr "Configuration des alertes"
 
-#: logdrake:429
+#: logdrake:437
 #, c-format
 msgid "Please enter your email address below "
 msgstr "Veuillez entrer votre adresse courriel ci-dessous"
 
-#: logdrake:430
+#: logdrake:438
 #, c-format
 msgid "and enter the name (or the IP) of the SMTP server you wish to use"
 msgstr ""
 "et entrez le nom (ou l'adresse IP) du serveur SMTP que vous désirez utiliser"
 
-#: logdrake:437
+#: logdrake:445
 #, c-format
 msgid "\"%s\" neither is a valid email nor is an existing local user!"
 msgstr ""
 "« %s » n'est ni une adresse de courriel valide ni un utilisateur local !"
 
-#: logdrake:442
+#: logdrake:450
 #, c-format
 msgid ""
 "\"%s\" is a local user, but you did not select a local smtp, so you must use "
@@ -2786,21 +2807,21 @@ msgstr ""
 "SMTP local.\n"
 "Vous devez donc utiliser une adresse de courriel complète !"
 
-#: logdrake:449
+#: logdrake:457
 #, c-format
 msgid "The wizard successfully configured the mail alert."
 msgstr ""
 "L'assistant a configuré avec succès le service d'alerte par courrier "
 "électronique."
 
-#: logdrake:455
+#: logdrake:463
 #, c-format
 msgid "The wizard successfully disabled the mail alert."
 msgstr ""
 "L'assistant a désactivé avec succès le service d'alerte par courrier "
 "électronique."
 
-#: logdrake:514
+#: logdrake:522
 #, c-format
 msgid "Save as.."
 msgstr "Enregistrer sous..."
@@ -3336,27 +3357,27 @@ msgstr ""
 msgid "Your scanner(s) will not be available on the network."
 msgstr "Vos scanners ne seront pas disponibles sur le réseau."
 
-#: service_harddrake:137
+#: service_harddrake:131
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Certains matériels listés dans la classe « %s » ont été enlevés :\n"
 
-#: service_harddrake:138
+#: service_harddrake:132
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- %s a été enlevé\n"
 
-#: service_harddrake:141
+#: service_harddrake:135
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "Certains périphériques ont été ajoutés : %s\n"
 
-#: service_harddrake:142
+#: service_harddrake:136
 #, c-format
 msgid "- %s was added\n"
 msgstr "- %s a été ajouté\n"
 
-#: service_harddrake:265
+#: service_harddrake:259
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "Détection du matériel en cours"

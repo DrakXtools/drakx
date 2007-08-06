@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone-hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-01 13:42+0200\n"
+"POT-Creation-Date: 2007-08-06 12:30+0200\n"
 "PO-Revision-Date: 2007-02-26 20:14+0100\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: \n"
@@ -23,17 +23,17 @@ msgstr ""
 msgid "No bootloader found, creating a new configuration"
 msgstr "Rendszerindító nem található; új beállítás készítése"
 
-#: drakboot:83 harddrake2:194 harddrake2:195 logdrake:70
+#: drakboot:83 harddrake2:194 harddrake2:195 logdrake:71
 #, c-format
 msgid "/_File"
 msgstr "/_Fájl"
 
-#: drakboot:84 logdrake:76
+#: drakboot:84 logdrake:77
 #, c-format
 msgid "/File/_Quit"
 msgstr "/Fájl/Ki_lépés"
 
-#: drakboot:84 harddrake2:195 logdrake:76
+#: drakboot:84 harddrake2:195 logdrake:77
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
@@ -143,62 +143,62 @@ msgstr ""
 "rendszerindítási bejegyzésre.\n"
 "Csak olyan módot válasszon, amelyet támogat a videokártya."
 
-#: drakbug:43
+#: drakbug:46
 #, c-format
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "Mandriva Linux hibabejelentő program"
 
-#: drakbug:48
+#: drakbug:51
 #, c-format
 msgid "Mandriva Linux Control Center"
 msgstr "Mandriva Linux Vezérlőközpont"
 
-#: drakbug:49
+#: drakbug:52
 #, c-format
 msgid "First Time Wizard"
 msgstr "Első indítási varázsló"
 
-#: drakbug:50
+#: drakbug:53
 #, c-format
 msgid "Synchronization tool"
 msgstr "Szinkronizáló program"
 
-#: drakbug:51 drakbug:145
+#: drakbug:54 drakbug:168
 #, c-format
 msgid "Standalone Tools"
 msgstr "Önálló eszközök"
 
-#: drakbug:53
+#: drakbug:56 drakbug:57
 #, c-format
 msgid "Mandriva Online"
 msgstr "Mandriva Online"
 
-#: drakbug:54
+#: drakbug:58
 #, c-format
 msgid "Remote Control"
 msgstr "Távirányítás"
 
-#: drakbug:55
+#: drakbug:59
 #, c-format
 msgid "Software Manager"
 msgstr "Szoftvercsomag-kezelő"
 
-#: drakbug:56
+#: drakbug:60
 #, c-format
 msgid "Windows Migration tool"
 msgstr "Windows migrációs program"
 
-#: drakbug:57
+#: drakbug:61
 #, c-format
 msgid "Configuration Wizards"
 msgstr "Beállítási varázslók"
 
-#: drakbug:79
+#: drakbug:83
 #, c-format
 msgid "Select Mandriva Tool:"
 msgstr "Adja meg a Mandriva-eszközt:"
 
-#: drakbug:80
+#: drakbug:84
 #, c-format
 msgid ""
 "or Application Name\n"
@@ -207,29 +207,39 @@ msgstr ""
 "vagy az alkalmazásnevet\n"
 "(vagy a teljes útvonalat):"
 
-#: drakbug:83
+#: drakbug:87
 #, c-format
 msgid "Find Package"
 msgstr "Csomag keresése"
 
-#: drakbug:85
+#: drakbug:89
 #, c-format
 msgid "Package: "
 msgstr "Csomag: "
 
-#: drakbug:86
+#: drakbug:90
 #, c-format
 msgid "Kernel:"
 msgstr "Kernel:"
 
-#: drakbug:94
+#: drakbug:102
+#, c-format
+msgid "The \"%s\" program has crashed with the following error:"
+msgstr ""
+
+#: drakbug:104
+#, c-format
+msgid "The \"%s\" program has crashed."
+msgstr ""
+
+#: drakbug:106
 #, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
 "This will open a web browser window on %s where you'll find a form to fill "
 "in.  The information displayed above will be transferred to that server.  \n"
-"Things useful to include in your report are the output of lspcidrake -v, kernel "
-"version, and /proc/cpuinfo."
+"Things useful to include in your report are the output of lspcidrake -v, "
+"kernel version, and /proc/cpuinfo."
 msgstr ""
 "Hibajelentés küldéséhez kattintson a \"Bejelentés\" gombra.\n"
 "Ekkor megjelenik a(z) \"%s\" weboldal egy\n"
@@ -238,17 +248,17 @@ msgstr ""
 "A bejelentésbe érdemes belevenni az \"lspcidrake -v\" program\n"
 "kimenetét, a kernel verzióját és a /proc/cpuinfo fájl tartalmát."
 
-#: drakbug:100
+#: drakbug:112
 #, c-format
 msgid "Report"
 msgstr "Bejelentés"
 
-#: drakbug:155
+#: drakbug:178
 #, c-format
 msgid "Not installed"
 msgstr "Nincs telepítve"
 
-#: drakbug:168
+#: drakbug:191
 #, c-format
 msgid "Package not installed"
 msgstr "A csomag nincs telepítve"
@@ -387,8 +397,8 @@ msgstr "Betűtípus nem található"
 msgid "parse all fonts"
 msgstr "az összes betűtípus vizsgálata"
 
-#: drakfont:222 drakfont:263 drakfont:332 drakfont:373 drakfont:381
-#: drakfont:407 drakfont:425 drakfont:439
+#: drakfont:222 drakfont:263 drakfont:332 drakfont:373 drakfont:380
+#: drakfont:406 drakfont:424 drakfont:438
 #, c-format
 msgid "done"
 msgstr "kész"
@@ -453,17 +463,17 @@ msgstr "Ghostscript-hivatkozás"
 msgid "Suppress Temporary Files"
 msgstr "Átmeneti fájlok elhagyása"
 
-#: drakfont:377 drakfont:435
+#: drakfont:376 drakfont:434
 #, c-format
 msgid "Restart XFS"
 msgstr "XFS újraindítása"
 
-#: drakfont:423 drakfont:433
+#: drakfont:422 drakfont:432
 #, c-format
 msgid "Suppress Fonts Files"
 msgstr "Betűtípus-fájlok elhagyása"
 
-#: drakfont:443
+#: drakfont:442
 #, c-format
 msgid ""
 "Before installing any fonts, be sure that you have the right to use and "
@@ -478,166 +488,166 @@ msgstr ""
 "A betűtípusokat a szokott módon telepítheti. Bizonyos hibás betűtípusok "
 "lefagyaszthatják az X-kiszolgálót."
 
-#: drakfont:483
+#: drakfont:482
 #, c-format
 msgid "Font Installation"
 msgstr "Betűtípus-telepítés"
 
-#: drakfont:494
+#: drakfont:493
 #, c-format
 msgid "DrakFont"
 msgstr "DrakFont"
 
-#: drakfont:495 drakfont:647
+#: drakfont:494 drakfont:646
 #, c-format
 msgid "Font List"
 msgstr "Betűtípus-lista"
 
-#: drakfont:498
+#: drakfont:497
 #, c-format
 msgid "Get Windows Fonts"
 msgstr "Windowsos betűkészletek behozatala"
 
-#: drakfont:504
+#: drakfont:503
 #, c-format
 msgid "About"
 msgstr "Névjegy"
 
-#: drakfont:506 drakfont:726
+#: drakfont:505 drakfont:725
 #, c-format
 msgid "Uninstall"
 msgstr "Eltávolítás"
 
-#: drakfont:507
+#: drakfont:506
 #, c-format
 msgid "Import"
 msgstr "Importálás"
 
-#: drakfont:525
+#: drakfont:524
 #, c-format
 msgid "Drakfont"
 msgstr "DrakFont"
 
-#: drakfont:527
+#: drakfont:526
 #, c-format
 msgid "Copyright (C) 2001-2006 by Mandriva"
 msgstr "Copyright (C) 2001-2006, Mandriva"
 
-#: drakfont:529
+#: drakfont:528
 #, c-format
 msgid "Font installer."
 msgstr "Betűtípus-telepítő"
 
-#: drakfont:531 harddrake2:236
+#: drakfont:530 harddrake2:236
 #, c-format
 msgid "Mandriva Linux"
 msgstr "Mandriva Linux"
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:538 harddrake2:241
+#: drakfont:537 harddrake2:241
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr "Arpad Biro <biro_arpad@yahoo.com>\n"
 
-#: drakfont:548
+#: drakfont:547
 #, c-format
 msgid "Choose the applications that will support the fonts:"
 msgstr "Válassza ki, mely alkalmazások fogják használni a betűtípusokat:"
 
-#: drakfont:559
+#: drakfont:558
 #, c-format
 msgid "Ghostscript"
 msgstr "Ghostscript"
 
-#: drakfont:560
+#: drakfont:559
 #, c-format
 msgid "OpenOffice.org"
 msgstr "OpenOffice.org"
 
-#: drakfont:561
+#: drakfont:560
 #, c-format
 msgid "Abiword"
 msgstr "AbiWord"
 
-#: drakfont:562
+#: drakfont:561
 #, c-format
 msgid "Generic Printers"
 msgstr "Általános nyomtatók"
 
-#: drakfont:576
+#: drakfont:575
 #, c-format
 msgid "Select the font file or directory and click on 'Add'"
 msgstr ""
 "Válassza ki a betűtípus-fájlt vagy -könyvtárt, majd kattintson a \"Hozzáadás"
 "\" gombra"
 
-#: drakfont:577
+#: drakfont:576
 #, c-format
 msgid "File Selection"
 msgstr "Fájlkijelölés"
 
-#: drakfont:581
+#: drakfont:580
 #, c-format
 msgid "Fonts"
 msgstr "Betűtípusok"
 
-#: drakfont:645
+#: drakfont:644
 #, c-format
 msgid "Import fonts"
 msgstr "Betűtípusok importálása"
 
-#: drakfont:658
+#: drakfont:657
 #, c-format
 msgid "Install"
 msgstr "Telepítés"
 
-#: drakfont:689
+#: drakfont:688
 #, c-format
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "Biztos, hogy el szeretné távolítani a következő betűtípusokat?"
 
-#: drakfont:734
+#: drakfont:733
 #, c-format
 msgid "Unselected All"
 msgstr "Kijelölések megszüntetése"
 
-#: drakfont:737
+#: drakfont:736
 #, c-format
 msgid "Selected All"
 msgstr "Mindent kijelöl"
 
-#: drakfont:751 drakfont:770
+#: drakfont:750 drakfont:769
 #, c-format
 msgid "Importing fonts"
 msgstr "Betűtípusok importálása"
 
-#: drakfont:755 drakfont:775
+#: drakfont:754 drakfont:774
 #, c-format
 msgid "Initial tests"
 msgstr "Tesztelés"
 
-#: drakfont:756
+#: drakfont:755
 #, c-format
 msgid "Copy fonts on your system"
 msgstr "Betűtípusok másolása a rendszerbe"
 
-#: drakfont:757
+#: drakfont:756
 #, c-format
 msgid "Install & convert Fonts"
 msgstr "Betűtípusok telepítése és konvertálása"
 
-#: drakfont:758
+#: drakfont:757
 #, c-format
 msgid "Post Install"
 msgstr "Telepítés után"
 
-#: drakfont:776
+#: drakfont:775
 #, c-format
 msgid "Remove fonts on your system"
 msgstr "A rendszerben található betűtípusok eltávolítása"
 
-#: drakfont:777
+#: drakfont:776
 #, c-format
 msgid "Post Uninstall"
 msgstr "Eltávolítás után"
@@ -1395,7 +1405,7 @@ msgstr "Automatikus felderítés"
 msgid "Detection in progress"
 msgstr "Felderítés folyamatban"
 
-#: drakups:118 drakups:157 logdrake:449 logdrake:455
+#: drakups:118 drakups:157 logdrake:457 logdrake:463
 #, c-format
 msgid "Congratulations"
 msgstr "Gratulálunk"
@@ -2238,12 +2248,12 @@ msgid "Features"
 msgstr "Tulajdonságok"
 
 #. -PO: please keep all "/" characters !!!
-#: harddrake2:176 logdrake:77
+#: harddrake2:176 logdrake:78
 #, c-format
 msgid "/_Options"
 msgstr "/_Beállítások"
 
-#: harddrake2:177 harddrake2:206 logdrake:79
+#: harddrake2:177 harddrake2:206 logdrake:80
 #, c-format
 msgid "/_Help"
 msgstr "/_Segítség"
@@ -2385,171 +2395,171 @@ msgstr "író"
 msgid "DVD"
 msgstr "DVD"
 
-#: localedrake:38
+#: localedrake:47
 #, c-format
 msgid "LocaleDrake"
 msgstr "LocaleDrake"
 
-#: localedrake:44
+#: localedrake:53
 #, c-format
 msgid "You should install the following packages: %s"
 msgstr "Telepítenie kell a következő csomagokat: %s"
 
 #. -PO: the following is used to combine packages names. eg: "initscripts, harddrake, yudit"
-#: localedrake:47
+#: localedrake:56
 #, c-format
 msgid ", "
 msgstr ", "
 
-#: localedrake:55
+#: localedrake:64
 #, c-format
 msgid "The change is done, but to be effective you must logout"
 msgstr "A módosítás megtörtént, de az érvénybe lépéséhez ki kell jelentkezni"
 
-#: logdrake:50
+#: logdrake:51
 #, c-format
 msgid "Mandriva Linux Tools Logs"
 msgstr "Mandriva Linux-eszközök naplói"
 
-#: logdrake:51
+#: logdrake:52
 #, c-format
 msgid "Logs"
 msgstr "Naplók"
 
-#: logdrake:64
+#: logdrake:65
 #, c-format
 msgid "Show only for the selected day"
 msgstr "Csak a kijelölt napot jelenítse meg"
 
-#: logdrake:71
+#: logdrake:72
 #, c-format
 msgid "/File/_New"
 msgstr "/Fájl/Ú_j"
 
-#: logdrake:71
+#: logdrake:72
 #, c-format
 msgid "<control>N"
 msgstr "<control>N"
 
-#: logdrake:72
+#: logdrake:73
 #, c-format
 msgid "/File/_Open"
 msgstr "/Fájl/_Megnyitás"
 
-#: logdrake:72
+#: logdrake:73
 #, c-format
 msgid "<control>O"
 msgstr "<control>O"
 
-#: logdrake:73
+#: logdrake:74
 #, c-format
 msgid "/File/_Save"
 msgstr "/Fájl/M_entés"
 
-#: logdrake:73
+#: logdrake:74
 #, c-format
 msgid "<control>S"
 msgstr "<control>S"
 
-#: logdrake:74
+#: logdrake:75
 #, c-format
 msgid "/File/Save _As"
 msgstr "/Fájl/Mentés más_ként"
 
-#: logdrake:75
+#: logdrake:76
 #, c-format
 msgid "/File/-"
 msgstr "/Fájl/-"
 
-#: logdrake:78
+#: logdrake:79
 #, c-format
 msgid "/Options/Test"
 msgstr "/Beállítások/Próba"
 
-#: logdrake:80
+#: logdrake:81
 #, c-format
 msgid "/Help/_About..."
 msgstr "/Segítség/_Névjegy..."
 
-#: logdrake:109
+#: logdrake:110
 #, c-format
 msgid ""
 "_:this is the auth.log log file\n"
 "Authentication"
 msgstr "Azonosítás"
 
-#: logdrake:110
+#: logdrake:111
 #, c-format
 msgid ""
 "_:this is the user.log log file\n"
 "User"
 msgstr "Felhasználó"
 
-#: logdrake:111
+#: logdrake:112
 #, c-format
 msgid ""
 "_:this is the /var/log/messages log file\n"
 "Messages"
 msgstr "Üzenetek"
 
-#: logdrake:112
+#: logdrake:113
 #, c-format
 msgid ""
 "_:this is the /var/log/syslog log file\n"
 "Syslog"
 msgstr "Rendszernapló"
 
-#: logdrake:116
+#: logdrake:117
 #, c-format
 msgid "search"
 msgstr "keresés"
 
-#: logdrake:128
+#: logdrake:129
 #, c-format
 msgid "A tool to monitor your logs"
 msgstr "Naplófigyelő"
 
-#: logdrake:130
+#: logdrake:131
 #, c-format
 msgid "Settings"
 msgstr "Beállítások"
 
-#: logdrake:133
+#: logdrake:134
 #, c-format
 msgid "Matching"
 msgstr "Ezzel egyező"
 
-#: logdrake:134
+#: logdrake:135
 #, c-format
 msgid "but not matching"
 msgstr "de ezzel nem egyező"
 
-#: logdrake:137
+#: logdrake:138
 #, c-format
 msgid "Choose file"
 msgstr "Válasszon fájlt"
 
-#: logdrake:149
+#: logdrake:150
 #, c-format
 msgid "Calendar"
 msgstr "Naptár"
 
-#: logdrake:158
+#: logdrake:159
 #, c-format
 msgid "Content of the file"
 msgstr "A fájl tartalma"
 
-#: logdrake:162 logdrake:399
+#: logdrake:163 logdrake:407
 #, c-format
 msgid "Mail alert"
 msgstr "Email-figyelmeztetés"
 
-#: logdrake:169
+#: logdrake:170
 #, c-format
 msgid "The alert wizard has failed unexpectedly:"
 msgstr "Probléma lépett fel a figyelmeztetési varázslóban:"
 
-#: logdrake:173
+#: logdrake:174
 #, c-format
 msgid "Save"
 msgstr "Mentés"
@@ -2559,62 +2569,72 @@ msgstr "Mentés"
 msgid "please wait, parsing file: %s"
 msgstr "a fájl elemzése folyamatban: %s"
 
-#: logdrake:377
+#: logdrake:244
+#, c-format
+msgid "Sorry, log file isn't available!"
+msgstr ""
+
+#: logdrake:292
+#, c-format
+msgid "Error while opening \"%s\" log file: %s\n"
+msgstr ""
+
+#: logdrake:385
 #, c-format
 msgid "Apache World Wide Web Server"
 msgstr "Apache World Wide Web-kiszolgáló"
 
-#: logdrake:378
+#: logdrake:386
 #, c-format
 msgid "Domain Name Resolver"
 msgstr "Tartománynév-feloldó"
 
-#: logdrake:379
+#: logdrake:387
 #, c-format
 msgid "Ftp Server"
 msgstr "FTP-kiszolgáló"
 
-#: logdrake:380
+#: logdrake:388
 #, c-format
 msgid "Postfix Mail Server"
 msgstr "Postfix email-kiszolgáló"
 
-#: logdrake:381
+#: logdrake:389
 #, c-format
 msgid "Samba Server"
 msgstr "Samba-kiszolgáló"
 
-#: logdrake:382
+#: logdrake:390
 #, c-format
 msgid "SSH Server"
 msgstr "SSH-kiszolgáló"
 
-#: logdrake:383
+#: logdrake:391
 #, c-format
 msgid "Webmin Service"
 msgstr "Webmin szolgáltatás"
 
-#: logdrake:384
+#: logdrake:392
 #, c-format
 msgid "Xinetd Service"
 msgstr "Xinetd szolgáltatás"
 
-#: logdrake:393
+#: logdrake:401
 #, c-format
 msgid "Configure the mail alert system"
 msgstr "Az email-figyelmeztetési rendszer beállítása"
 
-#: logdrake:394
+#: logdrake:402
 #, c-format
 msgid "Stop the mail alert system"
 msgstr "Az email-figyelmeztetési rendszer leállítása"
 
-#: logdrake:402
+#: logdrake:410
 #, c-format
 msgid "Mail alert configuration"
 msgstr "Email-figyelmeztetés beállításai"
 
-#: logdrake:403
+#: logdrake:411
 #, c-format
 msgid ""
 "Welcome to the mail configuration utility.\n"
@@ -2625,17 +2645,17 @@ msgstr ""
 "\n"
 "A programmal beállítható a figyelmeztetések küldése.\n"
 
-#: logdrake:406
+#: logdrake:414
 #, c-format
 msgid "What do you want to do?"
 msgstr "Mit szeretne tenni?"
 
-#: logdrake:413
+#: logdrake:421
 #, c-format
 msgid "Services settings"
 msgstr "Szolgáltatásbeállítás"
 
-#: logdrake:414
+#: logdrake:422
 #, c-format
 msgid ""
 "You will receive an alert if one of the selected services is no longer "
@@ -2644,45 +2664,45 @@ msgstr ""
 "A rendszer figyelmeztetést küld, ha a kijelölt szolgáltatások valamelyike "
 "nem fut"
 
-#: logdrake:421
+#: logdrake:429
 #, c-format
 msgid "Load setting"
 msgstr "Terhelésbeállítás"
 
-#: logdrake:422
+#: logdrake:430
 #, c-format
 msgid "You will receive an alert if the load is higher than this value"
 msgstr "A rendszer figyelmeztetést küld, ha a terhelés ezen értéknél magasabb"
 
-#: logdrake:423
+#: logdrake:431
 #, c-format
 msgid ""
 "_: load here is a noun, the load of the system\n"
 "Load"
 msgstr "Terhelés"
 
-#: logdrake:428
+#: logdrake:436
 #, c-format
 msgid "Alert configuration"
 msgstr "Figyelmeztetés beállítása"
 
-#: logdrake:429
+#: logdrake:437
 #, c-format
 msgid "Please enter your email address below "
 msgstr "Adja meg az email-címét "
 
-#: logdrake:430
+#: logdrake:438
 #, c-format
 msgid "and enter the name (or the IP) of the SMTP server you wish to use"
 msgstr "és adja meg a használni kívánt SMTP-kiszolgáló nevét (vagy IP-címét)"
 
-#: logdrake:437
+#: logdrake:445
 #, c-format
 msgid "\"%s\" neither is a valid email nor is an existing local user!"
 msgstr ""
 "\"%s\": email-címként helytelen, helyi felhasználóként pedig nem létezik."
 
-#: logdrake:442
+#: logdrake:450
 #, c-format
 msgid ""
 "\"%s\" is a local user, but you did not select a local smtp, so you must use "
@@ -2691,17 +2711,17 @@ msgstr ""
 "\"%s\" egy helyi felhasználó, de mivel nem lett kiválasztva helyi SMTP, "
 "ezért teljes email-címet kell használni."
 
-#: logdrake:449
+#: logdrake:457
 #, c-format
 msgid "The wizard successfully configured the mail alert."
 msgstr "A varázsló beállította az email-figyelmeztetést."
 
-#: logdrake:455
+#: logdrake:463
 #, c-format
 msgid "The wizard successfully disabled the mail alert."
 msgstr "A varázsló kikapcsolta az email-figyelmeztetést."
 
-#: logdrake:514
+#: logdrake:522
 #, c-format
 msgid "Save as.."
 msgstr "Mentés másként..."
@@ -3226,27 +3246,27 @@ msgstr ""
 msgid "Your scanner(s) will not be available on the network."
 msgstr "A lapolvasó(k) nem lesz(nek) elérhető(k) a hálózaton."
 
-#: service_harddrake:137
+#: service_harddrake:131
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "A(z) \"%s\" hardverosztály bizonyos eszközei el lettek távolítva:\n"
 
-#: service_harddrake:138
+#: service_harddrake:132
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- %s el lett távolítva\n"
 
-#: service_harddrake:141
+#: service_harddrake:135
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "Új eszközök kerültek a rendszerbe: %s\n"
 
-#: service_harddrake:142
+#: service_harddrake:136
 #, c-format
 msgid "- %s was added\n"
 msgstr "- %s bekerült a rendszerbe\n"
 
-#: service_harddrake:265
+#: service_harddrake:259
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "Hardverfelderítés folyamatban"
