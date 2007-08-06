@@ -21,26 +21,26 @@ use fs;
 
 %suggestions = (
   N_("simple") => [
-    { mntpoint => "/",     size => 300 << 11, fs_type => 'ext3', ratio => 5, maxsize => 8000 << 11 },
-    { mntpoint => "swap",  size =>  64 << 11, fs_type => 'swap', ratio => 1, maxsize => 4000 << 11 },
-    { mntpoint => "/home", size => 300 << 11, fs_type => 'ext3', ratio => 3 },
+    { mntpoint => "/",     size => MB(300), fs_type => 'ext3', ratio => 5, maxsize => MB(8000) },
+    { mntpoint => "swap",  size =>  MB(64), fs_type => 'swap', ratio => 1, maxsize => MB(4000) },
+    { mntpoint => "/home", size => MB(300), fs_type => 'ext3', ratio => 3 },
   ], N_("with /usr") => [
-    { mntpoint => "/",     size => 250 << 11, fs_type => 'ext3', ratio => 1, maxsize => 4000 << 11 },
-    { mntpoint => "swap",  size =>  64 << 11, fs_type => 'swap', ratio => 1, maxsize => 4000 << 11 },
-    { mntpoint => "/usr",  size => 300 << 11, fs_type => 'ext3', ratio => 4, maxsize => 8000 << 11 },
-    { mntpoint => "/home", size => 100 << 11, fs_type => 'ext3', ratio => 3 },
+    { mntpoint => "/",     size => MB(250), fs_type => 'ext3', ratio => 1, maxsize => MB(4000) },
+    { mntpoint => "swap",  size =>  MB(64), fs_type => 'swap', ratio => 1, maxsize => MB(4000) },
+    { mntpoint => "/usr",  size => MB(300), fs_type => 'ext3', ratio => 4, maxsize => MB(8000) },
+    { mntpoint => "/home", size => MB(100), fs_type => 'ext3', ratio => 3 },
   ], N_("server") => [
-    { mntpoint => "/",     size => 150 << 11, fs_type => 'ext3', ratio => 1, maxsize => 4000 << 11 },
-    { mntpoint => "swap",  size =>  64 << 11, fs_type => 'swap', ratio => 2, maxsize => 4000 << 11 },
-    { mntpoint => "/usr",  size => 300 << 11, fs_type => 'ext3', ratio => 4, maxsize => 8000 << 11 },
-    { mntpoint => "/var",  size => 200 << 11, fs_type => 'ext3', ratio => 3 },
-    { mntpoint => "/home", size => 150 << 11, fs_type => 'ext3', ratio => 3 },
-    { mntpoint => "/tmp",  size => 150 << 11, fs_type => 'ext3', ratio => 2, maxsize => 4000 << 11 },
+    { mntpoint => "/",     size => MB(150), fs_type => 'ext3', ratio => 1, maxsize => MB(4000) },
+    { mntpoint => "swap",  size =>  MB(64), fs_type => 'swap', ratio => 2, maxsize => MB(4000) },
+    { mntpoint => "/usr",  size => MB(300), fs_type => 'ext3', ratio => 4, maxsize => MB(8000) },
+    { mntpoint => "/var",  size => MB(200), fs_type => 'ext3', ratio => 3 },
+    { mntpoint => "/home", size => MB(150), fs_type => 'ext3', ratio => 3 },
+    { mntpoint => "/tmp",  size => MB(150), fs_type => 'ext3', ratio => 2, maxsize => MB(4000) },
   ],
 );
 foreach (values %suggestions) {
     if (arch() =~ /ia64/) {
-	@$_ = ({ mntpoint => "/boot/efi", size => 50 << 11, pt_type => 0xef, ratio => 1, maxsize => 150 << 11 }, @$_);
+	@$_ = ({ mntpoint => "/boot/efi", size => MB(50), pt_type => 0xef, ratio => 1, maxsize => MB(150) }, @$_);
     }
 }
 
@@ -296,7 +296,7 @@ sub is_one_big_fat_or_NT {
     @$hds == 1 or return 0;
 
     my @l = fs::get::hds_fstab(@$hds);
-    @l == 1 && isFat_or_NTFS($l[0]) && fs::get::hds_free_space(@$hds) < 10 << 11;
+    @l == 1 && isFat_or_NTFS($l[0]) && fs::get::hds_free_space(@$hds) < MB(10);
 }
 
 

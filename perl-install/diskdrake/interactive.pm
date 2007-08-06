@@ -485,7 +485,7 @@ sub Create {
     #- one.
     my ($primaryOrExtended, $migrate_files);
     my $type_name = fs::type::part2type_name($part);
-    my $mb_size = $part->{size} >> 11;
+    my $mb_size = to_Mb($part->{size});
     my $has_startsector = ($::expert || arch() !~ /i.86/) && !isLVM($hd);
 
     $in->ask_from(N("Create a new partition"), '',
@@ -493,10 +493,10 @@ sub Create {
          { label => N("Create a new partition"), title => 1 },
            if_($has_startsector,
          { label => N("Start sector: "), val => \$part->{start}, min => $def_start, max => ($max - min_partition_size($hd)), 
-	   type => 'range', SpinButton => $::expert, changed => sub { $mb_size = min($mb_size, ($max - $part->{start}) >> 11) } },
+	   type => 'range', SpinButton => $::expert, changed => sub { $mb_size = min($mb_size, to_Mb($max - $part->{start})) } },
            ),
-         { label => N("Size in MB: "), val => \$mb_size, min => min_partition_size($hd) >> 11, max => $def_size >> 11, 
-	   type => 'range', SpinButton => $::expert, changed => sub { $part->{start} = min($part->{start}, $max - ($mb_size << 11)) } },
+         { label => N("Size in MB: "), val => \$mb_size, min => to_Mb(min_partition_size($hd)), max => to_Mb($def_size), 
+	   type => 'range', SpinButton => $::expert, changed => sub { $part->{start} = min($part->{start}, $max - $mb_size * 2048) } },
          { label => N("Filesystem type: "), val => \$type_name, list => [ fs::type::type_names($::expert) ], 
 	   sort => 0, if_($::expert, gtk => { wrap_width => 4 }) },
          { label => N("Mount point: "), val => \$part->{mntpoint}, list => [ fsedit::suggestions_mntpoint($all_hds), '' ],
@@ -751,8 +751,8 @@ sub Resize {
 	}
     }
 
-    my $mb_size = $part->{size} >> 11;
-    my ($gmin, $gmax) = ($min >> 11, $max >> 11);
+    my $mb_size = to_Mb($part->{size});
+    my ($gmin, $gmax) = (to_Mb($min), to_Mb($max));
     $in->ask_from(N("Resize"), '', [ 
 		   { label => N("Choose the new size"), title => 1 },
 		   { label => N("New size in MB: "), val => \$mb_size, min => $gmin, max => $gmax, type => 'range', SpinButton => $::expert },
@@ -923,10 +923,10 @@ sub Loopback {
     delete $part->{mntpoint}; # we do not want the suggested mntpoint
 
     my $type_name = fs::type::part2type_name($part);
-    my $mb_size = $part->{size} >> 11;
+    my $mb_size = to_Mb($part->{size});
     $in->ask_from(N("Loopback"), '', [
 		  { label => N("Loopback file name: "), val => \$part->{loopback_file} },
-		  { label => N("Size in MB: "), val => \$mb_size, min => $min >> 11, max => $max >> 11, type => 'range', SpinButton => $::expert },
+		  { label => N("Size in MB: "), val => \$mb_size, min => to_Mb($min), max => to_Mb($max), type => 'range', SpinButton => $::expert },
 		  { label => N("Filesystem type: "), val => \$type_name, list => [ fs::type::type_names($::expert) ], not_edit => !$::expert, sort => 0 },
              ],
 	     complete => sub {
@@ -1212,9 +1212,14 @@ sub warn_if_renumbered {
 #- modified to take into account a true bounding with min and max.
 sub from_Mb {
     my ($mb, $min, $max) = @_;
-    $mb <= $min >> 11 and return $min;
-    $mb >= $max >> 11 and return $max;
+    $mb <= to_Mb($min) and return $min;
+    $mb >= to_Mb($max) and return $max;
     $mb * 2048;
+}
+
+sub to_Mb {
+    my ($size_sector) = @_;
+    to_int($size_sector / 2048);
 }
 
 sub format_part_info {

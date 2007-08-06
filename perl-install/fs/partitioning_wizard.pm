@@ -18,9 +18,13 @@ use partition_table::raw;
 #- modified to take into account a true bounding with min and max.
 sub from_Mb {
     my ($mb, $min, $max) = @_;
-    $mb <= $min >> 11 and return $min;
-    $mb >= $max >> 11 and return $max;
-    $mb * 2048;
+    $mb <= to_Mb($min) and return $min;
+    $mb >= to_Mb($max) and return $max;
+    MB($mb);
+}
+sub to_Mb {
+    my ($size_sector) = @_;
+    to_int($size_sector / 2048);
 }
 
 sub partition_with_diskdrake {
@@ -66,11 +70,11 @@ sub partitionWizardSolutions {
     my @wizlog;
     my (%solutions);
 
-    my $min_linux = 400 << 11;
-    my $max_linux = 2000 << 11;
-    my $min_swap = 50 << 11;
-    my $max_swap = 300 << 11;
-    my $min_freewin = 100 << 11;
+    my $min_linux = MB(400);
+    my $max_linux = MB(2000);
+    my $min_swap = MB(50);
+    my $max_swap = MB(300);
+    my $min_freewin = MB(100);
 
     # each solution is a [ score, text, function ], where the function retunrs true if succeeded
 
@@ -102,12 +106,12 @@ sub partitionWizardSolutions {
 		my $part = $in->ask_from_listf('', N("Which partition do you want to use for Linux4Win?"), \&partition_table::description, \@ok_forloopback) or return;
 		$max_swap = $min_swap + 1 if $part->{free} - $max_swap < $min_linux;
 		$in->ask_from('', N("Choose the sizes"), [ 
-		   { label => N("Root partition size in MB: "), val => \$s_root, min => $min_linux >> 11, max => min($part->{free} - $max_swap, $max_linux) >> 11, type => 'range' },
-		   { label => N("Swap partition size in MB: "), val => \$s_swap, min => $min_swap >> 11,  max => $max_swap >> 11, type => 'range' },
+		   { label => N("Root partition size in MB: "), val => \$s_root, min => to_Mb($min_linux), max => to_Mb(min($part->{free} - $max_swap, $max_linux)), type => 'range' },
+		   { label => N("Swap partition size in MB: "), val => \$s_swap, min => to_Mb($min_swap),  max => to_Mb($max_swap), type => 'range' },
 		]) or return;
 		push @{$part->{loopback}}, 
-		  { fs_type => 'ext3', loopback_file => '/lnx4win/linuxsys.img', mntpoint => '/',    size => $s_root << 11, loopback_device => $part, notFormatted => 1 },
-		  { fs_type => 'swap', loopback_file => '/lnx4win/swapfile',     mntpoint => 'swap', size => $s_swap << 11, loopback_device => $part, notFormatted => 1 };
+		  { fs_type => 'ext3', loopback_file => '/lnx4win/linuxsys.img', mntpoint => '/',    size => $s_root * 2048, loopback_device => $part, notFormatted => 1 },
+		  { fs_type => 'swap', loopback_file => '/lnx4win/swapfile',     mntpoint => 'swap', size => $s_swap * 2048, loopback_device => $part, notFormatted => 1 };
 		fsedit::recompute_loopbacks($all_hds);
 		1;
 	    } ];
@@ -159,9 +163,9 @@ Be careful: this operation is dangerous. If you have not already done so, you fi
 
 When sure, press %s.", N("Next")))) or return;
 
-		my $mb_size = $part->{size} >> 11;
+		my $mb_size = to_Mb($part->{size});
 		$in->ask_from('', N("Which size do you want to keep for Microsoft Windows® on partition %s?", partition_table::description($part)), [
-                   { label => N("Size"), val => \$mb_size, min => $min_win >> 11, max => ($part->{size} - $min_linux - $min_swap) >> 11, type => 'range' },
+                   { label => N("Size"), val => \$mb_size, min => to_Mb($min_win), max => to_Mb($part->{size} - $min_linux - $min_swap), type => 'range' },
                 ]) or return;
 
 		my $oldsize = $part->{size};

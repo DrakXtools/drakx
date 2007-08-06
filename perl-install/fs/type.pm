@@ -364,8 +364,8 @@ sub set_isFormatted {
 #- do this before modifying $part->{fs_type}
 sub check {
     my ($fs_type, $_hd, $part) = @_;
-    $fs_type eq "jfs" && $part->{size} < 16 << 11 and die N("You can not use JFS for partitions smaller than 16MB");
-    $fs_type eq "reiserfs" && $part->{size} < 32 << 11 and die N("You can not use ReiserFS for partitions smaller than 32MB");
+    $fs_type eq "jfs" && $part->{size} < MB(16) and die N("You can not use JFS for partitions smaller than 16MB");
+    $fs_type eq "reiserfs" && $part->{size} < MB(32) and die N("You can not use ReiserFS for partitions smaller than 32MB");
 }
 
 sub guessed_by_mount() {

@@ -132,7 +132,7 @@ sub getAvailableSpace_raw {
     if ($::testing) {
 	my $nb = 450;
 	log::l("taking ${nb}MB for testing");
-	return $nb << 11;
+	return MB($nb);
     }
     die "missing root partition";
 }

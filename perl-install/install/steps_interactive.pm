@@ -212,7 +212,7 @@ sub doPartitionDisks {
 		    log::l("creating bootstrap partition on drive /dev/$freepart->{hd}{device}, block $freepart->{start}");
 		    $partition_table::mac::bootstrap_part = $freepart->{part};
 		    log::l("bootstrap now at $partition_table::mac::bootstrap_part");
-		    my $p = { start => $freepart->{start}, size => 1 << 11, mntpoint => '' };
+		    my $p = { start => $freepart->{start}, size => MB(1), mntpoint => '' };
 		    fs::type::set_pt_type($p, 0x401);
 		    fsedit::add($freepart->{hd}, $p, $o->{all_hds}, { force => 1, primaryOrExtended => 'Primary' });
 		    $partition_table::mac::new_bootstrap = 1;

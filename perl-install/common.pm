@@ -10,7 +10,7 @@ use run_program;
 
 use Exporter;
 our @ISA = qw(Exporter);
-our @EXPORT = qw($SECTORSIZE N P N_ check_for_xserver files_exist formatTime formatXiB makedev mandrake_release mandrake_release_info removeXiBSuffix require_root_capability setVirtual set_alternative set_l10n_sort set_permissions translate unmakedev);
+our @EXPORT = qw($SECTORSIZE N P N_ check_for_xserver files_exist formatTime MB formatXiB makedev mandrake_release mandrake_release_info removeXiBSuffix require_root_capability setVirtual set_alternative set_l10n_sort set_permissions translate unmakedev);
 
 # perl_checker: RE-EXPORT-ALL
 push @EXPORT, @MDK::Common::EXPORT;
@@ -109,6 +109,13 @@ sub setVirtual {
 sub nonblock {
     my ($F) = @_;
     fcntl($F, c::F_SETFL(), fcntl($F, c::F_GETFL(), 0) | c::O_NONBLOCK()) or die "can not fcntl F_SETFL: $!";
+}
+
+#- return a size in sector
+#- ie MB(1) is 2048 sectors, which is 1MB
+sub MB {
+    my ($nb_MB) = @_;
+    $nb_MB * 2048;
 }
 
 sub removeXiBSuffix {
