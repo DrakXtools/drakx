@@ -118,8 +118,8 @@ sub part_raw {
 
     my @args = ($cmd, @first_options, @options, devices::make($dev));
 
-    if ($cmd eq 'mkfs.ext2' && $wait_message) {
-	mkfs_ext2($wait_message, @args) or die N("%s formatting of %s failed", $fs_type, $dev);
+    if ($cmd eq 'mkfs.ext3' && $wait_message) {
+	mkfs_ext3($wait_message, @args) or die N("%s formatting of %s failed", $fs_type, $dev);
     } else {
 	run_program::raw({ timeout => 'never' }, @args) or die N("%s formatting of %s failed", $fs_type, $dev);
     }
@@ -131,7 +131,7 @@ sub part_raw {
     set_isFormatted($part, 1);
 }
 
-sub mkfs_ext2 {
+sub mkfs_ext3 {
     my ($wait_message, @args) = @_;
 
     my $cmd = shell_quote_best_effort(@args);
