@@ -53,13 +53,6 @@ if_(arch() =~ /ppc/,
   0x85 => '',         'Linux extended',
 	],
 
-        backward_compatibility => [
-  0x183 => 'reiserfs', 'reiserfs (deprecated)',
-  0x283 => 'xfs',      'xfs (deprecated)',
-  0x383 => 'jfs',      'jfs (deprecated)',
-  0x483 => 'ext3',     'ext3 (deprecated)',
-	],
-
 	other => [
  if_(arch() =~ /^ia64/,
   0x100 => '',         'Various',
