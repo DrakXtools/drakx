@@ -25,11 +25,14 @@ at was run, and runs batch commands when the load average is low enough."),
 crond => N_("cron is a standard UNIX program that runs user-specified programs
 at periodic scheduled times. vixie cron adds a number of features to the basic
 UNIX cron, including better security and more powerful configuration options."),
+cups => N_("Common UNIX Printing System (CUPS) is an advanced printer spooling system"),
+dm => N_("Launches the graphical display manager"),
 fam => N_("FAM is a file monitoring daemon. It is used to get reports when files change.
 It is used by GNOME and KDE"),
 gpm => N_("GPM adds mouse support to text-based Linux applications such the
 Midnight Commander. It also allows mouse-based console cut-and-paste operations,
 and includes support for pop-up menus on the console."),
+haldaemon => N_("HAL is a daemon that collects and maintains information about hardware"),
 harddrake => N_("HardDrake runs a hardware probe, and optionally configures
 new/changed hardware."),
 httpd => N_("Apache is a World Wide Web server. It is used to serve HTML files and CGI."),
@@ -51,6 +54,7 @@ lpd => N_("lpd is the print daemon required for lpr to work properly. It is
 basically a server that arbitrates print jobs to printer(s)."),
 lvs => N_("Linux Virtual Server, used to build a high-performance and highly
 available server."),
+messagebus => N_("DBUS is a daemon which broadcasts notifications of system events and other messages"),
 named => N_("named (BIND) is a Domain Name Server (DNS) that is used to resolve host names to IP addresses."),
 netfs => N_("Mounts and unmounts all Network File System (NFS), SMB (Lan
 Manager/Windows), and NCP (NetWare) mount points."),
@@ -61,6 +65,7 @@ This service provides NFS server functionality, which is configured via the
 /etc/exports file."),
 nfslock => N_("NFS is a popular protocol for file sharing across TCP/IP
 networks. This service provides NFS file locking functionality."),
+ntpd => N_("Synchronizes system time using the Network Time Protocol (NTP)"),
 numlock => N_("Automatically switch on numlock key locker under console
 and Xorg at boot."),
 oki4daemon => N_("Support the OKI 4w and compatible winprinters."),
@@ -84,11 +89,15 @@ rusersd => N_("The rusers protocol allows users on a network to identify who is
 logged in on other responding machines."),
 rwhod => N_("The rwho protocol lets remote users get a list of all of the users
 logged into a machine running the rwho daemon (similar to finger)."),
+saned => N_("SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."),
+smb => N_("The SMB/CIFS protocol enables to shar access to files & printers and also integrates with a Windows Server domain"),
 sound => N_("Launch the sound system on your machine"),
+sshd => N_("Secure Shell is a network protocol that allows data to be exchanged over a secure channel between two computers"),
 syslog => N_("Syslog is the facility by which many daemons use to log messages
 to various system log files.  It is a good idea to always run syslog."),
 usb => N_("Load the drivers for your usb devices."),
 xfs => N_("Starts the X Font Server (this is mandatory for Xorg to run)."),
+xinetd => N_("Starts other deamons on demand.."),
     );
     my ($name) = @_;
     my $s = $services{$name};
