@@ -189,16 +189,21 @@ our @drakx_modules = qw(Xconfig::card Xconfig::default Xconfig::main Xconfig::mo
 
 sub bug_handler {
     my ($error) = @_;
+
     # exceptions in eval are OK:
     return if $error && $^S;
+
     # exceptions with "\n" are normal ways to quit:
     if ($error eq MDK::Common::String::formatError($error)) {
         warn $error;
         exit(255);
     }
+
     # we want the full backtrace:
     $error .= common::backtrace() if $error;
+
     my $progname = $0;
+
     # do not loop if drakbug crashes and do not complain about wizcancel:
     if ($progname =~ /drakbug/ || $error =~ /wizcancel/) {
     	warn $error;
@@ -207,6 +212,7 @@ sub bug_handler {
     $progname =~ s|.*/||;
     exec('drakbug',  if_($error, '--error', $error), '--incident', $progname,);
 }
+
 $SIG{SEGV} = \&bug_handler;
 $SIG{__DIE__} = \&bug_handler;
 
