@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-nl\n"
 "POT-Creation-Date: 2007-08-06 12:28+0200\n"
-"PO-Revision-Date: 2007-03-13 00:45+0200\n"
+"PO-Revision-Date: 2007-08-06 01:36+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@gmail.com>\n"
 "Language-Team:  Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
@@ -776,6 +776,7 @@ msgstr "Bestand op deze computer:"
 #, c-format
 msgid "Use information stored in local files for all authentication"
 msgstr ""
+"Informatie opgeslagen in lokale bestanden gebruiken voor aanmeldingscontrole"
 
 #: authentication.pm:67
 #, c-format
@@ -2042,9 +2043,9 @@ msgstr ""
 "multi-opstarten van uw systeem.\n"
 
 #: diskdrake/interactive.pm:1280
-#, fuzzy, c-format
+#, c-format
 msgid "Free space on %s (%s)"
-msgstr "Lege ruimte op %s (%s)"
+msgstr "Vrije ruimte op %s (%s)"
 
 #: diskdrake/interactive.pm:1289
 #, c-format
@@ -2278,7 +2279,7 @@ msgstr "Gebruik een versleuteld bestandssysteem"
 #: fs/mount_options.pm:113
 #, c-format
 msgid "Flush write cache on file close"
-msgstr ""
+msgstr "Schrijfbuffer legen bij sluiten bestand"
 
 #: fs/mount_options.pm:115
 #, c-format
@@ -2295,12 +2296,12 @@ msgstr ""
 "(bijv. voor snellere toegang op de newsspool om newsservers te versnellen)."
 
 #: fs/mount_options.pm:120
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Do not update directory inode access times on this filesystem\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
-"inode-toegangstijden op dit bestandssysteem niet verversen\n"
+"De directory-inode-toegangstijden op dit bestandssysteem niet bijwerken\n"
 "(bijv. voor snellere toegang op de newsspool om newsservers te versnellen)."
 
 #: fs/mount_options.pm:123
@@ -3000,7 +3001,7 @@ msgstr "Muis"
 #: harddrake/data.pm:505
 #, c-format
 msgid "Biometry"
-msgstr ""
+msgstr "Biometrie"
 
 #: harddrake/data.pm:513
 #, c-format
@@ -5238,28 +5239,28 @@ msgstr ""
 "zijn."
 
 #: security/help.pm:11
-#, fuzzy, c-format
+#, c-format
 msgid "Accept bogus IPv4 error messages."
-msgstr "IPv4-onzinfoutmeldingen accepteren"
+msgstr "IPv4-onzinfoutmeldingen accepteren."
 
 #: security/help.pm:13
-#, fuzzy, c-format
+#, c-format
 msgid "Accept broadcasted icmp echo."
-msgstr "Uitgezonden icmp-echo accepteren"
+msgstr "Uitgezonden icmp-echo accepteren."
 
 #: security/help.pm:15
-#, fuzzy, c-format
+#, c-format
 msgid "Accept icmp echo."
-msgstr "icmp-echo accepteren"
+msgstr "icmp-echo accepteren."
 
 #: security/help.pm:17
-#, fuzzy, c-format
+#, c-format
 msgid "Allow autologin."
-msgstr "Automatisch aanmelden toestaan/verbieden."
+msgstr "Automatisch aanmelden toestaan."
 
 #. -PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
 #: security/help.pm:21
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
 "\n"
@@ -5267,49 +5268,50 @@ msgid ""
 "\n"
 "Else only /etc/issue is allowed."
 msgstr ""
-"Als ingesteld op = \"ALL\", het bestaan van /etc/issue en /etc/issue.net\n"
-"toestaan. Als ingesteld op \"NONE\" dan zijn geen 'issues' toegestaan.\n"
+"Als ingesteld op \"All\", dan mogen /etc/issue en /etc/issue.net bestaan.\n"
+"\n"
+"Als ingesteld op \"None\" dan zijn geen 'issues' toegestaan.\n"
 "\n"
 "Anders is alleen /etc/issue toegestaan."
 
 #: security/help.pm:27
-#, fuzzy, c-format
+#, c-format
 msgid "Allow reboot by the console user."
-msgstr "Herstarten door de console-gebruiker toestaan/verbieden"
+msgstr "Herstarten door de console-gebruiker toestaan."
 
 #: security/help.pm:29
-#, fuzzy, c-format
+#, c-format
 msgid "Allow remote root login."
-msgstr "Op afstand aanmelden van root toestaan"
+msgstr "Op afstand aanmelden van root toestaan."
 
 #: security/help.pm:31
-#, fuzzy, c-format
+#, c-format
 msgid "Allow direct root login."
-msgstr "Directe aanmelding van root toestaan/verbieden."
+msgstr "Directe aanmelding van root toestaan."
 
 #: security/help.pm:33
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr ""
-"De systeemgebruikerslijst toestaan/verbieden op displaybeheer (kdm en gdm)."
+"Een lijst van gebruikers op het systeem toestaan op displaybeheer (kdm en gdm)."
 
 #: security/help.pm:35
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow to export display when\n"
 "passing from the root account to the other users.\n"
 "\n"
 "See pam_xauth(8) for more details.'"
 msgstr ""
-"Export van de display toestaan/verbieden\n"
-"wanneer vanaf het root account overgegaan wordt\n"
+"Export van de display toestaan\n"
+"wanneer vanaf het root-account overgegaan wordt\n"
 "naar andere gebruikers.\n"
 "\n"
-"Zie de man-pagina van pam_xauth(8) voor meer details.'"
+"Zie de man-pagina van pam_xauth(8) voor meer details."
 
 #: security/help.pm:40
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow X connections:\n"
 "\n"
@@ -5319,13 +5321,13 @@ msgid ""
 "\n"
 "- \"None\" (no connection)."
 msgstr ""
-"X-verbindingen toestaan/verbieden:\n"
+"X-verbindingen toestaan:\n"
 "\n"
-"- ALL (alle verbindingen toegestaan),\n"
+"- \"Alle\" (alle verbindingen toegestaan),\n"
 "\n"
-"- LOCAL (alleen lokale verbinding toestaan),\n"
+"- \"Local\" (alleen verbinding vanaf lokale machine toestaan),\n"
 "\n"
-"- NONE (geen.verbinding)."
+"- \"None\" (geen verbinding)."
 
 #: security/help.pm:48
 #, c-format
@@ -5338,7 +5340,7 @@ msgstr ""
 
 #. -PO: here "ALL", "Local" and "None" are values in a pull-down menu; translate them the same as they're
 #: security/help.pm:53
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Authorize:\n"
 "\n"
@@ -5357,9 +5359,9 @@ msgstr ""
 "- Alle diensten gecontroleerd door tcp_wrappers (zie de man-pagina\n"
 "van hosts.deny(5)) als ingesteld op \"ALL\",\n"
 "\n"
-"- alleen lokale diensten als ingesteld op \"LOCAL\"\n"
+"- alleen lokale diensten als ingesteld op \"Local\"\n"
 "\n"
-"- geen als ingesteld op \"NONE\".\n"
+"- geen als ingesteld op \"None\".\n"
 "\n"
 "Om de diensten die u nodig heeft goed te keuren, gebruikt u\n"
 "/etc/hosts.allow (zie de man-pagina van hosts.allow(5))."
@@ -5385,30 +5387,30 @@ msgstr ""
 "de installatie van pakketten."
 
 #: security/help.pm:72
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable crontab and at for users.\n"
 "\n"
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
 msgstr ""
-"crontab en at in-/uitschakelen voor gebruikers.\n"
+"crontab en at inschakelen voor gebruikers.\n"
 "\n"
 "Zet toegestane gebruikers in /etc/cron.allow en /etc/at.allow\n"
-"(zie man at(1) en crontab(1))."
+"(zie de man-pagina van at(1) en crontab(1))."
 
 #: security/help.pm:77
-#, fuzzy, c-format
+#, c-format
 msgid "Enable syslog reports to console 12"
-msgstr "Systeemlogboekrapportage naar console 12 in-/uitschakelen"
+msgstr "Systeemlogboekrapportage naar console 12 inschakelen"
 
 #: security/help.pm:79
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable name resolution spoofing protection.  If\n"
 "\"%s\" is true, also reports to syslog."
 msgstr ""
-"Bescherming tegen naamopzoek-misleiding in-/uitschakelenAls \"%s\" waar is, "
+"Bescherming tegen naamopzoek-misleiding inschakelen. Als \"%s\" waar is, "
 "ook naar syslogboek rapporteren."
 
 #: security/help.pm:80
@@ -5417,24 +5419,24 @@ msgid "Security Alerts:"
 msgstr "Beveiligingswaarschuwingen:"
 
 #: security/help.pm:82
-#, fuzzy, c-format
+#, c-format
 msgid "Enable IP spoofing protection."
 msgstr "Bescherming tegen nep-IP's"
 
 #: security/help.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Enable libsafe if libsafe is found on the system."
 msgstr "libsafe inschakelen als libsafe op het systeem is gevonden."
 
 #: security/help.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Enable the logging of IPv4 strange packets."
 msgstr "In logboek bijhouden van vreemde IPv4-pakketten"
 
 #: security/help.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid "Enable msec hourly security check."
-msgstr "Om het uur-msec beveilingscontrole in-/uitschakelen"
+msgstr "Om het uur-msec beveilingscontrole inschakelen."
 
 #: security/help.pm:90
 #, c-format
@@ -5451,19 +5453,19 @@ msgid "Use password to authenticate users."
 msgstr "Wachtwoord gebruiken voor aanmeldcontrole van gebruikers."
 
 #: security/help.pm:94
-#, fuzzy, c-format
+#, c-format
 msgid "Activate ethernet cards promiscuity check."
-msgstr "Controle op ethernetkaart-afluistermodus in-/uitschakelen."
+msgstr "Controle op ethernetkaart-afluistermodus inschakelen."
 
 #: security/help.pm:96
-#, fuzzy, c-format
+#, c-format
 msgid "Activate daily security check."
-msgstr "Dagelijkse beveiligingscontrole (de-)activeren."
+msgstr "Dagelijkse beveiligingscontrole activeren."
 
 #: security/help.pm:98
-#, fuzzy, c-format
+#, c-format
 msgid "Enable sulogin(8) in single user level."
-msgstr "sulogin(8) in-/uitschakelen op \"single user\"-niveau."
+msgstr "sulogin(8) inschakelen op \"single user\"-niveau."
 
 #: security/help.pm:100
 #, c-format
@@ -5496,9 +5498,9 @@ msgstr ""
 "hoofdletters."
 
 #: security/help.pm:108
-#, fuzzy, c-format
+#, c-format
 msgid "Set the root's file mode creation mask."
-msgstr "Het root-umask instellen."
+msgstr "Instellen van standaardrechten bestanden aanmaken voor root."
 
 #: security/help.pm:109
 #, c-format
@@ -5632,9 +5634,9 @@ msgid "Timeout unit is second"
 msgstr "Timeout-eenheid is seconde"
 
 #: security/help.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Set the user's file mode creation mask."
-msgstr "Het gebruikers-umask instellen."
+msgstr "Instellen van standaardrechten bestanden aanmaken voor gebruikers."
 
 #: security/l10n.pm:11
 #, c-format
@@ -6078,11 +6080,12 @@ msgstr ""
 msgid ""
 "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr ""
+"Common UNIX Printing System (CUPS) is een geavanceerd printerwachtrijsysteem"
 
 #: services.pm:29
 #, c-format
 msgid "Launches the graphical display manager"
-msgstr ""
+msgstr "Start het grafische displaybeheer"
 
 #: services.pm:30
 #, c-format
@@ -6111,7 +6114,7 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
+msgstr "HAL is een voorziening die informatie over apparatuur verzamelt en onderhoudt"
 
 #: services.pm:36
 #, c-format
@@ -6216,6 +6219,8 @@ msgid ""
 "DBUS is a daemon which broadcasts notifications of system events and other "
 "messages"
 msgstr ""
+"DBUS is een voorziening die meldingen uitzendt, bijvoorbeeld over "
+"systeemgebeurtenissen "
 
 #: services.pm:58
 #, c-format
@@ -6268,7 +6273,7 @@ msgstr ""
 #: services.pm:68
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
-msgstr ""
+msgstr "Synchroniseert de systeemtijd met behulp van Netwerktijd-protocol (NTP)"
 
 #: services.pm:69
 #, c-format
@@ -6381,6 +6386,7 @@ msgstr ""
 msgid ""
 "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
+"SANE (Scanner Access Now Easy) geeft u toegang tot scanners, videocamera's, …"
 
 #: services.pm:93
 #, c-format
@@ -6388,6 +6394,8 @@ msgid ""
 "The SMB/CIFS protocol enables to shar access to files & printers and also "
 "integrates with a Windows Server domain"
 msgstr ""
+"Het SMB/CIFS-protocol maakt het mogelijk toegang tot bestanden & printers "
+"te delen en integreert met een Windows Server-domein"
 
 #: services.pm:94
 #, c-format
@@ -6400,6 +6408,8 @@ msgid ""
 "Secure Shell is a network protocol that allows data to be exchanged over a "
 "secure channel between two computers"
 msgstr ""
+"Secure Shell is een netwerkprotocol dat u in staat stelt om gegevens uit te "
+"wisselen over een beveiligd kanaal tussen twee computers"
 
 #: services.pm:96
 #, c-format
@@ -6427,7 +6437,7 @@ msgstr ""
 #: services.pm:100
 #, c-format
 msgid "Starts other deamons on demand.."
-msgstr ""
+msgstr "Start andere voorzieningen op aanvraag."
 
 #: services.pm:123
 #, c-format
