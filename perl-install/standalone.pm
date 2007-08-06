@@ -192,7 +192,7 @@ sub bug_handler {
     # exceptions in eval are OK:
     return if $error && $^S;
     # exceptions with "\n" are normal ways to quit:
-    if ($error !~ /at line/) {
+    if ($error eq MDK::Common::String::formatError($error)) {
         warn $error;
         exit(255);
     }
