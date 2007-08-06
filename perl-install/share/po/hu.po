@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
-"POT-Creation-Date: 2007-07-30 20:17+0200\n"
+"POT-Creation-Date: 2007-08-06 12:28+0200\n"
 "PO-Revision-Date: 2007-03-10 13:24+0100\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: \n"
@@ -17,10 +17,10 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: any.pm:240 diskdrake/interactive.pm:422 diskdrake/interactive.pm:621
-#: diskdrake/interactive.pm:808 diskdrake/interactive.pm:852
-#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:1201 do_pkgs.pm:209
-#: do_pkgs.pm:255 harddrake/sound.pm:201 interactive.pm:576
+#: any.pm:240 diskdrake/interactive.pm:603 diskdrake/interactive.pm:790
+#: diskdrake/interactive.pm:834 diskdrake/interactive.pm:896
+#: diskdrake/interactive.pm:1183 do_pkgs.pm:209 do_pkgs.pm:255
+#: harddrake/sound.pm:201 interactive.pm:576
 #, c-format
 msgid "Please wait"
 msgstr "Kis türelmet..."
@@ -176,7 +176,7 @@ msgstr "Jelszó"
 msgid "The passwords do not match"
 msgstr "A jelszavak nem egyeznek"
 
-#: any.pm:395 authentication.pm:207 diskdrake/interactive.pm:1361
+#: any.pm:395 authentication.pm:207 diskdrake/interactive.pm:1343
 #, c-format
 msgid "Please try again"
 msgstr "Próbálja meg újra"
@@ -289,7 +289,7 @@ msgstr "Indítási RAM-diszk"
 msgid "Network profile"
 msgstr "Hálózati profil"
 
-#: any.pm:506 any.pm:511 any.pm:513 diskdrake/interactive.pm:443
+#: any.pm:506 any.pm:511 any.pm:513 diskdrake/interactive.pm:425
 #, c-format
 msgid "Label"
 msgstr "Címke"
@@ -1150,38 +1150,38 @@ msgstr ""
 msgid "New"
 msgstr "Új"
 
-#: diskdrake/dav.pm:61 diskdrake/interactive.pm:449 diskdrake/smbnfs_gtk.pm:75
+#: diskdrake/dav.pm:61 diskdrake/interactive.pm:431 diskdrake/smbnfs_gtk.pm:75
 #, c-format
 msgid "Unmount"
 msgstr "Leválasztás"
 
-#: diskdrake/dav.pm:62 diskdrake/interactive.pm:446 diskdrake/smbnfs_gtk.pm:76
+#: diskdrake/dav.pm:62 diskdrake/interactive.pm:428 diskdrake/smbnfs_gtk.pm:76
 #, c-format
 msgid "Mount"
 msgstr "Csatolás"
 
-#: diskdrake/dav.pm:64 diskdrake/interactive.pm:440
-#: diskdrake/interactive.pm:680 diskdrake/interactive.pm:698
-#: diskdrake/interactive.pm:702 diskdrake/removable.pm:23
+#: diskdrake/dav.pm:64 diskdrake/interactive.pm:422
+#: diskdrake/interactive.pm:662 diskdrake/interactive.pm:680
+#: diskdrake/interactive.pm:684 diskdrake/removable.pm:23
 #: diskdrake/smbnfs_gtk.pm:79
 #, c-format
 msgid "Mount point"
 msgstr "Csatolási pont"
 
-#: diskdrake/dav.pm:65 diskdrake/interactive.pm:442
-#: diskdrake/interactive.pm:1057 diskdrake/removable.pm:24
+#: diskdrake/dav.pm:65 diskdrake/interactive.pm:424
+#: diskdrake/interactive.pm:1039 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
 msgstr "Beállítások"
 
 #: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:115 diskdrake/interactive.pm:229
-#: diskdrake/interactive.pm:242 diskdrake/interactive.pm:398
-#: diskdrake/interactive.pm:416 diskdrake/interactive.pm:547
-#: diskdrake/interactive.pm:552 diskdrake/interactive.pm:670
-#: diskdrake/interactive.pm:932 diskdrake/interactive.pm:1102
-#: diskdrake/interactive.pm:1115 diskdrake/interactive.pm:1118
-#: diskdrake/interactive.pm:1361 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
+#: diskdrake/interactive.pm:242 diskdrake/interactive.pm:386
+#: diskdrake/interactive.pm:404 diskdrake/interactive.pm:529
+#: diskdrake/interactive.pm:534 diskdrake/interactive.pm:652
+#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:1084
+#: diskdrake/interactive.pm:1097 diskdrake/interactive.pm:1100
+#: diskdrake/interactive.pm:1343 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
 #: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:229
 #: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
 #: scanner.pm:94 scanner.pm:105 scanner.pm:112 scanner.pm:119 wizards.pm:95
@@ -1205,13 +1205,13 @@ msgstr "Az URL-nek http:// vagy https:// kezdetűnek kell lenni"
 msgid "Server: "
 msgstr "Kiszolgáló: "
 
-#: diskdrake/dav.pm:110 diskdrake/interactive.pm:520
-#: diskdrake/interactive.pm:1243 diskdrake/interactive.pm:1321
+#: diskdrake/dav.pm:110 diskdrake/interactive.pm:502
+#: diskdrake/interactive.pm:1225 diskdrake/interactive.pm:1303
 #, c-format
 msgid "Mount point: "
 msgstr "Csatolási pont: "
 
-#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1328
+#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1310
 #, c-format
 msgid "Options: %s"
 msgstr "Beállítások: %s"
@@ -1225,8 +1225,8 @@ msgstr "Beállítások: %s"
 msgid "Partitioning"
 msgstr "Partícionálás"
 
-#: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1077
-#: diskdrake/interactive.pm:1087 diskdrake/interactive.pm:1140
+#: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1059
+#: diskdrake/interactive.pm:1069 diskdrake/interactive.pm:1122
 #, c-format
 msgid "Read carefully!"
 msgstr "Olvassa el figyelmesen!"
@@ -1328,12 +1328,12 @@ msgstr "HFS"
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:352 services.pm:149
+#: diskdrake/hd_gtk.pm:352 services.pm:158
 #, c-format
 msgid "Other"
 msgstr "Egyéb"
 
-#: diskdrake/hd_gtk.pm:352 diskdrake/interactive.pm:1257
+#: diskdrake/hd_gtk.pm:352 diskdrake/interactive.pm:1239
 #, c-format
 msgid "Empty"
 msgstr "Üres"
@@ -1344,12 +1344,12 @@ msgid "Filesystem types:"
 msgstr "Fájlrendszer-típusok:"
 
 #: diskdrake/hd_gtk.pm:380 diskdrake/interactive.pm:291
-#: diskdrake/interactive.pm:392 diskdrake/interactive.pm:428
-#: diskdrake/interactive.pm:577 diskdrake/interactive.pm:761
-#: diskdrake/interactive.pm:819 diskdrake/interactive.pm:912
-#: diskdrake/interactive.pm:954 diskdrake/interactive.pm:955
-#: diskdrake/interactive.pm:1186 diskdrake/interactive.pm:1224
-#: diskdrake/interactive.pm:1360 do_pkgs.pm:16 do_pkgs.pm:35 do_pkgs.pm:53
+#: diskdrake/interactive.pm:380 diskdrake/interactive.pm:410
+#: diskdrake/interactive.pm:559 diskdrake/interactive.pm:743
+#: diskdrake/interactive.pm:801 diskdrake/interactive.pm:894
+#: diskdrake/interactive.pm:936 diskdrake/interactive.pm:937
+#: diskdrake/interactive.pm:1168 diskdrake/interactive.pm:1206
+#: diskdrake/interactive.pm:1342 do_pkgs.pm:16 do_pkgs.pm:35 do_pkgs.pm:53
 #: harddrake/sound.pm:285
 #, c-format
 msgid "Warning"
@@ -1370,8 +1370,8 @@ msgstr "Használja először a \"Leválasztás\"-t"
 msgid "Use ``%s'' instead"
 msgstr "Használja inkább ezt: \"%s\""
 
-#: diskdrake/hd_gtk.pm:389 diskdrake/interactive.pm:441
-#: diskdrake/interactive.pm:615 diskdrake/interactive.pm:1093
+#: diskdrake/hd_gtk.pm:389 diskdrake/interactive.pm:423
+#: diskdrake/interactive.pm:597 diskdrake/interactive.pm:1075
 #: diskdrake/removable.pm:25 diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
@@ -1403,7 +1403,7 @@ msgid "Toggle to expert mode"
 msgstr "Átváltás szakértői módba"
 
 #: diskdrake/interactive.pm:269 diskdrake/interactive.pm:279
-#: diskdrake/interactive.pm:1171
+#: diskdrake/interactive.pm:1153
 #, c-format
 msgid "Confirmation"
 msgstr "Megerősítés"
@@ -1455,7 +1455,7 @@ msgstr "Teljes törlés"
 msgid "Auto allocate"
 msgstr "Automatikus helyfoglalás"
 
-#: diskdrake/interactive.pm:306 diskdrake/interactive.pm:360
+#: diskdrake/interactive.pm:306 diskdrake/interactive.pm:354
 #: interactive/curses.pm:512
 #, c-format
 msgid "More"
@@ -1485,52 +1485,27 @@ msgstr ""
 "További partíciók létrehozásához törölni kell egyet (hogy egy kiterjesztett "
 "partíciót létre lehessen hozni)"
 
-#: diskdrake/interactive.pm:354
-#, c-format
-msgid "No supermount"
-msgstr "Ne legyen supermount"
-
-#: diskdrake/interactive.pm:355
-#, c-format
-msgid "Supermount"
-msgstr "Supermount (automatikus csatolás)"
-
 #: diskdrake/interactive.pm:356
-#, c-format
-msgid "Supermount except for CDROM drives"
-msgstr "Supermount, kivéve a CD-meghajtókat"
-
-#: diskdrake/interactive.pm:362
 #, c-format
 msgid "Save partition table"
 msgstr "A partíciós tábla mentése"
 
-#: diskdrake/interactive.pm:363
+#: diskdrake/interactive.pm:357
 #, c-format
 msgid "Restore partition table"
 msgstr "Partíciós tábla visszatöltése"
 
-#: diskdrake/interactive.pm:364
-#, c-format
-msgid "Rescue partition table"
-msgstr "A partíciós tábla helyreállítása"
-
-#: diskdrake/interactive.pm:366
+#: diskdrake/interactive.pm:359
 #, c-format
 msgid "Reload partition table"
 msgstr "A partíciós tábla újraolvasása"
 
-#: diskdrake/interactive.pm:368
-#, c-format
-msgid "Removable media automounting"
-msgstr "Cserélhető adathordozó automatikus csatolása"
-
-#: diskdrake/interactive.pm:381 diskdrake/interactive.pm:407
+#: diskdrake/interactive.pm:369 diskdrake/interactive.pm:395
 #, c-format
 msgid "Select file"
 msgstr "Fájlválasztás"
 
-#: diskdrake/interactive.pm:393
+#: diskdrake/interactive.pm:381
 #, c-format
 msgid ""
 "The backup partition table has not the same size\n"
@@ -1539,97 +1514,92 @@ msgstr ""
 "A partíciós tábla két példányának mérete eltér.\n"
 "Mégis kívánja folytatni a műveletet?"
 
-#: diskdrake/interactive.pm:422
-#, c-format
-msgid "Trying to rescue partition table"
-msgstr "A partíciós tábla helyrehozásának megkísérlése..."
-
-#: diskdrake/interactive.pm:428
+#: diskdrake/interactive.pm:410
 #, c-format
 msgid "Detailed information"
 msgstr "Részletes információ"
 
-#: diskdrake/interactive.pm:444 diskdrake/interactive.pm:774
+#: diskdrake/interactive.pm:426 diskdrake/interactive.pm:756
 #, c-format
 msgid "Resize"
 msgstr "Átméretezés"
 
-#: diskdrake/interactive.pm:445
+#: diskdrake/interactive.pm:427
 #, c-format
 msgid "Format"
 msgstr "Formázás"
 
-#: diskdrake/interactive.pm:447 diskdrake/interactive.pm:860
+#: diskdrake/interactive.pm:429 diskdrake/interactive.pm:842
 #, c-format
 msgid "Add to RAID"
 msgstr "Hozzáadás RAID-hez"
 
-#: diskdrake/interactive.pm:448 diskdrake/interactive.pm:877
+#: diskdrake/interactive.pm:430 diskdrake/interactive.pm:859
 #, c-format
 msgid "Add to LVM"
 msgstr "Hozzáadás LVM-hez"
 
-#: diskdrake/interactive.pm:450
+#: diskdrake/interactive.pm:432
 #, c-format
 msgid "Delete"
 msgstr "Törlés"
 
-#: diskdrake/interactive.pm:451
+#: diskdrake/interactive.pm:433
 #, c-format
 msgid "Remove from RAID"
 msgstr "Eltávolítás RAID-ből"
 
-#: diskdrake/interactive.pm:452
+#: diskdrake/interactive.pm:434
 #, c-format
 msgid "Remove from LVM"
 msgstr "Eltávolítás LVM-ből"
 
-#: diskdrake/interactive.pm:453
+#: diskdrake/interactive.pm:435
 #, c-format
 msgid "Modify RAID"
 msgstr "RAID módosítása"
 
-#: diskdrake/interactive.pm:454
+#: diskdrake/interactive.pm:436
 #, c-format
 msgid "Use for loopback"
 msgstr "Loopback-hez használva"
 
-#: diskdrake/interactive.pm:465
+#: diskdrake/interactive.pm:447
 #, c-format
 msgid "Create"
 msgstr "Létrehozás"
 
-#: diskdrake/interactive.pm:509 diskdrake/interactive.pm:511
+#: diskdrake/interactive.pm:491 diskdrake/interactive.pm:493
 #, c-format
 msgid "Create a new partition"
 msgstr "Új partíció létrehozása"
 
-#: diskdrake/interactive.pm:513
+#: diskdrake/interactive.pm:495
 #, c-format
 msgid "Start sector: "
 msgstr "Kezdőszektor: "
 
-#: diskdrake/interactive.pm:516 diskdrake/interactive.pm:947
+#: diskdrake/interactive.pm:498 diskdrake/interactive.pm:929
 #, c-format
 msgid "Size in MB: "
 msgstr "Méret (MB): "
 
-#: diskdrake/interactive.pm:518 diskdrake/interactive.pm:948
+#: diskdrake/interactive.pm:500 diskdrake/interactive.pm:930
 #, c-format
 msgid "Filesystem type: "
 msgstr "A fájlrendszer típusa: "
 
-#: diskdrake/interactive.pm:524
+#: diskdrake/interactive.pm:506
 #, c-format
 msgid "Preference: "
 msgstr "Beállítások: "
 
-#: diskdrake/interactive.pm:527
+#: diskdrake/interactive.pm:509
 #, c-format
 msgid "Logical volume name "
 msgstr "A logikai kötet neve "
 
-#: diskdrake/interactive.pm:547
+#: diskdrake/interactive.pm:529
 #, c-format
 msgid ""
 "You can not create a new partition\n"
@@ -1641,54 +1611,54 @@ msgstr ""
 "Távolítson el egy elsődleges partíciót és hozzon létre egy kiterjesztett "
 "partíciót."
 
-#: diskdrake/interactive.pm:577
+#: diskdrake/interactive.pm:559
 #, c-format
 msgid "Remove the loopback file?"
 msgstr "El szeretné távolítani a loopback-fájlt?"
 
-#: diskdrake/interactive.pm:599
+#: diskdrake/interactive.pm:581
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "A(z) %s partíció típusának módosítása után a partíción levő adatok elvesznek"
 
-#: diskdrake/interactive.pm:612
+#: diskdrake/interactive.pm:594
 #, c-format
 msgid "Change partition type"
 msgstr "A partíciótípus megváltoztatása"
 
-#: diskdrake/interactive.pm:614 diskdrake/removable.pm:47
+#: diskdrake/interactive.pm:596 diskdrake/removable.pm:47
 #, c-format
 msgid "Which filesystem do you want?"
 msgstr "Melyik fájlrendszert szeretné?"
 
-#: diskdrake/interactive.pm:621
+#: diskdrake/interactive.pm:603
 #, c-format
 msgid "Switching from ext2 to ext3"
 msgstr "Konvertálás Ext2-ről Ext3-ra"
 
-#: diskdrake/interactive.pm:647 diskdrake/interactive.pm:650
+#: diskdrake/interactive.pm:629 diskdrake/interactive.pm:632
 #, c-format
 msgid "Which volume label?"
 msgstr "Melyik kötetcímke?"
 
-#: diskdrake/interactive.pm:651
+#: diskdrake/interactive.pm:633
 #, c-format
 msgid "Label:"
 msgstr "Címke:"
 
-#: diskdrake/interactive.pm:665
+#: diskdrake/interactive.pm:647
 #, c-format
 msgid "Where do you want to mount the loopback file %s?"
 msgstr "Hová szeretné csatolni a(z) %s loopback-fájlt?"
 
-#: diskdrake/interactive.pm:666
+#: diskdrake/interactive.pm:648
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "Hová szeretné csatolni a(z) %s eszközt?"
 
-#: diskdrake/interactive.pm:671
+#: diskdrake/interactive.pm:653
 #, c-format
 msgid ""
 "Can not unset mount point as this partition is used for loop back.\n"
@@ -1697,59 +1667,59 @@ msgstr ""
 "Nem lehet megszüntetni a csatolási pontot, mert ez egy loopback\n"
 "partíció. Először távolítsa el a loopback-et."
 
-#: diskdrake/interactive.pm:701
+#: diskdrake/interactive.pm:683
 #, c-format
 msgid "Where do you want to mount %s?"
 msgstr "Hová szeretné csatolni ezt: \"%s\"?"
 
-#: diskdrake/interactive.pm:725 diskdrake/interactive.pm:808
+#: diskdrake/interactive.pm:707 diskdrake/interactive.pm:790
 #: fs/partitioning_wizard.pm:141 fs/partitioning_wizard.pm:173
 #, c-format
 msgid "Resizing"
 msgstr "Átméretezés"
 
-#: diskdrake/interactive.pm:725
+#: diskdrake/interactive.pm:707
 #, c-format
 msgid "Computing FAT filesystem bounds"
 msgstr "A FAT-fájlrendszer jellemzőinek kiszámítása"
 
-#: diskdrake/interactive.pm:761
+#: diskdrake/interactive.pm:743
 #, c-format
 msgid "This partition is not resizeable"
 msgstr "Ezt a partíciót nem lehet átméretezni"
 
-#: diskdrake/interactive.pm:766
+#: diskdrake/interactive.pm:748
 #, c-format
 msgid "All data on this partition should be backed-up"
 msgstr "Készítsen biztonsági mentést erről a partícióról"
 
-#: diskdrake/interactive.pm:768
+#: diskdrake/interactive.pm:750
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr ""
 "A(z) %s partíció átméretezésekor a partíción található adatok elvesznek"
 
-#: diskdrake/interactive.pm:775
+#: diskdrake/interactive.pm:757
 #, c-format
 msgid "Choose the new size"
 msgstr "Adja meg az új méretet"
 
-#: diskdrake/interactive.pm:776
+#: diskdrake/interactive.pm:758
 #, c-format
 msgid "New size in MB: "
 msgstr "Az új méret (MB-ban): "
 
-#: diskdrake/interactive.pm:777
+#: diskdrake/interactive.pm:759
 #, c-format
 msgid "Minimum size: %s MB"
 msgstr "Minimális méret: %s MB"
 
-#: diskdrake/interactive.pm:778
+#: diskdrake/interactive.pm:760
 #, c-format
 msgid "Maximum size: %s MB"
 msgstr "Maximális méret: %s MB"
 
-#: diskdrake/interactive.pm:819 fs/partitioning_wizard.pm:181
+#: diskdrake/interactive.pm:801 fs/partitioning_wizard.pm:181
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
@@ -1759,27 +1729,27 @@ msgstr ""
 "indításnál \n"
 "fájlrendszer-ellenőrzés lesz végezve"
 
-#: diskdrake/interactive.pm:860
+#: diskdrake/interactive.pm:842
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "Válassza ki azt a RAID-et, amelyikhez hozzá szeretné adni a lemezt"
 
-#: diskdrake/interactive.pm:862 diskdrake/interactive.pm:879
+#: diskdrake/interactive.pm:844 diskdrake/interactive.pm:861
 #, c-format
 msgid "new"
 msgstr "új"
 
-#: diskdrake/interactive.pm:877
+#: diskdrake/interactive.pm:859
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "Válassza ki azt az LVM-et, amelyhez hozzá szeretné adni a lemezt"
 
-#: diskdrake/interactive.pm:884
+#: diskdrake/interactive.pm:866
 #, c-format
 msgid "LVM name?"
 msgstr "Az LVM neve?"
 
-#: diskdrake/interactive.pm:912
+#: diskdrake/interactive.pm:894
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
@@ -1789,108 +1759,108 @@ msgstr ""
 "Kívánja áthelyezni a kötet használatban levő fizikai kiterjedéseit (extent) "
 "más kötetekre?"
 
-#: diskdrake/interactive.pm:914
+#: diskdrake/interactive.pm:896
 #, c-format
 msgid "Moving physical extents"
 msgstr "Fizikai kiterjedések áthelyezése"
 
-#: diskdrake/interactive.pm:932
+#: diskdrake/interactive.pm:914
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "Ez a partíció nem használható loopback-hez"
 
-#: diskdrake/interactive.pm:945
+#: diskdrake/interactive.pm:927
 #, c-format
 msgid "Loopback"
 msgstr "Loopback"
 
-#: diskdrake/interactive.pm:946
+#: diskdrake/interactive.pm:928
 #, c-format
 msgid "Loopback file name: "
 msgstr "A loopback-fájl neve: "
 
-#: diskdrake/interactive.pm:951
+#: diskdrake/interactive.pm:933
 #, c-format
 msgid "Give a file name"
 msgstr "Adjon meg egy fájlnevet"
 
-#: diskdrake/interactive.pm:954
+#: diskdrake/interactive.pm:936
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr ""
 "Ez a fájl már egy másik loopback-hez van rendelve, válasszon egy másikat"
 
-#: diskdrake/interactive.pm:955
+#: diskdrake/interactive.pm:937
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "A fájl már létezik, használjam?"
 
-#: diskdrake/interactive.pm:984 diskdrake/interactive.pm:987
+#: diskdrake/interactive.pm:966 diskdrake/interactive.pm:969
 #, c-format
 msgid "Mount options"
 msgstr "Csatolási (mount) opciók"
 
-#: diskdrake/interactive.pm:994
+#: diskdrake/interactive.pm:976
 #, c-format
 msgid "Various"
 msgstr "Vegyes"
 
-#: diskdrake/interactive.pm:1059
+#: diskdrake/interactive.pm:1041
 #, c-format
 msgid "device"
 msgstr "eszköz"
 
-#: diskdrake/interactive.pm:1060
+#: diskdrake/interactive.pm:1042
 #, c-format
 msgid "level"
 msgstr "szint"
 
-#: diskdrake/interactive.pm:1061
+#: diskdrake/interactive.pm:1043
 #, c-format
 msgid "chunk size in KiB"
 msgstr "szeletméret kilobájtban (KiB)"
 
-#: diskdrake/interactive.pm:1078
+#: diskdrake/interactive.pm:1060
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Vigyázat! Ez a művelet adatvesztést okozhat."
 
-#: diskdrake/interactive.pm:1093
+#: diskdrake/interactive.pm:1075
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Milyen típusú partícionálást szeretne?"
 
-#: diskdrake/interactive.pm:1131
+#: diskdrake/interactive.pm:1113
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "A változások csak a rendszer újraindításakor lépnek életbe"
 
-#: diskdrake/interactive.pm:1140
+#: diskdrake/interactive.pm:1122
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "A(z) \"%s\" meghajtó partíciótáblájának mentése következik!"
 
-#: diskdrake/interactive.pm:1166
+#: diskdrake/interactive.pm:1148
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr "A(z) %s partíció formázásakor a partíción található adatok elvesznek!"
 
-#: diskdrake/interactive.pm:1171 fs/partitioning.pm:49
+#: diskdrake/interactive.pm:1153 fs/partitioning.pm:49
 #, c-format
 msgid "Check bad blocks?"
 msgstr "Ellenőrizve legyen, hogy vannak-e hibás blokkok?"
 
-#: diskdrake/interactive.pm:1185
+#: diskdrake/interactive.pm:1167
 #, c-format
 msgid "Move files to the new partition"
 msgstr "Fájlok áthelyezése az új partícióra"
 
-#: diskdrake/interactive.pm:1185
+#: diskdrake/interactive.pm:1167
 #, c-format
 msgid "Hide files"
 msgstr "Fájlok elrejtése"
 
-#: diskdrake/interactive.pm:1186
+#: diskdrake/interactive.pm:1168
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -1907,103 +1877,103 @@ msgstr ""
 "hagyhatja azokat (az utóbbi esetben a már ott levő fájlokat el fogja rejteni "
 "a csatolt partíció tartalma)."
 
-#: diskdrake/interactive.pm:1201
+#: diskdrake/interactive.pm:1183
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "Fájlok áthelyezése az új partícióra"
 
-#: diskdrake/interactive.pm:1205
+#: diskdrake/interactive.pm:1187
 #, c-format
 msgid "Copying %s"
 msgstr "%s másolása"
 
-#: diskdrake/interactive.pm:1209
+#: diskdrake/interactive.pm:1191
 #, c-format
 msgid "Removing %s"
 msgstr "%s eltávolítása"
 
-#: diskdrake/interactive.pm:1223
+#: diskdrake/interactive.pm:1205
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "a(z) %s partíció jelenleg \"%s\"-ként ismert"
 
-#: diskdrake/interactive.pm:1224
+#: diskdrake/interactive.pm:1206
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr "A partíciók újra lettek számozva: "
 
-#: diskdrake/interactive.pm:1244 diskdrake/interactive.pm:1306
+#: diskdrake/interactive.pm:1226 diskdrake/interactive.pm:1288
 #, c-format
 msgid "Device: "
 msgstr "Eszköz: "
 
-#: diskdrake/interactive.pm:1245
+#: diskdrake/interactive.pm:1227
 #, c-format
 msgid "Volume label: "
 msgstr "Kötetcímke: "
 
-#: diskdrake/interactive.pm:1246
+#: diskdrake/interactive.pm:1228
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS-meghajtó betűjele: %s (ez csak egy tipp)\n"
 
-#: diskdrake/interactive.pm:1250 diskdrake/interactive.pm:1259
-#: diskdrake/interactive.pm:1324
+#: diskdrake/interactive.pm:1232 diskdrake/interactive.pm:1241
+#: diskdrake/interactive.pm:1306
 #, c-format
 msgid "Type: "
 msgstr "Típus: "
 
-#: diskdrake/interactive.pm:1254
+#: diskdrake/interactive.pm:1236
 #, c-format
 msgid "Name: "
 msgstr "Név: "
 
-#: diskdrake/interactive.pm:1261
+#: diskdrake/interactive.pm:1243
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Kezdőszektor: %s\n"
 
-#: diskdrake/interactive.pm:1262
+#: diskdrake/interactive.pm:1244
 #, c-format
 msgid "Size: %s"
 msgstr "Méret: %s"
 
-#: diskdrake/interactive.pm:1264
+#: diskdrake/interactive.pm:1246
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s szektor"
 
-#: diskdrake/interactive.pm:1266
+#: diskdrake/interactive.pm:1248
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "A(z) %d. cilindertől a(z) %d.-ig\n"
 
-#: diskdrake/interactive.pm:1267
+#: diskdrake/interactive.pm:1249
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr "Logikai kiterjedések száma: %d\n"
 
-#: diskdrake/interactive.pm:1268
+#: diskdrake/interactive.pm:1250
 #, c-format
 msgid "Formatted\n"
 msgstr "Formázva\n"
 
-#: diskdrake/interactive.pm:1269
+#: diskdrake/interactive.pm:1251
 #, c-format
 msgid "Not formatted\n"
 msgstr "Nincs formázva\n"
 
-#: diskdrake/interactive.pm:1270
+#: diskdrake/interactive.pm:1252
 #, c-format
 msgid "Mounted\n"
 msgstr "Csatolva\n"
 
-#: diskdrake/interactive.pm:1271
+#: diskdrake/interactive.pm:1253
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1276
+#: diskdrake/interactive.pm:1258
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2012,7 +1982,7 @@ msgstr ""
 "Loopback-fájl(ok):\n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1277
+#: diskdrake/interactive.pm:1259
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -2021,27 +1991,27 @@ msgstr ""
 "Az alapértelmezett indítási partíció\n"
 "    (a DOS-nak, nem a LILO-nak)\n"
 
-#: diskdrake/interactive.pm:1279
+#: diskdrake/interactive.pm:1261
 #, c-format
 msgid "Level %s\n"
 msgstr "%s. szint\n"
 
-#: diskdrake/interactive.pm:1280
+#: diskdrake/interactive.pm:1262
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "A szelet mérete: %d KiB\n"
 
-#: diskdrake/interactive.pm:1281
+#: diskdrake/interactive.pm:1263
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "RAID-lemezek: %s\n"
 
-#: diskdrake/interactive.pm:1283
+#: diskdrake/interactive.pm:1265
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "A loopback-fájl neve: %s"
 
-#: diskdrake/interactive.pm:1286
+#: diskdrake/interactive.pm:1268
 #, c-format
 msgid ""
 "\n"
@@ -2054,7 +2024,7 @@ msgstr ""
 "meghajtóknak van fenntartva,\n"
 "ne módosítson rajta.\n"
 
-#: diskdrake/interactive.pm:1289
+#: diskdrake/interactive.pm:1271
 #, c-format
 msgid ""
 "\n"
@@ -2067,79 +2037,79 @@ msgstr ""
 "partíció (hogy többféle operációs\n"
 "rendszert lehessen indítani).\n"
 
-#: diskdrake/interactive.pm:1298
+#: diskdrake/interactive.pm:1280
 #, fuzzy, c-format
 msgid "Free space on %s (%s)"
 msgstr "Üres hely ezen: %s (%s)"
 
-#: diskdrake/interactive.pm:1307
+#: diskdrake/interactive.pm:1289
 #, c-format
 msgid "Read-only"
 msgstr "Csak olvasható"
 
-#: diskdrake/interactive.pm:1308
+#: diskdrake/interactive.pm:1290
 #, c-format
 msgid "Size: %s\n"
 msgstr "Méret: %s\n"
 
-#: diskdrake/interactive.pm:1309
+#: diskdrake/interactive.pm:1291
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Geometria: %s cilinder, %s fej, %s szektor\n"
 
-#: diskdrake/interactive.pm:1310
+#: diskdrake/interactive.pm:1292
 #, c-format
 msgid "Info: "
 msgstr "Információ: "
 
-#: diskdrake/interactive.pm:1311
+#: diskdrake/interactive.pm:1293
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "LVM-lemezek: %s\n"
 
-#: diskdrake/interactive.pm:1312
+#: diskdrake/interactive.pm:1294
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "A partíciós tábla típusa: %s\n"
 
-#: diskdrake/interactive.pm:1313
+#: diskdrake/interactive.pm:1295
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "csatorna: %d, id: %d\n"
 
-#: diskdrake/interactive.pm:1356
+#: diskdrake/interactive.pm:1338
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "Fájlrendszer-titkosítási kulcs"
 
-#: diskdrake/interactive.pm:1357
+#: diskdrake/interactive.pm:1339
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Válasszon fájlrendszer-titkosítási kulcsot"
 
-#: diskdrake/interactive.pm:1360
+#: diskdrake/interactive.pm:1342
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr ""
 "Ez a titkosítási kulcs túl egyszerű (legalább %d karakter hosszúnak kell "
 "lennie)"
 
-#: diskdrake/interactive.pm:1361
+#: diskdrake/interactive.pm:1343
 #, c-format
 msgid "The encryption keys do not match"
 msgstr "A titkosítási kulcsok nem egyeznek"
 
-#: diskdrake/interactive.pm:1364
+#: diskdrake/interactive.pm:1346
 #, c-format
 msgid "Encryption key"
 msgstr "Titkosítási kulcs"
 
-#: diskdrake/interactive.pm:1365
+#: diskdrake/interactive.pm:1347
 #, c-format
 msgid "Encryption key (again)"
 msgstr "Titkosítási kulcs (még egyszer)"
 
-#: diskdrake/interactive.pm:1367
+#: diskdrake/interactive.pm:1349
 #, c-format
 msgid "Encryption algorithm"
 msgstr "Titkosítási módszer"
@@ -2294,10 +2264,15 @@ msgstr "hiba történt a(z) %s leválasztásakor: %s"
 msgid "Enabling swap partition %s"
 msgstr "A(z) %s lapozópartíció bekapcsolása"
 
-#: fs/mount_options.pm:113
+#: fs/mount_options.pm:111
 #, c-format
 msgid "Use an encrypted file system"
 msgstr "Titkosított fájlrendszer használata"
+
+#: fs/mount_options.pm:113
+#, c-format
+msgid "Flush write cache on file close"
+msgstr ""
 
 #: fs/mount_options.pm:115
 #, c-format
@@ -2316,6 +2291,15 @@ msgstr ""
 "(például hírkiszolgálók esetén gyorsabb hozzáférést biztosíthat a hírekhez)."
 
 #: fs/mount_options.pm:120
+#, fuzzy, c-format
+msgid ""
+"Do not update directory inode access times on this filesystem\n"
+"(e.g, for faster access on the news spool to speed up news servers)."
+msgstr ""
+"Az inode-ok elérési időpontjai ne legyenek frissítve ezen a fájlrendszeren\n"
+"(például hírkiszolgálók esetén gyorsabb hozzáférést biztosíthat a hírekhez)."
+
+#: fs/mount_options.pm:123
 #, c-format
 msgid ""
 "Can only be mounted explicitly (i.e.,\n"
@@ -2324,14 +2308,14 @@ msgstr ""
 "Csak explicit módon csatolható, vagyis a '-a' opció\n"
 "hatására nem kerül csatolásra a fájlrendszer."
 
-#: fs/mount_options.pm:123
+#: fs/mount_options.pm:126
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
 msgstr ""
 "A fájlrendszerben levő karakter- illetve blokkeszközök ne legyenek "
 "értelmezve."
 
-#: fs/mount_options.pm:125
+#: fs/mount_options.pm:128
 #, c-format
 msgid ""
 "Do not allow execution of any binaries on the mounted\n"
@@ -2343,7 +2327,7 @@ msgstr ""
 "Ez akkor lehet hasznos, ha egy kiszolgálón vannak olyan fájlrendszerek is,\n"
 "amelyek más architektúrákhoz tartozó bináris programokat tartalmaznak."
 
-#: fs/mount_options.pm:129
+#: fs/mount_options.pm:132
 #, c-format
 msgid ""
 "Do not allow set-user-identifier or set-group-identifier\n"
@@ -2356,46 +2340,46 @@ msgstr ""
 "telepítve\n"
 "az suidperl(1).)"
 
-#: fs/mount_options.pm:133
+#: fs/mount_options.pm:136
 #, c-format
 msgid "Mount the file system read-only."
 msgstr "A fájlrendszer csak-olvasható módon való csatolása."
 
-#: fs/mount_options.pm:135
+#: fs/mount_options.pm:138
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
 msgstr "A fájlrendszer összes I/O művelete szinkron módon történjen."
 
-#: fs/mount_options.pm:139
+#: fs/mount_options.pm:140
 #, c-format
 msgid "Allow every user to mount and umount the file system."
 msgstr ""
 "A fájlrendszer csatolásának és leválasztásának engedélyezése minden "
 "felhasználó számára."
 
-#: fs/mount_options.pm:141
+#: fs/mount_options.pm:142
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
 msgstr "A fájlrendszer csatolásának engedélyezése normál felhasználók számára."
 
-#: fs/mount_options.pm:143
+#: fs/mount_options.pm:144
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr ""
 "Felhasználói lemezkvóta bekapcsolása, esetlegesen bizonyos korlátozások "
 "érvényesítésével"
 
-#: fs/mount_options.pm:145
+#: fs/mount_options.pm:146
 #, c-format
 msgid "Support \"user.\" extended attributes"
 msgstr "\"user.\" kiterjesztett attribútumok támogatása"
 
-#: fs/mount_options.pm:147
+#: fs/mount_options.pm:148
 #, c-format
 msgid "Give write access to ordinary users"
 msgstr "Írási jog adása a normál felhasználóknak"
 
-#: fs/mount_options.pm:149
+#: fs/mount_options.pm:150
 #, c-format
 msgid "Give read-only access to ordinary users"
 msgstr "Olvasási jog adása a normál felhasználóknak"
@@ -4624,7 +4608,7 @@ msgstr "Zambia"
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
-#: lang.pm:1154
+#: lang.pm:1144
 #, c-format
 msgid "Welcome to %s"
 msgstr "Üdvözöljük - %s"
@@ -6134,6 +6118,17 @@ msgstr ""
 #: services.pm:28
 #, c-format
 msgid ""
+"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgstr ""
+
+#: services.pm:29
+#, c-format
+msgid "Launches the graphical display manager"
+msgstr ""
+
+#: services.pm:30
+#, c-format
+msgid ""
 "FAM is a file monitoring daemon. It is used to get reports when files "
 "change.\n"
 "It is used by GNOME and KDE"
@@ -6142,7 +6137,7 @@ msgstr ""
 "változásakor.\n"
 "A GNOME és a KDE is használja."
 
-#: services.pm:30
+#: services.pm:32
 #, c-format
 msgid ""
 "GPM adds mouse support to text-based Linux applications such the\n"
@@ -6155,7 +6150,12 @@ msgstr ""
 "nyújt egérrel való másolásra illetve beillesztésre, valamint\n"
 "felbukkanó menük használatára (konzolon)."
 
-#: services.pm:33
+#: services.pm:35
+#, c-format
+msgid "HAL is a daemon that collects and maintains information about hardware"
+msgstr ""
+
+#: services.pm:36
 #, c-format
 msgid ""
 "HardDrake runs a hardware probe, and optionally configures\n"
@@ -6164,7 +6164,7 @@ msgstr ""
 "A HardDrake a gép hardverének ellenőrzésére szolgál. Lehetővé teszi az új\n"
 "vagy megváltozott hardver megfelelő beállítását."
 
-#: services.pm:35
+#: services.pm:38
 #, c-format
 msgid ""
 "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
@@ -6172,7 +6172,7 @@ msgstr ""
 "Az Apache egy WWW-kiszolgáló. HTML-fájlokat és CGI-t tesz elérhetővé\n"
 "a hálózaton keresztül."
 
-#: services.pm:36
+#: services.pm:39
 #, c-format
 msgid ""
 "The internet superserver daemon (commonly called inetd) starts a\n"
@@ -6186,7 +6186,7 @@ msgstr ""
 "szolgáltatás indításáért, mint például telnet, ftp, rsh és rlogin. Az inetd\n"
 "leállításával minden általa irányított szolgáltatás leáll."
 
-#: services.pm:40
+#: services.pm:43
 #, c-format
 msgid ""
 "Launch packet filtering for Linux kernel 2.2 series, to set\n"
@@ -6196,7 +6196,7 @@ msgstr ""
 "Lehetővé teszi tűzfal beállítását, hogy a hálózat felőli támadások\n"
 "kivédhetők legyenek."
 
-#: services.pm:42
+#: services.pm:45
 #, c-format
 msgid ""
 "This package loads the selected keyboard map as set in\n"
@@ -6207,7 +6207,7 @@ msgstr ""
 "/etc/sysconfig/keyboard -ban állítható be. A beállítás megváltoztatható\n"
 "a kbdconfig programmal. Ezt bekapcsolva kell hagyni a legtöbb rendszeren."
 
-#: services.pm:45
+#: services.pm:48
 #, c-format
 msgid ""
 "Automatic regeneration of kernel header in /boot for\n"
@@ -6216,14 +6216,14 @@ msgstr ""
 "A kernel fejlécének automatikus újragenerálása a /boot-ban a\n"
 "/usr/include/linux/{autoconf,version}.h alapján"
 
-#: services.pm:47
+#: services.pm:50
 #, c-format
 msgid "Automatic detection and configuration of hardware at boot."
 msgstr ""
 "A hardvereszközök automatikus felderítése és beállítása a rendszer "
 "indulásakor."
 
-#: services.pm:48
+#: services.pm:51
 #, c-format
 msgid ""
 "Linuxconf will sometimes arrange to perform various tasks\n"
@@ -6232,7 +6232,7 @@ msgstr ""
 "A Linuxconf elvégez bizonyos feladatokat a rendszer indításakor,\n"
 "hogy a beállítások konzisztensek maradjanak."
 
-#: services.pm:50
+#: services.pm:53
 #, c-format
 msgid ""
 "lpd is the print daemon required for lpr to work properly. It is\n"
@@ -6242,7 +6242,7 @@ msgstr ""
 "alapjában véve egy nyomtatókiszolgáló, amely elrendezi a nyomtatásokat\n"
 "a különböző nyomtatók között."
 
-#: services.pm:52
+#: services.pm:55
 #, c-format
 msgid ""
 "Linux Virtual Server, used to build a high-performance and highly\n"
@@ -6251,7 +6251,14 @@ msgstr ""
 "Linux Virtual Server, nagyteljesítményű, nagy rendelkezésre állású\n"
 "kiszolgáló kialakításához használható."
 
-#: services.pm:54
+#: services.pm:57
+#, c-format
+msgid ""
+"DBUS is a daemon which broadcasts notifications of system events and other "
+"messages"
+msgstr ""
+
+#: services.pm:58
 #, c-format
 msgid ""
 "named (BIND) is a Domain Name Server (DNS) that is used to resolve host "
@@ -6260,7 +6267,7 @@ msgstr ""
 "A named (BIND) egy DNS, azaz tartománynév-kiszolgáló, ennek segítségével\n"
 "feleltetik meg a gépek az IP-címeket és a gépneveket."
 
-#: services.pm:55
+#: services.pm:59
 #, c-format
 msgid ""
 "Mounts and unmounts all Network File System (NFS), SMB (Lan\n"
@@ -6270,7 +6277,7 @@ msgstr ""
 "hálózati fájlrendszereket, mint például az NFS, az SMB\n"
 "(LAN Manager/Windows) és az NCP (NetWare)."
 
-#: services.pm:57
+#: services.pm:61
 #, c-format
 msgid ""
 "Activates/Deactivates all network interfaces configured to start\n"
@@ -6279,7 +6286,7 @@ msgstr ""
 "Aktiválja vagy deaktiválja a rendszerindításnál automatikusan induló\n"
 "hálózati csatolókat."
 
-#: services.pm:59
+#: services.pm:63
 #, c-format
 msgid ""
 "NFS is a popular protocol for file sharing across TCP/IP networks.\n"
@@ -6290,7 +6297,7 @@ msgstr ""
 "Ez a szolgáltatás egy NFS-kiszolgáló; beállítása a /etc/exports\n"
 "fájllal történik."
 
-#: services.pm:62
+#: services.pm:66
 #, c-format
 msgid ""
 "NFS is a popular protocol for file sharing across TCP/IP\n"
@@ -6299,7 +6306,12 @@ msgstr ""
 "Az NFS egy népszerű, TCP/IP hálózaton használatos fájlmegosztási protokoll.\n"
 "Ez a szolgáltatás az NFS-fájlzárolást biztosítja."
 
-#: services.pm:64
+#: services.pm:68
+#, c-format
+msgid "Synchronizes system time using the Network Time Protocol (NTP)"
+msgstr ""
+
+#: services.pm:69
 #, c-format
 msgid ""
 "Automatically switch on numlock key locker under console\n"
@@ -6308,12 +6320,12 @@ msgstr ""
 "A NumLock automatikus bekapcsolása rendszerindításkor a konzolon és az\n"
 "Xorg rendszerben."
 
-#: services.pm:66
+#: services.pm:71
 #, c-format
 msgid "Support the OKI 4w and compatible winprinters."
 msgstr "Az OKI 4w és az azzal kompatibilis windowsos nyomtatók támogatása."
 
-#: services.pm:67
+#: services.pm:72
 #, c-format
 msgid ""
 "PCMCIA support is usually to support things like ethernet and\n"
@@ -6326,7 +6338,7 @@ msgstr ""
 "A szolgáltatás nem indul el, ha nincs beállítva, tehát nyugodtan fel lehet\n"
 "telepíteni olyan gépre is, ahol nincs rá szükség."
 
-#: services.pm:70
+#: services.pm:75
 #, c-format
 msgid ""
 "The portmapper manages RPC connections, which are used by\n"
@@ -6339,7 +6351,7 @@ msgstr ""
 "azokon a gépeken, amelyek az RPC mechanizmust használó protokollokhoz\n"
 "kapcsolódó szolgáltatást nyújtanak."
 
-#: services.pm:73
+#: services.pm:78
 #, c-format
 msgid ""
 "Postfix is a Mail Transport Agent, which is the program that moves mail from "
@@ -6348,7 +6360,7 @@ msgstr ""
 "A Postfix egy levéltovábbító (MTA) program, amely a leveleket továbbítja\n"
 "a különböző gépek között."
 
-#: services.pm:74
+#: services.pm:79
 #, c-format
 msgid ""
 "Saves and restores system entropy pool for higher quality random\n"
@@ -6357,7 +6369,7 @@ msgstr ""
 "Elmenti és visszaállítja a rendszer entrópia-tárolóját, így jobb\n"
 "véletlenszámokat lehet generálni."
 
-#: services.pm:76
+#: services.pm:81
 #, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
@@ -6367,7 +6379,7 @@ msgstr ""
 "merevlemezes partíciókhoz), hogy az alkalmazásokból (Oracle, DVD-lejátszók,\n"
 "...) hozzáférhetők legyenek."
 
-#: services.pm:78
+#: services.pm:83
 #, c-format
 msgid ""
 "The routed daemon allows for automatic IP router table updated via\n"
@@ -6380,7 +6392,7 @@ msgstr ""
 "A RIP elterjedt a kis hálózatokon; a nagyobb, bonyolultabb hálózatok más\n"
 "útválasztó-protokollokat igényelnek."
 
-#: services.pm:81
+#: services.pm:86
 #, c-format
 msgid ""
 "The rstat protocol allows users on a network to retrieve\n"
@@ -6389,7 +6401,7 @@ msgstr ""
 "Az rstat protokoll segítségével a felhasználók információt kaphatnak a\n"
 "(lokális) hálózaton működő gépekről."
 
-#: services.pm:83
+#: services.pm:88
 #, c-format
 msgid ""
 "The rusers protocol allows users on a network to identify who is\n"
@@ -6398,7 +6410,7 @@ msgstr ""
 "Az rusers protokoll segítségével a felhasználók lekérdezhetik, hogy melyik\n"
 "gépre ki van bejelentkezve."
 
-#: services.pm:85
+#: services.pm:90
 #, c-format
 msgid ""
 "The rwho protocol lets remote users get a list of all of the users\n"
@@ -6408,12 +6420,32 @@ msgstr ""
 "az rwho szolgáltatást futtató gép aktuális felhasználóiról (olyan, mint a\n"
 "finger)."
 
-#: services.pm:87
+#: services.pm:92
+#, c-format
+msgid ""
+"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgstr ""
+
+#: services.pm:93
+#, c-format
+msgid ""
+"The SMB/CIFS protocol enables to shar access to files & printers and also "
+"integrates with a Windows Server domain"
+msgstr ""
+
+#: services.pm:94
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "A gép hangrendszerének elindítása"
 
-#: services.pm:88
+#: services.pm:95
+#, c-format
+msgid ""
+"Secure Shell is a network protocol that allows data to be exchanged over a "
+"secure channel between two computers"
+msgstr ""
+
+#: services.pm:96
 #, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages\n"
@@ -6422,79 +6454,84 @@ msgstr ""
 "A syslog-on keresztül naplóznak a szolgáltatások különböző naplófájlokba.\n"
 "A syslog használata mindig ajánlott."
 
-#: services.pm:90
+#: services.pm:98
 #, c-format
 msgid "Load the drivers for your usb devices."
 msgstr "Az USB-eszközök meghajtóinak betöltése."
 
-#: services.pm:91
+#: services.pm:99
 #, c-format
 msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
 msgstr ""
 "Elindítja az X betűtípus-kiszolgálóját (erre szükség van az Xorg "
 "használatához)."
 
-#: services.pm:114
+#: services.pm:100
+#, c-format
+msgid "Starts other deamons on demand.."
+msgstr ""
+
+#: services.pm:123
 #, c-format
 msgid "Printing"
 msgstr "Nyomtatás"
 
-#: services.pm:115
+#: services.pm:124
 #, c-format
 msgid "Internet"
 msgstr "Internet"
 
-#: services.pm:118
+#: services.pm:127
 #, c-format
 msgid "File sharing"
 msgstr "Fájlmegosztás"
 
-#: services.pm:120
+#: services.pm:129
 #, c-format
 msgid "System"
 msgstr "Rendszer"
 
-#: services.pm:125
+#: services.pm:134
 #, c-format
 msgid "Remote Administration"
 msgstr "Távoli adminisztráció"
 
-#: services.pm:133
+#: services.pm:142
 #, c-format
 msgid "Database Server"
 msgstr "Adatbázis-kiszolgáló"
 
-#: services.pm:144 services.pm:180
+#: services.pm:153 services.pm:189
 #, c-format
 msgid "Services"
 msgstr "Szolgáltatások"
 
-#: services.pm:144
+#: services.pm:153
 #, c-format
 msgid "Choose which services should be automatically started at boot time"
 msgstr "Válassza ki, mely szolgáltatások induljanak el rendszerindításkor"
 
-#: services.pm:162
+#: services.pm:171
 #, c-format
 msgid "Services: %d activated for %d registered"
 msgstr "Szolgáltatások: %d aktivált, %d regisztrált"
 
-#: services.pm:196
+#: services.pm:205
 #, c-format
 msgid "running"
 msgstr "fut"
 
-#: services.pm:196
+#: services.pm:205
 #, c-format
 msgid "stopped"
 msgstr "leállítva"
 
-#: services.pm:201
+#: services.pm:210
 #, c-format
 msgid "Services and daemons"
 msgstr "Szolgáltatások és démonok"
 
-#: services.pm:207
+#: services.pm:216
 #, c-format
 msgid ""
 "No additional information\n"
@@ -6503,27 +6540,27 @@ msgstr ""
 "Nem érhető el további információ\n"
 "erről a szolgáltatásról."
 
-#: services.pm:212 ugtk2.pm:901
+#: services.pm:221 ugtk2.pm:901
 #, c-format
 msgid "Info"
 msgstr "Információ"
 
-#: services.pm:215
+#: services.pm:224
 #, c-format
 msgid "Start when requested"
 msgstr "Indítás kérésre"
 
-#: services.pm:215
+#: services.pm:224
 #, c-format
 msgid "On boot"
 msgstr "Rendszerindításkor"
 
-#: services.pm:233
+#: services.pm:242
 #, c-format
 msgid "Start"
 msgstr "Indítás"
 
-#: services.pm:233
+#: services.pm:242
 #, c-format
 msgid "Stop"
 msgstr "Leállítás"
@@ -6773,7 +6810,7 @@ msgstr ""
 "       XFdrake [--noauto] monitor\n"
 "       XFdrake felbontás"
 
-#: standalone.pm:149
+#: standalone.pm:152
 #, c-format
 msgid ""
 "\n"
@@ -6897,6 +6934,24 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "A telepítés hibával ért véget."
+
+#~ msgid "No supermount"
+#~ msgstr "Ne legyen supermount"
+
+#~ msgid "Supermount"
+#~ msgstr "Supermount (automatikus csatolás)"
+
+#~ msgid "Supermount except for CDROM drives"
+#~ msgstr "Supermount, kivéve a CD-meghajtókat"
+
+#~ msgid "Rescue partition table"
+#~ msgstr "A partíciós tábla helyreállítása"
+
+#~ msgid "Removable media automounting"
+#~ msgstr "Cserélhető adathordozó automatikus csatolása"
+
+#~ msgid "Trying to rescue partition table"
+#~ msgstr "A partíciós tábla helyrehozásának megkísérlése..."
 
 #~ msgid ""
 #~ "Use local for all authentication and information user tell in local file"
