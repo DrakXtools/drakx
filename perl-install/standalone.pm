@@ -191,6 +191,11 @@ sub bug_handler {
     my ($error) = @_;
     # exceptions in eval are OK:
     return if $error && $^S;
+    # exceptions with "\n" are normal ways to quit:
+    if ($error !~ /at line/) {
+        warn $error;
+        exit(255);
+    }
     # we want the full backtrace:
     $error .= common::backtrace() if $error;
     my $progname = $0;
