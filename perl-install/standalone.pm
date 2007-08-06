@@ -194,8 +194,8 @@ sub bug_handler {
     # we want the full backtrace:
     $error .= common::backtrace() if $error;
     my $progname = $0;
-    # do not loop if drakbug crashes:
-    if ($progname =~ /drakbug/) {
+    # do not loop if drakbug crashes and do not complain about wizcancel:
+    if ($progname =~ /drakbug/ || $error =~ /wizcancel/) {
     	warn $error;
     	exit(1);
     }
