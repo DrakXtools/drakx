@@ -74,7 +74,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fr\n"
 "POT-Creation-Date: 2007-08-06 12:28+0200\n"
-"PO-Revision-Date: 2007-07-08 14:24+0200\n"
+"PO-Revision-Date: 2007-08-06 12:35+0200\n"
 "Last-Translator: Christophe Berthelé <cpjc@free.fr>\n"
 "Language-Team: Français <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -2377,14 +2377,13 @@ msgstr ""
 "plus rapide aux à ces dernières)"
 
 #: fs/mount_options.pm:120
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Do not update directory inode access times on this filesystem\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
-"Ne pas mettre à jour l'heure d'accès aux inodes sur ce système de fichier\n"
-"(par exemple, afin d'avoir d'accélérer un serveur de nouvelles via un accès "
-"plus rapide aux à ces dernières)"
+"Ne pas mettre à jour l'heure d'accès aux inodes de répertoires sur ce système de fichier\n"
+"(par exemple, afin d'avoir d'accélérer un serveur de nouvelles via un accès plus rapide aux à ces dernières)"
 
 #: fs/mount_options.pm:123
 #, c-format
@@ -5302,28 +5301,28 @@ msgstr ""
 "Vos scanners ne seront pas disponibles pour les utilisateurs non privilégiés."
 
 #: security/help.pm:11
-#, fuzzy, c-format
+#, c-format
 msgid "Accept bogus IPv4 error messages."
-msgstr "Accepter les messages d'erreur IPv4 bogués"
+msgstr "Accepter les messages d'erreur IPv4 bogués."
 
 #: security/help.pm:13
-#, fuzzy, c-format
+#, c-format
 msgid "Accept broadcasted icmp echo."
-msgstr "Accepter l'écho ICMP émis par diffusion"
+msgstr "Accepter l'écho ICMP émis par diffusion."
 
 #: security/help.pm:15
-#, fuzzy, c-format
+#, c-format
 msgid "Accept icmp echo."
-msgstr "Accepter l'écho ICMP"
+msgstr "Accepter l'écho ICMP."
 
 #: security/help.pm:17
-#, fuzzy, c-format
+#, c-format
 msgid "Allow autologin."
-msgstr "Activer/Désactiver la connexion automatique (autologin)."
+msgstr "Activer la connexion automatique (autologin)."
 
 #. -PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
 #: security/help.pm:21
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
 "\n"
@@ -5331,51 +5330,48 @@ msgid ""
 "\n"
 "Else only /etc/issue is allowed."
 msgstr ""
-"Si TOUS est choisi, permet à /etc/issue et /etc/issue.net d'exister.\n"
+"Si « TOUS » est choisi, permet à /etc/issue et /etc/issue.net d'exister.\n"
 "\n"
-"Si AUCUN est choisi, aucun de ces fichiers est autorisé.\n"
+"Si « Aucun » est choisi, aucun de ces fichiers est autorisé.\n"
 "\n"
 "Sinon seulement /etc/issue est permis."
 
 #: security/help.pm:27
-#, fuzzy, c-format
+#, c-format
 msgid "Allow reboot by the console user."
-msgstr ""
-"Activer/Désactiver le redémarrage du système par l'utilisateur de la console."
+msgstr "Activer le redémarrage du système par l'utilisateur de la console."
 
 #: security/help.pm:29
-#, fuzzy, c-format
+#, c-format
 msgid "Allow remote root login."
-msgstr "Permettre la connexion distante en tant que root"
+msgstr "Permettre la connexion distante en tant que root."
 
 #: security/help.pm:31
-#, fuzzy, c-format
+#, c-format
 msgid "Allow direct root login."
-msgstr "Permettre/interdire la connexion directe en tant que root."
+msgstr "Permettre la connexion directe en tant que root."
 
 #: security/help.pm:33
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow the list of users on the system on display managers (kdm and gdm)."
-msgstr ""
-"Permettre/interdire la liste des utilisateurs du système sur les "
-"gestionnaires de connexion (kdm et gdm)."
+msgstr "Permettre la liste des utilisateurs du système sur les gestionnaires de connexion (kdm et gdm)."
 
 #: security/help.pm:35
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow to export display when\n"
 "passing from the root account to the other users.\n"
 "\n"
 "See pam_xauth(8) for more details.'"
 msgstr ""
-"Permettre/interdire d'exporter l'affichage lorsque l'on passe du\n"
+"Permettre d'exporter l'affichage lorsque l'on passe du\n"
 "compte superutilisateur (« root ») à un autre utilisateur.\n"
 "\n"
-"Cf pam_xauth(8) pour plus d'informations"
+"Cf pam_xauth(8) pour plus d'informations."
 
 #: security/help.pm:40
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow X connections:\n"
 "\n"
@@ -5387,11 +5383,11 @@ msgid ""
 msgstr ""
 "Permettre/interdire les connexions à Xorg :\n"
 "\n"
-"- TOUS (toutes connexions permises),\n"
+"- « Tous » (toutes connexions permises),\n"
 "\n"
-"- LOCAL (seulement les connexions locales),\n"
+"- « Local » (seulement les connexions locales),\n"
 "\n"
-"- AUCUN (aucune connexion)."
+"- « Aucun » (aucune connexion)."
 
 #: security/help.pm:48
 #, c-format
@@ -5404,7 +5400,7 @@ msgstr ""
 
 #. -PO: here "ALL", "Local" and "None" are values in a pull-down menu; translate them the same as they're
 #: security/help.pm:53
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Authorize:\n"
 "\n"
@@ -5420,12 +5416,11 @@ msgid ""
 msgstr ""
 "Autoriser :\n"
 "\n"
-"- tous les services contrôlés par tcp_wrappers (voir hosts.deny(5)) si "
-"« TOUS »,\n"
+"- tous les services contrôlés par tcp_wrappers (voir hosts.deny(5)) si « TOUS »,\n"
 "\n"
-"- seulement ceux qui sont locaux si « LOCAL »\n"
+"- seulement ceux qui sont locaux si « Local »\n"
 "\n"
-"- aucun si « AUCUN ».\n"
+"- aucun si « Aucun ».\n"
 "\n"
 "Pour autoriser les services dont vous avez besoin, utilisez\n"
 "/etc/hosts.allow (voir hosts.allow(5)."
@@ -5452,31 +5447,31 @@ msgstr ""
 "pendant l'installation des paquetages."
 
 #: security/help.pm:72
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable crontab and at for users.\n"
 "\n"
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
 msgstr ""
-"Activer/Désactiver les travaux planifiés (crontab et at) pour les\n"
+"Activer les travaux planifiés (crontab et at) pour les\n"
 "utilisateurs.\n"
 "\n"
 "Mettre les utilisateurs autorisés dans /etc/cron.allow et\n"
 "/etc/at.allow (voir les pages de manuel at(1) et crontab(1)."
 
 #: security/help.pm:77
-#, fuzzy, c-format
+#, c-format
 msgid "Enable syslog reports to console 12"
-msgstr "Activer/désactiver l'affichage des messages systèmes sur la console 12"
+msgstr "Activer l'affichage des messages systèmes sur la console 12"
 
 #: security/help.pm:79
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable name resolution spoofing protection.  If\n"
 "\"%s\" is true, also reports to syslog."
 msgstr ""
-"Activer/Désactiver la protection contre l'usurpation de résolution de\n"
+"Activer la protection contre l'usurpation de résolution de\n"
 "nom (name resolution spoofing). Si « %s » est à 1, effectue aussi\n"
 "des rapports à syslog."
 
@@ -5486,24 +5481,24 @@ msgid "Security Alerts:"
 msgstr "Alertes de sécurité :"
 
 #: security/help.pm:82
-#, fuzzy, c-format
+#, c-format
 msgid "Enable IP spoofing protection."
-msgstr "Activer la protection contre l'usurpation d'adresse IP"
+msgstr "Activer la protection contre l'usurpation d'adresse IP."
 
 #: security/help.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Enable libsafe if libsafe is found on the system."
-msgstr "Activer la bibliothèque libsafe si elle est présente sur le système"
+msgstr "Activer la bibliothèque libsafe si elle est présente sur le système."
 
 #: security/help.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Enable the logging of IPv4 strange packets."
-msgstr "Activer le traçage de tous les paquets IPv4 étranges"
+msgstr "Activer le traçage de tous les paquets IPv4 étranges."
 
 #: security/help.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid "Enable msec hourly security check."
-msgstr "Activer les vérifications de msec toutes les heures"
+msgstr "Activer les vérifications de msec toutes les heures."
 
 #: security/help.pm:90
 #, c-format
@@ -5520,20 +5515,19 @@ msgid "Use password to authenticate users."
 msgstr "Utiliser des mots de passe pour authentifier les utilisateurs."
 
 #: security/help.pm:94
-#, fuzzy, c-format
+#, c-format
 msgid "Activate ethernet cards promiscuity check."
-msgstr "Activer/Désactiver la vérification du mode espion des cartes réseau."
+msgstr "Activer la vérification du mode espion des cartes réseau."
 
 #: security/help.pm:96
-#, fuzzy, c-format
+#, c-format
 msgid "Activate daily security check."
-msgstr "Activer/Désactiver les vérifications quotidiennes de sécurité."
+msgstr "Activer les vérifications quotidiennes de sécurité."
 
 #: security/help.pm:98
-#, fuzzy, c-format
+#, c-format
 msgid "Enable sulogin(8) in single user level."
-msgstr ""
-"Activer/Désactiver la demande de mot de passe en mode mono-utilisateur."
+msgstr "Activer la demande de mot de passe en mode mono-utilisateur."
 
 #: security/help.pm:100
 #, c-format
@@ -5564,9 +5558,9 @@ msgstr ""
 "minimum de lettres en majuscule d'un mot de passe."
 
 #: security/help.pm:108
-#, fuzzy, c-format
+#, c-format
 msgid "Set the root's file mode creation mask."
-msgstr "Régler le « umask » de root."
+msgstr "Régler le masque du mode de création de fichier pour l'administrateur système."
 
 #: security/help.pm:109
 #, c-format
@@ -5702,9 +5696,9 @@ msgid "Timeout unit is second"
 msgstr "L'unité du délai d'expiration est la seconde"
 
 #: security/help.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Set the user's file mode creation mask."
-msgstr "Régler le « umask » utilisateur."
+msgstr "Régler le masque du mode de création de fichier pour l'utilisateur."
 
 #: security/l10n.pm:11
 #, c-format
