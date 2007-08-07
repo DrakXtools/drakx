@@ -19,7 +19,7 @@ use common;
   setupSCSI          => [ N_("_: Keep these entry short\nHard drive detection"), 1, 0, '1', '' ],
   selectInstallClass => [ N_("_: Keep these entry short\nInstallation class"), 1, 1, '1', '' ],
   selectKeyboard     => [ N_("_: Keep these entry short\nKeyboard"), 1, 1, '1' ],
-  #miscellaneous      => [ N_("_: Keep these entry short\nSecurity"), 1, 1, '', '' ],
+  miscellaneous      => [ N_("_: Keep these entry short\nSecurity"), 1, 1, '1', '' ],
   doPartitionDisks   => [ N_("_: Keep these entry short\nPartitioning"), 1, 0, '', "selectInstallClass" ],
   formatPartitions   => [ N_("_: Keep these entry short\nFormatting"), 1, -1, '1', "doPartitionDisks" ],
   choosePackages     => [ N_("_: Keep these entry short\nChoosing packages"), 1, -2, '1', "formatPartitions" ],
