@@ -561,7 +561,7 @@ sub summary_prompt {
     foreach my $e (@$l) {
 	if ($group ne $e->{group}) {
 	    $group = $e->{group};
-	    push @table, [ gtknew('HBox', children_tight => [ $group ]), '' ];
+	    push @table, [ gtknew('HBox', children_tight => [ gtknew('Title1', label => escape_text_for_TextView_markup_format($group)) ]), '' ];
 	}
 	$e->{widget} = gtknew('WrappedLabel', width => $::real_windowwidth * 0.72);
 
