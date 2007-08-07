@@ -35,7 +35,7 @@ if (-d $SLASH_LOCATION) {
     rm_rf($SLASH_LOCATION);
 }
 
-mkdir_p("$SLASH_LOCATION$_") foreach '/dev', '/dev/usb', '/etc', '/var', '/proc', $STAGE2_LOCATION_ROOTED, $MEDIA_LOCATION_ROOTED, $prefix_ROOTED;
+mkdir_p("$SLASH_LOCATION$_") foreach '/dev', '/dev/usb', '/etc', '/var', '/proc', '/sys', $STAGE2_LOCATION_ROOTED, $MEDIA_LOCATION_ROOTED, $prefix_ROOTED;
 
 sys("$sudo rm -rf $dir") if $ENV{CLEAN};
 -e $dir or sys("$sudo mkdir -p $dir");
@@ -56,6 +56,7 @@ if ($remote_repository) {
 sys("$sudo mount -o bind $dir $SLASH_LOCATION$prefix_ROOTED");
 sys("$sudo mount -o bind $repository $SLASH_LOCATION$MEDIA_LOCATION_ROOTED") if !$remote_repository;
 sys("$sudo mount -t proc none $SLASH_LOCATION/proc");
+sys("$sudo mount -t sysfs none $SLASH_LOCATION/sys");
 symlinkf('media', "$SLASH_LOCATION$IMAGE_LOCATION_ROOTED");
 create_initial_symlinks();
 create_initial_devices();
@@ -71,6 +72,13 @@ eval { cp_af($_, "$dir$_") } foreach qw(/dev/root);
 
 #- if the DISPLAY is remote, we may need to resolve the name:
 eval { cp_af($_, "$SLASH_LOCATION$_") } foreach qw(/etc/resolv.conf);
+
+{
+    chomp(my $kernel_version = `uname -r`);
+    my $dir = "/modules/$kernel_version";
+    mkdir_p("$SLASH_LOCATION$dir");
+    cp_af("/lib/$dir/modules.dep", "/lib/$dir/modules.alias", "$SLASH_LOCATION$dir");
+}
 
 my $Xnest_pid;
 my $Xnest_bin = find { whereis_binary($_) } 'Xnest', 'Xephyr';
