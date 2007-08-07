@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-et\n"
 "POT-Creation-Date: 2007-08-06 12:28+0200\n"
-"PO-Revision-Date: 2007-03-21 13:53+0200\n"
+"PO-Revision-Date: 2007-08-07 16:28+0200\n"
 "Last-Translator: Marek Laane <bald@starman.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -760,7 +760,7 @@ msgstr "Kohalik fail:"
 #: authentication.pm:66
 #, c-format
 msgid "Use information stored in local files for all authentication"
-msgstr ""
+msgstr "Autentimiseks kasutatakse kohalikesse failidesse salvestatud teavet"
 
 #: authentication.pm:67
 #, c-format
@@ -2014,7 +2014,7 @@ msgstr ""
 "laadimist.\n"
 
 #: diskdrake/interactive.pm:1280
-#, fuzzy, c-format
+#, c-format
 msgid "Free space on %s (%s)"
 msgstr "Vaba ruum %s peal (%s)"
 
@@ -2246,7 +2246,7 @@ msgstr "Krüptitud failisüsteemi kasutamine"
 #: fs/mount_options.pm:113
 #, c-format
 msgid "Flush write cache on file close"
-msgstr ""
+msgstr "Kirjutamispuhvri tühjendamine faili sulgemisel"
 
 #: fs/mount_options.pm:115
 #, c-format
@@ -2264,13 +2264,13 @@ msgstr ""
 "(nt. kiiremaks juurdepääsuks uudistepuhvrile uudisteserveri kiirendamiseks)."
 
 #: fs/mount_options.pm:120
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Do not update directory inode access times on this filesystem\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
 "Inode juurdepääsu kordi sellel failisüsteemil ei värskendata\n"
-"(nt. kiiremaks juurdepääsuks uudistepuhvrile uudisteserveri kiirendamiseks)."
+"(nt. kiiremaks ligipääsuks uudistepuhvrile uudisteserveri kiirendamiseks)."
 
 #: fs/mount_options.pm:123
 #, c-format
@@ -2957,7 +2957,7 @@ msgstr "Hiir"
 #: harddrake/data.pm:505
 #, c-format
 msgid "Biometry"
-msgstr ""
+msgstr "Biomeetria"
 
 #: harddrake/data.pm:513
 #, c-format
@@ -5178,28 +5178,28 @@ msgid "Your scanner(s) will not be available for non-root users."
 msgstr "Teie skänner(id) ei ole tavakasutajale kättesaadavad."
 
 #: security/help.pm:11
-#, fuzzy, c-format
+#, c-format
 msgid "Accept bogus IPv4 error messages."
-msgstr "IPv4 võltsveateadete lubamine"
+msgstr "IPv4 võltsveateadete lubamine."
 
 #: security/help.pm:13
-#, fuzzy, c-format
+#, c-format
 msgid "Accept broadcasted icmp echo."
-msgstr "Üldlevi icmp echo lubamine"
+msgstr "Üldlevi icmp echo lubamine."
 
 #: security/help.pm:15
-#, fuzzy, c-format
+#, c-format
 msgid "Accept icmp echo."
-msgstr "Icmp echo lubamine"
+msgstr "Icmp echo lubamine."
 
 #: security/help.pm:17
-#, fuzzy, c-format
+#, c-format
 msgid "Allow autologin."
-msgstr "Automaatse sisselogimise lubamine/keelamine"
+msgstr "Automaatse sisselogimise lubamine."
 
 #. -PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
 #: security/help.pm:21
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
 "\n"
@@ -5209,46 +5209,46 @@ msgid ""
 msgstr ""
 "Kui on \"KÕIK\", on lubatud nii /etc/issue kui /etc/issue.net.\n"
 "\n"
-"Kui on \"PUUDUB\", ei ole kumbki lubatud.\n"
+"Kui on \"Puudub\", ei ole kumbki lubatud.\n"
 "\n"
 "Muidu on lubatud ainult /etc/issue."
 
 #: security/help.pm:27
-#, fuzzy, c-format
+#, c-format
 msgid "Allow reboot by the console user."
-msgstr "Konsooli kasutajale taaskäivituse lubamine/keelamine"
+msgstr "Konsooli kasutajale taaskäivituse lubamine."
 
 #: security/help.pm:29
-#, fuzzy, c-format
+#, c-format
 msgid "Allow remote root login."
-msgstr "Administraatori võrgust sisselogimise lubamine"
+msgstr "Administraatori võrgust sisselogimise lubamine."
 
 #: security/help.pm:31
-#, fuzzy, c-format
+#, c-format
 msgid "Allow direct root login."
-msgstr "Administraatori vahetu sisselogimise lubamine/keelamine"
+msgstr "Administraatori vahetu sisselogimise lubamine."
 
 #: security/help.pm:33
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow the list of users on the system on display managers (kdm and gdm)."
-msgstr "Kasutajate nimekirja lubamine/keelamine kuvahalduritel (kdm ja gdm)"
+msgstr "Kasutajate nimekirja lubamine kuvahalduritel (kdm ja gdm)."
 
 #: security/help.pm:35
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow to export display when\n"
 "passing from the root account to the other users.\n"
 "\n"
 "See pam_xauth(8) for more details.'"
 msgstr ""
-"Kuva ekspordi lubamine/keelamine\n"
-"administraatori kontolt muude kasutajate kontole üle minnes.\n"
+"Kuva ekspordi lubamine administraatori\n"
+"kontolt muude kasutajate kontole üle minnes.\n"
 "\n"
 "Vaadake täpsemalt pam_xauth(8)."
 
 #: security/help.pm:40
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow X connections:\n"
 "\n"
@@ -5260,11 +5260,11 @@ msgid ""
 msgstr ""
 "X'i ühenduste lubamine/keelamine:\n"
 "\n"
-"- KÕIK (kõik ühendused on lubatud),\n"
+"- \"Kõik\" (kõik ühendused on lubatud),\n"
 "\n"
-"- KOHALIK (ainult kohalikud ühendused),\n"
+"- \"Kohalik\" (ainult kohalikud ühendused),\n"
 "\n"
-"- PUUDUB (ühendusi ei lubata)."
+"- \"Puudub\" (ühendusi ei lubata)."
 
 #: security/help.pm:48
 #, c-format
@@ -5277,7 +5277,7 @@ msgstr ""
 
 #. -PO: here "ALL", "Local" and "None" are values in a pull-down menu; translate them the same as they're
 #: security/help.pm:53
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Authorize:\n"
 "\n"
@@ -5296,9 +5296,9 @@ msgstr ""
 "- kõik teenused, mida kontrollib tcp_wrappers (vt hosts.deny (5)), kui on "
 "\"KÕIK\",\n"
 "\n"
-"- ainult kohalikud, kui on \"KOHALIK\",\n"
+"- ainult kohalikud, kui on \"Kohalik\",\n"
 "\n"
-"- mitte ühtegi teenust, kui on \"PUUDUB\".\n"
+"- mitte ühtegi teenust, kui on \"Puudub\".\n"
 "\n"
 "Vajalike teenuste autoriseerimiseks kasutage faili /etc/hosts.allow (vt. "
 "hosts.allow(5))."
@@ -5325,30 +5325,30 @@ msgstr ""
 "paigaldamise ajal failis olemas."
 
 #: security/help.pm:72
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable crontab and at for users.\n"
 "\n"
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
 msgstr ""
-"Crontab ja at lubamine/keelamine kasutajatele.\n"
+"Crontab ja at lubamine kasutajatele.\n"
 "\n"
 "Lubatud kasutajad kirjutatakse failidesse /etc/cron.allow ja /etc/at.allow "
 "(vt man at(1) ja crontab(1))."
 
 #: security/help.pm:77
-#, fuzzy, c-format
+#, c-format
 msgid "Enable syslog reports to console 12"
-msgstr "Syslog-i teadete konsoolile 12 saatmise lubamine/keelamine"
+msgstr "Syslog-i teadete konsoolile 12 saatmise lubamine."
 
 #: security/help.pm:79
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable name resolution spoofing protection.  If\n"
 "\"%s\" is true, also reports to syslog."
 msgstr ""
-"Nimelahenduse võltsimiskaitse lubamine/keelamine. Kui\n"
+"Nimelahenduse võltsimiskaitse lubamine. Kui\n"
 "\"%s\" on tõene, saadetakse ka raport syslog-i."
 
 #: security/help.pm:80
@@ -5357,24 +5357,24 @@ msgid "Security Alerts:"
 msgstr "Turvahoiatused:"
 
 #: security/help.pm:82
-#, fuzzy, c-format
+#, c-format
 msgid "Enable IP spoofing protection."
-msgstr "IP võltsimiskaitse lubamine"
+msgstr "IP võltsimiskaitse lubamine."
 
 #: security/help.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Enable libsafe if libsafe is found on the system."
-msgstr "Libsafe lubamine, kui see süsteemist leitakse"
+msgstr "Libsafe lubamine, kui see süsteemist leitakse."
 
 #: security/help.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Enable the logging of IPv4 strange packets."
-msgstr "Ipv4 veidrate pakettide logimise lubamine"
+msgstr "Ipv4 võõraste pakettide logimise lubamine."
 
 #: security/help.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid "Enable msec hourly security check."
-msgstr "Msec igatunnise turvakontrolli lubamine"
+msgstr "Msec'i igatunnise turvakontrolli lubamine."
 
 #: security/help.pm:90
 #, c-format
@@ -5391,19 +5391,19 @@ msgid "Use password to authenticate users."
 msgstr "Parooli kasutamine kasutajate autentimiseks"
 
 #: security/help.pm:94
-#, fuzzy, c-format
+#, c-format
 msgid "Activate ethernet cards promiscuity check."
-msgstr "Võrgukaardi mitte-eelisoleku kontrolli lubamine/keelamine"
+msgstr "Võrgukaardi mitte-eelisoleku kontrolli lubamine."
 
 #: security/help.pm:96
-#, fuzzy, c-format
+#, c-format
 msgid "Activate daily security check."
-msgstr "Igapäevase turvakontrolli lubamine/keelamine"
+msgstr "Igapäevase turvakontrolli lubamine."
 
 #: security/help.pm:98
-#, fuzzy, c-format
+#, c-format
 msgid "Enable sulogin(8) in single user level."
-msgstr "sulogin(8) lubamine/keelamine üksikkasutaja tasemel"
+msgstr "sulogin(8) lubamine üksikkasutaja tasemel."
 
 #: security/help.pm:100
 #, c-format
@@ -5432,9 +5432,9 @@ msgstr ""
 "hulga"
 
 #: security/help.pm:108
-#, fuzzy, c-format
+#, c-format
 msgid "Set the root's file mode creation mask."
-msgstr "Administraatori umask-i määramine"
+msgstr "Administraatori umask-i määramine."
 
 #: security/help.pm:109
 #, c-format
@@ -5561,9 +5561,9 @@ msgid "Timeout unit is second"
 msgstr "Aegumisühikuks on sekundid"
 
 #: security/help.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Set the user's file mode creation mask."
-msgstr "Kasutaja umask-i määramine"
+msgstr "Kasutaja faili loomise maski määramine."
 
 #: security/l10n.pm:11
 #, c-format
@@ -5996,11 +5996,12 @@ msgstr ""
 msgid ""
 "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr ""
+"Common UNIX Printing System (CUPS) on võimas trükkimissüsteem"
 
 #: services.pm:29
 #, c-format
 msgid "Launches the graphical display manager"
-msgstr ""
+msgstr "Käivitab graafilise kuvahalduri"
 
 #: services.pm:30
 #, c-format
@@ -6027,7 +6028,7 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
+msgstr "HAL on deemon, mis kogub ja säilitab teavet riistvara kohta"
 
 #: services.pm:36
 #, c-format
@@ -6127,6 +6128,8 @@ msgid ""
 "DBUS is a daemon which broadcasts notifications of system events and other "
 "messages"
 msgstr ""
+"DBUS on deemon, mis levitab süsteemsete sündmuste teadaandeid ja "
+"muid teateid"
 
 #: services.pm:58
 #, c-format
@@ -6176,7 +6179,7 @@ msgstr ""
 #: services.pm:68
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
-msgstr ""
+msgstr "Sünkroniseerib süsteemi aja võrguajaprotokolli NTP abil"
 
 #: services.pm:69
 #, c-format
@@ -6282,6 +6285,7 @@ msgstr ""
 msgid ""
 "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
+"SANE (Scanner Access Now Easy) võimaldab kasutada skännereid, videokaameraid..."
 
 #: services.pm:93
 #, c-format
@@ -6289,6 +6293,8 @@ msgid ""
 "The SMB/CIFS protocol enables to shar access to files & printers and also "
 "integrates with a Windows Server domain"
 msgstr ""
+"SMB/CIFS protokoll võimaldab kasutada jagatud faile ja printereid ning "
+"ühenduda Windowsi serveri domeeniga"
 
 #: services.pm:94
 #, c-format
@@ -6301,6 +6307,8 @@ msgid ""
 "Secure Shell is a network protocol that allows data to be exchanged over a "
 "secure channel between two computers"
 msgstr ""
+"Secure Shell on võrguprotokoll, mis võimaldab kahel arvutil vahetada andmeid "
+"turvalise kanali kaudu"
 
 #: services.pm:96
 #, c-format
@@ -6322,7 +6330,7 @@ msgstr "Käivitab X fondiserveri, ilma milleta X lihtsalt ei lähe käima."
 #: services.pm:100
 #, c-format
 msgid "Starts other deamons on demand.."
-msgstr ""
+msgstr "Käivitab vajaduse korral teised deemonid."
 
 #: services.pm:123
 #, c-format
@@ -6806,35 +6814,6 @@ msgstr "Paigaldamine ebaõnnestus!"
 
 #~ msgid "Trying to rescue partition table"
 #~ msgstr "Proovin päästa partitsioonitabelit"
-
-#~ msgid ""
-#~ "Use local for all authentication and information user tell in local file"
-#~ msgstr ""
-#~ "Kohaliku faili kasutamine autentimiseks ja kasutaja info hankimiseks."
-
-#~ msgid "Accept/Refuse bogus IPv4 error messages."
-#~ msgstr "IPv4 võltsveateadete lubamine/keelamine"
-
-#~ msgid "Accept/Refuse broadcasted icmp echo."
-#~ msgstr "Üldlevi icmp echo aktsepteerimine/tagasilükkamine"
-
-#~ msgid "Accept/Refuse icmp echo."
-#~ msgstr "Icmp echo aktsepteerimine/tagasilükkamine"
-
-#~ msgid "Allow/Forbid remote root login."
-#~ msgstr "Administraatori võrgust sisselogimise lubamine/keelamine"
-
-#~ msgid "Enable/Disable IP spoofing protection."
-#~ msgstr "IP võltsimiskaitse lubamine/keelamine"
-
-#~ msgid "Enable/Disable libsafe if libsafe is found on the system."
-#~ msgstr "Libsafe lubamine/keelamine, kui see süsteemist leitakse"
-
-#~ msgid "Enable/Disable the logging of IPv4 strange packets."
-#~ msgstr "Ipv4 veidrate pakettide logimise lubamine/keelamine"
-
-#~ msgid "Enable/Disable msec hourly security check."
-#~ msgstr "Msec igatunnise turvakontrolli lubamine/keelamine"
 
 #~ msgid "Icon"
 #~ msgstr "Ikoon"
