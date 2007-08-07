@@ -744,14 +744,13 @@ sub summary {
 
     my @l;
 
-    push @l, {
-	group => N("System"), 
-	label => N("Keyboard"), 
-	val => sub { $o->{keyboard} && translate(keyboard::keyboard2text($o->{keyboard})) },
-	clicked => sub { $o->selectKeyboard(1) },
-    };
-
     my $timezone_manually_set;  
+    push @l, {
+	group => N("System"),
+	label => N("Timezone"),
+	val => sub { $o->{timezone}{timezone} },
+	clicked => sub { $timezone_manually_set = $o->configureTimezone(1) || $timezone_manually_set },
+    };
     push @l, {
 	group => N("System"),
 	label => N("Country / Region"),
@@ -772,13 +771,40 @@ sub summary {
     };
     push @l, {
 	group => N("System"),
-	label => N("Timezone"),
-	val => sub { $o->{timezone}{timezone} },
-	clicked => sub { $timezone_manually_set = $o->configureTimezone(1) || $timezone_manually_set },
+	label => N("Bootloader"),
+	val => sub { 
+	    #-PO: example: lilo-graphic on /dev/hda1
+	    N("%s on %s", $o->{bootloader}{method}, $o->{bootloader}{boot});
+	},
+	clicked => sub { 
+	    any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) or return;
+	    any::installBootloader($o, $o->{bootloader}, $o->{all_hds});
+	},
     };
 
     push @l, {
 	group => N("System"),
+	label => N("Services"),
+	val => sub {
+	    require services;
+	    my ($l, $activated) = services::services();
+	    N("Services: %d activated for %d registered", int(@$activated), int(@$l));
+	},
+	clicked => sub { 
+	    require services;
+	    $o->{services} = services::ask($o) and services::doit($o, $o->{services});
+	},
+    };
+
+    push @l, {
+	group => N("Hardware"), 
+	label => N("Keyboard"), 
+	val => sub { $o->{keyboard} && translate(keyboard::keyboard2text($o->{keyboard})) },
+	clicked => sub { $o->selectKeyboard(1) },
+    };
+
+    push @l, {
+	group => N("Hardware"),
 	label => N("Mouse"),
 	val => sub { translate($o->{mouse}{type}) . ' ' . translate($o->{mouse}{name}) },
 	clicked => sub { selectMouse($o, 1); mouse::write($o->do_pkgs, $o->{mouse}) },
@@ -892,33 +918,6 @@ sub summary {
 	    }
 	},
     } if detect_devices::get_net_interfaces();
-
-    push @l, {
-	group => N("Boot"),
-	label => N("Bootloader"),
-	val => sub { 
-	    #-PO: example: lilo-graphic on /dev/hda1
-	    N("%s on %s", $o->{bootloader}{method}, $o->{bootloader}{boot});
-	},
-	clicked => sub { 
-	    any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) or return;
-	    any::installBootloader($o, $o->{bootloader}, $o->{all_hds});
-	},
-    };
-
-    push @l, {
-	group => N("System"),
-	label => N("Services"),
-	val => sub {
-	    require services;
-	    my ($l, $activated) = services::services();
-	    N("Services: %d activated for %d registered", int(@$activated), int(@$l));
-	},
-	clicked => sub { 
-	    require services;
-	    $o->{services} = services::ask($o) and services::doit($o, $o->{services});
-	},
-    };
 
     my $check_complete = sub {
 	require install::pkgs;
