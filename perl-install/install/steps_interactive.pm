@@ -898,8 +898,11 @@ sub summary {
 	},
 	clicked => sub {
 	    require security::level;
-	    security::level::level_choose($o, \$o->{security}, \$o->{libsafe}, \$o->{security_user})
-		and install::any::set_security($o);
+       set_sec_level:
+	    if (security::level::level_choose($o, \$o->{security}, \$o->{libsafe}, \$o->{security_user})) {
+             check_security_level($o) or goto set_sec_level;
+             install::any::set_security($o);
+         }
 	},
     };
 
