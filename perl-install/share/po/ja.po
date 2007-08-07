@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-ja\n"
 "POT-Creation-Date: 2007-08-06 12:28+0200\n"
-"PO-Revision-Date: 2007-05-16 07:00+0900\n"
+"PO-Revision-Date: 2007-08-07 17:00+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -762,7 +762,7 @@ msgstr "ローカルファイル:"
 #: authentication.pm:66
 #, c-format
 msgid "Use information stored in local files for all authentication"
-msgstr ""
+msgstr "ローカルファイルに保存された情報をすべての認証に使う"
 
 #: authentication.pm:67
 #, c-format
@@ -2018,7 +2018,7 @@ msgstr ""
 "デュアルブート用です。\n"
 
 #: diskdrake/interactive.pm:1280
-#, fuzzy, c-format
+#, c-format
 msgid "Free space on %s (%s)"
 msgstr "%s の空き容量 (%s)"
 
@@ -2249,7 +2249,7 @@ msgstr "暗号化ファイルシステムを使う"
 #: fs/mount_options.pm:113
 #, c-format
 msgid "Flush write cache on file close"
-msgstr ""
+msgstr "ファイルを閉じるときに書き込みキャッシュを消去する"
 
 #: fs/mount_options.pm:115
 #, c-format
@@ -2262,16 +2262,16 @@ msgid ""
 "Do not update inode access times on this file system\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
-"このファイルシステムの inode のアクセス時間を更新しない。\n"
+"このファイルシステムで inode アクセス時間を更新しない。\n"
 "(用途例: ニューススプールへのアクセス速度を向上させる)"
 
 #: fs/mount_options.pm:120
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Do not update directory inode access times on this filesystem\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
-"このファイルシステムの inode のアクセス時間を更新しない。\n"
+"このファイルシステムでディレクトリの inode アクセス時間を更新しない。\n"
 "(用途例: ニューススプールへのアクセス速度を向上させる)"
 
 #: fs/mount_options.pm:123
@@ -2959,7 +2959,7 @@ msgstr "マウス"
 #: harddrake/data.pm:505
 #, c-format
 msgid "Biometry"
-msgstr ""
+msgstr "バイオメトリクス"
 
 #: harddrake/data.pm:513
 #, c-format
@@ -5121,28 +5121,28 @@ msgid "Your scanner(s) will not be available for non-root users."
 msgstr "お使いのスキャナは root 以外のユーザには利用できません"
 
 #: security/help.pm:11
-#, fuzzy, c-format
+#, c-format
 msgid "Accept bogus IPv4 error messages."
-msgstr "偽の IPv4 エラーメッセージを許可"
+msgstr "偽の IPv4 エラーメッセージを許可します。"
 
 #: security/help.pm:13
-#, fuzzy, c-format
+#, c-format
 msgid "Accept broadcasted icmp echo."
-msgstr "ブロードキャストされた icmp echo を許可"
+msgstr "ブロードキャストされた icmp echo を許可します。"
 
 #: security/help.pm:15
-#, fuzzy, c-format
+#, c-format
 msgid "Accept icmp echo."
-msgstr "icmp echo を許可"
+msgstr "icmp echo を許可します。"
 
 #: security/help.pm:17
-#, fuzzy, c-format
+#, c-format
 msgid "Allow autologin."
-msgstr "自動ログインを許可/禁止する"
+msgstr "自動ログインを許可します。"
 
 #. -PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
 #: security/help.pm:21
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
 "\n"
@@ -5151,32 +5151,34 @@ msgid ""
 "Else only /etc/issue is allowed."
 msgstr ""
 "「すべて」を選ぶと、/etc/issue と /etc/issue.net を許可します。\n"
+"\n"
 "「なし」を選ぶと、どちらも禁止します。\n"
+"\n"
 "それ以外の場合は、/etc/issue のみ許可します。"
 
 #: security/help.pm:27
-#, fuzzy, c-format
+#, c-format
 msgid "Allow reboot by the console user."
-msgstr "コンソールユーザによる再起動を許可/禁止する"
+msgstr "コンソールユーザによる再起動を許可します。"
 
 #: security/help.pm:29
-#, fuzzy, c-format
+#, c-format
 msgid "Allow remote root login."
-msgstr "リモート root ログインを許可"
+msgstr "リモート root ログインを許可します。"
 
 #: security/help.pm:31
-#, fuzzy, c-format
+#, c-format
 msgid "Allow direct root login."
-msgstr "ダイレクト root ログインを許可/禁止する"
+msgstr "ダイレクト root ログインを許可します。"
 
 #: security/help.pm:33
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow the list of users on the system on display managers (kdm and gdm)."
-msgstr "ディスプレイマネージャ (kdm と gdm) のユーザリストを許可/禁止する"
+msgstr "ディスプレイマネージャ (kdm と gdm) のユーザリストを許可します。"
 
 #: security/help.pm:35
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow to export display when\n"
 "passing from the root account to the other users.\n"
@@ -5184,12 +5186,12 @@ msgid ""
 "See pam_xauth(8) for more details.'"
 msgstr ""
 "root から他のユーザアカウントに移行したときに\n"
-"ディスプレイのエクスポートを許可/禁止する。\n"
+"ディスプレイのエクスポートを許可します。\n"
 "\n"
 "詳しくは man pam_xauth(8) を参照してください。"
 
 #: security/help.pm:40
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow X connections:\n"
 "\n"
@@ -5199,11 +5201,11 @@ msgid ""
 "\n"
 "- \"None\" (no connection)."
 msgstr ""
-"X 接続を許可/禁止する:\n"
+"X 接続を許可します:\n"
 "\n"
 "- すべて (すべての接続を許可)\n"
 "\n"
-"- ローカル (ローカル接続のみ許可)\n"
+"- ローカル (ローカルマシンからの接続のみ許可)\n"
 "\n"
 "- なし (接続しない)"
 
@@ -5218,7 +5220,7 @@ msgstr ""
 
 #. -PO: here "ALL", "Local" and "None" are values in a pull-down menu; translate them the same as they're
 #: security/help.pm:53
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Authorize:\n"
 "\n"
@@ -5236,6 +5238,8 @@ msgstr ""
 "\n"
 "- 「すべて」を選ぶと、すべてのサービスを tcp_wrappers が制御します。man "
 "hosts.deny(5) を参照。\n"
+"\n"
+"- 「ローカル」を選ぶと、ローカルのサービスのみが制御されます。\n"
 "\n"
 "- 「なし」を選ぶと、どれも制御されません。\n"
 "必要なサービスを認可するには、/etc/hosts.allow を使ってください。man hosts."
@@ -5262,30 +5266,30 @@ msgstr ""
 "'chkconfig --add' が参照し、サービスを追加するかどうかを決定します。"
 
 #: security/help.pm:72
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable crontab and at for users.\n"
 "\n"
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
 msgstr ""
-"ユーザの crontab と at を有効/無効にします。\n"
+"ユーザの crontab と at を有効にします。\n"
 "\n"
 "/etc/cron.allow と /etc/at.allow に許可するユーザを追加します。\n"
 "man at(1) と crontab(1) を参照。"
 
 #: security/help.pm:77
-#, fuzzy, c-format
+#, c-format
 msgid "Enable syslog reports to console 12"
-msgstr "Syslog による console 12 への報告を有効/無効にします。"
+msgstr "Syslog による console 12 への報告を有効にします。"
 
 #: security/help.pm:79
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable name resolution spoofing protection.  If\n"
 "\"%s\" is true, also reports to syslog."
 msgstr ""
-"name resolution spoofing protection を有効/無効にします。\n"
+"name resolution spoofing protection を有効にします。\n"
 "%s が true の場合は syslog に報告します。"
 
 #: security/help.pm:80
@@ -5294,24 +5298,24 @@ msgid "Security Alerts:"
 msgstr "セキュリティ警告:"
 
 #: security/help.pm:82
-#, fuzzy, c-format
+#, c-format
 msgid "Enable IP spoofing protection."
-msgstr "IP spoofing protection を有効にする"
+msgstr "IP spoofing protection を有効にします。"
 
 #: security/help.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Enable libsafe if libsafe is found on the system."
-msgstr "libsafe がシステムにあるときは libsafe を有効にする"
+msgstr "libsafe がシステムにあるときは libsafe を有効にします。"
 
 #: security/help.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Enable the logging of IPv4 strange packets."
-msgstr "IPv4 strange packets のログを有効にする"
+msgstr "IPv4 strange packets のログを有効にします。"
 
 #: security/help.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid "Enable msec hourly security check."
-msgstr "一時間ごとの msec セキュリティチェックを有効にする"
+msgstr "一時間ごとの msec セキュリティチェックを有効にします。"
 
 #: security/help.pm:90
 #, c-format
@@ -5328,19 +5332,19 @@ msgid "Use password to authenticate users."
 msgstr "ユーザの認証にパスワードを使用します。"
 
 #: security/help.pm:94
-#, fuzzy, c-format
+#, c-format
 msgid "Activate ethernet cards promiscuity check."
-msgstr "ethernet カードの promiscuity チェックを有効/無効にします。"
+msgstr "ethernet カードの promiscuity チェックを有効にします。"
 
 #: security/help.pm:96
-#, fuzzy, c-format
+#, c-format
 msgid "Activate daily security check."
-msgstr "毎日のセキュリティチェックを有効/無効にします。"
+msgstr "毎日のセキュリティチェックを有効にします。"
 
 #: security/help.pm:98
-#, fuzzy, c-format
+#, c-format
 msgid "Enable sulogin(8) in single user level."
-msgstr "シングルユーザレベルでの sulogin(8) を有効/無効にします。"
+msgstr "シングルユーザレベルでの sulogin(8) を有効にします。"
 
 #: security/help.pm:100
 #, c-format
@@ -5365,9 +5369,9 @@ msgid ""
 msgstr "パスワードの最小の長さ、最小の桁数、最小の大文字数を設定します。"
 
 #: security/help.pm:108
-#, fuzzy, c-format
+#, c-format
 msgid "Set the root's file mode creation mask."
-msgstr "root の umask を設定します。"
+msgstr "root のファイルモード作成マスクを設定します。"
 
 #: security/help.pm:109
 #, c-format
@@ -5491,24 +5495,24 @@ msgid "Timeout unit is second"
 msgstr "タイムアウトの単位は秒です"
 
 #: security/help.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Set the user's file mode creation mask."
-msgstr "ユーザの umask を設定します。"
+msgstr "ユーザのファイルモード作成マスクを設定します。"
 
 #: security/l10n.pm:11
 #, c-format
 msgid "Accept bogus IPv4 error messages"
-msgstr "偽の IPv4 エラーメッセージを許可"
+msgstr "偽の IPv4 エラーメッセージを許可する"
 
 #: security/l10n.pm:12
 #, c-format
 msgid "Accept broadcasted icmp echo"
-msgstr "ブロードキャストされた icmp echo を許可"
+msgstr "ブロードキャストされた icmp echo を許可する"
 
 #: security/l10n.pm:13
 #, c-format
 msgid "Accept icmp echo"
-msgstr "icmp echo を許可"
+msgstr "icmp echo を許可する"
 
 #: security/l10n.pm:15
 #, c-format
@@ -5523,7 +5527,7 @@ msgstr "コンソールユーザによる再起動"
 #: security/l10n.pm:17
 #, c-format
 msgid "Allow remote root login"
-msgstr "リモート root ログインを許可"
+msgstr "リモート root ログインを許可する"
 
 #: security/l10n.pm:18
 #, c-format
@@ -5543,12 +5547,12 @@ msgstr "root から他のユーザに移行したときにディスプレイを�
 #: security/l10n.pm:21
 #, c-format
 msgid "Allow X Window connections"
-msgstr "X Window 接続を許可"
+msgstr "X Window 接続を許可する"
 
 #: security/l10n.pm:22
 #, c-format
 msgid "Authorize TCP connections to X Window"
-msgstr "TCP の X Window 接続を許可"
+msgstr "TCP の X Window 接続を許可する"
 
 #: security/l10n.pm:23
 #, c-format
@@ -5563,7 +5567,7 @@ msgstr "Chkconfig は msec のルールに従う"
 #: security/l10n.pm:25
 #, c-format
 msgid "Enable \"crontab\" and \"at\" for users"
-msgstr "ユーザの crontab と at を許可"
+msgstr "ユーザの crontab と at を許可する"
 
 #: security/l10n.pm:26
 #, c-format
@@ -5924,11 +5928,12 @@ msgstr ""
 msgid ""
 "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr ""
+"CUPS (Common UNIX Printing System) は高度なプリンタスプールシステムです"
 
 #: services.pm:29
 #, c-format
 msgid "Launches the graphical display manager"
-msgstr ""
+msgstr "グラフィカルなディスプレイマネージャを起動します"
 
 #: services.pm:30
 #, c-format
@@ -5955,7 +5960,7 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
+msgstr "HAL はハードウェアに関する情報を収集・維持するデーモンです"
 
 #: services.pm:36
 #, c-format
@@ -6057,6 +6062,8 @@ msgid ""
 "DBUS is a daemon which broadcasts notifications of system events and other "
 "messages"
 msgstr ""
+"D-Bus はシステムイベントの通知やその他のメッセージをブロードキャストするデー"
+"モンです"
 
 #: services.pm:58
 #, c-format
@@ -6109,7 +6116,7 @@ msgstr ""
 #: services.pm:68
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
-msgstr ""
+msgstr "NTP (Network Time Protocol) を使ってシステム時間を同期させます"
 
 #: services.pm:69
 #, c-format
@@ -6219,6 +6226,8 @@ msgstr ""
 msgid ""
 "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
+"SANE (Scanner Access Now Easy) はスキャナやビデオカメラなどへのアクセスを可能"
+"にします"
 
 #: services.pm:93
 #, c-format
@@ -6226,6 +6235,8 @@ msgid ""
 "The SMB/CIFS protocol enables to shar access to files & printers and also "
 "integrates with a Windows Server domain"
 msgstr ""
+"SMB/CIFS プロトコルはファイルとプリンタへの共有アクセスを可能にします。"
+"Windows サーバドメインにも統合されます。"
 
 #: services.pm:94
 #, c-format
@@ -6238,6 +6249,8 @@ msgid ""
 "Secure Shell is a network protocol that allows data to be exchanged over a "
 "secure channel between two computers"
 msgstr ""
+"セキュアシェルは 2 つのコンピュータ間でデータをセキュアに (安全に) 交換するた"
+"めのネットワークプロトコルです"
 
 #: services.pm:96
 #, c-format
@@ -6261,7 +6274,7 @@ msgstr "X フォントサーバを開始します。(Xorg を実行するのに�
 #: services.pm:100
 #, c-format
 msgid "Starts other deamons on demand.."
-msgstr ""
+msgstr "オンデマンドで他のデーモンを起動します。"
 
 #: services.pm:123
 #, c-format
