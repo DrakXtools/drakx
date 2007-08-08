@@ -580,8 +580,8 @@ sub install_hardware_packages {
         require Xconfig::card;
         require Xconfig::proprietary;
         my $cards = Xconfig::card::readCardsDB("$ENV{SHARE_PATH}/ldetect-lst/Cards+");
-        my @drivers = uniq(map { exists $_->{Driver2} ? Xconfig::proprietary::pkg_name_for_Driver2($_) : () } values %$cards);
-        push @l, map { $_, @{$o->do_pkgs->check_kernel_module_packages($_) || []} } @drivers;
+        my @drivers = grep { $_ } uniq(map { $_->{Driver2} } values %$cards);
+        push @l, map { Xconfig::proprietary::pkgs_for_Driver2($_, $o->do_pkgs) } @drivers;
 
         require network::connection;
         require network::thirdparty;
