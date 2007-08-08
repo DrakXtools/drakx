@@ -398,20 +398,7 @@ sub get_alternatives {
 
 sub symlinkf_update_alternatives {
     my ($name, $wanted_file) = @_;
-    my $conf = get_alternatives($name);
-    my $chosen = find { $_->{file} eq $wanted_file } @{$conf->{alternatives}} or return;
-    symlinkf("/etc/alternatives/$name", $::prefix . $conf->{link});
-    symlinkf($wanted_file, "$::prefix/etc/alternatives/$name");
-    mapn {
-	my ($slave, $file) = @_;
-	if ($file) {
-	    symlinkf("/etc/alternatives/$slave->{name}", $::prefix . $slave->{link});
-	    symlinkf($file, "$::prefix/etc/alternatives/$slave->{name}");
-	} else {
-	    unlink $::prefix . $slave->{link};
-	    unlink "$::prefix/etc/alternatives/$slave->{name}";
-	}
-    } $conf->{slaves}, $chosen->{slave_files};
+    run_program::rooted($::prefix, 'update-alternatives', '--set', $name, $wanted_file);
 }
 
 sub update_gnomekderc_no_create {
