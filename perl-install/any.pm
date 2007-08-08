@@ -431,7 +431,7 @@ sub setupBootloader__general {
 	delete $b->{'raid-extra-boot'} if $b->{'raid-extra-boot'} eq 'mbr';
     }
 
-    bootloader::ensure_pkg_is_installed($in->do_pkgs, $b) or return 0;
+    bootloader::ensure_pkg_is_installed($in->do_pkgs, $b) or goto &setupBootloader__general;
 
     bootloader::suggest_message_text($b) if ! -e "$::prefix/boot/message-text"; #- in case we switch from grub to lilo
 
