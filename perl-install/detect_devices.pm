@@ -780,11 +780,7 @@ sub pci_probe__real() {
     } c::pci_probe());
 }
 sub pci_probe() {
-    if ($::isStandalone && @pci) {
-	    @pci;
-    } else {
-	    @pci = pci_probe__real();
-    }
+    @pci = pci_probe__real() if !@pci;
 }
 
 sub usb_probe__real() {
