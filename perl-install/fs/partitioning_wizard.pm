@@ -217,7 +217,7 @@ filesystem checks will be run on your next boot into Microsoft Windows®")) if $
 	    } ];
     }
 
-    if (@hds_rw) {
+    if (@hds_rw || find { $_->isa('partition_table::lvm') } @$hds) {
 	$solutions{diskdrake} = [ 0, N("Custom disk partitioning"), sub {
 	    partition_with_diskdrake($in, $all_hds, $all_fstab, $manual_fstab, $partitions, $partitioning_flags, $skip_mtab);
         } ];

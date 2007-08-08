@@ -180,10 +180,8 @@ sub get_hds {
 			1;
 		    } elsif ($type->{pt_type} == 0x8e) {
 			#- LVM on full disk
-			my $part = { size => $hd->{totalsectors}, device => $hd->{device}, %$type };
-			bless $hd, 'partition_table::raw';
-			$hd->{readonly} = $hd->{getting_rid_of_readonly_allowed} = 1;
-			$hd->{primary}{normal} = [ $part ];
+			require partition_table::lvm;
+			partition_table::lvm::initialize($hd);
 			1;
 		    } else {
 			0;
