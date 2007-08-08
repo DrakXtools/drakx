@@ -5,6 +5,8 @@ use strict;
 use common qw(N N_ if_ backtrace);
 use Config;
 
+BEGIN { unshift @::textdomains, 'libDrakX-standalone' }
+
 #- for sanity (if a use standalone is made during install, MANY problems will happen)
 require 'log.pm'; #- "require log" causes some pb, perl thinking that "log" is the log() function
 if ($::isInstall) {
