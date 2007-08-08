@@ -781,6 +781,7 @@ sub pci_probe__real() {
 }
 sub pci_probe() {
     @pci = pci_probe__real() if !@pci;
+    @pci;
 }
 
 sub usb_probe__real() {
