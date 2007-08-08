@@ -51,7 +51,7 @@ my @cards = (
     {
         ldetect_driver_regexp => 'Card:NVIDIA',
         xorg_driver_regexp => 'nv.+',
-        module_names => [ qw(NVdriver nvidia.o nvidia.ko nvidia71xx.ko nvidia96xx.ko nvidia97xx.ko) ]
+        module_names => [ qw(NVdriver nvidia.o nvidia.ko nvidia71xx.ko nvidia96xx.ko nvidia97xx.ko nvidia-current.ko) ]
     },
     {
         ldetect_driver_regexp => 'Card:ATI Radeon',
