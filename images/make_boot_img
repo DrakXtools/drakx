@@ -160,10 +160,14 @@ sub initrd {
 	mkdir_p("$tmp_initrd/etc/pcmcia");
 	 _ "cp -a /etc/pcmcia/config.opts $tmp_initrd/etc/pcmcia";
     }
-    my ($ext) = $img =~ /rdz-(.*)/ or die "bad initrd name ($img)";
-    my $modz = "all.kernels$I/$ext";
-    __ "tar xC $tmp_initrd/modules -f $modz/${type}_modules.tar";
-    _ "cp -f $modz/modules.dep modules.description $tmp_initrd/modules/";
+    {
+	my ($ext) = $img =~ /rdz-(.*)/ or die "bad initrd name ($img)";
+	my $modz = "all.kernels$I/$ext";
+	mkdir_p("$tmp_initrd/modules/$ext");
+	__ "tar xC $tmp_initrd/modules -f $modz/${type}_modules.tar";
+	_ "cp -f $modz/modules.dep $modz/modules.alias modules.description $tmp_initrd/modules/$ext";
+	symlink "$ext/$_", "$tmp_initrd/modules/$_" foreach qw(modules.dep modules.description);
+    }
 
     if ($ENV{DEBUGSTAGE1}) {
 	_ "cp -f /usr/bin/busybox $tmp_initrd/sbin";
