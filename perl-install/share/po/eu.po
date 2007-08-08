@@ -1,4 +1,4 @@
-# translation of eu.po to Euskara
+# translation of libDrakX.po to Euskara
 # EUSKARA: Mandriva Linux translation.
 # Copyright (C) 2002,2003, 2004, 2005, 2007 Free Software Foundation, Inc.
 #
@@ -6,9 +6,9 @@
 # Hizkuntza Politikarako Sailburuordetza <hizpol@ej-gv.es>, 2004.
 msgid ""
 msgstr ""
-"Project-Id-Version: eu\n"
+"Project-Id-Version: libDrakX\n"
 "POT-Creation-Date: 2007-08-06 12:28+0200\n"
-"PO-Revision-Date: 2007-08-08 04:15+0200\n"
+"PO-Revision-Date: 2007-08-08 14:48+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Euskara <eu@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -142,7 +142,7 @@ msgstr "Abio gailua"
 #: any.pm:387
 #, c-format
 msgid "Main options"
-msgstr ""
+msgstr "Aukera nagusiak"
 
 #: any.pm:388
 #, c-format
@@ -155,14 +155,14 @@ msgid "Enable ACPI"
 msgstr "Gaitu ACPI"
 
 #: any.pm:390
-#, fuzzy, c-format
+#, c-format
 msgid "Enable APIC"
-msgstr "Gaitu ACPI"
+msgstr "Gaitu APIC"
 
 #: any.pm:391
-#, fuzzy, c-format
+#, c-format
 msgid "Enable Local APIC"
-msgstr "Gaitu ACPI"
+msgstr "Gaitu bertako APIC"
 
 #: any.pm:393 any.pm:773 authentication.pm:196 diskdrake/smbnfs_gtk.pm:181
 #, c-format
@@ -180,9 +180,9 @@ msgid "Please try again"
 msgstr "Saiatu berriro"
 
 #: any.pm:396
-#, fuzzy, c-format
+#, c-format
 msgid "You can not use a password with %s"
-msgstr "Ezin da fitxategi-sistema enkriptatua erabili %s muntatze-punturako"
+msgstr "Ezin duzu %s-rekin pasahitz bat erabili"
 
 #: any.pm:399 any.pm:774 authentication.pm:197
 #, c-format
@@ -267,7 +267,7 @@ msgstr "Erantsi"
 #: any.pm:491
 #, c-format
 msgid "Xen append"
-msgstr ""
+msgstr "Xen erantsi"
 
 #: any.pm:494
 #, c-format
@@ -550,7 +550,7 @@ msgstr "Hizkuntza anitz"
 #: any.pm:928 any.pm:959
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
-msgstr ""
+msgstr "Kodeketa bateragarritasun zaharra (ez UTF-8)"
 
 #: any.pm:930
 #, c-format
@@ -560,7 +560,7 @@ msgstr "Hizkuntza guztiak"
 #: any.pm:1005
 #, c-format
 msgid "Country / Region"
-msgstr "Estatua/Eskualdea"
+msgstr "Estatua / Eskualdea"
 
 #: any.pm:1007
 #, c-format
@@ -688,22 +688,22 @@ msgstr "Zein da zure ordu-zona?"
 #: any.pm:1296 any.pm:1298
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
-msgstr ""
+msgstr "Data, ordulari eta ordu gune ezarpenak"
 
 #: any.pm:1299
 #, c-format
 msgid "What is the best time?"
-msgstr ""
+msgstr "Zein da ordu onena?"
 
 #: any.pm:1303
-#, fuzzy, c-format
+#, c-format
 msgid "%s (hardware clock set to UTC)"
-msgstr "Hardwarearen ordua GMTn ezarria"
+msgstr "%s (hardware ordularia UTC-ra ezarria)"
 
 #: any.pm:1304
-#, fuzzy, c-format
+#, c-format
 msgid "%s (hardware clock set to local time)"
-msgstr "Hardwarearen ordua GMTn ezarria"
+msgstr "%s (hardware ordularia bertako ordura ezarria)"
 
 #: any.pm:1306
 #, c-format
@@ -758,7 +758,7 @@ msgstr "Bertako fitxategia:"
 #: authentication.pm:66
 #, c-format
 msgid "Use information stored in local files for all authentication"
-msgstr ""
+msgstr "Erabili bertako fitxategietan gordetako informazioa autentikazio guztietarako"
 
 #: authentication.pm:67
 #, c-format
@@ -1034,7 +1034,7 @@ msgstr "Yaboot"
 #: bootloader.pm:1034
 #, c-format
 msgid "SILO"
-msgstr ""
+msgstr "SILO"
 
 #: bootloader.pm:1114
 #, c-format
@@ -1070,9 +1070,9 @@ msgid "Re-install Boot Loader"
 msgstr "Berriro instalatu abioko kargatzailea"
 
 #: common.pm:132
-#, fuzzy, c-format
+#, c-format
 msgid "B"
-msgstr "KB"
+msgstr "B"
 
 #: common.pm:132
 #, c-format
@@ -1112,7 +1112,7 @@ msgstr "%d segundo"
 #: common.pm:306
 #, c-format
 msgid "command %s missing"
-msgstr ""
+msgstr "%s komandoa falta da"
 
 #: diskdrake/dav.pm:17
 #, c-format
@@ -1338,9 +1338,9 @@ msgid "Warning"
 msgstr "Kontuz"
 
 #: diskdrake/hd_gtk.pm:380
-#, fuzzy, c-format
+#, c-format
 msgid "This partition is already empty"
-msgstr "Partizio honi ezin zaio tamaina aldatu"
+msgstr "Partizio hau dagoeneko hutsik dago"
 
 #: diskdrake/hd_gtk.pm:389
 #, c-format
@@ -1386,9 +1386,9 @@ msgstr "Aldatu aditu-modura"
 
 #: diskdrake/interactive.pm:269 diskdrake/interactive.pm:279
 #: diskdrake/interactive.pm:1153
-#, fuzzy, c-format
+#, c-format
 msgid "Confirmation"
-msgstr "Sare lokalaren konfigurazioa (LAN)"
+msgstr "Baieztapena"
 
 #: diskdrake/interactive.pm:269
 #, c-format
@@ -1622,9 +1622,9 @@ msgid "Which volume label?"
 msgstr "Bolumenarentzako zein etiketa?"
 
 #: diskdrake/interactive.pm:633
-#, fuzzy, c-format
+#, c-format
 msgid "Label:"
-msgstr "Etiketa"
+msgstr "Etiketa:"
 
 #: diskdrake/interactive.pm:647
 #, c-format
@@ -1689,12 +1689,12 @@ msgstr "Tamaina berria MBtan: "
 #: diskdrake/interactive.pm:759
 #, c-format
 msgid "Minimum size: %s MB"
-msgstr ""
+msgstr "Gutxieneko neurria: %s MB"
 
 #: diskdrake/interactive.pm:760
 #, c-format
 msgid "Maximum size: %s MB"
-msgstr ""
+msgstr "Geihenezko neurria: %s MB"
 
 #: diskdrake/interactive.pm:801 fs/partitioning_wizard.pm:181
 #, c-format
@@ -1846,6 +1846,10 @@ msgid ""
 "mounted there or leave them where they are (which results in hiding them by "
 "the contents of the mounted partition)"
 msgstr ""
+"%s direktorioak dagoeneko datuak dauzka\n"
+"(%s)\n"
+"\n"
+"Fitxategiak bertan muntatuko den partiziora mugitu ditzakezu edo dauden tokian utzi ditzakezu (ondorioz muntatutako partizioaren edukinak ezkutatuko ditu)"
 
 #: diskdrake/interactive.pm:1183
 #, c-format
@@ -2010,7 +2014,7 @@ msgstr ""
 #: diskdrake/interactive.pm:1280
 #, c-format
 msgid "Free space on %s (%s)"
-msgstr ""
+msgstr "Leku askea %s-n (%s)"
 
 #: diskdrake/interactive.pm:1289
 #, c-format
@@ -2313,7 +2317,7 @@ msgstr "Fitxategi-sistemako S/I guztiak sinkronizatuta egin behar dira."
 #: fs/mount_options.pm:140
 #, c-format
 msgid "Allow every user to mount and umount the file system."
-msgstr ""
+msgstr "Erabiltzaile orori fitxategi sistema muntatu eta desmuntatzeko baimena eman."
 
 #: fs/mount_options.pm:142
 #, c-format
@@ -2634,7 +2638,7 @@ msgstr "zerbitzaria"
 #: fsedit.pm:116
 #, c-format
 msgid "BIOS software RAID detected on disks %s. Activate it?"
-msgstr ""
+msgstr "BIOS software RAID aurkitu da %s diskoetan. Aktibatu nahi duzu?"
 
 #: fsedit.pm:230
 #, c-format
@@ -2888,14 +2892,14 @@ msgid "(E)IDE/ATA controllers"
 msgstr "(E)IDE/ATA kontroladoreak"
 
 #: harddrake/data.pm:386
-#, fuzzy, c-format
+#, c-format
 msgid "USB Mass Storage Devices"
-msgstr "USB soinu gailuak"
+msgstr "USB biltegiratze gailuak"
 
 #: harddrake/data.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "Card readers"
-msgstr "Txartel-modeloa:"
+msgstr "Txartela irakurleak"
 
 #: harddrake/data.pm:404
 #, c-format
@@ -2950,7 +2954,7 @@ msgstr "Sagua"
 #: harddrake/data.pm:505
 #, c-format
 msgid "Biometry"
-msgstr ""
+msgstr "Biometria"
 
 #: harddrake/data.pm:513
 #, c-format
@@ -5171,19 +5175,19 @@ msgid "Accept bogus IPv4 error messages."
 msgstr "Onartu IPv4 errore-mezu simulatuak"
 
 #: security/help.pm:13
-#, fuzzy, c-format
+#, c-format
 msgid "Accept broadcasted icmp echo."
-msgstr "Onartu difusioz bidalitako icmp oihartzuna"
+msgstr "Onartu broadcast bitartez bidalitako icmp echo"
 
 #: security/help.pm:15
-#, fuzzy, c-format
+#, c-format
 msgid "Accept icmp echo."
-msgstr "Onartu icmp oihartzuna"
+msgstr "Onartu icmp echo"
 
 #: security/help.pm:17
-#, fuzzy, c-format
+#, c-format
 msgid "Allow autologin."
-msgstr "Baimendu/Debekatu saio-hasiera automatikoa"
+msgstr "Onartu saio-hasiera automatikoa."
 
 #. -PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
 #: security/help.pm:21
@@ -5202,19 +5206,19 @@ msgstr ""
 "Bestela, /etc/issue bakarrik onartzen da."
 
 #: security/help.pm:27
-#, fuzzy, c-format
+#, c-format
 msgid "Allow reboot by the console user."
-msgstr "Onartu/Debekatu kontsola-erabiltzaileak sistema berrabiaraztea."
+msgstr "Onartu kontsola erabiltzaileak sistema berrabiaraztea."
 
 #: security/help.pm:29
-#, fuzzy, c-format
+#, c-format
 msgid "Allow remote root login."
-msgstr "Onartu urrunetik root gisa saioa hastea"
+msgstr "Onartu urrunetik root gisa saioa hastea."
 
 #: security/help.pm:31
-#, fuzzy, c-format
+#, c-format
 msgid "Allow direct root login."
-msgstr "Onartu/Debekatu zuzenean root gisa saioa hastea."
+msgstr "Onartu root gisa zuzenean saioa hastea."
 
 #: security/help.pm:33
 #, fuzzy, c-format
@@ -5237,7 +5241,7 @@ msgstr ""
 "Begiratu pam_xauth(8) xehetasun gehiago jasotzeko. "
 
 #: security/help.pm:40
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow X connections:\n"
 "\n"
@@ -5247,13 +5251,13 @@ msgid ""
 "\n"
 "- \"None\" (no connection)."
 msgstr ""
-"Baimendu/Debekatu X konexioak:\n"
+"Onartu X loturak:\n"
 "\n"
-"- GUZTIAK (konexio guztiak baimenduta),\n"
+"- \"Guztiak\" (lotura guztiak onartzen dira),\n"
 "\n"
-"- LOKALA (konexio lokala bakarrik) ,\n"
+"- \"Bertakoak\" (loturak soilik bertako makinatik),\n"
 "\n"
-"- BAT ERE EZ (bat ere konexiorik ez)."
+"- \"Bat ere ez\" (loturarik ez)."
 
 #: security/help.pm:48
 #, c-format
@@ -5314,22 +5318,22 @@ msgstr ""
 "gehitu behar den ala ez erabakitzeko."
 
 #: security/help.pm:72
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable crontab and at for users.\n"
 "\n"
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
 msgstr ""
-"Gaitu/Desgaitu crontab eta at erabiltzaileentzat.\n"
+"Gaitu crontab eta at erabiltzaileentzat.\n"
 "\n"
-"Ipini baimendutako erabiltzaileak /etc/cron.allow eta /etc/at.allow-en\n"
-"(ikus at(1) eta crontab(1) eskuliburuko orrialdeak)."
+"Ipini baimendutako erabiltzaileak /etc/cron.allow eta /etc/at.allow\n"
+"fitxategietan (begiratu at(1) eta crontab(1) man orriak)."
 
 #: security/help.pm:77
-#, fuzzy, c-format
+#, c-format
 msgid "Enable syslog reports to console 12"
-msgstr "Gaitu/Desgaitu 12. kontsolara egiten diren syslog-en berri-emateak"
+msgstr "Gaitu syslog txostenak 12. kontsolan"
 
 #: security/help.pm:79
 #, fuzzy, c-format
@@ -5346,31 +5350,31 @@ msgid "Security Alerts:"
 msgstr "Segurtasun-abisuak:"
 
 #: security/help.pm:82
-#, fuzzy, c-format
+#, c-format
 msgid "Enable IP spoofing protection."
-msgstr "Gaitu IP iruzurren kontrako babesa"
+msgstr "Gaitu IP iruzurren aurkako babesa."
 
 #: security/help.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Enable libsafe if libsafe is found on the system."
-msgstr "Gaitu libsafe, sisteman aurkitzen bada."
+msgstr "Gaitu libsafe, libsafe sisteman aurkitzen bada."
 
 #: security/help.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Enable the logging of IPv4 strange packets."
-msgstr "Gaitu IPv4 pakete arraroak egunkarian erregistratzea"
+msgstr "Gaitu IPv4 pakete arraroen erregistroa."
 
 #: security/help.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid "Enable msec hourly security check."
-msgstr "Gaitu msec ordueroko segurtasun-egiaztapena."
+msgstr "Gaitu msec orduroko segurtasun egiaztapena."
 
 #: security/help.pm:90
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable su only from members of the wheel group. If set to no, allows su from "
 "any user."
-msgstr " Gaitu su wheel taldeko kideentzat edo edozein erabiltzailerentzat."
+msgstr "Gaitu su soilik wheel taldeko kideentzat. Ezetz ezarri ezkero, su edozein erabiltzailekin onartzen du."
 
 #: security/help.pm:92
 #, c-format
@@ -5383,14 +5387,14 @@ msgid "Activate ethernet cards promiscuity check."
 msgstr "Aktibatu/Desgaitu ethernet txartelen nahasgarritasunaren egiaztapena."
 
 #: security/help.pm:96
-#, fuzzy, c-format
+#, c-format
 msgid "Activate daily security check."
-msgstr "Aktibatu/Desgaitu eguneroko segurtasun-egiaztapena."
+msgstr "Aktibatu eguneroko segurtasun egiaztapena."
 
 #: security/help.pm:98
-#, fuzzy, c-format
+#, c-format
 msgid "Enable sulogin(8) in single user level."
-msgstr "Gaitu/Desgaitu sulogin (8) erabiltzaile bakarraren mailan."
+msgstr "Gaitu sulogin(8) erabiltzaile bakarreko mailan."
 
 #: security/help.pm:100
 #, c-format
@@ -5417,9 +5421,9 @@ msgstr ""
 "gutxieneko maiuskula-kopurua."
 
 #: security/help.pm:108
-#, fuzzy, c-format
+#, c-format
 msgid "Set the root's file mode creation mask."
-msgstr "Ezarri root-aren \"umask\"."
+msgstr "Ezarri root-aren fitxategi modua sortzeko maskara."
 
 #: security/help.pm:109
 #, c-format
@@ -5553,9 +5557,9 @@ msgid "Timeout unit is second"
 msgstr "Denbora-mugaren unitatea segundoa da"
 
 #: security/help.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Set the user's file mode creation mask."
-msgstr "Ezarri root-aren \"umask\"."
+msgstr "Ezarri erabiltzaileen fitxategi modua sortzeko maskara."
 
 #: security/l10n.pm:11
 #, c-format
@@ -5658,9 +5662,9 @@ msgid "Enable msec hourly security check"
 msgstr "Gaitu msec ordueroko segurtasun-egiaztapena."
 
 #: security/l10n.pm:32
-#, fuzzy, c-format
+#, c-format
 msgid "Enable su only from the wheel group members"
-msgstr "Gaitu su wheel taldeko kideentzat edo edozein erabiltzailerentzat"
+msgstr "Onartu su soilik wheel taldeko kideentzat"
 
 #: security/l10n.pm:33
 #, c-format
@@ -5785,7 +5789,7 @@ msgstr "Exekutatu chkrootkit egiaztapenak"
 #: security/l10n.pm:57
 #, c-format
 msgid "Do not send empty mail reports"
-msgstr ""
+msgstr "Ez bidali hutsik dauden posta txostenak"
 
 #: security/l10n.pm:58
 #, c-format
@@ -6174,7 +6178,7 @@ msgstr ""
 #: services.pm:68
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
-msgstr ""
+msgstr "Sistemaren ordua sinkronizatzen du Sareko Ordu Protokoloa (NTP) erabiliz"
 
 #: services.pm:69
 #, c-format
@@ -6287,7 +6291,7 @@ msgstr ""
 #: services.pm:92
 #, c-format
 msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
-msgstr ""
+msgstr "SANE-k (Scanner Access Now Easy) eskaner, bideo kamera eta abarretara sarbidea ematen du."
 
 #: services.pm:93
 #, c-format
@@ -6686,42 +6690,42 @@ msgstr ""
 "testing] [-v|--version] "
 
 #: timezone.pm:148 timezone.pm:149
-#, fuzzy, c-format
+#, c-format
 msgid "All servers"
-msgstr "Gehitu zerbitzaria"
+msgstr "Zerbitzari guztiak"
 
 #: timezone.pm:183
 #, c-format
 msgid "Global"
-msgstr ""
+msgstr "Globala"
 
 #: timezone.pm:186
-#, fuzzy, c-format
+#, c-format
 msgid "Africa"
-msgstr "Hegoafrika"
+msgstr "Afrika"
 
 #: timezone.pm:187
-#, fuzzy, c-format
+#, c-format
 msgid "Asia"
-msgstr "Austria"
+msgstr "Asia"
 
 #: timezone.pm:188
 #, c-format
 msgid "Europe"
-msgstr ""
+msgstr "Europa"
 
 #: timezone.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid "North America"
-msgstr "Hegoafrika"
+msgstr "Ipar Amerika"
 
 #: timezone.pm:190
-#, fuzzy, c-format
+#, c-format
 msgid "Oceania"
-msgstr "Mazedonia"
+msgstr "Ozeania"
 
 #: timezone.pm:191
-#, fuzzy, c-format
+#, c-format
 msgid "South America"
 msgstr "Hegoafrika"
 
