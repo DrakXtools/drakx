@@ -49,16 +49,17 @@ substInFile { s/DISTRIB_DESCR/$ENV{DISTRIB_DESCR}/ } "$tmp/etc/issue";
 _ "../tools/install-xml-file-list list.xml $tmp";
 
 my %keytable_conflicts;
-my @less_important_keytables = qw(am_old am_phonetic no-dvorak fr_CH-latin1);
+my @less_important_keytables = qw(am_old am_phonetic no-dvorak);
 foreach (keyboard::loadkeys_files()) {
     my ($dir, $fname) = (dirname($_), basename($_));
-    my ($name) = $fname =~ /(.*)\.kmap\.gz/ or next;
+    my ($name) = $fname =~ /(.*)\.map\.gz/ or next;
     next if member($name, @less_important_keytables);
-    if (my ($short) = $name =~ m|(.+?)[\W_]|) {
+    if (my ($short2, $short) = $name =~ m|((.+?)[\W_][^\W_]*)|) {
+	$keytable_conflicts{$short} && $short2 ne $name and $short = $short2;
 	$keytable_conflicts{$short} and warn("conflict between $keytable_conflicts{$short} and $name for short name $short (choosing the first)\n"), next;
 	$keytable_conflicts{$short} = $name;
 	# create the short name based on the long one
-	symlinkf($fname, "$tmp$dir/$short.kmap.gz");
+	symlinkf($fname, "$tmp$dir/$short.map.gz");
     }
 }
 
