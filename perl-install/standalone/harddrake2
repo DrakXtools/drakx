@@ -52,6 +52,7 @@ my %fields =
       "port" => [ N("Port"), N("network printer port") ],
       "primary_partitions" => [ N("Primary partitions"), N("the number of the primary partitions") ],
       "Vendor" => [ N("Vendor"), N("the vendor name of the device") ],
+      "pci_domain" => [ N("PCI domain"), N("the PCI domain of the device") ],
       "pci_bus" => [ N("Bus PCI #"), N("the PCI bus on which the device is plugged") ],
       "pci_device" => [ N("PCI device #"), N("PCI device number") ],
       "pci_function" => [ N("PCI function #"), N("PCI function number") ],
@@ -126,7 +127,7 @@ my %groups = (
               generic =>
               {
                N("Identification") => [ qw(Vendor model description info media_type) ],
-               N("Connection") => [ qw(bus pci_bus pci_device pci_function vendor id subvendor subid) ],
+               N("Connection") => [ qw(bus pci_domain pci_bus pci_device pci_function vendor id subvendor subid) ],
               },
               AUDIO =>
               {
