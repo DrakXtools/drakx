@@ -55,6 +55,7 @@ if_(arch() =~ /ppc/,
 sub typeOfMBR($) { typeFromMagic(devices::make($_[0]), @MBR_signatures) }
 sub typeOfMBR_($) { typeFromMagic($_[0], @MBR_signatures) }
 
+sub use_pt_type { 0 }
 sub hasExtended { 0 }
 sub set_best_geometry_for_the_partition_table {}
 

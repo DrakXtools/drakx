@@ -19,6 +19,7 @@ my $nb_primary = 4;
 
 my $offset = $common::SECTORSIZE - length($magic) - $nb_primary * common::psizeof($format);
 
+sub use_pt_type { 1 }
 sub hasExtended { 1 }
 
 sub geometry_to_string {

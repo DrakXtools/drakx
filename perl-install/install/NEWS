@@ -1,3 +1,6 @@
+- diskdrake:
+  o do not show partition types which have no associated filesystem
+    for LVM LV (#32326)
 - allow using diskdrake even if there is only a lvm PV on full disk available
 - fix range max value >2TB when creating a partition (useful for LVs >2TB)
 - kill security level step (only reachable from summary now)

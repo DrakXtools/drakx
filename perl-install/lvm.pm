@@ -19,6 +19,7 @@ sub new {
     $name = substr($name, 0, 63); # max length must be < NAME_LEN / 2  where NAME_LEN is 128
     bless { disks => [], VG_name => $name }, $class;
 }
+sub use_pt_type { 0 }
 sub hasExtended { 0 }
 sub adjustStart {}
 sub adjustEnd {}

@@ -179,10 +179,16 @@ if_(arch() !~ /ppc/,
 
 
 sub type_names { 
-    my ($expert) = @_;
+    my ($expert, $o_hd) = @_;
     my @l = @{$type_names{important}};
     push @l, @{$type_names{less_important}}, sort @{$type_names{other}} if $expert;
-    @l;
+    if ($o_hd && !$o_hd->use_pt_type) {
+	warn "$_ => $type_name2fs_type{$_}\n" foreach @l;
+	@l = grep { $type_name2fs_type{$_} } @l;
+	uniq_ { $type_name2fs_type{$_[0]} } @l;
+    } else {
+	@l;
+    }
 }
 
 sub type_name2subpart {

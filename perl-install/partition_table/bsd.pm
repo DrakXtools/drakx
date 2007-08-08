@@ -58,6 +58,9 @@ my $magic = 0x82564557;
 my $nb_primary = 8;
 my $offset = 0x40;
 
+
+sub use_pt_type { 1 }
+
 sub read($$) {
     my ($hd, $sector) = @_;
     my $tmp;

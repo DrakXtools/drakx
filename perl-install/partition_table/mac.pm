@@ -79,6 +79,8 @@ $p_format = join '', @$p_format;
 my $magic = 0x4552;
 my $pmagic = 0x504D;
 
+sub use_pt_type { 1 }
+
 sub first_usable_sector { 1 }
 
 sub adjustStart($$) {

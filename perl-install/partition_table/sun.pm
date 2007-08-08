@@ -39,6 +39,8 @@ my $magic = 0xDABE;
 my $nb_primary = 8;
 my $offset = 0;
 
+sub use_pt_type { 1 }
+
 sub adjustStart($$) {
     my ($hd, $part) = @_;
     my $end = $part->{start} + $part->{size};

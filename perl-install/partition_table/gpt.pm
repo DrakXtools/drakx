@@ -223,6 +223,8 @@ sub raw_add {
     push @$raw, $part;
 }
 
+sub use_pt_type { 1 }
+
 sub adjustStart {}
 sub adjustEnd {}
 
