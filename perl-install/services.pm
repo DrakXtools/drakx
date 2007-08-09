@@ -90,7 +90,7 @@ logged in on other responding machines."),
 rwhod => N_("The rwho protocol lets remote users get a list of all of the users
 logged into a machine running the rwho daemon (similar to finger)."),
 saned => N_("SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."),
-smb => N_("The SMB/CIFS protocol enables to shar access to files & printers and also integrates with a Windows Server domain"),
+smb => N_("The SMB/CIFS protocol enables to share access to files & printers and also integrates with a Windows Server domain"),
 sound => N_("Launch the sound system on your machine"),
 sshd => N_("Secure Shell is a network protocol that allows data to be exchanged over a secure channel between two computers"),
 syslog => N_("Syslog is the facility by which many daemons use to log messages
