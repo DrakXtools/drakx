@@ -207,7 +207,7 @@ sub bug_handler {
     my $progname = $0;
 
     # do not loop if drakbug crashes and do not complain about wizcancel:
-    if ($progname =~ /drakbug/ || $error =~ /wizcancel/) {
+    if ($progname =~ /drakbug/ || $error =~ /wizcancel/ || !-x '/usr/bin/drakbug') {
     	warn $error;
     	exit(1);
     }
