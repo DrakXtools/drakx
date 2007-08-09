@@ -164,7 +164,7 @@ Be careful: this operation is dangerous. If you have not already done so, you fi
 When sure, press %s.", N("Next")))) or return;
 
 		my $mb_size = to_Mb($part->{size});
-		$in->ask_from('', N("Which size do you want to keep for Microsoft Windows® on partition %s?", partition_table::description($part)), [
+		$in->ask_from(N("Partitionning"), N("Which size do you want to keep for Microsoft Windows® on partition %s?", partition_table::description($part)), [
                    { label => N("Size"), val => \$mb_size, min => to_Mb($min_win), max => to_Mb($part->{size} - $min_linux - $min_swap), type => 'range' },
                 ]) or return;
 
