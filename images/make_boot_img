@@ -32,9 +32,7 @@ sub mke2fs {
 _ "mkdir -p $tmp_mnt";
 mkdir "images";
 
-my @kernels = all('all.kernels');
-my $main = chomp_(cat_('RPMS/.main')) || $kernels[0];
-@kernels = uniq($main, @kernels);
+my @kernels = chomp_(cat_('all.kernels/.list'));
 
 my @all_images = (
 		  if_($arch =~ /i.86/, 'isolinux', 'boot.iso', 'all.img', 'hd_grub.img'),
@@ -63,7 +61,7 @@ foreach my $img (@images) {
     } elsif ($extension eq 'img') {
 	print STDERR "calling boot_img_$arch for $img\n";
 	$::{"boot_img_$arch"}->($type, $I, "$img-$_", "all.kernels/$_/vmlinuz") foreach @kernels;
-	rename("$img-$main", $img);
+	rename("$img-$kernels[0]", $img);
     } else {
 	die "unknown image $img";
     }

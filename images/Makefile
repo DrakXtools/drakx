@@ -2,6 +2,7 @@ include ../Makefile.config
 
 VERSION=1.13
 PRODUCT=drakx-installer-images
+KERNELS=$(shell rpm -qf /lib/modules/2.*)
 
 IMAGES_DEST = $(ROOTDEST)/install/images
 
@@ -16,7 +17,7 @@ images: all.kernels
 	cd images ; md5sum *.{img,iso}* > MD5SUM
 
 all.kernels: update_kernel ../kernel/list_modules.pm
-	./update_kernel
+	./update_kernel $(KERNELS)
 
 tar:
 	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
