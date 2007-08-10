@@ -1509,7 +1509,7 @@ sub RENDER { # not that efficient...
 
   my ($x_offset, $y_offset, $_width, $_height) = calc_size($cell, $layout);
   my $pixbuf = $cell->get('pixbuf');
-    my ($pwidth, $pheight) = pixbuf_size($cell);
+  my ($pwidth, $pheight) = pixbuf_size($cell);
   my $txt_offset = $cell_area->x + $x_offset + $x_padding * 2 + $pwidth;
 
   if ($pixbuf) {
