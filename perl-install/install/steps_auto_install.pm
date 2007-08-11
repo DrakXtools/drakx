@@ -11,7 +11,6 @@ use vars qw(@ISA $graphical @graphical_steps);
 #-######################################################################################
 use common;
 use install::steps;
-use install::steps_gtk;
 
 sub new {
     my ($type, $o) = @_;
