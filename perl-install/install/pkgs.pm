@@ -493,8 +493,9 @@ sub computeGroupSize {
 		$newSelection{$id} = undef;
 
 		my $pkg = $packages->{depslist}[$id];
-		foreach ($pkg->requires_nosense) {
-		    my @choices = keys %{$packages->{provides}{$_} || {}};
+		my @requires = map { [ $_, keys %{$packages->{provides}{$_} || {}} ] } $pkg->requires_nosense;
+		foreach (sort { @$a <=> @$b } @requires) { #- sort on number of provides (it helps choosing "b" in: "a" requires both "b" and virtual={"b","c"})
+		    my ($virtual, @choices) = @$_;
 		    if (@choices <= 1) {
 			#- only one choice :)
 		    } elsif (find { exists $newSelection{$_} } @choices) {
@@ -504,7 +505,7 @@ sub computeGroupSize {
 			if (find { $_->flag_available } @choices_pkgs) {
 			    @choices = (); #- one package is already selected (?)
 			} else {
-			    @choices = map { $_->id } packageCallbackChoices($packages, undef, undef, \@choices_pkgs, $_);
+			    @choices = map { $_->id } packageCallbackChoices($packages, undef, undef, \@choices_pkgs, $virtual);
 			}
 		    }
 		    push @l2, @choices;
