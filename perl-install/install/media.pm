@@ -25,7 +25,7 @@ use fs::type;
 #-	rel_path (for isofiles and cdrom)
 #-	url
 
-#- list of fields for {mediums} :
+#- list of fields for {media} :
 #-	end (last rpm id, undefined iff not selected)
 #-	fakemedium ("$name ($rpmsdir)", used locally by urpmi)
 #-	rel_hdlist
@@ -46,36 +46,36 @@ our $postinstall_rpms = '';
 my %mounted_media;
 
 sub free_medium_id {
-    my ($mediums) = @_;
-    int(@$mediums);
+    my ($media) = @_;
+    int(@$media);
 }
 
 sub allMediums {
     my ($packages) = @_;
 
-    @{$packages->{mediums}};
+    @{$packages->{media}};
 }
 
 sub phys_media {
     my ($packages) = @_;
 
-    uniq(map { $_->{phys_medium} } @{$packages->{mediums}});
+    uniq(map { $_->{phys_medium} } @{$packages->{media}});
 }
 
 sub pkg2media {
-   my ($mediums, $p) = @_; 
+   my ($media, $p) = @_; 
    $p or internal_error("invalid package");
 
    find {
        $_->{selected} &&
 	 $p->id >= $_->{start} && $p->id <= $_->{end};
-   } @$mediums;
+   } @$media;
 }
 
 sub packageMedium {
    my ($packages, $p) = @_;
 
-   pkg2media($packages->{mediums}, $p) || {};
+   pkg2media($packages->{media}, $p) || {};
 }
 sub packagesOfMedium {
     my ($packages, $medium) = @_;
@@ -85,7 +85,7 @@ sub packagesOfMedium {
 
 sub first_medium {
     my ($packages) = @_;
-    $packages->{mediums}[0];
+    $packages->{media}[0];
 }
 
 sub path {
@@ -648,7 +648,7 @@ sub get_media_cfg {
 
     associate_phys_media($o->{all_hds}, $phys_medium, $hdlists);
 
-    if ($deselectionAllowed && !@{$packages->{mediums}}) {
+    if ($deselectionAllowed && !@{$packages->{media}}) {
 	my $allow = allow_copy_rpms_on_disk($phys_medium, $hdlists);
 	$o->ask_deselect_media__copy_on_disk($hdlists, $allow && \$o->{copy_rpms_on_disk}) if $allow || @$hdlists > 1;
     }
@@ -682,7 +682,7 @@ sub get_medium {
 
     $m->{selected} or log::l("ignoring packages in $m->{rel_hdlist}"), return;
 
-    my $medium_id = int @{$packages->{mediums}};
+    my $medium_id = int @{$packages->{media}};
     $m->{fakemedium} = $m->{name} || $phys_m->{method};
     $m->{fakemedium} =~ s!/!_!g; #- remove "/" from name
     if (find { $m->{fakemedium} eq $_->{fakemedium} } allMediums($packages)) {
@@ -727,7 +727,7 @@ sub get_medium {
     $phys_m->{name} ||= $m->{name};
 
     #- integrate medium in media list, only here to avoid download error (update) to be propagated.
-    push @{$packages->{mediums}}, $m;
+    push @{$packages->{media}}, $m;
 
     #- parse synthesis (if available) of directly hdlist (with packing).
     {
@@ -755,7 +755,7 @@ sub get_medium {
 	}
 
 	if ($error) {
-	    pop @{$packages->{mediums}};
+	    pop @{$packages->{media}};
 	    unlink $hdlist, $synthesis;
 	    die $error;
 	} else {
@@ -914,7 +914,7 @@ sub parse_url_with_login {
 sub install_urpmi {
     my ($stage2_method, $packages) = @_;
 
-    my @mediums = @{$packages->{mediums}};
+    my @media = @{$packages->{media}};
 
     log::l("install_urpmi $stage2_method");
     #- clean to avoid opening twice the rpm db.
@@ -923,7 +923,7 @@ sub install_urpmi {
     #- import pubkey in rpmdb.
     my $db = install::pkgs::open_rpm_db_rw();
     $packages->parse_pubkeys(db => $db);
-    foreach my $medium (@mediums) {
+    foreach my $medium (@media) {
 	$packages->import_needed_pubkeys($medium->{pubkey}, db => $db, callback => sub {
 					     my (undef, undef, $_k, $id, $imported) = @_;
 					     if ($id) {
@@ -934,7 +934,7 @@ sub install_urpmi {
     }
 
     my (@cfg, @netrc);
-    foreach my $medium (@mediums) {
+    foreach my $medium (@media) {
 	if ($medium->{selected}) {
             my ($dir, $removable_device, $static);
 

@@ -332,7 +332,7 @@ sub selectSupplMedia {
     $phys_medium->{$field} = $val;
 
     #- try using media_info/hdlist.cz
-    my $medium_id = int(@{$o->{packages}{mediums}});
+    my $medium_id = int(@{$o->{packages}{media}});
     eval { install::media::get_standalone_medium($o, $phys_medium, $o->{packages}, { name => "Supplementary media $medium_id" }) };
     if (!$@) {
 	log::l("read suppl hdlist (via $method)");

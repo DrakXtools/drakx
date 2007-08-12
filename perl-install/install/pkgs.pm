@@ -160,7 +160,7 @@ sub bestKernelPackage {
 sub packagesToInstall {
     my ($packages) = @_;
     my @packages;
-    foreach (@{$packages->{mediums}}) {
+    foreach (@{$packages->{media}}) {
 	$_->{selected} or next;
 	log::l("examining packagesToInstall of medium $_->{name}");
 	push @packages, grep { $_->flag_selected } install::media::packagesOfMedium($packages, $_);
@@ -322,7 +322,7 @@ sub empty_packages() {
     my $packages = new URPM;
 
     #- add additional fields used by DrakX.
-    @$packages{qw(count mediums)} = (0, []);
+    @$packages{qw(count media)} = (0, []);
 
     $packages;
 }
@@ -659,7 +659,7 @@ sub selectPackagesToUpgrade {
 sub installTransactionClosure {
     my ($packages, $id2pkg, $isUpgrade) = @_;
 
-    foreach (grep { !$_->{selected} } @{$packages->{mediums}}) {
+    foreach (grep { !$_->{selected} } @{$packages->{media}}) {
 	foreach ($_->{start} .. $_->{end}) {
 	    delete $id2pkg->{$_};
 	}
@@ -669,7 +669,7 @@ sub installTransactionClosure {
     my $medium;
 
     #- search first usable medium (media are sorted).
-    foreach (@{$packages->{mediums}}) {
+    foreach (@{$packages->{media}}) {
 	if ($l[0] <= $_->{end}) {
 	    #- we have a candidate medium, it could be the right one containing
 	    #- the first package of @l...
@@ -779,7 +779,7 @@ sub install {
 	}
 
 	#- extract headers for parent as they are used by callback.
-	extractHeaders(\@transToInstall, $packages->{mediums});
+	extractHeaders(\@transToInstall, $packages->{media});
 
 	my ($retry, $retry_count);
 	while (@transToInstall) {
