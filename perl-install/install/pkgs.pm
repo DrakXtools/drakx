@@ -184,12 +184,12 @@ sub packageRequest {
 }
 
 sub packageCallbackChoices {
-    my ($urpm, $_db, $state, $choices) = @_;
+    my ($urpm, $_db, $_state, $choices, $virtual_pkg_name) = @_;
 
     if (my @l = packageCallbackChoices_($urpm, $choices)) {
 	@l;
     } else {
-	log::l("packageCallbackChoices: default choice from ", join(",", map { $_->name } @$choices), " in ", join(",", map { $urpm->{depslist}[$_]->name } keys %{$state->{selected}}));
+	log::l("packageCallbackChoices: default choice from " . join(",", map { $_->name } @$choices) . " for $virtual_pkg_name");
 	$choices->[0];
     }
 }
