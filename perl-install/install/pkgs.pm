@@ -463,7 +463,7 @@ sub computeGroupSize {
 	}
 	join("\t", map { join('&&', @$_) } @r);
     }
-    my (%group, %memo, $slowpart_counter);
+    my (%group, %memo);
 
     log::l("install::pkgs::computeGroupSize");
     my $time = time();
@@ -496,26 +496,18 @@ sub computeGroupSize {
 		foreach ($pkg->requires_nosense) {
 		    my @choices = keys %{$packages->{provides}{$_} || {}};
 		    if (@choices <= 1) {
-			push @l2, @choices;
-		    } elsif (! find { exists $newSelection{$_} } @choices) {
-			my ($candidate_id, $prefer_id);
-			foreach (@choices) {
-			    ++$slowpart_counter;
-			    my $ppkg = $packages->{depslist}[$_] or next;
-			    $ppkg->flag_available and $prefer_id = $candidate_id = undef, last;
-			    exists $preferred{$ppkg->name} and $prefer_id = $_;
-			    $ppkg->name =~ /kernel-\d/ and $prefer_id ||= $_;
-			    foreach my $l ($ppkg->requires_nosense) {
-				$l =~ /locales-/ or next;
-				my $pppkg = packageByName($packages, $l) or next;
-				$pppkg->flag_available and $prefer_id ||= $_;
-			    }
-			    $candidate_id = $_;
-			}
-			if (defined $prefer_id || defined $candidate_id) {
-			    push @l2, defined $prefer_id ? $prefer_id : $candidate_id;
+			#- only one choice :)
+		    } elsif (find { exists $newSelection{$_} } @choices) {
+			@choices = ();
+		    } else {
+			my @choices_pkgs = map { $packages->{depslist}[$_] } @choices;
+			if (find { $_->flag_available } @choices_pkgs) {
+			    @choices = (); #- one package is already selected (?)
+			} else {
+			    @choices = map { $_->id } packageCallbackChoices($packages, undef, undef, \@choices_pkgs, $_);
 			}
 		    }
+		    push @l2, @choices;
 		}
 	    }
 
