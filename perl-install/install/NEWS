@@ -1,4 +1,6 @@
 - internal
+  o use urpm::select::get_preferred to choose preferred packages
+    (need urpmi library >= 4.10.1)
   o computeGroupSize: do direct requires before choices
     (eg for epiphany: require libmozilla-firefox2.0.0.6 before choosing
     package providing libmozjs.so)

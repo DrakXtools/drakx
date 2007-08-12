@@ -11,6 +11,7 @@ BEGIN {
 use URPM;
 use URPM::Resolve;
 use URPM::Signature;
+use urpm::select;
 use common;
 use install::any;
 use install::media qw(getFile_ getAndSaveFile_ packageMedium);
@@ -21,12 +22,6 @@ use fs;
 use fs::loopback;
 use c;
 
-our %preferred = map { $_ => undef } 
-  qw(libmesagl1 lib64mesagl1 grub nail 
-     perl-base openjade ctags glibc glibc-devel curl sane-backends postfix 
-     gcc gcc-cpp gcc-c++ proftpd vim-minimal db1 libxpm4 zlib1 
-     libkdebase4 libkdepim2-ktnef-devel libkdepim2-korganizer libkdebase4-konsole libkdebase4-kmenuedit
-     libncurses5 harddrake cups free-kde-config);
 
 #- lower bound on the left ( aka 90 means [90-100[ )
 our %compssListDesc = (
@@ -196,9 +191,10 @@ sub packageCallbackChoices {
 
 sub packageCallbackChoices_ {
     my ($urpm, $choices) = @_;
-    if (my $prefer = find { $_->arch ne 'src' && exists $preferred{$_->name} } @$choices) {
-	log::l("packageCallbackChoices: prefered choice " . $prefer->name . " from ", join(",", map { $_->name } @$choices));
-	$prefer;
+
+    my ($prefer, $_other) = urpm::select::get_preferred($urpm, $choices, '');
+    if (@$prefer) {
+	@$prefer;
     } elsif ($choices->[0]->name =~ /^kernel-(.*source-|.*-devel-)/) {
 	my @l = grep {
 	    if ($_->name =~ /^kernel-.*source-stripped-(.*)/) {
@@ -323,6 +319,9 @@ sub empty_packages() {
 
     #- add additional fields used by DrakX.
     @$packages{qw(count media)} = (0, []);
+
+    $packages->{log} = \&log::l;
+    $packages->{prefer_vendor_list} = '/etc/urpmi/prefer.vendor.list';
 
     $packages;
 }

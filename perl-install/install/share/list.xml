@@ -112,6 +112,7 @@
 </filter>
 
 <from>
+  /etc/urpmi/prefer.vendor.list
   /etc/mke2fs.conf
   /etc/fonts/fonts.conf
   /etc/protocols
@@ -330,6 +331,10 @@
   ARCH-linux/URPM/Resolve.pm
   ARCH-linux/URPM/Signature.pm
   ARCH-linux/auto/URPM/URPM.so
+  urpm/msg.pm
+  urpm/select.pm
+  urpm/util.pm
+  urpm/sys.pm
   <if set="DEBUG_INSTALL">
     ARCH-linux/Term/ReadLine/Gnu.pm
     ARCH-linux/Term/ReadLine/Gnu/XS.pm
