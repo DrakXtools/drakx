@@ -506,7 +506,7 @@ sub computeGroupSize {
 			    exists $preferred{$ppkg->name} and $prefer_id = $_;
 			    $ppkg->name =~ /kernel-\d/ and $prefer_id ||= $_;
 			    foreach my $l ($ppkg->requires_nosense) {
-				/locales-/ or next;
+				$l =~ /locales-/ or next;
 				my $pppkg = packageByName($packages, $l) or next;
 				$pppkg->flag_available and $prefer_id ||= $_;
 			    }
