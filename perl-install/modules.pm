@@ -191,7 +191,7 @@ sub write_preload_conf {
     push @l, 'padlock' if cat_("/proc/cpuinfo") =~ /rng_en/;
     push @l, 'evdev' if any { $_->{Synaptics} || $_->{ALPS} || $_->{HWHEEL} } detect_devices::getInputDevices();
     push @l, 'asus_acpi' if $is_laptop && $manufacturer =~ m/^ASUS/;
-    push @l, 'ibm_acpi' if $is_laptop && member($manufacturer, qw(IBM LENOVO));
+    push @l, 'thinkpad_acpi' if $is_laptop && member($manufacturer, qw(IBM LENOVO));
     push @l, 'hdaps' if $is_laptop && $manufacturer eq 'LENOVO';
     append_to_modules_loaded_at_startup("$::prefix/etc/modprobe.preload", @l);
 }
