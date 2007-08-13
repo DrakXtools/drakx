@@ -576,9 +576,12 @@ sub summary_prompt {
 
     $set_entry_labels = sub {
 	foreach (@$l) {
-	    my $t = $_->{val}() || '<span foreground="red">' . N("not configured") . '</span>';
-	    $t =~ s/&/&amp;/g;
-	    gtkset($_->{widget}, text_markup => $_->{label} . ' - ' . $t);
+	    my $t;
+	    if ($_->{val}) {
+		$t = $_->{val}() || '<span foreground="red">' . N("not configured") . '</span>';
+		$t =~ s/&/&amp;/g;
+	    }
+	    gtkset($_->{widget}, text_markup => $_->{label} . ($t ? " - $t" : ''));
 	}
     };
     $set_entry_labels->();
