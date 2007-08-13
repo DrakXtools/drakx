@@ -465,6 +465,12 @@ sub _normalize_entries {
 sub ask_from_normalize {
     my ($o, $common, $l) = @_;
 
+    if ($common->{focus_first}) {
+	if (my $e = find { $_->{val} } @$l) {
+	    $e->{focus} = sub { 1 };
+	}
+    }
+
     _normalize_entries($o, $l);
 
     $l->[0]{focus} = sub { 1 } if $common->{focus_first};
