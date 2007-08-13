@@ -47,7 +47,7 @@ sub translate_real {
     $s or return '';
     foreach (@::textdomains, 'libDrakX') {
 	my $s2;
-     if ($o_nb) {
+     if ($o_plural) {
          $s2 = Locale::gettext::dngettext($_, $s, $o_plural, $o_nb);
      } else {
          $s2 = Locale::gettext::dgettext($_, $s);
