@@ -1,3 +1,9 @@
+- merge root password step and create user step
+- fix checking user creation info (#32517)
+- allow to create only one user per default, but add an entry in summary to
+  create more users
+- authentication method is not configurable anymore for now. 
+  should we add it to summary?
 - 'ibm_acpi' driver was replaced by 'thinkpad_acpi (#31606)
 - internal
   o use urpm::select::get_preferred to choose preferred packages

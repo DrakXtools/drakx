@@ -17,7 +17,7 @@ if (my @l = grep { ! /^-/ } @ARGV) {
     $users = [ map { { name => $_, realname => $_ } } @l ];
 } else {
     $in = 'interactive'->vnew('su');
-    any::ask_users($in, $users, security::level::get(), []);
+    any::ask_user($in, $users, security::level::get(), needauser => 1);
 }
 
 any::add_users($users, authentication::get());

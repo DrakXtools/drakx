@@ -716,12 +716,21 @@ sub inspect {
     $h;
 }
 
-sub ask_user_one {
-    my ($in, $users, $security, $u, $suggested_names, %options) = @_;
+sub ask_user {
+    my ($in, $users, $security, %options) = @_;
+
+    ask_user_and_root($in, undef, $users, $security, %options);
+}
+
+sub ask_user_and_root {
+    my ($in, $superuser, $users, $security, %options) = @_;
 
     $options{needauser} ||= $security >= 3;
 
-    my @suggested_names = grep { ! defined getpwnam($_) } @$suggested_names;
+    my @suggested_names = $::isInstall ? do {
+	my @l = grep { !/^\./ && $_ ne 'lost+found' && -d "$::prefix/home/$_" } all("$::prefix/home");
+	grep { ! defined getpwnam($_) } @l;
+    } : ();
 
     my %high_security_groups = (
         xgrp => N("access to X programs"),
@@ -732,6 +741,7 @@ sub ask_user_one {
 	ctools => N("access to compilation tools"),
     );
 
+    my $u = {};
     $u->{password2} ||= $u->{password} ||= '';
     $u->{shell} ||= '/bin/bash';
     my $names = @$users ? N("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @$users)) : '';
@@ -739,63 +749,57 @@ sub ask_user_one {
     my %groups;
 
     require authentication;
-    my $verif = sub {
-	authentication::check_given_password($in, $u, $security > 3 ? 6 : 0) or return 1,2;
-	$u->{name} or $in->ask_warn('', N("Please give a user name")), return 1,0;
-        $u->{name} =~ /^[a-z]+?[a-z0-9_-]*?$/ or $in->ask_warn('', N("The user name must contain only lower cased letters, numbers, `-' and `_'")), return 1,0;
-        length($u->{name}) <= 32 or $in->ask_warn('', N("The user name is too long")), return 1,0;
-        defined getpwnam($u->{name}) || member($u->{name}, map { $_->{name} } @$users) and $in->ask_warn('', N("This user name has already been added")), return 1,0;
-	foreach ([ $u->{uid}, N("User ID") ],
-		 [ $u->{gid}, N("Group ID") ]) {
-	    my ($id, $name) = @$_;
-	    $id or next;
-	    $id =~ /^\d+$/ or $in->ask_warn('', N("%s must be a number", $name)), return 1;
-	    $id >= 500 or $in->ask_yesorno('', N("%s should be above 500. Accept anyway?", $name)) or return 1;
-	}
-        return 0;
+    my $validate_name = sub {
+	$u->{name} or $in->ask_warn('', N("Please give a user name")), return;
+        $u->{name} =~ /^[a-z]+?[a-z0-9_-]*?$/ or $in->ask_warn('', N("The user name must contain only lower cased letters, numbers, `-' and `_'")), return;
+        length($u->{name}) <= 32 or $in->ask_warn('', N("The user name is too long")), return;
+        defined getpwnam($u->{name}) || member($u->{name}, map { $_->{name} } @$users) and $in->ask_warn('', N("This user name has already been added")), return;
+	'ok';
+    };
+    my $validate_uid_gid = sub {
+	my ($field) = @_;
+	my $id = $u->{$field} or return 'ok';
+	my $name = $field eq 'uid' ? N("User ID") : N("Group ID");
+	$id =~ /^\d+$/ or $in->ask_warn('', N("%s must be a number", $name)), return;
+	$id >= 500 or $in->ask_yesorno('', N("%s should be above 500. Accept anyway?", $name)) or return;
+	'ok';
     };
     my $ret = $in->ask_from_(
         { title => N("Add user"),
           icon => 'banner-adduser',
-          messages => N("Enter a user\n%s", $options{additional_msg} || $names),
           interactive_help_id => 'addUser',
+	  if_($::isInstall && $superuser, cancel => ''),
           focus_first => 1,
-          if_(!$::isInstall, ok => N("Done")),
-          cancel => $options{noaccept} ? '' : N("Accept user"),
-          callbacks => {
-                  canceled => $verif,
-                  ok_disabled => sub { $options{needauser} && !@$users || $u->{name} },
-	  } }, [ 
+        }, [ 
+	      $superuser ? (
+	  { label => N("Set administrator (root) password"), title => 1 },
+	  { label => N("Password"), val => \$superuser->{password},  hidden => 1,
+	    validate => sub { authentication::check_given_password($in, $superuser, 2 * $security) } },
+	  { label => N("Password (again)"), val => \$superuser->{password2}, hidden => 1 },
+              ) : (),
+	  { label => N("Enter a user"), title => 1 }, if_($names, { label => $names }),
 	  { label => N("Real name"), val => \$u->{realname}, focus_out => sub {
 		$u->{name} ||= lc first($u->{realname} =~ /([a-zA-Z0-9_-]+)/);
 	    } },
-          { label => N("Login name"), val => \$u->{name}, list => \@suggested_names, not_edit => 0 },
-          { label => N("Password"),val => \$u->{password}, hidden => 1 },
+          { label => N("Login name"), val => \$u->{name}, list => \@suggested_names, not_edit => 0, validate => $validate_name },
+          { label => N("Password"),val => \$u->{password}, hidden => 1,
+	    validate => sub { authentication::check_given_password($in, $u, $security > 3 ? 6 : 0) } },
           { label => N("Password (again)"), val => \$u->{password2}, hidden => 1 },
           { label => N("Shell"), val => \$u->{shell}, list => [ shells() ], advanced => 1 },
-	  { label => N("User ID"), val => \$u->{uid}, advanced => 1 },
-	  { label => N("Group ID"), val => \$u->{gid}, advanced => 1 },
+	  { label => N("User ID"), val => \$u->{uid}, advanced => 1, validate => sub { $validate_uid_gid->('uid') } },
+	  { label => N("Group ID"), val => \$u->{gid}, advanced => 1, validate => sub { $validate_uid_gid->('gid') } },
 	    if_($security > 3,
                 map {
                     { label => $_, val => \$groups{$_}, text => $high_security_groups{$_}, type => 'bool' };
                 } keys %high_security_groups,
                ),
-               ],
-                            );
+	  ],
+    );
     $u->{groups} = [ grep { $groups{$_} } keys %groups ];
 
     push @$users, $u if $u->{name};
 
-    return $ret;
-}
-
-sub ask_users {
-    my ($in, $users, $security, $suggested_names) = @_;
-
-    while (1) {
-	my $u = {};
-        ask_user_one($in, $users, $security, $u, $suggested_names) and return;
-    }
+    $ret && $u;
 }
 
 sub sessions() {

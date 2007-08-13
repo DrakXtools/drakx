@@ -16,7 +16,7 @@ covers the entire Mandriva Linux distribution. If you agree with all the
 terms it contains, check the \"%s\" box. If not, clicking on the \"%s\"
 button will reboot your computer.", N("Accept"), N("Quit"));
 }
-sub addUser() {
+sub setRootPassword_addUser() {
     N("GNU/Linux is a multi-user system which means each user can have his or her
 own preferences, own files and so on. But unlike \"root\", who is the
 system administrator, the users you add at this point will not be authorized
@@ -680,43 +680,6 @@ move your mouse about.", N("with Wheel emulation"), N("Universal | Any PS/2 & US
 sub selectSerialPort() {
     N("Please select the correct port. For example, the \"COM1\" port under
 Windows is named \"ttyS0\" under GNU/Linux.");
-}
-sub setRootPassword() {
-    N("This is the most crucial decision point for the security of your GNU/Linux
-system: you must enter the \"root\" password. \"Root\" is the system
-administrator and is the only user authorized to make updates, add users,
-change the overall system configuration, and so on. In short, \"root\" can
-do everything! That's why you must choose a password which is difficult to
-guess: DrakX will tell you if the password you chose is too simple. As you
-can see, you're not forced to enter a password, but we strongly advise
-against this. GNU/Linux is just as prone to operator error as any other
-operating system. Since \"root\" can overcome all limitations and
-unintentionally erase all data on partitions by carelessly accessing the
-partitions themselves, it is important that it be difficult to become
-\"root\".
-
-The password should be a mixture of alphanumeric characters and at least 8
-characters long. Never write down the \"root\" password -- it makes it far
-too easy to compromise your system.
-
-One caveat: do not make the password too long or too complicated because you
-must be able to remember it!
-
-The password will not be displayed on screen as you type it. To reduce the
-chance of a blind typing error you'll need to enter the password twice. If
-you do happen to make the same typing error twice, you'll have to use this
-``incorrect'' password the first time you'll try to connect as \"root\".
-
-If you want an authentication server to control access to your computer,
-click on the \"%s\" button.
-
-If your network uses either LDAP, NIS, or PDC Windows Domain authentication
-services, select the appropriate one for \"%s\". If you do not know which
-one to use, you should ask your network administrator.
-
-If you happen to have problems with remembering passwords, or if your
-computer will never be connected to the Internet and you absolutely trust
-everybody who uses your computer, you can choose to have \"%s\".", N("Advanced"), N("authentication"), N("No password"));
 }
 sub setupBootloaderBeginner() {
     N("A boot loader is a little program which is started by the computer at boot

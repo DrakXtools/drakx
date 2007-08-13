@@ -728,6 +728,13 @@ sub configureServices {
 }
 
 #------------------------------------------------------------------------------
+sub setRootPassword_addUser {
+    my ($o) = @_;
+
+    setRootPassword($o);
+    addUser($o);
+}
+
 sub setRootPassword {
     my ($o) = @_;
     $o->{superuser} ||= {};
@@ -735,8 +742,6 @@ sub setRootPassword {
     authentication::set_root_passwd($o->{superuser}, $o->{authentication});
     install::any::set_authentication($o);
 }
-
-#------------------------------------------------------------------------------
 
 sub addUser {
     my ($o) = @_;

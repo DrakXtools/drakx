@@ -86,7 +86,7 @@ sub ask_authentication() {
 
 sub ask_users() {
     my $users = []; 
-    any::ask_users($in, $users, $security, []);
+    any::ask_user($in, $users, $security);
     my $old_user = $conf{USER_RENAME_FROM};
     if (@$users && $old_user) {
       $users->[0]{rename_from} = $old_user;

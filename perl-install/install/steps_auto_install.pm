@@ -15,8 +15,9 @@ use install::steps;
 sub new {
     my ($type, $o) = @_;
 
-    # Handle legacy options
     $o->{interactive} ||= 'gtk' if $graphical || !is_empty_array_ref($o->{interactiveSteps});
+    # Handle legacy options
+    push @{$o->{interactiveSteps}}, qw(setRootPassword_addUser) if intersection($o->{interactiveSteps}, ['addUser', 'setRootPassword']);
     push @{$o->{interactiveSteps}}, qw(installPackages configureNetwork), @graphical_steps, if_(!$o->{autoExitInstall}, 'exitInstall');
 
     if ($o->{interactive}) {

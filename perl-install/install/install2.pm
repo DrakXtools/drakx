@@ -271,17 +271,10 @@ sub configureServices {
     installStepsCall($o, $auto, 'configureServices');
 }
 #------------------------------------------------------------------------------
-sub setRootPassword {
-    my ($auto) = @_;
-    return if $o->{isUpgrade};
-
-    installStepsCall($o, $auto, 'setRootPassword');
-}
-#------------------------------------------------------------------------------
-sub addUser {
+sub setRootPassword_addUser {
     my ($auto) = @_;
 
-    installStepsCall($o, $auto, 'addUser') if !$o->{isUpgrade};
+    installStepsCall($o, $auto, 'setRootPassword_addUser') if !$o->{isUpgrade};
 }
 
 #------------------------------------------------------------------------------

@@ -784,6 +784,16 @@ sub summary {
 
     push @l, {
 	group => N("System"),
+	label => N("User management"),
+	clicked => sub { 
+	    if (my $u = any::ask_user($o, $o->{users}, $o->{security}, needauser => 1)) {
+		any::add_users([$u], $o->{authentication});
+	    }
+	},
+    };
+
+    push @l, {
+	group => N("System"),
 	label => N("Services"),
 	val => sub {
 	    require services;
@@ -935,37 +945,18 @@ sub summary {
 }
 
 #------------------------------------------------------------------------------
-sub setRootPassword {
-    my ($o, $clicked) = @_;
+#-setRootPassword_addUser
+#------------------------------------------------------------------------------
+sub setRootPassword_addUser {
+    my ($o) = @_;
+    $o->{users} ||= [];
+
     my $sup = $o->{superuser} ||= {};
     $sup->{password2} ||= $sup->{password} ||= "";
 
-    if ($o->{security} >= 1 || $clicked) {
-	require authentication;
-	authentication::ask_root_password_and_authentication($o, $o->{net}, $sup, $o->{authentication} ||= {}, $o->{meta_class}, $o->{security});
-    }
+    any::ask_user_and_root($o, $sup, $o->{users}, $o->{security});
+
     install::steps::setRootPassword($o);
-}
-
-#------------------------------------------------------------------------------
-#-addUser
-#------------------------------------------------------------------------------
-sub addUser {
-    my ($o, $clicked) = @_;
-    $o->{users} ||= [];
-
-    if ($o->{security} < 1) {
-	push @{$o->{users}}, { password => 'mandrake', realname => 'default', icon => 'automagic' } 
-	  if !member('mandrake', map { $_->{name} } @{$o->{users}});
-    }
-    if ($o->{security} >= 1 || $clicked) {
-	my @suggested_names = @{$o->{users}} ? () : grep { !/^\./ && $_ ne 'lost+found' && -d "$::prefix/home/$_" } all("$::prefix/home");
-	any::ask_users($o, $o->{users}, $o->{security}, \@suggested_names);
-    }
-    add2hash($o, any::get_autologin());
-    any::autologin($o, $o);
-    any::set_autologin($o->do_pkgs, $o->{autologin}, $o->{desktop}) if $::globetrotter;
-
     install::steps::addUser($o);
 }
 

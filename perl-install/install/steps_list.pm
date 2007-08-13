@@ -24,8 +24,8 @@ use common;
   formatPartitions   => [ N_("_: Keep these entry short\nFormatting"), 1, -1, '1', "doPartitionDisks" ],
   choosePackages     => [ N_("_: Keep these entry short\nChoosing packages"), 1, -2, '1', "formatPartitions" ],
   installPackages    => [ N_("_: Keep these entry short\nInstalling"), 1, -1, '', ["formatPartitions", "selectInstallClass"] ],
-  setRootPassword    => [ N_("_: Keep these entry short\nAuthentication"), 1, 1, '', "installPackages" ],
-  addUser            => [ N_("_: Keep these entry short\nUsers"), 1, 1, '', "installPackages" ],
+  setRootPassword_addUser
+                     => [ N_("_: Keep these entry short\nUsers"), 1, 1, '', "installPackages" ],
   configureNetwork   => [ N_("_: Keep these entry short\nNetworking"), 1, 1, '1', "formatPartitions" ],
   setupBootloader    => [ N_("_: Keep these entry short\nBootloader"), 1, 0, '', "installPackages" ],
   configureX         => [ N_("_: Keep these entry short\nConfigure X"), 1, 1, '1', ["formatPartitions", "setupBootloader"] ],
