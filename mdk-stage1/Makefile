@@ -81,7 +81,7 @@ FRONTEND_LINK = $(FRONTEND_OBJS) $($(F)_FRONTEND_LIBS)
 
 STAGE1_OWN_LIBS =
 ifeq (DIETLIBC, $(L))
-STAGE1_OWN_LIBS = /usr/lib/dietlibc/lib-$(ARCH)/libz.a
+STAGE1_OWN_LIBS = $(patsubst %,/usr/lib/dietlibc/lib-$(ARCH)/%,libz.a libldetect.a libmodprobe.a libpci.a)
 else
 STAGE1_OWN_LIBS = /usr/$(LIB)/libz.a
 endif

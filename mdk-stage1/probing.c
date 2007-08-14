@@ -43,6 +43,7 @@
 #include <sys/ioctl.h>
 #include <sys/mount.h>
 #include <pci/pci.h>
+#include <libldetect.h>
 #include "stage1.h"
 
 #include "log.h"
@@ -168,105 +169,52 @@ static void add_detected_device(unsigned short vendor, unsigned short device, un
 	log_message("detected device (%04x, %04x, %04x, %04x, %s, %s)", vendor, device, subvendor, subdevice, name, module);
 }
 
-static int check_device_full(struct pci_module_map_full * pcidb_full, unsigned int len_full,
-			     unsigned short vendor, unsigned short device,
-			     unsigned short subvendor, unsigned short subdevice)
+static int add_detected_device_if_match(struct pciusb_entry *e, char **modules, unsigned int modules_len)
 {
 	int i;
-	for (i = 0; i < len_full; i++)
-		if (pcidb_full[i].vendor == vendor && pcidb_full[i].device == device) {
-			if (pcidb_full[i].subvendor == subvendor && pcidb_full[i].subdevice == subdevice) {
-				add_detected_device(vendor, device, subvendor, subdevice,
-						    pcidb_full[i].name, pcidb_full[i].module);
-				return 1;
-			}
-		}
-	return 0;
-}
-
-static int check_device(struct pci_module_map * pcidb, unsigned int len,
-			unsigned short vendor, unsigned short device,
-			unsigned short subvendor, unsigned short subdevice)
-{
-	int i;
-	for (i = 0; i < len; i++)
-		if (pcidb[i].vendor == vendor && pcidb[i].device == device) {
-			add_detected_device(vendor, device, subvendor, subdevice,
-					    pcidb[i].name, pcidb[i].module);
+	for (i = 0; i < modules_len; i++) {
+		if (!strcmp(modules[i], e->module)) {
+			add_detected_device(e->vendor, e->device, e->subvendor, e->subdevice,
+					    e->text, e->module);
 			return 1;
 		}
+	}
 	return 0;
 }
 
 void probing_detect_devices()
 {
-	FILE * f = NULL;
-	char buf[512]; /* XXX the better fix is to readjust on '\n' */
         static int already_detected_devices = 0;
+	struct pciusb_entries entries;
+	int i;
 
 	if (already_detected_devices)
 		return;
 
-	if (!(f = fopen("/proc/bus/pci/devices", "rb"))) {
-		log_message("PCI: could not open proc file");
-		return;
-	}
-
-	while (1) {
-		unsigned int i;
-		unsigned short vendor, device, subvendor, subdevice, devbusfn;
-		if (!fgets(buf, sizeof(buf), f)) break;
-		sscanf(buf, "%hx %x", &devbusfn, &i);
-		device = i;
-		vendor = i >> 16;
-		{
-			int bus = devbusfn >> 8;
-			int device_p = (devbusfn & 0xff) >> 3;
-			int function = (devbusfn & 0xff) & 0x07;
-			char file[100];
-			int sf;
-			sprintf(file, "/proc/bus/pci/%02x/%02x.%d", bus, device_p, function);
-			if ((sf = open(file, O_RDONLY)) == -1) {
-				log_message("PCI: could not open file for full probe (%s)", file);
-				continue;
-			}
-			if (read(sf, buf, 48) == -1) {
-				log_message("PCI: could not read 48 bytes from %s", file);
-				close(sf);
-				continue;
-			}
-			close(sf);
-			memcpy(&subvendor, buf+44, 2);
-			memcpy(&subdevice, buf+46, 2);
-		}
-
-
+	entries = pci_probe();
+	for (i = 0; i < entries.nb; i++) {
+		struct pciusb_entry *e = &entries.entries[i];
 #ifndef DISABLE_PCIADAPTERS
 #ifndef DISABLE_MEDIAS
-		if (check_device_full(medias_pci_ids_full, medias_num_ids_full, vendor, device, subvendor, subdevice))
-			continue;
-		if (check_device(medias_pci_ids, medias_num_ids, vendor, device, subvendor, subdevice))
+		if (add_detected_device_if_match(e, medias_pci_modules, medias_pci_modules_len))
 			continue;
 #endif
 
 #ifndef DISABLE_NETWORK
-		if (check_device_full(network_pci_ids_full, network_num_ids_full, vendor, device, subvendor, subdevice))
+		if (add_detected_device_if_match(e, network_pci_modules, network_pci_modules_len))
 			continue;
-		if (check_device(network_pci_ids, network_num_ids, vendor, device, subvendor, subdevice))
-			continue;
-#endif
 #endif
 
 #ifdef ENABLE_USB
-		if (check_device(usb_pci_ids, usb_num_ids, vendor, device, subvendor, subdevice))
+		if (add_detected_device_if_match(e, usb_controller_modules, usb_controller_modules_len))
 			continue;
 #endif
-
+#endif
 		/* device can't be found in built-in pcitables, but keep it */
-		add_detected_device(vendor, device, subvendor, subdevice, "", "");
+		add_detected_device(e->vendor, e->device, e->subvendor, e->subdevice, e->text, e->module);
 	}
+	pciusb_free(&entries);
 
-	fclose(f);
 	already_detected_devices = 1;
 }
 
@@ -350,12 +298,10 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 
 	/* ---- PCI probe ---------------------------------------------- */
 	{
-		FILE * f = NULL;
-		unsigned int len = 0;
-		unsigned int len_full = 0;
-		char buf[200];
-		struct pci_module_map * pcidb = NULL;
-		struct pci_module_map_full * pcidb_full = NULL;
+		struct pciusb_entries entries;
+		char **pci_modules;
+		unsigned int pci_modules_len = 0;
+		int i;
 
 		switch (type) {
 #ifndef DISABLE_PCIADAPTERS
@@ -365,18 +311,14 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 			if (already_probed_scsi_adapters)
 				goto end_pci_probe;
 			already_probed_scsi_adapters = 1;
-			pcidb = medias_pci_ids;
-			len   = medias_num_ids;
-			pcidb_full = medias_pci_ids_full;
-			len_full   = medias_num_ids_full;
+			pci_modules = medias_pci_modules;
+			pci_modules_len   = medias_pci_modules_len;
 			break;
 #endif
 #ifndef DISABLE_NETWORK
 		case NETWORK_DEVICES:
-			pcidb = network_pci_ids;
-			len   = network_num_ids;
-			pcidb_full = network_pci_ids_full;
-			len_full   = network_num_ids_full;
+			pci_modules = network_pci_modules;
+			pci_modules_len   = network_pci_modules_len;
 			break;
 #endif
 #endif
@@ -385,103 +327,29 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 			if (already_probed_usb_controllers || IS_NOAUTO)
 				goto end_pci_probe;
 			already_probed_usb_controllers = 1;
-			pcidb = usb_pci_ids;
-			len   = usb_num_ids;
+			pci_modules = usb_controller_modules;
+			pci_modules_len   = usb_controller_modules_len;
 			break;
 #endif
 		default:
 			goto end_pci_probe;
 		}
 
-		if (!(f = fopen("/proc/bus/pci/devices", "rb"))) {
-			log_message("PCI: could not open proc file");
-			goto end_pci_probe;
-		}
-
-		while (1) {
-			unsigned int i;
-			unsigned short vendor, device, subvendor, subdevice, class_, devbusfn;
-			unsigned char class_prog;
-			const char *name, *module;
-			enum driver_type type_ = type;
-
-			if (!fgets(buf, sizeof(buf), f)) break;
-	
-			sscanf(buf, "%hx %x", &devbusfn, &i);
-			device = i;
-			vendor = i >> 16;
-
-			{
-				int bus = devbusfn >> 8;
-				int device_p = (devbusfn & 0xff) >> 3;
-				int function = (devbusfn & 0xff) & 0x07;
-				char file[100];
-				int sf;
-				sprintf(file, "/proc/bus/pci/%02x/%02x.%d", bus, device_p, function);
-				if ((sf = open(file, O_RDONLY)) == -1) {
-					log_message("PCI: could not open file for full probe (%s)", file);
+		entries = pci_probe();
+		for (i = 0; i < entries.nb; i++) {
+			struct pciusb_entry *e = &entries.entries[i];
+			int j;
+			for (j = 0; j < pci_modules_len; j++) {
+				if (!strcmp(pci_modules[j], e->module)) {
+					log_message("PCI: device %04x %04x %04x %04x is \"%s\", driver is %s",
+						    e->vendor, e->device, e->subvendor, e->subdevice, e->text, e->module);
+					discovered_device(type, e->text, e->module);
 					continue;
 				}
-				if (read(sf, buf, 48) == -1) {
-					log_message("PCI: could not read 48 bytes from %s", file);
-					close(sf);
-					continue;
-				}
-				close(sf);
-				memcpy(&class_prog, buf+9, 1);
-				memcpy(&class_, buf+10, 2);
-				memcpy(&subvendor, buf+44, 2);
-				memcpy(&subdevice, buf+46, 2);
 			}
-
-			/* special rules below must be in sync with ldetect/pci.c */
-
-			if (class_ == PCI_CLASS_SERIAL_USB) {
-				/* taken from kudzu's pci.c */
-				module = 
-					class_prog == 0 ? "usb-uhci" : 
-					class_prog == 0x10 ? "usb-ohci" :
-					class_prog == 0x20 ? "ehci-hcd" : NULL;
-				if (module) {
-					name = "USB Controller";
-					type_ = USB_CONTROLLERS;
-					goto found_pci_device;
-				}
-			}
-			if (class_ == PCI_CLASS_SERIAL_FIREWIRE) {
-				/* taken from kudzu's pci.c */
-				if (class_prog == 0x10) {
-					module = strdup("ohci1394");
-					name = "Firewire Controller";
-					goto found_pci_device;
-				}
-			}
-
-			for (i = 0; i < len_full; i++)
-				if (pcidb_full[i].vendor == vendor && pcidb_full[i].device == device) {
-					if (pcidb_full[i].subvendor == subvendor && pcidb_full[i].subdevice == subdevice) {
-						name = pcidb_full[i].name;
-						module = pcidb_full[i].module;
-						goto found_pci_device;
-					}
-				}
-			
-			for (i = 0; i < len; i++)
-				if (pcidb[i].vendor == vendor && pcidb[i].device == device) {
-					name = pcidb[i].name;
-					module = pcidb[i].module;
-					goto found_pci_device;
-				}
-
-			continue;
-
-		found_pci_device:
-                        log_message("PCI: device %04x %04x %04x %04x is \"%s\", driver is %s", vendor, device, subvendor, subdevice, name, module);
-			discovered_device(type_, name, module);
 		}
+		pciusb_free(&entries);
 	end_pci_probe:;
-		if (f)
-                        fclose(f);
 	}
 
 
@@ -489,11 +357,8 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 	/* ---- USB probe ---------------------------------------------- */
 	if ((bus == BUS_USB || bus == BUS_ANY) && !(IS_NOAUTO)) {
 		static int already_mounted_usbdev = 0;
-
-		FILE * f = NULL;
-		int len = 0;
-		char buf[200];
-		struct usb_module_map * usbdb = NULL;
+		struct pciusb_entries entries;
+		int i;
 
 		if (!already_probed_usb_controllers) {
 			already_probed_usb_controllers = 1;
@@ -514,38 +379,23 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 			remove_wait_message();
 		}
 
-		if (!(f = fopen("/proc/bus/usb/devices", "rb"))) {
-			log_message("USB: could not open proc file");
+		if (type != NETWORK_DEVICES)
 			goto end_usb_probe;
-		}
 
-		switch (type) {
-		case NETWORK_DEVICES:
-			usbdb = usb_usb_ids;
-			len   = usb_usb_num_ids;
-			break;
-		default:
-			goto end_usb_probe;
-		}
-
-		while (1) {
-			int i, vendor, id;
-
-			if (!fgets(buf, sizeof(buf), f)) break;
-
-			if (sscanf(buf, "P:  Vendor=%x ProdID=%x", &vendor, &id) != 2)
-				continue;
-
-			for (i = 0; i < len; i++) {
-				if (usbdb[i].vendor == vendor && usbdb[i].id == id) {
-					log_message("USB: device %04x %04x is \"%s\" (%s)", vendor, id, usbdb[i].name, usbdb[i].module);
-					discovered_device(type, usbdb[i].name, usbdb[i].module);
+		entries = usb_probe();
+		for (i = 0; i < entries.nb; i++) {
+			struct pciusb_entry *e = &entries.entries[i];
+			int j;
+			for (j = 0; j < usb_modules_len; j++) {
+				if (!strcmp(usb_modules[j], e->module)) {
+					log_message("USB: device %04x %04x is \"%s\" (%s)", e->vendor, e->device, e->text, e->module);
+					discovered_device(type, e->text, e->module);
+					continue;
 				}
 			}
 		}
+		pciusb_free(&entries);
 	end_usb_probe:;
-		if (f)
-                        fclose(f);
 	}
 #endif
 
