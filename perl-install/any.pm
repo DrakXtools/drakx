@@ -765,7 +765,7 @@ sub ask_user_and_root {
 	'ok';
     };
     my $ret = $in->ask_from_(
-        { title => N("Add user"),
+        { title => N("User management"),
           icon => 'banner-adduser',
           interactive_help_id => 'addUser',
 	  if_($::isInstall && $superuser, cancel => ''),
