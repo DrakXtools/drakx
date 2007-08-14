@@ -17,9 +17,14 @@
 ARCH := $(patsubst i%86,i386,$(shell uname -m))
 ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
+# DEBUG = 1
+
  #- default frontend is newt (honoured by main Makefile whenever possible)
+ifdef DEBUG
+F = STDIO
+else
 F = NEWT
-# F = STDIO
+endif
 
 DIET = $(shell test -x /usr/bin/diet && echo diet)
 
@@ -30,8 +35,14 @@ else
 L = GLIBC
 endif
 
+ifdef DEBUG
+OPTFLAGS = -g
+else
+OPTFLAGS = -Os
+endif
+
 #- flags used by all stuff
-CFLAGS = -Os -pipe -Wall -fomit-frame-pointer -fno-strict-aliasing
+CFLAGS = $(OPTFLAGS) -pipe -Wall -fomit-frame-pointer -fno-strict-aliasing
 
 ifneq (ppc, $(ARCH))
 ifneq (sparc, $(ARCH))
@@ -49,5 +60,9 @@ LDFLAGS = $($(L)_LDFLAGS)
 
 STAGE1_LIBC = $($(L)_LIBC)
 
+ifdef DEBUG
+STRIPCMD = echo not stripping
+else
 STRIPCMD = strip -R .note -R .comment
+endif
 
