@@ -149,10 +149,29 @@ sub new($$) {
     $o;
 }
 
+# (icon, title)
+my %default_step_items = (
+    acceptLicense   => [ 'banner-license', N("License agreement") ],
+    selectLanguage  => [ 'banner-languages', N("Localization") ],
+    selectKeyboard  => [ 'banner-languages', N("Localization") ],
+    doPartitionDisksBefore => [ 'banner-part', N("Partitioning") ],
+    doPartitionDisks => [ 'banner-part', N("Partitioning") ],
+    selectInstallClass => [ 'banner-sys', N("_: Keep these entry short\nInstallation class") ],
+    chooseGroups    => [ 'banner-sys', N("Package Group Selection") ],
+    installPackages => [ 'banner-sys', N("Installing") ],
+    summary         => [ 'banner-summary', N("Summary") ],
+    auth            => [ 'banner-pw', N("Authentication") ],
+    setupBootloaderBefore => [ 'banner-bootL', N("_: Keep these entry short\nBootloader") ],
+    setupBootloader => [ 'banner-bootL', N("_: Keep these entry short\nBootloader") ],
+    installUpdates  => [ 'banner-update', N("Updates") ],
+    exitInstall     => [ 'banner-exit', N("Exit") ],
+);
+
 sub enteringStep {
     my ($o, $step) = @_;
 
     printf "Entering step `%s'\n", common::remove_translate_context($o->{steps}{$step}{text});
+    ugtk2::set_default_step_items(@{$default_step_items{$step}}) if $default_step_items{$step};
     $o->SUPER::enteringStep($step);
     install::gtk::update_steps_position($o);
 }
