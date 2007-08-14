@@ -203,7 +203,7 @@ sub set_default {
 	#- Do  not  update  inode  access times on this
 	#- file system (e.g, for faster access  on  the
 	#- news spool to speed up news servers).
-	$options->{noatime} = detect_devices::isLaptop();
+	$options->{relatime} = detect_devices::isLaptop();
     }
     if ($part->{fs_type} eq 'nfs') {
 	put_in_hash($options, { 
