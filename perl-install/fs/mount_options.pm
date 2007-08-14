@@ -198,13 +198,12 @@ sub set_default {
 	$options->{flush} = 1;
     }
 
-    if (isTrueFS($part)) {
-	#- relatime on laptops (do not wake up the hd)
+	#- relatime (wake up the hd less often / better performances)
 	#- Do  not  update  inode  access times on this
 	#- file system (e.g, for faster access  on  the
 	#- news spool to speed up news servers).
-	$options->{relatime} = detect_devices::isLaptop();
-    }
+	$options->{relatime} = isTrueFS($part);
+
     if ($part->{fs_type} eq 'nfs') {
 	put_in_hash($options, { 
 			       nosuid => 1, 'rsize=8192,wsize=8192' => 1, soft => 1,
