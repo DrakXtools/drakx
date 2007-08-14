@@ -12,7 +12,7 @@ sub list() {
     my %non_defaults = (
 			sync => 'async', noatime => 'atime', noauto => 'auto', ro => 'rw', 
 			user => 'nouser', nodev => 'dev', noexec => 'exec', nosuid => 'suid',
-			user_xattr => 'nouser_xattr',
+			user_xattr => 'nouser_xattr', relatime => 'atime',
 		       );
     my @user_implies = qw(noexec nodev nosuid);
     \%non_defaults, \@user_implies;
