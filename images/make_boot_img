@@ -149,6 +149,7 @@ sub initrd {
     symlink "/proc/mounts", "$tpm_initrd/etc/mtab";
     symlink "../tmp", "$tpm_initrd/var/run";
     _ "install -D /usr/share/terminfo/l/linux $tmp_initrd/usr/share/terminfo/l/linux";
+    _ "install -D /usr/share/ldetect-lst/pcitable.gz $tmp_initrd/usr/share/ldetect-lst/pcitable.gz";
 
     _ "install $stage1_root/init $tmp_initrd/";
     foreach ('stage1', 'pppd', 'pppoe') {
