@@ -698,6 +698,13 @@ sub string_width {
 }
 
 
+my ($def_step_icon, $def_step_title);
+sub set_default_step_items {
+    ($def_step_icon, $def_step_title) = @_;
+}
+
+sub get_default_step_items { ($def_step_icon, $def_step_title) }
+
 # -=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---
 #                 toplevel window creation helper
 #
@@ -713,13 +720,13 @@ sub new {
     my $o = bless { %opts }, $type;
     while (my $e = shift @tempory::objects) { $e->destroy }
 
-    my $icon = find { _find_imgfile($_) } $opts{icon}, 'banner-generic-ad';
+    my $icon = find { _find_imgfile($_) } $opts{icon}, (get_default_step_items())[0], 'banner-generic-ad';
     my $banner_title = $opts{banner_title};
     my $window = gtknew(
 	'MagicWindow',
 	title => $title || '',
 	pop_it => $o->{pop_it},
-	$::isInstall && $icon ? (banner => Gtk2::Banner->new($icon, $title)) : (),
+	$::isInstall ? (banner => Gtk2::Banner->new($banner_title ? ($icon, $title) : get_default_step_items())) : (),
 	$::isStandalone && $banner_title && $icon ? (banner => Gtk2::Banner->new($icon, $banner_title)) : (),
 	child => gtknew('VBox'),
 	width => $opts{width}, height => $opts{height}, default_width => $opts{default_width}, default_height => $opts{default_height}, 
