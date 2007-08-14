@@ -18,9 +18,9 @@ clean xs:
 tar:
 	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
 	mkdir -p $(PRODUCT)-$(VERSION)
-	svn export -q .. $(PRODUCT)-$(VERSION)/perl-install
-	svn export -q ../../tools $(PRODUCT)-$(VERSION)/tools
-	svn export -q ../../kernel $(PRODUCT)-$(VERSION)/kernel
+	svn export -q -rBASE .. $(PRODUCT)-$(VERSION)/perl-install
+	svn export -q -rBASE ../../tools $(PRODUCT)-$(VERSION)/tools
+	svn export -q -rBASE ../../kernel $(PRODUCT)-$(VERSION)/kernel
 	cp ../../Makefile.config $(PRODUCT)-$(VERSION)/
 	tar cfj $(PRODUCT)-$(VERSION).tar.bz2 $(PRODUCT)-$(VERSION)
 	rm -rf $(PRODUCT)-$(VERSION)
