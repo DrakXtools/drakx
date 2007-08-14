@@ -117,7 +117,7 @@ sub help() {
 	'noatime' => N("Do not update inode access times on this file system
 (e.g, for faster access on the news spool to speed up news servers)."),
 
-	'nodiratime' => N("Do not update directory inode access times on this filesystem
+	'norelatime' => N("Update inode access times on this filesystem in a more efficient way
 (e.g, for faster access on the news spool to speed up news servers)."),
 
 	'noauto' => N("Can only be mounted explicitly (i.e.,
