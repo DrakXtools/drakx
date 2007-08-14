@@ -960,6 +960,9 @@ sub Options {
 	# we don't want both user and users
 	user => sub { $options->{users} = 0; $options->{$_} = $options->{user} foreach @$user_implies },
 	users => sub { $options->{user} = 0; $options->{$_} = $options->{users} foreach @$user_implies },
+	# we don't want both relatime and noatime
+	relatime => sub { $options->{noatime} = 0 },
+	noatime => sub { $options->{relatime} = 0 },
     );
 	
 

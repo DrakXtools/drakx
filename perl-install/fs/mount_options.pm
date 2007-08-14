@@ -12,7 +12,7 @@ sub list() {
     my %non_defaults = (
 			sync => 'async', noatime => 'atime', noauto => 'auto', ro => 'rw', 
 			user => 'nouser', nodev => 'dev', noexec => 'exec', nosuid => 'suid',
-			user_xattr => 'nouser_xattr', relatime => 'atime',
+			user_xattr => 'nouser_xattr',
 		       );
     my @user_implies = qw(noexec nodev nosuid);
     \%non_defaults, \@user_implies;
@@ -41,6 +41,7 @@ sub unpack {
 	$non_defaults->{$_} = 1 foreach @$l;
     }
 
+    $non_defaults->{relatime} = 1 if isTrueFS($part);
     $non_defaults->{encrypted} = 1;
 
     my $defaults = { reverse %$non_defaults };
@@ -117,7 +118,7 @@ sub help() {
 	'noatime' => N("Do not update inode access times on this file system
 (e.g, for faster access on the news spool to speed up news servers)."),
 
-	'norelatime' => N("Update inode access times on this filesystem in a more efficient way
+	'relatime' => N("Update inode access times on this filesystem in a more efficient way
 (e.g, for faster access on the news spool to speed up news servers)."),
 
 	'noauto' => N("Can only be mounted explicitly (i.e.,
