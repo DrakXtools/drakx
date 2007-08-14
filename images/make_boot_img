@@ -143,7 +143,8 @@ sub initrd {
     my $stage1_root = $ENV{DEBUGSTAGE1} ? "../mdk-stage1" : "/usr/$lib/drakx-installer-binaries";
 
     _ "rm -rf $tmp_initrd";
-    mkdir_p("$tmp_initrd$_") foreach qw(/etc /modules /sbin /tmp /var);
+    mkdir_p("$tmp_initrd$_") foreach qw(/etc /lib /modules /sbin /tmp /var);
+    symlink "/modules", "$tmp_initrd/lib/modules";
 
     symlink "/proc/mounts", "$tpm_initrd/etc/mtab";
     symlink "../tmp", "$tpm_initrd/var/run";
