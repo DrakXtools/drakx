@@ -199,7 +199,7 @@ sub set_default {
     }
 
     if (isTrueFS($part)) {
-	#- noatime on laptops (do not wake up the hd)
+	#- relatime on laptops (do not wake up the hd)
 	#- Do  not  update  inode  access times on this
 	#- file system (e.g, for faster access  on  the
 	#- news spool to speed up news servers).
