@@ -48,7 +48,9 @@ sub unpack {
     my %options = map { $_ => '' } keys %$non_defaults;
     my @unknown;
     foreach (split(",", $packed_options)) {
-	if (member($_, 'user', 'users')) {
+	if ($_ eq 'defaults') {
+	    #- skip
+	} elsif (member($_, 'user', 'users')) {
 	    $options{$_} = 1 foreach $_, @$user_implies;
 	} elsif (exists $non_defaults->{$_}) {
 	    $options{$_} = 1;
