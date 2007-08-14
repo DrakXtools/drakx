@@ -55,7 +55,7 @@ mo_files : $(MOFILES)
 localcopy: clean
 	rm -rf $(PACKAGE)-$(PKGVERSION)*
 	mkdir -p $(PACKAGE)-$(PKGVERSION)/tools
-	svn export -q . $(PACKAGE)-$(PKGVERSION)/perl-install
+	svn export -q -rBASE . $(PACKAGE)-$(PKGVERSION)/perl-install
 	for i in $(OTHERS); do svn export -q ../$$i $(PACKAGE)-$(PKGVERSION)/$$i; done
 	rm -rf $(PACKAGE)-$(PKGVERSION)/perl-install/{install,unused,list_modules.pm}
 	cp -f ../kernel/list_modules.pm $(PACKAGE)-$(PKGVERSION)/perl-install
