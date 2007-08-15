@@ -149,7 +149,9 @@ sub initrd {
     symlink "/proc/mounts", "$tmp_initrd/etc/mtab";
     symlink "../tmp", "$tmp_initrd/var/run";
     _ "install -D /usr/share/terminfo/l/linux $tmp_initrd/usr/share/terminfo/l/linux";
-    _ "install -D /usr/share/ldetect-lst/pcitable.gz $tmp_initrd/usr/share/ldetect-lst/pcitable.gz";
+    foreach ('pcitable', 'usbtable') {
+        _ "install -D /usr/share/ldetect-lst/$_.gz $tmp_initrd/usr/share/ldetect-lst/$_.gz";
+    }
     _ "install -D /usr/share/pci.ids $tmp_initrd/usr/share/pci.ids";
 
     _ "install $stage1_root/init $tmp_initrd/";
