@@ -172,6 +172,8 @@ static void add_detected_device(unsigned short vendor, unsigned short device, un
 static int add_detected_device_if_match(struct pciusb_entry *e, char **modules, unsigned int modules_len)
 {
 	int i;
+	if (!e->module)
+		return 0;
 	for (i = 0; i < modules_len; i++) {
 		if (!strcmp(modules[i], e->module)) {
 			add_detected_device(e->vendor, e->device, e->subvendor, e->subdevice,
@@ -339,6 +341,8 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 		for (i = 0; i < entries.nb; i++) {
 			struct pciusb_entry *e = &entries.entries[i];
 			int j;
+			if (!e->module)
+				continue;
 			for (j = 0; j < pci_modules_len; j++) {
 				if (!strcmp(pci_modules[j], e->module)) {
 					log_message("PCI: device %04x %04x %04x %04x is \"%s\", driver is %s",
