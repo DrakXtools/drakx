@@ -348,7 +348,7 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 					log_message("PCI: device %04x %04x %04x %04x is \"%s\", driver is %s",
 						    e->vendor, e->device, e->subvendor, e->subdevice, e->text, e->module);
 					discovered_device(type, e->text, e->module);
-					continue;
+					break;
 				}
 			}
 		}
