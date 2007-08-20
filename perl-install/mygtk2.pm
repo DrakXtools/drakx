@@ -333,6 +333,7 @@ sub _gtk__Label {
 	$w->set_text(delete $opts->{text}) if exists $opts->{text};
     } else {
 	$w = exists $opts->{text} ? Gtk2::Label->new(delete $opts->{text}) : Gtk2::Label->new;
+	$w->set_ellipsize(delete $opts->{ellipsize}) if exists $opts->{ellipsize};
 	$w->set_justify(delete $opts->{justify}) if exists $opts->{justify};
 	$w->set_line_wrap(delete $opts->{line_wrap}) if exists $opts->{line_wrap};
 	$w->set_alignment(@{delete $opts->{alignment}}) if exists $opts->{alignment};
