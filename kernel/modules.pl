@@ -16,7 +16,7 @@ sub flatten_and_check {
     map { 
 	my $category = $_;
 	my @l = @{$h->{$category}};
-	if (my @bad = difference2(\@l, [ category2modules($category) ])) {
+	if (my @bad = difference2(\@l, [ list_modules::category2modules_raw($category) ])) {
 	    foreach (@bad) {
 		if (my $cat = module2category($_)) {
 		    warn "ERROR in modules.pl: module $_ is in category $cat, not in $category\n";
@@ -37,7 +37,7 @@ my ($f, @para) = @ARGV;
 $::{$f}->(@para);
 
 sub modules() {
-    map { category2modules($_) } split(' ', $images_cat);
+    map { list_modules::category2modules_raw($_) } split(' ', $images_cat);
 }
 
 sub remove_unneeded_modules {
@@ -93,7 +93,7 @@ sub get_main_modules() {
 
 sub pci_modules4stage1 {
     my ($category) = @_;
-    my @modules = difference2([ category2modules($category) ]);
+    my @modules = difference2([ list_modules::category2modules_raw($category) ]);
     print "$_\n" foreach uniq(map { dependencies_closure($_) } @modules);
 }
 
