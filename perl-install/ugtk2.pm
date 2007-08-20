@@ -605,12 +605,14 @@ sub _find_imgfile {
 
 # use it if you want to display an icon/image in your app
 sub gtkcreate_img {
-    gtknew('Image', file => $_[0]);
+    my ($file, $o_size) = @_;
+    gtknew('Image', file => $file, if_($o_size, size => $o_size));
 }
 
 # use it if you want to draw an image onto a drawingarea
 sub gtkcreate_pixbuf {
-    gtknew('Pixbuf', file => $_[0]);
+    my ($file, $o_size) = @_;
+    gtknew('Pixbuf', file => $_[0], if_($o_size, size => $o_size));
 }
 
 sub gtktext_append { gtktext_insert(@_, append => 1) }
