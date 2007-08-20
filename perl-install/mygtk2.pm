@@ -755,6 +755,8 @@ sub _gtk_any_ButtonBox {
 
     if (!$w) {
 	$w = "Gtk2::$class"->new;
+	$w->set_homogeneous(delete $opts->{homogenous}) if exists $opts->{homogenous};
+	$w->set_spacing(delete $opts->{spacing}) if exists $opts->{spacing};
 	$w->set_layout(delete $opts->{layout} || 'spread');
     } elsif ($action eq 'gtkset') {
 	$_->destroy foreach $w->get_children;
