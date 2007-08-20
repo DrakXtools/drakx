@@ -12,7 +12,7 @@ use modules::any_conf;
 sub modules_descriptions() {
     my $f = '/lib/modules/' . c::kernel_version() . '/modules.description';
     -e $f or $f = '/modules/modules.description';
-    map { /(\S+)\s+(.*)/ } cat_($f);
+    map { my ($m, $d) = /(\S+)\s+(.*)/; $m =~ s/-/_/g; ($m => $d) } cat_($f);
 }
 
 sub module2description { +{ modules_descriptions() }->{$_[0]} }
@@ -24,9 +24,9 @@ sub category2modules_and_description {
 }
 
 my %mappings_24_26 = (
-    "usb-ohci" => "ohci-hcd",
-    "usb-uhci" => "uhci-hcd",
-    "uhci" => "uhci-hcd",
+    "usb_ohci" => "ohci_hcd",
+    "usb_uhci" => "uhci_hcd",
+    "uhci" => "uhci_hcd",
     "printer" => "usblp",
     "bcm4400" => "b44",
     "3c559" => "3c359",
@@ -34,7 +34,7 @@ my %mappings_24_26 = (
     "dc395x_trm" => "dc395x",
 );
 my %mappings_26_24 = reverse %mappings_24_26;
-$mappings_26_24{'uhci-hcd'} = 'usb-uhci';
+$mappings_26_24{'uhci_hcd'} = 'usb_uhci';
 
 sub mapping_24_26 {
     my ($modname) = @_;

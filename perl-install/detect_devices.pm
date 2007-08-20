@@ -390,7 +390,7 @@ sub probe_category {
     my @modules = list_modules::category2modules($category);
 
     if_($category =~ /sound/ && arch() =~ /ppc/ && get_mac_model() !~ /IBM/,
-	{ driver => 'snd-powermac', description => 'Macintosh built-in' },
+	{ driver => 'snd_powermac', description => 'Macintosh built-in' },
     ),
     grep {
 	if ($category eq 'network/isdn') {
@@ -601,7 +601,7 @@ sub get_xdsl_usb_devices() {
     $_->{driver} = 'eciusb' foreach @eci;
     my @usb = detect_devices::probe_category('network/usb_dsl');
     $_->{description} = "USB ADSL modem (eagle chipset)" foreach
-      grep { $_->{driver} eq 'ueagle-atm' && $_->{description} eq '(null)' } @usb;
+      grep { $_->{driver} eq 'ueagle_atm' && $_->{description} eq '(null)' } @usb;
     @usb, @bewan, @eci;
 }
 
