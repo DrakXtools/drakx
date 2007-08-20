@@ -1,5 +1,6 @@
 #!/usr/bin/perl
 
+use lib '../kernel';
 use strict;
 use MDK::Common;
 
