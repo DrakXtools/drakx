@@ -147,7 +147,7 @@ sub _gtk_any_Button {
         if ($class eq 'RadioButton') {
             @radio_options = delete $opts->{group};
 	}
-	$w = $opts->{image} || $opts->{child} ? "Gtk2::$class"->new :
+	$w = $opts->{child} ? "Gtk2::$class"->new :
 	  delete $opts->{mnemonic} ? "Gtk2::$class"->new_with_mnemonic(@radio_options, delete $opts->{text} || '') :
 	    $opts->{text} ? "Gtk2::$class"->new_with_label(@radio_options, delete $opts->{text} || '') :
            "Gtk2::$class"->new(@radio_options);
@@ -155,10 +155,11 @@ sub _gtk_any_Button {
 	$w->{format} = delete $opts->{format} if exists $opts->{format};
     }
 
-    if (my $widget = delete $opts->{image} || delete $opts->{child}) {
+    if (my $widget = delete $opts->{child}) {
 	$w->add($widget);
 	$widget->show;
     }
+    $w->set_image(delete $opts->{image}) if exists $opts->{image};
     $w->set_relief(delete $opts->{relief}) if exists $opts->{relief};
 
     if (my $text_ref = delete $opts->{text_ref}) {
