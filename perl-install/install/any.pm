@@ -56,7 +56,7 @@ sub start_i810fb() {
     my $xres = $vga_to_xres{$vga} || '800';
 
     log::l("trying to load i810fb module with xres <$xres> (vga was <$vga>)");
-    eval { modules::load('intel-agp') };
+    eval { modules::load('intel_agp') };
     eval {
 	my $opt = "xres=$xres hsync1=32 hsync2=48 vsync1=50 vsync2=70 vram=2 bpp=16 accel=1 mtrr=1"; #- this sucking i810fb does not accept floating point numbers in hsync!
 	modules::load_with_options([ 'i810fb' ], { i810fb => $opt }); 
