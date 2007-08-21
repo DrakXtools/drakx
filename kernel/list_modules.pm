@@ -299,6 +299,12 @@ sub dependencies_closure {
     (@l, $_[0]);
 }
 
+sub filename2modname {
+    my ($modname) = @_;
+    $modname =~ s/-/_/g;
+    $modname;
+}
+
 #- give module filenames, with '-' characters
 sub category2modules_raw {
     map {
@@ -313,7 +319,7 @@ sub category2modules_raw {
 
 #- give driver names, with '_' characters
 sub category2modules {
-    map { s/-/_/g; $_ } category2modules_raw(@_);
+    map { filename2modname($_) } category2modules_raw(@_);
 }
 
 sub all_modules() {
@@ -322,7 +328,7 @@ sub all_modules() {
 
 sub module2category {
     my ($module) = @_;
-    $module =~ s/-/_/g;
+    $module = filename2modname($module);
     foreach my $t1 (keys %l) {
 	my $h = $l{$t1};
 	foreach my $t2 (keys %$h) {
