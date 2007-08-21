@@ -61,7 +61,7 @@ sub floppies {
         }
     }
         
-    my @ide = ls120s() and eval { modules::load("ide-floppy") };
+    my @ide = ls120s() and eval { modules::load("ide_floppy") };
 
     eval { modules::load("usb_storage") } if $::isInstall && usbStorage();
     my @scsi = grep { $_->{media_type} eq 'fd' } getSCSI();

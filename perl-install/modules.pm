@@ -161,7 +161,7 @@ sub load_category {
 
 	$_->{try} = 1 if member($_->{driver}, 'hptraid', 'ohci1394'); #- do not warn when this fails
     }
-    eval { load_and_configure($conf, 'ide-generic') } if $category eq 'disk/ide';
+    eval { load_and_configure($conf, 'ide_generic') } if $category eq 'disk/ide';
     grep { !($_->{error} && $_->{try}) } @l;
 }
 
@@ -261,7 +261,7 @@ sub when_load_category {
 
     if ($category =~ m,disk/ide,) {
 	$conf->add_probeall('ide-controller', $name);
-	eval { load('ide-disk') };
+	eval { load('ide_disk') };
     } elsif ($category =~ m,disk/(scsi|hardware_raid|sata|usb|firewire),) {
 	$conf->add_probeall('scsi_hostadapter', $name);
 	eval { load('sd_mod') };
