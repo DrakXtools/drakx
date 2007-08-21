@@ -289,8 +289,9 @@ sub load_dependencies {
 	s![^ ]*/!!g;
 	s!\.ko!!g;
 	s!\.gz!!g;
-	my ($f, $deps) = split ':';
-	$f => [ split ' ', $deps ];
+	my ($filename, $d) = split ':';
+	my ($modname, @deps) = map { filename2modname($_) } $filename, split(' ', $d);
+	$dependencies{$modname} =  \@deps;
     } cat_($file);
 }
 
