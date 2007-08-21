@@ -16,7 +16,7 @@ sub flatten_and_check {
     map { 
 	my $category = $_;
 	my @l = @{$h->{$category}};
-	if (my @bad = difference2(\@l, [ list_modules::category2modules_raw($category) ])) {
+	if (my @bad = difference2(\@l, [ category2modules($category) ])) {
 	    foreach (@bad) {
 		if (my $cat = module2category($_)) {
 		    warn "ERROR in modules.pl: module $_ is in category $cat, not in $category\n";
