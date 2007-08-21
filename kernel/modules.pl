@@ -69,17 +69,14 @@ sub filter_modules_dep {
     my @l = cat_("all.kernels/$kern_ver/modules.dep");
 
     @l = map {
-	if (/(\S+):\s+(.*)/) {
-	    my ($module, @deps) = map { m!.*/(.*)\.k?o(\.gz)$! && $1 } $1, split(' ', $2);
+	    my ($f, $d) = split ':';
+	    my ($module, @deps) = map { m!.*/(.*)\.k?o(\.gz)$! && $1 } $f, split(' ', $d);
 	    if (member($module, 'plip', 'ppa', 'imm')) {
 		@deps = map { $_ eq 'parport' ? 'parport_pc' : $_ } @deps;
 	    } elsif ($module eq 'vfat') {
 		push @deps, 'nls_cp437', 'nls_iso8859-1';
 	    }
-	    if_(@deps, join(' ', "$module:", @deps));
-	} else {
-	    ();
-	}
+	    join(' ', "$module:", @deps);
     } @l;
 
     output("all.kernels/$kern_ver/modules.dep", map { "$_\n" } @l);
