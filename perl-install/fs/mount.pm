@@ -115,7 +115,8 @@ sub umount {
 
     run_program::run('umount', $mntpoint) or do {
 	kill 15, fuzzy_pidofs('^fam\b');
-	run_program::run('umount', $mntpoint) or die N("error unmounting %s: %s", $mntpoint, $!);
+	my $err;
+	run_program::run('umount', '2>', \$err, $mntpoint) or die N("error unmounting %s: %s", $mntpoint, $err);
     };
 
     substInFile { $_ = '' if /(^|\s)$mntpoint\s/ } '/etc/mtab'; #- do not care about error, if we can not read, we will not manage to write... (and mess mtab)
