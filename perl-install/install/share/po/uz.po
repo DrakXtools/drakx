@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-02 11:21+0200\n"
+"POT-Creation-Date: 2007-08-21 15:52+0200\n"
 "PO-Revision-Date: 2007-08-20 21:59+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <floss-uz-l10n@googlegroups.com>\n"
@@ -70,7 +70,8 @@ msgstr "Манзил ftp:// ёки http:// билан бошланиши кер�
 
 #: any.pm:232
 #, c-format
-msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid ""
+"Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr ""
 "Мавжуд бўлган ойналарнинг рўйхатини олиш учун Mandriva Linux сайти билан "
 "алоқа ўрнатилмоқда..."
@@ -250,7 +251,8 @@ msgstr "Скриншотларни дискни бўлишдан аввал ол
 #: any.pm:1279
 #, c-format
 msgid "Screenshots will be available after install in %s"
-msgstr "Ўрнатиш тугаганидан кейин скриншотларни қуйидаги жойдан топиш мумкин: %s"
+msgstr ""
+"Ўрнатиш тугаганидан кейин скриншотларни қуйидаги жойдан топиш мумкин: %s"
 
 #: gtk.pm:136
 #, c-format
@@ -685,7 +687,46 @@ msgstr "Mandriva Linux ОТни ўрнатиш %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> банддан-бандга"
 
-#: steps_gtk.pm:195
+#: steps_gtk.pm:155 steps_gtk.pm:156
+#, c-format
+msgid "Localization"
+msgstr ""
+
+#: steps_gtk.pm:159 steps_list.pm:20
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Installation class"
+msgstr "Ўрнатиш синфи"
+
+#: steps_gtk.pm:160 steps_gtk.pm:243 steps_interactive.pm:511
+#, c-format
+msgid "Package Group Selection"
+msgstr "Пакетларни гуруҳ бўйича танлаш"
+
+#: steps_gtk.pm:161 steps_gtk.pm:460 steps_interactive.pm:543
+#, c-format
+msgid "Installing"
+msgstr "Ўрнатилмоқда"
+
+#: steps_gtk.pm:162 steps_gtk.pm:576 steps_interactive.pm:735
+#, c-format
+msgid "Summary"
+msgstr "Ҳисобот"
+
+#: steps_gtk.pm:164 steps_gtk.pm:165 steps_list.pm:30
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Bootloader"
+msgstr "ОТ юклагичи"
+
+#: steps_gtk.pm:166 steps_interactive.pm:644
+#, c-format
+msgid "Updates"
+msgstr "Янгиланишлар"
+
+#: steps_gtk.pm:213
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -694,12 +735,7 @@ msgid ""
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 
-#: steps_gtk.pm:225 steps_interactive.pm:511
-#, c-format
-msgid "Package Group Selection"
-msgstr "Пакетларни гуруҳ бўйича танлаш"
-
-#: steps_gtk.pm:246 steps_interactive.pm:529
+#: steps_gtk.pm:264 steps_interactive.pm:529
 #, c-format
 msgid "Individual package selection"
 msgstr "Пакетларни биттама-битта танлаш"
@@ -764,7 +800,8 @@ msgstr "%s'ни қолдириш учун"
 msgid ""
 "You can not select this package as there is not enough space left to install "
 "it"
-msgstr "Бу пакетни танлолмайсиз, чунки уни ўрнатиш учун етарли жой мавжуд эмас."
+msgstr ""
+"Бу пакетни танлолмайсиз, чунки уни ўрнатиш учун етарли жой мавжуд эмас."
 
 #: steps_gtk.pm:366
 #, c-format
@@ -826,12 +863,7 @@ msgstr "Дастурлар бошқаруви"
 msgid "Choose the packages you want to install"
 msgstr "Сиз ўрнатмоқчи бўлган пакетларни танланг"
 
-#: steps_gtk.pm:442 steps_interactive.pm:543
-#, c-format
-msgid "Installing"
-msgstr "Ўрнатилмоқда"
-
-#: steps_gtk.pm:468
+#: steps_gtk.pm:487
 #, c-format
 msgid "No details"
 msgstr "Тафсилотларсиз"
@@ -852,12 +884,7 @@ msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d-та пакет"
 
-#: steps_gtk.pm:557 steps_interactive.pm:735
-#, c-format
-msgid "Summary"
-msgstr "Ҳисобот"
-
-#: steps_gtk.pm:570
+#: steps_gtk.pm:589
 #, c-format
 msgid "Configure"
 msgstr "Мослаш"
@@ -1095,11 +1122,6 @@ msgstr "Ўрнатишдан кейин мослаш"
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr ""
 
-#: steps_interactive.pm:644
-#, c-format
-msgid "Updates"
-msgstr "Янгиланишлар"
-
 #: steps_interactive.pm:645
 #, c-format
 msgid ""
@@ -1134,8 +1156,14 @@ msgstr ""
 msgid "Unable to contact mirror %s"
 msgstr "Ойна (%s)билан алоқа ўрнатиб бўлмади."
 
-#: steps_interactive.pm:794 steps_interactive.pm:811 steps_interactive.pm:827
-#: steps_interactive.pm:838
+#. -PO: example: lilo-graphic on /dev/hda1
+#: steps_interactive.pm:777
+#, c-format
+msgid "%s on %s"
+msgstr "%s %s'да"
+
+#: steps_interactive.pm:810 steps_interactive.pm:817 steps_interactive.pm:830
+#: steps_interactive.pm:847 steps_interactive.pm:863 steps_interactive.pm:874
 #, c-format
 msgid "Hardware"
 msgstr "Асбоб-ускуналар"
@@ -1211,18 +1239,7 @@ msgstr "ишлаяпти"
 msgid "disabled"
 msgstr "ўчирилган"
 
-#: steps_interactive.pm:897
-#, c-format
-msgid "Boot"
-msgstr "Тизимни юкланиши"
-
-#. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:901
-#, c-format
-msgid "%s on %s"
-msgstr "%s %s'да"
-
-#: steps_interactive.pm:927
+#: steps_interactive.pm:939
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Сиз X'ни мосламадингиз. Ростдан буни истайсизми?"
@@ -1352,13 +1369,6 @@ msgid ""
 "Hard drive detection"
 msgstr "Қаттиқ дискни аниқлаш"
 
-#: steps_list.pm:20
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Installation class"
-msgstr "Ўрнатиш синфи"
-
 #: steps_list.pm:21
 #, c-format
 msgid ""
@@ -1401,13 +1411,6 @@ msgid ""
 "Installing"
 msgstr "Ўрнатилмоқда"
 
-#: steps_list.pm:27
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Authentication"
-msgstr "Тасдиқлаш"
-
 #: steps_list.pm:28
 #, c-format
 msgid ""
@@ -1421,13 +1424,6 @@ msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "Тармоқ"
-
-#: steps_list.pm:30
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Bootloader"
-msgstr "ОТ юклагичи"
 
 #: steps_list.pm:31
 #, c-format
@@ -1464,3 +1460,10 @@ msgid ""
 "Exit"
 msgstr "Чиқиш"
 
+#~ msgid "Boot"
+#~ msgstr "Тизимни юкланиши"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Authentication"
+#~ msgstr "Тасдиқлаш"

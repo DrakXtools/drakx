@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-02 11:21+0200\n"
+"POT-Creation-Date: 2007-08-21 15:52+0200\n"
 "PO-Revision-Date: 2007-06-15 14:03+0300\n"
 "Last-Translator: Pavel Maryanov <acid_jack@ukr.net>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -693,7 +693,46 @@ msgstr "Установка Mandriva Linux %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> между элементами"
 
-#: steps_gtk.pm:195
+#: steps_gtk.pm:155 steps_gtk.pm:156
+#, c-format
+msgid "Localization"
+msgstr ""
+
+#: steps_gtk.pm:159 steps_list.pm:20
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Installation class"
+msgstr "Тип установки"
+
+#: steps_gtk.pm:160 steps_gtk.pm:243 steps_interactive.pm:511
+#, c-format
+msgid "Package Group Selection"
+msgstr "Выбор группы пакетов"
+
+#: steps_gtk.pm:161 steps_gtk.pm:460 steps_interactive.pm:543
+#, c-format
+msgid "Installing"
+msgstr "Устанавливается"
+
+#: steps_gtk.pm:162 steps_gtk.pm:576 steps_interactive.pm:735
+#, c-format
+msgid "Summary"
+msgstr "Сводка"
+
+#: steps_gtk.pm:164 steps_gtk.pm:165 steps_list.pm:30
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Bootloader"
+msgstr "Загрузчик"
+
+#: steps_gtk.pm:166 steps_interactive.pm:644
+#, c-format
+msgid "Updates"
+msgstr "Обновления"
+
+#: steps_gtk.pm:213
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -706,12 +745,7 @@ msgstr ""
 "текстовом режиме. Для этого после загрузки с CDROM'а нажмите `F1',\n"
 "а затем наберите 'text'."
 
-#: steps_gtk.pm:225 steps_interactive.pm:511
-#, c-format
-msgid "Package Group Selection"
-msgstr "Выбор группы пакетов"
-
-#: steps_gtk.pm:246 steps_interactive.pm:529
+#: steps_gtk.pm:264 steps_interactive.pm:529
 #, c-format
 msgid "Individual package selection"
 msgstr "Выбор отдельных пакетов"
@@ -838,12 +872,7 @@ msgstr "Управление программами"
 msgid "Choose the packages you want to install"
 msgstr "Выберите пакеты, которые нужно установить"
 
-#: steps_gtk.pm:442 steps_interactive.pm:543
-#, c-format
-msgid "Installing"
-msgstr "Устанавливается"
-
-#: steps_gtk.pm:468
+#: steps_gtk.pm:487
 #, c-format
 msgid "No details"
 msgstr "Убрать подробности"
@@ -865,12 +894,7 @@ msgid_plural "%d packages"
 msgstr[0] "%d пакет"
 msgstr[1] "%d пакетов"
 
-#: steps_gtk.pm:557 steps_interactive.pm:735
-#, c-format
-msgid "Summary"
-msgstr "Сводка"
-
-#: steps_gtk.pm:570
+#: steps_gtk.pm:589
 #, c-format
 msgid "Configure"
 msgstr "Настройка"
@@ -1118,11 +1142,6 @@ msgstr "Настройка после установки"
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "Проверьте в устройстве %s наличие носителя 'Update Modules'"
 
-#: steps_interactive.pm:644
-#, c-format
-msgid "Updates"
-msgstr "Обновления"
-
 #: steps_interactive.pm:645
 #, c-format
 msgid ""
@@ -1155,8 +1174,14 @@ msgstr ""
 msgid "Unable to contact mirror %s"
 msgstr "Невозможно соединиться с зеркалом %s"
 
-#: steps_interactive.pm:794 steps_interactive.pm:811 steps_interactive.pm:827
-#: steps_interactive.pm:838
+#. -PO: example: lilo-graphic on /dev/hda1
+#: steps_interactive.pm:777
+#, c-format
+msgid "%s on %s"
+msgstr "%s на %s"
+
+#: steps_interactive.pm:810 steps_interactive.pm:817 steps_interactive.pm:830
+#: steps_interactive.pm:847 steps_interactive.pm:863 steps_interactive.pm:874
 #, c-format
 msgid "Hardware"
 msgstr "Оборудование"
@@ -1232,18 +1257,7 @@ msgstr "включен"
 msgid "disabled"
 msgstr "выключен"
 
-#: steps_interactive.pm:897
-#, c-format
-msgid "Boot"
-msgstr "Загрузка"
-
-#. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:901
-#, c-format
-msgid "%s on %s"
-msgstr "%s на %s"
-
-#: steps_interactive.pm:927
+#: steps_interactive.pm:939
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Х-сервер ещё не настроен. Вы точно уверены в своих действиях?"
@@ -1386,13 +1400,6 @@ msgid ""
 "Hard drive detection"
 msgstr "Поиск жёсткого диска"
 
-#: steps_list.pm:20
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Installation class"
-msgstr "Тип установки"
-
 #: steps_list.pm:21
 #, c-format
 msgid ""
@@ -1435,13 +1442,6 @@ msgid ""
 "Installing"
 msgstr "Установка"
 
-#: steps_list.pm:27
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Authentication"
-msgstr "Аутентификация"
-
 #: steps_list.pm:28
 #, c-format
 msgid ""
@@ -1455,13 +1455,6 @@ msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "Сеть"
-
-#: steps_list.pm:30
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Bootloader"
-msgstr "Загрузчик"
 
 #: steps_list.pm:31
 #, c-format
@@ -1497,6 +1490,14 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "Выход"
+
+#~ msgid "Boot"
+#~ msgstr "Загрузка"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Authentication"
+#~ msgstr "Аутентификация"
 
 #~ msgid "Arkeia"
 #~ msgstr "Arkeia"

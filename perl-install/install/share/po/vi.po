@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-vi version\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-02 11:21+0200\n"
+"POT-Creation-Date: 2007-08-21 15:52+0200\n"
 "PO-Revision-Date: 2005-06-02 21:17+0700\n"
 "Last-Translator: Larry Nguyen <larry@vnlinux.org>\n"
 "Language-Team:  <gnomevi-list@lists.sourceforge.net>\n"
@@ -677,7 +677,46 @@ msgstr "Cài đặt Mandriva Linux %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> giữa các phần tử"
 
-#: steps_gtk.pm:195
+#: steps_gtk.pm:155 steps_gtk.pm:156
+#, c-format
+msgid "Localization"
+msgstr ""
+
+#: steps_gtk.pm:159 steps_list.pm:20
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Installation class"
+msgstr ""
+
+#: steps_gtk.pm:160 steps_gtk.pm:243 steps_interactive.pm:511
+#, c-format
+msgid "Package Group Selection"
+msgstr "Nhóm gói tin được chọn"
+
+#: steps_gtk.pm:161 steps_gtk.pm:460 steps_interactive.pm:543
+#, c-format
+msgid "Installing"
+msgstr "Đang cài đặt"
+
+#: steps_gtk.pm:162 steps_gtk.pm:576 steps_interactive.pm:735
+#, c-format
+msgid "Summary"
+msgstr "Tóm tắt"
+
+#: steps_gtk.pm:164 steps_gtk.pm:165 steps_list.pm:30
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Bootloader"
+msgstr "Trình nạp khởi động"
+
+#: steps_gtk.pm:166 steps_interactive.pm:644
+#, c-format
+msgid "Updates"
+msgstr "Cập nhật"
+
+#: steps_gtk.pm:213
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -691,12 +730,7 @@ msgstr ""
 "chế độ văn bản bằng cách nhấn phím `F1' khi khởi động từ CDROM, rồi nhập "
 "`text'."
 
-#: steps_gtk.pm:225 steps_interactive.pm:511
-#, c-format
-msgid "Package Group Selection"
-msgstr "Nhóm gói tin được chọn"
-
-#: steps_gtk.pm:246 steps_interactive.pm:529
+#: steps_gtk.pm:264 steps_interactive.pm:529
 #, c-format
 msgid "Individual package selection"
 msgstr "Chọn các gói riêng"
@@ -823,12 +857,7 @@ msgstr "Quản Lý Phần Mềm"
 msgid "Choose the packages you want to install"
 msgstr "Chọn các gói bạn muốn cài đặt "
 
-#: steps_gtk.pm:442 steps_interactive.pm:543
-#, c-format
-msgid "Installing"
-msgstr "Đang cài đặt"
-
-#: steps_gtk.pm:468
+#: steps_gtk.pm:487
 #, c-format
 msgid "No details"
 msgstr "Không có thông tin"
@@ -849,12 +878,7 @@ msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d các gói"
 
-#: steps_gtk.pm:557 steps_interactive.pm:735
-#, c-format
-msgid "Summary"
-msgstr "Tóm tắt"
-
-#: steps_gtk.pm:570
+#: steps_gtk.pm:589
 #, c-format
 msgid "Configure"
 msgstr "Cấu hình"
@@ -1098,11 +1122,6 @@ msgstr "Cấu hình sau khi cài đặt"
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "Hãy đảm bảo là phương tiện Update Modules có trong drive %s"
 
-#: steps_interactive.pm:644
-#, c-format
-msgid "Updates"
-msgstr "Cập nhật"
-
 #: steps_interactive.pm:645
 #, c-format
 msgid ""
@@ -1133,8 +1152,14 @@ msgstr "Đang kết nối với mirror để lấy danh sách các gói hiện c
 msgid "Unable to contact mirror %s"
 msgstr "Không thể kết nối được với mirror %s"
 
-#: steps_interactive.pm:794 steps_interactive.pm:811 steps_interactive.pm:827
-#: steps_interactive.pm:838
+#. -PO: example: lilo-graphic on /dev/hda1
+#: steps_interactive.pm:777
+#, c-format
+msgid "%s on %s"
+msgstr "%s trên %s"
+
+#: steps_interactive.pm:810 steps_interactive.pm:817 steps_interactive.pm:830
+#: steps_interactive.pm:847 steps_interactive.pm:863 steps_interactive.pm:874
 #, c-format
 msgid "Hardware"
 msgstr "Phần cứng"
@@ -1209,18 +1234,7 @@ msgstr "Đã kích hoạt"
 msgid "disabled"
 msgstr "Đã tắt"
 
-#: steps_interactive.pm:897
-#, c-format
-msgid "Boot"
-msgstr "Khởi động"
-
-#. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:901
-#, c-format
-msgid "%s on %s"
-msgstr "%s trên %s"
-
-#: steps_interactive.pm:927
+#: steps_interactive.pm:939
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Chưa đặt cấu hình cho X. Bạn có chắc là muốn như vậy không ?"
@@ -1361,13 +1375,6 @@ msgid ""
 "Hard drive detection"
 msgstr "Dò tìm đĩa cứng"
 
-#: steps_list.pm:20
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Installation class"
-msgstr ""
-
 #: steps_list.pm:21
 #, c-format
 msgid ""
@@ -1410,13 +1417,6 @@ msgid ""
 "Installing"
 msgstr "Đang cài đặt"
 
-#: steps_list.pm:27
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Authentication"
-msgstr "Xác nhận"
-
 #: steps_list.pm:28
 #, c-format
 msgid ""
@@ -1430,13 +1430,6 @@ msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "Chạy mạng"
-
-#: steps_list.pm:30
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Bootloader"
-msgstr "Trình nạp khởi động"
 
 #: steps_list.pm:31
 #, c-format
@@ -1472,6 +1465,14 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "Thoát ra"
+
+#~ msgid "Boot"
+#~ msgstr "Khởi động"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Authentication"
+#~ msgstr "Xác nhận"
 
 #~ msgid "Gwenview"
 #~ msgstr "Gwenview"

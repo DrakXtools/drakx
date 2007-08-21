@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mandriva Linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-02 11:21+0200\n"
+"POT-Creation-Date: 2007-08-21 15:52+0200\n"
 "PO-Revision-Date: 2007-01-28 12:37+0000\n"
 "Last-Translator: Rhoslyn Prys <post@meddal.com>\n"
 "Language-Team: Cymraeg\n"
@@ -688,7 +688,46 @@ msgstr "Gosodiad %s Mandriva Linux"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> rhwng elfennau"
 
-#: steps_gtk.pm:195
+#: steps_gtk.pm:155 steps_gtk.pm:156
+#, c-format
+msgid "Localization"
+msgstr ""
+
+#: steps_gtk.pm:159 steps_list.pm:20
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Installation class"
+msgstr "Dosbarth gosod"
+
+#: steps_gtk.pm:160 steps_gtk.pm:243 steps_interactive.pm:511
+#, c-format
+msgid "Package Group Selection"
+msgstr "Dewis  y Grŵp Pecyn"
+
+#: steps_gtk.pm:161 steps_gtk.pm:460 steps_interactive.pm:543
+#, c-format
+msgid "Installing"
+msgstr "Gosod"
+
+#: steps_gtk.pm:162 steps_gtk.pm:576 steps_interactive.pm:735
+#, c-format
+msgid "Summary"
+msgstr "Crynodeb"
+
+#: steps_gtk.pm:164 steps_gtk.pm:165 steps_list.pm:30
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Bootloader"
+msgstr "Cychwynnwr ar waith"
+
+#: steps_gtk.pm:166 steps_interactive.pm:644
+#, c-format
+msgid "Updates"
+msgstr "Diweddaru"
+
+#: steps_gtk.pm:213
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -701,12 +740,7 @@ msgstr ""
 "hynny. I wneud hynny pwyswch 'F1' wrth gychwyn ar CDROM, ac yna teipio "
 "'text'."
 
-#: steps_gtk.pm:225 steps_interactive.pm:511
-#, c-format
-msgid "Package Group Selection"
-msgstr "Dewis  y Grŵp Pecyn"
-
-#: steps_gtk.pm:246 steps_interactive.pm:529
+#: steps_gtk.pm:264 steps_interactive.pm:529
 #, c-format
 msgid "Individual package selection"
 msgstr "Dewis pecynnau unigol."
@@ -833,12 +867,7 @@ msgstr "Rheoli Meddalwedd"
 msgid "Choose the packages you want to install"
 msgstr "Dewiswch y pecynnau hoffech chi eu gosod"
 
-#: steps_gtk.pm:442 steps_interactive.pm:543
-#, c-format
-msgid "Installing"
-msgstr "Gosod"
-
-#: steps_gtk.pm:468
+#: steps_gtk.pm:487
 #, c-format
 msgid "No details"
 msgstr "Dim manylion"
@@ -860,12 +889,7 @@ msgid_plural "%d packages"
 msgstr[0] "%d pecyn"
 msgstr[1] "%d pecyn"
 
-#: steps_gtk.pm:557 steps_interactive.pm:735
-#, c-format
-msgid "Summary"
-msgstr "Crynodeb"
-
-#: steps_gtk.pm:570
+#: steps_gtk.pm:589
 #, c-format
 msgid "Configure"
 msgstr "Ffurfweddu"
@@ -1112,11 +1136,6 @@ msgstr "Ffurfweddiad ôl osod"
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "Gwnewch yn siŵr fod cyfrwng Diweddaru Modiwlau yng ngyrrwr %s"
 
-#: steps_interactive.pm:644
-#, c-format
-msgid "Updates"
-msgstr "Diweddaru"
-
 #: steps_interactive.pm:645
 #, c-format
 msgid ""
@@ -1148,8 +1167,14 @@ msgstr "Cysylltu â'r drych i estyn y rhestr o becynnau sydd ar gael..."
 msgid "Unable to contact mirror %s"
 msgstr "Methu canfod drych: %s."
 
-#: steps_interactive.pm:794 steps_interactive.pm:811 steps_interactive.pm:827
-#: steps_interactive.pm:838
+#. -PO: example: lilo-graphic on /dev/hda1
+#: steps_interactive.pm:777
+#, c-format
+msgid "%s on %s"
+msgstr "%s ar %s"
+
+#: steps_interactive.pm:810 steps_interactive.pm:817 steps_interactive.pm:830
+#: steps_interactive.pm:847 steps_interactive.pm:863 steps_interactive.pm:874
 #, c-format
 msgid "Hardware"
 msgstr "Caledwedd"
@@ -1223,18 +1248,7 @@ msgstr "gweithredwyd"
 msgid "disabled"
 msgstr "anablwyd"
 
-#: steps_interactive.pm:897
-#, c-format
-msgid "Boot"
-msgstr "Cychwyn"
-
-#. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:901
-#, c-format
-msgid "%s on %s"
-msgstr "%s ar %s"
-
-#: steps_interactive.pm:927
+#: steps_interactive.pm:939
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Nid ydych wedi ffurfweddu X. Ydych chi'n siŵr eich bod am wneud hyn?"
@@ -1376,13 +1390,6 @@ msgid ""
 "Hard drive detection"
 msgstr "Canfod disg caled"
 
-#: steps_list.pm:20
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Installation class"
-msgstr "Dosbarth gosod"
-
 #: steps_list.pm:21
 #, c-format
 msgid ""
@@ -1425,13 +1432,6 @@ msgid ""
 "Installing"
 msgstr "Gosod"
 
-#: steps_list.pm:27
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Authentication"
-msgstr "Dilysu"
-
 #: steps_list.pm:28
 #, c-format
 msgid ""
@@ -1445,13 +1445,6 @@ msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "Rhwydweithio"
-
-#: steps_list.pm:30
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Bootloader"
-msgstr "Cychwynnwr ar waith"
 
 #: steps_list.pm:31
 #, c-format
@@ -1487,6 +1480,14 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "Gadael"
+
+#~ msgid "Boot"
+#~ msgstr "Cychwyn"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Authentication"
+#~ msgstr "Dilysu"
 
 #~ msgid "Arkeia"
 #~ msgstr "Arkeia"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-02 11:21+0200\n"
+"POT-Creation-Date: 2007-08-21 15:52+0200\n"
 "PO-Revision-Date: 2005-03-27 17:55+0530\n"
 "Last-Translator: Jaswinder Singh Phulewala <jaswinderphulewala@yahoo.com>\n"
 "Language-Team: Punjabi <punlinux-i18n@lists.soruceforge.net>\n"
@@ -662,7 +662,46 @@ msgstr "ਮੈਂਡਰਿਵ-ਲੀਨਕਸ ਇੰਸਟਾਲੇਸ਼ਨ %s "
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> ਇਕਾਈਆਂ ਵਿੱਚ "
 
-#: steps_gtk.pm:195
+#: steps_gtk.pm:155 steps_gtk.pm:156
+#, c-format
+msgid "Localization"
+msgstr ""
+
+#: steps_gtk.pm:159 steps_list.pm:20
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Installation class"
+msgstr ""
+
+#: steps_gtk.pm:160 steps_gtk.pm:243 steps_interactive.pm:511
+#, c-format
+msgid "Package Group Selection"
+msgstr "ਪੈਕੇਜ ਸਮੂਹ ਚੋਣ"
+
+#: steps_gtk.pm:161 steps_gtk.pm:460 steps_interactive.pm:543
+#, c-format
+msgid "Installing"
+msgstr "ਇੰਸਟਾਲ ਹੋ ਰਹੇ ਹਨ"
+
+#: steps_gtk.pm:162 steps_gtk.pm:576 steps_interactive.pm:735
+#, c-format
+msgid "Summary"
+msgstr "ਸਾਰ"
+
+#: steps_gtk.pm:164 steps_gtk.pm:165 steps_list.pm:30
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Bootloader"
+msgstr "ਬੂਟ-ਲੋਡਰ"
+
+#: steps_gtk.pm:166 steps_interactive.pm:644
+#, c-format
+msgid "Updates"
+msgstr "ਨਵਿਨੀਕਰਨ"
+
+#: steps_gtk.pm:213
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -674,12 +713,7 @@ msgstr ""
 "ਆ ਸਕਦੀ ਹੈ। ਜੇ ਅਜਿਹਾ ਹੋਇਆ, ਤੁਸੀਂ ਪਾਠ ਇੰਸਟਾਲੇਸ਼ਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਇਸ ਲਈ,\n"
 "`F1' ਦਬਾਓ ਜਦੋਂ CDROM ਤੋਂ ਬੂਟ ਕਰਦੇ ਹੋ, ਫਿਰ `ਪਾਠ' ਭਰੋ।"
 
-#: steps_gtk.pm:225 steps_interactive.pm:511
-#, c-format
-msgid "Package Group Selection"
-msgstr "ਪੈਕੇਜ ਸਮੂਹ ਚੋਣ"
-
-#: steps_gtk.pm:246 steps_interactive.pm:529
+#: steps_gtk.pm:264 steps_interactive.pm:529
 #, c-format
 msgid "Individual package selection"
 msgstr "ਵੱਖ-ਵੱਖ ਪੈਕੇਜ ਚੋਣ"
@@ -806,12 +840,7 @@ msgstr "ਸਾਫਟਵੇਅਰ ਪ੍ਰਬੰਧਨ"
 msgid "Choose the packages you want to install"
 msgstr "ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਪੈਕੇਜ ਚੁਣੋ"
 
-#: steps_gtk.pm:442 steps_interactive.pm:543
-#, c-format
-msgid "Installing"
-msgstr "ਇੰਸਟਾਲ ਹੋ ਰਹੇ ਹਨ"
-
-#: steps_gtk.pm:468
+#: steps_gtk.pm:487
 #, c-format
 msgid "No details"
 msgstr "ਕੋਈ ਵੇਰਵਾ ਨਹੀਂ"
@@ -833,12 +862,7 @@ msgid_plural "%d packages"
 msgstr[0] "%d ਪੈਕੇਜ"
 msgstr[1] "%d ਪੈਕੇਜ"
 
-#: steps_gtk.pm:557 steps_interactive.pm:735
-#, c-format
-msgid "Summary"
-msgstr "ਸਾਰ"
-
-#: steps_gtk.pm:570
+#: steps_gtk.pm:589
 #, c-format
 msgid "Configure"
 msgstr "ਸੰਰਚਨਾ"
@@ -1080,11 +1104,6 @@ msgstr "ਪੋਸਟ-ਇੰਸਟਾਲ ਸੰਰਚਨਾ"
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr ""
 
-#: steps_interactive.pm:644
-#, c-format
-msgid "Updates"
-msgstr "ਨਵਿਨੀਕਰਨ"
-
 #: steps_interactive.pm:645
 #, c-format
 msgid ""
@@ -1108,8 +1127,14 @@ msgstr "ਉਪਲੱਬਧ ਪੈਕੇਜਾਂ ਦੀ ਸੂਚੀ ਵੇਖ�
 msgid "Unable to contact mirror %s"
 msgstr "ਪ੍ਰਤੀਬਿੰਬ %s ਨਾਲ ਸੰਪਰਕ ਲਈ ਅਸਮਰਥ"
 
-#: steps_interactive.pm:794 steps_interactive.pm:811 steps_interactive.pm:827
-#: steps_interactive.pm:838
+#. -PO: example: lilo-graphic on /dev/hda1
+#: steps_interactive.pm:777
+#, c-format
+msgid "%s on %s"
+msgstr "%s, %s ਉੱਪਰ"
+
+#: steps_interactive.pm:810 steps_interactive.pm:817 steps_interactive.pm:830
+#: steps_interactive.pm:847 steps_interactive.pm:863 steps_interactive.pm:874
 #, c-format
 msgid "Hardware"
 msgstr "ਜੰਤਰ"
@@ -1181,18 +1206,7 @@ msgstr "ਸਰਗਰਮ"
 msgid "disabled"
 msgstr "ਅਯੋਗ"
 
-#: steps_interactive.pm:897
-#, c-format
-msgid "Boot"
-msgstr "ਬੂਟ"
-
-#. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:901
-#, c-format
-msgid "%s on %s"
-msgstr "%s, %s ਉੱਪਰ"
-
-#: steps_interactive.pm:927
+#: steps_interactive.pm:939
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "ਤੁਸੀਂ X ਸੰਰਚਿਤ ਨਹੀਂ ਕੀਤਾ। ਕੀ ਤੁਸੀਂ ਯਕੀਨਨ ਇਸ ਨੂੰ ਚਾਹੁੰਦੇ ਹੋ?"
@@ -1330,13 +1344,6 @@ msgid ""
 "Hard drive detection"
 msgstr "ਹਾਰਡ ਡਰਾਈਵ ਖੋਜ"
 
-#: steps_list.pm:20
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Installation class"
-msgstr ""
-
 #: steps_list.pm:21
 #, c-format
 msgid ""
@@ -1379,13 +1386,6 @@ msgid ""
 "Installing"
 msgstr "ਇੰਸਟਾਲ ਹੋ ਰਹੇ ਹਨ"
 
-#: steps_list.pm:27
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Authentication"
-msgstr "ਪ੍ਰਮਾਣਿਕਤਾ"
-
 #: steps_list.pm:28
 #, c-format
 msgid ""
@@ -1399,13 +1399,6 @@ msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "ਨੈਟਵਰਕਿੰਗ"
-
-#: steps_list.pm:30
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Bootloader"
-msgstr "ਬੂਟ-ਲੋਡਰ"
 
 #: steps_list.pm:31
 #, c-format
@@ -1441,6 +1434,14 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "ਬਾਹਰ"
+
+#~ msgid "Boot"
+#~ msgstr "ਬੂਟ"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Authentication"
+#~ msgstr "ਪ੍ਰਮਾਣਿਕਤਾ"
 
 #~ msgid "Gwenview"
 #~ msgstr "Gwenview"

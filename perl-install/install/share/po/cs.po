@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-02 11:21+0200\n"
+"POT-Creation-Date: 2007-08-21 15:52+0200\n"
 "PO-Revision-Date: 2007-03-15 19:32+0100\n"
 "Last-Translator: Michal Bukovjan <bukm@centrum.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -688,7 +688,46 @@ msgstr "Mandriva Linux Instalace %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> mezi prvky"
 
-#: steps_gtk.pm:195
+#: steps_gtk.pm:155 steps_gtk.pm:156
+#, c-format
+msgid "Localization"
+msgstr ""
+
+#: steps_gtk.pm:159 steps_list.pm:20
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Installation class"
+msgstr "Třída instalace"
+
+#: steps_gtk.pm:160 steps_gtk.pm:243 steps_interactive.pm:511
+#, c-format
+msgid "Package Group Selection"
+msgstr "Výběr skupiny balíčků"
+
+#: steps_gtk.pm:161 steps_gtk.pm:460 steps_interactive.pm:543
+#, c-format
+msgid "Installing"
+msgstr "Instaluji"
+
+#: steps_gtk.pm:162 steps_gtk.pm:576 steps_interactive.pm:735
+#, c-format
+msgid "Summary"
+msgstr "Souhrn"
+
+#: steps_gtk.pm:164 steps_gtk.pm:165 steps_list.pm:30
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Bootloader"
+msgstr "Zaváděcí program"
+
+#: steps_gtk.pm:166 steps_interactive.pm:644
+#, c-format
+msgid "Updates"
+msgstr "Aktualizace"
+
+#: steps_gtk.pm:213
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -701,12 +740,7 @@ msgstr ""
 "verzi instalačního programu. Ta se spouští tak, že při startu\n"
 "z CD mechaniky stisknete 'F1' a poté napíšete 'text'."
 
-#: steps_gtk.pm:225 steps_interactive.pm:511
-#, c-format
-msgid "Package Group Selection"
-msgstr "Výběr skupiny balíčků"
-
-#: steps_gtk.pm:246 steps_interactive.pm:529
+#: steps_gtk.pm:264 steps_interactive.pm:529
 #, c-format
 msgid "Individual package selection"
 msgstr "Výběr jednotlivých balíčků"
@@ -834,12 +868,7 @@ msgstr "Správa software"
 msgid "Choose the packages you want to install"
 msgstr "Vyberte si balíčky, které chcete nainstalovat"
 
-#: steps_gtk.pm:442 steps_interactive.pm:543
-#, c-format
-msgid "Installing"
-msgstr "Instaluji"
-
-#: steps_gtk.pm:468
+#: steps_gtk.pm:487
 #, c-format
 msgid "No details"
 msgstr "Bez podrobností"
@@ -862,12 +891,7 @@ msgstr[0] "%d balíček"
 msgstr[1] "%d balíčky"
 msgstr[2] "%d balíčků"
 
-#: steps_gtk.pm:557 steps_interactive.pm:735
-#, c-format
-msgid "Summary"
-msgstr "Souhrn"
-
-#: steps_gtk.pm:570
+#: steps_gtk.pm:589
 #, c-format
 msgid "Configure"
 msgstr "Nastavit"
@@ -1114,11 +1138,6 @@ msgstr ""
 "Ujistěte se prosím, že se médium s aktualizovanými moduly nachází v jednotce "
 "%s"
 
-#: steps_interactive.pm:644
-#, c-format
-msgid "Updates"
-msgstr "Aktualizace"
-
 #: steps_interactive.pm:645
 #, c-format
 msgid ""
@@ -1150,8 +1169,14 @@ msgstr "Stahuji seznam dostupných balíčků ze zrcadla..."
 msgid "Unable to contact mirror %s"
 msgstr "Nelze kontaktovat zrcadlo %s"
 
-#: steps_interactive.pm:794 steps_interactive.pm:811 steps_interactive.pm:827
-#: steps_interactive.pm:838
+#. -PO: example: lilo-graphic on /dev/hda1
+#: steps_interactive.pm:777
+#, c-format
+msgid "%s on %s"
+msgstr "%s na %s"
+
+#: steps_interactive.pm:810 steps_interactive.pm:817 steps_interactive.pm:830
+#: steps_interactive.pm:847 steps_interactive.pm:863 steps_interactive.pm:874
 #, c-format
 msgid "Hardware"
 msgstr "Hardware"
@@ -1226,18 +1251,7 @@ msgstr "aktivováno"
 msgid "disabled"
 msgstr "vypnuto"
 
-#: steps_interactive.pm:897
-#, c-format
-msgid "Boot"
-msgstr "Spuštění"
-
-#. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:901
-#, c-format
-msgid "%s on %s"
-msgstr "%s na %s"
-
-#: steps_interactive.pm:927
+#: steps_interactive.pm:939
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr ""
@@ -1379,13 +1393,6 @@ msgid ""
 "Hard drive detection"
 msgstr "Detekce pevných disků"
 
-#: steps_list.pm:20
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Installation class"
-msgstr "Třída instalace"
-
 #: steps_list.pm:21
 #, c-format
 msgid ""
@@ -1428,13 +1435,6 @@ msgid ""
 "Installing"
 msgstr "Instaluji"
 
-#: steps_list.pm:27
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Authentication"
-msgstr "Ověření"
-
 #: steps_list.pm:28
 #, c-format
 msgid ""
@@ -1448,13 +1448,6 @@ msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "Sítě"
-
-#: steps_list.pm:30
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Bootloader"
-msgstr "Zaváděcí program"
 
 #: steps_list.pm:31
 #, c-format
@@ -1490,6 +1483,14 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "Konec"
+
+#~ msgid "Boot"
+#~ msgstr "Spuštění"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Authentication"
+#~ msgstr "Ověření"
 
 #~ msgid "Arkeia"
 #~ msgstr "Arkeia"

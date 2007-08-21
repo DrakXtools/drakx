@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-02 11:21+0200\n"
+"POT-Creation-Date: 2007-08-21 15:52+0200\n"
 "PO-Revision-Date: 2005-02-26 06:31+0100\n"
 "Last-Translator: Abbas Izad <abbasizad@hotmail.com>\n"
 "Language-Team: Persian\n"
@@ -674,7 +674,46 @@ msgstr "نصب لینوکس ماندریبا %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> بین عناصر"
 
-#: steps_gtk.pm:195
+#: steps_gtk.pm:155 steps_gtk.pm:156
+#, c-format
+msgid "Localization"
+msgstr ""
+
+#: steps_gtk.pm:159 steps_list.pm:20
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Installation class"
+msgstr ""
+
+#: steps_gtk.pm:160 steps_gtk.pm:243 steps_interactive.pm:511
+#, c-format
+msgid "Package Group Selection"
+msgstr "گزینش گروه بسته"
+
+#: steps_gtk.pm:161 steps_gtk.pm:460 steps_interactive.pm:543
+#, c-format
+msgid "Installing"
+msgstr "نصب کردن"
+
+#: steps_gtk.pm:162 steps_gtk.pm:576 steps_interactive.pm:735
+#, c-format
+msgid "Summary"
+msgstr "خلاصه"
+
+#: steps_gtk.pm:164 steps_gtk.pm:165 steps_list.pm:30
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Bootloader"
+msgstr "بارگذار آغازگر"
+
+#: steps_gtk.pm:166 steps_interactive.pm:644
+#, c-format
+msgid "Updates"
+msgstr "بروزسازی‌ها"
+
+#: steps_gtk.pm:213
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -688,12 +727,7 @@ msgstr ""
 "`F1' را \n"
 "هنگام آغازگری با سی‌دی فشار داده، سپس `text' وارد کنید."
 
-#: steps_gtk.pm:225 steps_interactive.pm:511
-#, c-format
-msgid "Package Group Selection"
-msgstr "گزینش گروه بسته"
-
-#: steps_gtk.pm:246 steps_interactive.pm:529
+#: steps_gtk.pm:264 steps_interactive.pm:529
 #, c-format
 msgid "Individual package selection"
 msgstr "انتخاب بسته‌ی تکی"
@@ -822,12 +856,7 @@ msgstr "مدیریت نرم‌افزار"
 msgid "Choose the packages you want to install"
 msgstr "بسته‌هایی را که می‌خواهید نصب کنید انتخاب کنید"
 
-#: steps_gtk.pm:442 steps_interactive.pm:543
-#, c-format
-msgid "Installing"
-msgstr "نصب کردن"
-
-#: steps_gtk.pm:468
+#: steps_gtk.pm:487
 #, c-format
 msgid "No details"
 msgstr "بدون جزئیات"
@@ -848,12 +877,7 @@ msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "بسته‌های %d"
 
-#: steps_gtk.pm:557 steps_interactive.pm:735
-#, c-format
-msgid "Summary"
-msgstr "خلاصه"
-
-#: steps_gtk.pm:570
+#: steps_gtk.pm:589
 #, c-format
 msgid "Configure"
 msgstr "پیکربندی"
@@ -1096,11 +1120,6 @@ msgstr "پیکربندی بعد از نصب"
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr ""
 
-#: steps_interactive.pm:644
-#, c-format
-msgid "Updates"
-msgstr "بروزسازی‌ها"
-
 #: steps_interactive.pm:645
 #, c-format
 msgid ""
@@ -1131,8 +1150,14 @@ msgstr "تماس گرفتن با آینه برای گرفتن لیست بسته�
 msgid "Unable to contact mirror %s"
 msgstr "نمی‌توان با آینه %s تماس برقرار کرد"
 
-#: steps_interactive.pm:794 steps_interactive.pm:811 steps_interactive.pm:827
-#: steps_interactive.pm:838
+#. -PO: example: lilo-graphic on /dev/hda1
+#: steps_interactive.pm:777
+#, c-format
+msgid "%s on %s"
+msgstr "%s بر %s"
+
+#: steps_interactive.pm:810 steps_interactive.pm:817 steps_interactive.pm:830
+#: steps_interactive.pm:847 steps_interactive.pm:863 steps_interactive.pm:874
 #, c-format
 msgid "Hardware"
 msgstr "سخت‌افزار"
@@ -1206,18 +1231,7 @@ msgstr "فعال شده"
 msgid "disabled"
 msgstr "از کار افتاده"
 
-#: steps_interactive.pm:897
-#, c-format
-msgid "Boot"
-msgstr "آغازگری"
-
-#. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:901
-#, c-format
-msgid "%s on %s"
-msgstr "%s بر %s"
-
-#: steps_interactive.pm:927
+#: steps_interactive.pm:939
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "شما ایکس را پیکربندی نکرده‌اید. آیا واقعاً مطمئنید که این را می‌خواهید؟"
@@ -1358,13 +1372,6 @@ msgid ""
 "Hard drive detection"
 msgstr "شناسایی گرداننده‌ی دیسک"
 
-#: steps_list.pm:20
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Installation class"
-msgstr ""
-
 #: steps_list.pm:21
 #, c-format
 msgid ""
@@ -1407,13 +1414,6 @@ msgid ""
 "Installing"
 msgstr "نصب کردن"
 
-#: steps_list.pm:27
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Authentication"
-msgstr "تأیید هویت"
-
 #: steps_list.pm:28
 #, c-format
 msgid ""
@@ -1427,13 +1427,6 @@ msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "شبکه‌کاری"
-
-#: steps_list.pm:30
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Bootloader"
-msgstr "بارگذار آغازگر"
 
 #: steps_list.pm:31
 #, c-format
@@ -1469,6 +1462,14 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "خروج"
+
+#~ msgid "Boot"
+#~ msgstr "آغازگری"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Authentication"
+#~ msgstr "تأیید هویت"
 
 #~ msgid "Gwenview"
 #~ msgstr "Gwenview"

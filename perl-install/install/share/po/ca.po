@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-02 11:21+0200\n"
+"POT-Creation-Date: 2007-08-21 15:52+0200\n"
 "PO-Revision-Date: 2005-09-13 23:24+0200\n"
 "Last-Translator: Albert Astals Cid <astals11@terra.es>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -687,7 +687,46 @@ msgstr "Instal·lació del Mandriva Linux %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> entre elements"
 
-#: steps_gtk.pm:195
+#: steps_gtk.pm:155 steps_gtk.pm:156
+#, c-format
+msgid "Localization"
+msgstr ""
+
+#: steps_gtk.pm:159 steps_list.pm:20
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Installation class"
+msgstr ""
+
+#: steps_gtk.pm:160 steps_gtk.pm:243 steps_interactive.pm:511
+#, c-format
+msgid "Package Group Selection"
+msgstr "Selecció del grup de paquets"
+
+#: steps_gtk.pm:161 steps_gtk.pm:460 steps_interactive.pm:543
+#, c-format
+msgid "Installing"
+msgstr "S'està instal·lant"
+
+#: steps_gtk.pm:162 steps_gtk.pm:576 steps_interactive.pm:735
+#, c-format
+msgid "Summary"
+msgstr "Resum"
+
+#: steps_gtk.pm:164 steps_gtk.pm:165 steps_list.pm:30
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Bootloader"
+msgstr "Carregador d'arrencada"
+
+#: steps_gtk.pm:166 steps_interactive.pm:644
+#, c-format
+msgid "Updates"
+msgstr "Actualitzacions"
+
+#: steps_gtk.pm:213
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -701,12 +740,7 @@ msgstr ""
 "mode text. Per fer-ho, premeu 'F1' en arrencar des del CD-ROM i escriviu "
 "'text'."
 
-#: steps_gtk.pm:225 steps_interactive.pm:511
-#, c-format
-msgid "Package Group Selection"
-msgstr "Selecció del grup de paquets"
-
-#: steps_gtk.pm:246 steps_interactive.pm:529
+#: steps_gtk.pm:264 steps_interactive.pm:529
 #, c-format
 msgid "Individual package selection"
 msgstr "Selecció individual de paquets"
@@ -835,12 +869,7 @@ msgstr "Gestor de programari"
 msgid "Choose the packages you want to install"
 msgstr "Escolliu els paquets que voleu instal·lar"
 
-#: steps_gtk.pm:442 steps_interactive.pm:543
-#, c-format
-msgid "Installing"
-msgstr "S'està instal·lant"
-
-#: steps_gtk.pm:468
+#: steps_gtk.pm:487
 #, c-format
 msgid "No details"
 msgstr "Sense detalls"
@@ -862,12 +891,7 @@ msgid_plural "%d packages"
 msgstr[0] "%d paquet"
 msgstr[1] "%d paquets"
 
-#: steps_gtk.pm:557 steps_interactive.pm:735
-#, c-format
-msgid "Summary"
-msgstr "Resum"
-
-#: steps_gtk.pm:570
+#: steps_gtk.pm:589
 #, c-format
 msgid "Configure"
 msgstr "Configura"
@@ -1109,11 +1133,6 @@ msgstr "Configuració posterior a la instal·lació"
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr ""
 
-#: steps_interactive.pm:644
-#, c-format
-msgid "Updates"
-msgstr "Actualitzacions"
-
 #: steps_interactive.pm:645
 #, c-format
 msgid ""
@@ -1148,8 +1167,14 @@ msgstr ""
 msgid "Unable to contact mirror %s"
 msgstr "No es pot contactar amb la rèplica: %s"
 
-#: steps_interactive.pm:794 steps_interactive.pm:811 steps_interactive.pm:827
-#: steps_interactive.pm:838
+#. -PO: example: lilo-graphic on /dev/hda1
+#: steps_interactive.pm:777
+#, c-format
+msgid "%s on %s"
+msgstr "%s a %s"
+
+#: steps_interactive.pm:810 steps_interactive.pm:817 steps_interactive.pm:830
+#: steps_interactive.pm:847 steps_interactive.pm:863 steps_interactive.pm:874
 #, c-format
 msgid "Hardware"
 msgstr "Maquinari"
@@ -1225,18 +1250,7 @@ msgstr "activat"
 msgid "disabled"
 msgstr "inhabilita"
 
-#: steps_interactive.pm:897
-#, c-format
-msgid "Boot"
-msgstr "Arrencada"
-
-#. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:901
-#, c-format
-msgid "%s on %s"
-msgstr "%s a %s"
-
-#: steps_interactive.pm:927
+#: steps_interactive.pm:939
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "No heu configurat X. Segur que ho voleu així?"
@@ -1379,13 +1393,6 @@ msgid ""
 "Hard drive detection"
 msgstr "Detecció del disc dur"
 
-#: steps_list.pm:20
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Installation class"
-msgstr ""
-
 #: steps_list.pm:21
 #, c-format
 msgid ""
@@ -1428,13 +1435,6 @@ msgid ""
 "Installing"
 msgstr "S'està instal·lant"
 
-#: steps_list.pm:27
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Authentication"
-msgstr "Autenticació"
-
 #: steps_list.pm:28
 #, c-format
 msgid ""
@@ -1448,13 +1448,6 @@ msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "Xarxa"
-
-#: steps_list.pm:30
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Bootloader"
-msgstr "Carregador d'arrencada"
 
 #: steps_list.pm:31
 #, c-format
@@ -1490,6 +1483,14 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "Surt"
+
+#~ msgid "Boot"
+#~ msgstr "Arrencada"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Authentication"
+#~ msgstr "Autenticació"
 
 #~ msgid "Gwenview"
 #~ msgstr "Gwenview"

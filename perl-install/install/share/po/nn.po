@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-02 11:21+0200\n"
+"POT-Creation-Date: 2007-08-21 15:52+0200\n"
 "PO-Revision-Date: 2007-07-20 20:15+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -68,7 +68,8 @@ msgstr "Adresser må starta med «ftp://» eller «http://»."
 
 #: any.pm:232
 #, c-format
-msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid ""
+"Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr "Kontaktar Mandriva Linux-nettstaden for oversikt over speglar …"
 
 #: any.pm:237
@@ -125,7 +126,8 @@ msgstr "Tillegg"
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
 "correct."
-msgstr "Finn ikkje pakkelistfila på denne spegelen. Sjå til at adressa er rett."
+msgstr ""
+"Finn ikkje pakkelistfila på denne spegelen. Sjå til at adressa er rett."
 
 #: any.pm:379
 #, c-format
@@ -586,7 +588,8 @@ msgstr "GNOME-arbeidsstasjon"
 msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
 "tools"
-msgstr "Eit grafisk skrivebordsmiljø med brukarvenlege program og skrivebordsverktøy"
+msgstr ""
+"Eit grafisk skrivebordsmiljø med brukarvenlege program og skrivebordsverktøy"
 
 #: share/meta-task/compssUsers.pl:155
 #, c-format
@@ -678,7 +681,46 @@ msgstr "Mandriva Linux-installering %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "«Tab»/«Alt + Tab» mellom element"
 
-#: steps_gtk.pm:195
+#: steps_gtk.pm:155 steps_gtk.pm:156
+#, c-format
+msgid "Localization"
+msgstr ""
+
+#: steps_gtk.pm:159 steps_list.pm:20
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Installation class"
+msgstr "Installasjonsklasse"
+
+#: steps_gtk.pm:160 steps_gtk.pm:243 steps_interactive.pm:511
+#, c-format
+msgid "Package Group Selection"
+msgstr "Pakkegruppeval"
+
+#: steps_gtk.pm:161 steps_gtk.pm:460 steps_interactive.pm:543
+#, c-format
+msgid "Installing"
+msgstr "Installerer"
+
+#: steps_gtk.pm:162 steps_gtk.pm:576 steps_interactive.pm:735
+#, c-format
+msgid "Summary"
+msgstr "Samandrag"
+
+#: steps_gtk.pm:164 steps_gtk.pm:165 steps_list.pm:30
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Bootloader"
+msgstr "Oppstartslastar"
+
+#: steps_gtk.pm:166 steps_interactive.pm:644
+#, c-format
+msgid "Updates"
+msgstr "Oppdateringar"
+
+#: steps_gtk.pm:213
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -691,12 +733,7 @@ msgstr ""
 "Du kan då installera i tekstmodus i staden for. Trykk «F1» ved oppstart av\n"
 "CD-plata, og skriv «text» om du ønskjer dette."
 
-#: steps_gtk.pm:225 steps_interactive.pm:511
-#, c-format
-msgid "Package Group Selection"
-msgstr "Pakkegruppeval"
-
-#: steps_gtk.pm:246 steps_interactive.pm:529
+#: steps_gtk.pm:264 steps_interactive.pm:529
 #, c-format
 msgid "Individual package selection"
 msgstr "Direkte pakkeval"
@@ -825,12 +862,7 @@ msgstr "Programvarehandsaming"
 msgid "Choose the packages you want to install"
 msgstr "Vel pakkane du ønskjer å installera"
 
-#: steps_gtk.pm:442 steps_interactive.pm:543
-#, c-format
-msgid "Installing"
-msgstr "Installerer"
-
-#: steps_gtk.pm:468
+#: steps_gtk.pm:487
 #, c-format
 msgid "No details"
 msgstr "Skjul detaljar"
@@ -852,12 +884,7 @@ msgid_plural "%d packages"
 msgstr[0] "%d pakke"
 msgstr[1] "%d pakkar"
 
-#: steps_gtk.pm:557 steps_interactive.pm:735
-#, c-format
-msgid "Summary"
-msgstr "Samandrag"
-
-#: steps_gtk.pm:570
+#: steps_gtk.pm:589
 #, c-format
 msgid "Configure"
 msgstr "Set opp"
@@ -1104,11 +1131,6 @@ msgstr "Oppsett etter installering"
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "Sjå til at oppdateringsmediet er i stasjon %s"
 
-#: steps_interactive.pm:644
-#, c-format
-msgid "Updates"
-msgstr "Oppdateringar"
-
 #: steps_interactive.pm:645
 #, c-format
 msgid ""
@@ -1139,8 +1161,14 @@ msgstr "Kontaktar spegel for oversikt over pakkar …"
 msgid "Unable to contact mirror %s"
 msgstr "Klarte ikkje kontakta spegelen «%s»"
 
-#: steps_interactive.pm:794 steps_interactive.pm:811 steps_interactive.pm:827
-#: steps_interactive.pm:838
+#. -PO: example: lilo-graphic on /dev/hda1
+#: steps_interactive.pm:777
+#, c-format
+msgid "%s on %s"
+msgstr "%s på %s"
+
+#: steps_interactive.pm:810 steps_interactive.pm:817 steps_interactive.pm:830
+#: steps_interactive.pm:847 steps_interactive.pm:863 steps_interactive.pm:874
 #, c-format
 msgid "Hardware"
 msgstr "Maskinvare"
@@ -1160,7 +1188,8 @@ msgstr "Har du eit ISA-lydkort?"
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
 "card"
-msgstr "Køyr «sndconfig» etter installasjonen er ferdig for å setja opp lydkortet."
+msgstr ""
+"Køyr «sndconfig» etter installasjonen er ferdig for å setja opp lydkortet."
 
 #: steps_interactive.pm:819
 #, c-format
@@ -1212,18 +1241,7 @@ msgstr "påslått"
 msgid "disabled"
 msgstr "avslått"
 
-#: steps_interactive.pm:897
-#, c-format
-msgid "Boot"
-msgstr "Oppstart"
-
-#. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:901
-#, c-format
-msgid "%s on %s"
-msgstr "%s på %s"
-
-#: steps_interactive.pm:927
+#: steps_interactive.pm:939
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr ""
@@ -1367,13 +1385,6 @@ msgid ""
 "Hard drive detection"
 msgstr "Harddiskoppdaging"
 
-#: steps_list.pm:20
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Installation class"
-msgstr "Installasjonsklasse"
-
 #: steps_list.pm:21
 #, c-format
 msgid ""
@@ -1416,13 +1427,6 @@ msgid ""
 "Installing"
 msgstr "Installering"
 
-#: steps_list.pm:27
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Authentication"
-msgstr "Autentisering"
-
 #: steps_list.pm:28
 #, c-format
 msgid ""
@@ -1436,13 +1440,6 @@ msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "Nettverk"
-
-#: steps_list.pm:30
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Bootloader"
-msgstr "Oppstartslastar"
 
 #: steps_list.pm:31
 #, c-format
@@ -1478,6 +1475,14 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "Avslutt"
+
+#~ msgid "Boot"
+#~ msgstr "Oppstart"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Authentication"
+#~ msgstr "Autentisering"
 
 #~ msgid "Arkeia"
 #~ msgstr "Arkeia"
@@ -1578,4 +1583,3 @@ msgstr "Avslutt"
 #~ "fila «%s»). Det kjem vanlegvis av at oppstartsdisketten er laga for ein "
 #~ "annan versjon enn installasjonsmediet. Du bør då laga ein ny, oppdatert "
 #~ "oppstartsdiskett."
-

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-02 11:21+0200\n"
+"POT-Creation-Date: 2007-08-21 15:52+0200\n"
 "PO-Revision-Date: 2005-02-24 21:42+0100\n"
 "Last-Translator: Pablo Saratxaga <pablo@walon.org>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
@@ -694,7 +694,46 @@ msgstr "Astalåcion di Mandriva Linux %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> candjî elemints"
 
-#: steps_gtk.pm:195
+#: steps_gtk.pm:155 steps_gtk.pm:156
+#, c-format
+msgid "Localization"
+msgstr ""
+
+#: steps_gtk.pm:159 steps_list.pm:20
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Installation class"
+msgstr "Li classe d' astalåcion"
+
+#: steps_gtk.pm:160 steps_gtk.pm:243 steps_interactive.pm:511
+#, c-format
+msgid "Package Group Selection"
+msgstr "Tchoezi les groupes di pacaedjes"
+
+#: steps_gtk.pm:161 steps_gtk.pm:460 steps_interactive.pm:543
+#, c-format
+msgid "Installing"
+msgstr "Astalant"
+
+#: steps_gtk.pm:162 steps_gtk.pm:576 steps_interactive.pm:735
+#, c-format
+msgid "Summary"
+msgstr "Rascourti éndjolreye"
+
+#: steps_gtk.pm:164 steps_gtk.pm:165 steps_list.pm:30
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Bootloader"
+msgstr "Enondrece"
+
+#: steps_gtk.pm:166 steps_interactive.pm:644
+#, c-format
+msgid "Updates"
+msgstr "Metaedjes a djoû"
+
+#: steps_gtk.pm:213
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -707,12 +746,7 @@ msgstr ""
 "astalåcion e môde tecse. Po çoula, tchoûkîz sol tape «F1» a l' enondaedje\n"
 "et poy tapez «text»."
 
-#: steps_gtk.pm:225 steps_interactive.pm:511
-#, c-format
-msgid "Package Group Selection"
-msgstr "Tchoezi les groupes di pacaedjes"
-
-#: steps_gtk.pm:246 steps_interactive.pm:529
+#: steps_gtk.pm:264 steps_interactive.pm:529
 #, c-format
 msgid "Individual package selection"
 msgstr "Tchoezi tchaeke pacaedje sepårumint"
@@ -841,12 +875,7 @@ msgstr "Manaedjaedje di programes"
 msgid "Choose the packages you want to install"
 msgstr "Tchoezixhoz les pacaedjes k' vos voloz astaler"
 
-#: steps_gtk.pm:442 steps_interactive.pm:543
-#, c-format
-msgid "Installing"
-msgstr "Astalant"
-
-#: steps_gtk.pm:468
+#: steps_gtk.pm:487
 #, c-format
 msgid "No details"
 msgstr "Po vey les rclames"
@@ -868,12 +897,7 @@ msgid_plural "%d packages"
 msgstr[0] "%d pacaedje"
 msgstr[1] "%d pacaedjes"
 
-#: steps_gtk.pm:557 steps_interactive.pm:735
-#, c-format
-msgid "Summary"
-msgstr "Rascourti éndjolreye"
-
-#: steps_gtk.pm:570
+#: steps_gtk.pm:589
 #, c-format
 msgid "Configure"
 msgstr "Apontyî"
@@ -1126,11 +1150,6 @@ msgstr ""
 "Acertinez vs ki l' sopoirt di metaedje a djoû des modules est dins l' lijheu "
 "%s"
 
-#: steps_interactive.pm:644
-#, c-format
-msgid "Updates"
-msgstr "Metaedjes a djoû"
-
 #: steps_interactive.pm:645
 #, c-format
 msgid ""
@@ -1161,8 +1180,14 @@ msgstr "Dj' atôche li muroe po-z aveur li djivêye des pacaedjes"
 msgid "Unable to contact mirror %s"
 msgstr "Dji n' a savou m' raloyî å muroe %s"
 
-#: steps_interactive.pm:794 steps_interactive.pm:811 steps_interactive.pm:827
-#: steps_interactive.pm:838
+#. -PO: example: lilo-graphic on /dev/hda1
+#: steps_interactive.pm:777
+#, c-format
+msgid "%s on %s"
+msgstr "%s so %s"
+
+#: steps_interactive.pm:810 steps_interactive.pm:817 steps_interactive.pm:830
+#: steps_interactive.pm:847 steps_interactive.pm:863 steps_interactive.pm:874
 #, c-format
 msgid "Hardware"
 msgstr "Éndjolreye"
@@ -1236,18 +1261,7 @@ msgstr "metou en alaedje"
 msgid "disabled"
 msgstr "dismetou"
 
-#: steps_interactive.pm:897
-#, c-format
-msgid "Boot"
-msgstr "Enondaedje"
-
-#. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:901
-#, c-format
-msgid "%s on %s"
-msgstr "%s so %s"
-
-#: steps_interactive.pm:927
+#: steps_interactive.pm:939
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr ""
@@ -1391,13 +1405,6 @@ msgid ""
 "Hard drive detection"
 msgstr "Trover les deurès plakes"
 
-#: steps_list.pm:20
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Installation class"
-msgstr "Li classe d' astalåcion"
-
 #: steps_list.pm:21
 #, c-format
 msgid ""
@@ -1440,13 +1447,6 @@ msgid ""
 "Installing"
 msgstr "Astalant"
 
-#: steps_list.pm:27
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Authentication"
-msgstr "Otintifiaedje"
-
 #: steps_list.pm:28
 #, c-format
 msgid ""
@@ -1460,13 +1460,6 @@ msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "Rantoele"
-
-#: steps_list.pm:30
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Bootloader"
-msgstr "Enondrece"
 
 #: steps_list.pm:31
 #, c-format
@@ -1502,6 +1495,14 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "Moussî foû"
+
+#~ msgid "Boot"
+#~ msgstr "Enondaedje"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Authentication"
+#~ msgstr "Otintifiaedje"
 
 #~ msgid "Arkeia"
 #~ msgstr "Arkeia"

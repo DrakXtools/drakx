@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-az\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-02 11:21+0200\n"
+"POT-Creation-Date: 2007-08-21 15:52+0200\n"
 "PO-Revision-Date: 2005-03-31 14:21+0200\n"
 "Last-Translator: Mətin Əmirov <metin@karegen.com>\n"
 "Language-Team: Azerbaijani <translation-team-az@lists.sourceforge.net>\n"
@@ -682,7 +682,46 @@ msgstr "Mandriva Linux Qurulumu %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> irəli/geri"
 
-#: steps_gtk.pm:195
+#: steps_gtk.pm:155 steps_gtk.pm:156
+#, c-format
+msgid "Localization"
+msgstr ""
+
+#: steps_gtk.pm:159 steps_list.pm:20
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Installation class"
+msgstr ""
+
+#: steps_gtk.pm:160 steps_gtk.pm:243 steps_interactive.pm:511
+#, c-format
+msgid "Package Group Selection"
+msgstr "Paket Qruplarının Seçimi"
+
+#: steps_gtk.pm:161 steps_gtk.pm:460 steps_interactive.pm:543
+#, c-format
+msgid "Installing"
+msgstr "Qurulur"
+
+#: steps_gtk.pm:162 steps_gtk.pm:576 steps_interactive.pm:735
+#, c-format
+msgid "Summary"
+msgstr "İcmal"
+
+#: steps_gtk.pm:164 steps_gtk.pm:165 steps_list.pm:30
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Bootloader"
+msgstr "Açılış yükləyicisi"
+
+#: steps_gtk.pm:166 steps_interactive.pm:644
+#, c-format
+msgid "Updates"
+msgstr "Yeniləmələr"
+
+#: steps_gtk.pm:213
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -696,12 +735,7 @@ msgstr ""
 "dəCDROMdan başlatdığınız zaman,\n"
 " 'F1'ə basın və 'text' yazaraq enter'ə basın."
 
-#: steps_gtk.pm:225 steps_interactive.pm:511
-#, c-format
-msgid "Package Group Selection"
-msgstr "Paket Qruplarının Seçimi"
-
-#: steps_gtk.pm:246 steps_interactive.pm:529
+#: steps_gtk.pm:264 steps_interactive.pm:529
 #, c-format
 msgid "Individual package selection"
 msgstr "Fərdi paket seçimi"
@@ -828,12 +862,7 @@ msgstr "Proqram Tə'minatı İdarəsi"
 msgid "Choose the packages you want to install"
 msgstr "Qurmaq istədiyiniz paketləri seçin"
 
-#: steps_gtk.pm:442 steps_interactive.pm:543
-#, c-format
-msgid "Installing"
-msgstr "Qurulur"
-
-#: steps_gtk.pm:468
+#: steps_gtk.pm:487
 #, c-format
 msgid "No details"
 msgstr "Təfsilatsız"
@@ -854,12 +883,7 @@ msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d paket"
 
-#: steps_gtk.pm:557 steps_interactive.pm:735
-#, c-format
-msgid "Summary"
-msgstr "İcmal"
-
-#: steps_gtk.pm:570
+#: steps_gtk.pm:589
 #, c-format
 msgid "Configure"
 msgstr "Qur"
@@ -1099,11 +1123,6 @@ msgstr "Qurulum sonrası qurğular"
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr ""
 
-#: steps_interactive.pm:644
-#, c-format
-msgid "Updates"
-msgstr "Yeniləmələr"
-
 #: steps_interactive.pm:645
 #, c-format
 msgid ""
@@ -1136,8 +1155,14 @@ msgstr "Əks ünvanına bağlantı qurulur"
 msgid "Unable to contact mirror %s"
 msgstr "%s əksi ilə rabitə qurula bilmir"
 
-#: steps_interactive.pm:794 steps_interactive.pm:811 steps_interactive.pm:827
-#: steps_interactive.pm:838
+#. -PO: example: lilo-graphic on /dev/hda1
+#: steps_interactive.pm:777
+#, c-format
+msgid "%s on %s"
+msgstr "%2$s üstündə %1$s"
+
+#: steps_interactive.pm:810 steps_interactive.pm:817 steps_interactive.pm:830
+#: steps_interactive.pm:847 steps_interactive.pm:863 steps_interactive.pm:874
 #, c-format
 msgid "Hardware"
 msgstr "Avadanlıq"
@@ -1210,18 +1235,7 @@ msgstr "fəal"
 msgid "disabled"
 msgstr "qeyri-fəal"
 
-#: steps_interactive.pm:897
-#, c-format
-msgid "Boot"
-msgstr "Açılış"
-
-#. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:901
-#, c-format
-msgid "%s on %s"
-msgstr "%2$s üstündə %1$s"
-
-#: steps_interactive.pm:927
+#: steps_interactive.pm:939
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Siz X-i quraşdırmadınız. Bundan əminsinizmi?"
@@ -1360,13 +1374,6 @@ msgid ""
 "Hard drive detection"
 msgstr "Sabit disklərin aşkar edilməsi"
 
-#: steps_list.pm:20
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Installation class"
-msgstr ""
-
 #: steps_list.pm:21
 #, c-format
 msgid ""
@@ -1409,13 +1416,6 @@ msgid ""
 "Installing"
 msgstr "Qurulur"
 
-#: steps_list.pm:27
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Authentication"
-msgstr "Tanıtma"
-
 #: steps_list.pm:28
 #, c-format
 msgid ""
@@ -1429,13 +1429,6 @@ msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "Şəbəkə"
-
-#: steps_list.pm:30
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Bootloader"
-msgstr "Açılış yükləyicisi"
 
 #: steps_list.pm:31
 #, c-format
@@ -1471,6 +1464,14 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "Çıxış"
+
+#~ msgid "Boot"
+#~ msgstr "Açılış"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Authentication"
+#~ msgstr "Tanıtma"
 
 #~ msgid "DrakVPN"
 #~ msgstr "DrakVPN"

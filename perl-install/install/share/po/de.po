@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-02 11:21+0200\n"
+"POT-Creation-Date: 2007-08-21 15:52+0200\n"
 "PO-Revision-Date: 2007-01-20 13:38+0100\n"
 "Last-Translator: Nicolas Bauer <rastafarii@mandrivauer.de>\n"
 "Language-Team: deutsch\n"
@@ -697,7 +697,46 @@ msgstr "Mandriva Linux-Installation %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> zwischen den Elementen"
 
-#: steps_gtk.pm:195
+#: steps_gtk.pm:155 steps_gtk.pm:156
+#, c-format
+msgid "Localization"
+msgstr ""
+
+#: steps_gtk.pm:159 steps_list.pm:20
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Installation class"
+msgstr "Installationsgruppe"
+
+#: steps_gtk.pm:160 steps_gtk.pm:243 steps_interactive.pm:511
+#, c-format
+msgid "Package Group Selection"
+msgstr "Auswahl der Paketgruppen"
+
+#: steps_gtk.pm:161 steps_gtk.pm:460 steps_interactive.pm:543
+#, c-format
+msgid "Installing"
+msgstr "Installation wird durchgeführt"
+
+#: steps_gtk.pm:162 steps_gtk.pm:576 steps_interactive.pm:735
+#, c-format
+msgid "Summary"
+msgstr "Zusammenfassung"
+
+#: steps_gtk.pm:164 steps_gtk.pm:165 steps_list.pm:30
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Bootloader"
+msgstr "Bootloader"
+
+#: steps_gtk.pm:166 steps_interactive.pm:644
+#, c-format
+msgid "Updates"
+msgstr "Aktualisierungen"
+
+#: steps_gtk.pm:213
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -711,12 +750,7 @@ msgstr ""
 "Installationsstart und geben Sie „text“ an der Eingabeaufforderung \n"
 "ein."
 
-#: steps_gtk.pm:225 steps_interactive.pm:511
-#, c-format
-msgid "Package Group Selection"
-msgstr "Auswahl der Paketgruppen"
-
-#: steps_gtk.pm:246 steps_interactive.pm:529
+#: steps_gtk.pm:264 steps_interactive.pm:529
 #, c-format
 msgid "Individual package selection"
 msgstr "Individuelle Paketauswahl"
@@ -849,12 +883,7 @@ msgstr "Software verwalten"
 msgid "Choose the packages you want to install"
 msgstr "Zu installierende Pakete auswählen"
 
-#: steps_gtk.pm:442 steps_interactive.pm:543
-#, c-format
-msgid "Installing"
-msgstr "Installation wird durchgeführt"
-
-#: steps_gtk.pm:468
+#: steps_gtk.pm:487
 #, c-format
 msgid "No details"
 msgstr "Keine Details"
@@ -876,12 +905,7 @@ msgid_plural "%d packages"
 msgstr[0] "%d Paket"
 msgstr[1] "%d Pakete"
 
-#: steps_gtk.pm:557 steps_interactive.pm:735
-#, c-format
-msgid "Summary"
-msgstr "Zusammenfassung"
-
-#: steps_gtk.pm:570
+#: steps_gtk.pm:589
 #, c-format
 msgid "Configure"
 msgstr "Konfigurieren"
@@ -1130,11 +1154,6 @@ msgstr ""
 "Bitte stellen Sie sicher, dass sich das Update-Modul-Medium im Laufwerk %s "
 "befindet"
 
-#: steps_interactive.pm:644
-#, c-format
-msgid "Updates"
-msgstr "Aktualisierungen"
-
 #: steps_interactive.pm:645
 #, c-format
 msgid ""
@@ -1165,8 +1184,14 @@ msgstr "Kontaktiere Mirror, um eine Liste verfügbarer Pakete zu erhalten..."
 msgid "Unable to contact mirror %s"
 msgstr "Mirror %s nicht erreichbar"
 
-#: steps_interactive.pm:794 steps_interactive.pm:811 steps_interactive.pm:827
-#: steps_interactive.pm:838
+#. -PO: example: lilo-graphic on /dev/hda1
+#: steps_interactive.pm:777
+#, c-format
+msgid "%s on %s"
+msgstr "%s auf %s"
+
+#: steps_interactive.pm:810 steps_interactive.pm:817 steps_interactive.pm:830
+#: steps_interactive.pm:847 steps_interactive.pm:863 steps_interactive.pm:874
 #, c-format
 msgid "Hardware"
 msgstr "Hardware"
@@ -1242,18 +1267,7 @@ msgstr "aktiviert"
 msgid "disabled"
 msgstr "deaktiviert"
 
-#: steps_interactive.pm:897
-#, c-format
-msgid "Boot"
-msgstr "Start"
-
-#. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:901
-#, c-format
-msgid "%s on %s"
-msgstr "%s auf %s"
-
-#: steps_interactive.pm:927
+#: steps_interactive.pm:939
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Sie haben X nicht konfiguriert. Sind Sie sicher?"
@@ -1399,13 +1413,6 @@ msgid ""
 "Hard drive detection"
 msgstr "Festplatten suchen"
 
-#: steps_list.pm:20
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Installation class"
-msgstr "Installationsgruppe"
-
 #: steps_list.pm:21
 #, c-format
 msgid ""
@@ -1448,13 +1455,6 @@ msgid ""
 "Installing"
 msgstr "Installation wird durchgeführt"
 
-#: steps_list.pm:27
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Authentication"
-msgstr "Authentifizierung"
-
 #: steps_list.pm:28
 #, c-format
 msgid ""
@@ -1468,13 +1468,6 @@ msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "Netzwerk"
-
-#: steps_list.pm:30
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Bootloader"
-msgstr "Bootloader"
 
 #: steps_list.pm:31
 #, c-format
@@ -1510,6 +1503,14 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "Verlassen"
+
+#~ msgid "Boot"
+#~ msgstr "Start"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Authentication"
+#~ msgstr "Authentifizierung"
 
 #~ msgid "Arkeia"
 #~ msgstr "Arkeia"

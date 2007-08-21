@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fi - Mandriva 2007 Release\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-02 11:21+0200\n"
+"POT-Creation-Date: 2007-08-21 15:52+0200\n"
 "PO-Revision-Date: 2006-09-18 20:02+0300\n"
 "Last-Translator: Thomas Backlund <tmb@mandriva.org>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -690,7 +690,47 @@ msgstr "Mandriva Linux asennus %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> vaihtaa elementtiä"
 
-#: steps_gtk.pm:195
+#: steps_gtk.pm:155 steps_gtk.pm:156
+#, c-format
+msgid "Localization"
+msgstr ""
+
+#: steps_gtk.pm:159 steps_list.pm:20
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Installation class"
+msgstr "Asennusluokka"
+
+#: steps_gtk.pm:160 steps_gtk.pm:243 steps_interactive.pm:511
+#, c-format
+msgid "Package Group Selection"
+msgstr "Pakettiryhmien valinta"
+
+#: steps_gtk.pm:161 steps_gtk.pm:460 steps_interactive.pm:543
+#, c-format
+msgid "Installing"
+msgstr "Asennetaan"
+
+# Asennuksen sivuvalikko
+#: steps_gtk.pm:162 steps_gtk.pm:576 steps_interactive.pm:735
+#, c-format
+msgid "Summary"
+msgstr "Yhteenveto"
+
+#: steps_gtk.pm:164 steps_gtk.pm:165 steps_list.pm:30
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Bootloader"
+msgstr "Käynnistyslataaja"
+
+#: steps_gtk.pm:166 steps_interactive.pm:644
+#, c-format
+msgid "Updates"
+msgstr "Päivitykset"
+
+#: steps_gtk.pm:213
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -704,12 +744,7 @@ msgstr ""
 "Tehdäksesi niin paina `F1' kun käynnistät asennusohjelmaa CD-ROM:lta.\n"
 "Tämän jälkeen kirjoita `text'."
 
-#: steps_gtk.pm:225 steps_interactive.pm:511
-#, c-format
-msgid "Package Group Selection"
-msgstr "Pakettiryhmien valinta"
-
-#: steps_gtk.pm:246 steps_interactive.pm:529
+#: steps_gtk.pm:264 steps_interactive.pm:529
 #, c-format
 msgid "Individual package selection"
 msgstr "Yksittäisten pakettien valinta"
@@ -841,12 +876,7 @@ msgstr "Ohjelmistohallinta"
 msgid "Choose the packages you want to install"
 msgstr "Valitse asennettavat paketit"
 
-#: steps_gtk.pm:442 steps_interactive.pm:543
-#, c-format
-msgid "Installing"
-msgstr "Asennetaan"
-
-#: steps_gtk.pm:468
+#: steps_gtk.pm:487
 #, c-format
 msgid "No details"
 msgstr "Ei yksityiskohtia"
@@ -868,13 +898,7 @@ msgid_plural "%d packages"
 msgstr[0] "%d pakettia"
 msgstr[1] "%d pakettia"
 
-# Asennuksen sivuvalikko
-#: steps_gtk.pm:557 steps_interactive.pm:735
-#, c-format
-msgid "Summary"
-msgstr "Yhteenveto"
-
-#: steps_gtk.pm:570
+#: steps_gtk.pm:589
 #, c-format
 msgid "Configure"
 msgstr "Aseta"
@@ -1121,11 +1145,6 @@ msgstr "Asennuksen jälkeiset toiminnot"
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "Varmista että Päivitetyt Moduulit media on asemassa %s"
 
-#: steps_interactive.pm:644
-#, c-format
-msgid "Updates"
-msgstr "Päivitykset"
-
 #: steps_interactive.pm:645
 #, c-format
 msgid ""
@@ -1156,8 +1175,14 @@ msgstr "Yhdistetään peilipalvelimeen uusimman pakettilistan saamiseksi..."
 msgid "Unable to contact mirror %s"
 msgstr "Yhteyttä peilipalvelimeen %s ei voitu muodostaa"
 
-#: steps_interactive.pm:794 steps_interactive.pm:811 steps_interactive.pm:827
-#: steps_interactive.pm:838
+#. -PO: example: lilo-graphic on /dev/hda1
+#: steps_interactive.pm:777
+#, c-format
+msgid "%s on %s"
+msgstr "%s kohteessa %s"
+
+#: steps_interactive.pm:810 steps_interactive.pm:817 steps_interactive.pm:830
+#: steps_interactive.pm:847 steps_interactive.pm:863 steps_interactive.pm:874
 #, c-format
 msgid "Hardware"
 msgstr "Laitteisto"
@@ -1232,18 +1257,7 @@ msgstr "aktivoitu"
 msgid "disabled"
 msgstr "ei käytössä"
 
-#: steps_interactive.pm:897
-#, c-format
-msgid "Boot"
-msgstr "Käynnistys"
-
-#. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:901
-#, c-format
-msgid "%s on %s"
-msgstr "%s kohteessa %s"
-
-#: steps_interactive.pm:927
+#: steps_interactive.pm:939
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Et ole asettanut X-palvelinta. Oletko varma että haluat tehdä tämän?"
@@ -1386,13 +1400,6 @@ msgid ""
 "Hard drive detection"
 msgstr "Kiintolevyjen tunnistus"
 
-#: steps_list.pm:20
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Installation class"
-msgstr "Asennusluokka"
-
 #: steps_list.pm:21
 #, c-format
 msgid ""
@@ -1435,13 +1442,6 @@ msgid ""
 "Installing"
 msgstr "Asennetaan"
 
-#: steps_list.pm:27
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Authentication"
-msgstr "Tunnistustapa"
-
 #: steps_list.pm:28
 #, c-format
 msgid ""
@@ -1455,13 +1455,6 @@ msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "Verkko"
-
-#: steps_list.pm:30
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Bootloader"
-msgstr "Käynnistyslataaja"
 
 # Asennuksen sivuvalikko
 #: steps_list.pm:31
@@ -1499,6 +1492,14 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "Poistu"
+
+#~ msgid "Boot"
+#~ msgstr "Käynnistys"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Authentication"
+#~ msgstr "Tunnistustapa"
 
 #~ msgid "Arkeia"
 #~ msgstr "Arkeia"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-02 11:21+0200\n"
+"POT-Creation-Date: 2007-08-21 15:52+0200\n"
 "PO-Revision-Date: 2007-03-10 13:05+0100\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: \n"
@@ -692,7 +692,46 @@ msgstr "Mandriva Linux-telepítés %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt+Tab> lépegetés"
 
-#: steps_gtk.pm:195
+#: steps_gtk.pm:155 steps_gtk.pm:156
+#, c-format
+msgid "Localization"
+msgstr ""
+
+#: steps_gtk.pm:159 steps_list.pm:20
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Installation class"
+msgstr "Telepítési osztály"
+
+#: steps_gtk.pm:160 steps_gtk.pm:243 steps_interactive.pm:511
+#, c-format
+msgid "Package Group Selection"
+msgstr "Csomag-csoportok kiválasztása"
+
+#: steps_gtk.pm:161 steps_gtk.pm:460 steps_interactive.pm:543
+#, c-format
+msgid "Installing"
+msgstr "Telepítés"
+
+#: steps_gtk.pm:162 steps_gtk.pm:576 steps_interactive.pm:735
+#, c-format
+msgid "Summary"
+msgstr "Összefoglalás"
+
+#: steps_gtk.pm:164 steps_gtk.pm:165 steps_list.pm:30
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Bootloader"
+msgstr "Rendszerbetöltő"
+
+#: steps_gtk.pm:166 steps_interactive.pm:644
+#, c-format
+msgid "Updates"
+msgstr "Frissítések"
+
+#: steps_gtk.pm:213
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -705,12 +744,7 @@ msgstr ""
 "szöveges módú telepítéssel: CD-ről való rendszerindítást követően nyomjon\n"
 "\"F1\"-et, majd írja be azt, hogy \"text\"."
 
-#: steps_gtk.pm:225 steps_interactive.pm:511
-#, c-format
-msgid "Package Group Selection"
-msgstr "Csomag-csoportok kiválasztása"
-
-#: steps_gtk.pm:246 steps_interactive.pm:529
+#: steps_gtk.pm:264 steps_interactive.pm:529
 #, c-format
 msgid "Individual package selection"
 msgstr "Csomagok egyedi kiválasztása"
@@ -852,12 +886,7 @@ msgstr "Szoftverkezelés"
 msgid "Choose the packages you want to install"
 msgstr "Válassza ki a telepítendő csomagokat"
 
-#: steps_gtk.pm:442 steps_interactive.pm:543
-#, c-format
-msgid "Installing"
-msgstr "Telepítés"
-
-#: steps_gtk.pm:468
+#: steps_gtk.pm:487
 #, c-format
 msgid "No details"
 msgstr "Részletek nélkül"
@@ -879,12 +908,7 @@ msgid_plural "%d packages"
 msgstr[0] "%d csomag"
 msgstr[1] "%d csomag"
 
-#: steps_gtk.pm:557 steps_interactive.pm:735
-#, c-format
-msgid "Summary"
-msgstr "Összefoglalás"
-
-#: steps_gtk.pm:570
+#: steps_gtk.pm:589
 #, c-format
 msgid "Configure"
 msgstr "Beállítás"
@@ -1135,11 +1159,6 @@ msgstr ""
 "Tegye be a frissítési modulokat tartalmazó adathordozót a(z) \"%s\" "
 "meghajtóba"
 
-#: steps_interactive.pm:644
-#, c-format
-msgid "Updates"
-msgstr "Frissítések"
-
 #: steps_interactive.pm:645
 #, c-format
 msgid ""
@@ -1171,8 +1190,14 @@ msgstr ""
 msgid "Unable to contact mirror %s"
 msgstr "Nem sikerült kapcsolódni ehhez a tükörkiszolgálóhoz: %s"
 
-#: steps_interactive.pm:794 steps_interactive.pm:811 steps_interactive.pm:827
-#: steps_interactive.pm:838
+#. -PO: example: lilo-graphic on /dev/hda1
+#: steps_interactive.pm:777
+#, c-format
+msgid "%s on %s"
+msgstr "%s ezen: %s"
+
+#: steps_interactive.pm:810 steps_interactive.pm:817 steps_interactive.pm:830
+#: steps_interactive.pm:847 steps_interactive.pm:863 steps_interactive.pm:874
 #, c-format
 msgid "Hardware"
 msgstr "Hardver"
@@ -1248,18 +1273,7 @@ msgstr "aktiválva"
 msgid "disabled"
 msgstr "kikapcsolva"
 
-#: steps_interactive.pm:897
-#, c-format
-msgid "Boot"
-msgstr "Rendszerindítás"
-
-#. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:901
-#, c-format
-msgid "%s on %s"
-msgstr "%s ezen: %s"
-
-#: steps_interactive.pm:927
+#: steps_interactive.pm:939
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Az X grafikus rendszert nem állította be. Biztosan megfelel így?"
@@ -1402,13 +1416,6 @@ msgid ""
 "Hard drive detection"
 msgstr "Merevlemez keresése"
 
-#: steps_list.pm:20
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Installation class"
-msgstr "Telepítési osztály"
-
 #: steps_list.pm:21
 #, c-format
 msgid ""
@@ -1451,13 +1458,6 @@ msgid ""
 "Installing"
 msgstr "Telepítés"
 
-#: steps_list.pm:27
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Authentication"
-msgstr "Felhasználóazonosítás"
-
 #: steps_list.pm:28
 #, c-format
 msgid ""
@@ -1471,13 +1471,6 @@ msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "Hálózat"
-
-#: steps_list.pm:30
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Bootloader"
-msgstr "Rendszerbetöltő"
 
 #: steps_list.pm:31
 #, c-format
@@ -1513,6 +1506,14 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "Kilépés"
+
+#~ msgid "Boot"
+#~ msgstr "Rendszerindítás"
+
+#~ msgid ""
+#~ "_: Keep these entry short\n"
+#~ "Authentication"
+#~ msgstr "Felhasználóazonosítás"
 
 #~ msgid "Arkeia"
 #~ msgstr "Arkeia"
