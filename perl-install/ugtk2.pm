@@ -728,7 +728,7 @@ sub new {
 	'MagicWindow',
 	title => $title || '',
 	pop_it => $o->{pop_it},
-	$::isInstall ? (banner => Gtk2::Banner->new($banner_title ? ($icon, $title) : get_default_step_items())) : (),
+	$::isInstall ? (banner => Gtk2::Banner->new($opts{icon} ? ($icon, $title) : get_default_step_items())) : (),
 	$::isStandalone && $banner_title && $icon ? (banner => Gtk2::Banner->new($icon, $banner_title)) : (),
 	child => gtknew('VBox'),
 	width => $opts{width}, height => $opts{height}, default_width => $opts{default_width}, default_height => $opts{default_height}, 
