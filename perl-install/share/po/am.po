@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2007-08-09 11:21+0200\n"
+"POT-Creation-Date: 2007-08-21 15:48+0200\n"
 "PO-Revision-Date: 2004-06-01 03:36+0100\n"
 "Last-Translator: Alemayehu <alemayehu@gmx.at>\n"
 "Language-Team: Amharic <am-translate@geez.org>\n"
@@ -407,33 +407,24 @@ msgstr "(%f በሰነድ-ስም ይተካል፤ %l በመስመር ቁጥር)"
 msgid "%s should be above 500. Accept anyway?"
 msgstr ""
 
-#: any.pm:758
-#, c-format
-msgid "Add user"
-msgstr "ተጠቃሚ ጨምር"
+#: any.pm:768
+#, fuzzy, c-format
+msgid "User management"
+msgstr "የተጠቃሚ ስም"
 
-#: any.pm:760
-#, c-format
-msgid ""
-"Enter a user\n"
-"%s"
+#: any.pm:775 authentication.pm:182
+#, fuzzy, c-format
+msgid "Set administrator (root) password"
+msgstr "የroot ሚስጢራዊ ቃል ይምረጡ"
+
+#: any.pm:780
+#, fuzzy, c-format
+msgid "Enter a user"
 msgstr ""
 "የተጠቃሚ ስም ያስገቡ\n"
 "%s"
 
-#: any.pm:763 diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:166
-#: diskdrake/removable.pm:26 diskdrake/smbnfs_gtk.pm:82
-#: interactive/http.pm:151
-#, c-format
-msgid "Done"
-msgstr "ጨርሷል"
-
-#: any.pm:764
-#, c-format
-msgid "Accept user"
-msgstr "ተጠቃሚ ተቀበል"
-
-#: any.pm:769
+#: any.pm:781
 #, c-format
 msgid "Real name"
 msgstr "እውነተኛ ስም"
@@ -908,11 +899,6 @@ msgstr "የዶሜን አስተዳዳሪ ሚስጢራዊ ቃል"
 msgid "Authentication"
 msgstr ""
 
-#: authentication.pm:182
-#, fuzzy, c-format
-msgid "Set administrator (root) password"
-msgstr "የroot ሚስጢራዊ ቃል ይምረጡ"
-
 #: authentication.pm:184
 #, fuzzy, c-format
 msgid "Authentication method"
@@ -1083,14 +1069,20 @@ msgstr ""
 msgid "Options"
 msgstr "ምርጫዎች"
 
+#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:166 diskdrake/removable.pm:26
+#: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
+#, c-format
+msgid "Done"
+msgstr "ጨርሷል"
+
 #: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:115 diskdrake/interactive.pm:229
 #: diskdrake/interactive.pm:242 diskdrake/interactive.pm:386
 #: diskdrake/interactive.pm:404 diskdrake/interactive.pm:529
 #: diskdrake/interactive.pm:534 diskdrake/interactive.pm:652
-#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:1084
-#: diskdrake/interactive.pm:1097 diskdrake/interactive.pm:1100
-#: diskdrake/interactive.pm:1343 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
-#: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:229
+#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:1087
+#: diskdrake/interactive.pm:1100 diskdrake/interactive.pm:1103
+#: diskdrake/interactive.pm:1351 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
+#: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:227
 #: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
 #: scanner.pm:94 scanner.pm:105 scanner.pm:112 scanner.pm:119 wizards.pm:95
 #: wizards.pm:99 wizards.pm:121
@@ -2144,10 +2136,10 @@ msgid ""
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
 
-#: fs/mount_options.pm:120
+#: fs/mount_options.pm:123
 #, c-format
 msgid ""
-"Do not update directory inode access times on this filesystem\n"
+"Update inode access times on this filesystem in a more efficient way\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
 
@@ -6120,6 +6112,12 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Installation failed"
 msgstr "%s አልተገኘም"
+
+#~ msgid "Add user"
+#~ msgstr "ተጠቃሚ ጨምር"
+
+#~ msgid "Accept user"
+#~ msgstr "ተጠቃሚ ተቀበል"
 
 #~ msgid "Rescue partition table"
 #~ msgstr "የክፋይ ሠንጠረዡን አድን"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-sc\n"
-"POT-Creation-Date: 2007-08-09 11:21+0200\n"
+"POT-Creation-Date: 2007-08-21 15:48+0200\n"
 "PO-Revision-Date: 2005-09-14 11:29+0100\n"
 "Last-Translator: Antoni Pistis <antonio.pistis@virgilio.it>\n"
 "Language-Team: Sardu\n"
@@ -418,33 +418,24 @@ msgstr "%s depit essi unu nùmeru"
 msgid "%s should be above 500. Accept anyway?"
 msgstr "%s iat a bolli prus artu de 500. Du pigu a su pròpiu?"
 
-#: any.pm:758
-#, c-format
-msgid "Add user"
-msgstr "Açungi umperadori"
+#: any.pm:768
+#, fuzzy, c-format
+msgid "User management"
+msgstr "Nòmini umperadori"
 
-#: any.pm:760
+#: any.pm:775 authentication.pm:182
 #, c-format
-msgid ""
-"Enter a user\n"
-"%s"
+msgid "Set administrator (root) password"
+msgstr "Assètia sa password de s'aministradori (root)"
+
+#: any.pm:780
+#, fuzzy, c-format
+msgid "Enter a user"
 msgstr ""
 "Intra unu umperadori\n"
 "%s"
 
-#: any.pm:763 diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:166
-#: diskdrake/removable.pm:26 diskdrake/smbnfs_gtk.pm:82
-#: interactive/http.pm:151
-#, c-format
-msgid "Done"
-msgstr "Fatu"
-
-#: any.pm:764
-#, c-format
-msgid "Accept user"
-msgstr "Aceta umperadori"
-
-#: any.pm:769
+#: any.pm:781
 #, c-format
 msgid "Real name"
 msgstr "Nòmini beru"
@@ -942,11 +933,6 @@ msgstr ""
 msgid "Authentication"
 msgstr "Autentigadura"
 
-#: authentication.pm:182
-#, c-format
-msgid "Set administrator (root) password"
-msgstr "Assètia sa password de s'aministradori (root)"
-
 #: authentication.pm:184
 #, c-format
 msgid "Authentication method"
@@ -1129,14 +1115,20 @@ msgstr "Puntu de càrrigu"
 msgid "Options"
 msgstr "Sceras"
 
+#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:166 diskdrake/removable.pm:26
+#: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
+#, c-format
+msgid "Done"
+msgstr "Fatu"
+
 #: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:115 diskdrake/interactive.pm:229
 #: diskdrake/interactive.pm:242 diskdrake/interactive.pm:386
 #: diskdrake/interactive.pm:404 diskdrake/interactive.pm:529
 #: diskdrake/interactive.pm:534 diskdrake/interactive.pm:652
-#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:1084
-#: diskdrake/interactive.pm:1097 diskdrake/interactive.pm:1100
-#: diskdrake/interactive.pm:1343 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
-#: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:229
+#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:1087
+#: diskdrake/interactive.pm:1100 diskdrake/interactive.pm:1103
+#: diskdrake/interactive.pm:1351 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
+#: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:227
 #: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
 #: scanner.pm:94 scanner.pm:105 scanner.pm:112 scanner.pm:119 wizards.pm:95
 #: wizards.pm:99 wizards.pm:121
@@ -2217,10 +2209,10 @@ msgid ""
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
 
-#: fs/mount_options.pm:120
+#: fs/mount_options.pm:123
 #, c-format
 msgid ""
-"Do not update directory inode access times on this filesystem\n"
+"Update inode access times on this filesystem in a more efficient way\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
 
@@ -6228,6 +6220,12 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Aposentadura faddia"
+
+#~ msgid "Add user"
+#~ msgstr "Açungi umperadori"
+
+#~ msgid "Accept user"
+#~ msgstr "Aceta umperadori"
 
 #~ msgid "Supermount"
 #~ msgstr "Supermount"

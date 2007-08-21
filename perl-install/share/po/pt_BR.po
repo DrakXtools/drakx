@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pt_BR\n"
-"POT-Creation-Date: 2007-08-09 11:21+0200\n"
+"POT-Creation-Date: 2007-08-21 15:48+0200\n"
 "PO-Revision-Date: 2007-05-21 11:05-0300\n"
 "Last-Translator: Felipe Arruda <felipemiguel@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_br@mail.kde.org>\n"
@@ -448,33 +448,24 @@ msgstr "A opção %s tem que ser um número"
 msgid "%s should be above 500. Accept anyway?"
 msgstr "%s deve ser acima de 500. Aceitar mesmo assim?"
 
-#: any.pm:758
-#, c-format
-msgid "Add user"
-msgstr "Adicionar usuário"
+#: any.pm:768
+#, fuzzy, c-format
+msgid "User management"
+msgstr "Nome de usuário"
 
-#: any.pm:760
+#: any.pm:775 authentication.pm:182
 #, c-format
-msgid ""
-"Enter a user\n"
-"%s"
+msgid "Set administrator (root) password"
+msgstr "Especifique a senha do root"
+
+#: any.pm:780
+#, fuzzy, c-format
+msgid "Enter a user"
 msgstr ""
 "Digite um usuário\n"
 "%s"
 
-#: any.pm:763 diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:166
-#: diskdrake/removable.pm:26 diskdrake/smbnfs_gtk.pm:82
-#: interactive/http.pm:151
-#, c-format
-msgid "Done"
-msgstr "Pronto"
-
-#: any.pm:764
-#, c-format
-msgid "Accept user"
-msgstr "Aceitar usuário"
-
-#: any.pm:769
+#: any.pm:781
 #, c-format
 msgid "Real name"
 msgstr "Nome real"
@@ -994,11 +985,6 @@ msgstr "Senha de administrador do domínio"
 msgid "Authentication"
 msgstr "Autenticação"
 
-#: authentication.pm:182
-#, c-format
-msgid "Set administrator (root) password"
-msgstr "Especifique a senha do root"
-
 #: authentication.pm:184
 #, c-format
 msgid "Authentication method"
@@ -1188,14 +1174,20 @@ msgstr "Ponto de Montagem"
 msgid "Options"
 msgstr "Opções"
 
+#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:166 diskdrake/removable.pm:26
+#: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
+#, c-format
+msgid "Done"
+msgstr "Pronto"
+
 #: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:115 diskdrake/interactive.pm:229
 #: diskdrake/interactive.pm:242 diskdrake/interactive.pm:386
 #: diskdrake/interactive.pm:404 diskdrake/interactive.pm:529
 #: diskdrake/interactive.pm:534 diskdrake/interactive.pm:652
-#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:1084
-#: diskdrake/interactive.pm:1097 diskdrake/interactive.pm:1100
-#: diskdrake/interactive.pm:1343 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
-#: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:229
+#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:1087
+#: diskdrake/interactive.pm:1100 diskdrake/interactive.pm:1103
+#: diskdrake/interactive.pm:1351 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
+#: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:227
 #: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
 #: scanner.pm:94 scanner.pm:105 scanner.pm:112 scanner.pm:119 wizards.pm:95
 #: wizards.pm:99 wizards.pm:121
@@ -2303,10 +2295,10 @@ msgstr ""
 "(ex. para um acesso mais rápido ao spoll de notícias, para acelerar os "
 "servidores de notícias)."
 
-#: fs/mount_options.pm:120
+#: fs/mount_options.pm:123
 #, fuzzy, c-format
 msgid ""
-"Do not update directory inode access times on this filesystem\n"
+"Update inode access times on this filesystem in a more efficient way\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
 "Não atualize o tempo de acesso ao inode neste sistema de arquivos\n"
@@ -6896,6 +6888,21 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Falha na instalação"
+
+#~ msgid "Add user"
+#~ msgstr "Adicionar usuário"
+
+#~ msgid "Accept user"
+#~ msgstr "Aceitar usuário"
+
+#, fuzzy
+#~ msgid ""
+#~ "Do not update directory inode access times on this filesystem\n"
+#~ "(e.g, for faster access on the news spool to speed up news servers)."
+#~ msgstr ""
+#~ "Não atualize o tempo de acesso ao inode neste sistema de arquivos\n"
+#~ "(ex. para um acesso mais rápido ao spoll de notícias, para acelerar os "
+#~ "servidores de notícias)."
 
 #~ msgid "No supermount"
 #~ msgstr "Sem o supermount"

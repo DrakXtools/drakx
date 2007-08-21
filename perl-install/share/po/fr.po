@@ -73,7 +73,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fr\n"
-"POT-Creation-Date: 2007-08-09 11:21+0200\n"
+"POT-Creation-Date: 2007-08-21 15:48+0200\n"
 "PO-Revision-Date: 2007-08-12 13:52+0200\n"
 "Last-Translator: Christophe Berthelé <cpjc@free.fr>\n"
 "Language-Team: Français <cooker-i18n@mandrivalinux.org>\n"
@@ -506,33 +506,24 @@ msgstr "%s doit être un nombre"
 msgid "%s should be above 500. Accept anyway?"
 msgstr "%s doit être supérieur ou égal à 500. Accepter quand même?"
 
-#: any.pm:758
-#, c-format
-msgid "Add user"
-msgstr "Ajouter un utilisateur"
+#: any.pm:768
+#, fuzzy, c-format
+msgid "User management"
+msgstr "Nom d'utilisateur"
 
-#: any.pm:760
+#: any.pm:775 authentication.pm:182
 #, c-format
-msgid ""
-"Enter a user\n"
-"%s"
+msgid "Set administrator (root) password"
+msgstr "Définissez le mot de passe root"
+
+#: any.pm:780
+#, fuzzy, c-format
+msgid "Enter a user"
 msgstr ""
 "Créer un compte utilisateur\n"
 "%s"
 
-#: any.pm:763 diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:166
-#: diskdrake/removable.pm:26 diskdrake/smbnfs_gtk.pm:82
-#: interactive/http.pm:151
-#, c-format
-msgid "Done"
-msgstr "Terminer"
-
-#: any.pm:764
-#, c-format
-msgid "Accept user"
-msgstr "Accepter"
-
-#: any.pm:769
+#: any.pm:781
 #, c-format
 msgid "Real name"
 msgstr "Nom et prénom"
@@ -1055,11 +1046,6 @@ msgstr "Mot de passe d'administration de domaine"
 msgid "Authentication"
 msgstr "Authentification"
 
-#: authentication.pm:182
-#, c-format
-msgid "Set administrator (root) password"
-msgstr "Définissez le mot de passe root"
-
 #: authentication.pm:184
 #, c-format
 msgid "Authentication method"
@@ -1252,14 +1238,20 @@ msgstr "Point de montage"
 msgid "Options"
 msgstr "Options"
 
+#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:166 diskdrake/removable.pm:26
+#: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
+#, c-format
+msgid "Done"
+msgstr "Terminer"
+
 #: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:115 diskdrake/interactive.pm:229
 #: diskdrake/interactive.pm:242 diskdrake/interactive.pm:386
 #: diskdrake/interactive.pm:404 diskdrake/interactive.pm:529
 #: diskdrake/interactive.pm:534 diskdrake/interactive.pm:652
-#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:1084
-#: diskdrake/interactive.pm:1097 diskdrake/interactive.pm:1100
-#: diskdrake/interactive.pm:1343 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
-#: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:229
+#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:1087
+#: diskdrake/interactive.pm:1100 diskdrake/interactive.pm:1103
+#: diskdrake/interactive.pm:1351 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
+#: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:227
 #: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
 #: scanner.pm:94 scanner.pm:105 scanner.pm:112 scanner.pm:119 wizards.pm:95
 #: wizards.pm:99 wizards.pm:121
@@ -2378,14 +2370,13 @@ msgstr ""
 "(par exemple, afin d'avoir d'accélérer un serveur de nouvelles via un accès "
 "plus rapide aux à ces dernières)"
 
-#: fs/mount_options.pm:120
-#, c-format
+#: fs/mount_options.pm:123
+#, fuzzy, c-format
 msgid ""
-"Do not update directory inode access times on this filesystem\n"
+"Update inode access times on this filesystem in a more efficient way\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
-"Ne pas mettre à jour l'heure d'accès aux inodes de répertoires sur ce "
-"système de fichier\n"
+"Ne pas mettre à jour l'heure d'accès aux inodes sur ce système de fichier\n"
 "(par exemple, afin d'avoir d'accélérer un serveur de nouvelles via un accès "
 "plus rapide aux à ces dernières)"
 
@@ -3152,7 +3143,7 @@ msgstr ""
 "Vous pouvez sélectionner ici un pilote alternatif (OSS ou ALSA) pour votre "
 "carte son (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA",
+#. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:252
@@ -7015,3 +7006,18 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Échec de l'installation"
+
+#~ msgid "Add user"
+#~ msgstr "Ajouter un utilisateur"
+
+#~ msgid "Accept user"
+#~ msgstr "Accepter"
+
+#~ msgid ""
+#~ "Do not update directory inode access times on this filesystem\n"
+#~ "(e.g, for faster access on the news spool to speed up news servers)."
+#~ msgstr ""
+#~ "Ne pas mettre à jour l'heure d'accès aux inodes de répertoires sur ce "
+#~ "système de fichier\n"
+#~ "(par exemple, afin d'avoir d'accélérer un serveur de nouvelles via un "
+#~ "accès plus rapide aux à ces dernières)"

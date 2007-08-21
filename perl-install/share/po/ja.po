@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-ja\n"
-"POT-Creation-Date: 2007-08-09 11:21+0200\n"
+"POT-Creation-Date: 2007-08-21 15:48+0200\n"
 "PO-Revision-Date: 2007-08-17 09:00+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <cooker-i18n@mandrivalinux.org>\n"
@@ -438,33 +438,24 @@ msgstr "%s は数字でなければいけません"
 msgid "%s should be above 500. Accept anyway?"
 msgstr "%s は 500 より上でなければいけません。このまま受け入れますか？"
 
-#: any.pm:758
-#, c-format
-msgid "Add user"
-msgstr "ユーザを追加"
+#: any.pm:768
+#, fuzzy, c-format
+msgid "User management"
+msgstr "ユーザ名"
 
-#: any.pm:760
+#: any.pm:775 authentication.pm:182
 #, c-format
-msgid ""
-"Enter a user\n"
-"%s"
+msgid "Set administrator (root) password"
+msgstr "管理者 (root) のパスワードを設定"
+
+#: any.pm:780
+#, fuzzy, c-format
+msgid "Enter a user"
 msgstr ""
 "ユーザ名を入力\n"
 "%s"
 
-#: any.pm:763 diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:166
-#: diskdrake/removable.pm:26 diskdrake/smbnfs_gtk.pm:82
-#: interactive/http.pm:151
-#, c-format
-msgid "Done"
-msgstr "完了"
-
-#: any.pm:764
-#, c-format
-msgid "Accept user"
-msgstr "ユーザ受け入れ"
-
-#: any.pm:769
+#: any.pm:781
 #, c-format
 msgid "Real name"
 msgstr "本名"
@@ -964,11 +955,6 @@ msgstr "ドメイン管理者のパスワード"
 msgid "Authentication"
 msgstr "認証"
 
-#: authentication.pm:182
-#, c-format
-msgid "Set administrator (root) password"
-msgstr "管理者 (root) のパスワードを設定"
-
 #: authentication.pm:184
 #, c-format
 msgid "Authentication method"
@@ -1153,14 +1139,20 @@ msgstr "マウントポイント"
 msgid "Options"
 msgstr "オプション"
 
+#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:166 diskdrake/removable.pm:26
+#: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
+#, c-format
+msgid "Done"
+msgstr "完了"
+
 #: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:115 diskdrake/interactive.pm:229
 #: diskdrake/interactive.pm:242 diskdrake/interactive.pm:386
 #: diskdrake/interactive.pm:404 diskdrake/interactive.pm:529
 #: diskdrake/interactive.pm:534 diskdrake/interactive.pm:652
-#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:1084
-#: diskdrake/interactive.pm:1097 diskdrake/interactive.pm:1100
-#: diskdrake/interactive.pm:1343 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
-#: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:229
+#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:1087
+#: diskdrake/interactive.pm:1100 diskdrake/interactive.pm:1103
+#: diskdrake/interactive.pm:1351 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
+#: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:227
 #: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
 #: scanner.pm:94 scanner.pm:105 scanner.pm:112 scanner.pm:119 wizards.pm:95
 #: wizards.pm:99 wizards.pm:121
@@ -2265,13 +2257,13 @@ msgstr ""
 "このファイルシステムで inode アクセス時間を更新しない。\n"
 "(用途例: ニューススプールへのアクセス速度を向上させる)"
 
-#: fs/mount_options.pm:120
-#, c-format
+#: fs/mount_options.pm:123
+#, fuzzy, c-format
 msgid ""
-"Do not update directory inode access times on this filesystem\n"
+"Update inode access times on this filesystem in a more efficient way\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
-"このファイルシステムでディレクトリの inode アクセス時間を更新しない。\n"
+"このファイルシステムで inode アクセス時間を更新しない。\n"
 "(用途例: ニューススプールへのアクセス速度を向上させる)"
 
 #: fs/mount_options.pm:123
@@ -6740,6 +6732,19 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "インストール失敗"
+
+#~ msgid "Add user"
+#~ msgstr "ユーザを追加"
+
+#~ msgid "Accept user"
+#~ msgstr "ユーザ受け入れ"
+
+#~ msgid ""
+#~ "Do not update directory inode access times on this filesystem\n"
+#~ "(e.g, for faster access on the news spool to speed up news servers)."
+#~ msgstr ""
+#~ "このファイルシステムでディレクトリの inode アクセス時間を更新しない。\n"
+#~ "(用途例: ニューススプールへのアクセス速度を向上させる)"
 
 #~ msgid "No supermount"
 #~ msgstr "supermount なし"
