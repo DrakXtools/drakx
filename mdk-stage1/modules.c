@@ -263,35 +263,6 @@ static enum insmod_return insmod_with_deps(const char * mod_name, char * options
 }
 
 
-static const char * get_name_kernel_26_transition(const char * name)
-{
-	struct kernel_24_26_mapping {
-		const char * name_24;
-		const char * name_26;
-	};
-	static struct kernel_24_26_mapping mappings[] = {
-                { "usb-ohci", "ohci-hcd" },
-                { "usb-uhci", "uhci-hcd" },
-                { "uhci", "uhci-hcd" },
-//                { "printer", "usblp" },
-                { "bcm4400", "b44" },
-                { "3c559", "3c359" },
-                { "3c90x", "3c59x" },
-                { "dc395x_trm", "dc395x" },
-//                { "audigy", "snd-emu10k1" },
-        };
-	int mappings_nb = sizeof(mappings) / sizeof(struct kernel_24_26_mapping);
-        int i;
-
-        /* pcitable contains 2.4 names. this will need to change if/when it contains 2.6 names! */
-        for (i=0; i<mappings_nb; i++) {
-            if (streq(name, mappings[i].name_24))
-                return mappings[i].name_26;
-        }
-        return name;
-}
-
-
 #ifndef DISABLE_NETWORK
 enum insmod_return my_insmod(const char * mod_name, enum driver_type type, char * options, int allow_modules_floppy)
 #else
@@ -303,12 +274,10 @@ enum insmod_return my_insmod(const char * mod_name, enum driver_type type __attr
 	char ** net_devices = NULL; /* fucking compiler */
 #endif
 
-        const char * real_mod_name = get_name_kernel_26_transition(mod_name);
-
-	if (module_already_present(real_mod_name))
+	if (module_already_present(mod_name))
 		return INSMOD_OK;
 
-	log_message("have to insmod %s", real_mod_name);
+	log_message("have to insmod %s", mod_name);
 
 #ifndef DISABLE_NETWORK
 	if (type == NETWORK_DEVICES)
@@ -326,10 +295,10 @@ enum insmod_return my_insmod(const char * mod_name, enum driver_type type __attr
 		i = system(cmd);
 	}
 #else
-	i = insmod_with_deps(real_mod_name, options, allow_modules_floppy);
+	i = insmod_with_deps(mod_name, options, allow_modules_floppy);
 #endif
 	if (i == 0) {
-		log_message("\tsucceeded %s", real_mod_name);
+		log_message("\tsucceeded %s", mod_name);
 #ifndef DISABLE_NETWORK
 		if (type == NETWORK_DEVICES) {
 			char ** new_net_devices = get_net_devices();
@@ -352,7 +321,7 @@ enum insmod_return my_insmod(const char * mod_name, enum driver_type type __attr
 		}
 #endif
 	} else
-		log_message("warning, insmod failed (%s %s) (%d)", real_mod_name, options, i);
+		log_message("warning, insmod failed (%s %s) (%d)", mod_name, options, i);
 	
 	return i;
 
