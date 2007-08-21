@@ -281,18 +281,22 @@ our %l = (
 );
 
 my %dependencies;
+my %filenames;
 
 sub load_dependencies {
     my ($file) = @_;
 
-    %dependencies = map {
+    %dependencies = ();
+    %filenames = ();
+    foreach (cat_($file)) {
 	s![^ ]*/!!g;
 	s!\.ko!!g;
 	s!\.gz!!g;
 	my ($filename, $d) = split ':';
 	my ($modname, @deps) = map { filename2modname($_) } $filename, split(' ', $d);
 	$dependencies{$modname} =  \@deps;
-    } cat_($file);
+	$filenames{$modname} = $filename;
+    }
 }
 
 sub dependencies_closure {
@@ -304,6 +308,10 @@ sub filename2modname {
     my ($modname) = @_;
     $modname =~ s/-/_/g;
     $modname;
+}
+
+sub modname2filename {
+    $filenames{$_[0]};
 }
 
 #- give module filenames, with '-' characters
