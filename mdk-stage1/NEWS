@@ -1,3 +1,11 @@
+1.13:
+- use module names instead of filenames
+- convert module name to filename before loading it
+  (using modules.dep to get filename)
+- keep module in dependencies list even if it has no dependencies
+  (to keep track of its filename)
+- use '_' in module names when explicitely loading modules (cosmetics)
+
 1.12:
 - adapt to new list_modules
 
