@@ -90,7 +90,7 @@ sub get_main_modules() {
 
 sub pci_modules4stage1 {
     my ($category) = @_;
-    my @modules = difference2([ list_modules::category2modules_raw($category) ]);
+    my @modules = difference2([ category2modules($category) ]);
     print "$_\n" foreach uniq(map { dependencies_closure($_) } @modules);
 }
 
