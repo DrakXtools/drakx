@@ -54,26 +54,15 @@ See below for information about these files.
 ********************************************************************************
 First here are the different things needed :
 
-media/media_info/hdlists
+media/media_info/media.cfg
 	description of the available install media.
-	format is one line for one medium as
-		<hdlist_name> <rpms_directory> <description>
-	<hdlist_name> should be match regexp /hdlist\S*.cz2?/
-	for example (two cd install) you get
-		hdlist1.cz	Mandrake/RPMS1	Boot CD
-		hdlist2.cz	Mandrake/RPMS2	Extension CD
+	cf MDV::Distribconf(3)
 
 media/media_info/hdlist*.cz
 	table of rpm's headers, referred by ``hdlists''
 	their contents can be listed using ``packdrake -l <hdlist_file>'' or
 	or ``parsehdlist <hdlist_file>''.
 	! Need to be remade when media/main changes (with ``gendistrib'') !
-
-media/media_info/depslist.ordered
-	for each packages, tell which package it depends on. Also contains the
-	size for some (obscure) bloody reasons.
-	! Need to be remade when media/main changes !
-	(with ``gendistrib --noclean --distrib .'')
 
 media/media_info/compssUsers
 
