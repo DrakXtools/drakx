@@ -1,4 +1,10 @@
+Version 10.4.174 - 21 August 2007, by Olivier "blino" Blin
+
 - set default per step banner title & icon for all steps
+- fallback on module name if the filename can't be found
+  (in the rare case the caller uses '-' in the module name)
+- use '_' in module names when explicitely loading them (cosmetics only)
+- kill old usb-storage code, mkinitrd now loads it when necessary
 
 Version 10.4.173 - 21 August 2007, by Olivier "blino" Blin
 
