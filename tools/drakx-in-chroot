@@ -88,7 +88,7 @@ if (!-f ($SLASH_LOCATION . $AUTO_INSTALL_ROOTED) && $Xnest_bin) {
     if (!$Xnest_pid) {
 	exec $Xnest_bin, $DISPLAY, '-ac', ($Xnest_bin eq 'Xephyr' ? '-screen' : '-geometry'), '800x600' or die "Xnest failed\n";
     }
-    $ENV{DISPLAY} = 'localhost' . $DISPLAY;
+    $ENV{DISPLAY} = '127.0.0.1' . $DISPLAY;
 }
 
 if (my $pid = fork()) {
