@@ -241,7 +241,12 @@ sub read_already_loaded {
 
 sub name2file {
     my ($name) = @_;
-    list_modules::modname2filename($name) . ".ko";
+    my $f = list_modules::modname2filename($name);
+    if (!$f) {
+        log::l("warning: unable to get module filename for $name");
+        $f = $name;
+    }
+    $f . ".ko";
 }
 
 sub when_load {
