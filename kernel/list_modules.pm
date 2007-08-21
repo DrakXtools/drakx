@@ -314,21 +314,15 @@ sub modname2filename {
     $filenames{$_[0]};
 }
 
-#- give module filenames, with '-' characters
-sub category2modules_raw {
+sub category2modules {
     map {
 	my ($t1, $t2s) = m|(.*)/(.*)|;
 	my @sub = $t2s eq '*' ? keys %{$l{$t1}} : split('\|', $t2s);
 	map {
 	    my $l = $l{$t1}{$_} or die "bad category $t1/$_\n" . backtrace();
-	    @$l;
+	    map { filename2modname($_) } @$l;
 	} @sub;
     } split(' ', $_[0]);
-}
-
-#- give driver names, with '_' characters
-sub category2modules {
-    map { filename2modname($_) } category2modules_raw(@_);
 }
 
 sub all_modules() {
