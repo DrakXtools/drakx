@@ -780,7 +780,7 @@ sub summary {
 	    any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) or return;
 	    any::installBootloader($o, $o->{bootloader}, $o->{all_hds});
 	},
-    };
+    } if !$::local_install;
 
     push @l, {
 	group => N("System"),
