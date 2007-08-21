@@ -313,8 +313,6 @@ sub load_raw_install {
             if ($rc) {
                 unlink $m;
                 '';
-            } elsif ($m !~ /pata/) { # FIXME: remove me once cooker is reopened
-		'error';
             }
 	} else {
 	    log::l("missing module $_");
