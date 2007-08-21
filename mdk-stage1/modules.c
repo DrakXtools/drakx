@@ -141,7 +141,7 @@ static int load_modules_dependencies(void)
 		}
 
 		/* sort of a good line */
-		modules_deps[line].name = strdup(start);
+		modules_deps[line].modname = strdup(start);
 
 		start = ptr;
 		i = 0;
@@ -163,7 +163,7 @@ static int load_modules_dependencies(void)
 		line++;
 		start = end + 1;
 	}
-	modules_deps[line].name = NULL;
+	modules_deps[line].modname = NULL;
 
 	return 0;
 }
@@ -226,9 +226,9 @@ static enum insmod_return insmod_with_deps(const char * mod_name, char * options
 	struct module_deps_elem * dep;
 
 	dep = modules_deps;
-	while (dep && dep->name && strcmp(dep->name, mod_name)) dep++;
+	while (dep && dep->modname && strcmp(dep->modname, mod_name)) dep++;
 
-	if (dep && dep->name && dep->deps) {
+	if (dep && dep->modname && dep->deps) {
 		char ** one_dep;
 		one_dep = dep->deps;
 		while (*one_dep) {

@@ -27,7 +27,7 @@ enum return_type ask_insmod(enum driver_type);
 int module_already_present(const char * name);
 
 struct module_deps_elem {
-    char * name;
+    char * modname;
     char ** deps;
 };
 
