@@ -122,6 +122,7 @@ static int load_modules_dependencies(void)
 	line = 0;
 	while (start < (buf+s.st_size) && *start) {
 		char * tmp_deps[50];
+		char * modp;
 
 		end = strchr(start, '\n');
 		*end = '\0';
@@ -141,7 +142,15 @@ static int load_modules_dependencies(void)
 		}
 
 		/* sort of a good line */
+		modules_deps[line].filename = strdup(start);
+
 		modules_deps[line].modname = strdup(start);
+		modp = modules_deps[line].modname;
+		while (modp && *modp) {
+			if (*modp == '-')
+				*modp = '_';
+			modp++;
+		}
 
 		start = ptr;
 		i = 0;
@@ -224,6 +233,7 @@ int module_already_present(const char * name)
 static enum insmod_return insmod_with_deps(const char * mod_name, char * options, int allow_modules_floppy)
 {
 	struct module_deps_elem * dep;
+	const char * filename;
 
 	dep = modules_deps;
 	while (dep && dep->modname && strcmp(dep->modname, mod_name)) dep++;
@@ -238,13 +248,20 @@ static enum insmod_return insmod_with_deps(const char * mod_name, char * options
 			one_dep++;
 		}
 	}
+        
+	if (dep && dep->filename) {
+	       filename = dep->filename;
+	} else {
+		log_message("warning: unable to get module filename for %s", mod_name);
+		filename = mod_name;
+	}
 
 	if (module_already_present(mod_name))
 		return INSMOD_OK;
 
-	log_message("needs %s", mod_name);
+	log_message("needs %s", filename);
 	{
-		char *file = asprintf_("/modules/%s%s", mod_name, kernel_module_extension());
+		char *file = asprintf_("/modules/%s%s", filename, kernel_module_extension());
 		return insmod_local_file(file, options);
 	}
 }

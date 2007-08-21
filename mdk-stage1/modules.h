@@ -28,6 +28,7 @@ int module_already_present(const char * name);
 
 struct module_deps_elem {
     char * modname;
+    char * filename;
     char ** deps;
 };
 
