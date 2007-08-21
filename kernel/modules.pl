@@ -37,7 +37,7 @@ my ($f, @para) = @ARGV;
 $::{$f}->(@para);
 
 sub modules() {
-    map { list_modules::category2modules_raw($_) } split(' ', $images_cat);
+    map { category2modules($_) } split(' ', $images_cat);
 }
 
 sub remove_unneeded_modules {
@@ -49,7 +49,7 @@ sub remove_unneeded_modules {
 
     my @all = modules();
     my @all_with_deps = map { dependencies_closure($_) } @all;
-    my %wanted_modules = map { ("$_.ko.gz" => 1) } @all_with_deps;
+    my %wanted_modules = map { (list_modules::modname2filename($_) . ".ko.gz" => 1) } @all_with_deps;
     foreach (all("all.kernels/$kern_ver/modules")) {
 	$wanted_modules{$_} or unlink "all.kernels/$kern_ver/modules/$_";	
     }
