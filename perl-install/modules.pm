@@ -241,7 +241,7 @@ sub read_already_loaded {
 
 sub name2file {
     my ($name) = @_;
-    "$name.ko";
+    list_modules::modname2filename($name) . ".ko";
 }
 
 sub when_load {
