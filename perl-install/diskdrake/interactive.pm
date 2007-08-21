@@ -845,6 +845,7 @@ sub Add2RAID {
 
     if (ref($md_part)) {
 	raid::add($md_part, $part);
+	raid::write_conf($raids) if $::isStandalone;
     } else {
 	raid::check_prog($in) or return;
 	my $md_part = raid::new($raids, disks => [ $part ]);
@@ -1048,6 +1049,7 @@ sub modifyRAID {
 		 ) or return;
     raid::change_device($md_part, $new_device);
     raid::updateSize($md_part); # changing the raid level changes the size available
+    raid::write_conf($raids) if $::isStandalone;
     1;
 }
 

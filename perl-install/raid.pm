@@ -53,6 +53,7 @@ sub delete {
     inactivate_and_dirty($md_part);
     delete $_->{raid} foreach @{$md_part->{disks}};
     @$raids = grep { $_ != $md_part } @$raids;
+    write_conf($raids) if $::isStandalone;
 }
 
 sub change_device {
@@ -77,6 +78,7 @@ sub removeDisk {
     } else {
 	@$raids = grep { $_ != $md_part } @$raids;
     }
+    write_conf($raids) if $::isStandalone;
 }
 
 sub updateSize {
