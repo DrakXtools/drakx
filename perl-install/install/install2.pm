@@ -184,16 +184,6 @@ sub formatPartitions {
 
     any::rotate_logs($::prefix);
 
-    if (any { $_->{usb_media_type} && any { $_->{mntpoint} } partition_table::get_normal_parts($_) } @{$o->{all_hds}{hds}}) {
-	log::l("we use a usb-storage based drive, so keep it as a normal scsi_hostadapter");
-    } else {
-	log::l("we do not need usb-storage for booting system, rely on hotplug");
-	#- when usb-storage is in scsi_hostadapter, 
-	#- hotplug + scsimon do not load sd_mod/sr_mod when needed
-	#- (eg: when plugging a usb key)
-	$o->{modules_conf}->remove_probeall('scsi_hostadapter', 'usb-storage');
-    }
-
     require raid;
     raid::write_conf($o->{all_hds}{raids});
 
