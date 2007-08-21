@@ -125,7 +125,7 @@ enum return_type disk_prepare(void)
 	if (count == 0) {
                 if (!already_probed_ide_generic) {
                         already_probed_ide_generic = 1;
-                        my_insmod("ide-generic", ANY_DRIVER_TYPE, NULL, 0);
+                        my_insmod("ide_generic", ANY_DRIVER_TYPE, NULL, 0);
                         return disk_prepare();
                 }
 		stg1_error_message("No DISK drive found.");

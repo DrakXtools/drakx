@@ -497,7 +497,7 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
         if (type == SCSI_ADAPTERS && already_probed_usb_controllers && !already_loaded_usb_scsi) {
                 already_loaded_usb_scsi = 1;
                 /* we can't allow additional modules floppy since we need usbkbd for keystrokes of usb keyboards */
-                my_insmod("usb-storage", SCSI_ADAPTERS, NULL, 0); 
+                my_insmod("usb_storage", SCSI_ADAPTERS, NULL, 0); 
                 if (module_already_present("ieee1394"))
                         my_insmod("sbp2", SCSI_ADAPTERS, NULL, 0);
                 wait_message("Detecting USB mass-storage devices.");
