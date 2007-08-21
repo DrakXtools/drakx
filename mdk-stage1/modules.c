@@ -136,10 +136,6 @@ static int load_modules_dependencies(void)
 		ptr++;
 
 		while (*ptr && (*ptr == ' ')) ptr++;
-		if (!*ptr) {
-			start = end + 1;
-			continue;
-		}
 
 		/* sort of a good line */
 		modules_deps[line].filename = strdup(start);
