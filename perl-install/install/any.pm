@@ -1097,7 +1097,7 @@ sub getHds {
 }
 
 sub removable_media__early_in_install() {
-    eval { modules::load('usb-storage', 'sd_mod') } if detect_devices::usbStorage();
+    eval { modules::load('usb_storage', 'sd_mod') } if detect_devices::usbStorage();
     my $all_hds = fsedit::get_hds({});
     fs::get_raw_hds('', $all_hds);
 

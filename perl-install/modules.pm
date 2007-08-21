@@ -72,8 +72,8 @@ sub load_raw {
     }
     if (any { /^(mousedev|printer)$/ } @$l) {
 	sleep 2;
-    } elsif (member('usb-storage', @$l)) {
-	#- usb-storage is only modprobed when we know there is some scsi devices
+    } elsif (member('usb_storage', @$l)) {
+	#- usb_storage is only modprobed when we know there is some scsi devices
 	#- so trying hard to wait for devices to be detected
 
 	#- first sleep the minimum time usb-stor-scan takes
@@ -83,7 +83,7 @@ sub load_raw {
 	while ($retry++ < 10) { 
 	    fuzzy_pidofs('usb-stor-scan') or last;
 	    sleep 1;
-	    log::l("waiting for usb-storage devices to appear (retry = $retry)");
+	    log::l("waiting for usb_storage devices to appear (retry = $retry)");
 	}
     }
 }
@@ -135,7 +135,7 @@ sub load_category {
 
     my @try_modules = (
       if_($category =~ /scsi/,
-	  if_(detect_devices::usbStorage(), 'usb-storage'),
+	  if_(detect_devices::usbStorage(), 'usb_storage'),
       ),
       arch() =~ /ppc/ ? (
 	  if_($category =~ /scsi/,
