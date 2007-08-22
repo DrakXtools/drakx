@@ -473,8 +473,6 @@ sub ask_from_normalize {
 
     _normalize_entries($o, $l);
 
-    $l->[0]{focus} = sub { 1 } if $common->{focus_first};
-
     if (!$common->{title} && $::isStandalone) {
 	($common->{title} = $0) =~ s|.*/||;
     }
