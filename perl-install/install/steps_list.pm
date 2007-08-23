@@ -20,7 +20,7 @@ use common;
                           'banner-sys', N_("_: Keep these entry short\nHard drive detection") ],
   selectInstallClass => [ N_("_: Keep these entry short\nInstallation class"), 1, 1, '1', '',
                           'banner-sys', N("_: Keep these entry short\nInstallation class") ],
-  selectKeyboard     => [ N_("_: Keep these entry short\nKeyboard"), 1, 1, '1', 'banner-languages', N("Localization") ],
+  selectKeyboard     => [ N_("_: Keep these entry short\nKeyboard"), 1, 1, '1', '', 'banner-languages', N("Localization") ],
   miscellaneous      => [ N_("_: Keep these entry short\nSecurity"), 1, 1, '1', '', 'banner-security', N("Security") ],
   doPartitionDisks   => [ N_("_: Keep these entry short\nPartitioning"), 1, 0, '', "selectInstallClass",
                           'banner-part', N("Partitioning") ],
@@ -49,6 +49,7 @@ use common;
 );
     for (my $i = 0; $i < @installSteps; $i += 2) {
 	my %h; @h{@installStepsFields} = @{ $installSteps[$i + 1] };
+	!$h{banner_icon} || $h{banner_icon} =~ /^banner/ or internal_error("bad banner_icon for step $installSteps[$i]");
 	$h{entered} = 0;
 	$h{onError} = $installSteps[$i + 2 * $h{onError}];
 	$h{reachable} = !$h{needs};
