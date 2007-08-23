@@ -129,6 +129,16 @@ char * get_net_intf_description(char * intf_name)
 }
 #endif
 
+static int device_match_modules_list(struct pciusb_entry *e, char **modules, unsigned int modules_len) {
+	int i;
+	if (!e->module)
+		return 0;
+	for (i = 0; i < modules_len; i++)
+		if (!strcmp(modules[i], e->module))
+			return 1;
+	return 0;
+}
+
 struct pcitable_entry *detected_devices = NULL;
 int detected_devices_len = 0;
 
@@ -171,17 +181,11 @@ static void add_detected_device(unsigned short vendor, unsigned short device, un
 
 static int add_detected_device_if_match(struct pciusb_entry *e, char **modules, unsigned int modules_len)
 {
-	int i;
-	if (!e->module)
-		return 0;
-	for (i = 0; i < modules_len; i++) {
-		if (!strcmp(modules[i], e->module)) {
-			add_detected_device(e->vendor, e->device, e->subvendor, e->subdevice,
-					    e->text, e->module);
-			return 1;
-		}
-	}
-	return 0;
+	int ret = device_match_modules_list(e, modules, modules_len);
+	if (ret)
+		add_detected_device(e->vendor, e->device, e->subvendor, e->subdevice,
+				    e->text, e->module);
+	return ret;
 }
 
 void probing_detect_devices()
@@ -340,16 +344,10 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 		entries = pci_probe();
 		for (i = 0; i < entries.nb; i++) {
 			struct pciusb_entry *e = &entries.entries[i];
-			int j;
-			if (!e->module)
-				continue;
-			for (j = 0; j < pci_modules_len; j++) {
-				if (!strcmp(pci_modules[j], e->module)) {
-					log_message("PCI: device %04x %04x %04x %04x is \"%s\", driver is %s",
-						    e->vendor, e->device, e->subvendor, e->subdevice, e->text, e->module);
-					discovered_device(type, e->text, e->module);
-					break;
-				}
+			if (device_match_modules_list(e, pci_modules, pci_modules_len)) {
+				log_message("PCI: device %04x %04x %04x %04x is \"%s\", driver is %s",
+					    e->vendor, e->device, e->subvendor, e->subdevice, e->text, e->module);
+				discovered_device(type, e->text, e->module);
 			}
 		}
 		pciusb_free(&entries);
@@ -389,13 +387,9 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 		entries = usb_probe();
 		for (i = 0; i < entries.nb; i++) {
 			struct pciusb_entry *e = &entries.entries[i];
-			int j;
-			for (j = 0; j < usb_modules_len; j++) {
-				if (!strcmp(usb_modules[j], e->module)) {
-					log_message("USB: device %04x %04x is \"%s\" (%s)", e->vendor, e->device, e->text, e->module);
-					discovered_device(type, e->text, e->module);
-					continue;
-				}
+			if (device_match_modules_list(e, usb_modules, usb_modules_len)) {
+				log_message("USB: device %04x %04x is \"%s\" (%s)", e->vendor, e->device, e->text, e->module);
+				discovered_device(type, e->text, e->module);
 			}
 		}
 		pciusb_free(&entries);
