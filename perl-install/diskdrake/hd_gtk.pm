@@ -348,9 +348,9 @@ sub hd2kind {
 }
 
 sub filesystems_button_box() {
-    my @types = (N_("Ext2"), N_("Journalised FS"), N_("Swap"), arch() =~ /sparc/ ? N_("SunOS") : arch() eq "ppc" ? N_("HFS") : N_("Windows"),
+    my @types = (N_("Ext3"), N_("XFS"), N_("Swap"), arch() =~ /sparc/ ? N_("SunOS") : arch() eq "ppc" ? N_("HFS") : N_("Windows"),
 		 N_("Other"), N_("Empty"));
-    my %name2fs_type = (Ext2 => 'ext2', 'Journalised FS' => 'ext3', Swap => 'swap', Other => 'other', "Windows" => 'vfat', HFS => 'hfs');
+    my %name2fs_type = (Ext3 => 'ext3', 'XFS' => 'xfs', Swap => 'swap', Other => 'other', "Windows" => 'vfat', HFS => 'hfs');
 
     gtkpack(Gtk2::HBox->new(0,0), 
 	    N("Filesystem types:"),

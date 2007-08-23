@@ -11,24 +11,24 @@ style "red" = "font"
   bg[ACTIVE] = { 0.9, 0, 0 }
   bg[PRELIGHT] = { 0.9, 0, 0 }
 }
-style "darkred" = "font"
+style "orange" = "font"
 {
-  bg[NORMAL] = { 0.7, 0, 0 }
-  bg[ACTIVE] = { 0.6, 0, 0 }
-  bg[PRELIGHT] = { 0.6, 0, 0 }
+  bg[NORMAL] = { 1.0, 0.6, 0 }
+  bg[ACTIVE] = { 0.9, 0.6, 0 }
+  bg[PRELIGHT] = { 0.9, 0.4, 0 }
 }
 style "green" = "font"
 {
-  bg[NORMAL] = { 0, 1.0, 0 }
-  bg[ACTIVE] = { 0, 0.9, 0 }
-  bg[PRELIGHT] = { 0, 0.9, 0 }
+  bg[NORMAL] = { 0.4, 0.8, 0 }
+  bg[ACTIVE] = { 0.4, 0.7, 0 }
+  bg[PRELIGHT] = { 0.4, 0.7, 0 }
   fg[NORMAL] = { 0, 0, 0 }
 }
 style "blue" = "font"
 {
-  bg[NORMAL] = { 0, 0, 1.0 }
-  bg[ACTIVE] = { 0, 0, 0.9 }
-  bg[PRELIGHT] = { 0, 0, 0.9 }
+  bg[NORMAL] = { 0, 0.7, 1.0 }
+  bg[ACTIVE] = { 0, 0.6, 0.9 }
+  bg[PRELIGHT] = { 0, 0.6, 0.9 }
 }
 style "white" = "font"
 {
@@ -37,10 +37,18 @@ style "white" = "font"
   bg[PRELIGHT] = { 0.9, 0.9, 0.9 }
   fg[NORMAL] = { 0, 0, 0 }
 }
+style "gray" = "font"
+{
+  bg[NORMAL] = { 0.57, 0.62, 0.67 }
+  bg[ACTIVE] = { 0.57, 0.62, 0.57 }
+  bg[PRELIGHT] = { 0.57, 0.62, 0.57 }
+  fg[NORMAL] = { 0, 0, 0 }
+}
 
-widget "*Linux*"      style "red" 
-widget "*Ext2*"       style "red" 
-widget "*Journalised FS*"   style "darkred" 
+widget "*Ext3*"       style "red" 
+widget "*ext3*"       style "red" 
+widget "*XFS*"   style "orange" 
+widget "*xfs*"   style "orange" 
 widget "*Linux swap*" style "green"
 widget "*Swap*"       style "green"
 widget "*FAT*"        style "blue"
@@ -48,4 +56,4 @@ widget "*Windows*"    style "blue"
 widget "*SunOS*"      style "blue"
 widget "*NTFS*"       style "blue"
 widget "*Empty*"      style "white"
-widget "*Other*"      style "font"
+widget "*Other*"      style "gray"
