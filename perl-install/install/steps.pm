@@ -836,7 +836,6 @@ sub miscellaneousAfter {
 
     addToBeDone {
 	addVarsInSh("$::prefix/etc/sysconfig/system", { META_CLASS => $o->{meta_class} });
-	substInFile { s/KEYBOARD_AT_BOOT=.*/KEYBOARD_AT_BOOT=yes/ } "$::prefix/etc/sysconfig/usb" if detect_devices::usbKeyboards();
 
 	eval { install::any::set_security($o) };
 
