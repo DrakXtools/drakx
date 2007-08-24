@@ -34,7 +34,7 @@ use common;
                      => [ N_("_: Keep these entry short\nUsers"), 1, 1, '', "installPackages",
                           'banner-pw', N("User management") ],
   configureNetwork   => [ N_("_: Keep these entry short\nNetworking"), 1, 1, '1', "formatPartitions",
-                          'banner-bootl', N_("_: Keep these entry short\nNetworking") ],
+                          'banner-bootL', N_("_: Keep these entry short\nNetworking") ],
   setupBootloader    => [ N_("_: Keep these entry short\nBootloader"), 1, 0, '', "installPackages",
                           'banner-bootL', N("_: Keep these entry short\nBootloader")  ],
   configureX         => [ N_("_: Keep these entry short\nConfigure X"), 1, 1, '1', ["formatPartitions", "setupBootloader"],
