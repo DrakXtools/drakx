@@ -138,11 +138,12 @@ sub bestKernelPackage {
     my ($packages) = @_;
 
     my @preferred_exts =
-      $::o->{match_all_hardware} ? (arch() =~ /x86_64/ ? '' : '-legacy') :
-      $::build_globetrotter ? '' :
+      $::o->{match_all_hardware} ? (arch() =~ /x86_64/ ? '-desktop' : '-desktop586') :
+      $::build_globetrotter ? '-desktop' :
       detect_devices::is_xbox() ? '-xbox' :
-      detect_devices::is_i586() ? '-legacy' :
-      detect_devices::dmi_detect_memory() > 3.8 * 1024 ? '-enterprise' :
+      detect_devices::is_i586() ? '-desktop586' :
+      detect_devices::isLaptop() ? '-laptop' :
+      detect_devices::dmi_detect_memory() > 3.8 * 1024 ? '-server' :
       '';
 
     my @kernels = grep { $_ } map { packageByName($packages, "kernel$_-latest") } @preferred_exts, '';
