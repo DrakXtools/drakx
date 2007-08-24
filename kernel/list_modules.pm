@@ -335,7 +335,7 @@ sub module2category {
     foreach my $t1 (keys %l) {
 	my $h = $l{$t1};
 	foreach my $t2 (keys %$h) {
-	  $module eq $_ and return "$t1/$t2" foreach @{$h->{$t2}};
+	  $module eq filename2modname($_) and return "$t1/$t2" foreach @{$h->{$t2}};
       }
     }
     return;
