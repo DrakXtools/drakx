@@ -126,7 +126,7 @@ sub in {
 sub install {
     my ($do, @l) = @_;
     log::l("do_pkgs_during_install::install");
-    if ($::testing || $::globetrotter) {
+    if ($::testing) {
 	log::l("i would install packages " . join(' ', @l));
 	1;
     } else {

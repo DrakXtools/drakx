@@ -378,7 +378,6 @@ sub main {
 	    nomouseprobe => sub { $o->{nomouseprobe} = $v },
 	    updatemodules => sub { $o->{updatemodules} = 1 },
 	    move  => sub { $::move = 1 },
-	    globetrotter  => sub { $::move = 1; $::globetrotter = 1 },
 	    suppl => sub { $o->{supplmedia} = 1 },
 	    askmedia => sub { $o->{askmedia} = 1 },
 	}}{lc $n}; &$f if $f;
@@ -582,7 +581,7 @@ sub main {
     }
     $::o = $o = $o_;
 
-    eval { output('/proc/splash', "verbose\n") } if !$::globetrotter;
+    eval { output('/proc/splash', "verbose\n") };
   
     #-the main cycle
     MAIN: for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep($o)) {

@@ -47,10 +47,10 @@ sub new($$) {
 	    my @options = $wanted_DISPLAY;
 	    if ($server eq 'Xnest') {
 		push @options, '-ac', '-geometry', $o->{vga} || ($o->{vga16} ? '640x480' : '800x600');
-	    } elsif ($::globetrotter || !$::move) {
+	    } elsif (!$::move) {
 		install::gtk::createXconf($f, @{$o->{mouse}}{'Protocol', 'device'}, $o->{mouse}{wacom}[0], $Driver);
 
-		push @options, if_(!$::globetrotter, '-kb'), '-allowMouseOpenFail', '-xf86config', $f if arch() !~ /^sparc/;
+		push @options, '-kb', '-allowMouseOpenFail', '-xf86config', $f if arch() !~ /^sparc/;
 		push @options, 'tty7', '-s', '240';
 
 		#- old weird servers: Xsun
@@ -106,11 +106,11 @@ sub new($$) {
 	    @servers = map { if_($_, "Driver:$_") } $card && $card->{Driver}, 'fbdev';
         }
 
-        if (($::move || $::globetrotter) && !$::testing) {
+        if ($::move && !$::testing) {
             require move;
             require run_program;
             move::automatic_xconf($o);
-            @servers = $::globetrotter ? qw(Driver:fbdev) : qw(X_move);
+            @servers = qw(X_move);
 	}
 
 	foreach (@servers) {

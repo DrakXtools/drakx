@@ -816,11 +816,11 @@ sub autologin {
     my @wm = sessions();
     my @users = map { $_->{name} } @{$o->{users} || []};
 
-    if (!$::globetrotter && member('KDE', @wm) && @users == 1 && $o->{meta_class} eq 'desktop') {
+    if (member('KDE', @wm) && @users == 1 && $o->{meta_class} eq 'desktop') {
 	$o->{desktop} = 'KDE';
 	$o->{autologin} = $users[0];
-    } elsif ($::globetrotter || @wm > 1 && @users && !$o->{authentication}{NIS} && $o->{security} <= 2) {
-	my $use_autologin = $::globetrotter || @users == 1;
+    } elsif (@wm > 1 && @users && !$o->{authentication}{NIS} && $o->{security} <= 2) {
+	my $use_autologin = @users == 1;
 
 	$in->ask_from_(
 		       { title => N("Autologin"),
@@ -861,21 +861,17 @@ sub acceptLicense {
 		     cancel => N("Quit"),
 		     messages => formatAlaTeX(messages::main_license() . "\n\n\n" . messages::warning_about_patents()),
 		     interactive_help_id => 'acceptLicense',
-		     if_(!$::globetrotter && $o->{release_notes}, more_buttons => [ [ N("Release Notes"), sub { $o->ask_warn(N("Release Notes"), $o->{release_notes}) }, 1 ] ]),
+		     if_($o->{release_notes}, more_buttons => [ [ N("Release Notes"), sub { $o->ask_warn(N("Release Notes"), $o->{release_notes}) }, 1 ] ]),
 		     callbacks => { ok_disabled => sub { $r eq 'Refuse' } },
 		   },
 		   [ { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list', format => sub { translate($_[0]) } } ])
       or do {
 	  # when refusing license in finish-install:
 	  exec("/sbin/reboot") if !$::isInstall;
-	  if ($::globetrotter) {
-           run_program::run('killall', 'Xorg');
-	      exec("/sbin/reboot");
-	  } else {
+
 	      install::media::umount_phys_medium($o->{stage2_phys_medium});
 	      install::media::openCdromTray($o->{stage2_phys_medium}{device}) if !detect_devices::is_xbox() && $o->{method} eq 'cdrom';
 	      $o->exit;
-	  }
       };
 }
 
