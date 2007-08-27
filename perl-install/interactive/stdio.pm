@@ -70,7 +70,7 @@ ask_fromW_begin:
 	    print N("Your choice? (0/1, default `%s') ", ${$e->{val}} || '0');
 	    my $i = readln();
 	    if ($i) {
-		to_bool($i) != to_bool(${$e->{val}}) and $common->{changed}->($ind);
+		to_bool($i) != to_bool(${$e->{val}}) && $e->{changed} and $e->{changed}->();
 		${$e->{val}} = $i;
 	    }
 	} elsif ($e->{type} =~ /list/) {
@@ -89,12 +89,18 @@ ask_fromW_begin:
 	    print "\n";
 	    my $i = good_choice(may_apply($e->{format}, ${$e->{val}}), $n);
 	    print "Setting to <", $i ? ${$e->{list}}[$i-1] : ${$e->{val}}, ">\n";
-	    $i and ${$e->{val}} = ${$e->{list}}[$i-1], $common->{changed}->($ind);
+	    if ($i) { 
+		${$e->{val}} = ${$e->{list}}[$i-1];
+		$e->{changed} and $e->{changed}->();
+	    }
 	} elsif ($e->{type} eq 'button') {
 	    print N("Button `%s': %s", $e->{label}, may_apply($e->{format}, ${$e->{val}})), " $e->{text}\n";
 	    print N("Do you want to click on this button?");
 	    my $i = readln();
-	    $i && $i !~ /^n/i and $e->{clicked_may_quit}(), $common->{changed}->($ind);
+	    if ($i && $i !~ /^n/i) {
+		$e->{clicked_may_quit}();
+		$e->{changed} and $e->{changed}->();
+	    }
 	} elsif ($e->{type} eq 'label') {
 	    my $t = $format_label->($e);
 	    push @labels, $t;
@@ -106,7 +112,7 @@ ask_fromW_begin:
 	    ${$e->{val}} = $i || ${$e->{val}};
 	    ${$e->{val}} = '' if ${$e->{val}} eq 'void';
 	    print "Setting to <", ${$e->{val}}, ">\n";
-	    $i and $common->{changed}->($ind);
+	    $i && $e->{changed} and $e->{changed}->();
 	} else {
 	    printf "UNSUPPORTED WIDGET TYPE (type <%s> label <%s> text <%s> val <%s>\n", $e->{type}, $e->{label}, $e->{text}, ${$e->{val}};
 	}
