@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-et\n"
-"POT-Creation-Date: 2007-08-21 15:48+0200\n"
+"POT-Creation-Date: 2007-08-27 20:13+0200\n"
 "PO-Revision-Date: 2007-08-22 12:11+0200\n"
 "Last-Translator: Marek Laane <bald@starman.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -1270,17 +1270,17 @@ msgstr "Kõvakettaid ei leitud"
 msgid "Unknown"
 msgstr "Tundmatu"
 
-#: diskdrake/hd_gtk.pm:351
-#, c-format
-msgid "Ext2"
-msgstr "Ext2"
+#: diskdrake/hd_gtk.pm:354
+#, fuzzy, c-format
+msgid "Ext3"
+msgstr "Välju"
 
-#: diskdrake/hd_gtk.pm:351
-#, c-format
-msgid "Journalised FS"
-msgstr "Kirjendatud FS"
+#: diskdrake/hd_gtk.pm:354
+#, fuzzy, c-format
+msgid "XFS"
+msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:351
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "Swap"
 msgstr "Saaleala"
@@ -6317,9 +6317,9 @@ msgid "Load the drivers for your usb devices."
 msgstr "Laeb draiverid USB-seadmete tarbeks."
 
 #: services.pm:99
-#, c-format
-msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
-msgstr "Käivitab X fondiserveri, ilma milleta X lihtsalt ei lähe käima."
+#, fuzzy, c-format
+msgid "Starts the X Font Server."
+msgstr "Käivitab vajaduse korral teised deemonid."
 
 #: services.pm:100
 #, c-format
@@ -6791,6 +6791,14 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Paigaldamine ebaõnnestus!"
 
+#~ msgid "Ext2"
+#~ msgstr "Ext2"
+
+#~ msgid "Journalised FS"
+#~ msgstr "Kirjendatud FS"
+
+#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
+#~ msgstr "Käivitab X fondiserveri, ilma milleta X lihtsalt ei lähe käima."
 
 #~ msgid "No supermount"
 #~ msgstr "Automaatne haakimine puudub"
@@ -6818,4 +6826,3 @@ msgstr "Paigaldamine ebaõnnestus!"
 
 #~ msgid "enable radio support"
 #~ msgstr "raadiotoe lubamine"
-

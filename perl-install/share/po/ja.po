@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-ja\n"
-"POT-Creation-Date: 2007-08-21 15:48+0200\n"
+"POT-Creation-Date: 2007-08-27 20:13+0200\n"
 "PO-Revision-Date: 2007-08-25 15:00+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <cooker-i18n@mandrivalinux.org>\n"
@@ -1266,18 +1266,17 @@ msgstr "ハードドライブが見つかりません"
 msgid "Unknown"
 msgstr "不明"
 
-#: diskdrake/hd_gtk.pm:351
-#, c-format
-msgid "Ext2"
-msgstr "Ext2"
+#: diskdrake/hd_gtk.pm:354
+#, fuzzy, c-format
+msgid "Ext3"
+msgstr "終了"
 
-# we must keep label narrow, full katakana label is too wide
-#: diskdrake/hd_gtk.pm:351
-#, c-format
-msgid "Journalised FS"
-msgstr "Journalised FS"
+#: diskdrake/hd_gtk.pm:354
+#, fuzzy, c-format
+msgid "XFS"
+msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:351
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "Swap"
 msgstr "Swap"
@@ -6262,9 +6261,9 @@ msgid "Load the drivers for your usb devices."
 msgstr "USB デバイスのドライバをロードします。"
 
 #: services.pm:99
-#, c-format
-msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
-msgstr "X フォントサーバを開始します。(Xorg を実行するのに必須)"
+#, fuzzy, c-format
+msgid "Starts the X Font Server."
+msgstr "オンデマンドで他のデーモンを起動します。"
 
 #: services.pm:100
 #, c-format
@@ -6730,6 +6729,16 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "インストール失敗"
+
+#~ msgid "Ext2"
+#~ msgstr "Ext2"
+
+# we must keep label narrow, full katakana label is too wide
+#~ msgid "Journalised FS"
+#~ msgstr "Journalised FS"
+
+#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
+#~ msgstr "X フォントサーバを開始します。(Xorg を実行するのに必須)"
 
 #~ msgid "Add user"
 #~ msgstr "ユーザを追加"

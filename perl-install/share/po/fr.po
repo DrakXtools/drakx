@@ -73,7 +73,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fr\n"
-"POT-Creation-Date: 2007-08-21 15:48+0200\n"
+"POT-Creation-Date: 2007-08-27 20:13+0200\n"
 "PO-Revision-Date: 2007-08-21 16:59+0200\n"
 "Last-Translator: Christophe Berthelé <cpjc@free.fr>\n"
 "Language-Team: Français <cooker-i18n@mandrivalinux.org>\n"
@@ -1367,17 +1367,17 @@ msgstr "Aucun disque dur trouvé"
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: diskdrake/hd_gtk.pm:351
-#, c-format
-msgid "Ext2"
-msgstr "Ext2"
+#: diskdrake/hd_gtk.pm:354
+#, fuzzy, c-format
+msgid "Ext3"
+msgstr "Quitter"
 
-#: diskdrake/hd_gtk.pm:351
-#, c-format
-msgid "Journalised FS"
-msgstr "SF journalisé"
+#: diskdrake/hd_gtk.pm:354
+#, fuzzy, c-format
+msgid "XFS"
+msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:351
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "Swap"
 msgstr "Swap"
@@ -2375,7 +2375,8 @@ msgid ""
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
 "Mettre à jour l'heure d'accès aux inodes sur ce système de fichier\n"
-"(par exemple, afin d'avoir d'accélérer un serveur de nouvelles via un accès plus rapide aux à ces dernières)"
+"(par exemple, afin d'avoir d'accélérer un serveur de nouvelles via un accès "
+"plus rapide aux à ces dernières)"
 
 #: fs/mount_options.pm:123
 #, c-format
@@ -6522,11 +6523,9 @@ msgid "Load the drivers for your usb devices."
 msgstr "Charger les pilotes pour vos périphériques USB."
 
 #: services.pm:99
-#, c-format
-msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
-msgstr ""
-"Démarre le serveur de polices de caractères, obligatoire pour le "
-"fonctionnement de l'interface graphique (Xorg)."
+#, fuzzy, c-format
+msgid "Starts the X Font Server."
+msgstr "Démarre d'autres démons à la demande."
 
 #: services.pm:100
 #, c-format
@@ -7003,6 +7002,17 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Échec de l'installation"
+
+#~ msgid "Ext2"
+#~ msgstr "Ext2"
+
+#~ msgid "Journalised FS"
+#~ msgstr "SF journalisé"
+
+#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
+#~ msgstr ""
+#~ "Démarre le serveur de polices de caractères, obligatoire pour le "
+#~ "fonctionnement de l'interface graphique (Xorg)."
 
 #~ msgid "Add user"
 #~ msgstr "Ajouter un utilisateur"
