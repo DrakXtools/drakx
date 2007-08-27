@@ -33,12 +33,12 @@
 #include "utils.h"
 #include "frontend.h"
 #include "mount.h"
-#include "modules_descr.h"
 #include "zlibsupport.h"
 
 #include "modules.h"
 
 static struct module_deps_elem * modules_deps = NULL;
+static struct module_descr_elem * modules_descr = NULL;
 
 extern long init_module(void *, unsigned long, const char *);
 
@@ -160,10 +160,57 @@ static int load_modules_dependencies(void)
 }
 
 
+static int load_modules_descriptions(void)
+{
+	char * descr_file = "/modules/modules.description";
+	char * buf, * ptr, * start, * end;
+	struct stat s;
+	int line;
+
+	log_message("loading modules descriptions");
+
+	buf = cat_file(descr_file, &s);
+	if (!buf)
+		return -1;
+	line = line_counts(buf);
+	modules_descr = malloc(sizeof(*modules_descr) * (line+1));
+
+	start = buf;
+	line = 0;
+	while (start < (buf+s.st_size) && *start) {
+		end = strchr(start, '\n');
+		*end = '\0';
+
+		ptr = strchr(start, '\t');
+		if (!ptr) {
+			start = end + 1;
+			continue;
+		}
+		*ptr = '\0';
+		ptr++;
+
+		modules_descr[line].modname = strdup(start);
+		filename2modname(modules_deps[line].modname);
+		modules_descr[line].description = strndup(ptr, 50);
+
+		line++;
+		start = end + 1;
+	}
+	modules_descr[line].modname = NULL;
+
+	free(buf);
+
+	return 0;
+}
+
+
 void init_modules_insmoding(void)
 {
 	if (load_modules_dependencies()) {
 		fatal_error("warning, error initing modules stuff, modules loading disabled");
+	}
+	if (load_modules_descriptions()) {
+		log_message("warning, error initing modules stuff, modules loading disabled");
 	}
 }
 
@@ -349,7 +396,8 @@ enum return_type ask_insmod(enum driver_type type)
 	unset_automatic(); /* we are in a fallback mode */
 
 	while (p_dlist && *p_dlist) {
-		int i;
+		struct module_descr_elem * descr;
+
 		if (!strstr(*p_dlist, kernel_module_extension())) {
 			p_dlist++;
 			continue;
@@ -357,10 +405,12 @@ enum return_type ask_insmod(enum driver_type type)
 		*p_modules = *p_dlist;
 		*p_descrs = NULL;
 		(*p_modules)[strlen(*p_modules)-strlen(kernel_module_extension())] = '\0'; /* remove trailing .ko.gz */
-		for (i = 0 ; i < modules_descriptions_num ; i++) {
-			if (!strcmp(*p_modules, modules_descriptions[i].module))
-				*p_descrs = modules_descriptions[i].descr;
-		}
+
+		descr = modules_descr;
+		while (descr && descr->modname && strcmp(descr->modname, *p_modules)) descr++;
+		if (descr)
+			*p_descrs = descr->description;
+
 		p_dlist++;
 		p_modules++;
 		p_descrs++;

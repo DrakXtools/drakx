@@ -32,6 +32,11 @@ struct module_deps_elem {
     char ** deps;
 };
 
+struct module_descr_elem {
+    char * modname;
+    char * description;
+};
+
 extern int disable_modules;
 
 #endif
