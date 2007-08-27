@@ -60,29 +60,29 @@ static const char *moderror(int err)
 
 int insmod_local_file(char * path, char * options)
 {
-    void *file;
-    unsigned long len;
-    int rc;
+	void *file;
+	unsigned long len;
+	int rc;
                 
-    if (IS_TESTING)
-	    return 0;
+	if (IS_TESTING)
+		return 0;
 
-    file = grab_file(path, &len);
+	file = grab_file(path, &len);
                 
-    if (!file) {
-        log_perror(asprintf_("\terror reading %s", path));
-        return -1;
-    }
+	if (!file) {
+		log_perror(asprintf_("\terror reading %s", path));
+		return -1;
+	}
                 
-    rc = init_module(file, len, options ? options : "");
-    if (rc)
-        log_message("\terror: %s", moderror(errno));
-    return rc;
+	rc = init_module(file, len, options ? options : "");
+	if (rc)
+		log_message("\terror: %s", moderror(errno));
+	return rc;
 }
 
 static char *kernel_module_extension(void)
 {
-  return ".ko.gz";
+	return ".ko.gz";
 }
 
 static int load_modules_dependencies(void)
