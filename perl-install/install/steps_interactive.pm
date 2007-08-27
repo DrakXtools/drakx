@@ -728,7 +728,7 @@ sub summary_prompt {
 
     foreach (@$l) {
 	my $val = $_->{val};
-	($_->{format}, $_->{val}) = (sub { $val->() || N("not configured") }, '');
+	($_->{format}, $_->{val}) = (sub { $val && $val->() || N("not configured") }, '');
     }
     
     $o->ask_from_({
