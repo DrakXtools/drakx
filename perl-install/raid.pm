@@ -96,11 +96,16 @@ sub updateSize {
 
 sub module {
     my ($part) = @_;
-    my $mod = $part->{level};
+    my $level = $part->{level};
+    log::l("level $level");
 
-    $mod = 5 if $mod eq "4";
-    $mod = "raid$mod" if $mod =~ /^\d+$/;
-    $mod;
+    if (member($level, 4, 5, 6)) {
+	'raid456';
+    } elsif ($level eq '1') {
+	'raid1';
+    } else {
+	$level;
+    }
 }
 
 
@@ -191,7 +196,7 @@ sub detect_during_install_once {
     run_program::run('mdadm', '>>', '/etc/mdadm.conf', '--examine', '--scan');
 
     foreach (@{parse_mdadm_conf(scalar cat_('/etc/mdadm.conf'))->{ARRAY}}) {
-	eval { modules::load($_->{level}) };
+	eval { modules::load(module($_)) };
     }
     run_program::run('mdadm', '--assemble', '--scan');    
 }
@@ -266,6 +271,7 @@ sub parse_mdadm_conf {
 	    push @{$conf{DEVICE}}, split(' ', $1);
 	} elsif (my ($md, $md_conf) = /^ARRAY\s+(\S+)\s*(.*)/) {
 	    my %md_conf = map { if_(/(.*)=(.*)/, $1 => $2) } split(' ', $md_conf);
+	    $md_conf{level} =~ s/^raid//;
 	    $md_conf{device} = $md;
 	    push @{$conf{ARRAY}}, \%md_conf;
 	}
