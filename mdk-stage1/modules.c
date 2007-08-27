@@ -354,8 +354,8 @@ enum return_type ask_insmod(enum driver_type type)
 	enum return_type results;
 	char * choice;
 	char ** dlist = list_directory("/modules");
-	char ** modules = malloc(sizeof(char *) * string_array_length(dlist) + 1);
-	char ** descrs = malloc(sizeof(char *) * string_array_length(dlist) + 1);
+	char ** modules = malloc(sizeof(char *) * (string_array_length(dlist) + 1));
+	char ** descrs = malloc(sizeof(char *) * (string_array_length(dlist) + 1));
 	char ** p_dlist = dlist;
 	char ** p_modules = modules;
 	char ** p_descrs = descrs;
