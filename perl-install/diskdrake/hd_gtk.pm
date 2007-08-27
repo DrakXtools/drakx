@@ -339,7 +339,7 @@ sub current_part() {
 
 sub kind2hd {
     my ($kind) = @_;
-    $kind->{type} =~ /hd|lvm/ ? $kind->{val} : {};
+    $kind->{type} =~ /hd|lvm/ ? $kind->{val} : bless({}, 'partition_table::raw');
 }
 
 sub hd2kind {
