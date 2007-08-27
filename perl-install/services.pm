@@ -96,7 +96,7 @@ sshd => N_("Secure Shell is a network protocol that allows data to be exchanged 
 syslog => N_("Syslog is the facility by which many daemons use to log messages
 to various system log files.  It is a good idea to always run syslog."),
 usb => N_("Load the drivers for your usb devices."),
-xfs => N_("Starts the X Font Server (this is mandatory for Xorg to run)."),
+xfs => N_("Starts the X Font Server."),
 xinetd => N_("Starts other deamons on demand."),
     );
     my ($name) = @_;
