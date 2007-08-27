@@ -314,7 +314,10 @@ sub create_buttons4partitions {
 		last;
 	    }
 	});
-	$w->set_name("PART_" . fs::type::part2type_name($entry));
+	my @colorized_fs_types = qw(ext3 xfs swap vfat ntfs ntfs-3g);
+	$w->set_name("PART_" . (isEmpty($entry) ? 'empty' : 
+				$entry->{fs_type} && member($entry->{fs_type}, @colorized_fs_types) ? $entry->{fs_type} :
+				'other'));
 	$w->set_size_request($entry->{size} * $ratio + $minwidth, 0);
 	gtkpack__($kind->{display_box}, $w);
 	if ($current_entry && fsedit::are_same_partitions($current_entry, $entry)) {
@@ -358,7 +361,7 @@ sub filesystems_button_box() {
 		  my $t = $name2fs_type{$_};
 		  $w->signal_connect(clicked => sub { try_('', \&createOrChangeType, $t, current_hd(), current_part()) });
 		  $w->can_focus(0);
-		  $w->set_name($_); 
+		  $w->set_name("PART_$t"); 
 		  $w;
 	    } @types);
 }
