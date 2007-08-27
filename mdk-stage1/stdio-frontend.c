@@ -30,7 +30,7 @@
 #include <probing.h>
 
 #include "frontend.h"
-
+#include "utils.h"
 
 void init_frontend(char * welcome_msg)
 {
@@ -248,18 +248,12 @@ enum return_type ask_from_list_index(char *msg, char ** elems, char ** elems_com
 		snprintf(tmp, sizeof(tmp), "[%%%dd]", justify_number);
 		printf(tmp, i);
 	}
-	char ** sav_elems = elems;
 	int i = 1;
 	int j = 0;
 
-	while (elems && *elems) {
-		elems++;
-		i++;
-	}
-	if (i >= 10)
+	if (string_array_length(elems) >= 10)
 		justify_number = 2;
 
-	elems = sav_elems;
 	i = 1;
 
 	printf("> %s\n", msg);
