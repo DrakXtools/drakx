@@ -64,6 +64,9 @@ int insmod_local_file(char * path, char * options)
     unsigned long len;
     int rc;
                 
+    if (IS_TESTING)
+	    return 0;
+
     file = grab_file(path, &len);
                 
     if (!file) {
@@ -90,9 +93,6 @@ static int load_modules_dependencies(void)
 	int fd, line, i;
 
 	log_message("loading modules dependencies");
-
-	if (IS_TESTING)
-		return 0;
 
 	fd = open(deps_file, O_RDONLY);
 	if (fd == -1) {
@@ -283,9 +283,6 @@ enum insmod_return my_insmod(const char * mod_name, enum driver_type type __attr
 	if (type == NETWORK_DEVICES)
 		net_devices = get_net_devices();
 #endif
-
-	if (IS_TESTING)
-		return INSMOD_OK;
 
 #ifdef ENABLE_NETWORK_STANDALONE
 	{
