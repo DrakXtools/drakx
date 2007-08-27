@@ -87,14 +87,12 @@ static char *kernel_module_extension(void)
 }
 
 
-static char * filename2modname(char * filename) {
-	char * modname = strdup(filename);
-	while (modname && *modname) {
-		if (*modname == '-')
-			*modname = '_';
-		modname++;
+static void filename2modname(char * filename) {
+	while (filename && *filename) {
+		if (*filename == '-')
+			*filename = '_';
+		filename++;
 	}
-	return modname;
 }
 
 static int load_modules_dependencies(void)
@@ -131,7 +129,8 @@ static int load_modules_dependencies(void)
 
 		/* sort of a good line */
 		modules_deps[line].filename = strdup(start);
-		modules_deps[line].modname = filename2modname(start);
+		modules_deps[line].modname = strdup(start);
+		filename2modname(modules_deps[line].modname);
 
 		start = ptr;
 		i = 0;
