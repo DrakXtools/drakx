@@ -18,6 +18,8 @@
  * (3) insmod them
  */
 
+#include "stage1.h"
+
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -27,7 +29,6 @@
 #include <string.h>
 #include <stdio.h>
 #include <errno.h>
-#include "stage1.h"
 #include "log.h"
 #include "utils.h"
 #include "frontend.h"

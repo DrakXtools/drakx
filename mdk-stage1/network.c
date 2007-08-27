@@ -19,9 +19,9 @@
  *
  */
 
+#include "stage1.h"
+
 #include <stdlib.h>
-/* define _GNU_SOURCE so strndup is available */
-#define _GNU_SOURCE
 #include <string.h>
 #include <unistd.h>
 #include <sys/socket.h>
@@ -35,7 +35,6 @@
 #include <resolv.h>
 #include <sys/utsname.h>
 
-#include "stage1.h"
 #include "frontend.h"
 #include "modules.h"
 #include "probing.h"
