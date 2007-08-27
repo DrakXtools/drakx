@@ -371,21 +371,30 @@ enum return_type ask_insmod(enum driver_type type)
 	snprintf(msg, sizeof(msg), "Which driver should I try to gain %s access?", mytype);
 
 	{
-		char ** modules = NULL;
-		char ** descrs = malloc(sizeof(char *) * string_array_length(modules));
+		char ** dlist = list_directory("/modules");
+		char ** modules = malloc(sizeof(char *) * string_array_length(dlist) + 1);
+		char ** descrs = malloc(sizeof(char *) * string_array_length(dlist) + 1);
+		char ** p_dlist = dlist;
 		char ** p_modules = modules;
 		char ** p_descrs = descrs;
-		while (p_modules && *p_modules) {
+		while (p_dlist && *p_dlist) {
 			int i;
-			*p_descrs = NULL;
+			if (!strstr(*p_dlist, kernel_module_extension())) {
+				p_dlist++;
+				continue;
+			}
+			*p_modules = *p_dlist;
+			(*p_modules)[strlen(*p_modules)-strlen(kernel_module_extension())] = '\0'; /* remove trailing .ko.gz */
 			for (i = 0 ; i < modules_descriptions_num ; i++) {
-				if (!strncmp(*p_modules, modules_descriptions[i].module, strlen(modules_descriptions[i].module))
-				    && (*p_modules)[strlen(modules_descriptions[i].module)] == '.') /* one contains '.ko.gz' not the other */
+				if (!strcmp(*p_modules, modules_descriptions[i].module))
 					*p_descrs = modules_descriptions[i].descr;
 			}
+			p_dlist++;
 			p_modules++;
 			p_descrs++;
 		}
+		*p_modules = NULL;
+		*p_descrs = NULL;
 		if (modules && *modules)
 			results = ask_from_list_comments(msg, modules, descrs, &choice);
 		else
@@ -393,7 +402,6 @@ enum return_type ask_insmod(enum driver_type type)
 	}
 
 	if (results == RETURN_OK) {
-		choice[strlen(choice)-strlen(kernel_module_extension())] = '\0'; /* remove trailing .ko.gz */
 		return insmod_with_options(choice, type);
 	} else
 		return results;
