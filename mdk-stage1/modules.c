@@ -351,55 +351,53 @@ static enum return_type insmod_with_options(char * mod, enum driver_type type)
 
 enum return_type ask_insmod(enum driver_type type)
 {
-	char * mytype;
-	char msg[200];
 	enum return_type results;
 	char * choice;
+	char ** dlist = list_directory("/modules");
+	char ** modules = malloc(sizeof(char *) * string_array_length(dlist) + 1);
+	char ** descrs = malloc(sizeof(char *) * string_array_length(dlist) + 1);
+	char ** p_dlist = dlist;
+	char ** p_modules = modules;
+	char ** p_descrs = descrs;
 
 	unset_automatic(); /* we are in a fallback mode */
 
-	if (type == SCSI_ADAPTERS)
-		mytype = "SCSI";
-	else if (type == NETWORK_DEVICES)
-		mytype = "NET";
-	else
-		return RETURN_ERROR;
-
-	snprintf(msg, sizeof(msg), "Which driver should I try to gain %s access?", mytype);
-
-	{
-		char ** dlist = list_directory("/modules");
-		char ** modules = malloc(sizeof(char *) * string_array_length(dlist) + 1);
-		char ** descrs = malloc(sizeof(char *) * string_array_length(dlist) + 1);
-		char ** p_dlist = dlist;
-		char ** p_modules = modules;
-		char ** p_descrs = descrs;
-		while (p_dlist && *p_dlist) {
-			int i;
-			if (!strstr(*p_dlist, kernel_module_extension())) {
-				p_dlist++;
-				continue;
-			}
-			*p_modules = *p_dlist;
-			(*p_modules)[strlen(*p_modules)-strlen(kernel_module_extension())] = '\0'; /* remove trailing .ko.gz */
-			for (i = 0 ; i < modules_descriptions_num ; i++) {
-				if (!strcmp(*p_modules, modules_descriptions[i].module))
-					*p_descrs = modules_descriptions[i].descr;
-			}
+	while (p_dlist && *p_dlist) {
+		int i;
+		if (!strstr(*p_dlist, kernel_module_extension())) {
 			p_dlist++;
-			p_modules++;
-			p_descrs++;
+			continue;
 		}
-		*p_modules = NULL;
-		*p_descrs = NULL;
-		if (modules && *modules)
-			results = ask_from_list_comments(msg, modules, descrs, &choice);
-		else
-			results = RETURN_BACK;
+		*p_modules = *p_dlist;
+		(*p_modules)[strlen(*p_modules)-strlen(kernel_module_extension())] = '\0'; /* remove trailing .ko.gz */
+		for (i = 0 ; i < modules_descriptions_num ; i++) {
+			if (!strcmp(*p_modules, modules_descriptions[i].module))
+				*p_descrs = modules_descriptions[i].descr;
+		}
+		p_dlist++;
+		p_modules++;
+		p_descrs++;
 	}
+	*p_modules = NULL;
+	*p_descrs = NULL;
 
-	if (results == RETURN_OK) {
-		return insmod_with_options(choice, type);
-	} else
-		return results;
+	if (modules && *modules) {
+		char * mytype;
+		char msg[200];
+		if (type == SCSI_ADAPTERS)
+			mytype = "SCSI";
+		else if (type == NETWORK_DEVICES)
+			mytype = "NET";
+		else
+			return RETURN_ERROR;
+
+		snprintf(msg, sizeof(msg), "Which driver should I try to gain %s access?", mytype);
+		results = ask_from_list_comments(msg, modules, descrs, &choice);
+		if (results == RETURN_OK)
+			return insmod_with_options(choice, type);
+		else
+			return results;
+	} else {
+		return RETURN_BACK;
+	}
 }
