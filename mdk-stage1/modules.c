@@ -91,32 +91,13 @@ static int load_modules_dependencies(void)
 	char * deps_file = "/modules/modules.dep";
 	char * buf, * ptr, * start, * end;
 	struct stat s;
-	int fd, line, i;
+	int line, i;
 
 	log_message("loading modules dependencies");
-
-	fd = open(deps_file, O_RDONLY);
-	if (fd == -1) {
-		log_perror(deps_file);
+	buf = cat_file(deps_file, &s);
+	if (!buf)
 		return -1;
-	}
-	
-	fstat(fd, &s);
-	buf = alloca(s.st_size + 1);
-	if (read(fd, buf, s.st_size) != (ssize_t)s.st_size) {
-		log_perror(deps_file);
-		return -1;
-	}
-	buf[s.st_size] = '\0';
-	close(fd);
-
-	ptr = buf;
-	line = 0;
-	while (ptr) {
-		line++;
-		ptr = strchr(ptr + 1, '\n');
-	}
-
+	line = line_counts(buf);
 	modules_deps = malloc(sizeof(*modules_deps) * (line+1));
 
 	start = buf;
@@ -170,6 +151,8 @@ static int load_modules_dependencies(void)
 		start = end + 1;
 	}
 	modules_deps[line].modname = NULL;
+
+	free(buf);
 
 	return 0;
 }

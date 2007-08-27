@@ -17,6 +17,8 @@
 
 int charstar_to_int(const char * s);
 off_t file_size(const char * path);
+char * cat_file(const char * file, struct stat * s);
+int line_counts(const char * buf);
 int total_memory(void);
 void * memdup(void *src, size_t size);
 void add_to_env(char * name, char * value);

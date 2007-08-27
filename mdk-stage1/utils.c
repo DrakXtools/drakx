@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <fcntl.h>
 #include <unistd.h>
 #include <ctype.h>
 #include <dirent.h>
@@ -44,6 +45,38 @@ off_t file_size(const char * path)
 		return -1;
         else
                 return statr.st_size;
+}
+
+char * cat_file(const char * file, struct stat * s) {
+	char * buf;
+	int fd = open(file, O_RDONLY);
+	if (fd == -1) {
+		log_perror(file);
+		return NULL;
+	}
+	
+	fstat(fd, s);
+	buf = malloc(s->st_size + 1);
+	if (read(fd, buf, s->st_size) != (ssize_t)s->st_size) {
+		close(fd);
+		free(buf);
+		log_perror(file);
+		return NULL;
+	}
+	buf[s->st_size] = '\0';
+	close(fd);
+
+	return buf;
+}
+
+int line_counts(const char * buf) {
+	const char * ptr = buf;
+	int line = 0;
+	while (ptr) {
+		line++;
+		ptr = strchr(ptr + 1, '\n');
+	}
+	return line;
 }
 
 int total_memory(void)
