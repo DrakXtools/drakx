@@ -86,6 +86,17 @@ static char *kernel_module_extension(void)
 	return ".ko.gz";
 }
 
+
+static char * filename2modname(char * filename) {
+	char * modname = strdup(filename);
+	while (modname && *modname) {
+		if (*modname == '-')
+			*modname = '_';
+		modname++;
+	}
+	return modname;
+}
+
 static int load_modules_dependencies(void)
 {
 	char * deps_file = "/modules/modules.dep";
@@ -104,7 +115,6 @@ static int load_modules_dependencies(void)
 	line = 0;
 	while (start < (buf+s.st_size) && *start) {
 		char * tmp_deps[50];
-		char * modp;
 
 		end = strchr(start, '\n');
 		*end = '\0';
@@ -121,14 +131,7 @@ static int load_modules_dependencies(void)
 
 		/* sort of a good line */
 		modules_deps[line].filename = strdup(start);
-
-		modules_deps[line].modname = strdup(start);
-		modp = modules_deps[line].modname;
-		while (modp && *modp) {
-			if (*modp == '-')
-				*modp = '_';
-			modp++;
-		}
+		modules_deps[line].modname = filename2modname(start);
 
 		start = ptr;
 		i = 0;
