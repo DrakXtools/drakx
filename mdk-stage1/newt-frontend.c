@@ -174,7 +174,7 @@ void end_progression_raw(void)
 
 enum return_type ask_from_list_index(char *msg, char ** elems, char ** elems_comments, int * answer)
 {
-	char * items[500];
+	char * items[50000];
 	int rc;
 
 	if (elems_comments) {
