@@ -354,8 +354,8 @@ enum return_type ask_insmod(enum driver_type type)
 	enum return_type results;
 	char * choice;
 	char ** dlist = list_directory("/modules");
-	char ** modules = malloc(sizeof(char *) * (string_array_length(dlist) + 1));
-	char ** descrs = malloc(sizeof(char *) * (string_array_length(dlist) + 1));
+	char ** modules = alloca(sizeof(char *) * (string_array_length(dlist) + 1));
+	char ** descrs = alloca(sizeof(char *) * (string_array_length(dlist) + 1));
 	char ** p_dlist = dlist;
 	char ** p_modules = modules;
 	char ** p_descrs = descrs;
@@ -369,6 +369,7 @@ enum return_type ask_insmod(enum driver_type type)
 			continue;
 		}
 		*p_modules = *p_dlist;
+		*p_descrs = NULL;
 		(*p_modules)[strlen(*p_modules)-strlen(kernel_module_extension())] = '\0'; /* remove trailing .ko.gz */
 		for (i = 0 ; i < modules_descriptions_num ; i++) {
 			if (!strcmp(*p_modules, modules_descriptions[i].module))
