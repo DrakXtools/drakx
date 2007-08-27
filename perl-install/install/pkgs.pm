@@ -143,7 +143,7 @@ sub bestKernelPackage {
       detect_devices::is_i586() ? '-desktop586' :
       detect_devices::isLaptop() ? '-laptop' :
       detect_devices::dmi_detect_memory() > 3.8 * 1024 ? '-server' :
-      '';
+      '-desktop';
 
     my @kernels = grep { $_ } map { packageByName($packages, "kernel$_-latest") } @preferred_exts, '';
 
