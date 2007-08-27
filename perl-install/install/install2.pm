@@ -377,7 +377,6 @@ sub main {
 	    rpm_dbapi => sub { $o->{rpm_dbapi} = $v },
 	    nomouseprobe => sub { $o->{nomouseprobe} = $v },
 	    updatemodules => sub { $o->{updatemodules} = 1 },
-	    move  => sub { $::move = 1 },
 	    suppl => sub { $o->{supplmedia} = 1 },
 	    askmedia => sub { $o->{askmedia} = 1 },
 	}}{lc $n}; &$f if $f;
@@ -400,10 +399,6 @@ sub main {
     eval { fs::mount::mount('none', '/sys', 'sysfs', 1) };
     eval { touch('/root/non-chrooted-marker.DrakX') }; #- helps distinguishing /root and /mnt/root when we don't know if we are chrooted
 
-    if ($::move) {
-        require move;
-        move::init($o);
-    }
     if ($::local_install) {
 	push @auto, 
 #	  'selectLanguage', 'selectKeyboard', 'miscellaneous', 'selectInstallClass',
@@ -413,7 +408,7 @@ sub main {
 	$o->{mouse} = mouse::fullname2mouse('Universal|Any PS/2 & USB mice');
     }
 
-    $o->{prefix} = $::prefix = $::testing ? "/tmp/test-perl-install" : $::move ? "" : "/mnt";
+    $o->{prefix} = $::prefix = $::testing ? "/tmp/test-perl-install" : "/mnt";
     mkdir $::prefix, 0755;
 
     #-  make sure we do not pick up any gunk from the outside world
@@ -531,7 +526,7 @@ sub main {
 	mouse::load_modules($o->{mouse});
     }
 
-    lang::set($o->{locale}) if !$::move;
+    lang::set($o->{locale});
 
     # keep the result otherwise monitor-edid does not return good results afterwards
     eval { any::monitor_full_edid() };
@@ -540,7 +535,7 @@ sub main {
 
     $o->{allowFB} = listlength(cat_("/proc/fb"));
 
-    if (!$::move && !$::testing) {
+    if (!$::testing) {
 	my $product_id = cat__(install::any::getFile_($o->{stage2_phys_medium}, "product.id"));
 	log::l('product_id: ' . chomp_($product_id));
 	$o->{product_id} = common::parse_LDAP_namespace_structure($product_id);

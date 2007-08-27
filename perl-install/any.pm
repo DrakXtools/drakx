@@ -924,7 +924,6 @@ when your installation is complete and you restart your system.")),
 	      #- very special cases for langs which do not like UTF-8
 	      $non_utf8 = $lang =~ /\bzh/ if !$utf8_forced;
 	  }, focus_out => sub { $langs->{$listval2val->($lang)} = 1 } },
-      if_(!$::move,
 	  { val => \$non_utf8, type => 'bool', text => N("Old compatibility (non UTF-8) encoding"), 
 	    advanced => 1, changed => sub { $utf8_forced = 1 } },
 	  { val => \$langs->{all}, type => 'bool', text => N("All languages"), advanced => 1 },
@@ -934,7 +933,6 @@ when your installation is complete and you restart your system.")),
 	      image => "langs/lang-$_->[0]",
 	  };
 	} sort { $a->[1] cmp $b->[1] } map { [ $_, $sort_func->($_) ] } lang::list_langs(),
-      ),
     ]) or return;
     $locale->{utf8} = !$non_utf8;
     %$langs = grep_each { $::b } %$langs;  #- clean hash

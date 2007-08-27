@@ -27,12 +27,8 @@ our @advertising_images;
 sub drakx_version { 
     my ($o) = @_;
 
-    if ($::move) {
-	sprintf "DrakX-move v%s", cat_('/usr/bin/stage2/move.pm') =~ /move\.pm,v (\S+ \S+ \S+)/;
-    } else {
 	my $version = cat__(getFile_($o->{stage2_phys_medium}, "install/stage2/VERSION"));
 	sprintf "DrakX v%s", chomp_($version);
-    }
 }
 
 #-######################################################################################

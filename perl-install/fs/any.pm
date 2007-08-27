@@ -13,7 +13,7 @@ sub get_hds {
     my $probed_all_hds = fsedit::get_hds($partitioning_flags, $o_in);
     my $hds = $probed_all_hds->{hds};
 
-    if (is_empty_array_ref($hds) && !$::move) { #- no way
+    if (is_empty_array_ref($hds)) { #- no way
 	die N("An error occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem");
     }
 

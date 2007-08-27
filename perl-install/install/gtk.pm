@@ -60,20 +60,6 @@ sub load_rc {
     if ($f) {
 	Gtk2::Rc->parse_string($o->{doc} ? $theme_overriding_for_doc : scalar cat_($f));
    }
-
-    if ($::move) {
-        #- override selection color since we will not do inverse-video on the text when it's images
-	Gtk2::Rc->parse_string(q(
-style "galaxy-default"
-{
-    base[ACTIVE]      = "#CECECE"
-    base[SELECTED]    = "#CECECE"
-    text[ACTIVE]      = "#000000"
-    text[PRELIGHT]    = "#000000"
-    text[SELECTED]    = "#000000"
-}
-));
-    }
 }
 
 #------------------------------------------------------------------------------
@@ -100,7 +86,6 @@ widget "*" style "default-font"
 #------------------------------------------------------------------------------
 sub default_theme {
     my ($o) = @_;
-    $::move ? '' :
     $o->{simple_themes} || $o->{vga16} ? 'blue' : 'galaxy';
 }
 
@@ -110,11 +95,9 @@ sub install_theme {
     load_rc($o, $o->{theme} ||= default_theme($o));
     load_font($o);
 
-    if (!$::move) {
 	my $win = gtknew('Window', widget_name => 'background');
 	$win->realize;
 	mygtk2::set_root_window_background_with_gc($win->style->bg_gc('normal'));
-    }
 }
 
 #------------------------------------------------------------------------------
@@ -176,7 +159,7 @@ sub update_steps_position {
 sub create_logo_window {
     my ($o) = @_;
 
-    return if $::logowidth == 0 || $::move;
+    return if $::logowidth == 0;
 
     mygtk2::may_destroy($o->{logo_window});
 
@@ -216,11 +199,10 @@ q(<fontconfig>
 sub init_sizes {
     my ($o) = @_;
     ($::rootwidth,  $::rootheight)    = (Gtk2::Gdk->screen_width, Gtk2::Gdk->screen_height);
-    $::stepswidth = $::rootwidth <= 640 ? 0 : 200 if !$::move;
+    $::stepswidth = $::rootwidth <= 640 ? 0 : 200;
     ($::logowidth, $::logoheight) = $::rootwidth <= 640 ? (0, 0) : (800, 75);
     ($o->{windowwidth}, $o->{windowheight}) = ($::rootwidth - $::stepswidth, $::rootheight - $::helpheight - $::logoheight);
     ($::real_windowwidth, $::real_windowheight) = (576, 418);
-    $::move and $o->{windowwidth} -= 100;
 }
 
 sub handle_unsafe_mouse {

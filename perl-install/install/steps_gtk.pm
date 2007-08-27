@@ -47,7 +47,7 @@ sub new($$) {
 	    my @options = $wanted_DISPLAY;
 	    if ($server eq 'Xnest') {
 		push @options, '-ac', '-geometry', $o->{vga} || ($o->{vga16} ? '640x480' : '800x600');
-	    } elsif (!$::move) {
+	    } else {
 		install::gtk::createXconf($f, @{$o->{mouse}}{'Protocol', 'device'}, $o->{mouse}{wacom}[0], $Driver);
 
 		push @options, '-kb', '-allowMouseOpenFail', '-xf86config', $f if arch() !~ /^sparc/;
@@ -106,13 +106,6 @@ sub new($$) {
 	    @servers = map { if_($_, "Driver:$_") } $card && $card->{Driver}, 'fbdev';
         }
 
-        if ($::move && !$::testing) {
-            require move;
-            require run_program;
-            move::automatic_xconf($o);
-            @servers = qw(X_move);
-	}
-
 	foreach (@servers) {
 	    log::l("Trying with server $_");
 	    my ($prog, $Driver) = /Driver:(.*)/ ? ('Xorg', $1) : /Xsun|Xnest|^X_move$/ ? $_ : "XF86_$_";
@@ -125,7 +118,6 @@ sub new($$) {
 		$o->{vga16} = 1 if /VGA16/;
 		&$launchX($prog, $Driver) and goto OK;
 	    }
-            $::move and print("can not launch graphical mode :(\n"), c::_exit(1);
 	}
 	return undef;
     }

@@ -40,7 +40,7 @@ sub mount {
 
 	push @types, 'smb', 'smbfs', 'davfs2' if !$::isInstall;
 
-	if (!member($fs, @types) && !$::move) {
+	if (!member($fs, @types)) {
 	    log::l("skipping mounting $dev partition ($fs)");
 	    return;
 	}

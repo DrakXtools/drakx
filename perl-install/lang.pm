@@ -940,8 +940,7 @@ sub set {
     
     put_in_hash(\%ENV, i18n_env($locale));
 
-    if ($::move) {
-    } elsif (!$::isInstall) {
+    if (!$::isInstall) {
 	bindtextdomain();
     } else {
 	$ENV{LC_NUMERIC} = 'C'; #- otherwise eval "1.5" returns 1 in fr_FR
