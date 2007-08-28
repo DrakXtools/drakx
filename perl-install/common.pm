@@ -45,8 +45,8 @@ sub unmakedev { $_[0] >> 8, $_[0] & 0xff }
 sub translate_real {
     my ($s, $o_plural, $o_nb) = @_;
     $s or return '';
+    my $s2;
     foreach (@::textdomains, 'libDrakX') {
-	my $s2;
      if ($o_plural) {
          $s2 = Locale::gettext::dngettext($_, $s, $o_plural, $o_nb);
      } else {
@@ -56,9 +56,8 @@ sub translate_real {
 	c::set_tagged_utf8($s2) if !utf8::is_utf8($s2) && utf8::is_utf8($s);
 	return $s2 if $s ne $s2 && $s2 ne $o_plural;
     }
-    # didn't lookup anything or locale is "C";
-    # in english 1 is singular whereas 0 is plural:
-    defined $o_nb && $o_nb != 1 ? $o_plural : $s;
+    # didn't lookup anything or locale is "C":
+    $s2;
 }
 
 sub remove_translate_context {
