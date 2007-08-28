@@ -56,7 +56,7 @@ sub translate_real {
 	c::set_tagged_utf8($s2) if !utf8::is_utf8($s2) && utf8::is_utf8($s);
 	return $s2 if $s ne $s2 && $s2 ne $o_plural;
     }
-    $s;
+    $o_nb ? $o_plural : $s;
 }
 
 sub remove_translate_context {
