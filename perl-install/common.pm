@@ -56,7 +56,9 @@ sub translate_real {
 	c::set_tagged_utf8($s2) if !utf8::is_utf8($s2) && utf8::is_utf8($s);
 	return $s2 if $s ne $s2 && $s2 ne $o_plural;
     }
-    $o_nb ? $o_plural : $s;
+    # didn't lookup anything or locale is "C";
+    # in english 1 is singular whereas 0 is plural:
+    defined $o_nb && $o_nb != 1 ? $o_plural : $s;
 }
 
 sub remove_translate_context {
