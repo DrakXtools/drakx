@@ -478,14 +478,6 @@ Consoles 1,3,4,7 may also contain interesting information";
     #- install urpmi before as rpmdb will be opened, this will cause problem with update-menus.
     $o->install_urpmi;
 
-    #- update menu scheme before calling update menus if desktop mode.
-    if ($o->{meta_class} eq 'desktop') {
-	run_program::rooted($::prefix, "touch", "/etc/menu/do-not-create-menu-link");
-	run_program::rooted($::prefix, "touch", "/etc/menu/enable_simplified");
-    } elsif (!$o->{isUpgrade}) {
-	run_program::rooted($::prefix, "touch", "/etc/menu/do-not-create-menu-link");
-    }
-
     if ($o->{pcmcia}) {
 	substInFile { s/.*(TaskBarShowAPMStatus).*/$1=1/ } "$::prefix/usr/lib/X11/icewm/preferences";
 	eval { cp_af("$::prefix/usr/share/applnk/System/kapm.kdelnk",
