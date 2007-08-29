@@ -145,7 +145,6 @@ sub enteringStep {
     my ($o, $step) = @_;
 
     printf "Entering step `%s'\n", common::remove_translate_context($o->{steps}{$step}{text});
-);
     if (my @banner_elts = ($o->{steps}{$step}{banner_icon}, translate($o->{steps}{$step}{banner_title}))) {
         ugtk2::set_default_step_items(@banner_elts);
     }
