@@ -563,7 +563,10 @@ sub summary_prompt {
 	push @table, [], [ gtknew('HBox', spacing => 30, children_tight => [ '', $e->{widget} ]),
 			   gtknew('Button', text => N("Configure"), clicked => sub { 
 						 $w->{rwindow}->hide;
+						 my ($old_icon, $old_title) = get_default_step_items();
+						 set_default_step_items($e->{banner_icon} || $old_icon, $e->{banner_title} || $old_title);
 						 $e->{clicked}(); 
+						 set_default_step_items($old_icon, $old_title);
 						 $w->{rwindow}->show;
 						 $set_entry_labels->();
 					     }) ];
