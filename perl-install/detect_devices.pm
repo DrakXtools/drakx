@@ -1042,6 +1042,7 @@ sub isLaptop() {
 	|| (matching_desc__regexp('C&T.*655[45]\d') || matching_desc__regexp('C&T.*68554') ||
 	    matching_desc__regexp('Neomagic.*Magic(Media|Graph)') ||
 	    matching_desc__regexp('ViRGE.MX') || matching_desc__regexp('S3.*Savage.*[IM]X') ||
+	    matching_desc__regexp('Intel Corporation\|Mobile') ||
 	    matching_desc__regexp('ATI.*(Mobility|LT)'))
 	|| cat_('/proc/cpuinfo') =~ /\bmobile\b/i
 	|| probe_unique_name("Type") eq 'laptop'
