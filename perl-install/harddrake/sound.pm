@@ -206,7 +206,7 @@ sub do_switch {
         unload($old_driver);    # run_program("/sbin/modprobe -r $driver"); # just in case ...
     }
     $modules_conf->remove_module($old_driver);
-    $modules_conf->set_sound_slot("sound-slot-$index", $new_driver);
+    configure_one_sound_slot($modules_conf, $index, $new_driver);
     $modules_conf->write;
     if ($new_driver =~ /^snd_/) {   # new driver is an alsa one
         $in->do_pkgs->ensure_binary_is_installed(qw(alsa-utils alsactl), 1);
@@ -364,6 +364,12 @@ The current driver for your \"%s\" sound card is \"%s\" ", $device->{description
     };
 }
 
+sub configure_one_sound_slot {
+    my ($modules_conf, $index, $driver) = @_;
+    $modules_conf->set_sound_slot("sound-slot-$index", $driver);
+    $modules_conf->set_options($driver, "xbox=1") if $driver eq "snd_intel8x0" && detect_devices::is_xbox();
+    $modules_conf->set_options('snd-ac97-codec', "power_save=1") if $driver =~ /^snd/ && detect_devices::isLaptop();
+}
 
 sub configure_sound_slots {
     my ($modules_conf) = @_;
@@ -372,9 +378,7 @@ sub configure_sound_slots {
         my $default_driver = $modules_conf->get_alias("sound-slot-$::i");
         if (!member($default_driver, @{get_alternative($_->{driver})}, $_->{driver})) {
             $altered ||= $default_driver;
-            $modules_conf->set_sound_slot("sound-slot-$::i", $_->{driver});
-	    $modules_conf->set_options($_->{driver}, "xbox=1") if $_->{driver} eq "snd_intel8x0" && detect_devices::is_xbox();
-	    $modules_conf->set_options('snd-ac97-codec', "power_save=1") if $_->{driver} =~ /^snd/ && detect_devices::isLaptop();
+            configure_one_sound_slot($modules_conf, $::i, $_->{driver});
         }
     } detect_devices::getSoundDevices();
     $modules_conf->write if $altered && $::isStandalone;
