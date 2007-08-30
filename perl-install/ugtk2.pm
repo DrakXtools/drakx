@@ -17,6 +17,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $wm_icon $grab $border); #-
 
     helpers => [ qw(add2notebook add_icon_path escape_text_for_TextView_markup_format gtkcolor gtkcreate_img
                     gtkcreate_pixbuf gtkfontinfo gtkset_background gtktreeview_children set_back_pixmap
+                    get_default_step_items set_default_step_items
                     string_size string_width) ],
 
     create => [ qw(create_adjustment create_box_with_title create_dialog create_factory_menu create_factory_popup_menu
