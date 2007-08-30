@@ -361,7 +361,7 @@ sub filesystems_button_box() {
 		  my $t = $name2fs_type{$_};
 		  $w->signal_connect(clicked => sub { try_('', \&createOrChangeType, $t, current_hd(), current_part()) });
 		  $w->can_focus(0);
-		  $w->set_name("PART_$t"); 
+		  $w->set_name('PART_' . ($t || 'empty')); 
 		  $w;
 	    } @types);
 }
