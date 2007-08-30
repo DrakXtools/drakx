@@ -748,6 +748,7 @@ sub summary {
     push @l, {
 	group => N("System"),
 	label => N("Timezone"),
+	banner_icon => 'banner-languages',
 	val => sub { $o->{timezone}{timezone} },
 	clicked => sub { $timezone_manually_set = $o->configureTimezone(1) || $timezone_manually_set },
     };
@@ -795,6 +796,7 @@ sub summary {
     push @l, {
 	group => N("System"),
 	label => N("Services"),
+	banner_icon => 'banner-generic',
 	val => sub {
 	    require services;
 	    my ($l, $activated) = services::services();
@@ -816,6 +818,7 @@ sub summary {
     push @l, {
 	group => N("Hardware"),
 	label => N("Mouse"),
+	banner_icon => 'banner-bootL',
 	val => sub { translate($o->{mouse}{type}) . ' ' . translate($o->{mouse}{name}) },
 	clicked => sub { selectMouse($o, 1); mouse::write($o->do_pkgs, $o->{mouse}) },
     };
@@ -829,6 +832,7 @@ sub summary {
 	push @l, {
 	    group => N("Hardware"),
 	    label => N("Sound card"),
+	    banner_icon => 'banner-generic',
 	    val => sub { 
 		$device->{driver} && modules::module2description($device->{driver}) || $device->{description};
 	    },
@@ -873,6 +877,7 @@ sub summary {
     push @l, {
 	group => N("Hardware"),
 	label => N("Graphical interface"),
+	banner_icon => 'banner-bootL',
 	val => sub { $o->{raw_X} ? Xconfig::various::to_string($o->{raw_X}) : '' },
 	clicked => sub { configureX($o, 'expert') }, 
     };
