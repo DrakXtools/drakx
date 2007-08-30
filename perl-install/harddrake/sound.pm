@@ -374,6 +374,7 @@ sub configure_sound_slots {
             $altered ||= $default_driver;
             $modules_conf->set_sound_slot("sound-slot-$::i", $_->{driver});
 	    $modules_conf->set_options($_->{driver}, "xbox=1") if $_->{driver} eq "snd_intel8x0" && detect_devices::is_xbox();
+	    $modules_conf->set_options('snd-ac97-codec', "power_save=1") if $_->{driver} =~ /^snd/ && detect_devices::isLaptop();
         }
     } detect_devices::getSoundDevices();
     $modules_conf->write if $altered && $::isStandalone;
