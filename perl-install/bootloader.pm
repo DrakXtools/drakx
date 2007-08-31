@@ -43,7 +43,10 @@ sub vmlinuz2kernel_str {
     { 
 	basename => $basename,
 	version => $version, 
-	$version =~ /(.*md[kv])-?(.*)/ ? (ext => $2, version_no_ext => $1) : (version_no_ext => $version),
+	$version =~ /(.*)-(\D.*)-(\d+md[kv])$/ ? #- eg: 2.6.22.5-server-1mdv
+	  (ext => $2, version_no_ext => "$1-$3") :
+	$version =~ /(.*md[kv])-?(.*)/ ? #- (old) eg: 2.6.17-13mdventerprise
+	  (ext => $2, version_no_ext => $1) : (version_no_ext => $version),
     };
 }
 
@@ -83,8 +86,7 @@ sub kernel_str2label {
     my ($kernel, $o_use_long_name) = @_;
     my $base = $kernel->{basename} eq 'vmlinuz' ? 'linux' : $kernel->{basename};
     $o_use_long_name || $kernel->{use_long_name} ?
-      sanitize_ver($base, $kernel) : 
-        $kernel->{ext} ? "$base-" . short_ext($kernel) : $base;
+      sanitize_ver($base, $kernel) : $base;
 }
 
 sub get {
@@ -857,8 +859,6 @@ sub sanitize_ver {
     my $v = $kernel_str->{version_no_ext};
     if ($v =~ s/-\d+\.mm\././) {
 	$name = join(' ', grep { $_ } $name, 'multimedia');
-    } elsif ($v =~ s/-(desktop|server|laptop)-/-/) {
-	$name = join(' ', grep { $_ } $name, $1);
     }
 
     $v =~ s!md[kv]$!!;

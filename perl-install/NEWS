@@ -1,3 +1,8 @@
+- bootloader-config
+  o handle new naming of vmlinuz flavors: vmlinuz-<version>-<flavor>-Xmdv
+    instead of vmlinuz-<version>-Xmdv<flavor>
+  o always use "linux" short name instead of "linux-<flavor>"
+    (since the long name is quite nice nowadays)
 - assume system is a laptop if it contains some "Intel Corporation|Mobile" devices
   (fix Samsung Q1U detection, #32967)
 - draksound, harddrake service:
