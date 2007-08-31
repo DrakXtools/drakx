@@ -138,7 +138,7 @@ sub bestKernelPackage {
     my ($packages) = @_;
 
     my @preferred_exts =
-      $::o->{match_all_hardware} ? (arch() =~ /x86_64/ ? '-desktop' : '-desktop586') :
+      $::o->{match_all_hardware} ? (arch() =~ /i.86/ ? '-desktop586' : '-desktop') :
       detect_devices::is_xbox() ? '-xbox' :
       detect_devices::is_i586() ? '-desktop586' :
       detect_devices::isLaptop() ? '-laptop' :
