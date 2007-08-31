@@ -22,7 +22,7 @@ sub read_fstab {
     my ($prefix, $file, @reading_options) = @_;
 
     if (member('keep_default', @reading_options)) {
-	push @reading_options, 'freq_passno', 'keep_device_LABEL';
+	push @reading_options, 'freq_passno', 'keep_device_LABEL', 'keep_device_UUID';
     }
 
     my %comments;
@@ -85,6 +85,10 @@ sub read_fstab {
 
 	if ($h->{device_LABEL} && !$h->{device_alias} && member('keep_device_LABEL', @reading_options)) {
 	    $h->{prefer_device_LABEL} = 1;
+	} elsif ($h->{device_UUID} && !$h->{device_alias} && member('keep_device_UUID', @reading_options)) {
+	    $h->{prefer_device_UUID} = 1;
+	} else {
+	    $h->{prefer_device} = 1;
 	}
 
 	if ($h->{options} =~ /credentials=/ && !member('verbatim_credentials', @reading_options)) {

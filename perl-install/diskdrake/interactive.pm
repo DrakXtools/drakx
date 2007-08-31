@@ -35,7 +35,10 @@ struct part {
   int part_number       # 1 for hda1...
   string device         # 'hda5', 'sdc1' ...
   string device_LABEL   # volume label. LABEL=xxx or /dev/disk/by-label/xxx can be used in fstab instead of the device
+  string device_UUID    # volume UUID. UUID=xxx or /dev/disk/by-uuid/xxx can be used in fstab instead of the device
   bool prefer_device_LABEL # should the {device_LABEL} or the {device} be used in fstab
+  bool prefer_device_UUID # should the {device_UUID} or the {device} be used in fstab
+  bool prefer_device    # should the {device} be used in fstab
   bool faked_device     # false if {device} is a real device, true for nfs/smb/dav/none devices. If the field does not exist, we do not know
 
   string rootDevice     # 'sda', 'hdc' ... (can also be a VG_name)
@@ -1235,6 +1238,7 @@ sub format_part_info {
     $info .= N("Mount point: ") . "$part->{mntpoint}\n" if $part->{mntpoint};
     $info .= N("Device: ") . "$part->{device}\n" if $part->{device} && !isLoopback($part);
     $info .= N("Volume label: ") . "$part->{device_LABEL}\n" if $part->{device_LABEL} && $::expert;
+    $info .= N("UUID: ") . "$part->{device_UUID}\n" if $::expert && $part->{device_UUID};
     $info .= N("DOS drive letter: %s (just a guess)\n", $part->{device_windobe}) if $part->{device_windobe};
     if (arch() eq "ppc") {
 	my $pType = $part->{pType};

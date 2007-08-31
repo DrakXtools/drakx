@@ -125,7 +125,7 @@ sub umount {
 sub part {
     my ($part, $b_rdonly, $o_wait_message) = @_;
 
-    log::l("mount_part: " . join(' ', map { "$_=$part->{$_}" } 'device', 'mntpoint', 'isMounted', 'real_mntpoint'));
+    log::l("mount_part: " . join(' ', map { "$_=$part->{$_}" } 'device', 'mntpoint', 'isMounted', 'real_mntpoint', 'device_UUID'));
 
     return if $part->{isMounted} && !($part->{real_mntpoint} && $part->{mntpoint});
 

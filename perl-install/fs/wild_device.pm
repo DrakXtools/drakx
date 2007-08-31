@@ -15,6 +15,8 @@ sub analyze {
 	'dev', "/dev/$dev";
     } elsif ($dev =~ /^LABEL=(.*)/) {
 	'label', $1;
+    } elsif ($dev =~ /^UUID=(.*)/) {
+	'uuid', $1;
     } elsif ($dev eq 'none' || $dev eq 'rootfs') {
 	'virtual';
     } elsif ($dev =~ m!^(\S+):/\w!) {
@@ -34,6 +36,8 @@ sub to_subpart {
     if (my ($kind, $val) = analyze($dev)) {
 	if ($kind eq 'label') {	    
 	    $part->{device_LABEL} = $val;
+	} elsif ($kind eq 'label') {	    
+	    $part->{device_UUID} = $val;
 	} elsif ($kind eq 'dev') {
 	    my %part = (faked_device => 0);
 	    if (my $rdev = (stat "$::prefix$dev")[6]) {
@@ -51,6 +55,7 @@ sub to_subpart {
 		}
 		if ($keep) {
 		    $part{device_LABEL} = $1 if $dev =~  m!^disk/by-label/(.*)!;
+		    $part{device_UUID} = $1 if $dev =~  m!^disk/by-uuid/(.*)!;
 		    $part{device_alias} = $dev;
 		    $dev = $symlink;
 		}
@@ -78,6 +83,8 @@ sub from_part {
 	'LABEL=' . $part->{device_LABEL};
     } elsif ($part->{device_alias}) {
 	"/dev/$part->{device_alias}";
+    } elsif ($part->{prefer_device_UUID} && $part->{device_UUID}) {
+	'UUID=' . $part->{device_UUID};
     } else {
 	my $faked_device = exists $part->{faked_device} ? 
 	    $part->{faked_device} : 

@@ -260,6 +260,7 @@ Do you agree to lose all the partitions?
 		$_->{bad_fs_type_magic} = 1;
 	    }
 	    $_->{device_LABEL} = $_->{LABEL_from_magic} if $_->{LABEL_from_magic};
+	    $_->{device_UUID} = $_->{UUID_from_magic} if $_->{UUID_from_magic};
 	}
 
 	if ($hd->{usb_media_type}) {
@@ -380,7 +381,8 @@ sub suggest_part {
     $part->{mntpoint} = $best->{mntpoint};
     fs::type::set_type_subpart($part, $best) if !isTrueFS($best) || !isTrueFS($part);
     $part->{size} = computeSize($part, $best, $all_hds, \@local_suggestions);
-    foreach ('options', 'lv_name', 'encrypt_key', 'device_LABEL', 'prefer_device_LABEL', 'primaryOrExtended') {
+    foreach ('options', 'lv_name', 'encrypt_key', 'primaryOrExtended',
+	     'device_LABEL', 'prefer_device_LABEL', 'device_UUID', 'prefer_device_UUID', 'prefer_device') {
 	$part->{$_} = $best->{$_} if $best->{$_};
     }
     $best;
