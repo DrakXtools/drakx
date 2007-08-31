@@ -1324,6 +1324,25 @@ sub write_fstab {
 	if !$o->{isUpgrade} || $o->{isUpgrade} =~ /redhat|conectiva/ || $o->{migrate_device_names};
 }
 
+sub adjust_files_mtime_to_timezone() {
+    #- to ensure linuxconf does not cry against those files being in the future
+    #- to ensure fc-cache works correctly on fonts installed after reboot
+
+    my $timezone_shift = run_program::rooted_get_stdout($::prefix, 'date', '+%z');
+    my ($h, $m) = $timezone_shift =~ /\+(..)(..)/ or return;
+    my $now = time() - ($h * 60 + $m * 60) * 60;
+
+    my @files = (
+	(map { "$::prefix/$_" } '/etc/modules.conf', '/etc/crontab', '/etc/sysconfig/mouse', '/etc/sysconfig/network', '/etc/X11/fs/config'),
+	glob_("$::prefix/var/cache/fontconfig/*"),
+    );
+    log::l("adjust_files_mtime_to_timezone: setting time back $h:$m for files " . join(' ', @files));
+    foreach (@files) {
+	utime $now, $now, $_;
+    }
+}
+
+
 sub move_compressed_image_to_disk {
     my ($o) = @_;
 

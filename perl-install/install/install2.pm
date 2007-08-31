@@ -613,11 +613,8 @@ sub main {
     $o->{modules_conf}->write;
     detect_devices::install_addons($::prefix);
 
-    #- to ensure linuxconf does not cry against those files being in the future
-    foreach ('/etc/modules.conf', '/etc/crontab', '/etc/sysconfig/mouse', '/etc/sysconfig/network', '/etc/X11/fs/config') {
-	my $now = time() - 24 * 60 * 60;
-	utime $now, $now, "$::prefix/$_";
-    }
+    install::any::adjust_files_mtime_to_timezone();
+
     #- make sure failed upgrade will not hurt too much.
     install::steps::cleanIfFailedUpgrade($o);
 
