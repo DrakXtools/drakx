@@ -232,8 +232,6 @@ sub remove_ending_zero {
 sub boot_img_i386 {
     my ($type, $I, $img, $kernel) = @_;
 
-    _ "dd if=/dev/zero of=$img bs=1k count=" . ($type eq 'all' ? 10500 : $type eq 'ka' ? 2950 : 1440);
-
     _ "rm -rf $tmp_mnt"; mkdir $tmp_mnt;
     _ "cat $kernel > $tmp_mnt/vmlinuz";
 
@@ -252,6 +250,9 @@ sub boot_img_i386 {
 
     _ "cp -f $rdz $tmp_mnt/$short_type.rdz";
     unlink $rdz;
+
+    my $size = max(chomp_(`du -s -k $tmp_mnt`) + 50, 1440);
+    _ "dd if=/dev/zero of=$img bs=1k count=$size";
 
     _ "mkdosfs-with-dir $tmp_mnt $img";
     _ "syslinux $img";
