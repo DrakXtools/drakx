@@ -4,7 +4,7 @@ use common;
 
 sub kinds { 
     my $no_para = @_ == 0;
-    my ($do_pkgs, $_meta_class) = @_;
+    my ($do_pkgs) = @_;
     my $allow_SmartCard = $no_para || $do_pkgs->is_available('castella-pam');
     my $allow_AD = 1;
     (
@@ -172,10 +172,10 @@ The command 'wbinfo -t' will test whether your authentication secrets are good."
 }
 
 sub ask_root_password_and_authentication {
-    my ($in, $net, $superuser, $authentication, $meta_class, $security) = @_;
+    my ($in, $net, $superuser, $authentication, $_meta_class, $security) = @_;
 
     my $kind = to_kind($authentication);
-    my @kinds = kinds($in->do_pkgs, $meta_class);
+    my @kinds = kinds($in->do_pkgs);
 
     $in->ask_from_({
 	 title => N("Authentication"), 
