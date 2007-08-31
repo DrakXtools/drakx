@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-08-27 20:13+0200\n"
-"PO-Revision-Date: 2007-08-28 03:41+0100\n"
+"PO-Revision-Date: 2007-08-31 02:54+0100\n"
 "Last-Translator: Zé <mmodem00@gmail.com>\n"
 "Language-Team: Português <pt@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -54,16 +54,16 @@ msgid ""
 "Assign a new Volume ID?"
 msgstr ""
 "O LILO quer atribuir um novo ID de Volume ao dispositivo %s.  No entanto,\n"
-"se mudar o ID de Volume do Windows NT, 2000, ou do disco de arranque XP,\n"
-"pode causar um erro fatal no Windows. Esta precaução não se aplica ao\n"
-"Windows 95 ou 98. ou aos discos NT.\n"
+"se mudar o ID de Volume de um disco de arranque Windows NT, 2000,\n"
+"ou XP, pode causar um erro fatal no Windows. Esta precaução não se\n"
+"aplica ao Windows 95 ou 98. ou aos discos de dados NT.\n"
 "\n"
 "Atribuir um novo ID de Volume?"
 
 #: any.pm:262
 #, c-format
 msgid "Installation of bootloader failed. The following error occurred:"
-msgstr "Instalação do carregador de arranque falhada. Ocorreram os seguintes erros:"
+msgstr "Instalação do carregador de arranque falhada. Ocorreu o seguinte erro:"
 
 #: any.pm:268
 #, c-format
@@ -75,13 +75,13 @@ msgid ""
 " Then type: shut-down\n"
 "At your next boot you should see the bootloader prompt."
 msgstr ""
-"Pode precisar mudar o seu dispositivo de arranque Open\n"
-" 'Firmware' para activar o carregador de arranque.  Se não vê\n"
-" a prompt do carregador de arranque ao reiniciar, mantenha\n"
-" carregado o Comando-Opção-O-F ao reiniciar e digite:\n"
+"Pode precisar mudar o seu dispositivo de arranque 'Open\n"
+" Firmware' para activar o carregador de arranque.  Se não vê\n"
+" a linha de comandos do carregador de arranque ao reiniciar,\n"
+" mantenha carregado o Comando-Opção-O-F ao reiniciar e digite:\n"
 " setenv boot-device %s,\\\\:tbxi\n"
 " Depois digite: shut-down\n"
-" No próximo arranque deve ver a prompt do carregador de arranque."
+" No próximo arranque deve ver a linha de comandos do carregador de arranque."
 
 #: any.pm:306
 #, c-format
@@ -93,7 +93,7 @@ msgid ""
 "On which drive are you booting?"
 msgstr ""
 "Decidiu instalar o carregador de arranque numa partição.\n"
-"Isto implica que já tem um carregador de arranque no disco que arranca\n"
+"Isto implica que já tem um carregador de arranque no disco em que arranca"
 "(ex: System Commander).\n"
 "\n"
 "Em que dispositivo está a arrancar?"
@@ -161,7 +161,7 @@ msgstr "Opções principais"
 #: any.pm:388
 #, c-format
 msgid "Delay before booting default image"
-msgstr "Atraso antes de arrancar imagem predefinida"
+msgstr "Atraso antes de arrancar a imagem predefinida"
 
 #: any.pm:389
 #, c-format
@@ -216,7 +216,7 @@ msgstr "restringir"
 #: any.pm:401
 #, c-format
 msgid "Option ``Restrict command line options'' is of no use without a password"
-msgstr "Opção ``Restringir opções da linha de comando'' não tem uso sem senha"
+msgstr "Opção ``Restringir opções da linha de comando'' não tem qualquer uso sem senha"
 
 #: any.pm:403
 #, c-format
@@ -226,7 +226,7 @@ msgstr "Limpar /tmp a cada arranque"
 #: any.pm:404
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Tamanho da RAM exacto se necessário (%d MB encontrados)"
+msgstr "Tamanho exacto da RAM se necessário (%d MB encontrados)"
 
 #: any.pm:405
 #, c-format
@@ -286,7 +286,7 @@ msgstr "Juntar Xen"
 #: any.pm:494
 #, c-format
 msgid "Video mode"
-msgstr "Modo Gráfico"
+msgstr "Modo gráfico"
 
 #: any.pm:496
 #, c-format
@@ -316,12 +316,12 @@ msgstr "Sem Vídeo"
 #: any.pm:526
 #, c-format
 msgid "Empty label not allowed"
-msgstr "Não é permitido rótulos vazios"
+msgstr "Não são permitido rótulos vazios"
 
 #: any.pm:527
 #, c-format
 msgid "You must specify a kernel image"
-msgstr "Deve indicar uma imagem do kernel"
+msgstr "Deve indicar uma imagem kernel"
 
 #: any.pm:527
 #, c-format
@@ -425,12 +425,12 @@ msgstr "Este nome de utilizador já foi adicionado"
 #: any.pm:748 any.pm:776
 #, c-format
 msgid "User ID"
-msgstr "ID Utilizador"
+msgstr "ID do Utilizador"
 
 #: any.pm:749 any.pm:777
 #, c-format
 msgid "Group ID"
-msgstr "ID Grupo"
+msgstr "ID do Grupo"
 
 #: any.pm:752
 #, c-format
@@ -450,7 +450,7 @@ msgstr "Gestão de utilizadores"
 #: any.pm:775 authentication.pm:182
 #, c-format
 msgid "Set administrator (root) password"
-msgstr "Definir senha do administrador (root)"
+msgstr "Definir senha de administrador (root)"
 
 #: any.pm:780
 #, c-format
@@ -532,7 +532,7 @@ msgstr "Por favor escolha a língua a usar."
 #: any.pm:883 any.pm:951
 #, c-format
 msgid "Language choice"
-msgstr "Escolha de língua"
+msgstr "Escolha da língua"
 
 #: any.pm:913
 #, c-format
@@ -620,10 +620,10 @@ msgid ""
 "\"Custom\" permit a per-user granularity.\n"
 msgstr ""
 "Deseja permitir que os utilizadores partilhem alguns dos seus directórios?\n"
-"Ao permitir isto os utilizadores apenas têm que clicar em \"Partilhar\" no "
+"Ao activar esta opção, os utilizadores têm apenas que clicar em \"Partilhar\" no "
 "konqueror e nautilus.\n"
 "\n"
-"\"Personalizado\" permite várias escolhas a cada utilizador.\n"
+"\"Personalizado\" permite várias escolhas por cada utilizador.\n"
 
 #: any.pm:1115
 #, c-format
@@ -664,18 +664,18 @@ msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
 "You can use userdrake to add a user to this group."
 msgstr ""
-"A partilha do utilizador normal usa o grupo \"fileshare\". \n"
+"A partilha por utilizador usa o grupo \"fileshare\". \n"
 "Pode usar o userdrake para adicionar um utilizador a este grupo."
 
 #: any.pm:1245
 #, c-format
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
-msgstr "Por favor saia (log out) e depois use Ctrl-Alt-BackSpace"
+msgstr "Por favor saia desta sessão e depois use Ctrl-Alt-BackSpace"
 
 #: any.pm:1249
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
-msgstr "Precisa sair e voltar para que as mudanças tenham efeito"
+msgstr "Precisa sair desta sessão e voltar para as mudanças surtirem efeito"
 
 #: any.pm:1284
 #, c-format
@@ -690,7 +690,7 @@ msgstr "Qual é o seu fuso horário?"
 #: any.pm:1296 any.pm:1298
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
-msgstr "Definições de Fuso Horário e Data"
+msgstr "Definições de Data, Hora e Fuso Horário"
 
 #: any.pm:1299
 #, c-format
@@ -705,7 +705,7 @@ msgstr "%s (relógio do material definido para UTC)"
 #: any.pm:1304
 #, c-format
 msgid "%s (hardware clock set to local time)"
-msgstr "%s (relógio do material definido para a hora local)"
+msgstr "%s (relógio do material definido para hora local)"
 
 #: any.pm:1306
 #, c-format
@@ -789,7 +789,7 @@ msgid ""
 "Service domain with a common password and group file."
 msgstr ""
 "Permite-lhe correr um grupo de computadores no mesmo domínio de Serviços de "
-"Informação de Rede com uma senha comum e um ficheiro de grupo."
+"Informação da Rede com uma senha comum e um ficheiro de grupo."
 
 #: authentication.pm:69
 #, c-format
@@ -813,7 +813,7 @@ msgstr "Directório Activo com SFU:"
 #: authentication.pm:70
 #, c-format
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
-msgstr "Com o Kerberos e o Ldap para autenticar no Servidor Activo do Directório "
+msgstr "Com o Kerberos e o Ldap para autenticar no Servidor de Directório Activo "
 
 #: authentication.pm:71
 #, c-format
@@ -826,8 +826,8 @@ msgid ""
 "Winbind allows the system to authenticate users in a Windows Active "
 "Directory Server."
 msgstr ""
-"O Winbind permite ao sistema autenticar utilizadores no Servidor Activo de "
-"Directório windows."
+"O Winbind permite ao sistema autenticar utilizadores no Servidor de "
+"Directório Activo Windows."
 
 #: authentication.pm:96
 #, c-format
@@ -930,24 +930,24 @@ msgid ""
 "The command 'wbinfo -t' will test whether your authentication secrets are "
 "good."
 msgstr ""
-"Para que isto funcione para um W2K PDC, irá provavelmente precisar de ter o "
-"administrador a executar: C:\\>net grupolocal \"Pre-Windows 2000 Acesso "
-"Compatível\" todos /add e reinicie o servidor.\n"
-"Irá também precisar do nome/senha de um Administrador de Domínio para juntar "
-"a máquina ao domínio Windows(TM).\n"
-"Se a rede ainda não está activada, o DrakX irá tentar juntar-se ao domínio a "
-"seguir ao passo da configuração da rede.\n"
-"Se este passo falhar por alguma razão e a autenticação no domínio não "
-"funcionar, execute 'smbpasswd -j DOMÍNIO -U UTILIZADOR%%SENHA' usando o seu "
-"Domínio Windows (TM), e o Nome/Senha do Admin, depois do arranque do "
-"sistema.\n"
-"O comando 'wbinfo -t' irá testar se os segredos da sua autenticação estão "
+"Para que isto funcione para um W2K PDC, irá provavelmente precisar de "
+"ter o administrador a executar: C:\\>net localgroup \"Acesso Compatível "
+"Pre-Windows 2000\" everyone /add e reinicie o servidor.\n"
+"Irá também precisar do nome/senha de um Administrador de Domínio para "
+"juntar a máquina ao domínio Windows(TM).\n"
+"Se a rede ainda não está activada, o DrakX irá tentar juntar-se ao domínio "
+"a seguir ao passo de configuração da rede.\n"
+"Se por alguma razão este passo falhar e a autenticação no domínio não "
+"funcionar, execute 'smbpasswd -j DOMÍNIO -U UTILIZADOR%%SENHA' "
+"usando o seu Domínio Windows (TM), e o Nome/Senha do Admin, depois "
+"do arranque do sistema.\n"
+"O comando 'wbinfo -t' irá testar se os seus segredos de autenticação estão "
 "bem."
 
 #: authentication.pm:159
 #, c-format
 msgid "Authentication Windows Domain"
-msgstr "Autenticação do Domínio Windows"
+msgstr "Autenticação de Domínio Windows"
 
 #: authentication.pm:161
 #, c-format
@@ -957,12 +957,12 @@ msgstr "Directório Activo Realm "
 #: authentication.pm:164
 #, c-format
 msgid "Domain Admin User Name"
-msgstr "Nome do Utilizador/Administrador do Domínio"
+msgstr "Nome de Utilizador/Administrador do Domínio"
 
 #: authentication.pm:165
 #, c-format
 msgid "Domain Admin Password"
-msgstr "Senha de Admin do Domínio"
+msgstr "Senha de Administrador do Domínio"
 
 #: authentication.pm:181 authentication.pm:198
 #, c-format
@@ -978,7 +978,7 @@ msgstr "Método de autenticação"
 #: authentication.pm:189
 #, c-format
 msgid "No password"
-msgstr "Nenhuma senha"
+msgstr "Sem senha"
 
 #: authentication.pm:210
 #, c-format
@@ -988,7 +988,7 @@ msgstr "Essa senha é demasiado simples (pelo menos deve ter %d caracteres)"
 #: authentication.pm:351
 #, c-format
 msgid "Can not use broadcast with no NIS domain"
-msgstr "Não foi possível usar 'broadcast' sem um domínio NIS"
+msgstr "Não é possível usar 'broadcast' sem um domínio NIS"
 
 # NOTE: this message will be displayed at boot time; that is
 # only the ascii charset will be available on most machines
@@ -1006,7 +1006,7 @@ msgid ""
 msgstr ""
 "Bem-vindo ao menu de escolha do sistema operativo!\n"
 "\n"
-"Escolha um sistema operativo da lista em cima ou\n"
+"Escolha um sistema operativo da lista acima ou\n"
 "espere pelo arranque predefinido.\n"
 "\n"
 
@@ -1038,7 +1038,7 @@ msgstr "SILO"
 #: bootloader.pm:1114
 #, c-format
 msgid "not enough room in /boot"
-msgstr "não há espaço suficiente em /boot"
+msgstr "sem espaço suficiente em /boot"
 
 #: bootloader.pm:1681
 #, c-format
@@ -1061,12 +1061,12 @@ msgid ""
 "choose \"%s\""
 msgstr ""
 "O carregador de arranque não pode ser instalado correctamente. Tem de "
-"arrancar usar em modo de emergência e escolher \"%s\""
+"arrancar o modo de emergência e escolher \"%s\""
 
 #: bootloader.pm:1748
 #, c-format
 msgid "Re-install Boot Loader"
-msgstr "Reinstalar o carregador de arranque"
+msgstr "Reinstalar Carregador de Arranque"
 
 #: common.pm:132
 #, c-format
@@ -1160,7 +1160,7 @@ msgstr "Opções"
 #: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
 #, c-format
 msgid "Done"
-msgstr "Pronto"
+msgstr "Concluído"
 
 #: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:115 diskdrake/interactive.pm:229
 #: diskdrake/interactive.pm:242 diskdrake/interactive.pm:386
@@ -1210,7 +1210,7 @@ msgstr "Opções: %s"
 #: fs/partitioning_wizard.pm:266 fs/partitioning_wizard.pm:271
 #, c-format
 msgid "Partitioning"
-msgstr "Particionar"
+msgstr "Particionamento"
 
 #: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1059
 #: diskdrake/interactive.pm:1069 diskdrake/interactive.pm:1122
@@ -1221,7 +1221,7 @@ msgstr "Leia com atenção!"
 #: diskdrake/hd_gtk.pm:93
 #, c-format
 msgid "Please make a backup of your data first"
-msgstr "Por favor primeiro faça uma salvaguarda dos seus dados"
+msgstr "Por favor faça primeiro uma salvaguarda dos seus dados"
 
 #: diskdrake/hd_gtk.pm:94 diskdrake/interactive.pm:222
 #, c-format
@@ -1264,7 +1264,7 @@ msgid ""
 msgstr ""
 "Tem uma partição Microsoft Windows grande.\n"
 "Sugiro que redimensione primeiro esta partição\n"
-"(clique nela, depois clique em \"Redimensionar\")"
+"(clique na partição, e clique em \"Redimensionar\")"
 
 #: diskdrake/hd_gtk.pm:203
 #, c-format
@@ -1314,12 +1314,12 @@ msgstr "HFS"
 #: diskdrake/hd_gtk.pm:351
 #, c-format
 msgid "Windows"
-msgstr "Janelas"
+msgstr "Windows"
 
 #: diskdrake/hd_gtk.pm:352 services.pm:158
 #, c-format
 msgid "Other"
-msgstr "Outros"
+msgstr "Outro"
 
 #: diskdrake/hd_gtk.pm:352 diskdrake/interactive.pm:1239
 #, c-format
@@ -1351,7 +1351,7 @@ msgstr "Esta partição já está vazia"
 #: diskdrake/hd_gtk.pm:389
 #, c-format
 msgid "Use ``Unmount'' first"
-msgstr "Use ``Desmontar'' primeiro"
+msgstr "Use primeiro ``Desmontar''"
 
 #: diskdrake/hd_gtk.pm:389
 #, c-format
@@ -1409,7 +1409,7 @@ msgstr "Sair sem gravar"
 #: diskdrake/interactive.pm:274
 #, c-format
 msgid "Quit without writing the partition table?"
-msgstr "Sair sem escrever a tabela de partições?"
+msgstr "Sair sem gravar a tabela de partições?"
 
 #: diskdrake/interactive.pm:279
 #, c-format
@@ -1420,7 +1420,7 @@ msgstr "Deseja gravar as modificações em /etc/fstab?"
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
-"Precisa reiniciar para que as modificações na tabela de partições tenham "
+"Precisa reiniciar para que as modificações na tabela de partições surtam "
 "efeito"
 
 #: diskdrake/interactive.pm:291
@@ -1431,8 +1431,8 @@ msgid ""
 "Quit anyway?"
 msgstr ""
 "Deve formatar a partição %s!\n"
-"Senão nenhuma entrada para o ponto de montagem %s será escrita no fstab.\n"
-"Desistir na mesma?"
+"Senão nenhuma entrada do ponto de montagem %s será gravada em fstab.\n"
+"Sair mesmo assim?"
 
 #: diskdrake/interactive.pm:304
 #, c-format
@@ -1463,7 +1463,7 @@ msgstr "Todas as partições primárias estão usadas"
 #: diskdrake/interactive.pm:344
 #, c-format
 msgid "I can not add any more partitions"
-msgstr "Não posso adicionar mais partições"
+msgstr "Não é possível adicionar mais partições"
 
 #: diskdrake/interactive.pm:345
 #, c-format
@@ -1521,12 +1521,12 @@ msgstr "Formatar"
 #: diskdrake/interactive.pm:429 diskdrake/interactive.pm:842
 #, c-format
 msgid "Add to RAID"
-msgstr "Adicionar ao RAID"
+msgstr "Adicionar a RAID"
 
 #: diskdrake/interactive.pm:430 diskdrake/interactive.pm:859
 #, c-format
 msgid "Add to LVM"
-msgstr "Adicionar ao LVM"
+msgstr "Adicionar a LVM"
 
 #: diskdrake/interactive.pm:432
 #, c-format
@@ -1536,12 +1536,12 @@ msgstr "Apagar"
 #: diskdrake/interactive.pm:433
 #, c-format
 msgid "Remove from RAID"
-msgstr "Remover do RAID"
+msgstr "Remover de RAID"
 
 #: diskdrake/interactive.pm:434
 #, c-format
 msgid "Remove from LVM"
-msgstr "Remover do LVM"
+msgstr "Remover de LVM"
 
 #: diskdrake/interactive.pm:435
 #, c-format
@@ -1561,7 +1561,7 @@ msgstr "Criar"
 #: diskdrake/interactive.pm:491 diskdrake/interactive.pm:493
 #, c-format
 msgid "Create a new partition"
-msgstr "Criar uma nova partição"
+msgstr "Criar nova partição"
 
 #: diskdrake/interactive.pm:495
 #, c-format
@@ -1576,7 +1576,7 @@ msgstr "Tamanho em MB: "
 #: diskdrake/interactive.pm:500 diskdrake/interactive.pm:930
 #, c-format
 msgid "Filesystem type: "
-msgstr "Tipo do Sistema de Ficheiros: "
+msgstr "Tipo do sistema de ficheiros: "
 
 #: diskdrake/interactive.pm:506
 #, c-format
@@ -1596,7 +1596,7 @@ msgid ""
 "First remove a primary partition and create an extended partition."
 msgstr ""
 "Não pode criar uma nova partição\n"
-"(porque atingiu o numero máximo de partições primárias).\n"
+"(atingiu o numero máximo de partições primárias).\n"
 "Primeiro remova uma partição primária e crie uma partição extendida."
 
 #: diskdrake/interactive.pm:559
@@ -1607,7 +1607,7 @@ msgstr "Remover o ficheiro loopback?"
 #: diskdrake/interactive.pm:581
 #, c-format
 msgid "After changing type of partition %s, all data on this partition will be lost"
-msgstr "Após alterar o tipo da partição %s, todos os dados na partição serão perdidos"
+msgstr "Após alterar o tipo da partição %s, todos os dados nesta partição serão perdidos"
 
 #: diskdrake/interactive.pm:594
 #, c-format
@@ -1650,9 +1650,9 @@ msgid ""
 "Can not unset mount point as this partition is used for loop back.\n"
 "Remove the loopback first"
 msgstr ""
-"Não é possível mudar o ponto de montagem enquanto\n"
-"esta partição for usada para loopback.\n"
-"Remova o loopback primeiro"
+"Não pode mudar o ponto de montagem enquanto esta partição for "
+"usada para loopback.\n"
+"Remova primeiro o loopback"
 
 #: diskdrake/interactive.pm:683
 #, c-format
@@ -1668,7 +1668,7 @@ msgstr "A redimensionar"
 #: diskdrake/interactive.pm:707
 #, c-format
 msgid "Computing FAT filesystem bounds"
-msgstr "A computar os limites do sistema de ficheiros FAT"
+msgstr "A calcular os limites do sistema de ficheiros FAT"
 
 #: diskdrake/interactive.pm:743
 #, c-format
@@ -1683,7 +1683,7 @@ msgstr "Todos os dados desta partição devem ser salvaguardados"
 #: diskdrake/interactive.pm:750
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
-msgstr "Após redimensionar a partição %s, todos os dados da partição serão perdidos"
+msgstr "Após redimensionar a partição %s, todos os dados desta partição serão perdidos"
 
 #: diskdrake/interactive.pm:757
 #, c-format
@@ -1712,8 +1712,8 @@ msgid ""
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
 "Para assegurar a integridade dos dados após redimensionar\n"
-"a(s) partição(ões), a verificação do sistema de ficheiros irá ser\n"
-"executada no próximo arranque no Windows(TM)"
+"a(s) partição(ões), as verificações do sistema de ficheiros irão ser\n"
+"executada no próximo arranque do Windows(TM)"
 
 #: diskdrake/interactive.pm:842
 #, c-format
@@ -1742,7 +1742,7 @@ msgid ""
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
 "O volume físico %s ainda está em uso.\n"
-"Deseja remover as extensões físicas usadas neste volume para outros volumes?"
+"Deseja mover as extensões físicas usadas neste volume para outros volumes?"
 
 #: diskdrake/interactive.pm:896
 #, c-format
@@ -1787,7 +1787,7 @@ msgstr "Opções de montagem"
 #: diskdrake/interactive.pm:976
 #, c-format
 msgid "Various"
-msgstr "Diversos"
+msgstr "Várias"
 
 #: diskdrake/interactive.pm:1041
 #, c-format
@@ -1807,7 +1807,7 @@ msgstr "tamanho do bloco em KiB"
 #: diskdrake/interactive.pm:1060
 #, c-format
 msgid "Be careful: this operation is dangerous."
-msgstr "Cuidado: esta operação é perigosa."
+msgstr "Atenção: esta operação é perigosa."
 
 #: diskdrake/interactive.pm:1075
 #, c-format
@@ -1822,12 +1822,12 @@ msgstr "Precisa reiniciar antes que as modificações tenham efeito"
 #: diskdrake/interactive.pm:1122
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
-msgstr "A tabela de partições do controlador %s irá ser escrita no disco!"
+msgstr "A tabela de partições do dispositivo %s irá ser escrita no disco!"
 
 #: diskdrake/interactive.pm:1148
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
-msgstr "Após formatar a partição %s, todos os dados serão perdidos"
+msgstr "Após formatar a partição %s, todos os dados nesta partição serão perdidos"
 
 #: diskdrake/interactive.pm:1153 fs/partitioning.pm:49
 #, c-format
@@ -1857,14 +1857,14 @@ msgstr ""
 "O directório %s já contém dados\n"
 "(%s)\n"
 "\n"
-"Pode escolher entre mover os ficheiros para uma partição que será aí montada "
-"ou deixar os ficheiros onde estão (onde ficarão escondidos pelos conteúdos "
-"da partição montada)"
+"Pode escolher entre mover os ficheiros para a partição que aí será montada "
+"ou deixar os ficheiros onde estão (que resultará em esconder os ficheiros "
+"pelos conteúdos da partição montada)"
 
 #: diskdrake/interactive.pm:1183
 #, c-format
 msgid "Moving files to the new partition"
-msgstr "A mover os ficheiros para a nova partição"
+msgstr "A mover ficheiros para a nova partição"
 
 #: diskdrake/interactive.pm:1187
 #, c-format
@@ -1884,7 +1884,7 @@ msgstr "a partição %s é agora conhecida como %s"
 #: diskdrake/interactive.pm:1206
 #, c-format
 msgid "Partitions have been renumbered: "
-msgstr "As partições foram renúmeradas: "
+msgstr "As partições foram renumeradas: "
 
 #: diskdrake/interactive.pm:1226 diskdrake/interactive.pm:1288
 #, c-format
@@ -1894,12 +1894,12 @@ msgstr "Dispositivo: "
 #: diskdrake/interactive.pm:1227
 #, c-format
 msgid "Volume label: "
-msgstr "Etiqueta do Volume: "
+msgstr "Nome do volume: "
 
 #: diskdrake/interactive.pm:1228
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
-msgstr "Letra do controlador DOS: %s (apenas um palpite)\n"
+msgstr "Letra do dispositivo DOS: %s (apenas um palpite)\n"
 
 #: diskdrake/interactive.pm:1232 diskdrake/interactive.pm:1241
 #: diskdrake/interactive.pm:1306
@@ -1972,8 +1972,8 @@ msgid ""
 "Partition booted by default\n"
 "    (for MS-DOS boot, not for lilo)\n"
 msgstr ""
-"Partição de arranque por omissão\n"
-"    (para arranque MS-DOS, não para lilo)\n"
+"Partição de arranque predefinida\n"
+"    (para arranque MS-DOS, não para o lilo)\n"
 
 #: diskdrake/interactive.pm:1261
 #, c-format
@@ -2004,9 +2004,9 @@ msgid ""
 "probably leave it alone.\n"
 msgstr ""
 "\n"
-"A possibilidade é, esta partição\n"
-"ser uma partição Controladora.\n"
-"Recomenda-se que não se mexa.\n"
+"Provavelmente esta partição"
+"é uma partição com controlador.\n"
+"Não deve mexer na partição.\n"
 
 #: diskdrake/interactive.pm:1271
 #, c-format
@@ -2017,19 +2017,19 @@ msgid ""
 "dual-booting your system.\n"
 msgstr ""
 "\n"
-"Esta partição especial\n"
-"Bootstrap é para\n"
-"arranque dual do sistema.\n"
+"Esta partição especial de arranque\n"
+"(bootstrap) é para\n"
+"arranque de vários sistemas.\n"
 
 #: diskdrake/interactive.pm:1280
 #, c-format
 msgid "Free space on %s (%s)"
-msgstr "Espaço vazio em %s (%s)"
+msgstr "Espaço livre em %s (%s)"
 
 #: diskdrake/interactive.pm:1289
 #, c-format
 msgid "Read-only"
-msgstr "Leitura-apenas"
+msgstr "Apenas-leitura"
 
 #: diskdrake/interactive.pm:1290
 #, c-format
@@ -2064,34 +2064,34 @@ msgstr "no canal %d id %d\n"
 #: diskdrake/interactive.pm:1338
 #, c-format
 msgid "Filesystem encryption key"
-msgstr "Senha de encriptação do sistema de ficheiros"
+msgstr "Chave de encriptação do sistema de ficheiros"
 
 #: diskdrake/interactive.pm:1339
 #, c-format
 msgid "Choose your filesystem encryption key"
-msgstr "Escolha a sua senha de encriptação do sistema de ficheiros"
+msgstr "Escolha a sua chave de encriptação de sistema de ficheiros"
 
 #: diskdrake/interactive.pm:1342
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr ""
-"Esta senha de encriptação é demasiado simples (pelo menos deve ter %d "
+"Esta chave de encriptação é demasiado simples (deve pelo menos ter %d "
 "caracteres de comprimento)"
 
 #: diskdrake/interactive.pm:1343
 #, c-format
 msgid "The encryption keys do not match"
-msgstr "As senhas de encriptação não correspondem"
+msgstr "As chaves de encriptação não correspondem"
 
 #: diskdrake/interactive.pm:1346
 #, c-format
 msgid "Encryption key"
-msgstr "Senha de encriptação"
+msgstr "Chave de encriptação"
 
 #: diskdrake/interactive.pm:1347
 #, c-format
 msgid "Encryption key (again)"
-msgstr "Senha de encriptação (novamente)"
+msgstr "Chave de encriptação (novamente)"
 
 #: diskdrake/interactive.pm:1349
 #, c-format
@@ -2114,12 +2114,12 @@ msgstr "Cancelar"
 #: diskdrake/smbnfs_gtk.pm:164
 #, c-format
 msgid "Can not login using username %s (bad password?)"
-msgstr "Não é possível autenticar com o nome de utilizador %s (senha errada?)"
+msgstr "Não é possível autenticar usando nome de utilizador %s (senha errada?)"
 
 #: diskdrake/smbnfs_gtk.pm:168 diskdrake/smbnfs_gtk.pm:177
 #, c-format
 msgid "Domain Authentication Required"
-msgstr "Autenticação do Domínio Requerida"
+msgstr "Necessário Autenticação do Domínio"
 
 #: diskdrake/smbnfs_gtk.pm:169
 #, c-format
@@ -2129,7 +2129,7 @@ msgstr "Que nome de utilizador"
 #: diskdrake/smbnfs_gtk.pm:169
 #, c-format
 msgid "Another one"
-msgstr "Mais outro"
+msgstr "Outro"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
@@ -2161,12 +2161,12 @@ msgstr "O pacote %s precisa ser instalado. Deseja-o instalar?"
 #: do_pkgs.pm:19 do_pkgs.pm:40 do_pkgs.pm:56
 #, c-format
 msgid "Could not install the %s package!"
-msgstr "Não foi possível instalar o pacote %s !"
+msgstr "Não é possível instalar o pacote %s!"
 
 #: do_pkgs.pm:24 do_pkgs.pm:61
 #, c-format
 msgid "Mandatory package %s is missing"
-msgstr "O pacote imperativo %s está em falta"
+msgstr "O pacote principal %s está em falta"
 
 #: do_pkgs.pm:35
 #, c-format
@@ -2190,7 +2190,7 @@ msgid ""
 "filesystems. Please check your hardware for the cause of this problem"
 msgstr ""
 "Ocorreu um erro - nenhum dispositivo válido foi encontrado para criar novos "
-"sistemas de ficheiros. Por favor verifique no material a causa deste problema"
+"sistemas de ficheiros. Por favor verifique no seu material a causa deste problema"
 
 #: fs/any.pm:62 fs/partitioning_wizard.pm:55
 #, c-format
@@ -2250,19 +2250,17 @@ msgstr "A activar a partição swap %s"
 #: fs/mount_options.pm:111
 #, c-format
 msgid "Use an encrypted file system"
-msgstr "Usar um sistema de ficheiros encriptado"
+msgstr "Usar sistema de ficheiros encriptado"
 
 #: fs/mount_options.pm:113
 #, c-format
 msgid "Flush write cache on file close"
-msgstr "Elimina a 'cache' de escrita ao fechar um ficheiro"
+msgstr "Eliminar 'cache' de escrita ao fechar ficheiro"
 
 #: fs/mount_options.pm:115
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
-msgstr ""
-"Activar registo da quota do grupo no disco e opcionalmente reforçar os "
-"limites"
+msgstr "Activar registo da quota de grupo no disco e opcionalmente reforçar limites"
 
 #: fs/mount_options.pm:117
 #, c-format
@@ -2297,7 +2295,7 @@ msgstr ""
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
 msgstr ""
-"Não interprete os caracteres ou blocos dos dispositivos especiais no sistema "
+"Não interpretar caracteres ou blocos especiais dos dispositivos no sistema "
 "de ficheiros."
 
 #: fs/mount_options.pm:128
@@ -2325,7 +2323,7 @@ msgstr ""
 #: fs/mount_options.pm:136
 #, c-format
 msgid "Mount the file system read-only."
-msgstr "Montar o sistema de ficheiros em leitura-apenas."
+msgstr "Montar sistema de ficheiros em apenas-leitura."
 
 #: fs/mount_options.pm:138
 #, c-format
@@ -2345,14 +2343,12 @@ msgstr "Permitir a um utilizador normal montar o sistema de ficheiros."
 #: fs/mount_options.pm:144
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
-msgstr ""
-"Activar contagem da quota do disco do utilizador, e opcionalmente reforçar "
-"os limites"
+msgstr "Activar contagem da quota de disco do utilizador, e opcionalmente reforçar limites"
 
 #: fs/mount_options.pm:146
 #, c-format
 msgid "Support \"user.\" extended attributes"
-msgstr "Suportar atributos \"utilizador.\" extendidos"
+msgstr "Suportar atributos extendidos de \"utilizador.\""
 
 #: fs/mount_options.pm:148
 #, c-format
@@ -2362,7 +2358,7 @@ msgstr "Dar acesso de escrita a utilizadores normais"
 #: fs/mount_options.pm:150
 #, c-format
 msgid "Give read-only access to ordinary users"
-msgstr "Dar acesso de leitura-apenas a utilizadores normais"
+msgstr "Dar acesso de apenas-leitura a utilizadores normais"
 
 #: fs/mount_point.pm:80
 #, c-format
@@ -2372,7 +2368,7 @@ msgstr "Duplicar ponto de montagem %s"
 #: fs/mount_point.pm:95
 #, c-format
 msgid "No partition available"
-msgstr "Sem partições disponíveis"
+msgstr "Nenhuma partição disponível"
 
 #: fs/mount_point.pm:98
 #, c-format
@@ -2387,7 +2383,7 @@ msgstr "Escolha os pontos de montagem"
 #: fs/partitioning.pm:46
 #, c-format
 msgid "Choose the partitions you want to format"
-msgstr "Escolha as partições que quer formatar"
+msgstr "Escolha as partições que deseja formatar"
 
 #: fs/partitioning.pm:76
 #, c-format
@@ -2396,12 +2392,12 @@ msgid ""
 "you can lose data)"
 msgstr ""
 "Falha na verificação do sistema de ficheiros %s. Deseja corrigir os erros? "
-"(cuidado, pode perder dados)"
+"(atenção, pode perder dados)"
 
 #: fs/partitioning.pm:79
 #, c-format
 msgid "Not enough swap space to fulfill installation, please add some"
-msgstr "Sem espaço swap para concluir a instalação, por favor adicione mais"
+msgstr "Sem espaço swap suficiente para concluir a instalação, por favor adicione mais"
 
 #: fs/partitioning_wizard.pm:47
 #, c-format
@@ -2412,7 +2408,7 @@ msgid ""
 msgstr ""
 "Precisa ter uma partição de raiz.\n"
 "Para isso, crie uma partição (ou clique numa existente).\n"
-"Depois escolha a acção ``Ponto de montagem'' e defina-o como `/'"
+"Depois escolha a acção ``Ponto de montagem'' e defina-a para `/'"
 
 #: fs/partitioning_wizard.pm:52
 #, c-format
@@ -2433,7 +2429,7 @@ msgstr "Usar espaço livre"
 #: fs/partitioning_wizard.pm:82
 #, c-format
 msgid "Not enough free space to allocate new partitions"
-msgstr "Sem espaço livre suficiente para alocar as novas partições"
+msgstr "Sem espaço livre suficiente para alocar novas partições"
 
 #: fs/partitioning_wizard.pm:90
 #, c-format
@@ -2478,7 +2474,7 @@ msgstr "Não há partições FAT para usar como loopback (ou não tem espaço su
 #: fs/partitioning_wizard.pm:122
 #, c-format
 msgid "Use the free space on the Microsoft Windows® partition"
-msgstr "Usar o espaço livre na partição Windows"
+msgstr "Usar o espaço livre na partição Microsoft Windows®"
 
 #: fs/partitioning_wizard.pm:124
 #, c-format
@@ -2507,7 +2503,7 @@ msgid ""
 "the Mandriva Linux installation."
 msgstr ""
 "A sua partição Microsoft Windows® está demasiado fragmentada. Por favor "
-"reinicie o seu computador para Microsoft Windows®, execute o utilitário "
+"reinicie o seu computador no Microsoft Windows®, execute o utilitário "
 "``defrag'', depois recomece a instalação Mandriva Linux."
 
 #: fs/partitioning_wizard.pm:151
@@ -2537,10 +2533,10 @@ msgstr ""
 "\n"
 "Atenção: esta operação é perigosa. Se ainda não a tiver feito, deve primeiro "
 "sair da instalação, executar \"chkdsk c:\" a partir de uma linha de comandos "
-"no Microsoft Windows® (cuidado, não chega apenas executar o programa gráfico "
-"\"scandisk\", execute numa linda de comandos o \"chkdsk\"!), opcionalmente "
-"pode correr o defrag, depois reinicie a instalação. Deve também salvaguardar "
-"os seus dados.\n"
+"no Microsoft Windows® (atenção, não chega apenas executar o programa gráfico "
+"\"scandisk\", certifique-se que execute numa linda de comandos o \"chkdsk\"!), "
+"opcionalmente pode correr o defrag, depois reinicie a instalação. Deve também "
+"salvaguardar os seus dados.\n"
 "\n"
 "\n"
 "Quando tiver certeza, prima %s."
@@ -2575,12 +2571,12 @@ msgstr "A redimensionar a partição Microsoft Windows®"
 #: fs/partitioning_wizard.pm:178
 #, c-format
 msgid "FAT resizing failed: %s"
-msgstr "Falha no redimensionamento FAT: %s"
+msgstr "Redimensionamento FAT falhado: %s"
 
 #: fs/partitioning_wizard.pm:193
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
-msgstr "Não há partições FAT para redimensionar (ou espaço livre insuficiente)"
+msgstr "Não há partições FAT para redimensionar (ou espaço livre suficiente)"
 
 #: fs/partitioning_wizard.pm:198
 #, c-format
@@ -2600,9 +2596,7 @@ msgstr "Tem mais que um disco rígido, em que disco deseja instalar o linux?"
 #: fs/partitioning_wizard.pm:206
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr ""
-"TODAS as partições existentes e os seus dados serão perdidos no dispositivo %"
-"s"
+msgstr "TODAS as partições existentes e seus dados serão perdidos no dispositivo %s"
 
 #: fs/partitioning_wizard.pm:217
 #, c-format
@@ -2661,7 +2655,7 @@ msgstr "servidor"
 #: fsedit.pm:116
 #, c-format
 msgid "BIOS software RAID detected on disks %s. Activate it?"
-msgstr "Programa RAID de BIOS detectado nos discos %s. Deseja-o activar?"
+msgstr "Programa BIOS RAID detectado nos discos %s. Deseja-o activar?"
 
 #: fsedit.pm:230
 #, c-format
@@ -2674,17 +2668,17 @@ msgid ""
 "\n"
 "Do you agree to lose all the partitions?\n"
 msgstr ""
-"Não foi possível ler a tabela de partição de %s, está demasiado corrompida:\n"
-"Pode-se tentar continuar, a apagar as partições corrompidas (TODOS OS\n"
-"DADOS serão perdidos!). A outra solução é não deixar o DrakX modificar\n"
-"a tabela de partições. (o erro é %s)\n"
+"Não é possível ler a tabela de partição de %s, está demasiado corrompida:\n"
+"Pode tentar continuar, e apagar as partições corrompidas (TODOS\n"
+"OS DADOS serão perdidos!). A outra solução é não permitir ao DrakX\n"
+"modificar a tabela de partições. (o erro é %s)\n"
 "\n"
 "Concorda em perder todas as partições?\n"
 
 #: fsedit.pm:403
 #, c-format
 msgid "Mount points must begin with a leading /"
-msgstr "Os pontos de montagem devem começar com uma /"
+msgstr "Os pontos de montagem devem começar com /"
 
 #: fsedit.pm:404
 #, c-format
@@ -2703,9 +2697,9 @@ msgid ""
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
-"Seleccionou uma partição RAID como raiz (/).\n"
-"Nenhum carregador de arranque a consegue aceder sem uma\n"
-"partição /boot. Certifique-se que adiciona uma partição /boot"
+"Seleccionou uma partição RAID como raiz (/). Nenhum\n"
+"carregador de arranque consegue aceder a esta partição sem\n"
+"uma partição /boot. Certifique-se que adiciona uma partição /boot"
 
 #: fsedit.pm:415
 #, c-format
@@ -2713,8 +2707,8 @@ msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr ""
-"Não pode usar Volumes Lógicos LVM para pontos de montagem %s já que atrasa "
-"os volumes físicos"
+"Não pode usar Volumes Lógicos LVM para pontos de montagem %s "
+"já que atrasa os volumes físicos"
 
 #: fsedit.pm:417
 #, c-format
@@ -2725,14 +2719,14 @@ msgid ""
 "You should create a /boot partition first"
 msgstr ""
 "Seleccionou um Volume Lógico LVM como raiz (/).\n"
-"O carregador de arranque não o consegue gerir quando o volume atrasa volumes "
-"físicos.\n"
-"Deve criar primeiro uma partição de arranque /boot"
+"O carregador de arranque não o consegue gerir quando o volume atrasa "
+"os volumes físicos.\n"
+"Deve primeiro criar uma partição de arranque /boot"
 
 #: fsedit.pm:421 fsedit.pm:423
 #, c-format
 msgid "This directory should remain within the root filesystem"
-msgstr "Este directório deve permanecer dentro do sistema de ficheiros raiz"
+msgstr "Este directório deve permanecer dentro do sistema de ficheiros de raiz"
 
 #: fsedit.pm:425 fsedit.pm:427
 #, c-format
@@ -2811,7 +2805,7 @@ msgstr "Placa DVB"
 #: harddrake/data.pm:164
 #, c-format
 msgid "Tvcard"
-msgstr "Placa de TV"
+msgstr "Placa TV"
 
 #: harddrake/data.pm:174
 #, c-format
@@ -2861,12 +2855,12 @@ msgstr "Placas de rede WAN"
 #: harddrake/data.pm:267
 #, c-format
 msgid "Bluetooth devices"
-msgstr "Dispositivos Bluetooth"
+msgstr "Dispositivos bluetooth"
 
 #: harddrake/data.pm:276
 #, c-format
 msgid "Ethernetcard"
-msgstr "Placa Ethernet"
+msgstr "Placa ethernet"
 
 #: harddrake/data.pm:293
 #, c-format
@@ -3015,8 +3009,8 @@ msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
 "currently uses \"%s\""
 msgstr ""
-"Não há nenhum controlador alternativo OSS/ALSA conhecido para a sua placa de "
-"som (%s) que actualmente usa \"%s\""
+"Não há nenhum controlador alternativo OSS/ALSA conhecido para a sua "
+"placa de som (%s) que actualmente usa \"%s\""
 
 #: harddrake/sound.pm:245
 #, c-format
@@ -3029,8 +3023,8 @@ msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
 "sound card (%s)."
 msgstr ""
-"Aqui pode seleccionar um controlador alternativo (seja OSS ou ALSA) para a "
-"sua placa de som (%s)."
+"Aqui pode seleccionar um controlador alternativo (seja OSS ou ALSA) "
+"para a sua placa de som (%s)."
 
 #. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
@@ -3046,7 +3040,7 @@ msgstr ""
 "\n"
 "\n"
 "A sua placa actualmente usa o controlador %s\"%s\" (o controlador "
-"predefinido para a sua placa é o \"%s\")"
+"predefinido para a sua placa é \"%s\")"
 
 #: harddrake/sound.pm:254
 #, c-format
@@ -3118,8 +3112,8 @@ msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
 "driver at \"%s\"."
 msgstr ""
-"Não há nenhum controlador grátis para a sua placa de som (%s), mas existe um "
-"controlador proprietário em \"%s\"."
+"Não há nenhum controlador grátis para a sua placa de som (%s), mas "
+"existe um controlador proprietário em \"%s\"."
 
 #: harddrake/sound.pm:297
 #, c-format
