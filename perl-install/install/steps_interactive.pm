@@ -339,7 +339,6 @@ sub choosePackages {
 
     my $w = $o->wait_message('', N("Looking for available packages..."));
     my $availableC = &install::steps::choosePackages;
-    my $individual;
 
     require install::pkgs;
 
@@ -354,9 +353,12 @@ sub choosePackages {
     }
 
     my $min_mark = 4;
+    my ($individual, $chooseGroups);
+
+    _chooseDesktop($o, $o->{rpmsrate_flags_chosen}, \$chooseGroups) if !$o->{upgrade};
 
   chooseGroups:
-    $o->chooseGroups($o->{packages}, $o->{compssUsers}, $min_mark, \$individual) if !$o->{isUpgrade};
+    $o->chooseGroups($o->{packages}, $o->{compssUsers}, $min_mark, \$individual) if $chooseGroups;
 
     ($o->{packages_}{ind}) =
       install::pkgs::setSelectedFromCompssList($o->{packages}, $o->{rpmsrate_flags_chosen}, $min_mark, $availableC);
@@ -402,6 +404,30 @@ The format is the same as auto_install generated files."),
     } else {
 	log::l("save package selection");
 	install::any::g_default_packages($o);
+    }
+}
+sub _chooseDesktop {
+    my ($o, $rpmsrate_flags_chosen, $chooseGroups) = @_;
+
+    my @l = (
+	N_("Install Mandriva KDE Desktop"),
+	N_("Install Mandriva GNOME Desktop"),
+	N_("Custom install"),
+    );
+
+    my $choice;
+    $o->ask_from_({}, [
+	{ val => \$choice, list => \@l, type => 'list', format => \&translate },
+    ]);
+    log::l("chosen Desktop: $choice");
+    if (my ($desktop) = $choice =~ /(KDE|GNOME)/) {
+	my ($want, $dontwant) = ($desktop, grep { $desktop ne $_ } 'KDE', 'GNOME');
+	$rpmsrate_flags_chosen->{"CAT_$want"} = 1;
+	$rpmsrate_flags_chosen->{"CAT_$dontwant"} = 0;
+	my @flags = map_each { if_($::b, $::a) } %$rpmsrate_flags_chosen;
+	log::l("flags ", join(' ', sort @flags));
+    } else {
+	$$chooseGroups = 1;
     }
 }
 sub chooseGroups {
