@@ -145,7 +145,7 @@ sub bestKernelPackage {
       detect_devices::dmi_detect_memory() > 3.8 * 1024 ? '-server' :
       '-desktop';
 
-    my @kernels = grep { $_ } map { packageByName($packages, "kernel$_-latest") } @preferred_exts, '';
+    my @kernels = grep { $_ } map { packageByName($packages, "kernel$_-latest") } @preferred_exts;
 
     log::l("bestKernelPackage (" . join(':', @preferred_exts) . "): " . join(' ', map { $_->name } @kernels) . (@kernels > 1 ? ' (choosing the first)' : ''));
 
