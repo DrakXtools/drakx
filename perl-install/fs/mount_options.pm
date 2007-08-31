@@ -41,7 +41,7 @@ sub unpack {
 	$non_defaults->{$_} = 1 foreach @$l;
     }
 
-    $non_defaults->{relatime} = 1 if isTrueFS($part);
+    $non_defaults->{relatime} = 1 if isTrueLocalFS($part);
     $non_defaults->{encrypted} = 1;
 
     my $defaults = { reverse %$non_defaults };
@@ -201,7 +201,7 @@ sub set_default {
 	$options->{flush} = 1;
     }
 
-    if (isTrueFS($part)) {
+    if (isTrueLocalFS($part)) {
 	#- noatime on laptops (do not wake up the hd)
 	#- otherwise relatime (wake up the hd less often / better performances)
 	#- Do  not  update  inode  access times on this
