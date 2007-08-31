@@ -163,7 +163,7 @@ sub create_logo_window {
 
     mygtk2::may_destroy($o->{logo_window});
 
-    my $file = $o->{meta_class} eq 'firewall' ? "logo-mandriva-Firewall.png" : "logo-mandriva.png";
+    my $file = "logo-mandriva.png";
 
     $o->{logo_window} =
       gtknew('Window', 

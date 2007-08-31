@@ -356,7 +356,7 @@ sub choosePackages {
     my $min_mark = 4;
 
   chooseGroups:
-    $o->chooseGroups($o->{packages}, $o->{compssUsers}, $min_mark, \$individual) if !$o->{isUpgrade} && $o->{meta_class} ne 'desktop';
+    $o->chooseGroups($o->{packages}, $o->{compssUsers}, $min_mark, \$individual) if !$o->{isUpgrade};
 
     ($o->{packages_}{ind}) =
       install::pkgs::setSelectedFromCompssList($o->{packages}, $o->{rpmsrate_flags_chosen}, $min_mark, $availableC);
@@ -364,7 +364,7 @@ sub choosePackages {
     $o->choosePackagesTree($o->{packages}) or goto chooseGroups if $individual;
 
     install::any::warnAboutRemovedPackages($o, $o->{packages});
-    install::any::warnAboutNaughtyServers($o) or goto chooseGroups if !$o->{isUpgrade} && $o->{meta_class} ne 'firewall';
+    install::any::warnAboutNaughtyServers($o) or goto chooseGroups if !$o->{isUpgrade};
 }
 
 sub choosePackagesTree {
@@ -525,7 +525,6 @@ sub reallyChooseGroups {
 		  changed => sub { $size_text = &$size_to_display },
 		 };
 	   } @$compssUsers),
-	 if_($o->{meta_class} eq 'desktop', { text => N("All"), val => \$all, type => 'bool' }),
 	 if_($individual, { text => N("Individual package selection"), val => $individual, advanced => 1, type => 'bool' }),
     ]);
 
@@ -615,17 +614,12 @@ sub updatemodules {
 #------------------------------------------------------------------------------
 sub configureNetwork {
     my ($o) = @_;
-    if ($o->{meta_class} eq 'firewall') {
-	require network::netconnect;
-	network::netconnect::real_main($o->{net}, $o, $o->{modules_conf});
-    } else {
 	#- don't overwrite configuration in a network install
 	if (!install::any::is_network_install($o)) {
 	    require network::network;
 	    network::network::easy_dhcp($o->{net}, $o->{modules_conf});
 	}
 	$o->SUPER::configureNetwork;
-    }
 }
 
 #------------------------------------------------------------------------------
@@ -1006,13 +1000,6 @@ sub check_security_level {
 
 sub miscellaneous {
     my ($o, $_clicked) = @_;
-
-    if (0 && $o->{meta_class} ne 'desktop' && $o->{meta_class} ne 'firewall' && !$o->{isUpgrade}) {
-	require security::level;
-	security::level::level_choose($o, \$o->{security}, \$o->{libsafe}, \$o->{security_user});
-
-     check_security_level($o) or goto &miscellaneous;
-    }
 
     install::steps::miscellaneous($o);
 }
