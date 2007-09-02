@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
 "POT-Creation-Date: 2007-08-27 20:13+0200\n"
-"PO-Revision-Date: 2007-08-12 10:41+0200\n"
+"PO-Revision-Date: 2007-09-01 13:20+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -199,8 +199,7 @@ msgstr "avgrens"
 
 #: any.pm:401
 #, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
+msgid "Option ``Restrict command line options'' is of no use without a password"
 msgstr "Valet «Avgrens kommandolinjeval» er ubrukeleg utan passord"
 
 #: any.pm:403
@@ -394,10 +393,8 @@ msgstr "Skriv inn brukarnamn"
 
 #: any.pm:745
 #, c-format
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
-msgstr ""
-"Brukarnamnet kan berre innehelda små bokstavar, tala og teikna «-» og «_»"
+msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgstr "Brukarnamnet kan berre innehelda små bokstavar, tala og teikna «-» og «_»"
 
 #: any.pm:746
 #, c-format
@@ -430,9 +427,9 @@ msgid "%s should be above 500. Accept anyway?"
 msgstr "%s må vera over 500. Vil du likevel bruka dette?"
 
 #: any.pm:768
-#, fuzzy, c-format
+#, c-format
 msgid "User management"
-msgstr "Brukarnamn"
+msgstr "Brukarhandtering"
 
 #: any.pm:775 authentication.pm:182
 #, c-format
@@ -440,11 +437,9 @@ msgid "Set administrator (root) password"
 msgstr "Vel passord for systemansvarleg («root»)"
 
 #: any.pm:780
-#, fuzzy, c-format
+#, c-format
 msgid "Enter a user"
-msgstr ""
-"Skriv inn ny brukar\n"
-"%s"
+msgstr "Skriv inn ny brukar"
 
 #: any.pm:781
 #, c-format
@@ -631,8 +626,7 @@ msgstr ""
 
 #: any.pm:1126
 #, c-format
-msgid ""
-"You can export using NFS or SMB. Please select which you would like to use."
+msgid "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Du kan eksportera med NFS og SMB. Vel kven av dei du vil bruka."
 
 #: any.pm:1151
@@ -1032,8 +1026,7 @@ msgstr "Du kan ikkje installera oppstartslastaren på ein «%s»-partisjon\n"
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
 "renumbered"
-msgstr ""
-"Oppstartslastaren må oppdaterast, då partisjonane har fått ny rekkjefølgje"
+msgstr "Oppstartslastaren må oppdaterast, då partisjonane har fått ny rekkjefølgje"
 
 #: bootloader.pm:1747
 #, c-format
@@ -1267,14 +1260,14 @@ msgid "Unknown"
 msgstr "Ukjend"
 
 #: diskdrake/hd_gtk.pm:354
-#, fuzzy, c-format
+#, c-format
 msgid "Ext3"
-msgstr "Avslutt"
+msgstr "Ext3"
 
 #: diskdrake/hd_gtk.pm:354
-#, fuzzy, c-format
+#, c-format
 msgid "XFS"
-msgstr "HFS"
+msgstr "XFS"
 
 #: diskdrake/hd_gtk.pm:354
 #, c-format
@@ -1399,8 +1392,7 @@ msgstr "Vil du lagra endringar i «/etc/fstab»"
 #: diskdrake/interactive.pm:286 fs/partitioning_wizard.pm:247
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr ""
-"Du må starta på nytt for at endringane i partisjontabellen skal trå i kraft"
+msgstr "Du må starta på nytt for at endringane i partisjontabellen skal trå i kraft"
 
 #: diskdrake/interactive.pm:291
 #, c-format
@@ -1586,8 +1578,7 @@ msgstr "Vil du fjerna filmonteringsfila?"
 
 #: diskdrake/interactive.pm:581
 #, c-format
-msgid ""
-"After changing type of partition %s, all data on this partition will be lost"
+msgid "After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "Når du har endra partisjonstypen til «%s» vil alle data på denne partisjonen "
 "vera tapt"
@@ -2114,8 +2105,7 @@ msgstr "Endå ein"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
+msgid "Please enter your username, password and domain name to access this host."
 msgstr "Skriv inn brukarnamn, passord og domenenamn for verten."
 
 #: diskdrake/smbnfs_gtk.pm:180
@@ -2250,11 +2240,13 @@ msgid ""
 msgstr "Ikkje oppdater tilgangstider på inodar på filsystemet."
 
 #: fs/mount_options.pm:123
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
-msgstr "Ikkje oppdater tilgangstider på inodar på filsystemet."
+msgstr ""
+"Oppdater tilgangstider på inodar på filsystemet på ein meir effektiv måte\n"
+"(gjev for eksempel raskare tilgang til njuskøar på njustenarar)."
 
 #: fs/mount_options.pm:123
 #, c-format
@@ -2997,10 +2989,9 @@ msgstr "Lydoppsett"
 msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
 "sound card (%s)."
-msgstr ""
-"Her kan du velja ein annan OSS- eller ALSA-drivar for lydkortet ditt («%s»)."
+msgstr "Her kan du velja ein annan OSS- eller ALSA-drivar for lydkortet ditt («%s»)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:252
@@ -4997,8 +4988,7 @@ msgstr "Klarte ikkje installera pakkane for deling av skannar(ar)."
 #: scanner.pm:201
 #, c-format
 msgid "Your scanner(s) will not be available for non-root users."
-msgstr ""
-"Skannaren/-ane vil ikkje vera tilgjengeleg for andre brukarar enn «root»."
+msgstr "Skannaren/-ane vil ikkje vera tilgjengeleg for andre brukarar enn «root»."
 
 #: security/help.pm:11
 #, c-format
@@ -5053,8 +5043,7 @@ msgstr "Godta direkte «root»-innlogging."
 
 #: security/help.pm:33
 #, c-format
-msgid ""
-"Allow the list of users on the system on display managers (kdm and gdm)."
+msgid "Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr "Godta vising av brukarar i innlogginshandsamarar (kdm og gdm)."
 
 #: security/help.pm:35
@@ -5251,8 +5240,7 @@ msgstr "Vel storleik på passordlogg for å hindra gjenbruk av passord."
 msgid ""
 "Set the password minimum length and minimum number of digit and minimum "
 "number of capitalized letters."
-msgstr ""
-"Vel minstelengd på passord og minimum tal på siffer og store bokstavar."
+msgstr "Vel minstelengd på passord og minimum tal på siffer og store bokstavar."
 
 #: security/help.pm:108
 #, c-format
@@ -5286,8 +5274,7 @@ msgstr ""
 #: security/help.pm:117
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
-msgstr ""
-"Kontroller løyve til filer i heimemappe til brukarar viss sett til «ja»."
+msgstr "Kontroller løyve til filer i heimemappe til brukarar viss sett til «ja»."
 
 #: security/help.pm:118
 #, c-format
@@ -5329,8 +5316,7 @@ msgstr "Rapporter eigarlause filer viss sett til «ja»."
 #: security/help.pm:125
 #, c-format
 msgid "if set to yes, check files/directories writable by everybody."
-msgstr ""
-"Kontroller om filer og mapper er skrivbare for alle viss sett til «ja»."
+msgstr "Kontroller om filer og mapper er skrivbare for alle viss sett til «ja»."
 
 #: security/help.pm:126
 #, c-format
@@ -5339,8 +5325,7 @@ msgstr "Køyr «chkrootkit»-kontrollar viss sett til «ja»."
 
 #: security/help.pm:127
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
+msgid "if set, send the mail report to this email address else send it to root."
 msgstr "Send rapport på e-post til denne adressa, eller til «root» viss tom."
 
 #: security/help.pm:128
@@ -5361,8 +5346,7 @@ msgstr "Køyr nokre kontrollar mot rpm-databasen viss sett til «ja»."
 #: security/help.pm:131
 #, c-format
 msgid "if set to yes, report check result to syslog."
-msgstr ""
-"Rapporter resultatet av kontrollar til systemloggen viss sett til «ja»."
+msgstr "Rapporter resultatet av kontrollar til systemloggen viss sett til «ja»."
 
 #: security/help.pm:132
 #, c-format
@@ -5764,10 +5748,8 @@ msgstr "Bruk libsafe for tenarar"
 
 #: security/level.pm:64
 #, c-format
-msgid ""
-"A library which defends against buffer overflow and format string attacks."
-msgstr ""
-"Eit bibliotek som vernar mot overflytsfeil og strengformateringsangrep."
+msgid "A library which defends against buffer overflow and format string attacks."
+msgstr "Eit bibliotek som vernar mot overflytsfeil og strengformateringsangrep."
 
 #: security/level.pm:65
 #, c-format
@@ -5816,8 +5798,7 @@ msgstr ""
 
 #: services.pm:28
 #, c-format
-msgid ""
-"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr "Common UNIX Printing System (CUPS) er eit avansert utskriftskøsystem."
 
 #: services.pm:29
@@ -5851,21 +5832,18 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
-"HAL er ei teneste som samlar inn og vedlikeheld informasjon om maskinvare."
+msgstr "HAL er ei teneste som samlar inn og vedlikeheld informasjon om maskinvare."
 
 #: services.pm:36
 #, c-format
 msgid ""
 "HardDrake runs a hardware probe, and optionally configures\n"
 "new/changed hardware."
-msgstr ""
-"HardDrake køyrer eit maskinvaresøk, og kan setja opp ny og endra maskinvare."
+msgstr "HardDrake køyrer eit maskinvaresøk, og kan setja opp ny og endra maskinvare."
 
 #: services.pm:38
 #, c-format
-msgid ""
-"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr "Apache er ein vevtenar."
 
 #: services.pm:39
@@ -6047,16 +6025,14 @@ msgstr ""
 msgid ""
 "Postfix is a Mail Transport Agent, which is the program that moves mail from "
 "one machine to another."
-msgstr ""
-"Postfix er eit program for overføring av elektronisk post mellom maskiner."
+msgstr "Postfix er eit program for overføring av elektronisk post mellom maskiner."
 
 #: services.pm:79
 #, c-format
 msgid ""
 "Saves and restores system entropy pool for higher quality random\n"
 "number generation."
-msgstr ""
-"Lagrar og gjenopprettar systementropigrunnlag for betre slumptalsgenerering."
+msgstr "Lagrar og gjenopprettar systementropigrunnlag for betre slumptalsgenerering."
 
 #: services.pm:81
 #, c-format
@@ -6108,8 +6084,7 @@ msgstr ""
 
 #: services.pm:92
 #, c-format
-msgid ""
-"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
 "SANE (Scanner Access Now Easy) gjev tilgang til skannarar, filmkamera og "
 "liknande."
@@ -6152,9 +6127,9 @@ msgid "Load the drivers for your usb devices."
 msgstr "Last drivarane for USB-einingane dine."
 
 #: services.pm:99
-#, fuzzy, c-format
+#, c-format
 msgid "Starts the X Font Server."
-msgstr "Startar andre tenester når det trengst."
+msgstr "Startar X-skrifttenaren."
 
 #: services.pm:100
 #, c-format
@@ -6691,3 +6666,4 @@ msgstr "Feil ved installering."
 
 #~ msgid "Enable/Disable msec hourly security check."
 #~ msgstr "Slå på/av msec-basert tryggleikskontroll."
+
