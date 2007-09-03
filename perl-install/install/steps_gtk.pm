@@ -213,6 +213,42 @@ sub selectMouse {
     } 
 }
 
+sub reallyChooseDesktop {
+    my ($o, $title, $message, $choices) = @_;
+
+    my $w = ugtk2->new($title);
+
+    my $sizegrp = Gtk2::SizeGroup->new('horizontal');
+    my $choice = $choices->[0];
+    my $prev;
+    my @l = map {
+	my $val = $_;
+	$prev = gtknew('RadioButton', text => $val->[1],
+		       toggled => sub { $choice = $val if $_[0]->get_active },
+		       $prev ? (group => $prev->get_group) : ());
+	$prev->signal_connect(key_press_event => sub {
+				  my (undef, $event) = @_;
+				  if (!$event || ($event->keyval & 0x7f) == 0xd) {
+				      Gtk2->main_quit;
+				  }
+			      });
+	gtknew('HBox', border_width => 15, spacing => 10, children => [ 
+	    0, gtknew('Image', file => "desktop-$val->[0]", size_group => $sizegrp),
+	    1, $prev,
+	]);
+    } @$choices;
+
+    ugtk2::gtkadd($w->{window},
+	   gtknew('VBox', children => [
+		    0, gtknew('Label', text => $message),
+		    (map { (1, $_) } @l),
+		    0, $w->create_okcancel(N("Next"), undef),
+		]));
+    $w->main;
+    
+    $choice;
+}
+
 sub reallyChooseGroups {
     my ($o, $size_to_display, $individual, $_compssUsers) = @_;
 

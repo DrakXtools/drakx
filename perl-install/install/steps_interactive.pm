@@ -409,19 +409,27 @@ The format is the same as auto_install generated files."),
 sub _chooseDesktop {
     my ($o, $rpmsrate_flags_chosen, $chooseGroups) = @_;
 
-    my @l = (
-	N_("Install Mandriva KDE Desktop"),
-	N_("Install Mandriva GNOME Desktop"),
-	N_("Custom install"),
+    my @l = group_by2(
+	KDE    => N("Install Mandriva KDE Desktop"),
+	GNOME  => N("Install Mandriva GNOME Desktop"),
+	Custom => N("Custom install"),
     );
+    my $title = N("Package Group Selection");
+    my $message = N("You can choose your workstation desktop profile: KDE, GNOME or Custom");
 
     my $choice;
-    $o->ask_from_({}, [
-	{ val => \$choice, list => \@l, type => 'list', format => \&translate },
-    ]);
-    log::l("chosen Desktop: $choice");
-    if (my ($desktop) = $choice =~ /(KDE|GNOME)/) {
-	my ($want, $dontwant) = ($desktop, grep { $desktop ne $_ } 'KDE', 'GNOME');
+    if ($o->isa('interactive::gtk') && 0) {
+	$choice = install::steps_gtk::reallyChooseDesktop($o, $title, $message, \@l);
+    } else {
+	$o->ask_from_({ title => $title, message => $message }, [
+	    { val => \$choice, list => \@l, type => 'list', format => sub { $_[0][1] } }, 
+	]);
+    }
+    my $desktop = $choice->[0];
+    log::l("chosen Desktop: $desktop");
+    my @desktops = ('KDE', 'GNOME');
+    if (member($desktop, @desktops)) {
+	my ($want, $dontwant) = ($desktop, grep { $desktop ne $_ } @desktops);
 	$rpmsrate_flags_chosen->{"CAT_$want"} = 1;
 	$rpmsrate_flags_chosen->{"CAT_$dontwant"} = 0;
 	my @flags = map_each { if_($::b, $::a) } %$rpmsrate_flags_chosen;
