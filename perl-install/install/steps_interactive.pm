@@ -434,6 +434,7 @@ sub _chooseDesktop {
 	$rpmsrate_flags_chosen->{"CAT_$dontwant"} = 0;
 	my @flags = map_each { if_($::b, $::a) } %$rpmsrate_flags_chosen;
 	log::l("flags ", join(' ', sort @flags));
+	install::any::unselectMostPackages($o);
     } else {
 	$$chooseGroups = 1;
     }
