@@ -217,6 +217,10 @@ sub prepare_write_fstab {
 	      ($_->{mntpoint} eq '/' ? "/initrd/loopfs" : $_->{loopback_device}{mntpoint}) . $_->{loopback_file} :
 	  fs::wild_device::from_part($o_prefix, $_);
 
+	my $comment = $_->{comment};
+	$comment = '' if $comment =~ m!^Entry for /dev/.* :!;
+	$comment ||= "# Entry for /dev/$_->{device} :\n" if $device =~ /^(UUID|LABEL)=/;
+
 	my $real_mntpoint = $_->{mntpoint} || ${{ '/tmp/hdimage' => '/mnt/hd' }}{$_->{real_mntpoint}};
 	mkdir_p("$o_prefix$real_mntpoint") if $real_mntpoint =~ m|^/|;
 	my $mntpoint = fs::type::carry_root_loopback($_) ? '/initrd/loopfs' : $real_mntpoint;
@@ -249,7 +253,7 @@ sub prepare_write_fstab {
 
 	    my $file_dep = $options =~ /\b(loop|bind)\b/ ? $device : '';
 
-	    [ $file_dep, $mntpoint, $_->{comment} . join(' ', $device, $mntpoint, $fs_type, $options || 'defaults', $freq, $passno) . "\n" ];
+	    [ $file_dep, $mntpoint, $comment . join(' ', $device, $mntpoint, $fs_type, $options || 'defaults', $freq, $passno) . "\n" ];
 	} else {
 	    ();
 	}
