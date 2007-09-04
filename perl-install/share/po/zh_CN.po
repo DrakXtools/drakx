@@ -427,9 +427,9 @@ msgid "%s should be above 500. Accept anyway?"
 msgstr "%s 应该大于 500。仍然接受吗？"
 
 #: any.pm:768
-#, fuzzy, c-format
+#, c-format
 msgid "User management"
-msgstr "用户名"
+msgstr "用户管理"
 
 #: any.pm:775 authentication.pm:182
 #, c-format
@@ -437,11 +437,9 @@ msgid "Set administrator (root) password"
 msgstr "设定管理员(root)密码"
 
 #: any.pm:780
-#, fuzzy, c-format
+#, c-format
 msgid "Enter a user"
-msgstr ""
-"输入一个用户名\n"
-"%s"
+msgstr "输入一个用户"
 
 #: any.pm:781
 #, c-format
@@ -1244,14 +1242,14 @@ msgid "Unknown"
 msgstr "未知"
 
 #: diskdrake/hd_gtk.pm:354
-#, fuzzy, c-format
+#, c-format
 msgid "Ext3"
-msgstr "退出"
+msgstr "Ext3"
 
 #: diskdrake/hd_gtk.pm:354
-#, fuzzy, c-format
+#, c-format
 msgid "XFS"
-msgstr "HFS"
+msgstr "XFS"
 
 #: diskdrake/hd_gtk.pm:354
 #, c-format
@@ -1477,8 +1475,7 @@ msgid "Add to RAID"
 msgstr "加入 RAID"
 
 #: diskdrake/interactive.pm:430 diskdrake/interactive.pm:859
-#, c-format
-msgid "Add to LVM"
+#, c-formatXmsgid "Add to LVM"
 msgstr "加入 LVM"
 
 #: diskdrake/interactive.pm:432
@@ -2222,13 +2219,13 @@ msgstr ""
 "(例如, 为了加速对新闻服务器的新闻池的访问)"
 
 #: fs/mount_options.pm:123
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
-"不在此文件系统更新 inode 访问次数\n"
-"(例如, 为了加速对新闻服务器的新闻池的访问)"
+"以更有效的方式更新文件系统中的 inode 访问次数\n"
+"(例如, 为了加速对新闻服务器的新闻池的访问)。"
 
 #: fs/mount_options.pm:123
 #, c-format
@@ -2489,7 +2486,7 @@ msgid "Next"
 msgstr "下一步"
 
 #: fs/partitioning_wizard.pm:167
-#, fuzzy, c-format
+#, c-format
 msgid "Partitionning"
 msgstr "分区"
 
@@ -6585,93 +6582,3 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "安装失败"
-
-#~ msgid "Ext2"
-#~ msgstr "Ext2"
-
-#~ msgid "Journalised FS"
-#~ msgstr "日志文件系统"
-
-#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
-#~ msgstr "启动 X 字体服务器(Xorg 所需)。"
-
-#~ msgid "Add user"
-#~ msgstr "添加用户"
-
-#~ msgid "Accept user"
-#~ msgstr "接受用户"
-
-#, fuzzy
-#~ msgid ""
-#~ "Do not update directory inode access times on this filesystem\n"
-#~ "(e.g, for faster access on the news spool to speed up news servers)."
-#~ msgstr ""
-#~ "不在此文件系统更新 inode 访问次数\n"
-#~ "(例如, 为了加速对新闻服务器的新闻池的访问)"
-
-#~ msgid "No supermount"
-#~ msgstr "无 supermount"
-
-#~ msgid "Supermount"
-#~ msgstr "Supermount"
-
-#~ msgid "Supermount except for CDROM drives"
-#~ msgstr "除 CDROM 驱动器以外都为 Supermount"
-
-#~ msgid "Rescue partition table"
-#~ msgstr "抢救分区表"
-
-#~ msgid "Removable media automounting"
-#~ msgstr "自动装载可移动介质"
-
-#~ msgid "Trying to rescue partition table"
-#~ msgstr "正在尝试恢复分区表"
-
-#~ msgid ""
-#~ "Use local for all authentication and information user tell in local file"
-#~ msgstr "使用本地进行全部身份验证并在本地文件中存储关于用户的信息"
-
-#~ msgid "Accept/Refuse bogus IPv4 error messages."
-#~ msgstr "允许/拒绝 bogus IPv4 错误消息。"
-
-#~ msgid "Accept/Refuse broadcasted icmp echo."
-#~ msgstr "允许/拒绝广播 ICMP 回应。"
-
-#~ msgid "Accept/Refuse icmp echo."
-#~ msgstr "允许/拒绝 ICMP 回应。"
-
-#~ msgid "Allow/Forbid remote root login."
-#~ msgstr "允许/禁止远程 root 登录。"
-
-#~ msgid "Enable/Disable IP spoofing protection."
-#~ msgstr "启用/禁用 IP 欺骗保护。"
-
-#~ msgid "Enable/Disable libsafe if libsafe is found on the system."
-#~ msgstr "启用/禁用 libsafe, 若在系统中发现 libsafe。"
-
-#~ msgid "Enable/Disable the logging of IPv4 strange packets."
-#~ msgstr "启用/禁用 IPv4 异常包日志。"
-
-#~ msgid "Enable/Disable msec hourly security check."
-#~ msgstr "启用/禁用 msec 每小时安全检查。"
-
-#~ msgid "Icon"
-#~ msgstr "图标"
-
-#~ msgid "Number of capture buffers:"
-#~ msgstr "捕获缓冲区数量: "
-
-#~ msgid "number of capture buffers for mmap'ed capture"
-#~ msgstr "用于 mmap 捕获的缓冲区数量"
-
-#~ msgid "PLL setting:"
-#~ msgstr "PLL 设置: "
-
-#~ msgid "Radio support:"
-#~ msgstr "无线电支持: "
-
-#~ msgid "enable radio support"
-#~ msgstr "启用无线电支持"
-
-#~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
-#~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
