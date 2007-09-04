@@ -199,8 +199,8 @@ sub getSCSI() {
 	my $dir = "$dev_dir/$_";
 
 	# handle both old and new kernels:
-	my $node =  -e "$dir/block" ? "$dir/block" : top(glob_("$dir/block*"));
-	my ($device) = readlink($node) =~ m!/block/(.*)!;
+	my $node =  find { -e $_ } "$dir/block", top(glob_("$dir/block*")), "$dir/tape";
+	my ($device) = readlink($node) =~ m!/(?:scsi_tape|block)/(.*)!;
 	warn("cannot get info for device ($_)"), next if !$device;
 
 	my $usb_dir = readlink("$node/device") =~ m!/usb! && "$node/device/../../../..";
