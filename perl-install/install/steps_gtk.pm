@@ -587,10 +587,14 @@ sub summary_prompt {
     my $w = ugtk2->new(N("Summary"), icon => 'banner-summary');
 
     my $set_entry_labels;
-    my @table;
-    my $group;
+    my (@table, @widget_list);
+    my ($group, $count);
     foreach my $e (@$l) {
 	if ($group ne $e->{group}) {
+	    push @widget_list, [ @table ] if @table;
+	    @table = ();
+	    push @widget_list, gtknew('HSeparator') if $count;
+	    $count++;
 	    $group = $e->{group};
 	    push @table, [ gtknew('HBox', children_tight => [ gtknew('Title1', label => escape_text_for_TextView_markup_format($group)) ]), '' ];
 	}
@@ -624,7 +628,10 @@ sub summary_prompt {
 
     ugtk2::gtkadd($w->{window},
 	   gtknew('VBox', spacing => 5, children => [
-		    1, gtknew('ScrolledWindow', child => gtknew('Table', mcc => 1, row_spacings => 2, children => \@table)),
+		    1, gtknew('ScrolledWindow',
+                        child => gtknew('VBox', children_tight => [ map {
+                            ref($_) eq 'ARRAY' ? gtknew('Table', mcc => 1, row_spacings => 2, children => $_) : $_;
+                        } @widget_list ])),
 		    0, $w->create_okcancel(undef, '', '', if_($help_sub, [ N("Help"), $help_sub, 1 ]))
 		  ]));
 
