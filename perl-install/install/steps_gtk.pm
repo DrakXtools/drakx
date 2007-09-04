@@ -624,7 +624,7 @@ sub summary_prompt {
 
     ugtk2::gtkadd($w->{window},
 	   gtknew('VBox', spacing => 5, children => [
-		    1, gtknew('ScrolledWindow', child => gtknew('Table', mcc => 1, children => \@table)),
+		    1, gtknew('ScrolledWindow', child => gtknew('Table', mcc => 1, row_spacings => 2, children => \@table)),
 		    0, $w->create_okcancel(undef, '', '', if_($help_sub, [ N("Help"), $help_sub, 1 ]))
 		  ]));
 
