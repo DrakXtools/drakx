@@ -83,7 +83,7 @@ sub from_part {
 	'LABEL=' . $part->{device_LABEL};
     } elsif ($part->{device_alias}) {
 	"/dev/$part->{device_alias}";
-    } elsif ($part->{prefer_device_UUID} && $part->{device_UUID}) {
+    } elsif (!$part->{prefer_device} && ($part->{prefer_device_UUID} || $::uuid_by_default) && $part->{device_UUID}) {
 	'UUID=' . $part->{device_UUID};
     } else {
 	my $faked_device = exists $part->{faked_device} ? 

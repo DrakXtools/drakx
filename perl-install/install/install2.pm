@@ -363,6 +363,7 @@ sub main {
 	    newt      => sub { $o->{interactive} = "curses" },
 	    text      => sub { $o->{interactive} = "curses" },
 	    stdio     => sub { $o->{interactive} = "stdio" },
+	    use_uuid  => sub { $::uuid_by_default = $v },
 	    kickstart => sub { $::auto_install = $v },
 	    local_install => sub { $::local_install = 1 },
 	    uml_install => sub { $::uml_install = $::local_install = 1 },
