@@ -44,7 +44,9 @@ static int mount_that_cd_device(char * dev_name)
 	snprintf(device_fullname, sizeof(device_fullname), "/dev/%s", dev_name);
 
 	mount_result = my_mount(device_fullname, MEDIA_LOCATION, "iso9660", 0);
-	symlink(MEDIA_LOCATION_REL "/" ARCH, IMAGE_LOCATION);
+
+	create_IMAGE_LOCATION(MEDIA_LOCATION);
+
 	return mount_result;
 }
 

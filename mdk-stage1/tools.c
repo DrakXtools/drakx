@@ -53,6 +53,26 @@ int image_has_stage2()
 	       access(IMAGE_LOCATION "/" LIVE_LOCATION_REL, R_OK) == 0;
 }
 
+enum return_type create_IMAGE_LOCATION(char *location_full)
+{
+	struct stat statbuf;
+	int offset = strncmp(location_full, IMAGE_LOCATION_DIR, sizeof(IMAGE_LOCATION_DIR) - 1) == 0 ? sizeof(IMAGE_LOCATION_DIR) - 1 : 0;
+	char *with_arch = asprintf_("%s/%s", location_full, ARCH);
+
+	log_message("trying %s", with_arch);
+
+	if (stat(with_arch, &statbuf) == 0 && S_ISDIR(statbuf.st_mode))
+		location_full = with_arch;
+
+	log_message("assuming %s is a mirror tree", location_full + offset);
+
+	unlink(IMAGE_LOCATION);
+	if (symlink(location_full + offset, IMAGE_LOCATION) != 0)
+		return RETURN_ERROR;
+
+	return RETURN_OK;
+}
+
 int ramdisk_possible(void)
 {
 	if (total_memory() > (IS_RESCUE ? MEM_LIMIT_RESCUE : MEM_LIMIT_DRAKX))

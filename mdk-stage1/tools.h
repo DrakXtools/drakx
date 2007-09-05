@@ -27,6 +27,7 @@
 #include "bootsplash.h"
 
 int image_has_stage2();
+enum return_type create_IMAGE_LOCATION(char *location_full);
 int ramdisk_possible(void);
 enum return_type copy_file(char * from, char * to, void (*callback_func)(int overall));
 enum return_type recursiveRemove(char *file);
