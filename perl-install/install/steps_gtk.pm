@@ -611,6 +611,8 @@ sub summary_prompt {
 						 $set_entry_labels->();
 					     }) ];
     }
+    # add latest group:
+    push @widget_list, [ @table ] if @table;
 
     $set_entry_labels = sub {
 	foreach (@$l) {
