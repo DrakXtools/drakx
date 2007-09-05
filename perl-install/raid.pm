@@ -101,8 +101,8 @@ sub module {
 
     if (member($level, 4, 5, 6)) {
 	'raid456';
-    } elsif ($level eq '1') {
-	'raid1';
+    } elsif ($level =~ /^\d+$/) {
+	"raid$level";
     } else {
 	$level;
     }
