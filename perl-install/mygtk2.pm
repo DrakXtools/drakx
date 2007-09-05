@@ -147,7 +147,7 @@ sub _gtk_any_Button {
         if ($class eq 'RadioButton') {
             @radio_options = delete $opts->{group};
 	}
-	$w = $opts->{child} ? "Gtk2::$class"->new :
+	$w = $opts->{child} ? "Gtk2::$class"->new(@radio_options) :
 	  delete $opts->{mnemonic} ? "Gtk2::$class"->new_with_mnemonic(@radio_options, delete $opts->{text} || '') :
 	    $opts->{text} ? "Gtk2::$class"->new_with_label(@radio_options, delete $opts->{text} || '') :
            "Gtk2::$class"->new(@radio_options);
