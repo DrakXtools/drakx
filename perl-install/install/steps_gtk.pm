@@ -223,7 +223,11 @@ sub reallyChooseDesktop {
     my $prev;
     my @l = map {
 	my $val = $_;
-	$prev = gtknew('RadioButton', text => $val->[1],
+	$prev = gtknew('RadioButton', child =>
+                      gtknew('HBox', border_width => 15, spacing => 10, children => [ 
+                          0, gtknew('Image', file => "desktop-$val->[0]", size_group => $sizegrp),
+                          1, gtknew('Label', text => $val->[1]),
+                      ]),
 		       toggled => sub { $choice = $val if $_[0]->get_active },
 		       $prev ? (group => $prev->get_group) : ());
 	$prev->signal_connect(key_press_event => sub {
@@ -232,10 +236,7 @@ sub reallyChooseDesktop {
 				      Gtk2->main_quit;
 				  }
 			      });
-	gtknew('HBox', border_width => 15, spacing => 10, children => [ 
-	    0, gtknew('Image', file => "desktop-$val->[0]", size_group => $sizegrp),
-	    1, $prev,
-	]);
+	$prev
     } @$choices;
 
     ugtk2::gtkadd($w->{window},
