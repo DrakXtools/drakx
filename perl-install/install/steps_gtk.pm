@@ -593,7 +593,7 @@ sub summary_prompt {
 	if ($group ne $e->{group}) {
 	    push @widget_list, [ @table ] if @table;
 	    @table = ();
-	    push @widget_list, gtknew('HSeparator') if $count;
+	    push @widget_list, gtknew('HSeparator', height => 8) if $count;
 	    $count++;
 	    $group = $e->{group};
 	    push @table, [ gtknew('HBox', children_tight => [ gtknew('Title1', label => escape_text_for_TextView_markup_format($group)) ]), '' ];
