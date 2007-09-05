@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 2007\n"
 "POT-Creation-Date: 2007-09-05 13:56+0200\n"
-"PO-Revision-Date: 2006-09-10 21:48+0800\n"
+"PO-Revision-Date: 2007-09-05 20:13+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -736,7 +736,7 @@ msgstr "本地文件:"
 #: authentication.pm:66
 #, c-format
 msgid "Use information stored in local files for all authentication"
-msgstr ""
+msgstr "使用本地文件中存储的信息进行全部身份验证"
 
 #: authentication.pm:67
 #, c-format
@@ -1848,7 +1848,7 @@ msgstr "卷标: "
 #: diskdrake/interactive.pm:1241
 #, c-format
 msgid "UUID: "
-msgstr ""
+msgstr "UUDI: "
 
 #: diskdrake/interactive.pm:1242
 #, c-format
@@ -2203,7 +2203,7 @@ msgstr "使用加密的文件系统"
 #: fs/mount_options.pm:113
 #, c-format
 msgid "Flush write cache on file close"
-msgstr ""
+msgstr "关闭文件时清空缓存"
 
 #: fs/mount_options.pm:115
 #, c-format
@@ -3225,7 +3225,7 @@ msgstr "上一步"
 #: interactive/gtk.pm:544
 #, c-format
 msgid "Beware, Caps Lock is enabled"
-msgstr ""
+msgstr "注意，Caps Lock 已开启"
 
 #: interactive/stdio.pm:29 interactive/stdio.pm:154
 #, c-format
@@ -5033,28 +5033,28 @@ msgid "Your scanner(s) will not be available for non-root users."
 msgstr "您的扫描仪将无法被非 root 用户使用。"
 
 #: security/help.pm:11
-#, fuzzy, c-format
+#, c-format
 msgid "Accept bogus IPv4 error messages."
-msgstr "接受 bogus IPv4 错误消息"
+msgstr "接受有错的 IPv4 错误消息。"
 
 #: security/help.pm:13
-#, fuzzy, c-format
+#, c-format
 msgid "Accept broadcasted icmp echo."
-msgstr "接受广播 ICMP 回应"
+msgstr "接受广播 ICMP 回应。"
 
 #: security/help.pm:15
-#, fuzzy, c-format
+#, c-format
 msgid "Accept icmp echo."
-msgstr "接受 icmp 回应"
+msgstr "接受 icmp 回应。"
 
 #: security/help.pm:17
-#, fuzzy, c-format
+#, c-format
 msgid "Allow autologin."
-msgstr "允许/禁止自动登录。"
+msgstr "允许自动登录。"
 
 #. -PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
 #: security/help.pm:21
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
 "\n"
@@ -5064,44 +5064,44 @@ msgid ""
 msgstr ""
 "如果设为 ALL, 则允许 /etc/issue 和 /etc/issue.net 存在。\n"
 "\n"
-"如果设为 NONE, 则除了 /etc/issue 以外不允许任何事务。\n"
+"如果设为 NONE, 则不允许任何 issue。\n\n"
 "否则只能允许 /etc/issue。"
 
 #: security/help.pm:27
-#, fuzzy, c-format
+#, c-format
 msgid "Allow reboot by the console user."
-msgstr "允许/禁止控制台用户重新启动。"
+msgstr "允许控制台用户重新启动。"
 
 #: security/help.pm:29
-#, fuzzy, c-format
+#, c-format
 msgid "Allow remote root login."
-msgstr "允许远程 root 登录"
+msgstr "允许远程 root 登录。"
 
 #: security/help.pm:31
-#, fuzzy, c-format
+#, c-format
 msgid "Allow direct root login."
-msgstr "允许/禁止直接 root 登录。"
+msgstr "允许直接 root 登录。"
 
 #: security/help.pm:33
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow the list of users on the system on display managers (kdm and gdm)."
-msgstr "允许/禁止系统中的用户列表显示在管理器(kdm 或 gdm)上。"
+msgstr "允许系统中的用户列表显示在管理器(kdm 或 gdm)上。"
 
 #: security/help.pm:35
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow to export display when\n"
 "passing from the root account to the other users.\n"
 "\n"
 "See pam_xauth(8) for more details.'"
 msgstr ""
-"允许/禁止从 root 账户传递给其它用户时导出显示。\n"
+"允许从 root 账户传递给其它用户时导出显示。\n"
 "\n"
 "请查看 pam_xauth(8) 中的细节。"
 
 #: security/help.pm:40
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow X connections:\n"
 "\n"
@@ -5111,7 +5111,7 @@ msgid ""
 "\n"
 "- \"None\" (no connection)."
 msgstr ""
-"允许/禁止 X 连接:\n"
+"允许 X 连接:\n"
 "\n"
 "- 所有(允许所有连接), \n"
 "\n"
@@ -5128,7 +5128,7 @@ msgstr "参数指定了客户端要要通过 TCP 端口 6000 连接到 X 服务�
 
 #. -PO: here "ALL", "Local" and "None" are values in a pull-down menu; translate them the same as they're
 #: security/help.pm:53
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Authorize:\n"
 "\n"
@@ -5174,30 +5174,30 @@ msgstr ""
 "件时, 决定是否要添加服务。"
 
 #: security/help.pm:72
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable crontab and at for users.\n"
 "\n"
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
 msgstr ""
-"启用/禁用用户的 crontab 和 at。\n"
+"启用用户的 crontab 和 at。\n"
 "\n"
 "将允许的用户放在 /etc/cron.allow 和 /etc/at.allow(参看 at(1) 和 crontab(1) "
 "的 man)。"
 
 #: security/help.pm:77
-#, fuzzy, c-format
+#, c-format
 msgid "Enable syslog reports to console 12"
-msgstr "在 12 控制台上启用/禁用系统日志报告"
+msgstr "在 12 号控制台上启用系统日志报告"
 
 #: security/help.pm:79
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable name resolution spoofing protection.  If\n"
 "\"%s\" is true, also reports to syslog."
 msgstr ""
-"启用/禁用名称解析欺骗保护。如果“%s”为 true, \n"
+"启用名称解析欺骗保护。如果“%s”为 true, \n"
 "还同时报告到系统日志。"
 
 #: security/help.pm:80
@@ -5206,24 +5206,24 @@ msgid "Security Alerts:"
 msgstr "安全警告: "
 
 #: security/help.pm:82
-#, fuzzy, c-format
+#, c-format
 msgid "Enable IP spoofing protection."
-msgstr "启用 IP 欺骗保护"
+msgstr "启用 IP 欺骗保护。"
 
 #: security/help.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Enable libsafe if libsafe is found on the system."
-msgstr "启用 libsafe, 若在系统中发现 libsafe"
+msgstr "启用 libsafe, 若在系统中发现 libsafe。"
 
 #: security/help.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Enable the logging of IPv4 strange packets."
-msgstr "启用 IPv4 异常包日志"
+msgstr "启用 IPv4 异常包日志。"
 
 #: security/help.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid "Enable msec hourly security check."
-msgstr "启用 msec 每小时安全检查"
+msgstr "启用 msec 每小时安全检查。"
 
 #: security/help.pm:90
 #, c-format
@@ -5238,19 +5238,19 @@ msgid "Use password to authenticate users."
 msgstr "使用密码认证用户。"
 
 #: security/help.pm:94
-#, fuzzy, c-format
+#, c-format
 msgid "Activate ethernet cards promiscuity check."
-msgstr "激活/禁用以太网卡混用检查。"
+msgstr "激活以太网卡混用检查。"
 
 #: security/help.pm:96
-#, fuzzy, c-format
+#, c-format
 msgid "Activate daily security check."
-msgstr "激活/禁用每日安全检查。"
+msgstr "激活每日安全检查。"
 
 #: security/help.pm:98
-#, fuzzy, c-format
+#, c-format
 msgid "Enable sulogin(8) in single user level."
-msgstr "在单用户级别上启用/禁用 sulogin(8)。"
+msgstr "在单用户级别上启用 sulogin(8)。"
 
 #: security/help.pm:100
 #, c-format
@@ -5275,9 +5275,9 @@ msgid ""
 msgstr "设置密码最短长度, 数字的最少个数, 大写字母的最少个数。"
 
 #: security/help.pm:108
-#, fuzzy, c-format
+#, c-format
 msgid "Set the root's file mode creation mask."
-msgstr "设置 root umask。"
+msgstr "设置 root 的文件模式创建 mask。"
 
 #: security/help.pm:109
 #, c-format
@@ -5400,9 +5400,9 @@ msgid "Timeout unit is second"
 msgstr "超时单位为秒"
 
 #: security/help.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Set the user's file mode creation mask."
-msgstr "设置用户 umask。"
+msgstr "设置用户文件的模式创建 mask。"
 
 #: security/l10n.pm:11
 #, c-format
@@ -5825,12 +5825,12 @@ msgstr ""
 #, c-format
 msgid ""
 "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
-msgstr ""
+msgstr "CUPS 是高级打印机管理系统"
 
 #: services.pm:29
 #, c-format
 msgid "Launches the graphical display manager"
-msgstr ""
+msgstr "调用图形化显示服务器"
 
 #: services.pm:30
 #, c-format
@@ -5857,7 +5857,7 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
+msgstr "HAL 守护程序将收集并维护关于硬件的信息"
 
 #: services.pm:36
 #, c-format
@@ -5947,7 +5947,7 @@ msgstr "Linux 虚拟服务器, 用来构架高效和高可用系统。"
 msgid ""
 "DBUS is a daemon which broadcasts notifications of system events and other "
 "messages"
-msgstr ""
+msgstr "DBUS 守护程序将广播通知系统事件以及其它消息"
 
 #: services.pm:58
 #, c-format
@@ -5995,7 +5995,7 @@ msgstr ""
 #: services.pm:68
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
-msgstr ""
+msgstr "使用网络时间协议(NTP)同步系统时间"
 
 #: services.pm:69
 #, c-format
@@ -6094,14 +6094,14 @@ msgstr ""
 #, c-format
 msgid ""
 "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
-msgstr ""
+msgstr "SANE 允许访问扫描仪、摄像头等设备。"
 
 #: services.pm:93
 #, c-format
 msgid ""
 "The SMB/CIFS protocol enables to share access to files & printers and also "
 "integrates with a Windows Server domain"
-msgstr ""
+msgstr "SMB/CIFS 协议用户访问共享的文件和打印机，并且与 Windows Server 域集成"
 
 #: services.pm:94
 #, c-format
@@ -6113,7 +6113,7 @@ msgstr "启动计算机上的声音系统"
 msgid ""
 "Secure Shell is a network protocol that allows data to be exchanged over a "
 "secure channel between two computers"
-msgstr ""
+msgstr "安全 Shell (SSH)网络协议允许在两台计算机之间通过安全通道交换数据"
 
 #: services.pm:96
 #, c-format
@@ -6132,12 +6132,12 @@ msgstr "装入您 USB 设备的驱动程序。"
 #: services.pm:99
 #, c-format
 msgid "Starts the X Font Server."
-msgstr ""
+msgstr "启动 X 字体服务器。"
 
 #: services.pm:100
 #, c-format
 msgid "Starts other deamons on demand."
-msgstr ""
+msgstr "按需启动其它守护程序。"
 
 #: services.pm:123
 #, c-format
