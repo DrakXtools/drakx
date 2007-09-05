@@ -571,20 +571,6 @@ my %IM_config =
              XIM_PROGRAM => 'gcin',
              XMODIFIERS => '@im=gcin',
             },
-   iiimf => {
-             GTK_IM_MODULE => 'iiim',
-             QT_IM_MODULE => 'iiim',
-             XIM => 'iiimx',
-             XIM_PROGRAM => 'iiimx',
-             XMODIFIERS => '@im=iiimx',
-	     packages => {
-		 generic => 'iiimf-engines-unit',
-		 am => 'iiimf-engines-unit',
-		 ja => 'iiimf-engines-canna',
-		 ko => 'iiimf-engines-sun-korea',
-		 zh => 'iiimf-engines-sun-chinese',
-	     },
-            },
    'im-ja' => {
                GTK_IM_MODULE => 'im-ja',
                QT_IM_MODULE => 'xim',
