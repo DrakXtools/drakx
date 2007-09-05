@@ -535,7 +535,17 @@ sub create_widget {
 	    }
 	}
 	$w->signal_connect(key_press_event => $e->{may_go_to_next});
-	$w->set_visibility(0) if $e->{hidden};
+	if ($e->{hidden}) {
+	    $w->set_visibility(0);
+	    $w->signal_connect(key_press_event => sub {
+		my (undef, $event) = @_;
+		if (!$o->{capslock_warned} && member('lock-mask', @{$event->state}) && !$w->get_text) {
+		    $o->{capslock_warned} = 1;
+		    $o->ask_warn('', N("Beware, Caps Lock is enabled"));
+		}
+		0;
+	    });
+	}
     }
 
     if (my $focus_out = $e->{focus_out}) {
