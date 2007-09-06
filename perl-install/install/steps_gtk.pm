@@ -241,7 +241,7 @@ sub reallyChooseDesktop {
 
     ugtk2::gtkadd($w->{window},
 	   gtknew('VBox', children => [
-		    0, gtknew('Label', text => $message),
+		    0, gtknew('WrappedLabel', text => $message),
 		    (map { (1, $_) } @l),
 		    0, $w->create_okcancel(N("Next"), undef),
 		]));
