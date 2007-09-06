@@ -20,7 +20,7 @@ my %cmds = (
     hfs      => [ 'hfsutils', 'hformat' ],
     dos      => [ 'dosfstools', 'mkdosfs' ],
     vfat     => [ 'dosfstools', 'mkdosfs', '-F', '32' ],
-    swap     => [ 'util-linux', 'mkswap' ],
+    swap     => [ 'util-linux-ng', 'mkswap' ],
     ntfs     => [ 'ntfsprogs', 'mkntfs', '--fast' ],
 );
 
