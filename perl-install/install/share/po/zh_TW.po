@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-04 17:16+0200\n"
-"PO-Revision-Date: 2006-09-14 09:46+0800\n"
-"Last-Translator: Shiva Huang <shivahuang@gmail.com>\n"
+"PO-Revision-Date: 2007-09-06 23:18+0800\n"
+"Last-Translator: You-Cheng Hsieh <yochenhsieh@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -82,15 +82,12 @@ msgstr "URL 開頭必須是 ftp:// 或 http://"
 
 #: any.pm:232
 #, c-format
-msgid ""
-"Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr "正在連結到 Mandriva Linux 網站查詢可用的映射站台..."
 
 #: any.pm:237
 #, c-format
-msgid ""
-"Failed contacting Mandriva Linux web site to get the list of available "
-"mirrors"
+msgid "Failed contacting Mandriva Linux web site to get the list of available mirrors"
 msgstr "無法連結到 Mandriva Linux 網站取得可用的映射站台"
 
 #: any.pm:247
@@ -111,12 +108,12 @@ msgstr "請輸入您的 NFS 媒介的主機和目錄名稱"
 #: any.pm:282
 #, c-format
 msgid "Hostname missing"
-msgstr ""
+msgstr "沒有主機名稱"
 
 #: any.pm:283
 #, c-format
 msgid "Directory must begin with \"/\""
-msgstr ""
+msgstr "目錄必須以「/」開始"
 
 #: any.pm:287
 #, c-format
@@ -131,13 +128,11 @@ msgstr "目錄"
 #: any.pm:310
 #, c-format
 msgid "Supplementary"
-msgstr ""
+msgstr "補充"
 
 #: any.pm:345
 #, c-format
-msgid ""
-"Can't find a package list file on this mirror. Make sure the location is "
-"correct."
+msgid "Can't find a package list file on this mirror. Make sure the location is correct."
 msgstr "無法在這個映像站上找到套件列表檔。請確定位址是正確的。"
 
 #: any.pm:379
@@ -217,7 +212,8 @@ msgstr "FTP"
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1137 steps_interactive.pm:846
+#: any.pm:1137
+#: steps_interactive.pm:846
 #, c-format
 msgid "Network"
 msgstr "網路"
@@ -262,7 +258,8 @@ msgstr "在安裝後您可以於 %s 取得螢幕截圖"
 msgid "Installation"
 msgstr "安裝"
 
-#: gtk.pm:139 share/meta-task/compssUsers.pl:54
+#: gtk.pm:139
+#: share/meta-task/compssUsers.pl:54
 #, c-format
 msgid "Configuration"
 msgstr "組態設定"
@@ -291,7 +288,8 @@ msgstr "啟動網路"
 msgid "Bringing down the network"
 msgstr "關閉網路"
 
-#: media.pm:699 media.pm:710
+#: media.pm:699
+#: media.pm:710
 #, c-format
 msgid "Downloading file %s..."
 msgstr "正在下載檔案 %s..."
@@ -343,21 +341,13 @@ msgstr "辦公軟體平台"
 
 #: share/meta-task/compssUsers.pl:27
 #, c-format
-msgid ""
-"Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets "
-"(OpenOffice.org Calc, Kspread), PDF viewers, etc"
-msgstr ""
-"辦公軟體：文書處理軟體 (OpenOffice.org Writer、Kword)、試算表 (OpenOffice."
-"org Calc、Kspread)、PDF 檢視器等等"
+msgid "Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets (OpenOffice.org Calc, Kspread), PDF viewers, etc"
+msgstr "辦公軟體：文書處理軟體 (OpenOffice.org Writer、Kword)、試算表 (OpenOffice.org Calc、Kspread)、PDF 檢視器等等"
 
 #: share/meta-task/compssUsers.pl:28
 #, c-format
-msgid ""
-"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
-"gnumeric), pdf viewers, etc"
-msgstr ""
-"辦公軟體：文書處理軟體 (kword、abiword)、試算表 (kspread、gnumeric)、PDF 檢視"
-"器等等"
+msgid "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, gnumeric), pdf viewers, etc"
+msgstr "辦公軟體：文書處理軟體 (kword、abiword)、試算表 (kspread、gnumeric)、PDF 檢視器等等"
 
 #: share/meta-task/compssUsers.pl:33
 #, c-format
@@ -386,9 +376,7 @@ msgstr "網際網路平台"
 
 #: share/meta-task/compssUsers.pl:44
 #, c-format
-msgid ""
-"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
-"Web"
+msgid "Set of tools to read and send mail and news (mutt, tin..) and to browse the Web"
 msgstr "包含讀信、寄信和閱讀新聞群組 (mutt、tin ..) 以及網路瀏覽的工具"
 
 #: share/meta-task/compssUsers.pl:49
@@ -416,33 +404,39 @@ msgstr "Console 工具"
 msgid "Editors, shells, file tools, terminals"
 msgstr "編輯器、shell、檔案工具、終端機"
 
-#: share/meta-task/compssUsers.pl:64 share/meta-task/compssUsers.pl:166
+#: share/meta-task/compssUsers.pl:64
+#: share/meta-task/compssUsers.pl:166
 #: share/meta-task/compssUsers.pl:168
 #, c-format
 msgid "Development"
 msgstr "程式開發"
 
-#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:169
+#: share/meta-task/compssUsers.pl:65
+#: share/meta-task/compssUsers.pl:169
 #, c-format
 msgid "C and C++ development libraries, programs and include files"
 msgstr "C/C++ 發展環境，包含編譯器、程式庫與及一些引入檔"
 
-#: share/meta-task/compssUsers.pl:69 share/meta-task/compssUsers.pl:173
+#: share/meta-task/compssUsers.pl:69
+#: share/meta-task/compssUsers.pl:173
 #, c-format
 msgid "Documentation"
 msgstr "文件檔案"
 
-#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:174
+#: share/meta-task/compssUsers.pl:70
+#: share/meta-task/compssUsers.pl:174
 #, c-format
 msgid "Books and Howto's on Linux and Free Software"
 msgstr "Linux 系統與自由軟體的書籍、HOWTO 文件"
 
-#: share/meta-task/compssUsers.pl:74 share/meta-task/compssUsers.pl:177
+#: share/meta-task/compssUsers.pl:74
+#: share/meta-task/compssUsers.pl:177
 #, c-format
 msgid "LSB"
 msgstr "LSB"
 
-#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:178
+#: share/meta-task/compssUsers.pl:75
+#: share/meta-task/compssUsers.pl:178
 #, c-format
 msgid "Linux Standard Base. Third party applications support"
 msgstr "LSB 的支援，包含第三類協力廠商軟體支援"
@@ -467,12 +461,14 @@ msgstr "群組軟體"
 msgid "Kolab Server"
 msgstr "Kolab 伺服器"
 
-#: share/meta-task/compssUsers.pl:92 share/meta-task/compssUsers.pl:133
+#: share/meta-task/compssUsers.pl:92
+#: share/meta-task/compssUsers.pl:133
 #, c-format
 msgid "Firewall/Router"
 msgstr "防火牆/路由器"
 
-#: share/meta-task/compssUsers.pl:93 share/meta-task/compssUsers.pl:134
+#: share/meta-task/compssUsers.pl:93
+#: share/meta-task/compssUsers.pl:134
 #, c-format
 msgid "Internet gateway"
 msgstr "網際網路閘道器"
@@ -522,7 +518,8 @@ msgstr "檔案與列印分享伺服器"
 msgid "NFS Server, Samba server"
 msgstr "NFS 伺服器、Samba 伺服器"
 
-#: share/meta-task/compssUsers.pl:116 share/meta-task/compssUsers.pl:129
+#: share/meta-task/compssUsers.pl:116
+#: share/meta-task/compssUsers.pl:129
 #, c-format
 msgid "Database"
 msgstr "資料庫軟體"
@@ -579,9 +576,7 @@ msgstr "KDE 工作站"
 
 #: share/meta-task/compssUsers.pl:147
 #, c-format
-msgid ""
-"The K Desktop Environment, the basic graphical environment with a collection "
-"of accompanying tools"
+msgid "The K Desktop Environment, the basic graphical environment with a collection of accompanying tools"
 msgstr "K 桌面環境，包含許多好用的圖型介面工具程式"
 
 #: share/meta-task/compssUsers.pl:151
@@ -591,9 +586,7 @@ msgstr "GNOME 工作站"
 
 #: share/meta-task/compssUsers.pl:152
 #, c-format
-msgid ""
-"A graphical environment with user-friendly set of applications and desktop "
-"tools"
+msgid "A graphical environment with user-friendly set of applications and desktop tools"
 msgstr "包含友善的應用程式、桌面軟體的圖型化使用環境"
 
 #: share/meta-task/compssUsers.pl:155
@@ -616,7 +609,8 @@ msgstr "Window Maker、Enlightenment、Fvwm 等"
 msgid "Utilities"
 msgstr "工具軟體"
 
-#: share/meta-task/compssUsers.pl:185 share/meta-task/compssUsers.pl:186
+#: share/meta-task/compssUsers.pl:185
+#: share/meta-task/compssUsers.pl:186
 #, c-format
 msgid "SSH Server"
 msgstr "SSH 伺服主機"
@@ -665,14 +659,14 @@ msgstr ""
 msgid ""
 "Some important packages did not get installed properly.\n"
 "Either your cdrom drive or your cdrom is defective.\n"
-"Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm"
-"\"\n"
+"Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm\"\n"
 msgstr ""
 "有某些重要的套件沒有被適當地安裝。\n"
 "可能是您的光碟機或者是光碟片有缺陷。\n"
 "請將光碟放在一個已經安裝好的電腦上使用 \"rpm -qpl media/main/*.rpm\" 來檢查\n"
 
-#: steps_auto_install.pm:71 steps_stdio.pm:27
+#: steps_auto_install.pm:71
+#: steps_stdio.pm:27
 #, c-format
 msgid "Entering step `%s'\n"
 msgstr "進入步驟 `%s'\n"
@@ -687,41 +681,52 @@ msgstr "Mandriva Linux 安裝程式 %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> 在元件間移動"
 
-#: steps_gtk.pm:155 steps_gtk.pm:156
+#: steps_gtk.pm:155
+#: steps_gtk.pm:156
 #, c-format
 msgid "Localization"
-msgstr ""
+msgstr "地區化"
 
-#: steps_gtk.pm:159 steps_list.pm:20
+#: steps_gtk.pm:159
+#: steps_list.pm:20
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Installation class"
 msgstr "安裝類別"
 
-#: steps_gtk.pm:160 steps_gtk.pm:243 steps_interactive.pm:511
+#: steps_gtk.pm:160
+#: steps_gtk.pm:243
+#: steps_interactive.pm:511
 #, c-format
 msgid "Package Group Selection"
 msgstr "套件群組選擇"
 
-#: steps_gtk.pm:161 steps_gtk.pm:460 steps_interactive.pm:543
+#: steps_gtk.pm:161
+#: steps_gtk.pm:460
+#: steps_interactive.pm:543
 #, c-format
 msgid "Installing"
 msgstr "正在安裝"
 
-#: steps_gtk.pm:162 steps_gtk.pm:576 steps_interactive.pm:735
+#: steps_gtk.pm:162
+#: steps_gtk.pm:576
+#: steps_interactive.pm:735
 #, c-format
 msgid "Summary"
 msgstr "總結"
 
-#: steps_gtk.pm:164 steps_gtk.pm:165 steps_list.pm:30
+#: steps_gtk.pm:164
+#: steps_gtk.pm:165
+#: steps_list.pm:30
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Bootloader"
 msgstr "開機載入器"
 
-#: steps_gtk.pm:166 steps_interactive.pm:644
+#: steps_gtk.pm:166
+#: steps_interactive.pm:644
 #, c-format
 msgid "Updates"
 msgstr "更新"
@@ -730,20 +735,21 @@ msgstr "更新"
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
-"Mandriva Linux. If that occurs, you can try a text install instead. For "
-"this,\n"
+"Mandriva Linux. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "您的系統資源太少，可能會在安裝 Mandriva Linux 過程中遇到問題。\n"
 "若是真的發生問題，您或許可以改用文字模式的安裝方式來取代。\n"
 "要如此作的話，請在光碟開機時按下 `F1'，然後輸入 `text'。"
 
-#: steps_gtk.pm:264 steps_interactive.pm:529
+#: steps_gtk.pm:264
+#: steps_interactive.pm:529
 #, c-format
 msgid "Individual package selection"
 msgstr "選取單一套件"
 
-#: steps_gtk.pm:268 steps_interactive.pm:454
+#: steps_gtk.pm:268
+#: steps_interactive.pm:454
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "總共大小： %d / %d MB"
@@ -800,9 +806,7 @@ msgstr "為了要保留 %s"
 
 #: steps_gtk.pm:363
 #, c-format
-msgid ""
-"You can not select this package as there is not enough space left to install "
-"it"
+msgid "You can not select this package as there is not enough space left to install it"
 msgstr "您不可以選取這個套件，因為剩餘的空間不足以安裝它。"
 
 #: steps_gtk.pm:366
@@ -835,7 +839,8 @@ msgstr "您不能不選這個套件，它一定要更新才行。"
 msgid "Show automatically selected packages"
 msgstr "顯示自動被選取的套件"
 
-#: steps_gtk.pm:402 steps_interactive.pm:133
+#: steps_gtk.pm:402
+#: steps_interactive.pm:133
 #, c-format
 msgid "Install"
 msgstr "安裝"
@@ -860,7 +865,8 @@ msgstr "最小安裝"
 msgid "Software Management"
 msgstr "軟體套件管理"
 
-#: steps_gtk.pm:425 steps_interactive.pm:373
+#: steps_gtk.pm:425
+#: steps_interactive.pm:373
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "選擇您想要安裝的套件"
@@ -891,12 +897,15 @@ msgstr[0] "%d 個套件"
 msgid "Configure"
 msgstr "設定"
 
-#: steps_gtk.pm:580 steps_interactive.pm:731 steps_interactive.pm:858
+#: steps_gtk.pm:580
+#: steps_interactive.pm:731
+#: steps_interactive.pm:858
 #, c-format
 msgid "not configured"
 msgstr "未被設定"
 
-#: steps_gtk.pm:612 steps_interactive.pm:268
+#: steps_gtk.pm:612
+#: steps_interactive.pm:268
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -905,19 +914,18 @@ msgstr ""
 "已經找到下列的安裝媒介。\n"
 "如果您想略過它們，您現在可以將它們取消選取。"
 
-#: steps_gtk.pm:621 steps_interactive.pm:274
+#: steps_gtk.pm:621
+#: steps_interactive.pm:274
 #, c-format
 msgid ""
-"You have the option to copy the contents of the CDs onto the hard drive "
-"before installation.\n"
-"It will then continue from the hard drive and the packages will remain "
-"available once the system is fully installed."
+"You have the option to copy the contents of the CDs onto the hard drive before installation.\n"
+"It will then continue from the hard drive and the packages will remain available once the system is fully installed."
 msgstr ""
-"您可以選擇在安裝前將光碟的內容複製到硬碟。稍候將會由硬碟繼續安裝，並且這些套"
-"件\n"
+"您可以選擇在安裝前將光碟的內容複製到硬碟。稍候將會由硬碟繼續安裝，並且這些套件\n"
 "在安裝完畢之後仍然可以繼續使用。"
 
-#: steps_gtk.pm:623 steps_interactive.pm:276
+#: steps_gtk.pm:623
+#: steps_interactive.pm:276
 #, c-format
 msgid "Copy whole CDs"
 msgstr "複製整張光碟"
@@ -969,29 +977,21 @@ msgstr "正在設定 IDE"
 
 #: steps_interactive.pm:221
 #, c-format
-msgid ""
-"No free space for 1MB bootstrap! Install will continue, but to boot your "
-"system, you'll need to create the bootstrap partition in DiskDrake"
+msgid "No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"
 msgstr ""
 "沒有足夠的可用空間安裝 bootstrap！安裝還是會繼續，但是您必須在 DiskDrake\n"
 "中建立 bootstrap 分割來啟動您的系統"
 
 #: steps_interactive.pm:226
 #, c-format
-msgid ""
-"You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
-"to boot your system, you'll need to create the bootstrap partition in "
-"DiskDrake"
-msgstr ""
-"您需要建立一個 PPC PReP 開機 bootstrap！安裝還是會繼續，但是您必須在 "
-"DiskDrake 中建立 bootstrap 分割來啟動您的系統"
+msgid "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"
+msgstr "您需要建立一個 PPC PReP 開機 bootstrap！安裝還是會繼續，但是您必須在 DiskDrake 中建立 bootstrap 分割來啟動您的系統"
 
 #: steps_interactive.pm:318
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
-"Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when "
-"done.\n"
+"Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.\n"
 "If you do not have it, press Cancel to avoid installation from this Cd-Rom."
 msgstr ""
 "更換光碟片！\n"
@@ -1005,10 +1005,8 @@ msgstr "正在搜尋可以用的套件..."
 
 #: steps_interactive.pm:349
 #, c-format
-msgid ""
-"Your system does not have enough space left for installation or upgrade (%"
-"dMB > %dMB)"
-msgstr ""
+msgid "Your system does not have enough space left for installation or upgrade (%dMB > %dMB)"
+msgstr "您的系統剩餘的空間不足以安裝或升級 (%dMB > %dMB)"
 
 #: steps_interactive.pm:385
 #, c-format
@@ -1037,22 +1035,22 @@ msgstr "損壞的檔案"
 #: steps_interactive.pm:413
 #, c-format
 msgid "Install Mandriva KDE Desktop"
-msgstr ""
+msgstr "安裝 Mandriva KDE 桌面"
 
 #: steps_interactive.pm:414
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
-msgstr ""
+msgstr "安裝 Mandriva GNOME 桌面"
 
 #: steps_interactive.pm:415
-#, fuzzy, c-format
+#, c-format
 msgid "Custom install"
-msgstr "最小安裝"
+msgstr "自訂安裝"
 
 #: steps_interactive.pm:418
 #, c-format
 msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
-msgstr ""
+msgstr "您可以選擇您的工作站的桌面設定檔：KDE, GNOME 或自訂"
 
 #: steps_interactive.pm:503
 #, c-format
@@ -1121,22 +1119,22 @@ msgstr "重試"
 #: steps_interactive.pm:581
 #, c-format
 msgid "Skip this package"
-msgstr ""
+msgstr "略過這個套件"
 
 #: steps_interactive.pm:582
 #, c-format
 msgid "Skip all packages from medium \"%s\""
-msgstr ""
+msgstr "略過所有 %s 媒體的套件"
 
 #: steps_interactive.pm:583
-#, fuzzy, c-format
+#, c-format
 msgid "Go back to media and packages selection"
-msgstr "儲存套件選擇"
+msgstr "回到媒體與套件選擇"
 
 #: steps_interactive.pm:586
-#, fuzzy, c-format
+#, c-format
 msgid "There was an error installing package %s."
-msgstr "安裝套件時發生錯誤："
+msgstr "安裝 %s 套件時發生錯誤。"
 
 #: steps_interactive.pm:604
 #, c-format
@@ -1183,13 +1181,18 @@ msgstr "無法聯繫映射站台 %s"
 msgid "%s on %s"
 msgstr "%2$s 上的 %1$s"
 
-#: steps_interactive.pm:810 steps_interactive.pm:817 steps_interactive.pm:830
-#: steps_interactive.pm:847 steps_interactive.pm:863 steps_interactive.pm:874
+#: steps_interactive.pm:810
+#: steps_interactive.pm:817
+#: steps_interactive.pm:830
+#: steps_interactive.pm:847
+#: steps_interactive.pm:863
+#: steps_interactive.pm:874
 #, c-format
 msgid "Hardware"
 msgstr "硬體"
 
-#: steps_interactive.pm:795 steps_interactive.pm:812
+#: steps_interactive.pm:795
+#: steps_interactive.pm:812
 #, c-format
 msgid "Sound card"
 msgstr "音效卡"
@@ -1201,9 +1204,7 @@ msgstr "您有 ISA 音效卡嗎？"
 
 #: steps_interactive.pm:817
 #, c-format
-msgid ""
-"Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
-"card"
+msgid "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound card"
 msgstr "請在安裝完畢後，執行 \"alsaconf\" 或 \"sndconfig\" 來設定您的音效卡"
 
 #: steps_interactive.pm:819
@@ -1221,7 +1222,8 @@ msgstr "電視卡"
 msgid "Graphical interface"
 msgstr "圖形介面"
 
-#: steps_interactive.pm:845 steps_interactive.pm:856
+#: steps_interactive.pm:845
+#: steps_interactive.pm:856
 #, c-format
 msgid "Network & Internet"
 msgstr "網路與網際網路"
@@ -1268,16 +1270,11 @@ msgstr "正在準備開機載入程式..."
 
 #: steps_interactive.pm:983
 #, c-format
-msgid ""
-"You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
-"will not work for you. The install will continue, but you'll need to use "
-"BootX or some other means to boot your machine. The kernel argument for the "
-"root fs is: root=%s"
+msgid "You appear to have an OldWorld or Unknown machine, the yaboot bootloader will not work for you. The install will continue, but you'll need to use BootX or some other means to boot your machine. The kernel argument for the root fs is: root=%s"
 msgstr ""
 "您的系統似乎有 OldWorld 或者是其他不認識的機器，\n"
 "這將會導致 yaboot 開機載入器無法正常運作。\n"
-"安裝還是會繼續下去，不過您將需要使用 bootX 或某些其他方法來啟動您的機器。"
-"root fs 的核心參數是：root=%s"
+"安裝還是會繼續下去，不過您將需要使用 bootX 或某些其他方法來啟動您的機器。root fs 的核心參數是：root=%s"
 
 #: steps_interactive.pm:989
 #, c-format
@@ -1295,9 +1292,7 @@ msgstr ""
 
 #: steps_interactive.pm:1009
 #, c-format
-msgid ""
-"In this security level, access to the files in the Windows partition is "
-"restricted to the administrator."
+msgid "In this security level, access to the files in the Windows partition is restricted to the administrator."
 msgstr "在這個安全層級中，只有管理者能夠存取位於 Windows 分割區的檔案。"
 
 #: steps_interactive.pm:1038
@@ -1331,7 +1326,8 @@ msgstr "恭喜"
 msgid "Reboot"
 msgstr "重新開機"
 
-#: steps_interactive.pm:1069 steps_interactive.pm:1070
+#: steps_interactive.pm:1069
+#: steps_interactive.pm:1070
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "製作自動安裝磁片"
@@ -1488,100 +1484,69 @@ msgstr "離開"
 
 #~ msgid "Boot"
 #~ msgstr "開機"
-
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "認證方式"
-
 #~ msgid "Arkeia"
 #~ msgstr "Arkeia"
-
 #~ msgid "Flatout"
 #~ msgstr "Flatout"
-
 #~ msgid "Gwenview"
 #~ msgstr "Gwenview"
-
 #~ msgid "3D"
 #~ msgstr "3D"
-
 #~ msgid "CMS"
 #~ msgstr "CMS"
-
 #~ msgid "CRM"
 #~ msgstr "CRM"
-
 #~ msgid "2007 product line"
 #~ msgstr "2007 產品線"
-
 #~ msgid "Invictus Firewall"
 #~ msgstr "Invictus 防火牆"
-
 #~ msgid "Discovery Live Mode"
 #~ msgstr "Discovery Live 模式"
-
 #~ msgid "How to register"
 #~ msgstr "如何註冊"
-
 #~ msgid "Rpmdrake 2"
 #~ msgstr "Rpmdrake 2"
-
 #~ msgid "Mandriva Online Services"
 #~ msgstr "Mandriva Online 服務"
-
 #~ msgid "New Theme"
 #~ msgstr "新的佈景主題"
-
 #~ msgid "Web 2.0"
 #~ msgstr "Web 2.0"
-
 #~ msgid "Kaspersky"
 #~ msgstr "Kaspersky"
-
 #~ msgid "LinDVD"
 #~ msgstr "LinDVD"
-
 #~ msgid "Skype"
 #~ msgstr "Skype"
-
 #~ msgid "Transgaming/Cedega"
 #~ msgstr "Transgaming/Cedega"
-
 #~ msgid "DrakVPN"
 #~ msgstr "DrakVPN"
-
 #~ msgid "(%d package, %d MB)"
 #~ msgid_plural "(%d packages, %d MB)"
 #~ msgstr[0] "(%d 個套件，共 %d MB)"
-
 #~ msgid "%d packages"
 #~ msgstr "%d 個套件"
-
 #~ msgid "Language"
 #~ msgstr "語言"
-
 #~ msgid "License"
 #~ msgstr "授權"
-
 #~ msgid "Installation class"
 #~ msgstr "安裝類別"
-
 #~ msgid "Formatting"
 #~ msgstr "正在格式化"
-
 #~ msgid "Choosing packages"
 #~ msgstr "選取程式套件"
-
 #~ msgid "Users"
 #~ msgstr "使用者"
-
 #~ msgid "Networking"
 #~ msgstr "網路"
-
 #~ msgid "Configure X"
 #~ msgstr "設定 X 環境"
-
 #~ msgid ""
 #~ "Can not access kernel modules corresponding to your kernel (file %s is "
 #~ "missing), this generally means your boot floppy in not in sync with the "
@@ -1590,3 +1555,4 @@ msgstr "離開"
 #~ "無法存取對應您的核心的核心模組 (檔案 %s 遺失)，這一般表示您的開機軟片不同"
 #~ "步於\n"
 #~ "安裝媒介 (請建立一個更新的開機磁片)"
+
