@@ -978,7 +978,9 @@ sub suggest {
     } elsif (arch() !~ /ia64/) {
 	#- search for dos (or windows) boot partition. Do not look in extended partitions!
 	my @windows_boot_parts =
-	  grep { isFat_or_NTFS($_) && member(fs::type::fs_type_from_magic($_), 'vfat', 'ntfs') }
+	  grep { isFat_or_NTFS($_) && member(fs::type::fs_type_from_magic($_), 'vfat', 'ntfs')
+		   && fs::type::part2type_name($_) !~ /^Hidden/;
+	     }
 	    map { @{$_->{primary}{normal}} } @{$all_hds->{hds}};
 	each_index {
 	    add_entry($bootloader,
