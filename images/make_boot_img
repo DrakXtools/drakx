@@ -153,6 +153,9 @@ sub initrd {
         _ "install -D /usr/share/ldetect-lst/$_.gz $tmp_initrd/usr/share/ldetect-lst/$_.gz";
     }
     _ "install -D /usr/share/pci.ids $tmp_initrd/usr/share/pci.ids";
+    foreach (glob("/usr/share/ldetect-lst/*-modules.alias")) {
+        _ "install -D $_ $tmp_initrd$_";
+    }
 
     _ "install $stage1_root/init $tmp_initrd/";
     foreach ('stage1', 'pppd', 'pppoe') {
