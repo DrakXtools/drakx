@@ -7,14 +7,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "POT-Creation-Date: 2007-09-05 13:56+0200\n"
-"PO-Revision-Date: 2007-03-15 19:36+0100\n"
+"PO-Revision-Date: 2007-09-08 16:57+0200\n"
 "Last-Translator: Michal Bukovjan <bukm@centrum.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
 #: any.pm:240 diskdrake/interactive.pm:603 diskdrake/interactive.pm:790
@@ -202,10 +201,8 @@ msgstr "omezení"
 
 #: any.pm:401
 #, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
-msgstr ""
-"Volba ''Omezení nastavení z příkazové řádky'' je bezpředmětné bez hesla"
+msgid "Option ``Restrict command line options'' is of no use without a password"
+msgstr "Volba ''Omezení nastavení z příkazové řádky'' je bezpředmětné bez hesla"
 
 #: any.pm:403
 #, c-format
@@ -398,8 +395,7 @@ msgstr "Prosím zadejte uživatelské jméno"
 
 #: any.pm:745
 #, c-format
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr "Uživatelské jméno může obsahovat pouze malá písmena, čísla, '-' a '_'"
 
 #: any.pm:746
@@ -433,9 +429,9 @@ msgid "%s should be above 500. Accept anyway?"
 msgstr "%s by mělo být vyšší než 500. Přesto použít?"
 
 #: any.pm:768
-#, fuzzy, c-format
+#, c-format
 msgid "User management"
-msgstr "Uživatelské jméno"
+msgstr "Správa uživatelů"
 
 #: any.pm:775 authentication.pm:182
 #, c-format
@@ -443,11 +439,9 @@ msgid "Set administrator (root) password"
 msgstr "Heslo správce (uživatele root)"
 
 #: any.pm:780
-#, fuzzy, c-format
+#, c-format
 msgid "Enter a user"
-msgstr ""
-"Zadejte uživatele\n"
-"%s"
+msgstr "Zadejte uživatele"
 
 #: any.pm:781
 #, c-format
@@ -472,8 +466,7 @@ msgstr "Automatické přihlášení"
 #: any.pm:823
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
-msgstr ""
-"Můžu nastavit váš počítač tak, aby automaticky přihlásil vybraného uživatele."
+msgstr "Můžu nastavit váš počítač tak, aby automaticky přihlásil vybraného uživatele."
 
 #: any.pm:824
 #, c-format
@@ -636,8 +629,7 @@ msgstr ""
 
 #: any.pm:1126
 #, c-format
-msgid ""
-"You can export using NFS or SMB. Please select which you would like to use."
+msgid "You can export using NFS or SMB. Please select which you would like to use."
 msgstr ""
 "Nyní lze provést export přes protokol NFS nebo SMB. Vyberte prosím, který "
 "chcete použít."
@@ -754,7 +746,7 @@ msgstr "Lokální soubor:"
 #: authentication.pm:66
 #, c-format
 msgid "Use information stored in local files for all authentication"
-msgstr ""
+msgstr "Použít pro veškeré ověřování informace uložené v lokálních souborech"
 
 #: authentication.pm:67
 #, c-format
@@ -1282,14 +1274,14 @@ msgid "Unknown"
 msgstr "Neznámý"
 
 #: diskdrake/hd_gtk.pm:354
-#, fuzzy, c-format
+#, c-format
 msgid "Ext3"
-msgstr "Konec"
+msgstr "Ext3"
 
 #: diskdrake/hd_gtk.pm:354
-#, fuzzy, c-format
+#, c-format
 msgid "XFS"
-msgstr "HFS"
+msgstr "XFS"
 
 #: diskdrake/hd_gtk.pm:354
 #, c-format
@@ -1600,8 +1592,7 @@ msgstr "Odstranit soubor loopbacku?"
 
 #: diskdrake/interactive.pm:581
 #, c-format
-msgid ""
-"After changing type of partition %s, all data on this partition will be lost"
+msgid "After changing type of partition %s, all data on this partition will be lost"
 msgstr "Tím, že změníte typ oddílu %s, přijdete o všechna jeho data"
 
 #: diskdrake/interactive.pm:594
@@ -1891,7 +1882,7 @@ msgstr "Název svazku: "
 #: diskdrake/interactive.pm:1241
 #, c-format
 msgid "UUID: "
-msgstr ""
+msgstr "UUID: "
 
 #: diskdrake/interactive.pm:1242
 #, c-format
@@ -2019,9 +2010,9 @@ msgstr ""
 "dalšího systému.\n"
 
 #: diskdrake/interactive.pm:1280
-#, fuzzy, c-format
+#, c-format
 msgid "Free space on %s (%s)"
-msgstr "Prázdné místo na %s (%s)"
+msgstr "Volné místo na %s (%s)"
 
 #: diskdrake/interactive.pm:1289
 #, c-format
@@ -2071,8 +2062,7 @@ msgstr "Vyberte si šifrovací klíč pro souborový systém"
 #: diskdrake/interactive.pm:1342
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
-msgstr ""
-"Tento šifrovací klíč je příliš jednoduchý (musí být alespoň %d znaků dlouhý)"
+msgstr "Tento šifrovací klíč je příliš jednoduchý (musí být alespoň %d znaků dlouhý)"
 
 #: diskdrake/interactive.pm:1343
 #, c-format
@@ -2129,8 +2119,7 @@ msgstr "Další"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
+msgid "Please enter your username, password and domain name to access this host."
 msgstr ""
 "Prosím zadejte své uživatelské jméno, heslo a název domény, pod kterými "
 "chcete přistupovat k tomuto počítači."
@@ -2252,7 +2241,7 @@ msgstr "Použít šifrovaný souborový systém"
 #: fs/mount_options.pm:113
 #, c-format
 msgid "Flush write cache on file close"
-msgstr ""
+msgstr "Vyprázdnit vyrovnávací paměť pro zápis při zavření souboru"
 
 #: fs/mount_options.pm:115
 #, c-format
@@ -2270,12 +2259,12 @@ msgstr ""
 "serveru)."
 
 #: fs/mount_options.pm:123
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
-"Neaktualizovat čas přístupu pro tento souborový systém\n"
+"Aktualizovat čas přístupu k uzlům pro tento souborový systém efektivněji\n"
 "(např. pro rychlejší přístup k frontě zpráv při provozování diskusního "
 "serveru)."
 
@@ -2291,8 +2280,7 @@ msgstr ""
 #: fs/mount_options.pm:126
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
-msgstr ""
-"Neinterpretovat speciální znaková či bloková zařízení na souborovém systému."
+msgstr "Neinterpretovat speciální znaková či bloková zařízení na souborovém systému."
 
 #: fs/mount_options.pm:128
 #, c-format
@@ -2548,7 +2536,7 @@ msgid "Next"
 msgstr "Další"
 
 #: fs/partitioning_wizard.pm:167
-#, fuzzy, c-format
+#, c-format
 msgid "Partitionning"
 msgstr "Rozdělení disku"
 
@@ -2975,7 +2963,7 @@ msgstr "Myš"
 #: harddrake/data.pm:505
 #, c-format
 msgid "Biometry"
-msgstr ""
+msgstr "Biometrie"
 
 #: harddrake/data.pm:513
 #, c-format
@@ -3030,7 +3018,7 @@ msgstr ""
 "Zde si pro vaši zvukovou (%s) kartu můžete vybrat alternativní ovladač (buď "
 "OSS nebo ALSA)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:252
@@ -3308,7 +3296,7 @@ msgstr "Zpět"
 #: interactive/gtk.pm:544
 #, c-format
 msgid "Beware, Caps Lock is enabled"
-msgstr ""
+msgstr "Pozor, jsou povolena velká písmena"
 
 #: interactive/stdio.pm:29 interactive/stdio.pm:154
 #, c-format
@@ -5186,28 +5174,28 @@ msgid "Your scanner(s) will not be available for non-root users."
 msgstr "Váš skener(y) nebude přístupný jiným uživatelům než root."
 
 #: security/help.pm:11
-#, fuzzy, c-format
+#, c-format
 msgid "Accept bogus IPv4 error messages."
-msgstr "Akceptovat nekorektní chybové zprávy protokolu IPv4"
+msgstr "Přijímat nekorektní chybové zprávy protokolu IPv4."
 
 #: security/help.pm:13
-#, fuzzy, c-format
+#, c-format
 msgid "Accept broadcasted icmp echo."
-msgstr "Akceptovat všesměrové icmp echo"
+msgstr "Přijímat všesměrové icmp echo."
 
 #: security/help.pm:15
-#, fuzzy, c-format
+#, c-format
 msgid "Accept icmp echo."
-msgstr "Přijímat icmp echo"
+msgstr "Přijímat icmp echo."
 
 #: security/help.pm:17
-#, fuzzy, c-format
+#, c-format
 msgid "Allow autologin."
-msgstr "Povolí/zakáže automatické přihlášení."
+msgstr "Povolit automatické přihlášení."
 
 #. -PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
 #: security/help.pm:21
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
 "\n"
@@ -5215,7 +5203,7 @@ msgid ""
 "\n"
 "Else only /etc/issue is allowed."
 msgstr ""
-"Pokud je nastaveno \"OBA\", je povolena existence soubor /etc/issue\n"
+"Pokud je nastaveno \"OBA\", je povolena existence souborů /etc/issue\n"
 "a /etc/issue.net.\n"
 "\n"
 "Pokud je nastaveno \"ŽÁDNÝ\", není povolen žádný soubor issue.\n"
@@ -5223,41 +5211,40 @@ msgstr ""
 "Jinak je povolena existence pouze souboru /etc/issue."
 
 #: security/help.pm:27
-#, fuzzy, c-format
+#, c-format
 msgid "Allow reboot by the console user."
-msgstr "Povolí/zakáže reboot z konzole provedené uživatelem."
+msgstr "Povolit reboot uživatelem z konzole."
 
 #: security/help.pm:29
-#, fuzzy, c-format
+#, c-format
 msgid "Allow remote root login."
-msgstr "Povolit vzdálené přihlášení uživatele root"
+msgstr "Povolit vzdálené přihlášení uživatele root."
 
 #: security/help.pm:31
-#, fuzzy, c-format
+#, c-format
 msgid "Allow direct root login."
-msgstr "Povolí/zakáže přímé přihlášení uživatele root."
+msgstr "Povolit přímé přihlášení uživatele root."
 
 #: security/help.pm:33
-#, fuzzy, c-format
-msgid ""
-"Allow the list of users on the system on display managers (kdm and gdm)."
-msgstr "Povolí/zakáže výpis uživatelů ve správcích přihlášení (kdm nebo gdm)."
+#, c-format
+msgid "Allow the list of users on the system on display managers (kdm and gdm)."
+msgstr "Povolit výpis uživatelů systému ve správcích přihlášení (kdm nebo gdm)."
 
 #: security/help.pm:35
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow to export display when\n"
 "passing from the root account to the other users.\n"
 "\n"
 "See pam_xauth(8) for more details.'"
 msgstr ""
-"Povolí/zakáže export obrazovky při\n"
+"Povolit export obrazovky při\n"
 "přechodu z účtu root na jiné uživatele.\n"
 "\n"
 "Více podrobností viz pam_xauth(8)."
 
 #: security/help.pm:40
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow X connections:\n"
 "\n"
@@ -5267,13 +5254,13 @@ msgid ""
 "\n"
 "- \"None\" (no connection)."
 msgstr ""
-"Povolí/zakáže spojení na X server:\n"
+"Povolit spojení na X server:\n"
 "\n"
-"- VŠECHNY (všechna spojení jsou povolena),\n"
+"- \"Všechny\" (všechna spojení jsou povolena),\n"
 "\n"
-" LOKÁLNÍ (je povoleno pouze lokální spojení),\n"
+" \"Lokální\" (je povoleno pouze lokální spojení),\n"
 "\n"
-"- ŽÁDNÉ (není povoleno žádné spojení)."
+"- \"Žádné\" (není povoleno žádné spojení)."
 
 #: security/help.pm:48
 #, c-format
@@ -5286,7 +5273,7 @@ msgstr ""
 
 #. -PO: here "ALL", "Local" and "None" are values in a pull-down menu; translate them the same as they're
 #: security/help.pm:53
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Authorize:\n"
 "\n"
@@ -5302,14 +5289,14 @@ msgid ""
 msgstr ""
 "Autorizace:\n"
 "\n"
-"- pokud je nastaveno \"VŠECHNY\", jsou všechny služby kontrolovány  pomocí "
+"- pokud je nastaveno \"VŠECHNY\", jsou všechny služby kontrolovány pomocí "
 "tcp_wrapper (více hosts.deny(5)) .\n"
 "\n"
-"- pokud je nastaveno \"LOKÁLNÍ\", autorizuje pouze lokální, \n"
+"- pokud je nastaveno \"Lokální\", autorizuje pouze lokální, \n"
 "\n"
-"- pokud je nastaveno \"ŽÁDNÉ\", neautorizuje žádné.\n"
+"- pokud je nastaveno \"Žádné\", neautorizuje žádné.\n"
 "\n"
-"Pokud potřebujete autorizovat službu, použijte soubor /etc/host.allow  (Více "
+"Pokud potřebujete autorizovat službu, použijte soubor /etc/host.allow (více "
 "najdete v man hosts.allow(5))."
 
 #: security/help.pm:63
@@ -5332,30 +5319,30 @@ msgstr ""
 "služby během instalace balíčků."
 
 #: security/help.pm:72
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable crontab and at for users.\n"
 "\n"
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
 msgstr ""
-"Povolí/zakáže příkaz crontab a at pro uživatele.\n"
+"Povolit příkaz crontab a at všem uživatelům.\n"
 "\n"
-"Vyjmenovaní uživatelé se zapíšou do /etc/cron.allow a /etc/at.allow\n"
+"Vyjmenovaní uživatelé se zapíšou do souborů /etc/cron.allow a /etc/at.allow\n"
 "(více man at(1) a crontab(1))."
 
 #: security/help.pm:77
-#, fuzzy, c-format
+#, c-format
 msgid "Enable syslog reports to console 12"
-msgstr "Povolí/zakáže report syslogu zobrazovat na konzoli č. 12"
+msgstr "Povolit zobrazování hlášení syslogu na konzoli č. 12"
 
 #: security/help.pm:79
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable name resolution spoofing protection.  If\n"
 "\"%s\" is true, also reports to syslog."
 msgstr ""
-"Povolí/zakáže ochranu před spoofingem jmenných služeb. Pokud\n"
+"Povolit ochranu před spoofingem jmenných služeb. Pokud\n"
 "je nastaveno \"%s\", vypíše report do syslogu."
 
 #: security/help.pm:80
@@ -5364,24 +5351,24 @@ msgid "Security Alerts:"
 msgstr "Bezpečnostní varování:"
 
 #: security/help.pm:82
-#, fuzzy, c-format
+#, c-format
 msgid "Enable IP spoofing protection."
-msgstr "Povolit ochranu před IP spoofingem"
+msgstr "Povolit ochranu před IP spoofingem."
 
 #: security/help.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Enable libsafe if libsafe is found on the system."
-msgstr "Povolit použití knihovny libsafe, pokud je na systému nalezena"
+msgstr "Povolit použití knihovny libsafe, pokud je na systému nalezena."
 
 #: security/help.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Enable the logging of IPv4 strange packets."
-msgstr "Povolit zaznamenávání podivných IPv4 paketů"
+msgstr "Povolit zaznamenávání podivných IPv4 paketů."
 
 #: security/help.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid "Enable msec hourly security check."
-msgstr "Povolit bezpečnostní kontrolu pravidelně každou hodinu"
+msgstr "Povolit pravidelnou bezpečnostní kontrolu každou hodinu."
 
 #: security/help.pm:90
 #, c-format
@@ -5398,26 +5385,24 @@ msgid "Use password to authenticate users."
 msgstr "Použije heslo pro autentizaci uživatelů."
 
 #: security/help.pm:94
-#, fuzzy, c-format
+#, c-format
 msgid "Activate ethernet cards promiscuity check."
-msgstr ""
-"Povolí/zakáže kontrolu na nastavení promiskuitního režimu síťového rozhraní."
+msgstr "Povolit kontrolu na nastavení promiskuitního režimu síťového rozhraní."
 
 #: security/help.pm:96
-#, fuzzy, c-format
+#, c-format
 msgid "Activate daily security check."
-msgstr "Povolí/zakáže provádění denních bezpečnostních kontrol."
+msgstr "Aktivovat provádění denních bezpečnostních kontrol."
 
 #: security/help.pm:98
-#, fuzzy, c-format
+#, c-format
 msgid "Enable sulogin(8) in single user level."
-msgstr "Povolí/zakáže sulogin(8) v jednouživatelském režimu."
+msgstr "Povolit sulogin(8) v jednouživatelském režimu."
 
 #: security/help.pm:100
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
-msgstr ""
-"Přidá jméno k výjimkám, které se nekontrolují na dobu platnosti pomocí msec."
+msgstr "Přidá jméno k výjimkám, které se nekontrolují na dobu platnosti pomocí msec."
 
 #: security/help.pm:102
 #, c-format
@@ -5439,9 +5424,9 @@ msgstr ""
 "hesle."
 
 #: security/help.pm:108
-#, fuzzy, c-format
+#, c-format
 msgid "Set the root's file mode creation mask."
-msgstr "Nastavuje umask pro uživatele root."
+msgstr "Nastavuje masku režimu tvorby souborů pro uživatele root."
 
 #: security/help.pm:109
 #, c-format
@@ -5470,14 +5455,12 @@ msgstr ""
 #: security/help.pm:117
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
-msgstr ""
-"pokud je nastaveno, kontrolu práva souborů v domovském adresáři uživatele"
+msgstr "pokud je nastaveno, kontrolu práva souborů v domovském adresáři uživatele"
 
 #: security/help.pm:118
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
-msgstr ""
-"pokud je nastaveno, kontroluje, zda je síťové rozhraní v promiskuitním režimu"
+msgstr "pokud je nastaveno, kontroluje, zda je síťové rozhraní v promiskuitním režimu"
 
 #: security/help.pm:119
 #, c-format
@@ -5502,8 +5485,7 @@ msgstr "pokud je nastaveno, ověřuje kontrolní součet pro suid/sgid soubory."
 #: security/help.pm:123
 #, c-format
 msgid "if set to yes, check additions/removals of suid root files."
-msgstr ""
-"pokud je nastaveno, kontroluje přidávání/odebírání souborů se suid root."
+msgstr "pokud je nastaveno, kontroluje přidávání/odebírání souborů se suid root."
 
 #: security/help.pm:124
 #, c-format
@@ -5524,10 +5506,8 @@ msgstr "pokud je nastaveno, provádí kontrolu na chkrootkit."
 
 #: security/help.pm:127
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
-msgstr ""
-"pokud je nastaveno, odesílá report na daný email nebo přímo uživateli root"
+msgid "if set, send the mail report to this email address else send it to root."
+msgstr "pokud je nastaveno, odesílá report na daný email nebo přímo uživateli root"
 
 #: security/help.pm:128
 #, c-format
@@ -5570,9 +5550,9 @@ msgid "Timeout unit is second"
 msgstr "Čas pro vypršení je v sekundách"
 
 #: security/help.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Set the user's file mode creation mask."
-msgstr "Nastaví uživatelskou masku."
+msgstr "Nastavuje masku režimu tvorby souborů pro běžné uživatele."
 
 #: security/l10n.pm:11
 #, c-format
@@ -5687,8 +5667,7 @@ msgstr "Použije heslo pro autentizaci uživatelů"
 #: security/l10n.pm:34
 #, c-format
 msgid "Ethernet cards promiscuity check"
-msgstr ""
-"Povolí/zakáže kontrolu na nastavení promiskuitního režimu síťového rozhraní."
+msgstr "Povolí/zakáže kontrolu na nastavení promiskuitního režimu síťového rozhraní."
 
 #: security/l10n.pm:35
 #, c-format
@@ -5808,8 +5787,7 @@ msgstr "Neposílat emailem prázdná hlášení"
 #: security/l10n.pm:58
 #, c-format
 msgid "If set, send the mail report to this email address else send it to root"
-msgstr ""
-"Pokud je nastaveno, odesílá report na daný email nebo přímo uživateli root"
+msgstr "Pokud je nastaveno, odesílá report na daný email nebo přímo uživateli root"
 
 #: security/l10n.pm:59
 #, c-format
@@ -5878,8 +5856,7 @@ msgstr ""
 msgid ""
 "Passwords are now enabled, but use as a networked computer is still not "
 "recommended."
-msgstr ""
-"Hesla jsou nyní aktivní, ale stále nedoporučuji použít tento počítač na síti."
+msgstr "Hesla jsou nyní aktivní, ale stále nedoporučuji použít tento počítač na síti."
 
 #: security/level.pm:45
 #, c-format
@@ -5895,8 +5872,7 @@ msgstr ""
 msgid ""
 "There are already some restrictions, and more automatic checks are run every "
 "night."
-msgstr ""
-"Existují zde některá omezení a každou noc jsou spuštěny automatické testy."
+msgstr "Existují zde některá omezení a každou noc jsou spuštěny automatické testy."
 
 #: security/level.pm:47
 #, c-format
@@ -5950,8 +5926,7 @@ msgstr "Použít libsafe pro servery"
 
 #: security/level.pm:64
 #, c-format
-msgid ""
-"A library which defends against buffer overflow and format string attacks."
+msgid "A library which defends against buffer overflow and format string attacks."
 msgstr ""
 "Knihovna, které zabraňuje útokům proti přetečení bufferu nebo proti špatnému "
 "formátování řetězců."
@@ -6003,14 +5978,13 @@ msgstr ""
 
 #: services.pm:28
 #, c-format
-msgid ""
-"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
-msgstr ""
+msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgstr "Common UNIX Printing System (CUPS) je pokročilý systém pro správu tisku a tiskáren."
 
 #: services.pm:29
 #, c-format
 msgid "Launches the graphical display manager"
-msgstr ""
+msgstr "Spustí grafického správce přihlášení"
 
 #: services.pm:30
 #, c-format
@@ -6038,7 +6012,7 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
+msgstr "HAL je démon, který sbírá a udržuje informace o hardware"
 
 #: services.pm:36
 #, c-format
@@ -6051,8 +6025,7 @@ msgstr ""
 
 #: services.pm:38
 #, c-format
-msgid ""
-"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr "Apache je WWW server. Je používán k poskytování HTML a CGI souborů."
 
 #: services.pm:39
@@ -6136,7 +6109,7 @@ msgstr ""
 msgid ""
 "DBUS is a daemon which broadcasts notifications of system events and other "
 "messages"
-msgstr ""
+msgstr "DBUS je démon, který vysílá upozornění na události v systému a další zprávy"
 
 #: services.pm:58
 #, c-format
@@ -6188,7 +6161,7 @@ msgstr ""
 #: services.pm:68
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
-msgstr ""
+msgstr "Synchronizuje systémový čas pomocí síťového časového protokolu (NTP)"
 
 #: services.pm:69
 #, c-format
@@ -6296,9 +6269,8 @@ msgstr ""
 
 #: services.pm:92
 #, c-format
-msgid ""
-"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
-msgstr ""
+msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgstr "SANE (Scanner Access Now Easy) umožňuje přístup ke skenerům, video kamerám a dalším zařízením..."
 
 #: services.pm:93
 #, c-format
@@ -6306,6 +6278,8 @@ msgid ""
 "The SMB/CIFS protocol enables to share access to files & printers and also "
 "integrates with a Windows Server domain"
 msgstr ""
+"Protokol SMB/CIFS umožňuje sdílet přístup k souborům a tiskárnám a také integraci "
+"se serverovými doménami Windows"
 
 #: services.pm:94
 #, c-format
@@ -6318,6 +6292,8 @@ msgid ""
 "Secure Shell is a network protocol that allows data to be exchanged over a "
 "secure channel between two computers"
 msgstr ""
+"Secure Shell je síťový protokol, který umožňuje výměnu dat pomocí zabezpečeného "
+"kanálu mezi dvěma počítači"
 
 #: services.pm:96
 #, c-format
@@ -6337,12 +6313,12 @@ msgstr "Nahrát ovladače pro usb zařízení."
 #: services.pm:99
 #, c-format
 msgid "Starts the X Font Server."
-msgstr ""
+msgstr "Startuje server písem pro X."
 
 #: services.pm:100
 #, c-format
 msgid "Starts other deamons on demand."
-msgstr ""
+msgstr "Startuje ostatní démony na vyžádání."
 
 #: services.pm:123
 #, c-format
@@ -6806,75 +6782,3 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Instalace selhala"
 
-#~ msgid "Ext2"
-#~ msgstr "Ext2"
-
-#~ msgid "Journalised FS"
-#~ msgstr "Žurnálovací FS"
-
-#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
-#~ msgstr "Startuje X Font Server (to je nezbytné pro běh Xorg)."
-
-#~ msgid "Add user"
-#~ msgstr "Přidat uživatele"
-
-#~ msgid "Accept user"
-#~ msgstr "Vytvořit uživatele"
-
-#, fuzzy
-#~ msgid ""
-#~ "Do not update directory inode access times on this filesystem\n"
-#~ "(e.g, for faster access on the news spool to speed up news servers)."
-#~ msgstr ""
-#~ "Neaktualizovat čas přístupu pro tento souborový systém\n"
-#~ "(např. pro rychlejší přístup k frontě zpráv při provozování diskusního "
-#~ "serveru)."
-
-#~ msgid "No supermount"
-#~ msgstr "Bez supermountu"
-
-#~ msgid "Supermount"
-#~ msgstr "Supermount"
-
-#~ msgid "Supermount except for CDROM drives"
-#~ msgstr "Supermount vyjma jednotek CDROM"
-
-#~ msgid "Rescue partition table"
-#~ msgstr "Záchrana tabulky oddílů"
-
-#~ msgid "Removable media automounting"
-#~ msgstr "Automatické připojování pro vyjímatelná média"
-
-#~ msgid "Trying to rescue partition table"
-#~ msgstr "Pokouším se obnovit tabulku oddílů"
-
-#~ msgid ""
-#~ "Use local for all authentication and information user tell in local file"
-#~ msgstr ""
-#~ "Všechno ověřování a ukládání informací o uživateli budou probíhat na "
-#~ "lokálním souboru"
-
-#~ msgid "Accept/Refuse bogus IPv4 error messages."
-#~ msgstr "Akceptuje/odmítne nekorektní chybové zprávy protokolu IPv4."
-
-#~ msgid "Accept/Refuse broadcasted icmp echo."
-#~ msgstr "Akceptuje/odmítne všesměrové icmp echo."
-
-#~ msgid "Accept/Refuse icmp echo."
-#~ msgstr "Přijímá/odmítá icmp echo."
-
-#~ msgid "Allow/Forbid remote root login."
-#~ msgstr "Povolí vzdálené přihlášení uživatele root."
-
-#~ msgid "Enable/Disable IP spoofing protection."
-#~ msgstr "Povolí/zakáže ochranu před IP spoofingem."
-
-#~ msgid "Enable/Disable libsafe if libsafe is found on the system."
-#~ msgstr ""
-#~ "Povolí/zakáže použití knihovny libsafe, pokud je na systému nalezena."
-
-#~ msgid "Enable/Disable the logging of IPv4 strange packets."
-#~ msgstr "Povolí/zakáže zaznamenávání podivných IPv4 paketů."
-
-#~ msgid "Enable/Disable msec hourly security check."
-#~ msgstr "Povolí/zakáže bezpečnostní kontrolu pravidelně každou hodinu."
