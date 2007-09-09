@@ -1,25 +1,24 @@
-# translation of DrakX-sl.po to slovenščččina
-# Copyright (C) 2004, 2005, 2006 Free Software Foundation, Inc.
+# translation of sl.po to Slovenščina
+# Copyright (C) 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
 #
 # Matjaž Kaše <matjaz.kase@g-kabel.si>, 2004.
 # Aljoša Ločičnik <aljosa.locicnik@mandrakeprinas.org>, 2005.
 # Gregor Pirnaver <gregor.pirnaver@sdm-si.org>, 2002,2004,2005.
-# Jure Repinc <jlp@holodeck1.com>, 2005.
+# Jure Repinc <jlp@holodeck1.com>, 2005, 2007.
 # Matjaž Kaše <matjaz.kase@telemach.net>, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: DrakX-sl\n"
+"Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-04 17:16+0200\n"
-"PO-Revision-Date: 2006-09-16 09:42+0200\n"
-"Last-Translator: Matjaž Kaše <matjaz.kase@telemach.net>\n"
-"Language-Team: slovenščččina <sl@li.org>\n"
+"PO-Revision-Date: 2007-09-09 10:53+0200\n"
+"Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
+"Language-Team: Slovenščina <lugos-slo@lugos.si>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
-"n%100==4 ? 2 : 3);\n"
+"Plural-Forms:  nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #: any.pm:159
 #, c-format
@@ -72,8 +71,7 @@ msgstr "URL se mora začeti s ftp:// ali http://"
 
 #: any.pm:232
 #, c-format
-msgid ""
-"Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr ""
 "Vzpostavljanje povezave s spletno stranjo Mandriva Linux in pridobivanje "
 "seznama dosegljivih strežnikov...."
@@ -105,12 +103,12 @@ msgstr "Prosim, vnesite ime gostitelja in ime mape vašega vira NFS"
 #: any.pm:282
 #, c-format
 msgid "Hostname missing"
-msgstr ""
+msgstr "Manjka ime gostitelja"
 
 #: any.pm:283
 #, c-format
 msgid "Directory must begin with \"/\""
-msgstr ""
+msgstr "Mapa se mora pričeti z »/«"
 
 #: any.pm:287
 #, c-format
@@ -125,7 +123,7 @@ msgstr "Mapa"
 #: any.pm:310
 #, c-format
 msgid "Supplementary"
-msgstr ""
+msgstr "Dodatno"
 
 #: any.pm:345
 #, c-format
@@ -595,8 +593,7 @@ msgstr "Delovna postaja GNOME"
 msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
 "tools"
-msgstr ""
-"Grafično okolje z uporabniku prijaznim naborom programov in namiznimi orodji"
+msgstr "Grafično okolje z uporabniku prijaznim naborom programov in namiznimi orodji"
 
 #: share/meta-task/compssUsers.pl:155
 #, c-format
@@ -693,7 +690,7 @@ msgstr "<Tab>/<Alt-Tab> med elementi"
 #: steps_gtk.pm:155 steps_gtk.pm:156
 #, c-format
 msgid "Localization"
-msgstr ""
+msgstr "Področne nastavitve"
 
 #: steps_gtk.pm:159 steps_list.pm:20
 #, c-format
@@ -887,12 +884,12 @@ msgid "Estimating"
 msgstr "Ocena"
 
 #: steps_gtk.pm:511
-#, fuzzy, c-format
+#, c-format
 msgid "%d package"
 msgid_plural "%d packages"
-msgstr[0] "%d paketov"
-msgstr[1] "%d paketov"
-msgstr[2] "%d paketov"
+msgstr[0] "%d paket"
+msgstr[1] "%d paketa"
+msgstr[2] "%d paketi"
 msgstr[3] "%d paketov"
 
 #: steps_gtk.pm:589
@@ -1021,6 +1018,8 @@ msgid ""
 "Your system does not have enough space left for installation or upgrade (%"
 "dMB > %dMB)"
 msgstr ""
+"Sistem nima dovolj prostora za namestitev ali "
+"nadgradnjo (%d MB > %d MB)"
 
 #: steps_interactive.pm:385
 #, c-format
@@ -1049,22 +1048,22 @@ msgstr "Neustrezna datoteka"
 #: steps_interactive.pm:413
 #, c-format
 msgid "Install Mandriva KDE Desktop"
-msgstr ""
+msgstr "Namizje Mandriva KDE"
 
 #: steps_interactive.pm:414
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
-msgstr ""
+msgstr "Namizje Mandriva GNOME"
 
 #: steps_interactive.pm:415
-#, fuzzy, c-format
+#, c-format
 msgid "Custom install"
-msgstr "Minimalna namestitev"
+msgstr "Po meri"
 
 #: steps_interactive.pm:418
 #, c-format
 msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
-msgstr ""
+msgstr "Tu lahko izberete namizno okolje, ki bo nameščeno:"
 
 #: steps_interactive.pm:503
 #, c-format
@@ -1113,7 +1112,7 @@ msgstr "Pripravljanje namestitve"
 #: steps_interactive.pm:552
 #, c-format
 msgid "Installing package %s"
-msgstr ""
+msgstr "Nameščanje paketa %s"
 
 #: steps_interactive.pm:576
 #, c-format
@@ -1133,22 +1132,22 @@ msgstr "Poskusi znova"
 #: steps_interactive.pm:581
 #, c-format
 msgid "Skip this package"
-msgstr ""
+msgstr "Spusti ta paket"
 
 #: steps_interactive.pm:582
 #, c-format
 msgid "Skip all packages from medium \"%s\""
-msgstr ""
+msgstr "Spusti vse pakete z nosilca »%s«"
 
 #: steps_interactive.pm:583
-#, fuzzy, c-format
+#, c-format
 msgid "Go back to media and packages selection"
-msgstr "Shrani izbiro paketov"
+msgstr "Nazaj na izbiro nosilcev in paketov"
 
 #: steps_interactive.pm:586
-#, fuzzy, c-format
+#, c-format
 msgid "There was an error installing package %s."
-msgstr "Med nameščanjem paketov je prišlo do napake:"
+msgstr "Prišlo je do napake med nameščanjem paketa %s."
 
 #: steps_interactive.pm:604
 #, c-format
@@ -1508,111 +1507,3 @@ msgid ""
 "Exit"
 msgstr "Izhod"
 
-#~ msgid "Boot"
-#~ msgstr "Zagon"
-
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Authentication"
-#~ msgstr "Overjanje"
-
-#~ msgid "Arkeia"
-#~ msgstr "Arkeia"
-
-#~ msgid "Flatout"
-#~ msgstr "Flatout"
-
-#~ msgid "Gwenview"
-#~ msgstr "Gwenview"
-
-#~ msgid "3D"
-#~ msgstr "3D"
-
-#~ msgid "CMS"
-#~ msgstr "CMS"
-
-#~ msgid "CRM"
-#~ msgstr "CRM"
-
-#~ msgid "2007 product line"
-#~ msgstr "Izdaje 2007"
-
-#~ msgid "Invictus Firewall"
-#~ msgstr "Požarni zid Invictus"
-
-#~ msgid "Discovery Live Mode"
-#~ msgstr "Živi način za Discovery"
-
-#~ msgid "How to register"
-#~ msgstr "Kako se registrirati"
-
-#~ msgid "Rpmdrake 2"
-#~ msgstr "Rpmdrake 2"
-
-#~ msgid "Mandriva Online Services"
-#~ msgstr "Spletne storitve Mandriva"
-
-#~ msgid "New Theme"
-#~ msgstr "Nova tema"
-
-#~ msgid "Web 2.0"
-#~ msgstr "Web 2.0"
-
-#~ msgid "Kaspersky"
-#~ msgstr "Kaspersky"
-
-#~ msgid "LinDVD"
-#~ msgstr "LinDVD"
-
-#~ msgid "Skype"
-#~ msgstr "Skype"
-
-#~ msgid "Transgaming/Cedega"
-#~ msgstr "Transgaming/Cedega"
-
-#~ msgid "DrakVPN"
-#~ msgstr "DrakVPN"
-
-#, fuzzy
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "(%d paketov, %d MB)"
-#~ msgstr[1] "(%d paketov, %d MB)"
-#~ msgstr[2] "(%d paketov, %d MB)"
-#~ msgstr[3] "(%d paketov, %d MB)"
-
-#~ msgid "%d packages"
-#~ msgstr "%d paketov"
-
-#~ msgid "Language"
-#~ msgstr "Jezik"
-
-#~ msgid "License"
-#~ msgstr "Licenca"
-
-#~ msgid "Installation class"
-#~ msgstr "Razred namestitve "
-
-#~ msgid "Formatting"
-#~ msgstr "Formatiranje"
-
-#~ msgid "Choosing packages"
-#~ msgstr "Izbiranje paketov "
-
-#~ msgid "Users"
-#~ msgstr "Uporabniki"
-
-#~ msgid "Networking"
-#~ msgstr "Povezovanje"
-
-#~ msgid "Configure X"
-#~ msgstr "Nastavitev X"
-
-#~ msgid ""
-#~ "Can not access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "Ne najdem modulov jedra, ki bi se ujemali z vašim jedrom. (Manjka "
-#~ "datoteka %s) To običajno pomeni, da vaša zagonska disketa ni usklajena z "
-#~ "virom namestitve. Prosimo, ustvarite novo zagonsko disketo."
