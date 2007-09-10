@@ -1083,7 +1083,7 @@ my @icon_paths;
 sub add_icon_path { push @icon_paths, @_ }
 sub _icon_paths() {
    (@icon_paths, (exists $ENV{SHARE_PATH} ? ($ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/icons", "$ENV{SHARE_PATH}/libDrakX/pixmaps") : ()),
-    "/usr/lib/libDrakX/icons", "pixmaps", 'data/icons', 'standalone/icons', '/usr/share/rpmdrake/icons');
+    "/usr/lib/libDrakX/icons", "pixmaps", 'data/icons', 'data/pixmaps', 'standalone/icons', '/usr/share/rpmdrake/icons');
 }  
 
 sub main {
