@@ -253,7 +253,7 @@ sub prepare_write_fstab {
 
 	    my $file_dep = $options =~ /\b(loop|bind)\b/ ? $device : '';
 
-	    [ $file_dep, $mntpoint, $comment . join(' ', $device, $mntpoint, $fs_type, $options || 'defaults', $freq, $passno) . "\n" ];
+	    [ $file_dep, $mntpoint, $comment . join(' ', $device, $mntpoint, $fs_type, $options, $freq, $passno) . "\n" ];
 	} else {
 	    ();
 	}

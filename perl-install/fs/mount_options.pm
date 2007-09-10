@@ -103,7 +103,7 @@ sub pack_ {
 }
 sub pack {
     my ($part, $options, $unknown) = @_;
-    $part->{options} = pack_($part, $options, $unknown);
+    $part->{options} = pack_($part, $options, $unknown) || 'defaults';
     noreturn();
 }
 
