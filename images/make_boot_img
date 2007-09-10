@@ -734,6 +734,7 @@ sub boot_iso {
 
     my $with_gfxboot = 0;
     _ "cp /usr/share/gfxboot/themes/Mandriva/install/* .boot_iso/isolinux" if $with_gfxboot;
+#    _ "cp /home/pixel/cooker/soft/theme/mandriva-gfxboot-theme/inst/* .boot_iso/isolinux" if $with_gfxboot;
 
     output('.boot_iso/isolinux/isolinux.cfg', syslinux_cfg_all('', $with_gfxboot));
 
