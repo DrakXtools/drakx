@@ -449,9 +449,9 @@ msgid "%s should be above 500. Accept anyway?"
 msgstr "%s deve ser acima de 500. Aceitar mesmo assim?"
 
 #: any.pm:768
-#, fuzzy, c-format
+#, c-format
 msgid "User management"
-msgstr "Nome de usuário"
+msgstr "Gerenciamento de usuário"
 
 #: any.pm:775 authentication.pm:182
 #, c-format
@@ -459,11 +459,9 @@ msgid "Set administrator (root) password"
 msgstr "Especifique a senha do root"
 
 #: any.pm:780
-#, fuzzy, c-format
+#, c-format
 msgid "Enter a user"
-msgstr ""
-"Digite um usuário\n"
-"%s"
+msgstr "Digite um usuário"
 
 #: any.pm:781
 #, c-format
@@ -776,7 +774,7 @@ msgstr "Arquivo local:"
 #: authentication.pm:66
 #, c-format
 msgid "Use information stored in local files for all authentication"
-msgstr ""
+msgstr "Usa informação armazenada em arquivos locais para autenticação"
 
 #: authentication.pm:67
 #, c-format
@@ -1305,14 +1303,14 @@ msgid "Unknown"
 msgstr "Desconhecido"
 
 #: diskdrake/hd_gtk.pm:354
-#, fuzzy, c-format
+#, c-format
 msgid "Ext3"
-msgstr "Sair"
+msgstr "Ext3"
 
 #: diskdrake/hd_gtk.pm:354
-#, fuzzy, c-format
+#, c-format
 msgid "XFS"
-msgstr "HFS"
+msgstr "XFS"
 
 #: diskdrake/hd_gtk.pm:354
 #, c-format
@@ -1918,12 +1916,12 @@ msgstr "Dispositivo: "
 #: diskdrake/interactive.pm:1227
 #, c-format
 msgid "Volume label: "
-msgstr "Nome do Volume:"
+msgstr "Nome do volume: "
 
 #: diskdrake/interactive.pm:1241
 #, c-format
 msgid "UUID: "
-msgstr ""
+msgstr "UUID: "
 
 #: diskdrake/interactive.pm:1242
 #, c-format
@@ -2051,9 +2049,9 @@ msgstr ""
 "dual boot do seu sistema.\n"
 
 #: diskdrake/interactive.pm:1280
-#, fuzzy, c-format
+#, c-format
 msgid "Free space on %s (%s)"
-msgstr "Espaço vazio em %s (%s)"
+msgstr "Espaço livre em %s (%s)"
 
 #: diskdrake/interactive.pm:1289
 #, c-format
@@ -2283,7 +2281,7 @@ msgstr "Usar um sistema de arquivos encriptado"
 #: fs/mount_options.pm:113
 #, c-format
 msgid "Flush write cache on file close"
-msgstr ""
+msgstr "Esvaziar cache de escrita ao fechar arquivo"
 
 #: fs/mount_options.pm:115
 #, c-format
@@ -2301,13 +2299,13 @@ msgstr ""
 "servidores de notícias)."
 
 #: fs/mount_options.pm:123
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
-"Não atualize o tempo de acesso ao inode neste sistema de arquivos\n"
-"(ex. para um acesso mais rápido ao spoll de notícias, para acelerar os "
+"Atualiza tempo de acesso ao inode neste sistema de arquivos de maneira mais eficiente\n"
+"(ex. para um acesso mais rápido ao spool de notícias, acelerando os "
 "servidores de notícias)."
 
 #: fs/mount_options.pm:123
@@ -2582,7 +2580,7 @@ msgid "Next"
 msgstr "Próximo"
 
 #: fs/partitioning_wizard.pm:167
-#, fuzzy, c-format
+#, c-format
 msgid "Partitionning"
 msgstr "Particionamento"
 
@@ -3012,7 +3010,7 @@ msgstr "Mouse"
 #: harddrake/data.pm:505
 #, c-format
 msgid "Biometry"
-msgstr ""
+msgstr "Biometria"
 
 #: harddrake/data.pm:513
 #, c-format
@@ -3032,7 +3030,7 @@ msgstr "Desconhecido/Outros"
 #: harddrake/data.pm:561
 #, c-format
 msgid "cpu # "
-msgstr "CPU # "
+msgstr "cpu # "
 
 #: harddrake/sound.pm:201
 #, c-format
@@ -3345,12 +3343,12 @@ msgstr "Anterior"
 #: interactive/gtk.pm:544
 #, c-format
 msgid "Beware, Caps Lock is enabled"
-msgstr ""
+msgstr "Cuidado, tecla Caps Lock está ligada"
 
 #: interactive/stdio.pm:29 interactive/stdio.pm:154
 #, c-format
 msgid "Bad choice, try again\n"
-msgstr "Má escolha, tente novamente\n"
+msgstr "Escolha ruim, tente novamente\n"
 
 #: interactive/stdio.pm:30 interactive/stdio.pm:149
 #, c-format
@@ -5233,28 +5231,28 @@ msgstr ""
 "diferentes do superusuário (usuários comuns)."
 
 #: security/help.pm:11
-#, fuzzy, c-format
+#, c-format
 msgid "Accept bogus IPv4 error messages."
-msgstr "Aceitar mensagens de erro IPv4"
+msgstr "Aceitar mensagens de erro espúrias IPv4."
 
 #: security/help.pm:13
-#, fuzzy, c-format
+#, c-format
 msgid "Accept broadcasted icmp echo."
-msgstr "Aceitar eco ICMP transmitido"
+msgstr "Aceitar eco ICMP retransmitido."
 
 #: security/help.pm:15
-#, fuzzy, c-format
+#, c-format
 msgid "Accept icmp echo."
-msgstr "Aceitar echo ICMP"
+msgstr "Aceitar echo ICMP."
 
 #: security/help.pm:17
-#, fuzzy, c-format
+#, c-format
 msgid "Allow autologin."
-msgstr "Permite/nega o login automático."
+msgstr "Permite o login automático."
 
 #. -PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
 #: security/help.pm:21
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
 "\n"
@@ -5264,47 +5262,47 @@ msgid ""
 msgstr ""
 "Ao escolher \"ALL\", /etc/issue e /etc/issue.net poderão existir.\n"
 "\n"
-"Se escolher NONE, nenhum arquivo issue será permitido.\n"
+"Se escolher \"None\", nenhum arquivo issue será permitido.\n"
 "\n"
 "Caso contrário, somente o /etc/issue será permitido."
 
 #: security/help.pm:27
-#, fuzzy, c-format
+#, c-format
 msgid "Allow reboot by the console user."
-msgstr "Permite/proíbe que o usuário do console possa reiniciar a máquina."
+msgstr "Permite que usuário do console possa reiniciar a máquina."
 
 #: security/help.pm:29
-#, fuzzy, c-format
+#, c-format
 msgid "Allow remote root login."
-msgstr "Permitir login remoto do root"
+msgstr "Permitir login remoto do root."
 
 #: security/help.pm:31
-#, fuzzy, c-format
+#, c-format
 msgid "Allow direct root login."
-msgstr "Permite/nega o login direto do root."
+msgstr "Permite o login direto do root."
 
 #: security/help.pm:33
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr ""
-"Permite/proíbe a lista de usuários no gerenciador gráfico (kdm e  gdm)."
+"Permite a listagem de usuários no gerenciador gráfico (kdm e gdm)."
 
 #: security/help.pm:35
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow to export display when\n"
 "passing from the root account to the other users.\n"
 "\n"
 "See pam_xauth(8) for more details.'"
 msgstr ""
-"Permite/nega a exportação do display ao\n"
-"mudar da conta de root para de outros usuários.\n"
+"Permite a exportar o display ao\n"
+"mudar da conta de root para outros usuários.\n"
 "\n"
 "Veja pam_xauth(8) para mais detalhes."
 
 #: security/help.pm:40
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow X connections:\n"
 "\n"
@@ -5314,13 +5312,13 @@ msgid ""
 "\n"
 "- \"None\" (no connection)."
 msgstr ""
-"Permite/nega as conexões ao X (servidor gráfico):\n"
+"Permite conexões ao X (servidor gráfico):\n"
 "\n"
-"- ALL (todas as conexões são permitidas),\n"
+"- \"All\" (todas as conexões são permitidas),\n"
 "\n"
-"- LOCAL (somente as conexões do computador local),\n"
+"- \"Local\" (somente as conexões do computador local),\n"
 "\n"
-"- NONE (nenhuma conexão)."
+"- \"None\" (nenhuma conexão)."
 
 #: security/help.pm:48
 #, c-format
@@ -5333,7 +5331,7 @@ msgstr ""
 
 #. -PO: here "ALL", "Local" and "None" are values in a pull-down menu; translate them the same as they're
 #: security/help.pm:53
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Authorize:\n"
 "\n"
@@ -5352,9 +5350,9 @@ msgstr ""
 "- todos os serviços controlados por tcp_wrappers (veja a página do manual de "
 "hosts.deny(5)), se escolher \"ALL\",\n"
 "\n"
-"- somente o local, se escolher \"LOCAL\"\n"
+"- somente da máquina local, se escolher \"Local\"\n"
 "\n"
-"- nenhum, se escolher \"NONE\".\n"
+"- nenhum, se escolher \"None\".\n"
 "\n"
 "Para autorizar os serviços que você necessita, use o arquivo /etc/hosts."
 "allow (veja o manual do hosts.allow (5))."
@@ -5381,31 +5379,31 @@ msgstr ""
 "durante a instalação dos pacotes."
 
 #: security/help.pm:72
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable crontab and at for users.\n"
 "\n"
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
 msgstr ""
-"Ativa/desativa o crontab para usuários.\n"
+"Habilita o crontab e at para usuários.\n"
 "\n"
-"Insira os usuários permitidos em /etc/cron.allow e do \n"
-"/etc/at.allow (veja nas páginas de manual do  at(1) e crontab(1))."
+"Insira os usuários permitidos em /etc/cron.allow e /etc/at.allow\n"
+"(veja as páginas de manual do at(1) e crontab(1))."
 
 #: security/help.pm:77
-#, fuzzy, c-format
+#, c-format
 msgid "Enable syslog reports to console 12"
-msgstr "Ativa/desativa a gravação do syslog para o console 12"
+msgstr "Habilita a saída do syslog para o console 12"
 
 #: security/help.pm:79
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable name resolution spoofing protection.  If\n"
 "\"%s\" is true, also reports to syslog."
 msgstr ""
-"Habilita/desabilita a proteção de spoofing de resolução de nomes. Se\n"
-"\"%s\" for verdadeiro, será reportado no syslog."
+"Habilita a proteção de spoofing de resolução de nomes. Se\n"
+"\"%s\" for verdadeiro, também será reportado no syslog."
 
 #: security/help.pm:80
 #, c-format
@@ -5413,24 +5411,24 @@ msgid "Security Alerts:"
 msgstr "Alertas de Segurança:"
 
 #: security/help.pm:82
-#, fuzzy, c-format
+#, c-format
 msgid "Enable IP spoofing protection."
-msgstr "Habilitar proteção por IP spoofing"
+msgstr "Habilitar proteção para IP spoofing."
 
 #: security/help.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Enable libsafe if libsafe is found on the system."
-msgstr "Habilitar 'libsafe' se for encontrado no sistema"
+msgstr "Habilitar libsafe se for encontrada no sistema."
 
 #: security/help.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Enable the logging of IPv4 strange packets."
-msgstr "Habilitar relatório dos pacotes IPv4 estranhos"
+msgstr "Habilitar relatório de pacotes IPv4 estranhos."
 
 #: security/help.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid "Enable msec hourly security check."
-msgstr "Ativar verificação msec de hora em hora"
+msgstr "Habilitar verificação de seguraça do msec de hora em hora."
 
 #: security/help.pm:90
 #, c-format
@@ -5447,20 +5445,19 @@ msgid "Use password to authenticate users."
 msgstr "Usa a senha para autenticar os usuários."
 
 #: security/help.pm:94
-#, fuzzy, c-format
+#, c-format
 msgid "Activate ethernet cards promiscuity check."
-msgstr ""
-"Ativa/desativa a verificação do modo de promiscuidade em placas Ethernet."
+msgstr "Ativa a verificação do modo promíscuo em placas ethernet."
 
 #: security/help.pm:96
-#, fuzzy, c-format
+#, c-format
 msgid "Activate daily security check."
-msgstr "Ativa/desativa a verificação diária de segurança."
+msgstr "Ativa a verificação diária de segurança."
 
 #: security/help.pm:98
-#, fuzzy, c-format
+#, c-format
 msgid "Enable sulogin(8) in single user level."
-msgstr "Ativa/desativa o sulogin(8) no nível do usuário simples."
+msgstr "Ativa o sulogin(8) no nível de usuário único (single user)."
 
 #: security/help.pm:100
 #, c-format
@@ -5493,9 +5490,9 @@ msgstr ""
 "letras interpretadas pelo sistema)."
 
 #: security/help.pm:108
-#, fuzzy, c-format
+#, c-format
 msgid "Set the root's file mode creation mask."
-msgstr "Define a umask para a conta de root."
+msgstr "Define a umask para criação de arquivos do root."
 
 #: security/help.pm:109
 #, c-format
@@ -5635,9 +5632,9 @@ msgid "Timeout unit is second"
 msgstr "A unidade de tempo limite é em segundos"
 
 #: security/help.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Set the user's file mode creation mask."
-msgstr "Define a umask para usuários."
+msgstr "Define a umask para criação de arquivos para usuários."
 
 #: security/l10n.pm:11
 #, c-format
@@ -6078,11 +6075,12 @@ msgstr ""
 msgid ""
 "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr ""
+"Common UNIX Printing System (CUPS) é um sistema avançado de filas de impressão"
 
 #: services.pm:29
 #, c-format
 msgid "Launches the graphical display manager"
-msgstr ""
+msgstr "Executa o gerenciador de login gráfico"
 
 #: services.pm:30
 #, c-format
@@ -6110,7 +6108,7 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
+msgstr "HAL é um serviço que coleta e mantém informações sobre o hardware"
 
 #: services.pm:36
 #, c-format
@@ -6217,6 +6215,8 @@ msgid ""
 "DBUS is a daemon which broadcasts notifications of system events and other "
 "messages"
 msgstr ""
+"DBUS é um servidor que anuncia notificações de eventos do sistema e outras "
+"mensagens"
 
 #: services.pm:58
 #, c-format
@@ -6270,7 +6270,7 @@ msgstr ""
 #: services.pm:68
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
-msgstr ""
+msgstr "Sincroniza a hora do sistema usando o Network Time Protocol (NTP)"
 
 #: services.pm:69
 #, c-format
@@ -6386,6 +6386,7 @@ msgstr ""
 msgid ""
 "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
+"SANE (Scanner Access Now Easy) habilita o acesso a scanners, câmeras de vídeo, ..."
 
 #: services.pm:93
 #, c-format
@@ -6393,6 +6394,8 @@ msgid ""
 "The SMB/CIFS protocol enables to share access to files & printers and also "
 "integrates with a Windows Server domain"
 msgstr ""
+"O protocolo SMB/CIFS habilita acesso compartilhado a arquivos e impressoras e também "
+"integra-se a um domínio de um servidor Windows"
 
 #: services.pm:94
 #, c-format
@@ -6405,6 +6408,8 @@ msgid ""
 "Secure Shell is a network protocol that allows data to be exchanged over a "
 "secure channel between two computers"
 msgstr ""
+"Secure Shell é um protocolo de rede que permite que dados sejam trocados por um "
+"canal seguro entre dois computadores"
 
 #: services.pm:96
 #, c-format
@@ -6424,12 +6429,12 @@ msgstr "Carrega os drivers para seus dispositivos usb."
 #: services.pm:99
 #, c-format
 msgid "Starts the X Font Server."
-msgstr ""
+msgstr "Inicia o servidor de fontes X."
 
 #: services.pm:100
 #, c-format
 msgid "Starts other deamons on demand."
-msgstr ""
+msgstr "Inicia outros serviços sob demanda."
 
 #: services.pm:123
 #, c-format
@@ -6915,7 +6920,6 @@ msgstr "Falha na instalação"
 #~ msgid "Accept user"
 #~ msgstr "Aceitar usuário"
 
-#, fuzzy
 #~ msgid ""
 #~ "Do not update directory inode access times on this filesystem\n"
 #~ "(e.g, for faster access on the news spool to speed up news servers)."
