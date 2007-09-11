@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "POT-Creation-Date: 2007-09-05 13:56+0200\n"
-"PO-Revision-Date: 2007-09-12 00:07+0200\n"
+"PO-Revision-Date: 2007-09-12 01:14+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -755,7 +755,7 @@ msgstr "Helyi fájl:"
 #: authentication.pm:66
 #, c-format
 msgid "Use information stored in local files for all authentication"
-msgstr ""
+msgstr "Helyi fájlokban levő információk használata minden felhasználóazonosításhoz"
 
 #: authentication.pm:67
 #, c-format
@@ -1283,14 +1283,14 @@ msgid "Unknown"
 msgstr "Ismeretlen"
 
 #: diskdrake/hd_gtk.pm:354
-#, fuzzy, c-format
+#, c-format
 msgid "Ext3"
-msgstr "Kilépés"
+msgstr "Ext3"
 
 #: diskdrake/hd_gtk.pm:354
-#, fuzzy, c-format
+#, c-format
 msgid "XFS"
-msgstr "HFS"
+msgstr "XFS"
 
 #: diskdrake/hd_gtk.pm:354
 #, c-format
@@ -1894,7 +1894,7 @@ msgstr "Kötetcímke: "
 #: diskdrake/interactive.pm:1241
 #, c-format
 msgid "UUID: "
-msgstr ""
+msgstr "UUID: "
 
 #: diskdrake/interactive.pm:1242
 #, c-format
@@ -2255,7 +2255,7 @@ msgstr "Titkosított fájlrendszer használata"
 #: fs/mount_options.pm:113
 #, c-format
 msgid "Flush write cache on file close"
-msgstr ""
+msgstr "Az írási gyorstár kiírása fájlbezáráskor"
 
 #: fs/mount_options.pm:115
 #, c-format
@@ -2274,13 +2274,14 @@ msgstr ""
 "(például hírkiszolgálók esetén gyorsabb hozzáférést biztosíthat a hírekhez)."
 
 #: fs/mount_options.pm:123
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
-"Az inode-ok elérési időpontjai ne legyenek frissítve ezen a fájlrendszeren\n"
-"(például hírkiszolgálók esetén gyorsabb hozzáférést biztosíthat a hírekhez)."
+"Az inode-ok elérési időpontjai hatékonyabb módon legyenek frissítve\n"
+"ezen a fájlrendszeren (például hírkiszolgálók esetén gyorsabb hozzáférést\n"
+"biztosíthat a hírekhez)."
 
 #: fs/mount_options.pm:123
 #, c-format
@@ -2982,7 +2983,7 @@ msgstr "Egér"
 #: harddrake/data.pm:505
 #, c-format
 msgid "Biometry"
-msgstr ""
+msgstr "Biometria"
 
 #: harddrake/data.pm:513
 #, c-format
@@ -5251,7 +5252,7 @@ msgstr "Automatikus bejelentkezés engedélyezése"
 
 #. -PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
 #: security/help.pm:21
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
 "\n"
@@ -5259,9 +5260,9 @@ msgid ""
 "\n"
 "Else only /etc/issue is allowed."
 msgstr ""
-"ALL érték esetén létezhet /etc/issue és /etc/issue.net nevű fájl is.\n"
+"\"Mind\" beállítás esetén létezhet /etc/issue és /etc/issue.net nevű fájl is.\n"
 "\n"
-"NONE érték esetén egyik \"issue\" fájl sem létezhet.\n"
+"\"Egyik sem\" beállítás esetén egyik \"issue\" fájl sem létezhet.\n"
 "\n"
 "Egyéb esetekben pedig csak a /etc/issue fájl engedélyezett."
 
@@ -5288,20 +5289,20 @@ msgstr ""
 "bejelentkezéskezelőkben (KDM és GDM)"
 
 #: security/help.pm:35
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow to export display when\n"
 "passing from the root account to the other users.\n"
 "\n"
 "See pam_xauth(8) for more details.'"
 msgstr ""
-"A képernyő exportálásának engedélyezése/letiltása a\n"
+"A képernyő exportálásának engedélyezése a\n"
 "rendszergazdai azonosítóról egy másikra való átlépéskor.\n"
 "\n"
 "További részletek: pam_xauth(8)."
 
 #: security/help.pm:40
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow X connections:\n"
 "\n"
@@ -5311,13 +5312,13 @@ msgid ""
 "\n"
 "- \"None\" (no connection)."
 msgstr ""
-"X-kapcsolatok engedélyezése/letiltása:\n"
+"X-kapcsolatok engedélyezése:\n"
 "\n"
-"- ALL érték esetén minden kapcsolat engedélyezett\n"
+"- \"Mind\": minden kapcsolat engedélyezett\n"
 "\n"
-"- LOCAL érték esetén csak a helyi kapcsolatok engedélyezettek\n"
+"- \"Helyi\": csak a helyi gépről induló kapcsolatok engedélyezettek\n"
 "\n"
-"- NONE érték esetén semmilyen kapcsolat nincs engedélyezve"
+"- \"Egyik sem\": semmilyen kapcsolat nincs engedélyezve"
 
 #: security/help.pm:48
 #, c-format
@@ -5330,7 +5331,7 @@ msgstr ""
 
 #. -PO: here "ALL", "Local" and "None" are values in a pull-down menu; translate them the same as they're
 #: security/help.pm:53
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Authorize:\n"
 "\n"
@@ -5346,15 +5347,15 @@ msgid ""
 msgstr ""
 "Engedélyezés a következők számára:\n"
 "\n"
-"- ALL érték esetén: a tcp_wrappers által vezérelt összes szolgáltatás\n"
-"(információ a hosts.deny(5) leírásban)\n"
+"- \"Mind\" beállítás esetén: a tcp_wrappers által vezérelt összes szolgáltatás\n"
+"(információ a hosts.deny(5) leírásban (\"man\"))\n"
 "\n"
-"- LOCAL érték esetén: csak a helyiek\n"
+"- \"Helyi\" beállítás esetén: csak a helyiek\n"
 "\n"
-"- NONE érték esetén: egyik sem\n"
+"- \"Egyik sem\" beállítás esetén: egyik sem\n"
 "\n"
 "A szükséges szolgáltatások engedélyezése a /etc/hosts.allow fájl\n"
-"használatával végezhető (információ a hosts.allow(5) leírásban)."
+"használatával végezhető (információ a hosts.allow(5) leírásban (\"man\"))."
 
 #: security/help.pm:63
 #, c-format
@@ -5378,20 +5379,18 @@ msgstr ""
 "szolgáltatást (az alapján, hogy szerepel-e a fájlban)."
 
 #: security/help.pm:72
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable crontab and at for users.\n"
 "\n"
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
 msgstr ""
-"A 'cron' és az 'at' használatának engedélyezése/letiltása a felhasználók\n"
-"számára.\n"
+"A 'cron' és az 'at' használatának engedélyezése a felhasználók számára.\n"
 "\n"
 "Az engedélyezett felhasználókat a /etc/cron.allow illetve a\n"
-"/etc/at.allow fájlokba kell beírni (információ az at(1) illetve a crontab"
-"(1)\n"
-"leírásban)."
+"/etc/at.allow fájlokba kell beírni (információ az at(1) illetve a\n"
+"crontab(1) leírásban (\"man\"))."
 
 #: security/help.pm:77
 #, c-format
@@ -5399,13 +5398,13 @@ msgid "Enable syslog reports to console 12"
 msgstr "A 12-es konzolra történő rendszernaplózás bekapcsolása"
 
 #: security/help.pm:79
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable name resolution spoofing protection.  If\n"
 "\"%s\" is true, also reports to syslog."
 msgstr ""
 "A 'DNS spoofing' (a névfeloldásnak az eredetitől eltérő rendszerrel való\n"
-"végeztetése) elleni védelem bekapcsolása/kikapcsolása. Ha az \"%s\"\n"
+"végeztetése) elleni védelem bekapcsolása. Ha a(z) \"%s\"\n"
 "érték igazra van állítva, akkor a rendszernaplóba is ír."
 
 #: security/help.pm:80
@@ -5496,9 +5495,9 @@ msgstr ""
 "számának beállítása"
 
 #: security/help.pm:108
-#, fuzzy, c-format
+#, c-format
 msgid "Set the root's file mode creation mask."
-msgstr "A rendszergazdához tartozó umask-érték beállítása"
+msgstr "A rendszergazdához tartozó létrehozási fájlmód-maszk beállítása"
 
 #: security/help.pm:109
 #, c-format
@@ -5638,9 +5637,9 @@ msgid "Timeout unit is second"
 msgstr "A várakozási idő egysége a másodperc"
 
 #: security/help.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Set the user's file mode creation mask."
-msgstr "A felhasználóhoz tartozó umask-érték beállítása"
+msgstr "A felhasználóhoz tartozó létrehozási fájlmód-maszk beállítása"
 
 #: security/l10n.pm:11
 #, c-format
