@@ -53,7 +53,6 @@ case "$1" in
  stop)
 	# dummy
  	rm -f $SUBSYS
- 	action "Stopping %s" harddrake /usr/share/harddrake/service_harddrake stop 2>/dev/null
  	;;
  *)
  	gprintf "Usage: %s {start|stop}\n" "$0"
