@@ -6,10 +6,10 @@
 # Tamas Szanto <tszanto@mol.hu>, 2001.
 msgid ""
 msgstr ""
-"Project-Id-Version: libDrakX-standalone-hu\n"
+"Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-08-09 11:27+0200\n"
-"PO-Revision-Date: 2007-02-26 20:14+0100\n"
+"PO-Revision-Date: 2007-09-11 23:42+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -225,12 +225,12 @@ msgstr "Kernel:"
 #: drakbug:102
 #, c-format
 msgid "The \"%s\" program has crashed with the following error:"
-msgstr ""
+msgstr "A(z) \"%s\" program leállt a következő hibával:"
 
 #: drakbug:104
 #, c-format
 msgid "The \"%s\" program has crashed."
-msgstr ""
+msgstr "A(z) \"%s\" program leállt."
 
 #: drakbug:106
 #, c-format
@@ -675,8 +675,7 @@ msgstr " --help                - jelen segítség megjelenítése\n"
 
 #: drakhelp:23
 #, c-format
-msgid ""
-" --id <id_label>       - load the html help page which refers to id_label\n"
+msgid " --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
 " --id <azonosító>      - a megadott azonosítócímkéjű HTML segítség "
 "betöltése\n"
@@ -1620,10 +1619,8 @@ msgstr "Busz"
 
 #: harddrake2:31
 #, c-format
-msgid ""
-"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
-msgstr ""
-"Ez a fizikai busz, amelyre az eszköz csatlakoztatva van (PCI, USB, ...)"
+msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgstr "Ez a fizikai busz, amelyre az eszköz csatlakoztatva van (PCI, USB, ...)"
 
 #: harddrake2:33 harddrake2:146
 #, c-format
@@ -1774,12 +1771,12 @@ msgstr "Az eszköz gyártójának neve"
 #: harddrake2:55
 #, c-format
 msgid "PCI domain"
-msgstr ""
+msgstr "PCI-tartomány"
 
 #: harddrake2:55
-#, fuzzy, c-format
+#, c-format
 msgid "the PCI domain of the device"
-msgstr "Az eszköz gyártójának neve"
+msgstr "Az eszköz PCI-tartománya"
 
 #: harddrake2:56
 #, c-format
@@ -1976,8 +1973,7 @@ msgstr "Van-e az FPU-nak IRQ-vektora"
 #: harddrake2:78
 #, c-format
 msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr ""
-"Ha igen, akkor az aritmetikai társprocesszor rendelkezik kivételvektorral"
+msgstr "Ha igen, akkor az aritmetikai társprocesszor rendelkezik kivételvektorral"
 
 #: harddrake2:79
 #, c-format
@@ -1987,8 +1983,7 @@ msgstr "F00F-hiba"
 #: harddrake2:79
 #, c-format
 msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
-msgstr ""
-"A korai Pentiumok hibásak voltak - az F00F bájtkód értelmezésekor lefagytak"
+msgstr "A korai Pentiumok hibásak voltak - az F00F bájtkód értelmezésekor lefagytak"
 
 #: harddrake2:80
 #, c-format
@@ -2168,8 +2163,7 @@ msgstr "Eszközfájl"
 
 #: harddrake2:115
 #, c-format
-msgid ""
-"the device file used to communicate with the kernel driver for the mouse"
+msgid "the device file used to communicate with the kernel driver for the mouse"
 msgstr "Az egér kernelbeli meghajtójával kommunikáló eszközfájl"
 
 #: harddrake2:116
@@ -2369,8 +2363,7 @@ msgstr "Beállítóprogram indítása"
 
 #: harddrake2:299
 #, c-format
-msgid ""
-"Click on a device in the left tree in order to display its information here."
+msgid "Click on a device in the left tree in order to display its information here."
 msgstr ""
 "Ha a bal oldali fában rákattint egy eszközre, megjelennek itt az eszköz "
 "adatai."
@@ -2582,12 +2575,12 @@ msgstr "a fájl elemzése folyamatban: %s"
 #: logdrake:244
 #, c-format
 msgid "Sorry, log file isn't available!"
-msgstr ""
+msgstr "Naplófájl nem elérhető."
 
 #: logdrake:292
 #, c-format
 msgid "Error while opening \"%s\" log file: %s\n"
-msgstr ""
+msgstr "Hiba a(z) \"%s\" naplófájl megnyitásakor: %s\n"
 
 #: logdrake:385
 #, c-format
@@ -2709,8 +2702,7 @@ msgstr "és adja meg a használni kívánt SMTP-kiszolgáló nevét (vagy IP-cí
 #: logdrake:445
 #, c-format
 msgid "\"%s\" neither is a valid email nor is an existing local user!"
-msgstr ""
-"\"%s\": email-címként helytelen, helyi felhasználóként pedig nem létezik."
+msgstr "\"%s\": email-címként helytelen, helyi felhasználóként pedig nem létezik."
 
 #: logdrake:450
 #, c-format
@@ -2754,8 +2746,7 @@ msgstr "Kilépés a Scannerdrake programból."
 
 #: scannerdrake:60
 #, c-format
-msgid ""
-"Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr "Nem sikerült telepíteni a lapolvasó-beállításhoz szükséges csomagokat."
 
 #: scannerdrake:61
@@ -3291,111 +3282,3 @@ msgstr "Hardverváltozások a(z) \"%s\" osztályban (%s másodperc a válaszra)"
 msgid "Do you want to run the appropriate config tool?"
 msgstr "Szeretné elindítani a megfelelő beállítóeszközt?"
 
-#~ msgid "Error!"
-#~ msgstr "Hiba!"
-
-#~ msgid "I can not find needed image file `%s'."
-#~ msgstr "Nem található a(z) \"%s\" képfájl."
-
-#~ msgid "Auto Install Configurator"
-#~ msgstr "Az automatikus telepítés beállításai"
-
-#~ msgid ""
-#~ "You are about to configure an Auto Install floppy. This feature is "
-#~ "somewhat dangerous and must be used circumspectly.\n"
-#~ "\n"
-#~ "With that feature, you will be able to replay the installation you've "
-#~ "performed on this computer, being interactively prompted for some steps, "
-#~ "in order to change their values.\n"
-#~ "\n"
-#~ "For maximum safety, the partitioning and formatting will never be "
-#~ "performed automatically, whatever you chose during the install of this "
-#~ "computer.\n"
-#~ "\n"
-#~ "Press ok to continue."
-#~ msgstr ""
-#~ "Egy automatikus telepítőfloppy beállítása következik. Ez veszélyes lehet, "
-#~ "ezért körültekintéssel használandó.\n"
-#~ "\n"
-#~ "Ennek segítségével újrajátszható az Ön által ezen gépen végrehajtott "
-#~ "telepítés - közben bizonyos lépéseknél kérdéseket tesz majd fel a program "
-#~ "egyes értékek módosítása érdekében.\n"
-#~ "\n"
-#~ "A maximális biztonság kedvéért a partícionálási és formázási műveletek "
-#~ "soha nem lesznek automatikusan végrehajtva, bármit is választott Ön ezen "
-#~ "gép telepítése során.\n"
-#~ "\n"
-#~ "A folytatáshoz nyomja le az \"OK\" gombot."
-
-#~ msgid "replay"
-#~ msgstr "újrajátszás"
-
-#~ msgid "manual"
-#~ msgstr "kézi"
-
-#~ msgid "Automatic Steps Configuration"
-#~ msgstr "Az automatikus lépések beállításai"
-
-#~ msgid ""
-#~ "Please choose for each step whether it will replay like your install, or "
-#~ "it will be manual"
-#~ msgstr ""
-#~ "Adja meg mindegyik lépésnél, hogy újrajátszással vagy kézi vezérléssel "
-#~ "történjen"
-
-#~ msgid "Insert a blank floppy in drive %s"
-#~ msgstr "Tegyen egy üres floppyt a(z) \"%s\" meghajtóba"
-
-#~ msgid "Creating auto install floppy"
-#~ msgstr "Automatikus telepítőfloppy készítése"
-
-#~ msgid "Insert another blank floppy in drive %s (for drivers disk)"
-#~ msgstr ""
-#~ "Tegyen egy másik üres floppyt a(z) \"%s\" meghajtóba (a meghajtóprogramok "
-#~ "számára)"
-
-#~ msgid "Creating auto install floppy (drivers disk)"
-#~ msgstr "Automatikus telepítőfloppy készítése (meghajtóprogramok)"
-
-#~ msgid ""
-#~ "\n"
-#~ "Welcome.\n"
-#~ "\n"
-#~ "The parameters of the auto-install are available in the sections on the "
-#~ "left"
-#~ msgstr ""
-#~ "\n"
-#~ "Üdvözöljük.\n"
-#~ "\n"
-#~ "Az automatikus telepítés paraméterei a bal oldalon érhetők el"
-
-#~ msgid ""
-#~ "The floppy has been successfully generated.\n"
-#~ "You may now replay your installation."
-#~ msgstr ""
-#~ "A floppy létrehozása sikeresen befejeződött.\n"
-#~ "A telepítés újralejátszása elvégezhető."
-
-#~ msgid "Auto Install"
-#~ msgstr "Automatikus telepítés"
-
-#~ msgid "Add an item"
-#~ msgstr "Elem hozzáadása"
-
-#~ msgid "Remove the last item"
-#~ msgstr "Az utolsó elem eltávolítása"
-
-#~ msgid "HardDrake"
-#~ msgstr "HardDrake"
-
-#~ msgid "Menudrake"
-#~ msgstr "MenuDrake"
-
-#~ msgid "Msec"
-#~ msgstr "Msec"
-
-#~ msgid "Urpmi"
-#~ msgstr "Urpmi"
-
-#~ msgid "Userdrake"
-#~ msgstr "UserDrake"
