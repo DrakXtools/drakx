@@ -425,8 +425,8 @@ foreach (@classes) {
         $configurator .= harddrake::data::set_removable_configurator($Ident, $_);
         if ($Ident eq "AUDIO") {
             require harddrake::sound;
-            my $alter = harddrake::sound::get_alternative($_->{driver});
-            if (my $alternative_drivers = $alter->[0] ne 'unknown' && join(', ', @$alter)) {
+            my @alter = harddrake::sound::get_alternative($_->{driver});
+            if (my $alternative_drivers = join(', ', @alter)) {
 		$_->{alternative_drivers} = $alternative_drivers;
 	    }
         }
