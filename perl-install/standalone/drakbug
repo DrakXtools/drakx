@@ -95,7 +95,7 @@ $comb_app->set_text("");
 gtkadd($window->{window},
        gtkpack_(Gtk2::VBox->new(0, 5),
                 0, gtknew('Title1', label => $mandrake_release),
-                0, create_scrolled_window(
+                1, create_scrolled_window(
                     gtknew('TextView',
                            text => formatAlaTeX(
                         join("\n\n",
