@@ -192,7 +192,8 @@ sub load {
 
 sub get_alternative {
     my ($driver) = @_;
-    $alsa2oss{$driver} || $oss2alsa{$driver};
+    my $list = $alsa2oss{$driver} || $oss2alsa{$driver};
+    $list ? @$list : undef;
 }
 
 sub do_switch {
@@ -225,9 +226,9 @@ sub switch {
     my $driver = $device->{current_driver} || $device->{driver};
 
     foreach (@blacklist) { $blacklisted = 1 if $driver eq $_ }
-    my @alternative = $driver ne 'unknown' ? @{get_alternative($driver)} : ();
+    my @alternative = $driver ne 'unknown' ? get_alternative($driver) : ();
     unless ($driver eq $device->{driver} || member($device->{driver}, @alternative)) {
-	push @alternative, @{get_alternative($device->{driver})}, $device->{driver};
+	push @alternative, get_alternative($device->{driver}), $device->{driver};
     }
     if (@alternative) {
         my $new_driver = $driver;
@@ -376,7 +377,7 @@ sub configure_sound_slots {
     my $altered = 0;
     each_index {
         my $default_driver = $modules_conf->get_alias("sound-slot-$::i");
-        if (!member($default_driver, @{get_alternative($_->{driver})}, $_->{driver})) {
+        if (!member($default_driver, get_alternative($_->{driver}), $_->{driver})) {
             $altered ||= $default_driver;
             configure_one_sound_slot($modules_conf, $::i, $_->{driver});
         }
