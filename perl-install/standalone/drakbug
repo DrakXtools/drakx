@@ -96,15 +96,23 @@ gtkadd($window->{window},
        gtkpack_(Gtk2::VBox->new(0, 5),
                 0, gtknew('Title1', label => $mandrake_release),
                 1, create_scrolled_window(
-                    gtknew('TextView',
-                           text => formatAlaTeX(
-                        join("\n\n",
-                             if_($prog, $error ?
-                                   N("The \"%s\" program has crashed with the following error:", $prog)
-                                     . join("\n\n", "\n", split("\n", $error), '')
-                                       : N("The \"%s\" program has crashed.", $prog)
+                    gtknew('TextView', editable => 0, height => 200,
+                           text => [
+                               if_($prog, $error ?
+                                     (
+                                         [
+                                             N("The \"%s\" program has crashed with the following error:", $prog),
+                                         ],
+                                         [
+                                             "\n\n  " . join("\n  ", split("\n", $error)) . "\n\n",
+                                             { family => 'monospace' }
+                                         ]
+                                     ) : [ N("The \"%s\" program has crashed.", $prog) . "\n\n" ]
                                  ),
-                             N("To submit a bug report, click on the report button.  \nThis will open a web browser window on %s where you'll find a form to fill in.  The information displayed above will be transferred to that server.  \nThings useful to include in your report are the output of lspcidrake -v, kernel version, and /proc/cpuinfo.", $wizard_name)))), "left"),
+                               [
+                                   N("To submit a bug report, click on the report button.  \nThis will open a web browser window on %s where you'll find a form to fill in.  The information displayed above will be transferred to that server.  \nThings useful to include in your report are the output of lspcidrake -v, kernel version, and /proc/cpuinfo.", $wizard_name)
+                               ]
+                           ])),
 		0, gtkadd($table),
 		0, gtkpack(Gtk2::HSeparator->new),
 		0, gtkpack(create_hbox('edge'),
