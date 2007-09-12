@@ -193,7 +193,7 @@ sub load {
 sub get_alternative {
     my ($driver) = @_;
     my $list = $alsa2oss{$driver} || $oss2alsa{$driver};
-    $list ? @$list : undef;
+    $list ? @$list : "unknown";
 }
 
 sub do_switch {
@@ -299,10 +299,6 @@ The new \"%s\" driver will only be used on next bootstrap.", $device->{current_d
                       N("There's no known driver for your sound card (%s)",
                         $device->{description}),
                       [ get_any_driver_entry($in, $modules_conf, $driver, $device) ]);
-    } else {
-        $in->ask_warn(N("Unknown driver"), 
-                      N("Error: The \"%s\" driver for your sound card is unlisted",
-                      $driver));
     }
   end:
 }
