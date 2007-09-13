@@ -960,9 +960,9 @@ sub find_root_parts {
     my $extract = sub {
 	my ($prefix, $f, $part) = @_;
 	chomp(my $s = cat_("$prefix$f"));
-	$s =~ s/\s+for\s+\S+//;
-	log::l("find_root_parts found $part->{device}: $s" . ($f !~ m!/etc/! ? " in special release file $f" : ''));
-	{ release => $s, release_file => $f, part => $part };
+	my $arch = $s =~ s/\s+for\s+(\S+)// && $1;
+	log::l("find_root_parts found $part->{device}: $s for $arch" . ($f !~ m!/etc/! ? " in special release file $f" : ''));
+	{ release => $s, release_file => $f, part => $part, arch => $arch };
     };
 
     if ($::local_install) {
