@@ -202,6 +202,7 @@ sub bug_handler {
     }
 
     # we want the full backtrace:
+    $error .= "\n" if $is_signal;
     $error .= common::backtrace() if $error;
 
     my $progname = $0;
