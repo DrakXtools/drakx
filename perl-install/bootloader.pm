@@ -1642,6 +1642,17 @@ sub configure_kdm_BootManager {
     )) };
 }
 
+sub sync_partition_data_to_disk {
+    my ($part) = @_;
+
+    common::sync();
+
+    if ($part->{fs_type} eq 'xfs') {
+	run_program::rooted($::prefix, 'xfs_freeze', '-f', $part->{mntpoint});
+	run_program::rooted($::prefix, 'xfs_freeze', '-u', $part->{mntpoint});
+    }
+}
+
 sub install_grub {
     my ($bootloader, $all_hds) = @_;
 
@@ -1650,6 +1661,7 @@ sub install_grub {
     if (!$::testing) {
 	my @files = grep { /(stage1|stage2|_stage1_5)$/ } glob("$::prefix/lib/grub/*/*");
 	cp_af(@files, "$::prefix/boot/grub");
+	sync_partition_data_to_disk(fs::get::root([ fs::get::fstab($all_hds) ], 'boot'));
 	install_raw_grub(); 
     }
 
