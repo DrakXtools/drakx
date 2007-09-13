@@ -239,6 +239,7 @@ sub set_default {
     }
     if ($part->{fs_type} eq 'reiserfs') {
 	$options->{notail} = 1;
+	$options->{user_xattr} = 1;
     }
     if (isLoopback($part) && !isSwap($part)) { #- no need for loop option for swap files
 	$options->{loop} = 1;
