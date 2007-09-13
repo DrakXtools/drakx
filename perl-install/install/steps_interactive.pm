@@ -124,6 +124,7 @@ sub selectInstallClass {
 	    $_->{release} .= " ($_->{part}{device})" foreach @l;
 	}
 
+      askInstallClass:
 	my $p;
 	$o->ask_from_({ title => N("Install/Upgrade"),
 			messages => N("Is this an install or an upgrade?"),
@@ -135,6 +136,15 @@ sub selectInstallClass {
 			  format => sub { ref($_[0]) ? N("Upgrade %s", $_[0]{release}) : translate($_[0]) }
 			} ]);
 	if (ref $p) {
+	    if (arch() =~ /x86_64/ && $p->{arch} eq 'i586') {
+		$o->ask_warn('', N("Upgrade from a 32bit to a 64bit distribution is not supported"));
+		goto askInstallClass;
+	    }
+	    if (arch() =~ /i.86/ && $p->{arch} eq 'x86_64') {
+		$o->ask_warn('', N("Upgrade from a 64bit to a 32bit distribution is not supported"));
+		goto askInstallClass;
+	    }
+
 	    if ($p->{part}) {
 		log::l("choosing to upgrade partition $p->{part}{device}");
 		$o->{migrate_device_names} = install::any::use_root_part($o->{all_hds}, $p->{part}, $o);
