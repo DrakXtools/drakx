@@ -285,8 +285,8 @@ sub when_load_category {
 	$sound_alias ||= 'sound-slot-0';
 	$conf->set_sound_slot($sound_alias, $name);
     } elsif ($category =~ m!disk/card_reader!) {
-        $conf->set_above($name, 'tifm_sd') if $name =~ /tifm_7xx1/;
-        $conf->set_above($name, 'mmc_block');
+        my @modules = ('mmc_block', if_($name =~ /tifm_7xx1/, 'tifm_sd'));
+        $conf->set_above($name, join(' ', @modules));
     }
 }
 
