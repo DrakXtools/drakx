@@ -147,8 +147,7 @@ qq(If you can, try to run the "$prog" program from a terminal and copy and paste
                                                    );
 							 print($bugzilla_url . "?" . $options . "\n");
 							 require run_program;
-							 run_program::raw({ detach => 1 },
-                                                     if_($parent_uid, 'sudo', '-u', "#$parent_uid"),
+							 run_program::raw({ detach => 1, setuid => $parent_uid },
                                                      '/usr/bin/www-browser', "$bugzilla_url?$options");
 						 }
 						),
