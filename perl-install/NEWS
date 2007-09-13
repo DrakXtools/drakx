@@ -1,6 +1,7 @@
 - distinct exceptions from segfaults, thus restoring catching SIGSEGV
   and preventing looping while segfaulting again
 - fix loading of tifm_sd module (#18237)
+- run_program layer: enable to drop privileges through setuid()
 - drakbug:
   o run the regular user browser (#33522)
 
