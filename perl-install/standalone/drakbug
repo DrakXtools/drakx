@@ -92,6 +92,8 @@ $table = create_packtable({ col_spacings => 5, row_spacings => 10 },
 $comb_app->set_popdown_strings("", uniq(sort(@generic_tool), if_($prog, $prog)));
 $comb_app->set_text("");
 
+my $parent_uid = get_parent_uid();
+
 gtkadd($window->{window},
        gtkpack_(Gtk2::VBox->new(0, 5),
                 0, gtknew('Title1', label => $mandrake_release),
@@ -145,7 +147,9 @@ qq(If you can, try to run the "$prog" program from a terminal and copy and paste
                                                    );
 							 print($bugzilla_url . "?" . $options . "\n");
 							 require run_program;
-							 run_program::raw({ detach => 1 }, '/usr/bin/www-browser', "$bugzilla_url?$options");
+							 run_program::raw({ detach => 1 },
+                                                     if_($parent_uid, 'sudo', '-u', "#$parent_uid"),
+                                                     '/usr/bin/www-browser', "$bugzilla_url?$options");
 						 }
 						),
 			       gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub { ugtk2->exit(0) }),
