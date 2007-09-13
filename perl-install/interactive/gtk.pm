@@ -831,10 +831,10 @@ sub wait_messageW {
 			title => $title,
 			pop_it => !$::isInstall, 
 			modal => 1, 
+			$::isInstall ? (banner => Gtk2::Banner->new((get_default_step_items())[0], $message)) : (),
 			no_Window_Manager => exists $o->{no_Window_Manager} ? $o->{no_Window_Manager} : !$::isStandalone,
 			if__($::main_window, transient_for => $::main_window),
 			child => gtknew('VBox', padding => 4, border_width => 10, children => [
-			    0, Gtk2::Label->new(scalar warp_text($message)),
 			    1, $to_modify,
 			    if_(ref($message_modifiable), 0, $message_modifiable),
 			]),
