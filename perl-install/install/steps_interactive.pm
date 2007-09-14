@@ -952,9 +952,11 @@ sub summary {
 	},
 	clicked => sub {
 	    require security::level;
+	    my $security = $o->{security};
        set_sec_level:
-	    if (security::level::level_choose($o, \$o->{security}, \$o->{libsafe}, \$o->{security_user})) {
-             check_security_level($o) or goto set_sec_level;
+	    if (security::level::level_choose($o, \$security, \$o->{libsafe}, \$o->{security_user})) {
+             check_security_level($o, $security) or goto set_sec_level;
+	     $o->{security} = $security;
              install::any::set_security($o);
          }
 	},
@@ -1036,8 +1038,8 @@ try to force installation even if that destroys the first partition?"));
 }
 
 sub check_security_level {
-    my ($o) = @_;
-	if ($o->{security} > 2 && find { $_->{fs_type} eq 'vfat' } @{$o->{fstab}}) {
+    my ($o, $security) = @_;
+	if ($security > 2 && find { $_->{fs_type} eq 'vfat' } @{$o->{fstab}}) {
 	    $o->ask_okcancel('', N("In this security level, access to the files in the Windows partition is restricted to the administrator.")) or return 0;
      }
      return 1;
