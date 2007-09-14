@@ -268,10 +268,8 @@ sub selectPackage {
     my @l = $packages->resolve_requested($packages->{rpmdb}, $state, packageRequest($packages, $pkg) || {},
 					 callback_choices => \&packageCallbackChoices);
 
-    if (!member($pkg, @l) && $state->{rejected}) {
-	log::l("ERROR: selecting " . $pkg->name . " failed");
-	require Data::Dumper;
-	log::l(Data::Dumper::Dumper($state->{rejected}));
+    if (!exists $state->{selected}{$pkg->id}) {
+	log::l("ERROR: selecting " . $pkg->name . " failed: " . urpm::select::translate_why_unselected_one($packages, $state, scalar $pkg->fullname));
     }
 
     if ($b_base) {
