@@ -100,7 +100,7 @@ sub read_rpmsrate {
 	my $p;
 	if ($::isInstall) {
 	$p = install::pkgs::packageByName($packages, $_)  or next;
-	if (my @l = map { if_(/locales-(.*)/, qq(LOCALES"$1")) } $p->requires_nosense) {
+	if (my @l = map { /locales-(.*)/ ? qq(LOCALES"$1") : () } $p->requires_nosense) {
 	    if (@l > 1) {
 		log::l("ERROR: package $_ is requiring many locales") if $_ ne 'lsb';
 	    } else {
