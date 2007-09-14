@@ -179,9 +179,11 @@ sub packageRequest {
 }
 
 sub packageCallbackChoices {
-    my ($urpm, $_db, $_state, $choices, $virtual_pkg_name) = @_;
-
-    if (my @l = packageCallbackChoices_($urpm, $choices)) {
+    my ($urpm, $_db, $_state, $choices, $virtual_pkg_name, $prefered) = @_;
+  
+    if ($prefered && @$prefered) {
+	@$prefered;
+    } elsif (my @l = packageCallbackChoices_($urpm, $choices)) {
 	@l;
     } else {
 	log::l("packageCallbackChoices: default choice from " . join(",", map { $_->name } @$choices) . " for $virtual_pkg_name");
@@ -219,16 +221,7 @@ sub packageCallbackChoices_ {
 
 	@l;
     } else {
-	grep {
-	    #- or even if a package requires a specific locales which
-	    #- is already selected.
-	    find {
-		/locales-/ && do {
-		    my $p = packageByName($urpm, $_);
-		    $p && $p->flag_available;
-		};
-	    } $_->requires_nosense;
-	} @$choices;
+	();
     }
 }
 
