@@ -36,7 +36,7 @@ sub to_subpart {
     if (my ($kind, $val) = analyze($dev)) {
 	if ($kind eq 'label') {	    
 	    $part->{device_LABEL} = $val;
-	} elsif ($kind eq 'label') {	    
+	} elsif ($kind eq 'uuid') {	    
 	    $part->{device_UUID} = $val;
 	} elsif ($kind eq 'dev') {
 	    my %part = (faked_device => 0);
