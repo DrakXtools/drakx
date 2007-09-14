@@ -12,13 +12,14 @@
 # Eskild Hustvedt <eskild@goldenfiles.com>, 2004.
 # Eskild Hustvedt <zerodogg@skolelinux.no>, 2004, 2005.
 # Per Øyvind Karlsen <pkarlsen@mandriva.com>, 2005, 2006.
+# Per Øyvind Karlsen <peroyvind@mandriva.org>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "POT-Creation-Date: 2007-09-12 17:02+0200\n"
-"PO-Revision-Date: 2006-09-12 23:22+0200\n"
-"Last-Translator: Per Øyvind Karlsen <pkarlsen@mandriva.com>\n"
-"Language-Team: Norwegian Bokmål <cooker-i18n@mandrivalinux.com>\n"
+"PO-Revision-Date: 2007-09-14 15:41+0200\n"
+"Last-Translator: Per Øyvind Karlsen <peroyvind@mandriva.org>\n"
+"Language-Team: Norwegian Bokmål <i18n-no@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -188,9 +189,9 @@ msgid "Please try again"
 msgstr "Prøv igjen"
 
 #: any.pm:396
-#, fuzzy, c-format
+#, c-format
 msgid "You can not use a password with %s"
-msgstr "Du kan ikke bruke ett kryptert filsystem som monteringspunkt %s"
+msgstr "Du kan ikke bruka et passord som inneholder «%s»."
 
 #: any.pm:399 any.pm:774 authentication.pm:197
 #, c-format
@@ -209,8 +210,7 @@ msgstr "begrens"
 
 #: any.pm:401
 #, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
+msgid "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 "Innstillingen ``Begrense kommandolinje-instillinger'' kan ikke brukes uten "
 "et passord"
@@ -406,8 +406,7 @@ msgstr "Oppgi et brukernavn"
 
 #: any.pm:745
 #, c-format
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr "Brukernavnet kan kun innholde små bokstaver, tall, `-' og `_'"
 
 #: any.pm:746
@@ -441,9 +440,9 @@ msgid "%s should be above 500. Accept anyway?"
 msgstr "%s burde være over 500. Akseptér allikevel?"
 
 #: any.pm:768
-#, fuzzy, c-format
+#, c-format
 msgid "User management"
-msgstr "Brukernavn"
+msgstr "Brukerhåndtering"
 
 #: any.pm:775 authentication.pm:182
 #, c-format
@@ -451,11 +450,9 @@ msgid "Set administrator (root) password"
 msgstr "Sett (root) administrator-passordet"
 
 #: any.pm:780
-#, fuzzy, c-format
+#, c-format
 msgid "Enter a user"
-msgstr ""
-"Angi en bruker\n"
-"%s"
+msgstr "Skriv inn brukernavn"
 
 #: any.pm:781
 #, c-format
@@ -643,8 +640,7 @@ msgstr ""
 
 #: any.pm:1126
 #, c-format
-msgid ""
-"You can export using NFS or SMB. Please select which you would like to use."
+msgid "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Du kan eksportere med NFS eller SMB. Velg den du ønsker å bruke."
 
 #: any.pm:1151
@@ -759,7 +755,7 @@ msgstr "Lokal fil:"
 #: authentication.pm:66
 #, c-format
 msgid "Use information stored in local files for all authentication"
-msgstr ""
+msgstr "Bruk informasjon lagra i lokale filer for all autentisering"
 
 #: authentication.pm:67
 #, c-format
@@ -1027,7 +1023,7 @@ msgstr "Yaboot"
 #: bootloader.pm:1034
 #, c-format
 msgid "SILO"
-msgstr ""
+msgstr "SILO"
 
 #: bootloader.pm:1114
 #, c-format
@@ -1281,14 +1277,14 @@ msgid "Unknown"
 msgstr "Ukjent"
 
 #: diskdrake/hd_gtk.pm:354
-#, fuzzy, c-format
+#, c-format
 msgid "Ext3"
-msgstr "Avslutt"
+msgstr "Ext3"
 
 #: diskdrake/hd_gtk.pm:354
-#, fuzzy, c-format
+#, c-format
 msgid "XFS"
-msgstr "HFS"
+msgstr "XFS"
 
 #: diskdrake/hd_gtk.pm:354
 #, c-format
@@ -1598,8 +1594,7 @@ msgstr "Fjern loopback-filen?"
 
 #: diskdrake/interactive.pm:581
 #, c-format
-msgid ""
-"After changing type of partition %s, all data on this partition will be lost"
+msgid "After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "Etter endring av type på partisjon %s, vil alle data på denne partisjonen gå "
 "tapt"
@@ -1896,7 +1891,7 @@ msgstr "Volumnavn: "
 #: diskdrake/interactive.pm:1241
 #, c-format
 msgid "UUID: "
-msgstr ""
+msgstr "UUID: "
 
 #: diskdrake/interactive.pm:1242
 #, c-format
@@ -2027,7 +2022,7 @@ msgstr ""
 #: diskdrake/interactive.pm:1280
 #, c-format
 msgid "Free space on %s (%s)"
-msgstr ""
+msgstr "Ledig plass på %s (%s)"
 
 #: diskdrake/interactive.pm:1289
 #, c-format
@@ -2134,8 +2129,7 @@ msgstr "Enda ett"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
+msgid "Please enter your username, password and domain name to access this host."
 msgstr ""
 "Tast inn brukernavnet, passordet og domenenavnet ditt for å få tilgang til "
 "denne verten."
@@ -2257,7 +2251,7 @@ msgstr "Bruk et kryptert filsystem"
 #: fs/mount_options.pm:113
 #, c-format
 msgid "Flush write cache on file close"
-msgstr ""
+msgstr "Tøm skrivecache ved fillukking"
 
 #: fs/mount_options.pm:115
 #, c-format
@@ -2275,14 +2269,13 @@ msgstr ""
 "tjenere)."
 
 #: fs/mount_options.pm:123
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
-"Ikke oppdater inodeaksesstid på dette filsystemet\n"
-"(feks. for kjappere tilgang til njus-køen for å øke hastigheten på njus-"
-"tjenere)."
+"Oppdater tilgangstider på inoder på filsystemet på en mer effektiv måte\n"
+"(gir for eksempel raskere tilgang til njuskøer på njustjenere)."
 
 #: fs/mount_options.pm:123
 #, c-format
@@ -2551,15 +2544,14 @@ msgid "Next"
 msgstr "Neste"
 
 #: fs/partitioning_wizard.pm:167
-#, fuzzy, c-format
+#, c-format
 msgid "Partitionning"
 msgstr "Partisjonering"
 
 #: fs/partitioning_wizard.pm:167
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
-msgstr ""
-"Hvilken størrelse ønsker du å beholde Microsoft Windows® på partisjon %s?"
+msgstr "Hvilken størrelse ønsker du å beholde Microsoft Windows® på partisjon %s?"
 
 #: fs/partitioning_wizard.pm:164
 #, c-format
@@ -2919,9 +2911,9 @@ msgid "USB Mass Storage Devices"
 msgstr "USB-masselagringsenheter"
 
 #: harddrake/data.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "Card readers"
-msgstr "Kortmodell:"
+msgstr "Kortlesere"
 
 #: harddrake/data.pm:404
 #, c-format
@@ -2976,7 +2968,7 @@ msgstr "Mus"
 #: harddrake/data.pm:505
 #, c-format
 msgid "Biometry"
-msgstr ""
+msgstr "Biometri"
 
 #: harddrake/data.pm:513
 #, c-format
@@ -3031,7 +3023,7 @@ msgstr ""
 "Her kan du velge en alternativ driver (enten OSS eller ALSA) for lydkortet "
 "ditt (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:252
@@ -3304,7 +3296,7 @@ msgstr "Forrige"
 #: interactive/gtk.pm:544
 #, c-format
 msgid "Beware, Caps Lock is enabled"
-msgstr ""
+msgstr "Obs! «Caps Lock» er på"
 
 #: interactive/stdio.pm:29 interactive/stdio.pm:154
 #, c-format
@@ -5181,32 +5173,31 @@ msgstr "Kunne ikke installere pakkene som trengs for å dele din(e) skanner(e)."
 #: scanner.pm:201
 #, c-format
 msgid "Your scanner(s) will not be available for non-root users."
-msgstr ""
-"Din(e) skanner(e) vil ikke være tilgjengelig(e) for brukere som ikke er root."
+msgstr "Din(e) skanner(e) vil ikke være tilgjengelig(e) for brukere som ikke er root."
 
 #: security/help.pm:11
-#, fuzzy, c-format
+#, c-format
 msgid "Accept bogus IPv4 error messages."
-msgstr "Akseptér ugyldige IPv4-feilmeldinger."
+msgstr "Tillat ugyldige IPv4-feilmeldinger."
 
 #: security/help.pm:13
-#, fuzzy, c-format
+#, c-format
 msgid "Accept broadcasted icmp echo."
-msgstr "Akseptér kringkastede icmp echo."
+msgstr "Tillat kringkastet icmp-ekko."
 
 #: security/help.pm:15
-#, fuzzy, c-format
+#, c-format
 msgid "Accept icmp echo."
-msgstr "Akseptér icmp echo"
+msgstr "Tillat icmp-ekko."
 
 #: security/help.pm:17
-#, fuzzy, c-format
+#, c-format
 msgid "Allow autologin."
-msgstr "Tillat/Forby automatisk innlogging."
+msgstr "Tillat autoinnlogging."
 
 #. -PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
 #: security/help.pm:21
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
 "\n"
@@ -5214,51 +5205,47 @@ msgid ""
 "\n"
 "Else only /etc/issue is allowed."
 msgstr ""
-"Hvis satt til «ALL», tillates både /etc/issue og /etc/issue.net å "
-"eksistere.\n"
+"Hvis satt til «ALLE», kan «/etc/issue» og «/etc/issue.net» eksistere.\n"
 "\n"
-"Hvis satt til «NONE», tillates ingen av de\n"
+"Hvis satt til «Ingen» kan ingen av de eksistere.\n"
 "\n"
-"Ellers er bare /etc/issue tillatt."
+"Elles kan bare «/etc/issue» eksistere."
 
 #: security/help.pm:27
-#, fuzzy, c-format
+#, c-format
 msgid "Allow reboot by the console user."
-msgstr "Tillat/Forby omstart av konsollbrukeren."
+msgstr "Tillat omstart av konsollbruker."
 
 #: security/help.pm:29
-#, fuzzy, c-format
+#, c-format
 msgid "Allow remote root login."
-msgstr "Tillat ekstern root-innlogging"
+msgstr "Tillat «root»-innlogging over nett."
 
 #: security/help.pm:31
-#, fuzzy, c-format
+#, c-format
 msgid "Allow direct root login."
-msgstr "Tillat/Forby direkte root-innlogging."
+msgstr "Tillat direkte «root»-innlogging."
 
 #: security/help.pm:33
-#, fuzzy, c-format
-msgid ""
-"Allow the list of users on the system on display managers (kdm and gdm)."
-msgstr ""
-"Tillat/Forby liste over brukere på systemet i innloggingshåndterer (kdm og "
-"gdm)"
+#, c-format
+msgid "Allow the list of users on the system on display managers (kdm and gdm)."
+msgstr "Tillat visning av brukere i innloggingshåndterer (kdm og gdm)."
 
 #: security/help.pm:35
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow to export display when\n"
 "passing from the root account to the other users.\n"
 "\n"
 "See pam_xauth(8) for more details.'"
 msgstr ""
-"Tillat/nekt å eksportere display når\n"
-"det sendes fra root-kontoen til andre brukere.\n"
+"Tillat skjermbildeeksportering fra\n"
+"«root»-bruker til andre brukere.\n"
 "\n"
-"Se pam_xauth(8) for flere detaljer.'"
+"Se  pam_xauth(8) for mer informasjon."
 
 #: security/help.pm:40
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow X connections:\n"
 "\n"
@@ -5268,13 +5255,13 @@ msgid ""
 "\n"
 "- \"None\" (no connection)."
 msgstr ""
-"Tillat/Forby X-tilkoblinger:\n"
+"Tillat X-tilkoblinger:\n"
 "\n"
-"- ALL (alle tilkoblinger er tillatt),\n"
+"– «Alle» (tillat alle tilkoblinger)\n"
 "\n"
-"- LOCAL (bare tilkoblinger fra den lokale maskinen),\n"
+"– «Lokale» (bare tillat tilkoblinger fra lokale maskiner)\n"
 "\n"
-"- NONE (ingen tilkoblinger)."
+"– «Ingen» (ikke tillat noen tilkoblinger)"
 
 #: security/help.pm:48
 #, c-format
@@ -5287,7 +5274,7 @@ msgstr ""
 
 #. -PO: here "ALL", "Local" and "None" are values in a pull-down menu; translate them the same as they're
 #: security/help.pm:53
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Authorize:\n"
 "\n"
@@ -5301,17 +5288,16 @@ msgid ""
 "To authorize the services you need, use /etc/hosts.allow (see hosts.allow"
 "(5))."
 msgstr ""
-"Autoriser:\n"
+"Tillat:\n"
 "\n"
-"- alle tjenester kontrollert av tcp_wrappers (se hosts.deny(5) man-side) "
-"hvis satt til «ALL»,\n"
+"– Alle tjenester kontrollert av tcp_wrappers (se manualsida hosts.deny(5)) "
+"hvis satt til «ALLE».\n"
 "\n"
-"- bare lokale hvis satt til «LOCAL»\n"
+"– Bare lokale hvis satt til «Lokale».\n"
 "\n"
-"- ingen hvis satt til «NONE».\n"
+"– Ingen hvis satt til «Ingen».\n"
 "\n"
-"For å autorisere tjenestene du trenger, bruk /etc/hosts.allow\n"
-"(se hosts.allow(5))."
+"Bruk /etc/hosts.allow (se hosts.allow (5)) for å tillate de tjenestene du trenger."
 
 #: security/help.pm:63
 #, c-format
@@ -5335,31 +5321,32 @@ msgstr ""
 "av pakker."
 
 #: security/help.pm:72
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable crontab and at for users.\n"
 "\n"
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
 msgstr ""
-"Aktiver/Deaktiver crontab og at for brukere.\n"
+"Slå på «crontab» og «at» for brukere.\n"
 "\n"
-"Plassér tillatte brukere i /etc/cron.allow og /etc/at.allow\n"
-"(se man-side at(1) og crontab(1))."
+"Legg til brukere som får tilgang i «/etc/cron.allow» og «/etc/at.allow» (se "
+"man at(1)\n"
+"og crontab(1))."
 
 #: security/help.pm:77
-#, fuzzy, c-format
+#, c-format
 msgid "Enable syslog reports to console 12"
-msgstr "Aktiver/Deaktiver systemloggrapporter til konsoll 12"
+msgstr "Slå på systemloggrapportar til konsoll 12."
 
 #: security/help.pm:79
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable name resolution spoofing protection.  If\n"
 "\"%s\" is true, also reports to syslog."
 msgstr ""
-"Aktiver/Deaktiver navneoppslagsforfalskningsbeskyttelse.  Hvis\n"
-"«%s» er sann, rapportér også til syslog."
+"Slå på beskyttelse mot navneoppslagforfalsking. Hvis\n"
+"«%s» er på, vil dette òg loggføres i systemloggen."
 
 #: security/help.pm:80
 #, c-format
@@ -5367,24 +5354,24 @@ msgid "Security Alerts:"
 msgstr "Sikkerhetvarsler:"
 
 #: security/help.pm:82
-#, fuzzy, c-format
+#, c-format
 msgid "Enable IP spoofing protection."
-msgstr "Aktiver IP-forfalskningsbeskyttelse."
+msgstr "Slå på beskyttelse mot IP-forfalsking."
 
 #: security/help.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Enable libsafe if libsafe is found on the system."
-msgstr "Aktiver libsafe hvis libsafe er funnet på systemet."
+msgstr "Bruk libsafe om libsafe er tilgjengelig på systemet."
 
 #: security/help.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Enable the logging of IPv4 strange packets."
-msgstr "Aktiver loggingen av rare IPv4 pakker."
+msgstr "Loggfør merkelige IPv4-pakker."
 
 #: security/help.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid "Enable msec hourly security check."
-msgstr "Aktiver msec sikkerhetssjekk hver time"
+msgstr "Kjør msec-sikkerhetssjekk hver time."
 
 #: security/help.pm:90
 #, c-format
@@ -5401,25 +5388,24 @@ msgid "Use password to authenticate users."
 msgstr "Bruk passord for å autentisere brukere."
 
 #: security/help.pm:94
-#, fuzzy, c-format
+#, c-format
 msgid "Activate ethernet cards promiscuity check."
-msgstr "Aktiver/Deaktiver ethernettkorts promiskuøssjekk."
+msgstr "Slå på løsaktighetskontroll for nettverkskort."
 
 #: security/help.pm:96
-#, fuzzy, c-format
+#, c-format
 msgid "Activate daily security check."
-msgstr "Aktiver/Deaktiver daglig sikkerhetssjekk."
+msgstr "Slå på daglig sikkerhetskontroll."
 
 #: security/help.pm:98
-#, fuzzy, c-format
+#, c-format
 msgid "Enable sulogin(8) in single user level."
-msgstr "Aktiver/Deaktiver sulogin(8) i enbruker-nivå."
+msgstr "Slå på sulogin(8) i enbrukermodus."
 
 #: security/help.pm:100
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
-msgstr ""
-"Legg til navnet som et unntak for håndteringen av passordforeldelse av msec."
+msgstr "Legg til navnet som et unntak for håndteringen av passordforeldelse av msec."
 
 #: security/help.pm:102
 #, c-format
@@ -5443,9 +5429,9 @@ msgstr ""
 "bokstaver."
 
 #: security/help.pm:108
-#, fuzzy, c-format
+#, c-format
 msgid "Set the root's file mode creation mask."
-msgstr "Setter root sin umask."
+msgstr "Velg modus for nye filer («umask») til «root»."
 
 #: security/help.pm:109
 #, c-format
@@ -5474,8 +5460,7 @@ msgstr ""
 #: security/help.pm:117
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
-msgstr ""
-"hvis satt til ja, sjekk rettigheter på filer i brukerenes hjemmekatalog. "
+msgstr "hvis satt til ja, sjekk rettigheter på filer i brukerenes hjemmekatalog. "
 
 #: security/help.pm:118
 #, c-format
@@ -5515,8 +5500,7 @@ msgstr "hvis satt til ja, rapporter filer uten eier"
 #: security/help.pm:125
 #, c-format
 msgid "if set to yes, check files/directories writable by everybody."
-msgstr ""
-"hvis satt til ja, sjekk filer eller kataloger som er skrivbare av alle."
+msgstr "hvis satt til ja, sjekk filer eller kataloger som er skrivbare av alle."
 
 #: security/help.pm:126
 #, c-format
@@ -5525,8 +5509,7 @@ msgstr "hvis satt til ja, kjør chkrootkit-kontroller"
 
 #: security/help.pm:127
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
+msgid "if set, send the mail report to this email address else send it to root."
 msgstr "sender e-postrapport til denne adressen dersom satt, ellers til root."
 
 #: security/help.pm:128
@@ -5570,9 +5553,9 @@ msgid "Timeout unit is second"
 msgstr "Tidsavbruddenhet er sekund"
 
 #: security/help.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Set the user's file mode creation mask."
-msgstr "Setter brukerens umask."
+msgstr "Velg modus for nye filer («umask») til bruker."
 
 #: security/l10n.pm:11
 #, c-format
@@ -5807,8 +5790,7 @@ msgstr "Ikke send tomme e-postrapporter"
 #: security/l10n.pm:58
 #, c-format
 msgid "If set, send the mail report to this email address else send it to root"
-msgstr ""
-"Hvis satt, send e-postrapport til denne e-postadressen, ellers send til root."
+msgstr "Hvis satt, send e-postrapport til denne e-postadressen, ellers send til root."
 
 #: security/l10n.pm:59
 #, c-format
@@ -5949,10 +5931,8 @@ msgstr "Bruk libsafe for tjenere"
 
 #: security/level.pm:64
 #, c-format
-msgid ""
-"A library which defends against buffer overflow and format string attacks."
-msgstr ""
-"Ett bibliotek som beskytter mot buffer overflow og strengformateringsangrep."
+msgid "A library which defends against buffer overflow and format string attacks."
+msgstr "Ett bibliotek som beskytter mot buffer overflow og strengformateringsangrep."
 
 #: security/level.pm:65
 #, c-format
@@ -6003,14 +5983,13 @@ msgstr ""
 
 #: services.pm:28
 #, c-format
-msgid ""
-"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
-msgstr ""
+msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgstr "Common UNIX Printing System (CUPS) er et avansert utskriftskøsystem."
 
 #: services.pm:29
 #, c-format
 msgid "Launches the graphical display manager"
-msgstr ""
+msgstr "Starter den grafiske innloggingsbehandleren."
 
 #: services.pm:30
 #, c-format
@@ -6039,7 +6018,7 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
+msgstr "HAL er en tjeneste som samler inn og vedlikeholder informasjon om maskinvare."
 
 #: services.pm:36
 #, c-format
@@ -6052,8 +6031,7 @@ msgstr ""
 
 #: services.pm:38
 #, c-format
-msgid ""
-"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
 "Apache er en World Wide Web-tjener. Den blir brukt til å tjene HTML-filer og "
 "CGI."
@@ -6142,7 +6120,7 @@ msgstr ""
 msgid ""
 "DBUS is a daemon which broadcasts notifications of system events and other "
 "messages"
-msgstr ""
+msgstr "DBUS er en tjeneste som kringkaster meldinger om systemhendelser, og andre meldinger."
 
 #: services.pm:58
 #, c-format
@@ -6194,7 +6172,7 @@ msgstr ""
 #: services.pm:68
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
-msgstr ""
+msgstr "Synkroniserer systemklokka med nettverkstidsprotokollen NTP."
 
 #: services.pm:69
 #, c-format
@@ -6302,16 +6280,17 @@ msgstr ""
 
 #: services.pm:92
 #, c-format
-msgid ""
-"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
+"SANE (Scanner Access Now Easy) gir tilgang til skannere, filmkamera og "
+"lignende."
 
 #: services.pm:93
 #, c-format
 msgid ""
 "The SMB/CIFS protocol enables to share access to files & printers and also "
 "integrates with a Windows Server domain"
-msgstr ""
+msgstr "SMB/CIFS-protokollen gjør det mulig å dele tilgang til filer og skrivere, og integrerering med Windows Server-domene."
 
 #: services.pm:94
 #, c-format
@@ -6324,6 +6303,8 @@ msgid ""
 "Secure Shell is a network protocol that allows data to be exchanged over a "
 "secure channel between two computers"
 msgstr ""
+"Secure Shell er en nettverksprotokoll som gjjør det mulig å utveksle data over "
+"en sikker tilkobling mellom to datamaskiner."
 
 #: services.pm:96
 #, c-format
@@ -6342,12 +6323,12 @@ msgstr "Last driverne for dine usb-enheter."
 #: services.pm:99
 #, c-format
 msgid "Starts the X Font Server."
-msgstr ""
+msgstr "Starter X-skrifttjeneren."
 
 #: services.pm:100
 #, c-format
 msgid "Starts other deamons on demand."
-msgstr ""
+msgstr "Starter andre tjenester etter behov."
 
 #: services.pm:123
 #, c-format
@@ -6816,99 +6797,3 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Installasjon mislyktes"
 
-#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
-#~ msgstr "Feil: «%s»-driveren for lydkortet ditt er ikke i listen"
-
-#~ msgid "Ext2"
-#~ msgstr "Ext2"
-
-#~ msgid "Journalised FS"
-#~ msgstr "Journalisert filsystem"
-
-#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
-#~ msgstr ""
-#~ "Starter X-font-tjeneren (dette er obligatorisk for at Xorg skal kjøre)."
-
-#~ msgid "Add user"
-#~ msgstr "Legg til bruker"
-
-#~ msgid "Accept user"
-#~ msgstr "Godta bruker"
-
-#, fuzzy
-#~ msgid ""
-#~ "Do not update directory inode access times on this filesystem\n"
-#~ "(e.g, for faster access on the news spool to speed up news servers)."
-#~ msgstr ""
-#~ "Ikke oppdater inodeaksesstid på dette filsystemet\n"
-#~ "(feks. for kjappere tilgang til njus-køen for å øke hastigheten på njus-"
-#~ "tjenere)."
-
-#~ msgid "No supermount"
-#~ msgstr "Ingen supermount"
-
-#~ msgid "Supermount"
-#~ msgstr "Supermount"
-
-#~ msgid "Supermount except for CDROM drives"
-#~ msgstr "Supermount bortsett fra for CDROMer"
-
-#~ msgid "Rescue partition table"
-#~ msgstr "Nødpartisjonstabell"
-
-#~ msgid "Removable media automounting"
-#~ msgstr "Automontering av fjernbart medie"
-
-#~ msgid "Trying to rescue partition table"
-#~ msgstr "Prøver å redde partisjonstabell"
-
-#~ msgid ""
-#~ "Use local for all authentication and information user tell in local file"
-#~ msgstr ""
-#~ "Bruk lokal for all autentisering og informasjon som bruker oppgir i lokal "
-#~ "fil"
-
-#~ msgid "Accept/Refuse bogus IPv4 error messages."
-#~ msgstr "Aksepter/Nekt tullete IPv4-feilmeldinger."
-
-#~ msgid "Accept/Refuse broadcasted icmp echo."
-#~ msgstr "Aksepter/Nekt kringkastede icmp echo."
-
-#~ msgid "Accept/Refuse icmp echo."
-#~ msgstr "Aksepter/Nekt icmp echo."
-
-#~ msgid "Allow/Forbid remote root login."
-#~ msgstr "Tillat/Forby ekstern root-innlogging."
-
-#~ msgid "Enable/Disable IP spoofing protection."
-#~ msgstr "Aktiver/Deaktiver IP-forfalskningsbeskyttelse."
-
-#~ msgid "Enable/Disable libsafe if libsafe is found on the system."
-#~ msgstr "Aktiver/Deaktiver libsafe hvis libsafe er funnet på systemet."
-
-#~ msgid "Enable/Disable the logging of IPv4 strange packets."
-#~ msgstr "Aktiver/Deaktiver loggingen av rare IPv4 pakker."
-
-#~ msgid "Enable/Disable msec hourly security check."
-#~ msgstr "Aktiver/Deaktiver msec-sikkerhetssjekk hver time."
-
-#~ msgid "Icon"
-#~ msgstr "Ikon"
-
-#~ msgid "Number of capture buffers:"
-#~ msgstr "Antall opptaksmellomlagre"
-
-#~ msgid "number of capture buffers for mmap'ed capture"
-#~ msgstr "Antall opptaksmellomlagre for minnekartlagt opptak"
-
-#~ msgid "PLL setting:"
-#~ msgstr "PLL-oppsett:"
-
-#~ msgid "Radio support:"
-#~ msgstr "Radiostøtte"
-
-#~ msgid "enable radio support"
-#~ msgstr "aktiver radiostøtte"
-
-#~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
-#~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
