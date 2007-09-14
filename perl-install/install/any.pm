@@ -1293,8 +1293,6 @@ sub copy_advertising {
 	foreach (@files) {
 	    chomp;
 	    install::media::getAndSaveFile_($o->{stage2_phys_medium}, "$source_dir/$_", "$dir/$_");
-	    (my $pl = $_) =~ s/\.png/.pl/;
-	    install::media::getAndSaveFile_($o->{stage2_phys_medium}, "$source_dir/$pl", "$dir/$pl");
 	}
 	@advertising_images = map { "$dir/$_" } @files;
     }
