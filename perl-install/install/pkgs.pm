@@ -258,6 +258,20 @@ sub select_by_package_names_or_die {
     }
 }
 
+sub resolve_requested_and_check {
+    my ($packages, $state, $requested) = @_;
+
+    my @l = $packages->resolve_requested($packages->{rpmdb}, $state, $requested,
+					 callback_choices => \&packageCallbackChoices);
+
+    if (find { !exists $state->{selected}{$_} } keys %$requested) {
+	my @rejected = urpm::select::unselected_packages($packages, $state);
+	log::l("ERROR: selection failed: " . urpm::select::translate_why_unselected($packages, $state, @rejected));
+    }
+
+    @l;
+}
+
 sub selectPackage {
     my ($packages, $pkg, $b_base) = @_;
 
@@ -265,12 +279,7 @@ sub selectPackage {
 
     $packages->{rpmdb} ||= rpmDbOpen();
 
-    my @l = $packages->resolve_requested($packages->{rpmdb}, $state, packageRequest($packages, $pkg) || {},
-					 callback_choices => \&packageCallbackChoices);
-
-    if (!exists $state->{selected}{$pkg->id}) {
-	log::l("ERROR: selecting " . $pkg->name . " failed: " . urpm::select::translate_why_unselected_one($packages, $state, scalar $pkg->fullname));
-    }
+    my @l = resolve_requested_and_check($packages, $state, packageRequest($packages, $pkg) || {});
 
     if ($b_base) {
 	$_->set_flag_base foreach @l;
@@ -308,8 +317,7 @@ sub unselectAllPackages {
     }
     #- clean state, in order to start with a brand new set...
     $packages->{state} = {};
-    $packages->resolve_requested($packages->{rpmdb}, $packages->{state}, \%keep_selected,
-				 callback_choices => \&packageCallbackChoices);
+    resolve_requested_and_check($packages, $packages->{state}, \%keep_selected);
 }
 
 sub empty_packages() {
@@ -320,6 +328,7 @@ sub empty_packages() {
 
     $packages->{log} = \&log::l;
     $packages->{prefer_vendor_list} = '/etc/urpmi/prefer.vendor.list';
+    $packages->{keep_unrequested_dependencies} = 1;
 
     $packages;
 }
@@ -374,9 +383,7 @@ sub setSelectedFromCompssList {
 	#- selecting $p. the packages are not selected.
 	my $state = $packages->{state} ||= {};
 
-	my @l = $packages->resolve_requested($packages->{rpmdb}, $state, packageRequest($packages, $p) || {},
-					     keep_unrequested_dependencies => 1,
-					     callback_choices => \&packageCallbackChoices);
+	my @l = resolve_requested_and_check($packages, $state, packageRequest($packages, $p) || {});
 
 	#- this enable an incremental total size.
 	my $old_nb = $nb;
@@ -636,14 +643,9 @@ sub selectPackagesToUpgrade {
     log::l("selected pkgs to upgrade: " . join(' ', map { $packages->{depslist}[$_]->name } keys %selection));
 
     log::l("resolving dependencies...");
-    $packages->resolve_requested($packages->{rpmdb}, $state, \%selection,
-				 callback_choices => \&packageCallbackChoices);
+    resolve_requested_and_check($packages, $state, \%selection);
     log::l("...done");
     log::l("finally selected pkgs: ", join(" ", sort map { $_->name } grep { $_->flag_selected } @{$packages->{depslist}}));
-    if ($state->{rejected}) {
-	require Data::Dumper;
-	log::l(Data::Dumper::Dumper($state));
-    }
 }
 
 sub installTransactionClosure {
