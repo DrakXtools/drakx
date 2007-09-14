@@ -109,18 +109,12 @@ sub size2time {
     }
 }
 
-
-sub packagesProviding {
-    my ($packages, $name) = @_;
-    map { $packages->{depslist}[$_] } keys %{$packages->{provides}{$name} || {}};
-}
-
 #- search package with given name and compatible with current architecture.
 #- take the best one found (most up-to-date).
 sub packageByName {
     my ($packages, $name) = @_;
 
-    my @l = grep { $_->is_arch_compat && $_->name eq $name } packagesProviding($packages, $name);
+    my @l = grep { $_->is_arch_compat && $_->name eq $name } URPM::packages_providing($packages, $name);
 
     my $best;
     foreach (@l) {
@@ -203,7 +197,7 @@ sub packageCallbackChoices_ {
 		my $version = quotemeta($1);
 		find {
 		    $_->name =~ /-$version$/ && ($_->flag_installed || $_->flag_selected);
-		} packagesProviding($urpm, 'kernel');
+		} $urpm->packages_providing('kernel');
 	    } elsif ($_->name =~ /(kernel-.*)-devel-(.*)/) {
 		my $kernel = "$1-$2";
 		my $p = packageByName($urpm, $kernel);

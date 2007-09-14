@@ -553,7 +553,7 @@ sub install_urpmi {
     my $pkg = install::pkgs::packageByName($o->{packages}, 'urpmi');
     if ($pkg && ($pkg->flag_selected || $pkg->flag_installed)
 	#- this is a workaround. if many urpmi packages are found in the
-	#- provides of all media, packagesProviding() might return the wrong
+	#- provides of all media, packages_providing() might return the wrong
 	#- one. This probably needs to be fixed in URPM
 	|| run_program::rooted_get_stdout($::prefix, '/bin/rpm', '-q', 'urpmi') =~ /urpmi/
     ) {

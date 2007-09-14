@@ -799,7 +799,7 @@ sub summary {
 	    any::selectCountry($o, $o->{locale}) or return;
 
 	    my $pkg_locale = lang::locale_to_main_locale(lang::getlocale_for_country($o->{locale}{lang}, $o->{locale}{country}));
-	    my @pkgs = install::pkgs::packagesProviding($o->{packages}, "locales-$pkg_locale");
+	    my @pkgs = URPM::packages_providing($o->{packages}, "locales-$pkg_locale");
 	    $o->pkg_install(map { $_->name } @pkgs) if @pkgs;
 
 	    lang::write_and_install($o->{locale}, $o->do_pkgs);

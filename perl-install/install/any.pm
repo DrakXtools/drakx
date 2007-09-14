@@ -579,7 +579,7 @@ sub default_packages {
     push @l, 'quota' if any { $_->{options} =~ /usrquota|grpquota/ } @{$o->{fstab}};
     push @l, uniq(grep { $_ } map { fs::format::package_needed_for_partition_type($_) } @{$o->{fstab}});
 
-    my @locale_pkgs = map { install::pkgs::packagesProviding($o->{packages}, 'locales-' . $_) } lang::langsLANGUAGE($o->{locale}{langs});
+    my @locale_pkgs = map { URPM::packages_providing($o->{packages}, 'locales-' . $_) } lang::langsLANGUAGE($o->{locale}{langs});
     unshift @l, uniq(map { $_->name } @locale_pkgs);
 
     @l;
