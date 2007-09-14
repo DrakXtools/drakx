@@ -7,7 +7,6 @@ DESTDIR = $(ROOTDEST)/install/extra/advertising
 install:
 	rm -rf $(DESTDIR)
 	install -d $(DESTDIR)
-	install -m755 `cat list-$(THEME) | sed 's/png$$/pl/'` $(DESTDIR)
 	install -m644 `cat list-$(THEME)` $(DESTDIR)
 	install -m644 list-$(THEME) $(DESTDIR)/list
 
