@@ -533,11 +533,11 @@ my @IM_i18n_fields = (
 );
 
 my @sessions = any::sessions();
-my $is_kde = member('KDE', @sessions);
+my $is_kde3 = member('KDE', @sessions);
 my $is_kde4 = member('KDE', @sessions);
 my $is_gtk = any { !/KDE/i } @sessions;
 
-my @scim_bridges_qt_packages = (if_($is_kde, 'scim-bridge-qt3'), if_($is_kde4, 'scim-bridge-qt4'));
+my @scim_bridges_qt_packages = (if_($is_kde3, 'scim-bridge-qt3'), if_($is_kde4, 'scim-bridge-qt4'));
 
 # keep the 'packages' field in sync with share/rpmsrate:
 my %IM_config =
@@ -618,12 +618,12 @@ my %IM_config =
             XMODIFIERS => '@im=SCIM',
 	    default_for_lang => 'am ja ko vi zh_CN zh_TW',
 	    packages => {
-		generic => [ qw(scim scim-m17n scim-tables), if_($is_kde, 'scim-qtimm') ],
-		am => [ qw(scim scim-tables ), if_($is_kde, 'scim-qtimm') ],
-		ja => [ qw(scim-anthy scim-input-pad scim-tomoe), if_($is_kde, 'scim-qtimm') ],
-		ko => [ 'scim-hangul', if_($is_kde, 'scim-qtimm') ],
-          vi => [ 'scim-m17n', if_($is_kde, 'scim-qtimm') ],
-		zh => [ qw(scim-pinyin scim-tables scim-chewing), if_($is_kde, 'scim-qtimm') ],
+		generic => [ qw(scim scim-m17n scim-tables), if_($is_kde3, 'scim-qtimm') ],
+		am => [ qw(scim scim-tables ), if_($is_kde3, 'scim-qtimm') ],
+		ja => [ qw(scim-anthy scim-input-pad scim-tomoe), if_($is_kde3, 'scim-qtimm') ],
+		ko => [ 'scim-hangul', if_($is_kde3, 'scim-qtimm') ],
+          vi => [ 'scim-m17n', if_($is_kde3, 'scim-qtimm') ],
+		zh => [ qw(scim-pinyin scim-tables scim-chewing), if_($is_kde3, 'scim-qtimm') ],
 	    },
            },
 
@@ -649,12 +649,12 @@ my %IM_config =
             XMODIFIERS => '@im=SCIM',
             default_for_lang => 'am ja ko vi zh_CN zh_TW',
             packages => {
-                generic => [ qw(scim-tables-skim scim-m17n), if_($is_kde, 'scim-qtimm') ],
-                am => [ 'scim-tables-skim', if_($is_kde, 'scim-qtimm') ],
-                ja => [ qw(skim-scim-anthy scim-input-pad scim-tomoe), if_($is_kde, 'scim-qtimm') ],
-                ko => [ 'scim-hangul-skim', if_($is_kde, 'scim-qtimm') ],
-                vi => [ qw(skim scim-m17n), if_($is_kde, 'scim-qtimm') ],
-                zh => [ qw(skim-scim-pinyin scim-tables-skim scim-chewing), if_($is_kde, 'scim-qtimm') ],
+                generic => [ qw(scim-tables-skim scim-m17n), if_($is_kde3, 'scim-qtimm') ],
+                am => [ 'scim-tables-skim', if_($is_kde3, 'scim-qtimm') ],
+                ja => [ qw(skim-scim-anthy scim-input-pad scim-tomoe), if_($is_kde3, 'scim-qtimm') ],
+                ko => [ 'scim-hangul-skim', if_($is_kde3, 'scim-qtimm') ],
+                vi => [ qw(skim scim-m17n), if_($is_kde3, 'scim-qtimm') ],
+                zh => [ qw(skim-scim-pinyin scim-tables-skim scim-chewing), if_($is_kde3, 'scim-qtimm') ],
             },
         },
    uim => {
