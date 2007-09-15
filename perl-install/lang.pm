@@ -534,7 +534,10 @@ my @IM_i18n_fields = (
 
 my @sessions = any::sessions();
 my $is_kde = member('KDE', @sessions);
+my $is_kde4 = member('KDE', @sessions);
 my $is_gtk = any { !/KDE/i } @sessions;
+
+my @scim_bridges_qt_packages = (if_($is_kde, 'scim-bridge-qt3'), if_($is_kde4, 'scim-bridge-qt4'));
 
 # keep the 'packages' field in sync with share/rpmsrate:
 my %IM_config =
@@ -631,12 +634,12 @@ my %IM_config =
        XMODIFIERS => '@im=SCIM',
        default_for_lang => 'am ja ko vi zh_CN zh_TW',
        packages => {
-           generic => [ qw(scim-m17n scim-tables), if_($is_kde, 'scim-bridge-qt3') ],
-           am => [ 'scim-tables', if_($is_kde, 'scim-bridge-qt3') ],
-           ja => [ qw(scim-anthy scim-input-pad scim-tomoe), if_($is_kde, 'scim-bridge-qt3') ],
-           ko => [ 'scim-hangul', if_($is_kde, 'scim-bridge-qt3') ],
-           vi => [ 'scim-m17n', if_($is_kde, 'scim-bridge-qt3') ],
-           zh => [ qw(scim-pinyin scim-tables scim-chewing), if_($is_kde, 'scim-bridge-qt3') ],
+           generic => [ qw(scim-m17n scim-tables), @scim_bridges_qt_packages ],
+           am => [ 'scim-tables', @scim_bridges_qt_packages ],
+           ja => [ qw(scim-anthy scim-input-pad scim-tomoe), @scim_bridges_qt_packages ],
+           ko => [ 'scim-hangul', @scim_bridges_qt_packages ],
+           vi => [ 'scim-m17n', @scim_bridges_qt_packages ],
+           zh => [ qw(scim-pinyin scim-tables scim-chewing), @scim_bridges_qt_packages ],
        },
    },
    skim => {
