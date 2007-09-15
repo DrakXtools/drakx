@@ -620,12 +620,12 @@ my %IM_config =
             XMODIFIERS => '@im=SCIM',
 	    default_for_lang => 'am ja ko vi zh_CN zh_TW',
 	    packages => {
-		generic => 'scim scim-m17n scim-tables',
-		am => 'scim scim-tables ',
-		ja => 'scim-anthy scim-input-pad scim-tomoe',
-		ko => 'scim-hangul',
-          vi => 'scim-m17n',
-		zh => 'scim-pinyin scim-tables scim-chewing',
+		generic => packages_if_desktop('scim scim-m17n scim-tables', $is_kde, 'scim-qtimm'),,
+		am => packages_if_desktop('scim scim-tables ', $is_kde, 'scim-qtimm'),,
+		ja => packages_if_desktop('scim-anthy scim-input-pad scim-tomoe', $is_kde, 'scim-qtimm'),,
+		ko => packages_if_desktop('scim-hangul', $is_kde, 'scim-qtimm'),,
+          vi => packages_if_desktop('scim-m17n', $is_kde, 'scim-qtimm'),,
+		zh => packages_if_desktop('scim-pinyin scim-tables scim-chewing', $is_kde, 'scim-qtimm'),,
 	    },
            },
 
