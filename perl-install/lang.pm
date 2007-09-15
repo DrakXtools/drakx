@@ -536,6 +536,11 @@ my @sessions = any::sessions();
 my $is_kde = member('KDE', @sessions);
 my $is_gtj = any { !/KDE/i } @sessions;
 
+sub packages_if_desktop {
+    my ($packages, $cdt, $extra_pkg) = @_;
+    join(' ', $packages, if_($cdt, $extra_pkg));
+}
+
 # keep the 'packages' field in sync with share/rpmsrate:
 my %IM_config =
   (
