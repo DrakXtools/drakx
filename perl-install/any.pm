@@ -10,7 +10,7 @@ use common;
 use detect_devices;
 use partition_table;
 use fs::type;
-use lang;
+require lang;
 use run_program;
 use devices;
 use modules;
