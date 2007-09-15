@@ -536,11 +536,6 @@ my @sessions = any::sessions();
 my $is_kde = member('KDE', @sessions);
 my $is_gtk = any { !/KDE/i } @sessions;
 
-sub packages_if_desktop {
-    my ($packages, $cdt, $extra_pkg) = @_;
-    join(' ', $packages, if_($cdt, $extra_pkg));
-}
-
 # keep the 'packages' field in sync with share/rpmsrate:
 my %IM_config =
   (
@@ -565,7 +560,7 @@ my %IM_config =
 		   'zh_HK' => 'chinput -big5',
 		   'zh_TW' => 'chinput -big5',
 	       },	       
-	       packages => { generic => 'miniChinput' },
+	       packages => { generic => [ 'miniChinput' ] },
               },
    fcitx => {
              GTK_IM_MODULE => 'xim',
@@ -595,7 +590,7 @@ my %IM_config =
                XIM => 'kinput2',
                XIM_PROGRAM => 'kinput2',
                XMODIFIERS => '@im=kinput2',
-	       packages => { generic => 'kinput2-wnn' },
+	       packages => { generic => [ 'kinput2-wnn' ] },
               },
    nabi => {
             GTK_IM_MODULE => 'xim',
@@ -611,7 +606,7 @@ my %IM_config =
        XIM => 'oxim',
        XIM_PROGRAM => 'oxim',
        XMODIFIERS => '@im=oxim', # '@im=SCIM' is broken for now
-       packages => { generic => 'oxim' },
+       packages => { generic => [ 'oxim' ] },
    },
    'scim' => {
             GTK_IM_MODULE => 'scim',
@@ -620,12 +615,12 @@ my %IM_config =
             XMODIFIERS => '@im=SCIM',
 	    default_for_lang => 'am ja ko vi zh_CN zh_TW',
 	    packages => {
-		generic => packages_if_desktop('scim scim-m17n scim-tables', $is_kde, 'scim-qtimm'),
-		am => packages_if_desktop('scim scim-tables ', $is_kde, 'scim-qtimm'),
-		ja => packages_if_desktop('scim-anthy scim-input-pad scim-tomoe', $is_kde, 'scim-qtimm'),
-		ko => packages_if_desktop('scim-hangul', $is_kde, 'scim-qtimm'),
-          vi => packages_if_desktop('scim-m17n', $is_kde, 'scim-qtimm'),
-		zh => packages_if_desktop('scim-pinyin scim-tables scim-chewing', $is_kde, 'scim-qtimm'),
+		generic => [ qw(scim scim-m17n scim-tables), if_($is_kde, 'scim-qtimm') ],
+		am => [ qw(scim scim-tables ), if_($is_kde, 'scim-qtimm') ],
+		ja => [ qw(scim-anthy scim-input-pad scim-tomoe), if_($is_kde, 'scim-qtimm') ],
+		ko => [ 'scim-hangul', if_($is_kde, 'scim-qtimm') ],
+          vi => [ 'scim-m17n', if_($is_kde, 'scim-qtimm') ],
+		zh => [ qw(scim-pinyin scim-tables scim-chewing), if_($is_kde, 'scim-qtimm') ],
 	    },
            },
 
@@ -636,12 +631,12 @@ my %IM_config =
        XMODIFIERS => '@im=SCIM',
        default_for_lang => 'am ja ko vi zh_CN zh_TW',
        packages => {
-           generic => packages_if_desktop('scim-m17n scim-tables', $is_kde, 'scim-bridge-qt3'),
-           am => packages_if_desktop('scim-tables', $is_kde, 'scim-bridge-qt3'),
-           ja => packages_if_desktop('scim-anthy scim-input-pad scim-tomoe', $is_kde, 'scim-bridge-qt3'),
-           ko => packages_if_desktop('scim-hangul', $is_kde, 'scim-bridge-qt3'),
-           vi => packages_if_desktop('scim-m17n', $is_kde, 'scim-bridge-qt3'),
-           zh => packages_if_desktop('scim-pinyin scim-tables scim-chewing', $is_kde, 'scim-bridge-qt3'),
+           generic => [ qw(scim-m17n scim-tables), if_($is_kde, 'scim-bridge-qt3') ],
+           am => [ 'scim-tables', if_($is_kde, 'scim-bridge-qt3') ],
+           ja => [ qw(scim-anthy scim-input-pad scim-tomoe), if_($is_kde, 'scim-bridge-qt3') ],
+           ko => [ 'scim-hangul', if_($is_kde, 'scim-bridge-qt3') ],
+           vi => [ 'scim-m17n', if_($is_kde, 'scim-bridge-qt3') ],
+           zh => [ qw(scim-pinyin scim-tables scim-chewing), if_($is_kde, 'scim-bridge-qt3') ],
        },
    },
    skim => {
@@ -651,12 +646,12 @@ my %IM_config =
             XMODIFIERS => '@im=SCIM',
             default_for_lang => 'am ja ko vi zh_CN zh_TW',
             packages => {
-                generic => packages_if_desktop('scim-tables-skim scim-m17n', $is_kde, 'scim-qtimm'),
-                am => packages_if_desktop('scim-tables-skim', $is_kde, 'scim-qtimm'),
-                ja => packages_if_desktop('skim-scim-anthy scim-input-pad scim-tomoe', $is_kde, 'scim-qtimm'),
-                ko => packages_if_desktop('scim-hangul-skim', $is_kde, 'scim-qtimm'),
-                vi => packages_if_desktop('skim scim-m17n', $is_kde, 'scim-qtimm'),
-                zh => packages_if_desktop('skim-scim-pinyin scim-tables-skim scim-chewing', $is_kde, 'scim-qtimm'),
+                generic => [ qw(scim-tables-skim scim-m17n), if_($is_kde, 'scim-qtimm') ],
+                am => [ 'scim-tables-skim', if_($is_kde, 'scim-qtimm') ],
+                ja => [ qw(skim-scim-anthy scim-input-pad scim-tomoe), if_($is_kde, 'scim-qtimm') ],
+                ko => [ 'scim-hangul-skim', if_($is_kde, 'scim-qtimm') ],
+                vi => [ qw(skim scim-m17n), if_($is_kde, 'scim-qtimm') ],
+                zh => [ qw(skim-scim-pinyin scim-tables-skim scim-chewing), if_($is_kde, 'scim-qtimm') ],
             },
         },
    uim => {
@@ -665,7 +660,7 @@ my %IM_config =
            XIM => 'uim',
            XIM_PROGRAM => 'uim-xim',
            XMODIFIERS => '@im=uim',
-	   packages => { generic => 'uim-gtk uim' },
+	   packages => { generic => [ qw(uim-gtk uim) ] },
           },
    xcin => {
             XIM => 'xcin',
@@ -723,7 +718,8 @@ sub IM2packages {
     if ($locale->{IM}) {
 	my $per_lang = $IM_config{$locale->{IM}}{packages} || {};
 	my $lang = analyse_locale_name($locale->{lang})->{main};
-	split(' ', $per_lang->{$lang} || $per_lang->{generic} || $locale->{IM});
+	my $packages = $per_lang->{$lang} || $per_lang->{generic};
+	$packages ? @$packages : $locale->{IM};
     } else { () }
 }
 
