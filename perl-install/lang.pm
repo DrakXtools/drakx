@@ -5,6 +5,7 @@ use strict;
 use common;
 use utf8;
 use log;
+use any;
 
 #- key: lang name (locale name for some (~5) special cases needing
 #-      extra distinctions)
@@ -531,6 +532,10 @@ my @IM_i18n_fields = (
 #-     XIM server; or a Qt plugin if exists)
 );
 
+my @sessions = any::sessions();
+my $is_kde = member('KDE', @sessions);
+my $is_gtj = any { !/KDE/i } @sessions;
+
 # keep the 'packages' field in sync with share/rpmsrate:
 my %IM_config =
   (
@@ -636,12 +641,12 @@ my %IM_config =
        XMODIFIERS => '@im=SCIM',
        default_for_lang => 'am ja ko vi zh_CN zh_TW',
        packages => {
-           generic => 'scim-bridge-qt3 scim-m17n scim-tables'),
-           am => 'scim-bridge-qt3 scim-tables'),
-           ja => 'scim-bridge-qt3 scim-anthy scim-input-pad scim-tomoe'),
-           ko => 'scim-bridge-qt3 scim-hangul'),
-           vi => 'scim-bridge-qt3 scim-m17n'),
-           zh => 'scim-bridge-qt3 scim-pinyin scim-tables scim-chewing'),
+           generic => join(' ', if_($is_kde, 'scim-bridge-qt3'), ' scim-m17n scim-tables'),
+           am => join(' ', if_($is_kde, 'scim-bridge-qt3'), ' scim-tables'),
+           ja => join(' ', if_($is_kde, 'scim-bridge-qt3'), ' scim-anthy scim-input-pad scim-tomoe'),
+           ko => join(' ', if_($is_kde, 'scim-bridge-qt3'), ' scim-hangul'),
+           vi => join(' ', if_($is_kde, 'scim-bridge-qt3'), ' scim-m17n'),
+           zh => join(' ', if_($is_kde, 'scim-bridge-qt3'), ' scim-pinyin scim-tables scim-chewing'),
        },
    },
    skim => {
