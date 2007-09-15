@@ -646,12 +646,12 @@ my %IM_config =
        XMODIFIERS => '@im=SCIM',
        default_for_lang => 'am ja ko vi zh_CN zh_TW',
        packages => {
-           generic => join(' ', if_($is_kde, 'scim-bridge-qt3'), ' scim-m17n scim-tables'),
-           am => join(' ', if_($is_kde, 'scim-bridge-qt3'), ' scim-tables'),
-           ja => join(' ', if_($is_kde, 'scim-bridge-qt3'), ' scim-anthy scim-input-pad scim-tomoe'),
-           ko => join(' ', if_($is_kde, 'scim-bridge-qt3'), ' scim-hangul'),
-           vi => join(' ', if_($is_kde, 'scim-bridge-qt3'), ' scim-m17n'),
-           zh => join(' ', if_($is_kde, 'scim-bridge-qt3'), ' scim-pinyin scim-tables scim-chewing'),
+           generic => join(' ', packages_if_desktop('scim-m17n scim-tables', $is_kde, 'scim-bridge-qt3'),
+           am => join(' ', packages_if_desktop('scim-tables', $is_kde, 'scim-bridge-qt3'),
+           ja => join(' ', packages_if_desktop('scim-anthy scim-input-pad scim-tomoe', $is_kde, 'scim-bridge-qt3'),
+           ko => join(' ', packages_if_desktop('scim-hangul', $is_kde, 'scim-bridge-qt3'),
+           vi => join(' ', packages_if_desktop('scim-m17n', $is_kde, 'scim-bridge-qt3'),
+           zh => join(' ', packages_if_desktop('scim-pinyin scim-tables scim-chewing', $is_kde, 'scim-bridge-qt3'),
        },
    },
    skim => {
