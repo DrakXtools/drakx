@@ -534,7 +534,7 @@ my @IM_i18n_fields = (
 
 my @sessions = any::sessions();
 my $is_kde = member('KDE', @sessions);
-my $is_gtj = any { !/KDE/i } @sessions;
+my $is_gtk = any { !/KDE/i } @sessions;
 
 sub packages_if_desktop {
     my ($packages, $cdt, $extra_pkg) = @_;
