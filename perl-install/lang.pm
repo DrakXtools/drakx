@@ -613,7 +613,7 @@ my %IM_config =
        XMODIFIERS => '@im=oxim', # '@im=SCIM' is broken for now
        packages => { generic => 'oxim' },
    },
-   'scim+(default)' => {
+   'scim' => {
             GTK_IM_MODULE => 'scim',
             QT_IM_MODULE => 'scim',
             XIM_PROGRAM => 'scim -d',
@@ -628,16 +628,6 @@ my %IM_config =
 		zh => packages_if_desktop('scim-pinyin scim-tables scim-chewing', $is_kde, 'scim-qtimm'),,
 	    },
            },
-
-   (map {
-       ("scim+$_" => {
-            GTK_IM_MODULE => 'scim',
-	    QT_IM_MODULE => 'scim',
-            XIM_PROGRAM => 'scim -d',
-            XMODIFIERS => '@im=SCIM',
-	    packages => { generic => "scim-$_" },
-       });
-   } qw(anthy canna ccinput fcitx m17n prime pinyin skk uim)), # enable to select extra SCIM combinations
 
    'scim-bridge' => {
        GTK_IM_MODULE => 'scim-bridge',
