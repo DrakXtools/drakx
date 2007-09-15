@@ -629,6 +629,21 @@ my %IM_config =
        });
    } qw(anthy canna ccinput fcitx m17n prime pinyin skk uim)), # enable to select extra SCIM combinations
 
+   'scim-bridge' => {
+       GTK_IM_MODULE => 'scim-bridge',
+       QT_IM_MODULE => 'scim-bridge',
+       XIM_PROGRAM => 'scim -d',
+       XMODIFIERS => '@im=SCIM',
+       default_for_lang => 'am ja ko vi zh_CN zh_TW',
+       packages => {
+           generic => 'scim-bridge-qt3 scim-m17n scim-tables'),
+           am => 'scim-bridge-qt3 scim-tables'),
+           ja => 'scim-bridge-qt3 scim-anthy scim-input-pad scim-tomoe'),
+           ko => 'scim-bridge-qt3 scim-hangul'),
+           vi => 'scim-bridge-qt3 scim-m17n'),
+           zh => 'scim-bridge-qt3 scim-pinyin scim-tables scim-chewing'),
+       },
+   },
    skim => {
             GTK_IM_MODULE => 'scim',
             QT_IM_MODULE => 'scim',
