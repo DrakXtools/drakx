@@ -659,7 +659,16 @@ my %IM_config =
             QT_IM_MODULE => 'scim',
             XIM_PROGRAM => 'skim -d',
             XMODIFIERS => '@im=SCIM',
-           },
+            default_for_lang => 'am ja ko vi zh_CN zh_TW',
+            packages => {
+                generic => packages_if_desktop('scim-tables-skim scim-m17n', $is_kde, 'scim-qtimm'),
+                am => packages_if_desktop('scim-tables-skim', $is_kde, 'scim-qtimm'),
+                ja => packages_if_desktop('skim-scim-anthy scim-input-pad scim-tomoe', $is_kde, 'scim-qtimm'),
+                ko => packages_if_desktop('scim-hangul-skim', $is_kde, 'scim-qtimm'),
+                vi => packages_if_desktop('skim scim-m17n', $is_kde, 'scim-qtimm'),
+                zh => packages_if_desktop('skim-scim-pinyin scim-tables-skim scim-chewing', $is_kde, 'scim-qtimm'),
+            },
+        },
    uim => {
            GTK_IM_MODULE => 'uim',
            QT_IM_MODULE => 'uim',
