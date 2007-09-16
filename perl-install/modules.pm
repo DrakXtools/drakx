@@ -256,8 +256,8 @@ sub when_load {
 	when_load_category($conf, $name, $category);
     }
 
-    if (my $above = $conf->get_above($name)) {
-	load($above); #- eg: for snd-pcm-oss set by set_sound_slot()
+    if (my @above = $conf->get_above($name)) {
+	load(@above); #- eg: for snd-pcm-oss set by set_sound_slot()
     }
 }
 

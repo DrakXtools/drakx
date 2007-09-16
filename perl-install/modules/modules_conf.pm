@@ -19,7 +19,7 @@ sub get_above {
     my ($conf, $module) = @_;
     $module = $conf->mapping($module);
 
-    $conf->{$module} && $conf->{$module}{above};
+    $conf->{$module} && split(' ', $conf->{$module}{above});
 }
 sub set_above {
     my ($conf, $module, $o_modules) = @_;

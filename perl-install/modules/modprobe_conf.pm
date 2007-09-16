@@ -21,7 +21,7 @@ sub get_above {
 
     my (undef, $after) = parse_non_virtual($module, $conf->{$module}{install}) or return;
     my ($l, $_other_cmds) = partition_modprobes($after);
-    join(' ', @$l);
+    @$l;
 }
 sub set_above {
     my ($conf, $module, $o_modules) = @_;
