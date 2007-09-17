@@ -663,7 +663,7 @@ sub rebuild_initrds {
 
     my %done;
     foreach my $v (grep { $_->{initrd} } @{$bootloader->{entries}}) {
-	my $kernel_str = vmlinuz2kernel_str($v->{kernel_or_dev});
+	my $kernel_str = vmlinuz2kernel_str($v->{kernel_or_dev}) or next;
 	my $initrd_long = '/boot/' . kernel_str2initrd_long($kernel_str);
 	next if $done{$initrd_long}++;
 
