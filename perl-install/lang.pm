@@ -5,7 +5,6 @@ use strict;
 use common;
 use utf8;
 use log;
-use any;
 
 #- key: lang name (locale name for some (~5) special cases needing
 #-      extra distinctions)
@@ -716,6 +715,7 @@ sub get_default_im {
 sub IM2packages {
     my ($locale) = @_;
     if ($locale->{IM}) {
+	require any;
 	my @sessions = any::sessions();
 	$is_kde3 = member('KDE', @sessions);
 	$is_kde4 = member('KDE', @sessions);
