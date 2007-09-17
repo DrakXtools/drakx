@@ -145,8 +145,7 @@ sub add_kind2notebook {
     $kind;
 }
 
-sub interactive_help {
-    my ($in) = @_;
+sub interactive_help() {
     if ($::isInstall) {
         $in->interactive_help_sub_display_id('partition_with_diskdrake');
     } else {
