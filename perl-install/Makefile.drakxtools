@@ -2,8 +2,8 @@
 include Makefile.config
 
 INLIBDEST_DIRS = c resize_fat xf86misc
-HAVEINST_DIRS = share/po standalone/po standalone/interactive_http
-DIRS = $(INLIBDEST_DIRS) $(HAVEINST_DIRS) harddrake printer ../tools/serial_probe
+HAVEINST_DIRS = share/po standalone/po standalone/interactive_http standalone/menu
+DIRS = $(INLIBDEST_DIRS) $(HAVEINST_DIRS) harddrake printer ../tools/serial_probe standalone/menu
 NAME = libDrakX
 XSETUPLEVEL=40
 PREFIX = 
@@ -27,7 +27,7 @@ $(DIRS):
 
 install:
 	perl -pi -e "s/\"VER\"(; # version)/\"$(VERSION)\"\1/" standalone.pm
-	mkdir -p $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR)/{harddrake,pixmaps,icons/{large,mini},autostart} $(PIXDIR) $(INITDIR) $(MENUDIR)
+	mkdir -p $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR)/{applications,harddrake,pixmaps,icons/{large,mini},autostart} $(PIXDIR) $(INITDIR) $(MENUDIR)
 	install -d $(INLIBDEST_DIRS:%=$(LIBDEST)/%)
 	install $(STANDALONEPMS) standalone/service_harddrake.sh standalone/convert $(SBINDEST)
 	install -s ../tools/rpcinfo-flushed ../tools/serial_probe/serial_probe $(SBINDEST)
@@ -63,6 +63,7 @@ install:
 	mv $(LIBDEST)/icons/localedrake-48.png $(ICONSDIR)/large/localedrake.png
 	mv $(LIBDEST)/icons/localedrake-16.png $(ICONSDIR)/mini/localedrake.png
 	rmdir $(LIBDEST)/icons/harddrake2/menu
+	install -m 644 standalone/menu/*.desktop $(DATADIR)/applications
 	mv $(LIBDEST)/icons/harddrake2/ $(DATADIR)/pixmaps/
 	mv $(SBINDEST)/service_harddrake.sh $(INITDIR)/harddrake
 	mv $(SBINDEST)/convert $(DATADIR)/harddrake
