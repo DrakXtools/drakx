@@ -1,0 +1,1 @@
+$title = 'Discover Mandriva';
