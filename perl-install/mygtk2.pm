@@ -589,7 +589,7 @@ sub _gtk__MagicWindow {
     my $provided_banner = delete $opts->{banner};
 
     if ($pop_it) {
-	$sub_child = gtknew('VBox', children_tight => [ $provided_banner ]) if $provided_banner;
+	$sub_child ||= gtknew('VBox', children_tight => [ $provided_banner ]) if $provided_banner;
 	$opts->{child} = $::isInstall ?
 	  gtknew('Frame', shadow_type => 'out', 
 		 child => gtknew('Frame', shadow_type => 'none', border_width => 3, child => $sub_child)) :
