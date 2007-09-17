@@ -81,8 +81,9 @@ sub create_treeview_list {
     my $list_tv = Gtk2::TreeView->new_with_model($list);
     $list_tv->set_headers_visible(0);
     $list_tv->get_selection->set_mode('browse');
-    my $textcolumn = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0);
+    my $textcolumn = Gtk2::TreeViewColumn->new_with_attributes(undef, my $renderer = Gtk2::CellRendererText->new, 'text' => 0);
     $list_tv->append_column($textcolumn);
+    $renderer->set_property('ellipsize', 'end');
     
     my $select = sub {
 	my ($path) = @_;
