@@ -47,7 +47,7 @@ sub mapping_26_24 {
 
 sub cond_mapping_24_26 {
     my ($modname) = @_;
-    $mappings_24_26{$modname} || $modname;
+    $mappings_24_26{$modname} || list_modules::filename2modname($modname);
 }
 
 sub module_is_available {
