@@ -17,7 +17,7 @@ use run_program;
 sub init() {
     whereis_binary('dmraid') or die "dmraid not installed";
 
-    eval { modules::load('dm-mirror') };
+    eval { modules::load('dm-mirror', 'dm-zero') };
     devices::init_device_mapper();
     if ($::isInstall) {
 	call_dmraid('-ay');
