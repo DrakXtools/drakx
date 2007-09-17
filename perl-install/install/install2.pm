@@ -320,7 +320,7 @@ sub main {
     my ($cfg, $patch, @auto);
     my %cmdline = map { 
 	my ($n, $v) = split /=/;
-	$n => $v || 1;
+	$n => defined($v) ? $v : 1;
     } split ' ', cat_("/proc/cmdline");
 
     my $opt; foreach (@_) {
