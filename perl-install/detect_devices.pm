@@ -220,6 +220,7 @@ sub getSCSI() {
 	  $raw_type =~ /Scanner|Processor/ && 'scanner';
 
 	push @l, { info =>  $get->('vendor') . ' ' . $get->('model'), host => $host, channel => $channel, id => $id, lun => $lun, 
+	  description => join('|', $get->('vendor'), $get->('model')),
 	  bus => 'SCSI', media_type => $media_type, device => $device,
 	    $usb_dir ? (
 	  usb_vendor => hex($get_usb->('idVendor')), usb_id => hex($get_usb->('idProduct')),
