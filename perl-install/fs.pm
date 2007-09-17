@@ -237,7 +237,7 @@ sub prepare_write_fstab {
 	    $new{$device} = 1;
 	    $new{$mntpoint} = 1;
 
-	    my $options = $_->{options};
+	    my $options = $_->{options} || 'defaults';
 
 	    if ($_->{fs_type} eq 'smbfs' && $options =~ /password=/ && !$b_keep_smb_credentials) {
 		require fs::remote::smb;
