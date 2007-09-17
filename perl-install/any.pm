@@ -1059,7 +1059,7 @@ sub report_bug {
       header("fstab"), cat_("$::prefix/etc/fstab"),
       header("modprobe.conf"), cat_("$::prefix/etc/modprobe.conf"),
       header("lilo.conf"), cat_("$::prefix/etc/lilo.conf"),
-      header("grub: menu.lst"), cat_("$::prefix/boot/grub/menu.lst"),
+      header("grub: menu.lst"), join('', map { s/^(\s*password)\s+(.*)/$1 xxx/; $_ } cat_("$::prefix/boot/grub/menu.lst")),
       header("grub: install.sh"), cat_("$::prefix/boot/grub/install.sh"),
       header("grub: device.map"), cat_("$::prefix/boot/grub/device.map"),
       header("xorg.conf"), cat_("$::prefix/etc/X11/xorg.conf"),
