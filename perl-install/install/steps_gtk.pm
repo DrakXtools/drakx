@@ -484,6 +484,14 @@ sub installPackages {
 	my $f = $install::any::advertising_images[$i++ % @install::any::advertising_images];
 	log::l("advertising $f");
 	gtkval_modify(\$advertising_image, $f);
+
+	if (my $banner = $w->{window}{banner}) {
+	    my ($title);
+	    my $pl = $f; $pl =~ s/\.png$/.pl/;
+	    eval(cat_($pl)) if -e $pl;    
+	    $banner->{text} = $title;
+	    Gtk2::Banner::set_pixmap($banner);
+	}
     };
 
     my $cancel = gtknew('Button', text => N("Cancel"), clicked => sub { $install::pkgs::cancel_install = 1 });
