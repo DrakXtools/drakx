@@ -236,11 +236,6 @@ sub what_provides {
     split('\|', chomp_(run_program::get_stdout('urpmq', $name)));
 }
 
-sub is_installed {
-    my ($do, $name) = @_;
-    are_installed($do, $name);
-}
-
 sub are_installed {
     my ($_do, @l) = @_;
     @l or return;
