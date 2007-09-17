@@ -718,7 +718,7 @@ sub IM2packages {
 	require any;
 	my @sessions = any::sessions();
 	$is_kde3 = member('KDE', @sessions);
-	$is_kde4 = member('KDE', @sessions);
+	$is_kde4 = member('KDE4', @sessions);
 	$_is_gtk = any { !/KDE/i } @sessions;
      @scim_bridges_qt_packages = (if_($is_kde3, 'scim-bridge-qt3'), if_($is_kde4, 'scim-bridge-qt4'));
 	my $per_lang = $IM_config{$locale->{IM}}{packages} || {};
