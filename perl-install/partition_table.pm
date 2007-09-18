@@ -245,14 +245,14 @@ sub read_one($$) {
 		# perl_checker: require partition_table::sun
 		require "partition_table/$_.pm";
 		bless $hd, "partition_table::$_";
-		($pt, $info) = $hd->read($sector);
+		($pt, $info) = $hd->read_one($sector);
 		log::l("found a $_ partition table on $hd->{file} at sector $sector");
 	    };
 	    $@ or last;
 	}
     } else {
 	#- keep current blessed object for that, this means it is neccessary to read sector 0 before.
-	($pt, $info) = $hd->read($sector);
+	($pt, $info) = $hd->read_one($sector);
     }
 
     my @extended = $hd->hasExtended ? grep { isExtended($_) } @$pt : ();

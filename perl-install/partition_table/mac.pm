@@ -98,7 +98,7 @@ sub adjustEnd($$) {
     my ($_hd, $_part) = @_;
 }
 
-sub read($$) {
+sub read_one {
     my ($hd, $sector) = @_;
     my $tmp;
 

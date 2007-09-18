@@ -197,7 +197,7 @@ sub set_best_geometry_for_the_partition_table {
     }
 }
 
-sub read {
+sub read_one {
     my ($hd, $sector) = @_;
     my $tmp;
 

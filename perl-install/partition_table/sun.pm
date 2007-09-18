@@ -73,7 +73,7 @@ sub compute_crc($) {
     $crc;
 }
 
-sub read($$) {
+sub read_one {
     my ($hd, $sector) = @_;
     my $tmp;
 

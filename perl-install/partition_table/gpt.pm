@@ -138,7 +138,7 @@ sub read_partitionEntries {
     \@pt;
 }
 
-sub read {
+sub read_one {
     my ($hd, $sector) = @_;
 
     my $l = partition_table::dos::read($hd, $sector);

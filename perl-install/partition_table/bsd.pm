@@ -61,7 +61,7 @@ my $offset = 0x40;
 
 sub use_pt_type { 1 }
 
-sub read($$) {
+sub read_one {
     my ($hd, $sector) = @_;
     my $tmp;
 
