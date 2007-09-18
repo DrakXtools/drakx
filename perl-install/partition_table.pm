@@ -225,7 +225,6 @@ sub get_normal_parts_and_holes {
 
 sub read_primary {
     my ($hd) = @_;
-    my ($pt, $info);
 
     #- it can be safely considered that the first sector is used to probe the partition table
     #- but other sectors (typically for extended partition ones) have to match this type!
