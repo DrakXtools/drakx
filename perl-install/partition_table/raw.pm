@@ -212,15 +212,18 @@ sub default_type {
     my $type = arch() =~ /ia64/ ? 'gpt' : arch() eq "alpha" ? "bsd" : arch() =~ /^sparc/ ? "sun" : arch() eq "ppc" ? "mac" : "dos";
     #- override standard mac type on PPC for IBM machines to dos
     $type = "dos" if arch() =~ /ppc/ && detect_devices::get_mac_model() =~ /^IBM/;
-    require "partition_table/$type.pm";
-    "partition_table::$type";
+    $type;
 }
 
-sub zero_MBR {
-    my ($hd) = @_;
-    #- force the standard partition type for the architecture
-    my $type = default_type();
-    $type->initialize($hd);
+sub zero_MBR { &clear } #- deprecated
+sub clear {
+    my ($hd, $o_type) = @_;
+
+    my $type = $o_type || default_type();
+
+    require "partition_table/$type.pm";
+    "partition_table::$type"->initialize($hd);
+
     delete $hd->{extended};
     if (detect_devices::is_xbox()) {
         my $part = { start => 1, size => 15632048, pt_type => 0x0bf, isFormatted => 1 };
@@ -235,10 +238,11 @@ sub clear_existing {
     partition_table::will_tell_kernel($hd, del => $_) foreach @parts;
 }
 
-sub zero_MBR_and_dirty {
+sub zero_MBR_and_dirty { &clear_and_dirty } #- deprecated
+sub clear_and_dirty {
     my ($hd) = @_;
     $hd->clear_existing;
-    zero_MBR($hd);
+    clear($hd);
 }
 
 sub read_primary {

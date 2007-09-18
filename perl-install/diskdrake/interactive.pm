@@ -327,7 +327,7 @@ sub Clear_all {
     } else {
 	$hd->{readonly} = 0; #- give a way out of readonly-ness. only allowed when getting_rid_of_readonly_allowed
 	$hd->{getting_rid_of_readonly_allowed} = 0; #- we don't need this flag anymore
-	partition_table::raw::zero_MBR_and_dirty($hd);
+	partition_table::raw::clear_and_dirty($hd);
     }
 }
 
