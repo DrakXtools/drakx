@@ -235,7 +235,7 @@ sub read_primary {
 	);
 	foreach ('empty', @parttype, 'unknown') {
 	    /unknown/ and die "unknown partition table format on disk " . $hd->{file};
-	    eval {
+
 		# perl_checker: require partition_table::bsd
 		# perl_checker: require partition_table::dos
 		# perl_checker: require partition_table::empty
@@ -244,16 +244,12 @@ sub read_primary {
 		# perl_checker: require partition_table::sun
 		require "partition_table/$_.pm";
 		bless $hd, "partition_table::$_";
-		($pt, $info) = $hd->read_one(0);
-		log::l("found a $_ partition table on $hd->{file} at sector 0");
-	    };
-	    $@ or last;
+	        if ($hd->read_primary) {
+		    log::l("found a $_ partition table on $hd->{file} at sector 0");
+		    return 1;
+		}
 	}
-    my $primary = partition_table::raw::pt_info_to_primary($hd, $pt, $info) or return;
-    $hd->{primary} = $primary;
-    undef $hd->{extended};
-    verifyPrimary($primary);
-    1;
+    0;
 }
 
 sub read {

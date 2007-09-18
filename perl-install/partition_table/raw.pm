@@ -236,6 +236,17 @@ sub zero_MBR_and_dirty {
     zero_MBR($hd);
 }
 
+sub read_primary {
+    my ($hd) = @_;
+
+    my ($pt, $info) = eval { $hd->read_one(0) } or return;
+    my $primary = partition_table::raw::pt_info_to_primary($hd, $pt, $info);
+    $hd->{primary} = $primary;
+    undef $hd->{extended};
+    partition_table::verifyPrimary($primary);
+    1;
+}
+
 sub pt_info_to_primary {
     my ($hd, $pt, $info) = @_;
 
