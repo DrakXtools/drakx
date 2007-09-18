@@ -223,13 +223,12 @@ sub get_normal_parts_and_holes {
     grep { !isEmpty($_) || $_->{size} >= $hd->cylinder_size } @l;
 }
 
-sub read_one($$) {
-    my ($hd, $sector) = @_;
+sub read_primary {
+    my ($hd) = @_;
     my ($pt, $info);
 
     #- it can be safely considered that the first sector is used to probe the partition table
     #- but other sectors (typically for extended partition ones) have to match this type!
-    if (!$sector) {
 	my @parttype = (
 	  if_(arch() =~ /^ia64/, 'gpt'),
 	  arch() =~ /^sparc/ ? ('sun', 'bsd') : ('dos', 'bsd', 'sun', 'mac'),
@@ -245,22 +244,17 @@ sub read_one($$) {
 		# perl_checker: require partition_table::sun
 		require "partition_table/$_.pm";
 		bless $hd, "partition_table::$_";
-		($pt, $info) = $hd->read_one($sector);
-		log::l("found a $_ partition table on $hd->{file} at sector $sector");
+		($pt, $info) = $hd->read_one(0);
+		log::l("found a $_ partition table on $hd->{file} at sector 0");
 	    };
 	    $@ or last;
 	}
-    } else {
-	#- keep current blessed object for that, this means it is neccessary to read sector 0 before.
-	($pt, $info) = $hd->read_one($sector);
-    }
-
     partition_table::raw::pt_info_to_primary($hd, $pt, $info);
 }
 
 sub read {
     my ($hd) = @_;
-    my $pt = read_one($hd, 0) or return 0;
+    my $pt = read_primary($hd, 0) or return 0;
     $hd->{primary} = $pt;
     undef $hd->{extended};
     verifyPrimary($pt);
@@ -288,7 +282,10 @@ sub read {
 sub read_extended {
     my ($hd, $extended, $need_removing_empty_extended) = @_;
 
-    my $pt = read_one($hd, $extended->{start}) or return 0;
+    my $pt = do {
+	my ($pt, $info) = $hd->read_one($extended->{start}) or return 0;
+	partition_table::raw::pt_info_to_primary($hd, $pt, $info);
+    };
     $pt = { %$extended, %$pt };
 
     push @{$hd->{extended}}, $pt;
