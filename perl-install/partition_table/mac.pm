@@ -357,8 +357,8 @@ sub info {
     $info;
 }
 
-sub clear_raw {
-    my ($hd) = @_;
+sub initialize {
+    my ($class, $hd) = @_;
     my @oldraw = @{$hd->{primary}{raw}};
     my $pt = { raw => [ ({}) x 63 ], info => info($hd) };
 
@@ -389,7 +389,8 @@ sub clear_raw {
     }
     @{$pt->{info}{ddMap}} = @{$hd->{primary}{info}{ddMap}};
 
-    $pt;
+    $hd->{primary} = $pt;
+    bless $hd, $class;
 }
 
 1;

@@ -218,8 +218,8 @@ sub default_type {
 sub zero_MBR {
     my ($hd) = @_;
     #- force the standard partition type for the architecture
-    bless $hd, default_type();
-    $hd->{primary} = $hd->clear_raw;
+    my $type = default_type();
+    $type->initialize($hd);
     delete $hd->{extended};
     if (detect_devices::is_xbox()) {
         my $part = { start => 1, size => 15632048, pt_type => 0x0bf, isFormatted => 1 };

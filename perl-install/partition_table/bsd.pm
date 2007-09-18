@@ -140,9 +140,11 @@ sub info {
     };
 }
 
-sub clear_raw {
-    my ($hd) = @_;
-    { raw => [ ({}) x $nb_primary ], info => info($hd) };
+sub initialize {
+    my ($class, $hd) = @_;
+    $hd->{primary} = { raw => [ ({}) x $nb_primary ], info => info($hd) };
+    bless $hd, $class;
+;
 }
 
 sub first_usable_sector { 2048 }

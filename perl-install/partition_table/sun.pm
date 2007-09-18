@@ -186,7 +186,7 @@ sub info {
     $info;
 }
 
-sub clear_raw {
+sub initialize {
     my ($hd) = @_;
     my $pt = { raw => [ ({}) x $nb_primary ], info => info($hd) };
 
@@ -198,7 +198,8 @@ sub clear_raw {
 	size => $hd->{geom}{cylinders} * $hd->cylinder_size,
     };
 
-    $pt;
+    $hd->{primary} = $pt;
+    bless $hd, 'partition::sun';
 }
 
 1;

@@ -184,7 +184,7 @@ sub write {
 
     {
 	# write the PMBR
-	my $pmbr = partition_table::dos::clear_raw();
+	my $pmbr = partition_table::dos::empty_raw();
 	$pmbr->{raw}[0] = { pt_type => 0xee, local_start => $info->{myLBA}, size => $info->{alternateLBA} - $info->{myLBA} + 1 };
 	partition_table::dos::write($hd, $sector, $pmbr->{raw});
     }
@@ -258,9 +258,10 @@ sub info {
     };
 }
 
-sub clear_raw {
-    my ($hd) = @_;
-    { raw => [], info => info($hd) };
+sub initialize {
+    my ($class, $hd) = @_;
+    $hd->{primary} = { raw => [], info => info($hd) };
+    bless $hd, $class;
 }
 
 1;

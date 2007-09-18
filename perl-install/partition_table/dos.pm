@@ -247,6 +247,12 @@ sub write {
     1;
 }
 
-sub clear_raw { { raw => [ ({}) x $nb_primary ] } }
+sub empty_raw { { raw => [ ({}) x $nb_primary ] } }
+
+sub initialize { 
+    my ($class, $hd) = @_;
+    $hd->{primary} = empty_raw();
+    bless $hd, $class;
+}
 
 1;
