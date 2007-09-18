@@ -5,9 +5,10 @@ package partition_table::lvm; # $Id: $
 use diagnostics;
 use strict;
 
-1;
+our @ISA = qw(partition_table::readonly);
 
 use common;
+use partition_table::readonly;
 use fs::type;
 use lvm;
 
@@ -28,8 +29,12 @@ sub read_primary {
 
     $type && $type->{pt_type} == $wanted->{pt_type} or return;
 
-    require partition_table::readonly;
-    partition_table::readonly->initialize($hd, _parts($hd));
-
+    partition_table::lvm->initialize($hd);
     1;
+}
+
+sub initialize {
+    my ($class, $hd) = @_;
+
+    partition_table::readonly::initialize($class, $hd, _parts($hd));    
 }
