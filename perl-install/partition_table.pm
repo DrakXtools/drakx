@@ -249,19 +249,20 @@ sub read_primary {
 	    };
 	    $@ or last;
 	}
-    partition_table::raw::pt_info_to_primary($hd, $pt, $info);
+    my $primary = partition_table::raw::pt_info_to_primary($hd, $pt, $info) or return;
+    $hd->{primary} = $primary;
+    undef $hd->{extended};
+    verifyPrimary($primary);
+    1;
 }
 
 sub read {
     my ($hd) = @_;
-    my $pt = read_primary($hd, 0) or return 0;
-    $hd->{primary} = $pt;
-    undef $hd->{extended};
-    verifyPrimary($pt);
+    read_primary($hd) or return 0;
     eval {
 	my $need_removing_empty_extended;
-	if ($pt->{extended}) {
-	    read_extended($hd, $pt->{extended}, \$need_removing_empty_extended) or return 0;
+	if ($hd->{primary}{extended}) {
+	    read_extended($hd, $hd->{primary}{extended}, \$need_removing_empty_extended) or return 0;
 	}
 	if ($need_removing_empty_extended) {
 	    #- special case when hda5 is empty, it must be skipped
