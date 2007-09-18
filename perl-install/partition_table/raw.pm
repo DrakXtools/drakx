@@ -229,10 +229,15 @@ sub zero_MBR {
     }
 }
 
-sub zero_MBR_and_dirty {
-    my ($hd) = @_;    
+sub clear_existing {
+    my ($hd) = @_;
     my @parts = (partition_table::get_normal_parts($hd), if_($hd->{primary}{extended}, $hd->{primary}{extended}));
     partition_table::will_tell_kernel($hd, del => $_) foreach @parts;
+}
+
+sub zero_MBR_and_dirty {
+    my ($hd) = @_;
+    $hd->clear_existing;
     zero_MBR($hd);
 }
 
