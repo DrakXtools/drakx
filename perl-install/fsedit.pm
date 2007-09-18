@@ -178,11 +178,6 @@ sub get_hds {
 			push @raw_hds, $hd;
 			$hd = '';
 			1;
-		    } elsif ($type->{pt_type} == 0x8e) {
-			#- LVM on full disk
-			require partition_table::lvm;
-			partition_table::lvm->initialize($hd);
-			1;
 		    } else {
 			0;
 		    }

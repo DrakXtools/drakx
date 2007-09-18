@@ -23,3 +23,15 @@ sub initialize {
 
     bless $hd, $class;
 }
+
+sub read_primary {
+    my ($hd) = @_;
+
+    my $wanted = fs::type::type_name2subpart('Linux Logical Volume Manager');
+    my $type = fs::type::type_subpart_from_magic($hd);
+
+    $type && $type->{pt_type} == $wanted->{pt_type} or return;
+
+    partition_table::lvm->initialize($hd);
+    1;
+}
