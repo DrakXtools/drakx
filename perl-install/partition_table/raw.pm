@@ -6,6 +6,7 @@ use strict;
 use common;
 use devices;
 use detect_devices;
+use fs::type;
 use log;
 use c;
 
@@ -233,6 +234,19 @@ sub zero_MBR_and_dirty {
     my @parts = (partition_table::get_normal_parts($hd), if_($hd->{primary}{extended}, $hd->{primary}{extended}));
     partition_table::will_tell_kernel($hd, del => $_) foreach @parts;
     zero_MBR($hd);
+}
+
+sub pt_info_to_primary {
+    my ($hd, $pt, $info) = @_;
+
+    my @extended = $hd->hasExtended ? grep { isExtended($_) } @$pt : ();
+    my @normal = grep { $_->{size} && !isEmpty($_) && !isExtended($_) } @$pt;
+    my $nb_special_empty = int(grep { $_->{size} && isEmpty($_) } @$pt);
+
+    @extended > 1 and die "more than one extended partition";
+
+    put_in_hash($_, partition_table::hd2minimal_part($hd)) foreach @normal, @extended;
+    { raw => $pt, extended => $extended[0], normal => \@normal, info => $info, nb_special_empty => $nb_special_empty };
 }
 
 #- ugly stuff needed mainly for Western Digital IDE drives

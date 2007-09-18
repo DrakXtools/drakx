@@ -255,14 +255,7 @@ sub read_one($$) {
 	($pt, $info) = $hd->read_one($sector);
     }
 
-    my @extended = $hd->hasExtended ? grep { isExtended($_) } @$pt : ();
-    my @normal = grep { $_->{size} && !isEmpty($_) && !isExtended($_) } @$pt;
-    my $nb_special_empty = int(grep { $_->{size} && isEmpty($_) } @$pt);
-
-    @extended > 1 and die "more than one extended partition";
-
-    put_in_hash($_, hd2minimal_part($hd)) foreach @normal, @extended;
-    { raw => $pt, extended => $extended[0], normal => \@normal, info => $info, nb_special_empty => $nb_special_empty };
+    partition_table::raw::pt_info_to_primary($hd, $pt, $info);
 }
 
 sub read {
