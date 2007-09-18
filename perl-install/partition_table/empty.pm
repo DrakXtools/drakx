@@ -28,7 +28,7 @@ sub read_one {
     sysread $F, $tmp, 1024 or die "error reading magic number on disk $hd->{device}";
     $tmp eq substr($tmp, 0, 1) x 1024 or die "bad magic number on disk $hd->{device}";
 
-    partition_table::raw::clear($hd);
+    partition_table::initialize($hd);
 
     $hd->{primary}{raw}, $hd->{primary}{info};
 }

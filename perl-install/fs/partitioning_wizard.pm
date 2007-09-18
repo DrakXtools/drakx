@@ -211,7 +211,7 @@ filesystem checks will be run on your next boot into Microsoft Windows®")) if $
 				    title => N("Partitioning"),
 				    icon => 'banner-part',
 				    interactive_help_id => 'takeOverHdConfirm' }) or return;
-		partition_table::raw::clear($hd);
+		partition_table::initialize($hd);
 		fsedit::auto_allocate($all_hds, $partitions);
 		1;
 	    } ];

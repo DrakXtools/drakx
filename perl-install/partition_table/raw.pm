@@ -215,22 +215,7 @@ sub default_type {
     $type;
 }
 
-sub zero_MBR { &clear } #- deprecated
-sub clear {
-    my ($hd, $o_type) = @_;
-
-    my $type = $o_type || default_type();
-
-    require "partition_table/$type.pm";
-    "partition_table::$type"->initialize($hd);
-
-    delete $hd->{extended};
-    if (detect_devices::is_xbox()) {
-        my $part = { start => 1, size => 15632048, pt_type => 0x0bf, isFormatted => 1 };
-        partition_table::dos::compute_CHS($hd, $part);
-	$hd->{primary}{raw}[0] = $part;
-    }
-}
+sub zero_MBR { &partition_table::initialize } #- deprecated
 
 sub clear_existing {
     my ($hd) = @_;
@@ -242,7 +227,7 @@ sub zero_MBR_and_dirty { &clear_and_dirty } #- deprecated
 sub clear_and_dirty {
     my ($hd) = @_;
     $hd->clear_existing;
-    clear($hd);
+    partition_table::initialize($hd);
 }
 
 sub read_primary {

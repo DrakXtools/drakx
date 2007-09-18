@@ -223,6 +223,29 @@ sub get_normal_parts_and_holes {
     grep { !isEmpty($_) || $_->{size} >= $hd->cylinder_size } @l;
 }
 
+sub _default_type {
+    my $type = arch() =~ /ia64/ ? 'gpt' : arch() eq "alpha" ? "bsd" : arch() =~ /^sparc/ ? "sun" : arch() eq "ppc" ? "mac" : "dos";
+    #- override standard mac type on PPC for IBM machines to dos
+    $type = "dos" if arch() =~ /ppc/ && detect_devices::get_mac_model() =~ /^IBM/;
+    $type;
+}
+
+sub initialize {
+    my ($hd, $o_type) = @_;
+
+    my $type = $o_type || _default_type();
+
+    require "partition_table/$type.pm";
+    "partition_table::$type"->initialize($hd);
+
+    delete $hd->{extended};
+    if (detect_devices::is_xbox()) {
+        my $part = { start => 1, size => 15632048, pt_type => 0x0bf, isFormatted => 1 };
+        partition_table::dos::compute_CHS($hd, $part);
+	$hd->{primary}{raw}[0] = $part;
+    }
+}
+
 sub read_primary {
     my ($hd) = @_;
 
