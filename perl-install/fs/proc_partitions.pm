@@ -63,11 +63,9 @@ sub compare {
 
 sub use_ {
     my ($hd) = @_;
-    
-    partition_table::raw::clear($hd);
-    $hd->{readonly} = 1;
-    $hd->{getting_rid_of_readonly_allowed} = 1;
-    $hd->{primary} = { normal => [ grep { $_->{rootDevice} eq $hd->{device} } &read([$hd]) ] };
+
+    require partition_table::readonly;
+    partition_table::readonly->initialize($hd, [ grep { $_->{rootDevice} eq $hd->{device} } &read([$hd]) ]);
 }
 
 1;

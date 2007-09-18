@@ -5,23 +5,19 @@ package partition_table::lvm; # $Id: $
 use diagnostics;
 use strict;
 
-our @ISA = qw(partition_table::raw);
+1;
 
 use common;
-use partition_table::raw;
 use fs::type;
 use lvm;
 
-sub initialize {
-    my ($class, $hd) = @_;
+sub _parts {
+    my ($hd) = @_;
 
     my $part = { size => $hd->{totalsectors}, device => $hd->{device} };
     add2hash($part, fs::type::type_name2subpart('Linux Logical Volume Manager'));
 
-    $hd->{readonly} = $hd->{getting_rid_of_readonly_allowed} = 1;
-    $hd->{primary}{normal} = [ $part ];   
-
-    bless $hd, $class;
+    [ $part ];
 }
 
 sub read_primary {
@@ -32,6 +28,8 @@ sub read_primary {
 
     $type && $type->{pt_type} == $wanted->{pt_type} or return;
 
-    partition_table::lvm->initialize($hd);
+    require partition_table::readonly;
+    partition_table::readonly->initialize($hd, _parts($hd));
+
     1;
 }
