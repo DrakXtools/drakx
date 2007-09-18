@@ -241,7 +241,8 @@ sub select_by_package_names_or_die {
     foreach (@$names) {
 	my $p = packageByName($packages, $_) or die "package $_ not found";
 	!$p->flag_installed && !$p->flag_selected or next;
-	selectPackage($packages, $p, $b_base) or die "package $_ can't be selected";
+	my ($_pkgs, $error) = selectPackage_with_error($packages, $p, $b_base);
+	$error and die N("Some packages requested by %s cannot be installed:\n%s", $_, $error);
     }
 }
 
@@ -251,27 +252,35 @@ sub resolve_requested_and_check {
     my @l = $packages->resolve_requested($packages->{rpmdb}, $state, $requested,
 					 callback_choices => \&packageCallbackChoices);
 
+    my $error;
     if (find { !exists $state->{selected}{$_} } keys %$requested) {
 	my @rejected = urpm::select::unselected_packages($packages, $state);
-	log::l("ERROR: selection failed: " . urpm::select::translate_why_unselected($packages, $state, @rejected));
+	$error = urpm::select::translate_why_unselected($packages, $state, @rejected);
+	log::l("ERROR: selection failed: $error");
     }
 
-    @l;
+    \@l, $error;
 }
 
 sub selectPackage {
+    my ($packages, $pkg, $b_base) = @_;
+    my ($pkgs, $_error) = selectPackage_with_error($packages, $pkg, $b_base);
+    @$pkgs;
+}
+
+sub selectPackage_with_error {
     my ($packages, $pkg, $b_base) = @_;
 
     my $state = $packages->{state} ||= {};
 
     $packages->{rpmdb} ||= rpmDbOpen();
 
-    my @l = resolve_requested_and_check($packages, $state, packageRequest($packages, $pkg) || {});
+    my ($pkgs, $error) = resolve_requested_and_check($packages, $state, packageRequest($packages, $pkg) || {});
 
     if ($b_base) {
-	$_->set_flag_base foreach @l;
+	$_->set_flag_base foreach @$pkgs;
     }
-    @l;
+    ($pkgs, $error);
 }
 
 sub unselectPackage {
@@ -370,17 +379,17 @@ sub setSelectedFromCompssList {
 	#- selecting $p. the packages are not selected.
 	my $state = $packages->{state} ||= {};
 
-	my @l = resolve_requested_and_check($packages, $state, packageRequest($packages, $p) || {});
+	my ($l, $_error) = resolve_requested_and_check($packages, $state, packageRequest($packages, $p) || {});
 
 	#- this enable an incremental total size.
 	my $old_nb = $nb;
-	foreach (@l) {
+	foreach (@$l) {
 	    $nb += $_->size;
 	}
 	if ($max_size && $nb > $max_size) {
 	    $nb = $old_nb;
 	    $min_level = $p->rate;
-	    $packages->disable_selected($packages->{rpmdb}, $state, @l);
+	    $packages->disable_selected($packages->{rpmdb}, $state, @$l);
 	    last;
 	}
     }
