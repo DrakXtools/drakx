@@ -208,13 +208,6 @@ sub raw_add {
     die "raw_add: partition table already full";
 }
 
-sub default_type {
-    my $type = arch() =~ /ia64/ ? 'gpt' : arch() eq "alpha" ? "bsd" : arch() =~ /^sparc/ ? "sun" : arch() eq "ppc" ? "mac" : "dos";
-    #- override standard mac type on PPC for IBM machines to dos
-    $type = "dos" if arch() =~ /ppc/ && detect_devices::get_mac_model() =~ /^IBM/;
-    $type;
-}
-
 sub zero_MBR { &partition_table::initialize } #- deprecated
 
 sub clear_existing {
