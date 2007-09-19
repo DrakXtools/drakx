@@ -585,11 +585,16 @@ sub _gtk__MagicWindow {
 	any { !$_->isa('Gtk2::DrawingArea') && $_->visible } $::WizardTable->get_children;
     };
 
-    my $sub_child = delete $opts->{child} or internal_error("missing child");
+    my $sub_child = delete $opts->{child};
     my $provided_banner = delete $opts->{banner};
 
+    if ($pop_it && $provided_banner) {
+	$sub_child = gtknew('VBox', children => [ 0, $provided_banner, if_($sub_child, 1, $sub_child) ]);
+    } else {
+	$sub_child ||= gtknew('VBox');
+    }
+
     if ($pop_it) {
-	$sub_child ||= gtknew('VBox', children_tight => [ $provided_banner ]) if $provided_banner;
 	$opts->{child} = $::isInstall ?
 	  gtknew('Frame', shadow_type => 'out', 
 		 child => gtknew('Frame', shadow_type => 'none', border_width => 3, child => $sub_child)) :

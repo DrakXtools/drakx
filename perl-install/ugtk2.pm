@@ -731,7 +731,6 @@ sub new {
 	pop_it => $o->{pop_it},
 	$::isInstall ? (banner => Gtk2::Banner->new($icon, $title || (get_default_step_items())[1])) : (),
 	$::isStandalone && $banner_title && $icon ? (banner => Gtk2::Banner->new($icon, $banner_title)) : (),
-	child => gtknew('VBox'),
 	width => $opts{width}, height => $opts{height}, default_width => $opts{default_width}, default_height => $opts{default_height}, 
 	modal => $opts{modal} || $grab || $o->{grab} || $o->{modal} || $o->{transient},
 	no_Window_Manager => exists $opts{no_Window_Manager} ? $opts{no_Window_Manager} : !$::isStandalone,
