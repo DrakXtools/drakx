@@ -82,7 +82,7 @@ our %l = (
     ],
     tokenring => [ qw(3c359 abyss ibmtr lanstreamer olympic proteon skisa smctr tms380tr tmspci) ],
     wan => [ qw(c101 cosa cyclomx cycx_drv dlci dscc4 farsync hdlc hostess_sv11 lmc n2 pc300 pci200syn sbni sdla sdladrv sealevel syncppp wanxl z85230) ],
-    usb_dsl => [ qw(cxacru eagle-usb speedtch ueagle-atm usbatm xusbatm) ],
+    usb_dsl => [ qw(cxacru speedtch ueagle-atm usbatm xusbatm) ],
   },
 
   ################################################################################
