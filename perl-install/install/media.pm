@@ -377,7 +377,7 @@ sub get_file_and_size {
 	my $f2 = path($phys_m, $f);
 
 	if (! -f $f2) {
-	    change_phys_medium($phys_m, $f);
+	    change_phys_medium($phys_m, $f, $::o->{packages});
 	}
 	open_file_and_size($f2);
     }
@@ -580,7 +580,7 @@ sub url2mounted_phys_medium {
 
     my $phys_m = url2phys_medium($o, $url);
     $phys_m->{name} = $o_name if $o_name; #- useful for CDs which prompts a name in change_phys_medium
-    change_phys_medium($phys_m, $o_rel_file) or return;
+    change_phys_medium($phys_m, $o_rel_file, $o->{packages}) or return;
     $phys_m;
 }
 
