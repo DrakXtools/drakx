@@ -698,7 +698,7 @@ sub Mount_point_raw_hd {
 sub Resize {
     my ($in, $hd, $part) = @_;
     my (%nice_resize);
-    my ($min, $max) = (min_partition_size($hd), max_partition_size($hd, $part));
+    my ($min, $max) = (min_partition_size($hd), max_partition_resize($hd, $part));
 
     if (maybeFormatted($part)) {
 	# here we may have a non-formatted or a formatted partition
@@ -1326,7 +1326,7 @@ sub format_raw_hd_info {
 #- logical partition.
 sub min_partition_size { $_[0]->cylinder_size + 2*$_[0]{geom}{sectors} }
 
-sub max_partition_size {
+sub max_partition_resize {
     my ($hd, $part) = @_;
     if (isLVM($hd)) {
 	$part->{size} + fs::get::vg_free_space($hd);
