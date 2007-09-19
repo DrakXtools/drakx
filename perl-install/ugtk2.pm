@@ -908,7 +908,7 @@ sub ask_browse_tree_info {
 		    1, gtknew('HBox', children_loose => [
 			       gtknew('ScrolledWindow', child => $tree),
 			       gtknew('Frame', text => N("Info"), child =>
-				      gtknew('ScrolledWindow', child => my $info = gtknew('TextView')),
+				      gtknew('ScrolledWindow', child => my $info = gtknew('TextView', editable => 0)),
 				     ) ]),
 		    0, my $status = gtknew('Label'),
 		    if_($common->{auto_deps},
