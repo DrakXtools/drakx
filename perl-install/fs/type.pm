@@ -279,9 +279,6 @@ sub type_subpart_from_magic {
     my ($part) = @_;
     my $ids = call_vol_id($part);
 
-    $part->{LABEL_from_magic} = $ids->{ID_FS_LABEL} if $ids->{ID_FS_LABEL};
-    $part->{UUID_from_magic} = $ids->{ID_FS_UUID} if $ids->{ID_FS_UUID};
-
     my $p;
     if ($ids->{ID_FS_USAGE} eq 'raid') {
 	my $name = {
@@ -297,6 +294,8 @@ sub type_subpart_from_magic {
 
     if ($p) {
 	$part->{fs_type_from_magic} = $p->{fs_type};
+	$p->{device_LABEL} = $ids->{ID_FS_LABEL} if $ids->{ID_FS_LABEL};
+	$p->{device_UUID} = $ids->{ID_FS_UUID} if $ids->{ID_FS_UUID};
     }
     $p;
 }

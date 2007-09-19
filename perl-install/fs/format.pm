@@ -128,9 +128,8 @@ sub part_raw {
 	disable_forced_fsck($dev);
     }
 
-    delete $part->{UUID_from_magic};
-    fs::type::type_subpart_from_magic($part);
-    $part->{device_UUID} = $part->{UUID_from_magic};
+    my $p = fs::type::type_subpart_from_magic($part);
+    $part->{device_UUID} = $p && $p->{device_UUID};
 
     set_isFormatted($part, 1);
 }

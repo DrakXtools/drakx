@@ -245,17 +245,11 @@ Do you agree to lose all the partitions?
 	# checking the magic of the filesystem, do not rely on pt_type
 	foreach (@parts) {
 	    if (my $type = fs::type::type_subpart_from_magic($_)) {
-                if ($type->{fs_type}) {
-                    #- keep {pt_type}
-		    $_->{fs_type} = $type->{fs_type};
-                } else {
-                    put_in_hash($_, $type); 
-                }
+                $type->{pt_type} = $_->{pt_type}; #- keep {pt_type}
+                put_in_hash($_, $type); 
 	    } else {
 		$_->{bad_fs_type_magic} = 1;
 	    }
-	    $_->{device_LABEL} = $_->{LABEL_from_magic} if $_->{LABEL_from_magic};
-	    $_->{device_UUID} = $_->{UUID_from_magic} if $_->{UUID_from_magic};
 	}
 
 	if ($hd->{usb_media_type}) {
