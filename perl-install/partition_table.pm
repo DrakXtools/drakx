@@ -224,16 +224,19 @@ sub get_normal_parts_and_holes {
 }
 
 sub _default_type {
-    my $type = arch() =~ /ia64/ ? 'gpt' : arch() eq "alpha" ? "bsd" : arch() =~ /^sparc/ ? "sun" : arch() eq "ppc" ? "mac" : "dos";
-    #- override standard mac type on PPC for IBM machines to dos
-    $type = "dos" if arch() =~ /ppc/ && detect_devices::get_mac_model() =~ /^IBM/;
-    $type;
+    my ($hd) = @_;
+
+    arch() =~ /ia64/ ? 'gpt' : 
+      arch() eq "alpha" ? "bsd" : 
+      arch() =~ /^sparc/ ? "sun" : 
+      arch() eq "ppc" && detect_devices::get_mac_model() !~ /^IBM/ ? "mac" : 
+	$hd->{totalsectors} > 4 * 1024 * 1024 * 2048 ? 'lvm' : "dos"; #- default to LVM on full disk when >4TB
 }
 
 sub initialize {
     my ($hd, $o_type) = @_;
 
-    my $type = $o_type || _default_type();
+    my $type = $o_type || _default_type($hd);
 
     require "partition_table/$type.pm";
     "partition_table::$type"->initialize($hd);
