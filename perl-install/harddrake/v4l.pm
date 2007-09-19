@@ -449,6 +449,7 @@ sub config {
 
     my %conf = (gbuffers => 4, card => $default, tuner => -1, radio => 0, pll => -1);
 
+    return if !$cards_lst->{$driver};
     my %cards_list = %{$cards_lst->{$driver}};
     my %rvs_cards_list = reverse %cards_list;
 
