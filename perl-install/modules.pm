@@ -96,7 +96,8 @@ sub load_with_options {
 
     @l = remove_loaded_modules(@l) or return;
 
-    load_raw(\@l, $h_options);
+    my %options = map { cond_mapping_24_26($_) => $h_options->{$_} } keys %$h_options;
+    load_raw(\@l, \%options);
 }
 sub load {
     my (@l) = @_;
@@ -108,7 +109,7 @@ sub load_and_configure {
     my ($conf, $module, $o_options) = @_;
 
     my @l = remove_loaded_modules(dependencies_closure(cond_mapping_24_26($module)));
-    load_raw(\@l, { $module => $o_options });
+    load_raw(\@l, { cond_mapping_24_26($module) => $o_options });
 
     if (member($module, 'imm', 'ppa') 
 	&& ! -d "/proc/sys/dev/parport/parport0/devices/$module") {
