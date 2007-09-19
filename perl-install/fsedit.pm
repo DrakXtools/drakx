@@ -167,7 +167,8 @@ sub get_hds {
 	}
 
 	if ($flags->{clearall} || member($hd->{device}, @{$flags->{clear} || []})) {
-	    partition_table::raw::zero_MBR_and_dirty($hd);
+	    my $lvms = []; #- temporary one, will be re-created later in get_hds()
+	    partition_table_initialize($lvms, $hd, $o_in);
 	} else {
 	    my $handle_die_and_cdie = sub {
 		if (my $type = fs::type::type_subpart_from_magic($hd)) {
@@ -549,6 +550,25 @@ sub change_type {
     fs::type::set_type_subpart($part, $type);
     fs::mount_options::rationalize($part);
     1;
+}
+
+sub partition_table_clear_and_initialize {
+    my ($lvms, $hd, $o_in, $o_type, $b_warn) = @_;
+    $hd->clear_existing;
+    partition_table_initialize($lvms, $hd, $o_in, $o_type, $b_warn);
+}
+
+sub partition_table_initialize {
+    my ($lvms, $hd, $o_in, $b_warn, $o_type) = @_;
+    partition_table::initialize($hd, $o_type);
+    if ($hd->isa('partition_table::lvm')) {
+	if ($b_warn && $o_in) {
+	    $o_in->ask_okcancel_('', N("ALL existing partitions and their data will be lost on drive %s", partition_table::description($hd))) or return;
+	}
+	require lvm;
+	lvm::check($o_in ? $o_in->do_pkgs : do_pkgs_standalone->new) if $::isStandalone;
+	lvm::create_singleton_vg($lvms, fs::get::hds_fstab($hd));
+    }
 }
 
 1;

@@ -216,11 +216,10 @@ sub clear_existing {
     partition_table::will_tell_kernel($hd, del => $_) foreach @parts;
 }
 
-sub zero_MBR_and_dirty { &clear_and_dirty } #- deprecated
-sub clear_and_dirty {
+#- deprecated
+sub zero_MBR_and_dirty { 
     my ($hd) = @_;
-    $hd->clear_existing;
-    partition_table::initialize($hd);
+    fsedit::partition_table_clear_and_initialize([], $hd);
 }
 
 sub read_primary {

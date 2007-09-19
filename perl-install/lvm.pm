@@ -204,4 +204,16 @@ sub add_to_VG {
     lvm::update_size($lvm);
 }
 
+sub create_singleton_vg {
+    my ($lvms, $part) = @_;
+
+    my %existing = map { $_->{VG_name} => 1 } @$lvms;
+    my $VG_name = find { !$existing{$_} } map { "VG$_" } 1 .. 100 or internal_error();    
+
+    my $lvm = new lvm($VG_name);
+    push @$lvms, $lvm;
+
+    add_to_VG($part, $lvm);
+}
+
 1;
