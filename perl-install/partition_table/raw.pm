@@ -69,6 +69,9 @@ sub last_usable_sector {
     my ($hd) = @_;
     $hd->{totalsectors};
 }
+# no limit
+sub max_partition_start { 1e99 }
+sub max_partition_size { 1e99 }
 
 #- default method for starting a partition, only head size or twice
 #- is allowed for starting a partition after a cylinder boundarie.

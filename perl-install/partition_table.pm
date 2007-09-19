@@ -219,7 +219,7 @@ sub get_normal_parts_and_holes {
 	$hole, $_;
     } sort { $a->{start} <=> $b->{start} } grep { !isWholedisk($_) } get_normal_parts($hd);
 
-    push @l, { start => $start, size => $last - $start, %$minimal_hole };
+    push @l, { start => $start, size => min($last - $start, $hd->max_partition_size), %$minimal_hole } if $start < $hd->max_partition_start;
     grep { !isEmpty($_) || $_->{size} >= $hd->cylinder_size } @l;
 }
 

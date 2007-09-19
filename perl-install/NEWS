@@ -1,5 +1,7 @@
 - diskdrake:
   o "Clear All" defaults to LVM on full disk if drive is >4TB
+  o do not allow partitions bigger than 2TB-1 on DOS MBR, nor partitions
+    starting above 2TB-1
 - bootloader-config:
   o handle /boot/xxx files on linux raid1
 - fix getting UUID on mdmadm (eg: md0) devices

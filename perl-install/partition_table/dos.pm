@@ -33,6 +33,10 @@ sub last_usable_sector {
     $hd->{geom}{sectors} * $hd->{geom}{heads} * $hd->{geom}{cylinders};
 }
 
+my $two_TB = 2 * 1024 * 1024 * 2048;
+sub max_partition_start { $two_TB - 1 }
+sub max_partition_size { $two_TB - 1 }
+
 sub get_rawCHS {
     my ($part) = @_;
 
