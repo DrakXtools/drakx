@@ -425,6 +425,7 @@ sub getInputDevices() {
             $device = {};
             $device->{vendor} = /Vendor=(\w+)/ && $1;
             $device->{id} = /Product=(\w+)/ && $1;
+            $device->{bustype} = /Bus=(\w+)/ && $1;
         } elsif (/N: Name="(.*)"/) {
 	    my $descr = $1;
 	    $device->{description} = "|$descr";
