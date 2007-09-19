@@ -397,7 +397,7 @@ sub setPackages {
 
 	#- always try to select basic kernel (else on upgrade, kernel will never be updated provided a kernel is already
 	#- installed and provides what is necessary).
-	my $kernel_pkg = install::pkgs::bestKernelPackage($o->{packages});
+	my $kernel_pkg = install::pkgs::bestKernelPackage($o->{packages}, $o->{match_all_hardware});
 	install::pkgs::selectPackage($o->{packages}, $kernel_pkg, 1);
 	if ($o->{isUpgrade} && $o->{packages}{sizes}{dkms}) {
 	    log::l("selecting kernel-desktop-devel-latest (since dkms was installed)");
