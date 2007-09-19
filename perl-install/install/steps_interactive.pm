@@ -901,18 +901,6 @@ sub summary {
 	};
     }
 
-    foreach my $tv (detect_devices::getTVcards()) {
-	push @l, {
-	    group => N("Hardware"),
-	    label => N("TV card"),
-	    val => sub { $tv->{description} }, 
-	    clicked => sub { 
-	        require harddrake::v4l; 
-	        harddrake::v4l::config($o, $o->{modules_conf}, $tv->{driver});
-	    }
-	};
-    }
-
     push @l, {
 	group => N("Hardware"),
 	label => N("Graphical interface"),
