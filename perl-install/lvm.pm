@@ -57,9 +57,9 @@ sub lvm_cmd_or_die {
 }
 
 sub check {
-    my ($in) = @_;
+    my ($do_pkgs) = @_;
 
-    $in->do_pkgs->ensure_binary_is_installed('lvm2', 'lvm2') or return;
+    $do_pkgs->ensure_binary_is_installed('lvm2', 'lvm2') or return;
     init();
     1;
 }
@@ -125,6 +125,7 @@ sub get_lvs {
 sub vg_add {
     my ($part) = @_;
     my $dev = expand_symlinks(devices::make($part->{device}));
+    output($dev, '\0' x 512); #- help pvcreate
     lvm_cmd_or_die('pvcreate', '-y', '-ff', $dev);
     my $prog = lvm_cmd('vgs', $part->{lvm}) ? 'vgextend' : 'vgcreate';
     lvm_cmd_or_die($prog, $part->{lvm}, $dev);
@@ -190,6 +191,17 @@ sub lv_resize {
     lvm_cmd_or_die($oldsize > $lv->{size} ? ('lvreduce', '-f') : 'lvextend', 
 		   '--size', int($lv->{size} / 2) . 'k', "/dev/$lv->{device}");
     $lv->{size} = get_lv_size($lv->{device}); #- the resized partition may not be the exact asked size
+}
+
+sub add_to_VG {
+    my ($part, $lvm) = @_;
+
+    $part->{lvm} = $lvm->{VG_name};
+    push @{$lvm->{disks}}, $part;
+    delete $part->{mntpoint};
+
+    lvm::vg_add($part);
+    lvm::update_size($lvm);
 }
 
 1;
