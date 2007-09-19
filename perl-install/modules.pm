@@ -103,7 +103,7 @@ sub load {
     load_with_options(\@l, {});
 }
 
-# eg: load_and_configure($modules_conf, 'vfat', 'reiserfs', [ ne2k => 'io=0xXXX', 'dma=5' ])
+# eg: load_and_configure($modules_conf, 'bt878', [ bttv => 'no_overlay=1' ])
 sub load_and_configure {
     my ($conf, $module, $o_options) = @_;
 
