@@ -316,7 +316,8 @@ sub unselectAllPackages {
     resolve_requested_and_check($packages, $packages->{state}, \%keep_selected);
 }
 
-sub empty_packages() {
+sub empty_packages {
+    my ($o_keep_unrequested_dependencies) = @_;
     my $packages = new URPM;
 
     #- add additional fields used by DrakX.
@@ -324,7 +325,8 @@ sub empty_packages() {
 
     $packages->{log} = \&log::l;
     $packages->{prefer_vendor_list} = '/etc/urpmi/prefer.vendor.list';
-    $packages->{keep_unrequested_dependencies} = 1;
+    $packages->{keep_unrequested_dependencies} =
+      defined($o_keep_unrequested_dependencies) ? $o_keep_unrequested_dependencies : 1;
 
     $packages;
 }

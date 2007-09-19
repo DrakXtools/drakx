@@ -358,7 +358,7 @@ sub setPackages {
 
     require install::pkgs;
     {
-	$o->{packages} = install::pkgs::empty_packages();
+	$o->{packages} = install::pkgs::empty_packages($o->{keep_unrequested_dependencies});
 	
 	my $media = $o->{media} || [ { type => 'media_cfg', url => 'drakx://media' } ];
 
