@@ -13,7 +13,7 @@ clean:
 
 install: all
 	install -d $(mcc_dir)/desktop
-	install -m644 $(DESKTOP) $(DIRECTORY) $(mcc_dir)/desktop
+	install -m644 $(DESKTOP) $(DIRECTORY) $(mcc_dir)
 	install -d $(PREFIX)/etc/gnome-vfs-2.0/vfolders
 
 %.desktop:   %.desktop.in
