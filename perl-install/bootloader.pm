@@ -1434,6 +1434,11 @@ sub device_string2grub {
 }
 sub device2grub {
     my ($device, $sorted_hds) = @_;
+
+    if (isRAID($device) && $device->{level} == 1) {
+	#- we can take any disk
+	$device = $device->{disks}[0];
+    }
     my ($hd, $part_nb) = 
       $device->{rootDevice} ?
 	(fs::get::device2part($device->{rootDevice}, $sorted_hds), $device->{device} =~ /(\d+)$/) :
