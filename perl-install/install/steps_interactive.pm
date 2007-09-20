@@ -835,7 +835,7 @@ sub summary {
     push @l, {
 	group => N("System"),
 	label => N("Services"),
-	banner_icon => 'banner-generic',
+	banner_icon => 'banner-generic-ad',
 	val => sub {
 	    require services;
 	    my ($l, $activated) = services::services();
@@ -871,7 +871,7 @@ sub summary {
 	push @l, {
 	    group => N("Hardware"),
 	    label => N("Sound card"),
-	    banner_icon => 'banner-generic',
+	    banner_icon => 'banner-generic-ad',
 	    val => sub { 
 		$device->{driver} && modules::module2description($device->{driver}) || $device->{description};
 	    },
