@@ -645,6 +645,7 @@ sub set_window_manager {
     update_gnomekderc("$p_home/.dmrc", 'Desktop', Session => "$wm_number$wm");
     my $user = find { $home eq $_->[7] } list_passwd();
     chown($user->[2], $user->[3], "$p_home/.dmrc");
+    chmod(0644, "$p_home/.dmrc");
 
     #- for startx/autologin
     {
