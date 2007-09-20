@@ -612,7 +612,6 @@ my %IM_config =
             QT_IM_MODULE => 'scim',
             XIM_PROGRAM => 'scim -d',
             XMODIFIERS => '@im=SCIM',
-	    default_for_lang => 'am ja ko vi zh_CN zh_TW',
 	    packages => {
 		generic => sub { qw(scim scim-m17n scim-tables), if_($is_kde3, 'scim-qtimm') },
 		am => sub { qw(scim scim-tables ), if_($is_kde3, 'scim-qtimm') },
@@ -643,7 +642,6 @@ my %IM_config =
             QT_IM_MODULE => 'scim',
             XIM_PROGRAM => 'skim -d',
             XMODIFIERS => '@im=SCIM',
-            default_for_lang => 'am ja ko vi zh_CN zh_TW',
             packages => {
                 generic => sub { qw(scim-tables-skim scim-m17n), if_($is_kde3, 'scim-qtimm') },
                 am => sub { 'scim-tables-skim', if_($is_kde3, 'scim-qtimm') },
