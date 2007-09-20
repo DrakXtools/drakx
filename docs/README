@@ -45,8 +45,9 @@ For one CD or a network/hd volume, please use media/main.
 Optionnally, you can modify ``media/media_info/rpmsrate''; this file manages
 the relative importance of the files, and thus their installation or not.
 
-To modify the code of stage2, use "misc/mdkinst_stage2_tool install/stage2" to generate "install/stage2/live".
-When you are done use "misc/mdkinst_stage2_tool install/stage2" again, the "rm -rf install/stage/live".
+To modify the code of stage2, use "misc/mdkinst_stage2_tool --uncompress
+install/stage2" to generate "install/stage2/live". When you are done, use
+"misc/mdkinst_stage2_tool --clean --compress install/stage2".
 See below for information about these files.
 
 ********************************************************************************
