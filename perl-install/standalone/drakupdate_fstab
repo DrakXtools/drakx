@@ -55,20 +55,6 @@ my ($action) = $raw_action =~ /^--(add|del)/;
 
 main($action, $device_name);
 
-
-sub check_hard_drives {
-    my ($name) = @_;
-
-    #- do not do anything if there are many partitions
-    #- otherwise we may add main extended partitions
-    if (my ($path, $prefix) = $name =~ m!^(.*)/(\w+)\d+$!) {
-	my @parts = grep { /^\Q$prefix\E\d+$/ } all($path);
-	@parts <= 1;
-    } else {
-	1;
-    }
-}
-
 sub device_name_to_entry {
     my ($name) = @_;
     $name =~ s|/dev/||;
@@ -107,9 +93,9 @@ sub set_options {
 }
 
 sub set_mount_point {
-    my ($part, $fstab) = @_;
+    my ($part, $fstab, $is_hd) = @_;
 
-    my $mntpoint = detect_devices::suggest_mount_point($part) or return;
+    my $mntpoint = $is_hd ? 'hd' : detect_devices::suggest_mount_point($part);
     $mntpoint = "/media/$mntpoint";
 
     foreach ('', 2 .. 10) {
@@ -121,13 +107,21 @@ sub set_mount_point {
 }
 
 sub main {
-    my ($action, $device_name) = @_;
-
-    if ($::auto) {
-	check_hard_drives($device_name) or return;
+    my ($action, $device_name) = @_;	
+    my $device = device_name_to_entry($device_name);
+    if ($device->{media_type} eq 'hd') {
+	my $all_hds = fsedit::get_hds();
+	my $hd = find { fs::get::is_same_hd($_, $device) } fs::get::hds($all_hds);
+	$hd or die "unable to find hd for $device->{device}";
+	my @parts = grep { !fsedit::isSwap($_) } partition_table::get_normal_parts($hd);
+	configure_part($action, $_, 'hd') foreach @parts;
+    } else {
+        configure_part($action, $device, undef);
     }
+}
 
-    my $part = device_name_to_entry($device_name);
+sub configure_part {
+    my ($action, $part, $is_hd) = @_;
     my $fstab_file = '/etc/fstab';
     if (!$part) {
 	print STDERR "Can not find device $device_name\n" if $::testing;
@@ -151,12 +145,12 @@ sub main {
 	}
 	my %dynamic = getVarsFromSh('/etc/sysconfig/dynamic');
 	set_options($part, to_bool($dynamic{SYNC} ne 'no'));
-	set_mount_point($part, $fstab) or return;
+	set_mount_point($part, $fstab, $is_hd) or return;
 
 	my ($line) = fs::prepare_write_fstab([$part]);
 	if ($line) {
 	    append_to_file($fstab_file, $line);
-	    system("mount $part->{mntpoint}") if !$::testing && $device_name =~ /^fd\d+/;
+	    system("mount $part->{mntpoint}") if !$::testing && ($device_name =~ /^fd\d+/ || $is_hd);
 	}
 
 	if ($::auto) {
