@@ -88,13 +88,16 @@ sub ask_users() {
     my $users = []; 
     any::ask_user($in, $users, $security);
     my $old_user = $conf{USER_RENAME_FROM};
+    my $old_autologin;
     if (@$users && $old_user) {
       $users->[0]{rename_from} = $old_user;
       $users->[0]{home} ||= '/home/' . $users->[0]{name};
       my $autologin = any::get_autologin();
-      $autologin->{autologin} eq $old_user and any::set_autologin($in->do_pkgs, $users->[0]{name}, $autologin->{desktop});
+      $old_autologin = $autologin->{autologin} eq $old_user && $autologin->{desktop};
     }
     any::add_users($users, $authentication);
+    any::set_autologin($in->do_pkgs, $users->[0]{name}, $old_autologin)
+	if $old_autologin;
 }
 
 sub ask_glx() {
