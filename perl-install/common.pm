@@ -134,19 +134,19 @@ sub formatXiB {
     my ($nb, $base);
     my $decr = sub { 
 	($nb, $base) = ($newnb, $newbase);
-	$base >= 1024 ? ($newbase = $base / 1024) : ($newnb = $nb / 1024);
+	abs($base) >= 1024 ? ($newbase = $base / 1024) : ($newnb = $nb / 1024);
     };
     my $suffix;
     foreach (N("B"), N("KB"), N("MB"), N("GB"), N("TB")) {
 	$decr->(); 
-	if ($newnb < 1 && $newnb * $newbase < 1) {
+	if (abs($newnb) < 1 && abs($newnb * $newbase) < 1) {
 	    $suffix = $_;
 	    last;
 	}
     }
     my $v = $nb * $base;
     my $s = $v < 10 && int(10 * $v - 10 * int($v));
-    int($v) . ($s ? ".$s" : '') . ($suffix || N("TB"));
+    int($v) . ($s ? "." . abs($s) : '') . ($suffix || N("TB"));
 }
 
 sub formatTime {
