@@ -688,6 +688,11 @@ sub installTransactionClosure {
 	}
     }
 
+    if (my $p = packageByName($packages, 'mdv-rpm-summary')) {
+	#- if it is selected, make it the first package
+	exists $id2pkg->{$p->id} and unshift @l, $p->id; 
+    }
+
     my %closure;
     foreach my $id (@l) {
 	my @l2 = $id;
@@ -783,6 +788,9 @@ sub install {
 
 	    @transToInstall = grep {
 		if ($_->flag_installed || !packageMedium($packages, $_)->{selected}) {
+		    if ($_->name eq 'mdv-rpm-summary' && $_->flag_installed) {
+			install::pkgs::setup_rpm_summary_translations();
+		    }
 		    $_->free_header;
 		    0;
 		} else {
@@ -1030,6 +1038,15 @@ sub remove {
     }
     if (@pbs) {
 	die "removing of old rpms failed:\n  ", join("\n  ", @pbs);
+    }
+}
+
+sub setup_rpm_summary_translations {
+    my @domains = qw(rpm-summary-contrib rpm-summary-devel rpm-summary-main);
+    push @::textdomains, @domains;
+    foreach (@domains) {
+	Locale::gettext::bind_textdomain_codeset($_, 'UTF-8');
+	Locale::gettext::bindtextdomain($_, "$::prefix/usr/share/locale");
     }
 }
 
