@@ -591,13 +591,15 @@ You can create additional entries or change the existing ones."), [ {
 
 sub get_autologin() {
     my %desktop = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
-    my $desktop = $desktop{DESKTOP} || 'KDE';
+    my $gdm_file= "$::prefix/etc/X11/gdm/custom.conf";
+    my $kdm_file = "$::prefix/etc/kde/kdm/kdmrc";
+    my $desktop = $desktop{DESKTOP} || (! -e $kdm_file && -e $gdm_file ? 'GNOME' : 'KDE');
     my $autologin = do {
 	if (($desktop{DISPLAYMANAGER} || $desktop) eq 'GNOME') {
-	    my %conf = read_gnomekderc("$::prefix/etc/X11/gdm/custom.conf", 'daemon');
+	    my %conf = read_gnomekderc($gdm_file, 'daemon');
 	    text2bool($conf{AutomaticLoginEnable}) && $conf{AutomaticLogin};
 	} else { # KDM / MdkKDM
-	    my %conf = read_gnomekderc("$::prefix/etc/kde/kdm/kdmrc", 'X-:0-Core');
+	    my %conf = read_gnomekderc($kdm_file, 'X-:0-Core');
 	    text2bool($conf{AutoLoginEnable}) && $conf{AutoLoginUser};
 	}
     };
