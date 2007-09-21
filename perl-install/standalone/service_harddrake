@@ -140,12 +140,12 @@ foreach my $hw_class (@harddrake::data::tree) {
     next if $Ident eq 'MOUSE' && $curr_kernel ne $previous_kernel_config{KERNEL} && $cfg{"DETECT_$Ident"} ne 'force';
 
     my @configurator_pool;
-    if (harddrake::data::is_removable($Ident)) {
+    if (harddrake::data::is_auto_configurable_media($Ident)) {
         foreach my $device (@ID{@added}) {
-            push @configurator_pool, harddrake::data::set_removable_auto_configurator($Ident, $device);
+            push @configurator_pool, harddrake::data::set_media_auto_configurator($Ident, $device);
         }
         foreach my $device (@$oldconfig{@was_removed}) {
-            push @configurator_pool, harddrake::data::set_removable_remover($Ident, $device);
+            push @configurator_pool, harddrake::data::set_media_remover($Ident, $device);
         }
     } else {
         @configurator_pool = $configurator;

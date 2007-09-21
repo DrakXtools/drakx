@@ -35,21 +35,22 @@ sub f {
 
 # FIXME: add translated items
 
-sub is_removable { $_[0] =~ /FLOPPY|ZIP|HARDDISK/ }
+sub is_removable { $_[0] =~ /FLOPPY|ZIP|DVDROM|CDROM|BURNER/ }
+sub is_auto_configurable_media { $_[0] =~ /FLOPPY|ZIP|HARDDISK/ }
 
 sub set_removable_configurator {
     my ($class, $device) = @_;
     return "/usr/sbin/diskdrake --removable=$device->{device}" if is_removable($class);
  }
 
-sub set_removable_auto_configurator {
+sub set_media_auto_configurator {
     my ($class, $device) = @_;
-    return "/usr/sbin/drakupdate_fstab --no-flag --auto --add $device->{device}" if is_removable($class);
+    return "/usr/sbin/drakupdate_fstab --no-flag --auto --add $device->{device}" if is_auto_configurable_media($class);
 }
 
-sub set_removable_remover {
+sub set_media_remover {
     my ($class, $device) = @_;
-    return "/usr/sbin/drakupdate_fstab --no-flag --del $device->{device}" if is_removable($class);
+    return "/usr/sbin/drakupdate_fstab --no-flag --del $device->{device}" if is_auto_configurable_media($class);
 }
 
 my $modules_conf = modules::any_conf->read;
