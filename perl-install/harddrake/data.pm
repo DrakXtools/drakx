@@ -35,7 +35,7 @@ sub f {
 
 # FIXME: add translated items
 
-sub is_removable { $_[0] =~ /FLOPPY|ZIP/ }
+sub is_removable { $_[0] =~ /FLOPPY|ZIP|HARDDISK/ }
 
 sub set_removable_configurator {
     my ($class, $device) = @_;
@@ -89,7 +89,8 @@ our @tree =
       icon => "harddisk.png",
       configurator => "$sbindir/diskdrake",
       detector => sub { f(detect_devices::hds()) },
-      checked_on_boot => 0,
+      checked_on_boot => 1,
+      automatic => 1,
      },
 
      {
