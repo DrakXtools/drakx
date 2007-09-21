@@ -131,22 +131,24 @@ sub removeXiBSuffix {
 sub formatXiB {
     my ($newnb, $o_newbase) = @_;
     my $newbase = $o_newbase || 1;
+    my $sign = $newnb < 0 ? -1 : 1;
+    $newnb = abs($newnb);
     my ($nb, $base);
     my $decr = sub { 
 	($nb, $base) = ($newnb, $newbase);
-	abs($base) >= 1024 ? ($newbase = $base / 1024) : ($newnb = $nb / 1024);
+	$base >= 1024 ? ($newbase = $base / 1024) : ($newnb = $nb / 1024);
     };
     my $suffix;
     foreach (N("B"), N("KB"), N("MB"), N("GB"), N("TB")) {
 	$decr->(); 
-	if (abs($newnb) < 1 && abs($newnb * $newbase) < 1) {
+	if ($newnb < 1 && $newnb * $newbase < 1) {
 	    $suffix = $_;
 	    last;
 	}
     }
     my $v = $nb * $base;
     my $s = $v < 10 && int(10 * $v - 10 * int($v));
-    int($v) . ($s ? "." . abs($s) : '') . ($suffix || N("TB"));
+    int($v * $sign) . ($s ? "." . abs($s) : '') . ($suffix || N("TB"));
 }
 
 sub formatTime {
