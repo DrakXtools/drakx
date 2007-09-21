@@ -132,7 +132,7 @@ sub formatXiB {
     my ($newnb, $o_newbase) = @_;
     my $newbase = $o_newbase || 1;
     my $sign = $newnb < 0 ? -1 : 1;
-    $newnb = abs($newnb);
+    $newnb = abs(int($newnb));
     my ($nb, $base);
     my $decr = sub { 
 	($nb, $base) = ($newnb, $newbase);
