@@ -23,6 +23,8 @@ my @config_groups = (
 my @classes = qw(ide ieee1394 input pci pcmcia pnp serio usb);
 my @alias_groups;
 
+my $alias_re = qr/^\s*alias\s+(([^:]+):\S+)\s+(\S+)$/;
+
 sub alias_to_ids {
     my ($alias) = @_;
     my ($vendor, $device);
@@ -40,7 +42,7 @@ sub parse_path {
         parse_path($group, "$path/$_") foreach all($path);
     } elsif (-f $path) {
         foreach (cat_($path)) {
-            if (my ($alias, $class, $module) = /^\s*alias\s+(([^:]+):\S+)\s+(\S+)$/) {
+            if (my ($alias, $class, $module) = $_ =~ $alias_re) {
                 my ($vendor, $device) = alias_to_ids($alias);
                 if (member($class, @classes)) {
                     if ($vendor) {
