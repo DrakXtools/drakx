@@ -1143,6 +1143,24 @@ sub hasMousePS2 {
     my $t; sysread(tryOpen($_[0]) || return, $t, 256) != 1 || $t ne "\xFE";
 }
 
+sub probeall_unavailable_modules {
+    map {
+        my $driver = $_->{driver};
+        $driver !~ /:/ &&
+        !member($driver, 'hub', 'unknown', 'md64_agp') &&
+        !modules::module_is_available($driver) ?
+          $driver :
+          ();
+    } probeall();
+}
+
+sub probeall_dkms_modules {
+    my @unavailable_modules = probeall_unavailable_modules() or return;
+    require modalias;
+    my $dkms_modules = modalias::parse_file_modules($::prefix . "/usr/share/ldetect-lst/dkms-modules.alias");
+    intersection([ keys(%$dkms_modules) ], \@unavailable_modules);
+}
+
 sub usb_description2removable {
     local ($_) = @_;
     return 'camera' if /\bcamera\b/i;
