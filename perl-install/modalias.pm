@@ -59,6 +59,17 @@ sub parse_path {
     }
 }
 
+sub parse_file_modules {
+    my ($path) = @_;
+    my %modules;
+    foreach (cat_($path)) {
+        if (my ($alias, undef, $module) = $_ =~ $alias_re) {
+            push @{$modules{$module}}, $alias;
+        }
+    }
+    \%modules;
+}
+
 sub get_alias_groups() {
     @alias_groups = map {
         my $group = {};
