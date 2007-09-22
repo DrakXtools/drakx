@@ -311,6 +311,8 @@ sub filename2modname {
 }
 
 sub modname2filename {
+    load_dependencies($::prefix . '/lib/modules/' . c::kernel_version() . '/modules.dep')
+      if !%filenames;
     $filenames{$_[0]};
 }
 
