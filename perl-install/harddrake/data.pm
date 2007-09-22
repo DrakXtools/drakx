@@ -35,8 +35,8 @@ sub f {
 
 # FIXME: add translated items
 
-sub is_removable { $_[0] =~ /FLOPPY|ZIP|DVDROM|CDROM|BURNER/ }
-sub is_auto_configurable_media { is_removable($_[0]) || $_[0] =~ /HARDDISK/ }
+sub is_removable { member($_[0], qw(FLOPPY ZIP DVDROM CDROM BURNER)) }
+sub is_auto_configurable_media { is_removable($_[0]) || member($_[0], qw(HARDDISK)) }
 
 sub set_removable_configurator {
     my ($class, $device) = @_;
