@@ -52,7 +52,7 @@ sub cond_mapping_24_26 {
 
 sub module_is_available {
     my ($module) = @_;
-    find { m!/\Q$module\E\.k?o! } cat_($::prefix . '/lib/modules/' . c::kernel_version() . '/modules.dep');
+    defined list_modules::modname2filename($module);
 }
 
 #-###############################################################################
