@@ -36,7 +36,7 @@ sub f {
 # FIXME: add translated items
 
 sub is_removable { $_[0] =~ /FLOPPY|ZIP|DVDROM|CDROM|BURNER/ }
-sub is_auto_configurable_media { $_[0] =~ /FLOPPY|ZIP|HARDDISK/ }
+sub is_auto_configurable_media { is_removable($_[0]) || $_[0] =~ /HARDDISK/ }
 
 sub set_removable_configurator {
     my ($class, $device) = @_;
@@ -100,7 +100,7 @@ our @tree =
       icon => "cd.png",
       configurator => "",
       detector => sub { f(grep { !(detect_devices::isBurner($_) || detect_devices::isDvdDrive($_)) } &detect_devices::cdroms) },
-      checked_on_boot => 0,
+      checked_on_boot => 1,
       automatic => 1,
      },
 
@@ -110,7 +110,7 @@ our @tree =
       icon => "cd.png",
       configurator => "",
       detector => sub { f(detect_devices::burners()) },
-      checked_on_boot => 0,
+      checked_on_boot => 1,
       automatic => 1,
      },
 
@@ -120,7 +120,7 @@ our @tree =
       icon => "cd.png",
       configurator => "",
       detector => sub { f(grep { ! detect_devices::isBurner($_) } detect_devices::dvdroms()) },
-      checked_on_boot => 0,
+      checked_on_boot => 1,
       automatic => 1,
      },
 
