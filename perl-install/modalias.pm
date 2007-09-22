@@ -14,6 +14,9 @@ my @config_groups = (
 	"/etc/modprobe.d",
     ],
     [
+        "/lib/module-init-tools/ldetect-lst-modules.alias",
+    ],
+    [
         "/lib/modules/" . c::kernel_version() . "/modules.alias",
     ],
 );
