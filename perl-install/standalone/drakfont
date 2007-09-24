@@ -282,7 +282,12 @@ sub print_list() {
 
 sub dir_created() {
   return if $::testing;
-    do { my $dir = "$drakfont_dir/$_"; -e $dir or mkdir_p($dir) } foreach qw(Type1 ttf otf ttc tmp/ttf tmp/Type1 tmp/tmp);
+  foreach (qw(Type1 ttf otf ttc tmp/ttf tmp/Type1 tmp/tmp)) {
+      my $dir = "$drakfont_dir/$_";
+      next if -e $dir;
+      mkdir_p($dir);
+      symlink($dir, "$fontpathd_dir/drakfont_$_:pri=50");
+  }
 }
 
 
