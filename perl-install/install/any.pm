@@ -1248,7 +1248,7 @@ sub X_options_from_o {
 sub screenshot_dir__and_move() {
     my ($dir0, $dir1, $dir2) = ('/root', "$::prefix/root", '/tmp');
     if (-e $dir0 && ! -e '/root/non-chrooted-marker.DrakX') {
-	$dir0; #- it occurs during pkgs install when we are chrooted
+	($dir0, 'nowarn'); #- it occurs during pkgs install when we are chrooted
     } elsif (-e $dir1) {
 	if (-e "$dir2/DrakX-screenshots") {
 	    cp_af("$dir2/DrakX-screenshots", $dir1);
@@ -1260,19 +1260,22 @@ sub screenshot_dir__and_move() {
     }
 }
 
+my $warned;
 sub take_screenshot {
     my ($in) = @_;
-    my $dir = screenshot_dir__and_move() . '/DrakX-screenshots';
-    my $warn;
+    my ($base_dir, $nowarn) = screenshot_dir__and_move();
+    my $dir = "$base_dir/DrakX-screenshots";
     if (!-e $dir) {
 	mkdir $dir or $in->ask_warn('', N("Can not make screenshots before partitioning")), return;
-	$warn = 1;
     }
     my $nb = 1;
     $nb++ while -e "$dir/$nb.png";
     system("fb2png /dev/fb0 $dir/$nb.png 0");
 
-    $in->ask_warn('', N("Screenshots will be available after install in %s", "/root/DrakX-screenshots")) if $warn;
+    if (!$warned && !$nowarn) {
+	$warned = 1;
+	$in->ask_warn('', N("Screenshots will be available after install in %s", "/root/DrakX-screenshots"));
+    }
 }
 
 sub copy_advertising {
