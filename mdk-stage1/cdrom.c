@@ -136,7 +136,6 @@ enum return_type cdrom_prepare(void)
 	char * choice;
 	int i, count = 0;
 	enum return_type results;
-        static int already_probed_ide_generic = 0;
 
 	my_insmod("ide_cd", ANY_DRIVER_TYPE, NULL, 0);
 
@@ -171,11 +170,6 @@ enum return_type cdrom_prepare(void)
         }
 
 	if (count == 0) {
-                if (!already_probed_ide_generic) {
-                        already_probed_ide_generic = 1;
-                        my_insmod("ide_generic", ANY_DRIVER_TYPE, NULL, 0);
-                        return cdrom_prepare();
-                }
 		stg1_error_message("No CDROM device found.");
 		i = ask_insmod(SCSI_ADAPTERS);
 		if (i == RETURN_BACK)
