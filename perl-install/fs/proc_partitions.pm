@@ -54,9 +54,13 @@ sub compare {
     my ($len1, $len2) = (int(@l1) + $hd->{primary}{nb_special_empty}, int(@l2));
 
     if ($len1 != $len2) {
-	die sprintf(
+	if (find { $_->{pt_type} == 0xbf } @l1) {
+	    log::l("not using /proc/partitions because of the presence of solaris extended partition"); #- cf #33866
+	} else {
+	    die sprintf(
 		    "/proc/partitions does not agree with drakx %d != %d:\n%s\n", $len1, $len2,
 		    "/proc/partitions: " . join(", ", map { "$_->{device} ($_->{rootDevice})" } @l2));
+	}
     }
     $len2;
 }
