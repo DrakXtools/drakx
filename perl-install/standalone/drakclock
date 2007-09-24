@@ -327,6 +327,9 @@ sub Repaint {
     my $dRadians_hour_real = $dRadians_hour + $dRadians_min / 12;
     my $dRadians_min_real  = POSIX::floor($dRadians_min / $PI * 30) * $PI / 30;
     my $dRadians_sec_real  = $dRadians_sec;
+    my $gc = $drawing_area->style->white_gc;
+    # fix race on ugtk2->exit that causes a crash (#33894)
+    return 0  if !$gc;
     $pixmap->draw_rectangle($drawing_area->style->white_gc, 1, 0, 0, $width, $height);
     my ($midx, $midy) = ($width / 2, $height / 2);
     $radius = ($midx < $midy ? $midx : $midy) - 10;
