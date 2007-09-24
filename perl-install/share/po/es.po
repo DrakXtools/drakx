@@ -1,7 +1,7 @@
 # traducción de DrakX-es.po to Español
 # spanish translation of DrakX
 # Copyright (C) 2000, 2001,2002 Mandriva S.A.
-# Fabian Mandelbaum <fabman@mandriva.com>, 2000, 2001, 2002,2003, 2004, 2006.
+# Fabián Mandelbaum <fmandelbaum@gmail.com>, 2000-2004, 2006, 2007.
 # Pablo Saratxaga <pablo@mandriva.com>, 2004, 2006.
 # Jaime Crespo <505201@unizar.es>, 2004, 2005.
 # José Manuel Pérez <jmprodu@hotmail.com>, 2005.
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-es\n"
 "POT-Creation-Date: 2007-09-12 17:02+0200\n"
-"PO-Revision-Date: 2006-09-06 21:07-0400\n"
-"Last-Translator: Fabian Mandelbaum <fabman@mandriva.com>\n"
+"PO-Revision-Date: 2007-09-24 16:50-0300\n"
+"Last-Translator: Fabián Mandelbaum <fmandelbaum@gmail.com>\n"
 "Language-Team: Español <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -438,21 +438,19 @@ msgid "%s should be above 500. Accept anyway?"
 msgstr "%s debería ser superior a 500. ¿Aceptarlo igual?"
 
 #: any.pm:768
-#, fuzzy, c-format
+#, c-format
 msgid "User management"
-msgstr "Nombre de usuario"
+msgstr "Administración de usuarios"
 
 #: any.pm:775 authentication.pm:182
 #, c-format
 msgid "Set administrator (root) password"
-msgstr "Introduzca contraseña de administrador (root)"
+msgstr "Introduzca contraseña del administrador (root)"
 
 #: any.pm:780
-#, fuzzy, c-format
+#, c-format
 msgid "Enter a user"
-msgstr ""
-"Introduzca un usuario\n"
-"%s"
+msgstr "Ingrese un usuario"
 
 #: any.pm:781
 #, c-format
@@ -760,7 +758,7 @@ msgstr "Archivo local:"
 #: authentication.pm:66
 #, c-format
 msgid "Use information stored in local files for all authentication"
-msgstr ""
+msgstr "Usar información almacenada en ficheros locales para la autenticación"
 
 #: authentication.pm:67
 #, c-format
@@ -1283,14 +1281,14 @@ msgid "Unknown"
 msgstr "Desconocido"
 
 #: diskdrake/hd_gtk.pm:354
-#, fuzzy, c-format
+#, c-format
 msgid "Ext3"
-msgstr "Salir"
+msgstr "Ext3"
 
 #: diskdrake/hd_gtk.pm:354
-#, fuzzy, c-format
+#, c-format
 msgid "XFS"
-msgstr "HFS"
+msgstr "XFS"
 
 #: diskdrake/hd_gtk.pm:354
 #, c-format
@@ -1899,7 +1897,7 @@ msgstr "Etiqueta de volumen: "
 #: diskdrake/interactive.pm:1241
 #, c-format
 msgid "UUID: "
-msgstr ""
+msgstr "UUID: "
 
 #: diskdrake/interactive.pm:1242
 #, c-format
@@ -2027,9 +2025,9 @@ msgstr ""
 "dual de su sistema.\n"
 
 #: diskdrake/interactive.pm:1280
-#, fuzzy, c-format
+#, c-format
 msgid "Free space on %s (%s)"
-msgstr "Espacio vacío en %s (%s)"
+msgstr "Espacio libre en %s (%s)"
 
 #: diskdrake/interactive.pm:1289
 #, c-format
@@ -2264,7 +2262,7 @@ msgstr "Usar un sistema de archivos cifrado"
 #: fs/mount_options.pm:113
 #, c-format
 msgid "Flush write cache on file close"
-msgstr ""
+msgstr "Vaciar el cache de escritura al cerrar los ficheros"
 
 #: fs/mount_options.pm:115
 #, c-format
@@ -2284,14 +2282,13 @@ msgstr ""
 "noticias)"
 
 #: fs/mount_options.pm:123
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
-"No actualizar los tiempos de acceso al inodo en este sistema de archivos\n"
-"(ej: para un acceso más rápido al spool de noticias en un servidor de "
-"noticias)"
+"Actualizar más eficientemente tiempo de acceso a inodos en este sist. de archivos\n"
+"(ej: para mejorar el tiempo de respuesta de un servidor de noticias)"
 
 #: fs/mount_options.pm:123
 #, c-format
@@ -2567,7 +2564,7 @@ msgid "Next"
 msgstr "Siguiente"
 
 #: fs/partitioning_wizard.pm:167
-#, fuzzy, c-format
+#, c-format
 msgid "Partitionning"
 msgstr "Particionando"
 
@@ -2997,7 +2994,7 @@ msgstr "Ratón"
 #: harddrake/data.pm:505
 #, c-format
 msgid "Biometry"
-msgstr ""
+msgstr "Biometría"
 
 #: harddrake/data.pm:513
 #, c-format
@@ -3328,7 +3325,7 @@ msgstr "Anterior"
 #: interactive/gtk.pm:544
 #, c-format
 msgid "Beware, Caps Lock is enabled"
-msgstr ""
+msgstr "Atención, está habilitado el bloqueo de mayúsculas"
 
 #: interactive/stdio.pm:29 interactive/stdio.pm:154
 #, c-format
@@ -5222,31 +5219,31 @@ msgstr ""
 #: scanner.pm:201
 #, c-format
 msgid "Your scanner(s) will not be available for non-root users."
-msgstr "Sus escáneres no estarán disponibles para los usuarios no-root."
+msgstr "Sus escáneres no estarán disponibles para los usuarios no privilegiados."
 
 #: security/help.pm:11
-#, fuzzy, c-format
+#, c-format
 msgid "Accept bogus IPv4 error messages."
-msgstr "Aceptar mensajes de error IPv4 simulados"
+msgstr "Aceptar mensajes de error IPv4 simulados."
 
 #: security/help.pm:13
-#, fuzzy, c-format
+#, c-format
 msgid "Accept broadcasted icmp echo."
-msgstr "Aceptar eco ICMP difundido"
+msgstr "Aceptar eco ICMP por difusión."
 
 #: security/help.pm:15
-#, fuzzy, c-format
+#, c-format
 msgid "Accept icmp echo."
-msgstr "Aceptar eco ICMP"
+msgstr "Aceptar eco ICMP."
 
 #: security/help.pm:17
-#, fuzzy, c-format
+#, c-format
 msgid "Allow autologin."
-msgstr "Permitir/Prohibir conexión automática."
+msgstr "Permitir conexión automática."
 
 #. -PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
 #: security/help.pm:21
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
 "\n"
@@ -5254,49 +5251,48 @@ msgid ""
 "\n"
 "Else only /etc/issue is allowed."
 msgstr ""
-"Si \"TODO\" permitir que existan /etc/issue y /etc/issue.net. Si \"NINGUNO\" "
-"no se permiten \"issues\".\n"
+"Si se elige \"TODO\", permitir que existan /etc/issue y /etc/issue.net.\n"
+"\n"
+"Si se elige \"NINGUNO\" no se permiten \"issues\".\n"
 "\n"
 "De lo contrario sólo se permite /etc/issue."
 
 #: security/help.pm:27
-#, fuzzy, c-format
+#, c-format
 msgid "Allow reboot by the console user."
-msgstr "Permitir/Prohibir reinicio por parte del usuario de la consola."
+msgstr "Permitir reinicio por parte del usuario de la consola."
 
 #: security/help.pm:29
-#, fuzzy, c-format
+#, c-format
 msgid "Allow remote root login."
-msgstr "Permitir conexión remota de root"
+msgstr "Permitir conexión remota del administrador del sistema."
 
 #: security/help.pm:31
-#, fuzzy, c-format
+#, c-format
 msgid "Allow direct root login."
-msgstr "Permitir/Prohibir conexión directa de root."
+msgstr "Permitir conexión directa del administrador del sistema."
 
 #: security/help.pm:33
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow the list of users on the system on display managers (kdm and gdm)."
-msgstr ""
-"Permitir/Prohibir la lista de usuarios del sistema en administradores de "
-"conexión (kdm y gdm)."
+msgstr "Permitir la lista de usuarios del sistema en administradores de conexión (kdm y gdm)."
 
 #: security/help.pm:35
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow to export display when\n"
 "passing from the root account to the other users.\n"
 "\n"
 "See pam_xauth(8) for more details.'"
 msgstr ""
-"Permitir/prohibir exportar pantalla cuando\n"
-"se pasa de la cuenta root a las otras cuentas.\n"
+"Permitir exportar pantalla cuando\n"
+"se pasa de la cuenta del administrador del sistema a las otras cuentas.\n"
 "\n"
 "Consulte pam_xauth(8) para más detalles.'"
 
 #: security/help.pm:40
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow X connections:\n"
 "\n"
@@ -5306,9 +5302,9 @@ msgid ""
 "\n"
 "- \"None\" (no connection)."
 msgstr ""
-"Permitir/Prohibir conexiones X:\n"
+"Permitir conexiones X:\n"
 "\n"
-"- TODO (permitir todas las conexiones),\n"
+"- TODO (se permiten todas las conexiones),\n"
 "\n"
 "- LOCAL (sólo conexiones desde la máquina local),\n"
 "\n"
@@ -5325,7 +5321,7 @@ msgstr ""
 
 #. -PO: here "ALL", "Local" and "None" are values in a pull-down menu; translate them the same as they're
 #: security/help.pm:53
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Authorize:\n"
 "\n"
@@ -5341,15 +5337,13 @@ msgid ""
 msgstr ""
 "Autorizar:\n"
 "\n"
-"- todos los servicios controlados por tcp_wrappers (ver hosts.deny(5)) si se "
-"configura en \"TODO\",\n"
+"- todos los servicios controlados por tcp_wrappers (ver hosts.deny(5)) si se configura en \"TODO\",\n"
 "\n"
 "- sólo los locales si se configura en \"LOCAL\"\n"
 "\n"
 "- ninguno si se configura en \"NINGUNO\".\n"
 "\n"
-"Para autorizar los servicios que necesita, use /etc/hosts.allow (ver hosts."
-"allow(5))."
+"Para autorizar los servicios que necesita, use /etc/hosts.allow (ver hosts.allow(5))."
 
 #: security/help.pm:63
 #, c-format
@@ -5373,30 +5367,30 @@ msgstr ""
 "durante la instalación de paquetes."
 
 #: security/help.pm:72
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable crontab and at for users.\n"
 "\n"
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
 msgstr ""
-"Habilitar/deshabilitar crontab y at para usuarios.\n"
+"Habilitar los trabajos planificados (crontab y at) para los usuarios.\n"
 "\n"
-"Poner los permitidos en /etc/cron y /etc/at.allow\n"
+"Poner los usuarios permitidos en /etc/cron.allow y /etc/at.allow\n"
 "(ver man at(1) y crontab(1))."
 
 #: security/help.pm:77
-#, fuzzy, c-format
+#, c-format
 msgid "Enable syslog reports to console 12"
-msgstr "Habilitar/Deshabilitar reporte de syslog en la consola 12"
+msgstr "Habilitar reportes de syslog en la consola 12"
 
 #: security/help.pm:79
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable name resolution spoofing protection.  If\n"
 "\"%s\" is true, also reports to syslog."
 msgstr ""
-"Habilitar/deshabilitar protección de engaño de resolución de nombres. Si\n"
+"Habilitar protección de usurpación de resolución de nombres. Si\n"
 "\"%s\" es verdadero, también reportar a syslog."
 
 #: security/help.pm:80
@@ -5405,24 +5399,24 @@ msgid "Security Alerts:"
 msgstr "Alertas de seguridad:"
 
 #: security/help.pm:82
-#, fuzzy, c-format
+#, c-format
 msgid "Enable IP spoofing protection."
-msgstr "Habilitar protección contra engaño de IP"
+msgstr "Habilitar protección contra usurpación de IP"
 
 #: security/help.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Enable libsafe if libsafe is found on the system."
-msgstr "Habilitar libsafe si es que se encuentra en el sistema"
+msgstr "Habilitar libsafe si es que se encuentra en el sistema."
 
 #: security/help.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Enable the logging of IPv4 strange packets."
-msgstr "Habilitar registro de paquetes IPv4 extraños"
+msgstr "Habilitar registro de paquetes IPv4 extraños."
 
 #: security/help.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid "Enable msec hourly security check."
-msgstr "Habilitar verificación horaria de seguridad de msec"
+msgstr "Habilitar las verificaciones de msec todas las horas."
 
 #: security/help.pm:90
 #, c-format
@@ -5439,20 +5433,19 @@ msgid "Use password to authenticate users."
 msgstr "Usar contraseña para autenticar usuarios."
 
 #: security/help.pm:94
-#, fuzzy, c-format
+#, c-format
 msgid "Activate ethernet cards promiscuity check."
-msgstr ""
-"Activar/desactivar verificaciones de promiscuidad de tarjetas Ethernet."
+msgstr "Activar verificaciones de promiscuidad de tarjetas Ethernet."
 
 #: security/help.pm:96
-#, fuzzy, c-format
+#, c-format
 msgid "Activate daily security check."
-msgstr "Activar/desactivar verificaciones diarias de seguridad."
+msgstr "Activar verificaciones diarias de seguridad."
 
 #: security/help.pm:98
-#, fuzzy, c-format
+#, c-format
 msgid "Enable sulogin(8) in single user level."
-msgstr "Habilitar/Deshabilitar sulogin(8) en nivel de usuario único."
+msgstr "Habilitar sulogin(8) en nivel de usuario único."
 
 #: security/help.pm:100
 #, c-format
@@ -5485,9 +5478,9 @@ msgstr ""
 "y cantidad mínima de letras mayúsculas."
 
 #: security/help.pm:108
-#, fuzzy, c-format
+#, c-format
 msgid "Set the root's file mode creation mask."
-msgstr "Configurar la umask de root."
+msgstr "Configurar la máscara de modo de creación de ficheros para el administrador del sistema."
 
 #: security/help.pm:109
 #, c-format
@@ -5511,7 +5504,7 @@ msgstr ""
 "\n"
 "- sin contraseña en /etc/shadow\n"
 "\n"
-"- por usuarios con el id 0 que no sean root."
+"- a los usuarios con el id 0 que no sean el administrador del sistema."
 
 #: security/help.pm:117
 #, c-format
@@ -5573,9 +5566,7 @@ msgstr "si se pone en sí, ejecutar verificaciones chkrootkit."
 #, c-format
 msgid ""
 "if set, send the mail report to this email address else send it to root."
-msgstr ""
-"si está activo, enviar el correo de reporte a esta dirección, caso contrario "
-"a root."
+msgstr "si está activo, enviar el correo de reporte a esta dirección, caso contrario al administrador del sistema."
 
 #: security/help.pm:128
 #, c-format
@@ -5621,9 +5612,9 @@ msgid "Timeout unit is second"
 msgstr "La unidad del tiempo de espera es el segundo"
 
 #: security/help.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Set the user's file mode creation mask."
-msgstr "Configurar la umask de usuario."
+msgstr "Configurar la máscara de creación de ficheros para los usuarios."
 
 #: security/l10n.pm:11
 #, c-format
@@ -5653,12 +5644,12 @@ msgstr "El usuario puede reiniciar desde la consola"
 #: security/l10n.pm:17
 #, c-format
 msgid "Allow remote root login"
-msgstr "Permitir conexión remota de root"
+msgstr "Permitir conexión remota del administrador del sistema"
 
 #: security/l10n.pm:18
 #, c-format
 msgid "Direct root login"
-msgstr "Conexión directa de root"
+msgstr "Conexión directa del administrador del sistema"
 
 #: security/l10n.pm:19
 #, c-format
@@ -5668,7 +5659,7 @@ msgstr "Listar usuarios del sistema en administradores de conexión (kdm y gdm)"
 #: security/l10n.pm:20
 #, c-format
 msgid "Export display when passing from root to the other users"
-msgstr "Exportar pantalla cuando se pasa de root a otras cuentas"
+msgstr "Exportar pantalla cuando se pasa del administrador del sistema a otras cuentas"
 
 #: security/l10n.pm:21
 #, c-format
@@ -5703,12 +5694,12 @@ msgstr "Syslog reporta en la consola 12"
 #: security/l10n.pm:27
 #, c-format
 msgid "Name resolution spoofing protection"
-msgstr "Protección contra engaño de resolución de nombres"
+msgstr "Protección contra usurpación de resolución de nombres"
 
 #: security/l10n.pm:28
 #, c-format
 msgid "Enable IP spoofing protection"
-msgstr "Habilitar protección contra engaño de IP"
+msgstr "Habilitar protección contra usurpación de IP"
 
 #: security/l10n.pm:29
 #, c-format
@@ -5775,7 +5766,7 @@ msgstr ""
 #: security/l10n.pm:41
 #, c-format
 msgid "Root umask"
-msgstr "Máscara de root"
+msgstr "Máscara del administrador del sistema"
 
 #: security/l10n.pm:42
 #, c-format
@@ -5860,9 +5851,7 @@ msgstr "No enviar por correo electrónico los reportes vacíos"
 #: security/l10n.pm:58
 #, c-format
 msgid "If set, send the mail report to this email address else send it to root"
-msgstr ""
-"Si está activo, enviar el correo de reporte a esta dirección, caso contrario "
-"a root."
+msgstr "Si está activo, enviar el correo de reporte a esta dirección, caso contrario al administrador del sistema."
 
 #: security/l10n.pm:59
 #, c-format
@@ -6064,12 +6053,12 @@ msgstr ""
 #, c-format
 msgid ""
 "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
-msgstr ""
+msgstr "CUPS (Common UNIX Printing System) es un sistema de cola de impresión avanzado"
 
 #: services.pm:29
 #, c-format
 msgid "Launches the graphical display manager"
-msgstr ""
+msgstr "Lanza el administrador de conexión gráfico"
 
 #: services.pm:30
 #, c-format
@@ -6098,7 +6087,7 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
+msgstr "HAL es un servicio que recolecta y mantiene información acerca del hardware"
 
 #: services.pm:36
 #, c-format
@@ -6202,7 +6191,7 @@ msgstr ""
 msgid ""
 "DBUS is a daemon which broadcasts notifications of system events and other "
 "messages"
-msgstr ""
+msgstr "DBUS es un servicio que difunde notificaciones de los eventos del sistema y otros mensajes"
 
 #: services.pm:58
 #, c-format
@@ -6256,7 +6245,7 @@ msgstr ""
 #: services.pm:68
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
-msgstr ""
+msgstr "Sincroniza la hora del sistema usando NTP (Network Time Protocol)"
 
 #: services.pm:69
 #, c-format
@@ -6371,14 +6360,14 @@ msgstr ""
 #, c-format
 msgid ""
 "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
-msgstr ""
+msgstr "SANE (Scanner Access Now Easy) permite acceder a escáner, cámaras de vídeo, ..."
 
 #: services.pm:93
 #, c-format
 msgid ""
 "The SMB/CIFS protocol enables to share access to files & printers and also "
 "integrates with a Windows Server domain"
-msgstr ""
+msgstr "El protocolo SMB/CIFS permite compartir el acceso a ficheros e impresoras y también la integración a un dominio de Windows Server"
 
 #: services.pm:94
 #, c-format
@@ -6390,7 +6379,7 @@ msgstr "Lanza el sistema de sonido en su máquina"
 msgid ""
 "Secure Shell is a network protocol that allows data to be exchanged over a "
 "secure channel between two computers"
-msgstr ""
+msgstr "Secure Shell es un protocolo de red que permite que se intercambien datos entre dos computadoras usando un canal seguro"
 
 #: services.pm:96
 #, c-format
@@ -6398,7 +6387,7 @@ msgid ""
 "Syslog is the facility by which many daemons use to log messages\n"
 "to various system log files.  It is a good idea to always run syslog."
 msgstr ""
-"Syslog es el servicio a través del que varios demonios van a enviar\n"
+"Syslog es el servicio a través del cual varios demonios van a enviar\n"
 "sus mensajes de registro, que syslog va a redirigir a varios archivos\n"
 "de registro(log).  Es una buena idea ejecutar siempre syslog."
 
@@ -6410,12 +6399,12 @@ msgstr "Carga los controladores para sus dispositivos USB."
 #: services.pm:99
 #, c-format
 msgid "Starts the X Font Server."
-msgstr ""
+msgstr "Inicia el servidor de tipografías X (xfs)."
 
 #: services.pm:100
 #, c-format
 msgid "Starts other deamons on demand."
-msgstr ""
+msgstr "Inicia otros servicios según sea necesario."
 
 #: services.pm:123
 #, c-format
@@ -6904,15 +6893,6 @@ msgstr "Falló la instalación"
 
 #~ msgid "Accept user"
 #~ msgstr "Aceptar el usuario"
-
-#, fuzzy
-#~ msgid ""
-#~ "Do not update directory inode access times on this filesystem\n"
-#~ "(e.g, for faster access on the news spool to speed up news servers)."
-#~ msgstr ""
-#~ "No actualizar los tiempos de acceso al inodo en este sistema de archivos\n"
-#~ "(ej: para un acceso más rápido al spool de noticias en un servidor de "
-#~ "noticias)"
 
 #~ msgid "No supermount"
 #~ msgstr "Sin supermount"
