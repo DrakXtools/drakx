@@ -656,7 +656,7 @@ sub _gtk__AboutDialog {
     if (!$w) {
         $w = Gtk2::AboutDialog->new;
         $w->signal_connect(response => sub { $_[0]->destroy });
-        $w->set_name(delete $opts->{name}) if exists $opts->{name};
+        $w->set_program_name(delete $opts->{name}) if exists $opts->{name};
         $w->set_version(delete $opts->{version}) if exists $opts->{version};
         $w->set_icon(gtknew('Pixbuf', file => delete $opts->{icon})) if exists $opts->{icon};
         $w->set_logo(gtknew('Pixbuf', file => delete $opts->{logo})) if exists $opts->{logo};
