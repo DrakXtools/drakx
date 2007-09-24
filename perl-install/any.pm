@@ -163,11 +163,16 @@ sub setupBootloaderBefore {
     if (cat_("/proc/cmdline") =~ /\bnoapic/) {
 	bootloader::set_append_simple($bootloader, 'noapic');
     }
-    my ($MemTotal) = cat_("/proc/meminfo") =~ /^MemTotal:\s*(\d+)/m;
-    if (my ($biggest_swap) = sort { $b->{size} <=> $a->{size} } grep { isSwap($_) } @$fstab) {
-	log::l("MemTotal: $MemTotal < ", $biggest_swap->{size} / 2);
-	if ($MemTotal < $biggest_swap->{size} / 2) {
-	    bootloader::set_append_with_key($bootloader, resume => devices::make($biggest_swap->{device}));
+    if (cat_("/proc/cmdline") =~ /\bnoresume/) {
+	bootloader::set_append_simple($bootloader, 'noresume');
+    } elsif (bootloader::get_append_simple($bootloader, 'noresume')) {
+    } else {
+	my ($MemTotal) = cat_("/proc/meminfo") =~ /^MemTotal:\s*(\d+)/m;
+	if (my ($biggest_swap) = sort { $b->{size} <=> $a->{size} } grep { isSwap($_) } @$fstab) {
+	    log::l("MemTotal: $MemTotal < ", $biggest_swap->{size} / 2);
+	    if ($MemTotal < $biggest_swap->{size} / 2) {
+		bootloader::set_append_with_key($bootloader, resume => devices::make($biggest_swap->{device}));
+	    }
 	}
     }
 
