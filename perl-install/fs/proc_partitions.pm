@@ -53,7 +53,7 @@ sub compare {
     #- so add them for comparison
     my ($len1, $len2) = (int(@l1) + $hd->{primary}{nb_special_empty}, int(@l2));
 
-    if ($len1 != $len2 && arch() ne 'ppc') {
+    if ($len1 != $len2) {
 	die sprintf(
 		    "/proc/partitions does not agree with drakx %d != %d:\n%s\n", $len1, $len2,
 		    "/proc/partitions: " . join(", ", map { "$_->{device} ($_->{rootDevice})" } @l2));

@@ -203,7 +203,7 @@ sub get_hds {
 				die sprintf(q(bad dmraid (missing partition %s), you may try rebooting install with option "nodmraid"), $p->{device});
 			    }
 			} else {
-			    fs::proc_partitions::compare($hd) if !detect_devices::is_xbox();
+			    fs::proc_partitions::compare($hd) if !detect_devices::is_xbox() && arch() ne 'ppc';
 			}
 		    }
 		} sub {
