@@ -200,8 +200,8 @@ sub add_to_VG {
     push @{$lvm->{disks}}, $part;
     delete $part->{mntpoint};
 
-    lvm::vg_add($part);
-    lvm::update_size($lvm);
+    vg_add($part);
+    update_size($lvm);
 }
 
 sub create_singleton_vg {
