@@ -1,8 +1,7 @@
 # traducción de DrakX-es.po to Español
 # spanish translation of DrakX
-# Copyright (C) 2000, 2001,2002 Mandriva S.A.
-# Fabian Mandelbaum <fabman@mandriva.com>, 2000, 2001, 2002,2003, 2004.
-# Fabian Mandelbaum <fmandelbaum@hotmail.com>, 2003, 2004.
+# Copyright (C) 2000, 2001,2002, 2007 Mandriva S.A.
+# Fabián Mandelbaum <fmandelbaum@gmail.com>, 2000, 2001, 2002,2003, 2004, 2007.
 # Pablo Saratxaga <pablo@mandriva.com>, 2004, 2006.
 # Jaime Crespo <505201@unizar.es>, 2004, 2005.
 # José Manuel Pérez <jmprodu@hotmail.com>, 2005.
@@ -12,8 +11,8 @@ msgstr ""
 "Project-Id-Version: DrakX-es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-04 17:16+0200\n"
-"PO-Revision-Date: 2005-04-24 11:46+0200\n"
-"Last-Translator: Pablo Saratxaga <pablo@mandriva.com>\n"
+"PO-Revision-Date: 2007-09-24 14:30-0300\n"
+"Last-Translator: Fabián Mandelbaum <fmandelbaum@gmail.com>\n"
 "Language-Team: Español <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +23,7 @@ msgstr ""
 #: any.pm:159
 #, c-format
 msgid "Do you have further supplementary media?"
-msgstr "¿Tiene algún otro soporte de instalación suplementario?"
+msgstr "¿Tiene algún soporte de instalación suplementario?"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: any.pm:162
@@ -35,8 +34,7 @@ msgid ""
 "\n"
 "Do you have a supplementary installation medium to configure?"
 msgstr ""
-"Los soportes siguients fueron detectados y se usarán durante la instalación: "
-"%s.\n"
+"Se encontraron los soportes siguientes y se usarán durante la instalación: %s.\n"
 "\n"
 "\n"
 "¿Tiene algún soporte suplementario que configurar?"
@@ -101,7 +99,7 @@ msgstr "Configuración NFS"
 #: any.pm:278
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
-msgstr "Entre el nombre de servidor y el directorio de su soporte NFS"
+msgstr "Ingrese el nombre de servidor y el directorio de su soporte NFS"
 
 #: any.pm:282
 #, c-format
@@ -116,7 +114,7 @@ msgstr "El directorio debe empezar con \"/\""
 #: any.pm:287
 #, c-format
 msgid "Hostname of the NFS mount ?"
-msgstr "¿Nombre del servidor para el montaje NFS?"
+msgstr "¿Nombre del servidor del montaje NFS?"
 
 #: any.pm:288
 #, c-format
@@ -133,7 +131,7 @@ msgstr "Suplementario"
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
 "correct."
-msgstr "No puedo encontrar el archivo hdlist en este sitio réplica"
+msgstr "No puedo encontrar el archivo hdlist en este sitio réplica. Asegúrese que la ubicación es correcta."
 
 #: any.pm:379
 #, c-format
@@ -164,12 +162,11 @@ msgid ""
 "\n"
 "Do you really want to install these servers?\n"
 msgstr ""
-"Ha seleccionado el/los siguientes servidores: %s\n"
+"Ha seleccionado los siguientes servidores: %s\n"
 "\n"
 "\n"
 "Estos servidores se activan por defecto. No se les conocen problemas de\n"
-"seguridad, pero se pueden encontrar problemas nuevos. En ese caso, debe "
-"asegurarse de\n"
+"seguridad, pero se pueden encontrar problemas nuevos. En ese caso, debe asegurarse de\n"
 "actualizarlos tan pronto como sea posible.\n"
 "\n"
 "\n"
@@ -192,7 +189,7 @@ msgstr ""
 #: any.pm:1059
 #, c-format
 msgid "The following disk(s) were renamed:"
-msgstr "El siguiente disco(s) fue renombrado:"
+msgstr "Se renombraron los discos siguientes:"
 
 #: any.pm:1061
 #, c-format
@@ -242,7 +239,7 @@ msgstr "Nombre NFS incorrecto"
 #: any.pm:1230
 #, c-format
 msgid "Bad media %s"
-msgstr "Soporte incorrecto %s"
+msgstr "Soporte %s incorrecto"
 
 #: any.pm:1272
 #, c-format
@@ -252,9 +249,7 @@ msgstr "No se pueden realizar instantáneas de pantalla antes del particionado"
 #: any.pm:1279
 #, c-format
 msgid "Screenshots will be available after install in %s"
-msgstr ""
-"Luego de la instalación estarán disponibles las instantáneas de pantalla en %"
-"s"
+msgstr "Luego de la instalación estarán disponibles las instantáneas de pantalla en %s"
 
 #: gtk.pm:136
 #, c-format
@@ -269,7 +264,7 @@ msgstr "Configuración"
 #: install2.pm:165
 #, c-format
 msgid "You must also format %s"
-msgstr "Tú también debes formatear %s"
+msgstr "También se debe formatear %s"
 
 #: interactive.pm:16
 #, c-format
@@ -294,7 +289,7 @@ msgstr "Bajando la red"
 #: media.pm:699 media.pm:710
 #, c-format
 msgid "Downloading file %s..."
-msgstr "Descargando el fichero %s..."
+msgstr "Transfiriendo el fichero %s..."
 
 #: media.pm:804
 #, c-format
@@ -304,7 +299,7 @@ msgstr "Copiando algunos paquetes en el disco para uso futuro"
 #: media.pm:857
 #, c-format
 msgid "Copying in progress"
-msgstr "Copiado en progreso"
+msgstr "Copia en curso"
 
 #: pkgs.pm:33
 #, c-format
@@ -401,7 +396,7 @@ msgstr "Computadora de Red (cliente)"
 #: share/meta-task/compssUsers.pl:50
 #, c-format
 msgid "Clients for different protocols including ssh"
-msgstr "Clientes para los distintos protocolos incluyendo a ssh"
+msgstr "Clientes para los distintos protocolos incluyendo a SSH"
 
 #: share/meta-task/compssUsers.pl:55
 #, c-format
@@ -462,7 +457,7 @@ msgstr "Apache"
 #: share/meta-task/compssUsers.pl:88
 #, c-format
 msgid "Groupware"
-msgstr "Aplicaciones para grupos"
+msgstr "Grupos de trabajo"
 
 #: share/meta-task/compssUsers.pl:89
 #, c-format
@@ -472,7 +467,7 @@ msgstr "Servidor Kolab"
 #: share/meta-task/compssUsers.pl:92 share/meta-task/compssUsers.pl:133
 #, c-format
 msgid "Firewall/Router"
-msgstr "Servidor, Cortafuegos/Router"
+msgstr "Cortafuegos/Router"
 
 #: share/meta-task/compssUsers.pl:93 share/meta-task/compssUsers.pl:134
 #, c-format
@@ -527,7 +522,7 @@ msgstr "Servidor NFS, servidor Samba"
 #: share/meta-task/compssUsers.pl:116 share/meta-task/compssUsers.pl:129
 #, c-format
 msgid "Database"
-msgstr "Servidor, Bases de Datos"
+msgstr "Base de Datos"
 
 #: share/meta-task/compssUsers.pl:117
 #, c-format
@@ -537,7 +532,7 @@ msgstr "Servidor de base de datos PostgreSQL y MySQL"
 #: share/meta-task/compssUsers.pl:121
 #, c-format
 msgid "Web/FTP"
-msgstr "Servidor, Web/FTP"
+msgstr "Web/FTP"
 
 #: share/meta-task/compssUsers.pl:122
 #, c-format
@@ -562,7 +557,7 @@ msgstr "Servidor de base de datos PostgreSQL o MySQL"
 #: share/meta-task/compssUsers.pl:137
 #, c-format
 msgid "Network Computer server"
-msgstr "Computadora servidor de red"
+msgstr "Servidor de red"
 
 #: share/meta-task/compssUsers.pl:138
 #, c-format
@@ -640,13 +635,12 @@ msgstr "Servidor de configuración remota Webmin"
 #: share/meta-task/compssUsers.pl:195
 #, c-format
 msgid "Network Utilities/Monitoring"
-msgstr "Utilidades/monitorización de red"
+msgstr "Utilidades/Supervisión de red"
 
 #: share/meta-task/compssUsers.pl:196
 #, c-format
 msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-msgstr ""
-"Herramientas de monitorización, control de procesos, tcpdump, nmap, ..."
+msgstr "Herramientas de supervisión, control de procesos, tcpdump, nmap, ..."
 
 #: share/meta-task/compssUsers.pl:200
 #, c-format
@@ -656,7 +650,7 @@ msgstr "Asistentes de Mandriva"
 #: share/meta-task/compssUsers.pl:201
 #, c-format
 msgid "Wizards to configure server"
-msgstr "Asistentes para configurar servidor"
+msgstr "Asistentes para configurar el servidor"
 
 #: steps.pm:85
 #, c-format
@@ -664,7 +658,7 @@ msgid ""
 "An error occurred, but I do not know how to handle it nicely.\n"
 "Continue at your own risk."
 msgstr ""
-"Ocurrió un error y no se puede gestionar de forma adecuada.\n"
+"Ocurrió un error y no se puede resolver de forma adecuada.\n"
 "Continúe bajo su propio riesgo."
 
 #: steps.pm:432
@@ -675,9 +669,9 @@ msgid ""
 "Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm"
 "\"\n"
 msgstr ""
-"Algunos paquetes importantes no fueron instalados correctamente.\n"
-"Seguramente su lector de CD o su CD de instalación sean defectuosos.\n"
-"Compruebe el CD de instalación en un sistema ya existente con el comando:\n"
+"Algunos paquetes importantes no se instalaron correctamente.\n"
+"Puede ser que su lector de CD o su CD de instalación estén defectuosos.\n"
+"Verifique el CD de instalación en un sistema ya existente con el comando:\n"
 "  rpm -qpl media/main/*.rpm\n"
 
 #: steps_auto_install.pm:71 steps_stdio.pm:27
@@ -688,7 +682,7 @@ msgstr "Entrando en la etapa '%s'\n"
 #: steps_curses.pm:22
 #, c-format
 msgid "Mandriva Linux Installation %s"
-msgstr "Instalación %s de Mandriva Linux"
+msgstr "Instalación de Mandriva Linux %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -698,7 +692,7 @@ msgstr "<Tab>/<Alt-Tab> entre elementos"
 #: steps_gtk.pm:155 steps_gtk.pm:156
 #, c-format
 msgid "Localization"
-msgstr ""
+msgstr "Localización"
 
 #: steps_gtk.pm:159 steps_list.pm:20
 #, c-format
@@ -727,7 +721,7 @@ msgstr "Resumen"
 msgid ""
 "_: Keep these entry short\n"
 "Bootloader"
-msgstr "Cargador de arranque"
+msgstr "Arranque"
 
 #: steps_gtk.pm:166 steps_interactive.pm:644
 #, c-format
@@ -743,7 +737,7 @@ msgid ""
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "Su sistema tiene pocos recursos. Puede tener algún problema instalando\n"
-"Mandriva Linux. Si eso ocurre, puede intentar una instalación tipo texto.\n"
+"Mandriva Linux. De ser así, puede intentar una instalación tipo texto.\n"
 "Para ello, presione 'F1' cuando arranque desde el CDROM, e introduzca 'text'."
 
 #: steps_gtk.pm:264 steps_interactive.pm:529
@@ -818,12 +812,12 @@ msgstr ""
 #: steps_gtk.pm:366
 #, c-format
 msgid "The following packages are going to be installed"
-msgstr "Se van a instalar los siguientes paquetes"
+msgstr "Se van a instalar los paquetes siguientes"
 
 #: steps_gtk.pm:367
 #, c-format
 msgid "The following packages are going to be removed"
-msgstr "Se van a quitar los siguientes paquetes"
+msgstr "Se van a quitar los paquetes siguientes"
 
 #: steps_gtk.pm:392
 #, c-format
@@ -905,7 +899,7 @@ msgstr "Configurar"
 #: steps_gtk.pm:580 steps_interactive.pm:731 steps_interactive.pm:858
 #, c-format
 msgid "not configured"
-msgstr "no configurada"
+msgstr "no configurado"
 
 #: steps_gtk.pm:612 steps_interactive.pm:268
 #, c-format
@@ -913,8 +907,8 @@ msgid ""
 "The following installation media have been found.\n"
 "If you want to skip some of them, you can unselect them now."
 msgstr ""
-"Se han encontrado los siguientes soportes de instalación. Si quiere saltarse "
-"alguno de ellos, puede deseleccionarlos ahora."
+"Se han encontrado los siguientes soportes de instalación.\n"
+"Si quiere saltarse alguno de ellos, puede deseleccionarlos ahora."
 
 #: steps_gtk.pm:621 steps_interactive.pm:274
 #, c-format
@@ -924,15 +918,13 @@ msgid ""
 "It will then continue from the hard drive and the packages will remain "
 "available once the system is fully installed."
 msgstr ""
-"Tiene la opción de copiar los contenidos de los CDs al disco duro antes de "
-"la instalación.\n"
-"Entonces continuará desde el disco duro y los paquetes estarán disponibles "
-"una vez que el sistema esté completamente instalado."
+"Tiene la opción de copiar los contenidos de los CD al disco duro antes de la instalación.\n"
+"La misma continuará desde el disco duro y los paquetes estarán disponibles una vez que el sistema esté completamente instalado."
 
 #: steps_gtk.pm:623 steps_interactive.pm:276
 #, c-format
 msgid "Copy whole CDs"
-msgstr "Copiar los CDs por completo"
+msgstr "Copiar los CD por completo"
 
 #: steps_interactive.pm:38
 #, c-format
@@ -942,7 +934,7 @@ msgstr "Ocurrió un error"
 #: steps_interactive.pm:97
 #, c-format
 msgid "Please choose your keyboard layout."
-msgstr "Seleccione la distribución de su teclado."
+msgstr "Por favor, elija el tipo de su teclado."
 
 #: steps_interactive.pm:99
 #, c-format
@@ -1055,22 +1047,22 @@ msgstr "Archivo incorrecto"
 #: steps_interactive.pm:413
 #, c-format
 msgid "Install Mandriva KDE Desktop"
-msgstr ""
+msgstr "Instalar el escritorio KDE de Mandriva"
 
 #: steps_interactive.pm:414
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
-msgstr ""
+msgstr "Instalar el escritorio GNOME de Mandriva"
 
 #: steps_interactive.pm:415
-#, fuzzy, c-format
+#, c-format
 msgid "Custom install"
-msgstr "Instalación mínima"
+msgstr "Instalación personalizada"
 
 #: steps_interactive.pm:418
 #, c-format
 msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
-msgstr ""
+msgstr "Puede elegir un perfil de escritorio de estación de trabajo: KDE, GNOME o Instalación personalizada"
 
 #: steps_interactive.pm:503
 #, c-format
@@ -1089,7 +1081,7 @@ msgid ""
 "Please choose the minimal installation you want:"
 msgstr ""
 "No ha seleccionado ningún grupo de paquetes\n"
-"Elija por favor la mínima instalación que quiera."
+"Elija por favor la instalación mínima que desea."
 
 #: steps_interactive.pm:487
 #, c-format
@@ -1139,12 +1131,12 @@ msgstr "Reintentarlo"
 #: steps_interactive.pm:581
 #, c-format
 msgid "Skip this package"
-msgstr "Pasar este paquete"
+msgstr "Omitir este paquete"
 
 #: steps_interactive.pm:582
 #, c-format
 msgid "Skip all packages from medium \"%s\""
-msgstr "Pasar todos los paquetes del soporte \"%s\""
+msgstr "Omitir todos los paquetes del soporte \"%s\""
 
 #: steps_interactive.pm:583
 #, c-format
@@ -1154,7 +1146,7 @@ msgstr "Volver a la selección de paquetes"
 #: steps_interactive.pm:586
 #, c-format
 msgid "There was an error installing package %s."
-msgstr "Hubo un error al instalar el paquetes %s."
+msgstr "Hubo un error al instalar el paquete %s."
 
 #: steps_interactive.pm:604
 #, c-format
@@ -1164,9 +1156,7 @@ msgstr "Configuración posterior a la instalación"
 #: steps_interactive.pm:611
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
-msgstr ""
-"Por favor, asegúrese de que el soporte de Actualización de Módulos está en "
-"la unidad %s"
+msgstr "Por favor, asegúrese de que el soporte de actualización de módulos está en la unidad %s"
 
 #: steps_interactive.pm:645
 #, c-format
@@ -1181,7 +1171,7 @@ msgid ""
 "Do you want to install the updates?"
 msgstr ""
 "Ahora tiene la oportunidad de bajar paquetes actualizados. Estos paquetes\n"
-"se han actualizad después de que se publicó la distribución. Puede que los\n"
+"se han actualizado después de que se publicó la distribución. Puede que los\n"
 "mismos contengan correcciones de bugs o de seguridad.\n"
 "\n"
 "Para descargar estos paquetes, necesitará tener una conexión con la\n"
@@ -1301,11 +1291,9 @@ msgid ""
 "BootX or some other means to boot your machine. The kernel argument for the "
 "root fs is: root=%s"
 msgstr ""
-"Parece que tiene una máquina desconocida o \"Old World\",el gestor de "
-"arranque yaboot no funcionará en la misma.\n"
+"Parece que tiene una máquina desconocida o \"Old World\", el gestor de arranque yaboot no funcionará en la misma.\n"
 "La instalación continuará, pero necesitará\n"
-"utilizar BootX o alguna otra manera para arrancar su máquina. El parámetro "
-"del kernel para el sistema de ficheros raíz es: root=%s"
+"utilizar BootX o alguna otra manera para arrancar su máquina. El parámetro del kernel para el sistema de ficheros raíz es: root=%s"
 
 #: steps_interactive.pm:989
 #, c-format
@@ -1403,7 +1391,7 @@ msgstr "Guardar la selección de paquetes"
 msgid ""
 "_: Keep these entry short\n"
 "Language"
-msgstr "Elija su idioma"
+msgstr "Idioma"
 
 #: steps_list.pm:17
 #, c-format
@@ -1445,7 +1433,7 @@ msgstr "Seguridad"
 msgid ""
 "_: Keep these entry short\n"
 "Partitioning"
-msgstr "Particionando"
+msgstr "Particionado"
 
 #: steps_list.pm:24
 #, c-format
@@ -1466,7 +1454,7 @@ msgstr "Selección de paquetes"
 msgid ""
 "_: Keep these entry short\n"
 "Installing"
-msgstr "Instalando"
+msgstr "Instalación"
 
 #: steps_list.pm:28
 #, c-format
