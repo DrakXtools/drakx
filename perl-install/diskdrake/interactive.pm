@@ -873,7 +873,7 @@ sub Add2LVM {
     }
     raid::make($all_hds->{raids}, $part) if isRAID($part);
     lvm::check($in->do_pkgs) if $::isStandalone;
-    lvm::add_to_VG($lvm, $part);
+    lvm::add_to_VG($part, $lvm);
 }
 sub Unmount {
     my ($_in, $_hd, $part) = @_;
