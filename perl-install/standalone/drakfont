@@ -165,7 +165,7 @@ my @installed_fonts_path;      # list of path included in xfs
 my @installed_fonts_full_path; # full path list of fonts to uninstall
 
 sub list_fontpath() {
-    foreach (grep { /\d+:\s/ } `$chkfontpath -l`) {
+    foreach (uniq((map { expand_symlinks($_) } glob_('/etc/X11/fontpath.d/*')), grep { /\d+:\s/ } `$chkfontpath -l`)) {
         chomp;
         s/\d+:\s//gi;
         s/:\w*$//gi;
