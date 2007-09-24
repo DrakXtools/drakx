@@ -150,6 +150,7 @@ foreach my $i (@application) {
 # PATH and binary full path
 #my $xfs_conffile = '/etc/fonts/fonts.conf';
 my $font_dir = '/usr/share/fonts';
+my $fontpathd_dir = '/etc/X11/fontpath.d/';
 my $drakfont_dir = "$font_dir/drakfont";
 my $ttf2pt1      = '/usr/sbin/ttf2pt1';
 my $pfm2afm      = '/usr/sbin/pfm2afm';
@@ -165,7 +166,7 @@ my @installed_fonts_path;      # list of path included in xfs
 my @installed_fonts_full_path; # full path list of fonts to uninstall
 
 sub list_fontpath() {
-    foreach (uniq((map { expand_symlinks($_) } glob_('/etc/X11/fontpath.d/*')), grep { /\d+:\s/ } `$chkfontpath -l`)) {
+    foreach (uniq((map { expand_symlinks($_) } glob_("$fontpathd_dir/*")), grep { /\d+:\s/ } `$chkfontpath -l`)) {
         chomp;
         s/\d+:\s//gi;
         s/:\w*$//gi;
