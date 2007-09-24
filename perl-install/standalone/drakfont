@@ -740,6 +740,9 @@ sub uninstall() { #- TODO : add item to right list with gtksignal_connect
 	    gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub { exitdialog(); list_to_remove() }),
 	    gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => \&exitdialog),
 	   ],
+           undef,
+           { size => [ -1, 300 ] }
+
 	  );
 }
 
