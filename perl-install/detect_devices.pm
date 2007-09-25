@@ -680,7 +680,7 @@ sub get_ids_from_sysfs_device {
         if ($bus eq 'pci') {
             my $device = basename(readlink $dev_path);
             my @ids = $device =~ /^(.{4}):(.{2}):(.{2})\.(.+)$/;
-            @{%$sysfs_ids}{qw(pci_domain pci_bus pci_device pci_function)} = map { hex($_) } @ids if @ids;
+            @{$sysfs_ids}{qw(pci_domain pci_bus pci_device pci_function)} = map { hex($_) } @ids if @ids;
         }
     }
     $sysfs_ids;
