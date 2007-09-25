@@ -528,7 +528,7 @@ sub get_media {
 	    my $phys_m = url2mounted_phys_medium($o, $_->{url});
 	    get_standalone_medium($o, $phys_m, $packages, { name => $_->{id} =~ /media=(.*)/ && $1 });
 	} elsif ($_->{type} eq 'media_cfg_isos') {
-	    my ($dir_url, $iso, $rel_path) = $_->{url} =~ m!(.*)/(.*\.iso):(/.*)!;
+	    my ($dir_url, $iso, $rel_path) = $_->{url} =~ m!(.*)/(.*\.iso):(/.*)! or die "bad media_cfg_isos url $_->{url}";
 	    my $dir_medium = url2mounted_phys_medium($o, $dir_url);
 	    $dir_medium->{options} =~ s/\bnoauto\b,?//;
 	    my $phys_m = iso_phys_media($dir_medium, $iso, $rel_path);
