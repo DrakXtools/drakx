@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mandriva DrakX.cy\n"
 "POT-Creation-Date: 2007-09-12 17:02+0200\n"
-"PO-Revision-Date: 2007-01-14 17:31-0000\n"
+"PO-Revision-Date: 2007-09-25 17:20+0200\n"
 "Last-Translator: Rhoslyn Prys <post@meddal.com>\n"
 "Language-Team: Cymraeg <post@meddal.com>\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr ""
 #: harddrake/sound.pm:201 interactive.pm:576
 #, c-format
 msgid "Please wait"
-msgstr "Arhoswch"
+msgstr "Arhoswch..."
 
 #: any.pm:240
 #, c-format
@@ -120,17 +120,17 @@ msgstr "Ffurfweddu'r Math o Gychwyn"
 #: any.pm:377 any.pm:409 any.pm:410
 #, c-format
 msgid "Bootloader main options"
-msgstr "Prif ddewisiadau Bootloader"
+msgstr "Prif ddewisiadau'r cychwynnwr"
 
 #: any.pm:382
 #, c-format
 msgid "Bootloader"
-msgstr "Cychwynnwr ar waith"
+msgstr "Cychwynnwr"
 
 #: any.pm:383 any.pm:414
 #, c-format
 msgid "Bootloader to use"
-msgstr "Bootloader ar waith"
+msgstr "Dewis cychwynnwr"
 
 #: any.pm:385 any.pm:416
 #, c-format
@@ -202,7 +202,7 @@ msgstr "cyfyngu"
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
-"Dewis Nid yw 'cyfyngu dewisiadau llinell orchymyn' o werth heb gyfrinair"
+"Dewis ``Nid yw 'cyfyngu dewisiadau llinell orchymyn'' o werth heb gyfrinair"
 
 #: any.pm:403
 #, c-format
@@ -232,12 +232,12 @@ msgstr "Agor Oedi Cadarnwedd"
 #: any.pm:418
 #, c-format
 msgid "Kernel Boot Timeout"
-msgstr "Goramser cychwyn y cnewyllyn"
+msgstr "Goramser Cychwyn y Cnewyllyn"
 
 #: any.pm:419
 #, c-format
 msgid "Enable CD Boot?"
-msgstr "Galluogi cychwyn o CD?"
+msgstr "Galluogi Cychwyn o CD?"
 
 #: any.pm:420
 #, c-format
@@ -431,21 +431,19 @@ msgid "%s should be above 500. Accept anyway?"
 msgstr "Dylai %s fod dros 500. Parhau beth bynnag?"
 
 #: any.pm:768
-#, fuzzy, c-format
+#, c-format
 msgid "User management"
-msgstr "Enw defnyddiwr"
+msgstr "Rheoli defnyddiwr"
 
 #: any.pm:775 authentication.pm:182
 #, c-format
 msgid "Set administrator (root) password"
-msgstr "Gosod cyfrinair gweinyddwr (root"
+msgstr "Gosod cyfrinair gweinyddwr (root)"
 
 #: any.pm:780
-#, fuzzy, c-format
+#, c-format
 msgid "Enter a user"
-msgstr ""
-"Rhowch enw defnyddiwr\n"
-"%s"
+msgstr "Rhowch enw defnyddiwr"
 
 #: any.pm:781
 #, c-format
@@ -529,7 +527,7 @@ msgid ""
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
 msgstr ""
-"Gallwch ddewis ieithoedd eraill fydd ar gael ar ôl gosod. Dewiswch\n"
+"Mae Mandriva Linux yn cynnal nifer o ieithoedd. Dewiswch\n"
 "pa iaith yr hoffech ei osod. Byddant ar gael pan fydd eich gosodiad\n"
 "wedi ei gwblhau a phan fyddwch yn ailgychwyn eich system."
 
@@ -725,7 +723,7 @@ msgstr "NIS"
 #: authentication.pm:26
 #, c-format
 msgid "Smart Card"
-msgstr "Cerdyn clyfar"
+msgstr "Cerdyn Clyfar"
 
 #: authentication.pm:27 authentication.pm:163
 #, c-format
@@ -751,6 +749,8 @@ msgstr "Ffeil leol:"
 #, c-format
 msgid "Use information stored in local files for all authentication"
 msgstr ""
+"Defnyddiwch wybodaeth sydd wedi ei gadw ar ffeiliau lleol ar gyfer pob "
+"dilysiad"
 
 #: authentication.pm:67
 #, c-format
@@ -1104,10 +1104,10 @@ msgid ""
 "configured as a WebDAV server). If you would like to add WebDAV mount\n"
 "points, select \"New\"."
 msgstr ""
-"Protocol yw WebDAV sy'n eich caniatáu i chi osod gweinydd gwe'n lleol\n"
+"Protocol yw WebDAV sy'n eich caniatáu i chi arosod gweinydd gwe'n lleol\n"
 "a'i drin fel system ffeilio leol ( ar yr amod bod y gweinydd lleol wedi ei\n"
 "ffurfweddi fel gweinydd WebDAV). Os hoffech ychwanegu pwyntiau\n"
-"gosod WebDAV, dewiswch \"Newydd\""
+"arosod WebDAV, dewiswch \"Newydd\""
 
 #: diskdrake/dav.pm:25
 #, c-format
@@ -1117,12 +1117,12 @@ msgstr "Newydd"
 #: diskdrake/dav.pm:61 diskdrake/interactive.pm:431 diskdrake/smbnfs_gtk.pm:75
 #, c-format
 msgid "Unmount"
-msgstr "Dadosod"
+msgstr "Dadarosod"
 
 #: diskdrake/dav.pm:62 diskdrake/interactive.pm:428 diskdrake/smbnfs_gtk.pm:76
 #, c-format
 msgid "Mount"
-msgstr "Gosod"
+msgstr "Arosod"
 
 #: diskdrake/dav.pm:64 diskdrake/interactive.pm:422
 #: diskdrake/interactive.pm:662 diskdrake/interactive.pm:680
@@ -1130,7 +1130,7 @@ msgstr "Gosod"
 #: diskdrake/smbnfs_gtk.pm:79
 #, c-format
 msgid "Mount point"
-msgstr "Pwynt gosod"
+msgstr "Pwynt arosod"
 
 #: diskdrake/dav.pm:65 diskdrake/interactive.pm:424
 #: diskdrake/interactive.pm:1039 diskdrake/removable.pm:24
@@ -1179,7 +1179,7 @@ msgstr "Gweinydd:"
 #: diskdrake/interactive.pm:1225 diskdrake/interactive.pm:1303
 #, c-format
 msgid "Mount point: "
-msgstr "Pwynt gosod:"
+msgstr "Pwynt arosod:"
 
 #: diskdrake/dav.pm:111 diskdrake/interactive.pm:1310
 #, c-format
@@ -1270,14 +1270,14 @@ msgid "Unknown"
 msgstr "Anhysbys"
 
 #: diskdrake/hd_gtk.pm:354
-#, fuzzy, c-format
+#, c-format
 msgid "Ext3"
-msgstr "Gadael"
+msgstr "Ext3"
 
 #: diskdrake/hd_gtk.pm:354
-#, fuzzy, c-format
+#, c-format
 msgid "XFS"
-msgstr "HFS"
+msgstr "XFS"
 
 #: diskdrake/hd_gtk.pm:354
 #, c-format
@@ -1334,7 +1334,7 @@ msgstr "Mae'r rhaniad eisoes yn wag"
 #: diskdrake/hd_gtk.pm:389
 #, c-format
 msgid "Use ``Unmount'' first"
-msgstr "Defnyddiwch \"Dadosod\" yn gyntaf"
+msgstr "Defnyddiwch \"Dadarosod\" yn gyntaf"
 
 #: diskdrake/hd_gtk.pm:389
 #, c-format
@@ -1413,7 +1413,8 @@ msgid ""
 "Quit anyway?"
 msgstr ""
 "Dylech fformatio rhaniad %s.\n"
-"Fel arall ni fydd mynediad i bwynt gosod %s yn cael ei ysgrifennu yn fstab.\n"
+"Fel arall ni fydd mynediad i bwynt arosod %s yn cael ei ysgrifennu yn "
+"fstab.\n"
 "Gadael beth bynnag?"
 
 #: diskdrake/interactive.pm:304
@@ -1619,12 +1620,12 @@ msgstr "Label:"
 #: diskdrake/interactive.pm:647
 #, c-format
 msgid "Where do you want to mount the loopback file %s?"
-msgstr "Lle'r hoffech chi osod y ffeil gylchol %s?"
+msgstr "Lle'r hoffech chi arosod y ffeil gylchol %s?"
 
 #: diskdrake/interactive.pm:648
 #, c-format
 msgid "Where do you want to mount device %s?"
-msgstr "Lle'r ydych am osod dyfais %s?"
+msgstr "Lle'r ydych am arosod dyfais %s?"
 
 #: diskdrake/interactive.pm:653
 #, c-format
@@ -1632,14 +1633,14 @@ msgid ""
 "Can not unset mount point as this partition is used for loop back.\n"
 "Remove the loopback first"
 msgstr ""
-"Methu dadsetio'r pwynt gosod gan fod y rhaniad yn cael ei ddefnyddio ar "
+"Methu dadsetio'r pwynt arosod gan fod y rhaniad yn cael ei ddefnyddio ar "
 "gyfer cylch-ôl\n"
-"Tynnu'r cylch-ôl yn gyntaf"
+"Tynnu'r cylchol yn gyntaf"
 
 #: diskdrake/interactive.pm:683
 #, c-format
 msgid "Where do you want to mount %s?"
-msgstr "Lle'r ydych am osod %s?"
+msgstr "Lle'r ydych am arosod %s?"
 
 #: diskdrake/interactive.pm:707 diskdrake/interactive.pm:790
 #: fs/partitioning_wizard.pm:141 fs/partitioning_wizard.pm:173
@@ -1768,7 +1769,7 @@ msgstr "Mae'r ffeil yn bodoli eisoes. Defnyddiwch hwn?"
 #: diskdrake/interactive.pm:966 diskdrake/interactive.pm:969
 #, c-format
 msgid "Mount options"
-msgstr "Dewisiadau gosod"
+msgstr "Dewisiadau arosod"
 
 #: diskdrake/interactive.pm:976
 #, c-format
@@ -1844,7 +1845,7 @@ msgstr ""
 "Mae cyfeiriadur %s eisoes yn cynnwys data\n"
 "(%s)\n"
 "\n"
-"Gallwch un ai ddewis i symud y ffeiliau i'r rhaniad fydd wedi ei osod yno "
+"Gallwch un ai ddewis i symud y ffeiliau i'r rhaniad fydd wedi ei arosod yno "
 "neu eu gadael lle y maent (sy'n golygu eu cuddio gan gynnwys y rhaniad hwnnw)"
 
 #: diskdrake/interactive.pm:1183
@@ -1885,7 +1886,7 @@ msgstr "Label y gyfrol:"
 #: diskdrake/interactive.pm:1241
 #, c-format
 msgid "UUID: "
-msgstr ""
+msgstr "UUID: "
 
 #: diskdrake/interactive.pm:1242
 #, c-format
@@ -1941,7 +1942,7 @@ msgstr "Heb ei fformatio\n"
 #: diskdrake/interactive.pm:1252
 #, c-format
 msgid "Mounted\n"
-msgstr "Gosodwyd\n"
+msgstr "Arosodwyd\n"
 
 #: diskdrake/interactive.pm:1253
 #, c-format
@@ -2015,7 +2016,7 @@ msgstr ""
 #: diskdrake/interactive.pm:1280
 #, c-format
 msgid "Free space on %s (%s)"
-msgstr ""
+msgstr "Gofod rhydd ar %s (%s)"
 
 #: diskdrake/interactive.pm:1289
 #, c-format
@@ -2187,7 +2188,7 @@ msgstr ""
 #: fs/any.pm:62 fs/partitioning_wizard.pm:55
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr "Rhaid cael rhaniad FAT wedi ei fowntio yn /boot/efi"
+msgstr "Rhaid cael rhaniad FAT wedi ei arosod yn /boot/efi"
 
 #: fs/format.pm:60 fs/format.pm:67
 #, c-format
@@ -2212,17 +2213,17 @@ msgstr "methodd  fformatio %s o %s"
 #: fs/loopback.pm:24
 #, c-format
 msgid "Circular mounts %s\n"
-msgstr "Gosodiadau cylch %s\n"
+msgstr "Arosodiadau cylch %s\n"
 
 #: fs/mount.pm:79
 #, c-format
 msgid "Mounting partition %s"
-msgstr "Yn fformatio rhaniad %s"
+msgstr "Yn arosod rhaniad %s"
 
 #: fs/mount.pm:80
 #, c-format
 msgid "mounting partition %s in directory %s failed"
-msgstr "methodd gosod rhaniad %s yng nghyfeiriadur %s"
+msgstr "methodd arosod rhaniad %s yng nghyfeiriadur %s"
 
 #: fs/mount.pm:85 fs/mount.pm:102
 #, c-format
@@ -2232,7 +2233,7 @@ msgstr "Gwirio %s"
 #: fs/mount.pm:118 partition_table.pm:384
 #, c-format
 msgid "error unmounting %s: %s"
-msgstr "gwall dadosod %s: %s"
+msgstr "gwall dadarosod %s: %s"
 
 #: fs/mount.pm:133
 #, c-format
@@ -2247,7 +2248,7 @@ msgstr "Defnyddiwch system ffeil amgryptiedig"
 #: fs/mount_options.pm:113
 #, c-format
 msgid "Flush write cache on file close"
-msgstr ""
+msgstr "Gwagio'r storfa ysgrifennu wrth gau ffeil"
 
 #: fs/mount_options.pm:115
 #, c-format
@@ -2265,12 +2266,13 @@ msgstr ""
 "newyddion)."
 
 #: fs/mount_options.pm:123
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
-"Peidiwch ddiweddaru amser mynediad inode ar y system ffeiliau\n"
+"Diweddaru amser mynediad inode ar y system ffeiliau mewn ffordd mwy "
+"effeithiol\n"
 "(e.e. ar gyfer mynediad cynt ar y cylch newyddion i gyflymu gweinyddion "
 "newyddion)."
 
@@ -2280,8 +2282,8 @@ msgid ""
 "Can only be mounted explicitly (i.e.,\n"
 "the -a option will not cause the file system to be mounted)."
 msgstr ""
-"Dim ond ei osod yn benodol (h.y.,\n"
-"bydd y dewis -a yn achosi i'r system gael ei osod)."
+"Dim ond ei arosod yn benodol (h.y.,\n"
+"bydd y dewis -a yn achosi i'r system gael ei arosod)."
 
 #: fs/mount_options.pm:126
 #, c-format
@@ -2297,7 +2299,7 @@ msgid ""
 "containing binaries for architectures other than its own."
 msgstr ""
 "Peidio caniatáu gweithrediad unrhyw dueddiad ar system ffeil wedi ei\n"
-"gosod. Gall y dewis fod yn ddefnyddiol ar gyfer gweinydd sydd ganddo\n"
+"arosod. Gall y dewis fod yn ddefnyddiol ar gyfer gweinydd sydd ganddo\n"
 "systemau ffeiliau yn cynnwys tueddiad fel pensaernïaeth wahanol i'w un ei "
 "hun."
 
@@ -2315,7 +2317,7 @@ msgstr ""
 #: fs/mount_options.pm:136
 #, c-format
 msgid "Mount the file system read-only."
-msgstr "Gosodwch y system ffeiliau fel darllen yn unig."
+msgstr "Arosodwch y system ffeiliau fel darllen yn unig."
 
 #: fs/mount_options.pm:138
 #, c-format
@@ -2325,12 +2327,12 @@ msgstr "Dylai pob I/O i'r system ffeil gael ei wneud yn gydamserol."
 #: fs/mount_options.pm:140
 #, c-format
 msgid "Allow every user to mount and umount the file system."
-msgstr "Caniatáu pob defnyddiwr i osod a dadosod y system ffeiliau."
+msgstr "Caniatáu pob defnyddiwr i arosod a dadarosod y system ffeiliau."
 
 #: fs/mount_options.pm:142
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
-msgstr "Caniatáu i ddefnyddiwr cyffredin osod system ffeil."
+msgstr "Caniatáu i ddefnyddiwr cyffredin arosod system ffeil."
 
 #: fs/mount_options.pm:144
 #, c-format
@@ -2355,7 +2357,7 @@ msgstr "Rhoi mynediad darllen yn unig i ddefnyddwyr cyffredin"
 #: fs/mount_point.pm:80
 #, c-format
 msgid "Duplicate mount point %s"
-msgstr "Pwynt mowntio dyblyg %s"
+msgstr "Pwynt arosod dyblyg %s"
 
 #: fs/mount_point.pm:95
 #, c-format
@@ -2365,12 +2367,12 @@ msgstr "Dim rhaniad ar gael"
 #: fs/mount_point.pm:98
 #, c-format
 msgid "Scanning partitions to find mount points"
-msgstr "Sganio rhaniadau i ganfod pwyntiau mowntio"
+msgstr "Sganio rhaniadau i ganfod pwyntiau arosod"
 
 #: fs/mount_point.pm:105
 #, c-format
 msgid "Choose the mount points"
-msgstr "Dewiswch bwyntiau mowntio"
+msgstr "Dewiswch bwyntiau arosod"
 
 #: fs/partitioning.pm:46
 #, c-format
@@ -2400,7 +2402,7 @@ msgid ""
 msgstr ""
 "Rhaid cael rhainiad root.\n"
 "Ar gyfer gwneud hyn , crëwch raniad (neu cliciwch ar un cyfredol).\n"
-"Yna dewiswch weithred ``Pwynt mowntio'' a'i osod i `/'"
+"Yna dewiswch weithred ``Pwynt arosod'' a'i osod i `/'"
 
 #: fs/partitioning_wizard.pm:52
 #, c-format
@@ -2542,7 +2544,7 @@ msgid "Next"
 msgstr "Nesaf"
 
 #: fs/partitioning_wizard.pm:167
-#, fuzzy, c-format
+#, c-format
 msgid "Partitionning"
 msgstr "Creu rhaniadau"
 
@@ -2672,17 +2674,17 @@ msgstr ""
 #: fsedit.pm:403
 #, c-format
 msgid "Mount points must begin with a leading /"
-msgstr "Rhaid i bwyntiau gosod gynnwys / arweiniol"
+msgstr "Rhaid i bwyntiau arosod gynnwys / arweiniol"
 
 #: fsedit.pm:404
 #, c-format
 msgid "Mount points should contain only alphanumerical characters"
-msgstr "Dylai enw'r pwyntiau gosod gynnwys llythrennau a  rhifau'n unig"
+msgstr "Dylai enw'r pwyntiau arosod gynnwys llythrennau a  rhifau'n unig"
 
 #: fsedit.pm:405
 #, c-format
 msgid "There is already a partition with mount point %s\n"
-msgstr "Mae yna eisoes raniad gyda phwynt gosod %s\n"
+msgstr "Mae yna eisoes raniad gyda phwynt arosod %s\n"
 
 #: fsedit.pm:409
 #, c-format
@@ -2701,7 +2703,7 @@ msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr ""
-"Does dim modd defnyddio Cyfrol Resymegol LVM ar gyfer pwynt gosod %s am ei "
+"Does dim modd defnyddio Cyfrol Resymegol LVM ar gyfer pwynt arosod %s am ei "
 "fod ar draws cyfrolau ffisegol."
 
 #: fsedit.pm:417
@@ -2728,12 +2730,12 @@ msgid ""
 "point\n"
 msgstr ""
 "Mae angen gwir system ffeilio (ext2, reiserfs,  xfs, neu jfs)) ar gyfer y "
-"pwynt gosod\n"
+"pwynt arosod\n"
 
 #: fsedit.pm:429
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
-msgstr "Nid oes modd defnyddio Cyfrol Resymegol LVM ar gyfer pwynt gosod %s"
+msgstr "Nid oes modd defnyddio Cyfrol Resymegol LVM ar gyfer pwynt arosod %s"
 
 #: fsedit.pm:493
 #, c-format
@@ -2907,9 +2909,9 @@ msgid "USB Mass Storage Devices"
 msgstr "Dyfeisiau Storio Crynswth  USB"
 
 #: harddrake/data.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "Card readers"
-msgstr "Model cerdyn:"
+msgstr "Darllenydd cerdyn"
 
 #: harddrake/data.pm:404
 #, c-format
@@ -2964,7 +2966,7 @@ msgstr "Llygoden"
 #: harddrake/data.pm:505
 #, c-format
 msgid "Biometry"
-msgstr ""
+msgstr "Biometreg"
 
 #: harddrake/data.pm:513
 #, c-format
@@ -3293,7 +3295,7 @@ msgstr "Blaenorol"
 #: interactive/gtk.pm:544
 #, c-format
 msgid "Beware, Caps Lock is enabled"
-msgstr ""
+msgstr "Gwyliwch, Mae Caps Lock ymlaen"
 
 #: interactive/stdio.pm:29 interactive/stdio.pm:154
 #, c-format
@@ -5084,7 +5086,7 @@ msgstr ""
 #: partition_table.pm:390
 #, c-format
 msgid "mount failed: "
-msgstr "maethodd y gosodiad"
+msgstr "maethodd y arosod"
 
 #: partition_table.pm:500
 #, c-format
@@ -5180,28 +5182,28 @@ msgid "Your scanner(s) will not be available for non-root users."
 msgstr "Ni fydd eich sganiwr(wyr) ar gael ar gyfer defnyddwyr anwraidd."
 
 #: security/help.pm:11
-#, fuzzy, c-format
+#, c-format
 msgid "Accept bogus IPv4 error messages."
 msgstr "Derbyn negeseuon gwall IPv4 ffug."
 
 #: security/help.pm:13
-#, fuzzy, c-format
+#, c-format
 msgid "Accept broadcasted icmp echo."
-msgstr "Derbyn darllediad atsain icmp"
+msgstr "Derbyn darllediad atsain icmp."
 
 #: security/help.pm:15
-#, fuzzy, c-format
+#, c-format
 msgid "Accept icmp echo."
 msgstr "Derbyn atsain icmp"
 
 #: security/help.pm:17
-#, fuzzy, c-format
+#, c-format
 msgid "Allow autologin."
-msgstr "Caniatáu/Gwrthod awto mewngofnodi."
+msgstr "Caniatáu awto mewngofnodi."
 
 #. -PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
 #: security/help.pm:21
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
 "\n"
@@ -5211,48 +5213,46 @@ msgid ""
 msgstr ""
 "Os yw \"ALL\"yn caniatáu /etc/issue a /etc/issue.net i fodoli.\n"
 "\n"
-"Os yw \\fIarg\\fP = NONE\n"
+"Os yw wedi ei osod i \"None\", nid oes caniatad i faterion\n"
 "\n"
 "Dim materion heblaw caniatáu  /etc/issue."
 
 #: security/help.pm:27
-#, fuzzy, c-format
+#, c-format
 msgid "Allow reboot by the console user."
-msgstr "Caniatáu/Gwrthod ailgychwyn cyfrifiadur gan ddefnyddiwr y consol."
+msgstr "Caniatáu ailgychwyn gan ddefnyddiwr y consol."
 
 #: security/help.pm:29
-#, fuzzy, c-format
+#, c-format
 msgid "Allow remote root login."
 msgstr "Caniatáu mewngofnodi gwraidd pell"
 
 #: security/help.pm:31
-#, fuzzy, c-format
+#, c-format
 msgid "Allow direct root login."
-msgstr "Caniatáu/Gwrthod mewngofnodi gwraidd uniongyrchol."
+msgstr "Caniatáu mewngofnodi gwraidd uniongyrchol."
 
 #: security/help.pm:33
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow the list of users on the system on display managers (kdm and gdm)."
-msgstr ""
-"Caniatáu/Gwrthod rhestr defnyddwyr ar y system ar reolwyr dangos (kdm and "
-"gdm)."
+msgstr "Caniatáu rhestr defnyddwyr ar y system ar reolwyr dangos (kdm a gdm)."
 
 #: security/help.pm:35
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow to export display when\n"
 "passing from the root account to the other users.\n"
 "\n"
 "See pam_xauth(8) for more details.'"
 msgstr ""
-"Caniatáu/gwrthod allforio dangosiad\n"
+"Caniatáu allforio dangosiad\n"
 "wrth basio o gyfrif root i ddefnyddiwr arall.\n"
 "\n"
-"Gw. am_xauth(8) a, ragor o fanylion.'"
+"Gw. pam_xauth(8) a, ragor o fanylion.'"
 
 #: security/help.pm:40
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow X connections:\n"
 "\n"
@@ -5262,12 +5262,12 @@ msgid ""
 "\n"
 "- \"None\" (no connection)."
 msgstr ""
-"Caniatáu/Gwrthod cysylltiadau X.:\n"
+"Caniatáu cysylltiadau X.:\n"
 "\n"
-"- ALL (caniatáu pob cysylltiad),\n"
+"- \"All\" (caniatáu pob cysylltiad),\n"
 "\n"
-"- LOCAL (dim ond cysylltiadau lleol)\n"
-"-  NONE (dim cysylltiadau)"
+"- \"Local\" (dim ond cysylltiadau lleol)\n"
+"- \"None\" (dim cysylltiadau)"
 
 #: security/help.pm:48
 #, c-format
@@ -5280,7 +5280,7 @@ msgstr ""
 
 #. -PO: here "ALL", "Local" and "None" are values in a pull-down menu; translate them the same as they're
 #: security/help.pm:53
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Authorize:\n"
 "\n"
@@ -5297,13 +5297,15 @@ msgstr ""
 "Ymresymiadau: (arg)\n"
 "\n"
 "- pob gwasanaeth sy'n cael ei reoli gan tcp_wrappers (gw. hosts.deny(5) man "
-"page) os wedi ei osod i \"ALL\",\n"
+"page) os wedi ei osod i \"POPETH\",\n"
 "\n"
 "\n"
-" Dim ond rhai lleol os wedi eu gosod i \"LOCAL\"\n"
+" Dim ond rhai lleol os wedi eu gosod i \"LLEOL\"\n"
 "\n"
-"- dim os wedi eu gosodi i NONE. I ganiatáu'r gwasanaethau sydd eu hangen, "
-"defnyddiwch /etc/hosts.allow (gw. hosts.allow(5))."
+"- dim os wedi eu gosodi i \"None\".\n"
+"\n"
+" I ganiatáu'r gwasanaethau sydd eu hangen, defnyddiwch /etc/hosts.allow (gw. "
+"hosts.allow(5))."
 
 #: security/help.pm:63
 #, c-format
@@ -5326,7 +5328,7 @@ msgstr ""
 "ffeil wrth osod y pecynnau"
 
 #: security/help.pm:72
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable crontab and at for users.\n"
 "\n"
@@ -5339,17 +5341,17 @@ msgstr ""
 " (gw. man yn(1) a crontab(1))."
 
 #: security/help.pm:77
-#, fuzzy, c-format
+#, c-format
 msgid "Enable syslog reports to console 12"
-msgstr "Galluogi/Analluogi adroddiadau Salig i gonsol 12"
+msgstr "Galluogi adroddiadau syslog i gonsol 12"
 
 #: security/help.pm:79
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable name resolution spoofing protection.  If\n"
 "\"%s\" is true, also reports to syslog."
 msgstr ""
-"Galluogi/Analluogi amddiffyn spwffio datrys enw. Os yw\n"
+"Galluogi amddiffyn spwffio datrys enw. Os yw\n"
 "\"%s\" yn wir, adrodd i syslog."
 
 #: security/help.pm:80
@@ -5358,24 +5360,24 @@ msgid "Security Alerts:"
 msgstr "Rhybuddion Diogelwch:"
 
 #: security/help.pm:82
-#, fuzzy, c-format
+#, c-format
 msgid "Enable IP spoofing protection."
 msgstr "Galluogi amddiffyn sbwlio IP"
 
 #: security/help.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Enable libsafe if libsafe is found on the system."
-msgstr "Galluogi/Analluogi libsafe os yw ar y system."
+msgstr "Galluogi libsafe os yw ar y system."
 
 #: security/help.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Enable the logging of IPv4 strange packets."
 msgstr "Galluogi mewngofnodi pecynnau anarferol IPv4."
 
 #: security/help.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid "Enable msec hourly security check."
-msgstr "Galluogi/Analluogi gwiriad diogelwch msec bob awr."
+msgstr "Galluogi gwiriad diogelwch msec bob awr."
 
 #: security/help.pm:90
 #, c-format
@@ -5392,19 +5394,19 @@ msgid "Use password to authenticate users."
 msgstr "Defnyddio cyfrinair i wirio defnyddwyr."
 
 #: security/help.pm:94
-#, fuzzy, c-format
+#, c-format
 msgid "Activate ethernet cards promiscuity check."
-msgstr "Galluogi/Analluogi gwiriad cymysgaredd cardiau ethernet."
+msgstr "Galluogi gwiriad cymysgaredd cardiau ethernet."
 
 #: security/help.pm:96
-#, fuzzy, c-format
+#, c-format
 msgid "Activate daily security check."
-msgstr "Galluogi/Analluogi gwiriad diogelwch dyddiol."
+msgstr "Galluogi gwiriad diogelwch dyddiol."
 
 #: security/help.pm:98
-#, fuzzy, c-format
+#, c-format
 msgid "Enable sulogin(8) in single user level."
-msgstr "Galluogi/Analluogi sulogin(8) mewn defnydd defnyddiwr unigol."
+msgstr "Galluogi sulogin(8) mewn defnydd defnyddiwr unigol."
 
 #: security/help.pm:100
 #, c-format
@@ -5432,9 +5434,9 @@ msgstr ""
 "mawr."
 
 #: security/help.pm:108
-#, fuzzy, c-format
+#, c-format
 msgid "Set the root's file mode creation mask."
-msgstr "Gosod gwraidd umask."
+msgstr "Gosod creu modd ffeil gwraidd mask."
 
 #: security/help.pm:109
 #, c-format
@@ -5563,9 +5565,9 @@ msgid "Timeout unit is second"
 msgstr "Enwi enw'r ail uned."
 
 #: security/help.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Set the user's file mode creation mask."
-msgstr "Gosod umasg y defnyddiwr."
+msgstr "Gosod creu modd ffeil masg y defnyddiwr."
 
 #: security/l10n.pm:11
 #, c-format
@@ -6000,12 +6002,12 @@ msgstr ""
 #, c-format
 msgid ""
 "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
-msgstr ""
+msgstr "System sbwlio argraffu uwch yw'r Common UNIX Printing System (CUPS)"
 
 #: services.pm:29
 #, c-format
 msgid "Launches the graphical display manager"
-msgstr ""
+msgstr "Cychwyn y rheolwr dangosydd graffigol"
 
 #: services.pm:30
 #, c-format
@@ -6034,7 +6036,7 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
+msgstr " HAL - daemon sy'n casglu a chynnal gwybodaeth am galedwedd"
 
 #: services.pm:36
 #, c-format
@@ -6136,6 +6138,7 @@ msgid ""
 "DBUS is a daemon which broadcasts notifications of system events and other "
 "messages"
 msgstr ""
+"DBUS -daemon sy'n hysbysu'r sytem am ddigwyddiadau system a negeseuon eraill"
 
 #: services.pm:58
 #, c-format
@@ -6152,8 +6155,8 @@ msgid ""
 "Mounts and unmounts all Network File System (NFS), SMB (Lan\n"
 "Manager/Windows), and NCP (NetWare) mount points."
 msgstr ""
-"Yn gosod a dadosod pob System Ffeil y Rhwydwaith (NFS), SMB\n"
-"(Rheolwr Rhwydwaith/Windows), a phwyntiau gosod NCP (NetWare) ."
+"Yn arosod a dadarosod pob System Ffeil y Rhwydwaith (NFS), SMB\n"
+"(Rheolwr Rhwydwaith/Windows), a phwyntiau arosod NCP (NetWare) ."
 
 #: services.pm:61
 #, c-format
@@ -6190,7 +6193,7 @@ msgstr ""
 #: services.pm:68
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
-msgstr ""
+msgstr "Cydweddu amser system gan ddefnyddio Protocol Amser Rhwydwaith (NTP)"
 
 #: services.pm:69
 #, c-format
@@ -6306,6 +6309,8 @@ msgstr ""
 msgid ""
 "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
+"SANE (Scanner Access Now Easy) - galluogi mynediad i sganwyr, camerau "
+"fideo..."
 
 #: services.pm:93
 #, c-format
@@ -6313,6 +6318,8 @@ msgid ""
 "The SMB/CIFS protocol enables to share access to files & printers and also "
 "integrates with a Windows Server domain"
 msgstr ""
+"Protocol SMB/CIFS - caniatau rhannu mynediad i ffeiliau ac argraffwyr ac "
+"yhefyd yn intigreiddio gyda parth Windows Server"
 
 #: services.pm:94
 #, c-format
@@ -6325,6 +6332,8 @@ msgid ""
 "Secure Shell is a network protocol that allows data to be exchanged over a "
 "secure channel between two computers"
 msgstr ""
+"Secure Shell - protocol rhwydwaith sy'n caniatâu u ddata gael ei gyfnewid "
+"dros sianel ddiogel rhwng dau gyfrifiadur"
 
 #: services.pm:96
 #, c-format
@@ -6344,12 +6353,12 @@ msgstr "Llwytho'r gyrwyr ar gyfer eich dyfeisiau usb."
 #: services.pm:99
 #, c-format
 msgid "Starts the X Font Server."
-msgstr ""
+msgstr "Cychwyn Gweinydd Ffont X"
 
 #: services.pm:100
 #, c-format
 msgid "Starts other deamons on demand."
-msgstr ""
+msgstr "Cychwyn daemon ar alw"
 
 #: services.pm:123
 #, c-format
