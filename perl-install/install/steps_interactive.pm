@@ -365,7 +365,15 @@ sub choosePackages {
     my $min_mark = 4;
     my ($individual, $chooseGroups);
 
-    _chooseDesktop($o, $o->{rpmsrate_flags_chosen}, \$chooseGroups) if !$o->{upgrade};
+    if (!$o->{upgrade}) {
+	if (install::pkgs::packageByName($o->{packages}, 'task-kde') &&
+	    install::pkgs::packageByName($o->{packages}, 'task-gnome-minimal')) {
+	    _chooseDesktop($o, $o->{rpmsrate_flags_chosen}, \$chooseGroups);
+	} else {
+	    # don't ask for desktop if kde and gnome are not available on media (useful for mini iso)
+	    $chooseGroups = 1;
+	}
+    }
 
   chooseGroups:
     $o->chooseGroups($o->{packages}, $o->{compssUsers}, $min_mark, \$individual) if $chooseGroups;
