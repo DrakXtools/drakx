@@ -131,7 +131,7 @@ sub selectInstallClass {
 			interactive_help_id => 'selectInstallClass',
 		      },
 		      [ { val => \$p,
-			  list => [ @l, N_("Install") ], 
+			  list => [ @l, N_("_: This is a noun:\nInstall") ], 
 			  type => 'list',
 			  format => sub { ref($_[0]) ? N("Upgrade %s", $_[0]{release}) : translate($_[0]) }
 			} ]);
