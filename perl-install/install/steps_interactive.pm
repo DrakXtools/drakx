@@ -365,7 +365,7 @@ sub choosePackages {
     my $min_mark = 4;
     my ($individual, $chooseGroups);
 
-    if (!$o->{upgrade}) {
+    if (!$o->{isUpgrade}) {
 	if (install::pkgs::packageByName($o->{packages}, 'task-kde') &&
 	    install::pkgs::packageByName($o->{packages}, 'task-gnome-minimal')) {
 	    _chooseDesktop($o, $o->{rpmsrate_flags_chosen}, \$chooseGroups);
