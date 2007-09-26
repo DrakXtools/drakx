@@ -24,6 +24,7 @@ use lib qw(/usr/lib/libDrakX);
 use any;
 use standalone;
 use common;
+BEGIN { $::no_ugtk_init = 1 }
 use mygtk2 qw(gtknew);
 use ugtk2 qw(:all);
 use Config;
@@ -41,6 +42,13 @@ foreach (@ARGV) {
     /^--report$/ and $prog = splice(@ARGV, $i, 1);
     /^--incident$/ and do { $incident = 1; $prog = splice(@ARGV, $i, 1) };
 }
+
+if (!check_for_xserver) {
+    print("Cannot be run in console mode.\n");
+    print N("The \"%s\" program has crashed with the following error:", $prog) . "\n$error\n" if $error;
+}
+
+mygtk2::init();
 
 $ugtk2::wm_icon = 'drakbug-16';
 my $window = ugtk2->new(N("Mandriva Linux Bug Report Tool"), center => 1);
