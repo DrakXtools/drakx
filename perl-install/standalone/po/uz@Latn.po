@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-17 15:08+0200\n"
+"POT-Creation-Date: 2007-09-26 12:55+0200\n"
 "PO-Revision-Date: 2007-09-17 22:53+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <floss-uz-l10n@googlegroups.com>\n"
@@ -136,7 +136,12 @@ msgid ""
 "Be sure your video card supports the mode you choose."
 msgstr ""
 
-#: drakbug:46
+#: drakbug:48 drakbug:113
+#, c-format
+msgid "The \"%s\" program has crashed with the following error:"
+msgstr ""
+
+#: drakbug:54
 #, c-format
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "Mandriva Linux uchun xato haqida xabar qiluvchi vosita"
@@ -213,17 +218,7 @@ msgstr "Paket: "
 msgid "Kernel:"
 msgstr "Kernel:"
 
-#: drakbug:102
-#, c-format
-msgid "The \"%s\" program has crashed with the following error:"
-msgstr ""
-
-#: drakbug:104
-#, c-format
-msgid "The \"%s\" program has crashed."
-msgstr ""
-
-#: drakbug:106
+#: drakbug:121
 #, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
@@ -346,7 +341,8 @@ msgstr ""
 #: drakedm:73
 #, c-format
 msgid "The change is done, do you want to restart the dm service?"
-msgstr "O'zgarishlar qo'llandi, dm xizmatini boshqadan ishga tushirishni istaysizmi?"
+msgstr ""
+"O'zgarishlar qo'llandi, dm xizmatini boshqadan ishga tushirishni istaysizmi?"
 
 #: drakedm:74
 #, c-format
@@ -551,7 +547,8 @@ msgstr "Andoza printerlar"
 #: drakfont:575
 #, c-format
 msgid "Select the font file or directory and click on 'Add'"
-msgstr "Shrift faylini yoki direktoriyani tanlang va \"Qo'shish\" tugmasini bosing"
+msgstr ""
+"Shrift faylini yoki direktoriyani tanlang va \"Qo'shish\" tugmasini bosing"
 
 #: drakfont:576
 #, c-format
@@ -646,7 +643,8 @@ msgstr " --help                - shu yordamni ko'rsatish\n"
 
 #: drakhelp:23
 #, c-format
-msgid " --id <id_label>       - load the html help page which refers to id_label\n"
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
 
 #: drakhelp:24
@@ -843,7 +841,8 @@ msgid ""
 " only owner of directory or file in this directory can delete it"
 msgstr ""
 "Direktoriyalar uchun ishlatiladi:\n"
-" uni faqat direktoriyaning egasi yoki shu direktoriyadagi fayl o'chirishi mumkin"
+" uni faqat direktoriyaning egasi yoki shu direktoriyadagi fayl o'chirishi "
+"mumkin"
 
 #: drakperm:273
 #, c-format
@@ -1041,7 +1040,137 @@ msgstr "Tizimning moslamalari"
 msgid "Periodic Checks"
 msgstr "Davriy tekshiruvlar"
 
-#: draksec:291
+#: draksec:283
+#, c-format
+msgid "Root password"
+msgstr ""
+
+#: draksec:284
+#, c-format
+msgid "User password"
+msgstr ""
+
+#: draksec:314 draksec:368
+#, fuzzy, c-format
+msgid "Software management"
+msgstr "Dasturlar boshqaruvchisi"
+
+#: draksec:315
+#, fuzzy, c-format
+msgid "Mandriva Update"
+msgstr "Mandriva Online"
+
+#: draksec:316
+#, fuzzy, c-format
+msgid "Software Media Manager"
+msgstr "Dasturlar boshqaruvchisi"
+
+#: draksec:317
+#, c-format
+msgid "Configure 3D Desktop effects"
+msgstr ""
+
+#: draksec:318
+#, fuzzy, c-format
+msgid "Graphical server Configuration"
+msgstr "Xat orqali xabar berishni moslash"
+
+#: draksec:319
+#, fuzzy, c-format
+msgid "Mouse Configuration"
+msgstr "Qo'lbola moslash"
+
+#: draksec:320
+#, fuzzy, c-format
+msgid "Keyboard Configuration"
+msgstr "Asbob-uskunalarni moslash"
+
+#: draksec:321
+#, fuzzy, c-format
+msgid "UPS Configuration"
+msgstr "UPS drayverini moslash"
+
+#: draksec:322
+#, fuzzy, c-format
+msgid "Network Configuration"
+msgstr "Asbob-uskunalarni moslash"
+
+#: draksec:323
+#, c-format
+msgid "Hosts definitions"
+msgstr ""
+
+#: draksec:324
+#, fuzzy, c-format
+msgid "Network Center"
+msgstr "tarmoqdagi printerning porti"
+
+#: draksec:325
+#, c-format
+msgid "VPN"
+msgstr ""
+
+#: draksec:326
+#, fuzzy, c-format
+msgid "Proxy Configuration"
+msgstr "Asbob-uskunalarni moslash"
+
+#: draksec:327
+#, fuzzy, c-format
+msgid "Connection Sharing"
+msgstr "Ulanish"
+
+#: draksec:329
+#, c-format
+msgid "Backups"
+msgstr ""
+
+#: draksec:331 logdrake:52
+#, c-format
+msgid "Logs"
+msgstr "Loglar"
+
+#: draksec:333
+#, fuzzy, c-format
+msgid "Users"
+msgstr "Foydalanuvchi"
+
+#: draksec:335
+#, fuzzy, c-format
+msgid "Boot Configuratoin"
+msgstr "Asbob-uskunalarni moslash"
+
+#: draksec:353
+#, c-format
+msgid "Ask for user password"
+msgstr ""
+
+#: draksec:354
+#, c-format
+msgid "Ask for root password"
+msgstr ""
+
+#: draksec:355
+#, c-format
+msgid "Do not ask for any password"
+msgstr ""
+
+#: draksec:369
+#, fuzzy, c-format
+msgid "Hardware"
+msgstr "Harddrake"
+
+#: draksec:370
+#, fuzzy, c-format
+msgid "Network"
+msgstr "Tarmoqning moslamalari"
+
+#: draksec:372
+#, c-format
+msgid "Boot"
+msgstr ""
+
+#: draksec:396
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "Iltimos kutib turing, xavfsizlik darajasi o'rnatilmoqda"
@@ -1083,8 +1212,8 @@ msgstr ""
 "\n"
 "\n"
 "Izoh: agar sizda ISA PnP tovush kartasi bo'lsa, alsaconf yoki sndconfig "
-"dasturini ishlatishingiz kerak bo'ladi. Konsolda \"alsaconf\" yoki \"sndconfig\" "
-"buyrug'ini bajaring xolos."
+"dasturini ishlatishingiz kerak bo'ladi. Konsolda \"alsaconf\" yoki "
+"\"sndconfig\" buyrug'ini bajaring xolos."
 
 #: draksplash:32
 #, c-format
@@ -1510,7 +1639,8 @@ msgstr ""
 
 #: harddrake2:31
 #, c-format
-msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgid ""
+"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr ""
 
 #: harddrake2:33 harddrake2:146
@@ -2045,7 +2175,8 @@ msgstr "Uskunaning fayli"
 
 #: harddrake2:115
 #, c-format
-msgid "the device file used to communicate with the kernel driver for the mouse"
+msgid ""
+"the device file used to communicate with the kernel driver for the mouse"
 msgstr ""
 
 #: harddrake2:116
@@ -2245,10 +2376,11 @@ msgstr "Moslash vositasini ishga tushirish"
 
 #: harddrake2:299
 #, c-format
-msgid "Click on a device in the left tree in order to display its information here."
+msgid ""
+"Click on a device in the left tree in order to display its information here."
 msgstr ""
-"Uskuna haqida ma'lumotni bu yerda ko'rish uchun uni chap tarafdagi ro'yxatdan "
-"tanlang."
+"Uskuna haqida ma'lumotni bu yerda ko'rish uchun uni chap tarafdagi "
+"ro'yxatdan tanlang."
 
 #: harddrake2:319
 #, c-format
@@ -2300,18 +2432,13 @@ msgstr ", "
 #, c-format
 msgid "The change is done, but to be effective you must logout"
 msgstr ""
-"O'zgarishlar bajarildi, ammo amalda to'liq qo'llanilishi uchun siz chiqishingiz "
-"kerak."
+"O'zgarishlar bajarildi, ammo amalda to'liq qo'llanilishi uchun siz "
+"chiqishingiz kerak."
 
 #: logdrake:51
 #, c-format
 msgid "Mandriva Linux Tools Logs"
 msgstr "Mandriva Linux vositalarining logi"
-
-#: logdrake:52
-#, c-format
-msgid "Logs"
-msgstr "Loglar"
 
 #: logdrake:65
 #, c-format
@@ -2623,7 +2750,8 @@ msgstr "Scannerdrake to'xtatilmoqda."
 
 #: scannerdrake:60
 #, c-format
-msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr ""
 
 #: scannerdrake:61
@@ -3005,7 +3133,8 @@ msgstr ""
 #: scannerdrake:601
 #, c-format
 msgid "The scanners on this machine are available to other computers"
-msgstr "Bu kompyuterdagi skannerlarni boshqa kompyuterlardan ham ishlatsa bo'ladi"
+msgstr ""
+"Bu kompyuterdagi skannerlarni boshqa kompyuterlardan ham ishlatsa bo'ladi"
 
 #: scannerdrake:603
 #, c-format
@@ -3073,7 +3202,8 @@ msgstr "Kompyuterning nomini yoki IP raqamini kiritishingiz kerak.\n"
 #: scannerdrake:742 scannerdrake:892
 #, c-format
 msgid "This host is already in the list, it cannot be added again.\n"
-msgstr "Bu kompyuterning nomi ro'yxatda allaqachon bor, uni yana qo'shib bo'lmaydi.\n"
+msgstr ""
+"Bu kompyuterning nomi ro'yxatda allaqachon bor, uni yana qo'shib bo'lmaydi.\n"
 
 #: scannerdrake:797
 #, c-format
@@ -3159,4 +3289,3 @@ msgstr "Joriy foydalanuvchi uchun til va davlatni moslash"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Foydalanuvchining mahalliy moslamalari"
-

@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-17 15:08+0200\n"
+"POT-Creation-Date: 2007-09-26 12:55+0200\n"
 "PO-Revision-Date: 2007-05-21 11:09-0300\n"
 "Last-Translator: Felipe Arruda <felipemiguel@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_br@mail.kde.org>\n"
@@ -155,7 +155,12 @@ msgstr ""
 "entradas de boot selecionadas abaixo.\n"
 "Tenha certeza de que sua placa de vídeo suporta o modo escolhido."
 
-#: drakbug:46
+#: drakbug:48 drakbug:113
+#, c-format
+msgid "The \"%s\" program has crashed with the following error:"
+msgstr "O programa \"%s\" foi finalizado com o seguinte erro:"
+
+#: drakbug:54
 #, c-format
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "Ferramenta de Relatório de Erros do Mandriva Linux"
@@ -234,17 +239,7 @@ msgstr "Pacote: "
 msgid "Kernel:"
 msgstr "Kernel:"
 
-#: drakbug:102
-#, c-format
-msgid "The \"%s\" program has crashed with the following error:"
-msgstr "O programa \"%s\" foi finalizado com o seguinte erro:"
-
-#: drakbug:104
-#, c-format
-msgid "The \"%s\" program has crashed."
-msgstr "O programa \"%s\" foi finalizado com erro."
-
-#: drakbug:106
+#: drakbug:121
 #, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
@@ -1140,7 +1135,137 @@ msgstr "Opções do sistema"
 msgid "Periodic Checks"
 msgstr "Verificações Periódicas"
 
-#: draksec:291
+#: draksec:283
+#, c-format
+msgid "Root password"
+msgstr ""
+
+#: draksec:284
+#, c-format
+msgid "User password"
+msgstr ""
+
+#: draksec:314 draksec:368
+#, fuzzy, c-format
+msgid "Software management"
+msgstr "Gerenciador de Softwares"
+
+#: draksec:315
+#, fuzzy, c-format
+msgid "Mandriva Update"
+msgstr "Mandriva Online"
+
+#: draksec:316
+#, fuzzy, c-format
+msgid "Software Media Manager"
+msgstr "Gerenciador de Softwares"
+
+#: draksec:317
+#, c-format
+msgid "Configure 3D Desktop effects"
+msgstr ""
+
+#: draksec:318
+#, fuzzy, c-format
+msgid "Graphical server Configuration"
+msgstr "Configuração de alerta por e-mail"
+
+#: draksec:319
+#, fuzzy, c-format
+msgid "Mouse Configuration"
+msgstr "Configuração manual"
+
+#: draksec:320
+#, fuzzy, c-format
+msgid "Keyboard Configuration"
+msgstr "Configuração de Hardware"
+
+#: draksec:321
+#, fuzzy, c-format
+msgid "UPS Configuration"
+msgstr "Configuração do driver UPS (no-break)"
+
+#: draksec:322
+#, fuzzy, c-format
+msgid "Network Configuration"
+msgstr "Configuração do alerta"
+
+#: draksec:323
+#, c-format
+msgid "Hosts definitions"
+msgstr ""
+
+#: draksec:324
+#, fuzzy, c-format
+msgid "Network Center"
+msgstr "porta da impressora da rede"
+
+#: draksec:325
+#, c-format
+msgid "VPN"
+msgstr ""
+
+#: draksec:326
+#, fuzzy, c-format
+msgid "Proxy Configuration"
+msgstr "Configuração do alerta"
+
+#: draksec:327
+#, fuzzy, c-format
+msgid "Connection Sharing"
+msgstr "Conexão"
+
+#: draksec:329
+#, fuzzy, c-format
+msgid "Backups"
+msgstr "Barramento"
+
+#: draksec:331 logdrake:52
+#, c-format
+msgid "Logs"
+msgstr "Relatorios"
+
+#: draksec:333
+#, fuzzy, c-format
+msgid "Users"
+msgstr "Usuário"
+
+#: draksec:335
+#, fuzzy, c-format
+msgid "Boot Configuratoin"
+msgstr "Configuração do alerta"
+
+#: draksec:353
+#, c-format
+msgid "Ask for user password"
+msgstr ""
+
+#: draksec:354
+#, c-format
+msgid "Ask for root password"
+msgstr ""
+
+#: draksec:355
+#, c-format
+msgid "Do not ask for any password"
+msgstr ""
+
+#: draksec:369
+#, fuzzy, c-format
+msgid "Hardware"
+msgstr "Harddrake"
+
+#: draksec:370
+#, fuzzy, c-format
+msgid "Network"
+msgstr "Opções da rede"
+
+#: draksec:372
+#, c-format
+msgid "Boot"
+msgstr ""
+
+#: draksec:396
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "Por favor aguarde, configurando nível de segurança..."
@@ -2467,11 +2592,6 @@ msgstr ""
 msgid "Mandriva Linux Tools Logs"
 msgstr "Logs das ferramentas Mandriva Linux"
 
-#: logdrake:52
-#, c-format
-msgid "Logs"
-msgstr "Relatorios"
-
 #: logdrake:65
 #, c-format
 msgid "Show only for the selected day"
@@ -3352,6 +3472,9 @@ msgstr "Configuração de Idioma e País"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Configurações Regionais"
+
+#~ msgid "The \"%s\" program has crashed."
+#~ msgstr "O programa \"%s\" foi finalizado com erro."
 
 #~ msgid "Error!"
 #~ msgstr "Erro!"

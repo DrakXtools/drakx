@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-17 15:08+0200\n"
+"POT-Creation-Date: 2007-09-26 12:55+0200\n"
 "PO-Revision-Date: 2007-09-20 23:29+0200\n"
 "Last-Translator: Dotan Kamber <kamberd@yahoo.com>\n"
 "Language-Team: Hebrew\n"
@@ -28,23 +28,17 @@ msgstr ""
 msgid "No bootloader found, creating a new configuration"
 msgstr "לא נמצא מנהל אתחול, יוצר תצורה חדשה"
 
-#: drakboot:83
-#: harddrake2:194
-#: harddrake2:195
-#: logdrake:71
+#: drakboot:83 harddrake2:194 harddrake2:195 logdrake:71
 #, c-format
 msgid "/_File"
 msgstr "/_קובץ"
 
-#: drakboot:84
-#: logdrake:77
+#: drakboot:84 logdrake:77
 #, c-format
 msgid "/File/_Quit"
 msgstr "/קובץ/_יציאה"
 
-#: drakboot:84
-#: harddrake2:195
-#: logdrake:77
+#: drakboot:84 harddrake2:195 logdrake:77
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
@@ -66,8 +60,12 @@ msgstr "שקט"
 
 #: drakboot:133
 #, c-format
-msgid "Your system bootloader is not in framebuffer mode. To activate graphical boot, select a graphic video mode from the bootloader configuration tool."
-msgstr "מנהל האתחול של המערכת אינו במצב framebuffer. להפעלת איתחול גרפי יש לבחור מצב תצוגה גרפי מכלי התצורה של מנהל האתחול."
+msgid ""
+"Your system bootloader is not in framebuffer mode. To activate graphical "
+"boot, select a graphic video mode from the bootloader configuration tool."
+msgstr ""
+"מנהל האתחול של המערכת אינו במצב framebuffer. להפעלת איתחול גרפי יש לבחור מצב "
+"תצוגה גרפי מכלי התצורה של מנהל האתחול."
 
 #: drakboot:134
 #, c-format
@@ -103,8 +101,7 @@ msgstr ""
 "הצגת ערכת נושא\n"
 "תחת מסוף"
 
-#: drakboot:158
-#: draksplash:25
+#: drakboot:158 draksplash:25
 #, c-format
 msgid "Create new theme"
 msgstr "יצירת ערכת נושא חדשה"
@@ -142,13 +139,19 @@ msgstr "הפעלת הסביבה הגרפית באתחול המערכת"
 #: drakboot:260
 #, c-format
 msgid ""
-"Please choose a video mode, it will be applied to each of the boot entries selected below.\n"
+"Please choose a video mode, it will be applied to each of the boot entries "
+"selected below.\n"
 "Be sure your video card supports the mode you choose."
 msgstr ""
 "נא לבחור מצב תצוגה, הוא ישמש לכל אחת ממובאות האתחול הנבחרות מטה.\n"
 "יש לודא כי כרטיס המסך תומך במצב שנבחר."
 
-#: drakbug:46
+#: drakbug:48 drakbug:113
+#, c-format
+msgid "The \"%s\" program has crashed with the following error:"
+msgstr "התוכנית \"%s\" קרסה עם השגיאה הבאה:"
+
+#: drakbug:54
 #, c-format
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "כלי דיווח התקלות של מנדריבה לינוקס"
@@ -168,14 +171,12 @@ msgstr "אשף הפעם הראשונה"
 msgid "Synchronization tool"
 msgstr "כלי תאום לביצוע בו-זמני"
 
-#: drakbug:54
-#: drakbug:168
+#: drakbug:54 drakbug:168
 #, c-format
 msgid "Standalone Tools"
 msgstr "כלים עצמאיים"
 
-#: drakbug:56
-#: drakbug:57
+#: drakbug:56 drakbug:57
 #, c-format
 msgid "Mandriva Online"
 msgstr "חנות מנדריבה"
@@ -229,22 +230,14 @@ msgstr "חבילה: "
 msgid "Kernel:"
 msgstr "גרעין:"
 
-#: drakbug:102
-#, c-format
-msgid "The \"%s\" program has crashed with the following error:"
-msgstr "התוכנית \"%s\" קרסה עם השגיאה הבאה:"
-
-#: drakbug:104
-#, c-format
-msgid "The \"%s\" program has crashed."
-msgstr "התוכנית \"%s\" קרסה."
-
-#: drakbug:106
+#: drakbug:121
 #, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
-"This will open a web browser window on %s where you'll find a form to fill in.  The information displayed above will be transferred to that server.  \n"
-"Things useful to include in your report are the output of lspcidrake -v, kernel version, and /proc/cpuinfo."
+"This will open a web browser window on %s where you'll find a form to fill "
+"in.  The information displayed above will be transferred to that server.  \n"
+"Things useful to include in your report are the output of lspcidrake -v, "
+"kernel version, and /proc/cpuinfo."
 msgstr ""
 "בכדי לדווח על תקלה, עליך ללחוץ על כפתור הדיווח.  \n"
 "פעולה זו תפתח חלון דפדפן באתר %s שבו נמצא טופס\n"
@@ -331,8 +324,7 @@ msgstr "התאום עם %s נכשל."
 msgid "Retry"
 msgstr "נסה שנית"
 
-#: drakclock:149
-#: drakclock:159
+#: drakclock:149 drakclock:159
 #, c-format
 msgid "Reset"
 msgstr "איפוס"
@@ -375,8 +367,12 @@ msgstr "השינוי נעשה. האם אתה רוצה לאתחל את שירות
 
 #: drakedm:74
 #, c-format
-msgid "You are going to close all running programs and lose your current session. Are you really sure that you want to restart the dm service?"
-msgstr "כל התוכניות הרצות עומדות להסגר וההפעלה הנוכחית תאבד. האם השתכנעת שברצונך להתחל את שירות מנהל שולחן העבודה?"
+msgid ""
+"You are going to close all running programs and lose your current session. "
+"Are you really sure that you want to restart the dm service?"
+msgstr ""
+"כל התוכניות הרצות עומדות להסגר וההפעלה הנוכחית תאבד. האם השתכנעת שברצונך "
+"להתחל את שירות מנהל שולחן העבודה?"
 
 #: drakfont:187
 #, c-format
@@ -398,14 +394,8 @@ msgstr "לא נמצאו גופנים"
 msgid "parse all fonts"
 msgstr "נתח את כל הגופנים"
 
-#: drakfont:222
-#: drakfont:263
-#: drakfont:332
-#: drakfont:373
-#: drakfont:380
-#: drakfont:406
-#: drakfont:424
-#: drakfont:438
+#: drakfont:222 drakfont:263 drakfont:332 drakfont:373 drakfont:380
+#: drakfont:406 drakfont:424 drakfont:438
 #, c-format
 msgid "done"
 msgstr "סיום"
@@ -455,8 +445,7 @@ msgstr "עליך להמתין להשלמת פעולת ttmkfdir..."
 msgid "True Type install done"
 msgstr "התקנה של TrueType הסתיימה"
 
-#: drakfont:348
-#: drakfont:363
+#: drakfont:348 drakfont:363
 #, c-format
 msgid "type1inst building"
 msgstr "בניית type1inst "
@@ -471,14 +460,12 @@ msgstr "הפנית Ghostscript"
 msgid "Suppress Temporary Files"
 msgstr "ביטול קבצים זמניים"
 
-#: drakfont:376
-#: drakfont:434
+#: drakfont:376 drakfont:434
 #, c-format
 msgid "Restart XFS"
 msgstr "מפעיל מחדש את XFS"
 
-#: drakfont:422
-#: drakfont:432
+#: drakfont:422 drakfont:432
 #, c-format
 msgid "Suppress Fonts Files"
 msgstr "ביטול קבצי גופנים"
@@ -486,13 +473,17 @@ msgstr "ביטול קבצי גופנים"
 #: drakfont:442
 #, c-format
 msgid ""
-"Before installing any fonts, be sure that you have the right to use and install them on your system.\n"
+"Before installing any fonts, be sure that you have the right to use and "
+"install them on your system.\n"
 "\n"
-"You can install the fonts the normal way. In rare cases, bogus fonts may hang up your X Server."
+"You can install the fonts the normal way. In rare cases, bogus fonts may "
+"hang up your X Server."
 msgstr ""
-"לפני התקנת גופנים, עלייך לוודא שבאפשרותך להשתמש ולהתקין אותם על המערכת בהתאם לתנאי הרישוי שלהם.\n"
+"לפני התקנת גופנים, עלייך לוודא שבאפשרותך להשתמש ולהתקין אותם על המערכת בהתאם "
+"לתנאי הרישוי שלהם.\n"
 "\n"
-"באפשרותך להתקין את הגופנים בדרך הרגילה. במקרים נדירים גופנים עם בעיות עלולים לגלום לבעיות בממשק הגרפי."
+"באפשרותך להתקין את הגופנים בדרך הרגילה. במקרים נדירים גופנים עם בעיות עלולים "
+"לגלום לבעיות בממשק הגרפי."
 
 #: drakfont:482
 #, c-format
@@ -504,8 +495,7 @@ msgstr "התקנת גופנים"
 msgid "DrakFont"
 msgstr "DrakFont"
 
-#: drakfont:494
-#: drakfont:646
+#: drakfont:494 drakfont:646
 #, c-format
 msgid "Font List"
 msgstr "רשימת גופנים"
@@ -520,8 +510,7 @@ msgstr "ייבוא גופני ווינדוס"
 msgid "About"
 msgstr "אודות"
 
-#: drakfont:505
-#: drakfont:725
+#: drakfont:505 drakfont:725
 #, c-format
 msgid "Uninstall"
 msgstr "ביטול התקנה"
@@ -546,16 +535,14 @@ msgstr "זכויות היוצרים (C) 2001-2006 שייכות למנדריבה"
 msgid "Font installer."
 msgstr "מתקין גופנים"
 
-#: drakfont:530
-#: harddrake2:236
+#: drakfont:530 harddrake2:236
 #, c-format
 msgid "Mandriva Linux"
 msgstr "מנדריבה לינוקס"
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:537
-#: harddrake2:241
+#: drakfont:537 harddrake2:241
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr "Dotan Kamber <kamberd@yahoo.com>\n"
@@ -625,14 +612,12 @@ msgstr "בטל בחירת הכל"
 msgid "Selected All"
 msgstr "בחר את הכל"
 
-#: drakfont:750
-#: drakfont:769
+#: drakfont:750 drakfont:769
 #, c-format
 msgid "Importing fonts"
 msgstr "מייבא גופנים"
 
-#: drakfont:754
-#: drakfont:774
+#: drakfont:754 drakfont:774
 #, c-format
 msgid "Initial tests"
 msgstr "בדיקות ראשוניות"
@@ -667,7 +652,8 @@ msgstr "אחרי ההסרה"
 msgid ""
 " drakhelp 0.1\n"
 "Copyright (C) %s Mandriva.\n"
-"This is free software and may be redistributed under the terms of the GNU GPL.\n"
+"This is free software and may be redistributed under the terms of the GNU "
+"GPL.\n"
 "\n"
 "Usage: \n"
 msgstr ""
@@ -684,13 +670,18 @@ msgstr " --help                - הצגת עזרה זו     \n"
 
 #: drakhelp:23
 #, c-format
-msgid " --id <id_label>       - load the html help page which refers to id_label\n"
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr " --id <id_label>       - טעינת דף html לעזרה הנוגעת ל- id_label\n"
 
 #: drakhelp:24
 #, c-format
-msgid " --doc <link>          - link to another web page ( for WM welcome frontend)\n"
-msgstr " --doc <link>          - קישור לדף רשת נוסף ( עבור מנשק קבלת הפנים של מנהל החלונות)\n"
+msgid ""
+" --doc <link>          - link to another web page ( for WM welcome "
+"frontend)\n"
+msgstr ""
+" --doc <link>          - קישור לדף רשת נוסף ( עבור מנשק קבלת הפנים של מנהל "
+"החלונות)\n"
 
 #: drakhelp:52
 #, c-format
@@ -727,26 +718,22 @@ msgstr "הרשאות אבטחה"
 msgid "Editable"
 msgstr "ניתן לעריכה"
 
-#: drakperm:49
-#: drakperm:322
+#: drakperm:49 drakperm:322
 #, c-format
 msgid "Path"
 msgstr "נתיב"
 
-#: drakperm:49
-#: drakperm:250
+#: drakperm:49 drakperm:250
 #, c-format
 msgid "User"
 msgstr "משתמש"
 
-#: drakperm:49
-#: drakperm:250
+#: drakperm:49 drakperm:250
 #, c-format
 msgid "Group"
 msgstr "קבוצה"
 
-#: drakperm:49
-#: drakperm:334
+#: drakperm:49 drakperm:334
 #, c-format
 msgid "Permissions"
 msgstr "הרשאות"
@@ -756,9 +743,7 @@ msgstr "הרשאות"
 msgid "Add a new rule"
 msgstr "הוספת חוק חדש"
 
-#: drakperm:66
-#: drakperm:101
-#: drakperm:126
+#: drakperm:66 drakperm:101 drakperm:126
 #, c-format
 msgid "Edit current rule"
 msgstr "עריכת החוק הנוכחי"
@@ -766,7 +751,8 @@ msgstr "עריכת החוק הנוכחי"
 #: drakperm:108
 #, c-format
 msgid ""
-"Here you can see files to use in order to fix permissions, owners, and groups via msec.\n"
+"Here you can see files to use in order to fix permissions, owners, and "
+"groups via msec.\n"
 "You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
 "כאן ביכולתך לראות קבצים בהם יש להשתמש בכדי\n"
@@ -818,10 +804,7 @@ msgstr "הוספה של חוק חדש בסוף"
 msgid "Delete selected rule"
 msgstr "למחוק את הכלל הנבחר"
 
-#: drakperm:126
-#: drakups:300
-#: drakups:362
-#: drakups:382
+#: drakperm:126 drakups:300 drakups:362 drakups:382
 #, c-format
 msgid "Edit"
 msgstr "עריכה"
@@ -996,22 +979,31 @@ msgid ""
 "Here, you can setup the security level and administrator of your machine.\n"
 "\n"
 "\n"
-"The '<span weight=\"bold\">Security Administrator</span>' is the one who will receive security alerts if the\n"
-"'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a username or an email.\n"
+"The '<span weight=\"bold\">Security Administrator</span>' is the one who "
+"will receive security alerts if the\n"
+"'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
+"username or an email.\n"
 "\n"
 "\n"
-"The '<span weight=\"bold\">Security Level</span>' menu allows you to select one of the six preconfigured security levels\n"
-"provided with msec. These levels range from '<span weight=\"bold\">poor</span>' security and ease of use, to\n"
-"'<span weight=\"bold\">paranoid</span>' config, suitable for very sensitive server applications:\n"
+"The '<span weight=\"bold\">Security Level</span>' menu allows you to select "
+"one of the six preconfigured security levels\n"
+"provided with msec. These levels range from '<span weight=\"bold\">poor</"
+"span>' security and ease of use, to\n"
+"'<span weight=\"bold\">paranoid</span>' config, suitable for very sensitive "
+"server applications:\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but very\n"
-"easy to use security level. It should only be used for machines not connected to\n"
+"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+"very\n"
+"easy to use security level. It should only be used for machines not "
+"connected to\n"
 "any network and that are not accessible to everybody.\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">Standard</span>: This is the standard security\n"
-"recommended for a computer that will be used to connect to the Internet as a\n"
+"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+"security\n"
+"recommended for a computer that will be used to connect to the Internet as "
+"a\n"
 "client.\n"
 "\n"
 "\n"
@@ -1019,24 +1011,32 @@ msgid ""
 "restrictions, and more automatic checks are run every night.\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">Higher</span>: The security is now high enough\n"
-"to use the system as a server which can accept connections from many clients. If\n"
-"your machine is only a client on the Internet, you should choose a lower level.\n"
+"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+"enough\n"
+"to use the system as a server which can accept connections from many "
+"clients. If\n"
+"your machine is only a client on the Internet, you should choose a lower "
+"level.\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the previous\n"
+"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+"previous\n"
 "level, but the system is entirely closed and security features are at their\n"
 "maximum"
 msgstr ""
 "כאן באפשרותך לקבוע את רמת ומנהל האבטחה במערכת שלך.\n"
 "\n"
 "\n"
-"<span weight=\"bold\">מנהל האבטחה</span> הוא זה שיקבל אתרעות אבטחה אם האפשרות\n"
-"'<span weight=\"bold\">אתרעות אבטחה</span>'נבחרה. הערך צריך להיות שם משתמש או דוא\"ל.\n"
+"<span weight=\"bold\">מנהל האבטחה</span> הוא זה שיקבל אתרעות אבטחה אם "
+"האפשרות\n"
+"'<span weight=\"bold\">אתרעות אבטחה</span>'נבחרה. הערך צריך להיות שם משתמש "
+"או דוא\"ל.\n"
 "\n"
 "\n"
-"תפריט <span weight=\"bold\">רמת האבטחה</span>'מאפשר לבחור אחת משש רמות אבטחה מוגדרות מראש המסופקות עם msec.\n"
-"רמות אלו נעות בין רמה<span weight=\"bold\">נמוכה</span>'וקלות שימוש לבין רמה\n"
+"תפריט <span weight=\"bold\">רמת האבטחה</span>'מאפשר לבחור אחת משש רמות אבטחה "
+"מוגדרות מראש המסופקות עם msec.\n"
+"רמות אלו נעות בין רמה<span weight=\"bold\">נמוכה</span>'וקלות שימוש לבין "
+"רמה\n"
 "'<span weight=\"bold\">פרנואידית</span>'המתאימה ליישומי שרת רגישים:\n"
 "\n"
 "\n"
@@ -1061,8 +1061,7 @@ msgstr ""
 "<span foreground=\"royalblue3\">פרנואידית</span>: רמה זו זהה לקודמת\n"
 "אבל המערכת סגורה לחלוטין ואפשרויות האבטחה ברמתן המירבית."
 
-#: draksec:147
-#: harddrake2:211
+#: draksec:147 harddrake2:211
 #, c-format
 msgid ""
 "Description of the fields:\n"
@@ -1111,7 +1110,137 @@ msgstr "אפשרויות מערכת"
 msgid "Periodic Checks"
 msgstr "בדיקות תקופתיות"
 
-#: draksec:291
+#: draksec:283
+#, c-format
+msgid "Root password"
+msgstr ""
+
+#: draksec:284
+#, c-format
+msgid "User password"
+msgstr ""
+
+#: draksec:314 draksec:368
+#, fuzzy, c-format
+msgid "Software management"
+msgstr "מנהל מקורות תוכנה"
+
+#: draksec:315
+#, fuzzy, c-format
+msgid "Mandriva Update"
+msgstr "חנות מנדריבה"
+
+#: draksec:316
+#, fuzzy, c-format
+msgid "Software Media Manager"
+msgstr "מנהל מקורות תוכנה"
+
+#: draksec:317
+#, c-format
+msgid "Configure 3D Desktop effects"
+msgstr ""
+
+#: draksec:318
+#, fuzzy, c-format
+msgid "Graphical server Configuration"
+msgstr "תצורת התראות דוא\"ל"
+
+#: draksec:319
+#, fuzzy, c-format
+msgid "Mouse Configuration"
+msgstr "הגדרה ידנית"
+
+#: draksec:320
+#, fuzzy, c-format
+msgid "Keyboard Configuration"
+msgstr "הגדרת חומרה"
+
+#: draksec:321
+#, fuzzy, c-format
+msgid "UPS Configuration"
+msgstr "הגדרת מנהל התקן UPS"
+
+#: draksec:322
+#, fuzzy, c-format
+msgid "Network Configuration"
+msgstr "הגדרת התראות:"
+
+#: draksec:323
+#, c-format
+msgid "Hosts definitions"
+msgstr ""
+
+#: draksec:324
+#, fuzzy, c-format
+msgid "Network Center"
+msgstr "יציאה לרשת של המדפסת"
+
+#: draksec:325
+#, c-format
+msgid "VPN"
+msgstr ""
+
+#: draksec:326
+#, fuzzy, c-format
+msgid "Proxy Configuration"
+msgstr "הגדרת התראות:"
+
+#: draksec:327
+#, fuzzy, c-format
+msgid "Connection Sharing"
+msgstr "חיבור"
+
+#: draksec:329
+#, fuzzy, c-format
+msgid "Backups"
+msgstr "ערוץ"
+
+#: draksec:331 logdrake:52
+#, c-format
+msgid "Logs"
+msgstr "רישומים"
+
+#: draksec:333
+#, fuzzy, c-format
+msgid "Users"
+msgstr "משתמש"
+
+#: draksec:335
+#, fuzzy, c-format
+msgid "Boot Configuratoin"
+msgstr "הגדרת התראות:"
+
+#: draksec:353
+#, c-format
+msgid "Ask for user password"
+msgstr ""
+
+#: draksec:354
+#, c-format
+msgid "Ask for root password"
+msgstr ""
+
+#: draksec:355
+#, c-format
+msgid "Do not ask for any password"
+msgstr ""
+
+#: draksec:369
+#, fuzzy, c-format
+msgid "Hardware"
+msgstr "Harddrake"
+
+#: draksec:370
+#, fuzzy, c-format
+msgid "Network"
+msgstr "אפשרויות רשת"
+
+#: draksec:372
+#, c-format
+msgid "Boot"
+msgstr ""
+
+#: draksec:396
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "נא להמתין, מגדיר תצורת אבטחה..."
@@ -1130,7 +1259,8 @@ msgstr "לא זוהה כרטיס קול!"
 #: draksound:50
 #, c-format
 msgid ""
-"No Sound Card has been detected on your machine. Please verify that a Linux-supported Sound Card is correctly plugged in.\n"
+"No Sound Card has been detected on your machine. Please verify that a Linux-"
+"supported Sound Card is correctly plugged in.\n"
 "\n"
 "\n"
 "You can visit our hardware database at:\n"
@@ -1138,7 +1268,8 @@ msgid ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 msgstr ""
-"לא זוהה כרטיס קול במערכת שלך. נא לוודא שכרטיס קול תואם Linux נמצא במערכת ומוכנס באופן נכון. \n"
+"לא זוהה כרטיס קול במערכת שלך. נא לוודא שכרטיס קול תואם Linux נמצא במערכת "
+"ומוכנס באופן נכון. \n"
 "\n"
 "אתה יכול לבקר ברשימת החומרה שלנו באתר: \n"
 "\n"
@@ -1150,12 +1281,14 @@ msgid ""
 "\n"
 "\n"
 "\n"
-"Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console."
+"Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
+"the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console."
 msgstr ""
 "\n"
 "\n"
 "\n"
-"הערה: אם ברשותך כרטיס קול ISA PnP, עליך להשתמש בתכנית alsaconf או sndconfig. פשוט הקלד \"sndconfig\" במסוף."
+"הערה: אם ברשותך כרטיס קול ISA PnP, עליך להשתמש בתכנית alsaconf או sndconfig. "
+"פשוט הקלד \"sndconfig\" במסוף."
 
 #: draksplash:32
 #, fuzzy, c-format
@@ -1255,8 +1388,7 @@ msgstr "סוג שיפוע"
 msgid "Choose text color"
 msgstr "בחירת צבע טקסט"
 
-#: draksplash:67
-#: draksplash:74
+#: draksplash:67 draksplash:74
 #, c-format
 msgid "Choose picture"
 msgstr "בחירת תמונה"
@@ -1367,27 +1499,25 @@ msgstr ""
 msgid ""
 "We're going to add an UPS device.\n"
 "\n"
-"Do you want to autodetect UPS devices connected to this machine or to manually select them?"
+"Do you want to autodetect UPS devices connected to this machine or to "
+"manually select them?"
 msgstr ""
 "אנו עומדים להוסיף התקן אל-פסק.\n"
 "\n"
-"האם ברצונך בזיהוי אוטומטי של התקני אל-פסק המחוברים למכונה זו או לבחור אותם ידנית?"
+"האם ברצונך בזיהוי אוטומטי של התקני אל-פסק המחוברים למכונה זו או לבחור אותם "
+"ידנית?"
 
 #: drakups:91
 #, c-format
 msgid "Autodetection"
 msgstr "זיהוי-אוטומטי"
 
-#: drakups:99
-#: harddrake2:367
+#: drakups:99 harddrake2:367
 #, c-format
 msgid "Detection in progress"
 msgstr "זיהוי בתהליך"
 
-#: drakups:118
-#: drakups:157
-#: logdrake:457
-#: logdrake:463
+#: drakups:118 drakups:157 logdrake:457 logdrake:463
 #, c-format
 msgid "Congratulations"
 msgstr "ברכותינו!"
@@ -1402,8 +1532,7 @@ msgstr "האשף הוסיף בהצלחה את התקני ה-UPS הבאים:"
 msgid "No new UPS devices was found"
 msgstr "לא נמצאו התקני UPS חדשים"
 
-#: drakups:126
-#: drakups:138
+#: drakups:126 drakups:138
 #, c-format
 msgid "UPS driver configuration"
 msgstr "הגדרת מנהל התקן UPS"
@@ -1462,24 +1591,18 @@ msgstr "אשף זה סיים בהצלחה את הגדרת התקן ה-UPS \"%s\"
 msgid "UPS devices"
 msgstr "התקני UPS"
 
-#: drakups:249
-#: drakups:268
-#: drakups:284
-#: harddrake2:85
-#: harddrake2:111
+#: drakups:249 drakups:268 drakups:284 harddrake2:85 harddrake2:111
 #: harddrake2:118
 #, c-format
 msgid "Name"
 msgstr "שם"
 
-#: drakups:249
-#: harddrake2:133
+#: drakups:249 harddrake2:133
 #, c-format
 msgid "Driver"
 msgstr "מנהל התקן"
 
-#: drakups:249
-#: harddrake2:52
+#: drakups:249 harddrake2:52
 #, c-format
 msgid "Port"
 msgstr "יציאה"
@@ -1514,8 +1637,7 @@ msgstr "חוקים"
 msgid "Action"
 msgstr "פעולה"
 
-#: drakups:297
-#: harddrake2:82
+#: drakups:297 harddrake2:82
 #, c-format
 msgid "Level"
 msgstr "שלב"
@@ -1530,8 +1652,7 @@ msgstr "שם ACL"
 msgid "UPS Management"
 msgstr "ניהול אל-פסק"
 
-#: drakups:333
-#: drakups:342
+#: drakups:333 drakups:342
 #, c-format
 msgid "DrakUPS"
 msgstr "DrakUPS"
@@ -1550,7 +1671,8 @@ msgstr "לא זוהה כרטיס טלוויזיה!"
 #: drakxtv:69
 #, c-format
 msgid ""
-"No TV Card has been detected on your machine. Please verify that a Linux-supported Video/TV Card is correctly plugged in.\n"
+"No TV Card has been detected on your machine. Please verify that a Linux-"
+"supported Video/TV Card is correctly plugged in.\n"
 "\n"
 "\n"
 "You can visit our hardware database at:\n"
@@ -1558,7 +1680,8 @@ msgid ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 msgstr ""
-"לא זוהה כרטיס טלויזיה במחשב זה. עליך לבדוק שכרטיס הטלויזיה מותקן ומתאים לשימוש במערכות גנו/לינוקס.\n"
+"לא זוהה כרטיס טלויזיה במחשב זה. עליך לבדוק שכרטיס הטלויזיה מותקן ומתאים "
+"לשימוש במערכות גנו/לינוקס.\n"
 "\n"
 "\n"
 "באפשרותך לבדוק את תאימות הכרטיס במסד הנתונים המקוון של מנדריבה לינוקס:\n"
@@ -1571,9 +1694,7 @@ msgstr ""
 msgid "Please, choose your keyboard layout."
 msgstr "עליך לבחור את פריסת המקלדת:"
 
-#: finish-install:111
-#: finish-install:129
-#: finish-install:141
+#: finish-install:111 finish-install:129 finish-install:141
 #, c-format
 msgid "Encrypted home partition"
 msgstr "מחיצת בית מוצפנת"
@@ -1603,27 +1724,29 @@ msgstr "התקנים חלופיים"
 msgid "the list of alternative drivers for this sound card"
 msgstr "הרשימה של התקנים אלטרנטיביים לכרטיס קול הזה"
 
-#: harddrake2:30
-#: harddrake2:120
+#: harddrake2:30 harddrake2:120
 #, c-format
 msgid "Bus"
 msgstr "ערוץ"
 
 #: harddrake2:31
 #, c-format
-msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgid ""
+"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr "זה הערוץ הפיזי שאליו ההתקן מחובר (כמו PCI,USB ועוד...)"
 
-#: harddrake2:33
-#: harddrake2:146
+#: harddrake2:33 harddrake2:146
 #, c-format
 msgid "Bus identification"
 msgstr "זיהוי ערוץ"
 
 #: harddrake2:34
 #, c-format
-msgid "- PCI and USB devices: this lists the vendor, device, subvendor and subdevice PCI/USB ids"
-msgstr "התקני PCI ו-USB: רשימה זו מכילה את היצרן, יצרן משנה וזיהוי תת התקני PCI/USB "
+msgid ""
+"- PCI and USB devices: this lists the vendor, device, subvendor and "
+"subdevice PCI/USB ids"
+msgstr ""
+"התקני PCI ו-USB: רשימה זו מכילה את היצרן, יצרן משנה וזיהוי תת התקני PCI/USB "
 
 #: harddrake2:36
 #, c-format
@@ -1732,8 +1855,7 @@ msgstr "סוג התקן"
 msgid "class of hardware device"
 msgstr "סוג התקן החומרה"
 
-#: harddrake2:51
-#: harddrake2:83
+#: harddrake2:51 harddrake2:83
 #, c-format
 msgid "Model"
 msgstr "דגם"
@@ -1758,8 +1880,7 @@ msgstr "מחיצות ראשיות"
 msgid "the number of the primary partitions"
 msgstr "מספר המחיצות הראשיות"
 
-#: harddrake2:54
-#: harddrake2:88
+#: harddrake2:54 harddrake2:88
 #, c-format
 msgid "Vendor"
 msgstr "יצרן"
@@ -1866,8 +1987,13 @@ msgstr "Bogomips"
 
 #: harddrake2:66
 #, c-format
-msgid "the GNU/Linux kernel needs to run a calculation loop at boot time to initialize a timer counter.  Its result is stored as bogomips as a way to \"benchmark\" the cpu."
-msgstr "גרעין GNU/Linux צריכה להפעיל לולאה חישובית בזמן האתחול בכדי לזהות ספירת שעון. התוצאה מאוחסנת בתור bogomips כדרך ל\"אבחון\" המעבד"
+msgid ""
+"the GNU/Linux kernel needs to run a calculation loop at boot time to "
+"initialize a timer counter.  Its result is stored as bogomips as a way to "
+"\"benchmark\" the cpu."
+msgstr ""
+"גרעין GNU/Linux צריכה להפעיל לולאה חישובית בזמן האתחול בכדי לזהות ספירת "
+"שעון. התוצאה מאוחסנת בתור bogomips כדרך ל\"אבחון\" המעבד"
 
 #: harddrake2:67
 #, c-format
@@ -1917,8 +2043,13 @@ msgstr "תדירות (MHz)"
 
 #: harddrake2:73
 #, c-format
-msgid "the CPU frequency in MHz (Megahertz which in first approximation may be coarsely assimilated to number of instructions the cpu is able to execute per second)"
-msgstr "תדר המעבד במה\"ץ (מגה הרץ שבקירוב ראשון ניתן לדמות למספר הפעולות שהמעבד יכול לבצע בשניה)"
+msgid ""
+"the CPU frequency in MHz (Megahertz which in first approximation may be "
+"coarsely assimilated to number of instructions the cpu is able to execute "
+"per second)"
+msgstr ""
+"תדר המעבד במה\"ץ (מגה הרץ שבקירוב ראשון ניתן לדמות למספר הפעולות שהמעבד יכול "
+"לבצע בשניה)"
 
 #: harddrake2:74
 #, c-format
@@ -1937,8 +2068,13 @@ msgstr "באג Fdiv"
 
 #: harddrake2:76
 #, c-format
-msgid "Early Intel Pentium chips manufactured have a bug in their floating point processor which did not achieve the required precision when performing a Floating point DIVision (FDIV)"
-msgstr "לחלק ממעבדי הפנטיום הראשונים היא באג בחשובים של נקודה צפה המעבדים לא חישבו בצורה נכונה חלק מהחישובים שתלוים בנקודה צפה Floating point DIVision (FDIV)"
+msgid ""
+"Early Intel Pentium chips manufactured have a bug in their floating point "
+"processor which did not achieve the required precision when performing a "
+"Floating point DIVision (FDIV)"
+msgstr ""
+"לחלק ממעבדי הפנטיום הראשונים היא באג בחשובים של נקודה צפה המעבדים לא חישבו "
+"בצורה נכונה חלק מהחישובים שתלוים בנקודה צפה Floating point DIVision (FDIV)"
 
 #: harddrake2:77
 #, c-format
@@ -1977,8 +2113,12 @@ msgstr "באג HALT"
 
 #: harddrake2:81
 #, c-format
-msgid "Some of the early i486DX-100 chips cannot reliably return to operating mode after the \"halt\" instruction is used"
-msgstr "חלק משבבי ה- i486DX-100 המוקדמים אינם יכולים לחזור לפעולה באופן אמין אחרי שימוש בפקודה \"halt\""
+msgid ""
+"Some of the early i486DX-100 chips cannot reliably return to operating mode "
+"after the \"halt\" instruction is used"
+msgstr ""
+"חלק משבבי ה- i486DX-100 המוקדמים אינם יכולים לחזור לפעולה באופן אמין אחרי "
+"שימוש בפקודה \"halt\""
 
 #: harddrake2:82
 #, c-format
@@ -2037,8 +2177,14 @@ msgstr "הגנת כתיבה"
 
 #: harddrake2:89
 #, c-format
-msgid "the WP flag in the CR0 register of the cpu enforce write protection at the memory page level, thus enabling the processor to prevent unchecked kernel accesses to user memory (aka this is a bug guard)"
-msgstr "דגלון ה-WP באוגר ה-CR0 של המעבד כופה הגנת כתיבה ברמת דף הזכרון ועל כן מאפשר למעבד למנוע גישות גלעין שלא נבדקו אל זכרון המשתמש (במילים פשוטות - זו הגנה בפני שגיאות)"
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write protection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
+"דגלון ה-WP באוגר ה-CR0 של המעבד כופה הגנת כתיבה ברמת דף הזכרון ועל כן מאפשר "
+"למעבד למנוע גישות גלעין שלא נבדקו אל זכרון המשתמש (במילים פשוטות - זו הגנה "
+"בפני שגיאות)"
 
 #: harddrake2:93
 #, c-format
@@ -2078,10 +2224,12 @@ msgstr "מספר יחידה לוגית "
 #: harddrake2:99
 #, c-format
 msgid ""
-"the SCSI target number (LUN). SCSI devices connected to a host are uniquely identified by a\n"
+"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
+"identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
-"מספר יעד ה-SCSI (ה-LUN). התקני SCSI המחוברים למארח מזוהים באופן פרטני על ידי מספר ערוץ,\n"
+"מספר יעד ה-SCSI (ה-LUN). התקני SCSI המחוברים למארח מזוהים באופן פרטני על ידי "
+"מספר ערוץ,\n"
 "מזהה מטרה ומספר יחידה לוגית (LUN)."
 
 #. -PO: here, "size" is the size of the ram chip (eg: 128Mo, 256Mo, ...)
@@ -2137,7 +2285,8 @@ msgstr "קובץ התקן"
 
 #: harddrake2:115
 #, c-format
-msgid "the device file used to communicate with the kernel driver for the mouse"
+msgid ""
+"the device file used to communicate with the kernel driver for the mouse"
 msgstr "קובץ ההתקן המשמש לתקשורת בין העכבר למנהל ההתקן בגרעין"
 
 #: harddrake2:116
@@ -2185,17 +2334,12 @@ msgstr "פרוטוקול עכבר המשמש את X11"
 msgid "the protocol that the graphical desktop use with the mouse"
 msgstr "הפרוטוקול המשמש את שולחן העבודה לתקשורת עם העכבר"
 
-#: harddrake2:128
-#: harddrake2:137
-#: harddrake2:144
-#: harddrake2:152
-#: harddrake2:332
+#: harddrake2:128 harddrake2:137 harddrake2:144 harddrake2:152 harddrake2:332
 #, c-format
 msgid "Identification"
 msgstr "זיהוי"
 
-#: harddrake2:129
-#: harddrake2:145
+#: harddrake2:129 harddrake2:145
 #, c-format
 msgid "Connection"
 msgstr "חיבור"
@@ -2231,15 +2375,12 @@ msgid "Features"
 msgstr "תכונות"
 
 #. -PO: please keep all "/" characters !!!
-#: harddrake2:176
-#: logdrake:78
+#: harddrake2:176 logdrake:78
 #, c-format
 msgid "/_Options"
 msgstr "/_אפשרויות"
 
-#: harddrake2:177
-#: harddrake2:206
-#: logdrake:80
+#: harddrake2:177 harddrake2:206 logdrake:80
 #, c-format
 msgid "/_Help"
 msgstr "/_עזרה"
@@ -2291,8 +2432,12 @@ msgstr "יש לבחור התקן!"
 
 #: harddrake2:219
 #, c-format
-msgid "Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"
-msgstr "ברגע שהתקן נבחר,ניתן לראות את המידע של ההתקן בשדות התצוגה במסגרת הימנית (\"מידע\")"
+msgid ""
+"Once you've selected a device, you'll be able to see the device information "
+"in fields displayed on the right frame (\"Information\")"
+msgstr ""
+"ברגע שהתקן נבחר,ניתן לראות את המידע של ההתקן בשדות התצוגה במסגרת הימנית "
+"(\"מידע\")"
 
 #: harddrake2:225
 #, c-format
@@ -2324,8 +2469,7 @@ msgstr "זהו HardDrake, כלי הגדרת חומרה  %s."
 msgid "Detected hardware"
 msgstr "חומרה שזוהתה"
 
-#: harddrake2:270
-#: scannerdrake:286
+#: harddrake2:270 scannerdrake:286
 #, c-format
 msgid "Information"
 msgstr "מידע"
@@ -2342,7 +2486,8 @@ msgstr "הרצת כלי הגדרה"
 
 #: harddrake2:299
 #, c-format
-msgid "Click on a device in the left tree in order to display its information here."
+msgid ""
+"Click on a device in the left tree in order to display its information here."
 msgstr "עליך לבחור התקן בחלון הימני בכדי להציג את המידע עבורו בחלון זה."
 
 #: harddrake2:319
@@ -2400,11 +2545,6 @@ msgstr "השינוי הסתיים, אך כדי שיהיה בעל משמעות ע
 #, c-format
 msgid "Mandriva Linux Tools Logs"
 msgstr "כלי רישום של מנדריבה לינוקס"
-
-#: logdrake:52
-#, c-format
-msgid "Logs"
-msgstr "רישומים"
 
 #: logdrake:65
 #, c-format
@@ -2529,8 +2669,7 @@ msgstr "לוח שנה"
 msgid "Content of the file"
 msgstr "תכולת הקובץ"
 
-#: logdrake:163
-#: logdrake:407
+#: logdrake:163 logdrake:407
 #, c-format
 msgid "Mail alert"
 msgstr "התראות דוא\"ל"
@@ -2638,7 +2777,9 @@ msgstr "הגדרת שרותים:"
 
 #: logdrake:422
 #, c-format
-msgid "You will receive an alert if one of the selected services is no longer running"
+msgid ""
+"You will receive an alert if one of the selected services is no longer "
+"running"
 msgstr "התראה תשלח באם אחד מהשרותים האלו הפסיק לפעול"
 
 #: logdrake:429
@@ -2680,7 +2821,9 @@ msgstr "\"%s\" אינה כתובת דוא\"ל תקפה או משתמש מקומ�
 
 #: logdrake:450
 #, c-format
-msgid "\"%s\" is a local user, but you did not select a local smtp, so you must use a complete email address!"
+msgid ""
+"\"%s\" is a local user, but you did not select a local smtp, so you must use "
+"a complete email address!"
 msgstr ""
 "\"%s\" הוא משתמש במחשב המקומי, אבל לא הגדרת\n"
 "שרת SMTP מקומי כך שעליך להזין כתובת דוא\"ל מלאה!"
@@ -2718,28 +2861,27 @@ msgstr "פעולת אשף הגדרת הסורק הופסקה."
 
 #: scannerdrake:60
 #, c-format
-msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
-msgstr "לא יכול להתקין את החבליות הבסיסיות עבור תמיכה בסורק עם אשף הגדרת הסורק."
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
+msgstr ""
+"לא יכול להתקין את החבליות הבסיסיות עבור תמיכה בסורק עם אשף הגדרת הסורק."
 
 #: scannerdrake:61
 #, c-format
 msgid "Scannerdrake will not be started now."
 msgstr "אשף הגדרת הסורק לא יופעל כעת."
 
-#: scannerdrake:67
-#: scannerdrake:506
+#: scannerdrake:67 scannerdrake:506
 #, c-format
 msgid "Searching for configured scanners..."
 msgstr "מחפש סורקים מוגדרים..."
 
-#: scannerdrake:71
-#: scannerdrake:510
+#: scannerdrake:71 scannerdrake:510
 #, c-format
 msgid "Searching for new scanners..."
 msgstr "מחפש סורקים חדשים..."
 
-#: scannerdrake:79
-#: scannerdrake:532
+#: scannerdrake:79 scannerdrake:532
 #, c-format
 msgid "Re-generating list of configured scanners..."
 msgstr "יצירה מחדש של רשימת הסורקים המוגדרים ..."
@@ -2779,8 +2921,7 @@ msgstr "נא לבחור דגם סורק (זוהה דגם: %s)"
 msgid "Select a scanner model (Port: %s)"
 msgstr "נא לבחור דגם סורק (שער: %s)"
 
-#: scannerdrake:136
-#: scannerdrake:139
+#: scannerdrake:136 scannerdrake:139
 #, c-format
 msgid " (UNSUPPORTED)"
 msgstr " (לא נתמך)"
@@ -2790,68 +2931,60 @@ msgstr " (לא נתמך)"
 msgid "The %s is not supported under Linux."
 msgstr "ה-%s לא נתמך תחת לינוקס."
 
-#: scannerdrake:169
-#: scannerdrake:183
+#: scannerdrake:169 scannerdrake:183
 #, c-format
 msgid "Do not install firmware file"
 msgstr "אל תתקין קובץ קושחה"
 
-#: scannerdrake:172
-#: scannerdrake:222
+#: scannerdrake:172 scannerdrake:222
 #, c-format
 msgid "Scanner Firmware"
 msgstr "קושחת סורק"
 
-#: scannerdrake:173
-#: scannerdrake:225
+#: scannerdrake:173 scannerdrake:225
 #, c-format
-msgid "It is possible that your %s needs its firmware to be uploaded everytime when it is turned on."
+msgid ""
+"It is possible that your %s needs its firmware to be uploaded everytime when "
+"it is turned on."
 msgstr "יתכן וה%s שלך דורש את טעינת הקושחה בכל הפעלה."
 
-#: scannerdrake:174
-#: scannerdrake:226
+#: scannerdrake:174 scannerdrake:226
 #, c-format
 msgid "If this is the case, you can make this be done automatically."
 msgstr "במקרה זה, יש באפשרותך להגדיר פעולה זו לביצוע אוטומטי."
 
-#: scannerdrake:175
-#: scannerdrake:229
+#: scannerdrake:175 scannerdrake:229
 #, c-format
-msgid "To do so, you need to supply the firmware file for your scanner so that it can be installed."
+msgid ""
+"To do so, you need to supply the firmware file for your scanner so that it "
+"can be installed."
 msgstr "לשם כך, עליך לספק את קובץ הקושחה לסורק בכדי שהוא יותקן."
 
-#: scannerdrake:176
-#: scannerdrake:230
+#: scannerdrake:176 scannerdrake:230
 #, c-format
-msgid "You find the file on the CD or floppy coming with the scanner, on the manufacturer's home page, or on your Windows partition."
-msgstr "הקובץ אמור להמצא בתקליטון או התקליטור שצורף לקופסה בה נרכש הסורק, באתר הבית של המפתח או במחיצת חלונות."
+msgid ""
+"You find the file on the CD or floppy coming with the scanner, on the "
+"manufacturer's home page, or on your Windows partition."
+msgstr ""
+"הקובץ אמור להמצא בתקליטון או התקליטור שצורף לקופסה בה נרכש הסורק, באתר הבית "
+"של המפתח או במחיצת חלונות."
 
-#: scannerdrake:178
-#: scannerdrake:237
+#: scannerdrake:178 scannerdrake:237
 #, c-format
 msgid "Install firmware file from"
 msgstr "התקנת קובץ קושחה מ"
 
-#: scannerdrake:180
-#: scannerdrake:188
-#: scannerdrake:239
-#: scannerdrake:246
+#: scannerdrake:180 scannerdrake:188 scannerdrake:239 scannerdrake:246
 #, c-format
 msgid "CD-ROM"
 msgstr "תקליטור"
 
-#: scannerdrake:181
-#: scannerdrake:190
-#: scannerdrake:240
-#: scannerdrake:248
+#: scannerdrake:181 scannerdrake:190 scannerdrake:240 scannerdrake:248
 #, c-format
 msgid "Floppy Disk"
 msgstr "תקליטון"
 
-#: scannerdrake:182
-#: scannerdrake:192
-#: scannerdrake:241
-#: scannerdrake:250
+#: scannerdrake:182 scannerdrake:192 scannerdrake:241 scannerdrake:250
 #, c-format
 msgid "Other place"
 msgstr "מקום אחר"
@@ -2861,26 +2994,34 @@ msgstr "מקום אחר"
 msgid "Select firmware file"
 msgstr "יש לבחור קובץ קושחה"
 
-#: scannerdrake:201
-#: scannerdrake:260
+#: scannerdrake:201 scannerdrake:260
 #, c-format
 msgid "The firmware file %s does not exist or is unreadable!"
 msgstr "קובץ הקושחה %s לא קיים או אינו קריא!"
 
 #: scannerdrake:224
 #, c-format
-msgid "It is possible that your scanners need their firmware to be uploaded everytime when they are turned on."
+msgid ""
+"It is possible that your scanners need their firmware to be uploaded "
+"everytime when they are turned on."
 msgstr "יתכן שיש צורך לטעון את הקושחה של הסורק שלך בכל הפעלה."
 
 #: scannerdrake:228
 #, c-format
-msgid "To do so, you need to supply the firmware files for your scanners so that it can be installed."
-msgstr "לצורך זה, עליך לספק את קובץ הקושחה עבור הסורק שלך בכדי שניתן יהיה להתקינו."
+msgid ""
+"To do so, you need to supply the firmware files for your scanners so that it "
+"can be installed."
+msgstr ""
+"לצורך זה, עליך לספק את קובץ הקושחה עבור הסורק שלך בכדי שניתן יהיה להתקינו."
 
 #: scannerdrake:231
 #, c-format
-msgid "If you have already installed your scanner's firmware you can update the firmware here by supplying the new firmware file."
-msgstr "אם כבר התקנת את קושחת הסורק שלך, יש באפשרותך לעדכן את הקושחה כעת אם ברשותך קובץ קושחה חדש."
+msgid ""
+"If you have already installed your scanner's firmware you can update the "
+"firmware here by supplying the new firmware file."
+msgstr ""
+"אם כבר התקנת את קושחת הסורק שלך, יש באפשרותך לעדכן את הקושחה כעת אם ברשותך "
+"קובץ קושחה חדש."
 
 #: scannerdrake:233
 #, c-format
@@ -2921,21 +3062,17 @@ msgstr ""
 msgid "Setting up kernel modules..."
 msgstr "מגדיר את מודולי הליבה..."
 
-#: scannerdrake:330
-#: scannerdrake:337
-#: scannerdrake:367
+#: scannerdrake:330 scannerdrake:337 scannerdrake:367
 #, c-format
 msgid "Auto-detect available ports"
 msgstr "זיהוי אוטומטית של יציאות זמינות"
 
-#: scannerdrake:331
-#: scannerdrake:377
+#: scannerdrake:331 scannerdrake:377
 #, fuzzy, c-format
 msgid "Device choice"
 msgstr "התקן נבחר"
 
-#: scannerdrake:332
-#: scannerdrake:378
+#: scannerdrake:332 scannerdrake:378
 #, c-format
 msgid "Please select the device where your %s is attached"
 msgstr "נא לבחור את ההתקן שאליו ה-%s שלך מחובר"
@@ -2945,8 +3082,7 @@ msgstr "נא לבחור את ההתקן שאליו ה-%s שלך מחובר"
 msgid "(Note: Parallel ports cannot be auto-detected)"
 msgstr "(הודעה: יציאות טוריות לא יכולות להיות מזוהות אוטומטית)"
 
-#: scannerdrake:335
-#: scannerdrake:380
+#: scannerdrake:335 scannerdrake:380
 #, c-format
 msgid "choose device"
 msgstr "יש לבחור התקן"
@@ -2956,8 +3092,7 @@ msgstr "יש לבחור התקן"
 msgid "Searching for scanners..."
 msgstr "מחפש סורקים חדשים ..."
 
-#: scannerdrake:405
-#: scannerdrake:412
+#: scannerdrake:405 scannerdrake:412
 #, c-format
 msgid "Attention!"
 msgstr "לתשומת לבך!"
@@ -2967,33 +3102,47 @@ msgstr "לתשומת לבך!"
 msgid ""
 "Your %s cannot be configured fully automatically.\n"
 "\n"
-"Manual adjustments are required. Please edit the configuration file /etc/sane.d/%s.conf. "
+"Manual adjustments are required. Please edit the configuration file /etc/"
+"sane.d/%s.conf. "
 msgstr ""
 "לא ניתן להגדיר את ה-%s שלך באופן אוטומטי לחלוטין.\n"
 "\n"
 "התאמות ידניות נדרשות. נא לערוך את קובץהתצורה /etc/sane.d/%s.conf. "
 
-#: scannerdrake:407
-#: scannerdrake:416
+#: scannerdrake:407 scannerdrake:416
 #, c-format
-msgid "More info in the driver's manual page. Run the command \"man sane-%s\" to read it."
-msgstr "מידע נוסף בדף ההסבר של התקן ההינע. יש להריץ את הפקודה \"man sane-%s\" כדי לקרוא אותו."
+msgid ""
+"More info in the driver's manual page. Run the command \"man sane-%s\" to "
+"read it."
+msgstr ""
+"מידע נוסף בדף ההסבר של התקן ההינע. יש להריץ את הפקודה \"man sane-%s\" כדי "
+"לקרוא אותו."
 
-#: scannerdrake:409
-#: scannerdrake:418
+#: scannerdrake:409 scannerdrake:418
 #, c-format
-msgid "After that you may scan documents using \"XSane\" or \"Kooka\" from Multimedia/Graphics in the applications menu."
-msgstr "עכשיו באפשרותך לסרוק מסמכים בעזרת \"XSane\" או \"Kooka\" מהאפשרות מולטימדיה/גרפיקה בתפריט היישומים."
+msgid ""
+"After that you may scan documents using \"XSane\" or \"Kooka\" from "
+"Multimedia/Graphics in the applications menu."
+msgstr ""
+"עכשיו באפשרותך לסרוק מסמכים בעזרת \"XSane\" או \"Kooka\" מהאפשרות מולטימדיה/"
+"גרפיקה בתפריט היישומים."
 
 #: scannerdrake:413
 #, c-format
-msgid "Your %s has been configured, but it is possible that additional manual adjustments are needed to get it to work. "
-msgstr "ה-%s שלך הוגדר אבל יתכן שידרשו התאמות ידניות נוספות כדי לגרום לו לעבוד."
+msgid ""
+"Your %s has been configured, but it is possible that additional manual "
+"adjustments are needed to get it to work. "
+msgstr ""
+"ה-%s שלך הוגדר אבל יתכן שידרשו התאמות ידניות נוספות כדי לגרום לו לעבוד."
 
 #: scannerdrake:414
 #, c-format
-msgid "If it does not appear in the list of configured scanners in the main window of Scannerdrake or if it does not work correctly, "
-msgstr "אם הוא אינו מופיע ברשימת הסורקים המוגדרים בחלון של Scannerdrake או אם אינו עובד כשורה,"
+msgid ""
+"If it does not appear in the list of configured scanners in the main window "
+"of Scannerdrake or if it does not work correctly, "
+msgstr ""
+"אם הוא אינו מופיע ברשימת הסורקים המוגדרים בחלון של Scannerdrake או אם אינו "
+"עובד כשורה,"
 
 #: scannerdrake:415
 #, c-format
@@ -3009,10 +3158,12 @@ msgstr "ברכותינו!"
 #, c-format
 msgid ""
 "Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" or \"Kooka\" from Multimedia/Graphics in the applications menu."
+"You may now scan documents using \"XSane\" or \"Kooka\" from Multimedia/"
+"Graphics in the applications menu."
 msgstr ""
 "ה %s שלך הוגדר.\n"
-"עכשיו באפשרותך לסרוק מסמכים בעזרת \"XSane\" או \"Kooka\" מכניסת מולטימדיה/גרפיקה בתפריט היישומים."
+"עכשיו באפשרותך לסרוק מסמכים בעזרת \"XSane\" או \"Kooka\" מכניסת מולטימדיה/"
+"גרפיקה בתפריט היישומים."
 
 #: scannerdrake:446
 #, c-format
@@ -3040,8 +3191,7 @@ msgstr ""
 "%s\n"
 "זמין במערכת שלך.\n"
 
-#: scannerdrake:450
-#: scannerdrake:453
+#: scannerdrake:450 scannerdrake:453
 #, c-format
 msgid "There are no scanners found which are available on your system.\n"
 msgstr "לא נמצאו סורקים זמינים במערכת שלך.\n"
@@ -3071,14 +3221,12 @@ msgstr "התקנת/עדכון קבצי קושחה"
 msgid "Scanner sharing"
 msgstr "שיתוף סורק"
 
-#: scannerdrake:545
-#: scannerdrake:710
+#: scannerdrake:545 scannerdrake:710
 #, c-format
 msgid "All remote machines"
 msgstr "כל המכונות המרוחקות"
 
-#: scannerdrake:557
-#: scannerdrake:860
+#: scannerdrake:557 scannerdrake:860
 #, c-format
 msgid "This machine"
 msgstr "מערכת זו"
@@ -3090,12 +3238,18 @@ msgstr "שיתוף סורק"
 
 #: scannerdrake:597
 #, c-format
-msgid "Here you can choose whether the scanners connected to this machine should be accessible by remote machines and by which remote machines."
-msgstr "כאן באפשרותך לבחור האם הסורקים המחוברים למחשב זה יהיו זמינים למחשבים מרוחקים, וכמו כן ע\"י אילו מחשבים מרוחקים."
+msgid ""
+"Here you can choose whether the scanners connected to this machine should be "
+"accessible by remote machines and by which remote machines."
+msgstr ""
+"כאן באפשרותך לבחור האם הסורקים המחוברים למחשב זה יהיו זמינים למחשבים "
+"מרוחקים, וכמו כן ע\"י אילו מחשבים מרוחקים."
 
 #: scannerdrake:598
 #, c-format
-msgid "You can also decide here whether scanners on remote machines should be made available on this machine."
+msgid ""
+"You can also decide here whether scanners on remote machines should be made "
+"available on this machine."
 msgstr "באפשרותך גם להחליט אם סורקים על מחשבים מרוחקים יהיו זמינים למחשב זה."
 
 #: scannerdrake:601
@@ -3108,8 +3262,7 @@ msgstr "הסורקים על מחשב זה זמינים למחשבים אחרים
 msgid "Scanner sharing to hosts: "
 msgstr "סוגר את הרשת"
 
-#: scannerdrake:608
-#: scannerdrake:625
+#: scannerdrake:608 scannerdrake:625
 #, c-format
 msgid "No remote machines"
 msgstr "אין מכונות מרוחקות"
@@ -3124,62 +3277,50 @@ msgstr "שימוש בסורקים תחת מחשבים מרוחקים"
 msgid "Use the scanners on hosts: "
 msgstr "שימוש בסורקים אלה תחת המארחים:"
 
-#: scannerdrake:647
-#: scannerdrake:719
-#: scannerdrake:869
+#: scannerdrake:647 scannerdrake:719 scannerdrake:869
 #, c-format
 msgid "Sharing of local scanners"
 msgstr "שיתוף של סורקים מקומיים"
 
 #: scannerdrake:648
 #, c-format
-msgid "These are the machines on which the locally connected scanner(s) should be available:"
+msgid ""
+"These are the machines on which the locally connected scanner(s) should be "
+"available:"
 msgstr "אלה המחשבים שבהם הסורקים שמחוברים מקומית אמורים להיות זמינים:"
 
-#: scannerdrake:659
-#: scannerdrake:809
+#: scannerdrake:659 scannerdrake:809
 #, c-format
 msgid "Add host"
 msgstr "הוספת מארח"
 
-#: scannerdrake:665
-#: scannerdrake:815
+#: scannerdrake:665 scannerdrake:815
 #, c-format
 msgid "Edit selected host"
 msgstr "ערוך מארח שנבחר"
 
-#: scannerdrake:674
-#: scannerdrake:824
+#: scannerdrake:674 scannerdrake:824
 #, c-format
 msgid "Remove selected host"
 msgstr "להסיר את המארח הנבחר"
 
-#: scannerdrake:698
-#: scannerdrake:706
-#: scannerdrake:711
-#: scannerdrake:757
-#: scannerdrake:848
-#: scannerdrake:856
-#: scannerdrake:861
-#: scannerdrake:907
+#: scannerdrake:698 scannerdrake:706 scannerdrake:711 scannerdrake:757
+#: scannerdrake:848 scannerdrake:856 scannerdrake:861 scannerdrake:907
 #, c-format
 msgid "Name/IP address of host:"
 msgstr "שם/כתובת IP של המארח:"
 
-#: scannerdrake:720
-#: scannerdrake:870
+#: scannerdrake:720 scannerdrake:870
 #, c-format
 msgid "Choose the host on which the local scanners should be made available:"
 msgstr "יש לבחור מארח שבו הסורקים המקומיים יהיו זמינים:"
 
-#: scannerdrake:731
-#: scannerdrake:881
+#: scannerdrake:731 scannerdrake:881
 #, c-format
 msgid "You must enter a host name or an IP address.\n"
 msgstr "חובה עליך להכניס שם מארח או כתובת IP.\n"
 
-#: scannerdrake:742
-#: scannerdrake:892
+#: scannerdrake:742 scannerdrake:892
 #, c-format
 msgid "This host is already in the list, it cannot be added again.\n"
 msgstr "המארח הזה כבר ברשימה, אי אפשר להוסיף אותו שוב.\n"
@@ -3205,8 +3346,7 @@ msgstr ""
 "\n"
 "האם ברצונך להתקין חבילה זו?"
 
-#: scannerdrake:959
-#: scannerdrake:963
+#: scannerdrake:959 scannerdrake:963
 #, c-format
 msgid "Your scanner(s) will not be available on the network."
 msgstr "הסורק(ים) שלך לא יהיו זמינים ברשת."
@@ -3270,3 +3410,5 @@ msgstr "הגדרת שפה ומדינה"
 msgid "Regional Settings"
 msgstr "הגדרות אזוריות"
 
+#~ msgid "The \"%s\" program has crashed."
+#~ msgstr "התוכנית \"%s\" קרסה."

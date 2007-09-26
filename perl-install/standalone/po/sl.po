@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-17 15:08+0200\n"
+"POT-Creation-Date: 2007-09-26 12:55+0200\n"
 "PO-Revision-Date: 2007-09-20 02:33+0200\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenščina <lugos-slo@lugos.si>\n"
@@ -18,7 +18,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms:  nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3);\n"
 
 #: drakboot:49
 #, c-format
@@ -145,7 +146,12 @@ msgstr ""
 "zagonskega nalagalnika.\n"
 "Prepričajte se, da vaša kartica podpira način, ki ga boste izbrali."
 
-#: drakbug:46
+#: drakbug:48 drakbug:113
+#, c-format
+msgid "The \"%s\" program has crashed with the following error:"
+msgstr "Program »%s« se je sesul s tem sporočilom o napaki:"
+
+#: drakbug:54
 #, c-format
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "Mandriva Linuxovo orodje za poročanje o hroščih"
@@ -224,17 +230,7 @@ msgstr "Paket: "
 msgid "Kernel:"
 msgstr "Jedro:"
 
-#: drakbug:102
-#, c-format
-msgid "The \"%s\" program has crashed with the following error:"
-msgstr "Program »%s« se je sesul s tem sporočilom o napaki:"
-
-#: drakbug:104
-#, c-format
-msgid "The \"%s\" program has crashed."
-msgstr "Program »%s« se je sesul."
-
-#: drakbug:106
+#: drakbug:121
 #, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
@@ -674,7 +670,8 @@ msgstr " --help                - prikaže to datoteko s pomočjo     \n"
 
 #: drakhelp:23
 #, c-format
-msgid " --id <id_label>       - load the html help page which refers to id_label\n"
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
 " --id <id_label>       - naloži html stran pomoči katera je na poti k "
 "id_label\n"
@@ -1120,7 +1117,137 @@ msgstr "Sistemske možnosti"
 msgid "Periodic Checks"
 msgstr "Redna preverjanja"
 
-#: draksec:291
+#: draksec:283
+#, c-format
+msgid "Root password"
+msgstr ""
+
+#: draksec:284
+#, c-format
+msgid "User password"
+msgstr ""
+
+#: draksec:314 draksec:368
+#, fuzzy, c-format
+msgid "Software management"
+msgstr "Upravitelj programske opreme"
+
+#: draksec:315
+#, fuzzy, c-format
+msgid "Mandriva Update"
+msgstr "Mandriva Online"
+
+#: draksec:316
+#, fuzzy, c-format
+msgid "Software Media Manager"
+msgstr "Upravitelj programske opreme"
+
+#: draksec:317
+#, c-format
+msgid "Configure 3D Desktop effects"
+msgstr ""
+
+#: draksec:318
+#, fuzzy, c-format
+msgid "Graphical server Configuration"
+msgstr "Nastavitve e-poštnih opozoril"
+
+#: draksec:319
+#, fuzzy, c-format
+msgid "Mouse Configuration"
+msgstr "Ročna nastavitev"
+
+#: draksec:320
+#, fuzzy, c-format
+msgid "Keyboard Configuration"
+msgstr "Nastavitev strojne opreme"
+
+#: draksec:321
+#, fuzzy, c-format
+msgid "UPS Configuration"
+msgstr "nastavitev UPS gonilnikov"
+
+#: draksec:322
+#, fuzzy, c-format
+msgid "Network Configuration"
+msgstr "Nastavitve opozoril"
+
+#: draksec:323
+#, c-format
+msgid "Hosts definitions"
+msgstr ""
+
+#: draksec:324
+#, fuzzy, c-format
+msgid "Network Center"
+msgstr "vrata mrežnega tiskalnika"
+
+#: draksec:325
+#, c-format
+msgid "VPN"
+msgstr ""
+
+#: draksec:326
+#, fuzzy, c-format
+msgid "Proxy Configuration"
+msgstr "Nastavitve opozoril"
+
+#: draksec:327
+#, fuzzy, c-format
+msgid "Connection Sharing"
+msgstr "Povezava"
+
+#: draksec:329
+#, fuzzy, c-format
+msgid "Backups"
+msgstr "Vodilo"
+
+#: draksec:331 logdrake:52
+#, c-format
+msgid "Logs"
+msgstr "Dnevniki"
+
+#: draksec:333
+#, fuzzy, c-format
+msgid "Users"
+msgstr "Uporabnik"
+
+#: draksec:335
+#, fuzzy, c-format
+msgid "Boot Configuratoin"
+msgstr "Nastavitve opozoril"
+
+#: draksec:353
+#, c-format
+msgid "Ask for user password"
+msgstr ""
+
+#: draksec:354
+#, c-format
+msgid "Ask for root password"
+msgstr ""
+
+#: draksec:355
+#, c-format
+msgid "Do not ask for any password"
+msgstr ""
+
+#: draksec:369
+#, fuzzy, c-format
+msgid "Hardware"
+msgstr "Harddrake"
+
+#: draksec:370
+#, fuzzy, c-format
+msgid "Network"
+msgstr "Omrežne možnosti"
+
+#: draksec:372
+#, c-format
+msgid "Boot"
+msgstr ""
+
+#: draksec:396
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "Prosim počakajte, nastavljanje stopnje varnosti ..."
@@ -1613,7 +1740,8 @@ msgstr "Vodilo"
 
 #: harddrake2:31
 #, c-format
-msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgid ""
+"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr ""
 "to je fizično vodilo, na katerega je priklopljena naprava (npr: PCI, "
 "USB, ...)"
@@ -2174,8 +2302,10 @@ msgstr "Datoteka naprave"
 
 #: harddrake2:115
 #, c-format
-msgid "the device file used to communicate with the kernel driver for the mouse"
-msgstr "Datoteka naprave uporabljeno za komunikacijo z jedrnim gonilnikom za miško"
+msgid ""
+"the device file used to communicate with the kernel driver for the mouse"
+msgstr ""
+"Datoteka naprave uporabljeno za komunikacijo z jedrnim gonilnikom za miško"
 
 #: harddrake2:116
 #, c-format
@@ -2374,7 +2504,8 @@ msgstr "Poženi nastavitveno orodje"
 
 #: harddrake2:299
 #, c-format
-msgid "Click on a device in the left tree in order to display its information here."
+msgid ""
+"Click on a device in the left tree in order to display its information here."
 msgstr ""
 "Kliknite na napravo v drevesu na levi in tukaj se bodo prikazali njeni "
 "podatki."
@@ -2434,11 +2565,6 @@ msgstr "Da bi uveljavili spremembe, se morate odjaviti."
 #, c-format
 msgid "Mandriva Linux Tools Logs"
 msgstr "Orodja Mandriva Linuxa"
-
-#: logdrake:52
-#, c-format
-msgid "Logs"
-msgstr "Dnevniki"
 
 #: logdrake:65
 #, c-format
@@ -2757,7 +2883,8 @@ msgstr "Prekinitev Scannerdrake."
 
 #: scannerdrake:60
 #, c-format
-msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr ""
 "Paketov potrebnih za nastavitev optičnega čitalca s Scannerdrake ni mogoče "
 "namestiti."
@@ -2898,7 +3025,8 @@ msgstr "Izberite datoteko strojnega gonilnika (firmware)"
 #: scannerdrake:201 scannerdrake:260
 #, c-format
 msgid "The firmware file %s does not exist or is unreadable!"
-msgstr "Datoteka strojnega gonilnika (firmware) %s ne obstaja oziroma. je neberljiva!"
+msgstr ""
+"Datoteka strojnega gonilnika (firmware) %s ne obstaja oziroma. je neberljiva!"
 
 #: scannerdrake:224
 #, c-format
@@ -3322,3 +3450,5 @@ msgstr "Nastavitev jezika in države"
 msgid "Regional Settings"
 msgstr "Področne nastavitve"
 
+#~ msgid "The \"%s\" program has crashed."
+#~ msgstr "Program »%s« se je sesul."

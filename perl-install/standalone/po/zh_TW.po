@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-17 15:08+0200\n"
+"POT-Creation-Date: 2007-09-26 12:55+0200\n"
 "PO-Revision-Date: 2007-09-22 23:44+0800\n"
 "Last-Translator: You-Cheng Hsieh <yochenhsieh@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
@@ -33,23 +33,17 @@ msgstr ""
 msgid "No bootloader found, creating a new configuration"
 msgstr "找不到開機管理程式，正在建立新的設定"
 
-#: drakboot:83
-#: harddrake2:194
-#: harddrake2:195
-#: logdrake:71
+#: drakboot:83 harddrake2:194 harddrake2:195 logdrake:71
 #, c-format
 msgid "/_File"
 msgstr "/檔案 (_F)"
 
-#: drakboot:84
-#: logdrake:77
+#: drakboot:84 logdrake:77
 #, c-format
 msgid "/File/_Quit"
 msgstr "/檔案 (F)/結束 (_Q)"
 
-#: drakboot:84
-#: harddrake2:195
-#: logdrake:77
+#: drakboot:84 harddrake2:195 logdrake:77
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
@@ -71,8 +65,12 @@ msgstr "隱藏訊息"
 
 #: drakboot:133
 #, c-format
-msgid "Your system bootloader is not in framebuffer mode. To activate graphical boot, select a graphic video mode from the bootloader configuration tool."
-msgstr "您的系統開機管理程式並未使用 framebuffer 模式。要啟用圖形開機，請從開機管理程式設定工具選擇一種圖形顯示模式。"
+msgid ""
+"Your system bootloader is not in framebuffer mode. To activate graphical "
+"boot, select a graphic video mode from the bootloader configuration tool."
+msgstr ""
+"您的系統開機管理程式並未使用 framebuffer 模式。要啟用圖形開機，請從開機管理程"
+"式設定工具選擇一種圖形顯示模式。"
 
 #: drakboot:134
 #, c-format
@@ -108,8 +106,7 @@ msgstr ""
 "在 console\n"
 "顯示佈景"
 
-#: drakboot:158
-#: draksplash:25
+#: drakboot:158 draksplash:25
 #, c-format
 msgid "Create new theme"
 msgstr "建立新的佈景"
@@ -147,13 +144,19 @@ msgstr "開機時啟動 X Window 圖形作業環境"
 #: drakboot:260
 #, c-format
 msgid ""
-"Please choose a video mode, it will be applied to each of the boot entries selected below.\n"
+"Please choose a video mode, it will be applied to each of the boot entries "
+"selected below.\n"
 "Be sure your video card supports the mode you choose."
 msgstr ""
 "請選擇顯示模式，它將被用在下列選擇的每一個的開機項目。\n"
 "請確定您的顯示卡支援您選擇的模式。"
 
-#: drakbug:46
+#: drakbug:48 drakbug:113
+#, c-format
+msgid "The \"%s\" program has crashed with the following error:"
+msgstr ""
+
+#: drakbug:54
 #, c-format
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "Mandriva Linux 臭蟲回報工具"
@@ -173,14 +176,12 @@ msgstr "初次使用精靈"
 msgid "Synchronization tool"
 msgstr "同步工具"
 
-#: drakbug:54
-#: drakbug:168
+#: drakbug:54 drakbug:168
 #, c-format
 msgid "Standalone Tools"
 msgstr "單一工具"
 
-#: drakbug:56
-#: drakbug:57
+#: drakbug:56 drakbug:57
 #, c-format
 msgid "Mandriva Online"
 msgstr "Mandriva Online 線上服務"
@@ -234,27 +235,20 @@ msgstr "套件： "
 msgid "Kernel:"
 msgstr "核心："
 
-#: drakbug:102
-#, c-format
-msgid "The \"%s\" program has crashed with the following error:"
-msgstr ""
-
-#: drakbug:104
-#, c-format
-msgid "The \"%s\" program has crashed."
-msgstr ""
-
-#: drakbug:106
+#: drakbug:121
 #, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
-"This will open a web browser window on %s where you'll find a form to fill in.  The information displayed above will be transferred to that server.  \n"
-"Things useful to include in your report are the output of lspcidrake -v, kernel version, and /proc/cpuinfo."
+"This will open a web browser window on %s where you'll find a form to fill "
+"in.  The information displayed above will be transferred to that server.  \n"
+"Things useful to include in your report are the output of lspcidrake -v, "
+"kernel version, and /proc/cpuinfo."
 msgstr ""
 "要回報臭蟲問題，請點選回報的按鈕。\n"
 "這將會在 %s 開啟瀏覽器，並有一表格可填入。\n"
 "以上顯示的資訊將會被傳送到該伺服器。\n"
-"適合附在報告中的有用資訊包含 lspcidrake -v 的結果、核心版本、和 /proc/cpuinfo."
+"適合附在報告中的有用資訊包含 lspcidrake -v 的結果、核心版本、和 /proc/"
+"cpuinfo."
 
 #: drakbug:112
 #, c-format
@@ -335,8 +329,7 @@ msgstr "無法與 %s 同步。"
 msgid "Retry"
 msgstr "重試"
 
-#: drakclock:149
-#: drakclock:159
+#: drakclock:149 drakclock:159
 #, c-format
 msgid "Reset"
 msgstr "重設"
@@ -378,8 +371,12 @@ msgstr "改變完成，您要重新啟動 dm 服務嗎？"
 
 #: drakedm:74
 #, c-format
-msgid "You are going to close all running programs and lose your current session. Are you really sure that you want to restart the dm service?"
-msgstr "您將要關閉所有執行中的程式並結束目前的工作階段。您真的確定要重新啟動 dm 服務嗎？"
+msgid ""
+"You are going to close all running programs and lose your current session. "
+"Are you really sure that you want to restart the dm service?"
+msgstr ""
+"您將要關閉所有執行中的程式並結束目前的工作階段。您真的確定要重新啟動 dm 服務"
+"嗎？"
 
 #: drakfont:187
 #, c-format
@@ -401,14 +398,8 @@ msgstr "找不到字型"
 msgid "parse all fonts"
 msgstr "解析所有字型"
 
-#: drakfont:222
-#: drakfont:263
-#: drakfont:332
-#: drakfont:373
-#: drakfont:380
-#: drakfont:406
-#: drakfont:424
-#: drakfont:438
+#: drakfont:222 drakfont:263 drakfont:332 drakfont:373 drakfont:380
+#: drakfont:406 drakfont:424 drakfont:438
 #, c-format
 msgid "done"
 msgstr "完成"
@@ -458,8 +449,7 @@ msgstr "請稍候，執行 ttmkfdir 程式中..."
 msgid "True Type install done"
 msgstr "True Type 字體安裝完成"
 
-#: drakfont:348
-#: drakfont:363
+#: drakfont:348 drakfont:363
 #, c-format
 msgid "type1inst building"
 msgstr ""
@@ -474,14 +464,12 @@ msgstr ""
 msgid "Suppress Temporary Files"
 msgstr "不刪除暫存檔案"
 
-#: drakfont:376
-#: drakfont:434
+#: drakfont:376 drakfont:434
 #, c-format
 msgid "Restart XFS"
 msgstr "重新啟動 XFS 服務"
 
-#: drakfont:422
-#: drakfont:432
+#: drakfont:422 drakfont:432
 #, c-format
 msgid "Suppress Fonts Files"
 msgstr "不刪除字型檔"
@@ -489,9 +477,11 @@ msgstr "不刪除字型檔"
 #: drakfont:442
 #, c-format
 msgid ""
-"Before installing any fonts, be sure that you have the right to use and install them on your system.\n"
+"Before installing any fonts, be sure that you have the right to use and "
+"install them on your system.\n"
 "\n"
-"You can install the fonts the normal way. In rare cases, bogus fonts may hang up your X Server."
+"You can install the fonts the normal way. In rare cases, bogus fonts may "
+"hang up your X Server."
 msgstr ""
 "安裝任何字型前，請確認您有權限能夠安裝與使用。\n"
 "\n"
@@ -508,8 +498,7 @@ msgstr "字型安裝"
 msgid "DrakFont"
 msgstr "DrakFont"
 
-#: drakfont:494
-#: drakfont:646
+#: drakfont:494 drakfont:646
 #, c-format
 msgid "Font List"
 msgstr "字型清單"
@@ -524,8 +513,7 @@ msgstr "取得 Windows 字型"
 msgid "About"
 msgstr "關於"
 
-#: drakfont:505
-#: drakfont:725
+#: drakfont:505 drakfont:725
 #, c-format
 msgid "Uninstall"
 msgstr "移除"
@@ -550,16 +538,14 @@ msgstr "Copyright (C) 2001-2006 by Mandriva"
 msgid "Font installer."
 msgstr "字型安裝程式"
 
-#: drakfont:530
-#: harddrake2:236
+#: drakfont:530 harddrake2:236
 #, c-format
 msgid "Mandriva Linux"
 msgstr "Mandriva Linux"
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:537
-#: harddrake2:241
+#: drakfont:537 harddrake2:241
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr ""
@@ -631,14 +617,12 @@ msgstr "取消選取所有項目"
 msgid "Selected All"
 msgstr "選取所有項目"
 
-#: drakfont:750
-#: drakfont:769
+#: drakfont:750 drakfont:769
 #, c-format
 msgid "Importing fonts"
 msgstr "正在匯入字型"
 
-#: drakfont:754
-#: drakfont:774
+#: drakfont:754 drakfont:774
 #, c-format
 msgid "Initial tests"
 msgstr "初始測試"
@@ -673,7 +657,8 @@ msgstr "後續移除設定"
 msgid ""
 " drakhelp 0.1\n"
 "Copyright (C) %s Mandriva.\n"
-"This is free software and may be redistributed under the terms of the GNU GPL.\n"
+"This is free software and may be redistributed under the terms of the GNU "
+"GPL.\n"
 "\n"
 "Usage: \n"
 msgstr ""
@@ -690,12 +675,15 @@ msgstr " --help                - 顯示本說明\n"
 
 #: drakhelp:23
 #, c-format
-msgid " --id <id_label>       - load the html help page which refers to id_label\n"
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr " --id <id 標籤>        - 載入與 id 標籤相關的  html 說明頁面\n"
 
 #: drakhelp:24
 #, c-format
-msgid " --doc <link>          - link to another web page ( for WM welcome frontend)\n"
+msgid ""
+" --doc <link>          - link to another web page ( for WM welcome "
+"frontend)\n"
 msgstr ""
 
 #: drakhelp:52
@@ -733,26 +721,22 @@ msgstr "安全性權限"
 msgid "Editable"
 msgstr "可編輯的"
 
-#: drakperm:49
-#: drakperm:322
+#: drakperm:49 drakperm:322
 #, c-format
 msgid "Path"
 msgstr "路徑"
 
-#: drakperm:49
-#: drakperm:250
+#: drakperm:49 drakperm:250
 #, c-format
 msgid "User"
 msgstr "使用者"
 
-#: drakperm:49
-#: drakperm:250
+#: drakperm:49 drakperm:250
 #, c-format
 msgid "Group"
 msgstr "群組"
 
-#: drakperm:49
-#: drakperm:334
+#: drakperm:49 drakperm:334
 #, c-format
 msgid "Permissions"
 msgstr "權限"
@@ -762,9 +746,7 @@ msgstr "權限"
 msgid "Add a new rule"
 msgstr "新增規則"
 
-#: drakperm:66
-#: drakperm:101
-#: drakperm:126
+#: drakperm:66 drakperm:101 drakperm:126
 #, c-format
 msgid "Edit current rule"
 msgstr "編輯目前的規則"
@@ -772,7 +754,8 @@ msgstr "編輯目前的規則"
 #: drakperm:108
 #, c-format
 msgid ""
-"Here you can see files to use in order to fix permissions, owners, and groups via msec.\n"
+"Here you can see files to use in order to fix permissions, owners, and "
+"groups via msec.\n"
 "You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
 "這裡讓您可以藉由 msec 檢視以及修改重要檔案的權限、擁有者、群組等資訊。\n"
@@ -822,10 +805,7 @@ msgstr "於結尾新增一項規則"
 msgid "Delete selected rule"
 msgstr "刪除所選取的規則"
 
-#: drakperm:126
-#: drakups:300
-#: drakups:362
-#: drakups:382
+#: drakperm:126 drakups:300 drakups:362 drakups:382
 #, c-format
 msgid "Edit"
 msgstr "編輯"
@@ -1000,22 +980,31 @@ msgid ""
 "Here, you can setup the security level and administrator of your machine.\n"
 "\n"
 "\n"
-"The '<span weight=\"bold\">Security Administrator</span>' is the one who will receive security alerts if the\n"
-"'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a username or an email.\n"
+"The '<span weight=\"bold\">Security Administrator</span>' is the one who "
+"will receive security alerts if the\n"
+"'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
+"username or an email.\n"
 "\n"
 "\n"
-"The '<span weight=\"bold\">Security Level</span>' menu allows you to select one of the six preconfigured security levels\n"
-"provided with msec. These levels range from '<span weight=\"bold\">poor</span>' security and ease of use, to\n"
-"'<span weight=\"bold\">paranoid</span>' config, suitable for very sensitive server applications:\n"
+"The '<span weight=\"bold\">Security Level</span>' menu allows you to select "
+"one of the six preconfigured security levels\n"
+"provided with msec. These levels range from '<span weight=\"bold\">poor</"
+"span>' security and ease of use, to\n"
+"'<span weight=\"bold\">paranoid</span>' config, suitable for very sensitive "
+"server applications:\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but very\n"
-"easy to use security level. It should only be used for machines not connected to\n"
+"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+"very\n"
+"easy to use security level. It should only be used for machines not "
+"connected to\n"
 "any network and that are not accessible to everybody.\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">Standard</span>: This is the standard security\n"
-"recommended for a computer that will be used to connect to the Internet as a\n"
+"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+"security\n"
+"recommended for a computer that will be used to connect to the Internet as "
+"a\n"
 "client.\n"
 "\n"
 "\n"
@@ -1023,18 +1012,21 @@ msgid ""
 "restrictions, and more automatic checks are run every night.\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">Higher</span>: The security is now high enough\n"
-"to use the system as a server which can accept connections from many clients. If\n"
-"your machine is only a client on the Internet, you should choose a lower level.\n"
+"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+"enough\n"
+"to use the system as a server which can accept connections from many "
+"clients. If\n"
+"your machine is only a client on the Internet, you should choose a lower "
+"level.\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the previous\n"
+"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+"previous\n"
 "level, but the system is entirely closed and security features are at their\n"
 "maximum"
 msgstr ""
 
-#: draksec:147
-#: harddrake2:211
+#: draksec:147 harddrake2:211
 #, c-format
 msgid ""
 "Description of the fields:\n"
@@ -1083,7 +1075,137 @@ msgstr "系統選項"
 msgid "Periodic Checks"
 msgstr "週期性檢查"
 
-#: draksec:291
+#: draksec:283
+#, c-format
+msgid "Root password"
+msgstr ""
+
+#: draksec:284
+#, c-format
+msgid "User password"
+msgstr ""
+
+#: draksec:314 draksec:368
+#, fuzzy, c-format
+msgid "Software management"
+msgstr "套件管理程式"
+
+#: draksec:315
+#, fuzzy, c-format
+msgid "Mandriva Update"
+msgstr "Mandriva Online 線上服務"
+
+#: draksec:316
+#, fuzzy, c-format
+msgid "Software Media Manager"
+msgstr "套件管理程式"
+
+#: draksec:317
+#, c-format
+msgid "Configure 3D Desktop effects"
+msgstr ""
+
+#: draksec:318
+#, fuzzy, c-format
+msgid "Graphical server Configuration"
+msgstr "郵件警示通知組態設定"
+
+#: draksec:319
+#, fuzzy, c-format
+msgid "Mouse Configuration"
+msgstr "手動組態設定"
+
+#: draksec:320
+#, fuzzy, c-format
+msgid "Keyboard Configuration"
+msgstr "硬體組態設定"
+
+#: draksec:321
+#, fuzzy, c-format
+msgid "UPS Configuration"
+msgstr "UPS 驅動程式設定"
+
+#: draksec:322
+#, fuzzy, c-format
+msgid "Network Configuration"
+msgstr "警示設定"
+
+#: draksec:323
+#, c-format
+msgid "Hosts definitions"
+msgstr ""
+
+#: draksec:324
+#, fuzzy, c-format
+msgid "Network Center"
+msgstr "網路印表機連接埠"
+
+#: draksec:325
+#, c-format
+msgid "VPN"
+msgstr ""
+
+#: draksec:326
+#, fuzzy, c-format
+msgid "Proxy Configuration"
+msgstr "警示設定"
+
+#: draksec:327
+#, fuzzy, c-format
+msgid "Connection Sharing"
+msgstr "連線"
+
+#: draksec:329
+#, fuzzy, c-format
+msgid "Backups"
+msgstr "匯流排"
+
+#: draksec:331 logdrake:52
+#, c-format
+msgid "Logs"
+msgstr "日誌記錄"
+
+#: draksec:333
+#, fuzzy, c-format
+msgid "Users"
+msgstr "使用者"
+
+#: draksec:335
+#, fuzzy, c-format
+msgid "Boot Configuratoin"
+msgstr "警示設定"
+
+#: draksec:353
+#, c-format
+msgid "Ask for user password"
+msgstr ""
+
+#: draksec:354
+#, c-format
+msgid "Ask for root password"
+msgstr ""
+
+#: draksec:355
+#, c-format
+msgid "Do not ask for any password"
+msgstr ""
+
+#: draksec:369
+#, fuzzy, c-format
+msgid "Hardware"
+msgstr "Harddrake"
+
+#: draksec:370
+#, fuzzy, c-format
+msgid "Network"
+msgstr "網路選項"
+
+#: draksec:372
+#, c-format
+msgid "Boot"
+msgstr ""
+
+#: draksec:396
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "請稍候，正在設定安全層級..."
@@ -1102,7 +1224,8 @@ msgstr "偵測不到系統有任何音效裝置！"
 #: draksound:50
 #, c-format
 msgid ""
-"No Sound Card has been detected on your machine. Please verify that a Linux-supported Sound Card is correctly plugged in.\n"
+"No Sound Card has been detected on your machine. Please verify that a Linux-"
+"supported Sound Card is correctly plugged in.\n"
 "\n"
 "\n"
 "You can visit our hardware database at:\n"
@@ -1124,12 +1247,14 @@ msgid ""
 "\n"
 "\n"
 "\n"
-"Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console."
+"Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
+"the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console."
 msgstr ""
 "\n"
 "\n"
 "\n"
-"請注意：若您使用的是 ISA PnP 音效卡的話，您需要使用 alsaconf 或 sndconfig 程式來設定。請在終端機中輸入 \"alsaconf\" 或 \"sndconfig\" 即可。"
+"請注意：若您使用的是 ISA PnP 音效卡的話，您需要使用 alsaconf 或 sndconfig 程"
+"式來設定。請在終端機中輸入 \"alsaconf\" 或 \"sndconfig\" 即可。"
 
 #: draksplash:32
 #, c-format
@@ -1225,8 +1350,7 @@ msgstr "漸層類型"
 msgid "Choose text color"
 msgstr "選擇文字顏色"
 
-#: draksplash:67
-#: draksplash:74
+#: draksplash:67 draksplash:74
 #, c-format
 msgid "Choose picture"
 msgstr "選擇圖案"
@@ -1337,7 +1461,8 @@ msgstr ""
 msgid ""
 "We're going to add an UPS device.\n"
 "\n"
-"Do you want to autodetect UPS devices connected to this machine or to manually select them?"
+"Do you want to autodetect UPS devices connected to this machine or to "
+"manually select them?"
 msgstr ""
 "現在將要新增一台 UPS 裝置。\n"
 "\n"
@@ -1348,16 +1473,12 @@ msgstr ""
 msgid "Autodetection"
 msgstr "自動偵測"
 
-#: drakups:99
-#: harddrake2:367
+#: drakups:99 harddrake2:367
 #, c-format
 msgid "Detection in progress"
 msgstr "正在偵測中"
 
-#: drakups:118
-#: drakups:157
-#: logdrake:457
-#: logdrake:463
+#: drakups:118 drakups:157 logdrake:457 logdrake:463
 #, c-format
 msgid "Congratulations"
 msgstr "恭喜"
@@ -1372,8 +1493,7 @@ msgstr "本精靈已經成功的加入了以下的 UPS 裝置："
 msgid "No new UPS devices was found"
 msgstr "找不到新的 UPS 裝置"
 
-#: drakups:126
-#: drakups:138
+#: drakups:126 drakups:138
 #, c-format
 msgid "UPS driver configuration"
 msgstr "UPS 驅動程式設定"
@@ -1430,24 +1550,18 @@ msgstr "本精靈已經成功的設定了新的 \"%s\" UPS 裝置。"
 msgid "UPS devices"
 msgstr "UPS 裝置"
 
-#: drakups:249
-#: drakups:268
-#: drakups:284
-#: harddrake2:85
-#: harddrake2:111
+#: drakups:249 drakups:268 drakups:284 harddrake2:85 harddrake2:111
 #: harddrake2:118
 #, c-format
 msgid "Name"
 msgstr "名稱"
 
-#: drakups:249
-#: harddrake2:133
+#: drakups:249 harddrake2:133
 #, c-format
 msgid "Driver"
 msgstr "驅動程式"
 
-#: drakups:249
-#: harddrake2:52
+#: drakups:249 harddrake2:52
 #, c-format
 msgid "Port"
 msgstr "通訊埠"
@@ -1482,8 +1596,7 @@ msgstr "規則"
 msgid "Action"
 msgstr "行動"
 
-#: drakups:297
-#: harddrake2:82
+#: drakups:297 harddrake2:82
 #, c-format
 msgid "Level"
 msgstr "難度"
@@ -1498,8 +1611,7 @@ msgstr "ACL 名稱"
 msgid "UPS Management"
 msgstr "UPS 管理"
 
-#: drakups:333
-#: drakups:342
+#: drakups:333 drakups:342
 #, c-format
 msgid "DrakUPS"
 msgstr "DrakUPS"
@@ -1518,7 +1630,8 @@ msgstr "系統偵測不到任何電視卡！"
 #: drakxtv:69
 #, c-format
 msgid ""
-"No TV Card has been detected on your machine. Please verify that a Linux-supported Video/TV Card is correctly plugged in.\n"
+"No TV Card has been detected on your machine. Please verify that a Linux-"
+"supported Video/TV Card is correctly plugged in.\n"
 "\n"
 "\n"
 "You can visit our hardware database at:\n"
@@ -1539,9 +1652,7 @@ msgstr ""
 msgid "Please, choose your keyboard layout."
 msgstr "請選取鍵盤排列的格式是那一種。"
 
-#: finish-install:111
-#: finish-install:129
-#: finish-install:141
+#: finish-install:111 finish-install:129 finish-install:141
 #, c-format
 msgid "Encrypted home partition"
 msgstr ""
@@ -1571,27 +1682,29 @@ msgstr "另外可供選擇的驅動程式"
 msgid "the list of alternative drivers for this sound card"
 msgstr "可供您的音效卡額外可選擇的驅動程式清單"
 
-#: harddrake2:30
-#: harddrake2:120
+#: harddrake2:30 harddrake2:120
 #, c-format
 msgid "Bus"
 msgstr "匯流排"
 
 #: harddrake2:31
 #, c-format
-msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgid ""
+"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr "這是這個裝置安裝的實體匯流排 (比方：PCI、USB 等等...)"
 
-#: harddrake2:33
-#: harddrake2:146
+#: harddrake2:33 harddrake2:146
 #, c-format
 msgid "Bus identification"
 msgstr "匯流排描述"
 
 #: harddrake2:34
 #, c-format
-msgid "- PCI and USB devices: this lists the vendor, device, subvendor and subdevice PCI/USB ids"
-msgstr "- PCI 與 USB 裝置：這列出了廠商名稱、裝置名稱、附屬廠商與 PCI/USB IDS 資訊"
+msgid ""
+"- PCI and USB devices: this lists the vendor, device, subvendor and "
+"subdevice PCI/USB ids"
+msgstr ""
+"- PCI 與 USB 裝置：這列出了廠商名稱、裝置名稱、附屬廠商與 PCI/USB IDS 資訊"
 
 #: harddrake2:36
 #, c-format
@@ -1700,8 +1813,7 @@ msgstr "媒介類別"
 msgid "class of hardware device"
 msgstr "硬體裝置類別"
 
-#: harddrake2:51
-#: harddrake2:83
+#: harddrake2:51 harddrake2:83
 #, c-format
 msgid "Model"
 msgstr "型號"
@@ -1726,8 +1838,7 @@ msgstr "主分割區"
 msgid "the number of the primary partitions"
 msgstr "主分割區的數目"
 
-#: harddrake2:54
-#: harddrake2:88
+#: harddrake2:54 harddrake2:88
 #, c-format
 msgid "Vendor"
 msgstr "廠商"
@@ -1834,7 +1945,10 @@ msgstr ""
 
 #: harddrake2:66
 #, c-format
-msgid "the GNU/Linux kernel needs to run a calculation loop at boot time to initialize a timer counter.  Its result is stored as bogomips as a way to \"benchmark\" the cpu."
+msgid ""
+"the GNU/Linux kernel needs to run a calculation loop at boot time to "
+"initialize a timer counter.  Its result is stored as bogomips as a way to "
+"\"benchmark\" the cpu."
 msgstr ""
 
 #: harddrake2:67
@@ -1885,8 +1999,13 @@ msgstr "頻率 (MHz)"
 
 #: harddrake2:73
 #, c-format
-msgid "the CPU frequency in MHz (Megahertz which in first approximation may be coarsely assimilated to number of instructions the cpu is able to execute per second)"
-msgstr "CPU 的工作頻率，以 MHz 為單位 (百萬赫茲，一般而言近似於 CPU 每秒能夠處理的指令數)"
+msgid ""
+"the CPU frequency in MHz (Megahertz which in first approximation may be "
+"coarsely assimilated to number of instructions the cpu is able to execute "
+"per second)"
+msgstr ""
+"CPU 的工作頻率，以 MHz 為單位 (百萬赫茲，一般而言近似於 CPU 每秒能夠處理的指"
+"令數)"
 
 #: harddrake2:74
 #, c-format
@@ -1905,8 +2024,13 @@ msgstr "Fdiv 臭蟲"
 
 #: harddrake2:76
 #, c-format
-msgid "Early Intel Pentium chips manufactured have a bug in their floating point processor which did not achieve the required precision when performing a Floating point DIVision (FDIV)"
-msgstr "早期的 Intel Pentium 晶片生產時有個浮點數處理器的臭蟲，無法達到浮點數除法(FDIV) 所要求的精確度"
+msgid ""
+"Early Intel Pentium chips manufactured have a bug in their floating point "
+"processor which did not achieve the required precision when performing a "
+"Floating point DIVision (FDIV)"
+msgstr ""
+"早期的 Intel Pentium 晶片生產時有個浮點數處理器的臭蟲，無法達到浮點數除法"
+"(FDIV) 所要求的精確度"
 
 #: harddrake2:77
 #, c-format
@@ -1945,7 +2069,9 @@ msgstr "待機臭蟲"
 
 #: harddrake2:81
 #, c-format
-msgid "Some of the early i486DX-100 chips cannot reliably return to operating mode after the \"halt\" instruction is used"
+msgid ""
+"Some of the early i486DX-100 chips cannot reliably return to operating mode "
+"after the \"halt\" instruction is used"
 msgstr "有些早期的 i486DX-100 晶片無法在 \"halt\" 指令之後成功的回到工作模式"
 
 #: harddrake2:82
@@ -2005,7 +2131,10 @@ msgstr "寫入保護"
 
 #: harddrake2:89
 #, c-format
-msgid "the WP flag in the CR0 register of the cpu enforce write protection at the memory page level, thus enabling the processor to prevent unchecked kernel accesses to user memory (aka this is a bug guard)"
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write protection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
 msgstr ""
 
 #: harddrake2:93
@@ -2046,7 +2175,8 @@ msgstr "本機密碼檔"
 #: harddrake2:99
 #, c-format
 msgid ""
-"the SCSI target number (LUN). SCSI devices connected to a host are uniquely identified by a\n"
+"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
+"identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
 
@@ -2103,7 +2233,8 @@ msgstr "裝置檔案"
 
 #: harddrake2:115
 #, c-format
-msgid "the device file used to communicate with the kernel driver for the mouse"
+msgid ""
+"the device file used to communicate with the kernel driver for the mouse"
 msgstr "這隻滑鼠用來與核心驅動程式溝通的裝置檔案"
 
 #: harddrake2:116
@@ -2151,17 +2282,12 @@ msgstr "X11 使用的滑鼠協定"
 msgid "the protocol that the graphical desktop use with the mouse"
 msgstr "圖形桌面環境與這隻滑鼠間所使用的通訊協定"
 
-#: harddrake2:128
-#: harddrake2:137
-#: harddrake2:144
-#: harddrake2:152
-#: harddrake2:332
+#: harddrake2:128 harddrake2:137 harddrake2:144 harddrake2:152 harddrake2:332
 #, c-format
 msgid "Identification"
 msgstr "辨別身份"
 
-#: harddrake2:129
-#: harddrake2:145
+#: harddrake2:129 harddrake2:145
 #, c-format
 msgid "Connection"
 msgstr "連線"
@@ -2197,15 +2323,12 @@ msgid "Features"
 msgstr "功能"
 
 #. -PO: please keep all "/" characters !!!
-#: harddrake2:176
-#: logdrake:78
+#: harddrake2:176 logdrake:78
 #, c-format
 msgid "/_Options"
 msgstr "/選項 (_O)"
 
-#: harddrake2:177
-#: harddrake2:206
-#: logdrake:80
+#: harddrake2:177 harddrake2:206 logdrake:80
 #, c-format
 msgid "/_Help"
 msgstr "/說明 (_H)"
@@ -2257,7 +2380,9 @@ msgstr "選取一個裝置！"
 
 #: harddrake2:219
 #, c-format
-msgid "Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"
+msgid ""
+"Once you've selected a device, you'll be able to see the device information "
+"in fields displayed on the right frame (\"Information\")"
 msgstr "只要您選擇了一項裝置，您就能在右方的欄位 (\"資訊\") 中看到該裝置的資訊"
 
 #: harddrake2:225
@@ -2290,8 +2415,7 @@ msgstr "這是 HardDrake，一個 %s 硬體設定工具。"
 msgid "Detected hardware"
 msgstr "已偵測到的硬體"
 
-#: harddrake2:270
-#: scannerdrake:286
+#: harddrake2:270 scannerdrake:286
 #, c-format
 msgid "Information"
 msgstr "資訊"
@@ -2308,7 +2432,8 @@ msgstr "執行設定程式"
 
 #: harddrake2:299
 #, c-format
-msgid "Click on a device in the left tree in order to display its information here."
+msgid ""
+"Click on a device in the left tree in order to display its information here."
 msgstr "在左側的樹狀結構中點選一個裝置以在此顯示它的資訊。"
 
 #: harddrake2:319
@@ -2366,11 +2491,6 @@ msgstr "變更已經完成，不過您需要重新登入才能夠生效"
 #, c-format
 msgid "Mandriva Linux Tools Logs"
 msgstr "Mandriva 工具紀錄"
-
-#: logdrake:52
-#, c-format
-msgid "Logs"
-msgstr "日誌記錄"
 
 #: logdrake:65
 #, c-format
@@ -2495,8 +2615,7 @@ msgstr "行事曆"
 msgid "Content of the file"
 msgstr "檔案內容"
 
-#: logdrake:163
-#: logdrake:407
+#: logdrake:163 logdrake:407
 #, c-format
 msgid "Mail alert"
 msgstr "郵件警示"
@@ -2604,7 +2723,9 @@ msgstr "服務設定"
 
 #: logdrake:422
 #, c-format
-msgid "You will receive an alert if one of the selected services is no longer running"
+msgid ""
+"You will receive an alert if one of the selected services is no longer "
+"running"
 msgstr "若是您所選取的服務項目沒有執行的話，您將會收到警示通知"
 
 #: logdrake:429
@@ -2646,8 +2767,12 @@ msgstr "\"%s\" 既不是有效的信箱也不是既有的本地使用者！"
 
 #: logdrake:450
 #, c-format
-msgid "\"%s\" is a local user, but you did not select a local smtp, so you must use a complete email address!"
-msgstr "\"%s\" 是一位本地使用者，但您沒有選擇一個本地的 smtp，所以您必須使用完整的郵件位址！"
+msgid ""
+"\"%s\" is a local user, but you did not select a local smtp, so you must use "
+"a complete email address!"
+msgstr ""
+"\"%s\" 是一位本地使用者，但您沒有選擇一個本地的 smtp，所以您必須使用完整的郵"
+"件位址！"
 
 #: logdrake:457
 #, c-format
@@ -2682,7 +2807,8 @@ msgstr "取消 Scannerdrake。"
 
 #: scannerdrake:60
 #, c-format
-msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr "無法安裝使用 Scannerdrake 設定掃描器所需的套件。"
 
 #: scannerdrake:61
@@ -2690,20 +2816,17 @@ msgstr "無法安裝使用 Scannerdrake 設定掃描器所需的套件。"
 msgid "Scannerdrake will not be started now."
 msgstr "Scannerdrake 將不會啟動。"
 
-#: scannerdrake:67
-#: scannerdrake:506
+#: scannerdrake:67 scannerdrake:506
 #, c-format
 msgid "Searching for configured scanners..."
 msgstr "正在尋找已經設定好的掃描器..."
 
-#: scannerdrake:71
-#: scannerdrake:510
+#: scannerdrake:71 scannerdrake:510
 #, c-format
 msgid "Searching for new scanners..."
 msgstr "正在尋找新的掃描器..."
 
-#: scannerdrake:79
-#: scannerdrake:532
+#: scannerdrake:79 scannerdrake:532
 #, c-format
 msgid "Re-generating list of configured scanners..."
 msgstr "重新產生設定好的掃描器的列單..."
@@ -2743,8 +2866,7 @@ msgstr "請選取一個掃描器型號 (偵測到型號：%s)"
 msgid "Select a scanner model (Port: %s)"
 msgstr "請選取一個掃描器型號 (位於連接埠：%s)"
 
-#: scannerdrake:136
-#: scannerdrake:139
+#: scannerdrake:136 scannerdrake:139
 #, c-format
 msgid " (UNSUPPORTED)"
 msgstr " (不支援)"
@@ -2754,68 +2876,60 @@ msgstr " (不支援)"
 msgid "The %s is not supported under Linux."
 msgstr "%s 不被 Linux 所支援。"
 
-#: scannerdrake:169
-#: scannerdrake:183
+#: scannerdrake:169 scannerdrake:183
 #, c-format
 msgid "Do not install firmware file"
 msgstr "不要安裝韌體檔"
 
-#: scannerdrake:172
-#: scannerdrake:222
+#: scannerdrake:172 scannerdrake:222
 #, c-format
 msgid "Scanner Firmware"
 msgstr "掃描器軔體"
 
-#: scannerdrake:173
-#: scannerdrake:225
+#: scannerdrake:173 scannerdrake:225
 #, c-format
-msgid "It is possible that your %s needs its firmware to be uploaded everytime when it is turned on."
+msgid ""
+"It is possible that your %s needs its firmware to be uploaded everytime when "
+"it is turned on."
 msgstr "您的 %s 可能每次啟動時都需要下載它的韌體檔。"
 
-#: scannerdrake:174
-#: scannerdrake:226
+#: scannerdrake:174 scannerdrake:226
 #, c-format
 msgid "If this is the case, you can make this be done automatically."
 msgstr "如果是這種情況，您可以自動的完成這個工作。"
 
-#: scannerdrake:175
-#: scannerdrake:229
+#: scannerdrake:175 scannerdrake:229
 #, c-format
-msgid "To do so, you need to supply the firmware file for your scanner so that it can be installed."
+msgid ""
+"To do so, you need to supply the firmware file for your scanner so that it "
+"can be installed."
 msgstr "要這樣作的話，請提供您掃描器的韌體檔以供安裝。"
 
-#: scannerdrake:176
-#: scannerdrake:230
+#: scannerdrake:176 scannerdrake:230
 #, c-format
-msgid "You find the file on the CD or floppy coming with the scanner, on the manufacturer's home page, or on your Windows partition."
-msgstr "您可以在隨著您掃描器附上的光碟或磁片、廠商的網頁、或者是您的 Windows 磁區上找到這個檔案。"
+msgid ""
+"You find the file on the CD or floppy coming with the scanner, on the "
+"manufacturer's home page, or on your Windows partition."
+msgstr ""
+"您可以在隨著您掃描器附上的光碟或磁片、廠商的網頁、或者是您的 Windows 磁區上找"
+"到這個檔案。"
 
-#: scannerdrake:178
-#: scannerdrake:237
+#: scannerdrake:178 scannerdrake:237
 #, c-format
 msgid "Install firmware file from"
 msgstr "安裝韌體檔，由"
 
-#: scannerdrake:180
-#: scannerdrake:188
-#: scannerdrake:239
-#: scannerdrake:246
+#: scannerdrake:180 scannerdrake:188 scannerdrake:239 scannerdrake:246
 #, c-format
 msgid "CD-ROM"
 msgstr "CD-ROM"
 
-#: scannerdrake:181
-#: scannerdrake:190
-#: scannerdrake:240
-#: scannerdrake:248
+#: scannerdrake:181 scannerdrake:190 scannerdrake:240 scannerdrake:248
 #, c-format
 msgid "Floppy Disk"
 msgstr "磁碟片"
 
-#: scannerdrake:182
-#: scannerdrake:192
-#: scannerdrake:241
-#: scannerdrake:250
+#: scannerdrake:182 scannerdrake:192 scannerdrake:241 scannerdrake:250
 #, c-format
 msgid "Other place"
 msgstr "其他地方"
@@ -2825,25 +2939,30 @@ msgstr "其他地方"
 msgid "Select firmware file"
 msgstr "選擇韌體檔案"
 
-#: scannerdrake:201
-#: scannerdrake:260
+#: scannerdrake:201 scannerdrake:260
 #, c-format
 msgid "The firmware file %s does not exist or is unreadable!"
 msgstr "韌體檔 %s 不存在或者無法讀取！"
 
 #: scannerdrake:224
 #, c-format
-msgid "It is possible that your scanners need their firmware to be uploaded everytime when they are turned on."
+msgid ""
+"It is possible that your scanners need their firmware to be uploaded "
+"everytime when they are turned on."
 msgstr "這可能是因為您的掃描器每次啟動時都需要下載它的韌體檔。"
 
 #: scannerdrake:228
 #, c-format
-msgid "To do so, you need to supply the firmware files for your scanners so that it can be installed."
+msgid ""
+"To do so, you need to supply the firmware files for your scanners so that it "
+"can be installed."
 msgstr "要這樣作的話，請提供您掃描器的韌體檔以供安裝。"
 
 #: scannerdrake:231
 #, c-format
-msgid "If you have already installed your scanner's firmware you can update the firmware here by supplying the new firmware file."
+msgid ""
+"If you have already installed your scanner's firmware you can update the "
+"firmware here by supplying the new firmware file."
 msgstr "如果您之前已經安裝了您掃描器的韌體，您可以在這邊提供新的韌體檔來升級。"
 
 #: scannerdrake:233
@@ -2885,21 +3004,17 @@ msgstr ""
 msgid "Setting up kernel modules..."
 msgstr "正在設定核心模組..."
 
-#: scannerdrake:330
-#: scannerdrake:337
-#: scannerdrake:367
+#: scannerdrake:330 scannerdrake:337 scannerdrake:367
 #, c-format
 msgid "Auto-detect available ports"
 msgstr "自動偵測可用的埠"
 
-#: scannerdrake:331
-#: scannerdrake:377
+#: scannerdrake:331 scannerdrake:377
 #, c-format
 msgid "Device choice"
 msgstr "選擇裝置"
 
-#: scannerdrake:332
-#: scannerdrake:378
+#: scannerdrake:332 scannerdrake:378
 #, c-format
 msgid "Please select the device where your %s is attached"
 msgstr "請選取您的 %s 所連接的裝置"
@@ -2909,8 +3024,7 @@ msgstr "請選取您的 %s 所連接的裝置"
 msgid "(Note: Parallel ports cannot be auto-detected)"
 msgstr "(注意：無法自動偵測平行埠)"
 
-#: scannerdrake:335
-#: scannerdrake:380
+#: scannerdrake:335 scannerdrake:380
 #, c-format
 msgid "choose device"
 msgstr "選取裝置"
@@ -2920,8 +3034,7 @@ msgstr "選取裝置"
 msgid "Searching for scanners..."
 msgstr "正在尋找掃描器..."
 
-#: scannerdrake:405
-#: scannerdrake:412
+#: scannerdrake:405 scannerdrake:412
 #, c-format
 msgid "Attention!"
 msgstr "注意！"
@@ -2931,33 +3044,44 @@ msgstr "注意！"
 msgid ""
 "Your %s cannot be configured fully automatically.\n"
 "\n"
-"Manual adjustments are required. Please edit the configuration file /etc/sane.d/%s.conf. "
+"Manual adjustments are required. Please edit the configuration file /etc/"
+"sane.d/%s.conf. "
 msgstr ""
 "您的 %s 無法完全自動設定。\n"
 "\n"
 "您需要手動調整設定。請編輯設定檔 /etc/sane.d/%s.conf。"
 
-#: scannerdrake:407
-#: scannerdrake:416
+#: scannerdrake:407 scannerdrake:416
 #, c-format
-msgid "More info in the driver's manual page. Run the command \"man sane-%s\" to read it."
-msgstr "驅動程式使用手冊中有更多的資訊。請執行如下指令 \"man sane-%s\" 來閱讀。"
+msgid ""
+"More info in the driver's manual page. Run the command \"man sane-%s\" to "
+"read it."
+msgstr ""
+"驅動程式使用手冊中有更多的資訊。請執行如下指令 \"man sane-%s\" 來閱讀。"
 
-#: scannerdrake:409
-#: scannerdrake:418
+#: scannerdrake:409 scannerdrake:418
 #, c-format
-msgid "After that you may scan documents using \"XSane\" or \"Kooka\" from Multimedia/Graphics in the applications menu."
-msgstr "之後您就可以使用應用程式選單的多媒體/圖形分類中的 \"XSane\" 或\"Kooka\" 來掃描文件。"
+msgid ""
+"After that you may scan documents using \"XSane\" or \"Kooka\" from "
+"Multimedia/Graphics in the applications menu."
+msgstr ""
+"之後您就可以使用應用程式選單的多媒體/圖形分類中的 \"XSane\" 或\"Kooka\" 來掃"
+"描文件。"
 
 #: scannerdrake:413
 #, c-format
-msgid "Your %s has been configured, but it is possible that additional manual adjustments are needed to get it to work. "
+msgid ""
+"Your %s has been configured, but it is possible that additional manual "
+"adjustments are needed to get it to work. "
 msgstr "您的 %s 已經設定完成，但是它可能需要經過額外的手動調整之後才能運作。"
 
 #: scannerdrake:414
 #, c-format
-msgid "If it does not appear in the list of configured scanners in the main window of Scannerdrake or if it does not work correctly, "
-msgstr "如果它沒有出現在 Scannerdrake 主畫面已設定的掃描器清單中，或它並未正常運作，"
+msgid ""
+"If it does not appear in the list of configured scanners in the main window "
+"of Scannerdrake or if it does not work correctly, "
+msgstr ""
+"如果它沒有出現在 Scannerdrake 主畫面已設定的掃描器清單中，或它並未正常運作，"
 
 #: scannerdrake:415
 #, c-format
@@ -2973,10 +3097,12 @@ msgstr "恭喜！"
 #, c-format
 msgid ""
 "Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" or \"Kooka\" from Multimedia/Graphics in the applications menu."
+"You may now scan documents using \"XSane\" or \"Kooka\" from Multimedia/"
+"Graphics in the applications menu."
 msgstr ""
 "您的 %s 已經設定完成。\n"
-"您現在可以立即使用應用程式選單的多媒體/圖形分類中的 \"XSane\" 或 \"Kooka\"來掃描文件。"
+"您現在可以立即使用應用程式選單的多媒體/圖形分類中的 \"XSane\" 或 \"Kooka\"來"
+"掃描文件。"
 
 #: scannerdrake:446
 #, c-format
@@ -3004,8 +3130,7 @@ msgstr ""
 "%s\n"
 "可以在您的系統上使用。\n"
 
-#: scannerdrake:450
-#: scannerdrake:453
+#: scannerdrake:450 scannerdrake:453
 #, c-format
 msgid "There are no scanners found which are available on your system.\n"
 msgstr "沒有找到可以在您系統上使用的掃描器。\n"
@@ -3035,14 +3160,12 @@ msgstr "安裝/更新韌體"
 msgid "Scanner sharing"
 msgstr "掃描器分享"
 
-#: scannerdrake:545
-#: scannerdrake:710
+#: scannerdrake:545 scannerdrake:710
 #, c-format
 msgid "All remote machines"
 msgstr "所有的遠端機器"
 
-#: scannerdrake:557
-#: scannerdrake:860
+#: scannerdrake:557 scannerdrake:860
 #, c-format
 msgid "This machine"
 msgstr "本機"
@@ -3054,12 +3177,18 @@ msgstr "掃描器分享"
 
 #: scannerdrake:597
 #, c-format
-msgid "Here you can choose whether the scanners connected to this machine should be accessible by remote machines and by which remote machines."
-msgstr "您可以在這裡選擇連接到這部電腦的掃描器是否允許遠端電腦使用，以及允許那些電腦使用。"
+msgid ""
+"Here you can choose whether the scanners connected to this machine should be "
+"accessible by remote machines and by which remote machines."
+msgstr ""
+"您可以在這裡選擇連接到這部電腦的掃描器是否允許遠端電腦使用，以及允許那些電腦"
+"使用。"
 
 #: scannerdrake:598
 #, c-format
-msgid "You can also decide here whether scanners on remote machines should be made available on this machine."
+msgid ""
+"You can also decide here whether scanners on remote machines should be made "
+"available on this machine."
 msgstr "您也可以決定是否要從這部電腦使用遠端電腦的掃描器。"
 
 #: scannerdrake:601
@@ -3072,8 +3201,7 @@ msgstr "本機的掃描器可以被其他的電腦使用"
 msgid "Scanner sharing to hosts: "
 msgstr "分享掃描器給主機："
 
-#: scannerdrake:608
-#: scannerdrake:625
+#: scannerdrake:608 scannerdrake:625
 #, c-format
 msgid "No remote machines"
 msgstr "沒有遠端機器"
@@ -3088,62 +3216,50 @@ msgstr "使用遠端電腦上的掃描器"
 msgid "Use the scanners on hosts: "
 msgstr "使用掃描器於主機："
 
-#: scannerdrake:647
-#: scannerdrake:719
-#: scannerdrake:869
+#: scannerdrake:647 scannerdrake:719 scannerdrake:869
 #, c-format
 msgid "Sharing of local scanners"
 msgstr "本地端掃描器分享"
 
 #: scannerdrake:648
 #, c-format
-msgid "These are the machines on which the locally connected scanner(s) should be available:"
+msgid ""
+"These are the machines on which the locally connected scanner(s) should be "
+"available:"
 msgstr "以下電腦要可以使用連接到本機的掃描器："
 
-#: scannerdrake:659
-#: scannerdrake:809
+#: scannerdrake:659 scannerdrake:809
 #, c-format
 msgid "Add host"
 msgstr "新增主機"
 
-#: scannerdrake:665
-#: scannerdrake:815
+#: scannerdrake:665 scannerdrake:815
 #, c-format
 msgid "Edit selected host"
 msgstr "編輯選擇的主機"
 
-#: scannerdrake:674
-#: scannerdrake:824
+#: scannerdrake:674 scannerdrake:824
 #, c-format
 msgid "Remove selected host"
 msgstr "移除選取的主機"
 
-#: scannerdrake:698
-#: scannerdrake:706
-#: scannerdrake:711
-#: scannerdrake:757
-#: scannerdrake:848
-#: scannerdrake:856
-#: scannerdrake:861
-#: scannerdrake:907
+#: scannerdrake:698 scannerdrake:706 scannerdrake:711 scannerdrake:757
+#: scannerdrake:848 scannerdrake:856 scannerdrake:861 scannerdrake:907
 #, c-format
 msgid "Name/IP address of host:"
 msgstr "主機的名稱/IP 位址："
 
-#: scannerdrake:720
-#: scannerdrake:870
+#: scannerdrake:720 scannerdrake:870
 #, c-format
 msgid "Choose the host on which the local scanners should be made available:"
 msgstr "選擇那些主機要使用本機的掃描器："
 
-#: scannerdrake:731
-#: scannerdrake:881
+#: scannerdrake:731 scannerdrake:881
 #, c-format
 msgid "You must enter a host name or an IP address.\n"
 msgstr "您必須輸入主機名稱或 IP 位址。\n"
 
-#: scannerdrake:742
-#: scannerdrake:892
+#: scannerdrake:742 scannerdrake:892
 #, c-format
 msgid "This host is already in the list, it cannot be added again.\n"
 msgstr "這個主機已經存在於列表中，無法重複新增\n"
@@ -3169,8 +3285,7 @@ msgstr ""
 "\n"
 "您要安裝 saned 套件嗎？"
 
-#: scannerdrake:959
-#: scannerdrake:963
+#: scannerdrake:959 scannerdrake:963
 #, c-format
 msgid "Your scanner(s) will not be available on the network."
 msgstr "您的掃描器將無法從網路上使用。"
@@ -3236,10 +3351,13 @@ msgstr "區域設定"
 
 #~ msgid "Error!"
 #~ msgstr "錯誤！"
+
 #~ msgid "I can not find needed image file `%s'."
 #~ msgstr "我找不到需要的核心映像檔案 %s 。"
+
 #~ msgid "Auto Install Configurator"
 #~ msgstr "自動安裝設定程式"
+
 #~ msgid ""
 #~ "You are about to configure an Auto Install floppy. This feature is "
 #~ "somewhat dangerous and must be used circumspectly.\n"
@@ -3263,24 +3381,33 @@ msgstr "區域設定"
 #~ "不論您在這部電腦上如何選擇。\n"
 #~ "\n"
 #~ "按下確定以繼續。"
+
 #~ msgid "replay"
 #~ msgstr "重播"
+
 #~ msgid "manual"
 #~ msgstr "手動"
+
 #~ msgid "Automatic Steps Configuration"
 #~ msgstr "自動化步驟設定"
+
 #~ msgid ""
 #~ "Please choose for each step whether it will replay like your install, or "
 #~ "it will be manual"
 #~ msgstr "請選擇每一個安裝的步驟，這些將會是您所操作的安裝過程"
+
 #~ msgid "Insert a blank floppy in drive %s"
 #~ msgstr "請在 %s 中插入一片空白磁片"
+
 #~ msgid "Creating auto install floppy"
 #~ msgstr "正在製作自動安裝磁片"
+
 #~ msgid "Insert another blank floppy in drive %s (for drivers disk)"
 #~ msgstr "請在 %s 中插入一片空白磁片 (作為驅動程式磁片)"
+
 #~ msgid "Creating auto install floppy (drivers disk)"
 #~ msgstr "正在製作自動安裝磁片 (驅動程式磁片)"
+
 #~ msgid ""
 #~ "\n"
 #~ "Welcome.\n"
@@ -3292,24 +3419,31 @@ msgstr "區域設定"
 #~ "歡迎!\n"
 #~ "\n"
 #~ "自動安裝可用的參數項目都在左邊的區域內"
+
 #~ msgid ""
 #~ "The floppy has been successfully generated.\n"
 #~ "You may now replay your installation."
 #~ msgstr ""
 #~ "已經成功建立自動安裝磁片。\n"
 #~ "您可以使用這張磁片進行自動安裝的程序"
+
 #~ msgid "Auto Install"
 #~ msgstr "自動安裝"
+
 #~ msgid "Add an item"
 #~ msgstr "新增項目"
+
 #~ msgid "Remove the last item"
 #~ msgstr "移除之前項目"
+
 #~ msgid "Menudrake"
 #~ msgstr "Mandriva 選單編輯器"
+
 #~ msgid "Msec"
 #~ msgstr "Msec 安全設定偵測"
+
 #~ msgid "Urpmi"
 #~ msgstr "Urpmi 套件管理"
+
 #~ msgid "Userdrake"
 #~ msgstr "Userdrake 使用者管理"
-

@@ -7,14 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-17 15:08+0200\n"
+"POT-Creation-Date: 2007-09-26 12:55+0200\n"
 "PO-Revision-Date: 2007-09-18 10:20+0200\n"
 "Last-Translator: Michal Bukovjan <bukm@centrum.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
 #: drakboot:49
@@ -141,7 +142,12 @@ msgstr ""
 "položky zavaděče.\n"
 "Ujistěte se prosím, že vaše grafická karta podporuje režim, který vyberete."
 
-#: drakbug:46
+#: drakbug:48 drakbug:113
+#, c-format
+msgid "The \"%s\" program has crashed with the following error:"
+msgstr "Program \"%s\" havaroval s následující chybou:"
+
+#: drakbug:54
 #, c-format
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "Nástroj distribuce Mandriva Linux pro hlášení chyb"
@@ -220,17 +226,7 @@ msgstr "Balíček: "
 msgid "Kernel:"
 msgstr "Jádro: "
 
-#: drakbug:102
-#, c-format
-msgid "The \"%s\" program has crashed with the following error:"
-msgstr "Program \"%s\" havaroval s následující chybou:"
-
-#: drakbug:104
-#, c-format
-msgid "The \"%s\" program has crashed."
-msgstr "Program \"%s\" havaroval."
-
-#: drakbug:106
+#: drakbug:121
 #, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
@@ -671,7 +667,8 @@ msgstr " --help                - zobrazí tuto nápovědu     \n"
 
 #: drakhelp:23
 #, c-format
-msgid " --id <id_label>       - load the html help page which refers to id_label\n"
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
 " --id <id_label>       - načte HTML stránku s nápovědou, která odpovídá "
 "id_label\n"
@@ -1114,7 +1111,137 @@ msgstr "Systémové volby"
 msgid "Periodic Checks"
 msgstr "Pravidelné kontroly"
 
-#: draksec:291
+#: draksec:283
+#, c-format
+msgid "Root password"
+msgstr ""
+
+#: draksec:284
+#, c-format
+msgid "User password"
+msgstr ""
+
+#: draksec:314 draksec:368
+#, fuzzy, c-format
+msgid "Software management"
+msgstr "Správce software"
+
+#: draksec:315
+#, fuzzy, c-format
+msgid "Mandriva Update"
+msgstr "Mandriva Online"
+
+#: draksec:316
+#, fuzzy, c-format
+msgid "Software Media Manager"
+msgstr "Správce software"
+
+#: draksec:317
+#, c-format
+msgid "Configure 3D Desktop effects"
+msgstr ""
+
+#: draksec:318
+#, fuzzy, c-format
+msgid "Graphical server Configuration"
+msgstr "Nastavení zasílání varovných zpráv e-mailem"
+
+#: draksec:319
+#, fuzzy, c-format
+msgid "Mouse Configuration"
+msgstr "Ruční nastavení"
+
+#: draksec:320
+#, fuzzy, c-format
+msgid "Keyboard Configuration"
+msgstr "Nastavení hardware"
+
+#: draksec:321
+#, fuzzy, c-format
+msgid "UPS Configuration"
+msgstr "Nastavení ovladače UPS"
+
+#: draksec:322
+#, fuzzy, c-format
+msgid "Network Configuration"
+msgstr "Nastavení varování"
+
+#: draksec:323
+#, c-format
+msgid "Hosts definitions"
+msgstr ""
+
+#: draksec:324
+#, fuzzy, c-format
+msgid "Network Center"
+msgstr "port síťové tiskárny"
+
+#: draksec:325
+#, c-format
+msgid "VPN"
+msgstr ""
+
+#: draksec:326
+#, fuzzy, c-format
+msgid "Proxy Configuration"
+msgstr "Nastavení varování"
+
+#: draksec:327
+#, fuzzy, c-format
+msgid "Connection Sharing"
+msgstr "Připojení"
+
+#: draksec:329
+#, fuzzy, c-format
+msgid "Backups"
+msgstr "Sběrnice"
+
+#: draksec:331 logdrake:52
+#, c-format
+msgid "Logs"
+msgstr "Záznamy"
+
+#: draksec:333
+#, fuzzy, c-format
+msgid "Users"
+msgstr "Uživatel"
+
+#: draksec:335
+#, fuzzy, c-format
+msgid "Boot Configuratoin"
+msgstr "Nastavení varování"
+
+#: draksec:353
+#, c-format
+msgid "Ask for user password"
+msgstr ""
+
+#: draksec:354
+#, c-format
+msgid "Ask for root password"
+msgstr ""
+
+#: draksec:355
+#, c-format
+msgid "Do not ask for any password"
+msgstr ""
+
+#: draksec:369
+#, fuzzy, c-format
+msgid "Hardware"
+msgstr "Harddrake"
+
+#: draksec:370
+#, fuzzy, c-format
+msgid "Network"
+msgstr "Volby sítě"
+
+#: draksec:372
+#, c-format
+msgid "Boot"
+msgstr ""
+
+#: draksec:396
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "Čekejte prosím, nastavuji úroveň zabezpečení..."
@@ -1607,7 +1734,8 @@ msgstr "Sběrnice"
 
 #: harddrake2:31
 #, c-format
-msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgid ""
+"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr ""
 "toto je fyzická sběrnice, na kterou je připojeno zařízení (např. PCI, "
 "USB, ...)"
@@ -1650,7 +1778,8 @@ msgstr "Kapacita zařízení"
 #: harddrake2:40
 #, c-format
 msgid "special capacities of the driver (burning ability and or DVD support)"
-msgstr "speciální schopnosti zařízení (schopnost vypalování a/nebo podpora DVD)"
+msgstr ""
+"speciální schopnosti zařízení (schopnost vypalování a/nebo podpora DVD)"
 
 #: harddrake2:41
 #, c-format
@@ -2166,8 +2295,10 @@ msgstr "Soubor se zařízením"
 
 #: harddrake2:115
 #, c-format
-msgid "the device file used to communicate with the kernel driver for the mouse"
-msgstr "soubor se zařízením, který se používá při komunikaci s ovladačem jádra myši"
+msgid ""
+"the device file used to communicate with the kernel driver for the mouse"
+msgstr ""
+"soubor se zařízením, který se používá při komunikaci s ovladačem jádra myši"
 
 #: harddrake2:116
 #, c-format
@@ -2366,8 +2497,10 @@ msgstr "Spustit nástroj pro nastavení"
 
 #: harddrake2:299
 #, c-format
-msgid "Click on a device in the left tree in order to display its information here."
-msgstr "Klepněte na zařízení v levé části stromu a zobrazíte zde o něm informace."
+msgid ""
+"Click on a device in the left tree in order to display its information here."
+msgstr ""
+"Klepněte na zařízení v levé části stromu a zobrazíte zde o něm informace."
 
 #: harddrake2:319
 #, c-format
@@ -2424,11 +2557,6 @@ msgstr "Změny jsou provedeny, ale pro aktivaci je nutné provést odhlášení"
 #, c-format
 msgid "Mandriva Linux Tools Logs"
 msgstr "Záznamy nástrojů Mandriva Linuxu"
-
-#: logdrake:52
-#, c-format
-msgid "Logs"
-msgstr "Záznamy"
 
 #: logdrake:65
 #, c-format
@@ -2696,12 +2824,14 @@ msgstr "Zadejte prosím níže svou poštovní adresu "
 #: logdrake:438
 #, c-format
 msgid "and enter the name (or the IP) of the SMTP server you wish to use"
-msgstr "a zadejte název (nebo IP adresu) SMTP serveru, který budete chtít použít"
+msgstr ""
+"a zadejte název (nebo IP adresu) SMTP serveru, který budete chtít použít"
 
 #: logdrake:445
 #, c-format
 msgid "\"%s\" neither is a valid email nor is an existing local user!"
-msgstr "\"%s\" není ani platná emailová adresa ani existující lokální uživatel!"
+msgstr ""
+"\"%s\" není ani platná emailová adresa ani existující lokální uživatel!"
 
 #: logdrake:450
 #, c-format
@@ -2745,7 +2875,8 @@ msgstr "Ukončuji Scannerdrake."
 
 #: scannerdrake:60
 #, c-format
-msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr ""
 "Nelze nainstalovat balíčky potřebné pro nastavení skeneru pomocí "
 "Scannerdrake."
@@ -2830,7 +2961,8 @@ msgstr "Firmware skeneru"
 msgid ""
 "It is possible that your %s needs its firmware to be uploaded everytime when "
 "it is turned on."
-msgstr "Je možné, že váš %s potřebuje nahrát svůj firmware pokaždé, když je zapnut."
+msgstr ""
+"Je možné, že váš %s potřebuje nahrát svůj firmware pokaždé, když je zapnut."
 
 #: scannerdrake:174 scannerdrake:226
 #, c-format
@@ -3179,7 +3311,8 @@ msgstr "Sdílení lokálních skenerů"
 msgid ""
 "These are the machines on which the locally connected scanner(s) should be "
 "available:"
-msgstr "Zde je seznam počítačů, na kterých jsou přístupné lokálně připojené skenery: "
+msgstr ""
+"Zde je seznam počítačů, na kterých jsou přístupné lokálně připojené skenery: "
 
 #: scannerdrake:659 scannerdrake:809
 #, c-format
@@ -3302,3 +3435,5 @@ msgstr "Nastavení jazyka a země"
 msgid "Regional Settings"
 msgstr "Regionální nastavení"
 
+#~ msgid "The \"%s\" program has crashed."
+#~ msgstr "Program \"%s\" havaroval."

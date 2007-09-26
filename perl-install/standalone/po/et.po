@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-et\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-17 15:08+0200\n"
+"POT-Creation-Date: 2007-09-26 12:55+0200\n"
 "PO-Revision-Date: 2007-09-18 23:55+0200\n"
 "Last-Translator: Marek Laane <bald@starman.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -141,7 +141,12 @@ msgstr ""
 "alglaadimiskirjete korral.\n"
 "Palun kontrollige, et Teie videokaart ikka toetab valitud moodi."
 
-#: drakbug:46
+#: drakbug:48 drakbug:113
+#, c-format
+msgid "The \"%s\" program has crashed with the following error:"
+msgstr "Programm \"%s\" jooksis kokku järgmise veaga:"
+
+#: drakbug:54
 #, c-format
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "Mandriva Linuxi vigadest teatamise tööriist"
@@ -220,17 +225,7 @@ msgstr "Pakett: "
 msgid "Kernel:"
 msgstr "Kernel:"
 
-#: drakbug:102
-#, c-format
-msgid "The \"%s\" program has crashed with the following error:"
-msgstr "Programm \"%s\" jooksis kokku järgmise veaga:"
-
-#: drakbug:104
-#, c-format
-msgid "The \"%s\" program has crashed."
-msgstr "Programm \"%s\" jooksis kokku."
-
-#: drakbug:106
+#: drakbug:121
 #, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
@@ -1113,7 +1108,137 @@ msgstr "Süsteemi parameetrid"
 msgid "Periodic Checks"
 msgstr "Perioodiline kontroll"
 
-#: draksec:291
+#: draksec:283
+#, c-format
+msgid "Root password"
+msgstr ""
+
+#: draksec:284
+#, c-format
+msgid "User password"
+msgstr ""
+
+#: draksec:314 draksec:368
+#, fuzzy, c-format
+msgid "Software management"
+msgstr "Tarkvarahaldur"
+
+#: draksec:315
+#, fuzzy, c-format
+msgid "Mandriva Update"
+msgstr "Mandriva Online"
+
+#: draksec:316
+#, fuzzy, c-format
+msgid "Software Media Manager"
+msgstr "Tarkvarahaldur"
+
+#: draksec:317
+#, c-format
+msgid "Configure 3D Desktop effects"
+msgstr ""
+
+#: draksec:318
+#, fuzzy, c-format
+msgid "Graphical server Configuration"
+msgstr "E-kirjaga hoiatamise seadistamine"
+
+#: draksec:319
+#, fuzzy, c-format
+msgid "Mouse Configuration"
+msgstr "Käsitsiseadistamine"
+
+#: draksec:320
+#, fuzzy, c-format
+msgid "Keyboard Configuration"
+msgstr "Riistvara seadistamine"
+
+#: draksec:321
+#, fuzzy, c-format
+msgid "UPS Configuration"
+msgstr "UPS-i draiveri seadistamine"
+
+#: draksec:322
+#, fuzzy, c-format
+msgid "Network Configuration"
+msgstr "Hoiatuse seadistamine"
+
+#: draksec:323
+#, c-format
+msgid "Hosts definitions"
+msgstr ""
+
+#: draksec:324
+#, fuzzy, c-format
+msgid "Network Center"
+msgstr "võrguprinteri port"
+
+#: draksec:325
+#, c-format
+msgid "VPN"
+msgstr ""
+
+#: draksec:326
+#, fuzzy, c-format
+msgid "Proxy Configuration"
+msgstr "Hoiatuse seadistamine"
+
+#: draksec:327
+#, fuzzy, c-format
+msgid "Connection Sharing"
+msgstr "Ühendus"
+
+#: draksec:329
+#, fuzzy, c-format
+msgid "Backups"
+msgstr "Siin"
+
+#: draksec:331 logdrake:52
+#, c-format
+msgid "Logs"
+msgstr "Logid"
+
+#: draksec:333
+#, fuzzy, c-format
+msgid "Users"
+msgstr "Kasutaja"
+
+#: draksec:335
+#, fuzzy, c-format
+msgid "Boot Configuratoin"
+msgstr "Hoiatuse seadistamine"
+
+#: draksec:353
+#, c-format
+msgid "Ask for user password"
+msgstr ""
+
+#: draksec:354
+#, c-format
+msgid "Ask for root password"
+msgstr ""
+
+#: draksec:355
+#, c-format
+msgid "Do not ask for any password"
+msgstr ""
+
+#: draksec:369
+#, fuzzy, c-format
+msgid "Hardware"
+msgstr "Harddrake"
+
+#: draksec:370
+#, fuzzy, c-format
+msgid "Network"
+msgstr "Võrguparameetrid"
+
+#: draksec:372
+#, c-format
+msgid "Boot"
+msgstr ""
+
+#: draksec:396
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "Palun oodake, kehtestan turvataseme..."
@@ -2423,11 +2548,6 @@ msgstr "Muudatus on tehtud, aga selle rakendamiseks tuleb välja logida"
 msgid "Mandriva Linux Tools Logs"
 msgstr "Mandriva Linuxi tööriistade logi"
 
-#: logdrake:52
-#, c-format
-msgid "Logs"
-msgstr "Logid"
-
 #: logdrake:65
 #, c-format
 msgid "Show only for the selected day"
@@ -3305,6 +3425,9 @@ msgstr "Keele ja riigi seadistamine"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Asukohaseadistused"
+
+#~ msgid "The \"%s\" program has crashed."
+#~ msgstr "Programm \"%s\" jooksis kokku."
 
 #~ msgid "I can not find needed image file `%s'."
 #~ msgstr "Ei suudetud leida laadefaili \"%s\"."

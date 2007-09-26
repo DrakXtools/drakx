@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-17 15:08+0200\n"
+"POT-Creation-Date: 2007-09-26 12:55+0200\n"
 "PO-Revision-Date: 2007-09-23 11:26+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -142,7 +142,12 @@ msgstr ""
 "nedanfor.\n"
 "Hugs at skjermkortet ditt må støtta skjermmodusen du vel."
 
-#: drakbug:46
+#: drakbug:48 drakbug:113
+#, c-format
+msgid "The \"%s\" program has crashed with the following error:"
+msgstr "Programmet «%s» krasja med følgjande feil:"
+
+#: drakbug:54
 #, c-format
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "Feilrapporteringsverktøy for Mandriva Linux"
@@ -221,17 +226,7 @@ msgstr "Pakke: "
 msgid "Kernel:"
 msgstr "Kjerne:"
 
-#: drakbug:102
-#, c-format
-msgid "The \"%s\" program has crashed with the following error:"
-msgstr "Programmet «%s» krasja med følgjande feil:"
-
-#: drakbug:104
-#, c-format
-msgid "The \"%s\" program has crashed."
-msgstr "Programmet «%s» krasja."
-
-#: drakbug:106
+#: drakbug:121
 #, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
@@ -671,7 +666,8 @@ msgstr " --help                – Vis denne hjelpeteksten.\n"
 
 #: drakhelp:23
 #, c-format
-msgid " --id <id_label>       - load the html help page which refers to id_label\n"
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
 " --id <identifikator>  – Last HTML-hjelpesida som refererer til "
 "«identifikator».\n"
@@ -681,7 +677,8 @@ msgstr ""
 msgid ""
 " --doc <link>          - link to another web page ( for WM welcome "
 "frontend)\n"
-msgstr " --doc <lenkje>        – Lenkje til ei anna nettside (for velkomstmelding).\n"
+msgstr ""
+" --doc <lenkje>        – Lenkje til ei anna nettside (for velkomstmelding).\n"
 
 #: drakhelp:52
 #, c-format
@@ -1112,7 +1109,137 @@ msgstr "Systemval"
 msgid "Periodic Checks"
 msgstr "Regelmessige kontrollar"
 
-#: draksec:291
+#: draksec:283
+#, c-format
+msgid "Root password"
+msgstr ""
+
+#: draksec:284
+#, c-format
+msgid "User password"
+msgstr ""
+
+#: draksec:314 draksec:368
+#, fuzzy, c-format
+msgid "Software management"
+msgstr "Programhandtering"
+
+#: draksec:315
+#, fuzzy, c-format
+msgid "Mandriva Update"
+msgstr "Mandriva Online"
+
+#: draksec:316
+#, fuzzy, c-format
+msgid "Software Media Manager"
+msgstr "Programhandtering"
+
+#: draksec:317
+#, c-format
+msgid "Configure 3D Desktop effects"
+msgstr ""
+
+#: draksec:318
+#, fuzzy, c-format
+msgid "Graphical server Configuration"
+msgstr "Set opp e-postvarsel"
+
+#: draksec:319
+#, fuzzy, c-format
+msgid "Mouse Configuration"
+msgstr "Manuelt oppsett"
+
+#: draksec:320
+#, fuzzy, c-format
+msgid "Keyboard Configuration"
+msgstr "Maskinvareoppsett"
+
+#: draksec:321
+#, fuzzy, c-format
+msgid "UPS Configuration"
+msgstr "UPS-drivaroppsett"
+
+#: draksec:322
+#, fuzzy, c-format
+msgid "Network Configuration"
+msgstr "Varseloppsett"
+
+#: draksec:323
+#, c-format
+msgid "Hosts definitions"
+msgstr ""
+
+#: draksec:324
+#, fuzzy, c-format
+msgid "Network Center"
+msgstr "Nettverksskrivarport"
+
+#: draksec:325
+#, c-format
+msgid "VPN"
+msgstr ""
+
+#: draksec:326
+#, fuzzy, c-format
+msgid "Proxy Configuration"
+msgstr "Varseloppsett"
+
+#: draksec:327
+#, fuzzy, c-format
+msgid "Connection Sharing"
+msgstr "Samband"
+
+#: draksec:329
+#, fuzzy, c-format
+msgid "Backups"
+msgstr "Buss"
+
+#: draksec:331 logdrake:52
+#, c-format
+msgid "Logs"
+msgstr "Loggar"
+
+#: draksec:333
+#, fuzzy, c-format
+msgid "Users"
+msgstr "Brukar"
+
+#: draksec:335
+#, fuzzy, c-format
+msgid "Boot Configuratoin"
+msgstr "Varseloppsett"
+
+#: draksec:353
+#, c-format
+msgid "Ask for user password"
+msgstr ""
+
+#: draksec:354
+#, c-format
+msgid "Ask for root password"
+msgstr ""
+
+#: draksec:355
+#, c-format
+msgid "Do not ask for any password"
+msgstr ""
+
+#: draksec:369
+#, fuzzy, c-format
+msgid "Hardware"
+msgstr "Harddrake"
+
+#: draksec:370
+#, fuzzy, c-format
+msgid "Network"
+msgstr "Nettverksval"
+
+#: draksec:372
+#, c-format
+msgid "Boot"
+msgstr ""
+
+#: draksec:396
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "Set tryggleiksnivå. Vent litt …"
@@ -1605,7 +1732,8 @@ msgstr "Buss"
 
 #: harddrake2:31
 #, c-format
-msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgid ""
+"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr ""
 "Dette er den fysiske bussen som eininga er kopla til (eksempel: PCI eller "
 "USB)."
@@ -2163,7 +2291,8 @@ msgstr "Einingsfil"
 
 #: harddrake2:115
 #, c-format
-msgid "the device file used to communicate with the kernel driver for the mouse"
+msgid ""
+"the device file used to communicate with the kernel driver for the mouse"
 msgstr "einingsfila for musa brukt til å kommunisera med kjernedrivaren"
 
 #: harddrake2:116
@@ -2365,7 +2494,8 @@ msgstr "Køyr oppsettverktøy"
 
 #: harddrake2:299
 #, c-format
-msgid "Click on a device in the left tree in order to display its information here."
+msgid ""
+"Click on a device in the left tree in order to display its information here."
 msgstr "Trykk på ei eining til venstre for å sjå informasjon om eininga her."
 
 #: harddrake2:319
@@ -2425,11 +2555,6 @@ msgstr ""
 #, c-format
 msgid "Mandriva Linux Tools Logs"
 msgstr "Loggverktøy for Mandriva Linux"
-
-#: logdrake:52
-#, c-format
-msgid "Logs"
-msgstr "Loggar"
 
 #: logdrake:65
 #, c-format
@@ -2665,7 +2790,8 @@ msgstr "Tenesteoppsett"
 msgid ""
 "You will receive an alert if one of the selected services is no longer "
 "running"
-msgstr "Du vil motta ei varsling om ei av avmerkte tenestene ikkje lenger køyrer"
+msgstr ""
+"Du vil motta ei varsling om ei av avmerkte tenestene ikkje lenger køyrer"
 
 #: logdrake:429
 #, c-format
@@ -2748,7 +2874,8 @@ msgstr "Avbryt skannaroppsett."
 
 #: scannerdrake:60
 #, c-format
-msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr "Klarte ikkje installera pakkar nødvendige for å setja opp skannarar."
 
 #: scannerdrake:61
@@ -3304,6 +3431,9 @@ msgstr "Oppsett av språk og land"
 msgid "Regional Settings"
 msgstr "Språk og land"
 
+#~ msgid "The \"%s\" program has crashed."
+#~ msgstr "Programmet «%s» krasja."
+
 #~ msgid "Error!"
 #~ msgstr "Feil"
 
@@ -3404,4 +3534,3 @@ msgstr "Språk og land"
 
 #~ msgid "Userdrake"
 #~ msgstr "Brukaroppsett"
-

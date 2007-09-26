@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 2007\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-17 15:08+0200\n"
+"POT-Creation-Date: 2007-09-26 12:55+0200\n"
 "PO-Revision-Date: 2006-09-16 07:01+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
@@ -139,7 +139,12 @@ msgstr ""
 "请选择视频模式, 该模式将应用到下面所选的每个启动项。\n"
 "请确定您的视频卡支持您所选的模式。"
 
-#: drakbug:46
+#: drakbug:48 drakbug:113
+#, c-format
+msgid "The \"%s\" program has crashed with the following error:"
+msgstr "“%s”程序已崩溃，并抛出如下错误："
+
+#: drakbug:54
 #, c-format
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "Mandriva Linux 故障报告工具"
@@ -218,17 +223,7 @@ msgstr "软件包: "
 msgid "Kernel:"
 msgstr "内核: "
 
-#: drakbug:102
-#, c-format
-msgid "The \"%s\" program has crashed with the following error:"
-msgstr "“%s”程序已崩溃，并抛出如下错误："
-
-#: drakbug:104
-#, c-format
-msgid "The \"%s\" program has crashed."
-msgstr "“%s”程序已崩溃。"
-
-#: drakbug:106
+#: drakbug:121
 #, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
@@ -1100,7 +1095,137 @@ msgstr "系统选项"
 msgid "Periodic Checks"
 msgstr "定期检查"
 
-#: draksec:291
+#: draksec:283
+#, c-format
+msgid "Root password"
+msgstr ""
+
+#: draksec:284
+#, c-format
+msgid "User password"
+msgstr ""
+
+#: draksec:314 draksec:368
+#, fuzzy, c-format
+msgid "Software management"
+msgstr "软件管理器"
+
+#: draksec:315
+#, fuzzy, c-format
+msgid "Mandriva Update"
+msgstr "Mandriva 在线"
+
+#: draksec:316
+#, fuzzy, c-format
+msgid "Software Media Manager"
+msgstr "软件管理器"
+
+#: draksec:317
+#, c-format
+msgid "Configure 3D Desktop effects"
+msgstr ""
+
+#: draksec:318
+#, fuzzy, c-format
+msgid "Graphical server Configuration"
+msgstr "邮件提醒设定"
+
+#: draksec:319
+#, fuzzy, c-format
+msgid "Mouse Configuration"
+msgstr "手工配置"
+
+#: draksec:320
+#, fuzzy, c-format
+msgid "Keyboard Configuration"
+msgstr "硬件配置"
+
+#: draksec:321
+#, fuzzy, c-format
+msgid "UPS Configuration"
+msgstr "UPS 驱动程序配置"
+
+#: draksec:322
+#, fuzzy, c-format
+msgid "Network Configuration"
+msgstr "提醒配置"
+
+#: draksec:323
+#, c-format
+msgid "Hosts definitions"
+msgstr ""
+
+#: draksec:324
+#, fuzzy, c-format
+msgid "Network Center"
+msgstr "网络打印机端口"
+
+#: draksec:325
+#, c-format
+msgid "VPN"
+msgstr ""
+
+#: draksec:326
+#, fuzzy, c-format
+msgid "Proxy Configuration"
+msgstr "提醒配置"
+
+#: draksec:327
+#, fuzzy, c-format
+msgid "Connection Sharing"
+msgstr "连接"
+
+#: draksec:329
+#, fuzzy, c-format
+msgid "Backups"
+msgstr "总线"
+
+#: draksec:331 logdrake:52
+#, c-format
+msgid "Logs"
+msgstr "日志"
+
+#: draksec:333
+#, fuzzy, c-format
+msgid "Users"
+msgstr "用户"
+
+#: draksec:335
+#, fuzzy, c-format
+msgid "Boot Configuratoin"
+msgstr "提醒配置"
+
+#: draksec:353
+#, c-format
+msgid "Ask for user password"
+msgstr ""
+
+#: draksec:354
+#, c-format
+msgid "Ask for root password"
+msgstr ""
+
+#: draksec:355
+#, c-format
+msgid "Do not ask for any password"
+msgstr ""
+
+#: draksec:369
+#, fuzzy, c-format
+msgid "Hardware"
+msgstr "Drak 硬件配置"
+
+#: draksec:370
+#, fuzzy, c-format
+msgid "Network"
+msgstr "网络选项"
+
+#: draksec:372
+#, c-format
+msgid "Boot"
+msgstr ""
+
+#: draksec:396
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "请稍候, 正在设置安全级别..."
@@ -2396,11 +2521,6 @@ msgstr "修改已经完成, 不过您必须退出登录修改才会生效"
 msgid "Mandriva Linux Tools Logs"
 msgstr "Mandriva Linux 工具日志"
 
-#: logdrake:52
-#, c-format
-msgid "Logs"
-msgstr "日志"
-
 #: logdrake:65
 #, c-format
 msgid "Show only for the selected day"
@@ -3257,3 +3377,5 @@ msgstr "语言和国家配置"
 msgid "Regional Settings"
 msgstr "区域设置"
 
+#~ msgid "The \"%s\" program has crashed."
+#~ msgstr "“%s”程序已崩溃。"

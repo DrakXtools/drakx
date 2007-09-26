@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: menu-messages-main-es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-17 15:08+0200\n"
+"POT-Creation-Date: 2007-09-26 12:55+0200\n"
 "PO-Revision-Date: 2007-09-24 17:00-0300\n"
 "Last-Translator: Fabián Mandelbaum <fmandelbaum@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -144,7 +144,12 @@ msgstr ""
 "arranque aquí debajo.\n"
 "Asegúrese de que su tarjeta de vídeo soporta el modo que eligió"
 
-#: drakbug:46
+#: drakbug:48 drakbug:113
+#, c-format
+msgid "The \"%s\" program has crashed with the following error:"
+msgstr "El programa \"%s\" se ha detenido con el error siguiente:"
+
+#: drakbug:54
 #, c-format
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "Herramienta de Reporte de Errores de Mandriva Linux"
@@ -223,17 +228,7 @@ msgstr "Paquete:"
 msgid "Kernel:"
 msgstr "Kernel:"
 
-#: drakbug:102
-#, c-format
-msgid "The \"%s\" program has crashed with the following error:"
-msgstr "El programa \"%s\" se ha detenido con el error siguiente:"
-
-#: drakbug:104
-#, c-format
-msgid "The \"%s\" program has crashed."
-msgstr "El programa \"%s\" se ha detenido."
-
-#: drakbug:106
+#: drakbug:121
 #, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
@@ -243,8 +238,11 @@ msgid ""
 "kernel version, and /proc/cpuinfo."
 msgstr ""
 "Para enviar un informe de errores, haga clic sobre el botón Informe.\n"
-"Esto abrirá una ventana del navegador web en %s donde encontrará un formulario para que lo rellene. La información que se muestra arriba será transferida a ese servidor. \n"
-" Algunos datos útiles que puede incluir en su informe son la salida de lspcidrake -v, versión del kernel, e información de su procesador/cpu."
+"Esto abrirá una ventana del navegador web en %s donde encontrará un "
+"formulario para que lo rellene. La información que se muestra arriba será "
+"transferida a ese servidor. \n"
+" Algunos datos útiles que puede incluir en su informe son la salida de "
+"lspcidrake -v, versión del kernel, e información de su procesador/cpu."
 
 #: drakbug:112
 #, c-format
@@ -1128,7 +1126,137 @@ msgstr "Opciones de sistema"
 msgid "Periodic Checks"
 msgstr "Verificaciones periódicas"
 
-#: draksec:291
+#: draksec:283
+#, c-format
+msgid "Root password"
+msgstr ""
+
+#: draksec:284
+#, c-format
+msgid "User password"
+msgstr ""
+
+#: draksec:314 draksec:368
+#, fuzzy, c-format
+msgid "Software management"
+msgstr "Administrador de software"
+
+#: draksec:315
+#, fuzzy, c-format
+msgid "Mandriva Update"
+msgstr "Mandriva Online"
+
+#: draksec:316
+#, fuzzy, c-format
+msgid "Software Media Manager"
+msgstr "Administrador de software"
+
+#: draksec:317
+#, c-format
+msgid "Configure 3D Desktop effects"
+msgstr ""
+
+#: draksec:318
+#, fuzzy, c-format
+msgid "Graphical server Configuration"
+msgstr "Configuración de alerta por correo"
+
+#: draksec:319
+#, fuzzy, c-format
+msgid "Mouse Configuration"
+msgstr "Configuración manual"
+
+#: draksec:320
+#, fuzzy, c-format
+msgid "Keyboard Configuration"
+msgstr "Configuración del material"
+
+#: draksec:321
+#, fuzzy, c-format
+msgid "UPS Configuration"
+msgstr "Configuración del controlador UPS"
+
+#: draksec:322
+#, fuzzy, c-format
+msgid "Network Configuration"
+msgstr "Configuración de alerta"
+
+#: draksec:323
+#, c-format
+msgid "Hosts definitions"
+msgstr ""
+
+#: draksec:324
+#, fuzzy, c-format
+msgid "Network Center"
+msgstr "puerto de impresora de red"
+
+#: draksec:325
+#, c-format
+msgid "VPN"
+msgstr ""
+
+#: draksec:326
+#, fuzzy, c-format
+msgid "Proxy Configuration"
+msgstr "Configuración de alerta"
+
+#: draksec:327
+#, fuzzy, c-format
+msgid "Connection Sharing"
+msgstr "Conexión"
+
+#: draksec:329
+#, fuzzy, c-format
+msgid "Backups"
+msgstr "Bus"
+
+#: draksec:331 logdrake:52
+#, c-format
+msgid "Logs"
+msgstr "Registros"
+
+#: draksec:333
+#, fuzzy, c-format
+msgid "Users"
+msgstr "Usuario"
+
+#: draksec:335
+#, fuzzy, c-format
+msgid "Boot Configuratoin"
+msgstr "Configuración de alerta"
+
+#: draksec:353
+#, c-format
+msgid "Ask for user password"
+msgstr ""
+
+#: draksec:354
+#, c-format
+msgid "Ask for root password"
+msgstr ""
+
+#: draksec:355
+#, c-format
+msgid "Do not ask for any password"
+msgstr ""
+
+#: draksec:369
+#, fuzzy, c-format
+msgid "Hardware"
+msgstr "Harddrake"
+
+#: draksec:370
+#, fuzzy, c-format
+msgid "Network"
+msgstr "Opciones de red"
+
+#: draksec:372
+#, c-format
+msgid "Boot"
+msgstr ""
+
+#: draksec:396
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "Por favor espere, configurando el nivel de seguridad..."
@@ -2458,11 +2586,6 @@ msgstr "Se ha realizado el cambio, pero no se hará efectivo hasta que salga"
 msgid "Mandriva Linux Tools Logs"
 msgstr "Registros de las Herramientas Mandriva Linux"
 
-#: logdrake:52
-#, c-format
-msgid "Logs"
-msgstr "Registros"
-
 #: logdrake:65
 #, c-format
 msgid "Show only for the selected day"
@@ -3347,6 +3470,9 @@ msgstr "Configuración del idioma y país"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Ajustes regionales"
+
+#~ msgid "The \"%s\" program has crashed."
+#~ msgstr "El programa \"%s\" se ha detenido."
 
 #~ msgid "Error!"
 #~ msgstr "¡Error!"

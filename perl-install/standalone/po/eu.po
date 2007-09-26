@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-17 15:08+0200\n"
+"POT-Creation-Date: 2007-09-26 12:55+0200\n"
 "PO-Revision-Date: 2007-08-08 19:05+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Euskara <eu@li.org>\n"
@@ -142,7 +142,12 @@ msgstr ""
 "bakoitzari aplikatuko zaio.\n"
 "Ziurtatu zure bideo txartelak aukeratzen duzun modua onartzen duela."
 
-#: drakbug:46
+#: drakbug:48 drakbug:113
+#, c-format
+msgid "The \"%s\" program has crashed with the following error:"
+msgstr "\"%s\" programa kraskatu egin da ondorengo akatsarekin:"
+
+#: drakbug:54
 #, c-format
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "Mandriva Linux-en programa-erroreen berri emateko tresna"
@@ -221,17 +226,7 @@ msgstr "Paketea: "
 msgid "Kernel:"
 msgstr "Nukleoa:"
 
-#: drakbug:102
-#, c-format
-msgid "The \"%s\" program has crashed with the following error:"
-msgstr "\"%s\" programa kraskatu egin da ondorengo akatsarekin:"
-
-#: drakbug:104
-#, c-format
-msgid "The \"%s\" program has crashed."
-msgstr "\"%s\" programa kraskatu egin da."
-
-#: drakbug:106
+#: drakbug:121
 #, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
@@ -1125,7 +1120,137 @@ msgstr "Sistema-aukerak"
 msgid "Periodic Checks"
 msgstr "Aldizkako egiaztapenak"
 
-#: draksec:291
+#: draksec:283
+#, c-format
+msgid "Root password"
+msgstr ""
+
+#: draksec:284
+#, c-format
+msgid "User password"
+msgstr ""
+
+#: draksec:314 draksec:368
+#, fuzzy, c-format
+msgid "Software management"
+msgstr "Software-kudeatzailea"
+
+#: draksec:315
+#, fuzzy, c-format
+msgid "Mandriva Update"
+msgstr "Mandriva Online"
+
+#: draksec:316
+#, fuzzy, c-format
+msgid "Software Media Manager"
+msgstr "Software-kudeatzailea"
+
+#: draksec:317
+#, c-format
+msgid "Configure 3D Desktop effects"
+msgstr ""
+
+#: draksec:318
+#, fuzzy, c-format
+msgid "Graphical server Configuration"
+msgstr "Posta-abisuen konfigurazioa"
+
+#: draksec:319
+#, fuzzy, c-format
+msgid "Mouse Configuration"
+msgstr "Eskuzko konfigurazioa"
+
+#: draksec:320
+#, fuzzy, c-format
+msgid "Keyboard Configuration"
+msgstr "Hardware konfiguraketa"
+
+#: draksec:321
+#, fuzzy, c-format
+msgid "UPS Configuration"
+msgstr "UPS gailuaren konfigurazioa"
+
+#: draksec:322
+#, fuzzy, c-format
+msgid "Network Configuration"
+msgstr "Abisuen konfigurazioa"
+
+#: draksec:323
+#, c-format
+msgid "Hosts definitions"
+msgstr ""
+
+#: draksec:324
+#, fuzzy, c-format
+msgid "Network Center"
+msgstr "sareko inprimagailuaren ataka"
+
+#: draksec:325
+#, c-format
+msgid "VPN"
+msgstr ""
+
+#: draksec:326
+#, fuzzy, c-format
+msgid "Proxy Configuration"
+msgstr "Abisuen konfigurazioa"
+
+#: draksec:327
+#, fuzzy, c-format
+msgid "Connection Sharing"
+msgstr "Lotura"
+
+#: draksec:329
+#, fuzzy, c-format
+msgid "Backups"
+msgstr "Bus"
+
+#: draksec:331 logdrake:52
+#, c-format
+msgid "Logs"
+msgstr "Egunkariak"
+
+#: draksec:333
+#, fuzzy, c-format
+msgid "Users"
+msgstr "Erabiltzailea"
+
+#: draksec:335
+#, fuzzy, c-format
+msgid "Boot Configuratoin"
+msgstr "Abisuen konfigurazioa"
+
+#: draksec:353
+#, c-format
+msgid "Ask for user password"
+msgstr ""
+
+#: draksec:354
+#, c-format
+msgid "Ask for root password"
+msgstr ""
+
+#: draksec:355
+#, c-format
+msgid "Do not ask for any password"
+msgstr ""
+
+#: draksec:369
+#, fuzzy, c-format
+msgid "Hardware"
+msgstr "Harddrake"
+
+#: draksec:370
+#, fuzzy, c-format
+msgid "Network"
+msgstr "Sare-aukerak"
+
+#: draksec:372
+#, c-format
+msgid "Boot"
+msgstr ""
+
+#: draksec:396
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "Itxaron, segurtasun-maila ezartzen..."
@@ -2446,11 +2571,6 @@ msgstr "Aldaketa egin da, baina, eragina izan dezan, saioa amaitu behar duzu"
 msgid "Mandriva Linux Tools Logs"
 msgstr "Mandriva Linux Tresnen Erregistroak"
 
-#: logdrake:52
-#, c-format
-msgid "Logs"
-msgstr "Egunkariak"
-
 #: logdrake:65
 #, c-format
 msgid "Show only for the selected day"
@@ -3333,3 +3453,6 @@ msgstr "Eskuzko konfigurazioa"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "Ezarpenak"
+
+#~ msgid "The \"%s\" program has crashed."
+#~ msgstr "\"%s\" programa kraskatu egin da."
