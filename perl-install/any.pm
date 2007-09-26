@@ -856,8 +856,10 @@ sub acceptLicense {
             my $d = find { -e "$_/$file" } glob_("/usr/share/doc/*-release-*");
             $d && cat_("$d/$file");
         }
-    } 'release-notes.txt', 'release-notes.' . arch() . '.txt');
+    } 'release-notes.html', 'release-notes.' . arch() . '.html');
 
+    # we do not handle links:
+    $o->{release_notes} =~ s!<a href=".*?">(.*?)</a>!\1!g;
 
     return if $o->{useless_thing_accepted};
 
@@ -869,7 +871,43 @@ sub acceptLicense {
 		     cancel => N("Quit"),
 		     messages => formatAlaTeX(messages::main_license() . "\n\n\n" . messages::warning_about_patents()),
 		     interactive_help_id => 'acceptLicense',
-		     if_($o->{release_notes}, more_buttons => [ [ N("Release Notes"), sub { $o->ask_warn(N("Release Notes"), $o->{release_notes}) }, 1 ] ]),
+		     if_($o->{release_notes},
+                   more_buttons => [
+                       [
+                           N("Release Notes"), sub {
+                               require Gtk2::Html2;
+                               require ugtk2;
+                               ugtk2->import(':all');
+                               require mygtk2;
+                               mygtk2->import('gtknew');
+                               my $view     = Gtk2::Html2::View->new;
+                               my $document = Gtk2::Html2::Document->new;
+                               $view->set_document($document);
+                               
+                               $document->clear;
+                               $document->open_stream("text/html");
+                               $document->write_stream($o->{release_notes});
+                               
+                               my $w = ugtk2->new(N("Release Notes"), transient => $mainw->{real_window}, modal => 1);
+                               gtkadd($w->{rwindow},
+                                      gtkpack_(Gtk2::VBox->new,
+                                               1, create_scrolled_window(ugtk2::gtkset_border_width($view, 5),
+                                                                         [ 'never', 'automatic' ],
+                                                                     ),
+                                               0, gtkpack(create_hbox('edge'),
+                                                          gtknew('Button', text => N("Close"),
+                                                                 clicked => sub { Gtk2->main_quit })
+                                                      ),
+                                           ),
+                                  );
+                               # make parent visible still visible:
+                               local ($::real_windowwidth, $::real_windowheight) = ($::real_windowwidth - 50, $::real_windowheight - 50);
+                               mygtk2::set_main_window_size($w->{rwindow});
+                               $w->{real_window}->grab_focus;
+                               $w->{real_window}->show_all;
+                               $w->main;
+                               return;
+                           }, 1 ] ]),
 		     callbacks => { ok_disabled => sub { $r eq 'Refuse' } },
 		   },
 		   [ { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list', format => sub { translate($_[0]) } } ])
