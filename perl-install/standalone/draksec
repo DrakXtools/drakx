@@ -463,7 +463,7 @@ gtkpack_($vbox,
         );
 
 $notebook->set_scrollable(1);
-$notebook->signal_connect("switch-page" => sub { $oc->{buttons}{N("Help")}->set_sensitive($_[2]) });
+$notebook->signal_connect("switch-page" => sub { $oc->{buttons}{N("Help")}->set_sensitive(!member($_[2], qw(0 4))) });
 
 $oc->{buttons}{N("Help")}->set_sensitive(0);
 $oc->{cancel}->can_default(1);
