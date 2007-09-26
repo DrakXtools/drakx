@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-tr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-12 17:01+0200\n"
+"POT-Creation-Date: 2007-09-26 13:45+0200\n"
 "PO-Revision-Date: 2004-09-15 13:35+0200\n"
 "Last-Translator: Ömer Fadıl USTA <omer_fad@hotmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -142,7 +142,12 @@ msgid ""
 "Be sure your video card supports the mode you choose."
 msgstr ""
 
-#: drakbug:46
+#: drakbug:48 drakbug:113
+#, c-format
+msgid "The \"%s\" program has crashed with the following error:"
+msgstr ""
+
+#: drakbug:54
 #, fuzzy, c-format
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "Mandriva Hata Bildirme Aracı"
@@ -219,17 +224,7 @@ msgstr "Paket:"
 msgid "Kernel:"
 msgstr "Çekirdek:"
 
-#: drakbug:102
-#, c-format
-msgid "The \"%s\" program has crashed with the following error:"
-msgstr ""
-
-#: drakbug:104
-#, c-format
-msgid "The \"%s\" program has crashed."
-msgstr ""
-
-#: drakbug:106
+#: drakbug:121
 #, fuzzy, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
@@ -1060,7 +1055,122 @@ msgstr "Sistem Seçenekleri"
 msgid "Periodic Checks"
 msgstr "Periyodik Denetlemeler"
 
-#: draksec:291
+#: draksec:283
+#, c-format
+msgid "Root password"
+msgstr ""
+
+#: draksec:284
+#, c-format
+msgid "User password"
+msgstr ""
+
+#: draksec:314 draksec:368
+#, c-format
+msgid "Software Management"
+msgstr "Yazılım Yöneticisi"
+
+#: draksec:315
+#, fuzzy, c-format
+msgid "Mandriva Update"
+msgstr "Mandriva Online"
+
+#: draksec:316
+#, c-format
+msgid "Software Media Manager"
+msgstr "Yazılım Kaynak Yöneticisi"
+
+#: draksec:317
+#, fuzzy, c-format
+msgid "Configure 3D Desktop effects"
+msgstr "Web sunucuyu yapılandır"
+
+#: draksec:318
+#, fuzzy, c-format
+msgid "Graphical Server Configuration"
+msgstr "Posta uyarı yapılandırması"
+
+#: draksec:319
+#, fuzzy, c-format
+msgid "Mouse Configuration"
+msgstr "Elle yapılandır"
+
+#: draksec:320
+#, fuzzy, c-format
+msgid "Keyboard Configuration"
+msgstr "Ağ Yapılandırması"
+
+#: draksec:321
+#, fuzzy, c-format
+msgid "UPS Configuration"
+msgstr "CUPS yazdırma yapılandırması"
+
+#: draksec:322
+#, fuzzy, c-format
+msgid "Network Configuration"
+msgstr "Uyarı yapılandırması"
+
+#: draksec:323
+#, c-format
+msgid "Hosts definitions"
+msgstr ""
+
+#: draksec:324
+#, fuzzy, c-format
+msgid "Network Center"
+msgstr "Ağ & İnternet"
+
+#: draksec:325
+#, c-format
+msgid "VPN"
+msgstr ""
+
+#: draksec:326
+#, c-format
+msgid "Proxy Configuration"
+msgstr "Vekil Sunucu Yapılandırması"
+
+#: draksec:327
+#, fuzzy, c-format
+msgid "Connection Sharing"
+msgstr "Bağlantı"
+
+#: draksec:329
+#, c-format
+msgid "Backups"
+msgstr "Yedekler"
+
+#: draksec:331 logdrake:52
+#, c-format
+msgid "Logs"
+msgstr "Kayıtlar"
+
+#: draksec:333
+#, fuzzy, c-format
+msgid "Users"
+msgstr "Kullanıcı"
+
+#: draksec:335
+#, fuzzy, c-format
+msgid "Boot Configuratoin"
+msgstr "Uyarı yapılandırması"
+
+#: draksec:364
+#, c-format
+msgid "Hardware"
+msgstr "Donanım"
+
+#: draksec:370
+#, fuzzy, c-format
+msgid "Network"
+msgstr "Ağ Seçenekleri"
+
+#: draksec:372
+#, c-format
+msgid "Boot"
+msgstr "Önyükleme"
+
+#: draksec:396
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "Lütfen bekleyin, güvenlik seviyesi ayarlanıyor..."
@@ -2351,11 +2461,6 @@ msgstr "Değişklik bitti, fakat etkinleşmesi için sistemden çıkmalısınız
 msgid "Mandriva Linux Tools Logs"
 msgstr "Mandriva Araç Kayıtları"
 
-#: logdrake:52
-#, c-format
-msgid "Logs"
-msgstr "Kayıtlar"
-
 #: logdrake:65
 #, c-format
 msgid "Show only for the selected day"
@@ -3177,6 +3282,34 @@ msgstr ""
 msgid "Do you want to run the appropriate config tool?"
 msgstr "Yapılandırmanızı denemek ister misiniz?"
 
+#: ../menu/localedrake-system.desktop.in.h:1
+#, fuzzy
+msgid "System Regional Settings"
+msgstr "Sistem ayarları"
+
+#: ../menu/localedrake-system.desktop.in.h:2
+msgid "System wide language & country configurator"
+msgstr ""
+
+#: ../menu/harddrake.desktop.in.h:1
+msgid "HardDrake"
+msgstr "HardDrake"
+
+#: ../menu/harddrake.desktop.in.h:2
+#, fuzzy
+msgid "Hardware Central Configuration/information tool"
+msgstr "Ağ Yapılandırması"
+
+#: ../menu/localedrake-user.desktop.in.h:1
+#, fuzzy
+msgid "Language & country configuration"
+msgstr "Elle yapılandır"
+
+#: ../menu/localedrake-user.desktop.in.h:2
+#, fuzzy
+msgid "Regional Settings"
+msgstr "Ayarlar"
+
 #~ msgid "Error!"
 #~ msgstr "Hata!"
 
@@ -3266,9 +3399,6 @@ msgstr "Yapılandırmanızı denemek ister misiniz?"
 
 #~ msgid "Remove the last item"
 #~ msgstr "Son öğeyi kaldır"
-
-#~ msgid "HardDrake"
-#~ msgstr "HardDrake"
 
 #~ msgid "Menudrake"
 #~ msgstr "Menudrake"
