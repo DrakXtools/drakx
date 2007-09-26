@@ -13,7 +13,7 @@ use common;
 use Gtk2;
 use Gtk2::Gdk::Keysyms;
 
-unless ($::no_ugtk_init) {
+sub init() {
     !check_for_xserver() and print("Cannot be run in console mode.\n"), c::_exit(0);
     $::one_message_has_been_translated and warn("N() was called from $::one_message_has_been_translated BEFORE gtk2 initialisation, replace it with a N_() AND a translate() later.\n"), c::_exit(1);
 
@@ -22,6 +22,7 @@ unless ($::no_ugtk_init) {
         'drakx-net', 'drakx-kbd-mouse-x11', # shared translation
           @::textdomains;
 }
+init() unless ($::no_ugtk_init);
 Gtk2->croak_execeptions if (!$::no_ugtk_init || $::isInstall) && 0.95 < $Gtk2::VERSION;
 
 
