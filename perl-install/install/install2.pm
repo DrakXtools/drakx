@@ -317,7 +317,7 @@ sub main {
 
     push @::textdomains, 'DrakX', 'drakx-net', 'drakx-kbd-mouse-x11';
 
-    my ($cfg, $patch, @auto);
+    my ($cfg, $patch);
     my %cmdline = map { 
 	my ($n, $v) = split /=/;
 	$n => defined($v) ? $v : 1;
@@ -341,7 +341,7 @@ sub main {
 	my ($n, $v) = @_;
 	my $f = ${{
 	    lang      => sub { $o->{locale}{lang} = $v },
-	    flang     => sub { $o->{locale}{lang} = $v; push @auto, 'selectLanguage' },
+	    flang     => sub { $o->{locale}{lang} = $v; push @::auto_steps, 'selectLanguage' },
 	    langs     => sub { $o->{locale}{langs} = +{ map { $_ => 1 } split(':', $v) } },
 	    method    => sub { $o->{method} = $v },
 	    pcmcia    => sub { $o->{pcmcia} = $v },
@@ -401,7 +401,7 @@ sub main {
     eval { touch('/root/non-chrooted-marker.DrakX') }; #- helps distinguishing /root and /mnt/root when we don't know if we are chrooted
 
     if ($::local_install) {
-	push @auto, 
+	push @::auto_steps, 
 #	  'selectLanguage', 'selectKeyboard', 'miscellaneous', 'selectInstallClass',
 	  'doPartitionDisks', 'formatPartitions';
 	fs::mount::usbfs(''); #- do it now so that when_load doesn't do it
@@ -553,7 +553,7 @@ sub main {
     log::l("META_CLASS=$o->{meta_class}");
     $ENV{META_CLASS} = $o->{meta_class}; #- for Ia Ora
 
-    foreach (@auto) {
+    foreach (@::auto_steps) {
 	my $s = $o->{steps}{/::(.*)/ ? $1 : $_} or next;
 	$s->{auto} = $s->{hidden} = 1;
     }
