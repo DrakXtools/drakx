@@ -273,6 +273,111 @@ gtkappend_page($notebook, gtkshow(gtknew('VBox', children => [
                        gtknew('Label', text => $check_string));
 
 
+######################## AUTH ###################################
+my %progs;
+
+my $auth_string = N("Authentication");
+
+my %auth = (
+      no_passwd => N("No password"),
+      root_passwd => N("Root password"),
+      user_passwd => N("User password"),
+);
+
+sub default_auth_value {
+    my ($prog) = @_;
+    my $link = readlink("/etc/pam.d/$prog");
+    if ($link =~ /mandriva-console-auth/) {
+        return $auth{no_passwd};
+    } elsif ($link =~ /mandriva-simple-auth/) {
+        my ($user) = cat_("/etc/security/console.apps/$prog") =~ /USER=(.*)/;
+        return $auth{root_passwd} if $user eq 'root';
+        return $auth{user_passwd} if $user eq '<user>';
+    }
+}
+
+sub set_auth_value {
+    my ($prog, $auth) = @_;
+    if ($auth eq 'no_passwd') {
+        symlinkf('../../etc/pam.d/mandriva-console-auth', "/etc/pam.d/$prog");
+    } else {
+        symlink('../../etc/pam.d/mandriva-simple-auth', "/etc/pam.d/$prog");
+        my $value = $auth eq 'user_passwd' ? '<user>' : 'root';
+        substInFile {
+            s/^USER=.*/USER=$value/;
+        } "/etc/security/console.apps/$prog";
+    }
+}
+
+my %descr = (
+    
+    rpmdrake => N("Software management"),
+    mandrivaupdate => N("Mandriva Update"),
+    'drakrpm-edit-media' => N("Software Media Manager"),
+    drak3d => N("Configure 3D Desktop effects"),
+    xfdrake => N("Graphical server Configuration"),
+    drakmouse => N("Mouse Configuration"),
+    drakkeyboard => N("Keyboard Configuration"),
+    drakups => N("UPS Configuration"),
+    drakconnect => N("Network Configuration"),
+    drakhosts => N("Hosts definitions"),
+    draknetcenter => N("Network Center"),
+    drakvpn => N("VPN"),
+    drakproxy => N("Proxy Configuration"),
+    drakgw => N("Connection Sharing"),
+    drakauth => N("Authentication"),
+    drakbackup => N("Backups"),
+    drakfont => N("Import fonts"),
+    draklog => N("Logs"),
+    drakxservices => N("Services"),
+    userdrake => N("Users"),
+    drakclock => N("Date, Clock & Time Zone Settings"),
+    drakboot => N("Boot Configuratoin"),
+);
+
+gtkappend_page(
+    $notebook,
+    gtkshow(create_scrolled_window(
+        gtknew('VBox', children => [
+            map {
+                my ($title, $progs) = @$_;
+                (0, gtknew('Title2', label => $title),
+                 1, create_packtable(
+                     $common_opts,
+                     map {
+                         [
+                             gtkshow(gtknew('Label_Left', line_wrap => 1, text => $descr{$_} || $_)),
+                             resize(
+                                 $progs{$_} = new_nonedit_combo([
+                                     if_(0,
+                                         N("Ask for user password"),
+                                         N("Ask for root password"),
+                                         N("Do not ask for any password"),
+                                     ),
+                                     @auth{qw(user_passwd root_passwd no_passwd)}
+                                 ],
+                                                                default_auth_value($_)
+                                                                #$msec->get_check_value($opt)
+                                                            )
+                             )
+                         ];
+                     } split(' ', $progs)
+                 )
+                );
+            } (
+                [ N("Software management"), 'rpmdrake mandrivaupdate drakrpm-edit-media' ],
+                [ N("Harware"), 'drak3d xfdrake drakmouse drakkeyboard drakups' ],
+                [ N("Network"), 'drakconnect drakhosts draknetcenter drakvpn drakproxy drakgw' ],
+                [ N("System"), 'drakauth drakbackup drakfont draklog drakxservices userdrake drakclock' ],
+                [ N("Boot"), 'drakboot' ],
+            )
+        ]))),
+    gtknew('Label', text => $auth_string));
+
+
+
+
+
 ####################### OK CANCEL BUTTONS ##################################
 gtkpack_($vbox,
          1, gtkshow($notebook),
@@ -319,6 +424,13 @@ gtkpack_($vbox,
                                 $msec->apply_functions;
                                 log::explanations("Applying msec changes");
                                 run_program::run("/usr/sbin/msec");
+
+                                log::explanations("Setting up right delegation");
+                                my %rev_auth = reverse %auth;
+                                foreach my $key (keys %progs) {
+                                    my $value = $progs{$key}->get_text;
+                                    set_auth_value($key, $rev_auth{$value});
+                                }
 
                                 remove_wait_msg($w);
 
