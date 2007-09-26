@@ -265,6 +265,8 @@ sub associate_phys_media {
 
 	foreach my $medium (@$hdlists) {
 	    if (my $phys_m = find { $_->{name} eq $medium->{name} } @phys_media) {
+		$medium->{phys_medium} and log::l("$medium->{name} has already phys_medium $medium->{phys_medium}{url}");
+		log::l("setting medium $medium->{name} phys_medium to $phys_m->{url}");
 		$medium->{phys_medium} = $phys_m;
 	    } else {
 		$medium->{selected} = 0;
@@ -322,9 +324,9 @@ sub look_for_ISO_images {
     my @media = map {
 	if (sysopen(my $F, "$iso_dir/$_", 0)) {
 	    my ($vol_id, $app_id) = c::get_iso_volume_ids(fileno $F);
-	    #- the ISO volume names must end in -Disc\d+ if they belong (!) to a set
+	    #- the ISO volume names must end in -CD\d+ if they belong (!) to a set
 	    #- otherwise use the full volume name as CD set identifier
-	    my $cd_set = $vol_id =~ /^(.*)-disc\d+$/i ? $1 : $vol_id;
+	    my $cd_set = $vol_id =~ /^(.*)-(disc|cd|dvd)\d+$/i ? $1 : $vol_id;
 
 	    log::l("found ISO: file=$_ cd_set=$cd_set app_id=$app_id");
 	    { cd_set => $cd_set, app_id => $app_id, file => $_ };
@@ -480,10 +482,12 @@ sub parse_media_cfg {
     my $distribconf = { map { $_ => $d->getvalue(undef, $_) } 'suppl', 'askmedia' };
     my @hdlists = map { 
 	my ($size) = $d->getvalue($_, 'size') =~ /(\d+)MB?/i;
+	my $name = $d->getvalue($_, 'name'); 
+	$name =~ s/^"(.*)"$/$1/;
 	{ 
 	    rpmsdir => $_,
 	    rel_hdlist => 'media_info/' . $d->getvalue($_, 'hdlist'),
-	    name => $d->getvalue($_, 'name'),
+	    name => $name,
 	    size => $size,
 	    selected => !$d->getvalue($_, 'noauto'),
 	    update => $d->getvalue($_, 'updates_for') ? 1 : undef,
