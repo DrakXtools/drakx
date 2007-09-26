@@ -349,11 +349,6 @@ gtkappend_page(
                              gtkshow(gtknew('Label_Left', line_wrap => 1, text => $descr{$_} || $_)),
                              resize(
                                  $progs{$_} = new_nonedit_combo([
-                                     if_(0,
-                                         N("Ask for user password"),
-                                         N("Ask for root password"),
-                                         N("Do not ask for any password"),
-                                     ),
                                      @auth{qw(user_passwd root_passwd no_passwd)}
                                  ],
                                                                 default_auth_value($_)
