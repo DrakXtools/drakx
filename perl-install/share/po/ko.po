@@ -1,14 +1,14 @@
 # Korean translation of drakbootdisk.
 # Copyright (C) 2001 Free Software Foundation, Inc.
 # Jaegeum Choe <baedaron@hananet.net>, 2001.
-#
+# 
 # changes asked by HP people -- pablo 2003-01-23
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2007-09-12 17:02+0200\n"
-"PO-Revision-Date: 2002-09-09 09:08+0900\n"
+"PO-Revision-Date: 2007-09-26 20:12+0200\n"
 "Last-Translator: Jaegeum Cze <baedaron@hanafos.com>\n"
 "Language-Team: Korean <beadaron@hanafos.com>\n"
 "MIME-Version: 1.0\n"
@@ -38,6 +38,12 @@ msgid ""
 "\n"
 "Assign a new Volume ID?"
 msgstr ""
+"LILO는 %s 드라이브에 대하여 새로운 Volume ID를 할당하고자 합니다.\n"
+"하지만 Windows NT, 2000, 또는 XP 부팅 디스크의 Volume ID를 변경하는것은\n"
+"심각한 Windows 오류를 발생시킵니다.이 경고는 Windows 95, 98, 또는 NT 데이터 "
+"디스크에는 적용되지 않습니다.\n"
+"\n"
+"새로운 Volume ID를 할당하시겠습니까?"
 
 #: any.pm:262
 #, c-format
@@ -70,6 +76,11 @@ msgid ""
 "\n"
 "On which drive are you booting?"
 msgstr ""
+"당신은 파티션에 부트로더를 설치하기로 결정하였습니다.\n"
+"이것은 당신이 부팅하는 하드드라이브에 부트로더가 이미 있음을 의미합니다.\n"
+"(eg: System Commander).\n"
+"\n"
+"어느 드라이브에서 부팅하시겠습니까?"
 
 #: any.pm:329
 #, c-format
@@ -129,7 +140,7 @@ msgstr "부트 장치"
 #: any.pm:387
 #, c-format
 msgid "Main options"
-msgstr ""
+msgstr "메인 옵션"
 
 #: any.pm:388
 #, c-format
@@ -139,17 +150,17 @@ msgstr "기본 이미지로 부팅될 때까지 지연시간"
 #: any.pm:389
 #, fuzzy, c-format
 msgid "Enable ACPI"
-msgstr "CD 부팅 허용?"
+msgstr "ACPI 허용"
 
 #: any.pm:390
 #, fuzzy, c-format
 msgid "Enable APIC"
-msgstr "CD 부팅 허용?"
+msgstr "APIC 허용"
 
 #: any.pm:391
 #, fuzzy, c-format
 msgid "Enable Local APIC"
-msgstr "CD 부팅 허용?"
+msgstr "지역 APIC 허용"
 
 #: any.pm:393 any.pm:773 authentication.pm:196 diskdrake/smbnfs_gtk.pm:181
 #, c-format
@@ -169,7 +180,7 @@ msgstr "다시 시도하세요."
 #: any.pm:396
 #, fuzzy, c-format
 msgid "You can not use a password with %s"
-msgstr " %s 마운트 위치에는 암호화 파일시스템을 사용할 수 없습니다. "
+msgstr " %s 마운트 위치에는 암호를 사용할 수 없습니다.다. "
 
 #: any.pm:399 any.pm:774 authentication.pm:197
 #, c-format
@@ -255,7 +266,7 @@ msgstr "추가"
 #: any.pm:491
 #, c-format
 msgid "Xen append"
-msgstr ""
+msgstr "Xen 추가"
 
 #: any.pm:494
 #, c-format
@@ -416,6 +427,8 @@ msgstr "%s 옵션은 숫자이어야 합니다!"
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
 msgstr ""
+"%s 는 500 위의 수여야 합니다. 지금의 수를 허가하고 \n"
+"계속 진행하시겠습니까?"
 
 #: any.pm:768
 #, fuzzy, c-format
@@ -425,7 +438,7 @@ msgstr "사용자명"
 #: any.pm:775 authentication.pm:182
 #, fuzzy, c-format
 msgid "Set administrator (root) password"
-msgstr "root 암호 설정"
+msgstr "관리자(root) 암호 설정"
 
 #: any.pm:780
 #, fuzzy, c-format
@@ -509,7 +522,7 @@ msgstr "사용할 언어를 선택해 주세요."
 #: any.pm:883 any.pm:951
 #, fuzzy, c-format
 msgid "Language choice"
-msgstr "미얀마"
+msgstr "언어선택"
 
 #: any.pm:913
 #, c-format
@@ -517,17 +530,20 @@ msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
-msgstr "설치후 다른 다른 언어를 선택할수 있습니다."
+msgstr ""
+"Mandriva Linux는 다수의 언어를 지원할 수 있습니다.\n"
+"설치할 언어를 선택하여주십시요. 설치된 언어들은 설치가 완료되고\n"
+"시스템이 다시 시작되면 사용할 수 있습니다."
 
 #: any.pm:916
 #, c-format
 msgid "Multi languages"
-msgstr ""
+msgstr "다중 언어"
 
 #: any.pm:928 any.pm:959
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
-msgstr ""
+msgstr "이전 호환성 (non UTF-8) 인코딩"
 
 #: any.pm:930
 #, fuzzy, c-format
@@ -562,7 +578,7 @@ msgstr "고급"
 #: any.pm:1016
 #, c-format
 msgid "Input method:"
-msgstr ""
+msgstr "입력 방법"
 
 #: any.pm:1019
 #, c-format
@@ -593,6 +609,10 @@ msgid ""
 "\n"
 "\"Custom\" permit a per-user granularity.\n"
 msgstr ""
+"이 디렉토리의 내용중 일부를 사용자가 공유할 수 있도록 하시겠습니까?\n"
+"공유를 허가하시려면 konqueror과 nautilus에서 \"Share\"버튼을 클릭하시면\n"
+"사용자에게 공유가 허가될 것입니다.\n"
+"\"Custom\" 사용자마다 따로 허가 해줄 수 있습니다.\n"
 
 #: any.pm:1115
 #, c-format
@@ -600,6 +620,8 @@ msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
 "Windows."
 msgstr ""
+"NFS: Mac과 Windows 에서는 다소 지원이 미흡하지만\n"
+"전통적인 Unix 파일 공유 시스템입니다."
 
 #: any.pm:1118
 #, c-format
@@ -607,6 +629,7 @@ msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
 "systems."
 msgstr ""
+"SMB: Window, Mac OS X 그리고 많은 최신 Linux에서 사용되는 파일 공유 시스템"
 
 #: any.pm:1126
 #, c-format
@@ -617,7 +640,7 @@ msgstr "NFS와 삼바 중, 어느 것을 이용하시겠습니까?"
 #: any.pm:1151
 #, c-format
 msgid "Launch userdrake"
-msgstr "사용자드레이크 실행"
+msgstr "userdrake 실행"
 
 #: any.pm:1151 interactive/gtk.pm:747
 #, c-format
@@ -630,6 +653,8 @@ msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
 "You can use userdrake to add a user to this group."
 msgstr ""
+"사용자 개개인의 공유를 위해서는 그룹의 \"fileshare\"를 사용합니다.\n"
+"이 그룹에서 사용자를 추가하기위해 userdrake를 사용할 수 있습니다."
 
 #: any.pm:1245
 #, c-format
@@ -654,12 +679,12 @@ msgstr "님의 시간대는 어디입니까?"
 #: any.pm:1296 any.pm:1298
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
-msgstr ""
+msgstr "날짜, 시간 & 시간대 설정"
 
 #: any.pm:1299
 #, c-format
 msgid "What is the best time?"
-msgstr ""
+msgstr "최적의 시간은 무엇입니까?"
 
 #: any.pm:1303
 #, fuzzy, c-format
@@ -699,7 +724,7 @@ msgstr "NIS"
 #: authentication.pm:26
 #, fuzzy, c-format
 msgid "Smart Card"
-msgstr "이더넷 카드"
+msgstr "스마트 카드"
 
 #: authentication.pm:27 authentication.pm:163
 #, c-format
@@ -709,17 +734,17 @@ msgstr "윈도우즈 도메인"
 #: authentication.pm:28
 #, fuzzy, c-format
 msgid "Active Directory with SFU"
-msgstr "모든 백업 복구"
+msgstr "SFU로 디렉토리 활성화"
 
 #: authentication.pm:29
 #, fuzzy, c-format
 msgid "Active Directory with Winbind"
-msgstr "모든 백업 복구"
+msgstr "Winbind로 디렉토리 활성화"
 
 #: authentication.pm:66
 #, c-format
 msgid "Local file:"
-msgstr "로컬 파일 :"
+msgstr "로컬 파일 :"
 
 #: authentication.pm:66
 #, c-format
@@ -749,6 +774,8 @@ msgid ""
 "Allows you to run a group of computers in the same Network Information "
 "Service domain with a common password and group file."
 msgstr ""
+"일반적인 암호와 그룹 파일을 포함한 동일한 네트워크 정보 서비스(NIS)에서\n"
+"컴퓨터 그룹을 작동하기 위해 허가합니다."
 
 #: authentication.pm:69
 #, c-format
@@ -761,6 +788,8 @@ msgid ""
 "Winbind allows the system to retrieve information and authenticate users in "
 "a Windows domain."
 msgstr ""
+"Winbind 는 Windows 도메인 상에서 정보를 수정하고 사용자를 인증하기 위해\n"
+"시스템에 적용됩니다."
 
 #: authentication.pm:70
 #, fuzzy, c-format
@@ -770,7 +799,7 @@ msgstr "모든 백업 복구"
 #: authentication.pm:70
 #, c-format
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
-msgstr ""
+msgstr "동적 디렉토리 서버(ADS)에서 인증을 위한 Kerberos와 Ldap 포함"
 
 #: authentication.pm:71
 #, fuzzy, c-format
@@ -783,6 +812,8 @@ msgid ""
 "Winbind allows the system to authenticate users in a Windows Active "
 "Directory Server."
 msgstr ""
+"Winbind 는 Windows Active Directory Server에서 사용자 인증을 위해\n"
+"시스템에 적용됩니다."
 
 #: authentication.pm:96
 #, c-format
@@ -817,12 +848,12 @@ msgstr "SSL"
 #: authentication.pm:114
 #, c-format
 msgid "security layout (SASL/Kerberos)"
-msgstr ""
+msgstr "보안 계층(SASL/Kerberos)"
 
 #: authentication.pm:121 authentication.pm:159
 #, fuzzy, c-format
 msgid "Authentication Active Directory"
-msgstr "사용자 인증"
+msgstr "활성 디렉토리 인증"
 
 #: authentication.pm:122 diskdrake/smbnfs_gtk.pm:182
 #, c-format
@@ -837,17 +868,17 @@ msgstr "서버"
 #: authentication.pm:125
 #, fuzzy, c-format
 msgid "LDAP users database"
-msgstr "데이터베이스"
+msgstr "LDAP 사용자 데이터베이스"
 
 #: authentication.pm:126
 #, c-format
 msgid "Use Anonymous BIND "
-msgstr ""
+msgstr "익명 BIND 사용"
 
 #: authentication.pm:127
 #, c-format
 msgid "LDAP user allowed to browse the Active Directory"
-msgstr ""
+msgstr "LDAP 사용자는 Active Directory를 검색할 수 있습니다."
 
 #: authentication.pm:128
 #, fuzzy, c-format
@@ -904,7 +935,7 @@ msgstr "도메인 관리자 사용자명"
 #: authentication.pm:165
 #, c-format
 msgid "Domain Admin Password"
-msgstr ""
+msgstr "도메인 관리자 암호"
 
 #: authentication.pm:181 authentication.pm:198
 #, c-format
@@ -914,7 +945,7 @@ msgstr "사용자 인증"
 #: authentication.pm:184
 #, fuzzy, c-format
 msgid "Authentication method"
-msgstr "사용자 인증"
+msgstr "인증 방법"
 
 #. -PO: keep this short or else the buttons will not fit in the window
 #: authentication.pm:189
@@ -942,6 +973,9 @@ msgid ""
 "wait for default boot.\n"
 "\n"
 msgstr ""
+"운영체제 선택!\n"
+"다음 리스트에서의 운영체제를 선택하시거나, 기본 부팅을 기다리십시요\n"
+"\n"
 
 #: bootloader.pm:1030
 #, c-format
@@ -951,12 +985,12 @@ msgstr "텍스트 메뉴 LILO"
 #: bootloader.pm:1031
 #, c-format
 msgid "GRUB with graphical menu"
-msgstr ""
+msgstr "그래픽 메뉴 GRUB"
 
 #: bootloader.pm:1032
 #, c-format
 msgid "GRUB with text menu"
-msgstr ""
+msgstr "텍스트 메뉴 GRUB"
 
 #: bootloader.pm:1033
 #, c-format
@@ -984,6 +1018,7 @@ msgid ""
 "Your bootloader configuration must be updated because partition has been "
 "renumbered"
 msgstr ""
+"파티션이 번호가 변경되었기 때문에, 부트로더 설정이 업데이트 되어야 합니다."
 
 #: bootloader.pm:1747
 #, c-format
@@ -991,16 +1026,18 @@ msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
 "choose \"%s\""
 msgstr ""
+"부트로더가 정확하게 설치 될수 없습니다. rescue로 부팅하여 \"%s\"를 \n"
+"선택하여야 합니다."
 
 #: bootloader.pm:1748
 #, fuzzy, c-format
 msgid "Re-install Boot Loader"
-msgstr "부트로더 설치"
+msgstr "부트로더 재설치"
 
 #: common.pm:132
 #, c-format
 msgid "B"
-msgstr "바이트"
+msgstr "Byte"
 
 #: common.pm:132
 #, c-format
@@ -1040,7 +1077,7 @@ msgstr "%d 초"
 #: common.pm:306
 #, c-format
 msgid "command %s missing"
-msgstr ""
+msgstr "잘못된 명령 %s "
 
 #: diskdrake/dav.pm:17
 #, c-format
@@ -1050,6 +1087,9 @@ msgid ""
 "configured as a WebDAV server). If you would like to add WebDAV mount\n"
 "points, select \"New\"."
 msgstr ""
+"WebDAV는 web server의 디렉토리를 로컬로 마운트 해주고,(web server 가 WebDAV "
+"server처럼 설정되도록 해주는)로컬 파일시스템 처럼 \n"
+"다루는 프로토콜 입니다."
 
 #: diskdrake/dav.pm:25
 #, c-format
@@ -1110,7 +1150,7 @@ msgstr "WebDAV 서버 URL을 입력하세요."
 #: diskdrake/dav.pm:87
 #, c-format
 msgid "The URL must begin with http:// or https://"
-msgstr ""
+msgstr "URL 주소는 http:// 또는 https://로 시작되어야 합니다."
 
 #: diskdrake/dav.pm:109
 #, c-format
@@ -1187,8 +1227,8 @@ msgid ""
 "I suggest you first resize that partition\n"
 "(click on it, then click on \"Resize\")"
 msgstr ""
-"하나의 큰 도스 파티션을 가지고 있습니다.\n"
-"(일반적으로 마이크로소프트의 도스/윈도우즈에서 사용).\n"
+"하나의 큰 Microsoft Windows 파티션을 가지고 있습니다.\n"
+"(일반적으로 Microsoft의 DOS/Windows에서 사용).\n"
 "먼저 그 파티션의 크기를 조정할 것을 권장합니다.\n"
 "(그것을 클릭한후, \"크기조정\"을 클릭하세요.)"
 
@@ -1240,7 +1280,7 @@ msgstr "HFS"
 #: diskdrake/hd_gtk.pm:351
 #, c-format
 msgid "Windows"
-msgstr "창"
+msgstr ""
 
 #: diskdrake/hd_gtk.pm:352 services.pm:158
 #, c-format
@@ -1272,7 +1312,7 @@ msgstr "경고"
 #: diskdrake/hd_gtk.pm:380
 #, fuzzy, c-format
 msgid "This partition is already empty"
-msgstr "이 파티션은 크기변경이 허용되지 않습니다."
+msgstr "이 파티션은 이미 비어있습니다."
 
 #: diskdrake/hd_gtk.pm:389
 #, c-format
@@ -1294,7 +1334,7 @@ msgstr "유형"
 #: diskdrake/interactive.pm:193
 #, c-format
 msgid "Choose another partition"
-msgstr "추가 파티션 선택"
+msgstr "다른 파티션 선택"
 
 #: diskdrake/interactive.pm:193
 #, c-format
@@ -1354,6 +1394,9 @@ msgid ""
 "Otherwise no entry for mount point %s will be written in fstab.\n"
 "Quit anyway?"
 msgstr ""
+"파티션 %s는 포맷되어야 합니다.\n"
+"포맷하지 않으면 fstab에 %s 마운트 포인트는 작성되지 않을 것입니다\n"
+"종료하시겠습니까?"
 
 #: diskdrake/interactive.pm:304
 #, c-format
@@ -1516,6 +1559,8 @@ msgid ""
 "(since you reached the maximal number of primary partitions).\n"
 "First remove a primary partition and create an extended partition."
 msgstr ""
+"(주 파티션의 최고 숫자에 도달했기 때문에)새 파티션을 생성할 수 없습니다.\n"
+"먼저 주 파티션을 제거하고 확장 파티션을 생성합니다."
 
 #: diskdrake/interactive.pm:559
 #, c-format
@@ -1546,7 +1591,7 @@ msgstr "EXT2에서 EXT3로 변경"
 #: diskdrake/interactive.pm:629 diskdrake/interactive.pm:632
 #, c-format
 msgid "Which volume label?"
-msgstr ""
+msgstr "어느 Volume Label?"
 
 #: diskdrake/interactive.pm:633
 #, fuzzy, c-format
@@ -1617,12 +1662,12 @@ msgstr "새로운 용량(MB):"
 #: diskdrake/interactive.pm:759
 #, c-format
 msgid "Minimum size: %s MB"
-msgstr ""
+msgstr "최소 크기: %s MB"
 
 #: diskdrake/interactive.pm:760
 #, c-format
 msgid "Maximum size: %s MB"
-msgstr ""
+msgstr "최대 크기: %s MB"
 
 #: diskdrake/interactive.pm:801 fs/partitioning_wizard.pm:181
 #, c-format
@@ -1630,6 +1675,8 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
+"파티션 크기를 조정한 후 데이터의 무결성을 확인하기 위해\n"
+"파일시스템 점검은 Microsoft Windows®로 다음번 부팅할때 작동될 것입니다."
 
 #: diskdrake/interactive.pm:842
 #, c-format
@@ -1657,11 +1704,13 @@ msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
+"물리적 Volume %s 는 이미 사용중입니다.\n"
+"이 Volume에서 사용된 물리적인 부분을 다른 Volume으로 이동하시겠습니까?"
 
 #: diskdrake/interactive.pm:896
 #, c-format
 msgid "Moving physical extents"
-msgstr ""
+msgstr "물리적인 부분 이동중"
 
 #: diskdrake/interactive.pm:914
 #, c-format
@@ -1759,7 +1808,7 @@ msgid "Hide files"
 msgstr "파일 숨기기"
 
 #: diskdrake/interactive.pm:1168
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Directory %s already contains data\n"
 "(%s)\n"
@@ -1768,11 +1817,13 @@ msgid ""
 "mounted there or leave them where they are (which results in hiding them by "
 "the contents of the mounted partition)"
 msgstr ""
+"%s 디렉토리에는 이미 데이터가 포함되어 있습니다.\n"
+"\n"
 
 #: diskdrake/interactive.pm:1183
 #, c-format
 msgid "Moving files to the new partition"
-msgstr "새 파티션으로 파일 옴기는 중"
+msgstr "새 파티션으로 파일 이동 중"
 
 #: diskdrake/interactive.pm:1187
 #, c-format
@@ -1787,12 +1838,12 @@ msgstr "%s 제거 중"
 #: diskdrake/interactive.pm:1205
 #, c-format
 msgid "partition %s is now known as %s"
-msgstr ""
+msgstr "%s 파티션은 지금 %s로 알려져 있습니다. "
 
 #: diskdrake/interactive.pm:1206
 #, c-format
 msgid "Partitions have been renumbered: "
-msgstr ""
+msgstr "파티션이 다시 번호가 매겨졌습니다."
 
 #: diskdrake/interactive.pm:1226 diskdrake/interactive.pm:1288
 #, c-format
@@ -1848,7 +1899,7 @@ msgstr "실린더 %d에서 %d까지\n"
 #: diskdrake/interactive.pm:1249
 #, c-format
 msgid "Number of logical extents: %d\n"
-msgstr ""
+msgstr "Logical 부분의 수 : %d\n"
 
 #: diskdrake/interactive.pm:1250
 #, c-format
@@ -1934,9 +1985,9 @@ msgstr ""
 "듀얼 부팅하기 위한 것입니다.\n"
 
 #: diskdrake/interactive.pm:1280
-#, c-format
+#, fuzzy, c-format
 msgid "Free space on %s (%s)"
-msgstr ""
+msgstr "%s (%s)에 있는 빈 공간"
 
 #: diskdrake/interactive.pm:1289
 #, c-format
@@ -2024,7 +2075,7 @@ msgstr "취소"
 #: diskdrake/smbnfs_gtk.pm:164
 #, c-format
 msgid "Can not login using username %s (bad password?)"
-msgstr ""
+msgstr "사용자 이름 %s를 사용하여 로그인할수 없습니다.(잘못된 암호?)"
 
 #: diskdrake/smbnfs_gtk.pm:168 diskdrake/smbnfs_gtk.pm:177
 #, c-format
@@ -2046,6 +2097,8 @@ msgstr "또 다른 것"
 msgid ""
 "Please enter your username, password and domain name to access this host."
 msgstr ""
+"이 호스트에 접근하기 위하여 사용자이름, 암호, 도메인 이름을 \n"
+"입력하여주십시요."
 
 #: diskdrake/smbnfs_gtk.pm:180
 #, c-format
@@ -2098,8 +2151,8 @@ msgid ""
 "An error occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
 msgstr ""
-"오류 발생 - 새로운 파일 시스템을 만들 어떤 올바른 장치도 찾을 수 없습니다.이 "
-"문제를 해결하시려면, 하드웨어를 점검해 보시기 바랍니다."
+"오류 발생 - 새로운 파일 시스템을 만들 어떤 올바른 장치도 찾을 수 없습니다.\n"
+"이 문제를 해결하시려면, 하드웨어를 점검해 보시기 바랍니다."
 
 #: fs/any.pm:62 fs/partitioning_wizard.pm:55
 #, c-format
@@ -2137,9 +2190,9 @@ msgid "Mounting partition %s"
 msgstr "%s 파티션 포맷중"
 
 #: fs/mount.pm:80
-#, c-format
+#, fuzzy, c-format
 msgid "mounting partition %s in directory %s failed"
-msgstr ""
+msgstr "%s 디렉토리에서 "
 
 #: fs/mount.pm:85 fs/mount.pm:102
 #, fuzzy, c-format
@@ -2169,7 +2222,7 @@ msgstr ""
 #: fs/mount_options.pm:115
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
-msgstr ""
+msgstr "그룹 디스크 할당 계산 및 선택적인 실시 제한 사용"
 
 #: fs/mount_options.pm:117
 #, c-format
@@ -2177,13 +2230,19 @@ msgid ""
 "Do not update inode access times on this file system\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
+"이 파일 시스템상에서 (예를 들면, 뉴스서버의 속도를 높이기 위해 \n"
+"뉴스 스풀상에서 더 빠르게 접근하기 위해)inode 접근시간을 \n"
+"업데이트 하지 마십시요."
 
 #: fs/mount_options.pm:123
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
+"이 파일 시스템상에서 (예를 들면, 뉴스서버의 속도를 높이기 위해 \n"
+"뉴스 스풀상에서 더 빠르게 접근하기 위해)inode 접근시간을 \n"
+"업데이트 하지 마십시요."
 
 #: fs/mount_options.pm:123
 #, c-format
@@ -2216,7 +2275,7 @@ msgstr ""
 #: fs/mount_options.pm:136
 #, c-format
 msgid "Mount the file system read-only."
-msgstr ""
+msgstr "파일시스템을 읽기만 가능하도록 마운트"
 
 #: fs/mount_options.pm:138
 #, c-format
@@ -2536,7 +2595,7 @@ msgstr "32MB 미만의 파티션에는 ReiserFS 파일 시스템을 사용할 �
 #: fsedit.pm:27
 #, c-format
 msgid "with /usr"
-msgstr ""
+msgstr "/usr 포함"
 
 #: fsedit.pm:32
 #, c-format
@@ -2648,7 +2707,7 @@ msgstr "플로피"
 #: harddrake/data.pm:72
 #, c-format
 msgid "Zip"
-msgstr "짚"
+msgstr ""
 
 #: harddrake/data.pm:88
 #, c-format
@@ -6312,20 +6371,24 @@ msgstr ""
 msgid "Installation failed"
 msgstr "설치 실패."
 
+#~ msgid "Add user"
+#~ msgstr "사용자 추가"
+
+#~ msgid "Accept user"
+#~ msgstr "사용자 허가"
+
+#~ msgid ""
+#~ "Use local for all authentication and information user tell in local file"
+#~ msgstr "로컬파일에서  모든 인증과 사용자 정보를 나타내기 위해 로컬 사용"
+
 #~ msgid "Ext2"
 #~ msgstr "Ext2"
 
 #~ msgid "Journalised FS"
 #~ msgstr "저널화 FS"
 
-#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
-#~ msgstr "X 폰트 서버 시작 (X 윈도우를 운영하기 위해서는 필수입니다)."
-
-#~ msgid "Add user"
-#~ msgstr "사용자 추가"
-
-#~ msgid "Accept user"
-#~ msgstr "사용자 허가"
+#~ msgid "Supermount except for CDROM drives"
+#~ msgstr "CDROM을 제외한 Supermount"
 
 #~ msgid "Rescue partition table"
 #~ msgstr "파티션 테이블 응급처치"
@@ -6339,6 +6402,9 @@ msgstr "설치 실패."
 #, fuzzy
 #~ msgid "Allow/Forbid remote root login."
 #~ msgstr "(이 서버상의)"
+
+#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
+#~ msgstr "X 폰트 서버 시작 (X 윈도우를 운영하기 위해서는 필수입니다)."
 
 #~ msgid "Icon"
 #~ msgstr "아이콘"
