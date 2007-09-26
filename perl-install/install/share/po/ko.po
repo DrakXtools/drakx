@@ -1,26 +1,29 @@
+# translation of ko(metanav).po to ahb hong-bae
 # Korean translation of drakbootdisk.
-# Copyright (C) 2001 Free Software Foundation, Inc.
-# Jaegeum Choe <baedaron@hananet.net>, 2001.
+# Copyright (C) 2001, 2007 Free Software Foundation, Inc.
 #
 # changes asked by HP people -- pablo 2003-01-23
 #
+# Jaegeum Choe <baedaron@hananet.net>, 2001.
+# meta <hbahn@metq.com>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: DrakX\n"
+"Project-Id-Version: ko(metanav)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-25 20:13+0200\n"
-"PO-Revision-Date: 2002-09-09 09:08+0900\n"
-"Last-Translator: Jaegeum Cze <baedaron@hanafos.com>\n"
-"Language-Team: Korean <beadaron@hanafos.com>\n"
+"PO-Revision-Date: 2007-06-18 14:54+0900\n"
+"Last-Translator: meta <hbahn@metq.com>\n"
+"Language-Team: ahb hong-bae <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: any.pm:159
-#, fuzzy, c-format
+#, c-format
 msgid "Do you have further supplementary media?"
-msgstr "또 다른것이 설치되어 있습니까?"
+msgstr "추가할 미디어가 있습니까?"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: any.pm:162
@@ -31,6 +34,10 @@ msgid ""
 "\n"
 "Do you have a supplementary installation medium to configure?"
 msgstr ""
+"다음과 같은 미디어를 찾았습니다. 이들은 설치시 사용될 것입니다.: %s.\n"
+"\n"
+"\n"
+"설정할 추가 설치 매체가 있습니까?"
 
 #: any.pm:170
 #, c-format
@@ -38,72 +45,73 @@ msgid "CD-ROM"
 msgstr "CD-ROM"
 
 #: any.pm:171
-#, fuzzy, c-format
+#, c-format
 msgid "Network (HTTP)"
-msgstr "네트웍"
+msgstr "망(HTTP)"
 
 #: any.pm:172
-#, fuzzy, c-format
+#, c-format
 msgid "Network (FTP)"
-msgstr "네트웍"
+msgstr "망(FTP)"
 
 #: any.pm:173
 #, c-format
 msgid "Network (NFS)"
-msgstr ""
+msgstr "망(NFS)"
 
 #: any.pm:215
 #, c-format
 msgid "URL of the mirror?"
-msgstr ""
+msgstr "미러사이트의 (URL)주소를 적어주십시오."
 
 #: any.pm:221
 #, c-format
 msgid "URL must start with ftp:// or http://"
-msgstr ""
+msgstr "URL 주소는 ftp:// 또는 http:// 로 시작되어야 합니다."
 
 #: any.pm:232
 #, c-format
 msgid ""
 "Contacting Mandriva Linux web site to get the list of available mirrors..."
-msgstr "유효한 미러 목록을 받기 위해 맨드리바 리눅스 웹사이트에 접속 중..."
+msgstr "유효한 미러 목록을 받기 위해 Mandriva Linux 홈페이지에 접속 중..."
 
 #: any.pm:237
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Failed contacting Mandriva Linux web site to get the list of available "
 "mirrors"
-msgstr "유효한 미러 목록을 받기 위해 맨드리바 리눅스 웹사이트에 접속 중..."
+msgstr ""
+"Mandriva Linux 홈페이지에 접속하여 미러사이트목록을 받는 데 실패했습니다."
 
 #: any.pm:247
 #, c-format
 msgid "Choose a mirror from which to get the packages"
-msgstr "팩키지를 받을 미러 사이트를 선택해 주세요."
+msgstr "패키지를 받을 미러 사이트를 선택하시오."
 
 #: any.pm:277
 #, c-format
 msgid "NFS setup"
-msgstr ""
+msgstr "망 파일 시스템 (NFS) 구성"
 
 #: any.pm:278
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
-msgstr ""
+msgstr "NFS 매체의 호스트 이름과 디렉토리를 입력해 주십시요."
 
 #: any.pm:282
 #, c-format
 msgid "Hostname missing"
-msgstr ""
+msgstr "호스트 이름을 찾을 수 없습니다"
 
 #: any.pm:283
 #, c-format
 msgid "Directory must begin with \"/\""
-msgstr ""
+msgstr "디렉토리는 \"/\"로 시작되어야 합니다."
 
 #: any.pm:287
 #, c-format
 msgid "Hostname of the NFS mount ?"
-msgstr ""
+msgstr "망 파일 시스템(NFS)의 호스트 이름을 설치합니까?"
 
 #: any.pm:288
 #, c-format
@@ -113,33 +121,34 @@ msgstr "디렉토리"
 #: any.pm:310
 #, c-format
 msgid "Supplementary"
-msgstr ""
+msgstr "추가"
 
 #: any.pm:345
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
 "correct."
-msgstr "%s를 열 수 없습니다: %s\n"
+msgstr ""
+"미러 사이트에서 패키지 리스트를 찾을 수 없습니다. 이 위치에 만드시겠습니까?"
 
 #: any.pm:379
 #, c-format
 msgid "Looking at packages already installed..."
-msgstr "이미 설치된 팩키지 찾는 중..."
+msgstr "이미 설치된 패키지 찾는 중..."
 
 #: any.pm:386
 #, c-format
 msgid "Removing packages prior to upgrade..."
-msgstr ""
+msgstr "업그레이드된 패키지를 제거하는 중..."
 
 #: any.pm:428
 #, c-format
 msgid "Finding packages to upgrade..."
-msgstr "업그레이드할 팩키지를 검색중입니다."
+msgstr "업그레이드할 패키지를 검색중..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: any.pm:614
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
 "\n"
@@ -151,12 +160,12 @@ msgid ""
 "\n"
 "Do you really want to install these servers?\n"
 msgstr ""
-"다음과 같은 서버들이 선택되었습니다: %s\n"
+"다음 서버들이 선택되었습니다: %s\n"
 "\n"
 "\n"
-"이 서버들은 기본적으로 활성화됩니다. 비록 아직까지 알려진 보안 문제는 없지"
-"만,\n"
-"새로운 문제점이 발견될 수도 있습니다. 그럴 경우에는 가능한 한 신속하게\n"
+"이 서버들의 기본 설정은 활성화상태입니다. 알려진 보안 문제는 없지만, 새로운 "
+"문제점이 발견될 수도 있습니다.\n"
+" 그럴 경우에는 가능한 한 신속하게\n"
 "업그레이드해야 합니다.\n"
 "\n"
 "\n"
@@ -171,41 +180,45 @@ msgid ""
 "\n"
 "Do you really want to remove these packages?\n"
 msgstr ""
+"다음 패키지들은 당신의 시스템을 업그레이드하기위해 제거될 것입니다. : %s\n"
+"\n"
+"\n"
+"정말 이 패키지들을 제거 하시겠습니까?\n"
 
 #: any.pm:1059
-#, fuzzy, c-format
+#, c-format
 msgid "The following disk(s) were renamed:"
-msgstr "다음 팩키지들이 설치될 것입니다."
+msgstr "다음 디스크이름이 변경되었습니다. :"
 
 #: any.pm:1061
 #, c-format
 msgid "%s (previously named as %s)"
-msgstr ""
+msgstr "%s (이전 이름은 %s였음.)"
 
 #: any.pm:1118
 #, c-format
 msgid "HTTP"
-msgstr "HTTP"
+msgstr "HTTP(하이퍼텍스트 전송 규약)"
 
 #: any.pm:1118
 #, c-format
 msgid "FTP"
-msgstr "FTP"
+msgstr "FTP(파일 전송규약)"
 
 #: any.pm:1118
 #, c-format
 msgid "NFS"
-msgstr "NFS"
+msgstr "NFS(망 파일 시스템)"
 
 #: any.pm:1137 steps_interactive.pm:846
 #, c-format
 msgid "Network"
-msgstr "네트웍"
+msgstr "망"
 
 #: any.pm:1141
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose a media"
-msgstr "선택하세요"
+msgstr "매체를 선택하시오"
 
 #: any.pm:1157
 #, fuzzy, c-format
@@ -220,12 +233,12 @@ msgstr "권한이 없습니다."
 #: any.pm:1209
 #, c-format
 msgid "Bad NFS name"
-msgstr ""
+msgstr "부정확한 NFS 이름입니다"
 
 #: any.pm:1230
-#, fuzzy, c-format
+#, c-format
 msgid "Bad media %s"
-msgstr "파일 %s 읽어들임"
+msgstr "알 수 없는 미디어 %s"
 
 #: any.pm:1272
 #, c-format
@@ -235,7 +248,7 @@ msgstr "파티션을 나누기 전에는 스크린샷을 만들 수 없습니다
 #: any.pm:1279
 #, c-format
 msgid "Screenshots will be available after install in %s"
-msgstr "스크린샷은 설치후에 %s에 있습니다."
+msgstr "스크린샷은 설치 이후에 %s에 위치 할 것입니다."
 
 #: gtk.pm:136
 #, fuzzy, c-format
@@ -250,7 +263,7 @@ msgstr "설정"
 #: install2.pm:165
 #, c-format
 msgid "You must also format %s"
-msgstr ""
+msgstr "%s도 포맷해야 합니다."
 
 #: interactive.pm:16
 #, c-format
@@ -258,18 +271,18 @@ msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
 msgstr ""
-"「상업용」드라이버를 필요로하는 일부 하드웨어가 시스템상에 있습니다.\n"
+"「상업용」드라이버를 필요로 하는 일부 하드웨어가 시스템상에 있습니다.\n"
 "자세한 정보는 다음을 참조하세요: %s"
 
 #: interactive.pm:22
 #, c-format
 msgid "Bringing up the network"
-msgstr "네트웍 활성화 중..."
+msgstr "망 활성화 중..."
 
 #: interactive.pm:27
 #, c-format
 msgid "Bringing down the network"
-msgstr "네트웍 해제 중..."
+msgstr "망 해제 중..."
 
 #: media.pm:699 media.pm:710
 #, fuzzy, c-format
@@ -279,7 +292,7 @@ msgstr "파일 전송 중 ..."
 #: media.pm:804
 #, c-format
 msgid "Copying some packages on disks for future use"
-msgstr ""
+msgstr "추후 사용하기 위해 디스크에 패키지 복사중... "
 
 #: media.pm:857
 #, fuzzy, c-format
@@ -289,27 +302,27 @@ msgstr "검색 진행 중"
 #: pkgs.pm:33
 #, c-format
 msgid "must have"
-msgstr "필수 팩키지"
+msgstr "필수 패키지"
 
 #: pkgs.pm:34
 #, c-format
 msgid "important"
-msgstr "중요한 팩키지"
+msgstr "중요한 패키지"
 
 #: pkgs.pm:35
 #, c-format
 msgid "very nice"
-msgstr "훌륭한 팩키지"
+msgstr "훌륭한 패키지"
 
 #: pkgs.pm:36
 #, c-format
 msgid "nice"
-msgstr "좋은 팩키지"
+msgstr "좋은 패키지"
 
 #: pkgs.pm:37
 #, c-format
 msgid "maybe"
-msgstr "괜찮은 팩키지"
+msgstr "괜찮은 패키지"
 
 #: share/meta-task/compssUsers.pl:23
 #, c-format
@@ -328,7 +341,7 @@ msgid ""
 "(OpenOffice.org Calc, Kspread), PDF viewers, etc"
 msgstr ""
 "오피스 프로그램들: 워드프로세서 (OpenOffice.org Writer, Kword), 스프레드쉬트 "
-"(OpenOffice.org Calc, Kspread), pdf 뷰어, 등등"
+"(OpenOffice.org Calc, Kspread), PDF 뷰어, 등등"
 
 #: share/meta-task/compssUsers.pl:28
 #, c-format
@@ -347,7 +360,7 @@ msgstr "게임 스테이션"
 #: share/meta-task/compssUsers.pl:34
 #, c-format
 msgid "Amusement programs: arcade, boards, strategy, etc"
-msgstr "장난감 프로그램: arcade, boards, strategy, 등등"
+msgstr "간단한 게임모음: 아케이드, 보드, 전략 등등"
 
 #: share/meta-task/compssUsers.pl:37
 #, c-format
@@ -365,26 +378,26 @@ msgid "Internet station"
 msgstr "인터넷 스테이션"
 
 #: share/meta-task/compssUsers.pl:44
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Set of tools to read and send mail and news (mutt, tin..) and to browse the "
 "Web"
-msgstr "메일/뉴스를 일고 보내며 웹검색을 위한 도구모음(pine, mutt, tin...)"
+msgstr "메일/뉴스를 읽고 보내며 (mutt, tin..) 웹검색을 하기 위한 도구모음"
 
 #: share/meta-task/compssUsers.pl:49
 #, c-format
 msgid "Network Computer (client)"
-msgstr "네트웍 컴퓨터 (클라이언트)"
+msgstr "망 컴퓨터 (클라이언트)"
 
 #: share/meta-task/compssUsers.pl:50
 #, c-format
 msgid "Clients for different protocols including ssh"
-msgstr "SSH 및 다른 프로토콜의 클라이언트"
+msgstr "SSH를 포함한 여러 프로토콜의 클라이언트"
 
 #: share/meta-task/compssUsers.pl:55
 #, c-format
 msgid "Tools to ease the configuration of your computer"
-msgstr "쉬운 컴퓨터 설정을 위한 도구"
+msgstr "쉽게 컴퓨터 설정을 하기 위한 도구"
 
 #: share/meta-task/compssUsers.pl:59
 #, c-format
@@ -420,12 +433,12 @@ msgstr "리눅스 및 자유 소프트웨어에 대한 서적과 Howto문서"
 #: share/meta-task/compssUsers.pl:74 share/meta-task/compssUsers.pl:177
 #, c-format
 msgid "LSB"
-msgstr "LSB"
+msgstr "리눅스 기본 규격(Linux Standard Base)"
 
 #: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:178
 #, c-format
 msgid "Linux Standard Base. Third party applications support"
-msgstr "리눅스 표준 기반. 외부 애플리케이션 지원"
+msgstr "리눅스 기본 규격. 외부 애플리케이션 지원"
 
 #: share/meta-task/compssUsers.pl:84
 #, c-format
@@ -435,12 +448,12 @@ msgstr "웹 서버"
 #: share/meta-task/compssUsers.pl:85
 #, c-format
 msgid "Apache"
-msgstr "아파치와"
+msgstr "아파치"
 
 #: share/meta-task/compssUsers.pl:88
-#, fuzzy, c-format
+#, c-format
 msgid "Groupware"
-msgstr "그룹"
+msgstr "그룹웨어"
 
 #: share/meta-task/compssUsers.pl:89
 #, c-format
@@ -468,9 +481,9 @@ msgid "Postfix mail server, Inn news server"
 msgstr "포스트픽스 메일 서버"
 
 #: share/meta-task/compssUsers.pl:100
-#, fuzzy, c-format
+#, c-format
 msgid "Directory Server"
-msgstr "CD로부터 복구"
+msgstr "디렉토리 서버"
 
 #: share/meta-task/compssUsers.pl:104
 #, c-format
@@ -480,17 +493,17 @@ msgstr "FTP 서버"
 #: share/meta-task/compssUsers.pl:105
 #, c-format
 msgid "ProFTPd"
-msgstr ""
+msgstr "ProFTPd"
 
 #: share/meta-task/compssUsers.pl:108
 #, c-format
 msgid "DNS/NIS"
-msgstr "DNS/NIS"
+msgstr "도메인 이름 서버/망 정보 서버"
 
 #: share/meta-task/compssUsers.pl:109
 #, c-format
 msgid "Domain Name and Network Information Server"
-msgstr "도메인 네임 및 네트웍 정보 서버"
+msgstr "도메인 이름 및 망 정보 서버"
 
 #: share/meta-task/compssUsers.pl:112
 #, fuzzy, c-format
@@ -498,9 +511,9 @@ msgid "File and Printer Sharing Server"
 msgstr "프린터 서버"
 
 #: share/meta-task/compssUsers.pl:113
-#, fuzzy, c-format
+#, c-format
 msgid "NFS Server, Samba server"
-msgstr "삼바 서비스"
+msgstr "NFS 서비스, 삼바 서비스"
 
 #: share/meta-task/compssUsers.pl:116 share/meta-task/compssUsers.pl:129
 #, c-format
@@ -540,12 +553,12 @@ msgstr "PostgreSQL 또는 MySQL 데이터베이스 서버"
 #: share/meta-task/compssUsers.pl:137
 #, c-format
 msgid "Network Computer server"
-msgstr "네트웍 컴퓨터 서버"
+msgstr "망 컴퓨터 서버"
 
 #: share/meta-task/compssUsers.pl:138
 #, c-format
 msgid "NFS server, SMB server, Proxy server, ssh server"
-msgstr "NFS 서버, 삼바 서버, 프락시 서버, SSH 서버"
+msgstr "NFS 서버, 삼바 서버, 프록시 서버, SSH 서버"
 
 #: share/meta-task/compssUsers.pl:144
 #, c-format
@@ -555,7 +568,7 @@ msgstr "그래픽 환경"
 #: share/meta-task/compssUsers.pl:146
 #, c-format
 msgid "KDE Workstation"
-msgstr "KDE 워크스테이션"
+msgstr "K 데스크탑 환경 기반 워크스테이션"
 
 #: share/meta-task/compssUsers.pl:147
 #, c-format
@@ -574,12 +587,12 @@ msgstr "GNOME 워크스테이션"
 msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
 "tools"
-msgstr "사용자 친화적 프로그램과 데스크탑 도구를 가진 그래픽 환경"
+msgstr "사용자 친화적 응용 프로그램들과 데스크탑 도구들을 가진 그래픽 환경"
 
 #: share/meta-task/compssUsers.pl:155
-#, fuzzy, c-format
+#, c-format
 msgid "IceWm Desktop"
-msgstr "일터"
+msgstr "IceWm 데스크탑"
 
 #: share/meta-task/compssUsers.pl:159
 #, c-format
@@ -607,19 +620,19 @@ msgid "Webmin"
 msgstr "웹민 서비스"
 
 #: share/meta-task/compssUsers.pl:191
-#, fuzzy, c-format
+#, c-format
 msgid "Webmin Remote Configuration Server"
-msgstr "맨드리바 터미널 서버 설정"
+msgstr "Webmin 원격 설정 서버"
 
 #: share/meta-task/compssUsers.pl:195
-#, fuzzy, c-format
+#, c-format
 msgid "Network Utilities/Monitoring"
-msgstr "네트웍 환경 설정"
+msgstr "망 유틸리티들/감시"
 
 #: share/meta-task/compssUsers.pl:196
 #, c-format
 msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-msgstr ""
+msgstr "감시 도구, 프로세스 관리, tcpdump, nmap, ..."
 
 #: share/meta-task/compssUsers.pl:200
 #, fuzzy, c-format
@@ -627,9 +640,9 @@ msgid "Mandriva Wizards"
 msgstr "맨드리바 제어 센터"
 
 #: share/meta-task/compssUsers.pl:201
-#, fuzzy, c-format
+#, c-format
 msgid "Wizards to configure server"
-msgstr "프린터 「%s」 설정 중 ..."
+msgstr "서버 설정 도우미"
 
 #: steps.pm:85
 #, c-format
@@ -637,8 +650,8 @@ msgid ""
 "An error occurred, but I do not know how to handle it nicely.\n"
 "Continue at your own risk."
 msgstr ""
-"오류가 발생했습니다. 그러나 적절히 처리할 수 없습니다.\n"
-"위헝을 감수할려면 계속하세요."
+"오류가 발생했지만, 처리할 수 없습니다.\n"
+"위험을 감수하려면 계속하세요."
 
 #: steps.pm:432
 #, c-format
@@ -648,10 +661,10 @@ msgid ""
 "Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm"
 "\"\n"
 msgstr ""
-"일부 중요한 팩키지들이 올바르게 설치되지 않았습니다.\n"
+"일부 중요한 패키지들이 올바르게 설치되지 않았습니다.\n"
 "CDROM 드라이브 또는 미디어가 손상되었습니다.\n"
-"이미 설치가 완료된 컴퓨터에서 「rpm -qpl media/main/*.rpm」명령으로 점검해 보"
-"세요.\n"
+"설치 완료된 컴퓨터에서 「rpm -qpl media/main/*.rpm」명령으로 CDROM을 점검하십"
+"시오.\n"
 
 #: steps_auto_install.pm:71 steps_stdio.pm:27
 #, c-format
@@ -661,7 +674,7 @@ msgstr "%s 단계로 넘어갑니다.\n"
 #: steps_curses.pm:22
 #, c-format
 msgid "Mandriva Linux Installation %s"
-msgstr "리눅스-맨드리바 설치 %s"
+msgstr "Mandriva Linux 설치 %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -678,12 +691,12 @@ msgstr ""
 msgid ""
 "_: Keep these entry short\n"
 "Installation class"
-msgstr ""
+msgstr "설치 등급"
 
 #: steps_gtk.pm:160 steps_gtk.pm:243 steps_interactive.pm:511
 #, c-format
 msgid "Package Group Selection"
-msgstr "팩키지 그룹 선택"
+msgstr "패키지 그룹 선택"
 
 #: steps_gtk.pm:161 steps_gtk.pm:460 steps_interactive.pm:543
 #, c-format
@@ -700,12 +713,12 @@ msgstr "요약설명"
 msgid ""
 "_: Keep these entry short\n"
 "Bootloader"
-msgstr ""
+msgstr "부트로더"
 
 #: steps_gtk.pm:166 steps_interactive.pm:644
 #, c-format
 msgid "Updates"
-msgstr ""
+msgstr "업데이트"
 
 #: steps_gtk.pm:213
 #, c-format
@@ -715,10 +728,11 @@ msgid ""
 "this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"시스템의 자원이 부족합니다. 리눅스 맨드리바를 설치하는데 일부 문제가 발생할\n"
-"수도 있습니다. 만약 문제가 발생하면, 택스트 모드로 설치를 시도해 보세요.\n"
-"텍스트 모드로 설치하려면, CDROM으로 부팅후 「F1」을 누르고 「text」라고 입력"
-"하세요."
+"시스템의 자원이 부족합니다. 맨드리바 리눅스를 설치하는데 \n"
+"일부 문제가 발생할 수도 있습니다.\n"
+"문제가 발생하면 텍스트모드로 재설치하십시오.\n"
+"텍스트 모드 설치는 CDROM으로 부팅후 「F1」을 누르고 「text」를 입력하시면 됩"
+"니다."
 
 #: steps_gtk.pm:264 steps_interactive.pm:529
 #, c-format
@@ -738,7 +752,7 @@ msgstr "잘못된 팩키지"
 #: steps_gtk.pm:315
 #, c-format
 msgid "Version: "
-msgstr "버전: "
+msgstr "판"
 
 #: steps_gtk.pm:316
 #, c-format
@@ -746,9 +760,9 @@ msgid "Size: "
 msgstr "크기: "
 
 #: steps_gtk.pm:316
-#, fuzzy, c-format
+#, c-format
 msgid "%d KB\n"
-msgstr "크기: %d KB\n"
+msgstr "%d 킬로 바이트\n"
 
 #: steps_gtk.pm:317
 #, c-format
@@ -758,64 +772,64 @@ msgstr "중요도: "
 #: steps_gtk.pm:351
 #, c-format
 msgid "You can not select/unselect this package"
-msgstr "이 팩키지를 선택/버림 할수 없습니다."
+msgstr "이 패키지를 선택/버림 할 수 없습니다."
 
 #: steps_gtk.pm:355
-#, fuzzy, c-format
+#, c-format
 msgid "due to missing %s"
-msgstr "kdesu가 없음"
+msgstr "%s 가 없음"
 
 #: steps_gtk.pm:356
 #, c-format
 msgid "due to unsatisfied %s"
-msgstr ""
+msgstr "%s 비충족"
 
 #: steps_gtk.pm:357
 #, c-format
 msgid "trying to promote %s"
-msgstr ""
+msgstr "%s 를 활성화하기 위해 시도중"
 
 #: steps_gtk.pm:358
 #, c-format
 msgid "in order to keep %s"
-msgstr ""
+msgstr "%s를 유지하기 위해"
 
 #: steps_gtk.pm:363
 #, c-format
 msgid ""
 "You can not select this package as there is not enough space left to install "
 "it"
-msgstr "디스크 공간이 부족하기 때문에 이 팩키지를 선택할 수 없습니다."
+msgstr "이 패키지 선택할 수 없음 - 디스크 공간 부족"
 
 #: steps_gtk.pm:366
 #, c-format
 msgid "The following packages are going to be installed"
-msgstr "다음 팩키지들이 설치될 것입니다."
+msgstr "다음 패키지들을 설치합니다."
 
 #: steps_gtk.pm:367
 #, c-format
 msgid "The following packages are going to be removed"
-msgstr "다음 팩키지들이 제거될 것입니다."
+msgstr "다음 패키지들을 제거합니다."
 
 #: steps_gtk.pm:392
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
-msgstr "이것은 필수적인 팩키지입니다. 반드시 선택되어야 합니다."
+msgstr "이것은 필수 패키지이므로 제거할 수 없습니다."
 
 #: steps_gtk.pm:394
 #, c-format
 msgid "You can not unselect this package. It is already installed"
-msgstr "이 팩키지를 선택해제할 수 없습니다. 이미 설치 되었습니다."
+msgstr "선택해제할 수 없음 - 이미 설치된 패키지입니다."
 
 #: steps_gtk.pm:396
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
-msgstr "이 팩키지를 선택해제할수 없습니다. 반드시 업그레이드되어야 합니다."
+msgstr "선택해제할 수 없음 - 업그레이드 필."
 
 #: steps_gtk.pm:400
 #, c-format
 msgid "Show automatically selected packages"
-msgstr "자동으로 선택된 팩키지들 보이기"
+msgstr "자동 선택 패키지들 보기"
 
 #: steps_gtk.pm:402 steps_interactive.pm:133
 #, c-format
@@ -823,14 +837,14 @@ msgid "Install"
 msgstr "설치"
 
 #: steps_gtk.pm:405
-#, fuzzy, c-format
+#, c-format
 msgid "Load/Save selection"
-msgstr "선택 이동"
+msgstr "열기/저장 선택"
 
 #: steps_gtk.pm:406
 #, c-format
 msgid "Updating package selection"
-msgstr "선택된 팩키지 목록 업데이트 중"
+msgstr "선택된 패키지 목록 업데이트 중"
 
 #: steps_gtk.pm:411
 #, c-format
@@ -845,12 +859,12 @@ msgstr "소프트웨어 관리"
 #: steps_gtk.pm:425 steps_interactive.pm:373
 #, c-format
 msgid "Choose the packages you want to install"
-msgstr "설치하고자 하는 팩키지를 선택하세요."
+msgstr "설치할 패키지를 선택하시오."
 
 #: steps_gtk.pm:487
-#, fuzzy, c-format
+#, c-format
 msgid "No details"
-msgstr "상세설명"
+msgstr "상세설명 생략"
 
 #: steps_gtk.pm:483
 #, c-format
@@ -866,7 +880,8 @@ msgstr "계산 중"
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
-msgstr[0] "%d 팩키지"
+msgstr[0] "%d 패키지"
+msgstr[1] "%d 패키지"
 
 #: steps_gtk.pm:589
 #, c-format
@@ -874,9 +889,9 @@ msgid "Configure"
 msgstr "설정"
 
 #: steps_gtk.pm:580 steps_interactive.pm:731 steps_interactive.pm:858
-#, fuzzy, c-format
+#, c-format
 msgid "not configured"
-msgstr "재설정"
+msgstr "설정되지 않음"
 
 #: steps_gtk.pm:612 steps_interactive.pm:268
 #, c-format
@@ -884,6 +899,8 @@ msgid ""
 "The following installation media have been found.\n"
 "If you want to skip some of them, you can unselect them now."
 msgstr ""
+"다음 설치 매체를 찾았습니다.\n"
+"설치 하지 않으려면 설치해제하십시오."
 
 #: steps_gtk.pm:621 steps_interactive.pm:274
 #, c-format
@@ -893,11 +910,14 @@ msgid ""
 "It will then continue from the hard drive and the packages will remain "
 "available once the system is fully installed."
 msgstr ""
+"설치 전에 하드 드라이브로 CDROM에 있는 컨텐츠를 복사할 수 있습니다.\n"
+"그러면 하드 드라이브에 설치한 후에도 패키지는 시스템에 남아서 재설치가 가능합"
+"니다."
 
 #: steps_gtk.pm:623 steps_interactive.pm:276
 #, c-format
 msgid "Copy whole CDs"
-msgstr ""
+msgstr "전체 CD 복사"
 
 #: steps_interactive.pm:38
 #, c-format
@@ -907,34 +927,34 @@ msgstr "오류 발생"
 #: steps_interactive.pm:97
 #, c-format
 msgid "Please choose your keyboard layout."
-msgstr "키보드 레이아웃 선택을 선택하세요."
+msgstr "키보드 구성을 선택하시오."
 
 #: steps_interactive.pm:99
-#, fuzzy, c-format
+#, c-format
 msgid "Here is the full list of available keyboards"
-msgstr "지원되는 키보드 목록이 여기에 있습니다."
+msgstr "지원되는 키보드 목록입니다."
 
 #: steps_interactive.pm:128
-#, fuzzy, c-format
+#, c-format
 msgid "Install/Upgrade"
-msgstr "설치/업데이트"
+msgstr "설치/업그레이드"
 
 #: steps_interactive.pm:129
-#, fuzzy, c-format
+#, c-format
 msgid "Is this an install or an upgrade?"
-msgstr "설치합니까 아니면 업데이트 합니까?"
+msgstr "설치합니까 아니면 업그레이드 합니까?"
 
 #: steps_interactive.pm:134
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
-msgstr "설치"
+msgstr ""
 
 #: steps_interactive.pm:137
-#, fuzzy, c-format
+#, c-format
 msgid "Upgrade %s"
-msgstr "업그레이드"
+msgstr "업그레이드 %s"
 
 #: steps_interactive.pm:148
 #, fuzzy, c-format
@@ -957,18 +977,20 @@ msgid ""
 "No free space for 1MB bootstrap! Install will continue, but to boot your "
 "system, you'll need to create the bootstrap partition in DiskDrake"
 msgstr ""
-"1MB 부트스트랩 공간 부족! 설치는 계속할 수 있지만, 시스템을 부팅하기 위해서"
-"는 디스크드레이크에서 부트스트랩 파티션을 만들어야 합니다."
+"1MB 부트스트랩 공간 부족! \n"
+"설치는 계속할 수 있지만, 시스템을 부팅하기 위해서는 DiskDrake에서 부트스트랩 "
+"파티션을 만들어야 합니다."
 
 #: steps_interactive.pm:226
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
 "to boot your system, you'll need to create the bootstrap partition in "
 "DiskDrake"
 msgstr ""
-"1MB 부트스트랩 공간 부족! 설치는 계속할 수 있지만, 시스템을 부팅하기 위해서"
-"는 디스크드레이크에서 부트스트랩 파티션을 만들어야 합니다."
+"PPC PReP Boot 부트스트랩 생성이 필요합니다!\n"
+"설치는 계속할 수 있지만, 시스템을 부팅하기 위해서는 DiskDrake에서 부트스트랩 "
+"파티션을 만들어야 합니다."
 
 #: steps_interactive.pm:318
 #, c-format
@@ -978,7 +1000,7 @@ msgid ""
 "done.\n"
 "If you do not have it, press Cancel to avoid installation from this Cd-Rom."
 msgstr ""
-"CDROM을 바꿔 주세요!\n"
+"CDROM을 바꾸십시오!\n"
 "\n"
 "「%s」라고 쓰여진 CDROM을 드라이브에 넣은 후, 「확인」을 눌러 주세요.\n"
 "만약 CDROM을 가지고 있지 않다면, 「취소」를 눌러 추가 설치를 취소하세요."
@@ -986,7 +1008,7 @@ msgstr ""
 #: steps_interactive.pm:340
 #, c-format
 msgid "Looking for available packages..."
-msgstr "유효한 팩키지를 찾고 있습니다."
+msgstr "유효한 패키지를 찾고 있습니다."
 
 #: steps_interactive.pm:349
 #, c-format
@@ -994,20 +1016,22 @@ msgid ""
 "Your system does not have enough space left for installation or upgrade (%"
 "dMB > %dMB)"
 msgstr ""
+"현재 시스템에는 설치 또는 업그레이드 할만한 충분한 공간이 \n"
+"남아있지 않습니다.(%dMB > %dMB)"
 
 #: steps_interactive.pm:385
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please choose load or save package selection.\n"
 "The format is the same as auto_install generated files."
 msgstr ""
-"플로피에 팩키지 선택목록을 적재 또는 저장할지를 선택하세요.\n"
-"형식(포맷)은 자동설치 생성 플로피와 동일합니다."
+"패키지 선택목록을 불러올지 혹은 저장할지를 선택하세요.\n"
+"형식(포맷)은 자동설치 생성 파일과 동일합니다."
 
 #: steps_interactive.pm:387
 #, c-format
 msgid "Load"
-msgstr "읽어들이기"
+msgstr "불러오기"
 
 #: steps_interactive.pm:387
 #, c-format
@@ -1015,9 +1039,9 @@ msgid "Save"
 msgstr "저장"
 
 #: steps_interactive.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "Bad file"
-msgstr "파일 읽기"
+msgstr "손상된 파일 혹은 없는 파일입니다."
 
 #: steps_interactive.pm:413
 #, c-format
@@ -1047,7 +1071,7 @@ msgstr "선택된 용량이 사용할 수 있는 공간보다 큽니다."
 #: steps_interactive.pm:483
 #, c-format
 msgid "Type of install"
-msgstr ""
+msgstr "설치 타입"
 
 #: steps_interactive.pm:484
 #, c-format
@@ -1055,21 +1079,23 @@ msgid ""
 "You have not selected any group of packages.\n"
 "Please choose the minimal installation you want:"
 msgstr ""
+"어떤 패키지 그룹도 선택되지 않았습니다.\n"
+"패키지 최소설치 이상을  선택하십시오."
 
 #: steps_interactive.pm:487
 #, c-format
 msgid "With X"
-msgstr ""
+msgstr "X 포함"
 
 #: steps_interactive.pm:488
 #, c-format
 msgid "With basic documentation (recommended!)"
-msgstr ""
+msgstr "기본 문서 포함(추천!)"
 
 #: steps_interactive.pm:489
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
-msgstr ""
+msgstr "최소 설치(특히 urpmi사용안함)"
 
 #: steps_interactive.pm:528
 #, c-format
@@ -1084,12 +1110,12 @@ msgstr "설치 준비중입니다"
 #: steps_interactive.pm:552
 #, c-format
 msgid "Installing package %s"
-msgstr "%s 팩키지 설치중"
+msgstr "%s 패키지 설치중"
 
 #: steps_interactive.pm:576
 #, c-format
 msgid "There was an error ordering packages:"
-msgstr "팩키지를 정렬하는 중 오류발생:"
+msgstr "패키지를 정렬하는 중 오류발생:"
 
 #: steps_interactive.pm:576
 #, c-format
@@ -1099,37 +1125,37 @@ msgstr "계속 진행합니까?"
 #: steps_interactive.pm:580
 #, c-format
 msgid "Retry"
-msgstr ""
+msgstr "재시도"
 
 #: steps_interactive.pm:581
 #, c-format
 msgid "Skip this package"
-msgstr ""
+msgstr "이 패키지는 설치하지 않고 지나가기"
 
 #: steps_interactive.pm:582
 #, c-format
 msgid "Skip all packages from medium \"%s\""
-msgstr ""
+msgstr "\"%s\"에서 모든 패키지를 설치하지 않음"
 
 #: steps_interactive.pm:583
-#, fuzzy, c-format
+#, c-format
 msgid "Go back to media and packages selection"
-msgstr "선택된 팩키지 목록 저장"
+msgstr "미디어나 패키지 선택목록으로 돌아가기"
 
 #: steps_interactive.pm:586
-#, fuzzy, c-format
+#, c-format
 msgid "There was an error installing package %s."
-msgstr "다음 팩키지를 설치중 오류가 발생했습니다: "
+msgstr "다음 패키지 설치중 오류 발생: %s."
 
 #: steps_interactive.pm:604
 #, c-format
 msgid "Post-install configuration"
-msgstr "설치전 환경설정"
+msgstr "설치 후 환경설정"
 
 #: steps_interactive.pm:611
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
-msgstr ""
+msgstr "업데이트 모듈 매체가 %s 드라이브에 있도록 하십시오."
 
 #: steps_interactive.pm:645
 #, c-format
@@ -1143,16 +1169,21 @@ msgid ""
 "\n"
 "Do you want to install the updates?"
 msgstr ""
+"업데이트 패키지들을 다운로드하십시오. \n"
+"이 패키지들에는 제품이 릴리즈 된 이후에 업데이트 된 내용 \n"
+"(보안 및 버그의 보완)이 있습니다.\n"
+"이 패키지들을 다운로드 받으려면 인터넷이 연결되어 있어야 합니다.\n"
+"업데이트를 설치 하시겠습니까?"
 
 #: steps_interactive.pm:666
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
-msgstr "사용가능한 팩키지의 리스트를 미러 사이트에 접속해서 받습니다."
+msgstr "사용할 패키지의 리스트를 미러 사이트에서 받습니다."
 
 #: steps_interactive.pm:672
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to contact mirror %s"
-msgstr "분기할 수 없습니다: %s"
+msgstr "미러사이트 %s에 접속할 수 없습니다"
 
 #. -PO: example: lilo-graphic on /dev/hda1
 #: steps_interactive.pm:777
@@ -1182,11 +1213,15 @@ msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
 "card"
 msgstr ""
+"사운드 카드를 설정하려면 설치 후에\n"
+"「alsaconf」 또는 「sndconfig」명령을 실행해주십시요."
 
 #: steps_interactive.pm:819
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr ""
+"사운드 카드가 발견되지 않았습니다.\n"
+"설치 후에「harddrake」명령을 실행해주십시요."
 
 #: steps_interactive.pm:828
 #, c-format
@@ -1194,24 +1229,24 @@ msgid "TV card"
 msgstr "TV 카드"
 
 #: steps_interactive.pm:839
-#, fuzzy, c-format
+#, c-format
 msgid "Graphical interface"
-msgstr "시작시 바로 X 실행"
+msgstr "시작시 바로 X-Window 실행"
 
 #: steps_interactive.pm:845 steps_interactive.pm:856
 #, c-format
 msgid "Network & Internet"
-msgstr "네트웍과 인터넷"
+msgstr "망과 인터넷"
 
 #: steps_interactive.pm:857
-#, fuzzy, c-format
+#, c-format
 msgid "Proxies"
-msgstr "프로파일: "
+msgstr "프록시"
 
 #: steps_interactive.pm:858
-#, fuzzy, c-format
+#, c-format
 msgid "configured"
-msgstr "재설정"
+msgstr "재설정되었습니다."
 
 #: steps_interactive.pm:868
 #, c-format
@@ -1224,9 +1259,9 @@ msgid "Firewall"
 msgstr "방화벽"
 
 #: steps_interactive.pm:886
-#, fuzzy, c-format
+#, c-format
 msgid "activated"
-msgstr "지금 활성화"
+msgstr "활성화"
 
 #: steps_interactive.pm:886
 #, c-format
@@ -1236,7 +1271,7 @@ msgstr "금지"
 #: steps_interactive.pm:939
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
-msgstr ""
+msgstr "X 설정이 되지 않았습니다. 설정하시겠습니까?"
 
 #: steps_interactive.pm:973
 #, c-format
@@ -1251,6 +1286,11 @@ msgid ""
 "BootX or some other means to boot your machine. The kernel argument for the "
 "root fs is: root=%s"
 msgstr ""
+"예전 모델이거나 알 수 없는 컴퓨터입니다.\n"
+"yaboot 부트로더는 작동되지 않을 것입니다.\n"
+"설치를 계속 진행하지만, 컴퓨터를 부팅하기 위해서\n"
+"BootX나 또는 몇몇 방법을 써야 될수도 있습니다. \n"
+"root fs를 위한 kernel argument : root=%s"
 
 #: steps_interactive.pm:989
 #, c-format
@@ -1264,7 +1304,7 @@ msgid ""
 "try to force installation even if that destroys the first partition?"
 msgstr ""
 "aboot 설치 실패. \n"
-"첫번째 파티션을 훼손할지라도 강제 설치할까요?"
+"강제설치합니까? - 첫번째 파티션이 훼손될 수 있습니다."
 
 #: steps_interactive.pm:1009
 #, c-format
@@ -1272,6 +1312,8 @@ msgid ""
 "In this security level, access to the files in the Windows partition is "
 "restricted to the administrator."
 msgstr ""
+"이 보안 등급에서는 윈도우즈 파티션에서의 파일 접근이 관리자에 의해 제한 됩니"
+"다."
 
 #: steps_interactive.pm:1038
 #, c-format
@@ -1321,7 +1363,6 @@ msgstr ""
 "자동 설치는 원한다면 완벽한 자동화가 가능합니다.\n"
 "이럴 경우, 하드 드라이브를 점유해 버립니다!\n"
 "(이것은 또 다른 컴퓨터에 동일하게 설치할 때를 위한 것입니다.)\n"
-"\n"
 "일반적으로 직접 설치하는 것이 좋습니다.\n"
 
 #: steps_interactive.pm:1076
@@ -1337,7 +1378,7 @@ msgstr "자동"
 #: steps_interactive.pm:1079
 #, c-format
 msgid "Save packages selection"
-msgstr "선택된 팩키지 목록 저장"
+msgstr "선택된 패키지 목록 저장"
 
 #. -PO: please keep the following messages very short: they must fit in the left list of the installer!!!
 #: steps_list.pm:16
@@ -1345,7 +1386,7 @@ msgstr "선택된 팩키지 목록 저장"
 msgid ""
 "_: Keep these entry short\n"
 "Language"
-msgstr "언어 선택"
+msgstr "언어"
 
 #: steps_list.pm:17
 #, c-format
@@ -1387,7 +1428,7 @@ msgstr "보안"
 msgid ""
 "_: Keep these entry short\n"
 "Partitioning"
-msgstr ""
+msgstr "파티션 작업"
 
 #: steps_list.pm:24
 #, c-format
@@ -1401,7 +1442,7 @@ msgstr "구성중"
 msgid ""
 "_: Keep these entry short\n"
 "Choosing packages"
-msgstr ""
+msgstr "패키지 선택"
 
 #: steps_list.pm:26
 #, c-format
@@ -1422,7 +1463,7 @@ msgstr "사용자들"
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
-msgstr "네트워크"
+msgstr "망 설정"
 
 #: steps_list.pm:31
 #, c-format
@@ -1450,7 +1491,7 @@ msgstr "서비스"
 msgid ""
 "_: Keep these entry short\n"
 "Updates"
-msgstr ""
+msgstr "업데이트"
 
 #: steps_list.pm:35
 #, c-format
@@ -1459,6 +1500,63 @@ msgid ""
 "Exit"
 msgstr "종료"
 
+#~ msgid "Arkeia"
+#~ msgstr "아르케이아"
+
+#~ msgid "Flatout"
+#~ msgstr "플래트아웃(최고속도로)"
+
+#~ msgid "Gwenview"
+#~ msgstr "Gwenview"
+
+#~ msgid "3D"
+#~ msgstr "3차원"
+
+#~ msgid "CMS"
+#~ msgstr "CMS"
+
+#~ msgid "CRM"
+#~ msgstr "CRM"
+
+#~ msgid "2007 product line"
+#~ msgstr "2007 제품 라인"
+
+#~ msgid "Invictus Firewall"
+#~ msgstr "인빅투스 방화벽"
+
+#~ msgid "Discovery Live Mode"
+#~ msgstr "Discovery Live Mode"
+
+#~ msgid "How to register"
+#~ msgstr "등록하는 법"
+
+#~ msgid "Rpmdrake 2"
+#~ msgstr "Rpmdrake 2"
+
+#~ msgid "Mandriva Online Services"
+#~ msgstr "맨드리바 온라인 서비스"
+
+#~ msgid "New Theme"
+#~ msgstr "새 테마"
+
+#~ msgid "Web 2.0"
+#~ msgstr "웹 2.0"
+
+#~ msgid "Kaspersky"
+#~ msgstr "캐스퍼 스카이(인터넷보안업체)"
+
+#~ msgid "LinDVD"
+#~ msgstr "LinDVD"
+
+#~ msgid "Skype"
+#~ msgstr "스카이프(인터넷 전화)"
+
+#~ msgid "Transgaming/Cedega"
+#~ msgstr "Cedega - 윈도우용 게임 실행기"
+
+#~ msgid "DrakVPN"
+#~ msgstr "드레이크VPN - 가상사설통신망"
+
 #~ msgid "Boot"
 #~ msgstr "부트"
 
@@ -1466,32 +1564,3 @@ msgstr "종료"
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "사용자 인증"
-
-#~ msgid "%d packages"
-#~ msgstr "%d 팩키지"
-
-#~ msgid "Language"
-#~ msgstr "언어 선택"
-
-#~ msgid "License"
-#~ msgstr "라이센스"
-
-#, fuzzy
-#~ msgid "Installation class"
-#~ msgstr "설치 클래스 선택"
-
-#~ msgid "Formatting"
-#~ msgstr "구성중"
-
-#, fuzzy
-#~ msgid "Choosing packages"
-#~ msgstr "설치 팩키지 선택"
-
-#~ msgid "Users"
-#~ msgstr "사용자들"
-
-#~ msgid "Networking"
-#~ msgstr "네트워크"
-
-#~ msgid "Configure X"
-#~ msgstr "X 설정"
