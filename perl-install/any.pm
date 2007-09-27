@@ -1034,11 +1034,10 @@ sub selectCountry {
 
     my $country = $locale->{country};
     my @countries = lang::list_countries(exclude_non_installed => !$::isInstall);
-    my @best = uniq map {
-	my $h = lang::analyse_locale_name($_);
-	if_($h->{main} eq lang::locale_to_main_locale($locale->{lang}) && $h->{country},
-	    $h->{country});
-    } @lang::locales;
+    my @best = grep {
+	my $h = lang::analyse_locale_name(lang::c2locale($_));
+	$h->{main} eq lang::locale_to_main_locale($locale->{lang});
+    } @countries;
     @best == 1 and @best = ();
 
     my $other = !member($country, @best);
