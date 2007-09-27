@@ -702,12 +702,22 @@ my $help_path = "/usr/share/doc/installer-help";
 
 sub load_from_uri {
     my ($document, $url) = @_;
-    $url = "$help_path/$url" if $url !~ m!^/!;
+    $url = get_html_file($::o, $url);
     my $str = scalar(cat_($url));
     c::set_tagged_utf8($str);
     $document->clear;
     $document->open_stream("text/html");
     $document->write_stream($str);
+}
+
+sub get_html_file {
+    my ($o, $url) = @_;
+    find { -e $_ } map { "$help_path/${_}" }
+      map {
+          my $id = $_;
+          require lang;
+          map { ("$_/$id") } (split ':', lang::getLANGUAGE($o->{locale}{lang}));
+      } $url;
 }
 
 sub ask_fromW {
@@ -728,13 +738,7 @@ sub ask_fromW {
     my @more_buttons = (
 			if_($common->{interactive_help}, 
 			    [ N("Help"), sub { 
-                         if (my $file = find { -e $_ } map { "$help_path/${_}.html" }
-                               map {
-                                   my $id = $_;
-                                   require lang;
-                                   map { "$_/$id" } (split ':', lang::getLANGUAGE($o->{locale}{lang}));
-                               } $common->{interactive_help_id}
-                           ) {
+                         if (my $file = $common->{interactive_help_id}) {
                              require Gtk2::Html2;
                              my $view     = Gtk2::Html2::View->new;
                              my $document = Gtk2::Html2::Document->new;
@@ -746,7 +750,7 @@ sub ask_fromW {
                              $document->signal_connect('link-clicked' => \&load_from_uri);
                              $view->set_document($document);
 
-                             load_from_uri($document, $file);
+                             load_from_uri($document, "$file.html");
 
                              my $w = ugtk2->new(N("Help"), transient => $mainw->{real_window}, modal => 1);
                              gtkadd($w->{rwindow},
