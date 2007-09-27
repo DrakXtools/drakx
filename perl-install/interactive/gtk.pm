@@ -716,7 +716,7 @@ sub get_html_file {
       map {
           my $id = $_;
           require lang;
-          map { ("$_/$id") } (split ':', lang::getLANGUAGE($o->{locale}{lang}));
+          map { ("$_/$id") } (split ':', lang::getLANGUAGE($o->{locale}{lang})), '';
       } $url;
 }
 
