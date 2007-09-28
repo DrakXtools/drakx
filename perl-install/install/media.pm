@@ -1011,6 +1011,7 @@ sub log_sizes() {
     log::l(sprintf "Installed: %dMB(df), %dMB(rpm)",
 	   ($df[0] - $df[1]) / 1024,
 	   sum(run_program::rooted_get_stdout($::prefix, 'rpm', '-qa', '--queryformat', '%{size}\n')) / 1024 / 1024) if -x "$::prefix/bin/rpm";
+    install::pkgs::clean_rpmdb_shared_regions();
 }
 
 1;
