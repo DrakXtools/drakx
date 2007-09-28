@@ -838,7 +838,7 @@ sub wait_messageW {
 
     my $Window = gtknew('MagicWindow',
 			title => $title,
-			pop_it => !$::isInstall, 
+			pop_it => defined $o->{pop_wait_messages} ? $o->{pop_wait_messages} : !$::isInstall, 
 			modal => 1, 
 			$::isInstall ? (banner => Gtk2::Banner->new((get_default_step_items())[0], $message)) : (),
 			no_Window_Manager => exists $o->{no_Window_Manager} ? $o->{no_Window_Manager} : !$::isStandalone,
