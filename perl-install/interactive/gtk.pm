@@ -529,7 +529,10 @@ sub create_widget {
 	    $set = sub { $w->set_text($_[0]) if $_[0] ne $w->get_text };
 	    if ($e->{type} eq 'file') {
 		my $button = gtksignal_connect(Gtk2::Button->new_from_stock('gtk-open'), clicked => sub {
-						   my $file = $o->ask_filename({ title => $e->{label} });
+						   my $file = $o->ask_fileW({
+                                                       title => $e->{label},
+                                                       want_a_dir => to_bool($e->{want_a_dir}),
+                                                   });
 						   $set->($file) if $file;
 					       });
 		$real_w = gtkpack_(Gtk2::HBox->new(0,0), 1, $w, 0, $button);
