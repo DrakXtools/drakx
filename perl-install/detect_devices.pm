@@ -1066,6 +1066,10 @@ sub is_xbox() {
     any { $_->{vendor} == 0x10de && $_->{id} == 0x02a5 } pci_probe();
 }
 
+sub is_virtualbox() {
+    any { $_->{driver} eq 'vboxadd' } detect_devices::pci_probe();
+}
+
 sub has_cpu_flag {
     my ($flag) = @_;
     cat_('/proc/cpuinfo') =~ /^flags.*\b$flag\b/m;
