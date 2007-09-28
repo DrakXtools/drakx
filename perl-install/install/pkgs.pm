@@ -5,7 +5,7 @@ use strict;
 BEGIN {
     # needed before "use URPM"
     mkdir '/etc/rpm';
-    symlink '/tmp/stage2/etc/rpm/platform', '/etc/rpm/platform';
+    symlink "/tmp/stage2/etc/rpm/$_", "/etc/rpm/$_" foreach 'platform', 'macros.cdb';
 }
 
 use URPM;
