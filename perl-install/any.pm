@@ -895,7 +895,7 @@ sub acceptLicense {
     } 'release-notes.html', 'release-notes.' . arch() . '.html');
 
     # we do not handle links:
-    $o->{release_notes} =~ s!<a href=".*?">(.*?)</a>!\1!g;
+    $o->{release_notes} =~ s!<a href=".*?">(.*?)</a>!$1!g;
 
     return if $o->{useless_thing_accepted};
 
