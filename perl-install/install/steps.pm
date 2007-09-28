@@ -390,6 +390,7 @@ sub pkg_install {
 	$o->installPackages;
     } else {
 	log::l("all packages selected are already installed, nothing to do");
+	delete $o->{packages}{rpmdb}; #- make sure rpmdb is closed
 	0;
     }
 }
