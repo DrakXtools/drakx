@@ -38,6 +38,15 @@ sub find_pci_device {
     any { my $dev = $_; any { $_->{vendor} == $dev->[0] && $_->{id} == $dev->[1] } pci_probe() } @devices;
 }
 
+sub probe_acpi_cpufreq() {
+    any {
+        get_vendor($_) eq "Intel" &&
+        has_flag($_, 'est') &&
+        $_->{'cpu family'} == 6 &&
+        $_->{model} == 15;
+    } get_cpus();
+}
+
 sub probe_centrino() {
     any {
         get_vendor($_) eq "Intel" &&
@@ -114,6 +123,7 @@ sub probe_longrun() {
 }
 
 my @modules = (
+    [ "acpi-cpufreq", \&probe_acpi_cpufreq ],
     # probe centrino first, it will get detected on ICH chipset and
     # speedstep-ich doesn't work with it
     [ "speedstep-centrino", \&probe_centrino ],
