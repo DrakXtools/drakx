@@ -9,13 +9,14 @@
 # Esa Linna <denzo@mbnet.fi>, 2004.
 # Thomas Backlund <tmb@mandrake.org>, 2002, 2003, 2004, 2005.
 # Thomas Backlund <tmb@mandriva.org>, 2006.
+# Anssi Hannula <anssi@mandriva.org>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: DrakX-fi - Mandriva 2007 Release\n"
+"Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-25 20:13+0200\n"
-"PO-Revision-Date: 2006-09-18 20:02+0300\n"
-"Last-Translator: Thomas Backlund <tmb@mandriva.org>\n"
+"PO-Revision-Date: 2007-09-29 20:32+0300\n"
+"Last-Translator: Anssi Hannula <anssi@mandriva.org>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,10 +38,10 @@ msgid ""
 "\n"
 "Do you have a supplementary installation medium to configure?"
 msgstr ""
-"Seuraavat lähteet on löydetty ja käytetään asennuksen aikana: %s.\n"
+"Seuraavat lähteet on löydetty ja niitä käytetään asennuksen aikana: %s.\n"
 "\n"
 "\n"
-"Onlo sinulla lisää lähteitä jotta haluat määrittää?"
+"Onko sinulla lisää lähteitä jotka haluat määrittää?"
 
 #: any.pm:170
 #, c-format
@@ -74,10 +75,8 @@ msgstr "URL pitää alkaa ftp:// tai http://"
 
 #: any.pm:232
 #, c-format
-msgid ""
-"Contacting Mandriva Linux web site to get the list of available mirrors..."
-msgstr ""
-"Otetaan yhteys Mandriva Linuxin sivustolle peilipalvelinlistan saamiseksi..."
+msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgstr "Otetaan yhteys Mandriva Linuxin sivustolle peilipalvelinlistan saamiseksi..."
 
 #: any.pm:237
 #, c-format
@@ -106,12 +105,12 @@ msgstr "Syötä NFS-palvelimesi nimi ja hakemistopolku"
 #: any.pm:282
 #, c-format
 msgid "Hostname missing"
-msgstr ""
+msgstr "Palvelimen osoite puuttuu"
 
 #: any.pm:283
 #, c-format
 msgid "Directory must begin with \"/\""
-msgstr ""
+msgstr "Hakemistopolun täytyy alkaa \"/\"-merkillä"
 
 #: any.pm:287
 #, c-format
@@ -126,7 +125,7 @@ msgstr "Kansio"
 #: any.pm:310
 #, c-format
 msgid "Supplementary"
-msgstr ""
+msgstr "Lisämedia"
 
 #: any.pm:345
 #, c-format
@@ -583,8 +582,7 @@ msgstr "KDE-työasema"
 msgid ""
 "The K Desktop Environment, the basic graphical environment with a collection "
 "of accompanying tools"
-msgstr ""
-"K-työpöytäympäristö. Graafinen perusympäristö ja sen mukana tulevat työkalut"
+msgstr "K-työpöytäympäristö. Graafinen perusympäristö ja sen mukana tulevat työkalut"
 
 #: share/meta-task/compssUsers.pl:151
 #, c-format
@@ -596,8 +594,7 @@ msgstr "GNOME-työasema"
 msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
 "tools"
-msgstr ""
-"Graafinen ympäristö käyttäjäystävällisellä sovelluksilla ja työkaluilla."
+msgstr "Graafinen ympäristö käyttäjäystävällisellä sovelluksilla ja työkaluilla."
 
 #: share/meta-task/compssUsers.pl:155
 #, c-format
@@ -693,7 +690,7 @@ msgstr "<Tab>/<Alt-Tab> vaihtaa elementtiä"
 #: steps_gtk.pm:155 steps_gtk.pm:156
 #, c-format
 msgid "Localization"
-msgstr ""
+msgstr "Lokalisointi"
 
 #: steps_gtk.pm:159 steps_list.pm:20
 #, c-format
@@ -892,10 +889,10 @@ msgid "Estimating"
 msgstr "Arvioidaan aikaa"
 
 #: steps_gtk.pm:511
-#, fuzzy, c-format
+#, c-format
 msgid "%d package"
 msgid_plural "%d packages"
-msgstr[0] "%d pakettia"
+msgstr[0] "%d paketti"
 msgstr[1] "%d pakettia"
 
 #: steps_gtk.pm:589
@@ -961,11 +958,11 @@ msgid "Is this an install or an upgrade?"
 msgstr "Onko tämä asennus vai päivitys?"
 
 #: steps_interactive.pm:134
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
-msgstr "Asenna"
+msgstr "Asennus"
 
 #: steps_interactive.pm:137
 #, c-format
@@ -1032,7 +1029,7 @@ msgstr "Etsitään saatavilla olevia paketteja..."
 msgid ""
 "Your system does not have enough space left for installation or upgrade (%"
 "dMB > %dMB)"
-msgstr ""
+msgstr "Järjestelmässäsi ei ole riittävästi vapaata tilaa (%dMt > %dMt)"
 
 #: steps_interactive.pm:385
 #, c-format
@@ -1061,23 +1058,23 @@ msgstr "Huono tiedosto"
 #: steps_interactive.pm:413
 #, c-format
 msgid "Install Mandriva KDE Desktop"
-msgstr ""
+msgstr "Asenna Mandriva KDE-työpöytäympäristöllä"
 
 #: steps_interactive.pm:414
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
-msgstr ""
+msgstr "Asenna Mandriva GNOME-työpöytäympäristöllä"
 
 # Asennuksen sivuvalikko
 #: steps_interactive.pm:415
-#, fuzzy, c-format
+#, c-format
 msgid "Custom install"
-msgstr "Minimaalinen asennus"
+msgstr "Mukautettu asennus"
 
 #: steps_interactive.pm:418
 #, c-format
 msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
-msgstr ""
+msgstr "Voit valita asennettavan työpöydän: KDE, GNOME tai mukautettu"
 
 #: steps_interactive.pm:503
 #, c-format
@@ -1141,27 +1138,27 @@ msgstr "Jatka kuitenkin?"
 #: steps_interactive.pm:580
 #, c-format
 msgid "Retry"
-msgstr ""
+msgstr "Yritä uudelleen"
 
 #: steps_interactive.pm:581
 #, c-format
 msgid "Skip this package"
-msgstr ""
+msgstr "Ohita tämä paketti"
 
 #: steps_interactive.pm:582
 #, c-format
 msgid "Skip all packages from medium \"%s\""
-msgstr ""
+msgstr "Ohita kaikki paketit medialta \"%s\""
 
 #: steps_interactive.pm:583
-#, fuzzy, c-format
+#, c-format
 msgid "Go back to media and packages selection"
-msgstr "Tallenna pakettien valinta"
+msgstr "Siirry takaisin medioiden ja pakettien valintaan"
 
 #: steps_interactive.pm:586
-#, fuzzy, c-format
+#, c-format
 msgid "There was an error installing package %s."
-msgstr "Tapahtui virhe asennettaessa paketteja:"
+msgstr "Paketin %s asentamisessa tapahtui virhe."
 
 #: steps_interactive.pm:604
 #, c-format
@@ -1237,8 +1234,7 @@ msgstr ""
 #: steps_interactive.pm:819
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
-msgstr ""
-"Yhtäkään äänikorttia ei löydetty. Kokeile \"harddrake\" asennuksen jälkeen"
+msgstr "Yhtäkään äänikorttia ei löydetty. Kokeile \"harddrake\" asennuksen jälkeen"
 
 #: steps_interactive.pm:828
 #, c-format
@@ -1521,111 +1517,3 @@ msgid ""
 "Exit"
 msgstr "Poistu"
 
-#~ msgid "Boot"
-#~ msgstr "Käynnistys"
-
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Authentication"
-#~ msgstr "Tunnistustapa"
-
-#~ msgid "Arkeia"
-#~ msgstr "Arkeia"
-
-#~ msgid "Flatout"
-#~ msgstr "Flatout"
-
-#~ msgid "Gwenview"
-#~ msgstr "Gwenview"
-
-#~ msgid "3D"
-#~ msgstr "3D"
-
-#~ msgid "CMS"
-#~ msgstr "CMS"
-
-#~ msgid "CRM"
-#~ msgstr "CRM"
-
-#~ msgid "2007 product line"
-#~ msgstr "2007 tuotelinja"
-
-#~ msgid "Invictus Firewall"
-#~ msgstr "Invictus Palomuuri"
-
-#~ msgid "Discovery Live Mode"
-#~ msgstr "Discovery Live Tila"
-
-#~ msgid "How to register"
-#~ msgstr "Miten rekisteröityä"
-
-#~ msgid "Rpmdrake 2"
-#~ msgstr "Rpmdrake 2"
-
-#~ msgid "Mandriva Online Services"
-#~ msgstr "Mandriva Online Palvelut"
-
-#~ msgid "New Theme"
-#~ msgstr "Uusi teema"
-
-#~ msgid "Web 2.0"
-#~ msgstr "Web 2.0"
-
-#~ msgid "Kaspersky"
-#~ msgstr "Kaspersky"
-
-#~ msgid "LinDVD"
-#~ msgstr "LinDVD"
-
-#~ msgid "Skype"
-#~ msgstr "Skype"
-
-#~ msgid "Transgaming/Cedega"
-#~ msgstr "Transgaming/Cedega"
-
-#~ msgid "DrakVPN"
-#~ msgstr "DrakVPN"
-
-#, fuzzy
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "%d pakettia"
-#~ msgstr[1] "%d pakettia"
-
-#~ msgid "%d packages"
-#~ msgstr "%d pakettia"
-
-# Asennuksen sivuvalikko
-#~ msgid "Language"
-#~ msgstr "Kieli"
-
-#~ msgid "License"
-#~ msgstr "Lisenssi"
-
-#~ msgid "Installation class"
-#~ msgstr "Asennusluokka"
-
-#~ msgid "Formatting"
-#~ msgstr "Alustetaan"
-
-#~ msgid "Choosing packages"
-#~ msgstr "Pakettien valitseminen"
-
-#~ msgid "Users"
-#~ msgstr "Käyttäjät"
-
-#~ msgid "Networking"
-#~ msgstr "Verkko"
-
-# Asennuksen sivuvalikko
-#~ msgid "Configure X"
-#~ msgstr "Aseta X"
-
-#~ msgid ""
-#~ "Can not access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "Käyttämääsi ydintä vastaavia ytimen moduuleja ei voida käyttää (tiedosto %"
-#~ "s puuttuu), tämä yleensä tarkoittaa että käynnistyslevykettäsi ei ole "
-#~ "tahdistettu asennusmedian kanssa (luo uudempi käynnistyslevyke)."
