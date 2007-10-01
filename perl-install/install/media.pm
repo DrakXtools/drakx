@@ -872,7 +872,7 @@ sub copy_rpms_on_disk {
 	my $total = install::any::count_files($rpmsdir);
 	log::l("copying $rpmsdir to $::prefix$dest_dir ($total files)");
 	eval {
-	    install::any::cp_with_progress($wait_message, 0, $total, $rpmsdir, "$::prefix$dest_dir");
+	    install::any::cp_with_progress_({}, $wait_message, $total, [$rpmsdir], "$::prefix$dest_dir");
 	};
 	log::l($@) if $@;
 
