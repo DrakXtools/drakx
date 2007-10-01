@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-25 20:13+0200\n"
+"POT-Creation-Date: 2007-10-01 09:12+0200\n"
 "PO-Revision-Date: 2007-09-08 23:46+0300\n"
 "Last-Translator: Dotan Kamber <kamberd@yahoo.com>\n"
 "Language-Team: Hebrew\n"
@@ -24,13 +24,13 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: any.pm:159
+#: any.pm:155
 #, c-format
 msgid "Do you have further supplementary media?"
 msgstr "האם יש לך מקורות התקנה נוספים?"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:162
+#: any.pm:158
 #, c-format
 msgid ""
 "The following media have been found and will be used during install: %s.\n"
@@ -43,112 +43,114 @@ msgstr ""
 "\n"
 "האם יש לך מקורות נוספים להתקנה שברצונך להגדיר?"
 
-#: any.pm:170
+#: any.pm:166
 #, c-format
 msgid "CD-ROM"
 msgstr "תקליטור"
 
-#: any.pm:171
+#: any.pm:167
 #, c-format
 msgid "Network (HTTP)"
 msgstr "רשת (HTTP)"
 
-#: any.pm:172
+#: any.pm:168
 #, c-format
 msgid "Network (FTP)"
 msgstr "רשת (FTP)"
 
-#: any.pm:173
+#: any.pm:169
 #, c-format
 msgid "Network (NFS)"
 msgstr "רשת (NFS)"
 
-#: any.pm:215
+#: any.pm:211
 #, c-format
 msgid "URL of the mirror?"
 msgstr "כתובת URL של אתר המראה?"
 
-#: any.pm:221
+#: any.pm:217
 #, c-format
 msgid "URL must start with ftp:// or http://"
 msgstr "על הכתובת להתחיל ב-//:ftp או ב-//:http"
 
-#: any.pm:232
+#: any.pm:228
 #, c-format
-msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid ""
+"Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr "מתחבר לאתר מנדריבה לינוקס בכדי לקבל רשימה של אתרי מראה זמינים..."
 
-#: any.pm:237
+#: any.pm:233
 #, c-format
 msgid ""
 "Failed contacting Mandriva Linux web site to get the list of available "
 "mirrors"
 msgstr "כשל בחיבור לאתר מנדריבה לינוקס בכדי לקבל רשימה של אתרי מראה זמינים"
 
-#: any.pm:247
+#: any.pm:243
 #, c-format
 msgid "Choose a mirror from which to get the packages"
 msgstr "עליך לבחור את אתר המראה ממנו יורדו החבילות"
 
-#: any.pm:277
+#: any.pm:273
 #, c-format
 msgid "NFS setup"
 msgstr "הגדרת NFS"
 
-#: any.pm:278
+#: any.pm:274
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
 msgstr "נא להזין את שם המארח ואת התיקיה בה נמצא מקור ה-NFS"
 
-#: any.pm:282
+#: any.pm:278
 #, c-format
 msgid "Hostname missing"
 msgstr "שם המארח חסר"
 
-#: any.pm:283
+#: any.pm:279
 #, c-format
 msgid "Directory must begin with \"/\""
 msgstr "על התיקיה להתחיל ב=\"/\""
 
-#: any.pm:287
+#: any.pm:283
 #, c-format
 msgid "Hostname of the NFS mount ?"
 msgstr "שם המארח של עיגון ה-NFS?"
 
-#: any.pm:288
+#: any.pm:284
 #, c-format
 msgid "Directory"
 msgstr "ספרייה"
 
-#: any.pm:310
+#: any.pm:306
 #, c-format
 msgid "Supplementary"
 msgstr "תוספים"
 
-#: any.pm:345
+#: any.pm:341
 #, c-format
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
 "correct."
-msgstr "אין אפשרות למצוא קובץ המכיל רשימת חבילות במקור זה. נא לוודא שהכתובת תקינה."
+msgstr ""
+"אין אפשרות למצוא קובץ המכיל רשימת חבילות במקור זה. נא לוודא שהכתובת תקינה."
 
-#: any.pm:379
+#: any.pm:375
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "מחפש חבילות שכבר מותקנות..."
 
-#: any.pm:386
+#: any.pm:382
 #, c-format
 msgid "Removing packages prior to upgrade..."
 msgstr "מסיר חבילות לפני השדרוג..."
 
-#: any.pm:428
+#: any.pm:424
 #, c-format
 msgid "Finding packages to upgrade..."
 msgstr "מאתר חבילות שיש לשדרג..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:614
+#: any.pm:610
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -172,7 +174,7 @@ msgstr ""
 "האם ברצונך להתקין שרתים אלו בשלב זה?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:637
+#: any.pm:633
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -185,77 +187,77 @@ msgstr ""
 "\n"
 "האם באמת ברצונך להסיר חבילות אלה?\n"
 
-#: any.pm:1059
+#: any.pm:1055
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "שמות הכוננ(ים) הבאים שונו:"
 
-#: any.pm:1061
+#: any.pm:1057
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (השם הקודם הוא %s)"
 
-#: any.pm:1118
+#: any.pm:1114
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1118
+#: any.pm:1114
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1118
+#: any.pm:1114
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1137 steps_interactive.pm:846
+#: any.pm:1133 steps_interactive.pm:922
 #, c-format
 msgid "Network"
 msgstr "רשת"
 
-#: any.pm:1141
+#: any.pm:1137
 #, c-format
 msgid "Please choose a media"
 msgstr "עליך לבחור מקור"
 
-#: any.pm:1157
+#: any.pm:1153
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "הקובץ כבר קיים. לשכתב?"
 
-#: any.pm:1161
+#: any.pm:1157
 #, c-format
 msgid "Permission denied"
 msgstr "הגישה נדחתה"
 
-#: any.pm:1209
+#: any.pm:1205
 #, c-format
 msgid "Bad NFS name"
 msgstr "שם NFS לא-תקין"
 
-#: any.pm:1230
+#: any.pm:1226
 #, c-format
 msgid "Bad media %s"
 msgstr "המקור %s אינו תקין"
 
-#: any.pm:1272
+#: any.pm:1269
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "אין אפשרות לשמור תמונות מסך לפני חלוקה למחיצות"
 
-#: any.pm:1279
+#: any.pm:1277
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "ניתן למצוא את תמונות המסך אחרי התקנה ב%s"
 
-#: gtk.pm:136
+#: gtk.pm:119
 #, c-format
 msgid "Installation"
 msgstr "התקנה"
 
-#: gtk.pm:139 share/meta-task/compssUsers.pl:54
+#: gtk.pm:122 share/meta-task/compssUsers.pl:42
 #, c-format
 msgid "Configuration"
 msgstr "הגדרות"
@@ -284,57 +286,64 @@ msgstr "מאתחל את שירותי הרשת"
 msgid "Bringing down the network"
 msgstr "מוריד את שירותי הרשת"
 
-#: media.pm:699 media.pm:710
+#: media.pm:703 media.pm:714
 #, c-format
 msgid "Downloading file %s..."
 msgstr "מוריד קובץ %s..."
 
-#: media.pm:804
+#: media.pm:808
 #, c-format
 msgid "Copying some packages on disks for future use"
 msgstr "מעתיק מספר חבילות על הכוננים לשימוש עתידי"
 
-#: media.pm:857
+#: media.pm:861
 #, c-format
 msgid "Copying in progress"
 msgstr "מעתיק את התקליטור לכונן הקשיח"
 
-#: pkgs.pm:33
+#: pkgs.pm:28
 #, c-format
 msgid "must have"
 msgstr "חייב להיות"
 
-#: pkgs.pm:34
+#: pkgs.pm:29
 #, c-format
 msgid "important"
 msgstr "חשוב"
 
-#: pkgs.pm:35
+#: pkgs.pm:30
 #, c-format
 msgid "very nice"
 msgstr "מומלץ מאוד"
 
-#: pkgs.pm:36
+#: pkgs.pm:31
 #, c-format
 msgid "nice"
 msgstr "מומלץ"
 
-#: pkgs.pm:37
+#: pkgs.pm:32
 #, c-format
 msgid "maybe"
 msgstr "לא הכרחי"
 
-#: share/meta-task/compssUsers.pl:23
+#: pkgs.pm:245
+#, c-format
+msgid ""
+"Some packages requested by %s cannot be installed:\n"
+"%s"
+msgstr ""
+
+#: share/meta-task/compssUsers.pl:11
 #, c-format
 msgid "Workstation"
 msgstr "תחנת עבודה"
 
-#: share/meta-task/compssUsers.pl:25
+#: share/meta-task/compssUsers.pl:13
 #, c-format
 msgid "Office Workstation"
 msgstr "תחנת עבודה משרדית"
 
-#: share/meta-task/compssUsers.pl:27
+#: share/meta-task/compssUsers.pl:15
 #, c-format
 msgid ""
 "Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets "
@@ -343,7 +352,7 @@ msgstr ""
 "תוכנות משרד: מעבדי תמלילים (כתבן אופן אופיס, Kword), גיליונות אלקטרונים "
 "(גיליון אופן אופיס, Kspread),מציגי pdf, ועוד"
 
-#: share/meta-task/compssUsers.pl:28
+#: share/meta-task/compssUsers.pl:16
 #, c-format
 msgid ""
 "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -352,294 +361,295 @@ msgstr ""
 "תוכנות משרד: מעבדי טקסט (kword, abiword), גיליונות אלקטרונים (kspread, "
 "gnumeric),מציגי pdf, ועוד"
 
-#: share/meta-task/compssUsers.pl:33
+#: share/meta-task/compssUsers.pl:21
 #, c-format
 msgid "Game station"
 msgstr "תחנת עבודה למשחקים"
 
-#: share/meta-task/compssUsers.pl:34
+#: share/meta-task/compssUsers.pl:22
 #, c-format
 msgid "Amusement programs: arcade, boards, strategy, etc"
 msgstr "תוכנות לבידור: ארקייד, לוח, אסטרטגיה, ועוד"
 
-#: share/meta-task/compssUsers.pl:37
+#: share/meta-task/compssUsers.pl:25
 #, c-format
 msgid "Multimedia station"
 msgstr "תחנת עבודה למולטימדיה"
 
-#: share/meta-task/compssUsers.pl:38
+#: share/meta-task/compssUsers.pl:26
 #, c-format
 msgid "Sound and video playing/editing programs"
 msgstr "תוכנות להשמעה או עריכה של קול ווידאו"
 
-#: share/meta-task/compssUsers.pl:43
+#: share/meta-task/compssUsers.pl:31
 #, c-format
 msgid "Internet station"
 msgstr "תחנת עבודה לאינטרנט"
 
-#: share/meta-task/compssUsers.pl:44
+#: share/meta-task/compssUsers.pl:32
 #, c-format
 msgid ""
 "Set of tools to read and send mail and news (mutt, tin..) and to browse the "
 "Web"
-msgstr "ערכת כלים לקריאה וכתיבת דוא\"ל וחדשות  (pine, mutt, tin..) ולגלישה באינטרנט"
+msgstr ""
+"ערכת כלים לקריאה וכתיבת דוא\"ל וחדשות  (pine, mutt, tin..) ולגלישה באינטרנט"
 
-#: share/meta-task/compssUsers.pl:49
+#: share/meta-task/compssUsers.pl:37
 #, c-format
 msgid "Network Computer (client)"
 msgstr "מחשב רשת (לקוח)"
 
-#: share/meta-task/compssUsers.pl:50
+#: share/meta-task/compssUsers.pl:38
 #, c-format
 msgid "Clients for different protocols including ssh"
 msgstr "לקוחות לפרוטוקולים שונים כולל ssh"
 
-#: share/meta-task/compssUsers.pl:55
+#: share/meta-task/compssUsers.pl:43
 #, c-format
 msgid "Tools to ease the configuration of your computer"
 msgstr "כלי עזר לביצוע הגדרות המחשב שלך"
 
-#: share/meta-task/compssUsers.pl:59
+#: share/meta-task/compssUsers.pl:47
 #, c-format
 msgid "Console Tools"
 msgstr "כלי מסוף"
 
-#: share/meta-task/compssUsers.pl:60
+#: share/meta-task/compssUsers.pl:48
 #, c-format
 msgid "Editors, shells, file tools, terminals"
 msgstr "עורכים, מעטפות, כלי קבצים, מסופים"
 
-#: share/meta-task/compssUsers.pl:64 share/meta-task/compssUsers.pl:166
-#: share/meta-task/compssUsers.pl:168
+#: share/meta-task/compssUsers.pl:52 share/meta-task/compssUsers.pl:153
+#: share/meta-task/compssUsers.pl:155
 #, c-format
 msgid "Development"
 msgstr "פיתוח"
 
-#: share/meta-task/compssUsers.pl:65 share/meta-task/compssUsers.pl:169
+#: share/meta-task/compssUsers.pl:53 share/meta-task/compssUsers.pl:156
 #, c-format
 msgid "C and C++ development libraries, programs and include files"
 msgstr "ספריות פיתוח בC וC++, תוכנות וקבצי include"
 
-#: share/meta-task/compssUsers.pl:69 share/meta-task/compssUsers.pl:173
+#: share/meta-task/compssUsers.pl:56 share/meta-task/compssUsers.pl:160
 #, c-format
 msgid "Documentation"
 msgstr "מסמכים"
 
-#: share/meta-task/compssUsers.pl:70 share/meta-task/compssUsers.pl:174
+#: share/meta-task/compssUsers.pl:57 share/meta-task/compssUsers.pl:161
 #, c-format
 msgid "Books and Howto's on Linux and Free Software"
 msgstr "ספרים ומדריכים לשימוש בלינוקס ותוכנה חופשית"
 
-#: share/meta-task/compssUsers.pl:74 share/meta-task/compssUsers.pl:177
+#: share/meta-task/compssUsers.pl:61 share/meta-task/compssUsers.pl:164
 #, c-format
 msgid "LSB"
 msgstr "LSB"
 
-#: share/meta-task/compssUsers.pl:75 share/meta-task/compssUsers.pl:178
+#: share/meta-task/compssUsers.pl:62 share/meta-task/compssUsers.pl:165
 #, c-format
 msgid "Linux Standard Base. Third party applications support"
 msgstr "תמיכה בתוכנות צד שלישי. Linux Standard Base"
 
-#: share/meta-task/compssUsers.pl:84
+#: share/meta-task/compssUsers.pl:71
 #, c-format
 msgid "Web Server"
 msgstr "שרת איחסון אתרים"
 
-#: share/meta-task/compssUsers.pl:85
+#: share/meta-task/compssUsers.pl:72
 #, c-format
 msgid "Apache"
 msgstr "Apache"
 
-#: share/meta-task/compssUsers.pl:88
+#: share/meta-task/compssUsers.pl:75
 #, c-format
 msgid "Groupware"
 msgstr "עבודה בקבוצה"
 
-#: share/meta-task/compssUsers.pl:89
+#: share/meta-task/compssUsers.pl:76
 #, c-format
 msgid "Kolab Server"
 msgstr "שרת Kolab"
 
-#: share/meta-task/compssUsers.pl:92 share/meta-task/compssUsers.pl:133
+#: share/meta-task/compssUsers.pl:79 share/meta-task/compssUsers.pl:120
 #, c-format
 msgid "Firewall/Router"
 msgstr "חומת אש/נתב"
 
-#: share/meta-task/compssUsers.pl:93 share/meta-task/compssUsers.pl:134
+#: share/meta-task/compssUsers.pl:80 share/meta-task/compssUsers.pl:121
 #, c-format
 msgid "Internet gateway"
 msgstr "הגנת המערכת בעת חיבור לאינטרנט"
 
-#: share/meta-task/compssUsers.pl:96
+#: share/meta-task/compssUsers.pl:83
 #, c-format
 msgid "Mail/News"
 msgstr "דואר/קבוצות דיון"
 
-#: share/meta-task/compssUsers.pl:97
+#: share/meta-task/compssUsers.pl:84
 #, c-format
 msgid "Postfix mail server, Inn news server"
 msgstr "שרת דואר Postfix, שרת קבוצות דיון Inn"
 
-#: share/meta-task/compssUsers.pl:100
+#: share/meta-task/compssUsers.pl:87
 #, c-format
 msgid "Directory Server"
 msgstr "שרת ספרייה"
 
-#: share/meta-task/compssUsers.pl:104
+#: share/meta-task/compssUsers.pl:91
 #, c-format
 msgid "FTP Server"
 msgstr "שרת FTP"
 
-#: share/meta-task/compssUsers.pl:105
+#: share/meta-task/compssUsers.pl:92
 #, c-format
 msgid "ProFTPd"
 msgstr "ProFTPd"
 
-#: share/meta-task/compssUsers.pl:108
+#: share/meta-task/compssUsers.pl:95
 #, c-format
 msgid "DNS/NIS"
 msgstr "DNS/NIS"
 
-#: share/meta-task/compssUsers.pl:109
+#: share/meta-task/compssUsers.pl:96
 #, c-format
 msgid "Domain Name and Network Information Server"
 msgstr "שרת שמות מתחם ומידע רשת"
 
-#: share/meta-task/compssUsers.pl:112
+#: share/meta-task/compssUsers.pl:99
 #, c-format
 msgid "File and Printer Sharing Server"
 msgstr "שרת שיתוף קבצים ומדפסות"
 
-#: share/meta-task/compssUsers.pl:113
+#: share/meta-task/compssUsers.pl:100
 #, c-format
 msgid "NFS Server, Samba server"
 msgstr "שרת NFS, שרת סמבה"
 
-#: share/meta-task/compssUsers.pl:116 share/meta-task/compssUsers.pl:129
+#: share/meta-task/compssUsers.pl:103 share/meta-task/compssUsers.pl:116
 #, c-format
 msgid "Database"
 msgstr "מסדי נתונים"
 
-#: share/meta-task/compssUsers.pl:117
+#: share/meta-task/compssUsers.pl:104
 #, c-format
 msgid "PostgreSQL and MySQL Database Server"
 msgstr "שרת מסד נתונים MySQL או PostgreSQL"
 
-#: share/meta-task/compssUsers.pl:121
+#: share/meta-task/compssUsers.pl:108
 #, c-format
 msgid "Web/FTP"
 msgstr "Web/FTP"
 
-#: share/meta-task/compssUsers.pl:122
+#: share/meta-task/compssUsers.pl:109
 #, c-format
 msgid "Apache, Pro-ftpd"
 msgstr "Apache, Pro-ftpd"
 
-#: share/meta-task/compssUsers.pl:125
+#: share/meta-task/compssUsers.pl:112
 #, c-format
 msgid "Mail"
 msgstr "דואר"
 
-#: share/meta-task/compssUsers.pl:126
+#: share/meta-task/compssUsers.pl:113
 #, c-format
 msgid "Postfix mail server"
 msgstr "שרת דואר Postfix"
 
-#: share/meta-task/compssUsers.pl:130
+#: share/meta-task/compssUsers.pl:117
 #, c-format
 msgid "PostgreSQL or MySQL database server"
 msgstr "שרת מסד נתונים MySQL או PostgreSQL"
 
-#: share/meta-task/compssUsers.pl:137
+#: share/meta-task/compssUsers.pl:124
 #, c-format
 msgid "Network Computer server"
 msgstr "שרת מחשב רשת"
 
-#: share/meta-task/compssUsers.pl:138
+#: share/meta-task/compssUsers.pl:125
 #, c-format
 msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "שרת NFS, שרת SMB, שרת Proxy, שרת ssh"
 
-#: share/meta-task/compssUsers.pl:144
+#: share/meta-task/compssUsers.pl:131
 #, c-format
 msgid "Graphical Environment"
 msgstr "סביבה גרפית"
 
-#: share/meta-task/compssUsers.pl:146
+#: share/meta-task/compssUsers.pl:133
 #, c-format
 msgid "KDE Workstation"
 msgstr "סביבת העבודה KDE"
 
-#: share/meta-task/compssUsers.pl:147
+#: share/meta-task/compssUsers.pl:134
 #, c-format
 msgid ""
 "The K Desktop Environment, the basic graphical environment with a collection "
 "of accompanying tools"
 msgstr "סביבת שולחן עבודה פופולרית וקלה לשימוש עם מגוון יישומים נלווים"
 
-#: share/meta-task/compssUsers.pl:151
+#: share/meta-task/compssUsers.pl:138
 #, c-format
 msgid "GNOME Workstation"
 msgstr "סביבת העבודה GNOME"
 
-#: share/meta-task/compssUsers.pl:152
+#: share/meta-task/compssUsers.pl:139
 #, c-format
 msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
 "tools"
 msgstr "סביבת שולחן עבודה פופולרית וקלה לשימוש עם מגוון יישומים נלווים"
 
-#: share/meta-task/compssUsers.pl:155
+#: share/meta-task/compssUsers.pl:142
 #, c-format
 msgid "IceWm Desktop"
 msgstr "שולחן עבודה IceWm"
 
-#: share/meta-task/compssUsers.pl:159
+#: share/meta-task/compssUsers.pl:146
 #, c-format
 msgid "Other Graphical Desktops"
 msgstr "סביבות עבודה אחרות"
 
-#: share/meta-task/compssUsers.pl:160
+#: share/meta-task/compssUsers.pl:147
 #, c-format
 msgid "Window Maker, Enlightenment, Fvwm, etc"
 msgstr "סביבות עבודה קלילות כגון Window Maker, Enlightenment, Fvwm, ועוד"
 
-#: share/meta-task/compssUsers.pl:183
+#: share/meta-task/compssUsers.pl:170
 #, c-format
 msgid "Utilities"
 msgstr "תוכנות שרות"
 
-#: share/meta-task/compssUsers.pl:185 share/meta-task/compssUsers.pl:186
+#: share/meta-task/compssUsers.pl:172 share/meta-task/compssUsers.pl:173
 #, c-format
 msgid "SSH Server"
 msgstr "שרת SSH"
 
-#: share/meta-task/compssUsers.pl:190
+#: share/meta-task/compssUsers.pl:177
 #, c-format
 msgid "Webmin"
 msgstr "Webmin"
 
-#: share/meta-task/compssUsers.pl:191
+#: share/meta-task/compssUsers.pl:178
 #, c-format
 msgid "Webmin Remote Configuration Server"
 msgstr "שרת הגדרה תצורה מרחוק Webmin"
 
-#: share/meta-task/compssUsers.pl:195
+#: share/meta-task/compssUsers.pl:182
 #, c-format
 msgid "Network Utilities/Monitoring"
 msgstr "כלי הגדרת וניטור רשת"
 
-#: share/meta-task/compssUsers.pl:196
+#: share/meta-task/compssUsers.pl:183
 #, c-format
 msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
 msgstr "כלי ניטור, בקרת תהליכים, tcpdump , nmap, ..."
 
-#: share/meta-task/compssUsers.pl:200
+#: share/meta-task/compssUsers.pl:187
 #, c-format
 msgid "Mandriva Wizards"
 msgstr "אשפי מנדריבה"
 
-#: share/meta-task/compssUsers.pl:201
+#: share/meta-task/compssUsers.pl:188
 #, c-format
 msgid "Wizards to configure server"
 msgstr "אשפים להגדרת השרת שלך"
@@ -653,7 +663,7 @@ msgstr ""
 "חלה תקלה, אך איני יודע איך לפתור אותה.\n"
 "המשך הפעולה הינו באחריותך בלבד."
 
-#: steps.pm:432
+#: steps.pm:433
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -680,46 +690,7 @@ msgstr "התקנת מנדריבה לינוקס %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> בין רכיבים"
 
-#: steps_gtk.pm:155 steps_gtk.pm:156
-#, c-format
-msgid "Localization"
-msgstr "התאמה למקום"
-
-#: steps_gtk.pm:159 steps_list.pm:20
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Installation class"
-msgstr "סוג התקנה"
-
-#: steps_gtk.pm:160 steps_gtk.pm:243 steps_interactive.pm:511
-#, c-format
-msgid "Package Group Selection"
-msgstr "בחירת קבוצת חבילות לפי נושא"
-
-#: steps_gtk.pm:161 steps_gtk.pm:460 steps_interactive.pm:543
-#, c-format
-msgid "Installing"
-msgstr "מתקין"
-
-#: steps_gtk.pm:162 steps_gtk.pm:576 steps_interactive.pm:735
-#, c-format
-msgid "Summary"
-msgstr "סיכום ובדיקת הגדרות"
-
-#: steps_gtk.pm:164 steps_gtk.pm:165 steps_list.pm:30
-#, c-format
-msgid ""
-"_: Keep these entry short\n"
-"Bootloader"
-msgstr "מנהל אתחול"
-
-#: steps_gtk.pm:166 steps_interactive.pm:644
-#, c-format
-msgid "Updates"
-msgstr "עדכונים"
-
-#: steps_gtk.pm:213
+#: steps_gtk.pm:189
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -731,166 +702,182 @@ msgstr ""
 "בעיות. במקרה שכזה, ניתן להתקין בעזרת ממשק טקסטואלי. להתקנה טקסטואלית יש \n"
 "ללחוץ על מקש F1 כאשר מאתחלים מהתקליטור ולהכניס 'text' בשורת הפקודה."
 
-#: steps_gtk.pm:264 steps_interactive.pm:529
+#: steps_gtk.pm:256 steps_interactive.pm:435 steps_interactive.pm:564
+#: steps_list.pm:30
+#, c-format
+msgid "Package Group Selection"
+msgstr "בחירת קבוצת חבילות לפי נושא"
+
+#: steps_gtk.pm:277 steps_interactive.pm:581
 #, c-format
 msgid "Individual package selection"
 msgstr "בחירת חבילות באופן פרטני"
 
-#: steps_gtk.pm:268 steps_interactive.pm:454
+#: steps_gtk.pm:299 steps_interactive.pm:507
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "גודל כללי: %d / %d MB"
 
-#: steps_gtk.pm:313
+#: steps_gtk.pm:344
 #, c-format
 msgid "Bad package"
 msgstr "חבילה פגומה"
 
-#: steps_gtk.pm:315
+#: steps_gtk.pm:346
 #, c-format
 msgid "Version: "
 msgstr "גרסה: "
 
-#: steps_gtk.pm:316
+#: steps_gtk.pm:347
 #, c-format
 msgid "Size: "
 msgstr "גודל: "
 
-#: steps_gtk.pm:316
+#: steps_gtk.pm:347
 #, c-format
 msgid "%d KB\n"
 msgstr "%d KB\n"
 
-#: steps_gtk.pm:317
+#: steps_gtk.pm:348
 #, c-format
 msgid "Importance: "
 msgstr "חשיבות: "
 
-#: steps_gtk.pm:351
+#: steps_gtk.pm:382
 #, c-format
 msgid "You can not select/unselect this package"
 msgstr "אי אפשר לבחור/לבטל את החבילה הזו"
 
-#: steps_gtk.pm:355
+#: steps_gtk.pm:386
 #, c-format
 msgid "due to missing %s"
 msgstr "בגלל שחסר %s"
 
-#: steps_gtk.pm:356
+#: steps_gtk.pm:387
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "עקב תלות שלא מולאה %s"
 
-#: steps_gtk.pm:357
+#: steps_gtk.pm:388
 #, c-format
 msgid "trying to promote %s"
 msgstr "מנסה לקדם %s"
 
-#: steps_gtk.pm:358
+#: steps_gtk.pm:389
 #, c-format
 msgid "in order to keep %s"
 msgstr "בכדי לשמור %s"
 
-#: steps_gtk.pm:363
+#: steps_gtk.pm:394
 #, c-format
 msgid ""
 "You can not select this package as there is not enough space left to install "
 "it"
 msgstr "אי אפשר לבחור בחבילה זו מכיוון שלא נותר מספיק מקום פנוי להתקינה"
 
-#: steps_gtk.pm:366
+#: steps_gtk.pm:397
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "החבילות הבאות עומדות להיות מותקנות"
 
-#: steps_gtk.pm:367
+#: steps_gtk.pm:398
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "החבילות הבאות עומדות להיות מוסרות"
 
-#: steps_gtk.pm:392
+#: steps_gtk.pm:423
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
 msgstr "זוהי חבילה בסיסית, אי אפשר לבטל את בחירתה"
 
-#: steps_gtk.pm:394
+#: steps_gtk.pm:425
 #, c-format
 msgid "You can not unselect this package. It is already installed"
 msgstr "אין אפשרות לבטל חבילה זו מכיוון שהיא כבר מותקנת"
 
-#: steps_gtk.pm:396
+#: steps_gtk.pm:427
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
 msgstr "לא ניתן לבטל את בחירת חבילה זו, חובה לשדרג אותה"
 
-#: steps_gtk.pm:400
+#: steps_gtk.pm:431
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "הראה חבילות שנבחרו באופן אוטומטי"
 
-#: steps_gtk.pm:402 steps_interactive.pm:133
+#: steps_gtk.pm:433
 #, c-format
 msgid "Install"
 msgstr "התקנה"
 
-#: steps_gtk.pm:405
+#: steps_gtk.pm:436
 #, c-format
 msgid "Load/Save selection"
 msgstr "טעינת/שמירת אזור נבחר"
 
-#: steps_gtk.pm:406
+#: steps_gtk.pm:437
 #, c-format
 msgid "Updating package selection"
 msgstr "עדכון בחירת חבילות"
 
-#: steps_gtk.pm:411
+#: steps_gtk.pm:442
 #, c-format
 msgid "Minimal install"
 msgstr "התקנה מינימלית"
 
-#: steps_gtk.pm:425
+#: steps_gtk.pm:456
 #, c-format
 msgid "Software Management"
 msgstr "תוכנות"
 
-#: steps_gtk.pm:425 steps_interactive.pm:373
+#: steps_gtk.pm:456 steps_interactive.pm:393
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "עליך לבחור את החבילות שברצונך להתקין:"
 
-#: steps_gtk.pm:487
+#: steps_gtk.pm:473 steps_interactive.pm:595 steps_list.pm:32
+#, c-format
+msgid "Installing"
+msgstr "מתקין"
+
+#: steps_gtk.pm:499
 #, c-format
 msgid "No details"
 msgstr "ללא פרטים"
 
-#: steps_gtk.pm:483
+#: steps_gtk.pm:514
 #, c-format
 msgid "Time remaining "
 msgstr "זמן נותר "
 
-#: steps_gtk.pm:484
+#: steps_gtk.pm:515
 #, c-format
 msgid "Estimating"
 msgstr "נותרו"
 
-#: steps_gtk.pm:511
+#: steps_gtk.pm:542
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d חבילה"
 msgstr[1] "%d חבילות"
 
-#: steps_gtk.pm:589
+#: steps_gtk.pm:588 steps_interactive.pm:782 steps_list.pm:43
+#, c-format
+msgid "Summary"
+msgstr "סיכום ובדיקת הגדרות"
+
+#: steps_gtk.pm:605
 #, c-format
 msgid "Configure"
 msgstr "הגדרות"
 
-#: steps_gtk.pm:580 steps_interactive.pm:731 steps_interactive.pm:858
+#: steps_gtk.pm:622 steps_interactive.pm:778 steps_interactive.pm:934
 #, c-format
 msgid "not configured"
 msgstr "לא מוגדר"
 
-#: steps_gtk.pm:612 steps_interactive.pm:268
+#: steps_gtk.pm:658 steps_interactive.pm:278
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -899,7 +886,7 @@ msgstr ""
 "מקורות התוכנה הבאים זמינים להתקנה.\n"
 "באפשרותך לדלג על חלק מהמקורות על ידי ביטול הסימונים המתאימים."
 
-#: steps_gtk.pm:621 steps_interactive.pm:274
+#: steps_gtk.pm:667 steps_interactive.pm:284
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -911,7 +898,7 @@ msgstr ""
 "אם אפשרות זו מופעלת, ההתקנה תמשיך מהכונן הקשיח, וכל החבילות מתקליטורי ההתקנה "
 "יהיו זמינות אחרי סיום ההתקנה מהכונן הקשיח."
 
-#: steps_gtk.pm:623 steps_interactive.pm:276
+#: steps_gtk.pm:669 steps_interactive.pm:286
 #, c-format
 msgid "Copy whole CDs"
 msgstr "העתקת תקליטורים שלמים"
@@ -931,12 +918,12 @@ msgstr "בשלב זה עליך להגדיר את פריסת המקלדת שלך:
 msgid "Here is the full list of available keyboards"
 msgstr "להלן הרשימה המלאה של המדפסות הזמינות"
 
-#: steps_interactive.pm:128
+#: steps_interactive.pm:129
 #, c-format
 msgid "Install/Upgrade"
 msgstr "התקנה/עדכון"
 
-#: steps_interactive.pm:129
+#: steps_interactive.pm:130
 #, c-format
 msgid "Is this an install or an upgrade?"
 msgstr "האם זו התקנה או שידרוג?"
@@ -948,27 +935,37 @@ msgid ""
 "Install"
 msgstr "התקנה"
 
-#: steps_interactive.pm:137
+#: steps_interactive.pm:136
 #, c-format
 msgid "Upgrade %s"
 msgstr "שידרוג %s"
 
-#: steps_interactive.pm:148
+#: steps_interactive.pm:140
+#, c-format
+msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+msgstr ""
+
+#: steps_interactive.pm:144
+#, c-format
+msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+msgstr ""
+
+#: steps_interactive.pm:158
 #, c-format
 msgid "Encryption key for %s"
 msgstr "מפתח הצפנה עבור %s"
 
-#: steps_interactive.pm:184
+#: steps_interactive.pm:194
 #, c-format
 msgid "IDE"
 msgstr "IDE"
 
-#: steps_interactive.pm:184
+#: steps_interactive.pm:194
 #, c-format
 msgid "Configuring IDE"
 msgstr "מגדיר IDE"
 
-#: steps_interactive.pm:221
+#: steps_interactive.pm:231
 #, c-format
 msgid ""
 "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -977,7 +974,7 @@ msgstr ""
 "לא נמצא מקום פנוי עבור bootstrap בגודל 1MB! ההתקנה תמשיך, אבל בכדי לאתחל את "
 "המערכת שלך, יהיה עליך ליצור מחיצת bootstrap באופן ידני בעזרת DiskDrake"
 
-#: steps_interactive.pm:226
+#: steps_interactive.pm:236
 #, c-format
 msgid ""
 "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
@@ -987,7 +984,7 @@ msgstr ""
 "עליך ליצור PPC PReP Boot bootstrap! ההתקנה תמשיך, אבל בכדי  לאתחל את המערכת "
 "יהיה עליך ליצור מחיצת bootstrap באופן ידני בעזרת DiskDrak "
 
-#: steps_interactive.pm:318
+#: steps_interactive.pm:328
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -1001,19 +998,19 @@ msgstr ""
 "ולאחר מכן ללחוץ על כפתור \"אישור\". אם תקליטור זה אינו ברשותך,\n"
 "עליך ללחוץ על כפתור \"ביטול\" בכדי לדלג על התקנת חבילות אלו."
 
-#: steps_interactive.pm:340
+#: steps_interactive.pm:350
 #, c-format
 msgid "Looking for available packages..."
 msgstr "מחפש חבילות זמינות..."
 
-#: steps_interactive.pm:349
+#: steps_interactive.pm:358
 #, c-format
 msgid ""
 "Your system does not have enough space left for installation or upgrade (%"
 "dMB > %dMB)"
 msgstr "למערכת שלך לא נותר די מקום להתקנה או שדרוג (%dMB > %dMB)"
 
-#: steps_interactive.pm:385
+#: steps_interactive.pm:405
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1022,52 +1019,53 @@ msgstr ""
 "עליך לבחור באם לטעון או לשמור את בחירת החבילות.\n"
 "מבנה הקובץ זהה לקובץ auto_install הנוצר באופן אוטומטי."
 
-#: steps_interactive.pm:387
+#: steps_interactive.pm:407
 #, c-format
 msgid "Load"
 msgstr "הספק"
 
-#: steps_interactive.pm:387
+#: steps_interactive.pm:407
 #, c-format
 msgid "Save"
 msgstr "שמור"
 
-#: steps_interactive.pm:395
+#: steps_interactive.pm:415
 #, c-format
 msgid "Bad file"
 msgstr "קובץ לא-תקין"
 
-#: steps_interactive.pm:413
+#: steps_interactive.pm:431
 #, c-format
 msgid "Install Mandriva KDE Desktop"
 msgstr "התקנת שולחן העבודה KDE של מנדריבה"
 
-#: steps_interactive.pm:414
+#: steps_interactive.pm:432
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
 msgstr "התקנת שולחן העבודה GNOME של מנדריבה"
 
-#: steps_interactive.pm:415
+#: steps_interactive.pm:433
 #, c-format
 msgid "Custom install"
 msgstr "התקנה מותאמת אישית"
 
-#: steps_interactive.pm:418
+#: steps_interactive.pm:436
 #, c-format
 msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
-msgstr "באפשרותך לבחור את מתאר שולחן העבודה של התחנה שלך: KDE, GNOME או מותאם אישית"
+msgstr ""
+"באפשרותך לבחור את מתאר שולחן העבודה של התחנה שלך: KDE, GNOME או מותאם אישית"
 
-#: steps_interactive.pm:503
+#: steps_interactive.pm:521
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "הגודל הנבחר גדול יותר מהמקום הזמין"
 
-#: steps_interactive.pm:483
+#: steps_interactive.pm:536
 #, c-format
 msgid "Type of install"
 msgstr "סוג ההתקנה"
 
-#: steps_interactive.pm:484
+#: steps_interactive.pm:537
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1076,82 +1074,82 @@ msgstr ""
 "לא נבחרה אף קבוצה של חבילות.\n"
 "נא לבחור את ההתקנה המינימלית שברצונך לבצע:"
 
-#: steps_interactive.pm:487
+#: steps_interactive.pm:540
 #, c-format
 msgid "With X"
 msgstr "עם סביבה גרפית (X)"
 
-#: steps_interactive.pm:488
+#: steps_interactive.pm:541
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "עם מסמכים בסיסיים (מומלץ!)"
 
-#: steps_interactive.pm:489
+#: steps_interactive.pm:542
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "התקנה מינימלית אמיתית (בייחוד לא urpmi)"
 
-#: steps_interactive.pm:528
-#, c-format
-msgid "All"
-msgstr "הכל"
-
-#: steps_interactive.pm:544
+#: steps_interactive.pm:596
 #, c-format
 msgid "Preparing installation"
 msgstr "מכין את ההתקנה"
 
-#: steps_interactive.pm:552
+#: steps_interactive.pm:604
 #, c-format
 msgid "Installing package %s"
 msgstr "מתקין חבילה %s"
 
-#: steps_interactive.pm:576
+#: steps_interactive.pm:628
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "התרחשה שגיאה בסידור חבילות:"
 
-#: steps_interactive.pm:576
+#: steps_interactive.pm:628
 #, c-format
 msgid "Go on anyway?"
 msgstr "האם להמשיך בכל מקרה?"
 
-#: steps_interactive.pm:580
+#: steps_interactive.pm:632
 #, c-format
 msgid "Retry"
 msgstr "ניסיון נוסף"
 
-#: steps_interactive.pm:581
+#: steps_interactive.pm:633
 #, c-format
 msgid "Skip this package"
 msgstr "דלג על חבילה זו"
 
-#: steps_interactive.pm:582
+#: steps_interactive.pm:634
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "דלג על כל החבילות ממקור \"%s\""
 
-#: steps_interactive.pm:583
+#: steps_interactive.pm:635
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "חזרה לבחירת מקורות וחבילות"
 
-#: steps_interactive.pm:586
+#: steps_interactive.pm:638
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "חלה שגיאה בהתקנת החבילה %s"
 
-#: steps_interactive.pm:604
+#: steps_interactive.pm:656
 #, c-format
 msgid "Post-install configuration"
 msgstr "מבצע הגדרות לאחר-התקנה"
 
-#: steps_interactive.pm:611
+#: steps_interactive.pm:663
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "נא לודא שהמקור לעידכונים בכונן %s"
 
-#: steps_interactive.pm:645
+#: steps_interactive.pm:691 steps_list.pm:47
+#, c-format
+msgid "Updates"
+msgstr "עדכונים"
+
+#: steps_interactive.pm:692
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1170,39 +1168,39 @@ msgstr ""
 "להורדת חבילות אלה נדרש חיבור אינטרנט עובד. האם ברצונך לעדכן את המערכת בשלב "
 "זה ?"
 
-#: steps_interactive.pm:666
+#: steps_interactive.pm:713
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "מתחבר לאתר המראה כדי לקבל את רשימת החבילות הזמינות..."
 
-#: steps_interactive.pm:672
+#: steps_interactive.pm:719
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr "לא יכול להתחבר לאתר המראה  %s"
 
 #. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:777
+#: steps_interactive.pm:825
 #, c-format
 msgid "%s on %s"
 msgstr "%s על %s"
 
-#: steps_interactive.pm:810 steps_interactive.pm:817 steps_interactive.pm:830
-#: steps_interactive.pm:847 steps_interactive.pm:863 steps_interactive.pm:874
+#: steps_interactive.pm:859 steps_interactive.pm:866 steps_interactive.pm:880
+#: steps_interactive.pm:898 steps_interactive.pm:913
 #, c-format
 msgid "Hardware"
 msgstr "חומרה"
 
-#: steps_interactive.pm:795 steps_interactive.pm:812
+#: steps_interactive.pm:881 steps_interactive.pm:899
 #, c-format
 msgid "Sound card"
 msgstr "כרטיס קול"
 
-#: steps_interactive.pm:815
+#: steps_interactive.pm:902
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "האם יש לך כרטיס קול ISA?"
 
-#: steps_interactive.pm:817
+#: steps_interactive.pm:904
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -1211,67 +1209,62 @@ msgstr ""
 "עליך להריץ את \"alsaconf\" או \"sndconfig\" אחרי ההתקנה בכדי להגדיר את כרטיס "
 "הקול שלך"
 
-#: steps_interactive.pm:819
+#: steps_interactive.pm:906
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr "לא זוהו כרטיסי קול. יש לנסות את האשף \"harddrake\"  לאחר ההתקנה"
 
-#: steps_interactive.pm:828
-#, c-format
-msgid "TV card"
-msgstr "כרטיס טלוויזיה"
-
-#: steps_interactive.pm:839
+#: steps_interactive.pm:914
 #, c-format
 msgid "Graphical interface"
 msgstr "ממשק גרפי"
 
-#: steps_interactive.pm:845 steps_interactive.pm:856
+#: steps_interactive.pm:921 steps_interactive.pm:932
 #, c-format
 msgid "Network & Internet"
 msgstr "רשת ואינטרנט"
 
-#: steps_interactive.pm:857
+#: steps_interactive.pm:933
 #, c-format
 msgid "Proxies"
 msgstr "שרתים מתווכים"
 
-#: steps_interactive.pm:858
+#: steps_interactive.pm:934
 #, c-format
 msgid "configured"
 msgstr "מוגדר"
 
-#: steps_interactive.pm:868
+#: steps_interactive.pm:944
 #, c-format
 msgid "Security Level"
 msgstr "סף האבטחה המבוקש:"
 
-#: steps_interactive.pm:882
+#: steps_interactive.pm:963
 #, c-format
 msgid "Firewall"
 msgstr "חומת אש"
 
-#: steps_interactive.pm:886
+#: steps_interactive.pm:967
 #, c-format
 msgid "activated"
 msgstr "פועל"
 
-#: steps_interactive.pm:886
+#: steps_interactive.pm:967
 #, c-format
 msgid "disabled"
 msgstr "מנותק"
 
-#: steps_interactive.pm:939
+#: steps_interactive.pm:981
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "לא הוגדר ממשק גרפי (X). האם אכן ברצונך לבחור אפשרות זו?"
 
-#: steps_interactive.pm:973
+#: steps_interactive.pm:1008
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "מכין את מנהל האתחול..."
 
-#: steps_interactive.pm:983
+#: steps_interactive.pm:1018
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1283,12 +1276,12 @@ msgstr ""
 "במקרה זה. ההתקנה תמשך אבל יהיה עליך להשתמש ב-BootX או באמצעי אחר לאתחול "
 "המערכת. משנה גלעין המערכת למערכת קבצי השורש הוא: root=%s"
 
-#: steps_interactive.pm:989
+#: steps_interactive.pm:1024
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "האם ברצונך להשתמש בaboot?"
 
-#: steps_interactive.pm:992
+#: steps_interactive.pm:1027
 #, c-format
 msgid ""
 "Error installing aboot, \n"
@@ -1297,24 +1290,24 @@ msgstr ""
 "שגיאה בהתקנת aboot,\n"
 "האם לנסות לאלץ את ההתקנה אפילו אם המחיצה הראשונה עלולה להיהרס?"
 
-#: steps_interactive.pm:1009
+#: steps_interactive.pm:1039
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
 "restricted to the administrator."
 msgstr "ברמת אבטחה זו, גישה לקבצים במחיצת החלונות תתאפשר רק למנהל המערכת."
 
-#: steps_interactive.pm:1038
+#: steps_interactive.pm:1071
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "נא להכניס תקליטון ריק לכונן %s"
 
-#: steps_interactive.pm:1040
+#: steps_interactive.pm:1073
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "יוצר תקליטון הפעלה אוטומטית..."
 
-#: steps_interactive.pm:1051
+#: steps_interactive.pm:1084
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1325,22 +1318,22 @@ msgstr ""
 "\n"
 "האם באמת ברצונך לצאת עכשיו?"
 
-#: steps_interactive.pm:1061
+#: steps_interactive.pm:1094
 #, c-format
 msgid "Congratulations"
 msgstr "ברכותינו!"
 
-#: steps_interactive.pm:1065
+#: steps_interactive.pm:1098
 #, c-format
 msgid "Reboot"
 msgstr "הפעלה מחדש"
 
-#: steps_interactive.pm:1069 steps_interactive.pm:1070
+#: steps_interactive.pm:1102 steps_interactive.pm:1103
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "בניית תקליטון הפעלה אוטומטית"
 
-#: steps_interactive.pm:1071
+#: steps_interactive.pm:1104
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"
@@ -1355,17 +1348,17 @@ msgstr ""
 "\n"
 "באם אינך רוצה במחיקת כל תוכן הכונן הקשיח יש לבחור במנגנון שחזור ההתקנה.\n"
 
-#: steps_interactive.pm:1076
+#: steps_interactive.pm:1109
 #, c-format
 msgid "Replay"
 msgstr "שחזור התקנה"
 
-#: steps_interactive.pm:1076
+#: steps_interactive.pm:1109
 #, c-format
 msgid "Automated"
 msgstr "אוטומטי"
 
-#: steps_interactive.pm:1079
+#: steps_interactive.pm:1112
 #, c-format
 msgid "Save packages selection"
 msgstr "שמירת בחירת החבילות"
@@ -1377,6 +1370,11 @@ msgid ""
 "_: Keep these entry short\n"
 "Language"
 msgstr "בחירת שפה"
+
+#: steps_list.pm:16 steps_list.pm:23
+#, c-format
+msgid "Localization"
+msgstr "התאמה למקום"
 
 #: steps_list.pm:17
 #, c-format
@@ -1392,101 +1390,120 @@ msgid ""
 "Mouse"
 msgstr "עכבר"
 
-#: steps_list.pm:19
+#: steps_list.pm:19 steps_list.pm:20
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Hard drive detection"
 msgstr "זיהוי כונן קשיח"
 
-#: steps_list.pm:21
+#: steps_list.pm:21 steps_list.pm:22
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Installation class"
+msgstr "סוג התקנה"
+
+#: steps_list.pm:23
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Keyboard"
 msgstr "מקלדת"
 
-#: steps_list.pm:22
+#: steps_list.pm:24
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Security"
 msgstr "הגדרות אבטחה"
 
-#: steps_list.pm:23
+#: steps_list.pm:25
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Partitioning"
 msgstr "חלוקה למחיצות"
 
-#: steps_list.pm:24
+#: steps_list.pm:27 steps_list.pm:28
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Formatting"
 msgstr "מאתחל"
 
-#: steps_list.pm:25
+#: steps_list.pm:29
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Choosing packages"
 msgstr "בחירת חבילות"
 
-#: steps_list.pm:26
+#: steps_list.pm:31
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Installing"
 msgstr "מתקין"
 
-#: steps_list.pm:28
+#: steps_list.pm:34
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Users"
 msgstr "משתמשים"
 
-#: steps_list.pm:29
+#: steps_list.pm:36 steps_list.pm:37
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "עבודה ברשת"
 
-#: steps_list.pm:31
+#: steps_list.pm:38 steps_list.pm:39
+#, c-format
+msgid ""
+"_: Keep these entry short\n"
+"Bootloader"
+msgstr "מנהל אתחול"
+
+#: steps_list.pm:40 steps_list.pm:41
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Configure X"
 msgstr "הגדרת X"
 
-#: steps_list.pm:32
+#: steps_list.pm:42
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Summary"
 msgstr "סיכום ובדיקת הגדרות"
 
-#: steps_list.pm:33
+#: steps_list.pm:44 steps_list.pm:45
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Services"
 msgstr "שרותים"
 
-#: steps_list.pm:34
+#: steps_list.pm:46
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Updates"
 msgstr "עדכונים"
 
-#: steps_list.pm:35
+#: steps_list.pm:48
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "יציאה"
 
+#~ msgid "All"
+#~ msgstr "הכל"
+
+#~ msgid "TV card"
+#~ msgstr "כרטיס טלוויזיה"
