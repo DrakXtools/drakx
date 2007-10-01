@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-26 13:45+0200\n"
+"POT-Creation-Date: 2007-10-01 09:49+0200\n"
 "PO-Revision-Date: 2007-05-21 11:09-0300\n"
 "Last-Translator: Felipe Arruda <felipemiguel@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_br@mail.kde.org>\n"
@@ -30,12 +30,26 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n > 1);\n"
 
+#: drakauth:24 drakauth:26 draksec:279 draksec:328
+#, fuzzy, c-format
+msgid "Authentication"
+msgstr "Detecção automática"
+
+#: drakauth:36 drakclock:110 drakclock:124 drakfont:214 drakfont:227
+#: drakfont:265 draksplash:169 finish-install:82 logdrake:170 logdrake:445
+#: logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
+#: scannerdrake:200 scannerdrake:259 scannerdrake:730 scannerdrake:741
+#: scannerdrake:880 scannerdrake:891 scannerdrake:961
+#, fuzzy, c-format
+msgid "Error"
+msgstr "Erro!"
+
 #: drakboot:49
 #, c-format
 msgid "No bootloader found, creating a new configuration"
 msgstr "Bootloader não encontrado, criando uma nova configuração"
 
-#: drakboot:83 harddrake2:194 harddrake2:195 logdrake:71
+#: drakboot:83 harddrake2:196 harddrake2:197 logdrake:71
 #, c-format
 msgid "/_File"
 msgstr "/_Arquivo"
@@ -45,7 +59,7 @@ msgstr "/_Arquivo"
 msgid "/File/_Quit"
 msgstr "/Arquivo/_Sair"
 
-#: drakboot:84 harddrake2:195 logdrake:77
+#: drakboot:84 harddrake2:197 logdrake:77
 #, c-format
 msgid "<control>Q"
 msgstr "<control>S"
@@ -64,6 +78,13 @@ msgstr "Detalhado"
 #, c-format
 msgid "Silent"
 msgstr "Silencioso"
+
+#: drakboot:132 drakfont:693 drakperm:378 drakperm:388 drakups:27
+#: harddrake2:515 localedrake:43 scannerdrake:51 scannerdrake:54
+#: scannerdrake:297 scannerdrake:302 scannerdrake:955
+#, c-format
+msgid "Warning"
+msgstr ""
 
 #: drakboot:133
 #, c-format
@@ -144,6 +165,16 @@ msgstr "Modo do sistema"
 msgid "Launch the graphical environment when your system starts"
 msgstr "Executar o sistema X-Window na inicialização"
 
+#: drakboot:257
+#, fuzzy, c-format
+msgid "Boot Style Configuration"
+msgstr "Configuração da Inicialização"
+
+#: drakboot:259 drakboot:263
+#, c-format
+msgid "Video mode"
+msgstr ""
+
 #: drakboot:260
 #, c-format
 msgid ""
@@ -165,57 +196,57 @@ msgstr "O programa \"%s\" foi finalizado com o seguinte erro:"
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "Ferramenta de Relatório de Erros do Mandriva Linux"
 
-#: drakbug:51
+#: drakbug:59
 #, c-format
 msgid "Mandriva Linux Control Center"
 msgstr "Centro de Controle Mandriva Linux"
 
-#: drakbug:52
+#: drakbug:60
 #, c-format
 msgid "First Time Wizard"
 msgstr "Assistente para Primeira Configuração"
 
-#: drakbug:53
+#: drakbug:61
 #, c-format
 msgid "Synchronization tool"
 msgstr "Ferramenta de sincronização"
 
-#: drakbug:54 drakbug:168
+#: drakbug:62 drakbug:186
 #, c-format
 msgid "Standalone Tools"
 msgstr "Ferramentas dedicadas"
 
-#: drakbug:56 drakbug:57
+#: drakbug:64 drakbug:65
 #, c-format
 msgid "Mandriva Online"
 msgstr "Mandriva Online"
 
-#: drakbug:58
+#: drakbug:66
 #, c-format
 msgid "Remote Control"
 msgstr "Controle Remoto"
 
-#: drakbug:59
+#: drakbug:67
 #, c-format
 msgid "Software Manager"
 msgstr "Gerenciador de Softwares"
 
-#: drakbug:60
+#: drakbug:68
 #, c-format
 msgid "Windows Migration tool"
 msgstr "Ferramenta de Migração Windows"
 
-#: drakbug:61
+#: drakbug:69
 #, c-format
 msgid "Configuration Wizards"
 msgstr "Assistentes de Configuração"
 
-#: drakbug:83
+#: drakbug:91
 #, c-format
 msgid "Select Mandriva Tool:"
 msgstr "Selecione a ferramenta Mandriva:"
 
-#: drakbug:84
+#: drakbug:92
 #, c-format
 msgid ""
 "or Application Name\n"
@@ -224,17 +255,17 @@ msgstr ""
 "ou o nome da aplicação\n"
 "(ou seu caminho completo):"
 
-#: drakbug:87
+#: drakbug:95
 #, c-format
 msgid "Find Package"
 msgstr "Localizar Pacote"
 
-#: drakbug:89
+#: drakbug:97
 #, c-format
 msgid "Package: "
 msgstr "Pacote: "
 
-#: drakbug:90
+#: drakbug:98
 #, c-format
 msgid "Kernel:"
 msgstr "Kernel:"
@@ -256,20 +287,35 @@ msgstr ""
 "saída do comando lspcidrake -v, versão do kernel, e o conteúdo do arquivo /"
 "proc/cpuinfo."
 
-#: drakbug:112
+#: drakbug:127 drakperm:134 draksec:440 draksec:442 draksec:461 draksec:463
+#, fuzzy, c-format
+msgid "Help"
+msgstr "/Aj_uda"
+
+#: drakbug:129
 #, c-format
 msgid "Report"
 msgstr "Enviar"
 
-#: drakbug:178
+#: drakbug:160 drakfont:517
+#, c-format
+msgid "Close"
+msgstr ""
+
+#: drakbug:196
 #, c-format
 msgid "Not installed"
 msgstr "Não instalado"
 
-#: drakbug:191
+#: drakbug:209
 #, c-format
 msgid "Package not installed"
 msgstr "Pacote não instalado"
+
+#: drakclock:30 draksec:334
+#, c-format
+msgid "Date, Clock & Time Zone Settings"
+msgstr ""
 
 #: drakclock:39
 #, c-format
@@ -285,6 +331,11 @@ msgstr "Trocar Fuso horário"
 #, c-format
 msgid "Timezone - DrakClock"
 msgstr "Fuso horário - DrakClock"
+
+#: drakclock:44
+#, c-format
+msgid "Which is your timezone?"
+msgstr ""
 
 #: drakclock:45
 #, c-format
@@ -320,6 +371,11 @@ msgstr "Ativar NTP"
 msgid "Server:"
 msgstr "Servidor:"
 
+#: drakclock:95
+#, c-format
+msgid "Timezone"
+msgstr ""
+
 #: drakclock:110
 #, c-format
 msgid "Please enter a valid NTP server address."
@@ -329,6 +385,11 @@ msgstr "Por favor, informe um servidor NTP válido."
 #, c-format
 msgid "Could not synchronize with %s."
 msgstr "Não foi possível sincronizar com %s."
+
+#: drakclock:126 draksplash:93 logdrake:175 scannerdrake:492
+#, fuzzy, c-format
+msgid "Quit"
+msgstr "/_Sair"
 
 #: drakclock:127
 #, c-format
@@ -386,103 +447,103 @@ msgstr ""
 "Todos os seus programas serão fechados e você irá perder a sessão corrente. "
 "Você tem certeza de que deseja reinicializar o serviço dm?"
 
-#: drakfont:187
+#: drakfont:188
 #, c-format
 msgid "Search installed fonts"
 msgstr "Procurar por fontes instaladas"
 
-#: drakfont:189
+#: drakfont:190
 #, c-format
 msgid "Unselect fonts installed"
 msgstr "Desmarcar as fontes instaladas"
 
-#: drakfont:213
+#: drakfont:214
 #, c-format
 msgid "No fonts found"
 msgstr "Nenhuma fonte encontrada"
 
-#: drakfont:217
+#: drakfont:218
 #, c-format
 msgid "parse all fonts"
 msgstr "analisar todas as fontes"
 
-#: drakfont:222 drakfont:263 drakfont:332 drakfont:373 drakfont:380
-#: drakfont:406 drakfont:424 drakfont:438
+#: drakfont:223 drakfont:264 drakfont:338 drakfont:379 drakfont:387
+#: drakfont:413 drakfont:431 drakfont:445
 #, c-format
 msgid "done"
 msgstr "pronto"
 
-#: drakfont:226
+#: drakfont:227
 #, c-format
 msgid "Could not find any font in your mounted partitions"
 msgstr "Não consegui encontrar nenhuma fonte nas suas partições montadas"
 
-#: drakfont:261
+#: drakfont:262
 #, c-format
 msgid "Reselect correct fonts"
 msgstr "Selecionar novamente as fontes corretas"
 
-#: drakfont:264
+#: drakfont:265
 #, c-format
 msgid "Could not find any font.\n"
 msgstr "Não foi possível encontrar nenhuma fonte.\n"
 
-#: drakfont:274
+#: drakfont:275
 #, c-format
 msgid "Search for fonts in installed list"
 msgstr "Procurar fontes na lista das instaladas"
 
-#: drakfont:293
+#: drakfont:299
 #, c-format
 msgid "%s fonts conversion"
 msgstr "%s conversão de fonte"
 
-#: drakfont:330
+#: drakfont:336
 #, c-format
 msgid "Fonts copy"
 msgstr "Cópia de fontes"
 
-#: drakfont:333
+#: drakfont:339
 #, c-format
 msgid "True Type fonts installation"
 msgstr "Instalação das fontes True Type"
 
-#: drakfont:341
+#: drakfont:347
 #, c-format
 msgid "please wait during ttmkfdir..."
 msgstr "por favor aguarde enquanto ttmkfdir..."
 
-#: drakfont:342
+#: drakfont:348
 #, c-format
 msgid "True Type install done"
 msgstr "Instalação das fontes True Type concluída"
 
-#: drakfont:348 drakfont:363
+#: drakfont:354 drakfont:369
 #, c-format
 msgid "type1inst building"
 msgstr "construção de type1inst"
 
-#: drakfont:357
+#: drakfont:363
 #, c-format
 msgid "Ghostscript referencing"
 msgstr "Referencia no Ghostscript"
 
-#: drakfont:374
+#: drakfont:380
 #, c-format
 msgid "Suppress Temporary Files"
 msgstr "Apagar os arquivos temporários"
 
-#: drakfont:376 drakfont:434
+#: drakfont:383 drakfont:441
 #, c-format
 msgid "Restart XFS"
 msgstr "Reiniciar XFS"
 
-#: drakfont:422 drakfont:432
+#: drakfont:429 drakfont:439
 #, c-format
 msgid "Suppress Fonts Files"
 msgstr "Apagar os Arquivos de Fontes"
 
-#: drakfont:442
+#: drakfont:449
 #, c-format
 msgid ""
 "Before installing any fonts, be sure that you have the right to use and "
@@ -497,64 +558,69 @@ msgstr ""
 "Você pode instalar fontes normalmente. Em casos raros, fontes falsas podem "
 "bloquear seu servidor X."
 
-#: drakfont:482
+#: drakfont:489
 #, c-format
 msgid "Font Installation"
 msgstr "Instalação de Fonte"
 
-#: drakfont:493
+#: drakfont:500
 #, c-format
 msgid "DrakFont"
 msgstr "DrakFont"
 
-#: drakfont:494 drakfont:646
+#: drakfont:501 drakfont:653
 #, c-format
 msgid "Font List"
 msgstr "Lista das Fontes"
 
-#: drakfont:497
+#: drakfont:504
 #, c-format
 msgid "Get Windows Fonts"
 msgstr "Obter Fontes do Windows"
 
-#: drakfont:503
+#: drakfont:510
 #, c-format
 msgid "About"
 msgstr "Sobre"
 
-#: drakfont:505 drakfont:725
+#: drakfont:511 drakfont:552
+#, fuzzy, c-format
+msgid "Options"
+msgstr "/_Opções"
+
+#: drakfont:512 drakfont:732
 #, c-format
 msgid "Uninstall"
 msgstr "Desinstalar"
 
-#: drakfont:506
+#: drakfont:513
 #, c-format
 msgid "Import"
 msgstr "Importar"
 
-#: drakfont:524
+#: drakfont:531
 #, c-format
 msgid "Drakfont"
 msgstr "DrakFont"
 
-#: drakfont:526
+#: drakfont:533
 #, c-format
 msgid "Copyright (C) 2001-2006 by Mandriva"
 msgstr "Copyright (C) 2001-2006 Mandriva"
 
-#: drakfont:528
+#: drakfont:535
 #, c-format
 msgid "Font installer."
 msgstr "Instalador de fontes"
 
-#: drakfont:530 harddrake2:236
+#: drakfont:537 harddrake2:238
 #, c-format
 msgid "Mandriva Linux"
 msgstr "Mandriva Linux"
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:537 harddrake2:241
+#: drakfont:544 harddrake2:243
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr ""
@@ -562,102 +628,133 @@ msgstr ""
 "Arthur Renato Mello <renato@conectiva.com.br>\n"
 "Felipe Arruda <felipemiguel@gmail.com>\n"
 
-#: drakfont:547
+#: drakfont:554
 #, c-format
 msgid "Choose the applications that will support the fonts:"
 msgstr "Escolha os programas que vão aceitar as fontes :"
 
-#: drakfont:558
+#: drakfont:565
 #, c-format
 msgid "Ghostscript"
 msgstr "Ghostscript"
 
-#: drakfont:559
+#: drakfont:566
 #, c-format
 msgid "OpenOffice.org"
 msgstr "BrOffice.org"
 
-#: drakfont:560
+#: drakfont:567
 #, c-format
 msgid "Abiword"
 msgstr "Abiword"
 
-#: drakfont:561
+#: drakfont:568
 #, c-format
 msgid "Generic Printers"
 msgstr "Impressoras Genéricas"
 
-#: drakfont:575
+#: drakfont:573 drakfont:583 draksplash:180 drakups:210
+#, c-format
+msgid "Ok"
+msgstr ""
+
+#: drakfont:582
 #, c-format
 msgid "Select the font file or directory and click on 'Add'"
 msgstr "Escolha o arquivo ou diretório de fontes e clique em 'Adicionar'"
 
-#: drakfont:576
+#: drakfont:583
 #, c-format
 msgid "File Selection"
 msgstr "Seleção de arquivos"
 
-#: drakfont:580
+#: drakfont:583 drakfont:663 drakfont:747 draksplash:180 drakups:217
+#: logdrake:175
+#, fuzzy, c-format
+msgid "Cancel"
+msgstr "Canal"
+
+#: drakfont:587
 #, c-format
 msgid "Fonts"
 msgstr "Fontes"
 
-#: drakfont:644
+#: drakfont:651 draksec:330
 #, c-format
 msgid "Import fonts"
 msgstr "Importar fontes"
 
-#: drakfont:657
+#: drakfont:657 drakups:299 drakups:361 drakups:381
+#, c-format
+msgid "Add"
+msgstr ""
+
+#: drakfont:658 drakfont:746 drakups:301 drakups:363 drakups:383
+#, c-format
+msgid "Remove"
+msgstr ""
+
+#: drakfont:664
 #, c-format
 msgid "Install"
 msgstr "Instalar"
 
-#: drakfont:688
+#: drakfont:695
 #, c-format
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "Você tem certeza que deseja desinstalar as seguintes fontes?"
 
-#: drakfont:733
+#: drakfont:699 draksec:59 harddrake2:323
+#, c-format
+msgid "Yes"
+msgstr ""
+
+#: drakfont:701 draksec:58 harddrake2:324
+#, c-format
+msgid "No"
+msgstr ""
+
+#: drakfont:740
 #, c-format
 msgid "Unselected All"
 msgstr "Desmarcar Tudo"
 
-#: drakfont:736
+#: drakfont:743
 #, c-format
 msgid "Selected All"
 msgstr "Selecionar Tudo"
 
-#: drakfont:750 drakfont:769
+#: drakfont:760 drakfont:779
 #, c-format
 msgid "Importing fonts"
 msgstr "Importando fontes"
 
-#: drakfont:754 drakfont:774
+#: drakfont:764 drakfont:784
 #, c-format
 msgid "Initial tests"
 msgstr "Testes iniciais"
 
-#: drakfont:755
+#: drakfont:765
 #, c-format
 msgid "Copy fonts on your system"
 msgstr "Copiar fontes para o seu sistema"
 
-#: drakfont:756
+#: drakfont:766
 #, c-format
 msgid "Install & convert Fonts"
 msgstr "Instalar & converter fontes"
 
-#: drakfont:757
+#: drakfont:767
 #, c-format
 msgid "Post Install"
 msgstr "Pós-instalação"
 
-#: drakfont:775
+#: drakfont:785
 #, c-format
 msgid "Remove fonts on your system"
 msgstr "Remover as fontes do seu sistema"
 
-#: drakfont:776
+#: drakfont:786
 #, c-format
 msgid "Post Uninstall"
 msgstr "Pós-desinstalação"
@@ -817,6 +914,11 @@ msgstr "Adicionar nova regra ao final"
 
 #: drakperm:125
 #, c-format
+msgid "Delete"
+msgstr ""
+
+#: drakperm:125
+#, c-format
 msgid "Delete selected rule"
 msgstr "Apagar regra selecionada"
 
@@ -843,6 +945,11 @@ msgstr "grupo"
 #: drakperm:247
 #, c-format
 msgid "other"
+msgstr "outros"
+
+#: drakperm:250
+#, fuzzy, c-format
+msgid "Other"
 msgstr "outros"
 
 #: drakperm:252
@@ -981,10 +1088,22 @@ msgstr "LOCAL"
 msgid "NONE"
 msgstr "NENHUM"
 
+#: draksec:56
+#, fuzzy, c-format
+msgid "Default"
+msgstr "Usuário padrão"
+
 #: draksec:57
 #, c-format
 msgid "Ignore"
 msgstr "Ignorar"
+
+#: draksec:72 drakups:99 harddrake2:369 scannerdrake:66 scannerdrake:70
+#: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:505
+#: scannerdrake:509 scannerdrake:531 service_harddrake:252
+#, c-format
+msgid "Please wait"
+msgstr ""
 
 #. -PO: Do not alter the <span ..> and </span> tags.
 #. -PO: Translate the security levels (Poor, Standard, High, Higher and Paranoid) in the same way, you translated these individuals words.
@@ -1086,7 +1205,7 @@ msgstr ""
 "mas o sistema é completamente fechado e as opções de\n"
 "segurança estão ao máximo."
 
-#: draksec:147 harddrake2:211
+#: draksec:147 harddrake2:213
 #, c-format
 msgid ""
 "Description of the fields:\n"
@@ -1108,6 +1227,11 @@ msgstr "Nível de segurança e Controles"
 #: draksec:203
 #, c-format
 msgid "Security Level:"
+msgstr "Nível de segurança:"
+
+#: draksec:206
+#, fuzzy, c-format
+msgid "Security Alerts:"
 msgstr "Nível de segurança:"
 
 #: draksec:210
@@ -1135,6 +1259,11 @@ msgstr "Opções do sistema"
 msgid "Periodic Checks"
 msgstr "Verificações Periódicas"
 
+#: draksec:282
+#, fuzzy, c-format
+msgid "No password"
+msgstr "Senha do root"
+
 #: draksec:283
 #, c-format
 msgid "Root password"
@@ -1145,7 +1274,7 @@ msgstr "Senha do root"
 msgid "User password"
 msgstr "Senha do usuário"
 
-#: draksec:314 draksec:368
+#: draksec:314 draksec:363
 #, c-format
 msgid "Software Management"
 msgstr "Gerenciador de Software"
@@ -1225,6 +1354,11 @@ msgstr "Backups"
 msgid "Logs"
 msgstr "Relatorios"
 
+#: draksec:332
+#, fuzzy, c-format
+msgid "Services"
+msgstr "No-breaks"
+
 #: draksec:333
 #, c-format
 msgid "Users"
@@ -1240,33 +1374,38 @@ msgstr "Configuração da Inicialização"
 msgid "Hardware"
 msgstr "Hardware"
 
-#: draksec:370
+#: draksec:365
 #, c-format
 msgid "Network"
 msgstr "Rede"
 
-#: draksec:372
+#: draksec:366
+#, fuzzy, c-format
+msgid "System"
+msgstr "Modo do sistema"
+
+#: draksec:367
 #, c-format
 msgid "Boot"
 msgstr "Inicialização"
 
-#: draksec:396
+#: draksec:391
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "Por favor aguarde, configurando nível de segurança..."
 
-#: draksec:297
+#: draksec:397
 #, c-format
 msgid "Please wait, setting security options..."
 msgstr "Por favor aguarde, configurando opções de segurança..."
 
-#: draksound:47
+#: draksound:48
 #, c-format
 msgid "No Sound Card detected!"
 msgstr "Nenhuma Placa de Som detectada!"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: draksound:50
+#: draksound:51
 #, c-format
 msgid ""
 "No Sound Card has been detected on your machine. Please verify that a Linux-"
@@ -1287,7 +1426,7 @@ msgstr ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 
-#: draksound:57
+#: draksound:58
 #, c-format
 msgid ""
 "\n"
@@ -1524,7 +1663,7 @@ msgstr ""
 msgid "Autodetection"
 msgstr "Detecção automática"
 
-#: drakups:99 harddrake2:367
+#: drakups:99 harddrake2:369
 #, c-format
 msgid "Detection in progress"
 msgstr "Detecção em progresso"
@@ -1581,6 +1720,11 @@ msgid "The name of your ups"
 msgstr "O nome do seu no-break"
 
 #: drakups:144
+#, fuzzy, c-format
+msgid "Driver:"
+msgstr "Driver"
+
+#: drakups:144
 #, c-format
 msgid "The driver that manages your ups"
 msgstr "O driver que gerencia seu no-break"
@@ -1605,18 +1749,18 @@ msgstr "O assistente configurou com sucesso o novo dispositivo \"%s\"."
 msgid "UPS devices"
 msgstr "No-breaks"
 
-#: drakups:249 drakups:268 drakups:284 harddrake2:85 harddrake2:111
-#: harddrake2:118
+#: drakups:249 drakups:268 drakups:284 harddrake2:87 harddrake2:113
+#: harddrake2:120
 #, c-format
 msgid "Name"
 msgstr "Nome"
 
-#: drakups:249 harddrake2:133
+#: drakups:249 harddrake2:135
 #, c-format
 msgid "Driver"
 msgstr "Driver"
 
-#: drakups:249 harddrake2:52
+#: drakups:249 harddrake2:53
 #, c-format
 msgid "Port"
 msgstr "Porta"
@@ -1651,7 +1795,7 @@ msgstr "Regras"
 msgid "Action"
 msgstr "Ação"
 
-#: drakups:297 harddrake2:82
+#: drakups:297 harddrake2:84
 #, c-format
 msgid "Level"
 msgstr "Nível"
@@ -1660,6 +1804,11 @@ msgstr "Nível"
 #, c-format
 msgid "ACL name"
 msgstr "Nome da ACL"
+
+#: drakups:297 finish-install:116
+#, fuzzy, c-format
+msgid "Password"
+msgstr "Senha do root"
 
 #: drakups:329
 #, c-format
@@ -1703,27 +1852,37 @@ msgstr ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 
+#: finish-install:43
+#, c-format
+msgid "Keyboard"
+msgstr ""
+
 #: finish-install:44
 #, c-format
 msgid "Please, choose your keyboard layout."
 msgstr "Por favor, escolha o layout do seu teclado."
 
-#: finish-install:111 finish-install:129 finish-install:141
+#: finish-install:114 finish-install:132 finish-install:144
 #, c-format
 msgid "Encrypted home partition"
 msgstr "Partição home criptografada"
 
-#: finish-install:111
+#: finish-install:114
 #, c-format
 msgid "Please enter a password for the %s user"
 msgstr "Por favor, informe uma senha para o usuário %s"
 
-#: finish-install:129
+#: finish-install:117
+#, c-format
+msgid "Password (again)"
+msgstr ""
+
+#: finish-install:132
 #, c-format
 msgid "Creating encrypted home partition"
 msgstr "Criando partição home criptografada"
 
-#: finish-install:141
+#: finish-install:144
 #, c-format
 msgid "Formatting encrypted home partition"
 msgstr "Formatando partição home criptografada"
@@ -1738,7 +1897,7 @@ msgstr "Drivers alternativos"
 msgid "the list of alternative drivers for this sound card"
 msgstr "lista de drivers alternativos para sua placa de som"
 
-#: harddrake2:30 harddrake2:120
+#: harddrake2:30 harddrake2:122
 #, c-format
 msgid "Bus"
 msgstr "Barramento"
@@ -1750,7 +1909,7 @@ msgid ""
 msgstr ""
 "este é o caminho físico onde está ligado o dispositivo (ex: PCI, USB, ...)"
 
-#: harddrake2:33 harddrake2:146
+#: harddrake2:33 harddrake2:148
 #, c-format
 msgid "Bus identification"
 msgstr "Identificação do barramento"
@@ -1873,137 +2032,137 @@ msgstr "Classe da mídia"
 msgid "class of hardware device"
 msgstr "classe do dispositivo de hardware"
 
-#: harddrake2:51 harddrake2:83
+#: harddrake2:52 harddrake2:85
 #, c-format
 msgid "Model"
 msgstr "Modelo"
 
-#: harddrake2:51
+#: harddrake2:52
 #, c-format
 msgid "hard disk model"
 msgstr "modelo do disco rígido"
 
-#: harddrake2:52
+#: harddrake2:53
 #, c-format
 msgid "network printer port"
 msgstr "porta da impressora da rede"
 
-#: harddrake2:53
+#: harddrake2:54
 #, c-format
 msgid "Primary partitions"
 msgstr "Partições primárias"
 
-#: harddrake2:53
+#: harddrake2:54
 #, c-format
 msgid "the number of the primary partitions"
 msgstr "o número de partições primárias"
 
-#: harddrake2:54 harddrake2:88
+#: harddrake2:55 harddrake2:90
 #, c-format
 msgid "Vendor"
 msgstr "Fabricante"
 
-#: harddrake2:54
+#: harddrake2:55
 #, c-format
 msgid "the vendor name of the device"
 msgstr "o nome do fabricante do dispositivo"
 
-#: harddrake2:55
+#: harddrake2:56
 #, c-format
 msgid "PCI domain"
 msgstr "Domínio PCI"
 
-#: harddrake2:55
+#: harddrake2:56
 #, c-format
 msgid "the PCI domain of the device"
 msgstr "o domínio PCI do dispositivo"
 
-#: harddrake2:56
+#: harddrake2:57
 #, c-format
 msgid "Bus PCI #"
 msgstr "Barramento PCI #"
 
-#: harddrake2:56
+#: harddrake2:57
 #, c-format
 msgid "the PCI bus on which the device is plugged"
 msgstr "o barramento PCI aonde o dispositivo está conectado"
 
-#: harddrake2:57
+#: harddrake2:58
 #, c-format
 msgid "PCI device #"
 msgstr "dispositivo PCI #"
 
-#: harddrake2:57
+#: harddrake2:58
 #, c-format
 msgid "PCI device number"
 msgstr "número do dispositivo PCI"
 
-#: harddrake2:58
+#: harddrake2:59
 #, c-format
 msgid "PCI function #"
 msgstr "função PCI #"
 
-#: harddrake2:58
+#: harddrake2:59
 #, c-format
 msgid "PCI function number"
 msgstr "número da função PCI"
 
-#: harddrake2:59
+#: harddrake2:60
 #, c-format
 msgid "Vendor ID"
 msgstr "ID do fabricante"
 
-#: harddrake2:59
+#: harddrake2:60
 #, c-format
 msgid "this is the standard numerical identifier of the vendor"
 msgstr "este é o identificador numérico padrão do fabricante"
 
-#: harddrake2:60
+#: harddrake2:61
 #, c-format
 msgid "Device ID"
 msgstr "ID do dispositivo"
 
-#: harddrake2:60
+#: harddrake2:61
 #, c-format
 msgid "this is the numerical identifier of the device"
 msgstr "este é o identificador numérico do dispositivo"
 
-#: harddrake2:61
+#: harddrake2:62
 #, c-format
 msgid "Sub vendor ID"
 msgstr "ID do sub-fabricante"
 
-#: harddrake2:61
+#: harddrake2:62
 #, c-format
 msgid "this is the minor numerical identifier of the vendor"
 msgstr "este é o identificador numérico menor do fabricante"
 
-#: harddrake2:62
+#: harddrake2:63
 #, c-format
 msgid "Sub device ID"
 msgstr "ID do Sub-dispositivo"
 
-#: harddrake2:62
+#: harddrake2:63
 #, c-format
 msgid "this is the minor numerical identifier of the device"
 msgstr "este é o  identificador numérico menor do dispositivo"
 
-#: harddrake2:63
+#: harddrake2:64
 #, c-format
 msgid "Device USB ID"
 msgstr "ID do dispositivo USB"
 
-#: harddrake2:63
+#: harddrake2:64
 #, c-format
 msgid ".."
 msgstr ".."
 
-#: harddrake2:66
+#: harddrake2:68
 #, c-format
 msgid "Bogomips"
 msgstr "Bogomips"
 
-#: harddrake2:66
+#: harddrake2:68
 #, c-format
 msgid ""
 "the GNU/Linux kernel needs to run a calculation loop at boot time to "
@@ -2014,53 +2173,53 @@ msgstr ""
 "iniciar um contador de tempo. O resultado é guardado em bogomips, como uma "
 "maneira de fazer uma avaliação ou \"benchmark\" da CPU."
 
-#: harddrake2:67
+#: harddrake2:69
 #, c-format
 msgid "Cache size"
 msgstr "Tamanho do cache"
 
-#: harddrake2:67
+#: harddrake2:69
 #, c-format
 msgid "size of the (second level) cpu cache"
 msgstr "tamanho do cache da CPU (segundo nível)"
 
 #. -PO: here "comas" is the medical coma, not the lexical coma!!
-#: harddrake2:70
+#: harddrake2:72
 #, c-format
 msgid "Coma bug"
 msgstr "bug Coma"
 
-#: harddrake2:70
+#: harddrake2:72
 #, c-format
 msgid "whether this cpu has the Cyrix 6x86 Coma bug"
 msgstr "se este processador central tem o erro(bug) 'coma' do Cyrix 6x86"
 
-#: harddrake2:71
+#: harddrake2:73
 #, c-format
 msgid "Cpuid family"
 msgstr "Família da CPU"
 
-#: harddrake2:71
+#: harddrake2:73
 #, c-format
 msgid "family of the cpu (eg: 6 for i686 class)"
 msgstr "família da CPU (ex: 6 para classe i686)"
 
-#: harddrake2:72
+#: harddrake2:74
 #, c-format
 msgid "Cpuid level"
 msgstr "Nível de CPU"
 
-#: harddrake2:72
+#: harddrake2:74
 #, c-format
 msgid "information level that can be obtained through the cpuid instruction"
 msgstr "nível de informação que pode ser obtido através da instrução cpuid"
 
-#: harddrake2:73
+#: harddrake2:75
 #, c-format
 msgid "Frequency (MHz)"
 msgstr "Freqüência (MHz)"
 
-#: harddrake2:73
+#: harddrake2:75
 #, c-format
 msgid ""
 "the CPU frequency in MHz (Megahertz which in first approximation may be "
@@ -2071,22 +2230,22 @@ msgstr ""
 "vulgarmente considerado o número de instruções que o CPU é capaz de executar "
 "por segundo)"
 
-#: harddrake2:74
+#: harddrake2:76
 #, c-format
 msgid "Flags"
 msgstr "Sinais"
 
-#: harddrake2:74
+#: harddrake2:76
 #, c-format
 msgid "CPU flags reported by the kernel"
 msgstr "sinais da CPU mostrados pelo kernel"
 
-#: harddrake2:75
+#: harddrake2:77
 #, c-format
 msgid "Fdiv bug"
 msgstr "Bug do Fdiv"
 
-#: harddrake2:76
+#: harddrake2:78
 #, c-format
 msgid ""
 "Early Intel Pentium chips manufactured have a bug in their floating point "
@@ -2097,46 +2256,46 @@ msgstr ""
 "de cálculos por vírgula que não permite a precisão esperada quando é feita "
 "uma divisão com vírgulas (FDIV)"
 
-#: harddrake2:77
+#: harddrake2:79
 #, c-format
 msgid "Is FPU present"
 msgstr "O FPU está presente"
 
-#: harddrake2:77
+#: harddrake2:79
 #, c-format
 msgid "yes means the processor has an arithmetic coprocessor"
 msgstr ""
 "\"sim\" significa que o processador possui um co-processador matemático"
 
-#: harddrake2:78
+#: harddrake2:80
 #, c-format
 msgid "Whether the FPU has an irq vector"
 msgstr "Se o FPU possui um vetor de IRQs"
 
-#: harddrake2:78
+#: harddrake2:80
 #, c-format
 msgid "yes means the arithmetic coprocessor has an exception vector attached"
 msgstr ""
 "\"sim\" significa que o co-processador aritmético possui uma falha no vetor"
 
-#: harddrake2:79
+#: harddrake2:81
 #, c-format
 msgid "F00f bug"
 msgstr "Bug do F00f"
 
-#: harddrake2:79
+#: harddrake2:81
 #, c-format
 msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
 msgstr ""
 "os primeiros pentiums possuíam falhas e travavam ao decodificar o bytecode "
 "F00F"
 
-#: harddrake2:80
+#: harddrake2:82
 #, c-format
 msgid "Halt bug"
 msgstr "Erro de desligamento"
 
-#: harddrake2:81
+#: harddrake2:83
 #, c-format
 msgid ""
 "Some of the early i486DX-100 chips cannot reliably return to operating mode "
@@ -2145,62 +2304,62 @@ msgstr ""
 "Alguns dos primeiros chips i486DX-100 não podem retornar confiavelmente ao "
 "modo operacional após a instrução \"halt\" ser utilizada"
 
-#: harddrake2:82
+#: harddrake2:84
 #, c-format
 msgid "sub generation of the cpu"
 msgstr "sub-geração da CPU"
 
-#: harddrake2:83
+#: harddrake2:85
 #, c-format
 msgid "generation of the cpu (eg: 8 for Pentium III, ...)"
 msgstr "geração da CPU (ex: 8 para Pentium III, ...)"
 
-#: harddrake2:84
+#: harddrake2:86
 #, c-format
 msgid "Model name"
 msgstr "Nome do modelo"
 
-#: harddrake2:84
+#: harddrake2:86
 #, c-format
 msgid "official vendor name of the cpu"
 msgstr "nome oficial do fabricante da CPU"
 
-#: harddrake2:85
+#: harddrake2:87
 #, c-format
 msgid "the name of the CPU"
 msgstr "o nome da CPU"
 
-#: harddrake2:86
+#: harddrake2:88
 #, c-format
 msgid "Processor ID"
 msgstr "ID do processador"
 
-#: harddrake2:86
+#: harddrake2:88
 #, c-format
 msgid "the number of the processor"
 msgstr "o número do processador"
 
-#: harddrake2:87
+#: harddrake2:89
 #, c-format
 msgid "Model stepping"
 msgstr "Cadeia de modelos"
 
-#: harddrake2:87
+#: harddrake2:89
 #, c-format
 msgid "stepping of the cpu (sub model (generation) number)"
 msgstr "mostra a cadeia de modelos da CPU (número (geração) do sub-modelo)"
 
-#: harddrake2:88
+#: harddrake2:90
 #, c-format
 msgid "the vendor name of the processor"
 msgstr "o nome do fabricante do processador"
 
-#: harddrake2:89
+#: harddrake2:91
 #, c-format
 msgid "Write protection"
 msgstr "Proteção contra escrita"
 
-#: harddrake2:89
+#: harddrake2:91
 #, c-format
 msgid ""
 "the WP flag in the CR0 register of the cpu enforce write protection at the "
@@ -2212,42 +2371,42 @@ msgstr ""
 "verificados do kernel à memória do usuário (isto é, uma proteção contra "
 "erros)"
 
-#: harddrake2:93
+#: harddrake2:95
 #, c-format
 msgid "Floppy format"
 msgstr "Formato de disquete"
 
-#: harddrake2:93
+#: harddrake2:95
 #, c-format
 msgid "format of floppies supported by the drive"
 msgstr "formatos de disquete suportados pelo drive"
 
-#: harddrake2:97
+#: harddrake2:99
 #, c-format
 msgid "Channel"
 msgstr "Canal"
 
-#: harddrake2:97
+#: harddrake2:99
 #, c-format
 msgid "EIDE/SCSI channel"
 msgstr "Canal EIDE/SCSI"
 
-#: harddrake2:98
+#: harddrake2:100
 #, c-format
 msgid "Disk identifier"
 msgstr "Identificador do Disco"
 
-#: harddrake2:98
+#: harddrake2:100
 #, c-format
 msgid "usually the disk serial number"
 msgstr "geralmente o número serial do disco"
 
-#: harddrake2:99
+#: harddrake2:101
 #, c-format
 msgid "Logical unit number"
 msgstr "Número da unidade lógica"
 
-#: harddrake2:99
+#: harddrake2:101
 #, c-format
 msgid ""
 "the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
@@ -2259,57 +2418,62 @@ msgstr ""
 "número de canal, um ID alvo e um número de unidade lógica"
 
 #. -PO: here, "size" is the size of the ram chip (eg: 128Mo, 256Mo, ...)
-#: harddrake2:106
+#: harddrake2:108
 #, c-format
 msgid "Installed size"
 msgstr "Tamanho instalado"
 
-#: harddrake2:106
+#: harddrake2:108
 #, c-format
 msgid "Installed size of the memory bank"
 msgstr "Tamanho instalado do banco de memória"
 
-#: harddrake2:107
+#: harddrake2:109
 #, c-format
 msgid "Enabled Size"
 msgstr "Tamanho Habilitado"
 
-#: harddrake2:107
+#: harddrake2:109
 #, c-format
 msgid "Enabled size of the memory bank"
 msgstr "Tamanho habilitado do banco de memória"
 
-#: harddrake2:108
+#: harddrake2:110 harddrake2:119
+#, c-format
+msgid "Type"
+msgstr ""
+
+#: harddrake2:110
 #, c-format
 msgid "type of the memory device"
 msgstr "tipo do dispositivo de memória"
 
-#: harddrake2:109
+#: harddrake2:111
 #, c-format
 msgid "Speed"
 msgstr "Velocidade"
 
-#: harddrake2:109
+#: harddrake2:111
 #, c-format
 msgid "Speed of the memory bank"
 msgstr "Velocidade do banco de memória"
 
-#: harddrake2:110
+#: harddrake2:112
 #, c-format
 msgid "Bank connections"
 msgstr "Conexões do Banco"
 
-#: harddrake2:111
+#: harddrake2:113
 #, c-format
 msgid "Socket designation of the memory bank"
 msgstr "Designação de Socket do banco de memória"
 
-#: harddrake2:115
+#: harddrake2:117
 #, c-format
 msgid "Device file"
 msgstr "Arquivo de dispositivo"
 
-#: harddrake2:115
+#: harddrake2:117
 #, c-format
 msgid ""
 "the device file used to communicate with the kernel driver for the mouse"
@@ -2317,148 +2481,148 @@ msgstr ""
 "o arquivo de dispositivo usado para a comunicação do driver do kernel com o "
 "mouse"
 
-#: harddrake2:116
+#: harddrake2:118
 #, c-format
 msgid "Emulated wheel"
 msgstr "Roda Emulada"
 
-#: harddrake2:116
+#: harddrake2:118
 #, c-format
 msgid "whether the wheel is emulated or not"
 msgstr "se a roda (wheel) é emulada ou não"
 
-#: harddrake2:117
+#: harddrake2:119
 #, c-format
 msgid "the type of the mouse"
 msgstr "o tipo do mouse"
 
-#: harddrake2:118
+#: harddrake2:120
 #, c-format
 msgid "the name of the mouse"
 msgstr "o nome do mouse"
 
-#: harddrake2:119
+#: harddrake2:121
 #, c-format
 msgid "Number of buttons"
 msgstr "Número de botões"
 
-#: harddrake2:119
+#: harddrake2:121
 #, c-format
 msgid "the number of buttons the mouse has"
 msgstr "o número de botões que o mouse tem"
 
-#: harddrake2:120
+#: harddrake2:122
 #, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "no tipo de barramento no qual seu mouse está conectado"
 
-#: harddrake2:121
+#: harddrake2:123
 #, c-format
 msgid "Mouse protocol used by X11"
 msgstr "Protocolo de Mouse usado pelo X11"
 
-#: harddrake2:121
+#: harddrake2:123
 #, c-format
 msgid "the protocol that the graphical desktop use with the mouse"
 msgstr "o protocolo que o ambiente gráfico usa com o mouse"
 
-#: harddrake2:128 harddrake2:137 harddrake2:144 harddrake2:152 harddrake2:332
+#: harddrake2:130 harddrake2:139 harddrake2:146 harddrake2:154 harddrake2:334
 #, c-format
 msgid "Identification"
 msgstr "Identificação"
 
-#: harddrake2:129 harddrake2:145
+#: harddrake2:131 harddrake2:147
 #, c-format
 msgid "Connection"
 msgstr "Conexão"
 
-#: harddrake2:138
+#: harddrake2:140
 #, c-format
 msgid "Performances"
 msgstr "Performances"
 
-#: harddrake2:139
+#: harddrake2:141
 #, c-format
 msgid "Bugs"
 msgstr "Erros"
 
-#: harddrake2:140
+#: harddrake2:142
 #, c-format
 msgid "FPU"
 msgstr "FPU"
 
-#: harddrake2:147
+#: harddrake2:149
 #, c-format
 msgid "Device"
 msgstr "Dispositivo"
 
-#: harddrake2:148
+#: harddrake2:150
 #, c-format
 msgid "Partitions"
 msgstr "Partições"
 
-#: harddrake2:153
+#: harddrake2:155
 #, c-format
 msgid "Features"
 msgstr "Características"
 
 #. -PO: please keep all "/" characters !!!
-#: harddrake2:176 logdrake:78
+#: harddrake2:178 logdrake:78
 #, c-format
 msgid "/_Options"
 msgstr "/_Opções"
 
-#: harddrake2:177 harddrake2:206 logdrake:80
+#: harddrake2:179 harddrake2:208 logdrake:80
 #, c-format
 msgid "/_Help"
 msgstr "/Aj_uda"
 
-#: harddrake2:181
+#: harddrake2:183
 #, c-format
 msgid "/Autodetect _printers"
 msgstr "/Detectar _impressoras automaticamente"
 
-#: harddrake2:182
+#: harddrake2:184
 #, c-format
 msgid "/Autodetect _modems"
 msgstr "/Detectar _modems automaticamente"
 
-#: harddrake2:183
+#: harddrake2:185
 #, c-format
 msgid "/Autodetect _jaz drives"
 msgstr "/Detectar drives _jaz automaticamente"
 
-#: harddrake2:184
+#: harddrake2:186
 #, c-format
 msgid "/Autodetect parallel _zip drives"
 msgstr "/Detectar _zip drives paralelos automaticamente"
 
-#: harddrake2:188
+#: harddrake2:190
 #, c-format
 msgid "Hardware Configuration"
 msgstr "Configuração de Hardware"
 
-#: harddrake2:195
+#: harddrake2:197
 #, c-format
 msgid "/_Quit"
 msgstr "/_Sair"
 
-#: harddrake2:208
+#: harddrake2:210
 #, c-format
 msgid "/_Fields description"
 msgstr "/Descrição dos cam_pos"
 
-#: harddrake2:210
+#: harddrake2:212
 #, c-format
 msgid "Harddrake help"
 msgstr "Ajuda do Harddrake"
 
-#: harddrake2:219
+#: harddrake2:221
 #, c-format
 msgid "Select a device!"
 msgstr "Selecione um dispositivo!"
 
-#: harddrake2:219
+#: harddrake2:221
 #, c-format
 msgid ""
 "Once you've selected a device, you'll be able to see the device information "
@@ -2467,52 +2631,52 @@ msgstr ""
 "Ao selecionar um dispositivo, você poderá ver as informações do dispositivo "
 "nos campos do quadro à direita (\"Informações\")"
 
-#: harddrake2:225
+#: harddrake2:227
 #, c-format
 msgid "/_Report Bug"
 msgstr "/En_viar erro"
 
-#: harddrake2:227
+#: harddrake2:229
 #, c-format
 msgid "/_About..."
 msgstr "/_Sobre..."
 
-#: harddrake2:230
+#: harddrake2:232
 #, c-format
 msgid "Harddrake"
 msgstr "Harddrake"
 
-#: harddrake2:232
+#: harddrake2:234
 #, c-format
 msgid "Copyright (C) %s by Mandriva"
 msgstr "Copyright (C) %s por Mandriva"
 
-#: harddrake2:234
+#: harddrake2:236
 #, c-format
 msgid "This is HardDrake, a %s hardware configuration tool."
 msgstr "Esse é o HardDrake, uma ferramenta %s de configuração de hardware."
 
-#: harddrake2:267
+#: harddrake2:269
 #, c-format
 msgid "Detected hardware"
 msgstr "Hardware detectado"
 
-#: harddrake2:270 scannerdrake:286
+#: harddrake2:272 scannerdrake:286
 #, c-format
 msgid "Information"
 msgstr "Informações"
 
-#: harddrake2:272
+#: harddrake2:274
 #, c-format
 msgid "Set current driver options"
 msgstr "Configurar opções do driver atual"
 
-#: harddrake2:279
+#: harddrake2:281
 #, c-format
 msgid "Run config tool"
 msgstr "Executar ferramenta de configuração"
 
-#: harddrake2:299
+#: harddrake2:301
 #, c-format
 msgid ""
 "Click on a device in the left tree in order to display its information here."
@@ -2520,53 +2684,68 @@ msgstr ""
 "Clique em um dispositivo na lista à esquerda para visualizar as suas "
 "informações."
 
-#: harddrake2:319
+#: harddrake2:321
 #, c-format
 msgid "unknown"
 msgstr "desconhecido"
 
-#: harddrake2:340
+#: harddrake2:322
+#, fuzzy, c-format
+msgid "Unknown"
+msgstr "desconhecido"
+
+#: harddrake2:342
 #, c-format
 msgid "Misc"
 msgstr "Extras"
 
-#: harddrake2:415
+#: harddrake2:417
 #, c-format
 msgid "secondary"
 msgstr "secundário"
 
-#: harddrake2:415
+#: harddrake2:417
 #, c-format
 msgid "primary"
 msgstr "primário"
 
-#: harddrake2:419
+#: harddrake2:421
 #, c-format
 msgid "burner"
 msgstr "gravador"
 
-#: harddrake2:419
+#: harddrake2:421
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: localedrake:47
+#: harddrake2:473
+#, c-format
+msgid "Unknown/Others"
+msgstr ""
+
+#: harddrake2:515
+#, c-format
+msgid "The following packages need to be installed:\n"
+msgstr ""
+
+#: localedrake:38
 #, c-format
 msgid "LocaleDrake"
 msgstr "LocaleDrake"
 
-#: localedrake:53
+#: localedrake:44
 #, c-format
 msgid "You should install the following packages: %s"
 msgstr "Você deveria instalar os seguintes pacotes: %s"
 
 #. -PO: the following is used to combine packages names. eg: "initscripts, harddrake, yudit"
-#: localedrake:56
+#: localedrake:47
 #, c-format
 msgid ", "
 msgstr ", "
 
-#: localedrake:64
+#: localedrake:55
 #, c-format
 msgid "The change is done, but to be effective you must logout"
 msgstr ""
@@ -2923,6 +3102,11 @@ msgstr "Gerando novamente a lista de scanners configurados..."
 #, c-format
 msgid "The %s is not supported by this version of %s."
 msgstr "O %s não é suportado por esta versão do %s."
+
+#: scannerdrake:104 scannerdrake:115
+#, fuzzy, c-format
+msgid "Confirmation"
+msgstr "Informações"
 
 #: scannerdrake:104
 #, c-format
@@ -3351,6 +3535,11 @@ msgstr "Editar máquina selecionada"
 msgid "Remove selected host"
 msgstr "Remover máquina selecionada"
 
+#: scannerdrake:683 scannerdrake:833
+#, fuzzy, c-format
+msgid "Done"
+msgstr "pronto"
+
 #: scannerdrake:698 scannerdrake:706 scannerdrake:711 scannerdrake:757
 #: scannerdrake:848 scannerdrake:856 scannerdrake:861 scannerdrake:907
 #, c-format
@@ -3398,27 +3587,34 @@ msgstr ""
 msgid "Your scanner(s) will not be available on the network."
 msgstr "Seu scanner não estará disponível para a rede."
 
-#: service_harddrake:131
+#: scannerdrake:962
+#, fuzzy, c-format
+msgid "Could not install the packages needed to share your scanner(s)."
+msgstr ""
+"Não foi possível instalar os pacotes necessários para configurar um scanner "
+"com o Scannerdrake."
+
+#: service_harddrake:124
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Alguns dispositivos na classe de hardware \"%s\" foram removidos:\n"
 
-#: service_harddrake:132
+#: service_harddrake:125
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- %s foi removido\n"
 
-#: service_harddrake:135
+#: service_harddrake:128
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "Alguns dispositivos foram adicionados: %s\n"
 
-#: service_harddrake:136
+#: service_harddrake:129
 #, c-format
 msgid "- %s was added\n"
 msgstr "- %s foi adicionado\n"
 
-#: service_harddrake:259
+#: service_harddrake:252
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "Detecção de hardware em progresso"
@@ -3460,9 +3656,6 @@ msgstr "Configurações Regionais"
 
 #~ msgid "The \"%s\" program has crashed."
 #~ msgstr "O programa \"%s\" foi finalizado com erro."
-
-#~ msgid "Error!"
-#~ msgstr "Erro!"
 
 #~ msgid "I can not find needed image file `%s'."
 #~ msgstr "Não foi possível encontrar o arquivo de imagem `%s'."

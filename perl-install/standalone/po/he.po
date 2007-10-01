@@ -14,20 +14,34 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-26 13:45+0200\n"
+"POT-Creation-Date: 2007-10-01 09:49+0200\n"
 "PO-Revision-Date: 2007-09-26 18:16+0200\n"
 "Last-Translator: Dotan Kamber <kamberd@yahoo.com>\n"
 "Language-Team: Hebrew\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: drakauth:24 drakauth:26 draksec:279 draksec:328
+#, fuzzy, c-format
+msgid "Authentication"
+msgstr "זיהוי-אוטומטי"
+
+#: drakauth:36 drakclock:110 drakclock:124 drakfont:214 drakfont:227
+#: drakfont:265 draksplash:169 finish-install:82 logdrake:170 logdrake:445
+#: logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
+#: scannerdrake:200 scannerdrake:259 scannerdrake:730 scannerdrake:741
+#: scannerdrake:880 scannerdrake:891 scannerdrake:961
+#, c-format
+msgid "Error"
+msgstr ""
 
 #: drakboot:49
 #, c-format
 msgid "No bootloader found, creating a new configuration"
 msgstr "לא נמצא מנהל אתחול, יוצר תצורה חדשה"
 
-#: drakboot:83 harddrake2:194 harddrake2:195 logdrake:71
+#: drakboot:83 harddrake2:196 harddrake2:197 logdrake:71
 #, c-format
 msgid "/_File"
 msgstr "/_קובץ"
@@ -37,7 +51,7 @@ msgstr "/_קובץ"
 msgid "/File/_Quit"
 msgstr "/קובץ/_יציאה"
 
-#: drakboot:84 harddrake2:195 logdrake:77
+#: drakboot:84 harddrake2:197 logdrake:77
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
@@ -56,6 +70,13 @@ msgstr "מפורט"
 #, c-format
 msgid "Silent"
 msgstr "שקט"
+
+#: drakboot:132 drakfont:693 drakperm:378 drakperm:388 drakups:27
+#: harddrake2:515 localedrake:43 scannerdrake:51 scannerdrake:54
+#: scannerdrake:297 scannerdrake:302 scannerdrake:955
+#, c-format
+msgid "Warning"
+msgstr ""
 
 #: drakboot:133
 #, c-format
@@ -135,6 +156,16 @@ msgstr "מצב מערכת"
 msgid "Launch the graphical environment when your system starts"
 msgstr "הפעלת הסביבה הגרפית באתחול המערכת"
 
+#: drakboot:257
+#, fuzzy, c-format
+msgid "Boot Style Configuration"
+msgstr "תצורת האיתחול"
+
+#: drakboot:259 drakboot:263
+#, c-format
+msgid "Video mode"
+msgstr ""
+
 #: drakboot:260
 #, c-format
 msgid ""
@@ -155,57 +186,57 @@ msgstr "התוכנית \"%s\" קרסה עם השגיאה הבאה:"
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "כלי דיווח התקלות של מנדריבה לינוקס"
 
-#: drakbug:51
+#: drakbug:59
 #, c-format
 msgid "Mandriva Linux Control Center"
 msgstr "מרכז הבקרה של מנדריבה לינוקס"
 
-#: drakbug:52
+#: drakbug:60
 #, c-format
 msgid "First Time Wizard"
 msgstr "אשף הפעם הראשונה"
 
-#: drakbug:53
+#: drakbug:61
 #, c-format
 msgid "Synchronization tool"
 msgstr "כלי תאום לביצוע בו-זמני"
 
-#: drakbug:54 drakbug:168
+#: drakbug:62 drakbug:186
 #, c-format
 msgid "Standalone Tools"
 msgstr "כלים עצמאיים"
 
-#: drakbug:56 drakbug:57
+#: drakbug:64 drakbug:65
 #, c-format
 msgid "Mandriva Online"
 msgstr "חנות מנדריבה"
 
-#: drakbug:58
+#: drakbug:66
 #, c-format
 msgid "Remote Control"
 msgstr "שליטה מרחוק"
 
-#: drakbug:59
+#: drakbug:67
 #, c-format
 msgid "Software Manager"
 msgstr "מנהל מקורות תוכנה"
 
-#: drakbug:60
+#: drakbug:68
 #, c-format
 msgid "Windows Migration tool"
 msgstr "כלי ההסבה מחלונות"
 
-#: drakbug:61
+#: drakbug:69
 #, c-format
 msgid "Configuration Wizards"
 msgstr "אשפי ההגדרות"
 
-#: drakbug:83
+#: drakbug:91
 #, c-format
 msgid "Select Mandriva Tool:"
 msgstr "עליך לבחור את תוכנת מנדריבה בה חלה תקלה: "
 
-#: drakbug:84
+#: drakbug:92
 #, c-format
 msgid ""
 "or Application Name\n"
@@ -214,17 +245,17 @@ msgstr ""
 "או שם התוכנה\n"
 "(או נתיב מלא):"
 
-#: drakbug:87
+#: drakbug:95
 #, c-format
 msgid "Find Package"
 msgstr "איתור חבילה"
 
-#: drakbug:89
+#: drakbug:97
 #, c-format
 msgid "Package: "
 msgstr "חבילה: "
 
-#: drakbug:90
+#: drakbug:98
 #, c-format
 msgid "Kernel:"
 msgstr "גרעין:"
@@ -244,20 +275,35 @@ msgstr ""
 "מידע שמומלץ לכלול בדיווח שלך כולל את הפלט של פקודת\n"
 "lspcidrake -v, גרסת הקרנל והתוכן של /proc/cpuinfo."
 
-#: drakbug:112
+#: drakbug:127 drakperm:134 draksec:440 draksec:442 draksec:461 draksec:463
+#, fuzzy, c-format
+msgid "Help"
+msgstr "/_עזרה"
+
+#: drakbug:129
 #, c-format
 msgid "Report"
 msgstr "דיווח"
 
-#: drakbug:178
+#: drakbug:160 drakfont:517
+#, c-format
+msgid "Close"
+msgstr ""
+
+#: drakbug:196
 #, c-format
 msgid "Not installed"
 msgstr "לא מותקן"
 
-#: drakbug:191
+#: drakbug:209
 #, c-format
 msgid "Package not installed"
 msgstr "החבילה לא מותקנת"
+
+#: drakclock:30 draksec:334
+#, c-format
+msgid "Date, Clock & Time Zone Settings"
+msgstr ""
 
 #: drakclock:39
 #, c-format
@@ -273,6 +319,11 @@ msgstr "שינוי אזור זמן"
 #, c-format
 msgid "Timezone - DrakClock"
 msgstr "אזור זמן - DrakClock"
+
+#: drakclock:44
+#, c-format
+msgid "Which is your timezone?"
+msgstr ""
 
 #: drakclock:45
 #, c-format
@@ -308,6 +359,11 @@ msgstr "אפשר סינכרון זמן דרך הרשת"
 msgid "Server:"
 msgstr "שרת:"
 
+#: drakclock:95
+#, c-format
+msgid "Timezone"
+msgstr ""
+
 #: drakclock:110
 #, c-format
 msgid "Please enter a valid NTP server address."
@@ -317,6 +373,11 @@ msgstr "נא להזין כתובת שרת NTP תקפה."
 #, c-format
 msgid "Could not synchronize with %s."
 msgstr "התאום עם %s נכשל."
+
+#: drakclock:126 draksplash:93 logdrake:175 scannerdrake:492
+#, fuzzy, c-format
+msgid "Quit"
+msgstr "/_יציאה"
 
 #: drakclock:127
 #, c-format
@@ -373,103 +434,103 @@ msgstr ""
 "כל התוכניות הרצות עומדות להסגר וההפעלה הנוכחית תאבד. האם השתכנעת שברצונך "
 "להתחל את שירות מנהל שולחן העבודה?"
 
-#: drakfont:187
+#: drakfont:188
 #, c-format
 msgid "Search installed fonts"
 msgstr "חיפוש גופנים זמינים"
 
-#: drakfont:189
+#: drakfont:190
 #, c-format
 msgid "Unselect fonts installed"
 msgstr "בטל בחירת גופנים מותקנים"
 
-#: drakfont:213
+#: drakfont:214
 #, c-format
 msgid "No fonts found"
 msgstr "לא נמצאו גופנים"
 
-#: drakfont:217
+#: drakfont:218
 #, c-format
 msgid "parse all fonts"
 msgstr "נתח את כל הגופנים"
 
-#: drakfont:222 drakfont:263 drakfont:332 drakfont:373 drakfont:380
-#: drakfont:406 drakfont:424 drakfont:438
+#: drakfont:223 drakfont:264 drakfont:338 drakfont:379 drakfont:387
+#: drakfont:413 drakfont:431 drakfont:445
 #, c-format
 msgid "done"
 msgstr "סיום"
 
-#: drakfont:226
+#: drakfont:227
 #, c-format
 msgid "Could not find any font in your mounted partitions"
 msgstr "לא נמצאו גופנים במחיצות המעוגנות שלך"
 
-#: drakfont:261
+#: drakfont:262
 #, c-format
 msgid "Reselect correct fonts"
 msgstr "עליך לבחור מחדש גופנים תקינים"
 
-#: drakfont:264
+#: drakfont:265
 #, c-format
 msgid "Could not find any font.\n"
 msgstr "לא נמצא שום גופן.\n"
 
-#: drakfont:274
+#: drakfont:275
 #, c-format
 msgid "Search for fonts in installed list"
 msgstr "חיפוש אחר גופנים מותקנים"
 
-#: drakfont:293
+#: drakfont:299
 #, c-format
 msgid "%s fonts conversion"
 msgstr "הסבת %s גופנים"
 
-#: drakfont:330
+#: drakfont:336
 #, c-format
 msgid "Fonts copy"
 msgstr "העתקת גופנים"
 
-#: drakfont:333
+#: drakfont:339
 #, c-format
 msgid "True Type fonts installation"
 msgstr "התקנת גופנים מסוג TTF"
 
-#: drakfont:341
+#: drakfont:347
 #, c-format
 msgid "please wait during ttmkfdir..."
 msgstr "עליך להמתין להשלמת פעולת ttmkfdir..."
 
-#: drakfont:342
+#: drakfont:348
 #, c-format
 msgid "True Type install done"
 msgstr "התקנה של TrueType הסתיימה"
 
-#: drakfont:348 drakfont:363
+#: drakfont:354 drakfont:369
 #, c-format
 msgid "type1inst building"
 msgstr "בניית type1inst "
 
-#: drakfont:357
+#: drakfont:363
 #, fuzzy, c-format
 msgid "Ghostscript referencing"
 msgstr "הפנית Ghostscript"
 
-#: drakfont:374
+#: drakfont:380
 #, c-format
 msgid "Suppress Temporary Files"
 msgstr "ביטול קבצים זמניים"
 
-#: drakfont:376 drakfont:434
+#: drakfont:383 drakfont:441
 #, c-format
 msgid "Restart XFS"
 msgstr "מפעיל מחדש את XFS"
 
-#: drakfont:422 drakfont:432
+#: drakfont:429 drakfont:439
 #, c-format
 msgid "Suppress Fonts Files"
 msgstr "ביטול קבצי גופנים"
 
-#: drakfont:442
+#: drakfont:449
 #, c-format
 msgid ""
 "Before installing any fonts, be sure that you have the right to use and "
@@ -484,164 +545,200 @@ msgstr ""
 "באפשרותך להתקין את הגופנים בדרך הרגילה. במקרים נדירים גופנים עם בעיות עלולים "
 "לגלום לבעיות בממשק הגרפי."
 
-#: drakfont:482
+#: drakfont:489
 #, c-format
 msgid "Font Installation"
 msgstr "התקנת גופנים"
 
-#: drakfont:493
+#: drakfont:500
 #, c-format
 msgid "DrakFont"
 msgstr "DrakFont"
 
-#: drakfont:494 drakfont:646
+#: drakfont:501 drakfont:653
 #, c-format
 msgid "Font List"
 msgstr "רשימת גופנים"
 
-#: drakfont:497
+#: drakfont:504
 #, c-format
 msgid "Get Windows Fonts"
 msgstr "ייבוא גופני ווינדוס"
 
-#: drakfont:503
+#: drakfont:510
 #, c-format
 msgid "About"
 msgstr "אודות"
 
-#: drakfont:505 drakfont:725
+#: drakfont:511 drakfont:552
+#, fuzzy, c-format
+msgid "Options"
+msgstr "/_אפשרויות"
+
+#: drakfont:512 drakfont:732
 #, c-format
 msgid "Uninstall"
 msgstr "ביטול התקנה"
 
-#: drakfont:506
+#: drakfont:513
 #, c-format
 msgid "Import"
 msgstr "ייבוא"
 
-#: drakfont:524
+#: drakfont:531
 #, c-format
 msgid "Drakfont"
 msgstr "Drakfont"
 
-#: drakfont:526
+#: drakfont:533
 #, c-format
 msgid "Copyright (C) 2001-2006 by Mandriva"
 msgstr "זכויות היוצרים (C) 2001-2006 שייכות למנדריבה"
 
-#: drakfont:528
+#: drakfont:535
 #, c-format
 msgid "Font installer."
 msgstr "מתקין גופנים"
 
-#: drakfont:530 harddrake2:236
+#: drakfont:537 harddrake2:238
 #, c-format
 msgid "Mandriva Linux"
 msgstr "מנדריבה לינוקס"
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:537 harddrake2:241
+#: drakfont:544 harddrake2:243
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr "Dotan Kamber <kamberd@yahoo.com>\n"
 
-#: drakfont:547
+#: drakfont:554
 #, c-format
 msgid "Choose the applications that will support the fonts:"
 msgstr "בחר את היישומים שיוכלו להשתמש בגופנים אלו:"
 
-#: drakfont:558
+#: drakfont:565
 #, c-format
 msgid "Ghostscript"
 msgstr "Ghostscript"
 
-#: drakfont:559
+#: drakfont:566
 #, c-format
 msgid "OpenOffice.org"
 msgstr "OpenOffice.org"
 
-#: drakfont:560
+#: drakfont:567
 #, c-format
 msgid "Abiword"
 msgstr "Abiword"
 
-#: drakfont:561
+#: drakfont:568
 #, c-format
 msgid "Generic Printers"
 msgstr "מדפסות גנריות"
 
-#: drakfont:575
+#: drakfont:573 drakfont:583 draksplash:180 drakups:210
+#, c-format
+msgid "Ok"
+msgstr ""
+
+#: drakfont:582
 #, c-format
 msgid "Select the font file or directory and click on 'Add'"
 msgstr "נא לסמן את קובץ הגופן או ספריית הגופנים ולבחור \"הוספה\""
 
-#: drakfont:576
+#: drakfont:583
 #, c-format
 msgid "File Selection"
 msgstr "בחירת קובץ"
 
-#: drakfont:580
+#: drakfont:583 drakfont:663 drakfont:747 draksplash:180 drakups:217
+#: logdrake:175
+#, fuzzy, c-format
+msgid "Cancel"
+msgstr "אפיק"
+
+#: drakfont:587
 #, c-format
 msgid "Fonts"
 msgstr "גופנים"
 
-#: drakfont:644
+#: drakfont:651 draksec:330
 #, c-format
 msgid "Import fonts"
 msgstr "ייבוא גופנים"
 
-#: drakfont:657
+#: drakfont:657 drakups:299 drakups:361 drakups:381
+#, c-format
+msgid "Add"
+msgstr ""
+
+#: drakfont:658 drakfont:746 drakups:301 drakups:363 drakups:383
+#, c-format
+msgid "Remove"
+msgstr ""
+
+#: drakfont:664
 #, c-format
 msgid "Install"
 msgstr "התקן"
 
-#: drakfont:688
+#: drakfont:695
 #, c-format
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "בטוח שברצונך להתקין את הגופנים הבאים?"
 
-#: drakfont:733
+#: drakfont:699 draksec:59 harddrake2:323
+#, c-format
+msgid "Yes"
+msgstr ""
+
+#: drakfont:701 draksec:58 harddrake2:324
+#, c-format
+msgid "No"
+msgstr ""
+
+#: drakfont:740
 #, c-format
 msgid "Unselected All"
 msgstr "בטל בחירת הכל"
 
-#: drakfont:736
+#: drakfont:743
 #, c-format
 msgid "Selected All"
 msgstr "בחר את הכל"
 
-#: drakfont:750 drakfont:769
+#: drakfont:760 drakfont:779
 #, c-format
 msgid "Importing fonts"
 msgstr "מייבא גופנים"
 
-#: drakfont:754 drakfont:774
+#: drakfont:764 drakfont:784
 #, c-format
 msgid "Initial tests"
 msgstr "בדיקות ראשוניות"
 
-#: drakfont:755
+#: drakfont:765
 #, c-format
 msgid "Copy fonts on your system"
 msgstr "העתקת גופנים"
 
-#: drakfont:756
+#: drakfont:766
 #, c-format
 msgid "Install & convert Fonts"
 msgstr "התקנת והסבת גופנים"
 
-#: drakfont:757
+#: drakfont:767
 #, c-format
 msgid "Post Install"
 msgstr "השלמת ההתקנה"
 
-#: drakfont:775
+#: drakfont:785
 #, c-format
 msgid "Remove fonts on your system"
 msgstr "הסרת גופנים מהמערכת שלך"
 
-#: drakfont:776
+#: drakfont:786
 #, c-format
 msgid "Post Uninstall"
 msgstr "אחרי ההסרה"
@@ -800,6 +897,11 @@ msgstr "הוספה של חוק חדש בסוף"
 
 #: drakperm:125
 #, c-format
+msgid "Delete"
+msgstr ""
+
+#: drakperm:125
+#, c-format
 msgid "Delete selected rule"
 msgstr "למחוק את הכלל הנבחר"
 
@@ -826,6 +928,11 @@ msgstr "קבוצה"
 #: drakperm:247
 #, c-format
 msgid "other"
+msgstr "אחר"
+
+#: drakperm:250
+#, fuzzy, c-format
+msgid "Other"
 msgstr "אחר"
 
 #: drakperm:252
@@ -964,10 +1071,22 @@ msgstr "מקומי"
 msgid "NONE"
 msgstr "כלום"
 
+#: draksec:56
+#, fuzzy, c-format
+msgid "Default"
+msgstr "שם משתמש:"
+
 #: draksec:57
 #, c-format
 msgid "Ignore"
 msgstr "התעלם"
+
+#: draksec:72 drakups:99 harddrake2:369 scannerdrake:66 scannerdrake:70
+#: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:505
+#: scannerdrake:509 scannerdrake:531 service_harddrake:252
+#, c-format
+msgid "Please wait"
+msgstr ""
 
 #. -PO: Do not alter the <span ..> and </span> tags.
 #. -PO: Translate the security levels (Poor, Standard, High, Higher and Paranoid) in the same way, you translated these individuals words.
@@ -1060,7 +1179,7 @@ msgstr ""
 "<span foreground=\"royalblue3\">פרנואידית</span>: רמה זו זהה לקודמת\n"
 "אבל המערכת סגורה לחלוטין ואפשרויות האבטחה ברמתן המירבית."
 
-#: draksec:147 harddrake2:211
+#: draksec:147 harddrake2:213
 #, c-format
 msgid ""
 "Description of the fields:\n"
@@ -1082,6 +1201,11 @@ msgstr "רמת אבטחה ובדיקות"
 #: draksec:203
 #, c-format
 msgid "Security Level:"
+msgstr "סף אבטחה:"
+
+#: draksec:206
+#, fuzzy, c-format
+msgid "Security Alerts:"
 msgstr "סף אבטחה:"
 
 #: draksec:210
@@ -1109,6 +1233,11 @@ msgstr "אפשרויות מערכת"
 msgid "Periodic Checks"
 msgstr "בדיקות תקופתיות"
 
+#: draksec:282
+#, fuzzy, c-format
+msgid "No password"
+msgstr "סיסמת מנהל המערכת"
+
 #: draksec:283
 #, c-format
 msgid "Root password"
@@ -1119,7 +1248,7 @@ msgstr "סיסמת מנהל המערכת"
 msgid "User password"
 msgstr "סיסמת המשתמש"
 
-#: draksec:314 draksec:368
+#: draksec:314 draksec:363
 #, c-format
 msgid "Software Management"
 msgstr "ניהול תוכנות"
@@ -1199,6 +1328,11 @@ msgstr "גיבויים"
 msgid "Logs"
 msgstr "רישומים"
 
+#: draksec:332
+#, fuzzy, c-format
+msgid "Services"
+msgstr "התקני UPS"
+
 #: draksec:333
 #, c-format
 msgid "Users"
@@ -1214,33 +1348,38 @@ msgstr "תצורת האיתחול"
 msgid "Hardware"
 msgstr "חומרה"
 
-#: draksec:370
+#: draksec:365
 #, c-format
 msgid "Network"
 msgstr "רשת"
 
-#: draksec:372
+#: draksec:366
+#, fuzzy, c-format
+msgid "System"
+msgstr "מצב מערכת"
+
+#: draksec:367
 #, c-format
 msgid "Boot"
 msgstr "אתחול"
 
-#: draksec:396
+#: draksec:391
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "נא להמתין, מגדיר תצורת אבטחה..."
 
-#: draksec:297
+#: draksec:397
 #, c-format
 msgid "Please wait, setting security options..."
 msgstr "נא להמתין, מגדיר אפשרויות אבטחה..."
 
-#: draksound:47
+#: draksound:48
 #, c-format
 msgid "No Sound Card detected!"
 msgstr "לא זוהה כרטיס קול!"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: draksound:50
+#: draksound:51
 #, c-format
 msgid ""
 "No Sound Card has been detected on your machine. Please verify that a Linux-"
@@ -1259,7 +1398,7 @@ msgstr ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 
-#: draksound:57
+#: draksound:58
 #, c-format
 msgid ""
 "\n"
@@ -1496,7 +1635,7 @@ msgstr ""
 msgid "Autodetection"
 msgstr "זיהוי-אוטומטי"
 
-#: drakups:99 harddrake2:367
+#: drakups:99 harddrake2:369
 #, c-format
 msgid "Detection in progress"
 msgstr "זיהוי בתהליך"
@@ -1551,6 +1690,11 @@ msgid "The name of your ups"
 msgstr "שם ה UPS שלך"
 
 #: drakups:144
+#, fuzzy, c-format
+msgid "Driver:"
+msgstr "מנהל התקן"
+
+#: drakups:144
 #, c-format
 msgid "The driver that manages your ups"
 msgstr "מנהל ההתקן שמנהל את חומרת ה-UPS שלך"
@@ -1575,18 +1719,18 @@ msgstr "אשף זה סיים בהצלחה את הגדרת התקן ה-UPS \"%s\"
 msgid "UPS devices"
 msgstr "התקני UPS"
 
-#: drakups:249 drakups:268 drakups:284 harddrake2:85 harddrake2:111
-#: harddrake2:118
+#: drakups:249 drakups:268 drakups:284 harddrake2:87 harddrake2:113
+#: harddrake2:120
 #, c-format
 msgid "Name"
 msgstr "שם"
 
-#: drakups:249 harddrake2:133
+#: drakups:249 harddrake2:135
 #, c-format
 msgid "Driver"
 msgstr "מנהל התקן"
 
-#: drakups:249 harddrake2:52
+#: drakups:249 harddrake2:53
 #, c-format
 msgid "Port"
 msgstr "יציאה"
@@ -1621,7 +1765,7 @@ msgstr "חוקים"
 msgid "Action"
 msgstr "פעולה"
 
-#: drakups:297 harddrake2:82
+#: drakups:297 harddrake2:84
 #, c-format
 msgid "Level"
 msgstr "שלב"
@@ -1630,6 +1774,11 @@ msgstr "שלב"
 #, c-format
 msgid "ACL name"
 msgstr "שם ACL"
+
+#: drakups:297 finish-install:116
+#, fuzzy, c-format
+msgid "Password"
+msgstr "סיסמת מנהל המערכת"
 
 #: drakups:329
 #, c-format
@@ -1673,27 +1822,37 @@ msgstr ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 
+#: finish-install:43
+#, c-format
+msgid "Keyboard"
+msgstr ""
+
 #: finish-install:44
 #, c-format
 msgid "Please, choose your keyboard layout."
 msgstr "עליך לבחור את פריסת המקלדת:"
 
-#: finish-install:111 finish-install:129 finish-install:141
+#: finish-install:114 finish-install:132 finish-install:144
 #, c-format
 msgid "Encrypted home partition"
 msgstr "מחיצת בית מוצפנת"
 
-#: finish-install:111
+#: finish-install:114
 #, c-format
 msgid "Please enter a password for the %s user"
 msgstr "נא להזין סיסמה עבור המשתמש %s"
 
-#: finish-install:129
+#: finish-install:117
+#, c-format
+msgid "Password (again)"
+msgstr ""
+
+#: finish-install:132
 #, c-format
 msgid "Creating encrypted home partition"
 msgstr "יוצר מחיצת בית מוצפנת"
 
-#: finish-install:141
+#: finish-install:144
 #, c-format
 msgid "Formatting encrypted home partition"
 msgstr "מאתחל מחיצת בית מוצפנת"
@@ -1708,7 +1867,7 @@ msgstr "התקנים חלופיים"
 msgid "the list of alternative drivers for this sound card"
 msgstr "הרשימה של התקנים אלטרנטיביים לכרטיס קול הזה"
 
-#: harddrake2:30 harddrake2:120
+#: harddrake2:30 harddrake2:122
 #, c-format
 msgid "Bus"
 msgstr "ערוץ"
@@ -1719,7 +1878,7 @@ msgid ""
 "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr "זה הערוץ הפיזי שאליו ההתקן מחובר (כמו PCI,USB ועוד...)"
 
-#: harddrake2:33 harddrake2:146
+#: harddrake2:33 harddrake2:148
 #, c-format
 msgid "Bus identification"
 msgstr "זיהוי ערוץ"
@@ -1839,137 +1998,137 @@ msgstr "סוג התקן"
 msgid "class of hardware device"
 msgstr "סוג התקן החומרה"
 
-#: harddrake2:51 harddrake2:83
+#: harddrake2:52 harddrake2:85
 #, c-format
 msgid "Model"
 msgstr "דגם"
 
-#: harddrake2:51
+#: harddrake2:52
 #, c-format
 msgid "hard disk model"
 msgstr "דגם כונן קשיח"
 
-#: harddrake2:52
+#: harddrake2:53
 #, c-format
 msgid "network printer port"
 msgstr "יציאה לרשת של המדפסת"
 
-#: harddrake2:53
+#: harddrake2:54
 #, c-format
 msgid "Primary partitions"
 msgstr "מחיצות ראשיות"
 
-#: harddrake2:53
+#: harddrake2:54
 #, c-format
 msgid "the number of the primary partitions"
 msgstr "מספר המחיצות הראשיות"
 
-#: harddrake2:54 harddrake2:88
+#: harddrake2:55 harddrake2:90
 #, c-format
 msgid "Vendor"
 msgstr "יצרן"
 
-#: harddrake2:54
+#: harddrake2:55
 #, c-format
 msgid "the vendor name of the device"
 msgstr "שם היצרן של ההתקן"
 
-#: harddrake2:55
+#: harddrake2:56
 #, c-format
 msgid "PCI domain"
 msgstr "מתחם ה-PCI"
 
-#: harddrake2:55
+#: harddrake2:56
 #, c-format
 msgid "the PCI domain of the device"
 msgstr "מתחם ה-PCI של ההתקן"
 
-#: harddrake2:56
+#: harddrake2:57
 #, c-format
 msgid "Bus PCI #"
 msgstr "ערוץ PCI #"
 
-#: harddrake2:56
+#: harddrake2:57
 #, c-format
 msgid "the PCI bus on which the device is plugged"
 msgstr "ערוץ ה PCI שאליו ההתקן מחובר"
 
-#: harddrake2:57
+#: harddrake2:58
 #, c-format
 msgid "PCI device #"
 msgstr "מספר התקן PCI"
 
-#: harddrake2:57
+#: harddrake2:58
 #, c-format
 msgid "PCI device number"
 msgstr "מספר התקן PCI"
 
-#: harddrake2:58
+#: harddrake2:59
 #, fuzzy, c-format
 msgid "PCI function #"
 msgstr "מספר פעולת PCI"
 
-#: harddrake2:58
+#: harddrake2:59
 #, c-format
 msgid "PCI function number"
 msgstr "מספר פונקצית PCI"
 
-#: harddrake2:59
+#: harddrake2:60
 #, c-format
 msgid "Vendor ID"
 msgstr "קוד יצרן"
 
-#: harddrake2:59
+#: harddrake2:60
 #, c-format
 msgid "this is the standard numerical identifier of the vendor"
 msgstr "זהו המזהה המספרי התקני של היצרן"
 
-#: harddrake2:60
+#: harddrake2:61
 #, c-format
 msgid "Device ID"
 msgstr "קוד התקן"
 
-#: harddrake2:60
+#: harddrake2:61
 #, c-format
 msgid "this is the numerical identifier of the device"
 msgstr "זהו קוד הזיהוי המספרי של ההתקן"
 
-#: harddrake2:61
+#: harddrake2:62
 #, c-format
 msgid "Sub vendor ID"
 msgstr "תת-קוד יצרן"
 
-#: harddrake2:61
+#: harddrake2:62
 #, c-format
 msgid "this is the minor numerical identifier of the vendor"
 msgstr "זהו קוד הזיהוי המספרי המשני של היצרן"
 
-#: harddrake2:62
+#: harddrake2:63
 #, c-format
 msgid "Sub device ID"
 msgstr "קוד תת-התקן"
 
-#: harddrake2:62
+#: harddrake2:63
 #, c-format
 msgid "this is the minor numerical identifier of the device"
 msgstr "זהו תת-קוד הזיהוי המספרי של ההתקן"
 
-#: harddrake2:63
+#: harddrake2:64
 #, c-format
 msgid "Device USB ID"
 msgstr "קוד USB של ההתקן"
 
-#: harddrake2:63
+#: harddrake2:64
 #, c-format
 msgid ".."
 msgstr ".."
 
-#: harddrake2:66
+#: harddrake2:68
 #, c-format
 msgid "Bogomips"
 msgstr "Bogomips"
 
-#: harddrake2:66
+#: harddrake2:68
 #, c-format
 msgid ""
 "the GNU/Linux kernel needs to run a calculation loop at boot time to "
@@ -1979,53 +2138,53 @@ msgstr ""
 "גרעין GNU/Linux צריכה להפעיל לולאה חישובית בזמן האתחול בכדי לזהות ספירת "
 "שעון. התוצאה מאוחסנת בתור bogomips כדרך ל\"אבחון\" המעבד"
 
-#: harddrake2:67
+#: harddrake2:69
 #, c-format
 msgid "Cache size"
 msgstr "גודל מטמון"
 
-#: harddrake2:67
+#: harddrake2:69
 #, c-format
 msgid "size of the (second level) cpu cache"
 msgstr "גודל מטמון המעבד (רמה שניה)"
 
 #. -PO: here "comas" is the medical coma, not the lexical coma!!
-#: harddrake2:70
+#: harddrake2:72
 #, c-format
 msgid "Coma bug"
 msgstr "באג תרדמת"
 
-#: harddrake2:70
+#: harddrake2:72
 #, c-format
 msgid "whether this cpu has the Cyrix 6x86 Coma bug"
 msgstr "האם למעבד הזה יש את באג התרדמת של Cyrix 6x86?"
 
-#: harddrake2:71
+#: harddrake2:73
 #, c-format
 msgid "Cpuid family"
 msgstr "משפחת Cpuid"
 
-#: harddrake2:71
+#: harddrake2:73
 #, c-format
 msgid "family of the cpu (eg: 6 for i686 class)"
 msgstr "המשפחה של המעבד (למשל 6 למעבדי i686)"
 
-#: harddrake2:72
+#: harddrake2:74
 #, c-format
 msgid "Cpuid level"
 msgstr "רמת CPUID"
 
-#: harddrake2:72
+#: harddrake2:74
 #, c-format
 msgid "information level that can be obtained through the cpuid instruction"
 msgstr "רמת המידע שניתן לקבל מהוראת cpuid"
 
-#: harddrake2:73
+#: harddrake2:75
 #, c-format
 msgid "Frequency (MHz)"
 msgstr "תדירות (MHz)"
 
-#: harddrake2:73
+#: harddrake2:75
 #, c-format
 msgid ""
 "the CPU frequency in MHz (Megahertz which in first approximation may be "
@@ -2035,22 +2194,22 @@ msgstr ""
 "תדר המעבד במה\"ץ (מגה הרץ שבקירוב ראשון ניתן לדמות למספר הפעולות שהמעבד יכול "
 "לבצע בשניה)"
 
-#: harddrake2:74
+#: harddrake2:76
 #, c-format
 msgid "Flags"
 msgstr "דגלים"
 
-#: harddrake2:74
+#: harddrake2:76
 #, c-format
 msgid "CPU flags reported by the kernel"
 msgstr "דגלי מעבד מדווחים על ידי הגרעין"
 
-#: harddrake2:75
+#: harddrake2:77
 #, c-format
 msgid "Fdiv bug"
 msgstr "באג Fdiv"
 
-#: harddrake2:76
+#: harddrake2:78
 #, c-format
 msgid ""
 "Early Intel Pentium chips manufactured have a bug in their floating point "
@@ -2060,42 +2219,42 @@ msgstr ""
 "לחלק ממעבדי הפנטיום הראשונים היא באג בחשובים של נקודה צפה המעבדים לא חישבו "
 "בצורה נכונה חלק מהחישובים שתלוים בנקודה צפה Floating point DIVision (FDIV)"
 
-#: harddrake2:77
+#: harddrake2:79
 #, c-format
 msgid "Is FPU present"
 msgstr "האם FPU נוכח"
 
-#: harddrake2:77
+#: harddrake2:79
 #, c-format
 msgid "yes means the processor has an arithmetic coprocessor"
 msgstr "כן אומר שלמעבד יש יחידת עיבוד מתמטית"
 
-#: harddrake2:78
+#: harddrake2:80
 #, c-format
 msgid "Whether the FPU has an irq vector"
 msgstr "האם מעבד העזר המתמתטי תומך ב-IRQ וקטורי"
 
-#: harddrake2:78
+#: harddrake2:80
 #, c-format
 msgid "yes means the arithmetic coprocessor has an exception vector attached"
 msgstr ""
 
-#: harddrake2:79
+#: harddrake2:81
 #, c-format
 msgid "F00f bug"
 msgstr "באג F00f"
 
-#: harddrake2:79
+#: harddrake2:81
 #, c-format
 msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
 msgstr "למעבדי פנטיום הראשונים היא באג שגרם להם לקפוא כאשר חישבו את הקוד F00F"
 
-#: harddrake2:80
+#: harddrake2:82
 #, c-format
 msgid "Halt bug"
 msgstr "באג HALT"
 
-#: harddrake2:81
+#: harddrake2:83
 #, c-format
 msgid ""
 "Some of the early i486DX-100 chips cannot reliably return to operating mode "
@@ -2104,62 +2263,62 @@ msgstr ""
 "חלק משבבי ה- i486DX-100 המוקדמים אינם יכולים לחזור לפעולה באופן אמין אחרי "
 "שימוש בפקודה \"halt\""
 
-#: harddrake2:82
+#: harddrake2:84
 #, c-format
 msgid "sub generation of the cpu"
 msgstr "תת-דור של המעבד"
 
-#: harddrake2:83
+#: harddrake2:85
 #, c-format
 msgid "generation of the cpu (eg: 8 for Pentium III, ...)"
 msgstr "דור המעבד: (לדוגמה: 8 לפנטיום 3,...) "
 
-#: harddrake2:84
+#: harddrake2:86
 #, c-format
 msgid "Model name"
 msgstr "שם דגם"
 
-#: harddrake2:84
+#: harddrake2:86
 #, c-format
 msgid "official vendor name of the cpu"
 msgstr "שם המעבד הרשמי לפי היצרן"
 
-#: harddrake2:85
+#: harddrake2:87
 #, c-format
 msgid "the name of the CPU"
 msgstr "שם המעבד הראשי"
 
-#: harddrake2:86
+#: harddrake2:88
 #, c-format
 msgid "Processor ID"
 msgstr "מזהה מעבד"
 
-#: harddrake2:86
+#: harddrake2:88
 #, c-format
 msgid "the number of the processor"
 msgstr "מספר המעבד"
 
-#: harddrake2:87
+#: harddrake2:89
 #, c-format
 msgid "Model stepping"
 msgstr "מדרגת דגם"
 
-#: harddrake2:87
+#: harddrake2:89
 #, c-format
 msgid "stepping of the cpu (sub model (generation) number)"
 msgstr "מדרגת הדגם (מספר (דור) דגם משנה)"
 
-#: harddrake2:88
+#: harddrake2:90
 #, c-format
 msgid "the vendor name of the processor"
 msgstr "שם היצרן של המעבד"
 
-#: harddrake2:89
+#: harddrake2:91
 #, c-format
 msgid "Write protection"
 msgstr "הגנת כתיבה"
 
-#: harddrake2:89
+#: harddrake2:91
 #, c-format
 msgid ""
 "the WP flag in the CR0 register of the cpu enforce write protection at the "
@@ -2170,42 +2329,42 @@ msgstr ""
 "למעבד למנוע גישות גלעין שלא נבדקו אל זכרון המשתמש (במילים פשוטות - זו הגנה "
 "בפני שגיאות)"
 
-#: harddrake2:93
+#: harddrake2:95
 #, c-format
 msgid "Floppy format"
 msgstr "פרמוט תקליטון"
 
-#: harddrake2:93
+#: harddrake2:95
 #, c-format
 msgid "format of floppies supported by the drive"
 msgstr "סוגי התקליטונים הנתמכים ע\"י הכונן"
 
-#: harddrake2:97
+#: harddrake2:99
 #, c-format
 msgid "Channel"
 msgstr "אפיק"
 
-#: harddrake2:97
+#: harddrake2:99
 #, c-format
 msgid "EIDE/SCSI channel"
 msgstr "ערוץ EIDE/SCSI"
 
-#: harddrake2:98
+#: harddrake2:100
 #, c-format
 msgid "Disk identifier"
 msgstr "מזהה דיסק"
 
-#: harddrake2:98
+#: harddrake2:100
 #, c-format
 msgid "usually the disk serial number"
 msgstr "בדרך כלל המספר הסידורי של הכונן"
 
-#: harddrake2:99
+#: harddrake2:101
 #, c-format
 msgid "Logical unit number"
 msgstr "מספר יחידה לוגית "
 
-#: harddrake2:99
+#: harddrake2:101
 #, c-format
 msgid ""
 "the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
@@ -2217,204 +2376,209 @@ msgstr ""
 "מזהה מטרה ומספר יחידה לוגית (LUN)."
 
 #. -PO: here, "size" is the size of the ram chip (eg: 128Mo, 256Mo, ...)
-#: harddrake2:106
+#: harddrake2:108
 #, c-format
 msgid "Installed size"
 msgstr "גודל מותקן"
 
-#: harddrake2:106
+#: harddrake2:108
 #, c-format
 msgid "Installed size of the memory bank"
 msgstr "גודל מותקן של רכיב הזיכרון"
 
-#: harddrake2:107
+#: harddrake2:109
 #, c-format
 msgid "Enabled Size"
 msgstr "גודל מאופשר"
 
-#: harddrake2:107
+#: harddrake2:109
 #, c-format
 msgid "Enabled size of the memory bank"
 msgstr "גודל מאופשר של רכיב הזיכרון"
 
-#: harddrake2:108
+#: harddrake2:110 harddrake2:119
+#, c-format
+msgid "Type"
+msgstr ""
+
+#: harddrake2:110
 #, c-format
 msgid "type of the memory device"
 msgstr "סוג התקן הזיכרון"
 
-#: harddrake2:109
+#: harddrake2:111
 #, c-format
 msgid "Speed"
 msgstr "מהירות"
 
-#: harddrake2:109
+#: harddrake2:111
 #, c-format
 msgid "Speed of the memory bank"
 msgstr "מהירות רכיבי הזיכרון"
 
-#: harddrake2:110
+#: harddrake2:112
 #, c-format
 msgid "Bank connections"
 msgstr "חיבורי זכרונות"
 
-#: harddrake2:111
+#: harddrake2:113
 #, c-format
 msgid "Socket designation of the memory bank"
 msgstr "סימוני תושבות רכיבי הזיכרון"
 
-#: harddrake2:115
+#: harddrake2:117
 #, c-format
 msgid "Device file"
 msgstr "קובץ התקן"
 
-#: harddrake2:115
+#: harddrake2:117
 #, c-format
 msgid ""
 "the device file used to communicate with the kernel driver for the mouse"
 msgstr "קובץ ההתקן המשמש לתקשורת בין העכבר למנהל ההתקן בגרעין"
 
-#: harddrake2:116
+#: harddrake2:118
 #, c-format
 msgid "Emulated wheel"
 msgstr "הדמיית גלגלת"
 
-#: harddrake2:116
+#: harddrake2:118
 #, c-format
 msgid "whether the wheel is emulated or not"
 msgstr "עם הדמיית גלגלת או בלעדיה"
 
-#: harddrake2:117
+#: harddrake2:119
 #, c-format
 msgid "the type of the mouse"
 msgstr "סוג העכבר"
 
-#: harddrake2:118
+#: harddrake2:120
 #, c-format
 msgid "the name of the mouse"
 msgstr "שם העכבר"
 
-#: harddrake2:119
+#: harddrake2:121
 #, c-format
 msgid "Number of buttons"
 msgstr "מספר כפתורים"
 
-#: harddrake2:119
+#: harddrake2:121
 #, c-format
 msgid "the number of buttons the mouse has"
 msgstr "מספר המקשים שיש לעכבר"
 
-#: harddrake2:120
+#: harddrake2:122
 #, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "סוג החיבור של העכבר"
 
-#: harddrake2:121
+#: harddrake2:123
 #, c-format
 msgid "Mouse protocol used by X11"
 msgstr "פרוטוקול עכבר המשמש את X11"
 
-#: harddrake2:121
+#: harddrake2:123
 #, c-format
 msgid "the protocol that the graphical desktop use with the mouse"
 msgstr "הפרוטוקול המשמש את שולחן העבודה לתקשורת עם העכבר"
 
-#: harddrake2:128 harddrake2:137 harddrake2:144 harddrake2:152 harddrake2:332
+#: harddrake2:130 harddrake2:139 harddrake2:146 harddrake2:154 harddrake2:334
 #, c-format
 msgid "Identification"
 msgstr "זיהוי"
 
-#: harddrake2:129 harddrake2:145
+#: harddrake2:131 harddrake2:147
 #, c-format
 msgid "Connection"
 msgstr "חיבור"
 
-#: harddrake2:138
+#: harddrake2:140
 #, c-format
 msgid "Performances"
 msgstr "ביצועים"
 
-#: harddrake2:139
+#: harddrake2:141
 #, c-format
 msgid "Bugs"
 msgstr "באגיםפס"
 
-#: harddrake2:140
+#: harddrake2:142
 #, c-format
 msgid "FPU"
 msgstr "FPU"
 
-#: harddrake2:147
+#: harddrake2:149
 #, c-format
 msgid "Device"
 msgstr "התקן"
 
-#: harddrake2:148
+#: harddrake2:150
 #, c-format
 msgid "Partitions"
 msgstr "מחיצות"
 
-#: harddrake2:153
+#: harddrake2:155
 #, c-format
 msgid "Features"
 msgstr "תכונות"
 
 #. -PO: please keep all "/" characters !!!
-#: harddrake2:176 logdrake:78
+#: harddrake2:178 logdrake:78
 #, c-format
 msgid "/_Options"
 msgstr "/_אפשרויות"
 
-#: harddrake2:177 harddrake2:206 logdrake:80
+#: harddrake2:179 harddrake2:208 logdrake:80
 #, c-format
 msgid "/_Help"
 msgstr "/_עזרה"
 
-#: harddrake2:181
+#: harddrake2:183
 #, c-format
 msgid "/Autodetect _printers"
 msgstr "/זיהוי _מדפסות אוטומטי"
 
-#: harddrake2:182
+#: harddrake2:184
 #, c-format
 msgid "/Autodetect _modems"
 msgstr "/זיהוי אוטומטי של _מודמים"
 
-#: harddrake2:183
+#: harddrake2:185
 #, c-format
 msgid "/Autodetect _jaz drives"
 msgstr "/זיהוי אוטומטי של כונני _jaz"
 
-#: harddrake2:184
+#: harddrake2:186
 #, c-format
 msgid "/Autodetect parallel _zip drives"
 msgstr "/זיהוי אוטומטי של כונני _zip"
 
-#: harddrake2:188
+#: harddrake2:190
 #, c-format
 msgid "Hardware Configuration"
 msgstr "הגדרת חומרה"
 
-#: harddrake2:195
+#: harddrake2:197
 #, c-format
 msgid "/_Quit"
 msgstr "/_יציאה"
 
-#: harddrake2:208
+#: harddrake2:210
 #, c-format
 msgid "/_Fields description"
 msgstr "/תיאור _שדות"
 
-#: harddrake2:210
+#: harddrake2:212
 #, c-format
 msgid "Harddrake help"
 msgstr "עזרת Harddrake "
 
-#: harddrake2:219
+#: harddrake2:221
 #, c-format
 msgid "Select a device!"
 msgstr "יש לבחור התקן!"
 
-#: harddrake2:219
+#: harddrake2:221
 #, c-format
 msgid ""
 "Once you've selected a device, you'll be able to see the device information "
@@ -2423,104 +2587,119 @@ msgstr ""
 "ברגע שהתקן נבחר,ניתן לראות את המידע של ההתקן בשדות התצוגה במסגרת הימנית "
 "(\"מידע\")"
 
-#: harddrake2:225
+#: harddrake2:227
 #, c-format
 msgid "/_Report Bug"
 msgstr "/_דיווח באג"
 
-#: harddrake2:227
+#: harddrake2:229
 #, c-format
 msgid "/_About..."
 msgstr "/_אודות..."
 
-#: harddrake2:230
+#: harddrake2:232
 #, c-format
 msgid "Harddrake"
 msgstr "Harddrake"
 
-#: harddrake2:232
+#: harddrake2:234
 #, c-format
 msgid "Copyright (C) %s by Mandriva"
 msgstr "זכויות היוצרים (C) %s שייכות למנדריבה"
 
-#: harddrake2:234
+#: harddrake2:236
 #, fuzzy, c-format
 msgid "This is HardDrake, a %s hardware configuration tool."
 msgstr "זהו HardDrake, כלי הגדרת חומרה  %s."
 
-#: harddrake2:267
+#: harddrake2:269
 #, c-format
 msgid "Detected hardware"
 msgstr "חומרה שזוהתה"
 
-#: harddrake2:270 scannerdrake:286
+#: harddrake2:272 scannerdrake:286
 #, c-format
 msgid "Information"
 msgstr "מידע"
 
-#: harddrake2:272
+#: harddrake2:274
 #, c-format
 msgid "Set current driver options"
 msgstr "כיוון אפשרויות התקן ההינע הנוכחי"
 
-#: harddrake2:279
+#: harddrake2:281
 #, c-format
 msgid "Run config tool"
 msgstr "הרצת כלי הגדרה"
 
-#: harddrake2:299
+#: harddrake2:301
 #, c-format
 msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr "עליך לבחור התקן בחלון הימני בכדי להציג את המידע עבורו בחלון זה."
 
-#: harddrake2:319
+#: harddrake2:321
 #, c-format
 msgid "unknown"
 msgstr "לא ידוע"
 
-#: harddrake2:340
+#: harddrake2:322
+#, fuzzy, c-format
+msgid "Unknown"
+msgstr "לא ידוע"
+
+#: harddrake2:342
 #, c-format
 msgid "Misc"
 msgstr "שונות"
 
-#: harddrake2:415
+#: harddrake2:417
 #, c-format
 msgid "secondary"
 msgstr "משני"
 
-#: harddrake2:415
+#: harddrake2:417
 #, c-format
 msgid "primary"
 msgstr "ראשי"
 
-#: harddrake2:419
+#: harddrake2:421
 #, c-format
 msgid "burner"
 msgstr "צורב"
 
-#: harddrake2:419
+#: harddrake2:421
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: localedrake:47
+#: harddrake2:473
+#, c-format
+msgid "Unknown/Others"
+msgstr ""
+
+#: harddrake2:515
+#, c-format
+msgid "The following packages need to be installed:\n"
+msgstr ""
+
+#: localedrake:38
 #, c-format
 msgid "LocaleDrake"
 msgstr "ניהול שפה"
 
-#: localedrake:53
+#: localedrake:44
 #, c-format
 msgid "You should install the following packages: %s"
 msgstr "עליך להתקין את החבילות הבאות: %s"
 
 #. -PO: the following is used to combine packages names. eg: "initscripts, harddrake, yudit"
-#: localedrake:56
+#: localedrake:47
 #, c-format
 msgid ", "
 msgstr ", "
 
-#: localedrake:64
+#: localedrake:55
 #, c-format
 msgid "The change is done, but to be effective you must logout"
 msgstr "השינוי הסתיים, אך כדי שיהיה בעל משמעות עליך לצאת"
@@ -2874,6 +3053,11 @@ msgstr "יצירה מחדש של רשימת הסורקים המוגדרים ..."
 #, c-format
 msgid "The %s is not supported by this version of %s."
 msgstr "ה-%s לא נתמך בגרסה הנוכחית של %s."
+
+#: scannerdrake:104 scannerdrake:115
+#, fuzzy, c-format
+msgid "Confirmation"
+msgstr "מידע"
 
 #: scannerdrake:104
 #, c-format
@@ -3288,6 +3472,11 @@ msgstr "ערוך מארח שנבחר"
 msgid "Remove selected host"
 msgstr "להסיר את המארח הנבחר"
 
+#: scannerdrake:683 scannerdrake:833
+#, fuzzy, c-format
+msgid "Done"
+msgstr "סיום"
+
 #: scannerdrake:698 scannerdrake:706 scannerdrake:711 scannerdrake:757
 #: scannerdrake:848 scannerdrake:856 scannerdrake:861 scannerdrake:907
 #, c-format
@@ -3335,27 +3524,33 @@ msgstr ""
 msgid "Your scanner(s) will not be available on the network."
 msgstr "הסורק(ים) שלך לא יהיו זמינים ברשת."
 
-#: service_harddrake:131
+#: scannerdrake:962
+#, fuzzy, c-format
+msgid "Could not install the packages needed to share your scanner(s)."
+msgstr ""
+"לא יכול להתקין את החבליות הבסיסיות עבור תמיכה בסורק עם אשף הגדרת הסורק."
+
+#: service_harddrake:124
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "מספר התקני ברמת החומרה \"%s\" הוסרו:\n"
 
-#: service_harddrake:132
+#: service_harddrake:125
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- %s הוסר\n"
 
-#: service_harddrake:135
+#: service_harddrake:128
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "מספר התקנים נוספו: %s\n"
 
-#: service_harddrake:136
+#: service_harddrake:129
 #, c-format
 msgid "- %s was added\n"
 msgstr "- %s נוסף\n"
 
-#: service_harddrake:259
+#: service_harddrake:252
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "תהליך בדיקת חומרה"

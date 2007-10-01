@@ -28,7 +28,7 @@ $(NAME).pot: $(PMSFILES_HERE) POTFILES.in
 	intltool-update --gettext-package desktopstuff --pot
 	cd .. ; perl_checker -q --generate-pot po/.$@ $(PMSFILES)
 	xgettext $(MAIN_PO_FILES:%=-x %) -o ..$@ .$@
-	msgcat --use-first ..$@ desktopstuff.pot > $@
+	msgcat --use-first .$@ desktopstuff.pot > $@
 	rm -f desktopstuff.pot $(NAME)_tmp.pot .$@ ..$@
 
 install: $(MOFILES)
