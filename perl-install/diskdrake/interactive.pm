@@ -970,7 +970,7 @@ sub Options {
 		  [ 
 		    { label => N("Mount options"), title => 1 },
 		   (map { 
-			 { label => $_, text => scalar warp_text(formatAlaTeX($help{$_})), val => \$options->{$_}, hidden => scalar(/password/),
+			 { label => $_, text => scalar warp_text(formatAlaTeX($help{$_}), 60), val => \$options->{$_}, hidden => scalar(/password/),
 			   advanced => !$part->{rootDevice} && !member($_, @simple_options), if_(!/=$/, type => 'bool'),
 			   if_($callbacks{$_}, changed => $callbacks{$_}),
 		       };
