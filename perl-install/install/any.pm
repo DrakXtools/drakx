@@ -462,22 +462,32 @@ sub cp_with_progress {
     my $current = shift;
     my $total = shift;
     my $dest = pop @_;
-    @_ or return;
-    @_ == 1 || -d $dest or die "cp: copying multiple files, but last argument ($dest) is not a directory\n";
+    cp_with_progress_({ keep_special => 1 }, $wait_message, $total, \@_, $dest);
+}
+sub cp_with_progress_ {
+    my ($options, $wait_message, $total, $list, $dest) = @_;
+    @$list or return;
+    @$list == 1 || -d $dest or die "cp: copying multiple files, but last argument ($dest) is not a directory\n";
 
-    foreach my $src (@_) {
+    -d $dest or $dest = dirname($dest);
+    _cp_with_progress($options, $wait_message, 0, $total, $list, $dest);
+}
+sub _cp_with_progress {
+    my ($options, $wait_message, $current, $total, $list, $dest) = @_;
+
+    foreach my $src (@$list) {
 	my $dest = $dest;
 	-d $dest and $dest .= '/' . basename($src);
 
 	unlink $dest;
 
-	if (-l $src) {
+	if (-l $src && $options->{keep_special}) {
 	    unless (symlink(readlink($src) || die("readlink failed: $!"), $dest)) {
 		warn "symlink: can't create symlink $dest: $!\n";
 	    }
 	} elsif (-d $src) {
 	    -d $dest or mkdir $dest, (stat($src))[2] or die "mkdir: can't create directory $dest: $!\n";
-	    cp_with_progress($wait_message, $current, $total, glob_($src), $dest);
+	    _cp_with_progress($options, $wait_message, $current, $total, [ glob_($src) ], $dest);
 	} else {
 	    open(my $F, $src) or die "can't open $src for reading: $!\n";
 	    open(my $G, ">", $dest) or die "can't cp to file $dest: $!\n";
