@@ -2,6 +2,8 @@ package authentication; # $Id$
 
 use common;
 
+my $lib = arch() =~ /x86_64/ ? 'lib64' : 'lib';
+
 sub kinds { 
     my $no_para = @_ == 0;
     my ($do_pkgs) = @_;
@@ -53,7 +55,7 @@ my %kind2packages = (
     local     => [],
     SmartCard => [ 'castella-pam' ],
     LDAP      => [ 'openldap-clients', 'nss_ldap', 'pam_ldap', 'autofs' ],
-    AD        => [ 'nss_ldap', 'pam_krb5', 'libsasl2-plug-gssapi' ],
+    AD        => [ 'nss_ldap', 'pam_krb5', $lib . 'sasl2-plug-gssapi' ],
     NIS       => [ 'ypbind', 'autofs' ],
     winbind   => [ 'samba-winbind' ],
     SMBKRB    => [ 'samba-winbind', 'pam_krb5', 'samba-server', 'samba-client' ],
