@@ -28,6 +28,7 @@ enum driver_type { SCSI_ADAPTERS, NETWORK_DEVICES, USB_CONTROLLERS, ANY_DRIVER_T
 
 enum media_bus { BUS_IDE, BUS_SCSI, BUS_USB, BUS_PCMCIA, BUS_ANY };
 
+void find_media(enum media_bus bus);
 void get_medias(enum media_type media, char *** names, char *** models, enum media_bus bus);
 char ** get_net_devices(void);
 void net_discovered_interface(char * intf_name);

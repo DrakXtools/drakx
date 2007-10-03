@@ -503,7 +503,7 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 
 static struct media_info * medias = NULL;
 
-static void find_media(enum media_bus bus)
+void find_media(enum media_bus bus)
 {
     	char b[50];
 	char buf[5000];
