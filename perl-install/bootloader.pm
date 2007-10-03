@@ -1057,9 +1057,9 @@ sub method_choices {
     my $have_dmraid = find { fs::type::is_dmraid($_) } @{$all_hds->{hds}};
 
     grep {
-	(!/lilo/ || !isLoopback($root_part) && !$have_dmraid)
-	  && (!/grub/ || !isRAID($root_part))
-	  && (!/grub-graphic/ || cat_("/proc/cmdline") !~ /console=ttyS/);
+	!(/lilo/ && (isLoopback($root_part) || $have_dmraid))
+	  && !(/grub/ && isRAID($root_part))
+	  && !(/grub-graphic/ && cat_("/proc/cmdline") =~ /console=ttyS/);
     } method_choices_raw($b_prefix_mounted);
 }
 sub main_method_choices {
