@@ -1,23 +1,24 @@
+# translation of es.po to Español
 # traducción de DrakX-es.po to Español
 # spanish translation of DrakX
 # Copyright (C) 2000, 2001,2002, 2007 Mandriva S.A.
-# Fabián Mandelbaum <fmandelbaum@gmail.com>, 2000, 2001, 2002,2003, 2004, 2007.
+#
+# Fabián Mandelbaum <fmandelbaum@gmail.com>, 2000-2004, 2007.
 # Pablo Saratxaga <pablo@mandriva.com>, 2004, 2006.
 # Jaime Crespo <505201@unizar.es>, 2004, 2005.
 # José Manuel Pérez <jmprodu@hotmail.com>, 2005.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: DrakX-es\n"
+"Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-10-01 09:12+0200\n"
-"PO-Revision-Date: 2007-09-24 14:30-0300\n"
+"PO-Revision-Date: 2007-10-02 13:46-0300\n"
 "Last-Translator: Fabián Mandelbaum <fmandelbaum@gmail.com>\n"
 "Language-Team: Español <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: any.pm:155
@@ -338,6 +339,8 @@ msgid ""
 "Some packages requested by %s cannot be installed:\n"
 "%s"
 msgstr ""
+"Algunos paquetes que necesita %s no se pueden instalar:\n"
+"%s"
 
 #: share/meta-task/compssUsers.pl:11
 #, c-format
@@ -944,11 +947,11 @@ msgid "Is this an install or an upgrade?"
 msgstr "¿Es una instalación o una actualización?"
 
 #: steps_interactive.pm:134
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
-msgstr "Instalar"
+msgstr "Instalación"
 
 #: steps_interactive.pm:136
 #, c-format
@@ -958,12 +961,12 @@ msgstr "Actualizar %s"
 #: steps_interactive.pm:140
 #, c-format
 msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-msgstr ""
+msgstr "No se soporta la acutalización de una distribución 32 bit a una 64 bit"
 
 #: steps_interactive.pm:144
 #, c-format
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-msgstr ""
+msgstr "No se soporta la actualización de una distribución 64 bit a una 32 bit"
 
 #: steps_interactive.pm:158
 #, c-format
@@ -1238,8 +1241,7 @@ msgstr ""
 #: steps_interactive.pm:906
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
-msgstr ""
-"No se detectó tarjeta de sonido. Pruebe \"harddrake\" luego de la instalación"
+msgstr "No se detectó tarjeta de sonido. Pruebe \"harddrake\" luego de la instalación"
 
 #: steps_interactive.pm:914
 #, c-format
@@ -1534,82 +1536,3 @@ msgid ""
 "Exit"
 msgstr "Salir"
 
-#~ msgid "All"
-#~ msgstr "Todo"
-
-#~ msgid "TV card"
-#~ msgstr "Tarjeta de TV"
-
-#~ msgid "Boot"
-#~ msgstr "Arranque"
-
-#~ msgid ""
-#~ "_: Keep these entry short\n"
-#~ "Authentication"
-#~ msgstr "Autentificación"
-
-#~ msgid "Arkeia"
-#~ msgstr "Arkeia"
-
-#~ msgid "Gwenview"
-#~ msgstr "Gwenview"
-
-#~ msgid "3D"
-#~ msgstr "3D"
-
-#~ msgid "2007 product line"
-#~ msgstr "línea de productos 2007"
-
-#~ msgid "Invictus Firewall"
-#~ msgstr "Cortafuegos Invictus"
-
-#~ msgid "How to register"
-#~ msgstr "Como registrarse"
-
-#~ msgid "New Theme"
-#~ msgstr "Nuevo tema"
-
-#~ msgid "Skype"
-#~ msgstr "Skype"
-
-#~ msgid "(%d package, %d MB)"
-#~ msgid_plural "(%d packages, %d MB)"
-#~ msgstr[0] "(%d paquete, %d MB)"
-#~ msgstr[1] "(%d paquetes, %d MB)"
-
-#~ msgid "%d packages"
-#~ msgstr "%d paquetes"
-
-#~ msgid "Language"
-#~ msgstr "Elija su idioma"
-
-#~ msgid "License"
-#~ msgstr "Licencia"
-
-#~ msgid "Installation class"
-#~ msgstr "Clase de instalación"
-
-#~ msgid "Formatting"
-#~ msgstr "Formateo"
-
-#~ msgid "Choosing packages"
-#~ msgstr "Selección de paquetes"
-
-#~ msgid "Users"
-#~ msgstr "Usuarios"
-
-#~ msgid "Networking"
-#~ msgstr "Red"
-
-#~ msgid "Configure X"
-#~ msgstr "Configuración de X"
-
-#~ msgid ""
-#~ "Can not access kernel modules corresponding to your kernel (file %s is "
-#~ "missing), this generally means your boot floppy in not in sync with the "
-#~ "Installation medium (please create a newer boot floppy)"
-#~ msgstr ""
-#~ "No se puede acceder a los módulos del núcleo correspondientes a su núcleo "
-#~ "(no se encuentra el archivo %s), esto generalmente significa que su "
-#~ "disquete de arranque no contiene un núcleo de misma versión que el "
-#~ "soporte de instalación (haga un nuevo disquete de arranque por favor)"
