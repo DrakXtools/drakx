@@ -121,7 +121,7 @@ NETWORK_STANDALONE_DEFS = -DDISABLE_CDROM -DDISABLE_DISK -DENABLE_NETWORK_STANDA
 
 STAGE1OBJS-FULL = $(subst .c,-FULL.o,$(STAGE1_ALLSRC))
 
-BINS = init stage1 dhcp-client rescue-gui
+BINS = init stage1 dhcp-client rescue-gui probe-modules
 
 DIRS += pci-resource usb-resource slang newt ppp/pppd rp-pppoe/src
 ifeq (i386, $(ARCH))
@@ -194,6 +194,9 @@ rescue-gui: rescue-gui.o frontend-common.o params.o utils.o log.o automatic.o $(
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^
 	$(STRIPCMD) $@
 
+probe-modules: probe-modules.o probing.o modules.o params.o utils.o log.o automatic.o frontend-common.o stdio-frontend.o zlibsupport.o $(STAGE1_OWN_LIBS) $(STAGE1_LIBC)
+	$(DIET) $(CC) $(LDFLAGS) -o $@ $^
+	$(STRIPCMD) $@
 
 tar:
 	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
