@@ -310,9 +310,12 @@ sub filename2modname {
     $modname;
 }
 
+sub load_default_moddeps {
+    load_dependencies($::prefix . '/lib/modules/' . c::kernel_version() . '/modules.dep');
+}
+
 sub modname2filename {
-    load_dependencies($::prefix . '/lib/modules/' . c::kernel_version() . '/modules.dep')
-      if !%filenames;
+    load_default_moddeps() if !%filenames;
     $filenames{$_[0]};
 }
 
