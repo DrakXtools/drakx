@@ -460,6 +460,7 @@ Consoles 1,3,4,7 may also contain interesting information";
     #- for mandrake_firstime
     touch "$::prefix/var/lock/TMP_1ST";
 
+    fs::any::set_cdrom_symlink_udev_rule($o->{all_hds}{raw_hds});
     any::config_mtools($::prefix);
 
     #- make sure wins is disabled in /etc/nsswitch.conf
