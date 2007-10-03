@@ -287,13 +287,18 @@ sub load_dependencies {
 
     %moddeps = ();
     foreach (cat_($file)) {
-	s![^ ]*/!!g;
-	s!\.ko!!g;
-	s!\.gz!!g;
-	my ($filename, $d) = split ':';
-	my ($modname, @deps) = map { filename2modname($_) } $filename, split(' ', $d);
+	my ($m, $d) = split ':';
+	my $path = $m;
+	my ($filename, @fdeps) = map {
+	    s![^ ]*/!!g;
+	    s!\.ko!!g;
+	    s!\.gz!!g;
+	    $_;
+	} $m, split(' ', $d);
+	my ($modname, @deps) = map { filename2modname($_) } $filename, @fdeps;
 	$moddeps{$modname}{deps} = \@deps;
 	$moddeps{$modname}{filename} = $filename;
+ 	$moddeps{$modname}{path} = $path;
     }
 }
 
@@ -316,6 +321,11 @@ sub load_default_moddeps {
 sub modname2filename {
     load_default_moddeps() if !%moddeps;
     $moddeps{$_[0]}{filename};
+}
+
+sub modname2path {
+    load_default_moddeps() if !%moddeps;
+    $moddeps{$_[0]}{path};
 }
 
 sub category2modules {
