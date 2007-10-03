@@ -1054,11 +1054,12 @@ sub method_choices {
     my ($all_hds, $b_prefix_mounted) = @_;
     my $fstab = [ fs::get::fstab($all_hds) ];
     my $root_part = fs::get::root($fstab);
+    my $boot_part = fs::get::root($fstab, 'boot');
     my $have_dmraid = find { fs::type::is_dmraid($_) } @{$all_hds->{hds}};
 
     grep {
 	!(/lilo/ && (isLoopback($root_part) || $have_dmraid))
-	  && !(/grub/ && isRAID($root_part))
+	  && !(/grub/ && isRAID($boot_part))
 	  && !(/grub-graphic/ && cat_("/proc/cmdline") =~ /console=ttyS/);
     } method_choices_raw($b_prefix_mounted);
 }
