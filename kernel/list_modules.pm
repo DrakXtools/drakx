@@ -280,27 +280,25 @@ our %l = (
   },
 );
 
-my %dependencies;
-my %filenames;
+my %moddeps;
 
 sub load_dependencies {
     my ($file) = @_;
 
-    %dependencies = ();
-    %filenames = ();
+    %moddeps = ();
     foreach (cat_($file)) {
 	s![^ ]*/!!g;
 	s!\.ko!!g;
 	s!\.gz!!g;
 	my ($filename, $d) = split ':';
 	my ($modname, @deps) = map { filename2modname($_) } $filename, split(' ', $d);
-	$dependencies{$modname} =  \@deps;
-	$filenames{$modname} = $filename;
+	$moddeps{$modname}{deps} = \@deps;
+	$moddeps{$modname}{filename} = $filename;
     }
 }
 
 sub dependencies_closure {
-    my @l = map { dependencies_closure($_) } @{$dependencies{$_[0]} || []};
+    my @l = map { dependencies_closure($_) } @{$moddeps{$_[0]}{deps} || []};
     (@l, $_[0]);
 }
 
@@ -316,8 +314,8 @@ sub load_default_moddeps {
 }
 
 sub modname2filename {
-    load_default_moddeps() if !%filenames;
-    $filenames{$_[0]};
+    load_default_moddeps() if !%moddeps;
+    $moddeps{$_[0]}{filename};
 }
 
 sub category2modules {
