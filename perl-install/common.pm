@@ -164,6 +164,21 @@ sub formatTime {
     }
 }
 
+sub expand_symlinks_with_absolute_symlinks_in_prefix {
+    my ($prefix, $link) = @_;
+
+    my ($first, @l) = split '/', $link;
+    $first eq '' or die "expand_symlinks: $link is relative\n";
+    my ($f, $l);
+    foreach (@l) {
+	$f .= "/$_";
+	while ($l = readlink "$prefix$f") {
+	    $f = $l =~ m!^/! ? $l : MDK::Common::File::concat_symlink($f, "../$l");
+	}
+    }
+    "$prefix$f";
+}
+
 sub expand_symlinks_but_simple {
     my ($f) = @_;
     my $link = readlink($f);
