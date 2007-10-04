@@ -91,11 +91,13 @@ sub check_kernel_module_packages {
     my ($do, $base_name) = @_;
     
     require bootloader;
-    my @rpms = (
+    my @test_rpms = (
 	'dkms-' . $base_name,
 	map { $base_name . '-kernel-' . bootloader::vmlinuz2version($_) } bootloader::installed_vmlinuz()
     );
-    @rpms = $do->are_available(@rpms) or return;
+    @rpms = $do->are_available(@test_rpms);
+    @rpms = $do->are_installed(@test_rpms) if !@rpms;
+    @rpms or return;
 
     log::l("those kernel module packages can be installed: " . join(' ', @rpms));
 
