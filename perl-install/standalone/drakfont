@@ -529,7 +529,7 @@ sub help() {
          my $license = formatAlaTeX(translate($::license));
          $license =~ s/\n/\n\n/sg; # nicer formatting
          my $w = gtknew('AboutDialog', name => N("Drakfont"),
-                        version => '2007',
+                        version => mandrake_release_info()->{version},
                         copyright => N("Copyright (C) 2001-2006 by Mandriva"),
                         license => $license, wrap_license => 1,
                         comments => N("Font installer."),
