@@ -3,7 +3,7 @@
 use lib qw(/usr/lib/libDrakX);
 
 # i18n: IMPORTANT: to get correct namespace (drakx-kbd-mouse-x11 and drak3d instead of libDrakX)
-BEGIN { unshift @::textdomains, 'drakx-kbd-mouse-x11', 'drak3d' }
+BEGIN { unshift @::textdomains, 'drakx-net', 'drakx-kbd-mouse-x11', 'drak3d' }
 
 use standalone;
 $::isStandalone = 0;
