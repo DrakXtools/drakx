@@ -1,3 +1,7 @@
+- use /dev/cdrom in fstab, but do not write corresponding udev rule
+  (the rules will be generated at boot time otherwise it won't catch the
+  hdX/srX switch)
+
 Version 10.4.232 - 4 October 2007, by Olivier "blino" Blin
 
 - add helper to get kernel module path (to be used in draklive)

@@ -50,29 +50,12 @@ sub write_hds {
     @$fstab = fs::get::fstab($all_hds);
 }
 
-sub set_cdrom_symlink_udev_rule {
+sub set_cdrom_symlink {
     my ($raw_hds) = @_;
 
-    my $cdrom_helper = '/lib/udev/cdrom_helper';
-    -x "$::prefix$cdrom_helper" or return;
-
-    my $udev_rule = "$::prefix/etc/udev/rules.d/61-block_config.rules";
-    if (-e $udev_rule) {
-	log::l("cleaning $udev_rule from previous cdrom symlink rules");
-	substInFile { $_ = '' if /SYMLINK\+="cdrom/ } $udev_rule;
-    }
-
     foreach (grep { $_->{media_type} eq 'cdrom' } @$raw_hds) {
-	my @env = (
-	    'SUBSYSTEM=block',
-	    run_program::rooted_get_stdout($::prefix, '/lib/udev/path_id', "/block/$_->{device}"),
-	    run_program::rooted_get_stdout($::prefix, '/lib/udev/cdrom_id', "/dev/$_->{device}"),
-	);
-	local %ENV = (%ENV, map { if_(/(.*?)=(.*)/, $1 => $2) } @env);
-
-	log::l("calling $cdrom_helper with ID_PATH=$ENV{ID_PATH}");
-	my ($alias) = run_program::rooted_get_stdout($::prefix, $cdrom_helper) =~ /(\w+)/;
-
+	next if $_->{device_alias};
+	my $alias = basename($_->{mntpoint}) or next;
 	log::l("using alias $alias for $_->{device}");
 	$_->{device_alias} = $alias;
 	symlink($_->{device}, "$::prefix/dev/$alias");
