@@ -303,7 +303,7 @@ sub load_dependencies {
 }
 
 sub dependencies_closure {
-    my @l = map { dependencies_closure($_) } @{$moddeps{$_[0]}{deps} || []};
+    my @l = map { dependencies_closure($_) } @{exists $moddeps{$_[0]} && $moddeps{$_[0]}{deps} || []};
     (@l, $_[0]);
 }
 
