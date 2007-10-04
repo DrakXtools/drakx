@@ -1184,6 +1184,9 @@ Allowing this will permit users to simply click on \"Share\" in konqueror and na
 		services::do_not_start_service_on_boot($service);
 	    }
 	}
+	if ($in->do_pkgs->is_installed('nautilus')) {
+	    $in->do_pkgs->ensure_is_installed('nautilus-filesharing') or return;
+	}
     }
     $conf{RESTRICT} = bool2yesno($restrict);
     setVarsInSh($file, \%conf);
