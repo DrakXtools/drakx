@@ -868,14 +868,19 @@ sub copy_rpms_on_disk {
 		$m->{selected} = 0;
 	    }
 	}
+	my $dest_medium_dir = $dest_dir . '/'. basename($rpmsdir);
+	#- handle rpmsdir being ../../i586/media/main: we flatten it
+	-e "$::prefix$dest_medium_dir" and $dest_medium_dir .= '32';
+	-e "$::prefix$dest_medium_dir" and next;
 
 	my $total = install::any::count_files($rpmsdir);
-	log::l("copying $rpmsdir to $::prefix$dest_dir ($total files)");
+	log::l("copying $rpmsdir to $::prefix$dest_medium_dir ($total files)");
 	eval {
-	    install::any::cp_with_progress_({}, $wait_message, $total, [$rpmsdir], "$::prefix$dest_dir");
+	    install::any::cp_with_progress_({}, $wait_message, $total, [$rpmsdir], "$::prefix$dest_medium_dir");
 	};
 	log::l($@) if $@;
 
+	$m->{rpmsdir} = basename($dest_medium_dir);
 	$m->{phys_medium} = $dest_phys_medium;
     }
     undef $wait;
