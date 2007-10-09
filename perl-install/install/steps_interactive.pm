@@ -707,6 +707,7 @@ Do you want to install the updates?")),
     my $update_medium;
     do {
 	$u->{url} = install::any::ask_mirror($o, 'updates', $u->{url}) or goto &installUpdates;
+	# FIXME: install all update media
 	my $phys_medium = install::media::url2mounted_phys_medium($o, $u->{url} . '/media/main/updates');
 
 	eval {

@@ -679,6 +679,7 @@ sub installUpdates {
     upNetwork($o);
     require mirror;
 
+    # FIXME: install all update media
     my $phys_medium = install::media::url2mounted_phys_medium($o, $u->{url} . '/media/main/updates');
 
     my $update_medium = { name => "Updates for Mandriva Linux " . $o->{product_id}{version}, update => 1 };
