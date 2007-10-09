@@ -545,8 +545,6 @@ sub main {
 	    One          => 'desktop',
 	    Free         => 'download',
 	    Powerpack    => 'powerpack',
-	    Discovery    => 'desktop',
-	    'Powerpack+' => 'server',
 	}->{$o->{product_id}{product}} || 'download';
     }
 
