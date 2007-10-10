@@ -301,7 +301,7 @@ sub set_auth_value {
     if ($auth eq 'no_passwd') {
         symlinkf('../../etc/pam.d/mandriva-console-auth', "/etc/pam.d/$prog");
     } else {
-        symlink('../../etc/pam.d/mandriva-simple-auth', "/etc/pam.d/$prog");
+        symlinkf('../../etc/pam.d/mandriva-simple-auth', "/etc/pam.d/$prog");
         my $value = $auth eq 'user_passwd' ? '<user>' : 'root';
         substInFile {
             s/^USER=.*/USER=$value/;
