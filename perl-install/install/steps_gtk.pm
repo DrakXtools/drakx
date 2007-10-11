@@ -69,6 +69,7 @@ sub new($$) {
 		log::l("$server still not running, trying again");
 	    }
 	    my $nb;
+	    my $start_time = time();
 	    foreach (1..60) {
 		log::l("waiting for the server to start ($_ $nb)");
 		log::l("Server died"), return 0 if !fuzzy_pidofs(qr/\b$server\b/);
@@ -77,6 +78,8 @@ sub new($$) {
 		    log::l("AFAIK X server is up");
 		    return 1;
 		}
+		time() - $start_time < 60 or last;
+		time() - $start_time > 8 and print N("Xorg server is slow to start. Please wait..."), "\n";
 		sleep 1;
 	    }
 	    log::l("Timeout!!");
