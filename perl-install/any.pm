@@ -1036,7 +1036,9 @@ sub selectCountry {
     my $country = $locale->{country};
     my @countries = lang::list_countries(exclude_non_installed => !$::isInstall);
     my @best = grep {
-	lang::locale_to_main_locale(lang::c2locale($_)) eq lang::locale_to_main_locale($locale->{lang});
+	find { 
+	    lang::locale_to_main_locale($_) eq lang::locale_to_main_locale($locale->{lang});
+	} lang::country_to_locales($_);
     } @countries;
     @best == 1 and @best = ();
 

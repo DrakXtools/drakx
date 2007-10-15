@@ -504,6 +504,17 @@ sub getLANGUAGE {
 					locale_to_main_locale($lang)));
 }
 
+sub country_to_locales {
+    my ($country) = @_;
+
+    my $locale = c2locale($country) or return;
+
+    uniq($locale, grep { 
+       my $h = analyse_locale_name($_) or internal_error();
+       $h->{country} eq $country;
+    } @locales);    
+}
+
 #-------------------------------------------------------------
 #
 # IM configuration hash tables
