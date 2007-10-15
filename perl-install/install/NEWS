@@ -1,3 +1,6 @@
+- in case of ftp/http media, we select basesystem before doing
+  bestKernelPackage so we must ensure the choice callback selects the good
+  kernel (reported by Thomas Spuhler on cooker mailing list)
 - do propose "Suisse" after selecting french language (#34675)
 - use time() to know when to timeout (when launching installer X server)
   since the loop may be slower than 1 second (xf86misc::main::Xtest takes time

@@ -128,17 +128,21 @@ sub packageByName {
     $best;
 }
 
-sub bestKernelPackage {
-    my ($packages, $o_match_all_hardware) = @_;
+sub bestKernel_extensions {
+    my ($o_match_all_hardware) = @_;
 
-    my @preferred_exts =
-      $o_match_all_hardware ? (arch() =~ /i.86/ ? '-desktop586' : '-desktop') :
+    $o_match_all_hardware ? (arch() =~ /i.86/ ? '-desktop586' : '-desktop') :
       detect_devices::is_xbox() ? '-xbox' :
       detect_devices::is_i586() ? '-desktop586' :
       detect_devices::isLaptop() ? '-laptop' :
       detect_devices::dmi_detect_memory() > 3.8 * 1024 ? '-server' :
       '-desktop';
+}
 
+sub bestKernelPackage {
+    my ($packages, $o_match_all_hardware) = @_;
+
+    my @preferred_exts = bestKernel_extensions($o_match_all_hardware);
     my @kernels = grep { $_ } map { packageByName($packages, "kernel$_-latest") } @preferred_exts;
 
     log::l("bestKernelPackage (" . join(':', @preferred_exts) . "): " . join(' ', map { $_->name } @kernels) . (@kernels > 1 ? ' (choosing the first)' : ''));
@@ -177,7 +181,7 @@ sub packageCallbackChoices {
   
     if ($prefered && @$prefered) {
 	@$prefered;
-    } elsif (my @l = packageCallbackChoices_($urpm, $choices)) {
+    } elsif (my @l = packageCallbackChoices_($urpm, $choices, $virtual_pkg_name)) {
 	@l;
     } else {
 	log::l("packageCallbackChoices: default choice from " . join(",", map { $_->name } @$choices) . " for $virtual_pkg_name");
@@ -186,11 +190,16 @@ sub packageCallbackChoices {
 }
 
 sub packageCallbackChoices_ {
-    my ($urpm, $choices) = @_;
+    my ($urpm, $choices, $virtual_pkg_name) = @_;
 
     my ($prefer, $_other) = urpm::select::get_preferred($urpm, $choices, '');
     if (@$prefer) {
 	@$prefer;
+    } elsif ($virtual_pkg_name eq 'kernel') {
+	my $re = join('|', map { "kernel\Q$_-2" } bestKernel_extensions($o_match_all_hardware));
+	my @l = grep { $_->name =~ $re } @$choices;
+	log::l("packageCallbackChoices: kernel chosen ", join(",", map { $_->name } @l), " in ", join(",", map { $_->name } @$choices));
+	@l;
     } elsif ($choices->[0]->name =~ /^kernel-(.*source-|.*-devel-)/) {
 	my @l = grep {
 	    if ($_->name =~ /^kernel-.*source-stripped-(.*)/) {
