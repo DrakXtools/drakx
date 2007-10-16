@@ -1,12 +1,4 @@
 package authentication; # $Id$
-
-
-
-
-
-
-
-
 use common;
 
 my $lib = arch() =~ /x86_64/ ? 'lib64' : 'lib';
