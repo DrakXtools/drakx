@@ -81,7 +81,7 @@ sub partitionWizardSolutions {
     my @hds_rw = grep { !$_->{readonly} } @$hds;
     my @hds_can_add = grep { $_->can_raw_add } @hds_rw;
     if (fs::get::hds_free_space(@hds_can_add) > $min_linux) {
-	$solutions{free_space} = [ 20, N("Use free space"), sub { fsedit::auto_allocate($all_hds, $partitions); 1 } ];
+	$solutions{free_space} = [ 30, N("Use free space"), sub { fsedit::auto_allocate($all_hds, $partitions); 1 } ];
     } else { 
 	push @wizlog, N("Not enough free space to allocate new partitions") . ": " .
 	  (@hds_can_add ? 
@@ -91,7 +91,7 @@ sub partitionWizardSolutions {
 
     if (my @truefs = grep { isTrueLocalFS($_) } @$fstab) {
 	#- value twice the ext2 partitions
-	$solutions{existing_part} = [ 6 + @truefs + @$fstab, N("Use existing partitions"), sub { fs::mount_point::ask_mount_points($in, $fstab, $all_hds) } ];
+	$solutions{existing_part} = [ 20 + @truefs + @$fstab, N("Use existing partitions"), sub { fs::mount_point::ask_mount_points($in, $fstab, $all_hds) } ];
     } else {
 	push @wizlog, N("There is no existing partition to use");
     }
@@ -123,7 +123,7 @@ sub partitionWizardSolutions {
     
     if (my @ok_for_resize_fat = grep { isFat_or_NTFS($_) && !fs::get::part2hd($_, $all_hds)->{readonly} } @$fstab) {
 	$solutions{resize_fat} = 
-	  [ 6 - @ok_for_resize_fat, N("Use the free space on the Microsoft Windows® partition"),
+	  [ 20 - @ok_for_resize_fat, N("Use the free space on the Microsoft Windows® partition"),
 	    sub {
 		my $part = $in->ask_from_listf_raw({ messages => N("Which partition do you want to resize?"),
 						    interactive_help_id => 'resizeFATChoose',
