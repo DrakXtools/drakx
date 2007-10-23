@@ -303,7 +303,7 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
         static int already_loaded_usb_scsi = 0;
 
 	/* ---- PCI probe ---------------------------------------------- */
-	{
+	if (bus != BUS_USB) {
 		struct pciusb_entries entries;
 		char **pci_modules;
 		unsigned int pci_modules_len = 0;
