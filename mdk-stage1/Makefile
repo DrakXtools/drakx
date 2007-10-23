@@ -194,7 +194,7 @@ rescue-gui: rescue-gui.o frontend-common.o params.o utils.o log.o automatic.o $(
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^
 	$(STRIPCMD) $@
 
-probe-modules: probe-modules.o probing-FULL.o modules-FULL.o params-FULL.o utils-FULL.o log-FULL.o automatic-FULL.o frontend-common-FULL.o stdio-frontend.o zlibsupport-FULL.o $(STAGE1_OWN_LIBS) $(STAGE1_LIBC)
+probe-modules: probe-modules.o probing-FULL.o modules-FULL.o params-FULL.o utils-FULL.o log-FULL.o automatic-FULL.o frontend-common-FULL.o stdio-frontend.o zlibsupport-FULL.o $(STAGE1_OWN_LIBS) $(PCMCIA_LIB) $(STAGE1_LIBC)
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^
 	$(STRIPCMD) $@
 
