@@ -796,8 +796,8 @@ static enum return_type get_mirrorlist(mirrorlist_t mirrorlist, int start, char 
 			line[line_pos] = '\0';
 			line_pos = 0;
 
-			/* skip medium if it looks like an updates one */
-			if (strstr(line, ",type=updates,"))
+			/* skip medium if it does not look like a distrib path */
+			if (!strstr(line, ",type=distrib,"))
 				continue;
 
 			url = strstr(line, ",url=");
