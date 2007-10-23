@@ -519,7 +519,8 @@ sub create_okcancel {
     $w->{wizcancel} = gtknew('Button', text => N("Cancel"), clicked => sub { die 'wizcancel' }) if $::isWizard && !$::isInstall;
     if (!defined $wm_is_kde) {
         require any;
-        $wm_is_kde = !$::isInstall && any::running_window_manager() eq "kwin" || 0;
+        my $wm = any::running_window_manager();
+        $wm_is_kde = !$::isInstall && ($wm eq "kwin" || $wm eq "compiz" && fuzzy_pidofs(qr/\bkde-window-decorator\b/)) || 0;
     }
     my $f = sub { $w->{buttons}{$_[0][0]} = gtknew('Button', text => $_[0][0], clicked => $_[0][1]) };
     my @left  = ((map { $f->($_) } grep {  $_->[2] && !$_->[3] } @other),
