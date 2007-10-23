@@ -18,6 +18,9 @@
 #include "probing.h"
 #include "frontend.h"
 #include <stdlib.h>
+#include <sys/stat.h>
+#include <string.h>
+#include "utils.h"
 
 void exit_bootsplash(void) {}
 void stg1_error_message(char *msg, ...)
@@ -33,11 +36,15 @@ void fatal_error(char *msg)
 	exit(EXIT_FAILURE);
 }
 
-int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused)), char **env)
+int main(int argc, char **argv, char **env)
 {
+	enum media_bus bus = BUS_ANY;
+	if (argc > 1 && streq(argv[1], "usb")) {
+		bus = BUS_USB;
+	}
 	open_log();
 	init_modules_insmoding();
-	find_media(BUS_ANY);
+	find_media(bus);
 	close_log();
 
 	return 0;
