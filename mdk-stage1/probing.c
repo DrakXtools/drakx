@@ -362,10 +362,8 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 		struct pciusb_entries entries;
 		int i;
 
-		if (!already_probed_usb_controllers) {
-			already_probed_usb_controllers = 1;
+		if (!already_probed_usb_controllers)
 			probe_that_type(USB_CONTROLLERS, BUS_ANY);
-		}
 
 		if (!already_mounted_usbdev) {
 			already_mounted_usbdev = 1;
