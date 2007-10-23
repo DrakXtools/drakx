@@ -64,7 +64,9 @@ sub write {
 sub reload_sys_clock {
     my ($t) = @_;
     require run_program;
+    any::disable_x_screensaver();
     run_program::run('hwclock', '--hctosys', ($t->{UTC} ? '--utc' : '--localtime'));
+    any::enable_x_screensaver();
 }
 
 #- best guesses for a given country

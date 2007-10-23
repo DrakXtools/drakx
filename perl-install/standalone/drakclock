@@ -103,6 +103,7 @@ $my_win->{window}->add(gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, chi
                                                     cancel_clicked => sub { ugtk2->exit(0) },
                                                     ok_clicked => sub {
 							my $need_date = 1;
+                                                        any::disable_x_screensaver();
                                                         if ($check_ntp->get_active) {
                                                             my $choosed_serv = $combo_ntpserver->entry->get_text;
                                                             $choosed_serv =~ s/^[^:]+: (.+)/$1/;
@@ -141,6 +142,7 @@ $my_win->{window}->add(gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, chi
 							           join('', map { print_it0($_) } ($month, $day, $hour, $min, $year)) . '.' . print_it0($sec));
 							}
 							-e '/sbin/hwclock' and system('/sbin/hwclock --systohc');
+                                                        any::enable_x_screensaver();
                                                         system("dcop kicker Panel restart") if $ENV{DESKTOP} eq 'kde';
                                                         ugtk2->exit(0);
                                                     },

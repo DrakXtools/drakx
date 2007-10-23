@@ -1363,4 +1363,15 @@ sub configure_timezone {
     1;
 }
 
+sub disable_x_screensaver() {
+    run_program::run("xset", "s", "off");
+    run_program::run("xset", "-dpms");
+}
+
+sub enable_x_screensaver() {
+    run_program::run("xset", "+dpms");
+    run_program::run("xset", "s", "on");
+    run_program::run("xset", "s", "reset");
+}
+
 1;
