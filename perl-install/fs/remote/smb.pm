@@ -5,7 +5,6 @@ use diagnostics;
 
 use common;
 use fs::mount_options;
-use network::network;
 use fs::remote;
 
 
@@ -56,6 +55,7 @@ sub smbclient {
 sub find_servers {
     my (undef, @l) = `nmblookup "*"`;
     s/\s.*\n// foreach @l;
+    require network::network;
     my @servers = grep { network::network::is_ip($_) } @l;
     my %servers;
     $servers{$_}{ip} = $_ foreach @servers;
