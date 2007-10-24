@@ -1,4 +1,7 @@
-- bootloader-config must not need network::network from libdrakx-net
+- bootloader-config:
+  o bootloader-config must not need network::network from libdrakx-net
+  o if drakx-kbd-mouse-x11 is not installed, simply don't add bootsplash
+    instead of dying
 - fix buttons order under KDE when using compiz (by detecting kde-window-decorator)
 - drakclock/finish-install: disable DPMS and screensaver when setting time,
   not to blank monitor (#17031)

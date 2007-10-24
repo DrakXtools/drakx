@@ -144,7 +144,7 @@ sub add_boot_splash {
 
     $vga or return;
 
-    require Xconfig::resolution_and_depth;
+    eval { require Xconfig::resolution_and_depth } or return;
     if (my $res = Xconfig::resolution_and_depth::from_bios($vga)) {
 	run_program::rooted($::prefix, '/usr/share/bootsplash/scripts/make-boot-splash', $initrd, $res->{X});
     } else {
