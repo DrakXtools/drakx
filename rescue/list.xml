@@ -29,10 +29,12 @@
     vol_id <!-- needed by libDrakX -->
   </mode>
 
+  packdrake parsehdlist
   cpio ftp tar
   rsync
   ssh scp
   telnet
+  host
 
   date
   dmesg
@@ -47,6 +49,7 @@
   mingetty init
   reboot halt shutdown
   kill killall5 ps strace
+  sed tr
 
   loadkeys tset stty
 
@@ -54,12 +57,14 @@
 
   fdformat badblocks
   e2fsck fsck.ext2 fsck.ext3 mke2fs mkfs.ext2 mkfs.ext3 resize2fs
+  mkfs.ext3 mkfs.reiserfs mkfs.xfs mkfs.jfs
   debugfs dumpe2fs tune2fs
   fsck.xfs xfs_repair
   resize_reiserfs reiserfsck
   mkswap swapoff swapon
   <if ARCH="i.86|x86_64">
     fsck.jfs
+    strings
   </if>
   <if ARCH="i.86|x86_64|ia64">
     ntfsresize
@@ -104,6 +109,8 @@
   vim-minimal hexedit
 
   perl
+  uniq
+  wget
 
   <if ARCH="i.86|x86_64|ia64">
     dmidecode 
@@ -200,6 +207,25 @@
   ARCH-linux/auto/POSIX/POSIX.so
   ARCH-linux/POSIX.pm
   ARCH-linux/XSLoader.pm
+  ARCH-linux/lib.pm
+  ARCH-linux/Socket.pm
+  ARCH-linux/IO/Socket.pm
+  ARCH-linux/IO.pm
+  ARCH-linux/IO/Handle.pm
+  ARCH-linux/Encode/Symbol.pm
+  Symbol.pm
+  SelectSaver.pm
+  ARCH-linux/auto/DynaLoader/dl_findfile.al
+  ARCH-linux/DynaLoader.pm
+  ARCH-linux/auto/IO/IO.so
+  ARCH-linux/auto/Socket/Socket.so
+  ARCH-linux/Errno.pm
+  IO/Socket/INET.pm
+  IO/Socket/UNIX.pm
+</from>
+<from expand="perl">
+  packdrake.pm
+  MDV/Packdrakeng.pm
 </from>
 </filter>
 
@@ -251,7 +277,28 @@
     dhcp-client
   </to>
 </from>
-
+<from dir="/usr/bin">
+  <to dir="/ka">
+    bootable_flag.sh
+    fdisk_to_desc
+    gen_modprobe_conf.pl
+    ka-d-client
+    ka-d-server
+    ka-d.sh
+    ka_replication.sh
+    make_initrd_grub
+    make_initrd_lilo
+    prepare_node.sh
+    send_status.pl
+    status_node.pl
+    store_log.sh
+  </to>
+</from>
+<from dir="/etc/ka">
+  <to dir="/ka">
+    replication.conf
+  </to>
+</from>
 <if set="RESCUE_FLASH">
   <from expand="binary">
     clear
