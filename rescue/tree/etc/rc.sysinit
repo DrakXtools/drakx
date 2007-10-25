@@ -1,6 +1,8 @@
 #!/bin/sh
 
 action() { echo $1; shift; $*; }
+DATE=`date +%Y%m%d-%Hh%M`
+KADIR="/ka2"
 
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 
@@ -51,11 +53,15 @@ stty sane
 
 grep -q noauto /proc/cmdline || drvinst SERIAL_USB
 
-if grep ka /proc/cmdline; then
-    echo Welcome to Ka rescue
-    drvinst
-    cd /ka
-    ./install.sh
+if grep kamethod /proc/cmdline; then
+    echo "Welcome to Ka"
+    drvinst 
+    ln -sf /tmp/stage2/ka $KADIR
+    ln -sf /tmp/stage2/disk /disk
+    cd $KADIR
+    echo "-------- Starting LOG server -------------"
+    perl send_status.pl > /tmp/kacmd &
+    exec ./ka_replication.sh > /tmp/ka_log-$HOSTNAME-$DATE 2>&1
 fi
 
 if ! grep -q expert /proc/cmdline; then
