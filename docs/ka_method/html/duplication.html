@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /><title>Duplicate a node</title><link rel="stylesheet" href="styleguibo.css" type="text/css" /><meta name="generator" content="DocBook XSL Stylesheets V1.73.2" /><link rel="start" href="#id2447712" title="Duplicate a node" /><link rel="next" href="#id2446541" title="1. Duplicate a computer over the network" /></head><body><div class="article" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="id2447712"></a>Duplicate a node</h2></div></div><hr /></div><div class="toc"><dl><dt><span class="sect1"><a href="#id2446541">1. Duplicate a computer over the network</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id2243707">1.1. KA method</a></span></dt><dt><span class="sect2"><a href="#id2521938">1.2. HOW it works</a></span></dt><dd><dl><dt><span class="sect3"><a href="#id2521943">1.2.1. Steps</a></span></dt><dt><span class="sect3"><a href="#id2522328">1.2.2. Needed files</a></span></dt></dl></dd><dt><span class="sect2"><a href="#id2522381">1.3. Step 1: PXE, TFTP, DHCPD services</a></span></dt><dd><dl><dt><span class="sect3"><a href="#id2522416">1.3.1. PXE parameters on server</a></span></dt><dt><span class="sect3"><a href="#id2522497">1.3.2. TFTP server</a></span></dt><dt><span class="sect3"><a href="#id2522528">1.3.3. PXE configuration</a></span></dt><dt><span class="sect3"><a href="#id2522540">1.3.4. DHCPD configuration</a></span></dt></dl></dd></dl></dd><dt><span class="sect1"><a href="#id2522692">2. Setup a node as a golden node</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id2522697">2.1. The rescue.sqfs file</a></span></dt><dd><dl><dt><span class="sect3"><a href="#id2522749">2.1.1. ka-d.sh</a></span></dt><dt><span class="sect3"><a href="#id2522775">2.1.2. replication.conf</a></span></dt><dt><span class="sect3"><a href="#id2522788">2.1.3. fdisk_to_desc</a></span></dt><dt><span class="sect3"><a href="#id2522812">2.1.4. gen_modprobe_conf.pl</a></span></dt><dt><span class="sect3"><a href="#id2522837">2.1.5. ka-d-client</a></span></dt><dt><span class="sect3"><a href="#id2522872">2.1.6. ka-d-server</a></span></dt><dt><span class="sect3"><a href="#id2522906">2.1.7. ka_replication.sh</a></span></dt><dt><span class="sect3"><a href="#id2522931">2.1.8. store_log.sh</a></span></dt><dt><span class="sect3"><a href="#id2522960">2.1.9. bootable_flag.sh</a></span></dt><dt><span class="sect3"><a href="#id2522972">2.1.10. make_initrd_grub</a></span></dt><dt><span class="sect3"><a href="#id2522996">2.1.11. make_initrd_lilo</a></span></dt><dt><span class="sect3"><a href="#id2523020">2.1.12. prepare_node.sh</a></span></dt><dt><span class="sect3"><a href="#id2523046">2.1.13. send_status.pl</a></span></dt><dt><span class="sect3"><a href="#id2523070">2.1.14. status_node.pl</a></span></dt></dl></dd></dl></dd><dt><span class="sect1"><a href="#id2523090">3. The golden node, KA server</a></span></dt><dt><span class="sect1"><a href="#id2523240">4. KA client node</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id2523246">4.1. PXE server (kamethod)</a></span></dt><dt><span class="sect2"><a href="#id2523284">4.2. Stage1 KA method, node waiting stage2 </a></span></dt><dt><span class="sect2"><a href="#id2523331">4.3. Stage2, the duplication process</a></span></dt><dt><span class="sect2"><a href="#id2523401">4.4. Prepare the node</a></span></dt><dt><span class="sect2"><a href="#id2523428">4.5. PXE server to local boot</a></span></dt></dl></dd><dt><span class="sect1"><a href="#id2523445">5. full log of a KA duplication</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id2523451">5.1. Golden node side</a></span></dt><dt><span class="sect2"><a href="#id2523463">5.2. KA client side</a></span></dt></dl></dd></dl></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2446541"></a>1. Duplicate a computer over the network</h2></div></div></div><p>
+      Goal of duplication is to easily deploy a computer over network without taking care of numbers of computer. In this documentation, we call golden node the node we want to clone.
+      We can duplicate SCSI or IDE hard drive, and duplication support multiple filesystem (reiserfs, ext2, ext3, xfs, jfs).
+    </p><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id2243707"></a>1.1. KA method</h3></div></div></div><p>
+	With KA method you can quickly duplicate a node using a <span class="bold"><strong>desc</strong></span>
+	file describing partitions. KA method only duplicate data on partitions, so if you have 80go HDD disk, and
+	only 10go on it, KA only duplicates 10go, and not the whole disk. KA method doesn't not support RAID software.
+      </p><p>
+	Drawbacks:
+      </p><p>
+	</p><div class="itemizedlist"><ul type="disc"><li><p>KA method doesn't support RAID software</p></li><li><p>you can only clone Linux filesystems (if you want to duplicate another kinf of FS, it's up to you to modify the scripts)</p></li><li><p>you can only duplicate same kind of HDD (IDE or SCSI)</p></li></ul></div><p>
+      </p></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id2521938"></a>1.2. HOW it works</h3></div></div></div><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="id2521943"></a>1.2.1. Steps</h4></div></div></div><p>
+	  The clone process works in three steps
+	</p><div class="itemizedlist"><ul type="disc"><li><p><span class="bold"><strong>PXE boot to retrieve stage1</strong></span>: the computer boot on PXE mode, retrieve <span class="bold"><strong>vmlinuz</strong></span> and an <span class="bold"><strong>initrd</strong></span>. The computer is in <span class="bold"><strong>stage1</strong></span> mode, and is able to get the stage2 throug KA. Network is up.</p></li><li><p><span class="bold"><strong>get stage2</strong></span>: the computer gets the stage2 with KA method. The <span class="bold"><strong>stage2</strong></span> contains all necessary tools to recognize your hardware (the most important things is to detect your HDD), and all necessary tools to finalize the cloning process.</p></li><li><p><span class="bold"><strong>Duplication process</strong></span>: the computer auto-probes needed modules to be able to access to HDD. A basic log server is launched on the client node to be able to run command and get status of the KA duplication process.</p></li></ul></div></div><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="id2522328"></a>1.2.2. Needed files</h4></div></div></div><p>
+	  All needed files are available on Mandriva Linux cooker.
+	</p><p>
+	  </p><div class="itemizedlist"><ul type="disc"><li><p><span class="bold"><strong>install/stage2/rescue.sqhfs</strong></span>: this is the stage2 file with all needed files to detect and probe modules, and launch the third step of the duplication process. This file will be used on the golden node.</p></li><li><p><span class="bold"><strong>isolinux/alt0/vmlinuz</strong></span>: linux kernel, needed in the <span class="bold"><strong>/var/lib/tftpboot/X86PC/linux/images/</strong></span> directory of the PXE server</p></li><li><p><span class="bold"><strong>isolinux/alt0/all.rdz</strong></span>: stage1 and all needed modules.</p></li></ul></div><p>
+	</p></div></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id2522381"></a>1.3. Step 1: PXE, TFTP, DHCPD services</h3></div></div></div><p>
+	To easily clone a computer node, we use PXE technology to boot a <span class="bold"><strong>kernel</strong></span>, and an <span class="bold"><strong>initrd</strong></span> image wich contains all needed modules for network and media storage. Documentation about PXE can be found here: <a class="ulink" href="http://people.mandriva.com/~aginies/doc/pxe/" target="_top">PXE doc</a>. Please, keep in mind setting such services can <span class="bold"><strong>DISTURB</strong></span> your current network architecture.
+      </p><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="id2522416"></a>1.3.1. PXE parameters on server</h4></div></div></div><p>
+	  Mandriva Linux installer supports various methods to install a computer. With PXE configuration file you can specify wich method you want to use to install your node, or add a specific option at boot prompt. Edit your default PXE configuration file to add your custom entry (<span class="bold"><strong>/var/lib/tftpboot/X86PC/linux/pxelinux.cfg/default</strong></span>).
+	</p><p>
+	  </p><pre class="screen">
+PROMPT 1
+DEFAULT local
+DISPLAY messages
+TIMEOUT 50
+F1 help.txt
+
+label local
+    LOCALBOOT 0
+
+label kamethod
+    KERNEL images/vmlinuz
+    APPEND initrd=images/all.rdz ramdisk_size=64000 vga=788 \
+	      automatic=method:ka,interface:eth0,network:dhcp root=/dev/ram3 rw rescue kamethod</pre><p>
+	</p><p>
+	  At boot prompt no you can boot:
+	</p><p>
+	  </p><div class="itemizedlist"><ul type="disc"><li><p><span class="bold"><strong>DEFAULT local</strong></span>: default boot will be local one, change it with the name of a <span class="bold"><strong>LABEL</strong></span></p></li><li><p><span class="bold"><strong>local</strong></span>: boot local</p></li><li><p><span class="bold"><strong>kamethod</strong></span>: automatic mode, get stage2 through <span class="bold"><strong>KA</strong></span>. Network interface is set to eth0. Auto setup the network with DHCP, and use the KA technology to launch the replication method.</p></li></ul></div><p>
+	</p></div><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="id2522497"></a>1.3.2. TFTP server</h4></div></div></div><p>
+	  TFTP server should be activated in <span class="bold"><strong>/etc/xinetd.d/tftp</strong></span> file, and the <span class="bold"><strong>xinetd</strong></span> service started.
+	</p><p>
+	  </p><pre class="screen">
+service tftp
+{
+	    disable= no
+	    socket_type= dgram
+	    protocol= udp
+	    wait= yes
+	    user= root
+	    server= /usr/sbin/in.tftpd
+	    server_args = -s /var/lib/tftpboot
+	    per_source= 11
+	    cps= 100 2
+	    flags= IPv4
+}</pre><p>
+	</p></div><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="id2522528"></a>1.3.3. PXE configuration</h4></div></div></div><p>
+</p><pre class="programlisting">
+# which interface to use
+interface=eth0
+default_address=IPADDR_PXE
+
+# the multicast ip address to listen on
+multicast_address=224.0.1.2
+
+# mtftp info
+mtftp_address=IPADDR_TFTP
+mtftp_client_port=1758
+mtftp_server_port=1759
+
+# the port to listen on
+listen_port=4011
+
+# enable multicast?
+use_multicast=1
+
+# enable broadcast?
+use_broadcast=0
+
+# user prompt
+prompt=Press F8 to view menu ...
+prompt_timeout=2
+
+# what services to provide, priority in ordering
+# CSA = Client System Architecture
+# service=&lt;CSA&gt;,&lt;min layer&gt;,&lt;max layer&gt;,&lt;basename&gt;,&lt;menu entry&gt;
+service=X86PC,0,2,linux,Mandrake Linux x86
+service=IA64PC,0,2,linux,Mandrake Linux IA64
+service=X86PC,0,0,local,Local boot
+
+# tftpd base dir
+tftpdbase=/
+
+# domain=guibland.com
+domain=
+</pre><p>
+	</p></div><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="id2522540"></a>1.3.4. DHCPD configuration</h4></div></div></div><p>
+	  IE of an <span class="bold"><strong>/etc/dhcpd.conf</strong></span> configuration file. Change <span class="bold"><strong>IPADDR_TFTP</strong></span> with the IP address of the TFTP serrver, and the <span class="bold"><strong>NET</strong></span> value. Don't forget to adjust the <span class="bold"><strong>domain-name</strong></span> and the <span class="bold"><strong>domain-name-servers</strong></span>.
+	</p><p>
+	  </p><pre class="screen">
+ddns-update-style none;
+allow booting;
+allow bootp;
+
+authoritative;
+
+# Definition of PXE-specific options
+# Code 1: Multicast IP address of bootfile
+# Code 2: UDP port that client should monitor for MTFTP responses
+# Code 3: UDP port that MTFTP servers are using to listen for MTFTP requests
+# Code 4: Number of secondes a client must listen for activity before trying
+#         to start a new MTFTP transfer
+# Code 5: Number of secondes a client must listen before trying to restart
+#         a MTFTP transfer
+
+# define Option for the PXE class
+option space PXE;
+option PXE.mtftp-ip code 1 = ip-address;
+option PXE.mtftp-cport code 2 = unsigned integer 16;
+option PXE.mtftp-sport code 3 = unsigned integer 16;
+option PXE.mtftp-tmout code 4 = unsigned integer 8;
+option PXE.mtftp-delay code 5 = unsigned integer 8;
+option PXE.discovery-control code 6 = unsigned integer 8;
+option PXE.discovery-mcast-addr code 7 = ip-address;
+
+#Define options for pxelinux
+option space pxelinux;
+option pxelinux.magic code 208 = string;
+option pxelinux.configfile code 209 = text;
+option pxelinux.pathprefix code 210 = text;
+option pxelinux.reboottime code 211 = unsigned integer 32;
+site-option-space "pxelinux";
+
+option pxelinux.magic f1:00:74:7e;
+option pxelinux.reboottime 30;
+
+#Class that determine the options for Etherboot 5.x requests
+class "Etherboot" {
+#if The vendor-class-identifier equal Etherboot-5.0
+match if substring (option vendor-class-identifier, 0, 13) = "Etherboot-5.0";
+# filename define the file retrieve by the client, there nbgrub
+# our tftp is chrooted so is just the path to the file
+filename "/etherboot/nbgrub";
+#Used by etherboot to detect a valid pxe dhcp server
+option vendor-encapsulated-options 3c:09:45:74:68:65:72:62:6f:6f:74:ff;
+# Set the  "vendor-class-identifier" field to "PXEClient" in dhcp answer
+# if this field is not set the pxe client will ignore the answer !
+option vendor-class-identifier "Etherboot-5.0";
+vendor-option-space PXE;
+option PXE.mtftp-ip 0.0.0.0;
+# IP of you TFTP server
+next-server IPADDR_TFTP;
+}
+
+# create the Class PXE
+class "PXE" {
+# if the "vendor-class-identifier" is set to "PXEClient" in the client dhcp request
+match if substring(option vendor-class-identifier, 0, 9) = "PXEClient";
+filename "/X86PC/linux/linux.0";
+option vendor-class-identifier "PXEClient";
+vendor-option-space PXE;
+option PXE.mtftp-ip 0.0.0.0;
+next-server IPADDR_TFTP;
+}
+
+#host node20 {
+#    hardware ethernet 00:40:CA:8C:B6:E9;
+#    fixed-address node20;
+#}
+
+subnet NET.0 netmask 255.255.255.0 {
+  option subnet-mask 255.255.255.0;
+  option routers IPADDR_GW;
+  default-lease-time 288000;
+  max-lease-time 864000;
+  option domain-name "guibland.com";
+  option domain-name-servers IPADDR_DNS;
+  next-server IPADDR_TFTP;
+  pool {
+  range NET.30 NET.40;
+  }
+}</pre><p>
+	</p></div></div></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2522692"></a>2. Setup a node as a golden node</h2></div></div></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id2522697"></a>2.1. The rescue.sqfs file</h3></div></div></div><p>
+	You need the rescue disk (wich contains the <span class="bold"><strong>/ka</strong></span> directory),
+	and mount it loop in <span class="bold"><strong>/mnt/ka</strong></span>.
+      </p><p>
+	</p><pre class="screen">
+mkdir /mnt/ka
+mount -o loop -t squashfs rescue.sqfs /mnt/ka</pre><p>
+      </p><p>
+	Go in the <span class="bold"><strong>/mnt/ka/ka</strong></span> directory, and see all new files available. All those files are needed
+	to do a <span class="bold"><strong>KA</strong></span> duplication process. We will explain now the rule of each of them. If you want
+	to modify the content of this rescue disk (add scripts...), mount it in a tempory directory, and copy the content
+	into the <span class="bold"><strong>/mnt/ka</strong></span> directory.
+      </p><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="id2522749"></a>2.1.1. ka-d.sh</h4></div></div></div><p>
+	  This is the master script to declare a node as a golden node. This script takes a lot of arguments.
+</p><pre class="screen">
+    -h, --help : display this message
+    -n num : specify the number of (destination) nodes
+    -x dir : exclude directory
+    -X sdb : exclude sdb for the replication
+    -m drive : copy the master boot record (for windows) of this drive
+    -M drive file : use 'file' as master boot record (must be 446 bytes long) for the specified drive
+    -D partition : also copy partition 'partition'
+    -p drive pdesc : use 'pdesc' file as partition scheme (see doc) for the specified drive
+    -d delay : delay beteween the release of 2 clients (1/10 second)
+    -r 'grub|lilo' : choose the bootloader (you can add mkinitrd options)
+
+    ie: ka-d.sh -n 3 -p sda /tmp/desc -X sdb -r 'grub --with=ata_piix --with=piix'</pre><p>
+	</p></div><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="id2522775"></a>2.1.2. replication.conf</h4></div></div></div><p>
+	  This file contain all variables needed by other scripts. It also tries to get information like IP address.
+	</p></div><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="id2522788"></a>2.1.3. fdisk_to_desc</h4></div></div></div><p>
+	  This script generate the description table of the hard drive disk in the <span class="bold"><strong>/tmp/desc</strong></span> file.
+	  This file must follow some rules: one line per partition, with two fields : type of partition and size in megabytes.
+	  The  type  can be linux, swap, extended. Other types can be obtained by appending their hexadecimal number to 'type'.
+	  For example linux is the same as type83. The size is either a number of megabytes, or the keyword fill (to take all
+	  available space). The logical  partitions must have the logical keyword.
+	</p></div><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="id2522812"></a>2.1.4. gen_modprobe_conf.pl</h4></div></div></div><p>
+	  This script create a basic output like the content of the<span class="bold"><strong>/etc/modprobe.conf</strong></span> file. Drawbacks
+	  this file must be updated for each new modules available in the kernel (based on the <span class="bold"><strong>kernel/list_modules.pm</strong></span> file).
+	</p></div><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="id2522837"></a>2.1.5. ka-d-client</h4></div></div></div><p>
+	  The <span class="bold"><strong>ka-d-client</strong></span> binary file is used to get stage2 with the <span class="bold"><strong>KA</strong></span> method, and after
+	  get the whole system. The important argument is the <span class="bold"><strong>-s</strong></span> session name. A <span class="bold"><strong>KA</strong></span>
+	  can only connect to a specific session (getstage2, kainstall ...). The code source is available in the ka-deploy-0.92 SRPM.
+	</p></div><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="id2522872"></a>2.1.6. ka-d-server</h4></div></div></div><p>
+	  The <span class="bold"><strong>ka-d-server</strong></span> binary file is used to be a <span class="bold"><strong>KA</strong></span> golden node server.
+	  Like the <span class="bold"><strong>ka-d-client</strong></span> the session arguments is an important parameter (<span class="bold"><strong>-s session_name</strong></span>).
+	  The code source is available in the ka-deploy-0.92 SRPM.
+	</p></div><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="id2522906"></a>2.1.7. ka_replication.sh</h4></div></div></div><p>
+	  Script launched on the <span class="bold"><strong>KA</strong></span> client (after getting stage2 and probing modules), to do the full process of the
+	  <span class="bold"><strong>Ka</strong></span> duplication.
+	  This script call other scripts to prepare the node (prepare_node.sh), configure the bootloader (make_initrd_grub or make_initrd_lilo).
+	</p></div><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="id2522931"></a>2.1.8. store_log.sh</h4></div></div></div><p>
+	  Basic script to store the log of the <span class="bold"><strong>KA</strong></span> duplication process on an FTP server. Adjust to feet your need, and uncomment
+	  the line <span class="bold"><strong>#store_log.sh</strong></span> in the <span class="bold"><strong>/mnt/ka/ka/ka_replication.sh</strong></span> file.
+	</p></div><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="id2522960"></a>2.1.9. bootable_flag.sh</h4></div></div></div><p>
+	  Script to set bootable an HDD using fdisk. First arg must be the HDD device.
+	</p></div><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="id2522972"></a>2.1.10. make_initrd_grub</h4></div></div></div><p>
+	  Restore and reload the Grub bootloader in the <span class="bold"><strong>/mnt/disk</strong></span> directory. It's a very basic script, and perhaps
+	  use the <span class="bold"><strong>restore_bootloader</strong></span> of the Mandriva Linux Rescue should be a better idea.
+	</p></div><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="id2522996"></a>2.1.11. make_initrd_lilo</h4></div></div></div><p>
+	  Restore and reload the lilo bootloader in the <span class="bold"><strong>/mnt/disk</strong></span> directory. Again it's a very basic script, perhaps we should use the
+	  <span class="bold"><strong>restore_bootloader</strong></span> of the Mandriva Linux Rescue.
+	</p></div><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="id2523020"></a>2.1.12. prepare_node.sh</h4></div></div></div><p>
+	  This script remove in the futur system the old network's udev rules, old dhcp cache files, launch the script <span class="bold"><strong>gen_modprobe_conf.pl</strong></span> to
+	  regenerate an uptodate <span class="bold"><strong>/etc/modprobe.conf</strong></span> in the new system, and launch the script to restore the bootloader.
+	  If you want to do more action on the installed, system, you can modify this script.
+	</p></div><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="id2523046"></a>2.1.13. send_status.pl</h4></div></div></div><p>
+	  Very basic perl script to open the port 12345, and paste the content of the <span class="bold"><strong>/tmp/ka*</strong></span> file. It also
+	  permit the execution of commands on node, if user send a message from the golden node with the <span class="bold"><strong>exec</strong></span> prefix.
+	</p></div><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="id2523070"></a>2.1.14. status_node.pl</h4></div></div></div><p>
+	  Script to connect to a client node, first arg must be the IP address of the node. You can run command on the node with the <span class="bold"><strong>exec</strong></span> prefix.
+	</p></div></div></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2523090"></a>3. The golden node, KA server</h2></div></div></div><p>
+      Now, it is time to build a description of the node partitions. You can use the script
+      <span class="bold"><strong>/mnt/ka/ka/fdisk_to_desc</strong></span> as root user, or your favorite text editor,
+      you can write a file like this one:
+    </p><p>
+      </p><pre class="screen">
+linux 3500
+extended fill
+logical swap 500
+logical linux fill</pre><p>
+    </p><p>
+      This file describes your partition table and the sample above can be considered as a default one for a recommended
+      installation. There is a 3.5GB <span class="bold"><strong>/</strong></span> partition, a 500 MB swap
+      partition, and <span class="bold"><strong>/var</strong></span> fills the rest, of course you can adjust
+      sizes accoding to your system.
+    </p><p>
+      Type the following to start the ka replication server as root user:
+    </p><p>
+</p><pre class="programlisting">
+      &lt;screen&gt;
+[root@node40 ka]# ./ka-d.sh -n 1 -p sda /root/desc -X sdb -r "grub --with=jfs --with=ata_piix"
+takembr =
+desc = sda /root/desc
++ Mount points :
+     /dev/sda5 / ext3
+     /dev/sda1 swap swap
++ Hard drives :
+     sda
++ Reading partition table description for sda
+    Added partition 1 : type 82
+    Added partition 5 : type 83
++ Included mount points : /
++ Bootloader is: grub --with=jfs --with=ata_piix
++++ Sending Stage2 +++
+Compiled : Aug 23 2007 12:58:29
+ARGS=+ka-d-server+-s+getstage2+-n+1+-e+(cd /mnt/ka; tar --create --one-file-system --sparse  . )+
+Server IP = 10.0.1.40
+command = (cd /mnt/ka; tar --create --one-file-system --sparse  . )
+I want 1 clients
+Socket 4 on port 30765 on node40.guibland.com ready.
+Socket 5 on port 30764 on node40.guibland.com ready.
+</pre><p>
+    </p><p>
+      </p><div class="itemizedlist"><ul type="disc"><li><p><span class="bold"><strong>-r "grub --with=jfs --with=ata_piix"</strong></span>: use grub bootloader and <span class="bold"><strong>--with=jfs --with=piix</strong></span> mkinitrd option in the chrooted system after the <span class="bold"><strong>KA</strong></span> deploiement</p></li><li><p><span class="bold"><strong>-n nb_nodes</strong></span>: specify how many nodes are clients</p></li><li><p><span class="bold"><strong>-p sda/hda desc</strong></span>: specify if you want to duplicate SCSI or IDE storage, and the name of the hdd</p></li><li><p><span class="bold"><strong>-x /tmp</strong></span>: exclude <span class="bold"><strong>/tmp</strong></span> directory</p></li><li><p><span class="bold"><strong>-X sdb</strong></span>: exclude <span class="bold"><strong>sdb</strong></span> hdd for the duplication</p></li></ul></div><p>
+    </p><p>
+      Now the node is waiting for the rest of the nodes to start replication.
+    </p></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2523240"></a>4. KA client node</h2></div></div></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id2523246"></a>4.1. PXE server (kamethod)</h3></div></div></div><p>
+	We have to configure the PXE to boot by default on <span class="bold"><strong>kamethod</strong></span>.
+	To do this just edit <span class="bold"><strong>/var/lib/tftpboot/X86PC/linux/pxelinux.cfg/default</strong></span> and set
+	  <span class="bold"><strong>DEFAULT</strong></span> to kamethod:
+      </p><pre class="screen">DEFAULT kamethod</pre><p>
+	So, next time a node boots, the PXE server will force the
+	node to boot using the kamethod.
+      </p></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id2523284"></a>4.2. Stage1 KA method, node waiting stage2 </h3></div></div></div><p>
+	Now, you boot all remaining nodes. The replication process
+	will start once all nodes are up and waiting on the <span class="bold"><strong>KA</strong></span>
+	screen.
+      </p><p>
+	If the nodes can't reach the golden node, running the <span class="bold"><strong>KA</strong></span>
+	server the message <span class="bold"><strong>Can't reach a valid KA server</strong></span> will appear.
+	Each node will try five times to reach the <span class="bold"><strong>KA</strong></span> server, after that the node will reboot.
+	As the node boots on <span class="bold"><strong>kamethod</strong></span>, it will retry until it finds it.
+      </p></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id2523331"></a>4.3. Stage2, the duplication process</h3></div></div></div><p>
+	Once all the nodes have found the <span class="bold"><strong>KA</strong></span> server, the first
+	duplication process will start. This step duplicates the
+	<span class="bold"><strong>rescue_stage2</strong></span> from the <span class="bold"><strong>/mnt/ka</strong></span> directory
+	of the golden node, in the client's nodes memory (<span class="bold"><strong>/dev/ram3</strong></span>). Then, nodes chroot their
+	memories (the <span class="bold"><strong>/tmp/stage2</strong></span> directory), and launch the <span class="bold"><strong>drvinst</strong></span> command from the rescue disk, to probe all needed their modules (drivers).
+	Then, the second step of the duplication starts.
+      </p><p>
+	The duplication process will clone your drives following
+	the description you have made (<span class="bold"><strong>/tmp/desc</strong></span> of the golden node).
+	Nodes will rewrite their partition table, then format their filesystems (ReiserFs, XFS,
+	ext2/3, JFS). All new partitions will be mounted in the <span class="bold"><strong>/mnt/disk</strong></span> directory.
+	Then, the drive duplication process will begin. On a fast Ethernet switch you can reach speeds of 10MBytes/sec.
+      </p></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id2523401"></a>4.4. Prepare the node</h3></div></div></div><p>
+	At the end of the duplication process, each node will
+	chroot its partitions and rebuild its <span class="bold"><strong>/boot/initrd.img</strong></span>,
+	and <span class="bold"><strong>/etc/modprobe.conf</strong></span> files.
+	This step ensures that your node will reboot using its potential
+	SCSI drives and adjusting its network card driver. Before
+	rebooting, each node reinstalls lilo/grub. All your node are
+	now ready, and are clone of master node.
+      </p></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id2523428"></a>4.5. PXE server to local boot</h3></div></div></div><p>
+	Don't forget to change the default PXE boot to <span class="bold"><strong>local</strong></span>
+	so node after replication will boot localy.
+      </p></div></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2523445"></a>5. full log of a KA duplication</h2></div></div></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id2523451"></a>5.1. Golden node side</h3></div></div></div><p>
+</p><pre class="programlisting">
+[root@node40 ka]# ./ka-d.sh -n 1 -p sda /root/desc -X sdb -r "grub --with=jfs --with=ata_piix"
+takembr =
+desc = sda /root/desc
++ Mount points :
+     /dev/sda5 / ext3
+     /dev/sda1 swap swap
++ Hard drives :
+     sda
++ Reading partition table description for sda
+    Added partition 1 : type 82
+    Added partition 5 : type 83
++ Included mount points : /
++ Bootloader is: grub --with=jfs --with=ata_piix
++++ Sending Stage2 +++
+Compiled : Aug 23 2007 12:58:29
+ARGS=+ka-d-server+-s+getstage2+-n+1+-e+(cd /mnt/ka; tar --create --one-file-system --sparse  . )+
+Server IP = 10.0.1.40
+command = (cd /mnt/ka; tar --create --one-file-system --sparse  . )
+I want 1 clients
+Socket 4 on port 30765 on node40.guibland.com ready.
+Socket 5 on port 30764 on node40.guibland.com ready.
+got UDP packet from 10.0.1.35
+Session name matches
+Sending UDP reply to 10.0.1.35
+Accepting connection from 10.0.1.35
+Clients : want_data 0  / connected 0
+client says hello !
+Client sends options
+Client accepts data
+Added client 10.0.1.35, daddy = 10.0.1.40
+Accepting connection from 10.0.1.35
+checking connection auth10.0.1.40 reports 10.0.1.35 has opened data connection
+Client 10.0.1.35 reports data position : 0
+10.0.1.40 reports 10.0.1.35 has been accepted
+Welcome son, you are number 1 (MAX 4)
+Let's go!
+Total data read = 45 Megs, BUF: 0M  FREE = 34M  startpos = 10M
+End of data flow
+Dropping children
+Dropping child 10.0.1.35
+All children dropped
+Client says dad disconnected
+Client says he has finished
+Client has finished transfer
+Busy clients: 0 -- connected : 1
+Peer closed connection on socket 6
+close_connection(6)
+Busy clients: 0 -- connected : 0
+All clients left, I quit
+Total data sent = 48 Megs, in 2172 packets
+Transfer time = 6.125 seconds, throughput = 7.881 Mbytes/second
+The pipeline was emptied in 0.026 seconds
+ - Sending partition/filesystem/mount points informations...
+ +++ Running ka-deploy +++
+Compiled : Aug 23 2007 12:58:29
+ARGS=+ka-d-server+-s+kainstall1+-n+1+-e+(cd /tmp/ka-d6083 &amp;&amp; tar c *)+
+Server IP = 10.0.1.40
+command = (cd /tmp/ka-d6083 &amp;&amp; tar c *)
+I want 1 clients
+Socket 4 on port 30765 on node40.guibland.com ready.
+Socket 5 on port 30764 on node40.guibland.com ready.
+got UDP packet from 10.0.1.35
+Session name matches
+Sending UDP reply to 10.0.1.35
+Accepting connection from 10.0.1.35
+Clients : want_data 0  / connected 0
+client says hello !
+Client sends options
+Client accepts data
+Added client 10.0.1.35, daddy = 10.0.1.40
+Accepting connection from 10.0.1.35
+checking connection auth10.0.1.40 reports 10.0.1.35 has opened data connection
+Client 10.0.1.35 reports data position : 0
+10.0.1.40 reports 10.0.1.35 has been accepted
+Welcome son, you are number 1 (MAX 4)
+Let's go!
+Total data read = 0 Megs, BUF: 0M  FREE = 34M  startpos = 0M
+End of data flow
+Dropping children
+Dropping child 10.0.1.35
+All children dropped
+Client says dad disconnected
+Client says he has finished
+Client has finished transfer
+Busy clients: 0 -- connected : 1
+Peer closed connection on socket 6
+close_connection(6)
+Busy clients: 0 -- connected : 0
+All clients left, I quit
+Total data sent = 0 Megs, in 1 packets
+Transfer time = 0.016 seconds, throughput = 0.628 Mbytes/second
+The pipeline was emptied in 0.027 seconds
+ WAITING node (partition/format)
+ - Sending Linux filesystem...
+ +++ Running ka-deploy +++
+Compiled : Aug 23 2007 12:58:29
+ARGS=+ka-d-server+-s+kainstall2+-n+1+-e+(cd /; tar --create --one-file-system --sparse  /)+
+Server IP = 10.0.1.40
+command = (cd /; tar --create --one-file-system --sparse  /)
+I want 1 clients
+Socket 4 on port 30765 on node40.guibland.com ready.
+Socket 5 on port 30764 on node40.guibland.com ready.
+got UDP packet from 10.0.1.35
+Session name matches
+Sending UDP reply to 10.0.1.35
+Accepting connection from 10.0.1.35
+Clients : want_data 0  / connected 0
+client says hello !
+Client sends options
+Client accepts data
+Added client 10.0.1.35, daddy = 10.0.1.40
+Accepting connection from 10.0.1.35
+checking connection auth10.0.1.40 reports 10.0.1.35 has opened data connection
+Client 10.0.1.35 reports data position : 0
+10.0.1.40 reports 10.0.1.35 has been accepted
+Welcome son, you are number 1 (MAX 4)
+Let's go!
+Total data read = 621 Megs, BUF: 24M  FREE = 10M  startpos = 586M
+End of data flow
+Dropping children
+Dropping child 10.0.1.35
+All children dropped
+Client says dad disconnected
+Client says he has finished
+Client has finished transfer
+Busy clients: 0 -- connected : 1
+Peer closed connection on socket 6
+close_connection(6)
+Busy clients: 0 -- connected : 0
+All clients left, I quit
+Total data sent = 627 Megs, in 34011 packets
+Transfer time = 127.140 seconds, throughput = 4.937 Mbytes/second
+The pipeline was emptied in 1.549 seconds
+</pre><p>
+      </p></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id2523463"></a>5.2. KA client side</h3></div></div></div><p>
+	Just launch <span class="bold"><strong>/mnt/ka/ka/status_node.pl IPADD</strong></span> to get log of the KA client.
+      </p><pre class="programlisting">
+10.0.1.35&gt; ------| Ka |---- Install starting...
+10.0.1.35&gt; Current session is -s kainstall1
+10.0.1.35&gt;  Receiving partitions information...OK
+10.0.1.35&gt;  Cleaning hard drive...
+10.0.1.35&gt; ==&gt; /tmp/kacmd &lt;==
+10.0.1.35&gt; Starting log server..
+10.0.1.35&gt; 
+10.0.1.35&gt; ==&gt; /tmp/ka_log-10.0.1.35-20071024-10h32 &lt;==
+10.0.1.35&gt; OK
+10.0.1.35&gt; Device contains neither a valid DOS partition table, nor Sun, SGI or OSF disklabel
+10.0.1.35&gt; Building a new DOS disklabel with disk identifier 0x59be1427.
+10.0.1.35&gt; Changes will remain in memory only, until you decide to write them.
+10.0.1.35&gt; After that, of course, the previous content won't be recoverable.
+10.0.1.35&gt; 
+10.0.1.35&gt; 
+10.0.1.35&gt; The number of cylinders for this disk is set to 1116.
+10.0.1.35&gt; There is nothing wrong with that, but this is larger than 1024,
+10.0.1.35&gt; and could in certain setups cause problems with:
+10.0.1.35&gt; 1) software that runs at boot time (e.g., old versions of LILO)
+10.0.1.35&gt; 2) booting and partitioning software from other OSs
+10.0.1.35&gt;    (e.g., DOS FDISK, OS/2 FDISK)
+10.0.1.35&gt; Warning: invalid flag 0x0000 of partition table 4 will be corrected by w(rite)
+10.0.1.35&gt; 
+10.0.1.35&gt; Command (m for help): The partition table has been altered!
+10.0.1.35&gt; 
+10.0.1.35&gt; Calling ioctl() to re-read partition table.
+10.0.1.35&gt; Syncing disks.
+10.0.1.35&gt;  Writing partition table for sda using fdisk...OK
+10.0.1.35&gt;  Formatting /dev/sda5 as ext3...OK
+10.0.1.35&gt;  Formatting /dev/sda1 as swap...OK
+10.0.1.35&gt; - Mounting /dev/sda5 as /mnt/disk/ ......OK
+10.0.1.35&gt; ++++++++++++++++++++++++++
+10.0.1.35&gt; rootfs on / type rootfs (rw)
+10.0.1.35&gt; /proc on /proc type proc (rw)
+10.0.1.35&gt; none on /sys type sysfs (rw)
+10.0.1.35&gt; none on /proc/bus/usb type usbfs (rw)
+10.0.1.35&gt; /dev/ram3 on /tmp/stage2 type ext2 (rw)
+10.0.1.35&gt; /dev/sda5 on /mnt/disk type ext3 (rw,data=ordered)
+10.0.1.35&gt; ++++++++++++++++++++++++++
+10.0.1.35&gt; Linux copy is about to start 
+10.0.1.35&gt; Server IP is 10.0.1.40
+10.0.1.35&gt; Buffers names :pipe 
+Total data received = 620 Megs (11.222 Mbytes/sec); BUF :0M End of data flow
+10.0.1.35&gt; Flushing buffers
+10.0.1.35&gt; Total data received = 627 Megs, in 434960 packets
+10.0.1.35&gt; Elapsed time = 128.482 seconds, throughput = 4.886 Mbytes/second
+10.0.1.35&gt;  Syncing disks...OK
+10.0.1.35&gt; Linux copy done.
+10.0.1.35&gt; Creating excluded directories
+10.0.1.35&gt; - bootloader is grub --with=jfs --with=ata_piix (user choice and options)
+10.0.1.35&gt; - Removing duplicated dhcp cache
+10.0.1.35&gt; - Writing modprobe.conf
+10.0.1.35&gt; ********************
+10.0.1.35&gt; install scsi_hostadapter /sbin/modprobe aic7xxx; /sbin/modprobe ata_piix; /bin/true
+10.0.1.35&gt; alias eth0 eepro100
+10.0.1.35&gt; alias eth1 eepro100
+10.0.1.35&gt; ********************
+10.0.1.35&gt; - Remove ude network rules
+10.0.1.35&gt; removed `/mnt/disk/etc/udev/rules.d/61-net_config.rules'
+10.0.1.35&gt; - Running mkinitrd
+10.0.1.35&gt; Looking for default grub menu
+10.0.1.35&gt; - erase old initrd.img link
+10.0.1.35&gt; removed `/mnt/disk/boot/initrd.img'
+10.0.1.35&gt;  initrd will be : /boot/initrd-2.6.22.9-desktop-1mdv.img
+10.0.1.35&gt; running: chroot /mnt/disk /sbin/mkinitrd -v -f --with=jfs /boot/initrd-2.6.22.9-desktop-1mdv.img 2.6.22.9-desktop-1mdv
+10.0.1.35&gt; Looking for deps of module aic7xxx
+	10.0.1.35&gt;  scsi_transport_spi scsi_mod
+10.0.1.35&gt; Looking for deps of module scsi_transport_spi
+	10.0.1.35&gt;  scsi_mod
+10.0.1.35&gt; Looking for deps of module scsi_mod
+10.0.1.35&gt; skip dups
+10.0.1.35&gt; Looking for deps of module sd_mod
+	10.0.1.35&gt;  scsi_mod
+10.0.1.35&gt; Looking for deps of module scsi_wait_scan
+	10.0.1.35&gt;  scsi_mod
+10.0.1.35&gt; Looking for deps of module ext3
+	10.0.1.35&gt;  jbd
+10.0.1.35&gt; Looking for deps of module jbd
+10.0.1.35&gt; Looking for deps of module jfs
+10.0.1.35&gt; Using modules:  /lib/modules/2.6.22.9-desktop-1mdv/kernel/drivers/scsi/scsi_mod.ko /lib/modules/2.6.22.9-desktop-1mdv/kernel/drivers/scsi/scsi_transport_spi.ko /lib/modules/2.6.22.9-desktop-1mdv/kernel/drivers/scsi/aic7xxx/aic7xxx.ko /lib/modules/2.6.22.9-desktop-1mdv/kernel/drivers/scsi/sd_mod.ko /lib/modules/2.6.22.9-desktop-1mdv/kernel/drivers/scsi/scsi_wait_scan.ko /lib/modules/2.6.22.9-desktop-1mdv/kernel/fs/jbd/jbd.ko /lib/modules/2.6.22.9-desktop-1mdv/kernel/fs/ext3/ext3.ko /lib/modules/2.6.22.9-desktop-1mdv/kernel/fs/jfs/jfs.ko
+10.0.1.35&gt; Using /tmp as temporary directory.
+10.0.1.35&gt; /sbin/nash -&gt; /tmp/initrd.tG1408/bin/nash
+	10.0.1.35&gt; /lib/modules/2.6.22.9-desktop-1mdv/kernel/drivers/scsi/scsi_mod.ko.gz: 60.6%
+	10.0.1.35&gt; /lib/modules/2.6.22.9-desktop-1mdv/kernel/drivers/scsi/scsi_transport_spi.ko.gz: 63.1%
+	10.0.1.35&gt; /lib/modules/2.6.22.9-desktop-1mdv/kernel/drivers/scsi/aic7xxx/aic7xxx.ko.gz: 61.4%
+	10.0.1.35&gt; /lib/modules/2.6.22.9-desktop-1mdv/kernel/drivers/scsi/sd_mod.ko.gz: 60.2%
+	10.0.1.35&gt; /lib/modules/2.6.22.9-desktop-1mdv/kernel/drivers/scsi/scsi_wait_scan.ko.gz: 77.3%
+	10.0.1.35&gt; /lib/modules/2.6.22.9-desktop-1mdv/kernel/fs/jbd/jbd.ko.gz: 60.5%
+	10.0.1.35&gt; /lib/modules/2.6.22.9-desktop-1mdv/kernel/fs/ext3/ext3.ko.gz: 53.9%
+	10.0.1.35&gt; /lib/modules/2.6.22.9-desktop-1mdv/kernel/fs/jfs/jfs.ko.gz: 51.4%
+10.0.1.35&gt; Loading module scsi_mod.ko
+10.0.1.35&gt; Loading module scsi_transport_spi.ko
+10.0.1.35&gt; Loading module aic7xxx.ko
+10.0.1.35&gt; Loading module sd_mod.ko
+10.0.1.35&gt; Loading module scsi_wait_scan.ko
+10.0.1.35&gt; Loading module jbd.ko
+10.0.1.35&gt; Loading module ext3.ko
+10.0.1.35&gt; Loading module jfs.ko
+10.0.1.35&gt; /usr/sbin/resume -&gt; /tmp/initrd.tG1408/bin
+10.0.1.35&gt; Contents of RCFILE:
+10.0.1.35&gt; #!/bin/nash
+10.0.1.35&gt; 
+10.0.1.35&gt; echo "Loading scsi_mod.ko module"
+10.0.1.35&gt; insmod /lib/scsi_mod.ko 
+10.0.1.35&gt; echo "Loading scsi_transport_spi.ko module"
+10.0.1.35&gt; insmod /lib/scsi_transport_spi.ko 
+10.0.1.35&gt; echo "Loading aic7xxx.ko module"
+10.0.1.35&gt; insmod /lib/aic7xxx.ko 
+10.0.1.35&gt; echo "Loading sd_mod.ko module"
+10.0.1.35&gt; insmod /lib/sd_mod.ko 
+10.0.1.35&gt; echo "Loading scsi_wait_scan.ko module"
+10.0.1.35&gt; insmod /lib/scsi_wait_scan.ko 
+10.0.1.35&gt; echo "Loading jbd.ko module"
+10.0.1.35&gt; insmod /lib/jbd.ko 
+10.0.1.35&gt; echo "Loading ext3.ko module"
+10.0.1.35&gt; insmod /lib/ext3.ko 
+10.0.1.35&gt; echo "Loading jfs.ko module"
+10.0.1.35&gt; insmod /lib/jfs.ko 
+10.0.1.35&gt; echo Mounting /proc filesystem
+10.0.1.35&gt; mount -t proc /proc /proc
+10.0.1.35&gt; echo Mounting sysfs
+10.0.1.35&gt; mount -t sysfs none /sys
+10.0.1.35&gt; echo Creating device files
+10.0.1.35&gt; mountdev size=32M,mode=0755
+10.0.1.35&gt; mkdevices /dev
+10.0.1.35&gt; echo Creating root device
+10.0.1.35&gt; mkrootdev /dev/root
+10.0.1.35&gt; resume
+10.0.1.35&gt; echo 1 &gt; /sys/power/suspend2/do_resume
+10.0.1.35&gt; echo 1 &gt; /sys/power/tuxonice/do_resume
+10.0.1.35&gt; echo Mounting root filesystem /dev/root with flags relatime
+10.0.1.35&gt; mount -o relatime --ro -t ext3 /dev/root /sysroot
+10.0.1.35&gt; echo Switching to new root
+10.0.1.35&gt; switchroot --movedev /sysroot
+10.0.1.35&gt; echo Initrd finished
+10.0.1.35&gt;  First drive will be: /dev/sda
+10.0.1.35&gt; Installation finished. No error reported.
+10.0.1.35&gt; This is the contents of the device map /boot/grub/device.map.
+10.0.1.35&gt; Check if this is correct or not. If any of the lines is incorrect,
+10.0.1.35&gt; fix it and re-run the script `grub-install'.
+10.0.1.35&gt; 
+10.0.1.35&gt; (hd0) /dev/sda
+10.0.1.35&gt; (hd1) /dev/sdb
+10.0.1.35&gt; umount: /mnt/disk/dev: not mounted
+10.0.1.35&gt;  Umounting /dev/sda5...OK
+10.0.1.35&gt; AUTH not understood
+10.0.1.35&gt; Local directory now /tmp
+exec lsmod
+10.0.1.35&gt; &lt;console&gt; 
+10.0.1.35&gt; &lt;console&gt; 
+10.0.1.35&gt; &lt;console&gt; exec lsmod
+10.0.1.35&gt; Module                  Size  Used by
+10.0.1.35&gt; aic7xxx               167992  0 
+10.0.1.35&gt; scsi_transport_spi     22432  1 aic7xxx
+10.0.1.35&gt; ata_piix               12228  0 
+10.0.1.35&gt; libata                109424  1 ata_piix
+10.0.1.35&gt; sr_mod                 15044  0 
+10.0.1.35&gt; sd_mod                 25888  0 
+10.0.1.35&gt; scsi_mod              124908  5 aic7xxx,scsi_transport_spi,libata,sr_mod,sd_mod
+10.0.1.35&gt; loop                   14212  0 
+10.0.1.35&gt; jfs                   176708  0 
+10.0.1.35&gt; xfs                   528088  0 
+10.0.1.35&gt; reiserfs              247908  0 
+10.0.1.35&gt; ext3                  118824  0 
+10.0.1.35&gt; jbd                    50184  1 ext3
+10.0.1.35&gt; vfat                   10816  0 
+10.0.1.35&gt; nls_iso8859_1           4672  0 
+10.0.1.35&gt; nls_cp437               6304  0 
+10.0.1.35&gt; fat                    45980  1 vfat
+10.0.1.35&gt; isofs                  31452  0 
+10.0.1.35&gt; piix                    9060  0 [permanent]
+10.0.1.35&gt; ide_cd                 35488  0 
+10.0.1.35&gt; ide_disk               14496  0 
+10.0.1.35&gt; ide_core               99396  3 piix,ide_cd,ide_disk
+10.0.1.35&gt; af_packet              17960  0 
+10.0.1.35&gt; eepro100               28432  0 
+10.0.1.35&gt; mii                     5376  1 eepro100
+10.0.1.35&gt; usbkbd                  6304  0 
+10.0.1.35&gt; uhci_hcd               22736  0 
+10.0.1.35&gt; usbcore               113928  3 usbkbd,uhci_hcd
+</pre></div></div></div></body></html>
