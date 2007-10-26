@@ -552,8 +552,11 @@ sub main {
     $ENV{META_CLASS} = $o->{meta_class}; #- for Ia Ora
 
     foreach (@::auto_steps) {
-	my $s = $o->{steps}{/::(.*)/ ? $1 : $_} or next;
-	$s->{auto} = $s->{hidden} = 1;
+	if (my $s = $o->{steps}{/::(.*)/ ? $1 : $_}) {
+	    $s->{auto} = $s->{hidden} = 1;
+	} else {
+	    log::l("ERROR: unknown step $_ in auto_steps");
+	}
     }
 
     my $o_;
