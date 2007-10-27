@@ -5,7 +5,7 @@
 # Mohammad DAMT <mdamt@cdl2000.com>, 1999-2001
 # Andy <chandy@indo.net.id>, 1999
 # Kelana <nk@telkom.net>, 1999
-# Willy Sudiarto Raharjo <willysr@gmail.com>, 2004 - 2005.
+# Willy Sudiarto Raharjo <willysr@gmail.com>, 2004 - 2007.
 # Erwien Samantha <erwiensamantha@gmail.com>, 2005.
 # Bayu Artanto <bayuart@yahoo.com>, 2005.
 # Ahmad Ramadhana <ahmad_ramadhana@yahoo.com.sg>, 2005.
@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
 "POT-Creation-Date: 2007-09-12 17:02+0200\n"
-"PO-Revision-Date: 2007-03-18 08:17+0700\n"
+"PO-Revision-Date: 2007-10-27 19:26+0700\n"
 "Last-Translator: Willy Sudiarto Raharjo <willysr@gmail.com>\n"
 "Language-Team: Indonesia <mdk-id@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -70,7 +70,7 @@ msgid ""
 " Then type: shut-down\n"
 "At your next boot you should see the bootloader prompt."
 msgstr ""
-"Anda harus mengganti bootdevice Open Firmware untuk mengaktifkan "
+"Anda harus mengganti perangkat boot Open Firmware untuk mengaktifkan "
 "bootloader.\n"
 " Jika Anda tak melihat prompt bootloader saat reboot, tekan\n"
 " Command-Option-O-F saat reboot dan ketik:\n"
@@ -88,7 +88,7 @@ msgid ""
 "On which drive are you booting?"
 msgstr ""
 "Anda memutuskan untuk menginstall bootloader pada partisi.\n"
-"Berarti Anda sudah punya bootloader di harddisk yang Anda boot (mis: System "
+"Berarti Anda sudah punya bootloader pada harddisk yang Anda boot (mis: System "
 "Commander).\n"
 "\n"
 "Pada drive mana Anda melakukan booting?"
@@ -146,7 +146,7 @@ msgstr "Bootloader yang hendak digunakan"
 #: any.pm:385 any.pm:416
 #, c-format
 msgid "Boot device"
-msgstr "Divais boot"
+msgstr "Perangkat boot"
 
 #: any.pm:387
 #, c-format
@@ -176,12 +176,12 @@ msgstr "Aktifkan APIC Lokal"
 #: any.pm:393 any.pm:773 authentication.pm:196 diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
-msgstr "Katasandi"
+msgstr "Kata sandi"
 
 #: any.pm:395 authentication.pm:207
 #, c-format
 msgid "The passwords do not match"
-msgstr "Katasandi tidak cocok"
+msgstr "Kata sandi tidak cocok"
 
 #: any.pm:395 authentication.pm:207 diskdrake/interactive.pm:1343
 #, c-format
@@ -191,17 +191,17 @@ msgstr "Silahkan coba lagi"
 #: any.pm:396
 #, c-format
 msgid "You can not use a password with %s"
-msgstr "Anda tidak dapat menggunakan sebuah katasandi dengan %s"
+msgstr "Anda tidak dapat menggunakan sebuah kata sandi dengan %s"
 
 #: any.pm:399 any.pm:774 authentication.pm:197
 #, c-format
 msgid "Password (again)"
-msgstr "Katasandi (lagi)"
+msgstr "Kata sandi (lagi)"
 
 #: any.pm:400
 #, c-format
 msgid "Restrict command line options"
-msgstr "Batasi parameter command line"
+msgstr "Batasi parameter perintah baris"
 
 #: any.pm:400
 #, c-format
@@ -213,12 +213,12 @@ msgstr "batasi"
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
-"Pilihan ``Batasi parameter command line'' tidak ada gunanya tanpa katasandi"
+"Pilihan ``Batasi parameter perintah baris'' tidak ada gunanya tanpa kata sandi"
 
 #: any.pm:403
 #, c-format
 msgid "Clean /tmp at each boot"
-msgstr "Hapus /tmp tiap kali boot"
+msgstr "Hapus /tmp setiap boot"
 
 #: any.pm:404
 #, c-format
@@ -372,7 +372,7 @@ msgstr "akses ke program X"
 #: any.pm:728
 #, c-format
 msgid "access to rpm tools"
-msgstr "akses ke perkakas rpm"
+msgstr "akses ke aplikasi rpm"
 
 #: any.pm:729
 #, c-format
@@ -387,12 +387,12 @@ msgstr "akses ke file administratif"
 #: any.pm:731
 #, c-format
 msgid "access to network tools"
-msgstr "akses ke perkakas jaringan"
+msgstr "akses ke aplikasi jaringan"
 
 #: any.pm:732
 #, c-format
 msgid "access to compilation tools"
-msgstr "akses ke perkakas kompilasi"
+msgstr "akses ke aplikasi kompilasi"
 
 #: any.pm:737
 #, c-format
@@ -441,21 +441,19 @@ msgid "%s should be above 500. Accept anyway?"
 msgstr "%s seharusnya diatas 500. Terima apa adanya?"
 
 #: any.pm:768
-#, fuzzy, c-format
+#, c-format
 msgid "User management"
-msgstr "Nama pengguna"
+msgstr "Manajemen pengguna"
 
 #: any.pm:775 authentication.pm:182
 #, c-format
 msgid "Set administrator (root) password"
-msgstr "Tentukan katasandi root"
+msgstr "Tentukan kata sandi root"
 
 #: any.pm:780
-#, fuzzy, c-format
+#, c-format
 msgid "Enter a user"
-msgstr ""
-"Masukkan pengguna\n"
-"%s"
+msgstr "Masukkan pengguna"
 
 #: any.pm:781
 #, c-format
@@ -760,7 +758,7 @@ msgstr "File lokal:"
 #: authentication.pm:66
 #, c-format
 msgid "Use information stored in local files for all authentication"
-msgstr ""
+msgstr "Informasi pengguna disimpan pada berkas lokal untuk semua otentikasi"
 
 #: authentication.pm:67
 #, c-format
@@ -898,7 +896,7 @@ msgstr "Pengguna LDAP diijinkan untuk menjelajah Active Directory"
 #: authentication.pm:128
 #, c-format
 msgid "Password for user"
-msgstr "Katasandi untuk pengguna"
+msgstr "Kata sandi untuk pengguna"
 
 #: authentication.pm:140
 #, c-format
@@ -934,12 +932,12 @@ msgstr ""
 "Agar dapat bekerja dengan PDC W2K, Anda mungkin perlu minta tolong admin "
 "menjalankan: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" "
 "everyone / add dan me-reboot server.\n"
-"Anda mungkin juga perlu nama pengguna/katasandi Admin Domain untuk "
+"Anda mungkin juga perlu nama pengguna/kata sandi Admin Domain untuk "
 "menggabungkan komputer ke domain Windows(TM).\n"
 "Jika jaringan belum aktif, Drakx akan mencoba bergabung dengan domain "
 "setelah tahapan setup jaringan.\n"
 "Jika setup dan otentikasi domain gagal, jalankan 'smbpasswd -j DOMAIN -U USER"
-"%%PASSWORD' menggunakan Domain Windows(tm) Anda, dan Nama pengguna/Katasandi "
+"%%PASSWORD' menggunakan Domain Windows(tm) Anda, dan Nama pengguna/Kata sandi "
 "Admin, setelah boot system.\n"
 "Perintah 'wbinfo -t' akan menguji apakah rahasia otentikasi Anda baik."
 
@@ -961,7 +959,7 @@ msgstr "Nama Pengguna Admin Domain"
 #: authentication.pm:165
 #, c-format
 msgid "Domain Admin Password"
-msgstr "Katasandi Admin Domain"
+msgstr "Kata sandi Admin Domain"
 
 #: authentication.pm:181 authentication.pm:198
 #, c-format
@@ -977,12 +975,12 @@ msgstr "Metode otentikasi"
 #: authentication.pm:189
 #, c-format
 msgid "No password"
-msgstr "Tanpa katasandi"
+msgstr "Tanpa kata sandi"
 
 #: authentication.pm:210
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
-msgstr "Katasandi ini terlalu pendek (paling tidak harus %d karakter)"
+msgstr "Kata sandi ini terlalu pendek (paling tidak harus %d karakter)"
 
 #: authentication.pm:351
 #, c-format
@@ -1286,14 +1284,14 @@ msgid "Unknown"
 msgstr "Tidak dikenal"
 
 #: diskdrake/hd_gtk.pm:354
-#, fuzzy, c-format
+#, c-format
 msgid "Ext3"
-msgstr "Keluar"
+msgstr "Ext3"
 
 #: diskdrake/hd_gtk.pm:354
-#, fuzzy, c-format
+#, c-format
 msgid "XFS"
-msgstr "HFS"
+msgstr "XFS"
 
 #: diskdrake/hd_gtk.pm:354
 #, c-format
@@ -1641,7 +1639,7 @@ msgstr "Dimana Anda akan melakukan mount file loopback %s?"
 #: diskdrake/interactive.pm:648
 #, c-format
 msgid "Where do you want to mount device %s?"
-msgstr "Dimana Anda akan melakukan mount divais %s?"
+msgstr "Dimana Anda akan melakukan mount perangkat %s?"
 
 #: diskdrake/interactive.pm:653
 #, c-format
@@ -1791,7 +1789,7 @@ msgstr "Macam-macam"
 #: diskdrake/interactive.pm:1041
 #, c-format
 msgid "device"
-msgstr "divais"
+msgstr "perangkat"
 
 #: diskdrake/interactive.pm:1042
 #, c-format
@@ -1888,7 +1886,7 @@ msgstr "Telah terjadi penomoran ulang pada partisi:"
 #: diskdrake/interactive.pm:1226 diskdrake/interactive.pm:1288
 #, c-format
 msgid "Device: "
-msgstr "Divais: "
+msgstr "Perangkat: "
 
 #: diskdrake/interactive.pm:1227
 #, c-format
@@ -1898,7 +1896,7 @@ msgstr "Label Volume: "
 #: diskdrake/interactive.pm:1241
 #, c-format
 msgid "UUID: "
-msgstr ""
+msgstr "UUID"
 
 #: diskdrake/interactive.pm:1242
 #, c-format
@@ -2025,7 +2023,7 @@ msgstr ""
 "digunakan oleh sistem dual boot.\n"
 
 #: diskdrake/interactive.pm:1280
-#, fuzzy, c-format
+#, c-format
 msgid "Free space on %s (%s)"
 msgstr "Ruang kosong pada %s (%s)"
 
@@ -2115,7 +2113,7 @@ msgstr "Batal"
 #: diskdrake/smbnfs_gtk.pm:164
 #, c-format
 msgid "Can not login using username %s (bad password?)"
-msgstr "Tidak bisa login dengan nama pengguna %s (katasandi salah?)"
+msgstr "Tidak bisa login dengan nama pengguna %s (kata sandi salah?)"
 
 #: diskdrake/smbnfs_gtk.pm:168 diskdrake/smbnfs_gtk.pm:177
 #, c-format
@@ -2137,7 +2135,7 @@ msgstr "Yang lain"
 msgid ""
 "Please enter your username, password and domain name to access this host."
 msgstr ""
-"Masukkan nama pengguna, katasandi dan nama domain untuk mengakses host ini."
+"Masukkan nama pengguna, kata sandi dan nama domain untuk mengakses host ini."
 
 #: diskdrake/smbnfs_gtk.pm:180
 #, c-format
@@ -2190,7 +2188,7 @@ msgid ""
 "An error occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
 msgstr ""
-"Sebuah kesalahan terjadi - tidak ada divais yang ditemukan untuk membuat "
+"Sebuah kesalahan terjadi - tidak ada perangkat yang ditemukan untuk membuat "
 "sistem berkas baru. Harap periksa perangkat keras Anda untuk penyebab "
 "masalah ini"
 
@@ -2257,7 +2255,7 @@ msgstr "Gunakan sistem file terenkripsi"
 #: fs/mount_options.pm:113
 #, c-format
 msgid "Flush write cache on file close"
-msgstr ""
+msgstr "Hapus cache penulisan pada saat berkas ditutup"
 
 #: fs/mount_options.pm:115
 #, c-format
@@ -2276,12 +2274,12 @@ msgstr ""
 "berita)."
 
 #: fs/mount_options.pm:123
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
-"Jangan update waktu akses inode di sistem file ini\n"
+"Update waktu akses inode pada sistem file ini dengan cara yang lebih efisien\n"
 "(mis: untuk akses lebih cepat di spool berita untuk mempercepat server "
 "berita)."
 
@@ -2298,7 +2296,7 @@ msgstr ""
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
 msgstr ""
-"Jangan interpretasi divais karakter atau blok spesial pada sistem file."
+"Jangan interpretasi perangkat karakter atau blok spesial pada sistem file."
 
 #: fs/mount_options.pm:128
 #, c-format
@@ -2555,7 +2553,7 @@ msgid "Next"
 msgstr "Selanjutnya"
 
 #: fs/partitioning_wizard.pm:167
-#, fuzzy, c-format
+#, c-format
 msgid "Partitionning"
 msgstr "Pembuatan partisi"
 
@@ -2679,7 +2677,7 @@ msgid ""
 "\n"
 "Do you agree to lose all the partitions?\n"
 msgstr ""
-"Tidak bisa membaca tabel partisi dari divais %s, rusak terlalu parah :(\n"
+"Tidak bisa membaca tabel partisi dari perangkat %s, rusak terlalu parah :(\n"
 "Saya dapat mencoba untuk menghapus partisi yang rusak (SEMUA DATA AKAN "
 "HILANG!).\n"
 "Solusi lainnya adalah melarang DrakX memodifikasi tabel partisi.\n"
@@ -2822,7 +2820,7 @@ msgstr "Kartu TV"
 #: harddrake/data.pm:174
 #, c-format
 msgid "Other MultiMedia devices"
-msgstr "Divais MultiMedia Lain"
+msgstr "Perangkat MultiMedia Lain"
 
 #: harddrake/data.pm:183
 #, c-format
@@ -2847,7 +2845,7 @@ msgstr "Adapter ISDN"
 #: harddrake/data.pm:231
 #, c-format
 msgid "USB sound devices"
-msgstr "Divais suara USB"
+msgstr "Perangkat suara USB"
 
 #: harddrake/data.pm:240
 #, c-format
@@ -2867,7 +2865,7 @@ msgstr "Kartu jaringan WAN"
 #: harddrake/data.pm:267
 #, c-format
 msgid "Bluetooth devices"
-msgstr "Divais Bluetooth"
+msgstr "Perangkat Bluetooth"
 
 #: harddrake/data.pm:276
 #, c-format
@@ -2923,7 +2921,7 @@ msgstr "Pengontrol (E)IDE/ATA"
 #: harddrake/data.pm:386
 #, c-format
 msgid "USB Mass Storage Devices"
-msgstr "Divais Penyimpanan Massal USB"
+msgstr "Perangkat Penyimpanan Massal USB"
 
 #: harddrake/data.pm:395
 #, c-format
@@ -2983,7 +2981,7 @@ msgstr "Mouse"
 #: harddrake/data.pm:505
 #, c-format
 msgid "Biometry"
-msgstr ""
+msgstr "Biometry"
 
 #: harddrake/data.pm:513
 #, c-format
@@ -3310,7 +3308,7 @@ msgstr "Sebelumnya"
 #: interactive/gtk.pm:544
 #, c-format
 msgid "Beware, Caps Lock is enabled"
-msgstr ""
+msgstr "Hati-hati, Caps Lock aktif"
 
 #: interactive/stdio.pm:29 interactive/stdio.pm:154
 #, c-format
@@ -5191,28 +5189,28 @@ msgid "Your scanner(s) will not be available for non-root users."
 msgstr "Scanner Anda tidak akan tersedia untuk pengguna selain root."
 
 #: security/help.pm:11
-#, fuzzy, c-format
+#, c-format
 msgid "Accept bogus IPv4 error messages."
-msgstr "Terima pesan error IPv4 yang tidak benar"
+msgstr "Terima pesan error IPv4 yang tidak benar."
 
 #: security/help.pm:13
-#, fuzzy, c-format
+#, c-format
 msgid "Accept broadcasted icmp echo."
-msgstr "Terima echo icmp tersiar"
+msgstr "Terima echo icmp tersiar."
 
 #: security/help.pm:15
-#, fuzzy, c-format
+#, c-format
 msgid "Accept icmp echo."
-msgstr "Terima mode icmp"
+msgstr "Terima mode icmp."
 
 #: security/help.pm:17
-#, fuzzy, c-format
+#, c-format
 msgid "Allow autologin."
-msgstr "Izinkan/Larang autologin."
+msgstr "Izinkan autologin."
 
 #. -PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
 #: security/help.pm:21
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
 "\n"
@@ -5222,47 +5220,47 @@ msgid ""
 msgstr ""
 "Jika diset ke \"SEMUA\", /etc/issue dan /etc/issue.net diijinkan untuk ada.\n"
 "\n"
-"Jika diset ke TIDAK ADA, tidak ada issue yang diijinkan.\n"
+"Jika diset ke \"Tidak Ada\", tidak ada issue yang diijinkan.\n"
 "\n"
 "Selain itu hanya /etc/issue yang diijinkan."
 
 #: security/help.pm:27
-#, fuzzy, c-format
+#, c-format
 msgid "Allow reboot by the console user."
-msgstr "Izinkan/Larang reboot oleh pengguna konsol."
+msgstr "Izinkan reboot oleh pengguna konsol."
 
 #: security/help.pm:29
-#, fuzzy, c-format
+#, c-format
 msgid "Allow remote root login."
-msgstr "Izinkan/Larang login root remote."
+msgstr "Izinkan login root secara remote."
 
 #: security/help.pm:31
-#, fuzzy, c-format
+#, c-format
 msgid "Allow direct root login."
-msgstr "Izinkan/Larang login root langsung."
+msgstr "Izinkan login root langsung."
 
 #: security/help.pm:33
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr ""
-"Izinkan/Larang daftar pengguna sistem pada manajer display (kdm dan gdm)."
+"Izinkan daftar pengguna sistem pada manajer display (kdm dan gdm)."
 
 #: security/help.pm:35
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow to export display when\n"
 "passing from the root account to the other users.\n"
 "\n"
 "See pam_xauth(8) for more details.'"
 msgstr ""
-"Ijinkan/larang mengeksport tampilan\n"
+"Ijinkan mengeksport tampilan\n"
 "ketika berganti dari account root pada pengguna lain.\n"
 "\n"
 "Lihat pam_xauth(8) untuk detail lebih lanjut.'"
 
 #: security/help.pm:40
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow X connections:\n"
 "\n"
@@ -5272,13 +5270,13 @@ msgid ""
 "\n"
 "- \"None\" (no connection)."
 msgstr ""
-"Izinkan/Larang koneksi X:\n"
+"Izinkan koneksi X:\n"
 "\n"
-"- SEMUA (semua koneksi diijinkan), \n"
+"- \"Semua\" (semua koneksi diijinkan), \n"
 "\n"
-"- LOKAL (hanya koneksi dari komputer lokal), \n"
+"- \"Lokal\" (hanya koneksi dari komputer lokal), \n"
 "\n"
-"- TIDAK ADA (tidak ada koneksi)."
+"- \"Tidak Ada\" (tidak ada koneksi)."
 
 #: security/help.pm:48
 #, c-format
@@ -5291,7 +5289,7 @@ msgstr ""
 
 #. -PO: here "ALL", "Local" and "None" are values in a pull-down menu; translate them the same as they're
 #: security/help.pm:53
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Authorize:\n"
 "\n"
@@ -5310,9 +5308,9 @@ msgstr ""
 "- semua servis dikontrol oleh tcp_wrappers (lihat manual hosts.deny(5)) jika "
 "diset ke \"SEMUA\",\n"
 "\n"
-"- hanya lokal jika diset ke \"LOKAL\"\n"
+"- hanya lokal jika diset ke \"Lokal\"\n"
 "\n"
-"- tak satu-pun jika diset ke \"TIADA\".\n"
+"- tak satu-pun jika diset ke \"Tidak Ada\".\n"
 "\n"
 "Untuk meng-otorisasi layanan yang Anda perlukan, gunakan /etc/hosts.allow "
 "(lihat hosts.allow(5))."
@@ -5338,30 +5336,30 @@ msgstr ""
 "menambahkan layanan jika terdapat pada file selama installasi paket."
 
 #: security/help.pm:72
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable crontab and at for users.\n"
 "\n"
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
 msgstr ""
-"Aktifkan/Matikan crontab dan at untuk pengguna.\n"
+"Aktifkan crontab dan at untuk pengguna.\n"
 "\n"
 "Taruh pengguna yang diijinkan pada /etc/cron.allow dan /etc/at.allow \n"
 "(lihat man at(1) dan crontab(1))."
 
 #: security/help.pm:77
-#, fuzzy, c-format
+#, c-format
 msgid "Enable syslog reports to console 12"
-msgstr "Aktifkan/Matikan laporan syslog ke konsol 12"
+msgstr "Aktifkan laporan syslog ke konsol 12"
 
 #: security/help.pm:79
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable name resolution spoofing protection.  If\n"
 "\"%s\" is true, also reports to syslog."
 msgstr ""
-"Aktifkan/Matikan proteksi pemalsuan resolusi nama.\n"
+"Aktifkan proteksi pemalsuan resolusi nama.\n"
 "Jika \"%s\" bernilai true, juga laporkan ke syslog."
 
 #: security/help.pm:80
@@ -5370,24 +5368,24 @@ msgid "Security Alerts:"
 msgstr "Pemberitahuan Keamanan:"
 
 #: security/help.pm:82
-#, fuzzy, c-format
+#, c-format
 msgid "Enable IP spoofing protection."
 msgstr "Aktifkan proteksi pemalsuan IP."
 
 #: security/help.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Enable libsafe if libsafe is found on the system."
-msgstr "Aktifkan/Matikan libsafe jika libsafe ditemukan pada sistem"
+msgstr "Aktifkan libsafe jika libsafe ditemukan pada sistem."
 
 #: security/help.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Enable the logging of IPv4 strange packets."
-msgstr "Aktifkan pencatatan paket aneh IPv4"
+msgstr "Aktifkan pencatatan paket aneh IPv4."
 
 #: security/help.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid "Enable msec hourly security check."
-msgstr "Aktifkan pengujian keamanan setiap jam oleh msec"
+msgstr "Aktifkan pengujian keamanan setiap jam oleh msec."
 
 #: security/help.pm:90
 #, c-format
@@ -5401,41 +5399,41 @@ msgstr ""
 #: security/help.pm:92
 #, c-format
 msgid "Use password to authenticate users."
-msgstr "Gunakan katasandi untuk meng-otentikasi pengguna."
+msgstr "Gunakan kata sandi untuk meng-otentikasi pengguna."
 
 #: security/help.pm:94
-#, fuzzy, c-format
+#, c-format
 msgid "Activate ethernet cards promiscuity check."
-msgstr "Aktifkan/Matikan pengujian mode promiscuous kartu ethernet."
+msgstr "Aktifkan pengujian mode promiscuous kartu ethernet."
 
 #: security/help.pm:96
-#, fuzzy, c-format
+#, c-format
 msgid "Activate daily security check."
-msgstr "Aktifkan/Matikan pengujian keamanan harian."
+msgstr "Aktifkan pengujian keamanan harian."
 
 #: security/help.pm:98
-#, fuzzy, c-format
+#, c-format
 msgid "Enable sulogin(8) in single user level."
-msgstr "Izinkan/Tolak sulogin(8) pada level pengguna tunggal."
+msgstr "Izinkan sulogin(8) pada level pengguna tunggal."
 
 #: security/help.pm:100
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
 msgstr ""
-"Tambahkan nama sebagai pengecualian penanganan umur katasandi oleh msec."
+"Tambahkan nama sebagai pengecualian penanganan umur kata sandi oleh msec."
 
 #: security/help.pm:102
 #, c-format
 msgid "Set password aging to \"max\" days and delay to change to \"inactive\"."
 msgstr ""
-"Tentukan umur katasandi menjadi \"maks\" hari dan delay menjadi \"tidak aktif"
+"Tentukan umur kata sandi menjadi \"maks\" hari dan delay menjadi \"tidak aktif"
 "\"."
 
 #: security/help.pm:104
 #, c-format
 msgid "Set the password history length to prevent password reuse."
 msgstr ""
-"Tentukan panjang sejarah katasandi untuk mencegah penggunaan ulang katasandi."
+"Tentukan panjang sejarah kata sandi untuk mencegah penggunaan ulang kata sandi."
 
 #: security/help.pm:106
 #, c-format
@@ -5443,12 +5441,12 @@ msgid ""
 "Set the password minimum length and minimum number of digit and minimum "
 "number of capitalized letters."
 msgstr ""
-"Tentukan panjang minimum, jumlah minimum digit dan huruf besar katasandi."
+"Tentukan panjang minimum, jumlah minimum digit dan huruf besar kata sandi."
 
 #: security/help.pm:108
-#, fuzzy, c-format
+#, c-format
 msgid "Set the root's file mode creation mask."
-msgstr "Tentukan umask root."
+msgstr "Tentukan mode mask pembuatan berkas root."
 
 #: security/help.pm:109
 #, c-format
@@ -5468,9 +5466,9 @@ msgid ""
 msgstr ""
 "jika ya, periksa:\n"
 "\n"
-"- katasandi kosong,\n"
+"- kata sandi kosong,\n"
 "\n"
-"- katasandi kosong pada /etc/shadow\n"
+"- kata sandi kosong pada /etc/shadow\n"
 "\n"
 "- pengguna dengan id 0 selain root."
 
@@ -5483,7 +5481,7 @@ msgstr "jika ya, periksa hak akses file-file pada home pengguna."
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
 msgstr ""
-"jika ya, periksa apakah divais jaringan berada dalam modus promiscuous."
+"jika ya, periksa apakah perangkat jaringan berada dalam modus promiscuous."
 
 #: security/help.pm:119
 #, c-format
@@ -5498,7 +5496,7 @@ msgstr "Jika ya, periksa penambahan/penghapusan file sgid."
 #: security/help.pm:121
 #, c-format
 msgid "if set to yes, check empty password in /etc/shadow."
-msgstr "jika ya, periksa katasandi kosong pada /etc/shadow."
+msgstr "jika ya, periksa kata sandi kosong pada /etc/shadow."
 
 #: security/help.pm:122
 #, c-format
@@ -5573,9 +5571,9 @@ msgid "Timeout unit is second"
 msgstr "Unit timeout adalah detik"
 
 #: security/help.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Set the user's file mode creation mask."
-msgstr "Tentukan umask pengguna."
+msgstr "Tentukan mode mask pembuatan berkas pengguna."
 
 #: security/l10n.pm:11
 #, c-format
@@ -5685,7 +5683,7 @@ msgstr "Izinkan su hanya bagi anggota grup wheel"
 #: security/l10n.pm:33
 #, c-format
 msgid "Use password to authenticate users"
-msgstr "Pakai katasandi untuk meng-otentikasi pengguna"
+msgstr "Pakai kata sandi untuk meng-otentikasi pengguna"
 
 #: security/l10n.pm:34
 #, c-format
@@ -5705,22 +5703,22 @@ msgstr "Sulogin(8) pada level pengguna tunggal"
 #: security/l10n.pm:37
 #, c-format
 msgid "No password aging for"
-msgstr "Tidak ada umur katasandi untuk"
+msgstr "Tidak ada umur kata sandi untuk"
 
 #: security/l10n.pm:38
 #, c-format
 msgid "Set password expiration and account inactivation delays"
-msgstr "Tentukan kadaluarsa katasandi dan jeda penonaktifan account"
+msgstr "Tentukan kadaluarsa kata sandi dan jeda penonaktifan account"
 
 #: security/l10n.pm:39
 #, c-format
 msgid "Password history length"
-msgstr "Panjang sejarah katasandi"
+msgstr "Panjang sejarah kata sandi"
 
 #: security/l10n.pm:40
 #, c-format
 msgid "Password minimum length and number of digits and upcase letters"
-msgstr "Panjang minimum katasandi serta jumlah digit dan huruf besar"
+msgstr "Panjang minimum kata sandi serta jumlah digit dan huruf besar"
 
 #: security/l10n.pm:41
 #, c-format
@@ -5760,7 +5758,7 @@ msgstr "Periksa hak akses file pada home pengguna."
 #: security/l10n.pm:48
 #, c-format
 msgid "Check if the network devices are in promiscuous mode"
-msgstr "Periksa apakah divais jaringan berada dalam modus promiscuous"
+msgstr "Periksa apakah perangkat jaringan berada dalam modus promiscuous"
 
 #: security/l10n.pm:49
 #, c-format
@@ -5775,7 +5773,7 @@ msgstr "Periksa penambahan/penghapusan file sgid"
 #: security/l10n.pm:51
 #, c-format
 msgid "Check empty password in /etc/shadow"
-msgstr "Periksa katasandi kosong pada /etc/shadow"
+msgstr "Periksa kata sandi kosong pada /etc/shadow"
 
 #: security/l10n.pm:52
 #, c-format
@@ -5872,7 +5870,7 @@ msgid ""
 msgstr ""
 "Level ini harus digunakan hati-hati. Ia akan membuat sistem Anda akan mudah\n"
 "digunakan, tapi sangat sensitif. Tidak boleh digunakan untuk komputer yang\n"
-"terhubung ke komputer lain atau ke Internet. Tidak ada akses katasandi."
+"terhubung ke komputer lain atau ke Internet. Tidak ada akses kata sandi."
 
 #: security/level.pm:44
 #, c-format
@@ -5880,7 +5878,7 @@ msgid ""
 "Passwords are now enabled, but use as a networked computer is still not "
 "recommended."
 msgstr ""
-"Katasandi diaktifkan, tapi penggunaan sebagai komputer jaringan tidak "
+"Kata sandi diaktifkan, tapi penggunaan sebagai komputer jaringan tidak "
 "direkomendasikan."
 
 #: security/level.pm:45
@@ -6010,11 +6008,12 @@ msgstr ""
 msgid ""
 "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr ""
+"Common UNIX Printing System (CUPS) adalah system spooling printer tingkat tinggi"
 
 #: services.pm:29
 #, c-format
 msgid "Launches the graphical display manager"
-msgstr ""
+msgstr "Menjalankan manajemen display grafis"
 
 #: services.pm:30
 #, c-format
@@ -6043,7 +6042,8 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
+msgstr "HAL adalah daemon yang mengumpulkan dan mengelola informasi tentang "
+"perangkat keras"
 
 #: services.pm:36
 #, c-format
@@ -6144,6 +6144,8 @@ msgid ""
 "DBUS is a daemon which broadcasts notifications of system events and other "
 "messages"
 msgstr ""
+"DBUS adalah daemon yang mempublikasikan notifikasi kejadian sistem dan pesan "
+"lain"
 
 #: services.pm:58
 #, c-format
@@ -6195,7 +6197,7 @@ msgstr ""
 #: services.pm:68
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
-msgstr ""
+msgstr "Sinkronisasi waktu sistem menggunakan Network Time Protokol (NTP)"
 
 #: services.pm:69
 #, c-format
@@ -6257,7 +6259,7 @@ msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
 "partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
-"Menunjuk divais raw ke divais block (misalnya partisi hard drive),\n"
+"Menunjuk perangkat raw ke perangkat block (misalnya partisi hard drive),\n"
 "untuk digunakan oleh aplikasi semacam Oracle atau pemutar DVD"
 
 #: services.pm:83
@@ -6304,6 +6306,7 @@ msgstr ""
 msgid ""
 "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
+"SANE (Scanner Access Now Easy) mengijinkan akses ke scanner, kamera video, ..."
 
 #: services.pm:93
 #, c-format
@@ -6311,6 +6314,8 @@ msgid ""
 "The SMB/CIFS protocol enables to share access to files & printers and also "
 "integrates with a Windows Server domain"
 msgstr ""
+"Protokol SMB/CIFS mengijinkan share akses pada berkas & printer dan juga "
+"terintegrasi dengan domain Windows Server"
 
 #: services.pm:94
 #, c-format
@@ -6323,6 +6328,8 @@ msgid ""
 "Secure Shell is a network protocol that allows data to be exchanged over a "
 "secure channel between two computers"
 msgstr ""
+"Secure Shell adalah protokol jaringan yang mengijinkan data untuk dipertukarkan "
+"pada jalur aman diantara dua komputer"
 
 #: services.pm:96
 #, c-format
@@ -6336,17 +6343,17 @@ msgstr ""
 #: services.pm:98
 #, c-format
 msgid "Load the drivers for your usb devices."
-msgstr "Muat driver untuk divais USB Anda"
+msgstr "Muat driver untuk perangkat USB Anda"
 
 #: services.pm:99
 #, c-format
 msgid "Starts the X Font Server."
-msgstr ""
+msgstr "Menjalankan Server X Font."
 
 #: services.pm:100
 #, c-format
 msgid "Starts other deamons on demand."
-msgstr ""
+msgstr "Menjalankan daemon lain sesuai kebutuhan."
 
 #: services.pm:123
 #, c-format
@@ -6529,8 +6536,8 @@ msgstr ""
 "\n"
 "OPSI:\n"
 "  --help            - cetak pesan ini.\n"
-"  --report          - program harus berupa perkakas Mandriva Linux\n"
-"  --incident        - program harus berupa perkakas Mandriva Linux"
+"  --report          - program harus berupa aplikasi Mandriva Linux\n"
+"  --incident        - program harus berupa aplikasi Mandriva Linux"
 
 #: standalone.pm:65
 #, c-format
@@ -6828,12 +6835,11 @@ msgstr "Installasi gagal"
 #~ msgid "Accept user"
 #~ msgstr "Menerima pengguna"
 
-#, fuzzy
 #~ msgid ""
 #~ "Do not update directory inode access times on this filesystem\n"
 #~ "(e.g, for faster access on the news spool to speed up news servers)."
 #~ msgstr ""
-#~ "Jangan update waktu akses inode di sistem file ini\n"
+#~ "Jangan update waktu akses inode direktori pada sistem file ini\n"
 #~ "(mis: untuk akses lebih cepat di spool berita untuk mempercepat server "
 #~ "berita)."
 
