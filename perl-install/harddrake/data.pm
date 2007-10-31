@@ -59,6 +59,110 @@ my $modules_conf = modules::any_conf->read;
 our @tree =
     (
      {
+      class => "SATA_STORAGE",
+      string => N("SATA controllers"),
+      icon => "ide_hd.png",
+      configurator => "",
+      detector => sub { f(detect_devices::probe_category('disk/sata')) },
+      checked_on_boot => 1,
+     },
+
+     {
+      class => "RAID_STORAGE",
+      string => N("RAID controllers"),
+      icon => "ide_hd.png",
+      configurator => "",
+      detector => sub { f(detect_devices::probe_category('disk/hardware_raid')),
+                          f(grep { $_->{media_type} =~ /STORAGE_RAID/ } @devices) },
+      checked_on_boot => 1,
+     },
+
+     {
+      class => "ATA_STORAGE",
+      string => N("(E)IDE/ATA controllers"),
+      icon => "ide_hd.png",
+      configurator => "",
+      detector => sub { f(detect_devices::probe_category('disk/ide')),
+                          f(grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ } @devices) },
+      checked_on_boot => 1,
+     },
+
+     {
+      class => "CARD_READER",
+      string => N("Card readers"),
+      icon => "ide_hd.png",
+      configurator => "",
+      detector => sub { f(detect_devices::probe_category('disk/card_reader')) },
+      checked_on_boot => 1,
+     },
+
+     {
+      class => "FIREWIRE_CONTROLLER",
+      string => N("Firewire controllers"),
+      icon => "usb.png",
+      configurator => "",
+      detector => sub { f(grep { $_->{driver} =~ /ohci1394/ } @devices) },
+      checked_on_boot => 1,
+     },
+
+     {
+      class => "PCMCIA_CONTROLLER",
+      string => N("PCMCIA controllers"),
+      icon => "hw-pcmcia.png",
+      configurator => "",
+      detector => sub { f(detect_devices::pcmcia_controller_probe()) },
+      checked_on_boot => 1,
+     },
+
+     {
+      class => "SCSI_CONTROLLER",
+      string => N("SCSI controllers"),
+      icon => "scsi.png",
+      configurator => "",
+      detector => sub { f(detect_devices::probe_category('disk/scsi'), grep { $_->{media_type} =~ /STORAGE_SCSI/ } @devices) },
+      checked_on_boot => 1,
+     },
+
+     {
+      class => "USB_CONTROLLER",
+      string => N("USB controllers"),
+      icon => "usb.png",
+      configurator => "",
+      detector => sub { f(grep { $_->{media_type} eq 'SERIAL_USB' } @devices) },
+      checked_on_boot => 1,
+     },
+
+     {
+      class => "USB_HUB",
+      string => N("USB ports"),
+      icon => "hw-usb.png",
+      configurator => "",
+      detector => sub { f(grep { $_->{media_type} =~ /Hub/ } @devices) },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "SMB_CONTROLLER",
+      string => N("SMBus controllers"),
+      icon => "hw-smbus.png",
+      configurator => "",
+      detector => sub { f(grep { $_->{media_type} =~ /SERIAL_SMBUS/ } @devices) },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "BRIDGE",
+      string => N("Bridges and system controllers"),
+      icon => "memory.png",
+      configurator => "",
+      detector => sub { f(grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM|SYSTEM_OTHER|MEMORY_OTHER|SYSTEM_PIC/
+                                 || $_->{description} =~ /Parallel Port Adapter/;
+			 } @devices) },
+      checked_on_boot => 0,
+     },
+
+
+     {
       class => "FLOPPY",
       string => N("Floppy"),
       icon => "floppy.png",
@@ -361,109 +465,6 @@ our @tree =
       checked_on_boot => 0,
      },
 
-
-     {
-      class => "SATA_STORAGE",
-      string => N("SATA controllers"),
-      icon => "ide_hd.png",
-      configurator => "",
-      detector => sub { f(detect_devices::probe_category('disk/sata')) },
-      checked_on_boot => 1,
-     },
-
-     {
-      class => "RAID_STORAGE",
-      string => N("RAID controllers"),
-      icon => "ide_hd.png",
-      configurator => "",
-      detector => sub { f(detect_devices::probe_category('disk/hardware_raid')),
-                          f(grep { $_->{media_type} =~ /STORAGE_RAID/ } @devices) },
-      checked_on_boot => 1,
-     },
-
-     {
-      class => "ATA_STORAGE",
-      string => N("(E)IDE/ATA controllers"),
-      icon => "ide_hd.png",
-      configurator => "",
-      detector => sub { f(detect_devices::probe_category('disk/ide')),
-                          f(grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ } @devices) },
-      checked_on_boot => 1,
-     },
-
-     {
-      class => "CARD_READER",
-      string => N("Card readers"),
-      icon => "ide_hd.png",
-      configurator => "",
-      detector => sub { f(detect_devices::probe_category('disk/card_reader')) },
-      checked_on_boot => 1,
-     },
-
-     {
-      class => "FIREWIRE_CONTROLLER",
-      string => N("Firewire controllers"),
-      icon => "usb.png",
-      configurator => "",
-      detector => sub { f(grep { $_->{driver} =~ /ohci1394/ } @devices) },
-      checked_on_boot => 1,
-     },
-
-     {
-      class => "PCMCIA_CONTROLLER",
-      string => N("PCMCIA controllers"),
-      icon => "hw-pcmcia.png",
-      configurator => "",
-      detector => sub { f(detect_devices::pcmcia_controller_probe()) },
-      checked_on_boot => 1,
-     },
-
-     {
-      class => "SCSI_CONTROLLER",
-      string => N("SCSI controllers"),
-      icon => "scsi.png",
-      configurator => "",
-      detector => sub { f(detect_devices::probe_category('disk/scsi'), grep { $_->{media_type} =~ /STORAGE_SCSI/ } @devices) },
-      checked_on_boot => 1,
-     },
-
-     {
-      class => "USB_CONTROLLER",
-      string => N("USB controllers"),
-      icon => "usb.png",
-      configurator => "",
-      detector => sub { f(grep { $_->{media_type} eq 'SERIAL_USB' } @devices) },
-      checked_on_boot => 1,
-     },
-
-     {
-      class => "USB_HUB",
-      string => N("USB ports"),
-      icon => "hw-usb.png",
-      configurator => "",
-      detector => sub { f(grep { $_->{media_type} =~ /Hub/ } @devices) },
-      checked_on_boot => 0,
-     },
-
-     {
-      class => "SMB_CONTROLLER",
-      string => N("SMBus controllers"),
-      icon => "hw-smbus.png",
-      configurator => "",
-      detector => sub { f(grep { $_->{media_type} =~ /SERIAL_SMBUS/ } @devices) },
-      checked_on_boot => 0,
-     },
-
-     {
-      class => "BRIDGE",
-      string => N("Bridges and system controllers"),
-      icon => "memory.png",
-      configurator => "",
-      detector => sub { f(grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM|SYSTEM_OTHER|MEMORY_OTHER|SYSTEM_PIC/
-                                 || $_->{description} =~ /Parallel Port Adapter/;
-			 } @devices) },
-      checked_on_boot => 0,
-     },
 
      {
       class => "KEYBOARD",
