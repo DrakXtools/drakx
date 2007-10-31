@@ -95,6 +95,15 @@ our @tree =
      },
 
      {
+      class => "USB_STORAGE",
+      string => N("USB Mass Storage Devices"),
+      icon => "usb.png",
+      configurator => "",
+      detector => sub { f(grep { member($_->{driver}, qw(usb_storage ub)) } @devices) },
+      checked_on_boot => 0,
+     },
+
+     {
       class => "CDROM",
       string => N("CDROM"),
       icon => "cd.png",
@@ -380,15 +389,6 @@ our @tree =
       detector => sub { f(detect_devices::probe_category('disk/ide')),
                           f(grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ } @devices) },
       checked_on_boot => 1,
-     },
-
-     {
-      class => "USB_STORAGE",
-      string => N("USB Mass Storage Devices"),
-      icon => "usb.png",
-      configurator => "",
-      detector => sub { f(grep { member($_->{driver}, qw(usb_storage ub)) } @devices) },
-      checked_on_boot => 0,
      },
 
      {
