@@ -389,7 +389,7 @@ sub createOrChangeType {
 	diskdrake::interactive::Create($in, $hd, $part, $all_hds);
     } else {
 	return if $fs_type eq $part->{fs_type};
-	$in->ask_warn('', isBusy($part) ? N("Use ``Unmount'' first") : N("Use ``%s'' instead", N("Type")));
+	$in->ask_warn('', isBusy($part) ? N("Use ``Unmount'' first") : N("Use ``%s'' instead (in expert mode)", N("Type")));
     }
 }
 
