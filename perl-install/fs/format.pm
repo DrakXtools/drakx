@@ -85,7 +85,7 @@ sub part_raw {
 
     my $fs_type = $part->{fs_type};
 
-    if ($fs_type eq 'ext2' || $fs_type eq 'ext3') {
+    if (member($fs_type, qw(ext2 ext3))) {
 	push @options, "-m", "0" if $part->{mntpoint} =~ m|^/home|;
     } elsif (isDos($part)) {
 	$fs_type = 'dos';
