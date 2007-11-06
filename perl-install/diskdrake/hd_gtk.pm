@@ -314,7 +314,7 @@ sub create_buttons4partitions {
 		last;
 	    }
 	});
-	my @colorized_fs_types = qw(ext3 xfs swap vfat ntfs ntfs-3g);
+	my @colorized_fs_types = qw(ext3 ext4dev xfs swap vfat ntfs ntfs-3g);
 	$w->set_name("PART_" . (isEmpty($entry) ? 'empty' : 
 				$entry->{fs_type} && member($entry->{fs_type}, @colorized_fs_types) ? $entry->{fs_type} :
 				'other'));
@@ -353,7 +353,7 @@ sub hd2kind {
 sub filesystems_button_box() {
     my @types = (N_("Ext3"), N_("XFS"), N_("Swap"), arch() =~ /sparc/ ? N_("SunOS") : arch() eq "ppc" ? N_("HFS") : N_("Windows"),
 		 N_("Other"), N_("Empty"));
-    my %name2fs_type = (Ext3 => 'ext3', 'XFS' => 'xfs', Swap => 'swap', Other => 'other', "Windows" => 'vfat', HFS => 'hfs');
+    my %name2fs_type = (Ext3 => 'ext3', Ext4 => 'ext4dev', 'XFS' => 'xfs', Swap => 'swap', Other => 'other', "Windows" => 'vfat', HFS => 'hfs');
 
     gtkpack(Gtk2::HBox->new(0,0), 
 	    N("Filesystem types:"),

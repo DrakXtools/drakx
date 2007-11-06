@@ -35,7 +35,7 @@ sub mount {
     $fs or log::l("not mounting $dev partition"), return;
 
     {
-	my @fs_modules = qw(ext3 hfs jfs nfs ntfs romfs reiserfs ufs xfs vfat);
+	my @fs_modules = qw(ext3 ext4dev hfs jfs nfs ntfs romfs reiserfs ufs xfs vfat);
 	my @types = (qw(ext2 proc sysfs usbfs usbdevfs iso9660 devfs devpts), @fs_modules);
 
 	push @types, 'smb', 'smbfs', 'davfs2' if !$::isInstall;
@@ -170,10 +170,10 @@ sub part {
 	    }
 	    mount($dev, $mntpoint, $fs_type, $b_rdonly, $options, $o_wait_message);
 
-	    if ($options =~ /usrquota|grpquota/ && $part->{fs_type} eq 'ext3') {
+	    if ($options =~ /usrquota|grpquota/ && member($part->{fs_type}, qw(ext3 ext4dev))) {
 		if (! find { -e "$mntpoint/$_" } qw(aquota.user aquota.group quota.user quota.group)) {
 		    #- quotacheck will create aquota.user and/or aquota.group,
-		    #- needed for quotas on ext3.
+		    #- needed for quotas on ext[34].
 		    run_program::run('quotacheck', $mntpoint);
 		}		
 	    }

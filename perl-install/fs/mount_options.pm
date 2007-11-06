@@ -32,9 +32,10 @@ sub unpack {
 		  nfs => [ qw(rsize=8192 wsize=8192) ],
 		  smbfs => [ qw(username= password=) ],
 		  davfs2 => [ qw(username= password= uid= gid=) ],
+		  ext4dev => [ qw(extents) ],
 		  reiserfs => [ 'notail' ],
 		 );
-    push @{$per_fs{$_}}, 'usrquota', 'grpquota' foreach 'ext2', 'ext3', 'xfs';
+    push @{$per_fs{$_}}, 'usrquota', 'grpquota' foreach 'ext2', 'ext3', 'ext4dev', 'xfs';
 
     while (my ($fs, $l) = each %per_fs) {
 	$part->{fs_type} eq $fs || $part->{fs_type} eq 'auto' && member($fs, @auto_fs) or next;
@@ -228,6 +229,9 @@ sub set_default {
 			       'umask=0' => $opts{security} < 3, 'umask=0022' => $opts{security} < 4,
 			       'iocharset=' => $opts{iocharset}, 'codepage=' => $opts{codepage},
 			      });
+    }
+    if ($part->{fs_type} eq 'ext4dev') {
+	put_in_hash($options, { extents => 1 });
     }
     if ($part->{fs_type} eq 'ntfs') {
 	put_in_hash($options, { ro => 1, 'nls=' => $opts{iocharset},

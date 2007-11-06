@@ -13,6 +13,7 @@ use log;
 my %cmds = (
     ext2     => [ 'e2fsprogs', 'mkfs.ext2', '-F' ],
     ext3     => [ 'e2fsprogs', 'mkfs.ext3', '-F' ],
+    ext4dev     => [ 'e2fsprogs', 'mkfs.ext3', '-F', '-I', '256' ], # FIXME: enable more options once we've better mkfs support
     reiserfs => [ 'reiserfsprogs', 'mkfs.reiserfs', '-ff' ],
     reiser4  => [ 'reiser4progs', 'mkfs.reiser4', '-f', '-y' ],
     xfs      => [ 'xfsprogs', 'mkfs.xfs', '-f', '-q' ],
@@ -27,6 +28,7 @@ my %cmds = (
 my %LABELs = ( #- option, length, handled_by_mount
     ext2     => [ '-L', 16, 1 ],
     ext3     => [ '-L', 16, 1 ],
+    ext4dev     => [ '-L', 16, 1 ],
     reiserfs => [ '-l', 16, 1 ],
     xfs      => [ '-L', 12, 1 ],
     jfs      => [ '-L', 16, 1 ],
@@ -85,7 +87,7 @@ sub part_raw {
 
     my $fs_type = $part->{fs_type};
 
-    if (member($fs_type, qw(ext2 ext3))) {
+    if (member($fs_type, qw(ext2 ext3 ext4dev))) {
 	push @options, "-m", "0" if $part->{mntpoint} =~ m|^/home|;
     } elsif (isDos($part)) {
 	$fs_type = 'dos';
@@ -104,7 +106,7 @@ sub part_raw {
 		$part->{device_LABEL} = $short;
 	    }
 	    delete $part->{prefer_device_LABEL}
-	      if !$handled_by_mount || $part->{mntpoint} eq '/' && !member($fs_type, 'ext2', 'ext3');
+	      if !$handled_by_mount || $part->{mntpoint} eq '/' && !member($fs_type, qw(ext2 ext3 ext4dev));
 
 	    push @options, $option, $part->{device_LABEL};
 	} else {
@@ -119,12 +121,12 @@ sub part_raw {
     my @args = ($cmd, @first_options, @options, devices::make($dev));
 
     if ($cmd eq 'mkfs.ext3' && $wait_message) {
-	mkfs_ext3($wait_message, @args) or die N("%s formatting of %s failed", $fs_type, $dev);
+	    #DEBUG: mkfs_ext3($wait_message, @args) or die N("%s formatting of %s failed", $fs_type, $dev);
     } else {
 	run_program::raw({ timeout => 'never' }, @args) or die N("%s formatting of %s failed", $fs_type, $dev);
     }
 
-    if ($fs_type eq 'ext3') {
+    if (member($fs_type, qw(ext3 ext4dev))) {
 	disable_forced_fsck($dev);
     }
 
@@ -169,7 +171,7 @@ sub formatMount_part {
     }
 
     #- setting user_xattr on /home (or "/" if no /home)
-    if (!$part->{isMounted} && $part->{fs_type} eq 'ext3' 
+    if (!$part->{isMounted} && member($part->{fs_type}, qw(ext3 ext4dev))
 	  && ($part->{mntpoint} eq '/home' ||
 		!fs::get::has_mntpoint('/home', $all_hds) && $part->{mntpoint} eq '/')) {
 	run_program::run('tune2fs', '-o', 'user_xattr', devices::make($part->{real_device} || $part->{device}));
