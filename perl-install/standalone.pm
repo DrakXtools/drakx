@@ -213,7 +213,8 @@ sub bug_handler {
     	exit(1);
     }
     $progname =~ s|.*/||;
-    exec('drakbug',  if_($error, '--error', $error), '--incident', $progname,);
+    system('drakbug',  if_($error, '--error', $error), '--incident', $progname);
+    c::exit(1);
 }
 
 $SIG{SEGV} = sub { bug_handler(@_, 1) };
