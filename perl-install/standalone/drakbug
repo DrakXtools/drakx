@@ -44,7 +44,8 @@ foreach (@ARGV) {
     /^--incident$/ and do { $incident = 1; $prog = splice(@ARGV, $i, 1) };
 }
 
-if ($error =~ /SEGV/ && -x '/usr/bin/gdb') {
+my $segfaulted = $error =~ /SEGV/;
+if ($segfaulted && -x '/usr/bin/gdb') {
     local $ENV{TMP} ||= '/tmp';
     my $file = chomp_(`mktemp $ENV{TMP}/drakbug.XXXXXXXX`);
     my $_guard = before_leaving { rm_rf $file };
@@ -170,7 +171,7 @@ gtkadd($window->{window},
                                                          'component=Core%20Packages',
                                                        'classification=Mandriva%20Linux',
                                                        if_($prog,
-                                                           "short_desc=$prog%20crashed",
+                                                           "short_desc=$prog%20" . ($segfaulted ? 'segfaulted' : 'crashed'),
                                                            'comment=' . uri_escape(qq(The "$prog" program crashed. Drakbug-$rel catched it.
 
 Please describe what you were doing when it crashed.
