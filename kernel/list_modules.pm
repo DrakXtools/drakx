@@ -167,7 +167,7 @@ our %l = (
       if_(arch() =~ /^ppc/, qw(hfs)),
       qw(reiserfs jfs xfs),
     ],
-    various => [ qw(smbfs romfs ext3 ufs ntfs unionfs) ],
+    various => [ qw(smbfs romfs ext3 ext4dev ufs ntfs unionfs) ],
 
   },
 
