@@ -29,10 +29,11 @@ use mygtk2 qw(gtknew);
 use ugtk2 qw(:all);
 use Config;
 use URI::Escape;
+use run_program;
 
 my $prog;
 my $incident = 0;
-my ($table, $comb_app, $com_app, $button_pkg, $package, $distrocode, $error);
+my ($table, $comb_app, $com_app, $button_pkg, $package, $distrocode, $error, $gdb_trace);
 
 my $i;
 foreach (@ARGV) {
@@ -43,9 +44,27 @@ foreach (@ARGV) {
     /^--incident$/ and do { $incident = 1; $prog = splice(@ARGV, $i, 1) };
 }
 
+if ($error =~ /SEGV/ && -x '/usr/bin/gdb') {
+    local $ENV{TMP} ||= '/tmp';
+    my $file = chomp_(`mktemp $ENV{TMP}/drakbug.XXXXXXXX`);
+    my $_guard = before_leaving { rm_rf $file };
+    if (-e $file) {
+        output($file, qq(bt
+quit));
+        local $ENV{LANGUAGE} = 'C';
+        my $temp = run_program::get_stdout('gdb', '-q', 'perl', $$, '-x', $file);
+        $gdb_trace = join "\n", grep { !/^done\.$/ && !/Reading symbols from/
+                                         && !/Loaded symbols/ && !/The program is run/ } split(/\n/, $temp);
+    }
+}
 if (!check_for_xserver) {
     print("Cannot be run in console mode.\n");
-    print N("The \"%s\" program has crashed with the following error:", $prog) . "\n$error\n" if $error;
+    print join("\n", 
+               N("The \"%s\" program has crashed with the following error:", $prog),
+               $error,
+               $gdb_trace,
+               '')
+      if $error;
 }
 
 mygtk2::init();
@@ -110,10 +129,21 @@ gtkadd($window->{window},
                            text => [
                                if_($prog && $error,
                                          [
-                                             N("The \"%s\" program has crashed with the following error:", $prog),
+                                             ($gdb_trace ?
+                                                N("The \"%s\" program has segfaulted with the following error:", $prog)
+                                               : N("The \"%s\" program has crashed with the following error:", $prog)),
                                          ],
                                          [
                                              "\n\n  " . join("\n  ", split("\n", $error)) . "\n\n",
+                                             { family => 'monospace' }
+                                         ]
+                                 ),
+                               if_($prog && $gdb_trace,
+                                         [
+                                             N("Its gdb trace is:")
+                                         ],
+                                         [
+                                             "\n\n  " . join("\n  ", split("\n", $gdb_trace)) . "\n\n",
                                              { family => 'monospace' }
                                          ]
                                  ),
@@ -147,12 +177,14 @@ Please describe what you were doing when it crashed.
 
 ) . ($error ? qq(Backtrace was:
 $error) :
-qq(If you can, try to run the "$prog" program from a terminal and copy and paste here any error messages and/or backtrace)),
+qq(If you can, try to run the "$prog" program from a terminal and copy and paste here any error messages and/or backtrace))
+  . if_($gdb_trace, qq(
+GDB backtrace was:
+$gdb_trace)),
                                                                   ),
                                                        ),
                                                    );
 							 print($bugzilla_url . "?" . $options . "\n");
-							 require run_program;
 							 run_program::raw({ detach => 1, setuid => $parent_uid },
                                                      '/usr/bin/www-browser', "$bugzilla_url?$options");
 						 }
