@@ -460,13 +460,18 @@ our @locales = qw(aa_DJ aa_ER aa_ER@saaho aa_ET af_ZA am_ET an_ES ar_AE ar_BH ar
 	
 sub standard_locale {
     my ($lang, $country, $prefer_lang) = @_;
-    member("${lang}_${country}", @locales) and return "${lang}_${country}";
-    $prefer_lang && member($lang, @locales) and return $lang;
-    my $main_locale = locale_to_main_locale($lang);
-    if ($main_locale ne $lang) {
-	standard_locale($main_locale, $country, $prefer_lang);
+
+    if (member("${lang}_${country}", @locales)) {
+	"${lang}_${country}";
+    } elsif ($prefer_lang && member($lang, @locales)) {
+	$lang;
     } else {
-	'';
+	my $main_locale = locale_to_main_locale($lang);
+	if ($main_locale ne $lang) {
+	    standard_locale($main_locale, $country, $prefer_lang);
+	} else {
+	    '';
+	}
     }
 }
 
