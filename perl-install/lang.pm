@@ -465,8 +465,9 @@ sub standard_locale {
     my $main_locale = locale_to_main_locale($lang);
     if ($main_locale ne $lang) {
 	standard_locale($main_locale, $country, $prefer_lang);
+    } else {
+	'';
     }
-    '';
 }
 
 sub fix_variant {
