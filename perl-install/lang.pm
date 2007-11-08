@@ -476,21 +476,21 @@ sub standard_locale {
 }
 
 sub fix_variant {
-    my ($locale) = @_;
+    my ($lang) = @_;
     #- uz@Cyrl_UZ -> uz_UZ@Cyrl
-    $locale =~ s/(.*)(\@\w+)(_.*)/$1$3$2/;
-    $locale;
+    $lang =~ s/(.*)(\@\w+)(_.*)/$1$3$2/;
+    $lang;
 }
 
 sub analyse_locale_name {
-    my ($locale) = @_;
-    $locale =~ /^(.*?) (?:_(.*?))? (?:\.(.*?))? (?:\@(.*?))? $/x &&
+    my ($lang) = @_;
+    $lang =~ /^(.*?) (?:_(.*?))? (?:\.(.*?))? (?:\@(.*?))? $/x &&
       { main => $1, country => $2, charset => $3, variant => $4 };
 }
 
 sub locale_to_main_locale {
-    my ($locale) = @_;
-    lc(analyse_locale_name($locale)->{main});
+    my ($lang) = @_;
+    lc(analyse_locale_name($lang)->{main});
 }
 
 sub getlocale_for_lang {
@@ -513,9 +513,9 @@ sub getLANGUAGE {
 sub country_to_locales {
     my ($country) = @_;
 
-    my $locale = c2locale($country) or return;
+    my $lang = c2locale($country) or return;
 
-    uniq($locale, grep { 
+    uniq($lang, grep { 
        my $h = analyse_locale_name($_) or internal_error();
        $h->{country} eq $country;
     } @locales);    
@@ -1011,9 +1011,11 @@ sub system_locales_to_ourlocale {
     $locale->{lang} .= '@' . $h->{variant} if $h->{variant};
     $locale->{country} = analyse_locale_name($locale_country)->{country};
     $locale->{utf8} = $h->{charset} && $h->{charset} eq 'UTF-8';
+
     #- safe fallbacks
     $locale->{lang} ||= 'en_US';
     $locale->{country} ||= 'US';
+
     $locale;
 }
 
