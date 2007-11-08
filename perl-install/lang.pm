@@ -461,25 +461,35 @@ our @locales = qw(aa_DJ aa_ER aa_ER@saaho aa_ET af_ZA am_ET an_ES ar_AE ar_BH ar
 sub standard_locale {
     my ($lang, $country, $prefer_lang) = @_;
 
-    if (member("${lang}_${country}", @locales)) {
-	"${lang}_${country}";
+    my $lang_ = force_lang_country($lang, $country);
+    if (member($lang_, @locales)) {
+	$lang_;
     } elsif ($prefer_lang && member($lang, @locales)) {
 	$lang;
     } else {
-	my $main_locale = locale_to_main_locale($lang);
-	if ($main_locale ne $lang) {
-	    standard_locale($main_locale, $country, $prefer_lang);
-	} else {
-	    '';
-	}
+	'';
     }
 }
 
-sub fix_variant {
-    my ($lang) = @_;
-    #- uz@Cyrl_UZ -> uz_UZ@Cyrl
-    $lang =~ s/(.*)(\@\w+)(_.*)/$1$3$2/;
-    $lang;
+sub force_lang_country {
+    my ($lang, $country) = @_;
+    my $h = analyse_locale_name($lang);
+    $h->{country} = $country;
+    analysed_to_lang($h);
+}
+
+sub force_lang_charset {
+    my ($lang, $charset) = @_;
+    my $h = analyse_locale_name($lang);
+    $h->{charset} = $charset;
+    analysed_to_lang($h);
+}
+
+sub analysed_to_lang {
+    my ($h) = @_;
+    $h->{main} . '_' . $h->{country} . 
+      ($h->{charset} ? '.' . $h->{charset} : '') .
+      ($h->{variant} ? '@' . $h->{variant} : '');
 }
 
 sub analyse_locale_name {
@@ -495,12 +505,12 @@ sub locale_to_main_locale {
 
 sub getlocale_for_lang {
     my ($lang, $country, $o_utf8) = @_;
-    fix_variant((standard_locale($lang, $country, 'prefer_lang') || l2locale($lang)) . ($o_utf8 ? '.UTF-8' : ''));
+    force_lang_charset(standard_locale($lang, $country, 'prefer_lang') || l2locale($lang), $o_utf8 && 'UTF-8');
 }
 
 sub getlocale_for_country {
     my ($lang, $country, $o_utf8) = @_;
-    fix_variant((standard_locale($lang, $country, '') || c2locale($country)) . ($o_utf8 ? '.UTF-8' : ''));
+    force_lang_charset(standard_locale($lang, $country, '') || c2locale($country), $o_utf8 && 'UTF-8');
 }
 
 sub getLANGUAGE {
