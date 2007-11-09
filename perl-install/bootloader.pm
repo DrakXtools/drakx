@@ -86,7 +86,7 @@ sub kernel_str2label {
     my ($kernel, $o_use_long_name) = @_;
     my $base = $kernel->{basename} eq 'vmlinuz' ? 'linux' : $kernel->{basename};
     $o_use_long_name || $kernel->{use_long_name} ?
-      sanitize_ver($base, $kernel) : $base;
+      _sanitize_ver($kernel) : $base;
 }
 
 sub get {
@@ -851,10 +851,18 @@ sub short_ext {
 
     $short_ext || $kernel_str->{ext};
 }
-sub sanitize_ver {
-    my ($name, $kernel_str) = @_;
 
-    $name = '' if $name eq 'linux';
+# deprecated, only for compatibility (nov 2007)
+sub sanitize_ver {    
+    my ($_name, $kernel_str) = @_;
+    _sanitize_ver($kernel_str);
+}
+
+sub _sanitize_ver {
+    my ($kernel_str) = @_;
+
+    my $name = $kernel_str->{basename};
+    $name = '' if $name eq 'vmlinuz';
 
     my $v = $kernel_str->{version_no_ext};
     if ($v =~ s/-\d+\.mm\././) {
