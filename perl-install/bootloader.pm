@@ -84,9 +84,12 @@ sub kernel_str2initrd_short {
 
 sub kernel_str2label {
     my ($kernel, $o_use_long_name) = @_;
-    my $base = $kernel->{basename} eq 'vmlinuz' ? 'linux' : $kernel->{basename};
-    $o_use_long_name || $kernel->{use_long_name} ?
-      _sanitize_ver($kernel) : $base;
+    if ($o_use_long_name || $kernel->{use_long_name}) {
+	_sanitize_ver($kernel);
+    } else {
+	$kernel->{basename} eq 'vmlinuz' ? ($kernel->{ext} eq 'xen' ? $kernel->{ext} : 'linux') : 
+	  $kernel->{basename};
+    }
 }
 
 sub get {
