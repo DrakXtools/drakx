@@ -270,7 +270,7 @@ sub read_grub_menu_lst {
 
     #- sanitize
     foreach my $e (@{$b{entries}}) {
-	if ($e->{kernel} =~ /xen/ && @{$e->{modules}} == 2 && $e->{modules}[1] =~ /initrd/) {
+	if ($e->{kernel} =~ /xen/ && @{$e->{modules} || []} == 2 && $e->{modules}[1] =~ /initrd/) {
 	    (my $xen, $e->{xen_append}) = split(' ', $e->{kernel}, 2);
 	    ($e->{kernel}, my $initrd) = @{delete $e->{modules}};
 	    $e->{xen} = grub2file($xen, $grub2dev, $fstab);
