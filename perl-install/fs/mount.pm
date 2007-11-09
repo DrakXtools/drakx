@@ -173,7 +173,7 @@ sub part {
 	    if ($options =~ /usrquota|grpquota/ && member($part->{fs_type}, qw(ext3 ext4dev))) {
 		if (! find { -e "$mntpoint/$_" } qw(aquota.user aquota.group quota.user quota.group)) {
 		    #- quotacheck will create aquota.user and/or aquota.group,
-		    #- needed for quotas on ext[34].
+		    #- needed for quotas on ext3/ext4.
 		    run_program::run('quotacheck', $mntpoint);
 		}		
 	    }
