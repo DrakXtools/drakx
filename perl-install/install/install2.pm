@@ -36,6 +36,7 @@ $o = $::o = {
 #-    packages   => [ qw() ],
     partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0 }, #-, readonly => 0 },
     authentication => { md5 => 1, shadow => 1 },
+    uuid_by_default => 1,
     locale         => { lang => 'en_US' },
 #-    isUpgrade    => 0,
     toRemove     => [],
