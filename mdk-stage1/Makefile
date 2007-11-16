@@ -83,7 +83,7 @@ STAGE1_STATIC_LIBS = libmodprobe.a
 STAGE1_STATIC_USR_LIBS = libz.a libldetect.a libpci.a
 STAGE1_OWN_LIBS =
 ifeq (DIETLIBC, $(L))
-STAGE1_OWN_LIBS = $(patsubst %,/usr/lib/dietlibc/lib-$(ARCH)/%,$(STAGE1_STATIC_LIBS) $(STAGE1_STATIC_USR_LIBS))
+STAGE1_OWN_LIBS = $(patsubst %,/usr/lib/dietlibc/lib-$(ARCH)/%,$(STAGE1_STATIC_USR_LIBS) $(STAGE1_STATIC_LIBS))
 else
 STAGE1_OWN_LIBS = $(patsubst %,/usr/$(LIB)/%,$(STAGE1_STATIC_USR_LIBS)) $(patsubst %,/$(LIB)/%,$(STAGE1_STATIC_LIBS))
 endif
