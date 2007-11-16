@@ -19,6 +19,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <unistd.h>
 
 #include "config-stage1.h"
 #include "frontend.h"

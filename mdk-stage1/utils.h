@@ -15,6 +15,8 @@
 #ifndef _UTILS_H_
 #define _UTILS_H_
 
+#include <sys/stat.h>
+
 int charstar_to_int(const char * s);
 off_t file_size(const char * path);
 char * cat_file(const char * file, struct stat * s);
