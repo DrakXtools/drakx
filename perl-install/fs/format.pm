@@ -121,7 +121,7 @@ sub part_raw {
     my @args = ($cmd, @first_options, @options, devices::make($dev));
 
     if ($cmd eq 'mkfs.ext3' && $wait_message) {
-	    #DEBUG: mkfs_ext3($wait_message, @args) or die N("%s formatting of %s failed", $fs_type, $dev);
+	mkfs_ext3($wait_message, @args) or die N("%s formatting of %s failed", $fs_type, $dev);
     } else {
 	run_program::raw({ timeout => 'never' }, @args) or die N("%s formatting of %s failed", $fs_type, $dev);
     }
