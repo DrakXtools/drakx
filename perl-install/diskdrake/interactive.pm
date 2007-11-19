@@ -436,7 +436,7 @@ sub part_possible_actions {
         N_("Remove from RAID") => 'isPartOfRAID',
         N_("Remove from LVM")  => 'isPartOfLVM',
         N_("Modify RAID")      => 'canModifyRAID',
-        N_("Use for loopback") => '!$part->{real_mntpoint} && isMountableRW && !isSpecial && hasMntpoint && $::expert',
+        N_("Use for loopback") => '!$part->{real_mntpoint} && isMountableRW && !isSpecial && hasMntpoint && maybeFormatted && $::expert',
     );
     my ($actions_names) = list2kv(@l);
     my $_all_hds = $all_hds; #- help perl_checker know the $all_hds *is* used in the macro below
