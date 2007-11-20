@@ -1298,7 +1298,8 @@ sub format_hd_info {
     $info .= N("Read-only") . "\n" if $hd->{readonly};
     $info .= N("Size: %s\n", formatXiB($hd->{totalsectors}, 512)) if $hd->{totalsectors};
     $info .= N("Geometry: %s cylinders, %s heads, %s sectors\n", $hd->{geom}{cylinders}, $hd->{geom}{heads}, $hd->{geom}{sectors}) if $::expert && $hd->{geom};
-    $info .= N("Info: ") . ($hd->{info} || $hd->{media_type}) . "\n" if $::expert && ($hd->{info} || $hd->{media_type});
+    $info .= N("Name: ") . $hd->{info} . "\n" if $hd->{info};
+    $info .= N("Medium type: ") . $hd->{media_type} . "\n" if $hd->{media_type} && $::expert;
     $info .= N("LVM-disks %s\n", join ", ", map { $_->{device} } @{$hd->{disks}}) if isLVM($hd) && $hd->{disks};
     $info .= N("Partition table type: %s\n", $1) if $::expert && ref($hd) =~ /_([^_]+)$/;
     $info .= N("on channel %d id %d\n", $hd->{channel}, $hd->{id}) if $::expert && exists $hd->{channel};
