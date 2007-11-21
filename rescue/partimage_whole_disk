@@ -13,7 +13,7 @@ use partition_table::empty;
 use Carp::Heavy;
 
 #- help getting the file in make_rescue_img
-BEGIN { partition_table::raw::default_type() }
+BEGIN { partition_table::raw::first_usable_sector() }
 
 my %options = (
     save_home_directory => 1,
