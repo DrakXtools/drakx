@@ -209,7 +209,7 @@ sub set_default {
 	#- file system (e.g, for faster access  on  the
 	#- news spool to speed up news servers).
 	$options->{relatime} = $options->{noatime} = 0;
-	$options->{detect_devices::isLaptop() ? 'noatime': 'relatime'} = 1;
+	$options->{detect_devices::isLaptop() ? 'noatime': 'relatime'} = 1 if !$opts{force_atime};
     }
     if ($part->{fs_type} eq 'nfs') {
 	put_in_hash($options, { 
