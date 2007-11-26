@@ -239,6 +239,7 @@ sub read_grub_menu_lst {
     -e $menu_lst_file or return;
 
     foreach (cat_($menu_lst_file)) {
+	my $verbatim = $_;
         chomp;
 	s/^\s*//; s/\s*$//;
         next if /^#/ || /^$/;
@@ -273,6 +274,7 @@ sub read_grub_menu_lst {
 		$e->{$keyword} = $v eq '' ? 1 : $v;
 	    }
         }
+	$e and $e->{verbatim} .= $verbatim;
     }
 
     #- sanitize
@@ -288,6 +290,7 @@ sub read_grub_menu_lst {
 	    $e->{append} = join(' ', grep { !/^BOOT_IMAGE=/ } split(' ', $e->{append}));
 	    $e->{root} = $1 if $e->{append} =~ s/root=(\S*)\s*//;
 	    $e->{kernel_or_dev} = grub2file($kernel, $grub2dev, $fstab, $e);
+	    $e->{keep_verbatim} = 1 if dirname($e->{kernel_or_dev}) ne '/boot';
 	}
 	my ($vga, $other) = partition { /^vga=/ } split(' ', $e->{append});
 	if (@$vga) {
@@ -433,7 +436,7 @@ sub cleanup_entries {
     #- cleanup bad entries (in case file is corrupted)
     @{$bootloader->{entries}} = 
 	grep { 
-	    my $pb = $_->{type} eq 'image' && dirname($_->{kernel_or_dev}) eq '/boot' && ! -e "$::prefix$_->{kernel_or_dev}";
+	    my $pb = $_->{type} eq 'image' && !$_->{keep_verbatim} && ! -e "$::prefix$_->{kernel_or_dev}";
 	    log::l("dropping bootloader entry $_->{label} since $_->{kernel_or_dev} doesn't exist") if $pb;
 	    !$pb;
 	} @{$bootloader->{entries}};
@@ -1600,7 +1603,9 @@ sub write_grub {
 	foreach my $entry (@{$bootloader->{entries}}) {
 	    my $title = "\ntitle $entry->{label}";
 
-	    if ($entry->{type} eq "image") {
+	    if ($entry->{keep_verbatim}) {
+		push @conf, '', $entry->{verbatim};
+	    } elsif ($entry->{type} eq "image") {
 		push @conf, $title;
 		push @conf, grep { $entry->{$_} } 'lock';
 		push @conf, join(' ', 'kernel', $file2grub->($entry->{xen}), $entry->{xen_append}) if $entry->{xen};

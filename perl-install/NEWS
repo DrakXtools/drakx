@@ -1,6 +1,7 @@
 - bootloader:
   o when reading existing menu.lst, keep verbatim entries for which the device
   has no mount-point
+  o handle "alien" grub entries that will be kept verbatim (#23591)
   o handle "root (hd...)" for menu.lst entries (#23591)
     (nb: when writing, "root ..." will not be used)
 - diskdrake:
