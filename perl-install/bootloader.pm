@@ -1495,8 +1495,8 @@ sub grub2dev {
 sub grub2file {
     my ($grub_file, $grub2dev, $fstab) = @_;
     if (my ($device, $rel_file) = grub2dev_and_file($grub_file, $grub2dev)) {	
-	if (my $part = fs::get::device2part($device, $fstab)) {
-	    my $mntpoint = $part->{mntpoint} || '';
+	my $part = fs::get::device2part($device, $fstab);
+	if (my $mntpoint = $part && $part->{mntpoint})  {
 	    ($mntpoint eq '/' ? '' : $mntpoint) . '/' . $rel_file;
 	} else {
 	    log::l("ERROR: unknown device $device (computed from $grub_file)");
