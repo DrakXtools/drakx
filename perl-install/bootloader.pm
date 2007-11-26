@@ -254,7 +254,7 @@ sub read_grub_menu_lst {
             push @{$b{entries}}, $e = { label => $v };
             $global = 0;
         } elsif ($global) {
-            $b{$keyword} = $v eq '' ? 1 : grub2file($v, $grub2dev, $fstab);
+            $b{$keyword} = $v eq '' ? 1 : grub2file($v, $grub2dev, $fstab, \%b);
         } else {
             if ($keyword eq 'kernel') {
                 $e->{type} = 'image';
@@ -264,7 +264,7 @@ sub read_grub_menu_lst {
                 $e->{kernel_or_dev} = grub2dev($e->{rootnoverify} || $e->{grub_root}, $grub2dev);
                 $e->{append} = "";
             } elsif ($keyword eq 'initrd') {
-                $e->{initrd} = grub2file($v, $grub2dev, $fstab);
+                $e->{initrd} = grub2file($v, $grub2dev, $fstab, $e);
             } elsif ($keyword eq 'map') {
 		$e->{mapdrive}{$2} = $1 if $v =~ m/\((.*)\) \((.*)\)/;
             } elsif ($keyword eq 'module') {
@@ -280,14 +280,14 @@ sub read_grub_menu_lst {
 	if ($e->{kernel} =~ /xen/ && @{$e->{modules} || []} == 2 && $e->{modules}[1] =~ /initrd/) {
 	    (my $xen, $e->{xen_append}) = split(' ', $e->{kernel}, 2);
 	    ($e->{kernel}, my $initrd) = @{delete $e->{modules}};
-	    $e->{xen} = grub2file($xen, $grub2dev, $fstab);
-	    $e->{initrd} = grub2file($initrd, $grub2dev, $fstab);
+	    $e->{xen} = grub2file($xen, $grub2dev, $fstab, $e);
+	    $e->{initrd} = grub2file($initrd, $grub2dev, $fstab, $e);
 	}
 	if (my $v = delete $e->{kernel}) {
 	    (my $kernel, $e->{append}) = split(' ', $v, 2);
 	    $e->{append} = join(' ', grep { !/^BOOT_IMAGE=/ } split(' ', $e->{append}));
 	    $e->{root} = $1 if $e->{append} =~ s/root=(\S*)\s*//;
-	    $e->{kernel_or_dev} = grub2file($kernel, $grub2dev, $fstab);
+	    $e->{kernel_or_dev} = grub2file($kernel, $grub2dev, $fstab, $e);
 	}
 	my ($vga, $other) = partition { /^vga=/ } split(' ', $e->{append});
 	if (@$vga) {
@@ -1497,7 +1497,13 @@ sub grub2dev {
 
 # replace dummy "(hdX,Y)" in "(hdX,Y)/boot/vmlinuz..." by appropriate path if needed
 sub grub2file {
-    my ($grub_file, $grub2dev, $fstab) = @_;
+    my ($grub_file, $grub2dev, $fstab, $o_entry) = @_;
+
+    if ($grub_file =~ m!^/!) {
+	my $root = $o_entry && ($o_entry->{rootnoverify} || $o_entry->{grub_root});
+	$root and $grub_file = "$root$grub_file";
+    }
+
     if (my ($device, $rel_file) = grub2dev_and_file($grub_file, $grub2dev)) {	
 	my $part = fs::get::device2part($device, $fstab);
 	if (my $mntpoint = $part && $part->{mntpoint})  {
