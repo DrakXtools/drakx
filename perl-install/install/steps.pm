@@ -140,6 +140,9 @@ sub selectKeyboard {
     keyboard::setup_install($o->{keyboard});
 
     addToBeDone {
+	#- the bkmap keymaps in installer are deficient, we need to load the real one before keyboard::write which will generate /etc/sysconfig/console/default.kmap
+	run_program::rooted($::prefix, 'loadkeys', keyboard::keyboard2kmap($o->{keyboard}))
+	    or log::l("loadkeys failed");
 	keyboard::write($o->{keyboard});
     } 'installPackages' if !$o->{isUpgrade} || !$o->{keyboard}{unsafe};
 
