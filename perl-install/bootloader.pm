@@ -245,6 +245,11 @@ sub read_grub_menu_lst {
 	my ($keyword, $v) = split('[ \t=]+', $_, 2) or
 	  warn qq(unknown line in /boot/grub/menu.lst: "$_"\n), next;
 
+	if ($keyword eq 'root') {
+	    #- rename to avoid name conflict
+	    $keyword = 'grub_root';
+	}
+
         if ($keyword eq 'title') {
             push @{$b{entries}}, $e = { label => $v };
             $global = 0;
@@ -254,10 +259,9 @@ sub read_grub_menu_lst {
             if ($keyword eq 'kernel') {
                 $e->{type} = 'image';
 		$e->{kernel} = $v;
-            } elsif ($keyword eq 'root' || $keyword eq 'rootnoverify') {
+            } elsif ($keyword eq 'chainloader') {
                 $e->{type} = 'other';
-		$e->{grub_noverify} = 1 if $keyword eq 'rootnoverify';
-                $e->{kernel_or_dev} = grub2dev($v, $grub2dev);
+                $e->{kernel_or_dev} = grub2dev($e->{rootnoverify} || $e->{grub_root}, $grub2dev);
                 $e->{append} = "";
             } elsif ($keyword eq 'initrd') {
                 $e->{initrd} = grub2file($v, $grub2dev, $fstab);
@@ -1612,7 +1616,7 @@ sub write_grub {
 		    next;
 		}
 		push @conf, $title;
-		push @conf, join(' ', $entry->{grub_noverify} ? 'rootnoverify' : 'root', $dev);
+		push @conf, join(' ', $entry->{rootnoverify} ? 'rootnoverify' : 'root', $dev);
 
 		if ($entry->{table}) {
 		    if (my $hd = fs::get::device2part($entry->{table}, \@sorted_hds)) {
