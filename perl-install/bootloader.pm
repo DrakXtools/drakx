@@ -1685,12 +1685,45 @@ sub sync_partition_data_to_disk {
     }
 }
 
+sub _dev_to_MBR_backup {
+    my ($dev) = @_;
+    $dev =~ s!/dev/!!;
+    $dev =~ s!/!_!g;
+    "$::prefix/boot/boot.backup.$dev";
+}
+
+sub save_previous_MBR_bootloader {
+    my ($dev) = @_;
+    my $t;
+    open(my $F, $dev);
+    CORE::read($F, $t, 0x1b8); #- up to disk magic
+    output(_dev_to_MBR_backup($dev), $t);
+}
+
+sub restore_previous_MBR_bootloader {
+    my ($dev) = @_;
+    log::l("restoring previous bootloader on $dev");
+    output($dev, scalar cat_(_dev_to_MBR_backup($dev)));
+}
+
 sub install_grub {
     my ($bootloader, $all_hds) = @_;
 
     write_grub($bootloader, $all_hds);
 
     if (!$::testing) {
+	if ($bootloader->{previous_boot} && $bootloader->{previous_boot} eq $bootloader->{boot}) {
+	    # nothing to do
+	} else {
+	    if ($bootloader->{previous_boot}) {
+		restore_previous_MBR_bootloader(delete $bootloader->{previous_boot});
+	    }
+	    if (fs::get::device2part($bootloader->{boot}, [ fs::get::hds($all_hds) ])) {
+		save_previous_MBR_bootloader($bootloader->{boot});
+		$bootloader->{previous_boot} = $bootloader->{boot};
+	    }
+	}
+
 	my @files = grep { /(stage1|stage2|_stage1_5)$/ } glob("$::prefix/lib/grub/*/*");
 	cp_af(@files, "$::prefix/boot/grub");
 	sync_partition_data_to_disk(fs::get::root([ fs::get::fstab($all_hds) ], 'boot'));

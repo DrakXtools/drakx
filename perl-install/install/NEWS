@@ -1,3 +1,5 @@
+- save bootloader on MBR when calling grub/install.sh, and restore it before
+  calling it again (#35255) (ie implement "lilo -u" for grub)
 - ensure /etc/sysconfig/console/default.kmap is generated with installed
   keymaps, not installer simplified (?) .bkmap (#35376)
 - add /etc/mke2fs.conf symlink so that mke2fs can use it (cf #27377)
