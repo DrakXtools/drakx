@@ -1,3 +1,5 @@
+- use xkb instead of xmodmap 
+  (this fixes XF86_Switch_VT_X not defined in our xmodmaps)
 - save bootloader on MBR when calling grub/install.sh, and restore it before
   calling it again (#35255) (ie implement "lilo -u" for grub)
 - ensure /etc/sysconfig/console/default.kmap is generated with installed

@@ -245,7 +245,7 @@ sub createXconf {
     symlink("/tmp/stage2/etc/X11", "/etc/X11");
 
 if ($Driver) {
-     output($file, sprintf(<<'END', 'Option "XkbDisable"', $mouse_type, $Driver, $Driver eq 'fbdev' ? '"default"' : '"800x600" "640x480"'));
+     output($file, sprintf(<<'END', $mouse_type, $Driver, $Driver eq 'fbdev' ? '"default"' : '"800x600" "640x480"'));
 Section "Files"
    FontPath   "/usr/share/fonts:unscaled"
 EndSection
@@ -253,9 +253,8 @@ EndSection
 Section "InputDevice"
     Identifier "Keyboard"
     Driver "keyboard"
-    %s
     Option "XkbModel" "pc105"
-    Option "XkbLayout" ""
+    Option "XkbLayout" "us"
 EndSection
 
 Section "InputDevice"
