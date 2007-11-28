@@ -191,7 +191,7 @@ sub formatPartitions {
     #- needed by lilo
     if (-d '/dev/mapper' && !$::local_install) {
 	my @vgs = map { $_->{VG_name} } @{$o->{all_hds}{lvms}};
-	cp_af("/dev/$_", "$::prefix/dev") foreach 'mapper', @vgs;
+	-e "/dev/$_" and cp_af("/dev/$_", "$::prefix/dev") foreach 'mapper', @vgs;
     }
 }
 
