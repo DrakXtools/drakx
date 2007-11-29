@@ -644,7 +644,7 @@ my %IM_config =
 		am => sub { qw(scim scim-tables ), if_($is_kde3, 'scim-qtimm') },
 		ja => sub { qw(scim-anthy scim-input-pad scim-tomoe), if_($is_kde3, 'scim-qtimm') },
 		ko => sub { 'scim-hangul', if_($is_kde3, 'scim-qtimm') },
-          vi => sub { 'scim-m17n', if_($is_kde3, 'scim-qtimm') },
+		vi => sub { 'scim-m17n', if_($is_kde3, 'scim-qtimm') },
 		zh => sub { qw(scim-pinyin scim-tables scim-chewing), if_($is_kde3, 'scim-qtimm') },
 	    },
            },
