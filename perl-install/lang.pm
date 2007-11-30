@@ -736,8 +736,8 @@ sub IM2packages {
 	$is_kde3 = member('KDE', @sessions);
 	$is_kde4 = member('KDE4', @sessions);
 	my $per_lang = $IM_config{$locale->{IM}}{packages} || {};
-	my $lang = analyse_locale_name($locale->{lang})->{main};
-	my $packages = $per_lang->{$lang} || $per_lang->{generic};
+	my $main_lang = analyse_locale_name($locale->{lang})->{main};
+	my $packages = $per_lang->{$main_lang} || $per_lang->{generic};
 	my @pkgs = ($packages ? $packages->() : $locale->{IM},
 		    $per_lang->{common} ? $per_lang->{common}->() : ());
 	@pkgs;
