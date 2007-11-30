@@ -733,7 +733,7 @@ sub IM2packages {
     if ($locale->{IM}) {
 	require any;
 	my @sessions = any::sessions();
-	$is_kde3 = member('KDE', @sessions) || 1;
+	$is_kde3 = member('KDE', @sessions);
 	$is_kde4 = member('KDE4', @sessions);
 	my $per_lang = $IM_config{$locale->{IM}}{packages} || {};
 	my $lang = analyse_locale_name($locale->{lang})->{main};
