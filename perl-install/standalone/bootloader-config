@@ -111,8 +111,10 @@ sub remove_kernel() {
 		}
 		if (my $kernel_str = $proposed_labels{$_->{label}}) {
 		    push @new_entries, [ $kernel_str, $_ ];
+		    1;
+		} else {
+		    0;
 		}
-		1;
 	    } else {
 		0;
 	    }
