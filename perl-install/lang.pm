@@ -565,7 +565,6 @@ my %IM_config =
   (
    chinput => {
                GTK_IM_MODULE => 'xim',
-               QT_IM_MODULE => 'xim',
                XIM => 'chinput',
                XMODIFIERS => '@im=Chinput',
 	       XIM_PROGRAM => {
@@ -578,14 +577,12 @@ my %IM_config =
               },
    fcitx => {
              GTK_IM_MODULE => 'xim',
-             QT_IM_MODULE => 'xim',
              XIM => 'fcitx',
              XIM_PROGRAM => 'fcitx',
              XMODIFIERS => '@im=fcitx',
             },
    gcin => {
              GTK_IM_MODULE => 'gcin',
-             QT_IM_MODULE => 'gcin',
              XIM => 'gcin',
              XIM_PROGRAM => 'gcin',
              XMODIFIERS => '@im=gcin',
@@ -600,7 +597,6 @@ my %IM_config =
 
    kinput2 => {   
                GTK_IM_MODULE => 'xim',
-               QT_IM_MODULE => 'xim',
                XIM => 'kinput2',
                XIM_PROGRAM => 'kinput2',
                XMODIFIERS => '@im=kinput2',
@@ -608,7 +604,6 @@ my %IM_config =
               },
    nabi => {
             GTK_IM_MODULE => 'xim',
-            QT_IM_MODULE => 'xim',
             XIM => 'nabi',
             XIM_PROGRAM => 'nabi',
             XMODIFIERS => '@im=nabi',
@@ -616,7 +611,6 @@ my %IM_config =
 
    oxim => {
        GTK_IM_MODULE => 'oxim',
-       QT_IM_MODULE => 'oxim',
        XIM => 'oxim',
        XIM_PROGRAM => 'oxim',
        XMODIFIERS => '@im=oxim', # '@im=SCIM' is broken for now
@@ -624,7 +618,6 @@ my %IM_config =
    },
    'scim' => {
             GTK_IM_MODULE => 'scim',
-            QT_IM_MODULE => 'scim',
             XIM_PROGRAM => 'scim -d',
             XMODIFIERS => '@im=SCIM',
 	    packages => {
@@ -640,7 +633,6 @@ my %IM_config =
 
    'scim-bridge' => {
        GTK_IM_MODULE => 'scim-bridge',
-       QT_IM_MODULE => 'scim-bridge',
        XIM_PROGRAM => 'scim -d',
        XMODIFIERS => '@im=SCIM',
        default_for_lang => 'am ja ko vi zh_CN zh_TW',
@@ -656,7 +648,6 @@ my %IM_config =
    },
    skim => {
             GTK_IM_MODULE => 'scim',
-            QT_IM_MODULE => 'scim',
             XIM_PROGRAM => 'skim -d',
             XMODIFIERS => '@im=SCIM',
             packages => {
@@ -671,7 +662,6 @@ my %IM_config =
         },
    uim => {
            GTK_IM_MODULE => 'uim',
-           QT_IM_MODULE => 'uim',
            XIM => 'uim',
            XIM_PROGRAM => 'uim-xim',
            XMODIFIERS => '@im=uim',
@@ -682,11 +672,9 @@ my %IM_config =
             XIM_PROGRAM => 'xcin',
             XMODIFIERS => '@im=xcin-zh_TW',
             GTK_IM_MODULE => 'xim',
-            QT_IM_MODULE => 'xim',
            },
    'x-unikey' => {
                   GTK_IM_MODULE => 'xim',
-                  QT_IM_MODULE => 'xim',
                   XMODIFIERS => '@im=unikey',
                  },
 );
@@ -1122,7 +1110,7 @@ sub write {
 	foreach (@IM_i18n_fields) {
 	    $h->{$_} = $IM_config{$locale->{IM}}{$_};
 	}
- #       $h->{QT_IM_MODULE} = $h->{GTK_IM_MODULE};
+	$h->{QT_IM_MODULE} ||= $h->{GTK_IM_MODULE};
 
 	if (ref $h->{XIM_PROGRAM}) {
 	    $h->{XIM_PROGRAM} = 
