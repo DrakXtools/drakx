@@ -565,16 +565,6 @@ my @scim_bridges_qt_packages;
 # keep the 'packages' field in sync with share/rpmsrate:
 my %IM_config =
   (
-   ami => {
-           XIM => 'Ami',
-           #- NOTE: there are several possible versions of ami, for the different
-           #- desktops (kde, gnome, etc). So XIM_PROGRAM is not defined; it will
-           #- be the xinitrc script, XIM section, that will choose the right one 
-           #- XIM_PROGRAM => 'ami',
-           XMODIFIERS => '@im=Ami',
-           GTK_IM_MODULE => 'xim',
-           QT_IM_MODULE => 'xim',
-          },
    chinput => {
                GTK_IM_MODULE => 'xim',
                QT_IM_MODULE => 'xim',
