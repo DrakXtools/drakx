@@ -560,8 +560,6 @@ my @IM_i18n_fields = (
 
 my ($is_kde3, $is_kde4, $_is_gtk);
 
-my @scim_bridges_qt_packages;
-
 # keep the 'packages' field in sync with share/rpmsrate:
 my %IM_config =
   (
@@ -647,7 +645,7 @@ my %IM_config =
        XMODIFIERS => '@im=SCIM',
        default_for_lang => 'am ja ko vi zh_CN zh_TW',
        packages => {
-	   common => sub { @scim_bridges_qt_packages },
+	   common => sub { if_($is_kde3, 'scim-bridge-qt3'), if_($is_kde4, 'scim-bridge-qt4') },
            generic => sub { qw(scim-m17n scim-tables) },
            am => sub { qw(scim-tables) },
            ja => sub { qw(scim-anthy scim-input-pad scim-tomoe) },
@@ -735,10 +733,9 @@ sub IM2packages {
     if ($locale->{IM}) {
 	require any;
 	my @sessions = any::sessions();
-	$is_kde3 = member('KDE', @sessions);
+	$is_kde3 = member('KDE', @sessions) || 1;
 	$is_kde4 = member('KDE4', @sessions);
 	$_is_gtk = any { !/KDE/i } @sessions;
-     @scim_bridges_qt_packages = (if_($is_kde3, 'scim-bridge-qt3'), if_($is_kde4, 'scim-bridge-qt4'));
 	my $per_lang = $IM_config{$locale->{IM}}{packages} || {};
 	my $lang = analyse_locale_name($locale->{lang})->{main};
 	my $packages = $per_lang->{$lang} || $per_lang->{generic};
