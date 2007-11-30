@@ -573,6 +573,7 @@ my %IM_config =
 		   'zh_HK' => 'chinput -big5',
 		   'zh_TW' => 'chinput -big5',
 	       },	       
+	       langs => 'zh',
 	       packages => { generic => sub { 'miniChinput' } },
               },
    fcitx => {
@@ -580,12 +581,14 @@ my %IM_config =
              XIM => 'fcitx',
              XIM_PROGRAM => 'fcitx',
              XMODIFIERS => '@im=fcitx',
+	     langs => 'zh',
             },
    gcin => {
              GTK_IM_MODULE => 'gcin',
              XIM => 'gcin',
              XIM_PROGRAM => 'gcin',
              XMODIFIERS => '@im=gcin',
+	     langs => 'zh',
             },
    'im-ja' => {
                GTK_IM_MODULE => 'im-ja',
@@ -593,6 +596,7 @@ my %IM_config =
                XIM => 'im-ja-xim-server',
                XIM_PROGRAM => 'im-ja-xim-server',
                XMODIFIERS => '@im=im-ja-xim-server',
+	       langs => 'ja',
               },
 
    kinput2 => {   
@@ -600,6 +604,7 @@ my %IM_config =
                XIM => 'kinput2',
                XIM_PROGRAM => 'kinput2',
                XMODIFIERS => '@im=kinput2',
+	       langs => 'ja',
 	       packages => { generic => sub { 'kinput2-wnn' } },
               },
    nabi => {
@@ -607,6 +612,7 @@ my %IM_config =
             XIM => 'nabi',
             XIM_PROGRAM => 'nabi',
             XMODIFIERS => '@im=nabi',
+	    langs => 'ko',
            },
 
    oxim => {
@@ -614,6 +620,7 @@ my %IM_config =
        XIM => 'oxim',
        XIM_PROGRAM => 'oxim',
        XMODIFIERS => '@im=oxim', # '@im=SCIM' is broken for now
+       langs => 'zh_TW',
        packages => { generic => sub { 'oxim' } },
    },
    'scim' => {
@@ -665,6 +672,7 @@ my %IM_config =
            XIM => 'uim',
            XIM_PROGRAM => 'uim-xim',
            XMODIFIERS => '@im=uim',
+	   langs => 'ja',
 	   packages => { generic => sub { qw(uim-gtk uim) } },
           },
    xcin => {
@@ -672,16 +680,14 @@ my %IM_config =
             XIM_PROGRAM => 'xcin',
             XMODIFIERS => '@im=xcin-zh_TW',
             GTK_IM_MODULE => 'xim',
+	    langs => 'zh',
            },
    'x-unikey' => {
                   GTK_IM_MODULE => 'xim',
                   XMODIFIERS => '@im=unikey',
+		  langs => 'vi',
                  },
 );
-
-sub get_ims() { keys %IM_config }
-           
-
 
 #-------------------------------------------------------------
 #
@@ -708,6 +714,17 @@ my %IM_locale_specific_config = (
                       },
           );
 
+
+sub get_ims { 
+    my ($lang) = @_;
+    my $main_lang = analyse_locale_name($lang)->{main};
+
+    sort grep {
+	my $langs = $IM_config{$_}{langs};
+	!$langs || intersection([ $lang, $main_lang ], 
+				[ split(' ', $langs) ]);
+    } keys %IM_config;
+}          
 
 sub get_default_im {
     my ($lang) = @_;

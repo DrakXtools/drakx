@@ -1060,7 +1060,7 @@ sub selectCountry {
 		      list => [ @countries ], advanced => scalar(@best), changed => sub { $other = 1 } },
 		    { val => \$locale->{IM}, type => 'combo', label => N("Input method:"), 
 		      sort => 0, separator => '|',
-		      list => [ '', sort(lang::get_ims()) ], 
+		      list => [ '', lang::get_ims($locale->{lang}) ], 
 		      format => sub { $_[0] ? uc($_[0] =~ /(.*)\+(.*)/ ? "$1|$1+$2" : $_[0]) : N("None") },
 		      advanced => !$locale->{IM},
 		    },
