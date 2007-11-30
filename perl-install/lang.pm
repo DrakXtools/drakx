@@ -660,12 +660,12 @@ my %IM_config =
             XIM_PROGRAM => 'skim -d',
             XMODIFIERS => '@im=SCIM',
             packages => {
-                generic => sub { qw(scim-tables-skim scim-m17n), if_($is_kde3, 'scim-qtimm') },
-                am => sub { 'scim-tables-skim', if_($is_kde3, 'scim-qtimm') },
+                generic => sub { qw(skim-scim-tables scim-m17n), if_($is_kde3, 'scim-qtimm') },
+                am => sub { qw(skim-scim-tables), if_($is_kde3, 'scim-qtimm') },
                 ja => sub { qw(skim-scim-anthy scim-input-pad scim-tomoe), if_($is_kde3, 'scim-qtimm') },
                 ko => sub { 'scim-hangul-skim', if_($is_kde3, 'scim-qtimm') },
                 vi => sub { qw(skim scim-m17n), if_($is_kde3, 'scim-qtimm') },
-                zh => sub { qw(skim-scim-pinyin scim-tables-skim scim-chewing), if_($is_kde3, 'scim-qtimm') },
+                zh => sub { qw(skim-scim-pinyin skim-scim-tables scim-chewing), if_($is_kde3, 'scim-qtimm') },
             },
         },
    uim => {
