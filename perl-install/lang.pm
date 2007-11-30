@@ -558,7 +558,7 @@ my @IM_i18n_fields = (
 #-     XIM server; or a Qt plugin if exists)
 );
 
-my ($is_kde3, $is_kde4, $_is_gtk);
+my ($is_kde3, $is_kde4);
 
 # keep the 'packages' field in sync with share/rpmsrate:
 my %IM_config =
@@ -735,7 +735,6 @@ sub IM2packages {
 	my @sessions = any::sessions();
 	$is_kde3 = member('KDE', @sessions) || 1;
 	$is_kde4 = member('KDE4', @sessions);
-	$_is_gtk = any { !/KDE/i } @sessions;
 	my $per_lang = $IM_config{$locale->{IM}}{packages} || {};
 	my $lang = analyse_locale_name($locale->{lang})->{main};
 	my $packages = $per_lang->{$lang} || $per_lang->{generic};
