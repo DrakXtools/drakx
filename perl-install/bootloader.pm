@@ -690,7 +690,7 @@ sub duplicate_kernel_entry {
     add_entry($bootloader, $entry);
 }
 
-my $uniq_dict_appends = join('|', qw(devfs acpi pci resume PROFILE XFree));
+my $uniq_dict_appends = join('|', qw(acpi pci resume PROFILE XFree));
 
 sub unpack_append {
     my ($s) = @_;
