@@ -46,6 +46,9 @@ sub read {
 sub compare {
     my ($hd) = @_;
 
+    eval { $hd->isa('partition_table::lvm') } and return;
+
+
     my @l1 = partition_table::get_normal_parts($hd);
     my @l2 = grep { $_->{rootDevice} eq $hd->{device} } &read([$hd]);
 
