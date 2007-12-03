@@ -3,7 +3,7 @@ Version 10.5.6 - 30 November 2007, by Pascal "Pixel" Rigaux
 - restrict the proposed input-methods for each language
 - /dev/<vg> may not exist if LVs have not been created, it must not be an error (#31478)
 - use xkb instead of xmodmap 
-  (this fixes XF86_Switch_VT_X not defined in our xmodmaps)
+  (this fixes XF86_Switch_VT_X not defined in our xmodmaps, #35912)
 - save bootloader on MBR when calling grub/install.sh, and restore it before
   calling it again (#35255) (ie implement "lilo -u" for grub)
 - ensure /etc/sysconfig/console/default.kmap is generated with installed
