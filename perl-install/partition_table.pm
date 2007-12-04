@@ -9,8 +9,6 @@ use partition_table::raw;
 use detect_devices;
 use log;
 
-our @fields2save = qw(primary extended totalsectors isDirty will_tell_kernel);
-
 
 sub hd2minimal_part {
     my ($hd) = @_;
@@ -437,7 +435,6 @@ sub write {
 	}
     }
     $hd->{isDirty} = 0;
-    $hd->{hasBeenDirty} = 1; #- used in undo (to know if undo should believe isDirty or not)
 
     if (my $tell_kernel = delete $hd->{will_tell_kernel}) {
 	if (fs::type::is_dmraid($hd)) {
@@ -602,41 +599,6 @@ sub next_start {
     my ($hd, $part) = @_;
     my $next = &next($hd, $part);
     $next ? $next->{start} : $hd->last_usable_sector;
-}
-
-sub load {
-    my ($hd, $file, $b_force) = @_;
-
-    my $F = ref $file ? $file : common::open_file($file) || die N("Error reading file %s", $file);
-
-    my $h;
-    {
-	local $/ = "\0";
-	eval <$F>;
-    }
-    $@ and die N("Restoring from file %s failed: %s", $file, $@);
-
-    ref($h) eq 'ARRAY' or die N("Bad backup file");
-
-    my %h; @h{@fields2save} = @$h;
-
-    $h{totalsectors} == $hd->{totalsectors} or $b_force or cdie "bad totalsectors";
-
-    #- unsure we do not modify totalsectors
-    local $hd->{totalsectors};
-
-    @$hd{@fields2save} = @$h;
-
-    delete @$_{qw(isMounted isFormatted notFormatted toFormat toFormatUnsure)} foreach get_normal_parts($hd);
-    will_tell_kernel($hd, 'force_reboot'); #- just like undo, do not force write_partitions so that user can see the new partition table but can still discard it
-}
-
-sub save {
-    my ($hd, $file) = @_;
-    my @h = @$hd{@fields2save};
-    require Data::Dumper;
-    eval { output($file, Data::Dumper->Dump([\@h], ['$h']), "\0") }
-      or die N("Error writing to file %s", $file);
 }
 
 1;

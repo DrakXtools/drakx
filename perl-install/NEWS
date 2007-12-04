@@ -10,6 +10,8 @@
   o handle "root (hd...)" for menu.lst entries (#23591)
     (nb: when writing, "root ..." will not be used)
 - diskdrake:
+  o drop "Undo", "Restore partition table", "Save partition table"
+    (preparing to switch to libparted)
   o fix garbaged error messages when umounting fs
   o disallow "Use for loopback" when the partition used for loopback is
     not formatted (#35535)

@@ -108,8 +108,6 @@ sub try {
 sub try_ {
     my ($name, $f, @args) = @_;
 
-    diskdrake::interactive::undo_prepare($all_hds) if $name ne 'Undo';
-
     my $v = eval { $f->($in, @args, $all_hds) };
     if (my $err = $@) {
 	$in->ask_warn(N("Error"), formatError($err));

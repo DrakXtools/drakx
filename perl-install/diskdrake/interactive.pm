@@ -128,7 +128,6 @@ struct hd {
   bool getting_rid_of_readonly_allowed # is it forbidden to write because the partition table is badly handled, or is it because we MUST not change the partition table
   bool isDirty          # does it need to be written to the disk 
   list will_tell_kernel # list of actions to tell to the kernel so that it knows the new partition table
-  bool hasBeenDirty     # for undo
   bool rebootNeeded     # happens when a kernel reread failed
   list partitionsRenumbered # happens when you
                             # - remove an extended partition which is not the last one
@@ -160,7 +159,7 @@ struct raw_hd inherits hd {
   string mntpoint   # '/', '/usr' ...
   string options    # 'defaults', 'noauto'
 
-  # invalid: isDirty, will_tell_kernel, hasBeenDirty, rebootNeeded, primary, extended
+  # invalid: isDirty, will_tell_kernel, rebootNeeded, primary, extended
 }
 
 struct all_hds {
@@ -255,13 +254,7 @@ sub main {
 ################################################################################
 sub general_possible_actions {
     my ($_in, $_all_hds) = @_;
-    N_("Undo"), ($::expert ? N_("Toggle to normal mode") : N_("Toggle to expert mode"));
-}
-
-
-sub Undo {
-    my ($_in, $all_hds) = @_;
-    undo($all_hds);
+    $::expert ? N_("Toggle to normal mode") : N_("Toggle to expert mode");
 }
 
 sub Done {
@@ -306,7 +299,7 @@ sub hd_possible_actions {
     ( 
      if_(!$hd->{readonly} || $hd->{getting_rid_of_readonly_allowed}, N_("Clear all")), 
      if_(!$hd->{readonly} && $::isInstall, N_("Auto allocate")),
-     N_("More"),
+     if_($::isInstall, N_("More")),
     );
 }
 sub hd_possible_actions_interactive {
@@ -356,56 +349,9 @@ sub More {
     my $r;
     $in->ask_from(N("More"), '',
 	    [
-	     { val => N("Save partition table"),    clicked_may_quit => sub { SaveInFile($in, $hd);   1 } },
-	     { val => N("Restore partition table"), clicked_may_quit => sub { ReadFromFile($in, $hd); 1 } },
-	         if_($::isInstall, 
-	     { val => N("Reload partition table"), clicked_may_quit => sub { $r = 'force_reload'; 1 } }),
+	     { val => N("Reload partition table"), clicked_may_quit => sub { $r = 'force_reload'; 1 } },
 	    ],
     ) && $r;
-}
-
-sub ReadFromFile {
-    my ($in, $hd) = @_;
-
-    my ($h, $file, $fh);
-    if ($::isStandalone) {
-	$file = $in->ask_filename({ title => N("Select file") }) or return;
-    } else {
-	undef $h; #- help perl_checker
-	my $name = $hd->{device}; $name =~ s!/!_!g;
-	($h, $fh) = install::any::media_browser($in, '', "part_$name") or return;
-    }
-
-    eval {
-    catch_cdie { partition_table::load($hd, $file || $fh) }
-      sub {
-	  $@ =~ /bad totalsectors/ or return;
-	  $in->ask_yesorno(N("Warning"),
-N("The backup partition table has not the same size
-Still continue?"), 0);
-      };
-    };
-    if (my $err = $@) {
-    	$in->ask_warn(N("Error"), formatError($err));
-    }
-}
-
-sub SaveInFile {
-    my ($in, $hd) = @_;
-
-    my ($h, $file) = ('', '');
-    if ($::isStandalone) {
-	$file = $in->ask_filename({ save => 1, title => N("Select file") }) or return;
-    } else {
-	undef $h; #- help perl_checker
-	my $name = $hd->{device}; $name =~ s!/!_!g;
-	($h, $file) = install::any::media_browser($in, 'save', "part_$name") or return;
-    }
-
-    eval { partition_table::save($hd, $file) };
-    if (my $err = $@) {
-    	$in->ask_warn(N("Error"), formatError($err));
-    }
 }
 
 sub Hd_info {
@@ -1380,27 +1326,4 @@ sub update_bootloader_for_renumbered_partitions {
 
     require bootloader;
     bootloader::update_for_renumbered_partitions($in, \@renumbering, $all_hds);
-}
-
-sub undo_prepare {
-    my ($all_hds) = @_;
-    require Data::Dumper;
-    $Data::Dumper::Purity = 1;
-    foreach (@{$all_hds->{hds}}) {
-	my @h = @$_{@partition_table::fields2save};
-	push @{$_->{undo}}, Data::Dumper->Dump([\@h], ['$h']);
-    }
-}
-sub undo {
-    my ($all_hds) = @_;
-    foreach (@{$all_hds->{hds}}) {
-	my $code = pop @{$_->{undo}} or next;
-	my $h; eval $code;
-	@$_{@partition_table::fields2save} = @$h;
-
-	if ($_->{hasBeenDirty}) {
-	    partition_table::will_tell_kernel($_, 'force_reboot'); #- next action needing write_partitions will force it. We can not do it now since more undo may occur, and we must not needReboot now
-	}
-    }
-    
 }
