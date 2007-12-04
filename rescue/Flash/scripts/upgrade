@@ -177,6 +177,9 @@ function merge_config_files() {
     #- reapply lang configuration, mostly to rewrite kdeglobals
     chroot $tmpdir/union perl -I/usr/lib/libDrakX -Mlang -e "lang::write(lang::read())" &>/dev/null
 
+    #- remove KDE sessions file so that previous compiz usage does not break session
+    rm -f $tmpdir/union/home/*/.kde/share/config/ksmserverrc &>/dev/null
+
     return 0
 }
 
