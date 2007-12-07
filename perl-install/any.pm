@@ -967,7 +967,7 @@ when your installation is complete and you restart your system.")),
 	{ val => \$lang, separator => '|', 
 	  if_($using_images, image2f => sub { $name2l{$_[0]} =~ /^[a-z]/ && "langs/lang-$name2l{$_[0]}" }),
 	  format => sub { $_[0] =~ /(.*\|)(.*)/ ? $1 . lang::l2name($2) : lang::l2name($_[0]) },
-	  list => \@langs, sort => 1, changed => sub { 
+	  list => \@langs, changed => sub { 
 	      #- very special cases for langs which do not like UTF-8
 	      $non_utf8 = $lang =~ /\bzh/ if !$utf8_forced;
 	  }, focus_out => sub { $langs->{$listval2val->($lang)} = 1 } },
