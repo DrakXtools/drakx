@@ -111,9 +111,9 @@ our %l = (
     ],
     sata => [
       # note that ata_piix manage RAID devices on ICH6R
-      qw(ahci aic94xx ata_adma ata_piix pata_pdc2027x pdc_adma sata_inic162x sata_mv sata_nv sata_promise sata_qstor sata_sil sata_sil24 sata_sis sata_svw sata_sx4 sata_uli sata_via sata_vsc sx8),
+      qw(ahci aic94xx ata_adma ata_piix pata_pdc2027x pdc_adma sata_fsl sata_inic162x sata_mv sata_nv sata_promise sata_qstor sata_sil sata_sil24 sata_sis sata_svw sata_sx4 sata_uli sata_via sata_vsc sx8),
       # new drivers: old ide drivers ported over libata:
-      qw(pata_ali pata_amd pata_artop pata_atiixp pata_cmd64x pata_cmd640 pata_cs5520 pata_cs5530 pata_cs5535 pata_cypress),
+      qw(pata_ali pata_amd pata_artop pata_atiixp pata_cmd64x pata_cmd640 pata_cs5520 pata_cs5530 pata_cs5535 pata_cs5536 pata_cypress),
       qw(pata_efar pata_hpt366 pata_hpt37x pata_hpt3x2n pata_hpt3x3 pata_isapnp pata_it821x pata_it8172 pata_it8213 pata_jmicron),
       qw(pata_legacy pata_marvell pata_mpiix pata_netcell pata_ns87410 pata_oldpiix pata_opti pata_optidma),
       qw(pata_pdc2027x pata_pdc202xx_old pata_platform pata_qdi pata_radisys pata_rz1000),
