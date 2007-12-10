@@ -50,7 +50,7 @@ our %l = (
     ],
     pcmcia => [ 
       qw(3c574_cs 3c589_cs axnet_cs fmvj18x_cs),
-      qw(ibmtr_cs nmclan_cs pcnet_cs smc91c92_cs),
+      qw(ibmtr_cs libertas_cs nmclan_cs pcnet_cs smc91c92_cs),
       qw(xirc2ps_cs xircom_cb xircom_tulip_cb),
     ],
    #- generic NIC detection for USB seems broken (class, subclass, 
