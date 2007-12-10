@@ -15,7 +15,7 @@ our %l = (
   {
     atm => [ qw(ambassador eni firestream fore_200e he horizon idt77252 iphase lanai nicstar zatm) ],
     main => [
-      if_(arch() =~ /ppc/, qw(bmac ibm_emac mace oaknet sungem)),
+      if_(arch() =~ /ppc/, qw(bmac fec_mpc52xx ibm_emac mace oaknet sungem)),
       if_(arch() =~ /^sparc/, qw(sunbmac sunhme sunqe)),
       if_(arch() !~ /alpha|sparc/,
         qw(3c501 3c503 3c505 3c507 3c509 3c515 3c990 3c990fx),
@@ -37,11 +37,11 @@ our %l = (
         qw(typhoon via-rhine winbond-840 forcedeth),
         qw(sungem sunhme), # drivers for ultrasparc, but compiled in ix86 kernels...
       ),
-      qw(3c59x 8139too 8139cp sundance), #rtl8139
+      qw(3c59x 8139too 8139cp niu sundance), #rtl8139
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
-      qw(atl1 bnx2 cxgb cxgb3 dl2k e1000 e1000e ixgb ixgbe myri_sbus netxen_nic ns83820 qla3xxx r8169 s2io sis190 sk98lin skge sky2 spidernet tg3 via-velocity yellowfin),
+      qw(atl1 bnx2 cxgb cxgb3 dl2k e1000 e1000e ixgb ixgbe myri_sbus netxen_nic ns83820 qla3xxx r8169 s2io sis190 sk98lin skge sky2 spidernet tehuti tg3 via-velocity yellowfin),
       qw(bcm5820 bcm5700), #- encrypted
     ],
 
