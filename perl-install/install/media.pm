@@ -937,6 +937,7 @@ sub install_urpmi {
 						 $medium->{key_ids}{$id} = undef;
 					     }
 					 });
+	unlink $medium->{pubkey};
     }
 
     my (@cfg, @netrc);
