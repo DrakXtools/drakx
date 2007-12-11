@@ -368,8 +368,8 @@ sub setPackages {
 	    1 while $o->selectSupplMedia;
 	}
 
-	#- open rpm db according to right mode needed (ie rebuilding database if upgrading)
-	$o->{packages}{rpmdb} ||= install::pkgs::rpmDbOpen($o->{isUpgrade}, $o->{rpm_dbapi});
+	#- open rpm db according to right mode needed
+	$o->{packages}{rpmdb} ||= install::pkgs::rpmDbOpen('rebuild_if_needed', $o->{rpm_dbapi});
 
 	{
 	    my $_wait = $o->wait_message('', N("Looking at packages already installed..."));
