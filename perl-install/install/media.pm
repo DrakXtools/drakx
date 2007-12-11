@@ -721,11 +721,9 @@ sub get_medium {
     if (!$m->{pubkey}) {
 	my $rel_pubkey = $m->{rel_hdlist};
 	$rel_pubkey =~ s!/hdlist(.*)\.cz!/pubkey$1! or internal_error("bad {rel_hdlist} $m->{rel_hdlist}");
-	if (my $pubkey = getFile_($phys_m, $rel_pubkey)) {
-	    $m->{pubkey} = [ $packages->parse_armored_file($pubkey) ];
-	}
+	$m->{pubkey} = urpmidir() . "/pubkey_$m->{fakemedium}";
+	getAndSaveFile_($phys_m, $rel_pubkey, $m->{pubkey});
     }
-    $m->{pubkey} ||= [];
 
     #- for standalone medium not using media.cfg
     $phys_m->{name} ||= $m->{name};
@@ -931,10 +929,9 @@ sub install_urpmi {
 
     #- import pubkey in rpmdb.
     my $db = install::pkgs::open_rpm_db_rw();
-    $packages->parse_pubkeys(db => $db);
     foreach my $medium (@media) {
-	$packages->import_needed_pubkeys($medium->{pubkey}, db => $db, callback => sub {
-					     my (undef, undef, $_k, $id, $imported) = @_;
+	URPM::import_needed_pubkeys_from_file($db, $medium->{pubkey}, sub {
+					     my ($id, $imported) = @_;
 					     if ($id) {
 						 log::l(($imported ? "imported" : "found") . " key=$id for medium $medium->{name}");
 						 $medium->{key_ids}{$id} = undef;
