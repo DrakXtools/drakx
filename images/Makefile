@@ -1,6 +1,6 @@
 include ../Makefile.config
 
-VERSION=1.24
+VERSION=1.25
 PRODUCT=drakx-installer-images
 KERNELS=$(shell rpm -qf /lib/modules/2.*)
 
