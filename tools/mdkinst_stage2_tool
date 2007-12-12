@@ -36,7 +36,7 @@ if [ $ACTION = "--compress" ]; then
     [ -d "$LIVE_DIR" ] || error
     echo "Creating $COMPRESSED_IMAGE from $LIVE_DIR"
     rm -f $STAGE2_DIR/.room
-    mksquashfs $LIVE_DIR $COMPRESSED_IMAGE -all-root -noappend >/dev/null
+    mksquashfs $LIVE_DIR $COMPRESSED_IMAGE -all-root -noappend >/dev/null || { echo "mksquashfs failed"; exit 1; }
     chmod 755 $COMPRESSED_IMAGE
     echo foo > $STAGE2_DIR/.room
     if [ -s $STAGE2_DIR/.room ]; then
