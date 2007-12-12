@@ -19,6 +19,7 @@ my $RPMSRATE_ROOTED = '/tmp/rpmsrate';
 @ARGV >= 2 or die "usage: drakx-in-chroot <root of distrib> <dir to install to> [options]\n";
 
 (my $repository, my $dir, @ARGV) = @ARGV;
+my ($repository_without_arch, $repository_arch) = basename($repository) eq arch() ? (dirname($repository), '/' . arch()) : ($repository, '');
 my $STAGE2_LOCATION = $SLASH_LOCATION . $STAGE2_LOCATION_ROOTED;
 
 my $sudo;
@@ -54,10 +55,10 @@ if ($remote_repository) {
 }
 
 sys("$sudo mount -o bind $dir $SLASH_LOCATION$prefix_ROOTED");
-sys("$sudo mount -o bind $repository $SLASH_LOCATION$MEDIA_LOCATION_ROOTED") if !$remote_repository;
+sys("$sudo mount -o bind $repository_without_arch $SLASH_LOCATION$MEDIA_LOCATION_ROOTED") if !$remote_repository;
 sys("$sudo mount -t proc none $SLASH_LOCATION/proc");
 sys("$sudo mount -t sysfs none $SLASH_LOCATION/sys");
-symlinkf('media', "$SLASH_LOCATION$IMAGE_LOCATION_ROOTED");
+symlinkf('media' . $repository_arch, "$SLASH_LOCATION$IMAGE_LOCATION_ROOTED");
 create_initial_symlinks();
 create_initial_devices();
 
