@@ -840,6 +840,7 @@ sub install {
 		$retry = 1;
 	    }
 	}
+	log::l("progression: $nb remaining packages to install");
 	cleanHeaders();
     } while $nb > 0 && !$install::pkgs::cancel_install;
 
