@@ -48,23 +48,18 @@ if [ $ACTION = "--compress" ]; then
 	exit 1
     fi
 else
+    which unsquashfs >/dev/null 2>/dev/null || { echo "missing command unsquashfs (from squashfs-tools)"; exit 1; }
+
     [ -f "$COMPRESSED_IMAGE" ] || error
     echo "Creating $LIVE_DIR from $COMPRESSED_IMAGE"
-
-    TMPDIR=${TMPDIR=/tmp}
-    MNTPOINT=$TMPDIR/stage2_img
 
     if [ $EUID != "0" ]; then
 	SUDO="sudo"
 	PATH="/sbin:/usr/sbin:$PATH"
     fi
 
-    $SUDO umount $MNTPOINT 2>/dev/null
-    mkdir -p $MNTPOINT
-    $SUDO mount -o loop -t squashfs $COMPRESSED_IMAGE $MNTPOINT || { echo "can not loopback mount $COMPRESSED_IMAGE"; exit 1; }
-    mkdir $LIVE_DIR || { echo "not enough space"; exit 1; }
-    cp -a $MNTPOINT/* $LIVE_DIR/ || { rm -rf $LIVE_DIR; exit 1; }
-    $SUDO umount $MNTPOINT
+    unsquashfs -dest $LIVE_DIR $COMPRESSED_IMAGE || { rm -rf $LIVE_DIR; exit 1; }
+
     [ -n "$CLEAN" ] && rm -f $COMPRESSED_IMAGE
 fi
 
