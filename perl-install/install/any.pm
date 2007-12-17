@@ -538,7 +538,7 @@ sub rpmsrate_always_flags {
     $rpmsrate_flags_chosen->{PCMCIA} = 1 if $o->{match_all_hardware} || detect_devices::hasPCMCIA();
     $rpmsrate_flags_chosen->{HIGH_SECURITY} = 1 if $o->{security} > 3;
     $rpmsrate_flags_chosen->{BIGMEM} = 1 if detect_devices::BIGMEM();
-    $rpmsrate_flags_chosen->{SMP} = 1 if detect_devices::hasSMP();
+    $rpmsrate_flags_chosen->{SMP} = 1 if $o->{match_all_hardware} || detect_devices::hasSMP();
     $rpmsrate_flags_chosen->{CDCOM} = 1 if any { $_->{name} =~ /commercial/i } install::media::allMediums($o->{packages});
     $rpmsrate_flags_chosen->{'3D'} = 1 if
       $o->{match_all_hardware} ||
