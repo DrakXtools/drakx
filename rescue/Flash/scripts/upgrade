@@ -180,6 +180,9 @@ function merge_config_files() {
     #- remove KDE sessions file so that previous compiz usage does not break session
     rm -f $tmpdir/union/home/*/.kde/share/config/ksmserverrc &>/dev/null
 
+    #- remove KDE autostart files that should have been migrated by startkde...
+    rm -f $tmpdir/union/home/*/.kde/Autostart/{alignment-icons,openkmenu}.desktop &>/dev/null
+
     return 0
 }
 
