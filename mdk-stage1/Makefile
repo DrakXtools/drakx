@@ -203,8 +203,8 @@ probe-modules: probe-modules.o probing-FULL.o modules-FULL.o params-FULL.o utils
 tar:
 	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
 	mkdir -p $(PRODUCT)-$(VERSION)
-	svn export -q . $(PRODUCT)-$(VERSION)/mdk-stage1
-	svn export -q ../kernel $(PRODUCT)-$(VERSION)/kernel
+	svn export -q -rBASE . $(PRODUCT)-$(VERSION)/mdk-stage1
+	svn export -q -rBASE ../kernel $(PRODUCT)-$(VERSION)/kernel
 	cp ../Makefile.config $(PRODUCT)-$(VERSION)/
 	tar cfj $(PRODUCT)-$(VERSION).tar.bz2 $(PRODUCT)-$(VERSION)
 	rm -rf $(PRODUCT)-$(VERSION)
