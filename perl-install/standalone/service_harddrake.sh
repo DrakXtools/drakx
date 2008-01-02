@@ -8,6 +8,7 @@
 #
 ### BEGIN INIT INFO
 # Provides: harddrake
+# X-Mandriva-Interactive
 # Should-Start: pcmcia dkms
 # Short-Description: The harddrake hardware probe
 # Description: This runs the hardware probe, and optionally configures
