@@ -79,7 +79,7 @@ sub device_name_to_entry {
 }
 
 sub set_options {
-    my ($part, $o_sync) = @_;
+    my ($part) = @_;
 
     $part->{is_removable} = 1; #- force removable flag
     fs::mount_options::set_default($part, 
@@ -87,7 +87,6 @@ sub set_options {
 			    lang::fs_options(lang::read()));
 
     my ($options, $unknown) = fs::mount_options::unpack($part);
-    $options->{sync} = $o_sync if defined($o_sync);
     $options->{kudzu} = 1 if !$no_flag;
     fs::mount_options::pack($part, $options, $unknown);
 }
@@ -143,8 +142,6 @@ sub configure_part {
 	    print STDERR "Already in fstab\n" if $::testing;
 	    return;
 	}
-	my %dynamic = getVarsFromSh('/etc/sysconfig/dynamic');
-	set_options($part, to_bool($dynamic{SYNC} ne 'no'));
 	set_mount_point($part, $fstab, $is_hd) or return;
 
 	my ($line) = fs::prepare_write_fstab([$part]);

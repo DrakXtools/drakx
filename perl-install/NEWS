@@ -4,6 +4,8 @@
   o mark the service as interactive, so that package requests are
     displayed with parallell init
   o check that media are not USB keys before auto-configuring them (#34568)
+- drakupdate_fstab:
+  o never set "sync" option, use default fs options from drakx (#35204)
 - drakbug:
   o report crash messages in the bug report only when --incident is used
     (and not when tools explicitely run drakbug with --report)
