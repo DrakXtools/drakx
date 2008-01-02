@@ -167,7 +167,7 @@ foreach my $hw_class (@harddrake::data::tree) {
         $modules_conf->write;
         next;
     } elsif (member($Ident, qw(ATA_STORAGE CARD_READER RAID_STORAGE SATA_STORAGE SCSI_CONTROLLER))) {
-        # set scsi_hostadapterr in modprobe.conf:
+        # set scsi_hostadapter in modprobe.conf:
         modules::load_category($modules_conf, 'disk/' . {
 			ATA_STORAGE => 'ide',
 			SATA_STORAGE => 'sata',
