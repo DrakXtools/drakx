@@ -11,6 +11,7 @@ Group: System/Configuration/Other
 Source: rpmsrate-raw
 Source2: compssUsers.pl
 Source3: prefer.vendor.list
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch: noarch
 
 %description
