@@ -31,12 +31,11 @@ $::isStandalone = 1; #- not using standalone.pm which generates too many logs fo
 
 log::l("drakupdate_fstab called with @ARGV\n");
 
-my ($no_flag, $debug, $removed);
+my ($debug, $removed);
 
 my %args = (
             '--auto' => \$::auto,
             '--debug' => \$debug,
-            '--no-flag' => \$no_flag,
             '--test' => \$::testing,
            );
 
@@ -51,7 +50,7 @@ each_index {
 my ($raw_action, $device_name) = @ARGV;
 my ($action) = $raw_action =~ /^--(add|del)/;
 
-@ARGV == 2 && $action or die "usage: drakupdate_fstab [--test] [--auto] [--no-flag] [--add | --del] <device>\n";
+@ARGV == 2 && $action or die "usage: drakupdate_fstab [--test] [--auto] [--add | --del] <device>\n";
 
 main($action, $device_name);
 
@@ -85,10 +84,6 @@ sub set_options {
     fs::mount_options::set_default($part, 
 			    security => security::level::get(), 
 			    lang::fs_options(lang::read()));
-
-    my ($options, $unknown) = fs::mount_options::unpack($part);
-    $options->{kudzu} = 1 if !$no_flag;
-    fs::mount_options::pack($part, $options, $unknown);
 }
 
 sub set_mount_point {
@@ -157,12 +152,6 @@ sub configure_part {
 	if (!@$existing_fstab_entries) {
 	    print STDERR "Not found in fstab\n" if $::testing;
 	    return;
-	}
-	foreach (@$existing_fstab_entries) {
-	    if (!$no_flag && $_->{options} !~ /\bkudzu\b/) {
-		print STDERR "Not a 'kudzu'-flagged entry\n" if $::testing;
-		return;
-	    }
 	}
 
 	my ($s) = fs::prepare_write_fstab($fstab_, '', 'keep_smb_credentials');
