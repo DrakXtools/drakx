@@ -172,7 +172,7 @@ gtkadd($window->{window},
                                                           'cf_rpmpkg=' . join('-', $product, $version) : ()),
                                                          'component=Core%20Packages',
                                                        'classification=Mandriva%20Linux',
-                                                       if_($prog,
+                                                       if_($incident,
                                                            "short_desc=$prog%20" . ($segfaulted ? 'segfaulted' : 'crashed'),
                                                            'comment=' . uri_escape(qq(The "$prog" program crashed. Drakbug-$rel caught it.
 
