@@ -37,6 +37,7 @@ sub f {
 
 sub is_removable { member($_[0], qw(FLOPPY ZIP DVDROM CDROM BURNER)) }
 sub is_auto_configurable_class { is_removable($_[0]) || member($_[0], qw(HARDDISK)) }
+sub is_auto_configurable_media { !detect_devices::isKeyUsb($_[0]) }
 
 sub set_removable_configurator {
     my ($class, $device) = @_;
@@ -45,12 +46,12 @@ sub set_removable_configurator {
 
 sub set_media_auto_configurator {
     my ($class, $device) = @_;
-    return "/usr/sbin/drakupdate_fstab --no-flag --auto --add $device->{device}" if is_auto_configurable_class($class);
+    return "/usr/sbin/drakupdate_fstab --no-flag --auto --add $device->{device}" if is_auto_configurable_media($device);
 }
 
 sub set_media_remover {
     my ($class, $device) = @_;
-    return "/usr/sbin/drakupdate_fstab --no-flag --del $device->{device}" if is_auto_configurable_class($class);
+    return "/usr/sbin/drakupdate_fstab --no-flag --del $device->{device}" if is_auto_configurable_media($device);
 }
 
 my $modules_conf = modules::any_conf->read;
