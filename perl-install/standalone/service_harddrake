@@ -142,10 +142,10 @@ foreach my $hw_class (@harddrake::data::tree) {
     my @configurator_pool;
     if (harddrake::data::is_auto_configurable_class($Ident)) {
         foreach my $device (@ID{@added}) {
-            push @configurator_pool, harddrake::data::set_media_auto_configurator($Ident, $device);
+            push @configurator_pool, harddrake::data::set_media_auto_configurator($device);
         }
         foreach my $device (@$oldconfig{@was_removed}) {
-            push @configurator_pool, harddrake::data::set_media_remover($Ident, $device);
+            push @configurator_pool, harddrake::data::set_media_remover($device);
         }
     } else {
         @configurator_pool = $configurator;
