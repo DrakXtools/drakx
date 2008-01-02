@@ -40,7 +40,7 @@ sub is_auto_configurable_media { is_removable($_[0]) || member($_[0], qw(HARDDIS
 
 sub set_removable_configurator {
     my ($class, $device) = @_;
-    return "/usr/sbin/diskdrake --removable=$device->{device}" if is_removable($class);
+    is_removable($class) ? "/usr/sbin/diskdrake --removable=$device->{device}" : undef;
  }
 
 sub set_media_auto_configurator {
