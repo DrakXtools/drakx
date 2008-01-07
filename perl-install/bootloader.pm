@@ -474,7 +474,7 @@ sub same_entries {
     my ($a, $b) = @_;
 
     foreach (uniq(keys %$a, keys %$b)) {
-	if (member($_, 'label', 'append', 'mapdrive', 'readonly', 'makeactive')) {
+	if (member($_, 'label', 'append', 'mapdrive', 'readonly', 'makeactive', 'verbatim')) {
 	    next;
 	} else {
 	    next if $a->{$_} eq $b->{$_};
