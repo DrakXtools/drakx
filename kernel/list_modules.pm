@@ -196,7 +196,7 @@ our %l = (
           qw(snd-maestro3 snd-mia snd-mixart snd-mona snd-mpu401 snd-nm256),
           qw(snd-opl3sa2 snd-opti92x-ad1848 snd-opti92x-cs4231 snd-opti93x snd-oxygen snd-pcsp snd-pcxhr snd-riptide snd-rme32),
           qw(snd-rme96 snd-rme9652 snd-sb16 snd-sb8 snd-sbawe snd-sc6000 snd-sgalaxy snd-sis7019 snd-sonicvibes),
-          qw(snd-sscape snd-trident snd-via82xx snd-vx222 snd-vxp440 snd-vxpocket snd-wavefront),
+          qw(snd-sscape snd-trident snd-via82xx snd-virtuoso snd-vx222 snd-vxp440 snd-vxpocket snd-wavefront),
           qw(snd-ymfpci sonicvibes sscape trident via82cxxx_audio wavefront ymfpci),
       ),
     ],
