@@ -1034,11 +1034,12 @@ sub selectCountry {
     my ($in, $locale) = @_;
 
     my $country = $locale->{country};
-    my @countries = lang::list_countries(exclude_non_installed => !$::isInstall);
+    my $country2locales = lang::countries_to_locales(exclude_non_installed => !$::isInstall);
+    my @countries = keys %$country2locales;
     my @best = grep {
 	find { 
-	    lang::locale_to_main_locale($_) eq lang::locale_to_main_locale($locale->{lang});
-	} lang::country_to_locales($_);
+	    $_->{main} eq lang::locale_to_main_locale($locale->{lang});
+	} @{$country2locales->{$_}};
     } @countries;
     @best == 1 and @best = ();
 

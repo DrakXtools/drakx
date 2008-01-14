@@ -449,9 +449,8 @@ my %countries = (
 sub c2name   { exists $countries{$_[0]} && translate($countries{$_[0]}[0]) }
 sub c2locale { exists $countries{$_[0]} && $countries{$_[0]}[1] }
 sub list_countries {
-    my (%options) = @_;
-    my @l = keys %countries;
-    $options{exclude_non_installed} ? grep { -e "/usr/share/locale/" . c2locale($_) . "/LC_CTYPE" } @l : @l;
+    my (%_options) = @_;
+    keys %countries;
 }
 
 #- this list is built with the following command on the compile cluster:
@@ -520,15 +519,28 @@ sub getLANGUAGE {
 					locale_to_main_locale($lang)));
 }
 
-sub country_to_locales {
-    my ($country) = @_;
+sub countries_to_locales {
+    my (%options) = @_;
 
-    my $lang = c2locale($country) or return;
+    my %country2locales;
+    my $may_add = sub {
+	my ($locale, $country) = @_;
+	if ($options{exclude_non_installed}) {
+	    -e "/usr/share/locale/$locale/LC_CTYPE" or return;
+	}
+	my $h = analyse_locale_name($locale) or internal_error();
+	push @{$country2locales{$country || $h->{country}}}, $h;
+    };
 
-    uniq($lang, grep { 
-       my $h = analyse_locale_name($_) or internal_error();
-       $h->{country} eq $country;
-    } @locales);    
+    # first add all real locales
+    foreach (@locales) {
+	$may_add->($_, undef);
+    }
+    # then add countries XX for which we use locale yy_ZZ and not yy_XX
+    foreach my $country (list_countries()) {
+	$may_add->(c2locale($country), $country);
+    }
+    \%country2locales;
 }
 
 #-------------------------------------------------------------
