@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-hi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-01 09:12+0200\n"
+"POT-Creation-Date: 2008-01-17 14:35+0100\n"
 "PO-Revision-Date: 2004-04-04 21:54+0530\n"
 "Last-Translator: धनञ्जय शर्मा (Dhananjaya Sharma) <dysxhi@yahoo.co.in>\n"
 "Language-Team: हिन्दी (Hindi) <dysxhi@yahoo.co.in>\n"
@@ -141,7 +141,7 @@ msgid "Finding packages to upgrade..."
 msgstr "उन्नयन के लिये पैकेजों को खोजा जा रहा है..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:610
+#: any.pm:620
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -166,7 +166,7 @@ msgstr ""
 "क्या आप वास्तव में इन सर्वरों को संसाधित करना चाहते है?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:633
+#: any.pm:643
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -179,67 +179,72 @@ msgstr ""
 "\n"
 "क्या वास्तव में इन पैकेजों को हटाना चाहते है?\n"
 
-#: any.pm:1055
+#: any.pm:857
+#, fuzzy, c-format
+msgid "Error reading file %s"
+msgstr "संचिकायें प्रेषित की जा रही..."
+
+#: any.pm:1065
 #, fuzzy, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "निम्नलिखित पैकेजों का संसाधन करना आवश्यक है:\n"
 
-#: any.pm:1057
+#: any.pm:1067
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr ""
 
-#: any.pm:1114
+#: any.pm:1124
 #, c-format
 msgid "HTTP"
 msgstr "एचटीटीपी"
 
-#: any.pm:1114
+#: any.pm:1124
 #, c-format
 msgid "FTP"
 msgstr "एफटीपी"
 
-#: any.pm:1114
+#: any.pm:1124
 #, c-format
 msgid "NFS"
 msgstr "एनएफ़एस"
 
-#: any.pm:1133 steps_interactive.pm:922
+#: any.pm:1143 steps_interactive.pm:923
 #, c-format
 msgid "Network"
 msgstr "नेटवर्क"
 
-#: any.pm:1137
+#: any.pm:1147
 #, fuzzy, c-format
 msgid "Please choose a media"
 msgstr "कृपया चयन करें"
 
-#: any.pm:1153
+#: any.pm:1163
 #, fuzzy, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "फाईल पहले से है पुन बनाएँ"
 
-#: any.pm:1157
+#: any.pm:1167
 #, c-format
 msgid "Permission denied"
 msgstr "अनुमति नहीं है"
 
-#: any.pm:1205
+#: any.pm:1215
 #, c-format
 msgid "Bad NFS name"
 msgstr ""
 
-#: any.pm:1226
+#: any.pm:1236
 #, fuzzy, c-format
 msgid "Bad media %s"
 msgstr "%s माध्यम को जोड़ा गया"
 
-#: any.pm:1269
+#: any.pm:1279
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "विभाजनीकरण के पूर्व स्क्रीन-चित्र-माला को नहीं लिया जा सकता है"
 
-#: any.pm:1277
+#: any.pm:1287
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "%s में संसाधन के उपरान्त स्क्रीन चित्र-माला उपलब्ध होगी"
@@ -254,7 +259,7 @@ msgstr "संसाधन हो रहा है"
 msgid "Configuration"
 msgstr "संरचना"
 
-#: install2.pm:165
+#: install2.pm:166
 #, c-format
 msgid "You must also format %s"
 msgstr "आपको %s को भी एकसार करना चाहिए"
@@ -284,12 +289,12 @@ msgstr "नेटवर्क को लाया जा रहा है"
 msgid "Downloading file %s..."
 msgstr "संचिकायें प्रेषित की जा रही..."
 
-#: media.pm:808
+#: media.pm:806
 #, c-format
 msgid "Copying some packages on disks for future use"
 msgstr ""
 
-#: media.pm:861
+#: media.pm:859
 #, fuzzy, c-format
 msgid "Copying in progress"
 msgstr "खोज जारी है"
@@ -319,7 +324,7 @@ msgstr "बहुत अच्छा"
 msgid "maybe"
 msgstr "हो सकता है"
 
-#: pkgs.pm:245
+#: pkgs.pm:254
 #, c-format
 msgid ""
 "Some packages requested by %s cannot be installed:\n"
@@ -659,7 +664,7 @@ msgstr ""
 "किया जायें ।\n"
 "अपने जोखिम पर जारी रहें । "
 
-#: steps.pm:433
+#: steps.pm:436
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -687,7 +692,12 @@ msgstr "मैनड्रिव लिनक्स संसाधन %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> इकाईयों के मध्य "
 
-#: steps_gtk.pm:189
+#: steps_gtk.pm:82
+#, c-format
+msgid "Xorg server is slow to start. Please wait..."
+msgstr ""
+
+#: steps_gtk.pm:192
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -700,189 +710,189 @@ msgstr ""
 "देख सकते है, ऐसा करने के लिए, \n"
 "सीडीरॉम से बूट होने के समय `F1' को दबायें, और फ़िर `text' को इन्टर करें ।"
 
-#: steps_gtk.pm:256 steps_interactive.pm:435 steps_interactive.pm:564
+#: steps_gtk.pm:259 steps_interactive.pm:435 steps_interactive.pm:564
 #: steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "पैकेज समूह चयन"
 
-#: steps_gtk.pm:277 steps_interactive.pm:581
+#: steps_gtk.pm:280 steps_interactive.pm:581
 #, c-format
 msgid "Individual package selection"
 msgstr "अलग-अलग पैकेजों का चयन"
 
-#: steps_gtk.pm:299 steps_interactive.pm:507
+#: steps_gtk.pm:302 steps_interactive.pm:507
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "कुल आकार: %d / %d एम०बी०"
 
-#: steps_gtk.pm:344
+#: steps_gtk.pm:347
 #, c-format
 msgid "Bad package"
 msgstr "निकृष्ट पैकेज"
 
-#: steps_gtk.pm:346
+#: steps_gtk.pm:349
 #, c-format
 msgid "Version: "
 msgstr "संस्मरण: "
 
-#: steps_gtk.pm:347
+#: steps_gtk.pm:350
 #, c-format
 msgid "Size: "
 msgstr "आकार:"
 
-#: steps_gtk.pm:347
+#: steps_gtk.pm:350
 #, c-format
 msgid "%d KB\n"
 msgstr "%d केबी\n"
 
-#: steps_gtk.pm:348
+#: steps_gtk.pm:351
 #, c-format
 msgid "Importance: "
 msgstr "महत्ता: "
 
-#: steps_gtk.pm:382
+#: steps_gtk.pm:385
 #, c-format
 msgid "You can not select/unselect this package"
 msgstr "आप इस पैकज को चयनित/अचयनित नहीं कर सकते है"
 
-#: steps_gtk.pm:386
+#: steps_gtk.pm:389
 #, c-format
 msgid "due to missing %s"
 msgstr "%s विलुप्त होने के कारण"
 
-#: steps_gtk.pm:387
+#: steps_gtk.pm:390
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "असन्तुष्ट %s के कारण"
 
-#: steps_gtk.pm:388
+#: steps_gtk.pm:391
 #, c-format
 msgid "trying to promote %s"
 msgstr "%s को प्रोत्साहित करने का प्रयास"
 
-#: steps_gtk.pm:389
+#: steps_gtk.pm:392
 #, c-format
 msgid "in order to keep %s"
 msgstr "%s को रखने के लिए"
 
-#: steps_gtk.pm:394
+#: steps_gtk.pm:397
 #, c-format
 msgid ""
 "You can not select this package as there is not enough space left to install "
 "it"
 msgstr "आप इस पैकज का चयन नहीं कर सकते है क्योंकि और अधिक स्थान संसाधन के लिए नहीं बचा है"
 
-#: steps_gtk.pm:397
+#: steps_gtk.pm:400
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "निम्नलिखित पैकजों का संसाधन होने जा रहा है"
 
-#: steps_gtk.pm:398
+#: steps_gtk.pm:401
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "निम्नलिखित पैकेजों को हटाया जाने वाला है"
 
-#: steps_gtk.pm:423
+#: steps_gtk.pm:426
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
 msgstr "यह एक अति आवश्यक पैकेज है, इसे अचयनित नहीं किया जा सकता है"
 
-#: steps_gtk.pm:425
+#: steps_gtk.pm:428
 #, c-format
 msgid "You can not unselect this package. It is already installed"
 msgstr "आप इस पैकेज को अचयनित नहीं कर सकते है । इसे पहिले से ही संसाधित किया जा चुका है"
 
-#: steps_gtk.pm:427
+#: steps_gtk.pm:430
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
 msgstr "इस पैकज को अचयनित नहीं करा जा सकता है । इसे उन्नयन किया जाना चाहिए"
 
-#: steps_gtk.pm:431
+#: steps_gtk.pm:434
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "स्वतः चयनित पैकेजों को दिखायें"
 
-#: steps_gtk.pm:433
+#: steps_gtk.pm:436
 #, c-format
 msgid "Install"
 msgstr "संसाधन"
 
-#: steps_gtk.pm:436
+#: steps_gtk.pm:439
 #, fuzzy, c-format
 msgid "Load/Save selection"
 msgstr "पैकेज चयन"
 
-#: steps_gtk.pm:437
+#: steps_gtk.pm:440
 #, c-format
 msgid "Updating package selection"
 msgstr "चयनित पैकेजों का उन्नयन किया जा रहा है"
 
-#: steps_gtk.pm:442
+#: steps_gtk.pm:445
 #, c-format
 msgid "Minimal install"
 msgstr "निम्नतम संसाधन"
 
-#: steps_gtk.pm:456
+#: steps_gtk.pm:459
 #, c-format
 msgid "Software Management"
 msgstr "सॉफ़्टवेयर प्रबंधक"
 
-#: steps_gtk.pm:456 steps_interactive.pm:393
+#: steps_gtk.pm:459 steps_interactive.pm:393
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "उन पैकेजों का चयन करें जिन्हें आप संसाधित करना चाहते है"
 
-#: steps_gtk.pm:473 steps_interactive.pm:595 steps_list.pm:32
+#: steps_gtk.pm:476 steps_interactive.pm:595 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "संसाधन हो रहा है"
 
-#: steps_gtk.pm:499
+#: steps_gtk.pm:502
 #, c-format
 msgid "No details"
 msgstr "कोई विवरण नहीं"
 
-#: steps_gtk.pm:514
+#: steps_gtk.pm:517
 #, c-format
 msgid "Time remaining "
 msgstr "शेष समय"
 
-#: steps_gtk.pm:515
-#, c-format
-msgid "Estimating"
+#: steps_gtk.pm:518
+#, fuzzy, c-format
+msgid "(estimating...)"
 msgstr "अनुमान लगाया जा रहा है"
 
-#: steps_gtk.pm:542
+#: steps_gtk.pm:545
 #, fuzzy, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d पैकेज"
 msgstr[1] "%d पैकेज"
 
-#: steps_gtk.pm:588 steps_interactive.pm:782 steps_list.pm:43
+#: steps_gtk.pm:591 steps_interactive.pm:783 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "सारांश"
 
-#: steps_gtk.pm:605
+#: steps_gtk.pm:608
 #, c-format
 msgid "Configure"
 msgstr "संरचना"
 
-#: steps_gtk.pm:622 steps_interactive.pm:778 steps_interactive.pm:934
+#: steps_gtk.pm:625 steps_interactive.pm:779 steps_interactive.pm:935
 #, c-format
 msgid "not configured"
 msgstr "संरचित नहीं"
 
-#: steps_gtk.pm:658 steps_interactive.pm:278
+#: steps_gtk.pm:661 steps_interactive.pm:278
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
 "If you want to skip some of them, you can unselect them now."
 msgstr ""
 
-#: steps_gtk.pm:667 steps_interactive.pm:284
+#: steps_gtk.pm:670 steps_interactive.pm:284
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -891,7 +901,7 @@ msgid ""
 "available once the system is fully installed."
 msgstr ""
 
-#: steps_gtk.pm:669 steps_interactive.pm:286
+#: steps_gtk.pm:672 steps_interactive.pm:286
 #, c-format
 msgid "Copy whole CDs"
 msgstr ""
@@ -1162,102 +1172,102 @@ msgstr ""
 "\n"
 "क्या आप इन अपडेटों को संसाधित करना चाहते है ?"
 
-#: steps_interactive.pm:713
+#: steps_interactive.pm:714
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "उपलब्ध पैकेजों की सूची प्राप्त करने के लिए मिरर से सम्पर्क स्थापित किया जा रहा है..."
 
-#: steps_interactive.pm:719
+#: steps_interactive.pm:720
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr "%s मिरर प्रणाली से संबंध स्थापित करने में असमर्थ"
 
 #. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:825
+#: steps_interactive.pm:826
 #, c-format
 msgid "%s on %s"
 msgstr "%s पर %s"
 
-#: steps_interactive.pm:859 steps_interactive.pm:866 steps_interactive.pm:880
-#: steps_interactive.pm:898 steps_interactive.pm:913
+#: steps_interactive.pm:860 steps_interactive.pm:867 steps_interactive.pm:881
+#: steps_interactive.pm:899 steps_interactive.pm:914
 #, c-format
 msgid "Hardware"
 msgstr "हार्डवेयर"
 
-#: steps_interactive.pm:881 steps_interactive.pm:899
+#: steps_interactive.pm:882 steps_interactive.pm:900
 #, c-format
 msgid "Sound card"
 msgstr "सांउड कार्ड"
 
-#: steps_interactive.pm:902
+#: steps_interactive.pm:903
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "क्या आपके पास एक आई०एस०ऐ० सांउड कार्ड है?"
 
-#: steps_interactive.pm:904
+#: steps_interactive.pm:905
 #, fuzzy, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
 "card"
 msgstr "संसाधन के उपरान्त \"sndconfig\" को अपने साउण्ड कार्ड को संरचित करने के लिए चलायें"
 
-#: steps_interactive.pm:906
+#: steps_interactive.pm:907
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr ""
 "कोई साउण्ड कार्ड नहीं खोजा जा सका । संसाधन के उपरान्त \"harddrake\" को उपयोग करके देखें"
 
-#: steps_interactive.pm:914
+#: steps_interactive.pm:915
 #, c-format
 msgid "Graphical interface"
 msgstr "सचित्र इन्टरफ़ेस"
 
-#: steps_interactive.pm:921 steps_interactive.pm:932
+#: steps_interactive.pm:922 steps_interactive.pm:933
 #, c-format
 msgid "Network & Internet"
 msgstr "नेटवर्क और इन्टरनेट"
 
-#: steps_interactive.pm:933
+#: steps_interactive.pm:934
 #, c-format
 msgid "Proxies"
 msgstr "प्रोक्सियां"
 
-#: steps_interactive.pm:934
+#: steps_interactive.pm:935
 #, c-format
 msgid "configured"
 msgstr "संरचित"
 
-#: steps_interactive.pm:944
+#: steps_interactive.pm:945
 #, c-format
 msgid "Security Level"
 msgstr "सुरक्षा स्तर"
 
-#: steps_interactive.pm:963
+#: steps_interactive.pm:964
 #, c-format
 msgid "Firewall"
 msgstr "अग्नि-भीतिका"
 
-#: steps_interactive.pm:967
+#: steps_interactive.pm:968
 #, c-format
 msgid "activated"
 msgstr "सक्रिय है"
 
-#: steps_interactive.pm:967
+#: steps_interactive.pm:968
 #, c-format
 msgid "disabled"
 msgstr "निष्क्रिय"
 
-#: steps_interactive.pm:981
+#: steps_interactive.pm:982
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "आपने एक्स को संरचित नहीं किया है ।  क्या आप वास्तव में ऐसा चाहते है?"
 
-#: steps_interactive.pm:1008
+#: steps_interactive.pm:1009
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "बूटलोडर को तैयार किया जा रहा है..."
 
-#: steps_interactive.pm:1018
+#: steps_interactive.pm:1019
 #, fuzzy, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1270,12 +1280,12 @@ msgstr ""
 "संसाधन जारी रहेगा, परन्तु आपको अपनी मशीन को बूट करने के लिए, \n"
 "बूट-एक्स या किसी अन्य साधन की आवश्यकता होगी"
 
-#: steps_interactive.pm:1024
+#: steps_interactive.pm:1025
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "क्या आप ऐबूट का का उपयोग करना चाहते है?"
 
-#: steps_interactive.pm:1027
+#: steps_interactive.pm:1028
 #, c-format
 msgid ""
 "Error installing aboot, \n"
@@ -1284,24 +1294,24 @@ msgstr ""
 "एक बूट को संसाधित करने में त्रुटि, \n"
 "संसाधन को बलपूर्वक करने का प्रयास करे, चाहे कि प्रथम विभाजन नष्ट हो जायें?"
 
-#: steps_interactive.pm:1039
+#: steps_interactive.pm:1040
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
 "restricted to the administrator."
 msgstr "इस सुरक्षा स्तर में, विण्डो विभाजन में संचिकाओं तक पहुँच सिर्फ़ प्रबंधक को हीप्राप्त है।"
 
-#: steps_interactive.pm:1071
+#: steps_interactive.pm:1072
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "%s में एक खाली फ़्लापी डालें"
 
-#: steps_interactive.pm:1073
+#: steps_interactive.pm:1074
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "स्वतः संसाधन फ़्लापी का निर्माण किया जा रहा है..."
 
-#: steps_interactive.pm:1084
+#: steps_interactive.pm:1085
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1312,22 +1322,22 @@ msgstr ""
 "\n"
 "क्या आप वास्तव में बाहर निकलना चाहते है?"
 
-#: steps_interactive.pm:1094
+#: steps_interactive.pm:1095
 #, c-format
 msgid "Congratulations"
 msgstr "बधाई हो"
 
-#: steps_interactive.pm:1098
+#: steps_interactive.pm:1099
 #, c-format
 msgid "Reboot"
 msgstr "रीबूट"
 
-#: steps_interactive.pm:1102 steps_interactive.pm:1103
+#: steps_interactive.pm:1103 steps_interactive.pm:1104
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "स्वतः संसाधान फ़्लापी का निर्माण किया जा रहा है"
 
-#: steps_interactive.pm:1104
+#: steps_interactive.pm:1105
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"
@@ -1342,17 +1352,17 @@ msgstr ""
 "\n"
 "आप हो सकता है कि संसाधन को रीप्ले करन चाहते हो।\n"
 
-#: steps_interactive.pm:1109
+#: steps_interactive.pm:1110
 #, c-format
 msgid "Replay"
 msgstr "पुनः चलाना"
 
-#: steps_interactive.pm:1109
+#: steps_interactive.pm:1110
 #, c-format
 msgid "Automated"
 msgstr "स्वचालित"
 
-#: steps_interactive.pm:1112
+#: steps_interactive.pm:1113
 #, c-format
 msgid "Save packages selection"
 msgstr "पैकेजों के चयन को सुरक्षित करें"

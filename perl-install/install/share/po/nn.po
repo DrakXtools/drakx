@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-01 09:12+0200\n"
+"POT-Creation-Date: 2008-01-17 14:35+0100\n"
 "PO-Revision-Date: 2007-10-02 18:33+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -68,7 +68,8 @@ msgstr "Adresser må starta med «ftp://» eller «http://»."
 
 #: any.pm:228
 #, c-format
-msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid ""
+"Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr "Kontaktar Mandriva Linux-nettstaden for oversikt over speglar …"
 
 #: any.pm:233
@@ -125,7 +126,8 @@ msgstr "Tillegg"
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
 "correct."
-msgstr "Finn ikkje pakkelistfila på denne spegelen. Sjå til at adressa er rett."
+msgstr ""
+"Finn ikkje pakkelistfila på denne spegelen. Sjå til at adressa er rett."
 
 #: any.pm:375
 #, c-format
@@ -143,7 +145,7 @@ msgid "Finding packages to upgrade..."
 msgstr "Ser etter pakkar å oppgradera …"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:610
+#: any.pm:620
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -169,7 +171,7 @@ msgstr ""
 "Er du sikker på at du vil installera tenarane?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:633
+#: any.pm:643
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -182,67 +184,72 @@ msgstr ""
 "\n"
 "Er du sikker på at du vil fjerna pakkane?\n"
 
-#: any.pm:1055
+#: any.pm:857
+#, fuzzy, c-format
+msgid "Error reading file %s"
+msgstr "Lastar ned «%s» …"
+
+#: any.pm:1065
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Desse diskane fekk nye namn:"
 
-#: any.pm:1057
+#: any.pm:1067
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "«%s» (tidlegare namn: «%s»)"
 
-#: any.pm:1114
+#: any.pm:1124
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1114
+#: any.pm:1124
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1114
+#: any.pm:1124
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1133 steps_interactive.pm:922
+#: any.pm:1143 steps_interactive.pm:923
 #, c-format
 msgid "Network"
 msgstr "Nettverk"
 
-#: any.pm:1137
+#: any.pm:1147
 #, c-format
 msgid "Please choose a media"
 msgstr "Vel medium"
 
-#: any.pm:1153
+#: any.pm:1163
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Fila finst allereie. Vil du skriva over ho?"
 
-#: any.pm:1157
+#: any.pm:1167
 #, c-format
 msgid "Permission denied"
 msgstr "Nekta løyve"
 
-#: any.pm:1205
+#: any.pm:1215
 #, c-format
 msgid "Bad NFS name"
 msgstr "Ugyldig NFS-namn"
 
-#: any.pm:1226
+#: any.pm:1236
 #, c-format
 msgid "Bad media %s"
 msgstr "Ugyldig medium: %s"
 
-#: any.pm:1269
+#: any.pm:1279
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Kan ikkje ta skjermbilete før partisjonering"
 
-#: any.pm:1277
+#: any.pm:1287
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Skjermbilete vert tilgjengelege i «%s» etter installeringa er ferdig"
@@ -257,7 +264,7 @@ msgstr "Installerering"
 msgid "Configuration"
 msgstr "Oppsett"
 
-#: install2.pm:165
+#: install2.pm:166
 #, c-format
 msgid "You must also format %s"
 msgstr "Du må òg formatera «%s»"
@@ -286,12 +293,12 @@ msgstr "Koplar frå nettverket"
 msgid "Downloading file %s..."
 msgstr "Lastar ned «%s» …"
 
-#: media.pm:808
+#: media.pm:806
 #, c-format
 msgid "Copying some packages on disks for future use"
 msgstr "Kopierer nokre pakkar til harddisken for seinare bruk"
 
-#: media.pm:861
+#: media.pm:859
 #, c-format
 msgid "Copying in progress"
 msgstr "Kopierer filer"
@@ -321,7 +328,7 @@ msgstr "kjekt å ha"
 msgid "maybe"
 msgstr "kanskje"
 
-#: pkgs.pm:245
+#: pkgs.pm:254
 #, c-format
 msgid ""
 "Some packages requested by %s cannot be installed:\n"
@@ -595,7 +602,8 @@ msgstr "GNOME-arbeidsstasjon"
 msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
 "tools"
-msgstr "Eit grafisk skrivebordsmiljø med brukarvenlege program og skrivebordsverktøy"
+msgstr ""
+"Eit grafisk skrivebordsmiljø med brukarvenlege program og skrivebordsverktøy"
 
 #: share/meta-task/compssUsers.pl:142
 #, c-format
@@ -659,7 +667,7 @@ msgid ""
 "Continue at your own risk."
 msgstr "Det oppstod ein kritisk feil. Hald fram på eige ansvar."
 
-#: steps.pm:433
+#: steps.pm:436
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -687,7 +695,12 @@ msgstr "Mandriva Linux-installering %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "«Tab»/«Alt + Tab» mellom element"
 
-#: steps_gtk.pm:189
+#: steps_gtk.pm:82
+#, c-format
+msgid "Xorg server is slow to start. Please wait..."
+msgstr ""
+
+#: steps_gtk.pm:192
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -700,73 +713,73 @@ msgstr ""
 "Du kan då installera i tekstmodus i staden for. Trykk «F1» ved oppstart av\n"
 "CD-plata, og skriv «text» om du ønskjer dette."
 
-#: steps_gtk.pm:256 steps_interactive.pm:435 steps_interactive.pm:564
+#: steps_gtk.pm:259 steps_interactive.pm:435 steps_interactive.pm:564
 #: steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "Pakkegruppeval"
 
-#: steps_gtk.pm:277 steps_interactive.pm:581
+#: steps_gtk.pm:280 steps_interactive.pm:581
 #, c-format
 msgid "Individual package selection"
 msgstr "Direkte pakkeval"
 
-#: steps_gtk.pm:299 steps_interactive.pm:507
+#: steps_gtk.pm:302 steps_interactive.pm:507
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Totalstorleik: %d / %d MiB"
 
-#: steps_gtk.pm:344
+#: steps_gtk.pm:347
 #, c-format
 msgid "Bad package"
 msgstr "Ugyldig pakke"
 
-#: steps_gtk.pm:346
+#: steps_gtk.pm:349
 #, c-format
 msgid "Version: "
 msgstr "Versjon: "
 
-#: steps_gtk.pm:347
+#: steps_gtk.pm:350
 #, c-format
 msgid "Size: "
 msgstr "Storleik: "
 
-#: steps_gtk.pm:347
+#: steps_gtk.pm:350
 #, c-format
 msgid "%d KB\n"
 msgstr "%d KiB\n"
 
-#: steps_gtk.pm:348
+#: steps_gtk.pm:351
 #, c-format
 msgid "Importance: "
 msgstr "Prioritet: "
 
-#: steps_gtk.pm:382
+#: steps_gtk.pm:385
 #, c-format
 msgid "You can not select/unselect this package"
 msgstr "Du kan ikkje velja eller fjerna denne pakken"
 
-#: steps_gtk.pm:386
+#: steps_gtk.pm:389
 #, c-format
 msgid "due to missing %s"
 msgstr "på grunn av manglande «%s»"
 
-#: steps_gtk.pm:387
+#: steps_gtk.pm:390
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "då «%s» ikkje er tilfredsstilt"
 
-#: steps_gtk.pm:388
+#: steps_gtk.pm:391
 #, c-format
 msgid "trying to promote %s"
 msgstr "Prøver å prioritera «%s»"
 
-#: steps_gtk.pm:389
+#: steps_gtk.pm:392
 #, c-format
 msgid "in order to keep %s"
 msgstr "for å kunna behalda «%s»"
 
-#: steps_gtk.pm:394
+#: steps_gtk.pm:397
 #, c-format
 msgid ""
 "You can not select this package as there is not enough space left to install "
@@ -775,109 +788,109 @@ msgstr ""
 "Du kan ikkje velja denne pakken, då det ikkje er nok ledig plass til å "
 "installera han."
 
-#: steps_gtk.pm:397
+#: steps_gtk.pm:400
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "Desse pakkane vert installerte"
 
-#: steps_gtk.pm:398
+#: steps_gtk.pm:401
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "Desse pakkane vert fjerna"
 
-#: steps_gtk.pm:423
+#: steps_gtk.pm:426
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
 msgstr "Dette er ein obligatorisk pakke. Du kan ikkje velja han vekk."
 
-#: steps_gtk.pm:425
+#: steps_gtk.pm:428
 #, c-format
 msgid "You can not unselect this package. It is already installed"
 msgstr "Du kan ikkje velja vekk denne pakken, då han allereie er installert."
 
-#: steps_gtk.pm:427
+#: steps_gtk.pm:430
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
 msgstr "Kan ikkje velja vekk pakken. Han må oppgraderast."
 
-#: steps_gtk.pm:431
+#: steps_gtk.pm:434
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "Vis automatiske valde pakkar"
 
-#: steps_gtk.pm:433
+#: steps_gtk.pm:436
 #, c-format
 msgid "Install"
 msgstr "Installer"
 
-#: steps_gtk.pm:436
+#: steps_gtk.pm:439
 #, c-format
 msgid "Load/Save selection"
 msgstr "Opna/lagra utval"
 
-#: steps_gtk.pm:437
+#: steps_gtk.pm:440
 #, c-format
 msgid "Updating package selection"
 msgstr "Oppdaterer pakkeval"
 
-#: steps_gtk.pm:442
+#: steps_gtk.pm:445
 #, c-format
 msgid "Minimal install"
 msgstr "Minimal installering"
 
-#: steps_gtk.pm:456
+#: steps_gtk.pm:459
 #, c-format
 msgid "Software Management"
 msgstr "Programvarehandsaming"
 
-#: steps_gtk.pm:456 steps_interactive.pm:393
+#: steps_gtk.pm:459 steps_interactive.pm:393
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Vel pakkane du ønskjer å installera"
 
-#: steps_gtk.pm:473 steps_interactive.pm:595 steps_list.pm:32
+#: steps_gtk.pm:476 steps_interactive.pm:595 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "Installerer"
 
-#: steps_gtk.pm:499
+#: steps_gtk.pm:502
 #, c-format
 msgid "No details"
 msgstr "Skjul detaljar"
 
-#: steps_gtk.pm:514
+#: steps_gtk.pm:517
 #, c-format
 msgid "Time remaining "
 msgstr "Tid igjen"
 
-#: steps_gtk.pm:515
-#, c-format
-msgid "Estimating"
+#: steps_gtk.pm:518
+#, fuzzy, c-format
+msgid "(estimating...)"
 msgstr "Estimerer"
 
-#: steps_gtk.pm:542
+#: steps_gtk.pm:545
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d pakke"
 msgstr[1] "%d pakkar"
 
-#: steps_gtk.pm:588 steps_interactive.pm:782 steps_list.pm:43
+#: steps_gtk.pm:591 steps_interactive.pm:783 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Samandrag"
 
-#: steps_gtk.pm:605
+#: steps_gtk.pm:608
 #, c-format
 msgid "Configure"
 msgstr "Set opp"
 
-#: steps_gtk.pm:622 steps_interactive.pm:778 steps_interactive.pm:934
+#: steps_gtk.pm:625 steps_interactive.pm:779 steps_interactive.pm:935
 #, c-format
 msgid "not configured"
 msgstr "ikkje sett opp"
 
-#: steps_gtk.pm:658 steps_interactive.pm:278
+#: steps_gtk.pm:661 steps_interactive.pm:278
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -886,7 +899,7 @@ msgstr ""
 "Fann desse installasjonsmedia.\n"
 "Om du ikkje ønskjer å bruka alle, kan du velja vekk dei du ikkje treng no."
 
-#: steps_gtk.pm:667 steps_interactive.pm:284
+#: steps_gtk.pm:670 steps_interactive.pm:284
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -899,7 +912,7 @@ msgstr ""
 "Installasjonen vil då helda fram frå harddisken, og pakkane vil vera lett "
 "tilgjengeleg òg etter at systemet er installert og sett opp."
 
-#: steps_gtk.pm:669 steps_interactive.pm:286
+#: steps_gtk.pm:672 steps_interactive.pm:286
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Kopier CD-ane"
@@ -1055,7 +1068,8 @@ msgstr "Anna installering"
 #: steps_interactive.pm:436
 #, c-format
 msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
-msgstr "Her kan du velja skrivebordsprofil for systemet: KDE, GNOME eller annan"
+msgstr ""
+"Her kan du velja skrivebordsprofil for systemet: KDE, GNOME eller annan"
 
 #: steps_interactive.pm:521
 #, c-format
@@ -1171,103 +1185,104 @@ msgstr ""
 "\n"
 "Ønskjer du å installera oppdateringane?"
 
-#: steps_interactive.pm:713
+#: steps_interactive.pm:714
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Kontaktar spegel for oversikt over pakkar …"
 
-#: steps_interactive.pm:719
+#: steps_interactive.pm:720
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr "Klarte ikkje kontakta spegelen «%s»"
 
 #. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:825
+#: steps_interactive.pm:826
 #, c-format
 msgid "%s on %s"
 msgstr "%s på %s"
 
-#: steps_interactive.pm:859 steps_interactive.pm:866 steps_interactive.pm:880
-#: steps_interactive.pm:898 steps_interactive.pm:913
+#: steps_interactive.pm:860 steps_interactive.pm:867 steps_interactive.pm:881
+#: steps_interactive.pm:899 steps_interactive.pm:914
 #, c-format
 msgid "Hardware"
 msgstr "Maskinvare"
 
-#: steps_interactive.pm:881 steps_interactive.pm:899
+#: steps_interactive.pm:882 steps_interactive.pm:900
 #, c-format
 msgid "Sound card"
 msgstr "Lydkort"
 
-#: steps_interactive.pm:902
+#: steps_interactive.pm:903
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Har du eit ISA-lydkort?"
 
-#: steps_interactive.pm:904
+#: steps_interactive.pm:905
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
 "card"
-msgstr "Køyr «sndconfig» etter installasjonen er ferdig for å setja opp lydkortet."
+msgstr ""
+"Køyr «sndconfig» etter installasjonen er ferdig for å setja opp lydkortet."
 
-#: steps_interactive.pm:906
+#: steps_interactive.pm:907
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr "Fann ingen lydkort. Køyr «harddrake» etter installasjonen er ferdig."
 
-#: steps_interactive.pm:914
+#: steps_interactive.pm:915
 #, c-format
 msgid "Graphical interface"
 msgstr "Grafisk grensesnitt"
 
-#: steps_interactive.pm:921 steps_interactive.pm:932
+#: steps_interactive.pm:922 steps_interactive.pm:933
 #, c-format
 msgid "Network & Internet"
 msgstr "Nettverk og Internett"
 
-#: steps_interactive.pm:933
+#: steps_interactive.pm:934
 #, c-format
 msgid "Proxies"
 msgstr "Mellomtenarar"
 
-#: steps_interactive.pm:934
+#: steps_interactive.pm:935
 #, c-format
 msgid "configured"
 msgstr "oppsett"
 
-#: steps_interactive.pm:944
+#: steps_interactive.pm:945
 #, c-format
 msgid "Security Level"
 msgstr "Tryggleiksnivå"
 
-#: steps_interactive.pm:963
+#: steps_interactive.pm:964
 #, c-format
 msgid "Firewall"
 msgstr "Brannmur"
 
-#: steps_interactive.pm:967
+#: steps_interactive.pm:968
 #, c-format
 msgid "activated"
 msgstr "påslått"
 
-#: steps_interactive.pm:967
+#: steps_interactive.pm:968
 #, c-format
 msgid "disabled"
 msgstr "avslått"
 
-#: steps_interactive.pm:981
+#: steps_interactive.pm:982
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr ""
 "Du har ikkje sett opp det grafiske grensesnittet. Er du sikker på at du "
 "ikkje vil ha det?"
 
-#: steps_interactive.pm:1008
+#: steps_interactive.pm:1009
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Førebur oppstartslastar …"
 
-#: steps_interactive.pm:1018
+#: steps_interactive.pm:1019
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1280,12 +1295,12 @@ msgstr ""
 "annan måte å starta maskina di på. Kjerneargumentet for rotfilsystemet er: "
 "root=%s"
 
-#: steps_interactive.pm:1024
+#: steps_interactive.pm:1025
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "Vil du bruka aboot?"
 
-#: steps_interactive.pm:1027
+#: steps_interactive.pm:1028
 #, c-format
 msgid ""
 "Error installing aboot, \n"
@@ -1295,7 +1310,7 @@ msgstr ""
 "Vil du prøva å tvinga gjennom installering, sjølv om det kan øydeleggja den "
 "første partisjonen?"
 
-#: steps_interactive.pm:1039
+#: steps_interactive.pm:1040
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1304,17 +1319,17 @@ msgstr ""
 "Med dette tryggleiksnivået er det berre administratoren som får tilgang til "
 "filer på Windows-partisjonen."
 
-#: steps_interactive.pm:1071
+#: steps_interactive.pm:1072
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Set inn ein tom diskett i stasjon «%s»"
 
-#: steps_interactive.pm:1073
+#: steps_interactive.pm:1074
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Lagar diskett for automatisk installasjon …"
 
-#: steps_interactive.pm:1084
+#: steps_interactive.pm:1085
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1325,22 +1340,22 @@ msgstr ""
 "\n"
 "Er du sikker på at du vil avslutta?"
 
-#: steps_interactive.pm:1094
+#: steps_interactive.pm:1095
 #, c-format
 msgid "Congratulations"
 msgstr "Gratulerer"
 
-#: steps_interactive.pm:1098
+#: steps_interactive.pm:1099
 #, c-format
 msgid "Reboot"
 msgstr "Start på nytt"
 
-#: steps_interactive.pm:1102 steps_interactive.pm:1103
+#: steps_interactive.pm:1103 steps_interactive.pm:1104
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "Lag diskett for automatisk installasjon"
 
-#: steps_interactive.pm:1104
+#: steps_interactive.pm:1105
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"
@@ -1355,17 +1370,17 @@ msgstr ""
 "\n"
 "Du kan òg velja å køyra gjennom installasjonen på nytt.\n"
 
-#: steps_interactive.pm:1109
+#: steps_interactive.pm:1110
 #, c-format
 msgid "Replay"
 msgstr "Spel av"
 
-#: steps_interactive.pm:1109
+#: steps_interactive.pm:1110
 #, c-format
 msgid "Automated"
 msgstr "Automatisert"
 
-#: steps_interactive.pm:1112
+#: steps_interactive.pm:1113
 #, c-format
 msgid "Save packages selection"
 msgstr "Lagra pakkeval"
@@ -1622,4 +1637,3 @@ msgstr "Avslutt"
 #~ "fila «%s»). Det kjem vanlegvis av at oppstartsdisketten er laga for ein "
 #~ "annan versjon enn installasjonsmediet. Du bør då laga ein ny, oppdatert "
 #~ "oppstartsdiskett."
-

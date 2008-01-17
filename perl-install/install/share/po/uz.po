@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-01 09:12+0200\n"
+"POT-Creation-Date: 2008-01-17 14:35+0100\n"
 "PO-Revision-Date: 2007-09-26 23:35+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <floss-uz-l10n@googlegroups.com>\n"
@@ -150,7 +150,7 @@ msgid "Finding packages to upgrade..."
 msgstr "Yangilash uchun paketlar qidirilmoqda..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:610
+#: any.pm:620
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -175,7 +175,7 @@ msgstr ""
 "Bu server dasturlarni rostdan ham o'rnatishni istaysizmi?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:633
+#: any.pm:643
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -188,67 +188,72 @@ msgstr ""
 "\n"
 "Davom etishni istaysizmi?\n"
 
-#: any.pm:1055
+#: any.pm:857
+#, fuzzy, c-format
+msgid "Error reading file %s"
+msgstr "%s fayli yozib olinmoqda..."
+
+#: any.pm:1065
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Quyidagi disk(lar)ning nomi o'zgartirildi:"
 
-#: any.pm:1057
+#: any.pm:1067
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (oldingi nomi %s)"
 
-#: any.pm:1114
+#: any.pm:1124
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1114
+#: any.pm:1124
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1114
+#: any.pm:1124
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1133 steps_interactive.pm:922
+#: any.pm:1143 steps_interactive.pm:923
 #, c-format
 msgid "Network"
 msgstr "Tarmoq"
 
-#: any.pm:1137
+#: any.pm:1147
 #, c-format
 msgid "Please choose a media"
 msgstr "Iltimos to'plamni tanlang"
 
-#: any.pm:1153
+#: any.pm:1163
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Fayl allaqachon mavjud. Uni almashtirishni istaysizmi?"
 
-#: any.pm:1157
+#: any.pm:1167
 #, c-format
 msgid "Permission denied"
 msgstr "Ruxsat yo'q"
 
-#: any.pm:1205
+#: any.pm:1215
 #, c-format
 msgid "Bad NFS name"
 msgstr "NFS nomi noto'g'ri"
 
-#: any.pm:1226
+#: any.pm:1236
 #, c-format
 msgid "Bad media %s"
 msgstr "Noto'g'ri to'plam %s"
 
-#: any.pm:1269
+#: any.pm:1279
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Skrinshotlarni diskni bo'lishdan avval olib bo'lmaydi"
 
-#: any.pm:1277
+#: any.pm:1287
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr ""
@@ -264,7 +269,7 @@ msgstr "O'rnatish"
 msgid "Configuration"
 msgstr "Moslash"
 
-#: install2.pm:165
+#: install2.pm:166
 #, c-format
 msgid "You must also format %s"
 msgstr "Siz %s'ni ham format qilishingiz kerak"
@@ -293,12 +298,12 @@ msgstr "Tarmoq o'chirilmoqda"
 msgid "Downloading file %s..."
 msgstr "%s fayli yozib olinmoqda..."
 
-#: media.pm:808
+#: media.pm:806
 #, c-format
 msgid "Copying some packages on disks for future use"
 msgstr "Ba'zi paketlardan diskka nusxa olinmoqda"
 
-#: media.pm:861
+#: media.pm:859
 #, c-format
 msgid "Copying in progress"
 msgstr "Nusxa olish davom etmoqda"
@@ -328,7 +333,7 @@ msgstr "yaxshi"
 msgid "maybe"
 msgstr "balki"
 
-#: pkgs.pm:245
+#: pkgs.pm:254
 #, c-format
 msgid ""
 "Some packages requested by %s cannot be installed:\n"
@@ -667,7 +672,7 @@ msgid ""
 "Continue at your own risk."
 msgstr ""
 
-#: steps.pm:433
+#: steps.pm:436
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -695,7 +700,12 @@ msgstr "Mandriva Linux OTni o'rnatish %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> banddan-bandga"
 
-#: steps_gtk.pm:189
+#: steps_gtk.pm:82
+#, c-format
+msgid "Xorg server is slow to start. Please wait..."
+msgstr ""
+
+#: steps_gtk.pm:192
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -704,73 +714,73 @@ msgid ""
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 
-#: steps_gtk.pm:256 steps_interactive.pm:435 steps_interactive.pm:564
+#: steps_gtk.pm:259 steps_interactive.pm:435 steps_interactive.pm:564
 #: steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "Paketlarni guruh bo'yicha tanlash"
 
-#: steps_gtk.pm:277 steps_interactive.pm:581
+#: steps_gtk.pm:280 steps_interactive.pm:581
 #, c-format
 msgid "Individual package selection"
 msgstr "Paketlarni bittama-bitta tanlash"
 
-#: steps_gtk.pm:299 steps_interactive.pm:507
+#: steps_gtk.pm:302 steps_interactive.pm:507
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Jami: %d / %d Mb"
 
-#: steps_gtk.pm:344
+#: steps_gtk.pm:347
 #, c-format
 msgid "Bad package"
 msgstr "Yomon paket"
 
-#: steps_gtk.pm:346
+#: steps_gtk.pm:349
 #, c-format
 msgid "Version: "
 msgstr "Versiyasi: "
 
-#: steps_gtk.pm:347
+#: steps_gtk.pm:350
 #, c-format
 msgid "Size: "
 msgstr "Hajmi: "
 
-#: steps_gtk.pm:347
+#: steps_gtk.pm:350
 #, c-format
 msgid "%d KB\n"
 msgstr "%d Kb\n"
 
-#: steps_gtk.pm:348
+#: steps_gtk.pm:351
 #, c-format
 msgid "Importance: "
 msgstr "Muhimligi: "
 
-#: steps_gtk.pm:382
+#: steps_gtk.pm:385
 #, c-format
 msgid "You can not select/unselect this package"
 msgstr "Bu paketni tanlolmaysiz/tanlashni bekor qilolmaysiz"
 
-#: steps_gtk.pm:386
+#: steps_gtk.pm:389
 #, c-format
 msgid "due to missing %s"
 msgstr "%s yetishmagani uchun"
 
-#: steps_gtk.pm:387
+#: steps_gtk.pm:390
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr ""
 
-#: steps_gtk.pm:388
+#: steps_gtk.pm:391
 #, c-format
 msgid "trying to promote %s"
 msgstr ""
 
-#: steps_gtk.pm:389
+#: steps_gtk.pm:392
 #, c-format
 msgid "in order to keep %s"
 msgstr "%s'ni qoldirish uchun"
 
-#: steps_gtk.pm:394
+#: steps_gtk.pm:397
 #, c-format
 msgid ""
 "You can not select this package as there is not enough space left to install "
@@ -778,109 +788,109 @@ msgid ""
 msgstr ""
 "Bu paketni tanlolmaysiz, chunki uni o'rnatish uchun yetarli joy mavjud emas."
 
-#: steps_gtk.pm:397
+#: steps_gtk.pm:400
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "Quyidagi paketlar o'rnatiladi"
 
-#: steps_gtk.pm:398
+#: steps_gtk.pm:401
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "Quyidagi paketlar olib tashlaniladi."
 
-#: steps_gtk.pm:423
+#: steps_gtk.pm:426
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
 msgstr ""
 "Bu o'rnatilishi shart bo'lgan paket, uni tanlashni bekor qilib bo'lmaydi."
 
-#: steps_gtk.pm:425
+#: steps_gtk.pm:428
 #, c-format
 msgid "You can not unselect this package. It is already installed"
 msgstr "Bu paketni tanlashni bekor qilolmaysiz. U allaqachon o'rnatilgan."
 
-#: steps_gtk.pm:427
+#: steps_gtk.pm:430
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
 msgstr "Bu paketni tanlashni bekor qilolmaysiz. U yangilanishi shart."
 
-#: steps_gtk.pm:431
+#: steps_gtk.pm:434
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "Avtomatik ravishda tanlangan paketlarni ko'rsatish"
 
-#: steps_gtk.pm:433
+#: steps_gtk.pm:436
 #, c-format
 msgid "Install"
 msgstr "O'rnatish"
 
-#: steps_gtk.pm:436
+#: steps_gtk.pm:439
 #, c-format
 msgid "Load/Save selection"
 msgstr "Tanlanganni yuklash/saqlash"
 
-#: steps_gtk.pm:437
+#: steps_gtk.pm:440
 #, c-format
 msgid "Updating package selection"
 msgstr "Paketlar tanlovi yangilanmoqda"
 
-#: steps_gtk.pm:442
+#: steps_gtk.pm:445
 #, c-format
 msgid "Minimal install"
 msgstr "Minimal o'rnatish"
 
-#: steps_gtk.pm:456
+#: steps_gtk.pm:459
 #, c-format
 msgid "Software Management"
 msgstr "Dasturlar boshqaruvi"
 
-#: steps_gtk.pm:456 steps_interactive.pm:393
+#: steps_gtk.pm:459 steps_interactive.pm:393
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Siz o'rnatmoqchi bo'lgan paketlarni tanlang"
 
-#: steps_gtk.pm:473 steps_interactive.pm:595 steps_list.pm:32
+#: steps_gtk.pm:476 steps_interactive.pm:595 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "O'rnatilmoqda"
 
-#: steps_gtk.pm:499
+#: steps_gtk.pm:502
 #, c-format
 msgid "No details"
 msgstr "Tafsilotlarsiz"
 
-#: steps_gtk.pm:514
+#: steps_gtk.pm:517
 #, c-format
 msgid "Time remaining "
 msgstr "Qolgan vaqt "
 
-#: steps_gtk.pm:515
-#, c-format
-msgid "Estimating"
+#: steps_gtk.pm:518
+#, fuzzy, c-format
+msgid "(estimating...)"
 msgstr "Chamalanmoqda"
 
-#: steps_gtk.pm:542
+#: steps_gtk.pm:545
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d-ta paket"
 
-#: steps_gtk.pm:588 steps_interactive.pm:782 steps_list.pm:43
+#: steps_gtk.pm:591 steps_interactive.pm:783 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Hisobot"
 
-#: steps_gtk.pm:605
+#: steps_gtk.pm:608
 #, c-format
 msgid "Configure"
 msgstr "Moslash"
 
-#: steps_gtk.pm:622 steps_interactive.pm:778 steps_interactive.pm:934
+#: steps_gtk.pm:625 steps_interactive.pm:779 steps_interactive.pm:935
 #, c-format
 msgid "not configured"
 msgstr "moslanmagan"
 
-#: steps_gtk.pm:658 steps_interactive.pm:278
+#: steps_gtk.pm:661 steps_interactive.pm:278
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -889,7 +899,7 @@ msgstr ""
 "Quyidagi o'rnatish manbalari aniqlandi.\n"
 "Faqat tanlangan manbalar o'rnatish uchun ishlatiladi."
 
-#: steps_gtk.pm:667 steps_interactive.pm:284
+#: steps_gtk.pm:670 steps_interactive.pm:284
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -901,7 +911,7 @@ msgstr ""
 "nusxa olish mumkin.\n"
 "O'rnatish to'liq tugagandan so'ng ular tizimga ma'lum bo'ladi."
 
-#: steps_gtk.pm:669 steps_interactive.pm:286
+#: steps_gtk.pm:672 steps_interactive.pm:286
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Butun diskdan nusxa olish"
@@ -1169,41 +1179,41 @@ msgstr ""
 "\n"
 "Yangilanishlarni o'rnatishni istaysizmi?"
 
-#: steps_interactive.pm:713
+#: steps_interactive.pm:714
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr ""
 "Mavjud bo'lgan paketlarning ro'yxatini olish uchun oyna bilan aloqa "
 "o'rnatilmoqda..."
 
-#: steps_interactive.pm:719
+#: steps_interactive.pm:720
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr "Oyna (%s)bilan aloqa o'rnatib bo'lmadi."
 
 #. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:825
+#: steps_interactive.pm:826
 #, c-format
 msgid "%s on %s"
 msgstr "%s %s'da"
 
-#: steps_interactive.pm:859 steps_interactive.pm:866 steps_interactive.pm:880
-#: steps_interactive.pm:898 steps_interactive.pm:913
+#: steps_interactive.pm:860 steps_interactive.pm:867 steps_interactive.pm:881
+#: steps_interactive.pm:899 steps_interactive.pm:914
 #, c-format
 msgid "Hardware"
 msgstr "Asbob-uskunalar"
 
-#: steps_interactive.pm:881 steps_interactive.pm:899
+#: steps_interactive.pm:882 steps_interactive.pm:900
 #, c-format
 msgid "Sound card"
 msgstr "Tovush karta"
 
-#: steps_interactive.pm:902
+#: steps_interactive.pm:903
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Sizda ISA tovush kartasi bormi?"
 
-#: steps_interactive.pm:904
+#: steps_interactive.pm:905
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -1212,64 +1222,64 @@ msgstr ""
 "O'rnatishdan keyin, tovush kartangizni moslash uchun, \"sndconfig\" yoki "
 "\"alsaconf\" dasturini ishga tushiring"
 
-#: steps_interactive.pm:906
+#: steps_interactive.pm:907
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr ""
 "Tovush kartasi topilmadi. O'rnatishdan keyin \"harddrake\" dasturini sinab "
 "ko'ring."
 
-#: steps_interactive.pm:914
+#: steps_interactive.pm:915
 #, c-format
 msgid "Graphical interface"
 msgstr "Grafik interfeys"
 
-#: steps_interactive.pm:921 steps_interactive.pm:932
+#: steps_interactive.pm:922 steps_interactive.pm:933
 #, c-format
 msgid "Network & Internet"
 msgstr "Tarmoq va Internet"
 
-#: steps_interactive.pm:933
+#: steps_interactive.pm:934
 #, c-format
 msgid "Proxies"
 msgstr "Proksilar"
 
-#: steps_interactive.pm:934
+#: steps_interactive.pm:935
 #, c-format
 msgid "configured"
 msgstr "moslangan"
 
-#: steps_interactive.pm:944
+#: steps_interactive.pm:945
 #, c-format
 msgid "Security Level"
 msgstr "Xavfsizlik darajasi"
 
-#: steps_interactive.pm:963
+#: steps_interactive.pm:964
 #, c-format
 msgid "Firewall"
 msgstr "Fayervol"
 
-#: steps_interactive.pm:967
+#: steps_interactive.pm:968
 #, c-format
 msgid "activated"
 msgstr "ishlayapti"
 
-#: steps_interactive.pm:967
+#: steps_interactive.pm:968
 #, c-format
 msgid "disabled"
 msgstr "o'chirilgan"
 
-#: steps_interactive.pm:981
+#: steps_interactive.pm:982
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Siz X'ni moslamadingiz. Rostdan buni istaysizmi?"
 
-#: steps_interactive.pm:1008
+#: steps_interactive.pm:1009
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "OT yuklagichi tayyorlanmoqda..."
 
-#: steps_interactive.pm:1018
+#: steps_interactive.pm:1019
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1278,19 +1288,19 @@ msgid ""
 "root fs is: root=%s"
 msgstr ""
 
-#: steps_interactive.pm:1024
+#: steps_interactive.pm:1025
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "aboot dasturidan foydalanishni istaysizmi?"
 
-#: steps_interactive.pm:1027
+#: steps_interactive.pm:1028
 #, c-format
 msgid ""
 "Error installing aboot, \n"
 "try to force installation even if that destroys the first partition?"
 msgstr ""
 
-#: steps_interactive.pm:1039
+#: steps_interactive.pm:1040
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1299,17 +1309,17 @@ msgstr ""
 "Ushbu xavfsizlik daraja qo'llanilganda diskning Windows qismidagi fayllarga "
 "faqat administrator murojaat qilishi mumkin."
 
-#: steps_interactive.pm:1071
+#: steps_interactive.pm:1072
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Bo'sh disketni %s uskunasiga qo'ying"
 
-#: steps_interactive.pm:1073
+#: steps_interactive.pm:1074
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Avto-o'rnatish disketi yaratilmoqda..."
 
-#: steps_interactive.pm:1084
+#: steps_interactive.pm:1085
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1320,22 +1330,22 @@ msgstr ""
 "\n"
 "Rostdan chiqishni istaysizmi?"
 
-#: steps_interactive.pm:1094
+#: steps_interactive.pm:1095
 #, c-format
 msgid "Congratulations"
 msgstr "Tabriklaymiz!"
 
-#: steps_interactive.pm:1098
+#: steps_interactive.pm:1099
 #, c-format
 msgid "Reboot"
 msgstr "O'chirib-yoqish"
 
-#: steps_interactive.pm:1102 steps_interactive.pm:1103
+#: steps_interactive.pm:1103 steps_interactive.pm:1104
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "Avto-o'rnatish disketni yaratish"
 
-#: steps_interactive.pm:1104
+#: steps_interactive.pm:1105
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"
@@ -1345,17 +1355,17 @@ msgid ""
 "You may prefer to replay the installation.\n"
 msgstr ""
 
-#: steps_interactive.pm:1109
+#: steps_interactive.pm:1110
 #, c-format
 msgid "Replay"
 msgstr "Qaytarish"
 
-#: steps_interactive.pm:1109
+#: steps_interactive.pm:1110
 #, c-format
 msgid "Automated"
 msgstr "Avtomatik"
 
-#: steps_interactive.pm:1112
+#: steps_interactive.pm:1113
 #, c-format
 msgid "Save packages selection"
 msgstr "Paketlar tanlovini saqlash"

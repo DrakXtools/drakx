@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-01 09:12+0200\n"
+"POT-Creation-Date: 2008-01-17 14:35+0100\n"
 "PO-Revision-Date: 2002-09-06 00:35+0800\n"
 "Last-Translator: prabu anand <prabu_anand2000@yahoo.com>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
@@ -140,7 +140,7 @@ msgid "Finding packages to upgrade..."
 msgstr "மேம்படுத்தப்பட வேண்டிய பொதிகள் அறியப்படுகின்றன"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:610
+#: any.pm:620
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -165,7 +165,7 @@ msgstr ""
 "நிங்கள் நிச்சயம் இவற்ைற நிறுவ விரும்புகிறீர்களா?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:633
+#: any.pm:643
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -174,67 +174,72 @@ msgid ""
 "Do you really want to remove these packages?\n"
 msgstr ""
 
-#: any.pm:1055
+#: any.pm:857
+#, fuzzy, c-format
+msgid "Error reading file %s"
+msgstr "கோப்புகளைக் கண்டுபிடி "
+
+#: any.pm:1065
 #, fuzzy, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "கிழ்கானும் பொதிகள் நிறுவுவதற்கு தேர்வுச் செய்யப்பட்டுள்ளது"
 
-#: any.pm:1057
+#: any.pm:1067
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr ""
 
-#: any.pm:1114
+#: any.pm:1124
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1114
+#: any.pm:1124
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1114
+#: any.pm:1124
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1133 steps_interactive.pm:922
+#: any.pm:1143 steps_interactive.pm:923
 #, c-format
 msgid "Network"
 msgstr "வலையமைப்பு"
 
-#: any.pm:1137
+#: any.pm:1147
 #, fuzzy, c-format
 msgid "Please choose a media"
 msgstr "தயவுசெய்து ேதர்ந்ெதடுக்கவும்"
 
-#: any.pm:1153
+#: any.pm:1163
 #, fuzzy, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "இந்த கோப்பு ஏற்கனவே உள்ளது. பயன்பாடுத்தி கொள்ளலாமா?"
 
-#: any.pm:1157
+#: any.pm:1167
 #, fuzzy, c-format
 msgid "Permission denied"
 msgstr "அனுமதிகள்"
 
-#: any.pm:1205
+#: any.pm:1215
 #, c-format
 msgid "Bad NFS name"
 msgstr ""
 
-#: any.pm:1226
+#: any.pm:1236
 #, fuzzy, c-format
 msgid "Bad media %s"
 msgstr "கெட்ட தகவல்"
 
-#: any.pm:1269
+#: any.pm:1279
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "வகிர்தல் முடிவதற்கு முன் திரைவேட்டு எடுக்க முடியாது"
 
-#: any.pm:1277
+#: any.pm:1287
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "நிறுவி முடித்தவுடன் திரைவேட்டுகள் %s என்ற அடைவில் கிடைக்கும்"
@@ -249,7 +254,7 @@ msgstr "நிறுவப்படுகிறது"
 msgid "Configuration"
 msgstr "வடிவமைப்புகள்"
 
-#: install2.pm:165
+#: install2.pm:166
 #, c-format
 msgid "You must also format %s"
 msgstr "நீங்கள் %s இதனையும் வடிவுட்ட வேண்டும்"
@@ -278,12 +283,12 @@ msgstr "வலையமைப்பாக்கங்கள் முடக்�
 msgid "Downloading file %s..."
 msgstr "கோப்புகளைக் கண்டுபிடி "
 
-#: media.pm:808
+#: media.pm:806
 #, c-format
 msgid "Copying some packages on disks for future use"
 msgstr ""
 
-#: media.pm:861
+#: media.pm:859
 #, fuzzy, c-format
 msgid "Copying in progress"
 msgstr "இன்னும் தேடுதல் நடைபெறுகிறது"
@@ -313,7 +318,7 @@ msgstr "அழகானவை"
 msgid "maybe"
 msgstr "தேவைப்பட்டால்"
 
-#: pkgs.pm:245
+#: pkgs.pm:254
 #, c-format
 msgid ""
 "Some packages requested by %s cannot be installed:\n"
@@ -645,7 +650,7 @@ msgstr ""
 "பிழை நேர்ந்துள்ளது மன்னிக்கவும் எனக்கு என்ன செய்வதென்று தெரியவில்ைல\n"
 "தொடர்ந்து செல்வது உங்கள் பொறுப்பு"
 
-#: steps.pm:433
+#: steps.pm:436
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -673,7 +678,12 @@ msgstr "மாண்ட்ேரக் லினக்ஸ் நிறுவல�
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr ""
 
-#: steps_gtk.pm:189
+#: steps_gtk.pm:82
+#, c-format
+msgid "Xorg server is slow to start. Please wait..."
+msgstr ""
+
+#: steps_gtk.pm:192
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -685,189 +695,189 @@ msgstr ""
 "மாண்ட்ேரக் லினக்ஸ் நிறுவுவதில் பிழை ஏற்படலாம். நீங்கள் உரைவழி நிறுவலாம்,\n"
 "சிடியில் நிறுவ தொடங்கும் போது  `F1'  என அழுத்தி விட்டு,  `text'. என அடிக்கவும்"
 
-#: steps_gtk.pm:256 steps_interactive.pm:435 steps_interactive.pm:564
+#: steps_gtk.pm:259 steps_interactive.pm:435 steps_interactive.pm:564
 #: steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "பொதிகள் குழுத் தேர்வு"
 
-#: steps_gtk.pm:277 steps_interactive.pm:581
+#: steps_gtk.pm:280 steps_interactive.pm:581
 #, c-format
 msgid "Individual package selection"
 msgstr "தனித்னி பொதியாக தேர்வுச் செய்"
 
-#: steps_gtk.pm:299 steps_interactive.pm:507
+#: steps_gtk.pm:302 steps_interactive.pm:507
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "மெகா பைட்டில் மொத்த அளவு  %d / %d"
 
-#: steps_gtk.pm:344
+#: steps_gtk.pm:347
 #, c-format
 msgid "Bad package"
 msgstr "தவறான பொதி"
 
-#: steps_gtk.pm:346
+#: steps_gtk.pm:349
 #, c-format
 msgid "Version: "
 msgstr "வெளியீடு: "
 
-#: steps_gtk.pm:347
+#: steps_gtk.pm:350
 #, c-format
 msgid "Size: "
 msgstr "அளவு: "
 
-#: steps_gtk.pm:347
+#: steps_gtk.pm:350
 #, fuzzy, c-format
 msgid "%d KB\n"
 msgstr "கிலோ பைட்டில் அளவு  %d \n"
 
-#: steps_gtk.pm:348
+#: steps_gtk.pm:351
 #, c-format
 msgid "Importance: "
 msgstr "முக்கியத்துவம்: "
 
-#: steps_gtk.pm:382
+#: steps_gtk.pm:385
 #, c-format
 msgid "You can not select/unselect this package"
 msgstr "நீங்கள் இந்த பொதியை தேர்வு/நீக்க முடியாது"
 
-#: steps_gtk.pm:386
+#: steps_gtk.pm:389
 #, fuzzy, c-format
 msgid "due to missing %s"
 msgstr "kdesu இல்ைல"
 
-#: steps_gtk.pm:387
+#: steps_gtk.pm:390
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr ""
 
-#: steps_gtk.pm:388
+#: steps_gtk.pm:391
 #, c-format
 msgid "trying to promote %s"
 msgstr ""
 
-#: steps_gtk.pm:389
+#: steps_gtk.pm:392
 #, c-format
 msgid "in order to keep %s"
 msgstr ""
 
-#: steps_gtk.pm:394
+#: steps_gtk.pm:397
 #, c-format
 msgid ""
 "You can not select this package as there is not enough space left to install "
 "it"
 msgstr "இடமில்ைல என்பதால்  நீங்கள் இந்த பொதியைத் தே`ர்வுச் செய்ய முடியாது"
 
-#: steps_gtk.pm:397
+#: steps_gtk.pm:400
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "கிழ்கானும் பொதிகள் நிறுவுவதற்கு தேர்வுச் செய்யப்பட்டுள்ளது"
 
-#: steps_gtk.pm:398
+#: steps_gtk.pm:401
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "கிழ்கானும் பொதிகள் நீக்கப்படுகிறது"
 
-#: steps_gtk.pm:423
+#: steps_gtk.pm:426
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
 msgstr "இது கட்டாய பொதி. இதனை நீக்க முடியாது"
 
-#: steps_gtk.pm:425
+#: steps_gtk.pm:428
 #, c-format
 msgid "You can not unselect this package. It is already installed"
 msgstr "இந்த பொதியை.நீக்க முடியாது. இது ஏற்கனவே நிறுவப்பட்டள்ளது"
 
-#: steps_gtk.pm:427
+#: steps_gtk.pm:430
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
 msgstr "இந்த பொதியை.நீக்க முடியாது. இது நிகழ்நிலைப்படுத்த வேண்டிய பொதி"
 
-#: steps_gtk.pm:431
+#: steps_gtk.pm:434
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "தானாக தேர்வுச் செய்யப்பட்டுள்ள பொதிகளைக் காட்டு"
 
-#: steps_gtk.pm:433
+#: steps_gtk.pm:436
 #, c-format
 msgid "Install"
 msgstr "நிறுவு"
 
-#: steps_gtk.pm:436
+#: steps_gtk.pm:439
 #, fuzzy, c-format
 msgid "Load/Save selection"
 msgstr "பொதிகள் தேர்வு"
 
-#: steps_gtk.pm:437
+#: steps_gtk.pm:440
 #, c-format
 msgid "Updating package selection"
 msgstr "பொதிகள் தேர்ைவ நிகழ்நிலைப் படுத்து"
 
-#: steps_gtk.pm:442
+#: steps_gtk.pm:445
 #, c-format
 msgid "Minimal install"
 msgstr "குறைந்தபட்ச நிறுவல்"
 
-#: steps_gtk.pm:456
+#: steps_gtk.pm:459
 #, c-format
 msgid "Software Management"
 msgstr "நிரல் மேலாண்மை"
 
-#: steps_gtk.pm:456 steps_interactive.pm:393
+#: steps_gtk.pm:459 steps_interactive.pm:393
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "நிறுவ வேண்டிய பொதிகளை தேர்வுச் செய்யுங்கள் "
 
-#: steps_gtk.pm:473 steps_interactive.pm:595 steps_list.pm:32
+#: steps_gtk.pm:476 steps_interactive.pm:595 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "நிறுவப்படுகிறது"
 
-#: steps_gtk.pm:499
+#: steps_gtk.pm:502
 #, fuzzy, c-format
 msgid "No details"
 msgstr "விவரங்கள்"
 
-#: steps_gtk.pm:514
+#: steps_gtk.pm:517
 #, c-format
 msgid "Time remaining "
 msgstr "தேவைப்படும் நேரம்"
 
-#: steps_gtk.pm:515
-#, c-format
-msgid "Estimating"
+#: steps_gtk.pm:518
+#, fuzzy, c-format
+msgid "(estimating...)"
 msgstr "கணக்கிடப்படுகிறது"
 
-#: steps_gtk.pm:542
+#: steps_gtk.pm:545
 #, fuzzy, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d பொதிகள்"
 msgstr[1] "%d பொதிகள்"
 
-#: steps_gtk.pm:588 steps_interactive.pm:782 steps_list.pm:43
+#: steps_gtk.pm:591 steps_interactive.pm:783 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "உரை"
 
-#: steps_gtk.pm:605
+#: steps_gtk.pm:608
 #, c-format
 msgid "Configure"
 msgstr "வடிவமை"
 
-#: steps_gtk.pm:622 steps_interactive.pm:778 steps_interactive.pm:934
+#: steps_gtk.pm:625 steps_interactive.pm:779 steps_interactive.pm:935
 #, c-format
 msgid "not configured"
 msgstr "வடிவமைக்கப்படவில்ைல"
 
-#: steps_gtk.pm:658 steps_interactive.pm:278
+#: steps_gtk.pm:661 steps_interactive.pm:278
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
 "If you want to skip some of them, you can unselect them now."
 msgstr ""
 
-#: steps_gtk.pm:667 steps_interactive.pm:284
+#: steps_gtk.pm:670 steps_interactive.pm:284
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -876,7 +886,7 @@ msgid ""
 "available once the system is fully installed."
 msgstr ""
 
-#: steps_gtk.pm:669 steps_interactive.pm:286
+#: steps_gtk.pm:672 steps_interactive.pm:286
 #, c-format
 msgid "Copy whole CDs"
 msgstr ""
@@ -1147,102 +1157,102 @@ msgstr ""
 "\n"
 "இவற்ைற நிறுவ விருப்பமா ?"
 
-#: steps_interactive.pm:713
+#: steps_interactive.pm:714
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "இணைப் பதிப்புதளங்களில் தற்ேபாதுள்ள பொதிகளை அறிய இணையதளம் தொடர்புகொள்ளப்படுகிறது"
 
-#: steps_interactive.pm:719
+#: steps_interactive.pm:720
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr ""
 
 #. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:825
+#: steps_interactive.pm:826
 #, c-format
 msgid "%s on %s"
 msgstr "%s இல் %s"
 
-#: steps_interactive.pm:859 steps_interactive.pm:866 steps_interactive.pm:880
-#: steps_interactive.pm:898 steps_interactive.pm:913
+#: steps_interactive.pm:860 steps_interactive.pm:867 steps_interactive.pm:881
+#: steps_interactive.pm:899 steps_interactive.pm:914
 #, c-format
 msgid "Hardware"
 msgstr "வன்பொருள்"
 
-#: steps_interactive.pm:881 steps_interactive.pm:899
+#: steps_interactive.pm:882 steps_interactive.pm:900
 #, c-format
 msgid "Sound card"
 msgstr "ஒலியட்ைட"
 
-#: steps_interactive.pm:902
+#: steps_interactive.pm:903
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "உங்களிடம் ISA ஒலியட்ைட ஏதேனும் உள்ளனவா?"
 
-#: steps_interactive.pm:904
+#: steps_interactive.pm:905
 #, fuzzy, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
 "card"
 msgstr "\"sndconfig\" என்ற நிரல் மூலம் உங்கள் ஒலியட்ைடயை வடிவமைக்க முடியும்"
 
-#: steps_interactive.pm:906
+#: steps_interactive.pm:907
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr ""
 "ஒலியட்ைட ஏதும் கண்டுபிடிக்க முடியவில்ைல. டிரேக்வன்ெபாருள் மாயாவியை பயன்படுத்துங்கள்"
 
-#: steps_interactive.pm:914
+#: steps_interactive.pm:915
 #, c-format
 msgid "Graphical interface"
 msgstr "வரைவியல்வழி"
 
-#: steps_interactive.pm:921 steps_interactive.pm:932
+#: steps_interactive.pm:922 steps_interactive.pm:933
 #, c-format
 msgid "Network & Internet"
 msgstr "வலையமைப்பும் இணையமும்"
 
-#: steps_interactive.pm:933
+#: steps_interactive.pm:934
 #, fuzzy, c-format
 msgid "Proxies"
 msgstr "பயனர்குறிப்பு: "
 
-#: steps_interactive.pm:934
+#: steps_interactive.pm:935
 #, fuzzy, c-format
 msgid "configured"
 msgstr "மறுவடிவமை"
 
-#: steps_interactive.pm:944
+#: steps_interactive.pm:945
 #, c-format
 msgid "Security Level"
 msgstr "பாதுகாப்பு நிலை"
 
-#: steps_interactive.pm:963
+#: steps_interactive.pm:964
 #, c-format
 msgid "Firewall"
 msgstr "நெருப்புச்சுவர்"
 
-#: steps_interactive.pm:967
+#: steps_interactive.pm:968
 #, fuzzy, c-format
 msgid "activated"
 msgstr "இப்போது துவக்கு"
 
-#: steps_interactive.pm:967
+#: steps_interactive.pm:968
 #, c-format
 msgid "disabled"
 msgstr "முடமாக்கப்பட்டுள்ளது"
 
-#: steps_interactive.pm:981
+#: steps_interactive.pm:982
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr ""
 
-#: steps_interactive.pm:1008
+#: steps_interactive.pm:1009
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "துவங்குநிரலை உருவாக்குகிறேன்..."
 
-#: steps_interactive.pm:1018
+#: steps_interactive.pm:1019
 #, fuzzy, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1251,36 +1261,36 @@ msgid ""
 "root fs is: root=%s"
 msgstr "தயவுசெய்து நிறுவுவதற்கு ஆங்கிலத்ைத பயன்படுத்துங்கள்"
 
-#: steps_interactive.pm:1024
+#: steps_interactive.pm:1025
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "தயவுசெய்து நிறுவுவதற்கு ஆங்கிலத்ைத பயன்படுத்துங்கள்"
 
-#: steps_interactive.pm:1027
+#: steps_interactive.pm:1028
 #, c-format
 msgid ""
 "Error installing aboot, \n"
 "try to force installation even if that destroys the first partition?"
 msgstr "தயவுசெய்து நிறுவுவதற்கு ஆங்கிலத்ைத பயன்படுத்துங்கள்"
 
-#: steps_interactive.pm:1039
+#: steps_interactive.pm:1040
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
 "restricted to the administrator."
 msgstr ""
 
-#: steps_interactive.pm:1071
+#: steps_interactive.pm:1072
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "வெற்று நெகிழ்வட்ைட  %s இயக்கியில் உள்ளிடவும்"
 
-#: steps_interactive.pm:1073
+#: steps_interactive.pm:1074
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "தானியங்கி நிறுவல்வட்ைட உருவாக்கவும்"
 
-#: steps_interactive.pm:1084
+#: steps_interactive.pm:1085
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1291,22 +1301,22 @@ msgstr ""
 "\n"
 "நீங்கள் நிச்சயம் நிறுவுதலை விட்டு வெளியேற விரும்புகிறீர்களா?"
 
-#: steps_interactive.pm:1094
+#: steps_interactive.pm:1095
 #, c-format
 msgid "Congratulations"
 msgstr "வாழ்த்துக்கள்"
 
-#: steps_interactive.pm:1098
+#: steps_interactive.pm:1099
 #, c-format
 msgid "Reboot"
 msgstr "மறுெதாடக்கம்"
 
-#: steps_interactive.pm:1102 steps_interactive.pm:1103
+#: steps_interactive.pm:1103 steps_interactive.pm:1104
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "தானியங்கி நிறுவல்வட்ைட உருவாக்கவும்"
 
-#: steps_interactive.pm:1104
+#: steps_interactive.pm:1105
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"
@@ -1322,17 +1332,17 @@ msgstr ""
 ",\n"
 "நீங்கள் மீண்டும் ஒருமுறை உங்கள் நிறுவலை மறு இயக்கம் செய்யலாம்,\n"
 
-#: steps_interactive.pm:1109
+#: steps_interactive.pm:1110
 #, c-format
 msgid "Replay"
 msgstr "மறு இயக்கம்"
 
-#: steps_interactive.pm:1109
+#: steps_interactive.pm:1110
 #, c-format
 msgid "Automated"
 msgstr "தானியங்கி"
 
-#: steps_interactive.pm:1112
+#: steps_interactive.pm:1113
 #, c-format
 msgid "Save packages selection"
 msgstr "பொதித் தேர்ைவச் சேமி"

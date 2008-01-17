@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-01 09:12+0200\n"
+"POT-Creation-Date: 2008-01-17 14:35+0100\n"
 "PO-Revision-Date: 2004-01-02 00:35+0100\n"
 "Last-Translator: Sanlig Badral <Badral@openmn.org>\n"
 "Language-Team: Mongolian <openmn-core@lists.sf.net>\n"
@@ -139,7 +139,7 @@ msgid "Finding packages to upgrade..."
 msgstr ""
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:610
+#: any.pm:620
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -154,7 +154,7 @@ msgid ""
 msgstr ""
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:633
+#: any.pm:643
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -163,69 +163,74 @@ msgid ""
 "Do you really want to remove these packages?\n"
 msgstr ""
 
-#: any.pm:1055
+#: any.pm:857
+#, fuzzy, c-format
+msgid "Error reading file %s"
+msgstr "Файлууд илгээж байна..."
+
+#: any.pm:1065
 #, fuzzy, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Дараах багцууд суулгагдах гэж байна"
 
-#: any.pm:1057
+#: any.pm:1067
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr ""
 
-#: any.pm:1114
+#: any.pm:1124
 #, c-format
 msgid "HTTP"
 msgstr ""
 
-#: any.pm:1114
+#: any.pm:1124
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1114
+#: any.pm:1124
 #, fuzzy, c-format
 msgid "NFS"
 msgstr "ТЭ"
 
-#: any.pm:1133 steps_interactive.pm:922
+#: any.pm:1143 steps_interactive.pm:923
 #, c-format
 msgid "Network"
 msgstr "Сүлжээ"
 
-#: any.pm:1137
+#: any.pm:1147
 #, fuzzy, c-format
 msgid "Please choose a media"
 msgstr ""
 "Нөөцлөх зөөврийн төхөөрөмжөө\n"
 "сонгоно уу."
 
-#: any.pm:1153
+#: any.pm:1163
 #, fuzzy, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Файл?"
 
-#: any.pm:1157
+#: any.pm:1167
 #, c-format
 msgid "Permission denied"
 msgstr "Хандалт нурлаа"
 
-#: any.pm:1205
+#: any.pm:1215
 #, c-format
 msgid "Bad NFS name"
 msgstr ""
 
-#: any.pm:1226
+#: any.pm:1236
 #, c-format
 msgid "Bad media %s"
 msgstr ""
 
-#: any.pm:1269
+#: any.pm:1279
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Хуваалт үүсгэхийн өмнө агшин дэлгэцүүдийг хийж чадахгүй"
 
-#: any.pm:1277
+#: any.pm:1287
 #, fuzzy, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "ямх"
@@ -240,7 +245,7 @@ msgstr "Суулгалт"
 msgid "Configuration"
 msgstr "Тохиргоо"
 
-#: install2.pm:165
+#: install2.pm:166
 #, c-format
 msgid "You must also format %s"
 msgstr ""
@@ -267,12 +272,12 @@ msgstr ""
 msgid "Downloading file %s..."
 msgstr "Файлууд илгээж байна..."
 
-#: media.pm:808
+#: media.pm:806
 #, c-format
 msgid "Copying some packages on disks for future use"
 msgstr ""
 
-#: media.pm:861
+#: media.pm:859
 #, fuzzy, c-format
 msgid "Copying in progress"
 msgstr "ямх"
@@ -302,7 +307,7 @@ msgstr "аятайхан"
 msgid "maybe"
 msgstr "магадгүй"
 
-#: pkgs.pm:245
+#: pkgs.pm:254
 #, c-format
 msgid ""
 "Some packages requested by %s cannot be installed:\n"
@@ -632,7 +637,7 @@ msgid ""
 "Continue at your own risk."
 msgstr ""
 
-#: steps.pm:433
+#: steps.pm:436
 #, fuzzy, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -656,7 +661,12 @@ msgstr "Мандрива удирдлагын төв"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr ""
 
-#: steps_gtk.pm:189
+#: steps_gtk.pm:82
+#, c-format
+msgid "Xorg server is slow to start. Please wait..."
+msgstr ""
+
+#: steps_gtk.pm:192
 #, fuzzy, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -665,189 +675,189 @@ msgid ""
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr "бол Та вы текст текст."
 
-#: steps_gtk.pm:256 steps_interactive.pm:435 steps_interactive.pm:564
+#: steps_gtk.pm:259 steps_interactive.pm:435 steps_interactive.pm:564
 #: steps_list.pm:30
 #, fuzzy, c-format
 msgid "Package Group Selection"
 msgstr "Пакет Групп"
 
-#: steps_gtk.pm:277 steps_interactive.pm:581
+#: steps_gtk.pm:280 steps_interactive.pm:581
 #, c-format
 msgid "Individual package selection"
 msgstr "Тусдаа дан багц сонгох"
 
-#: steps_gtk.pm:299 steps_interactive.pm:507
+#: steps_gtk.pm:302 steps_interactive.pm:507
 #, fuzzy, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Нийт хэмжээ"
 
-#: steps_gtk.pm:344
+#: steps_gtk.pm:347
 #, c-format
 msgid "Bad package"
 msgstr "Тааруухан багц"
 
-#: steps_gtk.pm:346
+#: steps_gtk.pm:349
 #, c-format
 msgid "Version: "
 msgstr "Хувилбар: "
 
-#: steps_gtk.pm:347
+#: steps_gtk.pm:350
 #, c-format
 msgid "Size: "
 msgstr "Хэмжээ: "
 
-#: steps_gtk.pm:347
+#: steps_gtk.pm:350
 #, c-format
 msgid "%d KB\n"
 msgstr "%d КБ\n"
 
-#: steps_gtk.pm:348
+#: steps_gtk.pm:351
 #, fuzzy, c-format
 msgid "Importance: "
 msgstr "Цонтууд импортлох"
 
-#: steps_gtk.pm:382
+#: steps_gtk.pm:385
 #, fuzzy, c-format
 msgid "You can not select/unselect this package"
 msgstr "Та"
 
-#: steps_gtk.pm:386
+#: steps_gtk.pm:389
 #, c-format
 msgid "due to missing %s"
 msgstr ""
 
-#: steps_gtk.pm:387
+#: steps_gtk.pm:390
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr ""
 
-#: steps_gtk.pm:388
+#: steps_gtk.pm:391
 #, fuzzy, c-format
 msgid "trying to promote %s"
 msgstr "Юу ч үгүй"
 
-#: steps_gtk.pm:389
+#: steps_gtk.pm:392
 #, fuzzy, c-format
 msgid "in order to keep %s"
 msgstr "ямх"
 
-#: steps_gtk.pm:394
+#: steps_gtk.pm:397
 #, fuzzy, c-format
 msgid ""
 "You can not select this package as there is not enough space left to install "
 "it"
 msgstr "Та бол зүүн"
 
-#: steps_gtk.pm:397
+#: steps_gtk.pm:400
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "Дараах багцууд суулгагдах гэж байна"
 
-#: steps_gtk.pm:398
+#: steps_gtk.pm:401
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr ""
 
-#: steps_gtk.pm:423
+#: steps_gtk.pm:426
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
 msgstr ""
 
-#: steps_gtk.pm:425
+#: steps_gtk.pm:428
 #, fuzzy, c-format
 msgid "You can not unselect this package. It is already installed"
 msgstr "Та бол"
 
-#: steps_gtk.pm:427
+#: steps_gtk.pm:430
 #, fuzzy, c-format
 msgid "You can not unselect this package. It must be upgraded"
 msgstr "Та"
 
-#: steps_gtk.pm:431
+#: steps_gtk.pm:434
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "Автоматаар сонгогдсон багцуудыг харуулах"
 
-#: steps_gtk.pm:433
+#: steps_gtk.pm:436
 #, c-format
 msgid "Install"
 msgstr "Суулга"
 
-#: steps_gtk.pm:436
+#: steps_gtk.pm:439
 #, fuzzy, c-format
 msgid "Load/Save selection"
 msgstr "Пакет"
 
-#: steps_gtk.pm:437
+#: steps_gtk.pm:440
 #, c-format
 msgid "Updating package selection"
 msgstr ""
 
-#: steps_gtk.pm:442
+#: steps_gtk.pm:445
 #, c-format
 msgid "Minimal install"
 msgstr ""
 
-#: steps_gtk.pm:456
+#: steps_gtk.pm:459
 #, c-format
 msgid "Software Management"
 msgstr ""
 
-#: steps_gtk.pm:456 steps_interactive.pm:393
+#: steps_gtk.pm:459 steps_interactive.pm:393
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Сонгохыг хүсэж буй багцаа сонгоно уу"
 
-#: steps_gtk.pm:473 steps_interactive.pm:595 steps_list.pm:32
+#: steps_gtk.pm:476 steps_interactive.pm:595 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "Суулгалт"
 
-#: steps_gtk.pm:499
+#: steps_gtk.pm:502
 #, fuzzy, c-format
 msgid "No details"
 msgstr "Үгүй"
 
-#: steps_gtk.pm:514
+#: steps_gtk.pm:517
 #, c-format
 msgid "Time remaining "
 msgstr "Үлдэж буй хугацаа"
 
-#: steps_gtk.pm:515
+#: steps_gtk.pm:518
 #, c-format
-msgid "Estimating"
+msgid "(estimating...)"
 msgstr ""
 
-#: steps_gtk.pm:542
+#: steps_gtk.pm:545
 #, fuzzy, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "Тааруухан багц"
 msgstr[1] "Тааруухан багц"
 
-#: steps_gtk.pm:588 steps_interactive.pm:782 steps_list.pm:43
+#: steps_gtk.pm:591 steps_interactive.pm:783 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Дүгнэлт"
 
-#: steps_gtk.pm:605
+#: steps_gtk.pm:608
 #, c-format
 msgid "Configure"
 msgstr "Тохируулах"
 
-#: steps_gtk.pm:622 steps_interactive.pm:778 steps_interactive.pm:934
+#: steps_gtk.pm:625 steps_interactive.pm:779 steps_interactive.pm:935
 #, c-format
 msgid "not configured"
 msgstr ""
 
-#: steps_gtk.pm:658 steps_interactive.pm:278
+#: steps_gtk.pm:661 steps_interactive.pm:278
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
 "If you want to skip some of them, you can unselect them now."
 msgstr ""
 
-#: steps_gtk.pm:667 steps_interactive.pm:284
+#: steps_gtk.pm:670 steps_interactive.pm:284
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -856,7 +866,7 @@ msgid ""
 "available once the system is fully installed."
 msgstr ""
 
-#: steps_gtk.pm:669 steps_interactive.pm:286
+#: steps_gtk.pm:672 steps_interactive.pm:286
 #, c-format
 msgid "Copy whole CDs"
 msgstr ""
@@ -1106,101 +1116,101 @@ msgid ""
 "Do you want to install the updates?"
 msgstr "Та г вы Интернэт г вы?"
 
-#: steps_interactive.pm:713
+#: steps_interactive.pm:714
 #, fuzzy, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "жигсаалт аас."
 
-#: steps_interactive.pm:719
+#: steps_interactive.pm:720
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr ""
 
 #. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:825
+#: steps_interactive.pm:826
 #, c-format
 msgid "%s on %s"
 msgstr "%s -д %s"
 
-#: steps_interactive.pm:859 steps_interactive.pm:866 steps_interactive.pm:880
-#: steps_interactive.pm:898 steps_interactive.pm:913
+#: steps_interactive.pm:860 steps_interactive.pm:867 steps_interactive.pm:881
+#: steps_interactive.pm:899 steps_interactive.pm:914
 #, c-format
 msgid "Hardware"
 msgstr "Техник хангамж"
 
-#: steps_interactive.pm:881 steps_interactive.pm:899
+#: steps_interactive.pm:882 steps_interactive.pm:900
 #, c-format
 msgid "Sound card"
 msgstr "Дууны карт"
 
-#: steps_interactive.pm:902
+#: steps_interactive.pm:903
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Та ISA дууны карттай юу?"
 
-#: steps_interactive.pm:904
+#: steps_interactive.pm:905
 #, fuzzy, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
 "card"
 msgstr "Ажиллуулах"
 
-#: steps_interactive.pm:906
+#: steps_interactive.pm:907
 #, fuzzy, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr "Үгүй Reyna"
 
-#: steps_interactive.pm:914
+#: steps_interactive.pm:915
 #, c-format
 msgid "Graphical interface"
 msgstr ""
 
-#: steps_interactive.pm:921 steps_interactive.pm:932
+#: steps_interactive.pm:922 steps_interactive.pm:933
 #, fuzzy, c-format
 msgid "Network & Internet"
 msgstr "Сүлжээ"
 
-#: steps_interactive.pm:933
+#: steps_interactive.pm:934
 #, fuzzy, c-format
 msgid "Proxies"
 msgstr "Польш"
 
-#: steps_interactive.pm:934
+#: steps_interactive.pm:935
 #, fuzzy, c-format
 msgid "configured"
 msgstr "Тохируулах"
 
-#: steps_interactive.pm:944
+#: steps_interactive.pm:945
 #, c-format
 msgid "Security Level"
 msgstr "Хамгаалалтын төвшин"
 
-#: steps_interactive.pm:963
+#: steps_interactive.pm:964
 #, c-format
 msgid "Firewall"
 msgstr ""
 
-#: steps_interactive.pm:967
+#: steps_interactive.pm:968
 #, c-format
 msgid "activated"
 msgstr ""
 
-#: steps_interactive.pm:967
+#: steps_interactive.pm:968
 #, c-format
 msgid "disabled"
 msgstr "хаалттай"
 
-#: steps_interactive.pm:981
+#: steps_interactive.pm:982
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Та Х-г тохируулаагүй байна. Та үүнийг хийхдээ итгэлтэй байна уу?"
 
-#: steps_interactive.pm:1008
+#: steps_interactive.pm:1009
 #, c-format
 msgid "Preparing bootloader..."
 msgstr ""
 
-#: steps_interactive.pm:1018
+#: steps_interactive.pm:1019
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1209,36 +1219,36 @@ msgid ""
 "root fs is: root=%s"
 msgstr ""
 
-#: steps_interactive.pm:1024
+#: steps_interactive.pm:1025
 #, fuzzy, c-format
 msgid "Do you want to use aboot?"
 msgstr "вы?"
 
-#: steps_interactive.pm:1027
+#: steps_interactive.pm:1028
 #, fuzzy, c-format
 msgid ""
 "Error installing aboot, \n"
 "try to force installation even if that destroys the first partition?"
 msgstr "Алдаа?"
 
-#: steps_interactive.pm:1039
+#: steps_interactive.pm:1040
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
 "restricted to the administrator."
 msgstr ""
 
-#: steps_interactive.pm:1071
+#: steps_interactive.pm:1072
 #, fuzzy, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Оруулах ямх"
 
-#: steps_interactive.pm:1073
+#: steps_interactive.pm:1074
 #, fuzzy, c-format
 msgid "Creating auto install floppy..."
 msgstr "Үүсгэж байна."
 
-#: steps_interactive.pm:1084
+#: steps_interactive.pm:1085
 #, fuzzy, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1246,22 +1256,22 @@ msgid ""
 "Do you really want to quit now?"
 msgstr "г вы?"
 
-#: steps_interactive.pm:1094
+#: steps_interactive.pm:1095
 #, fuzzy, c-format
 msgid "Congratulations"
 msgstr "Баяр хүргэе!"
 
-#: steps_interactive.pm:1098
+#: steps_interactive.pm:1099
 #, c-format
 msgid "Reboot"
 msgstr "Дахин ачаал"
 
-#: steps_interactive.pm:1102 steps_interactive.pm:1103
+#: steps_interactive.pm:1103 steps_interactive.pm:1104
 #, c-format
 msgid "Generate auto install floppy"
 msgstr ""
 
-#: steps_interactive.pm:1104
+#: steps_interactive.pm:1105
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"
@@ -1271,17 +1281,17 @@ msgid ""
 "You may prefer to replay the installation.\n"
 msgstr ""
 
-#: steps_interactive.pm:1109
+#: steps_interactive.pm:1110
 #, c-format
 msgid "Replay"
 msgstr ""
 
-#: steps_interactive.pm:1109
+#: steps_interactive.pm:1110
 #, c-format
 msgid "Automated"
 msgstr ""
 
-#: steps_interactive.pm:1112
+#: steps_interactive.pm:1113
 #, fuzzy, c-format
 msgid "Save packages selection"
 msgstr "Хадгалах"

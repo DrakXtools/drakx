@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-01 09:12+0200\n"
+"POT-Creation-Date: 2008-01-17 14:35+0100\n"
 "PO-Revision-Date: 2005-03-27 17:55+0530\n"
 "Last-Translator: Jaswinder Singh Phulewala <jaswinderphulewala@yahoo.com>\n"
 "Language-Team: Punjabi <punlinux-i18n@lists.soruceforge.net>\n"
@@ -139,7 +139,7 @@ msgid "Finding packages to upgrade..."
 msgstr "ਨਵੀਨੀਕਰਨ ਲਈ ਪੈਕੇਜਾਂ ਦੀ ਖੋਜ..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:610
+#: any.pm:620
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -154,7 +154,7 @@ msgid ""
 msgstr ""
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:633
+#: any.pm:643
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -167,67 +167,72 @@ msgstr ""
 "\n"
 "ਕੀ ਤੁਸੀਂ ਯਕੀਨਨ ਇਹ ਪੈਕੇਜ ਹਟਾਉਣੇ ਚਾਹੁੰਦੇ ਹੋ?\n"
 
-#: any.pm:1055
+#: any.pm:857
+#, fuzzy, c-format
+msgid "Error reading file %s"
+msgstr "ਫਾਇਲਾਂ ਭੇਜ ਰਿਹਾ ਹੈ..."
+
+#: any.pm:1065
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "ਹੇਠਲੀਆਂ ਡਿਸਕਾਂ ਦੇ ਨਾਂ ਤਬਦੀਲ ਕੀਤੇ ਹਨ:"
 
-#: any.pm:1057
+#: any.pm:1067
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (ਪਹਿਲਾਂ %s ਨਾਂ ਸੀ)"
 
-#: any.pm:1114
+#: any.pm:1124
 #, c-format
 msgid "HTTP"
 msgstr ""
 
-#: any.pm:1114
+#: any.pm:1124
 #, fuzzy, c-format
 msgid "FTP"
 msgstr "ਵੈਬ/FTP"
 
-#: any.pm:1114
+#: any.pm:1124
 #, fuzzy, c-format
 msgid "NFS"
 msgstr "PFS"
 
-#: any.pm:1133 steps_interactive.pm:922
+#: any.pm:1143 steps_interactive.pm:923
 #, c-format
 msgid "Network"
 msgstr "ਨੈੱਟਵਰਕ"
 
-#: any.pm:1137
+#: any.pm:1147
 #, fuzzy, c-format
 msgid "Please choose a media"
 msgstr "ਕਿਰਪਾ ਕਰਕੇ ਬੈਕਅੱਪ ਲਈ ਮਾਧਿਅਮ ਚੁਣੋ।"
 
-#: any.pm:1153
+#: any.pm:1163
 #, fuzzy, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "ਫਾਇਲ ਪਹਿਲਾਂ ਮੌਜੂਦ ਹੈ, ਇਹ ਵਰਤੋ?"
 
-#: any.pm:1157
+#: any.pm:1167
 #, fuzzy, c-format
 msgid "Permission denied"
 msgstr "ਅਧਿਕਾਰ"
 
-#: any.pm:1205
+#: any.pm:1215
 #, c-format
 msgid "Bad NFS name"
 msgstr ""
 
-#: any.pm:1226
+#: any.pm:1236
 #, c-format
 msgid "Bad media %s"
 msgstr ""
 
-#: any.pm:1269
+#: any.pm:1279
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "ਵਿਭਾਗੀਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਪਰਦਾ-ਤਸਵੀਰ ਨਹੀਂ ਬਣਾ ਸਕਦਾ"
 
-#: any.pm:1277
+#: any.pm:1287
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "ਪਰਦਾ-ਤਸਵੀਰਾਂ %s ਵਿੱਚ ਇੰਸਟਾਲੇਸ਼ਨ ਤੋਂ ਬਾਅਦ ਉਪਲੱਬਧ ਹੋਣਗੀਆਂ"
@@ -242,7 +247,7 @@ msgstr "ਇੰਸਟਾਲ ਹੋ ਰਹੇ ਹਨ"
 msgid "Configuration"
 msgstr "ਸੰਰਚਨਾ"
 
-#: install2.pm:165
+#: install2.pm:166
 #, c-format
 msgid "You must also format %s"
 msgstr "ਤੁਹਾਨੂੰ %s ਵੀ ਫਾਰਮਿਟ ਕਰਨਾ ਜਰੂਰੀ ਹੈ"
@@ -271,12 +276,12 @@ msgstr "ਨੈੱਟਵਰਕ ਬੰਦ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 msgid "Downloading file %s..."
 msgstr "ਫਾਇਲਾਂ ਭੇਜ ਰਿਹਾ ਹੈ..."
 
-#: media.pm:808
+#: media.pm:806
 #, c-format
 msgid "Copying some packages on disks for future use"
 msgstr ""
 
-#: media.pm:861
+#: media.pm:859
 #, c-format
 msgid "Copying in progress"
 msgstr "ਨਕਲ ਜਾਰੀ ਹੈ"
@@ -306,7 +311,7 @@ msgstr "ਵਧੀਆ"
 msgid "maybe"
 msgstr "ਹੋ ਸਕਦਾ ਹੈ"
 
-#: pkgs.pm:245
+#: pkgs.pm:254
 #, c-format
 msgid ""
 "Some packages requested by %s cannot be installed:\n"
@@ -642,7 +647,7 @@ msgstr ""
 "ਗਲਤੀ ਹੋਈ ਹੈ, ਪਰ ਮੈਂ ਨਹੀਂ ਜਾਣਦਾ ਕਿ ਇਸ ਦਾ ਕਿਸ ਤਰਾਂ ਪ੍ਰਬੰਧਨ ਕਰਨਾ ਹੈ।\n"
 "ਆਪਣੇ ਖਤਰੇ ਤੇ ਜਾਰੀ ਕਰੋ।"
 
-#: steps.pm:433
+#: steps.pm:436
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -669,7 +674,12 @@ msgstr "ਮੈਂਡਰਿਵ-ਲੀਨਕਸ ਇੰਸਟਾਲੇਸ਼ਨ %s "
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> ਇਕਾਈਆਂ ਵਿੱਚ "
 
-#: steps_gtk.pm:189
+#: steps_gtk.pm:82
+#, c-format
+msgid "Xorg server is slow to start. Please wait..."
+msgstr ""
+
+#: steps_gtk.pm:192
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -681,182 +691,182 @@ msgstr ""
 "ਆ ਸਕਦੀ ਹੈ। ਜੇ ਅਜਿਹਾ ਹੋਇਆ, ਤੁਸੀਂ ਪਾਠ ਇੰਸਟਾਲੇਸ਼ਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਇਸ ਲਈ,\n"
 "`F1' ਦਬਾਓ ਜਦੋਂ CDROM ਤੋਂ ਬੂਟ ਕਰਦੇ ਹੋ, ਫਿਰ `ਪਾਠ' ਭਰੋ।"
 
-#: steps_gtk.pm:256 steps_interactive.pm:435 steps_interactive.pm:564
+#: steps_gtk.pm:259 steps_interactive.pm:435 steps_interactive.pm:564
 #: steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "ਪੈਕੇਜ ਸਮੂਹ ਚੋਣ"
 
-#: steps_gtk.pm:277 steps_interactive.pm:581
+#: steps_gtk.pm:280 steps_interactive.pm:581
 #, c-format
 msgid "Individual package selection"
 msgstr "ਵੱਖ-ਵੱਖ ਪੈਕੇਜ ਚੋਣ"
 
-#: steps_gtk.pm:299 steps_interactive.pm:507
+#: steps_gtk.pm:302 steps_interactive.pm:507
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "ਕੁੱਲ ਅਕਾਰ: %d / %d ਮੈਬਾ"
 
-#: steps_gtk.pm:344
+#: steps_gtk.pm:347
 #, c-format
 msgid "Bad package"
 msgstr "ਗਲਤ ਪੈਕੇਜ"
 
-#: steps_gtk.pm:346
+#: steps_gtk.pm:349
 #, c-format
 msgid "Version: "
 msgstr "ਵਰਜਨ:"
 
-#: steps_gtk.pm:347
+#: steps_gtk.pm:350
 #, c-format
 msgid "Size: "
 msgstr "ਅਕਾਰ:"
 
-#: steps_gtk.pm:347
+#: steps_gtk.pm:350
 #, c-format
 msgid "%d KB\n"
 msgstr "%d ਕਿਬਾ\n"
 
-#: steps_gtk.pm:348
+#: steps_gtk.pm:351
 #, c-format
 msgid "Importance: "
 msgstr "ਖਾਸੀਅਤ:"
 
-#: steps_gtk.pm:382
+#: steps_gtk.pm:385
 #, c-format
 msgid "You can not select/unselect this package"
 msgstr "ਤੁਸੀਂ ਇਹ ਪੈਕੇਜ ਚੁਣ/ਨਾ-ਚੁਣ ਨਹੀਂ ਸਕਦੇ"
 
-#: steps_gtk.pm:386
+#: steps_gtk.pm:389
 #, c-format
 msgid "due to missing %s"
 msgstr "%s ਗੁੰਮ ਹੋਣ ਕਾਰਨ"
 
-#: steps_gtk.pm:387
+#: steps_gtk.pm:390
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "%s ਲੋੜ ਪੂਰੀ ਨਾ ਹੋਣ ਕਰਕੇ"
 
-#: steps_gtk.pm:388
+#: steps_gtk.pm:391
 #, c-format
 msgid "trying to promote %s"
 msgstr "%s ਵਰਤੋਂ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ"
 
-#: steps_gtk.pm:389
+#: steps_gtk.pm:392
 #, c-format
 msgid "in order to keep %s"
 msgstr "%s ਰੱਖਣ ਲਈ"
 
-#: steps_gtk.pm:394
+#: steps_gtk.pm:397
 #, c-format
 msgid ""
 "You can not select this package as there is not enough space left to install "
 "it"
 msgstr "ਤੁਸੀਂ ਇਹ ਪੈਕੇਜ ਨਹੀਂ ਚੁਣ ਸਕਦੇ ਕਿਉਂਕਿ ਇੱਥੇ ਇਸ ਨੂੰ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਲੋੜੀਂਦੀ ਥਾਂ ਨਹੀਂ ਹੈ।"
 
-#: steps_gtk.pm:397
+#: steps_gtk.pm:400
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "ਹੇਠਲੇ ਪੈਕੇਜ ਇੰਸਟਾਲ ਹੋ ਰਹੇ ਹਨ"
 
-#: steps_gtk.pm:398
+#: steps_gtk.pm:401
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "ਹੇਠਲੇ ਪੈਕੇਜ ਹਟਾਏ ਜਾ ਰਹੇ ਹਨ"
 
-#: steps_gtk.pm:423
+#: steps_gtk.pm:426
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
 msgstr "ਇਹ ਲਾਜ਼ਮੀ ਪੈਕੇਜ ਹੈ, ਇਸ ਦੀ ਚੋਣ ਨਹੀਂ ਹਟਾਈ ਜਾ ਸਕਦੀ"
 
-#: steps_gtk.pm:425
+#: steps_gtk.pm:428
 #, c-format
 msgid "You can not unselect this package. It is already installed"
 msgstr "ਤੁਸੀਂ ਇਸ ਪੈਕੇਜ ਦੀ ਚੋਣ ਨਹੀਂ ਹਟਾ ਸਕਦੇ। ਇਹ ਪਹਿਲਾਂ ਹੀ ਇੰਸਟਾਲ ਹੈ।"
 
-#: steps_gtk.pm:427
+#: steps_gtk.pm:430
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
 msgstr "ਤੁਸੀਂ ਇਸ ਪੈਕੇਜ ਦੀ ਚੋਣ ਨਹੀਂ ਹਟਾ ਸਕਦੇ। ਇਸ ਦਾ ਨਵੀਨੀਕਰਨ ਜਰੂਰੀ ਹੈ।"
 
-#: steps_gtk.pm:431
+#: steps_gtk.pm:434
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "ਚੁਣੇ ਪੈਕੇਜ ਸਵੈ ਹੀ ਵਿਖਾਓ"
 
-#: steps_gtk.pm:433
+#: steps_gtk.pm:436
 #, c-format
 msgid "Install"
 msgstr "ਇੰਸਟਾਲ"
 
-#: steps_gtk.pm:436
+#: steps_gtk.pm:439
 #, fuzzy, c-format
 msgid "Load/Save selection"
 msgstr "ਪੈਕੇਜ ਚੋਣ"
 
-#: steps_gtk.pm:437
+#: steps_gtk.pm:440
 #, c-format
 msgid "Updating package selection"
 msgstr "ਪੈਕੇਜ ਚੋਣ ਨਵੀਨੀਕਰਨ ਜਾਰੀ ਹੈ"
 
-#: steps_gtk.pm:442
+#: steps_gtk.pm:445
 #, c-format
 msgid "Minimal install"
 msgstr "ਘੱਟੋ-ਘੱਟ ਇੰਸਟਾਲ"
 
-#: steps_gtk.pm:456
+#: steps_gtk.pm:459
 #, c-format
 msgid "Software Management"
 msgstr "ਸਾਫਟਵੇਅਰ ਪ੍ਰਬੰਧਨ"
 
-#: steps_gtk.pm:456 steps_interactive.pm:393
+#: steps_gtk.pm:459 steps_interactive.pm:393
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਪੈਕੇਜ ਚੁਣੋ"
 
-#: steps_gtk.pm:473 steps_interactive.pm:595 steps_list.pm:32
+#: steps_gtk.pm:476 steps_interactive.pm:595 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "ਇੰਸਟਾਲ ਹੋ ਰਹੇ ਹਨ"
 
-#: steps_gtk.pm:499
+#: steps_gtk.pm:502
 #, c-format
 msgid "No details"
 msgstr "ਕੋਈ ਵੇਰਵਾ ਨਹੀਂ"
 
-#: steps_gtk.pm:514
+#: steps_gtk.pm:517
 #, c-format
 msgid "Time remaining "
 msgstr "ਬਾਕੀ ਸਮਾਂ"
 
-#: steps_gtk.pm:515
-#, c-format
-msgid "Estimating"
+#: steps_gtk.pm:518
+#, fuzzy, c-format
+msgid "(estimating...)"
 msgstr "ਅਨੁਮਾਨ ਜਾਰੀ ਹੈ"
 
-#: steps_gtk.pm:542
+#: steps_gtk.pm:545
 #, fuzzy, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d ਪੈਕੇਜ"
 msgstr[1] "%d ਪੈਕੇਜ"
 
-#: steps_gtk.pm:588 steps_interactive.pm:782 steps_list.pm:43
+#: steps_gtk.pm:591 steps_interactive.pm:783 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "ਸਾਰ"
 
-#: steps_gtk.pm:605
+#: steps_gtk.pm:608
 #, c-format
 msgid "Configure"
 msgstr "ਸੰਰਚਨਾ"
 
-#: steps_gtk.pm:622 steps_interactive.pm:778 steps_interactive.pm:934
+#: steps_gtk.pm:625 steps_interactive.pm:779 steps_interactive.pm:935
 #, c-format
 msgid "not configured"
 msgstr "ਸੰਰਚਿਤ ਨਹੀਂ"
 
-#: steps_gtk.pm:658 steps_interactive.pm:278
+#: steps_gtk.pm:661 steps_interactive.pm:278
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -865,7 +875,7 @@ msgstr ""
 "ਹੇਠਲੇ ਇੰਸਟਾਲੇਸ਼ਨ ਮਾਧਿਅਨ ਲੱਭੇ ਹਨ।\n"
 "ਜੇ ਤੁਸੀਂ ਇਹਨਾਂ ਵਿੱਚੋਂ ਕੁਝ ਛੱਡਣੇ ਚਾਹੁੰਦੇ ਹੋ, ਤੁਸੀਂ ਹੁਣ ਰੱਦ ਕਰ ਸਕਦੇ ਹੋ।"
 
-#: steps_gtk.pm:667 steps_interactive.pm:284
+#: steps_gtk.pm:670 steps_interactive.pm:284
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -877,7 +887,7 @@ msgstr ""
 "ਇਹ ਫਿਰ ਹਾਰਡ ਡਰਾਈਵ ਤੋਂ ਜਾਰੀ ਕਰੇਗਾ ਅਤੇ ਪੈਕੇਜ ਸਿਸਟਮ ਪੂਰੀ ਤਰਾਂ ਇੰਸਟਾਲ ਹੋਣ ਤੋਂ ਬਾਅਦ ਵੀ ਉਪਲੱਬਧ "
 "ਰਹਿਣਗੇ।"
 
-#: steps_gtk.pm:669 steps_interactive.pm:286
+#: steps_gtk.pm:672 steps_interactive.pm:286
 #, c-format
 msgid "Copy whole CDs"
 msgstr "ਪੂਰੀ CDs ਨਕਲ ਕਰੋ"
@@ -1138,101 +1148,101 @@ msgid ""
 "Do you want to install the updates?"
 msgstr ""
 
-#: steps_interactive.pm:713
+#: steps_interactive.pm:714
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "ਉਪਲੱਬਧ ਪੈਕੇਜਾਂ ਦੀ ਸੂਚੀ ਵੇਖਣ ਲਈ ਪ੍ਰਤੀਬਿੰਬ ਨਾਲ ਸੰਪਰਕ ਜਾਰੀ ਹੈ..."
 
-#: steps_interactive.pm:719
+#: steps_interactive.pm:720
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr "ਪ੍ਰਤੀਬਿੰਬ %s ਨਾਲ ਸੰਪਰਕ ਲਈ ਅਸਮਰਥ"
 
 #. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:825
+#: steps_interactive.pm:826
 #, c-format
 msgid "%s on %s"
 msgstr "%s, %s ਉੱਪਰ"
 
-#: steps_interactive.pm:859 steps_interactive.pm:866 steps_interactive.pm:880
-#: steps_interactive.pm:898 steps_interactive.pm:913
+#: steps_interactive.pm:860 steps_interactive.pm:867 steps_interactive.pm:881
+#: steps_interactive.pm:899 steps_interactive.pm:914
 #, c-format
 msgid "Hardware"
 msgstr "ਜੰਤਰ"
 
-#: steps_interactive.pm:881 steps_interactive.pm:899
+#: steps_interactive.pm:882 steps_interactive.pm:900
 #, c-format
 msgid "Sound card"
 msgstr "ਸਾਊਂਡ ਕਾਰਡ"
 
-#: steps_interactive.pm:902
+#: steps_interactive.pm:903
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "ਕੀ ਤੁਹਾਡੇ ਕੋਲ ISA ਸਾਊਂਡ ਕਾਰਡ ਹੈ?"
 
-#: steps_interactive.pm:904
+#: steps_interactive.pm:905
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
 "card"
 msgstr "ਆਪਣੀ ਸਾਊਂਡ ਕਾਰਡ ਸੰਰਚਨਾ ਲਈ ਇੰਸਟਾਲੇਸ਼ਨ ਮਗਰੋਂ \"alsaconf\" ਜਾਂ \"sndconfig\" ਚਲਾਓ"
 
-#: steps_interactive.pm:906
+#: steps_interactive.pm:907
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr "ਕੋਈ ਸਾਊਂਡ ਕਾਰਡ ਨਹੀਂ ਲੱਭਿਆ। ਇੰਸਟਾਲੇਸ਼ਨ ਮਗਰੋਂ \"harddrake\" ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ"
 
-#: steps_interactive.pm:914
+#: steps_interactive.pm:915
 #, c-format
 msgid "Graphical interface"
 msgstr "ਗਰਾਫੀਕਲ ਇੰਟਰਫੇਸ"
 
-#: steps_interactive.pm:921 steps_interactive.pm:932
+#: steps_interactive.pm:922 steps_interactive.pm:933
 #, c-format
 msgid "Network & Internet"
 msgstr "ਨੈੱਟਵਰਕ ਤੇ ਇੰਟਰਨੈੱਟ"
 
-#: steps_interactive.pm:933
+#: steps_interactive.pm:934
 #, c-format
 msgid "Proxies"
 msgstr "ਪਰਾਕਸੀ"
 
-#: steps_interactive.pm:934
+#: steps_interactive.pm:935
 #, c-format
 msgid "configured"
 msgstr "ਸੰਰਚਿਤ"
 
-#: steps_interactive.pm:944
+#: steps_interactive.pm:945
 #, c-format
 msgid "Security Level"
 msgstr "ਸੁਰੱਖਿਆ ਪੱਧਰ"
 
-#: steps_interactive.pm:963
+#: steps_interactive.pm:964
 #, c-format
 msgid "Firewall"
 msgstr "ਫਾਇਰਵਾਲ"
 
-#: steps_interactive.pm:967
+#: steps_interactive.pm:968
 #, c-format
 msgid "activated"
 msgstr "ਸਰਗਰਮ"
 
-#: steps_interactive.pm:967
+#: steps_interactive.pm:968
 #, c-format
 msgid "disabled"
 msgstr "ਅਯੋਗ"
 
-#: steps_interactive.pm:981
+#: steps_interactive.pm:982
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "ਤੁਸੀਂ X ਸੰਰਚਿਤ ਨਹੀਂ ਕੀਤਾ। ਕੀ ਤੁਸੀਂ ਯਕੀਨਨ ਇਸ ਨੂੰ ਚਾਹੁੰਦੇ ਹੋ?"
 
-#: steps_interactive.pm:1008
+#: steps_interactive.pm:1009
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "ਬੂਟ-ਲੋਡਰ ਤਿਆਰ ਕਰ ਰਿਹਾ ਹੈ..."
 
-#: steps_interactive.pm:1018
+#: steps_interactive.pm:1019
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1244,12 +1254,12 @@ msgstr ""
 "ਜਾਰੀ ਰਹੇਗਾ, ਪਰ ਤੁਹਾਨੂੰ ਆਪਣੀ ਮਸ਼ੀਨ ਬੂਟ ਕਰਨ ਲਈ BootX ਜਾਂ ਹੋਰ ਢੰਗ ਵਰਤਣ ਦੀ ਲੋੜ ਪਵੇਗੀ। ਰੂਟ "
 "ਫਾਇਲ ਸਿਸਟਮ ਲਈ ਕਰਨਲ ਆਰਗੂਮੈਂਟ ਹਨ: root=%s"
 
-#: steps_interactive.pm:1024
+#: steps_interactive.pm:1025
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "ਕੀ ਤੁਸੀਂ aboot ਵਰਤਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
-#: steps_interactive.pm:1027
+#: steps_interactive.pm:1028
 #, c-format
 msgid ""
 "Error installing aboot, \n"
@@ -1258,24 +1268,24 @@ msgstr ""
 "aboot ਇੰਸਟਾਲ ਕਰਨ ਵਿੱਚ ਗਲਤੀ, \n"
 "ਇੰਸਟਾਲੇਸ਼ਨ ਮਜਬੂਰ ਕਰੋ ਭਾਵੇਂ ਇਹ ਪਹਿਲਾ ਭਾਗ ਨਕਾਰਾ ਕਰਦਾ ਹੈ?"
 
-#: steps_interactive.pm:1039
+#: steps_interactive.pm:1040
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
 "restricted to the administrator."
 msgstr "ਇਸ ਸੁਰੱਖਿਆ ਪੱਧਰ ਵਿੱਚ, Windows ਭਾਗ ਵਿਚਲੀ ਫਾਇਲਾਂ ਵਰਤਣ ਲਈ ਪ੍ਰਬੰਧਕ ਨੂੰ ਮਨਾਹੀ ਹੈ।"
 
-#: steps_interactive.pm:1071
+#: steps_interactive.pm:1072
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "ਡਰਾਈਵ %s ਵਿੱਚ ਖਾਲੀ ਫਲਾਪੀ ਪਾਓ"
 
-#: steps_interactive.pm:1073
+#: steps_interactive.pm:1074
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "ਸਵੈ ਇੰਸਟਾਲ ਫਲਾਪੀ ਬਣਾ ਰਿਹਾ ਹੈ..."
 
-#: steps_interactive.pm:1084
+#: steps_interactive.pm:1085
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1286,22 +1296,22 @@ msgstr ""
 "\n"
 "ਕੀ ਤੁਸੀਂ ਹੁਣ ਯਕੀਨਨ ਬਾਹਰ ਜਾਣਾ ਹੈ?"
 
-#: steps_interactive.pm:1094
+#: steps_interactive.pm:1095
 #, c-format
 msgid "Congratulations"
 msgstr "ਮੁਬਾਰਕਾਂ"
 
-#: steps_interactive.pm:1098
+#: steps_interactive.pm:1099
 #, c-format
 msgid "Reboot"
 msgstr "ਮੁੜ-ਚਾਲੂ"
 
-#: steps_interactive.pm:1102 steps_interactive.pm:1103
+#: steps_interactive.pm:1103 steps_interactive.pm:1104
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "ਸਵੈ ਇੰਸਟਾਲ ਫਲਾਪੀ ਬਣਾਓ"
 
-#: steps_interactive.pm:1104
+#: steps_interactive.pm:1105
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"
@@ -1316,17 +1326,17 @@ msgstr ""
 "\n"
 "ਤੁਸੀਂ ਇੰਸਟਾਲੇਸ਼ਨ ਮੁੜ ਚਲਾਉਣ ਲਈ ਚੁਣ ਸਕਦੇ ਹੋ।\n"
 
-#: steps_interactive.pm:1109
+#: steps_interactive.pm:1110
 #, c-format
 msgid "Replay"
 msgstr "ਮੁੜ-ਚਲਾਓ"
 
-#: steps_interactive.pm:1109
+#: steps_interactive.pm:1110
 #, c-format
 msgid "Automated"
 msgstr "ਸਵੈਚਾਲਤ"
 
-#: steps_interactive.pm:1112
+#: steps_interactive.pm:1113
 #, c-format
 msgid "Save packages selection"
 msgstr "ਪੈਕੇਜ ਚੋਣ ਸੰਭਾਲੋ"
