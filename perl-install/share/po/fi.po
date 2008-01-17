@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fi - LE2005 Release\n"
-"POT-Creation-Date: 2007-09-12 17:02+0200\n"
+"POT-Creation-Date: 2008-01-17 14:31+0100\n"
 "PO-Revision-Date: 2005-04-03 20:59+0300\n"
 "Last-Translator: Thomas Backlund <tmb@mandrake.org>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -20,20 +20,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 
-#: any.pm:240 diskdrake/interactive.pm:603 diskdrake/interactive.pm:790
-#: diskdrake/interactive.pm:834 diskdrake/interactive.pm:896
-#: diskdrake/interactive.pm:1183 do_pkgs.pm:209 do_pkgs.pm:255
-#: harddrake/sound.pm:201 interactive.pm:576
+#: any.pm:245 diskdrake/interactive.pm:552 diskdrake/interactive.pm:739
+#: diskdrake/interactive.pm:783 diskdrake/interactive.pm:841
+#: diskdrake/interactive.pm:1132 do_pkgs.pm:216 do_pkgs.pm:258
+#: harddrake/sound.pm:202 interactive.pm:580
 #, c-format
 msgid "Please wait"
 msgstr "Odota hetki"
 
-#: any.pm:240
+#: any.pm:245
 #, c-format
 msgid "Bootloader installation in progress"
 msgstr "Käyttöjärjestelmän lataajan asennus käynnissä"
 
-#: any.pm:251
+#: any.pm:256
 #, c-format
 msgid ""
 "LILO wants to assign a new Volume ID to drive %s.  However, changing\n"
@@ -50,12 +50,12 @@ msgstr ""
 "\n"
 "Määritetäänkö uusi Volyymi ID?"
 
-#: any.pm:262
+#: any.pm:267
 #, c-format
 msgid "Installation of bootloader failed. The following error occurred:"
 msgstr "Käynnistyslataajan asennus epäonnistui. Seuraava virhe tapahtui:"
 
-#: any.pm:268
+#: any.pm:273
 #, c-format
 msgid ""
 "You may need to change your Open Firmware boot-device to\n"
@@ -74,7 +74,7 @@ msgstr ""
 "Seuraavalla käynnistyskerralla sinun pitäisi nähdä käynnistyslataajan\n"
 "komentokehote."
 
-#: any.pm:306
+#: any.pm:311
 #, c-format
 msgid ""
 "You decided to install the bootloader on a partition.\n"
@@ -89,269 +89,270 @@ msgstr ""
 "\n"
 "Mikä on sinun käynnistyskiintolevysi?"
 
-#: any.pm:329
+#: any.pm:334
 #, c-format
 msgid "First sector of drive (MBR)"
 msgstr "Levyn ensimmäinen sektori (MBR)"
 
-#: any.pm:330
+#: any.pm:335
 #, c-format
 msgid "First sector of the root partition"
 msgstr "Ensimmäinen sektori juuriosiolla"
 
-#: any.pm:332
+#: any.pm:337
 #, c-format
 msgid "On Floppy"
 msgstr "Levykkeellä"
 
-#: any.pm:334
+#: any.pm:339
 #, c-format
 msgid "Skip"
 msgstr "Ohita"
 
-#: any.pm:338
+#: any.pm:343
 #, c-format
 msgid "LILO/grub Installation"
 msgstr "LILO/grub asennus"
 
-#: any.pm:340
+#: any.pm:345
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Minne haluat asentaa käyttöjärjestelmän lataajan?"
 
-#: any.pm:367
+#: any.pm:372
 #, c-format
 msgid "Boot Style Configuration"
 msgstr "Käynnistystavan asetukset"
 
-#: any.pm:377 any.pm:409 any.pm:410
+#: any.pm:382 any.pm:414 any.pm:415
 #, c-format
 msgid "Bootloader main options"
 msgstr "Käyttöjärjestelmän lataajan pääasetukset"
 
-#: any.pm:382
+#: any.pm:387
 #, c-format
 msgid "Bootloader"
 msgstr "Käynnistyslataaja"
 
-#: any.pm:383 any.pm:414
+#: any.pm:388 any.pm:419
 #, c-format
 msgid "Bootloader to use"
 msgstr "Käytettävä käynnistyslataaja"
 
-#: any.pm:385 any.pm:416
+#: any.pm:390 any.pm:421
 #, c-format
 msgid "Boot device"
 msgstr "Käynnistyslaite"
 
-#: any.pm:387
+#: any.pm:392
 #, c-format
 msgid "Main options"
 msgstr ""
 
-#: any.pm:388
+#: any.pm:393
 #, c-format
 msgid "Delay before booting default image"
 msgstr "Viive ennen oletusjärjestelmän käynnistystä"
 
-#: any.pm:389
+#: any.pm:394
 #, c-format
 msgid "Enable ACPI"
 msgstr "Ota ACPI käyttöön"
 
-#: any.pm:390
+#: any.pm:395
 #, fuzzy, c-format
 msgid "Enable APIC"
 msgstr "Ota ACPI käyttöön"
 
-#: any.pm:391
+#: any.pm:396
 #, fuzzy, c-format
 msgid "Enable Local APIC"
 msgstr "Ota ACPI käyttöön"
 
-#: any.pm:393 any.pm:773 authentication.pm:196 diskdrake/smbnfs_gtk.pm:181
+#: any.pm:398 any.pm:785 any.pm:794 authentication.pm:197
+#: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
 msgstr "Salasana"
 
-#: any.pm:395 authentication.pm:207
+#: any.pm:400 authentication.pm:208
 #, c-format
 msgid "The passwords do not match"
 msgstr "Salasanat poikkeavat toisistaan"
 
-#: any.pm:395 authentication.pm:207 diskdrake/interactive.pm:1343
+#: any.pm:400 authentication.pm:208 diskdrake/interactive.pm:1299
 #, c-format
 msgid "Please try again"
 msgstr "Yritä uudelleen"
 
-#: any.pm:396
+#: any.pm:401
 #, fuzzy, c-format
 msgid "You can not use a password with %s"
 msgstr "Et voi käyttää salattua tiedostojärjestelmää liitospisteelle %s"
 
-#: any.pm:399 any.pm:774 authentication.pm:197
+#: any.pm:404 any.pm:787 any.pm:796 authentication.pm:198
 #, c-format
 msgid "Password (again)"
 msgstr "Salasana (uudelleen)"
 
-#: any.pm:400
+#: any.pm:405
 #, c-format
 msgid "Restrict command line options"
 msgstr "Rajoita komentorivioptioita"
 
-#: any.pm:400
+#: any.pm:405
 #, c-format
 msgid "restrict"
 msgstr "rajoita"
 
-#: any.pm:401
+#: any.pm:406
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 "Asetus ``Rajoita komentorivioptioita'' ei ole hyödyllinen ilman salasanaa"
 
-#: any.pm:403
+#: any.pm:408
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Tyhjennä /tmp jokaisella käynnistyskerralla"
 
-#: any.pm:404
+#: any.pm:409
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
 msgstr "Tarkka muistin koko, jos tarpeen (löydettiin %d Mt)"
 
-#: any.pm:405
+#: any.pm:410
 #, c-format
 msgid "Give the ram size in MB"
 msgstr "Anna muistin koko megatavuina (Mt)"
 
-#: any.pm:415
+#: any.pm:420
 #, c-format
 msgid "Init Message"
 msgstr "Käynnistysviesti"
 
-#: any.pm:417
+#: any.pm:422
 #, c-format
 msgid "Open Firmware Delay"
 msgstr "Vapaa Firmware -viive"
 
-#: any.pm:418
+#: any.pm:423
 #, c-format
 msgid "Kernel Boot Timeout"
 msgstr "Ytimen käynnistysviive"
 
-#: any.pm:419
+#: any.pm:424
 #, c-format
 msgid "Enable CD Boot?"
 msgstr "Mahdollista CD-käynnistys?"
 
-#: any.pm:420
+#: any.pm:425
 #, c-format
 msgid "Enable OF Boot?"
 msgstr "Mahdollista OF-käynnistys?"
 
-#: any.pm:421
+#: any.pm:426
 #, c-format
 msgid "Default OS?"
 msgstr "Oletuskäyttöjärjestelmä?"
 
-#: any.pm:487
+#: any.pm:493
 #, c-format
 msgid "Image"
 msgstr "Kuva"
 
-#: any.pm:488 any.pm:501
+#: any.pm:494 any.pm:507
 #, c-format
 msgid "Root"
 msgstr "Juuri"
 
-#: any.pm:489 any.pm:514
+#: any.pm:495 any.pm:520
 #, c-format
 msgid "Append"
 msgstr "Lisää"
 
-#: any.pm:491
+#: any.pm:497
 #, c-format
 msgid "Xen append"
 msgstr ""
 
-#: any.pm:494
+#: any.pm:500
 #, c-format
 msgid "Video mode"
 msgstr "Näyttötila"
 
-#: any.pm:496
+#: any.pm:502
 #, c-format
 msgid "Initrd"
 msgstr "Initrd"
 
-#: any.pm:497
+#: any.pm:503
 #, c-format
 msgid "Network profile"
 msgstr "Verkkoprofiili"
 
-#: any.pm:506 any.pm:511 any.pm:513 diskdrake/interactive.pm:425
+#: any.pm:512 any.pm:517 any.pm:519 diskdrake/interactive.pm:374
 #, c-format
 msgid "Label"
 msgstr "Nimike"
 
-#: any.pm:508 any.pm:516 harddrake/v4l.pm:438
+#: any.pm:514 any.pm:522 harddrake/v4l.pm:438
 #, c-format
 msgid "Default"
 msgstr "Oletus"
 
-#: any.pm:515
+#: any.pm:521
 #, c-format
 msgid "NoVideo"
 msgstr "Ei näyttöä"
 
-#: any.pm:526
+#: any.pm:532
 #, c-format
 msgid "Empty label not allowed"
 msgstr "Tyhjää nimikettä ei sallita"
 
-#: any.pm:527
+#: any.pm:533
 #, c-format
 msgid "You must specify a kernel image"
 msgstr "Sinun täytyy määritellä ydin"
 
-#: any.pm:527
+#: any.pm:533
 #, c-format
 msgid "You must specify a root partition"
 msgstr "Sinun täytyy määritellä juuriosio"
 
-#: any.pm:528
+#: any.pm:534
 #, c-format
 msgid "This label is already used"
 msgstr "Nimike on jo käytössä"
 
-#: any.pm:546
+#: any.pm:552
 #, c-format
 msgid "Which type of entry do you want to add?"
 msgstr "Minkä tyyppisen tietueen haluat lisätä?"
 
-#: any.pm:547
+#: any.pm:553
 #, c-format
 msgid "Linux"
 msgstr "Linux"
 
-#: any.pm:547
+#: any.pm:553
 #, c-format
 msgid "Other OS (SunOS...)"
 msgstr "Muu käyttöjärjestelmä (SunOS...)"
 
-#: any.pm:548
+#: any.pm:554
 #, c-format
 msgid "Other OS (MacOS...)"
 msgstr "Muu käyttöjärjestelmä (MacOS...)"
 
-#: any.pm:548
+#: any.pm:554
 #, c-format
 msgid "Other OS (Windows...)"
 msgstr "Muu käyttöjärjestelmä (Windows...)"
 
-#: any.pm:576
+#: any.pm:582
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -360,179 +361,184 @@ msgstr ""
 "Tässä ovat tämänhetkiset käynnistysvalikon tietueet.\n"
 "Voit lisätä uusia tai muuttaa olemassa olevia."
 
-#: any.pm:727
+#: any.pm:745
 #, c-format
 msgid "access to X programs"
 msgstr "oikeudet X-ohjelmiin"
 
-#: any.pm:728
+#: any.pm:746
 #, c-format
 msgid "access to rpm tools"
 msgstr "oikeudet RPM-työkaluihin"
 
-#: any.pm:729
+#: any.pm:747
 #, c-format
 msgid "allow \"su\""
 msgstr "salli \"su\""
 
-#: any.pm:730
+#: any.pm:748
 #, c-format
 msgid "access to administrative files"
 msgstr "oikeudet ylläpidollisiin tiedostoihin"
 
-#: any.pm:731
+#: any.pm:749
 #, c-format
 msgid "access to network tools"
 msgstr "oikeudet verkkotyökaluihin"
 
-#: any.pm:732
+#: any.pm:750
 #, c-format
 msgid "access to compilation tools"
 msgstr "oikeudet ohjelmointityökaluihin"
 
-#: any.pm:737
+#: any.pm:756
 #, c-format
 msgid "(already added %s)"
 msgstr "(lisätty jo: %s)"
 
-#: any.pm:744
+#: any.pm:762
 #, c-format
 msgid "Please give a user name"
 msgstr "Anna käyttäjätunnus"
 
-#: any.pm:745
+#: any.pm:763
 #, c-format
 msgid ""
 "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr ""
 "Käyttäjätunnus saa sisältää vain pieniä kirjaimia, numeroita, `-' ja `_'"
 
-#: any.pm:746
+#: any.pm:764
 #, c-format
 msgid "The user name is too long"
 msgstr "Käyttäjätunnus on liian pitkä"
 
-#: any.pm:747
+#: any.pm:765
 #, c-format
 msgid "This user name has already been added"
 msgstr "Käyttäjätunnus on jo lisätty"
 
-#: any.pm:748 any.pm:776
+#: any.pm:771 any.pm:798
 #, c-format
 msgid "User ID"
 msgstr "Käyttäjä-ID"
 
-#: any.pm:749 any.pm:777
+#: any.pm:771 any.pm:799
 #, c-format
 msgid "Group ID"
 msgstr "Ryhmä-ID"
 
-#: any.pm:752
+#: any.pm:772
 #, fuzzy, c-format
 msgid "%s must be a number"
 msgstr "Valitsimen %s pitää olla luku!"
 
-#: any.pm:753
+#: any.pm:773
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
 msgstr ""
 
-#: any.pm:768
+#: any.pm:777
 #, fuzzy, c-format
 msgid "User management"
 msgstr "Käyttäjätunnus"
 
 # Asennuksen sivuvalikko
-#: any.pm:775 authentication.pm:182
+#: any.pm:784 authentication.pm:183
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "Aseta ylläpitäjän (\"root\") salasana"
 
-#: any.pm:780
+#: any.pm:789
 #, fuzzy, c-format
 msgid "Enter a user"
 msgstr ""
 "Lisää käyttäjä\n"
 "%s"
 
-#: any.pm:781
+#: any.pm:790
 #, c-format
 msgid "Real name"
 msgstr "Oikea nimi"
 
-#: any.pm:772
+#: any.pm:793
 #, c-format
 msgid "Login name"
 msgstr "Käyttäjätunnus"
 
-#: any.pm:775
+#: any.pm:797
 #, c-format
 msgid "Shell"
 msgstr "Komentotulkki"
 
-#: any.pm:822 security/l10n.pm:14
+#: any.pm:835 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "Automaattinen kirjautuminen"
 
-#: any.pm:823
+#: any.pm:836
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr ""
 "Yksi käyttäjä voidaan asettaa kirjautumaan sisään automaattisesti "
 "tietokoneellesi."
 
-#: any.pm:824
+#: any.pm:837
 #, fuzzy, c-format
 msgid "Use this feature"
 msgstr "Haluatko käyttää tätä ominaisuutta?"
 
-#: any.pm:825
+#: any.pm:838
 #, c-format
 msgid "Choose the default user:"
 msgstr "Valitse oletuskäyttäjä:"
 
-#: any.pm:826
+#: any.pm:839
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Valitse käytettävä ikkunointijärjestelmä:"
 
-#: any.pm:854
-#, c-format
-msgid "License agreement"
-msgstr "Käyttöoikeussopimus"
-
-#: any.pm:857 diskdrake/dav.pm:26
-#, c-format
-msgid "Quit"
-msgstr "Lopeta"
-
-#: any.pm:860
+#: any.pm:862 any.pm:912
 #, c-format
 msgid "Release Notes"
 msgstr "Julkaisutiedote"
 
-#: any.pm:863
+#: any.pm:869 any.pm:1201 interactive/gtk.pm:766
+#, c-format
+msgid "Close"
+msgstr "Sulje"
+
+#: any.pm:905
+#, c-format
+msgid "License agreement"
+msgstr "Käyttöoikeussopimus"
+
+#: any.pm:908 diskdrake/dav.pm:26
+#, c-format
+msgid "Quit"
+msgstr "Lopeta"
+
+#: any.pm:915
 #, c-format
 msgid "Accept"
 msgstr "Hyväksy"
 
-#: any.pm:863
+#: any.pm:915
 #, c-format
 msgid "Refuse"
 msgstr "Kieltäydy"
 
-#: any.pm:882 any.pm:950
+#: any.pm:930 any.pm:996
 #, c-format
 msgid "Please choose a language to use."
 msgstr "Valitse käytettävä kieli."
 
-#: any.pm:883 any.pm:951
+#: any.pm:931 any.pm:997
 #, c-format
 msgid "Language choice"
 msgstr "Kielivalinta"
 
-#: any.pm:913
+#: any.pm:961
 #, c-format
 msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
@@ -543,74 +549,74 @@ msgstr ""
 "haluat asentaa. Ne ovat käytettävissä asennuksen jälkeen\n"
 "kun olet käynnistänyt koneesi uudelleen."
 
-#: any.pm:916
+#: any.pm:964
 #, c-format
 msgid "Multi languages"
 msgstr ""
 
-#: any.pm:928 any.pm:959
+#: any.pm:975 any.pm:1005
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr ""
 
 # Asennuksen sivuvalikko
-#: any.pm:930
+#: any.pm:977
 #, c-format
 msgid "All languages"
 msgstr "Kaikki kielet"
 
-#: any.pm:1005
+#: any.pm:1052
 #, c-format
 msgid "Country / Region"
 msgstr "Maa / alue"
 
-#: any.pm:1007
+#: any.pm:1054
 #, c-format
 msgid "Please choose your country."
 msgstr "Valitse maa jossa olet."
 
-#: any.pm:1009
+#: any.pm:1056
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Tässä on koko lista käytettävissä olevista maista"
 
-#: any.pm:1010
+#: any.pm:1057
 #, c-format
 msgid "Other Countries"
 msgstr "Muut maat"
 
-#: any.pm:1010 interactive.pm:477
+#: any.pm:1057 interactive.pm:481
 #, c-format
 msgid "Advanced"
 msgstr "Lisäasetukset"
 
-#: any.pm:1016
+#: any.pm:1063
 #, c-format
 msgid "Input method:"
 msgstr "Syöttömenetelmä:"
 
-#: any.pm:1019
+#: any.pm:1066
 #, c-format
 msgid "None"
 msgstr "Ei mitään"
 
-#: any.pm:1099
+#: any.pm:1146
 #, c-format
 msgid "No sharing"
 msgstr "Ei jaettu"
 
 # Asennuksen sivuvalikko
-#: any.pm:1099
+#: any.pm:1146
 #, c-format
 msgid "Allow all users"
 msgstr "Salli kaikille käyttäjille"
 
-#: any.pm:1099
+#: any.pm:1146
 #, c-format
 msgid "Custom"
 msgstr "Mukautettu"
 
-#: any.pm:1103
+#: any.pm:1150
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -625,7 +631,7 @@ msgstr ""
 "\n"
 "\"Mukautettu\" sallii käyttäjäkohtaiset oikeudet.\n"
 
-#: any.pm:1115
+#: any.pm:1162
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
@@ -633,7 +639,7 @@ msgid ""
 msgstr ""
 "NFS: Unix-tiedostonjakojärjestelmä, jota Mac ja Windows tukevat huonosti."
 
-#: any.pm:1118
+#: any.pm:1165
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
@@ -642,23 +648,18 @@ msgstr ""
 "SMB: tiedostonjakojärjestelmä, jota käyttävät Windows, Mac OS X ja monet "
 "Linux-järjestelmät."
 
-#: any.pm:1126
+#: any.pm:1173
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Voit jakaa sekä NFS:llä että Samballa. Valitse kumpaa haluat käyttää."
 
-#: any.pm:1151
+#: any.pm:1201
 #, c-format
 msgid "Launch userdrake"
 msgstr "Käynnistä Userdrake"
 
-#: any.pm:1151 interactive/gtk.pm:747
-#, c-format
-msgid "Close"
-msgstr "Sulje"
-
-#: any.pm:1153
+#: any.pm:1203
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -667,109 +668,109 @@ msgstr ""
 "Käyttäjäkohtainen jako käyttää ryhmää \"fileshare\".\n"
 "Voit käyttää Userdrakea lisätäksesi käyttäjiä tähän ryhmään."
 
-#: any.pm:1245
+#: any.pm:1295
 #, c-format
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr "Kirjaudu ulos ja käytä sen jälkeen Ctrl-Alt-Askelpalautin"
 
-#: any.pm:1249
+#: any.pm:1299
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr ""
 "Sinun pitää kirjautua ulos ja takaisin sisään jotta muutokset tulevat "
 "voimaan."
 
-#: any.pm:1284
+#: any.pm:1334
 #, c-format
 msgid "Timezone"
 msgstr "Aikavyöhyke"
 
-#: any.pm:1284
+#: any.pm:1334
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Mikä on järjestelmäsi aikavyöhyke?"
 
-#: any.pm:1296 any.pm:1298
+#: any.pm:1346 any.pm:1348
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr ""
 
-#: any.pm:1299
+#: any.pm:1349
 #, c-format
 msgid "What is the best time?"
 msgstr ""
 
-#: any.pm:1303
+#: any.pm:1353
 #, fuzzy, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "Laitteistokello asetettu GMT-aikaan"
 
-#: any.pm:1304
+#: any.pm:1354
 #, fuzzy, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "Laitteistokello asetettu GMT-aikaan"
 
-#: any.pm:1306
+#: any.pm:1356
 #, c-format
 msgid "NTP Server"
 msgstr "NTP-palvelin"
 
-#: any.pm:1307
+#: any.pm:1357
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Automaattinen kellon synkronointi (käyttäen NTP:tä)"
 
-#: authentication.pm:23
+#: authentication.pm:24
 #, c-format
 msgid "Local file"
 msgstr "Paikallinen tiedosto"
 
-#: authentication.pm:24
+#: authentication.pm:25
 #, c-format
 msgid "LDAP"
 msgstr "LDAP"
 
-#: authentication.pm:25
+#: authentication.pm:26
 #, c-format
 msgid "NIS"
 msgstr "NIS"
 
-#: authentication.pm:26
+#: authentication.pm:27
 #, c-format
 msgid "Smart Card"
 msgstr "Älykortti"
 
-#: authentication.pm:27 authentication.pm:163
+#: authentication.pm:28 authentication.pm:164
 #, c-format
 msgid "Windows Domain"
 msgstr "Windows verkkoalue"
 
-#: authentication.pm:28
+#: authentication.pm:29
 #, c-format
 msgid "Active Directory with SFU"
 msgstr "Aktiivihakemisto SFU:lla"
 
-#: authentication.pm:29
+#: authentication.pm:30
 #, c-format
 msgid "Active Directory with Winbind"
 msgstr "Aktiivihakemisto Winbind:llä"
 
-#: authentication.pm:66
+#: authentication.pm:67
 #, c-format
 msgid "Local file:"
 msgstr "Paikallinen tiedosto:"
 
-#: authentication.pm:66
+#: authentication.pm:67
 #, c-format
 msgid "Use information stored in local files for all authentication"
 msgstr ""
 
-#: authentication.pm:67
+#: authentication.pm:68
 #, c-format
 msgid "LDAP:"
 msgstr "LDAP:"
 
-#: authentication.pm:67
+#: authentication.pm:68
 #, c-format
 msgid ""
 "Tells your computer to use LDAP for some or all authentication. LDAP "
@@ -778,12 +779,12 @@ msgstr ""
 "Koneesi käyttää LDAP:a joihinkin tai kaikkiin tunnistuksiin. LDAP keskittää "
 "tietyntyyppiset tiedot organisaation sisällä."
 
-#: authentication.pm:68
+#: authentication.pm:69
 #, c-format
 msgid "NIS:"
 msgstr "NIS:"
 
-#: authentication.pm:68
+#: authentication.pm:69
 #, c-format
 msgid ""
 "Allows you to run a group of computers in the same Network Information "
@@ -792,12 +793,12 @@ msgstr ""
 "Salli samaan Network Information Service -verkkoalueeseen kuuluvien "
 "tietokoneiden käyttää yhteistä salasana- ja ryhmätiedostoa."
 
-#: authentication.pm:69
+#: authentication.pm:70
 #, c-format
 msgid "Windows Domain:"
 msgstr "Windows-verkkoalue:"
 
-#: authentication.pm:69
+#: authentication.pm:70
 #, c-format
 msgid ""
 "Winbind allows the system to retrieve information and authenticate users in "
@@ -806,114 +807,114 @@ msgstr ""
 "Winbind sallii järjestelmän noutaa tiedot ja tunnistaa käyttäjät Windows-"
 "verkkoalueella."
 
-#: authentication.pm:70
+#: authentication.pm:71
 #, c-format
 msgid "Active Directory with SFU:"
 msgstr "Aktiivihakemisto SFU:lla:"
 
-#: authentication.pm:70
+#: authentication.pm:71
 #, c-format
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
 msgstr ""
 
-#: authentication.pm:71
+#: authentication.pm:72
 #, c-format
 msgid "Active Directory with Winbind:"
 msgstr "Aktiivihakemisto Winbind:llä:"
 
-#: authentication.pm:71
+#: authentication.pm:72
 #, c-format
 msgid ""
 "Winbind allows the system to authenticate users in a Windows Active "
 "Directory Server."
 msgstr ""
 
-#: authentication.pm:96
+#: authentication.pm:97
 #, c-format
 msgid "Authentication LDAP"
 msgstr "Tunnistus: LDAP"
 
-#: authentication.pm:97
+#: authentication.pm:98
 #, c-format
 msgid "LDAP Base dn"
 msgstr "LDAP perus-dn"
 
-#: authentication.pm:98
+#: authentication.pm:99
 #, c-format
 msgid "LDAP Server"
 msgstr "LDAP-palvelin"
 
-#: authentication.pm:111 fsedit.pm:23
+#: authentication.pm:112 fsedit.pm:23
 #, c-format
 msgid "simple"
 msgstr "yksinkertainen"
 
-#: authentication.pm:112
+#: authentication.pm:113
 #, c-format
 msgid "TLS"
 msgstr "TLS"
 
-#: authentication.pm:113
+#: authentication.pm:114
 #, c-format
 msgid "SSL"
 msgstr "SSL"
 
-#: authentication.pm:114
+#: authentication.pm:115
 #, c-format
 msgid "security layout (SASL/Kerberos)"
 msgstr "turva-asetukset (SASL/Kerberos)"
 
-#: authentication.pm:121 authentication.pm:159
+#: authentication.pm:122 authentication.pm:160
 #, c-format
 msgid "Authentication Active Directory"
 msgstr "Tunnistus: Aktiivihakemisto"
 
-#: authentication.pm:122 diskdrake/smbnfs_gtk.pm:182
+#: authentication.pm:123 diskdrake/smbnfs_gtk.pm:182
 #, c-format
 msgid "Domain"
 msgstr "Verkkoalue"
 
-#: authentication.pm:124 diskdrake/dav.pm:63
+#: authentication.pm:125 diskdrake/dav.pm:63
 #, c-format
 msgid "Server"
 msgstr "Palvelin"
 
-#: authentication.pm:125
+#: authentication.pm:126
 #, c-format
 msgid "LDAP users database"
 msgstr "LDAP käyttäjätietokanta"
 
-#: authentication.pm:126
+#: authentication.pm:127
 #, c-format
 msgid "Use Anonymous BIND "
 msgstr "Käytä anonyymia BIND:a "
 
-#: authentication.pm:127
+#: authentication.pm:128
 #, c-format
 msgid "LDAP user allowed to browse the Active Directory"
 msgstr "LDAP käyttäjä saa selata Aktiivihakemistoa"
 
-#: authentication.pm:128
+#: authentication.pm:129
 #, c-format
 msgid "Password for user"
 msgstr "Käyttäjän salasana"
 
-#: authentication.pm:140
+#: authentication.pm:141
 #, c-format
 msgid "Authentication NIS"
 msgstr "Tunnistus: NIS"
 
-#: authentication.pm:141
+#: authentication.pm:142
 #, c-format
 msgid "NIS Domain"
 msgstr "NIS-verkkoalue"
 
-#: authentication.pm:142
+#: authentication.pm:143
 #, c-format
 msgid "NIS Server"
 msgstr "NIS-palvelin"
 
-#: authentication.pm:147
+#: authentication.pm:148
 #, c-format
 msgid ""
 "For this to work for a W2K PDC, you will probably need to have the admin "
@@ -942,49 +943,49 @@ msgstr ""
 "käynnistyksen jälkeen.\n"
 "Komento 'wbinfo -t' tarkistaa jos tunnistuksen salaisuudet ovat kunnossa."
 
-#: authentication.pm:159
+#: authentication.pm:160
 #, c-format
 msgid "Authentication Windows Domain"
 msgstr "Tunnistus: Windows verkkoalue"
 
-#: authentication.pm:161
+#: authentication.pm:162
 #, c-format
 msgid "Active Directory Realm "
 msgstr ""
 
-#: authentication.pm:164
+#: authentication.pm:165
 #, c-format
 msgid "Domain Admin User Name"
 msgstr "Verkkoalueen pääkäyttäjän nimi"
 
-#: authentication.pm:165
+#: authentication.pm:166
 #, c-format
 msgid "Domain Admin Password"
 msgstr "Verkkoalueen pääkäyttäjän salasana"
 
-#: authentication.pm:181 authentication.pm:198
+#: authentication.pm:182 authentication.pm:199
 #, c-format
 msgid "Authentication"
 msgstr "Tunnistustapa"
 
-#: authentication.pm:184
+#: authentication.pm:185
 #, c-format
 msgid "Authentication method"
 msgstr "Tunnistustapa"
 
 #. -PO: keep this short or else the buttons will not fit in the window
-#: authentication.pm:189
+#: authentication.pm:190
 #, c-format
 msgid "No password"
 msgstr "Ei salasanaa"
 
-#: authentication.pm:210
+#: authentication.pm:211
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr ""
 "Salasana on liian yksinkertainen (sen tulee olla ainakin %d merkkiä pitkä)"
 
-#: authentication.pm:351
+#: authentication.pm:352
 #, c-format
 msgid "Can not use broadcast with no NIS domain"
 msgstr "En voi käyttää kuulutusta ilman NIS-verkkoaluetta"
@@ -995,7 +996,7 @@ msgstr "En voi käyttää kuulutusta ilman NIS-verkkoaluetta"
 # leave it in English, as it is the best for your language)
 #
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: bootloader.pm:882
+#: bootloader.pm:900
 #, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
@@ -1010,42 +1011,42 @@ msgstr ""
 "odota oletuskaynnistysta.\n"
 "\n"
 
-#: bootloader.pm:1030
+#: bootloader.pm:1050
 #, c-format
 msgid "LILO with text menu"
 msgstr "LILO tekstipohjaisella valikolla"
 
-#: bootloader.pm:1031
+#: bootloader.pm:1051
 #, c-format
 msgid "GRUB with graphical menu"
 msgstr ""
 
-#: bootloader.pm:1032
+#: bootloader.pm:1052
 #, c-format
 msgid "GRUB with text menu"
 msgstr ""
 
-#: bootloader.pm:1033
+#: bootloader.pm:1053
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
 
-#: bootloader.pm:1034
+#: bootloader.pm:1054
 #, c-format
 msgid "SILO"
 msgstr "SILO"
 
-#: bootloader.pm:1114
+#: bootloader.pm:1135
 #, c-format
 msgid "not enough room in /boot"
 msgstr "ei tarpeeksi tilaa hakemistossa /boot"
 
-#: bootloader.pm:1681
+#: bootloader.pm:1760
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
 msgstr "Et voi asentaa käyttöjärjestelmän lataajaa osioon %s\n"
 
-#: bootloader.pm:1734
+#: bootloader.pm:1813
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1054,7 +1055,7 @@ msgstr ""
 "Käynnistyslataajasi asetukset pitää päivittää koska levyosiot on "
 "uudelleennumeroitu"
 
-#: bootloader.pm:1747
+#: bootloader.pm:1826
 #, c-format
 msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
@@ -1064,52 +1065,52 @@ msgstr ""
 "tilaan ja valita \"%s\""
 
 # Asennuksen sivuvalikko
-#: bootloader.pm:1748
+#: bootloader.pm:1827
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Asenna käynnistyslataaja uudelleen"
 
-#: common.pm:132
+#: common.pm:142
 #, fuzzy, c-format
 msgid "B"
 msgstr "kt"
 
-#: common.pm:132
+#: common.pm:142
 #, c-format
 msgid "KB"
 msgstr "kt"
 
-#: common.pm:132
+#: common.pm:142
 #, c-format
 msgid "MB"
 msgstr "Mt"
 
-#: common.pm:132
+#: common.pm:142
 #, c-format
 msgid "GB"
 msgstr "Gt"
 
-#: common.pm:132 common.pm:141
+#: common.pm:142 common.pm:151
 #, c-format
 msgid "TB"
 msgstr "Tt"
 
-#: common.pm:149
+#: common.pm:159
 #, c-format
 msgid "%d minutes"
 msgstr "%d minuuttia"
 
-#: common.pm:151
+#: common.pm:161
 #, c-format
 msgid "1 minute"
 msgstr "1 minuutti"
 
-#: common.pm:153
+#: common.pm:163
 #, c-format
 msgid "%d seconds"
 msgstr "%d sekuntia"
 
-#: common.pm:306
+#: common.pm:335
 #, c-format
 msgid "command %s missing"
 msgstr ""
@@ -1132,45 +1133,44 @@ msgstr ""
 msgid "New"
 msgstr "Uusi"
 
-#: diskdrake/dav.pm:61 diskdrake/interactive.pm:431 diskdrake/smbnfs_gtk.pm:75
+#: diskdrake/dav.pm:61 diskdrake/interactive.pm:380 diskdrake/smbnfs_gtk.pm:75
 #, c-format
 msgid "Unmount"
 msgstr "Irrota"
 
-#: diskdrake/dav.pm:62 diskdrake/interactive.pm:428 diskdrake/smbnfs_gtk.pm:76
+#: diskdrake/dav.pm:62 diskdrake/interactive.pm:377 diskdrake/smbnfs_gtk.pm:76
 #, c-format
 msgid "Mount"
 msgstr "Liitä"
 
-#: diskdrake/dav.pm:64 diskdrake/interactive.pm:422
-#: diskdrake/interactive.pm:662 diskdrake/interactive.pm:680
-#: diskdrake/interactive.pm:684 diskdrake/removable.pm:23
+#: diskdrake/dav.pm:64 diskdrake/interactive.pm:371
+#: diskdrake/interactive.pm:611 diskdrake/interactive.pm:629
+#: diskdrake/interactive.pm:633 diskdrake/removable.pm:23
 #: diskdrake/smbnfs_gtk.pm:79
 #, c-format
 msgid "Mount point"
 msgstr "Liitospiste"
 
-#: diskdrake/dav.pm:65 diskdrake/interactive.pm:424
-#: diskdrake/interactive.pm:1039 diskdrake/removable.pm:24
+#: diskdrake/dav.pm:65 diskdrake/interactive.pm:373
+#: diskdrake/interactive.pm:987 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
 msgstr "Optiot"
 
-#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:166 diskdrake/removable.pm:26
+#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:164 diskdrake/removable.pm:26
 #: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
 #, c-format
 msgid "Done"
 msgstr "Valmis"
 
-#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:115 diskdrake/interactive.pm:229
-#: diskdrake/interactive.pm:242 diskdrake/interactive.pm:386
-#: diskdrake/interactive.pm:404 diskdrake/interactive.pm:529
-#: diskdrake/interactive.pm:534 diskdrake/interactive.pm:652
-#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:1087
-#: diskdrake/interactive.pm:1100 diskdrake/interactive.pm:1103
-#: diskdrake/interactive.pm:1351 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
-#: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:227
+#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:113 diskdrake/interactive.pm:231
+#: diskdrake/interactive.pm:244 diskdrake/interactive.pm:478
+#: diskdrake/interactive.pm:483 diskdrake/interactive.pm:601
+#: diskdrake/interactive.pm:859 diskdrake/interactive.pm:1033
+#: diskdrake/interactive.pm:1046 diskdrake/interactive.pm:1049
+#: diskdrake/interactive.pm:1299 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
+#: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:223
 #: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
 #: scanner.pm:94 scanner.pm:105 scanner.pm:112 scanner.pm:119 wizards.pm:95
 #: wizards.pm:99 wizards.pm:121
@@ -1193,28 +1193,28 @@ msgstr "Osoitteen tulee alkaa etuliitteellä 'http://' tai 'https://'"
 msgid "Server: "
 msgstr "Palvelin: "
 
-#: diskdrake/dav.pm:110 diskdrake/interactive.pm:502
-#: diskdrake/interactive.pm:1225 diskdrake/interactive.pm:1303
+#: diskdrake/dav.pm:110 diskdrake/interactive.pm:451
+#: diskdrake/interactive.pm:1179 diskdrake/interactive.pm:1259
 #, c-format
 msgid "Mount point: "
 msgstr "Liitospiste: "
 
-#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1310
+#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1266
 #, c-format
 msgid "Options: %s"
 msgstr "Optiot: %s"
 
-#: diskdrake/hd_gtk.pm:53 diskdrake/interactive.pm:286
+#: diskdrake/hd_gtk.pm:53 diskdrake/interactive.pm:282
 #: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:106
-#: fs/partitioning_wizard.pm:47 fs/partitioning_wizard.pm:201
-#: fs/partitioning_wizard.pm:207 fs/partitioning_wizard.pm:247
-#: fs/partitioning_wizard.pm:266 fs/partitioning_wizard.pm:271
+#: fs/partitioning_wizard.pm:51 fs/partitioning_wizard.pm:205
+#: fs/partitioning_wizard.pm:211 fs/partitioning_wizard.pm:251
+#: fs/partitioning_wizard.pm:270 fs/partitioning_wizard.pm:275
 #, c-format
 msgid "Partitioning"
 msgstr "Osiointi"
 
-#: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1059
-#: diskdrake/interactive.pm:1069 diskdrake/interactive.pm:1122
+#: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1008
+#: diskdrake/interactive.pm:1018 diskdrake/interactive.pm:1071
 #, c-format
 msgid "Read carefully!"
 msgstr "Lue tarkkaan!"
@@ -1224,7 +1224,7 @@ msgstr "Lue tarkkaan!"
 msgid "Please make a backup of your data first"
 msgstr "Luo ensin varmuuskopio tiedoistasi"
 
-#: diskdrake/hd_gtk.pm:94 diskdrake/interactive.pm:222
+#: diskdrake/hd_gtk.pm:94 diskdrake/interactive.pm:224
 #, c-format
 msgid "Exit"
 msgstr "Poistu"
@@ -1244,18 +1244,18 @@ msgstr ""
 "Jos aiot käyttää aboot:a, varmista että jätät vapaata tilaa levyn alkuun\n"
 "(2048 sektoria on tarpeeksi)"
 
-#: diskdrake/hd_gtk.pm:162 interactive.pm:640 interactive/gtk.pm:719
-#: interactive/gtk.pm:740 interactive/gtk.pm:760 ugtk2.pm:926 ugtk2.pm:927
+#: diskdrake/hd_gtk.pm:160 interactive.pm:644 interactive/gtk.pm:744
+#: interactive/gtk.pm:759 interactive/gtk.pm:779 ugtk2.pm:936 ugtk2.pm:937
 #, c-format
 msgid "Help"
 msgstr "Ohje"
 
-#: diskdrake/hd_gtk.pm:197
+#: diskdrake/hd_gtk.pm:195
 #, c-format
 msgid "Choose action"
 msgstr "Valitse toiminto"
 
-#: diskdrake/hd_gtk.pm:201
+#: diskdrake/hd_gtk.pm:199
 #, c-format
 msgid ""
 "You have one big Microsoft Windows partition.\n"
@@ -1266,163 +1266,157 @@ msgstr ""
 "Ehdotan että muutat ensimmäiseksi osion kokoa\n"
 "(klikkaa osiota ja valitse sitten \"Muuta kokoa\")"
 
-#: diskdrake/hd_gtk.pm:203
+#: diskdrake/hd_gtk.pm:201
 #, c-format
 msgid "Please click on a partition"
 msgstr "Klikkaa osiota"
 
-#: diskdrake/hd_gtk.pm:217 diskdrake/smbnfs_gtk.pm:63
+#: diskdrake/hd_gtk.pm:215 diskdrake/smbnfs_gtk.pm:63
 #, c-format
 msgid "Details"
 msgstr "Yksityiskohdat"
 
-#: diskdrake/hd_gtk.pm:265
+#: diskdrake/hd_gtk.pm:263
 #, c-format
 msgid "No hard drives found"
 msgstr "Yhtään kiintolevyä ei löytynyt"
 
-#: diskdrake/hd_gtk.pm:292
+#: diskdrake/hd_gtk.pm:290
 #, c-format
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: diskdrake/hd_gtk.pm:354
+#: diskdrake/hd_gtk.pm:352
 #, fuzzy, c-format
 msgid "Ext3"
 msgstr "Poistu"
 
-#: diskdrake/hd_gtk.pm:354
+#: diskdrake/hd_gtk.pm:352
 #, fuzzy, c-format
 msgid "XFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:354
+#: diskdrake/hd_gtk.pm:352
 #, c-format
 msgid "Swap"
 msgstr "Sivutus"
 
-#: diskdrake/hd_gtk.pm:351
+#: diskdrake/hd_gtk.pm:352
 #, c-format
 msgid "SunOS"
 msgstr "SunOS"
 
-#: diskdrake/hd_gtk.pm:351
+#: diskdrake/hd_gtk.pm:352
 #, c-format
 msgid "HFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:351
+#: diskdrake/hd_gtk.pm:352
 #, c-format
 msgid "Windows"
 msgstr "Windows "
 
-#: diskdrake/hd_gtk.pm:352 services.pm:158
+#: diskdrake/hd_gtk.pm:353 services.pm:158
 #, c-format
 msgid "Other"
 msgstr "Muut"
 
-#: diskdrake/hd_gtk.pm:352 diskdrake/interactive.pm:1239
+#: diskdrake/hd_gtk.pm:353 diskdrake/interactive.pm:1194
 #, c-format
 msgid "Empty"
 msgstr "Tyhjä"
 
-#: diskdrake/hd_gtk.pm:356
+#: diskdrake/hd_gtk.pm:357
 #, c-format
 msgid "Filesystem types:"
 msgstr "Tiedostojärjestelmien tyypit:"
 
-#: diskdrake/hd_gtk.pm:380 diskdrake/interactive.pm:291
-#: diskdrake/interactive.pm:380 diskdrake/interactive.pm:410
-#: diskdrake/interactive.pm:559 diskdrake/interactive.pm:743
-#: diskdrake/interactive.pm:801 diskdrake/interactive.pm:894
-#: diskdrake/interactive.pm:936 diskdrake/interactive.pm:937
-#: diskdrake/interactive.pm:1168 diskdrake/interactive.pm:1206
-#: diskdrake/interactive.pm:1342 do_pkgs.pm:16 do_pkgs.pm:35 do_pkgs.pm:53
-#: harddrake/sound.pm:285
+#: diskdrake/hd_gtk.pm:381 diskdrake/interactive.pm:287
+#: diskdrake/interactive.pm:359 diskdrake/interactive.pm:508
+#: diskdrake/interactive.pm:692 diskdrake/interactive.pm:750
+#: diskdrake/interactive.pm:839 diskdrake/interactive.pm:881
+#: diskdrake/interactive.pm:882 diskdrake/interactive.pm:1117
+#: diskdrake/interactive.pm:1155 diskdrake/interactive.pm:1298 do_pkgs.pm:16
+#: do_pkgs.pm:35 do_pkgs.pm:53 harddrake/sound.pm:286
 #, c-format
 msgid "Warning"
 msgstr "Varoitus"
 
-#: diskdrake/hd_gtk.pm:380
+#: diskdrake/hd_gtk.pm:381
 #, fuzzy, c-format
 msgid "This partition is already empty"
 msgstr "Tämän osion kokoa ei voi muuttaa"
 
-#: diskdrake/hd_gtk.pm:389
+#: diskdrake/hd_gtk.pm:390
 #, c-format
 msgid "Use ``Unmount'' first"
 msgstr "Käytä ensin komentoa ``Irrota''"
 
-#: diskdrake/hd_gtk.pm:389
-#, c-format
-msgid "Use ``%s'' instead"
+#: diskdrake/hd_gtk.pm:390
+#, fuzzy, c-format
+msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Käytä sen sijaan ``%s'':ää"
 
-#: diskdrake/hd_gtk.pm:389 diskdrake/interactive.pm:423
-#: diskdrake/interactive.pm:597 diskdrake/interactive.pm:1075
+#: diskdrake/hd_gtk.pm:390 diskdrake/interactive.pm:372
+#: diskdrake/interactive.pm:546 diskdrake/interactive.pm:1024
 #: diskdrake/removable.pm:25 diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
 msgstr "Tyyppi"
 
-#: diskdrake/interactive.pm:193
+#: diskdrake/interactive.pm:195
 #, c-format
 msgid "Choose another partition"
 msgstr "Valitse toinen osio"
 
-#: diskdrake/interactive.pm:193
+#: diskdrake/interactive.pm:195
 #, c-format
 msgid "Choose a partition"
 msgstr "Valitse osio"
 
-#: diskdrake/interactive.pm:255
-#, c-format
-msgid "Undo"
-msgstr "Peruuta"
-
-#: diskdrake/interactive.pm:255
+#: diskdrake/interactive.pm:257
 #, c-format
 msgid "Toggle to normal mode"
 msgstr "Vaihda vakiotilaan"
 
-#: diskdrake/interactive.pm:255
+#: diskdrake/interactive.pm:257
 #, c-format
 msgid "Toggle to expert mode"
 msgstr "Vaihda asiantuntijatilaan"
 
-#: diskdrake/interactive.pm:269 diskdrake/interactive.pm:279
-#: diskdrake/interactive.pm:1153
+#: diskdrake/interactive.pm:265 diskdrake/interactive.pm:275
+#: diskdrake/interactive.pm:1102
 #, c-format
 msgid "Confirmation"
 msgstr "Vahvistaminen"
 
-#: diskdrake/interactive.pm:269
+#: diskdrake/interactive.pm:265
 #, c-format
 msgid "Continue anyway?"
 msgstr "Jatka joka tapauksessa?"
 
-#: diskdrake/interactive.pm:274
+#: diskdrake/interactive.pm:270
 #, c-format
 msgid "Quit without saving"
 msgstr "Lopeta tallentamatta"
 
-#: diskdrake/interactive.pm:274
+#: diskdrake/interactive.pm:270
 #, c-format
 msgid "Quit without writing the partition table?"
 msgstr "Lopeta kirjoittamatta osiotaulua?"
 
-#: diskdrake/interactive.pm:279
+#: diskdrake/interactive.pm:275
 #, c-format
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "Haluatko tallentaa muutokset tiedostoon /etc/fstab"
 
-#: diskdrake/interactive.pm:286 fs/partitioning_wizard.pm:247
+#: diskdrake/interactive.pm:282 fs/partitioning_wizard.pm:251
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
 "Sinun tulee käynnistää järjestelmä uudelleen jotta muutokset tulevat voimaan"
 
-#: diskdrake/interactive.pm:291
+#: diskdrake/interactive.pm:287
 #, c-format
 msgid ""
 "You should format partition %s.\n"
@@ -1433,38 +1427,38 @@ msgstr ""
 "Muuten tietuetta liitoskohdalle %s ei kirjoiteta fstab:iin.\n"
 "Lopeta kummiskin?"
 
-#: diskdrake/interactive.pm:304
+#: diskdrake/interactive.pm:300
 #, c-format
 msgid "Clear all"
 msgstr "Tyhjennä kaikki"
 
-#: diskdrake/interactive.pm:305
+#: diskdrake/interactive.pm:301
 #, c-format
 msgid "Auto allocate"
 msgstr "Automaattinen varaus"
 
-#: diskdrake/interactive.pm:306 diskdrake/interactive.pm:354
+#: diskdrake/interactive.pm:302 diskdrake/interactive.pm:350
 #: interactive/curses.pm:512
 #, c-format
 msgid "More"
 msgstr "Lisää"
 
-#: diskdrake/interactive.pm:311
+#: diskdrake/interactive.pm:307
 #, c-format
 msgid "Hard drive information"
 msgstr "Kiintolevyn tiedot"
 
-#: diskdrake/interactive.pm:343
+#: diskdrake/interactive.pm:339
 #, c-format
 msgid "All primary partitions are used"
 msgstr "Kaikki primääriosiot käytetty"
 
-#: diskdrake/interactive.pm:344
+#: diskdrake/interactive.pm:340
 #, c-format
 msgid "I can not add any more partitions"
 msgstr "Uusia osioita ei voida lisätä"
 
-#: diskdrake/interactive.pm:345
+#: diskdrake/interactive.pm:341
 #, c-format
 msgid ""
 "To have more partitions, please delete one to be able to create an extended "
@@ -1473,121 +1467,97 @@ msgstr ""
 "Voidaksesi luoda lisää osioita tuhoa yksi olemassa oleva osio jotta voisit "
 "luoda laajennetun osion"
 
-#: diskdrake/interactive.pm:356
-#, c-format
-msgid "Save partition table"
-msgstr "Tallenna osiotaulu"
-
-#: diskdrake/interactive.pm:357
-#, c-format
-msgid "Restore partition table"
-msgstr "Palauta osiotaulu"
-
-#: diskdrake/interactive.pm:359
+#: diskdrake/interactive.pm:352
 #, c-format
 msgid "Reload partition table"
 msgstr "Uudelleenlataa osiotaulu"
 
-#: diskdrake/interactive.pm:369 diskdrake/interactive.pm:395
-#, c-format
-msgid "Select file"
-msgstr "Valitse tiedosto"
-
-#: diskdrake/interactive.pm:381
-#, c-format
-msgid ""
-"The backup partition table has not the same size\n"
-"Still continue?"
-msgstr ""
-"Osiotaulun varmuuskopio ei ole saman kokoinen\n"
-"Jatketaanko silti?"
-
-#: diskdrake/interactive.pm:410
+#: diskdrake/interactive.pm:359
 #, c-format
 msgid "Detailed information"
 msgstr "Yksityiskohtaiset tiedot"
 
-#: diskdrake/interactive.pm:426 diskdrake/interactive.pm:756
+#: diskdrake/interactive.pm:375 diskdrake/interactive.pm:705
 #, c-format
 msgid "Resize"
 msgstr "Uusi koko"
 
-#: diskdrake/interactive.pm:427
+#: diskdrake/interactive.pm:376
 #, c-format
 msgid "Format"
 msgstr "Alusta"
 
-#: diskdrake/interactive.pm:429 diskdrake/interactive.pm:842
+#: diskdrake/interactive.pm:378 diskdrake/interactive.pm:791
 #, c-format
 msgid "Add to RAID"
 msgstr "Lisää RAIDiin"
 
-#: diskdrake/interactive.pm:430 diskdrake/interactive.pm:859
+#: diskdrake/interactive.pm:379 diskdrake/interactive.pm:809
 #, c-format
 msgid "Add to LVM"
 msgstr "Lisää LVM:iin"
 
-#: diskdrake/interactive.pm:432
+#: diskdrake/interactive.pm:381
 #, c-format
 msgid "Delete"
 msgstr "Poista"
 
-#: diskdrake/interactive.pm:433
+#: diskdrake/interactive.pm:382
 #, c-format
 msgid "Remove from RAID"
 msgstr "Poista RAID:sta"
 
-#: diskdrake/interactive.pm:434
+#: diskdrake/interactive.pm:383
 #, c-format
 msgid "Remove from LVM"
 msgstr "Poista LVM:stä"
 
-#: diskdrake/interactive.pm:435
+#: diskdrake/interactive.pm:384
 #, c-format
 msgid "Modify RAID"
 msgstr "Muokkaa RAID:a"
 
-#: diskdrake/interactive.pm:436
+#: diskdrake/interactive.pm:385
 #, c-format
 msgid "Use for loopback"
 msgstr "Käytä loopback-tiedostoa"
 
-#: diskdrake/interactive.pm:447
+#: diskdrake/interactive.pm:396
 #, c-format
 msgid "Create"
 msgstr "Luo"
 
-#: diskdrake/interactive.pm:491 diskdrake/interactive.pm:493
+#: diskdrake/interactive.pm:440 diskdrake/interactive.pm:442
 #, c-format
 msgid "Create a new partition"
 msgstr "Luo uusi osio"
 
-#: diskdrake/interactive.pm:495
+#: diskdrake/interactive.pm:444
 #, c-format
 msgid "Start sector: "
 msgstr "Aloitussektori: "
 
-#: diskdrake/interactive.pm:498 diskdrake/interactive.pm:929
+#: diskdrake/interactive.pm:447 diskdrake/interactive.pm:874
 #, c-format
 msgid "Size in MB: "
 msgstr "Koko Mt: "
 
-#: diskdrake/interactive.pm:500 diskdrake/interactive.pm:930
+#: diskdrake/interactive.pm:449 diskdrake/interactive.pm:875
 #, c-format
 msgid "Filesystem type: "
 msgstr "Tiedostojärjestelmä: "
 
-#: diskdrake/interactive.pm:506
+#: diskdrake/interactive.pm:455
 #, c-format
 msgid "Preference: "
 msgstr "Ominaisuus: "
 
-#: diskdrake/interactive.pm:509
+#: diskdrake/interactive.pm:458
 #, c-format
 msgid "Logical volume name "
 msgstr "Loogisen taltion nimi "
 
-#: diskdrake/interactive.pm:529
+#: diskdrake/interactive.pm:478
 #, c-format
 msgid ""
 "You can not create a new partition\n"
@@ -1599,55 +1569,55 @@ msgstr ""
 "Poista ensin yksi primääriosio, ja luo laajennettu osio sen tilalle."
 
 # mat
-#: diskdrake/interactive.pm:559
+#: diskdrake/interactive.pm:508
 #, c-format
 msgid "Remove the loopback file?"
 msgstr "Poista loopback-tiedosto?"
 
 # mat
-#: diskdrake/interactive.pm:581
+#: diskdrake/interactive.pm:530
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr "Vaihdettuasi osion %s tyyppiä kaikki siinä olevat tiedot häviävät"
 
-#: diskdrake/interactive.pm:594
+#: diskdrake/interactive.pm:543
 #, c-format
 msgid "Change partition type"
 msgstr "Muuta osiotyyppiä"
 
-#: diskdrake/interactive.pm:596 diskdrake/removable.pm:47
+#: diskdrake/interactive.pm:545 diskdrake/removable.pm:47
 #, c-format
 msgid "Which filesystem do you want?"
 msgstr "Minkä tiedostojärjestelmän haluat?"
 
-#: diskdrake/interactive.pm:603
-#, c-format
-msgid "Switching from ext2 to ext3"
+#: diskdrake/interactive.pm:552
+#, fuzzy, c-format
+msgid "Switching from %s to %s"
 msgstr "Vaihdetaan ext2:sta ext3:een"
 
-#: diskdrake/interactive.pm:629 diskdrake/interactive.pm:632
+#: diskdrake/interactive.pm:578 diskdrake/interactive.pm:581
 #, c-format
 msgid "Which volume label?"
 msgstr ""
 
-#: diskdrake/interactive.pm:633
+#: diskdrake/interactive.pm:582
 #, fuzzy, c-format
 msgid "Label:"
 msgstr "Nimike"
 
 # mat
-#: diskdrake/interactive.pm:647
+#: diskdrake/interactive.pm:596
 #, c-format
 msgid "Where do you want to mount the loopback file %s?"
 msgstr "Minne haluat liittää loopback-tiedoston %s?"
 
-#: diskdrake/interactive.pm:648
+#: diskdrake/interactive.pm:597
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "Minne haluat liittää laitteen %s?"
 
-#: diskdrake/interactive.pm:653
+#: diskdrake/interactive.pm:602
 #, c-format
 msgid ""
 "Can not unset mount point as this partition is used for loop back.\n"
@@ -1656,59 +1626,59 @@ msgstr ""
 "Liitospistettä ei voida poistaa koska osiota käytetään loopback-tilassa.\n"
 "Poista loopback-tiedosto ensin."
 
-#: diskdrake/interactive.pm:683
+#: diskdrake/interactive.pm:632
 #, c-format
 msgid "Where do you want to mount %s?"
 msgstr "Minne haluat liittää laitteen %s?"
 
-#: diskdrake/interactive.pm:707 diskdrake/interactive.pm:790
-#: fs/partitioning_wizard.pm:141 fs/partitioning_wizard.pm:173
+#: diskdrake/interactive.pm:656 diskdrake/interactive.pm:739
+#: fs/partitioning_wizard.pm:145 fs/partitioning_wizard.pm:177
 #, c-format
 msgid "Resizing"
 msgstr "Muutetaan kokoa"
 
-#: diskdrake/interactive.pm:707
+#: diskdrake/interactive.pm:656
 #, c-format
 msgid "Computing FAT filesystem bounds"
 msgstr "Lasketaan FAT-tiedostojärjestelmän rajoja"
 
-#: diskdrake/interactive.pm:743
+#: diskdrake/interactive.pm:692
 #, c-format
 msgid "This partition is not resizeable"
 msgstr "Tämän osion kokoa ei voi muuttaa"
 
-#: diskdrake/interactive.pm:748
+#: diskdrake/interactive.pm:697
 #, c-format
 msgid "All data on this partition should be backed-up"
 msgstr "Kaikki osion tiedot tulisi varmuuskopioida"
 
 # mat
-#: diskdrake/interactive.pm:750
+#: diskdrake/interactive.pm:699
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr "Osion %s koon muuttamisen jälkeen kaikki osion tiedot tuhoutuvat"
 
-#: diskdrake/interactive.pm:757
+#: diskdrake/interactive.pm:706
 #, c-format
 msgid "Choose the new size"
 msgstr "Valitse uusi koko"
 
-#: diskdrake/interactive.pm:758
+#: diskdrake/interactive.pm:707
 #, c-format
 msgid "New size in MB: "
 msgstr "Uusi koko (Mt): "
 
-#: diskdrake/interactive.pm:759
+#: diskdrake/interactive.pm:708
 #, c-format
 msgid "Minimum size: %s MB"
 msgstr ""
 
-#: diskdrake/interactive.pm:760
+#: diskdrake/interactive.pm:709
 #, c-format
 msgid "Maximum size: %s MB"
 msgstr ""
 
-#: diskdrake/interactive.pm:801 fs/partitioning_wizard.pm:181
+#: diskdrake/interactive.pm:750 fs/partitioning_wizard.pm:185
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
@@ -1718,135 +1688,135 @@ msgstr ""
 "muuttamisen jälkeen suoritetaan tiedostojärjestelmän\n"
 "tarkistus seuraavan kerran kun käynnistät Windowsin(TM)."
 
-#: diskdrake/interactive.pm:842
+#: diskdrake/interactive.pm:791
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "Valitse olemassa oleva RAID johon lisätään"
 
-#: diskdrake/interactive.pm:844 diskdrake/interactive.pm:861
+#: diskdrake/interactive.pm:793 diskdrake/interactive.pm:811
 #, c-format
 msgid "new"
 msgstr "uusi"
 
-#: diskdrake/interactive.pm:859
+#: diskdrake/interactive.pm:809
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "Valitse olemassa oleva LVM johon lisätään"
 
-#: diskdrake/interactive.pm:866
+#: diskdrake/interactive.pm:816
 #, c-format
 msgid "LVM name?"
 msgstr "LVM:n nimi?"
 
-#: diskdrake/interactive.pm:894
+#: diskdrake/interactive.pm:839
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
 
-#: diskdrake/interactive.pm:896
+#: diskdrake/interactive.pm:841
 #, c-format
 msgid "Moving physical extents"
 msgstr ""
 
-#: diskdrake/interactive.pm:914
+#: diskdrake/interactive.pm:859
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "Osiota ei voida käyttää loopback-osiona"
 
-#: diskdrake/interactive.pm:927
+#: diskdrake/interactive.pm:872
 #, c-format
 msgid "Loopback"
 msgstr "Loopback"
 
-#: diskdrake/interactive.pm:928
+#: diskdrake/interactive.pm:873
 #, c-format
 msgid "Loopback file name: "
 msgstr "Loopback tiedostonimi: "
 
-#: diskdrake/interactive.pm:933
+#: diskdrake/interactive.pm:878
 #, c-format
 msgid "Give a file name"
 msgstr "Anna tiedostonimi"
 
-#: diskdrake/interactive.pm:936
+#: diskdrake/interactive.pm:881
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "Tiedosto on jo toisen loopback:n käytössä, valitse toinen"
 
-#: diskdrake/interactive.pm:937
+#: diskdrake/interactive.pm:882
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "Tiedosto on jo olemassa. Käytetäänkö sitä?"
 
-#: diskdrake/interactive.pm:966 diskdrake/interactive.pm:969
+#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:917
 #, c-format
 msgid "Mount options"
 msgstr "Liitosoptiot"
 
-#: diskdrake/interactive.pm:976
+#: diskdrake/interactive.pm:924
 #, c-format
 msgid "Various"
 msgstr "Useita"
 
-#: diskdrake/interactive.pm:1041
+#: diskdrake/interactive.pm:989
 #, c-format
 msgid "device"
 msgstr "laite"
 
-#: diskdrake/interactive.pm:1042
+#: diskdrake/interactive.pm:990
 #, c-format
 msgid "level"
 msgstr "taso"
 
-#: diskdrake/interactive.pm:1043
+#: diskdrake/interactive.pm:991
 #, c-format
 msgid "chunk size in KiB"
 msgstr "lohkon koko kilotavuina"
 
-#: diskdrake/interactive.pm:1060
+#: diskdrake/interactive.pm:1009
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Varoitus: tämä on vaarallinen toiminto"
 
-#: diskdrake/interactive.pm:1075
+#: diskdrake/interactive.pm:1024
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Minkä tyyppinen osiointi?"
 
-#: diskdrake/interactive.pm:1113
+#: diskdrake/interactive.pm:1062
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Sinun täytyy käynnistää kone uudelleen ennen kuin muutos tulee voimaan"
 
-#: diskdrake/interactive.pm:1122
+#: diskdrake/interactive.pm:1071
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Levyn %s osiotaulu kirjoitetaan levylle!"
 
 # mat
-#: diskdrake/interactive.pm:1148
+#: diskdrake/interactive.pm:1097
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr "Kaikki osiolla %s olevat tiedot häviävät osion alustuksen yhteydessä"
 
-#: diskdrake/interactive.pm:1153 fs/partitioning.pm:49
+#: diskdrake/interactive.pm:1102 fs/partitioning.pm:49
 #, c-format
 msgid "Check bad blocks?"
 msgstr "Tarkistetaanko vialliset lohkot?"
 
-#: diskdrake/interactive.pm:1167
+#: diskdrake/interactive.pm:1116
 #, c-format
 msgid "Move files to the new partition"
 msgstr "Siirrä tiedostot uudelle osiolle"
 
-#: diskdrake/interactive.pm:1167
+#: diskdrake/interactive.pm:1116
 #, c-format
 msgid "Hide files"
 msgstr "Piilota tiedostot"
 
-#: diskdrake/interactive.pm:1168
+#: diskdrake/interactive.pm:1117
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -1857,109 +1827,109 @@ msgid ""
 "the contents of the mounted partition)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1183
+#: diskdrake/interactive.pm:1132
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "Siirretään tiedostoja uudelle osiolle"
 
-#: diskdrake/interactive.pm:1187
+#: diskdrake/interactive.pm:1136
 #, c-format
 msgid "Copying %s"
 msgstr "Kopioidaan %s"
 
-#: diskdrake/interactive.pm:1191
+#: diskdrake/interactive.pm:1140
 #, c-format
 msgid "Removing %s"
 msgstr "Poistetaan %s"
 
-#: diskdrake/interactive.pm:1205
+#: diskdrake/interactive.pm:1154
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "osio %s tunnetaan nyt nimellä %s"
 
-#: diskdrake/interactive.pm:1206
+#: diskdrake/interactive.pm:1155
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr "Osiot ovat uudellennumerotu: "
 
-#: diskdrake/interactive.pm:1226 diskdrake/interactive.pm:1288
+#: diskdrake/interactive.pm:1180 diskdrake/interactive.pm:1243
 #, c-format
 msgid "Device: "
 msgstr "Laite:   "
 
-#: diskdrake/interactive.pm:1227
+#: diskdrake/interactive.pm:1181
 #, c-format
 msgid "Volume label: "
 msgstr "Osion nimi: "
 
-#: diskdrake/interactive.pm:1241
+#: diskdrake/interactive.pm:1182
 #, c-format
 msgid "UUID: "
 msgstr ""
 
-#: diskdrake/interactive.pm:1242
+#: diskdrake/interactive.pm:1183
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS-asema: %s (vain arvaus)\n"
 
-#: diskdrake/interactive.pm:1232 diskdrake/interactive.pm:1241
-#: diskdrake/interactive.pm:1306
+#: diskdrake/interactive.pm:1187 diskdrake/interactive.pm:1196
+#: diskdrake/interactive.pm:1262
 #, c-format
 msgid "Type: "
 msgstr "Tyyppi:  "
 
-#: diskdrake/interactive.pm:1236
+#: diskdrake/interactive.pm:1191 diskdrake/interactive.pm:1247
 #, c-format
 msgid "Name: "
 msgstr "Nimi:    "
 
-#: diskdrake/interactive.pm:1243
+#: diskdrake/interactive.pm:1198
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Alkaa:   sektori %s\n"
 
 # mat
-#: diskdrake/interactive.pm:1244
+#: diskdrake/interactive.pm:1199
 #, c-format
 msgid "Size: %s"
 msgstr "Koko:    %s"
 
-#: diskdrake/interactive.pm:1246
+#: diskdrake/interactive.pm:1201
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s sektoria"
 
-#: diskdrake/interactive.pm:1248
+#: diskdrake/interactive.pm:1203
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "Sylinteristä %d sylinteriin %d\n"
 
-#: diskdrake/interactive.pm:1249
+#: diskdrake/interactive.pm:1204
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr ""
 
-#: diskdrake/interactive.pm:1250
+#: diskdrake/interactive.pm:1205
 #, c-format
 msgid "Formatted\n"
 msgstr "Alustettu\n"
 
-#: diskdrake/interactive.pm:1251
+#: diskdrake/interactive.pm:1206
 #, c-format
 msgid "Not formatted\n"
 msgstr "Ei alustettu\n"
 
-#: diskdrake/interactive.pm:1252
+#: diskdrake/interactive.pm:1207
 #, c-format
 msgid "Mounted\n"
 msgstr "Liitetty\n"
 
-#: diskdrake/interactive.pm:1253
+#: diskdrake/interactive.pm:1208
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1258
+#: diskdrake/interactive.pm:1213
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -1968,7 +1938,7 @@ msgstr ""
 "Loopback tiedosto(t):\n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1259
+#: diskdrake/interactive.pm:1214
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -1977,27 +1947,27 @@ msgstr ""
 "Osiolta käynnistetään oletuksena\n"
 "    (MS-DOS käynnistys, ei LILO)\n"
 
-#: diskdrake/interactive.pm:1261
+#: diskdrake/interactive.pm:1216
 #, c-format
 msgid "Level %s\n"
 msgstr "Taso %s\n"
 
-#: diskdrake/interactive.pm:1262
+#: diskdrake/interactive.pm:1217
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "Lohkon koko %d kt\n"
 
-#: diskdrake/interactive.pm:1263
+#: diskdrake/interactive.pm:1218
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "RAID-levyt %s\n"
 
-#: diskdrake/interactive.pm:1265
+#: diskdrake/interactive.pm:1220
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Loopback-tiedoston nimi: %s"
 
-#: diskdrake/interactive.pm:1268
+#: diskdrake/interactive.pm:1223
 #, c-format
 msgid ""
 "\n"
@@ -2010,7 +1980,7 @@ msgstr ""
 "ajuriosio. Sinun olisi kaiketi\n"
 "parasta jättää se rauhaan.\n"
 
-#: diskdrake/interactive.pm:1271
+#: diskdrake/interactive.pm:1226
 #, c-format
 msgid ""
 "\n"
@@ -2023,79 +1993,79 @@ msgstr ""
 "on järjestelmäsi käynnistämiseksi\n"
 "eri käyttöjärjestelmiin.\n"
 
-#: diskdrake/interactive.pm:1280
+#: diskdrake/interactive.pm:1235
 #, c-format
 msgid "Free space on %s (%s)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1289
+#: diskdrake/interactive.pm:1244
 #, c-format
 msgid "Read-only"
 msgstr "Vain luku"
 
-#: diskdrake/interactive.pm:1290
+#: diskdrake/interactive.pm:1245
 #, c-format
 msgid "Size: %s\n"
 msgstr "Koko:    %s\n"
 
-#: diskdrake/interactive.pm:1291
+#: diskdrake/interactive.pm:1246
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Levyn tiedot: %s sylinteriä, %s lukupäätä, %s sektoria\n"
 
-#: diskdrake/interactive.pm:1292
-#, c-format
-msgid "Info: "
-msgstr "Tietoja: "
+#: diskdrake/interactive.pm:1248
+#, fuzzy, c-format
+msgid "Medium type: "
+msgstr "Tiedostojärjestelmä: "
 
-#: diskdrake/interactive.pm:1293
+#: diskdrake/interactive.pm:1249
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "LVM-levyt %s\n"
 
 # mat
-#: diskdrake/interactive.pm:1294
+#: diskdrake/interactive.pm:1250
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Osion tyyppi: %s\n"
 
-#: diskdrake/interactive.pm:1295
+#: diskdrake/interactive.pm:1251
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "väylässä %d id %d\n"
 
-#: diskdrake/interactive.pm:1338
+#: diskdrake/interactive.pm:1294
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "Tiedostojärjestelmän salausavain"
 
-#: diskdrake/interactive.pm:1339
+#: diskdrake/interactive.pm:1295
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Valitse tiedostojärjestelmäsi salausavain"
 
-#: diskdrake/interactive.pm:1342
+#: diskdrake/interactive.pm:1298
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr ""
 "Salausavain on liian yksinkertainen (sen pitää olla ainakin %d merkkiä pitkä)"
 
-#: diskdrake/interactive.pm:1343
+#: diskdrake/interactive.pm:1299
 #, c-format
 msgid "The encryption keys do not match"
 msgstr "Salausavaimet eivät täsmää"
 
-#: diskdrake/interactive.pm:1346
+#: diskdrake/interactive.pm:1302
 #, c-format
 msgid "Encryption key"
 msgstr "Salausavain"
 
-#: diskdrake/interactive.pm:1347
+#: diskdrake/interactive.pm:1303
 #, c-format
 msgid "Encryption key (again)"
 msgstr "Salausavain (uudelleen)"
 
-#: diskdrake/interactive.pm:1349
+#: diskdrake/interactive.pm:1305
 #, c-format
 msgid "Encryption algorithm"
 msgstr "salausalgoritmi"
@@ -2105,10 +2075,10 @@ msgstr "salausalgoritmi"
 msgid "Change type"
 msgstr "Muuta tyyppiä"
 
-#: diskdrake/smbnfs_gtk.pm:81 interactive.pm:126 interactive.pm:539
+#: diskdrake/smbnfs_gtk.pm:81 interactive.pm:126 interactive.pm:543
 #: interactive/curses.pm:260 interactive/http.pm:104 interactive/http.pm:160
-#: interactive/stdio.pm:39 interactive/stdio.pm:142 ugtk2.pm:407 ugtk2.pm:509
-#: ugtk2.pm:518 ugtk2.pm:791
+#: interactive/stdio.pm:39 interactive/stdio.pm:148 ugtk2.pm:408 ugtk2.pm:510
+#: ugtk2.pm:519 ugtk2.pm:801
 #, c-format
 msgid "Cancel"
 msgstr "Peruuta"
@@ -2175,12 +2145,12 @@ msgstr "Pakollinen paketti %s puuttuu"
 msgid "The following packages need to be installed:\n"
 msgstr "Seuraavat paketit pitää asentaa:\n"
 
-#: do_pkgs.pm:209
+#: do_pkgs.pm:216
 #, c-format
 msgid "Installing packages..."
 msgstr "Asennetaan paketteja..."
 
-#: do_pkgs.pm:255
+#: do_pkgs.pm:258
 #, c-format
 msgid "Removing packages..."
 msgstr "Poistetaan paketteja..."
@@ -2194,27 +2164,27 @@ msgstr ""
 "On tapahtunut virhe - ei löytynyt ainuttakaan laitetta, joille voi luoda "
 "uuden tiedostojärjestelmän. Tarkista laitteistosi korjataksesi ongelman"
 
-#: fs/any.pm:62 fs/partitioning_wizard.pm:55
+#: fs/any.pm:74 fs/partitioning_wizard.pm:59
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "Sinulla pitää olla FAT-osio liitettynä hakemistoon /boot/efi"
 
-#: fs/format.pm:60 fs/format.pm:67
+#: fs/format.pm:62 fs/format.pm:69
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Alustetaan osiota %s"
 
-#: fs/format.pm:64
+#: fs/format.pm:66
 #, c-format
 msgid "Creating and formatting file %s"
 msgstr "Luodaan ja alustetaan tiedostoa %s"
 
-#: fs/format.pm:117
+#: fs/format.pm:119
 #, c-format
 msgid "I do not know how to format %s in type %s"
 msgstr "en osaa alustaa %s tyyppiä %s"
 
-#: fs/format.pm:122 fs/format.pm:124
+#: fs/format.pm:124 fs/format.pm:126
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "%s alustus %s epäonnistui"
@@ -2239,32 +2209,32 @@ msgstr "osion %s liittäminen hakemistoon %s epäonnistui"
 msgid "Checking %s"
 msgstr "Tarkistetaan %s"
 
-#: fs/mount.pm:118 partition_table.pm:384
+#: fs/mount.pm:119 partition_table.pm:395
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "virhe irrotettaessa %s: %s"
 
-#: fs/mount.pm:133
+#: fs/mount.pm:134
 #, c-format
 msgid "Enabling swap partition %s"
 msgstr "Otetaan käyttöön sivutusosiota %s"
 
-#: fs/mount_options.pm:111
+#: fs/mount_options.pm:115
 #, fuzzy, c-format
 msgid "Use an encrypted file system"
 msgstr "Et voi käyttää salattua tiedostojärjestelmää liitospisteelle %s"
 
-#: fs/mount_options.pm:113
+#: fs/mount_options.pm:117
 #, c-format
 msgid "Flush write cache on file close"
 msgstr ""
 
-#: fs/mount_options.pm:115
+#: fs/mount_options.pm:119
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
 msgstr ""
 
-#: fs/mount_options.pm:117
+#: fs/mount_options.pm:121
 #, c-format
 msgid ""
 "Do not update inode access times on this file system\n"
@@ -2273,7 +2243,7 @@ msgstr ""
 "Älä päivitä inoodien käyttöaikaa tässä tiedostojärjestelmässä\n"
 "(esim. nopeampaan uutisspoolin käyttöön nopeuttamaan uutispalvelimia)."
 
-#: fs/mount_options.pm:123
+#: fs/mount_options.pm:124
 #, fuzzy, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
@@ -2282,7 +2252,7 @@ msgstr ""
 "Älä päivitä inoodien käyttöaikaa tässä tiedostojärjestelmässä\n"
 "(esim. nopeampaan uutisspoolin käyttöön nopeuttamaan uutispalvelimia)."
 
-#: fs/mount_options.pm:123
+#: fs/mount_options.pm:127
 #, c-format
 msgid ""
 "Can only be mounted explicitly (i.e.,\n"
@@ -2291,12 +2261,12 @@ msgstr ""
 "Voidaan liittää vain erikseen määritettynä\n"
 "(esim. -a valitsin ei liitä tiedostojärjestelmää)."
 
-#: fs/mount_options.pm:126
+#: fs/mount_options.pm:130
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
 msgstr "Älä tulkitse merkki- tai lohkolaitteita tiedostojärjestelmässä."
 
-#: fs/mount_options.pm:128
+#: fs/mount_options.pm:132
 #, c-format
 msgid ""
 "Do not allow execution of any binaries on the mounted\n"
@@ -2308,7 +2278,7 @@ msgstr ""
 "palvelimelle jonka tiedostojärjestelmässä on binäärejä\n"
 "muille kuin omalle arkkitehtuurille."
 
-#: fs/mount_options.pm:132
+#: fs/mount_options.pm:136
 #, c-format
 msgid ""
 "Do not allow set-user-identifier or set-group-identifier\n"
@@ -2320,42 +2290,42 @@ msgstr ""
 "itse asiassa melko turvaton mikäli sinulla on suidperl(1)\n"
 "asennettuna.)"
 
-#: fs/mount_options.pm:136
+#: fs/mount_options.pm:140
 #, c-format
 msgid "Mount the file system read-only."
 msgstr "Liitä tiedostojärjestelmä vain luku -tilassa."
 
-#: fs/mount_options.pm:138
+#: fs/mount_options.pm:142
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
 msgstr "Kaikki luku/kirjoitustoiminnot tehdään synkronoidusti."
 
-#: fs/mount_options.pm:140
+#: fs/mount_options.pm:144
 #, c-format
 msgid "Allow every user to mount and umount the file system."
 msgstr ""
 
-#: fs/mount_options.pm:142
+#: fs/mount_options.pm:146
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
 msgstr ""
 
-#: fs/mount_options.pm:144
+#: fs/mount_options.pm:148
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr ""
 
-#: fs/mount_options.pm:146
+#: fs/mount_options.pm:150
 #, c-format
 msgid "Support \"user.\" extended attributes"
 msgstr ""
 
-#: fs/mount_options.pm:148
+#: fs/mount_options.pm:152
 #, c-format
 msgid "Give write access to ordinary users"
 msgstr "Salli kirjoitusoikeus tavallisille käyttäjille"
 
-#: fs/mount_options.pm:150
+#: fs/mount_options.pm:154
 #, c-format
 msgid "Give read-only access to ordinary users"
 msgstr "Salli vain luku -oikeus tavallisille käyttäjille"
@@ -2399,7 +2369,7 @@ msgstr ""
 msgid "Not enough swap space to fulfill installation, please add some"
 msgstr "Sivutustilaa ei ole riittävästi, suurenna sitä"
 
-#: fs/partitioning_wizard.pm:47
+#: fs/partitioning_wizard.pm:51
 #, c-format
 msgid ""
 "You must have a root partition.\n"
@@ -2410,7 +2380,7 @@ msgstr ""
 "Tätä varten luo osio (tai klikkaa olemassa olevaa).\n"
 "Valitse sitten toiminto ``Liitospiste'' ja aseta se arvoon `/'"
 
-#: fs/partitioning_wizard.pm:52
+#: fs/partitioning_wizard.pm:56
 #, c-format
 msgid ""
 "You do not have a swap partition.\n"
@@ -2421,69 +2391,69 @@ msgstr ""
 "\n"
 "Jatka kuitenkin?"
 
-#: fs/partitioning_wizard.pm:80
+#: fs/partitioning_wizard.pm:84
 #, c-format
 msgid "Use free space"
 msgstr "Käytä tyhjää tilaa"
 
-#: fs/partitioning_wizard.pm:82
+#: fs/partitioning_wizard.pm:86
 #, c-format
 msgid "Not enough free space to allocate new partitions"
 msgstr "Ei tarpeeksi tilaa uusien osioiden luomiseksi"
 
-#: fs/partitioning_wizard.pm:90
+#: fs/partitioning_wizard.pm:94
 #, c-format
 msgid "Use existing partitions"
 msgstr "Käytä olemassa olevia osioita"
 
-#: fs/partitioning_wizard.pm:92
+#: fs/partitioning_wizard.pm:96
 #, c-format
 msgid "There is no existing partition to use"
 msgstr "Ei ole olemassa olevaa osiota käytettäväksi"
 
-#: fs/partitioning_wizard.pm:99
+#: fs/partitioning_wizard.pm:103
 #, c-format
 msgid "Use the Microsoft Windows® partition for loopback"
 msgstr "Käytä Microsoft Windows®-osiota loopback-tiedostona"
 
-#: fs/partitioning_wizard.pm:102
+#: fs/partitioning_wizard.pm:106
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Mille osiolle haluat laittaa Linux4Win:n?"
 
-#: fs/partitioning_wizard.pm:104
+#: fs/partitioning_wizard.pm:108
 #, c-format
 msgid "Choose the sizes"
 msgstr "Valitse koot"
 
-#: fs/partitioning_wizard.pm:105
+#: fs/partitioning_wizard.pm:109
 #, c-format
 msgid "Root partition size in MB: "
 msgstr "Juuriosion koko Mt: "
 
-#: fs/partitioning_wizard.pm:106
+#: fs/partitioning_wizard.pm:110
 #, c-format
 msgid "Swap partition size in MB: "
 msgstr "Sivutusosion koko Mt: "
 
-#: fs/partitioning_wizard.pm:115
+#: fs/partitioning_wizard.pm:119
 #, c-format
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
 "Ei ole FAT-osioita, jota voisi käyttää loopback-tiedostona (tai ei "
 "riittävästi vapaata tilaa)"
 
-#: fs/partitioning_wizard.pm:122
+#: fs/partitioning_wizard.pm:126
 #, c-format
 msgid "Use the free space on the Microsoft Windows® partition"
 msgstr "Käytä tyhjää tilaa Windows-osiolla"
 
-#: fs/partitioning_wizard.pm:124
+#: fs/partitioning_wizard.pm:128
 #, c-format
 msgid "Which partition do you want to resize?"
 msgstr "Minkä osion kokoa haluat muuttaa?"
 
-#: fs/partitioning_wizard.pm:138
+#: fs/partitioning_wizard.pm:142
 #, c-format
 msgid ""
 "The FAT resizer is unable to handle your partition, \n"
@@ -2492,12 +2462,12 @@ msgstr ""
 "FAT-tiedostojärjestelmän koon muuttaja ei osaa käsitellä osiotasi,\n"
 "seuraava virhe tapahtui: %s"
 
-#: fs/partitioning_wizard.pm:141
+#: fs/partitioning_wizard.pm:145
 #, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
 msgstr "Lasken Microsoft Windows®-osion kokoa"
 
-#: fs/partitioning_wizard.pm:148
+#: fs/partitioning_wizard.pm:152
 #, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
@@ -2508,7 +2478,7 @@ msgstr ""
 "uudelleen, mene Microsoft Windows®iin ja aja \"Levyn eheytys\" ensin, ja "
 "aloita Mandriva Linuxin asennus uudestaan sen jälkeen."
 
-#: fs/partitioning_wizard.pm:151
+#: fs/partitioning_wizard.pm:155
 #, c-format
 msgid ""
 "WARNING!\n"
@@ -2544,8 +2514,8 @@ msgstr ""
 "Kun olet varma, paina %s."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:160 interactive.pm:538 interactive/curses.pm:263
-#: ugtk2.pm:511
+#: fs/partitioning_wizard.pm:164 interactive.pm:542 interactive/curses.pm:263
+#: ugtk2.pm:512
 #, c-format
 msgid "Next"
 msgstr "Seuraava"
@@ -2561,60 +2531,60 @@ msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
 msgstr "Kuinka paljon tilaa haluat säilyttää Microsoft Windows®ille osio %s?"
 
 # mat
-#: fs/partitioning_wizard.pm:164
+#: fs/partitioning_wizard.pm:168
 #, c-format
 msgid "Size"
 msgstr "Koko"
 
-#: fs/partitioning_wizard.pm:173
+#: fs/partitioning_wizard.pm:177
 #, c-format
 msgid "Resizing Microsoft Windows® partition"
 msgstr "Muutan Microsoft Windows®-osion kokoa"
 
-#: fs/partitioning_wizard.pm:178
+#: fs/partitioning_wizard.pm:182
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr "FAT-tiedostojärjestelmän koon muuttaminen epäonnistui: %s"
 
-#: fs/partitioning_wizard.pm:193
+#: fs/partitioning_wizard.pm:197
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "Ei ole FAT-osioita, joiden kokoa voisi muuttaa (tai ei riittävästi vapaata "
 "tilaa)"
 
-#: fs/partitioning_wizard.pm:198
+#: fs/partitioning_wizard.pm:202
 #, c-format
 msgid "Remove Microsoft Windows®"
 msgstr "Poista Microsoft Windows®"
 
-#: fs/partitioning_wizard.pm:198
+#: fs/partitioning_wizard.pm:202
 #, c-format
 msgid "Erase and use entire disk"
 msgstr "Tyhjennä ja käytä koko levy"
 
-#: fs/partitioning_wizard.pm:200
+#: fs/partitioning_wizard.pm:204
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "Sinulla on enemmän kuin yksi kiintolevy. Mille haluat asentaa Linuxin?"
 
 # mat
-#: fs/partitioning_wizard.pm:206
+#: fs/partitioning_wizard.pm:210 fsedit.pm:566
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "KAIKKI olemassa olevat osiot ja niissä oleva tieto tuhoutuu levyltä %s"
 
-#: fs/partitioning_wizard.pm:217
+#: fs/partitioning_wizard.pm:221
 #, c-format
 msgid "Custom disk partitioning"
 msgstr "Mukautettu levyn osiointi"
 
-#: fs/partitioning_wizard.pm:223
+#: fs/partitioning_wizard.pm:227
 #, c-format
 msgid "Use fdisk"
 msgstr "Käytä fdiskiä"
 
-#: fs/partitioning_wizard.pm:226
+#: fs/partitioning_wizard.pm:230
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -2623,28 +2593,28 @@ msgstr ""
 "Voit nyt osioida kiintolevysi %s\n"
 "Kun olet valmis, älä unohda tallentaa asetuksia komennolla `w'"
 
-#: fs/partitioning_wizard.pm:266
+#: fs/partitioning_wizard.pm:270
 #, c-format
 msgid "I can not find any room for installing"
 msgstr "Ei ole tarpeeksi tilaa asentamiseen"
 
-#: fs/partitioning_wizard.pm:270
+#: fs/partitioning_wizard.pm:274
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "DrakX Osiointivelho löysi seuraavat ratkaisut:"
 
 # mat
-#: fs/partitioning_wizard.pm:278
+#: fs/partitioning_wizard.pm:282
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Osiointi epäonnistui: %s"
 
-#: fs/type.pm:367
+#: fs/type.pm:368
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
 msgstr "Et voi käyttää JFS-tiedostojärjestelmää alle 16 Mt osioilla"
 
-#: fs/type.pm:368
+#: fs/type.pm:369
 #, c-format
 msgid "You can not use ReiserFS for partitions smaller than 32MB"
 msgstr "Et voi käyttää ReiserFS-tiedostojärjestelmää alle 32 Mt osioilla"
@@ -2664,7 +2634,7 @@ msgstr "palvelin"
 msgid "BIOS software RAID detected on disks %s. Activate it?"
 msgstr ""
 
-#: fsedit.pm:230
+#: fsedit.pm:224
 #, c-format
 msgid ""
 "I can not read the partition table of device %s, it's too corrupted for me :"
@@ -2682,23 +2652,23 @@ msgstr ""
 "\n"
 "Poistetaanko kaikki virheelliset osiot?\n"
 
-#: fsedit.pm:403
+#: fsedit.pm:393
 #, c-format
 msgid "Mount points must begin with a leading /"
 msgstr "Liitospisteiden pitää alkaa /-merkillä."
 
-#: fsedit.pm:404
+#: fsedit.pm:394
 #, c-format
 msgid "Mount points should contain only alphanumerical characters"
 msgstr "Liitospisteet saavat sisältää vain kirjaimia ja numeroita"
 
 # mat
-#: fsedit.pm:405
+#: fsedit.pm:395
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "On jo olemassa osio, jonka liitospiste on %s\n"
 
-#: fsedit.pm:409
+#: fsedit.pm:399
 #, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
@@ -2709,14 +2679,14 @@ msgstr ""
 "Mikään käynnistyslataaja ei osaa käsitellä tätä ilman /boot -osiota.\n"
 "Lisää /boot -osio, jos haluat käyttää LILO:a tai GRUB:a"
 
-#: fsedit.pm:415
+#: fsedit.pm:405
 #, fuzzy, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr "Et voi käyttää LVM loogista taltiota liitepisteelle %s"
 
-#: fsedit.pm:417
+#: fsedit.pm:407
 #, fuzzy, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
@@ -2728,12 +2698,12 @@ msgstr ""
 "Mikään käynnistyslataaja ei osaa käsitellä tätä ilman /boot -osiota.\n"
 "Lisää /boot -osio, jos haluat käyttää LILO:a tai GRUB:a"
 
-#: fsedit.pm:421 fsedit.pm:423
+#: fsedit.pm:411 fsedit.pm:413
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Tämän hakemiston pitäisi olla juuritiedostojärjestelmässä"
 
-#: fsedit.pm:425 fsedit.pm:427
+#: fsedit.pm:415 fsedit.pm:417
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
@@ -2742,273 +2712,273 @@ msgstr ""
 "Tarvitset oikean tiedostojärjestelmän (ext2/ext3, ReiserFS, XFS tai JFS) "
 "tälle liitospisteelle.\n"
 
-#: fsedit.pm:429
+#: fsedit.pm:419
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
 msgstr "Et voi käyttää salattua tiedostojärjestelmää liitospisteelle %s"
 
-#: fsedit.pm:493
+#: fsedit.pm:483
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "Vapaa tila ei riitä automaattiseen varaukseen"
 
-#: fsedit.pm:495
+#: fsedit.pm:485
 #, c-format
 msgid "Nothing to do"
 msgstr "Ei mitään tekemistä"
 
-#: harddrake/data.pm:62
+#: harddrake/data.pm:64
+#, c-format
+msgid "SATA controllers"
+msgstr "SATA-ohjaimet"
+
+#: harddrake/data.pm:73
+#, c-format
+msgid "RAID controllers"
+msgstr "RAID-ohjaimet"
+
+#: harddrake/data.pm:83
+#, c-format
+msgid "(E)IDE/ATA controllers"
+msgstr "(E)IDE/ATA-ohjaimet"
+
+#: harddrake/data.pm:93
+#, fuzzy, c-format
+msgid "Card readers"
+msgstr "Kortin malli:"
+
+#: harddrake/data.pm:102
+#, c-format
+msgid "Firewire controllers"
+msgstr "FireWire-ohjaimet"
+
+#: harddrake/data.pm:111
+#, c-format
+msgid "PCMCIA controllers"
+msgstr "PCMCIA-ohjaimet"
+
+#: harddrake/data.pm:120
+#, c-format
+msgid "SCSI controllers"
+msgstr "SCSI-ohjaimet"
+
+#: harddrake/data.pm:129
+#, c-format
+msgid "USB controllers"
+msgstr "USB-ohjaimet"
+
+#: harddrake/data.pm:138
+#, c-format
+msgid "USB ports"
+msgstr "USB-portit"
+
+#: harddrake/data.pm:147
+#, c-format
+msgid "SMBus controllers"
+msgstr "SMBus-ohjaimet"
+
+#: harddrake/data.pm:156
+#, c-format
+msgid "Bridges and system controllers"
+msgstr "Sillat ja järjestelmäohjaimet"
+
+#: harddrake/data.pm:168
 #, c-format
 msgid "Floppy"
 msgstr "Levyke"
 
-#: harddrake/data.pm:72
+#: harddrake/data.pm:178
 #, c-format
 msgid "Zip"
 msgstr "Zip"
 
-#: harddrake/data.pm:88
+#: harddrake/data.pm:194
 #, c-format
 msgid "Hard Disk"
 msgstr "Levy"
 
-#: harddrake/data.pm:97
+#: harddrake/data.pm:204
+#, c-format
+msgid "USB Mass Storage Devices"
+msgstr ""
+
+#: harddrake/data.pm:213
 #, c-format
 msgid "CDROM"
 msgstr "CD-ROM"
 
-#: harddrake/data.pm:107
+#: harddrake/data.pm:223
 #, c-format
 msgid "CD/DVD burners"
 msgstr "Polttavat CD/DVD-asemat"
 
-#: harddrake/data.pm:117
+#: harddrake/data.pm:233
 #, c-format
 msgid "DVD-ROM"
 msgstr "DVD-ROM"
 
-#: harddrake/data.pm:127
+#: harddrake/data.pm:243
 #, c-format
 msgid "Tape"
 msgstr "Nauha"
 
-#: harddrake/data.pm:138
+#: harddrake/data.pm:254
 #, c-format
 msgid "AGP controllers"
 msgstr "AGP-ohjaimet"
 
-#: harddrake/data.pm:147
+#: harddrake/data.pm:263
 #, c-format
 msgid "Videocard"
 msgstr "Näytönohjain"
 
-#: harddrake/data.pm:156
+#: harddrake/data.pm:272
 #, c-format
 msgid "DVB card"
 msgstr ""
 
-#: harddrake/data.pm:164
+#: harddrake/data.pm:280
 #, c-format
 msgid "Tvcard"
 msgstr "TV-kortti"
 
-#: harddrake/data.pm:174
+#: harddrake/data.pm:289
 #, c-format
 msgid "Other MultiMedia devices"
 msgstr "Muu multimedialaite"
 
-#: harddrake/data.pm:183
+#: harddrake/data.pm:298
 #, c-format
 msgid "Soundcard"
 msgstr "Äänikortti"
 
-#: harddrake/data.pm:196
+#: harddrake/data.pm:311
 #, c-format
 msgid "Webcam"
 msgstr "Webbikamera"
 
-#: harddrake/data.pm:210
+#: harddrake/data.pm:325
 #, c-format
 msgid "Processors"
 msgstr "Prosessorit"
 
-#: harddrake/data.pm:220
+#: harddrake/data.pm:335
 #, c-format
 msgid "ISDN adapters"
 msgstr "ISDN-sovittimet"
 
-#: harddrake/data.pm:231
+#: harddrake/data.pm:346
 #, c-format
 msgid "USB sound devices"
 msgstr ""
 
-#: harddrake/data.pm:240
+#: harddrake/data.pm:355
 #, c-format
 msgid "Radio cards"
 msgstr ""
 
-#: harddrake/data.pm:249
+#: harddrake/data.pm:364
 #, c-format
 msgid "ATM network cards"
 msgstr ""
 
-#: harddrake/data.pm:258
+#: harddrake/data.pm:373
 #, c-format
 msgid "WAN network cards"
 msgstr ""
 
-#: harddrake/data.pm:267
+#: harddrake/data.pm:382
 #, c-format
 msgid "Bluetooth devices"
 msgstr ""
 
-#: harddrake/data.pm:276
+#: harddrake/data.pm:391
 #, c-format
 msgid "Ethernetcard"
 msgstr "Verkkokortti"
 
-#: harddrake/data.pm:293
+#: harddrake/data.pm:408
 #, c-format
 msgid "Modem"
 msgstr "Modeemi"
 
-#: harddrake/data.pm:303
+#: harddrake/data.pm:418
 #, c-format
 msgid "ADSL adapters"
 msgstr "ADSL-sovittimet"
 
-#: harddrake/data.pm:315
+#: harddrake/data.pm:430
 #, c-format
 msgid "Memory"
 msgstr "Muisti"
 
-#: harddrake/data.pm:324
+#: harddrake/data.pm:439
 #, c-format
 msgid "Printer"
 msgstr "Tulostin"
 
 #. -PO: these are joysticks controllers:
-#: harddrake/data.pm:338
+#: harddrake/data.pm:453
 #, c-format
 msgid "Game port controllers"
 msgstr ""
 
-#: harddrake/data.pm:347
+#: harddrake/data.pm:462
 #, c-format
 msgid "Joystick"
 msgstr "Peliohjain"
 
-#: harddrake/data.pm:357
-#, c-format
-msgid "SATA controllers"
-msgstr "SATA-ohjaimet"
-
-#: harddrake/data.pm:366
-#, c-format
-msgid "RAID controllers"
-msgstr "RAID-ohjaimet"
-
-#: harddrake/data.pm:376
-#, c-format
-msgid "(E)IDE/ATA controllers"
-msgstr "(E)IDE/ATA-ohjaimet"
-
-#: harddrake/data.pm:386
-#, c-format
-msgid "USB Mass Storage Devices"
-msgstr ""
-
-#: harddrake/data.pm:395
-#, fuzzy, c-format
-msgid "Card readers"
-msgstr "Kortin malli:"
-
-#: harddrake/data.pm:404
-#, c-format
-msgid "Firewire controllers"
-msgstr "FireWire-ohjaimet"
-
-#: harddrake/data.pm:413
-#, c-format
-msgid "PCMCIA controllers"
-msgstr "PCMCIA-ohjaimet"
-
-#: harddrake/data.pm:422
-#, c-format
-msgid "SCSI controllers"
-msgstr "SCSI-ohjaimet"
-
-#: harddrake/data.pm:431
-#, c-format
-msgid "USB controllers"
-msgstr "USB-ohjaimet"
-
-#: harddrake/data.pm:440
-#, c-format
-msgid "USB ports"
-msgstr "USB-portit"
-
-#: harddrake/data.pm:449
-#, c-format
-msgid "SMBus controllers"
-msgstr "SMBus-ohjaimet"
-
-#: harddrake/data.pm:458
-#, c-format
-msgid "Bridges and system controllers"
-msgstr "Sillat ja järjestelmäohjaimet"
-
-#: harddrake/data.pm:469
+#: harddrake/data.pm:472
 #, c-format
 msgid "Keyboard"
 msgstr "Näppäimistö"
 
-#: harddrake/data.pm:482
+#: harddrake/data.pm:485
 #, c-format
 msgid "Tablet and touchscreen"
 msgstr ""
 
-#: harddrake/data.pm:491
+#: harddrake/data.pm:494
 #, c-format
 msgid "Mouse"
 msgstr "Hiiri"
 
-#: harddrake/data.pm:505
+#: harddrake/data.pm:508
 #, c-format
 msgid "Biometry"
 msgstr ""
 
-#: harddrake/data.pm:513
+#: harddrake/data.pm:516
 #, c-format
 msgid "UPS"
 msgstr "UPS"
 
-#: harddrake/data.pm:522
+#: harddrake/data.pm:525
 #, c-format
 msgid "Scanner"
 msgstr "Kuvanlukija"
 
-#: harddrake/data.pm:533
+#: harddrake/data.pm:536
 #, c-format
 msgid "Unknown/Others"
 msgstr "Tuntematon/Muut"
 
-#: harddrake/data.pm:561
+#: harddrake/data.pm:564
 #, c-format
 msgid "cpu # "
 msgstr "cpu # "
 
-#: harddrake/sound.pm:201
+#: harddrake/sound.pm:202
 #, c-format
 msgid "Please Wait... Applying the configuration"
 msgstr "Odota hetki... Otetaan asetukset käyttöön"
 
-#: harddrake/sound.pm:238
+#: harddrake/sound.pm:239
 #, c-format
 msgid "No alternative driver"
 msgstr "Ei vaihtoehtoista ajuria"
 
-#: harddrake/sound.pm:239
+#: harddrake/sound.pm:240
 #, c-format
 msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
@@ -3017,12 +2987,12 @@ msgstr ""
 "Tunnettua vaihtoehtoista OSS/ALSA ajuria äänikortillesi (%s), joka tällä "
 "hetkellä käyttää \"%s\", ei ole"
 
-#: harddrake/sound.pm:245
+#: harddrake/sound.pm:246
 #, c-format
 msgid "Sound configuration"
 msgstr "Ääniasetukset"
 
-#: harddrake/sound.pm:247
+#: harddrake/sound.pm:248
 #, c-format
 msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
@@ -3033,7 +3003,7 @@ msgstr ""
 #. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
-#: harddrake/sound.pm:252
+#: harddrake/sound.pm:253
 #, c-format
 msgid ""
 "\n"
@@ -3045,7 +3015,7 @@ msgstr ""
 "\n"
 "Käytät tällä hetkellä ajuria %s\"%s\" (vakioajuri kortillesi on \"%s\")."
 
-#: harddrake/sound.pm:254
+#: harddrake/sound.pm:255
 #, c-format
 msgid ""
 "OSS (Open Sound System) was the first sound API. It's an OS independent "
@@ -3081,17 +3051,17 @@ msgstr ""
 "- uusi ALSA-api, joka tarjoaa useita parannettuja ominaisuuksia,\n"
 "mutta vaatii ALSA-kirjaston käyttöä.\n"
 
-#: harddrake/sound.pm:268 harddrake/sound.pm:357
+#: harddrake/sound.pm:269 harddrake/sound.pm:354
 #, c-format
 msgid "Driver:"
 msgstr "Ajuri:"
 
-#: harddrake/sound.pm:277
+#: harddrake/sound.pm:278
 #, c-format
 msgid "Trouble shooting"
 msgstr "Vianetsintä"
 
-#: harddrake/sound.pm:285
+#: harddrake/sound.pm:286
 #, c-format
 msgid ""
 "The old \"%s\" driver is blacklisted.\n"
@@ -3106,12 +3076,12 @@ msgstr ""
 "\n"
 "Uusi \"%s\" ajuri otetaan käyttöön seuraavassa käynnistyksessä."
 
-#: harddrake/sound.pm:293
+#: harddrake/sound.pm:294
 #, c-format
 msgid "No open source driver"
 msgstr "Ei avoimen lähdekoodin ajuria"
 
-#: harddrake/sound.pm:294
+#: harddrake/sound.pm:295
 #, c-format
 msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
@@ -3120,28 +3090,23 @@ msgstr ""
 "Äänikortillesi (%s) ei löydy vapaata ajuria, mutta patenttisuojattu ajuri "
 "löytyy osoitteesta \"%s\"."
 
-#: harddrake/sound.pm:297
+#: harddrake/sound.pm:298
 #, c-format
 msgid "No known driver"
 msgstr "Ei tunnettua ajuria"
 
-#: harddrake/sound.pm:298
+#: harddrake/sound.pm:299
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
 msgstr "Ei tunnettua ajuria äänikortillesi (%s)"
 
-#: harddrake/sound.pm:302
-#, c-format
-msgid "Unknown driver"
-msgstr "Tuntematon ajuri"
-
-#: harddrake/sound.pm:317
+#: harddrake/sound.pm:314
 #, c-format
 msgid "Sound trouble shooting"
 msgstr "Äänen vianetsintä"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:320
+#: harddrake/sound.pm:317
 #, c-format
 msgid ""
 "The classic bug sound tester is to run the following commands:\n"
@@ -3185,18 +3150,18 @@ msgstr ""
 "\n"
 "- \"/sbin/fuser -v /dev/dsp\" kertoo mikä ohjelma käyttää äänikorttia.\n"
 
-#: harddrake/sound.pm:346
+#: harddrake/sound.pm:343
 #, c-format
 msgid "Let me pick any driver"
 msgstr "Anna valita mikä ajuri tahansa"
 
-#: harddrake/sound.pm:349
+#: harddrake/sound.pm:346
 #, c-format
 msgid "Choosing an arbitrary driver"
 msgstr "Summittaisen ajurin valinta"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:352
+#: harddrake/sound.pm:349
 #, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
@@ -3230,7 +3195,7 @@ msgstr "Tuntematon|CPH05X (bt878) [monta valmistajaa]"
 msgid "Unknown|CPH06X (bt878) [many vendors]"
 msgstr "Tuntematon|CPH06X (bt878) [monta valmistajaa]"
 
-#: harddrake/v4l.pm:474
+#: harddrake/v4l.pm:475
 #, c-format
 msgid ""
 "For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-"
@@ -3243,30 +3208,30 @@ msgstr ""
 "Jos korttisi on tunnistettu väärin, voit pakottaa oikean vastaanottimen sekä "
 "kortin tyypin täällä. Valitse TV-korttisi parametrit tarvittaessa."
 
-#: harddrake/v4l.pm:477
+#: harddrake/v4l.pm:478
 #, c-format
 msgid "Card model:"
 msgstr "Kortin malli:"
 
-#: harddrake/v4l.pm:478
+#: harddrake/v4l.pm:479
 #, c-format
 msgid "Tuner type:"
 msgstr "Vastaanottimen tyyppi:"
 
-#: interactive.pm:125 interactive.pm:538 interactive/curses.pm:263
+#: interactive.pm:125 interactive.pm:542 interactive/curses.pm:263
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
-#: interactive/stdio.pm:142 interactive/stdio.pm:143 ugtk2.pm:413 ugtk2.pm:511
-#: ugtk2.pm:791 ugtk2.pm:814
+#: interactive/stdio.pm:148 interactive/stdio.pm:149 ugtk2.pm:414 ugtk2.pm:512
+#: ugtk2.pm:801 ugtk2.pm:824
 #, c-format
 msgid "Ok"
 msgstr "OK"
 
-#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:790 wizards.pm:156
+#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:800 wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "Kyllä"
 
-#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:790 wizards.pm:156
+#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:800 wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "Ei"
@@ -3276,32 +3241,32 @@ msgstr "Ei"
 msgid "Choose a file"
 msgstr "Valitse tiedosto"
 
-#: interactive.pm:383 interactive/gtk.pm:419
+#: interactive.pm:383 interactive/gtk.pm:420
 #, c-format
 msgid "Add"
 msgstr "Lisää"
 
-#: interactive.pm:383 interactive/gtk.pm:419
+#: interactive.pm:383 interactive/gtk.pm:420
 #, c-format
 msgid "Modify"
 msgstr "Muokkaa"
 
-#: interactive.pm:383 interactive/gtk.pm:419
+#: interactive.pm:383 interactive/gtk.pm:420
 #, c-format
 msgid "Remove"
 msgstr "Poista"
 
-#: interactive.pm:538 interactive/curses.pm:263 ugtk2.pm:511
+#: interactive.pm:542 interactive/curses.pm:263 ugtk2.pm:512
 #, c-format
 msgid "Finish"
 msgstr "Valmis"
 
-#: interactive.pm:539 interactive/curses.pm:260 ugtk2.pm:509
+#: interactive.pm:543 interactive/curses.pm:260 ugtk2.pm:510
 #, c-format
 msgid "Previous"
 msgstr "Edellinen"
 
-#: interactive/gtk.pm:544
+#: interactive/gtk.pm:548
 #, c-format
 msgid "Beware, Caps Lock is enabled"
 msgstr ""
@@ -3311,7 +3276,7 @@ msgstr ""
 msgid "Bad choice, try again\n"
 msgstr "Huono valinta, yritä uudelleen\n"
 
-#: interactive/stdio.pm:30 interactive/stdio.pm:149
+#: interactive/stdio.pm:30 interactive/stdio.pm:155
 #, c-format
 msgid "Your choice? (default %s) "
 msgstr "Valintasi? (oletus %s) "
@@ -3330,32 +3295,32 @@ msgstr ""
 msgid "Your choice? (0/1, default `%s') "
 msgstr "Valintasi? (0/1, oletus '%s') "
 
-#: interactive/stdio.pm:94
+#: interactive/stdio.pm:97
 #, c-format
 msgid "Button `%s': %s"
 msgstr "Painike '%s': %s"
 
-#: interactive/stdio.pm:95
+#: interactive/stdio.pm:98
 #, c-format
 msgid "Do you want to click on this button?"
 msgstr "Haluatko klikata tätä painiketta?"
 
-#: interactive/stdio.pm:104
+#: interactive/stdio.pm:110
 #, c-format
 msgid "Your choice? (default `%s'%s) "
 msgstr "Valintasi? (oletus '%s'%s) "
 
-#: interactive/stdio.pm:104
+#: interactive/stdio.pm:110
 #, c-format
 msgid " enter `void' for void entry"
 msgstr " kirjoita 'void' jos haluat tyhjän tietueen"
 
-#: interactive/stdio.pm:122
+#: interactive/stdio.pm:128
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
 msgstr "=> On monta asiaa, joista valita (%s).\n"
 
-#: interactive/stdio.pm:125
+#: interactive/stdio.pm:131
 #, c-format
 msgid ""
 "Please choose the first number of the 10-range you wish to edit,\n"
@@ -3366,7 +3331,7 @@ msgstr ""
 "tai paina vain Enter jatkaaksesi.\n"
 "Valintasi? "
 
-#: interactive/stdio.pm:138
+#: interactive/stdio.pm:144
 #, c-format
 msgid ""
 "=> Notice, a label changed:\n"
@@ -3375,7 +3340,7 @@ msgstr ""
 "=> Huomaa, nimike vaihtui:\n"
 "%s"
 
-#: interactive/stdio.pm:145
+#: interactive/stdio.pm:151
 #, c-format
 msgid "Re-submit"
 msgstr "Lähetä uudelleen"
@@ -3393,7 +3358,7 @@ msgstr "default:LTR"
 msgid "Andorra"
 msgstr "Andorra"
 
-#: lang.pm:211 timezone.pm:213
+#: lang.pm:211 timezone.pm:215
 #, c-format
 msgid "United Arab Emirates"
 msgstr "Arabiemiirikunnat"
@@ -3438,7 +3403,7 @@ msgstr "Angola"
 msgid "Antarctica"
 msgstr "Antarktis"
 
-#: lang.pm:220 timezone.pm:258
+#: lang.pm:220 timezone.pm:260
 #, c-format
 msgid "Argentina"
 msgstr "Argentiina"
@@ -3448,12 +3413,12 @@ msgstr "Argentiina"
 msgid "American Samoa"
 msgstr "Amerikan Samoa"
 
-#: lang.pm:222 mirror.pm:11 timezone.pm:216
+#: lang.pm:222 mirror.pm:11 timezone.pm:218
 #, c-format
 msgid "Austria"
 msgstr "Itävalta"
 
-#: lang.pm:223 mirror.pm:10 timezone.pm:254
+#: lang.pm:223 mirror.pm:10 timezone.pm:256
 #, c-format
 msgid "Australia"
 msgstr "Australia"
@@ -3478,12 +3443,12 @@ msgstr "Bosnia ja Herzegovina"
 msgid "Barbados"
 msgstr "Barbados"
 
-#: lang.pm:228 timezone.pm:198
+#: lang.pm:228 timezone.pm:200
 #, c-format
 msgid "Bangladesh"
 msgstr "Bangladesh"
 
-#: lang.pm:229 mirror.pm:12 timezone.pm:218
+#: lang.pm:229 mirror.pm:12 timezone.pm:220
 #, c-format
 msgid "Belgium"
 msgstr "Belgia"
@@ -3493,7 +3458,7 @@ msgstr "Belgia"
 msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
-#: lang.pm:231 timezone.pm:219
+#: lang.pm:231 timezone.pm:221
 #, c-format
 msgid "Bulgaria"
 msgstr "Bulgaria"
@@ -3528,7 +3493,7 @@ msgstr "Brunei Darussalam"
 msgid "Bolivia"
 msgstr "Bolivia"
 
-#: lang.pm:238 mirror.pm:13 timezone.pm:259
+#: lang.pm:238 mirror.pm:13 timezone.pm:261
 #, c-format
 msgid "Brazil"
 msgstr "Brasilia"
@@ -3553,7 +3518,7 @@ msgstr "Bouvet'n saari"
 msgid "Botswana"
 msgstr "Botswana"
 
-#: lang.pm:243 timezone.pm:217
+#: lang.pm:243 timezone.pm:219
 #, c-format
 msgid "Belarus"
 msgstr "Valko-Venäjä"
@@ -3563,7 +3528,7 @@ msgstr "Valko-Venäjä"
 msgid "Belize"
 msgstr "Belize"
 
-#: lang.pm:245 mirror.pm:14 timezone.pm:248
+#: lang.pm:245 mirror.pm:14 timezone.pm:250
 #, c-format
 msgid "Canada"
 msgstr "Kanada"
@@ -3588,7 +3553,7 @@ msgstr "Keski-Afrikan tasavalta"
 msgid "Congo (Brazzaville)"
 msgstr "Kongo (Brazzaville)"
 
-#: lang.pm:250 mirror.pm:38 timezone.pm:242
+#: lang.pm:250 mirror.pm:38 timezone.pm:244
 #, c-format
 msgid "Switzerland"
 msgstr "Sveitsi"
@@ -3603,7 +3568,7 @@ msgstr "Cote d'Ivoire"
 msgid "Cook Islands"
 msgstr "Cookinsaaret"
 
-#: lang.pm:253 timezone.pm:260
+#: lang.pm:253 timezone.pm:262
 #, c-format
 msgid "Chile"
 msgstr "Chile"
@@ -3613,7 +3578,7 @@ msgstr "Chile"
 msgid "Cameroon"
 msgstr "Kamerun"
 
-#: lang.pm:255 timezone.pm:199
+#: lang.pm:255 timezone.pm:201
 #, c-format
 msgid "China"
 msgstr "Kiina"
@@ -3653,12 +3618,12 @@ msgstr "Joulusaari"
 msgid "Cyprus"
 msgstr "Kypros"
 
-#: lang.pm:263 mirror.pm:16 timezone.pm:220
+#: lang.pm:263 mirror.pm:16 timezone.pm:222
 #, c-format
 msgid "Czech Republic"
 msgstr "Tsekin tasavalta"
 
-#: lang.pm:264 mirror.pm:21 timezone.pm:225
+#: lang.pm:264 mirror.pm:21 timezone.pm:227
 #, c-format
 msgid "Germany"
 msgstr "Saksa"
@@ -3668,7 +3633,7 @@ msgstr "Saksa"
 msgid "Djibouti"
 msgstr "Djibouti"
 
-#: lang.pm:266 mirror.pm:17 timezone.pm:221
+#: lang.pm:266 mirror.pm:17 timezone.pm:223
 #, c-format
 msgid "Denmark"
 msgstr "Tanska"
@@ -3693,7 +3658,7 @@ msgstr "Algeria"
 msgid "Ecuador"
 msgstr "Ecuador"
 
-#: lang.pm:271 mirror.pm:18 timezone.pm:222
+#: lang.pm:271 mirror.pm:18 timezone.pm:224
 #, c-format
 msgid "Estonia"
 msgstr "Viro"
@@ -3713,7 +3678,7 @@ msgstr "Länsi-Sahara"
 msgid "Eritrea"
 msgstr "Eritrea"
 
-#: lang.pm:275 mirror.pm:36 timezone.pm:240
+#: lang.pm:275 mirror.pm:36 timezone.pm:242
 #, c-format
 msgid "Spain"
 msgstr "Espanja"
@@ -3723,7 +3688,7 @@ msgstr "Espanja"
 msgid "Ethiopia"
 msgstr "Etiopia"
 
-#: lang.pm:277 mirror.pm:19 timezone.pm:223
+#: lang.pm:277 mirror.pm:19 timezone.pm:225
 #, c-format
 msgid "Finland"
 msgstr "Suomi"
@@ -3748,7 +3713,7 @@ msgstr "Mikronesia"
 msgid "Faroe Islands"
 msgstr "Färsaaret"
 
-#: lang.pm:282 mirror.pm:20 timezone.pm:224
+#: lang.pm:282 mirror.pm:20 timezone.pm:226
 #, c-format
 msgid "France"
 msgstr "Ranska"
@@ -3758,7 +3723,7 @@ msgstr "Ranska"
 msgid "Gabon"
 msgstr "Gabon"
 
-#: lang.pm:284 timezone.pm:244
+#: lang.pm:284 timezone.pm:246
 #, c-format
 msgid "United Kingdom"
 msgstr "Iso-Britannia"
@@ -3813,7 +3778,7 @@ msgstr "Guadeloupe"
 msgid "Equatorial Guinea"
 msgstr "Guinea"
 
-#: lang.pm:295 mirror.pm:22 timezone.pm:226
+#: lang.pm:295 mirror.pm:22 timezone.pm:228
 #, c-format
 msgid "Greece"
 msgstr "Kreikka"
@@ -3823,7 +3788,7 @@ msgstr "Kreikka"
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Etelä-Georgia ja Eteläiset Sandwichsaaret"
 
-#: lang.pm:297 timezone.pm:249
+#: lang.pm:297 timezone.pm:251
 #, c-format
 msgid "Guatemala"
 msgstr "Guatemala"
@@ -3868,27 +3833,27 @@ msgstr "Kroatia"
 msgid "Haiti"
 msgstr "Haiti"
 
-#: lang.pm:306 mirror.pm:23 timezone.pm:227
+#: lang.pm:306 mirror.pm:23 timezone.pm:229
 #, c-format
 msgid "Hungary"
 msgstr "Unkari"
 
-#: lang.pm:307 timezone.pm:202
+#: lang.pm:307 timezone.pm:204
 #, c-format
 msgid "Indonesia"
 msgstr "Indonesia"
 
-#: lang.pm:308 mirror.pm:24 timezone.pm:228
+#: lang.pm:308 mirror.pm:24 timezone.pm:230
 #, c-format
 msgid "Ireland"
 msgstr "Irlanti"
 
-#: lang.pm:309 mirror.pm:25 timezone.pm:204
+#: lang.pm:309 mirror.pm:25 timezone.pm:206
 #, c-format
 msgid "Israel"
 msgstr "Israel"
 
-#: lang.pm:310 timezone.pm:201
+#: lang.pm:310 timezone.pm:203
 #, c-format
 msgid "India"
 msgstr "Intia"
@@ -3903,7 +3868,7 @@ msgstr "Brittiläinen Intian valtameren alue"
 msgid "Iraq"
 msgstr "Irak"
 
-#: lang.pm:313 timezone.pm:203
+#: lang.pm:313 timezone.pm:205
 #, c-format
 msgid "Iran"
 msgstr "Iran"
@@ -3913,7 +3878,7 @@ msgstr "Iran"
 msgid "Iceland"
 msgstr "Islanti"
 
-#: lang.pm:315 mirror.pm:26 timezone.pm:229
+#: lang.pm:315 mirror.pm:26 timezone.pm:231
 #, c-format
 msgid "Italy"
 msgstr "Italia"
@@ -3928,7 +3893,7 @@ msgstr "Jamaika"
 msgid "Jordan"
 msgstr "Jordania"
 
-#: lang.pm:318 mirror.pm:27 timezone.pm:205
+#: lang.pm:318 mirror.pm:27 timezone.pm:207
 #, c-format
 msgid "Japan"
 msgstr "Japani"
@@ -3968,7 +3933,7 @@ msgstr "Saint Kitts ja Nevis"
 msgid "Korea (North)"
 msgstr "Korea (Pohjois-)"
 
-#: lang.pm:326 timezone.pm:206
+#: lang.pm:326 timezone.pm:208
 #, c-format
 msgid "Korea"
 msgstr "Korea"
@@ -4023,12 +3988,12 @@ msgstr "Liberia"
 msgid "Lesotho"
 msgstr "Lesotho"
 
-#: lang.pm:337 timezone.pm:230
+#: lang.pm:337 timezone.pm:232
 #, c-format
 msgid "Lithuania"
 msgstr "Liettua"
 
-#: lang.pm:338 timezone.pm:231
+#: lang.pm:338 timezone.pm:233
 #, c-format
 msgid "Luxembourg"
 msgstr "Luxemburg"
@@ -4128,12 +4093,12 @@ msgstr "Malediivit"
 msgid "Malawi"
 msgstr "Malawi"
 
-#: lang.pm:358 timezone.pm:250
+#: lang.pm:358 timezone.pm:252
 #, c-format
 msgid "Mexico"
 msgstr "Meksiko"
 
-#: lang.pm:359 timezone.pm:207
+#: lang.pm:359 timezone.pm:209
 #, c-format
 msgid "Malaysia"
 msgstr "Malesia"
@@ -4173,12 +4138,12 @@ msgstr "Nigeria"
 msgid "Nicaragua"
 msgstr "Nicaragua"
 
-#: lang.pm:367 mirror.pm:28 timezone.pm:232
+#: lang.pm:367 mirror.pm:28 timezone.pm:234
 #, c-format
 msgid "Netherlands"
 msgstr "Alankomaat"
 
-#: lang.pm:368 mirror.pm:30 timezone.pm:233
+#: lang.pm:368 mirror.pm:30 timezone.pm:235
 #, c-format
 msgid "Norway"
 msgstr "Norja"
@@ -4198,7 +4163,7 @@ msgstr "Nauru"
 msgid "Niue"
 msgstr "Niue"
 
-#: lang.pm:372 mirror.pm:29 timezone.pm:255
+#: lang.pm:372 mirror.pm:29 timezone.pm:257
 #, c-format
 msgid "New Zealand"
 msgstr "Uusi-Seelanti"
@@ -4228,7 +4193,7 @@ msgstr "Ranskan Polynesia"
 msgid "Papua New Guinea"
 msgstr "Papua Uusi-Guinea"
 
-#: lang.pm:378 timezone.pm:208
+#: lang.pm:378 timezone.pm:210
 #, c-format
 msgid "Philippines"
 msgstr "Filippiinit"
@@ -4238,7 +4203,7 @@ msgstr "Filippiinit"
 msgid "Pakistan"
 msgstr "Pakistan"
 
-#: lang.pm:380 mirror.pm:31 timezone.pm:234
+#: lang.pm:380 mirror.pm:31 timezone.pm:236
 #, c-format
 msgid "Poland"
 msgstr "Puola"
@@ -4263,7 +4228,7 @@ msgstr "Puerto Rico"
 msgid "Palestine"
 msgstr "Palestiina"
 
-#: lang.pm:385 mirror.pm:32 timezone.pm:235
+#: lang.pm:385 mirror.pm:32 timezone.pm:237
 #, c-format
 msgid "Portugal"
 msgstr "Portugali"
@@ -4288,7 +4253,7 @@ msgstr "Qatar"
 msgid "Reunion"
 msgstr "Reunion"
 
-#: lang.pm:390 timezone.pm:236
+#: lang.pm:390 timezone.pm:238
 #, c-format
 msgid "Romania"
 msgstr "Romania"
@@ -4323,12 +4288,12 @@ msgstr "Seychellit"
 msgid "Sudan"
 msgstr "Sudan"
 
-#: lang.pm:397 mirror.pm:37 timezone.pm:241
+#: lang.pm:397 mirror.pm:37 timezone.pm:243
 #, c-format
 msgid "Sweden"
 msgstr "Ruotsi"
 
-#: lang.pm:398 timezone.pm:209
+#: lang.pm:398 timezone.pm:211
 #, c-format
 msgid "Singapore"
 msgstr "Singapore"
@@ -4338,7 +4303,7 @@ msgstr "Singapore"
 msgid "Saint Helena"
 msgstr "Saint Helena"
 
-#: lang.pm:400 timezone.pm:239
+#: lang.pm:400 timezone.pm:241
 #, c-format
 msgid "Slovenia"
 msgstr "Slovenia"
@@ -4348,7 +4313,7 @@ msgstr "Slovenia"
 msgid "Svalbard and Jan Mayen Islands"
 msgstr "Svalbard ja Jan Mayen"
 
-#: lang.pm:402 mirror.pm:34 timezone.pm:238
+#: lang.pm:402 mirror.pm:34 timezone.pm:240
 #, c-format
 msgid "Slovakia"
 msgstr "Slovakia"
@@ -4418,7 +4383,7 @@ msgstr "Ranskan eteläiset alueet"
 msgid "Togo"
 msgstr "Togo"
 
-#: lang.pm:416 mirror.pm:40 timezone.pm:211
+#: lang.pm:416 mirror.pm:40 timezone.pm:213
 #, c-format
 msgid "Thailand"
 msgstr "Thaimaa"
@@ -4453,7 +4418,7 @@ msgstr "Tunisia"
 msgid "Tonga"
 msgstr "Tonga"
 
-#: lang.pm:423 timezone.pm:212
+#: lang.pm:423 timezone.pm:214
 #, c-format
 msgid "Turkey"
 msgstr "Turkki"
@@ -4468,17 +4433,17 @@ msgstr "Trinidad ja Tobago"
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
-#: lang.pm:426 mirror.pm:39 timezone.pm:210
+#: lang.pm:426 mirror.pm:39 timezone.pm:212
 #, c-format
 msgid "Taiwan"
 msgstr "Taiwan"
 
-#: lang.pm:427 timezone.pm:195
+#: lang.pm:427 timezone.pm:197
 #, c-format
 msgid "Tanzania"
 msgstr "Tansania"
 
-#: lang.pm:428 timezone.pm:243
+#: lang.pm:428 timezone.pm:245
 #, c-format
 msgid "Ukraine"
 msgstr "Ukraina"
@@ -4493,7 +4458,7 @@ msgstr "Uganda"
 msgid "United States Minor Outlying Islands"
 msgstr "Yhdysvaltain pienet erillissaaret"
 
-#: lang.pm:431 mirror.pm:41 timezone.pm:251
+#: lang.pm:431 mirror.pm:41 timezone.pm:253
 #, c-format
 msgid "United States"
 msgstr "Yhdysvallat"
@@ -4563,7 +4528,7 @@ msgstr "Jemen"
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: lang.pm:445 mirror.pm:35 timezone.pm:194
+#: lang.pm:445 mirror.pm:35 timezone.pm:196
 #, c-format
 msgid "South Africa"
 msgstr "Etelä-Afrikka"
@@ -4579,27 +4544,27 @@ msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
 # mat
-#: lang.pm:1144
+#: lang.pm:1193
 #, c-format
 msgid "Welcome to %s"
 msgstr "Tervetuloa %s:n"
 
-#: lvm.pm:83
+#: lvm.pm:84
 #, c-format
 msgid "Moving used physical extents to other physical volumes failed"
 msgstr ""
 
-#: lvm.pm:135
+#: lvm.pm:137
 #, c-format
 msgid "Physical volume %s is still in use"
 msgstr ""
 
-#: lvm.pm:145
+#: lvm.pm:147
 #, c-format
 msgid "Remove the logical volumes first\n"
 msgstr "Poista ensin loogiset osiot\n"
 
-#: lvm.pm:178
+#: lvm.pm:180
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
 msgstr ""
@@ -5229,17 +5194,17 @@ msgstr ""
 "Moduulin %s lataaminen epäonnistui.\n"
 "Haluatko yrittää muilla asetuksilla?"
 
-#: partition_table.pm:390
+#: partition_table.pm:401
 #, c-format
 msgid "mount failed: "
 msgstr "liittäminen epäonnistui: "
 
-#: partition_table.pm:500
+#: partition_table.pm:510
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "Laajennettua osiotyyppiä ei tueta tässä ympäristössä"
 
-#: partition_table.pm:518
+#: partition_table.pm:528
 #, c-format
 msgid ""
 "You have a hole in your partition table but I can not use it.\n"
@@ -5250,27 +5215,7 @@ msgstr ""
 "Ainoa ratkaisu on siirtää primääriosioita siten että reikä on ennen "
 "laajennettuja osioita"
 
-#: partition_table.pm:597
-#, c-format
-msgid "Error reading file %s"
-msgstr "Virhe lukiessa tiedostoa %s"
-
-#: partition_table.pm:604
-#, c-format
-msgid "Restoring from file %s failed: %s"
-msgstr "Palautus tiedostosta %s epäonnistui: %s"
-
-#: partition_table.pm:606
-#, c-format
-msgid "Bad backup file"
-msgstr "Huono varmuuskopiotiedosto"
-
-#: partition_table.pm:626
-#, c-format
-msgid "Error writing to file %s"
-msgstr "Virhe kirjoitettaessa tiedostoon %s"
-
-#: partition_table/raw.pm:264
+#: partition_table/raw.pm:279
 #, c-format
 msgid ""
 "Something bad is happening on your drive. \n"
@@ -5288,7 +5233,7 @@ msgstr ""
 msgid "Can not add a partition to _formatted_ RAID %s"
 msgstr "Ei voitu lisätä osiota _alustetulle_ RAID:lle %s"
 
-#: raid.pm:150
+#: raid.pm:157
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
 msgstr "Ei riittävästi osioita RAID tasolle %d\n"
@@ -6569,7 +6514,7 @@ msgstr ""
 "Ei lisätietoja tästä\n"
 "palvelusta, valitan."
 
-#: services.pm:221 ugtk2.pm:901
+#: services.pm:221 ugtk2.pm:911
 #, c-format
 msgid "Info"
 msgstr "Tietoja"
@@ -6594,7 +6539,7 @@ msgstr "Käynnistä"
 msgid "Stop"
 msgstr "Pysäytä"
 
-#: standalone.pm:23
+#: standalone.pm:25
 #, c-format
 msgid ""
 "This program is free software; you can redistribute it and/or modify\n"
@@ -6629,7 +6574,7 @@ msgstr ""
 "1301\n"
 ", USA.\n"
 
-#: standalone.pm:42
+#: standalone.pm:44
 #, c-format
 msgid ""
 "[--config-info] [--daemon] [--debug] [--default] [--show-conf]\n"
@@ -6657,7 +6602,7 @@ msgstr ""
 "--help                : näytä tämä viesti.\n"
 "--version             : näytä versiotiedot.\n"
 
-#: standalone.pm:54
+#: standalone.pm:56
 #, c-format
 msgid ""
 "[--boot] [--splash]\n"
@@ -6672,7 +6617,7 @@ msgstr ""
 "  --splash          - aseta käynnistysteema\n"
 "Oletustila: tarjoutuu asettamaan automaattisen sisäänkirjautumisen"
 
-#: standalone.pm:59
+#: standalone.pm:61
 #, c-format
 msgid ""
 "[OPTIONS] [PROGRAM_NAME]\n"
@@ -6690,7 +6635,7 @@ msgstr ""
 "työkaluista\n"
 "  --incident        - ohjelman pitäisi olla yksi Mandriva Linuxin työkaluista"
 
-#: standalone.pm:65
+#: standalone.pm:67
 #, c-format
 msgid ""
 "[--add]\n"
@@ -6707,7 +6652,7 @@ msgstr ""
 "  --internet        - aseta Internet\n"
 "  --wizard          - kuten --add"
 
-#: standalone.pm:71
+#: standalone.pm:73
 #, c-format
 msgid ""
 "\n"
@@ -6738,7 +6683,7 @@ msgstr ""
 "                 : ohjelmiston_nimi, eli so vastaa StarOfficea\n"
 "                 : ja gs vastaa GhostScriptiä."
 
-#: standalone.pm:86
+#: standalone.pm:88
 #, c-format
 msgid ""
 "[OPTIONS]...\n"
@@ -6768,17 +6713,17 @@ msgstr ""
 "--delclient   : poista asiakaskone MTS:lta (vaatii MAC osoitteen, IP, nbi "
 "kuvatiedoston nimen)"
 
-#: standalone.pm:98
+#: standalone.pm:100
 #, c-format
 msgid "[keyboard]"
 msgstr "[näppäimistö]"
 
-#: standalone.pm:99
+#: standalone.pm:101
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 msgstr "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 
-#: standalone.pm:100
+#: standalone.pm:102
 #, c-format
 msgid ""
 "[OPTIONS]\n"
@@ -6801,7 +6746,7 @@ msgstr ""
 "--status : palauttaa 1 jos yhteys on avattu, muuten 0, ja poistuu.\n"
 "--quiet : ei-interaktiivinen tila. Käytetään (dis)connect:n kanssa."
 
-#: standalone.pm:110
+#: standalone.pm:112
 #, c-format
 msgid ""
 "[OPTION]...\n"
@@ -6820,7 +6765,7 @@ msgstr ""
 " --merge-all-rpmnew  ehdota kaikkien .rpmnew/.rpmsave tiedostojen "
 "yhdistämistä"
 
-#: standalone.pm:115
+#: standalone.pm:117
 #, c-format
 msgid ""
 "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
@@ -6829,7 +6774,7 @@ msgstr ""
 "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
 "usbtable] [--dynamic=dev]"
 
-#: standalone.pm:116
+#: standalone.pm:118
 #, c-format
 msgid ""
 " [everything]\n"
@@ -6840,7 +6785,7 @@ msgstr ""
 "       XFdrake [--noauto] näyttö\n"
 "       XFdrake tarkkuus"
 
-#: standalone.pm:152
+#: standalone.pm:154
 #, c-format
 msgid ""
 "\n"
@@ -6851,102 +6796,102 @@ msgstr ""
 "Käyttö: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
 "testing] [-v|--version] "
 
-#: timezone.pm:148 timezone.pm:149
+#: timezone.pm:150 timezone.pm:151
 #, fuzzy, c-format
 msgid "All servers"
 msgstr "Lisää palvelin"
 
-#: timezone.pm:183
+#: timezone.pm:185
 #, c-format
 msgid "Global"
 msgstr "Yleiset"
 
-#: timezone.pm:186
+#: timezone.pm:188
 #, fuzzy, c-format
 msgid "Africa"
 msgstr "Etelä-Afrikka"
 
-#: timezone.pm:187
+#: timezone.pm:189
 #, fuzzy, c-format
 msgid "Asia"
 msgstr "Itävalta"
 
-#: timezone.pm:188
+#: timezone.pm:190
 #, c-format
 msgid "Europe"
 msgstr ""
 
-#: timezone.pm:189
+#: timezone.pm:191
 #, fuzzy, c-format
 msgid "North America"
 msgstr "Etelä-Afrikka"
 
-#: timezone.pm:190
+#: timezone.pm:192
 #, c-format
 msgid "Oceania"
 msgstr "Oseania"
 
-#: timezone.pm:191
+#: timezone.pm:193
 #, fuzzy, c-format
 msgid "South America"
 msgstr "Etelä-Afrikka"
 
-#: timezone.pm:200
+#: timezone.pm:202
 #, c-format
 msgid "Hong Kong"
 msgstr "HongKong"
 
-#: timezone.pm:237
+#: timezone.pm:239
 #, c-format
 msgid "Russian Federation"
 msgstr "Venäjä"
 
-#: timezone.pm:245
+#: timezone.pm:247
 #, c-format
 msgid "Yugoslavia"
 msgstr "Jugoslavia"
 
-#: ugtk2.pm:791
+#: ugtk2.pm:801
 #, c-format
 msgid "Is this correct?"
 msgstr "Onko tämä oikein?"
 
-#: ugtk2.pm:851
+#: ugtk2.pm:861
 #, c-format
 msgid "No file chosen"
 msgstr "Tiedostoa ei valittu"
 
-#: ugtk2.pm:853
+#: ugtk2.pm:863
 #, c-format
 msgid "You have chosen a file, not a directory"
 msgstr "Olet valinnut tiedostoo, ei hakemistoa"
 
-#: ugtk2.pm:855
+#: ugtk2.pm:865
 #, c-format
 msgid "You have chosen a directory, not a file"
 msgstr "Olet valinnut hakemiston, eikä tiedostoa"
 
-#: ugtk2.pm:857
+#: ugtk2.pm:867
 #, c-format
 msgid "No such directory"
 msgstr "Hakemisto ei ole olemassa"
 
-#: ugtk2.pm:857
+#: ugtk2.pm:867
 #, c-format
 msgid "No such file"
 msgstr "Ei tiedostoa"
 
-#: ugtk2.pm:936
+#: ugtk2.pm:946
 #, c-format
 msgid "Expand Tree"
 msgstr "Laajenna puu"
 
-#: ugtk2.pm:937
+#: ugtk2.pm:947
 #, c-format
 msgid "Collapse Tree"
 msgstr "Sulje puu"
 
-#: ugtk2.pm:938
+#: ugtk2.pm:948
 #, c-format
 msgid "Toggle between flat and group sorted"
 msgstr "Vaihda tasaisen ja ryhmäjärjestyksen välillä"
@@ -6964,6 +6909,43 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Asennus epäonnistui"
+
+#~ msgid "Undo"
+#~ msgstr "Peruuta"
+
+#~ msgid "Save partition table"
+#~ msgstr "Tallenna osiotaulu"
+
+#~ msgid "Restore partition table"
+#~ msgstr "Palauta osiotaulu"
+
+#~ msgid "Select file"
+#~ msgstr "Valitse tiedosto"
+
+#~ msgid ""
+#~ "The backup partition table has not the same size\n"
+#~ "Still continue?"
+#~ msgstr ""
+#~ "Osiotaulun varmuuskopio ei ole saman kokoinen\n"
+#~ "Jatketaanko silti?"
+
+#~ msgid "Info: "
+#~ msgstr "Tietoja: "
+
+#~ msgid "Unknown driver"
+#~ msgstr "Tuntematon ajuri"
+
+#~ msgid "Error reading file %s"
+#~ msgstr "Virhe lukiessa tiedostoa %s"
+
+#~ msgid "Restoring from file %s failed: %s"
+#~ msgstr "Palautus tiedostosta %s epäonnistui: %s"
+
+#~ msgid "Bad backup file"
+#~ msgstr "Huono varmuuskopiotiedosto"
+
+#~ msgid "Error writing to file %s"
+#~ msgstr "Virhe kirjoitettaessa tiedostoon %s"
 
 #~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
 #~ msgstr "Virhe: Ajuri \"%s\" äänikortillesi ei ole listattu"

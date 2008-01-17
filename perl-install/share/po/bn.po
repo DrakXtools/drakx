@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX HEAD\n"
-"POT-Creation-Date: 2007-09-12 17:02+0200\n"
+"POT-Creation-Date: 2008-01-17 14:31+0100\n"
 "PO-Revision-Date: 2005-03-19 23:18+0600\n"
 "Last-Translator: Samia <mailsamia2001@yahoo.com>\n"
 "Language-Team: Bangla <mdk-translation@bengalinux.org>\n"
@@ -16,20 +16,20 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: any.pm:240 diskdrake/interactive.pm:603 diskdrake/interactive.pm:790
-#: diskdrake/interactive.pm:834 diskdrake/interactive.pm:896
-#: diskdrake/interactive.pm:1183 do_pkgs.pm:209 do_pkgs.pm:255
-#: harddrake/sound.pm:201 interactive.pm:576
+#: any.pm:245 diskdrake/interactive.pm:552 diskdrake/interactive.pm:739
+#: diskdrake/interactive.pm:783 diskdrake/interactive.pm:841
+#: diskdrake/interactive.pm:1132 do_pkgs.pm:216 do_pkgs.pm:258
+#: harddrake/sound.pm:202 interactive.pm:580
 #, c-format
 msgid "Please wait"
 msgstr "অনুগ্রহ করে অপেক্ষা করুন"
 
-#: any.pm:240
+#: any.pm:245
 #, c-format
 msgid "Bootloader installation in progress"
 msgstr "বুট লোডার ইনস্টল করা হচ্ছে"
 
-#: any.pm:251
+#: any.pm:256
 #, c-format
 msgid ""
 "LILO wants to assign a new Volume ID to drive %s.  However, changing\n"
@@ -44,12 +44,12 @@ msgstr ""
 "উইন্ডোজ সমস্যা।\n"
 "নতুন একটি ভলিউম আই-ডি দেয়া হবে?"
 
-#: any.pm:262
+#: any.pm:267
 #, c-format
 msgid "Installation of bootloader failed. The following error occurred:"
 msgstr "Bootloader ইনষ্টলেশন ব্যর্থ হয়েছে। এ সমস্ত ত্রুটি ঘটেছে:"
 
-#: any.pm:268
+#: any.pm:273
 #, c-format
 msgid ""
 "You may need to change your Open Firmware boot-device to\n"
@@ -65,7 +65,7 @@ msgstr ""
 " তারপর টাইপ করুন: shut-down\n"
 "পরবর্তীতে বুট হওয়ার সময় বুটলোডার প্রম্প্‌ট দেখতে পাওয়া উচিত।"
 
-#: any.pm:306
+#: any.pm:311
 #, c-format
 msgid ""
 "You decided to install the bootloader on a partition.\n"
@@ -81,268 +81,269 @@ msgstr ""
 "\n"
 "আপনি কোন ড্রাইভ থেকে বুট করছেন?"
 
-#: any.pm:329
+#: any.pm:334
 #, c-format
 msgid "First sector of drive (MBR)"
 msgstr "ড্রাইভের প্রথম সেক্টর (MBR)"
 
-#: any.pm:330
+#: any.pm:335
 #, c-format
 msgid "First sector of the root partition"
 msgstr "রুট পার্টিশনের প্রথম সেক্টর"
 
-#: any.pm:332
+#: any.pm:337
 #, c-format
 msgid "On Floppy"
 msgstr "ফ্লপি তে"
 
-#: any.pm:334
+#: any.pm:339
 #, c-format
 msgid "Skip"
 msgstr "উপেক্ষা"
 
-#: any.pm:338
+#: any.pm:343
 #, c-format
 msgid "LILO/grub Installation"
 msgstr "LILO/grub ইনস্টলেশন"
 
-#: any.pm:340
+#: any.pm:345
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "আপনি bootloader টি কোথায় ইনস্টল করতে চান?"
 
-#: any.pm:367
+#: any.pm:372
 #, c-format
 msgid "Boot Style Configuration"
 msgstr "বুটের ধরণ কনফিগারেশন"
 
-#: any.pm:377 any.pm:409 any.pm:410
+#: any.pm:382 any.pm:414 any.pm:415
 #, c-format
 msgid "Bootloader main options"
 msgstr "বুটলোডারের আসল অপশনসমুহ"
 
-#: any.pm:382
+#: any.pm:387
 #, c-format
 msgid "Bootloader"
 msgstr "বুটলোডার"
 
-#: any.pm:383 any.pm:414
+#: any.pm:388 any.pm:419
 #, c-format
 msgid "Bootloader to use"
 msgstr "ব্যবহারের জন্য বুটলোডার"
 
-#: any.pm:385 any.pm:416
+#: any.pm:390 any.pm:421
 #, c-format
 msgid "Boot device"
 msgstr "বুট ডিভাইস"
 
-#: any.pm:387
+#: any.pm:392
 #, c-format
 msgid "Main options"
 msgstr ""
 
-#: any.pm:388
+#: any.pm:393
 #, c-format
 msgid "Delay before booting default image"
 msgstr "স্বাভাবিক ইমেজ লোড করার আগে দেরী করো"
 
-#: any.pm:389
+#: any.pm:394
 #, c-format
 msgid "Enable ACPI"
 msgstr "ACPI এনেবল করো"
 
-#: any.pm:390
+#: any.pm:395
 #, fuzzy, c-format
 msgid "Enable APIC"
 msgstr "ACPI এনেবল করো"
 
-#: any.pm:391
+#: any.pm:396
 #, fuzzy, c-format
 msgid "Enable Local APIC"
 msgstr "ACPI এনেবল করো"
 
-#: any.pm:393 any.pm:773 authentication.pm:196 diskdrake/smbnfs_gtk.pm:181
+#: any.pm:398 any.pm:785 any.pm:794 authentication.pm:197
+#: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
 msgstr "পাসওয়ার্ড"
 
-#: any.pm:395 authentication.pm:207
+#: any.pm:400 authentication.pm:208
 #, c-format
 msgid "The passwords do not match"
 msgstr "পাসওয়ার্ডটি মিলছে না"
 
-#: any.pm:395 authentication.pm:207 diskdrake/interactive.pm:1343
+#: any.pm:400 authentication.pm:208 diskdrake/interactive.pm:1299
 #, c-format
 msgid "Please try again"
 msgstr "অনুগ্রহ করে আবার চেষ্ট করুন"
 
-#: any.pm:396
+#: any.pm:401
 #, fuzzy, c-format
 msgid "You can not use a password with %s"
 msgstr "আপনি %s মাউন্ট পয়েন্টের জন্য একটি এনক্রিপটেড ফাইল ব্যবহার করতে পারবেন"
 
-#: any.pm:399 any.pm:774 authentication.pm:197
+#: any.pm:404 any.pm:787 any.pm:796 authentication.pm:198
 #, c-format
 msgid "Password (again)"
 msgstr "পাসওয়ার্ড (পুনরায়)"
 
-#: any.pm:400
+#: any.pm:405
 #, c-format
 msgid "Restrict command line options"
 msgstr "কমান্ডলইন অপশনে বাঁধা দাও"
 
-#: any.pm:400
+#: any.pm:405
 #, c-format
 msgid "restrict"
 msgstr "বাঁধা দাও"
 
-#: any.pm:401
+#: any.pm:406
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr "``নিয়ন্ত্রিত কমান্ড লাইন অপশন'' অপশনটি পাসওয়ার্ড ছাড়া ব্যবহার করা যাবে না"
 
-#: any.pm:403
+#: any.pm:408
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "প্রতি বুটে /tmp পরিষ্কার করো"
 
-#: any.pm:404
+#: any.pm:409
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
 msgstr "যদি প্রয়োজন হয় যথাযথ RAM লাগবে (পাওয়া গেছে %d RAM)"
 
-#: any.pm:405
+#: any.pm:410
 #, c-format
 msgid "Give the ram size in MB"
 msgstr "মেগাবাইটে র‌্যমের সাইজ প্রদান করুন"
 
-#: any.pm:415
+#: any.pm:420
 #, c-format
 msgid "Init Message"
 msgstr "Init বার্তা"
 
-#: any.pm:417
+#: any.pm:422
 #, c-format
 msgid "Open Firmware Delay"
 msgstr "বিলম্বিত ওপেন ফার্মওয়্যার"
 
-#: any.pm:418
+#: any.pm:423
 #, c-format
 msgid "Kernel Boot Timeout"
 msgstr "কার্নাল বুটের সময় অতিক্রান্ত হয়েছে"
 
-#: any.pm:419
+#: any.pm:424
 #, c-format
 msgid "Enable CD Boot?"
 msgstr "সিডি বুট সক্রিয় করা হবে?"
 
-#: any.pm:420
+#: any.pm:425
 #, c-format
 msgid "Enable OF Boot?"
 msgstr "OF বুট সক্রিয় করা হবে?"
 
-#: any.pm:421
+#: any.pm:426
 #, c-format
 msgid "Default OS?"
 msgstr "স্বাভাবিক অবস্থায় ব্যবহৃত OS?"
 
-#: any.pm:487
+#: any.pm:493
 #, c-format
 msgid "Image"
 msgstr "ইমেজ"
 
-#: any.pm:488 any.pm:501
+#: any.pm:494 any.pm:507
 #, c-format
 msgid "Root"
 msgstr "Root"
 
-#: any.pm:489 any.pm:514
+#: any.pm:495 any.pm:520
 #, c-format
 msgid "Append"
 msgstr "যুক্ত"
 
-#: any.pm:491
+#: any.pm:497
 #, c-format
 msgid "Xen append"
 msgstr ""
 
-#: any.pm:494
+#: any.pm:500
 #, c-format
 msgid "Video mode"
 msgstr "ভিডিওর ধরণ"
 
-#: any.pm:496
+#: any.pm:502
 #, c-format
 msgid "Initrd"
 msgstr "Initrd"
 
-#: any.pm:497
+#: any.pm:503
 #, c-format
 msgid "Network profile"
 msgstr "নেটওয়ার্ক প্রোফাইল"
 
-#: any.pm:506 any.pm:511 any.pm:513 diskdrake/interactive.pm:425
+#: any.pm:512 any.pm:517 any.pm:519 diskdrake/interactive.pm:374
 #, c-format
 msgid "Label"
 msgstr "শিরোনাম"
 
-#: any.pm:508 any.pm:516 harddrake/v4l.pm:438
+#: any.pm:514 any.pm:522 harddrake/v4l.pm:438
 #, c-format
 msgid "Default"
 msgstr "স্বাভাবিক"
 
-#: any.pm:515
+#: any.pm:521
 #, c-format
 msgid "NoVideo"
 msgstr "কোন ভিডিও নেই"
 
-#: any.pm:526
+#: any.pm:532
 #, c-format
 msgid "Empty label not allowed"
 msgstr "খালি শিরোনাম গ্রহণযোগ্য নয়"
 
-#: any.pm:527
+#: any.pm:533
 #, c-format
 msgid "You must specify a kernel image"
 msgstr "আপনাকে অবশ্যই একটি কার্নালের ইমেজ নির্ধারণ করে দিতে হবে"
 
-#: any.pm:527
+#: any.pm:533
 #, c-format
 msgid "You must specify a root partition"
 msgstr "আপনাকে অবশ্যই একটি রুট পার্টিশন নির্ধারণ করে দিতে হবে"
 
-#: any.pm:528
+#: any.pm:534
 #, c-format
 msgid "This label is already used"
 msgstr "এই শিরোনামটি আগেই ব্যবহার হয়েছে"
 
-#: any.pm:546
+#: any.pm:552
 #, c-format
 msgid "Which type of entry do you want to add?"
 msgstr "আপনি কি ধরণের এন্ট্রি যোগ করতে চান?"
 
-#: any.pm:547
+#: any.pm:553
 #, c-format
 msgid "Linux"
 msgstr "লিনাক্স"
 
-#: any.pm:547
+#: any.pm:553
 #, c-format
 msgid "Other OS (SunOS...)"
 msgstr "অন্যান্য OS (SunOS...)"
 
-#: any.pm:548
+#: any.pm:554
 #, c-format
 msgid "Other OS (MacOS...)"
 msgstr "অন্যান্য OS (MacOS...)"
 
-#: any.pm:548
+#: any.pm:554
 #, c-format
 msgid "Other OS (Windows...)"
 msgstr "অন্যান্য OS (Windows...)"
 
-#: any.pm:576
+#: any.pm:582
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -351,176 +352,181 @@ msgstr ""
 "এপর্যন্ত আপনার বুটমেনুর এন্ট্রিগুলি এখানে।\n"
 "আপনি অন্যান্য এন্ট্রি তৈরী করতে পারেন অথবা আগের এন্ট্রিগুলি পরিবর্তন করতে পারেন।"
 
-#: any.pm:727
+#: any.pm:745
 #, c-format
 msgid "access to X programs"
 msgstr "X প্রোগ্রামসমূহে প্রবেশাধিকার"
 
-#: any.pm:728
+#: any.pm:746
 #, c-format
 msgid "access to rpm tools"
 msgstr "RPM টুলে প্রবেশাধিকার"
 
-#: any.pm:729
+#: any.pm:747
 #, c-format
 msgid "allow \"su\""
 msgstr "\"su\" গ্রহন করো"
 
-#: any.pm:730
+#: any.pm:748
 #, c-format
 msgid "access to administrative files"
 msgstr "এডমিনিষ্ট্রেশন সংক্রান্ত ফাইলে প্রবেশাধিকার"
 
-#: any.pm:731
+#: any.pm:749
 #, c-format
 msgid "access to network tools"
 msgstr "নেটওয়ার্ক টুলে প্রবেশাধিকার"
 
-#: any.pm:732
+#: any.pm:750
 #, c-format
 msgid "access to compilation tools"
 msgstr "compilation টুলে প্রবেশাধিকার"
 
-#: any.pm:737
+#: any.pm:756
 #, c-format
 msgid "(already added %s)"
 msgstr "(%s আগেই যোগ করা হয়েছে)"
 
-#: any.pm:744
+#: any.pm:762
 #, c-format
 msgid "Please give a user name"
 msgstr "অনুগ্রহ করে একটি উইজার নেম দিন"
 
-#: any.pm:745
+#: any.pm:763
 #, c-format
 msgid ""
 "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr "ইউজারনেমে অবশ্যই ছোটহাতের অক্ষর, নম্বর \"-\" এবং \"_\" থাকতে হবে"
 
-#: any.pm:746
+#: any.pm:764
 #, c-format
 msgid "The user name is too long"
 msgstr "ইউজারনেমটি অনেক বড়"
 
-#: any.pm:747
+#: any.pm:765
 #, c-format
 msgid "This user name has already been added"
 msgstr "এই ইউজারনেমটি এর আগেই যোগ করা হয়েছে"
 
-#: any.pm:748 any.pm:776
+#: any.pm:771 any.pm:798
 #, c-format
 msgid "User ID"
 msgstr "ব্যবহারকারীর ID"
 
-#: any.pm:749 any.pm:777
+#: any.pm:771 any.pm:799
 #, c-format
 msgid "Group ID"
 msgstr "দলের ID"
 
-#: any.pm:752
+#: any.pm:772
 #, fuzzy, c-format
 msgid "%s must be a number"
 msgstr "অপশন %s-কে অবশ্যই একটি সংখ্যা হতে হবে!"
 
-#: any.pm:753
+#: any.pm:773
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
 msgstr ""
 
-#: any.pm:768
+#: any.pm:777
 #, fuzzy, c-format
 msgid "User management"
 msgstr "ব্যবহারকারীনাম"
 
-#: any.pm:775 authentication.pm:182
+#: any.pm:784 authentication.pm:183
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "আ্যাডমিনিস্ট্রেটর (root) পাসওয়ার্ড সেট করুন"
 
-#: any.pm:780
+#: any.pm:789
 #, fuzzy, c-format
 msgid "Enter a user"
 msgstr ""
 "একটি ইউজার প্রবেশ করান\n"
 "%s"
 
-#: any.pm:781
+#: any.pm:790
 #, c-format
 msgid "Real name"
 msgstr "আসল নাম"
 
-#: any.pm:772
+#: any.pm:793
 #, c-format
 msgid "Login name"
 msgstr "লগ-ইন নাম"
 
-#: any.pm:775
+#: any.pm:797
 #, c-format
 msgid "Shell"
 msgstr "শেল"
 
-#: any.pm:822 security/l10n.pm:14
+#: any.pm:835 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "সয়ংক্রিয় লগ-ইন"
 
-#: any.pm:823
+#: any.pm:836
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr ""
 "আমি আপনার কম্পিউটারকে সয়ংক্রিয়ভাবে একটি ইউজারকে লগইন করার জন্য সেট করতে পারি।"
 
-#: any.pm:824
+#: any.pm:837
 #, fuzzy, c-format
 msgid "Use this feature"
 msgstr "এই সুবিধাটি কি আপনি ব্যবহার করতে চান?"
 
-#: any.pm:825
+#: any.pm:838
 #, c-format
 msgid "Choose the default user:"
 msgstr "স্বাভাবিক ব্যবহারকারীকে পছন্দ করুন:"
 
-#: any.pm:826
+#: any.pm:839
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "রান করার জন্য উইন্ডো ম্যানেজারকে পছন্দ করুন:"
 
-#: any.pm:854
-#, c-format
-msgid "License agreement"
-msgstr "লাইসেন্স এগ্রিমেন্ট"
-
-#: any.pm:857 diskdrake/dav.pm:26
-#, c-format
-msgid "Quit"
-msgstr "বাহির"
-
-#: any.pm:860
+#: any.pm:862 any.pm:912
 #, c-format
 msgid "Release Notes"
 msgstr "সংস্করণ মন্তব্য"
 
-#: any.pm:863
+#: any.pm:869 any.pm:1201 interactive/gtk.pm:766
+#, c-format
+msgid "Close"
+msgstr "বন্ধ"
+
+#: any.pm:905
+#, c-format
+msgid "License agreement"
+msgstr "লাইসেন্স এগ্রিমেন্ট"
+
+#: any.pm:908 diskdrake/dav.pm:26
+#, c-format
+msgid "Quit"
+msgstr "বাহির"
+
+#: any.pm:915
 #, c-format
 msgid "Accept"
 msgstr "গ্রহণ"
 
-#: any.pm:863
+#: any.pm:915
 #, c-format
 msgid "Refuse"
 msgstr "অস্বীকার"
 
-#: any.pm:882 any.pm:950
+#: any.pm:930 any.pm:996
 #, c-format
 msgid "Please choose a language to use."
 msgstr "ব্যবহার করার জন্য একটি ভাষা পছন্দ করুন"
 
-#: any.pm:883 any.pm:951
+#: any.pm:931 any.pm:997
 #, c-format
 msgid "Language choice"
 msgstr "পছন্দনীয় ভাষা"
 
-#: any.pm:913
+#: any.pm:961
 #, c-format
 msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
@@ -531,72 +537,72 @@ msgstr ""
 "আপনি যেই ভাষাটি ইনস্টল করতে চান তা পছন্দ করুন।\n"
 "ইনস্টল শেষে রি-স্টার্ট করার পরে সেই ভাষাগুলি উপলব্ধ হবে।"
 
-#: any.pm:916
+#: any.pm:964
 #, c-format
 msgid "Multi languages"
 msgstr ""
 
-#: any.pm:928 any.pm:959
+#: any.pm:975 any.pm:1005
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr ""
 
-#: any.pm:930
+#: any.pm:977
 #, c-format
 msgid "All languages"
 msgstr "সমস্থ ভাষা"
 
-#: any.pm:1005
+#: any.pm:1052
 #, c-format
 msgid "Country / Region"
 msgstr "দেশ / স্থান"
 
-#: any.pm:1007
+#: any.pm:1054
 #, c-format
 msgid "Please choose your country."
 msgstr "অনুগ্রহ করে তোমার দেশ পছন্দ করো।"
 
-#: any.pm:1009
+#: any.pm:1056
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "উপলব্ধ সমস্থ দেশের নাম এখানে রয়েছে"
 
-#: any.pm:1010
+#: any.pm:1057
 #, c-format
 msgid "Other Countries"
 msgstr "অন্যান্য দেশসমুহ"
 
-#: any.pm:1010 interactive.pm:477
+#: any.pm:1057 interactive.pm:481
 #, c-format
 msgid "Advanced"
 msgstr "উন্নত"
 
-#: any.pm:1016
+#: any.pm:1063
 #, c-format
 msgid "Input method:"
 msgstr "ইনপুট মাধ্যম:"
 
-#: any.pm:1019
+#: any.pm:1066
 #, c-format
 msgid "None"
 msgstr "একটিও না"
 
-#: any.pm:1099
+#: any.pm:1146
 #, c-format
 msgid "No sharing"
 msgstr "শেয়ারিং নেই"
 
-#: any.pm:1099
+#: any.pm:1146
 #, c-format
 msgid "Allow all users"
 msgstr "সব ব্যবহারকারীদের গ্রহণ করো"
 
-#: any.pm:1099
+#: any.pm:1146
 #, c-format
 msgid "Custom"
 msgstr "ব্যবস্থা"
 
-#: any.pm:1103
+#: any.pm:1150
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -606,7 +612,7 @@ msgid ""
 "\"Custom\" permit a per-user granularity.\n"
 msgstr "আপনি কি ব্যবহারকারীদের কিছু ডিরেক্টরি শেয়ার করতে দিতে চান?\n"
 
-#: any.pm:1115
+#: any.pm:1162
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
@@ -614,7 +620,7 @@ msgid ""
 msgstr ""
 "NFS: ঐতিহ্যগত ইউনিক্স ফাইল শেয়ারিং সিস্টেম, যা ম্যাক এবং উইন্ডোজে স্বল্প সমর্থিত।"
 
-#: any.pm:1118
+#: any.pm:1165
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
@@ -623,7 +629,7 @@ msgstr ""
 "SMB: উইন্ডোজ, ম্যাক ও-এস এক্স এবং অনেক আধুনিক লিনাক্স সিস্টেম কর্তৃক ব্যবহৃত ফাইল "
 "শেয়ারিং সিস্টেম।"
 
-#: any.pm:1126
+#: any.pm:1173
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
@@ -631,17 +637,12 @@ msgstr ""
 "আপনি NFS বা SMB ব্যবহার করে ফাইল পাঠাতে পারেন। যেটি আপনি ব্যবহার করতে চান "
 "অনুগ্রহ করে নির্বাচন করুন।"
 
-#: any.pm:1151
+#: any.pm:1201
 #, c-format
 msgid "Launch userdrake"
 msgstr "userdrake শুরু করো"
 
-#: any.pm:1151 interactive/gtk.pm:747
-#, c-format
-msgid "Close"
-msgstr "বন্ধ"
-
-#: any.pm:1153
+#: any.pm:1203
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -650,108 +651,108 @@ msgstr ""
 "প্রত্যেক ব্যবহারকারী গ্রুপের \"ফাইল ভাগাভাগি\" ভাগাভাগি করতে পারেন। \n"
 "এই গ্রুপে একজণ ব্যবহারকারী যোগ করতে আপনি userdrake ব্যবহার করতে পারেন।"
 
-#: any.pm:1245
+#: any.pm:1295
 #, c-format
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr "অনুগ্রহপূর্বক লগ-আউট করুন ও তারপর Ctrl-Alt-BackSpace চাপুন"
 
-#: any.pm:1249
+#: any.pm:1299
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr "পরিবর্তন কার্যকর করার পূর্বে আপনাকে লগ-আউট করে তারপর পুণরায় লগ-ইন করতে হবে"
 
-#: any.pm:1284
+#: any.pm:1334
 #, c-format
 msgid "Timezone"
 msgstr "টাইমজোন"
 
-#: any.pm:1284
+#: any.pm:1334
 #, c-format
 msgid "Which is your timezone?"
 msgstr "আপনার টাইমজোন কি?"
 
-#: any.pm:1296 any.pm:1298
+#: any.pm:1346 any.pm:1348
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr ""
 
-#: any.pm:1299
+#: any.pm:1349
 #, c-format
 msgid "What is the best time?"
 msgstr ""
 
-#: any.pm:1303
+#: any.pm:1353
 #, fuzzy, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "হার্ডওয়্যারে ঘড়ি GMT-এ সেট করা"
 
-#: any.pm:1304
+#: any.pm:1354
 #, fuzzy, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "হার্ডওয়্যারে ঘড়ি GMT-এ সেট করা"
 
-#: any.pm:1306
+#: any.pm:1356
 #, c-format
 msgid "NTP Server"
 msgstr "NTP সার্ভার"
 
-#: any.pm:1307
+#: any.pm:1357
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "সয়ংক্রিয়ভাবে সময় মেলাও (NTP ব্যবহার করে)"
 
-#: authentication.pm:23
+#: authentication.pm:24
 #, c-format
 msgid "Local file"
 msgstr "লোকাল ফাইল"
 
-#: authentication.pm:24
+#: authentication.pm:25
 #, c-format
 msgid "LDAP"
 msgstr "LDAP"
 
-#: authentication.pm:25
+#: authentication.pm:26
 #, c-format
 msgid "NIS"
 msgstr "NIS"
 
 # সাম
-#: authentication.pm:26
+#: authentication.pm:27
 #, c-format
 msgid "Smart Card"
 msgstr "স্মার্ট কার্ড"
 
-#: authentication.pm:27 authentication.pm:163
+#: authentication.pm:28 authentication.pm:164
 #, c-format
 msgid "Windows Domain"
 msgstr "উইন্ডোজ ডোমেইন"
 
-#: authentication.pm:28
+#: authentication.pm:29
 #, c-format
 msgid "Active Directory with SFU"
 msgstr "SFU যুক্ত সক্রিয় ডিরেক্টরি"
 
-#: authentication.pm:29
+#: authentication.pm:30
 #, c-format
 msgid "Active Directory with Winbind"
 msgstr "WinBind যুক্ত সক্রিয় ডিরেক্টরি"
 
-#: authentication.pm:66
+#: authentication.pm:67
 #, c-format
 msgid "Local file:"
 msgstr "লোকাল ফাইল:"
 
-#: authentication.pm:66
+#: authentication.pm:67
 #, c-format
 msgid "Use information stored in local files for all authentication"
 msgstr ""
 
-#: authentication.pm:67
+#: authentication.pm:68
 #, c-format
 msgid "LDAP:"
 msgstr "LDAP:"
 
-#: authentication.pm:67
+#: authentication.pm:68
 #, c-format
 msgid ""
 "Tells your computer to use LDAP for some or all authentication. LDAP "
@@ -760,12 +761,12 @@ msgstr ""
 "কিছু অথবা সব নির্ভরযোগ্যতার আপনার কম্পিউটারকে LDAP ব্যবহার করতে বলুন। LDAP আপনার "
 "অর্গানাইজেশনের বিভিন্ন ধরনের তথ্যকে আরও সুদৃড় করে"
 
-#: authentication.pm:68
+#: authentication.pm:69
 #, c-format
 msgid "NIS:"
 msgstr "NIS:"
 
-#: authentication.pm:68
+#: authentication.pm:69
 #, c-format
 msgid ""
 "Allows you to run a group of computers in the same Network Information "
@@ -774,12 +775,12 @@ msgstr ""
 "সার্বজনীন পাসওয়ার্ড ও গ্রুপ ফাইলসহ আপনি কম্পিউটারের একটি গ্রুপকে একই নেটওয়ার্ক তথ্য "
 "সার্ভিস ডোমেইনে চলার অনুমতি দেবে।"
 
-#: authentication.pm:69
+#: authentication.pm:70
 #, c-format
 msgid "Windows Domain:"
 msgstr "উইন্ডোজ ডোমেইন:"
 
-#: authentication.pm:69
+#: authentication.pm:70
 #, c-format
 msgid ""
 "Winbind allows the system to retrieve information and authenticate users in "
@@ -788,114 +789,114 @@ msgstr ""
 "উইনবাইন্ড আপনার সিস্টেমকে একটি উইন্ডোজ ডোমেইনের তথ্য ও নির্ভরযোগ্য ব্যবহারকারীদের "
 "পুনরুদ্ধারের অনুমতি দেবে।"
 
-#: authentication.pm:70
+#: authentication.pm:71
 #, c-format
 msgid "Active Directory with SFU:"
 msgstr "SFU যুক্ত সচল ডিরেক্টরি:"
 
-#: authentication.pm:70
+#: authentication.pm:71
 #, c-format
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
 msgstr ""
 
-#: authentication.pm:71
+#: authentication.pm:72
 #, c-format
 msgid "Active Directory with Winbind:"
 msgstr "Winbind যুক্ত সচল ডিরেক্টরি:"
 
-#: authentication.pm:71
+#: authentication.pm:72
 #, c-format
 msgid ""
 "Winbind allows the system to authenticate users in a Windows Active "
 "Directory Server."
 msgstr ""
 
-#: authentication.pm:96
+#: authentication.pm:97
 #, c-format
 msgid "Authentication LDAP"
 msgstr "LDAP অনুমোদন"
 
-#: authentication.pm:97
+#: authentication.pm:98
 #, c-format
 msgid "LDAP Base dn"
 msgstr "LDAP বেইজ dn"
 
-#: authentication.pm:98
+#: authentication.pm:99
 #, c-format
 msgid "LDAP Server"
 msgstr "LDAP সার্ভার"
 
-#: authentication.pm:111 fsedit.pm:23
+#: authentication.pm:112 fsedit.pm:23
 #, c-format
 msgid "simple"
 msgstr "সাধারণ"
 
-#: authentication.pm:112
+#: authentication.pm:113
 #, c-format
 msgid "TLS"
 msgstr "TLS"
 
-#: authentication.pm:113
+#: authentication.pm:114
 #, c-format
 msgid "SSL"
 msgstr "এসএসএল"
 
-#: authentication.pm:114
+#: authentication.pm:115
 #, c-format
 msgid "security layout (SASL/Kerberos)"
 msgstr "নিরাপত্তা লে-আউট (SASL/Kerberos)"
 
-#: authentication.pm:121 authentication.pm:159
+#: authentication.pm:122 authentication.pm:160
 #, c-format
 msgid "Authentication Active Directory"
 msgstr "নির্ভরযোগ্য সচল ডিরেক্টরি"
 
-#: authentication.pm:122 diskdrake/smbnfs_gtk.pm:182
+#: authentication.pm:123 diskdrake/smbnfs_gtk.pm:182
 #, c-format
 msgid "Domain"
 msgstr "ডোমেইন"
 
-#: authentication.pm:124 diskdrake/dav.pm:63
+#: authentication.pm:125 diskdrake/dav.pm:63
 #, c-format
 msgid "Server"
 msgstr "সার্ভার"
 
-#: authentication.pm:125
+#: authentication.pm:126
 #, c-format
 msgid "LDAP users database"
 msgstr "LDAP ব্যবহারকারীদের ডাটাবেজ"
 
-#: authentication.pm:126
+#: authentication.pm:127
 #, c-format
 msgid "Use Anonymous BIND "
 msgstr "Anonymous বাইন্ড ব্যবহার করুন "
 
-#: authentication.pm:127
+#: authentication.pm:128
 #, c-format
 msgid "LDAP user allowed to browse the Active Directory"
 msgstr "LDAP ব্যবহারকারী সচল ডিরেক্টরি ব্রাউজ করার অনুমতি দিয়েছে"
 
-#: authentication.pm:128
+#: authentication.pm:129
 #, c-format
 msgid "Password for user"
 msgstr "ব্যবহারকারীর পাসওয়ার্ড"
 
-#: authentication.pm:140
+#: authentication.pm:141
 #, c-format
 msgid "Authentication NIS"
 msgstr "NIS অনুমোদন"
 
-#: authentication.pm:141
+#: authentication.pm:142
 #, c-format
 msgid "NIS Domain"
 msgstr "NIS ডোমেইন"
 
-#: authentication.pm:142
+#: authentication.pm:143
 #, c-format
 msgid "NIS Server"
 msgstr "NIS সার্ভার"
 
-#: authentication.pm:147
+#: authentication.pm:148
 #, c-format
 msgid ""
 "For this to work for a W2K PDC, you will probably need to have the admin "
@@ -923,54 +924,54 @@ msgstr ""
 "এবং সিস্টেম বুট হবার পরঅ্যাডমিন ব্যবহারকারীনাম/পাসওয়ার্ড দিন।\n"
 "'wbinfo -t' কমান্ডটি আপনার অনুমোদিত গোপনীয়তা ভাল কিনা পরীক্ষা করে দেখবে।"
 
-#: authentication.pm:159
+#: authentication.pm:160
 #, c-format
 msgid "Authentication Windows Domain"
 msgstr "অনুমোদিত উইন্ডোজ ডোমেইন"
 
-#: authentication.pm:161
+#: authentication.pm:162
 #, c-format
 msgid "Active Directory Realm "
 msgstr ""
 
-#: authentication.pm:164
+#: authentication.pm:165
 #, c-format
 msgid "Domain Admin User Name"
 msgstr "ডোমেইন অ্যাডমিনের ব্যবহারকারীনাম"
 
-#: authentication.pm:165
+#: authentication.pm:166
 #, c-format
 msgid "Domain Admin Password"
 msgstr "ডোমেইন অ্যাডমিনের পাসওয়ার্ড"
 
-#: authentication.pm:181 authentication.pm:198
+#: authentication.pm:182 authentication.pm:199
 #, c-format
 msgid "Authentication"
 msgstr "অনুমোদন"
 
-#: authentication.pm:184
+#: authentication.pm:185
 #, c-format
 msgid "Authentication method"
 msgstr "নির্ভরযোগ্য নিয়ম"
 
 #. -PO: keep this short or else the buttons will not fit in the window
-#: authentication.pm:189
+#: authentication.pm:190
 #, c-format
 msgid "No password"
 msgstr "পাসওয়ার্ড ছাড়া"
 
-#: authentication.pm:210
+#: authentication.pm:211
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "এই পাসওয়ার্ডটি খুবই ছোট (এটা অবশ্যই %d অক্ষরের হতে হবে)"
 
-#: authentication.pm:351
+#: authentication.pm:352
 #, c-format
 msgid "Can not use broadcast with no NIS domain"
 msgstr "কোন NIS ডোমেইন ছাড়া ব্রডকাষ্ট ব্যবহার করা যাবেনা"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: bootloader.pm:882
+#: bootloader.pm:900
 #, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
@@ -985,43 +986,43 @@ msgstr ""
 "wait for default boot.\n"
 "\n"
 
-#: bootloader.pm:1030
+#: bootloader.pm:1050
 #, c-format
 msgid "LILO with text menu"
 msgstr "টেক্সট মেনুর সাথে LILO"
 
-#: bootloader.pm:1031
+#: bootloader.pm:1051
 #, c-format
 msgid "GRUB with graphical menu"
 msgstr ""
 
-#: bootloader.pm:1032
+#: bootloader.pm:1052
 #, c-format
 msgid "GRUB with text menu"
 msgstr ""
 
-#: bootloader.pm:1033
+#: bootloader.pm:1053
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
 
-#: bootloader.pm:1034
+#: bootloader.pm:1054
 #, c-format
 msgid "SILO"
 msgstr ""
 
-#: bootloader.pm:1114
+#: bootloader.pm:1135
 #, c-format
 msgid "not enough room in /boot"
 msgstr "/boot -এ বেশী জায়গা নেই"
 
-#: bootloader.pm:1681
+#: bootloader.pm:1760
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
 msgstr "আপনি %s পার্টিশনে বুটলোডার ইনস্টল করতে পারবেননা\n"
 
 # renumber = রি-নাম্বার লিখলাম। আসলটা আমি জানিনা
-#: bootloader.pm:1734
+#: bootloader.pm:1813
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1029,7 +1030,7 @@ msgid ""
 msgstr ""
 "পার্টিশন রি-নাম্বার করার কারনে আপনার বুটলোডারের কনফিগারেশন অবশ্যই আপডেট করতে হবে"
 
-#: bootloader.pm:1747
+#: bootloader.pm:1826
 #, c-format
 msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
@@ -1038,52 +1039,52 @@ msgstr ""
 "বুটলোডার সঠিকভাবে ইনস্টল হতে পারবেনা। আপনাকে rescue বুট করতে হবে এবং \"%s\" "
 "পছন্দ করতে হবে"
 
-#: bootloader.pm:1748
+#: bootloader.pm:1827
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "বুট লোডার রি-ইনস্টল করো"
 
-#: common.pm:132
+#: common.pm:142
 #, fuzzy, c-format
 msgid "B"
 msgstr "কেবি"
 
-#: common.pm:132
+#: common.pm:142
 #, c-format
 msgid "KB"
 msgstr "কেবি"
 
-#: common.pm:132
+#: common.pm:142
 #, c-format
 msgid "MB"
 msgstr "এমবি"
 
-#: common.pm:132
+#: common.pm:142
 #, c-format
 msgid "GB"
 msgstr "জিবি"
 
-#: common.pm:132 common.pm:141
+#: common.pm:142 common.pm:151
 #, c-format
 msgid "TB"
 msgstr "টিবি"
 
-#: common.pm:149
+#: common.pm:159
 #, c-format
 msgid "%d minutes"
 msgstr "%d মিনিট"
 
-#: common.pm:151
+#: common.pm:161
 #, c-format
 msgid "1 minute"
 msgstr "১ মিনিট"
 
-#: common.pm:153
+#: common.pm:163
 #, c-format
 msgid "%d seconds"
 msgstr "%d সেকেন্ড"
 
-#: common.pm:306
+#: common.pm:335
 #, c-format
 msgid "command %s missing"
 msgstr ""
@@ -1108,45 +1109,44 @@ msgstr ""
 msgid "New"
 msgstr "নতুন"
 
-#: diskdrake/dav.pm:61 diskdrake/interactive.pm:431 diskdrake/smbnfs_gtk.pm:75
+#: diskdrake/dav.pm:61 diskdrake/interactive.pm:380 diskdrake/smbnfs_gtk.pm:75
 #, c-format
 msgid "Unmount"
 msgstr "আন-মাউন্ট"
 
-#: diskdrake/dav.pm:62 diskdrake/interactive.pm:428 diskdrake/smbnfs_gtk.pm:76
+#: diskdrake/dav.pm:62 diskdrake/interactive.pm:377 diskdrake/smbnfs_gtk.pm:76
 #, c-format
 msgid "Mount"
 msgstr "মাউন্ট"
 
-#: diskdrake/dav.pm:64 diskdrake/interactive.pm:422
-#: diskdrake/interactive.pm:662 diskdrake/interactive.pm:680
-#: diskdrake/interactive.pm:684 diskdrake/removable.pm:23
+#: diskdrake/dav.pm:64 diskdrake/interactive.pm:371
+#: diskdrake/interactive.pm:611 diskdrake/interactive.pm:629
+#: diskdrake/interactive.pm:633 diskdrake/removable.pm:23
 #: diskdrake/smbnfs_gtk.pm:79
 #, c-format
 msgid "Mount point"
 msgstr "মাউন্ট পয়েন্ট"
 
-#: diskdrake/dav.pm:65 diskdrake/interactive.pm:424
-#: diskdrake/interactive.pm:1039 diskdrake/removable.pm:24
+#: diskdrake/dav.pm:65 diskdrake/interactive.pm:373
+#: diskdrake/interactive.pm:987 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
 msgstr "অপশন"
 
-#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:166 diskdrake/removable.pm:26
+#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:164 diskdrake/removable.pm:26
 #: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
 #, c-format
 msgid "Done"
 msgstr "হয়েছে"
 
-#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:115 diskdrake/interactive.pm:229
-#: diskdrake/interactive.pm:242 diskdrake/interactive.pm:386
-#: diskdrake/interactive.pm:404 diskdrake/interactive.pm:529
-#: diskdrake/interactive.pm:534 diskdrake/interactive.pm:652
-#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:1087
-#: diskdrake/interactive.pm:1100 diskdrake/interactive.pm:1103
-#: diskdrake/interactive.pm:1351 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
-#: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:227
+#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:113 diskdrake/interactive.pm:231
+#: diskdrake/interactive.pm:244 diskdrake/interactive.pm:478
+#: diskdrake/interactive.pm:483 diskdrake/interactive.pm:601
+#: diskdrake/interactive.pm:859 diskdrake/interactive.pm:1033
+#: diskdrake/interactive.pm:1046 diskdrake/interactive.pm:1049
+#: diskdrake/interactive.pm:1299 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
+#: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:223
 #: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
 #: scanner.pm:94 scanner.pm:105 scanner.pm:112 scanner.pm:119 wizards.pm:95
 #: wizards.pm:99 wizards.pm:121
@@ -1169,28 +1169,28 @@ msgstr "URL অবশ্যই http:// অথবা https:// দিয়ে শু
 msgid "Server: "
 msgstr "সার্ভার:"
 
-#: diskdrake/dav.pm:110 diskdrake/interactive.pm:502
-#: diskdrake/interactive.pm:1225 diskdrake/interactive.pm:1303
+#: diskdrake/dav.pm:110 diskdrake/interactive.pm:451
+#: diskdrake/interactive.pm:1179 diskdrake/interactive.pm:1259
 #, c-format
 msgid "Mount point: "
 msgstr "মাউন্ট পয়েন্ট:"
 
-#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1310
+#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1266
 #, c-format
 msgid "Options: %s"
 msgstr "অপশন: %s"
 
-#: diskdrake/hd_gtk.pm:53 diskdrake/interactive.pm:286
+#: diskdrake/hd_gtk.pm:53 diskdrake/interactive.pm:282
 #: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:106
-#: fs/partitioning_wizard.pm:47 fs/partitioning_wizard.pm:201
-#: fs/partitioning_wizard.pm:207 fs/partitioning_wizard.pm:247
-#: fs/partitioning_wizard.pm:266 fs/partitioning_wizard.pm:271
+#: fs/partitioning_wizard.pm:51 fs/partitioning_wizard.pm:205
+#: fs/partitioning_wizard.pm:211 fs/partitioning_wizard.pm:251
+#: fs/partitioning_wizard.pm:270 fs/partitioning_wizard.pm:275
 #, c-format
 msgid "Partitioning"
 msgstr "পার্টিশন করা হচ্ছে"
 
-#: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1059
-#: diskdrake/interactive.pm:1069 diskdrake/interactive.pm:1122
+#: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1008
+#: diskdrake/interactive.pm:1018 diskdrake/interactive.pm:1071
 #, c-format
 msgid "Read carefully!"
 msgstr "সতর্কতার সাথে পড়ো!"
@@ -1200,7 +1200,7 @@ msgstr "সতর্কতার সাথে পড়ো!"
 msgid "Please make a backup of your data first"
 msgstr "অনুগ্রহ করে প্রথমে আপনার ডাটার একটি ব্যাকআপ করে নিন"
 
-#: diskdrake/hd_gtk.pm:94 diskdrake/interactive.pm:222
+#: diskdrake/hd_gtk.pm:94 diskdrake/interactive.pm:224
 #, c-format
 msgid "Exit"
 msgstr "বাহির"
@@ -1221,18 +1221,18 @@ msgstr ""
 "সাথে খালি\n"
 "জায়গা ছেড়ে দিন (২০৪৮ সেক্টরই যথেষ্ট)"
 
-#: diskdrake/hd_gtk.pm:162 interactive.pm:640 interactive/gtk.pm:719
-#: interactive/gtk.pm:740 interactive/gtk.pm:760 ugtk2.pm:926 ugtk2.pm:927
+#: diskdrake/hd_gtk.pm:160 interactive.pm:644 interactive/gtk.pm:744
+#: interactive/gtk.pm:759 interactive/gtk.pm:779 ugtk2.pm:936 ugtk2.pm:937
 #, c-format
 msgid "Help"
 msgstr "সাহায্য"
 
-#: diskdrake/hd_gtk.pm:197
+#: diskdrake/hd_gtk.pm:195
 #, c-format
 msgid "Choose action"
 msgstr "কার্য পছন্দ করুন"
 
-#: diskdrake/hd_gtk.pm:201
+#: diskdrake/hd_gtk.pm:199
 #, c-format
 msgid ""
 "You have one big Microsoft Windows partition.\n"
@@ -1243,163 +1243,157 @@ msgstr ""
 "সেটাকে আগে রি-সাইজ করার জন্য আমি পরামর্শ দিচ্ছি\n"
 "(সেটাকে আগে ক্লিক করুন এবং পরে \"Resize\"-এ ক্লিক করুন)"
 
-#: diskdrake/hd_gtk.pm:203
+#: diskdrake/hd_gtk.pm:201
 #, c-format
 msgid "Please click on a partition"
 msgstr "অনুগ্রহ করে একটি পার্টিশনে ক্লিক করুন"
 
-#: diskdrake/hd_gtk.pm:217 diskdrake/smbnfs_gtk.pm:63
+#: diskdrake/hd_gtk.pm:215 diskdrake/smbnfs_gtk.pm:63
 #, c-format
 msgid "Details"
 msgstr "বিস্তারিত"
 
-#: diskdrake/hd_gtk.pm:265
+#: diskdrake/hd_gtk.pm:263
 #, c-format
 msgid "No hard drives found"
 msgstr "কোন হার্ড ড্রাইভ পাওয়া যায়নি"
 
-#: diskdrake/hd_gtk.pm:292
+#: diskdrake/hd_gtk.pm:290
 #, c-format
 msgid "Unknown"
 msgstr "অজানা"
 
-#: diskdrake/hd_gtk.pm:354
+#: diskdrake/hd_gtk.pm:352
 #, fuzzy, c-format
 msgid "Ext3"
 msgstr "বাহির"
 
-#: diskdrake/hd_gtk.pm:354
+#: diskdrake/hd_gtk.pm:352
 #, fuzzy, c-format
 msgid "XFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:354
+#: diskdrake/hd_gtk.pm:352
 #, c-format
 msgid "Swap"
 msgstr "সোয়াপ"
 
-#: diskdrake/hd_gtk.pm:351
+#: diskdrake/hd_gtk.pm:352
 #, c-format
 msgid "SunOS"
 msgstr "SunOS"
 
-#: diskdrake/hd_gtk.pm:351
+#: diskdrake/hd_gtk.pm:352
 #, c-format
 msgid "HFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:351
+#: diskdrake/hd_gtk.pm:352
 #, c-format
 msgid "Windows"
 msgstr "উইন্ডোজ"
 
-#: diskdrake/hd_gtk.pm:352 services.pm:158
+#: diskdrake/hd_gtk.pm:353 services.pm:158
 #, c-format
 msgid "Other"
 msgstr "অন্যান্য"
 
-#: diskdrake/hd_gtk.pm:352 diskdrake/interactive.pm:1239
+#: diskdrake/hd_gtk.pm:353 diskdrake/interactive.pm:1194
 #, c-format
 msgid "Empty"
 msgstr "শূণ্য"
 
-#: diskdrake/hd_gtk.pm:356
+#: diskdrake/hd_gtk.pm:357
 #, c-format
 msgid "Filesystem types:"
 msgstr "ফাইল সিস্টেমের ধরণ:"
 
-#: diskdrake/hd_gtk.pm:380 diskdrake/interactive.pm:291
-#: diskdrake/interactive.pm:380 diskdrake/interactive.pm:410
-#: diskdrake/interactive.pm:559 diskdrake/interactive.pm:743
-#: diskdrake/interactive.pm:801 diskdrake/interactive.pm:894
-#: diskdrake/interactive.pm:936 diskdrake/interactive.pm:937
-#: diskdrake/interactive.pm:1168 diskdrake/interactive.pm:1206
-#: diskdrake/interactive.pm:1342 do_pkgs.pm:16 do_pkgs.pm:35 do_pkgs.pm:53
-#: harddrake/sound.pm:285
+#: diskdrake/hd_gtk.pm:381 diskdrake/interactive.pm:287
+#: diskdrake/interactive.pm:359 diskdrake/interactive.pm:508
+#: diskdrake/interactive.pm:692 diskdrake/interactive.pm:750
+#: diskdrake/interactive.pm:839 diskdrake/interactive.pm:881
+#: diskdrake/interactive.pm:882 diskdrake/interactive.pm:1117
+#: diskdrake/interactive.pm:1155 diskdrake/interactive.pm:1298 do_pkgs.pm:16
+#: do_pkgs.pm:35 do_pkgs.pm:53 harddrake/sound.pm:286
 #, c-format
 msgid "Warning"
 msgstr "নোটিশ"
 
-#: diskdrake/hd_gtk.pm:380
+#: diskdrake/hd_gtk.pm:381
 #, fuzzy, c-format
 msgid "This partition is already empty"
 msgstr "এই পার্টিশনটি রি-সাইজ করার মত না"
 
-#: diskdrake/hd_gtk.pm:389
+#: diskdrake/hd_gtk.pm:390
 #, c-format
 msgid "Use ``Unmount'' first"
 msgstr "প্রথমে ``Unmount'' ব্যবহার করুন"
 
-#: diskdrake/hd_gtk.pm:389
-#, c-format
-msgid "Use ``%s'' instead"
+#: diskdrake/hd_gtk.pm:390
+#, fuzzy, c-format
+msgid "Use ``%s'' instead (in expert mode)"
 msgstr "পরিবর্তে ``%s'' ব্যবহার করুন"
 
-#: diskdrake/hd_gtk.pm:389 diskdrake/interactive.pm:423
-#: diskdrake/interactive.pm:597 diskdrake/interactive.pm:1075
+#: diskdrake/hd_gtk.pm:390 diskdrake/interactive.pm:372
+#: diskdrake/interactive.pm:546 diskdrake/interactive.pm:1024
 #: diskdrake/removable.pm:25 diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
 msgstr "ধরণ"
 
-#: diskdrake/interactive.pm:193
+#: diskdrake/interactive.pm:195
 #, c-format
 msgid "Choose another partition"
 msgstr "অন্য একটি পার্টিশন পছন্দ করুন"
 
-#: diskdrake/interactive.pm:193
+#: diskdrake/interactive.pm:195
 #, c-format
 msgid "Choose a partition"
 msgstr "একটি পার্টিশন পছন্দ করুন"
 
-#: diskdrake/interactive.pm:255
-#, c-format
-msgid "Undo"
-msgstr "পূর্বাবস্থা"
-
-#: diskdrake/interactive.pm:255
+#: diskdrake/interactive.pm:257
 #, c-format
 msgid "Toggle to normal mode"
 msgstr "সাধারণ মোডে বদল করো"
 
-#: diskdrake/interactive.pm:255
+#: diskdrake/interactive.pm:257
 #, c-format
 msgid "Toggle to expert mode"
 msgstr "দক্ষ মোডে বদল করো"
 
-#: diskdrake/interactive.pm:269 diskdrake/interactive.pm:279
-#: diskdrake/interactive.pm:1153
+#: diskdrake/interactive.pm:265 diskdrake/interactive.pm:275
+#: diskdrake/interactive.pm:1102
 #, fuzzy, c-format
 msgid "Confirmation"
 msgstr "কনফিগারেশন"
 
-#: diskdrake/interactive.pm:269
+#: diskdrake/interactive.pm:265
 #, c-format
 msgid "Continue anyway?"
 msgstr "অগ্রসর হবে?"
 
-#: diskdrake/interactive.pm:274
+#: diskdrake/interactive.pm:270
 #, c-format
 msgid "Quit without saving"
 msgstr "সংরক্ষণ ছাড়াই বের হও"
 
-#: diskdrake/interactive.pm:274
+#: diskdrake/interactive.pm:270
 #, c-format
 msgid "Quit without writing the partition table?"
 msgstr "কোন পার্টিশন টেবিল না লিখেই বের হয়ে যাব?"
 
-#: diskdrake/interactive.pm:279
+#: diskdrake/interactive.pm:275
 #, c-format
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "আপনি /etc/fstab -এর পরিবর্তন সেভ করতে চান?"
 
-#: diskdrake/interactive.pm:286 fs/partitioning_wizard.pm:247
+#: diskdrake/interactive.pm:282 fs/partitioning_wizard.pm:251
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr "পার্টিশন টেবিলের পরিবর্তনগুলি কার্যকর করবার জন্য আপনাকে রা-ষ্টার্ট করতে হবে"
 
 # সাম
-#: diskdrake/interactive.pm:291
+#: diskdrake/interactive.pm:287
 #, c-format
 msgid ""
 "You should format partition %s.\n"
@@ -1410,38 +1404,38 @@ msgstr ""
 "অন্যথা fstab এ মাউন্ট পয়েন্ট %s এর কোন এন্ট্রি লেখা হবে না।\n"
 "তবুও বের হয়ে যাব কি?"
 
-#: diskdrake/interactive.pm:304
+#: diskdrake/interactive.pm:300
 #, c-format
 msgid "Clear all"
 msgstr "সব বন্ধ করো"
 
-#: diskdrake/interactive.pm:305
+#: diskdrake/interactive.pm:301
 #, c-format
 msgid "Auto allocate"
 msgstr "সয়ংক্রিয়ভাবে সাজানো"
 
-#: diskdrake/interactive.pm:306 diskdrake/interactive.pm:354
+#: diskdrake/interactive.pm:302 diskdrake/interactive.pm:350
 #: interactive/curses.pm:512
 #, c-format
 msgid "More"
 msgstr "আরও"
 
-#: diskdrake/interactive.pm:311
+#: diskdrake/interactive.pm:307
 #, c-format
 msgid "Hard drive information"
 msgstr "হার্ড ড্রাইভের তথ্য"
 
-#: diskdrake/interactive.pm:343
+#: diskdrake/interactive.pm:339
 #, c-format
 msgid "All primary partitions are used"
 msgstr "সমস্থ প্রাইমারী পার্টিশনসমূহ ব্যবহৃত হচ্ছে"
 
-#: diskdrake/interactive.pm:344
+#: diskdrake/interactive.pm:340
 #, c-format
 msgid "I can not add any more partitions"
 msgstr "আমি আর পার্টিশন যোগ করতে পারবনা"
 
-#: diskdrake/interactive.pm:345
+#: diskdrake/interactive.pm:341
 #, c-format
 msgid ""
 "To have more partitions, please delete one to be able to create an extended "
@@ -1450,121 +1444,97 @@ msgstr ""
 "আরও পার্টিশন পাওয়ার জন্য, অনুগ্রহ করে একটি মুছে ফেলুন যাতে করে এক্সটেনডেড পার্টিশন "
 "তৈরী করা যায়"
 
-#: diskdrake/interactive.pm:356
-#, c-format
-msgid "Save partition table"
-msgstr "পার্টিশন টেবিল সংরক্ষিত করো"
-
-#: diskdrake/interactive.pm:357
-#, c-format
-msgid "Restore partition table"
-msgstr "পার্টিশন টেবিল রিষ্টোর করো"
-
-#: diskdrake/interactive.pm:359
+#: diskdrake/interactive.pm:352
 #, c-format
 msgid "Reload partition table"
 msgstr "পার্টিশন টেবিলকে পুনরায় লোড করো"
 
-#: diskdrake/interactive.pm:369 diskdrake/interactive.pm:395
-#, c-format
-msgid "Select file"
-msgstr "ফাইল সিলেক্ট করো"
-
-#: diskdrake/interactive.pm:381
-#, c-format
-msgid ""
-"The backup partition table has not the same size\n"
-"Still continue?"
-msgstr ""
-"ব্যাকআপ পার্টিশন সমান সাইজের ছিলনা\n"
-"এখনো এগুবো?"
-
-#: diskdrake/interactive.pm:410
+#: diskdrake/interactive.pm:359
 #, c-format
 msgid "Detailed information"
 msgstr "বিস্তারিত তথ্য"
 
-#: diskdrake/interactive.pm:426 diskdrake/interactive.pm:756
+#: diskdrake/interactive.pm:375 diskdrake/interactive.pm:705
 #, c-format
 msgid "Resize"
 msgstr "আকার পরিবর্তন"
 
-#: diskdrake/interactive.pm:427
+#: diskdrake/interactive.pm:376
 #, c-format
 msgid "Format"
 msgstr "ফরম্যাট"
 
-#: diskdrake/interactive.pm:429 diskdrake/interactive.pm:842
+#: diskdrake/interactive.pm:378 diskdrake/interactive.pm:791
 #, c-format
 msgid "Add to RAID"
 msgstr "RAID-তে যোগ করো"
 
-#: diskdrake/interactive.pm:430 diskdrake/interactive.pm:859
+#: diskdrake/interactive.pm:379 diskdrake/interactive.pm:809
 #, c-format
 msgid "Add to LVM"
 msgstr "LVM-এ যোগ করো"
 
-#: diskdrake/interactive.pm:432
+#: diskdrake/interactive.pm:381
 #, c-format
 msgid "Delete"
 msgstr "মুছে ফেলো"
 
-#: diskdrake/interactive.pm:433
+#: diskdrake/interactive.pm:382
 #, c-format
 msgid "Remove from RAID"
 msgstr "RAID থেকে মুছে ফেলো"
 
-#: diskdrake/interactive.pm:434
+#: diskdrake/interactive.pm:383
 #, c-format
 msgid "Remove from LVM"
 msgstr "LVM থেকে মুছে ফেলো"
 
-#: diskdrake/interactive.pm:435
+#: diskdrake/interactive.pm:384
 #, c-format
 msgid "Modify RAID"
 msgstr "RAID পরিবর্তন করো"
 
-#: diskdrake/interactive.pm:436
+#: diskdrake/interactive.pm:385
 #, c-format
 msgid "Use for loopback"
 msgstr "loopback-এর জন্য ব্যবহার করো"
 
-#: diskdrake/interactive.pm:447
+#: diskdrake/interactive.pm:396
 #, c-format
 msgid "Create"
 msgstr "তৈরী করো"
 
-#: diskdrake/interactive.pm:491 diskdrake/interactive.pm:493
+#: diskdrake/interactive.pm:440 diskdrake/interactive.pm:442
 #, c-format
 msgid "Create a new partition"
 msgstr "একটি নতুন পার্টিশন তৈরী করো"
 
-#: diskdrake/interactive.pm:495
+#: diskdrake/interactive.pm:444
 #, c-format
 msgid "Start sector: "
 msgstr "শুরুর সেক্টর:"
 
-#: diskdrake/interactive.pm:498 diskdrake/interactive.pm:929
+#: diskdrake/interactive.pm:447 diskdrake/interactive.pm:874
 #, c-format
 msgid "Size in MB: "
 msgstr "মেগাবাইটে সাইজ:"
 
-#: diskdrake/interactive.pm:500 diskdrake/interactive.pm:930
+#: diskdrake/interactive.pm:449 diskdrake/interactive.pm:875
 #, c-format
 msgid "Filesystem type: "
 msgstr "ফাইলসিস্টেমের ধরণ:"
 
-#: diskdrake/interactive.pm:506
+#: diskdrake/interactive.pm:455
 #, c-format
 msgid "Preference: "
 msgstr "পছন্দ"
 
-#: diskdrake/interactive.pm:509
+#: diskdrake/interactive.pm:458
 #, c-format
 msgid "Logical volume name "
 msgstr "লজিকাল ভলিউমের নাম"
 
-#: diskdrake/interactive.pm:529
+#: diskdrake/interactive.pm:478
 #, c-format
 msgid ""
 "You can not create a new partition\n"
@@ -1576,53 +1546,53 @@ msgstr ""
 "প্রথমে আপনাকে একটি প্রাইমারী পার্টিশন অপসরন করতে হবে এবং তারপরে এক্সটেনডেড "
 "পার্টিশন তৈরী করতে হবে।"
 
-#: diskdrake/interactive.pm:559
+#: diskdrake/interactive.pm:508
 #, c-format
 msgid "Remove the loopback file?"
 msgstr "লুকআপ ফাইল রিমুভ করবো?"
 
-#: diskdrake/interactive.pm:581
+#: diskdrake/interactive.pm:530
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr "%s পার্টিশনের ধরণ পরিবর্তনের পরে সেটার সমস্থ ডাটা হারিয়ে যাবে"
 
-#: diskdrake/interactive.pm:594
+#: diskdrake/interactive.pm:543
 #, c-format
 msgid "Change partition type"
 msgstr "পার্টিশনের ধরণ পরিবর্তন করো"
 
-#: diskdrake/interactive.pm:596 diskdrake/removable.pm:47
+#: diskdrake/interactive.pm:545 diskdrake/removable.pm:47
 #, c-format
 msgid "Which filesystem do you want?"
 msgstr "আপনি কোন ফাইলসিস্টেম চান?"
 
-#: diskdrake/interactive.pm:603
-#, c-format
-msgid "Switching from ext2 to ext3"
+#: diskdrake/interactive.pm:552
+#, fuzzy, c-format
+msgid "Switching from %s to %s"
 msgstr "ext2 থেকে ext3-তে পরিবর্তিত হচ্ছে"
 
-#: diskdrake/interactive.pm:629 diskdrake/interactive.pm:632
+#: diskdrake/interactive.pm:578 diskdrake/interactive.pm:581
 #, c-format
 msgid "Which volume label?"
 msgstr ""
 
-#: diskdrake/interactive.pm:633
+#: diskdrake/interactive.pm:582
 #, fuzzy, c-format
 msgid "Label:"
 msgstr "শিরোনাম"
 
-#: diskdrake/interactive.pm:647
+#: diskdrake/interactive.pm:596
 #, c-format
 msgid "Where do you want to mount the loopback file %s?"
 msgstr "আপনি %s লুপব্যাক ফাইলকে কোথায় মাউন্ট করতে চান ?"
 
-#: diskdrake/interactive.pm:648
+#: diskdrake/interactive.pm:597
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "আপনি %s ডিভাইসকে কোথায় মাউন্ট করতে চান?"
 
-#: diskdrake/interactive.pm:653
+#: diskdrake/interactive.pm:602
 #, c-format
 msgid ""
 "Can not unset mount point as this partition is used for loop back.\n"
@@ -1631,58 +1601,58 @@ msgstr ""
 "এই পার্টিশনটি লুপব্যাকের জন্য ব্যবহৃত হওয়ার কারনে মাউন্টপয়েন্ট আনসেট করা যাবেনা।\n"
 " আগে লুপব্যাক রিমুভ করুন"
 
-#: diskdrake/interactive.pm:683
+#: diskdrake/interactive.pm:632
 #, c-format
 msgid "Where do you want to mount %s?"
 msgstr "আপনি কোথায় মাউন্ট করতে চান %s?"
 
-#: diskdrake/interactive.pm:707 diskdrake/interactive.pm:790
-#: fs/partitioning_wizard.pm:141 fs/partitioning_wizard.pm:173
+#: diskdrake/interactive.pm:656 diskdrake/interactive.pm:739
+#: fs/partitioning_wizard.pm:145 fs/partitioning_wizard.pm:177
 #, c-format
 msgid "Resizing"
 msgstr "আকার পরিবর্তন করা হচ্ছে"
 
-#: diskdrake/interactive.pm:707
+#: diskdrake/interactive.pm:656
 #, c-format
 msgid "Computing FAT filesystem bounds"
 msgstr "FAT ফাইল সিস্টেমের সীমা (Bound) হিসেব করা হচ্ছে"
 
-#: diskdrake/interactive.pm:743
+#: diskdrake/interactive.pm:692
 #, c-format
 msgid "This partition is not resizeable"
 msgstr "এই পার্টিশনটি রি-সাইজ করার মত না"
 
-#: diskdrake/interactive.pm:748
+#: diskdrake/interactive.pm:697
 #, c-format
 msgid "All data on this partition should be backed-up"
 msgstr "এই পার্টিশনের সমস্থ ডাটা ব্যাকআপ করা উচিত্‍‌"
 
-#: diskdrake/interactive.pm:750
+#: diskdrake/interactive.pm:699
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr "%s পার্টিশন রি-সাইজ করার পরে, এই পার্টিশনের সমস্থ ডাটা হারিয়ে যাবে"
 
-#: diskdrake/interactive.pm:757
+#: diskdrake/interactive.pm:706
 #, c-format
 msgid "Choose the new size"
 msgstr "নতুন সাইজটি পছন্দ করুন"
 
-#: diskdrake/interactive.pm:758
+#: diskdrake/interactive.pm:707
 #, c-format
 msgid "New size in MB: "
 msgstr "মেগাবাইটে নতুন সাইজ:"
 
-#: diskdrake/interactive.pm:759
+#: diskdrake/interactive.pm:708
 #, c-format
 msgid "Minimum size: %s MB"
 msgstr ""
 
-#: diskdrake/interactive.pm:760
+#: diskdrake/interactive.pm:709
 #, c-format
 msgid "Maximum size: %s MB"
 msgstr ""
 
-#: diskdrake/interactive.pm:801 fs/partitioning_wizard.pm:181
+#: diskdrake/interactive.pm:750 fs/partitioning_wizard.pm:185
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
@@ -1691,134 +1661,134 @@ msgstr ""
 "পার্টিশনের পুনরাকৃতির পর ডাটার সম্পূর্ণতা নিশ্চিত করার জন্য, \n"
 "উইন্ডোজে(TM) আপনার পরবর্তী বুটে ফাইলসিস্টেম পরীক্ষা চলবে"
 
-#: diskdrake/interactive.pm:842
+#: diskdrake/interactive.pm:791
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "যোগ করার জন্য উপস্থিত একটি RAID পছন্দ করুন"
 
-#: diskdrake/interactive.pm:844 diskdrake/interactive.pm:861
+#: diskdrake/interactive.pm:793 diskdrake/interactive.pm:811
 #, c-format
 msgid "new"
 msgstr "নতুন"
 
-#: diskdrake/interactive.pm:859
+#: diskdrake/interactive.pm:809
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "যোগ করার জন্য উপস্থিত একটি LVM পছন্দ করুন"
 
-#: diskdrake/interactive.pm:866
+#: diskdrake/interactive.pm:816
 #, c-format
 msgid "LVM name?"
 msgstr "LVM-এর নাম?"
 
-#: diskdrake/interactive.pm:894
+#: diskdrake/interactive.pm:839
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
 
-#: diskdrake/interactive.pm:896
+#: diskdrake/interactive.pm:841
 #, c-format
 msgid "Moving physical extents"
 msgstr ""
 
-#: diskdrake/interactive.pm:914
+#: diskdrake/interactive.pm:859
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "লুপব্যাকের জন্য এই পার্টিশনটি ব্যবহার করা যাবেনা"
 
-#: diskdrake/interactive.pm:927
+#: diskdrake/interactive.pm:872
 #, c-format
 msgid "Loopback"
 msgstr "Loopback"
 
-#: diskdrake/interactive.pm:928
+#: diskdrake/interactive.pm:873
 #, c-format
 msgid "Loopback file name: "
 msgstr "Loopback ফাইলের নাম: "
 
-#: diskdrake/interactive.pm:933
+#: diskdrake/interactive.pm:878
 #, c-format
 msgid "Give a file name"
 msgstr "একটি ফাইলের নাম দিন"
 
-#: diskdrake/interactive.pm:936
+#: diskdrake/interactive.pm:881
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "ফাইলটি আগে থেকেই অন্য একটি লুপব্যাকে ব্যবহৃত হচ্ছে, আরেকটি পছন্দ করুন"
 
-#: diskdrake/interactive.pm:937
+#: diskdrake/interactive.pm:882
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "ফাইল আগে থেকেই আছে, ব্যবহার করব?"
 
-#: diskdrake/interactive.pm:966 diskdrake/interactive.pm:969
+#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:917
 #, c-format
 msgid "Mount options"
 msgstr "মাউন্ট অপসন"
 
-#: diskdrake/interactive.pm:976
+#: diskdrake/interactive.pm:924
 #, c-format
 msgid "Various"
 msgstr "বিভিন্ন"
 
-#: diskdrake/interactive.pm:1041
+#: diskdrake/interactive.pm:989
 #, c-format
 msgid "device"
 msgstr "ডিভাইস"
 
-#: diskdrake/interactive.pm:1042
+#: diskdrake/interactive.pm:990
 #, c-format
 msgid "level"
 msgstr "লেভেল"
 
-#: diskdrake/interactive.pm:1043
+#: diskdrake/interactive.pm:991
 #, c-format
 msgid "chunk size in KiB"
 msgstr "কিলোবাইট এ chunk সাইজ"
 
-#: diskdrake/interactive.pm:1060
+#: diskdrake/interactive.pm:1009
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "খুবই সাবধান: এই কাজটি ঝুঁকিপূর্ন।"
 
-#: diskdrake/interactive.pm:1075
+#: diskdrake/interactive.pm:1024
 #, c-format
 msgid "What type of partitioning?"
 msgstr "কি ধরণের পার্টিশন হবে?"
 
-#: diskdrake/interactive.pm:1113
+#: diskdrake/interactive.pm:1062
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "পরিবর্তনগুলি অবস্থান নেবার জন্য আপনাকে রি-ষ্টার্ট করতে হবে"
 
-#: diskdrake/interactive.pm:1122
+#: diskdrake/interactive.pm:1071
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "%s ড্রাইভের পার্টিশন টেবিল ডিস্কে লিখতে যাচ্ছি!"
 
-#: diskdrake/interactive.pm:1148
+#: diskdrake/interactive.pm:1097
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr "পার্টিশন %s -কে ফরমেট করার পরে এই পার্টিশনের সমস্থ ডাটা হারিয়ে যাবে"
 
-#: diskdrake/interactive.pm:1153 fs/partitioning.pm:49
+#: diskdrake/interactive.pm:1102 fs/partitioning.pm:49
 #, c-format
 msgid "Check bad blocks?"
 msgstr "খারাপ ব্লক চেক করব?"
 
-#: diskdrake/interactive.pm:1167
+#: diskdrake/interactive.pm:1116
 #, c-format
 msgid "Move files to the new partition"
 msgstr "ফাইলগুলিক একটি নতুন পার্টিশনে সরিয়ে ফেলো"
 
-#: diskdrake/interactive.pm:1167
+#: diskdrake/interactive.pm:1116
 #, c-format
 msgid "Hide files"
 msgstr "ফাইল লুকানো হোক"
 
-#: diskdrake/interactive.pm:1168
+#: diskdrake/interactive.pm:1117
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -1829,109 +1799,109 @@ msgid ""
 "the contents of the mounted partition)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1183
+#: diskdrake/interactive.pm:1132
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "ফাইলগুলিকে একটু নতুন পার্টিশনে নিয়ে যাওয়া হচ্ছে"
 
-#: diskdrake/interactive.pm:1187
+#: diskdrake/interactive.pm:1136
 #, c-format
 msgid "Copying %s"
 msgstr "%s কপি করা হচ্ছে"
 
-#: diskdrake/interactive.pm:1191
+#: diskdrake/interactive.pm:1140
 #, c-format
 msgid "Removing %s"
 msgstr "%s মুছে ফেলা হচ্ছে"
 
-#: diskdrake/interactive.pm:1205
+#: diskdrake/interactive.pm:1154
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "পার্টিশন %s-কে এখন %s নামে জানা যাবে"
 
 # সাম: renumber = পুনর্বিন্যাস?
-#: diskdrake/interactive.pm:1206
+#: diskdrake/interactive.pm:1155
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr "পার্টিশনগুলো পুনঃসংখ্যান করা হয়েছে: "
 
-#: diskdrake/interactive.pm:1226 diskdrake/interactive.pm:1288
+#: diskdrake/interactive.pm:1180 diskdrake/interactive.pm:1243
 #, c-format
 msgid "Device: "
 msgstr "ডিভাইস:"
 
-#: diskdrake/interactive.pm:1227
+#: diskdrake/interactive.pm:1181
 #, c-format
 msgid "Volume label: "
 msgstr "ভলিউম লেবেল:"
 
-#: diskdrake/interactive.pm:1241
+#: diskdrake/interactive.pm:1182
 #, c-format
 msgid "UUID: "
 msgstr ""
 
-#: diskdrake/interactive.pm:1242
+#: diskdrake/interactive.pm:1183
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS ড্রাইভ লেটার: %s (শুধুমাত্র একটি অনুমান)\n"
 
-#: diskdrake/interactive.pm:1232 diskdrake/interactive.pm:1241
-#: diskdrake/interactive.pm:1306
+#: diskdrake/interactive.pm:1187 diskdrake/interactive.pm:1196
+#: diskdrake/interactive.pm:1262
 #, c-format
 msgid "Type: "
 msgstr "ধরণ:"
 
-#: diskdrake/interactive.pm:1236
+#: diskdrake/interactive.pm:1191 diskdrake/interactive.pm:1247
 #, c-format
 msgid "Name: "
 msgstr "নাম:"
 
-#: diskdrake/interactive.pm:1243
+#: diskdrake/interactive.pm:1198
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "শুরু: সেক্টর %s\n"
 
-#: diskdrake/interactive.pm:1244
+#: diskdrake/interactive.pm:1199
 #, c-format
 msgid "Size: %s"
 msgstr "সাইজ: %s"
 
-#: diskdrake/interactive.pm:1246
+#: diskdrake/interactive.pm:1201
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s সেক্টরসমূহ"
 
-#: diskdrake/interactive.pm:1248
+#: diskdrake/interactive.pm:1203
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "সিলিন্ডার %d থেকে %d পর্যন্ত\n"
 
-#: diskdrake/interactive.pm:1249
+#: diskdrake/interactive.pm:1204
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr ""
 
-#: diskdrake/interactive.pm:1250
+#: diskdrake/interactive.pm:1205
 #, c-format
 msgid "Formatted\n"
 msgstr "ফরমেট করা হয়েছে\n"
 
-#: diskdrake/interactive.pm:1251
+#: diskdrake/interactive.pm:1206
 #, c-format
 msgid "Not formatted\n"
 msgstr "ফরমেট করা হয়নি\n"
 
-#: diskdrake/interactive.pm:1252
+#: diskdrake/interactive.pm:1207
 #, c-format
 msgid "Mounted\n"
 msgstr "মাউন্ট করা হয়েছে\n"
 
-#: diskdrake/interactive.pm:1253
+#: diskdrake/interactive.pm:1208
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1258
+#: diskdrake/interactive.pm:1213
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -1940,7 +1910,7 @@ msgstr ""
 "লুপব্যাক ফাইল(গুলি):\n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1259
+#: diskdrake/interactive.pm:1214
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -1949,27 +1919,27 @@ msgstr ""
 "পার্টিশন সাধারণভাবে বুট হয়েছে\n"
 "     (MS-DOS বুটের জনে, lilo-র জন্য নয়)\n"
 
-#: diskdrake/interactive.pm:1261
+#: diskdrake/interactive.pm:1216
 #, c-format
 msgid "Level %s\n"
 msgstr "লেভেল %s\n"
 
-#: diskdrake/interactive.pm:1262
+#: diskdrake/interactive.pm:1217
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "চাঙ্ক সাইজ %d কিলোবাইট\n"
 
-#: diskdrake/interactive.pm:1263
+#: diskdrake/interactive.pm:1218
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "RAID-ডিস্কসমূহ %s\n"
 
-#: diskdrake/interactive.pm:1265
+#: diskdrake/interactive.pm:1220
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "লুপব্যাক ফাইলের নাম: %s"
 
-#: diskdrake/interactive.pm:1268
+#: diskdrake/interactive.pm:1223
 #, c-format
 msgid ""
 "\n"
@@ -1982,7 +1952,7 @@ msgstr ""
 "ড্রাইভার পার্টিশন। আপনার উচিত হবে\n"
 "এটাকে এটা ছেড়ে দেয়া।\n"
 
-#: diskdrake/interactive.pm:1271
+#: diskdrake/interactive.pm:1226
 #, c-format
 msgid ""
 "\n"
@@ -1995,77 +1965,77 @@ msgstr ""
 "পার্টিশন হচ্ছে আপনার\n"
 "সিস্টেমের ডুয়াল-বুটিং এর জন্য।\n"
 
-#: diskdrake/interactive.pm:1280
+#: diskdrake/interactive.pm:1235
 #, c-format
 msgid "Free space on %s (%s)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1289
+#: diskdrake/interactive.pm:1244
 #, c-format
 msgid "Read-only"
 msgstr "শুধুমাত্র পড়া যাবে"
 
-#: diskdrake/interactive.pm:1290
+#: diskdrake/interactive.pm:1245
 #, c-format
 msgid "Size: %s\n"
 msgstr "সাইজ: %s\n"
 
-#: diskdrake/interactive.pm:1291
+#: diskdrake/interactive.pm:1246
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "জ্যামিতি: %s-গুলি সিলিন্ডার, %s-গুলি হেড, %s-গুলি সেক্টর\n"
 
-#: diskdrake/interactive.pm:1292
-#, c-format
-msgid "Info: "
-msgstr "তথ্য:"
+#: diskdrake/interactive.pm:1248
+#, fuzzy, c-format
+msgid "Medium type: "
+msgstr "ফাইলসিস্টেমের ধরণ:"
 
-#: diskdrake/interactive.pm:1293
+#: diskdrake/interactive.pm:1249
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "LVM-ডিস্কসমূহ %s\n"
 
-#: diskdrake/interactive.pm:1294
+#: diskdrake/interactive.pm:1250
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "পার্টিশন টেবিলের ধরণ: %s\n"
 
-#: diskdrake/interactive.pm:1295
+#: diskdrake/interactive.pm:1251
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "%d চ্যানেলে %d আইডিতে\n"
 
-#: diskdrake/interactive.pm:1338
+#: diskdrake/interactive.pm:1294
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "ফাইল সিস্টেমের এনক্রিপশন কী"
 
-#: diskdrake/interactive.pm:1339
+#: diskdrake/interactive.pm:1295
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "আপনার ফাইল সিস্টেমের এনক্রিপশন কী পছন্দ করুন"
 
-#: diskdrake/interactive.pm:1342
+#: diskdrake/interactive.pm:1298
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr "এই এনক্রিপশন কী টি খুবই সাধারণ (অবশ্যই %d অক্ষর বড় হতে হবে)"
 
-#: diskdrake/interactive.pm:1343
+#: diskdrake/interactive.pm:1299
 #, c-format
 msgid "The encryption keys do not match"
 msgstr "এনক্রিপশন কীগুলি মিলছেনা"
 
-#: diskdrake/interactive.pm:1346
+#: diskdrake/interactive.pm:1302
 #, c-format
 msgid "Encryption key"
 msgstr "এনক্রিপশন কী"
 
-#: diskdrake/interactive.pm:1347
+#: diskdrake/interactive.pm:1303
 #, c-format
 msgid "Encryption key (again)"
 msgstr "এনক্রিপশন কী (পুনরায়)"
 
-#: diskdrake/interactive.pm:1349
+#: diskdrake/interactive.pm:1305
 #, c-format
 msgid "Encryption algorithm"
 msgstr "Encryption অ্যালগোরিদম"
@@ -2075,10 +2045,10 @@ msgstr "Encryption অ্যালগোরিদম"
 msgid "Change type"
 msgstr "ধরণ বদল করো"
 
-#: diskdrake/smbnfs_gtk.pm:81 interactive.pm:126 interactive.pm:539
+#: diskdrake/smbnfs_gtk.pm:81 interactive.pm:126 interactive.pm:543
 #: interactive/curses.pm:260 interactive/http.pm:104 interactive/http.pm:160
-#: interactive/stdio.pm:39 interactive/stdio.pm:142 ugtk2.pm:407 ugtk2.pm:509
-#: ugtk2.pm:518 ugtk2.pm:791
+#: interactive/stdio.pm:39 interactive/stdio.pm:148 ugtk2.pm:408 ugtk2.pm:510
+#: ugtk2.pm:519 ugtk2.pm:801
 #, c-format
 msgid "Cancel"
 msgstr "বাতিল"
@@ -2146,12 +2116,12 @@ msgstr "%s আবশ্যিক প্যাকেজ নেই"
 msgid "The following packages need to be installed:\n"
 msgstr "নিম্নোক্ত প্যাকেজসমূহ ইনস্টল করা প্রয়োজন:\n"
 
-#: do_pkgs.pm:209
+#: do_pkgs.pm:216
 #, c-format
 msgid "Installing packages..."
 msgstr "প্যাকেজসমূহ ইনস্টল করা হচ্ছে..."
 
-#: do_pkgs.pm:255
+#: do_pkgs.pm:258
 #, c-format
 msgid "Removing packages..."
 msgstr "প্যাকেজসমূহ অপসরণ করা হচ্ছে..."
@@ -2165,28 +2135,28 @@ msgstr ""
 "একটি ভুল হয়ে গেছে - কোন সঠিক যন্ত্র পাওয়া যায়নি যেখানে নতুন ফাইল সিস্টেম তৈরি করা "
 "হবে। অনুগ্রহ করে এই সমস্যার কারণের জন্য আপনার হার্ডওয়্যার পরীক্ষা করুন"
 
-#: fs/any.pm:62 fs/partitioning_wizard.pm:55
+#: fs/any.pm:74 fs/partitioning_wizard.pm:59
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "আপনার /boot/efi -এ অবশ্যই একটি FAT পার্টিশন থাকতে হবে"
 
-#: fs/format.pm:60 fs/format.pm:67
+#: fs/format.pm:62 fs/format.pm:69
 #, c-format
 msgid "Formatting partition %s"
 msgstr "%s পার্টিশন ফরম্যাট করা হচ্ছে"
 
-#: fs/format.pm:64
+#: fs/format.pm:66
 #, c-format
 msgid "Creating and formatting file %s"
 msgstr "%s ফাইল তৈরী এবং ফরম্যাট করা হচ্ছে"
 
-#: fs/format.pm:117
+#: fs/format.pm:119
 #, c-format
 msgid "I do not know how to format %s in type %s"
 msgstr "আমার জানা নেই পার্টিশন %s-কে কিভাবে %s ধরণে ফরম্যাট করতে হয়"
 
 # এটাও উল্টে যাবে মানে করতে গেলে। কারন মানেটা দাঁড়াবে <দ্বিতীয় %s কে প্রথম %s ফরম্যাট করা ব্যার্থ হয়েছে>
-#: fs/format.pm:122 fs/format.pm:124
+#: fs/format.pm:124 fs/format.pm:126
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "%s কে %s ফরম্যাট করতে ব্যর্থ হয়েছে"
@@ -2213,34 +2183,34 @@ msgstr "%2$s ডিরেক্টরিতে %1$s পার্টিশন ম
 msgid "Checking %s"
 msgstr "%s পরীক্ষা করা হচ্ছে"
 
-#: fs/mount.pm:118 partition_table.pm:384
+#: fs/mount.pm:119 partition_table.pm:395
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "%s আনমাউন্টে সমস্যা: %s"
 
 # এনেবল লিখলাম। মানেটা মাথায় আসছেনা
-#: fs/mount.pm:133
+#: fs/mount.pm:134
 #, c-format
 msgid "Enabling swap partition %s"
 msgstr "%s সোয়াপ পার্টিশন সক্রিয় করো"
 
-#: fs/mount_options.pm:111
+#: fs/mount_options.pm:115
 #, fuzzy, c-format
 msgid "Use an encrypted file system"
 msgstr "আপনি %s মাউন্ট পয়েন্টের জন্য একটি এনক্রিপটেড ফাইল ব্যবহার করতে পারবেন"
 
-#: fs/mount_options.pm:113
+#: fs/mount_options.pm:117
 #, c-format
 msgid "Flush write cache on file close"
 msgstr ""
 
-#: fs/mount_options.pm:115
+#: fs/mount_options.pm:119
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
 msgstr ""
 
 # #msgstr "%2$s কে %1$s ফরম্যাট করা ব্যর্থ হয়েছে"
-#: fs/mount_options.pm:117
+#: fs/mount_options.pm:121
 #, c-format
 msgid ""
 "Do not update inode access times on this file system\n"
@@ -2250,7 +2220,7 @@ msgstr ""
 "(যেমন,নিউজ সার্ভার দ্রুত করতে নিউজ স্পুলে দ্রুত প্রবেশ)।"
 
 # #msgstr "%2$s কে %1$s ফরম্যাট করা ব্যর্থ হয়েছে"
-#: fs/mount_options.pm:123
+#: fs/mount_options.pm:124
 #, fuzzy, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
@@ -2259,7 +2229,7 @@ msgstr ""
 "এই ফাইল সিস্টেমে inode প্রবেশ সময় আপডেট করবেন না\n"
 "(যেমন,নিউজ সার্ভার দ্রুত করতে নিউজ স্পুলে দ্রুত প্রবেশ)।"
 
-#: fs/mount_options.pm:123
+#: fs/mount_options.pm:127
 #, c-format
 msgid ""
 "Can only be mounted explicitly (i.e.,\n"
@@ -2268,12 +2238,12 @@ msgstr ""
 "শুধুমাত্র স্পষ্টভাবে মাউন্ট করতে পারে (যেমন,\n"
 ")(-a অপশন ফাইল সিস্টেম মাউন্ট করতে দেবে না)।"
 
-#: fs/mount_options.pm:126
+#: fs/mount_options.pm:130
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
 msgstr "কোন চিহ্ন বা বিশেষ ব্লক যন্ত্রকে ফাইল সিস্টেমে ব্যাখ্যা করবেন না।"
 
-#: fs/mount_options.pm:128
+#: fs/mount_options.pm:132
 #, c-format
 msgid ""
 "Do not allow execution of any binaries on the mounted\n"
@@ -2284,7 +2254,7 @@ msgstr ""
 "এই অপশন সেই সার্ভারের জন্য ব্যবহৃত হতে পারে যেখানে সে তার নিজের চেয়ে\n"
 "অন্যান্য আর্কিটেকচারের বাইনারিগুলো বেশি ধারণ করে।"
 
-#: fs/mount_options.pm:132
+#: fs/mount_options.pm:136
 #, c-format
 msgid ""
 "Do not allow set-user-identifier or set-group-identifier\n"
@@ -2296,42 +2266,42 @@ msgstr ""
 "suidperl(1))\n"
 "ইনস্টল করা থাকে।)"
 
-#: fs/mount_options.pm:136
+#: fs/mount_options.pm:140
 #, c-format
 msgid "Mount the file system read-only."
 msgstr "ফাইল সিস্টেমকে শুধু পড়ার জন্য মাউন্ট করো।"
 
-#: fs/mount_options.pm:138
+#: fs/mount_options.pm:142
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
 msgstr "সকল I/O ফাইল সিস্টেম যুগপত্‍ভাবে হওয়া উচিত।"
 
-#: fs/mount_options.pm:140
+#: fs/mount_options.pm:144
 #, c-format
 msgid "Allow every user to mount and umount the file system."
 msgstr ""
 
-#: fs/mount_options.pm:142
+#: fs/mount_options.pm:146
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
 msgstr ""
 
-#: fs/mount_options.pm:144
+#: fs/mount_options.pm:148
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr ""
 
-#: fs/mount_options.pm:146
+#: fs/mount_options.pm:150
 #, c-format
 msgid "Support \"user.\" extended attributes"
 msgstr ""
 
-#: fs/mount_options.pm:148
+#: fs/mount_options.pm:152
 #, c-format
 msgid "Give write access to ordinary users"
 msgstr "সাধারণ ব্যবহারকারীদের লেখার ক্ষমতা দিন"
 
-#: fs/mount_options.pm:150
+#: fs/mount_options.pm:154
 #, c-format
 msgid "Give read-only access to ordinary users"
 msgstr "সাধারণ ব্যবহারকারীদের শুধু পড়ার ক্ষমতা দিন"
@@ -2375,7 +2345,7 @@ msgstr ""
 msgid "Not enough swap space to fulfill installation, please add some"
 msgstr "ইনস্টলেশন সম্পূর্ন হবার জন্য যথেষ্ট swap জায়গা নেই, অনুগ্রহ করে কিছু যোগ করুন"
 
-#: fs/partitioning_wizard.pm:47
+#: fs/partitioning_wizard.pm:51
 #, c-format
 msgid ""
 "You must have a root partition.\n"
@@ -2386,7 +2356,7 @@ msgstr ""
 "সেকারণে, একটি পার্টিশন তৈরি করুন (অথবা ইতিমধ্যেই তৈরি একটিতে ক্লিক করুন)।\n"
 "তারপর ``Mount point'' বেছে নিন এবং সেটাকে `/' তে সেট করুন"
 
-#: fs/partitioning_wizard.pm:52
+#: fs/partitioning_wizard.pm:56
 #, c-format
 msgid ""
 "You do not have a swap partition.\n"
@@ -2397,67 +2367,67 @@ msgstr ""
 "\n"
 "তবুও আগাবো?"
 
-#: fs/partitioning_wizard.pm:80
+#: fs/partitioning_wizard.pm:84
 #, c-format
 msgid "Use free space"
 msgstr "শুণ্য স্থান ব্যবহার করো"
 
-#: fs/partitioning_wizard.pm:82
+#: fs/partitioning_wizard.pm:86
 #, c-format
 msgid "Not enough free space to allocate new partitions"
 msgstr "নতুন পার্টিশন তৈরী করার জন্য যথেষ্ট পরিমান খালি জায়গা নেই"
 
-#: fs/partitioning_wizard.pm:90
+#: fs/partitioning_wizard.pm:94
 #, c-format
 msgid "Use existing partitions"
 msgstr "আগের পার্টিশনগুলি ব্যবহার করো"
 
-#: fs/partitioning_wizard.pm:92
+#: fs/partitioning_wizard.pm:96
 #, c-format
 msgid "There is no existing partition to use"
 msgstr "ব্যবহারের জন্য এখানে উপস্থিত কোন পার্টিশন নেই"
 
-#: fs/partitioning_wizard.pm:99
+#: fs/partitioning_wizard.pm:103
 #, c-format
 msgid "Use the Microsoft Windows® partition for loopback"
 msgstr "লুপ ব্যাকের জন্য উইন্ডোজের পার্টিশন ব্যবহার করো"
 
-#: fs/partitioning_wizard.pm:102
+#: fs/partitioning_wizard.pm:106
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Linux4Win-এর জন্য আপনি কোন পার্টিশন ব্যবহার করতে চান?"
 
-#: fs/partitioning_wizard.pm:104
+#: fs/partitioning_wizard.pm:108
 #, c-format
 msgid "Choose the sizes"
 msgstr "সাইজ পছন্দ করো"
 
-#: fs/partitioning_wizard.pm:105
+#: fs/partitioning_wizard.pm:109
 #, c-format
 msgid "Root partition size in MB: "
 msgstr "মেগাবাইটে রুট পার্টিশনের সাইজ:"
 
-#: fs/partitioning_wizard.pm:106
+#: fs/partitioning_wizard.pm:110
 #, c-format
 msgid "Swap partition size in MB: "
 msgstr "মেগাবাইটে সোয়াপ পার্টিশনের সাইজ:"
 
-#: fs/partitioning_wizard.pm:115
+#: fs/partitioning_wizard.pm:119
 #, c-format
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr "লুপব্যাকে ব্যবহারের জন্য কেন FAT পার্টিশন নেই (অথবা পর্যাপ্ত জায়গা নেই)"
 
-#: fs/partitioning_wizard.pm:122
+#: fs/partitioning_wizard.pm:126
 #, c-format
 msgid "Use the free space on the Microsoft Windows® partition"
 msgstr "উইন্ডোজ পার্টিশনের খালি জায়গা ব্যবহার করে"
 
-#: fs/partitioning_wizard.pm:124
+#: fs/partitioning_wizard.pm:128
 #, c-format
 msgid "Which partition do you want to resize?"
 msgstr "আপনি কোন পার্টিশন রি-সাইজ করতে চান?"
 
-#: fs/partitioning_wizard.pm:138
+#: fs/partitioning_wizard.pm:142
 #, c-format
 msgid ""
 "The FAT resizer is unable to handle your partition, \n"
@@ -2466,12 +2436,12 @@ msgstr ""
 "FAT আকার পরিবর্তক আপনার পার্টিশন হস্তক্ষেপ করতে পারেনি, \n"
 "নিম্নের এই সমস্যাগুলো হয়েছে: %s"
 
-#: fs/partitioning_wizard.pm:141
+#: fs/partitioning_wizard.pm:145
 #, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
 msgstr "আপনার উইন্ডোজের পার্টিশনের সাইজ হিসেব করা হচ্ছে"
 
-#: fs/partitioning_wizard.pm:148
+#: fs/partitioning_wizard.pm:152
 #, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
@@ -2481,7 +2451,7 @@ msgstr ""
 "আপনার উইন্ডোজের পার্টিশনটি প্রচন্ড অসম। অনুগ্রহ করে আপনার কম্পিউটারটি উইন্ডোজে রি-বুট "
 "করে, ``defrag'' ইউটিলিটি চালান, পরে  রি-ষ্টার্ট করে আবার মেনড্রক ইনস্টলেশন চালান।"
 
-#: fs/partitioning_wizard.pm:151
+#: fs/partitioning_wizard.pm:155
 #, c-format
 msgid ""
 "WARNING!\n"
@@ -2516,8 +2486,8 @@ msgstr ""
 
 # পরবর্তি 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:160 interactive.pm:538 interactive/curses.pm:263
-#: ugtk2.pm:511
+#: fs/partitioning_wizard.pm:164 interactive.pm:542 interactive/curses.pm:263
+#: ugtk2.pm:512
 #, c-format
 msgid "Next"
 msgstr "পরবর্তী"
@@ -2532,58 +2502,58 @@ msgstr "পার্টিশন করা হচ্ছে"
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
 msgstr "আপনি কোথায় উইন্ডোজের জন্য কোন সাইজটি রাখতে চান পার্টিশনসমূহ %s?"
 
-#: fs/partitioning_wizard.pm:164
+#: fs/partitioning_wizard.pm:168
 #, c-format
 msgid "Size"
 msgstr "মাপ"
 
-#: fs/partitioning_wizard.pm:173
+#: fs/partitioning_wizard.pm:177
 #, c-format
 msgid "Resizing Microsoft Windows® partition"
 msgstr "উইন্ডোজ পার্টিশন আকার পরিবর্তন করা হচ্ছে"
 
-#: fs/partitioning_wizard.pm:178
+#: fs/partitioning_wizard.pm:182
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr "FAT আকার পরিবর্তন ব্যর্থ হয়েছে: %s"
 
-#: fs/partitioning_wizard.pm:193
+#: fs/partitioning_wizard.pm:197
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "রি-সাইজ করার জন্য কোন FAT পার্টিশন নেই (অথবা যথেষ্ট পারিমান ফাঁকা জায়গা নেই)"
 
-#: fs/partitioning_wizard.pm:198
+#: fs/partitioning_wizard.pm:202
 #, c-format
 msgid "Remove Microsoft Windows®"
 msgstr "উইন্ডোজ(TM) মুছে ফেলো"
 
-#: fs/partitioning_wizard.pm:198
+#: fs/partitioning_wizard.pm:202
 #, fuzzy, c-format
 msgid "Erase and use entire disk"
 msgstr "সম্পূর্ণ ডিস্ক মুছে ফেলো"
 
-#: fs/partitioning_wizard.pm:200
+#: fs/partitioning_wizard.pm:204
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "আপনার একের অধিক হার্ড ড্রাইভ আছে, আপনি কোনটাতে লিনাক্স ইনস্টল করতে চান?"
 
-#: fs/partitioning_wizard.pm:206
+#: fs/partitioning_wizard.pm:210 fsedit.pm:566
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "%s ড্রাইভে উপস্থিত সমস্থ ডাটা এবং পার্টিশন নষ্ট হয়ে যাবে"
 
-#: fs/partitioning_wizard.pm:217
+#: fs/partitioning_wizard.pm:221
 #, c-format
 msgid "Custom disk partitioning"
 msgstr "হাতে হাতে ডিস্ক পার্টিশন"
 
-#: fs/partitioning_wizard.pm:223
+#: fs/partitioning_wizard.pm:227
 #, c-format
 msgid "Use fdisk"
 msgstr "fdisk ব্যবহার করো"
 
-#: fs/partitioning_wizard.pm:226
+#: fs/partitioning_wizard.pm:230
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -2592,27 +2562,27 @@ msgstr ""
 "এখন আপনি %s-কে পার্টিশন করতে পারেন।\n"
 "যখন হয়ে যাবে, তখন `w' চেপে সেভ করতে ভূলবেননা"
 
-#: fs/partitioning_wizard.pm:266
+#: fs/partitioning_wizard.pm:270
 #, c-format
 msgid "I can not find any room for installing"
 msgstr "আমি ইনস্টল করার জন্য কোন জায়গা পাচ্ছিনা"
 
-#: fs/partitioning_wizard.pm:270
+#: fs/partitioning_wizard.pm:274
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "DrakX পার্টিশন সহায়ক এই সমস্থ সমাধান পেয়েছে:"
 
-#: fs/partitioning_wizard.pm:278
+#: fs/partitioning_wizard.pm:282
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "পার্টিশনে ব্যার্থ: %s"
 
-#: fs/type.pm:367
+#: fs/type.pm:368
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
 msgstr "১৬ মেগাবাইটের চাইতে ছোট পার্টিশনে আপনি JFS ব্যবহার করতে পারবেন না"
 
-#: fs/type.pm:368
+#: fs/type.pm:369
 #, c-format
 msgid "You can not use ReiserFS for partitions smaller than 32MB"
 msgstr "৩২ মেগাবাইটের চাইতে ছোট পার্টিশনে আপনি ReiserFS ব্যবহার করতে পারবেন না"
@@ -2632,7 +2602,7 @@ msgstr "সার্ভার"
 msgid "BIOS software RAID detected on disks %s. Activate it?"
 msgstr ""
 
-#: fsedit.pm:230
+#: fsedit.pm:224
 #, c-format
 msgid ""
 "I can not read the partition table of device %s, it's too corrupted for me :"
@@ -2651,23 +2621,23 @@ msgstr ""
 "\n"
 "আপনি কি সব পার্টিশন হারাতে রাজি?\n"
 
-#: fsedit.pm:403
+#: fsedit.pm:393
 #, c-format
 msgid "Mount points must begin with a leading /"
 msgstr "মাউন্ট পয়েন্টগুলি অবশ্যই / দিয়ে শুরু হতে হবে"
 
 # * = alphanumerical = বাংলাটা মনে পড়ছেনা
-#: fsedit.pm:404
+#: fsedit.pm:394
 #, c-format
 msgid "Mount points should contain only alphanumerical characters"
 msgstr "মাউন্ট পয়েন্টগুলিতে শুধু * অক্ষর থাকবে"
 
-#: fsedit.pm:405
+#: fsedit.pm:395
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "এই পার্টিশনটি আগে থেকেই %s মাউন্টপয়েন্ট নামে আছে\n"
 
-#: fsedit.pm:409
+#: fsedit.pm:399
 #, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
@@ -2678,14 +2648,14 @@ msgstr ""
 "/boot পার্টিশন ছাড়া কোন বুটলোডার এটা হেন্ডেল করতে পারবেনা।\n"
 "অনুগ্রহ করে অবশ্যই একটি /boot পার্টিশন যোগ করুন"
 
-#: fsedit.pm:415
+#: fsedit.pm:405
 #, fuzzy, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr "আপনি LVM লজিকাল ভলিউমকে %s মাউন্ট পয়েন্ট হিসেবে ব্যবহার করতে পারবেননা"
 
-#: fsedit.pm:417
+#: fsedit.pm:407
 #, fuzzy, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
@@ -2697,12 +2667,12 @@ msgstr ""
 "/boot পার্টিশন ছাড়া কোন বুটলোডার এটা হেন্ডেল করতে পারবেনা।\n"
 "অনুগ্রহ করে অবশ্যই একটি /boot পার্টিশন যোগ করুন"
 
-#: fsedit.pm:421 fsedit.pm:423
+#: fsedit.pm:411 fsedit.pm:413
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "root ফাইল সিস্টেমের মধ্যে এই ডিরেক্টরি থাকা উচিত"
 
-#: fsedit.pm:425 fsedit.pm:427
+#: fsedit.pm:415 fsedit.pm:417
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
@@ -2711,274 +2681,274 @@ msgstr ""
 "এই মাউন্ট পয়েন্টের জন্য আপনার একটি সঠিক ফাইল সিস্টেম (ext2/ext3, reiserfs, xfs, "
 "বা jfs) প্রয়োজন\n"
 
-#: fsedit.pm:429
+#: fsedit.pm:419
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
 msgstr "আপনি %s মাউন্ট পয়েন্টের জন্য একটি এনক্রিপটেড ফাইল ব্যবহার করতে পারবেন"
 
-#: fsedit.pm:493
+#: fsedit.pm:483
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "স্বয়ংক্রিয়-বন্টনের জন্য কোন খালি জায়গা নেই"
 
-#: fsedit.pm:495
+#: fsedit.pm:485
 #, c-format
 msgid "Nothing to do"
 msgstr "কিছু করার নাই"
 
-#: harddrake/data.pm:62
+#: harddrake/data.pm:64
+#, c-format
+msgid "SATA controllers"
+msgstr "SATA কন্ট্রলারসমূহ"
+
+#: harddrake/data.pm:73
+#, c-format
+msgid "RAID controllers"
+msgstr "RAID কন্ট্রলারসমূহ"
+
+#: harddrake/data.pm:83
+#, c-format
+msgid "(E)IDE/ATA controllers"
+msgstr "(E)IDE/ATA কন্ট্রলারসমূহ"
+
+#: harddrake/data.pm:93
+#, fuzzy, c-format
+msgid "Card readers"
+msgstr "কার্ড মডেল:"
+
+#: harddrake/data.pm:102
+#, c-format
+msgid "Firewire controllers"
+msgstr "Firewire কন্ট্রলারসমূহ"
+
+#: harddrake/data.pm:111
+#, c-format
+msgid "PCMCIA controllers"
+msgstr "PCMCIA কন্ট্রলারসমূহ"
+
+#: harddrake/data.pm:120
+#, c-format
+msgid "SCSI controllers"
+msgstr "SCSI কন্ট্রলারসমূহ"
+
+#: harddrake/data.pm:129
+#, c-format
+msgid "USB controllers"
+msgstr "ইউএসবি কন্ট্রলারসমূহ"
+
+#: harddrake/data.pm:138
+#, c-format
+msgid "USB ports"
+msgstr "ইউএসবি পোর্টসমূহ"
+
+#: harddrake/data.pm:147
+#, c-format
+msgid "SMBus controllers"
+msgstr "SMBus কন্ট্রলারসমূহ"
+
+#: harddrake/data.pm:156
+#, c-format
+msgid "Bridges and system controllers"
+msgstr "ব্রীজ এবং সিস্টেম কন্ট্রোলার সমূহ"
+
+#: harddrake/data.pm:168
 #, c-format
 msgid "Floppy"
 msgstr "ফ্লপি"
 
-#: harddrake/data.pm:72
+#: harddrake/data.pm:178
 #, c-format
 msgid "Zip"
 msgstr "জিপ"
 
-#: harddrake/data.pm:88
+#: harddrake/data.pm:194
 #, c-format
 msgid "Hard Disk"
 msgstr "ডিস্ক"
 
-#: harddrake/data.pm:97
+#: harddrake/data.pm:204
+#, c-format
+msgid "USB Mass Storage Devices"
+msgstr ""
+
+#: harddrake/data.pm:213
 #, c-format
 msgid "CDROM"
 msgstr "সিডিরম"
 
-#: harddrake/data.pm:107
+#: harddrake/data.pm:223
 #, c-format
 msgid "CD/DVD burners"
 msgstr "সিডি/ডিভিডি রাইটিং সফ্টওয়্যার"
 
-#: harddrake/data.pm:117
+#: harddrake/data.pm:233
 #, c-format
 msgid "DVD-ROM"
 msgstr "ডিভিডি-রোম"
 
-#: harddrake/data.pm:127
+#: harddrake/data.pm:243
 #, c-format
 msgid "Tape"
 msgstr "টেপ"
 
-#: harddrake/data.pm:138
+#: harddrake/data.pm:254
 #, c-format
 msgid "AGP controllers"
 msgstr "AGP কন্ট্রোলার সমূহ"
 
-#: harddrake/data.pm:147
+#: harddrake/data.pm:263
 #, c-format
 msgid "Videocard"
 msgstr "ভিডিওকার্ড"
 
-#: harddrake/data.pm:156
+#: harddrake/data.pm:272
 #, c-format
 msgid "DVB card"
 msgstr ""
 
-#: harddrake/data.pm:164
+#: harddrake/data.pm:280
 #, c-format
 msgid "Tvcard"
 msgstr "টিভিকার্ড"
 
-#: harddrake/data.pm:174
+#: harddrake/data.pm:289
 #, c-format
 msgid "Other MultiMedia devices"
 msgstr "অন্যান্য মাল্টিমিডিয়া ডিভাইস সমূহ"
 
-#: harddrake/data.pm:183
+#: harddrake/data.pm:298
 #, c-format
 msgid "Soundcard"
 msgstr "সাউন্ডকার্ড"
 
-#: harddrake/data.pm:196
+#: harddrake/data.pm:311
 #, c-format
 msgid "Webcam"
 msgstr "ওয়েব ক্যামেরা"
 
-#: harddrake/data.pm:210
+#: harddrake/data.pm:325
 #, c-format
 msgid "Processors"
 msgstr "প্রসেসর"
 
-#: harddrake/data.pm:220
+#: harddrake/data.pm:335
 #, c-format
 msgid "ISDN adapters"
 msgstr "ISDN এডোপ্টার সমূহ"
 
-#: harddrake/data.pm:231
+#: harddrake/data.pm:346
 #, c-format
 msgid "USB sound devices"
 msgstr ""
 
-#: harddrake/data.pm:240
+#: harddrake/data.pm:355
 #, c-format
 msgid "Radio cards"
 msgstr ""
 
-#: harddrake/data.pm:249
+#: harddrake/data.pm:364
 #, c-format
 msgid "ATM network cards"
 msgstr ""
 
-#: harddrake/data.pm:258
+#: harddrake/data.pm:373
 #, c-format
 msgid "WAN network cards"
 msgstr ""
 
-#: harddrake/data.pm:267
+#: harddrake/data.pm:382
 #, c-format
 msgid "Bluetooth devices"
 msgstr ""
 
-#: harddrake/data.pm:276
+#: harddrake/data.pm:391
 #, c-format
 msgid "Ethernetcard"
 msgstr "ইথারনেটকার্ড"
 
-#: harddrake/data.pm:293
+#: harddrake/data.pm:408
 #, c-format
 msgid "Modem"
 msgstr "মডেম"
 
-#: harddrake/data.pm:303
+#: harddrake/data.pm:418
 #, c-format
 msgid "ADSL adapters"
 msgstr "ADSL এডোপ্টার সমূহ"
 
-#: harddrake/data.pm:315
+#: harddrake/data.pm:430
 #, c-format
 msgid "Memory"
 msgstr "মেমরি"
 
-#: harddrake/data.pm:324
+#: harddrake/data.pm:439
 #, c-format
 msgid "Printer"
 msgstr "প্রিন্টার"
 
 #. -PO: these are joysticks controllers:
-#: harddrake/data.pm:338
+#: harddrake/data.pm:453
 #, c-format
 msgid "Game port controllers"
 msgstr ""
 
-#: harddrake/data.pm:347
+#: harddrake/data.pm:462
 #, c-format
 msgid "Joystick"
 msgstr "জয়ষ্টিক"
 
-#: harddrake/data.pm:357
-#, c-format
-msgid "SATA controllers"
-msgstr "SATA কন্ট্রলারসমূহ"
-
-#: harddrake/data.pm:366
-#, c-format
-msgid "RAID controllers"
-msgstr "RAID কন্ট্রলারসমূহ"
-
-#: harddrake/data.pm:376
-#, c-format
-msgid "(E)IDE/ATA controllers"
-msgstr "(E)IDE/ATA কন্ট্রলারসমূহ"
-
-#: harddrake/data.pm:386
-#, c-format
-msgid "USB Mass Storage Devices"
-msgstr ""
-
-#: harddrake/data.pm:395
-#, fuzzy, c-format
-msgid "Card readers"
-msgstr "কার্ড মডেল:"
-
-#: harddrake/data.pm:404
-#, c-format
-msgid "Firewire controllers"
-msgstr "Firewire কন্ট্রলারসমূহ"
-
-#: harddrake/data.pm:413
-#, c-format
-msgid "PCMCIA controllers"
-msgstr "PCMCIA কন্ট্রলারসমূহ"
-
-#: harddrake/data.pm:422
-#, c-format
-msgid "SCSI controllers"
-msgstr "SCSI কন্ট্রলারসমূহ"
-
-#: harddrake/data.pm:431
-#, c-format
-msgid "USB controllers"
-msgstr "ইউএসবি কন্ট্রলারসমূহ"
-
-#: harddrake/data.pm:440
-#, c-format
-msgid "USB ports"
-msgstr "ইউএসবি পোর্টসমূহ"
-
-#: harddrake/data.pm:449
-#, c-format
-msgid "SMBus controllers"
-msgstr "SMBus কন্ট্রলারসমূহ"
-
-#: harddrake/data.pm:458
-#, c-format
-msgid "Bridges and system controllers"
-msgstr "ব্রীজ এবং সিস্টেম কন্ট্রোলার সমূহ"
-
-#: harddrake/data.pm:469
+#: harddrake/data.pm:472
 #, c-format
 msgid "Keyboard"
 msgstr "কি-বোর্ড"
 
-#: harddrake/data.pm:482
+#: harddrake/data.pm:485
 #, c-format
 msgid "Tablet and touchscreen"
 msgstr ""
 
-#: harddrake/data.pm:491
+#: harddrake/data.pm:494
 #, c-format
 msgid "Mouse"
 msgstr "মাউস"
 
-#: harddrake/data.pm:505
+#: harddrake/data.pm:508
 #, c-format
 msgid "Biometry"
 msgstr ""
 
-#: harddrake/data.pm:513
+#: harddrake/data.pm:516
 #, c-format
 msgid "UPS"
 msgstr "UPS"
 
-#: harddrake/data.pm:522
+#: harddrake/data.pm:525
 #, c-format
 msgid "Scanner"
 msgstr "স্কেনার"
 
-#: harddrake/data.pm:533
+#: harddrake/data.pm:536
 #, c-format
 msgid "Unknown/Others"
 msgstr "অজানা/অন্যান্য"
 
-#: harddrake/data.pm:561
+#: harddrake/data.pm:564
 #, c-format
 msgid "cpu # "
 msgstr "সিপিউ #"
 
-#: harddrake/sound.pm:201
+#: harddrake/sound.pm:202
 #, c-format
 msgid "Please Wait... Applying the configuration"
 msgstr "অনুগ্রহ করে অপেক্ষা করুন.... কনফিগারেশন প্রস্তাব করা হচ্ছে"
 
-#: harddrake/sound.pm:238
+#: harddrake/sound.pm:239
 #, c-format
 msgid "No alternative driver"
 msgstr "কোন বিকল্প ড্রাইভার নেই"
 
 # বিকল্প
-#: harddrake/sound.pm:239
+#: harddrake/sound.pm:240
 #, c-format
 msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
@@ -2987,12 +2957,12 @@ msgstr ""
 "আপনার সাউন্ড কার্ড (%s) যা আপনি বর্তমানে ব্যবহার \"%s\" করছেন তার জন্য পরিচিত অন্য "
 "কোন OSS/ALSA কোন ড্রাইভার নেই"
 
-#: harddrake/sound.pm:245
+#: harddrake/sound.pm:246
 #, c-format
 msgid "Sound configuration"
 msgstr "সাউন্ড কনফিগারেশন"
 
-#: harddrake/sound.pm:247
+#: harddrake/sound.pm:248
 #, c-format
 msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
@@ -3004,7 +2974,7 @@ msgstr ""
 #. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
-#: harddrake/sound.pm:252
+#: harddrake/sound.pm:253
 #, c-format
 msgid ""
 "\n"
@@ -3017,7 +2987,7 @@ msgstr ""
 "আপনি বর্তমানে %s\"%s\" ড্রাইভার ব্যবহার করছেন (আপনার সাউন্ড কার্ডের স্বাভাবিক "
 "ড্রাইভার \"%s\")"
 
-#: harddrake/sound.pm:254
+#: harddrake/sound.pm:255
 #, c-format
 msgid ""
 "OSS (Open Sound System) was the first sound API. It's an OS independent "
@@ -3050,17 +3020,17 @@ msgstr ""
 "- পুরাতন সমর্থিত OSS api\n"
 "- নতুন ALSA api যা অনেক সুবিধা প্রদান করে কিন্তু ALSA লাইব্রেরী কতৃক ব্যবহৃত।\n"
 
-#: harddrake/sound.pm:268 harddrake/sound.pm:357
+#: harddrake/sound.pm:269 harddrake/sound.pm:354
 #, c-format
 msgid "Driver:"
 msgstr "ড্রাইভার"
 
-#: harddrake/sound.pm:277
+#: harddrake/sound.pm:278
 #, c-format
 msgid "Trouble shooting"
 msgstr "ট্রাবল শুটিং"
 
-#: harddrake/sound.pm:285
+#: harddrake/sound.pm:286
 #, c-format
 msgid ""
 "The old \"%s\" driver is blacklisted.\n"
@@ -3075,12 +3045,12 @@ msgstr ""
 "\n"
 "নতুন \"%s\" শুধুমাত্র পরবর্তী বুটস্ট্র্যাপে ব্যবহৃত হবে।"
 
-#: harddrake/sound.pm:293
+#: harddrake/sound.pm:294
 #, c-format
 msgid "No open source driver"
 msgstr "কোন ওপেন সোর্স ড্রাইভার নেই"
 
-#: harddrake/sound.pm:294
+#: harddrake/sound.pm:295
 #, c-format
 msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
@@ -3089,28 +3059,23 @@ msgstr ""
 "আপনার সাউন্ড কার্ডের (%s) জন্য কোন ফ্রী ড্রাইভার নেই, কিন্তু একটি অংশিদারী ড্রাইভার "
 "\"%s\"-এ আছে।"
 
-#: harddrake/sound.pm:297
+#: harddrake/sound.pm:298
 #, c-format
 msgid "No known driver"
 msgstr "কোন পরিচিত ড্রাইভার নেই"
 
-#: harddrake/sound.pm:298
+#: harddrake/sound.pm:299
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
 msgstr "আপনার সাউন্ড কার্ড (%s)-এর জন্য কোন পরিচিত ড্রাইভার নেই"
 
-#: harddrake/sound.pm:302
-#, c-format
-msgid "Unknown driver"
-msgstr "অপরিচিত ড্রাইভার"
-
-#: harddrake/sound.pm:317
+#: harddrake/sound.pm:314
 #, c-format
 msgid "Sound trouble shooting"
 msgstr "সাউন্ড ট্রাবল শুটিং"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:320
+#: harddrake/sound.pm:317
 #, c-format
 msgid ""
 "The classic bug sound tester is to run the following commands:\n"
@@ -3154,18 +3119,18 @@ msgstr ""
 "\n"
 "- \"/sbin/fuser -v /dev/dsp\" কোন প্রোগ্রাম সাউন্ড কার্ড ব্যবহার করছে সেটা বলবে\n"
 
-#: harddrake/sound.pm:346
+#: harddrake/sound.pm:343
 #, c-format
 msgid "Let me pick any driver"
 msgstr "আমাকে যেকোন ড্রাইভার নিতে দাও"
 
-#: harddrake/sound.pm:349
+#: harddrake/sound.pm:346
 #, c-format
 msgid "Choosing an arbitrary driver"
 msgstr "ইচ্ছেমত ড্রাইভার পছন্দ"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:352
+#: harddrake/sound.pm:349
 #, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
@@ -3199,7 +3164,7 @@ msgstr "অজানা|CPH05X (bt878) [প্রচুর প্রস্তু
 msgid "Unknown|CPH06X (bt878) [many vendors]"
 msgstr "অজানা|CPH06X (bt878) [প্রচুর প্রস্তুতকারক]"
 
-#: harddrake/v4l.pm:474
+#: harddrake/v4l.pm:475
 #, c-format
 msgid ""
 "For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-"
@@ -3213,30 +3178,30 @@ msgstr ""
 "কার্ডের ধরণ এখানে জোর করে দিতে পারেন। যদি প্রয়োজন হয় তাহলে শুধু আপনার কার্ডের "
 "প্যারামিটার নির্বাচন করুন।"
 
-#: harddrake/v4l.pm:477
+#: harddrake/v4l.pm:478
 #, c-format
 msgid "Card model:"
 msgstr "কার্ড মডেল:"
 
-#: harddrake/v4l.pm:478
+#: harddrake/v4l.pm:479
 #, c-format
 msgid "Tuner type:"
 msgstr "টিউনারের ধরণ:"
 
-#: interactive.pm:125 interactive.pm:538 interactive/curses.pm:263
+#: interactive.pm:125 interactive.pm:542 interactive/curses.pm:263
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
-#: interactive/stdio.pm:142 interactive/stdio.pm:143 ugtk2.pm:413 ugtk2.pm:511
-#: ugtk2.pm:791 ugtk2.pm:814
+#: interactive/stdio.pm:148 interactive/stdio.pm:149 ugtk2.pm:414 ugtk2.pm:512
+#: ugtk2.pm:801 ugtk2.pm:824
 #, c-format
 msgid "Ok"
 msgstr "ঠিক আছে"
 
-#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:790 wizards.pm:156
+#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:800 wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "হ্যাঁ"
 
-#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:790 wizards.pm:156
+#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:800 wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "না"
@@ -3246,33 +3211,33 @@ msgstr "না"
 msgid "Choose a file"
 msgstr "একটি ফাইল পছন্দ করুন"
 
-#: interactive.pm:383 interactive/gtk.pm:419
+#: interactive.pm:383 interactive/gtk.pm:420
 #, c-format
 msgid "Add"
 msgstr "যোগ"
 
-#: interactive.pm:383 interactive/gtk.pm:419
+#: interactive.pm:383 interactive/gtk.pm:420
 #, c-format
 msgid "Modify"
 msgstr "পরিবর্তন"
 
-#: interactive.pm:383 interactive/gtk.pm:419
+#: interactive.pm:383 interactive/gtk.pm:420
 #, c-format
 msgid "Remove"
 msgstr "মুছে ফেলো"
 
-#: interactive.pm:538 interactive/curses.pm:263 ugtk2.pm:511
+#: interactive.pm:542 interactive/curses.pm:263 ugtk2.pm:512
 #, c-format
 msgid "Finish"
 msgstr "সমাপ্ত"
 
 # আগে
-#: interactive.pm:539 interactive/curses.pm:260 ugtk2.pm:509
+#: interactive.pm:543 interactive/curses.pm:260 ugtk2.pm:510
 #, c-format
 msgid "Previous"
 msgstr "পূর্ববর্তী"
 
-#: interactive/gtk.pm:544
+#: interactive/gtk.pm:548
 #, c-format
 msgid "Beware, Caps Lock is enabled"
 msgstr ""
@@ -3282,7 +3247,7 @@ msgstr ""
 msgid "Bad choice, try again\n"
 msgstr "বাজে পছন্দ, আবার চেষ্টা করুন\n"
 
-#: interactive/stdio.pm:30 interactive/stdio.pm:149
+#: interactive/stdio.pm:30 interactive/stdio.pm:155
 #, c-format
 msgid "Your choice? (default %s) "
 msgstr "আপনার পছন্দ? (সাধারনত %s)"
@@ -3301,32 +3266,32 @@ msgstr ""
 msgid "Your choice? (0/1, default `%s') "
 msgstr "Your choice? (0/1, সাধারনত `%s')"
 
-#: interactive/stdio.pm:94
+#: interactive/stdio.pm:97
 #, c-format
 msgid "Button `%s': %s"
 msgstr "বাটন `%s': %s"
 
-#: interactive/stdio.pm:95
+#: interactive/stdio.pm:98
 #, c-format
 msgid "Do you want to click on this button?"
 msgstr "আপনি কি এই বাটনে ক্লিক করতে চান?"
 
-#: interactive/stdio.pm:104
+#: interactive/stdio.pm:110
 #, c-format
 msgid "Your choice? (default `%s'%s) "
 msgstr "আপনার পছন্দ? (সাধারনত `%s'%s)"
 
-#: interactive/stdio.pm:104
+#: interactive/stdio.pm:110
 #, c-format
 msgid " enter `void' for void entry"
 msgstr " সঠিক এন্ট্রর জন্য `void' প্রবেশ করুন"
 
-#: interactive/stdio.pm:122
+#: interactive/stdio.pm:128
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
 msgstr "=> (%s)-থেকে পছন্দ করার অনেক কিছু আছে।\n"
 
-#: interactive/stdio.pm:125
+#: interactive/stdio.pm:131
 #, c-format
 msgid ""
 "Please choose the first number of the 10-range you wish to edit,\n"
@@ -3338,7 +3303,7 @@ msgstr ""
 "অথবা শুধুমাত্র চালিয়ে যাও'তে হিট করুন।\n"
 "আপনার পছন্দ? "
 
-#: interactive/stdio.pm:138
+#: interactive/stdio.pm:144
 #, c-format
 msgid ""
 "=> Notice, a label changed:\n"
@@ -3347,7 +3312,7 @@ msgstr ""
 "=> নোটিশ, একটি নাম পরিবর্তিত হয়েছে:\n"
 "%s"
 
-#: interactive/stdio.pm:145
+#: interactive/stdio.pm:151
 #, c-format
 msgid "Re-submit"
 msgstr "পুনরায়-পেশ"
@@ -3365,7 +3330,7 @@ msgstr "default:LTR"
 msgid "Andorra"
 msgstr "এনডোররা"
 
-#: lang.pm:211 timezone.pm:213
+#: lang.pm:211 timezone.pm:215
 #, c-format
 msgid "United Arab Emirates"
 msgstr "সংযুক্ত আরব আমিরাত"
@@ -3410,7 +3375,7 @@ msgstr "অ্যাংগোলা"
 msgid "Antarctica"
 msgstr "এন্টার্কটিকা"
 
-#: lang.pm:220 timezone.pm:258
+#: lang.pm:220 timezone.pm:260
 #, c-format
 msgid "Argentina"
 msgstr "আর্জেন্টিনা"
@@ -3420,12 +3385,12 @@ msgstr "আর্জেন্টিনা"
 msgid "American Samoa"
 msgstr "আমেরিকান সামোয়া"
 
-#: lang.pm:222 mirror.pm:11 timezone.pm:216
+#: lang.pm:222 mirror.pm:11 timezone.pm:218
 #, c-format
 msgid "Austria"
 msgstr "অষ্ট্রিয়া"
 
-#: lang.pm:223 mirror.pm:10 timezone.pm:254
+#: lang.pm:223 mirror.pm:10 timezone.pm:256
 #, c-format
 msgid "Australia"
 msgstr "অষ্ট্রেলিয়া"
@@ -3450,12 +3415,12 @@ msgstr "বসনিয়া এবং হার্জোগোভিনা"
 msgid "Barbados"
 msgstr "বার্বাডোস"
 
-#: lang.pm:228 timezone.pm:198
+#: lang.pm:228 timezone.pm:200
 #, c-format
 msgid "Bangladesh"
 msgstr "বাংলাদেশ"
 
-#: lang.pm:229 mirror.pm:12 timezone.pm:218
+#: lang.pm:229 mirror.pm:12 timezone.pm:220
 #, c-format
 msgid "Belgium"
 msgstr "বেলজিয়াম"
@@ -3465,7 +3430,7 @@ msgstr "বেলজিয়াম"
 msgid "Burkina Faso"
 msgstr "বুর্কিনা ফাসো"
 
-#: lang.pm:231 timezone.pm:219
+#: lang.pm:231 timezone.pm:221
 #, c-format
 msgid "Bulgaria"
 msgstr "বুলগেরিয়া"
@@ -3500,7 +3465,7 @@ msgstr "ব্রুনেই দারুসসালাম"
 msgid "Bolivia"
 msgstr "বলিভিয়া"
 
-#: lang.pm:238 mirror.pm:13 timezone.pm:259
+#: lang.pm:238 mirror.pm:13 timezone.pm:261
 #, c-format
 msgid "Brazil"
 msgstr "ব্রাজিল"
@@ -3525,7 +3490,7 @@ msgstr "বৌভেট দীপসমূহ"
 msgid "Botswana"
 msgstr "বত্‌সওয়ানা"
 
-#: lang.pm:243 timezone.pm:217
+#: lang.pm:243 timezone.pm:219
 #, c-format
 msgid "Belarus"
 msgstr "বেলারুস"
@@ -3535,7 +3500,7 @@ msgstr "বেলারুস"
 msgid "Belize"
 msgstr "বেলিজে"
 
-#: lang.pm:245 mirror.pm:14 timezone.pm:248
+#: lang.pm:245 mirror.pm:14 timezone.pm:250
 #, c-format
 msgid "Canada"
 msgstr "কানাডা"
@@ -3560,7 +3525,7 @@ msgstr "মধ্য আফ্রিকান গণপ্রজাতন্ত�
 msgid "Congo (Brazzaville)"
 msgstr "কঙ্গো (ব্রাজ্জাভিল্লে)"
 
-#: lang.pm:250 mirror.pm:38 timezone.pm:242
+#: lang.pm:250 mirror.pm:38 timezone.pm:244
 #, c-format
 msgid "Switzerland"
 msgstr "সুইজারল্যান্ড"
@@ -3575,7 +3540,7 @@ msgstr "কোট ডি'লভোরে"
 msgid "Cook Islands"
 msgstr "কুক দীপপুঞ্জ"
 
-#: lang.pm:253 timezone.pm:260
+#: lang.pm:253 timezone.pm:262
 #, c-format
 msgid "Chile"
 msgstr "চিলি"
@@ -3585,7 +3550,7 @@ msgstr "চিলি"
 msgid "Cameroon"
 msgstr "ক্যামেরুন"
 
-#: lang.pm:255 timezone.pm:199
+#: lang.pm:255 timezone.pm:201
 #, c-format
 msgid "China"
 msgstr "চীন"
@@ -3625,12 +3590,12 @@ msgstr "ক্রিসমাস দীপপুঞ্জ"
 msgid "Cyprus"
 msgstr "সাইপ্রাস"
 
-#: lang.pm:263 mirror.pm:16 timezone.pm:220
+#: lang.pm:263 mirror.pm:16 timezone.pm:222
 #, c-format
 msgid "Czech Republic"
 msgstr "চেক রিপাবলিক"
 
-#: lang.pm:264 mirror.pm:21 timezone.pm:225
+#: lang.pm:264 mirror.pm:21 timezone.pm:227
 #, c-format
 msgid "Germany"
 msgstr "জার্মানী"
@@ -3640,7 +3605,7 @@ msgstr "জার্মানী"
 msgid "Djibouti"
 msgstr "ডজিবুতি"
 
-#: lang.pm:266 mirror.pm:17 timezone.pm:221
+#: lang.pm:266 mirror.pm:17 timezone.pm:223
 #, c-format
 msgid "Denmark"
 msgstr "ডেনমার্ক"
@@ -3665,7 +3630,7 @@ msgstr "আলজেরিয়া"
 msgid "Ecuador"
 msgstr "ইকুয়েডর"
 
-#: lang.pm:271 mirror.pm:18 timezone.pm:222
+#: lang.pm:271 mirror.pm:18 timezone.pm:224
 #, c-format
 msgid "Estonia"
 msgstr "এস্তোনিয়া"
@@ -3685,7 +3650,7 @@ msgstr "পশ্চিম সাহারা"
 msgid "Eritrea"
 msgstr "এরিট্রিয়া"
 
-#: lang.pm:275 mirror.pm:36 timezone.pm:240
+#: lang.pm:275 mirror.pm:36 timezone.pm:242
 #, c-format
 msgid "Spain"
 msgstr "স্পেন"
@@ -3695,7 +3660,7 @@ msgstr "স্পেন"
 msgid "Ethiopia"
 msgstr "ইথিওপিয়া"
 
-#: lang.pm:277 mirror.pm:19 timezone.pm:223
+#: lang.pm:277 mirror.pm:19 timezone.pm:225
 #, c-format
 msgid "Finland"
 msgstr "ফিনল্যান্ড"
@@ -3720,7 +3685,7 @@ msgstr "মাক্রোনেশিয়া"
 msgid "Faroe Islands"
 msgstr "ফারোয় দীপপুঞ্জ"
 
-#: lang.pm:282 mirror.pm:20 timezone.pm:224
+#: lang.pm:282 mirror.pm:20 timezone.pm:226
 #, c-format
 msgid "France"
 msgstr "ফ্রান্স"
@@ -3730,7 +3695,7 @@ msgstr "ফ্রান্স"
 msgid "Gabon"
 msgstr "গ্যাবোন"
 
-#: lang.pm:284 timezone.pm:244
+#: lang.pm:284 timezone.pm:246
 #, c-format
 msgid "United Kingdom"
 msgstr "যুক্তরাজ্য"
@@ -3785,7 +3750,7 @@ msgstr "গুয়াদেলুপে"
 msgid "Equatorial Guinea"
 msgstr "ইকুয়েটরিয়াল গিনি"
 
-#: lang.pm:295 mirror.pm:22 timezone.pm:226
+#: lang.pm:295 mirror.pm:22 timezone.pm:228
 #, c-format
 msgid "Greece"
 msgstr "গ্রীস"
@@ -3795,7 +3760,7 @@ msgstr "গ্রীস"
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "দক্ষিন জর্জিয়া এবং দক্ষিন স্যান্ডউইচ্‌ দীপপুঞ্জ"
 
-#: lang.pm:297 timezone.pm:249
+#: lang.pm:297 timezone.pm:251
 #, c-format
 msgid "Guatemala"
 msgstr "গুয়াতেমালা"
@@ -3840,27 +3805,27 @@ msgstr "ক্রোয়েশিয়া"
 msgid "Haiti"
 msgstr "হাইতি"
 
-#: lang.pm:306 mirror.pm:23 timezone.pm:227
+#: lang.pm:306 mirror.pm:23 timezone.pm:229
 #, c-format
 msgid "Hungary"
 msgstr "হাঙ্গেরী"
 
-#: lang.pm:307 timezone.pm:202
+#: lang.pm:307 timezone.pm:204
 #, c-format
 msgid "Indonesia"
 msgstr "ইন্দোনেশিয়া"
 
-#: lang.pm:308 mirror.pm:24 timezone.pm:228
+#: lang.pm:308 mirror.pm:24 timezone.pm:230
 #, c-format
 msgid "Ireland"
 msgstr "আয়ারল্যান্ড"
 
-#: lang.pm:309 mirror.pm:25 timezone.pm:204
+#: lang.pm:309 mirror.pm:25 timezone.pm:206
 #, c-format
 msgid "Israel"
 msgstr "ইসরাঈল"
 
-#: lang.pm:310 timezone.pm:201
+#: lang.pm:310 timezone.pm:203
 #, c-format
 msgid "India"
 msgstr "ভারত"
@@ -3875,7 +3840,7 @@ msgstr "ব্রিটিশ ভারতীয় মহাসাগর সমর
 msgid "Iraq"
 msgstr "ইরাক"
 
-#: lang.pm:313 timezone.pm:203
+#: lang.pm:313 timezone.pm:205
 #, c-format
 msgid "Iran"
 msgstr "ইরান"
@@ -3885,7 +3850,7 @@ msgstr "ইরান"
 msgid "Iceland"
 msgstr "আইসল্যান্ড"
 
-#: lang.pm:315 mirror.pm:26 timezone.pm:229
+#: lang.pm:315 mirror.pm:26 timezone.pm:231
 #, c-format
 msgid "Italy"
 msgstr "ইতালী"
@@ -3900,7 +3865,7 @@ msgstr "জামাইকা"
 msgid "Jordan"
 msgstr "জর্ডান"
 
-#: lang.pm:318 mirror.pm:27 timezone.pm:205
+#: lang.pm:318 mirror.pm:27 timezone.pm:207
 #, c-format
 msgid "Japan"
 msgstr "জাপান"
@@ -3940,7 +3905,7 @@ msgstr "সেন্ট কিট্টস্‌ এবং নেভিস্‌
 msgid "Korea (North)"
 msgstr "কোরিয়া (উত্তর)"
 
-#: lang.pm:326 timezone.pm:206
+#: lang.pm:326 timezone.pm:208
 #, c-format
 msgid "Korea"
 msgstr "কোরিয়া"
@@ -3995,12 +3960,12 @@ msgstr "লাইবেরিয়া"
 msgid "Lesotho"
 msgstr "লেসথো"
 
-#: lang.pm:337 timezone.pm:230
+#: lang.pm:337 timezone.pm:232
 #, c-format
 msgid "Lithuania"
 msgstr "লিথুয়েনিয়া"
 
-#: lang.pm:338 timezone.pm:231
+#: lang.pm:338 timezone.pm:233
 #, c-format
 msgid "Luxembourg"
 msgstr "লুক্সেমবার্গ"
@@ -4100,12 +4065,12 @@ msgstr "মালদ্বীপ"
 msgid "Malawi"
 msgstr "মালাউ"
 
-#: lang.pm:358 timezone.pm:250
+#: lang.pm:358 timezone.pm:252
 #, c-format
 msgid "Mexico"
 msgstr "মেক্সিকো"
 
-#: lang.pm:359 timezone.pm:207
+#: lang.pm:359 timezone.pm:209
 #, c-format
 msgid "Malaysia"
 msgstr "মালয়েশিয়া"
@@ -4145,12 +4110,12 @@ msgstr "নাইজেরিয়া"
 msgid "Nicaragua"
 msgstr "নাইসারাগুয়া"
 
-#: lang.pm:367 mirror.pm:28 timezone.pm:232
+#: lang.pm:367 mirror.pm:28 timezone.pm:234
 #, c-format
 msgid "Netherlands"
 msgstr "নেদারল্যান্ড"
 
-#: lang.pm:368 mirror.pm:30 timezone.pm:233
+#: lang.pm:368 mirror.pm:30 timezone.pm:235
 #, c-format
 msgid "Norway"
 msgstr "নরওয়ে"
@@ -4170,7 +4135,7 @@ msgstr "নাউরু"
 msgid "Niue"
 msgstr "নিউও"
 
-#: lang.pm:372 mirror.pm:29 timezone.pm:255
+#: lang.pm:372 mirror.pm:29 timezone.pm:257
 #, c-format
 msgid "New Zealand"
 msgstr "নিউজিল্যান্ড"
@@ -4200,7 +4165,7 @@ msgstr "ফ্রেঞ্জ পলিনেশিয়া"
 msgid "Papua New Guinea"
 msgstr "পাপুয়া নিউগিনি"
 
-#: lang.pm:378 timezone.pm:208
+#: lang.pm:378 timezone.pm:210
 #, c-format
 msgid "Philippines"
 msgstr "ফিলিপাইন"
@@ -4210,7 +4175,7 @@ msgstr "ফিলিপাইন"
 msgid "Pakistan"
 msgstr "পাকিস্তান"
 
-#: lang.pm:380 mirror.pm:31 timezone.pm:234
+#: lang.pm:380 mirror.pm:31 timezone.pm:236
 #, c-format
 msgid "Poland"
 msgstr "পোল্যান্ড"
@@ -4235,7 +4200,7 @@ msgstr "পুয়ের্তোরিকো"
 msgid "Palestine"
 msgstr "প্যালেস্টাইন"
 
-#: lang.pm:385 mirror.pm:32 timezone.pm:235
+#: lang.pm:385 mirror.pm:32 timezone.pm:237
 #, c-format
 msgid "Portugal"
 msgstr "পর্তুগাল"
@@ -4260,7 +4225,7 @@ msgstr "কাতার"
 msgid "Reunion"
 msgstr "রিইউনিয়ন"
 
-#: lang.pm:390 timezone.pm:236
+#: lang.pm:390 timezone.pm:238
 #, c-format
 msgid "Romania"
 msgstr "রোমানিয়া"
@@ -4295,12 +4260,12 @@ msgstr "সেইছিল্লেস"
 msgid "Sudan"
 msgstr "সুদান"
 
-#: lang.pm:397 mirror.pm:37 timezone.pm:241
+#: lang.pm:397 mirror.pm:37 timezone.pm:243
 #, c-format
 msgid "Sweden"
 msgstr "সুইডেন"
 
-#: lang.pm:398 timezone.pm:209
+#: lang.pm:398 timezone.pm:211
 #, c-format
 msgid "Singapore"
 msgstr "সিঙ্গাপুর"
@@ -4310,7 +4275,7 @@ msgstr "সিঙ্গাপুর"
 msgid "Saint Helena"
 msgstr "সেন্ট হেলেনা"
 
-#: lang.pm:400 timezone.pm:239
+#: lang.pm:400 timezone.pm:241
 #, c-format
 msgid "Slovenia"
 msgstr "স্লোভেনিয়া"
@@ -4320,7 +4285,7 @@ msgstr "স্লোভেনিয়া"
 msgid "Svalbard and Jan Mayen Islands"
 msgstr "স্ভালবার্দ এবং জান মায়ান দীপপুঞ্জ"
 
-#: lang.pm:402 mirror.pm:34 timezone.pm:238
+#: lang.pm:402 mirror.pm:34 timezone.pm:240
 #, c-format
 msgid "Slovakia"
 msgstr "স্লোভাকিয়া"
@@ -4390,7 +4355,7 @@ msgstr "দক্ষিন ফ্রান্স সাম্রাজ্য"
 msgid "Togo"
 msgstr "টোগো"
 
-#: lang.pm:416 mirror.pm:40 timezone.pm:211
+#: lang.pm:416 mirror.pm:40 timezone.pm:213
 #, c-format
 msgid "Thailand"
 msgstr "থাইল্যান্ড"
@@ -4425,7 +4390,7 @@ msgstr "তানিসিয়া"
 msgid "Tonga"
 msgstr "টঙ্গো"
 
-#: lang.pm:423 timezone.pm:212
+#: lang.pm:423 timezone.pm:214
 #, c-format
 msgid "Turkey"
 msgstr "তুর্কি"
@@ -4440,17 +4405,17 @@ msgstr "ট্রিনিদাদ এবং টোবাগো"
 msgid "Tuvalu"
 msgstr "টুভালু"
 
-#: lang.pm:426 mirror.pm:39 timezone.pm:210
+#: lang.pm:426 mirror.pm:39 timezone.pm:212
 #, c-format
 msgid "Taiwan"
 msgstr "তাইওয়ান"
 
-#: lang.pm:427 timezone.pm:195
+#: lang.pm:427 timezone.pm:197
 #, c-format
 msgid "Tanzania"
 msgstr "তানজানিয়া"
 
-#: lang.pm:428 timezone.pm:243
+#: lang.pm:428 timezone.pm:245
 #, c-format
 msgid "Ukraine"
 msgstr "আকরাইসন"
@@ -4465,7 +4430,7 @@ msgstr "উগান্ডা"
 msgid "United States Minor Outlying Islands"
 msgstr "যুক্ত রাষ্ট্রের বাহিরের দীপপুঞ্জ"
 
-#: lang.pm:431 mirror.pm:41 timezone.pm:251
+#: lang.pm:431 mirror.pm:41 timezone.pm:253
 #, c-format
 msgid "United States"
 msgstr "যুক্তরাষ্ট্র"
@@ -4535,7 +4500,7 @@ msgstr "ইয়েমান"
 msgid "Mayotte"
 msgstr "মায়োত্তে"
 
-#: lang.pm:445 mirror.pm:35 timezone.pm:194
+#: lang.pm:445 mirror.pm:35 timezone.pm:196
 #, c-format
 msgid "South Africa"
 msgstr "দক্ষিন আফ্রিকা"
@@ -4550,27 +4515,27 @@ msgstr "জাম্বিয়া"
 msgid "Zimbabwe"
 msgstr "জিম্বাবুয়ে"
 
-#: lang.pm:1144
+#: lang.pm:1193
 #, c-format
 msgid "Welcome to %s"
 msgstr "%s -এ আপনাকে স্বাগতম"
 
-#: lvm.pm:83
+#: lvm.pm:84
 #, c-format
 msgid "Moving used physical extents to other physical volumes failed"
 msgstr ""
 
-#: lvm.pm:135
+#: lvm.pm:137
 #, c-format
 msgid "Physical volume %s is still in use"
 msgstr ""
 
-#: lvm.pm:145
+#: lvm.pm:147
 #, c-format
 msgid "Remove the logical volumes first\n"
 msgstr "প্রথমে লজিকাল ভলিউম সরিয়ে ফেলুন\n"
 
-#: lvm.pm:178
+#: lvm.pm:180
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
 msgstr ""
@@ -4924,17 +4889,17 @@ msgstr ""
 "%s মডিউল লোড করতে ব্যর্থ।\n"
 "আপনি কি অন্য প্যারামিটার দিয়ে আবার চেষ্টা করতে চান?"
 
-#: partition_table.pm:390
+#: partition_table.pm:401
 #, c-format
 msgid "mount failed: "
 msgstr "মাউন্ট হয়নি:"
 
-#: partition_table.pm:500
+#: partition_table.pm:510
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "এই প্লাটফর্মে এক্সটেনডেড পার্টিশন সাপোর্ট করেনা"
 
-#: partition_table.pm:518
+#: partition_table.pm:528
 #, c-format
 msgid ""
 "You have a hole in your partition table but I can not use it.\n"
@@ -4945,27 +4910,7 @@ msgstr ""
 "একমাত্র সমাধান হচ্ছে আপনার প্রাইমারি পার্টিশনের ত্রুটিকে Extended পার্টিশনে সরিয়ে "
 "নেয়া। "
 
-#: partition_table.pm:597
-#, c-format
-msgid "Error reading file %s"
-msgstr "%s ফাইল পড়াতে ত্রুটি"
-
-#: partition_table.pm:604
-#, c-format
-msgid "Restoring from file %s failed: %s"
-msgstr "%s ফাইল থেকে পুনরায় সংরক্ষণ করতে ব্যর্থ হয়েছে: %s"
-
-#: partition_table.pm:606
-#, c-format
-msgid "Bad backup file"
-msgstr "নষ্ট ব্যাকআপ ফাইল"
-
-#: partition_table.pm:626
-#, c-format
-msgid "Error writing to file %s"
-msgstr "%s ফাইলে লিখতে সমস্যা হয়েছে"
-
-#: partition_table/raw.pm:264
+#: partition_table/raw.pm:279
 #, c-format
 msgid ""
 "Something bad is happening on your drive. \n"
@@ -4983,7 +4928,7 @@ msgstr ""
 msgid "Can not add a partition to _formatted_ RAID %s"
 msgstr "_ফরম্যাটকৃত_ রেইড %s-এ পার্টিশন যোগ করা যাচ্ছে না"
 
-#: raid.pm:150
+#: raid.pm:157
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
 msgstr "রেইড স্তর %d-এর জন্য পর্যাপ্ত সংখ্যক পার্টিশন নেই\n"
@@ -6309,7 +6254,7 @@ msgstr ""
 "দুঃখিত, এই সার্ভিসটি সম্পর্কে\n"
 "অতিরিক্ত আর কোন তথ্য নেই।"
 
-#: services.pm:221 ugtk2.pm:901
+#: services.pm:221 ugtk2.pm:911
 #, c-format
 msgid "Info"
 msgstr "তথ্য"
@@ -6334,7 +6279,7 @@ msgstr "আরম্ভ"
 msgid "Stop"
 msgstr "বন্ধ"
 
-#: standalone.pm:23
+#: standalone.pm:25
 #, c-format
 msgid ""
 "This program is free software; you can redistribute it and/or modify\n"
@@ -6370,7 +6315,7 @@ msgstr ""
 
 # সাম
 # পুনরুদ্ধার 
-#: standalone.pm:42
+#: standalone.pm:44
 #, c-format
 msgid ""
 "[--config-info] [--daemon] [--debug] [--default] [--show-conf]\n"
@@ -6397,7 +6342,7 @@ msgstr ""
 "--help                : এই ম্যাসেজটি দেখাও।\n"
 "--version             : ভার্সান নাম্বার দেখাও।\n"
 
-#: standalone.pm:54
+#: standalone.pm:56
 #, c-format
 msgid ""
 "[--boot] [--splash]\n"
@@ -6412,7 +6357,7 @@ msgstr ""
 "  --splash          - বুট থিম কন্‌ফিগারে সক্রিয়\n"
 "ডিফল্ট মোড: স্বয়ংক্রিয়ভাবে কন্‌ফিগার হতে বলার মোড"
 
-#: standalone.pm:59
+#: standalone.pm:61
 #, c-format
 msgid ""
 "[OPTIONS] [PROGRAM_NAME]\n"
@@ -6429,7 +6374,7 @@ msgstr ""
 "  --report          - প্রোগ্রামটিকে কোন একটি ম্যান্ড্রিব লিনাক্স টুল হওয়া উচিত\n"
 "  --incident        - প্রোগ্রামটিকে কোন একটি ম্যান্ড্রিব লিনাক্স টুল হওয়া উচিত"
 
-#: standalone.pm:65
+#: standalone.pm:67
 #, c-format
 msgid ""
 "[--add]\n"
@@ -6449,7 +6394,7 @@ msgstr ""
 # সাম:
 # and gs for ghostscript for only this one... 
 # did not translate "for only this one"...
-#: standalone.pm:71
+#: standalone.pm:73
 #, c-format
 msgid ""
 "\n"
@@ -6482,7 +6427,7 @@ msgstr ""
 
 # সাম
 # Mandriva Linux Terminal
-#: standalone.pm:86
+#: standalone.pm:88
 #, c-format
 msgid ""
 "[OPTIONS]...\n"
@@ -6514,18 +6459,18 @@ msgstr ""
 "--delclient      : MTS থেকে একটি ক্লায়েন্ট মেশিন বাদ দাও (MAC অ্যাড্রেস, IP, nbi "
 "ইমেজ নাম প্রয়োজন)"
 
-#: standalone.pm:98
+#: standalone.pm:100
 #, c-format
 msgid "[keyboard]"
 msgstr "[কি-বোর্ড]"
 
-#: standalone.pm:99
+#: standalone.pm:101
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 msgstr "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 
 # সাম
-#: standalone.pm:100
+#: standalone.pm:102
 #, c-format
 msgid ""
 "[OPTIONS]\n"
@@ -6551,7 +6496,7 @@ msgstr ""
 
 # সাম
 # verify 
-#: standalone.pm:110
+#: standalone.pm:112
 #, c-format
 msgid ""
 "[OPTION]...\n"
@@ -6570,7 +6515,7 @@ msgstr ""
 "  --merge-all-rpmnew     প্রাপ্ত সকল .rpmnew/.rpmsave ফাইলগুলো একীভূতকরণের "
 "পরামর্শ দাও"
 
-#: standalone.pm:115
+#: standalone.pm:117
 #, c-format
 msgid ""
 "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
@@ -6579,7 +6524,7 @@ msgstr ""
 "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
 "usbtable] [--dynamic=dev]"
 
-#: standalone.pm:116
+#: standalone.pm:118
 #, c-format
 msgid ""
 " [everything]\n"
@@ -6590,7 +6535,7 @@ msgstr ""
 "       XFdrake [--noauto] মনিটর\n"
 "       XFdrake রেজ্যুলুশন"
 
-#: standalone.pm:152
+#: standalone.pm:154
 #, c-format
 msgid ""
 "\n"
@@ -6601,107 +6546,107 @@ msgstr ""
 "ব্যবহার: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
 "testing] [-v|--version] "
 
-#: timezone.pm:148 timezone.pm:149
+#: timezone.pm:150 timezone.pm:151
 #, fuzzy, c-format
 msgid "All servers"
 msgstr "সার্ভার যোগ করো"
 
-#: timezone.pm:183
+#: timezone.pm:185
 #, c-format
 msgid "Global"
 msgstr ""
 
-#: timezone.pm:186
+#: timezone.pm:188
 #, fuzzy, c-format
 msgid "Africa"
 msgstr "দক্ষিন আফ্রিকা"
 
-#: timezone.pm:187
+#: timezone.pm:189
 #, fuzzy, c-format
 msgid "Asia"
 msgstr "অষ্ট্রিয়া"
 
-#: timezone.pm:188
+#: timezone.pm:190
 #, c-format
 msgid "Europe"
 msgstr ""
 
-#: timezone.pm:189
+#: timezone.pm:191
 #, fuzzy, c-format
 msgid "North America"
 msgstr "দক্ষিন আফ্রিকা"
 
-#: timezone.pm:190
+#: timezone.pm:192
 #, fuzzy, c-format
 msgid "Oceania"
 msgstr "ম্যাসিডোনিয়া"
 
-#: timezone.pm:191
+#: timezone.pm:193
 #, fuzzy, c-format
 msgid "South America"
 msgstr "দক্ষিন আফ্রিকা"
 
-#: timezone.pm:200
+#: timezone.pm:202
 #, c-format
 msgid "Hong Kong"
 msgstr "হং কং"
 
-#: timezone.pm:237
+#: timezone.pm:239
 #, c-format
 msgid "Russian Federation"
 msgstr "রুশ ফেডারেশন"
 
-#: timezone.pm:245
+#: timezone.pm:247
 #, c-format
 msgid "Yugoslavia"
 msgstr "যুগোস্লাভিয়া"
 
-#: ugtk2.pm:791
+#: ugtk2.pm:801
 #, c-format
 msgid "Is this correct?"
 msgstr "এটা কি সঠিক?"
 
 # সাম
-#: ugtk2.pm:851
+#: ugtk2.pm:861
 #, c-format
 msgid "No file chosen"
 msgstr "কোন ফাইল বেছে নেয়া হয়নি"
 
 # সাম
-#: ugtk2.pm:853
+#: ugtk2.pm:863
 #, c-format
 msgid "You have chosen a file, not a directory"
 msgstr "আপনি একটি ফাইল নির্বাচন করেছেন, ডিরেক্টরি নয়"
 
 # সাম
-#: ugtk2.pm:855
+#: ugtk2.pm:865
 #, c-format
 msgid "You have chosen a directory, not a file"
 msgstr "আপনি একটি ডিরেক্টরি নির্বাচন করেছেন, ফাইল নয়"
 
 # সাম
-#: ugtk2.pm:857
+#: ugtk2.pm:867
 #, c-format
 msgid "No such directory"
 msgstr "এই নামে কোন ডিরেক্টরি নেই"
 
 # সাম
-#: ugtk2.pm:857
+#: ugtk2.pm:867
 #, c-format
 msgid "No such file"
 msgstr "এই নামে কোন ফাইল নেই"
 
-#: ugtk2.pm:936
+#: ugtk2.pm:946
 #, c-format
 msgid "Expand Tree"
 msgstr "ট্রী প্রসারিত করো"
 
-#: ugtk2.pm:937
+#: ugtk2.pm:947
 #, c-format
 msgid "Collapse Tree"
 msgstr "ট্রী সংকীর্ন করো"
 
-#: ugtk2.pm:938
+#: ugtk2.pm:948
 #, c-format
 msgid "Toggle between flat and group sorted"
 msgstr "ফ্ল্যাট এবং গ্রুপের শ্রেণীর মধ্যে পরিবর্তন করো"
@@ -6719,6 +6664,43 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "ইনস্টলেশন ব্যর্থ হয়েছে"
+
+#~ msgid "Undo"
+#~ msgstr "পূর্বাবস্থা"
+
+#~ msgid "Save partition table"
+#~ msgstr "পার্টিশন টেবিল সংরক্ষিত করো"
+
+#~ msgid "Restore partition table"
+#~ msgstr "পার্টিশন টেবিল রিষ্টোর করো"
+
+#~ msgid "Select file"
+#~ msgstr "ফাইল সিলেক্ট করো"
+
+#~ msgid ""
+#~ "The backup partition table has not the same size\n"
+#~ "Still continue?"
+#~ msgstr ""
+#~ "ব্যাকআপ পার্টিশন সমান সাইজের ছিলনা\n"
+#~ "এখনো এগুবো?"
+
+#~ msgid "Info: "
+#~ msgstr "তথ্য:"
+
+#~ msgid "Unknown driver"
+#~ msgstr "অপরিচিত ড্রাইভার"
+
+#~ msgid "Error reading file %s"
+#~ msgstr "%s ফাইল পড়াতে ত্রুটি"
+
+#~ msgid "Restoring from file %s failed: %s"
+#~ msgstr "%s ফাইল থেকে পুনরায় সংরক্ষণ করতে ব্যর্থ হয়েছে: %s"
+
+#~ msgid "Bad backup file"
+#~ msgstr "নষ্ট ব্যাকআপ ফাইল"
+
+#~ msgid "Error writing to file %s"
+#~ msgstr "%s ফাইলে লিখতে সমস্যা হয়েছে"
 
 #~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
 #~ msgstr "ভুল: আপনার সাউন্ড কার্ডের \"%s\" ড্রাইভারটি তালিকায় নেই"

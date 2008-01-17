@@ -6,30 +6,31 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
-"POT-Creation-Date: 2007-09-12 17:02+0200\n"
+"POT-Creation-Date: 2008-01-17 14:31+0100\n"
 "PO-Revision-Date: 2007-09-20 21:18+0200\n"
 "Last-Translator: Michal Bukovjan <bukm@centrum.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: any.pm:240 diskdrake/interactive.pm:603 diskdrake/interactive.pm:790
-#: diskdrake/interactive.pm:834 diskdrake/interactive.pm:896
-#: diskdrake/interactive.pm:1183 do_pkgs.pm:209 do_pkgs.pm:255
-#: harddrake/sound.pm:201 interactive.pm:576
+#: any.pm:245 diskdrake/interactive.pm:552 diskdrake/interactive.pm:739
+#: diskdrake/interactive.pm:783 diskdrake/interactive.pm:841
+#: diskdrake/interactive.pm:1132 do_pkgs.pm:216 do_pkgs.pm:258
+#: harddrake/sound.pm:202 interactive.pm:580
 #, c-format
 msgid "Please wait"
 msgstr "Prosím počkejte"
 
-#: any.pm:240
+#: any.pm:245
 #, c-format
 msgid "Bootloader installation in progress"
 msgstr "Probíhá instalace zaváděcího programu"
 
-#: any.pm:251
+#: any.pm:256
 #, c-format
 msgid ""
 "LILO wants to assign a new Volume ID to drive %s.  However, changing\n"
@@ -47,12 +48,12 @@ msgstr ""
 "\n"
 "Přiřadit nové ID svazku?"
 
-#: any.pm:262
+#: any.pm:267
 #, c-format
 msgid "Installation of bootloader failed. The following error occurred:"
 msgstr "Instalace zaváděcího programu neuspěla. Stala se tato chyba:"
 
-#: any.pm:268
+#: any.pm:273
 #, c-format
 msgid ""
 "You may need to change your Open Firmware boot-device to\n"
@@ -69,7 +70,7 @@ msgstr ""
 " Potom zadejte: shut-down\n"
 "Při dalším spuštění už uvidíte prompt."
 
-#: any.pm:306
+#: any.pm:311
 #, c-format
 msgid ""
 "You decided to install the bootloader on a partition.\n"
@@ -84,267 +85,270 @@ msgstr ""
 "\n"
 "Ze kterého disku spouštíte systém?"
 
-#: any.pm:329
+#: any.pm:334
 #, c-format
 msgid "First sector of drive (MBR)"
 msgstr "První sektor disku (MBR)"
 
-#: any.pm:330
+#: any.pm:335
 #, c-format
 msgid "First sector of the root partition"
 msgstr "První sektor kořenového oddílu"
 
-#: any.pm:332
+#: any.pm:337
 #, c-format
 msgid "On Floppy"
 msgstr "Na disketu"
 
-#: any.pm:334
+#: any.pm:339
 #, c-format
 msgid "Skip"
 msgstr "Přeskočit"
 
-#: any.pm:338
+#: any.pm:343
 #, c-format
 msgid "LILO/grub Installation"
 msgstr "Instalace LILO/Grub"
 
-#: any.pm:340
+#: any.pm:345
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Kam chcete nainstalovat zaváděcí program?"
 
-#: any.pm:367
+#: any.pm:372
 #, c-format
 msgid "Boot Style Configuration"
 msgstr "Nastavení stylu zavádění"
 
-#: any.pm:377 any.pm:409 any.pm:410
+#: any.pm:382 any.pm:414 any.pm:415
 #, c-format
 msgid "Bootloader main options"
 msgstr "Základní nastavení zaváděcího programu"
 
-#: any.pm:382
+#: any.pm:387
 #, c-format
 msgid "Bootloader"
 msgstr "Zaváděcí program"
 
-#: any.pm:383 any.pm:414
+#: any.pm:388 any.pm:419
 #, c-format
 msgid "Bootloader to use"
 msgstr "Zaváděcí program"
 
-#: any.pm:385 any.pm:416
+#: any.pm:390 any.pm:421
 #, c-format
 msgid "Boot device"
 msgstr "Startovací zařízení"
 
-#: any.pm:387
+#: any.pm:392
 #, c-format
 msgid "Main options"
 msgstr "Hlavní volby"
 
-#: any.pm:388
+#: any.pm:393
 #, c-format
 msgid "Delay before booting default image"
 msgstr "Prodleva před zavedením výchozího obrazu"
 
-#: any.pm:389
+#: any.pm:394
 #, c-format
 msgid "Enable ACPI"
 msgstr "Povolit ACPI"
 
-#: any.pm:390
+#: any.pm:395
 #, c-format
 msgid "Enable APIC"
 msgstr "Povolit APIC"
 
-#: any.pm:391
+#: any.pm:396
 #, c-format
 msgid "Enable Local APIC"
 msgstr "Povolit lokální APIC"
 
-#: any.pm:393 any.pm:773 authentication.pm:196 diskdrake/smbnfs_gtk.pm:181
+#: any.pm:398 any.pm:785 any.pm:794 authentication.pm:197
+#: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
 msgstr "Heslo"
 
-#: any.pm:395 authentication.pm:207
+#: any.pm:400 authentication.pm:208
 #, c-format
 msgid "The passwords do not match"
 msgstr "Hesla nejsou shodná"
 
-#: any.pm:395 authentication.pm:207 diskdrake/interactive.pm:1343
+#: any.pm:400 authentication.pm:208 diskdrake/interactive.pm:1299
 #, c-format
 msgid "Please try again"
 msgstr "Zkuste to znovu, prosím"
 
-#: any.pm:396
+#: any.pm:401
 #, c-format
 msgid "You can not use a password with %s"
 msgstr "Nelze použít heslo s %s"
 
-#: any.pm:399 any.pm:774 authentication.pm:197
+#: any.pm:404 any.pm:787 any.pm:796 authentication.pm:198
 #, c-format
 msgid "Password (again)"
 msgstr "Heslo (podruhé)"
 
-#: any.pm:400
+#: any.pm:405
 #, c-format
 msgid "Restrict command line options"
 msgstr "Omezení nastavení z příkazové řádky"
 
-#: any.pm:400
+#: any.pm:405
 #, c-format
 msgid "restrict"
 msgstr "omezení"
 
-#: any.pm:401
+#: any.pm:406
 #, c-format
-msgid "Option ``Restrict command line options'' is of no use without a password"
-msgstr "Volba ''Omezení nastavení z příkazové řádky'' je bezpředmětné bez hesla"
+msgid ""
+"Option ``Restrict command line options'' is of no use without a password"
+msgstr ""
+"Volba ''Omezení nastavení z příkazové řádky'' je bezpředmětné bez hesla"
 
-#: any.pm:403
+#: any.pm:408
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Vyčistit adresář /tmp při každém startu"
 
-#: any.pm:404
+#: any.pm:409
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
 msgstr "Pokud je třeba, upřesněte velikost paměti (nalezeno %d MB)"
 
-#: any.pm:405
+#: any.pm:410
 #, c-format
 msgid "Give the ram size in MB"
 msgstr "Zadejte velikost paměti v MB"
 
-#: any.pm:415
+#: any.pm:420
 #, c-format
 msgid "Init Message"
 msgstr "Úvodní zpráva"
 
-#: any.pm:417
+#: any.pm:422
 #, c-format
 msgid "Open Firmware Delay"
 msgstr "Prodleva pro firmware"
 
-#: any.pm:418
+#: any.pm:423
 #, c-format
 msgid "Kernel Boot Timeout"
 msgstr "Prodleva při spuštění"
 
-#: any.pm:419
+#: any.pm:424
 #, c-format
 msgid "Enable CD Boot?"
 msgstr "Povolit spuštění z CD?"
 
-#: any.pm:420
+#: any.pm:425
 #, c-format
 msgid "Enable OF Boot?"
 msgstr "Povolit zavaděč OF?"
 
-#: any.pm:421
+#: any.pm:426
 #, c-format
 msgid "Default OS?"
 msgstr "Výchozí OS?"
 
-#: any.pm:487
+#: any.pm:493
 #, c-format
 msgid "Image"
 msgstr "Obraz(image)"
 
-#: any.pm:488 any.pm:501
+#: any.pm:494 any.pm:507
 #, c-format
 msgid "Root"
 msgstr "Kořenový(root)"
 
-#: any.pm:489 any.pm:514
+#: any.pm:495 any.pm:520
 #, c-format
 msgid "Append"
 msgstr "Připojit"
 
-#: any.pm:491
+#: any.pm:497
 #, c-format
 msgid "Xen append"
 msgstr "Připojit Xen"
 
-#: any.pm:494
+#: any.pm:500
 #, c-format
 msgid "Video mode"
 msgstr "Video režim"
 
-#: any.pm:496
+#: any.pm:502
 #, c-format
 msgid "Initrd"
 msgstr "Initrd"
 
-#: any.pm:497
+#: any.pm:503
 #, c-format
 msgid "Network profile"
 msgstr "Síťový profil"
 
-#: any.pm:506 any.pm:511 any.pm:513 diskdrake/interactive.pm:425
+#: any.pm:512 any.pm:517 any.pm:519 diskdrake/interactive.pm:374
 #, c-format
 msgid "Label"
 msgstr "Značka"
 
-#: any.pm:508 any.pm:516 harddrake/v4l.pm:438
+#: any.pm:514 any.pm:522 harddrake/v4l.pm:438
 #, c-format
 msgid "Default"
 msgstr "Výchozí"
 
-#: any.pm:515
+#: any.pm:521
 #, c-format
 msgid "NoVideo"
 msgstr "Bez Videa"
 
-#: any.pm:526
+#: any.pm:532
 #, c-format
 msgid "Empty label not allowed"
 msgstr "Prázdná značka není povolena"
 
-#: any.pm:527
+#: any.pm:533
 #, c-format
 msgid "You must specify a kernel image"
 msgstr "Musíte zadat soubor s jádrem"
 
-#: any.pm:527
+#: any.pm:533
 #, c-format
 msgid "You must specify a root partition"
 msgstr "Musíte zadat kořenový oddíl"
 
-#: any.pm:528
+#: any.pm:534
 #, c-format
 msgid "This label is already used"
 msgstr "Tato značka se již používá"
 
-#: any.pm:546
+#: any.pm:552
 #, c-format
 msgid "Which type of entry do you want to add?"
 msgstr "Jaký typ záznamu chcete přidat?"
 
-#: any.pm:547
+#: any.pm:553
 #, c-format
 msgid "Linux"
 msgstr "Linux"
 
-#: any.pm:547
+#: any.pm:553
 #, c-format
 msgid "Other OS (SunOS...)"
 msgstr "Jiný systém (SunOs...)"
 
-#: any.pm:548
+#: any.pm:554
 #, c-format
 msgid "Other OS (MacOS...)"
 msgstr "Jiný systém (MacOs...)"
 
-#: any.pm:548
+#: any.pm:554
 #, c-format
 msgid "Other OS (Windows...)"
 msgstr "Jiný systém (Windows...)"
 
-#: any.pm:576
+#: any.pm:582
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -353,172 +357,179 @@ msgstr ""
 "Zde jsou záznamy z vašeho zaváděcího menu.\n"
 "Můžete přidat další nebo změnit stávající."
 
-#: any.pm:727
+#: any.pm:745
 #, c-format
 msgid "access to X programs"
 msgstr "přístup k programům v X prostředí"
 
-#: any.pm:728
+#: any.pm:746
 #, c-format
 msgid "access to rpm tools"
 msgstr "přístup k rpm nástrojům"
 
-#: any.pm:729
+#: any.pm:747
 #, c-format
 msgid "allow \"su\""
 msgstr "povolit \"su\""
 
-#: any.pm:730
+#: any.pm:748
 #, c-format
 msgid "access to administrative files"
 msgstr "přístup k administrativním souborům"
 
-#: any.pm:731
+#: any.pm:749
 #, c-format
 msgid "access to network tools"
 msgstr "přístup k síťovým nástrojům"
 
-#: any.pm:732
+#: any.pm:750
 #, c-format
 msgid "access to compilation tools"
 msgstr "přístup k nástrojům pro kompilaci"
 
-#: any.pm:737
+#: any.pm:756
 #, c-format
 msgid "(already added %s)"
 msgstr "(už byl přidán %s)"
 
-#: any.pm:744
+#: any.pm:762
 #, c-format
 msgid "Please give a user name"
 msgstr "Prosím zadejte uživatelské jméno"
 
-#: any.pm:745
+#: any.pm:763
 #, c-format
-msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgid ""
+"The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr "Uživatelské jméno může obsahovat pouze malá písmena, čísla, '-' a '_'"
 
-#: any.pm:746
+#: any.pm:764
 #, c-format
 msgid "The user name is too long"
 msgstr "Toto uživatelské jméno je příliš dlouhé"
 
-#: any.pm:747
+#: any.pm:765
 #, c-format
 msgid "This user name has already been added"
 msgstr "Toto uživatelské jméno už bylo přidáno"
 
-#: any.pm:748 any.pm:776
+#: any.pm:771 any.pm:798
 #, c-format
 msgid "User ID"
 msgstr "ID uživatele"
 
-#: any.pm:749 any.pm:777
+#: any.pm:771 any.pm:799
 #, c-format
 msgid "Group ID"
 msgstr "ID skupiny"
 
-#: any.pm:752
+#: any.pm:772
 #, c-format
 msgid "%s must be a number"
 msgstr "%s musí být číslo"
 
-#: any.pm:753
+#: any.pm:773
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
 msgstr "%s by mělo být vyšší než 500. Přesto použít?"
 
-#: any.pm:768
+#: any.pm:777
 #, c-format
 msgid "User management"
 msgstr "Správa uživatelů"
 
-#: any.pm:775 authentication.pm:182
+#: any.pm:784 authentication.pm:183
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "Heslo správce (uživatele root)"
 
-#: any.pm:780
+#: any.pm:789
 #, c-format
 msgid "Enter a user"
 msgstr "Zadejte uživatele"
 
-#: any.pm:781
+#: any.pm:790
 #, c-format
 msgid "Real name"
 msgstr "Skutečné jméno"
 
-#: any.pm:772
+#: any.pm:793
 #, c-format
 msgid "Login name"
 msgstr "Přihlašovací jméno"
 
-#: any.pm:775
+#: any.pm:797
 #, c-format
 msgid "Shell"
 msgstr "Shell"
 
-#: any.pm:822 security/l10n.pm:14
+#: any.pm:835 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "Automatické přihlášení"
 
-#: any.pm:823
+#: any.pm:836
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
-msgstr "Můžu nastavit váš počítač tak, aby automaticky přihlásil vybraného uživatele."
+msgstr ""
+"Můžu nastavit váš počítač tak, aby automaticky přihlásil vybraného uživatele."
 
-#: any.pm:824
+#: any.pm:837
 #, c-format
 msgid "Use this feature"
 msgstr "Použít tuto vlastnost"
 
-#: any.pm:825
+#: any.pm:838
 #, c-format
 msgid "Choose the default user:"
 msgstr "Zvolte standardního uživatele:"
 
-#: any.pm:826
+#: any.pm:839
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Vyberte si, který správce oken má být spouštěn:"
 
-#: any.pm:854
-#, c-format
-msgid "License agreement"
-msgstr "Souhlas s licencí"
-
-#: any.pm:857 diskdrake/dav.pm:26
-#, c-format
-msgid "Quit"
-msgstr "Konec"
-
-#: any.pm:860
+#: any.pm:862 any.pm:912
 #, c-format
 msgid "Release Notes"
 msgstr "Poznámky k vydání"
 
-#: any.pm:863
+#: any.pm:869 any.pm:1201 interactive/gtk.pm:766
+#, c-format
+msgid "Close"
+msgstr "Zavřít"
+
+#: any.pm:905
+#, c-format
+msgid "License agreement"
+msgstr "Souhlas s licencí"
+
+#: any.pm:908 diskdrake/dav.pm:26
+#, c-format
+msgid "Quit"
+msgstr "Konec"
+
+#: any.pm:915
 #, c-format
 msgid "Accept"
 msgstr "Přijmout"
 
-#: any.pm:863
+#: any.pm:915
 #, c-format
 msgid "Refuse"
 msgstr "Odmítnout"
 
-#: any.pm:882 any.pm:950
+#: any.pm:930 any.pm:996
 #, c-format
 msgid "Please choose a language to use."
 msgstr "Prosím zvolte si jazyk, který chcete používat."
 
-#: any.pm:883 any.pm:951
+#: any.pm:931 any.pm:997
 #, c-format
 msgid "Language choice"
 msgstr "Výběr jazyka"
 
-#: any.pm:913
+#: any.pm:961
 #, c-format
 msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
@@ -528,72 +539,72 @@ msgstr ""
 "Mandriva Linux podporuje více jazyků. Můžete si zvolit další jazyky,\n"
 "které budou dostupné po instalaci a následném restartu systému."
 
-#: any.pm:916
+#: any.pm:964
 #, c-format
 msgid "Multi languages"
 msgstr "Více jazyků"
 
-#: any.pm:928 any.pm:959
+#: any.pm:975 any.pm:1005
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr "Stará (ne UTF-8) kódování pro kompatibilitu"
 
-#: any.pm:930
+#: any.pm:977
 #, c-format
 msgid "All languages"
 msgstr "Všechny jazyky"
 
-#: any.pm:1005
+#: any.pm:1052
 #, c-format
 msgid "Country / Region"
 msgstr "Země"
 
-#: any.pm:1007
+#: any.pm:1054
 #, c-format
 msgid "Please choose your country."
 msgstr "Vyberte si prosím svoji zem."
 
-#: any.pm:1009
+#: any.pm:1056
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Zde je kompletní seznam dostupných zemí"
 
-#: any.pm:1010
+#: any.pm:1057
 #, c-format
 msgid "Other Countries"
 msgstr "Jiné země"
 
-#: any.pm:1010 interactive.pm:477
+#: any.pm:1057 interactive.pm:481
 #, c-format
 msgid "Advanced"
 msgstr "Rozšíření"
 
-#: any.pm:1016
+#: any.pm:1063
 #, c-format
 msgid "Input method:"
 msgstr "Vstupní metoda:"
 
-#: any.pm:1019
+#: any.pm:1066
 #, c-format
 msgid "None"
 msgstr "Žádné"
 
-#: any.pm:1099
+#: any.pm:1146
 #, c-format
 msgid "No sharing"
 msgstr "Nesdílet"
 
-#: any.pm:1099
+#: any.pm:1146
 #, c-format
 msgid "Allow all users"
 msgstr "Povolit všem uživatelům"
 
-#: any.pm:1099
+#: any.pm:1146
 #, c-format
 msgid "Custom"
 msgstr "Vlastní"
 
-#: any.pm:1103
+#: any.pm:1150
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -609,7 +620,7 @@ msgstr ""
 "\n"
 "Lze také provést \"Vlastní\" povolení pro jednotlivé uživatele.\n"
 
-#: any.pm:1115
+#: any.pm:1162
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
@@ -618,7 +629,7 @@ msgstr ""
 "NFS: tradiční systém pro sdílení souborů v prostředí Unix, s menší podporou "
 "operačních systémů Mac a Windows."
 
-#: any.pm:1118
+#: any.pm:1165
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
@@ -627,24 +638,20 @@ msgstr ""
 "SMB: systém pro sdílení souborů používaný ve Windows, MacOS X a mnohými "
 "moderními Linuxovými systémy."
 
-#: any.pm:1126
+#: any.pm:1173
 #, c-format
-msgid "You can export using NFS or SMB. Please select which you would like to use."
+msgid ""
+"You can export using NFS or SMB. Please select which you would like to use."
 msgstr ""
 "Nyní lze provést export přes protokol NFS nebo SMB. Vyberte prosím, který "
 "chcete použít."
 
-#: any.pm:1151
+#: any.pm:1201
 #, c-format
 msgid "Launch userdrake"
 msgstr "Spustit UserDrake"
 
-#: any.pm:1151 interactive/gtk.pm:747
-#, c-format
-msgid "Close"
-msgstr "Zavřít"
-
-#: any.pm:1153
+#: any.pm:1203
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -653,107 +660,107 @@ msgstr ""
 "Sdílení mezi uživateli používá skupinu \"fileshare\". \n"
 "Uživatele lze do této skupiny přidat pomocí nástroje UserDrake."
 
-#: any.pm:1245
+#: any.pm:1295
 #, c-format
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr "Prosím odhlaste se a pak stiskněte Ctrl-Alt-Backspace"
 
-#: any.pm:1249
+#: any.pm:1299
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr "Aby se změna projevila, je nutné se odhlásit a opět přihlásit"
 
-#: any.pm:1284
+#: any.pm:1334
 #, c-format
 msgid "Timezone"
 msgstr "Časová zóna"
 
-#: any.pm:1284
+#: any.pm:1334
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Jaké je vaše časové pásmo?"
 
-#: any.pm:1296 any.pm:1298
+#: any.pm:1346 any.pm:1348
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Nastavení data, hodin a časové zóny"
 
-#: any.pm:1299
+#: any.pm:1349
 #, c-format
 msgid "What is the best time?"
 msgstr "Jaké vedení času je nejvhodnější?"
 
-#: any.pm:1303
+#: any.pm:1353
 #, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "%s (hardwarové hodiny nastaveny na UTC)"
 
-#: any.pm:1304
+#: any.pm:1354
 #, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "%s (hardwarové hodiny nastaveny na místní čas)"
 
-#: any.pm:1306
+#: any.pm:1356
 #, c-format
 msgid "NTP Server"
 msgstr "NTP Server"
 
-#: any.pm:1307
+#: any.pm:1357
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Automatická synchronizace času (pomocí NTP)"
 
-#: authentication.pm:23
+#: authentication.pm:24
 #, c-format
 msgid "Local file"
 msgstr "Lokální soubor"
 
-#: authentication.pm:24
+#: authentication.pm:25
 #, c-format
 msgid "LDAP"
 msgstr "LDAP"
 
-#: authentication.pm:25
+#: authentication.pm:26
 #, c-format
 msgid "NIS"
 msgstr "NIS"
 
-#: authentication.pm:26
+#: authentication.pm:27
 #, c-format
 msgid "Smart Card"
 msgstr "Čipová karta"
 
-#: authentication.pm:27 authentication.pm:163
+#: authentication.pm:28 authentication.pm:164
 #, c-format
 msgid "Windows Domain"
 msgstr "Doména Windows"
 
-#: authentication.pm:28
+#: authentication.pm:29
 #, c-format
 msgid "Active Directory with SFU"
 msgstr "Active Directory s SFU"
 
-#: authentication.pm:29
+#: authentication.pm:30
 #, c-format
 msgid "Active Directory with Winbind"
 msgstr "Active Directory s Winbind"
 
-#: authentication.pm:66
+#: authentication.pm:67
 #, c-format
 msgid "Local file:"
 msgstr "Lokální soubor:"
 
-#: authentication.pm:66
+#: authentication.pm:67
 #, c-format
 msgid "Use information stored in local files for all authentication"
 msgstr "Použít pro veškeré ověřování informace uložené v lokálních souborech"
 
-#: authentication.pm:67
+#: authentication.pm:68
 #, c-format
 msgid "LDAP:"
 msgstr "LDAP:"
 
-#: authentication.pm:67
+#: authentication.pm:68
 #, c-format
 msgid ""
 "Tells your computer to use LDAP for some or all authentication. LDAP "
@@ -762,12 +769,12 @@ msgstr ""
 "Některé nebo veškeré ověřování bude používat LDAP. LDAP sdružuje některé "
 "informace uvnitř vaší organizace."
 
-#: authentication.pm:68
+#: authentication.pm:69
 #, c-format
 msgid "NIS:"
 msgstr "NIS:"
 
-#: authentication.pm:68
+#: authentication.pm:69
 #, c-format
 msgid ""
 "Allows you to run a group of computers in the same Network Information "
@@ -776,12 +783,12 @@ msgstr ""
 "Umožňuje provozovat skupinu počítačů ve stejné doméně NIS (Network "
 "Information Service) se společným heslem a skupinami."
 
-#: authentication.pm:69
+#: authentication.pm:70
 #, c-format
 msgid "Windows Domain:"
 msgstr "Doména Windows:"
 
-#: authentication.pm:69
+#: authentication.pm:70
 #, c-format
 msgid ""
 "Winbind allows the system to retrieve information and authenticate users in "
@@ -790,22 +797,22 @@ msgstr ""
 "Winbind umožňuje systému získávat informace a ověřovat uživatele v doméně "
 "Windows."
 
-#: authentication.pm:70
+#: authentication.pm:71
 #, c-format
 msgid "Active Directory with SFU:"
 msgstr "Active Directory s SFU:"
 
-#: authentication.pm:70
+#: authentication.pm:71
 #, c-format
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
 msgstr "Zahrnuje Kerberos a LDAP pro ověřování na serveru s Active Directory"
 
-#: authentication.pm:71
+#: authentication.pm:72
 #, c-format
 msgid "Active Directory with Winbind:"
 msgstr "Active Directory s Winbind:"
 
-#: authentication.pm:71
+#: authentication.pm:72
 #, c-format
 msgid ""
 "Winbind allows the system to authenticate users in a Windows Active "
@@ -814,92 +821,92 @@ msgstr ""
 "Winbind umožňuje systému ověřovat uživatele na serveru s Windows Active "
 "Directory."
 
-#: authentication.pm:96
+#: authentication.pm:97
 #, c-format
 msgid "Authentication LDAP"
 msgstr "Ověření pomocí LDAP"
 
-#: authentication.pm:97
+#: authentication.pm:98
 #, c-format
 msgid "LDAP Base dn"
 msgstr "Základní dn pro LDAP"
 
-#: authentication.pm:98
+#: authentication.pm:99
 #, c-format
 msgid "LDAP Server"
 msgstr "LDAP server"
 
-#: authentication.pm:111 fsedit.pm:23
+#: authentication.pm:112 fsedit.pm:23
 #, c-format
 msgid "simple"
 msgstr "jednoduchý"
 
-#: authentication.pm:112
+#: authentication.pm:113
 #, c-format
 msgid "TLS"
 msgstr "TLS"
 
-#: authentication.pm:113
+#: authentication.pm:114
 #, c-format
 msgid "SSL"
 msgstr "SSL"
 
-#: authentication.pm:114
+#: authentication.pm:115
 #, c-format
 msgid "security layout (SASL/Kerberos)"
 msgstr "bezpečnostní schéma (SASL/Kerberos)"
 
-#: authentication.pm:121 authentication.pm:159
+#: authentication.pm:122 authentication.pm:160
 #, c-format
 msgid "Authentication Active Directory"
 msgstr "Ověření pomocí Active Directory"
 
-#: authentication.pm:122 diskdrake/smbnfs_gtk.pm:182
+#: authentication.pm:123 diskdrake/smbnfs_gtk.pm:182
 #, c-format
 msgid "Domain"
 msgstr "Doména"
 
-#: authentication.pm:124 diskdrake/dav.pm:63
+#: authentication.pm:125 diskdrake/dav.pm:63
 #, c-format
 msgid "Server"
 msgstr "Server"
 
-#: authentication.pm:125
+#: authentication.pm:126
 #, c-format
 msgid "LDAP users database"
 msgstr "Databáze uživatelů LDAP"
 
-#: authentication.pm:126
+#: authentication.pm:127
 #, c-format
 msgid "Use Anonymous BIND "
 msgstr "Použít anonymní BIND "
 
-#: authentication.pm:127
+#: authentication.pm:128
 #, c-format
 msgid "LDAP user allowed to browse the Active Directory"
 msgstr "Uživatelé z databáze LDAP, kteří mohou prohlížet Active Directory"
 
-#: authentication.pm:128
+#: authentication.pm:129
 #, c-format
 msgid "Password for user"
 msgstr "Heslo pro uživatele"
 
-#: authentication.pm:140
+#: authentication.pm:141
 #, c-format
 msgid "Authentication NIS"
 msgstr "Ověření pomocí NIS"
 
-#: authentication.pm:141
+#: authentication.pm:142
 #, c-format
 msgid "NIS Domain"
 msgstr "NIS Doména"
 
-#: authentication.pm:142
+#: authentication.pm:143
 #, c-format
 msgid "NIS Server"
 msgstr "NIS Server"
 
-#: authentication.pm:147
+#: authentication.pm:148
 #, c-format
 msgid ""
 "For this to work for a W2K PDC, you will probably need to have the admin "
@@ -929,48 +936,48 @@ msgstr ""
 "Příkaz 'wbinfo -t' otestuje, zda-li vaše tajné informace pro ověření jsou "
 "správné."
 
-#: authentication.pm:159
+#: authentication.pm:160
 #, c-format
 msgid "Authentication Windows Domain"
 msgstr "Doména Windows pro ověření"
 
-#: authentication.pm:161
+#: authentication.pm:162
 #, c-format
 msgid "Active Directory Realm "
 msgstr "Oblast Active Directory "
 
-#: authentication.pm:164
+#: authentication.pm:165
 #, c-format
 msgid "Domain Admin User Name"
 msgstr "Uživatelské jméno Správce domény"
 
-#: authentication.pm:165
+#: authentication.pm:166
 #, c-format
 msgid "Domain Admin Password"
 msgstr "Heslo Správce domény"
 
-#: authentication.pm:181 authentication.pm:198
+#: authentication.pm:182 authentication.pm:199
 #, c-format
 msgid "Authentication"
 msgstr "Ověření"
 
-#: authentication.pm:184
+#: authentication.pm:185
 #, c-format
 msgid "Authentication method"
 msgstr "Autentizační metoda"
 
 #. -PO: keep this short or else the buttons will not fit in the window
-#: authentication.pm:189
+#: authentication.pm:190
 #, c-format
 msgid "No password"
 msgstr "Bez hesla"
 
-#: authentication.pm:210
+#: authentication.pm:211
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Toto heslo je příliš jednoduché (musí být alespoň %d znaků dlouhé)"
 
-#: authentication.pm:351
+#: authentication.pm:352
 #, c-format
 msgid "Can not use broadcast with no NIS domain"
 msgstr "Nelze použít všesměrové vysílání bez NIS domény"
@@ -980,7 +987,7 @@ msgstr "Nelze použít všesměrové vysílání bez NIS domény"
 # so use only 7bit for this message (and do transliteration or
 # leave it in English, as it is the best for your language)
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: bootloader.pm:882
+#: bootloader.pm:900
 #, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
@@ -995,42 +1002,42 @@ msgstr ""
 "vyckejte na automaticke zavedeni.\n"
 "\n"
 
-#: bootloader.pm:1030
+#: bootloader.pm:1050
 #, c-format
 msgid "LILO with text menu"
 msgstr "LILO s textovým menu"
 
-#: bootloader.pm:1031
+#: bootloader.pm:1051
 #, c-format
 msgid "GRUB with graphical menu"
 msgstr "GRUB s grafickým menu"
 
-#: bootloader.pm:1032
+#: bootloader.pm:1052
 #, c-format
 msgid "GRUB with text menu"
 msgstr "GRUB s textovým menu"
 
-#: bootloader.pm:1033
+#: bootloader.pm:1053
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
 
-#: bootloader.pm:1034
+#: bootloader.pm:1054
 #, c-format
 msgid "SILO"
 msgstr "SILO"
 
-#: bootloader.pm:1114
+#: bootloader.pm:1135
 #, c-format
 msgid "not enough room in /boot"
 msgstr "není dost místa v adresáři /boot"
 
-#: bootloader.pm:1681
+#: bootloader.pm:1760
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
 msgstr "Zaváděcí program nelze nainstalovat na oddíl %s\n"
 
-#: bootloader.pm:1734
+#: bootloader.pm:1813
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1039,7 +1046,7 @@ msgstr ""
 "Nastavení vašeho zavaděče musí být aktualizováno, protože se změnilo pořadí "
 "oddílů na disku"
 
-#: bootloader.pm:1747
+#: bootloader.pm:1826
 #, c-format
 msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
@@ -1048,52 +1055,52 @@ msgstr ""
 "Zavaděč nelze korektně nainstalovat. Musíte použít rescue režim a vybrat \"%s"
 "\""
 
-#: bootloader.pm:1748
+#: bootloader.pm:1827
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Znovu instalovat zaváděcí program"
 
-#: common.pm:132
+#: common.pm:142
 #, c-format
 msgid "B"
 msgstr "B"
 
-#: common.pm:132
+#: common.pm:142
 #, c-format
 msgid "KB"
 msgstr "kB"
 
-#: common.pm:132
+#: common.pm:142
 #, c-format
 msgid "MB"
 msgstr "MB"
 
-#: common.pm:132
+#: common.pm:142
 #, c-format
 msgid "GB"
 msgstr "GB"
 
-#: common.pm:132 common.pm:141
+#: common.pm:142 common.pm:151
 #, c-format
 msgid "TB"
 msgstr "TB"
 
-#: common.pm:149
+#: common.pm:159
 #, c-format
 msgid "%d minutes"
 msgstr "%d minut(y)"
 
-#: common.pm:151
+#: common.pm:161
 #, c-format
 msgid "1 minute"
 msgstr "1 minuta"
 
-#: common.pm:153
+#: common.pm:163
 #, c-format
 msgid "%d seconds"
 msgstr "%d sekund"
 
-#: common.pm:306
+#: common.pm:335
 #, c-format
 msgid "command %s missing"
 msgstr "chybí příkaz %s"
@@ -1118,45 +1125,44 @@ msgstr ""
 msgid "New"
 msgstr "Nový"
 
-#: diskdrake/dav.pm:61 diskdrake/interactive.pm:431 diskdrake/smbnfs_gtk.pm:75
+#: diskdrake/dav.pm:61 diskdrake/interactive.pm:380 diskdrake/smbnfs_gtk.pm:75
 #, c-format
 msgid "Unmount"
 msgstr "Odpojit"
 
-#: diskdrake/dav.pm:62 diskdrake/interactive.pm:428 diskdrake/smbnfs_gtk.pm:76
+#: diskdrake/dav.pm:62 diskdrake/interactive.pm:377 diskdrake/smbnfs_gtk.pm:76
 #, c-format
 msgid "Mount"
 msgstr "Připojit"
 
-#: diskdrake/dav.pm:64 diskdrake/interactive.pm:422
-#: diskdrake/interactive.pm:662 diskdrake/interactive.pm:680
-#: diskdrake/interactive.pm:684 diskdrake/removable.pm:23
+#: diskdrake/dav.pm:64 diskdrake/interactive.pm:371
+#: diskdrake/interactive.pm:611 diskdrake/interactive.pm:629
+#: diskdrake/interactive.pm:633 diskdrake/removable.pm:23
 #: diskdrake/smbnfs_gtk.pm:79
 #, c-format
 msgid "Mount point"
 msgstr "Přípojný bod"
 
-#: diskdrake/dav.pm:65 diskdrake/interactive.pm:424
-#: diskdrake/interactive.pm:1039 diskdrake/removable.pm:24
+#: diskdrake/dav.pm:65 diskdrake/interactive.pm:373
+#: diskdrake/interactive.pm:987 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
 msgstr "Volby"
 
-#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:166 diskdrake/removable.pm:26
+#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:164 diskdrake/removable.pm:26
 #: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
 #, c-format
 msgid "Done"
 msgstr "Hotovo"
 
-#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:115 diskdrake/interactive.pm:229
-#: diskdrake/interactive.pm:242 diskdrake/interactive.pm:386
-#: diskdrake/interactive.pm:404 diskdrake/interactive.pm:529
-#: diskdrake/interactive.pm:534 diskdrake/interactive.pm:652
-#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:1087
-#: diskdrake/interactive.pm:1100 diskdrake/interactive.pm:1103
-#: diskdrake/interactive.pm:1351 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
-#: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:227
+#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:113 diskdrake/interactive.pm:231
+#: diskdrake/interactive.pm:244 diskdrake/interactive.pm:478
+#: diskdrake/interactive.pm:483 diskdrake/interactive.pm:601
+#: diskdrake/interactive.pm:859 diskdrake/interactive.pm:1033
+#: diskdrake/interactive.pm:1046 diskdrake/interactive.pm:1049
+#: diskdrake/interactive.pm:1299 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
+#: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:223
 #: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
 #: scanner.pm:94 scanner.pm:105 scanner.pm:112 scanner.pm:119 wizards.pm:95
 #: wizards.pm:99 wizards.pm:121
@@ -1179,28 +1185,28 @@ msgstr "URL musí začínat znaky http:// nebo https://"
 msgid "Server: "
 msgstr "Server: "
 
-#: diskdrake/dav.pm:110 diskdrake/interactive.pm:502
-#: diskdrake/interactive.pm:1225 diskdrake/interactive.pm:1303
+#: diskdrake/dav.pm:110 diskdrake/interactive.pm:451
+#: diskdrake/interactive.pm:1179 diskdrake/interactive.pm:1259
 #, c-format
 msgid "Mount point: "
 msgstr "Adresář připojení (mount point): "
 
-#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1310
+#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1266
 #, c-format
 msgid "Options: %s"
 msgstr "Volby: %s"
 
-#: diskdrake/hd_gtk.pm:53 diskdrake/interactive.pm:286
+#: diskdrake/hd_gtk.pm:53 diskdrake/interactive.pm:282
 #: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:106
-#: fs/partitioning_wizard.pm:47 fs/partitioning_wizard.pm:201
-#: fs/partitioning_wizard.pm:207 fs/partitioning_wizard.pm:247
-#: fs/partitioning_wizard.pm:266 fs/partitioning_wizard.pm:271
+#: fs/partitioning_wizard.pm:51 fs/partitioning_wizard.pm:205
+#: fs/partitioning_wizard.pm:211 fs/partitioning_wizard.pm:251
+#: fs/partitioning_wizard.pm:270 fs/partitioning_wizard.pm:275
 #, c-format
 msgid "Partitioning"
 msgstr "Rozdělení disku"
 
-#: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1059
-#: diskdrake/interactive.pm:1069 diskdrake/interactive.pm:1122
+#: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1008
+#: diskdrake/interactive.pm:1018 diskdrake/interactive.pm:1071
 #, c-format
 msgid "Read carefully!"
 msgstr "Čtěte pozorně!"
@@ -1210,7 +1216,7 @@ msgstr "Čtěte pozorně!"
 msgid "Please make a backup of your data first"
 msgstr "Zálohujte si nejdřív svá data, prosím"
 
-#: diskdrake/hd_gtk.pm:94 diskdrake/interactive.pm:222
+#: diskdrake/hd_gtk.pm:94 diskdrake/interactive.pm:224
 #, c-format
 msgid "Exit"
 msgstr "Konec"
@@ -1230,18 +1236,18 @@ msgstr ""
 "Jestliže chcete používat aboot, musíte nechat volné místo na začátku disku\n"
 "(2048 sektorů stačí)"
 
-#: diskdrake/hd_gtk.pm:162 interactive.pm:640 interactive/gtk.pm:719
-#: interactive/gtk.pm:740 interactive/gtk.pm:760 ugtk2.pm:926 ugtk2.pm:927
+#: diskdrake/hd_gtk.pm:160 interactive.pm:644 interactive/gtk.pm:744
+#: interactive/gtk.pm:759 interactive/gtk.pm:779 ugtk2.pm:936 ugtk2.pm:937
 #, c-format
 msgid "Help"
 msgstr "Nápověda"
 
-#: diskdrake/hd_gtk.pm:197
+#: diskdrake/hd_gtk.pm:195
 #, c-format
 msgid "Choose action"
 msgstr "Volba akce"
 
-#: diskdrake/hd_gtk.pm:201
+#: diskdrake/hd_gtk.pm:199
 #, c-format
 msgid ""
 "You have one big Microsoft Windows partition.\n"
@@ -1253,162 +1259,156 @@ msgstr ""
 "Doporučuji vám nejprve zmenšit tento oddíl\n"
 "(klepněte na něj a potom na \"Změnit velikost\")"
 
-#: diskdrake/hd_gtk.pm:203
+#: diskdrake/hd_gtk.pm:201
 #, c-format
 msgid "Please click on a partition"
 msgstr "Prosím klepněte na oddíl"
 
-#: diskdrake/hd_gtk.pm:217 diskdrake/smbnfs_gtk.pm:63
+#: diskdrake/hd_gtk.pm:215 diskdrake/smbnfs_gtk.pm:63
 #, c-format
 msgid "Details"
 msgstr "Detaily"
 
-#: diskdrake/hd_gtk.pm:265
+#: diskdrake/hd_gtk.pm:263
 #, c-format
 msgid "No hard drives found"
 msgstr "Nenalezeny žádné pevné disky"
 
-#: diskdrake/hd_gtk.pm:292
+#: diskdrake/hd_gtk.pm:290
 #, c-format
 msgid "Unknown"
 msgstr "Neznámý"
 
-#: diskdrake/hd_gtk.pm:354
+#: diskdrake/hd_gtk.pm:352
 #, c-format
 msgid "Ext3"
 msgstr "Ext3"
 
-#: diskdrake/hd_gtk.pm:354
+#: diskdrake/hd_gtk.pm:352
 #, c-format
 msgid "XFS"
 msgstr "XFS"
 
-#: diskdrake/hd_gtk.pm:354
+#: diskdrake/hd_gtk.pm:352
 #, c-format
 msgid "Swap"
 msgstr "Odkládací (swap)"
 
-#: diskdrake/hd_gtk.pm:351
+#: diskdrake/hd_gtk.pm:352
 #, c-format
 msgid "SunOS"
 msgstr "SunOs"
 
-#: diskdrake/hd_gtk.pm:351
+#: diskdrake/hd_gtk.pm:352
 #, c-format
 msgid "HFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:351
+#: diskdrake/hd_gtk.pm:352
 #, c-format
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:352 services.pm:158
+#: diskdrake/hd_gtk.pm:353 services.pm:158
 #, c-format
 msgid "Other"
 msgstr "Další"
 
-#: diskdrake/hd_gtk.pm:352 diskdrake/interactive.pm:1239
+#: diskdrake/hd_gtk.pm:353 diskdrake/interactive.pm:1194
 #, c-format
 msgid "Empty"
 msgstr "Prázdný"
 
-#: diskdrake/hd_gtk.pm:356
+#: diskdrake/hd_gtk.pm:357
 #, c-format
 msgid "Filesystem types:"
 msgstr "Souborové systémy:"
 
-#: diskdrake/hd_gtk.pm:380 diskdrake/interactive.pm:291
-#: diskdrake/interactive.pm:380 diskdrake/interactive.pm:410
-#: diskdrake/interactive.pm:559 diskdrake/interactive.pm:743
-#: diskdrake/interactive.pm:801 diskdrake/interactive.pm:894
-#: diskdrake/interactive.pm:936 diskdrake/interactive.pm:937
-#: diskdrake/interactive.pm:1168 diskdrake/interactive.pm:1206
-#: diskdrake/interactive.pm:1342 do_pkgs.pm:16 do_pkgs.pm:35 do_pkgs.pm:53
-#: harddrake/sound.pm:285
+#: diskdrake/hd_gtk.pm:381 diskdrake/interactive.pm:287
+#: diskdrake/interactive.pm:359 diskdrake/interactive.pm:508
+#: diskdrake/interactive.pm:692 diskdrake/interactive.pm:750
+#: diskdrake/interactive.pm:839 diskdrake/interactive.pm:881
+#: diskdrake/interactive.pm:882 diskdrake/interactive.pm:1117
+#: diskdrake/interactive.pm:1155 diskdrake/interactive.pm:1298 do_pkgs.pm:16
+#: do_pkgs.pm:35 do_pkgs.pm:53 harddrake/sound.pm:286
 #, c-format
 msgid "Warning"
 msgstr "Varování"
 
-#: diskdrake/hd_gtk.pm:380
+#: diskdrake/hd_gtk.pm:381
 #, c-format
 msgid "This partition is already empty"
 msgstr "Tento oddíl je již prázdný"
 
-#: diskdrake/hd_gtk.pm:389
+#: diskdrake/hd_gtk.pm:390
 #, c-format
 msgid "Use ``Unmount'' first"
 msgstr "Nejprve použijte ''Odpojit''"
 
-#: diskdrake/hd_gtk.pm:389
-#, c-format
-msgid "Use ``%s'' instead"
+#: diskdrake/hd_gtk.pm:390
+#, fuzzy, c-format
+msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Místo toho použijte ''%s''"
 
-#: diskdrake/hd_gtk.pm:389 diskdrake/interactive.pm:423
-#: diskdrake/interactive.pm:597 diskdrake/interactive.pm:1075
+#: diskdrake/hd_gtk.pm:390 diskdrake/interactive.pm:372
+#: diskdrake/interactive.pm:546 diskdrake/interactive.pm:1024
 #: diskdrake/removable.pm:25 diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
 msgstr "Typ"
 
-#: diskdrake/interactive.pm:193
+#: diskdrake/interactive.pm:195
 #, c-format
 msgid "Choose another partition"
 msgstr "Vybrat jiný oddíl"
 
-#: diskdrake/interactive.pm:193
+#: diskdrake/interactive.pm:195
 #, c-format
 msgid "Choose a partition"
 msgstr "Vyberte oddíl"
 
-#: diskdrake/interactive.pm:255
-#, c-format
-msgid "Undo"
-msgstr "Zpět"
-
-#: diskdrake/interactive.pm:255
+#: diskdrake/interactive.pm:257
 #, c-format
 msgid "Toggle to normal mode"
 msgstr "Přepnout se do módu 'normální'"
 
-#: diskdrake/interactive.pm:255
+#: diskdrake/interactive.pm:257
 #, c-format
 msgid "Toggle to expert mode"
 msgstr "Přepnout se do režimu 'expert'"
 
-#: diskdrake/interactive.pm:269 diskdrake/interactive.pm:279
-#: diskdrake/interactive.pm:1153
+#: diskdrake/interactive.pm:265 diskdrake/interactive.pm:275
+#: diskdrake/interactive.pm:1102
 #, c-format
 msgid "Confirmation"
 msgstr "Potvrzení"
 
-#: diskdrake/interactive.pm:269
+#: diskdrake/interactive.pm:265
 #, c-format
 msgid "Continue anyway?"
 msgstr "Přesto chcete pokračovat?"
 
-#: diskdrake/interactive.pm:274
+#: diskdrake/interactive.pm:270
 #, c-format
 msgid "Quit without saving"
 msgstr "Konec bez uložení"
 
-#: diskdrake/interactive.pm:274
+#: diskdrake/interactive.pm:270
 #, c-format
 msgid "Quit without writing the partition table?"
 msgstr "Chcete skončit bez zapsání do tabulky oddílů?"
 
-#: diskdrake/interactive.pm:279
+#: diskdrake/interactive.pm:275
 #, c-format
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "Chcete uložit úpravy souboru /etc/fstab?"
 
-#: diskdrake/interactive.pm:286 fs/partitioning_wizard.pm:247
+#: diskdrake/interactive.pm:282 fs/partitioning_wizard.pm:251
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr "Aby se projevily změny v tabulce oddílů, musíte restartovat počítač"
 
-#: diskdrake/interactive.pm:291
+#: diskdrake/interactive.pm:287
 #, c-format
 msgid ""
 "You should format partition %s.\n"
@@ -1419,38 +1419,38 @@ msgstr ""
 "Jinak nebude do tabulky fstab zapsána položka pro přípojný bod %s.\n"
 "Chcete přesto skončit?"
 
-#: diskdrake/interactive.pm:304
+#: diskdrake/interactive.pm:300
 #, c-format
 msgid "Clear all"
 msgstr "Vše smazat"
 
-#: diskdrake/interactive.pm:305
+#: diskdrake/interactive.pm:301
 #, c-format
 msgid "Auto allocate"
 msgstr "Automaticky rozmístit"
 
-#: diskdrake/interactive.pm:306 diskdrake/interactive.pm:354
+#: diskdrake/interactive.pm:302 diskdrake/interactive.pm:350
 #: interactive/curses.pm:512
 #, c-format
 msgid "More"
 msgstr "Více"
 
-#: diskdrake/interactive.pm:311
+#: diskdrake/interactive.pm:307
 #, c-format
 msgid "Hard drive information"
 msgstr "Informace o pevném disku"
 
-#: diskdrake/interactive.pm:343
+#: diskdrake/interactive.pm:339
 #, c-format
 msgid "All primary partitions are used"
 msgstr "Všechny primární oddíly (partitions) jsou používány"
 
-#: diskdrake/interactive.pm:344
+#: diskdrake/interactive.pm:340
 #, c-format
 msgid "I can not add any more partitions"
 msgstr "Nemůžu přidat žádný další oddíl"
 
-#: diskdrake/interactive.pm:345
+#: diskdrake/interactive.pm:341
 #, c-format
 msgid ""
 "To have more partitions, please delete one to be able to create an extended "
@@ -1460,121 +1460,97 @@ msgstr ""
 "místě\n"
 "vytvořit rozšířený (extended) oddíl"
 
-#: diskdrake/interactive.pm:356
-#, c-format
-msgid "Save partition table"
-msgstr "Uložit tabulku oddílů"
-
-#: diskdrake/interactive.pm:357
-#, c-format
-msgid "Restore partition table"
-msgstr "Obnovit tabulku oddílů"
-
-#: diskdrake/interactive.pm:359
+#: diskdrake/interactive.pm:352
 #, c-format
 msgid "Reload partition table"
 msgstr "Znovu načíst tabulku oddílů"
 
-#: diskdrake/interactive.pm:369 diskdrake/interactive.pm:395
-#, c-format
-msgid "Select file"
-msgstr "Zvolit soubor"
-
-#: diskdrake/interactive.pm:381
-#, c-format
-msgid ""
-"The backup partition table has not the same size\n"
-"Still continue?"
-msgstr ""
-"Záložní tabulka oddílů nemá stejnou velikost\n"
-"Chcete přesto pokračovat?"
-
-#: diskdrake/interactive.pm:410
+#: diskdrake/interactive.pm:359
 #, c-format
 msgid "Detailed information"
 msgstr "Podrobné informace"
 
-#: diskdrake/interactive.pm:426 diskdrake/interactive.pm:756
+#: diskdrake/interactive.pm:375 diskdrake/interactive.pm:705
 #, c-format
 msgid "Resize"
 msgstr "Změnit velikost"
 
-#: diskdrake/interactive.pm:427
+#: diskdrake/interactive.pm:376
 #, c-format
 msgid "Format"
 msgstr "Formátovat"
 
-#: diskdrake/interactive.pm:429 diskdrake/interactive.pm:842
+#: diskdrake/interactive.pm:378 diskdrake/interactive.pm:791
 #, c-format
 msgid "Add to RAID"
 msgstr "Přidat do RAIDu"
 
-#: diskdrake/interactive.pm:430 diskdrake/interactive.pm:859
+#: diskdrake/interactive.pm:379 diskdrake/interactive.pm:809
 #, c-format
 msgid "Add to LVM"
 msgstr "Přidat do LVMu"
 
-#: diskdrake/interactive.pm:432
+#: diskdrake/interactive.pm:381
 #, c-format
 msgid "Delete"
 msgstr "Smazat"
 
-#: diskdrake/interactive.pm:433
+#: diskdrake/interactive.pm:382
 #, c-format
 msgid "Remove from RAID"
 msgstr "Odebrat z RAIDu"
 
-#: diskdrake/interactive.pm:434
+#: diskdrake/interactive.pm:383
 #, c-format
 msgid "Remove from LVM"
 msgstr "Odebrat z LVMu"
 
-#: diskdrake/interactive.pm:435
+#: diskdrake/interactive.pm:384
 #, c-format
 msgid "Modify RAID"
 msgstr "Změnit RAID"
 
-#: diskdrake/interactive.pm:436
+#: diskdrake/interactive.pm:385
 #, c-format
 msgid "Use for loopback"
 msgstr "Použít loopback"
 
-#: diskdrake/interactive.pm:447
+#: diskdrake/interactive.pm:396
 #, c-format
 msgid "Create"
 msgstr "Vytvořit"
 
-#: diskdrake/interactive.pm:491 diskdrake/interactive.pm:493
+#: diskdrake/interactive.pm:440 diskdrake/interactive.pm:442
 #, c-format
 msgid "Create a new partition"
 msgstr "Vytvořit nový oddíl"
 
-#: diskdrake/interactive.pm:495
+#: diskdrake/interactive.pm:444
 #, c-format
 msgid "Start sector: "
 msgstr "Počáteční sektor: "
 
-#: diskdrake/interactive.pm:498 diskdrake/interactive.pm:929
+#: diskdrake/interactive.pm:447 diskdrake/interactive.pm:874
 #, c-format
 msgid "Size in MB: "
 msgstr "Velikost v MB: "
 
-#: diskdrake/interactive.pm:500 diskdrake/interactive.pm:930
+#: diskdrake/interactive.pm:449 diskdrake/interactive.pm:875
 #, c-format
 msgid "Filesystem type: "
 msgstr "Souborový systém: "
 
-#: diskdrake/interactive.pm:506
+#: diskdrake/interactive.pm:455
 #, c-format
 msgid "Preference: "
 msgstr "Nastavení: "
 
-#: diskdrake/interactive.pm:509
+#: diskdrake/interactive.pm:458
 #, c-format
 msgid "Logical volume name "
 msgstr "Název logického svazku "
 
-#: diskdrake/interactive.pm:529
+#: diskdrake/interactive.pm:478
 #, c-format
 msgid ""
 "You can not create a new partition\n"
@@ -1585,52 +1561,53 @@ msgstr ""
 "(protože jste již dosáhli maximálního počtu primárních oddílů).\n"
 "Nejprve odstraňte některý primární oddíl a vytvořte oddíl rozšířený."
 
-#: diskdrake/interactive.pm:559
+#: diskdrake/interactive.pm:508
 #, c-format
 msgid "Remove the loopback file?"
 msgstr "Odstranit soubor loopbacku?"
 
-#: diskdrake/interactive.pm:581
+#: diskdrake/interactive.pm:530
 #, c-format
-msgid "After changing type of partition %s, all data on this partition will be lost"
+msgid ""
+"After changing type of partition %s, all data on this partition will be lost"
 msgstr "Tím, že změníte typ oddílu %s, přijdete o všechna jeho data"
 
-#: diskdrake/interactive.pm:594
+#: diskdrake/interactive.pm:543
 #, c-format
 msgid "Change partition type"
 msgstr "Změnit typ oddílu"
 
-#: diskdrake/interactive.pm:596 diskdrake/removable.pm:47
+#: diskdrake/interactive.pm:545 diskdrake/removable.pm:47
 #, c-format
 msgid "Which filesystem do you want?"
 msgstr "Který souborový systém chcete použít?"
 
-#: diskdrake/interactive.pm:603
-#, c-format
-msgid "Switching from ext2 to ext3"
+#: diskdrake/interactive.pm:552
+#, fuzzy, c-format
+msgid "Switching from %s to %s"
 msgstr "Přepínám z ext2 na ext3"
 
-#: diskdrake/interactive.pm:629 diskdrake/interactive.pm:632
+#: diskdrake/interactive.pm:578 diskdrake/interactive.pm:581
 #, c-format
 msgid "Which volume label?"
 msgstr "Které návěští svazku?"
 
-#: diskdrake/interactive.pm:633
+#: diskdrake/interactive.pm:582
 #, c-format
 msgid "Label:"
 msgstr "Návěští:"
 
-#: diskdrake/interactive.pm:647
+#: diskdrake/interactive.pm:596
 #, c-format
 msgid "Where do you want to mount the loopback file %s?"
 msgstr "Kam chcete připojit loopback soubor %s?"
 
-#: diskdrake/interactive.pm:648
+#: diskdrake/interactive.pm:597
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "Kam chcete připojit zařízení %s?"
 
-#: diskdrake/interactive.pm:653
+#: diskdrake/interactive.pm:602
 #, c-format
 msgid ""
 "Can not unset mount point as this partition is used for loop back.\n"
@@ -1639,58 +1616,58 @@ msgstr ""
 "Nemůžu smazat přípojný bod, protože tento oddíl je používán pro loopback.\n"
 "Odstraňte nejprve loopback"
 
-#: diskdrake/interactive.pm:683
+#: diskdrake/interactive.pm:632
 #, c-format
 msgid "Where do you want to mount %s?"
 msgstr "Kam chcete připojit %s?"
 
-#: diskdrake/interactive.pm:707 diskdrake/interactive.pm:790
-#: fs/partitioning_wizard.pm:141 fs/partitioning_wizard.pm:173
+#: diskdrake/interactive.pm:656 diskdrake/interactive.pm:739
+#: fs/partitioning_wizard.pm:145 fs/partitioning_wizard.pm:177
 #, c-format
 msgid "Resizing"
 msgstr "Měním velikost"
 
-#: diskdrake/interactive.pm:707
+#: diskdrake/interactive.pm:656
 #, c-format
 msgid "Computing FAT filesystem bounds"
 msgstr "Počítám hranice souborového systému fat"
 
-#: diskdrake/interactive.pm:743
+#: diskdrake/interactive.pm:692
 #, c-format
 msgid "This partition is not resizeable"
 msgstr "Na tomto diskovém oddílu nelze měnit velikost"
 
-#: diskdrake/interactive.pm:748
+#: diskdrake/interactive.pm:697
 #, c-format
 msgid "All data on this partition should be backed-up"
 msgstr "Všechna data z tohoto oddílu by měla být zálohována"
 
-#: diskdrake/interactive.pm:750
+#: diskdrake/interactive.pm:699
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr "Když změníte velikost oddílu %s, ztratíte tím všechna jeho data"
 
-#: diskdrake/interactive.pm:757
+#: diskdrake/interactive.pm:706
 #, c-format
 msgid "Choose the new size"
 msgstr "Zvolte novou velikost"
 
-#: diskdrake/interactive.pm:758
+#: diskdrake/interactive.pm:707
 #, c-format
 msgid "New size in MB: "
 msgstr "Nová velikost v MB: "
 
-#: diskdrake/interactive.pm:759
+#: diskdrake/interactive.pm:708
 #, c-format
 msgid "Minimum size: %s MB"
 msgstr "Minimální velikost: %s MB"
 
-#: diskdrake/interactive.pm:760
+#: diskdrake/interactive.pm:709
 #, c-format
 msgid "Maximum size: %s MB"
 msgstr "Maximální velikost: %s MB"
 
-#: diskdrake/interactive.pm:801 fs/partitioning_wizard.pm:181
+#: diskdrake/interactive.pm:750 fs/partitioning_wizard.pm:185
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
@@ -1699,27 +1676,27 @@ msgstr ""
 "Pro zachování integrity po provedené změně velikosti oddílu(ů) bude při\n"
 "dalším spuštění systému Windows provedena kontrola souborového systému."
 
-#: diskdrake/interactive.pm:842
+#: diskdrake/interactive.pm:791
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "Zvolte existující RAID pro přidání"
 
-#: diskdrake/interactive.pm:844 diskdrake/interactive.pm:861
+#: diskdrake/interactive.pm:793 diskdrake/interactive.pm:811
 #, c-format
 msgid "new"
 msgstr "nový"
 
-#: diskdrake/interactive.pm:859
+#: diskdrake/interactive.pm:809
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "Zvolte existující LVM pro přidání"
 
-#: diskdrake/interactive.pm:866
+#: diskdrake/interactive.pm:816
 #, c-format
 msgid "LVM name?"
 msgstr "Název pro LVM?"
 
-#: diskdrake/interactive.pm:894
+#: diskdrake/interactive.pm:839
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
@@ -1728,107 +1705,107 @@ msgstr ""
 "Fyzický svazek %s se stále používá.\n"
 "Chcete přesunout používané fyzické oblasti na tomto svazku do jiných svazků?"
 
-#: diskdrake/interactive.pm:896
+#: diskdrake/interactive.pm:841
 #, c-format
 msgid "Moving physical extents"
 msgstr "Přesunuji fyzické oblasti"
 
-#: diskdrake/interactive.pm:914
+#: diskdrake/interactive.pm:859
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "Tento oddíl nemůže být použit pro loopback"
 
-#: diskdrake/interactive.pm:927
+#: diskdrake/interactive.pm:872
 #, c-format
 msgid "Loopback"
 msgstr "Loopback"
 
-#: diskdrake/interactive.pm:928
+#: diskdrake/interactive.pm:873
 #, c-format
 msgid "Loopback file name: "
 msgstr "Název souboru loopbacku:"
 
-#: diskdrake/interactive.pm:933
+#: diskdrake/interactive.pm:878
 #, c-format
 msgid "Give a file name"
 msgstr "Zadejte název souboru"
 
-#: diskdrake/interactive.pm:936
+#: diskdrake/interactive.pm:881
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "Soubor už je používán jiným loopbackem, zvolte si jiný"
 
-#: diskdrake/interactive.pm:937
+#: diskdrake/interactive.pm:882
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "Soubor už existuje. Mám ho použít?"
 
-#: diskdrake/interactive.pm:966 diskdrake/interactive.pm:969
+#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:917
 #, c-format
 msgid "Mount options"
 msgstr "Volby pro připojení"
 
-#: diskdrake/interactive.pm:976
+#: diskdrake/interactive.pm:924
 #, c-format
 msgid "Various"
 msgstr "Další"
 
-#: diskdrake/interactive.pm:1041
+#: diskdrake/interactive.pm:989
 #, c-format
 msgid "device"
 msgstr "zařízení"
 
-#: diskdrake/interactive.pm:1042
+#: diskdrake/interactive.pm:990
 #, c-format
 msgid "level"
 msgstr "úroveň"
 
-#: diskdrake/interactive.pm:1043
+#: diskdrake/interactive.pm:991
 #, c-format
 msgid "chunk size in KiB"
 msgstr "velikost bloku v kB"
 
-#: diskdrake/interactive.pm:1060
+#: diskdrake/interactive.pm:1009
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Buďte opatrní: tato akce je nebezpečná."
 
-#: diskdrake/interactive.pm:1075
+#: diskdrake/interactive.pm:1024
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Jaký typ diskového oddílu?"
 
-#: diskdrake/interactive.pm:1113
+#: diskdrake/interactive.pm:1062
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Aby se změny uplatnily budete muset restartovat počítač"
 
-#: diskdrake/interactive.pm:1122
+#: diskdrake/interactive.pm:1071
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Bude zapsána nová tabulka oddílů na disku %s!"
 
-#: diskdrake/interactive.pm:1148
+#: diskdrake/interactive.pm:1097
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr "Když naformátujete oddíl %s, ztratíte tím všechna jeho data"
 
-#: diskdrake/interactive.pm:1153 fs/partitioning.pm:49
+#: diskdrake/interactive.pm:1102 fs/partitioning.pm:49
 #, c-format
 msgid "Check bad blocks?"
 msgstr "Otestovat na vadné stopy?"
 
-#: diskdrake/interactive.pm:1167
+#: diskdrake/interactive.pm:1116
 #, c-format
 msgid "Move files to the new partition"
 msgstr "Přesunout soubory na nový diskový oddíl"
 
-#: diskdrake/interactive.pm:1167
+#: diskdrake/interactive.pm:1116
 #, c-format
 msgid "Hide files"
 msgstr "Schovat soubory"
 
-#: diskdrake/interactive.pm:1168
+#: diskdrake/interactive.pm:1117
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -1844,108 +1821,108 @@ msgstr ""
 "Můžete buď přesunout soubory na oddíl, který zde bude připojen, nebo je "
 "nechat tam, kde jsou (a tak je překryjete obsahem připojeného oddílu)"
 
-#: diskdrake/interactive.pm:1183
+#: diskdrake/interactive.pm:1132
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "Přesunuji soubory na nový diskový oddíl"
 
-#: diskdrake/interactive.pm:1187
+#: diskdrake/interactive.pm:1136
 #, c-format
 msgid "Copying %s"
 msgstr "Kopíruji %s"
 
-#: diskdrake/interactive.pm:1191
+#: diskdrake/interactive.pm:1140
 #, c-format
 msgid "Removing %s"
 msgstr "Odstraňuji %s"
 
-#: diskdrake/interactive.pm:1205
+#: diskdrake/interactive.pm:1154
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "oddíl %s je nyní rozpoznán jako %s"
 
-#: diskdrake/interactive.pm:1206
+#: diskdrake/interactive.pm:1155
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr "Oddíly byly přečíslovány: "
 
-#: diskdrake/interactive.pm:1226 diskdrake/interactive.pm:1288
+#: diskdrake/interactive.pm:1180 diskdrake/interactive.pm:1243
 #, c-format
 msgid "Device: "
 msgstr "Zařízení: "
 
-#: diskdrake/interactive.pm:1227
+#: diskdrake/interactive.pm:1181
 #, c-format
 msgid "Volume label: "
 msgstr "Název svazku: "
 
-#: diskdrake/interactive.pm:1241
+#: diskdrake/interactive.pm:1182
 #, c-format
 msgid "UUID: "
 msgstr "UUID: "
 
-#: diskdrake/interactive.pm:1242
+#: diskdrake/interactive.pm:1183
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "Písmeno v DOSu: %s (jenom odhad)\n"
 
-#: diskdrake/interactive.pm:1232 diskdrake/interactive.pm:1241
-#: diskdrake/interactive.pm:1306
+#: diskdrake/interactive.pm:1187 diskdrake/interactive.pm:1196
+#: diskdrake/interactive.pm:1262
 #, c-format
 msgid "Type: "
 msgstr "Typ: "
 
-#: diskdrake/interactive.pm:1236
+#: diskdrake/interactive.pm:1191 diskdrake/interactive.pm:1247
 #, c-format
 msgid "Name: "
 msgstr "Jméno: "
 
-#: diskdrake/interactive.pm:1243
+#: diskdrake/interactive.pm:1198
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Začátek: sektor %s\n"
 
-#: diskdrake/interactive.pm:1244
+#: diskdrake/interactive.pm:1199
 #, c-format
 msgid "Size: %s"
 msgstr "Velikost: %s"
 
-#: diskdrake/interactive.pm:1246
+#: diskdrake/interactive.pm:1201
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s sektorů"
 
-#: diskdrake/interactive.pm:1248
+#: diskdrake/interactive.pm:1203
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "Od cylindru %d do cylindru %d\n"
 
-#: diskdrake/interactive.pm:1249
+#: diskdrake/interactive.pm:1204
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr "Počet logických oblastí: %d\n"
 
-#: diskdrake/interactive.pm:1250
+#: diskdrake/interactive.pm:1205
 #, c-format
 msgid "Formatted\n"
 msgstr "Naformátovaný\n"
 
-#: diskdrake/interactive.pm:1251
+#: diskdrake/interactive.pm:1206
 #, c-format
 msgid "Not formatted\n"
 msgstr "Nenaformátovaný\n"
 
-#: diskdrake/interactive.pm:1252
+#: diskdrake/interactive.pm:1207
 #, c-format
 msgid "Mounted\n"
 msgstr "Připojený\n"
 
-#: diskdrake/interactive.pm:1253
+#: diskdrake/interactive.pm:1208
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1258
+#: diskdrake/interactive.pm:1213
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -1954,7 +1931,7 @@ msgstr ""
 "Loopback soubor(y): \n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1259
+#: diskdrake/interactive.pm:1214
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -1963,27 +1940,27 @@ msgstr ""
 "Standardní startovací oddíl\n"
 "    (pro MS-DOS, ne pro LILO)\n"
 
-#: diskdrake/interactive.pm:1261
+#: diskdrake/interactive.pm:1216
 #, c-format
 msgid "Level %s\n"
 msgstr "Úroveň %s\n"
 
-#: diskdrake/interactive.pm:1262
+#: diskdrake/interactive.pm:1217
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "Velikost bloku (chunk) %d kB\n"
 
-#: diskdrake/interactive.pm:1263
+#: diskdrake/interactive.pm:1218
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "RAID disky %s\n"
 
-#: diskdrake/interactive.pm:1265
+#: diskdrake/interactive.pm:1220
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Loopback soubor: %s"
 
-#: diskdrake/interactive.pm:1268
+#: diskdrake/interactive.pm:1223
 #, c-format
 msgid ""
 "\n"
@@ -1996,7 +1973,7 @@ msgstr ""
 "s ovladači, je lepší\n"
 "no nechat neporušený.\n"
 
-#: diskdrake/interactive.pm:1271
+#: diskdrake/interactive.pm:1226
 #, c-format
 msgid ""
 "\n"
@@ -2009,77 +1986,78 @@ msgstr ""
 "oddíl je pro spuštění\n"
 "dalšího systému.\n"
 
-#: diskdrake/interactive.pm:1280
+#: diskdrake/interactive.pm:1235
 #, c-format
 msgid "Free space on %s (%s)"
 msgstr "Volné místo na %s (%s)"
 
-#: diskdrake/interactive.pm:1289
+#: diskdrake/interactive.pm:1244
 #, c-format
 msgid "Read-only"
 msgstr "Pouze pro čtení"
 
-#: diskdrake/interactive.pm:1290
+#: diskdrake/interactive.pm:1245
 #, c-format
 msgid "Size: %s\n"
 msgstr "Velikost: %s\n"
 
-#: diskdrake/interactive.pm:1291
+#: diskdrake/interactive.pm:1246
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Geometrie: %s cylindrů, %s hlav, %s sektorů\n"
 
-#: diskdrake/interactive.pm:1292
-#, c-format
-msgid "Info: "
-msgstr "Informace: "
+#: diskdrake/interactive.pm:1248
+#, fuzzy, c-format
+msgid "Medium type: "
+msgstr "Souborový systém: "
 
-#: diskdrake/interactive.pm:1293
+#: diskdrake/interactive.pm:1249
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "LVM disky %s\n"
 
-#: diskdrake/interactive.pm:1294
+#: diskdrake/interactive.pm:1250
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Typ tabulky oddílů: %s\n"
 
-#: diskdrake/interactive.pm:1295
+#: diskdrake/interactive.pm:1251
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "na kanále %d id %d\n"
 
-#: diskdrake/interactive.pm:1338
+#: diskdrake/interactive.pm:1294
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "Klíč pro šifrovaný souborový systém"
 
-#: diskdrake/interactive.pm:1339
+#: diskdrake/interactive.pm:1295
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Vyberte si šifrovací klíč pro souborový systém"
 
-#: diskdrake/interactive.pm:1342
+#: diskdrake/interactive.pm:1298
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
-msgstr "Tento šifrovací klíč je příliš jednoduchý (musí být alespoň %d znaků dlouhý)"
+msgstr ""
+"Tento šifrovací klíč je příliš jednoduchý (musí být alespoň %d znaků dlouhý)"
 
-#: diskdrake/interactive.pm:1343
+#: diskdrake/interactive.pm:1299
 #, c-format
 msgid "The encryption keys do not match"
 msgstr "Šifrovací klíče se neshodují"
 
-#: diskdrake/interactive.pm:1346
+#: diskdrake/interactive.pm:1302
 #, c-format
 msgid "Encryption key"
 msgstr "Šifrovací klíč"
 
-#: diskdrake/interactive.pm:1347
+#: diskdrake/interactive.pm:1303
 #, c-format
 msgid "Encryption key (again)"
 msgstr "Šifrovací klíč (znovu)"
 
-#: diskdrake/interactive.pm:1349
+#: diskdrake/interactive.pm:1305
 #, c-format
 msgid "Encryption algorithm"
 msgstr "Šifrovací algoritmus"
@@ -2089,10 +2067,10 @@ msgstr "Šifrovací algoritmus"
 msgid "Change type"
 msgstr "Změnit typ"
 
-#: diskdrake/smbnfs_gtk.pm:81 interactive.pm:126 interactive.pm:539
+#: diskdrake/smbnfs_gtk.pm:81 interactive.pm:126 interactive.pm:543
 #: interactive/curses.pm:260 interactive/http.pm:104 interactive/http.pm:160
-#: interactive/stdio.pm:39 interactive/stdio.pm:142 ugtk2.pm:407 ugtk2.pm:509
-#: ugtk2.pm:518 ugtk2.pm:791
+#: interactive/stdio.pm:39 interactive/stdio.pm:148 ugtk2.pm:408 ugtk2.pm:510
+#: ugtk2.pm:519 ugtk2.pm:801
 #, c-format
 msgid "Cancel"
 msgstr "Zrušit"
@@ -2119,7 +2097,8 @@ msgstr "Další"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid "Please enter your username, password and domain name to access this host."
+msgid ""
+"Please enter your username, password and domain name to access this host."
 msgstr ""
 "Prosím zadejte své uživatelské jméno, heslo a název domény, pod kterými "
 "chcete přistupovat k tomuto počítači."
@@ -2159,12 +2138,12 @@ msgstr "Chybí potřebný balíček %s"
 msgid "The following packages need to be installed:\n"
 msgstr "Je potřeba nainstalovat tyto balíčky:\n"
 
-#: do_pkgs.pm:209
+#: do_pkgs.pm:216
 #, c-format
 msgid "Installing packages..."
 msgstr "Instaluji balíčky..."
 
-#: do_pkgs.pm:255
+#: do_pkgs.pm:258
 #, c-format
 msgid "Removing packages..."
 msgstr "Odstraňuji balíčky..."
@@ -2178,27 +2157,27 @@ msgstr ""
 "Stala se chyba - nebylo nalezeno žádné zařízení, na kterém by se daly "
 "vytvořit nové souborové systémy. Zkontrolujte prosím hardware"
 
-#: fs/any.pm:62 fs/partitioning_wizard.pm:55
+#: fs/any.pm:74 fs/partitioning_wizard.pm:59
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "Musíte mít FAT oddíl připojený na /boot/efi"
 
-#: fs/format.pm:60 fs/format.pm:67
+#: fs/format.pm:62 fs/format.pm:69
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Formátuji oddíl %s"
 
-#: fs/format.pm:64
+#: fs/format.pm:66
 #, c-format
 msgid "Creating and formatting file %s"
 msgstr "Vytvářím a formátuji soubor %s"
 
-#: fs/format.pm:117
+#: fs/format.pm:119
 #, c-format
 msgid "I do not know how to format %s in type %s"
 msgstr "nevím jak naformátovat %s na typ %s"
 
-#: fs/format.pm:122 fs/format.pm:124
+#: fs/format.pm:124 fs/format.pm:126
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "%s formátování %s skončilo chybou"
@@ -2223,32 +2202,32 @@ msgstr "připojení oddílu %s v adresáři %s selhalo"
 msgid "Checking %s"
 msgstr "Kontroluji %s"
 
-#: fs/mount.pm:118 partition_table.pm:384
+#: fs/mount.pm:119 partition_table.pm:395
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "chyba odpojování %s: %s"
 
-#: fs/mount.pm:133
+#: fs/mount.pm:134
 #, c-format
 msgid "Enabling swap partition %s"
 msgstr "Aktivuji odkládací oddíl %s"
 
-#: fs/mount_options.pm:111
+#: fs/mount_options.pm:115
 #, c-format
 msgid "Use an encrypted file system"
 msgstr "Použít šifrovaný souborový systém"
 
-#: fs/mount_options.pm:113
+#: fs/mount_options.pm:117
 #, c-format
 msgid "Flush write cache on file close"
 msgstr "Vyprázdnit vyrovnávací paměť pro zápis při zavření souboru"
 
-#: fs/mount_options.pm:115
+#: fs/mount_options.pm:119
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
 msgstr "Počítat skupinové kvóty na disku a volitelně vynucovat omezení"
 
-#: fs/mount_options.pm:117
+#: fs/mount_options.pm:121
 #, c-format
 msgid ""
 "Do not update inode access times on this file system\n"
@@ -2258,7 +2237,7 @@ msgstr ""
 "(např. pro rychlejší přístup k frontě zpráv při provozování diskusního "
 "serveru)."
 
-#: fs/mount_options.pm:123
+#: fs/mount_options.pm:124
 #, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
@@ -2268,7 +2247,7 @@ msgstr ""
 "(např. pro rychlejší přístup k frontě zpráv při provozování diskusního "
 "serveru)."
 
-#: fs/mount_options.pm:123
+#: fs/mount_options.pm:127
 #, c-format
 msgid ""
 "Can only be mounted explicitly (i.e.,\n"
@@ -2277,12 +2256,13 @@ msgstr ""
 "Lze připojit pouze explicitně (tj. volba -a\n"
 "způsobí, že souborový systém nebude připojen)."
 
-#: fs/mount_options.pm:126
+#: fs/mount_options.pm:130
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
-msgstr "Neinterpretovat speciální znaková či bloková zařízení na souborovém systému."
+msgstr ""
+"Neinterpretovat speciální znaková či bloková zařízení na souborovém systému."
 
-#: fs/mount_options.pm:128
+#: fs/mount_options.pm:132
 #, c-format
 msgid ""
 "Do not allow execution of any binaries on the mounted\n"
@@ -2294,7 +2274,7 @@ msgstr ""
 "je souborový systém, který obsahuje binární aplikace pro jinou architekturu\n"
 "než je vlastní systém serveru."
 
-#: fs/mount_options.pm:132
+#: fs/mount_options.pm:136
 #, c-format
 msgid ""
 "Do not allow set-user-identifier or set-group-identifier\n"
@@ -2305,42 +2285,42 @@ msgstr ""
 "(Není to nebezpečné, ale v případě, že máte instalovaný suidperl(1) to\n"
 "potenciálně nebezpečné být může.)"
 
-#: fs/mount_options.pm:136
+#: fs/mount_options.pm:140
 #, c-format
 msgid "Mount the file system read-only."
 msgstr "Připojit souborový systém pouze pro čtení."
 
-#: fs/mount_options.pm:138
+#: fs/mount_options.pm:142
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
 msgstr "Všechny vstupně/výstupní operace budou prováděny synchronně."
 
-#: fs/mount_options.pm:140
+#: fs/mount_options.pm:144
 #, c-format
 msgid "Allow every user to mount and umount the file system."
 msgstr "Povolit připojení a odpojení souborového systému každému uživateli."
 
-#: fs/mount_options.pm:142
+#: fs/mount_options.pm:146
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
 msgstr "Povolit obyčejnému uživateli připojit souborový systém."
 
-#: fs/mount_options.pm:144
+#: fs/mount_options.pm:148
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr "Počítat uživatelské kvóty na disku a volitelně vynucovat omezení"
 
-#: fs/mount_options.pm:146
+#: fs/mount_options.pm:150
 #, c-format
 msgid "Support \"user.\" extended attributes"
 msgstr "Podporovat rozšířené atributy \"user.\""
 
-#: fs/mount_options.pm:148
+#: fs/mount_options.pm:152
 #, c-format
 msgid "Give write access to ordinary users"
 msgstr "Umožnit zápis běžným uživatelům"
 
-#: fs/mount_options.pm:150
+#: fs/mount_options.pm:154
 #, c-format
 msgid "Give read-only access to ordinary users"
 msgstr "Umožnit běžným uživatelům pouze čtení"
@@ -2384,7 +2364,7 @@ msgstr ""
 msgid "Not enough swap space to fulfill installation, please add some"
 msgstr "Není dostatek odkládacího prostoru k instalaci, prosím přidejte nějaký"
 
-#: fs/partitioning_wizard.pm:47
+#: fs/partitioning_wizard.pm:51
 #, c-format
 msgid ""
 "You must have a root partition.\n"
@@ -2396,7 +2376,7 @@ msgstr ""
 "(nebo vytvořit nový), zvolit 'Přípojný bod'\n"
 "a nastavit ho na '/'"
 
-#: fs/partitioning_wizard.pm:52
+#: fs/partitioning_wizard.pm:56
 #, c-format
 msgid ""
 "You do not have a swap partition.\n"
@@ -2407,69 +2387,69 @@ msgstr ""
 "\n"
 "Chcete přesto pokračovat?"
 
-#: fs/partitioning_wizard.pm:80
+#: fs/partitioning_wizard.pm:84
 #, c-format
 msgid "Use free space"
 msgstr "Použít volné místo"
 
-#: fs/partitioning_wizard.pm:82
+#: fs/partitioning_wizard.pm:86
 #, c-format
 msgid "Not enough free space to allocate new partitions"
 msgstr "Není dostatek místa pro vytvoření nových diskových oddílů"
 
-#: fs/partitioning_wizard.pm:90
+#: fs/partitioning_wizard.pm:94
 #, c-format
 msgid "Use existing partitions"
 msgstr "Použít existující oddíly"
 
-#: fs/partitioning_wizard.pm:92
+#: fs/partitioning_wizard.pm:96
 #, c-format
 msgid "There is no existing partition to use"
 msgstr "Není zde žádný existující oddíl k použití"
 
-#: fs/partitioning_wizard.pm:99
+#: fs/partitioning_wizard.pm:103
 #, c-format
 msgid "Use the Microsoft Windows® partition for loopback"
 msgstr "Použít oddíl Microsoft Windows® jako loopback"
 
-#: fs/partitioning_wizard.pm:102
+#: fs/partitioning_wizard.pm:106
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Který diskový oddíl chcete použít pro Linux4Win?"
 
-#: fs/partitioning_wizard.pm:104
+#: fs/partitioning_wizard.pm:108
 #, c-format
 msgid "Choose the sizes"
 msgstr "Zvolte velikosti"
 
-#: fs/partitioning_wizard.pm:105
+#: fs/partitioning_wizard.pm:109
 #, c-format
 msgid "Root partition size in MB: "
 msgstr "Velikost kořenového oddílu v MB:"
 
-#: fs/partitioning_wizard.pm:106
+#: fs/partitioning_wizard.pm:110
 #, c-format
 msgid "Swap partition size in MB: "
 msgstr "Velikost odkládacího oddílu v MB: "
 
-#: fs/partitioning_wizard.pm:115
+#: fs/partitioning_wizard.pm:119
 #, c-format
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
 "Nejsou zde žádné FAT oddíly, které by bylo možné použít pro loopback (nebo "
 "není dostatek místa)"
 
-#: fs/partitioning_wizard.pm:122
+#: fs/partitioning_wizard.pm:126
 #, c-format
 msgid "Use the free space on the Microsoft Windows® partition"
 msgstr "Použít volné místo na oddílu Microsoft Windows®"
 
-#: fs/partitioning_wizard.pm:124
+#: fs/partitioning_wizard.pm:128
 #, c-format
 msgid "Which partition do you want to resize?"
 msgstr "Na kterém oddílu chcete změnit velikost?"
 
-#: fs/partitioning_wizard.pm:138
+#: fs/partitioning_wizard.pm:142
 #, c-format
 msgid ""
 "The FAT resizer is unable to handle your partition, \n"
@@ -2478,12 +2458,12 @@ msgstr ""
 "Změnu velikost FAT není možné provést, \n"
 "vyskytla se následující chyba: %s"
 
-#: fs/partitioning_wizard.pm:141
+#: fs/partitioning_wizard.pm:145
 #, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
 msgstr "Počítám volné místo na oddílu Microsoft Windows®"
 
-#: fs/partitioning_wizard.pm:148
+#: fs/partitioning_wizard.pm:152
 #, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
@@ -2494,7 +2474,7 @@ msgstr ""
 "počítač do systému Microsoft Windows®, použijte program 'defrag' a potom "
 "spusťte opět instalaci Mandriva Linuxu."
 
-#: fs/partitioning_wizard.pm:151
+#: fs/partitioning_wizard.pm:155
 #, c-format
 msgid ""
 "WARNING!\n"
@@ -2529,8 +2509,8 @@ msgstr ""
 "Až si budete jistí, že chcete pokračovat, stiskněte %s."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:160 interactive.pm:538 interactive/curses.pm:263
-#: ugtk2.pm:511
+#: fs/partitioning_wizard.pm:164 interactive.pm:542 interactive/curses.pm:263
+#: ugtk2.pm:512
 #, c-format
 msgid "Next"
 msgstr "Další"
@@ -2547,59 +2527,59 @@ msgstr ""
 "Jakou velikost oddílu chcete nechat pro Microsoft Windows® na diskovém "
 "oddílu %s?"
 
-#: fs/partitioning_wizard.pm:164
+#: fs/partitioning_wizard.pm:168
 #, c-format
 msgid "Size"
 msgstr "Velikost"
 
-#: fs/partitioning_wizard.pm:173
+#: fs/partitioning_wizard.pm:177
 #, c-format
 msgid "Resizing Microsoft Windows® partition"
 msgstr "Měním velikost oddílu s Microsoft Windows®"
 
-#: fs/partitioning_wizard.pm:178
+#: fs/partitioning_wizard.pm:182
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr "Změna FAT oddílu neuspěla: %s"
 
-#: fs/partitioning_wizard.pm:193
+#: fs/partitioning_wizard.pm:197
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "Nejsou zde žádné FAT oddíly, které by bylo možné změnit (nebo není dostatek "
 "místa)"
 
-#: fs/partitioning_wizard.pm:198
+#: fs/partitioning_wizard.pm:202
 #, c-format
 msgid "Remove Microsoft Windows®"
 msgstr "Odstranit Microsoft Windows®"
 
-#: fs/partitioning_wizard.pm:198
+#: fs/partitioning_wizard.pm:202
 #, c-format
 msgid "Erase and use entire disk"
 msgstr "Smazat a použít celý disk"
 
-#: fs/partitioning_wizard.pm:200
+#: fs/partitioning_wizard.pm:204
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "Máte více než jeden pevný disk, na který chcete instalovat Linux?"
 
-#: fs/partitioning_wizard.pm:206
+#: fs/partitioning_wizard.pm:210 fsedit.pm:566
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "VŠECHNY diskové oddíly a data na disku %s budou zrušeny"
 
-#: fs/partitioning_wizard.pm:217
+#: fs/partitioning_wizard.pm:221
 #, c-format
 msgid "Custom disk partitioning"
 msgstr "Vlastní rozdělení disku"
 
-#: fs/partitioning_wizard.pm:223
+#: fs/partitioning_wizard.pm:227
 #, c-format
 msgid "Use fdisk"
 msgstr "Použít fdisk"
 
-#: fs/partitioning_wizard.pm:226
+#: fs/partitioning_wizard.pm:230
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -2608,27 +2588,27 @@ msgstr ""
 "Nyní můžete rozdělit váš pevný disk %s.\n"
 "Až skončíte, nezapomeňte uložit změny pomocí 'w'"
 
-#: fs/partitioning_wizard.pm:266
+#: fs/partitioning_wizard.pm:270
 #, c-format
 msgid "I can not find any room for installing"
 msgstr "Nemůžu najít žádné volné místo pro instalaci"
 
-#: fs/partitioning_wizard.pm:270
+#: fs/partitioning_wizard.pm:274
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "Průvodce oddíly DrakX našel následující řešení rozdělení disku:"
 
-#: fs/partitioning_wizard.pm:278
+#: fs/partitioning_wizard.pm:282
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Vytváření diskových oddílů selhalo: %s"
 
-#: fs/type.pm:367
+#: fs/type.pm:368
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
 msgstr "Nemůžete použít JFS pro oddíl menší než 16MB"
 
-#: fs/type.pm:368
+#: fs/type.pm:369
 #, c-format
 msgid "You can not use ReiserFS for partitions smaller than 32MB"
 msgstr "Nemůžete použít ReiserFS pro oddíl menší než 32MB"
@@ -2648,7 +2628,7 @@ msgstr "server"
 msgid "BIOS software RAID detected on disks %s. Activate it?"
 msgstr "Na discích %s byl nalezen softwarový RAID řízený BIOSem. Aktivovat?"
 
-#: fsedit.pm:230
+#: fsedit.pm:224
 #, c-format
 msgid ""
 "I can not read the partition table of device %s, it's too corrupted for me :"
@@ -2667,22 +2647,22 @@ msgstr ""
 "\n"
 "Souhlasíte s tím, že přijdete o všechny oddíly?\n"
 
-#: fsedit.pm:403
+#: fsedit.pm:393
 #, c-format
 msgid "Mount points must begin with a leading /"
 msgstr "Přípojné body (mount points) musí začínat '/'"
 
-#: fsedit.pm:404
+#: fsedit.pm:394
 #, c-format
 msgid "Mount points should contain only alphanumerical characters"
 msgstr "Název přípojného bodu může obsahovat pouze písmena a číslice"
 
-#: fsedit.pm:405
+#: fsedit.pm:395
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Oddíl s přípojným bodem %s už existuje\n"
 
-#: fsedit.pm:409
+#: fsedit.pm:399
 #, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
@@ -2693,7 +2673,7 @@ msgstr ""
 "S tím se není schopný vypořádat žádný zaváděcí program bez použití oddílu\n"
 "/boot. Ujistěte se prosím, že jste tento oddíl přidali"
 
-#: fsedit.pm:415
+#: fsedit.pm:405
 #, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
@@ -2702,7 +2682,7 @@ msgstr ""
 "Pro přípojný bod %s nemůžete použít Logický svazek LVM, jelikož spadá do "
 "více fyzických svazků"
 
-#: fsedit.pm:417
+#: fsedit.pm:407
 #, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
@@ -2715,12 +2695,12 @@ msgstr ""
 "svazků.\n"
 "Měli byste vytvořit nejprve oddíl /boot"
 
-#: fsedit.pm:421 fsedit.pm:423
+#: fsedit.pm:411 fsedit.pm:413
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Tento adresář musí kromě kořenového souborového systému zůstat"
 
-#: fsedit.pm:425 fsedit.pm:427
+#: fsedit.pm:415 fsedit.pm:417
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
@@ -2729,273 +2709,273 @@ msgstr ""
 "Pro tento přípojný bod potřebujete opravdový souborový systém (ext2/ext3, "
 "reiserFS, XFS nebo JFS)\n"
 
-#: fsedit.pm:429
+#: fsedit.pm:419
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
 msgstr "Nelze použít kryptovaný souborový systém na připojený bod %s"
 
-#: fsedit.pm:493
+#: fsedit.pm:483
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "Pro automatické rozdělení disku není dostatek místa"
 
-#: fsedit.pm:495
+#: fsedit.pm:485
 #, c-format
 msgid "Nothing to do"
 msgstr "Nic nedělat"
 
-#: harddrake/data.pm:62
+#: harddrake/data.pm:64
+#, c-format
+msgid "SATA controllers"
+msgstr "SATA řadiče"
+
+#: harddrake/data.pm:73
+#, c-format
+msgid "RAID controllers"
+msgstr "RAID řadiče"
+
+#: harddrake/data.pm:83
+#, c-format
+msgid "(E)IDE/ATA controllers"
+msgstr "(E)IDE/ATA řadiče"
+
+#: harddrake/data.pm:93
+#, c-format
+msgid "Card readers"
+msgstr "Čtečky karet"
+
+#: harddrake/data.pm:102
+#, c-format
+msgid "Firewire controllers"
+msgstr "Firewire řadiče"
+
+#: harddrake/data.pm:111
+#, c-format
+msgid "PCMCIA controllers"
+msgstr "PCMCIA řadiče"
+
+#: harddrake/data.pm:120
+#, c-format
+msgid "SCSI controllers"
+msgstr "SCSI řadiče"
+
+#: harddrake/data.pm:129
+#, c-format
+msgid "USB controllers"
+msgstr "USB řadiče"
+
+#: harddrake/data.pm:138
+#, c-format
+msgid "USB ports"
+msgstr "USB porty"
+
+#: harddrake/data.pm:147
+#, c-format
+msgid "SMBus controllers"
+msgstr "SMBus řadiče"
+
+#: harddrake/data.pm:156
+#, c-format
+msgid "Bridges and system controllers"
+msgstr "Systémové řadiče a můstky"
+
+#: harddrake/data.pm:168
 #, c-format
 msgid "Floppy"
 msgstr "Disketa"
 
-#: harddrake/data.pm:72
+#: harddrake/data.pm:178
 #, c-format
 msgid "Zip"
 msgstr "Zip"
 
-#: harddrake/data.pm:88
+#: harddrake/data.pm:194
 #, c-format
 msgid "Hard Disk"
 msgstr "Pevný disk"
 
-#: harddrake/data.pm:97
+#: harddrake/data.pm:204
+#, c-format
+msgid "USB Mass Storage Devices"
+msgstr "Úložná zařízení USB"
+
+#: harddrake/data.pm:213
 #, c-format
 msgid "CDROM"
 msgstr "CDROM"
 
-#: harddrake/data.pm:107
+#: harddrake/data.pm:223
 #, c-format
 msgid "CD/DVD burners"
 msgstr "CD/DVD vypalovačky"
 
-#: harddrake/data.pm:117
+#: harddrake/data.pm:233
 #, c-format
 msgid "DVD-ROM"
 msgstr "DVD-ROM"
 
-#: harddrake/data.pm:127
+#: harddrake/data.pm:243
 #, c-format
 msgid "Tape"
 msgstr "Páska"
 
-#: harddrake/data.pm:138
+#: harddrake/data.pm:254
 #, c-format
 msgid "AGP controllers"
 msgstr "AGP řadiče"
 
-#: harddrake/data.pm:147
+#: harddrake/data.pm:263
 #, c-format
 msgid "Videocard"
 msgstr "Grafická karta"
 
-#: harddrake/data.pm:156
+#: harddrake/data.pm:272
 #, c-format
 msgid "DVB card"
 msgstr "DVB karta"
 
-#: harddrake/data.pm:164
+#: harddrake/data.pm:280
 #, c-format
 msgid "Tvcard"
 msgstr "TV karta"
 
-#: harddrake/data.pm:174
+#: harddrake/data.pm:289
 #, c-format
 msgid "Other MultiMedia devices"
 msgstr "Další multimediální zařízení"
 
-#: harddrake/data.pm:183
+#: harddrake/data.pm:298
 #, c-format
 msgid "Soundcard"
 msgstr "Zvuková karta"
 
-#: harddrake/data.pm:196
+#: harddrake/data.pm:311
 #, c-format
 msgid "Webcam"
 msgstr "Webová kamera"
 
-#: harddrake/data.pm:210
+#: harddrake/data.pm:325
 #, c-format
 msgid "Processors"
 msgstr "Procesory"
 
-#: harddrake/data.pm:220
+#: harddrake/data.pm:335
 #, c-format
 msgid "ISDN adapters"
 msgstr "Adaptéry ISDN"
 
-#: harddrake/data.pm:231
+#: harddrake/data.pm:346
 #, c-format
 msgid "USB sound devices"
 msgstr "Zvuková zařízení USB"
 
-#: harddrake/data.pm:240
+#: harddrake/data.pm:355
 #, c-format
 msgid "Radio cards"
 msgstr "Rádio karty"
 
-#: harddrake/data.pm:249
+#: harddrake/data.pm:364
 #, c-format
 msgid "ATM network cards"
 msgstr "Síťové karty ATM"
 
-#: harddrake/data.pm:258
+#: harddrake/data.pm:373
 #, c-format
 msgid "WAN network cards"
 msgstr "Síťové karty WAN"
 
-#: harddrake/data.pm:267
+#: harddrake/data.pm:382
 #, c-format
 msgid "Bluetooth devices"
 msgstr "Zařízení Bluetooth"
 
-#: harddrake/data.pm:276
+#: harddrake/data.pm:391
 #, c-format
 msgid "Ethernetcard"
 msgstr "Ethernetová karta"
 
-#: harddrake/data.pm:293
+#: harddrake/data.pm:408
 #, c-format
 msgid "Modem"
 msgstr "Modem"
 
-#: harddrake/data.pm:303
+#: harddrake/data.pm:418
 #, c-format
 msgid "ADSL adapters"
 msgstr "Adaptéry ADSL"
 
-#: harddrake/data.pm:315
+#: harddrake/data.pm:430
 #, c-format
 msgid "Memory"
 msgstr "Paměť"
 
-#: harddrake/data.pm:324
+#: harddrake/data.pm:439
 #, c-format
 msgid "Printer"
 msgstr "Tiskárna"
 
 #. -PO: these are joysticks controllers:
-#: harddrake/data.pm:338
+#: harddrake/data.pm:453
 #, c-format
 msgid "Game port controllers"
 msgstr "Game port řadiče"
 
-#: harddrake/data.pm:347
+#: harddrake/data.pm:462
 #, c-format
 msgid "Joystick"
 msgstr "Joystick"
 
-#: harddrake/data.pm:357
-#, c-format
-msgid "SATA controllers"
-msgstr "SATA řadiče"
-
-#: harddrake/data.pm:366
-#, c-format
-msgid "RAID controllers"
-msgstr "RAID řadiče"
-
-#: harddrake/data.pm:376
-#, c-format
-msgid "(E)IDE/ATA controllers"
-msgstr "(E)IDE/ATA řadiče"
-
-#: harddrake/data.pm:386
-#, c-format
-msgid "USB Mass Storage Devices"
-msgstr "Úložná zařízení USB"
-
-#: harddrake/data.pm:395
-#, c-format
-msgid "Card readers"
-msgstr "Čtečky karet"
-
-#: harddrake/data.pm:404
-#, c-format
-msgid "Firewire controllers"
-msgstr "Firewire řadiče"
-
-#: harddrake/data.pm:413
-#, c-format
-msgid "PCMCIA controllers"
-msgstr "PCMCIA řadiče"
-
-#: harddrake/data.pm:422
-#, c-format
-msgid "SCSI controllers"
-msgstr "SCSI řadiče"
-
-#: harddrake/data.pm:431
-#, c-format
-msgid "USB controllers"
-msgstr "USB řadiče"
-
-#: harddrake/data.pm:440
-#, c-format
-msgid "USB ports"
-msgstr "USB porty"
-
-#: harddrake/data.pm:449
-#, c-format
-msgid "SMBus controllers"
-msgstr "SMBus řadiče"
-
-#: harddrake/data.pm:458
-#, c-format
-msgid "Bridges and system controllers"
-msgstr "Systémové řadiče a můstky"
-
-#: harddrake/data.pm:469
+#: harddrake/data.pm:472
 #, c-format
 msgid "Keyboard"
 msgstr "Klávesnice"
 
-#: harddrake/data.pm:482
+#: harddrake/data.pm:485
 #, c-format
 msgid "Tablet and touchscreen"
 msgstr "Tablet a dotyková obrazovka"
 
-#: harddrake/data.pm:491
+#: harddrake/data.pm:494
 #, c-format
 msgid "Mouse"
 msgstr "Myš"
 
-#: harddrake/data.pm:505
+#: harddrake/data.pm:508
 #, c-format
 msgid "Biometry"
 msgstr "Biometrie"
 
-#: harddrake/data.pm:513
+#: harddrake/data.pm:516
 #, c-format
 msgid "UPS"
 msgstr "UPS"
 
-#: harddrake/data.pm:522
+#: harddrake/data.pm:525
 #, c-format
 msgid "Scanner"
 msgstr "Skener"
 
-#: harddrake/data.pm:533
+#: harddrake/data.pm:536
 #, c-format
 msgid "Unknown/Others"
 msgstr "Neznámý/Jiný"
 
-#: harddrake/data.pm:561
+#: harddrake/data.pm:564
 #, c-format
 msgid "cpu # "
 msgstr "cpu #"
 
-#: harddrake/sound.pm:201
+#: harddrake/sound.pm:202
 #, c-format
 msgid "Please Wait... Applying the configuration"
 msgstr "Čekejte prosím... Aktivuji konfiguraci"
 
-#: harddrake/sound.pm:238
+#: harddrake/sound.pm:239
 #, c-format
 msgid "No alternative driver"
 msgstr "Bez alternativního ovladače"
 
-#: harddrake/sound.pm:239
+#: harddrake/sound.pm:240
 #, c-format
 msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
@@ -3004,12 +2984,12 @@ msgstr ""
 "Pro vaši zvukovou kartu (%s), která nyní používá ovladač \"%s\", není žádný "
 "známý OSS/ALSA alternativní ovladač."
 
-#: harddrake/sound.pm:245
+#: harddrake/sound.pm:246
 #, c-format
 msgid "Sound configuration"
 msgstr "Nastavení zvuku"
 
-#: harddrake/sound.pm:247
+#: harddrake/sound.pm:248
 #, c-format
 msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
@@ -3018,10 +2998,10 @@ msgstr ""
 "Zde si pro vaši zvukovou (%s) kartu můžete vybrat alternativní ovladač (buď "
 "OSS nebo ALSA)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA",
+#. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
-#: harddrake/sound.pm:252
+#: harddrake/sound.pm:253
 #, c-format
 msgid ""
 "\n"
@@ -3034,7 +3014,7 @@ msgstr ""
 "Vaše karta nyní používá ovladač %s\"%s\" (výchozí ovladač pro vaši kartu je "
 "\"%s\")"
 
-#: harddrake/sound.pm:254
+#: harddrake/sound.pm:255
 #, c-format
 msgid ""
 "OSS (Open Sound System) was the first sound API. It's an OS independent "
@@ -3068,17 +3048,17 @@ msgstr ""
 "- nové ALSA API, které poskytuje daleko více možností, ale vyžaduje použít "
 "knihovnu ALSA.\n"
 
-#: harddrake/sound.pm:268 harddrake/sound.pm:357
+#: harddrake/sound.pm:269 harddrake/sound.pm:354
 #, c-format
 msgid "Driver:"
 msgstr "Ovladač:"
 
-#: harddrake/sound.pm:277
+#: harddrake/sound.pm:278
 #, c-format
 msgid "Trouble shooting"
 msgstr "Řešení problémů"
 
-#: harddrake/sound.pm:285
+#: harddrake/sound.pm:286
 #, c-format
 msgid ""
 "The old \"%s\" driver is blacklisted.\n"
@@ -3093,12 +3073,12 @@ msgstr ""
 "\n"
 "Při dalším spuštění bude použit pouze nový ovladač \"%s\" "
 
-#: harddrake/sound.pm:293
+#: harddrake/sound.pm:294
 #, c-format
 msgid "No open source driver"
 msgstr "Není dostupný žádný open source ovladač"
 
-#: harddrake/sound.pm:294
+#: harddrake/sound.pm:295
 #, c-format
 msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
@@ -3107,28 +3087,23 @@ msgstr ""
 "Pro vaši zvukovou kartu (%s) není žádný vhodný volně použitelný ovladač, ale "
 "existuje alternativní proprietární ovladač na \"%s\"."
 
-#: harddrake/sound.pm:297
+#: harddrake/sound.pm:298
 #, c-format
 msgid "No known driver"
 msgstr "Nebyl rozpoznán žádný ovladač"
 
-#: harddrake/sound.pm:298
+#: harddrake/sound.pm:299
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
 msgstr "Pro vaši zvukovou kartu (%s) není žádný známý ovladač"
 
-#: harddrake/sound.pm:302
-#, c-format
-msgid "Unknown driver"
-msgstr "Neznámý ovladač"
-
-#: harddrake/sound.pm:317
+#: harddrake/sound.pm:314
 #, c-format
 msgid "Sound trouble shooting"
 msgstr "Řešení problémů se zvukem"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:320
+#: harddrake/sound.pm:317
 #, c-format
 msgid ""
 "The classic bug sound tester is to run the following commands:\n"
@@ -3172,18 +3147,18 @@ msgstr ""
 "- \"/sbin/fuser -v /dev/dsp\" vám řekne, který program používá zvukovou "
 "kartu.\n"
 
-#: harddrake/sound.pm:346
+#: harddrake/sound.pm:343
 #, c-format
 msgid "Let me pick any driver"
 msgstr "Umožnit výběr ovladače"
 
-#: harddrake/sound.pm:349
+#: harddrake/sound.pm:346
 #, c-format
 msgid "Choosing an arbitrary driver"
 msgstr "Výběr libovolného ovladače"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:352
+#: harddrake/sound.pm:349
 #, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
@@ -3217,7 +3192,7 @@ msgstr "Neznámá|CPH05X (bt878) [více dodavatelů]"
 msgid "Unknown|CPH06X (bt878) [many vendors]"
 msgstr "Neznámá|CPH06X (bt878) [více dodavatelů]"
 
-#: harddrake/v4l.pm:474
+#: harddrake/v4l.pm:475
 #, c-format
 msgid ""
 "For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-"
@@ -3230,30 +3205,30 @@ msgstr ""
 "Je-li vaše karta špatně detekována, lze zde ručně nastavit správný typ karty "
 "a tuneru. Pokud je to potřeba, vyberte také parametry vaší TV karty."
 
-#: harddrake/v4l.pm:477
+#: harddrake/v4l.pm:478
 #, c-format
 msgid "Card model:"
 msgstr "Model karty:"
 
-#: harddrake/v4l.pm:478
+#: harddrake/v4l.pm:479
 #, c-format
 msgid "Tuner type:"
 msgstr "Typ tuneru:"
 
-#: interactive.pm:125 interactive.pm:538 interactive/curses.pm:263
+#: interactive.pm:125 interactive.pm:542 interactive/curses.pm:263
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
-#: interactive/stdio.pm:142 interactive/stdio.pm:143 ugtk2.pm:413 ugtk2.pm:511
-#: ugtk2.pm:791 ugtk2.pm:814
+#: interactive/stdio.pm:148 interactive/stdio.pm:149 ugtk2.pm:414 ugtk2.pm:512
+#: ugtk2.pm:801 ugtk2.pm:824
 #, c-format
 msgid "Ok"
 msgstr "Ok"
 
-#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:790 wizards.pm:156
+#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:800 wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "Ano"
 
-#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:790 wizards.pm:156
+#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:800 wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "Ne"
@@ -3263,32 +3238,32 @@ msgstr "Ne"
 msgid "Choose a file"
 msgstr "Vyberte soubor"
 
-#: interactive.pm:383 interactive/gtk.pm:419
+#: interactive.pm:383 interactive/gtk.pm:420
 #, c-format
 msgid "Add"
 msgstr "Přidat"
 
-#: interactive.pm:383 interactive/gtk.pm:419
+#: interactive.pm:383 interactive/gtk.pm:420
 #, c-format
 msgid "Modify"
 msgstr "Změnit"
 
-#: interactive.pm:383 interactive/gtk.pm:419
+#: interactive.pm:383 interactive/gtk.pm:420
 #, c-format
 msgid "Remove"
 msgstr "Odebrat"
 
-#: interactive.pm:538 interactive/curses.pm:263 ugtk2.pm:511
+#: interactive.pm:542 interactive/curses.pm:263 ugtk2.pm:512
 #, c-format
 msgid "Finish"
 msgstr "Ukončit"
 
-#: interactive.pm:539 interactive/curses.pm:260 ugtk2.pm:509
+#: interactive.pm:543 interactive/curses.pm:260 ugtk2.pm:510
 #, c-format
 msgid "Previous"
 msgstr "Zpět"
 
-#: interactive/gtk.pm:544
+#: interactive/gtk.pm:548
 #, c-format
 msgid "Beware, Caps Lock is enabled"
 msgstr "Pozor, jsou povolena velká písmena"
@@ -3298,7 +3273,7 @@ msgstr "Pozor, jsou povolena velká písmena"
 msgid "Bad choice, try again\n"
 msgstr "Špatná volba, zkuste to znovu\n"
 
-#: interactive/stdio.pm:30 interactive/stdio.pm:149
+#: interactive/stdio.pm:30 interactive/stdio.pm:155
 #, c-format
 msgid "Your choice? (default %s) "
 msgstr "Vaše volba? (výchozí %s) "
@@ -3317,32 +3292,32 @@ msgstr ""
 msgid "Your choice? (0/1, default `%s') "
 msgstr "Vaše volba? (0/1, výchozí '%s') "
 
-#: interactive/stdio.pm:94
+#: interactive/stdio.pm:97
 #, c-format
 msgid "Button `%s': %s"
 msgstr "Tlačítko '%s': %s"
 
-#: interactive/stdio.pm:95
+#: interactive/stdio.pm:98
 #, c-format
 msgid "Do you want to click on this button?"
 msgstr "Chcete klepnout na toto tlačítko? "
 
-#: interactive/stdio.pm:104
+#: interactive/stdio.pm:110
 #, c-format
 msgid "Your choice? (default `%s'%s) "
 msgstr "Vaše volba? (výchozí '%s'%s) "
 
-#: interactive/stdio.pm:104
+#: interactive/stdio.pm:110
 #, c-format
 msgid " enter `void' for void entry"
 msgstr " zadejte 'void' pokud chcete prázdný vstup"
 
-#: interactive/stdio.pm:122
+#: interactive/stdio.pm:128
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
 msgstr "=> Je zde více voleb, ze kterých je možné si vybrat (%s).\n"
 
-#: interactive/stdio.pm:125
+#: interactive/stdio.pm:131
 #, c-format
 msgid ""
 "Please choose the first number of the 10-range you wish to edit,\n"
@@ -3353,7 +3328,7 @@ msgstr ""
 "nebo stiskněte Enter pro pokračování.\n"
 "Vaše volba? "
 
-#: interactive/stdio.pm:138
+#: interactive/stdio.pm:144
 #, c-format
 msgid ""
 "=> Notice, a label changed:\n"
@@ -3362,7 +3337,7 @@ msgstr ""
 "=> Oznamuji změnu návěští:\n"
 "%s"
 
-#: interactive/stdio.pm:145
+#: interactive/stdio.pm:151
 #, c-format
 msgid "Re-submit"
 msgstr "Znovu odeslat"
@@ -3380,7 +3355,7 @@ msgstr "default:LTR"
 msgid "Andorra"
 msgstr "Andorra"
 
-#: lang.pm:211 timezone.pm:213
+#: lang.pm:211 timezone.pm:215
 #, c-format
 msgid "United Arab Emirates"
 msgstr "Spojené Arabské Emiráty"
@@ -3425,7 +3400,7 @@ msgstr "Angola"
 msgid "Antarctica"
 msgstr "Antarktida"
 
-#: lang.pm:220 timezone.pm:258
+#: lang.pm:220 timezone.pm:260
 #, c-format
 msgid "Argentina"
 msgstr "Argentina"
@@ -3435,12 +3410,12 @@ msgstr "Argentina"
 msgid "American Samoa"
 msgstr "Americká Samoa"
 
-#: lang.pm:222 mirror.pm:11 timezone.pm:216
+#: lang.pm:222 mirror.pm:11 timezone.pm:218
 #, c-format
 msgid "Austria"
 msgstr "Rakousko"
 
-#: lang.pm:223 mirror.pm:10 timezone.pm:254
+#: lang.pm:223 mirror.pm:10 timezone.pm:256
 #, c-format
 msgid "Australia"
 msgstr "Austrálie"
@@ -3465,12 +3440,12 @@ msgstr "Bosna a Hercegovina"
 msgid "Barbados"
 msgstr "Barbados"
 
-#: lang.pm:228 timezone.pm:198
+#: lang.pm:228 timezone.pm:200
 #, c-format
 msgid "Bangladesh"
 msgstr "Bangladéš"
 
-#: lang.pm:229 mirror.pm:12 timezone.pm:218
+#: lang.pm:229 mirror.pm:12 timezone.pm:220
 #, c-format
 msgid "Belgium"
 msgstr "Belgie"
@@ -3480,7 +3455,7 @@ msgstr "Belgie"
 msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
-#: lang.pm:231 timezone.pm:219
+#: lang.pm:231 timezone.pm:221
 #, c-format
 msgid "Bulgaria"
 msgstr "Bulharsko"
@@ -3515,7 +3490,7 @@ msgstr "Brunei Darussalam"
 msgid "Bolivia"
 msgstr "Bolívie"
 
-#: lang.pm:238 mirror.pm:13 timezone.pm:259
+#: lang.pm:238 mirror.pm:13 timezone.pm:261
 #, c-format
 msgid "Brazil"
 msgstr "Brazílie"
@@ -3540,7 +3515,7 @@ msgstr "Bouvet Island"
 msgid "Botswana"
 msgstr "Botswana"
 
-#: lang.pm:243 timezone.pm:217
+#: lang.pm:243 timezone.pm:219
 #, c-format
 msgid "Belarus"
 msgstr "Bělorusko"
@@ -3550,7 +3525,7 @@ msgstr "Bělorusko"
 msgid "Belize"
 msgstr "Belize"
 
-#: lang.pm:245 mirror.pm:14 timezone.pm:248
+#: lang.pm:245 mirror.pm:14 timezone.pm:250
 #, c-format
 msgid "Canada"
 msgstr "Kanada"
@@ -3575,7 +3550,7 @@ msgstr "Centrální africká republika"
 msgid "Congo (Brazzaville)"
 msgstr "Kongo (Brazzaville)"
 
-#: lang.pm:250 mirror.pm:38 timezone.pm:242
+#: lang.pm:250 mirror.pm:38 timezone.pm:244
 #, c-format
 msgid "Switzerland"
 msgstr "Švýcarsko"
@@ -3590,7 +3565,7 @@ msgstr "Cote d'Ivoire"
 msgid "Cook Islands"
 msgstr "Cookovy ostrovy"
 
-#: lang.pm:253 timezone.pm:260
+#: lang.pm:253 timezone.pm:262
 #, c-format
 msgid "Chile"
 msgstr "Chile"
@@ -3600,7 +3575,7 @@ msgstr "Chile"
 msgid "Cameroon"
 msgstr "Kamerun"
 
-#: lang.pm:255 timezone.pm:199
+#: lang.pm:255 timezone.pm:201
 #, c-format
 msgid "China"
 msgstr "Čína"
@@ -3640,12 +3615,12 @@ msgstr "Vánoční ostrov"
 msgid "Cyprus"
 msgstr "Kypr"
 
-#: lang.pm:263 mirror.pm:16 timezone.pm:220
+#: lang.pm:263 mirror.pm:16 timezone.pm:222
 #, c-format
 msgid "Czech Republic"
 msgstr "Česká republika"
 
-#: lang.pm:264 mirror.pm:21 timezone.pm:225
+#: lang.pm:264 mirror.pm:21 timezone.pm:227
 #, c-format
 msgid "Germany"
 msgstr "Německo"
@@ -3655,7 +3630,7 @@ msgstr "Německo"
 msgid "Djibouti"
 msgstr "Džibuti"
 
-#: lang.pm:266 mirror.pm:17 timezone.pm:221
+#: lang.pm:266 mirror.pm:17 timezone.pm:223
 #, c-format
 msgid "Denmark"
 msgstr "Dánsko"
@@ -3680,7 +3655,7 @@ msgstr "Alžírsko"
 msgid "Ecuador"
 msgstr "Ekvádor"
 
-#: lang.pm:271 mirror.pm:18 timezone.pm:222
+#: lang.pm:271 mirror.pm:18 timezone.pm:224
 #, c-format
 msgid "Estonia"
 msgstr "Estonsko"
@@ -3700,7 +3675,7 @@ msgstr "Západní Sahara"
 msgid "Eritrea"
 msgstr "Eritrea"
 
-#: lang.pm:275 mirror.pm:36 timezone.pm:240
+#: lang.pm:275 mirror.pm:36 timezone.pm:242
 #, c-format
 msgid "Spain"
 msgstr "Španělsko"
@@ -3710,7 +3685,7 @@ msgstr "Španělsko"
 msgid "Ethiopia"
 msgstr "Etiopie"
 
-#: lang.pm:277 mirror.pm:19 timezone.pm:223
+#: lang.pm:277 mirror.pm:19 timezone.pm:225
 #, c-format
 msgid "Finland"
 msgstr "Finsko"
@@ -3735,7 +3710,7 @@ msgstr "Mikronésie"
 msgid "Faroe Islands"
 msgstr "Faroe Islands"
 
-#: lang.pm:282 mirror.pm:20 timezone.pm:224
+#: lang.pm:282 mirror.pm:20 timezone.pm:226
 #, c-format
 msgid "France"
 msgstr "Francie"
@@ -3745,7 +3720,7 @@ msgstr "Francie"
 msgid "Gabon"
 msgstr "Gabon"
 
-#: lang.pm:284 timezone.pm:244
+#: lang.pm:284 timezone.pm:246
 #, c-format
 msgid "United Kingdom"
 msgstr "Velká Británie"
@@ -3800,7 +3775,7 @@ msgstr "Guadeloupe"
 msgid "Equatorial Guinea"
 msgstr "Rovníková Guinea"
 
-#: lang.pm:295 mirror.pm:22 timezone.pm:226
+#: lang.pm:295 mirror.pm:22 timezone.pm:228
 #, c-format
 msgid "Greece"
 msgstr "Řecko"
@@ -3810,7 +3785,7 @@ msgstr "Řecko"
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Jižní Georgie a ostrovy South Sandwich"
 
-#: lang.pm:297 timezone.pm:249
+#: lang.pm:297 timezone.pm:251
 #, c-format
 msgid "Guatemala"
 msgstr "Guatemala"
@@ -3855,27 +3830,27 @@ msgstr "Chorvatsko"
 msgid "Haiti"
 msgstr "Haiti"
 
-#: lang.pm:306 mirror.pm:23 timezone.pm:227
+#: lang.pm:306 mirror.pm:23 timezone.pm:229
 #, c-format
 msgid "Hungary"
 msgstr "Maďarsko"
 
-#: lang.pm:307 timezone.pm:202
+#: lang.pm:307 timezone.pm:204
 #, c-format
 msgid "Indonesia"
 msgstr "Indonésie"
 
-#: lang.pm:308 mirror.pm:24 timezone.pm:228
+#: lang.pm:308 mirror.pm:24 timezone.pm:230
 #, c-format
 msgid "Ireland"
 msgstr "Irsko"
 
-#: lang.pm:309 mirror.pm:25 timezone.pm:204
+#: lang.pm:309 mirror.pm:25 timezone.pm:206
 #, c-format
 msgid "Israel"
 msgstr "Izrael"
 
-#: lang.pm:310 timezone.pm:201
+#: lang.pm:310 timezone.pm:203
 #, c-format
 msgid "India"
 msgstr "Indie"
@@ -3890,7 +3865,7 @@ msgstr "Britské teritorium Indického moře"
 msgid "Iraq"
 msgstr "Irák"
 
-#: lang.pm:313 timezone.pm:203
+#: lang.pm:313 timezone.pm:205
 #, c-format
 msgid "Iran"
 msgstr "Írán"
@@ -3900,7 +3875,7 @@ msgstr "Írán"
 msgid "Iceland"
 msgstr "Island"
 
-#: lang.pm:315 mirror.pm:26 timezone.pm:229
+#: lang.pm:315 mirror.pm:26 timezone.pm:231
 #, c-format
 msgid "Italy"
 msgstr "Itálie"
@@ -3915,7 +3890,7 @@ msgstr "Jamajka"
 msgid "Jordan"
 msgstr "Jordán"
 
-#: lang.pm:318 mirror.pm:27 timezone.pm:205
+#: lang.pm:318 mirror.pm:27 timezone.pm:207
 #, c-format
 msgid "Japan"
 msgstr "Japonsko"
@@ -3955,7 +3930,7 @@ msgstr "Saint Kitts a Nevis"
 msgid "Korea (North)"
 msgstr "Korea (Severní)"
 
-#: lang.pm:326 timezone.pm:206
+#: lang.pm:326 timezone.pm:208
 #, c-format
 msgid "Korea"
 msgstr "Korea"
@@ -4010,12 +3985,12 @@ msgstr "Libérie"
 msgid "Lesotho"
 msgstr "Lesotho"
 
-#: lang.pm:337 timezone.pm:230
+#: lang.pm:337 timezone.pm:232
 #, c-format
 msgid "Lithuania"
 msgstr "Litva"
 
-#: lang.pm:338 timezone.pm:231
+#: lang.pm:338 timezone.pm:233
 #, c-format
 msgid "Luxembourg"
 msgstr "Lucembursko"
@@ -4115,12 +4090,12 @@ msgstr "Maledivy"
 msgid "Malawi"
 msgstr "Malawi"
 
-#: lang.pm:358 timezone.pm:250
+#: lang.pm:358 timezone.pm:252
 #, c-format
 msgid "Mexico"
 msgstr "Mexiko"
 
-#: lang.pm:359 timezone.pm:207
+#: lang.pm:359 timezone.pm:209
 #, c-format
 msgid "Malaysia"
 msgstr "Malajsie"
@@ -4160,12 +4135,12 @@ msgstr "Nigérie"
 msgid "Nicaragua"
 msgstr "Nikaragua"
 
-#: lang.pm:367 mirror.pm:28 timezone.pm:232
+#: lang.pm:367 mirror.pm:28 timezone.pm:234
 #, c-format
 msgid "Netherlands"
 msgstr "Nizozemí"
 
-#: lang.pm:368 mirror.pm:30 timezone.pm:233
+#: lang.pm:368 mirror.pm:30 timezone.pm:235
 #, c-format
 msgid "Norway"
 msgstr "Norsko"
@@ -4185,7 +4160,7 @@ msgstr "Nauru"
 msgid "Niue"
 msgstr "Niue"
 
-#: lang.pm:372 mirror.pm:29 timezone.pm:255
+#: lang.pm:372 mirror.pm:29 timezone.pm:257
 #, c-format
 msgid "New Zealand"
 msgstr "Nový Zéland"
@@ -4215,7 +4190,7 @@ msgstr "Francouzská Polynésie"
 msgid "Papua New Guinea"
 msgstr "Papua Nová Guinea"
 
-#: lang.pm:378 timezone.pm:208
+#: lang.pm:378 timezone.pm:210
 #, c-format
 msgid "Philippines"
 msgstr "Filipíny"
@@ -4225,7 +4200,7 @@ msgstr "Filipíny"
 msgid "Pakistan"
 msgstr "Pákistán"
 
-#: lang.pm:380 mirror.pm:31 timezone.pm:234
+#: lang.pm:380 mirror.pm:31 timezone.pm:236
 #, c-format
 msgid "Poland"
 msgstr "Polsko"
@@ -4250,7 +4225,7 @@ msgstr "Puerto Rico"
 msgid "Palestine"
 msgstr "Palestina"
 
-#: lang.pm:385 mirror.pm:32 timezone.pm:235
+#: lang.pm:385 mirror.pm:32 timezone.pm:237
 #, c-format
 msgid "Portugal"
 msgstr "Portugalsko"
@@ -4275,7 +4250,7 @@ msgstr "Katar"
 msgid "Reunion"
 msgstr "Reunion"
 
-#: lang.pm:390 timezone.pm:236
+#: lang.pm:390 timezone.pm:238
 #, c-format
 msgid "Romania"
 msgstr "Rumunsko"
@@ -4310,12 +4285,12 @@ msgstr "Seychely"
 msgid "Sudan"
 msgstr "Sudán"
 
-#: lang.pm:397 mirror.pm:37 timezone.pm:241
+#: lang.pm:397 mirror.pm:37 timezone.pm:243
 #, c-format
 msgid "Sweden"
 msgstr "Švédsko"
 
-#: lang.pm:398 timezone.pm:209
+#: lang.pm:398 timezone.pm:211
 #, c-format
 msgid "Singapore"
 msgstr "Singapur"
@@ -4325,7 +4300,7 @@ msgstr "Singapur"
 msgid "Saint Helena"
 msgstr "Svatá Helena"
 
-#: lang.pm:400 timezone.pm:239
+#: lang.pm:400 timezone.pm:241
 #, c-format
 msgid "Slovenia"
 msgstr "Slovinsko"
@@ -4335,7 +4310,7 @@ msgstr "Slovinsko"
 msgid "Svalbard and Jan Mayen Islands"
 msgstr "Svalbard a ostrovy Jan Mayen"
 
-#: lang.pm:402 mirror.pm:34 timezone.pm:238
+#: lang.pm:402 mirror.pm:34 timezone.pm:240
 #, c-format
 msgid "Slovakia"
 msgstr "Slovensko"
@@ -4405,7 +4380,7 @@ msgstr "Francouzská jižní teritoria"
 msgid "Togo"
 msgstr "Togo"
 
-#: lang.pm:416 mirror.pm:40 timezone.pm:211
+#: lang.pm:416 mirror.pm:40 timezone.pm:213
 #, c-format
 msgid "Thailand"
 msgstr "Thajsko"
@@ -4440,7 +4415,7 @@ msgstr "Tunisko"
 msgid "Tonga"
 msgstr "Tonga"
 
-#: lang.pm:423 timezone.pm:212
+#: lang.pm:423 timezone.pm:214
 #, c-format
 msgid "Turkey"
 msgstr "Turecko"
@@ -4455,17 +4430,17 @@ msgstr "Trinidad a Tobago"
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
-#: lang.pm:426 mirror.pm:39 timezone.pm:210
+#: lang.pm:426 mirror.pm:39 timezone.pm:212
 #, c-format
 msgid "Taiwan"
 msgstr "Taiwan"
 
-#: lang.pm:427 timezone.pm:195
+#: lang.pm:427 timezone.pm:197
 #, c-format
 msgid "Tanzania"
 msgstr "Tanzanie"
 
-#: lang.pm:428 timezone.pm:243
+#: lang.pm:428 timezone.pm:245
 #, c-format
 msgid "Ukraine"
 msgstr "Ukrajina"
@@ -4480,7 +4455,7 @@ msgstr "Uganda"
 msgid "United States Minor Outlying Islands"
 msgstr "Spojené státy (Minor Outlying Islands)"
 
-#: lang.pm:431 mirror.pm:41 timezone.pm:251
+#: lang.pm:431 mirror.pm:41 timezone.pm:253
 #, c-format
 msgid "United States"
 msgstr "Spojené státy americké"
@@ -4550,7 +4525,7 @@ msgstr "Jemen"
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: lang.pm:445 mirror.pm:35 timezone.pm:194
+#: lang.pm:445 mirror.pm:35 timezone.pm:196
 #, c-format
 msgid "South Africa"
 msgstr "Jižní Afrika"
@@ -4565,27 +4540,27 @@ msgstr "Zambie"
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
-#: lang.pm:1144
+#: lang.pm:1193
 #, c-format
 msgid "Welcome to %s"
 msgstr "Vítá vás %s"
 
-#: lvm.pm:83
+#: lvm.pm:84
 #, c-format
 msgid "Moving used physical extents to other physical volumes failed"
 msgstr "Přesunutí používaných fyzických oblastí na jiné svazky selhalo"
 
-#: lvm.pm:135
+#: lvm.pm:137
 #, c-format
 msgid "Physical volume %s is still in use"
 msgstr "Fyzický svazek %s se stále používá"
 
-#: lvm.pm:145
+#: lvm.pm:147
 #, c-format
 msgid "Remove the logical volumes first\n"
 msgstr "Odeberte nejdříve logické disky\n"
 
-#: lvm.pm:178
+#: lvm.pm:180
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
 msgstr "Zavaděč neumí pracovat s adresářem /boot na více fyzických svazcích"
@@ -5070,17 +5045,17 @@ msgstr ""
 "Spuštění modulu %s selhalo.\n"
 "Chcete to zkusit s jinými parametry?"
 
-#: partition_table.pm:390
+#: partition_table.pm:401
 #, c-format
 msgid "mount failed: "
 msgstr "chyba připojování: "
 
-#: partition_table.pm:500
+#: partition_table.pm:510
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "Rozšířené diskové oddíly nejsou na tomto systému podporovány"
 
-#: partition_table.pm:518
+#: partition_table.pm:528
 #, c-format
 msgid ""
 "You have a hole in your partition table but I can not use it.\n"
@@ -5091,27 +5066,7 @@ msgstr ""
 "Jediné řešení je přesunout primární oddíly tak, abyste měli mezeru vedle\n"
 "rozšířených oddílů."
 
-#: partition_table.pm:597
-#, c-format
-msgid "Error reading file %s"
-msgstr "Chyba při čtení souboru %s"
-
-#: partition_table.pm:604
-#, c-format
-msgid "Restoring from file %s failed: %s"
-msgstr "Obnova ze souboru %s neuspěla: %s"
-
-#: partition_table.pm:606
-#, c-format
-msgid "Bad backup file"
-msgstr "Špatný záložní soubor"
-
-#: partition_table.pm:626
-#, c-format
-msgid "Error writing to file %s"
-msgstr "Chyba při zapisování do souboru %s"
-
-#: partition_table/raw.pm:264
+#: partition_table/raw.pm:279
 #, c-format
 msgid ""
 "Something bad is happening on your drive. \n"
@@ -5128,7 +5083,7 @@ msgstr ""
 msgid "Can not add a partition to _formatted_ RAID %s"
 msgstr "Nemůžu přidat oddíl do _naformátovaného_ RAID %s"
 
-#: raid.pm:150
+#: raid.pm:157
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
 msgstr "Není dostatek oddílů pro RAID úrovně %d\n"
@@ -5222,8 +5177,10 @@ msgstr "Povolit přímé přihlášení uživatele root."
 
 #: security/help.pm:33
 #, c-format
-msgid "Allow the list of users on the system on display managers (kdm and gdm)."
-msgstr "Povolit výpis uživatelů systému ve správcích přihlášení (kdm nebo gdm)."
+msgid ""
+"Allow the list of users on the system on display managers (kdm and gdm)."
+msgstr ""
+"Povolit výpis uživatelů systému ve správcích přihlášení (kdm nebo gdm)."
 
 #: security/help.pm:35
 #, c-format
@@ -5397,7 +5354,8 @@ msgstr "Povolit sulogin(8) v jednouživatelském režimu."
 #: security/help.pm:100
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
-msgstr "Přidá jméno k výjimkám, které se nekontrolují na dobu platnosti pomocí msec."
+msgstr ""
+"Přidá jméno k výjimkám, které se nekontrolují na dobu platnosti pomocí msec."
 
 #: security/help.pm:102
 #, c-format
@@ -5450,12 +5408,14 @@ msgstr ""
 #: security/help.pm:117
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
-msgstr "pokud je nastaveno, kontrolu práva souborů v domovském adresáři uživatele"
+msgstr ""
+"pokud je nastaveno, kontrolu práva souborů v domovském adresáři uživatele"
 
 #: security/help.pm:118
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
-msgstr "pokud je nastaveno, kontroluje, zda je síťové rozhraní v promiskuitním režimu"
+msgstr ""
+"pokud je nastaveno, kontroluje, zda je síťové rozhraní v promiskuitním režimu"
 
 #: security/help.pm:119
 #, c-format
@@ -5480,7 +5440,8 @@ msgstr "pokud je nastaveno, ověřuje kontrolní součet pro suid/sgid soubory."
 #: security/help.pm:123
 #, c-format
 msgid "if set to yes, check additions/removals of suid root files."
-msgstr "pokud je nastaveno, kontroluje přidávání/odebírání souborů se suid root."
+msgstr ""
+"pokud je nastaveno, kontroluje přidávání/odebírání souborů se suid root."
 
 #: security/help.pm:124
 #, c-format
@@ -5501,8 +5462,10 @@ msgstr "pokud je nastaveno, provádí kontrolu na chkrootkit."
 
 #: security/help.pm:127
 #, c-format
-msgid "if set, send the mail report to this email address else send it to root."
-msgstr "pokud je nastaveno, odesílá report na daný email nebo přímo uživateli root"
+msgid ""
+"if set, send the mail report to this email address else send it to root."
+msgstr ""
+"pokud je nastaveno, odesílá report na daný email nebo přímo uživateli root"
 
 #: security/help.pm:128
 #, c-format
@@ -5662,7 +5625,8 @@ msgstr "Použije heslo pro autentizaci uživatelů"
 #: security/l10n.pm:34
 #, c-format
 msgid "Ethernet cards promiscuity check"
-msgstr "Povolí/zakáže kontrolu na nastavení promiskuitního režimu síťového rozhraní."
+msgstr ""
+"Povolí/zakáže kontrolu na nastavení promiskuitního režimu síťového rozhraní."
 
 #: security/l10n.pm:35
 #, c-format
@@ -5782,7 +5746,8 @@ msgstr "Neposílat emailem prázdná hlášení"
 #: security/l10n.pm:58
 #, c-format
 msgid "If set, send the mail report to this email address else send it to root"
-msgstr "Pokud je nastaveno, odesílá report na daný email nebo přímo uživateli root"
+msgstr ""
+"Pokud je nastaveno, odesílá report na daný email nebo přímo uživateli root"
 
 #: security/l10n.pm:59
 #, c-format
@@ -5851,7 +5816,8 @@ msgstr ""
 msgid ""
 "Passwords are now enabled, but use as a networked computer is still not "
 "recommended."
-msgstr "Hesla jsou nyní aktivní, ale stále nedoporučuji použít tento počítač na síti."
+msgstr ""
+"Hesla jsou nyní aktivní, ale stále nedoporučuji použít tento počítač na síti."
 
 #: security/level.pm:45
 #, c-format
@@ -5867,7 +5833,8 @@ msgstr ""
 msgid ""
 "There are already some restrictions, and more automatic checks are run every "
 "night."
-msgstr "Existují zde některá omezení a každou noc jsou spuštěny automatické testy."
+msgstr ""
+"Existují zde některá omezení a každou noc jsou spuštěny automatické testy."
 
 #: security/level.pm:47
 #, c-format
@@ -5921,7 +5888,8 @@ msgstr "Použít libsafe pro servery"
 
 #: security/level.pm:64
 #, c-format
-msgid "A library which defends against buffer overflow and format string attacks."
+msgid ""
+"A library which defends against buffer overflow and format string attacks."
 msgstr ""
 "Knihovna, které zabraňuje útokům proti přetečení bufferu nebo proti špatnému "
 "formátování řetězců."
@@ -5973,7 +5941,8 @@ msgstr ""
 
 #: services.pm:28
 #, c-format
-msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgid ""
+"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr ""
 "Common UNIX Printing System (CUPS) je pokročilý systém pro správu tisku a "
 "tiskáren."
@@ -6022,7 +5991,8 @@ msgstr ""
 
 #: services.pm:38
 #, c-format
-msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid ""
+"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr "Apache je WWW server. Je používán k poskytování HTML a CGI souborů."
 
 #: services.pm:39
@@ -6106,7 +6076,8 @@ msgstr ""
 msgid ""
 "DBUS is a daemon which broadcasts notifications of system events and other "
 "messages"
-msgstr "DBUS je démon, který vysílá upozornění na události v systému a další zprávy"
+msgstr ""
+"DBUS je démon, který vysílá upozornění na události v systému a další zprávy"
 
 #: services.pm:58
 #, c-format
@@ -6266,7 +6237,8 @@ msgstr ""
 
 #: services.pm:92
 #, c-format
-msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgid ""
+"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
 "SANE (Scanner Access Now Easy) umožňuje přístup ke skenerům, video kamerám a "
 "dalším zařízením..."
@@ -6388,7 +6360,7 @@ msgstr ""
 "Nejsou žádné další\n"
 "informace o službě, promiňte."
 
-#: services.pm:221 ugtk2.pm:901
+#: services.pm:221 ugtk2.pm:911
 #, c-format
 msgid "Info"
 msgstr "Informace"
@@ -6413,7 +6385,7 @@ msgstr "Start"
 msgid "Stop"
 msgstr "Stop"
 
-#: standalone.pm:23
+#: standalone.pm:25
 #, c-format
 msgid ""
 "This program is free software; you can redistribute it and/or modify\n"
@@ -6443,7 +6415,7 @@ msgstr ""
 "nebo si o ní můžete napsat na adresu Free Software Foundation, Inc.,\n"
 "51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n"
 
-#: standalone.pm:42
+#: standalone.pm:44
 #, c-format
 msgid ""
 "[--config-info] [--daemon] [--debug] [--default] [--show-conf]\n"
@@ -6470,7 +6442,7 @@ msgstr ""
 "--help                : zobrazí tuto zprávu.\n"
 "--version             : zobrazí číslo verze.\n"
 
-#: standalone.pm:54
+#: standalone.pm:56
 #, c-format
 msgid ""
 "[--boot] [--splash]\n"
@@ -6485,7 +6457,7 @@ msgstr ""
 "  --splash          - povolí nastavení vzhledu pro zavaděč systému\n"
 "výchozí režim: nabídne nastavení vlastností pro automatické přihlášení"
 
-#: standalone.pm:59
+#: standalone.pm:61
 #, c-format
 msgid ""
 "[OPTIONS] [PROGRAM_NAME]\n"
@@ -6502,7 +6474,7 @@ msgstr ""
 "  --report          - program může být libovolný Mandriva Linux nástroj\n"
 "  --incident        - program může být libovolný Mandriva Linux nástroj"
 
-#: standalone.pm:65
+#: standalone.pm:67
 #, c-format
 msgid ""
 "[--add]\n"
@@ -6519,7 +6491,7 @@ msgstr ""
 "  --internet        - nastaví internet\n"
 "  --wizard          - stejné jako volba --add"
 
-#: standalone.pm:71
+#: standalone.pm:73
 #, c-format
 msgid ""
 "\n"
@@ -6551,7 +6523,7 @@ msgstr ""
 "                 : nazev_aplikace jako např. so pro staroffice \n"
 "                 : a gs pro ghostscript."
 
-#: standalone.pm:86
+#: standalone.pm:88
 #, c-format
 msgid ""
 "[OPTIONS]...\n"
@@ -6583,17 +6555,17 @@ msgstr ""
 "--delclient      : odebere klienta z MTS (vyžaduje MAC address, IP, název "
 "nbi obrazu)"
 
-#: standalone.pm:98
+#: standalone.pm:100
 #, c-format
 msgid "[keyboard]"
 msgstr "[klávesnice]"
 
-#: standalone.pm:99
+#: standalone.pm:101
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 msgstr "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 
-#: standalone.pm:100
+#: standalone.pm:102
 #, c-format
 msgid ""
 "[OPTIONS]\n"
@@ -6616,7 +6588,7 @@ msgstr ""
 "--status : vrátí 1 pokud je připojeno, jinak vrací 0 a skončí.\n"
 "--quiet : tichý režim. Používá se při (při)odpojování."
 
-#: standalone.pm:110
+#: standalone.pm:112
 #, c-format
 msgid ""
 "[OPTION]...\n"
@@ -6635,7 +6607,7 @@ msgstr ""
 "  --merge-all-rpmnew    navrhne spojit všechny nalezené soubory .rpmnew/."
 "rpmsave"
 
-#: standalone.pm:115
+#: standalone.pm:117
 #, c-format
 msgid ""
 "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
@@ -6644,7 +6616,7 @@ msgstr ""
 "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
 "usbtable] [--dynamic=dev]"
 
-#: standalone.pm:116
+#: standalone.pm:118
 #, c-format
 msgid ""
 " [everything]\n"
@@ -6655,7 +6627,7 @@ msgstr ""
 "       XFdrake [--noauto] monitor\n"
 "       XFdrake resolution"
 
-#: standalone.pm:152
+#: standalone.pm:154
 #, c-format
 msgid ""
 "\n"
@@ -6666,102 +6638,102 @@ msgstr ""
 "Použití: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
 "testing] [-v|--version] "
 
-#: timezone.pm:148 timezone.pm:149
+#: timezone.pm:150 timezone.pm:151
 #, c-format
 msgid "All servers"
 msgstr "Všechny servery"
 
-#: timezone.pm:183
+#: timezone.pm:185
 #, c-format
 msgid "Global"
 msgstr "Globální"
 
-#: timezone.pm:186
+#: timezone.pm:188
 #, c-format
 msgid "Africa"
 msgstr "Afrika"
 
-#: timezone.pm:187
+#: timezone.pm:189
 #, c-format
 msgid "Asia"
 msgstr "Asie"
 
-#: timezone.pm:188
+#: timezone.pm:190
 #, c-format
 msgid "Europe"
 msgstr "Evropa"
 
-#: timezone.pm:189
+#: timezone.pm:191
 #, c-format
 msgid "North America"
 msgstr "Severní Amerika"
 
-#: timezone.pm:190
+#: timezone.pm:192
 #, c-format
 msgid "Oceania"
 msgstr "Oceánie"
 
-#: timezone.pm:191
+#: timezone.pm:193
 #, c-format
 msgid "South America"
 msgstr "Jižní Amerika"
 
-#: timezone.pm:200
+#: timezone.pm:202
 #, c-format
 msgid "Hong Kong"
 msgstr "Hong Kong"
 
-#: timezone.pm:237
+#: timezone.pm:239
 #, c-format
 msgid "Russian Federation"
 msgstr "Ruská federace"
 
-#: timezone.pm:245
+#: timezone.pm:247
 #, c-format
 msgid "Yugoslavia"
 msgstr "Jugoslávie"
 
-#: ugtk2.pm:791
+#: ugtk2.pm:801
 #, c-format
 msgid "Is this correct?"
 msgstr "Je to správně?"
 
-#: ugtk2.pm:851
+#: ugtk2.pm:861
 #, c-format
 msgid "No file chosen"
 msgstr "Nezvolen žádný soubor"
 
-#: ugtk2.pm:853
+#: ugtk2.pm:863
 #, c-format
 msgid "You have chosen a file, not a directory"
 msgstr "Vybrali jste soubor, ne adresář"
 
-#: ugtk2.pm:855
+#: ugtk2.pm:865
 #, c-format
 msgid "You have chosen a directory, not a file"
 msgstr "Vybrali jste adresář, ne soubor"
 
-#: ugtk2.pm:857
+#: ugtk2.pm:867
 #, c-format
 msgid "No such directory"
 msgstr "Adresář neexistuje"
 
-#: ugtk2.pm:857
+#: ugtk2.pm:867
 #, c-format
 msgid "No such file"
 msgstr "Soubor neexistuje"
 
-#: ugtk2.pm:936
+#: ugtk2.pm:946
 #, c-format
 msgid "Expand Tree"
 msgstr "Rozbalit větev"
 
-#: ugtk2.pm:937
+#: ugtk2.pm:947
 #, c-format
 msgid "Collapse Tree"
 msgstr "Sbalit větev"
 
-#: ugtk2.pm:938
+#: ugtk2.pm:948
 #, c-format
 msgid "Toggle between flat and group sorted"
 msgstr "Přepnutí mezi abecedním a skupinovým řazením"
@@ -6781,3 +6753,39 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Instalace selhala"
 
+#~ msgid "Undo"
+#~ msgstr "Zpět"
+
+#~ msgid "Save partition table"
+#~ msgstr "Uložit tabulku oddílů"
+
+#~ msgid "Restore partition table"
+#~ msgstr "Obnovit tabulku oddílů"
+
+#~ msgid "Select file"
+#~ msgstr "Zvolit soubor"
+
+#~ msgid ""
+#~ "The backup partition table has not the same size\n"
+#~ "Still continue?"
+#~ msgstr ""
+#~ "Záložní tabulka oddílů nemá stejnou velikost\n"
+#~ "Chcete přesto pokračovat?"
+
+#~ msgid "Info: "
+#~ msgstr "Informace: "
+
+#~ msgid "Unknown driver"
+#~ msgstr "Neznámý ovladač"
+
+#~ msgid "Error reading file %s"
+#~ msgstr "Chyba při čtení souboru %s"
+
+#~ msgid "Restoring from file %s failed: %s"
+#~ msgstr "Obnova ze souboru %s neuspěla: %s"
+
+#~ msgid "Bad backup file"
+#~ msgstr "Špatný záložní soubor"
+
+#~ msgid "Error writing to file %s"
+#~ msgstr "Chyba při zapisování do souboru %s"
