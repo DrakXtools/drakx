@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-01 09:49+0200\n"
+"POT-Creation-Date: 2008-01-17 14:33+0100\n"
 "PO-Revision-Date: 2007-12-17 16:36+0000\n"
 "Last-Translator: Zé <mmodem00@gmail.com>\n"
 "Language-Team: Português <pt@li.org>\n"
@@ -35,8 +35,8 @@ msgstr ""
 msgid "Authentication"
 msgstr "Autenticação"
 
-#: drakauth:36 drakclock:110 drakclock:124 drakfont:214 drakfont:227
-#: drakfont:265 draksplash:169 finish-install:82 logdrake:170 logdrake:445
+#: drakauth:36 drakclock:111 drakclock:125 drakfont:214 drakfont:227
+#: drakfont:265 draksplash:169 finish-install:85 logdrake:170 logdrake:445
 #: logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
 #: scannerdrake:200 scannerdrake:259 scannerdrake:730 scannerdrake:741
 #: scannerdrake:880 scannerdrake:891 scannerdrake:961
@@ -92,9 +92,9 @@ msgid ""
 "Your system bootloader is not in framebuffer mode. To activate graphical "
 "boot, select a graphic video mode from the bootloader configuration tool."
 msgstr ""
-"O seu gestor de arranque não está em modo 'framebuffer'. Para activar "
-"o arranque gráfico, seleccione um modo de gráfico a partir da ferramenta "
-"de configuração do carregador de arranque."
+"O seu gestor de arranque não está em modo 'framebuffer'. Para activar o "
+"arranque gráfico, seleccione um modo de gráfico a partir da ferramenta de "
+"configuração do carregador de arranque."
 
 #: drakboot:134
 #, c-format
@@ -182,72 +182,72 @@ msgid ""
 "selected below.\n"
 "Be sure your video card supports the mode you choose."
 msgstr ""
-"Por favor escolha o modo gráfico, será aplicado a cada uma das entradas "
-"de arranque,\n"
+"Por favor escolha o modo gráfico, será aplicado a cada uma das entradas de "
+"arranque,\n"
 "escolhidas em baixo.\n"
 "Certifique-se que a sua placa gráfica suporta o modo escolhido."
 
-#: drakbug:48 drakbug:113
+#: drakbug:64 drakbug:136
 #, c-format
 msgid "The \"%s\" program has crashed with the following error:"
 msgstr "O programa \"%s\" estoirou com o seguinte erro:"
 
-#: drakbug:54
+#: drakbug:75
 #, c-format
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "Ferramenta Mandriva Linux de Comunicação de Erros"
 
-#: drakbug:59
+#: drakbug:80
 #, c-format
 msgid "Mandriva Linux Control Center"
 msgstr "Centro de Controlo Mandriva Linux"
 
-#: drakbug:60
+#: drakbug:81
 #, c-format
 msgid "First Time Wizard"
 msgstr "Assistente de Primeira Vez"
 
-#: drakbug:61
+#: drakbug:82
 #, c-format
 msgid "Synchronization tool"
 msgstr "Ferramenta de sincronização"
 
-#: drakbug:62 drakbug:186
+#: drakbug:83 drakbug:222
 #, c-format
 msgid "Standalone Tools"
 msgstr "Ferramentas Autónomas"
 
-#: drakbug:64 drakbug:65
+#: drakbug:85 drakbug:86
 #, c-format
 msgid "Mandriva Online"
 msgstr "Mandriva Em-linha"
 
-#: drakbug:66
+#: drakbug:87
 #, c-format
 msgid "Remote Control"
 msgstr "Controlo Remoto"
 
-#: drakbug:67
+#: drakbug:88
 #, c-format
 msgid "Software Manager"
 msgstr "Gestor de Programas"
 
-#: drakbug:68
+#: drakbug:89
 #, c-format
 msgid "Windows Migration tool"
 msgstr "Ferramenta de Migração Windows"
 
-#: drakbug:69
+#: drakbug:90
 #, c-format
 msgid "Configuration Wizards"
 msgstr "Assistentes de Configuração"
 
-#: drakbug:91
+#: drakbug:112
 #, c-format
 msgid "Select Mandriva Tool:"
 msgstr "Seleccione a Ferramenta Mandriva:"
 
-#: drakbug:92
+#: drakbug:113
 #, c-format
 msgid ""
 "or Application Name\n"
@@ -256,22 +256,32 @@ msgstr ""
 "ou Nome da Aplicação\n"
 "(ou Localização Completa):"
 
-#: drakbug:95
+#: drakbug:116
 #, c-format
 msgid "Find Package"
 msgstr "Procurar Pacote"
 
-#: drakbug:97
+#: drakbug:118
 #, c-format
 msgid "Package: "
 msgstr "Pacote: "
 
-#: drakbug:98
+#: drakbug:119
 #, c-format
 msgid "Kernel:"
 msgstr "Kernel:"
 
-#: drakbug:121
+#: drakbug:135
+#, fuzzy, c-format
+msgid "The \"%s\" program has segfaulted with the following error:"
+msgstr "O programa \"%s\" estoirou com o seguinte erro:"
+
+#: drakbug:145
+#, c-format
+msgid "Its gdb trace is:"
+msgstr ""
+
+#: drakbug:153
 #, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
@@ -281,32 +291,32 @@ msgid ""
 "kernel version, and /proc/cpuinfo."
 msgstr ""
 "Para enviar o relatório de um erro, clique no botão enviar.\n"
-"Isto irá abrir uma janela do navegador web em %s onde irá encontrar "
-"um formulário para preencher.  A informação mostrada em cima irá\n"
+"Isto irá abrir uma janela do navegador web em %s onde irá encontrar um "
+"formulário para preencher.  A informação mostrada em cima irá\n"
 "ser transferida para esse servidor. Convém incluir no seu relatório os "
 "resultados de lspcidrake -v, a versão do kernel e /proc/cpuinfo."
 
-#: drakbug:127 drakperm:134 draksec:440 draksec:442 draksec:461 draksec:463
+#: drakbug:161 drakperm:134 draksec:438 draksec:440 draksec:459 draksec:461
 #, c-format
 msgid "Help"
 msgstr "Ajuda"
 
-#: drakbug:129
+#: drakbug:163
 #, c-format
 msgid "Report"
 msgstr "Enviar"
 
-#: drakbug:160 drakfont:517
+#: drakbug:196 drakfont:517
 #, c-format
 msgid "Close"
 msgstr "Fechar"
 
-#: drakbug:196
+#: drakbug:232
 #, c-format
 msgid "Not installed"
 msgstr "Não instalado"
 
-#: drakbug:209
+#: drakbug:245
 #, c-format
 msgid "Package not installed"
 msgstr "Pacote não instalado"
@@ -375,27 +385,27 @@ msgstr "Servidor:"
 msgid "Timezone"
 msgstr "Fuso horário"
 
-#: drakclock:110
+#: drakclock:111
 #, c-format
 msgid "Please enter a valid NTP server address."
 msgstr "Por favor indique um endereço de servidor NTP válido."
 
-#: drakclock:125
+#: drakclock:126
 #, c-format
 msgid "Could not synchronize with %s."
 msgstr "Não foi possível sincronizar com %s."
 
-#: drakclock:126 draksplash:93 logdrake:175 scannerdrake:492
+#: drakclock:127 draksplash:93 logdrake:175 scannerdrake:492
 #, c-format
 msgid "Quit"
 msgstr "Sair"
 
-#: drakclock:127
+#: drakclock:128
 #, c-format
 msgid "Retry"
 msgstr "Tentar novamente"
 
-#: drakclock:149 drakclock:159
+#: drakclock:151 drakclock:161
 #, c-format
 msgid "Reset"
 msgstr "Restaurar"
@@ -442,8 +452,8 @@ msgid ""
 "You are going to close all running programs and lose your current session. "
 "Are you really sure that you want to restart the dm service?"
 msgstr ""
-"Irá fechar todos os programas em execução e perder a sua sessão actual. "
-"Tem certeza que deseja reiniciar o serviço dm?"
+"Irá fechar todos os programas em execução e perder a sua sessão actual. Tem "
+"certeza que deseja reiniciar o serviço dm?"
 
 #: drakfont:188
 #, c-format
@@ -553,8 +563,8 @@ msgstr ""
 "Antes de instalar qualquer tipo de letra, certifique-se que tem permissões "
 "de uso e instale-os no seu sistema.\n"
 "\n"
-"Pode instalar os tipos de letra normalmente. Nalguns casos, os tipos "
-"de letra fraudulentos podem bloquear o servidor X."
+"Pode instalar os tipos de letra normalmente. Nalguns casos, os tipos de "
+"letra fraudulentos podem bloquear o servidor X."
 
 #: drakfont:489
 #, c-format
@@ -777,8 +787,11 @@ msgstr " --help                - mostra esta ajuda   \n"
 
 #: drakhelp:23
 #, c-format
-msgid " --id <id_label>       - load the html help page which refers to id_label\n"
-msgstr " --id <id_label>       - carrega a página html de ajuda que se refere ao id_label\n"
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
+msgstr ""
+" --id <id_label>       - carrega a página html de ajuda que se refere ao "
+"id_label\n"
 
 #: drakhelp:24
 #, c-format
@@ -786,7 +799,8 @@ msgid ""
 " --doc <link>          - link to another web page ( for WM welcome "
 "frontend)\n"
 msgstr ""
-" --doc <link>          - liga a outra página web (para o interface bem-vindo\n"
+" --doc <link>          - liga a outra página web (para o interface bem-"
+"vindo\n"
 "do Gestor de Janelas)\n"
 
 #: drakhelp:52
@@ -861,8 +875,8 @@ msgid ""
 "groups via msec.\n"
 "You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
-"Aqui pode ver ficheiros para usar e corrigir as permissões, os donos, e "
-"os grupos via msec.\n"
+"Aqui pode ver ficheiros para usar e corrigir as permissões, os donos, e os "
+"grupos via msec.\n"
 "Pode também editar as suas próprias regras que irão substituir as regras "
 "predefinidas."
 
@@ -1152,8 +1166,7 @@ msgid ""
 "level, but the system is entirely closed and security features are at their\n"
 "maximum"
 msgstr ""
-"Aqui pode configurar o nível de segurança e o administrador da sua "
-"máquina.\n"
+"Aqui pode configurar o nível de segurança e o administrador da sua máquina.\n"
 "\n"
 "\n"
 "O <span weight=\"bold\">Administrador de Segurança </span> é aquele que irá "
@@ -1267,7 +1280,7 @@ msgstr "Senha root"
 msgid "User password"
 msgstr "Senha de utilizador"
 
-#: draksec:314 draksec:363
+#: draksec:314 draksec:360
 #, c-format
 msgid "Software Management"
 msgstr "Gestão de Programas"
@@ -1362,32 +1375,32 @@ msgstr "Utilizadores"
 msgid "Boot Configuratoin"
 msgstr "Configuração de Arranque"
 
-#: draksec:364
+#: draksec:361
 #, c-format
 msgid "Hardware"
 msgstr "Material"
 
-#: draksec:365
+#: draksec:362
 #, c-format
 msgid "Network"
 msgstr "Rede"
 
-#: draksec:366
+#: draksec:363
 #, c-format
 msgid "System"
 msgstr "Sistema"
 
-#: draksec:367
+#: draksec:364
 #, c-format
 msgid "Boot"
 msgstr "Arranque"
 
-#: draksec:391
+#: draksec:389
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "Por favor aguarde, a definir o nível de segurança..."
 
-#: draksec:397
+#: draksec:395
 #, c-format
 msgid "Please wait, setting security options..."
 msgstr "Por favor aguarde, a definir as opções de segurança..."
@@ -1796,7 +1809,7 @@ msgstr "Nível"
 msgid "ACL name"
 msgstr "Nome ACL"
 
-#: drakups:297 finish-install:116
+#: drakups:297 finish-install:119
 #, c-format
 msgid "Password"
 msgstr "Senha"
@@ -1843,37 +1856,37 @@ msgstr ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 
-#: finish-install:43
+#: finish-install:46
 #, c-format
 msgid "Keyboard"
 msgstr "Teclado"
 
-#: finish-install:44
+#: finish-install:47
 #, c-format
 msgid "Please, choose your keyboard layout."
 msgstr "Por favor, escolha a disposição do seu teclado."
 
-#: finish-install:114 finish-install:132 finish-install:144
+#: finish-install:117 finish-install:135 finish-install:147
 #, c-format
 msgid "Encrypted home partition"
 msgstr "Partição pessoal encriptada"
 
-#: finish-install:114
+#: finish-install:117
 #, c-format
 msgid "Please enter a password for the %s user"
 msgstr "Por favor indique a senha para i utilizador %s"
 
-#: finish-install:117
+#: finish-install:120
 #, c-format
 msgid "Password (again)"
 msgstr "Senha (novamente)"
 
-#: finish-install:132
+#: finish-install:135
 #, c-format
 msgid "Creating encrypted home partition"
 msgstr "A criar partição pessoal encriptada"
 
-#: finish-install:144
+#: finish-install:147
 #, c-format
 msgid "Formatting encrypted home partition"
 msgstr "A formatar partição pessoal encriptada"
@@ -1895,8 +1908,10 @@ msgstr "Bus"
 
 #: harddrake2:31
 #, c-format
-msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
-msgstr "este é o bus físico no qual o dispositivo está ligado (ex: PCI, USB, ...)"
+msgid ""
+"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgstr ""
+"este é o bus físico no qual o dispositivo está ligado (ex: PCI, USB, ...)"
 
 #: harddrake2:33 harddrake2:148
 #, c-format
@@ -1936,7 +1951,8 @@ msgstr "Capacidade do disco"
 #: harddrake2:40
 #, c-format
 msgid "special capacities of the driver (burning ability and or DVD support)"
-msgstr "capacidades especiais do controlador (capacidade de gravar e/ou suporte DVD)"
+msgstr ""
+"capacidades especiais do controlador (capacidade de gravar e/ou suporte DVD)"
 
 #: harddrake2:41
 #, c-format
@@ -2156,10 +2172,10 @@ msgid ""
 "initialize a timer counter.  Its result is stored as bogomips as a way to "
 "\"benchmark\" the cpu."
 msgstr ""
-"O kernel GNU/Linux precisa executar um ciclo de cálculos ao arrancar "
-"para inicializar o contador de tempo.  Os seus resultados são armazenados "
-"como bogomips como maneira de ter um termo/referência de comparação "
-"('benchmark') do processador (cpu)."
+"O kernel GNU/Linux precisa executar um ciclo de cálculos ao arrancar para "
+"inicializar o contador de tempo.  Os seus resultados são armazenados como "
+"bogomips como maneira de ter um termo/referência de comparação ('benchmark') "
+"do processador (cpu)."
 
 #: harddrake2:69
 #, c-format
@@ -2464,7 +2480,8 @@ msgstr "Ficheiro do dispositivo"
 
 #: harddrake2:117
 #, c-format
-msgid "the device file used to communicate with the kernel driver for the mouse"
+msgid ""
+"the device file used to communicate with the kernel driver for the mouse"
 msgstr ""
 "o ficheiro do dispositivo usado para comunicar com o controlador do kernel "
 "para o rato"
@@ -2666,8 +2683,10 @@ msgstr "Executar ferramenta de configuração"
 
 #: harddrake2:301
 #, c-format
-msgid "Click on a device in the left tree in order to display its information here."
-msgstr "Clique num dispositivo na árvore esquerda para mostrar aqui a sua informação."
+msgid ""
+"Click on a device in the left tree in order to display its information here."
+msgstr ""
+"Clique num dispositivo na árvore esquerda para mostrar aqui a sua informação."
 
 #: harddrake2:321
 #, c-format
@@ -3059,7 +3078,8 @@ msgstr "A abortar o Scannerdrake."
 
 #: scannerdrake:60
 #, c-format
-msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr ""
 "Não foi possível instalar os pacotes necessários para configurar um "
 "digitalizador com o Scannerdrake."
@@ -3470,7 +3490,8 @@ msgstr ""
 #: scannerdrake:601
 #, c-format
 msgid "The scanners on this machine are available to other computers"
-msgstr "Os digitalizadores nesta máquina estão disponíveis para outros computadores"
+msgstr ""
+"Os digitalizadores nesta máquina estão disponíveis para outros computadores"
 
 #: scannerdrake:603
 #, c-format
@@ -3503,8 +3524,8 @@ msgid ""
 "These are the machines on which the locally connected scanner(s) should be "
 "available:"
 msgstr ""
-"Estas são as máquinas onde o(s) digitalizador(es) ligados localmente "
-"devem estar disponiveis:"
+"Estas são as máquinas onde o(s) digitalizador(es) ligados localmente devem "
+"estar disponiveis:"
 
 #: scannerdrake:659 scannerdrake:809
 #, c-format
@@ -3535,7 +3556,8 @@ msgstr "Nome/Endereço IP do endereço:"
 #: scannerdrake:720 scannerdrake:870
 #, c-format
 msgid "Choose the host on which the local scanners should be made available:"
-msgstr "Escolha o endereço onde os digitalizadores locais devem estar disponíveis:"
+msgstr ""
+"Escolha o endereço onde os digitalizadores locais devem estar disponíveis:"
 
 #: scannerdrake:731 scannerdrake:881
 #, c-format
@@ -3572,12 +3594,14 @@ msgstr ""
 #: scannerdrake:959 scannerdrake:963
 #, c-format
 msgid "Your scanner(s) will not be available on the network."
-msgstr "O(s) seu(s) digitalizador(es) não irá(ão) estar disponível(eis) na rede."
+msgstr ""
+"O(s) seu(s) digitalizador(es) não irá(ão) estar disponível(eis) na rede."
 
 #: scannerdrake:962
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
-msgstr "Não foi possível instalar os pacotes precisos para partilhar o seu scanner."
+msgstr ""
+"Não foi possível instalar os pacotes precisos para partilhar o seu scanner."
 
 #: service_harddrake:124
 #, c-format
@@ -3637,4 +3661,3 @@ msgstr "Configuração da língua e país"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Configurações Regionais"
-
