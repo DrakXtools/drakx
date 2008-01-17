@@ -483,14 +483,15 @@ sub setupBootloader__entries {
 	my %root_descr = map { 
 	    my $info = delete $hd_infos{$_->{rootDevice}};
 	    my $dev = "/dev/$_->{device}";
-	    $dev => $info ? "$dev ($info)" : $dev;
+	    my $info_ = $info ? "$dev ($info)" : $dev;
+	    ($dev => $info_, fs::wild_device::from_part('', $_) => $info_);
 	} @$fstab;
 
 	my @l;
 	if ($e->{type} eq "image") { 
 	    @l = (
 { label => N("Image"), val => \$e->{kernel_or_dev}, list => [ map { "/boot/$_" } bootloader::installed_vmlinuz() ], not_edit => 0 },
-{ label => N("Root"), val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @$fstab ], format => sub { $root_descr{$_[0]} }  },
+{ label => N("Root"), val => \$e->{root}, list => [ map { fs::wild_device::from_part('', $_) } @$fstab ], format => sub { $root_descr{$_[0]} }  },
 { label => N("Append"), val => \$append },
   if_($e->{xen}, 
 { label => N("Xen append"), val => \$e->{xen_append} }
