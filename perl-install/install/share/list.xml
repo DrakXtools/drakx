@@ -250,9 +250,8 @@
   SelectSaver.pm
   SelfLoader.pm
   Symbol.pm
+  Tie/Hash.pm
   Time/Local.pm
-  IO/Socket/INET.pm
-  IO/Socket/UNIX.pm
   base.pm
   constant.pm
   locale.pm
@@ -269,51 +268,55 @@
   dumpvar.pl
   warnings.pm
   warnings/register.pm
-  ARCH-linux/File/Glob.pm
-  ARCH-linux/auto/File/Glob/Glob.so
-  ARCH-linux/Config.pm
-  ARCH-linux/Data/Dumper.pm
-  ARCH-linux/DynaLoader.pm
-  ARCH-linux/Errno.pm
-  ARCH-linux/Fcntl.pm
-  ARCH-linux/XSLoader.pm
-  ARCH-linux/auto/Fcntl/Fcntl.so
-  ARCH-linux/IO.pm
-  ARCH-linux/IO/File.pm
-  ARCH-linux/IO/Handle.pm
-  ARCH-linux/IO/Seekable.pm
-  ARCH-linux/IO/Select.pm
-  ARCH-linux/IO/Socket.pm
-  ARCH-linux/Socket.pm
-  ARCH-linux/_h2ph_pre.ph
-  ARCH-linux/asm/unistd.ph
+  ARCH-linux-thread-multi/File/Glob.pm
+  ARCH-linux-thread-multi/auto/File/Glob/Glob.so
+  ARCH-linux-thread-multi/Config.pm
+  ARCH-linux-thread-multi/Data/Dumper.pm
+  ARCH-linux-thread-multi/DynaLoader.pm
+  ARCH-linux-thread-multi/Errno.pm
+  ARCH-linux-thread-multi/Fcntl.pm
+  ARCH-linux-thread-multi/XSLoader.pm
+  ARCH-linux-thread-multi/auto/Fcntl/Fcntl.so
+  ARCH-linux-thread-multi/IO.pm
+  ARCH-linux-thread-multi/IO/File.pm
+  ARCH-linux-thread-multi/IO/Handle.pm
+  ARCH-linux-thread-multi/IO/Seekable.pm
+  ARCH-linux-thread-multi/IO/Select.pm
+  ARCH-linux-thread-multi/IO/Socket.pm
+  ARCH-linux-thread-multi/IO/Socket/INET.pm
+  ARCH-linux-thread-multi/IO/Socket/UNIX.pm
+  ARCH-linux-thread-multi/List/Util.pm
+  ARCH-linux-thread-multi/Socket.pm
+  ARCH-linux-thread-multi/Scalar/Util.pm
+  ARCH-linux-thread-multi/_h2ph_pre.ph
+  ARCH-linux-thread-multi/asm/unistd.ph
   <if ARCH="ia64">
-  ARCH-linux/asm-i386/unistd.ph 
-  ARCH-linux/asm-x86_64/unistd.ph 
-  ARCH-linux/asm/break.ph 
+  ARCH-linux-thread-multi/asm-i386/unistd.ph 
+  ARCH-linux-thread-multi/asm-x86_64/unistd.ph 
+  ARCH-linux-thread-multi/asm/break.ph 
   </if>
-  <if ARCH="x86_64">
-  ARCH-linux/asm-i386/unistd.ph 
-  ARCH-linux/asm-x86_64/unistd.ph 
+  <if ARCH="i.86|x86_64">
+  ARCH-linux-thread-multi/asm/unistd_32.ph
+  ARCH-linux-thread-multi/asm/unistd_64.ph
   </if>
-  ARCH-linux/auto/Data/Dumper/Dumper.so
-  ARCH-linux/auto/IO/IO.so
-  ARCH-linux/auto/Socket/Socket.so
-  ARCH-linux/bits/syscall.ph
-  ARCH-linux/bits/wordsize.ph
-  ARCH-linux/sys/syscall.ph
-  ARCH-linux/syscall.ph
-  ARCH-linux/auto/DynaLoader/dl_findfile.al
-  ARCH-linux/lib.pm
-  ARCH-linux/re.pm
-  ARCH-linux/auto/POSIX/autosplit.ix
-  ARCH-linux/auto/POSIX/load_imports.al
-  ARCH-linux/auto/POSIX/POSIX.so
-  ARCH-linux/Cwd.pm
-  ARCH-linux/auto/Cwd/Cwd.so
-  ARCH-linux/POSIX.pm
-  ARCH-linux/Time/HiRes.pm
-  ARCH-linux/auto/Time/HiRes/HiRes.so
+  ARCH-linux-thread-multi/auto/Data/Dumper/Dumper.so
+  ARCH-linux-thread-multi/auto/IO/IO.so
+  ARCH-linux-thread-multi/auto/Socket/Socket.so
+  ARCH-linux-thread-multi/bits/syscall.ph
+  ARCH-linux-thread-multi/bits/wordsize.ph
+  ARCH-linux-thread-multi/sys/syscall.ph
+  ARCH-linux-thread-multi/syscall.ph
+  ARCH-linux-thread-multi/auto/DynaLoader/dl_findfile.al
+  ARCH-linux-thread-multi/lib.pm
+  ARCH-linux-thread-multi/re.pm
+  ARCH-linux-thread-multi/auto/POSIX/autosplit.ix
+  ARCH-linux-thread-multi/auto/POSIX/load_imports.al
+  ARCH-linux-thread-multi/auto/POSIX/POSIX.so
+  ARCH-linux-thread-multi/Cwd.pm
+  ARCH-linux-thread-multi/auto/Cwd/Cwd.so
+  ARCH-linux-thread-multi/POSIX.pm
+  ARCH-linux-thread-multi/Time/HiRes.pm
+  ARCH-linux-thread-multi/auto/Time/HiRes/HiRes.so
   bytes.pm
   integer.pm
   overload.pm
@@ -326,8 +329,6 @@
   Net/FTP/I.pm
   Net/FTP/dataconn.pm
   Net/Netrc.pm
-  Scalar/Util.pm
-  List/Util.pm
   <if set="DEBUG_INSTALL">
     perl5db.pl
     Term/ReadLine.pm
@@ -342,26 +343,26 @@
   MDK/Common
   MDK/Common.pm
   String/ShellQuote.pm
-  ARCH-linux/Locale/gettext.pm
-  ARCH-linux/auto/Locale/gettext/gettext.so
-  ARCH-linux/File/FnMatch.pm
-  ARCH-linux/auto/File/FnMatch/FnMatch.so
-  ARCH-linux/Term/ReadKey.pm
-  ARCH-linux/auto/Term/ReadKey/ReadKey.so
-  ARCH-linux/URPM.pm
-  ARCH-linux/URPM/Build.pm
-  ARCH-linux/URPM/Resolve.pm
-  ARCH-linux/URPM/Signature.pm
-  ARCH-linux/auto/URPM/URPM.so
+  ARCH-linux-thread-multi/Locale/gettext.pm
+  ARCH-linux-thread-multi/auto/Locale/gettext/gettext.so
+  ARCH-linux-thread-multi/File/FnMatch.pm
+  ARCH-linux-thread-multi/auto/File/FnMatch/FnMatch.so
+  ARCH-linux-thread-multi/Term/ReadKey.pm
+  ARCH-linux-thread-multi/auto/Term/ReadKey/ReadKey.so
+  ARCH-linux-thread-multi/URPM.pm
+  ARCH-linux-thread-multi/URPM/Build.pm
+  ARCH-linux-thread-multi/URPM/Resolve.pm
+  ARCH-linux-thread-multi/URPM/Signature.pm
+  ARCH-linux-thread-multi/auto/URPM/URPM.so
   urpm/msg.pm
   urpm/select.pm
   urpm/util.pm
   urpm/sys.pm
   <if set="DEBUG_INSTALL">
-    ARCH-linux/Term/ReadLine/Gnu.pm
-    ARCH-linux/Term/ReadLine/Gnu/XS.pm
-    ARCH-linux/auto/Term/ReadLine/Gnu/Gnu.so
-    ARCH-linux/auto/Term/ReadLine/Gnu/XS/autosplit.ix
+    ARCH-linux-thread-multi/Term/ReadLine/Gnu.pm
+    ARCH-linux-thread-multi/Term/ReadLine/Gnu/XS.pm
+    ARCH-linux-thread-multi/auto/Term/ReadLine/Gnu/Gnu.so
+    ARCH-linux-thread-multi/auto/Term/ReadLine/Gnu/XS/autosplit.ix
   </if>
 </from>
 
