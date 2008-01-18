@@ -66,6 +66,7 @@ our %l = (
       qw(madwifi_pci netwave_cs ndiswrapper orinoco orinoco_cs orinoco_nortel orinoco_pci orinoco_plx orinoco_tmd),
       qw(p54pci p54usb prism2_cs prism2_pci prism2_usb prism54 r8180 ray_cs),
       qw(rt2400 rt2500 rt2570 rt61 rt73 rtusb),
+      qw(rt2400pci rt2500pci rt2500usb rt61pci rt73usb),
       qw(spectrum_cs usbvnet_rfmd vt_ar5k wavelan_cs wl3501_cs wvlan_cs zd1201 zd1211rw),
       if_(arch() =~ /ppc/, qw(airport)),
     ],
