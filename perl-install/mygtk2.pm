@@ -2,6 +2,7 @@ package mygtk2;
 
 use diagnostics;
 use strict;
+use feature 'state';
 
 our @ISA = qw(Exporter);
 our @EXPORT = qw(gtknew gtkset gtkadd gtkval_register gtkval_modify);
@@ -1118,7 +1119,7 @@ sub may_destroy {
 }
 
 sub root_window() {
-    my $root if 0;
+    state $root;
     $root ||= Gtk2::Gdk->get_default_root_window;
 }
 

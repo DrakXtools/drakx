@@ -2,6 +2,7 @@ package install::steps_gtk; # $Id$
 
 use diagnostics;
 use strict;
+use feature 'state';
 use vars qw(@ISA);
 
 @ISA = qw(install::steps_interactive interactive::gtk);
@@ -474,7 +475,7 @@ sub installPackages {
 
     local $::noborderWhenEmbedded = 1;
     my $w = ugtk2->new(N("Installing"), icon => 'banner-sys');
-    my $show_advertising if 0;
+    state $show_advertising;
 
     my $pkg_log_widget = gtknew('TextView', editable => 0);
     my ($advertising_image, $change_time, $i);

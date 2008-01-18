@@ -2,6 +2,7 @@ package mirror; # $Id$
 
 use diagnostics;
 use strict;
+use feature 'state';
 
 use common;
 use log;
@@ -86,7 +87,7 @@ sub list {
     my ($product_id, $type, $o_arch) = @_;
 
     our @mirrors_raw;
-    my $prev_arch if 0;
+    state $prev_arch;
     undef @mirrors_raw if $prev_arch ne $o_arch;
     $prev_arch = $o_arch || arch();
     if (!@mirrors_raw) {
