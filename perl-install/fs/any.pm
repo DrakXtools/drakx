@@ -58,6 +58,7 @@ sub set_cdrom_symlink {
 	my $alias = basename($_->{mntpoint}) or next;
 	log::l("using alias $alias for $_->{device}");
 	$_->{device_alias} = $alias;
+	symlink($_->{device}, "/dev/$alias") if $::prefix; # do create the symlink to have it during install (otherwise fs::wild_device::from_part will give a non accessible device)
 	symlink($_->{device}, "$::prefix/dev/$alias");
     }
 }
