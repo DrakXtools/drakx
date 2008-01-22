@@ -12,15 +12,15 @@
 # Hilbert <h@mandrake.org>, 2004.
 # hilbert <h@mandrake.org>, 2004.
 # Shiva Huang <blueshiva@giga.net.tw>, 2005.
-# Shiva Huang <shivahuang@gmail.com>, 2005-2006.
+# Shiva Huang <shivahuang@gmail.com>, 2005-2006, 2008
 # You-Cheng Hsieh <yochenhsieh@xuite.net>, 2005-2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2008-01-17 14:31+0100\n"
-"PO-Revision-Date: 2007-09-22 23:54+0800\n"
-"Last-Translator: You-Cheng Hsieh <yochenhsieh@gmail.com>\n"
+"PO-Revision-Date: 2008-01-22 17:46+0800\n"
+"Last-Translator: Shiva Huang <shivahuang@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -192,9 +192,9 @@ msgid "Please try again"
 msgstr "請再試一次"
 
 #: any.pm:401
-#, fuzzy, c-format
+#, c-format
 msgid "You can not use a password with %s"
-msgstr "您不能使用加密過的檔案系統來作為 %s 的掛載點"
+msgstr "您不能使用 %s 作為密碼"
 
 #: any.pm:404 any.pm:787 any.pm:796 authentication.pm:198
 #, c-format
@@ -1323,9 +1323,9 @@ msgid "Use ``Unmount'' first"
 msgstr "要先 ``Unmount''"
 
 #: diskdrake/hd_gtk.pm:390
-#, fuzzy, c-format
+#, c-format
 msgid "Use ``%s'' instead (in expert mode)"
-msgstr "用 ``%s'' 代替"
+msgstr "用 ``%s'' 代替 (在專家模式)"
 
 #: diskdrake/hd_gtk.pm:390 diskdrake/interactive.pm:372
 #: diskdrake/interactive.pm:546 diskdrake/interactive.pm:1024
@@ -1557,9 +1557,9 @@ msgid "Which filesystem do you want?"
 msgstr "您要用那一種檔案系統？"
 
 #: diskdrake/interactive.pm:552
-#, fuzzy, c-format
+#, c-format
 msgid "Switching from %s to %s"
-msgstr "由 ext2 正在切換到 ext3"
+msgstr "正在由 %s 切換至 %s"
 
 #: diskdrake/interactive.pm:578 diskdrake/interactive.pm:581
 #, c-format
@@ -1980,9 +1980,9 @@ msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "幾何：%s 磁柱，%s 讀寫頭，%s 扇區\n"
 
 #: diskdrake/interactive.pm:1248
-#, fuzzy, c-format
+#, c-format
 msgid "Medium type: "
-msgstr "檔案系統格式："
+msgstr "媒體型式："
 
 #: diskdrake/interactive.pm:1249
 #, c-format
@@ -4931,19 +4931,19 @@ msgid "Your scanner(s) will not be available for non-root users."
 msgstr "您的掃描器將只供擁有管理者權限的使用者使用。"
 
 #: security/help.pm:11
-#, fuzzy, c-format
+#, c-format
 msgid "Accept bogus IPv4 error messages."
-msgstr "接受偽造的 IPv4 錯誤訊息"
+msgstr "接收偽造的 IPv4 錯誤訊息。"
 
 #: security/help.pm:13
-#, fuzzy, c-format
+#, c-format
 msgid "Accept broadcasted icmp echo."
-msgstr "接收廣播的 icmp 回應"
+msgstr "接收廣播的 icmp 回應。"
 
 #: security/help.pm:15
 #, c-format
 msgid "Accept icmp echo."
-msgstr "接受 icmp 回應。"
+msgstr "接收 icmp 回應。"
 
 #: security/help.pm:17
 #, c-format
@@ -5102,9 +5102,9 @@ msgid "Use password to authenticate users."
 msgstr "使用密碼來驗證使用者。"
 
 #: security/help.pm:94
-#, fuzzy, c-format
+#, c-format
 msgid "Activate ethernet cards promiscuity check."
-msgstr "啟用/停用每日安全性檢查。"
+msgstr "啟用網路卡混用檢查。"
 
 #: security/help.pm:96
 #, c-format
@@ -5114,7 +5114,7 @@ msgstr "啟用每日安全性檢查。"
 #: security/help.pm:98
 #, c-format
 msgid "Enable sulogin(8) in single user level."
-msgstr ""
+msgstr "在單一使用者模式啟用 sulogin(8)。"
 
 #: security/help.pm:100
 #, c-format
@@ -5139,14 +5139,14 @@ msgid ""
 msgstr "設定密碼的最小長度、最少的數字數及大寫字母數。"
 
 #: security/help.pm:108
-#, fuzzy, c-format
+#, c-format
 msgid "Set the root's file mode creation mask."
-msgstr "設定 root umask。"
+msgstr "設定 root 的檔案模式建立遮罩。"
 
 #: security/help.pm:109
 #, c-format
 msgid "if set to yes, check open ports."
-msgstr ""
+msgstr "如果設定為 yes，檢查開啟的連接埠。"
 
 #: security/help.pm:110
 #, c-format
@@ -5159,6 +5159,13 @@ msgid ""
 "\n"
 "- for users with the 0 id other than root."
 msgstr ""
+"如果設定為 yes，檢查：\n"
+"\n"
+"- 空白密碼、\n"
+"\n"
+"- 在 /etc/shadow 中沒有密碼、\n"
+"\n"
+"- 並非 root 但使用者 ID 卻為 0。"
 
 #: security/help.pm:117
 #, c-format
@@ -5168,7 +5175,7 @@ msgstr "如果設定為 yes，檢查使用者家目錄下的檔案權限。"
 #: security/help.pm:118
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
-msgstr ""
+msgstr "如果設定為 yes，檢查網路裝置是否處於混雜模式。"
 
 #: security/help.pm:119
 #, c-format
