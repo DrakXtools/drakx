@@ -111,13 +111,17 @@ sub get_lvs {
       [
        map {
 	   my $device = "$lvm->{VG_name}/$_";
-	   my $fs_type = -e "/dev/$device" && fs::type::fs_type_from_magic({ device => $device });
-
-	   { device => $device, 
+	   my $part = {
+	     device => $device, 
 	     lv_name => $_,
 	     rootDevice => $lvm->{VG_name},
-	     fs_type => $fs_type || 'ext2',
 	     size => get_lv_size($device) };
+	   if (my $type = -e "/dev/$device" && fs::type::type_subpart_from_magic($part)) {
+                put_in_hash($part, $type); 	       
+	   } else {
+	       $part->{fs_type} = 'ext2';
+	   }
+	   $part;
        } @l
       ];
 }
