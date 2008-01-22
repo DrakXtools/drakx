@@ -254,7 +254,7 @@ sub read_primary {
     #- but other sectors (typically for extended partition ones) have to match this type!
 	my @parttype = (
 	  if_(arch() =~ /^ia64/, 'gpt'),
-	  arch() =~ /^sparc/ ? ('sun', 'bsd') : ('dos', 'lvm', 'bsd', 'sun', 'mac'),
+	  arch() =~ /^sparc/ ? ('sun', 'bsd') : ('lvm', 'dos', 'bsd', 'sun', 'mac'),
 	);
 	foreach ('empty', @parttype, 'unknown') {
 	    /unknown/ and die "unknown partition table format on disk " . $hd->{file};
