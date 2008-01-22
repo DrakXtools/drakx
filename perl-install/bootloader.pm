@@ -996,6 +996,13 @@ sub suggest {
     } elsif (arch() !~ /ia64/) {
 	#- search for dos (or windows) boot partition. Do not look in extended partitions!
 	my @windows_boot_parts =
+	  grep {	      
+	      my $handle = any::inspect($_, $::prefix);
+	      my $dir = $handle && $handle->{dir};
+	      my @root_files = map { lc($_) } all($dir);
+	      log::l("found the following files on potential windows partition $_->{device}: " . join(' ', @root_files));
+	      intersection(\@root_files, [ "windows", "winnt" ]);
+	  }
 	  grep { isFat_or_NTFS($_) && member(fs::type::fs_type_from_magic($_), 'vfat', 'ntfs')
 		   && fs::type::part2type_name($_) !~ /^Hidden/;
 	     }
