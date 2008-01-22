@@ -142,7 +142,7 @@ sub get_geometries {
     } @hds);
 
 
-    my %id2edd = keep_non_duplicates(map { [ chomp_(scalar cat_("$_/mbr_signature")), $_ ] } glob("/sys/firmware/edd/int13_dev*"));
+    my %id2edd = keep_non_duplicates(map { [ scalar(chomp_(cat_("$_/mbr_signature"))), $_ ] } glob("/sys/firmware/edd/int13_dev*"));
 
     log::l("id2hd: " . join(' ', map_each { "$::a=>$::b->{device}" } %id2hd));
     log::l("id2edd: " . join(' ', map_each { "$::a=>$::b" } %id2edd));
