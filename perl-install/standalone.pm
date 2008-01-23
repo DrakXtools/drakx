@@ -141,7 +141,7 @@ sub real_version {
 
 sub version() {
     print 'Drakxtools version ' . real_version() . '
-Copyright (C) 1999-2006 Mandriva by <install@mandriva.com>
+Copyright (C) 1999-2008 Mandriva by <install@mandriva.com>
 ',  $::license, "\n";
 }
 
