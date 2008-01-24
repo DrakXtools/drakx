@@ -1,6 +1,8 @@
 - bootloader-config, diskdrake:
   o look for LVM PV on non partitioned disk before looking for DOS
     partition_table (esp. for lilo which puts the DOS magic)
+- mygtk2: make sure users of ::no_ugtk_init (eg: drakbug) do catch
+  exceptions in callbacks
 
 Version 10.6.6 - 22 January 2008
 
