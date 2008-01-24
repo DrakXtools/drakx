@@ -1,6 +1,10 @@
 - bootloader-config, diskdrake:
   o look for LVM PV on non partitioned disk before looking for DOS
     partition_table (esp. for lilo which puts the DOS magic)
+- drakbug:
+  o make "Please describe what you were doing when it crashed" more
+    visible and force people to write something in before opening
+    bugzilla
 - mygtk2: make sure users of ::no_ugtk_init (eg: drakbug) do catch
   exceptions in callbacks
 

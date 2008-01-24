@@ -33,7 +33,7 @@ use run_program;
 
 my $prog;
 my $incident = 0;
-my ($table, $comb_app, $com_app, $button_pkg, $package, $distrocode, $error, $gdb_trace);
+my ($table, $comb_app, $com_app, $button_pkg, $package, $distrocode, $error, $gdb_trace, $user_descr);
 
 my $i;
 foreach (@ARGV) {
@@ -153,6 +153,12 @@ gtkadd($window->{window},
                                    N("To submit a bug report, click on the report button.  \nThis will open a web browser window on %s where you'll find a form to fill in.  The information displayed above will be transferred to that server.  \nThings useful to include in your report are the output of lspcidrake -v, kernel version, and /proc/cpuinfo.", $wizard_name)
                                ]
                            ])),
+                0, gtknew('Title2', label => N("Please describe what you were doing when it crashed:")),
+                if_($incident,
+                      1, create_scrolled_window(
+                          $user_descr = gtknew('TextView', editable => 1, height => 200)
+                      ),
+                ),
 		if_(!$error,
 		0, gtkadd($table),
           ),
@@ -167,6 +173,17 @@ gtkadd($window->{window},
 							 my $component = $app ?
 							   if_(member($app, @all_drakxtools), $app) || $mdk_app->{$app} :
 							   $product;
+                                                         my $text;
+                                                         if ($incident) {
+                                                             my $buffer = $user_descr->get_buffer;
+                                                             $text = $buffer->get_text($buffer->get_start_iter, $buffer->get_end_iter, 0);
+                                                             if (!$text) {
+                                                                 err_dialog(N("Warning"),
+                                                                            N("You must type in what you were doing when this bug happens in order to increase the reproductibility of this bug and the odds of fixing it")
+                                                                              . "\n\n" . N("Thanks."));
+                                                                 return;
+                                                             }
+                                                         }
                                     my $rel = standalone::real_version();
 							 my $options = join('&',
                                                        ($product || $version ?
@@ -177,9 +194,8 @@ gtkadd($window->{window},
                                                            "short_desc=$prog%20" . ($segfaulted ? 'segfaulted' : 'crashed'),
                                                            'comment=' . uri_escape(qq(The "$prog" program crashed. Drakbug-$rel caught it.
 
-Please describe what you were doing when it crashed.
-
-) . ($error ? qq(Backtrace was:
+). ($text || "Please describe what you were doing when it crashed.") . "\n\n"
+. ($error ? qq(Backtrace was:
 $error) :
 qq(If you can, try to run the "$prog" program from a terminal and copy and paste here any error messages and/or backtrace))
   . if_($gdb_trace, qq(
