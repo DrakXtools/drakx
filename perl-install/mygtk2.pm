@@ -24,7 +24,7 @@ sub init() {
           @::textdomains;
 }
 init() unless ($::no_ugtk_init);
-Gtk2->croak_execeptions if (!$::no_ugtk_init || $::isInstall) && 0.95 < $Gtk2::VERSION;
+Gtk2->croak_execeptions if (!$::no_ugtk_init || $::isInstall);
 
 
 
