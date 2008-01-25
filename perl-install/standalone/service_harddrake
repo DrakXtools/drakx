@@ -71,6 +71,7 @@ foreach my $card (@cards) {
         my @cards = Xconfig::card::probe();
         my $driver = $cards[0]{Driver};
         my $new_driver;
+        cp_af('/etc/X11/xorg.conf', "/etc/X11/xorg.conf.mdv$^T");
         substInFile { $new_driver = $1 if s!Driver "($card->{xorg_driver_regexp})"!Driver "$driver"!g } '/etc/X11/xorg.conf';
         if ($new_driver) {
             log::explanations("switch X.org driver from $new_driver to $driver");
