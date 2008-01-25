@@ -53,6 +53,7 @@ sub new($$) {
 
 		push @options, '-allowMouseOpenFail', '-xf86config', $f if arch() !~ /^sparc/;
 		push @options, 'tty7', '-s', '240';
+		push @options, '-nolisten', 'tcp';
 
 		#- old weird servers: Xsun
 		push @options, '-fp', '/usr/share/fonts:unscaled' if $server =~ /Xsun/;
