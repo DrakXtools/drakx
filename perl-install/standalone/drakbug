@@ -66,6 +66,7 @@ if (!check_for_xserver) {
                $gdb_trace,
                '')
       if $error;
+    c::_exit(0);
 }
 
 mygtk2::init();
