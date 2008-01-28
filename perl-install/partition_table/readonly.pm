@@ -8,7 +8,6 @@ our @ISA = qw(partition_table::raw);
 use common;
 use partition_table::raw;
 use fs::type;
-use lvm;
 
 sub initialize {
     my ($class, $hd, $parts) = @_;

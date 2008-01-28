@@ -10,7 +10,6 @@ our @ISA = qw(partition_table::readonly);
 use common;
 use partition_table::readonly;
 use fs::type;
-use lvm;
 
 sub _parts {
     my ($hd) = @_;
