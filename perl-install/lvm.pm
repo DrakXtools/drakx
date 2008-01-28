@@ -15,7 +15,7 @@ use run_program;
 #- for partition_table_xxx emulation
 sub new {
     my ($class, $name) = @_;
-    $name =~ s/\W/_/g;
+    $name =~ s/[^\w-]/_/g;
     $name = substr($name, 0, 63); # max length must be < NAME_LEN / 2  where NAME_LEN is 128
     bless { disks => [], VG_name => $name }, $class;
 }
