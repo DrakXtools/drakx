@@ -196,7 +196,8 @@ sub type_names {
 sub type_name2subpart {
     my ($name) = @_;
     exists $type_name2fs_type{$name} && 
-      { fs_type => $type_name2fs_type{$name}, pt_type => $type_name2pt_type{$name} };
+      { type_name => $name,
+	fs_type => $type_name2fs_type{$name}, pt_type => $type_name2pt_type{$name} };
 }
 
 sub part2type_name { 
@@ -308,8 +309,8 @@ sub isEmpty { !$_[0]{fs_type} && $_[0]{pt_type} == 0 }
 sub isEfi { arch() =~ /ia64/ && $_[0]{pt_type} == 0xef }
 sub isWholedisk { arch() =~ /^sparc/ && $_[0]{pt_type} == 5 }
 sub isExtended { arch() !~ /^sparc/ && ($_[0]{pt_type} == 5 || $_[0]{pt_type} == 0xf || $_[0]{pt_type} == 0x85) }
-sub isRawLVM { $_[0]{pt_type} == 0x8e }
-sub isRawRAID { $_[0]{pt_type} == 0xfd }
+sub isRawLVM { $_[0]{pt_type} == 0x8e || $_[0]{type_name} eq 'Linux Logical Volume Manager' }
+sub isRawRAID { $_[0]{pt_type} == 0xfd || $_[0]{type_name} eq 'Linux RAID' }
 sub isSwap { $_[0]{fs_type} eq 'swap' }
 sub isDos { arch() !~ /^sparc/ && ${{ 1 => 1, 4 => 1, 6 => 1 }}{$_[0]{pt_type}} }
 sub isFat_or_NTFS { member($_[0]{fs_type}, 'vfat', 'ntfs', 'ntfs-3g') }
