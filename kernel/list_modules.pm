@@ -37,11 +37,11 @@ our %l = (
         qw(typhoon via-rhine winbond-840 forcedeth),
         qw(sungem sunhme), # drivers for ultrasparc, but compiled in ix86 kernels...
       ),
-      qw(3c59x 8139too 8139cp niu sundance), #rtl8139
+      qw(3c59x 8139too 8139cp cpmac niu sundance), #rtl8139
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
-      qw(atl1 bnx2 cxgb cxgb3 dl2k e1000 e1000e igb ixgb ixgbe myri_sbus netxen_nic ns83820 qla3xxx r8169 s2io sis190 sk98lin skge sky2 spidernet tehuti tg3 via-velocity yellowfin),
+      qw(atl1 bnx2 cxgb cxgb3 dl2k e1000 e1000e igb ipg ixgb ixgbe myri_sbus netxen_nic ns83820 qla3xxx r8169 s2io sis190 sk98lin skge sky2 spidernet tehuti tg3 via-velocity yellowfin),
       qw(bcm5820 bcm5700), #- encrypted
     ],
 
@@ -115,11 +115,12 @@ our %l = (
       # note that ata_piix manage RAID devices on ICH6R
       qw(ahci aic94xx ata_adma ata_piix pata_pdc2027x pdc_adma sata_fsl sata_inic162x sata_mv sata_nv sata_promise sata_qstor sata_sil sata_sil24 sata_sis sata_svw sata_sx4 sata_uli sata_via sata_vsc sx8),
       # new drivers: old ide drivers ported over libata:
-      qw(pata_ali pata_amd pata_artop pata_atiixp pata_cmd64x pata_cmd640 pata_cs5520 pata_cs5530 pata_cs5535 pata_cs5536 pata_cypress),
+      qw(pata_ali pata_amd pata_artop pata_atiixp pata_bf54x pata_cmd64x pata_cmd640 pata_cs5520 pata_cs5530 pata_cs5535 pata_cs5536 pata_cypress),
       qw(pata_efar pata_hpt366 pata_hpt37x pata_hpt3x2n pata_hpt3x3 pata_isapnp pata_it821x pata_it8172 pata_it8213 pata_jmicron),
       qw(pata_legacy pata_marvell pata_mpiix pata_netcell pata_ns87410 pata_oldpiix pata_opti pata_optidma),
       qw(pata_pdc2027x pata_pdc202xx_old pata_platform pata_qdi pata_radisys pata_rz1000),
       qw(pata_sc1200 pata_serverworks pata_sil680 pata_sis pata_sl82c105 pata_triflex pata_via pata_winbond ata_generic),
+      if_(arch() =~ /ppc/, 'sata_fsl'),
     ],
     hardware_raid => [
       if_(arch() =~ /^sparc/, qw(pluto)),
@@ -186,7 +187,7 @@ our %l = (
           qw(maestro3 mpu401 msnd_pinnacle nm256_audio nvaudio opl3 opl3sa opl3sa2 pas2 pss),
           qw(rme96xx sam9407 sb sgalaxy snd-ad1816a snd-ad1848 snd-ad1889 snd-ali5451 snd-als100 snd-als300),
           qw(snd-als4000 snd-atiixp snd-au8810 snd-au8820 snd-au8830 snd-audigyls snd-azt2316 snd-azt2320 snd-azt3328 snd-azx),
-          qw(snd-asihpi snd-bt87x snd-ca0106 snd-cmi8330 snd-cmi8788 snd-cmipci),
+          qw(snd-asihpi snd-at73c213 snd-bt87x snd-ca0106 snd-cmi8330 snd-cmi8788 snd-cmipci),
           qw(snd-cs4231 snd-cs4232 snd-cs4236 snd-cs4281 snd-cs46xx snd-cs5530 snd-cs5535audio),
           qw(snd-darla20 snd-darla24 snd-dt019x snd-echo3g snd-emu10k1 snd-emu10k1x),
           qw(snd-ens1370 snd-ens1371 snd-es1688 snd-es18xx snd-es1938 snd-es1968 snd-es968),
@@ -202,7 +203,7 @@ our %l = (
           qw(snd-ymfpci sonicvibes sscape trident via82cxxx_audio wavefront ymfpci),
       ),
     ],
-    tv => [ qw(bt878 bttv cx8800 cx8802 cx88-blackbird dpc7146 ivtv mxb pvrusb2 saa7134 zr36067) ],
+    tv => [ qw(bt878 bttv cx23885 cx8800 cx8802 cx88-blackbird dpc7146 ivtv mxb pvrusb2 saa7134 zr36067) ],
     dvb => [
         qw(b2c2-flexcop-pci b2c2-flexcop-usb budget budget-av budget-ci cinergyT2),
         qw(dvb-dibusb dvb-ttpci dvb-ttusb-budget dvb-usb-a800 dvb-usb-cxusb),
@@ -215,7 +216,7 @@ our %l = (
     scanner => [ qw(scanner microtek) ],
     gameport => [ qw(cs461x ns558 emu10k1-gp fm801-gp lightning ns558 vortex) ],
     usb_sound => [ qw(audio dabusb dsbr100 snd-usb-audio snd-usb-caiaq snd-usb-usx2y usb-midi) ],
-    webcam => [ qw(cafe_ccic cpia_usb cpia2 cyber2000fb em28xx et61x251 ibmcam konicawc mod_quickcam ov511 ov511-alt ov518_decomp ovfx2 pwc quickcam quickcam_messenger se401 stv680 sn9c102 ultracam usbvideo usbvision vicam w9968cf zc0301) ],
+    webcam => [ qw(cafe_ccic cpia_usb cpia2 cyber2000fb em28xx et61x251 ibmcam konicawc mod_quickcam ov511 ov511-alt ov518_decomp ovfx2 pwc quickcam quickcam_messenger se401 stv680 sn9c102  tcm825x ultracam usbvideo usbvision vicam w9968cf zc0301) ],
   },
 
   # USB input stuff get automagically loaded by hotplug and thus
