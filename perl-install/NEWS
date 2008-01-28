@@ -1,6 +1,7 @@
 - detect raid partitions based on either type 0xfd or vol_id detecting
   linux_raid_member (#35684)
 - bootloader-config:
+  o fix handling LVM VGs with "-" in the name (#37267)
   o do not drop "lock" in chainload entries from grub's menu.lst (#36398)
 
 Version 10.6.9 - 25 January 2008
