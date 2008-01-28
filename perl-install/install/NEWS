@@ -1,3 +1,10 @@
+- handle new drivers: 
+  o ethernet: cpmac
+  o gigabit: ipg
+  o pata/sata: pata_bf54x, sata_fsl
+  o sound: snd-at73c213 
+  o tv cards: cx23885
+  o webcams: tcm825x
 - fix detecting existing LVMs (#31228)
   (regression introduced in 10.4.204 (?))
 - fix ensuring X is launched on tty7 (cf #37087)
