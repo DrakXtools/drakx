@@ -1158,7 +1158,7 @@ Allowing this will permit users to simply click on \"Share\" in konqueror and na
     if ($r ne $l[0]) {
 	require services;
 	my %types = (
-	    nfs => [ 'nfs-utils', 'nfs',
+	    nfs => [ 'nfs-utils', 'nfs-server',
 		     N("NFS: the traditional Unix file sharing system, with less support on Mac and Windows.")
 		   ],
 	    smb => [ 'samba-server', 'smb',
