@@ -1634,6 +1634,7 @@ sub write_grub {
 		    next;
 		}
 		push @conf, $title;
+		push @conf, grep { $entry->{$_} } 'lock';
 		push @conf, join(' ', $entry->{rootnoverify} ? 'rootnoverify' : 'root', $dev);
 
 		if ($entry->{table}) {
