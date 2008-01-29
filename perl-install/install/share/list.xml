@@ -37,7 +37,7 @@
 
   setfont kbd_mode
   Xorg xset
-  xmodmap <!-- should be "xkbcomp setxkbmap", but can't be because of #35912 -->
+  xkbcomp setxkbmap
 
   fb2png
   perl
@@ -75,7 +75,6 @@
   libshadow.so
 </from>
 
-<!--
 <from dir="/usr/share/X11/xkb">
  <filter subst="s!//.*!!">
   geometry/pc
@@ -89,7 +88,6 @@
   </from>
  </filter>
 </from>
--->
 
 <from dir="/usr/share/fonts/">
   <to flatten="on">
@@ -402,7 +400,6 @@
 <from dir="share">
   <from expand="tar">
     fonts.tar.bz2
-    keyboards.tar.bz2
     keymaps.tar.bz2
   </from>
 
