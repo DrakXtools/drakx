@@ -296,7 +296,7 @@ sub set_permissions {
 
 sub release_file {
     my ($o_dir) = @_;
-    my @names = ('mandrakelinux-release', 'mandrake-release', 'conectiva-release', 'release', 'redhat-release');
+    my @names = ('mandrakelinux-release', 'mandrake-release', 'conectiva-release', 'release', 'redhat-release', 'fedora-release');
     find { -r "$o_dir$_" } (
 	(map { "/root/drakx/$_.upgrading" } @names), 
 	(map { "/etc/$_" } @names),
