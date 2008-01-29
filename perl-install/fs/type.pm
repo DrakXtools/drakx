@@ -273,7 +273,7 @@ sub call_vol_id {
 
     my %h = map {
 	if_(/(.*?)=(.*)/, $1 => $2);
-    } run_program::get_stdout('vol_id', devices::make($part->{device}));
+    } run_program::get_stdout('vol_id', '2>', '/dev/null', devices::make($part->{device}));
 
     \%h;
 }
