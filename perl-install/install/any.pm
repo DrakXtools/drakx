@@ -967,23 +967,15 @@ sub generate_automatic_stage1_params {
 sub find_root_parts {
     my ($fstab, $prefix) = @_;
 
-    my $extract = sub {
-	my ($prefix, $f, $part) = @_;
-	chomp(my $s = cat_("$prefix$f"));
-	my $arch = $s =~ s/\s+for\s+(\S+)// && $1;
-	log::l("find_root_parts found $part->{device}: $s for $arch" . ($f !~ m!/etc/! ? " in special release file $f" : ''));
-	{ release => $s, release_file => $f, part => $part, arch => $arch };
-    };
-
     if ($::local_install) {
 	my $f = common::release_file('/mnt') or return;
-	return $extract->('/mnt', $f, {});
+	return common::parse_release_file('/mnt', $f, {});
     }
 
     map { 
 	my $handle = any::inspect($_, $prefix);
 	if (my $f = $handle && common::release_file($handle->{dir})) {
-	    $extract->($handle->{dir}, $f, $_);
+	    common::parse_release_file($handle->{dir}, $f, $_);
 	} else { () }
     } grep { isTrueLocalFS($_) } @$fstab;
 }
