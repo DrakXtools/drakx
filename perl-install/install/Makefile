@@ -22,7 +22,7 @@ tar:
 	svn export -q -rBASE ../../tools $(PRODUCT)-$(VERSION)/tools
 	svn export -q -rBASE ../../kernel $(PRODUCT)-$(VERSION)/kernel
 	cp ../../Makefile.config $(PRODUCT)-$(VERSION)/
-	tar cfj $(PRODUCT)-$(VERSION).tar.bz2 $(PRODUCT)-$(VERSION)
+	tar cfY $(PRODUCT)-$(VERSION).tar.lzma $(PRODUCT)-$(VERSION)
 	rm -rf $(PRODUCT)-$(VERSION)
 
 install:
