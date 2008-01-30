@@ -1025,6 +1025,17 @@ sub suggest {
     }
     $bootloader->{default} ||= "linux";
     $bootloader->{method} ||= first(method_choices($all_hds, 1));
+
+    if (main_method($bootloader->{method}) eq 'grub') {
+	foreach my $c (find_other_distros_grub_conf($fstab)) {	    
+	    add_entry($bootloader, { 
+		type => 'grub_configfile',
+		label => $c->{name},
+		kernel_or_dev => "/dev/$c->{bootpart}{device}",
+		configfile => $c->{grub_conf},
+	    });
+	}
+    }
 }
 
 sub detect_main_method {
@@ -1331,6 +1342,9 @@ sub write_lilo {
 	my $mbootpack_file = get_mbootpack_filename($entry);
         if ($mbootpack_file && !build_mbootpack($entry)) {
 	    warn "mbootpack is required for xen but unavailable, skipping\n";
+	    next;
+	}
+	if ($entry->{type} eq 'grub_configfile') {
 	    next;
 	}
 
@@ -1650,7 +1664,11 @@ sub write_grub {
 		    push @conf, map_each { "map ($::b) ($::a)" } %{$entry->{mapdrive}};
 		}
 		push @conf, "makeactive" if $entry->{makeactive};
-		push @conf, "chainloader +1";
+		if ($entry->{type} eq 'grub_configfile') {
+		    push @conf, "configfile $entry->{configfile}";
+		} else {
+		    push @conf, "chainloader +1";
+		}
 	    }
 	}
 	my $f = "$::prefix/boot/grub/menu.lst";
@@ -1783,6 +1801,73 @@ sub ensure_pkg_is_installed {
 	}
     }
     1;
+}
+
+sub find_other_distros_grub_conf {
+    my ($fstab) = @_;
+
+    my @unknown_true_fs = 
+      grep { isTrueLocalFS($_) && 
+	     (!$_->{mntpoint} || !member($_->{mntpoint}, '/home', fs::type::directories_needed_to_boot()));
+	 } @$fstab;
+
+    log::l("looking for configured grub on partitions " . join(' ', map { $_->{device} } @unknown_true_fs));
+
+    my @l;
+    foreach my $part (@unknown_true_fs) {
+	my $handle = any::inspect($part, $::prefix) or next;
+
+	foreach my $bootdir ('', '/boot') {
+	    my $f = find { -e "$handle->{dir}$bootdir/$_" } 'grub.conf', 'grub/menu.lst' or next;
+	    push @l, { bootpart => $part, bootdir => $bootdir, grub_conf => "$bootdir/$f" };
+	}
+	if (my $f = common::release_file($handle->{dir})) {
+	    my $h = common::parse_release_file($handle->{dir}, $f, $part);
+	    $h->{name} = $h->{release};
+	    push @l, $h;
+	} elsif ($handle && -e "$handle->{dir}/etc/issue") {
+	    my ($s, $dropped) = cat_("$handle->{dir}/etc/issue") =~ /^([^\\\n]*)(.*)/;
+	    log::l("found /etc/issue: $s (removed: $dropped)");
+	    push @l, { name => $s, part => $part };
+	}
+    }
+    my $root;
+    my $set_root = sub {
+	my ($v) = @_;
+	$root and log::l("don't know what to do with $root->{name} ($root->{part}{device})");
+	$root = $v;
+    };
+    my @found;
+    while (my $e = shift @l) {
+	if ($e->{name}) {
+	    $set_root->($e);
+	} else {
+	    if (@l && $l[0]{name}) {
+		$set_root->(shift @l);
+	    }
+
+	    my $ok;
+	    if ($root && $root->{part} == $e->{bootpart} && $e->{bootdir}) {
+		# easy case: /boot is not a separate partition
+		$ok = 1;
+	    } elsif ($root && $root->{part} != $e->{bootpart} && !$e->{bootdir}) {
+		log::l("associating '/' $root->{part}{device} with '/boot' $e->{bootpart}{device}");
+		$ok = 1;
+	    }
+	    if ($ok) {
+		add2hash($e, $root);
+		undef $root;
+		push @found, $e;
+	    } elsif ($root) {
+		log::l("weird case, skipping grub conf from $e->{bootpart}{device}, keeping '/' from $root->{part}{device}");
+	    } else {
+		log::l("could not recognise the distribution for $e->{grub_conf} in $e->{bootpart}{device}");
+	    }
+	}
+    }
+    $set_root->(undef);
+
+    @found;
 }
 
 sub update_for_renumbered_partitions {
