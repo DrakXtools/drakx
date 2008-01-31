@@ -161,15 +161,15 @@ gtkadd($window->{window},
                       ),
                 ),
 		if_(!$error,
-		0, gtkadd($table),
-          ),
+                    0, gtkadd($table),
+                ),
 		0, gtkpack(Gtk2::HSeparator->new),
 		0, gtkpack(create_hbox('edge'),
-			    gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { system("drakhelp --id drakbug &") }),
-                      gtkpack(create_hbox('end'),
+                           gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { system("drakhelp --id drakbug &") }),
+                           gtkpack(create_hbox('end'),
                                    gtksignal_connect(Gtk2::Button->new(N("Report")), clicked => \&report_bug_to_bugzilla),
-			       gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub { ugtk2->exit(0) }),
-			   ))));
+                                   gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub { ugtk2->exit(0) }),
+                               ))));
 
 if (defined $prog) {
     update_app($prog); 
