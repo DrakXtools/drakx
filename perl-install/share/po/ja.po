@@ -3,13 +3,13 @@
 # Copyright (C) 2000,2003, 2004, 2006 Free Software Foundation, Inc.
 # YAMAGATA Hiroo <hiyori13@alum.mit.edu>, 2000.
 # UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2003, 2004, 2006.
-# Yukiko Bando <ybando@k6.dion.ne.jp>, 2004, 2005, 2006, 2007.
+# Yukiko Bando <ybando@k6.dion.ne.jp>, 2004-2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-ja\n"
 "POT-Creation-Date: 2008-01-17 14:31+0100\n"
-"PO-Revision-Date: 2007-09-06 22:00+0900\n"
+"PO-Revision-Date: 2008-01-31 23:00+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -1334,9 +1334,9 @@ msgid "Use ``Unmount'' first"
 msgstr "まず「アンマウント」を使ってください"
 
 #: diskdrake/hd_gtk.pm:390
-#, fuzzy, c-format
+#, c-format
 msgid "Use ``%s'' instead (in expert mode)"
-msgstr "代わりに %s を使ってください"
+msgstr "代わりにエキスパートモードで %s を使ってください"
 
 #: diskdrake/hd_gtk.pm:390 diskdrake/interactive.pm:372
 #: diskdrake/interactive.pm:546 diskdrake/interactive.pm:1024
@@ -1572,9 +1572,9 @@ msgid "Which filesystem do you want?"
 msgstr "どのファイルシステムを使いますか？"
 
 #: diskdrake/interactive.pm:552
-#, fuzzy, c-format
+#, c-format
 msgid "Switching from %s to %s"
-msgstr "ext2 を ext3 に変更"
+msgstr "%s を %s に変更"
 
 #: diskdrake/interactive.pm:578 diskdrake/interactive.pm:581
 #, c-format
@@ -2002,9 +2002,9 @@ msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "ジオメトリ: %s シリンダ, %s ヘッド, %s セクタ\n"
 
 #: diskdrake/interactive.pm:1248
-#, fuzzy, c-format
+#, c-format
 msgid "Medium type: "
-msgstr "ファイルシステムの種類: "
+msgstr "メディアの種類: "
 
 #: diskdrake/interactive.pm:1249
 #, c-format
@@ -6679,133 +6679,3 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "インストール失敗"
-
-#~ msgid "Undo"
-#~ msgstr "元に戻す"
-
-#~ msgid "Save partition table"
-#~ msgstr "パーティションテーブルを保存"
-
-#~ msgid "Restore partition table"
-#~ msgstr "パーティションテーブルを復旧"
-
-#~ msgid "Select file"
-#~ msgstr "ファイルを選択"
-
-#~ msgid ""
-#~ "The backup partition table has not the same size\n"
-#~ "Still continue?"
-#~ msgstr ""
-#~ "バックアップのパーティションテーブルが同一サイズになっていません。\n"
-#~ "このまま続けますか？"
-
-#~ msgid "Info: "
-#~ msgstr "情報: "
-
-#~ msgid "Unknown driver"
-#~ msgstr "不明なドライバ"
-
-#~ msgid "Error reading file %s"
-#~ msgstr "ファイル %s を読み込み中にエラー"
-
-#~ msgid "Restoring from file %s failed: %s"
-#~ msgstr "ファイル %s からの復元に失敗しました: %s"
-
-#~ msgid "Bad backup file"
-#~ msgstr "不正なバックアップファイル"
-
-#~ msgid "Error writing to file %s"
-#~ msgstr "ファイル %s に書き込み中にエラー"
-
-#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
-#~ msgstr "エラー: お使いのサウンドカードの %s ドライバはリストにありません"
-
-#~ msgid "Ext2"
-#~ msgstr "Ext2"
-
-# we must keep label narrow, full katakana label is too wide
-#~ msgid "Journalised FS"
-#~ msgstr "Journalised FS"
-
-#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
-#~ msgstr "X フォントサーバを開始します。(Xorg を実行するのに必須)"
-
-#~ msgid "Add user"
-#~ msgstr "ユーザを追加"
-
-#~ msgid "Accept user"
-#~ msgstr "ユーザ受け入れ"
-
-#~ msgid ""
-#~ "Do not update directory inode access times on this filesystem\n"
-#~ "(e.g, for faster access on the news spool to speed up news servers)."
-#~ msgstr ""
-#~ "このファイルシステムでディレクトリの inode アクセス時間を更新しない。\n"
-#~ "(用途例: ニューススプールへのアクセス速度を向上させる)"
-
-#~ msgid "No supermount"
-#~ msgstr "supermount なし"
-
-#~ msgid "Supermount"
-#~ msgstr "supermount"
-
-#~ msgid "Supermount except for CDROM drives"
-#~ msgstr "CDROM ドライブ以外は supermount"
-
-#~ msgid "Rescue partition table"
-#~ msgstr "パーティションテーブルを救出"
-
-#~ msgid "Removable media automounting"
-#~ msgstr "リムーバブルメディアを自動的にマウント"
-
-#~ msgid "Trying to rescue partition table"
-#~ msgstr "パーティションテーブルを救出"
-
-#~ msgid ""
-#~ "Use local for all authentication and information user tell in local file"
-#~ msgstr "すべての認証およびユーザ情報の検索にローカルシステムのデータを使う"
-
-#~ msgid "Accept/Refuse bogus IPv4 error messages."
-#~ msgstr "偽の IPv4 エラーメッセージを許可/拒否する"
-
-#~ msgid "Accept/Refuse broadcasted icmp echo."
-#~ msgstr "ブロードキャストされた icmp echo を許可/拒否する"
-
-#~ msgid "Accept/Refuse icmp echo."
-#~ msgstr "icmp echo を許可/禁止する"
-
-#~ msgid "Allow/Forbid remote root login."
-#~ msgstr "リモート root ログインを許可/禁止する"
-
-#~ msgid "Enable/Disable IP spoofing protection."
-#~ msgstr "IP spoofing protection を有効/無効にします。"
-
-#~ msgid "Enable/Disable libsafe if libsafe is found on the system."
-#~ msgstr "libsafe がシステムにある場合、libsafe を有効/無効にします。"
-
-#~ msgid "Enable/Disable the logging of IPv4 strange packets."
-#~ msgstr "IPv4 strange packets のログを有効/無効にします。"
-
-#~ msgid "Enable/Disable msec hourly security check."
-#~ msgstr "一時間ごとの msec セキュリティチェックを有効/無効にします。"
-
-#~ msgid "Icon"
-#~ msgstr "アイコン"
-
-#~ msgid "Number of capture buffers:"
-#~ msgstr "キャプチャバッファの量:"
-
-#~ msgid "number of capture buffers for mmap'ed capture"
-#~ msgstr "mmap キャプチャのバッファ量"
-
-#~ msgid "PLL setting:"
-#~ msgstr "PLL の設定:"
-
-#~ msgid "Radio support:"
-#~ msgstr "ラジオサポート:"
-
-#~ msgid "enable radio support"
-#~ msgstr "ラジオサポートを有効にする"
-
-#~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
-#~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
