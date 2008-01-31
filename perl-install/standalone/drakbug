@@ -23,6 +23,7 @@ use diagnostics;
 use lib qw(/usr/lib/libDrakX);
 use any;
 use standalone;
+use MDK::Common;
 use common;
 BEGIN { $::no_ugtk_init = 1 }
 use mygtk2 qw(gtknew);
@@ -46,7 +47,7 @@ foreach (@ARGV) {
 
 my $segfaulted = $error =~ /SEGV/;
 if ($segfaulted && -x '/usr/bin/gdb') {
-    local $ENV{TMP} ||= '/tmp';
+    local $ENV{TMP} = $ENV{TMP} || '/tmp';
     my $file = chomp_(`mktemp $ENV{TMP}/drakbug.XXXXXXXX`);
     my $_guard = before_leaving { rm_rf $file };
     if (-e $file) {
@@ -58,7 +59,7 @@ quit));
                                          && !/Loaded symbols/ && !/The program is run/ } split(/\n/, $temp);
     }
 }
-if (!check_for_xserver) {
+if (!check_for_xserver()) {
     print("Cannot be run in console mode.\n");
     print join("\n", 
                N("The \"%s\" program has crashed with the following error:", $prog),
@@ -222,11 +223,11 @@ sub get_package {
     $rpm_package;
 }
 
-sub report_bug_to_bugzilla {
+sub report_bug_to_bugzilla() {
     my $p = $package->get_text;
     my ($product, $version) = $p =~ /^(.*)-([^-]+-[^-]+(mdk|mdv.*))$/; # FIXME: fragile!
     my $app = $comb_app->entry->get_text;
-    my $component = $app ?
+    my $_component = $app ?
       if_(member($app, @all_drakxtools), $app) || $mdk_app->{$app} :
         $product;
     my $text;
@@ -244,14 +245,14 @@ sub report_bug_to_bugzilla {
     my $rel = standalone::real_version();
     my $options = join('&',
                        ($product || $version ? 'cf_rpmpkg=' . join('-', $product, $version) : ()),
-                       'version=' . ($rel_data->{branch} eq 'Devel' ? 'Cooker' : $rel_data->{version} ),
+                       'version=' . ($rel_data->{branch} eq 'Devel' ? 'Cooker' : $rel_data->{version}),
                        'component=Core%20Packages',
                        'classification=Mandriva%20Linux',
                        if_($incident,
                            "short_desc=$prog%20" . ($segfaulted ? 'segfaulted' : 'crashed'),
                            'comment=' . uri_escape(qq(The "$prog" program crashed. Drakbug-$rel caught it.
 
-). ($text || "Please describe what you were doing when it crashed.") . "\n\n"
+) . ($text || "Please describe what you were doing when it crashed.") . "\n\n"
   . ($error ? qq(Backtrace was:
 $error) :
   qq(If you can, try to run the "$prog" program from a terminal and copy and paste here any error messages and/or backtrace))
