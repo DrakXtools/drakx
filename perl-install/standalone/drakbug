@@ -184,10 +184,12 @@ gtkadd($window->{window},
                                                                  return;
                                                              }
                                                          }
+                                    my $rel_data = mandrake_release_info();
                                     my $rel = standalone::real_version();
 							 my $options = join('&',
                                                        ($product || $version ?
                                                           'cf_rpmpkg=' . join('-', $product, $version) : ()),
+'version=' . ($rel_data->{branch} eq 'Devel' ? 'Cooker' : $rel_data->{version} ),
                                                          'component=Core%20Packages',
                                                        'classification=Mandriva%20Linux',
                                                        if_($incident,
