@@ -165,7 +165,10 @@ gtkadd($window->{window},
                 ),
 		0, gtkpack(Gtk2::HSeparator->new),
 		0, gtkpack(create_hbox('edge'),
-                           gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { system("drakhelp --id drakbug &") }),
+                           gtksignal_connect(
+                               Gtk2::Button->new(N("Help")), clicked => sub {
+                                   run_program::raw({ detach => 1, setuid => $parent_uid }, 'drakhelp', '--id', 'drakbug');
+                               }),
                            gtkpack(create_hbox('end'),
                                    gtksignal_connect(Gtk2::Button->new(N("Report")), clicked => \&report_bug_to_bugzilla),
                                    gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub { ugtk2->exit(0) }),
