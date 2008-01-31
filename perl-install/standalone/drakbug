@@ -135,14 +135,16 @@ gtkadd($window->{window},
                 1, create_scrolled_window(
                     gtknew('TextView', editable => 0, height => 200,
                            text => [
-                               if_($prog && $error,
-                                   format_trace_with_message(
-                                             ($gdb_trace ?
-                                                N("The \"%s\" program has segfaulted with the following error:", $prog)
-                                               : N("The \"%s\" program has crashed with the following error:", $prog)),
-                                             $error)
-                                 ),
-                               if_($prog && $gdb_trace, format_trace_with_message(N("Its gdb trace is:"), $gdb_trace)),
+                               if_($prog,
+                                   if_($error,
+                                       format_trace_with_message(
+                                           ($gdb_trace ?
+                                              N("The \"%s\" program has segfaulted with the following error:", $prog)
+                                                : N("The \"%s\" program has crashed with the following error:", $prog)),
+                                           $error)
+                                   ),
+                                   if_($gdb_trace, format_trace_with_message(N("Its gdb trace is:"), $gdb_trace)),
+                               ),
                                [
                                    N("To submit a bug report, click on the report button.  \nThis will open a web browser window on %s where you'll find a form to fill in.  The information displayed above will be transferred to that server.  \nThings useful to include in your report are the output of lspcidrake -v, kernel version, and /proc/cpuinfo.", $wizard_name)
                                ]
