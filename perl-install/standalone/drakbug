@@ -198,9 +198,6 @@ sub update_app {
 	$app_choice = get_package($mdk_app->{$text});
     } else {
         $app_choice = get_package($text);
-	if (my $tool = { reverse %$mdk_app }->{$text}) {
-	    $prog = $tool;
-	}
     }
     $app_choice ? $package->set_text($app_choice) : $package->set_text(N("Not installed"));
 }
