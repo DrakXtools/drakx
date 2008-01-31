@@ -255,7 +255,7 @@ sub report_bug_to_bugzilla() {
 $error) :
   qq(If you can, try to run the "$prog" program from a terminal and copy and paste here any error messages and/or backtrace))
     . if_($gdb_trace, qq(
-GDB backtrace was:
+GDB backtrace was (its interesting part is below Perl_pp_fork() or Perl_pp_waitpid()):
 $gdb_trace)),
                                                ),
                        ),
