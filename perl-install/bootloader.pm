@@ -1857,12 +1857,13 @@ sub find_other_distros_grub_conf {
 	    if ($ok) {
 		add2hash($e, $root);
 		undef $root;
-		push @found, $e;
 	    } elsif ($root) {
-		log::l("weird case, skipping grub conf from $e->{bootpart}{device}, keeping '/' from $root->{part}{device}");
+		log::l("weird case for grub conf in $e->{bootpart}{device}, keeping '/' from $root->{part}{device}");
 	    } else {
 		log::l("could not recognise the distribution for $e->{grub_conf} in $e->{bootpart}{device}");
 	    }
+	    $e->{name} ||= "Linux $e->{bootpart}{device}";
+	    push @found, $e;
 	}
     }
     $set_root->(undef);
