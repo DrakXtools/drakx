@@ -304,7 +304,7 @@ sub parse_release_file {
 
 sub release_file {
     my ($o_dir) = @_;
-    my @names = ('mandrakelinux-release', 'mandrake-release', 'conectiva-release', 'release', 'redhat-release', 'fedora-release');
+    my @names = ('mandrakelinux-release', 'mandrake-release', 'conectiva-release', 'release', 'redhat-release', 'fedora-release', 'SuSE-release');
     find { -r "$o_dir$_" } (
 	(map { "/root/drakx/$_.upgrading" } @names), 
 	(map { "/etc/$_" } @names),
