@@ -1,14 +1,14 @@
 # translation of libDrakX.po to Euskara
 # EUSKARA: Mandriva Linux translation.
-# Copyright (C) 2002,2003, 2004, 2005, 2007 Free Software Foundation, Inc.
+# Copyright (C) 2002,2003, 2004, 2005, 2007, 2008 Free Software Foundation, Inc.
 #
-# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2001-2002,2003,2004, 2005, 2007.
+# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2001-2002,2003,2004, 2005, 2007, 2008.
 # Hizkuntza Politikarako Sailburuordetza <hizpol@ej-gv.es>, 2004.
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
 "POT-Creation-Date: 2008-01-17 14:31+0100\n"
-"PO-Revision-Date: 2007-08-08 14:48+0200\n"
+"PO-Revision-Date: 2008-02-04 22:27+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Euskara <eu@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2245,14 +2245,13 @@ msgstr ""
 "ibil dadin)"
 
 #: fs/mount_options.pm:124
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
-"Ez eguneratu inodoen atzipen-orduak fitxategi-sistema honetan\n"
-"(adib.: berri-taldeen spool-a bizkorrago atzituz berri-zerbitzaria arinago "
-"ibil dadin)"
+"Ez eguneratu direktorio inodoen atzipen orduak fitxategi sistema honetan\n"
+"(adib.: berri spool-a bizkorrago atzitzeko berri zerbitzariak azkarrago ibil daitezen)."
 
 #: fs/mount_options.pm:127
 #, c-format
@@ -2322,7 +2321,7 @@ msgstr ""
 #: fs/mount_options.pm:150
 #, c-format
 msgid "Support \"user.\" extended attributes"
-msgstr ""
+msgstr "Euskarri eman erabiltzaileen ezaugarri hedatuei"
 
 #: fs/mount_options.pm:152
 #, c-format
@@ -2684,20 +2683,19 @@ msgstr ""
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
-msgstr ""
+msgstr "Ezin duzu LVM Bolumen Logikoa erabili %s muntaia puntuarentzako bolumen fisikoak hedatzen dituelako"
 
 #: fsedit.pm:407
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
 "The bootloader is not able to handle this when the volume spans physical "
 "volumes.\n"
 "You should create a /boot partition first"
 msgstr ""
-"Softwareko RAID partizio bat hautatu duzu erro gisa (/).\n"
-"Ez dago abioko kargatzailerik hori /boot partiziorik gabe erabil "
-"dezakeenik.\n"
-"Beraz, kontuan izan /boot partizioa gehitu behar duzula"
+"LVM bolumen logiko bat aukeratu duzu erro (/) gisa.\n"
+"Abio zamatzailea ez da hau erabiltzeko gauza bolumenak bolumen fisikoak hedatzen dituenean.\n"
+"/boot partizio bat sortu beharko zenuke"
 
 #: fsedit.pm:411 fsedit.pm:413
 #, c-format
@@ -5139,9 +5137,9 @@ msgstr ""
 "erabiltzaileentzat."
 
 #: security/help.pm:11
-#, fuzzy, c-format
+#, c-format
 msgid "Accept bogus IPv4 error messages."
-msgstr "Onartu IPv4 errore-mezu simulatuak"
+msgstr "Onartu IPv4 akats mezu faltsuak."
 
 #: security/help.pm:13
 #, c-format
@@ -5160,7 +5158,7 @@ msgstr "Onartu saio-hasiera automatikoa."
 
 #. -PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
 #: security/help.pm:21
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
 "\n"
@@ -5168,9 +5166,9 @@ msgid ""
 "\n"
 "Else only /etc/issue is allowed."
 msgstr ""
-"\"GUZTIAK\" ezartzen bada, /etc/issue eta /etc/issue.net izan daitezke.\n"
+"\"ALL\" ezartzen bada, /etc/issue eta /etc/issue.net existitu daitezke.\n"
 "\n"
-"\"BAT ERE EZ\" ezartzen bada, ez da \"issue\"rik onartzen.\n"
+"\"None\" ezarri ezkero, ez da \"issue\"rik onartzen.\n"
 "\n"
 "Bestela, /etc/issue bakarrik onartzen da."
 
@@ -5190,25 +5188,23 @@ msgid "Allow direct root login."
 msgstr "Onartu root gisa zuzenean saioa hastea."
 
 #: security/help.pm:33
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow the list of users on the system on display managers (kdm and gdm)."
-msgstr ""
-"Onartu/Debekatu sistemako erabiltzaileen zerrenda bistaratze-kudeatzaileetan "
-"(kdm eta gdm)."
+msgstr "Erabiltzaile zerrenda saio kudeatzaileetan (kdm eta gdm) agertu dadin onartu."
 
 #: security/help.pm:35
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow to export display when\n"
 "passing from the root account to the other users.\n"
 "\n"
 "See pam_xauth(8) for more details.'"
 msgstr ""
-"Baimendu/galarazi bistaratzea esportatzea\n"
-"root kontutik beste erabiltzaile batzuetara pasatzerakoan.\n"
+"Root kontutik beste erabiltzaileetara "
+"pasatzerakoan bistaratzea esportatzea onartu.\n"
 "\n"
-"Begiratu pam_xauth(8) xehetasun gehiago jasotzeko. "
+"Begiratu pam_xauth(8) xehetasun gehiago izateko. "
 
 #: security/help.pm:40
 #, c-format
@@ -5240,7 +5236,7 @@ msgstr ""
 
 #. -PO: here "ALL", "Local" and "None" are values in a pull-down menu; translate them the same as they're
 #: security/help.pm:53
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Authorize:\n"
 "\n"
@@ -5256,15 +5252,13 @@ msgid ""
 msgstr ""
 "Baimendu:\n"
 "\n"
-"- tcp_wrappers-ek kontrolatutako zerbitzu guztiak (ikus hosts.deny(5) "
-"eskuliburuko orrialdea) \"ALL\" ezarrita badago,\n"
+"- tcp_wrappers-ek kontrolatutako zerbitzu guztiak (begiratu hosts.deny(5) man orria) \"ALL\" ezarrita badago,\n"
 "\n"
-"- lokalak bakarrik \"LOCAL\" ezarrita badago\n"
+"- bertakoak bakarrik \"LOCAL\" ezarrita badago\n"
 "\n"
 "- bat ere ez \"NONE\" ezarrita badago.\n"
 "\n"
-"Behar dituzun zerbitzuak baimentzeko, eraili /etc/hosts.allow (ikus hosts."
-"allow(5))."
+"Behar dituzun zerbitzuak baimentzeko, eraili /etc/hosts.allow (begiratu hosts.allow(5))."
 
 #: security/help.pm:63
 #, c-format
@@ -5306,13 +5300,13 @@ msgid "Enable syslog reports to console 12"
 msgstr "Gaitu syslog txostenak 12. kontsolan"
 
 #: security/help.pm:79
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable name resolution spoofing protection.  If\n"
 "\"%s\" is true, also reports to syslog."
 msgstr ""
-"Gaitu/Desgaitu izen-ebazpenaren iruzurren kontrako babesa. \n"
-"\"%s\" ezarrita badago, syslog-era ere bidaltzen da berri-ematea."
+"Gaitu izen ebazpenaren iruzurren kontrako babesa.\n"
+"\"%s\" egia bada, syslog-en ere jakinarazten da."
 
 #: security/help.pm:80
 #, c-format
@@ -5354,9 +5348,9 @@ msgid "Use password to authenticate users."
 msgstr "Erabili pasahitza erabiltzaileak autentifikatzeko."
 
 #: security/help.pm:94
-#, fuzzy, c-format
+#, c-format
 msgid "Activate ethernet cards promiscuity check."
-msgstr "Aktibatu/Desgaitu ethernet txartelen nahasgarritasunaren egiaztapena."
+msgstr "Aktibatu ethernet txartelen promiskuotasun egiaztapena."
 
 #: security/help.pm:96
 #, c-format
@@ -5976,12 +5970,12 @@ msgstr ""
 #, c-format
 msgid ""
 "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
-msgstr ""
+msgstr "CUPS (Common UNIX Printing System) inprimagailu spool sistema aurreratua da"
 
 #: services.pm:29
 #, c-format
 msgid "Launches the graphical display manager"
-msgstr ""
+msgstr "Saio kudeatzaile grafikoa jaurtitzen du"
 
 #: services.pm:30
 #, c-format
@@ -6009,7 +6003,7 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
+msgstr "HAL hardwareari buruzko informazioa bildu eta mantentzen duen deabru bat da"
 
 #: services.pm:36
 #, c-format
@@ -6110,7 +6104,7 @@ msgstr ""
 msgid ""
 "DBUS is a daemon which broadcasts notifications of system events and other "
 "messages"
-msgstr ""
+msgstr "DBUS sistemaren gertakariak eta beste mezu batzuk igortzen dituen deabru bat da"
 
 #: services.pm:58
 #, c-format
@@ -6287,7 +6281,7 @@ msgstr ""
 msgid ""
 "The SMB/CIFS protocol enables to share access to files & printers and also "
 "integrates with a Windows Server domain"
-msgstr ""
+msgstr "SMB/CIFS protokoloak fitxategi eta inprimagailuetara sarbidea partekatu eta Windows zerbitzari domeinu batekin bateratzea ahalbidetzen du"
 
 #: services.pm:94
 #, c-format
@@ -6299,7 +6293,7 @@ msgstr "Abiarazi makinako soinu-sistema"
 msgid ""
 "Secure Shell is a network protocol that allows data to be exchanged over a "
 "secure channel between two computers"
-msgstr ""
+msgstr "Secure Shell, bi konputagailuren artean, kanal fidagaitz bat erabiliz (adib Internet), data era seguruan trukatzeko aukera eskaintzen duen sare protokolo bat da"
 
 #: services.pm:96
 #, c-format
@@ -6323,7 +6317,7 @@ msgstr ""
 #: services.pm:100
 #, c-format
 msgid "Starts other deamons on demand."
-msgstr ""
+msgstr "Behar ahala beste deabru batzuk abiatzen ditu..."
 
 #: services.pm:123
 #, c-format
