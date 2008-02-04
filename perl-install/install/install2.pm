@@ -4,6 +4,8 @@ use diagnostics;
 use strict;
 use vars qw($o);
 
+BEGIN { $::isInstall = 1 }
+
 #-######################################################################################
 #- misc imports
 #-######################################################################################
@@ -312,7 +314,6 @@ sub main {
     delete $ENV{TERMINFO};
     umask 022;
 
-    $::isInstall = 1;
     $::isWizard = 1;
     $::no_ugtk_init = 1;
 
