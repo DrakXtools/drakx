@@ -255,8 +255,8 @@ sub search_dir_font() {
                 }
             }
             elsif (is_a_font($fn)) {
-		!$replace && any { /$fn/ } @installed_fonts and next;
-		!any { /$fn/ } @installed_fonts and push @font_list, $fn;
+		!$replace && any { /\Q$fn\E/ } @installed_fonts and next;
+		!any { /\Q$fn\E/ } @installed_fonts and push @font_list, $fn;
 	    }
         }
         interactive_progress($pbar, 0.50 / @install, N("Reselect correct fonts"));
