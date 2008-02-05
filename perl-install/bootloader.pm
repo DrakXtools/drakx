@@ -68,8 +68,7 @@ sub kernel_str2vmlinuz_short {
     if ($kernel->{use_long_name}) {
 	kernel_str2vmlinuz_long($kernel);
     } else {
-	my $ext = $kernel->{ext} ? "-$kernel->{ext}" : '';
-	$kernel->{basename} . $ext;
+	$kernel->{basename};
     }
 }
 sub kernel_str2initrd_short {
@@ -77,8 +76,7 @@ sub kernel_str2initrd_short {
     if ($kernel->{use_long_name}) {
 	kernel_str2initrd_long($kernel);
     } else {
-	my $ext = $kernel->{ext} ? "-$kernel->{ext}" : '';
-	basename2initrd_basename($kernel->{basename}) . $ext . '.img';
+	basename2initrd_basename($kernel->{basename}) . '.img';
     }
 }
 
