@@ -1603,7 +1603,8 @@ package Gtk2::GUI_Update_Guard;
 use MDK::Common::Func qw(before_leaving);
 use ugtk2;
 
-sub new() {
+sub new {
+    my ($_class) = @_; # prevent a perl_checker warning in callers
     my $old_signal = $SIG{ALRM};
     $SIG{ALRM} = sub {
         ugtk2::gtkflush();
