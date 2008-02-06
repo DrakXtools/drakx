@@ -1,30 +1,29 @@
-# translation of sl.po to Slovenščina
-# Copyright (C) 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
+# translation of sl.po to Slovenian
+# Copyright (C) 2004, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
 #
 # Matjaž Kaše <matjaz.kase@g-kabel.si>, 2004.
 # Aljoša Ločičnik <aljosa.locicnik@mandrakeprinas.org>, 2005.
 # Gregor Pirnaver <gregor.pirnaver@sdm-si.org>, 2002,2004,2005.
-# Jure Repinc <jlp@holodeck1.com>, 2005, 2007.
+# Jure Repinc <jlp@holodeck1.com>, 2005, 2007, 2008.
 # Matjaž Kaše <matjaz.kase@telemach.net>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-01-17 14:35+0100\n"
-"PO-Revision-Date: 2007-09-09 10:53+0200\n"
+"PO-Revision-Date: 2008-02-06 04:23+0100\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
-"Language-Team: Slovenščina <lugos-slo@lugos.si>\n"
+"Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
-"n%100==4 ? 2 : 3);\n"
+"Plural-Forms:  nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n%100==4 ? 3 : 0);\n"
 
 #: any.pm:155
 #, c-format
 msgid "Do you have further supplementary media?"
-msgstr "Imate še kakšen dodatni vir za nameščanje?"
+msgstr "Ali imate še kak dodaten vir za nameščanje?"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: any.pm:158
@@ -35,10 +34,10 @@ msgid ""
 "\n"
 "Do you have a supplementary installation medium to configure?"
 msgstr ""
-"Zaznan je bil vir ki bo uporabljen med namestitvijo: %s.\n"
+"Zaznani so bili sledeči viri, ki bodo uporabljeni med namestitvijo: %s.\n"
 "\n"
 "\n"
-"Imate še kakšen dodaten vir ki ga je potrebno nastaviti?"
+"Ali imate še kak dodaten vir, ki ga je potrebno nastaviti?"
 
 #: any.pm:166
 #, c-format
@@ -63,20 +62,19 @@ msgstr "Omrežje (NFS)"
 #: any.pm:211
 #, c-format
 msgid "URL of the mirror?"
-msgstr "URL zrcalnega strežnika?"
+msgstr "Lokacija zrcalnega strežnika?"
 
 #: any.pm:217
 #, c-format
 msgid "URL must start with ftp:// or http://"
-msgstr "URL se mora začeti s ftp:// ali http://"
+msgstr "Lokacija se mora začeti z ftp:// ali s http://"
 
 #: any.pm:228
 #, c-format
-msgid ""
-"Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr ""
 "Vzpostavljanje povezave s spletno stranjo Mandriva Linux in pridobivanje "
-"seznama dosegljivih strežnikov...."
+"seznama dosegljivih zrcalnih strežnikov ..."
 
 #: any.pm:233
 #, c-format
@@ -85,12 +83,12 @@ msgid ""
 "mirrors"
 msgstr ""
 "Vzpostavljanje povezave s spletno stranjo Mandriva Linux in pridobivanje "
-"seznama dosegljivih strežnikov je spodletelo."
+"seznama dosegljivih zrcalnih strežnikov nista uspela"
 
 #: any.pm:243
 #, c-format
 msgid "Choose a mirror from which to get the packages"
-msgstr "Izberite zrcalni strežnik, s katerega želite pridobiti popravke"
+msgstr "Izberite zrcalni strežnik, s katerega želite pridobiti pakete"
 
 #: any.pm:273
 #, c-format
@@ -134,12 +132,12 @@ msgid ""
 "correct."
 msgstr ""
 "Na tem zrcalnem strežniku ne najdem seznama paketov. Prepričajte se, da je "
-"naslov pravi."
+"lokacija prava."
 
 #: any.pm:375
 #, c-format
 msgid "Looking at packages already installed..."
-msgstr "Pregledovanje že nameščenih paketov...."
+msgstr "Pregledovanje že nameščenih paketov ..."
 
 #: any.pm:382
 #, c-format
@@ -149,7 +147,7 @@ msgstr "Odstranjevanje paketov pred posodobitvijo ..."
 #: any.pm:424
 #, c-format
 msgid "Finding packages to upgrade..."
-msgstr "Iskanje paketov za posodobitev..."
+msgstr "Iskanje paketov za posodobitev ..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: any.pm:620
@@ -165,15 +163,15 @@ msgid ""
 "\n"
 "Do you really want to install these servers?\n"
 msgstr ""
-"Izbrali ste naslednje strežnike:%s\n"
+"Izbrali ste naslednje strežnike: %s\n"
 "\n"
 "\n"
-"Navedeni strežniki se zaženejo samodejno. O tem, ali so ti strežniki varni,\n"
-" ni podatkov, zato vas želimo opozoriti, da jih čimprej posodobite,\n"
-"če izveste za njihove novejše različice.\n"
+"Navedeni strežniki se zaženejo samodejno. Trenutno nimajo nobenih znanih\n"
+"varnostnih težav, a lahko odkrijejo nove. V tem primeru je strežnike potrebno\n"
+"čim prej posodobiti.\n"
 "\n"
 "\n"
-"Ste prepričani, da želite namestiti navedene strežnike?\n"
+"Ali ste prepričani, da želite namestiti navedene strežnike?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: any.pm:643
@@ -184,11 +182,10 @@ msgid ""
 "\n"
 "Do you really want to remove these packages?\n"
 msgstr ""
-"Da bi bilo mogoče posodobiti sistem, je treba odstraniti naslednje pakete: %"
-"s\n"
+"Da bi bilo mogoče posodobiti sistem, je treba odstraniti naslednje pakete: %s\n"
 "\n"
 "\n"
-"Naj odstranim navedene pakete?\n"
+"Ali naj odstranim navedene pakete?\n"
 
 #: any.pm:857
 #, c-format
@@ -198,12 +195,12 @@ msgstr "Napaka pri branju datoteke %s"
 #: any.pm:1065
 #, c-format
 msgid "The following disk(s) were renamed:"
-msgstr "Preimenovani so bili diski:"
+msgstr "Preimenovani so bili sledeči diski:"
 
 #: any.pm:1067
 #, c-format
 msgid "%s (previously named as %s)"
-msgstr "%s (prejšnje ime %s)"
+msgstr "%s (prejšnje ime: %s)"
 
 #: any.pm:1124
 #, c-format
@@ -233,7 +230,7 @@ msgstr "Prosim, izberite vir"
 #: any.pm:1163
 #, c-format
 msgid "File already exists. Overwrite it?"
-msgstr "Datoteka že obstaja. Jo prepišem?"
+msgstr "Datoteka že obstaja. Ali naj jo nadomestim?"
 
 #: any.pm:1167
 #, c-format
@@ -263,7 +260,7 @@ msgstr "Posnetki zaslona bodo po namestitvi v %s"
 #: gtk.pm:119
 #, c-format
 msgid "Installation"
-msgstr "Nameščanje "
+msgstr "Nameščanje"
 
 #: gtk.pm:122 share/meta-task/compssUsers.pl:42
 #, c-format
@@ -273,7 +270,7 @@ msgstr "Nastavitev"
 #: install2.pm:166
 #, c-format
 msgid "You must also format %s"
-msgstr "Formatirati morate tudi %s."
+msgstr "Formatirati morate tudi %s"
 
 #: interactive.pm:16
 #, c-format
@@ -281,7 +278,7 @@ msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
 msgstr ""
-"Nekateri deli vaše strojne opreme potrebujejo za pravilno delovanje "
+"Nekateri deli strojne opreme potrebujejo za pravilno delovanje "
 "»lastniške« gonilnike.\n"
 "Nekaj informacij o tem dobite na: %s"
 
@@ -298,12 +295,12 @@ msgstr "Izklapljanje omrežja"
 #: media.pm:703 media.pm:714
 #, c-format
 msgid "Downloading file %s..."
-msgstr "Prenos datoteke %s..."
+msgstr "Prenos datoteke %s ..."
 
 #: media.pm:806
 #, c-format
 msgid "Copying some packages on disks for future use"
-msgstr "Kopiranje nekaterih datotek na disk"
+msgstr "Kopiranje nekaterih paketov na disk, za kasnejšo uporabo"
 
 #: media.pm:859
 #, c-format
@@ -341,6 +338,8 @@ msgid ""
 "Some packages requested by %s cannot be installed:\n"
 "%s"
 msgstr ""
+"Ni moč namestiti nekaj paketov, ki jih zahteva %s:\n"
+"%s"
 
 #: share/meta-task/compssUsers.pl:11
 #, c-format
@@ -358,8 +357,8 @@ msgid ""
 "Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets "
 "(OpenOffice.org Calc, Kspread), PDF viewers, etc"
 msgstr ""
-"Pisarniški programi: urejanje besedila (OpenOffice.org Writer, Kword), "
-"preglednice (OpenOffice.org Calc, Kspread), pregledovalniki PDF, itd"
+"Pisarniški programi: urejanje besedila (OpenOffice.org Writer, KWord), "
+"preglednice (OpenOffice.org Calc, KSpread), pregledovalniki PDF, itd"
 
 #: share/meta-task/compssUsers.pl:16
 #, c-format
@@ -367,8 +366,8 @@ msgid ""
 "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
 "gnumeric), pdf viewers, etc"
 msgstr ""
-"Pisarniški programi: urejanje besedila (kword, abiword), preglednice "
-"(kspread, gnumeric), pregledovalniki PDF, itd"
+"Pisarniški programi: urejanje besedila (KWord, AbiWord), preglednice "
+"(KSpread, Gnumeric), pregledovalniki PDF, itd"
 
 #: share/meta-task/compssUsers.pl:21
 #, c-format
@@ -402,7 +401,7 @@ msgid ""
 "Web"
 msgstr ""
 "Zbirka orodij za branje in pošiljanje pošte in pošiljanje v novičarske "
-"skupine (mitt, tin ...) ter brskanje po spletu"
+"skupine (mutt, tin ...) ter brskanje po spletu"
 
 #: share/meta-task/compssUsers.pl:37
 #, c-format
@@ -463,7 +462,7 @@ msgstr "Standardna osnova Linuxa (LSB). Podpora programom tretjih oseb"
 #: share/meta-task/compssUsers.pl:71
 #, c-format
 msgid "Web Server"
-msgstr "Internetni strežnik"
+msgstr "Spletni strežnik"
 
 #: share/meta-task/compssUsers.pl:72
 #, c-format
@@ -473,7 +472,7 @@ msgstr "Apache"
 #: share/meta-task/compssUsers.pl:75
 #, c-format
 msgid "Groupware"
-msgstr "Program za skupinsko delo"
+msgstr "Skupinsko delo"
 
 #: share/meta-task/compssUsers.pl:76
 #, c-format
@@ -483,7 +482,7 @@ msgstr "Strežnik Kolab"
 #: share/meta-task/compssUsers.pl:79 share/meta-task/compssUsers.pl:120
 #, c-format
 msgid "Firewall/Router"
-msgstr "Požarni zid/Usmerjevalnik"
+msgstr "Požarni zid/usmerjevalnik"
 
 #: share/meta-task/compssUsers.pl:80 share/meta-task/compssUsers.pl:121
 #, c-format
@@ -493,7 +492,7 @@ msgstr "Internetni prehod (gateway)"
 #: share/meta-task/compssUsers.pl:83
 #, c-format
 msgid "Mail/News"
-msgstr "Pošta/Novičarske skupine"
+msgstr "Pošta/novičarske skupine"
 
 #: share/meta-task/compssUsers.pl:84
 #, c-format
@@ -523,12 +522,12 @@ msgstr "DNS/NIS"
 #: share/meta-task/compssUsers.pl:96
 #, c-format
 msgid "Domain Name and Network Information Server"
-msgstr "Strežnik domen in omrežnih podatkov (NIS)"
+msgstr "Strežnik imen domen in omrežnih podatkov"
 
 #: share/meta-task/compssUsers.pl:99
 #, c-format
 msgid "File and Printer Sharing Server"
-msgstr "Strežnik za datoteke in tiskalnike v skupni rabi"
+msgstr "Strežnik za souporabo datotek in tiskalnikov"
 
 #: share/meta-task/compssUsers.pl:100
 #, c-format
@@ -538,7 +537,7 @@ msgstr "Strežnik NFS, strežnik Samba"
 #: share/meta-task/compssUsers.pl:103 share/meta-task/compssUsers.pl:116
 #, c-format
 msgid "Database"
-msgstr "Podatkovna baza"
+msgstr "Podatkovna zbirka"
 
 #: share/meta-task/compssUsers.pl:104
 #, c-format
@@ -568,12 +567,12 @@ msgstr "Poštni strežnik Postfix"
 #: share/meta-task/compssUsers.pl:117
 #, c-format
 msgid "PostgreSQL or MySQL database server"
-msgstr "Strežnik podatkovnih baz PostgreSQL in MySQL"
+msgstr "Strežnik podatkovnih baz PostgreSQL ali MySQL"
 
 #: share/meta-task/compssUsers.pl:124
 #, c-format
 msgid "Network Computer server"
-msgstr "Strežnik omrežnega računalnika"
+msgstr "Omrežni računalnik (strežnik)"
 
 #: share/meta-task/compssUsers.pl:125
 #, c-format
@@ -607,8 +606,7 @@ msgstr "Delovna postaja GNOME"
 msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
 "tools"
-msgstr ""
-"Grafično okolje z uporabniku prijaznim naborom programov in namiznimi orodji"
+msgstr "Grafično okolje z naborom programov in namiznimi orodji"
 
 #: share/meta-task/compssUsers.pl:142
 #, c-format
@@ -643,12 +641,12 @@ msgstr "Webmin"
 #: share/meta-task/compssUsers.pl:178
 #, c-format
 msgid "Webmin Remote Configuration Server"
-msgstr "Strežnik Webmin za oddaljen dostop do nastavitev"
+msgstr "Strežnik Webmin za oddaljeno nastavljanje"
 
 #: share/meta-task/compssUsers.pl:182
 #, c-format
 msgid "Network Utilities/Monitoring"
-msgstr "Omrežni pripomočki / Nadzorniki"
+msgstr "Omrežni pripomočki/nadzorovanje"
 
 #: share/meta-task/compssUsers.pl:183
 #, c-format
@@ -671,7 +669,7 @@ msgid ""
 "An error occurred, but I do not know how to handle it nicely.\n"
 "Continue at your own risk."
 msgstr ""
-"Prišlo je do napake, ki je sistem na ustrezen način ne zna odpraviti.\n"
+"Prišlo je do napake, ki je sistem ne zna odpraviti na ustrezen način.\n"
 "Nadaljujte na lastno odgovornost."
 
 #: steps.pm:436
@@ -683,14 +681,14 @@ msgid ""
 "\"\n"
 msgstr ""
 "Nekateri pomembni paketi niso bili ustrezno nameščeni.\n"
-"Verjetno imate pokvarjeno zgoščenko ali CD-ROM.pogon. \n"
-"Na računalniku, na katerem je nameščen Linux, preverite zgoščenko\n"
-"z ukazom »rpm -qpl media/main/*.rpm«.\n"
+"Verjetno imate pokvarjen namestitveni nosilec ali pa pogon\n"
+"za branje. Na računalniku, na katerem je nameščen Linux,\n"
+"preverite nosilec z ukazom »rpm -qpl media/main/*.rpm«.\n"
 
 #: steps_auto_install.pm:71 steps_stdio.pm:27
 #, c-format
 msgid "Entering step `%s'\n"
-msgstr "Pričetek s korakom '%s'\n"
+msgstr "Pričetek koraka »%s«\n"
 
 #: steps_curses.pm:22
 #, c-format
@@ -705,7 +703,7 @@ msgstr "<Tab>/<Alt-Tab> med elementi"
 #: steps_gtk.pm:82
 #, c-format
 msgid "Xorg server is slow to start. Please wait..."
-msgstr ""
+msgstr "Grafični strežnik se zaganja počasi. Prosimo, počakajte ..."
 
 #: steps_gtk.pm:192
 #, c-format
@@ -715,16 +713,16 @@ msgid ""
 "this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"Vaš sistem ni dovolj zmogljiv. Lahko, da boste imeli pri namestitvi\n"
-"Mandriva Linuxa težave. V tem primeru lahko poskusite z namestitvijo v "
-"besedilnem načinu. \n"
-"Po zagonu z zgoščenke pritisnite »F1« in vpišite »text«."
+"Vaš sistem ni zelo zmogljiv. Lahko, da boste imeli pri namestitvi\n"
+"Mandriva Linuxa težave. V tem primeru lahko poskusite z namestitvijo\n"
+"v besedilnem načinu.\n"
+"Po zagonu z namestitvenega nosilca pritisnite »F1« in vnesite »text«."
 
 #: steps_gtk.pm:259 steps_interactive.pm:435 steps_interactive.pm:564
 #: steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
-msgstr "Izbira skupine paketov"
+msgstr "Izbira skupin paketov"
 
 #: steps_gtk.pm:280 steps_interactive.pm:581
 #, c-format
@@ -734,7 +732,7 @@ msgstr "Izbira posamičnih paketov"
 #: steps_gtk.pm:302 steps_interactive.pm:507
 #, c-format
 msgid "Total size: %d / %d MB"
-msgstr "Celotna velikost: %d / %d MB"
+msgstr "Skupna velikost: %d / %d MiB"
 
 #: steps_gtk.pm:347
 #, c-format
@@ -744,7 +742,7 @@ msgstr "Paket je pokvarjen"
 #: steps_gtk.pm:349
 #, c-format
 msgid "Version: "
-msgstr "Različica:"
+msgstr "Različica: "
 
 #: steps_gtk.pm:350
 #, c-format
@@ -754,12 +752,12 @@ msgstr "Velikost: "
 #: steps_gtk.pm:350
 #, c-format
 msgid "%d KB\n"
-msgstr "%d KB\n"
+msgstr "%d KiB\n"
 
 #: steps_gtk.pm:351
 #, c-format
 msgid "Importance: "
-msgstr "Pomembnost:"
+msgstr "Pomembnost: "
 
 #: steps_gtk.pm:385
 #, c-format
@@ -774,7 +772,7 @@ msgstr "ker manjka %s"
 #: steps_gtk.pm:390
 #, c-format
 msgid "due to unsatisfied %s"
-msgstr "zaradi nezadovoljstva %s"
+msgstr "zaradi nezadostitve %s"
 
 #: steps_gtk.pm:391
 #, c-format
@@ -798,17 +796,17 @@ msgstr ""
 #: steps_gtk.pm:400
 #, c-format
 msgid "The following packages are going to be installed"
-msgstr "Nameščeni bodo naslednji paketi:"
+msgstr "Nameščeni bodo naslednji paketi"
 
 #: steps_gtk.pm:401
 #, c-format
 msgid "The following packages are going to be removed"
-msgstr "Odstranjeni bodo naslednji paketi:"
+msgstr "Odstranjeni bodo naslednji paketi"
 
 #: steps_gtk.pm:426
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
-msgstr "Tega paketa ni mogoče izločiti."
+msgstr "To je obvezen paket in ga ni mogoče izločiti."
 
 #: steps_gtk.pm:428
 #, c-format
@@ -848,7 +846,7 @@ msgstr "Minimalna namestitev"
 #: steps_gtk.pm:459
 #, c-format
 msgid "Software Management"
-msgstr "Upravljanje programja"
+msgstr "Upravljanje s programi"
 
 #: steps_gtk.pm:459 steps_interactive.pm:393
 #, c-format
@@ -871,9 +869,9 @@ msgid "Time remaining "
 msgstr "Preostali čas "
 
 #: steps_gtk.pm:518
-#, fuzzy, c-format
+#, c-format
 msgid "(estimating...)"
-msgstr "Ocena"
+msgstr "(izračunavanje ...)"
 
 #: steps_gtk.pm:545
 #, c-format
@@ -892,7 +890,7 @@ msgstr "Povzetek"
 #: steps_gtk.pm:608
 #, c-format
 msgid "Configure"
-msgstr "Nastavite"
+msgstr "Nastavitev"
 
 #: steps_gtk.pm:625 steps_interactive.pm:779 steps_interactive.pm:935
 #, c-format
@@ -905,7 +903,7 @@ msgid ""
 "The following installation media have been found.\n"
 "If you want to skip some of them, you can unselect them now."
 msgstr ""
-"Na voljo so naslednji viri za namestitev:\n"
+"Na voljo so naslednji viri za namestitev.\n"
 "Če želite katerega izmed njih izločiti, to lahko storite sedaj."
 
 #: steps_gtk.pm:670 steps_interactive.pm:284
@@ -916,14 +914,14 @@ msgid ""
 "It will then continue from the hard drive and the packages will remain "
 "available once the system is fully installed."
 msgstr ""
-"Pred namestitvijo lahko vsebino zgoščenk prekopirate na trdi disk.\n"
+"Pred namestitvijo lahko vsebino namestitvenih nosilcev prekopirate na trdi disk.\n"
 "V tem primeru bo namestitev potekala s trdega diska, paketi pa bodo ostali "
-"na voljo tudi po dokončani namestitvi."
+"na voljo tudi po zaključeni namestitvi."
 
 #: steps_gtk.pm:672 steps_interactive.pm:286
 #, c-format
 msgid "Copy whole CDs"
-msgstr "Prekopiraj celotno vsebino zgoščenk"
+msgstr "Prekopiraj vsebino nosilcev"
 
 #: steps_interactive.pm:38
 #, c-format
@@ -938,24 +936,24 @@ msgstr "Izberite razpored tipkovnice"
 #: steps_interactive.pm:99
 #, c-format
 msgid "Here is the full list of available keyboards"
-msgstr "Izbirate lahko med naslednjimi tipkovnicami:"
+msgstr "Izbirate lahko med naslednjimi tipkovnicami"
 
 #: steps_interactive.pm:129
 #, c-format
 msgid "Install/Upgrade"
-msgstr "Namestitev/Posodobitev"
+msgstr "Namestitev/posodobitev"
 
 #: steps_interactive.pm:130
 #, c-format
 msgid "Is this an install or an upgrade?"
-msgstr "Želite izvesti novo namestitev ali posodobiti obstoječ sistem?"
+msgstr "Želite izvesti novo namestitev ali posodobiti nameščeni sistem?"
 
 #: steps_interactive.pm:134
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
-msgstr "Namesti"
+msgstr "Namestitev"
 
 #: steps_interactive.pm:136
 #, c-format
@@ -965,12 +963,12 @@ msgstr "Posodobitev %s"
 #: steps_interactive.pm:140
 #, c-format
 msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-msgstr ""
+msgstr "Posodobitev z 32-bitnega na 64-bitni sistem ni podprta"
 
 #: steps_interactive.pm:144
 #, c-format
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-msgstr ""
+msgstr "Posodobitev s 64-bitnega na 32-bitni sistem ni podprta"
 
 #: steps_interactive.pm:158
 #, c-format
@@ -993,7 +991,7 @@ msgid ""
 "No free space for 1MB bootstrap! Install will continue, but to boot your "
 "system, you'll need to create the bootstrap partition in DiskDrake"
 msgstr ""
-"Ni prostora za zapis začetnega nalaganja (1MB). Namestitev se bo "
+"Ni prostora za zapis začetnega nalagalnika (1MB). Namestitev se bo "
 "nadaljevala, vendar morate, da bi sistem po namestitvi lahko zagnali, s "
 "pomočjo orodja DiskDrake ustvariti razdelek za začetno nalaganje."
 
@@ -1004,9 +1002,9 @@ msgid ""
 "to boot your system, you'll need to create the bootstrap partition in "
 "DiskDrake"
 msgstr ""
-"Ustvariti morate PPC PReP Boot bootstrap! Namestitev se bo nadaljevala, "
-"vendar boste morali za zagon sistema s pomočjo DiskDrake ustvariti bootstrap "
-"razdelek."
+"Ustvariti morate začetni nalagalnik PPC PReP Boot! Namestitev se bo nadaljevala, "
+"vendar boste morali za zagon sistema s pomočjo DiskDrake ustvariti razdelek za "
+"začetno nalaganje."
 
 #: steps_interactive.pm:328
 #, c-format
@@ -1016,23 +1014,22 @@ msgid ""
 "done.\n"
 "If you do not have it, press Cancel to avoid installation from this Cd-Rom."
 msgstr ""
-"Zamenjajte zgoščenko!\n"
+"Zamenjajte nosilec!\n"
 "\n"
-"Prosim, vstavite zgoščenko z oznako »%s« v pogon in kliknite V redu\n"
-"Če zahtevane zgoščenke nimate, kliknite Prekliči, da jo bo namestitev obšla."
+"Vstavite namestitveni nosilec z oznako »%s« v pogon in kliknite V redu\n"
+"Če zahtevanega nosilca nimate, kliknite Prekliči, da ga bo namestitev preskočila."
 
 #: steps_interactive.pm:350
 #, c-format
 msgid "Looking for available packages..."
-msgstr "Iskanje dosegljivih paketov...."
+msgstr "Iskanje razpoložljivih paketov ..."
 
 #: steps_interactive.pm:358
 #, c-format
 msgid ""
 "Your system does not have enough space left for installation or upgrade (%"
 "dMB > %dMB)"
-msgstr ""
-"Sistem nima dovolj prostora za namestitev ali nadgradnjo (%d MB > %d MB)"
+msgstr "Sistem nima dovolj prostora za namestitev ali nadgradnjo (%d MiB > %d MiB)"
 
 #: steps_interactive.pm:405
 #, c-format
@@ -1061,12 +1058,12 @@ msgstr "Neustrezna datoteka"
 #: steps_interactive.pm:431
 #, c-format
 msgid "Install Mandriva KDE Desktop"
-msgstr "Namizje Mandriva KDE"
+msgstr "Namizje KDE"
 
 #: steps_interactive.pm:432
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
-msgstr "Namizje Mandriva GNOME"
+msgstr "Namizje GNOME"
 
 #: steps_interactive.pm:433
 #, c-format
@@ -1076,17 +1073,17 @@ msgstr "Po meri"
 #: steps_interactive.pm:436
 #, c-format
 msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
-msgstr "Tu lahko izberete namizno okolje, ki bo nameščeno:"
+msgstr "Tu lahko izberete namizno okolje, ki bo nameščeno"
 
 #: steps_interactive.pm:521
 #, c-format
 msgid "Selected size is larger than available space"
-msgstr "Izbrana velikost presega prostor, ki je na razpolago."
+msgstr "Velikost izbora presega prostor, ki je na razpolago."
 
 #: steps_interactive.pm:536
 #, c-format
 msgid "Type of install"
-msgstr "Način namestitve"
+msgstr "Vrsta namestitve"
 
 #: steps_interactive.pm:537
 #, c-format
@@ -1100,12 +1097,12 @@ msgstr ""
 #: steps_interactive.pm:540
 #, c-format
 msgid "With X"
-msgstr "Z X"
+msgstr "Z grafičnim okoljem"
 
 #: steps_interactive.pm:541
 #, c-format
 msgid "With basic documentation (recommended!)"
-msgstr "Z osnovno dokumentacijo (Priporočeno!)"
+msgstr "Z osnovno dokumentacijo (priporočeno!)"
 
 #: steps_interactive.pm:542
 #, c-format
@@ -1130,7 +1127,7 @@ msgstr "Med razvrščanjem paketov je prišlo do napake:"
 #: steps_interactive.pm:628
 #, c-format
 msgid "Go on anyway?"
-msgstr "Želite kljub temu nadaljevati?"
+msgstr "Ali naj kljub temu nadaljujem?"
 
 #: steps_interactive.pm:632
 #, c-format
@@ -1160,12 +1157,12 @@ msgstr "Prišlo je do napake med nameščanjem paketa %s."
 #: steps_interactive.pm:656
 #, c-format
 msgid "Post-install configuration"
-msgstr "Nastavitve po namestitvi"
+msgstr "Nastavitev po namestitvi"
 
 #: steps_interactive.pm:663
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
-msgstr "Prosim, prepričajte se, da je medij »Posodobitev modulov« v pogonu %s"
+msgstr "Prepričajte se, da je nosilec »Posodobitev modulov« v pogonu %s"
 
 #: steps_interactive.pm:691 steps_list.pm:47
 #, c-format
@@ -1186,11 +1183,11 @@ msgid ""
 msgstr ""
 "Imate možnost, da s strežnika prenesete posodobljene pakete. Ti paketi\n"
 "so bili posodobljeni po izdaji distribucije. Vsebujejo varnostne popravke in "
-"popravke hroščev.\n"
+"popravke napak.\n"
 "\n"
 "Za namestitev teh paketov morate imeti vzpostavljeno internetno povezavo.\n"
 "\n"
-"Želite namestiti posodobitve? "
+"Ali želite namestiti posodobitve?"
 
 #: steps_interactive.pm:714
 #, c-format
@@ -1224,15 +1221,14 @@ msgstr "Zvočna kartica"
 #: steps_interactive.pm:903
 #, c-format
 msgid "Do you have an ISA sound card?"
-msgstr "Imate zvočno kartico na ISA vodilu?"
+msgstr "Ali imate zvočno kartico na ISA vodilu?"
 
 #: steps_interactive.pm:905
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
 "card"
-msgstr ""
-"Po namestitvi zaženite »alsaconf« ali »sndconfig« za nastavitev zvočne kartice."
+msgstr "Za nastavitev zvočne kartice po namestitvi zaženite »alsaconf« ali »sndconfig«."
 
 #: steps_interactive.pm:907
 #, c-format
@@ -1259,7 +1255,7 @@ msgstr "Posredniški strežniki"
 #: steps_interactive.pm:935
 #, c-format
 msgid "configured"
-msgstr "Nastavljeno"
+msgstr "nastavljeno"
 
 #: steps_interactive.pm:945
 #, c-format
@@ -1274,22 +1270,22 @@ msgstr "Požarni zid"
 #: steps_interactive.pm:968
 #, c-format
 msgid "activated"
-msgstr "Aktivirano"
+msgstr "aktivirano"
 
 #: steps_interactive.pm:968
 #, c-format
 msgid "disabled"
-msgstr "Onemogočeno"
+msgstr "onemogočeno"
 
 #: steps_interactive.pm:982
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
-msgstr "Niste nastavili strežnika X. Ali to zares želite?"
+msgstr "Niste nastavili grafičnega strežnika. Ali to zares želite?"
 
 #: steps_interactive.pm:1009
 #, c-format
 msgid "Preparing bootloader..."
-msgstr "Pripravljanje zagonskega nalagalnika..."
+msgstr "Pripravljanje zagonskega nalagalnika ..."
 
 #: steps_interactive.pm:1019
 #, c-format
@@ -1301,13 +1297,13 @@ msgid ""
 msgstr ""
 "Na vašem računalniku zagonski nalagalnik yaboot ne bo deloval.\n"
 "Namestitev se bo nadaljevala, vendar boste morali\n"
-"računalnik zagnati s pomočjo BootX ali na drug ustrezen način. Nastavitev "
-"jedra za root datotečni sistem je:%s"
+"računalnik zagnati s pomočjo BootX ali na drug način. Nastavitev "
+"jedra za korenski datotečni sistem je: root=%s"
 
 #: steps_interactive.pm:1025
 #, c-format
 msgid "Do you want to use aboot?"
-msgstr "Želite uporabiti aboot?"
+msgstr "Ali želite uporabiti aboot?"
 
 #: steps_interactive.pm:1028
 #, c-format
@@ -1316,7 +1312,7 @@ msgid ""
 "try to force installation even if that destroys the first partition?"
 msgstr ""
 "Napaka pri namestitvi aboot\n"
-"Želite nadaljevati z namestitvijo, čeprav bo s tem prvi razdelek uničen?"
+"Ali želite nadaljevati z namestitvijo, čeprav bo s tem prvi razdelek uničen?"
 
 #: steps_interactive.pm:1040
 #, c-format
@@ -1324,8 +1320,8 @@ msgid ""
 "In this security level, access to the files in the Windows partition is "
 "restricted to the administrator."
 msgstr ""
-"Na tej varnostni stopnji je dostop do datotek na prvem razdelku za Windows "
-"dovoljen samo korenskemu uporabniku."
+"Na tej varnostni stopnji je dostop do datotek na razdelku za Windows "
+"dovoljen samo skrbniku sistema (root)."
 
 #: steps_interactive.pm:1072
 #, c-format
@@ -1335,7 +1331,7 @@ msgstr "Vstavite prazno disketo v pogon %s"
 #: steps_interactive.pm:1074
 #, c-format
 msgid "Creating auto install floppy..."
-msgstr "Ustvarjanje diskete za samodejno namestitev..."
+msgstr "Ustvarjanje diskete za samodejno namestitev ..."
 
 #: steps_interactive.pm:1085
 #, c-format
@@ -1346,7 +1342,7 @@ msgid ""
 msgstr ""
 "Nekateri koraki še niso dokončani.\n"
 "\n"
-"Res želite končati?"
+"Ali res želite končati?"
 
 #: steps_interactive.pm:1095
 #, c-format
@@ -1372,12 +1368,12 @@ msgid ""
 "\n"
 "You may prefer to replay the installation.\n"
 msgstr ""
-"Lahko izberete povsem samodejno namestitev,\n"
-"vključno s spremembami na trdem disku!!\n"
-"(Takšen način je uporaben, če želite namestitev ponoviti na drugem "
-"računalniku.)\n"
+"Namestitev je lahko povsem samodejna, V tem\n"
+"primeru se uporabi ves trdi disk!!\n"
+"(Takšen način je uporaben, če želite namestitev\n"
+"zagnati na drugem računalniku.)\n"
 "\n"
-"Morda vam bolj ustreza ponovna namestitev.\n"
+"Morda vam bolj ustreza ponovitev namestitve.\n"
 
 #: steps_interactive.pm:1110
 #, c-format
@@ -1426,7 +1422,7 @@ msgstr "Miška"
 msgid ""
 "_: Keep these entry short\n"
 "Hard drive detection"
-msgstr "Prepoznavanje trdega diska"
+msgstr "Zaznava trdega diska"
 
 #: steps_list.pm:21 steps_list.pm:22
 #, c-format
@@ -1489,7 +1485,7 @@ msgstr "Uporabniki"
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
-msgstr "Povezovanje"
+msgstr "Omrežje"
 
 #: steps_list.pm:38 steps_list.pm:39
 #, c-format
@@ -1503,7 +1499,7 @@ msgstr "Zagonski nalagalnik"
 msgid ""
 "_: Keep these entry short\n"
 "Configure X"
-msgstr "Nastavitev X"
+msgstr "Grafični strežnik"
 
 #: steps_list.pm:42
 #, c-format
@@ -1533,8 +1529,3 @@ msgid ""
 "Exit"
 msgstr "Izhod"
 
-#~ msgid "All"
-#~ msgstr "Vse"
-
-#~ msgid "TV card"
-#~ msgstr "TV kartica"
