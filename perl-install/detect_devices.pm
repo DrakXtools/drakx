@@ -1046,7 +1046,7 @@ sub isLaptop() {
 	    matching_desc__regexp('ViRGE.MX') || matching_desc__regexp('S3.*Savage.*[IM]X') ||
 	    matching_desc__regexp('Intel Corporation\|Mobile') ||
 	    matching_desc__regexp('\bATI\b.*(Mobility|\bLT\b)'))
-	|| cat_('/proc/cpuinfo') =~ /\bmobile\b/i
+	|| (any { $_->{'model name'} =~ /\bmobile\b/i } getCPUs())
 	|| probe_unique_name("Type") eq 'laptop'
         #- ipw2100/2200/3945 are Mini-PCI (Express) adapters
 	|| (any { member($_->{driver}, qw(ipw2100 ipw2200 ipw3945)) } pci_probe());
