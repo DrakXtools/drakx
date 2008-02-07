@@ -582,5 +582,5 @@ sub popup_menu {
 sub simple_read_rpmsrate() {
     require pkgs;
     my ($rates, $flags) = pkgs::read_rpmsrate({}, { }, '/usr/share/meta-task/rpmsrate-raw', 0);
-    grep { member('TRUE', @{$flags->{$_}}) && $rates->{$_} >= 5 } keys %$flags;
+    grep { !/openoffice/ && member('TRUE', @{$flags->{$_}}) && $rates->{$_} >= 5 } keys %$flags;
 }
