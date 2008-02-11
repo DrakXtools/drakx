@@ -465,7 +465,6 @@ image=/vmlinux$I.gz
 
 sub boot_img_ppc {
 	my ($type, $I, $img, $kernel) = @_;
-	(my $rdz = $img) =~ s/\.img/.rdz/;
 	foreach (glob("all.kernels/*")) {
 		my $ext = basename($_);
 		if ($ext =~ /legacy/) {
