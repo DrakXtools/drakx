@@ -295,7 +295,7 @@ sub modprobe {
     $h || @_ == 0 and die "usage: modprobe <module> [options]\n";
     my $name = shift;
     require modules;
-    modules::load_dependencies("/modules/modules.dep");
+    list_modules::load_default_moddeps();
     modules::load_with_options([ $name ], { $name => join(' ', @_) });
 }
 
@@ -401,7 +401,7 @@ sub bug {
 
     require any;
     require modules;
-    modules::load_dependencies("/modules/modules.dep");
+    list_modules::load_default_moddeps();
 
     my $part;
     if ($o_part_device) {

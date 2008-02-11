@@ -420,7 +420,7 @@ sub main {
 
     eval { install::any::spawnShell() };
 
-    modules::load_dependencies("/modules/modules.dep");
+    list_modules::load_default_moddeps();
     require modules::any_conf;
     require modules::modules_conf;
     $o->{modules_conf} = modules::modules_conf::read(modules::any_conf::vnew(), '/tmp/modules.conf');
