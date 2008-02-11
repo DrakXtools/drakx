@@ -88,12 +88,19 @@ static char *kernel_module_extension(void)
 }
 
 
-static void filename2modname(char * filename) {
-	while (filename && *filename) {
-		if (*filename == '-')
-			*filename = '_';
-		filename++;
+static char *filename2modname(char * filename) {
+	char *modname, *p;
+
+	modname = strdup(filename);
+
+	p = modname;
+	while (p && *p) {
+		if (*p == '-')
+			*p = '_';
+		p++;
 	}
+
+	return modname;
 }
 
 static void find_modules_directory(void)
@@ -135,8 +142,7 @@ static int load_modules_dependencies(void)
 
 		/* sort of a good line */
 		modules_deps[line].filename = strdup(start);
-		modules_deps[line].modname = strdup(start);
-		filename2modname(modules_deps[line].modname);
+		modules_deps[line].modname = filename2modname(start);
 
 		start = ptr;
 		i = 0;
@@ -195,8 +201,7 @@ static int load_modules_descriptions(void)
 		*ptr = '\0';
 		ptr++;
 
-		modules_descr[line].modname = strdup(start);
-		filename2modname(modules_deps[line].modname);
+		modules_descr[line].modname = filename2modname(start);
 		modules_descr[line].description = strndup(ptr, 50);
 
 		line++;
