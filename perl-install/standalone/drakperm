@@ -237,7 +237,7 @@ sub row_setting_dialog {
     my $dlg = gtknew('Dialog', transient_for => $w->{real_window}, title => $title);
 #    $dlg->set_resizable(0);
     my $browse = gtknew('Button', text => N("browse"));
-    my $file        = gtknew('Entry');
+    my $file   = gtknew('Entry', $o_iter ? (text => $model->get($o_iter, 1)) : ());
     my ($other, $group, $user, $s) = $o_iter ? reverse(split(//, $model->get($o_iter, 4))) : ();
     my @bits = qw(sticky gid suid);
     my @rights = qw(read write execute);
@@ -275,7 +275,6 @@ sub row_setting_dialog {
     my %s_right = get_right($s);
      
     my $alrd_exsts = defined $o_iter;
-    $file->set_text($model->get($o_iter, 1)) if $o_iter;
 
     my $users  = gtknew('ComboBox', list => [ my @users = get_user_or_group('users') ]);
     $users->entry->set_text($model->get($o_iter, 2)) if $o_iter;
