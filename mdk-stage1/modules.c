@@ -37,7 +37,7 @@
 
 #include "modules.h"
 
-static char modules_directory = "/modules";
+static char modules_directory[100];
 static struct module_deps_elem * modules_deps = NULL;
 static struct module_descr_elem * modules_descr = NULL;
 
@@ -94,6 +94,11 @@ static void filename2modname(char * filename) {
 			*filename = '_';
 		filename++;
 	}
+}
+
+static void find_modules_directory(void)
+{
+	strcpy(modules_directory, "/modules");
 }
 
 static int load_modules_dependencies(void)
@@ -207,6 +212,7 @@ static int load_modules_descriptions(void)
 
 void init_modules_insmoding(void)
 {
+	find_modules_directory();
 	if (load_modules_dependencies()) {
 		fatal_error("warning, error initing modules stuff, modules loading disabled");
 	}
