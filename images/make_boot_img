@@ -144,7 +144,7 @@ sub initrd {
 
     _ "rm -rf $tmp_initrd";
     mkdir_p("$tmp_initrd$_") foreach qw(/etc /lib /modules /sbin /tmp /var);
-    symlink "/modules", "$tmp_initrd/lib/modules";
+    symlink "../modules", "$tmp_initrd/lib/modules";
 
     symlink "/proc/mounts", "$tmp_initrd/etc/mtab";
     symlink "../tmp", "$tmp_initrd/var/run";
