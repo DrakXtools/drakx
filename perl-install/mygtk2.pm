@@ -388,6 +388,30 @@ sub _gtk__Title2 {
     _gtk__Title1($w, $opts);
 }
 
+sub _gtk__Sexy_IconEntry {
+    my ($w, $opts) = @_;
+
+    require Gtk2::Sexy;
+    if (!$w) {
+	$w = Gtk2::Sexy::IconEntry->new;
+	$w->set_editable(delete $opts->{editable}) if exists $opts->{editable};
+    }
+
+    $w->add_clear_button if delete $opts->{clear_button};
+    if (my $icon = delete $opts->{primary_icon}) {
+        $w->set_icon('primary', $icon);
+        $w->set_icon_highlight('primary', $icon);
+    }
+    if (my $icon = delete $opts->{secondary_icon}) {
+        $w->set_icon('secondary',i $icon);
+        $w->set_icon_highlight('secondary', $icon);
+    }
+
+    $w->signal_connect('icon-released' => delete $opts->{'icon-released'}) if exists $opts->{'icon-released'};
+
+    _gtk__Entry($w, $opts);
+}
+
 sub _gtk__Entry {
     my ($w, $opts) = @_;
 
