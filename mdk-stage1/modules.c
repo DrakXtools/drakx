@@ -25,6 +25,7 @@
 #include <sys/stat.h>
 #include <sys/mount.h>
 #include <fcntl.h>
+#include <libgen.h>
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
@@ -91,7 +92,10 @@ static char *kernel_module_extension(void)
 static char *filename2modname(char * filename) {
 	char *modname, *p;
 
-	modname = strdup(filename);
+	modname = strdup(basename(filename));
+	if (strstr(modname, kernel_module_extension())) {
+		modname[strlen(modname)-strlen(kernel_module_extension())] = '\0'; /* remove trailing .ko.gz */
+	}
 
 	p = modname;
 	while (p && *p) {
