@@ -234,10 +234,7 @@ sub load_perms() {
 sub row_setting_dialog {
     my ($title, $o_iter) = @_;
     
-    my $dlg = gtknew('Dialog');
-    $dlg->set_transient_for($w->{real_window});
-    $dlg->set_title($title);
-    $dlg->set_modal(1);
+    my $dlg = gtknew('Dialog', transient_for => $w->{real_window}, title => $title);
 #    $dlg->set_resizable(0);
     my $browse = gtknew('Button', text => N("browse"));
     my $file        = gtknew('Entry');
