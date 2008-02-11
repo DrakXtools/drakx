@@ -193,6 +193,8 @@ int my_mount(char *dev, char *location, char *fs, int force_rw)
 
 #ifndef DISABLE_MEDIAS
 	if (!strcmp(fs, "vfat")) {
+		my_insmod("nls_cp437", ANY_DRIVER_TYPE, NULL, 1);
+		my_insmod("nls_iso8859_1", ANY_DRIVER_TYPE, NULL, 1);
 		my_insmod("vfat", ANY_DRIVER_TYPE, NULL, 1);
 		opts = "check=relaxed";
 	}

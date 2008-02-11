@@ -37,7 +37,8 @@ my ($f, @para) = @ARGV;
 $::{$f}->(@para);
 
 sub modules() {
-    map { category2modules($_) } split(' ', $images_cat);
+    my @nls_modules = ('nls_cp437', 'nls_iso8859_1');
+    @nls_modules, map { category2modules($_) } split(' ', $images_cat);
 }
 
 sub remove_unneeded_modules {
@@ -73,8 +74,6 @@ sub filter_modules_dep {
 	    my ($module, @deps) = map { m!.*/(.*)\.k?o(\.gz)$! && $1 } $f, split(' ', $d);
 	    if (member($module, 'plip', 'ppa', 'imm')) {
 		@deps = map { $_ eq 'parport' ? 'parport_pc' : $_ } @deps;
-	    } elsif ($module eq 'vfat') {
-		push @deps, 'nls_cp437', 'nls_iso8859-1';
 	    }
 	    join(' ', "$module:", @deps);
     } @l;
