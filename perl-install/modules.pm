@@ -240,16 +240,6 @@ sub read_already_loaded {
     when_load($conf, $_) foreach reverse loaded_modules();
 }
 
-sub name2file {
-    my ($name) = @_;
-    my $f = list_modules::modname2filename($name);
-    if (!$f) {
-        log::l("warning: unable to get module filename for $name");
-        $f = $name;
-    }
-    $f . ".ko";
-}
-
 sub when_load {
     my ($conf, $name) = @_;
 
@@ -294,13 +284,19 @@ sub when_load_category {
 #-###############################################################################
 #- isInstall functions
 #-###############################################################################
+sub module_extension() { ".ko" }
+
 sub extract_modules {
     my ($dir, @modules) = @_;
     map {
-	my $f = name2file($_);
-	if (-e "/modules/$f.gz") {
-	    system("gzip -dc /modules/$f.gz > $dir/$f") == 0
+	my $modname = $_;
+	my $path = list_modules::modname2path($modname);
+	my $f = $modname . module_extension();
+	if (-e $path) {
+	    system("gzip -dc $path > $dir/$f") == 0
 	      or unlink "$dir/$f";
+	} else {
+	    log::l("warning: unable to get module filename for $modname (path: $path)");
 	}
 	"$dir/$f";
     } @modules;
@@ -311,7 +307,7 @@ sub load_raw_install {
 
     extract_modules('/tmp', @$l);
     my @failed = grep {
-	my $m = '/tmp/' . name2file($_);
+	my $m = '/tmp/' . $_ . module_extension();
 	if (-e $m) {
             my $stdout;
             my $rc = run_program::run('insmod', '2>', \$stdout, $m, split(' ', $options->{$_}));
