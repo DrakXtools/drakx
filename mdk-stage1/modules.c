@@ -149,7 +149,7 @@ static int load_modules_dependencies(void)
 		while (start && *start) {
 			ptr = strchr(start, ' ');
 			if (ptr) *ptr = '\0';
-			tmp_deps[i++] = strdup(start);
+			tmp_deps[i++] = filename2modname(start);
 			if (ptr)
 				start = ptr + 1;
 			else
