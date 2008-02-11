@@ -463,7 +463,7 @@ image=/vmlinux$I.gz
     }
 }
 
-sub boot_img_ppc() {
+sub boot_img_ppc {
 	my ($type, $I, $img, $kernel) = @_;
 	(my $rdz = $img) =~ s/\.img/.rdz/;
 	foreach (glob("all.kernels/*")) {
