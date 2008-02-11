@@ -5,6 +5,7 @@ use diagnostics;
 use lib qw(/usr/lib/libDrakX);
 use standalone;
 
+use MDK::Common;
 use common;
 use mygtk2 qw(gtknew gtkset);
 use ugtk2 qw(:create :dialogs :helpers :wrappers);
@@ -123,7 +124,7 @@ Select permissions to see/edit", $level), alignment => [ 0, 0 ]),
                                                                    [ N("Down"), N("Move selected rule down one level"), sub { move_callback('down') } ], 
                                                                    [ N("Add a rule"), N("Add a new rule at the end"), \&add_callback ],
                                                                    [ N("Delete"), N("Delete selected rule"), \&del_callback ], 
-                                                                   [ N("Edit"), N("Edit current rule"), \&edit_callback ])]),
+                                                                   [ N("Edit"), N("Edit current rule"), \&edit_callback ]) ]),
                                     0, gtknew('VBox'),
                                    ]),
                  0, create_okcancel({
