@@ -139,7 +139,7 @@ EOF
 }
 
 sub initrd {
-    my ($type, $I, $img, $bootsplash_cfg) = @_;
+    my ($type, $I, $img, $o_bootsplash_cfg) = @_;
     my $stage1_root = $ENV{DEBUGSTAGE1} ? "../mdk-stage1" : "/usr/$lib/drakx-installer-binaries";
 
     _ "rm -rf $tmp_initrd";
@@ -191,8 +191,8 @@ sub initrd {
 	symlink "busybox", "$tmp_initrd/sbin/$_" foreach qw(cat chgrp chmod chown chroot chvt clear cp cut date dd df dirname dmesg du echo env false find free grep gunzip gzip halt head id init kill killall klogd linuxrc ln logger ls lsmod mkdir mknod mkswap more mount mv poweroff ps pwd reboot reset rm rmdir sed sleep sh sort swapoff swapon sync syslogd tail tar touch true tty umount uname uniq uptime wc which whoami xargs yes zcat);
     }
 
-    if ($bootsplash_cfg) {
-	_ "splash -s -f $bootsplash_cfg > $tmp_initrd/bootsplash";
+    if ($o_bootsplash_cfg) {
+	_ "splash -s -f $o_bootsplash_cfg > $tmp_initrd/bootsplash";
     }
 
     my $devs = sprintf "ls /dev/{%s}", join(',', qw(console fb0 fd0 loop3 mem null ppp ptyp0 ram3 tty[0-7] ttyp0 ttyS0));
