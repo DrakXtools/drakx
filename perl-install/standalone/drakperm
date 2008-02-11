@@ -371,7 +371,7 @@ sub row_setting_dialog {
                                 my ($path, $user, $group, $perms, $_idx);
                                 $path = $file->get_text;
                                 if ($path !~ m!^/!) {
-                                    warn_dialog(N("Warning"), N("The first character of the path must be a slash (\"/\"):\n\"%s\"",  $path));
+                                    err_dialog(N("Warning"), N("The first character of the path must be a slash (\"/\"):\n\"%s\"",  $path));
                                     return 1;
                                 }
                                 if ($usr_check->get_active) {
@@ -381,7 +381,7 @@ sub row_setting_dialog {
                                     $user  = $users->entry->get_text;
                                     $group = $groups->entry->get_text;
                                     if (!member($user, @users) || !member($group, @groups)) {
-                                        warn_dialog(N("Warning"), join("\n", N("Both the username and the group must valid!"),
+                                        err_dialog(N("Warning"), join("\n", N("Both the username and the group must valid!"),
                                                                        N("User: %s",  $user),
                                                                        N("Group: %s",  $group),
                                                                    )
