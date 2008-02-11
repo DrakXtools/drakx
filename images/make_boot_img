@@ -176,7 +176,7 @@ sub initrd {
     }
     # ka deploy need some files in all.rdz 
     {
-	map { mkdir_p("$tmp_initrd/$_") } qw(sbin dev ka proc sbin var/tmp);
+	mkdir_p("$tmp_initrd/$_") foreach qw(sbin dev ka proc sbin var/tmp);
 	symlink("/sbin", "$tmp_initrd/bin");
 	cp_af("/usr/bin/ka-d-client", "$tmp_initrd/ka/ka-d-client");
 	cp_af("/usr/bin/mke2fs_diet", "$tmp_initrd/sbin/mke2fs");
