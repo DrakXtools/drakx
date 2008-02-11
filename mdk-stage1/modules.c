@@ -30,6 +30,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <errno.h>
+#include <sys/utsname.h>
 #include "log.h"
 #include "utils.h"
 #include "frontend.h"
@@ -109,7 +110,14 @@ static char *filename2modname(char * filename) {
 
 static void find_modules_directory(void)
 {
-	strcpy(modules_directory, "/modules");
+	struct utsname kernel_uname;
+	char * prefix = "/lib/modules";
+	char * release;
+	if (uname(&kernel_uname)) {
+		fatal_error("uname failed");
+	}
+	release = kernel_uname.release;
+	sprintf(modules_directory , "%s/%s", prefix, release);
 }
 
 static int load_modules_dependencies(void)
@@ -306,8 +314,7 @@ static enum insmod_return insmod_with_deps(const char * mod_name, char * options
 
 	log_message("needs %s", filename);
 	{
-		char *file = asprintf_("%s/%s%s", modules_directory, filename, kernel_module_extension());
-		return insmod_local_file(file, options);
+		return insmod_local_file((char *) filename, options);
 	}
 }
 
@@ -402,7 +409,8 @@ enum return_type ask_insmod(enum driver_type type)
 {
 	enum return_type results;
 	char * choice;
-	char ** dlist = list_directory(modules_directory);
+	char * modules_dir = asprintf_("%s/kernel", modules_directory);
+	char ** dlist = list_directory(modules_dir);
 	char ** modules = alloca(sizeof(char *) * (string_array_length(dlist) + 1));
 	char ** descrs = alloca(sizeof(char *) * (string_array_length(dlist) + 1));
 	char ** p_dlist = dlist;
