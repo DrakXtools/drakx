@@ -220,7 +220,7 @@ sub entries_append {
 	noacpi => "$automatic$default_vga acpi=off",
     );
 
-    map { { label => $_->[0], append => join(' ', grep {$_} $default_append, $_->[1]) } }
+    map { { label => $_->[0], append => join(' ', grep { $_ } $default_append, $_->[1]) } }
       group_by2(@entries);
 }
 
@@ -233,7 +233,7 @@ sub syslinux_cfg_all {
 	} entries_append($type)),
 	(map_index {
 	    { label => "alt$::i", kernel => "alt$::i/vmlinuz", initrd => "alt$::i/all.rdz", 
-	      append => join(' ', grep {$_} $default_append, $default_acpi, $default_vga) };
+	      append => join(' ', grep { $_ } $default_append, $default_acpi, $default_vga) };
 	} @kernels),
 	{ label => 'memtest', kernel => 'memtest' },
     ], $b_gfxboot);
