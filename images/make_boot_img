@@ -192,7 +192,7 @@ sub initrd {
     }
 
     if ($bootsplash_cfg) {
-	_ "splash -s -f $bootspash_cfg > $tmp_initrd/bootsplash";
+	_ "splash -s -f $bootsplash_cfg > $tmp_initrd/bootsplash";
     }
 
     my $devs = sprintf "ls /dev/{%s}", join(',', qw(console fb0 fd0 loop3 mem null ppp ptyp0 ram3 tty[0-7] ttyp0 ttyS0));
