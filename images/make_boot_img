@@ -170,8 +170,9 @@ sub initrd {
 	my ($ext) = $img =~ /rdz-(.*)/ or die "bad initrd name ($img)";
 	my $modz = "all.kernels$I/$ext";
 	mkdir_p("$tmp_initrd/modules/$ext");
-	__ "tar xC $tmp_initrd/modules -f $modz/${type}_modules.tar";
-	_ "cp -f $modz/modules.dep $modz/modules.alias modules.description $tmp_initrd/modules/$ext";
+	__ "tar xC $tmp_initrd/modules/$ext -f $modz/${type}_modules.tar";
+	_ "depmod -b $tmp_initrd $ext";
+	_ "cp -f $modz/modules.description $tmp_initrd/modules/$ext";
 	symlink "$ext/$_", "$tmp_initrd/modules/$_" foreach qw(modules.dep modules.description);
     }
     # ka deploy need some files in all.rdz 
