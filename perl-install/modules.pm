@@ -172,7 +172,6 @@ sub load_parallel_zip {
 
     arch() !~ /ppc/ or return;
 
-    eval { load('parport_pc') };
     grep { 
 	eval { load_and_configure($conf, $_); 1 };
     } 'imm', 'ppa';
