@@ -35,6 +35,8 @@ my %mappings_24_26 = (
 my %mappings_26_24 = reverse %mappings_24_26;
 $mappings_26_24{'uhci_hcd'} = 'usb_uhci';
 
+my @parallel_zip_modules = qw(imm ppa);
+
 sub mapping_24_26 {
     my ($modname) = @_;
     $mappings_24_26{$modname} || $modname;
@@ -90,7 +92,7 @@ sub load_with_options {
     my ($l, $h_options) = @_;
 
     my @l = map {
-	if_(member($_, 'plip', 'ppa', 'imm'), 'parport_pc'),
+	if_(member($_, 'plip', @parallel_zip_modules), 'parport_pc'),
 	if_($_ eq 'vfat', 'nls_cp437', 'nls_iso8859_1'),
 	dependencies_closure(cond_mapping_24_26($_));
     } @$l;
@@ -112,7 +114,7 @@ sub load_and_configure {
     my @l = remove_loaded_modules(dependencies_closure(cond_mapping_24_26($module)));
     load_raw(\@l, { cond_mapping_24_26($module) => $o_options });
 
-    if (member($module, 'imm', 'ppa') 
+    if (member($module, @parallel_zip_modules)
 	&& ! -d "/proc/sys/dev/parport/parport0/devices/$module") {
 	log::l("$module loaded but is not useful, removing");
 	unload($module);
@@ -174,7 +176,7 @@ sub load_parallel_zip {
 
     grep { 
 	eval { load_and_configure($conf, $_); 1 };
-    } 'imm', 'ppa';
+    } @parallel_zip_modules;
 }
 
 #-###############################################################################
