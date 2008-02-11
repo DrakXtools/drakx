@@ -44,8 +44,6 @@ sub modules() {
 sub remove_unneeded_modules {
     my ($kern_ver) = @_;
 
-    #- need creating a first time the modules.dep for all modules
-    filter_modules_dep($kern_ver);
     load_dependencies("all.kernels/$kern_ver/modules.dep");
 
     my @all = modules();
@@ -62,20 +60,6 @@ sub make_modules_per_image {
     my $dir = "all.kernels/$kern_ver/modules";
 
     system("cd $dir ; tar cf ../all_modules.tar *.ko.gz") == 0 or die "tar failed\n";
-}
-
-sub filter_modules_dep {
-    my ($kern_ver) = @_;
-
-    my @l = cat_("all.kernels/$kern_ver/modules.dep");
-
-    @l = map {
-	    my ($f, $d) = split ':';
-	    my ($module, @deps) = map { m!.*/(.*)\.k?o(\.gz)$! && $1 } $f, split(' ', $d);
-	    join(' ', "$module:", @deps);
-    } @l;
-
-    output("all.kernels/$kern_ver/modules.dep", map { "$_\n" } @l);
 }
 
 sub get_main_modules() {
