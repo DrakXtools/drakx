@@ -72,9 +72,6 @@ sub filter_modules_dep {
     @l = map {
 	    my ($f, $d) = split ':';
 	    my ($module, @deps) = map { m!.*/(.*)\.k?o(\.gz)$! && $1 } $f, split(' ', $d);
-	    if (member($module, 'plip', 'ppa', 'imm')) {
-		@deps = map { $_ eq 'parport' ? 'parport_pc' : $_ } @deps;
-	    }
 	    join(' ', "$module:", @deps);
     } @l;
 

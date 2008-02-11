@@ -90,6 +90,7 @@ sub load_with_options {
     my ($l, $h_options) = @_;
 
     my @l = map {
+	if_(member($_, 'plip', 'ppa', 'imm'), 'parport_pc'),
 	if_($_ eq 'vfat', 'nls_cp437', 'nls_iso8859_1'),
 	dependencies_closure(cond_mapping_24_26($_));
     } @$l;
