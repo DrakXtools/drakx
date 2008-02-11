@@ -32,8 +32,6 @@ my @kernels = map {
     $kern_ver;
 } @ARGV;
 
-sys('cp', '-f', "all.kernels/$kernels[0]/modules.description", '.');
-
 output('all.kernels/.list', map { "$_\n" } @kernels);
 
 sub system_verbose { print join(' ', @_), "\n"; system(@_) }
