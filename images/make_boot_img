@@ -686,13 +686,13 @@ sub syslinux_all_files {
 
     $default_vga =~ /788/ or die 'we rely on vga=788 for bootsplash';
     my $theme = $ENV{THEME} || 'Mandriva-Free';
-    my $bootspash_cfg = "/etc/bootsplash/themes/$theme/config/bootsplash-800x600.cfg";
-    -e $bootspash_cfg or die "can't find $bootspash_cfg";
+    my $bootsplash_cfg = "/etc/bootsplash/themes/$theme/config/bootsplash-800x600.cfg";
+    -e $bootsplash_cfg or die "can't find $bootsplash_cfg";
 
     each_index {
 	mkdir "$dir/alt$::i", 0777;
 	_ "cp all.kernels/$_/vmlinuz $dir/alt$::i";
-	initrd('all', '', "images/all.rdz-$_", $bootspash_cfg);
+	initrd('all', '', "images/all.rdz-$_", $bootsplash_cfg);
 	rename("images/all.rdz-$_", "$dir/alt$::i/all.rdz");
     } @$kernels;
 
