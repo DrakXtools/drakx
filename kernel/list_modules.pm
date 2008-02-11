@@ -319,7 +319,7 @@ sub filename2modname {
 
 sub load_default_moddeps() {
     require c;
-    load_dependencies($::prefix . '/lib/modules/' . c::kernel_version() . '/modules.dep');
+    load_dependencies('/lib/modules/' . c::kernel_version() . '/modules.dep');
 }
 
 sub modname2filename {
