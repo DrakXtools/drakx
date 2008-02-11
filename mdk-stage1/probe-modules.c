@@ -39,12 +39,25 @@ void fatal_error(char *msg)
 int main(int argc, char **argv, char **env)
 {
 	enum media_bus bus = BUS_ANY;
-	if (argc > 1 && streq(argv[1], "--usb")) {
-		bus = BUS_USB;
+	char *module = NULL;
+
+	if (argc > 1) {
+		if (streq(argv[1], "--usb")) {
+			bus = BUS_USB;
+		} else if (!ptr_begins_static_str(argv[1], "--")) {
+			module = argv[1];
+		}
 	}
+
 	open_log();
 	init_modules_insmoding();
-	find_media(bus);
+
+	if (module) {
+		my_insmod(module, ANY_DRIVER_TYPE, NULL, 0);
+	} else {
+		find_media(bus);
+	}
+
 	close_log();
 
 	return 0;
