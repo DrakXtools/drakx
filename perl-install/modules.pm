@@ -11,7 +11,6 @@ use modules::any_conf;
 
 sub modules_descriptions() {
     my $f = '/lib/modules/' . c::kernel_version() . '/modules.description';
-    -e $f or $f = '/modules/modules.description';
     map { my ($m, $d) = /(\S+)\s+(.*)/; $m =~ s/-/_/g; ($m => $d) } cat_($f);
 }
 
