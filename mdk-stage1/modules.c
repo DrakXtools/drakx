@@ -306,7 +306,7 @@ static enum insmod_return insmod_with_deps(const char * mod_name, char * options
 
 	log_message("needs %s", filename);
 	{
-		char *file = asprintf_("%s/%s", modules_directory, kernel_module_extension());
+		char *file = asprintf_("%s/%s%s", modules_directory, filename, kernel_module_extension());
 		return insmod_local_file(file, options);
 	}
 }
