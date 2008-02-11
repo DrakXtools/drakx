@@ -37,6 +37,7 @@
 
 #include "modules.h"
 
+static char modules_directory = "/modules";
 static struct module_deps_elem * modules_deps = NULL;
 static struct module_descr_elem * modules_descr = NULL;
 
@@ -97,7 +98,7 @@ static void filename2modname(char * filename) {
 
 static int load_modules_dependencies(void)
 {
-	char * deps_file = "/modules/modules.dep";
+	char * deps_file = asprintf_("%s/%s", modules_directory, "modules.dep");
 	char * buf, * ptr, * start, * end;
 	struct stat s;
 	int line, i;
@@ -162,7 +163,7 @@ static int load_modules_dependencies(void)
 
 static int load_modules_descriptions(void)
 {
-	char * descr_file = "/modules/modules.description";
+	char * descr_file = asprintf_("%s/%s", modules_directory, "modules.description");
 	char * buf, * ptr, * start, * end;
 	struct stat s;
 	int line;
@@ -290,7 +291,7 @@ static enum insmod_return insmod_with_deps(const char * mod_name, char * options
 
 	log_message("needs %s", filename);
 	{
-		char *file = asprintf_("/modules/%s%s", filename, kernel_module_extension());
+		char *file = asprintf_("%s/%s", modules_directory, kernel_module_extension());
 		return insmod_local_file(file, options);
 	}
 }
@@ -386,7 +387,7 @@ enum return_type ask_insmod(enum driver_type type)
 {
 	enum return_type results;
 	char * choice;
-	char ** dlist = list_directory("/modules");
+	char ** dlist = list_directory(modules_directory);
 	char ** modules = alloca(sizeof(char *) * (string_array_length(dlist) + 1));
 	char ** descrs = alloca(sizeof(char *) * (string_array_length(dlist) + 1));
 	char ** p_dlist = dlist;
