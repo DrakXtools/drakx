@@ -21,8 +21,8 @@ use fs;
 
 %suggestions = (
   N_("simple") => [
-    { mntpoint => "/",     size => MB(300), fs_type => 'ext3', ratio => 5, maxsize => MB(8000) },
-    { mntpoint => "swap",  size =>  MB(64), fs_type => 'swap', ratio => 1, maxsize => MB(4000) },
+    { mntpoint => "/",     size => MB(300), fs_type => 'ext3', ratio => 20, maxsize => MB(8000) },
+    { mntpoint => "swap",  size =>  MB(64), fs_type => 'swap', ratio => 1,  maxsize => MB(4000) },
     { mntpoint => "/home", size => MB(300), fs_type => 'ext3', ratio => 3 },
   ], N_("with /usr") => [
     { mntpoint => "/",     size => MB(250), fs_type => 'ext3', ratio => 1, maxsize => MB(4000) },
