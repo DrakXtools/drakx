@@ -408,6 +408,7 @@ sub _gtk__Sexy_IconEntry {
     }
 
     $w->signal_connect('icon-released' => delete $opts->{'icon-released'}) if exists $opts->{'icon-released'};
+    $w->signal_connect('icon-pressed' => delete $opts->{'icon-pressed'}) if exists $opts->{'icon-pressed'};
 
     _gtk__Entry($w, $opts);
 }
