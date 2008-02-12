@@ -172,7 +172,8 @@ sub initrd {
 	mkdir_p("$tmp_initrd/modules/$ext");
 	__ "tar xC $tmp_initrd/modules/$ext -f $modz/${type}_modules.tar";
 	_ "depmod -b $tmp_initrd $ext";
-	_ "cp -f $modz/modules.description $tmp_initrd/modules/$ext";
+	# depmod keeps only available modules in modules.alias, but we want them all
+	_ "cp -f $modz/modules.alias $modz/modules.description $tmp_initrd/modules/$ext";
     }
     # ka deploy need some files in all.rdz 
     {
