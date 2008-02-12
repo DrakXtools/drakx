@@ -367,7 +367,8 @@ sub choosePackages {
 
     if (!$o->{isUpgrade}) {
 	if (install::pkgs::packageByName($o->{packages}, 'task-kde') &&
-	    install::pkgs::packageByName($o->{packages}, 'task-gnome-minimal')) {
+	    install::pkgs::packageByName($o->{packages}, 'task-gnome-minimal') &&
+		$availableC >= 2_500_000_000) { # don't chooseDesktop if not enough place
 	    _chooseDesktop($o, $o->{rpmsrate_flags_chosen}, \$chooseGroups);
 	} else {
 	    # don't ask for desktop if kde and gnome are not available on media (useful for mini iso)
