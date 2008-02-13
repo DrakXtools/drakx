@@ -12,7 +12,7 @@
 # Hilbert <h@mandrake.org>, 2004.
 # hilbert <h@mandrake.org>, 2004.
 # Shiva Huang <blueshiva@giga.net.tw>, 2005.
-# Shiva Huang <shivahuang@gmail.com>, 2005, 2006
+# Shiva Huang <shivahuang@gmail.com>, 2005, 2006, 2008.
 # You-Cheng Hsieh <yochenhsieh@xuite.net>, 2005-2007.
 #
 msgid ""
@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-01-17 14:33+0100\n"
-"PO-Revision-Date: 2007-09-22 23:44+0800\n"
-"Last-Translator: You-Cheng Hsieh <yochenhsieh@gmail.com>\n"
+"PO-Revision-Date: 2008-02-14 03:15+0800\n"
+"Last-Translator: Shiva Huang <shivahuang@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -185,7 +185,7 @@ msgstr ""
 #: drakbug:64 drakbug:136
 #, c-format
 msgid "The \"%s\" program has crashed with the following error:"
-msgstr ""
+msgstr "程式 \"%s\" 發生了錯誤，錯誤訊息如下："
 
 #: drakbug:75
 #, c-format
@@ -269,12 +269,12 @@ msgstr "核心："
 #: drakbug:135
 #, c-format
 msgid "The \"%s\" program has segfaulted with the following error:"
-msgstr ""
+msgstr "程式 \"%s\" 發生了記憶體區段錯誤，錯誤訊息如下："
 
 #: drakbug:145
 #, c-format
 msgid "Its gdb trace is:"
-msgstr ""
+msgstr "它的 gdb 追蹤為："
 
 #: drakbug:153
 #, c-format
@@ -523,12 +523,12 @@ msgstr "True Type 字體安裝完成"
 #: drakfont:354 drakfont:369
 #, c-format
 msgid "type1inst building"
-msgstr ""
+msgstr "正在建立 type1inst"
 
 #: drakfont:363
 #, c-format
 msgid "Ghostscript referencing"
-msgstr ""
+msgstr "正在參照 Ghostscript"
 
 #: drakfont:380
 #, c-format
@@ -784,7 +784,7 @@ msgstr " --help                - 顯示本說明\n"
 #, c-format
 msgid ""
 " --id <id_label>       - load the html help page which refers to id_label\n"
-msgstr " --id <id 標籤>        - 載入與 id 標籤相關的  html 說明頁面\n"
+msgstr " --id <id 標籤>        - 載入與 id 標籤相關的 html 說明頁面\n"
 
 #: drakhelp:24
 #, c-format
@@ -792,6 +792,7 @@ msgid ""
 " --doc <link>          - link to another web page ( for WM welcome "
 "frontend)\n"
 msgstr ""
+" --doc <link>          - 連結到其他的網頁 (VM 的歡迎程式)\n"
 
 #: drakhelp:52
 #, c-format
@@ -1217,12 +1218,12 @@ msgstr "沒有密碼"
 #: draksec:283
 #, c-format
 msgid "Root password"
-msgstr ""
+msgstr "Root 密碼"
 
 #: draksec:284
 #, c-format
 msgid "User password"
-msgstr ""
+msgstr "使用者密碼"
 
 #: draksec:314 draksec:360
 #, c-format
@@ -1230,9 +1231,9 @@ msgid "Software Management"
 msgstr "軟體管理"
 
 #: draksec:315
-#, fuzzy, c-format
+#, c-format
 msgid "Mandriva Update"
-msgstr "Mandriva Online 線上服務"
+msgstr "Mandriva 更新"
 
 #: draksec:316
 #, c-format
@@ -1245,29 +1246,29 @@ msgid "Configure 3D Desktop effects"
 msgstr "設定 3D 桌面效果"
 
 #: draksec:318
-#, fuzzy, c-format
+#, c-format
 msgid "Graphical Server Configuration"
-msgstr "郵件警示通知組態設定"
+msgstr "圖形伺服器組態設定"
 
 #: draksec:319
-#, fuzzy, c-format
+#, c-format
 msgid "Mouse Configuration"
-msgstr "手動組態設定"
+msgstr "滑鼠組態設定"
 
 #: draksec:320
-#, fuzzy, c-format
+#, c-format
 msgid "Keyboard Configuration"
-msgstr "硬體組態設定"
+msgstr "鍵盤組態設定"
 
 #: draksec:321
-#, fuzzy, c-format
+#, c-format
 msgid "UPS Configuration"
-msgstr "UPS 驅動程式設定"
+msgstr "UPS 組態設定"
 
 #: draksec:322
-#, fuzzy, c-format
+#, c-format
 msgid "Network Configuration"
-msgstr "警示設定"
+msgstr "網路組態設定"
 
 #: draksec:323
 #, c-format
@@ -1282,17 +1283,17 @@ msgstr "網路中心"
 #: draksec:325
 #, c-format
 msgid "VPN"
-msgstr ""
+msgstr "VPN"
 
 #: draksec:326
 #, c-format
 msgid "Proxy Configuration"
-msgstr "Proxy 設定"
+msgstr "Proxy 組態設定"
 
 #: draksec:327
-#, fuzzy, c-format
+#, c-format
 msgid "Connection Sharing"
-msgstr "連線"
+msgstr "連線共享"
 
 #: draksec:329
 #, c-format
@@ -1310,14 +1311,14 @@ msgid "Services"
 msgstr "服務"
 
 #: draksec:333
-#, fuzzy, c-format
+#, c-format
 msgid "Users"
 msgstr "使用者"
 
 #: draksec:335
-#, fuzzy, c-format
+#, c-format
 msgid "Boot Configuratoin"
-msgstr "警示設定"
+msgstr "開機組態設定"
 
 #: draksec:361
 #, c-format
@@ -1325,9 +1326,9 @@ msgid "Hardware"
 msgstr "硬體"
 
 #: draksec:362
-#, fuzzy, c-format
+#, c-format
 msgid "Network"
-msgstr "網路選項"
+msgstr "網路"
 
 #: draksec:363
 #, c-format
@@ -1648,6 +1649,8 @@ msgid ""
 "We are configuring the \"%s\" UPS from \"%s\".\n"
 "Please fill in its name, its driver and its port."
 msgstr ""
+"我們正要設定位於 \"%2$s\" 的 UPS \"%1$s\"。\n"
+"請輸入它的名稱、驅動程式以及通訊埠。"
 
 #: drakups:143
 #, c-format
@@ -1804,12 +1807,12 @@ msgstr "請選取鍵盤排列的格式是那一種。"
 #: finish-install:117 finish-install:135 finish-install:147
 #, c-format
 msgid "Encrypted home partition"
-msgstr ""
+msgstr "加密的家目錄磁區"
 
 #: finish-install:117
 #, c-format
 msgid "Please enter a password for the %s user"
-msgstr ""
+msgstr "請為使用者 %s 輸入一個密碼"
 
 #: finish-install:120
 #, c-format
@@ -1819,12 +1822,12 @@ msgstr "密碼 (再一次)"
 #: finish-install:135
 #, c-format
 msgid "Creating encrypted home partition"
-msgstr ""
+msgstr "正在建立加密的家目錄磁區"
 
 #: finish-install:147
 #, c-format
 msgid "Formatting encrypted home partition"
-msgstr ""
+msgstr "正在格式化加密的家目錄磁區"
 
 #: harddrake2:27
 #, c-format
@@ -1948,14 +1951,14 @@ msgid "the disk controller on the host side"
 msgstr ""
 
 #: harddrake2:50
-#, fuzzy, c-format
+#, c-format
 msgid "Identifier"
-msgstr "磁碟標識"
+msgstr "識別標識"
 
 #: harddrake2:50
-#, fuzzy, c-format
+#, c-format
 msgid "usually the device serial number"
-msgstr "通常是磁碟的序號"
+msgstr "通常是此裝置的序號"
 
 #: harddrake2:51
 #, c-format
@@ -2005,12 +2008,12 @@ msgstr "裝置的廠商名稱"
 #: harddrake2:56
 #, c-format
 msgid "PCI domain"
-msgstr ""
+msgstr "PCI domain"
 
 #: harddrake2:56
-#, fuzzy, c-format
+#, c-format
 msgid "the PCI domain of the device"
-msgstr "裝置的廠商名稱"
+msgstr "此裝置的 PCI domain"
 
 #: harddrake2:57
 #, c-format
@@ -2095,7 +2098,7 @@ msgstr ".."
 #: harddrake2:68
 #, c-format
 msgid "Bogomips"
-msgstr ""
+msgstr "Bogomips"
 
 #: harddrake2:68
 #, c-format
@@ -2104,6 +2107,8 @@ msgid ""
 "initialize a timer counter.  Its result is stored as bogomips as a way to "
 "\"benchmark\" the cpu."
 msgstr ""
+"GNU/Linux 核心需要在啟動時執行一個計算迴圈來初始化計時器。它的結果會儲存"
+"為 bogomips 來作為 \"benchmark\" 這顆 CPU 的方法。"
 
 #: harddrake2:69
 #, c-format
@@ -2189,22 +2194,22 @@ msgstr ""
 #: harddrake2:79
 #, c-format
 msgid "Is FPU present"
-msgstr ""
+msgstr "是否擁有 FPU"
 
 #: harddrake2:79
 #, c-format
 msgid "yes means the processor has an arithmetic coprocessor"
-msgstr ""
+msgstr "是代表這顆處理器有算數協同處理器"
 
 #: harddrake2:80
 #, c-format
 msgid "Whether the FPU has an irq vector"
-msgstr ""
+msgstr "這個 FPU 是否有個 irq 向量"
 
 #: harddrake2:80
 #, c-format
 msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr ""
+msgstr "是代表這個算數協同處理器擁有個例外向量"
 
 #: harddrake2:81
 #, c-format
