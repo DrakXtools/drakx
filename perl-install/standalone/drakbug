@@ -231,7 +231,7 @@ sub report_bug_to_bugzilla() {
         $text = $buffer->get_text($buffer->get_start_iter, $buffer->get_end_iter, 0);
         if (!$text) {
             err_dialog(N("Warning"),
-                       N("You must type in what you were doing when this bug happens in order to increase the reproductibility of this bug and the odds of fixing it")
+                       N("You must type in what you were doing when this bug happens in order to enable us to reproduce this this bug and to increase the odds of fixing it")
                          . "\n\n" . N("Thanks."));
             return;
         }
