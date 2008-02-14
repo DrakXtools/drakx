@@ -378,7 +378,9 @@ sub tell_kernel {
 
     my $force_reboot = any { $_->[0] eq 'force_reboot' } @$tell_kernel;
     if (!$force_reboot) {
-	foreach (@$tell_kernel) {
+	# only keep the last action on the partition number
+	# that way we do not del/add the same partition, and this helps udev :)
+	foreach (reverse(uniq_ { $_->[1] } reverse @$tell_kernel)) {
 	    my ($action, $part_number, $o_start, $o_size) = @$_;
 	    
 	    if ($action eq 'add') {

@@ -1,3 +1,7 @@
+- diskdrake:
+  o final fix for resizing's failures due to udev's race 
+    (when writing the partition, do not del/add the same partition)
+
 Version 10.6.18 - 12 February 2008
 
 - handle 'icon-pressed' signal of Gtk2::Sexy::IconEntry
