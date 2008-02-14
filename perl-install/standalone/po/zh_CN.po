@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 2007\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-17 14:33+0100\n"
+"POT-Creation-Date: 2008-02-14 13:01+0100\n"
 "PO-Revision-Date: 2006-09-16 07:01+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
@@ -65,7 +65,7 @@ msgstr "详细"
 msgid "Silent"
 msgstr "静默"
 
-#: drakboot:132 drakfont:693 drakperm:378 drakperm:388 drakups:27
+#: drakboot:132 drakbug:233 drakfont:693 drakperm:375 drakperm:385 drakups:27
 #: harddrake2:515 localedrake:43 scannerdrake:51 scannerdrake:54
 #: scannerdrake:297 scannerdrake:302 scannerdrake:955
 #, c-format
@@ -170,67 +170,67 @@ msgstr ""
 "请选择视频模式, 该模式将应用到下面所选的每个启动项。\n"
 "请确定您的视频卡支持您所选的模式。"
 
-#: drakbug:64 drakbug:136
+#: drakbug:65 drakbug:143
 #, c-format
 msgid "The \"%s\" program has crashed with the following error:"
 msgstr "“%s”程序已崩溃，并抛出如下错误："
 
-#: drakbug:75
+#: drakbug:76
 #, c-format
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "Mandriva Linux 故障报告工具"
 
-#: drakbug:80
+#: drakbug:81
 #, c-format
 msgid "Mandriva Linux Control Center"
 msgstr "Mandriva Linux 控制中心"
 
-#: drakbug:81
+#: drakbug:82
 #, c-format
 msgid "First Time Wizard"
 msgstr "初次使用向导"
 
-#: drakbug:82
+#: drakbug:83
 #, c-format
 msgid "Synchronization tool"
 msgstr "同步工具"
 
-#: drakbug:83 drakbug:222
+#: drakbug:84 drakbug:195
 #, c-format
 msgid "Standalone Tools"
 msgstr "独立工具"
 
-#: drakbug:85 drakbug:86
+#: drakbug:86 drakbug:87
 #, c-format
 msgid "Mandriva Online"
 msgstr "Mandriva 在线"
 
-#: drakbug:87
+#: drakbug:88
 #, c-format
 msgid "Remote Control"
 msgstr "远程控制"
 
-#: drakbug:88
+#: drakbug:89
 #, c-format
 msgid "Software Manager"
 msgstr "软件管理器"
 
-#: drakbug:89
+#: drakbug:90
 #, c-format
 msgid "Windows Migration tool"
 msgstr "Windows 迁移工具"
 
-#: drakbug:90
+#: drakbug:91
 #, c-format
 msgid "Configuration Wizards"
 msgstr "配置向导"
 
-#: drakbug:112
+#: drakbug:113
 #, c-format
 msgid "Select Mandriva Tool:"
 msgstr "选择 Mandriva 工具:"
 
-#: drakbug:113
+#: drakbug:114
 #, c-format
 msgid ""
 "or Application Name\n"
@@ -239,32 +239,32 @@ msgstr ""
 "应用程序名\n"
 "(或完整路径): "
 
-#: drakbug:116
+#: drakbug:117
 #, c-format
 msgid "Find Package"
 msgstr "查找软件包"
 
-#: drakbug:118
+#: drakbug:119
 #, c-format
 msgid "Package: "
 msgstr "软件包: "
 
-#: drakbug:119
+#: drakbug:120
 #, c-format
 msgid "Kernel:"
 msgstr "内核: "
 
-#: drakbug:135
+#: drakbug:142
 #, c-format
 msgid "The \"%s\" program has segfaulted with the following error:"
 msgstr "“%s”程序已崩溃，并抛出如下错误："
 
-#: drakbug:145
+#: drakbug:146
 #, c-format
 msgid "Its gdb trace is:"
 msgstr "gdb 跟踪在此："
 
-#: drakbug:153
+#: drakbug:149
 #, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
@@ -279,30 +279,47 @@ msgstr ""
 "如果在您的报告中列出 lspcidrake -v 的输出、内核的版本以及 /proc/cpuinfo 的内"
 "容, 可能会更有帮助一些。"
 
-#: drakbug:161 drakperm:134 draksec:438 draksec:440 draksec:459 draksec:461
+#: drakbug:152
+#, c-format
+msgid "Please describe what you were doing when it crashed:"
+msgstr ""
+
+#: drakbug:164 drakperm:135 draksec:438 draksec:440 draksec:459 draksec:461
 #, c-format
 msgid "Help"
 msgstr "帮助"
 
-#: drakbug:163
+#: drakbug:168
 #, c-format
 msgid "Report"
 msgstr "报告"
 
-#: drakbug:196 drakfont:517
+#: drakbug:169 drakfont:517
 #, c-format
 msgid "Close"
 msgstr "关闭"
 
-#: drakbug:232
+#: drakbug:202
 #, c-format
 msgid "Not installed"
 msgstr "没有安装"
 
-#: drakbug:245
+#: drakbug:215
 #, c-format
 msgid "Package not installed"
 msgstr "软件包未安装"
+
+#: drakbug:234
+#, c-format
+msgid ""
+"You must type in what you were doing when this bug happens in order to "
+"increase the reproductibility of this bug and the odds of fixing it"
+msgstr ""
+
+#: drakbug:235
+#, c-format
+msgid "Thanks."
+msgstr ""
 
 #: drakclock:30 draksec:334
 #, c-format
@@ -788,62 +805,62 @@ msgstr "Mandriva Linux 帮助中心"
 msgid "No Help entry for %s\n"
 msgstr "%s 没有帮助项\n"
 
-#: drakperm:22
+#: drakperm:23
 #, c-format
 msgid "System settings"
 msgstr "系统设置"
 
-#: drakperm:23
+#: drakperm:24
 #, c-format
 msgid "Custom settings"
 msgstr "自定义设置"
 
-#: drakperm:24
+#: drakperm:25
 #, c-format
 msgid "Custom & system settings"
 msgstr "自定义和系统设置"
 
-#: drakperm:32
+#: drakperm:33
 #, c-format
 msgid "Security Permissions"
 msgstr "安全权限"
 
-#: drakperm:44
+#: drakperm:45
 #, c-format
 msgid "Editable"
 msgstr "可编辑"
 
-#: drakperm:49 drakperm:322
+#: drakperm:50 drakperm:319
 #, c-format
 msgid "Path"
 msgstr "路径"
 
-#: drakperm:49 drakperm:250
+#: drakperm:50 drakperm:248
 #, c-format
 msgid "User"
 msgstr "用户"
 
-#: drakperm:49 drakperm:250
+#: drakperm:50 drakperm:248
 #, c-format
 msgid "Group"
 msgstr "组"
 
-#: drakperm:49 drakperm:334
+#: drakperm:50 drakperm:331
 #, c-format
 msgid "Permissions"
 msgstr "权限"
 
-#: drakperm:59
+#: drakperm:60
 #, c-format
 msgid "Add a new rule"
 msgstr "添加新规则"
 
-#: drakperm:66 drakperm:101 drakperm:126
+#: drakperm:67 drakperm:102 drakperm:127
 #, c-format
 msgid "Edit current rule"
 msgstr "编辑当前规则"
 
-#: drakperm:108
+#: drakperm:109
 #, c-format
 msgid ""
 "Here you can see files to use in order to fix permissions, owners, and "
@@ -854,7 +871,7 @@ msgstr ""
 "等。\n"
 "您还可以编辑您自己的规则以取代默认的规则。"
 
-#: drakperm:110
+#: drakperm:111
 #, c-format
 msgid ""
 "The current security level is %s.\n"
@@ -863,115 +880,115 @@ msgstr ""
 "当前安全级别为 %s。\n"
 "选择要查看/编辑的权限"
 
-#: drakperm:122
+#: drakperm:123
 #, c-format
 msgid "Up"
 msgstr "上移"
 
-#: drakperm:122
+#: drakperm:123
 #, c-format
 msgid "Move selected rule up one level"
 msgstr "把选中的规则提高一级"
 
-#: drakperm:123
+#: drakperm:124
 #, c-format
 msgid "Down"
 msgstr "下移"
 
-#: drakperm:123
+#: drakperm:124
 #, c-format
 msgid "Move selected rule down one level"
 msgstr "把选中的规则降低一级"
 
-#: drakperm:124
+#: drakperm:125
 #, c-format
 msgid "Add a rule"
 msgstr "添加规则"
 
-#: drakperm:124
+#: drakperm:125
 #, c-format
 msgid "Add a new rule at the end"
 msgstr "在末尾添加新的规则"
 
-#: drakperm:125
+#: drakperm:126
 #, c-format
 msgid "Delete"
 msgstr "删除"
 
-#: drakperm:125
+#: drakperm:126
 #, c-format
 msgid "Delete selected rule"
 msgstr "删除选中的规则"
 
-#: drakperm:126 drakups:300 drakups:362 drakups:382
+#: drakperm:127 drakups:300 drakups:362 drakups:382
 #, c-format
 msgid "Edit"
 msgstr "编辑"
 
-#: drakperm:242
+#: drakperm:240
 #, c-format
 msgid "browse"
 msgstr "浏览"
 
-#: drakperm:247
+#: drakperm:245
 #, c-format
 msgid "user"
 msgstr "用户"
 
-#: drakperm:247
+#: drakperm:245
 #, c-format
 msgid "group"
 msgstr "组"
 
-#: drakperm:247
+#: drakperm:245
 #, c-format
 msgid "other"
 msgstr "其它"
 
-#: drakperm:250
+#: drakperm:248
 #, c-format
 msgid "Other"
 msgstr "其它"
 
-#: drakperm:252
+#: drakperm:250
 #, c-format
 msgid "Read"
 msgstr "读取"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:255
+#: drakperm:253
 #, c-format
 msgid "Enable \"%s\" to read the file"
 msgstr "允许“%s”读取文件"
 
-#: drakperm:259
+#: drakperm:257
 #, c-format
 msgid "Write"
 msgstr "写入"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:262
+#: drakperm:260
 #, c-format
 msgid "Enable \"%s\" to write the file"
 msgstr "允许“%s”写入文件"
 
-#: drakperm:266
+#: drakperm:264
 #, c-format
 msgid "Execute"
 msgstr "执行"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:269
+#: drakperm:267
 #, c-format
 msgid "Enable \"%s\" to execute the file"
 msgstr "允许“%s”执行此文件"
 
-#: drakperm:272
+#: drakperm:270
 #, c-format
 msgid "Sticky-bit"
 msgstr "Sticky-bit"
 
-#: drakperm:272
+#: drakperm:270
 #, c-format
 msgid ""
 "Used for directory:\n"
@@ -980,57 +997,57 @@ msgstr ""
 "用于目录:\n"
 " 只有目录的所有者或目录中文件的所有者可以删除它"
 
-#: drakperm:273
+#: drakperm:271
 #, c-format
 msgid "Set-UID"
 msgstr "Set-UID"
 
-#: drakperm:273
+#: drakperm:271
 #, c-format
 msgid "Use owner id for execution"
 msgstr "使用所有者 ID 执行"
 
-#: drakperm:274
+#: drakperm:272
 #, c-format
 msgid "Set-GID"
 msgstr "Set-GID"
 
-#: drakperm:274
+#: drakperm:272
 #, c-format
 msgid "Use group id for execution"
 msgstr "使用组 ID 执行"
 
-#: drakperm:292
+#: drakperm:289
 #, c-format
 msgid "User:"
 msgstr "用户:"
 
-#: drakperm:293
+#: drakperm:290
 #, c-format
 msgid "Group:"
 msgstr "组:"
 
-#: drakperm:297
+#: drakperm:294
 #, c-format
 msgid "Current user"
 msgstr "当前用户"
 
-#: drakperm:298
+#: drakperm:295
 #, c-format
 msgid "When checked, owner and group will not be changed"
 msgstr "选中后，无法更改所有者和组"
 
-#: drakperm:308
+#: drakperm:305
 #, c-format
 msgid "Path selection"
 msgstr "选择路径"
 
-#: drakperm:328
+#: drakperm:325
 #, c-format
 msgid "Property"
 msgstr "属性"
 
-#: drakperm:378
+#: drakperm:375
 #, c-format
 msgid ""
 "The first character of the path must be a slash (\"/\"):\n"
@@ -1039,17 +1056,17 @@ msgstr ""
 "路径的第一个字符必须是斜线(“/”):\n"
 "“%s”"
 
-#: drakperm:388
+#: drakperm:385
 #, c-format
 msgid "Both the username and the group must valid!"
 msgstr "用户名和组名必须都有效!"
 
-#: drakperm:389
+#: drakperm:386
 #, c-format
 msgid "User: %s"
 msgstr "用户: %s"
 
-#: drakperm:390
+#: drakperm:387
 #, c-format
 msgid "Group: %s"
 msgstr "组: %s"
@@ -1081,7 +1098,7 @@ msgstr "忽略"
 
 #: draksec:72 drakups:99 harddrake2:369 scannerdrake:66 scannerdrake:70
 #: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:505
-#: scannerdrake:509 scannerdrake:531 service_harddrake:252
+#: scannerdrake:509 scannerdrake:531 service_harddrake:253
 #, c-format
 msgid "Please wait"
 msgstr "请稍候"
@@ -3507,27 +3524,27 @@ msgstr "您的扫描仪将不会在网络上出现。"
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "无法安装共享您的扫描仪所需的软件包。"
 
-#: service_harddrake:124
+#: service_harddrake:125
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "删除了一些“%s”类别的设备:\n"
 
-#: service_harddrake:125
+#: service_harddrake:126
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- %s 已删除\n"
 
-#: service_harddrake:128
+#: service_harddrake:129
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "添加了一些设备: %s\n"
 
-#: service_harddrake:129
+#: service_harddrake:130
 #, c-format
 msgid "- %s was added\n"
 msgstr "- %s 已添加\n"
 
-#: service_harddrake:252
+#: service_harddrake:253
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "硬件检测进行中"

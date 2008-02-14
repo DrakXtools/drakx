@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-17 14:33+0100\n"
+"POT-Creation-Date: 2008-02-14 13:01+0100\n"
 "PO-Revision-Date: 2008-02-14 03:15+0800\n"
 "Last-Translator: Shiva Huang <shivahuang@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
@@ -77,7 +77,7 @@ msgstr "顯示詳細訊息"
 msgid "Silent"
 msgstr "隱藏訊息"
 
-#: drakboot:132 drakfont:693 drakperm:378 drakperm:388 drakups:27
+#: drakboot:132 drakbug:233 drakfont:693 drakperm:375 drakperm:385 drakups:27
 #: harddrake2:515 localedrake:43 scannerdrake:51 scannerdrake:54
 #: scannerdrake:297 scannerdrake:302 scannerdrake:955
 #, c-format
@@ -182,67 +182,67 @@ msgstr ""
 "請選擇顯示模式，它將被用在下列選擇的每一個的開機項目。\n"
 "請確定您的顯示卡支援您選擇的模式。"
 
-#: drakbug:64 drakbug:136
+#: drakbug:65 drakbug:143
 #, c-format
 msgid "The \"%s\" program has crashed with the following error:"
 msgstr "程式 \"%s\" 發生了錯誤，錯誤訊息如下："
 
-#: drakbug:75
+#: drakbug:76
 #, c-format
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "Mandriva Linux 臭蟲回報工具"
 
-#: drakbug:80
+#: drakbug:81
 #, c-format
 msgid "Mandriva Linux Control Center"
 msgstr "Mandriva Linux 控制中心"
 
-#: drakbug:81
+#: drakbug:82
 #, c-format
 msgid "First Time Wizard"
 msgstr "初次使用精靈"
 
-#: drakbug:82
+#: drakbug:83
 #, c-format
 msgid "Synchronization tool"
 msgstr "同步工具"
 
-#: drakbug:83 drakbug:222
+#: drakbug:84 drakbug:195
 #, c-format
 msgid "Standalone Tools"
 msgstr "單一工具"
 
-#: drakbug:85 drakbug:86
+#: drakbug:86 drakbug:87
 #, c-format
 msgid "Mandriva Online"
 msgstr "Mandriva Online 線上服務"
 
-#: drakbug:87
+#: drakbug:88
 #, c-format
 msgid "Remote Control"
 msgstr "遠端印表機"
 
-#: drakbug:88
+#: drakbug:89
 #, c-format
 msgid "Software Manager"
 msgstr "套件管理程式"
 
-#: drakbug:89
+#: drakbug:90
 #, c-format
 msgid "Windows Migration tool"
 msgstr "Windows 整合工具"
 
-#: drakbug:90
+#: drakbug:91
 #, c-format
 msgid "Configuration Wizards"
 msgstr "設定精靈"
 
-#: drakbug:112
+#: drakbug:113
 #, c-format
 msgid "Select Mandriva Tool:"
 msgstr "選擇 Mandriva 工具："
 
-#: drakbug:113
+#: drakbug:114
 #, c-format
 msgid ""
 "or Application Name\n"
@@ -251,32 +251,32 @@ msgstr ""
 "或應用程式名稱\n"
 "(或完整路徑)："
 
-#: drakbug:116
+#: drakbug:117
 #, c-format
 msgid "Find Package"
 msgstr "搜尋套件"
 
-#: drakbug:118
+#: drakbug:119
 #, c-format
 msgid "Package: "
 msgstr "套件： "
 
-#: drakbug:119
+#: drakbug:120
 #, c-format
 msgid "Kernel:"
 msgstr "核心："
 
-#: drakbug:135
+#: drakbug:142
 #, c-format
 msgid "The \"%s\" program has segfaulted with the following error:"
 msgstr "程式 \"%s\" 發生了記憶體區段錯誤，錯誤訊息如下："
 
-#: drakbug:145
+#: drakbug:146
 #, c-format
 msgid "Its gdb trace is:"
 msgstr "它的 gdb 追蹤為："
 
-#: drakbug:153
+#: drakbug:149
 #, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
@@ -291,30 +291,47 @@ msgstr ""
 "適合附在報告中的有用資訊包含 lspcidrake -v 的結果、核心版本、和 /proc/"
 "cpuinfo."
 
-#: drakbug:161 drakperm:134 draksec:438 draksec:440 draksec:459 draksec:461
+#: drakbug:152
+#, c-format
+msgid "Please describe what you were doing when it crashed:"
+msgstr ""
+
+#: drakbug:164 drakperm:135 draksec:438 draksec:440 draksec:459 draksec:461
 #, c-format
 msgid "Help"
 msgstr "說明"
 
-#: drakbug:163
+#: drakbug:168
 #, c-format
 msgid "Report"
 msgstr "回報"
 
-#: drakbug:196 drakfont:517
+#: drakbug:169 drakfont:517
 #, c-format
 msgid "Close"
 msgstr "關閉"
 
-#: drakbug:232
+#: drakbug:202
 #, c-format
 msgid "Not installed"
 msgstr "尚未安裝"
 
-#: drakbug:245
+#: drakbug:215
 #, c-format
 msgid "Package not installed"
 msgstr "套件尚未安裝"
+
+#: drakbug:234
+#, c-format
+msgid ""
+"You must type in what you were doing when this bug happens in order to "
+"increase the reproductibility of this bug and the odds of fixing it"
+msgstr ""
+
+#: drakbug:235
+#, c-format
+msgid "Thanks."
+msgstr ""
 
 #: drakclock:30 draksec:334
 #, c-format
@@ -791,8 +808,7 @@ msgstr " --id <id 標籤>        - 載入與 id 標籤相關的 html 說明頁�
 msgid ""
 " --doc <link>          - link to another web page ( for WM welcome "
 "frontend)\n"
-msgstr ""
-" --doc <link>          - 連結到其他的網頁 (VM 的歡迎程式)\n"
+msgstr " --doc <link>          - 連結到其他的網頁 (VM 的歡迎程式)\n"
 
 #: drakhelp:52
 #, c-format
@@ -804,62 +820,62 @@ msgstr "Mandriva Linux 協助中心"
 msgid "No Help entry for %s\n"
 msgstr "沒有 %s 的說明項目\n"
 
-#: drakperm:22
+#: drakperm:23
 #, c-format
 msgid "System settings"
 msgstr "系統設定"
 
-#: drakperm:23
+#: drakperm:24
 #, c-format
 msgid "Custom settings"
 msgstr "自訂設定"
 
-#: drakperm:24
+#: drakperm:25
 #, c-format
 msgid "Custom & system settings"
 msgstr "自訂與系統設定"
 
-#: drakperm:32
+#: drakperm:33
 #, c-format
 msgid "Security Permissions"
 msgstr "安全性權限"
 
-#: drakperm:44
+#: drakperm:45
 #, c-format
 msgid "Editable"
 msgstr "可編輯的"
 
-#: drakperm:49 drakperm:322
+#: drakperm:50 drakperm:319
 #, c-format
 msgid "Path"
 msgstr "路徑"
 
-#: drakperm:49 drakperm:250
+#: drakperm:50 drakperm:248
 #, c-format
 msgid "User"
 msgstr "使用者"
 
-#: drakperm:49 drakperm:250
+#: drakperm:50 drakperm:248
 #, c-format
 msgid "Group"
 msgstr "群組"
 
-#: drakperm:49 drakperm:334
+#: drakperm:50 drakperm:331
 #, c-format
 msgid "Permissions"
 msgstr "權限"
 
-#: drakperm:59
+#: drakperm:60
 #, c-format
 msgid "Add a new rule"
 msgstr "新增規則"
 
-#: drakperm:66 drakperm:101 drakperm:126
+#: drakperm:67 drakperm:102 drakperm:127
 #, c-format
 msgid "Edit current rule"
 msgstr "編輯目前的規則"
 
-#: drakperm:108
+#: drakperm:109
 #, c-format
 msgid ""
 "Here you can see files to use in order to fix permissions, owners, and "
@@ -869,7 +885,7 @@ msgstr ""
 "這裡讓您可以藉由 msec 檢視以及修改重要檔案的權限、擁有者、群組等資訊。\n"
 "另外您也可以編輯自訂的規則以取代預設的項目。"
 
-#: drakperm:110
+#: drakperm:111
 #, c-format
 msgid ""
 "The current security level is %s.\n"
@@ -878,115 +894,115 @@ msgstr ""
 "目前的安全性層級是 %s。\n"
 "請選擇要檢視/編輯的權限"
 
-#: drakperm:122
+#: drakperm:123
 #, c-format
 msgid "Up"
 msgstr "提高"
 
-#: drakperm:122
+#: drakperm:123
 #, c-format
 msgid "Move selected rule up one level"
 msgstr "把選取的規則提高一個層級"
 
-#: drakperm:123
+#: drakperm:124
 #, c-format
 msgid "Down"
 msgstr "降低"
 
-#: drakperm:123
+#: drakperm:124
 #, c-format
 msgid "Move selected rule down one level"
 msgstr "把選取的規則降低一個層級"
 
-#: drakperm:124
+#: drakperm:125
 #, c-format
 msgid "Add a rule"
 msgstr "新增規則"
 
-#: drakperm:124
+#: drakperm:125
 #, c-format
 msgid "Add a new rule at the end"
 msgstr "於結尾新增一項規則"
 
-#: drakperm:125
+#: drakperm:126
 #, c-format
 msgid "Delete"
 msgstr "刪除"
 
-#: drakperm:125
+#: drakperm:126
 #, c-format
 msgid "Delete selected rule"
 msgstr "刪除所選取的規則"
 
-#: drakperm:126 drakups:300 drakups:362 drakups:382
+#: drakperm:127 drakups:300 drakups:362 drakups:382
 #, c-format
 msgid "Edit"
 msgstr "編輯"
 
-#: drakperm:242
+#: drakperm:240
 #, c-format
 msgid "browse"
 msgstr "瀏覽"
 
-#: drakperm:247
+#: drakperm:245
 #, c-format
 msgid "user"
 msgstr "擁有者"
 
-#: drakperm:247
+#: drakperm:245
 #, c-format
 msgid "group"
 msgstr "群組"
 
-#: drakperm:247
+#: drakperm:245
 #, c-format
 msgid "other"
 msgstr "其它"
 
-#: drakperm:250
+#: drakperm:248
 #, c-format
 msgid "Other"
 msgstr "其他"
 
-#: drakperm:252
+#: drakperm:250
 #, c-format
 msgid "Read"
 msgstr "已讀"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:255
+#: drakperm:253
 #, c-format
 msgid "Enable \"%s\" to read the file"
 msgstr "允許 \"%s\" 讀取檔案"
 
-#: drakperm:259
+#: drakperm:257
 #, c-format
 msgid "Write"
 msgstr "寫入"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:262
+#: drakperm:260
 #, c-format
 msgid "Enable \"%s\" to write the file"
 msgstr "允許 \"%s\" 寫入檔案"
 
-#: drakperm:266
+#: drakperm:264
 #, c-format
 msgid "Execute"
 msgstr "執行"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:269
+#: drakperm:267
 #, c-format
 msgid "Enable \"%s\" to execute the file"
 msgstr "允許 \"%s\" 執行檔案"
 
-#: drakperm:272
+#: drakperm:270
 #, c-format
 msgid "Sticky-bit"
 msgstr "Sticky-Bit"
 
-#: drakperm:272
+#: drakperm:270
 #, c-format
 msgid ""
 "Used for directory:\n"
@@ -995,57 +1011,57 @@ msgstr ""
 "使用於目錄:\n"
 " 只有該檔案或目錄的擁有者才可以刪除它"
 
-#: drakperm:273
+#: drakperm:271
 #, c-format
 msgid "Set-UID"
 msgstr "Set-UID"
 
-#: drakperm:273
+#: drakperm:271
 #, c-format
 msgid "Use owner id for execution"
 msgstr "執行時另外具備該擁有者權限"
 
-#: drakperm:274
+#: drakperm:272
 #, c-format
 msgid "Set-GID"
 msgstr "Set-GID"
 
-#: drakperm:274
+#: drakperm:272
 #, c-format
 msgid "Use group id for execution"
 msgstr "執行時另外具備該群組權限"
 
-#: drakperm:292
+#: drakperm:289
 #, c-format
 msgid "User:"
 msgstr "使用者："
 
-#: drakperm:293
+#: drakperm:290
 #, c-format
 msgid "Group:"
 msgstr "分類："
 
-#: drakperm:297
+#: drakperm:294
 #, c-format
 msgid "Current user"
 msgstr "目前使用者"
 
-#: drakperm:298
+#: drakperm:295
 #, c-format
 msgid "When checked, owner and group will not be changed"
 msgstr "當選取時, 擁有者與群組將不被更動"
 
-#: drakperm:308
+#: drakperm:305
 #, c-format
 msgid "Path selection"
 msgstr "路徑選擇"
 
-#: drakperm:328
+#: drakperm:325
 #, c-format
 msgid "Property"
 msgstr "特性"
 
-#: drakperm:378
+#: drakperm:375
 #, c-format
 msgid ""
 "The first character of the path must be a slash (\"/\"):\n"
@@ -1054,17 +1070,17 @@ msgstr ""
 "路徑的第一個字母必須是斜線(\"/\")：\n"
 "\"%s\""
 
-#: drakperm:388
+#: drakperm:385
 #, c-format
 msgid "Both the username and the group must valid!"
 msgstr "使用者名稱與群組必須皆為有效的！"
 
-#: drakperm:389
+#: drakperm:386
 #, c-format
 msgid "User: %s"
 msgstr "使用者：%s"
 
-#: drakperm:390
+#: drakperm:387
 #, c-format
 msgid "Group: %s"
 msgstr "群組：%s"
@@ -1096,7 +1112,7 @@ msgstr "忽略"
 
 #: draksec:72 drakups:99 harddrake2:369 scannerdrake:66 scannerdrake:70
 #: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:505
-#: scannerdrake:509 scannerdrake:531 service_harddrake:252
+#: scannerdrake:509 scannerdrake:531 service_harddrake:253
 #, c-format
 msgid "Please wait"
 msgstr "請稍候"
@@ -2107,8 +2123,8 @@ msgid ""
 "initialize a timer counter.  Its result is stored as bogomips as a way to "
 "\"benchmark\" the cpu."
 msgstr ""
-"GNU/Linux 核心需要在啟動時執行一個計算迴圈來初始化計時器。它的結果會儲存"
-"為 bogomips 來作為 \"benchmark\" 這顆 CPU 的方法。"
+"GNU/Linux 核心需要在啟動時執行一個計算迴圈來初始化計時器。它的結果會儲存為 "
+"bogomips 來作為 \"benchmark\" 這顆 CPU 的方法。"
 
 #: harddrake2:69
 #, c-format
@@ -3484,27 +3500,27 @@ msgstr "您的掃描器將無法從網路上使用。"
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "無法安裝分享掃描器所需的套件。"
 
-#: service_harddrake:124
+#: service_harddrake:125
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "位於 \"%s\" 的硬體類別項目已經移除：\n"
 
-#: service_harddrake:125
+#: service_harddrake:126
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- %s 已經移除\n"
 
-#: service_harddrake:128
+#: service_harddrake:129
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "新增了一些裝置：%s\n"
 
-#: service_harddrake:129
+#: service_harddrake:130
 #, c-format
 msgid "- %s was added\n"
 msgstr "- %s 已經加入\n"
 
-#: service_harddrake:252
+#: service_harddrake:253
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "硬體偵測正在進行中"

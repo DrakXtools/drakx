@@ -74,7 +74,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-17 14:33+0100\n"
+"POT-Creation-Date: 2008-02-14 13:01+0100\n"
 "PO-Revision-Date: 2008-02-04 17:19+0100\n"
 "Last-Translator: Christophe Berthelé <cpjc@free.fr>\n"
 "Language-Team: Français <cooker-i18n@mandrivalinux.org>\n"
@@ -134,7 +134,7 @@ msgstr "Verbeux"
 msgid "Silent"
 msgstr "Silencieux"
 
-#: drakboot:132 drakfont:693 drakperm:378 drakperm:388 drakups:27
+#: drakboot:132 drakbug:233 drakfont:693 drakperm:375 drakperm:385 drakups:27
 #: harddrake2:515 localedrake:43 scannerdrake:51 scannerdrake:54
 #: scannerdrake:297 scannerdrake:302 scannerdrake:955
 #, c-format
@@ -241,67 +241,67 @@ msgstr ""
 "démarrage sélectionnée ci-dessus.\n"
 "Vérifiez que votre carte vidéo est en mesure de supporter le mode choisi."
 
-#: drakbug:64 drakbug:136
+#: drakbug:65 drakbug:143
 #, c-format
 msgid "The \"%s\" program has crashed with the following error:"
 msgstr "Le programme « %s » a planté (SEGV) avec l'erreur suivante :"
 
-#: drakbug:75
+#: drakbug:76
 #, c-format
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "Outil de signalement de bogue Mandriva Linux"
 
-#: drakbug:80
+#: drakbug:81
 #, c-format
 msgid "Mandriva Linux Control Center"
 msgstr "Centre de Contrôle Mandriva Linux"
 
-#: drakbug:81
+#: drakbug:82
 #, c-format
 msgid "First Time Wizard"
 msgstr "Assistant de première connexion"
 
-#: drakbug:82
+#: drakbug:83
 #, c-format
 msgid "Synchronization tool"
 msgstr "Outil de synchronisation"
 
-#: drakbug:83 drakbug:222
+#: drakbug:84 drakbug:195
 #, c-format
 msgid "Standalone Tools"
 msgstr "Outils autonomes"
 
-#: drakbug:85 drakbug:86
+#: drakbug:86 drakbug:87
 #, c-format
 msgid "Mandriva Online"
 msgstr "Mandriva Online"
 
-#: drakbug:87
+#: drakbug:88
 #, c-format
 msgid "Remote Control"
 msgstr "Contrôle à distance"
 
-#: drakbug:88
+#: drakbug:89
 #, c-format
 msgid "Software Manager"
 msgstr "Gestionnaire de programmes"
 
-#: drakbug:89
+#: drakbug:90
 #, c-format
 msgid "Windows Migration tool"
 msgstr "Outil de migration Windows"
 
-#: drakbug:90
+#: drakbug:91
 #, c-format
 msgid "Configuration Wizards"
 msgstr "Assistants de configuration"
 
-#: drakbug:112
+#: drakbug:113
 #, c-format
 msgid "Select Mandriva Tool:"
 msgstr "Choisissez un outil Mandriva :"
 
-#: drakbug:113
+#: drakbug:114
 #, c-format
 msgid ""
 "or Application Name\n"
@@ -310,32 +310,32 @@ msgstr ""
 "ou nom de l'Application\n"
 "(ou Chemin Complet) :"
 
-#: drakbug:116
+#: drakbug:117
 #, c-format
 msgid "Find Package"
 msgstr "Rechercher des Paquetages"
 
-#: drakbug:118
+#: drakbug:119
 #, c-format
 msgid "Package: "
 msgstr "Paquetage : "
 
-#: drakbug:119
+#: drakbug:120
 #, c-format
 msgid "Kernel:"
 msgstr "Noyau :"
 
-#: drakbug:135
+#: drakbug:142
 #, c-format
 msgid "The \"%s\" program has segfaulted with the following error:"
 msgstr "Le programme « %s » a planté avec l'erreur suivante :"
 
-#: drakbug:145
+#: drakbug:146
 #, c-format
 msgid "Its gdb trace is:"
 msgstr "Sa trace gdb est : "
 
-#: drakbug:153
+#: drakbug:149
 #, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
@@ -351,30 +351,47 @@ msgstr ""
 "Il est utile d'inclure dans votre rapport la sortie de la commande "
 "« lspcidrake -v », la version du noyau ainsi que le contenu de /proc/cpuinfo."
 
-#: drakbug:161 drakperm:134 draksec:438 draksec:440 draksec:459 draksec:461
+#: drakbug:152
+#, c-format
+msgid "Please describe what you were doing when it crashed:"
+msgstr ""
+
+#: drakbug:164 drakperm:135 draksec:438 draksec:440 draksec:459 draksec:461
 #, c-format
 msgid "Help"
 msgstr "Aide"
 
-#: drakbug:163
+#: drakbug:168
 #, c-format
 msgid "Report"
 msgstr "Signaler"
 
-#: drakbug:196 drakfont:517
+#: drakbug:169 drakfont:517
 #, c-format
 msgid "Close"
 msgstr "Fermer"
 
-#: drakbug:232
+#: drakbug:202
 #, c-format
 msgid "Not installed"
 msgstr "Non installé"
 
-#: drakbug:245
+#: drakbug:215
 #, c-format
 msgid "Package not installed"
 msgstr "Paquetage non installé"
+
+#: drakbug:234
+#, c-format
+msgid ""
+"You must type in what you were doing when this bug happens in order to "
+"increase the reproductibility of this bug and the odds of fixing it"
+msgstr ""
+
+#: drakbug:235
+#, c-format
+msgid "Thanks."
+msgstr ""
 
 #: drakclock:30 draksec:334
 #, c-format
@@ -887,62 +904,62 @@ msgstr "Le centre d'aide de Mandriva Linux"
 msgid "No Help entry for %s\n"
 msgstr "Aucune entrée d'aide pour %s\n"
 
-#: drakperm:22
+#: drakperm:23
 #, c-format
 msgid "System settings"
 msgstr "Réglages système"
 
-#: drakperm:23
+#: drakperm:24
 #, c-format
 msgid "Custom settings"
 msgstr "Réglages personnalisés"
 
-#: drakperm:24
+#: drakperm:25
 #, c-format
 msgid "Custom & system settings"
 msgstr "Réglages personnalisés et système"
 
-#: drakperm:32
+#: drakperm:33
 #, c-format
 msgid "Security Permissions"
 msgstr "Permissions de sécurité"
 
-#: drakperm:44
+#: drakperm:45
 #, c-format
 msgid "Editable"
 msgstr "Éditable"
 
-#: drakperm:49 drakperm:322
+#: drakperm:50 drakperm:319
 #, c-format
 msgid "Path"
 msgstr "Chemin"
 
-#: drakperm:49 drakperm:250
+#: drakperm:50 drakperm:248
 #, c-format
 msgid "User"
 msgstr "Utilisateur"
 
-#: drakperm:49 drakperm:250
+#: drakperm:50 drakperm:248
 #, c-format
 msgid "Group"
 msgstr "Groupe"
 
-#: drakperm:49 drakperm:334
+#: drakperm:50 drakperm:331
 #, c-format
 msgid "Permissions"
 msgstr "Permissions"
 
-#: drakperm:59
+#: drakperm:60
 #, c-format
 msgid "Add a new rule"
 msgstr "Ajouter une nouvelle règle"
 
-#: drakperm:66 drakperm:101 drakperm:126
+#: drakperm:67 drakperm:102 drakperm:127
 #, c-format
 msgid "Edit current rule"
 msgstr "Modifier la règle"
 
-#: drakperm:108
+#: drakperm:109
 #, c-format
 msgid ""
 "Here you can see files to use in order to fix permissions, owners, and "
@@ -954,7 +971,7 @@ msgstr ""
 "Vous pouvez aussi éditer vos propres règles, prioritaires devant celles par "
 "défaut."
 
-#: drakperm:110
+#: drakperm:111
 #, c-format
 msgid ""
 "The current security level is %s.\n"
@@ -963,115 +980,115 @@ msgstr ""
 "Le niveau de sécurité courant est %s.\n"
 "Sélectionnez les permissions à consulter et/ou éditer"
 
-#: drakperm:122
+#: drakperm:123
 #, c-format
 msgid "Up"
 msgstr "Monter"
 
-#: drakperm:122
+#: drakperm:123
 #, c-format
 msgid "Move selected rule up one level"
 msgstr "Augmenter la priorité de la règle d'un niveau"
 
-#: drakperm:123
+#: drakperm:124
 #, c-format
 msgid "Down"
 msgstr "Descendre"
 
-#: drakperm:123
+#: drakperm:124
 #, c-format
 msgid "Move selected rule down one level"
 msgstr "Abaisser la priorité de la règle d'un niveau"
 
-#: drakperm:124
+#: drakperm:125
 #, c-format
 msgid "Add a rule"
 msgstr "Ajouter une règle"
 
-#: drakperm:124
+#: drakperm:125
 #, c-format
 msgid "Add a new rule at the end"
 msgstr "Ajouter une nouvelle règle à la fin"
 
-#: drakperm:125
+#: drakperm:126
 #, c-format
 msgid "Delete"
 msgstr "Supprimer"
 
-#: drakperm:125
+#: drakperm:126
 #, c-format
 msgid "Delete selected rule"
 msgstr "Supprimer la règle"
 
-#: drakperm:126 drakups:300 drakups:362 drakups:382
+#: drakperm:127 drakups:300 drakups:362 drakups:382
 #, c-format
 msgid "Edit"
 msgstr "Éditer"
 
-#: drakperm:242
+#: drakperm:240
 #, c-format
 msgid "browse"
 msgstr "naviguer"
 
-#: drakperm:247
+#: drakperm:245
 #, c-format
 msgid "user"
 msgstr "utilisateur"
 
-#: drakperm:247
+#: drakperm:245
 #, c-format
 msgid "group"
 msgstr "groupe"
 
-#: drakperm:247
+#: drakperm:245
 #, c-format
 msgid "other"
 msgstr "autre"
 
-#: drakperm:250
+#: drakperm:248
 #, c-format
 msgid "Other"
 msgstr "Autre"
 
-#: drakperm:252
+#: drakperm:250
 #, c-format
 msgid "Read"
 msgstr "Lecture"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:255
+#: drakperm:253
 #, c-format
 msgid "Enable \"%s\" to read the file"
 msgstr "Permettre à « %s » de lire ce fichier"
 
-#: drakperm:259
+#: drakperm:257
 #, c-format
 msgid "Write"
 msgstr "Écriture"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:262
+#: drakperm:260
 #, c-format
 msgid "Enable \"%s\" to write the file"
 msgstr "Permettre à « %s » de modifier ce fichier"
 
-#: drakperm:266
+#: drakperm:264
 #, c-format
 msgid "Execute"
 msgstr "Exécuter"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:269
+#: drakperm:267
 #, c-format
 msgid "Enable \"%s\" to execute the file"
 msgstr "Permettre à « %s » d'exécuter ce fichier"
 
-#: drakperm:272
+#: drakperm:270
 #, c-format
 msgid "Sticky-bit"
 msgstr "Sticky-bit"
 
-#: drakperm:272
+#: drakperm:270
 #, c-format
 msgid ""
 "Used for directory:\n"
@@ -1081,58 +1098,58 @@ msgstr ""
 "un fichier du dossier ne peut être effacé ou renommé que par le propriétaire "
 "du dossier ou du fichier"
 
-#: drakperm:273
+#: drakperm:271
 #, c-format
 msgid "Set-UID"
 msgstr "Set-UID"
 
-#: drakperm:273
+#: drakperm:271
 #, c-format
 msgid "Use owner id for execution"
 msgstr "Utiliser l'id du propriétaire lors de l'exécution"
 
-#: drakperm:274
+#: drakperm:272
 #, c-format
 msgid "Set-GID"
 msgstr "Set-GID"
 
-#: drakperm:274
+#: drakperm:272
 #, c-format
 msgid "Use group id for execution"
 msgstr "Utiliser l'id du groupe lors de l'exécution"
 
-#: drakperm:292
+#: drakperm:289
 #, c-format
 msgid "User:"
 msgstr "Utilisateur :"
 
-#: drakperm:293
+#: drakperm:290
 #, c-format
 msgid "Group:"
 msgstr "Groupe :"
 
-#: drakperm:297
+#: drakperm:294
 #, c-format
 msgid "Current user"
 msgstr "Utilisateur courant"
 
-#: drakperm:298
+#: drakperm:295
 #, c-format
 msgid "When checked, owner and group will not be changed"
 msgstr ""
 "Une fois vérifiés, le propriétaire et le groupe ne seront plus modifiés"
 
-#: drakperm:308
+#: drakperm:305
 #, c-format
 msgid "Path selection"
 msgstr "Sélection du chemin"
 
-#: drakperm:328
+#: drakperm:325
 #, c-format
 msgid "Property"
 msgstr "Propriété"
 
-#: drakperm:378
+#: drakperm:375
 #, c-format
 msgid ""
 "The first character of the path must be a slash (\"/\"):\n"
@@ -1141,17 +1158,17 @@ msgstr ""
 "Le premier caractère du chemin doit être un slash (\"/\"):\n"
 "\"%s\""
 
-#: drakperm:388
+#: drakperm:385
 #, c-format
 msgid "Both the username and the group must valid!"
 msgstr "Le nom d'utilisateur et le groupe doivent être valides !"
 
-#: drakperm:389
+#: drakperm:386
 #, c-format
 msgid "User: %s"
 msgstr "Utilisateur : %s"
 
-#: drakperm:390
+#: drakperm:387
 #, c-format
 msgid "Group: %s"
 msgstr "Groupe : %s"
@@ -1183,7 +1200,7 @@ msgstr "Ignorer"
 
 #: draksec:72 drakups:99 harddrake2:369 scannerdrake:66 scannerdrake:70
 #: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:505
-#: scannerdrake:509 scannerdrake:531 service_harddrake:252
+#: scannerdrake:509 scannerdrake:531 service_harddrake:253
 #, c-format
 msgid "Please wait"
 msgstr "Veuillez patienter"
@@ -3686,27 +3703,27 @@ msgid "Could not install the packages needed to share your scanner(s)."
 msgstr ""
 "Impossible d'installer les paquetages nécessaires au partage de vos scanners."
 
-#: service_harddrake:124
+#: service_harddrake:125
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Certains matériels listés dans la classe « %s » ont été enlevés :\n"
 
-#: service_harddrake:125
+#: service_harddrake:126
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- %s a été enlevé\n"
 
-#: service_harddrake:128
+#: service_harddrake:129
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "Certains périphériques ont été ajoutés : %s\n"
 
-#: service_harddrake:129
+#: service_harddrake:130
 #, c-format
 msgid "- %s was added\n"
 msgstr "- %s a été ajouté\n"
 
-#: service_harddrake:252
+#: service_harddrake:253
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "Détection du matériel en cours"

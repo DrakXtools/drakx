@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-17 14:33+0100\n"
+"POT-Creation-Date: 2008-02-14 13:01+0100\n"
 "PO-Revision-Date: 2008-02-04 20:03+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Euskara <eu@li.org>\n"
@@ -66,7 +66,7 @@ msgstr "Berritsua"
 msgid "Silent"
 msgstr "Isila"
 
-#: drakboot:132 drakfont:693 drakperm:378 drakperm:388 drakups:27
+#: drakboot:132 drakbug:233 drakfont:693 drakperm:375 drakperm:385 drakups:27
 #: harddrake2:515 localedrake:43 scannerdrake:51 scannerdrake:54
 #: scannerdrake:297 scannerdrake:302 scannerdrake:955
 #, c-format
@@ -173,67 +173,67 @@ msgstr ""
 "bakoitzari aplikatuko zaio.\n"
 "Ziurtatu zure bideo txartelak aukeratzen duzun modua onartzen duela."
 
-#: drakbug:64 drakbug:136
+#: drakbug:65 drakbug:143
 #, c-format
 msgid "The \"%s\" program has crashed with the following error:"
 msgstr "\"%s\" programa kraskatu egin da ondorengo akatsarekin:"
 
-#: drakbug:75
+#: drakbug:76
 #, c-format
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "Mandriva Linux-en programa-erroreen berri emateko tresna"
 
-#: drakbug:80
+#: drakbug:81
 #, c-format
 msgid "Mandriva Linux Control Center"
 msgstr "Mandriva Linux-en kontrol-zentroa"
 
-#: drakbug:81
+#: drakbug:82
 #, c-format
 msgid "First Time Wizard"
 msgstr "Lehen aldiko morroia"
 
-#: drakbug:82
+#: drakbug:83
 #, c-format
 msgid "Synchronization tool"
 msgstr "Sinkronizazioko tresna"
 
-#: drakbug:83 drakbug:222
+#: drakbug:84 drakbug:195
 #, c-format
 msgid "Standalone Tools"
 msgstr "Tresna autonomoak"
 
-#: drakbug:85 drakbug:86
+#: drakbug:86 drakbug:87
 #, c-format
 msgid "Mandriva Online"
 msgstr "Mandriva Online"
 
-#: drakbug:87
+#: drakbug:88
 #, c-format
 msgid "Remote Control"
 msgstr "Urruneko kontrola"
 
-#: drakbug:88
+#: drakbug:89
 #, c-format
 msgid "Software Manager"
 msgstr "Software-kudeatzailea"
 
-#: drakbug:89
+#: drakbug:90
 #, c-format
 msgid "Windows Migration tool"
 msgstr "Windows-etik migratzeko tresna"
 
-#: drakbug:90
+#: drakbug:91
 #, c-format
 msgid "Configuration Wizards"
 msgstr "Konfigurazio-morroiak"
 
-#: drakbug:112
+#: drakbug:113
 #, c-format
 msgid "Select Mandriva Tool:"
 msgstr "Aukeratu Mandriva Tresna:"
 
-#: drakbug:113
+#: drakbug:114
 #, c-format
 msgid ""
 "or Application Name\n"
@@ -242,32 +242,32 @@ msgstr ""
 "edo aplikazio izena\n"
 "(edo Bide Osoa):"
 
-#: drakbug:116
+#: drakbug:117
 #, c-format
 msgid "Find Package"
 msgstr "Bilatu paketea"
 
-#: drakbug:118
+#: drakbug:119
 #, c-format
 msgid "Package: "
 msgstr "Paketea: "
 
-#: drakbug:119
+#: drakbug:120
 #, c-format
 msgid "Kernel:"
 msgstr "Nukleoa:"
 
-#: drakbug:135
+#: drakbug:142
 #, c-format
 msgid "The \"%s\" program has segfaulted with the following error:"
 msgstr "\"%s\" programak segmentu akatsa eragin du ondorengo akatsarekin:"
 
-#: drakbug:145
+#: drakbug:146
 #, c-format
 msgid "Its gdb trace is:"
 msgstr "Bere gdb aztarna:"
 
-#: drakbug:153
+#: drakbug:149
 #, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
@@ -284,30 +284,47 @@ msgstr ""
 "Zure txostenean erantsita lagungarri izan daitezke lspcidrake -v-ren "
 "irteera, nukleo bertsioa, eta /proc/cpuinfo."
 
-#: drakbug:161 drakperm:134 draksec:438 draksec:440 draksec:459 draksec:461
+#: drakbug:152
+#, c-format
+msgid "Please describe what you were doing when it crashed:"
+msgstr ""
+
+#: drakbug:164 drakperm:135 draksec:438 draksec:440 draksec:459 draksec:461
 #, c-format
 msgid "Help"
 msgstr "Laguntza"
 
-#: drakbug:163
+#: drakbug:168
 #, c-format
 msgid "Report"
 msgstr "Berri-ematea"
 
-#: drakbug:196 drakfont:517
+#: drakbug:169 drakfont:517
 #, c-format
 msgid "Close"
 msgstr "Itxi"
 
-#: drakbug:232
+#: drakbug:202
 #, c-format
 msgid "Not installed"
 msgstr "Instalatu gabe"
 
-#: drakbug:245
+#: drakbug:215
 #, c-format
 msgid "Package not installed"
 msgstr "Paketea ez dago instalatuta"
+
+#: drakbug:234
+#, c-format
+msgid ""
+"You must type in what you were doing when this bug happens in order to "
+"increase the reproductibility of this bug and the odds of fixing it"
+msgstr ""
+
+#: drakbug:235
+#, c-format
+msgid "Thanks."
+msgstr ""
 
 #: drakclock:30 draksec:334
 #, c-format
@@ -654,7 +671,8 @@ msgstr "Ados"
 #: drakfont:582
 #, c-format
 msgid "Select the font file or directory and click on 'Add'"
-msgstr "Hautatu letra-tipoen fitxategia edo direktorioa eta egin klik 'Gehitu'n"
+msgstr ""
+"Hautatu letra-tipoen fitxategia edo direktorioa eta egin klik 'Gehitu'n"
 
 #: drakfont:583
 #, c-format
@@ -776,15 +794,18 @@ msgstr " --help                - laguntza hau erakusten du     \n"
 
 #: drakhelp:23
 #, c-format
-msgid " --id <id_label>       - load the html help page which refers to id_label\n"
-msgstr " --id <id_label>       - id_label-i dagokion html laguntza-orria kargatu\n"
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
+msgstr ""
+" --id <id_label>       - id_label-i dagokion html laguntza-orria kargatu\n"
 
 #: drakhelp:24
 #, c-format
 msgid ""
 " --doc <link>          - link to another web page ( for WM welcome "
 "frontend)\n"
-msgstr " --doc <link>          - beste web orri baterako esteka ( WM ongietorria)\n"
+msgstr ""
+" --doc <link>          - beste web orri baterako esteka ( WM ongietorria)\n"
 
 #: drakhelp:52
 #, c-format
@@ -796,62 +817,62 @@ msgstr "Mandriva Linux Laguntza Gunea"
 msgid "No Help entry for %s\n"
 msgstr "Ez dago %s-rentzako laguntza sarrerarik\n"
 
-#: drakperm:22
+#: drakperm:23
 #, c-format
 msgid "System settings"
 msgstr "Sistemaren ezarpenak"
 
-#: drakperm:23
+#: drakperm:24
 #, c-format
 msgid "Custom settings"
 msgstr "Ezarpen pertsonalizatuak"
 
-#: drakperm:24
+#: drakperm:25
 #, c-format
 msgid "Custom & system settings"
 msgstr "Ezarpen pertsonalizatuak eta sistemakoak"
 
-#: drakperm:32
+#: drakperm:33
 #, c-format
 msgid "Security Permissions"
 msgstr "Segurtasun baimenak"
 
-#: drakperm:44
+#: drakperm:45
 #, c-format
 msgid "Editable"
 msgstr "Editagarria"
 
-#: drakperm:49 drakperm:322
+#: drakperm:50 drakperm:319
 #, c-format
 msgid "Path"
 msgstr "Bide-izena"
 
-#: drakperm:49 drakperm:250
+#: drakperm:50 drakperm:248
 #, c-format
 msgid "User"
 msgstr "Erabiltzailea"
 
-#: drakperm:49 drakperm:250
+#: drakperm:50 drakperm:248
 #, c-format
 msgid "Group"
 msgstr "Taldea"
 
-#: drakperm:49 drakperm:334
+#: drakperm:50 drakperm:331
 #, c-format
 msgid "Permissions"
 msgstr "Baimenak"
 
-#: drakperm:59
+#: drakperm:60
 #, c-format
 msgid "Add a new rule"
 msgstr "Erantsi arau berri bat"
 
-#: drakperm:66 drakperm:101 drakperm:126
+#: drakperm:67 drakperm:102 drakperm:127
 #, c-format
 msgid "Edit current rule"
 msgstr "Editatu uneko araua"
 
-#: drakperm:108
+#: drakperm:109
 #, c-format
 msgid ""
 "Here you can see files to use in order to fix permissions, owners, and "
@@ -862,7 +883,7 @@ msgstr ""
 "fitxategiak dauzkazu hemen.\n"
 "Arau lehenetsiak gainidatziko dituzten zure arauak ere edita ditzekezu."
 
-#: drakperm:110
+#: drakperm:111
 #, c-format
 msgid ""
 "The current security level is %s.\n"
@@ -871,115 +892,115 @@ msgstr ""
 "Uneko segurtasun-maila '%s' da.\n"
 "Hautatu ikusteko/editatzeko baimenak"
 
-#: drakperm:122
+#: drakperm:123
 #, c-format
 msgid "Up"
 msgstr "Gora"
 
-#: drakperm:122
+#: drakperm:123
 #, c-format
 msgid "Move selected rule up one level"
 msgstr "Eraman maila bat gora hautatutako araua"
 
-#: drakperm:123
+#: drakperm:124
 #, c-format
 msgid "Down"
 msgstr "Behera"
 
-#: drakperm:123
+#: drakperm:124
 #, c-format
 msgid "Move selected rule down one level"
 msgstr "Eraman maila bat behera hautatutako araua"
 
-#: drakperm:124
+#: drakperm:125
 #, c-format
 msgid "Add a rule"
 msgstr "Gehitu arau bat"
 
-#: drakperm:124
+#: drakperm:125
 #, c-format
 msgid "Add a new rule at the end"
 msgstr "Gehitu arau berri bat amaieran"
 
-#: drakperm:125
+#: drakperm:126
 #, c-format
 msgid "Delete"
 msgstr "Ezabatu"
 
-#: drakperm:125
+#: drakperm:126
 #, c-format
 msgid "Delete selected rule"
 msgstr "Ezabatu hautatutako araua"
 
-#: drakperm:126 drakups:300 drakups:362 drakups:382
+#: drakperm:127 drakups:300 drakups:362 drakups:382
 #, c-format
 msgid "Edit"
 msgstr "Editatu"
 
-#: drakperm:242
+#: drakperm:240
 #, c-format
 msgid "browse"
 msgstr "arakatu"
 
-#: drakperm:247
+#: drakperm:245
 #, c-format
 msgid "user"
 msgstr "erabiltzailea"
 
-#: drakperm:247
+#: drakperm:245
 #, c-format
 msgid "group"
 msgstr "taldea"
 
-#: drakperm:247
+#: drakperm:245
 #, c-format
 msgid "other"
 msgstr "Beste batzuk"
 
-#: drakperm:250
+#: drakperm:248
 #, c-format
 msgid "Other"
 msgstr "Bestelakoak"
 
-#: drakperm:252
+#: drakperm:250
 #, c-format
 msgid "Read"
 msgstr "Irakurtzeko"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:255
+#: drakperm:253
 #, c-format
 msgid "Enable \"%s\" to read the file"
 msgstr "Gaitu \"%s\" fitxategia irakurtzeko"
 
-#: drakperm:259
+#: drakperm:257
 #, c-format
 msgid "Write"
 msgstr "Idatzi"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:262
+#: drakperm:260
 #, c-format
 msgid "Enable \"%s\" to write the file"
 msgstr "Gaitu \"%s\" fitxategia idazteko"
 
-#: drakperm:266
+#: drakperm:264
 #, c-format
 msgid "Execute"
 msgstr "Exekutatu"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:269
+#: drakperm:267
 #, c-format
 msgid "Enable \"%s\" to execute the file"
 msgstr "Gaitu \"%s\" fitxategia exekutatzeko"
 
-#: drakperm:272
+#: drakperm:270
 #, c-format
 msgid "Sticky-bit"
 msgstr "bit itsaskorra"
 
-#: drakperm:272
+#: drakperm:270
 #, c-format
 msgid ""
 "Used for directory:\n"
@@ -988,57 +1009,57 @@ msgstr ""
 "Direktorioan erabiltzen da:\n"
 " direktorioaren edo bertako fitxategiaren jabeak bakarrik ezaba dezake"
 
-#: drakperm:273
+#: drakperm:271
 #, c-format
 msgid "Set-UID"
 msgstr "Set-UID"
 
-#: drakperm:273
+#: drakperm:271
 #, c-format
 msgid "Use owner id for execution"
 msgstr "Erabili jabearen id exekuziorako"
 
-#: drakperm:274
+#: drakperm:272
 #, c-format
 msgid "Set-GID"
 msgstr "Set-GID"
 
-#: drakperm:274
+#: drakperm:272
 #, c-format
 msgid "Use group id for execution"
 msgstr "Erabili taldearen id-a exekuziorako"
 
-#: drakperm:292
+#: drakperm:289
 #, c-format
 msgid "User:"
 msgstr "Erabiltzailea:"
 
-#: drakperm:293
+#: drakperm:290
 #, c-format
 msgid "Group:"
 msgstr "Taldea:"
 
-#: drakperm:297
+#: drakperm:294
 #, c-format
 msgid "Current user"
 msgstr "Uneko erabiltzailea"
 
-#: drakperm:298
+#: drakperm:295
 #, c-format
 msgid "When checked, owner and group will not be changed"
 msgstr "Hautatuta badago, jabea eta taldea ez dira aldatuko!"
 
-#: drakperm:308
+#: drakperm:305
 #, c-format
 msgid "Path selection"
 msgstr "Bide-izenaren hautapena"
 
-#: drakperm:328
+#: drakperm:325
 #, c-format
 msgid "Property"
 msgstr "Propietatea"
 
-#: drakperm:378
+#: drakperm:375
 #, c-format
 msgid ""
 "The first character of the path must be a slash (\"/\"):\n"
@@ -1047,17 +1068,17 @@ msgstr ""
 "Bidearen lehen karakterea barra bat izan behar da (\"/\"):\n"
 "\"%s\""
 
-#: drakperm:388
+#: drakperm:385
 #, c-format
 msgid "Both the username and the group must valid!"
 msgstr "Biak, erabiltzaile izena eta taldea onargarriak izan behar dira!"
 
-#: drakperm:389
+#: drakperm:386
 #, c-format
 msgid "User: %s"
 msgstr "Erabiltzailea: %s"
 
-#: drakperm:390
+#: drakperm:387
 #, c-format
 msgid "Group: %s"
 msgstr "Taldea: %s"
@@ -1089,7 +1110,7 @@ msgstr "Ez ikusi egin"
 
 #: draksec:72 drakups:99 harddrake2:369 scannerdrake:66 scannerdrake:70
 #: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:505
-#: scannerdrake:509 scannerdrake:531 service_harddrake:252
+#: scannerdrake:509 scannerdrake:531 service_harddrake:253
 #, c-format
 msgid "Please wait"
 msgstr "Itxaron"
@@ -1892,7 +1913,8 @@ msgstr "Bus"
 
 #: harddrake2:31
 #, c-format
-msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgid ""
+"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr "Gailua konektatutako bus fisikoa da hau (adib.: PCI, USB, ...)"
 
 #: harddrake2:33 harddrake2:148
@@ -2121,7 +2143,8 @@ msgstr "Fabrikatzailearen Azpi-ID"
 #: harddrake2:62
 #, c-format
 msgid "this is the minor numerical identifier of the vendor"
-msgstr "hau da fabrikatzailearen garrantzia apaleko zenbakizko identifikatzailea"
+msgstr ""
+"hau da fabrikatzailearen garrantzia apaleko zenbakizko identifikatzailea"
 
 #: harddrake2:63
 #, c-format
@@ -2249,7 +2272,8 @@ msgstr "FPU badago"
 #: harddrake2:79
 #, c-format
 msgid "yes means the processor has an arithmetic coprocessor"
-msgstr "prozesadoreak koprozesadore aritmetiko bat duela esan nahi du baiezkoak"
+msgstr ""
+"prozesadoreak koprozesadore aritmetiko bat duela esan nahi du baiezkoak"
 
 #: harddrake2:80
 #, c-format
@@ -2459,8 +2483,10 @@ msgstr "Gailu fitxategia"
 
 #: harddrake2:117
 #, c-format
-msgid "the device file used to communicate with the kernel driver for the mouse"
-msgstr "saguaren kernel gidariarekin komunikatzeko erabilitako gailu fitxategia"
+msgid ""
+"the device file used to communicate with the kernel driver for the mouse"
+msgstr ""
+"saguaren kernel gidariarekin komunikatzeko erabilitako gailu fitxategia"
 
 #: harddrake2:118
 #, c-format
@@ -2659,7 +2685,8 @@ msgstr "Exekutatu konfigurazio-tresna"
 
 #: harddrake2:301
 #, c-format
-msgid "Click on a device in the left tree in order to display its information here."
+msgid ""
+"Click on a device in the left tree in order to display its information here."
 msgstr ""
 "Egin klik ezkerreko zuhaitzeko gailu batean, dagokion informazioa hemen "
 "bistaratzeko."
@@ -3050,7 +3077,8 @@ msgstr "Scannerdrake abortatzen."
 
 #: scannerdrake:60
 #, c-format
-msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr ""
 "Ezin izan dira instalatu eskanerra Scannerdrake-rekin instalatzeko behar "
 "diren paketeak."
@@ -3460,7 +3488,8 @@ msgstr ""
 #: scannerdrake:601
 #, c-format
 msgid "The scanners on this machine are available to other computers"
-msgstr "Makina honetako eskanerrak beste ordenagailu batzuentzako erabilgarri daude"
+msgstr ""
+"Makina honetako eskanerrak beste ordenagailu batzuentzako erabilgarri daude"
 
 #: scannerdrake:603
 #, c-format
@@ -3492,7 +3521,8 @@ msgstr "Eskaner lokalak partekatzea"
 msgid ""
 "These are the machines on which the locally connected scanner(s) should be "
 "available:"
-msgstr "Lokalki konektatutako eskanerrak makina hauetan egongo dira erabilgarri:"
+msgstr ""
+"Lokalki konektatutako eskanerrak makina hauetan egongo dira erabilgarri:"
 
 #: scannerdrake:659 scannerdrake:809
 #, c-format
@@ -3566,27 +3596,27 @@ msgstr "Zure eskanerrak ez dira erabilgarri egongo sarean."
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "Ezin dira instalatu eskanerrak partekatzeko behar diren paketeak."
 
-#: service_harddrake:124
+#: service_harddrake:125
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "\"%s\" hardware-klaseko gailu batzuk kendu dira:\n"
 
-#: service_harddrake:125
+#: service_harddrake:126
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- %s ezabatuta dago\n"
 
-#: service_harddrake:128
+#: service_harddrake:129
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "Gailu batzuk gehitu dira: %s\n"
 
-#: service_harddrake:129
+#: service_harddrake:130
 #, c-format
 msgid "- %s was added\n"
 msgstr "- %s erantsi da\n"
 
-#: service_harddrake:252
+#: service_harddrake:253
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "Hardwarea probatzen ari da"
@@ -3624,4 +3654,3 @@ msgstr "Hizkuntza eta herrialde konfiguraketa"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Eskualdeko ezarpenak"
-
