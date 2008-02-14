@@ -1072,8 +1072,7 @@ sub write_partitions {
     $in->ask_okcancel(N("Read carefully!"), N("Partition table of drive %s is going to be written to disk!", $hd->{device}), 1) or return;
     partition_table::write($hd) if !$::testing;
     check_rebootNeeded($in, $hd) if !$b_skip_check_rebootNeeded;
-    # fix resizing's faillures due to udev's race when writing the partition table
-    # (deleting then recreating the nodes leaves a race window...)
+    # fix resizing's failures due to udev's race when writing the partition table
     run_program::run('udevsettle');
     1;
 }
