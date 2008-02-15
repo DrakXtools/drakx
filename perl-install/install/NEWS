@@ -1,3 +1,4 @@
+- install linuxwacom if needed
 - load disk/ide before disk/scsi, or else sata_sis may be loaded for a
   SATA controller and trigger pata_sis loading before sis5513 is loaded,
   which would defeat an eventual alias to sis5513 for a PATA controller
