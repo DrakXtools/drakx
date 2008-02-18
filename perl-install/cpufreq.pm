@@ -43,7 +43,7 @@ sub probe_acpi_cpufreq() {
         get_vendor($_) eq "Intel" &&
         has_flag($_, 'est') &&
         $_->{'cpu family'} == 6 &&
-        $_->{model} == 15;
+        member($_->{model}, 13, 15);
     } get_cpus();
 }
 
@@ -51,7 +51,7 @@ sub probe_centrino() {
     any {
         get_vendor($_) eq "Intel" &&
         has_flag($_, 'est') && (
-            $_->{'cpu family'} == 6 && member($_->{model}, 9, 13, 14) ||
+            $_->{'cpu family'} == 6 && member($_->{model}, 9, 14) ||
             $_->{'cpu family'} == 15 && member($_->{model}, 3, 4)
         );
     } get_cpus();
