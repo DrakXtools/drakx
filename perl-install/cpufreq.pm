@@ -43,8 +43,7 @@ sub probe_acpi_cpufreq() {
         get_vendor($_) eq "Intel" &&
         $_->{'cpu family'} == 6 &&
         (
-            has_flag($_, 'est') && member($_->{model}, 13, 15)
-            ||
+            has_flag($_, 'est') ||
             $_->{model} == 11
         );
     } get_cpus();
@@ -54,8 +53,11 @@ sub probe_centrino() {
     any {
         get_vendor($_) eq "Intel" &&
         has_flag($_, 'est') && (
-            $_->{'cpu family'} == 6 && member($_->{model}, 9, 14) ||
-            $_->{'cpu family'} == 15 && member($_->{model}, 3, 4)
+            ($_->{'cpu family'} == 6 && $_->{model} == 9 && $_->{stepping} == 5 &&
+             $_->{'model name'} =~ /^Intel\(R\) Pentium\(R\) M processor ( 900|1[0-7]00)MHz$/) ||
+            ($_->{'cpu family'} == 6 && $_->{model} == 13 && member($_->{stepping}, 1, 2, 6)) ||
+            ($_->{'cpu family'} == 15 && $_->{model} == 3 && $_->{stepping} == 4) ||
+            ($_->{'cpu family'} == 15 && $_->{model} == 4 && $_->{stepping} == 1)
         );
     } get_cpus();
 }
@@ -126,10 +128,10 @@ sub probe_longrun() {
 }
 
 my @modules = (
-    [ "acpi-cpufreq", \&probe_acpi_cpufreq ],
     # probe centrino first, it will get detected on ICH chipset and
     # speedstep-ich doesn't work with it
     [ "speedstep-centrino", \&probe_centrino ],
+    [ "acpi-cpufreq", \&probe_acpi_cpufreq ],
     # try to find cpufreq compliant northbridge
     [ "speedstep-ich", \&probe_ich ],
     [ "speedstep-smi", \&probe_smi ],
