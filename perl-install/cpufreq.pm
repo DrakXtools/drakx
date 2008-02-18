@@ -41,9 +41,12 @@ sub find_pci_device {
 sub probe_acpi_cpufreq() {
     any {
         get_vendor($_) eq "Intel" &&
-        has_flag($_, 'est') &&
         $_->{'cpu family'} == 6 &&
-        member($_->{model}, 13, 15);
+        (
+            has_flag($_, 'est') && member($_->{model}, 13, 15)
+            ||
+            $_->{'model'} == 11
+        );
     } get_cpus();
 }
 
