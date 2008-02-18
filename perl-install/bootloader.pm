@@ -474,6 +474,9 @@ sub same_entries {
     foreach (uniq(keys %$a, keys %$b)) {
 	if (member($_, 'label', 'append', 'mapdrive', 'readonly', 'makeactive', 'verbatim')) {
 	    next;
+	} elsif ($_ eq 'grub_root' && (!$a->{$_} || !$b->{$_})) {
+	    #- grub_root is mostly internal stuff. if it misses, it's ok
+	    next;
 	} else {
 	    next if $a->{$_} eq $b->{$_};
 

@@ -1,3 +1,5 @@
+- do not create alt_windows unless needed 
+  (regression introduced on 2007-11-26) (#37722)
 - install linuxwacom if needed
 - load disk/ide before disk/scsi, or else sata_sis may be loaded for a
   SATA controller and trigger pata_sis loading before sis5513 is loaded,
