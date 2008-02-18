@@ -45,7 +45,7 @@ sub probe_acpi_cpufreq() {
         (
             has_flag($_, 'est') && member($_->{model}, 13, 15)
             ||
-            $_->{'model'} == 11
+            $_->{model} == 11
         );
     } get_cpus();
 }
