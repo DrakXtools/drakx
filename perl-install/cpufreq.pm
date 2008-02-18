@@ -49,6 +49,7 @@ sub probe_acpi_cpufreq() {
     } get_cpus();
 }
 
+# see cpuid.c (from cpuid package) for a list of family/models
 sub probe_centrino() {
     any {
         get_vendor($_) eq "Intel" &&
