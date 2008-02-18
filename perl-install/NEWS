@@ -1,8 +1,9 @@
-- install linuxwacom if needed
 - diskdrake:
   o final fix for resizing's failures due to udev's race 
     (when writing the partition, do not del/add the same partition)
-- harddrake:
+- harddrake GUI:
+  o install linuxwacom if needed
+- harddrake service:
   o use acpi-cpufreq for Mobile PIII/Celeron
     (family 6 model 11, for example Toshiba Portégé 3500)
   o use speedstep-centrino only for supported models
