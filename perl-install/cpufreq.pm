@@ -85,8 +85,10 @@ sub probe_powerpc() {
 
 sub probe_p4() {
     any {
-        get_vendor($_) eq "Intel" &&
-        $_->{'cpu family'} == 15;
+        get_vendor($_) eq "Intel" && (
+            $_->{'cpu family'} == 15 ||
+            ($_->{'cpu family'} == 6 && !has_flag($_, 'est') && member($_->{model}, 9, 13, 14, 15))
+        );
     } get_cpus();
 }
 
