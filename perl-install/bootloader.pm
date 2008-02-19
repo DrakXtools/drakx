@@ -262,6 +262,10 @@ sub read_grub_menu_lst {
                 $e->{type} = 'other';
                 $e->{kernel_or_dev} = grub2dev($e->{rootnoverify} || $e->{grub_root}, $grub2dev);
                 $e->{append} = "";
+            } elsif ($keyword eq 'configfile') {
+                $e->{type} = 'grub_configfile';
+                $e->{kernel_or_dev} = grub2dev($e->{rootnoverify} || $e->{grub_root}, $grub2dev);
+                $e->{configfile} = $v;
             } elsif ($keyword eq 'initrd') {
                 $e->{initrd} = grub2file($v, $grub2dev, $fstab, $e);
             } elsif ($keyword eq 'map') {
