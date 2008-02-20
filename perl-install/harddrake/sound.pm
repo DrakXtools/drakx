@@ -275,6 +275,7 @@ To use alsa, one can either use:
                                                 }
                                 },
                                 {
+                                    advanced => 1,
                                     val => N("Trouble shooting"), disabled => sub {},
                                     clicked => sub { &trouble($in) }
                                 },
@@ -340,6 +341,7 @@ sub get_any_driver_entry {
     my ($in, $modules_conf, $driver, $device) = @_;
     return () if $::isInstall;
     +{
+        advanced => 1,
         val => N("Let me pick any driver"), disabled => sub {},
         clicked => sub {
             my $old_driver = $driver;
