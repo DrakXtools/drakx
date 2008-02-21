@@ -54,12 +54,11 @@ sub register_downloader {
 }
 
 sub mirrors_raw {
-    my ($product_id, $o_arch) = @_;
+    my ($product_id) = @_;
 
     #- contact the following URL to retrieve the list of mirrors.
     #- http://wiki.mandriva.com/en/Product_id
     my $type = lc($product_id->{type}); $type =~ s/\s//g;
-    local $product_id->{arch} = $o_arch if $o_arch;
     my $list = "http://api.mandriva.com/mirrors/$type.$product_id->{version}.$product_id->{arch}.list";
     log::explanations("trying mirror list from $list");
     my @lines;
@@ -84,14 +83,11 @@ sub mirrors_raw {
 }
 
 sub list {
-    my ($product_id, $type, $o_arch) = @_;
+    my ($product_id, $type) = @_;
 
     our @mirrors_raw;
-    state $prev_arch;
-    undef @mirrors_raw if $prev_arch ne $o_arch;
-    $prev_arch = $o_arch || arch();
     if (!@mirrors_raw) {
-        @mirrors_raw = eval { mirrors_raw($product_id, $o_arch) };
+        @mirrors_raw = eval { mirrors_raw($product_id) };
         if (my $err = $@) {
             log::explanations("failed to download mirror list");
             die $err;
