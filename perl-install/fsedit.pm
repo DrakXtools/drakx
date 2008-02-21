@@ -268,6 +268,8 @@ Do you agree to lose all the partitions?
 
     fs::get_major_minor([ fs::get::fstab($all_hds) ]);
 
+    $_->{faked_device} = 0 foreach fs::get::fstab($all_hds);
+
     $all_hds;
 }
 

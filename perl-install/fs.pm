@@ -121,7 +121,7 @@ sub merge_fstabs {
 	if (!$loose) {
 	    $p->{fs_type} = $p2->{fs_type} if $p2->{fs_type};
 	    $p->{options} = $p2->{options} if $p2->{options};
-	    add2hash($p, $p2);
+	    add2hash_($p, $p2);
 	} else {
 	    $p->{isMounted} ||= $p2->{isMounted};
 	    $p->{real_mntpoint} ||= $p2->{real_mntpoint};
