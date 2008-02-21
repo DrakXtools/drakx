@@ -10,7 +10,7 @@ use run_program;
 
 use Exporter;
 our @ISA = qw(Exporter);
-our @EXPORT = qw($SECTORSIZE N P N_ check_for_xserver files_exist formatTime MB formatXiB get_parent_uid makedev mandrake_release mandrake_release_info removeXiBSuffix require_root_capability setVirtual set_alternative set_l10n_sort set_permissions translate unmakedev);
+our @EXPORT = qw($SECTORSIZE N P N_ check_for_xserver files_exist formatTime MB formatXiB get_parent_uid makedev mandrake_release mandrake_release_info removeXiBSuffix require_root_capability setVirtual set_alternative set_l10n_sort set_permissions to_utf8  translate unmakedev);
 
 # perl_checker: RE-EXPORT-ALL
 push @EXPORT, @MDK::Common::EXPORT;
