@@ -1151,7 +1151,7 @@ sub probeall_unavailable_modules {
     map {
         my $driver = $_->{driver};
         $driver !~ /:/ &&
-        !member($driver, 'hub', 'unknown', 'md64_agp') &&
+        !member($driver, 'hub', 'unknown', 'amd64_agp') &&
         !modules::module_is_available($driver) ?
           $driver :
           ();
