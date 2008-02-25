@@ -171,7 +171,7 @@ sub splash_choice() {
 }
 
 sub autologin_choice() {
-    my @users = sort(list_users());
+    my @users = uniq(sort(list_users()));
     my @sessions = sort(split(' ', `/usr/sbin/chksession -l`));
 
     my $x_mode = Xconfig::various::runlevel() == 5;
