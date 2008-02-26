@@ -3,14 +3,14 @@
 # Copyright (C) 2000,2003, 2004, 2006, 2007 Free Software Foundation, Inc.
 # YAMAGATA Hiroo <hiyori13@alum.mit.edu>, 2000.
 # UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2003, 2004, 2006.
-# Yukiko Bando <ybando@k6.dion.ne.jp>, 2004, 2005, 2006, 2007.
+# Yukiko Bando <ybando@k6.dion.ne.jp>, 2004, 2005, 2006, 2007, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone-ja\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-02-14 13:23+0100\n"
-"PO-Revision-Date: 2007-09-26 23:00+0900\n"
+"PO-Revision-Date: 2008-02-26 19:00+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -260,14 +260,15 @@ msgid "Kernel:"
 msgstr "カーネル: "
 
 #: drakbug:142
-#, fuzzy, c-format
+#, c-format
 msgid "The \"%s\" program has segfaulted with the following error:"
-msgstr "プログラム \"%s\" が以下のエラーでクラッシュしました:"
+msgstr ""
+"プログラム \"%s\" が以下のエラーでセグメンテーション違反を起こしました:"
 
 #: drakbug:146
 #, c-format
 msgid "Its gdb trace is:"
-msgstr ""
+msgstr "gdb トレース:"
 
 #: drakbug:149
 #, c-format
@@ -286,7 +287,7 @@ msgstr ""
 #: drakbug:152
 #, c-format
 msgid "Please describe what you were doing when it crashed:"
-msgstr ""
+msgstr "クラッシュしたときに行っていたことを記述してください:"
 
 #: drakbug:164 drakperm:135 draksec:438 draksec:440 draksec:459 draksec:461
 #, c-format
@@ -319,11 +320,13 @@ msgid ""
 "You must type in what you were doing when this bug happened in order to "
 "enable us to reproduce this bug and to increase the odds of fixing it"
 msgstr ""
+"開発者がバグを再現し、修正しやすくするために、この不具合が起こったときに行っ"
+"ていたことを記述してください。"
 
 #: drakbug:235
 #, c-format
 msgid "Thanks."
-msgstr ""
+msgstr "ありがとうございます。"
 
 #: drakclock:30 draksec:334
 #, c-format
@@ -3623,6 +3626,3 @@ msgstr "言語と国の設定"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "言語と国の設定"
-
-#~ msgid "Copyright (C) 2001-2008 by Mandriva"
-#~ msgstr "Copyright (C) 2001-2008 by Mandriva"
