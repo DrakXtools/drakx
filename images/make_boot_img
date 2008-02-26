@@ -749,7 +749,7 @@ sub boot_iso {
 
     output('.boot_iso/isolinux/isolinux.cfg', syslinux_cfg_all('', $with_gfxboot));
 
-    _ "genisoimage -r -f -J -cache-inodes -V 'Mdk Boot ISO' -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso .boot_iso";
+    _ "genisoimage -r -f -J -cache-inodes -V 'Mdv Boot ISO' -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso .boot_iso";
     rm_rf('.boot_iso');
 }
 
