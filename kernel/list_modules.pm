@@ -165,7 +165,7 @@ our %l = (
   {
     network => [ qw(af_packet nfs) ],
     cdrom => [ qw(isofs) ],
-    loopback => [ qw(isofs loop squashfs), if_($ENV{MOVE}, qw(supermount)) ],
+    loopback => [ qw(isofs loop squashfs) ],
     local => [
       if_(arch() =~ /^i.86|x86_64/, qw(vfat ntfs)),
       if_(arch() =~ /^ppc/, qw(hfs)),
