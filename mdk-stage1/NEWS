@@ -1,3 +1,8 @@
+1.22:
+- fix automatic IDE media detection (was broken with multiple CD drives, #36161)
+- fix bootsplash in automatic CD-Rom mode (as a result of IDE media detection fix) 
+- wait only 1 second for firmware upload (not to hang boot with iwl3945, #37279)
+
 1.21:
 - load nls_cp437 and nls_iso8859_1 when loading vfat
   (used to be in custom modules.dep)
