@@ -123,7 +123,7 @@ enum return_type disk_prepare(void)
 
 	if (count == 0) {
 		stg1_error_message("No DISK drive found.");
-		i = ask_insmod(SCSI_ADAPTERS);
+		i = ask_insmod(MEDIA_ADAPTERS);
 		if (i == RETURN_BACK)
 			return RETURN_BACK;
 		return disk_prepare();
@@ -133,7 +133,7 @@ enum return_type disk_prepare(void)
 		results = try_with_device(*medias);
 		if (results != RETURN_ERROR)
 			return results;
-		i = ask_insmod(SCSI_ADAPTERS);
+		i = ask_insmod(MEDIA_ADAPTERS);
 		if (i == RETURN_BACK)
 			return RETURN_BACK;
 		return disk_prepare();
@@ -149,7 +149,7 @@ enum return_type disk_prepare(void)
 	results = try_with_device(choice);
 	if (results != RETURN_ERROR)
 		return results;
-	i = ask_insmod(SCSI_ADAPTERS);
+	i = ask_insmod(MEDIA_ADAPTERS);
 	if (i == RETURN_BACK)
 		return RETURN_BACK;
 	return disk_prepare();

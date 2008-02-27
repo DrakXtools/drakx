@@ -263,13 +263,13 @@ void discovered_device(enum driver_type type, const char * description, const ch
 
 	enum insmod_return failed = INSMOD_FAILED;
 #ifndef DISABLE_MEDIAS
-	if (type == SCSI_ADAPTERS) {
+	if (type == MEDIA_ADAPTERS) {
 		const char * alternate = NULL;
 		wait_message("Loading driver for media adapter:\n \n%s", description);
-		failed = my_insmod(driver, SCSI_ADAPTERS, NULL, 1);
+		failed = my_insmod(driver, MEDIA_ADAPTERS, NULL, 1);
 		alternate = get_alternate_module(driver);
 		if (!IS_NOAUTO && alternate) {
-			failed = failed || my_insmod(alternate, SCSI_ADAPTERS, NULL, 1);
+			failed = failed || my_insmod(alternate, MEDIA_ADAPTERS, NULL, 1);
 		}
 		remove_wait_message();
 		warning_insmod_failed(failed);
@@ -312,11 +312,11 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 		switch (type) {
 #ifndef DISABLE_PCIADAPTERS
 #ifndef DISABLE_MEDIAS
-			static int already_probed_scsi_adapters = 0;
-		case SCSI_ADAPTERS:
-			if (already_probed_scsi_adapters)
+			static int already_probed_media_adapters = 0;
+		case MEDIA_ADAPTERS:
+			if (already_probed_media_adapters)
 				goto end_pci_probe;
-			already_probed_scsi_adapters = 1;
+			already_probed_media_adapters = 1;
 			pci_modules = medias_pci_modules;
 			pci_modules_len   = medias_pci_modules_len;
 			break;
@@ -410,7 +410,7 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 
 		switch (type) {
 #ifndef DISABLE_MEDIAS
-		case SCSI_ADAPTERS:
+		case MEDIA_ADAPTERS:
 			pcmciadb = medias_pcmcia_ids;
 			len      = medias_pcmcia_num_ids;
 			break;
@@ -484,14 +484,14 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 	}
 #endif
 
-        /* be sure to load usb-storage after SCSI adapters, so that they are in
+        /* be sure to load usb-storage after media adapters, so that they are in
            same order than reboot, so that naming is the same */
-        if (type == SCSI_ADAPTERS && already_probed_usb_controllers && !already_loaded_usb_scsi) {
+        if (type == MEDIA_ADAPTERS && already_probed_usb_controllers && !already_loaded_usb_scsi) {
                 already_loaded_usb_scsi = 1;
                 /* we can't allow additional modules floppy since we need usbkbd for keystrokes of usb keyboards */
-                my_insmod("usb_storage", SCSI_ADAPTERS, NULL, 0); 
+                my_insmod("usb_storage", MEDIA_ADAPTERS, NULL, 0); 
                 if (module_already_present("ieee1394"))
-                        my_insmod("sbp2", SCSI_ADAPTERS, NULL, 0);
+                        my_insmod("sbp2", MEDIA_ADAPTERS, NULL, 0);
                 wait_message("Detecting USB mass-storage devices.");
                 sleep(10); /* sucking background work */
                 remove_wait_message();

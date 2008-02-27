@@ -171,7 +171,7 @@ enum return_type cdrom_prepare(void)
 
 	if (count == 0) {
 		stg1_error_message("No CDROM device found.");
-		i = ask_insmod(SCSI_ADAPTERS);
+		i = ask_insmod(MEDIA_ADAPTERS);
 		if (i == RETURN_BACK)
 			return RETURN_BACK;
 		return cdrom_prepare();
@@ -181,7 +181,7 @@ enum return_type cdrom_prepare(void)
 		results = try_with_device(*medias, *medias_models);
 		if (results == RETURN_OK)
 			return RETURN_OK;
-		i = ask_insmod(SCSI_ADAPTERS);
+		i = ask_insmod(MEDIA_ADAPTERS);
 		if (i == RETURN_BACK)
 			return RETURN_BACK;
 		return cdrom_prepare();
@@ -206,7 +206,7 @@ enum return_type cdrom_prepare(void)
 	if (results == RETURN_BACK)
 		return cdrom_prepare();
 
-	i = ask_insmod(SCSI_ADAPTERS);
+	i = ask_insmod(MEDIA_ADAPTERS);
 	if (i == RETURN_BACK)
 		return RETURN_BACK;
 	return cdrom_prepare();

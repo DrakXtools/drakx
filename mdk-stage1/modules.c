@@ -459,8 +459,8 @@ enum return_type ask_insmod(enum driver_type type)
 	if (modules && *modules) {
 		char * mytype;
 		char msg[200];
-		if (type == SCSI_ADAPTERS)
-			mytype = "SCSI";
+		if (type == MEDIA_ADAPTERS)
+			mytype = "MEDIA";
 		else if (type == NETWORK_DEVICES)
 			mytype = "NET";
 		else
