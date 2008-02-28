@@ -370,7 +370,7 @@ void finish_preparing(void)
 		int fd;
 		kill(shell_pid, 9);
 		fd = open("/dev/tty2", O_RDWR);
-		write(fd, "Killed\n", 7);
+		log_message("killed shell");
 		close(fd);
         }
 #endif
