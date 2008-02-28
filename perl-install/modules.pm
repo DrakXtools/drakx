@@ -312,7 +312,7 @@ sub load_raw_install {
 	my $m = '/tmp/' . $_ . module_extension();
 	if (-e $m) {
             my $stdout;
-            my $rc = run_program::run('insmod', '2>', \$stdout, $m, split(' ', $options->{$_}));
+            my $rc = run_program::run('/sbin/insmod', '2>', \$stdout, $m, split(' ', $options->{$_}));
             log::l(chomp_($stdout)) if $stdout;
             if ($rc) {
                 unlink $m;
