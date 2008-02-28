@@ -176,7 +176,7 @@ sub formatPartitions {
 	eval { rm_rf("$::prefix/var/lib/rpm") };
     }
 
-    install::any::create_minimal_files();
+    fs::any::create_minimal_files();
 
     eval { fs::mount::mount('none', "$::prefix/proc", 'proc') };
     eval { fs::mount::mount('none', "$::prefix/sys", 'sysfs') };

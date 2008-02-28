@@ -76,4 +76,16 @@ sub check_hds_boot_and_root {
     }
 }
 
+sub create_minimal_files() {
+    mkdir "$::prefix/$_", 0755 foreach 
+      qw(dev etc etc/profile.d etc/rpm etc/sysconfig etc/sysconfig/console 
+	etc/sysconfig/network-scripts etc/sysconfig/console/consolefonts 
+	etc/sysconfig/console/consoletrans
+	home mnt tmp var var/tmp var/lib var/lib/rpm var/lib/urpmi);
+    mkdir "$::prefix/$_", 0700 foreach qw(root root/tmp root/drakx);
+
+    devices::make("$::prefix/dev/null");
+    chmod 0666, "$::prefix/dev/null";
+}
+
 1;
