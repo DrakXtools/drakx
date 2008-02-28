@@ -105,6 +105,6 @@ EOF
 
 exit 0 if $ARGV[0];
 
-_ "./mksquashfs-2008.0 $tmp $rescue -all-root -noappend >/dev/null";
+_ "mksquashfs $tmp $rescue -all-root -noappend >/dev/null";
 _ "chmod 755 $rescue";
 _ "rm -rf $tmp";
