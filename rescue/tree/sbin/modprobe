@@ -1,56 +1,16 @@
 #!/usr/bin/perl
 
-sub cat_ { local *F; open F, $_[0] or $_[1] ? die "cat of file $_[0] failed: $!\n" : return; my @l = <F>; wantarray ? @l : join '', @l }
+use lib qw(/usr/lib/libDrakX);
+use list_modules;
+use modules;
 
-sub read_already_loaded() {
-    foreach (cat_("/proc/modules")) {
-	my ($name) = split;
-	$conf{$name}{loaded} = 1;
-    }
+# based on install::commands
+sub modprobe {
+    !@_ || $_[0] =~ /^-?-h/ and die "usage: modprobe <module> [<options...>]\n";
+    my $name = shift;
+    list_modules::load_default_moddeps();
+    modules::load_with_options([ $name ], { $name => join(' ', @_) });
 }
 
-sub load_deps($) {
-    my ($file) = @_;
-
-    local *F;
-    open F, $file or warn "error opening $file: $!\n", return 0;
-    foreach (<F>) {
-	my ($f, $deps) = split ':';
-	push @{$deps{$f}}, split ' ', $deps;
-    }
-}
-
-my $module_extension = cat_('/proc/version') =~ /^Linux version 2.4/ ? '.o' : '.ko';
-
-my %mappings = ("usb-ohci" => "ohci-hcd",
-                "usb-uhci" => "uhci-hcd",
-                "uhci" => "uhci-hcd",
-                "printer" => "usblp",
-                "bcm4400" => "b44",
-                "3c559" => "3c359",
-                "3c90x" => "3c59x",
-                "dc395x_trm" => "dc395x",
-                "audigy" => "snd-emu10k1");
-                                  
-sub load {
-    my ($name, @options) = @_;
-    $name =~ s/\.k?o$//;
-
-    $name = $mappings{$name} || $name;  #- 2.4 -> 2.6 compat mappings
-
-    $conf{$name}{loaded} and return;
-    eval { load($_, 'prereq') } foreach @{$deps{$name}};
-
-    system("gzip -dc /modules/$name$module_extension.gz > /tmp/$name$module_extension");
-    -r "/tmp/$name$module_extension" or die "can't find module $name\n";
-    system("/sbin/insmod /tmp/$name$module_extension");
-    my $retval = $?;
-    system("rm /tmp/$name$module_extension");
-    $retval and die("insmod $name failed");
-}
-
-!@ARGV || $ARGV[0] =~ /^-?-h/ and die "usage: modprobe <module> [<options...>]\n";
-
-read_already_loaded();
-load_deps("/modules/modules.dep");
-load(@ARGV);
+$::isInstall = 1;
+modprobe(@ARGV);
