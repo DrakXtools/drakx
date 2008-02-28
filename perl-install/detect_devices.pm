@@ -896,9 +896,9 @@ sub probeall() {
 
     pci_probe(), usb_probe(), firewire_probe(), pcmcia_probe(), dmi_probe();
 }
-sub probeall__real() {
+sub probeall_update_cache() {
     return if $::noauto;
-    pci_probe__real(), usb_probe__real(), firewire_probe(), pcmcia_probe(), dmi_probe();
+    @pci = pci_probe__real(), @usb = usb_probe__real(), firewire_probe(), pcmcia_probe(), dmi_probe();
 }
 sub matching_desc__regexp {
     my ($regexp) = @_;
