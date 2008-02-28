@@ -368,9 +368,11 @@ void finish_preparing(void)
 #ifdef SPAWN_SHELL
 	if (shell_pid != 0) {
 		int fd;
+		const char *clear = "\033[H\033[J";
 		kill(shell_pid, 9);
-		fd = open("/dev/tty2", O_RDWR);
 		log_message("killed shell");
+		fd = open("/dev/tty2", O_RDWR);
+		write(fd, clear, strlen(clear));
 		close(fd);
         }
 #endif
