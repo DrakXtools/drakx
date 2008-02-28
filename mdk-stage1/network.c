@@ -400,8 +400,8 @@ static void static_ip_callback(char ** strings)
 static enum return_type setup_network_interface(struct interface_info * intf)
 {
 	enum return_type results;
-	char * bootprotos[] = { "Static", "DHCP", "ADSL", NULL };
-	char * bootprotos_auto[] = { "static", "dhcp", "adsl" };
+	char * bootprotos[] = { "DHCP", "Static", "ADSL", NULL };
+	char * bootprotos_auto[] = { "dhcp", "static", "adsl" };
 	char * choice;
 
 	results = ask_from_list_auto("Please select your network connection type.", bootprotos, &choice, "network", bootprotos_auto);
