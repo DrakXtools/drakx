@@ -367,11 +367,11 @@ void finish_preparing(void)
 
 #ifdef SPAWN_SHELL
 	if (shell_pid != 0) {
-                int fd;
+		int fd;
 		kill(shell_pid, 9);
 		fd = open("/dev/tty2", O_RDWR);
-                write(fd, "Killed\n", 7);
-                close(fd);
+		write(fd, "Killed\n", 7);
+		close(fd);
         }
 #endif
 }
