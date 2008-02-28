@@ -1,3 +1,12 @@
+1.23:
+- probe usb-storage/sbp2 only when probing USB/SCSI buses
+  (to make automatic boot faster on IDE)
+- make dhcp the first choice (instead of static) in the network type menu
+- clear tty2 after shell is killed
+- log "killed shell" message on tty3
+- add a space in front of top line (like help message)
+- space-pad top line with spaces to the right (like help message)
+
 1.22:
 - fix automatic IDE media detection (was broken with multiple CD drives, #36161)
 - fix bootsplash in automatic CD-Rom mode (as a result of IDE media detection fix) 
