@@ -88,4 +88,20 @@ sub create_minimal_files() {
     chmod 0666, "$::prefix/dev/null";
 }
 
+sub prepare_minimal_root {
+    my ($all_hds) = @_;
+
+    fs::any::create_minimal_files();
+
+    eval { fs::mount::mount('none', "$::prefix/proc", 'proc') };
+    eval { fs::mount::mount('none', "$::prefix/sys", 'sysfs') };
+    eval { fs::mount::usbfs($::prefix) };
+
+    #- needed by lilo
+    if (-d '/dev/mapper' && !$::local_install) {
+	my @vgs = map { $_->{VG_name} } @{$all_hds->{lvms}};
+	-e "/dev/$_" and cp_af("/dev/$_", "$::prefix/dev") foreach 'mapper', @vgs;
+    }
+}
+
 1;
