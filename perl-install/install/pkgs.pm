@@ -952,7 +952,7 @@ sub upgrade_by_removing_pkgs {
 	foreach (@restore_files) {
 	    rename "$::prefix$_.rpmsave", "$::prefix$_";
 	}
-        install::any::create_minimal_files();
+	fs::any::create_minimal_files();
 	unlink $busy_var_tmp;
     }
 
