@@ -486,7 +486,8 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 
         /* be sure to load usb-storage after media adapters, so that they are in
            same order than reboot, so that naming is the same */
-        if (type == MEDIA_ADAPTERS && already_probed_usb_controllers && !already_loaded_usb_scsi) {
+        if (type == MEDIA_ADAPTERS && (bus == BUS_USB || bus == BUS_SCSI || bus == BUS_ANY) &&
+            already_probed_usb_controllers && !already_loaded_usb_scsi) {
                 already_loaded_usb_scsi = 1;
                 /* we can't allow additional modules floppy since we need usbkbd for keystrokes of usb keyboards */
                 my_insmod("usb_storage", MEDIA_ADAPTERS, NULL, 0); 
