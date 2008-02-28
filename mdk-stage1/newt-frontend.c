@@ -43,12 +43,14 @@ void init_frontend(char * welcome_msg)
 	for (i=0; i<38; i++) printf("\n");
 	newtInit();
 	newtCls();
-	
-	newtDrawRootText(0, 0, welcome_msg);
 
-	if (welcome_msg[0]) 
+	if (welcome_msg[0]) {
+		char *msg;
+		asprintf(&msg, " %s", welcome_msg);
+		newtDrawRootText(0, 0, msg);
+		free(msg);
 		newtPushHelpLine(" <Alt-F1> for here, <Alt-F3> to see the logs, <Alt-F4> for kernel msg");
-
+	}
 	newtRefresh();
 }
 
