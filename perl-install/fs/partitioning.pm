@@ -12,7 +12,7 @@ sub guess_partitions_to_format {
     foreach (@$fstab) {
 	$_->{mntpoint} = "swap" if isSwap($_);
 	$_->{mntpoint} or next;
-	
+
 	add2hash_($_, { toFormat => $_->{notFormatted} }) if $_->{fs_type}; #- eg: do not set toFormat for isRawRAID (0xfd)
         $_->{toFormatUnsure} ||= member($_->{mntpoint}, '/', '/usr');
 
