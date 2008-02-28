@@ -182,6 +182,12 @@ sub formatPartitions {
     eval { fs::mount::mount('none', "$::prefix/sys", 'sysfs') };
     eval { fs::mount::usbfs($::prefix) };
 
+    #- needed by lilo
+    if (-d '/dev/mapper' && !$::local_install) {
+	my @vgs = map { $_->{VG_name} } @{$o->{all_hds}{lvms}};
+	-e "/dev/$_" and cp_af("/dev/$_", "$::prefix/dev") foreach 'mapper', @vgs;
+    }
+
     install::any::screenshot_dir__and_move();
     install::any::move_compressed_image_to_disk($o);
 
@@ -189,12 +195,6 @@ sub formatPartitions {
 
     require raid;
     raid::write_conf($o->{all_hds}{raids});
-
-    #- needed by lilo
-    if (-d '/dev/mapper' && !$::local_install) {
-	my @vgs = map { $_->{VG_name} } @{$o->{all_hds}{lvms}};
-	-e "/dev/$_" and cp_af("/dev/$_", "$::prefix/dev") foreach 'mapper', @vgs;
-    }
 }
 
 #------------------------------------------------------------------------------
