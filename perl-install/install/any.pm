@@ -1,4 +1,4 @@
-*package install::any; # $Id$
+package install::any; # $Id$
 
 use strict;
 
