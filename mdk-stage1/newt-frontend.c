@@ -46,7 +46,9 @@ void init_frontend(char * welcome_msg)
 
 	if (welcome_msg[0]) {
 		char *msg;
-		asprintf(&msg, " %s", welcome_msg);
+		int cols, rows;
+		newtGetScreenSize(&cols, &rows);
+		asprintf(&msg, " %-*s", cols - 1, welcome_msg);
 		newtDrawRootText(0, 0, msg);
 		free(msg);
 		newtPushHelpLine(" <Alt-F1> for here, <Alt-F3> to see the logs, <Alt-F4> for kernel msg");
