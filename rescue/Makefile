@@ -16,7 +16,7 @@ $(RESCUE): list.xml drvinst guessmounts lsparts rescue-doc make_rescue_img
 tar:
 	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
 	mkdir -p $(PRODUCT)-$(VERSION)/tools
-	svn export -q . $(PRODUCT)-$(VERSION)/rescue
+	svn export -q -rBASE . $(PRODUCT)-$(VERSION)/rescue
 	cp ../Makefile.config $(PRODUCT)-$(VERSION)/
 	cp ../tools/install-xml-file-list $(PRODUCT)-$(VERSION)/tools
 	tar cfj $(PRODUCT)-$(VERSION).tar.bz2 $(PRODUCT)-$(VERSION)
