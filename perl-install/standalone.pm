@@ -193,7 +193,7 @@ sub bug_handler {
     my ($error, $is_signal) = @_;
 
     # exceptions in eval are OK:
-    return if $error && $^S && !$is_signal;
+    return if $error && $^S ne '0' && !$is_signal;
 
     # exceptions with "\n" are normal ways to quit:
     if (!$is_signal && $error eq MDK::Common::String::formatError($error)) {
