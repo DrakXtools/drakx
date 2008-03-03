@@ -210,7 +210,7 @@ sub _gtk__CheckMenuItem {
     $w;
 }
 
-sub _gtk___SpinButton {
+sub _gtk__SpinButton {
     my ($w, $opts) = @_;
 
     if (!$w) {
