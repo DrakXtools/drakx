@@ -301,7 +301,7 @@ sub set_removable_mntpoints {
     my %names;
     foreach (@{$all_hds->{raw_hds}}) {
 	my $name = detect_devices::suggest_mount_point($_) or next;
-	$name eq 'zip' and next;
+	$name eq 'zip' || $name eq 'cdrom' and next;
 	
 	my $s = ++$names{$name};
 	$_->{mntpoint} ||= "/media/$name" . ($s == 1 ? '' : $s);
