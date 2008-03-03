@@ -208,12 +208,18 @@ sub install {
 	return 1;
     }
 
-    my $_wait = $do->in && $do->in->wait_message(N("Please wait"), N("Installing packages..."));
-    $do->in->suspend if $do->in;
-    log::explanations("installing packages @l");
-    #- --expect-install added in urpmi 4.6.11
-    my $ret = system('urpmi', '--allow-medium-change', '--auto', '--no-verify-rpm', '--gui', '--expect-install', @l) == 0;
-    $do->in->resume if $do->in;
+    my @options = ('--allow-medium-change', '--auto', '--no-verify-rpm', '--expect-install', @l);
+    my $ret;
+    if (check_for_xserver() && -x '/usr/sbin/gurpmi') {
+        $ret = system('gurpmi', @options) == 0;
+    } else {
+        my $_wait = $do->in && $do->in->wait_message(N("Please wait"), N("Installing packages..."));
+        $do->in->suspend if $do->in;
+        log::explanations("installing packages @l");
+        #- --expect-install added in urpmi 4.6.11
+        $ret = system('urpmi', '--gui', @options) == 0;
+        $do->in->resume if $do->in;
+    }
     $ret;
 }
 
