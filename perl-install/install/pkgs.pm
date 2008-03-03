@@ -61,7 +61,6 @@ sub extractHeaders {
     foreach (@$pkgs) {
 	my $f = "$::prefix/tmp/headers/" . $_->header_filename;
 	$_->update_header($f) or log::l("unable to open header file $f"), next;
-	log::l("read header file $f");
     }
 }
 
