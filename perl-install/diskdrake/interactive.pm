@@ -73,6 +73,7 @@ struct part {
 
 struct part_allocate inherits part {
   int maxsize        # in sectors (alike "size")
+  int min_hd_size    # in sectors (do not allocate if the drive is smaller than the given size)
   int ratio          # 
   string hd          # 'hda', 'hdc'
   string parts       # for creating raid partitions. eg: 'foo bar' where 'foo' and 'bar' are mntpoint

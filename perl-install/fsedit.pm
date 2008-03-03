@@ -22,19 +22,19 @@ use fs;
 %suggestions = (
   N_("simple") => [
     { mntpoint => "/",     size => MB(300), fs_type => 'ext3', ratio => 20, maxsize => MB(8000) },
-    { mntpoint => "swap",  size =>  MB(64), fs_type => 'swap', ratio => 1,  maxsize => MB(4000) },
-    { mntpoint => "/home", size => MB(300), fs_type => 'ext3', ratio => 3 },
+    { mntpoint => "swap",  size => MB(128), fs_type => 'swap', ratio => 1,  maxsize => MB(4000) },
+    { mntpoint => "/home", size => MB(300), fs_type => 'ext3', ratio => 3,  min_hd_size => MB(7000) },
   ], N_("with /usr") => [
-    { mntpoint => "/",     size => MB(250), fs_type => 'ext3', ratio => 1, maxsize => MB(4000) },
+    { mntpoint => "/",     size => MB(250), fs_type => 'ext3', ratio => 1, maxsize => MB(8000) },
     { mntpoint => "swap",  size =>  MB(64), fs_type => 'swap', ratio => 1, maxsize => MB(4000) },
     { mntpoint => "/usr",  size => MB(300), fs_type => 'ext3', ratio => 4, maxsize => MB(8000) },
-    { mntpoint => "/home", size => MB(100), fs_type => 'ext3', ratio => 3 },
+    { mntpoint => "/home", size => MB(100), fs_type => 'ext3', ratio => 3, min_hd_size => MB(7000) },
   ], N_("server") => [
-    { mntpoint => "/",     size => MB(150), fs_type => 'ext3', ratio => 1, maxsize => MB(4000) },
+    { mntpoint => "/",     size => MB(150), fs_type => 'ext3', ratio => 1, maxsize => MB(8000) },
     { mntpoint => "swap",  size =>  MB(64), fs_type => 'swap', ratio => 2, maxsize => MB(4000) },
     { mntpoint => "/usr",  size => MB(300), fs_type => 'ext3', ratio => 4, maxsize => MB(8000) },
     { mntpoint => "/var",  size => MB(200), fs_type => 'ext3', ratio => 3 },
-    { mntpoint => "/home", size => MB(150), fs_type => 'ext3', ratio => 3 },
+    { mntpoint => "/home", size => MB(150), fs_type => 'ext3', ratio => 3, min_hd_size => MB(7000) },
     { mntpoint => "/tmp",  size => MB(150), fs_type => 'ext3', ratio => 2, maxsize => MB(4000) },
   ],
 );
@@ -346,10 +346,12 @@ sub suggest_part {
 	fs::type::set_pt_type($_, $_->{pt_type}) if !exists $_->{fs_type};
     }
 
+    my $hd_size = fs::get::part2hd($part, $all_hds)->{totalsectors};
     my $has_swap = any { isSwap($_) } fs::get::fstab($all_hds);
 
     my @local_suggestions =
       grep { !$_->{mntpoint} && !$_->{VG_name} || !fs::get::has_mntpoint($_->{mntpoint}, $all_hds) || isSwap($_) && !$has_swap }
+      grep { !$_->{min_hd_size} || $_->{min_hd_size} <= $hd_size }
       grep { !$_->{hd} || $_->{hd} eq $part->{rootDevice} }
 	@$suggestions;
 
@@ -357,7 +359,7 @@ sub suggest_part {
     #- one should rather use {ratio} instead
     foreach (@local_suggestions) {
 	if ($_->{percent_size} && $_->{percent_size} =~ /(.+?)%?$/) {
-	    $_->{size} = $1 / 100 * fs::get::part2hd($part, $all_hds)->{totalsectors};
+	    $_->{size} = $1 / 100 * $hd_size;
 	    log::l("in suggestion, setting size=$_->{size} for percent_size=$_->{percent_size}");
 	}
     }
