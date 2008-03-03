@@ -946,19 +946,12 @@ sub install_urpmi {
             my ($dir, $removable_device, $static);
 
 	    my $phys_m = $medium->{phys_medium};
-            if ($phys_m->{method} eq 'ftp' || $phys_m->{method} eq 'http') {
+            if ($phys_m->{method} eq 'ftp' || $phys_m->{method} eq 'http' || $phys_m->{method} eq 'cdrom') {
 		$dir = $phys_m->{url};
-	    } else {
-		#- for cdrom, removable://... is best since it mounts *and* umounts cdrom
-		#- for iso files, removable://... doesn't work correctly
-		my $urpmi_method = $phys_m->{method} eq 'cdrom' ? 'removable' : 'file';
+	    } elsif ($phys_m->{method} eq 'iso') {
+		my $urpmi_method = 'file';
 		$dir = "$urpmi_method:/$phys_m->{mntpoint}$phys_m->{rel_path}";
-		if ($phys_m->{method} eq 'iso') {
-		    $removable_device = $phys_m->{loopback_device}{mntpoint} . $phys_m->{loopback_file};
-		} elsif ($phys_m->{method} eq 'cdrom') {
-		    $removable_device = devices::make($phys_m->{device});
-		    $static = 1;
-		}
+		$removable_device = $phys_m->{loopback_device}{mntpoint} . $phys_m->{loopback_file};
 	    }
 
 	    $dir = MDK::Common::File::concat_symlink($dir, $medium->{rpmsdir});
