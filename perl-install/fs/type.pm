@@ -31,8 +31,8 @@ if_(arch() =~ /ppc|i.86|x86_64/,
 ),
 if_(arch() =~ /i.86|ia64|x86_64/,
   0x0b => 'vfat',     'FAT32',
-  0x07 => 'ntfs',     'NTFS',
   0x07 => 'ntfs-3g',  'NTFS-3G',
+  0x07 => 'ntfs',     'NTFS',
 ),
 if_(arch() =~ /ppc/,
   0x401	=> '',         'Apple Bootstrap',
@@ -291,8 +291,9 @@ sub type_subpart_from_magic {
 	}->{$ids->{ID_FS_TYPE}};
 
 	$p = type_name2subpart($name) if $name;
-    } elsif ($ids->{ID_FS_TYPE}) {
-	$p = fs_type2subpart($ids->{ID_FS_TYPE}) or log::l("unknown filesystem $ids->{ID_FS_TYPE} returned by vol_id");
+    } elsif (my $fs_type = $ids->{ID_FS_TYPE}) {
+	$fs_type = 'ntfs-3g' if $fs_type eq 'ntfs';
+	$p = fs_type2subpart($fs_type) or log::l("unknown filesystem $fs_type returned by vol_id");
     }
 
     if ($p) {
