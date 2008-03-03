@@ -971,7 +971,6 @@ sub install_urpmi {
 	    #- output new urpmi.cfg format here.
 	    push @cfg, map { "$_\n" } 
 	      "$qname $qdir {", 
-	      "  media_info_dir: media_info",
 		if_(keys(%{$medium->{key_ids}}), 
 	      "  key-ids: " . join(',', keys %{$medium->{key_ids}})),
 		if_($removable_device, 
