@@ -287,7 +287,7 @@ sub upgrading_redhat() {
     unlink "$::prefix/etc/X11/XF86Config";
     unlink "$::prefix/etc/X11/XF86Config-4";
 
-    sub prefering_mdk {
+    sub prefering_mdv {
 	my ($lpkg, $rpkg_ver, $c) = @_;
 	my $lpkg_ver = $lpkg->version . '-' . $lpkg->release;
 	log::l($lpkg->name . ' ' . ': prefering ' . ($c == 1 ? "$lpkg_ver over $rpkg_ver" : "$rpkg_ver over $lpkg_ver"));
@@ -297,9 +297,9 @@ sub upgrading_redhat() {
     undef *URPM::Package::compare_pkg;
     *URPM::Package::compare_pkg = sub {
 	my ($lpkg, $rpkg) = @_;
-	my $c = ($lpkg->release =~ /mdk$/ ? 1 : 0) - ($rpkg->release =~ /mdk$/ ? 1 : 0);
+	my $c = ($lpkg->release =~ /mdv|mnb/ ? 1 : 0) - ($rpkg->release =~ /mdv|mnb/ ? 1 : 0);
 	if ($c) {
-	    prefering_mdk($lpkg, $rpkg->version . '-' . $rpkg->release, $c);
+	    prefering_mdv($lpkg, $rpkg->version . '-' . $rpkg->release, $c);
 	    $c;
 	} else {
 	    &$old_compare_pkg;
@@ -310,9 +310,9 @@ sub upgrading_redhat() {
     undef *URPM::Package::compare;
     *URPM::Package::compare = sub {
 	my ($lpkg, $rpkg_ver) = @_;
-	my $c = ($lpkg->release =~ /mdk$/ ? 1 : 0) - ($rpkg_ver =~ /mdk$/ ? 1 : 0);
+	my $c = ($lpkg->release =~ /mdv|mnb/ ? 1 : 0) - ($rpkg_ver =~ /mdv|mnb/ ? 1 : 0);
 	if ($c) {
-	    prefering_mdk($lpkg, $rpkg_ver, $c);
+	    prefering_mdv($lpkg, $rpkg_ver, $c);
 	    return $c;
 	}
 	&$old_compare;
