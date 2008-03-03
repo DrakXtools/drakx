@@ -43,7 +43,7 @@ sub vmlinuz2kernel_str {
     { 
 	basename => $basename,
 	version => $version, 
-	$version =~ /(.*)-(\D.*)-(\d+md[kv])$/ ? #- eg: 2.6.22.5-server-1mdv
+	$version =~ /(.*)-(\D.*)-(\d+(mdk|mdv|mnb))$/ ? #- eg: 2.6.22.5-server-1mdv
 	  (ext => $2, version_no_ext => "$1-$3") :
 	$version =~ /(.*md[kv])-?(.*)/ ? #- (old) eg: 2.6.17-13mdventerprise
 	  (ext => $2, version_no_ext => $1) : (version_no_ext => $version),
