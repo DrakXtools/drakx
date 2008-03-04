@@ -949,8 +949,7 @@ sub install_urpmi {
             if ($phys_m->{method} eq 'ftp' || $phys_m->{method} eq 'http' || $phys_m->{method} eq 'cdrom') {
 		$dir = $phys_m->{url};
 	    } elsif ($phys_m->{method} eq 'iso') {
-		my $urpmi_method = 'file';
-		$dir = "$urpmi_method:/$phys_m->{mntpoint}$phys_m->{rel_path}";
+		$dir = "$phys_m->{mntpoint}$phys_m->{rel_path}";
 		$removable_device = $phys_m->{loopback_device}{mntpoint} . $phys_m->{loopback_file};
 	    }
 
