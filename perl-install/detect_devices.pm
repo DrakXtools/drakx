@@ -1062,6 +1062,7 @@ sub BIGMEM() {
 sub is_i586() {
     my $cpuinfo = cat_('/proc/cpuinfo');
     $cpuinfo =~ /^cpu family\s*:\s*(\d+)/m && $1 < 6 ||
+      $cpuinfo =~ /^model name\s*:\s*Transmeta.* TM5800/m || # mdvbz#37866
       !has_cpu_flag('cmov');
 }
 
