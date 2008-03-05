@@ -28,6 +28,7 @@ $::isWizard = 1;
 my $in = 'interactive'->vnew;
 
 sub ask_license() {
+    local $::isWizard = 0;
     any::acceptLicense($in);
 }
 
