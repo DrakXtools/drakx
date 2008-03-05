@@ -30,7 +30,7 @@ sub resize {
     my @l = ('-ff', '-s' . int($size / 2) . 'ki', $o->{dev});
     my $r;
     run_program::run('ntfsresize', '>', \$r, '-n', @l) or die "ntfsresize failed: $r\n";
-    run_program::run('ntfsresize', '>', \$r, @l) or die "ntfsresize failed: $r\n";
+    run_program::raw({ timeout => 'never' }, 'ntfsresize', '>', \$r, @l) or die "ntfsresize failed: $r\n";
 }
 
 1;
