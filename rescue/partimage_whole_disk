@@ -66,7 +66,7 @@ sub save_all {
     my $part_list = [ partition_table::get_normal_parts($hd) ];
 
     foreach (@$part_list) {
-	$_->{saved} = !member($_->{fs_type}, 'ntfs', 'vfat', 'swap');
+	$_->{saved} = !member($_->{fs_type}, 'ntfs', 'ntfs-3g', 'vfat', 'swap');
     }
 
     if (!$options{save_home_directory}) {
@@ -103,7 +103,7 @@ sub rest_all {
 	put_in_hash($_, partition_table::hd2minimal_part($hd)) foreach @$part_list;
 
 	my ($from_partimage, $other) = partition { $_->{saved} } @$part_list;
-	my ($from_resize, $created) = partition { member($_->{fs_type}, 'vfat', 'ntfs') } @$other;
+	my ($from_resize, $created) = partition { member($_->{fs_type}, 'vfat', 'ntfs', 'ntfs-3g') } @$other;
 	
 	my $total = sum(map { $_->{size} } @$part_list);
 	if ($total > $hd->{totalsectors}) {
