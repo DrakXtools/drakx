@@ -669,7 +669,7 @@ sub Resize {
 	    } else {
 		delete $nice_resize{ext2};
 	    }
-	} elsif ($part->{fs_type} eq 'ntfs') {
+	} elsif ($part->{fs_type} =~ /ntfs/) {
 	    write_partitions($in, $hd) or return;
 	    require diskdrake::resize_ntfs;
 	    diskdrake::resize_ntfs::check_prog($in) or return;

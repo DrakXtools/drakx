@@ -1008,7 +1008,7 @@ sub suggest {
 	      log::l("found the following files on potential windows partition $_->{device}: " . join(' ', @root_files));
 	      intersection(\@root_files, [ "windows", "winnt" ]);
 	  }
-	  grep { isFat_or_NTFS($_) && member(fs::type::fs_type_from_magic($_), 'vfat', 'ntfs')
+	  grep { isFat_or_NTFS($_) && member(fs::type::fs_type_from_magic($_), 'vfat', 'ntfs', 'ntfs-3g')
 		   && fs::type::part2type_name($_) !~ /^Hidden/;
 	     }
 	    map { @{$_->{primary}{normal}} } @{$all_hds->{hds}};
