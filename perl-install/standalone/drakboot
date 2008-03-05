@@ -242,7 +242,7 @@ sub set_splash_append {
     my ($val) = @_;
     bootloader::set_append_with_key($bootloader, 'splash', undef);
     bootloader::set_append_with_key($bootloader, 'splash', $val);
-    bootloader::install($bootloader, $all_hds);
+    modify_bootloader($bootloader, $all_hds);
 }
 
 sub enable_framebuffer() {
@@ -275,10 +275,16 @@ Be sure your video card supports the mode you choose."),
                 my $entry = find { $_->{label} eq $label } @{$bootloader->{entries}};
                 $entry->{vga} = $vga;
             }
-            bootloader::install($bootloader, $all_hds);
+            modify_bootloader($bootloader, $all_hds);
         }
     };
     die if $@ && $@ !~ /^wizcancel/;
     $::WizardWindow->destroy unless $::isEmbedded;
     $vga;
+}
+
+sub modify_bootloader {
+    my ($bootloader, $all_hds) = @_;
+    bootloader::action($bootloader, 'write', $all_hds);
+    bootloader::action($bootloader, 'when_config_changed');
 }
