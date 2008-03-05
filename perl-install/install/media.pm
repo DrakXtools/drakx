@@ -948,9 +948,11 @@ sub install_urpmi {
 	    my $phys_m = $medium->{phys_medium};
             if ($phys_m->{method} eq 'ftp' || $phys_m->{method} eq 'http' || $phys_m->{method} eq 'cdrom') {
 		$dir = $phys_m->{url};
-	    } elsif ($phys_m->{method} eq 'iso') {
+	    } else {
 		$dir = "$phys_m->{mntpoint}$phys_m->{rel_path}";
-		$removable_device = $phys_m->{loopback_device}{mntpoint} . $phys_m->{loopback_file};
+		if ($phys_m->{method} eq 'iso') {
+		    $removable_device = $phys_m->{loopback_device}{mntpoint} . $phys_m->{loopback_file};
+		}
 	    }
 
 	    $dir = MDK::Common::File::concat_symlink($dir, $medium->{rpmsdir});
