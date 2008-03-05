@@ -261,7 +261,7 @@ our %l = (
       qw(8250_pci 8250 epca esp isicom istallion jsm moxa mxser mxser_new stallion sx synclink synclinkmp),
     ],
     other => [
-      qw(defxx i810fb ide-floppy ide-scsi ide-tape loop lp nbd sg st),
+      qw(defxx ide-floppy ide-scsi ide-tape loop lp nbd sg st),
       qw(parport_pc parport_serial),
       qw(btaudio mmc_block),
 

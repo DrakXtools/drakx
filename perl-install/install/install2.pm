@@ -525,8 +525,6 @@ sub main {
     # keep the result otherwise monitor-edid does not return good results afterwards
     eval { any::monitor_full_edid() };
 
-    install::any::start_i810fb();
-
     $o->{allowFB} = listlength(cat_("/proc/fb"));
 
     if (!$::testing) {
