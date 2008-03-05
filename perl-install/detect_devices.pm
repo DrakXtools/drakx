@@ -821,6 +821,7 @@ sub firewire_probe() {
             specifier_id => hex($get->("$dir/specifier_id")),
             specifier_version => hex($get->("$dir/version")),
             bus => 'Firewire',
+            sysfs_device => $dir,
         };
     } grep { -f "$dev_dir/$_/specifier_id" } all($dev_dir);
 
@@ -880,6 +881,7 @@ sub pcmcia_probe() {
             if_($modalias, modalias => $modalias),
             if_($device, device => $device),
             bus => 'PCMCIA',
+            sysfs_device => $dir,
         };
     } all($dev_dir);
 }
