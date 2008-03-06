@@ -66,7 +66,7 @@ my $cal_butt = gtksignal_connect(Gtk2::CheckButton->new(N("Show only for the sel
 
 ### menus definition
 # the menus are not shown
-# but they provides shiny shortcut like C-q
+# but they provides shiny shortcut like C-q (Broken: FIXME)
 my @menu_items = (
 		  { path => N("/_File"), item_type => '<Branch>' },
 		  { path => N("/File/_New"), accelerator => N("<control>N") },
