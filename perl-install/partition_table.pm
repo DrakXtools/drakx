@@ -80,7 +80,13 @@ sub verifyPrimary {
 
 sub compute_device_name {
     my ($part, $hd) = @_;
-    $part->{device} = $hd->{prefix} . $part->{part_number};
+    $part->{device} = _compute_device_name($hd, $part->{part_number});
+}
+
+sub _compute_device_name {
+    my ($hd, $nb) = @_;
+    my $prefix = $hd->{prefix} || $hd->{device} . ($hd->{device} =~ /\d$/ ? 'p' : '');
+    $prefix . $nb;
 }
 
 sub assign_device_numbers {
@@ -98,7 +104,7 @@ sub assign_device_numbers {
 	#- now loop through them, assigning partition numbers - reserve one for the holes
 	foreach (@{$hd->{primary}{normal}}) {
 	    if ($_->{start} > $start) {
-		log::l("PPC: found a hole on $hd->{prefix} before $_->{start}, skipping device..."); 
+		log::l("PPC: found a hole on $hd->{device} before $_->{start}, skipping device..."); 
 		$i++;
 	    }
 	    $_->{part_number} = $i;
@@ -113,7 +119,7 @@ sub assign_device_numbers {
 	    $i++;
 	}
 	foreach (map { $_->{normal} } @{$hd->{extended} || []}) {
-	    my $dev = $hd->{prefix} . $i;
+	    my $dev = _compute_device_name($hd, $i);
 	    my $renumbered = $_->{device} && $dev ne $_->{device};
 	    if ($renumbered) {
 		require fs::mount;

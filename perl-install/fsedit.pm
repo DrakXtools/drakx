@@ -143,7 +143,6 @@ sub get_hds {
 
     foreach my $hd (@drives) {
 	$hd->{file} = devices::make($hd->{device});
-	$hd->{prefix} ||= $hd->{device};
     }
 
     @drives = partition_table::raw::get_geometries(@drives);

@@ -344,7 +344,7 @@ sub getDAC960() {
     #- /dev/rd/c0d0: RAID-7, Online, 17928192 blocks, Write Thru0123456790123456789012
     foreach (syslog()) {
 	my ($device, $info) = m|/dev/(rd/.*?): (.*?),| or next;
-	$idi{$device} = { info => $info, media_type => 'hd', device => $device, prefix => $device . 'p', bus => 'dac960' };
+	$idi{$device} = { info => $info, media_type => 'hd', device => $device, bus => 'dac960' };
     }
     values %idi;
 }
@@ -353,7 +353,7 @@ sub getATARAID() {
     my %l;
     foreach (syslog()) {
 	my ($device) = m|^\s*(ataraid/d\d+):| or next;
-	$l{$device} = { info => 'ATARAID block device', media_type => 'hd', device => $device, prefix => $device . 'p', bus => 'ataraid' };
+	$l{$device} = { info => 'ATARAID block device', media_type => 'hd', device => $device, bus => 'ataraid' };
 	log::l("ATARAID: $device");
     }
     values %l;

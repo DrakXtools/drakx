@@ -4,6 +4,7 @@
 - do not load i810fb, rely on vesa xorg drive instead (it may help #37772)
 - restore correct configuration of nfs/hd media in urpmi.cfg
   (regression introduced in 10.8)
+- fix partition device name for some dmraid (missing "p", cf #38363)
 - do not timeout after 10 minutes when resizing NTFS partition
 
 Version 10.8 - 4 March 2008
