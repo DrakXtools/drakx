@@ -96,7 +96,7 @@ sub vgs() {
     map {
 	my $dev = "mapper/$_->{name}";
 	my $vg = fs::wild_device::to_subpart("/dev/$dev");
-	add2hash($vg, { media_type => 'hd', prefix => $dev, bus => "dmraid_$_->{format}", disks => $_->{disks} });
+	add2hash($vg, { media_type => 'hd', bus => "dmraid_$_->{format}", disks => $_->{disks} });
 
 	#- device should exist, created by dmraid(8) using libdevmapper
 	#- if it doesn't, we suppose it's not in use
