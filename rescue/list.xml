@@ -249,6 +249,11 @@
 
 <from dir="/usr/share/ldetect-lst" expand="glob">
     *table.gz
+    dkms-modules.alias fallback-modules.alias
+</from>
+
+<from dir="/lib/module-init-tools">
+  ldetect-lst-modules.alias
 </from>
 
 <filter command="../tools/simplify-drakx-modules">
