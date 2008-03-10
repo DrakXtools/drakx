@@ -290,7 +290,7 @@ sub detect {
                  
 		# We have vendor and product ID, look up the scanner in
 		# the usbtable
-		foreach my $entry (cat_("$scannerDBdir/usbtable")) {
+		foreach my $entry (common::catMaybeCompressed("$scannerDBdir/usbtable")) {
 		    if ($entry =~ 
 			/^\s*$vendorid\s+$productid\s+.*\"([^\"]+)\"\s*$/) {
 			$description = $1;
