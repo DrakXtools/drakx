@@ -70,7 +70,7 @@ sub probe_smi() { find_pci_device([ 0x8086, 0x7190 ]) }
 sub probe_nforce2() { find_pci_device([ 0x10de, 0x01e0 ]) }
 
 sub probe_gsx() {
-    any { member(get_vendor($_), "Cyrix", "NSC") } get_cpus() &&
+    (any { member(get_vendor($_), "Cyrix", "NSC") } get_cpus()) &&
     find_pci_device([ 0x1078, 0x0100 ], [ 0x1078, 0x0002 ], [ 0x1078, 0x0000 ]);
 }
 
