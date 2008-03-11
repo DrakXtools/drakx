@@ -131,6 +131,12 @@ sub _gtk {
 	gtkval_register($w, $show_ref, sub { $$show_ref ? $w->show : $w->hide });
     }
 
+    if (my $sensitive_ref = delete $opts->{sensitive_ref}) {
+	my $set = sub { $w->set_sensitive($$sensitive_ref) };
+	gtkval_register($w, $sensitive_ref, $set);
+	$set->();
+    }
+
     if (%$opts && !$opts->{allow_unknown_options}) {
 	internal_error("$action $class: unknown option(s) " . join(', ', keys %$opts));
     }
