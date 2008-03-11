@@ -235,15 +235,17 @@ sub switch {
         push @alternative, $driver;
         my %des = modules::category2modules_and_description('multimedia/sound');
 
+        my @common = (
+            get_any_driver_entry($in, $modules_conf, $driver, $device),
+        );
+
         if ($new_driver eq 'unknown') {
             $in->ask_from_({
                 title => N("No alternative driver"),
                 messages => N("There's no known OSS/ALSA alternative driver for your sound card (%s) which currently uses \"%s\"",
                               $device->{description}, $driver),
                           },
-                          [
-                           get_any_driver_entry($in, $modules_conf, $driver, $device),
-                          ]
+                          \@common,
                          );
         } elsif ($in->ask_from_({ title => N("Sound configuration"),
                                   messages => 
@@ -281,7 +283,7 @@ To use alsa, one can either use:
                                     val => N("Trouble shooting"), disabled => sub {},
                                     clicked => sub { &trouble($in) }
                                 },
-                                get_any_driver_entry($in, $modules_conf, $driver, $device),
+                                @common,
                                 ]))
         {
             return if $new_driver eq $device->{current_driver};
