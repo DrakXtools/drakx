@@ -287,6 +287,11 @@ sub switch {
                 text => N("Enable user switching for audio applications"),
                 type => 'bool', val => \$is_user_switching,
             },
+            {
+                advanced => 1,
+                val => N("Trouble shooting"), disabled => sub {},
+                clicked => sub { &trouble($in) }
+            },
         );
 
         if ($new_driver eq 'unknown') {
@@ -330,11 +335,6 @@ To use alsa, one can either use:
                                                       sprintf(($des{$drv} ? "$des{$drv} (%s [%s])"
                                                                 : "%s [%s]"), $drv, $drv =~ /^snd_/ ? 'ALSA' : 'OSS');
                                                 }
-                                },
-                                {
-                                    advanced => 1,
-                                    val => N("Trouble shooting"), disabled => sub {},
-                                    clicked => sub { &trouble($in) }
                                 },
                                 @common,
                                 ]))
