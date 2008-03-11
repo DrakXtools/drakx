@@ -220,6 +220,27 @@ sub set_pulseaudio {
     append_to_file($config_file, $val) if !$done;
 }
 
+
+my $alsa_routing_config_file = '/etc/alsa/pulse-default.conf';
+my $disabling_routing = '#-DRAKSOUND- ';
+
+sub is_pulseaudio_routing_enabled() {
+    return -f $alsa_routing_config_file &&
+      cat_($alsa_routing_config_file) !~ /$disabling_routing/;
+}
+
+sub set_pulseaudio_routing {
+    my ($val) = @_;
+    substInFile {
+        if ($val) {
+            s/^$disabling_routing//;
+        } else {
+            s/^/$disabling_routing/;
+        }
+    } $alsa_routing_config_file;
+}
+
+
 sub rooted { run_program::rooted($::prefix, @_) }
 
 sub unload { modules::unload(@_) if $::isStandalone || $blacklisted }
@@ -275,6 +296,7 @@ sub switch {
         my %des = modules::category2modules_and_description('multimedia/sound');
         
         my $is_pulseaudio_enabled = is_pulseaudio_enabled();
+        my $is_pulseaudio_routing_enabled = is_pulseaudio_routing_enabled();
         my $is_user_switching = is_user_switching_enabled();
 
         my @common = (
@@ -282,6 +304,10 @@ sub switch {
             {
                 text => N("Enable PulseAudio"),
                 type => 'bool', val => \$is_pulseaudio_enabled,
+            },
+            {
+                text => N("Automatic routing from ALSA to PulseAudio"),
+                type => 'bool', val => \$is_pulseaudio_routing_enabled,
             },
             {
                 text => N("Enable user switching for audio applications"),
@@ -303,6 +329,7 @@ sub switch {
                           \@common,
                            )) {
                 set_pulseaudio($is_pulseaudio_enabled);
+                set_pulseaudio_routing($is_pulseaudio_routing_enabled);
                 set_user_switching($is_user_switching);
             }
         } elsif ($in->ask_from_({ title => N("Sound configuration"),
@@ -340,6 +367,7 @@ To use alsa, one can either use:
                                 ]))
         {
             set_pulseaudio($is_pulseaudio_enabled);
+            set_pulseaudio_routing($is_pulseaudio_routing_enabled);
             set_user_switching($is_user_switching);
             return if $new_driver eq $device->{current_driver};
             log::explanations("switching audio driver from '" . $device->{current_driver} . "' to '$new_driver'\n");
