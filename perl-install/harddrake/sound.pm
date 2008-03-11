@@ -236,9 +236,11 @@ sub switch {
         my %des = modules::category2modules_and_description('multimedia/sound');
 
         if ($new_driver eq 'unknown') {
-            $in->ask_from(N("No alternative driver"),
-                          N("There's no known OSS/ALSA alternative driver for your sound card (%s) which currently uses \"%s\"",
-                            $device->{description}, $driver),
+            $in->ask_from_({
+                title => N("No alternative driver"),
+                messages => N("There's no known OSS/ALSA alternative driver for your sound card (%s) which currently uses \"%s\"",
+                              $device->{description}, $driver),
+                          },
                           [
                            get_any_driver_entry($in, $modules_conf, $driver, $device),
                           ]
