@@ -73,7 +73,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fr\n"
-"POT-Creation-Date: 2008-01-17 14:31+0100\n"
+"POT-Creation-Date: 2008-03-11 16:47+0100\n"
 "PO-Revision-Date: 2008-01-19 22:01+0100\n"
 "Last-Translator: Christophe Berthelé <cpjc@free.fr>\n"
 "Language-Team: Français <cooker-i18n@mandrivalinux.org>\n"
@@ -3087,7 +3087,32 @@ msgstr "processeur n°"
 msgid "Please Wait... Applying the configuration"
 msgstr "Veuillez patienter... Mise en place de la configuration"
 
-#: harddrake/sound.pm:239
+#: harddrake/sound.pm:305
+#, c-format
+msgid "Enable PulseAudio"
+msgstr ""
+
+#: harddrake/sound.pm:309
+#, c-format
+msgid "Automatic routing from ALSA to PulseAudio"
+msgstr ""
+
+#: harddrake/sound.pm:313
+#, c-format
+msgid "Enable user switching for audio applications"
+msgstr ""
+
+#: harddrake/sound.pm:318
+#, c-format
+msgid "Reset sound mixer to default values"
+msgstr ""
+
+#: harddrake/sound.pm:323
+#, c-format
+msgid "Trouble shooting"
+msgstr "Résolution de problème"
+
+#: harddrake/sound.pm:330
 #, c-format
 msgid "No alternative driver"
 msgstr "Pas de pilote alternatif"
@@ -3115,7 +3140,7 @@ msgstr ""
 "Vous pouvez sélectionner ici un pilote alternatif (OSS ou ALSA) pour votre "
 "carte son (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA",
+#. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:253
@@ -3170,12 +3195,7 @@ msgstr ""
 msgid "Driver:"
 msgstr "Pilote :"
 
-#: harddrake/sound.pm:278
-#, c-format
-msgid "Trouble shooting"
-msgstr "Résolution de problème"
-
-#: harddrake/sound.pm:286
+#: harddrake/sound.pm:379
 #, c-format
 msgid ""
 "The old \"%s\" driver is blacklisted.\n"

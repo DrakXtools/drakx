@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
-"POT-Creation-Date: 2008-01-17 14:31+0100\n"
+"POT-Creation-Date: 2008-03-11 16:47+0100\n"
 "PO-Revision-Date: 2008-02-14 20:26+0100\n"
 "Last-Translator: Lónyai Gergely <alephlg@gmail.com>\n"
 "Language-Team: Hungarian <alephlg@gmail.com>\n"
@@ -3000,7 +3000,32 @@ msgstr "CPU # "
 msgid "Please Wait... Applying the configuration"
 msgstr "Kis türelmet - a beállítások módosítása"
 
-#: harddrake/sound.pm:239
+#: harddrake/sound.pm:305
+#, c-format
+msgid "Enable PulseAudio"
+msgstr ""
+
+#: harddrake/sound.pm:309
+#, c-format
+msgid "Automatic routing from ALSA to PulseAudio"
+msgstr ""
+
+#: harddrake/sound.pm:313
+#, c-format
+msgid "Enable user switching for audio applications"
+msgstr ""
+
+#: harddrake/sound.pm:318
+#, c-format
+msgid "Reset sound mixer to default values"
+msgstr ""
+
+#: harddrake/sound.pm:323
+#, c-format
+msgid "Trouble shooting"
+msgstr "Problémaelhárítás"
+
+#: harddrake/sound.pm:330
 #, c-format
 msgid "No alternative driver"
 msgstr "Nincs alternatív meghajtó"
@@ -3029,7 +3054,7 @@ msgstr ""
 "Itt kiválaszthat egy alternatív meghajtót (OSS vagy ALSA) a hangkártyához (%"
 "s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA",
+#. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:253
@@ -3085,12 +3110,7 @@ msgstr ""
 msgid "Driver:"
 msgstr "Meghajtó:"
 
-#: harddrake/sound.pm:278
-#, c-format
-msgid "Trouble shooting"
-msgstr "Problémaelhárítás"
-
-#: harddrake/sound.pm:286
+#: harddrake/sound.pm:379
 #, c-format
 msgid ""
 "The old \"%s\" driver is blacklisted.\n"
