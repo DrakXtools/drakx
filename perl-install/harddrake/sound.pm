@@ -323,6 +323,13 @@ sub switch {
         my $is_5_1_in_pulseaudio_enabled = is_5_1_in_pulseaudio_enabled();
         my $is_user_switching = is_user_switching_enabled();
 
+        my $write_config = sub {
+            set_pulseaudio($is_pulseaudio_enabled);
+            set_pulseaudio_routing($is_pulseaudio_routing_enabled);
+            set_5_1_in_pulseaudio($is_5_1_in_pulseaudio_enabled);
+            set_user_switching($is_user_switching);
+        };
+
         my @common = (
             get_any_driver_entry($in, $modules_conf, $driver, $device),
             {
@@ -361,10 +368,7 @@ sub switch {
                           },
                           \@common,
                            )) {
-                set_pulseaudio($is_pulseaudio_enabled);
-                set_pulseaudio_routing($is_pulseaudio_routing_enabled);
-                set_5_1_in_pulseaudio($is_5_1_in_pulseaudio_enabled);
-                set_user_switching($is_user_switching);
+                $write_config->();
             }
         } elsif ($in->ask_from_({ title => N("Sound configuration"),
                                   messages => 
@@ -400,10 +404,7 @@ To use alsa, one can either use:
                                 @common,
                                 ]))
         {
-            set_pulseaudio($is_pulseaudio_enabled);
-            set_pulseaudio_routing($is_pulseaudio_routing_enabled);
-            set_5_1_in_pulseaudio($is_5_1_in_pulseaudio_enabled);
-            set_user_switching($is_user_switching);
+            $write_config->();;
             return if $new_driver eq $device->{current_driver};
             log::explanations("switching audio driver from '" . $device->{current_driver} . "' to '$new_driver'\n");
             $in->ask_warn(N("Warning"), N("The old \"%s\" driver is blacklisted.\n
