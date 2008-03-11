@@ -315,6 +315,11 @@ sub switch {
             },
             {
                 advanced => 1,
+                val => N("Reset sound mixer to default values"),
+                clicked => sub { run_program::run('reset_sound') }
+            },
+            {
+                advanced => 1,
                 val => N("Trouble shooting"), disabled => sub {},
                 clicked => sub { &trouble($in) }
             },
