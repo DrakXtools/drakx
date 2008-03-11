@@ -181,6 +181,26 @@ our %oss2alsa =
 my @blacklist = qw(cs46xx cs4281);
 my $blacklisted = 0;
 
+my $config_file = '/etc/sysconfig/pulseaudio';
+
+sub is_pulseaudio_enabled() {
+    my %h = getVarsFromSh($config_file);
+    $h{PULSE_SERVER_TYPE} eq 'personal';
+}
+
+sub set_pulseaudio {
+    my ($val) = @_;
+    $val = 'PULSE_SERVER_TYPE=' . ($val ? 'personal' : 'none') . "\n";
+    my $done;
+    substInFile {
+        if (/^PULSE_SERVER_TYPE=/) {
+            $_ = $val;
+            $done = 1;
+        }
+    } $config_file;
+    append_to_file($config_file, $val) if !$done;
+}
+
 sub rooted { run_program::rooted($::prefix, @_) }
 
 sub unload { modules::unload(@_) if $::isStandalone || $blacklisted }
@@ -234,19 +254,27 @@ sub switch {
         my $new_driver = $driver;
         push @alternative, $driver;
         my %des = modules::category2modules_and_description('multimedia/sound');
+        
+        my $is_pulseaudio_enabled = is_pulseaudio_enabled();
 
         my @common = (
             get_any_driver_entry($in, $modules_conf, $driver, $device),
+            {
+                text => N("Enable PulseAudio"),
+                type => 'bool', val => \$is_pulseaudio_enabled,
+            },
         );
 
         if ($new_driver eq 'unknown') {
-            $in->ask_from_({
+            if ($in->ask_from_({
                 title => N("No alternative driver"),
                 messages => N("There's no known OSS/ALSA alternative driver for your sound card (%s) which currently uses \"%s\"",
                               $device->{description}, $driver),
                           },
                           \@common,
-                         );
+                           )) {
+                set_pulseaudio($is_pulseaudio_enabled);
+            }
         } elsif ($in->ask_from_({ title => N("Sound configuration"),
                                   messages => 
 				  N("Here you can select an alternative driver (either OSS or ALSA) for your sound card (%s).",
@@ -286,6 +314,7 @@ To use alsa, one can either use:
                                 @common,
                                 ]))
         {
+            set_pulseaudio($is_pulseaudio_enabled);
             return if $new_driver eq $device->{current_driver};
             log::explanations("switching audio driver from '" . $device->{current_driver} . "' to '$new_driver'\n");
             $in->ask_warn(N("Warning"), N("The old \"%s\" driver is blacklisted.\n
