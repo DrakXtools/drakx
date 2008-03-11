@@ -65,7 +65,7 @@ Do you want to install the SANE packages?"))) {
 if ($::Manual) { manual(); quit() }
 my $wait = $in->wait_message(N("Please wait"),
 			     N("Searching for configured scanners..."));
-my @c = scanner::configured();
+my @c = scanner::configured($in);
 $wait = undef;
 $wait = $in->wait_message(N("Please wait"),
 			     N("Searching for new scanners..."));
@@ -77,7 +77,7 @@ if ($changed) {
     my $_wait =
 	$in->wait_message(N("Please wait"),
 			  N("Re-generating list of configured scanners..."));
-    @c = scanner::configured();
+    @c = scanner::configured($in);
 }
 mainwindow(@c);
 quit();
@@ -504,7 +504,7 @@ sub mainwindow {
 		my $wait =
 		    $in->wait_message(N("Please wait"),
 				      N("Searching for configured scanners..."));
-		@configured = scanner::configured();
+		@configured = scanner::configured($in);
 		$wait = 
 		    $in->wait_message(N("Please wait"),
 				      N("Searching for new scanners..."));
@@ -530,7 +530,7 @@ sub mainwindow {
 		my $_wait =
 		    $in->wait_message(N("Please wait"),
 				      N("Re-generating list of configured scanners..."));
-		@configured = scanner::configured();
+		@configured = scanner::configured($in);
 	    }
 	} else {
 	    # Cancel clicked

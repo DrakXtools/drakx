@@ -123,7 +123,8 @@ sub installfirmware {
     return $firmware;
 }
 
-sub configured() {
+sub configured {
+    my ($in) = @_;
     my @res;
     my $parportscannerfound = 0;
     # Run "scanimage -L", to find the scanners which are already working
@@ -160,7 +161,7 @@ sub configured() {
     }
     close LIST;
     # We have a parallel port scanner, make it working for non-root users
-    nonroot_access_for_parport($parportscannerfound);
+    nonroot_access_for_parport($parportscannerfound, $in);
     return @res;
 }
 
@@ -175,7 +176,7 @@ sub nonroot_access_for_parport {
     # http://www.linuxprinting.org/download/digitalimage/Scanning-as-Normal-User-on-Wierd-Scanner-Mini-HOWTO.txt
 
     # Desired state of this facility: 1: Enable, 0: Disable
-    my ($enable) = @_;
+    my ($enable, $in) = @_;
     # Is saned running?
     my $sanedrunning = services::starts_on_boot("saned");
     # Is the "net" SANE backend active
