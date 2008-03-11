@@ -183,6 +183,25 @@ my $blacklisted = 0;
 
 my $config_file = '/etc/sysconfig/pulseaudio';
 
+sub is_user_switching_enabled() {
+    my $output = run_program::get_stdout('polkit-action', '--action',
+                                         'org.freedesktop.hal.device-access.sound');
+    my ($val) = $output =~ /default_inactive: (.*)/;
+    to_bool($val eq 'no');
+}
+
+sub set_user_switching {
+    my ($val) = @_;
+    if ($val) {
+        run_program::get_stdout('polkit-action', '--reset-defaults',
+                                'org.freedesktop.hal.device-access.sound');
+    } else {
+        run_program::get_stdout('polkit-action', '--set-defaults-inactive',
+                                'org.freedesktop.hal.device-access.sound', 'yes');
+    }
+}
+
+
 sub is_pulseaudio_enabled() {
     my %h = getVarsFromSh($config_file);
     $h{PULSE_SERVER_TYPE} eq 'personal';
@@ -256,12 +275,17 @@ sub switch {
         my %des = modules::category2modules_and_description('multimedia/sound');
         
         my $is_pulseaudio_enabled = is_pulseaudio_enabled();
+        my $is_user_switching = is_user_switching_enabled();
 
         my @common = (
             get_any_driver_entry($in, $modules_conf, $driver, $device),
             {
                 text => N("Enable PulseAudio"),
                 type => 'bool', val => \$is_pulseaudio_enabled,
+            },
+            {
+                text => N("Enable user switching for audio applications"),
+                type => 'bool', val => \$is_user_switching,
             },
         );
 
@@ -274,6 +298,7 @@ sub switch {
                           \@common,
                            )) {
                 set_pulseaudio($is_pulseaudio_enabled);
+                set_user_switching($is_user_switching);
             }
         } elsif ($in->ask_from_({ title => N("Sound configuration"),
                                   messages => 
@@ -315,6 +340,7 @@ To use alsa, one can either use:
                                 ]))
         {
             set_pulseaudio($is_pulseaudio_enabled);
+            set_user_switching($is_user_switching);
             return if $new_driver eq $device->{current_driver};
             log::explanations("switching audio driver from '" . $device->{current_driver} . "' to '$new_driver'\n");
             $in->ask_warn(N("Warning"), N("The old \"%s\" driver is blacklisted.\n
