@@ -210,7 +210,7 @@ sub install {
 
     my @options = ('--allow-medium-change', '--auto', '--no-verify-rpm', '--expect-install', @l);
     my $ret;
-    if (check_for_xserver() && -x '/usr/sbin/gurpmi') {
+    if (check_for_xserver() && -x '/usr/bin/gurpmi') {
         $ret = system('gurpmi', @options) == 0;
     } else {
         my $_wait = $do->in && $do->in->wait_message(N("Please wait"), N("Installing packages..."));
