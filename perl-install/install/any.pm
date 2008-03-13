@@ -940,6 +940,13 @@ sub generate_automatic_stage1_params {
 sub find_root_parts {
     my ($fstab, $prefix) = @_;
 
+    grep { $_->{release} =~ /\b(mandrake|mandriva|conectiva)\b/i } 
+      _find_root_parts($fstab, $prefix);
+}
+
+sub _find_root_parts {
+    my ($fstab, $prefix) = @_;
+
     if ($::local_install) {
 	my $f = common::release_file('/mnt') or return;
 	return common::parse_release_file('/mnt', $f, {});
