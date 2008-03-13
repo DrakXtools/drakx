@@ -111,7 +111,7 @@ sub raw {
     } else {
         if ($options->{setuid}) {
             require POSIX;
-            POSIX::setuid($options->{set_uid});
+            POSIX::setuid($options->{setuid});
         }
 
 	sub die_exit {
