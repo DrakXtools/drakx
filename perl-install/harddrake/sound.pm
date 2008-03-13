@@ -222,7 +222,7 @@ sub set_pulseaudio {
 
 
 my $alsa_routing_config_file = '/etc/alsa/pulse-default.conf';
-my $disabling_routing = '#-DRAKSOUND- ';
+my $disabling_routing = '#DRAKSOUND- ';
 
 sub is_pulseaudio_routing_enabled() {
     return -f $alsa_routing_config_file &&
