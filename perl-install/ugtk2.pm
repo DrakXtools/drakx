@@ -1590,12 +1590,11 @@ sub show {
                                             $self->process_next;
                                         }
                                     });
-    $self->{bubble}->set_timeout($self->{display});
-    Glib::Timeout->add($self->{display}, sub { 
-                           my $info = $self->{queue}[0];
-                           $info->{timeout}->() if $info->{timeout};
-                           $self->process_next;
-                           0 });
+    $self->{bubble}->signal_connect(closed => sub {
+                                        my $info = $self->{queue}[0];
+                                        $info->{timeout}->() if $info->{timeout};
+                                        $self->process_next;
+                                    });
     $self->{bubble}->show();
 }
 
