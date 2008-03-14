@@ -1593,7 +1593,7 @@ sub show {
                                         $info->{timeout}->() if $info->{timeout};
                                         $self->process_next;
                                     });
-    $notification->show;
+    eval { $notification->show };
 }
 
 1;
