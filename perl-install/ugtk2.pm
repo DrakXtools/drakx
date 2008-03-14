@@ -353,7 +353,7 @@ sub create_box_with_title {
     } else {
      my $new_label = sub {
          my ($txt) = @_;
-         ref($txt) ? $txt : gtknew('WrappedLabel', text_markup => $txt, width=> 490);
+         ref($txt) ? $txt : gtknew('WrappedLabel', text_markup => $txt, width => 490);
      };
 	    gtkpack__($box,
 		      if_($::isWizard, gtknew('Label', height => 10)),
@@ -1479,9 +1479,9 @@ sub calc_size {
     my ($width, $height) = $layout->get_pixel_size;
     my ($pwidth, $pheight) = pixbuf_size($cell);
     
-    return (0, 0,
+    return 0, 0,
             $width + $x_padding * 3 + $pwidth,
-            max($pheight, $height + $y_padding * 2));
+            max($pheight, $height + $y_padding * 2);
 }
 
 sub GET_SIZE {
@@ -1592,7 +1592,7 @@ sub show {
                                         $info->{timeout}->() if $info->{timeout};
                                         $self->process_next;
                                     });
-    $notification->show();
+    $notification->show;
 }
 
 1;
