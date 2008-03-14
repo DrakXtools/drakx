@@ -1563,7 +1563,7 @@ sub new {
 sub process_next {
     my ($self) = @_;
     shift @{$self->{queue}};
-    #- wait for some time so that the new bubble is noticeable
+    #- wait for some time so that the new notification is noticeable
     @{$self->{queue}} and Glib::Timeout->add($self->{delay}, sub { $self->show; 0 });
 }
 
