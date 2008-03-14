@@ -55,7 +55,8 @@ Do you want to install the SANE packages?"))) {
 		      N("Aborting Scannerdrake."));
 	exit 0;
     }
-    if (!$in->do_pkgs->install('sane-backends', 'scanner-gui')) {
+    # should be scanner-gui instead of xsane, but gurpmi2 does not handle provides
+    if (!$in->do_pkgs->install('sane-backends', 'xsane')) {
 	$in->ask_warn(N("Error"),
 		      N("Could not install the packages needed to set up a scanner with Scannerdrake.") . " " .
 		      N("Scannerdrake will not be started now."));
