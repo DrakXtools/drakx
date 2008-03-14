@@ -16,7 +16,9 @@ all: $(MOFILES)
 %.mo: %.po
 	msgfmt -o $@ $<
 
-merge: $(NAME).pot
+update_n_merge: $(NAME).pot merge
+
+merge:
 	for n in $(POFILES); do \
 	  echo "Merging $$n"; \
 	  msgmerge -C $$n $$n $(NAME).pot > "$$n"t ; \
