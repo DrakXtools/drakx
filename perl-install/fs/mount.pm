@@ -167,6 +167,8 @@ sub part {
 	    my $fs_type = $part->{fs_type};
 	    if ($fs_type eq 'auto' && $part->{media_type} eq 'cdrom' && $::isInstall) {
 		$fs_type = 'iso9660';
+	    } elsif ($fs_type eq 'ntfs-3g' && $::isInstall) {
+		$fs_type = 'ntfs';
 	    }
 	    mount($dev, $mntpoint, $fs_type, $b_rdonly, $options, $o_wait_message);
 
