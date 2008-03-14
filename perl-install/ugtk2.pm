@@ -1579,13 +1579,17 @@ sub show {
     my $info = $self->{queue}[0];
     $self->{bubble} = Gtk2::Notify->new_with_status_icon($info->{title}, $info->{message}, undef, $self->{statusicon});
     $self->{bubble}->set_icon_from_pixbuf($info->{pixbuf});
-    # FIXME: replace clicked for IFW:
-    $self->{bubble}->signal_connect(clicked => sub {
-                                        $self->{bubble}->hide;
-                                        #- has to call process_next when done
-                                        $info->{clicked}->();
-                                    }) if $info->{clicked};
+    foreach my $a (@{$info->{actions} || []}) {
+        $self->{bubble}->add_action(
+            $a->{action}, $a->{label},
+            sub {
+                $info->{processed} = 1;
+                #- $a->{callback} has to call $selft->process_next when done
+                $a->{callback}->();
+            });
+    }
     $self->{bubble}->signal_connect(closed => sub {
+                                        $info->{processed} and return;
                                         $info->{timeout}->() if $info->{timeout};
                                         $self->process_next;
                                     });
