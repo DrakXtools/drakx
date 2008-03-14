@@ -1575,7 +1575,7 @@ sub add {
 }
 
 sub show {
-    my ($self) = @_; # perl_checker: $self = Gtk2::NotificationBubble->new
+    my ($self) = @_; # perl_checker: $self = Gtk2::Notify->new
     my $info = $self->{queue}[0];
     $self->{bubble} = Gtk2::Notify->new_with_status_icon($info->{title}, $info->{message}, undef, $self->{statusicon});
     $self->{bubble}->set_icon_from_pixbuf($info->{pixbuf});
