@@ -48,7 +48,7 @@ sub read_rpmsrate_raw {
 	    my ($rate) = @$rates or die sprintf qq(missing rate for "%s" at line %d (flags are %s)\n), $data, $line_nb, join('&&', @m);
 	    foreach my $name (split ' ', $data) {
 		if (uc($name) eq $name) {
-		    log::l("$name is parsed as a package name, not as a flag");
+		    log::l("$line_nb: $name is parsed as a package name, not as a flag");
 		}
 		if (member('INSTALL', @$flags)) {
 		    push @need_to_copy, $name if !member('NOCOPY', @$flags);
