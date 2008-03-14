@@ -1591,7 +1591,7 @@ sub show {
                                         }
                                     });
     $self->{bubble}->set_timeout($self->{display});
-    Glib::Timeout->add($self->{delay}, sub { 
+    Glib::Timeout->add($self->{display}, sub { 
                            my $info = $self->{queue}[0];
                            $info->{timeout}->() if $info->{timeout};
                            $self->process_next;
