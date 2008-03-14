@@ -1578,6 +1578,7 @@ sub show {
     my $info = $self->{queue}[0];
     my $notification = Gtk2::Notify->new_with_status_icon($info->{title}, $info->{message}, undef, $self->{statusicon});
     $notification->set_icon_from_pixbuf($info->{pixbuf});
+    $notification->set_urgency($info->{urgency}) if $info->{urgency};
     foreach my $a (@{$info->{actions} || []}) {
         $notification->add_action(
             $a->{action}, $a->{label},
