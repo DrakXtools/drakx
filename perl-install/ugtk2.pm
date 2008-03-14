@@ -1544,7 +1544,7 @@ sub RENDER { # not that efficient...
 1;
 
 
-package Gtk2::NotificationBubble::Queue;
+package Gtk2::Notify::Queue;
 
 sub new {
     my ($class, $statusicon) = @_;
