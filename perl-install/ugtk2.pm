@@ -1552,7 +1552,6 @@ sub new {
     require Gtk2::Notify;
 
     my $self = bless {
-        bubble => Gtk2::Notify->new('', '', undef, undef),
         queue => [],
         statusicon => $statusicon,
         display => 5000,
@@ -1577,10 +1576,10 @@ sub add {
 sub show {
     my ($self) = @_; # perl_checker: $self = Gtk2::Notify->new
     my $info = $self->{queue}[0];
-    $self->{bubble} = Gtk2::Notify->new_with_status_icon($info->{title}, $info->{message}, undef, $self->{statusicon});
-    $self->{bubble}->set_icon_from_pixbuf($info->{pixbuf});
+    my $notification = Gtk2::Notify->new_with_status_icon($info->{title}, $info->{message}, undef, $self->{statusicon});
+    $notification->set_icon_from_pixbuf($info->{pixbuf});
     foreach my $a (@{$info->{actions} || []}) {
-        $self->{bubble}->add_action(
+        $notification->add_action(
             $a->{action}, $a->{label},
             sub {
                 $info->{processed} = 1;
@@ -1588,12 +1587,12 @@ sub show {
                 $a->{callback}->();
             });
     }
-    $self->{bubble}->signal_connect(closed => sub {
+    $notification->signal_connect(closed => sub {
                                         $info->{processed} and return;
                                         $info->{timeout}->() if $info->{timeout};
                                         $self->process_next;
                                     });
-    $self->{bubble}->show();
+    $notification->show();
 }
 
 1;
