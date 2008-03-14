@@ -1582,12 +1582,10 @@ sub show {
     # FIXME: replace clicked for IFW:
     $self->{bubble}->signal_connect(clicked => sub {
                                         $self->{bubble}->hide;
-                                        my $info = $self->{queue}[0];
                                         #- has to call process_next when done
                                         $info->{clicked}->();
-                                    }) if $self->{queue}[0]{clicked};
+                                    }) if $info->{clicked};
     $self->{bubble}->signal_connect(closed => sub {
-                                        my $info = $self->{queue}[0];
                                         $info->{timeout}->() if $info->{timeout};
                                         $self->process_next;
                                     });
