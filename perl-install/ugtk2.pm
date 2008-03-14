@@ -1547,31 +1547,17 @@ sub RENDER { # not that efficient...
 package Gtk2::NotificationBubble::Queue;
 
 sub new {
-    my ($class) = @_;
+    my ($class, $statusicon) = @_;
 
-    require Gtk2::NotificationBubble;
+    require Gtk2::Notify;
 
     my $self = bless {
-        bubble => Gtk2::NotificationBubble->new,
+        bubble => Gtk2::Notify->new('', '', undef, undef),
         queue => [],
+        statusicon => $statusicon,
         display => 5000,
         delay => 500,
     }, $class;
-    $self->{bubble}->signal_connect(timeout => sub {
-                                        my $info = $self->{queue}[0];
-                                        $info->{timeout}->() if $info->{timeout};
-                                        $self->process_next;
-                                    });
-    $self->{bubble}->signal_connect(clicked => sub {
-                                        $self->{bubble}->hide;
-                                        my $info = $self->{queue}[0];
-                                        if ($info->{clicked}) {
-                                            #- has to call process_next when done
-                                            $info->{clicked}->();
-                                        } else {
-                                            $self->process_next;
-                                        }
-                                    });
     $self;
 }
 
@@ -1591,8 +1577,26 @@ sub add {
 sub show {
     my ($self) = @_; # perl_checker: $self = Gtk2::NotificationBubble->new
     my $info = $self->{queue}[0];
-    $self->{bubble}->set($info->{title}, Gtk2::Image->new_from_pixbuf($info->{pixbuf}), $info->{message});
-    $self->{bubble}->show($self->{display});
+    $self->{bubble} = Gtk2::Notify->new_with_status_icon($info->{title}, $info->{message}, undef, $self->{statusicon});
+    $self->{bubble}->set_icon_from_pixbuf($info->{pixbuf});
+    # FIXME: replace clicked for IFW:
+    $self->{bubble}->signal_connect(clicked => sub {
+                                        $self->{bubble}->hide;
+                                        my $info = $self->{queue}[0];
+                                        if ($info->{clicked}) {
+                                            #- has to call process_next when done
+                                            $info->{clicked}->();
+                                        } else {
+                                            $self->process_next;
+                                        }
+                                    });
+    $self->{bubble}->set_timeout($self->{display});
+    Glib::Timeout->add($self->{delay}, sub { 
+                           my $info = $self->{queue}[0];
+                           $info->{timeout}->() if $info->{timeout};
+                           $self->process_next;
+                           0 });
+    $self->{bubble}->show();
 }
 
 1;
