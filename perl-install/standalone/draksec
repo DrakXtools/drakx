@@ -462,7 +462,7 @@ $oc->{buttons}{N("Help")}->set_sensitive(0);
 $oc->{cancel}->can_default(1);
 $oc->{cancel}->grab_default;
 
-$in->do_pkgs->ensure_is_installed('msec', '/usr/sbin/msec');
+exit(1) if !$in->do_pkgs->ensure_is_installed('msec', '/usr/sbin/msec');
 
 $w->main;
 ugtk2->exit(0);
