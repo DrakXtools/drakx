@@ -202,7 +202,9 @@ void probing_detect_devices()
 		struct pciusb_entry *e = &entries.entries[i];
 #ifndef DISABLE_PCIADAPTERS
 #ifndef DISABLE_MEDIAS
-		if (add_detected_device_if_match(e, medias_pci_modules, medias_pci_modules_len))
+		if (add_detected_device_if_match(e, medias_ide_pci_modules, medias_ide_pci_modules_len))
+			continue;
+		if (add_detected_device_if_match(e, medias_other_pci_modules, medias_other_pci_modules_len))
 			continue;
 #endif
 
@@ -328,7 +330,8 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 			if (already_probed_media_adapters)
 				break;
 			already_probed_media_adapters = 1;
-			probe_pci_modules(type, medias_pci_modules, medias_pci_modules_len);
+			probe_pci_modules(type, medias_ide_pci_modules, medias_ide_pci_modules_len);
+			probe_pci_modules(type, medias_other_pci_modules, medias_other_pci_modules_len);
 			break;
 #endif
 #ifndef DISABLE_NETWORK
