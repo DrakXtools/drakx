@@ -320,43 +320,34 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 
 	/* ---- PCI probe ---------------------------------------------- */
 	if (bus != BUS_USB) {
-		char **pci_modules;
-		unsigned int pci_modules_len = 0;
-
 		switch (type) {
 #ifndef DISABLE_PCIADAPTERS
 #ifndef DISABLE_MEDIAS
 			static int already_probed_media_adapters = 0;
 		case MEDIA_ADAPTERS:
 			if (already_probed_media_adapters)
-				goto end_pci_probe;
+				break;
 			already_probed_media_adapters = 1;
-			pci_modules = medias_pci_modules;
-			pci_modules_len   = medias_pci_modules_len;
+			probe_pci_modules(type, medias_pci_modules, medias_pci_modules_len);
 			break;
 #endif
 #ifndef DISABLE_NETWORK
 		case NETWORK_DEVICES:
-			pci_modules = network_pci_modules;
-			pci_modules_len   = network_pci_modules_len;
+			probe_pci_modules(type, network_pci_modules, network_pci_modules_len);
 			break;
 #endif
 #endif
 #ifdef ENABLE_USB
 		case USB_CONTROLLERS:
 			if (already_probed_usb_controllers || IS_NOAUTO)
-				goto end_pci_probe;
+				break;
 			already_probed_usb_controllers = 1;
-			pci_modules = usb_controller_modules;
-			pci_modules_len   = usb_controller_modules_len;
+			probe_pci_modules(type, usb_controller_modules, usb_controller_modules_len);
 			break;
 #endif
 		default:
-			goto end_pci_probe;
+			break;
 		}
-
-		probe_pci_modules(type, pci_modules, pci_modules_len);
-	end_pci_probe:;
 	}
 
 
