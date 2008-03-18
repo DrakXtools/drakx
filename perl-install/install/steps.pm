@@ -103,8 +103,6 @@ sub kill_action {}
 sub selectLanguage {
     my ($o) = @_;
 
-    #- for auto_install compatibility with old $o->{lang}
-    $o->{locale} = lang::system_locales_to_ourlocale($o->{lang}, $o->{lang}) if $o->{lang};
     $o->{locale}{langs} ||= { $o->{locale}{lang} => 1 };
 
     if (!exists $o->{locale}{country}) {

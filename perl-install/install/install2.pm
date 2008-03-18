@@ -333,8 +333,8 @@ sub main {
     map_each {
 	my ($n, $v) = @_;
 	my $f = ${{
-	    lang      => sub { $o->{locale}{lang} = $v },
-	    flang     => sub { $o->{locale}{lang} = $v; push @::auto_steps, 'selectLanguage' },
+	    lang      => sub { $o->{lang} = $v },
+	    flang     => sub { $o->{lang} = $v; push @::auto_steps, 'selectLanguage' },
 	    langs     => sub { $o->{locale}{langs} = +{ map { $_ => 1 } split(':', $v) } },
 	    method    => sub { $o->{method} = $v },
 	    pcmcia    => sub { $o->{pcmcia} = $v },
@@ -520,6 +520,11 @@ sub main {
 	mouse::load_modules($o->{mouse});
     }
 
+    #- for auto_install compatibility with old $o->{lang},
+    #- and also for --lang and --flang
+    if ($o->{lang}) {
+	put_in_hash($o->{locale}, lang::system_locales_to_ourlocale($o->{lang}, $o->{lang}));
+    }
     lang::set($o->{locale});
 
     # keep the result otherwise monitor-edid does not return good results afterwards
