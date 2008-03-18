@@ -1158,7 +1158,7 @@ sub write {
 
     my $file = $b_user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n';
     log::explanations(qq(Setting l10n configuration in "$file"));
-    setVarsInSh($::prefix . $file, $h);
+    setVarsInShMode($::prefix . $file, 0644, $h);
 
     configure_hal($locale) if !$b_user_only;
 
