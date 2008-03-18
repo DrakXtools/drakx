@@ -293,6 +293,22 @@ void discovered_device(enum driver_type type, const char * description, const ch
 #endif
 }
 
+void probe_pci_modules(enum driver_type type, char **pci_modules, unsigned int  pci_modules_len) {
+	struct pciusb_entries entries;
+	int i;
+
+	entries = pci_probe();
+	for (i = 0; i < entries.nb; i++) {
+		struct pciusb_entry *e = &entries.entries[i];
+		if (device_match_modules_list(e, pci_modules, pci_modules_len)) {
+			log_message("PCI: device %04x %04x %04x %04x is \"%s\", driver is %s",
+				    e->vendor, e->device, e->subvendor, e->subdevice, e->text, e->module);
+			discovered_device(type, e->text, e->module);
+		}
+	}
+	pciusb_free(&entries);
+}
+
 #ifdef ENABLE_USB
 void probe_that_type(enum driver_type type, enum media_bus bus)
 #else
@@ -304,10 +320,8 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 
 	/* ---- PCI probe ---------------------------------------------- */
 	if (bus != BUS_USB) {
-		struct pciusb_entries entries;
 		char **pci_modules;
 		unsigned int pci_modules_len = 0;
-		int i;
 
 		switch (type) {
 #ifndef DISABLE_PCIADAPTERS
@@ -341,16 +355,7 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 			goto end_pci_probe;
 		}
 
-		entries = pci_probe();
-		for (i = 0; i < entries.nb; i++) {
-			struct pciusb_entry *e = &entries.entries[i];
-			if (device_match_modules_list(e, pci_modules, pci_modules_len)) {
-				log_message("PCI: device %04x %04x %04x %04x is \"%s\", driver is %s",
-					    e->vendor, e->device, e->subvendor, e->subdevice, e->text, e->module);
-				discovered_device(type, e->text, e->module);
-			}
-		}
-		pciusb_free(&entries);
+		probe_pci_modules(type, pci_modules, pci_modules_len);
 	end_pci_probe:;
 	}
 
