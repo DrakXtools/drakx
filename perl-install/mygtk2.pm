@@ -767,6 +767,7 @@ sub _gtk_any_Paned {
     if (!$w) {
 	$w = "Gtk2::$class"->new;
 	$w->set_border_width(delete $opts->{border_width}) if exists $opts->{border_width};
+        $w->set_position(delete $opts->{position}) if exists $opts->{position};
     } elsif ($action eq 'gtkset') {
 	$_->destroy foreach $w->get_children;
     }
