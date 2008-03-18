@@ -43,8 +43,8 @@ sub parse_path {
     } elsif (-f $path) {
         foreach (cat_($path)) {
             if (my ($alias, $class, $module) = $_ =~ $alias_re) {
-                my ($vendor, $device) = alias_to_ids($alias);
                 if (member($class, @classes)) {
+                    my ($vendor, $device) = alias_to_ids($alias);
                     if ($vendor) {
                         $group->{$class} ||= {};
                         $group->{$class}{$vendor} ||= {};
