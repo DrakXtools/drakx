@@ -423,7 +423,7 @@ enum return_type ask_insmod(enum driver_type type)
 {
 	enum return_type results;
 	char * choice;
-	char * modules_dir = asprintf_("%s/kernel", modules_directory);
+	char * modules_dir = asprintf_("%s", modules_directory);
 	char ** dlist = list_directory(modules_dir);
 	char ** modules = alloca(sizeof(char *) * (string_array_length(dlist) + 1));
 	char ** descrs = alloca(sizeof(char *) * (string_array_length(dlist) + 1));
