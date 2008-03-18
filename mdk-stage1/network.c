@@ -853,7 +853,7 @@ static int choose_mirror_from_host_list(mirrorlist_t mirrorlist, char **selected
 static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port, const char *protocol, char **selected_host, char **filepath)
 {
 	enum return_type results;
-	char *versions[] = { "Specify the mirror manually", DISTRIB_VERSION, "cooker", NULL };
+	char *versions[] = { "Specify the mirror manually", DISTRIB_VERSION, NULL };
 	char *version = DISTRIB_VERSION;
 
 	do {
