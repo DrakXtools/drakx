@@ -736,6 +736,7 @@ sub ask_user_and_root {
 
     $options{needauser} ||= $security >= 3;
 
+    my @icons = facesnames();
     my @suggested_names = $::isInstall ? do {
 	my @l = grep { !/^\./ && $_ ne 'lost+found' && -d "$::prefix/home/$_" } all("$::prefix/home");
 	grep { ! defined getpwnam($_) } @l;
@@ -797,6 +798,9 @@ sub ask_user_and_root {
           { label => N("Shell"), val => \$u->{shell}, list => [ shells() ], advanced => 1 },
 	  { label => N("User ID"), val => \$u->{uid}, advanced => 1, validate => sub { $validate_uid_gid->('uid') } },
 	  { label => N("Group ID"), val => \$u->{gid}, advanced => 1, validate => sub { $validate_uid_gid->('gid') } },
+           if_($security <= 3 && !$options{noicons} && @icons,
+	  { label => N("Icon"), val => \ ($u->{icon} ||= 'default'), list => \@icons, icon2f => \&face2png, format => \&translate },
+           ),
 	    if_($security > 3,
                 map {
                     { label => $_, val => \$groups{$_}, text => $high_security_groups{$_}, type => 'bool' };
