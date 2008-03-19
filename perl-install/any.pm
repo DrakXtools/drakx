@@ -307,14 +307,10 @@ sub setupBootloader__boot_bios_drive {
 	#- some bios mapping already there
 	return 1;
     } elsif (bootloader::mixed_kind_of_disks($hds) && $b->{boot} =~ /\d$/) { #- on a partition
-	_ask_boot_bios_drive($in, $b, $hds);
+	# see below
     } else {
-	1;
+	return 1;
     }
-}
-
-sub _ask_boot_bios_drive {
-    my ($in, $b, $hds) = @_;
 
     log::l("_ask_boot_bios_drive");
     my $hd = $in->ask_from_listf('', N("You decided to install the bootloader on a partition.
