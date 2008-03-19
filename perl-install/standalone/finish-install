@@ -58,7 +58,11 @@ sub ask_timezone() {
     require timezone;
     my $t = timezone::read();
     $t->{timezone} = timezone::bestTimezone($locale->{country}) if $locale->{country};
-    any::configure_timezone($in, $t, 'ask_gmt');
+    if (lc($conf{TIMEZONE}) eq 'simplified') {
+       any::configure_time_more($in, $t, 'hide_ntp');
+    } else {
+       any::configure_timezone($in, $t, 'ask_gmt');
+    }
     timezone::write($t);
     #- reload sys clock from hc once we know the real timezone
     timezone::reload_sys_clock($t);
