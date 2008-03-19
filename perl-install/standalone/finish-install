@@ -68,6 +68,7 @@ sub ask_network() {
     my $modules_conf = modules::any_conf->read;
     require network::netconnect;
     network::netconnect::real_main($net, $in, $modules_conf);
+    $modules_conf->write;
 }
 
 sub ask_authentication() {
