@@ -302,12 +302,21 @@ sub setupBootloader_simple {
 sub setupBootloader__boot_bios_drive {
     my ($in, $b, $hds) = @_;
 
-    bootloader::mixed_kind_of_disks($hds) && 
-      $b->{boot} =~ /\d$/ && #- on a partition
-	is_empty_hash_ref($b->{bios}) && #- some bios mapping already there
-	  arch() !~ /ppc/ or return 1;
+    if (arch() =~ /ppc/ ||
+	  !is_empty_hash_ref($b->{bios})) {
+	#- some bios mapping already there
+	return 1;
+    } elsif (bootloader::mixed_kind_of_disks($hds) && $b->{boot} =~ /\d$/) { #- on a partition
+	_ask_boot_bios_drive($in, $b, $hds);
+    } else {
+	1;
+    }
+}
 
-    log::l("mixed_kind_of_disks");
+sub _ask_boot_bios_drive {
+    my ($in, $b, $hds) = @_;
+
+    log::l("_ask_boot_bios_drive");
     my $hd = $in->ask_from_listf('', N("You decided to install the bootloader on a partition.
 This implies you already have a bootloader on the hard drive you boot (eg: System Commander).
 
