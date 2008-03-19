@@ -597,7 +597,7 @@ You can create additional entries or change the existing ones."), [ {
 
 sub get_autologin() {
     my %desktop = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
-    my $gdm_file= "$::prefix/etc/X11/gdm/custom.conf";
+    my $gdm_file = "$::prefix/etc/X11/gdm/custom.conf";
     my $kdm_file = "$::prefix/etc/kde/kdm/kdmrc";
     my $desktop = $desktop{DESKTOP} || (! -e $kdm_file && -e $gdm_file ? 'GNOME' : 'KDE');
     my $autologin = do {
