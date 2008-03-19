@@ -1335,7 +1335,8 @@ sub configure_timezone {
     my ($in, $timezone, $ask_gmt) = @_;
 
     require timezone;
-    $timezone->{timezone} = $in->ask_from_treelist(N("Timezone"), N("Which is your timezone?"), '/', [ timezone::getTimeZones() ], $timezone->{timezone}) or return;
+    my $selected_timezone = $in->ask_from_treelist(N("Timezone"), N("Which is your timezone?"), '/', [ timezone::getTimeZones() ], $timezone->{timezone}) or return;
+    $timezone->{timezone} = $selected_timezone;
 
     my $ntp = to_bool($timezone->{ntp});
     my $servers = timezone::ntp_servers();
