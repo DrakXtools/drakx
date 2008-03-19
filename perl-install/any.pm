@@ -1343,14 +1343,14 @@ sub configure_timezone {
     my $selected_timezone = $in->ask_from_treelist(N("Timezone"), N("Which is your timezone?"), '/', [ timezone::getTimeZones() ], $timezone->{timezone}) or return;
     $timezone->{timezone} = $selected_timezone;
 
-    configure_time_more($in, $timezone)
+    configure_time_more($in, $timezone, undef)
 	or goto &configure_timezone if $ask_gmt || to_bool($timezone->{ntp});
 
     1;
 }
 
 sub configure_time_more {
-    my ($in, $timezone) = @_;
+    my ($in, $timezone, $o_hide_ntp) = @_;
 
     my $ntp = to_bool($timezone->{ntp});
     my $servers = timezone::ntp_servers();
@@ -1372,9 +1372,10 @@ sub configure_time_more {
                   N("%s (hardware clock set to UTC)", POSIX::strftime($time_format, localtime())) :
                   N("%s (hardware clock set to local time)", POSIX::strftime($time_format, gmtime()));
             } },
-          { label => N("NTP Server"), title => 1 },
-	  { text => N("Automatic time synchronization (using NTP)"), val => \$ntp, type => 'bool' },
-          { val => \$timezone->{ntp}, disabled => sub { !$ntp },
+          { label => N("NTP Server"), title => 1, advanced => $o_hide_ntp },
+          { text => N("Automatic time synchronization (using NTP)"), val => \$ntp, type => 'bool',
+            advanced => $o_hide_ntp },
+          { val => \$timezone->{ntp}, disabled => sub { !$ntp }, advanced => $o_hide_ntp,
             type => "list", separator => '|',
             list => [ keys %$servers ], format => sub { $servers->{$_[0]} } },
     ]) or return;
