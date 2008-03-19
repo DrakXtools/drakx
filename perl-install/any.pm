@@ -1343,6 +1343,15 @@ sub configure_timezone {
     my $selected_timezone = $in->ask_from_treelist(N("Timezone"), N("Which is your timezone?"), '/', [ timezone::getTimeZones() ], $timezone->{timezone}) or return;
     $timezone->{timezone} = $selected_timezone;
 
+    configure_time_more($in, $timezone)
+	or goto &configure_timezone if $ask_gmt || to_bool($timezone->{ntp});
+
+    1;
+}
+
+sub configure_time_more {
+    my ($in, $timezone) = @_;
+
     my $ntp = to_bool($timezone->{ntp});
     my $servers = timezone::ntp_servers();
     $timezone->{ntp} ||= 'pool.ntp.org';
@@ -1368,7 +1377,7 @@ sub configure_timezone {
           { val => \$timezone->{ntp}, disabled => sub { !$ntp },
             type => "list", separator => '|',
             list => [ keys %$servers ], format => sub { $servers->{$_[0]} } },
-    ]) or goto &configure_timezone if $ask_gmt || $ntp;
+    ]) or return;
 
     $timezone->{ntp} = '' if !$ntp;
 
