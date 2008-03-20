@@ -462,7 +462,7 @@ sub allow_copy_rpms_on_disk {
     my $totalsize = sum(map { $_->{size} } @$hdlists) || -1; #- don't check size, total medium size unknown
 
     if ($totalsize >= 0) {
-	my $availvar = install::any::getAvailableSpace_mounted("$::prefix/var");
+	my $availvar = fs::any::getAvailableSpace_mounted("$::prefix/var");
 	$availvar /= 1024 * 1024; #- Mo
 	log::l("totalsize=$totalsize, avail on $::prefix/var=$availvar");
 	$totalsize < $availvar * 0.6;

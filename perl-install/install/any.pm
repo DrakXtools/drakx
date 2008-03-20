@@ -84,37 +84,7 @@ cant_spawn:
 
 sub getAvailableSpace {
     my ($o) = @_;
-
-    #- make sure of this place to be available for installation, this could help a lot.
-    #- currently doing a very small install use 36Mb of postinstall-rpm, but installing
-    #- these packages may eat up to 90Mb (of course not all the server may be installed!).
-    #- 65mb may be a good choice to avoid almost all problem of insuficient space left...
-    my $minAvailableSize = 65 * sqr(1024);
-
-    my $n = !$::testing && getAvailableSpace_mounted($::prefix) || 
-            getAvailableSpace_raw($o->{fstab}) * 512 / 1.07;
-    $n - max(0.1 * $n, $minAvailableSize);
-}
-
-sub getAvailableSpace_mounted {
-    my ($prefix) = @_;
-    my $dir = -d "$prefix/usr" ? "$prefix/usr" : $prefix;
-    my (undef, $free) = MDK::Common::System::df($dir) or return;
-    log::l("getAvailableSpace_mounted $free KB");
-    $free * 1024 || 1;
-}
-sub getAvailableSpace_raw {
-    my ($fstab) = @_;
-
-    do { $_->{mntpoint} eq '/usr' and return $_->{size} } foreach @$fstab;
-    do { $_->{mntpoint} eq '/'    and return $_->{size} } foreach @$fstab;
-
-    if ($::testing) {
-	my $nb = 450;
-	log::l("taking ${nb}MB for testing");
-	return MB($nb);
-    }
-    die "missing root partition";
+    fs::any::getAvailableSpace($o->{fstab});
 }
 
 sub preConfigureTimezone {
