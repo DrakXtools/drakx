@@ -96,6 +96,8 @@ sub part_raw {
         push @options, '-l', "Untitled";
     } elsif (isAppleBootstrap($part)) {
 	push @options, '-l', 'bootstrap';
+    } elsif ($fs_type eq 'swap') {
+	push @options, '-U', $part->{device_UUID} if $part->{device_UUID};
     }
 
     if ($part->{device_LABEL}) {
