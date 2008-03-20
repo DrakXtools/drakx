@@ -8,7 +8,7 @@ use MDK::Common;
 my %t = ( 
     network => 'network/main|gigabit|tokenring|wireless|pcmcia',
     medias_ide  => 'disk/ide',
-    medias_other => 'disk/scsi|hardware_raid|sata',
+    medias_other => 'disk/scsi|hardware_raid|sata bus/firewire',
 );
 
 foreach my $type (keys %t) {
