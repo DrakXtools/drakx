@@ -34,7 +34,6 @@
 #                 - Get fonts on any partitions.
 #                 - UN-installation of any fonts (even if not installed through drakfont)
 #         - Support
-#               - Xfs
 #               - ghostscript & printer
 #               - Staroffice & printer
 #               - abiword
@@ -148,7 +147,6 @@ foreach my $i (@application) {
 }
 
 # PATH and binary full path
-#my $xfs_conffile = '/etc/fonts/fonts.conf';
 my $font_dir = '/usr/share/fonts';
 my $fontpathd_dir = '/etc/X11/fontpath.d/';
 my $drakfont_dir = "$font_dir/drakfont";
@@ -380,10 +378,6 @@ sub put_font_dir() {
         interactive_progress($pbar2, 1, N("done"));
         interactive_progress($pbar3, 0.25, N("Suppress Temporary Files"));
         my_rm_rf("$drakfont_dir/tmp/");
-        print "\n\nretarting xfs......\n";
-        interactive_progress($pbar3, 0.5, N("Restart XFS"));
-        system($update_chkfontpath);
-        system('/etc/rc.d/init.d/xfs restart');
         system('xset fp rehash');
         interactive_progress($pbar3, 0.30, N("done"));
     }
@@ -439,8 +433,6 @@ sub remove_fonts() {
         }
         interactive_progress($pbar2, 1 / @list_dir, N("Suppress Fonts Files"));
     }
-    interactive_progress($pbar2, 0.01, N("Restart XFS"));
-    system("/etc/rc.d/init.d/xfs restart");
     system('xset fp rehash');
     -e "/usr/share/ghostscript" and my_rm_rf("$drakfont_dir/remove") if !$::testing;
     interactive_progress($pbar2, 0.01, N("done"));
