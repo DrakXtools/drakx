@@ -542,7 +542,7 @@ static enum return_type configure_network(struct interface_info * intf)
 		    answers[1] = strdup(dhcp_domain);
 		}
 
-		if (!dhcp_hostname || !dhcp_hostname) {
+		if (!dhcp_hostname || !dhcp_domain) {
 		    results = ask_from_entries_auto("I could not guess hostname and domain name; please fill in this information. "
 						    "Valid answers are for example: `mybox' for hostname and `mynetwork.com' for "
 						    "domain name, for a machine called `mybox.mynetwork.com' on the Internet.",
