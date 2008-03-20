@@ -26,6 +26,11 @@ network::network::read_net_conf($net);
 $::isWizard = 1;
 my $in = 'interactive'->vnew;
 
+sub get_conf {
+	my ($name) = @_;
+	$conf{lc($name)} || $conf{uc($name)};
+}
+
 sub ask_license() {
     local $::isWizard = 0;
     any::acceptLicense($in);
@@ -58,7 +63,7 @@ sub ask_timezone() {
     require timezone;
     my $t = timezone::read();
     $t->{timezone} = timezone::bestTimezone($locale->{country}) if $locale->{country};
-    if (lc($conf{TIMEZONE}) eq 'simplified') {
+    if (lc(get_conf('TIMEZONE')) eq 'simplified') {
        any::configure_time_more($in, $t, 'hide_ntp');
     } else {
        any::configure_timezone($in, $t, 'ask_gmt');
@@ -97,14 +102,14 @@ sub ask_authentication() {
 sub ask_users() {
     my $users = []; 
     any::ask_user($in, $users, $security);
-    my $old_user = $conf{USER_RENAME_FROM};
+    my $old_user = get_conf('USER_RENAME_FROM');
     my $old_autologin;
     if (@$users && $old_user) {
       $users->[0]{rename_from} = $old_user;
       $users->[0]{home} ||= '/home/' . $users->[0]{name};
     }
     my $autologin = any::get_autologin();
-    $autologin_first = ($autologin->{autologin} eq $old_user || $conf{USER_AUTOLOGIN_FIRST} eq "yes") && $autologin->{desktop};
+    $autologin_first = ($autologin->{autologin} eq $old_user || get_conf('USER_AUTOLOGIN_FIRST') eq "yes") && $autologin->{desktop};
     any::add_users($users, $authentication);
     any::set_autologin($in->do_pkgs, $users->[0]{name}, $autologin_first)
 	if $autologin_first;
@@ -119,7 +124,7 @@ sub ask_glx() {
 }
 
 sub ask_encrypt_home() {
-    my $user = { name => $conf{ENCRYPT_HOME_USER}, device => $conf{ENCRYPT_HOME_DEVICE} };
+    my $user = { name => get_conf('ENCRYPT_HOME_USER'), device => get_conf('ENCRYPT_HOME_DEVICE') };
     any { !defined $_ } values %$user and return;
     $in->ask_from(N("Encrypted home partition"), N("Please enter a password for the %s user", $user->{name}),
                   [
@@ -181,7 +186,7 @@ sub encrypt_home {
 sub call {
     my ($step_name) = @_;
     my $f_name = 'ask_' . $step_name;
-    if (member('no', map { lc($conf{$_}) } lc($step_name), uc($step_name))) {
+    if (lc(get_conf($step_name)) eq 'no') {
         log::l("ignoring $f_name");
     } else {
         log::l("calling $f_name");
