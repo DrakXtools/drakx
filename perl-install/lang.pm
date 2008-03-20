@@ -1209,6 +1209,14 @@ sub write {
 	}
 
     } if !$b_dont_touch_kde_files;
+
+    #- update alternatives for OpenOffice/BrOffice if present
+    foreach my $name (grep { /^oobr_bootstraprc/ } all("$::prefix/var/lib/alternatives/")) {
+        my $alternative  = common::get_alternatives($name) or next;
+        my $wanted = $locale->{lang} eq 'pt_BR' ? 'bootstraprc.bro' : 'bootstraprc.ooo';
+        my $path = find { basename($_) eq $wanted } map { $_->{file} } @{$alternative->{alternatives}};
+        common::symlinkf_update_alternatives($name, $path) if $path;
+    }
 }
 
 sub configure_hal {
