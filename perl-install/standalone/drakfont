@@ -323,7 +323,8 @@ sub put_font_dir_real {
     my ($subdir, $command, $progress, $title) = @_;
     system("cd $drakfont_dir/$subdir && $fccache && $command");
     interactive_progress($pbar2, $progress, $title);
-    return "$chkfontpath -a $drakfont_dir/$subdir; rm -f $font_dir/fonts.cache-1";
+    symlinkf("$drakfont_dir/$subdir", "/etc/X11/fontpath.d/drakfont_$subdir");
+    system("rm -f $font_dir/fonts.cache-1");
 }
 
 sub put_font_dir() {
@@ -344,7 +345,7 @@ sub put_font_dir() {
         }
         system('cd ' . $temp_dir . ' && cp *.ttf ../../ttf; chmod 644 ../../ttf/*ttf') if glob("$temp_dir/*.ttf");
         interactive_progress($pbar2, 0.20, N("please wait during ttmkfdir..."));
-        my $update_chkfontpath = put_font_dir_real("ttf", "$ttmkfdir -u > fonts.dir", 0.10, N("True Type install done"));
+        put_font_dir_real("ttf", "$ttmkfdir -u > fonts.dir", 0.10, N("True Type install done"));
 
         if ($gs) {
             convert_ttf_fonts([ glob("$drakfont_dir/tmp/tmp/*.ttf") ], 1);
@@ -359,20 +360,20 @@ sub put_font_dir() {
                 system("cd $drakfont_dir/tmp/Type1 && cat Fontmap >> `rpm -ql ghostscript-common | grep Fontmap.GS` ");
                 move_fonts("$drakfont_dir/tmp/Type1", "../../Type1", qw(afm gsf pfb pfm));
             }
-            $update_chkfontpath .= "; " . put_font_dir_real("Type1", $type1inst, 0.05, N("Ghostscript referencing"));
+            put_font_dir_real("Type1", $type1inst, 0.05, N("Ghostscript referencing"));
         } elsif ($so) {
             convert_ttf_fonts([ glob("$drakfont_dir/tmp/tmp/*.ttf") ]);
             convert_fonts([ glob("$drakfont_dir/tmp/tmp/*.pfm") ], $pfm2afm, "PFM");
             move_fonts("$drakfont_dir/tmp/tmp", "../Type1", qw(afm));
             move_fonts("$drakfont_dir/tmp/Type1", "../../Type1", qw(afm));
-            $update_chkfontpath .= put_font_dir_real("Type1", $type1inst, 0.14, N("type1inst building"));
+            put_font_dir_real("Type1", $type1inst, 0.14, N("type1inst building"));
         }
 
         foreach my $subdir (qw(otf ttc)) {
             my $dir = "$drakfont_dir/$subdir";
             move_fonts("$drakfont_dir/tmp/tmp", "../../$subdir", $subdir);
             run_program::run($_, $dir) foreach qw(mkfontscale mkfontdir), $fccache;
-            run_program::run($chkfontpath, '-a', $dir);
+            symlinkf($dir, '/etc/X11/fontpath.d/drakfont_' . basename ($dir));
         }
 
         interactive_progress($pbar2, 1, N("done"));
@@ -426,11 +427,7 @@ sub remove_fonts() {
     interactive_progress($pbar1, 0.01, N("done"));
     -e "/usr/share/ghostscript" and remove_gs_fonts();
     foreach my $i (@list_dir) {
-        if (listlength all($i) < 3) {
-            system("chkfontpath -r $i") or print "PERL::system command failed during chkfontpath\n";
-        } else {
-            system("cd $i && type1inst") or print "PERL::system command failed during cd or type1inst\n";
-        }
+        system("cd $i && type1inst") or print "PERL::system command failed during cd or type1inst\n";
         interactive_progress($pbar2, 1 / @list_dir, N("Suppress Fonts Files"));
     }
     system('xset fp rehash');
@@ -444,7 +441,6 @@ sub license_msg() {
 
 sub backend_mod() {
     $xlsfonts and system("xlsfonts");
-    $list_all_font_path and system($chkfontpath);
 
     if ($windows) {
         print license_msg();
