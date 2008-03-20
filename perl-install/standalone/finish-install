@@ -101,6 +101,8 @@ sub ask_authentication() {
 }
 
 #- USERS=with_root: asks both root and user accounts
+#- USER_RENAME_FROM=<old user>: create the new user by renaming <old user>
+#- USER_AUTOLOGIN_FIRST: configure autologin for the first added user
 sub ask_users() {
     my $users = []; 
     my $ask_root = to_bool(lc(get_conf('USERS')) eq 'with_root');
