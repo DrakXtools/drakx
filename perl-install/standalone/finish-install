@@ -109,7 +109,7 @@ sub ask_users() {
       $users->[0]{home} ||= '/home/' . $users->[0]{name};
     }
     my $autologin = any::get_autologin();
-    $autologin_first = ($autologin->{autologin} eq $old_user || get_conf('USER_AUTOLOGIN_FIRST') eq "yes") && $autologin->{desktop};
+    $autologin_first = ($autologin->{autologin} eq $old_user || lc(get_conf('USER_AUTOLOGIN_FIRST')) eq "yes") && $autologin->{desktop};
     any::add_users($users, $authentication);
     any::set_autologin($in->do_pkgs, $users->[0]{name}, $autologin_first)
 	if $autologin_first;
