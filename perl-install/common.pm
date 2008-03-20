@@ -409,7 +409,7 @@ sub load_modules_from_base {
 sub get_alternatives {
     my ($name) = @_;
 
-    my $dir = '/var/lib/rpm/alternatives';
+    my $dir = $::prefix . '/var/lib/rpm/alternatives';
     my ($state, $main_link, @l) = chomp_(cat_("$dir/$name")) or return;
     my @slaves;
     while (@l && $l[0] ne '') {
