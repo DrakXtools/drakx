@@ -279,7 +279,13 @@ sub main {
 		  [ { val => \$sol, list => \@solutions, format => sub { $_[0][1] }, type => 'list' } ]);
     log::l("partitionWizard calling solution $sol->[1]");
     my $ok = eval { $sol->[2]->() };
-    $@ and $o->ask_warn('', N("Partitioning failed: %s", formatError($@)));
+    if (my $err = $@) {
+        if ($err =~ /wizcancel/) {
+            $_->destroy foreach $::WizardTable->get_children;
+        } else {
+            $o->ask_warn('', N("Partitioning failed: %s", formatError($err)));
+        }
+    }
     $ok or goto &main;
     1;
 }
