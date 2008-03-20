@@ -1111,6 +1111,7 @@ sub report_bug {
       header("partitions"), cat_("/proc/partitions"),
       header("cpuinfo"), cat_("/proc/cpuinfo"),
       header("syslog"), cat_("/tmp/syslog") || cat_("$::prefix/var/log/syslog"),
+      header("Xorg.log"), cat_("/var/log/Xorg.0.log"),
       header("monitor_full_edid"), monitor_full_edid(),
       header("stage1.log"), cat_("/tmp/stage1.log") || cat_("$::prefix/root/drakx/stage1.log"),
       header("ddebug.log"), cat_("/tmp/ddebug.log") || cat_("$::prefix/root/drakx/ddebug.log"),
