@@ -282,13 +282,10 @@ sub setupBootloader_simple {
     my $hds = $all_hds->{hds};
 
     require bootloader;
-    my $mixed_kind_of_disks = bootloader::mixed_kind_of_disks($hds);
-    #- full expert questions when there is 2 kind of disks
-    #- it would need a semi_auto asking on which drive the bios boots...
-
-    $mixed_kind_of_disks || $b->{bootUnsafe} || arch() =~ /ppc/ or return 1; #- default is good enough
+    bootloader::ensafe_first_bios_drive($hds)
+	|| $b->{bootUnsafe} || arch() =~ /ppc/ or return 1; #- default is good enough
     
-    if (!$mixed_kind_of_disks && arch() !~ /ia64/) {
+    if (arch() !~ /ia64/) {
 	setupBootloader__mbr_or_not($in, $b, $hds, $fstab) or return 0;
     } else {
       general:
@@ -336,7 +333,11 @@ sub setupBootloader__mbr_or_not {
 	my $floppy = detect_devices::floppy();
 
 	my @l = (
+	    bootloader::ensafe_first_bios_drive($hds) ?
+	         (map { [ N("First sector (MBR) of drive %s", partition_table::description($_)) => '/dev/' . $_->{device} ] } @$hds)
+	      :
 		 [ N("First sector of drive (MBR)") => '/dev/' . $hds->[0]{device} ],
+	    
 		 [ N("First sector of the root partition") => '/dev/' . fs::get::root($fstab, 'boot')->{device} ],
 		     if_($floppy, 
                  [ N("On Floppy") => "/dev/$floppy" ],

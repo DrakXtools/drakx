@@ -1448,9 +1448,18 @@ sub hd2bios_kind {
     lc(join('_', $hd->{bus}, $hd->{host}));
 }
 
+sub ensafe_first_bios_drive {
+    my ($hds) = @_;
+    mixed_kind_of_disks($hds) || @$hds > 1 && _not_first_bios_drive($hds->[0]);
+}
 sub mixed_kind_of_disks {
     my ($hds) = @_;
     (uniq_ { hd2bios_kind($_) } @$hds) > 1;
+}
+sub _not_first_bios_drive {
+    my ($hd) = @_;
+    my $bios = $hd && $hd->{bios_from_edd};
+    $bios && $bios ne '80';
 }
 
 sub sort_hds_according_to_bios {
