@@ -59,6 +59,7 @@ sub ask_keyboard() {
     keyboard::configure_and_set_standalone($keyboard);
 }
 
+#- TIMEZONE=simplified: do not ask timezone and make ntp settings advanced
 sub ask_timezone() {
     require timezone;
     my $t = timezone::read();
