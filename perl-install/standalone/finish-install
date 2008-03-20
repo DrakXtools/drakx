@@ -99,9 +99,11 @@ sub ask_authentication() {
     }
 }
 
+#- USERS=with_root: asks both root and user accounts
 sub ask_users() {
     my $users = []; 
-    any::ask_user($in, $users, $security);
+    my $ask_root = to_bool(lc(get_conf('USERS')) eq 'with_root');
+    any::ask_user_and_root($in, $ask_root, $users, $security);
     my $old_user = get_conf('USER_RENAME_FROM');
     my $old_autologin;
     if (@$users && $old_user) {
