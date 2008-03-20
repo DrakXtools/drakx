@@ -105,7 +105,7 @@ sub prepare_minimal_root {
 }
 
 sub getAvailableSpace {
-    my ($fstab) = @_;
+    my ($fstab, $o_skip_mounted) = @_;
 
     #- make sure of this place to be available for installation, this could help a lot.
     #- currently doing a very small install use 36Mb of postinstall-rpm, but installing
@@ -113,7 +113,7 @@ sub getAvailableSpace {
     #- 65mb may be a good choice to avoid almost all problem of insuficient space left...
     my $minAvailableSize = 65 * sqr(1024);
 
-    my $n = !$::testing && getAvailableSpace_mounted($::prefix) || 
+    my $n = !$::testing && !$o_skip_mounted && getAvailableSpace_mounted($::prefix) || 
             getAvailableSpace_raw($fstab) * 512 / 1.07;
     $n - max(0.1 * $n, $minAvailableSize);
 }
