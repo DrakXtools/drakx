@@ -441,7 +441,7 @@ sub trouble {
                                N("The classic bug sound tester is to run the following commands:
 
 
-- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card uses
+- \"lspcidrake -v | fgrep -i AUDIO\" will tell you which driver your card uses
 by default
 
 - \"grep sound-slot /etc/modprobe.conf\" will tell you what driver it
