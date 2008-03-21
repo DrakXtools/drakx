@@ -1,0 +1,16 @@
+#!/usr/bin/perl
+use lib qw(/usr/lib/libDrakX);
+use standalone;
+use interactive;
+use common;
+
+$::isStandalone = 0;
+my $in = 'interactive'->vnew;
+my $driver = eval {
+    require Xconfig::xfree;
+    $raw_X = Xconfig::xfree->read;
+    $raw_X->get_Driver;
+} || N("unknown");
+
+$in->ask_warn(N("Warning"), N("The proprietary driver for your graphic card can not be found, the system is now using the free software driver (%s).", $driver));
+unlink $0 if $0 =~ m!/etc/X11/xsetup.d/!;

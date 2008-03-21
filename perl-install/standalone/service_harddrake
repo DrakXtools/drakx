@@ -75,6 +75,7 @@ foreach my $card (@cards) {
         substInFile { $new_driver = $1 if s!Driver "($card->{xorg_driver_regexp})"!Driver "$driver"!g } '/etc/X11/xorg.conf';
         if ($new_driver) {
             log::explanations("switch X.org driver from $new_driver to $driver");
+            touch('/var/run/harddrake-notify-x11-free-driver-switch');
             Xconfig::card::libgl_config_and_more({ Driver => $driver });
         }
     }
