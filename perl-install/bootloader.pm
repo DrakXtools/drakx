@@ -1526,10 +1526,16 @@ sub write_grub_device_map {
 	   (map_index { "(hd$::i) /dev/$_->{device}\n" } @$sorted_hds));
 }
 
-sub grub2dev_and_file {
-    my ($grub_file, $grub2dev, $o_block_device) = @_;
+sub parse_grub_file {
+    my ($grub_file) = @_;
     my ($grub_dev, $rel_file) = $grub_file =~ m!\((.*?)\)/?(.*)! or return;
     my ($hd, $part) = split(',', $grub_dev);
+    ($hd, $part, $rel_file);
+}
+
+sub grub2dev_and_file {
+    my ($grub_file, $grub2dev, $o_block_device) = @_;
+    my ($hd, $part, $rel_file) = parse_grub_file($grub_file) or return;
     $grub2dev->{$hd} or internal_error("$hd has no mapping in device.map (when translating $grub_file)");
     $part = $o_block_device ? '' : defined $part && $part + 1; #- grub wants "(hdX,Y)" where lilo just want "hdY+1"
     my $device = '/dev/' . $grub2dev->{$hd} . $part;
