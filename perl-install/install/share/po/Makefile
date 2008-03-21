@@ -1,6 +1,6 @@
 NAME = DrakX
 LOCALEDIR = ${prefix}/share/locale
-PMSFILES = *.pm share/meta-task/compssUsers.pl*
+PMSFILES = *.pm share/meta-task/compssUsers.pl*  $(realpath  $(wildcard ../../../../advertising/*.pl) )
 PMSFILES_HERE = $(wildcard $(PMSFILES:%=../../%))
 
 MAIN_PO_FILES = ../../../share/po/libDrakX.pot
