@@ -31,12 +31,13 @@ $::isStandalone = 1; #- not using standalone.pm which generates too many logs fo
 
 log::l("drakupdate_fstab called with @ARGV\n");
 
-my ($debug, $removed);
+my ($debug, $verbose, $removed);
 
 my %args = (
             '--auto' => \$::auto,
             '--debug' => \$debug,
             '--test' => \$::testing,
+            '--verbose' => \$verbose,
            );
 
 each_index {
@@ -50,7 +51,7 @@ each_index {
 my ($raw_action, $device_name) = @ARGV;
 my ($action) = $raw_action =~ /^--(add|del)/;
 
-@ARGV == 2 && $action or die "usage: drakupdate_fstab [--test] [--auto] [--add | --del] <device>\n";
+@ARGV == 2 && $action or die "usage: drakupdate_fstab [--test] [--verbose] [--auto] [--add | --del] <device>\n";
 
 main($action, $device_name);
 
@@ -145,7 +146,7 @@ sub configure_part {
 	    system("mount $part->{mntpoint}") if !$::testing && ($device_name =~ /^fd\d+/ || $is_hd);
 	}
 
-	if ($::auto) {
+	if ($verbose) {
 	    print $part->{mntpoint}, " user\n";
 	}
     } else {
@@ -157,7 +158,7 @@ sub configure_part {
 	my ($s) = fs::prepare_write_fstab($fstab_, '', 'keep_smb_credentials');
 	output($fstab_file, $s);
 
-	if ($::auto) {
+	if ($verbose) {
 	    print "$_->{mntpoint}\n" foreach @$existing_fstab_entries;
 	}
     }
