@@ -212,20 +212,27 @@ sub read_grub {
 
     my $bootloader = read_grub_menu_lst($fstab, $grub2dev) or return;
 
-    read_grub_install_sh($bootloader, $grub2dev);
+    if (my $boot = read_grub_install_sh()->{boot}) {
+	$bootloader->{boot} = grub2dev($boot, $grub2dev);
+    }
 
     $bootloader;
 }
 
-sub read_grub_install_sh {
-    my ($bootloader, $grub2dev) = @_;
+sub read_grub_install_sh() {
+    my $s = cat_("$::prefix/boot/grub/install.sh");
+    my %h;
 
     #- matches either:
     #-   setup (hd0)
     #-   install (hd0,0)/boot/grub/stage1 d (hd0) (hd0,0)/boot/grub/stage2 p (hd0,0)/boot/grub/menu.lst
-    if (cat_("$::prefix/boot/grub/install.sh") =~ /^(?:setup.*|install\s.*\sd)\s+(\(.*?\))/m) {
-	$bootloader->{boot} = grub2dev($1, $grub2dev);
+    if ($s =~ /^(?:setup.*|install\s.*\sd)\s+(\(.*?\))/m) {
+	$h{boot} = $1;
     }    
+    if ($s =~ /^root\s+(\(.*?\))/m) {
+	$h{root} = $1;
+    }
+    \%h;
 }
 
 sub read_grub_menu_lst {
