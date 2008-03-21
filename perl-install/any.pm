@@ -998,6 +998,7 @@ when your installation is complete and you restart your system.")),
 	
     #- convert to the default locale for asked language
     $locale->{lang} = $listval2val->($lang);
+    lang::lang_changed($locale);
 }
 
 sub selectLanguage_standalone {
