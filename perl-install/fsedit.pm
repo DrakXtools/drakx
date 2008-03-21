@@ -345,12 +345,13 @@ sub suggest_part {
 	fs::type::set_pt_type($_, $_->{pt_type}) if !exists $_->{fs_type};
     }
 
-    my $hd_size = fs::get::part2hd($part, $all_hds)->{totalsectors};
+    my $hd = fs::get::part2hd($part, $all_hds);
+    my $hd_size = $hd && $hd->{totalsectors}; # nb: no $hd if $part is /dev/mdX
     my $has_swap = any { isSwap($_) } fs::get::fstab($all_hds);
 
     my @local_suggestions =
       grep { !$_->{mntpoint} && !$_->{VG_name} || !fs::get::has_mntpoint($_->{mntpoint}, $all_hds) || isSwap($_) && !$has_swap }
-      grep { !$_->{min_hd_size} || $_->{min_hd_size} <= $hd_size }
+      grep { !$_->{min_hd_size} || !$hd_size || $_->{min_hd_size} <= $hd_size }
       grep { !$_->{hd} || $_->{hd} eq $part->{rootDevice} }
 	@$suggestions;
 
