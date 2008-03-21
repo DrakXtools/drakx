@@ -6,6 +6,7 @@ HAVEINST_DIRS = share/po standalone/po standalone/interactive_http standalone/me
 DIRS = $(INLIBDEST_DIRS) $(HAVEINST_DIRS) harddrake printer ../tools/serial_probe standalone/menu
 NAME = libDrakX
 XSETUPLEVEL=40
+XSETUPLEVEL_HARDDRAKE=00
 PREFIX = 
 LIBDIR = $(PREFIX)/usr/lib
 MENUDIR= $(LIBDEST)/menu
@@ -47,6 +48,7 @@ install:
 	echo 'RESTRICT=yes' > $(PREFIX)/etc/security/fileshare.conf
 
 	install -D standalone/finish-install.xsetup $(PREFIX)/etc/X11/xsetup.d/$(XSETUPLEVEL)finish-install.xsetup
+	install -D standalone/notify-x11-free-driver-switch.xsetup $(PREFIX)/etc/X11/xsetup.d/$(XSETUPLEVEL_HARDDRAKE)notify-x11-free-driver-switch.xsetup
 	install -d $(PREFIX)/etc/sysconfig
 	echo 'FINISH_INSTALL=yes' > $(PREFIX)/etc/sysconfig/finish-install
 
@@ -68,6 +70,7 @@ install:
 	mv $(SBINDEST)/service_harddrake.sh $(INITDIR)/harddrake
 	mv $(SBINDEST)/convert $(DATADIR)/harddrake
 	mv $(SBINDEST)/service_harddrake $(DATADIR)/harddrake/
+	mv $(SBINDEST)/notify-x11-free-driver-switch $(DATADIR)/harddrake/
 	ln -s {XFdrake,$(SBINDEST)/drakx11}
 	ln -s {diskdrake,$(SBINDEST)/drakdisk}
 	ln -s {drakclock,$(SBINDEST)/clock.pl}
