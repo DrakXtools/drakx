@@ -824,7 +824,7 @@ sub summary {
 	label => N("Bootloader"),
 	val => sub { 
 	    #-PO: example: lilo-graphic on /dev/hda1
-	    N("%s on %s", $o->{bootloader}{method}, $o->{bootloader}{boot});
+	    $o->{bootloader}{boot} ? N("%s on %s", $o->{bootloader}{method}, $o->{bootloader}{boot}) : N("None");
 	},
 	clicked => sub { 
 	    any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) or return;

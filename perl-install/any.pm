@@ -322,6 +322,8 @@ On which drive are you booting?"), \&partition_table::description, $hds) or retu
 sub setupBootloader__mbr_or_not {
     my ($in, $b, $hds, $fstab) = @_;
 
+    log::l("setupBootloader__mbr_or_not");
+
     if (arch() =~ /ppc/) {
 	if (defined $partition_table::mac::bootstrap_part) {
 	    $b->{boot} = $partition_table::mac::bootstrap_part;
@@ -352,11 +354,11 @@ sub setupBootloader__mbr_or_not {
 			 interactive_help_id => 'setupBootloaderBeginner',
 		       },
 		      [ { val => \$default, list => \@l, format => sub { $_[0][0] }, type => 'list' } ]);
-	my $new_boot = $default->[1] or return;
+	my $new_boot = $default->[1];
 
 	#- remove bios mapping if the user changed the boot device
-	delete $b->{bios} if $new_boot ne $b->{boot};
-	$b->{boot} = $new_boot;
+	delete $b->{bios} if $new_boot && $new_boot ne $b->{boot};
+	$b->{boot} = $new_boot or return;
     }
     1;
 }
