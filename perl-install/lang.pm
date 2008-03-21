@@ -1037,6 +1037,14 @@ sub system_locales_to_ourlocale {
     $locale;
 }
 
+sub lang_to_ourlocale {
+    my ($lang) = @_;
+
+    my $locale = system_locales_to_ourlocale($lang);
+    lang_changed($locale);
+    $locale;
+}
+
 sub lang_changed {
     my ($locale) = @_;
     my $h = analyse_locale_name(l2locale($locale->{lang}));

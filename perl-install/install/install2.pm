@@ -522,7 +522,7 @@ sub main {
     #- for auto_install compatibility with old $o->{lang},
     #- and also for --lang and --flang
     if ($o->{lang}) {
-	put_in_hash($o->{locale}, lang::system_locales_to_ourlocale($o->{lang}, $o->{lang}));
+	put_in_hash($o->{locale}, lang::lang_to_ourlocale($o->{lang}));
     }
     lang::set($o->{locale});
 
