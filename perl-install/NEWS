@@ -1,3 +1,6 @@
+- bootloader-config, drakboot:
+  o fix device.map if it is not consistent with the system
+    (eg: it says hd0 in sdb whereas it now is sda) (#39160)
 - diskdrake:
   o fix setting mount point of a /dev/mdX (#39142)
     (regression introduced in 10.8)
