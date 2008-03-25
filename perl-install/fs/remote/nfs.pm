@@ -29,7 +29,8 @@ sub to_dev_raw {
 sub check {
     my ($_class, $in) = @_;
     $in->do_pkgs->ensure_binary_is_installed('nfs-utils-clients', 'showmount') or return;
-    system('/etc/init.d/portmap start') if system('/etc/init.d/portmap status') != 0;
+    require services;
+    services::start_not_running_service('portmap');
     1;
 }
 
