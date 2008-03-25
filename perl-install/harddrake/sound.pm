@@ -404,7 +404,7 @@ To use alsa, one can either use:
                                 @common,
                                 ]))
         {
-            $write_config->();;
+            $write_config->();
             return if $new_driver eq $device->{current_driver};
             log::explanations("switching audio driver from '" . $device->{current_driver} . "' to '$new_driver'\n");
             $in->ask_warn(N("Warning"), N("The old \"%s\" driver is blacklisted.\n
