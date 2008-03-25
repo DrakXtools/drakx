@@ -181,7 +181,7 @@ our %oss2alsa =
 my @blacklist = qw(cs46xx cs4281);
 my $blacklisted = 0;
 
-my $config_file = '/etc/sysconfig/pulseaudio';
+my $config_file = "$::prefix/etc/sysconfig/pulseaudio";
 
 sub is_user_switching_enabled() {
     my $output = run_program::get_stdout('polkit-action', '--action',
@@ -221,7 +221,7 @@ sub set_pulseaudio {
 }
 
 
-my $alsa_routing_config_file = '/etc/alsa/pulse-default.conf';
+my $alsa_routing_config_file = "$::prefix/etc/alsa/pulse-default.conf";
 my $disabling_routing = '#DRAKSOUND- ';
 
 sub is_pulseaudio_routing_enabled() {
@@ -242,7 +242,7 @@ sub set_pulseaudio_routing {
 
 
 
-my $pulse_config_file = '/etc/pulse/daemon.conf';
+my $pulse_config_file = "$::prefix/etc/pulse/daemon.conf";
 
 sub is_5_1_in_pulseaudio_enabled() {
     my ($val) = (cat_($pulse_config_file) =~ /^default-sample-channels\s*=\s*(\d+)/m); #^
