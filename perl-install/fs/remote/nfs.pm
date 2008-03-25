@@ -31,6 +31,7 @@ sub check {
     $in->do_pkgs->ensure_binary_is_installed('nfs-utils-clients', 'showmount') or return;
     require services;
     services::start_not_running_service('portmap');
+    services::start('nfs-common'); #- TODO: once nfs-common is fixed, it could use start_not_running_service()
     1;
 }
 
