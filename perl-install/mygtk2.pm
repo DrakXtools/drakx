@@ -948,7 +948,12 @@ sub _create_Window {
 	    $w->destroy; 
 	    die 'wizcancel';
 	} else { 
-	    Gtk2->main_quit;
+	    if (Gtk2->main_level) {
+                Gtk2->main_quit;
+	    } else {
+                # block window deletion if not in main loop (eg: while starting the GUI)
+                return 1;
+	    }
 	} 
     });
 

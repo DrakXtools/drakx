@@ -1,3 +1,5 @@
+- do not run main_quit if not in a main loop (eg: while loading GUI)
+  but block window deletion instead  (#39230)
 - diskdrake --nfs
   o ensure "nfs-common" is started (#34103)
 - adduserdrake
