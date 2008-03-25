@@ -192,6 +192,12 @@ sub openit {
     my $F; sysopen($F, $hd->{file}, $o_mode || 0) && $F;
 }
 
+sub can_add {
+    my ($hd) = @_;
+    !$_->{size} && !$_->{pt_type} || isExtended($_) and return 1 foreach @{$hd->{primary}{raw}};
+    0;
+}
+
 sub raw_removed {
     my ($_hd, $_raw) = @_;
 }

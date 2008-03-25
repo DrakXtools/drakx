@@ -213,6 +213,7 @@ sub raw_removed {
     my ($_hd, $raw) = @_;
     @$raw = grep { $_->{size} && $_->{pt_type} } @$raw;
 }
+sub can_add { &can_raw_add }
 sub can_raw_add {
     my ($hd) = @_;
     @{$hd->{primary}{raw}} < $hd->{primary}{info}{nbPartitions};
