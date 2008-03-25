@@ -720,6 +720,9 @@ sub salt {
 sub user_crypted_passwd {
     my ($u, $isMD5) = @_;
     if ($u->{password}) {
+	require utf8;
+	utf8::encode($u->{password}); #- we don't want perl to do "smart" things in crypt()
+
 	crypt($u->{password}, $isMD5 ? '$1$' . salt(8) : salt(2));
     } else {
 	$u->{pw} || '';
