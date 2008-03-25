@@ -226,7 +226,7 @@ sub set_default {
 			      }) if $part->{is_removable};
 
 	put_in_hash($options, {
-			       'umask=0' => $opts{security} < 3, 'umask=0022' => $opts{security} < 4,
+			       'umask=0' => $opts{security} <= 3,
 			       'iocharset=' => $opts{iocharset}, 'codepage=' => $opts{codepage},
 			      });
     }
