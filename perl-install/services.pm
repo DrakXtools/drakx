@@ -260,6 +260,11 @@ sub ask {
     !$::isInstall && $in->isa('interactive::gtk') ? &ask_standalone_gtk : &ask_;
 }
 
+sub _run_action {
+    my ($service, $action) = @_;
+    run_program::rooted($::prefix, "/etc/rc.d/init.d/$service", $action);
+}
+
 sub doit {
     my ($in, $on_services) = @_;
     my ($l, $was_on_services) = services();
@@ -276,7 +281,7 @@ sub doit {
 	    if (!$after && !$::isInstall && !$in->isa('interactive::gtk')) {
 		#- only done after install AND when not using the gtk frontend (since it allows one to start/stop services)
 		#- this allows to skip stopping service "dm"
-		run_program::rooted($::prefix, $script, "stop");
+		_run_action($_, "stop");
 	    }
 	}
     }
@@ -327,37 +332,35 @@ sub restart ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
     service_exists($service) or return 1;
-    run_program::rooted($::prefix, "/etc/rc.d/init.d/$service", "restart");
+    _run_action($service, "restart");
 }
 
 sub restart_or_start ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
     service_exists($service) or return 1;
-    is_service_running($service) ?
-      run_program::rooted($::prefix, "/etc/rc.d/init.d/$service", "restart") :
-      run_program::rooted($::prefix, "/etc/rc.d/init.d/$service", "start");
+    _run_action($service, is_service_running($service) ? "restart" : "start");
 }
 
 sub start ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
     service_exists($service) or return 1;
-    run_program::rooted($::prefix, "/etc/rc.d/init.d/$service", "start");
+    _run_action($service, "start");
 }
 
 sub start_not_running_service ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
     service_exists($service) or return 1;
-    is_service_running($service) || run_program::rooted($::prefix, "/etc/rc.d/init.d/$service", "start");
+    is_service_running($service) || _run_action($service, "start");
 }
 
 sub stop ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
     service_exists($service) or return 1;
-    run_program::rooted($::prefix, "/etc/rc.d/init.d/$service", "stop");
+    _run_action($service, "stop");
 }
 
 sub is_service_running ($) {
