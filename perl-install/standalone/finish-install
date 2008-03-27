@@ -116,6 +116,9 @@ sub ask_users() {
     }
     my $autologin = any::get_autologin();
     my $autologin_first = ($autologin->{autologin} eq $old_user || lc(get_conf('USER_AUTOLOGIN_FIRST')) eq "yes") && $autologin->{desktop};
+    if ($superuser) {
+        set_authentication($superuser) or goto &ask_users;
+    }
     any::add_users($users, $authentication);
     any::set_autologin($in->do_pkgs, $users->[0]{name}, $autologin_first)
 	if $autologin_first;
