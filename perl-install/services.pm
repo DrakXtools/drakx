@@ -326,8 +326,6 @@ sub services() {
 
 
 
-# the following functions are mostly by printer related modules
-
 sub service_exists {
     my ($service) = @_;
     -x "$::prefix/etc/rc.d/init.d/$service";
