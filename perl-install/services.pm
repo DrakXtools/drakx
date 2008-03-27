@@ -260,6 +260,15 @@ sub ask {
     !$::isInstall && $in->isa('interactive::gtk') ? &ask_standalone_gtk : &ask_;
 }
 
+sub _set_service {
+    my ($service, $enable) = @_;
+    my $script = "/etc/rc.d/init.d/$service";
+    run_program::rooted($::prefix, "chkconfig", $enable ? "--add" : "--del", $service);
+    if ($enable && cat_("$::prefix$script") =~ /^#\s+chkconfig:\s+-/m) {
+        run_program::rooted($::prefix, "chkconfig", "--level", "35", $service, "on");
+    }
+}
+
 sub _run_action {
     my ($service, $action) = @_;
     run_program::rooted($::prefix, "/etc/rc.d/init.d/$service", $action);
@@ -273,11 +282,7 @@ sub doit {
 	my $before = member($_, @$was_on_services);
 	my $after = member($_, @$on_services);
 	if ($before != $after) {
-	    my $script = "/etc/rc.d/init.d/$_";
-	    run_program::rooted($::prefix, "chkconfig", $after ? "--add" : "--del", $_);
-	    if ($after && cat_("$::prefix$script") =~ /^#\s+chkconfig:\s+-/m) {
-		run_program::rooted($::prefix, "chkconfig", "--level", "35", $_, "on");
-	    }
+	    _set_service($_, $after);
 	    if (!$after && !$::isInstall && !$in->isa('interactive::gtk')) {
 		#- only done after install AND when not using the gtk frontend (since it allows one to start/stop services)
 		#- this allows to skip stopping service "dm"
