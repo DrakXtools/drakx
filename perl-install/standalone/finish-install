@@ -122,7 +122,7 @@ sub ask_users() {
         #- replace home path in user config files
         my $old_home = "/home/$old_user";
         my $new_home = "/home/$users->[0]{name}";
-        run_program::run("grep -rl $old_home $new_home/.??* | while read f; do perl -pi -e 's,$old_home,$new_home,g' \"\$f\"; done");
+        run_program::run(qq(grep -rl $old_home $new_home/.??* | while read f; do perl -pi -e 's,$old_home,$new_home,g' "\$f"; done));
     }
 }
 
