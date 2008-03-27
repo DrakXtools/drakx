@@ -383,12 +383,12 @@ sub starts_on_boot {
 
 sub start_service_on_boot ($) {
     my ($service) = @_;
-    run_program::rooted($::prefix, "/sbin/chkconfig", "--add", $service);
+    _set_service($service, 1);
 }
 
 sub do_not_start_service_on_boot ($) {
     my ($service) = @_;
-    run_program::rooted($::prefix, "/sbin/chkconfig", "--del", $service);
+    _set_service($service, 0);
 }
 
 sub enable {
