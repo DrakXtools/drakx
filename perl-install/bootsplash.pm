@@ -15,7 +15,9 @@ our @resolutions = uniq(map { "$_->{X}x$_->{Y}" } Xconfig::resolution_and_depth:
 sub get_framebuffer_resolution() {
     require bootloader;
     require fsedit;
-    my $bootloader = bootloader::read(fsedit::get_hds());
+    my $all_hds = fsedit::get_hds();
+    fs::get_info_from_fstab($all_hds);
+    my $bootloader = bootloader::read($all_hds);
     my $x_res = Xconfig::resolution_and_depth::from_bios($bootloader->{default_options}{vga});
     $x_res ?
       ($x_res->{X} . 'x' . $x_res->{Y}, 1) :

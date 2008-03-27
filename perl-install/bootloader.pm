@@ -223,7 +223,8 @@ sub read_grub {
 
 sub _may_fix_grub2dev {
     my ($fstab, $grub2dev, $root) = @_;
-    my $real_root_part = fs::get::root($fstab);
+    my $real_root_part = fs::get::root_($fstab) or
+      log::l("argh... the fstab given is useless, it doesn't contain '/'"), return;
 
     if (my $prev_root_part = fs::get::device2part(grub2dev($root, $grub2dev), $fstab)) { # the root_device as far as grub config files say
 	$real_root_part == $prev_root_part and return;
