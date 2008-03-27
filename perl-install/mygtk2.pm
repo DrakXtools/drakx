@@ -179,6 +179,9 @@ sub _gtk_any_Button {
 	$set->();
     } elsif (exists $opts->{text}) {
 	$w->set_label(delete $opts->{text});
+    } elsif (exists $opts->{stock}) {
+	$w->set_label(delete $opts->{stock});
+	$w->set_use_stock(1);
     }
 
     if ($class eq 'Button') {
