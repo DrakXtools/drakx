@@ -83,21 +83,23 @@ sub ask_network() {
     $modules_conf->write;
 }
 
+sub set_authentication {
+    my ($superuser) = @_;
+    authentication::set_root_passwd($superuser, $authentication);
+    my $ok = eval {
+	authentication::set($in, $net, $authentication) or return;
+	network::network::write_network_conf($net);
+        1;
+    };
+    $in->ask_warn(N("Error"), formatError($@)) if $@;
+    return $ok;
+}
+
 sub ask_authentication() {
     my $meta_class = { getVarsFromSh("/etc/sysconfig/system") }->{META_CLASS};
-
     my $superuser = {};
     authentication::ask_root_password_and_authentication($in, $net, $superuser, $authentication, $meta_class, $security);
-    authentication::set_root_passwd($superuser, $authentication);
-
-    eval { 
-	authentication::set($in, $net, $authentication) or goto &ask_authentication;
-	network::network::write_network_conf($net);
-    };
-    if (my $err = $@) {
-	$in->ask_warn(N("Error"), formatError($err));
-	goto &ask_authentication;
-    }
+    set_authentication($superuser) or goto &ask_authentication;
 }
 
 #- USERS=with_root: asks both root and user accounts
