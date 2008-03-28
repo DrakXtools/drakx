@@ -1046,6 +1046,7 @@ sub isLaptop() {
     arch() =~ /ppc/ ? 
       get_mac_model() =~ /Book/ :
       computer_info()->{isLaptop}
+	|| glob_("/sys/bus/acpi/devices/PNP0C0D:*") #- ACPI lid button
 	|| (matching_desc__regexp('C&T.*655[45]\d') || matching_desc__regexp('C&T.*68554') ||
 	    matching_desc__regexp('Neomagic.*Magic(Media|Graph)') ||
 	    matching_desc__regexp('ViRGE.MX') || matching_desc__regexp('S3.*Savage.*[IM]X') ||
