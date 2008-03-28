@@ -6,10 +6,14 @@ use strict;
 use common;
 use log;
 
+sub get_timezone_prefix() {
+    my $prefix = $::testing ? '' : $::prefix;
+    $prefix . "/usr/share/zoneinfo";
+}
 
 sub getTimeZones() {
-    my $prefix = $::testing ? '' : $::prefix;
-    open(my $F, "cd $prefix/usr/share/zoneinfo && find [A-Z]* -noleaf -type f |");
+    my $tz_prefix = get_timezone_prefix();
+    open(my $F, "cd $tz_prefix && find [A-Z]* -noleaf -type f |");
     my @l = difference2([ chomp_(<$F>) ], [ 'ROC', 'PRC' ]);
     close $F or die "cannot list the available zoneinfos";
     sort @l;
@@ -52,7 +56,8 @@ sub write {
 
     set_ntp_server($t->{ntp});
 
-    eval { cp_af("$::prefix/usr/share/zoneinfo/$t->{timezone}", "$::prefix/etc/localtime") };
+    my $tz_prefix = get_timezone_prefix();
+    eval { cp_af($tz_prefix . '/' . $t->{timezone}, "$::prefix/etc/localtime") };
     $@ and log::l("installing /etc/localtime failed");
     setVarsInSh("$::prefix/etc/sysconfig/clock", {
 	ZONE => $t->{timezone},
