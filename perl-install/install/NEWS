@@ -1,3 +1,5 @@
+- ensure umount on loopback-mounted-file doesn't leak /dev/loop
+  (otherwise it breaks install from isos on disk) (#36992)
 - warn the user and propose to install/quit-install before upgrading from a
   partition where "/" is ext3 with block-size 1KB to avoid kernel bug (#37583)
 

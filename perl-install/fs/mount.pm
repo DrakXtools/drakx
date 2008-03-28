@@ -179,6 +179,13 @@ sub part {
 		    run_program::run('quotacheck', $mntpoint);
 		}		
 	    }
+	    if (isLoopback($part) && $::isInstall) {
+		#- since /etc/mtab is symlinked to /proc/mounts, umount will
+		#- not be able to know it needs to do losetup -d
+		#- TODO: drop this and have a real /etc/mtab
+		$part->{real_device} = cat_("/proc/mounts") =~ m!(/dev/\S+)\s+\Q$mntpoint\E\s! && $1;
+		log::l("XXX $part->{real_device}");
+	    }
 	}
     }
     $part->{isMounted} = 1;
