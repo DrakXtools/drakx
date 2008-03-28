@@ -145,6 +145,11 @@ sub selectInstallClass {
 		goto askInstallClass;
 	    }
 
+	    _check_unsafe_upgrade_and_warn($o, $p->{part}) or $p = undef;
+	}
+
+	if (ref $p) {
+
 	    if ($p->{part}) {
 		log::l("choosing to upgrade partition $p->{part}{device}");
 		$o->{migrate_device_names} = install::any::use_root_part($o->{all_hds}, $p->{part}, $o);
@@ -166,6 +171,50 @@ sub selectInstallClass {
 	    }->{$o->{isUpgrade}};
 	    log::l("upgrading $o->{isUpgrade} distribution" . ($o->{upgrade_by_removing_pkgs_matching} ? " (upgrade_by_removing_pkgs_matching $o->{upgrade_by_removing_pkgs_matching})" : ''));
 	}
+    }
+}
+
+sub _check_unsafe_upgrade_and_warn {
+    my ($o, $part) = @_;
+    !_is_unsafe_upgrade($part) || _warn_unsafe_upgrade($o);
+}
+sub _is_unsafe_upgrade {
+    my ($part) = @_;
+
+    my $r = run_program::get_stdout('dumpe2fs', devices::make($part->{device}));
+    my $block_size = $r =~ /^Block size:\s*(\d+)/m && $1;
+    log::l("block_size $block_size");
+    $block_size == 1024;
+}
+sub _warn_unsafe_upgrade {
+    my ($o) = @_;
+
+    log::l("_warn_unsafe_upgrade");
+
+    my @choices = (
+	N_("Cancel installation, reboot system"),
+	N_("New Installation"),
+	N_("Upgrade previous installation (not recommended)"),
+    );
+
+    my $choice;
+    $o->ask_from_({ messages => N("Installer have detected your installed Mandriva Linux system could not
+safely be upgraded to %s.
+
+New installation replacing your previous one is recommended.
+
+Warning : you should backup all your personal data before choosing \"New
+Installation\".", 'Mandriva Linux 2008 Spring') },
+		  [ { val => \$choice, type => 'list', list => \@choices, format => \&translate } ]);
+
+    log::l("_warn_unsafe_upgrade: got $choice");
+
+    if ($choice eq $choices[0]) {
+	any::reboot($o);
+    } elsif ($choice eq $choices[1]) {
+	undef;
+    } else {
+	1;
     }
 }
 
