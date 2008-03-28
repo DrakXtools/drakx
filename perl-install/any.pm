@@ -925,16 +925,21 @@ sub acceptLicense {
 		     callbacks => { ok_disabled => sub { $r eq 'Refuse' } },
 		   },
 		   [ { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list', format => sub { translate($_[0]) } } ])
-      or do {
-	  # when refusing license in finish-install:
-	  exec("/sbin/reboot") if !$::isInstall;
-
-	      install::media::umount_phys_medium($o->{stage2_phys_medium});
-	      install::media::openCdromTray($o->{stage2_phys_medium}{device}) if !detect_devices::is_xbox() && $o->{method} eq 'cdrom';
-	      $o->exit;
-      };
+      or reboot($o);
 }
 
+sub reboot {
+    my ($o) = @_;
+
+    if ($::isInstall) {
+	install::media::umount_phys_medium($o->{stage2_phys_medium});
+	install::media::openCdromTray($o->{stage2_phys_medium}{device}) if !detect_devices::is_xbox() && $o->{method} eq 'cdrom';
+	$o->exit;
+    } else {
+	# when refusing license in finish-install:
+	exec("/sbin/reboot");
+    }
+}
 
 sub selectLanguage_install {
     my ($in, $locale) = @_;
