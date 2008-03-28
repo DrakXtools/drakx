@@ -1369,7 +1369,8 @@ sub configure_time_more {
     require POSIX;
     use POSIX qw(strftime);
     my $time_format = "%H:%M:%S";
-    local $ENV{TZ} = ':' . $timezone->{timezone};
+    my $tz_prefix = timezone::get_timezone_prefix();
+    local $ENV{TZ} = ':' . $tz_prefix . '/' . $timezone->{timezone};
 
     $in->ask_from_({ interactive_help_id => 'configureTimezoneGMT',
                        title => N("Date, Clock & Time Zone Settings"), 

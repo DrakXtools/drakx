@@ -4,6 +4,8 @@
   partition where "/" is ext3 with block-size 1KB to avoid kernel bug (#37583)
 - detect as laptop systems with ACPI lid button
   (i.e. if /sys/bus/acpi/devices/PNP0C0D:* exists)
+- fix computing time according to timezone in local/UTC dialog
+  (by using zoneinfo files from the installed prefix)
 
 Version 10.21 - 25 March 2008
 
