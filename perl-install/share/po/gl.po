@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-gl\n"
 "POT-Creation-Date: 2008-03-20 14:27+0100\n"
-"PO-Revision-Date: 2008-03-30 01:26+0100\n"
+"PO-Revision-Date: 2008-03-30 22:38+0100\n"
 "Last-Translator: Leandro Regueiro <leandro DOT regueiro AT gmail DOT com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -1874,6 +1874,10 @@ msgid ""
 "\n"
 "You can either choose to move the files into the partition that will be mounted there or leave them where they are (which results in hiding them by the contents of the mounted partition)"
 msgstr ""
+"O directorio %s xa conten datos\n"
+"(%s)\n"
+"\n"
+"Pode escoller mover os ficheiros á partición que se vai montar alí ou deixalos onde están (o que fará que sexan ocultados polo contido da partición montada)"
 
 #: diskdrake/interactive.pm:1132
 #, c-format
@@ -3009,17 +3013,17 @@ msgstr ""
 #: harddrake/sound.pm:344
 #, c-format
 msgid "Enable 5.1 sound with Pulse Audio"
-msgstr ""
+msgstr "Activar son 5.1 con Pulse Audio"
 
 #: harddrake/sound.pm:348
 #, c-format
 msgid "Enable user switching for audio applications"
-msgstr ""
+msgstr "Activar o cambio de usuario para as aplicacións de audio"
 
 #: harddrake/sound.pm:318
 #, c-format
 msgid "Reset sound mixer to default values"
-msgstr ""
+msgstr "Restablecer os valores predeterminados do mesturador de son"
 
 #: harddrake/sound.pm:323
 #, c-format
@@ -5203,6 +5207,11 @@ msgid ""
 "\n"
 "Else only /etc/issue is allowed."
 msgstr ""
+"Se está establecido a \"ALL\", permítese que existan tanto /etc/issue coma /etc/issue.net.\n"
+"\n"
+"Se está a \"None\", non se permite ningún deles.\n"
+"\n"
+"Senón só se permite /etc/issue."
 
 #: security/help.pm:27
 #, fuzzy, c-format
@@ -5334,9 +5343,9 @@ msgid "Enable IP spoofing protection."
 msgstr ""
 
 #: security/help.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Enable libsafe if libsafe is found on the system."
-msgstr "Activar libsafe se se atopa no sistema"
+msgstr "Activar libsafe se se atopa no sistema."
 
 #: security/help.pm:86
 #, fuzzy, c-format
@@ -5364,9 +5373,9 @@ msgid "Activate ethernet cards promiscuity check."
 msgstr "Habilitar/Deshabilitar a verificación de promiscuidade de tarxetas ethernet."
 
 #: security/help.pm:96
-#, fuzzy, c-format
+#, c-format
 msgid "Activate daily security check."
-msgstr "Habilitar/Deshabilitar a comprobación diaria de seguridade."
+msgstr "Habilitar a comprobación diaria de seguridade."
 
 #: security/help.pm:98
 #, fuzzy, c-format
@@ -5394,9 +5403,9 @@ msgid "Set the password minimum length and minimum number of digit and minimum n
 msgstr "Establece-la lonxitude mínima, o número mínimo de díxitos e o número mínimo de letras maiúsculas do contrasinal."
 
 #: security/help.pm:108
-#, fuzzy, c-format
+#, c-format
 msgid "Set the root's file mode creation mask."
-msgstr "Sen contrasinal"
+msgstr ""
 
 #: security/help.pm:109
 #, c-format
@@ -5518,9 +5527,9 @@ msgid "Timeout unit is second"
 msgstr "A unidade de tempo de espera é o segundo"
 
 #: security/help.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Set the user's file mode creation mask."
-msgstr "Usuarios"
+msgstr ""
 
 #: security/l10n.pm:11
 #, c-format
@@ -5583,9 +5592,9 @@ msgid "Authorize all services controlled by tcp_wrappers"
 msgstr "Autorizar tódolos servicios controlados por tcp_wrappers"
 
 #: security/l10n.pm:24
-#, fuzzy, c-format
+#, c-format
 msgid "Chkconfig obey msec rules"
-msgstr "Configurar servicios"
+msgstr ""
 
 #: security/l10n.pm:25
 #, c-format
@@ -5668,9 +5677,9 @@ msgid "Password minimum length and number of digits and upcase letters"
 msgstr "Lonxitude mínima e número de díxitos e letras maiúsculas do contrasinal"
 
 #: security/l10n.pm:41
-#, fuzzy, c-format
+#, c-format
 msgid "Root umask"
-msgstr "Sen contrasinal"
+msgstr ""
 
 #: security/l10n.pm:42
 #, c-format
@@ -5683,9 +5692,9 @@ msgid "Shell timeout"
 msgstr "Tempo de espera da shell"
 
 #: security/l10n.pm:44
-#, fuzzy, c-format
+#, c-format
 msgid "User umask"
-msgstr "Usuarios"
+msgstr ""
 
 #: security/l10n.pm:45
 #, c-format
@@ -5937,7 +5946,7 @@ msgstr ""
 #: services.pm:28
 #, c-format
 msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
-msgstr ""
+msgstr "Common UNIX Printing System (CUPS) é un avanzado sistema de colas de impresión"
 
 #: services.pm:29
 #, c-format
@@ -5967,7 +5976,7 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
+msgstr "HAL é un daemon que recolle e mantén información sobre o hardware"
 
 #: services.pm:36
 #, c-format
@@ -6062,7 +6071,7 @@ msgstr ""
 #: services.pm:57
 #, c-format
 msgid "DBUS is a daemon which broadcasts notifications of system events and other messages"
-msgstr ""
+msgstr "DBUS é un daemon que difunde notificacións de eventos do sistema e outras mensaxes"
 
 #: services.pm:58
 #, c-format
@@ -6112,7 +6121,7 @@ msgstr ""
 #: services.pm:68
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
-msgstr ""
+msgstr "Sincroniza a hora do sistema usando Network Time Protocol (NTP)"
 
 #: services.pm:69
 #, c-format
@@ -6215,7 +6224,7 @@ msgstr ""
 #: services.pm:92
 #, c-format
 msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
-msgstr ""
+msgstr "SANE (Scanner Access Now Easy) permite acceder a escáners, cámaras de vídeo, ..."
 
 #: services.pm:93
 #, c-format
@@ -6230,7 +6239,7 @@ msgstr "Executa-lo sistema se son na súa máquina"
 #: services.pm:95
 #, c-format
 msgid "Secure Shell is a network protocol that allows data to be exchanged over a secure channel between two computers"
-msgstr ""
+msgstr "Secure Shell é un protocolo de rede que permite que se intercambien datos por unha canle segura entre dous ordenadores"
 
 #: services.pm:96
 #, c-format
@@ -6255,7 +6264,7 @@ msgstr ""
 #: services.pm:100
 #, c-format
 msgid "Starts other deamons on demand."
-msgstr ""
+msgstr "Inicia outros daemons baixo demanda."
 
 #: services.pm:123
 #, c-format
@@ -6421,6 +6430,12 @@ msgid ""
 "  --report          - program should be one of Mandriva Linux tools\n"
 "  --incident        - program should be one of Mandriva Linux tools"
 msgstr ""
+"[OPCIÓNS] [PROGRAMA]\n"
+"\n"
+"OPCIÓNS:\n"
+"  --help            - mostra esta mensaxe de axuda.\n"
+"  --report          - programa debe ser unha das ferramentas de Mandriva Linux\n"
+"  --incident        - programa debe ser unha das ferramentas de Mandriva Linux"
 
 #: standalone.pm:67
 #, c-format
