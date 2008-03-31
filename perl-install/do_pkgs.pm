@@ -12,14 +12,18 @@ use common;
 sub ensure_is_installed {
     my ($do, $pkg, $o_file, $b_auto) = @_;
 
-    if (! $o_file || ! -e "$::prefix$o_file") {
+    if ($o_file ? -e "$::prefix$o_file" : $do->is_installed($pkg)) {
+	return 1;
+    }
+
 	$do->in->ask_okcancel(N("Warning"), N("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
 	  or return if !$b_auto && $do->in;
+
 	if (!$do->install($pkg)) {
 	    $do->in->ask_warn(N("Error"), N("Could not install the %s package!", $pkg)) if $do->in;
 	    return;
 	}
-    }
+
     if ($o_file && ! -e "$::prefix$o_file") {
 	$do->in->ask_warn(N("Error"), N("Mandatory package %s is missing", $pkg)) if $do->in;
 	return;
