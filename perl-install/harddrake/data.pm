@@ -279,6 +279,7 @@ our @tree =
       class => "TV",
       string => N("Tvcard"),
       icon => "tv.png",
+      configurator => "/usr/bin/XawTV",
       detector => sub { f(detect_devices::probe_category('multimedia/tv')),
                           f(grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} eq 'PCI' } @devices) },
       checked_on_boot => 1,
