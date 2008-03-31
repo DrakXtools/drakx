@@ -2,23 +2,24 @@
 #
 # Copyright (C) 2002,2003, 2004, 2005 Free Software Foundation, Inc.
 # Copyright (C) 2002 Mandriva
+#
+#
 # Matias Griese <mahagr@utu.fi>, 2001.
 # Taisto Kuikka <69319@batman.jypoly.fi>, 2003,2004.
 # Esa Linna <denzo@mbnet.fi>, 2004.
 # Thomas Backlund <tmb@mandrake.org>, 2002, 2003, 2004, 2005.
-#
-#
+# Anssi Hannula <anssi@mandriva.org>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fi - LE2005 Release\n"
 "POT-Creation-Date: 2008-03-20 14:27+0100\n"
-"PO-Revision-Date: 2005-04-03 20:59+0300\n"
-"Last-Translator: Thomas Backlund <tmb@mandrake.org>\n"
+"PO-Revision-Date: 2008-03-31 17:58+0300\n"
+"Last-Translator: Anssi Hannula <anssi@mandriva.org>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: any.pm:245 diskdrake/interactive.pm:552 diskdrake/interactive.pm:739
 #: diskdrake/interactive.pm:783 diskdrake/interactive.pm:841
@@ -147,7 +148,7 @@ msgstr "Käynnistyslaite"
 #: any.pm:392
 #, c-format
 msgid "Main options"
-msgstr ""
+msgstr "Päävalinnat"
 
 #: any.pm:393
 #, c-format
@@ -160,14 +161,14 @@ msgid "Enable ACPI"
 msgstr "Ota ACPI käyttöön"
 
 #: any.pm:395
-#, fuzzy, c-format
+#, c-format
 msgid "Enable APIC"
-msgstr "Ota ACPI käyttöön"
+msgstr "Ota APIC käyttöön"
 
 #: any.pm:396
-#, fuzzy, c-format
+#, c-format
 msgid "Enable Local APIC"
-msgstr "Ota ACPI käyttöön"
+msgstr "Ota paikallinen APIC käyttöön"
 
 #: any.pm:398 any.pm:785 any.pm:794 authentication.pm:197
 #: diskdrake/smbnfs_gtk.pm:181
@@ -186,9 +187,9 @@ msgid "Please try again"
 msgstr "Yritä uudelleen"
 
 #: any.pm:401
-#, fuzzy, c-format
+#, c-format
 msgid "You can not use a password with %s"
-msgstr "Et voi käyttää salattua tiedostojärjestelmää liitospisteelle %s"
+msgstr "Et voi käyttää salasanaa %s kanssa"
 
 #: any.pm:404 any.pm:787 any.pm:796 authentication.pm:198
 #, c-format
@@ -207,10 +208,8 @@ msgstr "rajoita"
 
 #: any.pm:406
 #, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
-msgstr ""
-"Asetus ``Rajoita komentorivioptioita'' ei ole hyödyllinen ilman salasanaa"
+msgid "Option ``Restrict command line options'' is of no use without a password"
+msgstr "Asetus ``Rajoita komentorivioptioita'' ei ole hyödyllinen ilman salasanaa"
 
 #: any.pm:408
 #, c-format
@@ -270,12 +269,12 @@ msgstr "Juuri"
 #: any.pm:495 any.pm:520
 #, c-format
 msgid "Append"
-msgstr "Lisää"
+msgstr "Lisäoptiot"
 
 #: any.pm:497
 #, c-format
 msgid "Xen append"
-msgstr ""
+msgstr "Xen-lisäoptiot"
 
 #: any.pm:500
 #, c-format
@@ -403,10 +402,8 @@ msgstr "Anna käyttäjätunnus"
 
 #: any.pm:763
 #, c-format
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
-msgstr ""
-"Käyttäjätunnus saa sisältää vain pieniä kirjaimia, numeroita, `-' ja `_'"
+msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgstr "Käyttäjätunnus saa sisältää vain pieniä kirjaimia, numeroita, `-' ja `_'"
 
 #: any.pm:764
 #, c-format
@@ -429,19 +426,19 @@ msgid "Group ID"
 msgstr "Ryhmä-ID"
 
 #: any.pm:772
-#, fuzzy, c-format
+#, c-format
 msgid "%s must be a number"
-msgstr "Valitsimen %s pitää olla luku!"
+msgstr "%s pitää olla luku"
 
 #: any.pm:773
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
-msgstr ""
+msgstr "%s pitäisi olla yli 500. Jatka silti?"
 
 #: any.pm:777
-#, fuzzy, c-format
+#, c-format
 msgid "User management"
-msgstr "Käyttäjätunnus"
+msgstr "Käyttäjähallinta"
 
 # Asennuksen sivuvalikko
 #: any.pm:784 authentication.pm:183
@@ -450,11 +447,9 @@ msgid "Set administrator (root) password"
 msgstr "Aseta ylläpitäjän (\"root\") salasana"
 
 #: any.pm:789
-#, fuzzy, c-format
+#, c-format
 msgid "Enter a user"
-msgstr ""
-"Lisää käyttäjä\n"
-"%s"
+msgstr "Lisää käyttäjä"
 
 #: any.pm:790
 #, c-format
@@ -489,9 +484,9 @@ msgstr ""
 "tietokoneellesi."
 
 #: any.pm:837
-#, fuzzy, c-format
+#, c-format
 msgid "Use this feature"
-msgstr "Haluatko käyttää tätä ominaisuutta?"
+msgstr "Käytä tätä ominaisuutta"
 
 #: any.pm:838
 #, c-format
@@ -557,12 +552,12 @@ msgstr ""
 #: any.pm:964
 #, c-format
 msgid "Multi languages"
-msgstr ""
+msgstr "Asenna useita kieliä"
 
 #: any.pm:975 any.pm:1005
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
-msgstr ""
+msgstr "Vanhempi ei-UTF-8-merkistö"
 
 # Asennuksen sivuvalikko
 #: any.pm:977
@@ -641,8 +636,7 @@ msgstr ""
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
 "Windows."
-msgstr ""
-"NFS: Unix-tiedostonjakojärjestelmä, jota Mac ja Windows tukevat huonosti."
+msgstr "NFS: Unix-tiedostonjakojärjestelmä, jota Mac ja Windows tukevat huonosti."
 
 #: any.pm:1165
 #, c-format
@@ -655,8 +649,7 @@ msgstr ""
 
 #: any.pm:1173
 #, c-format
-msgid ""
-"You can export using NFS or SMB. Please select which you would like to use."
+msgid "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Voit jakaa sekä NFS:llä että Samballa. Valitse kumpaa haluat käyttää."
 
 #: any.pm:1201
@@ -698,22 +691,22 @@ msgstr "Mikä on järjestelmäsi aikavyöhyke?"
 #: any.pm:1346 any.pm:1348
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
-msgstr ""
+msgstr "Päivämäärä-, kello- ja aikavyöhykeasetukset"
 
 #: any.pm:1349
 #, c-format
 msgid "What is the best time?"
-msgstr ""
+msgstr "Kumpi aika on oikeampi?"
 
 #: any.pm:1353
-#, fuzzy, c-format
+#, c-format
 msgid "%s (hardware clock set to UTC)"
-msgstr "Laitteistokello asetettu GMT-aikaan"
+msgstr "%s (laitteistokello UTC-ajassa)"
 
 #: any.pm:1354
-#, fuzzy, c-format
+#, c-format
 msgid "%s (hardware clock set to local time)"
-msgstr "Laitteistokello asetettu GMT-aikaan"
+msgstr "%s (laitteistokello paikallisessa ajassa)"
 
 #: any.pm:1356
 #, c-format
@@ -768,7 +761,7 @@ msgstr "Paikallinen tiedosto:"
 #: authentication.pm:67
 #, c-format
 msgid "Use information stored in local files for all authentication"
-msgstr ""
+msgstr "Käytä paikallisiin tiedostoihin tallennettuja tietoja kaikkeen todentamiseen"
 
 #: authentication.pm:68
 #, c-format
@@ -820,7 +813,7 @@ msgstr "Aktiivihakemisto SFU:lla:"
 #: authentication.pm:71
 #, c-format
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
-msgstr ""
+msgstr "Kerberoksella ja LDAPilla Active Directory Server -todentamiseen"
 
 #: authentication.pm:72
 #, c-format
@@ -832,7 +825,7 @@ msgstr "Aktiivihakemisto Winbind:llä:"
 msgid ""
 "Winbind allows the system to authenticate users in a Windows Active "
 "Directory Server."
-msgstr ""
+msgstr "Winbind sallii käyttäjien todentamisen Windows Active Directory -palvelimella."
 
 #: authentication.pm:97
 #, c-format
@@ -956,7 +949,7 @@ msgstr "Tunnistus: Windows verkkoalue"
 #: authentication.pm:162
 #, c-format
 msgid "Active Directory Realm "
-msgstr ""
+msgstr "Active Directory Realm"
 
 #: authentication.pm:165
 #, c-format
@@ -987,8 +980,7 @@ msgstr "Ei salasanaa"
 #: authentication.pm:211
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
-msgstr ""
-"Salasana on liian yksinkertainen (sen tulee olla ainakin %d merkkiä pitkä)"
+msgstr "Salasana on liian yksinkertainen (sen tulee olla ainakin %d merkkiä pitkä)"
 
 #: authentication.pm:352
 #, c-format
@@ -1024,12 +1016,12 @@ msgstr "LILO tekstipohjaisella valikolla"
 #: bootloader.pm:1051
 #, c-format
 msgid "GRUB with graphical menu"
-msgstr ""
+msgstr "GRUB graafisella valikolla"
 
 #: bootloader.pm:1052
 #, c-format
 msgid "GRUB with text menu"
-msgstr ""
+msgstr "GRUB tekstipohjaisella valikolla"
 
 #: bootloader.pm:1053
 #, c-format
@@ -1076,9 +1068,9 @@ msgid "Re-install Boot Loader"
 msgstr "Asenna käynnistyslataaja uudelleen"
 
 #: common.pm:142
-#, fuzzy, c-format
+#, c-format
 msgid "B"
-msgstr "kt"
+msgstr "t"
 
 #: common.pm:142
 #, c-format
@@ -1118,7 +1110,7 @@ msgstr "%d sekuntia"
 #: common.pm:335
 #, c-format
 msgid "command %s missing"
-msgstr ""
+msgstr "komento %s puuttuu"
 
 #: diskdrake/dav.pm:17
 #, c-format
@@ -1292,14 +1284,14 @@ msgid "Unknown"
 msgstr "Tuntematon"
 
 #: diskdrake/hd_gtk.pm:352
-#, fuzzy, c-format
+#, c-format
 msgid "Ext3"
-msgstr "Poistu"
+msgstr "Ext3"
 
 #: diskdrake/hd_gtk.pm:352
-#, fuzzy, c-format
+#, c-format
 msgid "XFS"
-msgstr "HFS"
+msgstr "XFS"
 
 #: diskdrake/hd_gtk.pm:352
 #, c-format
@@ -1348,9 +1340,9 @@ msgid "Warning"
 msgstr "Varoitus"
 
 #: diskdrake/hd_gtk.pm:381
-#, fuzzy, c-format
+#, c-format
 msgid "This partition is already empty"
-msgstr "Tämän osion kokoa ei voi muuttaa"
+msgstr "Tämä osio on jo tyhjä"
 
 #: diskdrake/hd_gtk.pm:390
 #, c-format
@@ -1358,9 +1350,9 @@ msgid "Use ``Unmount'' first"
 msgstr "Käytä ensin komentoa ``Irrota''"
 
 #: diskdrake/hd_gtk.pm:390
-#, fuzzy, c-format
+#, c-format
 msgid "Use ``%s'' instead (in expert mode)"
-msgstr "Käytä sen sijaan ``%s'':ää"
+msgstr "Käytä sen sijaan ``%s'':ää (asiantuntijatilassa)"
 
 #: diskdrake/hd_gtk.pm:390 diskdrake/interactive.pm:372
 #: diskdrake/interactive.pm:546 diskdrake/interactive.pm:1024
@@ -1418,8 +1410,7 @@ msgstr "Haluatko tallentaa muutokset tiedostoon /etc/fstab"
 #: diskdrake/interactive.pm:282 fs/partitioning_wizard.pm:251
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr ""
-"Sinun tulee käynnistää järjestelmä uudelleen jotta muutokset tulevat voimaan"
+msgstr "Sinun tulee käynnistää järjestelmä uudelleen jotta muutokset tulevat voimaan"
 
 #: diskdrake/interactive.pm:287
 #, c-format
@@ -1582,8 +1573,7 @@ msgstr "Poista loopback-tiedosto?"
 # mat
 #: diskdrake/interactive.pm:530
 #, c-format
-msgid ""
-"After changing type of partition %s, all data on this partition will be lost"
+msgid "After changing type of partition %s, all data on this partition will be lost"
 msgstr "Vaihdettuasi osion %s tyyppiä kaikki siinä olevat tiedot häviävät"
 
 #: diskdrake/interactive.pm:543
@@ -1597,19 +1587,19 @@ msgid "Which filesystem do you want?"
 msgstr "Minkä tiedostojärjestelmän haluat?"
 
 #: diskdrake/interactive.pm:552
-#, fuzzy, c-format
+#, c-format
 msgid "Switching from %s to %s"
-msgstr "Vaihdetaan ext2:sta ext3:een"
+msgstr "Vaihdetaan %s tyyppiin %s"
 
 #: diskdrake/interactive.pm:578 diskdrake/interactive.pm:581
 #, c-format
 msgid "Which volume label?"
-msgstr ""
+msgstr "Osion nimi?"
 
 #: diskdrake/interactive.pm:582
-#, fuzzy, c-format
+#, c-format
 msgid "Label:"
-msgstr "Nimike"
+msgstr "Nimike:"
 
 # mat
 #: diskdrake/interactive.pm:596
@@ -1676,12 +1666,12 @@ msgstr "Uusi koko (Mt): "
 #: diskdrake/interactive.pm:708
 #, c-format
 msgid "Minimum size: %s MB"
-msgstr ""
+msgstr "Minimikoko: %s Mt"
 
 #: diskdrake/interactive.pm:709
 #, c-format
 msgid "Maximum size: %s MB"
-msgstr ""
+msgstr "Maksimikoko: %s Mt"
 
 #: diskdrake/interactive.pm:750 fs/partitioning_wizard.pm:185
 #, c-format
@@ -1719,11 +1709,13 @@ msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
+"Fyysinen levy %s on vielä käytössä.\n"
+"Haluatko siirtää käytetyt fyysiset extent-osat muille levyille?"
 
 #: diskdrake/interactive.pm:841
 #, c-format
 msgid "Moving physical extents"
-msgstr ""
+msgstr "Siirretään fyysiset extent-osat"
 
 #: diskdrake/interactive.pm:859
 #, c-format
@@ -2052,8 +2044,7 @@ msgstr "Valitse tiedostojärjestelmäsi salausavain"
 #: diskdrake/interactive.pm:1298
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
-msgstr ""
-"Salausavain on liian yksinkertainen (sen pitää olla ainakin %d merkkiä pitkä)"
+msgstr "Salausavain on liian yksinkertainen (sen pitää olla ainakin %d merkkiä pitkä)"
 
 #: diskdrake/interactive.pm:1299
 #, c-format
@@ -2110,10 +2101,8 @@ msgstr "Muu"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
-msgstr ""
-"Anna tunnuksesi, salasanasi ja verkkoalue käyttääksesi tätä palvelinta."
+msgid "Please enter your username, password and domain name to access this host."
+msgstr "Anna tunnuksesi, salasanasi ja verkkoalue käyttääksesi tätä palvelinta."
 
 #: diskdrake/smbnfs_gtk.pm:180
 #, c-format
@@ -3032,10 +3021,9 @@ msgstr "Ääniasetukset"
 msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
 "sound card (%s)."
-msgstr ""
-"Täällä voit valita vaihtoehtoisen ajurin (OSS tai ALSA) äänikortillesi (%s)."
+msgstr "Täällä voit valita vaihtoehtoisen ajurin (OSS tai ALSA) äänikortillesi (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:253
@@ -5281,8 +5269,7 @@ msgstr "Linkkiä /usr/share/sane/%s ei voitu luoda!"
 #: scanner.pm:113
 #, c-format
 msgid "Could not copy firmware file %s to /usr/share/sane/firmware!"
-msgstr ""
-"Firmware-tiedostoa %s ei voitu kopioida kohteeseen /usr/share/sane/firmware"
+msgstr "Firmware-tiedostoa %s ei voitu kopioida kohteeseen /usr/share/sane/firmware"
 
 #: scanner.pm:120
 #, c-format
@@ -5357,10 +5344,8 @@ msgstr "Salli / Estä root sisäänkirjautuminen paikallisesti."
 
 #: security/help.pm:33
 #, fuzzy, c-format
-msgid ""
-"Allow the list of users on the system on display managers (kdm and gdm)."
-msgstr ""
-"Salli / Estä järjestelmän käyttäjien listaus näytönhallinnassa (kdm ja gdm)."
+msgid "Allow the list of users on the system on display managers (kdm and gdm)."
+msgstr "Salli / Estä järjestelmän käyttäjien listaus näytönhallinnassa (kdm ja gdm)."
 
 #: security/help.pm:35
 #, fuzzy, c-format
@@ -5593,14 +5578,12 @@ msgstr ""
 #: security/help.pm:117
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
-msgstr ""
-"jos asetettu, tarkistetaan tiedostojen oikeudet käyttäjien kotihakemistossa."
+msgstr "jos asetettu, tarkistetaan tiedostojen oikeudet käyttäjien kotihakemistossa."
 
 #: security/help.pm:118
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
-msgstr ""
-"jos asetettu, tarkistetaan ovatko verkkolaitteet 'promiscuous' tilassa."
+msgstr "jos asetettu, tarkistetaan ovatko verkkolaitteet 'promiscuous' tilassa."
 
 #: security/help.pm:119
 #, c-format
@@ -5625,8 +5608,7 @@ msgstr "jos asetettu, tarkistetaan 'suid/sgid' tiedostojen tarkistussumma."
 #: security/help.pm:123
 #, c-format
 msgid "if set to yes, check additions/removals of suid root files."
-msgstr ""
-"jos 'kyllä', tarkistetaan 'suid root' tiedostojen lisäämiset/poistamiset."
+msgstr "jos 'kyllä', tarkistetaan 'suid root' tiedostojen lisäämiset/poistamiset."
 
 #: security/help.pm:124
 #, c-format
@@ -5647,8 +5629,7 @@ msgstr "jos asetettu, suoritetaan chkrootkit tarkistuksia."
 
 #: security/help.pm:127
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
+msgid "if set, send the mail report to this email address else send it to root."
 msgstr "jos asetettu, lähetä raportit tähän osoitteeseen, muuten root saa ne."
 
 #: security/help.pm:128
@@ -5679,8 +5660,7 @@ msgstr "jos asetettu, raportoi tarkistuksen tulokset näytölle."
 #: security/help.pm:134
 #, c-format
 msgid "Set shell commands history size. A value of -1 means unlimited."
-msgstr ""
-"Asettaa komentotulkin historian koon. Arvo -1 tarkoittaa rajoittamatonta."
+msgstr "Asettaa komentotulkin historian koon. Arvo -1 tarkoittaa rajoittamatonta."
 
 #: security/help.pm:136
 #, c-format
@@ -5740,8 +5720,7 @@ msgstr "Näytä lista järjestelmän käyttäjistä näytönhallinnassa (kdm ja 
 #: security/l10n.pm:20
 #, c-format
 msgid "Export display when passing from root to the other users"
-msgstr ""
-"Käytä näytön edelleenlähetys kun siirrytään root-tilistä muihin käyttäjiin."
+msgstr "Käytä näytön edelleenlähetys kun siirrytään root-tilistä muihin käyttäjiin."
 
 #: security/l10n.pm:21
 #, c-format
@@ -5843,8 +5822,7 @@ msgstr "Salasanahistorian pituus"
 #: security/l10n.pm:40
 #, c-format
 msgid "Password minimum length and number of digits and upcase letters"
-msgstr ""
-"Salasanan vähimmäispituus sekä numeroiden ja isojen kirjainten lukumäärä"
+msgstr "Salasanan vähimmäispituus sekä numeroiden ja isojen kirjainten lukumäärä"
 
 #: security/l10n.pm:41
 #, c-format
@@ -5934,8 +5912,7 @@ msgstr ""
 #: security/l10n.pm:58
 #, c-format
 msgid "If set, send the mail report to this email address else send it to root"
-msgstr ""
-"Jos asetettu, raportit lähetetään tähän osoitteeseen, muuten root saa ne."
+msgstr "Jos asetettu, raportit lähetetään tähän osoitteeseen, muuten root saa ne."
 
 #: security/l10n.pm:59
 #, c-format
@@ -6005,8 +5982,7 @@ msgstr ""
 msgid ""
 "Passwords are now enabled, but use as a networked computer is still not "
 "recommended."
-msgstr ""
-"Salasanat ovat nyt käytössä, mutta koneen käyttö verkossa ei ole suositeltua."
+msgstr "Salasanat ovat nyt käytössä, mutta koneen käyttö verkossa ei ole suositeltua."
 
 #: security/level.pm:45
 #, c-format
@@ -6079,8 +6055,7 @@ msgstr "Käytä libsafea palvelimille"
 
 #: security/level.pm:64
 #, c-format
-msgid ""
-"A library which defends against buffer overflow and format string attacks."
+msgid "A library which defends against buffer overflow and format string attacks."
 msgstr ""
 "Kirjasto, joka suojelee puskurin ylivuoto- ja\n"
 "merkkijonon muotovirhehyökkäyksiä vastaan."
@@ -6132,8 +6107,7 @@ msgstr ""
 
 #: services.pm:28
 #, c-format
-msgid ""
-"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr ""
 
 #: services.pm:29
@@ -6179,8 +6153,7 @@ msgstr ""
 
 #: services.pm:38
 #, c-format
-msgid ""
-"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
 "Apache on WWW-palvelin. Palvelinta käytetään jakamaan HTML-\n"
 "tiedostoja ja ajamaan CGI-ohjelmia."
@@ -6426,8 +6399,7 @@ msgstr ""
 
 #: services.pm:92
 #, c-format
-msgid ""
-"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
 
 #: services.pm:93
@@ -7072,3 +7044,4 @@ msgstr "Asennus epäonnistui"
 
 #~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
 #~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
+
