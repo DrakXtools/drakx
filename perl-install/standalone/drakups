@@ -237,7 +237,7 @@ sub edit_callback {
 sub del_callback {
     my ($model, $list) = @_;
     my (undef, $iter) = $list->get_selection->get_selected;
-    my $removed_idx = $list->get($iter, 0); # 1st column is index
+    my $removed_idx = $model->get($iter, 0); # 1st column is index
     #@rules = grep { $_->{index} ne $removed_idx } @rules;
     #$tree->remove($iter);
     #sensitive_buttons(0);
