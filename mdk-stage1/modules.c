@@ -243,7 +243,6 @@ static void init_firmware_timeout(void)
 void init_modules_insmoding(void)
 {
 	find_modules_directory();
-	init_firmware_timeout();
 	if (load_modules_dependencies()) {
 		fatal_error("warning, error initing modules stuff, modules loading disabled");
 	}

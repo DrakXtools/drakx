@@ -408,6 +408,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	spawn_shell();
 #endif
 	init_modules_insmoding();
+	init_firmware_timeout();
 	init_frontend("Welcome to " DISTRIB_DESCR ", " __DATE__ " " __TIME__);
 
         /* load usb interface as soon as possible, helps usb mouse detection in stage2 */
