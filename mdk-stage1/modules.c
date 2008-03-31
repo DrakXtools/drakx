@@ -229,7 +229,7 @@ static int load_modules_descriptions(void)
 	return 0;
 }
 
-static void init_firmware_timeout(void)
+void init_firmware_timeout(void)
 {
 	int fd = open(FIRMWARE_TIMEOUT_FILE, O_WRONLY|O_TRUNC, 0666);
 	if (!fd) {

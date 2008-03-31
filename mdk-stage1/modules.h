@@ -21,6 +21,7 @@
 enum insmod_return { INSMOD_OK, INSMOD_FAILED, INSMOD_FAILED_FILE_NOT_FOUND };
 
 void init_modules_insmoding(void);
+void init_firmware_timeout(void);
 int insmod_local_file(char * path, char * options);
 enum insmod_return my_insmod(const char * mod_name, enum driver_type type, char * options, int allow_modules_floppy);
 enum return_type ask_insmod(enum driver_type);
