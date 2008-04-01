@@ -42,7 +42,7 @@ sub unpack {
 	$non_defaults->{$_} = 1 foreach @$l;
     }
 
-    $non_defaults->{relatime} = 1 if isTrueLocalFS($part);
+    $non_defaults->{relatime} = 1 if isTrueLocalFS($part) || $part->{fs_type} eq 'ntfs-3g';
     $non_defaults->{encrypted} = 1;
 
     my $defaults = { reverse %$non_defaults };
