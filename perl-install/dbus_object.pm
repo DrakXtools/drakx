@@ -1,8 +1,10 @@
 package dbus_object;
 
-sub system_bus() {
+sub system_bus {
+    my %params = @_;
+    #- use nomainloop => 1 to disable Net::DBus::Reactor main loop
     require Net::DBus;
-    Net::DBus->system;
+    Net::DBus->system(%params);
 }
 
 sub new {
