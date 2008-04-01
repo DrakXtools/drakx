@@ -143,9 +143,7 @@ sub prep_net_suppl_media {
     my ($o) = @_;
 
     require network::tools;
-    my (undef, $is_up, undef) = network::tools::get_internet_connection($o->{net});
-
-    return if our $net_suppl_media_configured && $is_up;
+    return if our $net_suppl_media_configured && network::tools::has_network_connection();
     $net_suppl_media_configured = 1;
 
     #- install basesystem now
