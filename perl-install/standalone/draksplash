@@ -234,7 +234,7 @@ sub get_scale_max {
 }
 sub apply_scale {
     my ($name) = @_;
-    $theme{conf}{$name} = $adj{$name}->get_value;
+    $theme{conf}{$name} = int($adj{$name}->get_value);
     update_rect();
     $image_area->queue_draw;
 }
@@ -244,7 +244,7 @@ sub check_scale_value {
     $adj{$linked}->get_value > $max and $adj{$linked}->set_value($max);
 }
 sub update_scales_for_resolution() {
-    $theme{conf}{$_} ||= get_scale_max($_) * $scale_settings{$_}[0] foreach keys %scale_settings;
+    $theme{conf}{$_} ||= int(get_scale_max($_) * $scale_settings{$_}[0]) foreach keys %scale_settings;
     $adj{$_}->upper(get_scale_max($_)) foreach keys %adj;
 }
 sub update_scale_values_from_conf() {
