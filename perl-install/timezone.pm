@@ -64,6 +64,12 @@ sub write {
 	UTC  => bool2text($t->{UTC}),
 	ARC  => "false",
     });
+
+    my $adjtime_file = $::prefix . '/etc/adjtime';
+    my @adjtime = cat_($adjtime_file);
+    @adjtime or @adjtime = ("0.0 0 0.0\n", "0\n");
+    $adjtime[2] = $t->{UTC} ? "UTC\n" : "LOCAL\n";
+    output_p($adjtime_file, @adjtime);
 }
 
 sub reload_sys_clock {
