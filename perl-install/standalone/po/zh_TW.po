@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-14 13:23+0100\n"
+"POT-Creation-Date: 2008-04-03 06:29+0200\n"
 "PO-Revision-Date: 2008-03-06 17:41+0800\n"
 "Last-Translator: Shiva Huang <shivahuang@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
@@ -327,8 +327,8 @@ msgid ""
 "You must type in what you were doing when this bug happened in order to "
 "enable us to reproduce this bug and to increase the odds of fixing it"
 msgstr ""
-"您必須輸入當這個臭蟲發生的時候您正在作什麼，以讓我們能夠重現這隻臭蟲並增"
-"進它被修正的機會"
+"您必須輸入當這個臭蟲發生的時候您正在作什麼，以讓我們能夠重現這隻臭蟲並增進它"
+"被修正的機會"
 
 #: drakbug:235
 #, c-format
@@ -554,12 +554,7 @@ msgstr "正在參照 Ghostscript"
 msgid "Suppress Temporary Files"
 msgstr "不刪除暫存檔案"
 
-#: drakfont:383 drakfont:441
-#, c-format
-msgid "Restart XFS"
-msgstr "重新啟動 XFS 服務"
-
-#: drakfont:429 drakfont:439
+#: drakfont:425 drakfont:431
 #, c-format
 msgid "Suppress Fonts Files"
 msgstr "不刪除字型檔"
@@ -1177,14 +1172,14 @@ msgstr ""
 "\n"
 "\n"
 "所謂的 '<span weight=\"bold\">安全性管理者</span>' 是當\n"
-"'<span weight=\"bold\">安全警示</span>' 項目啟用後會收到安全警示的人。"
-"他可以是個使用者名稱或者電子郵件信箱。\n"
+"'<span weight=\"bold\">安全警示</span>' 項目啟用後會收到安全警示的人。他可以"
+"是個使用者名稱或者電子郵件信箱。\n"
 "\n"
 "\n"
-"而 '<span weight=\"bold\">安全層級</span>' 選單則允許您從六個預先設定好的"
-"安全層級中挑一個來使用。\n"
-"它們的範圍從These levels range from '<span weight=\"bold\">poor</"
-"span>' security and ease of use, to\n"
+"而 '<span weight=\"bold\">安全層級</span>' 選單則允許您從六個預先設定好的安全"
+"層級中挑一個來使用。\n"
+"它們的範圍從These levels range from '<span weight=\"bold\">poor</span>' "
+"security and ease of use, to\n"
 "'<span weight=\"bold\">paranoid</span>' config, suitable for very sensitive "
 "server applications:\n"
 "\n"
@@ -1838,7 +1833,12 @@ msgstr "鍵盤"
 msgid "Please, choose your keyboard layout."
 msgstr "請選取鍵盤排列的格式是那一種。"
 
-#: finish-install:117 finish-install:135 finish-install:147
+#: finish-install:91
+#, fuzzy, c-format
+msgid "Please wait, adding media..."
+msgstr "請稍候，執行 ttmkfdir 程式中..."
+
+#: finish-install:153 finish-install:171 finish-install:183
 #, c-format
 msgid "Encrypted home partition"
 msgstr "加密的家目錄磁區"
@@ -2374,7 +2374,8 @@ msgid ""
 "identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
-"SCSI 目標編號 (LUN)。藉由一個頻道號碼、目標 ID，以及邏輯單位號碼，連結到 host\n"
+"SCSI 目標編號 (LUN)。藉由一個頻道號碼、目標 ID，以及邏輯單位號碼，連結到 "
+"host\n"
 "的 SCSI 裝置都是唯一識別的"
 
 #. -PO: here, "size" is the size of the ram chip (eg: 128Mo, 256Mo, ...)
@@ -3575,6 +3576,9 @@ msgstr "語言與國家組態設定"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "區域設定"
+
+#~ msgid "Restart XFS"
+#~ msgstr "重新啟動 XFS 服務"
 
 #~ msgid "Copyright (C) 2001-2008 by Mandriva"
 #~ msgstr "Copyright (C) 2001-2008 by Mandriva"
