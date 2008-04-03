@@ -55,8 +55,8 @@ my @cards = (
 
 foreach my $card (@cards) {
     next if !find { $_->{driver} =~ /$card->{ldetect_driver_regexp}/ } detect_devices::probeall();
-    if (find { -e join('', "/lib/modules/", c::kernel_version(), "/kernel/drivers/$_") }
-          map { ("extra/$_", "video/$_", "char/$_", "char/drm/$_") } map { $_, "$_.gz" } @{$card->{module_names}}) {
+    if (find { -e join('', "/lib/modules/", c::kernel_version(), $_) }
+          map { ("/dkms/$_", "/dkms-binary/$_", "/kernel/$_") } map { "/drivers/$_" } map { ("extra/$_", "video/$_", "char/$_", "char/drm/$_") } map { $_, "$_.gz" } @{$card->{module_names}}) {
 
         # do not automatically switch from nv to nvidia (in order to handle
         # cases where nvidia module crashes the system):
