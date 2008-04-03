@@ -504,8 +504,8 @@ sub computeGroupSize {
 		$newSelection{$id} = undef;
 
 		my $pkg = $packages->{depslist}[$id];
-		my @requires = map { [ $_, keys %{$packages->{provides}{$_} || {}} ] } $pkg->requires_nosense;
-		foreach (sort { @$a <=> @$b } @requires) { #- sort on number of provides (it helps choosing "b" in: "a" requires both "b" and virtual={"b","c"})
+		my @deps = map { [ $_, keys %{$packages->{provides}{$_} || {}} ] } $pkg->requires_nosense, $pkg->suggests;
+		foreach (sort { @$a <=> @$b } @deps) { #- sort on number of provides (it helps choosing "b" in: "a" requires both "b" and virtual={"b","c"})
 		    my ($virtual, @choices) = @$_;
 		    if (@choices <= 1) {
 			#- only one choice :)
