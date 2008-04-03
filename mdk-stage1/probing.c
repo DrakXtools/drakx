@@ -94,6 +94,10 @@ static char * net_intf_too_early_name[50]; /* for modules providing more than on
 static int net_intf_too_early_number = 0;
 static int net_intf_too_early_ptr = 0;
 
+const char * safe_descr(const char * text) {
+	return text ? text : "unknown";
+}
+
 void prepare_intf_descr(const char * intf_descr)
 {
 	intf_descr_for_discover = strdup(intf_descr);
@@ -174,7 +178,7 @@ static void add_detected_device(unsigned short vendor, unsigned short device, un
 	dev->subdevice = subdevice;
 	strncpy(dev->module, module, sizeof(dev->module) - 1);
 	dev->module[sizeof(dev->module) - 1] = '\0';
-	strncpy(dev->description, name, sizeof(dev->description) - 1);
+	strncpy(dev->description, safe_descr(name), sizeof(dev->description) - 1);
 	dev->description[sizeof(dev->description) - 1] = '\0';
 	log_message("detected device (%04x, %04x, %04x, %04x, %s, %s)", vendor, device, subvendor, subdevice, name, module);
 }
@@ -261,7 +265,7 @@ static const char * get_alternate_module(const char * name)
 
 void discovered_device(enum driver_type type, const char * description, const char * driver)
 {
-
+	description = safe_descr(description);
 
 	enum insmod_return failed = INSMOD_FAILED;
 #ifndef DISABLE_MEDIAS
@@ -304,7 +308,7 @@ void probe_pci_modules(enum driver_type type, char **pci_modules, unsigned int  
 		struct pciusb_entry *e = &entries.entries[i];
 		if (device_match_modules_list(e, pci_modules, pci_modules_len)) {
 			log_message("PCI: device %04x %04x %04x %04x is \"%s\", driver is %s",
-				    e->vendor, e->device, e->subvendor, e->subdevice, e->text, e->module);
+				    e->vendor, e->device, e->subvendor, e->subdevice, safe_descr(e->text), e->module);
 			discovered_device(type, e->text, e->module);
 		}
 	}
@@ -385,7 +389,7 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 		for (i = 0; i < entries.nb; i++) {
 			struct pciusb_entry *e = &entries.entries[i];
 			if (device_match_modules_list(e, usb_modules, usb_modules_len)) {
-				log_message("USB: device %04x %04x is \"%s\" (%s)", e->vendor, e->device, e->text, e->module);
+				log_message("USB: device %04x %04x is \"%s\" (%s)", e->vendor, e->device, safe_descr(e->text), e->module);
 				discovered_device(type, e->text, e->module);
 			}
 		}
