@@ -83,6 +83,15 @@ sub ask_network() {
     $modules_conf->write;
 }
 
+sub ask_urpmi() {
+    #- configure urpmi media if network is up and no media are configured
+    require network::tools;
+    return if !network::tools::has_network_connection();
+    run_program::get_stdout('urpmq', '--list-media') and return;
+    my $_wait = $in->wait_message(N("Please wait"), N("Please wait, adding media..."));
+    run_program::run('urpmi.addmedia', '--distrib', '--mirrorlist', '$MIRRORLIST');
+}
+
 sub set_authentication {
     my ($superuser) = @_;
     authentication::set_root_passwd($superuser, $authentication);
@@ -222,6 +231,7 @@ if (defined $::WizardWindow) {
     $::WizardWindow->destroy;
     undef $::WizardWindow;
 }
+call('urpmi');
 $::Wizard_pix_up = 'redhat-config-users';
 call('authentication');
 call('users');
