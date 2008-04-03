@@ -372,6 +372,7 @@ sub main {
 	    updatemodules => sub { $o->{updatemodules} = 1 },
 	    suppl => sub { $o->{supplmedia} = 1 },
 	    askmedia => sub { $o->{askmedia} = 1 },
+	    restore => sub { $::isRestore = 1 },
 	}}{lc $n}; &$f if $f;
     } %cmdline;
 

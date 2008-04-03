@@ -109,6 +109,11 @@ sub selectKeyboard {
     }
     keyboard::group_toggle_choose($o, $o->{keyboard}) or goto &selectKeyboard;
     install::steps::selectKeyboard($o);
+    if ($::isRestore) {
+        require MDV::Snapshot::Restore;
+        MDV::Snapshot::Restore::main($o);
+        $o->exit;
+    }
 }
 
 #------------------------------------------------------------------------------
