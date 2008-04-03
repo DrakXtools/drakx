@@ -39,6 +39,9 @@ sub ask_license() {
 sub ask_language() {
     require lang;
     $locale = lang::read();
+    my ($lang) = cat_("/proc/cmdline") =~ /\blang=(.+?)\b/;
+    put_in_hash($locale, lang::lang_to_ourlocale($lang))
+      if $lang && member($lang, lang::list_langs(exclude_non_installed => 1));
     any::selectLanguage_and_more_standalone($in, $locale);
     lang::write_and_install($locale, $in->do_pkgs);
 }
