@@ -108,7 +108,7 @@ sub main {
 	my $all_hds = fsedit::get_hds();
 	my $hd = find { fs::get::is_same_hd($_, $device) } fs::get::hds($all_hds);
 	$hd or die "unable to find hd for $device->{device}";
-	my @parts = grep { !fsedit::isSwap($_) } partition_table::get_normal_parts($hd);
+	my @parts = grep { !fsedit::isSwap($_) && fs::type::maybeFormatted($_) } partition_table::get_normal_parts($hd);
 	configure_part($action, $_, 'hd') foreach @parts;
     } else {
         configure_part($action, $device, undef);
