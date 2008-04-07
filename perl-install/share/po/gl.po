@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-gl\n"
 "POT-Creation-Date: 2008-03-20 14:27+0100\n"
-"PO-Revision-Date: 2008-04-04 20:59+0100\n"
+"PO-Revision-Date: 2008-04-06 21:48+0100\n"
 "Last-Translator: Leandro Regueiro <leandro DOT regueiro AT gmail DOT com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -67,8 +67,9 @@ msgid ""
 " Then type: shut-down\n"
 "At your next boot you should see the bootloader prompt."
 msgstr ""
-"Pode ser que teña que cambiar o dispositivo de arrinque de Open\n"
-"Firmware para habilitar o cargador de arrinque. Se non ve a liña     do cargador de arrinqueó reiniciar, \n"
+"Pode ser que teña que cambiar o dispositivo de arrinque de\n"
+"Open Firmware para habilitar o cargador de arrinque. Se non\n"
+"ve a liña     do cargador de arrinqueó reiniciar, \n"
 " enable the bootloader.  If you do not see the bootloader prompt at\n"
 " reboot, hold down Command-Option-O-F at reboot and enter:\n"
 " setenv boot-device %s,\\\\:tbxi\n"
@@ -245,7 +246,7 @@ msgstr "Mensaxe Inicial"
 #: any.pm:422
 #, c-format
 msgid "Open Firmware Delay"
-msgstr ""
+msgstr "Retardo de Open Firmware"
 
 #: any.pm:423
 #, c-format
@@ -583,9 +584,9 @@ msgstr "Multilinguaxe"
 
 #: any.pm:975
 #: any.pm:1005
-#, c-format
+#, fuzzy, c-format
 msgid "Old compatibility (non UTF-8) encoding"
-msgstr ""
+msgstr "Codificación de compatibilidade cara atrás (non UTF-8)"
 
 #: any.pm:977
 #, c-format
@@ -714,17 +715,17 @@ msgstr "Configuración de Data, Reloxo e Zona Horaria"
 #: any.pm:1349
 #, c-format
 msgid "What is the best time?"
-msgstr ""
+msgstr "Cal é a mellor hora?"
 
 #: any.pm:1353
 #, fuzzy, c-format
 msgid "%s (hardware clock set to UTC)"
-msgstr "O reloxo interno do ordenador usa a hora GMT"
+msgstr "%s (o reloxo do hardware usa a hora GMT)"
 
 #: any.pm:1354
-#, fuzzy, c-format
+#, c-format
 msgid "%s (hardware clock set to local time)"
-msgstr "O reloxo interno do ordenador usa a hora GMT"
+msgstr "%s (o reloxo do hardware usa a hora local)"
 
 #: any.pm:1356
 #, c-format
@@ -780,7 +781,7 @@ msgstr "Ficheiro local:"
 #: authentication.pm:67
 #, c-format
 msgid "Use information stored in local files for all authentication"
-msgstr ""
+msgstr "Usar a información almacenada nos ficheiros locais para toda autenticación"
 
 #: authentication.pm:68
 #, c-format
@@ -922,14 +923,14 @@ msgid "NIS Server"
 msgstr "Servidor NIS"
 
 #: authentication.pm:148
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "For this to work for a W2K PDC, you will probably need to have the admin run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add and reboot the server.\n"
 "You will also need the username/password of a Domain Admin to join the machine to the Windows(TM) domain.\n"
 "If networking is not yet enabled, Drakx will attempt to join the domain after the network setup step.\n"
 "Should this setup fail for some reason and domain authentication is not working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows(tm) Domain, and Admin Username/Password, after system boot.\n"
 "The command 'wbinfo -t' will test whether your authentication secrets are good."
-msgstr ""
+msgstr "Para que isto funcione cun PDC W2K, probablemente "
 
 #: authentication.pm:160
 #, c-format
@@ -992,10 +993,10 @@ msgid ""
 "wait for default boot.\n"
 "\n"
 msgstr ""
-"Benvido o selector de sistema operativo!\n"
+"Benvido ó seleccionador de sistema operativo!\n"
 "\n"
 "Escolla un sistema operativo na lista de enriba, ou\n"
-"agarde a que arrinque o sistema por defecto.\n"
+"agarde a que arrinque o sistema predeterminado.\n"
 "\n"
 
 #: bootloader.pm:1050
@@ -1765,9 +1766,9 @@ msgstr ""
 "Desexa mover as partes usadas deste volume a outros volumes?"
 
 #: diskdrake/interactive.pm:841
-#, c-format
+#, fuzzy, c-format
 msgid "Moving physical extents"
-msgstr ""
+msgstr "Movendo as extensións físicas"
 
 #: diskdrake/interactive.pm:859
 #, c-format
@@ -1806,9 +1807,9 @@ msgid "Mount options"
 msgstr "Opcións de montaxe"
 
 #: diskdrake/interactive.pm:924
-#, c-format
+#, fuzzy, c-format
 msgid "Various"
-msgstr ""
+msgstr "Varios"
 
 #: diskdrake/interactive.pm:989
 #, c-format
@@ -1959,9 +1960,9 @@ msgid "Cylinder %d to %d\n"
 msgstr "Cilindros %d a %d\n"
 
 #: diskdrake/interactive.pm:1204
-#, c-format
+#, fuzzy, c-format
 msgid "Number of logical extents: %d\n"
-msgstr ""
+msgstr "Número de extensións físicas: %d\n"
 
 #: diskdrake/interactive.pm:1205
 #, c-format
@@ -2285,14 +2286,14 @@ msgid "Use an encrypted file system"
 msgstr "Usar un sistema de ficheiros cifrado"
 
 #: fs/mount_options.pm:117
-#, c-format
+#, fuzzy, c-format
 msgid "Flush write cache on file close"
-msgstr ""
+msgstr "Baleirar"
 
 #: fs/mount_options.pm:119
-#, c-format
+#, fuzzy, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
-msgstr ""
+msgstr "Activar a cuota de disco"
 
 #: fs/mount_options.pm:121
 #, c-format
@@ -2304,13 +2305,14 @@ msgstr ""
 "(p.ex, para un acceso máis rápido na cola de novas para acelerar os servidores de novas)."
 
 #: fs/mount_options.pm:124
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
-"Non actualizar as horas de acceso ó inodos neste sistema de ficheiros\n"
-"(p.ex, para un acceso máis rápido na cola de novas para acelerar os servidores de novas)."
+"Actualizar as horas de acceso ós inodos neste sistema de ficheiros\n"
+"dunha forma máis eficiente (p.ex, para un acceso máis rápido na\n"
+"cola de novas para acelerar os servidores de novas)."
 
 #: fs/mount_options.pm:127
 #, c-format
@@ -2366,9 +2368,9 @@ msgid "Allow an ordinary user to mount the file system."
 msgstr "Permitir que os usuarios normais monten o sistema de ficheiros."
 
 #: fs/mount_options.pm:148
-#, c-format
+#, fuzzy, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
-msgstr ""
+msgstr "Activar a cuota de disco por usuario"
 
 #: fs/mount_options.pm:150
 #, fuzzy, c-format
@@ -2721,7 +2723,7 @@ msgid ""
 "The bootloader is not able to handle this when the volume spans physical volumes.\n"
 "You should create a /boot partition first"
 msgstr ""
-"Seleccionou un Volume Lóxico LVM coma raíz (/).\n"
+"Seleccionou o Volume Lóxico LVM coma raíz (/).\n"
 "O cargador de arrinque non é capaz de manexar isto cando o volume\n"
 "expande os volumes físicos.\n"
 "\n"
@@ -3008,7 +3010,7 @@ msgstr "Activar PulseAudio"
 #: harddrake/sound.pm:309
 #, c-format
 msgid "Automatic routing from ALSA to PulseAudio"
-msgstr ""
+msgstr "Redirección automatica dende ALSA a PulseAudio"
 
 #: harddrake/sound.pm:344
 #, c-format
@@ -3098,7 +3100,7 @@ msgid "Driver:"
 msgstr "Driver:"
 
 #: harddrake/sound.pm:379
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "The old \"%s\" driver is blacklisted.\n"
 "\n"
@@ -3106,6 +3108,11 @@ msgid ""
 "\n"
 "The new \"%s\" driver will only be used on next bootstrap."
 msgstr ""
+"O antigo driver \"%s\" está na lista negra.\n"
+"\n"
+"Comunicouse que bloquea o kernel ó descargarse.\n"
+"\n"
+"Só se usará o novo driver \"%s\" no seguinte inicio."
 
 #: harddrake/sound.pm:294
 #, c-format
@@ -3314,7 +3321,7 @@ msgstr "Anterior"
 #: interactive/gtk.pm:548
 #, c-format
 msgid "Beware, Caps Lock is enabled"
-msgstr ""
+msgstr "Atención, Bloq Maiús está activado"
 
 #: interactive/stdio.pm:29
 #: interactive/stdio.pm:154
@@ -4679,9 +4686,9 @@ msgid "Welcome to %s"
 msgstr "Benvid@ a %s"
 
 #: lvm.pm:84
-#, c-format
+#, fuzzy, c-format
 msgid "Moving used physical extents to other physical volumes failed"
-msgstr ""
+msgstr "Fallou o movemento das extensións físicas usadas a outros volumes físicos"
 
 #: lvm.pm:137
 #, c-format
@@ -5183,14 +5190,14 @@ msgid "Accept bogus IPv4 error messages."
 msgstr ""
 
 #: security/help.pm:13
-#, fuzzy, c-format
+#, c-format
 msgid "Accept broadcasted icmp echo."
-msgstr "Aceptar/Rexeitar o eco icmp."
+msgstr ""
 
 #: security/help.pm:15
-#, fuzzy, c-format
+#, c-format
 msgid "Accept icmp echo."
-msgstr "Aceptar o eco icmp"
+msgstr "Aceptar o eco icmp."
 
 #: security/help.pm:17
 #, c-format
@@ -5214,24 +5221,24 @@ msgstr ""
 "Senón só se permite /etc/issue."
 
 #: security/help.pm:27
-#, fuzzy, c-format
+#, c-format
 msgid "Allow reboot by the console user."
-msgstr "Permitir/Prohibir o reinicio ó usuario da consola."
+msgstr "Permitir o reinicio por usuario de consola."
 
 #: security/help.pm:29
-#, fuzzy, c-format
+#, c-format
 msgid "Allow remote root login."
-msgstr "Permitirlle o login remoto ó usuario root"
+msgstr "Permitirlle o login remoto ó usuario root."
 
 #: security/help.pm:31
-#, fuzzy, c-format
+#, c-format
 msgid "Allow direct root login."
-msgstr "Permitir/Prohibir login directo do usuario root."
+msgstr "Permitir o login directo do usuario root."
 
 #: security/help.pm:33
-#, fuzzy, c-format
+#, c-format
 msgid "Allow the list of users on the system on display managers (kdm and gdm)."
-msgstr "Permitir/Prohibir ve-la lista de usuarios do sistema nos xestores de entrada (kdm e gdm)."
+msgstr "Permitir ve-la lista de usuarios do sistema nos xestores de entrada (kdm e gdm)."
 
 #: security/help.pm:35
 #, c-format
@@ -5241,9 +5248,13 @@ msgid ""
 "\n"
 "See pam_xauth(8) for more details.'"
 msgstr ""
+"Permitir exportar a pantalla ó\n"
+"pasar da conta de root a outros usuarios.\n"
+"\n"
+"Consulte pam_xauth(8) para obter máis detalles.'"
 
 #: security/help.pm:40
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow X connections:\n"
 "\n"
@@ -5253,13 +5264,13 @@ msgid ""
 "\n"
 "- \"None\" (no connection)."
 msgstr ""
-"Permitir/Prohibir as conexións X:\n"
+"Permitir as conexións X:\n"
 "\n"
-"- TODO (permitir tódalas conexións),\n"
+"- \"All\" (permitir tódalas conexións),\n"
 "\n"
-"- LOCAL (só se permiten as conexións dende a máquina local),\n"
+"- \"Local\" (só conexións dende a máquina local),\n"
 "\n"
-"- NADA (sen conexión)."
+"- \"None\" (sen conexión)."
 
 #: security/help.pm:48
 #, c-format
@@ -5272,7 +5283,7 @@ msgstr ""
 
 #. -PO: here "ALL", "Local" and "None" are values in a pull-down menu; translate them the same as they're
 #: security/help.pm:53
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Authorize:\n"
 "\n"
@@ -5286,13 +5297,13 @@ msgid ""
 msgstr ""
 "Autorizar:\n"
 "\n"
-"- tódolos servicios controlados por tcp_wrappers (consulte a páxina man hosts.deny(5)) se está establecido a \"TODO\",\n"
+"- tódolos servicios controlados por tcp_wrappers (consulte a páxina man hosts.deny(5)) se está establecido a \"ALL\",\n"
 "\n"
-"- só os locais se está establecido a \"LOCAL\"\n"
+"- só os locais se está establecido a \"Local\"\n"
 "\n"
-"- ningún se está establecido a \"NADA\".\n"
+"- ningún se está establecido a \"None\".\n"
 "\n"
-"Para autorizar os servicios que precise, use /etc/hosts.allow (mire hosts.allow(5))."
+"Para autorizar os servicios que precise, use /etc/hosts.allow (consulte hosts.allow(5))."
 
 #: security/help.pm:63
 #, c-format
@@ -5306,24 +5317,32 @@ msgid ""
 "add a service if it is present in the file during the installation of\n"
 "packages."
 msgstr ""
+"Se SERVER_LEVEL (ou se falta SECURE_LEVEL)\n"
+"é maior de 3 en /etc/security/msec/security.conf, créase a\n"
+"ligazón simbólica /etc/security/msec/server que apunta a\n"
+"/etc/security/msec/server.<SERVER_LEVEL>.\n"
+"\n"
+"/etc/security/msec/server é usado por chkconfig --add para decidir\n"
+"engadir un servizo se está presente no ficheiro durante a instalación\n"
+"de paquetes."
 
 #: security/help.pm:72
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable crontab and at for users.\n"
 "\n"
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
 msgstr ""
-"Activar/Desactivar crontab e at para os  usuarios.\n"
+"Activar crontab e at para os  usuarios.\n"
 "\n"
 "Poña os usuarios ós que se lles permite usalos en /etc/cron.allow e\n"
-"/etc/at.allow (vexa man at(1) e crontab(1))."
+"/etc/at.allow (consulte man at(1) e crontab(1))."
 
 #: security/help.pm:77
-#, fuzzy, c-format
+#, c-format
 msgid "Enable syslog reports to console 12"
-msgstr "Activar/Desactivar os informes de syslog na consola 12"
+msgstr "Activar os informes de syslog na consola 12"
 
 #: security/help.pm:79
 #, c-format
@@ -5348,14 +5367,14 @@ msgid "Enable libsafe if libsafe is found on the system."
 msgstr "Activar libsafe se se atopa no sistema."
 
 #: security/help.pm:86
-#, fuzzy, c-format
+#, c-format
 msgid "Enable the logging of IPv4 strange packets."
-msgstr "Activar o rexistro de paquetes IPv4 estraños"
+msgstr "Activar o rexistro de paquetes IPv4 estraños."
 
 #: security/help.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid "Enable msec hourly security check."
-msgstr "Habilitar a verificación de seguridade de msec cada hora"
+msgstr "Activar a verificación de seguridade de msec cada hora."
 
 #: security/help.pm:90
 #, c-format
@@ -5368,9 +5387,9 @@ msgid "Use password to authenticate users."
 msgstr "Usar contrasinal para autenticar ós usuarios."
 
 #: security/help.pm:94
-#, fuzzy, c-format
+#, c-format
 msgid "Activate ethernet cards promiscuity check."
-msgstr "Habilitar/Deshabilitar a verificación de promiscuidade de tarxetas ethernet."
+msgstr "Activar a verificación de promiscuidade de tarxetas ethernet."
 
 #: security/help.pm:96
 #, c-format
@@ -5378,19 +5397,19 @@ msgid "Activate daily security check."
 msgstr "Habilitar a comprobación diaria de seguridade."
 
 #: security/help.pm:98
-#, fuzzy, c-format
+#, c-format
 msgid "Enable sulogin(8) in single user level."
-msgstr "Habilitar/Deshabilitar sulogin(8) no nivel de usuario único."
+msgstr "Activar sulogin(8) no nivel de usuario único."
 
 #: security/help.pm:100
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
-msgstr ""
+msgstr "Engadir o nome coma unha excepción para a xestión da caducidade do contrasinal por parte de msec."
 
 #: security/help.pm:102
-#, fuzzy, c-format
+#, c-format
 msgid "Set password aging to \"max\" days and delay to change to \"inactive\"."
-msgstr "Estableza a caducidade en \"max\" días e o periodo para cambiala a \"inactiva\"."
+msgstr "Estableza a caducidade en \"max\" días e o período para cambiala a \"inactiva\"."
 
 #: security/help.pm:104
 #, c-format
@@ -5405,7 +5424,7 @@ msgstr "Establece-la lonxitude mínima, o número mínimo de díxitos e o númer
 #: security/help.pm:108
 #, c-format
 msgid "Set the root's file mode creation mask."
-msgstr ""
+msgstr "Establecer a máscara do modo de creación de ficheiros de root."
 
 #: security/help.pm:109
 #, c-format
@@ -5529,7 +5548,7 @@ msgstr "A unidade de tempo de espera é o segundo"
 #: security/help.pm:138
 #, c-format
 msgid "Set the user's file mode creation mask."
-msgstr ""
+msgstr "Establecer a máscara do modo de creación de ficheiros de usuario."
 
 #: security/l10n.pm:11
 #, c-format
@@ -5554,7 +5573,7 @@ msgstr "/etc/issue* existe"
 #: security/l10n.pm:16
 #, c-format
 msgid "Reboot by the console user"
-msgstr ""
+msgstr "Reinicio por usuario de consola"
 
 #: security/l10n.pm:17
 #, c-format
@@ -5574,7 +5593,7 @@ msgstr "Listar os usuarios nos xestores de entrada (kdm e gdm)"
 #: security/l10n.pm:20
 #, c-format
 msgid "Export display when passing from root to the other users"
-msgstr ""
+msgstr "Exportar a pantalla ó pasar dende root a outros usuarios"
 
 #: security/l10n.pm:21
 #, c-format
@@ -5594,7 +5613,7 @@ msgstr "Autorizar tódolos servicios controlados por tcp_wrappers"
 #: security/l10n.pm:24
 #, c-format
 msgid "Chkconfig obey msec rules"
-msgstr ""
+msgstr "Chkconfig cumpre as regras de msec"
 
 #: security/l10n.pm:25
 #, c-format
@@ -6229,7 +6248,7 @@ msgstr "SANE (Scanner Access Now Easy) permite acceder a escáners, cámaras de 
 #: services.pm:93
 #, c-format
 msgid "The SMB/CIFS protocol enables to share access to files & printers and also integrates with a Windows Server domain"
-msgstr ""
+msgstr "O protocolo SMB/CIFS permítelle compartir o acceso a ficheiros e impresoras e tamén se integra cun dominio de Windows Server"
 
 #: services.pm:94
 #, c-format
