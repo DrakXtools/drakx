@@ -765,7 +765,7 @@ sub import_status_uninstall() {
     $pbar  = Gtk2::ProgressBar->new;
     $pbar1 = Gtk2::ProgressBar->new;
     $pbar2 = Gtk2::ProgressBar->new;
-    dialog(N("Importing fonts"),
+    dialog(N("Removing fonts"),
 	   [
 	    0, create_packtable({ col_spacings => 10, row_spacings => 50 },
 				[ "", "" ],
