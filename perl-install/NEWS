@@ -1,3 +1,6 @@
+- bootloader-config:
+  o fix detecting device.map inconsistency when "/boot" and "/" are not on
+    same "drive" (esp. when "/" is LVM and "/boot" is not, #39229)
 - diskdrake:
   o ensure no "division by zero" runtime error (#34931)
 - drakupdate_fstab:

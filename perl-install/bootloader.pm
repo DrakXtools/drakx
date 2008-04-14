@@ -210,7 +210,7 @@ sub read_grub {
 
     my $grub2dev = read_grub_device_map();
     my $boot_root = read_grub_install_sh();
-    _may_fix_grub2dev($fstab, $grub2dev, $boot_root->{root});
+    _may_fix_grub2dev($fstab, $grub2dev, $boot_root->{boot_part});
 
     my $bootloader = read_grub_menu_lst($fstab, $grub2dev) or return;
 
@@ -222,26 +222,26 @@ sub read_grub {
 }
 
 sub _may_fix_grub2dev {
-    my ($fstab, $grub2dev, $root) = @_;
-    my $real_root_part = fs::get::root_($fstab) or
+    my ($fstab, $grub2dev, $boot_part) = @_;
+    my $real_boot_part = fs::get::root_($fstab, 'boot') or
       log::l("argh... the fstab given is useless, it doesn't contain '/'"), return;
 
-    if (my $prev_root_part = fs::get::device2part(grub2dev($root, $grub2dev), $fstab)) { # the root_device as far as grub config files say
-	$real_root_part == $prev_root_part and return;
+    if (my $prev_boot_part = fs::get::device2part(grub2dev($boot_part, $grub2dev), $fstab)) { # the boot_device as far as grub config files say
+	$real_boot_part == $prev_boot_part and return;
     }
 
     log::l("WARNING: we have detected that device.map is inconsistent with the system");
     
-    my $real_root_dev = $real_root_part->{rootDevice};
+    my $real_boot_dev = $real_boot_part->{rootDevice};
 
-    my ($hd_grub, undef, undef) = parse_grub_file($root);
-    if (my $prev_hd_grub = find { $grub2dev->{$_} eq $real_root_dev } keys %$grub2dev) {
+    my ($hd_grub, undef, undef) = parse_grub_file($boot_part);
+    if (my $prev_hd_grub = find { $grub2dev->{$_} eq $real_boot_dev } keys %$grub2dev) {
 	$grub2dev->{$prev_hd_grub} = $grub2dev->{$hd_grub};
-	log::l("swapping result: $hd_grub/$real_root_dev and $prev_hd_grub/$grub2dev->{$hd_grub}");
+	log::l("swapping result: $hd_grub/$real_boot_dev and $prev_hd_grub/$grub2dev->{$hd_grub}");
     } else {
-	log::l("argh... can't swap, setting $hd_grub to $real_root_dev anyway");
+	log::l("argh... can't swap, setting $hd_grub to $real_boot_dev anyway");
     }
-    $grub2dev->{$hd_grub} = $real_root_dev;
+    $grub2dev->{$hd_grub} = $real_boot_dev;
 }
 
 sub read_grub_install_sh() {
@@ -255,7 +255,7 @@ sub read_grub_install_sh() {
 	$h{boot} = $1;
     }    
     if ($s =~ /^root\s+(\(.*?\))/m) {
-	$h{root} = $1;
+	$h{boot_part} = $1;
     }
     \%h;
 }
