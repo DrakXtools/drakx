@@ -84,9 +84,10 @@ if ($root) {
 	fs::mount_options::pack($_, $valued_options, $options); #- vfat opts, we don't have the modules in rescue
 
 	my $where = "$target$_->{mntpoint}";
+	my $dev = fs::wild_device::from_part('', $_);
 	mkdir_p($where);
-	print STDERR "\t$_->{device} on $where type $_->{fs_type} options $_->{options}\n";
-	system("mount -t $_->{fs_type} /dev/$_->{device} $where -o $_->{options}");
+	print STDERR "\t$dev on $where type $_->{fs_type} options $_->{options}\n";
+	system("mount -t $_->{fs_type} $dev $where -o $_->{options}");
 	system("cp -f /etc/mtab $target/etc/mtab"); #- to allow a nice chrooted "mount" or "df"
     }
     print STDERR "\nYour system is ready on $target.\n\n";
