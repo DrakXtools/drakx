@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-gl\n"
 "POT-Creation-Date: 2008-03-20 14:27+0100\n"
-"PO-Revision-Date: 2008-04-11 14:13+0100\n"
+"PO-Revision-Date: 2008-04-13 20:37+0100\n"
 "Last-Translator: Leandro Regueiro <leandro DOT regueiro AT gmail DOT com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgstr ""
 #: interactive.pm:580
 #, c-format
 msgid "Please wait"
-msgstr "Por favor, agarde"
+msgstr "Agarde"
 
 #: any.pm:245
 #, c-format
@@ -930,7 +930,11 @@ msgid ""
 "If networking is not yet enabled, Drakx will attempt to join the domain after the network setup step.\n"
 "Should this setup fail for some reason and domain authentication is not working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows(tm) Domain, and Admin Username/Password, after system boot.\n"
 "The command 'wbinfo -t' will test whether your authentication secrets are good."
-msgstr "Para que isto funcione cun PDC W2K, probablemente "
+msgstr ""
+"Para que isto funcione cun PDC W2K, probablemente teña que ter que executar coma administrador: Tamén precisará o nome de usuario/contrasinal dun Administrador de Dominio para unir a máquina ó dominio Windows(TM).\n"
+"Se a rede ainda non está habilitada, Drakx intentará unirse ó dominio despois do paso de configuración da rede.\n"
+"Se esta configuración falla por algunha razón e a autenticación no dominio non funciona, execute 'smbpasswd -j DOMINIO -U USUARIO%%CONTRASINAL' usando o seu Dominio Windows(TM), e o Nome de Usuario/Contrasinal do Administrador, despois de iniciar o sistema.\n"
+"O comando 'wbinfo -t' comprobará se os seus segredos de autenticación son bos."
 
 #: authentication.pm:160
 #, c-format
@@ -5185,9 +5189,9 @@ msgid "Your scanner(s) will not be available for non-root users."
 msgstr "Os seus escáners non estarán dispoñibles para os usuarios que non sexan root"
 
 #: security/help.pm:11
-#, c-format
+#, fuzzy, c-format
 msgid "Accept bogus IPv4 error messages."
-msgstr ""
+msgstr "Aceptar mensaxes de erro IPv4             ."
 
 #: security/help.pm:13
 #, c-format
@@ -5551,9 +5555,9 @@ msgid "Set the user's file mode creation mask."
 msgstr "Establecer a máscara do modo de creación de ficheiros de usuario."
 
 #: security/l10n.pm:11
-#, c-format
+#, fuzzy, c-format
 msgid "Accept bogus IPv4 error messages"
-msgstr ""
+msgstr "Aceptar mensaxes de erro IPv4                   <====="
 
 #: security/l10n.pm:12
 #, c-format
@@ -6492,6 +6496,19 @@ msgid ""
 "                 : name_of_application like  so for staroffice \n"
 "                 : and gs for ghostscript for only this one."
 msgstr ""
+"\n"
+"Aplicación de importación e monitorización de fontes\n"
+"\n"
+"OPCIÓNS:\n"
+"--windows_import : importa dende tódalas particións windows dispoñibles.\n"
+"--xls_fonts      : mostra tódalas fontes que xa existen dende xls\n"
+"--install        : acepta calquera ficheiro de fonte e calquera directorio.\n"
+"--uninstall      : desinstala calquera fonte ou calquera directorio de fontes.\n"
+"--replace        : substitúe tódalas fontes se xa existen\n"
+"--application    : 0 ningunha aplicación.\n"
+"                 : 1 tódalas aplicacións dispoñibles soportadas.\n"
+"                 : nome_da_aplicación coma so para staroffice \n"
+"                 : e gs para ghostscript só para esta opción."
 
 #: standalone.pm:88
 #, c-format
@@ -6569,7 +6586,7 @@ msgstr ""
 #: standalone.pm:117
 #, c-format
 msgid "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-usbtable] [--dynamic=dev]"
-msgstr ""
+msgstr "[--manual] [--device=dispositivo] [--update-sane=directorio_fonte_de_sane] [--update-usbtable] [--dynamic=dispositivo]"
 
 #: standalone.pm:118
 #, c-format
@@ -6578,6 +6595,9 @@ msgid ""
 "       XFdrake [--noauto] monitor\n"
 "       XFdrake resolution"
 msgstr ""
+" [todo]\n"
+"       XFdrake [--noauto] monitor\n"
+"       XFdrake resolución"
 
 #: standalone.pm:154
 #, c-format
