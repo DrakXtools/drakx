@@ -1,3 +1,6 @@
+- /sbin/usb_id is needed by mouse.pm to generate /dev/input/by-id/xxx (#39868)
+  (and not /LIB/udev/usb_id since drakx-kbd-mouse-x11 0.42)
+
 Version 10.29 - 3 April 2008
 
 - time: write UTC setting in /etc/adjtime (#36522)
