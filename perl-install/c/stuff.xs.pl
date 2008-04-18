@@ -401,6 +401,7 @@ getNetDriver(char* device)
                 break;
         }
     } else { perror("SIOCETHTOOL"); RETVAL = strdup(""); }
+    close(s);
   OUTPUT:
   RETVAL
 
