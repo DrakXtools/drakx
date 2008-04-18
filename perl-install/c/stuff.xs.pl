@@ -354,6 +354,7 @@ get_netdevices()
 
           if (ioctl(s, SIOCGIFCONF, &ifc) < 0) {
                perror("SIOCGIFCONF");
+               close(s);
                return;
           }
           if (ifc.ifc_len == sizeof(struct ifreq) * numreqs) {
