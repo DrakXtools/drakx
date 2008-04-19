@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: DrakX-el\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-03-21 20:52+0100\n"
-"PO-Revision-Date: 2008-04-07 02:59+0200\n"
+"PO-Revision-Date: 2008-04-20 00:03+0200\n"
 "Last-Translator: nikos papadopoulos <231036448@freemail.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -17,11 +17,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.0.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Greek\n"
+"X-Poedit-Country: GREECE\n"
 
 #: ../../advertising/IM_flash.pl:1
-#, c-format
+#, fuzzy, c-format
 msgid "Your desktop on a USB key"
-msgstr ""
+msgstr "Το προσωπικό σου σύστημα εργασίας σε ένα "
 
 #: ../../advertising/IM_free08S.pl:1
 #, c-format
@@ -41,12 +43,12 @@ msgstr "Ένα πλήρες σύστημα desktop Mandriva Linux, με υποσ
 #: ../../advertising/IM_range08S.pl:1
 #, c-format
 msgid "Mandriva: distributions for everybody's needs"
-msgstr "Mandriva: διανομές για όλες τις χρήσεις"
+msgstr "Mandriva: συστήματα Λίνουξ για όλες τις χρήσεις"
 
 #: any.pm:109
-#, fuzzy, c-format
+#, c-format
 msgid "Do you have further supplementary media?"
-msgstr "Έχετε άλλον;"
+msgstr "Έχεις κάποια επιπλέον συμπληρωματικά μέσα;"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: any.pm:158
@@ -57,6 +59,10 @@ msgid ""
 "\n"
 "Do you have a supplementary installation medium to configure?"
 msgstr ""
+"Βρέθηκαν τα ακόλουθα μέσα, και θα χρησιμοποιηθούν κατά την εγκατάσταση: %s.\n"
+"\n"
+"\n"
+"Έχεις κάποιο συμπληρωματικό μέσο εγκατάστασης για ρύθμιση;"
 
 #: any.pm:166
 #, c-format
@@ -91,12 +97,12 @@ msgstr "Το URL πρέπει να ξεκινά με ftp:// ή http://"
 #: any.pm:228
 #, c-format
 msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
-msgstr "Σύνδεση με την τοποθεσία της Mandriva Linux για λήψη των διαθέσιμων τόπων λήψης..."
+msgstr "Σύνδεση με την τοποθεσία της Mandriva Linux, για λήψη της λίστας με τις εναλλακτικές διευθύνσεις..."
 
 #: any.pm:233
-#, fuzzy, c-format
+#, c-format
 msgid "Failed contacting Mandriva Linux web site to get the list of available mirrors"
-msgstr "Σύνδεση με την τοποθεσία της Mandriva Linux για λήψη των διαθέσιμων τόπων λήψης..."
+msgstr "Αδυναμία σύνδεσης με την τοποθεσία της Mandriva Linux, για λήψη της λίστας με τις εναλλακτικές διευθύνσεις"
 
 #: any.pm:243
 #, c-format
@@ -111,22 +117,22 @@ msgstr "Ρύθμιση NFS"
 #: any.pm:274
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
-msgstr ""
+msgstr "Παρακαλώ, εισήγαγε το hostname (οικοδεσπότη υπολογιστή) και τη διαδρομή του μέσου NFS"
 
 #: any.pm:278
 #, c-format
 msgid "Hostname missing"
-msgstr ""
+msgstr "Λείπει ο hostname (οικοδεσπότης υπολογιστής)"
 
 #: any.pm:279
 #, c-format
 msgid "Directory must begin with \"/\""
-msgstr ""
+msgstr "Ο κατάλογος πρέπει να αρχίζει με \"/\""
 
 #: any.pm:283
 #, c-format
 msgid "Hostname of the NFS mount ?"
-msgstr ""
+msgstr "Ο hostname (οικοδεσπότης υπολογιστής) της NFS προσάρτησης ;"
 
 #: any.pm:284
 #, c-format
@@ -136,7 +142,7 @@ msgstr "Κατάλογος"
 #: any.pm:306
 #, c-format
 msgid "Supplementary"
-msgstr ""
+msgstr "Συμπληρωματικά"
 
 #: any.pm:341
 #, fuzzy, c-format
@@ -151,7 +157,7 @@ msgstr "Ψάχνω για ήδη εγκατεστημένα πακέτα..."
 #: any.pm:382
 #, c-format
 msgid "Removing packages prior to upgrade..."
-msgstr ""
+msgstr "Αφαίρεση των πακέτων, πριν την αναβάθμιση..."
 
 #: any.pm:424
 #, c-format
@@ -175,9 +181,9 @@ msgstr ""
 "Έχετε επιλέξει τους παρακάτω διακομιστές(η): %s\n"
 "\n"
 "\n"
-"Αυτοί οι διακομιστές είναι εξ ορισμού ενεργεί. Δεν έχουν κάποιο γνωστό πρόβλημα\n"
+"Αυτοί οι διακομιστές είναι εξ ορισμού ενεργoί. Δεν έχουν κάποιο γνωστό πρόβλημα\n"
 "ασφάλειας, αλλά μπορούν να βρεθούν νέα. Σε αυτή την περίπτωση βεβαιωθείτε ότι\n"
-"έχετε εγκαταστήσει την τελευταία έκδοση το συντομότερο.\n"
+"έχετε εγκαταστήσει την τελευταία έκδοση, το συντομότερο.\n"
 "\n"
 "\n"
 "Είστε βέβαιοι για την εγκατάσταση αυτών των διακομιστών;\n"
@@ -209,7 +215,7 @@ msgstr "Έγινε αλλαγή των ονομάτων των παρακάτω 
 #: any.pm:1067
 #, c-format
 msgid "%s (previously named as %s)"
-msgstr ""
+msgstr "%s (προηγουμένως ονομαζόταν %s)"
 
 #: any.pm:1124
 #, c-format
@@ -656,7 +662,7 @@ msgstr "Εργαλεία Δικτύου/Παρακολούθηση"
 #: share/meta-task/compssUsers.pl:183
 #, c-format
 msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-msgstr ""
+msgstr "Εργαλεία παρακολούθησης, απολογισμός διεργασιών, tcpdump, nmap, ..."
 
 #: share/meta-task/compssUsers.pl:187
 #, c-format
@@ -697,7 +703,7 @@ msgstr "Βήμα `%s'\n"
 #: steps_curses.pm:22
 #, c-format
 msgid "Mandriva Linux Installation %s"
-msgstr "Εγκατάσταση Mandriva Linux %s"
+msgstr "Εγκατάσταση της Mandriva Linux %s"
 
 #: steps_curses.pm:32
 #, c-format
@@ -717,8 +723,8 @@ msgid ""
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "Το σύστημά σας δεν έχει αρκετούς πόρους. Μπορεί να αντιμετωπίσετε προβλήματα\n"
-"στην εγκατάσταση του Mandriva Linux. Εάν συμβεί αυτό, μπορείτε να δοκιμάσετε εγκατάσταση κειμένου.\n"
-"Πατήστε F1 κατά την εκκίνηση από CDROM, μετά γράψτε `text'."
+"στην εγκατάσταση της Mandriva Linux. Εάν συμβεί αυτό, μπορείτε να δοκιμάσετε την εγκατάσταση κειμένου.\n"
+"Για να γίνει αυτό, πατήστε F1 κατά την εκκίνηση από το CDROM, και μετά γράψτε `text'."
 
 #: steps_gtk.pm:259
 #: steps_interactive.pm:435
@@ -726,7 +732,7 @@ msgstr ""
 #: steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
-msgstr "Επιλογή Ομάδων Πακέτων"
+msgstr "Επιλογή Ομάδων από Πακέτα"
 
 #: steps_gtk.pm:280
 #: steps_interactive.pm:581
@@ -911,6 +917,8 @@ msgid ""
 "The following installation media have been found.\n"
 "If you want to skip some of them, you can unselect them now."
 msgstr ""
+"Βρέθηκαν τα ακόλουθα μέσα εγκατάστασης.\n"
+"Αν θες να παραλειφθούν κάποια από αυτά, μπορείς να τα αποεπιλέξεις τώρα."
 
 #: steps_gtk.pm:670
 #: steps_interactive.pm:284
@@ -1028,8 +1036,8 @@ msgid ""
 "Please choose load or save package selection.\n"
 "The format is the same as auto_install generated files."
 msgstr ""
-"Παρακαλώ, επέλεξε τη φόρτωση ή την αποθήκευση της λίστας των επιλεγμένων πακέτων.\n"
-"Η μορφή είναι η ίδια με αρχεία auto_install (αυτόματης εγκατάστασης)."
+"Παρακαλώ, επέλεξε τη φόρτωση ή την αποθήκευση της λίστας με τα επιλεγμένα πακέτα.\n"
+"Η μορφή είναι η ίδια με τα αρχεία auto_install (αυτόματης εγκατάστασης)."
 
 #: steps_interactive.pm:407
 #, c-format
@@ -1082,7 +1090,7 @@ msgid ""
 "You have not selected any group of packages.\n"
 "Please choose the minimal installation you want:"
 msgstr ""
-"Δεν έχετε επιλέξει ομάδα πακέτων.\n"
+"Δεν έχετε επιλέξει κάποια ομάδα πακέτων.\n"
 "Παρακαλώ επιλέξτε την ελάχιστη εγκατάσταση που θέλετε:"
 
 #: steps_interactive.pm:540
@@ -1103,12 +1111,12 @@ msgstr "Πραγματικά ελάχιστη εγκατάσταση (ειδικ
 #: steps_interactive.pm:596
 #, c-format
 msgid "Preparing installation"
-msgstr "Προετοιμασία εγκατάστασης"
+msgstr "Προετοιμασία της εγκατάστασης"
 
 #: steps_interactive.pm:604
 #, c-format
 msgid "Installing package %s"
-msgstr "Εγκατάσταση πακέτου %s"
+msgstr "Εγκατάσταση του πακέτου %s"
 
 #: steps_interactive.pm:628
 #, c-format
@@ -1221,7 +1229,7 @@ msgstr "Έχετε κάρτα ήχου ISA;"
 #: steps_interactive.pm:905
 #, c-format
 msgid "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound card"
-msgstr "Εκτελέστε \"alsaconf\" ή \"sndconfig\", μετά την εγκατάσταση, για να ρυθμίσεις την κάρτα ήχου"
+msgstr "Εκτέλεσε την εντολή \"alsaconf\" ή \"sndconfig\", μετά την εγκατάσταση, για να ρυθμίσεις την κάρτα ήχου"
 
 #: steps_interactive.pm:907
 #, c-format
@@ -1277,7 +1285,7 @@ msgstr "Δεν έχετε ρυθμίσει το Χ. Είστε βέβαιοι ό
 #: steps_interactive.pm:1009
 #, c-format
 msgid "Preparing bootloader..."
-msgstr "Προετοιμασία προγράμματος εκκίνησης..."
+msgstr "Προετοιμασία του προγράμματος εκκίνησης..."
 
 #: steps_interactive.pm:1019
 #, fuzzy, c-format
@@ -1299,8 +1307,8 @@ msgid ""
 "Error installing aboot, \n"
 "try to force installation even if that destroys the first partition?"
 msgstr ""
-"Σφάλμα κατά την εγκατάσταση του aboot, \n"
-"προσπάθεια βεβιασμένης εγκατάστασης, ακόμα και αν αυτό έχει σαν αποτέλεσμα την καταστροφή της πρώτης κατάτμησης;"
+"Σφάλμα κατά την εγκατάσταση του aboot. \n"
+"Να γίνει ππροσπάθεια βεβιασμένης εγκατάστασης, ακόμα και αν αυτό έχει σαν αποτέλεσμα την καταστροφή της πρώτης κατάτμησης;"
 
 #: steps_interactive.pm:1040
 #, c-format
@@ -1353,16 +1361,16 @@ msgid ""
 "\n"
 "You may prefer to replay the installation.\n"
 msgstr ""
-"Η αυτόματη εγκατάσταση μπορεί να είναι πλήρως αυτόματη,\n"
-"σε αυτήν την περίπτωση θα αναλάβει το σκληρό δίσκο!!\n"
-"(αυτό αναφέρεται για περιπτώσεις εγκατάστασης σε άλλο υπολογιστή).\n"
+"Η αυτόματη εγκατάσταση μπορεί να είναι πλήρως αυτόματη, κατά προτίμηση.\n"
+"Σε αυτή την περίπτωση, θα πάρει τον έλεγχο του σκληρού δίσκου\n"
+"(αυτό είναι χρήσιμο σε περιπτώσεις εγκατάστασης σε άλλο υπολογιστή).\n"
 "\n"
-"Μπορεί να προτιμάτε να επαναλάβετε την εγκατάσταση.\n"
+"Ίσως να προτιμούσες να επαναλάβεις την εγκατάσταση.\n"
 
 #: steps_interactive.pm:1110
 #, c-format
 msgid "Replay"
-msgstr "Επαναφόρτωση"
+msgstr "Επανάληψη"
 
 #: steps_interactive.pm:1110
 #, c-format
@@ -1482,7 +1490,7 @@ msgstr "Δικτύωση"
 msgid ""
 "_: Keep these entry short\n"
 "Bootloader"
-msgstr "Προγράμματος εκκίνησης"
+msgstr "Πρόγ. εκκίνησης"
 
 #: steps_list.pm:40
 #: steps_list.pm:41
