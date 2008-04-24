@@ -225,14 +225,14 @@ sub _may_fix_grub2dev {
     my ($fstab, $grub2dev, $boot_part) = @_;
     my $real_boot_part = fs::get::root_($fstab, 'boot') or
       log::l("argh... the fstab given is useless, it doesn't contain '/'"), return;
+    
+    my $real_boot_dev = $real_boot_part->{rootDevice} or return; # if /boot is on Linux RAID 1, hope things are all right...
 
     if (my $prev_boot_part = fs::get::device2part(grub2dev($boot_part, $grub2dev), $fstab)) { # the boot_device as far as grub config files say
 	$real_boot_part == $prev_boot_part and return;
     }
 
     log::l("WARNING: we have detected that device.map is inconsistent with the system");
-    
-    my $real_boot_dev = $real_boot_part->{rootDevice};
 
     my ($hd_grub, undef, undef) = parse_grub_file($boot_part);
     if (my $prev_hd_grub = find { $grub2dev->{$_} eq $real_boot_dev } keys %$grub2dev) {

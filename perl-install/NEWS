@@ -3,6 +3,8 @@ Version 10.30 - 23 April 2008
 - bootloader-config:
   o fix detecting device.map inconsistency when "/boot" and "/" are not on
     same "drive" (esp. when "/" is LVM and "/boot" is not, #39229)
+  o do not detect device.map inconsistency when "/boot" (or "/") is on Linux
+    software raid (/dev/mdX), cf #28309 and #35714
 - diskdrake:
   o ensure no "division by zero" runtime error (#34931)
 - drakupdate_fstab:
