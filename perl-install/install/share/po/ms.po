@@ -1,13 +1,13 @@
 # DrakX Bahasa Melayu (Malay) (ms).
-# Copyright (C) 2003 Free Software Foundation, Inc.
-# Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>, 2003
+# Copyright (C) 2003, 2008 Free Software Foundation, Inc.
+# Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>, 2003, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-03-21 20:52+0100\n"
-"PO-Revision-Date: 2007-08-31 19:08+0800\n"
+"PO-Revision-Date: 2008-05-01 14:16+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -62,22 +62,22 @@ msgstr "CD-ROM"
 #: any.pm:167
 #, fuzzy, c-format
 msgid "Network (HTTP)"
-msgstr "Tetapan HTTP"
+msgstr "Pelayan Rangkaian"
 
 #: any.pm:168
 #, fuzzy, c-format
 msgid "Network (FTP)"
-msgstr "Tetapan FTP"
+msgstr "Pelayan FTP"
 
 #: any.pm:169
 #, fuzzy, c-format
 msgid "Network (NFS)"
-msgstr "Imej NFS"
+msgstr "Pelayan Rangkaian"
 
 #: any.pm:211
 #, fuzzy, c-format
 msgid "URL of the mirror?"
-msgstr "URL Autokonfigurasi:"
+msgstr "URL untuk IG"
 
 #: any.pm:217
 #, c-format
@@ -86,15 +86,12 @@ msgstr ""
 
 #: any.pm:228
 #, c-format
-msgid ""
-"Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr ""
 
 #: any.pm:233
 #, c-format
-msgid ""
-"Failed contacting Mandriva Linux web site to get the list of available "
-"mirrors"
+msgid "Failed contacting Mandriva Linux web site to get the list of available mirrors"
 msgstr ""
 
 #: any.pm:243
@@ -105,7 +102,7 @@ msgstr ""
 #: any.pm:273
 #, fuzzy, c-format
 msgid "NFS setup"
-msgstr "Tetapan NFS"
+msgstr "Tetapan Halaman"
 
 #: any.pm:274
 #, c-format
@@ -125,7 +122,7 @@ msgstr "Nama Direktori mesti dimulakan dengan slash"
 #: any.pm:283
 #, fuzzy, c-format
 msgid "Hostname of the NFS mount ?"
-msgstr "Titik lekapan NFS"
+msgstr "Perkongsian NFS Terlekap"
 
 #: any.pm:284
 #, c-format
@@ -139,9 +136,7 @@ msgstr ""
 
 #: any.pm:341
 #, fuzzy, c-format
-msgid ""
-"Can't find a package list file on this mirror. Make sure the location is "
-"correct."
+msgid "Can't find a package list file on this mirror. Make sure the location is correct."
 msgstr "Ralat pada baris %d: %s"
 
 #: any.pm:375
@@ -187,7 +182,7 @@ msgstr ""
 #: any.pm:857
 #, fuzzy, c-format
 msgid "Error reading file %s"
-msgstr "ralat membaca fail"
+msgstr "Ralat mengimport fail %s"
 
 #: any.pm:1065
 #, fuzzy, c-format
@@ -197,7 +192,7 @@ msgstr "Peranti audio berikut telah dikesan."
 #: any.pm:1067
 #, fuzzy, c-format
 msgid "%s (previously named as %s)"
-msgstr "Format sebagai Swap?"
+msgstr "&Simpan Imej Sebagai"
 
 #: any.pm:1124
 #, c-format
@@ -214,7 +209,8 @@ msgstr "FTP"
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1143 steps_interactive.pm:923
+#: any.pm:1143
+#: steps_interactive.pm:923
 #, c-format
 msgid "Network"
 msgstr "Rangkaian"
@@ -222,7 +218,7 @@ msgstr "Rangkaian"
 #: any.pm:1147
 #, fuzzy, c-format
 msgid "Please choose a media"
-msgstr "Pilih jenis media"
+msgstr "Utiliti Media Mudah Alih"
 
 #: any.pm:1163
 #, fuzzy, c-format
@@ -237,12 +233,12 @@ msgstr "Izin ditolak"
 #: any.pm:1215
 #, fuzzy, c-format
 msgid "Bad NFS name"
-msgstr "Nama pelayan NFS:"
+msgstr "Tetap Nama Imej"
 
 #: any.pm:1236
 #, fuzzy, c-format
 msgid "Bad media %s"
-msgstr "Pemeriksaan Media"
+msgstr "Media Storan"
 
 #: any.pm:1279
 #, c-format
@@ -257,9 +253,10 @@ msgstr "dalam"
 #: gtk.pm:119
 #, fuzzy, c-format
 msgid "Installation"
-msgstr "%s %s pemasangan"
+msgstr "Pemasangan sekecil mungkin"
 
-#: gtk.pm:122 share/meta-task/compssUsers.pl:42
+#: gtk.pm:122
+#: share/meta-task/compssUsers.pl:42
 #, c-format
 msgid "Configuration"
 msgstr "Konfigurasikan"
@@ -279,17 +276,18 @@ msgstr "on"
 #: interactive.pm:22
 #, fuzzy, c-format
 msgid "Bringing up the network"
-msgstr "Menaikkan antaramuka $i: "
+msgstr "Pelayan Rangkaian Lama"
 
 #: interactive.pm:27
 #, fuzzy, c-format
 msgid "Bringing down the network"
-msgstr "Mematikan daemon palam rangkaian: "
+msgstr "Pelayan Rangkaian Lama"
 
-#: media.pm:703 media.pm:714
+#: media.pm:703
+#: media.pm:714
 #, fuzzy, c-format
 msgid "Downloading file %s..."
-msgstr "Menyalin Fail"
+msgstr "Extension &fail:"
 
 #: media.pm:806
 #, c-format
@@ -299,7 +297,7 @@ msgstr ""
 #: media.pm:859
 #, fuzzy, c-format
 msgid "Copying in progress"
-msgstr "Segerak sedang berjalan"
+msgstr "&Dalam pelayar web"
 
 #: pkgs.pm:28
 #, fuzzy, c-format
@@ -343,20 +341,16 @@ msgstr "StesyenKerja"
 #: share/meta-task/compssUsers.pl:13
 #, fuzzy, c-format
 msgid "Office Workstation"
-msgstr "StesyenKerja Default"
+msgstr "Pejabat/Produktiviti"
 
 #: share/meta-task/compssUsers.pl:15
 #, c-format
-msgid ""
-"Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets "
-"(OpenOffice.org Calc, Kspread), PDF viewers, etc"
+msgid "Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets (OpenOffice.org Calc, Kspread), PDF viewers, etc"
 msgstr ""
 
 #: share/meta-task/compssUsers.pl:16
 #, c-format
-msgid ""
-"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
-"gnumeric), pdf viewers, etc"
+msgid "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, gnumeric), pdf viewers, etc"
 msgstr ""
 
 #: share/meta-task/compssUsers.pl:21
@@ -372,7 +366,7 @@ msgstr ""
 #: share/meta-task/compssUsers.pl:25
 #, fuzzy, c-format
 msgid "Multimedia station"
-msgstr "Menu multimedia"
+msgstr "Kekunci Multimedia"
 
 #: share/meta-task/compssUsers.pl:26
 #, fuzzy, c-format
@@ -386,15 +380,13 @@ msgstr "Internet Bergrafik"
 
 #: share/meta-task/compssUsers.pl:32
 #, fuzzy, c-format
-msgid ""
-"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
-"Web"
+msgid "Set of tools to read and send mail and news (mutt, tin..) and to browse the Web"
 msgstr "dan dan dan"
 
 #: share/meta-task/compssUsers.pl:37
 #, fuzzy, c-format
 msgid "Network Computer (client)"
-msgstr "Memulakan sm-client: "
+msgstr "Klien Pelayan Terminal"
 
 #: share/meta-task/compssUsers.pl:38
 #, fuzzy, c-format
@@ -416,33 +408,39 @@ msgstr "Alatan Pentadbiran"
 msgid "Editors, shells, file tools, terminals"
 msgstr "Penyunting fail"
 
-#: share/meta-task/compssUsers.pl:52 share/meta-task/compssUsers.pl:153
+#: share/meta-task/compssUsers.pl:52
+#: share/meta-task/compssUsers.pl:153
 #: share/meta-task/compssUsers.pl:155
 #, c-format
 msgid "Development"
 msgstr "Pembangunan"
 
-#: share/meta-task/compssUsers.pl:53 share/meta-task/compssUsers.pl:156
+#: share/meta-task/compssUsers.pl:53
+#: share/meta-task/compssUsers.pl:156
 #, fuzzy, c-format
 msgid "C and C++ development libraries, programs and include files"
 msgstr "Pustaka dan fail selitan untuk Oaf."
 
-#: share/meta-task/compssUsers.pl:56 share/meta-task/compssUsers.pl:160
+#: share/meta-task/compssUsers.pl:56
+#: share/meta-task/compssUsers.pl:160
 #, c-format
 msgid "Documentation"
 msgstr "Dokumentasi"
 
-#: share/meta-task/compssUsers.pl:57 share/meta-task/compssUsers.pl:161
+#: share/meta-task/compssUsers.pl:57
+#: share/meta-task/compssUsers.pl:161
 #, fuzzy, c-format
 msgid "Books and Howto's on Linux and Free Software"
 msgstr "dan on dan Bebas"
 
-#: share/meta-task/compssUsers.pl:61 share/meta-task/compssUsers.pl:164
+#: share/meta-task/compssUsers.pl:61
+#: share/meta-task/compssUsers.pl:164
 #, c-format
 msgid "LSB"
 msgstr "LSB"
 
-#: share/meta-task/compssUsers.pl:62 share/meta-task/compssUsers.pl:165
+#: share/meta-task/compssUsers.pl:62
+#: share/meta-task/compssUsers.pl:165
 #, fuzzy, c-format
 msgid "Linux Standard Base. Third party applications support"
 msgstr "Asas"
@@ -467,15 +465,17 @@ msgstr "Groupware"
 msgid "Kolab Server"
 msgstr "Pelayan Kolab"
 
-#: share/meta-task/compssUsers.pl:79 share/meta-task/compssUsers.pl:120
+#: share/meta-task/compssUsers.pl:79
+#: share/meta-task/compssUsers.pl:120
 #, fuzzy, c-format
 msgid "Firewall/Router"
 msgstr "_Konfigurasikan Firewall"
 
-#: share/meta-task/compssUsers.pl:80 share/meta-task/compssUsers.pl:121
+#: share/meta-task/compssUsers.pl:80
+#: share/meta-task/compssUsers.pl:121
 #, fuzzy, c-format
 msgid "Internet gateway"
-msgstr "Gateway Tidak Sah"
+msgstr "Internet Bergrafik"
 
 #: share/meta-task/compssUsers.pl:83
 #, fuzzy, c-format
@@ -520,9 +520,10 @@ msgstr "(%ld)PELAYAN >>> %s"
 #: share/meta-task/compssUsers.pl:100
 #, fuzzy, c-format
 msgid "NFS Server, Samba server"
-msgstr "Konfigurasi Pelayan Samba"
+msgstr "Monitor status Samba"
 
-#: share/meta-task/compssUsers.pl:103 share/meta-task/compssUsers.pl:116
+#: share/meta-task/compssUsers.pl:103
+#: share/meta-task/compssUsers.pl:116
 #, c-format
 msgid "Database"
 msgstr "Pangkalan Data"
@@ -550,7 +551,7 @@ msgstr "Mel"
 #: share/meta-task/compssUsers.pl:113
 #, fuzzy, c-format
 msgid "Postfix mail server"
-msgstr "Pelayan Mel (SMTP)"
+msgstr "Pelayan Nama DNS"
 
 #: share/meta-task/compssUsers.pl:117
 #, c-format
@@ -570,36 +571,32 @@ msgstr ""
 #: share/meta-task/compssUsers.pl:131
 #, fuzzy, c-format
 msgid "Graphical Environment"
-msgstr "Pembolehubah Persekitaran"
+msgstr "Internet Bergrafik"
 
 #: share/meta-task/compssUsers.pl:133
 #, fuzzy, c-format
 msgid "KDE Workstation"
-msgstr "StesyenKerja Default"
+msgstr "Menu KDE"
 
 #: share/meta-task/compssUsers.pl:134
 #, fuzzy, c-format
-msgid ""
-"The K Desktop Environment, the basic graphical environment with a collection "
-"of accompanying tools"
+msgid "The K Desktop Environment, the basic graphical environment with a collection of accompanying tools"
 msgstr "Desktop Persekitaran asas"
 
 #: share/meta-task/compssUsers.pl:138
 #, fuzzy, c-format
 msgid "GNOME Workstation"
-msgstr "StesyenKerja Default"
+msgstr "Gnome-Breakout"
 
 #: share/meta-task/compssUsers.pl:139
 #, fuzzy, c-format
-msgid ""
-"A graphical environment with user-friendly set of applications and desktop "
-"tools"
+msgid "A graphical environment with user-friendly set of applications and desktop tools"
 msgstr "A pengguna dan"
 
 #: share/meta-task/compssUsers.pl:142
 #, fuzzy, c-format
 msgid "IceWm Desktop"
-msgstr "Desktop Default:"
+msgstr "Persekitaran Desktop"
 
 #: share/meta-task/compssUsers.pl:146
 #, fuzzy, c-format
@@ -616,10 +613,11 @@ msgstr ""
 msgid "Utilities"
 msgstr "Utiliti"
 
-#: share/meta-task/compssUsers.pl:172 share/meta-task/compssUsers.pl:173
+#: share/meta-task/compssUsers.pl:172
+#: share/meta-task/compssUsers.pl:173
 #, fuzzy, c-format
 msgid "SSH Server"
-msgstr "_Pelayan NIS:"
+msgstr "Pelayan FTP"
 
 #: share/meta-task/compssUsers.pl:177
 #, c-format
@@ -629,7 +627,7 @@ msgstr "Webmin"
 #: share/meta-task/compssUsers.pl:178
 #, fuzzy, c-format
 msgid "Webmin Remote Configuration Server"
-msgstr "Alatan Tetapan Pelayan NFS"
+msgstr "Alatan tetapan pelayan dan klien fax"
 
 #: share/meta-task/compssUsers.pl:182
 #, fuzzy, c-format
@@ -644,7 +642,7 @@ msgstr ""
 #: share/meta-task/compssUsers.pl:187
 #, fuzzy, c-format
 msgid "Mandriva Wizards"
-msgstr "Wizard pelayan"
+msgstr "Mandriva Galaxy"
 
 #: share/meta-task/compssUsers.pl:188
 #, fuzzy, c-format
@@ -657,8 +655,7 @@ msgid ""
 "An error occurred, but I do not know how to handle it nicely.\n"
 "Continue at your own risk."
 msgstr ""
-"Ralat telah berlaku, tetapi saya tidak tahu bagaimana untuk mengawalnya "
-"dengan baik.\n"
+"Ralat telah berlaku, tetapi saya tidak tahu bagaimana untuk mengawalnya dengan baik.\n"
 "Teruskan atas risiko anda."
 
 #: steps.pm:436
@@ -666,19 +663,19 @@ msgstr ""
 msgid ""
 "Some important packages did not get installed properly.\n"
 "Either your cdrom drive or your cdrom is defective.\n"
-"Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm"
-"\"\n"
+"Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm\"\n"
 msgstr "on"
 
-#: steps_auto_install.pm:71 steps_stdio.pm:27
+#: steps_auto_install.pm:71
+#: steps_stdio.pm:27
 #, fuzzy, c-format
 msgid "Entering step `%s'\n"
-msgstr "Langkah bersudut:"
+msgstr "Langkah pertama"
 
 #: steps_curses.pm:22
 #, fuzzy, c-format
 msgid "Mandriva Linux Installation %s"
-msgstr "Arahan Pemasangan - Mandriva Linux %s"
+msgstr "Mandriva Linux Update"
 
 #: steps_curses.pm:32
 #, c-format
@@ -694,31 +691,34 @@ msgstr ""
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
-"Mandriva Linux. If that occurs, you can try a text install instead. For "
-"this,\n"
+"Mandriva Linux. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 
-#: steps_gtk.pm:259 steps_interactive.pm:435 steps_interactive.pm:564
+#: steps_gtk.pm:259
+#: steps_interactive.pm:435
+#: steps_interactive.pm:564
 #: steps_list.pm:30
 #, fuzzy, c-format
 msgid "Package Group Selection"
-msgstr "Pemilihan Kumpulan Pakej"
+msgstr "Barisatas pilihan (toggle)"
 
-#: steps_gtk.pm:280 steps_interactive.pm:581
+#: steps_gtk.pm:280
+#: steps_interactive.pm:581
 #, fuzzy, c-format
 msgid "Individual package selection"
-msgstr "Pemilihan Pakej Satu Persatu"
+msgstr "Barisatas pilihan (toggle)"
 
-#: steps_gtk.pm:302 steps_interactive.pm:507
+#: steps_gtk.pm:302
+#: steps_interactive.pm:507
 #, fuzzy, c-format
 msgid "Total size: %d / %d MB"
-msgstr "Saiz dicadangkan (MB):"
+msgstr "Saiz lajur automatik"
 
 #: steps_gtk.pm:347
 #, fuzzy, c-format
 msgid "Bad package"
-msgstr "Pakej Hilang"
+msgstr "Pelihat Pakej"
 
 #: steps_gtk.pm:349
 #, c-format
@@ -748,7 +748,7 @@ msgstr ""
 #: steps_gtk.pm:389
 #, fuzzy, c-format
 msgid "due to missing %s"
-msgstr "kerana kehilangan %s"
+msgstr "&Lompat ke hiperlink"
 
 #: steps_gtk.pm:390
 #, c-format
@@ -767,9 +767,7 @@ msgstr "untuk menyimpan %s"
 
 #: steps_gtk.pm:397
 #, c-format
-msgid ""
-"You can not select this package as there is not enough space left to install "
-"it"
+msgid "You can not select this package as there is not enough space left to install it"
 msgstr ""
 
 #: steps_gtk.pm:400
@@ -814,29 +812,32 @@ msgstr "Pasang"
 #: steps_gtk.pm:439
 #, fuzzy, c-format
 msgid "Load/Save selection"
-msgstr "/Simpan/Muat pra-tetap auto"
+msgstr "Barisatas pilihan (toggle)"
 
 #: steps_gtk.pm:440
 #, fuzzy, c-format
 msgid "Updating package selection"
-msgstr "Pemilihan Pakej Satu Persatu"
+msgstr "Barisatas pilihan (toggle)"
 
 #: steps_gtk.pm:445
 #, fuzzy, c-format
 msgid "Minimal install"
-msgstr "Tetingkap Pemasangan"
+msgstr "Pasang plugin baru"
 
 #: steps_gtk.pm:459
 #, c-format
 msgid "Software Management"
 msgstr "Pengurusan Perisian"
 
-#: steps_gtk.pm:459 steps_interactive.pm:393
+#: steps_gtk.pm:459
+#: steps_interactive.pm:393
 #, fuzzy, c-format
 msgid "Choose the packages you want to install"
 msgstr "Pilih alatan yang anda hendak guna"
 
-#: steps_gtk.pm:476 steps_interactive.pm:595 steps_list.pm:32
+#: steps_gtk.pm:476
+#: steps_interactive.pm:595
+#: steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "Memasang"
@@ -844,12 +845,12 @@ msgstr "Memasang"
 #: steps_gtk.pm:502
 #, fuzzy, c-format
 msgid "No details"
-msgstr "Perincian bagi '%s'"
+msgstr "Maklumat lanjut Susunatur"
 
 #: steps_gtk.pm:517
 #, fuzzy, c-format
 msgid "Time remaining "
-msgstr "/Masa yang Tinggal"
+msgstr "Masa Himpun"
 
 #: steps_gtk.pm:518
 #, c-format
@@ -860,10 +861,12 @@ msgstr ""
 #, fuzzy, c-format
 msgid "%d package"
 msgid_plural "%d packages"
-msgstr[0] "Pakej"
+msgstr[0] "Pelihat Pakej"
 msgstr[1] "    Pakej"
 
-#: steps_gtk.pm:591 steps_interactive.pm:783 steps_list.pm:43
+#: steps_gtk.pm:591
+#: steps_interactive.pm:783
+#: steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Ringkasan"
@@ -873,31 +876,34 @@ msgstr "Ringkasan"
 msgid "Configure"
 msgstr "Buat konfigurasi"
 
-#: steps_gtk.pm:625 steps_interactive.pm:779 steps_interactive.pm:935
+#: steps_gtk.pm:625
+#: steps_interactive.pm:779
+#: steps_interactive.pm:935
 #, fuzzy, c-format
 msgid "not configured"
-msgstr "Firewall tidak dikonfigurasikan."
+msgstr "Tiada"
 
-#: steps_gtk.pm:661 steps_interactive.pm:278
+#: steps_gtk.pm:661
+#: steps_interactive.pm:278
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
 "If you want to skip some of them, you can unselect them now."
 msgstr ""
 
-#: steps_gtk.pm:670 steps_interactive.pm:284
+#: steps_gtk.pm:670
+#: steps_interactive.pm:284
 #, c-format
 msgid ""
-"You have the option to copy the contents of the CDs onto the hard drive "
-"before installation.\n"
-"It will then continue from the hard drive and the packages will remain "
-"available once the system is fully installed."
+"You have the option to copy the contents of the CDs onto the hard drive before installation.\n"
+"It will then continue from the hard drive and the packages will remain available once the system is fully installed."
 msgstr ""
 
-#: steps_gtk.pm:672 steps_interactive.pm:286
+#: steps_gtk.pm:672
+#: steps_interactive.pm:286
 #, fuzzy, c-format
 msgid "Copy whole CDs"
-msgstr "Tulis CD/DVD"
+msgstr "Main CD audio"
 
 #: steps_interactive.pm:38
 #, c-format
@@ -917,7 +923,7 @@ msgstr "penuh"
 #: steps_interactive.pm:129
 #, fuzzy, c-format
 msgid "Install/Upgrade"
-msgstr "Pemeriksaan Naiktaraf"
+msgstr "Pasang plugin baru"
 
 #: steps_interactive.pm:130
 #, c-format
@@ -929,7 +935,7 @@ msgstr ""
 msgid ""
 "_: This is a noun:\n"
 "Install"
-msgstr "Pasang"
+msgstr "Katalaluan diperlukan, ini adalah dokumen yang dienkrip"
 
 #: steps_interactive.pm:136
 #, fuzzy, c-format
@@ -949,7 +955,7 @@ msgstr ""
 #: steps_interactive.pm:158
 #, fuzzy, c-format
 msgid "Encryption key for %s"
-msgstr "tiada kekunci ditakrifkan untuk `%s'"
+msgstr "&Cari Bantuan"
 
 #: steps_interactive.pm:194
 #, c-format
@@ -959,29 +965,23 @@ msgstr "IDE"
 #: steps_interactive.pm:194
 #, fuzzy, c-format
 msgid "Configuring IDE"
-msgstr "Pengawal IDE"
+msgstr "IDE Anjuta"
 
 #: steps_interactive.pm:231
 #, fuzzy, c-format
-msgid ""
-"No free space for 1MB bootstrap! Install will continue, but to boot your "
-"system, you'll need to create the bootstrap partition in DiskDrake"
+msgid "No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"
 msgstr "Tidak Install dalam"
 
 #: steps_interactive.pm:236
 #, fuzzy, c-format
-msgid ""
-"You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
-"to boot your system, you'll need to create the bootstrap partition in "
-"DiskDrake"
+msgid "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"
 msgstr "Tidak Install dalam"
 
 #: steps_interactive.pm:328
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
-"Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when "
-"done.\n"
+"Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.\n"
 "If you do not have it, press Cancel to avoid installation from this Cd-Rom."
 msgstr ""
 
@@ -994,9 +994,7 @@ msgstr ""
 
 #: steps_interactive.pm:358
 #, c-format
-msgid ""
-"Your system does not have enough space left for installation or upgrade (%"
-"dMB > %dMB)"
+msgid "Your system does not have enough space left for installation or upgrade (%dMB > %dMB)"
 msgstr ""
 
 #: steps_interactive.pm:405
@@ -1019,7 +1017,7 @@ msgstr "Simpan"
 #: steps_interactive.pm:415
 #, fuzzy, c-format
 msgid "Bad file"
-msgstr "Saiz fail stats tidak betul.\n"
+msgstr "Extension &fail:"
 
 #: steps_interactive.pm:431
 #, c-format
@@ -1027,14 +1025,14 @@ msgid "Install Mandriva KDE Desktop"
 msgstr ""
 
 #: steps_interactive.pm:432
-#, c-format
+#, fuzzy, c-format
 msgid "Install Mandriva GNOME Desktop"
-msgstr ""
+msgstr "Sistem aplet desktop bagi GNOME"
 
 #: steps_interactive.pm:433
 #, fuzzy, c-format
 msgid "Custom install"
-msgstr "Tetingkap Pemasangan"
+msgstr "Kamus Lazim:"
 
 #: steps_interactive.pm:436
 #, c-format
@@ -1049,7 +1047,7 @@ msgstr ""
 #: steps_interactive.pm:536
 #, fuzzy, c-format
 msgid "Type of install"
-msgstr "Tetingkap Pemasangan"
+msgstr "Jenis per&nomboran:"
 
 #: steps_interactive.pm:537
 #, c-format
@@ -1061,7 +1059,7 @@ msgstr ""
 #: steps_interactive.pm:540
 #, fuzzy, c-format
 msgid "With X"
-msgstr "%s dengan %s"
+msgstr "Dengan penghujung:"
 
 #: steps_interactive.pm:541
 #, fuzzy, c-format
@@ -1076,25 +1074,22 @@ msgstr "tidak"
 #: steps_interactive.pm:596
 #, fuzzy, c-format
 msgid "Preparing installation"
-msgstr "Jenis Pemasangan"
+msgstr "Pemasangan sekecil mungkin"
 
 #: steps_interactive.pm:604
-#, fuzzy, c-format
+#, c-format
 msgid "Installing package %s"
-msgstr "Install pakej `%s' (%s/%s)..."
+msgstr "Memasang pakej %s"
 
 #: steps_interactive.pm:628
-#, fuzzy, c-format
+#, c-format
 msgid "There was an error ordering packages:"
-msgstr ""
-"Tedapat ralat memasang pakej.\n"
-"\n"
-"Keluar."
+msgstr "Tedapat ralat menyusun pakej:"
 
 #: steps_interactive.pm:628
-#, fuzzy, c-format
+#, c-format
 msgid "Go on anyway?"
-msgstr "%s %s pemasangan pada hos %s"
+msgstr "Teruskan juga?"
 
 #: steps_interactive.pm:632
 #, c-format
@@ -1131,7 +1126,8 @@ msgstr "Tetapan pasca pemasangan"
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr ""
 
-#: steps_interactive.pm:691 steps_list.pm:47
+#: steps_interactive.pm:691
+#: steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "Kemaskini"
@@ -1148,8 +1144,7 @@ msgid ""
 "\n"
 "Do you want to install the updates?"
 msgstr ""
-"Sekarang anda mempunyai peluang untuk memuatturun pakej dikemaskini. Pakej "
-"ini\n"
+"Sekarang anda mempunyai peluang untuk memuatturun pakej dikemaskini. Pakej ini\n"
 "telah dikemaskini selepas edaran dilancarkan. Mereka mungkin\n"
 "mengandungi pembetulan pepijat atau keselamatan.\n"
 "\n"
@@ -1174,13 +1169,17 @@ msgstr "Tidak boleh menghubungi mirror %s"
 msgid "%s on %s"
 msgstr "%s pada %s"
 
-#: steps_interactive.pm:860 steps_interactive.pm:867 steps_interactive.pm:881
-#: steps_interactive.pm:899 steps_interactive.pm:914
+#: steps_interactive.pm:860
+#: steps_interactive.pm:867
+#: steps_interactive.pm:881
+#: steps_interactive.pm:899
+#: steps_interactive.pm:914
 #, c-format
 msgid "Hardware"
 msgstr "Perkakasan"
 
-#: steps_interactive.pm:882 steps_interactive.pm:900
+#: steps_interactive.pm:882
+#: steps_interactive.pm:900
 #, c-format
 msgid "Sound card"
 msgstr "Kad bunyi"
@@ -1192,9 +1191,7 @@ msgstr ""
 
 #: steps_interactive.pm:905
 #, c-format
-msgid ""
-"Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
-"card"
+msgid "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound card"
 msgstr ""
 
 #: steps_interactive.pm:907
@@ -1207,7 +1204,8 @@ msgstr "Tiada kad bunyi dikesan. Cuba \"harddrake\" selepas pemasangan."
 msgid "Graphical interface"
 msgstr "Antaramuka Bergrafik"
 
-#: steps_interactive.pm:922 steps_interactive.pm:933
+#: steps_interactive.pm:922
+#: steps_interactive.pm:933
 #, c-format
 msgid "Network & Internet"
 msgstr "Rangkaian & Internet"
@@ -1254,16 +1252,8 @@ msgstr "Menyediakan pemuatboot..."
 
 #: steps_interactive.pm:1019
 #, c-format
-msgid ""
-"You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
-"will not work for you. The install will continue, but you'll need to use "
-"BootX or some other means to boot your machine. The kernel argument for the "
-"root fs is: root=%s"
-msgstr ""
-"Anda kelihatan mempunyai mesin lama atau yang tidak diketahui, pemuat boot "
-"yaboot tidak akan berfungsi untuk anda. Pemasangan akan diteruskan, tetapi "
-"anda perlu menggunakan BootX atau sebarang cara lain untuk memboot mesin "
-"anda. Hujah kernel untuk sistemfail root adalah: root=%s"
+msgid "You appear to have an OldWorld or Unknown machine, the yaboot bootloader will not work for you. The install will continue, but you'll need to use BootX or some other means to boot your machine. The kernel argument for the root fs is: root=%s"
+msgstr "Anda kelihatan mempunyai mesin lama atau yang tidak diketahui, pemuat boot yaboot tidak akan berfungsi untuk anda. Pemasangan akan diteruskan, tetapi anda perlu menggunakan BootX atau sebarang cara lain untuk memboot mesin anda. Hujah kernel untuk sistemfail root adalah: root=%s"
 
 #: steps_interactive.pm:1025
 #, c-format
@@ -1281,9 +1271,7 @@ msgstr ""
 
 #: steps_interactive.pm:1040
 #, c-format
-msgid ""
-"In this security level, access to the files in the Windows partition is "
-"restricted to the administrator."
+msgid "In this security level, access to the files in the Windows partition is restricted to the administrator."
 msgstr ""
 
 #: steps_interactive.pm:1072
@@ -1314,7 +1302,8 @@ msgstr "Tahniah"
 msgid "Reboot"
 msgstr "Boot semula"
 
-#: steps_interactive.pm:1103 steps_interactive.pm:1104
+#: steps_interactive.pm:1103
+#: steps_interactive.pm:1104
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "Jana cakera liut auto pasang"
@@ -1357,7 +1346,8 @@ msgid ""
 "Language"
 msgstr "Bahasa"
 
-#: steps_list.pm:16 steps_list.pm:23
+#: steps_list.pm:16
+#: steps_list.pm:23
 #, c-format
 msgid "Localization"
 msgstr ""
@@ -1376,14 +1366,16 @@ msgid ""
 "Mouse"
 msgstr "Tetikus"
 
-#: steps_list.pm:19 steps_list.pm:20
+#: steps_list.pm:19
+#: steps_list.pm:20
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Hard drive detection"
 msgstr "Pengesanan cakera keras"
 
-#: steps_list.pm:21 steps_list.pm:22
+#: steps_list.pm:21
+#: steps_list.pm:22
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
@@ -1411,7 +1403,8 @@ msgid ""
 "Partitioning"
 msgstr "Pempartisyenan"
 
-#: steps_list.pm:27 steps_list.pm:28
+#: steps_list.pm:27
+#: steps_list.pm:28
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
@@ -1439,21 +1432,24 @@ msgid ""
 "Users"
 msgstr "Pengguna"
 
-#: steps_list.pm:36 steps_list.pm:37
+#: steps_list.pm:36
+#: steps_list.pm:37
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "Rangkaian"
 
-#: steps_list.pm:38 steps_list.pm:39
+#: steps_list.pm:38
+#: steps_list.pm:39
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Bootloader"
 msgstr ""
 
-#: steps_list.pm:40 steps_list.pm:41
+#: steps_list.pm:40
+#: steps_list.pm:41
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
@@ -1467,7 +1463,8 @@ msgid ""
 "Summary"
 msgstr "Ringkasan"
 
-#: steps_list.pm:44 steps_list.pm:45
+#: steps_list.pm:44
+#: steps_list.pm:45
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
@@ -1488,8 +1485,3 @@ msgid ""
 "Exit"
 msgstr "Keluar"
 
-#~ msgid "All"
-#~ msgstr "Semua"
-
-#~ msgid "TV card"
-#~ msgstr "Kad TV"
