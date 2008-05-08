@@ -119,7 +119,7 @@ our %l = (
       qw(pata_efar pata_hpt366 pata_hpt37x pata_hpt3x2n pata_hpt3x3 pata_isapnp pata_it821x pata_it8172 pata_it8213 pata_jmicron),
       qw(pata_legacy pata_marvell pata_mpiix pata_netcell pata_ns87410 pata_oldpiix pata_opti pata_optidma),
       qw(pata_pdc2027x pata_pdc202xx_old pata_platform pata_qdi pata_radisys pata_rz1000),
-      qw(pata_sc1200 pata_serverworks pata_sil680 pata_sis pata_sl82c105 pata_triflex pata_via pata_winbond ata_generic),
+      qw(pata_sc1200 pata_sch pata_serverworks pata_sil680 pata_sis pata_sl82c105 pata_triflex pata_via pata_winbond ata_generic),
       if_(arch() =~ /ppc/, 'sata_fsl'),
     ],
     hardware_raid => [
