@@ -269,8 +269,9 @@
       partimage_whole_disk
     </to>
   </from>
-  <from dir="/usr/lib/libDrakX">
+  <from dir="/usr/lib/libDrakX" expand="glob">
     raid.pm <!-- required when needed in guessmounts -->
+    partition_table/*.pm <!-- required by partimage_whole_disk -->
   </from>
 </filter>
 
