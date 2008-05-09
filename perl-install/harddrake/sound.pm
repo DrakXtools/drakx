@@ -325,7 +325,7 @@ sub switch {
 
         my $write_config = sub {
             set_pulseaudio($is_pulseaudio_enabled);
-            set_pulseaudio_routing($is_pulseaudio_routing_enabled);
+            set_pulseaudio_routing($is_pulseaudio_enabled && $is_pulseaudio_routing_enabled);
             set_5_1_in_pulseaudio($is_5_1_in_pulseaudio_enabled);
             set_user_switching($is_user_switching);
         };
