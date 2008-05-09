@@ -339,6 +339,7 @@ sub switch {
             {
                 text => N("Automatic routing from ALSA to PulseAudio"),
                 type => 'bool', val => \$is_pulseaudio_routing_enabled,
+                disabled => sub { !$is_pulseaudio_enabled },
             },
             {
                 text => N("Enable 5.1 sound with Pulse Audio"),
