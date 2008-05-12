@@ -271,6 +271,7 @@
   </from>
   <from dir="/usr/lib/libDrakX" expand="glob">
     raid.pm <!-- required when needed in guessmounts -->
+    fs/dmraid.pm <!-- required by fsedit -->
     partition_table/*.pm <!-- required by partimage_whole_disk -->
   </from>
 </filter>
