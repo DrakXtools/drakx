@@ -344,6 +344,7 @@ sub switch {
             {
                 text => N("Enable 5.1 sound with Pulse Audio"),
                 type => 'bool', val => \$is_5_1_in_pulseaudio_enabled,
+                disabled => sub { !$is_pulseaudio_enabled },
             },
             {
                 text => N("Enable user switching for audio applications"),
