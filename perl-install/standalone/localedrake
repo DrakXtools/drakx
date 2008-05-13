@@ -52,10 +52,4 @@ if ($> && lang::IM2packages($locale)) {
 }
 lang::write_and_install($locale, $in->do_pkgs, $>);
 
-my $msg = N("The change is done, but to be effective you must logout");
-if (my $wm = $> && any::running_window_manager()) {
-    $in->ask_okcancel('', $msg, 1)
-      and any::ask_window_manager_to_logout($wm);
-} else {
-    $in->ask_warn('', $msg);
-}
+any::ask_for_X_restart($in);
