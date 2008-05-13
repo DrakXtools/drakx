@@ -328,6 +328,10 @@ sub switch {
             set_pulseaudio_routing($is_pulseaudio_enabled && $is_pulseaudio_routing_enabled);
             set_5_1_in_pulseaudio($is_5_1_in_pulseaudio_enabled);
             set_user_switching($is_user_switching);
+            if ($is_pulseaudio_routing_enabled) {
+                $in->do_pkgs->ensure_is_installed('alsa-plugins-pulseaudio', '/usr/' . (arch() =~ /x86_64/ ? 'lib64' : 'lib')
+                                                    .'/alsa-lib/libasound_module_pcm_pulse.so2');
+            }
         };
 
         my @common = (
