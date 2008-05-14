@@ -624,9 +624,9 @@ sub is_lan_interface {
 }
 
 sub is_useful_interface {
-    # - sit0 which is *always* created by net/ipv6/sit.c, thus is always created since net.agent loads ipv6 module
-    # - wifi%d are created by 3rdparty/hostap/hostap_hw.c (pseudo statistics devices, #14523)
-    # - wmaster%d are created by net/mac80211/ieee80211.c ("master" 802.11 device)
+    # sit0 which is *always* created by net/ipv6/sit.c, thus is always created since net.agent loads ipv6 module
+    # wifi%d are created by 3rdparty/hostap/hostap_hw.c (pseudo statistics devices, #14523)
+    # wmaster%d are created by net/mac80211/ieee80211.c ("master" 802.11 device)
     # ax*, rose*, nr*, bce* and scc* are Hamradio devices (#28776)
     $_[0] !~ /^(?:lo|sit0|wifi|wmaster|ax|rose|nr|bce|scc)/;
 }
