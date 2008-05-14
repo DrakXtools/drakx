@@ -614,7 +614,7 @@ sub is_lan_interface {
     # we want LAN like interfaces here (eg: ath|br|eth|fddi|plip|ra|tr|usb|wlan).
     # there's also bnep%d for bluetooth, bcp%d...
     # we do this by blacklisting the following interfaces:
-    # - ippp|isdn|plip|ppp (initscripts suggest that isdn%d can be created but kernel sources claim not)
+    #   ippp|isdn|plip|ppp (initscripts suggest that isdn%d can be created but kernel sources claim not)
     #   ippp%d are created by drivers/isdn/i4l/isdn_ppp.c
     #   plip%d are created by drivers/net/plip.c
     #   ppp%d are created by drivers/net/ppp_generic.c
