@@ -614,12 +614,13 @@ sub is_lan_interface {
     # we want LAN like interfaces here (eg: ath|br|eth|fddi|plip|ra|tr|usb|wlan).
     # there's also bnep%d for bluetooth, bcp%d...
     # we do this by blacklisting the following interfaces:
+    #   hso%d are created by drivers/net/usb/hso.c
     #   ippp|isdn|plip|ppp (initscripts suggest that isdn%d can be created but kernel sources claim not)
     #   ippp%d are created by drivers/isdn/i4l/isdn_ppp.c
     #   plip%d are created by drivers/net/plip.c
     #   ppp%d are created by drivers/net/ppp_generic.c
     is_useful_interface($_[0]) &&
-    $_[0] !~ /^(?:ippp|isdn|plip|ppp)/;
+    $_[0] !~ /^(?:hso|ippp|isdn|plip|ppp)/;
 }
 
 sub is_useful_interface {
