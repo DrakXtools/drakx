@@ -238,11 +238,14 @@ sub report_bug_to_bugzilla() {
     }
     my $rel_data = mandrake_release_info();
     my $rel = standalone::real_version();
+    my $arch = arch();
+    $arch = 'i586' if arch =~ /^i.86/;
     my $options = join('&',
                        ($product || $version ? 'cf_rpmpkg=' . join('-', $product, $version) : ()),
                        'version=' . ($rel_data->{branch} eq 'Devel' ? 'Cooker' : $rel_data->{version}),
                        'component=Core%20Packages',
                        'classification=Mandriva%20Linux',
+                       "rep_platform=$arch",
                        if_($incident,
                            "short_desc=$prog%20" . ($segfaulted ? 'segfaulted' : 'crashed'),
                            'comment=' . uri_escape(qq(The "$prog" program crashed. Drakbug-$rel caught it.
