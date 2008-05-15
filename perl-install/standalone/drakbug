@@ -238,6 +238,10 @@ sub report_bug_to_bugzilla() {
     }
     my $rel_data = mandrake_release_info();
     my $rel = standalone::real_version();
+    my $cpuinfo;
+    if (cat_('/proc/cpuinfo') =~ /model name\s*:\s*(.*)$/m) {
+        $cpuinfo = $1;
+    }
     my $arch = arch();
     $arch = 'i586' if arch =~ /^i.86/;
     my $options = join('&',
@@ -248,7 +252,10 @@ sub report_bug_to_bugzilla() {
                        "rep_platform=$arch",
                        if_($incident,
                            "short_desc=$prog%20" . ($segfaulted ? 'segfaulted' : 'crashed'),
-                           'comment=' . uri_escape(qq(The "$prog" program crashed. Drakbug-$rel caught it.
+                       ),
+                           'comment=' . uri_escape(
+                               if_($incident,
+                                   qq(The "$prog" program crashed. Drakbug-$rel caught it.
 
 ) . ($text || "Please describe what you were doing when it crashed.") . "\n\n"
   . ($error ? qq(Backtrace was:
@@ -257,8 +264,10 @@ $error) :
     . if_($gdb_trace, qq(
 GDB backtrace was (its interesting part is below Perl_pp_fork() or Perl_pp_waitpid()):
 $gdb_trace)),
-                                               ),
-                       ),
+                               )
+                                 . qq(Kernel version = $kernel_release
+) . if_($cpuinfo, "CPU=$cpuinfo")
+                           ),
                    );
     print($bugzilla_url . "?" . $options . "\n");
     run_program::raw({ detach => 1, setuid => $parent_uid }, '/usr/bin/www-browser', "$bugzilla_url?$options");
