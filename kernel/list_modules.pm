@@ -75,7 +75,7 @@ our %l = (
       qw(fcpci fcdsl fcdsl fcdsl2 fcdslsl fcdslslusb fcdslusb fcdslusba fcusb fcusb2 fxusb fxusb_CZ)
     ],
     cellular => [
-      qw(nozomi option),
+      qw(hso nozomi option),
     ],
     modem => [
       qw(ltmodem mwave sm56),
