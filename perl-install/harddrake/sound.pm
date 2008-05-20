@@ -233,9 +233,9 @@ sub set_pulseaudio_routing {
     my ($val) = @_;
     substInFile {
         if ($val) {
-            s/^$disabling_routing//;
+            s/^(?:$disabling_routing)*//g;
         } else {
-            s/^/$disabling_routing/;
+            s/^/$disabling_routing/ if !/^$disabling_routing/;
         }
     } $alsa_routing_config_file;
 }
