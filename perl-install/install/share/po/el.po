@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: DrakX-el\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-03-21 20:52+0100\n"
-"PO-Revision-Date: 2008-04-20 00:03+0200\n"
+"PO-Revision-Date: 2008-05-24 11:54+0200\n"
 "Last-Translator: nikos papadopoulos <231036448@freemail.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -19,11 +19,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Language: Greek\n"
 "X-Poedit-Country: GREECE\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 #: ../../advertising/IM_flash.pl:1
-#, fuzzy, c-format
+#, c-format
 msgid "Your desktop on a USB key"
-msgstr "Το προσωπικό σου σύστημα εργασίας σε ένα "
+msgstr "Το προσωπικό σου σύστημα εργασίας σε ένα USB"
 
 #: ../../advertising/IM_free08S.pl:1
 #, c-format
@@ -145,9 +146,9 @@ msgid "Supplementary"
 msgstr "Συμπληρωματικά"
 
 #: any.pm:341
-#, fuzzy, c-format
+#, c-format
 msgid "Can't find a package list file on this mirror. Make sure the location is correct."
-msgstr "Δεν βρέθηκε το %s στο %s"
+msgstr "Δεν βρέθηκε το αρχείο με την λίστα των πακέτων σε αυτόν τον mirror. Σιγουρευτείτε ότι η τοποθεσία είναι σωστή."
 
 #: any.pm:375
 #, c-format
@@ -404,9 +405,9 @@ msgid "Internet station"
 msgstr "Σταθμός Διαδικτύου"
 
 #: share/meta-task/compssUsers.pl:32
-#, fuzzy, c-format
+#, c-format
 msgid "Set of tools to read and send mail and news (mutt, tin..) and to browse the Web"
-msgstr "Εργαλεία για αποστολή και λήψη αλληλογραφίας και ειδήσεων (pine, mutt, tin...) και περιήγηση στο Διαδίκτυο"
+msgstr "Εργαλεία για αποστολή και λήψη αλληλογραφίας και ειδήσεων (mutt, tin...) και περιήγηση στο Διαδίκτυο"
 
 #: share/meta-task/compssUsers.pl:37
 #, c-format
@@ -481,7 +482,7 @@ msgid "Apache"
 msgstr "Apache"
 
 #: share/meta-task/compssUsers.pl:75
-#, fuzzy, c-format
+#, c-format
 msgid "Groupware"
 msgstr "Groupware"
 
@@ -508,9 +509,9 @@ msgid "Mail/News"
 msgstr "Αλληλογραφία/Νέα"
 
 #: share/meta-task/compssUsers.pl:84
-#, fuzzy, c-format
+#, c-format
 msgid "Postfix mail server, Inn news server"
-msgstr "Εξυπηρετητής ταχυδρομείου Postfix"
+msgstr "Postfix server ταχυδρομείου, Inn server ειδήσεων"
 
 #: share/meta-task/compssUsers.pl:87
 #, c-format
@@ -554,9 +555,9 @@ msgid "Database"
 msgstr "Βάση Δεδομένων"
 
 #: share/meta-task/compssUsers.pl:104
-#, fuzzy, c-format
+#, c-format
 msgid "PostgreSQL and MySQL Database Server"
-msgstr "Εξυπηρετητής βάσης δεδομένων PostgreSQL ή MySQL"
+msgstr "PostgreSQL και MySQL Database Server"
 
 #: share/meta-task/compssUsers.pl:108
 #, c-format
@@ -650,9 +651,9 @@ msgid "Webmin"
 msgstr "Webmin"
 
 #: share/meta-task/compssUsers.pl:178
-#, fuzzy, c-format
+#, c-format
 msgid "Webmin Remote Configuration Server"
-msgstr "Ρύθμιση του Διακομιστή Τερματικού Mandriva"
+msgstr "Webmin Server Απομακρυσμένης Ρύθμισης"
 
 #: share/meta-task/compssUsers.pl:182
 #, c-format
@@ -927,6 +928,8 @@ msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive before installation.\n"
 "It will then continue from the hard drive and the packages will remain available once the system is fully installed."
 msgstr ""
+"Έχετε την δυνατότητα να αντιγράψετε το περιεχόμενο των CD στο σκληρό δίσκο πριν την εγκατάσταση.\n"
+"Η οποία θα συνεχιστεί από τον σκληρό δίσκο και τα πακέτα θα μείνουν διαθέσιμα και μετά το τέλος της εγκατάστασης."
 
 #: steps_gtk.pm:672
 #: steps_interactive.pm:286
@@ -976,12 +979,12 @@ msgstr "Αναβάθμιση %s"
 #: steps_interactive.pm:140
 #, c-format
 msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-msgstr ""
+msgstr "Η αναβάθμιση της διανομής από 32bit σε 64bit δεν υποστηρίζεται "
 
 #: steps_interactive.pm:144
 #, c-format
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-msgstr ""
+msgstr "Η αναβάθμιση της διανομής από 64bit σε 32bit δεν υποστηρίζεται"
 
 #: steps_interactive.pm:158
 #, c-format
@@ -1004,21 +1007,21 @@ msgid "No free space for 1MB bootstrap! Install will continue, but to boot your 
 msgstr "Δεν υπάρχει ελεύθερος χώρος για 1MB bootstrap! Η εγκατάσταση θα συνεχιστεί, αλλά για να ξεκινήσετε το σύστημά σας, θα χρειαστεί να δημιουργήσετε μια κατάτμηση bootstrap με το DiskDrake"
 
 #: steps_interactive.pm:236
-#, fuzzy, c-format
+#, c-format
 msgid "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"
-msgstr "Δεν υπάρχει ελεύθερος χώρος για 1MB bootstrap! Η εγκατάσταση θα συνεχιστεί, αλλά για να ξεκινήσετε το σύστημά σας, θα χρειαστεί να δημιουργήσετε μια κατάτμηση bootstrap με το DiskDrake"
+msgstr "Πρέπει να δημιουργήσετε την κατάτμηση έναρξης (PPC PReP Boot bootstrap). Η εγκατάσταση θα συνεχιστεί, αλλά για να εκκινήσετε το σύστημά σας, θα πρέπει να δημιουργήσετε την κατάτμηση έναρξης από το DiskDrake"
 
 #: steps_interactive.pm:328
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Change your Cd-Rom!\n"
 "Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.\n"
 "If you do not have it, press Cancel to avoid installation from this Cd-Rom."
 msgstr ""
-"Αλλαγή Cd-Rom!\n"
+"Αλλάξτε το Cd-Rom!\n"
 "\n"
 "Παρακαλώ εισάγετε το Cd-Rom με όνομα \"%s\" στον οδηγό σας και πατήστε Εντάξει.\n"
-"Εάν δεν το έχετε, πατήστε Ακύρωση για αποφυγή εγκατάστασης από αυτό το CdRom."
+"Εάν δεν το έχετε, πατήστε Ακύρωση για αποφυγή εγκατάστασης από αυτό το Cd-Rom."
 
 #: steps_interactive.pm:350
 #, c-format
@@ -1028,7 +1031,7 @@ msgstr "Ψάχνω για διαθέσιμα πακέτα..."
 #: steps_interactive.pm:358
 #, c-format
 msgid "Your system does not have enough space left for installation or upgrade (%dMB > %dMB)"
-msgstr ""
+msgstr "Το σύστημά σας δεν έχει αρκετό ελεύθερο χώρο για την εγκατάσταση ή την αναβάθμιση (%dMB > %dMB)"
 
 #: steps_interactive.pm:405
 #, c-format
@@ -1072,7 +1075,7 @@ msgstr "Προσαρμοσμένη εγκατάσταση"
 #: steps_interactive.pm:436
 #, c-format
 msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
-msgstr ""
+msgstr "Μπορείτε να επιλέξετε το προφίλ για το περιβάλλον εργασίας σας : KDE, GNOME ή εγκατάσταση με προσωπικές ρύθμισεις"
 
 #: steps_interactive.pm:521
 #, c-format
@@ -1161,7 +1164,7 @@ msgstr "Ρυθμίσεις μετά την εγκατάσταση"
 #: steps_interactive.pm:663
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
-msgstr ""
+msgstr "Παρακαλώ σιγουρευτείτε ότι το μέσο ενημέρωσης των οδηγών (modules) είναι μέσα στην συσκευή %s"
 
 #: steps_interactive.pm:691
 #: steps_list.pm:47
@@ -1288,13 +1291,13 @@ msgid "Preparing bootloader..."
 msgstr "Προετοιμασία του προγράμματος εκκίνησης..."
 
 #: steps_interactive.pm:1019
-#, fuzzy, c-format
+#, c-format
 msgid "You appear to have an OldWorld or Unknown machine, the yaboot bootloader will not work for you. The install will continue, but you'll need to use BootX or some other means to boot your machine. The kernel argument for the root fs is: root=%s"
 msgstr ""
 "Φαίνεται πως έχετε ένα Αρχαίο ή Άγνωστο\n"
 "μηχάνημα, ο yaboot bootloader δεν θα δουλέψει για σας.\n"
 "Η εγκατάσταση θα συνεχιστεί, αλλά\n"
-"θα χρειαστεί να χρησιμοποιήσετε το BootX για να ξεκινήσετε το μηχάνημά σας"
+"θα χρειαστεί να χρησιμοποιήσετε το BootX ή μια άλλη μέθοδο για να ξεκινήσετε το μηχάνημά σας. Η παράμετρος για το root fs είναι: root=%s"
 
 #: steps_interactive.pm:1025
 #, c-format
@@ -1313,7 +1316,7 @@ msgstr ""
 #: steps_interactive.pm:1040
 #, c-format
 msgid "In this security level, access to the files in the Windows partition is restricted to the administrator."
-msgstr ""
+msgstr "Σε αυτό το επίπεδο ασφαλείας, η πρόσβαση στα αρχεία στην κατάτμηση των windows περιορίζεται μόνο για τον διαχειριστή."
 
 #: steps_interactive.pm:1072
 #, c-format
@@ -1424,7 +1427,7 @@ msgstr "Εντοπισμός δίσκου"
 msgid ""
 "_: Keep these entry short\n"
 "Installation class"
-msgstr ""
+msgstr "Κλάση της εγκατάστασης"
 
 #: steps_list.pm:23
 #, c-format
@@ -1453,14 +1456,14 @@ msgstr "Καταμερισμός"
 msgid ""
 "_: Keep these entry short\n"
 "Formatting"
-msgstr ""
+msgstr "Διαμόρφωση "
 
 #: steps_list.pm:29
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Choosing packages"
-msgstr ""
+msgstr "Επιλογή πακέτων"
 
 #: steps_list.pm:31
 #, c-format
