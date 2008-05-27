@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-el\n"
 "POT-Creation-Date: 2008-03-20 14:27+0100\n"
-"PO-Revision-Date: 2008-05-25 14:48+0200\n"
+"PO-Revision-Date: 2008-05-28 00:39+0200\n"
 "Last-Translator: nikos papadopoulos <231036448@freemail.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -47,6 +47,11 @@ msgid ""
 "\n"
 "Assign a new Volume ID?"
 msgstr ""
+"Το LILO σου ζητάει να δώσεις μία νέα Ταυτότητα Τόμου (Volume ID) στο δίσκο %s.\n"
+"Όμως, η αλλαγή της Ταυτότητας Τόμου ενός δίσκου εκκίνησης των Microsoft Windows NT, 2000, ή XP, είναι ένα μοιραίο λάθος για τα Microsoft Windows.\n"
+"Αυτή η επιφύλαξη δεν ισχύει για τα Microsoft Windows 95 ή 98, ή για τους δίσκους δεδομένων των NT.\n"
+"\n"
+"Να προσδιοριστεί μια νέα Ταυτότητα Τόμου;"
 
 #: any.pm:267
 #, c-format
@@ -982,7 +987,7 @@ msgstr "Δεν μπορώ να χρησιμοποιήσω broadcast χωρίς �
 # leave it in English, as it is the best for your language)
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #: bootloader.pm:900
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
 "\n"
@@ -990,10 +995,10 @@ msgid ""
 "wait for default boot.\n"
 "\n"
 msgstr ""
-"KALOS HRTHATE STON EPILOGEA LEITOURGIKOU SYSTHMATOS %s!\n"
+"Kalos irthate ston epilogea litourgikou sistimatos.\n"
 "\n"
-"EPILEXTE LEITORGIKO SYSTHMA APO TON PARAPANO KATALOGO \n"
-"H PERIMENETE %d DEUTEROLEPTA GIA THN AYTOMATH EPILOGH.\n"
+"Epelekse ena litourgiko sistima apo tin parapano lista,\n"
+"i perimene yia tin proepilegmeni ekkinisi.\n"
 "\n"
 
 #: bootloader.pm:1050
@@ -1882,17 +1887,17 @@ msgstr "Μετακίνηση αρχείων στην νέα κατάτμηση"
 #: diskdrake/interactive.pm:1136
 #, c-format
 msgid "Copying %s"
-msgstr "Αντιγραφή %s"
+msgstr "Αντιγραφή του %s"
 
 #: diskdrake/interactive.pm:1140
 #, c-format
 msgid "Removing %s"
-msgstr "Αφαίρεση %s"
+msgstr "Αφαίρεση του %s"
 
 #: diskdrake/interactive.pm:1154
 #, c-format
 msgid "partition %s is now known as %s"
-msgstr "Η κατάτμηση %s είναι τώρα γνωστή ως %s "
+msgstr "η κατάτμηση %s είναι τώρα γνωστή ως %s "
 
 #: diskdrake/interactive.pm:1155
 #, c-format
@@ -1951,7 +1956,7 @@ msgstr ", %s τομείς"
 #: diskdrake/interactive.pm:1203
 #, c-format
 msgid "Cylinder %d to %d\n"
-msgstr "Κύλινδρος από %d έως %d\n"
+msgstr "Κύλινδροι από %d έως %d\n"
 
 #: diskdrake/interactive.pm:1204
 #, c-format
@@ -1993,8 +1998,8 @@ msgid ""
 "Partition booted by default\n"
 "    (for MS-DOS boot, not for lilo)\n"
 msgstr ""
-"Κατάτμηση εκκίνησης εξ ορισμού\n"
-"    (από MS-DOS, όχι από lilo)\n"
+"Εξ ορισμού εκκίνηση της κατάτμησης \n"
+"    (για εκκίνηση MS-DOS, όχι για lilo)\n"
 
 #: diskdrake/interactive.pm:1216
 #, c-format
@@ -2037,9 +2042,9 @@ msgid ""
 "dual-booting your system.\n"
 msgstr ""
 "\n"
-"Αυτή είναι ειδική Bootstrap\n"
-"κατάτμηση για\n"
-"dual-booting το σύστημά σας.\n"
+"Αυτή η ειδική Bootstrap κατάτμηση\n"
+"είναι για την εκκίνηση πολλαπλών λειτουργικών συστημάτων\n"
+"στον υπολογιστή σου.\n"
 
 #: diskdrake/interactive.pm:1235
 #, c-format
@@ -2049,7 +2054,7 @@ msgstr "Κενός χώρος στον %s (%s)"
 #: diskdrake/interactive.pm:1244
 #, c-format
 msgid "Read-only"
-msgstr "Μόνο για ανάγνωση"
+msgstr "Μόνο-για-ανάγνωση"
 
 #: diskdrake/interactive.pm:1245
 #, c-format
@@ -2951,7 +2956,7 @@ msgstr "Πληκτρολόγιο"
 #: harddrake/data.pm:485
 #, c-format
 msgid "Tablet and touchscreen"
-msgstr ""
+msgstr "Πινακίδια (tablets) και οθόνες αφής"
 
 #: harddrake/data.pm:494
 #, c-format
@@ -3176,7 +3181,7 @@ msgstr "Θα διαλέξω εγώ οδηγό"
 #: harddrake/sound.pm:346
 #, c-format
 msgid "Choosing an arbitrary driver"
-msgstr ""
+msgstr "Επιλογή ενός αυθαίρετου οδηγού συσκευής"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: harddrake/sound.pm:349
@@ -3187,6 +3192,10 @@ msgid ""
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
+"Εάν πραγματικά πιστεύεις, ότι ξέρεις, ποιος οδηγός συσκευής είναι καλύτερος για την κάρτα σου,\n"
+"μπορείς να επιλέξεις έναν από την παραπάνω λίστα.\n"
+"\n"
+"Ο τωρινός οδηγός για την κάρτα ήχου σου \"%s\" είναι ο \"%s\" "
 
 #: harddrake/v4l.pm:12
 #, c-format
@@ -4918,7 +4927,7 @@ msgstr ""
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: messages.pm:131
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press Enter to reboot.\n"
@@ -4935,23 +4944,23 @@ msgid ""
 "install chapter of the Official Mandriva Linux User's Guide."
 msgstr ""
 "Συγχαρητήρια, η εγκατάσταση ολοκληρώθηκε.\n"
-"Αφαιρέστε την δισκέτα ή το CD εκκίνησης και πατήστε return για επανεκκίνηση.\n"
+"Αφαίρεσε το μέσο εκκίνησης του συστήματος και πίεσε το Enter για επανεκκίνηση.\n"
 "\n"
 "\n"
-"Για πληροφορίες σχετικά με διορθώσεις αυτής της έκδοσης του Mandriva Linux,\n"
-"συμβουλευτείτε την σελίδα: \n"
+"Για πληροφορίες σχετικές με τις διαθέσιμες διορθώσεις, πάνω σε αυτή την έκδοση της Mandriva Linux,\n"
+"μπορείς να συμβουλευτείς την σελίδα των Δυσλειτουργιών: \n"
 "\n"
 "\n"
 "%s\n"
 "\n"
 "\n"
-"Πληροφορίες σχετικά με τις ρυθμίσεις του συστήματός σας υπάρχουν στο σχετικό\n"
-"κεφάλαιο του επίσημου οδηγού χρήσης του Mandriva Linux."
+"Ενώ, πληροφορίες σχετικές με τις ρυθμίσεις του συστήματός σου, μπορούν να βρεθούν στο \n"
+"κεφάλαιο για μετά την εγκατάσταση, στον Επίσημο Οδηγό Χρήσης Της Mandriva Linux."
 
 #: modules/interactive.pm:19
-#, fuzzy, c-format
+#, c-format
 msgid "This driver has no configuration parameter!"
-msgstr "Ρυθμίσεις κοινής χρήσης εκτυπωτών CUPS"
+msgstr "Ο οδηγός δεν έχει κάποιες παραμέτρους για ρύθμιση."
 
 #: modules/interactive.pm:22
 #, c-format
@@ -5527,7 +5536,7 @@ msgstr ""
 #: security/l10n.pm:13
 #, c-format
 msgid "Accept icmp echo"
-msgstr ""
+msgstr "Αποδοχή του icmp echo"
 
 #: security/l10n.pm:15
 #, c-format
@@ -5537,7 +5546,7 @@ msgstr "το /etc/issue* ειπάρχει"
 #: security/l10n.pm:16
 #, c-format
 msgid "Reboot by the console user"
-msgstr ""
+msgstr "Επανεκκίνηση του υπολογιστή από τον χρήστη κονσόλας"
 
 #: security/l10n.pm:17
 #, c-format
@@ -5547,17 +5556,17 @@ msgstr "Να επιτρέπεται η απομακρυσμένη σύνδεση
 #: security/l10n.pm:18
 #, c-format
 msgid "Direct root login"
-msgstr ""
+msgstr "Άμεση σύνδεση διαχειριστή"
 
 #: security/l10n.pm:19
 #, c-format
 msgid "List users on display managers (kdm and gdm)"
-msgstr ""
+msgstr "Προβολή της λίστας των χρηστών στο γραφικό διαχειριστή σύνδεσης (kdm και gdm)"
 
 #: security/l10n.pm:20
 #, c-format
 msgid "Export display when passing from root to the other users"
-msgstr ""
+msgstr "Εξαγωγή της προβολής, όταν γίνεται μετάβαση από τον διαχειριστή του συστήματος στους άλλους χρήστες"
 
 #: security/l10n.pm:21
 #, c-format
@@ -5582,12 +5591,12 @@ msgstr "Το chkconfig να υπηρετεί τους κανόνες του msec
 #: security/l10n.pm:25
 #, c-format
 msgid "Enable \"crontab\" and \"at\" for users"
-msgstr ""
+msgstr "Ενεργοποίηση των \"crontab\" και \"at\" για τους χρήστες"
 
 #: security/l10n.pm:26
 #, c-format
 msgid "Syslog reports to console 12"
-msgstr ""
+msgstr "Αναφορές syslog στην κονσόλα 12"
 
 #: security/l10n.pm:27
 #, c-format
@@ -5647,7 +5656,7 @@ msgstr "Χωρίς κωδικό πρόσβασης"
 #: security/l10n.pm:38
 #, c-format
 msgid "Set password expiration and account inactivation delays"
-msgstr ""
+msgstr "Όρισε την ημερομηνία λήξης των κωδικών ασφαλείας και την καθυστέρηση απενεργοποίησης των λογαριασμών"
 
 #: security/l10n.pm:39
 #, fuzzy, c-format
@@ -5667,7 +5676,7 @@ msgstr "Κωδικός Root"
 #: security/l10n.pm:42
 #, c-format
 msgid "Shell history size"
-msgstr ""
+msgstr "Μέγεθος του ιστορικού του κελύφους"
 
 #: security/l10n.pm:43
 #, fuzzy, c-format
@@ -5924,7 +5933,7 @@ msgstr ""
 #: services.pm:29
 #, c-format
 msgid "Launches the graphical display manager"
-msgstr ""
+msgstr "Ενεργοποιεί τον διαχειριστή γραφικής προβολής"
 
 #: services.pm:30
 #, c-format
@@ -5932,6 +5941,8 @@ msgid ""
 "FAM is a file monitoring daemon. It is used to get reports when files change.\n"
 "It is used by GNOME and KDE"
 msgstr ""
+"Το FAM είναι ένας δαίμονας παρακολούθησης αρχείων. Χρησιμοποιείται για αναφορές όταν τα αρχεία αλλάζουν.\n"
+"Χρησιμοποιείται και από το GNOME και από το KDE"
 
 #: services.pm:32
 #, c-format
@@ -5947,7 +5958,7 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
+msgstr "Το HAL είναι ένας δαίμονας που συλλέγει και διατηρεί πληροφορίες σχετικές με τις συσκευές του υπολογιστή"
 
 #: services.pm:36
 #, c-format
@@ -6044,7 +6055,7 @@ msgstr ""
 #: services.pm:57
 #, c-format
 msgid "DBUS is a daemon which broadcasts notifications of system events and other messages"
-msgstr ""
+msgstr "Το DBUS είναι ένας δαίμονας που αποστέλλει ειδοποιήσεις για γεγονότα του συστήματος καθώς και άλλα μηνύματα"
 
 #: services.pm:58
 #, c-format
@@ -6094,7 +6105,7 @@ msgstr ""
 #: services.pm:68
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
-msgstr ""
+msgstr "Συγχρονίζει την ώρα του συστήματος χρησιμοποιώντας το Δικτυακό Πρωτόκολλο Ώρας (Network Time Protocol - NTP)"
 
 #: services.pm:69
 #, c-format
@@ -6200,12 +6211,12 @@ msgstr ""
 #: services.pm:92
 #, c-format
 msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
-msgstr ""
+msgstr "Το SANE (Πρόσβαση Σαρωτή Τώρα Εύκολη - Scanner Access Now Easy) επιτρέπει την πρόσβαση σε σαρωτές, κάμερες..."
 
 #: services.pm:93
 #, c-format
 msgid "The SMB/CIFS protocol enables to share access to files & printers and also integrates with a Windows Server domain"
-msgstr ""
+msgstr "Το πρωτόκολλο SMB/CIFS επιτρέπει την κοινή πρόσβαση σε αρχεία και εκτυπωτές, όπως επίσης, ενσωματώνεται με ένα Windows Server domain"
 
 #: services.pm:94
 #, c-format
@@ -6215,7 +6226,7 @@ msgstr "Εκκίνηση του συστήματος ήχου στο μηχάν�
 #: services.pm:95
 #, c-format
 msgid "Secure Shell is a network protocol that allows data to be exchanged over a secure channel between two computers"
-msgstr ""
+msgstr "Το Ασφαλές Κέλυφος (Secure Shell) είναι ένα πρωτόκολλο δικτύου, που επιτρέπει την ανταλλαγή δεδομένων μεταξύ δύο υπολογιστών, μέσω ενός ασφαλούς καναλιού"
 
 #: services.pm:96
 #, c-format
@@ -6401,6 +6412,11 @@ msgid ""
 "  --splash          - enable to configure boot theme\n"
 "default mode: offer to configure autologin feature"
 msgstr ""
+"[--boot] [--splash]\n"
+"ΕΠΙΛΟΓΕΣ:\n"
+"  --boot            - ενεργοποιεί την ρύθμιση του προγράμματος εκκίνησης του υπολογιστή\n"
+"  --splash          - ενεργοποιεί την ρύθμιση του θέματος κατά την εκκίνηση του υπολογιστή\n"
+"προεπιλεγμένη κατάσταση λειτουργίας: επιλογή για ρύθμιση της αυτόματης σύνδεσης"
 
 #: standalone.pm:61
 #, c-format
@@ -6412,6 +6428,12 @@ msgid ""
 "  --report          - program should be one of Mandriva Linux tools\n"
 "  --incident        - program should be one of Mandriva Linux tools"
 msgstr ""
+"[ΕΠΙΛΟΓΕΣ] [ΟΝΟΜΑ_ΤΟΥ_ΠΡΟΓΡΑΜΜΑΤΟΣ]\n"
+"\n"
+"ΕΠΙΛΟΓΕΣ:\n"
+"  --help            - εκτύπωση αυτού του μηνύματος βοήθειας.\n"
+"  --report          - το πρόγραμμα θα πρέπει να είναι ένα από τα εργαλεία της Mandriva Linux\n"
+"  --incident        - το πρόγραμμα θα πρέπει να είναι ένα από τα εργαλεία της Mandriva Linux"
 
 #: standalone.pm:67
 #, c-format
@@ -6423,6 +6445,12 @@ msgid ""
 "  --internet        - configure internet\n"
 "  --wizard          - like --add"
 msgstr ""
+"[--add]\n"
+"  --add             - o οδηγός ρυθμίσεων \"ρύθμισε μια καινούρια σύνδεση δικτύου\"\n"
+"  --del             - o οδηγός ρυθμίσεων \"διέγραψε μια σύνδεση δικτύου\"\n"
+"  --skip-wizard     - διαχείριση των συνδέσεων\n"
+"  --internet        - ρύθμιση του διαδικτύου\n"
+"  --wizard          - ίδια, όπως η --add"
 
 #: standalone.pm:73
 #, fuzzy, c-format
@@ -6520,6 +6548,11 @@ msgid ""
 "  --changelog-first      display changelog before filelist in the description window\n"
 "  --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"
 msgstr ""
+"[ΕΠΙΛΟΓΗ]...\n"
+"  --no-confirmation      να μην γίνεται η πρώτη ερώτηση επιβεβαίωσης, κατά την κατάσταση λειτουργίας «Ενημέρωσης της Mandriva»\n"
+"  --no-verify-rpm        να μη γίνεται επιβεβαίωση των υπογραφών των πακέτων\n"
+"  --changelog-first      προβολή των καταγραφών (changelog) πριν την λίστα των αρχείων στο παράθυρο περιγραφής\n"
+"  --merge-all-rpmnew     πρόταση για συγχώνευση όλων των ανευρεθέντων αρχείων .rpmnew/.rpmsave"
 
 #: standalone.pm:117
 #, c-format
@@ -6533,6 +6566,9 @@ msgid ""
 "       XFdrake [--noauto] monitor\n"
 "       XFdrake resolution"
 msgstr ""
+" [όλα]\n"
+"       XFdrake [--noauto] οθόνη\n"
+"       XFdrake ανάλυση_οθόνης"
 
 #: standalone.pm:154
 #, c-format
