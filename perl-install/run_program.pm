@@ -111,7 +111,7 @@ sub raw {
     } else {
         if ($options->{setuid}) {
             require POSIX;
-            $ENV{'LOGNAME'} = $options->{setuid} || $ENV{LOGNAME};
+            $ENV{'LOGNAME'} = getpwuid($options->{setuid}) || $ENV{LOGNAME};
             POSIX::setuid($options->{setuid});
         }
 
