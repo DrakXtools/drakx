@@ -45,13 +45,17 @@ my $fstab = [ fs::get::fstab($all_hds) ];
 my $cmdline = cat_('/proc/cmdline');
 
 my $bootloader;
-if (!$in->isa('interactive::gtk') || any { /^--boot$/ } @ARGV) {
+my $is_bootloader_mode = !$in->isa('interactive::gtk') || any { /^--boot$/ } @ARGV;
+
+if ($is_bootloader_mode || any { /^--splash$/ } @ARGV) {
     $bootloader = bootloader::read($all_hds);
     if (!$bootloader) {
         $in->ask_okcancel('', N("No bootloader found, creating a new configuration"), 0) or $in->exit;
         any::setupBootloaderBeforeStandalone($in->do_pkgs, $bootloader ||= {}, $all_hds, $fstab);
     }
+}
 
+if ($is_bootloader_mode) {
     $::isWizard = 1;
     eval { any::setupBootloaderUntilInstalled($in, $bootloader, $all_hds, $fstab, $ENV{SECURE_LEVEL}) };
     die if $@ && $@ !~ /^wizcancel/;
