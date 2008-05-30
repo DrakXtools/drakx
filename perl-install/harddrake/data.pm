@@ -46,12 +46,12 @@ sub set_removable_configurator {
 
 sub set_media_auto_configurator {
     my ($device) = @_;
-    return "/usr/sbin/drakupdate_fstab --auto --add $device->{device}" if is_auto_configurable_media($device);
+    is_auto_configurable_media($device) ? "/usr/sbin/drakupdate_fstab --auto --add $device->{device}" : ();
 }
 
 sub set_media_remover {
     my ($device) = @_;
-    return "/usr/sbin/drakupdate_fstab --del $device->{device}" if is_auto_configurable_media($device);
+    is_auto_configurable_media($device) ? "/usr/sbin/drakupdate_fstab --del $device->{device}" : ();
 }
 
 my $modules_conf = modules::any_conf->read;
