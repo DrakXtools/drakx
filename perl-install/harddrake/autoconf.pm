@@ -13,7 +13,7 @@ sub xconf {
     $o->{raw_X} = Xconfig::default::configure($do_pkgs);
     
     require Xconfig::main;
-    Xconfig::main::configure_everything_auto_install($o->{raw_X}, $do_pkgs, {}, { allowFB => 1 });
+    Xconfig::main::configure_everything_auto_install($o->{raw_X}, $do_pkgs, {}, { allowFB => listlength(cat_("/proc/fb")) });
 
     #- always disable compositing desktop effects when configuring a new video card
     require Xconfig::glx;
