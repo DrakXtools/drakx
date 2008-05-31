@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-el\n"
 "POT-Creation-Date: 2008-03-20 14:27+0100\n"
-"PO-Revision-Date: 2008-05-28 00:39+0200\n"
+"PO-Revision-Date: 2008-05-31 14:10+0200\n"
 "Last-Translator: nikos papadopoulos <231036448@freemail.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -3364,15 +3364,15 @@ msgid "=> There are many things to choose from (%s).\n"
 msgstr "=> Υπάρχουν πολλά πράγματα από τα οποία μπορείτε να επιλέξετε (%s).\n"
 
 #: interactive/stdio.pm:131
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please choose the first number of the 10-range you wish to edit,\n"
 "or just hit Enter to proceed.\n"
 "Your choice? "
 msgstr ""
-"επεξεργασία\n"
-"\n"
-" "
+"Παρακαλώ, επέλεξε το πρώτο αριθμό από το εύρος-10 που θέλεις να επεξεργαστείς, \n"
+"ή απλά πίεσε το Enter για να συνεχίσεις.\n"
+"Τι επιλέγεις;"
 
 #: interactive/stdio.pm:144
 #, c-format
@@ -4993,24 +4993,24 @@ msgid "See hardware info"
 msgstr "Προβολή πληροφοριών υλικού"
 
 #: modules/interactive.pm:82
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for USB controller"
-msgstr "Εγκατάσταση οδηγού για %s κάρτα %s"
+msgstr "Εγκατάσταση του οδηγού συσκευής για τον ελεγκτή USB"
 
 #: modules/interactive.pm:83
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for firewire controller %s"
-msgstr "Εγκατάσταση οδηγού για %s κάρτα %s"
+msgstr "Εγκατάσταση του οδηγού συσκευής για τον ελεγκτή firewire %s"
 
 #: modules/interactive.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for hard drive controller %s"
-msgstr "Εγκατάσταση οδηγού για %s κάρτα %s"
+msgstr "Εγκατάσταση του οδηγού συσκευής για τον ελεγκτή του σκληρού δίσκου %s"
 
 #: modules/interactive.pm:85
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for ethernet controller %s"
-msgstr "Εγκατάσταση οδηγού για %s κάρτα %s"
+msgstr "Εγκατάσταση του οδηγού συσκευής για τον ελεγκτή ethernet %s"
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
@@ -5115,9 +5115,9 @@ msgstr ""
 "Αυτό σημαίνει πως η οποιαδήποτε εγγραφή στο δίσκο θα καταλήξει σαν τυχαία σκουπίδια."
 
 #: raid.pm:42
-#, fuzzy, c-format
+#, c-format
 msgid "Can not add a partition to _formatted_ RAID %s"
-msgstr "Δεν μπορώ να προσθέσω κατάτμηση στο _μορφοποιημένο_ RAID md%d"
+msgstr "Αδυναμία προσθήκης μίας κατάτμησης στο _formatted_ RAID %s"
 
 #: raid.pm:157
 #, c-format
@@ -5160,20 +5160,14 @@ msgid "Your scanner(s) will not be available for non-root users."
 msgstr "Ο σαρωτής (ή σαρωτές) σου δε θα είναι διαθέσιμοι στους μη διαχειριστές."
 
 #: security/help.pm:11
-#, fuzzy, c-format
+#, c-format
 msgid "Accept bogus IPv4 error messages."
-msgstr ""
-"\n"
-"\n"
-" Αποδοχή Άρνηση."
+msgstr "Αποδοχή των δυσλειτουργικών μηνυμάτων λάθους IPv4"
 
 #: security/help.pm:13
-#, fuzzy, c-format
+#, c-format
 msgid "Accept broadcasted icmp echo."
-msgstr ""
-"\n"
-"\n"
-" Αποδοχή Άρνηση."
+msgstr "Αποδοχή του μεταδιδόμενου icmp echo."
 
 #: security/help.pm:15
 #, c-format
@@ -5370,12 +5364,9 @@ msgid "Enable sulogin(8) in single user level."
 msgstr "Επιτρέπεται η σύνδεση su (sulogin(8)) σε επίπεδο μονού χρήστη."
 
 #: security/help.pm:100
-#, fuzzy, c-format
+#, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
-msgstr ""
-"\n"
-"\n"
-" Προσθήκη."
+msgstr "Προσθήκη του ονόματος ως μία εξαίρεση στη διαχείριση της παλαίωσης των κωδικών ασφαλείας, σε msec."
 
 #: security/help.pm:102
 #, c-format
@@ -5526,12 +5517,9 @@ msgstr ""
 " Αποδοχή Άρνηση."
 
 #: security/l10n.pm:12
-#, fuzzy, c-format
+#, c-format
 msgid "Accept broadcasted icmp echo"
-msgstr ""
-"\n"
-"\n"
-" Αποδοχή Άρνηση."
+msgstr "Αποδοχή του μεταδιδόμενου icmp echo"
 
 #: security/l10n.pm:13
 #, c-format
@@ -5649,9 +5637,9 @@ msgid "Sulogin(8) in single user level"
 msgstr "Σύνδεση su (sulogin(8)) σε επίπεδο μονού χρήστη"
 
 #: security/l10n.pm:37
-#, fuzzy, c-format
+#, c-format
 msgid "No password aging for"
-msgstr "Χωρίς κωδικό πρόσβασης"
+msgstr "Χωρίς παλαίωση του κωδικού πρόσβασης για"
 
 #: security/l10n.pm:38
 #, c-format
@@ -5659,9 +5647,9 @@ msgid "Set password expiration and account inactivation delays"
 msgstr "Όρισε την ημερομηνία λήξης των κωδικών ασφαλείας και την καθυστέρηση απενεργοποίησης των λογαριασμών"
 
 #: security/l10n.pm:39
-#, fuzzy, c-format
+#, c-format
 msgid "Password history length"
-msgstr "Ο κωδικός πρόσβασης είναι πολύ απλός"
+msgstr "Μήκος του ιστορικού  του κωδικού ασφαλείας"
 
 #: security/l10n.pm:40
 #, c-format
@@ -5679,9 +5667,9 @@ msgid "Shell history size"
 msgstr "Μέγεθος του ιστορικού του κελύφους"
 
 #: security/l10n.pm:43
-#, fuzzy, c-format
+#, c-format
 msgid "Shell timeout"
-msgstr "Τέλος Χρόνου Εκκίνησης Πυρήνα"
+msgstr "Χρονική λήξη του κελύφους"
 
 #: security/l10n.pm:44
 #, fuzzy, c-format
@@ -6482,7 +6470,7 @@ msgstr ""
 "."
 
 #: standalone.pm:88
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTIONS]...\n"
 "Mandriva Linux Terminal Server Configurator\n"
@@ -6495,16 +6483,16 @@ msgid ""
 "--addclient      : add a client machine to MTS (requires MAC address, IP, nbi image name)\n"
 "--delclient      : delete a client machine from MTS (requires MAC address, IP, nbi image name)"
 msgstr ""
-"\n"
-" Εξυπηρετητής\n"
-" ενεργοποίηση ενεργοποίηση\n"
-" απενεργοποίηση απενεργοποίηση\n"
-"\n"
-"\n"
-" χρήστης\n"
-" Διαγραφή χρήστης\n"
-"\n"
-" Διαγραφή"
+"[ΕΠΙΛΟΓΕΣ]...\n"
+"Ρυθμιστής του Εξυπηρετητή Τερματικού της Mandriva Linux \n"
+"--enable         : ενεργοποίηση του MTS\n"
+"--disable        : απενεργοποίηση του MTS\n"
+"--start          : εκκίνηση του MTS\n"
+"--stop           : διακοπή του MTS\n"
+"--adduser        : προσθήκη ενός ήδη υπάρχοντος χρήστη στο MTS (απαιτεί «όνομα χρήστη»)\n"
+"--deluser        : διαγραφή ενός ήδη υπάρχοντος χρήστη από το MTS (απαιτεί «όνομα χρήστη»)\n"
+"--addclient      : προσθήκη ενός μηχανήματος-πελάτης στο MTS (απαιτεί μια διεύθυνση MAC, IP, όνομα εικόνας nbi)\n"
+"--delclient      : διαγραφή ενός μηχανήματος-πελάτης από το MTS (απαιτεί μια διεύθυνση MAC, IP, όνομα εικόνας nbi)"
 
 #: standalone.pm:100
 #, c-format
@@ -6517,7 +6505,7 @@ msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 msgstr "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 
 #: standalone.pm:102
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTIONS]\n"
 "Network & Internet connection and monitoring application\n"
@@ -6529,15 +6517,15 @@ msgid ""
 "--status : returns 1 if connected 0 otherwise, then exit.\n"
 "--quiet : do not be interactive. To be used with (dis)connect."
 msgstr ""
+"[ΕΠΙΛΟΓΕΣ]\n"
+"Συνδέσεις Δικτύου κ' Διαδικτύου και εφαρμογές παρακολούθησης\n"
 "\n"
-" Δίκτυο Διαδίκτυο\n"
-"\n"
-" εξ' ορισμού\n"
-"\n"
-"\n"
-" μετά βίας μετά βίας\n"
-"\n"
-"."
+"--defaultintf διεπαφή_χρήστη : εμφάνιση, κατά προεπιλογή, του συγκεκριμένου γραφικού περιβάλλοντος χρήσης\n"
+"--connect : να γίνει σύνδεση  στο Διαδίκτυο, αν δεν έχει γίνει ήδη\n"
+"--disconnect : να γίνει αποσύνδεση από το Διαδίκτυο, αν είναι συνδεδεμένο\n"
+"--force : χρήση μαζί με το (dis)connect : εξαναγκασμός (από-)σύνδεσης.\n"
+"--status : σου «δίνει» 1 αν είναι συνδεδεμένο, αν όχι, 0, μετά κλείνει.\n"
+"--quiet : να μην είναι διαδραστικό. Για χρήση μαζί με το (dis)connect."
 
 #: standalone.pm:112
 #, c-format
