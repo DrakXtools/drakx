@@ -171,7 +171,7 @@ sub setupBootloaderBefore {
 	if (my ($biggest_swap) = sort { $b->{size} <=> $a->{size} } grep { isSwap($_) } @$fstab) {
 	    log::l("MemTotal: $MemTotal < ", $biggest_swap->{size} / 2);
 	    if ($MemTotal < $biggest_swap->{size} / 2) {
-		bootloader::set_append_with_key($bootloader, resume => devices::make($biggest_swap->{device}));
+		bootloader::set_append_with_key($bootloader, resume => fs::wild_device::from_part('', $biggest_swap));
 	    }
 	}
     }
