@@ -1,20 +1,26 @@
 package authentication; # $Id$
-use common;
 
-my $lib = arch() =~ /x86_64/ ? 'lib64' : 'lib';
+use common;
+my $ccreds = 1;
+my $conf_file = "/etc/sysconfig/drakauth";
+
+$::real_windowwidth  = 700;
+$::real_windowheight = 600;
+
+my ($authentication) = @_;
 
 sub kinds { 
     my $no_para = @_ == 0;
-    my ($do_pkgs) = @_;
+    my ($do_pkgs, $_meta_class) = @_;
     my $allow_SmartCard = $no_para || $do_pkgs->is_available('castella-pam');
     my $allow_AD = 1;
     (
-	'local', 
 	'LDAP',
+	'KRB5',
+	'winbind', 
 	'NIS', 
 	if_($allow_SmartCard, 'SmartCard'), 
-	'winbind', 
-	if_($allow_AD, 'AD', 'SMBKRB'),
+	'local',
     );
 }
 
@@ -26,8 +32,7 @@ sub kind2name {
     NIS => N("NIS"),
     SmartCard => N("Smart Card"),
     winbind => N("Windows Domain"), 
-    AD => N("Active Directory with SFU"),
-    SMBKRB => N("Active Directory with Winbind") }}{$kind};
+    KRB5 => N("Kerberos 5")}}{$kind};
 }
 
 my %kind2pam_kind = (
@@ -35,9 +40,8 @@ my %kind2pam_kind = (
     SmartCard => ['castella'],
     LDAP      => ['ldap'], 
     NIS       => [],
-    AD        => ['krb5'],
+    KRB5        => ['krb5'],
     winbind   => ['winbind'], 
-    SMBKRB    => ['winbind'],
 );
 
 my %kind2nsswitch = (
@@ -45,37 +49,34 @@ my %kind2nsswitch = (
     SmartCard => [],
     LDAP      => ['ldap'], 
     NIS       => ['nis'],
-    AD        => ['ldap'],
+    KRB5        => ['ldap'],
     winbind   => ['winbind'], 
-    SMBKRB    => ['winbind'],
 );
 
 my %kind2packages = (
     local     => [],
     SmartCard => [ 'castella-pam' ],
-    LDAP      => [ 'openldap-clients', 'nss_ldap', 'pam_ldap', 'autofs' ],
-    AD        => [ 'nss_ldap', 'pam_krb5', $lib . 'sasl2-plug-gssapi' ],
+    LDAP      => [ 'openldap-clients', 'nss_ldap', 'pam_ldap', 'autofs','pam_ccreds','nss_updatedb' ],
+    KRB5       => [ 'nss_ldap', 'pam_krb5', 'libsasl2-plug-gssapi', 'pam_ccreds','nss_updatedb' ],
     NIS       => [ 'ypbind', 'autofs' ],
-    winbind   => [ 'samba-winbind' ],
-    SMBKRB    => [ 'samba-winbind', 'pam_krb5', 'samba-server', 'samba-client' ],
+    winbind   => [ 'samba-winbind', 'nss_ldap', 'pam_krb5', 'libsasl2-plug-gssapi', 'samba-server' ],
 );
 
 
 sub kind2description {
     my (@kinds) = @_;
     my %kind2description = (
-	local     => [ N("Local file:"), N("Use information stored in local files for all authentication"), ],
+	local     => [ N("Local file:"), N("Use local for all authentication and information user tell in local file"), ],
 	LDAP      => [ N("LDAP:"), N("Tells your computer to use LDAP for some or all authentication. LDAP consolidates certain types of information within your organization."), ],
 	NIS       => [ N("NIS:"), N("Allows you to run a group of computers in the same Network Information Service domain with a common password and group file."), ],
 	winbind   => [ N("Windows Domain:"), N("Winbind allows the system to retrieve information and authenticate users in a Windows domain."), ],
-	AD        => [ N("Active Directory with SFU:"), N("With Kerberos and Ldap for authentication in Active Directory Server "), ],
-	SMBKRB    => [ N("Active Directory with Winbind:"), N("Winbind allows the system to authenticate users in a Windows Active Directory Server.")  ],
+	KRB5        => [ N("Kerberos 5 :"), N("With Kerberos and Ldap for authentication in Active Directory Server "), ],
     );
     join('', map { $_ ? qq($_->[0]\n$_->[1]\n\n) : '' } map { $kind2description{$_} } @kinds);
 }
 sub to_kind {
     my ($authentication) = @_;
-    (find { exists $authentication->{$_} } kinds()) || 'local';
+    (find { exists $authentication->{$_} } kinds()) || 'LDAP';
 }
 
 sub domain_to_ldap_domain {
@@ -93,42 +94,82 @@ sub ask_parameters {
 
     if ($kind eq 'LDAP') {
 	$authentication->{LDAPDOMAIN} ||= domain_to_ldap_domain($net->{resolv}{DOMAINNAME});
-	$in->ask_from('',
-		     N("Authentication LDAP"),
-		     [ { label => N("LDAP Base dn"), val => \$authentication->{LDAPDOMAIN} },
-		       { label => N("LDAP Server"), val => \$authentication->{LDAP_server} },
+	#$authentication->{anonymous} = "0";
+	#$authentication->{cafile} = "0";
+	#$authentication->{nssgrp} = "0";
+
+	$in->ask_from('',N(" "),
+		     [ { label => N("Welcome to the Authentication Wizard"), title => 1},
+                     {},
+                     { label => N("You have selected LDAP authentication. Please review the configuration options below "), },
+                     {},
+		     { label => N("LDAP Server"), val => \$authentication->{LDAP_server} },
+		     { label => N("Base dn"), val => \$authentication->{LDAPDOMAIN} },
+                     { val => N("Fecth base Dn "), type  => button , clicked_may_quit => sub { $authentication->{LDAPDOMAIN} = fetch_dn($authentication->{LDAP_server}); 0 } },
+		     {},
+		     { text => N("Use encrypt connection with TLS "), val => \$authentication->{cafile}, type => 'bool' },
+                     { val => N("Download CA Certificate "), type  => button , disabled => sub { !$authentication->{cafile} }, clicked_may_quit => sub { $authentication->{file} = add_cafile(); 0}  },
+		     
+		     { text => N("Use Disconnect mode "), val => \$ccreds, type => 'bool' },
+		     { text => N("Use anonymous BIND "), val => \$authentication->{anonymous}, type => 'bool' , advanced => 1 },
+		     { text => N("  "), advanced => 1 },
+                     { label => N("Bind DN "), val => \$authentication->{LDAP_binddn}, disabled => sub { !$authentication->{anonymous} }, advanced => 1  },
+                     { label => N("Bind Password "), val => \$authentication->{LDAP_bindpwd}, disabled => sub { !$authentication->{anonymous} }, advanced => 1 },
+		     { text => N("  "), advanced => 1 },
+		     { text => N("Advanced path for group "), val => \$authentication->{nssgrp}, type => 'bool' , advanced => 1 },
+		     { text => N("  "), advanced => 1 },
+                     { label => N("Password base"), val => \$authentication->{nss_pwd},  disabled => sub { !$authentication->{nssgrp} }, advanced => 1 },
+                     { label => N("Group base"), val => \$authentication->{nss_grp},  disabled => sub { !$authentication->{nssgrp} }, advanced => 1 },
+                     { label => N("Sahdow base"), val => \$authentication->{nss_shadow},  disabled => sub { !$authentication->{nssgrp} }, advanced => 1 },
+		     { text => N("  "), advanced => 1 },
 		     ]) or return;
-    } elsif ($kind eq 'AD') {
+    } elsif ($kind eq 'KRB5') {
 	
 	$authentication->{AD_domain} ||= $net->{resolv}{DOMAINNAME};
-	$authentication->{AD_users_db} ||= 'cn=users,' . domain_to_ldap_domain($authentication->{AD_domain});
-
 	$in->do_pkgs->ensure_are_installed([ 'perl-Net-DNS' ], 1) or return;
-
 	my @srvs = query_srv_names($authentication->{AD_domain});
 	$authentication->{AD_server} ||= $srvs[0] if @srvs;
-
-	my %sub_kinds = (
-	    simple => N("simple"), 
-	    tls => N("TLS"),
-	    ssl => N("SSL"),
-	    kerberos => N("security layout (SASL/Kerberos)"),
-	);
-
 	my $AD_user = $authentication->{AD_user} =~ /(.*)\@\Q$authentication->{AD_domain}\E$/ ? $1 : $authentication->{AD_user};
-	my $anonymous = $AD_user;
+	#my $authentication->{ccreds} ;
 
-	$in->ask_from('',
-		     N("Authentication Active Directory"),
-		     [ { label => N("Domain"), val => \$authentication->{AD_domain} },
-		     #{ label => N("Server"), val => \$authentication->{AD_server} },
-		       { label => N("Server"), type => 'combo', val => \$authentication->{AD_server}, list => \@srvs , not_edit => 0 },
-		       { label => N("LDAP users database"), val => \$authentication->{AD_users_db} },
-		       { label => N("Use Anonymous BIND "), val => \$anonymous, type => 'bool' },
-		       { label => N("LDAP user allowed to browse the Active Directory"), val => \$AD_user, disabled => sub { $anonymous } },
-		       { label => N("Password for user"), val => \$authentication->{AD_password}, hidden => 1, disabled => sub { $anonymous } },
-		       #{ label => N("Encryption"), val => \$authentication->{sub_kind}, list => [ map { $_->[0] } group_by2(@sub_kinds) ], format => sub { $sub_kinds{$_[0]} } },
+	$in->ask_from('',N(" "),
+                        [ { label => N("Welcome to the Authentication Wizard"), title => 1},
+                        {},
+                        { label => N("You have selected Kerberos 5 authentication. Please review the configuration options below "), },
+                        {},
+		       { label => N("Realm "),  val => \$authentication->{AD_domain}},
+                       {},
+		       { label => N("KDCs Servers"),  title => 1, val => \$authentication->{AD_server} , list => \@srvs , not_edit => 0,  title => 1 },
+                       {},
+		       { text => N("Use DNS to resolve hosts for realms "), val => \$authentication->{KRB_host_lookup}, type => 'bool' },
+		       { text => N("Use DNS to resolve KDCs for realms "), val => \$authentication->{KRB_dns_lookup}, type => 'bool' },
+		       { text => N("Use Disconnect mode "), val => \$ccreds, type => 'bool' },
 		     ]) or return;
+
+my %level = (
+             1 => N("Use local file for users informations"),
+             2 => N("Use Ldap for users informations"),
+            );
+
+ $in->ask_from('',N(" "),
+                        [ { label => N(" "), title => 1},
+                        {},
+                        { label => N("You have selected Kerberos 5 for authentication, now you must choose the type of users information "), },
+                        {},
+			{ label => N("") , val => \$authentication->{nsskrb}, type => 'list', list => [ keys %level ], format => sub { $level{$_[0]} } },
+			{},	
+			{ label => N("LDAP Server"), val => \$authentication->{LDAP_server}, disabled => sub { $authentication->{nsskrb} eq "1"  } },
+                     	{ label => N("Base dn"), val => \$authentication->{LDAPDOMAIN} , disabled => sub { $authentication->{nsskrb} eq "1"  } },
+                     	{ val => N("Fecth base Dn "), type  => button , clicked_may_quit => sub { $authentication->{LDAPDOMAIN} = fetch_dn($authentication->{LDAP_server}); 0 }, disabled => sub { $authentication->{nsskrb} eq "1"  } },
+			{},
+                     	{ text => N("Use encrypt connection with TLS "), val => \$authentication->{cafile}, type => 'bool',, disabled => sub { $authentication->{nsskrb} eq "1"  } },
+                     	{ val => N("Download CA Certificate "), type  => button , disabled => sub { !$authentication->{cafile} }, clicked_may_quit => sub { $authentication->{file} = add_cafile(); 0}  },
+                     	{ text => N("Use anonymous BIND "), val => \$authentication->{anonymous}, type => 'bool', disabled => sub { $authentication->{nsskrb} eq "1"  } },
+                     	{ label => N("Bind DN "), val => \$authentication->{LDAP_binddn}, disabled => sub { !$authentication->{anonymous}} },
+                     	{ label => N("Bind Password "), val => \$authentication->{LDAP_bindpwd}, disabled => sub { !$authentication->{anonymous} } },
+                     	{},
+			]) or return;
+	
 	$authentication->{AD_user} = !$AD_user || $authentication->{sub_kind} eq 'anonymous' ? '' : 
 	                             $AD_user =~ /@/ ? $AD_user : "$AD_user\@$authentication->{AD_domain}";
 	$authentication->{AD_password} = '' if !$authentication->{AD_user};
@@ -137,46 +178,53 @@ sub ask_parameters {
     } elsif ($kind eq 'NIS') { 
 	$authentication->{NIS_server} ||= 'broadcast';
 	$net->{network}{NISDOMAIN} ||= $net->{resolv}{DOMAINNAME};
-	$in->ask_from('',
-		     N("Authentication NIS"),
-		     [ { label => N("NIS Domain"), val => \$net->{network}{NISDOMAIN} },
-		       { label => N("NIS Server"), val => \$authentication->{NIS_server}, list => ["broadcast"], not_edit => 0 },
+	$in->ask_from('',N(" "),
+		[ { label => N("Welcome to the Authentication Wizard"), title => 1},
+		{},
+		{ label => N("You have selected NIS authentication. Please review the configuration options below "), },
+		{},
+		{ label => N("NIS Domain"), val => \$net->{network}{NISDOMAIN} },
+		{ label => N("NIS Server"), val => \$authentication->{NIS_server}, list => ["broadcast"], not_edit => 0 },
+		{},
 		     ]) or return;
-    } elsif ($kind eq 'winbind' || $kind eq 'SMBKRB') {
+    } elsif ($kind eq 'winbind') {
 	#- maybe we should browse the network like diskdrake --smb and get the 'doze server names in a list 
 	#- but networking is not setup yet necessarily
-	$in->ask_warn('', N("For this to work for a W2K PDC, you will probably need to have the admin run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add and reboot the server.
-You will also need the username/password of a Domain Admin to join the machine to the Windows(TM) domain.
-If networking is not yet enabled, Drakx will attempt to join the domain after the network setup step.
-Should this setup fail for some reason and domain authentication is not working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows(tm) Domain, and Admin Username/Password, after system boot.
-The command 'wbinfo -t' will test whether your authentication secrets are good."))
-	  if $kind eq 'winbind';
+	#
+	my @sec_domain = (
+		"Windows NT4 Domain",
+		"Windows Active Directory Domain",
+);
 
-	$authentication->{AD_domain} ||= $net->{resolv}{DOMAINNAME} if $kind eq 'SMBKRB';
-	 $authentication->{AD_users_idmap} ||= 'ou=idmap,' . domain_to_ldap_domain($authentication->{AD_domain}) if $kind eq 'SMBKRB';
+
+	$authentication->{AD_domain} ||= $net->{resolv}{DOMAINNAME};
 	$authentication->{WINDOMAIN} ||= $net->{resolv}{DOMAINNAME};
+	$in->do_pkgs->ensure_are_installed([ 'samba-client' ], 1) or return;
+	my @domains=list_domains();
 
-	$in->ask_from('',
-		      $kind eq 'SMBKRB' ? N("Authentication Active Directory") : N("Authentication Windows Domain"),
-		        [ if_($kind eq 'SMBKRB', 
-			  { label => N("Active Directory Realm "), val => \$authentication->{AD_domain} }
-			     ),
-			  { label => N("Windows Domain"), val => \$authentication->{WINDOMAIN} },
-			  { label => N("Domain Admin User Name"), val => \$authentication->{winuser} },
-			  { label => N("Domain Admin Password"), val => \$authentication->{winpass}, hidden => 1 },
-			  #{ label => N("Use Idmap for store UID/SID "), val => \$anonymous, type => 'bool' },
-			  #{ label => N("Default Idmap "), val => \$authentication->{AD_users_idmap}, disabled => sub { $anonymous } },
+	$in->ask_from('',N(" "),
+			[ { label => N("Welcome to the Authentication Wizard"), title => 1},
+			{},
+			{ label => N("You have selected Windows Domain authentication. Please review the configuration options below "), },
+		        {},
+			{ label => N("Windows Domain"), val => \$authentication->{WINDOMAIN}, list => \@domains, not_edit => 1 },
+		        {},
+		        { label => N("Domain Model "), val => \$authentication->{model}, list => \@sec_domain , not_edit => 1 },
+		        {},
+			{ label => N("Active Directory Realm "), val => \$authentication->{AD_domain} , disabled => sub { $authentication->{model} eq "Windows NT4 Domain"  }},
+		        {},
+		        {},
+		        {},
 			]) or return;
     }
     $authentication->{$kind} ||= 1;
     1;
 }
-
 sub ask_root_password_and_authentication {
-    my ($in, $net, $superuser, $authentication, $_meta_class, $security) = @_;
+    my ($in, $net, $superuser, $authentication, $meta_class, $security) = @_;
 
     my $kind = to_kind($authentication);
-    my @kinds = kinds($in->do_pkgs);
+    my @kinds = kinds($in->do_pkgs, $meta_class);
 
     $in->ask_from_({
 	 title => N("Authentication"), 
@@ -266,85 +314,43 @@ sub set_raw {
     my $pam_modules = $kind2pam_kind{$kind} or log::l("kind2pam_kind does not know $kind");
     $pam_modules ||= [];
     sshd_config_UsePAM(@$pam_modules > 0);
-    set_pam_authentication(@$pam_modules);
+    set_pam_authentication($pam_modules, $ccreds);
 
     my $nsswitch = $kind2nsswitch{$kind} or log::l("kind2nsswitch does not know $kind");
     $nsswitch ||= [];
-    set_nsswitch_priority(@$nsswitch);
+    set_nsswitch_priority($nsswitch,$ccreds);
 
     if ($kind eq 'local') {
+
+output($conf_file, <<EOF);
+auth=Local File 
+server=none 
+realm=none
+EOF
+
+
+
     } elsif ($kind eq 'SmartCard') {
     } elsif ($kind eq 'LDAP') {
-	my $domain = $authentication->{LDAPDOMAIN} || do {
-	    my $s = run_program::rooted_get_stdout($::prefix, 'ldapsearch', '-x', '-h', $authentication->{LDAP_server}, '-b', '', '-s', 'base', '+');
-	    first($s =~ /namingContexts: (.+)/);
-	} or log::l("no ldap domain found on server $authentication->{LDAP_server}"), return;
 
-	update_ldap_conf(
-			 host => $authentication->{LDAP_server},
-			 base => $domain,
-			 nss_base_shadow => $domain . "?sub",
-			 nss_base_passwd => $domain . "?sub",
-			 nss_base_group => $domain . "?sub",
-			);
-    } elsif ($kind eq 'AD') {
-	my $port = "389";
-	
-	my $ssl = { 
-		   anonymous => 'off', 
-		   simple => 'off', 
-		   tls => 'start_tls',
-		   ssl => 'on',
-		   kerberos => 'off',
-		  }->{$authentication->{sub_kind}};
+	configure_nss_ldap($authentication);
 
-	if ($ssl eq 'on') {
-		$port = '636';
-	}
-	
-	
-	
-	update_ldap_conf(
-			 host => $authentication->{AD_server},
-			 base => domain_to_ldap_domain($authentication->{AD_domain}),
-			 nss_base_shadow => "$authentication->{AD_users_db}?sub",
-			 nss_base_passwd => "$authentication->{AD_users_db}?sub",
-			 nss_base_group => "$authentication->{AD_users_db}?sub",
+output($conf_file, <<EOF);
+auth=Ldap Directory
+server=$authentication->{LDAP_server}
+realm=$authentication->{LDAPDOMAIN}
+EOF
 
-			 ssl => $ssl,
-			 sasl_mech => $authentication->{sub_kind} eq 'kerberos' ? 'GSSAPI' : '',
-			 port => $port,
-
-			 binddn => $authentication->{AD_user},
-			 bindpw => $authentication->{AD_password},
-
-			 (map_each { "nss_map_objectclass_$::a" => $::b }
-			  posixAccount => 'User',
-			  shadowAccount => 'User',
-			  posixGroup => 'Group',
-			 ),
-
-
-			 scope => 'sub',
-			 pam_login_attribute => 'sAMAccountName',
-			 pam_filter => 'objectclass=User',
-			 pam_password => 'ad',
-
-			 
-			 (map_each { "nss_map_attribute_$::a" => $::b }
-			  uid => 'sAMAccountName',
-			  uidNumber => 'msSFU30UidNumber',
-			  gidNumber => 'msSFU30GidNumber',
-			  cn => 'sAMAccountName',
-			  uniqueMember => 'member',
-			  userPassword => 'msSFU30Password',
-			  homeDirectory => 'msSFU30HomeDirectory',
-			  loginShell => 'msSFU30LoginShell',
-			  gecos => 'name',
-			 ),
-			);
+    } elsif ($kind eq 'KRB5') {
 
 	configure_krb5_for_AD($authentication);
+	configure_nss_ldap($authentication);
+
+output($conf_file, <<EOF);
+auth=Kerberos 5
+server=$authentication->{AD_server}
+realm=$authentication->{AD_domain}
+EOF
 
     } elsif ($kind eq 'NIS') {
 	my $domain = $net->{network}{NISDOMAIN};
@@ -371,12 +377,22 @@ sub set_raw {
 	    run_program::rooted($::prefix, 'nisdomainname', $domain);
 	    run_program::rooted($::prefix, 'service', 'ypbind', 'restart');
 	});
+
+output($conf_file, <<EOF);
+auth=$kind
+server=$NIS_server
+realm=$domain
+EOF
+
 #    } elsif ($kind eq 'winbind' || $kind eq 'AD' && $authentication->{subkind} eq 'winbind') {
 
     } elsif ($kind eq 'winbind') {
 
 	my $domain = uc $authentication->{WINDOMAIN};
-	
+	($authentication->{winuser}, $authentication->{winpass}) = auth();
+
+	if ($authentication->{model} eq "Windows NT4 Domain") {
+
 	require fs::remote::smb;
 	fs::remote::smb::write_smb_conf($domain);
 	run_program::rooted($::prefix, "chkconfig", "--level", "35", "winbind", "on");
@@ -388,13 +404,25 @@ sub set_raw {
 
 	$when_network_is_up->(sub {
 	    run_program::raw({ root => $::prefix, sensitive_arguments => 1 },
-			     'net', 'join', $domain, '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
+		    #'net', 'join', $domain, '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
+			     'echo','"','net', 'join', $domain, '-U', $authentication->{winuser} . '%' . $authentication->{winpass},'"');
 	});
-    } elsif ($kind eq 'SMBKRB') {
-	 $authentication->{AD_server} ||= 'ads.' . $authentication->{AD_domain};
+
+output($conf_file, <<EOF);
+auth=Windows NT4 Domain
+server= none 
+realm=$domain
+EOF
+
+
+
+
+	} else { 	
+		
+	$authentication->{AD_server} ||= 'ads.' . $authentication->{AD_domain};
 	my $domain = uc $authentication->{WINDOMAIN};
 	my $realm = $authentication->{AD_domain};
-
+	($authentication->{winuser}, $authentication->{winpass}) = auth();
 	configure_krb5_for_AD($authentication);
 		
 	require fs::remote::smb;
@@ -409,13 +437,20 @@ sub set_raw {
 	    run_program::raw({ root => $::prefix, sensitive_arguments => 1 }, 
 			     'net', 'ads', 'join', '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
 	});
-    }
+
+
+output($conf_file, <<EOF);
+auth=Windows Active Directory Domain
+server= none
+realm=$realm
+EOF
+    } }
     1;
 }
 
 
 sub pam_modules() {
-    'pam_ldap', 'pam_castella', 'pam_winbind', 'pam_krb5', 'pam_mkhomedir';
+    'pam_ldap', 'pam_castella', 'pam_winbind', 'pam_krb5', 'pam_mkhomedir','pam_ccreds', 'pam_deny' , 'pam_permit';
 }
 sub pam_module_from_path { 
     $_[0] && $_[0] =~ m|(/lib/security/)?(pam_.*)\.so| && $2;
@@ -431,9 +466,12 @@ sub pam_format_line {
 sub get_raw_pam_authentication() {
     my %before_deny;
     foreach (cat_("$::prefix/etc/pam.d/system-auth")) {
-	my ($type, $control, $module, @para) = split;
+	#my ($type, $control, $module, @para) = split;
+	my ($type, $control, $other) = /(\S+)\s+(\[.*?\]|\S+)\s+(.*)/;
+	my ($module, @para) = split(' ', $other);
 	if ($module = pam_module_from_path($module)) {
-	    $before_deny{$type}{$module} = \@para if $control eq 'sufficient' && member($module, pam_modules());
+	    #$before_deny{$type}{$module} = \@para if $control eq 'sufficient' && member($module, pam_modules());
+	    $before_deny{$type}{$module} = \@para if member($module, pam_modules());
 	}
     }
     \%before_deny;
@@ -444,32 +482,69 @@ sub get_pam_authentication_kinds() {
     map { s/pam_//; $_ } keys %{$before_deny->{auth}};
 }
 
+sub sufficient {
+    my ($ccreds, $module, $type) = @_;
+
+    $ccreds && member($module, 'pam_unix' , 'pam_winbind' ) ?
+      'sufficient' :
+    $ccreds && member($module, 'pam_ldap', 'pam_krb5' ) && $type eq 'account' ?
+      '[authinfo_unavail=ignore default=done]' :
+    $ccreds && member($module, 'pam_ldap', 'pam_krb5' ) && $type eq 'password' ?
+      'sufficient' :
+    $ccreds && member($module, 'pam_ldap', 'pam_krb5' ) ?
+      '[authinfo_unavail=ignore user_unknown=ignore success=1 default=2]' :
+      'sufficient';
+}
+
+sub pam_sufficient_line {
+    my ($ccreds, $type, $module, @para) = @_;
+    my $control = sufficient($ccreds, $module, $type);
+    if ($module eq 'pam_winbind') {
+	push @para, 'cached_login';
+    }
+    pam_format_line($type, $control, $module, @para);
+}
+
+
+
+
+
+
 sub set_pam_authentication {
-    my (@authentication_kinds) = @_;
+    #my (@authentication_kinds) = @_;
+    my ($authentication_kinds, $ccreds) = @_;
     
     my %special = (
-	auth => [ difference2(\@authentication_kinds,, [ 'mount' ]) ],
-	account => [ difference2(\@authentication_kinds, [ 'castella', 'mount' ]) ],
-	password => [ intersection(\@authentication_kinds, [ 'ldap', 'krb5' ]) ],
+	    #auth => [ difference2(\@authentication_kinds,, [ 'mount' ]) ],
+	    #account => [ difference2(\@authentication_kinds, [ 'castella', 'mount' ]) ],
+	    #password => [ intersection(\@authentication_kinds, [ 'ldap', 'krb5' ]) ],
+	auth => [ difference2($authentication_kinds,, [ 'mount' ]) ],
+	account => [ difference2($authentication_kinds, [ 'castella', 'mount', 'ccreds' ]) ],
+	password => [ intersection($authentication_kinds, [ 'ldap', 'krb5', 'ccreds' ]) ],
     );
     my %before_first = (
-	auth => member('mount', @authentication_kinds) ? pam_format_line('auth', 'required', 'pam_mount') : '',
+	    #auth => member('mount', @authentication_kinds) ? pam_format_line('auth', 'required', 'pam_mount') : '',
+	auth => member('mount', @$authentication_kinds) ? pam_format_line('auth', 'required', 'pam_mount') : '',
 	session => 
-	  intersection(\@authentication_kinds, [ 'winbind', 'krb5', 'ldap' ]) 
+	  #intersection(\@authentication_kinds, [ 'winbind', 'krb5', 'ldap' ]) 
+	  intersection($authentication_kinds, [ 'winbind', 'krb5', 'ldap' ])
 	    ? pam_format_line('session', 'optional', 'pam_mkhomedir', 'skel=/etc/skel/', 'umask=0022') :
-	  member('castella', @authentication_kinds)
+	    #member('castella', @authentication_kinds)
+	    member('castella', @$authentication_kinds)
 	    ? pam_format_line('session', 'optional', 'pam_castella') : '',
     );
     my %after_deny = (
 	session =>
-          member('krb5', @authentication_kinds)
+          member('krb5', @$authentication_kinds)
             ? pam_format_line('session', 'optional', 'pam_krb5') :
-          member('mount', @authentication_kinds)
+          member('mount', @$authentication_kinds)
             ? pam_format_line('session', 'optional', 'pam_mount') : '',
     );
 
     substInFile {
-	my ($type, $control, $module, @para) = split;
+	    #my ($type, $control, $module, @para) = split;
+	my ($type, $control, $other) = /(\S+)\s+(\[.*?\]|\S+)\s+(.*)/;
+	my ($module, @para) = split(' ', $other);
 	if ($module = pam_module_from_path($module)) {
 	    if (member($module, pam_modules())) {
 		#- first removing previous config
@@ -487,23 +562,36 @@ sub set_pam_authentication {
 		    @para_for_last = grep { $_ ne 'use_first_pass' } @para_for_last;
 		}
 
-		my @l = ((map { [ "pam_$_" ] } @$before_noask, @$before),
+		my @l = ((map { [ "pam_$_" ] } @$before_noask),
 			 [ 'pam_unix', @para ],
-			 (map { [ "pam_$_" ] } @$after),
+			 (map { [ "pam_$_" ] } @$ask),
 			 );
 		push @{$l[-1]}, @para_for_last;
-		$_ = join('', map { pam_format_line($type, 'sufficient', @$_) } @l);
+		#$_ = join('', map { pam_format_line($type, 'sufficient', @$_) } @l);
+		### $_ = join('', map { pam_format_line($type, sufficient($ccreds, $_->[0], $type), @$_) } @l);
+		$_ = join('', map { pam_sufficient_line($ccreds, $type, @$_) } @l);
 
 		if ($control eq 'required') {
-		    #- ensure a pam_deny line is there
-		    ($control, $module, @para) = ('required', 'pam_deny');
-		    $_ .= pam_format_line($type, $control, $module);
+		    #- ensure a pam_deny line is there. it will be added below
+		    ($module, @para) = ('pam_deny');
 		}
+
+		if ($type eq 'auth' && $ccreds) {
+			$_ .= pam_format_line('auth', '[default=done]', 'pam_ccreds', 'action=validate use_first_pass');
+			$_ .= pam_format_line('auth', '[default=done]', 'pam_ccreds', 'action=store');
+			$_ .= pam_format_line('auth', '[default=bad]',  'pam_ccreds', 'action=update');
+		}
+	    }
+
+
+	    if (member($module, 'pam_deny', 'pam_permit')) {
+		$_ .= pam_format_line($type, $control, 
+				      $type eq 'account' && $ccreds ? 'pam_permit' : 'pam_deny');
 	    }
 	    if (my $s = delete $before_first{$type}) {
 		$_ = $s . $_;
 	    }
-	    if ($control eq 'required' && member($module, 'pam_deny', 'pam_unix')) {
+	    if ($control eq 'required' && member($module, 'pam_deny', 'pam_permit', 'pam_unix')) {
 		if (my $s = delete $after_deny{$type}) {
 		    $_ .= $s;
 		}
@@ -513,13 +601,25 @@ sub set_pam_authentication {
 }
 
 sub set_nsswitch_priority {
-    my (@kinds) = @_;
+	#my (@kinds) = @_;
+    my ($kinds, $connected) = @_;
     my @known = qw(nis ldap winbind);
     substInFile {
 	if (my ($database, $l) = /^(\s*(?:passwd|shadow|group|automount):\s*)(.*)/) {
 	    my @l = difference2([ split(' ', $l) ], \@known);
-	    $_ = $database . join(' ', uniq('files', @kinds, @l)) . "\n";
-	}	
+	    #    $_ = $database . join(' ', uniq('files', @kinds, @l)) . "\n";
+	    #}
+		$_ = $database . join(' ', uniq('files', @$kinds, @l)) . "\n";
+	}
+	if (/^\s*(?:passwd|group):/) {
+		my $option = '[NOTFOUND=return] db';
+	if ($connected) {
+		s/$/ $option/ if !/\Q$option/;
+	} else {
+		s/\s*\Q$option//;
+	}
+}	
+
     } "$::prefix/etc/nsswitch.conf";
 }
 
@@ -583,8 +683,8 @@ sub configure_krb5_for_AD {
     krb5_conf_update($krb5_conf_file,
 		     libdefaults => (
 				     default_realm => $uc_domain,
-				     dns_lookup_realm => $authentication->{AD_server} ? 'false' : 'true',
-				     dns_lookup_kdc => $authentication->{AD_server} ? 'false' : 'true',
+				     dns_lookup_realm => $authentication->{KRB_dns_lookup} ? 'true' : 'false',
+				     dns_lookup_kdc => $authentication->{KRB_host_lookup}? 'true' : 'false',
 				     default_tgs_enctypes => undef, 
 				     default_tkt_enctypes => undef,
 				     permitted_enctypes => undef,
@@ -720,9 +820,6 @@ sub salt {
 sub user_crypted_passwd {
     my ($u, $isMD5) = @_;
     if ($u->{password}) {
-	require utf8;
-	utf8::encode($u->{password}); #- we don't want perl to do "smart" things in crypt()
-
 	crypt($u->{password}, $isMD5 ? '$1$' . salt(8) : salt(2));
     } else {
 	$u->{pw} || '';
@@ -766,5 +863,87 @@ sub pack_passwd {
     join(':', @$l{@etc_pass_fields}) . "\n";
 }
 
-1;
+sub add_cafile {
+	my $file;
+	my $in = interactive->vnew;
+	$file = $in->ask_filename({ title => N("Select file") }) or return;
+}
 
+sub auth {
+	my $in = interactive->vnew;
+        $file = $in->ask_from('',N(" "),[
+		{ label => N("Domain Windows for authentication : " , $authentication->{WINDOMAIN} )},
+		{},
+		{ label => N("Domain Admin User Name"), val => \$authentication->{winuser} },
+	        { label => N("Domain Admin Password"), val => \$authentication->{winpass}, hidden => 1 },
+	]);
+	return ($authentication->{winuser},$authentication->{winpass});
+}
+
+require fs::remote::smb;
+sub list_domains {
+    my $smb = fs::remote::smb->new;
+    my %domains;
+    foreach my $server ($smb->find_servers) {
+        $domains{$server->{group}} = 1;
+    }
+    return sort keys %domains;
+}
+sub get_server_for_domain {
+    my $smb = fs::remote::smb->new;
+    my %domains;
+    foreach my $server ($smb->find_servers) {
+        return $server->{name} if $server->{group} == @_[0];
+    }
+}
+
+sub fetch_dn {
+	my ($srv) = @_;
+	#print "$srv";
+	my $s = run_program::rooted_get_stdout($::prefix, 'ldapsearch', '-x', '-h', $srv, '-b', '', '-s', 'base', '+');
+	$authentication->{LDAPDOMAIN} = first($s =~ /namingContexts: (.+)/);
+	return $authentication->{LDAPDOMAIN};
+}
+	
+sub configure_nss_ldap {
+	my ($authentication) = @_;
+	#my $authentication->{domain} = $authentication->{LDAPDOMAIN} || do {
+        #    my $s = run_program::rooted_get_stdout($::prefix, 'ldapsearch', '-x', '-h', $authentication->{LDAP_server}, '-b', '', '-s', 'base', '+');
+        #    first($s =~ /namingContexts: (.+)/);
+        #} or log::l("no ldap domain found on server $authentication->{LDAP_server}"), return;
+	update_ldap_conf(
+                         host => $authentication->{LDAP_server},
+                         base => $authentication->{LDAPDOMAIN},
+                        );
+
+        if ( $authentication->{nssgrp} eq '1' ) {
+
+        update_ldap_conf(
+                         nss_base_shadow => $authentication->{nss_shadow} . "?sub",
+                         nss_base_passwd => $authentication->{nss_pwd} . "?sub",
+                         nss_base_group => $authentication->{nss_grp} . "?sub",
+                        );
+        } else {
+
+        update_ldap_conf(
+                         nss_base_shadow => $authentication->{LDAPDOMAIN} . "?sub",
+                         nss_base_passwd => $authentication->{LDAPDOMAIN} . "?sub",
+                         nss_base_group => $authentication->{LDAPDOMAIN}  . "?sub",
+                        );
+                };
+        if ( $authentication->{anonymous} eq '1') {
+                 update_ldap_conf(
+                         binddn => $authentication->{LDAP_binddn},
+                         bindpw => $authentication->{LDAP_bindpwd},
+                        );
+        };
+
+        if ( $authentication->{cafile} eq '1' ) {
+                 update_ldap_conf(
+                 ssl => "on",
+                 tls_checkpeer => "yes",
+                 tls_cacertfile => $authentication->{file},
+                );
+        };
+ };
+1;
