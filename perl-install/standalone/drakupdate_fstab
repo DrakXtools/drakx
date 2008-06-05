@@ -78,15 +78,6 @@ sub device_name_to_entry {
     $e;
 }
 
-sub set_options {
-    my ($part) = @_;
-
-    $part->{is_removable} = 1; #- force removable flag
-    fs::mount_options::set_default($part, 
-			    security => security::level::get(), 
-			    lang::fs_options(lang::read()));
-}
-
 sub set_mount_point {
     my ($part, $fstab, $is_hd) = @_;
 
