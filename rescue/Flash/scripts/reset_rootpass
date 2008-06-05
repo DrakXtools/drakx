@@ -62,8 +62,8 @@ function cleanup() {
     chroot $tmpdir/union /usr/bin/unicode_stop
 
     umount $tmpdir/union > /dev/null 2>&1
-    umount $tmpdir/user > /dev/null 2>&1
-    umount $tmpdir/squash > /dev/null 2>&1
+    lumount $tmpdir/user > /dev/null 2>&1
+    lumount $tmpdir/squash > /dev/null 2>&1
     umount $rootdir > /dev/null 2>&1
 
     rmdir $tmpdir/union $tmpdir/user $tmpdir/squash 2> /dev/null

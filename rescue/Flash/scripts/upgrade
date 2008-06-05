@@ -79,7 +79,7 @@ function get_existing_rpms() {
     fi
 
     umount $tmpdir/union > /dev/null 2>&1
-    umount $tmpdir/squash > /dev/null 2>&1
+    lumount $tmpdir/squash > /dev/null 2>&1
 
     mkdir -p $tmpdir/user/root
     diff /tmp/previous_rpms.list /tmp/existing_rpms.list | sed -n 's/^> //p' > $tmpdir/user/root/new_existing_rpms.list
@@ -205,8 +205,8 @@ function cleanup() {
     cd /
 
     umount $tmpdir/union > /dev/null 2>&1
-    umount $tmpdir/user > /dev/null 2>&1
-    umount $tmpdir/squash > /dev/null 2>&1
+    lumount $tmpdir/user > /dev/null 2>&1
+    lumount $tmpdir/squash > /dev/null 2>&1
     umount $rootdir > /dev/null 2>&1
 
     rmdir $tmpdir/union $tmpdir/user $tmpdir/squash 2> /dev/null
