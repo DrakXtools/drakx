@@ -186,3 +186,9 @@ function progress() {
     usleep 100000
 }
 
+function lumount() {
+    local dir=$1
+    loop=$(perl -ne '@l = split; if ($l[1] eq "'$dir'") { print $l[0]; exit }' /proc/mounts)
+    umount $dir
+    losetup -d $loop
+}
