@@ -8,6 +8,8 @@ function detect_version() {
         version="1.05"
     elif has_label Mdv_Flash; then
         version="2.0"
+    elif has_label MDV_FLASH; then
+        version="2.05"
     fi
     usbroot_device=$_device
     source_version_variables
@@ -29,6 +31,10 @@ function source_version_variables {
         loopbacks_rel="/.loopbacks"
     elif [ "$_version" = "2.0" ]; then
         label=Mdv_Flash
+        boot_rel="/.boot"
+        loopbacks_rel="/.loopbacks"
+    elif [ "$_version" = "2.05" ]; then
+        label=MDV_FLASH
         boot_rel="/.boot"
         loopbacks_rel="/.loopbacks"
     fi
