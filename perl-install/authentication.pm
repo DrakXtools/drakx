@@ -163,9 +163,9 @@ my %level = (
                      	{ val => N("Fecth base Dn "), type  => button , clicked_may_quit => sub { $authentication->{LDAPDOMAIN} = fetch_dn($authentication->{LDAP_server}); 0 }, disabled => sub { $authentication->{nsskrb} eq "1"  } },
 			{},
                      	{ text => N("Use encrypt connection with TLS "), val => \$authentication->{cafile}, type => 'bool',, disabled => sub { $authentication->{nsskrb} eq "1"  } },
-                     	{ val => N("Download CA Certificate "), type  => button , disabled => sub { !$authentication->{cafile} }, clicked_may_quit => sub { $authentication->{file} = add_cafile(); 0}  },
+                     	{ val => N("Download CA Certificate "), type  => button , disabled => sub { !$authentication->{cafile} }, clicked_may_quit => sub { $authentication->{file} = add_cafile(); 0 }  },
                      	{ text => N("Use anonymous BIND "), val => \$authentication->{anonymous}, type => 'bool', disabled => sub { $authentication->{nsskrb} eq "1"  } },
-                     	{ label => N("Bind DN "), val => \$authentication->{LDAP_binddn}, disabled => sub { !$authentication->{anonymous}} },
+                     	{ label => N("Bind DN "), val => \$authentication->{LDAP_binddn}, disabled => sub { !$authentication->{anonymous} } },
                      	{ label => N("Bind Password "), val => \$authentication->{LDAP_bindpwd}, disabled => sub { !$authentication->{anonymous} } },
                      	{},
 			]) or return;
@@ -178,8 +178,8 @@ my %level = (
     } elsif ($kind eq 'NIS') { 
 	$authentication->{NIS_server} ||= 'broadcast';
 	$net->{network}{NISDOMAIN} ||= $net->{resolv}{DOMAINNAME};
-	$in->ask_from('',N(" "),
-		[ { label => N("Welcome to the Authentication Wizard"), title => 1},
+	$in->ask_from('', N(" "),
+		[ { label => N("Welcome to the Authentication Wizard"), title => 1 },
 		{},
 		{ label => N("You have selected NIS authentication. Please review the configuration options below "), },
 		{},
@@ -202,8 +202,8 @@ my %level = (
 	$in->do_pkgs->ensure_are_installed([ 'samba-client' ], 1) or return;
 	my @domains=list_domains();
 
-	$in->ask_from('',N(" "),
-			[ { label => N("Welcome to the Authentication Wizard"), title => 1},
+	$in->ask_from('', N(" "),
+			[ { label => N("Welcome to the Authentication Wizard"), title => 1 },
 			{},
 			{ label => N("You have selected Windows Domain authentication. Please review the configuration options below "), },
 		        {},
@@ -211,7 +211,7 @@ my %level = (
 		        {},
 		        { label => N("Domain Model "), val => \$authentication->{model}, list => \@sec_domain , not_edit => 1 },
 		        {},
-			{ label => N("Active Directory Realm "), val => \$authentication->{AD_domain} , disabled => sub { $authentication->{model} eq "Windows NT4 Domain"  }},
+			{ label => N("Active Directory Realm "), val => \$authentication->{AD_domain} , disabled => sub { $authentication->{model} eq "Windows NT4 Domain"  } },
 		        {},
 		        {},
 		        {},
@@ -405,7 +405,7 @@ EOF
 	$when_network_is_up->(sub {
 	    run_program::raw({ root => $::prefix, sensitive_arguments => 1 },
 		    #'net', 'join', $domain, '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
-			     'echo','"','net', 'join', $domain, '-U', $authentication->{winuser} . '%' . $authentication->{winpass},'"');
+			     'echo', '"', 'net', 'join', $domain, '-U', $authentication->{winuser} . '%' . $authentication->{winpass}, '"');
 	});
 
 output($conf_file, <<EOF);
@@ -450,7 +450,7 @@ EOF
 
 
 sub pam_modules() {
-    'pam_ldap', 'pam_castella', 'pam_winbind', 'pam_krb5', 'pam_mkhomedir','pam_ccreds', 'pam_deny' , 'pam_permit';
+    'pam_ldap', 'pam_castella', 'pam_winbind', 'pam_krb5', 'pam_mkhomedir', 'pam_ccreds', 'pam_deny' , 'pam_permit';
 }
 sub pam_module_from_path { 
     $_[0] && $_[0] =~ m|(/lib/security/)?(pam_.*)\.so| && $2;
@@ -485,13 +485,13 @@ sub get_pam_authentication_kinds() {
 sub sufficient {
     my ($ccreds, $module, $type) = @_;
 
-    $ccreds && member($module, 'pam_unix' , 'pam_winbind' ) ?
+    $ccreds && member($module, 'pam_unix' , 'pam_winbind') ?
       'sufficient' :
-    $ccreds && member($module, 'pam_ldap', 'pam_krb5' ) && $type eq 'account' ?
+    $ccreds && member($module, 'pam_ldap', 'pam_krb5') && $type eq 'account' ?
       '[authinfo_unavail=ignore default=done]' :
-    $ccreds && member($module, 'pam_ldap', 'pam_krb5' ) && $type eq 'password' ?
+    $ccreds && member($module, 'pam_ldap', 'pam_krb5') && $type eq 'password' ?
       'sufficient' :
-    $ccreds && member($module, 'pam_ldap', 'pam_krb5' ) ?
+    $ccreds && member($module, 'pam_ldap', 'pam_krb5') ?
       '[authinfo_unavail=ignore user_unknown=ignore success=1 default=2]' :
       'sufficient';
 }
@@ -684,7 +684,7 @@ sub configure_krb5_for_AD {
 		     libdefaults => (
 				     default_realm => $uc_domain,
 				     dns_lookup_realm => $authentication->{KRB_dns_lookup} ? 'true' : 'false',
-				     dns_lookup_kdc => $authentication->{KRB_host_lookup}? 'true' : 'false',
+				     dns_lookup_kdc => $authentication->{KRB_host_lookup} ? 'true' : 'false',
 				     default_tgs_enctypes => undef, 
 				     default_tkt_enctypes => undef,
 				     permitted_enctypes => undef,
@@ -871,13 +871,13 @@ sub add_cafile {
 
 sub auth {
 	my $in = interactive->vnew;
-        $file = $in->ask_from('',N(" "),[
-		{ label => N("Domain Windows for authentication : " , $authentication->{WINDOMAIN} )},
+        $file = $in->ask_from('', N(" "), [
+		{ label => N("Domain Windows for authentication : " , $authentication->{WINDOMAIN}) },
 		{},
 		{ label => N("Domain Admin User Name"), val => \$authentication->{winuser} },
 	        { label => N("Domain Admin Password"), val => \$authentication->{winpass}, hidden => 1 },
 	]);
-	return ($authentication->{winuser},$authentication->{winpass});
+	return ($authentication->{winuser}, $authentication->{winpass});
 }
 
 require fs::remote::smb;
@@ -916,7 +916,7 @@ sub configure_nss_ldap {
                          base => $authentication->{LDAPDOMAIN},
                         );
 
-        if ( $authentication->{nssgrp} eq '1' ) {
+        if ($authentication->{nssgrp} eq '1') {
 
         update_ldap_conf(
                          nss_base_shadow => $authentication->{nss_shadow} . "?sub",
@@ -931,14 +931,14 @@ sub configure_nss_ldap {
                          nss_base_group => $authentication->{LDAPDOMAIN}  . "?sub",
                         );
                 };
-        if ( $authentication->{anonymous} eq '1') {
+        if ($authentication->{anonymous} eq '1') {
                  update_ldap_conf(
                          binddn => $authentication->{LDAP_binddn},
                          bindpw => $authentication->{LDAP_bindpwd},
                         );
         };
 
-        if ( $authentication->{cafile} eq '1' ) {
+        if ($authentication->{cafile} eq '1') {
                  update_ldap_conf(
                  ssl => "on",
                  tls_checkpeer => "yes",
