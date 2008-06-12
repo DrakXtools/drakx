@@ -2,7 +2,6 @@ package authentication; # $Id$
 
 use common;
 my $ccreds = 1;
-my $conf_file = "/etc/sysconfig/drakauth";
 
 $::real_windowwidth  = 700;
 $::real_windowheight = 600;
@@ -302,6 +301,7 @@ sub set {
 sub set_raw {
     my ($net, $authentication, $o_when_network_is_up) = @_;
 
+    my $conf_file = "$::prefix/etc/sysconfig/drakauth";
     my $when_network_is_up = $o_when_network_is_up || sub { my ($f) = @_; $f->() };
 
     enable_shadow() if $authentication->{shadow};    
