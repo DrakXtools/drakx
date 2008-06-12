@@ -78,6 +78,11 @@ sub device_name_to_entry {
     $e;
 }
 
+sub set_options {
+    my ($part) = @_;
+    $part->{is_removable} = 1;
+}
+
 sub set_mount_point {
     my ($part, $fstab, $is_hd) = @_;
 
@@ -130,6 +135,7 @@ sub configure_part {
 	    return;
 	}
 	set_mount_point($part, $fstab, $is_hd) or return;
+	set_options($part);
 
 	my ($line) = fs::prepare_write_fstab([$part]);
 	if ($line) {
