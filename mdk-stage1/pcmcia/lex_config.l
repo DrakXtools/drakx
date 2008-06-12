@@ -32,6 +32,7 @@
 
 #include "yacc_config.h"
 
+#define YY_NO_INPUT 1 /* mdk-stage1 */
 #define YY_NO_UNPUT 1 /* mdk-stage1 */
 extern int yyparse(void); /* mdk-stage1 */
 
