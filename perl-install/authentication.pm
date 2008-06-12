@@ -156,7 +156,7 @@ my %level = (
                         {},
                         { label => N("You have selected Kerberos 5 for authentication, now you must choose the type of users information "), },
                         {},
-			{ label => N("") , val => \$authentication->{nsskrb}, type => 'list', list => [ keys %level ], format => sub { $level{$_[0]} } },
+			{ label => "" , val => \$authentication->{nsskrb}, type => 'list', list => [ keys %level ], format => sub { $level{$_[0]} } },
 			{},	
 			{ label => N("LDAP Server"), val => \$authentication->{LDAP_server}, disabled => sub { $authentication->{nsskrb} eq "1"  } },
                      	{ label => N("Base dn"), val => \$authentication->{LDAPDOMAIN} , disabled => sub { $authentication->{nsskrb} eq "1"  } },
