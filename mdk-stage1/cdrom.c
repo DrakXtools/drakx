@@ -138,7 +138,7 @@ enum return_type cdrom_prepare(void)
 	enum return_type results;
 	static int already_probed_ide_generic = 0;
 
-	my_insmod("ide_cd", ANY_DRIVER_TYPE, NULL, 0);
+	my_insmod("ide_cd_mod", ANY_DRIVER_TYPE, NULL, 0);
 
 	if (IS_AUTOMATIC) {
 		get_medias(CDROM, &medias, &medias_models, BUS_IDE);

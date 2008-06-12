@@ -312,7 +312,7 @@ int get_cdroms(char *** names, char *** models)
 	char ** ptr;
 	int count = 0;
 
-	my_insmod("ide_cd", ANY_DRIVER_TYPE, NULL, 0);
+	my_insmod("ide_cd_mod", ANY_DRIVER_TYPE, NULL, 0);
 	my_insmod("sr_mod", ANY_DRIVER_TYPE, NULL, 0);
 
 	get_medias(CDROM, names, models, BUS_ANY);
