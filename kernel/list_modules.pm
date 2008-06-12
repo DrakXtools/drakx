@@ -96,7 +96,7 @@ our %l = (
         qw(aec62xx ali14xx alim15x3 amd74xx atiixp cmd64x cy82c693 cs5520 cs5530 cs5535),
         qw(delkin_cb dtc2278 hpt34x hpt366 ns87415 ht6560b it8213 jmicron),
         qw(opti621 pdc202xx_new pdc202xx_old piix qd65xx rz1000 sc1200 serverworks siimage sis5513 slc90e66),
-        qw(tc86c001 triflex trm290 umc8672 via82cxxx generic ide-generic),
+        qw(tc86c001 triflex trm290 umc8672 via82cxxx ide-pci-generic ide-generic),
     ],
     scsi => [
       if_(arch() =~ /ppc/, qw(mesh mac53c94)),
