@@ -296,6 +296,7 @@ int module_already_present(const char * name)
 }
 
 
+#ifndef ENABLE_NETWORK_STANDALONE
 static enum insmod_return insmod_with_deps(const char * mod_name, char * options, int allow_modules_floppy)
 {
 	struct module_deps_elem * dep;
@@ -330,6 +331,7 @@ static enum insmod_return insmod_with_deps(const char * mod_name, char * options
 		return insmod_local_file((char *) filename, options);
 	}
 }
+#endif
 
 
 #ifndef DISABLE_NETWORK

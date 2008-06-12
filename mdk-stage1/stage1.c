@@ -246,6 +246,7 @@ static void handle_pcmcia(void)
 /************************************************************
  */
 
+#ifndef ENABLE_NETWORK_STANDALONE
 static void method_select_and_prepare(void)
 {
 	enum return_type results;
@@ -331,6 +332,7 @@ static void method_select_and_prepare(void)
         /* try to find third party modules on the install media */
         thirdparty_load_media_modules();
 }
+#endif
 
 static enum return_type create_initial_fs_symlinks(char* symlinks)
 {
