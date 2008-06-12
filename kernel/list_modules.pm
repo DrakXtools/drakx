@@ -136,7 +136,7 @@ our %l = (
     raw => [ qw(ide-disk sd_mod) ],
     usb => [ qw(usb-storage) ],
     firewire => [ qw(sbp2) ],
-    cdrom => [ qw(ide-cd sr_mod) ],
+    cdrom => [ qw(ide-cd_mod sr_mod) ],
     card_reader => [ qw(sdhci tifm_sd tifm_7xx1) ],
   },
 
