@@ -32,7 +32,7 @@ sub kind2name {
     NIS => N("NIS"),
     SmartCard => N("Smart Card"),
     winbind => N("Windows Domain"), 
-    KRB5 => N("Kerberos 5")}}{$kind};
+    KRB5 => N("Kerberos 5") }}{$kind};
 }
 
 my %kind2pam_kind = (
@@ -56,8 +56,8 @@ my %kind2nsswitch = (
 my %kind2packages = (
     local     => [],
     SmartCard => [ 'castella-pam' ],
-    LDAP      => [ 'openldap-clients', 'nss_ldap', 'pam_ldap', 'autofs','pam_ccreds','nss_updatedb' ],
-    KRB5       => [ 'nss_ldap', 'pam_krb5', 'libsasl2-plug-gssapi', 'pam_ccreds','nss_updatedb' ],
+    LDAP      => [ 'openldap-clients', 'nss_ldap', 'pam_ldap', 'autofs', 'pam_ccreds', 'nss_updatedb' ],
+    KRB5       => [ 'nss_ldap', 'pam_krb5', 'libsasl2-plug-gssapi', 'pam_ccreds', 'nss_updatedb' ],
     NIS       => [ 'ypbind', 'autofs' ],
     winbind   => [ 'samba-winbind', 'nss_ldap', 'pam_krb5', 'libsasl2-plug-gssapi', 'samba-server' ],
 );
@@ -98,8 +98,8 @@ sub ask_parameters {
 	#$authentication->{cafile} = "0";
 	#$authentication->{nssgrp} = "0";
 
-	$in->ask_from('',N(" "),
-		     [ { label => N("Welcome to the Authentication Wizard"), title => 1},
+	$in->ask_from('', N(" "),
+		     [ { label => N("Welcome to the Authentication Wizard"), title => 1 },
                      {},
                      { label => N("You have selected LDAP authentication. Please review the configuration options below "), },
                      {},
@@ -108,7 +108,7 @@ sub ask_parameters {
                      { val => N("Fecth base Dn "), type  => button , clicked_may_quit => sub { $authentication->{LDAPDOMAIN} = fetch_dn($authentication->{LDAP_server}); 0 } },
 		     {},
 		     { text => N("Use encrypt connection with TLS "), val => \$authentication->{cafile}, type => 'bool' },
-                     { val => N("Download CA Certificate "), type  => button , disabled => sub { !$authentication->{cafile} }, clicked_may_quit => sub { $authentication->{file} = add_cafile(); 0}  },
+                     { val => N("Download CA Certificate "), type  => button , disabled => sub { !$authentication->{cafile} }, clicked_may_quit => sub { $authentication->{file} = add_cafile(); 0 }  },
 		     
 		     { text => N("Use Disconnect mode "), val => \$ccreds, type => 'bool' },
 		     { text => N("Use anonymous BIND "), val => \$authentication->{anonymous}, type => 'bool' , advanced => 1 },
@@ -132,12 +132,12 @@ sub ask_parameters {
 	my $AD_user = $authentication->{AD_user} =~ /(.*)\@\Q$authentication->{AD_domain}\E$/ ? $1 : $authentication->{AD_user};
 	#my $authentication->{ccreds} ;
 
-	$in->ask_from('',N(" "),
-                        [ { label => N("Welcome to the Authentication Wizard"), title => 1},
+	$in->ask_from('', N(" "),
+                        [ { label => N("Welcome to the Authentication Wizard"), title => 1 },
                         {},
                         { label => N("You have selected Kerberos 5 authentication. Please review the configuration options below "), },
                         {},
-		       { label => N("Realm "),  val => \$authentication->{AD_domain}},
+		       { label => N("Realm "),  val => \$authentication->{AD_domain} },
                        {},
 		       { label => N("KDCs Servers"),  title => 1, val => \$authentication->{AD_server} , list => \@srvs , not_edit => 0,  title => 1 },
                        {},
@@ -151,8 +151,8 @@ my %level = (
              2 => N("Use Ldap for users informations"),
             );
 
- $in->ask_from('',N(" "),
-                        [ { label => N(" "), title => 1},
+ $in->ask_from('', N(" "),
+                        [ { label => N(" "), title => 1 },
                         {},
                         { label => N("You have selected Kerberos 5 for authentication, now you must choose the type of users information "), },
                         {},
