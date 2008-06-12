@@ -40,12 +40,18 @@ int main(int argc, char **argv, char **env)
 {
 	enum media_bus bus = BUS_ANY;
 	char *module = NULL;
+	char options[500] = "";
 
 	if (argc > 1) {
 		if (streq(argv[1], "--usb")) {
 			bus = BUS_USB;
 		} else if (!ptr_begins_static_str(argv[1], "--")) {
+			int i;
 			module = argv[1];
+			for (i = 2; i < argc; i++) {
+				strcat(options, argv[i]);
+				strcat(options, " ");
+			}
 		}
 	}
 
@@ -53,7 +59,7 @@ int main(int argc, char **argv, char **env)
 	init_modules_insmoding();
 
 	if (module) {
-		my_insmod(module, ANY_DRIVER_TYPE, NULL, 0);
+		my_insmod(module, ANY_DRIVER_TYPE, options, 0);
 	} else {
 		find_media(bus);
 	}
