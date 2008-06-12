@@ -869,7 +869,7 @@ sub add_cafile() {
 
 sub auth() {
 	my $in = interactive->vnew;
-        $file = $in->ask_from('', N(" "), [
+        $in->ask_from('', N(" "), [
 		{ label => N("Domain Windows for authentication : " , $authentication->{WINDOMAIN}) },
 		{},
 		{ label => N("Domain Admin User Name"), val => \$authentication->{winuser} },
