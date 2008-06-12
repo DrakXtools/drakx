@@ -4,7 +4,6 @@ use MDK::Common;
 use lib "/usr/lib/libDrakX";
 use keyboard;
 
-my $lib = (arch() =~ /x86_64/ ? "lib64" : "lib");
 my $tmp = "/tmp/rescue_tmp";
 my $rescue = "rescue.sqfs";
 
