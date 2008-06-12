@@ -876,7 +876,7 @@ sub auth() {
 		{ label => N("Domain Admin User Name"), val => \$authentication->{winuser} },
 	        { label => N("Domain Admin Password"), val => \$authentication->{winpass}, hidden => 1 },
 	]);
-	return ($authentication->{winuser}, $authentication->{winpass});
+	return $authentication->{winuser}, $authentication->{winpass};
 }
 
 require fs::remote::smb;
