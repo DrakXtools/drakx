@@ -863,13 +863,13 @@ sub pack_passwd {
     join(':', @$l{@etc_pass_fields}) . "\n";
 }
 
-sub add_cafile {
+sub add_cafile() {
 	my $file;
 	my $in = interactive->vnew;
 	$file = $in->ask_filename({ title => N("Select file") }) or return;
 }
 
-sub auth {
+sub auth() {
 	my $in = interactive->vnew;
         $file = $in->ask_from('', N(" "), [
 		{ label => N("Domain Windows for authentication : " , $authentication->{WINDOMAIN}) },
@@ -881,7 +881,7 @@ sub auth {
 }
 
 require fs::remote::smb;
-sub list_domains {
+sub list_domains() {
     my $smb = fs::remote::smb->new;
     my %domains;
     foreach my $server ($smb->find_servers) {
