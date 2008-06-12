@@ -15,26 +15,6 @@ BEGIN { undef *_ }
 sub __ { print @_, "\n"; system(@_) }
 sub _ { __ @_; $? and die }
 
-sub installown($$) {
-    my ($own, $dir) = @_;
-    return if -e "$tmp$dir/" . basename($own);
-    mkdir_p("$tmp$dir");
-    _ "cp -rL $own $tmp$dir";
-}
-
-sub install_perl_script {
-    my ($script, $dir) = @_;
-    my @gi_modules;
-    foreach (`../tools/get-needed-drakx-modules /usr/lib/libDrakX /usr/lib/libDrakX $script`) {
-	chomp;
-	my ($local, $dest) = split "\t";
-	installown($local, dirname($dest || $local));
-	push @gi_modules, "$tmp$dest" if $dest;
-    }    
-    installown($script, $dir);
-    system('../tools/simplify-drakx-modules', @gi_modules, "$tmp$dir/$script");
-}
-
 _ "rm -rf $tmp" if -e $tmp;
 _ "mkdir $tmp";
 _ 'find . -name "*~" | xargs rm -f';
