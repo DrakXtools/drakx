@@ -556,7 +556,6 @@ sub set_pam_authentication {
 		@para = difference2(\@para, \@para_for_last);
 
 		my ($before_noask, $ask) = partition { $_ eq 'castella' } @{$special{$type}};
-		my ($before, $after) = partition { $_ eq 'krb5' } @$ask;
 
 		if (!@$ask) {
 		    @para_for_last = grep { $_ ne 'use_first_pass' } @para_for_last;
