@@ -930,13 +930,13 @@ sub configure_nss_ldap {
                          nss_base_passwd => $authentication->{LDAPDOMAIN} . "?sub",
                          nss_base_group => $authentication->{LDAPDOMAIN}  . "?sub",
                         );
-                };
+                }
         if ($authentication->{anonymous} eq '1') {
                  update_ldap_conf(
                          binddn => $authentication->{LDAP_binddn},
                          bindpw => $authentication->{LDAP_bindpwd},
                         );
-        };
+        }
 
         if ($authentication->{cafile} eq '1') {
                  update_ldap_conf(
@@ -944,6 +944,6 @@ sub configure_nss_ldap {
                  tls_checkpeer => "yes",
                  tls_cacertfile => $authentication->{file},
                 );
-        };
- };
+        }
+ }
 1;
