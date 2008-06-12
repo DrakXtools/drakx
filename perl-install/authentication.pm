@@ -466,7 +466,7 @@ sub get_raw_pam_authentication() {
     my %before_deny;
     foreach (cat_("$::prefix/etc/pam.d/system-auth")) {
 	#my ($type, $control, $module, @para) = split;
-	my ($type, $control, $other) = /(\S+)\s+(\[.*?\]|\S+)\s+(.*)/;
+	my ($type, $_control, $other) = /(\S+)\s+(\[.*?\]|\S+)\s+(.*)/;
 	my ($module, @para) = split(' ', $other);
 	if ($module = pam_module_from_path($module)) {
 	    #$before_deny{$type}{$module} = \@para if $control eq 'sufficient' && member($module, pam_modules());
