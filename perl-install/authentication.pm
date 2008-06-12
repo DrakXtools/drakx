@@ -892,7 +892,7 @@ sub get_server_for_domain {
     my $smb = fs::remote::smb->new;
     my %domains;
     foreach my $server ($smb->find_servers) {
-        return $server->{name} if $server->{group} == @_[0];
+        return $server->{name} if $server->{group} == $_[0];
     }
 }
 
