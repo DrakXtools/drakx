@@ -28,7 +28,7 @@ echo rescue > /etc/HOSTNAME
 echo "Loading additional modules..."
 load() { modprobe $* 2>/dev/null; }
 load ide-disk
-load ide-cd
+load ide-cd_mod
 load floppy
 load af_packet
 load isofs
