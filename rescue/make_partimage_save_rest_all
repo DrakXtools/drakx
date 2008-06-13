@@ -1,11 +1,12 @@
 #!/bin/sh
 
 [ $# -lt 1 ] && { 
-    echo "usage: make_partimage_save_rest_all <partimage special rpm> [<partimage dir> <data dirs>]" ; 
+    echo "usage: make_partimage_save_rest_all <partimage special rpm> <partimage server> [<partimage dir> <data dirs>]" ; 
     exit 1
 }
 
 rpm=$1 ; shift
+server=$1 ; shift
 partimage_dir=$1 ; shift
 data_dir=$1 ; shift
 
@@ -42,10 +43,10 @@ timeout 150
 
 label save_all
   kernel vmlinuz
-  append initrd=all.rdz $common_para save_all
+  append initrd=all.rdz $common_para save_all pserver=$server
 label rest_all
   kernel vmlinuz
-  append initrd=all.rdz $common_para rest_all keepmounted BOX=$data_dir
+  append initrd=all.rdz $common_para rest_all keepmounted BOX=$data_dir pserver=$server
 label rescue
   kernel vmlinuz
   append initrd=all.rdz $common_para
