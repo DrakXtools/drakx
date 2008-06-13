@@ -54,10 +54,6 @@ if (my ($LANGUAGE) = map { if_(/LANGUAGE_(.*)/, $1) } keys %ENV) {
     } "$tmp/etc/rc.sysinit";
 }
 
-if ($ENV{PARTIMAGE_RPM}) {
-    #_ "rpm2cpio $ENV{PARTIMAGE_RPM} | (cd $tmp ; cpio -idu ./usr/sbin/partimage)";
-}
-
 exit 0 if $ARGV[0];
 
 _ "mksquashfs $tmp $rescue -all-root -noappend >/dev/null";
