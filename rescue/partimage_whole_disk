@@ -30,7 +30,7 @@ sub usage() { die "partimage_whole_disk [-s <server>] (save_all <dir> | rest_all
 $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 $ENV{HOME} = '/';
 log::openLog("/var/log/partimage_whole_disk.log");
-my @partimage_cmd = ('partimage', if_($server, '-s', $server));
+my @partimage_cmd = ('partimage', if_($server, '-s', $server, '-n', '-L'));
 
 @ARGV == 1 or usage();
 
