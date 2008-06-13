@@ -27,8 +27,6 @@ echo rescue > /etc/HOSTNAME
 # Loads common modules ( no kerneld :( )
 echo "Loading additional modules..."
 load() { modprobe $* 2>/dev/null; }
-load ide-mod
-load ide-probe
 load ide-disk
 load ide-cd
 load floppy
