@@ -55,31 +55,7 @@ if (my ($LANGUAGE) = map { if_(/LANGUAGE_(.*)/, $1) } keys %ENV) {
 }
 
 if ($ENV{PARTIMAGE_RPM}) {
-
-    _ "rpm2cpio $ENV{PARTIMAGE_RPM} | (cd $tmp ; cpio -idu ./usr/sbin/partimage)";
-    my $server = 'partimaged';
-    $server = 'leia';
-
-    my $default_dir = '/data/box';
-
-    substInFile {
-	$_ = "  server=$server\n" . "  default_dir=$default_dir\n" . <<'EOF' if /^\s*rescue-gui/;
-
-  partimage_dir=`perl -lne 'print $1 if /BOX=(\S+)/' /proc/cmdline`
-  [ -z "$partimage_dir" ] && partimage_dir=$default_dir
-
-  if grep -q save_all /proc/cmdline; then
-      partimage_whole_disk -s $server save_all $default_dir
-  fi
-  if grep -q rest_all /proc/cmdline; then
-      if [ -d /tmp/image$partimage_dir ]; then
-          partimage_whole_disk rest_all /tmp/image$partimage_dir
-      else
-          partimage_whole_disk -s $server rest_all $partimage_dir
-      fi
-  fi
-EOF
-    } "$tmp/etc/rc.sysinit";
+    #_ "rpm2cpio $ENV{PARTIMAGE_RPM} | (cd $tmp ; cpio -idu ./usr/sbin/partimage)";
 }
 
 exit 0 if $ARGV[0];
