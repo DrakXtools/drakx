@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-el\n"
 "POT-Creation-Date: 2008-03-20 14:27+0100\n"
-"PO-Revision-Date: 2008-06-01 17:17+0200\n"
+"PO-Revision-Date: 2008-06-15 03:20+0200\n"
 "Last-Translator: nikos papadopoulos <231036448@freemail.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -1605,15 +1605,15 @@ msgid "Logical volume name "
 msgstr "Το όνομα του λογικού τόμου"
 
 #: diskdrake/interactive.pm:478
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can not create a new partition\n"
 "(since you reached the maximal number of primary partitions).\n"
 "First remove a primary partition and create an extended partition."
 msgstr ""
-"νέο\n"
-" πρωτεύουσα\n"
-" πρωτεύουσα."
+"Δεν μπορείς να δημιουργήσεις μία νέα κατάτμηση\n"
+"(επειδή έχεις συμπληρώσει το μέγιστο αριθμό των πρωτευόντων κατατμήσεων).\n"
+"Πρώτα απομάκρυνε μία πρωτεύουσα κατάτμηση και μετά δημιούργησε μία εκτεταμένη (extended) κατάτμηση."
 
 #: diskdrake/interactive.pm:508
 #, c-format
@@ -3001,7 +3001,7 @@ msgstr "Ενεργοποίηση του PulseAudio"
 #: harddrake/sound.pm:309
 #, c-format
 msgid "Automatic routing from ALSA to PulseAudio"
-msgstr ""
+msgstr "Αυτόματη διαδρόμηση από τον ALSA στο PulseAudio"
 
 #: harddrake/sound.pm:344
 #, c-format
@@ -3132,7 +3132,7 @@ msgstr "Επίλυση προβλημάτων Ήχου"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: harddrake/sound.pm:317
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The classic bug sound tester is to run the following commands:\n"
 "\n"
@@ -3154,24 +3154,25 @@ msgid ""
 "\n"
 "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
 msgstr ""
+"Ο κλασικός τρόπος ελέγχου του ήχου για δυσλειτουργίες, είναι ή εκτέλεση των παρακάτω εντολών:\n"
 "\n"
 "\n"
+"- \"lspcidrake -v | fgrep -i AUDIO\" θα σου πει ποιον οδηγό συσκευής χρησιμοποιεί η κάρτα σου,\n"
+" κατά προεπιλογή\n"
 "\n"
+"- \"grep sound-slot /etc/modprobe.conf\" θα σου πει ποιον οδηγό συσκευής χρησιμοποιεί η κάρτα σου,\n"
+" τώρα\n"
 "\n"
-" εξ' ορισμού\n"
+"- \"/sbin/lsmod\" θα σου επιτρέψει να ελέγξεις αν το άρθρωμά της (module)(οδηγός συσκευής - driver)\n"
+" έχει φορτωθεί ή όχι\n"
 "\n"
+"- \"/sbin/chkconfig --list sound\" και \"/sbin/chkconfig --list alsa\" \n"
+" θα σου πει αν οι υπηρεσίες ήχου και alsa έχουν ρυθμιστεί να τρέχουν σε\n"
+" initlevel 3\n"
 "\n"
+"- \"aumix -q\" θα σου πει αν η ένταση του ήχου είναι σε κατάσταση σιγής ή όχι\n"
 "\n"
-"\n"
-" ενεργοποίηση\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"\n"
+"- \"/sbin/fuser -v /dev/dsp\" θα σου πει ποιο πρόγραμμα χρησιμοποιεί την κάρτα ήχου.\n"
 
 #: harddrake/sound.pm:343
 #, c-format
@@ -3220,13 +3221,13 @@ msgid "Unknown|CPH06X (bt878) [many vendors]"
 msgstr "Άγνωστο|CPH06X (bt878) [πολλοί κατασκευαστές]"
 
 #: harddrake/v4l.pm:475
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-detect the rights parameters.\n"
 "If your card is misdetected, you can force the right tuner and card types here. Just select your tv card parameters if needed."
 msgstr ""
-"Linux\n"
-" μετά βίας."
+"Ισχύει για τις περισσότερες σύγχρονες κάρτες τηλεόρασης: το άρθρωμα bttv, του kernel GNU/Linux, μόλις αναγνώρισε αυτόματα τις σωστές παραμέτρους.\n"
+"Στην περίπτωση που η κάρτα σου αναγνωρίστηκε εσφαλμένα, μπορείς, εδώ, να «επιβάλεις» τον σωστό τύπο του tuner και της κάρτας. Απλά, επέλεξε τις παραμέτρους της κάρτας τηλεόρασης, αν αυτό χρειαστεί."
 
 #: harddrake/v4l.pm:478
 #, c-format
@@ -5189,6 +5190,11 @@ msgid ""
 "\n"
 "Else only /etc/issue is allowed."
 msgstr ""
+"Αν οριστεί στο «όλα» ( \"ALL\" ), το /etc/issue και το /etc/issue.net επιτρέπεται να υπάρχουν.\n"
+"\n"
+"Αν οριστεί στο «κανένα» ( \"None\" ), τα issues δεν επιτρέπονται.\n"
+"\n"
+"Διαφορετικά, μόνο το /etc/issue επιτρέπεται."
 
 #: security/help.pm:27
 #, c-format
@@ -5208,8 +5214,9 @@ msgstr "Να επιτρέπεται η απευθείας σύνδεση υπε�
 #: security/help.pm:33
 #, c-format
 msgid "Allow the list of users on the system on display managers (kdm and gdm)."
-msgstr ""
+msgstr "Να επιτρέπεται η προβολή της λίστας με τους χρήστες, στους διαχειριστές σύνδεσης (kdm και gdm)."
 
+# ?????
 #: security/help.pm:35
 #, c-format
 msgid ""
@@ -5218,6 +5225,10 @@ msgid ""
 "\n"
 "See pam_xauth(8) for more details.'"
 msgstr ""
+"Να επιτρέπεται η εξαγωγή της προβολής, όταν γίνεται μετάβαση\n"
+"από το λογαριασμό υπερχρήστη στους άλλους χρήστες.\n"
+"\n"
+"Δες το pam_xauth(8) για περισσότερες λεπτομέρειες.'"
 
 #: security/help.pm:40
 #, c-format
@@ -5239,19 +5250,17 @@ msgstr ""
 "- \"Καμία\" (καμία σύνδεση)."
 
 #: security/help.pm:48
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The argument specifies if clients are authorized to connect\n"
 "to the X server from the network on the tcp port 6000 or not."
 msgstr ""
-"\n"
-"\n"
-"\n"
-" εξυπηρετητής."
+"Το επιχείρημα προσδιορίζει το αν οι πελάτες θα αδειοδοτούνται να συνδέονται, ή όχι,\n"
+"στον εξυπηρετητή X, μέσω δικτύου, στην θύρα tcp 6000."
 
 #. -PO: here "ALL", "Local" and "None" are values in a pull-down menu; translate them the same as they're
 #: security/help.pm:53
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Authorize:\n"
 "\n"
@@ -5263,11 +5272,15 @@ msgid ""
 "\n"
 "To authorize the services you need, use /etc/hosts.allow (see hosts.allow(5))."
 msgstr ""
+"Αδειοδότηση:\n"
 "\n"
+"- όλες οι υπηρεσίες ελέγχονται από το tcp_wrappers (δες hosts.deny(5) σελίδα man), αν οριστεί σε \"ALL\",\n"
 "\n"
+"- μόνο οι τοπικές, αν οριστεί σε \"Local\"\n"
 "\n"
-" κανένα\n"
-"."
+"- καμία, αν οριστεί σε \"None\".\n"
+"\n"
+"Για να αδειοδοτήσεις τις υπηρεσίες που θέλεις, χρησιμοποίησε το /etc/hosts.allow (δες hosts.allow(5))."
 
 #: security/help.pm:63
 #, fuzzy, c-format
@@ -5297,6 +5310,10 @@ msgid ""
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
 msgstr ""
+"Ενεργοποίηση του crontab και του at για τους χρήστες.\n"
+"\n"
+"Βάλε τους χρήστες που επιτρέπονται στο /etc/cron.allow και στο /etc/at.allow \n"
+"(δες το man at(1) και το crontab(1))."
 
 #: security/help.pm:77
 #, c-format
@@ -5309,6 +5326,8 @@ msgid ""
 "Enable name resolution spoofing protection.  If\n"
 "\"%s\" is true, also reports to syslog."
 msgstr ""
+"Ενεργοποίηση της προστασίας κατά της εισχώρησης στο δίκτυο (spoofing) με διερεύνηση ονόματος (name resolution).\n"
+"Αν το \"%s\" είναι αληθές, τότε γίνεται αναφορά και στο syslog."
 
 #: security/help.pm:80
 #, c-format
@@ -5318,7 +5337,7 @@ msgstr "Ειδοποιήσεις Ασφαλείας:"
 #: security/help.pm:82
 #, c-format
 msgid "Enable IP spoofing protection."
-msgstr ""
+msgstr "Ενεργοποίηση της προστασίας κατά της εισχώρησης στο δίκτυο (IP spoofing)."
 
 #: security/help.pm:84
 #, c-format
@@ -5583,12 +5602,12 @@ msgstr "Αναφορές syslog στην κονσόλα 12"
 #: security/l10n.pm:27
 #, c-format
 msgid "Name resolution spoofing protection"
-msgstr ""
+msgstr "Προστασίας κατά της εισχώρησης στο δίκτυο (spoofing) με διερεύνηση ονόματος (name resolution)"
 
 #: security/l10n.pm:28
 #, c-format
 msgid "Enable IP spoofing protection"
-msgstr ""
+msgstr "Ενεργοποίηση της προστασίας κατά της εισχώρησης στο δίκτυο (IP spoofing)"
 
 #: security/l10n.pm:29
 #, c-format
@@ -5860,7 +5879,7 @@ msgstr "Χρήση libsafe για διακομιστές"
 #: security/level.pm:64
 #, c-format
 msgid "A library which defends against buffer overflow and format string attacks."
-msgstr ""
+msgstr "Μία βιβλιοθήκη που προστατεύει ενάντια στις επιθέσεις «υπερχείλισης μικροαποθήκευσης» (buffer overflow) και format string."
 
 #: security/level.pm:65
 #, c-format
@@ -5910,7 +5929,7 @@ msgstr ""
 #: services.pm:28
 #, c-format
 msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
-msgstr ""
+msgstr "Το Κοινό Σύστημα Εκτύπωσης του UNIX (Common UNIX Printing System - CUPS) είναι ένα εξελιγμένο σύστημα ετεροχρονιζμού (spooling) εκτύπωσης."
 
 #: services.pm:29
 #, c-format
@@ -6158,7 +6177,7 @@ msgid ""
 "the RIP protocol. While RIP is widely used on small networks, more complex\n"
 "routing protocols are needed for complex networks."
 msgstr ""
-"Η υπηρεσία routed επιτρέπει την αυτόματη ενημέρωση του πίνακα δρομολόγησης \n"
+"Ο δαίμονας routed επιτρέπει την αυτόματη ενημέρωση του πίνακα δρομολόγησης \n"
 "IP μέσω του πρωτοκόλλου RIP. Παρ' όλο που το RIP είναι ευρέως διαδεδομένο σε \n"
 "μικρά δίκτυα, μεγαλύτερα δίκτυα απαιτούν περιπλοκότερα πρωτόκολλα."
 
