@@ -502,7 +502,8 @@ sub configure_one_sound_slot {
     my ($modules_conf, $index, $driver) = @_;
     $modules_conf->set_sound_slot("sound-slot-$index", $driver);
     $modules_conf->set_options($driver, "xbox=1") if $driver eq "snd_intel8x0" && detect_devices::is_xbox();
-    $modules_conf->set_options('snd-ac97-codec', "power_save=1") if $driver =~ /^snd/ && detect_devices::isLaptop();
+    $modules_conf->set_options('snd-ac97-codec', "power_save=1") if $driver =~ /^snd/ && detect_devices::isLaptop()
+      && arch() !~ /mips/;
 }
 
 sub configure_sound_slots {
