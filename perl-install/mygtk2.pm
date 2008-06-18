@@ -1015,7 +1015,7 @@ sub _find_imgfile {
 	$name;
     } else {
 	foreach my $path (_icon_paths()) {
-	    foreach ('', '.png', '.xpm') {
+	    foreach ('', '.png', '.xpm', '.jpg') {
 		my $file = "$path/$name$_";
 		-f $file and return $file;
 	    }
