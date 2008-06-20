@@ -3,9 +3,6 @@ package authentication; # $Id$
 use common;
 my $ccreds = 1;
 
-$::real_windowwidth  = 700;
-$::real_windowheight = 600;
-
 my ($authentication) = @_;
 
 sub kinds { 

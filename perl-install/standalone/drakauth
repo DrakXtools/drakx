@@ -9,6 +9,9 @@ use interactive;
 use authentication;
 use network::network;
 
+$::real_windowwidth  = 700;
+$::real_windowheight = 600;
+
 my $net = {};
 network::network::read_net_conf($net);
 
