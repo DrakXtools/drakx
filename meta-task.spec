@@ -14,6 +14,7 @@ Source2: compssUsers.pl
 Source3: prefer.vendor.list
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch: noarch
+BuildRequires: drakxtools-backend
 
 %description
 prefer.vendor.list is used by urpmi, rpmdrake and installer to prefer some
