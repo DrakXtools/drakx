@@ -50,6 +50,11 @@ sub vmlinuz2kernel_str {
     };
 }
 
+sub kernel_str2short_name {
+    my ($kernel) = @_;
+    $kernel->{ext} =~ /^xen/ ? 'xen' : $kernel->{basename};
+}
+
 sub basename2initrd_basename {
     my ($basename) = @_;
     $basename =~ s!vmlinuz-?!!; #- here we do not use $vmlinuz_regexp since we explictly want to keep all that is not "vmlinuz"
@@ -61,14 +66,14 @@ sub kernel_str2vmlinuz_long {
 }
 sub kernel_str2initrd_long {
     my ($kernel) = @_;
-    basename2initrd_basename($kernel->{basename}) . '-' . $kernel->{version} . '.img';
+    basename2initrd_basename(kernel_str2short_name($kernel)) . '-' . $kernel->{version} . '.img';
 }
 sub kernel_str2vmlinuz_short {
     my ($kernel) = @_;
     if ($kernel->{use_long_name}) {
 	kernel_str2vmlinuz_long($kernel);
     } else {
-	$kernel->{basename};
+	kernel_str2short_name($kernel);
     }
 }
 sub kernel_str2initrd_short {
@@ -76,7 +81,7 @@ sub kernel_str2initrd_short {
     if ($kernel->{use_long_name}) {
 	kernel_str2initrd_long($kernel);
     } else {
-	basename2initrd_basename($kernel->{basename}) . '.img';
+	basename2initrd_basename(kernel_str2short_name($kernel)) . '.img';
     }
 }
 
@@ -85,8 +90,8 @@ sub kernel_str2label {
     if ($o_use_long_name || $kernel->{use_long_name}) {
 	_sanitize_ver($kernel);
     } else {
-	$kernel->{basename} eq 'vmlinuz' ? ($kernel->{ext} eq 'xen' ? $kernel->{ext} : 'linux') : 
-	  $kernel->{basename};
+	my $short_name = kernel_str2short_name($kernel);
+	$short_name eq 'vmlinuz' ? 'linux' : $short_name;
     }
 }
 
