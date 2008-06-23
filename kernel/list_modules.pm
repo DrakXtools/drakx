@@ -240,6 +240,7 @@ our %l = (
   {
     raid => [
       qw(dm-crypt dm-mirror dm-mod dm-zero linear lvm-mod multipath raid0 raid1 raid10 raid456 raid5 raid6),
+      qw(dm-delay dm-log dm-mem-cache dm-message dm-raid4-5 dm-region_hash faulty md-mod),
     ],
     mouse => [
       qw(atixlmouse busmouse generic_serial inport ioc3_serial logibm logibusmouse msbusmouse pcips2 qpmouse synclinkmp),
