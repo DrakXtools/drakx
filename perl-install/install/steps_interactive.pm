@@ -420,7 +420,7 @@ sub choosePackages {
     my ($individual, $chooseGroups);
 
     if (!$o->{isUpgrade}) {
-	if (install::pkgs::packageByName($o->{packages}, 'task-kde') &&
+	if (install::pkgs::packageByName($o->{packages}, 'task-kde4') &&
 	    install::pkgs::packageByName($o->{packages}, 'task-gnome-minimal') &&
 		$availableC >= 2_500_000_000) { # don't chooseDesktop if not enough place
 	    _chooseDesktop($o, $o->{rpmsrate_flags_chosen}, \$chooseGroups);
