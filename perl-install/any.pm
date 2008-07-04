@@ -638,7 +638,7 @@ sub set_autologin {
     )) };
   
     my $xdm_autologin_cfg = "$::prefix/etc/sysconfig/autologin";
-    if (member($o_wm, 'KDE', 'GNOME')) {
+    if (member($o_wm, 'KDE', 'KDE4', 'GNOME')) {
 	unlink $xdm_autologin_cfg;
     } else {
 	$do_pkgs->ensure_is_installed('autologin', '/usr/bin/startx.autologin') if $o_user;
@@ -837,8 +837,9 @@ sub autologin {
     my @wm = sessions();
     my @users = map { $_->{name} } @{$o->{users} || []};
 
-    if (member('KDE', @wm) && @users == 1 && $o->{meta_class} eq 'desktop') {
-	$o->{desktop} = 'KDE';
+    my $kde_desktop = find { member($_, 'KDE', 'KDE4') } @wm;
+    if ($kde_desktop && @users == 1 && $o->{meta_class} eq 'desktop') {
+	$o->{desktop} = $kde_desktop;
 	$o->{autologin} = $users[0];
     } elsif (@wm > 1 && @users && !$o->{authentication}{NIS} && $o->{security} <= 2) {
 	my $use_autologin = @users == 1;
