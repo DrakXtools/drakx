@@ -607,7 +607,7 @@ sub get_autologin() {
     my %desktop = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
     my $gdm_file = "$::prefix/etc/X11/gdm/custom.conf";
     my $kdm_file = "$::prefix/usr/share/config/kdm/kdmrc";
-    my $desktop = $desktop{DESKTOP} || (! -e $kdm_file && -e $gdm_file ? 'GNOME' : 'KDE');
+    my $desktop = $desktop{DESKTOP} || (! -e $kdm_file && -e $gdm_file ? 'GNOME' : 'KDE4');
     my $autologin = do {
 	if (($desktop{DISPLAYMANAGER} || $desktop) eq 'GNOME') {
 	    my %conf = read_gnomekderc($gdm_file, 'daemon');
