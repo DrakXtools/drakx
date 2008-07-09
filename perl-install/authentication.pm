@@ -71,7 +71,7 @@ sub kind2description {
 }
 sub to_kind {
     my ($authentication) = @_;
-    (find { exists $authentication->{$_} } kinds()) || 'LDAP';
+    (find { exists $authentication->{$_} } kinds()) || 'local';
 }
 
 sub domain_to_ldap_domain {
