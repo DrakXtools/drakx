@@ -606,7 +606,7 @@ You can create additional entries or change the existing ones."), [ {
 sub get_autologin() {
     my %desktop = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
     my $gdm_file = "$::prefix/etc/X11/gdm/custom.conf";
-    my $kdm_file = "$::prefix/etc/kde/kdm/kdmrc";
+    my $kdm_file = "$::prefix/usr/share/config/kdm/kdmrc";
     my $desktop = $desktop{DESKTOP} || (! -e $kdm_file && -e $gdm_file ? 'GNOME' : 'KDE');
     my $autologin = do {
 	if (($desktop{DISPLAYMANAGER} || $desktop) eq 'GNOME') {
@@ -626,7 +626,8 @@ sub set_autologin {
     my $autologin = bool2text($o_user);
 
     #- Configure KDM / MDKKDM
-    eval { common::update_gnomekderc_no_create("$::prefix/etc/kde/kdm/kdmrc", 'X-:0-Core' => (
+    #- /usr/share/config/kdm/kdmrc is an alternative pointing in /var
+    eval { common::update_gnomekderc_no_create("$::prefix/usr/share/config/kdm/kdmrc", 'X-:0-Core' => (
 	AutoLoginEnable => $autologin,
 	AutoLoginUser => $o_user,
     )) };
