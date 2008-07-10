@@ -1,3 +1,6 @@
+- load disk/scsi before disk/ide since libata is now the default
+  (to prevent modules::load_category from loading ide-generic too early)
+
 Version 10.46 - 10 July 2008
 
 - authentication:

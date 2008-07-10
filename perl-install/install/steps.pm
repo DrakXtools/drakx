@@ -159,9 +159,10 @@ sub setupSCSI {
     install::any::configure_pcmcia($o);
     modules::load(modules::category2modules('disk/cdrom'));
     modules::load_category($o->{modules_conf}, 'bus/firewire');
-    modules::load_category($o->{modules_conf}, 'disk/ide');
-    #- load disk/ide before disk/scsi (to prevent sata deps from overriding non-libata pata modules)
-    modules::load_category($o->{modules_conf}, 'disk/scsi|hardware_raid|sata|firewire');
+    modules::load_category($o->{modules_conf}, 'disk/scsi');
+    #- load disk/scsi before disk/ide since libata is now the default
+    #- (to prevent modules::load_category from loading ide-generic too early)
+    modules::load_category($o->{modules_conf}, 'disk/ide|hardware_raid|sata|firewire');
 
     install::any::getHds($o);
 }
