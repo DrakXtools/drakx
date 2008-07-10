@@ -1,3 +1,5 @@
+Version 10.47 - 10 July 2008
+
 - load disk/scsi before disk/ide since libata is now the default
   (to prevent modules::load_category from loading ide-generic too early)
 - fix reading and setting kdmrc (by resolving alternative in chroot)
