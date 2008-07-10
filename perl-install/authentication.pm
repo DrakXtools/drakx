@@ -261,7 +261,7 @@ sub check_given_password {
 sub get() {
     my $system_auth = cat_("/etc/pam.d/system-auth");
     my $authentication = { 
-	md5 => $system_auth =~ /md5/, shadow => $system_auth =~ /shadow/, 
+	md5 => to_bool($system_auth =~ /md5/), shadow => to_bool($system_auth =~ /shadow/),
     };
 
     my @pam_kinds = get_pam_authentication_kinds();
