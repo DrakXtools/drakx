@@ -6,8 +6,6 @@ use lib qw(/usr/lib/libDrakX);
 BEGIN { unshift @::textdomains, 'drakx-net', 'drakx-kbd-mouse-x11', 'drak3d' }
 
 use standalone;
-$::isStandalone = 0;
-
 use common;
 use interactive;
 use any;
@@ -25,6 +23,7 @@ network::network::read_net_conf($net);
 
 $::isWizard = 1;
 my $in = 'interactive'->vnew;
+$in->{no_Window_Manager} = 1;
 
 sub get_conf {
 	my ($name) = @_;
