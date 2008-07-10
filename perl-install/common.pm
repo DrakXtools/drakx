@@ -239,6 +239,12 @@ sub join_lines {
 }
 
 
+sub read_alternative {
+    my ($name) = @_;
+    my $alt = readlink("$::prefix/etc/alternatives/$name");
+    $alt && $::prefix . $alt;
+}
+
 sub set_alternative {
     my ($command, $executable) = @_;
 
