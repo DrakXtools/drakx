@@ -35,7 +35,7 @@ my $cfg_file = '/etc/sysconfig/desktop';
 my @list = map {
     my %l = map { /(\S+)=(.*)/ } cat_($_);
     \%l;
-} sort(glob("/etc/X11/dm.d/*.conf"));
+} sort(glob("/usr/share/X11/dm.d/*.conf"));
 
 my @_DESCRIPTIONS_for_i18n = (
     N("GDM (GNOME Display Manager)"),
