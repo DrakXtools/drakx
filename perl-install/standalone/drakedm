@@ -65,6 +65,7 @@ several different X sessions on your local machine at the same time.")),
                                 }
                                ]
                               )
+      && $dm
    ) {
     $in->do_pkgs->ensure_is_installed($dm->{PACKAGE}, $dm->{EXEC}) or goto start;
     addVarsInSh($cfg_file, { DISPLAYMANAGER => $dm->{NAME} });
