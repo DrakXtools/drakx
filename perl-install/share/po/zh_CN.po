@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: zh_CN\n"
-"POT-Creation-Date: 2008-03-20 14:27+0100\n"
+"POT-Creation-Date: 2008-07-20 04:41+0200\n"
 "PO-Revision-Date: 2008-03-29 21:33+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
@@ -15,10 +15,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: any.pm:245 diskdrake/interactive.pm:552 diskdrake/interactive.pm:739
-#: diskdrake/interactive.pm:783 diskdrake/interactive.pm:841
-#: diskdrake/interactive.pm:1132 do_pkgs.pm:216 do_pkgs.pm:258
-#: harddrake/sound.pm:202 interactive.pm:580
+#: any.pm:245 diskdrake/interactive.pm:554 diskdrake/interactive.pm:741
+#: diskdrake/interactive.pm:785 diskdrake/interactive.pm:843
+#: diskdrake/interactive.pm:1133 do_pkgs.pm:220 do_pkgs.pm:262
+#: harddrake/sound.pm:285 interactive.pm:580
 #, c-format
 msgid "Please wait"
 msgstr "请稍候"
@@ -65,7 +65,7 @@ msgstr ""
 " 然后输入: shut-down\n"
 "您将在下次开机时看到引导程序提示。"
 
-#: any.pm:311
+#: any.pm:313
 #, c-format
 msgid ""
 "You decided to install the bootloader on a partition.\n"
@@ -80,269 +80,274 @@ msgstr ""
 "\n"
 "您要用哪个硬盘启动?"
 
-#: any.pm:334
+#: any.pm:339
+#, fuzzy, c-format
+msgid "First sector (MBR) of drive %s"
+msgstr "驱动器的第一扇区(MBR)"
+
+#: any.pm:341
 #, c-format
 msgid "First sector of drive (MBR)"
 msgstr "驱动器的第一扇区(MBR)"
 
-#: any.pm:335
+#: any.pm:343
 #, c-format
 msgid "First sector of the root partition"
 msgstr "根分区的第一扇区"
 
-#: any.pm:337
+#: any.pm:345
 #, c-format
 msgid "On Floppy"
 msgstr "在软盘上"
 
-#: any.pm:339
+#: any.pm:347
 #, c-format
 msgid "Skip"
 msgstr "跳过"
 
-#: any.pm:343
+#: any.pm:351
 #, c-format
 msgid "LILO/grub Installation"
 msgstr "LILO/grub 安装"
 
-#: any.pm:345
+#: any.pm:353
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "您希望启动引导程序安装到哪里?"
 
-#: any.pm:372
+#: any.pm:380
 #, c-format
 msgid "Boot Style Configuration"
 msgstr "启动风格配置"
 
-#: any.pm:382 any.pm:414 any.pm:415
+#: any.pm:390 any.pm:422 any.pm:423
 #, c-format
 msgid "Bootloader main options"
 msgstr "引导程序的主要选项"
 
-#: any.pm:387
+#: any.pm:395
 #, c-format
 msgid "Bootloader"
 msgstr "引导程序"
 
-#: any.pm:388 any.pm:419
+#: any.pm:396 any.pm:427
 #, c-format
 msgid "Bootloader to use"
 msgstr "要使用的引导程序"
 
-#: any.pm:390 any.pm:421
+#: any.pm:398 any.pm:429
 #, c-format
 msgid "Boot device"
 msgstr "启动设备"
 
-#: any.pm:392
+#: any.pm:400
 #, c-format
 msgid "Main options"
 msgstr "主选项"
 
-#: any.pm:393
+#: any.pm:401
 #, c-format
 msgid "Delay before booting default image"
 msgstr "启动默认映像前的延迟"
 
-#: any.pm:394
+#: any.pm:402
 #, c-format
 msgid "Enable ACPI"
 msgstr "启用 ACPI"
 
-#: any.pm:395
+#: any.pm:403
 #, c-format
 msgid "Enable APIC"
 msgstr "启用 APIC"
 
-#: any.pm:396
+#: any.pm:404
 #, c-format
 msgid "Enable Local APIC"
 msgstr "启用本地 APIC"
 
-#: any.pm:398 any.pm:785 any.pm:794 authentication.pm:197
+#: any.pm:406 any.pm:794 any.pm:803 authentication.pm:240
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
 msgstr "密码"
 
-#: any.pm:400 authentication.pm:208
+#: any.pm:408 authentication.pm:251
 #, c-format
 msgid "The passwords do not match"
 msgstr "两次密码不符"
 
-#: any.pm:400 authentication.pm:208 diskdrake/interactive.pm:1299
+#: any.pm:408 authentication.pm:251 diskdrake/interactive.pm:1300
 #, c-format
 msgid "Please try again"
 msgstr "请再试一次"
 
-#: any.pm:401
+#: any.pm:409
 #, c-format
 msgid "You can not use a password with %s"
 msgstr "您在 %s 时不能使用密码"
 
-#: any.pm:404 any.pm:787 any.pm:796 authentication.pm:198
+#: any.pm:412 any.pm:796 any.pm:805 authentication.pm:241
 #, c-format
 msgid "Password (again)"
 msgstr "密码(请再输一次)"
 
-#: any.pm:405
+#: any.pm:413
 #, c-format
 msgid "Restrict command line options"
 msgstr "限制命令行选项"
 
-#: any.pm:405
+#: any.pm:413
 #, c-format
 msgid "restrict"
 msgstr "限制"
 
-#: any.pm:406
+#: any.pm:414
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr "没有密码不能使用“限定命令行选项”"
 
-#: any.pm:408
+#: any.pm:416
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "每次启动时清除 /tmp"
 
-#: any.pm:409
+#: any.pm:417
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
 msgstr "精确的内存大小(找到 %d MB)"
 
-#: any.pm:410
+#: any.pm:418
 #, c-format
 msgid "Give the ram size in MB"
 msgstr "以兆为单位给出内存大小"
 
-#: any.pm:420
+#: any.pm:428
 #, c-format
 msgid "Init Message"
 msgstr "初始信息"
 
-#: any.pm:422
+#: any.pm:430
 #, c-format
 msgid "Open Firmware Delay"
 msgstr "开放固件延迟"
 
-#: any.pm:423
+#: any.pm:431
 #, c-format
 msgid "Kernel Boot Timeout"
 msgstr "核心启动超时"
 
-#: any.pm:424
+#: any.pm:432
 #, c-format
 msgid "Enable CD Boot?"
 msgstr "允许 CD 启动?"
 
-#: any.pm:425
+#: any.pm:433
 #, c-format
 msgid "Enable OF Boot?"
 msgstr "启用 OF 启动?"
 
-#: any.pm:426
+#: any.pm:434
 #, c-format
 msgid "Default OS?"
 msgstr "默认操作系统?"
 
-#: any.pm:493
+#: any.pm:501
 #, c-format
 msgid "Image"
 msgstr "映像"
 
-#: any.pm:494 any.pm:507
+#: any.pm:502 any.pm:515
 #, c-format
 msgid "Root"
 msgstr "根目录"
 
-#: any.pm:495 any.pm:520
+#: any.pm:503 any.pm:528
 #, c-format
 msgid "Append"
 msgstr "追加"
 
-#: any.pm:497
+#: any.pm:505
 #, c-format
 msgid "Xen append"
 msgstr "追加 Xen"
 
-#: any.pm:500
+#: any.pm:508
 #, c-format
 msgid "Video mode"
 msgstr "显示模式"
 
-#: any.pm:502
+#: any.pm:510
 #, c-format
 msgid "Initrd"
 msgstr "Initrd"
 
-#: any.pm:503
+#: any.pm:511
 #, c-format
 msgid "Network profile"
 msgstr "网络配置文件"
 
-#: any.pm:512 any.pm:517 any.pm:519 diskdrake/interactive.pm:374
+#: any.pm:520 any.pm:525 any.pm:527 diskdrake/interactive.pm:376
 #, c-format
 msgid "Label"
 msgstr "标签"
 
-#: any.pm:514 any.pm:522 harddrake/v4l.pm:438
+#: any.pm:522 any.pm:530 harddrake/v4l.pm:438
 #, c-format
 msgid "Default"
 msgstr "默认"
 
-#: any.pm:521
+#: any.pm:529
 #, c-format
 msgid "NoVideo"
 msgstr "无视频"
 
-#: any.pm:532
+#: any.pm:540
 #, c-format
 msgid "Empty label not allowed"
 msgstr "标签不能为空"
 
-#: any.pm:533
+#: any.pm:541
 #, c-format
 msgid "You must specify a kernel image"
 msgstr "您必须指定一个内核映像"
 
-#: any.pm:533
+#: any.pm:541
 #, c-format
 msgid "You must specify a root partition"
 msgstr "您必须指定根目录所在分区"
 
-#: any.pm:534
+#: any.pm:542
 #, c-format
 msgid "This label is already used"
 msgstr "这个名字已经被使用"
 
-#: any.pm:552
+#: any.pm:560
 #, c-format
 msgid "Which type of entry do you want to add?"
 msgstr "要添加的条目是什么类型?"
 
-#: any.pm:553
+#: any.pm:561
 #, c-format
 msgid "Linux"
 msgstr "Linux"
 
-#: any.pm:553
+#: any.pm:561
 #, c-format
 msgid "Other OS (SunOS...)"
 msgstr "其它操作系统(SunOS...)"
 
-#: any.pm:554
+#: any.pm:562
 #, c-format
 msgid "Other OS (MacOS...)"
 msgstr "其它操作系统(MacOS...)"
 
-#: any.pm:554
+#: any.pm:562
 #, c-format
 msgid "Other OS (Windows...)"
 msgstr "其它操作系统(Windows...)"
 
-#: any.pm:582
+#: any.pm:590
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -351,113 +356,113 @@ msgstr ""
 "引导菜单中现有下列条目。\n"
 "您可以创建额外的条目或是更改已存在的条目。"
 
-#: any.pm:745
+#: any.pm:754
 #, c-format
 msgid "access to X programs"
 msgstr "允许使用 X 应用程序"
 
-#: any.pm:746
+#: any.pm:755
 #, c-format
 msgid "access to rpm tools"
 msgstr "允许使用 rpm 工具"
 
-#: any.pm:747
+#: any.pm:756
 #, c-format
 msgid "allow \"su\""
 msgstr "允许使用“su”指令"
 
-#: any.pm:748
+#: any.pm:757
 #, c-format
 msgid "access to administrative files"
 msgstr "允许访问系统设置文件"
 
-#: any.pm:749
+#: any.pm:758
 #, c-format
 msgid "access to network tools"
 msgstr "允许使用网络工具"
 
-#: any.pm:750
+#: any.pm:759
 #, c-format
 msgid "access to compilation tools"
 msgstr "允许使用编译工具"
 
-#: any.pm:756
+#: any.pm:765
 #, c-format
 msgid "(already added %s)"
 msgstr "(已经添加了 %s)"
 
-#: any.pm:762
+#: any.pm:771
 #, c-format
 msgid "Please give a user name"
 msgstr "请给出用户名"
 
-#: any.pm:763
+#: any.pm:772
 #, c-format
 msgid ""
 "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr "用户名只能包含小写字母、数字、“-”和“_”"
 
-#: any.pm:764
+#: any.pm:773
 #, c-format
 msgid "The user name is too long"
 msgstr "该用户名太长"
 
-#: any.pm:765
+#: any.pm:774
 #, c-format
 msgid "This user name has already been added"
 msgstr "该用户名已经存在"
 
-#: any.pm:771 any.pm:798
+#: any.pm:780 any.pm:807
 #, c-format
 msgid "User ID"
 msgstr "用户 ID"
 
-#: any.pm:771 any.pm:799
+#: any.pm:780 any.pm:808
 #, c-format
 msgid "Group ID"
 msgstr "组 ID"
 
-#: any.pm:772
+#: any.pm:781
 #, c-format
 msgid "%s must be a number"
 msgstr "%s 必须是数字"
 
-#: any.pm:773
+#: any.pm:782
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
 msgstr "%s 应该大于 500。仍然接受吗？"
 
-#: any.pm:777
+#: any.pm:786
 #, c-format
 msgid "User management"
 msgstr "用户管理"
 
-#: any.pm:784 authentication.pm:183
+#: any.pm:793 authentication.pm:226
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "设定管理员(root)密码"
 
-#: any.pm:789
+#: any.pm:798
 #, c-format
 msgid "Enter a user"
 msgstr "输入一个用户"
 
-#: any.pm:790
+#: any.pm:799
 #, c-format
 msgid "Real name"
 msgstr "真实姓名"
 
-#: any.pm:793
+#: any.pm:802
 #, c-format
 msgid "Login name"
 msgstr "登录名"
 
-#: any.pm:797
+#: any.pm:806
 #, c-format
 msgid "Shell"
 msgstr "Shell"
 
-#: any.pm:811
+#: any.pm:810
 #, c-format
 msgid "Icon"
 msgstr "图标"
@@ -467,67 +472,67 @@ msgstr "图标"
 msgid "Autologin"
 msgstr "自动登录"
 
-#: any.pm:836
+#: any.pm:849
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr "您可在此设定启动时自动以某用户的身份登入系统。"
 
-#: any.pm:837
+#: any.pm:850
 #, c-format
 msgid "Use this feature"
 msgstr "使用此特性"
 
-#: any.pm:838
+#: any.pm:851
 #, c-format
 msgid "Choose the default user:"
 msgstr "选择默认的用户:"
 
-#: any.pm:839
+#: any.pm:852
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "选择要运行的窗口管理程序:"
 
-#: any.pm:862 any.pm:912
+#: any.pm:875 any.pm:925
 #, c-format
 msgid "Release Notes"
 msgstr "版本通告"
 
-#: any.pm:869 any.pm:1201 interactive/gtk.pm:766
+#: any.pm:882 any.pm:1221 interactive/gtk.pm:766
 #, c-format
 msgid "Close"
 msgstr "关闭"
 
-#: any.pm:905
+#: any.pm:918
 #, c-format
 msgid "License agreement"
 msgstr "许可协议"
 
-#: any.pm:908 diskdrake/dav.pm:26
+#: any.pm:921 diskdrake/dav.pm:26
 #, c-format
 msgid "Quit"
 msgstr "退出"
 
-#: any.pm:915
+#: any.pm:928
 #, c-format
 msgid "Accept"
 msgstr "接受"
 
-#: any.pm:915
+#: any.pm:928
 #, c-format
 msgid "Refuse"
 msgstr "拒绝"
 
-#: any.pm:930 any.pm:996
+#: any.pm:948 any.pm:1015
 #, c-format
 msgid "Please choose a language to use."
 msgstr "请选择要使用的语言。"
 
-#: any.pm:931 any.pm:997
+#: any.pm:949 any.pm:1016
 #, c-format
 msgid "Language choice"
 msgstr "语言选择"
 
-#: any.pm:961
+#: any.pm:979
 #, c-format
 msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
@@ -537,72 +542,72 @@ msgstr ""
 "Mandriva Linux 可以支持多种语言。请选择您想要安装的语言。\n"
 "安装完成并重新启动系统后它们就可以使用。"
 
-#: any.pm:964
+#: any.pm:982
 #, c-format
 msgid "Multi languages"
 msgstr "多语言"
 
-#: any.pm:975 any.pm:1005
+#: any.pm:993 any.pm:1024
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr "使用旧的编码方式(非 UTF-8)"
 
-#: any.pm:977
+#: any.pm:995
 #, c-format
 msgid "All languages"
 msgstr "全部语言"
 
-#: any.pm:1052
+#: any.pm:1071
 #, c-format
 msgid "Country / Region"
 msgstr "国家/地区"
 
-#: any.pm:1054
+#: any.pm:1073
 #, c-format
 msgid "Please choose your country."
 msgstr "请选择您的国家/地区。"
 
-#: any.pm:1056
+#: any.pm:1075
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "在此列出了可用的全部国家/地区"
 
-#: any.pm:1057
+#: any.pm:1076
 #, c-format
 msgid "Other Countries"
 msgstr "其它国家"
 
-#: any.pm:1057 interactive.pm:481
+#: any.pm:1076 interactive.pm:481
 #, c-format
 msgid "Advanced"
 msgstr "高级"
 
-#: any.pm:1063
+#: any.pm:1082
 #, c-format
 msgid "Input method:"
 msgstr "输入法:"
 
-#: any.pm:1066
+#: any.pm:1085
 #, c-format
 msgid "None"
 msgstr "无"
 
-#: any.pm:1146
+#: any.pm:1166
 #, c-format
 msgid "No sharing"
 msgstr "禁止共享"
 
-#: any.pm:1146
+#: any.pm:1166
 #, c-format
 msgid "Allow all users"
 msgstr "允许所有用户使用"
 
-#: any.pm:1146
+#: any.pm:1166
 #, c-format
 msgid "Custom"
 msgstr "自定义"
 
-#: any.pm:1150
+#: any.pm:1170
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -615,32 +620,32 @@ msgstr ""
 "选择允许, 用户将只需在 Konqueror 和 Nautilus 中单击“共享”即可开放共享。\n"
 "“自定义”允许按照不同用户细分设置。\n"
 
-#: any.pm:1162
+#: any.pm:1182
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
 "Windows."
 msgstr "NFS: 传统的 Unix 文件共享系统, Mac 和 Windows 上支持较少。"
 
-#: any.pm:1165
+#: any.pm:1185
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
 "systems."
 msgstr "SMB: Windows、MacOS X 和其它现代 Linux 系统所用的文件共享系统。"
 
-#: any.pm:1173
+#: any.pm:1193
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "您可以使用 NFS 或 Samba 导出。请选择您想要使用的协议。"
 
-#: any.pm:1201
+#: any.pm:1221
 #, c-format
 msgid "Launch userdrake"
 msgstr "运行“Drak 用户管理”"
 
-#: any.pm:1203
+#: any.pm:1223
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -649,107 +654,103 @@ msgstr ""
 "按用户设置的共享, 使用组“fileshare”。\n"
 "您可以使用“Drak 用户管理”将用户添加到此组中。"
 
-#: any.pm:1295
+#: any.pm:1315
 #, c-format
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr "请注销, 然后同时按 Ctrl-Alt-BackSpace"
 
-#: any.pm:1299
+#: any.pm:1319
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr "您需要注销后重新登录才能让更改生效"
 
-#: any.pm:1334
+#: any.pm:1354
 #, c-format
 msgid "Timezone"
 msgstr "时区"
 
-#: any.pm:1334
+#: any.pm:1354
 #, c-format
 msgid "Which is your timezone?"
 msgstr "您所在的时区?"
 
-#: any.pm:1346 any.pm:1348
+#: any.pm:1377 any.pm:1379
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "日期、时钟和时区设置"
 
-#: any.pm:1349
+#: any.pm:1380
 #, c-format
 msgid "What is the best time?"
 msgstr "最适合的时间是几点?"
 
-#: any.pm:1353
+#: any.pm:1384
 #, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "%s (硬件时钟设定为 GMT)"
 
-#: any.pm:1354
+#: any.pm:1385
 #, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "%s (硬件时钟设定为本地时间)"
 
-#: any.pm:1356
+#: any.pm:1387
 #, c-format
 msgid "NTP Server"
 msgstr "NTP 服务器"
 
-#: any.pm:1357
+#: any.pm:1388
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "自动时间同步(使用 NTP)"
 
-#: authentication.pm:24
+#: authentication.pm:25
 #, c-format
 msgid "Local file"
 msgstr "本地文件"
 
-#: authentication.pm:25
+#: authentication.pm:26
 #, c-format
 msgid "LDAP"
 msgstr "LDAP"
 
-#: authentication.pm:26
+#: authentication.pm:27
 #, c-format
 msgid "NIS"
 msgstr "NIS"
 
-#: authentication.pm:27
+#: authentication.pm:28
 #, c-format
 msgid "Smart Card"
 msgstr "智能卡"
 
-#: authentication.pm:28 authentication.pm:164
+#: authentication.pm:29 authentication.pm:205
 #, c-format
 msgid "Windows Domain"
 msgstr "Windows 域"
 
-#: authentication.pm:29
-#, c-format
-msgid "Active Directory with SFU"
-msgstr "带 SFU 的活动目录"
-
 #: authentication.pm:30
 #, c-format
-msgid "Active Directory with Winbind"
-msgstr "带 Winbind 的活动目录"
+msgid "Kerberos 5"
+msgstr ""
 
-#: authentication.pm:67
+#: authentication.pm:64
 #, c-format
 msgid "Local file:"
 msgstr "本地文件:"
 
-#: authentication.pm:67
+#: authentication.pm:64
 #, c-format
-msgid "Use information stored in local files for all authentication"
-msgstr "使用本地文件中存储的信息进行全部身份验证"
+msgid ""
+"Use local for all authentication and information user tell in local file"
+msgstr ""
 
-#: authentication.pm:68
+#: authentication.pm:65
 #, c-format
 msgid "LDAP:"
 msgstr "LDAP:"
 
-#: authentication.pm:68
+#: authentication.pm:65
 #, c-format
 msgid ""
 "Tells your computer to use LDAP for some or all authentication. LDAP "
@@ -758,12 +759,12 @@ msgstr ""
 "通知您的计算机使用 LDAP 进行某些或全部身份验证。LDAP 能够在您的组织中巩固特定"
 "类型的信息。"
 
-#: authentication.pm:69
+#: authentication.pm:66
 #, c-format
 msgid "NIS:"
 msgstr "NIS:"
 
-#: authentication.pm:69
+#: authentication.pm:66
 #, c-format
 msgid ""
 "Allows you to run a group of computers in the same Network Information "
@@ -771,198 +772,245 @@ msgid ""
 msgstr ""
 "允许您通过公共的密码和组文件在同一个网络信息服务(NIS)域中运行一组计算机。"
 
-#: authentication.pm:70
+#: authentication.pm:67
 #, c-format
 msgid "Windows Domain:"
 msgstr "Windows 域:"
 
-#: authentication.pm:70
+#: authentication.pm:67
 #, c-format
 msgid ""
 "Winbind allows the system to retrieve information and authenticate users in "
 "a Windows domain."
 msgstr "Winbind 允许系统从 Windows 域中获取信息并验证用户的身份。"
 
-#: authentication.pm:71
+#: authentication.pm:68
 #, c-format
-msgid "Active Directory with SFU:"
-msgstr "带 SFU 的活动目录:"
+msgid "Kerberos 5 :"
+msgstr ""
 
-#: authentication.pm:71
+#: authentication.pm:68
 #, c-format
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
 msgstr "使用 Kerboros 和 LDAP 在活动目录服务器中进行身份验证"
 
-#: authentication.pm:72
+#: authentication.pm:96 authentication.pm:130 authentication.pm:149
+#: authentication.pm:150 authentication.pm:176 authentication.pm:200
+#: authentication.pm:872
 #, c-format
-msgid "Active Directory with Winbind:"
-msgstr "带 Winbind 的活动目录:"
+msgid " "
+msgstr ""
 
-#: authentication.pm:72
-#, c-format
-msgid ""
-"Winbind allows the system to authenticate users in a Windows Active "
-"Directory Server."
-msgstr "Winbind 允许系统在 Windows 活动目录服务器中进行用户的身份验证。"
-
-#: authentication.pm:97
-#, c-format
-msgid "Authentication LDAP"
-msgstr "LDAP 认证"
-
-#: authentication.pm:98
-#, c-format
-msgid "LDAP Base dn"
-msgstr "LDAP 基 DN"
+#: authentication.pm:97 authentication.pm:131 authentication.pm:177
+#: authentication.pm:201
+#, fuzzy, c-format
+msgid "Welcome to the Authentication Wizard"
+msgstr "需要域认证"
 
 #: authentication.pm:99
+#, c-format
+msgid ""
+"You have selected LDAP authentication. Please review the configuration "
+"options below "
+msgstr ""
+
+#: authentication.pm:101 authentication.pm:156
 #, c-format
 msgid "LDAP Server"
 msgstr "LDAP 服务器"
 
-#: authentication.pm:112 fsedit.pm:23
-#, c-format
-msgid "simple"
-msgstr "简单"
+#: authentication.pm:102 authentication.pm:157
+#, fuzzy, c-format
+msgid "Base dn"
+msgstr "LDAP 基 DN"
 
-#: authentication.pm:113
+#: authentication.pm:103 authentication.pm:158
 #, c-format
-msgid "TLS"
-msgstr "TLS"
+msgid "Fecth base Dn "
+msgstr ""
+
+#: authentication.pm:105 authentication.pm:160
+#, c-format
+msgid "Use encrypt connection with TLS "
+msgstr ""
+
+#: authentication.pm:106 authentication.pm:161
+#, c-format
+msgid "Download CA Certificate "
+msgstr ""
+
+#: authentication.pm:108 authentication.pm:141
+#, c-format
+msgid "Use Disconnect mode "
+msgstr ""
+
+#: authentication.pm:109 authentication.pm:162
+#, fuzzy, c-format
+msgid "Use anonymous BIND "
+msgstr "使用匿名 BIND"
+
+#: authentication.pm:110 authentication.pm:113 authentication.pm:115
+#: authentication.pm:119
+#, c-format
+msgid "  "
+msgstr ""
+
+#: authentication.pm:111 authentication.pm:163
+#, c-format
+msgid "Bind DN "
+msgstr ""
+
+#: authentication.pm:112 authentication.pm:164
+#, fuzzy, c-format
+msgid "Bind Password "
+msgstr "密码"
 
 #: authentication.pm:114
 #, c-format
-msgid "SSL"
-msgstr "SSL"
+msgid "Advanced path for group "
+msgstr ""
 
-#: authentication.pm:115
+#: authentication.pm:116
+#, fuzzy, c-format
+msgid "Password base"
+msgstr "密码"
+
+#: authentication.pm:117
+#, fuzzy, c-format
+msgid "Group base"
+msgstr "组 ID"
+
+#: authentication.pm:118
 #, c-format
-msgid "security layout (SASL/Kerberos)"
-msgstr "安全层(SASL/Kerberos)"
+msgid "Sahdow base"
+msgstr ""
 
-#: authentication.pm:122 authentication.pm:160
+#: authentication.pm:133
 #, c-format
-msgid "Authentication Active Directory"
-msgstr "验证活动目录"
+msgid ""
+"You have selected Kerberos 5 authentication. Please review the configuration "
+"options below "
+msgstr ""
 
-#: authentication.pm:123 diskdrake/smbnfs_gtk.pm:182
+#: authentication.pm:135
+#, fuzzy, c-format
+msgid "Realm "
+msgstr "真实姓名"
+
+#: authentication.pm:137
+#, fuzzy, c-format
+msgid "KDCs Servers"
+msgstr "LDAP 服务器"
+
+#: authentication.pm:139
 #, c-format
-msgid "Domain"
-msgstr "域"
+msgid "Use DNS to resolve hosts for realms "
+msgstr ""
 
-#: authentication.pm:125 diskdrake/dav.pm:63
+#: authentication.pm:140
 #, c-format
-msgid "Server"
-msgstr "服务器"
+msgid "Use DNS to resolve KDCs for realms "
+msgstr ""
 
-#: authentication.pm:126
+#: authentication.pm:145
+#, fuzzy, c-format
+msgid "Use local file for users informations"
+msgstr "服务器使用 libsafe"
+
+#: authentication.pm:146
+#, fuzzy, c-format
+msgid "Use Ldap for users informations"
+msgstr "硬盘信息"
+
+#: authentication.pm:152
 #, c-format
-msgid "LDAP users database"
-msgstr "LDAP 用户数据库"
+msgid ""
+"You have selected Kerberos 5 for authentication, now you must choose the "
+"type of users information "
+msgstr ""
 
-#: authentication.pm:127
+#: authentication.pm:179
 #, c-format
-msgid "Use Anonymous BIND "
-msgstr "使用匿名 BIND"
+msgid ""
+"You have selected NIS authentication. Please review the configuration "
+"options below "
+msgstr ""
 
-#: authentication.pm:128
-#, c-format
-msgid "LDAP user allowed to browse the Active Directory"
-msgstr "允许浏览活动目录的 LDAP 用户"
-
-#: authentication.pm:129
-#, c-format
-msgid "Password for user"
-msgstr "用户的密码"
-
-#: authentication.pm:141
-#, c-format
-msgid "Authentication NIS"
-msgstr "NIS 认证"
-
-#: authentication.pm:142
+#: authentication.pm:181
 #, c-format
 msgid "NIS Domain"
 msgstr "NIS 网域"
 
-#: authentication.pm:143
+#: authentication.pm:182
 #, c-format
 msgid "NIS Server"
 msgstr "NIS 服务器"
 
-#: authentication.pm:148
+#: authentication.pm:203
 #, c-format
 msgid ""
-"For this to work for a W2K PDC, you will probably need to have the admin "
-"run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
-"add and reboot the server.\n"
-"You will also need the username/password of a Domain Admin to join the "
-"machine to the Windows(TM) domain.\n"
-"If networking is not yet enabled, Drakx will attempt to join the domain "
-"after the network setup step.\n"
-"Should this setup fail for some reason and domain authentication is not "
-"working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows(tm) "
-"Domain, and Admin Username/Password, after system boot.\n"
-"The command 'wbinfo -t' will test whether your authentication secrets are "
-"good."
+"You have selected Windows Domain authentication. Please review the "
+"configuration options below "
 msgstr ""
-"为了在 W2K PDC 服务器的环境中正常使用, 您可能得请 W2K 管理员运行“C:\\>net "
-"localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add”并重启服务"
-"器。\n"
-"您还需要一个域管理员的用户名/密码以便把这个机器添加到 Windows(TM) 域。\n"
-"如果网络还没有启用, DrakX 会在网络设置步骤之后尝试加入域。\n"
-"如果这个设置因为什么失败了而且域认证不起作用, 启动系统之后运行“smbpasswd -j "
-"域名 -U 用户%%密码”填入您的 Windows(tm) 域名和管理员的用户名/密码。\n"
-"命令“wbinfo -t”会测试您的认证密码是否完好。"
 
-#: authentication.pm:160
-#, c-format
-msgid "Authentication Windows Domain"
-msgstr "Windows 域认证"
+#: authentication.pm:207
+#, fuzzy, c-format
+msgid "Domain Model "
+msgstr "域"
 
-#: authentication.pm:162
+#: authentication.pm:209
 #, c-format
 msgid "Active Directory Realm "
 msgstr "活动目录域"
 
-#: authentication.pm:165
-#, c-format
-msgid "Domain Admin User Name"
-msgstr "域管理员用户名"
-
-#: authentication.pm:166
-#, c-format
-msgid "Domain Admin Password"
-msgstr "域管理员密码"
-
-#: authentication.pm:182 authentication.pm:199
+#: authentication.pm:225 authentication.pm:242
 #, c-format
 msgid "Authentication"
 msgstr "身份验证"
 
-#: authentication.pm:185
+#: authentication.pm:228
 #, c-format
 msgid "Authentication method"
 msgstr "身份验证方式"
 
 #. -PO: keep this short or else the buttons will not fit in the window
-#: authentication.pm:190
+#: authentication.pm:233
 #, c-format
 msgid "No password"
 msgstr "无密码"
 
-#: authentication.pm:211
+#: authentication.pm:254
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "这个密码太简单了(至少要有 %d 个字符)"
 
-#: authentication.pm:352
+#: authentication.pm:354
 #, c-format
 msgid "Can not use broadcast with no NIS domain"
 msgstr "没有 NIS 域无法广播"
 
+#: authentication.pm:867
+#, c-format
+msgid "Select file"
+msgstr ""
+
+#: authentication.pm:873
+#, fuzzy, c-format
+msgid "Domain Windows for authentication : "
+msgstr "需要域认证"
+
+#: authentication.pm:875
+#, c-format
+msgid "Domain Admin User Name"
+msgstr "域管理员用户名"
+
+#: authentication.pm:876
+#, c-format
+msgid "Domain Admin Password"
+msgstr "域管理员密码"
+
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: bootloader.pm:900
+#: bootloader.pm:942
 #, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
@@ -977,56 +1025,56 @@ msgstr ""
 "wait for default boot.\n"
 "\n"
 
-#: bootloader.pm:1050
+#: bootloader.pm:1110
 #, c-format
 msgid "LILO with text menu"
 msgstr "文本菜单 LILO"
 
-#: bootloader.pm:1051
+#: bootloader.pm:1111
 #, c-format
 msgid "GRUB with graphical menu"
 msgstr "图形菜单 GRUB"
 
-#: bootloader.pm:1052
+#: bootloader.pm:1112
 #, c-format
 msgid "GRUB with text menu"
 msgstr "文本菜单 GRUB"
 
-#: bootloader.pm:1053
+#: bootloader.pm:1113
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
 
-#: bootloader.pm:1054
+#: bootloader.pm:1114
 #, c-format
 msgid "SILO"
 msgstr "SILO"
 
-#: bootloader.pm:1135
+#: bootloader.pm:1195
 #, c-format
 msgid "not enough room in /boot"
 msgstr "/boot 中没有足够空间"
 
-#: bootloader.pm:1760
+#: bootloader.pm:1843
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
 msgstr "%s 分区不能安装启动引导程序\n"
 
-#: bootloader.pm:1813
+#: bootloader.pm:1964
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
 "renumbered"
 msgstr "必须更新您的启动引导程序配置, 因为分区已经重新编号"
 
-#: bootloader.pm:1826
+#: bootloader.pm:1977
 #, c-format
 msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
 "choose \"%s\""
 msgstr "无法正确安装启动引导程序。您需要以抢救方式启动并选择“%s”"
 
-#: bootloader.pm:1827
+#: bootloader.pm:1978
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "重新安装启动引导程序"
@@ -1071,7 +1119,7 @@ msgstr "1 分钟"
 msgid "%d seconds"
 msgstr "%d 秒钟"
 
-#: common.pm:335
+#: common.pm:349
 #, c-format
 msgid "command %s missing"
 msgstr "缺少命令 %s"
@@ -1093,26 +1141,31 @@ msgstr ""
 msgid "New"
 msgstr "新建"
 
-#: diskdrake/dav.pm:61 diskdrake/interactive.pm:380 diskdrake/smbnfs_gtk.pm:75
+#: diskdrake/dav.pm:61 diskdrake/interactive.pm:382 diskdrake/smbnfs_gtk.pm:75
 #, c-format
 msgid "Unmount"
 msgstr "卸载"
 
-#: diskdrake/dav.pm:62 diskdrake/interactive.pm:377 diskdrake/smbnfs_gtk.pm:76
+#: diskdrake/dav.pm:62 diskdrake/interactive.pm:379 diskdrake/smbnfs_gtk.pm:76
 #, c-format
 msgid "Mount"
 msgstr "挂载"
 
-#: diskdrake/dav.pm:64 diskdrake/interactive.pm:371
-#: diskdrake/interactive.pm:611 diskdrake/interactive.pm:629
-#: diskdrake/interactive.pm:633 diskdrake/removable.pm:23
+#: diskdrake/dav.pm:63
+#, c-format
+msgid "Server"
+msgstr "服务器"
+
+#: diskdrake/dav.pm:64 diskdrake/interactive.pm:373
+#: diskdrake/interactive.pm:613 diskdrake/interactive.pm:631
+#: diskdrake/interactive.pm:635 diskdrake/removable.pm:23
 #: diskdrake/smbnfs_gtk.pm:79
 #, c-format
 msgid "Mount point"
 msgstr "挂载点"
 
-#: diskdrake/dav.pm:65 diskdrake/interactive.pm:373
-#: diskdrake/interactive.pm:987 diskdrake/removable.pm:24
+#: diskdrake/dav.pm:65 diskdrake/interactive.pm:375
+#: diskdrake/interactive.pm:989 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
@@ -1124,16 +1177,17 @@ msgstr "选项"
 msgid "Done"
 msgstr "完成"
 
-#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:113 diskdrake/interactive.pm:231
-#: diskdrake/interactive.pm:244 diskdrake/interactive.pm:478
-#: diskdrake/interactive.pm:483 diskdrake/interactive.pm:601
-#: diskdrake/interactive.pm:859 diskdrake/interactive.pm:1033
-#: diskdrake/interactive.pm:1046 diskdrake/interactive.pm:1049
-#: diskdrake/interactive.pm:1299 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
-#: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:223
-#: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
-#: scanner.pm:94 scanner.pm:105 scanner.pm:112 scanner.pm:119 wizards.pm:95
-#: wizards.pm:99 wizards.pm:121
+#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:113 diskdrake/hd_gtk.pm:263
+#: diskdrake/interactive.pm:233 diskdrake/interactive.pm:246
+#: diskdrake/interactive.pm:480 diskdrake/interactive.pm:485
+#: diskdrake/interactive.pm:603 diskdrake/interactive.pm:861
+#: diskdrake/interactive.pm:1035 diskdrake/interactive.pm:1048
+#: diskdrake/interactive.pm:1051 diskdrake/interactive.pm:1300
+#: diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23 do_pkgs.pm:28 do_pkgs.pm:44
+#: do_pkgs.pm:60 do_pkgs.pm:65 fsedit.pm:222 interactive/http.pm:117
+#: interactive/http.pm:118 modules/interactive.pm:19 scanner.pm:94
+#: scanner.pm:105 scanner.pm:112 scanner.pm:119 wizards.pm:95 wizards.pm:99
+#: wizards.pm:121
 #, c-format
 msgid "Error"
 msgstr "错误"
@@ -1153,28 +1207,28 @@ msgstr "URL 应该是以 http:// 或 https:// 开头"
 msgid "Server: "
 msgstr "服务器: "
 
-#: diskdrake/dav.pm:110 diskdrake/interactive.pm:451
-#: diskdrake/interactive.pm:1179 diskdrake/interactive.pm:1259
+#: diskdrake/dav.pm:110 diskdrake/interactive.pm:453
+#: diskdrake/interactive.pm:1180 diskdrake/interactive.pm:1260
 #, c-format
 msgid "Mount point: "
 msgstr "挂载点: "
 
-#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1266
+#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1267
 #, c-format
 msgid "Options: %s"
 msgstr "选项: %s"
 
-#: diskdrake/hd_gtk.pm:53 diskdrake/interactive.pm:282
+#: diskdrake/hd_gtk.pm:53 diskdrake/interactive.pm:284
 #: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:106
-#: fs/partitioning_wizard.pm:51 fs/partitioning_wizard.pm:205
-#: fs/partitioning_wizard.pm:211 fs/partitioning_wizard.pm:251
-#: fs/partitioning_wizard.pm:270 fs/partitioning_wizard.pm:275
+#: fs/partitioning_wizard.pm:51 fs/partitioning_wizard.pm:206
+#: fs/partitioning_wizard.pm:212 fs/partitioning_wizard.pm:252
+#: fs/partitioning_wizard.pm:271 fs/partitioning_wizard.pm:276
 #, c-format
 msgid "Partitioning"
 msgstr "分区"
 
-#: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1008
-#: diskdrake/interactive.pm:1018 diskdrake/interactive.pm:1071
+#: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1010
+#: diskdrake/interactive.pm:1020 diskdrake/interactive.pm:1073
 #, c-format
 msgid "Read carefully!"
 msgstr "请仔细阅读！"
@@ -1184,7 +1238,7 @@ msgstr "请仔细阅读！"
 msgid "Please make a backup of your data first"
 msgstr "请事先备份您的数据"
 
-#: diskdrake/hd_gtk.pm:94 diskdrake/interactive.pm:224
+#: diskdrake/hd_gtk.pm:94 diskdrake/interactive.pm:226
 #, c-format
 msgid "Exit"
 msgstr "退出"
@@ -1281,7 +1335,7 @@ msgstr "Windows"
 msgid "Other"
 msgstr "其它"
 
-#: diskdrake/hd_gtk.pm:353 diskdrake/interactive.pm:1194
+#: diskdrake/hd_gtk.pm:353 diskdrake/interactive.pm:1195
 #, c-format
 msgid "Empty"
 msgstr "空"
@@ -1291,13 +1345,13 @@ msgstr "空"
 msgid "Filesystem types:"
 msgstr "文件系统类型: "
 
-#: diskdrake/hd_gtk.pm:381 diskdrake/interactive.pm:287
-#: diskdrake/interactive.pm:359 diskdrake/interactive.pm:508
-#: diskdrake/interactive.pm:692 diskdrake/interactive.pm:750
-#: diskdrake/interactive.pm:839 diskdrake/interactive.pm:881
-#: diskdrake/interactive.pm:882 diskdrake/interactive.pm:1117
-#: diskdrake/interactive.pm:1155 diskdrake/interactive.pm:1298 do_pkgs.pm:16
-#: do_pkgs.pm:35 do_pkgs.pm:53 harddrake/sound.pm:286
+#: diskdrake/hd_gtk.pm:381 diskdrake/interactive.pm:289
+#: diskdrake/interactive.pm:361 diskdrake/interactive.pm:510
+#: diskdrake/interactive.pm:694 diskdrake/interactive.pm:752
+#: diskdrake/interactive.pm:841 diskdrake/interactive.pm:883
+#: diskdrake/interactive.pm:884 diskdrake/interactive.pm:1118
+#: diskdrake/interactive.pm:1156 diskdrake/interactive.pm:1299 do_pkgs.pm:19
+#: do_pkgs.pm:39 do_pkgs.pm:57 harddrake/sound.pm:422
 #, c-format
 msgid "Warning"
 msgstr "警告"
@@ -1317,65 +1371,65 @@ msgstr "请先“Unmount”"
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "用“%s”代替(在专家模式中)"
 
-#: diskdrake/hd_gtk.pm:390 diskdrake/interactive.pm:372
-#: diskdrake/interactive.pm:546 diskdrake/interactive.pm:1024
+#: diskdrake/hd_gtk.pm:390 diskdrake/interactive.pm:374
+#: diskdrake/interactive.pm:548 diskdrake/interactive.pm:1026
 #: diskdrake/removable.pm:25 diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
 msgstr "类型"
 
-#: diskdrake/interactive.pm:195
+#: diskdrake/interactive.pm:197
 #, c-format
 msgid "Choose another partition"
 msgstr "选择其它分区"
 
-#: diskdrake/interactive.pm:195
+#: diskdrake/interactive.pm:197
 #, c-format
 msgid "Choose a partition"
 msgstr "选择分区"
 
-#: diskdrake/interactive.pm:257
+#: diskdrake/interactive.pm:259
 #, c-format
 msgid "Toggle to normal mode"
 msgstr "切换到正常模式"
 
-#: diskdrake/interactive.pm:257
+#: diskdrake/interactive.pm:259
 #, c-format
 msgid "Toggle to expert mode"
 msgstr "切换到专家模式"
 
-#: diskdrake/interactive.pm:265 diskdrake/interactive.pm:275
-#: diskdrake/interactive.pm:1102
+#: diskdrake/interactive.pm:267 diskdrake/interactive.pm:277
+#: diskdrake/interactive.pm:1103
 #, c-format
 msgid "Confirmation"
 msgstr "确认"
 
-#: diskdrake/interactive.pm:265
+#: diskdrake/interactive.pm:267
 #, c-format
 msgid "Continue anyway?"
 msgstr "仍然继续吗?"
 
-#: diskdrake/interactive.pm:270
+#: diskdrake/interactive.pm:272
 #, c-format
 msgid "Quit without saving"
 msgstr "退出而不保存更改"
 
-#: diskdrake/interactive.pm:270
+#: diskdrake/interactive.pm:272
 #, c-format
 msgid "Quit without writing the partition table?"
 msgstr "退出而不保存分区表吗?"
 
-#: diskdrake/interactive.pm:275
+#: diskdrake/interactive.pm:277
 #, c-format
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "您想要保存 /etc/fstab 修改吗?"
 
-#: diskdrake/interactive.pm:282 fs/partitioning_wizard.pm:251
+#: diskdrake/interactive.pm:284 fs/partitioning_wizard.pm:252
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr "对分区表的更改要等到重新启动后才能生效"
 
-#: diskdrake/interactive.pm:287
+#: diskdrake/interactive.pm:289
 #, c-format
 msgid ""
 "You should format partition %s.\n"
@@ -1386,135 +1440,135 @@ msgstr ""
 "否则, 将无法在 fstab 中写入挂载点 %s 的任何信息。\n"
 "仍然退出吗?"
 
-#: diskdrake/interactive.pm:300
+#: diskdrake/interactive.pm:302
 #, c-format
 msgid "Clear all"
 msgstr "全部清除"
 
-#: diskdrake/interactive.pm:301
+#: diskdrake/interactive.pm:303
 #, c-format
 msgid "Auto allocate"
 msgstr "自动分配"
 
-#: diskdrake/interactive.pm:302 diskdrake/interactive.pm:350
+#: diskdrake/interactive.pm:304 diskdrake/interactive.pm:352
 #: interactive/curses.pm:512
 #, c-format
 msgid "More"
 msgstr "更多"
 
-#: diskdrake/interactive.pm:307
+#: diskdrake/interactive.pm:309
 #, c-format
 msgid "Hard drive information"
 msgstr "硬盘信息"
 
-#: diskdrake/interactive.pm:339
+#: diskdrake/interactive.pm:341
 #, c-format
 msgid "All primary partitions are used"
 msgstr "主分区数目已经满了"
 
-#: diskdrake/interactive.pm:340
+#: diskdrake/interactive.pm:342
 #, c-format
 msgid "I can not add any more partitions"
 msgstr "我无法再添加任何分区了"
 
-#: diskdrake/interactive.pm:341
+#: diskdrake/interactive.pm:343
 #, c-format
 msgid ""
 "To have more partitions, please delete one to be able to create an extended "
 "partition"
 msgstr "如果需要更多的分区, 请删除一个主分区以创建扩展分区"
 
-#: diskdrake/interactive.pm:352
+#: diskdrake/interactive.pm:354
 #, c-format
 msgid "Reload partition table"
 msgstr "重新读取分区表"
 
-#: diskdrake/interactive.pm:359
+#: diskdrake/interactive.pm:361
 #, c-format
 msgid "Detailed information"
 msgstr "详细信息"
 
-#: diskdrake/interactive.pm:375 diskdrake/interactive.pm:705
+#: diskdrake/interactive.pm:377 diskdrake/interactive.pm:707
 #, c-format
 msgid "Resize"
 msgstr "改变大小"
 
-#: diskdrake/interactive.pm:376
+#: diskdrake/interactive.pm:378
 #, c-format
 msgid "Format"
 msgstr "格式化"
 
-#: diskdrake/interactive.pm:378 diskdrake/interactive.pm:791
+#: diskdrake/interactive.pm:380 diskdrake/interactive.pm:793
 #, c-format
 msgid "Add to RAID"
 msgstr "加入 RAID"
 
-#: diskdrake/interactive.pm:379 diskdrake/interactive.pm:809
+#: diskdrake/interactive.pm:381 diskdrake/interactive.pm:811
 #, c-format
 msgid "Add to LVM"
 msgstr "加入 LVM"
 
-#: diskdrake/interactive.pm:381
+#: diskdrake/interactive.pm:383
 #, c-format
 msgid "Delete"
 msgstr "删除"
 
-#: diskdrake/interactive.pm:382
+#: diskdrake/interactive.pm:384
 #, c-format
 msgid "Remove from RAID"
 msgstr "从 RAID 中移除"
 
-#: diskdrake/interactive.pm:383
+#: diskdrake/interactive.pm:385
 #, c-format
 msgid "Remove from LVM"
 msgstr "从 LVM 中移除"
 
-#: diskdrake/interactive.pm:384
+#: diskdrake/interactive.pm:386
 #, c-format
 msgid "Modify RAID"
 msgstr "修改 RAID"
 
-#: diskdrake/interactive.pm:385
+#: diskdrake/interactive.pm:387
 #, c-format
 msgid "Use for loopback"
 msgstr "用于回环"
 
-#: diskdrake/interactive.pm:396
+#: diskdrake/interactive.pm:398
 #, c-format
 msgid "Create"
 msgstr "新建"
 
-#: diskdrake/interactive.pm:440 diskdrake/interactive.pm:442
+#: diskdrake/interactive.pm:442 diskdrake/interactive.pm:444
 #, c-format
 msgid "Create a new partition"
 msgstr "创建一个新分区"
 
-#: diskdrake/interactive.pm:444
+#: diskdrake/interactive.pm:446
 #, c-format
 msgid "Start sector: "
 msgstr "开始扇区: "
 
-#: diskdrake/interactive.pm:447 diskdrake/interactive.pm:874
+#: diskdrake/interactive.pm:449 diskdrake/interactive.pm:876
 #, c-format
 msgid "Size in MB: "
 msgstr "大小(MB): "
 
-#: diskdrake/interactive.pm:449 diskdrake/interactive.pm:875
+#: diskdrake/interactive.pm:451 diskdrake/interactive.pm:877
 #, c-format
 msgid "Filesystem type: "
 msgstr "文件系统类型: "
 
-#: diskdrake/interactive.pm:455
+#: diskdrake/interactive.pm:457
 #, c-format
 msgid "Preference: "
 msgstr "首选项: "
 
-#: diskdrake/interactive.pm:458
+#: diskdrake/interactive.pm:460
 #, c-format
 msgid "Logical volume name "
 msgstr "逻辑卷标"
 
-#: diskdrake/interactive.pm:478
+#: diskdrake/interactive.pm:480
 #, c-format
 msgid ""
 "You can not create a new partition\n"
@@ -1525,53 +1579,53 @@ msgstr ""
 "(您超过了允许的主分区数量)。\n"
 "请先删除一个主分区, 然后创建一个扩展分区。"
 
-#: diskdrake/interactive.pm:508
+#: diskdrake/interactive.pm:510
 #, c-format
 msgid "Remove the loopback file?"
 msgstr "删除回环(loopback)文件?"
 
-#: diskdrake/interactive.pm:530
+#: diskdrake/interactive.pm:532
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr "在改变分区表 %s 的类型之后, 在这个分区上的所有资料将要被清除"
 
-#: diskdrake/interactive.pm:543
+#: diskdrake/interactive.pm:545
 #, c-format
 msgid "Change partition type"
 msgstr "更改分区类型"
 
-#: diskdrake/interactive.pm:545 diskdrake/removable.pm:47
+#: diskdrake/interactive.pm:547 diskdrake/removable.pm:47
 #, c-format
 msgid "Which filesystem do you want?"
 msgstr "您希望使用哪种文件系统?"
 
-#: diskdrake/interactive.pm:552
+#: diskdrake/interactive.pm:554
 #, c-format
 msgid "Switching from %s to %s"
 msgstr "从 %s 切换到 %s"
 
-#: diskdrake/interactive.pm:578 diskdrake/interactive.pm:581
+#: diskdrake/interactive.pm:580 diskdrake/interactive.pm:583
 #, c-format
 msgid "Which volume label?"
 msgstr "哪个卷标？"
 
-#: diskdrake/interactive.pm:582
+#: diskdrake/interactive.pm:584
 #, c-format
 msgid "Label:"
 msgstr "标签:"
 
-#: diskdrake/interactive.pm:596
+#: diskdrake/interactive.pm:598
 #, c-format
 msgid "Where do you want to mount the loopback file %s?"
 msgstr "您想把回环(loopback)文件 %s 挂载到哪里?"
 
-#: diskdrake/interactive.pm:597
+#: diskdrake/interactive.pm:599
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "您想把设备 %s 挂载到哪里?"
 
-#: diskdrake/interactive.pm:602
+#: diskdrake/interactive.pm:604
 #, c-format
 msgid ""
 "Can not unset mount point as this partition is used for loop back.\n"
@@ -1580,58 +1634,58 @@ msgstr ""
 "无法取消设定的挂载点, 因为该分区正用于回环。\n"
 "请先删除回环"
 
-#: diskdrake/interactive.pm:632
+#: diskdrake/interactive.pm:634
 #, c-format
 msgid "Where do you want to mount %s?"
 msgstr "您想把 %s 挂载到哪里?"
 
-#: diskdrake/interactive.pm:656 diskdrake/interactive.pm:739
-#: fs/partitioning_wizard.pm:145 fs/partitioning_wizard.pm:177
+#: diskdrake/interactive.pm:658 diskdrake/interactive.pm:741
+#: fs/partitioning_wizard.pm:146 fs/partitioning_wizard.pm:178
 #, c-format
 msgid "Resizing"
 msgstr "改变大小"
 
-#: diskdrake/interactive.pm:656
+#: diskdrake/interactive.pm:658
 #, c-format
 msgid "Computing FAT filesystem bounds"
 msgstr "计算 FAT 文件系统的边界"
 
-#: diskdrake/interactive.pm:692
+#: diskdrake/interactive.pm:694
 #, c-format
 msgid "This partition is not resizeable"
 msgstr "无法更改此分区的大小"
 
-#: diskdrake/interactive.pm:697
+#: diskdrake/interactive.pm:699
 #, c-format
 msgid "All data on this partition should be backed-up"
 msgstr "应该先备份在这个分区上的所有数据"
 
-#: diskdrake/interactive.pm:699
+#: diskdrake/interactive.pm:701
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr "改变分区 %s 的大小之后, 这个分区上现有的所有资料将被清除"
 
-#: diskdrake/interactive.pm:706
+#: diskdrake/interactive.pm:708
 #, c-format
 msgid "Choose the new size"
 msgstr "选择新的大小"
 
-#: diskdrake/interactive.pm:707
+#: diskdrake/interactive.pm:709
 #, c-format
 msgid "New size in MB: "
 msgstr "新大小(MB): "
 
-#: diskdrake/interactive.pm:708
+#: diskdrake/interactive.pm:710
 #, c-format
 msgid "Minimum size: %s MB"
 msgstr "最小大小：%s MB"
 
-#: diskdrake/interactive.pm:709
+#: diskdrake/interactive.pm:711
 #, c-format
 msgid "Maximum size: %s MB"
 msgstr "最大大小：%s MB"
 
-#: diskdrake/interactive.pm:750 fs/partitioning_wizard.pm:185
+#: diskdrake/interactive.pm:752 fs/partitioning_wizard.pm:186
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
@@ -1640,27 +1694,27 @@ msgstr ""
 "为了保证更改分区大小之后的数据完整性, 在您下次启动进入 Microsoft Windows® 时"
 "可能会自动运行文件系统检查。"
 
-#: diskdrake/interactive.pm:791
+#: diskdrake/interactive.pm:793
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "选择加入一个已存在的 RAID"
 
-#: diskdrake/interactive.pm:793 diskdrake/interactive.pm:811
+#: diskdrake/interactive.pm:795 diskdrake/interactive.pm:813
 #, c-format
 msgid "new"
 msgstr "新建"
 
-#: diskdrake/interactive.pm:809
+#: diskdrake/interactive.pm:811
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "选择加入一个已存在的 LVM"
 
-#: diskdrake/interactive.pm:816
+#: diskdrake/interactive.pm:818
 #, c-format
 msgid "LVM name?"
 msgstr "LVM 名称?"
 
-#: diskdrake/interactive.pm:839
+#: diskdrake/interactive.pm:841
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
@@ -1669,107 +1723,107 @@ msgstr ""
 "物理卷 %s 仍在使用中。\n"
 "您是否想要将此卷上已用的物理扩展分区移动到其它卷上？"
 
-#: diskdrake/interactive.pm:841
+#: diskdrake/interactive.pm:843
 #, c-format
 msgid "Moving physical extents"
 msgstr "移动物理扩展分区"
 
-#: diskdrake/interactive.pm:859
+#: diskdrake/interactive.pm:861
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "这个分区不能被用于回环"
 
-#: diskdrake/interactive.pm:872
+#: diskdrake/interactive.pm:874
 #, c-format
 msgid "Loopback"
 msgstr "回环"
 
-#: diskdrake/interactive.pm:873
+#: diskdrake/interactive.pm:875
 #, c-format
 msgid "Loopback file name: "
 msgstr "回环文件名: "
 
-#: diskdrake/interactive.pm:878
+#: diskdrake/interactive.pm:880
 #, c-format
 msgid "Give a file name"
 msgstr "给一个文件名"
 
-#: diskdrake/interactive.pm:881
+#: diskdrake/interactive.pm:883
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "文件已经被另一个回环使用, 请另外选择一个"
 
-#: diskdrake/interactive.pm:882
+#: diskdrake/interactive.pm:884
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "文件已经存在。使用现有的文件吗?"
 
-#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:917
+#: diskdrake/interactive.pm:916 diskdrake/interactive.pm:919
 #, c-format
 msgid "Mount options"
 msgstr "挂载选项"
 
-#: diskdrake/interactive.pm:924
+#: diskdrake/interactive.pm:926
 #, c-format
 msgid "Various"
 msgstr "杂项"
 
-#: diskdrake/interactive.pm:989
+#: diskdrake/interactive.pm:991
 #, c-format
 msgid "device"
 msgstr "设备"
 
-#: diskdrake/interactive.pm:990
+#: diskdrake/interactive.pm:992
 #, c-format
 msgid "level"
 msgstr "级别"
 
-#: diskdrake/interactive.pm:991
+#: diskdrake/interactive.pm:993
 #, c-format
 msgid "chunk size in KiB"
 msgstr "组块大小(KB)"
 
-#: diskdrake/interactive.pm:1009
+#: diskdrake/interactive.pm:1011
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "小心: 该操作有危险。"
 
-#: diskdrake/interactive.pm:1024
+#: diskdrake/interactive.pm:1026
 #, c-format
 msgid "What type of partitioning?"
 msgstr "何种分区类型?"
 
-#: diskdrake/interactive.pm:1062
+#: diskdrake/interactive.pm:1064
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "修改要等到重新启动后才能生效"
 
-#: diskdrake/interactive.pm:1071
+#: diskdrake/interactive.pm:1073
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "驱动器 %s 的分区表将会写入磁盘中！"
 
-#: diskdrake/interactive.pm:1097
+#: diskdrake/interactive.pm:1098
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr "格式化分区 %s 之后, 该分区上的所有数据都将丢失"
 
-#: diskdrake/interactive.pm:1102 fs/partitioning.pm:49
+#: diskdrake/interactive.pm:1103 fs/partitioning.pm:49
 #, c-format
 msgid "Check bad blocks?"
 msgstr "是否检查坏磁块?"
 
-#: diskdrake/interactive.pm:1116
+#: diskdrake/interactive.pm:1117
 #, c-format
 msgid "Move files to the new partition"
 msgstr "移动文件到新分区"
 
-#: diskdrake/interactive.pm:1116
+#: diskdrake/interactive.pm:1117
 #, c-format
 msgid "Hide files"
 msgstr "隐藏文件"
 
-#: diskdrake/interactive.pm:1117
+#: diskdrake/interactive.pm:1118
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -1785,108 +1839,108 @@ msgstr ""
 "您可以选择将文件移动到即将挂载到该目录的分区，或者将其保留在原地(这将导致这些"
 "文件因为其它分区被挂载被隐藏)"
 
-#: diskdrake/interactive.pm:1132
+#: diskdrake/interactive.pm:1133
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "移动文件到新分区"
 
-#: diskdrake/interactive.pm:1136
+#: diskdrake/interactive.pm:1137
 #, c-format
 msgid "Copying %s"
 msgstr "复制 %s"
 
-#: diskdrake/interactive.pm:1140
+#: diskdrake/interactive.pm:1141
 #, c-format
 msgid "Removing %s"
 msgstr "删除 %s"
 
-#: diskdrake/interactive.pm:1154
+#: diskdrake/interactive.pm:1155
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "分区 %s 现在被识别为 %s"
 
-#: diskdrake/interactive.pm:1155
+#: diskdrake/interactive.pm:1156
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr "分区已被重新编号: "
 
-#: diskdrake/interactive.pm:1180 diskdrake/interactive.pm:1243
+#: diskdrake/interactive.pm:1181 diskdrake/interactive.pm:1244
 #, c-format
 msgid "Device: "
 msgstr "设备: "
 
-#: diskdrake/interactive.pm:1181
+#: diskdrake/interactive.pm:1182
 #, c-format
 msgid "Volume label: "
 msgstr "卷标: "
 
-#: diskdrake/interactive.pm:1182
+#: diskdrake/interactive.pm:1183
 #, c-format
 msgid "UUID: "
 msgstr "UUDI: "
 
-#: diskdrake/interactive.pm:1183
+#: diskdrake/interactive.pm:1184
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS 下的盘符: %s(只是猜测)\n"
 
-#: diskdrake/interactive.pm:1187 diskdrake/interactive.pm:1196
-#: diskdrake/interactive.pm:1262
+#: diskdrake/interactive.pm:1188 diskdrake/interactive.pm:1197
+#: diskdrake/interactive.pm:1263
 #, c-format
 msgid "Type: "
 msgstr "类型: "
 
-#: diskdrake/interactive.pm:1191 diskdrake/interactive.pm:1247
+#: diskdrake/interactive.pm:1192 diskdrake/interactive.pm:1248
 #, c-format
 msgid "Name: "
 msgstr "名称: "
 
-#: diskdrake/interactive.pm:1198
+#: diskdrake/interactive.pm:1199
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "开始: 第 %s 扇区\n"
 
-#: diskdrake/interactive.pm:1199
+#: diskdrake/interactive.pm:1200
 #, c-format
 msgid "Size: %s"
 msgstr "大小: %s"
 
-#: diskdrake/interactive.pm:1201
+#: diskdrake/interactive.pm:1202
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s 扇区"
 
-#: diskdrake/interactive.pm:1203
+#: diskdrake/interactive.pm:1204
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "柱面 %d 到 %d\n"
 
-#: diskdrake/interactive.pm:1204
+#: diskdrake/interactive.pm:1205
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr "逻辑分区数：%d\n"
 
-#: diskdrake/interactive.pm:1205
+#: diskdrake/interactive.pm:1206
 #, c-format
 msgid "Formatted\n"
 msgstr "已格式化\n"
 
-#: diskdrake/interactive.pm:1206
+#: diskdrake/interactive.pm:1207
 #, c-format
 msgid "Not formatted\n"
 msgstr "未格式化\n"
 
-#: diskdrake/interactive.pm:1207
+#: diskdrake/interactive.pm:1208
 #, c-format
 msgid "Mounted\n"
 msgstr "已挂载\n"
 
-#: diskdrake/interactive.pm:1208
+#: diskdrake/interactive.pm:1209
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1213
+#: diskdrake/interactive.pm:1214
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -1895,7 +1949,7 @@ msgstr ""
 "回环文件: \n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1214
+#: diskdrake/interactive.pm:1215
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -1904,27 +1958,27 @@ msgstr ""
 "预设的启动分区\n"
 "    (给 MS-DOS 启动用的, 跟 lilo 无关)\n"
 
-#: diskdrake/interactive.pm:1216
+#: diskdrake/interactive.pm:1217
 #, c-format
 msgid "Level %s\n"
 msgstr "级别 %s\n"
 
-#: diskdrake/interactive.pm:1217
+#: diskdrake/interactive.pm:1218
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "组块大小 %d KB\n"
 
-#: diskdrake/interactive.pm:1218
+#: diskdrake/interactive.pm:1219
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "RAID 磁盘 %s\n"
 
-#: diskdrake/interactive.pm:1220
+#: diskdrake/interactive.pm:1221
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "回环文件名称: %s"
 
-#: diskdrake/interactive.pm:1223
+#: diskdrake/interactive.pm:1224
 #, c-format
 msgid ""
 "\n"
@@ -1936,7 +1990,7 @@ msgstr ""
 "此分区很可能是驱动器分区。\n"
 "您最好请不要更改它。\n"
 
-#: diskdrake/interactive.pm:1226
+#: diskdrake/interactive.pm:1227
 #, c-format
 msgid ""
 "\n"
@@ -1948,77 +2002,77 @@ msgstr ""
 "该 Bootstrap 分区特别\n"
 "是保留给双重启动系统。\n"
 
-#: diskdrake/interactive.pm:1235
+#: diskdrake/interactive.pm:1236
 #, c-format
 msgid "Free space on %s (%s)"
 msgstr "%s (%s) 上的空闲空间"
 
-#: diskdrake/interactive.pm:1244
+#: diskdrake/interactive.pm:1245
 #, c-format
 msgid "Read-only"
 msgstr "只读"
 
-#: diskdrake/interactive.pm:1245
+#: diskdrake/interactive.pm:1246
 #, c-format
 msgid "Size: %s\n"
 msgstr "大小: %s\n"
 
-#: diskdrake/interactive.pm:1246
+#: diskdrake/interactive.pm:1247
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "硬盘参数: %s 柱面, %s 磁头, %s 扇区\n"
 
-#: diskdrake/interactive.pm:1248
+#: diskdrake/interactive.pm:1249
 #, c-format
 msgid "Medium type: "
 msgstr "介质类型: "
 
-#: diskdrake/interactive.pm:1249
+#: diskdrake/interactive.pm:1250
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "LVM 磁盘 %s\n"
 
-#: diskdrake/interactive.pm:1250
+#: diskdrake/interactive.pm:1251
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "分区表类型: %s\n"
 
-#: diskdrake/interactive.pm:1251
+#: diskdrake/interactive.pm:1252
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "通道 %d id %d\n"
 
-#: diskdrake/interactive.pm:1294
+#: diskdrake/interactive.pm:1295
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "文件系统加密密钥"
 
-#: diskdrake/interactive.pm:1295
+#: diskdrake/interactive.pm:1296
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "选择该文件系统的加密密钥"
 
-#: diskdrake/interactive.pm:1298
+#: diskdrake/interactive.pm:1299
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr "这个加密密钥太简单了(至少要有 %d 个字符)"
 
-#: diskdrake/interactive.pm:1299
+#: diskdrake/interactive.pm:1300
 #, c-format
 msgid "The encryption keys do not match"
 msgstr "两次加密密钥不符"
 
-#: diskdrake/interactive.pm:1302
+#: diskdrake/interactive.pm:1303
 #, c-format
 msgid "Encryption key"
 msgstr "加密密钥"
 
-#: diskdrake/interactive.pm:1303
+#: diskdrake/interactive.pm:1304
 #, c-format
 msgid "Encryption key (again)"
 msgstr "加密密钥(再输入一次)"
 
-#: diskdrake/interactive.pm:1305
+#: diskdrake/interactive.pm:1306
 #, c-format
 msgid "Encryption algorithm"
 msgstr "加密算法"
@@ -2067,6 +2121,11 @@ msgstr "要访问此主机, 请输入您的用户名、密码和域名"
 msgid "Username"
 msgstr "用户名"
 
+#: diskdrake/smbnfs_gtk.pm:182
+#, c-format
+msgid "Domain"
+msgstr "域"
+
 #: diskdrake/smbnfs_gtk.pm:206
 #, c-format
 msgid "Search servers"
@@ -2077,32 +2136,32 @@ msgstr "搜索服务器"
 msgid "Search new servers"
 msgstr "搜索新服务器"
 
-#: do_pkgs.pm:16 do_pkgs.pm:53
+#: do_pkgs.pm:19 do_pkgs.pm:57
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
 msgstr "需要安装软件包 %s。您同意安装吗?"
 
-#: do_pkgs.pm:19 do_pkgs.pm:40 do_pkgs.pm:56
+#: do_pkgs.pm:23 do_pkgs.pm:44 do_pkgs.pm:60
 #, c-format
 msgid "Could not install the %s package!"
 msgstr "无法安装 %s 软件包!"
 
-#: do_pkgs.pm:24 do_pkgs.pm:61
+#: do_pkgs.pm:28 do_pkgs.pm:65
 #, c-format
 msgid "Mandatory package %s is missing"
 msgstr "无法找到必需的软件包 %s"
 
-#: do_pkgs.pm:35
+#: do_pkgs.pm:39
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "下列软件包需要安装: \n"
 
-#: do_pkgs.pm:216
+#: do_pkgs.pm:220
 #, c-format
 msgid "Installing packages..."
 msgstr "正在安装软件包..."
 
-#: do_pkgs.pm:258
+#: do_pkgs.pm:262
 #, c-format
 msgid "Removing packages..."
 msgstr "正在删除软件包..."
@@ -2115,27 +2174,27 @@ msgid ""
 msgstr ""
 "发生错误！新建文件系统时找不到可用的设备。请检查您的硬件以确定问题的原因"
 
-#: fs/any.pm:74 fs/partitioning_wizard.pm:59
+#: fs/any.pm:75 fs/partitioning_wizard.pm:59
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "您必须有一个FAT分区载入 /boot/efi"
 
-#: fs/format.pm:62 fs/format.pm:69
+#: fs/format.pm:63 fs/format.pm:70
 #, c-format
 msgid "Formatting partition %s"
 msgstr "正在格式化分区 %s"
 
-#: fs/format.pm:66
+#: fs/format.pm:67
 #, c-format
 msgid "Creating and formatting file %s"
 msgstr "正在创建和格式化文件 %s"
 
-#: fs/format.pm:119
+#: fs/format.pm:122
 #, c-format
 msgid "I do not know how to format %s in type %s"
 msgstr "不知道如何将 %s 格式化成 %s 类型"
 
-#: fs/format.pm:124 fs/format.pm:126
+#: fs/format.pm:127 fs/format.pm:129
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "%s 格式化 %s 失败"
@@ -2160,7 +2219,7 @@ msgstr "将分区 %s 挂载于目录 %s 失败"
 msgid "Checking %s"
 msgstr "正在检查 %s"
 
-#: fs/mount.pm:119 partition_table.pm:395
+#: fs/mount.pm:119 partition_table.pm:403
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "卸载 %s 出错: %s"
@@ -2387,17 +2446,17 @@ msgstr "交换分区大小(MB):"
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr "没有 FAT 分区来用作回环(或者没有足够剩余空间)"
 
-#: fs/partitioning_wizard.pm:126
-#, c-format
-msgid "Use the free space on the Microsoft Windows® partition"
+#: fs/partitioning_wizard.pm:127
+#, fuzzy, c-format
+msgid "Use the free space on a Microsoft Windows® partition"
 msgstr "使用在 Microsoft Windows® 分区上的空闲空间"
 
-#: fs/partitioning_wizard.pm:128
+#: fs/partitioning_wizard.pm:129
 #, c-format
 msgid "Which partition do you want to resize?"
 msgstr "您需要改变哪个分区的大小?"
 
-#: fs/partitioning_wizard.pm:142
+#: fs/partitioning_wizard.pm:143
 #, c-format
 msgid ""
 "The FAT resizer is unable to handle your partition, \n"
@@ -2406,12 +2465,12 @@ msgstr ""
 "改变 FAT 分区大小的程序无法处理这个分区, \n"
 "发生了如下错误: %s"
 
-#: fs/partitioning_wizard.pm:145
+#: fs/partitioning_wizard.pm:146
 #, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
 msgstr "正在计算 Microsoft Windows® 分区的大小"
 
-#: fs/partitioning_wizard.pm:152
+#: fs/partitioning_wizard.pm:153
 #, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
@@ -2421,7 +2480,7 @@ msgstr ""
 "您的 Microsoft Windows® 分区有太多碎片, 请重新启动, 进入 Microsoft Windows®, "
 "运行磁盘碎片整理程序, 然后重新开始安装 Mandriva Linux"
 
-#: fs/partitioning_wizard.pm:155
+#: fs/partitioning_wizard.pm:156
 #, c-format
 msgid ""
 "WARNING!\n"
@@ -2455,73 +2514,73 @@ msgstr ""
 "一切就绪后, 请按“%s”。"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:164 interactive.pm:542 interactive/curses.pm:263
+#: fs/partitioning_wizard.pm:165 interactive.pm:542 interactive/curses.pm:263
 #: ugtk2.pm:512
 #, c-format
 msgid "Next"
 msgstr "下一步"
 
-#: fs/partitioning_wizard.pm:167
+#: fs/partitioning_wizard.pm:168
 #, c-format
 msgid "Partitionning"
 msgstr "分区"
 
-#: fs/partitioning_wizard.pm:167
+#: fs/partitioning_wizard.pm:168
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
 msgstr "您将保留多少空间给 Microsoft Windows® 分区 %s?"
 
-#: fs/partitioning_wizard.pm:168
+#: fs/partitioning_wizard.pm:169
 #, c-format
 msgid "Size"
 msgstr "大小"
 
-#: fs/partitioning_wizard.pm:177
+#: fs/partitioning_wizard.pm:178
 #, c-format
 msgid "Resizing Microsoft Windows® partition"
 msgstr "改变 Microsoft Windows® 分区大小"
 
-#: fs/partitioning_wizard.pm:182
+#: fs/partitioning_wizard.pm:183
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr "FAT 调整大小失败: %s"
 
-#: fs/partitioning_wizard.pm:197
+#: fs/partitioning_wizard.pm:198
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr "没有 FAT 分区用来调整大小(或者没有足够剩余空间)"
 
-#: fs/partitioning_wizard.pm:202
+#: fs/partitioning_wizard.pm:203
 #, c-format
 msgid "Remove Microsoft Windows®"
 msgstr "删除 Microsoft Windows®"
 
-#: fs/partitioning_wizard.pm:202
+#: fs/partitioning_wizard.pm:203
 #, c-format
 msgid "Erase and use entire disk"
 msgstr "清除并使用整个磁盘"
 
-#: fs/partitioning_wizard.pm:204
+#: fs/partitioning_wizard.pm:205
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "您有不只一个硬盘, 您要在哪个上面安装 Linux?"
 
-#: fs/partitioning_wizard.pm:210 fsedit.pm:566
+#: fs/partitioning_wizard.pm:211 fsedit.pm:570
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "磁盘 %s 上现存的所有分区及其资料将被清除"
 
-#: fs/partitioning_wizard.pm:221
+#: fs/partitioning_wizard.pm:222
 #, c-format
 msgid "Custom disk partitioning"
 msgstr "自定义磁盘分区"
 
-#: fs/partitioning_wizard.pm:227
+#: fs/partitioning_wizard.pm:228
 #, c-format
 msgid "Use fdisk"
 msgstr "使用 fdisk"
 
-#: fs/partitioning_wizard.pm:230
+#: fs/partitioning_wizard.pm:231
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -2530,30 +2589,35 @@ msgstr ""
 "您现在可以在 %s 上分区。\n"
 "做完之后, 不要忘记用“w”命令保存您的修改"
 
-#: fs/partitioning_wizard.pm:270
+#: fs/partitioning_wizard.pm:271
 #, c-format
 msgid "I can not find any room for installing"
 msgstr "我无法找到安装需要的空间"
 
-#: fs/partitioning_wizard.pm:274
+#: fs/partitioning_wizard.pm:275
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "DrakX 分区向导找到下列解决办法:"
 
-#: fs/partitioning_wizard.pm:282
+#: fs/partitioning_wizard.pm:287
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "分区失败: %s"
 
-#: fs/type.pm:368
+#: fs/type.pm:370
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
 msgstr "您不能把 JFS(日志文件系统)用于小于 16 MB 的分区"
 
-#: fs/type.pm:369
+#: fs/type.pm:371
 #, c-format
 msgid "You can not use ReiserFS for partitions smaller than 32MB"
 msgstr "您不能把 ReiserFS 用于小于 32 MB 的分区"
+
+#: fsedit.pm:23
+#, c-format
+msgid "simple"
+msgstr "简单"
 
 #: fsedit.pm:27
 #, c-format
@@ -2570,7 +2634,7 @@ msgstr "服务器"
 msgid "BIOS software RAID detected on disks %s. Activate it?"
 msgstr "磁盘 %s 检测到了 BIOS 软件 RAID。激活吗?"
 
-#: fsedit.pm:224
+#: fsedit.pm:223
 #, c-format
 msgid ""
 "I can not read the partition table of device %s, it's too corrupted for me :"
@@ -2588,22 +2652,22 @@ msgstr ""
 "\n"
 "您同意清除所有分区吗?\n"
 
-#: fsedit.pm:393
+#: fsedit.pm:397
 #, c-format
 msgid "Mount points must begin with a leading /"
 msgstr "挂载点必需要以 / 为开头"
 
-#: fsedit.pm:394
+#: fsedit.pm:398
 #, c-format
 msgid "Mount points should contain only alphanumerical characters"
 msgstr "挂载点只能包含字母和数字"
 
-#: fsedit.pm:395
+#: fsedit.pm:399
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "已经有一个分区的挂载点是 %s\n"
 
-#: fsedit.pm:399
+#: fsedit.pm:403
 #, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
@@ -2614,14 +2678,14 @@ msgstr ""
 "如果没有一个 /boot 分区, 各种启动引导程序都无法处理这种情况。\n"
 "所以, 请增加一个 /boot 分区。"
 
-#: fsedit.pm:405
+#: fsedit.pm:409
 #, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr "您不能为挂载点 %s 使用 LVM 逻辑卷，因为该卷跨越了多个物理卷"
 
-#: fsedit.pm:407
+#: fsedit.pm:411
 #, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
@@ -2633,29 +2697,29 @@ msgstr ""
 "引导程序无法识别跨越多个物理卷的卷。\n"
 "您应该先创建 /boot 分区"
 
-#: fsedit.pm:411 fsedit.pm:413
+#: fsedit.pm:415 fsedit.pm:417
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "这个目录应该保留在根文件系统中"
 
-#: fsedit.pm:415 fsedit.pm:417
+#: fsedit.pm:419 fsedit.pm:421
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
 "point\n"
 msgstr "这个挂载点需要一个真正的文件系统(ext2/ext3、reiserfs、xfs 或 jfs)\n"
 
-#: fsedit.pm:419
+#: fsedit.pm:423
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
 msgstr "挂载点 %s 不能使用用加密的文件系统"
 
-#: fsedit.pm:483
+#: fsedit.pm:487
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "没有足够的空闲空间供自动分配"
 
-#: fsedit.pm:485
+#: fsedit.pm:489
 #, c-format
 msgid "Nothing to do"
 msgstr "不做任何事"
@@ -2775,185 +2839,185 @@ msgstr "DVB 卡"
 msgid "Tvcard"
 msgstr "电视卡"
 
-#: harddrake/data.pm:289
+#: harddrake/data.pm:290
 #, c-format
 msgid "Other MultiMedia devices"
 msgstr "其它多媒体设备"
 
-#: harddrake/data.pm:298
+#: harddrake/data.pm:299
 #, c-format
 msgid "Soundcard"
 msgstr "声卡"
 
-#: harddrake/data.pm:311
+#: harddrake/data.pm:312
 #, c-format
 msgid "Webcam"
 msgstr "摄像头"
 
-#: harddrake/data.pm:325
+#: harddrake/data.pm:326
 #, c-format
 msgid "Processors"
 msgstr "处理器"
 
-#: harddrake/data.pm:335
+#: harddrake/data.pm:336
 #, c-format
 msgid "ISDN adapters"
 msgstr "ISDN 适配器"
 
-#: harddrake/data.pm:346
+#: harddrake/data.pm:347
 #, c-format
 msgid "USB sound devices"
 msgstr "USB 声音设备"
 
-#: harddrake/data.pm:355
+#: harddrake/data.pm:356
 #, c-format
 msgid "Radio cards"
 msgstr "无线电卡"
 
-#: harddrake/data.pm:364
+#: harddrake/data.pm:365
 #, c-format
 msgid "ATM network cards"
 msgstr "ATM 网卡"
 
-#: harddrake/data.pm:373
+#: harddrake/data.pm:374
 #, c-format
 msgid "WAN network cards"
 msgstr "WAN 网卡"
 
-#: harddrake/data.pm:382
+#: harddrake/data.pm:383
 #, c-format
 msgid "Bluetooth devices"
 msgstr "蓝牙设备"
 
-#: harddrake/data.pm:391
+#: harddrake/data.pm:392
 #, c-format
 msgid "Ethernetcard"
 msgstr "以太网卡"
 
-#: harddrake/data.pm:408
+#: harddrake/data.pm:409
 #, c-format
 msgid "Modem"
 msgstr "调制解调器"
 
-#: harddrake/data.pm:418
+#: harddrake/data.pm:419
 #, c-format
 msgid "ADSL adapters"
 msgstr "ADSL 适配器"
 
-#: harddrake/data.pm:430
+#: harddrake/data.pm:431
 #, c-format
 msgid "Memory"
 msgstr "内存"
 
-#: harddrake/data.pm:439
+#: harddrake/data.pm:440
 #, c-format
 msgid "Printer"
 msgstr "打印机"
 
 #. -PO: these are joysticks controllers:
-#: harddrake/data.pm:453
+#: harddrake/data.pm:454
 #, c-format
 msgid "Game port controllers"
 msgstr "游戏控制器"
 
-#: harddrake/data.pm:462
+#: harddrake/data.pm:463
 #, c-format
 msgid "Joystick"
 msgstr "游戏杆"
 
-#: harddrake/data.pm:472
+#: harddrake/data.pm:473
 #, c-format
 msgid "Keyboard"
 msgstr "键盘"
 
-#: harddrake/data.pm:485
+#: harddrake/data.pm:486
 #, c-format
 msgid "Tablet and touchscreen"
 msgstr "手写板和触摸屏"
 
-#: harddrake/data.pm:494
+#: harddrake/data.pm:495
 #, c-format
 msgid "Mouse"
 msgstr "鼠标"
 
-#: harddrake/data.pm:508
+#: harddrake/data.pm:509
 #, c-format
 msgid "Biometry"
 msgstr "生物统计"
 
-#: harddrake/data.pm:516
+#: harddrake/data.pm:517
 #, c-format
 msgid "UPS"
 msgstr "UPS"
 
-#: harddrake/data.pm:525
+#: harddrake/data.pm:526
 #, c-format
 msgid "Scanner"
 msgstr "扫描仪"
 
-#: harddrake/data.pm:536
+#: harddrake/data.pm:537
 #, c-format
 msgid "Unknown/Others"
 msgstr "未知/其它"
 
-#: harddrake/data.pm:564
+#: harddrake/data.pm:565
 #, c-format
 msgid "cpu # "
 msgstr "CPU # "
 
-#: harddrake/sound.pm:202
+#: harddrake/sound.pm:285
 #, c-format
 msgid "Please Wait... Applying the configuration"
 msgstr "请稍候...正在应用配置"
 
-#: harddrake/sound.pm:305
+#: harddrake/sound.pm:346
 #, c-format
 msgid "Enable PulseAudio"
 msgstr "启用 PulseAudio"
 
-#: harddrake/sound.pm:309
+#: harddrake/sound.pm:350
 #, c-format
 msgid "Automatic routing from ALSA to PulseAudio"
 msgstr "自动让 ALSA 的音频由 PulseAudio 输出"
 
-#: harddrake/sound.pm:344
+#: harddrake/sound.pm:355
 #, c-format
 msgid "Enable 5.1 sound with Pulse Audio"
 msgstr "启用 Pulse Audio 的5.1声道"
 
-#: harddrake/sound.pm:348
+#: harddrake/sound.pm:360
 #, c-format
 msgid "Enable user switching for audio applications"
 msgstr "让用户能选择音频程序"
 
-#: harddrake/sound.pm:318
+#: harddrake/sound.pm:365
 #, c-format
 msgid "Reset sound mixer to default values"
 msgstr "将混音器重置为默认值"
 
-#: harddrake/sound.pm:323
+#: harddrake/sound.pm:370
 #, c-format
 msgid "Trouble shooting"
 msgstr "疑难解答"
 
-#: harddrake/sound.pm:330
+#: harddrake/sound.pm:377
 #, c-format
 msgid "No alternative driver"
 msgstr "没有替代的驱动程序"
 
-#: harddrake/sound.pm:240
+#: harddrake/sound.pm:378
 #, c-format
 msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
 "currently uses \"%s\""
 msgstr "没有已知的 OSS/ALSA 替代驱动程序可以用在您的声卡(%s)上, 现正使用“%s”"
 
-#: harddrake/sound.pm:246
+#: harddrake/sound.pm:385
 #, c-format
 msgid "Sound configuration"
 msgstr "声音配置"
 
-#: harddrake/sound.pm:248
+#: harddrake/sound.pm:387
 #, c-format
 msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
@@ -2964,7 +3028,7 @@ msgstr ""
 #. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
-#: harddrake/sound.pm:253
+#: harddrake/sound.pm:392
 #, c-format
 msgid ""
 "\n"
@@ -2976,7 +3040,7 @@ msgstr ""
 "\n"
 "您的声卡现在正在使用 %s“%s”驱动程序(其默认驱动程序为“%s”)"
 
-#: harddrake/sound.pm:255
+#: harddrake/sound.pm:394
 #, c-format
 msgid ""
 "OSS (Open Sound System) was the first sound API. It's an OS independent "
@@ -3008,12 +3072,12 @@ msgstr ""
 "- 与旧的 OSS 兼容的 API\n"
 "- 新的 ALSA API 带来许多增强特性, 但这需要使用 ALSA 库。\n"
 
-#: harddrake/sound.pm:269 harddrake/sound.pm:354
+#: harddrake/sound.pm:408 harddrake/sound.pm:491
 #, c-format
 msgid "Driver:"
 msgstr "驱动程序: "
 
-#: harddrake/sound.pm:379
+#: harddrake/sound.pm:422
 #, c-format
 msgid ""
 "The old \"%s\" driver is blacklisted.\n"
@@ -3028,12 +3092,12 @@ msgstr ""
 "\n"
 "新的“%s”驱动程序仅会在下此启动时使用。"
 
-#: harddrake/sound.pm:294
+#: harddrake/sound.pm:430
 #, c-format
 msgid "No open source driver"
 msgstr "没有开放源代码的驱动程序"
 
-#: harddrake/sound.pm:295
+#: harddrake/sound.pm:431
 #, c-format
 msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
@@ -3042,29 +3106,30 @@ msgstr ""
 "没有已知的 OSS/ALSA 替代驱动程序可以用在您的(%s)声卡上, 不过在“%s”有一个专有"
 "的驱动程序。"
 
-#: harddrake/sound.pm:298
+#: harddrake/sound.pm:434
 #, c-format
 msgid "No known driver"
 msgstr "没有已知驱动程序"
 
-#: harddrake/sound.pm:299
+#: harddrake/sound.pm:435
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
 msgstr "没有已知的驱动程序可以用在您的声卡(%s)上"
 
-#: harddrake/sound.pm:314
+#: harddrake/sound.pm:450
 #, c-format
 msgid "Sound trouble shooting"
 msgstr "声音疑难解决"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:317
+#: harddrake/sound.pm:453
 #, c-format
 msgid ""
 "The classic bug sound tester is to run the following commands:\n"
 "\n"
 "\n"
-"- \"lspcidrake -v | fgrep -i AUDIO\" will tell you which driver your card uses\n"
+"- \"lspcidrake -v | fgrep -i AUDIO\" will tell you which driver your card "
+"uses\n"
 "by default\n"
 "\n"
 "- \"grep sound-slot /etc/modprobe.conf\" will tell you what driver it\n"
@@ -3097,18 +3162,18 @@ msgstr ""
 "\n"
 "- “/sbin/fuser -v /dev/dsp”将会告诉您哪个程序使用声卡。\n"
 
-#: harddrake/sound.pm:343
+#: harddrake/sound.pm:480
 #, c-format
 msgid "Let me pick any driver"
 msgstr "让我挑选任意驱动"
 
-#: harddrake/sound.pm:346
+#: harddrake/sound.pm:483
 #, c-format
 msgid "Choosing an arbitrary driver"
 msgstr "选择其它驱动"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:349
+#: harddrake/sound.pm:486
 #, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
@@ -3304,7 +3369,7 @@ msgstr "default:LTR"
 msgid "Andorra"
 msgstr "安道尔"
 
-#: lang.pm:211 timezone.pm:215
+#: lang.pm:211 timezone.pm:226
 #, c-format
 msgid "United Arab Emirates"
 msgstr "阿拉伯联合酋长国"
@@ -3349,7 +3414,7 @@ msgstr "安哥拉"
 msgid "Antarctica"
 msgstr "南极洲"
 
-#: lang.pm:220 timezone.pm:260
+#: lang.pm:220 timezone.pm:271
 #, c-format
 msgid "Argentina"
 msgstr "阿根廷"
@@ -3359,12 +3424,12 @@ msgstr "阿根廷"
 msgid "American Samoa"
 msgstr "美属萨摩亚"
 
-#: lang.pm:222 mirror.pm:11 timezone.pm:218
+#: lang.pm:222 mirror.pm:12 timezone.pm:229
 #, c-format
 msgid "Austria"
 msgstr "奥地利"
 
-#: lang.pm:223 mirror.pm:10 timezone.pm:256
+#: lang.pm:223 mirror.pm:11 timezone.pm:267
 #, c-format
 msgid "Australia"
 msgstr "澳大利亚"
@@ -3389,12 +3454,12 @@ msgstr "波黑"
 msgid "Barbados"
 msgstr "巴巴多斯"
 
-#: lang.pm:228 timezone.pm:200
+#: lang.pm:228 timezone.pm:211
 #, c-format
 msgid "Bangladesh"
 msgstr "孟加拉"
 
-#: lang.pm:229 mirror.pm:12 timezone.pm:220
+#: lang.pm:229 mirror.pm:13 timezone.pm:231
 #, c-format
 msgid "Belgium"
 msgstr "比利时"
@@ -3404,7 +3469,7 @@ msgstr "比利时"
 msgid "Burkina Faso"
 msgstr "布基纳法索"
 
-#: lang.pm:231 timezone.pm:221
+#: lang.pm:231 timezone.pm:232
 #, c-format
 msgid "Bulgaria"
 msgstr "保加利亚"
@@ -3439,7 +3504,7 @@ msgstr "文莱达鲁萨兰国"
 msgid "Bolivia"
 msgstr "玻利维亚"
 
-#: lang.pm:238 mirror.pm:13 timezone.pm:261
+#: lang.pm:238 mirror.pm:14 timezone.pm:272
 #, c-format
 msgid "Brazil"
 msgstr "巴西"
@@ -3464,7 +3529,7 @@ msgstr "布维岛"
 msgid "Botswana"
 msgstr "博茨瓦纳"
 
-#: lang.pm:243 timezone.pm:219
+#: lang.pm:243 timezone.pm:230
 #, c-format
 msgid "Belarus"
 msgstr "白俄罗斯"
@@ -3474,7 +3539,7 @@ msgstr "白俄罗斯"
 msgid "Belize"
 msgstr "伯利兹"
 
-#: lang.pm:245 mirror.pm:14 timezone.pm:250
+#: lang.pm:245 mirror.pm:15 timezone.pm:261
 #, c-format
 msgid "Canada"
 msgstr "加拿大"
@@ -3499,7 +3564,7 @@ msgstr "中非共和国"
 msgid "Congo (Brazzaville)"
 msgstr "刚果(布拉柴维尔)"
 
-#: lang.pm:250 mirror.pm:38 timezone.pm:244
+#: lang.pm:250 mirror.pm:39 timezone.pm:255
 #, c-format
 msgid "Switzerland"
 msgstr "瑞士"
@@ -3514,7 +3579,7 @@ msgstr "科特迪瓦"
 msgid "Cook Islands"
 msgstr "库克群岛"
 
-#: lang.pm:253 timezone.pm:262
+#: lang.pm:253 timezone.pm:273
 #, c-format
 msgid "Chile"
 msgstr "智利"
@@ -3524,7 +3589,7 @@ msgstr "智利"
 msgid "Cameroon"
 msgstr "喀麦隆"
 
-#: lang.pm:255 timezone.pm:201
+#: lang.pm:255 timezone.pm:212
 #, c-format
 msgid "China"
 msgstr "中国"
@@ -3534,7 +3599,7 @@ msgstr "中国"
 msgid "Colombia"
 msgstr "哥伦比亚"
 
-#: lang.pm:257 mirror.pm:15
+#: lang.pm:257 mirror.pm:16
 #, c-format
 msgid "Costa Rica"
 msgstr "哥斯达黎加"
@@ -3564,12 +3629,12 @@ msgstr "圣诞岛"
 msgid "Cyprus"
 msgstr "塞浦路斯"
 
-#: lang.pm:263 mirror.pm:16 timezone.pm:222
+#: lang.pm:263 mirror.pm:17 timezone.pm:233
 #, c-format
 msgid "Czech Republic"
 msgstr "捷克共和国"
 
-#: lang.pm:264 mirror.pm:21 timezone.pm:227
+#: lang.pm:264 mirror.pm:22 timezone.pm:238
 #, c-format
 msgid "Germany"
 msgstr "德国"
@@ -3579,7 +3644,7 @@ msgstr "德国"
 msgid "Djibouti"
 msgstr "吉布提"
 
-#: lang.pm:266 mirror.pm:17 timezone.pm:223
+#: lang.pm:266 mirror.pm:18 timezone.pm:234
 #, c-format
 msgid "Denmark"
 msgstr "丹麦"
@@ -3604,7 +3669,7 @@ msgstr "阿尔及利亚"
 msgid "Ecuador"
 msgstr "厄瓜多尔"
 
-#: lang.pm:271 mirror.pm:18 timezone.pm:224
+#: lang.pm:271 mirror.pm:19 timezone.pm:235
 #, c-format
 msgid "Estonia"
 msgstr "爱沙尼亚"
@@ -3624,7 +3689,7 @@ msgstr "西撒哈拉"
 msgid "Eritrea"
 msgstr "厄立特里亚"
 
-#: lang.pm:275 mirror.pm:36 timezone.pm:242
+#: lang.pm:275 mirror.pm:37 timezone.pm:253
 #, c-format
 msgid "Spain"
 msgstr "西班牙"
@@ -3634,7 +3699,7 @@ msgstr "西班牙"
 msgid "Ethiopia"
 msgstr "埃塞俄比亚"
 
-#: lang.pm:277 mirror.pm:19 timezone.pm:225
+#: lang.pm:277 mirror.pm:20 timezone.pm:236
 #, c-format
 msgid "Finland"
 msgstr "芬兰"
@@ -3659,7 +3724,7 @@ msgstr "密克罗尼西亚"
 msgid "Faroe Islands"
 msgstr "法罗群岛"
 
-#: lang.pm:282 mirror.pm:20 timezone.pm:226
+#: lang.pm:282 mirror.pm:21 timezone.pm:237
 #, c-format
 msgid "France"
 msgstr "法国"
@@ -3669,7 +3734,7 @@ msgstr "法国"
 msgid "Gabon"
 msgstr "加蓬"
 
-#: lang.pm:284 timezone.pm:246
+#: lang.pm:284 timezone.pm:257
 #, c-format
 msgid "United Kingdom"
 msgstr "英国"
@@ -3724,7 +3789,7 @@ msgstr "瓜德洛普"
 msgid "Equatorial Guinea"
 msgstr "赤道几内亚"
 
-#: lang.pm:295 mirror.pm:22 timezone.pm:228
+#: lang.pm:295 mirror.pm:23 timezone.pm:239
 #, c-format
 msgid "Greece"
 msgstr "希腊"
@@ -3734,7 +3799,7 @@ msgstr "希腊"
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "南乔治亚岛和南桑德韦奇岛"
 
-#: lang.pm:297 timezone.pm:251
+#: lang.pm:297 timezone.pm:262
 #, c-format
 msgid "Guatemala"
 msgstr "危地马拉"
@@ -3779,27 +3844,27 @@ msgstr "克罗地亚"
 msgid "Haiti"
 msgstr "海地"
 
-#: lang.pm:306 mirror.pm:23 timezone.pm:229
+#: lang.pm:306 mirror.pm:24 timezone.pm:240
 #, c-format
 msgid "Hungary"
 msgstr "匈牙利"
 
-#: lang.pm:307 timezone.pm:204
+#: lang.pm:307 timezone.pm:215
 #, c-format
 msgid "Indonesia"
 msgstr "印度尼西亚"
 
-#: lang.pm:308 mirror.pm:24 timezone.pm:230
+#: lang.pm:308 mirror.pm:25 timezone.pm:241
 #, c-format
 msgid "Ireland"
 msgstr "爱尔兰"
 
-#: lang.pm:309 mirror.pm:25 timezone.pm:206
+#: lang.pm:309 mirror.pm:26 timezone.pm:217
 #, c-format
 msgid "Israel"
 msgstr "以色列"
 
-#: lang.pm:310 timezone.pm:203
+#: lang.pm:310 timezone.pm:214
 #, c-format
 msgid "India"
 msgstr "印度"
@@ -3814,7 +3879,7 @@ msgstr "英属印度洋地区"
 msgid "Iraq"
 msgstr "伊拉克"
 
-#: lang.pm:313 timezone.pm:205
+#: lang.pm:313 timezone.pm:216
 #, c-format
 msgid "Iran"
 msgstr "伊朗"
@@ -3824,7 +3889,7 @@ msgstr "伊朗"
 msgid "Iceland"
 msgstr "冰岛"
 
-#: lang.pm:315 mirror.pm:26 timezone.pm:231
+#: lang.pm:315 mirror.pm:27 timezone.pm:242
 #, c-format
 msgid "Italy"
 msgstr "意大利"
@@ -3839,7 +3904,7 @@ msgstr "牙买加"
 msgid "Jordan"
 msgstr "约旦"
 
-#: lang.pm:318 mirror.pm:27 timezone.pm:207
+#: lang.pm:318 mirror.pm:28 timezone.pm:218
 #, c-format
 msgid "Japan"
 msgstr "日本"
@@ -3879,7 +3944,7 @@ msgstr "圣基茨和尼维斯"
 msgid "Korea (North)"
 msgstr "朝鲜"
 
-#: lang.pm:326 timezone.pm:208
+#: lang.pm:326 timezone.pm:219
 #, c-format
 msgid "Korea"
 msgstr "韩国"
@@ -3934,12 +3999,12 @@ msgstr "利比里亚"
 msgid "Lesotho"
 msgstr "莱索托"
 
-#: lang.pm:337 timezone.pm:232
+#: lang.pm:337 timezone.pm:243
 #, c-format
 msgid "Lithuania"
 msgstr "立陶宛"
 
-#: lang.pm:338 timezone.pm:233
+#: lang.pm:338 timezone.pm:244
 #, c-format
 msgid "Luxembourg"
 msgstr "卢森堡"
@@ -4039,12 +4104,12 @@ msgstr "马尔代夫"
 msgid "Malawi"
 msgstr "马拉维"
 
-#: lang.pm:358 timezone.pm:252
+#: lang.pm:358 timezone.pm:263
 #, c-format
 msgid "Mexico"
 msgstr "墨西哥"
 
-#: lang.pm:359 timezone.pm:209
+#: lang.pm:359 timezone.pm:220
 #, c-format
 msgid "Malaysia"
 msgstr "马来西亚"
@@ -4084,12 +4149,12 @@ msgstr "尼日利亚"
 msgid "Nicaragua"
 msgstr "尼加拉瓜"
 
-#: lang.pm:367 mirror.pm:28 timezone.pm:234
+#: lang.pm:367 mirror.pm:29 timezone.pm:245
 #, c-format
 msgid "Netherlands"
 msgstr "荷兰"
 
-#: lang.pm:368 mirror.pm:30 timezone.pm:235
+#: lang.pm:368 mirror.pm:31 timezone.pm:246
 #, c-format
 msgid "Norway"
 msgstr "挪威"
@@ -4109,7 +4174,7 @@ msgstr "瑙鲁"
 msgid "Niue"
 msgstr "纽埃"
 
-#: lang.pm:372 mirror.pm:29 timezone.pm:257
+#: lang.pm:372 mirror.pm:30 timezone.pm:268
 #, c-format
 msgid "New Zealand"
 msgstr "新西兰"
@@ -4139,7 +4204,7 @@ msgstr "法属玻利尼西亚"
 msgid "Papua New Guinea"
 msgstr "巴布亚新几内亚"
 
-#: lang.pm:378 timezone.pm:210
+#: lang.pm:378 timezone.pm:221
 #, c-format
 msgid "Philippines"
 msgstr "菲律宾"
@@ -4149,7 +4214,7 @@ msgstr "菲律宾"
 msgid "Pakistan"
 msgstr "巴基斯坦"
 
-#: lang.pm:380 mirror.pm:31 timezone.pm:236
+#: lang.pm:380 mirror.pm:32 timezone.pm:247
 #, c-format
 msgid "Poland"
 msgstr "波兰"
@@ -4174,7 +4239,7 @@ msgstr "波多黎各"
 msgid "Palestine"
 msgstr "巴勒斯坦"
 
-#: lang.pm:385 mirror.pm:32 timezone.pm:237
+#: lang.pm:385 mirror.pm:33 timezone.pm:248
 #, c-format
 msgid "Portugal"
 msgstr "葡萄牙"
@@ -4199,12 +4264,12 @@ msgstr "卡塔尔"
 msgid "Reunion"
 msgstr "留尼旺"
 
-#: lang.pm:390 timezone.pm:238
+#: lang.pm:390 timezone.pm:249
 #, c-format
 msgid "Romania"
 msgstr "罗马尼亚"
 
-#: lang.pm:391 mirror.pm:33
+#: lang.pm:391 mirror.pm:34
 #, c-format
 msgid "Russia"
 msgstr "俄罗斯"
@@ -4234,12 +4299,12 @@ msgstr "塞舌尔"
 msgid "Sudan"
 msgstr "苏丹"
 
-#: lang.pm:397 mirror.pm:37 timezone.pm:243
+#: lang.pm:397 mirror.pm:38 timezone.pm:254
 #, c-format
 msgid "Sweden"
 msgstr "瑞典"
 
-#: lang.pm:398 timezone.pm:211
+#: lang.pm:398 timezone.pm:222
 #, c-format
 msgid "Singapore"
 msgstr "新加坡"
@@ -4249,7 +4314,7 @@ msgstr "新加坡"
 msgid "Saint Helena"
 msgstr "圣·海伦娜"
 
-#: lang.pm:400 timezone.pm:241
+#: lang.pm:400 timezone.pm:252
 #, c-format
 msgid "Slovenia"
 msgstr "斯洛文尼亚"
@@ -4259,7 +4324,7 @@ msgstr "斯洛文尼亚"
 msgid "Svalbard and Jan Mayen Islands"
 msgstr "斯马尔巴特和扬马延岛"
 
-#: lang.pm:402 mirror.pm:34 timezone.pm:240
+#: lang.pm:402 mirror.pm:35 timezone.pm:251
 #, c-format
 msgid "Slovakia"
 msgstr "斯洛伐克"
@@ -4329,7 +4394,7 @@ msgstr "法国南方属地"
 msgid "Togo"
 msgstr "多哥"
 
-#: lang.pm:416 mirror.pm:40 timezone.pm:213
+#: lang.pm:416 mirror.pm:41 timezone.pm:224
 #, c-format
 msgid "Thailand"
 msgstr "泰国"
@@ -4364,7 +4429,7 @@ msgstr "突尼斯"
 msgid "Tonga"
 msgstr "汤加"
 
-#: lang.pm:423 timezone.pm:214
+#: lang.pm:423 timezone.pm:225
 #, c-format
 msgid "Turkey"
 msgstr "土耳其"
@@ -4379,17 +4444,17 @@ msgstr "特立尼达和多巴哥岛"
 msgid "Tuvalu"
 msgstr "图瓦卢"
 
-#: lang.pm:426 mirror.pm:39 timezone.pm:212
+#: lang.pm:426 mirror.pm:40 timezone.pm:223
 #, c-format
 msgid "Taiwan"
 msgstr "中国台湾"
 
-#: lang.pm:427 timezone.pm:197
+#: lang.pm:427 timezone.pm:208
 #, c-format
 msgid "Tanzania"
 msgstr "坦桑尼亚"
 
-#: lang.pm:428 timezone.pm:245
+#: lang.pm:428 timezone.pm:256
 #, c-format
 msgid "Ukraine"
 msgstr "乌克兰"
@@ -4404,7 +4469,7 @@ msgstr "乌干达"
 msgid "United States Minor Outlying Islands"
 msgstr "美属本土外岛屿"
 
-#: lang.pm:431 mirror.pm:41 timezone.pm:253
+#: lang.pm:431 mirror.pm:42 timezone.pm:264
 #, c-format
 msgid "United States"
 msgstr "美国"
@@ -4474,7 +4539,7 @@ msgstr "也门"
 msgid "Mayotte"
 msgstr "马约特岛"
 
-#: lang.pm:445 mirror.pm:35 timezone.pm:196
+#: lang.pm:445 mirror.pm:36 timezone.pm:207
 #, c-format
 msgid "South Africa"
 msgstr "南非"
@@ -4489,7 +4554,7 @@ msgstr "赞比亚"
 msgid "Zimbabwe"
 msgstr "津巴布韦"
 
-#: lang.pm:1193
+#: lang.pm:1201
 #, c-format
 msgid "Welcome to %s"
 msgstr "欢迎使用 %s"
@@ -4499,17 +4564,17 @@ msgstr "欢迎使用 %s"
 msgid "Moving used physical extents to other physical volumes failed"
 msgstr "将已用的物理卷扩展分区移动到其它物理卷失败"
 
-#: lvm.pm:137
+#: lvm.pm:141
 #, c-format
 msgid "Physical volume %s is still in use"
 msgstr "物理卷 %s 仍在使用中"
 
-#: lvm.pm:147
+#: lvm.pm:151
 #, c-format
 msgid "Remove the logical volumes first\n"
 msgstr "请先删除逻辑卷\n"
 
-#: lvm.pm:180
+#: lvm.pm:184
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
 msgstr "引导程序无法识别多个物理卷上的 /boot"
@@ -4925,17 +4990,17 @@ msgstr ""
 "模块 %s 加载失败。\n"
 "您要尝试其它的参数吗?"
 
-#: partition_table.pm:401
+#: partition_table.pm:409
 #, c-format
 msgid "mount failed: "
 msgstr "挂载失败: "
 
-#: partition_table.pm:510
+#: partition_table.pm:518
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "这个平台上不支持扩展分区"
 
-#: partition_table.pm:528
+#: partition_table.pm:536
 #, c-format
 msgid ""
 "You have a hole in your partition table but I can not use it.\n"
@@ -4945,7 +5010,7 @@ msgstr ""
 "分区表里有一段是空的, 可是我没法使用它。\n"
 "唯一的办法是移动您的主分区, 把空闲部分换到与扩展分区相邻的位置。"
 
-#: partition_table/raw.pm:279
+#: partition_table/raw.pm:285
 #, c-format
 msgid ""
 "Something bad is happening on your drive. \n"
@@ -4987,17 +5052,17 @@ msgstr "无法将固件文件 %s 复制到 /usr/share/sane/firmware!"
 msgid "Could not set permissions of firmware file %s!"
 msgstr "无法设定固件文件 %s 的权限!"
 
-#: scanner.pm:199
+#: scanner.pm:200
 #, c-format
 msgid "Scannerdrake"
 msgstr "Drak 扫描仪"
 
-#: scanner.pm:200
+#: scanner.pm:201
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "无法安装共享您的扫描仪所需的软件包。"
 
-#: scanner.pm:201
+#: scanner.pm:202
 #, c-format
 msgid "Your scanner(s) will not be available for non-root users."
 msgstr "您的扫描仪将无法被非 root 用户使用。"
@@ -6446,57 +6511,57 @@ msgstr ""
 "用法:%s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--testing] "
 "[-v|--version] "
 
-#: timezone.pm:150 timezone.pm:151
+#: timezone.pm:161 timezone.pm:162
 #, c-format
 msgid "All servers"
 msgstr "全部服务器"
 
-#: timezone.pm:185
+#: timezone.pm:196
 #, c-format
 msgid "Global"
 msgstr "全球"
 
-#: timezone.pm:188
+#: timezone.pm:199
 #, c-format
 msgid "Africa"
 msgstr "非洲"
 
-#: timezone.pm:189
+#: timezone.pm:200
 #, c-format
 msgid "Asia"
 msgstr "亚洲"
 
-#: timezone.pm:190
+#: timezone.pm:201
 #, c-format
 msgid "Europe"
 msgstr "欧洲"
 
-#: timezone.pm:191
+#: timezone.pm:202
 #, c-format
 msgid "North America"
 msgstr "北美洲"
 
-#: timezone.pm:192
+#: timezone.pm:203
 #, c-format
 msgid "Oceania"
 msgstr "大洋洲"
 
-#: timezone.pm:193
+#: timezone.pm:204
 #, c-format
 msgid "South America"
 msgstr "南美洲"
 
-#: timezone.pm:202
+#: timezone.pm:213
 #, c-format
 msgid "Hong Kong"
 msgstr "香港"
 
-#: timezone.pm:239
+#: timezone.pm:250
 #, c-format
 msgid "Russian Federation"
 msgstr "俄联邦"
 
-#: timezone.pm:247
+#: timezone.pm:258
 #, c-format
 msgid "Yugoslavia"
 msgstr "南斯拉夫"
@@ -6559,3 +6624,76 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "安装失败"
+
+#~ msgid "Active Directory with SFU"
+#~ msgstr "带 SFU 的活动目录"
+
+#~ msgid "Active Directory with Winbind"
+#~ msgstr "带 Winbind 的活动目录"
+
+#~ msgid "Use information stored in local files for all authentication"
+#~ msgstr "使用本地文件中存储的信息进行全部身份验证"
+
+#~ msgid "Active Directory with SFU:"
+#~ msgstr "带 SFU 的活动目录:"
+
+#~ msgid "Active Directory with Winbind:"
+#~ msgstr "带 Winbind 的活动目录:"
+
+#~ msgid ""
+#~ "Winbind allows the system to authenticate users in a Windows Active "
+#~ "Directory Server."
+#~ msgstr "Winbind 允许系统在 Windows 活动目录服务器中进行用户的身份验证。"
+
+#~ msgid "Authentication LDAP"
+#~ msgstr "LDAP 认证"
+
+#~ msgid "TLS"
+#~ msgstr "TLS"
+
+#~ msgid "SSL"
+#~ msgstr "SSL"
+
+#~ msgid "security layout (SASL/Kerberos)"
+#~ msgstr "安全层(SASL/Kerberos)"
+
+#~ msgid "Authentication Active Directory"
+#~ msgstr "验证活动目录"
+
+#~ msgid "LDAP users database"
+#~ msgstr "LDAP 用户数据库"
+
+#~ msgid "LDAP user allowed to browse the Active Directory"
+#~ msgstr "允许浏览活动目录的 LDAP 用户"
+
+#~ msgid "Password for user"
+#~ msgstr "用户的密码"
+
+#~ msgid "Authentication NIS"
+#~ msgstr "NIS 认证"
+
+#~ msgid ""
+#~ "For this to work for a W2K PDC, you will probably need to have the admin "
+#~ "run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
+#~ "add and reboot the server.\n"
+#~ "You will also need the username/password of a Domain Admin to join the "
+#~ "machine to the Windows(TM) domain.\n"
+#~ "If networking is not yet enabled, Drakx will attempt to join the domain "
+#~ "after the network setup step.\n"
+#~ "Should this setup fail for some reason and domain authentication is not "
+#~ "working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows"
+#~ "(tm) Domain, and Admin Username/Password, after system boot.\n"
+#~ "The command 'wbinfo -t' will test whether your authentication secrets are "
+#~ "good."
+#~ msgstr ""
+#~ "为了在 W2K PDC 服务器的环境中正常使用, 您可能得请 W2K 管理员运行“C:\\>net "
+#~ "localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add”并重启服务"
+#~ "器。\n"
+#~ "您还需要一个域管理员的用户名/密码以便把这个机器添加到 Windows(TM) 域。\n"
+#~ "如果网络还没有启用, DrakX 会在网络设置步骤之后尝试加入域。\n"
+#~ "如果这个设置因为什么失败了而且域认证不起作用, 启动系统之后运行“smbpasswd -"
+#~ "j 域名 -U 用户%%密码”填入您的 Windows(tm) 域名和管理员的用户名/密码。\n"
+#~ "命令“wbinfo -t”会测试您的认证密码是否完好。"
+
+#~ msgid "Authentication Windows Domain"
+#~ msgstr "Windows 域认证"

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-el\n"
-"POT-Creation-Date: 2008-03-20 14:27+0100\n"
+"POT-Creation-Date: 2008-07-20 04:41+0200\n"
 "PO-Revision-Date: 2008-06-15 03:20+0200\n"
 "Last-Translator: nikos papadopoulos <231036448@freemail.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -19,16 +19,10 @@ msgstr ""
 "X-Poedit-Language: Greek\n"
 "X-Poedit-Country: GREECE\n"
 
-#: any.pm:245
-#: diskdrake/interactive.pm:552
-#: diskdrake/interactive.pm:739
-#: diskdrake/interactive.pm:783
-#: diskdrake/interactive.pm:841
-#: diskdrake/interactive.pm:1132
-#: do_pkgs.pm:216
-#: do_pkgs.pm:258
-#: harddrake/sound.pm:202
-#: interactive.pm:580
+#: any.pm:245 diskdrake/interactive.pm:554 diskdrake/interactive.pm:741
+#: diskdrake/interactive.pm:785 diskdrake/interactive.pm:843
+#: diskdrake/interactive.pm:1133 do_pkgs.pm:220 do_pkgs.pm:262
+#: harddrake/sound.pm:285 interactive.pm:580
 #, c-format
 msgid "Please wait"
 msgstr "Παρακαλώ περιμένετε"
@@ -42,21 +36,27 @@ msgstr "Γίνεται εγκατάσταση του προγράμματος ε
 #, c-format
 msgid ""
 "LILO wants to assign a new Volume ID to drive %s.  However, changing\n"
-"the Volume ID of a Windows NT, 2000, or XP boot disk is a fatal Windows error.\n"
+"the Volume ID of a Windows NT, 2000, or XP boot disk is a fatal Windows "
+"error.\n"
 "This caution does not apply to Windows 95 or 98, or to NT data disks.\n"
 "\n"
 "Assign a new Volume ID?"
 msgstr ""
-"Το LILO σου ζητάει να δώσεις μία νέα Ταυτότητα Τόμου (Volume ID) στο δίσκο %s.\n"
-"Όμως, η αλλαγή της Ταυτότητας Τόμου ενός δίσκου εκκίνησης των Microsoft Windows NT, 2000, ή XP, είναι ένα μοιραίο λάθος για τα Microsoft Windows.\n"
-"Αυτή η επιφύλαξη δεν ισχύει για τα Microsoft Windows 95 ή 98, ή για τους δίσκους δεδομένων των NT.\n"
+"Το LILO σου ζητάει να δώσεις μία νέα Ταυτότητα Τόμου (Volume ID) στο δίσκο %"
+"s.\n"
+"Όμως, η αλλαγή της Ταυτότητας Τόμου ενός δίσκου εκκίνησης των Microsoft "
+"Windows NT, 2000, ή XP, είναι ένα μοιραίο λάθος για τα Microsoft Windows.\n"
+"Αυτή η επιφύλαξη δεν ισχύει για τα Microsoft Windows 95 ή 98, ή για τους "
+"δίσκους δεδομένων των NT.\n"
 "\n"
 "Να προσδιοριστεί μια νέα Ταυτότητα Τόμου;"
 
 #: any.pm:267
 #, c-format
 msgid "Installation of bootloader failed. The following error occurred:"
-msgstr "Η εγκατάσταση του προγράμματος εκκίνησης απέτυχε. Προκλήθηκε το ακόλουθο σφάλμα:"
+msgstr ""
+"Η εγκατάσταση του προγράμματος εκκίνησης απέτυχε. Προκλήθηκε το ακόλουθο "
+"σφάλμα:"
 
 #: any.pm:273
 #, c-format
@@ -69,307 +69,299 @@ msgid ""
 "At your next boot you should see the bootloader prompt."
 msgstr ""
 "Μπορεί να χρειαστεί να αλλάξετε την Open Firmware boot-συσκευή ώστε να\n"
-" ενεργοποιήσετε το πρόγραμμα εκκίνησης.  Αν στην επανεκκίνηση δεν δείτε την προτροπή του πρόγραμμα εκκίνησης,\n"
+" ενεργοποιήσετε το πρόγραμμα εκκίνησης.  Αν στην επανεκκίνηση δεν δείτε την "
+"προτροπή του πρόγραμμα εκκίνησης,\n"
 "πατήστε το Command-Option-O-F κατά την επανεκκίνηση και εισάγετε:\n"
 " setenv boot-device %s,\\\\:tbxi\n"
 " Μετά γράψτε: shut-down\n"
-"Στην επόμενη εκκίνηση θα πρέπει να δείτε την προτροπή του προγράμματος εκκίνησης ."
+"Στην επόμενη εκκίνηση θα πρέπει να δείτε την προτροπή του προγράμματος "
+"εκκίνησης ."
 
-#: any.pm:311
+#: any.pm:313
 #, c-format
 msgid ""
 "You decided to install the bootloader on a partition.\n"
-"This implies you already have a bootloader on the hard drive you boot (eg: System Commander).\n"
+"This implies you already have a bootloader on the hard drive you boot (eg: "
+"System Commander).\n"
 "\n"
 "On which drive are you booting?"
 msgstr ""
 "Επιλέξατε να εγκαταστήσετε το πρόγραμμα εκκίνησης σε μια κατάτμηση.\n"
-"Εννοείτε ότι έχετε ήδη εγκατάσταση ένα άλλο πρόγραμμα εκκίνησης στον σκληρό  σας δίσκο (π.χ. System Commander).\n"
+"Εννοείτε ότι έχετε ήδη εγκατάσταση ένα άλλο πρόγραμμα εκκίνησης στον σκληρό  "
+"σας δίσκο (π.χ. System Commander).\n"
 "\n"
 "Από ποιόν δίσκο ξεκινάτε;"
 
-#: any.pm:334
+#: any.pm:339
+#, fuzzy, c-format
+msgid "First sector (MBR) of drive %s"
+msgstr "Πρώτος τομέας του δίσκου (MBR)"
+
+#: any.pm:341
 #, c-format
 msgid "First sector of drive (MBR)"
 msgstr "Πρώτος τομέας του δίσκου (MBR)"
 
-#: any.pm:335
+#: any.pm:343
 #, c-format
 msgid "First sector of the root partition"
 msgstr "Πρώτος τομέας της κατάτμησης εκκίνησης"
 
-#: any.pm:337
+#: any.pm:345
 #, c-format
 msgid "On Floppy"
 msgstr "Στην Δισκέτα"
 
-#: any.pm:339
+#: any.pm:347
 #, c-format
 msgid "Skip"
 msgstr "Παράλειψη"
 
-#: any.pm:343
+#: any.pm:351
 #, c-format
 msgid "LILO/grub Installation"
 msgstr "Εγκατάσταση LILO/grub"
 
-#: any.pm:345
+#: any.pm:353
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Πού θέλετε να εγκαταστήσετε το πρόγραμμα εκκίνησης;"
 
-#: any.pm:372
+#: any.pm:380
 #, c-format
 msgid "Boot Style Configuration"
 msgstr "Ρύθμιση Τύπου Εκκίνησης"
 
-#: any.pm:382
-#: any.pm:414
-#: any.pm:415
+#: any.pm:390 any.pm:422 any.pm:423
 #, c-format
 msgid "Bootloader main options"
 msgstr "Βασικές επιλογές προγράμματος εκκίνησης"
 
-#: any.pm:387
+#: any.pm:395
 #, c-format
 msgid "Bootloader"
 msgstr "Προγράμματος εκκίνησης"
 
-#: any.pm:388
-#: any.pm:419
+#: any.pm:396 any.pm:427
 #, c-format
 msgid "Bootloader to use"
 msgstr "Χρήση προγράμματος εκκίνησης"
 
-#: any.pm:390
-#: any.pm:421
+#: any.pm:398 any.pm:429
 #, c-format
 msgid "Boot device"
 msgstr "Συσκευή εκκίνησης"
 
-#: any.pm:392
+#: any.pm:400
 #, c-format
 msgid "Main options"
 msgstr "Βασικές ρυθμίσεις"
 
-#: any.pm:393
+#: any.pm:401
 #, c-format
 msgid "Delay before booting default image"
 msgstr "Καθυστέρηση πριν την εκκίνηση"
 
-#: any.pm:394
+#: any.pm:402
 #, c-format
 msgid "Enable ACPI"
 msgstr "Ενεργοποίηση ACPI"
 
-#: any.pm:395
+#: any.pm:403
 #, c-format
 msgid "Enable APIC"
 msgstr "Ενεργοποίηση του ACPI"
 
-#: any.pm:396
+#: any.pm:404
 #, c-format
 msgid "Enable Local APIC"
 msgstr "Ενεργοποίηση του Τοπικού ACPI"
 
-#: any.pm:398
-#: any.pm:785
-#: any.pm:794
-#: authentication.pm:197
+#: any.pm:406 any.pm:794 any.pm:803 authentication.pm:240
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
 msgstr "Κωδικός Πρόσβασης"
 
-#: any.pm:400
-#: authentication.pm:208
+#: any.pm:408 authentication.pm:251
 #, c-format
 msgid "The passwords do not match"
 msgstr "Οι κωδικοί πρόσβασης είναι ανόμοιοι"
 
-#: any.pm:400
-#: authentication.pm:208
-#: diskdrake/interactive.pm:1299
+#: any.pm:408 authentication.pm:251 diskdrake/interactive.pm:1300
 #, c-format
 msgid "Please try again"
 msgstr "Παρακαλώ προσπαθήστε ξανά"
 
-#: any.pm:401
+#: any.pm:409
 #, c-format
 msgid "You can not use a password with %s"
 msgstr "Δεν μπορείς να χρησιμοποιήσεις ένα κωδικό πρόσβασης με το %s"
 
-#: any.pm:404
-#: any.pm:787
-#: any.pm:796
-#: authentication.pm:198
+#: any.pm:412 any.pm:796 any.pm:805 authentication.pm:241
 #, c-format
 msgid "Password (again)"
 msgstr "Κωδικός Πρόσβασης (ξανά)"
 
-#: any.pm:405
+#: any.pm:413
 #, c-format
 msgid "Restrict command line options"
 msgstr "Απαγόρευση επιλογών γραμμής εντολής"
 
-#: any.pm:405
+#: any.pm:413
 #, c-format
 msgid "restrict"
 msgstr "απαγόρευση"
 
-#: any.pm:406
+#: any.pm:414
 #, c-format
-msgid "Option ``Restrict command line options'' is of no use without a password"
-msgstr "Η επιλογή ``Απαγόρευση επιλογών γραμμής εντολής'' είναι άχρηστη χωρίς κωδικό πρόσβασης"
+msgid ""
+"Option ``Restrict command line options'' is of no use without a password"
+msgstr ""
+"Η επιλογή ``Απαγόρευση επιλογών γραμμής εντολής'' είναι άχρηστη χωρίς κωδικό "
+"πρόσβασης"
 
-#: any.pm:408
+#: any.pm:416
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Καθαρισμός /tmp σε κάθε εκκίνηση"
 
-#: any.pm:409
+#: any.pm:417
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
 msgstr "Ακριβής ποσότητας μνήμης αν χρειάζεται (εντοπίστηκαν %d MB)"
 
-#: any.pm:410
+#: any.pm:418
 #, c-format
 msgid "Give the ram size in MB"
 msgstr "Εισάγετε μέγεθος μνήμης σε MB"
 
-#: any.pm:420
+#: any.pm:428
 #, c-format
 msgid "Init Message"
 msgstr "Μήνυμα Init"
 
-#: any.pm:422
+#: any.pm:430
 #, c-format
 msgid "Open Firmware Delay"
 msgstr "Άνοιγμα Καθυστέρησης Firmware"
 
-#: any.pm:423
+#: any.pm:431
 #, c-format
 msgid "Kernel Boot Timeout"
 msgstr "Τέλος Χρόνου Εκκίνησης Πυρήνα"
 
-#: any.pm:424
+#: any.pm:432
 #, c-format
 msgid "Enable CD Boot?"
 msgstr "Ενεργοποίηση εκκίνησης από CD;"
 
-#: any.pm:425
+#: any.pm:433
 #, c-format
 msgid "Enable OF Boot?"
 msgstr "Ενεργοποίηση OF εκκίνησης;"
 
-#: any.pm:426
+#: any.pm:434
 #, c-format
 msgid "Default OS?"
 msgstr "Εξ ορισμού λειτουργικό;"
 
-#: any.pm:493
+#: any.pm:501
 #, c-format
 msgid "Image"
 msgstr "Εικόνα"
 
-#: any.pm:494
-#: any.pm:507
+#: any.pm:502 any.pm:515
 #, c-format
 msgid "Root"
 msgstr "Root"
 
-#: any.pm:495
-#: any.pm:520
+#: any.pm:503 any.pm:528
 #, c-format
 msgid "Append"
 msgstr "Προσάρτηση"
 
-#: any.pm:497
+#: any.pm:505
 #, c-format
 msgid "Xen append"
 msgstr "Xen προσθήκη"
 
-#: any.pm:500
+#: any.pm:508
 #, c-format
 msgid "Video mode"
 msgstr "Ανάλυση οθόνης"
 
-#: any.pm:502
+#: any.pm:510
 #, c-format
 msgid "Initrd"
 msgstr "Initrd"
 
-#: any.pm:503
+#: any.pm:511
 #, c-format
 msgid "Network profile"
 msgstr "Προφίλ δικτύου"
 
-#: any.pm:512
-#: any.pm:517
-#: any.pm:519
-#: diskdrake/interactive.pm:374
+#: any.pm:520 any.pm:525 any.pm:527 diskdrake/interactive.pm:376
 #, c-format
 msgid "Label"
 msgstr "Ετικέτα"
 
-#: any.pm:514
-#: any.pm:522
-#: harddrake/v4l.pm:438
+#: any.pm:522 any.pm:530 harddrake/v4l.pm:438
 #, c-format
 msgid "Default"
 msgstr "Προεπιλεγμένο"
 
-#: any.pm:521
+#: any.pm:529
 #, c-format
 msgid "NoVideo"
 msgstr "ΧωρίςVideo"
 
-#: any.pm:532
+#: any.pm:540
 #, c-format
 msgid "Empty label not allowed"
 msgstr "Δεν επιτρέπεται άδεια ετικέτα"
 
-#: any.pm:533
+#: any.pm:541
 #, c-format
 msgid "You must specify a kernel image"
 msgstr "Πρέπει να ορίσετε μια εικόνα πυρήνα"
 
-#: any.pm:533
+#: any.pm:541
 #, c-format
 msgid "You must specify a root partition"
 msgstr "Πρέπει να ορίσετε μια κατάτμηση root"
 
-#: any.pm:534
+#: any.pm:542
 #, c-format
 msgid "This label is already used"
 msgstr "Αυτή η ετικέτα χρησιμοποιείται ήδη"
 
-#: any.pm:552
+#: any.pm:560
 #, c-format
 msgid "Which type of entry do you want to add?"
 msgstr "Τι τύπου επιλογή θέλετε να προσθέσετε;"
 
-#: any.pm:553
+#: any.pm:561
 #, c-format
 msgid "Linux"
 msgstr "Linux"
 
-#: any.pm:553
+#: any.pm:561
 #, c-format
 msgid "Other OS (SunOS...)"
 msgstr "Άλλο λειτουργικό (SunOS...)"
 
-#: any.pm:554
+#: any.pm:562
 #, c-format
 msgid "Other OS (MacOS...)"
 msgstr "Άλλο λειτουργικό (MacOS...)"
 
-#: any.pm:554
+#: any.pm:562
 #, c-format
 msgid "Other OS (Windows...)"
 msgstr "Άλλο λειτουργικό (Windows...)"
 
-#: any.pm:582
+#: any.pm:590
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -378,192 +370,185 @@ msgstr ""
 "Υπάρχουν οι ακόλουθες επιλογές.\n"
 "Μπορείτε να προσθέσετε κι άλλες ή να αλλάξετε τις υπάρχουσες."
 
-#: any.pm:745
+#: any.pm:754
 #, c-format
 msgid "access to X programs"
 msgstr "πρόσβαση σε προγράμματα Χ"
 
-#: any.pm:746
+#: any.pm:755
 #, c-format
 msgid "access to rpm tools"
 msgstr "πρόσβαση σε εργαλεία rpm"
 
-#: any.pm:747
+#: any.pm:756
 #, c-format
 msgid "allow \"su\""
 msgstr "δυνατότητα \"su\""
 
-#: any.pm:748
+#: any.pm:757
 #, c-format
 msgid "access to administrative files"
 msgstr "πρόσβαση σε διαχειριστικά αρχεία"
 
-#: any.pm:749
+#: any.pm:758
 #, c-format
 msgid "access to network tools"
 msgstr "πρόσβαση σε εργαλεία δικτύου"
 
-#: any.pm:750
+#: any.pm:759
 #, c-format
 msgid "access to compilation tools"
 msgstr "πρόσβαση σε εργαλεία σύνθεσης"
 
-#: any.pm:756
+#: any.pm:765
 #, c-format
 msgid "(already added %s)"
 msgstr "(το %s έχει ήδη προστεθεί)"
 
-#: any.pm:762
+#: any.pm:771
 #, c-format
 msgid "Please give a user name"
 msgstr "Παρακαλώ εισάγετε όνομα χρήστη"
 
-#: any.pm:763
+#: any.pm:772
 #, c-format
-msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
-msgstr "Το κωδικό όνομα μπορεί να περιέχει μόνο πεζά γράμματα, αριθμούς, `-' και `_'"
+msgid ""
+"The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgstr ""
+"Το κωδικό όνομα μπορεί να περιέχει μόνο πεζά γράμματα, αριθμούς, `-' και `_'"
 
-#: any.pm:764
+#: any.pm:773
 #, c-format
 msgid "The user name is too long"
 msgstr "Αυτό το όνομα χρήστη είναι πολύ μακρύ"
 
-#: any.pm:765
+#: any.pm:774
 #, c-format
 msgid "This user name has already been added"
 msgstr "Αυτό το όνομα χρήστη υπάρχει ήδη"
 
-#: any.pm:771
-#: any.pm:798
+#: any.pm:780 any.pm:807
 #, c-format
 msgid "User ID"
 msgstr "ID Χρήστη"
 
-#: any.pm:771
-#: any.pm:799
+#: any.pm:780 any.pm:808
 #, c-format
 msgid "Group ID"
 msgstr "ID Ομάδας"
 
-#: any.pm:772
+#: any.pm:781
 #, c-format
 msgid "%s must be a number"
 msgstr "Το %s πρέπει να είναι αριθμός"
 
-#: any.pm:773
+#: any.pm:782
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
 msgstr "το %s θα πρέπει να είναι πάνω από 500. Αποδοχή, έτσι κι αλλιώς;"
 
-#: any.pm:777
+#: any.pm:786
 #, c-format
 msgid "User management"
 msgstr "Διαχείριση χρηστών"
 
-#: any.pm:784
-#: authentication.pm:183
+#: any.pm:793 authentication.pm:226
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "Όρισε τον κωδικό πρόσβασης του διαχειριστή (root)"
 
-#: any.pm:789
+#: any.pm:798
 #, c-format
 msgid "Enter a user"
 msgstr "Εισήγαγε ένα χρήστη"
 
-#: any.pm:790
+#: any.pm:799
 #, c-format
 msgid "Real name"
 msgstr "Πραγματικό όνομα"
 
-#: any.pm:793
+#: any.pm:802
 #, c-format
 msgid "Login name"
 msgstr "Όνομα σύνδεσης"
 
-#: any.pm:797
+#: any.pm:806
 #, c-format
 msgid "Shell"
 msgstr "Φλοιός (shell)"
 
-#: any.pm:811
+#: any.pm:810
 #, c-format
 msgid "Icon"
 msgstr "Εικονίδιο"
 
-#: any.pm:848
-#: security/l10n.pm:14
+#: any.pm:848 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "Αυτόματη σύνδεση"
 
-#: any.pm:836
+#: any.pm:849
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
-msgstr "Μπορώ να ρυθμίσω το σύστημά σας έτσι ώστε να συνδέει αυτόματα έναν χρήστη."
+msgstr ""
+"Μπορώ να ρυθμίσω το σύστημά σας έτσι ώστε να συνδέει αυτόματα έναν χρήστη."
 
-#: any.pm:837
+#: any.pm:850
 #, c-format
 msgid "Use this feature"
 msgstr "Χρήση αυτής της λειτουργίας"
 
-#: any.pm:838
+#: any.pm:851
 #, c-format
 msgid "Choose the default user:"
 msgstr "Επιλέξτε τον προεπιλεγμένο χρήστη:"
 
-#: any.pm:839
+#: any.pm:852
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Επιλέξτε τον διαχειριστή παραθύρων που θέλετε να χρησιμοποιήσετε:"
 
-#: any.pm:862
-#: any.pm:912
+#: any.pm:875 any.pm:925
 #, c-format
 msgid "Release Notes"
 msgstr "Σημειώσεις Έκδοσης"
 
-#: any.pm:869
-#: any.pm:1201
-#: interactive/gtk.pm:766
+#: any.pm:882 any.pm:1221 interactive/gtk.pm:766
 #, c-format
 msgid "Close"
 msgstr "Κλείσιμο"
 
-#: any.pm:905
+#: any.pm:918
 #, c-format
 msgid "License agreement"
 msgstr "Άδεια χρήσης"
 
-#: any.pm:908
-#: diskdrake/dav.pm:26
+#: any.pm:921 diskdrake/dav.pm:26
 #, c-format
 msgid "Quit"
 msgstr "Έξοδος"
 
-#: any.pm:915
+#: any.pm:928
 #, c-format
 msgid "Accept"
 msgstr "Αποδοχή"
 
-#: any.pm:915
+#: any.pm:928
 #, c-format
 msgid "Refuse"
 msgstr "Άρνηση"
 
-#: any.pm:930
-#: any.pm:996
+#: any.pm:948 any.pm:1015
 #, c-format
 msgid "Please choose a language to use."
 msgstr "Παρακαλώ επιλέξτε τη γλώσσα."
 
-#: any.pm:931
-#: any.pm:997
+#: any.pm:949 any.pm:1016
 #, c-format
 msgid "Language choice"
 msgstr "Επιλογή γλώσσας"
 
-#: any.pm:961
+#: any.pm:979
 #, c-format
 msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
@@ -574,419 +559,499 @@ msgstr ""
 "τις άλλες γλώσσες που θα είναι διαθέσιμες μετά το πέρας της \n"
 "εγκατάστασης και την επανεκκίνηση του συστήματός σας."
 
-#: any.pm:964
+#: any.pm:982
 #, c-format
 msgid "Multi languages"
 msgstr "Πολλαπλές γλώσσες"
 
-#: any.pm:975
-#: any.pm:1005
+#: any.pm:993 any.pm:1024
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr "Κωδικοποίηση παλιάς συμβατότητας (μη UTF-8)"
 
-#: any.pm:977
+#: any.pm:995
 #, c-format
 msgid "All languages"
 msgstr "Όλες οι γλώσσες"
 
-#: any.pm:1052
+#: any.pm:1071
 #, c-format
 msgid "Country / Region"
 msgstr "Χώρα"
 
-#: any.pm:1054
+#: any.pm:1073
 #, c-format
 msgid "Please choose your country."
 msgstr "Παρακαλώ επιλέξτε την χώρα σας."
 
-#: any.pm:1056
+#: any.pm:1075
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Αυτή είναι η πλήρης λίστα των διαθέσιμων χωρών"
 
-#: any.pm:1057
+#: any.pm:1076
 #, c-format
 msgid "Other Countries"
 msgstr "Άλλες Χώρες"
 
-#: any.pm:1057
-#: interactive.pm:481
+#: any.pm:1076 interactive.pm:481
 #, c-format
 msgid "Advanced"
 msgstr "Για Προχωρημένους"
 
-#: any.pm:1063
+#: any.pm:1082
 #, c-format
 msgid "Input method:"
 msgstr "Μέθοδος εισαγωγής:"
 
-#: any.pm:1066
+#: any.pm:1085
 #, c-format
 msgid "None"
 msgstr "Κανένας"
 
-#: any.pm:1146
+#: any.pm:1166
 #, c-format
 msgid "No sharing"
 msgstr "Χωρίς κοινή χρήση"
 
-#: any.pm:1146
+#: any.pm:1166
 #, c-format
 msgid "Allow all users"
 msgstr "Επιτρέπεται για όλους τους χρήστες"
 
-#: any.pm:1146
+#: any.pm:1166
 #, c-format
 msgid "Custom"
 msgstr "Προσαρμοσμένο"
 
-#: any.pm:1150
+#: any.pm:1170
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
-"Allowing this will permit users to simply click on \"Share\" in konqueror and nautilus.\n"
+"Allowing this will permit users to simply click on \"Share\" in konqueror "
+"and nautilus.\n"
 "\n"
 "\"Custom\" permit a per-user granularity.\n"
 msgstr ""
 "Θέλετε να επιτρέψετε στους χρήστες να έχουν κοινόχρηστους καταλόγους;\n"
-"Αν ναι τότε οι χρήστες θα μπορούν απλά να κάνουν κλικ στο \"Κοινόχρηστο\" στον konqueror και το nautilus.\n"
+"Αν ναι τότε οι χρήστες θα μπορούν απλά να κάνουν κλικ στο \"Κοινόχρηστο\" "
+"στον konqueror και το nautilus.\n"
 "\n"
 "Το \"Προσαρμοσμένο\" επιτρέπει την ανά χρήστη ρύθμιση.\n"
 
-#: any.pm:1162
+#: any.pm:1182
 #, c-format
-msgid "NFS: the traditional Unix file sharing system, with less support on Mac and Windows."
-msgstr "NFS: το παραδοσιακό σύστημα κοινής χρήσης του Unix, με περιορισμένη υποστήριξη για Mac και Microsoft Windows."
+msgid ""
+"NFS: the traditional Unix file sharing system, with less support on Mac and "
+"Windows."
+msgstr ""
+"NFS: το παραδοσιακό σύστημα κοινής χρήσης του Unix, με περιορισμένη "
+"υποστήριξη για Mac και Microsoft Windows."
 
-#: any.pm:1165
+#: any.pm:1185
 #, c-format
-msgid "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux systems."
-msgstr "SMB: ένα σύστημα κοινής χρήσης, που χρησιμοποιείται από τα Microsoft Windows, από το Mac OS X και από πολλά μοντέρνα συστήματα Λίνουξ."
+msgid ""
+"SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
+"systems."
+msgstr ""
+"SMB: ένα σύστημα κοινής χρήσης, που χρησιμοποιείται από τα Microsoft "
+"Windows, από το Mac OS X και από πολλά μοντέρνα συστήματα Λίνουξ."
 
-#: any.pm:1173
+#: any.pm:1193
 #, c-format
-msgid "You can export using NFS or SMB. Please select which you would like to use."
-msgstr "Μπορείτε να γίνει εξαγωγή με την χρήση NFS ή SMB. Παρακαλώ επιλέξτε ποίο θέλετε."
+msgid ""
+"You can export using NFS or SMB. Please select which you would like to use."
+msgstr ""
+"Μπορείτε να γίνει εξαγωγή με την χρήση NFS ή SMB. Παρακαλώ επιλέξτε ποίο "
+"θέλετε."
 
-#: any.pm:1201
+#: any.pm:1221
 #, c-format
 msgid "Launch userdrake"
 msgstr "Εκκίνηση userdrake"
 
-#: any.pm:1203
+#: any.pm:1223
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
 "You can use userdrake to add a user to this group."
 msgstr ""
 "Το κοινόχρηστο ανά χρήστη κάνει χρήση της ομάδας \"fileshare\". \n"
-"Μπορείτε να την προσθέσετε στον κάθε χρήστη σε αυτή την ομάδα με το userdrake."
+"Μπορείτε να την προσθέσετε στον κάθε χρήστη σε αυτή την ομάδα με το "
+"userdrake."
 
-#: any.pm:1295
+#: any.pm:1315
 #, c-format
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr "Παρακαλώ αποσυνδεθείτε και μετά πατήστε Ctrl-Alt-BackSpace"
 
-#: any.pm:1299
+#: any.pm:1319
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
-msgstr "Για να εφαρμοστούν οι αλλαγές, θα πρέπει να αποσυνδεθείς και μετά να ξανασυνδεθείς"
+msgstr ""
+"Για να εφαρμοστούν οι αλλαγές, θα πρέπει να αποσυνδεθείς και μετά να "
+"ξανασυνδεθείς"
 
-#: any.pm:1334
+#: any.pm:1354
 #, c-format
 msgid "Timezone"
 msgstr "Ωρολογιακή Ζώνη"
 
-#: any.pm:1334
+#: any.pm:1354
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Ποια είναι η ζώνη ώρας;"
 
-#: any.pm:1346
-#: any.pm:1348
+#: any.pm:1377 any.pm:1379
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Ημερομηνία, Ρολόι κ' Ρυθμίσεις Ζώνης Ώρας"
 
-#: any.pm:1349
+#: any.pm:1380
 #, c-format
 msgid "What is the best time?"
 msgstr "Ποια είναι η σωσότερη ώρα;"
 
-#: any.pm:1353
+#: any.pm:1384
 #, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "%s (το ρολόι της μητρικής κάρτας έχει οριστεί σε UTC)"
 
-#: any.pm:1354
+#: any.pm:1385
 #, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "%s (το ρολόι της μητρικής κάρτας έχει οριστεί στην τοπική ώρα)"
 
-#: any.pm:1356
+#: any.pm:1387
 #, c-format
 msgid "NTP Server"
 msgstr "Εξυπηρετητής NTP"
 
-#: any.pm:1357
+#: any.pm:1388
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Αυτόματος συγχρονισμός ώρας (χρήση NTP)"
 
-#: authentication.pm:24
+#: authentication.pm:25
 #, c-format
 msgid "Local file"
 msgstr "Τοπικό αρχείο"
 
-#: authentication.pm:25
+#: authentication.pm:26
 #, c-format
 msgid "LDAP"
 msgstr "LDAP"
 
-#: authentication.pm:26
+#: authentication.pm:27
 #, c-format
 msgid "NIS"
 msgstr "NIS"
 
-#: authentication.pm:27
+#: authentication.pm:28
 #, c-format
 msgid "Smart Card"
 msgstr "Smart Card"
 
-#: authentication.pm:28
-#: authentication.pm:164
+#: authentication.pm:29 authentication.pm:205
 #, c-format
 msgid "Windows Domain"
 msgstr "Τομέας Microsoft Windows "
 
-#: authentication.pm:29
-#, c-format
-msgid "Active Directory with SFU"
-msgstr "Ενεργός Κατάλογος με SFU"
-
 #: authentication.pm:30
 #, c-format
-msgid "Active Directory with Winbind"
-msgstr "Ενεργός Κατάλογος με Winbind"
+msgid "Kerberos 5"
+msgstr ""
 
-#: authentication.pm:67
+#: authentication.pm:64
 #, c-format
 msgid "Local file:"
 msgstr "Τοπικό αρχείο:"
 
-#: authentication.pm:67
+#: authentication.pm:64
 #, c-format
-msgid "Use information stored in local files for all authentication"
-msgstr "Για όλες τις αυθεντικοποιήσεις, να γίνεται χρήση των πληροφοριών που είναι αποθηκευμένες σε τοπικά αρχεία"
+msgid ""
+"Use local for all authentication and information user tell in local file"
+msgstr ""
 
-#: authentication.pm:68
+#: authentication.pm:65
 #, c-format
 msgid "LDAP:"
 msgstr "LDAP:"
 
-#: authentication.pm:68
+#: authentication.pm:65
 #, c-format
-msgid "Tells your computer to use LDAP for some or all authentication. LDAP consolidates certain types of information within your organization."
-msgstr "Λέει στον υπολογιστή σου να χρησιμοποιήσει το LDAP, για κάποιες ή όλες τις αυθεντικοποιήσεις. Το LDAP συγκεντρώνει κάποιες συγκεκριμένες πληροφορίες στα πλαίσια του οργανισμού σου."
+msgid ""
+"Tells your computer to use LDAP for some or all authentication. LDAP "
+"consolidates certain types of information within your organization."
+msgstr ""
+"Λέει στον υπολογιστή σου να χρησιμοποιήσει το LDAP, για κάποιες ή όλες τις "
+"αυθεντικοποιήσεις. Το LDAP συγκεντρώνει κάποιες συγκεκριμένες πληροφορίες "
+"στα πλαίσια του οργανισμού σου."
 
-#: authentication.pm:69
+#: authentication.pm:66
 #, c-format
 msgid "NIS:"
 msgstr "NIS:"
 
-#: authentication.pm:69
+#: authentication.pm:66
 #, c-format
-msgid "Allows you to run a group of computers in the same Network Information Service domain with a common password and group file."
-msgstr "Επιτρέπει τη λειτουργία μιας ομάδας υπολογιστών στον ίδιο τομέα (domain) Υπηρεσίας Πληροφοριών Δικτύου, με τη χρήση ενός κοινού κώδικα ασφαλείας και αρχείου ομάδας."
+msgid ""
+"Allows you to run a group of computers in the same Network Information "
+"Service domain with a common password and group file."
+msgstr ""
+"Επιτρέπει τη λειτουργία μιας ομάδας υπολογιστών στον ίδιο τομέα (domain) "
+"Υπηρεσίας Πληροφοριών Δικτύου, με τη χρήση ενός κοινού κώδικα ασφαλείας και "
+"αρχείου ομάδας."
 
-#: authentication.pm:70
+#: authentication.pm:67
 #, c-format
 msgid "Windows Domain:"
 msgstr "Τομέας Microsoft Windows:"
 
-#: authentication.pm:70
+#: authentication.pm:67
 #, c-format
-msgid "Winbind allows the system to retrieve information and authenticate users in a Windows domain."
-msgstr "Το Winbind επιτρέπει στο σύστημα να λαμβάνει πληροφορίες και να αυθεντικοποιεί χρήστες σε ένα τομέα (domain) Microsoft Windows."
+msgid ""
+"Winbind allows the system to retrieve information and authenticate users in "
+"a Windows domain."
+msgstr ""
+"Το Winbind επιτρέπει στο σύστημα να λαμβάνει πληροφορίες και να "
+"αυθεντικοποιεί χρήστες σε ένα τομέα (domain) Microsoft Windows."
 
-#: authentication.pm:71
+#: authentication.pm:68
 #, c-format
-msgid "Active Directory with SFU:"
-msgstr "Ενεργός Κατάλογος με SFU:"
+msgid "Kerberos 5 :"
+msgstr ""
 
-#: authentication.pm:71
+#: authentication.pm:68
 #, c-format
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
-msgstr "Με το Kerberos και το Ldap για την αυθεντικοποίηση σε Εξυπηρετητή Ενεργού Καταλόγου"
+msgstr ""
+"Με το Kerberos και το Ldap για την αυθεντικοποίηση σε Εξυπηρετητή Ενεργού "
+"Καταλόγου"
 
-#: authentication.pm:72
+#: authentication.pm:96 authentication.pm:130 authentication.pm:149
+#: authentication.pm:150 authentication.pm:176 authentication.pm:200
+#: authentication.pm:872
 #, c-format
-msgid "Active Directory with Winbind:"
-msgstr "Ενεργός Κατάλογος με Winbind:"
+msgid " "
+msgstr ""
 
-#: authentication.pm:72
-#, c-format
-msgid "Winbind allows the system to authenticate users in a Windows Active Directory Server."
-msgstr "Το Winbind επιτρέπει στο σύστημα να αυθεντικοποιεί τους χρήστες σε έναν Εξυπηρετητή Ενεργού Καταλόγου των Microsoft Windows."
-
-#: authentication.pm:97
-#, c-format
-msgid "Authentication LDAP"
-msgstr "Πιστοποίηση LDAP"
-
-#: authentication.pm:98
-#, c-format
-msgid "LDAP Base dn"
-msgstr "LDAP Base dn"
+#: authentication.pm:97 authentication.pm:131 authentication.pm:177
+#: authentication.pm:201
+#, fuzzy, c-format
+msgid "Welcome to the Authentication Wizard"
+msgstr "Απαιτείται Πιστοποίηση Τομέα"
 
 #: authentication.pm:99
+#, c-format
+msgid ""
+"You have selected LDAP authentication. Please review the configuration "
+"options below "
+msgstr ""
+
+#: authentication.pm:101 authentication.pm:156
 #, c-format
 msgid "LDAP Server"
 msgstr "Εξυπηρετητής LDAP"
 
-#: authentication.pm:112
-#: fsedit.pm:23
-#, c-format
-msgid "simple"
-msgstr "απλό"
+#: authentication.pm:102 authentication.pm:157
+#, fuzzy, c-format
+msgid "Base dn"
+msgstr "LDAP Base dn"
 
-#: authentication.pm:113
+#: authentication.pm:103 authentication.pm:158
 #, c-format
-msgid "TLS"
-msgstr "TLS"
+msgid "Fecth base Dn "
+msgstr ""
+
+#: authentication.pm:105 authentication.pm:160
+#, c-format
+msgid "Use encrypt connection with TLS "
+msgstr ""
+
+#: authentication.pm:106 authentication.pm:161
+#, c-format
+msgid "Download CA Certificate "
+msgstr ""
+
+#: authentication.pm:108 authentication.pm:141
+#, c-format
+msgid "Use Disconnect mode "
+msgstr ""
+
+#: authentication.pm:109 authentication.pm:162
+#, fuzzy, c-format
+msgid "Use anonymous BIND "
+msgstr "Χρήση ανώνυμης BIND (σύνδεσης)"
+
+#: authentication.pm:110 authentication.pm:113 authentication.pm:115
+#: authentication.pm:119
+#, c-format
+msgid "  "
+msgstr ""
+
+#: authentication.pm:111 authentication.pm:163
+#, c-format
+msgid "Bind DN "
+msgstr ""
+
+#: authentication.pm:112 authentication.pm:164
+#, fuzzy, c-format
+msgid "Bind Password "
+msgstr "Κωδικός Πρόσβασης"
 
 #: authentication.pm:114
 #, c-format
-msgid "SSL"
-msgstr "SSL"
+msgid "Advanced path for group "
+msgstr ""
 
-#: authentication.pm:115
+#: authentication.pm:116
+#, fuzzy, c-format
+msgid "Password base"
+msgstr "Κωδικός Πρόσβασης"
+
+#: authentication.pm:117
+#, fuzzy, c-format
+msgid "Group base"
+msgstr "ID Ομάδας"
+
+#: authentication.pm:118
 #, c-format
-msgid "security layout (SASL/Kerberos)"
-msgstr "διάταξη ασφαλείας (SASL/Kerberos)"
+msgid "Sahdow base"
+msgstr ""
 
-#: authentication.pm:122
-#: authentication.pm:160
+#: authentication.pm:133
 #, c-format
-msgid "Authentication Active Directory"
-msgstr "Ενεργός Κατάλογος Αυθεντικοποίησης"
+msgid ""
+"You have selected Kerberos 5 authentication. Please review the configuration "
+"options below "
+msgstr ""
 
-#: authentication.pm:123
-#: diskdrake/smbnfs_gtk.pm:182
+#: authentication.pm:135
+#, fuzzy, c-format
+msgid "Realm "
+msgstr "Πραγματικό όνομα"
+
+#: authentication.pm:137
+#, fuzzy, c-format
+msgid "KDCs Servers"
+msgstr "Εξυπηρετητής LDAP"
+
+#: authentication.pm:139
 #, c-format
-msgid "Domain"
-msgstr "Τομέας (domain)"
+msgid "Use DNS to resolve hosts for realms "
+msgstr ""
 
-#: authentication.pm:125
-#: diskdrake/dav.pm:63
+#: authentication.pm:140
 #, c-format
-msgid "Server"
-msgstr "Εξυπηρετητής"
+msgid "Use DNS to resolve KDCs for realms "
+msgstr ""
 
-#: authentication.pm:126
+#: authentication.pm:145
+#, fuzzy, c-format
+msgid "Use local file for users informations"
+msgstr "Χρήση libsafe για διακομιστές"
+
+#: authentication.pm:146
+#, fuzzy, c-format
+msgid "Use Ldap for users informations"
+msgstr "Πληροφορίες σκληρού δίσκου"
+
+#: authentication.pm:152
 #, c-format
-msgid "LDAP users database"
-msgstr "Βάση δεδομένων χρηστών LDAP"
+msgid ""
+"You have selected Kerberos 5 for authentication, now you must choose the "
+"type of users information "
+msgstr ""
 
-#: authentication.pm:127
+#: authentication.pm:179
 #, c-format
-msgid "Use Anonymous BIND "
-msgstr "Χρήση ανώνυμης BIND (σύνδεσης)"
+msgid ""
+"You have selected NIS authentication. Please review the configuration "
+"options below "
+msgstr ""
 
-#: authentication.pm:128
-#, c-format
-msgid "LDAP user allowed to browse the Active Directory"
-msgstr "Επιτρέπεται στον χρήστη LDAP να εξερευνεί το Ενεργό Κατάλογο"
-
-#: authentication.pm:129
-#, c-format
-msgid "Password for user"
-msgstr "Κωδικός πρόσβασης για το χρήστη"
-
-#: authentication.pm:141
-#, c-format
-msgid "Authentication NIS"
-msgstr "Πιστοποίηση NIS"
-
-#: authentication.pm:142
+#: authentication.pm:181
 #, c-format
 msgid "NIS Domain"
 msgstr "Τομέας NIS"
 
-#: authentication.pm:143
+#: authentication.pm:182
 #, c-format
 msgid "NIS Server"
 msgstr "Εξυπηρετητής NIS"
 
-#: authentication.pm:148
-#, fuzzy, c-format
-msgid ""
-"For this to work for a W2K PDC, you will probably need to have the admin run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add and reboot the server.\n"
-"You will also need the username/password of a Domain Admin to join the machine to the Windows(TM) domain.\n"
-"If networking is not yet enabled, Drakx will attempt to join the domain after the network setup step.\n"
-"Should this setup fail for some reason and domain authentication is not working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows(tm) Domain, and Admin Username/Password, after system boot.\n"
-"The command 'wbinfo -t' will test whether your authentication secrets are good."
-msgstr ""
-"Τομέας Windows  εξυπηρετητής\n"
-" Τομέας Τομέας Windows \n"
-"\n"
-" Τομέας Windows  Τομέας Όνομα χρήστη Κωδικός Πρόσβασης\n"
-"."
-
-#: authentication.pm:160
+#: authentication.pm:203
 #, c-format
-msgid "Authentication Windows Domain"
-msgstr "Πιστοποίηση Τομέα Microsoft Windows"
+msgid ""
+"You have selected Windows Domain authentication. Please review the "
+"configuration options below "
+msgstr ""
 
-#: authentication.pm:162
+#: authentication.pm:207
+#, fuzzy, c-format
+msgid "Domain Model "
+msgstr "Τομέας (domain)"
+
+#: authentication.pm:209
 #, c-format
 msgid "Active Directory Realm "
 msgstr "Realm Ενεργού Καταλόγου"
 
-#: authentication.pm:165
-#, c-format
-msgid "Domain Admin User Name"
-msgstr "Όνομα Χρήστη του Διαχειριστή Τομέα"
-
-#: authentication.pm:166
-#, c-format
-msgid "Domain Admin Password"
-msgstr "Κωδικός Πρόσβασης του Διαχειριστή Τομέα"
-
-#: authentication.pm:182
-#: authentication.pm:199
+#: authentication.pm:225 authentication.pm:242
 #, c-format
 msgid "Authentication"
 msgstr "Πιστοποίηση"
 
-#: authentication.pm:185
+#: authentication.pm:228
 #, c-format
 msgid "Authentication method"
 msgstr "Μέθοδος ταυτοποίησης"
 
 #. -PO: keep this short or else the buttons will not fit in the window
-#: authentication.pm:190
+#: authentication.pm:233
 #, c-format
 msgid "No password"
 msgstr "Χωρίς κωδικό πρόσβασης"
 
-#: authentication.pm:211
+#: authentication.pm:254
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
-msgstr "Αυτός ο κωδικός πρόσβασης είναι πολύ απλός (πρέπει να έχει τουλάχιστον %d χαρακτήρες)"
+msgstr ""
+"Αυτός ο κωδικός πρόσβασης είναι πολύ απλός (πρέπει να έχει τουλάχιστον %d "
+"χαρακτήρες)"
 
-#: authentication.pm:352
+#: authentication.pm:354
 #, c-format
 msgid "Can not use broadcast with no NIS domain"
 msgstr "Δεν μπορώ να χρησιμοποιήσω broadcast χωρίς τομέα NIS"
+
+#: authentication.pm:867
+#, c-format
+msgid "Select file"
+msgstr "Επιλέξτε αρχείο"
+
+#: authentication.pm:873
+#, fuzzy, c-format
+msgid "Domain Windows for authentication : "
+msgstr "Απαιτείται Πιστοποίηση Τομέα"
+
+#: authentication.pm:875
+#, c-format
+msgid "Domain Admin User Name"
+msgstr "Όνομα Χρήστη του Διαχειριστή Τομέα"
+
+#: authentication.pm:876
+#, c-format
+msgid "Domain Admin Password"
+msgstr "Κωδικός Πρόσβασης του Διαχειριστή Τομέα"
 
 # NOTE: this message will be displayed at boot time; that is
 # only the ascii charset will be available on most machines
 # so use only 7bit for this message (and do transliteration or
 # leave it in English, as it is the best for your language)
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: bootloader.pm:900
+#: bootloader.pm:942
 #, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
@@ -1001,52 +1066,60 @@ msgstr ""
 "i perimene yia tin proepilegmeni ekkinisi.\n"
 "\n"
 
-#: bootloader.pm:1050
+#: bootloader.pm:1110
 #, c-format
 msgid "LILO with text menu"
 msgstr "LILO με μενού κειμένου"
 
-#: bootloader.pm:1051
+#: bootloader.pm:1111
 #, c-format
 msgid "GRUB with graphical menu"
 msgstr "GRUB με γραφικό μενού "
 
-#: bootloader.pm:1052
+#: bootloader.pm:1112
 #, c-format
 msgid "GRUB with text menu"
 msgstr "GRUB με μενού κειμένου"
 
-#: bootloader.pm:1053
+#: bootloader.pm:1113
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
 
-#: bootloader.pm:1054
+#: bootloader.pm:1114
 #, c-format
 msgid "SILO"
 msgstr "SILO"
 
-#: bootloader.pm:1135
+#: bootloader.pm:1195
 #, c-format
 msgid "not enough room in /boot"
 msgstr "δεν υπάρχει αρκετός χώρος στο /boot"
 
-#: bootloader.pm:1760
+#: bootloader.pm:1843
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
 msgstr "Δεν μπορείτε να εγκαταστήσετε το πρόγραμμα εκκίνησης σε κατάτμηση %s\n"
 
-#: bootloader.pm:1813
+#: bootloader.pm:1964
 #, c-format
-msgid "Your bootloader configuration must be updated because partition has been renumbered"
-msgstr "Η ρύθμιση του προγράμματος εκκίνησης του υπολογιστή σου πρέπει να ανανεωθεί, επειδή κάποιες κατατμήσεις έχουν αλλάξει αριθμούς"
+msgid ""
+"Your bootloader configuration must be updated because partition has been "
+"renumbered"
+msgstr ""
+"Η ρύθμιση του προγράμματος εκκίνησης του υπολογιστή σου πρέπει να ανανεωθεί, "
+"επειδή κάποιες κατατμήσεις έχουν αλλάξει αριθμούς"
 
-#: bootloader.pm:1826
+#: bootloader.pm:1977
 #, c-format
-msgid "The bootloader can not be installed correctly. You have to boot rescue and choose \"%s\""
-msgstr "Το πρόγραμμα εκκίνησης του υπολογιστή σου δεν μπορεί να εγκατασταθεί σωστά. Πρέπει να κάνεις εκκίνηση διάσωσης (boot rescue) και να επιλέξεις το \"%s\""
+msgid ""
+"The bootloader can not be installed correctly. You have to boot rescue and "
+"choose \"%s\""
+msgstr ""
+"Το πρόγραμμα εκκίνησης του υπολογιστή σου δεν μπορεί να εγκατασταθεί σωστά. "
+"Πρέπει να κάνεις εκκίνηση διάσωσης (boot rescue) και να επιλέξεις το \"%s\""
 
-#: bootloader.pm:1827
+#: bootloader.pm:1978
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Επανεγκατάσταση του Προγράμματος Εκκίνησης"
@@ -1071,8 +1144,7 @@ msgstr "MB"
 msgid "GB"
 msgstr "GB"
 
-#: common.pm:142
-#: common.pm:151
+#: common.pm:142 common.pm:151
 #, c-format
 msgid "TB"
 msgstr "TB"
@@ -1092,7 +1164,7 @@ msgstr "1 λεπτό"
 msgid "%d seconds"
 msgstr "%d δευτερόλεπτα"
 
-#: common.pm:335
+#: common.pm:349
 #, c-format
 msgid "command %s missing"
 msgstr "η εντολή %s λείπει"
@@ -1115,77 +1187,52 @@ msgstr ""
 msgid "New"
 msgstr "Νέο"
 
-#: diskdrake/dav.pm:61
-#: diskdrake/interactive.pm:380
-#: diskdrake/smbnfs_gtk.pm:75
+#: diskdrake/dav.pm:61 diskdrake/interactive.pm:382 diskdrake/smbnfs_gtk.pm:75
 #, c-format
 msgid "Unmount"
 msgstr "Αποπροσάρτηση"
 
-#: diskdrake/dav.pm:62
-#: diskdrake/interactive.pm:377
-#: diskdrake/smbnfs_gtk.pm:76
+#: diskdrake/dav.pm:62 diskdrake/interactive.pm:379 diskdrake/smbnfs_gtk.pm:76
 #, c-format
 msgid "Mount"
 msgstr "Προσάρτηση"
 
-#: diskdrake/dav.pm:64
-#: diskdrake/interactive.pm:371
-#: diskdrake/interactive.pm:611
-#: diskdrake/interactive.pm:629
-#: diskdrake/interactive.pm:633
-#: diskdrake/removable.pm:23
+#: diskdrake/dav.pm:63
+#, c-format
+msgid "Server"
+msgstr "Εξυπηρετητής"
+
+#: diskdrake/dav.pm:64 diskdrake/interactive.pm:373
+#: diskdrake/interactive.pm:613 diskdrake/interactive.pm:631
+#: diskdrake/interactive.pm:635 diskdrake/removable.pm:23
 #: diskdrake/smbnfs_gtk.pm:79
 #, c-format
 msgid "Mount point"
 msgstr "Σημείο προσάρτησης"
 
-#: diskdrake/dav.pm:65
-#: diskdrake/interactive.pm:373
-#: diskdrake/interactive.pm:987
-#: diskdrake/removable.pm:24
+#: diskdrake/dav.pm:65 diskdrake/interactive.pm:375
+#: diskdrake/interactive.pm:989 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
 msgstr "Επιλογές"
 
-#: diskdrake/dav.pm:66
-#: diskdrake/hd_gtk.pm:164
-#: diskdrake/removable.pm:26
-#: diskdrake/smbnfs_gtk.pm:82
-#: interactive/http.pm:151
+#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:164 diskdrake/removable.pm:26
+#: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
 #, c-format
 msgid "Done"
 msgstr "Ολοκληρώθηκε"
 
-#: diskdrake/dav.pm:75
-#: diskdrake/hd_gtk.pm:113
-#: diskdrake/interactive.pm:231
-#: diskdrake/interactive.pm:244
-#: diskdrake/interactive.pm:478
-#: diskdrake/interactive.pm:483
-#: diskdrake/interactive.pm:601
-#: diskdrake/interactive.pm:859
-#: diskdrake/interactive.pm:1033
-#: diskdrake/interactive.pm:1046
-#: diskdrake/interactive.pm:1049
-#: diskdrake/interactive.pm:1299
-#: diskdrake/smbnfs_gtk.pm:42
-#: do_pkgs.pm:19
-#: do_pkgs.pm:24
-#: do_pkgs.pm:40
-#: do_pkgs.pm:56
-#: do_pkgs.pm:61
-#: fsedit.pm:223
-#: interactive/http.pm:117
-#: interactive/http.pm:118
-#: modules/interactive.pm:19
-#: scanner.pm:94
-#: scanner.pm:105
-#: scanner.pm:112
-#: scanner.pm:119
-#: wizards.pm:95
-#: wizards.pm:99
+#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:113 diskdrake/hd_gtk.pm:263
+#: diskdrake/interactive.pm:233 diskdrake/interactive.pm:246
+#: diskdrake/interactive.pm:480 diskdrake/interactive.pm:485
+#: diskdrake/interactive.pm:603 diskdrake/interactive.pm:861
+#: diskdrake/interactive.pm:1035 diskdrake/interactive.pm:1048
+#: diskdrake/interactive.pm:1051 diskdrake/interactive.pm:1300
+#: diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23 do_pkgs.pm:28 do_pkgs.pm:44
+#: do_pkgs.pm:60 do_pkgs.pm:65 fsedit.pm:222 interactive/http.pm:117
+#: interactive/http.pm:118 modules/interactive.pm:19 scanner.pm:94
+#: scanner.pm:105 scanner.pm:112 scanner.pm:119 wizards.pm:95 wizards.pm:99
 #: wizards.pm:121
 #, c-format
 msgid "Error"
@@ -1206,38 +1253,28 @@ msgstr "Η διεύθυνση πρέπει να ξεκινά με http:// ή htt
 msgid "Server: "
 msgstr "Εξυπηρετητής:"
 
-#: diskdrake/dav.pm:110
-#: diskdrake/interactive.pm:451
-#: diskdrake/interactive.pm:1179
-#: diskdrake/interactive.pm:1259
+#: diskdrake/dav.pm:110 diskdrake/interactive.pm:453
+#: diskdrake/interactive.pm:1180 diskdrake/interactive.pm:1260
 #, c-format
 msgid "Mount point: "
 msgstr "Σημείο προσάρτησης: "
 
-#: diskdrake/dav.pm:111
-#: diskdrake/interactive.pm:1266
+#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1267
 #, c-format
 msgid "Options: %s"
 msgstr "Επιλογές: %s"
 
-#: diskdrake/hd_gtk.pm:53
-#: diskdrake/interactive.pm:282
-#: diskdrake/smbnfs_gtk.pm:22
-#: fs/mount_point.pm:106
-#: fs/partitioning_wizard.pm:51
-#: fs/partitioning_wizard.pm:205
-#: fs/partitioning_wizard.pm:211
-#: fs/partitioning_wizard.pm:251
-#: fs/partitioning_wizard.pm:270
-#: fs/partitioning_wizard.pm:275
+#: diskdrake/hd_gtk.pm:53 diskdrake/interactive.pm:284
+#: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:106
+#: fs/partitioning_wizard.pm:51 fs/partitioning_wizard.pm:206
+#: fs/partitioning_wizard.pm:212 fs/partitioning_wizard.pm:252
+#: fs/partitioning_wizard.pm:271 fs/partitioning_wizard.pm:276
 #, c-format
 msgid "Partitioning"
 msgstr "Καταμερισμός"
 
-#: diskdrake/hd_gtk.pm:93
-#: diskdrake/interactive.pm:1008
-#: diskdrake/interactive.pm:1018
-#: diskdrake/interactive.pm:1071
+#: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1010
+#: diskdrake/interactive.pm:1020 diskdrake/interactive.pm:1073
 #, c-format
 msgid "Read carefully!"
 msgstr "Διαβάστε προσεκτικά!"
@@ -1247,8 +1284,7 @@ msgstr "Διαβάστε προσεκτικά!"
 msgid "Please make a backup of your data first"
 msgstr "Παρακαλώ κάντε πρώτα ένα αντίγραφο ασφαλείας των δεδομένων σας"
 
-#: diskdrake/hd_gtk.pm:94
-#: diskdrake/interactive.pm:224
+#: diskdrake/hd_gtk.pm:94 diskdrake/interactive.pm:226
 #, c-format
 msgid "Exit"
 msgstr "Έξοδος"
@@ -1261,19 +1297,16 @@ msgstr "Συνέχεια"
 #: diskdrake/hd_gtk.pm:97
 #, c-format
 msgid ""
-"If you plan to use aboot, be careful to leave a free space (2048 sectors is enough)\n"
+"If you plan to use aboot, be careful to leave a free space (2048 sectors is "
+"enough)\n"
 "at the beginning of the disk"
 msgstr ""
-"Εάν σκοπεύετε να χρησιμοποιήσετε το aboot, προσέξτε να αφήσετε ελεύθερο χώρο (2048 τομείς είναι αρκετοί)\n"
+"Εάν σκοπεύετε να χρησιμοποιήσετε το aboot, προσέξτε να αφήσετε ελεύθερο χώρο "
+"(2048 τομείς είναι αρκετοί)\n"
 "στην αρχή του δίσκου"
 
-#: diskdrake/hd_gtk.pm:160
-#: interactive.pm:644
-#: interactive/gtk.pm:744
-#: interactive/gtk.pm:759
-#: interactive/gtk.pm:779
-#: ugtk2.pm:936
-#: ugtk2.pm:937
+#: diskdrake/hd_gtk.pm:160 interactive.pm:644 interactive/gtk.pm:744
+#: interactive/gtk.pm:759 interactive/gtk.pm:779 ugtk2.pm:936 ugtk2.pm:937
 #, c-format
 msgid "Help"
 msgstr "Βοήθεια"
@@ -1299,8 +1332,7 @@ msgstr ""
 msgid "Please click on a partition"
 msgstr "Παρακαλώ κάντε κλικ σε μια κατάτμηση"
 
-#: diskdrake/hd_gtk.pm:215
-#: diskdrake/smbnfs_gtk.pm:63
+#: diskdrake/hd_gtk.pm:215 diskdrake/smbnfs_gtk.pm:63
 #, c-format
 msgid "Details"
 msgstr "Λεπτομέρειες"
@@ -1345,14 +1377,12 @@ msgstr "HFS"
 msgid "Windows"
 msgstr "Windows "
 
-#: diskdrake/hd_gtk.pm:353
-#: services.pm:158
+#: diskdrake/hd_gtk.pm:353 services.pm:158
 #, c-format
 msgid "Other"
 msgstr "Άλλο"
 
-#: diskdrake/hd_gtk.pm:353
-#: diskdrake/interactive.pm:1194
+#: diskdrake/hd_gtk.pm:353 diskdrake/interactive.pm:1195
 #, c-format
 msgid "Empty"
 msgstr "Άδειο"
@@ -1362,22 +1392,13 @@ msgstr "Άδειο"
 msgid "Filesystem types:"
 msgstr "Τύποι συστήματος αρχείων:"
 
-#: diskdrake/hd_gtk.pm:381
-#: diskdrake/interactive.pm:287
-#: diskdrake/interactive.pm:359
-#: diskdrake/interactive.pm:508
-#: diskdrake/interactive.pm:692
-#: diskdrake/interactive.pm:750
-#: diskdrake/interactive.pm:839
-#: diskdrake/interactive.pm:881
-#: diskdrake/interactive.pm:882
-#: diskdrake/interactive.pm:1117
-#: diskdrake/interactive.pm:1155
-#: diskdrake/interactive.pm:1298
-#: do_pkgs.pm:16
-#: do_pkgs.pm:35
-#: do_pkgs.pm:53
-#: harddrake/sound.pm:286
+#: diskdrake/hd_gtk.pm:381 diskdrake/interactive.pm:289
+#: diskdrake/interactive.pm:361 diskdrake/interactive.pm:510
+#: diskdrake/interactive.pm:694 diskdrake/interactive.pm:752
+#: diskdrake/interactive.pm:841 diskdrake/interactive.pm:883
+#: diskdrake/interactive.pm:884 diskdrake/interactive.pm:1118
+#: diskdrake/interactive.pm:1156 diskdrake/interactive.pm:1299 do_pkgs.pm:19
+#: do_pkgs.pm:39 do_pkgs.pm:57 harddrake/sound.pm:422
 #, c-format
 msgid "Warning"
 msgstr "Προσοχή"
@@ -1397,70 +1418,67 @@ msgstr "Κάντε πρώτα ``Αποπροσάρτηση''"
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Χρήση του ``%s'' αντί αυτού (σε κατάσταση λειτουργίας έμπειρου χρήστη)"
 
-#: diskdrake/hd_gtk.pm:390
-#: diskdrake/interactive.pm:372
-#: diskdrake/interactive.pm:546
-#: diskdrake/interactive.pm:1024
-#: diskdrake/removable.pm:25
-#: diskdrake/removable.pm:48
+#: diskdrake/hd_gtk.pm:390 diskdrake/interactive.pm:374
+#: diskdrake/interactive.pm:548 diskdrake/interactive.pm:1026
+#: diskdrake/removable.pm:25 diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
 msgstr "Τύπος"
 
-#: diskdrake/interactive.pm:195
+#: diskdrake/interactive.pm:197
 #, c-format
 msgid "Choose another partition"
 msgstr "Επιλέξτε άλλη κατάτμηση"
 
-#: diskdrake/interactive.pm:195
+#: diskdrake/interactive.pm:197
 #, c-format
 msgid "Choose a partition"
 msgstr "Επιλέξτε κατάτμηση"
 
-#: diskdrake/interactive.pm:257
+#: diskdrake/interactive.pm:259
 #, c-format
 msgid "Toggle to normal mode"
 msgstr "Αλλαγή σε κανονικό τρόπο λειτουργίας"
 
-#: diskdrake/interactive.pm:257
+#: diskdrake/interactive.pm:259
 #, c-format
 msgid "Toggle to expert mode"
 msgstr "Αλλαγή σε προχωρημένο τρόπο λειτουργίας"
 
-#: diskdrake/interactive.pm:265
-#: diskdrake/interactive.pm:275
-#: diskdrake/interactive.pm:1102
+#: diskdrake/interactive.pm:267 diskdrake/interactive.pm:277
+#: diskdrake/interactive.pm:1103
 #, c-format
 msgid "Confirmation"
 msgstr "Επιβεβαίωση"
 
-#: diskdrake/interactive.pm:265
+#: diskdrake/interactive.pm:267
 #, c-format
 msgid "Continue anyway?"
 msgstr "Να συνεχίσω;"
 
-#: diskdrake/interactive.pm:270
+#: diskdrake/interactive.pm:272
 #, c-format
 msgid "Quit without saving"
 msgstr "Έξοδος χωρίς αποθήκευση"
 
-#: diskdrake/interactive.pm:270
+#: diskdrake/interactive.pm:272
 #, c-format
 msgid "Quit without writing the partition table?"
 msgstr "Έξοδος χωρίς αποθήκευση του πίνακα κατατμήσεων;"
 
-#: diskdrake/interactive.pm:275
+#: diskdrake/interactive.pm:277
 #, c-format
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "Θέλετε να αποθηκεύσετε τις αλλαγές του /etc/fstab"
 
-#: diskdrake/interactive.pm:282
-#: fs/partitioning_wizard.pm:251
+#: diskdrake/interactive.pm:284 fs/partitioning_wizard.pm:252
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr "Απαιτείται επανεκκίνηση για να ενεργοποιηθούν οι αλλαγές στον πίνακα κατατμήσεων"
+msgstr ""
+"Απαιτείται επανεκκίνηση για να ενεργοποιηθούν οι αλλαγές στον πίνακα "
+"κατατμήσεων"
 
-#: diskdrake/interactive.pm:287
+#: diskdrake/interactive.pm:289
 #, c-format
 msgid ""
 "You should format partition %s.\n"
@@ -1468,143 +1486,141 @@ msgid ""
 "Quit anyway?"
 msgstr ""
 "Θα πρέπει να μορφοποιήσεις την κατάτμηση %s.\n"
-"Διαφορετικά, δε θα εγγραφεί κάποια εισαγωγή στο fstab για το σημείο προσάρτησης %s.\n"
+"Διαφορετικά, δε θα εγγραφεί κάποια εισαγωγή στο fstab για το σημείο "
+"προσάρτησης %s.\n"
 "Να γίνει έξοδος έτσι και αλλιώς;"
 
-#: diskdrake/interactive.pm:300
+#: diskdrake/interactive.pm:302
 #, c-format
 msgid "Clear all"
 msgstr "Καθαρισμός όλων"
 
-#: diskdrake/interactive.pm:301
+#: diskdrake/interactive.pm:303
 #, c-format
 msgid "Auto allocate"
 msgstr "Αυτόματη κατανομή"
 
-#: diskdrake/interactive.pm:302
-#: diskdrake/interactive.pm:350
+#: diskdrake/interactive.pm:304 diskdrake/interactive.pm:352
 #: interactive/curses.pm:512
 #, c-format
 msgid "More"
 msgstr "Άλλα"
 
-#: diskdrake/interactive.pm:307
+#: diskdrake/interactive.pm:309
 #, c-format
 msgid "Hard drive information"
 msgstr "Πληροφορίες σκληρού δίσκου"
 
-#: diskdrake/interactive.pm:339
+#: diskdrake/interactive.pm:341
 #, c-format
 msgid "All primary partitions are used"
 msgstr "Όλες οι πρωτεύουσες κατατμήσεις είναι σε χρήση"
 
-#: diskdrake/interactive.pm:340
+#: diskdrake/interactive.pm:342
 #, c-format
 msgid "I can not add any more partitions"
 msgstr "Δεν μπορώ να προσθέσω κατατμήσεις"
 
-#: diskdrake/interactive.pm:341
+#: diskdrake/interactive.pm:343
 #, c-format
-msgid "To have more partitions, please delete one to be able to create an extended partition"
-msgstr "Για να προσθέσετε κατατμήσεις, παρακαλώ διαγράψτε μία έτσι ώστε να είναι δυνατή η προσθήκη εκτεταμένης κατάτμησης"
+msgid ""
+"To have more partitions, please delete one to be able to create an extended "
+"partition"
+msgstr ""
+"Για να προσθέσετε κατατμήσεις, παρακαλώ διαγράψτε μία έτσι ώστε να είναι "
+"δυνατή η προσθήκη εκτεταμένης κατάτμησης"
 
-#: diskdrake/interactive.pm:352
+#: diskdrake/interactive.pm:354
 #, c-format
 msgid "Reload partition table"
 msgstr "Ανανέωση πίνακα κατατμήσεων"
 
-#: diskdrake/interactive.pm:359
+#: diskdrake/interactive.pm:361
 #, c-format
 msgid "Detailed information"
 msgstr "Λεπτομερείς πληροφορίες"
 
-#: diskdrake/interactive.pm:375
-#: diskdrake/interactive.pm:705
+#: diskdrake/interactive.pm:377 diskdrake/interactive.pm:707
 #, c-format
 msgid "Resize"
 msgstr "Αλλαγή μεγέθους"
 
-#: diskdrake/interactive.pm:376
+#: diskdrake/interactive.pm:378
 #, c-format
 msgid "Format"
 msgstr "Μορφοποίηση"
 
-#: diskdrake/interactive.pm:378
-#: diskdrake/interactive.pm:791
+#: diskdrake/interactive.pm:380 diskdrake/interactive.pm:793
 #, c-format
 msgid "Add to RAID"
 msgstr "Προσθήκη στο RAID"
 
-#: diskdrake/interactive.pm:379
-#: diskdrake/interactive.pm:809
+#: diskdrake/interactive.pm:381 diskdrake/interactive.pm:811
 #, c-format
 msgid "Add to LVM"
 msgstr "Προσθήκη στο LVM"
 
-#: diskdrake/interactive.pm:381
+#: diskdrake/interactive.pm:383
 #, c-format
 msgid "Delete"
 msgstr "Διαγραφή"
 
-#: diskdrake/interactive.pm:382
+#: diskdrake/interactive.pm:384
 #, c-format
 msgid "Remove from RAID"
 msgstr "Αφαίρεση από το RAID"
 
-#: diskdrake/interactive.pm:383
+#: diskdrake/interactive.pm:385
 #, c-format
 msgid "Remove from LVM"
 msgstr "Αφαίρεση από το LVM"
 
-#: diskdrake/interactive.pm:384
+#: diskdrake/interactive.pm:386
 #, c-format
 msgid "Modify RAID"
 msgstr "Τροποποίηση RAID"
 
-#: diskdrake/interactive.pm:385
+#: diskdrake/interactive.pm:387
 #, c-format
 msgid "Use for loopback"
 msgstr "Χρήση για loopback"
 
-#: diskdrake/interactive.pm:396
+#: diskdrake/interactive.pm:398
 #, c-format
 msgid "Create"
 msgstr "Δημιουργία"
 
-#: diskdrake/interactive.pm:440
-#: diskdrake/interactive.pm:442
+#: diskdrake/interactive.pm:442 diskdrake/interactive.pm:444
 #, c-format
 msgid "Create a new partition"
 msgstr "Δημιουργία νέας κατάτμησης"
 
-#: diskdrake/interactive.pm:444
+#: diskdrake/interactive.pm:446
 #, c-format
 msgid "Start sector: "
 msgstr "Αρχικός τομέας: "
 
-#: diskdrake/interactive.pm:447
-#: diskdrake/interactive.pm:874
+#: diskdrake/interactive.pm:449 diskdrake/interactive.pm:876
 #, c-format
 msgid "Size in MB: "
 msgstr "Μέγεθος σε MB"
 
-#: diskdrake/interactive.pm:449
-#: diskdrake/interactive.pm:875
+#: diskdrake/interactive.pm:451 diskdrake/interactive.pm:877
 #, c-format
 msgid "Filesystem type: "
 msgstr "Τύπος συστήματος αρχείων: "
 
-#: diskdrake/interactive.pm:455
+#: diskdrake/interactive.pm:457
 #, c-format
 msgid "Preference: "
 msgstr "Προτίμηση: "
 
-#: diskdrake/interactive.pm:458
+#: diskdrake/interactive.pm:460
 #, c-format
 msgid "Logical volume name "
 msgstr "Το όνομα του λογικού τόμου"
 
-#: diskdrake/interactive.pm:478
+#: diskdrake/interactive.pm:480
 #, c-format
 msgid ""
 "You can not create a new partition\n"
@@ -1613,377 +1629,384 @@ msgid ""
 msgstr ""
 "Δεν μπορείς να δημιουργήσεις μία νέα κατάτμηση\n"
 "(επειδή έχεις συμπληρώσει το μέγιστο αριθμό των πρωτευόντων κατατμήσεων).\n"
-"Πρώτα απομάκρυνε μία πρωτεύουσα κατάτμηση και μετά δημιούργησε μία εκτεταμένη (extended) κατάτμηση."
+"Πρώτα απομάκρυνε μία πρωτεύουσα κατάτμηση και μετά δημιούργησε μία "
+"εκτεταμένη (extended) κατάτμηση."
 
-#: diskdrake/interactive.pm:508
+#: diskdrake/interactive.pm:510
 #, c-format
 msgid "Remove the loopback file?"
 msgstr "Να αφαιρεθεί το αρχείο loopback;"
 
-#: diskdrake/interactive.pm:530
+#: diskdrake/interactive.pm:532
 #, c-format
-msgid "After changing type of partition %s, all data on this partition will be lost"
-msgstr "Μετά την αλλαγή τύπου στην κατάτμηση %s, όλα τα δεδομένα σε αυτήν την κατάτμηση θα χαθούν"
+msgid ""
+"After changing type of partition %s, all data on this partition will be lost"
+msgstr ""
+"Μετά την αλλαγή τύπου στην κατάτμηση %s, όλα τα δεδομένα σε αυτήν την "
+"κατάτμηση θα χαθούν"
 
-#: diskdrake/interactive.pm:543
+#: diskdrake/interactive.pm:545
 #, c-format
 msgid "Change partition type"
 msgstr "Αλλαγή τύπου κατάτμησης"
 
-#: diskdrake/interactive.pm:545
-#: diskdrake/removable.pm:47
+#: diskdrake/interactive.pm:547 diskdrake/removable.pm:47
 #, c-format
 msgid "Which filesystem do you want?"
 msgstr "Ποιο σύστημα αρχείων προτιμάτε;"
 
-#: diskdrake/interactive.pm:552
+#: diskdrake/interactive.pm:554
 #, c-format
 msgid "Switching from %s to %s"
 msgstr "Αλλαγή από %s σε %s"
 
-#: diskdrake/interactive.pm:578
-#: diskdrake/interactive.pm:581
+#: diskdrake/interactive.pm:580 diskdrake/interactive.pm:583
 #, c-format
 msgid "Which volume label?"
 msgstr "Ποια ετικέτα τόμου;"
 
-#: diskdrake/interactive.pm:582
+#: diskdrake/interactive.pm:584
 #, c-format
 msgid "Label:"
 msgstr "Ετικέτα:"
 
-#: diskdrake/interactive.pm:596
+#: diskdrake/interactive.pm:598
 #, c-format
 msgid "Where do you want to mount the loopback file %s?"
 msgstr "Πού θέλεις να προσαρτήσεις το αρχείο loopback %s;"
 
-#: diskdrake/interactive.pm:597
+#: diskdrake/interactive.pm:599
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "Πού θέλεις να προσαρτήσεις τη συσκευή %s;"
 
-#: diskdrake/interactive.pm:602
+#: diskdrake/interactive.pm:604
 #, c-format
 msgid ""
 "Can not unset mount point as this partition is used for loop back.\n"
 "Remove the loopback first"
 msgstr ""
-"Δεν μπορώ να αλλάξω το σημείο προσάρτησης, καθώς αυτή η κατάτμηση χρησιμοποιείται\n"
+"Δεν μπορώ να αλλάξω το σημείο προσάρτησης, καθώς αυτή η κατάτμηση "
+"χρησιμοποιείται\n"
 "για loop back. Απομάκρυνε πρώτα το loopback"
 
-#: diskdrake/interactive.pm:632
+#: diskdrake/interactive.pm:634
 #, c-format
 msgid "Where do you want to mount %s?"
 msgstr "Πού θέλεις να προσαρτήσεις το %s;"
 
-#: diskdrake/interactive.pm:656
-#: diskdrake/interactive.pm:739
-#: fs/partitioning_wizard.pm:145
-#: fs/partitioning_wizard.pm:177
+#: diskdrake/interactive.pm:658 diskdrake/interactive.pm:741
+#: fs/partitioning_wizard.pm:146 fs/partitioning_wizard.pm:178
 #, c-format
 msgid "Resizing"
 msgstr "Αλλαγή μεγέθους"
 
-#: diskdrake/interactive.pm:656
+#: diskdrake/interactive.pm:658
 #, c-format
 msgid "Computing FAT filesystem bounds"
 msgstr "Υπολογισμός FAT filesystem bounds"
 
-#: diskdrake/interactive.pm:692
+#: diskdrake/interactive.pm:694
 #, c-format
 msgid "This partition is not resizeable"
 msgstr "Αυτή η κατάτμηση δεν μπορεί ν' αλλάξει μέγεθος."
 
-#: diskdrake/interactive.pm:697
-#, c-format
-msgid "All data on this partition should be backed-up"
-msgstr "Πρέπει να γίνει αντίγραφο ασφαλείας όλων των δεδομένων σε αυτή την κατάτμηση"
-
 #: diskdrake/interactive.pm:699
 #, c-format
-msgid "After resizing partition %s, all data on this partition will be lost"
-msgstr "Μετά την αλλαγή μεγέθους στην κατάτμηση %s, όλα τα δεδομένα σε αυτήν την κατάτμηση θα χαθούν"
+msgid "All data on this partition should be backed-up"
+msgstr ""
+"Πρέπει να γίνει αντίγραφο ασφαλείας όλων των δεδομένων σε αυτή την κατάτμηση"
 
-#: diskdrake/interactive.pm:706
+#: diskdrake/interactive.pm:701
+#, c-format
+msgid "After resizing partition %s, all data on this partition will be lost"
+msgstr ""
+"Μετά την αλλαγή μεγέθους στην κατάτμηση %s, όλα τα δεδομένα σε αυτήν την "
+"κατάτμηση θα χαθούν"
+
+#: diskdrake/interactive.pm:708
 #, c-format
 msgid "Choose the new size"
 msgstr "Επιλέξτε το νέο μέγεθος"
 
-#: diskdrake/interactive.pm:707
+#: diskdrake/interactive.pm:709
 #, c-format
 msgid "New size in MB: "
 msgstr "Νέο μέγεθος σε MB:"
 
-#: diskdrake/interactive.pm:708
+#: diskdrake/interactive.pm:710
 #, c-format
 msgid "Minimum size: %s MB"
 msgstr "Ελάχιστο μέγεθος: %s MB"
 
-#: diskdrake/interactive.pm:709
+#: diskdrake/interactive.pm:711
 #, c-format
 msgid "Maximum size: %s MB"
 msgstr "Μέγιστο μέγεθος: %s MB"
 
-#: diskdrake/interactive.pm:750
-#: fs/partitioning_wizard.pm:185
+#: diskdrake/interactive.pm:752 fs/partitioning_wizard.pm:186
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
-"Για να διασφαλιστεί η ακεραιότητα των δεδομένων σου, μετά την αλλαγή του μεγέθους των κατατμήσεων (ή κατάτμησης), \n"
-"κατά την επόμενη φορά που θα εκκινήσεις τα Microsoft Windows®, θα εκτελεστούν έλεγχοι του συστήματος αρχείων"
+"Για να διασφαλιστεί η ακεραιότητα των δεδομένων σου, μετά την αλλαγή του "
+"μεγέθους των κατατμήσεων (ή κατάτμησης), \n"
+"κατά την επόμενη φορά που θα εκκινήσεις τα Microsoft Windows®, θα "
+"εκτελεστούν έλεγχοι του συστήματος αρχείων"
 
-#: diskdrake/interactive.pm:791
+#: diskdrake/interactive.pm:793
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "Επιλέξτε ένα υπάρχον RAID στο οποίο θα γίνει η προσθήκη"
 
-#: diskdrake/interactive.pm:793
-#: diskdrake/interactive.pm:811
+#: diskdrake/interactive.pm:795 diskdrake/interactive.pm:813
 #, c-format
 msgid "new"
 msgstr "νέο"
 
-#: diskdrake/interactive.pm:809
+#: diskdrake/interactive.pm:811
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "Επιλέξτε ένα υπάρχον LVM στο οποίο θα γίνει η προσθήκη"
 
-#: diskdrake/interactive.pm:816
+#: diskdrake/interactive.pm:818
 #, c-format
 msgid "LVM name?"
 msgstr "όνομα LVM;"
 
-#: diskdrake/interactive.pm:839
+#: diskdrake/interactive.pm:841
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
 "Ο φυσικός τόμος %s χρησιμοποιείται ακόμη.\n"
-"Θέλεις να μετακινηθούν οι χρησιμοποιούμενες φυσικές εκτάσεις του δίσκου (extents), από αυτό τον τόμο σε άλλους τόμους;"
+"Θέλεις να μετακινηθούν οι χρησιμοποιούμενες φυσικές εκτάσεις του δίσκου "
+"(extents), από αυτό τον τόμο σε άλλους τόμους;"
 
-#: diskdrake/interactive.pm:841
+#: diskdrake/interactive.pm:843
 #, c-format
 msgid "Moving physical extents"
 msgstr "Μετακίνηση των φυσικών εκτάσεων"
 
-#: diskdrake/interactive.pm:859
+#: diskdrake/interactive.pm:861
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "Αυτή η κατάτμηση δεν μπορεί να χρησιμοποιηθεί για loopback"
 
-#: diskdrake/interactive.pm:872
+#: diskdrake/interactive.pm:874
 #, c-format
 msgid "Loopback"
 msgstr "Loopback"
 
-#: diskdrake/interactive.pm:873
+#: diskdrake/interactive.pm:875
 #, c-format
 msgid "Loopback file name: "
 msgstr "Όνομα αρχείου loopback: "
 
-#: diskdrake/interactive.pm:878
+#: diskdrake/interactive.pm:880
 #, c-format
 msgid "Give a file name"
 msgstr "Δώστε ένα όνομα αρχείου"
 
-#: diskdrake/interactive.pm:881
+#: diskdrake/interactive.pm:883
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "Το αρχείο χρησιμοποιείται ήδη από άλλο loopback, επιλέξτε ένα άλλο"
 
-#: diskdrake/interactive.pm:882
+#: diskdrake/interactive.pm:884
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "Το αρχείο υπάρχει ήδη. Να το χρησιμοποιήσω;"
 
-#: diskdrake/interactive.pm:914
-#: diskdrake/interactive.pm:917
+#: diskdrake/interactive.pm:916 diskdrake/interactive.pm:919
 #, c-format
 msgid "Mount options"
 msgstr "Επιλογές προσάρτησης"
 
-#: diskdrake/interactive.pm:924
+#: diskdrake/interactive.pm:926
 #, c-format
 msgid "Various"
 msgstr "Διάφορα"
 
-#: diskdrake/interactive.pm:989
+#: diskdrake/interactive.pm:991
 #, c-format
 msgid "device"
 msgstr "συσκευή"
 
-#: diskdrake/interactive.pm:990
+#: diskdrake/interactive.pm:992
 #, c-format
 msgid "level"
 msgstr "επίπεδο"
 
-#: diskdrake/interactive.pm:991
+#: diskdrake/interactive.pm:993
 #, c-format
 msgid "chunk size in KiB"
 msgstr "μέγεθος του chunk σε KiB"
 
-#: diskdrake/interactive.pm:1009
+#: diskdrake/interactive.pm:1011
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Προσοχή: Αυτή η διαδικασία είναι επικίνδυνη."
 
-#: diskdrake/interactive.pm:1024
+#: diskdrake/interactive.pm:1026
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Τι τύπος κατάτμησης;"
 
-#: diskdrake/interactive.pm:1062
+#: diskdrake/interactive.pm:1064
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Απαιτείται επανεκκίνηση για να εφαρμοστούν οι αλλαγές"
 
-#: diskdrake/interactive.pm:1071
+#: diskdrake/interactive.pm:1073
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Ο πίνακας κατατμήσεων του δίσκου %s θα αποθηκευτεί στον δίσκο!"
 
-#: diskdrake/interactive.pm:1097
+#: diskdrake/interactive.pm:1098
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
-msgstr "Μετά την μορφοποίηση της κατάτμησης %s, όλα τα δεδομένα σε αυτήν την κατάτμηση θα χαθούν"
+msgstr ""
+"Μετά την μορφοποίηση της κατάτμησης %s, όλα τα δεδομένα σε αυτήν την "
+"κατάτμηση θα χαθούν"
 
-#: diskdrake/interactive.pm:1102
-#: fs/partitioning.pm:49
+#: diskdrake/interactive.pm:1103 fs/partitioning.pm:49
 #, c-format
 msgid "Check bad blocks?"
 msgstr "Έλεγχος για χαλασμένα τμήματα;"
 
-#: diskdrake/interactive.pm:1116
+#: diskdrake/interactive.pm:1117
 #, c-format
 msgid "Move files to the new partition"
 msgstr "Μετακίνηση αρχείων στην νέα κατάτμηση"
 
-#: diskdrake/interactive.pm:1116
+#: diskdrake/interactive.pm:1117
 #, c-format
 msgid "Hide files"
 msgstr "Απόκρυψη αρχείων"
 
-#: diskdrake/interactive.pm:1117
+#: diskdrake/interactive.pm:1118
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
 "(%s)\n"
 "\n"
-"You can either choose to move the files into the partition that will be mounted there or leave them where they are (which results in hiding them by the contents of the mounted partition)"
+"You can either choose to move the files into the partition that will be "
+"mounted there or leave them where they are (which results in hiding them by "
+"the contents of the mounted partition)"
 msgstr ""
 "Ο κατάλογος %s περιέχει, ήδη, δεδομένα.\n"
 "(%s)\n"
 "\n"
-"Μπορείς, είτε να επιλέξεις τη μετακίνηση των αρχείων, προς την κατάτμηση που θα προσαρτηθεί εκεί, είτε να τα αφήσεις όπως έχουν (αυτό, θα έχει σαν αποτέλεσμα, να υποσκιαστούν και να κρυφτούν από τα περιεχόμενα της προσαρτούμενης κατάτμησης )"
+"Μπορείς, είτε να επιλέξεις τη μετακίνηση των αρχείων, προς την κατάτμηση που "
+"θα προσαρτηθεί εκεί, είτε να τα αφήσεις όπως έχουν (αυτό, θα έχει σαν "
+"αποτέλεσμα, να υποσκιαστούν και να κρυφτούν από τα περιεχόμενα της "
+"προσαρτούμενης κατάτμησης )"
 
-#: diskdrake/interactive.pm:1132
+#: diskdrake/interactive.pm:1133
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "Μετακίνηση αρχείων στην νέα κατάτμηση"
 
-#: diskdrake/interactive.pm:1136
+#: diskdrake/interactive.pm:1137
 #, c-format
 msgid "Copying %s"
 msgstr "Αντιγραφή του %s"
 
-#: diskdrake/interactive.pm:1140
+#: diskdrake/interactive.pm:1141
 #, c-format
 msgid "Removing %s"
 msgstr "Αφαίρεση του %s"
 
-#: diskdrake/interactive.pm:1154
+#: diskdrake/interactive.pm:1155
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "η κατάτμηση %s είναι τώρα γνωστή ως %s "
 
-#: diskdrake/interactive.pm:1155
+#: diskdrake/interactive.pm:1156
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr "Έχουν αλλάξει οι αριθμοί των κατατμήσεων:"
 
-#: diskdrake/interactive.pm:1180
-#: diskdrake/interactive.pm:1243
+#: diskdrake/interactive.pm:1181 diskdrake/interactive.pm:1244
 #, c-format
 msgid "Device: "
 msgstr "Συσκευή: "
 
-#: diskdrake/interactive.pm:1181
+#: diskdrake/interactive.pm:1182
 #, c-format
 msgid "Volume label: "
 msgstr "Ετικέτα τόμου: "
 
-#: diskdrake/interactive.pm:1182
+#: diskdrake/interactive.pm:1183
 #, c-format
 msgid "UUID: "
 msgstr "UUID: "
 
-#: diskdrake/interactive.pm:1183
+#: diskdrake/interactive.pm:1184
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "Πιθανό DOS γράμμα δίσκου: %s \n"
 
-#: diskdrake/interactive.pm:1187
-#: diskdrake/interactive.pm:1196
-#: diskdrake/interactive.pm:1262
+#: diskdrake/interactive.pm:1188 diskdrake/interactive.pm:1197
+#: diskdrake/interactive.pm:1263
 #, c-format
 msgid "Type: "
 msgstr "Τύπος: "
 
-#: diskdrake/interactive.pm:1191
-#: diskdrake/interactive.pm:1247
+#: diskdrake/interactive.pm:1192 diskdrake/interactive.pm:1248
 #, c-format
 msgid "Name: "
 msgstr "Όνομα: "
 
-#: diskdrake/interactive.pm:1198
+#: diskdrake/interactive.pm:1199
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Αρχή: τομέας %s\n"
 
-#: diskdrake/interactive.pm:1199
+#: diskdrake/interactive.pm:1200
 #, c-format
 msgid "Size: %s"
 msgstr "Μέγεθος: %s"
 
-#: diskdrake/interactive.pm:1201
+#: diskdrake/interactive.pm:1202
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s τομείς"
 
-#: diskdrake/interactive.pm:1203
+#: diskdrake/interactive.pm:1204
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "Κύλινδροι από %d έως %d\n"
 
-#: diskdrake/interactive.pm:1204
+#: diskdrake/interactive.pm:1205
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr "Ο αριθμός των λογικών εκτάσεων (extents): %d\n"
 
-#: diskdrake/interactive.pm:1205
+#: diskdrake/interactive.pm:1206
 #, c-format
 msgid "Formatted\n"
 msgstr "Μορφοποιημένος\n"
 
-#: diskdrake/interactive.pm:1206
+#: diskdrake/interactive.pm:1207
 #, c-format
 msgid "Not formatted\n"
 msgstr "Αμορφοποίητος\n"
 
-#: diskdrake/interactive.pm:1207
+#: diskdrake/interactive.pm:1208
 #, c-format
 msgid "Mounted\n"
 msgstr "Προσαρτημένο\n"
 
-#: diskdrake/interactive.pm:1208
+#: diskdrake/interactive.pm:1209
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1213
+#: diskdrake/interactive.pm:1214
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -1992,7 +2015,7 @@ msgstr ""
 "Αρχείο (α) loopback:\n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1214
+#: diskdrake/interactive.pm:1215
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -2001,27 +2024,27 @@ msgstr ""
 "Εξ ορισμού εκκίνηση της κατάτμησης \n"
 "    (για εκκίνηση MS-DOS, όχι για lilo)\n"
 
-#: diskdrake/interactive.pm:1216
+#: diskdrake/interactive.pm:1217
 #, c-format
 msgid "Level %s\n"
 msgstr "Επίπεδο %s\n"
 
-#: diskdrake/interactive.pm:1217
+#: diskdrake/interactive.pm:1218
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "Μέγεθος chunk %d KiB\n"
 
-#: diskdrake/interactive.pm:1218
+#: diskdrake/interactive.pm:1219
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "Δίσκοι RAID %s\n"
 
-#: diskdrake/interactive.pm:1220
+#: diskdrake/interactive.pm:1221
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Όνομα αρχείου loopback: %s"
 
-#: diskdrake/interactive.pm:1223
+#: diskdrake/interactive.pm:1224
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -2033,7 +2056,7 @@ msgstr ""
 "\n"
 " Οδηγός\n"
 
-#: diskdrake/interactive.pm:1226
+#: diskdrake/interactive.pm:1227
 #, c-format
 msgid ""
 "\n"
@@ -2046,77 +2069,79 @@ msgstr ""
 "είναι για την εκκίνηση πολλαπλών λειτουργικών συστημάτων\n"
 "στον υπολογιστή σου.\n"
 
-#: diskdrake/interactive.pm:1235
+#: diskdrake/interactive.pm:1236
 #, c-format
 msgid "Free space on %s (%s)"
 msgstr "Κενός χώρος στον %s (%s)"
 
-#: diskdrake/interactive.pm:1244
+#: diskdrake/interactive.pm:1245
 #, c-format
 msgid "Read-only"
 msgstr "Μόνο-για-ανάγνωση"
 
-#: diskdrake/interactive.pm:1245
+#: diskdrake/interactive.pm:1246
 #, c-format
 msgid "Size: %s\n"
 msgstr "Μέγεθος: %s\n"
 
-#: diskdrake/interactive.pm:1246
+#: diskdrake/interactive.pm:1247
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Γεωμετρία: %s κύλινδροι, %s κεφαλές, %s τομείς\n"
 
-#: diskdrake/interactive.pm:1248
+#: diskdrake/interactive.pm:1249
 #, c-format
 msgid "Medium type: "
 msgstr "Τύπος μέσου:"
 
-#: diskdrake/interactive.pm:1249
+#: diskdrake/interactive.pm:1250
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "Δίσκοι LVM %s\n"
 
-#: diskdrake/interactive.pm:1250
+#: diskdrake/interactive.pm:1251
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Τύπος πίνακα κατατμήσεων: %s\n"
 
-#: diskdrake/interactive.pm:1251
+#: diskdrake/interactive.pm:1252
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "στο κανάλι %d id %d\n"
 
-#: diskdrake/interactive.pm:1294
+#: diskdrake/interactive.pm:1295
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "Κλειδί κρυπτογράφησης συστήματος αρχείων"
 
-#: diskdrake/interactive.pm:1295
+#: diskdrake/interactive.pm:1296
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Επιλέξτε το κλειδί κρυπτογράφησης του συστήματος αρχείων"
 
-#: diskdrake/interactive.pm:1298
+#: diskdrake/interactive.pm:1299
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
-msgstr "Αυτός ο κωδικός πρόσβασης είναι πολύ απλός (πρέπει να έχει τουλάχιστον %d χαρακτήρες)"
+msgstr ""
+"Αυτός ο κωδικός πρόσβασης είναι πολύ απλός (πρέπει να έχει τουλάχιστον %d "
+"χαρακτήρες)"
 
-#: diskdrake/interactive.pm:1299
+#: diskdrake/interactive.pm:1300
 #, c-format
 msgid "The encryption keys do not match"
 msgstr "Τα κλειδιά κρυπτογράφησης είναι ανόμοια"
 
-#: diskdrake/interactive.pm:1302
+#: diskdrake/interactive.pm:1303
 #, c-format
 msgid "Encryption key"
 msgstr "Κλειδί κρυπτογράφησης"
 
-#: diskdrake/interactive.pm:1303
+#: diskdrake/interactive.pm:1304
 #, c-format
 msgid "Encryption key (again)"
 msgstr "Κλειδί κρυπτογράφησης (ξανά)"
 
-#: diskdrake/interactive.pm:1305
+#: diskdrake/interactive.pm:1306
 #, c-format
 msgid "Encryption algorithm"
 msgstr "Αλγόριθμος κρυπτογράφησης"
@@ -2126,18 +2151,10 @@ msgstr "Αλγόριθμος κρυπτογράφησης"
 msgid "Change type"
 msgstr "Αλλαγή τύπου"
 
-#: diskdrake/smbnfs_gtk.pm:81
-#: interactive.pm:126
-#: interactive.pm:543
-#: interactive/curses.pm:260
-#: interactive/http.pm:104
-#: interactive/http.pm:160
-#: interactive/stdio.pm:39
-#: interactive/stdio.pm:148
-#: ugtk2.pm:408
-#: ugtk2.pm:510
-#: ugtk2.pm:519
-#: ugtk2.pm:801
+#: diskdrake/smbnfs_gtk.pm:81 interactive.pm:126 interactive.pm:543
+#: interactive/curses.pm:260 interactive/http.pm:104 interactive/http.pm:160
+#: interactive/stdio.pm:39 interactive/stdio.pm:148 ugtk2.pm:408 ugtk2.pm:510
+#: ugtk2.pm:519 ugtk2.pm:801
 #, c-format
 msgid "Cancel"
 msgstr "Άκυρο"
@@ -2147,8 +2164,7 @@ msgstr "Άκυρο"
 msgid "Can not login using username %s (bad password?)"
 msgstr "Αδυναμία προσπέλασης με το όνομα χρήστη %s  (λάθος κωδικός)"
 
-#: diskdrake/smbnfs_gtk.pm:168
-#: diskdrake/smbnfs_gtk.pm:177
+#: diskdrake/smbnfs_gtk.pm:168 diskdrake/smbnfs_gtk.pm:177
 #, c-format
 msgid "Domain Authentication Required"
 msgstr "Απαιτείται Πιστοποίηση Τομέα"
@@ -2165,13 +2181,21 @@ msgstr "Και άλλο"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid "Please enter your username, password and domain name to access this host."
-msgstr "Παρακαλώ εισάγετε το όνομα χρήστη, τον κωδικό πρόσβασης και το όνομα τομέα για τη σύνδεση στον host (οικοδεσπότη)."
+msgid ""
+"Please enter your username, password and domain name to access this host."
+msgstr ""
+"Παρακαλώ εισάγετε το όνομα χρήστη, τον κωδικό πρόσβασης και το όνομα τομέα "
+"για τη σύνδεση στον host (οικοδεσπότη)."
 
 #: diskdrake/smbnfs_gtk.pm:180
 #, c-format
 msgid "Username"
 msgstr "Όνομα χρήστη"
+
+#: diskdrake/smbnfs_gtk.pm:182
+#, c-format
+msgid "Domain"
+msgstr "Τομέας (domain)"
 
 #: diskdrake/smbnfs_gtk.pm:206
 #, c-format
@@ -2183,69 +2207,67 @@ msgstr "Αναζήτηση διακομιστών"
 msgid "Search new servers"
 msgstr "Αναζήτηση νέων διακομιστών (servers)"
 
-#: do_pkgs.pm:16
-#: do_pkgs.pm:53
+#: do_pkgs.pm:19 do_pkgs.pm:57
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
 msgstr "Το πακέτο %s πρέπει να αναβαθμιστεί. Θέλετε να το εγκαταστήσετε;"
 
-#: do_pkgs.pm:19
-#: do_pkgs.pm:40
-#: do_pkgs.pm:56
+#: do_pkgs.pm:23 do_pkgs.pm:44 do_pkgs.pm:60
 #, c-format
 msgid "Could not install the %s package!"
 msgstr "Αδυναμία εγκατάστασης του πακέτου %s."
 
-#: do_pkgs.pm:24
-#: do_pkgs.pm:61
+#: do_pkgs.pm:28 do_pkgs.pm:65
 #, c-format
 msgid "Mandatory package %s is missing"
 msgstr "Ένα απαραίτητο αρχείο (το %s ) δεν υπάρχει"
 
-#: do_pkgs.pm:35
+#: do_pkgs.pm:39
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Τα παρακάτω πακέτα πρέπει να εγκατασταθούν:\n"
 
-#: do_pkgs.pm:216
+#: do_pkgs.pm:220
 #, c-format
 msgid "Installing packages..."
 msgstr "Εγκατάσταση πακέτων..."
 
-#: do_pkgs.pm:258
+#: do_pkgs.pm:262
 #, c-format
 msgid "Removing packages..."
 msgstr "Αφαιρούνται τα πακέτα..."
 
 #: fs/any.pm:17
 #, c-format
-msgid "An error occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem"
-msgstr "Προκλήθηκε σφάλμα - δεν βρέθηκαν συσκευές στις οποίες να είναι δυνατή η δημιουργία νέων συστημάτων αρχείων. Παρακαλώ ελέγξτε το υλικό σας για την αιτία αυτού του προβλήματος"
+msgid ""
+"An error occurred - no valid devices were found on which to create new "
+"filesystems. Please check your hardware for the cause of this problem"
+msgstr ""
+"Προκλήθηκε σφάλμα - δεν βρέθηκαν συσκευές στις οποίες να είναι δυνατή η "
+"δημιουργία νέων συστημάτων αρχείων. Παρακαλώ ελέγξτε το υλικό σας για την "
+"αιτία αυτού του προβλήματος"
 
-#: fs/any.pm:74
-#: fs/partitioning_wizard.pm:59
+#: fs/any.pm:75 fs/partitioning_wizard.pm:59
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "Πρέπει να έχετε μια κατάτμηση FAT προσαρτημένη στο /boot/efi"
 
-#: fs/format.pm:62
-#: fs/format.pm:69
+#: fs/format.pm:63 fs/format.pm:70
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Μορφοποίηση κατάτμησης %s"
 
-#: fs/format.pm:66
+#: fs/format.pm:67
 #, c-format
 msgid "Creating and formatting file %s"
 msgstr "Δημιουργία και μορφοποίηση αρχείου %s"
 
-#: fs/format.pm:119
+#: fs/format.pm:122
 #, c-format
 msgid "I do not know how to format %s in type %s"
 msgstr "δεν ξέρω πώς να μορφοποιήσω το %s σε τύπο %s"
 
-#: fs/format.pm:124
-#: fs/format.pm:126
+#: fs/format.pm:127 fs/format.pm:129
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "%s μορφοποίηση του %s απέτυχε"
@@ -2265,14 +2287,12 @@ msgstr "Προσάρτηση της κατάτμησης %s"
 msgid "mounting partition %s in directory %s failed"
 msgstr "η προσάρτηση της κατάτμησης %s στον κατάλογο %s απέτυχε"
 
-#: fs/mount.pm:85
-#: fs/mount.pm:102
+#: fs/mount.pm:85 fs/mount.pm:102
 #, c-format
 msgid "Checking %s"
 msgstr "Έλεγχος %s"
 
-#: fs/mount.pm:119
-#: partition_table.pm:395
+#: fs/mount.pm:119 partition_table.pm:403
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "σφάλμα κατά την αποπροσάρτηση του %s: %s"
@@ -2330,9 +2350,12 @@ msgid ""
 "file system. This option might be useful for a server that has file systems\n"
 "containing binaries for architectures other than its own."
 msgstr ""
-"Να μην επιτρέπεται η εκτέλεση εκτελέσιμων αρχείων (binaries) από τα προσαρτημένα συστήματα αρχείων.\n"
-"Αυτή η επιλογή, ίσως να είναι πιο χρήσιμη, για ένα μητρικό υπολογιστή (server),\n"
-"που έχει και συστήματα αρχείων, τα οποία εμπεριέχουν και εκτελέσιμα αρχεία διαφορετικής αρχιτεκτονικής, από αυτά του ίδιου του μητρικού υπολογιστή."
+"Να μην επιτρέπεται η εκτέλεση εκτελέσιμων αρχείων (binaries) από τα "
+"προσαρτημένα συστήματα αρχείων.\n"
+"Αυτή η επιλογή, ίσως να είναι πιο χρήσιμη, για ένα μητρικό υπολογιστή "
+"(server),\n"
+"που έχει και συστήματα αρχείων, τα οποία εμπεριέχουν και εκτελέσιμα αρχεία "
+"διαφορετικής αρχιτεκτονικής, από αυτά του ίδιου του μητρικού υπολογιστή."
 
 #: fs/mount_options.pm:136
 #, c-format
@@ -2350,12 +2373,15 @@ msgstr "Προσάρτηση του συστήματος αρχείων «μόν
 #: fs/mount_options.pm:142
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
-msgstr "Όλες οι λειτουργίες I/O στο σύστημα αρχείων θα πρέπει να γίνονται σύγχρονα."
+msgstr ""
+"Όλες οι λειτουργίες I/O στο σύστημα αρχείων θα πρέπει να γίνονται σύγχρονα."
 
 #: fs/mount_options.pm:144
 #, c-format
 msgid "Allow every user to mount and umount the file system."
-msgstr "Να επιτρέπεται σε κάθε χρήστη η προσάρτηση και η αποπροσάρτηση του συστήματος αρχείων."
+msgstr ""
+"Να επιτρέπεται σε κάθε χρήστη η προσάρτηση και η αποπροσάρτηση του "
+"συστήματος αρχείων."
 
 #: fs/mount_options.pm:146
 #, c-format
@@ -2409,13 +2435,19 @@ msgstr "Επιλέξτε κατατμήσεις προς μορφοποίηση"
 
 #: fs/partitioning.pm:76
 #, c-format
-msgid "Failed to check filesystem %s. Do you want to repair the errors? (beware, you can lose data)"
-msgstr "Απέτυχε ο έλεγχος του συστήματος αρχείων %s. Θέλετε να επισκευάσετε τα σφάλματα; (προσοχή, μπορεί να  χάσετε δεδομένα)"
+msgid ""
+"Failed to check filesystem %s. Do you want to repair the errors? (beware, "
+"you can lose data)"
+msgstr ""
+"Απέτυχε ο έλεγχος του συστήματος αρχείων %s. Θέλετε να επισκευάσετε τα "
+"σφάλματα; (προσοχή, μπορεί να  χάσετε δεδομένα)"
 
 #: fs/partitioning.pm:79
 #, c-format
 msgid "Not enough swap space to fulfill installation, please add some"
-msgstr "Δεν υπάρχει αρκετός χώρος swap για την ολοκλήρωση της εγκατάστασης, παρακαλώ προσθέστε"
+msgstr ""
+"Δεν υπάρχει αρκετός χώρος swap για την ολοκλήρωση της εγκατάστασης, παρακαλώ "
+"προσθέστε"
 
 #: fs/partitioning_wizard.pm:51
 #, c-format
@@ -2487,19 +2519,20 @@ msgstr "Μέγεθος κατάτμησης swap σε MB"
 #: fs/partitioning_wizard.pm:119
 #, c-format
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
-msgstr "Δεν υπάρχει κατάτμηση FAT για χρήση ως loopback (ή δεν υπάρχει αρκετός χώρος)"
+msgstr ""
+"Δεν υπάρχει κατάτμηση FAT για χρήση ως loopback (ή δεν υπάρχει αρκετός χώρος)"
 
-#: fs/partitioning_wizard.pm:126
-#, c-format
-msgid "Use the free space on the Microsoft Windows® partition"
+#: fs/partitioning_wizard.pm:127
+#, fuzzy, c-format
+msgid "Use the free space on a Microsoft Windows® partition"
 msgstr "Χρήση του ελεύθερου χώρου στην κατάτμηση των Windows"
 
-#: fs/partitioning_wizard.pm:128
+#: fs/partitioning_wizard.pm:129
 #, c-format
 msgid "Which partition do you want to resize?"
 msgstr "Σε τι τύπο κατάτμησης θέλετε να αλλάξετε μέγεθος;"
 
-#: fs/partitioning_wizard.pm:142
+#: fs/partitioning_wizard.pm:143
 #, c-format
 msgid ""
 "The FAT resizer is unable to handle your partition, \n"
@@ -2508,17 +2541,23 @@ msgstr ""
 "Δεν μπορώ να αλλάξω μέγεθος στην κατάτμηση FAT, \n"
 "προκλήθηκε το παρακάτω λάθος: %s"
 
-#: fs/partitioning_wizard.pm:145
+#: fs/partitioning_wizard.pm:146
 #, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
 msgstr "Υπολογίζεται το μέγεθος της κατάτμησης των Microsoft Windows®"
 
-#: fs/partitioning_wizard.pm:152
+#: fs/partitioning_wizard.pm:153
 #, c-format
-msgid "Your Microsoft Windows® partition is too fragmented. Please reboot your computer under Microsoft Windows®, run the ``defrag'' utility, then restart the Mandriva Linux installation."
-msgstr "Η κατάτμηση των Microsoft Windows® είναι πολύ κατακερματισμένη, παρακαλώ τρέξτε πρώτα το ``defrag'' μέσα από τα Microsoft Windows® και ξεκινήστε ξανά την εγκατάσταση του  Mandriva Linux "
+msgid ""
+"Your Microsoft Windows® partition is too fragmented. Please reboot your "
+"computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
+"the Mandriva Linux installation."
+msgstr ""
+"Η κατάτμηση των Microsoft Windows® είναι πολύ κατακερματισμένη, παρακαλώ "
+"τρέξτε πρώτα το ``defrag'' μέσα από τα Microsoft Windows® και ξεκινήστε ξανά "
+"την εγκατάσταση του  Mandriva Linux "
 
-#: fs/partitioning_wizard.pm:155
+#: fs/partitioning_wizard.pm:156
 #, c-format
 msgid ""
 "WARNING!\n"
@@ -2527,7 +2566,12 @@ msgid ""
 "Your Microsoft Windows® partition will be now resized.\n"
 "\n"
 "\n"
-"Be careful: this operation is dangerous. If you have not already done so, you first need to exit the installation, run \"chkdsk c:\" from a Command Prompt under Microsoft Windows® (beware, running graphical program \"scandisk\" is not enough, be sure to use \"chkdsk\" in a Command Prompt!), optionally run defrag, then restart the installation. You should also backup your data.\n"
+"Be careful: this operation is dangerous. If you have not already done so, "
+"you first need to exit the installation, run \"chkdsk c:\" from a Command "
+"Prompt under Microsoft Windows® (beware, running graphical program \"scandisk"
+"\" is not enough, be sure to use \"chkdsk\" in a Command Prompt!), "
+"optionally run defrag, then restart the installation. You should also backup "
+"your data.\n"
 "\n"
 "\n"
 "When sure, press %s."
@@ -2538,82 +2582,90 @@ msgstr ""
 "Θα γίνει, τώρα, αλλαγή του μεγέθους της κατάτμησης των Microsoft Windows®.\n"
 "\n"
 "\n"
-"Απαιτείται προσοχή: η διαδικασία αυτή εμπεριέχει κινδύνους. Εάν δεν το έχεις κάνει ήδη, πρέπει, πρώτα, να βγεις από την εγκατάσταση. Μετά, να εκτελέσεις την \"chkdsk c:\" από μία γραμμή εντολών (Command Prompt) μέσα από τα Microsoft Windows® (σημαντικό: η εκτέλεση του γραφικού προγράμματος \"scandisk\" δεν είναι αρκετή, πρέπει οπωσδήποτε να χρησιμοποιήσεις την \"chkdsk\" από την Γραμμή Εντολών). Προαιρετικά να εκτελέσεις το defrag. Και μετά να επανεκκινήσεις την εγκατάσταση. Θα πρέπει επίσης να πάρεις αντίγραφα ασφαλείας των δεδομένων σου.\n"
+"Απαιτείται προσοχή: η διαδικασία αυτή εμπεριέχει κινδύνους. Εάν δεν το έχεις "
+"κάνει ήδη, πρέπει, πρώτα, να βγεις από την εγκατάσταση. Μετά, να εκτελέσεις "
+"την \"chkdsk c:\" από μία γραμμή εντολών (Command Prompt) μέσα από τα "
+"Microsoft Windows® (σημαντικό: η εκτέλεση του γραφικού προγράμματος "
+"\"scandisk\" δεν είναι αρκετή, πρέπει οπωσδήποτε να χρησιμοποιήσεις την "
+"\"chkdsk\" από την Γραμμή Εντολών). Προαιρετικά να εκτελέσεις το defrag. Και "
+"μετά να επανεκκινήσεις την εγκατάσταση. Θα πρέπει επίσης να πάρεις αντίγραφα "
+"ασφαλείας των δεδομένων σου.\n"
 "\n"
 "\n"
 "Εάν είσαι σίγουρος, πάτησε %s."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:164
-#: interactive.pm:542
-#: interactive/curses.pm:263
+#: fs/partitioning_wizard.pm:165 interactive.pm:542 interactive/curses.pm:263
 #: ugtk2.pm:512
 #, c-format
 msgid "Next"
 msgstr "Επόμενο"
 
-#: fs/partitioning_wizard.pm:167
+#: fs/partitioning_wizard.pm:168
 #, c-format
 msgid "Partitionning"
 msgstr "Καταμερισμός"
 
-#: fs/partitioning_wizard.pm:167
+#: fs/partitioning_wizard.pm:168
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
 msgstr "Τι χώρο θέλετε να κρατήσετε για τα windows στο κατάτμηση %s;"
 
-#: fs/partitioning_wizard.pm:168
+#: fs/partitioning_wizard.pm:169
 #, c-format
 msgid "Size"
 msgstr "Μέγεθος"
 
-#: fs/partitioning_wizard.pm:177
+#: fs/partitioning_wizard.pm:178
 #, c-format
 msgid "Resizing Microsoft Windows® partition"
 msgstr "Γίνεται αλλαγή τις κατάτμησης των Microsoft Windows®"
 
-#: fs/partitioning_wizard.pm:182
+#: fs/partitioning_wizard.pm:183
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr "Αλλαγή μεγέθους FAT απέτυχε: %s"
 
-#: fs/partitioning_wizard.pm:197
+#: fs/partitioning_wizard.pm:198
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
-msgstr "Δεν υπάρχει κατάμτηση FAT για αλλαγή μεγέθους (ή δεν υπάρχει αρκετός χώρος)"
+msgstr ""
+"Δεν υπάρχει κατάμτηση FAT για αλλαγή μεγέθους (ή δεν υπάρχει αρκετός χώρος)"
 
-#: fs/partitioning_wizard.pm:202
+#: fs/partitioning_wizard.pm:203
 #, c-format
 msgid "Remove Microsoft Windows®"
 msgstr "Αφαίρεση Microsoft Windows®"
 
-#: fs/partitioning_wizard.pm:202
+#: fs/partitioning_wizard.pm:203
 #, c-format
 msgid "Erase and use entire disk"
 msgstr "Διαγραφή και χρήση ολόκληρου του δίσκου"
 
-#: fs/partitioning_wizard.pm:204
+#: fs/partitioning_wizard.pm:205
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
-msgstr "Έχετε περισσότερους από έναν δίσκους, σε ποιόν θέλετε να εγκαταστήσετε το Linux;"
+msgstr ""
+"Έχετε περισσότερους από έναν δίσκους, σε ποιόν θέλετε να εγκαταστήσετε το "
+"Linux;"
 
-#: fs/partitioning_wizard.pm:210
-#: fsedit.pm:566
+#: fs/partitioning_wizard.pm:211 fsedit.pm:570
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr "Όλες οι υπάρχουσες κατατμήσεις και τα δεδομένα τους στον δίσκο %s θα χαθούν"
+msgstr ""
+"Όλες οι υπάρχουσες κατατμήσεις και τα δεδομένα τους στον δίσκο %s θα χαθούν"
 
-#: fs/partitioning_wizard.pm:221
+#: fs/partitioning_wizard.pm:222
 #, c-format
 msgid "Custom disk partitioning"
 msgstr "Προσαρμοσμένες κατατμήσεις δίσκου"
 
-#: fs/partitioning_wizard.pm:227
+#: fs/partitioning_wizard.pm:228
 #, c-format
 msgid "Use fdisk"
 msgstr "Χρήση fdisk"
 
-#: fs/partitioning_wizard.pm:230
+#: fs/partitioning_wizard.pm:231
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -2622,30 +2674,38 @@ msgstr ""
 "Μπορείτε τώρα να κατατμήσετε τον δίσκο %s\n"
 "Όταν τελειώσετε, μην ξεχάσετε να αποθηκεύσετε πατώντας `w'"
 
-#: fs/partitioning_wizard.pm:270
+#: fs/partitioning_wizard.pm:271
 #, c-format
 msgid "I can not find any room for installing"
 msgstr "Δεν μπορώ να βρω αρκετό χώρο για εγκατάσταση"
 
-#: fs/partitioning_wizard.pm:274
+#: fs/partitioning_wizard.pm:275
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "Ο Οδηγός Κατάτμησης DrakX βρήκε τις παρακάτω λύσεις:"
 
-#: fs/partitioning_wizard.pm:282
+#: fs/partitioning_wizard.pm:287
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Η κατάτμηση απέτυχε: %s"
 
-#: fs/type.pm:368
+#: fs/type.pm:370
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
-msgstr "Δεν μπορείτε να χρησιμοποιήσετε το JFS για κατατμήσεις μικρότερες από 16MB"
+msgstr ""
+"Δεν μπορείτε να χρησιμοποιήσετε το JFS για κατατμήσεις μικρότερες από 16MB"
 
-#: fs/type.pm:369
+#: fs/type.pm:371
 #, c-format
 msgid "You can not use ReiserFS for partitions smaller than 32MB"
-msgstr "Δεν μπορείτε να χρησιμοποιήσετε το ReiserFS για κατατμήσεις μικρότερες από 32MB"
+msgstr ""
+"Δεν μπορείτε να χρησιμοποιήσετε το ReiserFS για κατατμήσεις μικρότερες από "
+"32MB"
+
+#: fsedit.pm:23
+#, c-format
+msgid "simple"
+msgstr "απλό"
 
 #: fsedit.pm:27
 #, c-format
@@ -2662,10 +2722,11 @@ msgstr "εξυπηρετητής"
 msgid "BIOS software RAID detected on disks %s. Activate it?"
 msgstr "Ανιχνεύθηκε RAID λογισμικό BIOS στους δίσκους %s. Να ενεργοποιηθεί;"
 
-#: fsedit.pm:224
+#: fsedit.pm:223
 #, c-format
 msgid ""
-"I can not read the partition table of device %s, it's too corrupted for me :(\n"
+"I can not read the partition table of device %s, it's too corrupted for me :"
+"(\n"
 "I can try to go on, erasing over bad partitions (ALL DATA will be lost!).\n"
 "The other solution is to not allow DrakX to modify the partition table.\n"
 "(the error is %s)\n"
@@ -2680,22 +2741,24 @@ msgstr ""
 "\n"
 "Συμφωνείτε να διαγραφούν όλες οι κατατμήσεις;\n"
 
-#: fsedit.pm:393
+#: fsedit.pm:397
 #, c-format
 msgid "Mount points must begin with a leading /"
 msgstr "Το σημείο προσάρτησης πρέπει να ξεκινάει με /"
 
-#: fsedit.pm:394
+#: fsedit.pm:398
 #, c-format
 msgid "Mount points should contain only alphanumerical characters"
-msgstr "Τα σημεία προσάρτησης θα πρέπει να περιέχουν μόνο αλφαριθμητικούς χαρακτήρες (γράμματα, αριθμοί, κλπ)"
+msgstr ""
+"Τα σημεία προσάρτησης θα πρέπει να περιέχουν μόνο αλφαριθμητικούς χαρακτήρες "
+"(γράμματα, αριθμοί, κλπ)"
 
-#: fsedit.pm:395
+#: fsedit.pm:399
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Υπάρχει, ήδη, μία κατάτμηση με το σημείο προσάρτησης %s\n"
 
-#: fsedit.pm:399
+#: fsedit.pm:403
 #, fuzzy, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
@@ -2705,44 +2768,54 @@ msgstr ""
 "\n"
 " Όχι\n"
 
-#: fsedit.pm:405
+#: fsedit.pm:409
 #, fuzzy, c-format
-msgid "You can not use the LVM Logical Volume for mount point %s since it spans physical volumes"
+msgid ""
+"You can not use the LVM Logical Volume for mount point %s since it spans "
+"physical volumes"
 msgstr "Δεν μπορείτε να χρησιμοποιήσετε μια κατάτμηση LVM για προσάρτηση %s"
 
-#: fsedit.pm:407
+#: fsedit.pm:411
 #, fuzzy, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
-"The bootloader is not able to handle this when the volume spans physical volumes.\n"
+"The bootloader is not able to handle this when the volume spans physical "
+"volumes.\n"
 "You should create a /boot partition first"
 msgstr ""
 "\n"
 " Όχι\n"
 
-#: fsedit.pm:411
-#: fsedit.pm:413
+#: fsedit.pm:415 fsedit.pm:417
 #, c-format
 msgid "This directory should remain within the root filesystem"
-msgstr "Αυτός ο κατάλογος πρέπει να παραμείνει στο ριζικό σύστημα αρχείων (root)"
+msgstr ""
+"Αυτός ο κατάλογος πρέπει να παραμείνει στο ριζικό σύστημα αρχείων (root)"
 
-#: fsedit.pm:415
-#: fsedit.pm:417
+#: fsedit.pm:419 fsedit.pm:421
 #, c-format
-msgid "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount point\n"
-msgstr "Χρειάζεστε ένα πραγματικό σύστημα αρχείων (ext2/ext3, reiserfs, xfs, ή jfs) για αυτό το σημείο προσάρτησης\n"
+msgid ""
+"You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
+"point\n"
+msgstr ""
+"Χρειάζεστε ένα πραγματικό σύστημα αρχείων (ext2/ext3, reiserfs, xfs, ή jfs) "
+"για αυτό το σημείο προσάρτησης\n"
 
-#: fsedit.pm:419
+#: fsedit.pm:423
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
-msgstr "Δεν μπορείς να χρησιμοποιήσεις ένα κρυπτογραφημένο σύστημα αρχείων για το σημείο προσάρτησης %s"
+msgstr ""
+"Δεν μπορείς να χρησιμοποιήσεις ένα κρυπτογραφημένο σύστημα αρχείων για το "
+"σημείο προσάρτησης %s"
 
-#: fsedit.pm:483
+#: fsedit.pm:487
 #, c-format
 msgid "Not enough free space for auto-allocating"
-msgstr "Δεν υπάρχει αρκετός ελεύθερος χώρος για την αυτόματη δημιουργία νέων κατατμήσεων"
+msgstr ""
+"Δεν υπάρχει αρκετός ελεύθερος χώρος για την αυτόματη δημιουργία νέων "
+"κατατμήσεων"
 
-#: fsedit.pm:485
+#: fsedit.pm:489
 #, c-format
 msgid "Nothing to do"
 msgstr "Καμία ενέργεια προς εκτέλεση"
@@ -2862,215 +2935,229 @@ msgstr "DVB κάρτα"
 msgid "Tvcard"
 msgstr "Κάρτα TV"
 
-#: harddrake/data.pm:289
+#: harddrake/data.pm:290
 #, c-format
 msgid "Other MultiMedia devices"
 msgstr "Άλλα συσκευές Πολυμέσων"
 
-#: harddrake/data.pm:298
+#: harddrake/data.pm:299
 #, c-format
 msgid "Soundcard"
 msgstr "Κάρτα ήχου"
 
-#: harddrake/data.pm:311
+#: harddrake/data.pm:312
 #, c-format
 msgid "Webcam"
 msgstr "Κάμερα WebCam"
 
-#: harddrake/data.pm:325
+#: harddrake/data.pm:326
 #, c-format
 msgid "Processors"
 msgstr "Επεξεργαστές"
 
-#: harddrake/data.pm:335
+#: harddrake/data.pm:336
 #, c-format
 msgid "ISDN adapters"
 msgstr "Προσαρμογείς ISDN"
 
-#: harddrake/data.pm:346
+#: harddrake/data.pm:347
 #, c-format
 msgid "USB sound devices"
 msgstr "USB συσκευές ήχου"
 
-#: harddrake/data.pm:355
+#: harddrake/data.pm:356
 #, c-format
 msgid "Radio cards"
 msgstr "Κάρτες ραδιοφώνου"
 
-#: harddrake/data.pm:364
+#: harddrake/data.pm:365
 #, c-format
 msgid "ATM network cards"
 msgstr "ATM κάρτες δικτύου"
 
-#: harddrake/data.pm:373
+#: harddrake/data.pm:374
 #, c-format
 msgid "WAN network cards"
 msgstr "WAN κάρτες δικτύου"
 
-#: harddrake/data.pm:382
+#: harddrake/data.pm:383
 #, c-format
 msgid "Bluetooth devices"
 msgstr "Συσκευές Bluetooth"
 
-#: harddrake/data.pm:391
+#: harddrake/data.pm:392
 #, c-format
 msgid "Ethernetcard"
 msgstr "Κάρτα Δικτύου Ethernet"
 
-#: harddrake/data.pm:408
+#: harddrake/data.pm:409
 #, c-format
 msgid "Modem"
 msgstr "Μόντεμ"
 
-#: harddrake/data.pm:418
+#: harddrake/data.pm:419
 #, c-format
 msgid "ADSL adapters"
 msgstr "Προσαρμογείς ADSL"
 
-#: harddrake/data.pm:430
+#: harddrake/data.pm:431
 #, c-format
 msgid "Memory"
 msgstr "Μνήμη"
 
-#: harddrake/data.pm:439
+#: harddrake/data.pm:440
 #, c-format
 msgid "Printer"
 msgstr "Εκτυπωτής"
 
 #. -PO: these are joysticks controllers:
-#: harddrake/data.pm:453
+#: harddrake/data.pm:454
 #, c-format
 msgid "Game port controllers"
 msgstr "Ελεγκτές θυρών παιχνιδιών"
 
-#: harddrake/data.pm:462
+#: harddrake/data.pm:463
 #, c-format
 msgid "Joystick"
 msgstr "Joystick"
 
-#: harddrake/data.pm:472
+#: harddrake/data.pm:473
 #, c-format
 msgid "Keyboard"
 msgstr "Πληκτρολόγιο"
 
-#: harddrake/data.pm:485
+#: harddrake/data.pm:486
 #, c-format
 msgid "Tablet and touchscreen"
 msgstr "Πινακίδια (tablets) και οθόνες αφής"
 
-#: harddrake/data.pm:494
+#: harddrake/data.pm:495
 #, c-format
 msgid "Mouse"
 msgstr "Ποντίκι"
 
-#: harddrake/data.pm:508
+#: harddrake/data.pm:509
 #, c-format
 msgid "Biometry"
 msgstr "Βιομετρία"
 
-#: harddrake/data.pm:516
+#: harddrake/data.pm:517
 #, c-format
 msgid "UPS"
 msgstr "UPS"
 
-#: harddrake/data.pm:525
+#: harddrake/data.pm:526
 #, c-format
 msgid "Scanner"
 msgstr "Σαρωτής"
 
-#: harddrake/data.pm:536
+#: harddrake/data.pm:537
 #, c-format
 msgid "Unknown/Others"
 msgstr "Άγνωστο/Άλλο"
 
-#: harddrake/data.pm:564
+#: harddrake/data.pm:565
 #, c-format
 msgid "cpu # "
 msgstr "επεξεργαστής # "
 
-#: harddrake/sound.pm:202
+#: harddrake/sound.pm:285
 #, c-format
 msgid "Please Wait... Applying the configuration"
 msgstr "Παρακαλώ περιμένετε... Εφαρμογή ρυθμίσεων"
 
-#: harddrake/sound.pm:305
+#: harddrake/sound.pm:346
 #, c-format
 msgid "Enable PulseAudio"
 msgstr "Ενεργοποίηση του PulseAudio"
 
-#: harddrake/sound.pm:309
+#: harddrake/sound.pm:350
 #, c-format
 msgid "Automatic routing from ALSA to PulseAudio"
 msgstr "Αυτόματη διαδρόμηση από τον ALSA στο PulseAudio"
 
-#: harddrake/sound.pm:344
+#: harddrake/sound.pm:355
 #, c-format
 msgid "Enable 5.1 sound with Pulse Audio"
 msgstr "Ενεργοποίηση του ήχου 5.1 με το Pulse Audio"
 
-#: harddrake/sound.pm:348
+#: harddrake/sound.pm:360
 #, c-format
 msgid "Enable user switching for audio applications"
 msgstr "Ενεργοποίηση της εναλλαγής χρήστη για τις εφαρμογές ήχου"
 
-#: harddrake/sound.pm:318
+#: harddrake/sound.pm:365
 #, c-format
 msgid "Reset sound mixer to default values"
 msgstr "Επαναφορά των προεπιλεγμένων ρυθμίσεων στο μίκτη ήχου"
 
-#: harddrake/sound.pm:323
+#: harddrake/sound.pm:370
 #, c-format
 msgid "Trouble shooting"
 msgstr "Επίλυση προβλημάτων"
 
-#: harddrake/sound.pm:330
+#: harddrake/sound.pm:377
 #, c-format
 msgid "No alternative driver"
 msgstr "Κανένας εναλλακτικός οδηγός"
 
-#: harddrake/sound.pm:240
+#: harddrake/sound.pm:378
 #, c-format
-msgid "There's no known OSS/ALSA alternative driver for your sound card (%s) which currently uses \"%s\""
-msgstr "Δεν υπάρχει, μέχρι τώρα, κάποιος γνωστός οδηγός συσκευής, εναλλακτικός των OSS/ALSA, για την κάρτα ήχου σου (%s), που να χρησιμοποιεί το \"%s\""
+msgid ""
+"There's no known OSS/ALSA alternative driver for your sound card (%s) which "
+"currently uses \"%s\""
+msgstr ""
+"Δεν υπάρχει, μέχρι τώρα, κάποιος γνωστός οδηγός συσκευής, εναλλακτικός των "
+"OSS/ALSA, για την κάρτα ήχου σου (%s), που να χρησιμοποιεί το \"%s\""
 
-#: harddrake/sound.pm:246
+#: harddrake/sound.pm:385
 #, c-format
 msgid "Sound configuration"
 msgstr "Ρύθμιση ήχου"
 
-#: harddrake/sound.pm:248
+#: harddrake/sound.pm:387
 #, c-format
-msgid "Here you can select an alternative driver (either OSS or ALSA) for your sound card (%s)."
-msgstr "Εδώ μπορείτε να επιλέξετε έναν εναλλακτικό οδηγό (OSS ή ALSA) για την κάρτα ήχου σας (%s)"
+msgid ""
+"Here you can select an alternative driver (either OSS or ALSA) for your "
+"sound card (%s)."
+msgstr ""
+"Εδώ μπορείτε να επιλέξετε έναν εναλλακτικό οδηγό (OSS ή ALSA) για την κάρτα "
+"ήχου σας (%s)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA",
+#. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
-#: harddrake/sound.pm:253
+#: harddrake/sound.pm:392
 #, c-format
 msgid ""
 "\n"
 "\n"
-"Your card currently use the %s\"%s\" driver (default driver for your card is \"%s\")"
+"Your card currently use the %s\"%s\" driver (default driver for your card is "
+"\"%s\")"
 msgstr ""
 "\n"
 "\n"
-"Η κάρτα σου, τώρα, χρησιμοποιεί τον οδηγό συσκευής %s\"%s\" (ο προεπιλεγμένος οδηγός για την κάρτα σου είναι ο \"%s\")"
+"Η κάρτα σου, τώρα, χρησιμοποιεί τον οδηγό συσκευής %s\"%s\" (ο "
+"προεπιλεγμένος οδηγός για την κάρτα σου είναι ο \"%s\")"
 
-#: harddrake/sound.pm:255
+#: harddrake/sound.pm:394
 #, fuzzy, c-format
 msgid ""
-"OSS (Open Sound System) was the first sound API. It's an OS independent sound API (it's available on most UNIX(tm) systems) but it's a very basic and limited API.\n"
+"OSS (Open Sound System) was the first sound API. It's an OS independent "
+"sound API (it's available on most UNIX(tm) systems) but it's a very basic "
+"and limited API.\n"
 "What's more, OSS drivers all reinvent the wheel.\n"
 "\n"
-"ALSA (Advanced Linux Sound Architecture) is a modularized architecture which\n"
+"ALSA (Advanced Linux Sound Architecture) is a modularized architecture "
+"which\n"
 "supports quite a large range of ISA, USB and PCI cards.\n"
 "\n"
 "It also provides a much higher API than OSS.\n"
 "\n"
 "To use alsa, one can either use:\n"
 "- the old compatibility OSS api\n"
-"- the new ALSA api that provides many enhanced features but requires using the ALSA library.\n"
+"- the new ALSA api that provides many enhanced features but requires using "
+"the ALSA library.\n"
 msgstr ""
 "Σύστημα\n"
 " Τι\n"
@@ -3084,13 +3171,12 @@ msgstr ""
 "\n"
 " νέο"
 
-#: harddrake/sound.pm:269
-#: harddrake/sound.pm:354
+#: harddrake/sound.pm:408 harddrake/sound.pm:491
 #, c-format
 msgid "Driver:"
 msgstr "Οδηγός:"
 
-#: harddrake/sound.pm:379
+#: harddrake/sound.pm:422
 #, fuzzy, c-format
 msgid ""
 "The old \"%s\" driver is blacklisted.\n"
@@ -3105,39 +3191,44 @@ msgstr ""
 "\n"
 " νέο."
 
-#: harddrake/sound.pm:294
+#: harddrake/sound.pm:430
 #, c-format
 msgid "No open source driver"
 msgstr "Κανένας οδηγός ανοιχτού κώδικα"
 
-#: harddrake/sound.pm:295
+#: harddrake/sound.pm:431
 #, c-format
-msgid "There's no free driver for your sound card (%s), but there's a proprietary driver at \"%s\"."
-msgstr "Δεν υπάρχει κάποιος ελεύθερος οδηγός συσκευής για την δικιά σου κάρτα ήχου (%s). Υπάρχει, όμως, ένας ιδιόκτητος οδηγός συσκευής στο \"%s\"."
+msgid ""
+"There's no free driver for your sound card (%s), but there's a proprietary "
+"driver at \"%s\"."
+msgstr ""
+"Δεν υπάρχει κάποιος ελεύθερος οδηγός συσκευής για την δικιά σου κάρτα ήχου (%"
+"s). Υπάρχει, όμως, ένας ιδιόκτητος οδηγός συσκευής στο \"%s\"."
 
-#: harddrake/sound.pm:298
+#: harddrake/sound.pm:434
 #, c-format
 msgid "No known driver"
 msgstr "Κανένας γνωστός οδηγός"
 
-#: harddrake/sound.pm:299
+#: harddrake/sound.pm:435
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
 msgstr "Δεν υπάρχει κάποιος γνωστός οδηγός για την κάρτα ήχου σας (%s)"
 
-#: harddrake/sound.pm:314
+#: harddrake/sound.pm:450
 #, c-format
 msgid "Sound trouble shooting"
 msgstr "Επίλυση προβλημάτων Ήχου"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:317
+#: harddrake/sound.pm:453
 #, c-format
 msgid ""
 "The classic bug sound tester is to run the following commands:\n"
 "\n"
 "\n"
-"- \"lspcidrake -v | fgrep -i AUDIO\" will tell you which driver your card uses\n"
+"- \"lspcidrake -v | fgrep -i AUDIO\" will tell you which driver your card "
+"uses\n"
 "by default\n"
 "\n"
 "- \"grep sound-slot /etc/modprobe.conf\" will tell you what driver it\n"
@@ -3154,46 +3245,54 @@ msgid ""
 "\n"
 "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
 msgstr ""
-"Ο κλασικός τρόπος ελέγχου του ήχου για δυσλειτουργίες, είναι ή εκτέλεση των παρακάτω εντολών:\n"
+"Ο κλασικός τρόπος ελέγχου του ήχου για δυσλειτουργίες, είναι ή εκτέλεση των "
+"παρακάτω εντολών:\n"
 "\n"
 "\n"
-"- \"lspcidrake -v | fgrep -i AUDIO\" θα σου πει ποιον οδηγό συσκευής χρησιμοποιεί η κάρτα σου,\n"
+"- \"lspcidrake -v | fgrep -i AUDIO\" θα σου πει ποιον οδηγό συσκευής "
+"χρησιμοποιεί η κάρτα σου,\n"
 " κατά προεπιλογή\n"
 "\n"
-"- \"grep sound-slot /etc/modprobe.conf\" θα σου πει ποιον οδηγό συσκευής χρησιμοποιεί η κάρτα σου,\n"
+"- \"grep sound-slot /etc/modprobe.conf\" θα σου πει ποιον οδηγό συσκευής "
+"χρησιμοποιεί η κάρτα σου,\n"
 " τώρα\n"
 "\n"
-"- \"/sbin/lsmod\" θα σου επιτρέψει να ελέγξεις αν το άρθρωμά της (module)(οδηγός συσκευής - driver)\n"
+"- \"/sbin/lsmod\" θα σου επιτρέψει να ελέγξεις αν το άρθρωμά της (module)"
+"(οδηγός συσκευής - driver)\n"
 " έχει φορτωθεί ή όχι\n"
 "\n"
 "- \"/sbin/chkconfig --list sound\" και \"/sbin/chkconfig --list alsa\" \n"
 " θα σου πει αν οι υπηρεσίες ήχου και alsa έχουν ρυθμιστεί να τρέχουν σε\n"
 " initlevel 3\n"
 "\n"
-"- \"aumix -q\" θα σου πει αν η ένταση του ήχου είναι σε κατάσταση σιγής ή όχι\n"
+"- \"aumix -q\" θα σου πει αν η ένταση του ήχου είναι σε κατάσταση σιγής ή "
+"όχι\n"
 "\n"
-"- \"/sbin/fuser -v /dev/dsp\" θα σου πει ποιο πρόγραμμα χρησιμοποιεί την κάρτα ήχου.\n"
+"- \"/sbin/fuser -v /dev/dsp\" θα σου πει ποιο πρόγραμμα χρησιμοποιεί την "
+"κάρτα ήχου.\n"
 
-#: harddrake/sound.pm:343
+#: harddrake/sound.pm:480
 #, c-format
 msgid "Let me pick any driver"
 msgstr "Θα διαλέξω εγώ οδηγό"
 
-#: harddrake/sound.pm:346
+#: harddrake/sound.pm:483
 #, c-format
 msgid "Choosing an arbitrary driver"
 msgstr "Επιλογή ενός αυθαίρετου οδηγού συσκευής"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:349
+#: harddrake/sound.pm:486
 #, c-format
 msgid ""
-"If you really think that you know which driver is the right one for your card\n"
+"If you really think that you know which driver is the right one for your "
+"card\n"
 "you can pick one in the above list.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
-"Εάν πραγματικά πιστεύεις, ότι ξέρεις, ποιος οδηγός συσκευής είναι καλύτερος για την κάρτα σου,\n"
+"Εάν πραγματικά πιστεύεις, ότι ξέρεις, ποιος οδηγός συσκευής είναι καλύτερος "
+"για την κάρτα σου,\n"
 "μπορείς να επιλέξεις έναν από την παραπάνω λίστα.\n"
 "\n"
 "Ο τωρινός οδηγός για την κάρτα ήχου σου \"%s\" είναι ο \"%s\" "
@@ -3203,9 +3302,7 @@ msgstr ""
 msgid "Auto-detect"
 msgstr "Αυτόματη ανίχνευση"
 
-#: harddrake/v4l.pm:97
-#: harddrake/v4l.pm:285
-#: harddrake/v4l.pm:337
+#: harddrake/v4l.pm:97 harddrake/v4l.pm:285 harddrake/v4l.pm:337
 #, c-format
 msgid "Unknown|Generic"
 msgstr "Άγνωστο|Γενικό"
@@ -3223,11 +3320,16 @@ msgstr "Άγνωστο|CPH06X (bt878) [πολλοί κατασκευαστές]"
 #: harddrake/v4l.pm:475
 #, c-format
 msgid ""
-"For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-detect the rights parameters.\n"
-"If your card is misdetected, you can force the right tuner and card types here. Just select your tv card parameters if needed."
+"For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-"
+"detect the rights parameters.\n"
+"If your card is misdetected, you can force the right tuner and card types "
+"here. Just select your tv card parameters if needed."
 msgstr ""
-"Ισχύει για τις περισσότερες σύγχρονες κάρτες τηλεόρασης: το άρθρωμα bttv, του kernel GNU/Linux, μόλις αναγνώρισε αυτόματα τις σωστές παραμέτρους.\n"
-"Στην περίπτωση που η κάρτα σου αναγνωρίστηκε εσφαλμένα, μπορείς, εδώ, να «επιβάλεις» τον σωστό τύπο του tuner και της κάρτας. Απλά, επέλεξε τις παραμέτρους της κάρτας τηλεόρασης, αν αυτό χρειαστεί."
+"Ισχύει για τις περισσότερες σύγχρονες κάρτες τηλεόρασης: το άρθρωμα bttv, "
+"του kernel GNU/Linux, μόλις αναγνώρισε αυτόματα τις σωστές παραμέτρους.\n"
+"Στην περίπτωση που η κάρτα σου αναγνωρίστηκε εσφαλμένα, μπορείς, εδώ, να "
+"«επιβάλεις» τον σωστό τύπο του tuner και της κάρτας. Απλά, επέλεξε τις "
+"παραμέτρους της κάρτας τηλεόρασης, αν αυτό χρειαστεί."
 
 #: harddrake/v4l.pm:478
 #, c-format
@@ -3239,34 +3341,20 @@ msgstr "Μοντέλο κάρτας:"
 msgid "Tuner type:"
 msgstr "Τύπος συντονιστή (tuner):"
 
-#: interactive.pm:125
-#: interactive.pm:542
-#: interactive/curses.pm:263
-#: interactive/http.pm:103
-#: interactive/http.pm:156
-#: interactive/stdio.pm:39
-#: interactive/stdio.pm:148
-#: interactive/stdio.pm:149
-#: ugtk2.pm:414
-#: ugtk2.pm:512
-#: ugtk2.pm:801
-#: ugtk2.pm:824
+#: interactive.pm:125 interactive.pm:542 interactive/curses.pm:263
+#: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
+#: interactive/stdio.pm:148 interactive/stdio.pm:149 ugtk2.pm:414 ugtk2.pm:512
+#: ugtk2.pm:801 ugtk2.pm:824
 #, c-format
 msgid "Ok"
 msgstr "Εντάξει"
 
-#: interactive.pm:224
-#: modules/interactive.pm:71
-#: ugtk2.pm:800
-#: wizards.pm:156
+#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:800 wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "Ναι"
 
-#: interactive.pm:224
-#: modules/interactive.pm:71
-#: ugtk2.pm:800
-#: wizards.pm:156
+#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:800 wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "Όχι"
@@ -3276,34 +3364,27 @@ msgstr "Όχι"
 msgid "Choose a file"
 msgstr "Επιλέξτε ένα αρχείο"
 
-#: interactive.pm:383
-#: interactive/gtk.pm:420
+#: interactive.pm:383 interactive/gtk.pm:420
 #, c-format
 msgid "Add"
 msgstr "Προσθήκη"
 
-#: interactive.pm:383
-#: interactive/gtk.pm:420
+#: interactive.pm:383 interactive/gtk.pm:420
 #, c-format
 msgid "Modify"
 msgstr "Τροποποίηση"
 
-#: interactive.pm:383
-#: interactive/gtk.pm:420
+#: interactive.pm:383 interactive/gtk.pm:420
 #, c-format
 msgid "Remove"
 msgstr "Αφαίρεση"
 
-#: interactive.pm:542
-#: interactive/curses.pm:263
-#: ugtk2.pm:512
+#: interactive.pm:542 interactive/curses.pm:263 ugtk2.pm:512
 #, c-format
 msgid "Finish"
 msgstr "Τέλος"
 
-#: interactive.pm:543
-#: interactive/curses.pm:260
-#: ugtk2.pm:510
+#: interactive.pm:543 interactive/curses.pm:260 ugtk2.pm:510
 #, c-format
 msgid "Previous"
 msgstr "Προηγούμενο"
@@ -3311,16 +3392,16 @@ msgstr "Προηγούμενο"
 #: interactive/gtk.pm:548
 #, c-format
 msgid "Beware, Caps Lock is enabled"
-msgstr "Μα δε προσέχεις; Τα κεφαλαία είναι ενεργοποιημένα (Πλήκτρο Caps Lock, εκεί, τέρμα αριστερά στο πληκτρολόγιο. Αμάν πια, όλα εμείς θα στα λέμε; :) )"
+msgstr ""
+"Μα δε προσέχεις; Τα κεφαλαία είναι ενεργοποιημένα (Πλήκτρο Caps Lock, εκεί, "
+"τέρμα αριστερά στο πληκτρολόγιο. Αμάν πια, όλα εμείς θα στα λέμε; :) )"
 
-#: interactive/stdio.pm:29
-#: interactive/stdio.pm:154
+#: interactive/stdio.pm:29 interactive/stdio.pm:154
 #, c-format
 msgid "Bad choice, try again\n"
 msgstr "Κακή επιλογή, ξαναδοκιμάστε\n"
 
-#: interactive/stdio.pm:30
-#: interactive/stdio.pm:155
+#: interactive/stdio.pm:30 interactive/stdio.pm:155
 #, c-format
 msgid "Your choice? (default %s) "
 msgstr "Η επιλογή σας; (εξ ορισμού %s)"
@@ -3371,7 +3452,8 @@ msgid ""
 "or just hit Enter to proceed.\n"
 "Your choice? "
 msgstr ""
-"Παρακαλώ, επέλεξε το πρώτο αριθμό από το εύρος-10 που θέλεις να επεξεργαστείς, \n"
+"Παρακαλώ, επέλεξε το πρώτο αριθμό από το εύρος-10 που θέλεις να "
+"επεξεργαστείς, \n"
 "ή απλά πίεσε το Enter για να συνεχίσεις.\n"
 "Τι επιλέγεις;"
 
@@ -3402,8 +3484,7 @@ msgstr "default:LTR"
 msgid "Andorra"
 msgstr "Ανδόρα"
 
-#: lang.pm:211
-#: timezone.pm:215
+#: lang.pm:211 timezone.pm:226
 #, c-format
 msgid "United Arab Emirates"
 msgstr "Ηνωμένα Αραβικά Εμιράτα"
@@ -3448,8 +3529,7 @@ msgstr "Αγκόλα"
 msgid "Antarctica"
 msgstr "Ανταρκτική"
 
-#: lang.pm:220
-#: timezone.pm:260
+#: lang.pm:220 timezone.pm:271
 #, c-format
 msgid "Argentina"
 msgstr "Αργεντινή"
@@ -3459,16 +3539,12 @@ msgstr "Αργεντινή"
 msgid "American Samoa"
 msgstr "Αμερικανική Σαμόα"
 
-#: lang.pm:222
-#: mirror.pm:11
-#: timezone.pm:218
+#: lang.pm:222 mirror.pm:12 timezone.pm:229
 #, c-format
 msgid "Austria"
 msgstr "Αυστρία"
 
-#: lang.pm:223
-#: mirror.pm:10
-#: timezone.pm:256
+#: lang.pm:223 mirror.pm:11 timezone.pm:267
 #, c-format
 msgid "Australia"
 msgstr "Αυστραλία"
@@ -3493,15 +3569,12 @@ msgstr "Βοσνία-Ερζεγοβίνη"
 msgid "Barbados"
 msgstr "Μπαρμπάντος"
 
-#: lang.pm:228
-#: timezone.pm:200
+#: lang.pm:228 timezone.pm:211
 #, c-format
 msgid "Bangladesh"
 msgstr "Μπανγκλαντές"
 
-#: lang.pm:229
-#: mirror.pm:12
-#: timezone.pm:220
+#: lang.pm:229 mirror.pm:13 timezone.pm:231
 #, c-format
 msgid "Belgium"
 msgstr "Βέλγιο"
@@ -3511,8 +3584,7 @@ msgstr "Βέλγιο"
 msgid "Burkina Faso"
 msgstr "Μπουρκίνα Φάσο"
 
-#: lang.pm:231
-#: timezone.pm:221
+#: lang.pm:231 timezone.pm:232
 #, c-format
 msgid "Bulgaria"
 msgstr "Βουλγαρία"
@@ -3547,9 +3619,7 @@ msgstr "Μπρουνέι Νταρουσαλάμ"
 msgid "Bolivia"
 msgstr "Βολιβία"
 
-#: lang.pm:238
-#: mirror.pm:13
-#: timezone.pm:261
+#: lang.pm:238 mirror.pm:14 timezone.pm:272
 #, c-format
 msgid "Brazil"
 msgstr "Βραζιλία"
@@ -3574,8 +3644,7 @@ msgstr "Νήσος Μπουβέ"
 msgid "Botswana"
 msgstr "Μποτσουάνα"
 
-#: lang.pm:243
-#: timezone.pm:219
+#: lang.pm:243 timezone.pm:230
 #, c-format
 msgid "Belarus"
 msgstr "Λευκορωσία"
@@ -3585,9 +3654,7 @@ msgstr "Λευκορωσία"
 msgid "Belize"
 msgstr "Μπελίζ"
 
-#: lang.pm:245
-#: mirror.pm:14
-#: timezone.pm:250
+#: lang.pm:245 mirror.pm:15 timezone.pm:261
 #, c-format
 msgid "Canada"
 msgstr "Καναδάς"
@@ -3612,9 +3679,7 @@ msgstr "Δημοκρατία Κεντρικής Αφρικής"
 msgid "Congo (Brazzaville)"
 msgstr "Κονγκό (Μπραζαβίλ)"
 
-#: lang.pm:250
-#: mirror.pm:38
-#: timezone.pm:244
+#: lang.pm:250 mirror.pm:39 timezone.pm:255
 #, c-format
 msgid "Switzerland"
 msgstr "Ελβετία"
@@ -3629,8 +3694,7 @@ msgstr "Ακτή Ελεφαντοστού"
 msgid "Cook Islands"
 msgstr "Νήσοι Κουκ"
 
-#: lang.pm:253
-#: timezone.pm:262
+#: lang.pm:253 timezone.pm:273
 #, c-format
 msgid "Chile"
 msgstr "Χιλή"
@@ -3640,8 +3704,7 @@ msgstr "Χιλή"
 msgid "Cameroon"
 msgstr "Καμερούν"
 
-#: lang.pm:255
-#: timezone.pm:201
+#: lang.pm:255 timezone.pm:212
 #, c-format
 msgid "China"
 msgstr "Κίνα"
@@ -3651,8 +3714,7 @@ msgstr "Κίνα"
 msgid "Colombia"
 msgstr "Κολομβία"
 
-#: lang.pm:257
-#: mirror.pm:15
+#: lang.pm:257 mirror.pm:16
 #, c-format
 msgid "Costa Rica"
 msgstr "Κόστα Ρίκα"
@@ -3682,16 +3744,12 @@ msgstr "Νήσοι Χριστουγέννων"
 msgid "Cyprus"
 msgstr "Κύπρος"
 
-#: lang.pm:263
-#: mirror.pm:16
-#: timezone.pm:222
+#: lang.pm:263 mirror.pm:17 timezone.pm:233
 #, c-format
 msgid "Czech Republic"
 msgstr "Τσέχικη Δημοκρατία"
 
-#: lang.pm:264
-#: mirror.pm:21
-#: timezone.pm:227
+#: lang.pm:264 mirror.pm:22 timezone.pm:238
 #, c-format
 msgid "Germany"
 msgstr "Γερμανία"
@@ -3701,9 +3759,7 @@ msgstr "Γερμανία"
 msgid "Djibouti"
 msgstr "Τζιμπουτί"
 
-#: lang.pm:266
-#: mirror.pm:17
-#: timezone.pm:223
+#: lang.pm:266 mirror.pm:18 timezone.pm:234
 #, c-format
 msgid "Denmark"
 msgstr "Δανία"
@@ -3728,9 +3784,7 @@ msgstr "Αλγερία"
 msgid "Ecuador"
 msgstr "Ισημερινός"
 
-#: lang.pm:271
-#: mirror.pm:18
-#: timezone.pm:224
+#: lang.pm:271 mirror.pm:19 timezone.pm:235
 #, c-format
 msgid "Estonia"
 msgstr "Εσθονία"
@@ -3750,9 +3804,7 @@ msgstr "Δυτική Σαχάρα"
 msgid "Eritrea"
 msgstr "Ερυθραία"
 
-#: lang.pm:275
-#: mirror.pm:36
-#: timezone.pm:242
+#: lang.pm:275 mirror.pm:37 timezone.pm:253
 #, c-format
 msgid "Spain"
 msgstr "Ισπανία"
@@ -3762,9 +3814,7 @@ msgstr "Ισπανία"
 msgid "Ethiopia"
 msgstr "Αιθιοπία"
 
-#: lang.pm:277
-#: mirror.pm:19
-#: timezone.pm:225
+#: lang.pm:277 mirror.pm:20 timezone.pm:236
 #, c-format
 msgid "Finland"
 msgstr "Φινλανδία"
@@ -3789,9 +3839,7 @@ msgstr "Μικρονησία"
 msgid "Faroe Islands"
 msgstr "Νήσοι Φερόες"
 
-#: lang.pm:282
-#: mirror.pm:20
-#: timezone.pm:226
+#: lang.pm:282 mirror.pm:21 timezone.pm:237
 #, c-format
 msgid "France"
 msgstr "Γαλλία"
@@ -3801,8 +3849,7 @@ msgstr "Γαλλία"
 msgid "Gabon"
 msgstr "Γκαμπόν"
 
-#: lang.pm:284
-#: timezone.pm:246
+#: lang.pm:284 timezone.pm:257
 #, c-format
 msgid "United Kingdom"
 msgstr "Ηνωμένο Βασίλειο"
@@ -3857,9 +3904,7 @@ msgstr "Γουαδελούπη"
 msgid "Equatorial Guinea"
 msgstr "Ισημερινή Γουϊνέα"
 
-#: lang.pm:295
-#: mirror.pm:22
-#: timezone.pm:228
+#: lang.pm:295 mirror.pm:23 timezone.pm:239
 #, c-format
 msgid "Greece"
 msgstr "Ελλάδα"
@@ -3869,8 +3914,7 @@ msgstr "Ελλάδα"
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Νότια Γεωργία και Νότια Νησιά Σάντουιτς"
 
-#: lang.pm:297
-#: timezone.pm:251
+#: lang.pm:297 timezone.pm:262
 #, c-format
 msgid "Guatemala"
 msgstr "Γουατεμάλα"
@@ -3915,35 +3959,27 @@ msgstr "Κροατία"
 msgid "Haiti"
 msgstr "Αϊτή"
 
-#: lang.pm:306
-#: mirror.pm:23
-#: timezone.pm:229
+#: lang.pm:306 mirror.pm:24 timezone.pm:240
 #, c-format
 msgid "Hungary"
 msgstr "Ουγγαρία"
 
-#: lang.pm:307
-#: timezone.pm:204
+#: lang.pm:307 timezone.pm:215
 #, c-format
 msgid "Indonesia"
 msgstr "Ινδονησία"
 
-#: lang.pm:308
-#: mirror.pm:24
-#: timezone.pm:230
+#: lang.pm:308 mirror.pm:25 timezone.pm:241
 #, c-format
 msgid "Ireland"
 msgstr "Ιρλανδία"
 
-#: lang.pm:309
-#: mirror.pm:25
-#: timezone.pm:206
+#: lang.pm:309 mirror.pm:26 timezone.pm:217
 #, c-format
 msgid "Israel"
 msgstr "Ισραήλ"
 
-#: lang.pm:310
-#: timezone.pm:203
+#: lang.pm:310 timezone.pm:214
 #, c-format
 msgid "India"
 msgstr "Ινδία"
@@ -3958,8 +3994,7 @@ msgstr "Βρετανικά Εδάφη Ινδικού Ωκεανού"
 msgid "Iraq"
 msgstr "Ιράκ"
 
-#: lang.pm:313
-#: timezone.pm:205
+#: lang.pm:313 timezone.pm:216
 #, c-format
 msgid "Iran"
 msgstr "Ιράν"
@@ -3969,9 +4004,7 @@ msgstr "Ιράν"
 msgid "Iceland"
 msgstr "Ισλανδία"
 
-#: lang.pm:315
-#: mirror.pm:26
-#: timezone.pm:231
+#: lang.pm:315 mirror.pm:27 timezone.pm:242
 #, c-format
 msgid "Italy"
 msgstr "Ιταλία"
@@ -3986,9 +4019,7 @@ msgstr "Τζαμάικα"
 msgid "Jordan"
 msgstr "Ιορδανία"
 
-#: lang.pm:318
-#: mirror.pm:27
-#: timezone.pm:207
+#: lang.pm:318 mirror.pm:28 timezone.pm:218
 #, c-format
 msgid "Japan"
 msgstr "Ιαπωνία"
@@ -4028,8 +4059,7 @@ msgstr "Σαιντ Κιτς και Νέβις"
 msgid "Korea (North)"
 msgstr "Κορέα (Βόρεια)"
 
-#: lang.pm:326
-#: timezone.pm:208
+#: lang.pm:326 timezone.pm:219
 #, c-format
 msgid "Korea"
 msgstr "Κορέα"
@@ -4084,14 +4114,12 @@ msgstr "Λιβερία"
 msgid "Lesotho"
 msgstr "Λεσότο"
 
-#: lang.pm:337
-#: timezone.pm:232
+#: lang.pm:337 timezone.pm:243
 #, c-format
 msgid "Lithuania"
 msgstr "Λιθουανία"
 
-#: lang.pm:338
-#: timezone.pm:233
+#: lang.pm:338 timezone.pm:244
 #, c-format
 msgid "Luxembourg"
 msgstr "Λουξεμβούργο"
@@ -4191,14 +4219,12 @@ msgstr "Μαλδίβες"
 msgid "Malawi"
 msgstr "Μαλάουι"
 
-#: lang.pm:358
-#: timezone.pm:252
+#: lang.pm:358 timezone.pm:263
 #, c-format
 msgid "Mexico"
 msgstr "Μεξικό"
 
-#: lang.pm:359
-#: timezone.pm:209
+#: lang.pm:359 timezone.pm:220
 #, c-format
 msgid "Malaysia"
 msgstr "Μαλαισία"
@@ -4238,16 +4264,12 @@ msgstr "Νιγηρία"
 msgid "Nicaragua"
 msgstr "Νικαράγουα"
 
-#: lang.pm:367
-#: mirror.pm:28
-#: timezone.pm:234
+#: lang.pm:367 mirror.pm:29 timezone.pm:245
 #, c-format
 msgid "Netherlands"
 msgstr "Ολλανδία"
 
-#: lang.pm:368
-#: mirror.pm:30
-#: timezone.pm:235
+#: lang.pm:368 mirror.pm:31 timezone.pm:246
 #, c-format
 msgid "Norway"
 msgstr "Νορβηγία"
@@ -4267,9 +4289,7 @@ msgstr "Ναούρου"
 msgid "Niue"
 msgstr "Νίουε"
 
-#: lang.pm:372
-#: mirror.pm:29
-#: timezone.pm:257
+#: lang.pm:372 mirror.pm:30 timezone.pm:268
 #, c-format
 msgid "New Zealand"
 msgstr "Νέα Ζηλανδία"
@@ -4299,8 +4319,7 @@ msgstr "Γαλλική Πολυνησία"
 msgid "Papua New Guinea"
 msgstr "Παπούα-Νέα Γουϊνέα"
 
-#: lang.pm:378
-#: timezone.pm:210
+#: lang.pm:378 timezone.pm:221
 #, c-format
 msgid "Philippines"
 msgstr "Φιλιππίνες"
@@ -4310,9 +4329,7 @@ msgstr "Φιλιππίνες"
 msgid "Pakistan"
 msgstr "Πακιστάν"
 
-#: lang.pm:380
-#: mirror.pm:31
-#: timezone.pm:236
+#: lang.pm:380 mirror.pm:32 timezone.pm:247
 #, c-format
 msgid "Poland"
 msgstr "Πολωνία"
@@ -4337,9 +4354,7 @@ msgstr "Πουέρτο Ρίκο"
 msgid "Palestine"
 msgstr "Παλαιστίνη"
 
-#: lang.pm:385
-#: mirror.pm:32
-#: timezone.pm:237
+#: lang.pm:385 mirror.pm:33 timezone.pm:248
 #, c-format
 msgid "Portugal"
 msgstr "Πορτογαλία"
@@ -4364,14 +4379,12 @@ msgstr "Κατάρ"
 msgid "Reunion"
 msgstr "Ρεουνιόν"
 
-#: lang.pm:390
-#: timezone.pm:238
+#: lang.pm:390 timezone.pm:249
 #, c-format
 msgid "Romania"
 msgstr "Ρουμανία"
 
-#: lang.pm:391
-#: mirror.pm:33
+#: lang.pm:391 mirror.pm:34
 #, c-format
 msgid "Russia"
 msgstr "Ρωσία"
@@ -4401,15 +4414,12 @@ msgstr "Σεϋχέλλες"
 msgid "Sudan"
 msgstr "Σουδάν"
 
-#: lang.pm:397
-#: mirror.pm:37
-#: timezone.pm:243
+#: lang.pm:397 mirror.pm:38 timezone.pm:254
 #, c-format
 msgid "Sweden"
 msgstr "Σουηδία"
 
-#: lang.pm:398
-#: timezone.pm:211
+#: lang.pm:398 timezone.pm:222
 #, c-format
 msgid "Singapore"
 msgstr "Σιγγαπούρη"
@@ -4419,8 +4429,7 @@ msgstr "Σιγγαπούρη"
 msgid "Saint Helena"
 msgstr "Νήσος Αγίας Ελένης"
 
-#: lang.pm:400
-#: timezone.pm:241
+#: lang.pm:400 timezone.pm:252
 #, c-format
 msgid "Slovenia"
 msgstr "Σλοβενία"
@@ -4430,9 +4439,7 @@ msgstr "Σλοβενία"
 msgid "Svalbard and Jan Mayen Islands"
 msgstr "Νήσοι Σβάλμπαρντ και Γιαν Μάγιεν"
 
-#: lang.pm:402
-#: mirror.pm:34
-#: timezone.pm:240
+#: lang.pm:402 mirror.pm:35 timezone.pm:251
 #, c-format
 msgid "Slovakia"
 msgstr "Σλοβακία"
@@ -4502,9 +4509,7 @@ msgstr "Γαλλικές Νότιες Περιοχές"
 msgid "Togo"
 msgstr "Τόγκο"
 
-#: lang.pm:416
-#: mirror.pm:40
-#: timezone.pm:213
+#: lang.pm:416 mirror.pm:41 timezone.pm:224
 #, c-format
 msgid "Thailand"
 msgstr "Ταϊλάνδη"
@@ -4539,8 +4544,7 @@ msgstr "Τυνησία"
 msgid "Tonga"
 msgstr "Τόγκα"
 
-#: lang.pm:423
-#: timezone.pm:214
+#: lang.pm:423 timezone.pm:225
 #, c-format
 msgid "Turkey"
 msgstr "Τουρκία"
@@ -4555,21 +4559,17 @@ msgstr "Τρινιντάντ και Τομπάγκο"
 msgid "Tuvalu"
 msgstr "Τουβαλού"
 
-#: lang.pm:426
-#: mirror.pm:39
-#: timezone.pm:212
+#: lang.pm:426 mirror.pm:40 timezone.pm:223
 #, c-format
 msgid "Taiwan"
 msgstr "Ταϊβάν"
 
-#: lang.pm:427
-#: timezone.pm:197
+#: lang.pm:427 timezone.pm:208
 #, c-format
 msgid "Tanzania"
 msgstr "Τανζανία"
 
-#: lang.pm:428
-#: timezone.pm:245
+#: lang.pm:428 timezone.pm:256
 #, c-format
 msgid "Ukraine"
 msgstr "Ουκρανία"
@@ -4584,9 +4584,7 @@ msgstr "Ουγκάντα"
 msgid "United States Minor Outlying Islands"
 msgstr "Μικρά απομονωμένα νησιά Ηνωμένων Πολιτειών"
 
-#: lang.pm:431
-#: mirror.pm:41
-#: timezone.pm:253
+#: lang.pm:431 mirror.pm:42 timezone.pm:264
 #, c-format
 msgid "United States"
 msgstr "Η.Π.Α."
@@ -4656,9 +4654,7 @@ msgstr "Υεμένη"
 msgid "Mayotte"
 msgstr "Μαγιότ"
 
-#: lang.pm:445
-#: mirror.pm:35
-#: timezone.pm:196
+#: lang.pm:445 mirror.pm:36 timezone.pm:207
 #, c-format
 msgid "South Africa"
 msgstr "Νότιος Αφρική"
@@ -4673,7 +4669,7 @@ msgstr "Ζάμπια"
 msgid "Zimbabwe"
 msgstr "Ζιμπάμπουε"
 
-#: lang.pm:1193
+#: lang.pm:1201
 #, c-format
 msgid "Welcome to %s"
 msgstr "Καλώς ορίσατε στο %s"
@@ -4683,20 +4679,22 @@ msgstr "Καλώς ορίσατε στο %s"
 msgid "Moving used physical extents to other physical volumes failed"
 msgstr "Η μεταφορά των φυσικών εκτάσεων προς άλλους φυσικούς τόμους, απέτυχε"
 
-#: lvm.pm:137
+#: lvm.pm:141
 #, c-format
 msgid "Physical volume %s is still in use"
 msgstr "Ο φυσικός τόμος %s εξακολουθεί να είναι σε χρήση"
 
-#: lvm.pm:147
+#: lvm.pm:151
 #, c-format
 msgid "Remove the logical volumes first\n"
 msgstr "Αφαίρεσε πρώτα τους λογικούς τόμους\n"
 
-#: lvm.pm:180
+#: lvm.pm:184
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
-msgstr "Το πρόγραμμα εκκίνησης του υπολογιστή σου δεν μπορεί να διαχειριστεί «/boot» σε πολλαπλούς φυσικούς τόμους"
+msgstr ""
+"Το πρόγραμμα εκκίνησης του υπολογιστή σου δεν μπορεί να διαχειριστεί «/boot» "
+"σε πολλαπλούς φυσικούς τόμους"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: messages.pm:10
@@ -4704,79 +4702,120 @@ msgstr "Το πρόγραμμα εκκίνησης του υπολογιστή �
 msgid ""
 "Introduction\n"
 "\n"
-"The operating system and the different components available in the Mandriva Linux distribution \n"
-"shall be called the \"Software Products\" hereafter. The Software Products include, but are not \n"
-"restricted to, the set of programs, methods, rules and documentation related to the operating \n"
+"The operating system and the different components available in the Mandriva "
+"Linux distribution \n"
+"shall be called the \"Software Products\" hereafter. The Software Products "
+"include, but are not \n"
+"restricted to, the set of programs, methods, rules and documentation related "
+"to the operating \n"
 "system and the different components of the Mandriva Linux distribution.\n"
 "\n"
 "\n"
 "1. License Agreement\n"
 "\n"
-"Please read this document carefully. This document is a license agreement between you and  \n"
+"Please read this document carefully. This document is a license agreement "
+"between you and  \n"
 "Mandriva S.A. which applies to the Software Products.\n"
-"By installing, duplicating or using the Software Products in any manner, you explicitly \n"
-"accept and fully agree to conform to the terms and conditions of this License. \n"
-"If you disagree with any portion of the License, you are not allowed to install, duplicate or use \n"
+"By installing, duplicating or using the Software Products in any manner, you "
+"explicitly \n"
+"accept and fully agree to conform to the terms and conditions of this "
+"License. \n"
+"If you disagree with any portion of the License, you are not allowed to "
+"install, duplicate or use \n"
 "the Software Products. \n"
-"Any attempt to install, duplicate or use the Software Products in a manner which does not comply \n"
-"with the terms and conditions of this License is void and will terminate your rights under this \n"
-"License. Upon termination of the License,  you must immediately destroy all copies of the \n"
+"Any attempt to install, duplicate or use the Software Products in a manner "
+"which does not comply \n"
+"with the terms and conditions of this License is void and will terminate "
+"your rights under this \n"
+"License. Upon termination of the License,  you must immediately destroy all "
+"copies of the \n"
 "Software Products.\n"
 "\n"
 "\n"
 "2. Limited Warranty\n"
 "\n"
-"The Software Products and attached documentation are provided \"as is\", with no warranty, to the \n"
+"The Software Products and attached documentation are provided \"as is\", "
+"with no warranty, to the \n"
 "extent permitted by law.\n"
-"Mandriva S.A. will, in no circumstances and to the extent permitted by law, be liable for any special,\n"
-"incidental, direct or indirect damages whatsoever (including without limitation damages for loss of \n"
-"business, interruption of business, financial loss, legal fees and penalties resulting from a court \n"
-"judgment, or any other consequential loss) arising out of  the use or inability to use the Software \n"
-"Products, even if Mandriva S.A. has been advised of the possibility or occurrence of such \n"
+"Mandriva S.A. will, in no circumstances and to the extent permitted by law, "
+"be liable for any special,\n"
+"incidental, direct or indirect damages whatsoever (including without "
+"limitation damages for loss of \n"
+"business, interruption of business, financial loss, legal fees and penalties "
+"resulting from a court \n"
+"judgment, or any other consequential loss) arising out of  the use or "
+"inability to use the Software \n"
+"Products, even if Mandriva S.A. has been advised of the possibility or "
+"occurrence of such \n"
 "damages.\n"
 "\n"
-"LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME COUNTRIES\n"
+"LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME "
+"COUNTRIES\n"
 "\n"
-"To the extent permitted by law, Mandriva S.A. or its distributors will, in no circumstances, be \n"
-"liable for any special, incidental, direct or indirect damages whatsoever (including without \n"
-"limitation damages for loss of business, interruption of business, financial loss, legal fees \n"
-"and penalties resulting from a court judgment, or any other consequential loss) arising out \n"
-"of the possession and use of software components or arising out of  downloading software components \n"
-"from one of Mandriva Linux sites  which are prohibited or restricted in some countries by local laws.\n"
-"This limited liability applies to, but is not restricted to, the strong cryptography components \n"
+"To the extent permitted by law, Mandriva S.A. or its distributors will, in "
+"no circumstances, be \n"
+"liable for any special, incidental, direct or indirect damages whatsoever "
+"(including without \n"
+"limitation damages for loss of business, interruption of business, financial "
+"loss, legal fees \n"
+"and penalties resulting from a court judgment, or any other consequential "
+"loss) arising out \n"
+"of the possession and use of software components or arising out of  "
+"downloading software components \n"
+"from one of Mandriva Linux sites  which are prohibited or restricted in some "
+"countries by local laws.\n"
+"This limited liability applies to, but is not restricted to, the strong "
+"cryptography components \n"
 "included in the Software Products.\n"
 "\n"
 "\n"
 "3. The GPL License and Related Licenses\n"
 "\n"
-"The Software Products consist of components created by different persons or entities.  Most \n"
-"of these components are governed under the terms and conditions of the GNU General Public \n"
-"Licence, hereafter called \"GPL\", or of similar licenses. Most of these licenses allow you to use, \n"
-"duplicate, adapt or redistribute the components which they cover. Please read carefully the terms \n"
-"and conditions of the license agreement for each component before using any component. Any question \n"
-"on a component license should be addressed to the component author and not to Mandriva.\n"
-"The programs developed by Mandriva S.A. are governed by the GPL License. Documentation written \n"
-"by Mandriva S.A. is governed by a specific license. Please refer to the documentation for \n"
+"The Software Products consist of components created by different persons or "
+"entities.  Most \n"
+"of these components are governed under the terms and conditions of the GNU "
+"General Public \n"
+"Licence, hereafter called \"GPL\", or of similar licenses. Most of these "
+"licenses allow you to use, \n"
+"duplicate, adapt or redistribute the components which they cover. Please "
+"read carefully the terms \n"
+"and conditions of the license agreement for each component before using any "
+"component. Any question \n"
+"on a component license should be addressed to the component author and not "
+"to Mandriva.\n"
+"The programs developed by Mandriva S.A. are governed by the GPL License. "
+"Documentation written \n"
+"by Mandriva S.A. is governed by a specific license. Please refer to the "
+"documentation for \n"
 "further details.\n"
 "\n"
 "\n"
 "4. Intellectual Property Rights\n"
 "\n"
-"All rights to the components of the Software Products belong to their respective authors and are \n"
-"protected by intellectual property and copyright laws applicable to software programs.\n"
-"Mandriva S.A. reserves its rights to modify or adapt the Software Products, as a whole or in \n"
+"All rights to the components of the Software Products belong to their "
+"respective authors and are \n"
+"protected by intellectual property and copyright laws applicable to software "
+"programs.\n"
+"Mandriva S.A. reserves its rights to modify or adapt the Software Products, "
+"as a whole or in \n"
 "parts, by all means and for all purposes.\n"
-"\"Mandriva\", \"Mandriva Linux\" and associated logos are trademarks of Mandriva S.A.  \n"
+"\"Mandriva\", \"Mandriva Linux\" and associated logos are trademarks of "
+"Mandriva S.A.  \n"
 "\n"
 "\n"
 "5. Governing Laws \n"
 "\n"
-"If any portion of this agreement is held void, illegal or inapplicable by a court judgment, this \n"
-"portion is excluded from this contract. You remain bound by the other applicable sections of the \n"
+"If any portion of this agreement is held void, illegal or inapplicable by a "
+"court judgment, this \n"
+"portion is excluded from this contract. You remain bound by the other "
+"applicable sections of the \n"
 "agreement.\n"
-"The terms and conditions of this License are governed by the Laws of France.\n"
-"All disputes on the terms of this license will preferably be settled out of court. As a last \n"
-"resort, the dispute will be referred to the appropriate Courts of Law of Paris - France.\n"
+"The terms and conditions of this License are governed by the Laws of "
+"France.\n"
+"All disputes on the terms of this license will preferably be settled out of "
+"court. As a last \n"
+"resort, the dispute will be referred to the appropriate Courts of Law of "
+"Paris - France.\n"
 "For any question on this document, please contact Mandriva S.A.  \n"
 msgstr ""
 "\n"
@@ -4859,9 +4898,11 @@ msgstr ""
 #, c-format
 msgid ""
 "Warning: Free Software may not necessarily be patent free, and some Free\n"
-"Software included may be covered by patents in your country. For example, the\n"
+"Software included may be covered by patents in your country. For example, "
+"the\n"
 "MP3 decoders included may require a licence for further usage (see\n"
-"http://www.mp3licensing.com for more details). If you are unsure if a patent\n"
+"http://www.mp3licensing.com for more details). If you are unsure if a "
+"patent\n"
 "may be applicable to you, check your local laws."
 msgstr ""
 
@@ -4934,7 +4975,8 @@ msgid ""
 "Remove the boot media and press Enter to reboot.\n"
 "\n"
 "\n"
-"For information on fixes which are available for this release of Mandriva Linux,\n"
+"For information on fixes which are available for this release of Mandriva "
+"Linux,\n"
 "consult the Errata available from:\n"
 "\n"
 "\n"
@@ -4945,18 +4987,22 @@ msgid ""
 "install chapter of the Official Mandriva Linux User's Guide."
 msgstr ""
 "Συγχαρητήρια, η εγκατάσταση ολοκληρώθηκε.\n"
-"Αφαίρεσε το μέσο εκκίνησης του συστήματος και πίεσε το Enter για επανεκκίνηση.\n"
+"Αφαίρεσε το μέσο εκκίνησης του συστήματος και πίεσε το Enter για "
+"επανεκκίνηση.\n"
 "\n"
 "\n"
-"Για πληροφορίες σχετικές με τις διαθέσιμες διορθώσεις, πάνω σε αυτή την έκδοση της Mandriva Linux,\n"
+"Για πληροφορίες σχετικές με τις διαθέσιμες διορθώσεις, πάνω σε αυτή την "
+"έκδοση της Mandriva Linux,\n"
 "μπορείς να συμβουλευτείς την σελίδα των Δυσλειτουργιών: \n"
 "\n"
 "\n"
 "%s\n"
 "\n"
 "\n"
-"Ενώ, πληροφορίες σχετικές με τις ρυθμίσεις του συστήματός σου, μπορούν να βρεθούν στο \n"
-"κεφάλαιο για μετά την εγκατάσταση, στον Επίσημο Οδηγό Χρήσης Της Mandriva Linux."
+"Ενώ, πληροφορίες σχετικές με τις ρυθμίσεις του συστήματός σου, μπορούν να "
+"βρεθούν στο \n"
+"κεφάλαιο για μετά την εγκατάσταση, στον Επίσημο Οδηγό Χρήσης Της Mandriva "
+"Linux."
 
 #: modules/interactive.pm:19
 #, c-format
@@ -5027,7 +5073,8 @@ msgid ""
 "Note that any address should be entered with the prefix 0x like '0x123'"
 msgstr ""
 "Μπορείτε τώρα να δώσετε τις παραμέτρους για το άρθρωμα %s.\n"
-"Σημειώστε ότι κάθε διεύθυνση πρέπει να εισάγεται με το πρόθεμα  0x όπως '0x123'"
+"Σημειώστε ότι κάθε διεύθυνση πρέπει να εισάγεται με το πρόθεμα  0x όπως "
+"'0x123'"
 
 #: modules/interactive.pm:116
 #, c-format
@@ -5055,9 +5102,11 @@ msgstr "Ποιόν οδηγό %s να δοκιμάσω;"
 #, c-format
 msgid ""
 "In some cases, the %s driver needs to have extra information to work\n"
-"properly, although it normally works fine without them. Would you like to specify\n"
+"properly, although it normally works fine without them. Would you like to "
+"specify\n"
 "extra options for it or allow the driver to probe your machine for the\n"
-"information it needs? Occasionally, probing will hang a computer, but it should\n"
+"information it needs? Occasionally, probing will hang a computer, but it "
+"should\n"
 "not cause any damage."
 msgstr ""
 "Σε μερικές περιπτώσεις, ο οδηγός %s χρειάζεται επιπλέον παραμέτρους για\n"
@@ -5085,35 +5134,39 @@ msgstr ""
 "Η φόρτωση του αρθρώματος %s απέτυχε.\n"
 "Θέλετε να δοκιμάσετε ξανά με διαφορετικές παραμέτρους;"
 
-#: partition_table.pm:401
+#: partition_table.pm:409
 #, c-format
 msgid "mount failed: "
 msgstr "η προσάρτηση απέτυχε: "
 
-#: partition_table.pm:510
+#: partition_table.pm:518
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "Η εκτεταμένη κατάτμηση δεν υποστηρίζεται σε αυτόν τον τύπο συστήματος"
 
-#: partition_table.pm:528
+#: partition_table.pm:536
 #, c-format
 msgid ""
 "You have a hole in your partition table but I can not use it.\n"
-"The only solution is to move your primary partitions to have the hole next to the extended partitions."
+"The only solution is to move your primary partitions to have the hole next "
+"to the extended partitions."
 msgstr ""
 "Υπάρχει ένα κενό στον πίνακα κατατμήσεων μα δεν μπορώ να το χρησιμοποιήσω.\n"
-"Η μοναδική λύση είναι να μετακινήσετε τις πρωτεύουσες κατατμήσεις σας έτσι ώστε το κενό να βρεθεί δίπλα στην εκτεταμένη κατάτμηση"
+"Η μοναδική λύση είναι να μετακινήσετε τις πρωτεύουσες κατατμήσεις σας έτσι "
+"ώστε το κενό να βρεθεί δίπλα στην εκτεταμένη κατάτμηση"
 
-#: partition_table/raw.pm:279
+#: partition_table/raw.pm:285
 #, c-format
 msgid ""
 "Something bad is happening on your drive. \n"
 "A test to check the integrity of data has failed. \n"
-"It means writing anything on the disk will end up with random, corrupted data."
+"It means writing anything on the disk will end up with random, corrupted "
+"data."
 msgstr ""
 "Κάτι κακό συμβαίνει στο δίσκο σας. \n"
 "Ένα τεστ ελέγχου της ακεραιότητας των δεδομένων απέτυχε. \n"
-"Αυτό σημαίνει πως η οποιαδήποτε εγγραφή στο δίσκο θα καταλήξει σαν τυχαία σκουπίδια."
+"Αυτό σημαίνει πως η οποιαδήποτε εγγραφή στο δίσκο θα καταλήξει σαν τυχαία "
+"σκουπίδια."
 
 #: raid.pm:42
 #, c-format
@@ -5138,27 +5191,31 @@ msgstr "Αδυναμία δημιουργίας του δεσμού προς τ�
 #: scanner.pm:113
 #, c-format
 msgid "Could not copy firmware file %s to /usr/share/sane/firmware!"
-msgstr "Αδυναμία αντιγραφής του αρχείου firmware %s στο /usr/share/sane/firmware ."
+msgstr ""
+"Αδυναμία αντιγραφής του αρχείου firmware %s στο /usr/share/sane/firmware ."
 
 #: scanner.pm:120
 #, c-format
 msgid "Could not set permissions of firmware file %s!"
 msgstr "Αδυναμία ορισμού των αδειών χρήσης του αρχείου firmware %s."
 
-#: scanner.pm:199
+#: scanner.pm:200
 #, c-format
 msgid "Scannerdrake"
 msgstr "Scannerdrake"
 
-#: scanner.pm:200
-#, c-format
-msgid "Could not install the packages needed to share your scanner(s)."
-msgstr "Αδυναμία εγκατάστασης των απαραίτητων πακέτων για την κοινή χρήση του σαρωτή (ή σαρωτών) σου."
-
 #: scanner.pm:201
 #, c-format
+msgid "Could not install the packages needed to share your scanner(s)."
+msgstr ""
+"Αδυναμία εγκατάστασης των απαραίτητων πακέτων για την κοινή χρήση του σαρωτή "
+"(ή σαρωτών) σου."
+
+#: scanner.pm:202
+#, c-format
 msgid "Your scanner(s) will not be available for non-root users."
-msgstr "Ο σαρωτής (ή σαρωτές) σου δε θα είναι διαθέσιμοι στους μη διαχειριστές."
+msgstr ""
+"Ο σαρωτής (ή σαρωτές) σου δε θα είναι διαθέσιμοι στους μη διαχειριστές."
 
 #: security/help.pm:11
 #, c-format
@@ -5190,7 +5247,8 @@ msgid ""
 "\n"
 "Else only /etc/issue is allowed."
 msgstr ""
-"Αν οριστεί στο «όλα» ( \"ALL\" ), το /etc/issue και το /etc/issue.net επιτρέπεται να υπάρχουν.\n"
+"Αν οριστεί στο «όλα» ( \"ALL\" ), το /etc/issue και το /etc/issue.net "
+"επιτρέπεται να υπάρχουν.\n"
 "\n"
 "Αν οριστεί στο «κανένα» ( \"None\" ), τα issues δεν επιτρέπονται.\n"
 "\n"
@@ -5213,8 +5271,11 @@ msgstr "Να επιτρέπεται η απευθείας σύνδεση υπε�
 
 #: security/help.pm:33
 #, c-format
-msgid "Allow the list of users on the system on display managers (kdm and gdm)."
-msgstr "Να επιτρέπεται η προβολή της λίστας με τους χρήστες, στους διαχειριστές σύνδεσης (kdm και gdm)."
+msgid ""
+"Allow the list of users on the system on display managers (kdm and gdm)."
+msgstr ""
+"Να επιτρέπεται η προβολή της λίστας με τους χρήστες, στους διαχειριστές "
+"σύνδεσης (kdm και gdm)."
 
 # ?????
 #: security/help.pm:35
@@ -5255,7 +5316,8 @@ msgid ""
 "The argument specifies if clients are authorized to connect\n"
 "to the X server from the network on the tcp port 6000 or not."
 msgstr ""
-"Το επιχείρημα προσδιορίζει το αν οι πελάτες θα αδειοδοτούνται να συνδέονται, ή όχι,\n"
+"Το επιχείρημα προσδιορίζει το αν οι πελάτες θα αδειοδοτούνται να συνδέονται, "
+"ή όχι,\n"
 "στον εξυπηρετητή X, μέσω δικτύου, στην θύρα tcp 6000."
 
 #. -PO: here "ALL", "Local" and "None" are values in a pull-down menu; translate them the same as they're
@@ -5264,23 +5326,27 @@ msgstr ""
 msgid ""
 "Authorize:\n"
 "\n"
-"- all services controlled by tcp_wrappers (see hosts.deny(5) man page) if set to \"ALL\",\n"
+"- all services controlled by tcp_wrappers (see hosts.deny(5) man page) if "
+"set to \"ALL\",\n"
 "\n"
 "- only local ones if set to \"Local\"\n"
 "\n"
 "- none if set to \"None\".\n"
 "\n"
-"To authorize the services you need, use /etc/hosts.allow (see hosts.allow(5))."
+"To authorize the services you need, use /etc/hosts.allow (see hosts.allow"
+"(5))."
 msgstr ""
 "Αδειοδότηση:\n"
 "\n"
-"- όλες οι υπηρεσίες ελέγχονται από το tcp_wrappers (δες hosts.deny(5) σελίδα man), αν οριστεί σε \"ALL\",\n"
+"- όλες οι υπηρεσίες ελέγχονται από το tcp_wrappers (δες hosts.deny(5) σελίδα "
+"man), αν οριστεί σε \"ALL\",\n"
 "\n"
 "- μόνο οι τοπικές, αν οριστεί σε \"Local\"\n"
 "\n"
 "- καμία, αν οριστεί σε \"None\".\n"
 "\n"
-"Για να αδειοδοτήσεις τις υπηρεσίες που θέλεις, χρησιμοποίησε το /etc/hosts.allow (δες hosts.allow(5))."
+"Για να αδειοδοτήσεις τις υπηρεσίες που θέλεις, χρησιμοποίησε το /etc/hosts."
+"allow (δες hosts.allow(5))."
 
 #: security/help.pm:63
 #, fuzzy, c-format
@@ -5312,7 +5378,8 @@ msgid ""
 msgstr ""
 "Ενεργοποίηση του crontab και του at για τους χρήστες.\n"
 "\n"
-"Βάλε τους χρήστες που επιτρέπονται στο /etc/cron.allow και στο /etc/at.allow \n"
+"Βάλε τους χρήστες που επιτρέπονται στο /etc/cron.allow και στο /etc/at."
+"allow \n"
 "(δες το man at(1) και το crontab(1))."
 
 #: security/help.pm:77
@@ -5326,7 +5393,8 @@ msgid ""
 "Enable name resolution spoofing protection.  If\n"
 "\"%s\" is true, also reports to syslog."
 msgstr ""
-"Ενεργοποίηση της προστασίας κατά της εισχώρησης στο δίκτυο (spoofing) με διερεύνηση ονόματος (name resolution).\n"
+"Ενεργοποίηση της προστασίας κατά της εισχώρησης στο δίκτυο (spoofing) με "
+"διερεύνηση ονόματος (name resolution).\n"
 "Αν το \"%s\" είναι αληθές, τότε γίνεται αναφορά και στο syslog."
 
 #: security/help.pm:80
@@ -5337,7 +5405,8 @@ msgstr "Ειδοποιήσεις Ασφαλείας:"
 #: security/help.pm:82
 #, c-format
 msgid "Enable IP spoofing protection."
-msgstr "Ενεργοποίηση της προστασίας κατά της εισχώρησης στο δίκτυο (IP spoofing)."
+msgstr ""
+"Ενεργοποίηση της προστασίας κατά της εισχώρησης στο δίκτυο (IP spoofing)."
 
 #: security/help.pm:84
 #, c-format
@@ -5356,8 +5425,12 @@ msgstr "Να επιτρέπονται οι ωριαίοι έλεγχοι ασφ�
 
 #: security/help.pm:90
 #, c-format
-msgid "Enable su only from members of the wheel group. If set to no, allows su from any user."
-msgstr "Ενεργοποίηση του su, μόνο για τα μέλη της ομάδας wheel. Αν επιλεγεί «όχι», επιτρέπει το su από οποιοδήποτε χρήστη."
+msgid ""
+"Enable su only from members of the wheel group. If set to no, allows su from "
+"any user."
+msgstr ""
+"Ενεργοποίηση του su, μόνο για τα μέλη της ομάδας wheel. Αν επιλεγεί «όχι», "
+"επιτρέπει το su από οποιοδήποτε χρήστη."
 
 #: security/help.pm:92
 #, c-format
@@ -5382,7 +5455,9 @@ msgstr "Επιτρέπεται η σύνδεση su (sulogin(8)) σε επίπε
 #: security/help.pm:100
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
-msgstr "Προσθήκη του ονόματος ως μία εξαίρεση στη διαχείριση της παλαίωσης των κωδικών ασφαλείας, σε msec."
+msgstr ""
+"Προσθήκη του ονόματος ως μία εξαίρεση στη διαχείριση της παλαίωσης των "
+"κωδικών ασφαλείας, σε msec."
 
 #: security/help.pm:102
 #, c-format
@@ -5392,12 +5467,18 @@ msgstr ""
 #: security/help.pm:104
 #, c-format
 msgid "Set the password history length to prevent password reuse."
-msgstr "Όρισε το μήκος του ιστορικού των κωδικών ασφαλείας, για την αποφυγή επαναχρησιμοποίησης κωδικών."
+msgstr ""
+"Όρισε το μήκος του ιστορικού των κωδικών ασφαλείας, για την αποφυγή "
+"επαναχρησιμοποίησης κωδικών."
 
 #: security/help.pm:106
 #, c-format
-msgid "Set the password minimum length and minimum number of digit and minimum number of capitalized letters."
-msgstr "Όρισε το ελάχιστο μέγεθος του κωδικού ασφαλείας, καθώς και τον ελάχιστο αριθμό ψηφίων και τον ελάχιστο αριθμό κεφαλαίων γραμμάτων."
+msgid ""
+"Set the password minimum length and minimum number of digit and minimum "
+"number of capitalized letters."
+msgstr ""
+"Όρισε το ελάχιστο μέγεθος του κωδικού ασφαλείας, καθώς και τον ελάχιστο "
+"αριθμό ψηφίων και τον ελάχιστο αριθμό κεφαλαίων γραμμάτων."
 
 #: security/help.pm:108
 #, fuzzy, c-format
@@ -5419,17 +5500,22 @@ msgid ""
 "- no password in /etc/shadow\n"
 "\n"
 "- for users with the 0 id other than root."
-msgstr "αν οριστεί ναι, έλεγχος για κενούς κωδικούς πρόσβασης, για κανέναν κωδικό πρόσβασης στο /etc/shadow και για χρήστες με id 0 εκτός από τον root."
+msgstr ""
+"αν οριστεί ναι, έλεγχος για κενούς κωδικούς πρόσβασης, για κανέναν κωδικό "
+"πρόσβασης στο /etc/shadow και για χρήστες με id 0 εκτός από τον root."
 
 #: security/help.pm:117
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
-msgstr "αν οριστεί ναι, έλεγχος δικαιωμάτων των αρχείων στον αρχικό κατάλογο χρήστη."
+msgstr ""
+"αν οριστεί ναι, έλεγχος δικαιωμάτων των αρχείων στον αρχικό κατάλογο χρήστη."
 
 #: security/help.pm:118
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
-msgstr "αν οριστεί ναι, έλεγχος των συσκευών δικτύου για αδιάκριτη κατάσταση λειτουργίας."
+msgstr ""
+"αν οριστεί ναι, έλεγχος των συσκευών δικτύου για αδιάκριτη κατάσταση "
+"λειτουργίας."
 
 #: security/help.pm:119
 #, c-format
@@ -5473,8 +5559,11 @@ msgstr "αν οριστεί ναι, εκτέλεση ελέγχων chkrootkit"
 
 #: security/help.pm:127
 #, c-format
-msgid "if set, send the mail report to this email address else send it to root."
-msgstr "αν ναι, αποστολή της αναφοράς ταχυδρομείου σε αυτήν την διεύθυνση ή αλλιώς στον root."
+msgid ""
+"if set, send the mail report to this email address else send it to root."
+msgstr ""
+"αν ναι, αποστολή της αναφοράς ταχυδρομείου σε αυτήν την διεύθυνση ή αλλιώς "
+"στον root."
 
 #: security/help.pm:128
 #, c-format
@@ -5484,7 +5573,9 @@ msgstr "αν οριστεί ναι, αποτέλεσμα αναφοράς ελέ
 #: security/help.pm:129
 #, c-format
 msgid "Do not send mails if there's nothing to warn about"
-msgstr "Να μην αποστέλνονται μηνύματα ηλ. ταχυδρομείου αν δεν υπάρχει κάποιος λόγος προειδοποίησης"
+msgstr ""
+"Να μην αποστέλνονται μηνύματα ηλ. ταχυδρομείου αν δεν υπάρχει κάποιος λόγος "
+"προειδοποίησης"
 
 #: security/help.pm:130
 #, c-format
@@ -5504,7 +5595,9 @@ msgstr "αν οριστεί ναι, αποτέλεσμα αναφοράς ελέ
 #: security/help.pm:134
 #, c-format
 msgid "Set shell commands history size. A value of -1 means unlimited."
-msgstr "Όρισε το μέγεθος του ιστορικού των εντολών του κελύφους. Η τιμή -1 σημαίνει χωρίς όριο."
+msgstr ""
+"Όρισε το μέγεθος του ιστορικού των εντολών του κελύφους. Η τιμή -1 σημαίνει "
+"χωρίς όριο."
 
 #: security/help.pm:136
 #, c-format
@@ -5562,12 +5655,15 @@ msgstr "Άμεση σύνδεση διαχειριστή"
 #: security/l10n.pm:19
 #, c-format
 msgid "List users on display managers (kdm and gdm)"
-msgstr "Προβολή της λίστας των χρηστών στο γραφικό διαχειριστή σύνδεσης (kdm και gdm)"
+msgstr ""
+"Προβολή της λίστας των χρηστών στο γραφικό διαχειριστή σύνδεσης (kdm και gdm)"
 
 #: security/l10n.pm:20
 #, c-format
 msgid "Export display when passing from root to the other users"
-msgstr "Εξαγωγή της προβολής, όταν γίνεται μετάβαση από τον διαχειριστή του συστήματος στους άλλους χρήστες"
+msgstr ""
+"Εξαγωγή της προβολής, όταν γίνεται μετάβαση από τον διαχειριστή του "
+"συστήματος στους άλλους χρήστες"
 
 #: security/l10n.pm:21
 #, c-format
@@ -5602,12 +5698,15 @@ msgstr "Αναφορές syslog στην κονσόλα 12"
 #: security/l10n.pm:27
 #, c-format
 msgid "Name resolution spoofing protection"
-msgstr "Προστασίας κατά της εισχώρησης στο δίκτυο (spoofing) με διερεύνηση ονόματος (name resolution)"
+msgstr ""
+"Προστασίας κατά της εισχώρησης στο δίκτυο (spoofing) με διερεύνηση ονόματος "
+"(name resolution)"
 
 #: security/l10n.pm:28
 #, c-format
 msgid "Enable IP spoofing protection"
-msgstr "Ενεργοποίηση της προστασίας κατά της εισχώρησης στο δίκτυο (IP spoofing)"
+msgstr ""
+"Ενεργοποίηση της προστασίας κατά της εισχώρησης στο δίκτυο (IP spoofing)"
 
 #: security/l10n.pm:29
 #, c-format
@@ -5657,7 +5756,9 @@ msgstr "Χωρίς παλαίωση του κωδικού πρόσβασης γ�
 #: security/l10n.pm:38
 #, c-format
 msgid "Set password expiration and account inactivation delays"
-msgstr "Όρισε την ημερομηνία λήξης των κωδικών ασφαλείας και την καθυστέρηση απενεργοποίησης των λογαριασμών"
+msgstr ""
+"Όρισε την ημερομηνία λήξης των κωδικών ασφαλείας και την καθυστέρηση "
+"απενεργοποίησης των λογαριασμών"
 
 #: security/l10n.pm:39
 #, c-format
@@ -5667,7 +5768,8 @@ msgstr "Μήκος του ιστορικού  του κωδικού ασφαλε
 #: security/l10n.pm:40
 #, c-format
 msgid "Password minimum length and number of digits and upcase letters"
-msgstr "Ελάχιστο μήκος, αριθμός ψηφίων, και κεφαλαίων γραμμάτων του κωδικού πρόσβασης"
+msgstr ""
+"Ελάχιστο μήκος, αριθμός ψηφίων, και κεφαλαίων γραμμάτων του κωδικού πρόσβασης"
 
 #: security/l10n.pm:41
 #, c-format
@@ -5707,7 +5809,9 @@ msgstr "Έλεγχος των δικαιωμάτων των αρχείων στ�
 #: security/l10n.pm:48
 #, c-format
 msgid "Check if the network devices are in promiscuous mode"
-msgstr "Έλεγχος για το αν οι συσκευές δικτύου είναι σε κατάσταση αδιάκριτης λειτουργίας"
+msgstr ""
+"Έλεγχος για το αν οι συσκευές δικτύου είναι σε κατάσταση αδιάκριτης "
+"λειτουργίας"
 
 #: security/l10n.pm:49
 #, c-format
@@ -5757,7 +5861,9 @@ msgstr "Να μη γίνεται αποστολή κενών αναφορών η
 #: security/l10n.pm:58
 #, c-format
 msgid "If set, send the mail report to this email address else send it to root"
-msgstr "Αν οριστεί, να γίνει αποστολή της αναφοράς ηλ. ταχυδρομείου σε αυτήν την διεύθυνση, ή αλλιώς στον root"
+msgstr ""
+"Αν οριστεί, να γίνει αποστολή της αναφοράς ηλ. ταχυδρομείου σε αυτήν την "
+"διεύθυνση, ή αλλιώς στον root"
 
 #: security/l10n.pm:59
 #, c-format
@@ -5822,34 +5928,56 @@ msgstr ""
 
 #: security/level.pm:44
 #, c-format
-msgid "Passwords are now enabled, but use as a networked computer is still not recommended."
-msgstr "Τώρα υπάρχουν κωδικοί πρόσβασης, αλλά η χρήση του συστήματος σε δίκτυο ακόμα δεν συνίσταται."
+msgid ""
+"Passwords are now enabled, but use as a networked computer is still not "
+"recommended."
+msgstr ""
+"Τώρα υπάρχουν κωδικοί πρόσβασης, αλλά η χρήση του συστήματος σε δίκτυο ακόμα "
+"δεν συνίσταται."
 
 #: security/level.pm:45
 #, c-format
-msgid "This is the standard security recommended for a computer that will be used to connect to the Internet as a client."
-msgstr "Αυτό είναι το συνηθισμένο επίπεδο ασφαλείας για ένα σύστημα που θα συνδεθεί ως πελάτης στο Διαδίκτυο."
+msgid ""
+"This is the standard security recommended for a computer that will be used "
+"to connect to the Internet as a client."
+msgstr ""
+"Αυτό είναι το συνηθισμένο επίπεδο ασφαλείας για ένα σύστημα που θα συνδεθεί "
+"ως πελάτης στο Διαδίκτυο."
 
 #: security/level.pm:46
 #, c-format
-msgid "There are already some restrictions, and more automatic checks are run every night."
-msgstr "Υπάρχουν ήδη κάποιοι περιορισμοί, και περισσότεροι έλεγχοι εκτελούνται κάθε βράδυ."
+msgid ""
+"There are already some restrictions, and more automatic checks are run every "
+"night."
+msgstr ""
+"Υπάρχουν ήδη κάποιοι περιορισμοί, και περισσότεροι έλεγχοι εκτελούνται κάθε "
+"βράδυ."
 
 #: security/level.pm:47
 #, c-format
 msgid ""
-"With this security level, the use of this system as a server becomes possible.\n"
-"The security is now high enough to use the system as a server which can accept\n"
-"connections from many clients. Note: if your machine is only a client on the Internet, you should choose a lower level."
+"With this security level, the use of this system as a server becomes "
+"possible.\n"
+"The security is now high enough to use the system as a server which can "
+"accept\n"
+"connections from many clients. Note: if your machine is only a client on the "
+"Internet, you should choose a lower level."
 msgstr ""
-"Με αυτό το επίπεδο ασφαλείας είναι δυνατή η χρήση του συστήματος στο ως εξυπηρετητή.\n"
-"Η ασφάλεια είναι αρκετά υψηλή ώστε να δέχεται ταυτόχρονες συνδέσεις από πολλούς πελάτες.\n"
-"Σημ: Αν το μηχάνημα είναι μόνο για την χρήση ως πελάτη στο Διαδίκτυο τότε καλύτερα να επιλέξετε χαμηλότερο επίπεδο ασφάλειας"
+"Με αυτό το επίπεδο ασφαλείας είναι δυνατή η χρήση του συστήματος στο ως "
+"εξυπηρετητή.\n"
+"Η ασφάλεια είναι αρκετά υψηλή ώστε να δέχεται ταυτόχρονες συνδέσεις από "
+"πολλούς πελάτες.\n"
+"Σημ: Αν το μηχάνημα είναι μόνο για την χρήση ως πελάτη στο Διαδίκτυο τότε "
+"καλύτερα να επιλέξετε χαμηλότερο επίπεδο ασφάλειας"
 
 #: security/level.pm:50
 #, c-format
-msgid "This is similar to the previous level, but the system is entirely closed and security features are at their maximum."
-msgstr "Η ασφάλεια είναι ίδια του προηγούμενου επιπέδου, με το σύστημα τελείως κλειστό. Η ασφάλεια είναι στο μέγιστο δυνατό."
+msgid ""
+"This is similar to the previous level, but the system is entirely closed and "
+"security features are at their maximum."
+msgstr ""
+"Η ασφάλεια είναι ίδια του προηγούμενου επιπέδου, με το σύστημα τελείως "
+"κλειστό. Η ασφάλεια είναι στο μέγιστο δυνατό."
 
 #: security/level.pm:55
 #, c-format
@@ -5878,8 +6006,11 @@ msgstr "Χρήση libsafe για διακομιστές"
 
 #: security/level.pm:64
 #, c-format
-msgid "A library which defends against buffer overflow and format string attacks."
-msgstr "Μία βιβλιοθήκη που προστατεύει ενάντια στις επιθέσεις «υπερχείλισης μικροαποθήκευσης» (buffer overflow) και format string."
+msgid ""
+"A library which defends against buffer overflow and format string attacks."
+msgstr ""
+"Μία βιβλιοθήκη που προστατεύει ενάντια στις επιθέσεις «υπερχείλισης "
+"μικροαποθήκευσης» (buffer overflow) και format string."
 
 #: security/level.pm:65
 #, c-format
@@ -5919,17 +6050,23 @@ msgstr ""
 #, c-format
 msgid ""
 "cron is a standard UNIX program that runs user-specified programs\n"
-"at periodic scheduled times. vixie cron adds a number of features to the basic\n"
+"at periodic scheduled times. vixie cron adds a number of features to the "
+"basic\n"
 "UNIX cron, including better security and more powerful configuration options."
 msgstr ""
 "Το cron είναι μια βασική υπηρεσία UNIX που τρέχει εντολές καθορισμένες από \n"
-"τον χρήστη σε τακτά χρονικά διαστήματα. Το vixie cron προσθέτει έναν αριθμό \n"
-"επιπλέον δυνατοτήτων που περιλαμβάνουν καλύτερη ασφάλεια και πιο ισχυρές ρυθμίσεις."
+"τον χρήστη σε τακτά χρονικά διαστήματα. Το vixie cron προσθέτει έναν "
+"αριθμό \n"
+"επιπλέον δυνατοτήτων που περιλαμβάνουν καλύτερη ασφάλεια και πιο ισχυρές "
+"ρυθμίσεις."
 
 #: services.pm:28
 #, c-format
-msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
-msgstr "Το Κοινό Σύστημα Εκτύπωσης του UNIX (Common UNIX Printing System - CUPS) είναι ένα εξελιγμένο σύστημα ετεροχρονιζμού (spooling) εκτύπωσης."
+msgid ""
+"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgstr ""
+"Το Κοινό Σύστημα Εκτύπωσης του UNIX (Common UNIX Printing System - CUPS) "
+"είναι ένα εξελιγμένο σύστημα ετεροχρονιζμού (spooling) εκτύπωσης."
 
 #: services.pm:29
 #, c-format
@@ -5939,17 +6076,20 @@ msgstr "Ενεργοποιεί τον διαχειριστή γραφικής π
 #: services.pm:30
 #, c-format
 msgid ""
-"FAM is a file monitoring daemon. It is used to get reports when files change.\n"
+"FAM is a file monitoring daemon. It is used to get reports when files "
+"change.\n"
 "It is used by GNOME and KDE"
 msgstr ""
-"Το FAM είναι ένας δαίμονας παρακολούθησης αρχείων. Χρησιμοποιείται για αναφορές όταν τα αρχεία αλλάζουν.\n"
+"Το FAM είναι ένας δαίμονας παρακολούθησης αρχείων. Χρησιμοποιείται για "
+"αναφορές όταν τα αρχεία αλλάζουν.\n"
 "Χρησιμοποιείται και από το GNOME και από το KDE"
 
 #: services.pm:32
 #, c-format
 msgid ""
 "GPM adds mouse support to text-based Linux applications such the\n"
-"Midnight Commander. It also allows mouse-based console cut-and-paste operations,\n"
+"Midnight Commander. It also allows mouse-based console cut-and-paste "
+"operations,\n"
 "and includes support for pop-up menus on the console."
 msgstr ""
 "Το GPM προσθέτει υποστήριξη ποντικιού σε εφαρμογές βασισμένες σε κονσόλα\n"
@@ -5959,7 +6099,9 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr "Το HAL είναι ένας δαίμονας που συλλέγει και διατηρεί πληροφορίες σχετικές με τις συσκευές του υπολογιστή"
+msgstr ""
+"Το HAL είναι ένας δαίμονας που συλλέγει και διατηρεί πληροφορίες σχετικές με "
+"τις συσκευές του υπολογιστή"
 
 #: services.pm:36
 #, c-format
@@ -5972,7 +6114,8 @@ msgstr ""
 
 #: services.pm:38
 #, c-format
-msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid ""
+"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
 "Ο Apache είναι ένας εξυπηρετητής WWW. Μπορεί να εξυπηρετήσει αρχεία\n"
 "HTML και CGI."
@@ -5981,13 +6124,16 @@ msgstr ""
 #, c-format
 msgid ""
 "The internet superserver daemon (commonly called inetd) starts a\n"
-"variety of other internet services as needed. It is responsible for starting\n"
-"many services, including telnet, ftp, rsh, and rlogin. Disabling inetd disables\n"
+"variety of other internet services as needed. It is responsible for "
+"starting\n"
+"many services, including telnet, ftp, rsh, and rlogin. Disabling inetd "
+"disables\n"
 "all of the services it is responsible for."
 msgstr ""
 "Η υπηρεσία υπερεξυπηρετητή Διαδικτύου (inetd) ξεκινάει μια ποικιλία\n"
 "άλλων υπηρεσιών διαδικτύου όποτε χρειάζονται. Είναι υπεύθυνη για την \n"
-"εκκίνηση πολλών υπηρεσιών, όπως telnet, ftp, rsh και rlogin. Η απενεργοποίηση\n"
+"εκκίνηση πολλών υπηρεσιών, όπως telnet, ftp, rsh και rlogin. Η "
+"απενεργοποίηση\n"
 "αυτής της υπηρεσίας απενεργοποιηθεί επίσης και τις υπηρεσίες για τις οποίες\n"
 "είναι υπεύθυνη."
 
@@ -5997,8 +6143,10 @@ msgid ""
 "Launch packet filtering for Linux kernel 2.2 series, to set\n"
 "up a firewall to protect your machine from network attacks."
 msgstr ""
-"Εκκίνηση πακέτου φίλτρου για τον πυρήνα Linux της σειράς 2.2, για την ρύθμιση\n"
-"ενός Τοίχους Προστασίας που θα προστατεύει το μηχάνημά σας από δικτυακές επιθέσεις."
+"Εκκίνηση πακέτου φίλτρου για τον πυρήνα Linux της σειράς 2.2, για την "
+"ρύθμιση\n"
+"ενός Τοίχους Προστασίας που θα προστατεύει το μηχάνημά σας από δικτυακές "
+"επιθέσεις."
 
 #: services.pm:45
 #, c-format
@@ -6023,7 +6171,8 @@ msgstr ""
 #: services.pm:50
 #, c-format
 msgid "Automatic detection and configuration of hardware at boot."
-msgstr "Αυτόματη ανίχνευση και ρύθμιση συσκευών κατά την εκκίνηση του συστήματος."
+msgstr ""
+"Αυτόματη ανίχνευση και ρύθμιση συσκευών κατά την εκκίνηση του συστήματος."
 
 #: services.pm:51
 #, c-format
@@ -6055,14 +6204,21 @@ msgstr ""
 
 #: services.pm:57
 #, c-format
-msgid "DBUS is a daemon which broadcasts notifications of system events and other messages"
-msgstr "Το DBUS είναι ένας δαίμονας που αποστέλλει ειδοποιήσεις για γεγονότα του συστήματος καθώς και άλλα μηνύματα"
+msgid ""
+"DBUS is a daemon which broadcasts notifications of system events and other "
+"messages"
+msgstr ""
+"Το DBUS είναι ένας δαίμονας που αποστέλλει ειδοποιήσεις για γεγονότα του "
+"συστήματος καθώς και άλλα μηνύματα"
 
 #: services.pm:58
 #, c-format
-msgid "named (BIND) is a Domain Name Server (DNS) that is used to resolve host names to IP addresses."
+msgid ""
+"named (BIND) is a Domain Name Server (DNS) that is used to resolve host "
+"names to IP addresses."
 msgstr ""
-"Ο named (BIND) είναι ένας Εξυπηρετητής Ονόματος Τομέα (DNS) που χρησιμοποιείται\n"
+"Ο named (BIND) είναι ένας Εξυπηρετητής Ονόματος Τομέα (DNS) που "
+"χρησιμοποιείται\n"
 "για να μετατρέπει ονόματα σε διευθύνσεις IP."
 
 #: services.pm:59
@@ -6071,7 +6227,8 @@ msgid ""
 "Mounts and unmounts all Network File System (NFS), SMB (Lan\n"
 "Manager/Windows), and NCP (NetWare) mount points."
 msgstr ""
-"Προσαρτεί και αποπροσαρτεί όλα τα Δικτυακά Συστήματα Αρχείων (NFS), SMB (Lan\n"
+"Προσαρτεί και αποπροσαρτεί όλα τα Δικτυακά Συστήματα Αρχείων (NFS), SMB "
+"(Lan\n"
 "Manager/Windows), και τα σημεία προσάρτησης NCP (NetWare)."
 
 #: services.pm:61
@@ -6106,7 +6263,9 @@ msgstr ""
 #: services.pm:68
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
-msgstr "Συγχρονίζει την ώρα του συστήματος χρησιμοποιώντας το Δικτυακό Πρωτόκολλο Ώρας (Network Time Protocol - NTP)"
+msgstr ""
+"Συγχρονίζει την ώρα του συστήματος χρησιμοποιώντας το Δικτυακό Πρωτόκολλο "
+"Ώρας (Network Time Protocol - NTP)"
 
 #: services.pm:69
 #, c-format
@@ -6126,18 +6285,22 @@ msgstr "Υποστήριξη των OKI 4w και συμβατών winprinters."
 #, c-format
 msgid ""
 "PCMCIA support is usually to support things like ethernet and\n"
-"modems in laptops.  It will not get started unless configured so it is safe to have\n"
+"modems in laptops.  It will not get started unless configured so it is safe "
+"to have\n"
 "it installed on machines that do not need it."
 msgstr ""
 "Η υποστήριξη PCMCIA προσφέρει υποστήριξη για κάρτες δικτύου, μόντεμ κλπ \n"
-"συνήθως σε συστήματα laptop. Δεν θα εκκινήσει εκτός αν αυτό ζητηθεί από τον \n"
-"χρήστη, οπότε είναι ασφαλές να εγκατασταθεί σε συστήματα που δεν το χρειάζονται."
+"συνήθως σε συστήματα laptop. Δεν θα εκκινήσει εκτός αν αυτό ζητηθεί από "
+"τον \n"
+"χρήστη, οπότε είναι ασφαλές να εγκατασταθεί σε συστήματα που δεν το "
+"χρειάζονται."
 
 #: services.pm:75
 #, c-format
 msgid ""
 "The portmapper manages RPC connections, which are used by\n"
-"protocols such as NFS and NIS. The portmap server must be running on machines\n"
+"protocols such as NFS and NIS. The portmap server must be running on "
+"machines\n"
 "which act as servers for protocols which make use of the RPC mechanism."
 msgstr ""
 "Ο portmapper διαχειρίζεται συνδέσεις RPC, οι οποίες χρησιμοποιούνται\n"
@@ -6146,7 +6309,9 @@ msgstr ""
 
 #: services.pm:78
 #, c-format
-msgid "Postfix is a Mail Transport Agent, which is the program that moves mail from one machine to another."
+msgid ""
+"Postfix is a Mail Transport Agent, which is the program that moves mail from "
+"one machine to another."
 msgstr ""
 "Το postfix είναι ένα πρόγραμμα μεταφοράς αλληλογραφίας, το \n"
 "πρόγραμμα που φροντίζει για την μεταφορά αλληλογραφίας από το \n"
@@ -6178,7 +6343,8 @@ msgid ""
 "routing protocols are needed for complex networks."
 msgstr ""
 "Ο δαίμονας routed επιτρέπει την αυτόματη ενημέρωση του πίνακα δρομολόγησης \n"
-"IP μέσω του πρωτοκόλλου RIP. Παρ' όλο που το RIP είναι ευρέως διαδεδομένο σε \n"
+"IP μέσω του πρωτοκόλλου RIP. Παρ' όλο που το RIP είναι ευρέως διαδεδομένο "
+"σε \n"
 "μικρά δίκτυα, μεγαλύτερα δίκτυα απαιτούν περιπλοκότερα πρωτόκολλα."
 
 #: services.pm:86
@@ -6211,13 +6377,20 @@ msgstr ""
 
 #: services.pm:92
 #, c-format
-msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
-msgstr "Το SANE (Πρόσβαση Σαρωτή Τώρα Εύκολη - Scanner Access Now Easy) επιτρέπει την πρόσβαση σε σαρωτές, κάμερες..."
+msgid ""
+"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgstr ""
+"Το SANE (Πρόσβαση Σαρωτή Τώρα Εύκολη - Scanner Access Now Easy) επιτρέπει "
+"την πρόσβαση σε σαρωτές, κάμερες..."
 
 #: services.pm:93
 #, c-format
-msgid "The SMB/CIFS protocol enables to share access to files & printers and also integrates with a Windows Server domain"
-msgstr "Το πρωτόκολλο SMB/CIFS επιτρέπει την κοινή πρόσβαση σε αρχεία και εκτυπωτές, όπως επίσης, ενσωματώνεται με ένα τομέα Εξυπηρετητή Microsoft Windows"
+msgid ""
+"The SMB/CIFS protocol enables to share access to files & printers and also "
+"integrates with a Windows Server domain"
+msgstr ""
+"Το πρωτόκολλο SMB/CIFS επιτρέπει την κοινή πρόσβαση σε αρχεία και εκτυπωτές, "
+"όπως επίσης, ενσωματώνεται με ένα τομέα Εξυπηρετητή Microsoft Windows"
 
 #: services.pm:94
 #, c-format
@@ -6226,8 +6399,13 @@ msgstr "Εκκίνηση του συστήματος ήχου στο μηχάν�
 
 #: services.pm:95
 #, c-format
-msgid "Secure Shell is a network protocol that allows data to be exchanged over a secure channel between two computers"
-msgstr "Το Ασφαλές Κέλυφος (Secure Shell) είναι ένα πρωτόκολλο δικτύου, που επιτρέπει την ανταλλαγή δεδομένων μεταξύ δύο υπολογιστών, μέσω ενός ασφαλούς καναλιού"
+msgid ""
+"Secure Shell is a network protocol that allows data to be exchanged over a "
+"secure channel between two computers"
+msgstr ""
+"Το Ασφαλές Κέλυφος (Secure Shell) είναι ένα πρωτόκολλο δικτύου, που "
+"επιτρέπει την ανταλλαγή δεδομένων μεταξύ δύο υπολογιστών, μέσω ενός ασφαλούς "
+"καναλιού"
 
 #: services.pm:96
 #, c-format
@@ -6284,8 +6462,7 @@ msgstr "Απομακρυσμένη διαχείριση"
 msgid "Database Server"
 msgstr "Εξυπηρετητής Βάσης Δεδομένων"
 
-#: services.pm:153
-#: services.pm:189
+#: services.pm:153 services.pm:189
 #, c-format
 msgid "Services"
 msgstr "Υπηρεσίες"
@@ -6324,8 +6501,7 @@ msgstr ""
 "Χωρίς επιπλέον πληροφορίες\n"
 "για αυτή την υπηρεσία."
 
-#: services.pm:221
-#: ugtk2.pm:911
+#: services.pm:221 ugtk2.pm:911
 #, c-format
 msgid "Info"
 msgstr "Πληροφορίες"
@@ -6365,7 +6541,8 @@ msgid ""
 "\n"
 "You should have received a copy of the GNU General Public License\n"
 "along with this program; if not, write to the Free Software\n"
-"Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n"
+"Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, "
+"USA.\n"
 msgstr ""
 "\n"
 " Γενικά Άδεια\n"
@@ -6389,7 +6566,8 @@ msgid ""
 "--default             : save default directories.\n"
 "--debug               : show all debug messages.\n"
 "--show-conf           : list of files or directories to backup.\n"
-"--config-info         : explain configuration file options (for non-X users).\n"
+"--config-info         : explain configuration file options (for non-X "
+"users).\n"
 "--daemon              : use daemon configuration. \n"
 "--help                : show this message.\n"
 "--version             : show version number.\n"
@@ -6399,8 +6577,10 @@ msgstr ""
 "\n"
 "--default             : αποθήκευση των προεπιλεγμένων διαδρομών καταλόγων.\n"
 "--debug               : προβολή όλων των μηνυμάτων απασφαλμάτωσης.\n"
-"--show-conf           : λίστα με τα αρχεία ή τους φακέλους για αντιγραφή ασφαλείας\n"
-"--config-info         : επεξήγηση των επιλογών του φακέλου ρύθμισης (για μη-X χρήστες).\n"
+"--show-conf           : λίστα με τα αρχεία ή τους φακέλους για αντιγραφή "
+"ασφαλείας\n"
+"--config-info         : επεξήγηση των επιλογών του φακέλου ρύθμισης (για μη-"
+"X χρήστες).\n"
 "--daemon              : χρήση της ρύθμισης δαίμονα. \n"
 "--help                : προβολή αυτού εδώ του μηνύματος.\n"
 "--version             : προβολή του αριθμού έκδοσης.\n"
@@ -6416,9 +6596,12 @@ msgid ""
 msgstr ""
 "[--boot] [--splash]\n"
 "ΕΠΙΛΟΓΕΣ:\n"
-"  --boot            - ενεργοποιεί την ρύθμιση του προγράμματος εκκίνησης του υπολογιστή\n"
-"  --splash          - ενεργοποιεί την ρύθμιση του θέματος κατά την εκκίνηση του υπολογιστή\n"
-"προεπιλεγμένη κατάσταση λειτουργίας: επιλογή για ρύθμιση της αυτόματης σύνδεσης"
+"  --boot            - ενεργοποιεί την ρύθμιση του προγράμματος εκκίνησης του "
+"υπολογιστή\n"
+"  --splash          - ενεργοποιεί την ρύθμιση του θέματος κατά την εκκίνηση "
+"του υπολογιστή\n"
+"προεπιλεγμένη κατάσταση λειτουργίας: επιλογή για ρύθμιση της αυτόματης "
+"σύνδεσης"
 
 #: standalone.pm:61
 #, c-format
@@ -6434,8 +6617,10 @@ msgstr ""
 "\n"
 "ΕΠΙΛΟΓΕΣ:\n"
 "  --help            - εκτύπωση αυτού του μηνύματος βοήθειας.\n"
-"  --report          - το πρόγραμμα θα πρέπει να είναι ένα από τα εργαλεία της Mandriva Linux\n"
-"  --incident        - το πρόγραμμα θα πρέπει να είναι ένα από τα εργαλεία της Mandriva Linux"
+"  --report          - το πρόγραμμα θα πρέπει να είναι ένα από τα εργαλεία "
+"της Mandriva Linux\n"
+"  --incident        - το πρόγραμμα θα πρέπει να είναι ένα από τα εργαλεία "
+"της Mandriva Linux"
 
 #: standalone.pm:67
 #, c-format
@@ -6448,7 +6633,8 @@ msgid ""
 "  --wizard          - like --add"
 msgstr ""
 "[--add]\n"
-"  --add             - o οδηγός ρυθμίσεων \"ρύθμισε μια καινούρια σύνδεση δικτύου\"\n"
+"  --add             - o οδηγός ρυθμίσεων \"ρύθμισε μια καινούρια σύνδεση "
+"δικτύου\"\n"
 "  --del             - o οδηγός ρυθμίσεων \"διέγραψε μια σύνδεση δικτύου\"\n"
 "  --skip-wizard     - διαχείριση των συνδέσεων\n"
 "  --internet        - ρύθμιση του διαδικτύου\n"
@@ -6475,10 +6661,13 @@ msgstr ""
 "Εφαρμογή Εισαγωγής Γραμματοσειρών και παρακολούθησης\n"
 "\n"
 "ΕΠΙΛΟΓΕΣ:\n"
-"--windows_import : εισαγωγή από όλες τις διαθέσιμες κατατμήσεις με Microsoft Windows.\n"
-"--xls_fonts      : προβολή όλων των γραμματοσειρών που υπάρχουν ήδη από το xls\n"
+"--windows_import : εισαγωγή από όλες τις διαθέσιμες κατατμήσεις με Microsoft "
+"Windows.\n"
+"--xls_fonts      : προβολή όλων των γραμματοσειρών που υπάρχουν ήδη από το "
+"xls\n"
 "--install        : αποδοχή κάθε αρχείου γραμματοσειράς και κάθε φακέλου.\n"
-"--uninstall      : απεγκατάσταση οποιασδήποτε γραμματοσειράς ή φακέλου γραμματοσειρών.\n"
+"--uninstall      : απεγκατάσταση οποιασδήποτε γραμματοσειράς ή φακέλου "
+"γραμματοσειρών.\n"
 "--replace        : αντικατάσταση όλων των γραμματοσειρών αν υπάρχουν ήδη\n"
 "--application    : 0 καμία εφαρμογή.\n"
 "                 : 1 υποστηρίζονται όλες οι διαθέσιμες εφαρμογές.\n"
@@ -6495,9 +6684,12 @@ msgid ""
 "--start          : start MTS\n"
 "--stop           : stop MTS\n"
 "--adduser        : add an existing system user to MTS (requires username)\n"
-"--deluser        : delete an existing system user from MTS (requires username)\n"
-"--addclient      : add a client machine to MTS (requires MAC address, IP, nbi image name)\n"
-"--delclient      : delete a client machine from MTS (requires MAC address, IP, nbi image name)"
+"--deluser        : delete an existing system user from MTS (requires "
+"username)\n"
+"--addclient      : add a client machine to MTS (requires MAC address, IP, "
+"nbi image name)\n"
+"--delclient      : delete a client machine from MTS (requires MAC address, "
+"IP, nbi image name)"
 msgstr ""
 "[ΕΠΙΛΟΓΕΣ]...\n"
 "Ρυθμιστής του Εξυπηρετητή Τερματικού της Mandriva Linux \n"
@@ -6505,10 +6697,14 @@ msgstr ""
 "--disable        : απενεργοποίηση του MTS\n"
 "--start          : εκκίνηση του MTS\n"
 "--stop           : διακοπή του MTS\n"
-"--adduser        : προσθήκη ενός ήδη υπάρχοντος χρήστη στο MTS (απαιτεί «όνομα χρήστη»)\n"
-"--deluser        : διαγραφή ενός ήδη υπάρχοντος χρήστη από το MTS (απαιτεί «όνομα χρήστη»)\n"
-"--addclient      : προσθήκη ενός μηχανήματος-πελάτης στο MTS (απαιτεί μια διεύθυνση MAC, IP, όνομα εικόνας nbi)\n"
-"--delclient      : διαγραφή ενός μηχανήματος-πελάτης από το MTS (απαιτεί μια διεύθυνση MAC, IP, όνομα εικόνας nbi)"
+"--adduser        : προσθήκη ενός ήδη υπάρχοντος χρήστη στο MTS (απαιτεί "
+"«όνομα χρήστη»)\n"
+"--deluser        : διαγραφή ενός ήδη υπάρχοντος χρήστη από το MTS (απαιτεί "
+"«όνομα χρήστη»)\n"
+"--addclient      : προσθήκη ενός μηχανήματος-πελάτης στο MTS (απαιτεί μια "
+"διεύθυνση MAC, IP, όνομα εικόνας nbi)\n"
+"--delclient      : διαγραφή ενός μηχανήματος-πελάτης από το MTS (απαιτεί μια "
+"διεύθυνση MAC, IP, όνομα εικόνας nbi)"
 
 #: standalone.pm:100
 #, c-format
@@ -6536,7 +6732,8 @@ msgstr ""
 "[ΕΠΙΛΟΓΕΣ]\n"
 "Συνδέσεις Δικτύου κ' Διαδικτύου και εφαρμογές παρακολούθησης\n"
 "\n"
-"--defaultintf διεπαφή_χρήστη : εμφάνιση, κατά προεπιλογή, του συγκεκριμένου γραφικού περιβάλλοντος χρήσης\n"
+"--defaultintf διεπαφή_χρήστη : εμφάνιση, κατά προεπιλογή, του συγκεκριμένου "
+"γραφικού περιβάλλοντος χρήσης\n"
 "--connect : να γίνει σύνδεση  στο Διαδίκτυο, αν δεν έχει γίνει ήδη\n"
 "--disconnect : να γίνει αποσύνδεση από το Διαδίκτυο, αν είναι συνδεδεμένο\n"
 "--force : χρήση μαζί με το (dis)connect : εξαναγκασμός (από-)σύνδεσης.\n"
@@ -6547,21 +6744,31 @@ msgstr ""
 #, c-format
 msgid ""
 "[OPTION]...\n"
-"  --no-confirmation      do not ask first confirmation question in Mandriva Update mode\n"
+"  --no-confirmation      do not ask first confirmation question in Mandriva "
+"Update mode\n"
 "  --no-verify-rpm        do not verify packages signatures\n"
-"  --changelog-first      display changelog before filelist in the description window\n"
+"  --changelog-first      display changelog before filelist in the "
+"description window\n"
 "  --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"
 msgstr ""
 "[ΕΠΙΛΟΓΗ]...\n"
-"  --no-confirmation      να μην γίνεται η πρώτη ερώτηση επιβεβαίωσης, κατά την κατάσταση λειτουργίας «Ενημέρωσης της Mandriva»\n"
-"  --no-verify-rpm        να μη γίνεται επιβεβαίωση των υπογραφών των πακέτων\n"
-"  --changelog-first      προβολή των καταγραφών (changelog) πριν την λίστα των αρχείων στο παράθυρο περιγραφής\n"
-"  --merge-all-rpmnew     πρόταση για συγχώνευση όλων των ανευρεθέντων αρχείων .rpmnew/.rpmsave"
+"  --no-confirmation      να μην γίνεται η πρώτη ερώτηση επιβεβαίωσης, κατά "
+"την κατάσταση λειτουργίας «Ενημέρωσης της Mandriva»\n"
+"  --no-verify-rpm        να μη γίνεται επιβεβαίωση των υπογραφών των "
+"πακέτων\n"
+"  --changelog-first      προβολή των καταγραφών (changelog) πριν την λίστα "
+"των αρχείων στο παράθυρο περιγραφής\n"
+"  --merge-all-rpmnew     πρόταση για συγχώνευση όλων των ανευρεθέντων "
+"αρχείων .rpmnew/.rpmsave"
 
 #: standalone.pm:117
 #, c-format
-msgid "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-usbtable] [--dynamic=dev]"
-msgstr "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-usbtable] [--dynamic=dev]"
+msgid ""
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
+msgstr ""
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 
 #: standalone.pm:118
 #, c-format
@@ -6578,63 +6785,64 @@ msgstr ""
 #, c-format
 msgid ""
 "\n"
-"Usage: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--testing] [-v|--version] "
+"Usage: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
+"testing] [-v|--version] "
 msgstr ""
 "\n"
-"Χρήση: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--testing] [-v|--version] "
+"Χρήση: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
+"testing] [-v|--version] "
 
-#: timezone.pm:150
-#: timezone.pm:151
+#: timezone.pm:161 timezone.pm:162
 #, c-format
 msgid "All servers"
 msgstr "Όλοι οι εξυπηρετητές (servers)"
 
-#: timezone.pm:185
+#: timezone.pm:196
 #, c-format
 msgid "Global"
 msgstr "Καθολικό"
 
-#: timezone.pm:188
+#: timezone.pm:199
 #, c-format
 msgid "Africa"
 msgstr "Αφρική"
 
-#: timezone.pm:189
+#: timezone.pm:200
 #, c-format
 msgid "Asia"
 msgstr "Ασία"
 
-#: timezone.pm:190
+#: timezone.pm:201
 #, c-format
 msgid "Europe"
 msgstr "Ευρώπη"
 
-#: timezone.pm:191
+#: timezone.pm:202
 #, c-format
 msgid "North America"
 msgstr "Βόρεια Αμερική"
 
-#: timezone.pm:192
+#: timezone.pm:203
 #, c-format
 msgid "Oceania"
 msgstr "Ωκεανία"
 
-#: timezone.pm:193
+#: timezone.pm:204
 #, c-format
 msgid "South America"
 msgstr "Νότια Αμερική"
 
-#: timezone.pm:202
+#: timezone.pm:213
 #, c-format
 msgid "Hong Kong"
 msgstr "Χονγκ Κονγκ"
 
-#: timezone.pm:239
+#: timezone.pm:250
 #, c-format
 msgid "Russian Federation"
 msgstr "Ρωσική Ομοσπονδία"
 
-#: timezone.pm:247
+#: timezone.pm:258
 #, c-format
 msgid "Yugoslavia"
 msgstr "Γιουγκοσλαβία"
@@ -6689,57 +6897,150 @@ msgstr "Εναλλαγή μεταξύ επίπεδης και ομαδικής �
 msgid ""
 "%s is not installed\n"
 "Click \"Next\" to install or \"Cancel\" to quit"
-msgstr "Το %s δεν είναι εγκατεστημένο επιλέξτε \"Επόμενο\" για εγκατάσταση η \"Άκυρο\" για έξοδο"
+msgstr ""
+"Το %s δεν είναι εγκατεστημένο επιλέξτε \"Επόμενο\" για εγκατάσταση η \"Άκυρο"
+"\" για έξοδο"
 
 #: wizards.pm:99
 #, c-format
 msgid "Installation failed"
 msgstr "Η εγκατάσταση απέτυχε"
 
+#~ msgid "Active Directory with SFU"
+#~ msgstr "Ενεργός Κατάλογος με SFU"
+
+#~ msgid "Active Directory with Winbind"
+#~ msgstr "Ενεργός Κατάλογος με Winbind"
+
+#~ msgid "Use information stored in local files for all authentication"
+#~ msgstr ""
+#~ "Για όλες τις αυθεντικοποιήσεις, να γίνεται χρήση των πληροφοριών που "
+#~ "είναι αποθηκευμένες σε τοπικά αρχεία"
+
+#~ msgid "Active Directory with SFU:"
+#~ msgstr "Ενεργός Κατάλογος με SFU:"
+
+#~ msgid "Active Directory with Winbind:"
+#~ msgstr "Ενεργός Κατάλογος με Winbind:"
+
+#~ msgid ""
+#~ "Winbind allows the system to authenticate users in a Windows Active "
+#~ "Directory Server."
+#~ msgstr ""
+#~ "Το Winbind επιτρέπει στο σύστημα να αυθεντικοποιεί τους χρήστες σε έναν "
+#~ "Εξυπηρετητή Ενεργού Καταλόγου των Microsoft Windows."
+
+#~ msgid "Authentication LDAP"
+#~ msgstr "Πιστοποίηση LDAP"
+
+#~ msgid "TLS"
+#~ msgstr "TLS"
+
+#~ msgid "SSL"
+#~ msgstr "SSL"
+
+#~ msgid "security layout (SASL/Kerberos)"
+#~ msgstr "διάταξη ασφαλείας (SASL/Kerberos)"
+
+#~ msgid "Authentication Active Directory"
+#~ msgstr "Ενεργός Κατάλογος Αυθεντικοποίησης"
+
+#~ msgid "LDAP users database"
+#~ msgstr "Βάση δεδομένων χρηστών LDAP"
+
+#~ msgid "LDAP user allowed to browse the Active Directory"
+#~ msgstr "Επιτρέπεται στον χρήστη LDAP να εξερευνεί το Ενεργό Κατάλογο"
+
+#~ msgid "Password for user"
+#~ msgstr "Κωδικός πρόσβασης για το χρήστη"
+
+#~ msgid "Authentication NIS"
+#~ msgstr "Πιστοποίηση NIS"
+
+#, fuzzy
+#~ msgid ""
+#~ "For this to work for a W2K PDC, you will probably need to have the admin "
+#~ "run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
+#~ "add and reboot the server.\n"
+#~ "You will also need the username/password of a Domain Admin to join the "
+#~ "machine to the Windows(TM) domain.\n"
+#~ "If networking is not yet enabled, Drakx will attempt to join the domain "
+#~ "after the network setup step.\n"
+#~ "Should this setup fail for some reason and domain authentication is not "
+#~ "working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows"
+#~ "(tm) Domain, and Admin Username/Password, after system boot.\n"
+#~ "The command 'wbinfo -t' will test whether your authentication secrets are "
+#~ "good."
+#~ msgstr ""
+#~ "Τομέας Windows  εξυπηρετητής\n"
+#~ " Τομέας Τομέας Windows \n"
+#~ "\n"
+#~ " Τομέας Windows  Τομέας Όνομα χρήστη Κωδικός Πρόσβασης\n"
+#~ "."
+
+#~ msgid "Authentication Windows Domain"
+#~ msgstr "Πιστοποίηση Τομέα Microsoft Windows"
+
 #~ msgid "Undo"
 #~ msgstr "Αναίρεση"
+
 #~ msgid "Save partition table"
 #~ msgstr "Αποθήκευση πίνακα κατατμήσεων"
+
 #~ msgid "Restore partition table"
 #~ msgstr "Επαναφορά πίνακα κατατμήσεων"
-#~ msgid "Select file"
-#~ msgstr "Επιλέξτε αρχείο"
+
 #~ msgid ""
 #~ "The backup partition table has not the same size\n"
 #~ "Still continue?"
 #~ msgstr ""
 #~ "Ο εφεδρικός πίνακας κατατμήσεων έχει διαφορετικό μέγεθος\n"
 #~ "Να συνεχίσω;"
+
 #~ msgid "Info: "
 #~ msgstr "Πληροφορίες: "
+
 #~ msgid "Unknown driver"
 #~ msgstr "Άγνωστος οδηγός"
+
 #~ msgid "Error reading file %s"
 #~ msgstr "Σφάλμα κατά την ανάγνωση του αρχείου %s"
+
 #~ msgid "Restoring from file %s failed: %s"
 #~ msgstr "Η επαναφορά από το αρχείο %s απέτυχε: %s"
+
 #~ msgid "Bad backup file"
 #~ msgstr "Κατεστραμμένο εφεδρικό αρχείο"
+
 #~ msgid "Error writing to file %s"
 #~ msgstr "Σφάλμα εγγραφής στο αρχείο %s"
+
 #~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
 #~ msgstr "Σφάλμα: Ο οδηγός \"%s\" της κάρτας ήχου σας δεν υπάρχει στη λίστα"
+
 #~ msgid "Ext2"
 #~ msgstr "Ext2"
+
 #~ msgid "Journalised FS"
 #~ msgstr "Journalised FS"
+
 #~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
 #~ msgstr ""
 #~ "Ξεκινάει την υπηρεσία εξυπηρετητή γραμματοσειρών X (αυτό είναι απαραίτητο "
 #~ "για να εκτελεστεί το Xorg)."
+
 #~ msgid "Add user"
 #~ msgstr "Προσθήκη χρήστη"
+
 #~ msgid "Accept user"
 #~ msgstr "Αποδοχή χρήστη"
+
 #~ msgid "Rescue partition table"
 #~ msgstr "Πίνακας κατατμήσεων διάσωσης"
+
 #~ msgid "Removable media automounting"
 #~ msgstr "Αυτόματη σύνδεση αποσπώμενων μονάδων"
+
 #~ msgid "Trying to rescue partition table"
 #~ msgstr "Προσπάθεια διάσωσης πίνακα κατατμήσεων"
 
@@ -6767,12 +7068,15 @@ msgstr "Η εγκατάσταση απέτυχε"
 #~ "\n"
 #~ "\n"
 #~ " ωριαία."
+
 #~ msgid "PLL setting:"
 #~ msgstr "Ρυθμίσεις PLL:"
+
 #~ msgid "Radio support:"
 #~ msgstr "Υποστήριξη ραδιοφώνου:"
+
 #~ msgid "enable radio support"
 #~ msgstr "ενεργοποίηση ραδιοφώνου"
+
 #~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
 #~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
-

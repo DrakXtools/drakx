@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2008-03-20 14:27+0100\n"
+"POT-Creation-Date: 2008-07-20 04:41+0200\n"
 "PO-Revision-Date: 2004-02-24 13:01+0200\n"
 "Last-Translator: Māris Laureckis <linux@latgola.lv>\n"
 "Language-Team: Latgalian <linux@latgola.lv>\n"
@@ -13,10 +13,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: any.pm:245 diskdrake/interactive.pm:552 diskdrake/interactive.pm:739
-#: diskdrake/interactive.pm:783 diskdrake/interactive.pm:841
-#: diskdrake/interactive.pm:1132 do_pkgs.pm:216 do_pkgs.pm:258
-#: harddrake/sound.pm:202 interactive.pm:580
+#: any.pm:245 diskdrake/interactive.pm:554 diskdrake/interactive.pm:741
+#: diskdrake/interactive.pm:785 diskdrake/interactive.pm:843
+#: diskdrake/interactive.pm:1133 do_pkgs.pm:220 do_pkgs.pm:262
+#: harddrake/sound.pm:285 interactive.pm:580
 #, c-format
 msgid "Please wait"
 msgstr "Lyudzu pagaidit"
@@ -53,7 +53,7 @@ msgid ""
 "At your next boot you should see the bootloader prompt."
 msgstr ""
 
-#: any.pm:311
+#: any.pm:313
 #, c-format
 msgid ""
 "You decided to install the bootloader on a partition.\n"
@@ -68,269 +68,274 @@ msgstr ""
 "\n"
 "Kurs ir jiusu suoknejamais disks?"
 
-#: any.pm:334
+#: any.pm:339
+#, fuzzy, c-format
+msgid "First sector (MBR) of drive %s"
+msgstr "Diska pyrmais sektors (MBR)"
+
+#: any.pm:341
 #, c-format
 msgid "First sector of drive (MBR)"
 msgstr "Diska pyrmais sektors (MBR)"
 
-#: any.pm:335
+#: any.pm:343
 #, c-format
 msgid "First sector of the root partition"
 msgstr "Suoknejomuos sadalis pyrmais sektors"
 
-#: any.pm:337
+#: any.pm:345
 #, c-format
 msgid "On Floppy"
 msgstr "Uz disketi"
 
-#: any.pm:339
+#: any.pm:347
 #, c-format
 msgid "Skip"
 msgstr "Izlaist"
 
-#: any.pm:343
+#: any.pm:351
 #, c-format
 msgid "LILO/grub Installation"
 msgstr "LILO/grub instaleišona"
 
-#: any.pm:345
+#: any.pm:353
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Kur jius gribit instalēt suokneituoju?"
 
-#: any.pm:372
+#: any.pm:380
 #, c-format
 msgid "Boot Style Configuration"
 msgstr "Suokneišonys stila konfigureišona"
 
-#: any.pm:382 any.pm:414 any.pm:415
+#: any.pm:390 any.pm:422 any.pm:423
 #, c-format
 msgid "Bootloader main options"
 msgstr "Suokneituoja golvonuos opcejis"
 
-#: any.pm:387
+#: any.pm:395
 #, c-format
 msgid "Bootloader"
 msgstr "Suokneituojs"
 
-#: any.pm:388 any.pm:419
+#: any.pm:396 any.pm:427
 #, c-format
 msgid "Bootloader to use"
 msgstr "Kuru OS īluodeituoju lītuot"
 
-#: any.pm:390 any.pm:421
+#: any.pm:398 any.pm:429
 #, c-format
 msgid "Boot device"
 msgstr "Suoknejamuo īreice"
 
-#: any.pm:392
+#: any.pm:400
 #, c-format
 msgid "Main options"
 msgstr ""
 
-#: any.pm:393
+#: any.pm:401
 #, c-format
 msgid "Delay before booting default image"
 msgstr "Pauze pyrms nūkluseituos sistemys īluodis"
 
-#: any.pm:394
+#: any.pm:402
 #, c-format
 msgid "Enable ACPI"
 msgstr "Īslēgt ACPI"
 
-#: any.pm:395
+#: any.pm:403
 #, fuzzy, c-format
 msgid "Enable APIC"
 msgstr "Īslēgt ACPI"
 
-#: any.pm:396
+#: any.pm:404
 #, fuzzy, c-format
 msgid "Enable Local APIC"
 msgstr "Īslēgt ACPI"
 
-#: any.pm:398 any.pm:785 any.pm:794 authentication.pm:197
+#: any.pm:406 any.pm:794 any.pm:803 authentication.pm:240
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
 msgstr "Parole"
 
-#: any.pm:400 authentication.pm:208
+#: any.pm:408 authentication.pm:251
 #, c-format
 msgid "The passwords do not match"
 msgstr "Parolis nasakreit"
 
-#: any.pm:400 authentication.pm:208 diskdrake/interactive.pm:1299
+#: any.pm:408 authentication.pm:251 diskdrake/interactive.pm:1300
 #, c-format
 msgid "Please try again"
 msgstr "Lyudzu mieginit vēlreiz"
 
-#: any.pm:401
+#: any.pm:409
 #, fuzzy, c-format
 msgid "You can not use a password with %s"
 msgstr "Jius navarit lītuot šifreitū failsistemu monteišonys punktā %s"
 
-#: any.pm:404 any.pm:787 any.pm:796 authentication.pm:198
+#: any.pm:412 any.pm:796 any.pm:805 authentication.pm:241
 #, c-format
 msgid "Password (again)"
 msgstr "Parole (atkāuotuoti)"
 
-#: any.pm:405
+#: any.pm:413
 #, c-format
 msgid "Restrict command line options"
 msgstr "Īrobežuot komandryndys opcejis"
 
-#: any.pm:405
+#: any.pm:413
 #, c-format
 msgid "restrict"
 msgstr "īrībežuot"
 
-#: any.pm:406
+#: any.pm:414
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr "Opcejai ``Īrūbežuot komandryndys opcejis'' nav jāgys bez parolis"
 
-#: any.pm:408
+#: any.pm:416
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Izteireit /tmp kotrys suokneišonys laikā"
 
-#: any.pm:409
+#: any.pm:417
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
 msgstr "Ja napīcīšoms, precizejit RAM apjūmu (atrosti %d MB)"
 
-#: any.pm:410
+#: any.pm:418
 #, c-format
 msgid "Give the ram size in MB"
 msgstr "Nūruodit atminis apjūmu MB"
 
-#: any.pm:420
+#: any.pm:428
 #, c-format
 msgid "Init Message"
 msgstr ""
 
-#: any.pm:422
+#: any.pm:430
 #, c-format
 msgid "Open Firmware Delay"
 msgstr ""
 
-#: any.pm:423
+#: any.pm:431
 #, c-format
 msgid "Kernel Boot Timeout"
 msgstr "Kerneļa īluodis taimauts"
 
-#: any.pm:424
+#: any.pm:432
 #, c-format
 msgid "Enable CD Boot?"
 msgstr "Atļaut īluodi nu kompaktdiska?"
 
-#: any.pm:425
+#: any.pm:433
 #, c-format
 msgid "Enable OF Boot?"
 msgstr "Atļaut īluodi OF?"
 
-#: any.pm:426
+#: any.pm:434
 #, c-format
 msgid "Default OS?"
 msgstr "Nūklusātuo OS?"
 
-#: any.pm:493
+#: any.pm:501
 #, c-format
 msgid "Image"
 msgstr "Attāls"
 
-#: any.pm:494 any.pm:507
+#: any.pm:502 any.pm:515
 #, c-format
 msgid "Root"
 msgstr "Sakne"
 
-#: any.pm:495 any.pm:520
+#: any.pm:503 any.pm:528
 #, c-format
 msgid "Append"
 msgstr "Papyldynuot"
 
-#: any.pm:497
+#: any.pm:505
 #, c-format
 msgid "Xen append"
 msgstr ""
 
-#: any.pm:500
+#: any.pm:508
 #, c-format
 msgid "Video mode"
 msgstr "Video režims"
 
-#: any.pm:502
+#: any.pm:510
 #, c-format
 msgid "Initrd"
 msgstr "Initrd"
 
-#: any.pm:503
+#: any.pm:511
 #, fuzzy, c-format
 msgid "Network profile"
 msgstr "Jauns profils..."
 
-#: any.pm:512 any.pm:517 any.pm:519 diskdrake/interactive.pm:374
+#: any.pm:520 any.pm:525 any.pm:527 diskdrake/interactive.pm:376
 #, c-format
 msgid "Label"
 msgstr "Nūsaukums"
 
-#: any.pm:514 any.pm:522 harddrake/v4l.pm:438
+#: any.pm:522 any.pm:530 harddrake/v4l.pm:438
 #, c-format
 msgid "Default"
 msgstr "Nūklusāts"
 
-#: any.pm:521
+#: any.pm:529
 #, c-format
 msgid "NoVideo"
 msgstr "Bez video"
 
-#: any.pm:532
+#: any.pm:540
 #, c-format
 msgid "Empty label not allowed"
 msgstr "Tukšs nūsaukums nav atļauts"
 
-#: any.pm:533
+#: any.pm:541
 #, c-format
 msgid "You must specify a kernel image"
 msgstr "Jiusim juonūruoda kūdula attāls"
 
-#: any.pm:533
+#: any.pm:541
 #, c-format
 msgid "You must specify a root partition"
 msgstr "Jiusim juonūruoda saknis (root) sadaļa"
 
-#: any.pm:534
+#: any.pm:542
 #, c-format
 msgid "This label is already used"
 msgstr "Itys nūsaukums jau ir izmontuots"
 
-#: any.pm:552
+#: any.pm:560
 #, c-format
 msgid "Which type of entry do you want to add?"
 msgstr "Kaida veida īrokstu gribit pīvīnuot"
 
-#: any.pm:553
+#: any.pm:561
 #, c-format
 msgid "Linux"
 msgstr "Linux"
 
-#: any.pm:553
+#: any.pm:561
 #, c-format
 msgid "Other OS (SunOS...)"
 msgstr "Cyta OS (SunOS...)"
 
-#: any.pm:554
+#: any.pm:562
 #, c-format
 msgid "Other OS (MacOS...)"
 msgstr "Cyta OS (MacOS...)"
 
-#: any.pm:554
+#: any.pm:562
 #, c-format
 msgid "Other OS (Windows...)"
 msgstr "Cyta OS (Windows...)"
 
-#: any.pm:582
+#: any.pm:590
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -339,115 +344,115 @@ msgstr ""
 "Ite ir dažaidi suokneišonys īroksti.\n"
 "Jius varit pīvīnuot jaunus voi izmaineit esūšūs."
 
-#: any.pm:745
+#: any.pm:754
 #, c-format
 msgid "access to X programs"
 msgstr "pīkļuve X programmom"
 
-#: any.pm:746
+#: any.pm:755
 #, c-format
 msgid "access to rpm tools"
 msgstr "pīkļuve rpm reikim"
 
-#: any.pm:747
+#: any.pm:756
 #, c-format
 msgid "allow \"su\""
 msgstr "atļaut \"su\""
 
-#: any.pm:748
+#: any.pm:757
 #, c-format
 msgid "access to administrative files"
 msgstr "pīkļuve administreišonys failim"
 
-#: any.pm:749
+#: any.pm:758
 #, c-format
 msgid "access to network tools"
 msgstr "pīkļuve teikla reikim"
 
-#: any.pm:750
+#: any.pm:759
 #, c-format
 msgid "access to compilation tools"
 msgstr "pīkļuve kompileišonys reikim"
 
-#: any.pm:756
+#: any.pm:765
 #, c-format
 msgid "(already added %s)"
 msgstr "(jau pīvīnuots %s)"
 
-#: any.pm:762
+#: any.pm:771
 #, c-format
 msgid "Please give a user name"
 msgstr "Lyudzu īvodit lītuotuoja vuordu"
 
-#: any.pm:763
+#: any.pm:772
 #, c-format
 msgid ""
 "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr "Lītuotuoja vuordā var byut tikai mozie angļu burti, cipari, `-' i `_'"
 
-#: any.pm:764
+#: any.pm:773
 #, c-format
 msgid "The user name is too long"
 msgstr "Lītuotuoja vuords ir puoruok garš"
 
-#: any.pm:765
+#: any.pm:774
 #, c-format
 msgid "This user name has already been added"
 msgstr "Šaids lītuotuoja vuords jau ir pīvīnuots"
 
-#: any.pm:771 any.pm:798
+#: any.pm:780 any.pm:807
 #, c-format
 msgid "User ID"
 msgstr "Lītuotuoja ID"
 
-#: any.pm:771 any.pm:799
+#: any.pm:780 any.pm:808
 #, c-format
 msgid "Group ID"
 msgstr "Grupys ID"
 
-#: any.pm:772
+#: any.pm:781
 #, fuzzy, c-format
 msgid "%s must be a number"
 msgstr "Opcejai %s ir juobyun numeram!"
 
-#: any.pm:773
+#: any.pm:782
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
 msgstr ""
 
-#: any.pm:777
+#: any.pm:786
 #, fuzzy, c-format
 msgid "User management"
 msgstr "Lītuotuoja vuords"
 
-#: any.pm:784 authentication.pm:183
+#: any.pm:793 authentication.pm:226
 #, fuzzy, c-format
 msgid "Set administrator (root) password"
 msgstr "root parolis izviele"
 
-#: any.pm:789
+#: any.pm:798
 #, fuzzy, c-format
 msgid "Enter a user"
 msgstr ""
 "Īvodit lītuotuoju\n"
 "%s"
 
-#: any.pm:790
+#: any.pm:799
 #, c-format
 msgid "Real name"
 msgstr "Vuords i uzvuords"
 
-#: any.pm:793
+#: any.pm:802
 #, c-format
 msgid "Login name"
 msgstr "Slāgvuords"
 
-#: any.pm:797
+#: any.pm:806
 #, c-format
 msgid "Shell"
 msgstr "Čaula"
 
-#: any.pm:811
+#: any.pm:810
 #, c-format
 msgid "Icon"
 msgstr "Ikona"
@@ -457,7 +462,7 @@ msgstr "Ikona"
 msgid "Autologin"
 msgstr "Autopīsasliegšonuos"
 
-#: any.pm:836
+#: any.pm:849
 #, fuzzy, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr ""
@@ -465,62 +470,62 @@ msgstr ""
 "atvērta viena noteikta lietotāja sesija. \n"
 "Vai vēlaties lietot šo iespēju?"
 
-#: any.pm:837
+#: any.pm:850
 #, fuzzy, c-format
 msgid "Use this feature"
 msgstr "Vai vēlaties izmantot aboot?"
 
-#: any.pm:838
+#: any.pm:851
 #, c-format
 msgid "Choose the default user:"
 msgstr "Nūruodit nūkluseitū lītuotuoju:"
 
-#: any.pm:839
+#: any.pm:852
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Nūruodit izmontojamū lūgu menedžeri:"
 
-#: any.pm:862 any.pm:912
+#: any.pm:875 any.pm:925
 #, c-format
 msgid "Release Notes"
 msgstr ""
 
-#: any.pm:869 any.pm:1201 interactive/gtk.pm:766
+#: any.pm:882 any.pm:1221 interactive/gtk.pm:766
 #, c-format
 msgid "Close"
 msgstr "Aizvērt"
 
-#: any.pm:905
+#: any.pm:918
 #, c-format
 msgid "License agreement"
 msgstr "Licencis leigums"
 
-#: any.pm:908 diskdrake/dav.pm:26
+#: any.pm:921 diskdrake/dav.pm:26
 #, c-format
 msgid "Quit"
 msgstr "Beigt"
 
-#: any.pm:915
+#: any.pm:928
 #, c-format
 msgid "Accept"
 msgstr "Pījimt"
 
-#: any.pm:915
+#: any.pm:928
 #, c-format
 msgid "Refuse"
 msgstr "Nūraideit"
 
-#: any.pm:930 any.pm:996
+#: any.pm:948 any.pm:1015
 #, c-format
 msgid "Please choose a language to use."
 msgstr "Lyudzu izavielejit izmontojamū volūdu."
 
-#: any.pm:931 any.pm:997
+#: any.pm:949 any.pm:1016
 #, fuzzy, c-format
 msgid "Language choice"
 msgstr "Manuali"
 
-#: any.pm:961
+#: any.pm:979
 #, c-format
 msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
@@ -531,72 +536,72 @@ msgstr ""
 "volūdys, kaidys gribit uzstuodeit. Tuos byus pīejamys,\n"
 "kod jiusu instaleišona byus gotova i jius puorstarteisit sovu sistemu."
 
-#: any.pm:964
+#: any.pm:982
 #, c-format
 msgid "Multi languages"
 msgstr ""
 
-#: any.pm:975 any.pm:1005
+#: any.pm:993 any.pm:1024
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr ""
 
-#: any.pm:977
+#: any.pm:995
 #, c-format
 msgid "All languages"
 msgstr "Vysys volūdys"
 
-#: any.pm:1052
+#: any.pm:1071
 #, c-format
 msgid "Country / Region"
 msgstr "Vaļsts / Regions"
 
-#: any.pm:1054
+#: any.pm:1073
 #, c-format
 msgid "Please choose your country."
 msgstr "Lyudzu izavielejit jiusu vaļsti."
 
-#: any.pm:1056
+#: any.pm:1075
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Ite ir pylns pīejamū vaļstu saroksts"
 
-#: any.pm:1057
+#: any.pm:1076
 #, fuzzy, c-format
 msgid "Other Countries"
 msgstr "Cyti porti"
 
-#: any.pm:1057 interactive.pm:481
+#: any.pm:1076 interactive.pm:481
 #, c-format
 msgid "Advanced"
 msgstr "Izvārsta"
 
-#: any.pm:1063
+#: any.pm:1082
 #, fuzzy, c-format
 msgid "Input method:"
 msgstr "Teikla metode:"
 
-#: any.pm:1066
+#: any.pm:1085
 #, c-format
 msgid "None"
 msgstr "Nav"
 
-#: any.pm:1146
+#: any.pm:1166
 #, c-format
 msgid "No sharing"
 msgstr "Bez kūplītuošonys"
 
-#: any.pm:1146
+#: any.pm:1166
 #, c-format
 msgid "Allow all users"
 msgstr "Atļaut vysus lītuotuojus"
 
-#: any.pm:1146
+#: any.pm:1166
 #, c-format
 msgid "Custom"
 msgstr "Pīlāguota"
 
-#: any.pm:1150
+#: any.pm:1170
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -612,21 +617,21 @@ msgstr ""
 "\n"
 "\"Izvārts\" atļaun individualu tīseibu pīškieršonu.\n"
 
-#: any.pm:1162
+#: any.pm:1182
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
 "Windows."
 msgstr ""
 
-#: any.pm:1165
+#: any.pm:1185
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
 "systems."
 msgstr ""
 
-#: any.pm:1173
+#: any.pm:1193
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
@@ -634,12 +639,12 @@ msgstr ""
 "Jius varit eksportēt, lītojūt NFS voi SMB. Lyudzu izavielejit, kuru gribit "
 "lītuot."
 
-#: any.pm:1201
+#: any.pm:1221
 #, c-format
 msgid "Launch userdrake"
 msgstr "Palaist userdrake"
 
-#: any.pm:1203
+#: any.pm:1223
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -648,313 +653,364 @@ msgstr ""
 "Lītuotuoju kūplītuojumi izmontoj grupu \"fileshare\". \n"
 "Jius varit izmontuot userdrake, lai itai grupai pīvīnuotu lītuotuojus."
 
-#: any.pm:1295
+#: any.pm:1315
 #, c-format
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr "Lyudzu aizverit seseju i nūspīdit Ctrl-Alt-BackSpace"
 
-#: any.pm:1299
+#: any.pm:1319
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr ""
 
-#: any.pm:1334
+#: any.pm:1354
 #, c-format
 msgid "Timezone"
 msgstr "Laika jūsla"
 
-#: any.pm:1334
+#: any.pm:1354
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Kaida ir jiusu laika jūsla?"
 
-#: any.pm:1346 any.pm:1348
+#: any.pm:1377 any.pm:1379
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr ""
 
-#: any.pm:1349
+#: any.pm:1380
 #, c-format
 msgid "What is the best time?"
 msgstr ""
 
-#: any.pm:1353
+#: any.pm:1384
 #, fuzzy, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "Datora pulksteņs īstateits ruodeit GMT laiku"
 
-#: any.pm:1354
+#: any.pm:1385
 #, fuzzy, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "Datora pulksteņs īstateits ruodeit GMT laiku"
 
-#: any.pm:1356
+#: any.pm:1387
 #, c-format
 msgid "NTP Server"
 msgstr "NTP servers"
 
-#: any.pm:1357
+#: any.pm:1388
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Automatiska laika sinhronizaceja (izmontojūt NTP)"
 
-#: authentication.pm:24
+#: authentication.pm:25
 #, fuzzy, c-format
 msgid "Local file"
 msgstr "Lokalī faili"
 
-#: authentication.pm:25
+#: authentication.pm:26
 #, c-format
 msgid "LDAP"
 msgstr "LDAP"
 
-#: authentication.pm:26
+#: authentication.pm:27
 #, c-format
 msgid "NIS"
 msgstr "NIS"
 
-#: authentication.pm:27
+#: authentication.pm:28
 #, fuzzy, c-format
 msgid "Smart Card"
 msgstr "Ethernet karte"
 
-#: authentication.pm:28 authentication.pm:164
+#: authentication.pm:29 authentication.pm:205
 #, c-format
 msgid "Windows Domain"
 msgstr "Windows domens"
 
-#: authentication.pm:29
-#, fuzzy, c-format
-msgid "Active Directory with SFU"
-msgstr "Atjaunuot vysys rezervis kopejis"
-
 #: authentication.pm:30
-#, fuzzy, c-format
-msgid "Active Directory with Winbind"
-msgstr "Atjaunuot vysys rezervis kopejis"
+#, c-format
+msgid "Kerberos 5"
+msgstr ""
 
-#: authentication.pm:67
+#: authentication.pm:64
 #, fuzzy, c-format
 msgid "Local file:"
 msgstr "Lokalī faili:"
 
-#: authentication.pm:67
+#: authentication.pm:64
 #, c-format
-msgid "Use information stored in local files for all authentication"
+msgid ""
+"Use local for all authentication and information user tell in local file"
 msgstr ""
 
-#: authentication.pm:68
+#: authentication.pm:65
 #, c-format
 msgid "LDAP:"
 msgstr "LDAP:"
 
-#: authentication.pm:68
+#: authentication.pm:65
 #, c-format
 msgid ""
 "Tells your computer to use LDAP for some or all authentication. LDAP "
 "consolidates certain types of information within your organization."
 msgstr ""
 
-#: authentication.pm:69
+#: authentication.pm:66
 #, c-format
 msgid "NIS:"
 msgstr "NIS:"
 
-#: authentication.pm:69
+#: authentication.pm:66
 #, c-format
 msgid ""
 "Allows you to run a group of computers in the same Network Information "
 "Service domain with a common password and group file."
 msgstr ""
 
-#: authentication.pm:70
+#: authentication.pm:67
 #, c-format
 msgid "Windows Domain:"
 msgstr "Windows domens:"
 
-#: authentication.pm:70
+#: authentication.pm:67
 #, c-format
 msgid ""
 "Winbind allows the system to retrieve information and authenticate users in "
 "a Windows domain."
 msgstr ""
 
-#: authentication.pm:71
-#, fuzzy, c-format
-msgid "Active Directory with SFU:"
-msgstr "Atjaunuot vysys rezervis kopejis"
+#: authentication.pm:68
+#, c-format
+msgid "Kerberos 5 :"
+msgstr ""
 
-#: authentication.pm:71
+#: authentication.pm:68
 #, c-format
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
 msgstr ""
 
-#: authentication.pm:72
-#, fuzzy, c-format
-msgid "Active Directory with Winbind:"
-msgstr "Atjaunuot vysys rezervis kopejis"
-
-#: authentication.pm:72
+#: authentication.pm:96 authentication.pm:130 authentication.pm:149
+#: authentication.pm:150 authentication.pm:176 authentication.pm:200
+#: authentication.pm:872
 #, c-format
-msgid ""
-"Winbind allows the system to authenticate users in a Windows Active "
-"Directory Server."
+msgid " "
 msgstr ""
 
-#: authentication.pm:97
-#, c-format
-msgid "Authentication LDAP"
-msgstr "LDAP autentikaceja"
-
-#: authentication.pm:98
-#, c-format
-msgid "LDAP Base dn"
-msgstr "LDAP Base dn"
+#: authentication.pm:97 authentication.pm:131 authentication.pm:177
+#: authentication.pm:201
+#, fuzzy, c-format
+msgid "Welcome to the Authentication Wizard"
+msgstr "Napīcīšoma domena autentikaceja"
 
 #: authentication.pm:99
+#, c-format
+msgid ""
+"You have selected LDAP authentication. Please review the configuration "
+"options below "
+msgstr ""
+
+#: authentication.pm:101 authentication.pm:156
 #, c-format
 msgid "LDAP Server"
 msgstr "LDAP servers"
 
-#: authentication.pm:112 fsedit.pm:23
-#, c-format
-msgid "simple"
-msgstr "vīnkuoršs"
-
-#: authentication.pm:113
+#: authentication.pm:102 authentication.pm:157
 #, fuzzy, c-format
-msgid "TLS"
-msgstr "LSB"
+msgid "Base dn"
+msgstr "LDAP Base dn"
+
+#: authentication.pm:103 authentication.pm:158
+#, c-format
+msgid "Fecth base Dn "
+msgstr ""
+
+#: authentication.pm:105 authentication.pm:160
+#, c-format
+msgid "Use encrypt connection with TLS "
+msgstr ""
+
+#: authentication.pm:106 authentication.pm:161
+#, c-format
+msgid "Download CA Certificate "
+msgstr ""
+
+#: authentication.pm:108 authentication.pm:141
+#, c-format
+msgid "Use Disconnect mode "
+msgstr ""
+
+#: authentication.pm:109 authentication.pm:162
+#, c-format
+msgid "Use anonymous BIND "
+msgstr ""
+
+#: authentication.pm:110 authentication.pm:113 authentication.pm:115
+#: authentication.pm:119
+#, c-format
+msgid "  "
+msgstr ""
+
+#: authentication.pm:111 authentication.pm:163
+#, c-format
+msgid "Bind DN "
+msgstr ""
+
+#: authentication.pm:112 authentication.pm:164
+#, fuzzy, c-format
+msgid "Bind Password "
+msgstr "Parole"
 
 #: authentication.pm:114
 #, c-format
-msgid "SSL"
+msgid "Advanced path for group "
 msgstr ""
 
-#: authentication.pm:115
-#, c-format
-msgid "security layout (SASL/Kerberos)"
-msgstr ""
-
-#: authentication.pm:122 authentication.pm:160
+#: authentication.pm:116
 #, fuzzy, c-format
-msgid "Authentication Active Directory"
-msgstr "Autentifikacejis_metode"
+msgid "Password base"
+msgstr "Parole"
 
-#: authentication.pm:123 diskdrake/smbnfs_gtk.pm:182
-#, c-format
-msgid "Domain"
-msgstr "Domens"
-
-#: authentication.pm:125 diskdrake/dav.pm:63
-#, c-format
-msgid "Server"
-msgstr "Servers"
-
-#: authentication.pm:126
+#: authentication.pm:117
 #, fuzzy, c-format
-msgid "LDAP users database"
-msgstr "Datubāzis"
+msgid "Group base"
+msgstr "Grupys ID"
 
-#: authentication.pm:127
+#: authentication.pm:118
 #, c-format
-msgid "Use Anonymous BIND "
+msgid "Sahdow base"
 msgstr ""
 
-#: authentication.pm:128
+#: authentication.pm:133
 #, c-format
-msgid "LDAP user allowed to browse the Active Directory"
+msgid ""
+"You have selected Kerberos 5 authentication. Please review the configuration "
+"options below "
 msgstr ""
 
-#: authentication.pm:129
+#: authentication.pm:135
 #, fuzzy, c-format
-msgid "Password for user"
-msgstr "Napīcīšoma parole"
+msgid "Realm "
+msgstr "Vuords i uzvuords"
 
-#: authentication.pm:141
+#: authentication.pm:137
+#, fuzzy, c-format
+msgid "KDCs Servers"
+msgstr "LDAP servers"
+
+#: authentication.pm:139
 #, c-format
-msgid "Authentication NIS"
-msgstr "NIS autentikaceja"
+msgid "Use DNS to resolve hosts for realms "
+msgstr ""
 
-#: authentication.pm:142
+#: authentication.pm:140
+#, c-format
+msgid "Use DNS to resolve KDCs for realms "
+msgstr ""
+
+#: authentication.pm:145
+#, fuzzy, c-format
+msgid "Use local file for users informations"
+msgstr "Lītuot libsafe prīkš serverim"
+
+#: authentication.pm:146
+#, fuzzy, c-format
+msgid "Use Ldap for users informations"
+msgstr "Cītuo diska informaceja"
+
+#: authentication.pm:152
+#, c-format
+msgid ""
+"You have selected Kerberos 5 for authentication, now you must choose the "
+"type of users information "
+msgstr ""
+
+#: authentication.pm:179
+#, c-format
+msgid ""
+"You have selected NIS authentication. Please review the configuration "
+"options below "
+msgstr ""
+
+#: authentication.pm:181
 #, c-format
 msgid "NIS Domain"
 msgstr "NIS domens"
 
-#: authentication.pm:143
+#: authentication.pm:182
 #, c-format
 msgid "NIS Server"
 msgstr "NIS servers"
 
-#: authentication.pm:148
+#: authentication.pm:203
 #, c-format
 msgid ""
-"For this to work for a W2K PDC, you will probably need to have the admin "
-"run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
-"add and reboot the server.\n"
-"You will also need the username/password of a Domain Admin to join the "
-"machine to the Windows(TM) domain.\n"
-"If networking is not yet enabled, Drakx will attempt to join the domain "
-"after the network setup step.\n"
-"Should this setup fail for some reason and domain authentication is not "
-"working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows(tm) "
-"Domain, and Admin Username/Password, after system boot.\n"
-"The command 'wbinfo -t' will test whether your authentication secrets are "
-"good."
+"You have selected Windows Domain authentication. Please review the "
+"configuration options below "
 msgstr ""
 
-#: authentication.pm:160
-#, c-format
-msgid "Authentication Windows Domain"
-msgstr "Windows domena autentikaceja"
+#: authentication.pm:207
+#, fuzzy, c-format
+msgid "Domain Model "
+msgstr "Domens"
 
-#: authentication.pm:162
+#: authentication.pm:209
 #, c-format
 msgid "Active Directory Realm "
 msgstr ""
 
-#: authentication.pm:165
-#, c-format
-msgid "Domain Admin User Name"
-msgstr "Domena administratora lītuotuoja vuords"
-
-#: authentication.pm:166
-#, c-format
-msgid "Domain Admin Password"
-msgstr "Domena administratora parole"
-
-#: authentication.pm:182 authentication.pm:199
+#: authentication.pm:225 authentication.pm:242
 #, c-format
 msgid "Authentication"
 msgstr "Autentifikaceja"
 
-#: authentication.pm:185
+#: authentication.pm:228
 #, fuzzy, c-format
 msgid "Authentication method"
 msgstr "Autentifikacejis_metode"
 
 #. -PO: keep this short or else the buttons will not fit in the window
-#: authentication.pm:190
+#: authentication.pm:233
 #, c-format
 msgid "No password"
 msgstr "Bez parolis"
 
-#: authentication.pm:211
+#: authentication.pm:254
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Itei parole ir puoruok vīnkuorša (juobyun vysmoz %d simbolus garai)"
 
-#: authentication.pm:352
+#: authentication.pm:354
 #, c-format
 msgid "Can not use broadcast with no NIS domain"
 msgstr "Navar izmontuot apraidi bez NIS domena"
+
+#: authentication.pm:867
+#, c-format
+msgid "Select file"
+msgstr "Izavielejit failu"
+
+#: authentication.pm:873
+#, fuzzy, c-format
+msgid "Domain Windows for authentication : "
+msgstr "Napīcīšoma domena autentikaceja"
+
+#: authentication.pm:875
+#, c-format
+msgid "Domain Admin User Name"
+msgstr "Domena administratora lītuotuoja vuords"
+
+#: authentication.pm:876
+#, c-format
+msgid "Domain Admin Password"
+msgstr "Domena administratora parole"
 
 # NOTE: this message will be displayed at boot time; that is
 # only the ascii charset will be available on most machines
 # so use only 7bit for this message (and do transliteration or
 # leave it in English, as it is the best for your language)
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: bootloader.pm:900
+#: bootloader.pm:942
 #, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
@@ -969,56 +1025,56 @@ msgstr ""
 "gaidit, cikom tiks iiluodeita nuuklusaatuo sistema.\n"
 "\n"
 
-#: bootloader.pm:1050
+#: bootloader.pm:1110
 #, c-format
 msgid "LILO with text menu"
 msgstr "LILO ar teksta izvieļni"
 
-#: bootloader.pm:1051
+#: bootloader.pm:1111
 #, c-format
 msgid "GRUB with graphical menu"
 msgstr ""
 
-#: bootloader.pm:1052
+#: bootloader.pm:1112
 #, c-format
 msgid "GRUB with text menu"
 msgstr ""
 
-#: bootloader.pm:1053
+#: bootloader.pm:1113
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
 
-#: bootloader.pm:1054
+#: bootloader.pm:1114
 #, c-format
 msgid "SILO"
 msgstr "SILO"
 
-#: bootloader.pm:1135
+#: bootloader.pm:1195
 #, c-format
 msgid "not enough room in /boot"
 msgstr "napīteik vītys /boot sadaļā"
 
-#: bootloader.pm:1760
+#: bootloader.pm:1843
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
 msgstr "Jius navarit instalēt suokneituoju %s sadaļā\n"
 
-#: bootloader.pm:1813
+#: bootloader.pm:1964
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
 "renumbered"
 msgstr ""
 
-#: bootloader.pm:1826
+#: bootloader.pm:1977
 #, c-format
 msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
 "choose \"%s\""
 msgstr ""
 
-#: bootloader.pm:1827
+#: bootloader.pm:1978
 #, fuzzy, c-format
 msgid "Re-install Boot Loader"
 msgstr "Suokneituoja instaleišona"
@@ -1063,7 +1119,7 @@ msgstr "1 minota"
 msgid "%d seconds"
 msgstr "%d sekundis"
 
-#: common.pm:335
+#: common.pm:349
 #, c-format
 msgid "command %s missing"
 msgstr ""
@@ -1087,26 +1143,31 @@ msgstr ""
 msgid "New"
 msgstr "Jauns"
 
-#: diskdrake/dav.pm:61 diskdrake/interactive.pm:380 diskdrake/smbnfs_gtk.pm:75
+#: diskdrake/dav.pm:61 diskdrake/interactive.pm:382 diskdrake/smbnfs_gtk.pm:75
 #, c-format
 msgid "Unmount"
 msgstr "Nūmontēt"
 
-#: diskdrake/dav.pm:62 diskdrake/interactive.pm:377 diskdrake/smbnfs_gtk.pm:76
+#: diskdrake/dav.pm:62 diskdrake/interactive.pm:379 diskdrake/smbnfs_gtk.pm:76
 #, c-format
 msgid "Mount"
 msgstr "Montēt"
 
-#: diskdrake/dav.pm:64 diskdrake/interactive.pm:371
-#: diskdrake/interactive.pm:611 diskdrake/interactive.pm:629
-#: diskdrake/interactive.pm:633 diskdrake/removable.pm:23
+#: diskdrake/dav.pm:63
+#, c-format
+msgid "Server"
+msgstr "Servers"
+
+#: diskdrake/dav.pm:64 diskdrake/interactive.pm:373
+#: diskdrake/interactive.pm:613 diskdrake/interactive.pm:631
+#: diskdrake/interactive.pm:635 diskdrake/removable.pm:23
 #: diskdrake/smbnfs_gtk.pm:79
 #, c-format
 msgid "Mount point"
 msgstr "Monteišonys punkts"
 
-#: diskdrake/dav.pm:65 diskdrake/interactive.pm:373
-#: diskdrake/interactive.pm:987 diskdrake/removable.pm:24
+#: diskdrake/dav.pm:65 diskdrake/interactive.pm:375
+#: diskdrake/interactive.pm:989 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
@@ -1118,16 +1179,17 @@ msgstr "Opcejis"
 msgid "Done"
 msgstr "Gotovs"
 
-#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:113 diskdrake/interactive.pm:231
-#: diskdrake/interactive.pm:244 diskdrake/interactive.pm:478
-#: diskdrake/interactive.pm:483 diskdrake/interactive.pm:601
-#: diskdrake/interactive.pm:859 diskdrake/interactive.pm:1033
-#: diskdrake/interactive.pm:1046 diskdrake/interactive.pm:1049
-#: diskdrake/interactive.pm:1299 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:19
-#: do_pkgs.pm:24 do_pkgs.pm:40 do_pkgs.pm:56 do_pkgs.pm:61 fsedit.pm:223
-#: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
-#: scanner.pm:94 scanner.pm:105 scanner.pm:112 scanner.pm:119 wizards.pm:95
-#: wizards.pm:99 wizards.pm:121
+#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:113 diskdrake/hd_gtk.pm:263
+#: diskdrake/interactive.pm:233 diskdrake/interactive.pm:246
+#: diskdrake/interactive.pm:480 diskdrake/interactive.pm:485
+#: diskdrake/interactive.pm:603 diskdrake/interactive.pm:861
+#: diskdrake/interactive.pm:1035 diskdrake/interactive.pm:1048
+#: diskdrake/interactive.pm:1051 diskdrake/interactive.pm:1300
+#: diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23 do_pkgs.pm:28 do_pkgs.pm:44
+#: do_pkgs.pm:60 do_pkgs.pm:65 fsedit.pm:222 interactive/http.pm:117
+#: interactive/http.pm:118 modules/interactive.pm:19 scanner.pm:94
+#: scanner.pm:105 scanner.pm:112 scanner.pm:119 wizards.pm:95 wizards.pm:99
+#: wizards.pm:121
 #, c-format
 msgid "Error"
 msgstr "Kliuda"
@@ -1147,28 +1209,28 @@ msgstr "URL ir juosasuoc ar http:// voi https://"
 msgid "Server: "
 msgstr "Servers:"
 
-#: diskdrake/dav.pm:110 diskdrake/interactive.pm:451
-#: diskdrake/interactive.pm:1179 diskdrake/interactive.pm:1259
+#: diskdrake/dav.pm:110 diskdrake/interactive.pm:453
+#: diskdrake/interactive.pm:1180 diskdrake/interactive.pm:1260
 #, c-format
 msgid "Mount point: "
 msgstr "Monteišonys punkts: "
 
-#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1266
+#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1267
 #, c-format
 msgid "Options: %s"
 msgstr "Opcejis: %s"
 
-#: diskdrake/hd_gtk.pm:53 diskdrake/interactive.pm:282
+#: diskdrake/hd_gtk.pm:53 diskdrake/interactive.pm:284
 #: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:106
-#: fs/partitioning_wizard.pm:51 fs/partitioning_wizard.pm:205
-#: fs/partitioning_wizard.pm:211 fs/partitioning_wizard.pm:251
-#: fs/partitioning_wizard.pm:270 fs/partitioning_wizard.pm:275
+#: fs/partitioning_wizard.pm:51 fs/partitioning_wizard.pm:206
+#: fs/partitioning_wizard.pm:212 fs/partitioning_wizard.pm:252
+#: fs/partitioning_wizard.pm:271 fs/partitioning_wizard.pm:276
 #, c-format
 msgid "Partitioning"
 msgstr "Diska sadaleišona"
 
-#: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1008
-#: diskdrake/interactive.pm:1018 diskdrake/interactive.pm:1071
+#: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1010
+#: diskdrake/interactive.pm:1020 diskdrake/interactive.pm:1073
 #, c-format
 msgid "Read carefully!"
 msgstr "Losit uzmaneigi!"
@@ -1178,7 +1240,7 @@ msgstr "Losit uzmaneigi!"
 msgid "Please make a backup of your data first"
 msgstr "Vyspyrms izveidojit datu rezervis kopeju"
 
-#: diskdrake/hd_gtk.pm:94 diskdrake/interactive.pm:224
+#: diskdrake/hd_gtk.pm:94 diskdrake/interactive.pm:226
 #, c-format
 msgid "Exit"
 msgstr "Izīt"
@@ -1276,7 +1338,7 @@ msgstr "Windows"
 msgid "Other"
 msgstr "Cyts"
 
-#: diskdrake/hd_gtk.pm:353 diskdrake/interactive.pm:1194
+#: diskdrake/hd_gtk.pm:353 diskdrake/interactive.pm:1195
 #, c-format
 msgid "Empty"
 msgstr "Tukšs"
@@ -1286,13 +1348,13 @@ msgstr "Tukšs"
 msgid "Filesystem types:"
 msgstr "Failsistemu tipi:"
 
-#: diskdrake/hd_gtk.pm:381 diskdrake/interactive.pm:287
-#: diskdrake/interactive.pm:359 diskdrake/interactive.pm:508
-#: diskdrake/interactive.pm:692 diskdrake/interactive.pm:750
-#: diskdrake/interactive.pm:839 diskdrake/interactive.pm:881
-#: diskdrake/interactive.pm:882 diskdrake/interactive.pm:1117
-#: diskdrake/interactive.pm:1155 diskdrake/interactive.pm:1298 do_pkgs.pm:16
-#: do_pkgs.pm:35 do_pkgs.pm:53 harddrake/sound.pm:286
+#: diskdrake/hd_gtk.pm:381 diskdrake/interactive.pm:289
+#: diskdrake/interactive.pm:361 diskdrake/interactive.pm:510
+#: diskdrake/interactive.pm:694 diskdrake/interactive.pm:752
+#: diskdrake/interactive.pm:841 diskdrake/interactive.pm:883
+#: diskdrake/interactive.pm:884 diskdrake/interactive.pm:1118
+#: diskdrake/interactive.pm:1156 diskdrake/interactive.pm:1299 do_pkgs.pm:19
+#: do_pkgs.pm:39 do_pkgs.pm:57 harddrake/sound.pm:422
 #, c-format
 msgid "Warning"
 msgstr "Uzmaneibu"
@@ -1312,66 +1374,66 @@ msgstr "Vyspyrms izmontojit ``Nūmontēt''"
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Tuo vītā izmontojit ``%s''"
 
-#: diskdrake/hd_gtk.pm:390 diskdrake/interactive.pm:372
-#: diskdrake/interactive.pm:546 diskdrake/interactive.pm:1024
+#: diskdrake/hd_gtk.pm:390 diskdrake/interactive.pm:374
+#: diskdrake/interactive.pm:548 diskdrake/interactive.pm:1026
 #: diskdrake/removable.pm:25 diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
 msgstr "Tips"
 
-#: diskdrake/interactive.pm:195
+#: diskdrake/interactive.pm:197
 #, c-format
 msgid "Choose another partition"
 msgstr "Izavielejit cytu sadaļu"
 
-#: diskdrake/interactive.pm:195
+#: diskdrake/interactive.pm:197
 #, c-format
 msgid "Choose a partition"
 msgstr "Izavielejit sadaļu"
 
-#: diskdrake/interactive.pm:257
+#: diskdrake/interactive.pm:259
 #, c-format
 msgid "Toggle to normal mode"
 msgstr "Puorsaslēgt normalajā režimā"
 
-#: diskdrake/interactive.pm:257
+#: diskdrake/interactive.pm:259
 #, c-format
 msgid "Toggle to expert mode"
 msgstr "Puorsaslēgt eksperta režimā"
 
-#: diskdrake/interactive.pm:265 diskdrake/interactive.pm:275
-#: diskdrake/interactive.pm:1102
+#: diskdrake/interactive.pm:267 diskdrake/interactive.pm:277
+#: diskdrake/interactive.pm:1103
 #, fuzzy, c-format
 msgid "Confirmation"
 msgstr "Konfiguraceja"
 
-#: diskdrake/interactive.pm:265
+#: diskdrake/interactive.pm:267
 #, c-format
 msgid "Continue anyway?"
 msgstr "Tūmār turpynuot?"
 
-#: diskdrake/interactive.pm:270
+#: diskdrake/interactive.pm:272
 #, c-format
 msgid "Quit without saving"
 msgstr "Izīt bez saglobuošonys"
 
-#: diskdrake/interactive.pm:270
+#: diskdrake/interactive.pm:272
 #, c-format
 msgid "Quit without writing the partition table?"
 msgstr "Izīt naīrokstūt sadaļu tabulu?"
 
-#: diskdrake/interactive.pm:275
+#: diskdrake/interactive.pm:277
 #, c-format
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "Voi gribit saglobuot /etc/fstab izmainis"
 
-#: diskdrake/interactive.pm:282 fs/partitioning_wizard.pm:251
+#: diskdrake/interactive.pm:284 fs/partitioning_wizard.pm:252
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
 "Lai sadaļu tabulys izmainis stuotūs spākā, jiusim juopuorstartej dators"
 
-#: diskdrake/interactive.pm:287
+#: diskdrake/interactive.pm:289
 #, c-format
 msgid ""
 "You should format partition %s.\n"
@@ -1382,38 +1444,38 @@ msgstr ""
 "Sovaižuok fstab nabyus īroksts par monteišonys punktu %s.\n"
 "Tūmār izīt?"
 
-#: diskdrake/interactive.pm:300
+#: diskdrake/interactive.pm:302
 #, c-format
 msgid "Clear all"
 msgstr "Vysu dzēst"
 
-#: diskdrake/interactive.pm:301
+#: diskdrake/interactive.pm:303
 #, c-format
 msgid "Auto allocate"
 msgstr "Izvītuot automatiski"
 
-#: diskdrake/interactive.pm:302 diskdrake/interactive.pm:350
+#: diskdrake/interactive.pm:304 diskdrake/interactive.pm:352
 #: interactive/curses.pm:512
 #, c-format
 msgid "More"
 msgstr "Vairuok"
 
-#: diskdrake/interactive.pm:307
+#: diskdrake/interactive.pm:309
 #, c-format
 msgid "Hard drive information"
 msgstr "Cītuo diska informaceja"
 
-#: diskdrake/interactive.pm:339
+#: diskdrake/interactive.pm:341
 #, c-format
 msgid "All primary partitions are used"
 msgstr "Vysys primaruos sadalis jau izmontuotys"
 
-#: diskdrake/interactive.pm:340
+#: diskdrake/interactive.pm:342
 #, fuzzy, c-format
 msgid "I can not add any more partitions"
 msgstr "Vairuok sadalis navar pīvīnuot"
 
-#: diskdrake/interactive.pm:341
+#: diskdrake/interactive.pm:343
 #, c-format
 msgid ""
 "To have more partitions, please delete one to be able to create an extended "
@@ -1422,97 +1484,97 @@ msgstr ""
 "Ja gribit vairuok sadalis, izdzēsit kaidu sadaļu, lai varātu izveiduot "
 "paplašynuotū sadaļu"
 
-#: diskdrake/interactive.pm:352
+#: diskdrake/interactive.pm:354
 #, c-format
 msgid "Reload partition table"
 msgstr "Puorluodēt sadaļu tabulu"
 
-#: diskdrake/interactive.pm:359
+#: diskdrake/interactive.pm:361
 #, c-format
 msgid "Detailed information"
 msgstr "Detalizeita informaceja"
 
-#: diskdrake/interactive.pm:375 diskdrake/interactive.pm:705
+#: diskdrake/interactive.pm:377 diskdrake/interactive.pm:707
 #, c-format
 msgid "Resize"
 msgstr "Maineit izmāru"
 
-#: diskdrake/interactive.pm:376
+#: diskdrake/interactive.pm:378
 #, c-format
 msgid "Format"
 msgstr "Formatēt"
 
-#: diskdrake/interactive.pm:378 diskdrake/interactive.pm:791
+#: diskdrake/interactive.pm:380 diskdrake/interactive.pm:793
 #, c-format
 msgid "Add to RAID"
 msgstr "Pīvīnuot pi RAID"
 
-#: diskdrake/interactive.pm:379 diskdrake/interactive.pm:809
+#: diskdrake/interactive.pm:381 diskdrake/interactive.pm:811
 #, c-format
 msgid "Add to LVM"
 msgstr "Pīvīnuot pi LVM"
 
-#: diskdrake/interactive.pm:381
+#: diskdrake/interactive.pm:383
 #, c-format
 msgid "Delete"
 msgstr "Izdzēst"
 
-#: diskdrake/interactive.pm:382
+#: diskdrake/interactive.pm:384
 #, c-format
 msgid "Remove from RAID"
 msgstr "Izjimt nu RAID"
 
-#: diskdrake/interactive.pm:383
+#: diskdrake/interactive.pm:385
 #, c-format
 msgid "Remove from LVM"
 msgstr "Izjimt nu LVM"
 
-#: diskdrake/interactive.pm:384
+#: diskdrake/interactive.pm:386
 #, c-format
 msgid "Modify RAID"
 msgstr "Maineit RAID"
 
-#: diskdrake/interactive.pm:385
+#: diskdrake/interactive.pm:387
 #, c-format
 msgid "Use for loopback"
 msgstr "Izmontuot prīkš loopback"
 
-#: diskdrake/interactive.pm:396
+#: diskdrake/interactive.pm:398
 #, c-format
 msgid "Create"
 msgstr "Izveiduot"
 
-#: diskdrake/interactive.pm:440 diskdrake/interactive.pm:442
+#: diskdrake/interactive.pm:442 diskdrake/interactive.pm:444
 #, c-format
 msgid "Create a new partition"
 msgstr "Izveiduot jaunu sadaļu"
 
-#: diskdrake/interactive.pm:444
+#: diskdrake/interactive.pm:446
 #, c-format
 msgid "Start sector: "
 msgstr "Suokuma sektors: "
 
-#: diskdrake/interactive.pm:447 diskdrake/interactive.pm:874
+#: diskdrake/interactive.pm:449 diskdrake/interactive.pm:876
 #, c-format
 msgid "Size in MB: "
 msgstr "Izmārs MB: "
 
-#: diskdrake/interactive.pm:449 diskdrake/interactive.pm:875
+#: diskdrake/interactive.pm:451 diskdrake/interactive.pm:877
 #, c-format
 msgid "Filesystem type: "
 msgstr "Failsistemys tips: "
 
-#: diskdrake/interactive.pm:455
+#: diskdrake/interactive.pm:457
 #, c-format
 msgid "Preference: "
 msgstr "Prīkšrūka: "
 
-#: diskdrake/interactive.pm:458
+#: diskdrake/interactive.pm:460
 #, c-format
 msgid "Logical volume name "
 msgstr "Logiskuos sadalis vuords"
 
-#: diskdrake/interactive.pm:478
+#: diskdrake/interactive.pm:480
 #, c-format
 msgid ""
 "You can not create a new partition\n"
@@ -1523,54 +1585,54 @@ msgstr ""
 "(par tū ka ir sasnīgts maksimalais primarū sadaļu skaits).\n"
 "Vyspyms nūjemit kaidu primarū sadaļu i izveidojit paplašynuotū sadaļu."
 
-#: diskdrake/interactive.pm:508
+#: diskdrake/interactive.pm:510
 #, c-format
 msgid "Remove the loopback file?"
 msgstr "Nūjimt loopback failu?"
 
-#: diskdrake/interactive.pm:530
+#: diskdrake/interactive.pm:532
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "Piec sadalis %s tipa nūmainis vysi šamā sadaļā esūšī dati tiks pazaudeiti"
 
-#: diskdrake/interactive.pm:543
+#: diskdrake/interactive.pm:545
 #, c-format
 msgid "Change partition type"
 msgstr "Nūmaineit sadalis tipu"
 
-#: diskdrake/interactive.pm:545 diskdrake/removable.pm:47
+#: diskdrake/interactive.pm:547 diskdrake/removable.pm:47
 #, c-format
 msgid "Which filesystem do you want?"
 msgstr "Kuru failu sistemu gribit?"
 
-#: diskdrake/interactive.pm:552
+#: diskdrake/interactive.pm:554
 #, fuzzy, c-format
 msgid "Switching from %s to %s"
 msgstr "Puorsasliegšona nu ext2 iz ext3"
 
-#: diskdrake/interactive.pm:578 diskdrake/interactive.pm:581
+#: diskdrake/interactive.pm:580 diskdrake/interactive.pm:583
 #, c-format
 msgid "Which volume label?"
 msgstr ""
 
-#: diskdrake/interactive.pm:582
+#: diskdrake/interactive.pm:584
 #, fuzzy, c-format
 msgid "Label:"
 msgstr "Nūsaukums"
 
-#: diskdrake/interactive.pm:596
+#: diskdrake/interactive.pm:598
 #, fuzzy, c-format
 msgid "Where do you want to mount the loopback file %s?"
 msgstr "Kur jūs vēlaties montēt loopback failu %s?"
 
-#: diskdrake/interactive.pm:597
+#: diskdrake/interactive.pm:599
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "Kur jius gribit montēt %s īreici?"
 
-#: diskdrake/interactive.pm:602
+#: diskdrake/interactive.pm:604
 #, c-format
 msgid ""
 "Can not unset mount point as this partition is used for loop back.\n"
@@ -1580,194 +1642,194 @@ msgstr ""
 "prīkš loopback.\n"
 "Vyspyrms nūjemit loopback"
 
-#: diskdrake/interactive.pm:632
+#: diskdrake/interactive.pm:634
 #, c-format
 msgid "Where do you want to mount %s?"
 msgstr "Kur jius gribit montēt %s?"
 
-#: diskdrake/interactive.pm:656 diskdrake/interactive.pm:739
-#: fs/partitioning_wizard.pm:145 fs/partitioning_wizard.pm:177
+#: diskdrake/interactive.pm:658 diskdrake/interactive.pm:741
+#: fs/partitioning_wizard.pm:146 fs/partitioning_wizard.pm:178
 #, c-format
 msgid "Resizing"
 msgstr "Mainu izmāru"
 
-#: diskdrake/interactive.pm:656
+#: diskdrake/interactive.pm:658
 #, c-format
 msgid "Computing FAT filesystem bounds"
 msgstr "Izskaitļoju FAT failsistemys rūbežys"
 
-#: diskdrake/interactive.pm:692
+#: diskdrake/interactive.pm:694
 #, c-format
 msgid "This partition is not resizeable"
 msgstr "Ituos sadalis izmāru navar izmaineit"
 
-#: diskdrake/interactive.pm:697
+#: diskdrake/interactive.pm:699
 #, c-format
 msgid "All data on this partition should be backed-up"
 msgstr "Vysim ituos sadalis datim juoizveidoj rezervis kopejis"
 
-#: diskdrake/interactive.pm:699
+#: diskdrake/interactive.pm:701
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr ""
 "Piec sadalis %s izmāra mainis vysi šamā sadaļā esūšū dati tiks pazaudeiti"
 
-#: diskdrake/interactive.pm:706
+#: diskdrake/interactive.pm:708
 #, c-format
 msgid "Choose the new size"
 msgstr "Nūruodit jaunū izmāru"
 
-#: diskdrake/interactive.pm:707
+#: diskdrake/interactive.pm:709
 #, c-format
 msgid "New size in MB: "
 msgstr "Jauns izmārs MB: "
 
-#: diskdrake/interactive.pm:708
+#: diskdrake/interactive.pm:710
 #, c-format
 msgid "Minimum size: %s MB"
 msgstr ""
 
-#: diskdrake/interactive.pm:709
+#: diskdrake/interactive.pm:711
 #, c-format
 msgid "Maximum size: %s MB"
 msgstr ""
 
-#: diskdrake/interactive.pm:750 fs/partitioning_wizard.pm:185
+#: diskdrake/interactive.pm:752 fs/partitioning_wizard.pm:186
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
 
-#: diskdrake/interactive.pm:791
+#: diskdrake/interactive.pm:793
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "Nūruodit eksistejūšu RAID, kam pīvīnuot"
 
-#: diskdrake/interactive.pm:793 diskdrake/interactive.pm:811
+#: diskdrake/interactive.pm:795 diskdrake/interactive.pm:813
 #, c-format
 msgid "new"
 msgstr "jauns"
 
-#: diskdrake/interactive.pm:809
+#: diskdrake/interactive.pm:811
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "Nūruodit jau esūšu LVM, kam pīvīnuot"
 
-#: diskdrake/interactive.pm:816
+#: diskdrake/interactive.pm:818
 #, c-format
 msgid "LVM name?"
 msgstr "LVM vuords?"
 
-#: diskdrake/interactive.pm:839
+#: diskdrake/interactive.pm:841
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
 
-#: diskdrake/interactive.pm:841
+#: diskdrake/interactive.pm:843
 #, c-format
 msgid "Moving physical extents"
 msgstr ""
 
-#: diskdrake/interactive.pm:859
+#: diskdrake/interactive.pm:861
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "Itū sadaļu navar izmontuot prīkš loopback"
 
-#: diskdrake/interactive.pm:872
+#: diskdrake/interactive.pm:874
 #, c-format
 msgid "Loopback"
 msgstr "Loopback"
 
-#: diskdrake/interactive.pm:873
+#: diskdrake/interactive.pm:875
 #, c-format
 msgid "Loopback file name: "
 msgstr "Loopback faila vuords: "
 
-#: diskdrake/interactive.pm:878
+#: diskdrake/interactive.pm:880
 #, c-format
 msgid "Give a file name"
 msgstr "Nūruodit faila nūsaukumu"
 
-#: diskdrake/interactive.pm:881
+#: diskdrake/interactive.pm:883
 #, fuzzy, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "Fails jau tiek izmantots citam loopback, norādiet citu failu"
 
-#: diskdrake/interactive.pm:882
+#: diskdrake/interactive.pm:884
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "Fails jau eksistej. Voi tū izmontuot?"
 
-#: diskdrake/interactive.pm:914 diskdrake/interactive.pm:917
+#: diskdrake/interactive.pm:916 diskdrake/interactive.pm:919
 #, c-format
 msgid "Mount options"
 msgstr "Monteišonys īspiejis:"
 
-#: diskdrake/interactive.pm:924
+#: diskdrake/interactive.pm:926
 #, c-format
 msgid "Various"
 msgstr "Dažaidi"
 
-#: diskdrake/interactive.pm:989
+#: diskdrake/interactive.pm:991
 #, c-format
 msgid "device"
 msgstr "īreice"
 
-#: diskdrake/interactive.pm:990
+#: diskdrake/interactive.pm:992
 #, c-format
 msgid "level"
 msgstr "leimiņs"
 
-#: diskdrake/interactive.pm:991
+#: diskdrake/interactive.pm:993
 #, fuzzy, c-format
 msgid "chunk size in KiB"
 msgstr "gobola izmārs"
 
-#: diskdrake/interactive.pm:1009
+#: diskdrake/interactive.pm:1011
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Esit uzmaneigi: itei operaceja ir beistama."
 
-#: diskdrake/interactive.pm:1024
+#: diskdrake/interactive.pm:1026
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Kaids ir sadaliejuma tips?"
 
-#: diskdrake/interactive.pm:1062
+#: diskdrake/interactive.pm:1064
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Lai izmainis stuotūs spākā, jiusim ir juopuorstartej dators"
 
-#: diskdrake/interactive.pm:1071
+#: diskdrake/interactive.pm:1073
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Īkuortys %s sadaļu tabula tiks īraksteita iz diska!"
 
-#: diskdrake/interactive.pm:1097
+#: diskdrake/interactive.pm:1098
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr ""
 "Piec sadalis %s formateišonys vysi šamā sadaļā esūšī dati tiks pazaudeiti"
 
-#: diskdrake/interactive.pm:1102 fs/partitioning.pm:49
+#: diskdrake/interactive.pm:1103 fs/partitioning.pm:49
 #, c-format
 msgid "Check bad blocks?"
 msgstr "Puorbaudeit slyktūs blokus?"
 
-#: diskdrake/interactive.pm:1116
+#: diskdrake/interactive.pm:1117
 #, c-format
 msgid "Move files to the new partition"
 msgstr "Puorvītuot failus iz jaunū sadaļu"
 
-#: diskdrake/interactive.pm:1116
+#: diskdrake/interactive.pm:1117
 #, c-format
 msgid "Hide files"
 msgstr "Slēpt failus"
 
-#: diskdrake/interactive.pm:1117
+#: diskdrake/interactive.pm:1118
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -1778,108 +1840,108 @@ msgid ""
 "the contents of the mounted partition)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1132
+#: diskdrake/interactive.pm:1133
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "Puorvītoju failus iz jaunū sadaļu"
 
-#: diskdrake/interactive.pm:1136
+#: diskdrake/interactive.pm:1137
 #, c-format
 msgid "Copying %s"
 msgstr "Kopeju %s"
 
-#: diskdrake/interactive.pm:1140
+#: diskdrake/interactive.pm:1141
 #, c-format
 msgid "Removing %s"
 msgstr "Atvīnoju %s"
 
-#: diskdrake/interactive.pm:1154
+#: diskdrake/interactive.pm:1155
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "sadaļa %s tagad ir zynuoma kai %s"
 
-#: diskdrake/interactive.pm:1155
+#: diskdrake/interactive.pm:1156
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr ""
 
-#: diskdrake/interactive.pm:1180 diskdrake/interactive.pm:1243
+#: diskdrake/interactive.pm:1181 diskdrake/interactive.pm:1244
 #, c-format
 msgid "Device: "
 msgstr "Īreice: "
 
-#: diskdrake/interactive.pm:1181
+#: diskdrake/interactive.pm:1182
 #, c-format
 msgid "Volume label: "
 msgstr ""
 
-#: diskdrake/interactive.pm:1182
+#: diskdrake/interactive.pm:1183
 #, c-format
 msgid "UUID: "
 msgstr ""
 
-#: diskdrake/interactive.pm:1183
+#: diskdrake/interactive.pm:1184
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS īkuortys burts: %s (tikai miniejums)\n"
 
-#: diskdrake/interactive.pm:1187 diskdrake/interactive.pm:1196
-#: diskdrake/interactive.pm:1262
+#: diskdrake/interactive.pm:1188 diskdrake/interactive.pm:1197
+#: diskdrake/interactive.pm:1263
 #, c-format
 msgid "Type: "
 msgstr "Tips: "
 
-#: diskdrake/interactive.pm:1191 diskdrake/interactive.pm:1247
+#: diskdrake/interactive.pm:1192 diskdrake/interactive.pm:1248
 #, c-format
 msgid "Name: "
 msgstr "Vuords: "
 
-#: diskdrake/interactive.pm:1198
+#: diskdrake/interactive.pm:1199
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Suokums: sektors %s\n"
 
-#: diskdrake/interactive.pm:1199
+#: diskdrake/interactive.pm:1200
 #, c-format
 msgid "Size: %s"
 msgstr "Izmārs: %s"
 
-#: diskdrake/interactive.pm:1201
+#: diskdrake/interactive.pm:1202
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s sektori"
 
-#: diskdrake/interactive.pm:1203
+#: diskdrake/interactive.pm:1204
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "Nu cilindra %d leidz cilindram %d\n"
 
-#: diskdrake/interactive.pm:1204
+#: diskdrake/interactive.pm:1205
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr ""
 
-#: diskdrake/interactive.pm:1205
+#: diskdrake/interactive.pm:1206
 #, c-format
 msgid "Formatted\n"
 msgstr "Formateita\n"
 
-#: diskdrake/interactive.pm:1206
+#: diskdrake/interactive.pm:1207
 #, c-format
 msgid "Not formatted\n"
 msgstr "Naformateita\n"
 
-#: diskdrake/interactive.pm:1207
+#: diskdrake/interactive.pm:1208
 #, c-format
 msgid "Mounted\n"
 msgstr "Monteita\n"
 
-#: diskdrake/interactive.pm:1208
+#: diskdrake/interactive.pm:1209
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1213
+#: diskdrake/interactive.pm:1214
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -1888,7 +1950,7 @@ msgstr ""
 "Loopback fails(i):\n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1214
+#: diskdrake/interactive.pm:1215
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -1897,27 +1959,27 @@ msgstr ""
 "Nāklusāti suoknejamuo sadaļa\n"
 "    (lai suokneitu MS-DOS, na lilo)\n"
 
-#: diskdrake/interactive.pm:1216
+#: diskdrake/interactive.pm:1217
 #, c-format
 msgid "Level %s\n"
 msgstr "Leimiņs %s\n"
 
-#: diskdrake/interactive.pm:1217
+#: diskdrake/interactive.pm:1218
 #, fuzzy, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "Gobola izmārs %s\n"
 
-#: diskdrake/interactive.pm:1218
+#: diskdrake/interactive.pm:1219
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "RAID diski %s\n"
 
-#: diskdrake/interactive.pm:1220
+#: diskdrake/interactive.pm:1221
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Loopback faila nūsaukums: %s"
 
-#: diskdrake/interactive.pm:1223
+#: diskdrake/interactive.pm:1224
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -1930,7 +1992,7 @@ msgstr ""
 "ir Draivera sadaļa, ko jums\n"
 "varbūt nevajadzētu aiztikt.\n"
 
-#: diskdrake/interactive.pm:1226
+#: diskdrake/interactive.pm:1227
 #, c-format
 msgid ""
 "\n"
@@ -1943,78 +2005,78 @@ msgstr ""
 "sadaļa ir paradzāta jiusu\n"
 "sistemys dualai suokneišonai.\n"
 
-#: diskdrake/interactive.pm:1235
+#: diskdrake/interactive.pm:1236
 #, c-format
 msgid "Free space on %s (%s)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1244
+#: diskdrake/interactive.pm:1245
 #, c-format
 msgid "Read-only"
 msgstr "Tikai laseit"
 
-#: diskdrake/interactive.pm:1245
+#: diskdrake/interactive.pm:1246
 #, c-format
 msgid "Size: %s\n"
 msgstr "Izmārs: %s\n"
 
-#: diskdrake/interactive.pm:1246
+#: diskdrake/interactive.pm:1247
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Geometreja: %s cilindri, %s golvys, %s sektori\n"
 
-#: diskdrake/interactive.pm:1248
+#: diskdrake/interactive.pm:1249
 #, fuzzy, c-format
 msgid "Medium type: "
 msgstr "Failsistemys tips: "
 
-#: diskdrake/interactive.pm:1249
+#: diskdrake/interactive.pm:1250
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "LVM-diski %s\n"
 
-#: diskdrake/interactive.pm:1250
+#: diskdrake/interactive.pm:1251
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "sadaļu tabulys tips: %s\n"
 
-#: diskdrake/interactive.pm:1251
+#: diskdrake/interactive.pm:1252
 #, fuzzy, c-format
 msgid "on channel %d id %d\n"
 msgstr "uz šinas %d id %d\n"
 
-#: diskdrake/interactive.pm:1294
+#: diskdrake/interactive.pm:1295
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "Failsistemys šifreišonys atslāga"
 
-#: diskdrake/interactive.pm:1295
+#: diskdrake/interactive.pm:1296
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Izavielejit jiusu failsistemys šifreišonys atslāgu"
 
-#: diskdrake/interactive.pm:1298
+#: diskdrake/interactive.pm:1299
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr ""
 "Šifreišonys atslāga ir puoruok vīnkuorša (juobyun vysmoz %d simbolus garai)"
 
-#: diskdrake/interactive.pm:1299
+#: diskdrake/interactive.pm:1300
 #, c-format
 msgid "The encryption keys do not match"
 msgstr "Šifreišonys atslāgys nasakreit"
 
-#: diskdrake/interactive.pm:1302
+#: diskdrake/interactive.pm:1303
 #, c-format
 msgid "Encryption key"
 msgstr "Šifreišonys atslāga"
 
-#: diskdrake/interactive.pm:1303
+#: diskdrake/interactive.pm:1304
 #, c-format
 msgid "Encryption key (again)"
 msgstr "Šifreišonys atslāga (vēlreiz)"
 
-#: diskdrake/interactive.pm:1305
+#: diskdrake/interactive.pm:1306
 #, fuzzy, c-format
 msgid "Encryption algorithm"
 msgstr "Autentifikacejis_algoritms"
@@ -2065,6 +2127,11 @@ msgstr ""
 msgid "Username"
 msgstr "Lītuotuoja vuords"
 
+#: diskdrake/smbnfs_gtk.pm:182
+#, c-format
+msgid "Domain"
+msgstr "Domens"
+
 #: diskdrake/smbnfs_gtk.pm:206
 #, c-format
 msgid "Search servers"
@@ -2075,32 +2142,32 @@ msgstr "Meklēt serverus"
 msgid "Search new servers"
 msgstr "Meklēšanas serveri"
 
-#: do_pkgs.pm:16 do_pkgs.pm:53
+#: do_pkgs.pm:19 do_pkgs.pm:57
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
 msgstr "Napīcīšoms instalēt pakūtni %s. Voi gribit tū instalēt?"
 
-#: do_pkgs.pm:19 do_pkgs.pm:40 do_pkgs.pm:56
+#: do_pkgs.pm:23 do_pkgs.pm:44 do_pkgs.pm:60
 #, fuzzy, c-format
 msgid "Could not install the %s package!"
 msgstr "Navaru instalēt Xorg pakūtni: %s"
 
-#: do_pkgs.pm:24 do_pkgs.pm:61
+#: do_pkgs.pm:28 do_pkgs.pm:65
 #, c-format
 msgid "Mandatory package %s is missing"
 msgstr "Iztryukst obligatuo pakūtne %s."
 
-#: do_pkgs.pm:35
+#: do_pkgs.pm:39
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Tiks instaleitys sekūjūšys pakūtnis:\n"
 
-#: do_pkgs.pm:216
+#: do_pkgs.pm:220
 #, c-format
 msgid "Installing packages..."
 msgstr "Instaleju pakūtnis..."
 
-#: do_pkgs.pm:258
+#: do_pkgs.pm:262
 #, c-format
 msgid "Removing packages..."
 msgstr "Nūjamu pakūtnis..."
@@ -2114,27 +2181,27 @@ msgstr ""
 "Atkluota kliuda - nav atrosta nivīna īreice, kas darātu jaunu failsistemu "
 "veiduošonai. Lyudzu puorbaudit aparaturu, lai nūskaidruotu problemys īmaslu"
 
-#: fs/any.pm:74 fs/partitioning_wizard.pm:59
+#: fs/any.pm:75 fs/partitioning_wizard.pm:59
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "Jiusim ir napīcīšoma /boot/efi monteita FAT sadaļa"
 
-#: fs/format.pm:62 fs/format.pm:69
+#: fs/format.pm:63 fs/format.pm:70
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Formateju sadaļu %s"
 
-#: fs/format.pm:66
+#: fs/format.pm:67
 #, c-format
 msgid "Creating and formatting file %s"
 msgstr "Veidoju i formateju failu %s"
 
-#: fs/format.pm:119
+#: fs/format.pm:122
 #, c-format
 msgid "I do not know how to format %s in type %s"
 msgstr "Nazynu, kai formatēt %s ar tipu %s"
 
-#: fs/format.pm:124 fs/format.pm:126
+#: fs/format.pm:127 fs/format.pm:129
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "%s formateišona %s naizadeve"
@@ -2159,7 +2226,7 @@ msgstr "sadalis %s monteišona direktorejā %s naizadeve"
 msgid "Checking %s"
 msgstr "Puorbaudu %s"
 
-#: fs/mount.pm:119 partition_table.pm:395
+#: fs/mount.pm:119 partition_table.pm:403
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "kliuda nūmontejūt %s: %s"
@@ -2378,17 +2445,17 @@ msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
 "Nav FAT sadalis, lai izmontuotu kai loopback (voi napīteik breivys vītys)"
 
-#: fs/partitioning_wizard.pm:126
-#, c-format
-msgid "Use the free space on the Microsoft Windows® partition"
+#: fs/partitioning_wizard.pm:127
+#, fuzzy, c-format
+msgid "Use the free space on a Microsoft Windows® partition"
 msgstr "Izmontuot Microsoft Windows® sadalis breivū vītu"
 
-#: fs/partitioning_wizard.pm:128
+#: fs/partitioning_wizard.pm:129
 #, c-format
 msgid "Which partition do you want to resize?"
 msgstr "Kurys sadalis izmāru gribit izmaineit?"
 
-#: fs/partitioning_wizard.pm:142
+#: fs/partitioning_wizard.pm:143
 #, c-format
 msgid ""
 "The FAT resizer is unable to handle your partition, \n"
@@ -2397,12 +2464,12 @@ msgstr ""
 "FAT izmāra maineituojs naspiej izmaineit jiusu sadali,\n"
 "atkluota sekuojūša kliuda: %s"
 
-#: fs/partitioning_wizard.pm:145
+#: fs/partitioning_wizard.pm:146
 #, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
 msgstr "Teik kalkulāts Microsoft Windows® sadalis lelums"
 
-#: fs/partitioning_wizard.pm:152
+#: fs/partitioning_wizard.pm:153
 #, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
@@ -2413,7 +2480,7 @@ msgstr ""
 "Windows® vidis palaidit ``defrag'' i tod atsuocit Mandriva Linux "
 "instaleišonu."
 
-#: fs/partitioning_wizard.pm:155
+#: fs/partitioning_wizard.pm:156
 #, c-format
 msgid ""
 "WARNING!\n"
@@ -2449,76 +2516,76 @@ msgstr ""
 "Kod asot puorsalīcynuojs, nūspīdit %s."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:164 interactive.pm:542 interactive/curses.pm:263
+#: fs/partitioning_wizard.pm:165 interactive.pm:542 interactive/curses.pm:263
 #: ugtk2.pm:512
 #, c-format
 msgid "Next"
 msgstr "Tuoļuok"
 
-#: fs/partitioning_wizard.pm:167
+#: fs/partitioning_wizard.pm:168
 #, fuzzy, c-format
 msgid "Partitionning"
 msgstr "Diska sadaleišona"
 
-#: fs/partitioning_wizard.pm:167
+#: fs/partitioning_wizard.pm:168
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
 msgstr "Kaidu apjūmu gribit atstuot prīkš Microsoft Windows® iz sadaļa %s?"
 
-#: fs/partitioning_wizard.pm:168
+#: fs/partitioning_wizard.pm:169
 #, c-format
 msgid "Size"
 msgstr "Izmārs"
 
-#: fs/partitioning_wizard.pm:177
+#: fs/partitioning_wizard.pm:178
 #, c-format
 msgid "Resizing Microsoft Windows® partition"
 msgstr "Mainu Microsoft Windows® sadalis izmāru"
 
-#: fs/partitioning_wizard.pm:182
+#: fs/partitioning_wizard.pm:183
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr "FAT izmāra maiņa naizadeve: %s"
 
-#: fs/partitioning_wizard.pm:197
+#: fs/partitioning_wizard.pm:198
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "Nav FAT sadalis, lai izmaineitu tuo izmāru (voi napīteik breivys vītys)"
 
-#: fs/partitioning_wizard.pm:202
+#: fs/partitioning_wizard.pm:203
 #, c-format
 msgid "Remove Microsoft Windows®"
 msgstr "Nūdzēst Microsoft Windows®"
 
-#: fs/partitioning_wizard.pm:202
+#: fs/partitioning_wizard.pm:203
 #, c-format
 msgid "Erase and use entire disk"
 msgstr "Izdzēst un lītuot vysu disku"
 
-#: fs/partitioning_wizard.pm:204
+#: fs/partitioning_wizard.pm:205
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr ""
 "Jiusim ir vairuok nakai vīns cītais disks, iz kura jius gribit instalēt "
 "linux?"
 
-#: fs/partitioning_wizard.pm:210 fsedit.pm:566
+#: fs/partitioning_wizard.pm:211 fsedit.pm:570
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "VYSYS diska %s sadalis i tamuos asūšī dati tiks pazaudeiti"
 
-#: fs/partitioning_wizard.pm:221
+#: fs/partitioning_wizard.pm:222
 #, c-format
 msgid "Custom disk partitioning"
 msgstr "Pīlāguots disku sadaliejums"
 
-#: fs/partitioning_wizard.pm:227
+#: fs/partitioning_wizard.pm:228
 #, c-format
 msgid "Use fdisk"
 msgstr "Lītuot fdisk"
 
-#: fs/partitioning_wizard.pm:230
+#: fs/partitioning_wizard.pm:231
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -2527,30 +2594,35 @@ msgstr ""
 "Tagad jius varit sadaleit diska īkuortu %s.\n"
 "Kod byusit pabeiguši, naaizmierstit saglobuot, izmontojūt `w'"
 
-#: fs/partitioning_wizard.pm:270
+#: fs/partitioning_wizard.pm:271
 #, c-format
 msgid "I can not find any room for installing"
 msgstr "Navaru atrast vītu instaleišonai"
 
-#: fs/partitioning_wizard.pm:274
+#: fs/partitioning_wizard.pm:275
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "DrakX sadaļu veiduošonys paleigs atroda sekojūšus rysynuojumus:"
 
-#: fs/partitioning_wizard.pm:282
+#: fs/partitioning_wizard.pm:287
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Diska sadaleišona naizadeve: %s"
 
-#: fs/type.pm:368
+#: fs/type.pm:370
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
 msgstr "JFS navar izmontuot sadaļom, kas mozuokys par 16MB"
 
-#: fs/type.pm:369
+#: fs/type.pm:371
 #, c-format
 msgid "You can not use ReiserFS for partitions smaller than 32MB"
 msgstr "ReiserFS navar izmontuot sadaļom, kas mozuokys par 32MB"
+
+#: fsedit.pm:23
+#, c-format
+msgid "simple"
+msgstr "vīnkuoršs"
 
 #: fsedit.pm:27
 #, c-format
@@ -2567,7 +2639,7 @@ msgstr "servers"
 msgid "BIOS software RAID detected on disks %s. Activate it?"
 msgstr ""
 
-#: fsedit.pm:224
+#: fsedit.pm:223
 #, c-format
 msgid ""
 "I can not read the partition table of device %s, it's too corrupted for me :"
@@ -2586,22 +2658,22 @@ msgstr ""
 "\n"
 "Voi jius pīkreitot zaudēt vysys sadalis?\n"
 
-#: fsedit.pm:393
+#: fsedit.pm:397
 #, c-format
 msgid "Mount points must begin with a leading /"
 msgstr "Monteišonys punktim juosasuoc ar /"
 
-#: fsedit.pm:394
+#: fsedit.pm:398
 #, fuzzy, c-format
 msgid "Mount points should contain only alphanumerical characters"
 msgstr "Printera vārdam jāsatur tikai burtus, ciparus un pasvītrojumu"
 
-#: fsedit.pm:395
+#: fsedit.pm:399
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Jau eksistej sadaļa ar monteišonys punktu %s\n"
 
-#: fsedit.pm:399
+#: fsedit.pm:403
 #, fuzzy, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
@@ -2612,14 +2684,14 @@ msgstr ""
 "Neviens sāknētājs nespēj to izmantot bez /boot sadaļas.\n"
 "Tāpēc neaizmirstiet izveidot /boot sadaļu."
 
-#: fsedit.pm:405
+#: fsedit.pm:409
 #, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr ""
 
-#: fsedit.pm:407
+#: fsedit.pm:411
 #, fuzzy, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
@@ -2631,12 +2703,12 @@ msgstr ""
 "Neviens sāknētājs nespēj to izmantot bez /boot sadaļas.\n"
 "Tāpēc neaizmirstiet izveidot /boot sadaļu."
 
-#: fsedit.pm:411 fsedit.pm:413
+#: fsedit.pm:415 fsedit.pm:417
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Itam katalogam ir juopalīk saknis failsistemā"
 
-#: fsedit.pm:415 fsedit.pm:417
+#: fsedit.pm:419 fsedit.pm:421
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
@@ -2645,17 +2717,17 @@ msgstr ""
 "Itam monteišonys punktam ir napīcīšoma reala failsistema (ext2/ext3, "
 "reiserfs, xfs voi jfs)\n"
 
-#: fsedit.pm:419
+#: fsedit.pm:423
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
 msgstr "Jius navarit lītuot šifreitū failsistemu monteišonys punktā %s"
 
-#: fsedit.pm:483
+#: fsedit.pm:487
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "Napīteik breivys vītys, lai izvītuotu automatiski"
 
-#: fsedit.pm:485
+#: fsedit.pm:489
 #, c-format
 msgid "Nothing to do"
 msgstr "Nav kū izpiļdeit"
@@ -2775,173 +2847,173 @@ msgstr ""
 msgid "Tvcard"
 msgstr "TV karte"
 
-#: harddrake/data.pm:289
+#: harddrake/data.pm:290
 #, c-format
 msgid "Other MultiMedia devices"
 msgstr "Cytys multimedia īkuortys"
 
-#: harddrake/data.pm:298
+#: harddrake/data.pm:299
 #, c-format
 msgid "Soundcard"
 msgstr "Skanis karte"
 
-#: harddrake/data.pm:311
+#: harddrake/data.pm:312
 #, c-format
 msgid "Webcam"
 msgstr ""
 
-#: harddrake/data.pm:325
+#: harddrake/data.pm:326
 #, c-format
 msgid "Processors"
 msgstr ""
 
-#: harddrake/data.pm:335
+#: harddrake/data.pm:336
 #, c-format
 msgid "ISDN adapters"
 msgstr "ISDN karte"
 
-#: harddrake/data.pm:346
+#: harddrake/data.pm:347
 #, c-format
 msgid "USB sound devices"
 msgstr ""
 
-#: harddrake/data.pm:355
+#: harddrake/data.pm:356
 #, c-format
 msgid "Radio cards"
 msgstr ""
 
-#: harddrake/data.pm:364
+#: harddrake/data.pm:365
 #, c-format
 msgid "ATM network cards"
 msgstr ""
 
-#: harddrake/data.pm:373
+#: harddrake/data.pm:374
 #, c-format
 msgid "WAN network cards"
 msgstr ""
 
-#: harddrake/data.pm:382
+#: harddrake/data.pm:383
 #, c-format
 msgid "Bluetooth devices"
 msgstr ""
 
-#: harddrake/data.pm:391
+#: harddrake/data.pm:392
 #, c-format
 msgid "Ethernetcard"
 msgstr "Ethernet teikla karte"
 
-#: harddrake/data.pm:408
+#: harddrake/data.pm:409
 #, c-format
 msgid "Modem"
 msgstr "Modems"
 
-#: harddrake/data.pm:418
+#: harddrake/data.pm:419
 #, c-format
 msgid "ADSL adapters"
 msgstr "ADSL adapteri"
 
-#: harddrake/data.pm:430
+#: harddrake/data.pm:431
 #, fuzzy, c-format
 msgid "Memory"
 msgstr "Vairuok"
 
-#: harddrake/data.pm:439
+#: harddrake/data.pm:440
 #, c-format
 msgid "Printer"
 msgstr "Printers"
 
 #. -PO: these are joysticks controllers:
-#: harddrake/data.pm:453
+#: harddrake/data.pm:454
 #, c-format
 msgid "Game port controllers"
 msgstr ""
 
-#: harddrake/data.pm:462
+#: harddrake/data.pm:463
 #, c-format
 msgid "Joystick"
 msgstr "Kursorsvira"
 
-#: harddrake/data.pm:472
+#: harddrake/data.pm:473
 #, c-format
 msgid "Keyboard"
 msgstr "Klaviatura"
 
-#: harddrake/data.pm:485
+#: harddrake/data.pm:486
 #, c-format
 msgid "Tablet and touchscreen"
 msgstr ""
 
-#: harddrake/data.pm:494
+#: harddrake/data.pm:495
 #, c-format
 msgid "Mouse"
 msgstr "Pele"
 
-#: harddrake/data.pm:508
+#: harddrake/data.pm:509
 #, c-format
 msgid "Biometry"
 msgstr ""
 
-#: harddrake/data.pm:516
+#: harddrake/data.pm:517
 #, fuzzy, c-format
 msgid "UPS"
 msgstr "CUPS"
 
-#: harddrake/data.pm:525
+#: harddrake/data.pm:526
 #, c-format
 msgid "Scanner"
 msgstr "Skeners"
 
-#: harddrake/data.pm:536
+#: harddrake/data.pm:537
 #, c-format
 msgid "Unknown/Others"
 msgstr "Nazynuoms/Cyti"
 
-#: harddrake/data.pm:564
+#: harddrake/data.pm:565
 #, c-format
 msgid "cpu # "
 msgstr "procesors # "
 
-#: harddrake/sound.pm:202
+#: harddrake/sound.pm:285
 #, c-format
 msgid "Please Wait... Applying the configuration"
 msgstr "Lyudzu pagaidit ... konfiguracejis pīmāruošona"
 
-#: harddrake/sound.pm:305
+#: harddrake/sound.pm:346
 #, c-format
 msgid "Enable PulseAudio"
 msgstr ""
 
-#: harddrake/sound.pm:309
+#: harddrake/sound.pm:350
 #, c-format
 msgid "Automatic routing from ALSA to PulseAudio"
 msgstr ""
 
-#: harddrake/sound.pm:344
+#: harddrake/sound.pm:355
 #, c-format
 msgid "Enable 5.1 sound with Pulse Audio"
 msgstr ""
 
-#: harddrake/sound.pm:348
+#: harddrake/sound.pm:360
 #, c-format
 msgid "Enable user switching for audio applications"
 msgstr ""
 
-#: harddrake/sound.pm:318
+#: harddrake/sound.pm:365
 #, c-format
 msgid "Reset sound mixer to default values"
 msgstr ""
 
-#: harddrake/sound.pm:323
+#: harddrake/sound.pm:370
 #, c-format
 msgid "Trouble shooting"
 msgstr ""
 
-#: harddrake/sound.pm:330
+#: harddrake/sound.pm:377
 #, c-format
 msgid "No alternative driver"
 msgstr "Nav alternativa draivera"
 
-#: harddrake/sound.pm:240
+#: harddrake/sound.pm:378
 #, c-format
 msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
@@ -2950,12 +3022,12 @@ msgstr ""
 "Nav zynuoms alternativs OSS/ALSA draivers prīkš jiusu skanis kartis (%s), "
 "kura pošreiz izmontoj \"%s\""
 
-#: harddrake/sound.pm:246
+#: harddrake/sound.pm:385
 #, c-format
 msgid "Sound configuration"
 msgstr "Skanis konfiguraceja"
 
-#: harddrake/sound.pm:248
+#: harddrake/sound.pm:387
 #, c-format
 msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
@@ -2967,7 +3039,7 @@ msgstr ""
 #. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
-#: harddrake/sound.pm:253
+#: harddrake/sound.pm:392
 #, c-format
 msgid ""
 "\n"
@@ -2980,7 +3052,7 @@ msgstr ""
 "Jiusu karte pošreiz izmontoj %s\"%s\" draiveri (nūklusātais draivers prīkš "
 "jiusu kartis ir \"%s\")"
 
-#: harddrake/sound.pm:255
+#: harddrake/sound.pm:394
 #, c-format
 msgid ""
 "OSS (Open Sound System) was the first sound API. It's an OS independent "
@@ -3000,12 +3072,12 @@ msgid ""
 "the ALSA library.\n"
 msgstr ""
 
-#: harddrake/sound.pm:269 harddrake/sound.pm:354
+#: harddrake/sound.pm:408 harddrake/sound.pm:491
 #, c-format
 msgid "Driver:"
 msgstr "Draivers:"
 
-#: harddrake/sound.pm:379
+#: harddrake/sound.pm:422
 #, c-format
 msgid ""
 "The old \"%s\" driver is blacklisted.\n"
@@ -3020,12 +3092,12 @@ msgstr ""
 "\n"
 "Jaunais \"%s\" draivers tiks lītuots tikai pi nuokūšuos īluodis."
 
-#: harddrake/sound.pm:294
+#: harddrake/sound.pm:430
 #, c-format
 msgid "No open source driver"
 msgstr "Nav atgvārtuo koda draiveru"
 
-#: harddrake/sound.pm:295
+#: harddrake/sound.pm:431
 #, fuzzy, c-format
 msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
@@ -3034,29 +3106,30 @@ msgstr ""
 "Nav zināms alternatīvs OSS/ALSA draiveris priekš Jūsu skaņu kartes (%s) kura "
 "patreiz izmanto \"%s\""
 
-#: harddrake/sound.pm:298
+#: harddrake/sound.pm:434
 #, c-format
 msgid "No known driver"
 msgstr "Nav zynuomu draiveru"
 
-#: harddrake/sound.pm:299
+#: harddrake/sound.pm:435
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
 msgstr "Nav zynuomu draiveru jiusu skanis kartei (%s)"
 
-#: harddrake/sound.pm:314
+#: harddrake/sound.pm:450
 #, c-format
 msgid "Sound trouble shooting"
 msgstr ""
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:317
+#: harddrake/sound.pm:453
 #, c-format
 msgid ""
 "The classic bug sound tester is to run the following commands:\n"
 "\n"
 "\n"
-"- \"lspcidrake -v | fgrep -i AUDIO\" will tell you which driver your card uses\n"
+"- \"lspcidrake -v | fgrep -i AUDIO\" will tell you which driver your card "
+"uses\n"
 "by default\n"
 "\n"
 "- \"grep sound-slot /etc/modprobe.conf\" will tell you what driver it\n"
@@ -3074,18 +3147,18 @@ msgid ""
 "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
 msgstr ""
 
-#: harddrake/sound.pm:343
+#: harddrake/sound.pm:480
 #, c-format
 msgid "Let me pick any driver"
 msgstr ""
 
-#: harddrake/sound.pm:346
+#: harddrake/sound.pm:483
 #, c-format
 msgid "Choosing an arbitrary driver"
 msgstr ""
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:349
+#: harddrake/sound.pm:486
 #, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
@@ -3279,7 +3352,7 @@ msgstr "default:LTR"
 msgid "Andorra"
 msgstr "Andora"
 
-#: lang.pm:211 timezone.pm:215
+#: lang.pm:211 timezone.pm:226
 #, c-format
 msgid "United Arab Emirates"
 msgstr "Apvīnuotī Arabu Emirati"
@@ -3324,7 +3397,7 @@ msgstr "Angola"
 msgid "Antarctica"
 msgstr "Antarktida"
 
-#: lang.pm:220 timezone.pm:260
+#: lang.pm:220 timezone.pm:271
 #, c-format
 msgid "Argentina"
 msgstr "Argentiona"
@@ -3334,12 +3407,12 @@ msgstr "Argentiona"
 msgid "American Samoa"
 msgstr "Amerikaņu Samoa"
 
-#: lang.pm:222 mirror.pm:11 timezone.pm:218
+#: lang.pm:222 mirror.pm:12 timezone.pm:229
 #, c-format
 msgid "Austria"
 msgstr "Austreja"
 
-#: lang.pm:223 mirror.pm:10 timezone.pm:256
+#: lang.pm:223 mirror.pm:11 timezone.pm:267
 #, c-format
 msgid "Australia"
 msgstr "Australeja"
@@ -3364,12 +3437,12 @@ msgstr "Bosneja Hercogovina"
 msgid "Barbados"
 msgstr "Barbadosa"
 
-#: lang.pm:228 timezone.pm:200
+#: lang.pm:228 timezone.pm:211
 #, c-format
 msgid "Bangladesh"
 msgstr "Bangladeša"
 
-#: lang.pm:229 mirror.pm:12 timezone.pm:220
+#: lang.pm:229 mirror.pm:13 timezone.pm:231
 #, c-format
 msgid "Belgium"
 msgstr "Beļgeja"
@@ -3379,7 +3452,7 @@ msgstr "Beļgeja"
 msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
-#: lang.pm:231 timezone.pm:221
+#: lang.pm:231 timezone.pm:232
 #, c-format
 msgid "Bulgaria"
 msgstr "Bulgareja"
@@ -3414,7 +3487,7 @@ msgstr "Bruneja"
 msgid "Bolivia"
 msgstr "Bolīveja"
 
-#: lang.pm:238 mirror.pm:13 timezone.pm:261
+#: lang.pm:238 mirror.pm:14 timezone.pm:272
 #, c-format
 msgid "Brazil"
 msgstr "Brazīleja"
@@ -3439,7 +3512,7 @@ msgstr "Bouvet Island"
 msgid "Botswana"
 msgstr "Botsvāna"
 
-#: lang.pm:243 timezone.pm:219
+#: lang.pm:243 timezone.pm:230
 #, c-format
 msgid "Belarus"
 msgstr "Boltkrīveja"
@@ -3449,7 +3522,7 @@ msgstr "Boltkrīveja"
 msgid "Belize"
 msgstr "Beliza"
 
-#: lang.pm:245 mirror.pm:14 timezone.pm:250
+#: lang.pm:245 mirror.pm:15 timezone.pm:261
 #, c-format
 msgid "Canada"
 msgstr "Kanada"
@@ -3474,7 +3547,7 @@ msgstr "Central Afrikys republika"
 msgid "Congo (Brazzaville)"
 msgstr "Kongo (Brazzaville)"
 
-#: lang.pm:250 mirror.pm:38 timezone.pm:244
+#: lang.pm:250 mirror.pm:39 timezone.pm:255
 #, c-format
 msgid "Switzerland"
 msgstr "Šveice"
@@ -3489,7 +3562,7 @@ msgstr "Kotdivuāra"
 msgid "Cook Islands"
 msgstr "Kuka solys"
 
-#: lang.pm:253 timezone.pm:262
+#: lang.pm:253 timezone.pm:273
 #, c-format
 msgid "Chile"
 msgstr "Čīle"
@@ -3499,7 +3572,7 @@ msgstr "Čīle"
 msgid "Cameroon"
 msgstr "Kamerūna"
 
-#: lang.pm:255 timezone.pm:201
+#: lang.pm:255 timezone.pm:212
 #, c-format
 msgid "China"
 msgstr "Kīna"
@@ -3509,7 +3582,7 @@ msgstr "Kīna"
 msgid "Colombia"
 msgstr "Kolumbeja"
 
-#: lang.pm:257 mirror.pm:15
+#: lang.pm:257 mirror.pm:16
 #, c-format
 msgid "Costa Rica"
 msgstr "Kostarika"
@@ -3539,12 +3612,12 @@ msgstr "Zīmsvātku sola"
 msgid "Cyprus"
 msgstr "Kipra"
 
-#: lang.pm:263 mirror.pm:16 timezone.pm:222
+#: lang.pm:263 mirror.pm:17 timezone.pm:233
 #, c-format
 msgid "Czech Republic"
 msgstr "Čehejis Republika"
 
-#: lang.pm:264 mirror.pm:21 timezone.pm:227
+#: lang.pm:264 mirror.pm:22 timezone.pm:238
 #, c-format
 msgid "Germany"
 msgstr "Vuoceja"
@@ -3554,7 +3627,7 @@ msgstr "Vuoceja"
 msgid "Djibouti"
 msgstr "Džibuti"
 
-#: lang.pm:266 mirror.pm:17 timezone.pm:223
+#: lang.pm:266 mirror.pm:18 timezone.pm:234
 #, c-format
 msgid "Denmark"
 msgstr "Dāneja"
@@ -3579,7 +3652,7 @@ msgstr "Alžireja"
 msgid "Ecuador"
 msgstr "Ekvadora"
 
-#: lang.pm:271 mirror.pm:18 timezone.pm:224
+#: lang.pm:271 mirror.pm:19 timezone.pm:235
 #, c-format
 msgid "Estonia"
 msgstr "Igauneja"
@@ -3599,7 +3672,7 @@ msgstr "Rītumsahara"
 msgid "Eritrea"
 msgstr "Eritreja"
 
-#: lang.pm:275 mirror.pm:36 timezone.pm:242
+#: lang.pm:275 mirror.pm:37 timezone.pm:253
 #, c-format
 msgid "Spain"
 msgstr "Spāneja"
@@ -3609,7 +3682,7 @@ msgstr "Spāneja"
 msgid "Ethiopia"
 msgstr "Etiopeja"
 
-#: lang.pm:277 mirror.pm:19 timezone.pm:225
+#: lang.pm:277 mirror.pm:20 timezone.pm:236
 #, c-format
 msgid "Finland"
 msgstr "Sūmeja"
@@ -3634,7 +3707,7 @@ msgstr "Mikronezeja"
 msgid "Faroe Islands"
 msgstr "Farēru solys"
 
-#: lang.pm:282 mirror.pm:20 timezone.pm:226
+#: lang.pm:282 mirror.pm:21 timezone.pm:237
 #, c-format
 msgid "France"
 msgstr "Franceja"
@@ -3644,7 +3717,7 @@ msgstr "Franceja"
 msgid "Gabon"
 msgstr "Gabona"
 
-#: lang.pm:284 timezone.pm:246
+#: lang.pm:284 timezone.pm:257
 #, c-format
 msgid "United Kingdom"
 msgstr "Apvīnuotuo Karaliste"
@@ -3699,7 +3772,7 @@ msgstr "Gvadelupa"
 msgid "Equatorial Guinea"
 msgstr "Ekvatorialuo Gvineja"
 
-#: lang.pm:295 mirror.pm:22 timezone.pm:228
+#: lang.pm:295 mirror.pm:23 timezone.pm:239
 #, c-format
 msgid "Greece"
 msgstr "Grīkeja"
@@ -3709,7 +3782,7 @@ msgstr "Grīkeja"
 msgid "South Georgia and the South Sandwich Islands"
 msgstr ""
 
-#: lang.pm:297 timezone.pm:251
+#: lang.pm:297 timezone.pm:262
 #, c-format
 msgid "Guatemala"
 msgstr "Gvatemala"
@@ -3754,27 +3827,27 @@ msgstr "Horvateja"
 msgid "Haiti"
 msgstr "Haiti"
 
-#: lang.pm:306 mirror.pm:23 timezone.pm:229
+#: lang.pm:306 mirror.pm:24 timezone.pm:240
 #, c-format
 msgid "Hungary"
 msgstr "Ungareja"
 
-#: lang.pm:307 timezone.pm:204
+#: lang.pm:307 timezone.pm:215
 #, c-format
 msgid "Indonesia"
 msgstr "Indonezeja"
 
-#: lang.pm:308 mirror.pm:24 timezone.pm:230
+#: lang.pm:308 mirror.pm:25 timezone.pm:241
 #, c-format
 msgid "Ireland"
 msgstr "Īreja"
 
-#: lang.pm:309 mirror.pm:25 timezone.pm:206
+#: lang.pm:309 mirror.pm:26 timezone.pm:217
 #, c-format
 msgid "Israel"
 msgstr "Izraela"
 
-#: lang.pm:310 timezone.pm:203
+#: lang.pm:310 timezone.pm:214
 #, c-format
 msgid "India"
 msgstr "Indeja"
@@ -3789,7 +3862,7 @@ msgstr "Britu Indejis okeana teritoreja"
 msgid "Iraq"
 msgstr "Iraka"
 
-#: lang.pm:313 timezone.pm:205
+#: lang.pm:313 timezone.pm:216
 #, c-format
 msgid "Iran"
 msgstr "Irana"
@@ -3799,7 +3872,7 @@ msgstr "Irana"
 msgid "Iceland"
 msgstr "Islande"
 
-#: lang.pm:315 mirror.pm:26 timezone.pm:231
+#: lang.pm:315 mirror.pm:27 timezone.pm:242
 #, c-format
 msgid "Italy"
 msgstr "Itāleja"
@@ -3814,7 +3887,7 @@ msgstr "Jamaika"
 msgid "Jordan"
 msgstr "Jordaneja"
 
-#: lang.pm:318 mirror.pm:27 timezone.pm:207
+#: lang.pm:318 mirror.pm:28 timezone.pm:218
 #, c-format
 msgid "Japan"
 msgstr "Japuona"
@@ -3854,7 +3927,7 @@ msgstr ""
 msgid "Korea (North)"
 msgstr "Zīmeļkoreja"
 
-#: lang.pm:326 timezone.pm:208
+#: lang.pm:326 timezone.pm:219
 #, c-format
 msgid "Korea"
 msgstr "Koreja"
@@ -3909,12 +3982,12 @@ msgstr "Libereja"
 msgid "Lesotho"
 msgstr "Lesoto"
 
-#: lang.pm:337 timezone.pm:232
+#: lang.pm:337 timezone.pm:243
 #, c-format
 msgid "Lithuania"
 msgstr "Lītuva"
 
-#: lang.pm:338 timezone.pm:233
+#: lang.pm:338 timezone.pm:244
 #, c-format
 msgid "Luxembourg"
 msgstr "Luksemburga"
@@ -4014,12 +4087,12 @@ msgstr "Maldivu solys"
 msgid "Malawi"
 msgstr "Malavi"
 
-#: lang.pm:358 timezone.pm:252
+#: lang.pm:358 timezone.pm:263
 #, c-format
 msgid "Mexico"
 msgstr "Meksika"
 
-#: lang.pm:359 timezone.pm:209
+#: lang.pm:359 timezone.pm:220
 #, c-format
 msgid "Malaysia"
 msgstr "Malaizeja"
@@ -4059,12 +4132,12 @@ msgstr "Nigereja"
 msgid "Nicaragua"
 msgstr "Nikaragva"
 
-#: lang.pm:367 mirror.pm:28 timezone.pm:234
+#: lang.pm:367 mirror.pm:29 timezone.pm:245
 #, c-format
 msgid "Netherlands"
 msgstr "Holande"
 
-#: lang.pm:368 mirror.pm:30 timezone.pm:235
+#: lang.pm:368 mirror.pm:31 timezone.pm:246
 #, c-format
 msgid "Norway"
 msgstr "Norvegeja"
@@ -4084,7 +4157,7 @@ msgstr "Nauru"
 msgid "Niue"
 msgstr "Niue"
 
-#: lang.pm:372 mirror.pm:29 timezone.pm:257
+#: lang.pm:372 mirror.pm:30 timezone.pm:268
 #, c-format
 msgid "New Zealand"
 msgstr "Jaunzelande"
@@ -4114,7 +4187,7 @@ msgstr "Franču Polinezeja"
 msgid "Papua New Guinea"
 msgstr "Papua Jaungvineja"
 
-#: lang.pm:378 timezone.pm:210
+#: lang.pm:378 timezone.pm:221
 #, c-format
 msgid "Philippines"
 msgstr "Filipinys"
@@ -4124,7 +4197,7 @@ msgstr "Filipinys"
 msgid "Pakistan"
 msgstr "Pakistana"
 
-#: lang.pm:380 mirror.pm:31 timezone.pm:236
+#: lang.pm:380 mirror.pm:32 timezone.pm:247
 #, c-format
 msgid "Poland"
 msgstr "Pūleja"
@@ -4149,7 +4222,7 @@ msgstr "Puerto Riko"
 msgid "Palestine"
 msgstr "Palestina"
 
-#: lang.pm:385 mirror.pm:32 timezone.pm:237
+#: lang.pm:385 mirror.pm:33 timezone.pm:248
 #, c-format
 msgid "Portugal"
 msgstr "Portugāle"
@@ -4174,12 +4247,12 @@ msgstr "Katara"
 msgid "Reunion"
 msgstr "Reinjona"
 
-#: lang.pm:390 timezone.pm:238
+#: lang.pm:390 timezone.pm:249
 #, c-format
 msgid "Romania"
 msgstr "Rumaneja"
 
-#: lang.pm:391 mirror.pm:33
+#: lang.pm:391 mirror.pm:34
 #, c-format
 msgid "Russia"
 msgstr "Krīveja"
@@ -4209,12 +4282,12 @@ msgstr "Seišeļu solys"
 msgid "Sudan"
 msgstr "Sudāna"
 
-#: lang.pm:397 mirror.pm:37 timezone.pm:243
+#: lang.pm:397 mirror.pm:38 timezone.pm:254
 #, c-format
 msgid "Sweden"
 msgstr "Zvīdreja"
 
-#: lang.pm:398 timezone.pm:211
+#: lang.pm:398 timezone.pm:222
 #, c-format
 msgid "Singapore"
 msgstr "Singapūra"
@@ -4224,7 +4297,7 @@ msgstr "Singapūra"
 msgid "Saint Helena"
 msgstr "Svātuos Helenys sola"
 
-#: lang.pm:400 timezone.pm:241
+#: lang.pm:400 timezone.pm:252
 #, c-format
 msgid "Slovenia"
 msgstr "Sloveneja"
@@ -4234,7 +4307,7 @@ msgstr "Sloveneja"
 msgid "Svalbard and Jan Mayen Islands"
 msgstr "Svalbāra i Jana Mejena solys"
 
-#: lang.pm:402 mirror.pm:34 timezone.pm:240
+#: lang.pm:402 mirror.pm:35 timezone.pm:251
 #, c-format
 msgid "Slovakia"
 msgstr "Slovakeja"
@@ -4304,7 +4377,7 @@ msgstr "Franču dīnvydu teritorejis"
 msgid "Togo"
 msgstr "Togo"
 
-#: lang.pm:416 mirror.pm:40 timezone.pm:213
+#: lang.pm:416 mirror.pm:41 timezone.pm:224
 #, c-format
 msgid "Thailand"
 msgstr "Taizeme"
@@ -4339,7 +4412,7 @@ msgstr "Tuniseja"
 msgid "Tonga"
 msgstr "Tonga"
 
-#: lang.pm:423 timezone.pm:214
+#: lang.pm:423 timezone.pm:225
 #, c-format
 msgid "Turkey"
 msgstr "Turceja"
@@ -4354,17 +4427,17 @@ msgstr "Trinidada i Tobago"
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
-#: lang.pm:426 mirror.pm:39 timezone.pm:212
+#: lang.pm:426 mirror.pm:40 timezone.pm:223
 #, c-format
 msgid "Taiwan"
 msgstr "Taivana"
 
-#: lang.pm:427 timezone.pm:197
+#: lang.pm:427 timezone.pm:208
 #, c-format
 msgid "Tanzania"
 msgstr "Tanzaneja"
 
-#: lang.pm:428 timezone.pm:245
+#: lang.pm:428 timezone.pm:256
 #, c-format
 msgid "Ukraine"
 msgstr "Ukraina"
@@ -4379,7 +4452,7 @@ msgstr "Uganda"
 msgid "United States Minor Outlying Islands"
 msgstr "ASV Mozuos Antiļu solys"
 
-#: lang.pm:431 mirror.pm:41 timezone.pm:253
+#: lang.pm:431 mirror.pm:42 timezone.pm:264
 #, c-format
 msgid "United States"
 msgstr "A.S.V."
@@ -4449,7 +4522,7 @@ msgstr "Jemena"
 msgid "Mayotte"
 msgstr "Majota"
 
-#: lang.pm:445 mirror.pm:35 timezone.pm:196
+#: lang.pm:445 mirror.pm:36 timezone.pm:207
 #, c-format
 msgid "South Africa"
 msgstr "Dienvidafrika"
@@ -4464,7 +4537,7 @@ msgstr "Zambija"
 msgid "Zimbabwe"
 msgstr "Zimbabve"
 
-#: lang.pm:1193
+#: lang.pm:1201
 #, c-format
 msgid "Welcome to %s"
 msgstr "Laipni lyudzam %s'a"
@@ -4474,17 +4547,17 @@ msgstr "Laipni lyudzam %s'a"
 msgid "Moving used physical extents to other physical volumes failed"
 msgstr ""
 
-#: lvm.pm:137
+#: lvm.pm:141
 #, c-format
 msgid "Physical volume %s is still in use"
 msgstr ""
 
-#: lvm.pm:147
+#: lvm.pm:151
 #, c-format
 msgid "Remove the logical volumes first\n"
 msgstr "Vyspyrms nūjemit logiskūs siejumus\n"
 
-#: lvm.pm:180
+#: lvm.pm:184
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
 msgstr ""
@@ -4862,17 +4935,17 @@ msgstr ""
 "Moduļa %s īluode beja naveiksmeiga.\n"
 "Voi gribit pamieginuot ar cytim parametrim?"
 
-#: partition_table.pm:401
+#: partition_table.pm:409
 #, c-format
 msgid "mount failed: "
 msgstr "monteišona naizadeve: "
 
-#: partition_table.pm:510
+#: partition_table.pm:518
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "Itai platformai paplošynuotuo sadaļa nav pīejama"
 
-#: partition_table.pm:528
+#: partition_table.pm:536
 #, c-format
 msgid ""
 "You have a hole in your partition table but I can not use it.\n"
@@ -4883,7 +4956,7 @@ msgstr ""
 "Vīneigais rysynuojums ir puorvītuot prymaruos sadalis tai, kab caurums "
 "atsarost supluok paplošynuotajuom sadaļom."
 
-#: partition_table/raw.pm:279
+#: partition_table/raw.pm:285
 #, c-format
 msgid ""
 "Something bad is happening on your drive. \n"
@@ -4922,17 +4995,17 @@ msgstr ""
 msgid "Could not set permissions of firmware file %s!"
 msgstr ""
 
-#: scanner.pm:199
+#: scanner.pm:200
 #, c-format
 msgid "Scannerdrake"
 msgstr "Scannerdrake"
 
-#: scanner.pm:200
+#: scanner.pm:201
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr ""
 
-#: scanner.pm:201
+#: scanner.pm:202
 #, c-format
 msgid "Your scanner(s) will not be available for non-root users."
 msgstr ""
@@ -6288,57 +6361,57 @@ msgid ""
 "testing] [-v|--version] "
 msgstr ""
 
-#: timezone.pm:150 timezone.pm:151
+#: timezone.pm:161 timezone.pm:162
 #, fuzzy, c-format
 msgid "All servers"
 msgstr "Pīvīnuot serveri"
 
-#: timezone.pm:185
+#: timezone.pm:196
 #, c-format
 msgid "Global"
 msgstr ""
 
-#: timezone.pm:188
+#: timezone.pm:199
 #, c-format
 msgid "Africa"
 msgstr "Afrika"
 
-#: timezone.pm:189
+#: timezone.pm:200
 #, c-format
 msgid "Asia"
 msgstr "Azeja"
 
-#: timezone.pm:190
+#: timezone.pm:201
 #, c-format
 msgid "Europe"
 msgstr "Eiropa"
 
-#: timezone.pm:191
+#: timezone.pm:202
 #, c-format
 msgid "North America"
 msgstr "Zīmeļamerika"
 
-#: timezone.pm:192
+#: timezone.pm:203
 #, fuzzy, c-format
 msgid "Oceania"
 msgstr "Makedoneja"
 
-#: timezone.pm:193
+#: timezone.pm:204
 #, c-format
 msgid "South America"
 msgstr "Dīnvidamerika"
 
-#: timezone.pm:202
+#: timezone.pm:213
 #, c-format
 msgid "Hong Kong"
 msgstr ""
 
-#: timezone.pm:239
+#: timezone.pm:250
 #, fuzzy, c-format
 msgid "Russian Federation"
 msgstr "Krīvejis (fonetiskuo)"
 
-#: timezone.pm:247
+#: timezone.pm:258
 #, fuzzy, c-format
 msgid "Yugoslavia"
 msgstr "Dīnvydslavu (latiņu)"
@@ -6400,6 +6473,47 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Instalaceja naizadeve"
 
+#, fuzzy
+#~ msgid "Active Directory with SFU"
+#~ msgstr "Atjaunuot vysys rezervis kopejis"
+
+#, fuzzy
+#~ msgid "Active Directory with Winbind"
+#~ msgstr "Atjaunuot vysys rezervis kopejis"
+
+#, fuzzy
+#~ msgid "Active Directory with SFU:"
+#~ msgstr "Atjaunuot vysys rezervis kopejis"
+
+#, fuzzy
+#~ msgid "Active Directory with Winbind:"
+#~ msgstr "Atjaunuot vysys rezervis kopejis"
+
+#~ msgid "Authentication LDAP"
+#~ msgstr "LDAP autentikaceja"
+
+#, fuzzy
+#~ msgid "TLS"
+#~ msgstr "LSB"
+
+#, fuzzy
+#~ msgid "Authentication Active Directory"
+#~ msgstr "Autentifikacejis_metode"
+
+#, fuzzy
+#~ msgid "LDAP users database"
+#~ msgstr "Datubāzis"
+
+#, fuzzy
+#~ msgid "Password for user"
+#~ msgstr "Napīcīšoma parole"
+
+#~ msgid "Authentication NIS"
+#~ msgstr "NIS autentikaceja"
+
+#~ msgid "Authentication Windows Domain"
+#~ msgstr "Windows domena autentikaceja"
+
 #~ msgid "Undo"
 #~ msgstr "Atsaukt"
 
@@ -6408,9 +6522,6 @@ msgstr "Instalaceja naizadeve"
 
 #~ msgid "Restore partition table"
 #~ msgstr "Atjaunuot sadaļu tabulu"
-
-#~ msgid "Select file"
-#~ msgstr "Izavielejit failu"
 
 #~ msgid ""
 #~ "The backup partition table has not the same size\n"
