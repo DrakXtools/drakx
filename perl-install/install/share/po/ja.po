@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-ja\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-21 20:52+0100\n"
+"POT-Creation-Date: 2008-07-20 04:44+0200\n"
 "PO-Revision-Date: 2008-01-31 23:00+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <cooker-i18n@mandrivalinux.org>\n"
@@ -50,7 +50,7 @@ msgid "Do you have further supplementary media?"
 msgstr "他に補助的なメディアがありますか？"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:158
+#: any.pm:112
 #, c-format
 msgid ""
 "The following media have been found and will be used during install: %s.\n"
@@ -63,43 +63,43 @@ msgstr ""
 "\n"
 "他に設定するメディアはありますか？"
 
-#: any.pm:166
+#: any.pm:120
 #, c-format
 msgid "CD-ROM"
 msgstr "CD-ROM"
 
-#: any.pm:167
+#: any.pm:121
 #, c-format
 msgid "Network (HTTP)"
 msgstr "ネットワーク (HTTP)"
 
-#: any.pm:168
+#: any.pm:122
 #, c-format
 msgid "Network (FTP)"
 msgstr "ネットワーク (FTP)"
 
-#: any.pm:169
+#: any.pm:123
 #, c-format
 msgid "Network (NFS)"
 msgstr "ネットワーク (NFS)"
 
-#: any.pm:211
+#: any.pm:163
 #, c-format
 msgid "URL of the mirror?"
 msgstr "ミラーの URL"
 
-#: any.pm:217
+#: any.pm:169
 #, c-format
 msgid "URL must start with ftp:// or http://"
 msgstr "URL は ftp:// または http:// で始まらなければなりません"
 
-#: any.pm:228
+#: any.pm:180
 #, c-format
 msgid ""
 "Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr "Mandriva Linux のサイトに接続してミラーのリストを取得しています..."
 
-#: any.pm:233
+#: any.pm:185
 #, c-format
 msgid ""
 "Failed contacting Mandriva Linux web site to get the list of available "
@@ -108,47 +108,47 @@ msgstr ""
 "Mandriva Linux ウェブサイトへの接続に失敗したため、利用可能なミラーのリストを"
 "取得できませんでした"
 
-#: any.pm:243
+#: any.pm:195
 #, c-format
 msgid "Choose a mirror from which to get the packages"
 msgstr "パッケージを取得するミラーを選択"
 
-#: any.pm:273
+#: any.pm:225
 #, c-format
 msgid "NFS setup"
 msgstr "NFS の設定"
 
-#: any.pm:274
+#: any.pm:226
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
 msgstr "NFS メディアのホスト名とディレクトリを入力してください"
 
-#: any.pm:278
+#: any.pm:230
 #, c-format
 msgid "Hostname missing"
 msgstr "ホスト名がありません"
 
-#: any.pm:279
+#: any.pm:231
 #, c-format
 msgid "Directory must begin with \"/\""
 msgstr "ディレクトリは \"/\" で始まらなければなりません"
 
-#: any.pm:283
+#: any.pm:235
 #, c-format
 msgid "Hostname of the NFS mount ?"
 msgstr "NFS マウントのホスト名"
 
-#: any.pm:284
+#: any.pm:236
 #, c-format
 msgid "Directory"
 msgstr "ディレクトリ"
 
-#: any.pm:306
+#: any.pm:258
 #, c-format
 msgid "Supplementary"
 msgstr "補助"
 
-#: any.pm:341
+#: any.pm:293
 #, c-format
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
@@ -157,23 +157,23 @@ msgstr ""
 "パッケージリストのファイルが見つかりません。ミラーの場所が正しいか確認してく"
 "ださい。"
 
-#: any.pm:375
+#: any.pm:327
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "インストール済みパッケージを探しています..."
 
-#: any.pm:382
+#: any.pm:334
 #, c-format
 msgid "Removing packages prior to upgrade..."
 msgstr "アップグレードする前にパッケージを削除しています..."
 
-#: any.pm:424
+#: any.pm:376
 #, c-format
 msgid "Finding packages to upgrade..."
 msgstr "更新するパッケージを探しています..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:620
+#: any.pm:561
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -197,7 +197,7 @@ msgstr ""
 "本当にこれらのサーバをインストールしますか？\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:643
+#: any.pm:584
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -210,72 +210,72 @@ msgstr ""
 "\n"
 "これらのパッケージを削除してよろしいですか？\n"
 
-#: any.pm:857
+#: any.pm:798
 #, c-format
 msgid "Error reading file %s"
 msgstr "ファイル %s を読み込み中にエラー"
 
-#: any.pm:1065
+#: any.pm:1005
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "次のディスクの名前は変更されました:"
 
-#: any.pm:1067
+#: any.pm:1007
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (変更前の名前は %s)"
 
-#: any.pm:1124
+#: any.pm:1064
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1124
+#: any.pm:1064
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1124
+#: any.pm:1064
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1143 steps_interactive.pm:923
+#: any.pm:1083 steps_interactive.pm:978
 #, c-format
 msgid "Network"
 msgstr "ネットワーク"
 
-#: any.pm:1147
+#: any.pm:1087
 #, c-format
 msgid "Please choose a media"
 msgstr "メディアを選んでください"
 
-#: any.pm:1163
+#: any.pm:1103
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "ファイルが既に存在します。上書きしますか？"
 
-#: any.pm:1167
+#: any.pm:1107
 #, c-format
 msgid "Permission denied"
 msgstr "アクセス許可がありません"
 
-#: any.pm:1215
+#: any.pm:1155
 #, c-format
 msgid "Bad NFS name"
 msgstr "不正な NFS 名"
 
-#: any.pm:1236
+#: any.pm:1176
 #, c-format
 msgid "Bad media %s"
 msgstr "不正なメディア %s"
 
-#: any.pm:1279
+#: any.pm:1219
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "パーティション設定が終わるまでスクリーンショットは撮れません"
 
-#: any.pm:1287
+#: any.pm:1227
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr ""
@@ -291,7 +291,7 @@ msgstr "インストール"
 msgid "Configuration"
 msgstr "設定"
 
-#: install2.pm:166
+#: install2.pm:168
 #, c-format
 msgid "You must also format %s"
 msgstr "%s もフォーマットしてください"
@@ -330,32 +330,32 @@ msgstr "後で利用するためにパッケージをディスクにコピー"
 msgid "Copying in progress"
 msgstr "コピーしています"
 
-#: pkgs.pm:28
+#: pkgs.pm:29
 #, c-format
 msgid "must have"
 msgstr "必須"
 
-#: pkgs.pm:29
+#: pkgs.pm:30
 #, c-format
 msgid "important"
 msgstr "重要"
 
-#: pkgs.pm:30
+#: pkgs.pm:31
 #, c-format
 msgid "very nice"
 msgstr "優秀"
 
-#: pkgs.pm:31
+#: pkgs.pm:32
 #, c-format
 msgid "nice"
 msgstr "秀"
 
-#: pkgs.pm:32
+#: pkgs.pm:33
 #, c-format
 msgid "maybe"
 msgstr "可"
 
-#: pkgs.pm:254
+#: pkgs.pm:253
 #, c-format
 msgid ""
 "Some packages requested by %s cannot be installed:\n"
@@ -693,7 +693,7 @@ msgstr ""
 "エラーが発生しました。しかし対処する方法がわかりません。\n"
 "自己責任で続けてください。"
 
-#: steps.pm:436
+#: steps.pm:437
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -720,12 +720,12 @@ msgstr "Mandriva Linux のインストール %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> 項目間を移動"
 
-#: steps_gtk.pm:82
+#: steps_gtk.pm:84
 #, c-format
 msgid "Xorg server is slow to start. Please wait..."
 msgstr "Xorg サーバの起動には時間がかかります。お待ちください..."
 
-#: steps_gtk.pm:192
+#: steps_gtk.pm:194
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -738,75 +738,75 @@ msgstr ""
 "インストールを試してみてください。\n"
 "CD-ROM から起動 -> F1 を押す -> 'text' と入力"
 
-#: steps_gtk.pm:259 steps_interactive.pm:435 steps_interactive.pm:564
+#: steps_gtk.pm:261 steps_interactive.pm:490 steps_interactive.pm:619
 #: steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "パッケージグループを選択"
 
-#: steps_gtk.pm:280 steps_interactive.pm:581
+#: steps_gtk.pm:282 steps_interactive.pm:636
 #, c-format
 msgid "Individual package selection"
 msgstr "パッケージを個別に選択"
 
 # Changed "total size" to "total", due to problem of available
 # space on screen.
-#: steps_gtk.pm:302 steps_interactive.pm:507
+#: steps_gtk.pm:304 steps_interactive.pm:562
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "合計: %d/%d MB"
 
-#: steps_gtk.pm:347
+#: steps_gtk.pm:349
 #, c-format
 msgid "Bad package"
 msgstr "不正なパッケージ"
 
-#: steps_gtk.pm:349
+#: steps_gtk.pm:351
 #, c-format
 msgid "Version: "
 msgstr "バージョン: "
 
-#: steps_gtk.pm:350
+#: steps_gtk.pm:352
 #, c-format
 msgid "Size: "
 msgstr "サイズ: "
 
-#: steps_gtk.pm:350
+#: steps_gtk.pm:352
 #, c-format
 msgid "%d KB\n"
 msgstr "%d KB\n"
 
-#: steps_gtk.pm:351
+#: steps_gtk.pm:353
 #, c-format
 msgid "Importance: "
 msgstr "重要性: "
 
-#: steps_gtk.pm:385
+#: steps_gtk.pm:387
 #, c-format
 msgid "You can not select/unselect this package"
 msgstr "このパッケージの選択/非選択は変更できません"
 
-#: steps_gtk.pm:389
+#: steps_gtk.pm:391
 #, c-format
 msgid "due to missing %s"
 msgstr "%s がないために"
 
-#: steps_gtk.pm:390
+#: steps_gtk.pm:392
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "%s が依存を満たしていないために"
 
-#: steps_gtk.pm:391
+#: steps_gtk.pm:393
 #, c-format
 msgid "trying to promote %s"
 msgstr "%s をアップグレードするために"
 
-#: steps_gtk.pm:392
+#: steps_gtk.pm:394
 #, c-format
 msgid "in order to keep %s"
 msgstr "%s を維持するために"
 
-#: steps_gtk.pm:397
+#: steps_gtk.pm:399
 #, c-format
 msgid ""
 "You can not select this package as there is not enough space left to install "
@@ -814,108 +814,108 @@ msgid ""
 msgstr ""
 "このパッケージは選択できません。インストールに必要な空き容量がありません。"
 
-#: steps_gtk.pm:400
+#: steps_gtk.pm:402
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "以下のパッケージをインストールします"
 
-#: steps_gtk.pm:401
+#: steps_gtk.pm:403
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "以下のパッケージを削除します"
 
-#: steps_gtk.pm:426
+#: steps_gtk.pm:428
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
 msgstr "これは必須パッケージです。選択を解除することはできません。"
 
-#: steps_gtk.pm:428
+#: steps_gtk.pm:430
 #, c-format
 msgid "You can not unselect this package. It is already installed"
 msgstr "このパッケージの選択は解除できません。既にインストールされています。"
 
-#: steps_gtk.pm:430
+#: steps_gtk.pm:432
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
 msgstr "このパッケージの選択は解除できません。アップグレードが必要です。"
 
-#: steps_gtk.pm:434
+#: steps_gtk.pm:436
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "自動的に選択されたパッケージを表示"
 
-#: steps_gtk.pm:436
+#: steps_gtk.pm:438
 #, c-format
 msgid "Install"
 msgstr "インストール"
 
-#: steps_gtk.pm:439
+#: steps_gtk.pm:441
 #, c-format
 msgid "Load/Save selection"
 msgstr "選択を読み込む/保存する"
 
-#: steps_gtk.pm:440
+#: steps_gtk.pm:442
 #, c-format
 msgid "Updating package selection"
 msgstr "パッケージの選択を更新"
 
-#: steps_gtk.pm:445
+#: steps_gtk.pm:447
 #, c-format
 msgid "Minimal install"
 msgstr "最小インストール"
 
-#: steps_gtk.pm:459
+#: steps_gtk.pm:461
 #, c-format
 msgid "Software Management"
 msgstr "ソフトウェアの管理"
 
-#: steps_gtk.pm:459 steps_interactive.pm:393
+#: steps_gtk.pm:461 steps_interactive.pm:448
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "インストールするパッケージを選んでください"
 
-#: steps_gtk.pm:476 steps_interactive.pm:595 steps_list.pm:32
+#: steps_gtk.pm:478 steps_interactive.pm:650 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "インストール中"
 
-#: steps_gtk.pm:502
+#: steps_gtk.pm:504
 #, c-format
 msgid "No details"
 msgstr "詳細なし"
 
-#: steps_gtk.pm:517
+#: steps_gtk.pm:519
 #, c-format
 msgid "Time remaining "
 msgstr "残り時間 "
 
-#: steps_gtk.pm:518
+#: steps_gtk.pm:520
 #, c-format
 msgid "(estimating...)"
 msgstr "(試算しています...)"
 
-#: steps_gtk.pm:545
+#: steps_gtk.pm:547
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d 個のパッケージ"
 
-#: steps_gtk.pm:591 steps_interactive.pm:783 steps_list.pm:43
+#: steps_gtk.pm:593 steps_interactive.pm:838 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "まとめ"
 
-#: steps_gtk.pm:608
+#: steps_gtk.pm:610
 #, c-format
 msgid "Configure"
 msgstr "設定"
 
-#: steps_gtk.pm:625 steps_interactive.pm:779 steps_interactive.pm:935
+#: steps_gtk.pm:627 steps_interactive.pm:834 steps_interactive.pm:990
 #, c-format
 msgid "not configured"
 msgstr "設定されていません"
 
-#: steps_gtk.pm:661 steps_interactive.pm:278
+#: steps_gtk.pm:664 steps_interactive.pm:332
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -924,7 +924,7 @@ msgstr ""
 "次のインストールメディアを検出しました。\n"
 "使用しないものがあればここで選択を解除してください。"
 
-#: steps_gtk.pm:670 steps_interactive.pm:284
+#: steps_gtk.pm:674 steps_interactive.pm:338
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -936,7 +936,7 @@ msgstr ""
 "そうするとインストーラはハードドライブからインストールを続けます。コピーされ"
 "たパッケージはインストール完了後も利用できます。"
 
-#: steps_gtk.pm:672 steps_interactive.pm:286
+#: steps_gtk.pm:676 steps_interactive.pm:340
 #, c-format
 msgid "Copy whole CDs"
 msgstr "CD 全体をコピー"
@@ -956,58 +956,85 @@ msgstr "キーボードの配列を選んでください"
 msgid "Here is the full list of available keyboards"
 msgstr "利用可能なすべてのキーボードのリスト"
 
-#: steps_interactive.pm:129
+#: steps_interactive.pm:134
 #, c-format
 msgid "Install/Upgrade"
 msgstr "インストール/更新"
 
-#: steps_interactive.pm:130
+#: steps_interactive.pm:135
 #, c-format
 msgid "Is this an install or an upgrade?"
 msgstr "インストールか更新を選んでください"
 
-#: steps_interactive.pm:134
+#: steps_interactive.pm:139
 #, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
 msgstr "インストール"
 
-#: steps_interactive.pm:136
+#: steps_interactive.pm:141
 #, c-format
 msgid "Upgrade %s"
 msgstr "%s を更新"
 
-#: steps_interactive.pm:140
+#: steps_interactive.pm:145
 #, c-format
 msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 msgstr ""
 "32bit から 64bit ディストリビューションへのアップグレードはサポートされていま"
 "せん"
 
-#: steps_interactive.pm:144
+#: steps_interactive.pm:149
 #, c-format
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 msgstr ""
 "64bit から 32bit ディストリビューションへのアップグレードはサポートされていま"
 "せん"
 
-#: steps_interactive.pm:158
+#: steps_interactive.pm:168
 #, c-format
 msgid "Encryption key for %s"
 msgstr "%s の暗号鍵"
 
-#: steps_interactive.pm:194
+#: steps_interactive.pm:200
+#, c-format
+msgid "Cancel installation, reboot system"
+msgstr ""
+
+#: steps_interactive.pm:201
+#, fuzzy, c-format
+msgid "New Installation"
+msgstr "インストール"
+
+#: steps_interactive.pm:202
+#, c-format
+msgid "Upgrade previous installation (not recommended)"
+msgstr ""
+
+#: steps_interactive.pm:206
+#, c-format
+msgid ""
+"Installer have detected your installed Mandriva Linux system could not\n"
+"safely be upgraded to %s.\n"
+"\n"
+"New installation replacing your previous one is recommended.\n"
+"\n"
+"Warning : you should backup all your personal data before choosing \"New\n"
+"Installation\"."
+msgstr ""
+
+#: steps_interactive.pm:248
 #, c-format
 msgid "IDE"
 msgstr "IDE"
 
-#: steps_interactive.pm:194
+#: steps_interactive.pm:248
 #, c-format
 msgid "Configuring IDE"
 msgstr "IDE を設定"
 
-#: steps_interactive.pm:231
+#: steps_interactive.pm:285
 #, c-format
 msgid ""
 "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1017,7 +1044,7 @@ msgstr ""
 "ステムを起動するには、DiskDrake でブートストラップパーティションを作成する必"
 "要があります。"
 
-#: steps_interactive.pm:236
+#: steps_interactive.pm:290
 #, c-format
 msgid ""
 "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
@@ -1028,7 +1055,7 @@ msgstr ""
 "システムを起動するには、DiskDrake でブートストラップパーティションを作成する"
 "必要があります。"
 
-#: steps_interactive.pm:328
+#: steps_interactive.pm:382
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -1040,12 +1067,12 @@ msgstr ""
 "\"%s\" という CD-ROM をドライブに入れて「OK」を押してください。\n"
 "お持ちでない場合は「キャンセル」を押してください。"
 
-#: steps_interactive.pm:350
+#: steps_interactive.pm:404
 #, c-format
 msgid "Looking for available packages..."
 msgstr "利用可能なパッケージを探しています..."
 
-#: steps_interactive.pm:358
+#: steps_interactive.pm:412
 #, c-format
 msgid ""
 "Your system does not have enough space left for installation or upgrade (%"
@@ -1054,7 +1081,7 @@ msgstr ""
 "あなたのシステムにはインストールまたはアップグレードに必要な空き容量がありま"
 "せん (%dMB > %dMB)"
 
-#: steps_interactive.pm:405
+#: steps_interactive.pm:460
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1063,54 +1090,54 @@ msgstr ""
 "パッケージの選択を読み込むか保存するかを選んでください。\n"
 "形式は auto_install で生成されたファイルと同じです。"
 
-#: steps_interactive.pm:407
+#: steps_interactive.pm:462
 #, c-format
 msgid "Load"
 msgstr "読み込む"
 
-#: steps_interactive.pm:407
+#: steps_interactive.pm:462
 #, c-format
 msgid "Save"
 msgstr "保存する"
 
-#: steps_interactive.pm:415
+#: steps_interactive.pm:470
 #, c-format
 msgid "Bad file"
 msgstr "不正なファイル"
 
-#: steps_interactive.pm:431
+#: steps_interactive.pm:486
 #, c-format
 msgid "Install Mandriva KDE Desktop"
 msgstr "Mandriva KDE デスクトップをインストール"
 
-#: steps_interactive.pm:432
+#: steps_interactive.pm:487
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
 msgstr "Mandriva GNOME デスクトップをインストール"
 
-#: steps_interactive.pm:433
+#: steps_interactive.pm:488
 #, c-format
 msgid "Custom install"
 msgstr "カスタムインストール"
 
-#: steps_interactive.pm:436
+#: steps_interactive.pm:491
 #, c-format
 msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
 msgstr ""
 "ワークステーションのデスクトッププロファイルを KDE, GNOME, カスタムの中から選"
 "択できます"
 
-#: steps_interactive.pm:521
+#: steps_interactive.pm:576
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "指定されたサイズが空き容量を超えています"
 
-#: steps_interactive.pm:536
+#: steps_interactive.pm:591
 #, c-format
 msgid "Type of install"
 msgstr "インストールの種類"
 
-#: steps_interactive.pm:537
+#: steps_interactive.pm:592
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1119,82 +1146,82 @@ msgstr ""
 "パッケージグループが選択されていません。\n"
 "インストールする最低限のものを選んでください:"
 
-#: steps_interactive.pm:540
+#: steps_interactive.pm:595
 #, c-format
 msgid "With X"
 msgstr "X を使う"
 
-#: steps_interactive.pm:541
+#: steps_interactive.pm:596
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "基本的なドキュメントを入れる (推奨)"
 
-#: steps_interactive.pm:542
+#: steps_interactive.pm:597
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "最小限のインストール (urpmi も含まれません)"
 
-#: steps_interactive.pm:596
+#: steps_interactive.pm:651
 #, c-format
 msgid "Preparing installation"
 msgstr "インストールの準備"
 
-#: steps_interactive.pm:604
+#: steps_interactive.pm:659
 #, c-format
 msgid "Installing package %s"
 msgstr "パッケージ %s をインストール"
 
-#: steps_interactive.pm:628
+#: steps_interactive.pm:683
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "パッケージを並べ替え中にエラーが発生:"
 
-#: steps_interactive.pm:628
+#: steps_interactive.pm:683
 #, c-format
 msgid "Go on anyway?"
 msgstr "続けますか？"
 
-#: steps_interactive.pm:632
+#: steps_interactive.pm:687
 #, c-format
 msgid "Retry"
 msgstr "再試行"
 
-#: steps_interactive.pm:633
+#: steps_interactive.pm:688
 #, c-format
 msgid "Skip this package"
 msgstr "このパッケージを飛ばす"
 
-#: steps_interactive.pm:634
+#: steps_interactive.pm:689
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "メディア %s のすべてのパッケージを飛ばす"
 
-#: steps_interactive.pm:635
+#: steps_interactive.pm:690
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "メディアとパッケージの選択に戻る"
 
-#: steps_interactive.pm:638
+#: steps_interactive.pm:693
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "パッケージ %s のインストール中にエラーが発生しました。"
 
-#: steps_interactive.pm:656
+#: steps_interactive.pm:711
 #, c-format
 msgid "Post-install configuration"
 msgstr "インストール後の設定"
 
-#: steps_interactive.pm:663
+#: steps_interactive.pm:718
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "更新モジュールメディアがドライブ %s に入っていることを確認してください"
 
-#: steps_interactive.pm:691 steps_list.pm:47
+#: steps_interactive.pm:746 steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "更新"
 
-#: steps_interactive.pm:692
+#: steps_interactive.pm:747
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1214,39 +1241,38 @@ msgstr ""
 "\n"
 "更新されたパッケージをインストールしますか？"
 
-#: steps_interactive.pm:714
+#: steps_interactive.pm:769
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "ミラーに接続して利用可能なパッケージのリストを取得しています..."
 
-#: steps_interactive.pm:720
+#: steps_interactive.pm:775
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr "ミラー %s に接続できません"
 
-#. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:826
+#: steps_interactive.pm:881
 #, c-format
 msgid "%s on %s"
 msgstr "%2$s の %1$s"
 
-#: steps_interactive.pm:860 steps_interactive.pm:867 steps_interactive.pm:881
-#: steps_interactive.pm:899 steps_interactive.pm:914
+#: steps_interactive.pm:915 steps_interactive.pm:922 steps_interactive.pm:936
+#: steps_interactive.pm:954 steps_interactive.pm:969
 #, c-format
 msgid "Hardware"
 msgstr "ハードウェア"
 
-#: steps_interactive.pm:882 steps_interactive.pm:900
+#: steps_interactive.pm:937 steps_interactive.pm:955
 #, c-format
 msgid "Sound card"
 msgstr "サウンドカード"
 
-#: steps_interactive.pm:903
+#: steps_interactive.pm:958
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "ISA サウンドカードをお使いですか？"
 
-#: steps_interactive.pm:905
+#: steps_interactive.pm:960
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -1255,64 +1281,64 @@ msgstr ""
 "インストール後に alsaconf か sndconfig を実行してサウンドカードを設定してくだ"
 "さい。"
 
-#: steps_interactive.pm:907
+#: steps_interactive.pm:962
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr ""
 "サウンドカードが見つかりません。インストール後に harddrake で再度設定を試みて"
 "ください。"
 
-#: steps_interactive.pm:915
+#: steps_interactive.pm:970
 #, c-format
 msgid "Graphical interface"
 msgstr "グラフィカルインターフェース"
 
-#: steps_interactive.pm:922 steps_interactive.pm:933
+#: steps_interactive.pm:977 steps_interactive.pm:988
 #, c-format
 msgid "Network & Internet"
 msgstr "ネットワークとインターネット"
 
-#: steps_interactive.pm:934
+#: steps_interactive.pm:989
 #, c-format
 msgid "Proxies"
 msgstr "プロキシ"
 
-#: steps_interactive.pm:935
+#: steps_interactive.pm:990
 #, c-format
 msgid "configured"
 msgstr "設定済み"
 
-#: steps_interactive.pm:945
+#: steps_interactive.pm:1000
 #, c-format
 msgid "Security Level"
 msgstr "セキュリティレベル"
 
-#: steps_interactive.pm:964
+#: steps_interactive.pm:1019
 #, c-format
 msgid "Firewall"
 msgstr "ファイアウォール"
 
-#: steps_interactive.pm:968
+#: steps_interactive.pm:1023
 #, c-format
 msgid "activated"
 msgstr "有効"
 
-#: steps_interactive.pm:968
+#: steps_interactive.pm:1023
 #, c-format
 msgid "disabled"
 msgstr "無効"
 
-#: steps_interactive.pm:982
+#: steps_interactive.pm:1037
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "X が設定されていません。本当によろしいですか？"
 
-#: steps_interactive.pm:1009
+#: steps_interactive.pm:1064
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "ブートローダを準備中..."
 
-#: steps_interactive.pm:1019
+#: steps_interactive.pm:1074
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1324,12 +1350,12 @@ msgstr ""
 "は yaboot は動きません。インストールを続けますが、マシンを起動するには、"
 "BootX もしくは他の方法が必要です。'root fs' のカーネル引数は 'root=%s' です。"
 
-#: steps_interactive.pm:1025
+#: steps_interactive.pm:1080
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "aboot を使いますか？"
 
-#: steps_interactive.pm:1028
+#: steps_interactive.pm:1083
 #, c-format
 msgid ""
 "Error installing aboot, \n"
@@ -1338,7 +1364,7 @@ msgstr ""
 "aboot をインストール中にエラーが発生しました。\n"
 "最初のパーティションを破壊しますが、強制的にインストールしますか？"
 
-#: steps_interactive.pm:1040
+#: steps_interactive.pm:1095
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1347,17 +1373,17 @@ msgstr ""
 "このセキュリティレベルでは、Windows パーティションのファイルへのアクセスが管"
 "理者のみに限定されます。"
 
-#: steps_interactive.pm:1072
+#: steps_interactive.pm:1127
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "空のフロッピーをドライブ %s に入れてください"
 
-#: steps_interactive.pm:1074
+#: steps_interactive.pm:1129
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "インストール自動化フロッピーを作成中..."
 
-#: steps_interactive.pm:1085
+#: steps_interactive.pm:1140
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1368,22 +1394,22 @@ msgstr ""
 "\n"
 "本当に終了しますか？"
 
-#: steps_interactive.pm:1095
+#: steps_interactive.pm:1150
 #, c-format
 msgid "Congratulations"
 msgstr "おめでとうございます"
 
-#: steps_interactive.pm:1099
+#: steps_interactive.pm:1154
 #, c-format
 msgid "Reboot"
 msgstr "再起動"
 
-#: steps_interactive.pm:1103 steps_interactive.pm:1104
+#: steps_interactive.pm:1158 steps_interactive.pm:1159
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "インストール自動化フロッピーを作成"
 
-#: steps_interactive.pm:1105
+#: steps_interactive.pm:1160
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"
@@ -1398,17 +1424,17 @@ msgstr ""
 "\n"
 "インストールの「再現」を利用されたほうがいいかもしれません。\n"
 
-#: steps_interactive.pm:1110
+#: steps_interactive.pm:1165
 #, c-format
 msgid "Replay"
 msgstr "再現"
 
-#: steps_interactive.pm:1110
+#: steps_interactive.pm:1165
 #, c-format
 msgid "Automated"
 msgstr "自動"
 
-#: steps_interactive.pm:1113
+#: steps_interactive.pm:1168
 #, c-format
 msgid "Save packages selection"
 msgstr "パッケージの選択を保存する"

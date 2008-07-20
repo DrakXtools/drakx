@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-21 20:52+0100\n"
+"POT-Creation-Date: 2008-07-20 04:44+0200\n"
 "PO-Revision-Date: 2008-06-10 18:58+0300\n"
 "Last-Translator: Taras Boychuk <btr0001@ukr.net>\n"
 "Language-Team: ukrainian <translation@linux.org.ua>\n"
@@ -19,7 +19,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../../advertising/IM_flash.pl:1
 #, c-format
@@ -52,7 +53,7 @@ msgid "Do you have further supplementary media?"
 msgstr "Чи маєте Ви наступні додаткові носії?"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:158
+#: any.pm:112
 #, c-format
 msgid ""
 "The following media have been found and will be used during install: %s.\n"
@@ -65,89 +66,93 @@ msgstr ""
 "\n"
 "Чи маєте Ви диск підтримки для налаштування?"
 
-#: any.pm:166
+#: any.pm:120
 #, c-format
 msgid "CD-ROM"
 msgstr "CD-ROM"
 
-#: any.pm:167
+#: any.pm:121
 #, c-format
 msgid "Network (HTTP)"
 msgstr "Мережа (HTTP)"
 
-#: any.pm:168
+#: any.pm:122
 #, c-format
 msgid "Network (FTP)"
 msgstr "Мережа (FTP)"
 
-#: any.pm:169
+#: any.pm:123
 #, c-format
 msgid "Network (NFS)"
 msgstr "Мережа (NFS)"
 
-#: any.pm:211
+#: any.pm:163
 #, c-format
 msgid "URL of the mirror?"
 msgstr "Посилання на дзеркало?"
 
-#: any.pm:217
+#: any.pm:169
 #, c-format
 msgid "URL must start with ftp:// or http://"
 msgstr "Посилання має починатися з ftp:// або http://"
 
-#: any.pm:228
+#: any.pm:180
 #, c-format
-msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
-msgstr "Зв'язуюсь з веб-сайтом Mandriva Linux, щоб отримати список наявних джерел..."
+msgid ""
+"Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgstr ""
+"Зв'язуюсь з веб-сайтом Mandriva Linux, щоб отримати список наявних джерел..."
 
-#: any.pm:233
+#: any.pm:185
 #, c-format
 msgid ""
 "Failed contacting Mandriva Linux web site to get the list of available "
 "mirrors"
-msgstr "Помилка зв'язку з веб-сайтом Mandriva Linux, щоб отримати список наявних джерел..."
+msgstr ""
+"Помилка зв'язку з веб-сайтом Mandriva Linux, щоб отримати список наявних "
+"джерел..."
 
-#: any.pm:243
+#: any.pm:195
 #, c-format
 msgid "Choose a mirror from which to get the packages"
 msgstr "Виберіть сервер, з якого звантажити пакунки"
 
-#: any.pm:273
+#: any.pm:225
 #, c-format
 msgid "NFS setup"
 msgstr "встановлення NFS"
 
-#: any.pm:274
+#: any.pm:226
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
 msgstr "Введіть назву машини або теку з носієм NFS"
 
-#: any.pm:278
+#: any.pm:230
 #, c-format
 msgid "Hostname missing"
 msgstr "Немає назви машини"
 
-#: any.pm:279
+#: any.pm:231
 #, c-format
 msgid "Directory must begin with \"/\""
 msgstr "Тека повинна починатися з \"/\""
 
-#: any.pm:283
+#: any.pm:235
 #, c-format
 msgid "Hostname of the NFS mount ?"
 msgstr "Назва комп'ютера для монтування NFS?"
 
-#: any.pm:284
+#: any.pm:236
 #, c-format
 msgid "Directory"
 msgstr "Тека"
 
-#: any.pm:306
+#: any.pm:258
 #, c-format
 msgid "Supplementary"
 msgstr "Додатковий"
 
-#: any.pm:341
+#: any.pm:293
 #, c-format
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
@@ -156,23 +161,23 @@ msgstr ""
 "Неможливо знайти перелік пакунків на цьому дзеркалі. Переконайтеся, чи "
 "правильне розташування."
 
-#: any.pm:375
+#: any.pm:327
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Переглядається список вже встановлених пакунків..."
 
-#: any.pm:382
+#: any.pm:334
 #, c-format
 msgid "Removing packages prior to upgrade..."
 msgstr "Вилучення пакунків перед поновленням..."
 
-#: any.pm:424
+#: any.pm:376
 #, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Шукаю пакунки для поновлення..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:620
+#: any.pm:561
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -196,7 +201,7 @@ msgstr ""
 "Ви хочете дозволити встановлення цих серверів?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:643
+#: any.pm:584
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -210,72 +215,72 @@ msgstr ""
 "\n"
 "Ви справді хочете вилучити ці пакунки?\n"
 
-#: any.pm:857
+#: any.pm:798
 #, c-format
 msgid "Error reading file %s"
 msgstr "Помилка при читанні файла %s"
 
-#: any.pm:1065
+#: any.pm:1005
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Назву наступних дисків було змінено:"
 
-#: any.pm:1067
+#: any.pm:1007
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (попередня назва %s)"
 
-#: any.pm:1124
+#: any.pm:1064
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1124
+#: any.pm:1064
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1124
+#: any.pm:1064
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1143 steps_interactive.pm:923
+#: any.pm:1083 steps_interactive.pm:978
 #, c-format
 msgid "Network"
 msgstr "Мережа"
 
-#: any.pm:1147
+#: any.pm:1087
 #, c-format
 msgid "Please choose a media"
 msgstr "Будь ласка, виберіть носій"
 
-#: any.pm:1163
+#: any.pm:1103
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Файл вже існує. Переписати?"
 
-#: any.pm:1167
+#: any.pm:1107
 #, c-format
 msgid "Permission denied"
 msgstr "Доступ заборонено"
 
-#: any.pm:1215
+#: any.pm:1155
 #, c-format
 msgid "Bad NFS name"
 msgstr "Неправильна назва NFS"
 
-#: any.pm:1236
+#: any.pm:1176
 #, c-format
 msgid "Bad media %s"
 msgstr "Поганий носій %s"
 
-#: any.pm:1279
+#: any.pm:1219
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Не можу робити знімки екрану перед розбиттям на розділи"
 
-#: any.pm:1287
+#: any.pm:1227
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Знімки екрану стануть можливими після встановлення в %s"
@@ -290,7 +295,7 @@ msgstr "Встановлення"
 msgid "Configuration"
 msgstr "Конфігурація"
 
-#: install2.pm:166
+#: install2.pm:168
 #, c-format
 msgid "You must also format %s"
 msgstr "Вам потрібно також відформатувати %s"
@@ -331,32 +336,32 @@ msgstr "Копіювання деяких пакунків на диски дл�
 msgid "Copying in progress"
 msgstr "Триває копіювання"
 
-#: pkgs.pm:28
+#: pkgs.pm:29
 #, c-format
 msgid "must have"
 msgstr "повинен мати"
 
-#: pkgs.pm:29
+#: pkgs.pm:30
 #, c-format
 msgid "important"
 msgstr "важливий"
 
-#: pkgs.pm:30
+#: pkgs.pm:31
 #, c-format
 msgid "very nice"
 msgstr "дуже гарний"
 
-#: pkgs.pm:31
+#: pkgs.pm:32
 #, c-format
 msgid "nice"
 msgstr "гарно"
 
-#: pkgs.pm:32
+#: pkgs.pm:33
 #, c-format
 msgid "maybe"
 msgstr "можливо"
 
-#: pkgs.pm:254
+#: pkgs.pm:253
 #, c-format
 msgid ""
 "Some packages requested by %s cannot be installed:\n"
@@ -633,7 +638,8 @@ msgstr "Робоча станція Gnome"
 msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
 "tools"
-msgstr "Графічне середовище з дружнім інтерфейсом та програмами, засоби для стільниці"
+msgstr ""
+"Графічне середовище з дружнім інтерфейсом та програмами, засоби для стільниці"
 
 #: share/meta-task/compssUsers.pl:142
 #, c-format
@@ -699,7 +705,7 @@ msgstr ""
 "Сталася помилка, але я не знаю, як її обробити.\n"
 "Продовжуйте на свій власний ризик."
 
-#: steps.pm:436
+#: steps.pm:437
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -726,12 +732,12 @@ msgstr "Встановлення Мандріва лінакс %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> між елементами"
 
-#: steps_gtk.pm:82
+#: steps_gtk.pm:84
 #, c-format
 msgid "Xorg server is slow to start. Please wait..."
 msgstr "Сервер Xorg стартує повільно. Зачекайте..."
 
-#: steps_gtk.pm:192
+#: steps_gtk.pm:194
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -744,73 +750,73 @@ msgstr ""
 "текстовому режимі. Для цього під час завантаження з компакт-диску\n"
 "натисніть F1 і потім введіть \"text\"."
 
-#: steps_gtk.pm:259 steps_interactive.pm:435 steps_interactive.pm:564
+#: steps_gtk.pm:261 steps_interactive.pm:490 steps_interactive.pm:619
 #: steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "Вибір груп пакунків"
 
-#: steps_gtk.pm:280 steps_interactive.pm:581
+#: steps_gtk.pm:282 steps_interactive.pm:636
 #, c-format
 msgid "Individual package selection"
 msgstr "Індивідуальний вибір пакунків"
 
-#: steps_gtk.pm:302 steps_interactive.pm:507
+#: steps_gtk.pm:304 steps_interactive.pm:562
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Загальний розмір: %d / %d Мб "
 
-#: steps_gtk.pm:347
+#: steps_gtk.pm:349
 #, c-format
 msgid "Bad package"
 msgstr "Поганий пакунок"
 
-#: steps_gtk.pm:349
+#: steps_gtk.pm:351
 #, c-format
 msgid "Version: "
 msgstr "Версія: "
 
-#: steps_gtk.pm:350
+#: steps_gtk.pm:352
 #, c-format
 msgid "Size: "
 msgstr "Розмір: "
 
-#: steps_gtk.pm:350
+#: steps_gtk.pm:352
 #, c-format
 msgid "%d KB\n"
 msgstr "%d Кб\n"
 
-#: steps_gtk.pm:351
+#: steps_gtk.pm:353
 #, c-format
 msgid "Importance: "
 msgstr "Важливість: "
 
-#: steps_gtk.pm:385
+#: steps_gtk.pm:387
 #, c-format
 msgid "You can not select/unselect this package"
 msgstr "Ви не можете вибрати або відмінити вибір цього пакунка."
 
-#: steps_gtk.pm:389
+#: steps_gtk.pm:391
 #, c-format
 msgid "due to missing %s"
 msgstr "через відсутність %s"
 
-#: steps_gtk.pm:390
+#: steps_gtk.pm:392
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "через незадоволеність %s"
 
-#: steps_gtk.pm:391
+#: steps_gtk.pm:393
 #, c-format
 msgid "trying to promote %s"
 msgstr "пробую активізувати %s"
 
-#: steps_gtk.pm:392
+#: steps_gtk.pm:394
 #, c-format
 msgid "in order to keep %s"
 msgstr "щоб залишити %s"
 
-#: steps_gtk.pm:397
+#: steps_gtk.pm:399
 #, c-format
 msgid ""
 "You can not select this package as there is not enough space left to install "
@@ -819,87 +825,87 @@ msgstr ""
 "Ви не можете вибрати цей пакунок, бо для його встановлення не залишилося "
 "достатньо вільного місця."
 
-#: steps_gtk.pm:400
+#: steps_gtk.pm:402
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "Ці пакунки буде встановлено"
 
-#: steps_gtk.pm:401
+#: steps_gtk.pm:403
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "Наступні пакунки буде вилучено"
 
-#: steps_gtk.pm:426
+#: steps_gtk.pm:428
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
 msgstr "Цей пакунок необхідний, його вибір відмінити не можна"
 
-#: steps_gtk.pm:428
+#: steps_gtk.pm:430
 #, c-format
 msgid "You can not unselect this package. It is already installed"
 msgstr "Вибір цього пакунка неможливо відмінити. Його вже встановлено."
 
-#: steps_gtk.pm:430
+#: steps_gtk.pm:432
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
 msgstr "Вибір цього пакунка неможливо відмінити. Він повинен бути поновлений."
 
-#: steps_gtk.pm:434
+#: steps_gtk.pm:436
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "Показувати автоматично вибрані пакунки"
 
-#: steps_gtk.pm:436
+#: steps_gtk.pm:438
 #, c-format
 msgid "Install"
 msgstr "Встановлення"
 
-#: steps_gtk.pm:439
+#: steps_gtk.pm:441
 #, c-format
 msgid "Load/Save selection"
 msgstr "Завантажити/зберегти виділене"
 
-#: steps_gtk.pm:440
+#: steps_gtk.pm:442
 #, c-format
 msgid "Updating package selection"
 msgstr "Поновлення вибору пакунків"
 
-#: steps_gtk.pm:445
+#: steps_gtk.pm:447
 #, c-format
 msgid "Minimal install"
 msgstr "Мінімальне встановлення"
 
-#: steps_gtk.pm:459
+#: steps_gtk.pm:461
 #, c-format
 msgid "Software Management"
 msgstr "Менеджер програм"
 
-#: steps_gtk.pm:459 steps_interactive.pm:393
+#: steps_gtk.pm:461 steps_interactive.pm:448
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Виберіть пакунки, які Ви хочете встановити"
 
-#: steps_gtk.pm:476 steps_interactive.pm:595 steps_list.pm:32
+#: steps_gtk.pm:478 steps_interactive.pm:650 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "Встановлюю"
 
-#: steps_gtk.pm:502
+#: steps_gtk.pm:504
 #, c-format
 msgid "No details"
 msgstr "Загально"
 
-#: steps_gtk.pm:517
+#: steps_gtk.pm:519
 #, c-format
 msgid "Time remaining "
 msgstr "Залишок часу "
 
-#: steps_gtk.pm:518
+#: steps_gtk.pm:520
 #, c-format
 msgid "(estimating...)"
 msgstr "(наближене обчислення...)"
 
-#: steps_gtk.pm:545
+#: steps_gtk.pm:547
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
@@ -907,22 +913,22 @@ msgstr[0] "%d пакунок"
 msgstr[1] "%d пакунки"
 msgstr[2] "%d пакунків"
 
-#: steps_gtk.pm:591 steps_interactive.pm:783 steps_list.pm:43
+#: steps_gtk.pm:593 steps_interactive.pm:838 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Загалом"
 
-#: steps_gtk.pm:608
+#: steps_gtk.pm:610
 #, c-format
 msgid "Configure"
 msgstr "Налаштувати"
 
-#: steps_gtk.pm:625 steps_interactive.pm:779 steps_interactive.pm:935
+#: steps_gtk.pm:627 steps_interactive.pm:834 steps_interactive.pm:990
 #, c-format
 msgid "not configured"
 msgstr "не налаштовано"
 
-#: steps_gtk.pm:661 steps_interactive.pm:278
+#: steps_gtk.pm:664 steps_interactive.pm:332
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -931,7 +937,7 @@ msgstr ""
 "Було знайдено наступні носії встановлення.\n"
 "Якщо Ви не хочете використовувати деякі з них, відмініть їх вибір."
 
-#: steps_gtk.pm:670 steps_interactive.pm:284
+#: steps_gtk.pm:674 steps_interactive.pm:338
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -944,7 +950,7 @@ msgstr ""
 "Після цього встановлення продовжиться з твердого диску і пакунки залишаться "
 "доступними після повного встановлення системи."
 
-#: steps_gtk.pm:672 steps_interactive.pm:286
+#: steps_gtk.pm:676 steps_interactive.pm:340
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Копіювати компакт-диски повністю."
@@ -964,54 +970,81 @@ msgstr "Будь ласка, виберіть розкладку клавіат�
 msgid "Here is the full list of available keyboards"
 msgstr "Тут наведено повний список можливих мап клавіатури"
 
-#: steps_interactive.pm:129
+#: steps_interactive.pm:134
 #, c-format
 msgid "Install/Upgrade"
 msgstr "Встановити/Поновити"
 
-#: steps_interactive.pm:130
+#: steps_interactive.pm:135
 #, c-format
 msgid "Is this an install or an upgrade?"
 msgstr "Це встановлення чи поновлення?"
 
-#: steps_interactive.pm:134
+#: steps_interactive.pm:139
 #, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
 msgstr "Встановлення"
 
-#: steps_interactive.pm:136
+#: steps_interactive.pm:141
 #, c-format
 msgid "Upgrade %s"
 msgstr "Поновити %s"
 
-#: steps_interactive.pm:140
+#: steps_interactive.pm:145
 #, c-format
 msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 msgstr "Поновлення системи з 32 біт до 64 не підтримується"
 
-#: steps_interactive.pm:144
+#: steps_interactive.pm:149
 #, c-format
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 msgstr "Поновлення системи з 64 біт до 32 не підтримується"
 
-#: steps_interactive.pm:158
+#: steps_interactive.pm:168
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Ключ шифрування для %s"
 
-#: steps_interactive.pm:194
+#: steps_interactive.pm:200
+#, c-format
+msgid "Cancel installation, reboot system"
+msgstr ""
+
+#: steps_interactive.pm:201
+#, fuzzy, c-format
+msgid "New Installation"
+msgstr "Встановлення"
+
+#: steps_interactive.pm:202
+#, c-format
+msgid "Upgrade previous installation (not recommended)"
+msgstr ""
+
+#: steps_interactive.pm:206
+#, c-format
+msgid ""
+"Installer have detected your installed Mandriva Linux system could not\n"
+"safely be upgraded to %s.\n"
+"\n"
+"New installation replacing your previous one is recommended.\n"
+"\n"
+"Warning : you should backup all your personal data before choosing \"New\n"
+"Installation\"."
+msgstr ""
+
+#: steps_interactive.pm:248
 #, c-format
 msgid "IDE"
 msgstr "IDE"
 
-#: steps_interactive.pm:194
+#: steps_interactive.pm:248
 #, c-format
 msgid "Configuring IDE"
 msgstr "Налаштування IDE"
 
-#: steps_interactive.pm:231
+#: steps_interactive.pm:285
 #, c-format
 msgid ""
 "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1021,7 +1054,7 @@ msgstr ""
 "буде продовжуватись, але для завантаження своєї системи Вам потрібно\n"
 "буде створити DiskDrake'ом завантажувальний розділ"
 
-#: steps_interactive.pm:236
+#: steps_interactive.pm:290
 #, c-format
 msgid ""
 "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
@@ -1032,7 +1065,7 @@ msgstr ""
 "буде продовжуватись, але для завантаження системи потрібно буде створити "
 "DiskDrake'ом завантажувальний розділ"
 
-#: steps_interactive.pm:328
+#: steps_interactive.pm:382
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -1046,21 +1079,21 @@ msgstr ""
 "Якщо Ви не маєте такого диску, натисніть Скасувати, щоб не\n"
 "встановлювати з цього диску."
 
-#: steps_interactive.pm:350
+#: steps_interactive.pm:404
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Шукаю наявні пакунки..."
 
-#: steps_interactive.pm:358
+#: steps_interactive.pm:412
 #, c-format
 msgid ""
 "Your system does not have enough space left for installation or upgrade (%"
 "dMB > %dMB)"
 msgstr ""
-"У Вашій системі не залишилося достатньо місця для встановлення або поновлення (%"
-"dМб > %dМб)"
+"У Вашій системі не залишилося достатньо місця для встановлення або "
+"поновлення (%dМб > %dМб)"
 
-#: steps_interactive.pm:405
+#: steps_interactive.pm:460
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1069,52 +1102,54 @@ msgstr ""
 "Будь ласка, виберіть, завантажити чи записати вибір пакунків.\n"
 "Формат такий самий, як для файлів auto_install."
 
-#: steps_interactive.pm:407
+#: steps_interactive.pm:462
 #, c-format
 msgid "Load"
 msgstr "Завантаження"
 
-#: steps_interactive.pm:407
+#: steps_interactive.pm:462
 #, c-format
 msgid "Save"
 msgstr "Зберегти"
 
-#: steps_interactive.pm:415
+#: steps_interactive.pm:470
 #, c-format
 msgid "Bad file"
 msgstr "Поганий файл"
 
-#: steps_interactive.pm:431
+#: steps_interactive.pm:486
 #, c-format
 msgid "Install Mandriva KDE Desktop"
 msgstr "Вставити робочу станцію Mandriva KDE"
 
-#: steps_interactive.pm:432
+#: steps_interactive.pm:487
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
 msgstr "Вставити робочу станцію Mandriva GNOME"
 
-#: steps_interactive.pm:433
+#: steps_interactive.pm:488
 #, c-format
 msgid "Custom install"
 msgstr "Вибіркове встановлення"
 
-#: steps_interactive.pm:436
+#: steps_interactive.pm:491
 #, c-format
 msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
-msgstr "Ви можете вибрати профіль стільниці робочої станції: KDE, GNOME або вибірковий"
+msgstr ""
+"Ви можете вибрати профіль стільниці робочої станції: KDE, GNOME або "
+"вибірковий"
 
-#: steps_interactive.pm:521
+#: steps_interactive.pm:576
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "Вибраний розмір більший за наявний "
 
-#: steps_interactive.pm:536
+#: steps_interactive.pm:591
 #, c-format
 msgid "Type of install"
 msgstr "Тип встановлення"
 
-#: steps_interactive.pm:537
+#: steps_interactive.pm:592
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1123,82 +1158,82 @@ msgstr ""
 "Ви не вказали жодної групи пакунків.\n"
 "Будь ласка, вкажіть мінімальне встановлення, яке Ви хочете:"
 
-#: steps_interactive.pm:540
+#: steps_interactive.pm:595
 #, c-format
 msgid "With X"
 msgstr "Разом з Х"
 
-#: steps_interactive.pm:541
+#: steps_interactive.pm:596
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "З основною документацією (рекомендується!)"
 
-#: steps_interactive.pm:542
+#: steps_interactive.pm:597
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Насправді мінімальне встановлення (навіть без urpmi)"
 
-#: steps_interactive.pm:596
+#: steps_interactive.pm:651
 #, c-format
 msgid "Preparing installation"
 msgstr "Підготовка встановлення"
 
-#: steps_interactive.pm:604
+#: steps_interactive.pm:659
 #, c-format
 msgid "Installing package %s"
 msgstr "Встановлюється пакунок %s"
 
-#: steps_interactive.pm:628
+#: steps_interactive.pm:683
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Сталася помилка під час сортування пакунків: "
 
-#: steps_interactive.pm:628
+#: steps_interactive.pm:683
 #, c-format
 msgid "Go on anyway?"
 msgstr "Все-таки продовжувати?"
 
-#: steps_interactive.pm:632
+#: steps_interactive.pm:687
 #, c-format
 msgid "Retry"
 msgstr "Ще раз"
 
-#: steps_interactive.pm:633
+#: steps_interactive.pm:688
 #, c-format
 msgid "Skip this package"
 msgstr "Пропустити цей пакунок"
 
-#: steps_interactive.pm:634
+#: steps_interactive.pm:689
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "Пропустити усі пакунки з носія \"%s\""
 
-#: steps_interactive.pm:635
+#: steps_interactive.pm:690
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "Повернутися до вибору носіїв і пакунків"
 
-#: steps_interactive.pm:638
+#: steps_interactive.pm:693
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "Сталася помилка під час встановлення пакунка %s."
 
-#: steps_interactive.pm:656
+#: steps_interactive.pm:711
 #, c-format
 msgid "Post-install configuration"
 msgstr "Налаштування після встановлення"
 
-#: steps_interactive.pm:663
+#: steps_interactive.pm:718
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "Переконайтеся, чи джерело Update Modules знаходиться в носії %s"
 
-#: steps_interactive.pm:691 steps_list.pm:47
+#: steps_interactive.pm:746 steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "Поновлення"
 
-#: steps_interactive.pm:692
+#: steps_interactive.pm:747
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1219,39 +1254,38 @@ msgstr ""
 "\n"
 "Ви хочете встановити ці поновлення?"
 
-#: steps_interactive.pm:714
+#: steps_interactive.pm:769
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Зв'язуюсь з сервером, щоб прочитати список наявних пакунків..."
 
-#: steps_interactive.pm:720
+#: steps_interactive.pm:775
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr "Неможливо з'єднатися з дзеркалом %s"
 
-#. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:826
+#: steps_interactive.pm:881
 #, c-format
 msgid "%s on %s"
 msgstr "%s на %s"
 
-#: steps_interactive.pm:860 steps_interactive.pm:867 steps_interactive.pm:881
-#: steps_interactive.pm:899 steps_interactive.pm:914
+#: steps_interactive.pm:915 steps_interactive.pm:922 steps_interactive.pm:936
+#: steps_interactive.pm:954 steps_interactive.pm:969
 #, c-format
 msgid "Hardware"
 msgstr "Залізо"
 
-#: steps_interactive.pm:882 steps_interactive.pm:900
+#: steps_interactive.pm:937 steps_interactive.pm:955
 #, c-format
 msgid "Sound card"
 msgstr "Звукова плата"
 
-#: steps_interactive.pm:903
+#: steps_interactive.pm:958
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Чи маєте Ви звукові карти ISA?"
 
-#: steps_interactive.pm:905
+#: steps_interactive.pm:960
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -1260,62 +1294,62 @@ msgstr ""
 "Виконайте \"alsaconf\" або \"sndconfig\" після встановлення, щоб налаштувати "
 "звукову карту"
 
-#: steps_interactive.pm:907
+#: steps_interactive.pm:962
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr "Звукових карт не виявлено. Спробуйте \"harddrake\" після встановлення"
 
-#: steps_interactive.pm:915
+#: steps_interactive.pm:970
 #, c-format
 msgid "Graphical interface"
 msgstr "Графічний інтерфейс"
 
-#: steps_interactive.pm:922 steps_interactive.pm:933
+#: steps_interactive.pm:977 steps_interactive.pm:988
 #, c-format
 msgid "Network & Internet"
 msgstr "Мережа та Інтернет"
 
-#: steps_interactive.pm:934
+#: steps_interactive.pm:989
 #, c-format
 msgid "Proxies"
 msgstr "Проксі"
 
-#: steps_interactive.pm:935
+#: steps_interactive.pm:990
 #, c-format
 msgid "configured"
 msgstr "налаштовано"
 
-#: steps_interactive.pm:945
+#: steps_interactive.pm:1000
 #, c-format
 msgid "Security Level"
 msgstr "Рівень безпеки"
 
-#: steps_interactive.pm:964
+#: steps_interactive.pm:1019
 #, c-format
 msgid "Firewall"
 msgstr "Захисний шлюз"
 
-#: steps_interactive.pm:968
+#: steps_interactive.pm:1023
 #, c-format
 msgid "activated"
 msgstr "увімкнено"
 
-#: steps_interactive.pm:968
+#: steps_interactive.pm:1023
 #, c-format
 msgid "disabled"
 msgstr "відімкнено"
 
-#: steps_interactive.pm:982
+#: steps_interactive.pm:1037
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Ви не сконфігурували X. Ви впевнені, що дійсно цього хочете?"
 
-#: steps_interactive.pm:1009
+#: steps_interactive.pm:1064
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Підготовлюю завантажувач..."
 
-#: steps_interactive.pm:1019
+#: steps_interactive.pm:1074
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1329,12 +1363,12 @@ msgstr ""
 "завантаження Вашої машини. Параметр ядра для кореневої файлової системи: "
 "root=%s"
 
-#: steps_interactive.pm:1025
+#: steps_interactive.pm:1080
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "Чи Ви хочете використовувати aboot?"
 
-#: steps_interactive.pm:1028
+#: steps_interactive.pm:1083
 #, c-format
 msgid ""
 "Error installing aboot, \n"
@@ -1343,7 +1377,7 @@ msgstr ""
 "Помилка при встановленні aboot,\n"
 "спробувати встановити примусово, навіть якщо це зруйнує перший розділ?"
 
-#: steps_interactive.pm:1040
+#: steps_interactive.pm:1095
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1352,17 +1386,17 @@ msgstr ""
 "На цьому рівні безпеки доступ до файлів на розділі Windows дозволений тільки "
 "адміністратору."
 
-#: steps_interactive.pm:1072
+#: steps_interactive.pm:1127
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Вставте чисту дискету в дисковод %s"
 
-#: steps_interactive.pm:1074
+#: steps_interactive.pm:1129
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Створення дискети для автоматичного встановлення..."
 
-#: steps_interactive.pm:1085
+#: steps_interactive.pm:1140
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1373,22 +1407,22 @@ msgstr ""
 "\n"
 "Ви дійсно хочете припинити зараз?"
 
-#: steps_interactive.pm:1095
+#: steps_interactive.pm:1150
 #, c-format
 msgid "Congratulations"
 msgstr "Вітання"
 
-#: steps_interactive.pm:1099
+#: steps_interactive.pm:1154
 #, c-format
 msgid "Reboot"
 msgstr "Перезавантажити"
 
-#: steps_interactive.pm:1103 steps_interactive.pm:1104
+#: steps_interactive.pm:1158 steps_interactive.pm:1159
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "Створити дискету для автовстановлення"
 
-#: steps_interactive.pm:1105
+#: steps_interactive.pm:1160
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"
@@ -1404,17 +1438,17 @@ msgstr ""
 "\n"
 "Можливо, Ви захочете повторити встановлення.\n"
 
-#: steps_interactive.pm:1110
+#: steps_interactive.pm:1165
 #, c-format
 msgid "Replay"
 msgstr "Повторити"
 
-#: steps_interactive.pm:1110
+#: steps_interactive.pm:1165
 #, c-format
 msgid "Automated"
 msgstr "Автоматизована"
 
-#: steps_interactive.pm:1113
+#: steps_interactive.pm:1168
 #, c-format
 msgid "Save packages selection"
 msgstr "Зберегти вибір пакунків"
@@ -1557,4 +1591,3 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "Вийти"
-

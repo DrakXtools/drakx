@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-21 20:52+0100\n"
+"POT-Creation-Date: 2008-07-20 04:44+0200\n"
 "PO-Revision-Date: 2008-02-29 18:31+0200\n"
 "Last-Translator: Thomas Backlund <tmb@mandriva.org>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -55,7 +55,7 @@ msgid "Do you have further supplementary media?"
 msgstr "Onko sinulla muita asennuksen lisälevyä?"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:158
+#: any.pm:112
 #, c-format
 msgid ""
 "The following media have been found and will be used during install: %s.\n"
@@ -68,44 +68,44 @@ msgstr ""
 "\n"
 "Onko sinulla lisää lähteitä jotka haluat määrittää?"
 
-#: any.pm:166
+#: any.pm:120
 #, c-format
 msgid "CD-ROM"
 msgstr "CD-ROM"
 
-#: any.pm:167
+#: any.pm:121
 #, c-format
 msgid "Network (HTTP)"
 msgstr "Verkko (HTTP)"
 
-#: any.pm:168
+#: any.pm:122
 #, c-format
 msgid "Network (FTP)"
 msgstr "Verkko (FTP)"
 
-#: any.pm:169
+#: any.pm:123
 #, c-format
 msgid "Network (NFS)"
 msgstr "Verkko (NFS)"
 
-#: any.pm:211
+#: any.pm:163
 #, c-format
 msgid "URL of the mirror?"
 msgstr "Peilipalvelimen URL?"
 
-#: any.pm:217
+#: any.pm:169
 #, c-format
 msgid "URL must start with ftp:// or http://"
 msgstr "URL pitää alkaa ftp:// tai http://"
 
-#: any.pm:228
+#: any.pm:180
 #, c-format
 msgid ""
 "Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr ""
 "Otetaan yhteys Mandriva Linuxin sivustolle peilipalvelinlistan saamiseksi..."
 
-#: any.pm:233
+#: any.pm:185
 #, c-format
 msgid ""
 "Failed contacting Mandriva Linux web site to get the list of available "
@@ -114,70 +114,70 @@ msgstr ""
 "Yhteydenotto Mandriva Linuxin sivustolle peilipalvelinlistan saamiseksi "
 "epäonnistui"
 
-#: any.pm:243
+#: any.pm:195
 #, c-format
 msgid "Choose a mirror from which to get the packages"
 msgstr "Valitse peilipalvelin josta paketit haetaan"
 
-#: any.pm:273
+#: any.pm:225
 #, c-format
 msgid "NFS setup"
 msgstr "NFS Asetus"
 
-#: any.pm:274
+#: any.pm:226
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
 msgstr "Syötä NFS-palvelimesi nimi ja hakemistopolku"
 
-#: any.pm:278
+#: any.pm:230
 #, c-format
 msgid "Hostname missing"
 msgstr "Palvelimen osoite puuttuu"
 
-#: any.pm:279
+#: any.pm:231
 #, c-format
 msgid "Directory must begin with \"/\""
 msgstr "Hakemistopolun täytyy alkaa \"/\"-merkillä"
 
-#: any.pm:283
+#: any.pm:235
 #, c-format
 msgid "Hostname of the NFS mount ?"
 msgstr "NFS-liitoksen palvelimen nimi?"
 
-#: any.pm:284
+#: any.pm:236
 #, c-format
 msgid "Directory"
 msgstr "Kansio"
 
-#: any.pm:306
+#: any.pm:258
 #, c-format
 msgid "Supplementary"
 msgstr "Lisämedia"
 
-#: any.pm:341
+#: any.pm:293
 #, c-format
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
 "correct."
 msgstr "En löydä hdlist tiedostoa tässä peilipalvelimessa."
 
-#: any.pm:375
+#: any.pm:327
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Etsitään jo asennettuja paketteja..."
 
-#: any.pm:382
+#: any.pm:334
 #, c-format
 msgid "Removing packages prior to upgrade..."
 msgstr "Poistetaan paketteja ennen päivitystä..."
 
-#: any.pm:424
+#: any.pm:376
 #, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Etsitään päivitettäviä paketteja..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:620
+#: any.pm:561
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -202,7 +202,7 @@ msgstr ""
 "Haluatko todella asentaa nämä palvelimet?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:643
+#: any.pm:584
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -215,72 +215,72 @@ msgstr ""
 "\n"
 "Haluatko varmasti poistaa nämä paketit?\n"
 
-#: any.pm:857
+#: any.pm:798
 #, c-format
 msgid "Error reading file %s"
 msgstr "Virhe lukiessa tiedostoa %s"
 
-#: any.pm:1065
+#: any.pm:1005
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Seuraava(t) levy(t) uudelleennimettiin:"
 
-#: any.pm:1067
+#: any.pm:1007
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (oli ennen nimetty %s)"
 
-#: any.pm:1124
+#: any.pm:1064
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1124
+#: any.pm:1064
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1124
+#: any.pm:1064
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1143 steps_interactive.pm:923
+#: any.pm:1083 steps_interactive.pm:978
 #, c-format
 msgid "Network"
 msgstr "Verkko"
 
-#: any.pm:1147
+#: any.pm:1087
 #, c-format
 msgid "Please choose a media"
 msgstr "Ole hyvä ja valitse media"
 
-#: any.pm:1163
+#: any.pm:1103
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Tiedosto jo olemassa. Korvaa?"
 
-#: any.pm:1167
+#: any.pm:1107
 #, c-format
 msgid "Permission denied"
 msgstr "Ei oikeuksia"
 
-#: any.pm:1215
+#: any.pm:1155
 #, c-format
 msgid "Bad NFS name"
 msgstr "Virheellinen NFS-nimi"
 
-#: any.pm:1236
+#: any.pm:1176
 #, c-format
 msgid "Bad media %s"
 msgstr "Huono media %s"
 
-#: any.pm:1279
+#: any.pm:1219
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Kuvakaappauksia ei voida tehdä ennen osiointia"
 
-#: any.pm:1287
+#: any.pm:1227
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Kuvakaappaukset löytyvät asennuksen jälkeen hakemistosta %s"
@@ -295,7 +295,7 @@ msgstr "Asennus"
 msgid "Configuration"
 msgstr "Asetustyökalut"
 
-#: install2.pm:166
+#: install2.pm:168
 #, c-format
 msgid "You must also format %s"
 msgstr "Sinun täytyy myös alustaa %s"
@@ -334,32 +334,32 @@ msgstr "Kopioin paketteja kovalevylle myöhempään käyttöön"
 msgid "Copying in progress"
 msgstr "Kopiointi käynnissä"
 
-#: pkgs.pm:28
+#: pkgs.pm:29
 #, c-format
 msgid "must have"
 msgstr "pakollinen"
 
-#: pkgs.pm:29
+#: pkgs.pm:30
 #, c-format
 msgid "important"
 msgstr "tärkeä"
 
-#: pkgs.pm:30
+#: pkgs.pm:31
 #, c-format
 msgid "very nice"
 msgstr "erittäin hyvä"
 
-#: pkgs.pm:31
+#: pkgs.pm:32
 #, c-format
 msgid "nice"
 msgstr "hyvä"
 
-#: pkgs.pm:32
+#: pkgs.pm:33
 #, c-format
 msgid "maybe"
 msgstr "ehkä"
 
-#: pkgs.pm:254
+#: pkgs.pm:253
 #, c-format
 msgid ""
 "Some packages requested by %s cannot be installed:\n"
@@ -703,7 +703,7 @@ msgstr ""
 "Ilmeni virhe, eikä sitä ei voida käsitellä kunnolla.\n"
 "Jatka omalla vastuullasi."
 
-#: steps.pm:436
+#: steps.pm:437
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -730,12 +730,12 @@ msgstr "Mandriva Linux asennus %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> vaihtaa elementtiä"
 
-#: steps_gtk.pm:82
+#: steps_gtk.pm:84
 #, c-format
 msgid "Xorg server is slow to start. Please wait..."
 msgstr "Xorg palvelin on hidas käynnistää. Odota..."
 
-#: steps_gtk.pm:192
+#: steps_gtk.pm:194
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -749,75 +749,75 @@ msgstr ""
 "Tehdäksesi niin paina `F1' kun käynnistät asennusohjelmaa CD-ROM:lta.\n"
 "Tämän jälkeen kirjoita `text'."
 
-#: steps_gtk.pm:259 steps_interactive.pm:435 steps_interactive.pm:564
+#: steps_gtk.pm:261 steps_interactive.pm:490 steps_interactive.pm:619
 #: steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "Pakettiryhmien valinta"
 
-#: steps_gtk.pm:280 steps_interactive.pm:581
+#: steps_gtk.pm:282 steps_interactive.pm:636
 #, c-format
 msgid "Individual package selection"
 msgstr "Yksittäisten pakettien valinta"
 
 # mat
-#: steps_gtk.pm:302 steps_interactive.pm:507
+#: steps_gtk.pm:304 steps_interactive.pm:562
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Koko yhteensä: %d / %d Mt"
 
-#: steps_gtk.pm:347
+#: steps_gtk.pm:349
 #, c-format
 msgid "Bad package"
 msgstr "Viallinen paketti"
 
-#: steps_gtk.pm:349
+#: steps_gtk.pm:351
 #, c-format
 msgid "Version: "
 msgstr "Versio: "
 
 # mat
-#: steps_gtk.pm:350
+#: steps_gtk.pm:352
 #, c-format
 msgid "Size: "
 msgstr "Koko: "
 
-#: steps_gtk.pm:350
+#: steps_gtk.pm:352
 #, c-format
 msgid "%d KB\n"
 msgstr "%d kt\n"
 
-#: steps_gtk.pm:351
+#: steps_gtk.pm:353
 #, c-format
 msgid "Importance: "
 msgstr "Tärkeys: "
 
-#: steps_gtk.pm:385
+#: steps_gtk.pm:387
 #, c-format
 msgid "You can not select/unselect this package"
 msgstr "Et voi valita/poistaa tätä pakettia"
 
-#: steps_gtk.pm:389
+#: steps_gtk.pm:391
 #, c-format
 msgid "due to missing %s"
 msgstr "puuttuvista %s johtuen"
 
-#: steps_gtk.pm:390
+#: steps_gtk.pm:392
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "täyttämättömistä riippuvuuksista %s johtuen"
 
-#: steps_gtk.pm:391
+#: steps_gtk.pm:393
 #, c-format
 msgid "trying to promote %s"
 msgstr "yritetään asentaa %s"
 
-#: steps_gtk.pm:392
+#: steps_gtk.pm:394
 #, c-format
 msgid "in order to keep %s"
 msgstr "jotta %s voitaisiin säilyttää"
 
-#: steps_gtk.pm:397
+#: steps_gtk.pm:399
 #, c-format
 msgid ""
 "You can not select this package as there is not enough space left to install "
@@ -826,88 +826,88 @@ msgstr ""
 "Et voi asentaa tätä pakettia, koska levyllä ei ole tarpeeksi tilaa sen "
 "asentamiseksi"
 
-#: steps_gtk.pm:400
+#: steps_gtk.pm:402
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "Seuraavat paketit asennetaan"
 
-#: steps_gtk.pm:401
+#: steps_gtk.pm:403
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "Seuraavat paketit poistetaan"
 
-#: steps_gtk.pm:426
+#: steps_gtk.pm:428
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
 msgstr "Tämä on pakollinen paketti, sitä ei voida poistaa valinnoista"
 
-#: steps_gtk.pm:428
+#: steps_gtk.pm:430
 #, c-format
 msgid "You can not unselect this package. It is already installed"
 msgstr "Et voi poistaa tämän paketin valintaa. Se on jo asennettu"
 
-#: steps_gtk.pm:430
+#: steps_gtk.pm:432
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
 msgstr "Et voi poistaa tämän paketin valintaa. Paketti pitää päivittää."
 
-#: steps_gtk.pm:434
+#: steps_gtk.pm:436
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "Näytä automaattisesti valitut paketit"
 
-#: steps_gtk.pm:436
+#: steps_gtk.pm:438
 #, c-format
 msgid "Install"
 msgstr "Asenna"
 
-#: steps_gtk.pm:439
+#: steps_gtk.pm:441
 #, c-format
 msgid "Load/Save selection"
 msgstr "Lataa/Tallenna valinta"
 
-#: steps_gtk.pm:440
+#: steps_gtk.pm:442
 #, c-format
 msgid "Updating package selection"
 msgstr "Päivitän pakettien valintaa"
 
 # Asennuksen sivuvalikko
-#: steps_gtk.pm:445
+#: steps_gtk.pm:447
 #, c-format
 msgid "Minimal install"
 msgstr "Minimaalinen asennus"
 
-#: steps_gtk.pm:459
+#: steps_gtk.pm:461
 #, c-format
 msgid "Software Management"
 msgstr "Ohjelmistohallinta"
 
-#: steps_gtk.pm:459 steps_interactive.pm:393
+#: steps_gtk.pm:461 steps_interactive.pm:448
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Valitse asennettavat paketit"
 
-#: steps_gtk.pm:476 steps_interactive.pm:595 steps_list.pm:32
+#: steps_gtk.pm:478 steps_interactive.pm:650 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "Asennetaan"
 
-#: steps_gtk.pm:502
+#: steps_gtk.pm:504
 #, c-format
 msgid "No details"
 msgstr "Ei yksityiskohtia"
 
-#: steps_gtk.pm:517
+#: steps_gtk.pm:519
 #, c-format
 msgid "Time remaining "
 msgstr "Aikaa jäljellä "
 
-#: steps_gtk.pm:518
+#: steps_gtk.pm:520
 #, c-format
 msgid "(estimating...)"
 msgstr "(arvioidaan...)"
 
-#: steps_gtk.pm:545
+#: steps_gtk.pm:547
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
@@ -915,22 +915,22 @@ msgstr[0] "%d paketti"
 msgstr[1] "%d pakettia"
 
 # Asennuksen sivuvalikko
-#: steps_gtk.pm:591 steps_interactive.pm:783 steps_list.pm:43
+#: steps_gtk.pm:593 steps_interactive.pm:838 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Yhteenveto"
 
-#: steps_gtk.pm:608
+#: steps_gtk.pm:610
 #, c-format
 msgid "Configure"
 msgstr "Aseta"
 
-#: steps_gtk.pm:625 steps_interactive.pm:779 steps_interactive.pm:935
+#: steps_gtk.pm:627 steps_interactive.pm:834 steps_interactive.pm:990
 #, c-format
 msgid "not configured"
 msgstr "ei asetettu"
 
-#: steps_gtk.pm:661 steps_interactive.pm:278
+#: steps_gtk.pm:664 steps_interactive.pm:332
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -939,7 +939,7 @@ msgstr ""
 "Seuraavar asennusmediat on löydetty.\n"
 "Jos haluat ohittaa joku niistä, voit poistaa niiden valinta nyt."
 
-#: steps_gtk.pm:670 steps_interactive.pm:284
+#: steps_gtk.pm:674 steps_interactive.pm:338
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -952,7 +952,7 @@ msgstr ""
 "Asennus jatkaa sen jälkeen kovalevyltä ja paketit ovat käytettävissä myös "
 "asennuksen jälkeen."
 
-#: steps_gtk.pm:672 steps_interactive.pm:286
+#: steps_gtk.pm:676 steps_interactive.pm:340
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Kopioi koko CD"
@@ -972,56 +972,83 @@ msgstr "Valitse näppäimistösi asettelu."
 msgid "Here is the full list of available keyboards"
 msgstr "Tässä on koko lista käytettävissä olevista näppäimistöistä"
 
-#: steps_interactive.pm:129
+#: steps_interactive.pm:134
 #, c-format
 msgid "Install/Upgrade"
 msgstr "Asenna/Päivitä"
 
-#: steps_interactive.pm:130
+#: steps_interactive.pm:135
 #, c-format
 msgid "Is this an install or an upgrade?"
 msgstr "Onko tämä asennus vai päivitys?"
 
-#: steps_interactive.pm:134
+#: steps_interactive.pm:139
 #, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
 msgstr "Asennus"
 
-#: steps_interactive.pm:136
+#: steps_interactive.pm:141
 #, c-format
 msgid "Upgrade %s"
 msgstr "Päivitä %s"
 
-#: steps_interactive.pm:140
+#: steps_interactive.pm:145
 #, c-format
 msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 msgstr ""
 "Päivittäminen 32-bittisestä jakelusta 64-bittiseen jakeluun ei ole tuettu."
 
-#: steps_interactive.pm:144
+#: steps_interactive.pm:149
 #, c-format
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 msgstr ""
 "Päivittäminen 64-bittisestä jakelusta 32-bittiseen jakeluun ei ole tuettu."
 
-#: steps_interactive.pm:158
+#: steps_interactive.pm:168
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Salausavain %s:lle"
 
-#: steps_interactive.pm:194
+#: steps_interactive.pm:200
+#, c-format
+msgid "Cancel installation, reboot system"
+msgstr ""
+
+#: steps_interactive.pm:201
+#, fuzzy, c-format
+msgid "New Installation"
+msgstr "Asennus"
+
+#: steps_interactive.pm:202
+#, c-format
+msgid "Upgrade previous installation (not recommended)"
+msgstr ""
+
+#: steps_interactive.pm:206
+#, c-format
+msgid ""
+"Installer have detected your installed Mandriva Linux system could not\n"
+"safely be upgraded to %s.\n"
+"\n"
+"New installation replacing your previous one is recommended.\n"
+"\n"
+"Warning : you should backup all your personal data before choosing \"New\n"
+"Installation\"."
+msgstr ""
+
+#: steps_interactive.pm:248
 #, c-format
 msgid "IDE"
 msgstr "IDE"
 
-#: steps_interactive.pm:194
+#: steps_interactive.pm:248
 #, c-format
 msgid "Configuring IDE"
 msgstr "Asetetaan IDE-levyä"
 
-#: steps_interactive.pm:231
+#: steps_interactive.pm:285
 #, c-format
 msgid ""
 "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1031,7 +1058,7 @@ msgstr ""
 "käynnistääksesi järjestelmän sinun pitää luoda käynnistyslohko-osio "
 "DiskDrake:ssa."
 
-#: steps_interactive.pm:236
+#: steps_interactive.pm:290
 #, c-format
 msgid ""
 "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
@@ -1042,7 +1069,7 @@ msgstr ""
 "käynnistääksesi järjestelmän sinun pitää luoda käynnistyslohko-osio "
 "DiskDrake:ssa."
 
-#: steps_interactive.pm:328
+#: steps_interactive.pm:382
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -1056,19 +1083,19 @@ msgstr ""
 "Jos sinulla ei ole levyä, valitse Peruuta välttääksesi asennukset tältä "
 "levyltä."
 
-#: steps_interactive.pm:350
+#: steps_interactive.pm:404
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Etsitään saatavilla olevia paketteja..."
 
-#: steps_interactive.pm:358
+#: steps_interactive.pm:412
 #, c-format
 msgid ""
 "Your system does not have enough space left for installation or upgrade (%"
 "dMB > %dMB)"
 msgstr "Järjestelmässäsi ei ole riittävästi vapaata tilaa (%dMt > %dMt)"
 
-#: steps_interactive.pm:405
+#: steps_interactive.pm:460
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1077,53 +1104,53 @@ msgstr ""
 "Lataa tai tallenna pakettien valinta.\n"
 "Muoto on sama kuin auto_install-toiminnon luomilla tiedostoilla."
 
-#: steps_interactive.pm:407
+#: steps_interactive.pm:462
 #, c-format
 msgid "Load"
 msgstr "Verkkokuorma"
 
-#: steps_interactive.pm:407
+#: steps_interactive.pm:462
 #, c-format
 msgid "Save"
 msgstr "Tallenna"
 
-#: steps_interactive.pm:415
+#: steps_interactive.pm:470
 #, c-format
 msgid "Bad file"
 msgstr "Huono tiedosto"
 
-#: steps_interactive.pm:431
+#: steps_interactive.pm:486
 #, c-format
 msgid "Install Mandriva KDE Desktop"
 msgstr "Asenna Mandriva KDE-työpöytäympäristöllä"
 
-#: steps_interactive.pm:432
+#: steps_interactive.pm:487
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
 msgstr "Asenna Mandriva GNOME-työpöytäympäristöllä"
 
 # Asennuksen sivuvalikko
-#: steps_interactive.pm:433
+#: steps_interactive.pm:488
 #, c-format
 msgid "Custom install"
 msgstr "Mukautettu asennus"
 
-#: steps_interactive.pm:436
+#: steps_interactive.pm:491
 #, c-format
 msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
 msgstr "Voit valita asennettavan työpöydän: KDE, GNOME tai mukautettu"
 
-#: steps_interactive.pm:521
+#: steps_interactive.pm:576
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "Valittu koko on suurempi kuin käytettävissä oleva levytila"
 
-#: steps_interactive.pm:536
+#: steps_interactive.pm:591
 #, c-format
 msgid "Type of install"
 msgstr "Asennuksen tyyppi"
 
-#: steps_interactive.pm:537
+#: steps_interactive.pm:592
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1132,82 +1159,82 @@ msgstr ""
 "Et ole valinnut yhtäkään pakettiryhmää.\n"
 "Valitse haluamasi minimaalinen asennus"
 
-#: steps_interactive.pm:540
+#: steps_interactive.pm:595
 #, c-format
 msgid "With X"
 msgstr "X-palvelimella"
 
-#: steps_interactive.pm:541
+#: steps_interactive.pm:596
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "Perusdokumentaation kanssa (suositeltu!)"
 
-#: steps_interactive.pm:542
+#: steps_interactive.pm:597
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Vähimmäisasennus (erityisesti ei urpmi)"
 
-#: steps_interactive.pm:596
+#: steps_interactive.pm:651
 #, c-format
 msgid "Preparing installation"
 msgstr "Valmistellaan asennusta"
 
-#: steps_interactive.pm:604
+#: steps_interactive.pm:659
 #, c-format
 msgid "Installing package %s"
 msgstr "Asennetaan pakettia: %s"
 
-#: steps_interactive.pm:628
+#: steps_interactive.pm:683
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Tapahtui virhe järjestettäessä paketteja:"
 
-#: steps_interactive.pm:628
+#: steps_interactive.pm:683
 #, c-format
 msgid "Go on anyway?"
 msgstr "Jatka kuitenkin?"
 
-#: steps_interactive.pm:632
+#: steps_interactive.pm:687
 #, c-format
 msgid "Retry"
 msgstr "Yritä uudelleen"
 
-#: steps_interactive.pm:633
+#: steps_interactive.pm:688
 #, c-format
 msgid "Skip this package"
 msgstr "Ohita tämä paketti"
 
-#: steps_interactive.pm:634
+#: steps_interactive.pm:689
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "Ohita kaikki paketit medialta \"%s\""
 
-#: steps_interactive.pm:635
+#: steps_interactive.pm:690
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "Siirry takaisin medioiden ja pakettien valintaan"
 
-#: steps_interactive.pm:638
+#: steps_interactive.pm:693
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "Paketin %s asentamisessa tapahtui virhe."
 
-#: steps_interactive.pm:656
+#: steps_interactive.pm:711
 #, c-format
 msgid "Post-install configuration"
 msgstr "Asennuksen jälkeiset toiminnot"
 
-#: steps_interactive.pm:663
+#: steps_interactive.pm:718
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "Varmista että Päivitetyt Moduulit media on asemassa %s"
 
-#: steps_interactive.pm:691 steps_list.pm:47
+#: steps_interactive.pm:746 steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "Päivitykset"
 
-#: steps_interactive.pm:692
+#: steps_interactive.pm:747
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1227,39 +1254,38 @@ msgstr ""
 "\n"
 "Haluatko hakea ja asentaa päivitykset?"
 
-#: steps_interactive.pm:714
+#: steps_interactive.pm:769
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Yhdistetään peilipalvelimeen uusimman pakettilistan saamiseksi..."
 
-#: steps_interactive.pm:720
+#: steps_interactive.pm:775
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr "Yhteyttä peilipalvelimeen %s ei voitu muodostaa"
 
-#. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:826
+#: steps_interactive.pm:881
 #, c-format
 msgid "%s on %s"
 msgstr "%s kohteessa %s"
 
-#: steps_interactive.pm:860 steps_interactive.pm:867 steps_interactive.pm:881
-#: steps_interactive.pm:899 steps_interactive.pm:914
+#: steps_interactive.pm:915 steps_interactive.pm:922 steps_interactive.pm:936
+#: steps_interactive.pm:954 steps_interactive.pm:969
 #, c-format
 msgid "Hardware"
 msgstr "Laitteisto"
 
-#: steps_interactive.pm:882 steps_interactive.pm:900
+#: steps_interactive.pm:937 steps_interactive.pm:955
 #, c-format
 msgid "Sound card"
 msgstr "Äänikortti"
 
-#: steps_interactive.pm:903
+#: steps_interactive.pm:958
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Onko sinulla ISA-väylään liitettävä äänikortti?"
 
-#: steps_interactive.pm:905
+#: steps_interactive.pm:960
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -1268,63 +1294,63 @@ msgstr ""
 "Suorita \"alsaconf\" tai \"sndconfig\" asennuksen jälkeen asettaaksesi "
 "äänikorttisi."
 
-#: steps_interactive.pm:907
+#: steps_interactive.pm:962
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr ""
 "Yhtäkään äänikorttia ei löydetty. Kokeile \"harddrake\" asennuksen jälkeen"
 
-#: steps_interactive.pm:915
+#: steps_interactive.pm:970
 #, c-format
 msgid "Graphical interface"
 msgstr "Graafinen käyttöliittymä"
 
-#: steps_interactive.pm:922 steps_interactive.pm:933
+#: steps_interactive.pm:977 steps_interactive.pm:988
 #, c-format
 msgid "Network & Internet"
 msgstr "Verkko & Internet"
 
-#: steps_interactive.pm:934
+#: steps_interactive.pm:989
 #, c-format
 msgid "Proxies"
 msgstr "Välityspalvelimet"
 
-#: steps_interactive.pm:935
+#: steps_interactive.pm:990
 #, c-format
 msgid "configured"
 msgstr "asetettu"
 
-#: steps_interactive.pm:945
+#: steps_interactive.pm:1000
 #, c-format
 msgid "Security Level"
 msgstr "Turvataso"
 
-#: steps_interactive.pm:964
+#: steps_interactive.pm:1019
 #, c-format
 msgid "Firewall"
 msgstr "Palomuuri"
 
-#: steps_interactive.pm:968
+#: steps_interactive.pm:1023
 #, c-format
 msgid "activated"
 msgstr "aktivoitu"
 
-#: steps_interactive.pm:968
+#: steps_interactive.pm:1023
 #, c-format
 msgid "disabled"
 msgstr "ei käytössä"
 
-#: steps_interactive.pm:982
+#: steps_interactive.pm:1037
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Et ole asettanut X-palvelinta. Oletko varma että haluat tehdä tämän?"
 
-#: steps_interactive.pm:1009
+#: steps_interactive.pm:1064
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Valmistelen käyttöjärjestelmän lataajaa..."
 
-#: steps_interactive.pm:1019
+#: steps_interactive.pm:1074
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1337,12 +1363,12 @@ msgstr ""
 "käyttää BootX:ää koneesi käynnistämiseen. Ytimen paremetrit root "
 "tiedostojärjestelmälle on: root=%s"
 
-#: steps_interactive.pm:1025
+#: steps_interactive.pm:1080
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "Haluatko käyttää aboot:a?"
 
-#: steps_interactive.pm:1028
+#: steps_interactive.pm:1083
 #, c-format
 msgid ""
 "Error installing aboot, \n"
@@ -1351,7 +1377,7 @@ msgstr ""
 "Virhe asennettaessa aboot:a,\n"
 "yritetäänkö pakkoasennusta vaikka se tuhoaa ensimmäisen osion?"
 
-#: steps_interactive.pm:1040
+#: steps_interactive.pm:1095
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1361,17 +1387,17 @@ msgstr ""
 "ylläpitäjälle."
 
 # mat
-#: steps_interactive.pm:1072
+#: steps_interactive.pm:1127
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Aseta tyhjä levyke levykeasemaan %s"
 
-#: steps_interactive.pm:1074
+#: steps_interactive.pm:1129
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Valmistellaan automaattiasennuslevykettä..."
 
-#: steps_interactive.pm:1085
+#: steps_interactive.pm:1140
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1382,22 +1408,22 @@ msgstr ""
 "\n"
 "Haluatko todella lopettaa?"
 
-#: steps_interactive.pm:1095
+#: steps_interactive.pm:1150
 #, c-format
 msgid "Congratulations"
 msgstr "Onnittelut"
 
-#: steps_interactive.pm:1099
+#: steps_interactive.pm:1154
 #, c-format
 msgid "Reboot"
 msgstr "Käynnistä uudelleen"
 
-#: steps_interactive.pm:1103 steps_interactive.pm:1104
+#: steps_interactive.pm:1158 steps_interactive.pm:1159
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "Luo automaattinen asennuslevyke"
 
-#: steps_interactive.pm:1105
+#: steps_interactive.pm:1160
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"
@@ -1412,17 +1438,17 @@ msgstr ""
 "\n"
 "Ehkä haluat mieluummin toistaa asennuksen.\n"
 
-#: steps_interactive.pm:1110
+#: steps_interactive.pm:1165
 #, c-format
 msgid "Replay"
 msgstr "Toista"
 
-#: steps_interactive.pm:1110
+#: steps_interactive.pm:1165
 #, c-format
 msgid "Automated"
 msgstr "Automaattinen"
 
-#: steps_interactive.pm:1113
+#: steps_interactive.pm:1168
 #, c-format
 msgid "Save packages selection"
 msgstr "Tallenna pakettien valinta"

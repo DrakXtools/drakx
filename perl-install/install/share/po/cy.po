@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mandriva Linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-21 20:52+0100\n"
+"POT-Creation-Date: 2008-07-20 04:44+0200\n"
 "PO-Revision-Date: 2008-03-22 19:39+0100\n"
 "Last-Translator: Rhoslyn Prys <post@meddal.com>\n"
 "Language-Team: Cymraeg\n"
@@ -51,7 +51,7 @@ msgid "Do you have further supplementary media?"
 msgstr "Oes gennych unrhyw gyfrwng atodol arall?"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:158
+#: any.pm:112
 #, c-format
 msgid ""
 "The following media have been found and will be used during install: %s.\n"
@@ -59,113 +59,122 @@ msgid ""
 "\n"
 "Do you have a supplementary installation medium to configure?"
 msgstr ""
-"Mae'r cyfrwng yma wedi ei ganfod a byddant yn cael eu defnyddio gyda'r gosodiad nesaf: %s \n"
+"Mae'r cyfrwng yma wedi ei ganfod a byddant yn cael eu defnyddio gyda'r "
+"gosodiad nesaf: %s \n"
 "\n"
 "\n"
 "A oes gennych gyfrwng gosod ychwanegol i'w ffurfweddu?"
 
-#: any.pm:166
+#: any.pm:120
 #, c-format
 msgid "CD-ROM"
 msgstr "CD-ROM"
 
-#: any.pm:167
+#: any.pm:121
 #, c-format
 msgid "Network (HTTP)"
 msgstr "Rhwydwaith (HTTP)"
 
-#: any.pm:168
+#: any.pm:122
 #, c-format
 msgid "Network (FTP)"
 msgstr "Rhwydwaith (FTP)"
 
-#: any.pm:169
+#: any.pm:123
 #, c-format
 msgid "Network (NFS)"
 msgstr "Rhwydwaith (NFS)"
 
-#: any.pm:211
+#: any.pm:163
 #, c-format
 msgid "URL of the mirror?"
 msgstr "URL y drych?"
 
-#: any.pm:217
+#: any.pm:169
 #, c-format
 msgid "URL must start with ftp:// or http://"
 msgstr "Rhaid i'r URL gychwyn gyda ftp:// neu http://"
 
-#: any.pm:228
+#: any.pm:180
 #, c-format
-msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid ""
+"Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr "Cysylltu â safle gwe Mandriva Linux i estyn y rhestr o ddrychau..."
 
-#: any.pm:233
+#: any.pm:185
 #, c-format
-msgid "Failed contacting Mandriva Linux web site to get the list of available mirrors"
-msgstr "Methwyd cysylltu â safle gwe Mandriva Linux i estyn y rhestr o ddrychau"
+msgid ""
+"Failed contacting Mandriva Linux web site to get the list of available "
+"mirrors"
+msgstr ""
+"Methwyd cysylltu â safle gwe Mandriva Linux i estyn y rhestr o ddrychau"
 
-#: any.pm:243
+#: any.pm:195
 #, c-format
 msgid "Choose a mirror from which to get the packages"
 msgstr "Dewiswch ddrych lle mae modd estyn y pecynnau"
 
-#: any.pm:273
+#: any.pm:225
 #, c-format
 msgid "NFS setup"
 msgstr "Ffurfweddiad NFS"
 
-#: any.pm:274
+#: any.pm:226
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
 msgstr "Rhowch enw'r gwesteiwr a chyfeiriadur eich cyfrwng NFS"
 
-#: any.pm:278
+#: any.pm:230
 #, c-format
 msgid "Hostname missing"
 msgstr "Enw gwesteiwr ar goll"
 
-#: any.pm:279
+#: any.pm:231
 #, c-format
 msgid "Directory must begin with \"/\""
 msgstr "Rhaid i gyfeiriadur gychwyn gyda \"/\""
 
-#: any.pm:283
+#: any.pm:235
 #, c-format
 msgid "Hostname of the NFS mount ?"
 msgstr "Enw gwesteiwr arosod NFS?"
 
-#: any.pm:284
+#: any.pm:236
 #, c-format
 msgid "Directory"
 msgstr "Cyfeiriadur"
 
-#: any.pm:306
+#: any.pm:258
 #, c-format
 msgid "Supplementary"
 msgstr "Atodol"
 
-#: any.pm:341
+#: any.pm:293
 #, c-format
-msgid "Can't find a package list file on this mirror. Make sure the location is correct."
-msgstr "Methu canfod ffeil hdlist ar y drych. Gwnewch yn siwr fod y lleoliad yn gywir."
+msgid ""
+"Can't find a package list file on this mirror. Make sure the location is "
+"correct."
+msgstr ""
+"Methu canfod ffeil hdlist ar y drych. Gwnewch yn siwr fod y lleoliad yn "
+"gywir."
 
-#: any.pm:375
+#: any.pm:327
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Edrych ar becynnau wedi eu gosod yn barod..."
 
-#: any.pm:382
+#: any.pm:334
 #, c-format
 msgid "Removing packages prior to upgrade..."
 msgstr "Tynnu pecynnau cyn diweddaru..."
 
-#: any.pm:424
+#: any.pm:376
 #, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Canfod pecynnau i'w uwchraddio..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:620
+#: any.pm:561
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -188,7 +197,7 @@ msgstr ""
 "Ydych chi wir eisiau gosod y gweinyddion hyn?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:643
+#: any.pm:584
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -196,78 +205,78 @@ msgid ""
 "\n"
 "Do you really want to remove these packages?\n"
 msgstr ""
-"Bydd y pecynnau canlynol yn cael eu tynnu i ganiatáu diweddaru eich system: %s\n"
+"Bydd y pecynnau canlynol yn cael eu tynnu i ganiatáu diweddaru eich system: %"
+"s\n"
 "\n"
 "\n"
 "Ydych chi am dynnu'r pecynnau hyn?\n"
 
-#: any.pm:857
+#: any.pm:798
 #, c-format
 msgid "Error reading file %s"
 msgstr "Gwall wrth ddarllen ffeil %s"
 
-#: any.pm:1065
+#: any.pm:1005
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Mae'r disg(iau) canlynol wedi eu hail enwi:"
 
-#: any.pm:1067
+#: any.pm:1007
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (ei enw blaenorol oedd %s)"
 
-#: any.pm:1124
+#: any.pm:1064
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1124
+#: any.pm:1064
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1124
+#: any.pm:1064
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1143
-#: steps_interactive.pm:923
+#: any.pm:1083 steps_interactive.pm:978
 #, c-format
 msgid "Network"
 msgstr "Rhwydwaith"
 
-#: any.pm:1147
+#: any.pm:1087
 #, c-format
 msgid "Please choose a media"
 msgstr "Dewiswch gyfrwng"
 
-#: any.pm:1163
+#: any.pm:1103
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Mae'r ffeil yn bodoli eisoes. Ysgrifennu drosti?"
 
-#: any.pm:1167
+#: any.pm:1107
 #, c-format
 msgid "Permission denied"
 msgstr "Caniatâd wedi ei wrthod."
 
-#: any.pm:1215
+#: any.pm:1155
 #, c-format
 msgid "Bad NFS name"
 msgstr "Enw NFS gwael"
 
-#: any.pm:1236
+#: any.pm:1176
 #, c-format
 msgid "Bad media %s"
 msgstr "Cyfrwng %s gwael"
 
-#: any.pm:1279
+#: any.pm:1219
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Meth creu lluniau o'r sgrin cyn rhannu"
 
-#: any.pm:1287
+#: any.pm:1227
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Bydd lluniau o'r sgrin ar gael ar ôl gosod yn %s"
@@ -277,13 +286,12 @@ msgstr "Bydd lluniau o'r sgrin ar gael ar ôl gosod yn %s"
 msgid "Installation"
 msgstr "Gosod"
 
-#: gtk.pm:122
-#: share/meta-task/compssUsers.pl:42
+#: gtk.pm:122 share/meta-task/compssUsers.pl:42
 #, c-format
 msgid "Configuration"
 msgstr "Ffurfweddiad"
 
-#: install2.pm:166
+#: install2.pm:168
 #, c-format
 msgid "You must also format %s"
 msgstr "Rhaid fformatio %s hefyd"
@@ -307,8 +315,7 @@ msgstr "Cychwyn y rhwydwaith"
 msgid "Bringing down the network"
 msgstr "Cau'r rhwydwaith"
 
-#: media.pm:703
-#: media.pm:714
+#: media.pm:703 media.pm:714
 #, c-format
 msgid "Downloading file %s..."
 msgstr "Llwytho ffeil %s..."
@@ -323,32 +330,32 @@ msgstr "Copïo rhai pecynnau ar ddisg ar gyfer defnydd yn y dyfodol"
 msgid "Copying in progress"
 msgstr "Wrthi'n copïo..."
 
-#: pkgs.pm:28
+#: pkgs.pm:29
 #, c-format
 msgid "must have"
 msgstr "rhaid cael"
 
-#: pkgs.pm:29
+#: pkgs.pm:30
 #, c-format
 msgid "important"
 msgstr "pwysig"
 
-#: pkgs.pm:30
+#: pkgs.pm:31
 #, c-format
 msgid "very nice"
 msgstr "hyfryd iawn"
 
-#: pkgs.pm:31
+#: pkgs.pm:32
 #, c-format
 msgid "nice"
 msgstr "hyfryd"
 
-#: pkgs.pm:32
+#: pkgs.pm:33
 #, c-format
 msgid "maybe"
 msgstr "efallai"
 
-#: pkgs.pm:254
+#: pkgs.pm:253
 #, c-format
 msgid ""
 "Some packages requested by %s cannot be installed:\n"
@@ -369,13 +376,21 @@ msgstr "Gweithfan Swyddfa"
 
 #: share/meta-task/compssUsers.pl:15
 #, c-format
-msgid "Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets (OpenOffice.org Calc, Kspread), PDF viewers, etc"
-msgstr "Rhaglenni swyddfa: prosesydd geiriau (OpenOffice.org Writer, Kword), taenlenni (OpenOffice.org Calc, Kspread), ddarllenydd pdf, ag ati"
+msgid ""
+"Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets "
+"(OpenOffice.org Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"Rhaglenni swyddfa: prosesydd geiriau (OpenOffice.org Writer, Kword), "
+"taenlenni (OpenOffice.org Calc, Kspread), ddarllenydd pdf, ag ati"
 
 #: share/meta-task/compssUsers.pl:16
 #, c-format
-msgid "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, gnumeric), pdf viewers, etc"
-msgstr "Rhaglenni swyddfa: prosesydd geiriau (Kword, abiword), taenlenni (kspread, gnumeric), ddarllenydd pdf, ag ati"
+msgid ""
+"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
+"gnumeric), pdf viewers, etc"
+msgstr ""
+"Rhaglenni swyddfa: prosesydd geiriau (Kword, abiword), taenlenni (kspread, "
+"gnumeric), ddarllenydd pdf, ag ati"
 
 #: share/meta-task/compssUsers.pl:21
 #, c-format
@@ -404,8 +419,12 @@ msgstr "Man rhyngrwyd"
 
 #: share/meta-task/compssUsers.pl:32
 #, c-format
-msgid "Set of tools to read and send mail and news (mutt, tin..) and to browse the Web"
-msgstr "Casgliad o offer i ddarllen ac anfon e-bost a newyddion (mutt, tin..) ac i bori'r We"
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"Casgliad o offer i ddarllen ac anfon e-bost a newyddion (mutt, tin..) ac i "
+"bori'r We"
 
 #: share/meta-task/compssUsers.pl:37
 #, c-format
@@ -432,39 +451,33 @@ msgstr "Offer y Consol"
 msgid "Editors, shells, file tools, terminals"
 msgstr "Golygyddion, cregyn, offer ffeilio, terfynellau"
 
-#: share/meta-task/compssUsers.pl:52
-#: share/meta-task/compssUsers.pl:153
+#: share/meta-task/compssUsers.pl:52 share/meta-task/compssUsers.pl:153
 #: share/meta-task/compssUsers.pl:155
 #, c-format
 msgid "Development"
 msgstr "Datblygiad"
 
-#: share/meta-task/compssUsers.pl:53
-#: share/meta-task/compssUsers.pl:156
+#: share/meta-task/compssUsers.pl:53 share/meta-task/compssUsers.pl:156
 #, c-format
 msgid "C and C++ development libraries, programs and include files"
 msgstr "Llyfrgelloedd datblygiadol C a C++, rhaglenni a ffeiliau cynnwys"
 
-#: share/meta-task/compssUsers.pl:56
-#: share/meta-task/compssUsers.pl:160
+#: share/meta-task/compssUsers.pl:56 share/meta-task/compssUsers.pl:160
 #, c-format
 msgid "Documentation"
 msgstr "Dogfennau"
 
-#: share/meta-task/compssUsers.pl:57
-#: share/meta-task/compssUsers.pl:161
+#: share/meta-task/compssUsers.pl:57 share/meta-task/compssUsers.pl:161
 #, c-format
 msgid "Books and Howto's on Linux and Free Software"
 msgstr "Llyfrau a Howto's ar Linux a Meddalwedd Rhydd"
 
-#: share/meta-task/compssUsers.pl:61
-#: share/meta-task/compssUsers.pl:164
+#: share/meta-task/compssUsers.pl:61 share/meta-task/compssUsers.pl:164
 #, c-format
 msgid "LSB"
 msgstr "LSB"
 
-#: share/meta-task/compssUsers.pl:62
-#: share/meta-task/compssUsers.pl:165
+#: share/meta-task/compssUsers.pl:62 share/meta-task/compssUsers.pl:165
 #, c-format
 msgid "Linux Standard Base. Third party applications support"
 msgstr "Linux Standard Base. Cefnogaeth i raglenni trydydd parti"
@@ -489,14 +502,12 @@ msgstr "Grwpwar"
 msgid "Kolab Server"
 msgstr "Gweinydd Kolab"
 
-#: share/meta-task/compssUsers.pl:79
-#: share/meta-task/compssUsers.pl:120
+#: share/meta-task/compssUsers.pl:79 share/meta-task/compssUsers.pl:120
 #, c-format
 msgid "Firewall/Router"
 msgstr "Mur Gwarchod/Llwybrydd"
 
-#: share/meta-task/compssUsers.pl:80
-#: share/meta-task/compssUsers.pl:121
+#: share/meta-task/compssUsers.pl:80 share/meta-task/compssUsers.pl:121
 #, c-format
 msgid "Internet gateway"
 msgstr "Porth i'r rhyngrwyd"
@@ -546,8 +557,7 @@ msgstr "Gweinydd Ffeil a Rhannu Argraffydd"
 msgid "NFS Server, Samba server"
 msgstr "Gweinydd NSF, gweinydd Samba"
 
-#: share/meta-task/compssUsers.pl:103
-#: share/meta-task/compssUsers.pl:116
+#: share/meta-task/compssUsers.pl:103 share/meta-task/compssUsers.pl:116
 #, c-format
 msgid "Database"
 msgstr "Cronfa Ddata"
@@ -604,8 +614,12 @@ msgstr "Man Gwaith KDE"
 
 #: share/meta-task/compssUsers.pl:134
 #, c-format
-msgid "The K Desktop Environment, the basic graphical environment with a collection of accompanying tools"
-msgstr "KDE - Amgylchedd Bwrdd gwaith K, yr amgylchedd graffig sylfaenol gyda chasgliad o offer"
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"KDE - Amgylchedd Bwrdd gwaith K, yr amgylchedd graffig sylfaenol gyda "
+"chasgliad o offer"
 
 #: share/meta-task/compssUsers.pl:138
 #, c-format
@@ -614,8 +628,12 @@ msgstr "Man Gwaith Gnome"
 
 #: share/meta-task/compssUsers.pl:139
 #, c-format
-msgid "A graphical environment with user-friendly set of applications and desktop tools"
-msgstr "Amgylchedd graffig gyda chasgliad o raglenni ac offer bwrdd gwaith hawdd eu defnyddio."
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr ""
+"Amgylchedd graffig gyda chasgliad o raglenni ac offer bwrdd gwaith hawdd eu "
+"defnyddio."
 
 #: share/meta-task/compssUsers.pl:142
 #, c-format
@@ -637,8 +655,7 @@ msgstr "Window Maker, Enlightenment, Fvwm, ag ati"
 msgid "Utilities"
 msgstr "Gwasanaethau"
 
-#: share/meta-task/compssUsers.pl:172
-#: share/meta-task/compssUsers.pl:173
+#: share/meta-task/compssUsers.pl:172 share/meta-task/compssUsers.pl:173
 #, c-format
 msgid "SSH Server"
 msgstr "Gweinydd SSH"
@@ -682,19 +699,20 @@ msgstr ""
 "Digwyddodd gwall ond wn i ddim sut i ddelio ag ef yn dwt.\n"
 "Mae'n beryglus i barhau."
 
-#: steps.pm:436
+#: steps.pm:437
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
 "Either your cdrom drive or your cdrom is defective.\n"
-"Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm\"\n"
+"Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm"
+"\"\n"
 msgstr ""
 "Methodd rhai pecynnau pwysig a chael eu gosod yn gywir.\n"
 "Un ai mae eich disg CD-ROM neu eich CD-ROM yn wallus.\n"
-"Gwiriwch y CD-ROM ar gyfrifiadur wedi ei osod gan ddefnyddio \"rpm -qpl media/main/*.rpm\"\n"
+"Gwiriwch y CD-ROM ar gyfrifiadur wedi ei osod gan ddefnyddio \"rpm -qpl "
+"media/main/*.rpm\"\n"
 
-#: steps_auto_install.pm:71
-#: steps_stdio.pm:27
+#: steps_auto_install.pm:71 steps_stdio.pm:27
 #, c-format
 msgid "Entering step `%s'\n"
 msgstr "Cychwyn cam '%s\"\n"
@@ -709,208 +727,200 @@ msgstr "Gosod Mandriva Linux %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> rhwng elfennau"
 
-#: steps_gtk.pm:82
+#: steps_gtk.pm:84
 #, c-format
 msgid "Xorg server is slow to start. Please wait..."
 msgstr "Mae gweinydd Xorg yn araf ei gychwyn. Arhoswch..."
 
-#: steps_gtk.pm:192
+#: steps_gtk.pm:194
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
-"Mandriva Linux. If that occurs, you can try a text install instead. For this,\n"
+"Mandriva Linux. If that occurs, you can try a text install instead. For "
+"this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "Mae eich system yn brin o adnoddau. Efallai bod gennych broblem wrth osod\n"
 "Mandriva Linux. Os yw hynny'n digwydd, defnyddiwch y gosod testun  yn lle\n"
-"hynny. I wneud hynny pwyswch 'F1' wrth gychwyn ar CD-ROM, ac yna teipio 'text'."
+"hynny. I wneud hynny pwyswch 'F1' wrth gychwyn ar CD-ROM, ac yna teipio "
+"'text'."
 
-#: steps_gtk.pm:259
-#: steps_interactive.pm:435
-#: steps_interactive.pm:564
+#: steps_gtk.pm:261 steps_interactive.pm:490 steps_interactive.pm:619
 #: steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "Dewis Grŵp y Pecyn"
 
-#: steps_gtk.pm:280
-#: steps_interactive.pm:581
+#: steps_gtk.pm:282 steps_interactive.pm:636
 #, c-format
 msgid "Individual package selection"
 msgstr "Dewis pecynnau unigol."
 
-#: steps_gtk.pm:302
-#: steps_interactive.pm:507
+#: steps_gtk.pm:304 steps_interactive.pm:562
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Cyfanswm maint: %d / %d MB"
 
-#: steps_gtk.pm:347
+#: steps_gtk.pm:349
 #, c-format
 msgid "Bad package"
 msgstr "Pecyn gwallus"
 
-#: steps_gtk.pm:349
+#: steps_gtk.pm:351
 #, c-format
 msgid "Version: "
 msgstr "Fersiwn:"
 
-#: steps_gtk.pm:350
+#: steps_gtk.pm:352
 #, c-format
 msgid "Size: "
 msgstr "Maint:"
 
-#: steps_gtk.pm:350
+#: steps_gtk.pm:352
 #, c-format
 msgid "%d KB\n"
 msgstr "%d KB\n"
 
-#: steps_gtk.pm:351
+#: steps_gtk.pm:353
 #, c-format
 msgid "Importance: "
 msgstr "Pwysigrwydd: "
 
-#: steps_gtk.pm:385
+#: steps_gtk.pm:387
 #, c-format
 msgid "You can not select/unselect this package"
 msgstr "Does dim modd i chi ddewis/dad-ddewis y pecyn"
 
-#: steps_gtk.pm:389
+#: steps_gtk.pm:391
 #, c-format
 msgid "due to missing %s"
 msgstr "oherwydd %s coll"
 
-#: steps_gtk.pm:390
+#: steps_gtk.pm:392
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "oherwydd %s annigonol"
 
-#: steps_gtk.pm:391
+#: steps_gtk.pm:393
 #, c-format
 msgid "trying to promote %s"
 msgstr "ceisio hyrwyddo %s"
 
-#: steps_gtk.pm:392
+#: steps_gtk.pm:394
 #, c-format
 msgid "in order to keep %s"
 msgstr "er mwyn cadw %s"
 
-#: steps_gtk.pm:397
+#: steps_gtk.pm:399
 #, c-format
-msgid "You can not select this package as there is not enough space left to install it"
+msgid ""
+"You can not select this package as there is not enough space left to install "
+"it"
 msgstr "Nid oes modd i chi ddewis y pecyn hwn - does dim lle ar ôl i'w osod"
 
-#: steps_gtk.pm:400
+#: steps_gtk.pm:402
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "Mae'r pecynnau canlynol i'w gosod"
 
-#: steps_gtk.pm:401
+#: steps_gtk.pm:403
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "Bydd y pecynnau canlynol yn cael eu tynnu"
 
-#: steps_gtk.pm:426
+#: steps_gtk.pm:428
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
 msgstr "Mae hwn yn becyn hanfodol, does dim modd ei ddad-ddewis"
 
-#: steps_gtk.pm:428
+#: steps_gtk.pm:430
 #, c-format
 msgid "You can not unselect this package. It is already installed"
 msgstr "Does dim mod dad-ddewis y pecyn, mae wedi ei osod yn barod"
 
-#: steps_gtk.pm:430
+#: steps_gtk.pm:432
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
 msgstr "Does dim mod dad-ddewis y pecyn hwn. Rhaid ei ddiweddaru"
 
-#: steps_gtk.pm:434
+#: steps_gtk.pm:436
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "Dangoswch y pecynnau dewis awtomatig"
 
-#: steps_gtk.pm:436
+#: steps_gtk.pm:438
 #, c-format
 msgid "Install"
 msgstr "Gosod"
 
-#: steps_gtk.pm:439
+#: steps_gtk.pm:441
 #, c-format
 msgid "Load/Save selection"
 msgstr "Llwytho/Cadw'r dewis"
 
-#: steps_gtk.pm:440
+#: steps_gtk.pm:442
 #, c-format
 msgid "Updating package selection"
 msgstr "Diweddaru'r dewis o becynnau"
 
-#: steps_gtk.pm:445
+#: steps_gtk.pm:447
 #, c-format
 msgid "Minimal install"
 msgstr "Gosodiad lleiaf"
 
-#: steps_gtk.pm:459
+#: steps_gtk.pm:461
 #, c-format
 msgid "Software Management"
 msgstr "Rheoli Meddalwedd"
 
-#: steps_gtk.pm:459
-#: steps_interactive.pm:393
+#: steps_gtk.pm:461 steps_interactive.pm:448
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Dewiswch y pecynnau yr hoffech chi eu gosod"
 
-#: steps_gtk.pm:476
-#: steps_interactive.pm:595
-#: steps_list.pm:32
+#: steps_gtk.pm:478 steps_interactive.pm:650 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "Gosod"
 
-#: steps_gtk.pm:502
+#: steps_gtk.pm:504
 #, c-format
 msgid "No details"
 msgstr "Dim manylion"
 
-#: steps_gtk.pm:517
+#: steps_gtk.pm:519
 #, c-format
 msgid "Time remaining "
 msgstr "Amser yn weddill"
 
-#: steps_gtk.pm:518
+#: steps_gtk.pm:520
 #, c-format
 msgid "(estimating...)"
 msgstr "(amcangyfrif...)"
 
-#: steps_gtk.pm:545
+#: steps_gtk.pm:547
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d pecyn"
 msgstr[1] "%d pecyn"
 
-#: steps_gtk.pm:591
-#: steps_interactive.pm:783
-#: steps_list.pm:43
+#: steps_gtk.pm:593 steps_interactive.pm:838 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Crynodeb"
 
-#: steps_gtk.pm:608
+#: steps_gtk.pm:610
 #, c-format
 msgid "Configure"
 msgstr "Ffurfweddu"
 
-#: steps_gtk.pm:625
-#: steps_interactive.pm:779
-#: steps_interactive.pm:935
+#: steps_gtk.pm:627 steps_interactive.pm:834 steps_interactive.pm:990
 #, c-format
 msgid "not configured"
 msgstr "heb ffurfweddu"
 
-#: steps_gtk.pm:661
-#: steps_interactive.pm:278
+#: steps_gtk.pm:664 steps_interactive.pm:332
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -919,18 +929,20 @@ msgstr ""
 "Mae'r cyfrwng gosod canlynol wedi ei ganfod.\n"
 "Os hoffech hepgor rhai ohonynt, dad-ddewiswch nhw nawr."
 
-#: steps_gtk.pm:670
-#: steps_interactive.pm:284
+#: steps_gtk.pm:674 steps_interactive.pm:338
 #, c-format
 msgid ""
-"You have the option to copy the contents of the CDs onto the hard drive before installation.\n"
-"It will then continue from the hard drive and the packages will remain available once the system is fully installed."
+"You have the option to copy the contents of the CDs onto the hard drive "
+"before installation.\n"
+"It will then continue from the hard drive and the packages will remain "
+"available once the system is fully installed."
 msgstr ""
-"Mae gennych y dewis i gopïo cynnwys y CD ar i'r disg caled cyn gosod Mandriva Linux.\n"
-"Bydd yna'n parhau o'r disg caled a bydd y pecynnau ar gael unwaith i'r system gael ei osod yn gyflawn."
+"Mae gennych y dewis i gopïo cynnwys y CD ar i'r disg caled cyn gosod "
+"Mandriva Linux.\n"
+"Bydd yna'n parhau o'r disg caled a bydd y pecynnau ar gael unwaith i'r "
+"system gael ei osod yn gyflawn."
 
-#: steps_gtk.pm:672
-#: steps_interactive.pm:286
+#: steps_gtk.pm:676 steps_interactive.pm:340
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Copïo'r CDau cyfan"
@@ -950,17 +962,17 @@ msgstr "Dewiswch gynllun eich bysellfwrdd."
 msgid "Here is the full list of available keyboards"
 msgstr "Dyma restr lawn o'r bysellfyrddau sydd ar gael"
 
-#: steps_interactive.pm:129
+#: steps_interactive.pm:134
 #, c-format
 msgid "Install/Upgrade"
 msgstr "Gosod/Diweddaru"
 
-#: steps_interactive.pm:130
+#: steps_interactive.pm:135
 #, c-format
 msgid "Is this an install or an upgrade?"
 msgstr "Gosod neu ddiweddaru?"
 
-#: steps_interactive.pm:134
+#: steps_interactive.pm:139
 #, c-format
 msgid ""
 "_: This is a noun:\n"
@@ -969,68 +981,109 @@ msgstr ""
 "_:Enw yw hwn:\n"
 "Gosod"
 
-#: steps_interactive.pm:136
+#: steps_interactive.pm:141
 #, c-format
 msgid "Upgrade %s"
 msgstr "Diweddaru %s"
 
-#: steps_interactive.pm:140
+#: steps_interactive.pm:145
 #, c-format
 msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 msgstr "Nid yw diweddaru o ddosbarthiad 32did i 64did yn cael ei gynnal"
 
-#: steps_interactive.pm:144
+#: steps_interactive.pm:149
 #, c-format
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 msgstr "Nid yw diweddaru o ddosbarthiad 64did i 32did yn cael ei gynnal"
 
-#: steps_interactive.pm:158
+#: steps_interactive.pm:168
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Allwedd amgryptio ar gyfer %s"
 
-#: steps_interactive.pm:194
+#: steps_interactive.pm:200
+#, c-format
+msgid "Cancel installation, reboot system"
+msgstr ""
+
+#: steps_interactive.pm:201
+#, fuzzy, c-format
+msgid "New Installation"
+msgstr "Gosod"
+
+#: steps_interactive.pm:202
+#, c-format
+msgid "Upgrade previous installation (not recommended)"
+msgstr ""
+
+#: steps_interactive.pm:206
+#, c-format
+msgid ""
+"Installer have detected your installed Mandriva Linux system could not\n"
+"safely be upgraded to %s.\n"
+"\n"
+"New installation replacing your previous one is recommended.\n"
+"\n"
+"Warning : you should backup all your personal data before choosing \"New\n"
+"Installation\"."
+msgstr ""
+
+#: steps_interactive.pm:248
 #, c-format
 msgid "IDE"
 msgstr "IDE"
 
-#: steps_interactive.pm:194
+#: steps_interactive.pm:248
 #, c-format
 msgid "Configuring IDE"
 msgstr "Ffurfweddu IDE"
 
-#: steps_interactive.pm:231
+#: steps_interactive.pm:285
 #, c-format
-msgid "No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"
-msgstr "Nid oes lle rhydd ar gyfer yr ymlwythwr 1MB! Bydd y gosod yn parhau, ond i gychwyn y system bydd rhaid i chi greu rhaniad ymlwythwr yn DiskDrake"
+msgid ""
+"No free space for 1MB bootstrap! Install will continue, but to boot your "
+"system, you'll need to create the bootstrap partition in DiskDrake"
+msgstr ""
+"Nid oes lle rhydd ar gyfer yr ymlwythwr 1MB! Bydd y gosod yn parhau, ond i "
+"gychwyn y system bydd rhaid i chi greu rhaniad ymlwythwr yn DiskDrake"
 
-#: steps_interactive.pm:236
+#: steps_interactive.pm:290
 #, c-format
-msgid "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"
-msgstr "Bydd angen i chi greu llwythwr mwdwl PPC PReP Boot! Bydd y gosod yn parhau, ond i gychwyn y system bydd rhaid i chi greu rhaniad ymlwythwr yn DiskDrake"
+msgid ""
+"You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
+"to boot your system, you'll need to create the bootstrap partition in "
+"DiskDrake"
+msgstr ""
+"Bydd angen i chi greu llwythwr mwdwl PPC PReP Boot! Bydd y gosod yn parhau, "
+"ond i gychwyn y system bydd rhaid i chi greu rhaniad ymlwythwr yn DiskDrake"
 
-#: steps_interactive.pm:328
+#: steps_interactive.pm:382
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
-"Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.\n"
+"Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when "
+"done.\n"
 "If you do not have it, press Cancel to avoid installation from this Cd-Rom."
 msgstr ""
 "Newidiwch eich CD-ROM\n"
 "Rhowch y CD-ROM \"%s\" yn eich gyrrwr a chlicio Iawn ar ôl gorffen\n"
 "Os nad yw gennych, cliciwch Diddymu i beidio a gosod o'r CD-ROM."
 
-#: steps_interactive.pm:350
+#: steps_interactive.pm:404
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Casglu'r pecynnau sydd ar gael..."
 
-#: steps_interactive.pm:358
+#: steps_interactive.pm:412
 #, c-format
-msgid "Your system does not have enough space left for installation or upgrade (%dMB > %dMB)"
-msgstr "Nid oes gan eich system ddigon o le ar gyfer gosod neu ddiweddaru  (%dMB > %dMB)"
+msgid ""
+"Your system does not have enough space left for installation or upgrade (%"
+"dMB > %dMB)"
+msgstr ""
+"Nid oes gan eich system ddigon o le ar gyfer gosod neu ddiweddaru  (%dMB > %"
+"dMB)"
 
-#: steps_interactive.pm:405
+#: steps_interactive.pm:460
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1039,52 +1092,53 @@ msgstr ""
 "Dewiswch lwytho neu gadw pecyn dewiswyd.\n"
 "Mae'r fformat yr un â ffeiliau cynhyrchwyd drwy auto_install."
 
-#: steps_interactive.pm:407
+#: steps_interactive.pm:462
 #, c-format
 msgid "Load"
 msgstr "Llwyth"
 
-#: steps_interactive.pm:407
+#: steps_interactive.pm:462
 #, c-format
 msgid "Save"
 msgstr "Cadw"
 
-#: steps_interactive.pm:415
+#: steps_interactive.pm:470
 #, c-format
 msgid "Bad file"
 msgstr "Ffeil gwael"
 
-#: steps_interactive.pm:431
+#: steps_interactive.pm:486
 #, c-format
 msgid "Install Mandriva KDE Desktop"
 msgstr "Gosod Bwrdd Gwaith Mandriva KDE"
 
-#: steps_interactive.pm:432
+#: steps_interactive.pm:487
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
 msgstr "Gosod Bwrdd Gwaith Mandriva GNOME"
 
-#: steps_interactive.pm:433
+#: steps_interactive.pm:488
 #, c-format
 msgid "Custom install"
 msgstr "Gosodiad addasu"
 
-#: steps_interactive.pm:436
+#: steps_interactive.pm:491
 #, c-format
 msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
-msgstr "Gallwch ddewis proffil bwrdd gwaith eich man gwaith: KDR, GNOME neu Addasu"
+msgstr ""
+"Gallwch ddewis proffil bwrdd gwaith eich man gwaith: KDR, GNOME neu Addasu"
 
-#: steps_interactive.pm:521
+#: steps_interactive.pm:576
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "Mae'r maint a ddewiswyd yn fwy na'r lle ar gael"
 
-#: steps_interactive.pm:536
+#: steps_interactive.pm:591
 #, c-format
 msgid "Type of install"
 msgstr "Math o osod"
 
-#: steps_interactive.pm:537
+#: steps_interactive.pm:592
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1093,83 +1147,82 @@ msgstr ""
 "Nid ydych wedi dewis grwpiau o becynnau.\n"
 "Dewiswch y gosod lleiaf rydych ei eisiau"
 
-#: steps_interactive.pm:540
+#: steps_interactive.pm:595
 #, c-format
 msgid "With X"
 msgstr "Gyda X"
 
-#: steps_interactive.pm:541
+#: steps_interactive.pm:596
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "Gyda dogfennau elfennol (argymell!)"
 
-#: steps_interactive.pm:542
+#: steps_interactive.pm:597
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Gosod bach iawn (yn arbennig dim urpmi)"
 
-#: steps_interactive.pm:596
+#: steps_interactive.pm:651
 #, c-format
 msgid "Preparing installation"
 msgstr "Paratoi'r gosod"
 
-#: steps_interactive.pm:604
+#: steps_interactive.pm:659
 #, c-format
 msgid "Installing package %s"
 msgstr "Gosod pecyn %s"
 
-#: steps_interactive.pm:628
+#: steps_interactive.pm:683
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Roedd gwall wrth drefnu pecynnau:"
 
-#: steps_interactive.pm:628
+#: steps_interactive.pm:683
 #, c-format
 msgid "Go on anyway?"
 msgstr "Mynd yn eich blaen beth bynnag?"
 
-#: steps_interactive.pm:632
+#: steps_interactive.pm:687
 #, c-format
 msgid "Retry"
 msgstr "Ceisio eto"
 
-#: steps_interactive.pm:633
+#: steps_interactive.pm:688
 #, c-format
 msgid "Skip this package"
 msgstr "Hepgor y pecyn"
 
-#: steps_interactive.pm:634
+#: steps_interactive.pm:689
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "Hepgor pob pecyn o gyfrwng \"%s\""
 
-#: steps_interactive.pm:635
+#: steps_interactive.pm:690
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "Mynd yn ôl at ddewis cyfrwng a phecyn"
 
-#: steps_interactive.pm:638
+#: steps_interactive.pm:693
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "Digwyddodd gwall wrth osod pecyn: %s."
 
-#: steps_interactive.pm:656
+#: steps_interactive.pm:711
 #, c-format
 msgid "Post-install configuration"
 msgstr "Ffurfweddiad ôl osod"
 
-#: steps_interactive.pm:663
+#: steps_interactive.pm:718
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "Gwnewch yn siŵr fod cyfrwng Diweddaru Modiwlau yng ngyrrwr %s"
 
-#: steps_interactive.pm:691
-#: steps_list.pm:47
+#: steps_interactive.pm:746 steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "Diweddaru"
 
-#: steps_interactive.pm:692
+#: steps_interactive.pm:747
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1182,121 +1235,128 @@ msgid ""
 "Do you want to install the updates?"
 msgstr ""
 "Mae'n bosibl i chi llwytho i lawr y pecynnau diweddaraf sydd wedi eu\n"
-"ryddhau ers i'r dosbarthiad fod ar gael. Efallai bod gwallau a materion diogelwch wedi eu cywiro\n"
+"ryddhau ers i'r dosbarthiad fod ar gael. Efallai bod gwallau a materion "
+"diogelwch wedi eu cywiro\n"
 "\n"
 "I lwytho'r pecynnau i lawr, bydd angen cyswllt gweithredol\n"
 "â'r Rhyngrwyd.\n"
 "\n"
 "Ydych chi am osod y diweddariadau?"
 
-#: steps_interactive.pm:714
+#: steps_interactive.pm:769
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Cysylltu â'r drych i estyn y rhestr o becynnau sydd ar gael..."
 
-#: steps_interactive.pm:720
+#: steps_interactive.pm:775
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr "Methu canfod drych: %s."
 
-#. -PO: example: lilo-graphic on /dev/hda1
-#: steps_interactive.pm:826
+#: steps_interactive.pm:881
 #, c-format
 msgid "%s on %s"
 msgstr "%s ar %s"
 
-#: steps_interactive.pm:860
-#: steps_interactive.pm:867
-#: steps_interactive.pm:881
-#: steps_interactive.pm:899
-#: steps_interactive.pm:914
+#: steps_interactive.pm:915 steps_interactive.pm:922 steps_interactive.pm:936
+#: steps_interactive.pm:954 steps_interactive.pm:969
 #, c-format
 msgid "Hardware"
 msgstr "Caledwedd"
 
-#: steps_interactive.pm:882
-#: steps_interactive.pm:900
+#: steps_interactive.pm:937 steps_interactive.pm:955
 #, c-format
 msgid "Sound card"
 msgstr "Cerdyn sain"
 
-#: steps_interactive.pm:903
+#: steps_interactive.pm:958
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "A oes gennych gerdyn sain ISA?"
 
-#: steps_interactive.pm:905
+#: steps_interactive.pm:960
 #, c-format
-msgid "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound card"
-msgstr "Rhedwch \"alsaconf\" neu \"sndconfig\" wedi'r gosodiad i ffurfweddu eich cerdyn sain"
+msgid ""
+"Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
+"card"
+msgstr ""
+"Rhedwch \"alsaconf\" neu \"sndconfig\" wedi'r gosodiad i ffurfweddu eich "
+"cerdyn sain"
 
-#: steps_interactive.pm:907
+#: steps_interactive.pm:962
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr "Heb ganfod cerdyn sain. Ceisiwch \"harddrake\" wedi'r gosodiad"
 
-#: steps_interactive.pm:915
+#: steps_interactive.pm:970
 #, c-format
 msgid "Graphical interface"
 msgstr "Rhyngwyneb graffigol"
 
-#: steps_interactive.pm:922
-#: steps_interactive.pm:933
+#: steps_interactive.pm:977 steps_interactive.pm:988
 #, c-format
 msgid "Network & Internet"
 msgstr "Rhwydwaith a'r Rhyngrwyd"
 
-#: steps_interactive.pm:934
+#: steps_interactive.pm:989
 #, c-format
 msgid "Proxies"
 msgstr "Dirprwyon"
 
-#: steps_interactive.pm:935
+#: steps_interactive.pm:990
 #, c-format
 msgid "configured"
 msgstr "ffurfweddwyd"
 
-#: steps_interactive.pm:945
+#: steps_interactive.pm:1000
 #, c-format
 msgid "Security Level"
 msgstr "Lefel Diogelwch"
 
-#: steps_interactive.pm:964
+#: steps_interactive.pm:1019
 #, c-format
 msgid "Firewall"
 msgstr "Mur Cadarn"
 
-#: steps_interactive.pm:968
+#: steps_interactive.pm:1023
 #, c-format
 msgid "activated"
 msgstr "gweithredwyd"
 
-#: steps_interactive.pm:968
+#: steps_interactive.pm:1023
 #, c-format
 msgid "disabled"
 msgstr "anablwyd"
 
-#: steps_interactive.pm:982
+#: steps_interactive.pm:1037
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Nid ydych wedi ffurfweddu X. Ydych chi'n siŵr eich bod am wneud hyn?"
 
-#: steps_interactive.pm:1009
+#: steps_interactive.pm:1064
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Paratoi cychwynnwr..."
 
-#: steps_interactive.pm:1019
+#: steps_interactive.pm:1074
 #, c-format
-msgid "You appear to have an OldWorld or Unknown machine, the yaboot bootloader will not work for you. The install will continue, but you'll need to use BootX or some other means to boot your machine. The kernel argument for the root fs is: root=%s"
-msgstr "Mae'n ymddangos fod gennych beiriant OldWorld neu Anhysbys ac ni fydd cychwynnwr yaboot yn gweithio ar eich cyfer Bydd y gosodiad yn parhau ond bydd rhaid defnyddio BootX i gychwyn eich peiriant. Ymresymiad y cnewyllyn ar gyfer y gwraidd yw: root=%s"
+msgid ""
+"You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
+"will not work for you. The install will continue, but you'll need to use "
+"BootX or some other means to boot your machine. The kernel argument for the "
+"root fs is: root=%s"
+msgstr ""
+"Mae'n ymddangos fod gennych beiriant OldWorld neu Anhysbys ac ni fydd "
+"cychwynnwr yaboot yn gweithio ar eich cyfer Bydd y gosodiad yn parhau ond "
+"bydd rhaid defnyddio BootX i gychwyn eich peiriant. Ymresymiad y cnewyllyn "
+"ar gyfer y gwraidd yw: root=%s"
 
-#: steps_interactive.pm:1025
+#: steps_interactive.pm:1080
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "Ydych chi eisiau defnyddio aboot?"
 
-#: steps_interactive.pm:1028
+#: steps_interactive.pm:1083
 #, c-format
 msgid ""
 "Error installing aboot, \n"
@@ -1305,22 +1365,26 @@ msgstr ""
 "Gwall gosod aboot, \n"
 "ceisiwch orfodi gosodiad hyd yn oed os yw hynny'n dinistrio'r rhaniad cyntaf?"
 
-#: steps_interactive.pm:1040
+#: steps_interactive.pm:1095
 #, c-format
-msgid "In this security level, access to the files in the Windows partition is restricted to the administrator."
-msgstr "Ar y lefel diogelwch yma, mae mynedfa i ffeiliau yn rhaniad Windows wedi eu cyfyngu i'r Gweinyddwr."
+msgid ""
+"In this security level, access to the files in the Windows partition is "
+"restricted to the administrator."
+msgstr ""
+"Ar y lefel diogelwch yma, mae mynedfa i ffeiliau yn rhaniad Windows wedi eu "
+"cyfyngu i'r Gweinyddwr."
 
-#: steps_interactive.pm:1072
+#: steps_interactive.pm:1127
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Rhowch ddisg meddal  yng ngyrrwr %s"
 
-#: steps_interactive.pm:1074
+#: steps_interactive.pm:1129
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Creu disg meddal awto gosod..."
 
-#: steps_interactive.pm:1085
+#: steps_interactive.pm:1140
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1331,23 +1395,22 @@ msgstr ""
 "\n"
 "Ydych chi wir eisiau gorffen?"
 
-#: steps_interactive.pm:1095
+#: steps_interactive.pm:1150
 #, c-format
 msgid "Congratulations"
 msgstr "Llongyfarchiadau"
 
-#: steps_interactive.pm:1099
+#: steps_interactive.pm:1154
 #, c-format
 msgid "Reboot"
 msgstr "Ail gychwyn"
 
-#: steps_interactive.pm:1103
-#: steps_interactive.pm:1104
+#: steps_interactive.pm:1158 steps_interactive.pm:1159
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "Creu disg meddal awto gosod"
 
-#: steps_interactive.pm:1105
+#: steps_interactive.pm:1160
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"
@@ -1363,17 +1426,17 @@ msgstr ""
 "\n"
 "Efallai byddai'n well gennych ai osod y gosodiad.\n"
 
-#: steps_interactive.pm:1110
+#: steps_interactive.pm:1165
 #, c-format
 msgid "Replay"
 msgstr "Ail chwarae"
 
-#: steps_interactive.pm:1110
+#: steps_interactive.pm:1165
 #, c-format
 msgid "Automated"
 msgstr "Awtomeiddwyd"
 
-#: steps_interactive.pm:1113
+#: steps_interactive.pm:1168
 #, c-format
 msgid "Save packages selection"
 msgstr "Cadw'r dewis o becynnau"
@@ -1386,8 +1449,7 @@ msgid ""
 "Language"
 msgstr "Iaith"
 
-#: steps_list.pm:16
-#: steps_list.pm:23
+#: steps_list.pm:16 steps_list.pm:23
 #, c-format
 msgid "Localization"
 msgstr "Lleoleiddio"
@@ -1406,16 +1468,14 @@ msgid ""
 "Mouse"
 msgstr "Llygoden"
 
-#: steps_list.pm:19
-#: steps_list.pm:20
+#: steps_list.pm:19 steps_list.pm:20
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Hard drive detection"
 msgstr "Canfod disg caled"
 
-#: steps_list.pm:21
-#: steps_list.pm:22
+#: steps_list.pm:21 steps_list.pm:22
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
@@ -1443,8 +1503,7 @@ msgid ""
 "Partitioning"
 msgstr "Creu rhaniadau"
 
-#: steps_list.pm:27
-#: steps_list.pm:28
+#: steps_list.pm:27 steps_list.pm:28
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
@@ -1472,24 +1531,21 @@ msgid ""
 "Users"
 msgstr "Defnyddwyr"
 
-#: steps_list.pm:36
-#: steps_list.pm:37
+#: steps_list.pm:36 steps_list.pm:37
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "Rhwydweithio"
 
-#: steps_list.pm:38
-#: steps_list.pm:39
+#: steps_list.pm:38 steps_list.pm:39
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Bootloader"
 msgstr "Cychwynnwr"
 
-#: steps_list.pm:40
-#: steps_list.pm:41
+#: steps_list.pm:40 steps_list.pm:41
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
@@ -1503,8 +1559,7 @@ msgid ""
 "Summary"
 msgstr "Crynodeb"
 
-#: steps_list.pm:44
-#: steps_list.pm:45
+#: steps_list.pm:44 steps_list.pm:45
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
@@ -1527,74 +1582,107 @@ msgstr "Gorffen"
 
 #~ msgid "All"
 #~ msgstr "Popeth"
+
 #~ msgid "TV card"
 #~ msgstr "Cerdyn Teledu"
+
 #~ msgid "Boot"
 #~ msgstr "Cychwyn"
+
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "Dilysu"
+
 #~ msgid "Arkeia"
 #~ msgstr "Arkeia"
+
 #~ msgid "Flatout"
 #~ msgstr "Flatout"
+
 #~ msgid "Gwenview"
 #~ msgstr "Gwenview"
+
 #~ msgid "3D"
 #~ msgstr "3D"
+
 #~ msgid "CMS"
 #~ msgstr "CMS"
+
 #~ msgid "CRM"
 #~ msgstr "CRM"
+
 #~ msgid "2007 product line"
 #~ msgstr "Cynnyrch 2007"
+
 #~ msgid "Invictus Firewall"
 #~ msgstr "Mur Cadarn Invictus"
+
 #~ msgid "Discovery Live Mode"
 #~ msgstr "Modd Byw Discovery"
+
 #~ msgid "How to register"
 #~ msgstr "Sut i gofrestru"
+
 #~ msgid "Rpmdrake 2"
 #~ msgstr "Rpmdrake 2"
+
 #~ msgid "Mandriva Online Services"
 #~ msgstr "Mandriva Online Services"
+
 #~ msgid "New Theme"
 #~ msgstr "Thema Newydd"
+
 #~ msgid "Web 2.0"
 #~ msgstr "Web 2.0"
+
 #~ msgid "Kaspersky"
 #~ msgstr "Kaspersky"
+
 #~ msgid "LinDVD"
 #~ msgstr "LinDVD"
+
 #~ msgid "Skype"
 #~ msgstr "Skype"
+
 #~ msgid "Transgaming/Cedega"
 #~ msgstr "Transgaming/Cedega"
+
 #~ msgid "DrakVPN"
 #~ msgstr "DrakVPN"
+
 #~ msgid "(%d package, %d MB)"
 #~ msgid_plural "(%d packages, %d MB)"
 #~ msgstr[0] "(%d pecyn, %d MB)"
 #~ msgstr[1] "(%d pecyn, %d MB)"
+
 #~ msgid "%d packages"
 #~ msgstr "%d pecyn"
+
 #~ msgid "Language"
 #~ msgstr "Iaith"
+
 #~ msgid "License"
 #~ msgstr "Trwydded"
+
 #~ msgid "Installation class"
 #~ msgstr "Dosbarth gosod"
+
 #~ msgid "Formatting"
 #~ msgstr "Fformatio"
+
 #~ msgid "Choosing packages"
 #~ msgstr "Dewis pecynnau"
+
 #~ msgid "Users"
 #~ msgstr "Defnyddwyr"
+
 #~ msgid "Networking"
 #~ msgstr "Rhwydweithio"
+
 #~ msgid "Configure X"
 #~ msgstr "Ffurfweddu X"
+
 #~ msgid ""
 #~ "Can not access kernel modules corresponding to your kernel (file %s is "
 #~ "missing), this generally means your boot floppy in not in sync with the "
@@ -1604,4 +1692,3 @@ msgstr "Gorffen"
 #~ "chi (mae ffeil %s ar goll), mae hyn yn golygu, fel arfer, nad yw eich "
 #~ "disg cychwyn yn cydweddu gyda'r cyfrwng Gosod (crëwch ddisg cychwyn "
 #~ "meddal newydd)"
-
