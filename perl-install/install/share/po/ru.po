@@ -7,18 +7,19 @@
 # Alice Lafox <alice@lafox.net>, 2004, 2005.
 # Alexander Kuzmenkov <rc@mezon.ru>, 2007.
 # akdengi <kazancas@mandriva.ru>, 2008.
+# akdengi <kazancas@gmail.com>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-07-20 04:44+0200\n"
-"PO-Revision-Date: 2008-07-07 15:33+0200\n"
-"Last-Translator: Pavel Maryanov <acid_jack@ukr.net>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2008-07-22 18:15+0400\n"
+"Last-Translator: akdengi <kazancas@gmail.com>\n"
+"Language-Team:  <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
 #: ../../advertising/IM_flash.pl:1
@@ -98,8 +99,7 @@ msgstr "Адрес должен начинаться с ftp:// или http://"
 
 #: any.pm:180
 #, c-format
-msgid ""
-"Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr ""
 "Выполняется соединение с веб-сайтом Mandriva Linux для получения списка "
 "доступных пакетов..."
@@ -430,8 +430,7 @@ msgstr "Интернет-компьютер"
 msgid ""
 "Set of tools to read and send mail and news (mutt, tin..) and to browse the "
 "Web"
-msgstr ""
-"Набор программ для работы с корреспонденцией (mutt, tin...) и веб-серфинга"
+msgstr "Набор программ для работы с корреспонденцией (mutt, tin...) и веб-серфинга"
 
 #: share/meta-task/compssUsers.pl:37
 #, c-format
@@ -994,14 +993,12 @@ msgstr "Обновление %s"
 #: steps_interactive.pm:145
 #, c-format
 msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-msgstr ""
-"Обновление с 32-разрядного до 64-разрядного дистрибутива не поддерживается"
+msgstr "Обновление с 32-разрядного до 64-разрядного дистрибутива не поддерживается"
 
 #: steps_interactive.pm:149
 #, c-format
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-msgstr ""
-"Обновление с 64-разрядного до 32-разрядного дистрибутива не поддерживается"
+msgstr "Обновление с 64-разрядного до 32-разрядного дистрибутива не поддерживается"
 
 #: steps_interactive.pm:168
 #, c-format
@@ -1011,17 +1008,17 @@ msgstr "Ключ шифрования для %s"
 #: steps_interactive.pm:200
 #, c-format
 msgid "Cancel installation, reboot system"
-msgstr ""
+msgstr "Отмена установки, перезагрузка системы"
 
 #: steps_interactive.pm:201
-#, fuzzy, c-format
+#, c-format
 msgid "New Installation"
-msgstr "Установка"
+msgstr "Новая Установка"
 
 #: steps_interactive.pm:202
 #, c-format
 msgid "Upgrade previous installation (not recommended)"
-msgstr ""
+msgstr "Обновление предыдущей установки (не рекомендуется)"
 
 #: steps_interactive.pm:206
 #, c-format
@@ -1034,6 +1031,13 @@ msgid ""
 "Warning : you should backup all your personal data before choosing \"New\n"
 "Installation\"."
 msgstr ""
+"Установщик обнаружил, что существующая установка Mandriva Linux не\n"
+"может быть безопасно обновлена на %s.\n"
+"\n"
+"Рекомедуется заново установить систему, заменив существующую.\n"
+"\n"
+"Внимание: вы должны сделать копию всех ваших персональных данных, перед выбором \"Новая\n"
+"Установка\"."
 
 #: steps_interactive.pm:248
 #, c-format
@@ -1136,8 +1140,7 @@ msgstr "Выборочная установка"
 #: steps_interactive.pm:491
 #, c-format
 msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
-msgstr ""
-"Вы можете выбрать профиль для установки окружения: KDE, GNOME или выборочный"
+msgstr "Вы можете выбрать профиль для установки окружения: KDE, GNOME или выборочный"
 
 #: steps_interactive.pm:576
 #, c-format
@@ -1257,8 +1260,7 @@ msgstr ""
 #: steps_interactive.pm:769
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
-msgstr ""
-"Выполняется соединение с зеркалом для получения списка доступных пакетов..."
+msgstr "Выполняется соединение с зеркалом для получения списка доступных пакетов..."
 
 #: steps_interactive.pm:775
 #, c-format
@@ -1594,3 +1596,4 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "Выход"
+
