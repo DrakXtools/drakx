@@ -136,7 +136,6 @@ sub new($$) {
     install::gtk::init_gtk($o);
     install::gtk::init_sizes($o);
     install::gtk::install_theme($o);
-    install::gtk::create_logo_window($o);
     install::gtk::create_steps_window($o);
 
     $ugtk2::grab = 1;
