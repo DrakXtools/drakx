@@ -724,7 +724,7 @@ sub new {
     my $o = bless { %opts }, $type;
     while (my $e = shift @tempory::objects) { $e->destroy }
 
-    my $icon = find { _find_imgfile($_) } $opts{icon}, (get_default_step_items())[0], 'banner-generic-ad';
+    my $icon = find { _find_imgfile($_) } $::isInstall ? 'empty-banner' : $opts{icon};
     my $banner_title = $opts{banner_title};
     my $window = gtknew(
 	'MagicWindow',

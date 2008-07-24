@@ -840,7 +840,7 @@ sub wait_messageW {
 			title => $title,
 			pop_it => defined $o->{pop_wait_messages} ? $o->{pop_wait_messages} : !$::isInstall, 
 			modal => 1, 
-			$::isInstall ? (banner => Gtk2::Banner->new((get_default_step_items())[0], $message)) : (),
+			$::isInstall ? (banner => Gtk2::Banner->new('empty-banner', $message)) : (),
 			no_Window_Manager => exists $o->{no_Window_Manager} ? $o->{no_Window_Manager} : !$::isStandalone,
 			if__($::main_window, transient_for => $::main_window),
 			child => gtknew('VBox', padding => 4, border_width => 10, children => [
