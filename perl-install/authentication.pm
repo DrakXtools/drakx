@@ -224,7 +224,6 @@ sub ask_root_password_and_authentication {
     $in->ask_from_({
 	 title => N("Authentication"), 
 	 messages => N("Set administrator (root) password"),
-	 icon => 'banner-pw',
 	 advanced_label => N("Authentication method"),
 	 advanced_messages => kind2description(@kinds),
 	 interactive_help_id => "setRootPassword",

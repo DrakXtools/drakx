@@ -257,7 +257,7 @@ sub reallyChooseDesktop {
 sub reallyChooseGroups {
     my ($o, $size_to_display, $individual, $_compssUsers) = @_;
 
-    my $w = ugtk2->new(N("Package Group Selection"), icon => 'banner-sys');
+    my $w = ugtk2->new(N("Package Group Selection"));
     my $w_size = gtknew('Label', text => &$size_to_display);
 
     my $entry = sub {
@@ -474,7 +474,7 @@ sub installPackages {
     my ($current_total_size, $last_size, $nb, $total_size, $last_dtime, $_trans_progress_total);
 
     local $::noborderWhenEmbedded = 1;
-    my $w = ugtk2->new(N("Installing"), icon => 'banner-sys');
+    my $w = ugtk2->new(N("Installing"));
     state $show_advertising;
 
     my $pkg_log_widget = gtknew('TextView', editable => 0);
@@ -589,7 +589,7 @@ sub installPackages {
 sub summary_prompt {
     my ($o, $l, $check_complete) = @_;
 
-    my $w = ugtk2->new(N("Summary"), icon => 'banner-summary');
+    my $w = ugtk2->new(N("Summary"));
 
     my $set_entry_labels;
     my (@table, @widget_list);

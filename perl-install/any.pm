@@ -349,7 +349,6 @@ sub setupBootloader__mbr_or_not {
 
 	my $default = find { $_->[1] eq $b->{boot} } @l;
 	$in->ask_from_({ title => N("LILO/grub Installation"),
-			 icon => 'banner-bootL',
 			 messages => N("Where do you want to install the bootloader?"),
 			 interactive_help_id => 'setupBootloaderBeginner',
 		       },
@@ -388,7 +387,6 @@ sub setupBootloader__general {
 
 	$in->ask_from_({ #messages => N("Bootloader main options"),
 			 title => N("Bootloader main options"),
-			 icon => 'banner-bootL',
 			 interactive_help_id => 'setupBootloader',
 		       }, [
 			 #title => N("Bootloader main options"),
@@ -421,7 +419,6 @@ sub setupBootloader__general {
 	$b->{boot} = $partition_table::mac::bootstrap_part;	
 	$in->ask_from_({ messages => N("Bootloader main options"),
 			 title => N("Bootloader main options"),
-			 icon => 'banner-bootL',
 			 interactive_help_id => 'setupYabootGeneral',
 		       }, [
             { label => N("Bootloader to use"), val => \$b->{method}, list => \@method_choices, format => \&bootloader::method2text },
@@ -784,7 +781,6 @@ sub ask_user_and_root {
     };
     my $ret = $in->ask_from_(
         { title => N("User management"),
-          icon => 'banner-adduser',
           interactive_help_id => 'addUser',
 	  if_($::isInstall && $superuser, cancel => ''),
           focus_first => 1,
@@ -916,7 +912,6 @@ sub acceptLicense {
     my $r = $::testing ? 'Accept' : 'Refuse';
 
     $o->ask_from_({ title => N("License agreement"), 
-                    icon => 'banner-license',
 		    focus_first => 1,
 		     cancel => N("Quit"),
 		     messages => formatAlaTeX(messages::main_license() . "\n\n\n" . messages::warning_about_patents()),
@@ -947,7 +942,6 @@ sub selectLanguage_install {
 
     my $common = { messages => N("Please choose a language to use."),
 		   title => N("Language choice"),
-		   icon => 'banner-languages.png',
 		   interactive_help_id => 'selectLanguage' };
 
     my $lang = $locale->{lang};
@@ -1069,7 +1063,6 @@ sub selectCountry {
 
     $in->ask_from_(
 		  { title => N("Country / Region"), 
-		    icon => 'banner-languages',
 		    messages => N("Please choose your country."),
 		    interactive_help_id => 'selectCountry',
 		    if_(@best, advanced_messages => N("Here is the full list of available countries")),

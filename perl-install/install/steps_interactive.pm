@@ -93,7 +93,6 @@ sub selectKeyboard {
 	my $ext_keyboard = my $KEYBOARD = $o->{keyboard}{KEYBOARD};
 	$o->ask_from_(
 		      { title => N("Keyboard"), 
-			icon => 'banner-languages',
 			messages => N("Please choose your keyboard layout."),
 			interactive_help_id => 'selectKeyboard',
 			advanced_messages => N("Here is the full list of available keyboards"),
@@ -743,7 +742,7 @@ sub installUpdates {
 	return;
     }
 
-    $o->ask_yesorno_({ title => N("Updates"), icon => 'banner-update', messages => formatAlaTeX(
+    $o->ask_yesorno_({ title => N("Updates"), messages => formatAlaTeX(
 N("You now have the opportunity to download updated packages. These packages
 have been updated after the distribution was released. They may
 contain security or bug fixes.
@@ -851,7 +850,6 @@ sub summary {
     push @l, {
 	group => N("System"),
 	label => N("Timezone"),
-	banner_icon => 'banner-languages',
 	val => sub { $o->{timezone}{timezone} },
 	clicked => sub { $timezone_manually_set = $o->configureTimezone(1) || $timezone_manually_set },
     };
@@ -899,7 +897,6 @@ sub summary {
     push @l, {
 	group => N("System"),
 	label => N("Services"),
-	banner_icon => 'banner-generic-ad',
 	val => sub {
 	    require services;
 	    my ($l, $activated) = services::services();
@@ -921,7 +918,6 @@ sub summary {
     push @l, {
 	group => N("Hardware"),
 	label => N("Mouse"),
-	banner_icon => 'banner-bootL',
 	val => sub { translate($o->{mouse}{type}) . ' ' . translate($o->{mouse}{name}) },
 	clicked => sub { selectMouse($o, 1); mouse::write($o->do_pkgs, $o->{mouse}) },
     };
@@ -935,7 +931,6 @@ sub summary {
 	push @l, {
 	    group => N("Hardware"),
 	    label => N("Sound card"),
-	    banner_icon => 'banner-generic-ad',
 	    val => sub { 
 		$device->{driver} && modules::module2description($device->{driver}) || $device->{description};
 	    },
@@ -968,7 +963,6 @@ sub summary {
     push @l, {
 	group => N("Hardware"),
 	label => N("Graphical interface"),
-	banner_icon => 'banner-bootL',
 	val => sub { $o->{raw_X} ? Xconfig::various::to_string($o->{raw_X}) : '' },
 	clicked => sub { configureX($o, 'expert') }, 
     };
@@ -1148,7 +1142,6 @@ Do you really want to quit now?"), 0);
     $o->ask_from_no_check(
 	{
 	 title => N("Congratulations"),
-	 icon => 'banner-exit',
 	 messages => formatAlaTeX(messages::install_completed()),
 	 interactive_help_id => 'exitInstall',
 	 ok => $::local_install ? N("Quit") : N("Reboot"),
