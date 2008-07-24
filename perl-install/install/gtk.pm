@@ -116,7 +116,10 @@ sub create_steps_window {
 	]);
     };
 
-    my @l = $category->(N("Installation"));
+    my @l = (
+        create_logo(),
+        $category->(N("Installation"))
+    );
     foreach (grep { !eval $o->{steps}{$_}{hidden} } @{$o->{orderedSteps}}) {
 	if ($_ eq 'setRootPassword_addUser') {
 	    push @l, '', $category->(N("Configuration"));
