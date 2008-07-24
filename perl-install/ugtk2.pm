@@ -702,12 +702,12 @@ sub string_width {
 }
 
 
-my ($def_step_icon, $def_step_title);
+my ($def_step_title);
 sub set_default_step_items {
-    ($def_step_icon, $def_step_title) = @_;
+    ($def_step_title) = @_;
 }
 
-sub get_default_step_items { ($def_step_icon, $def_step_title) }
+sub get_default_step_items { ($def_step_title) }
 
 # -=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---
 #                 toplevel window creation helper
@@ -730,7 +730,7 @@ sub new {
 	'MagicWindow',
 	title => $title || '',
 	pop_it => $o->{pop_it},
-	$::isInstall ? (banner => Gtk2::Banner->new($icon, $title || (get_default_step_items())[1])) : (),
+	$::isInstall ? (banner => Gtk2::Banner->new($icon, $title || (get_default_step_items()))) : (),
 	$::isStandalone && $banner_title && $icon ? (banner => Gtk2::Banner->new($icon, $banner_title)) : (),
 	width => $opts{width}, height => $opts{height}, default_width => $opts{default_width}, default_height => $opts{default_height}, 
 	modal => $opts{modal} || $grab || $o->{grab} || $o->{modal} || $o->{transient},

@@ -149,8 +149,8 @@ sub enteringStep {
     my ($o, $step) = @_;
 
     printf "Entering step `%s'\n", common::remove_translate_context($o->{steps}{$step}{text});
-    if (my @banner_elts = ($o->{steps}{$step}{banner_icon}, translate($o->{steps}{$step}{banner_title}))) {
-        set_default_step_items(@banner_elts);
+    if (my $banner_title = $o->{steps}{$step}{banner_title}) {
+        set_default_step_items($banner_title);
     }
     $o->SUPER::enteringStep($step);
     install::gtk::update_steps_position($o);
@@ -609,9 +609,9 @@ sub summary_prompt {
 			   gtknew('Button', text => N("Configure"), clicked => sub { 
 						 $w->{rwindow}->hide;
 						 my ($old_icon, $old_title) = get_default_step_items();
-						 set_default_step_items($e->{banner_icon} || $old_icon, $e->{banner_title} || $old_title);
+						 set_default_step_items($e->{banner_title} || $old_title);
 						 $e->{clicked}(); 
-						 set_default_step_items($old_icon, $old_title);
+						 set_default_step_items($old_title);
 						 $w->{rwindow}->show;
 						 $set_entry_labels->();
 					     }) ];
