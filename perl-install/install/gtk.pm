@@ -127,7 +127,11 @@ sub create_steps_window {
 	my $img = gtknew('Image', file => 'steps_off.png');
 	$steps{steps}{$_}{img} = $img;
 	$steps{steps}{$_}{raw_text} = translate($o->{steps}{$_}{text});
-	push @l, gtknew('HBox', spacing => 7, children_tight => [ '', '', $img, $steps{steps}{$_}{text} = gtknew('Label', text => $steps{steps}{$_}{raw_text}) ]);
+	push @l, gtknew('HBox', spacing => 7, children => [
+            1, '',
+            0, $steps{steps}{$_}{text} = gtknew('Label', text => $steps{steps}{$_}{raw_text}),
+            0, $img,
+        ]);
     }
 
     my $offset = 20;
