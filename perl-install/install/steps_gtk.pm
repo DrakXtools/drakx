@@ -133,6 +133,7 @@ sub new($$) {
         modules::load('xpad');
         run_program::run('xset', 'm', '1/8', '1');
     }
+    run_program::raw({ detach => 1 }, 'drakx-matchbox-window-manager', '-display', $wanted_DISPLAY, '-theme', 'Ia Ora Smooth');
     install::gtk::init_gtk($o);
     install::gtk::init_sizes($o);
     install::gtk::install_theme($o);
