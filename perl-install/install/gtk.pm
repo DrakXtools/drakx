@@ -156,22 +156,11 @@ sub update_steps_position {
 }
 
 #------------------------------------------------------------------------------
-sub create_logo_window {
+sub create_logo {
     my ($o) = @_;
 
     return if $::logowidth == 0;
-
-    mygtk2::may_destroy($o->{logo_window});
-
-    my $file = "logo-mandriva.png";
-
-    $o->{logo_window} =
-      gtknew('Window', 
-	     width => $::logowidth, height => $::logoheight, 
-	     widget_name => 'logo',
-	     child => gtknew('Image', file => $file),
-	 );
-    $o->{logo_window}->show;
+    gtknew('Image', file => 'logo-mandriva.png');
 }
 
 #------------------------------------------------------------------------------
