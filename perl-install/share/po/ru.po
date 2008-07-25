@@ -1,21 +1,24 @@
+# translation of ru.po to
 # Translation of libDrakX messages to Russian
 # Copyright (C) 1999-2008 Mandriva
+#
 # Pavel Maryanov <acid_jack@ukr.net>, 2002, 2003, 2005, 2006, 2007, 2008.
 # Alice Lafox <alice@lafox.com.ua>, 2003.
 # Alice Lafox <alice@lafox.net>, 2004, 2005.
 # Alexander Kuzmenkov <rc@mezon.ru>, 2007.
-#
+# akdengi <kazancas@gmail.com>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: libDrakX\n"
+"Project-Id-Version: ru\n"
 "POT-Creation-Date: 2008-07-20 04:41+0200\n"
-"PO-Revision-Date: 2008-03-21 02:55+0200\n"
-"Last-Translator: Pavel Maryanov <acid_jack@ukr.net>\n"
-"Language-Team: Russian <gnu@mx.ru>\n"
+"PO-Revision-Date: 2008-07-25 23:11+0400\n"
+"Last-Translator: akdengi <kazancas@gmail.com>\n"
+"Language-Team:  <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: any.pm:245 diskdrake/interactive.pm:554 diskdrake/interactive.pm:741
 #: diskdrake/interactive.pm:785 diskdrake/interactive.pm:843
@@ -210,10 +213,8 @@ msgstr "ограничить"
 
 #: any.pm:414
 #, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
-msgstr ""
-"Опция ``Ограничить параметры командной строки'' не используется без пароля"
+msgid "Option ``Restrict command line options'' is of no use without a password"
+msgstr "Опция ``Ограничить параметры командной строки'' не используется без пароля"
 
 #: any.pm:416
 #, c-format
@@ -406,8 +407,7 @@ msgstr "Укажите имя пользователя, пожалуйста"
 
 #: any.pm:772
 #, c-format
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr ""
 "Имя пользователя должно содержать только буквы в нижнем регистре, \n"
 "цифры , `-' и `_'"
@@ -654,8 +654,7 @@ msgstr ""
 
 #: any.pm:1193
 #, c-format
-msgid ""
-"You can export using NFS or SMB. Please select which you would like to use."
+msgid "You can export using NFS or SMB. Please select which you would like to use."
 msgstr ""
 "Вы можете экспортировать при помощи NFS или SMB. Пожалуйста, выберите, "
 "который из них вы желаете использовать."
@@ -752,7 +751,7 @@ msgstr "Домен Windows"
 #: authentication.pm:30
 #, c-format
 msgid "Kerberos 5"
-msgstr ""
+msgstr "Kerberos 5"
 
 #: authentication.pm:64
 #, c-format
@@ -761,9 +760,9 @@ msgstr "Локальный файл:"
 
 #: authentication.pm:64
 #, c-format
-msgid ""
-"Use local for all authentication and information user tell in local file"
-msgstr ""
+#, fuzzy
+msgid "Use local for all authentication and information user tell in local file"
+msgstr " Всю аутенфикацию производить локально и заносить информацию пользователей в локальный файл."
 
 #: authentication.pm:65
 #, c-format
@@ -811,7 +810,7 @@ msgstr ""
 #: authentication.pm:68
 #, c-format
 msgid "Kerberos 5 :"
-msgstr ""
+msgstr "Kerberos 5 :"
 
 #: authentication.pm:68
 #, c-format
@@ -836,7 +835,7 @@ msgstr "Требуется аутентификация домена"
 msgid ""
 "You have selected LDAP authentication. Please review the configuration "
 "options below "
-msgstr ""
+msgstr "Вы выбрали аутенфикацию LDAP. Проверьте опции конфигурации ниже"
 
 #: authentication.pm:101 authentication.pm:156
 #, c-format
@@ -856,17 +855,18 @@ msgstr ""
 #: authentication.pm:105 authentication.pm:160
 #, c-format
 msgid "Use encrypt connection with TLS "
-msgstr ""
+msgstr "Использовать шифрованное соединение с TLS"
 
 #: authentication.pm:106 authentication.pm:161
 #, c-format
 msgid "Download CA Certificate "
-msgstr ""
+msgstr "Загрузить сертификат CA"
 
 #: authentication.pm:108 authentication.pm:141
 #, c-format
+#, fuzzy
 msgid "Use Disconnect mode "
-msgstr ""
+msgstr "Использовать Бесвязный режим"
 
 #: authentication.pm:109 authentication.pm:162
 #, fuzzy, c-format
@@ -882,7 +882,7 @@ msgstr ""
 #: authentication.pm:111 authentication.pm:163
 #, c-format
 msgid "Bind DN "
-msgstr ""
+msgstr "Аутенфикация DN"
 
 #: authentication.pm:112 authentication.pm:164
 #, fuzzy, c-format
@@ -892,7 +892,7 @@ msgstr "Пароль"
 #: authentication.pm:114
 #, c-format
 msgid "Advanced path for group "
-msgstr ""
+msgstr "Дополнительный путь для группы"
 
 #: authentication.pm:116
 #, fuzzy, c-format
@@ -914,7 +914,7 @@ msgstr ""
 msgid ""
 "You have selected Kerberos 5 authentication. Please review the configuration "
 "options below "
-msgstr ""
+msgstr "Вы выбрали Kerberos 5 для аутефикации. Проверьте опции конфигурации ниже"
 
 #: authentication.pm:135
 #, fuzzy, c-format
@@ -929,12 +929,12 @@ msgstr "Сервер LDAP"
 #: authentication.pm:139
 #, c-format
 msgid "Use DNS to resolve hosts for realms "
-msgstr ""
+msgstr "Использовать DNS для разрешения хостов для области"
 
 #: authentication.pm:140
 #, c-format
 msgid "Use DNS to resolve KDCs for realms "
-msgstr ""
+msgstr "Использовать DNS для разрешения KDC для области"
 
 #: authentication.pm:145
 #, fuzzy, c-format
@@ -951,14 +951,14 @@ msgstr "Информация о жестком диске"
 msgid ""
 "You have selected Kerberos 5 for authentication, now you must choose the "
 "type of users information "
-msgstr ""
+msgstr "Вы выбрали Kerberos 5 для аутефикации, теперь вы можете изменить тип информации пользователя"
 
 #: authentication.pm:179
 #, c-format
 msgid ""
 "You have selected NIS authentication. Please review the configuration "
 "options below "
-msgstr ""
+msgstr "Вы выбрали аутенфикацию NIS. Проверьте опции конфигурации ниже"
 
 #: authentication.pm:181
 #, c-format
@@ -976,6 +976,8 @@ msgid ""
 "You have selected Windows Domain authentication. Please review the "
 "configuration options below "
 msgstr ""
+"Вы выбрали домен аутенфикации Windows."
+"Проверьте опции конфигурации ниже"
 
 #: authentication.pm:207
 #, fuzzy, c-format
@@ -1457,8 +1459,7 @@ msgstr "Желаете сохранить изменения /etc/fstab"
 #: diskdrake/interactive.pm:284 fs/partitioning_wizard.pm:252
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr ""
-"Вам нужно перезагрузиться, чтобы изменения таблицы разделов вступили в силу"
+msgstr "Вам нужно перезагрузиться, чтобы изменения таблицы разделов вступили в силу"
 
 #: diskdrake/interactive.pm:289
 #, c-format
@@ -1619,10 +1620,8 @@ msgstr "Удалить файл loopback?"
 
 #: diskdrake/interactive.pm:532
 #, c-format
-msgid ""
-"After changing type of partition %s, all data on this partition will be lost"
-msgstr ""
-"После изменения типа раздела %s, все данные в этом разделе будут потеряны"
+msgid "After changing type of partition %s, all data on this partition will be lost"
+msgstr "После изменения типа раздела %s, все данные в этом разделе будут потеряны"
 
 #: diskdrake/interactive.pm:545
 #, c-format
@@ -1697,8 +1696,7 @@ msgstr "Для всех данных в этом разделе должна б�
 #: diskdrake/interactive.pm:701
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
-msgstr ""
-"После изменения размера раздела %s все данные в этом разделе будут потеряны"
+msgstr "После изменения размера раздела %s все данные в этом разделе будут потеряны"
 
 #: diskdrake/interactive.pm:708
 #, c-format
@@ -1843,8 +1841,7 @@ msgstr "Таблица разделов устройства %s будет за�
 #: diskdrake/interactive.pm:1098
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
-msgstr ""
-"После форматирования раздела %s, все данные на этом разделе будут потеряны"
+msgstr "После форматирования раздела %s, все данные на этом разделе будут потеряны"
 
 #: diskdrake/interactive.pm:1103 fs/partitioning.pm:49
 #, c-format
@@ -2155,8 +2152,7 @@ msgstr "Еще один"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
+msgid "Please enter your username, password and domain name to access this host."
 msgstr ""
 "Пожалуйста, введите свои имя пользователя, пароль и имя домена, чтобы "
 "получить доступ к хосту"
@@ -2289,8 +2285,7 @@ msgstr "Очищать кэш записи при закрытии файла"
 #: fs/mount_options.pm:119
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
-msgstr ""
-"Разрешить подсчет дисковых квот для групп и опционально установку лимитов"
+msgstr "Разрешить подсчет дисковых квот для групп и опционально установку лимитов"
 
 #: fs/mount_options.pm:121
 #, c-format
@@ -2364,8 +2359,7 @@ msgstr "Все I/O для файловой системы должны быть 
 #: fs/mount_options.pm:144
 #, c-format
 msgid "Allow every user to mount and umount the file system."
-msgstr ""
-"Разрешить всем пользователям монтировать и размонтировать файловую систему."
+msgstr "Разрешить всем пользователям монтировать и размонтировать файловую систему."
 
 #: fs/mount_options.pm:146
 #, c-format
@@ -3105,7 +3099,7 @@ msgstr ""
 "Здесь можно выбрать альтернативный драйвер (OSS или ALSA) для звуковой карты "
 "(%s)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:392
@@ -5283,8 +5277,7 @@ msgstr "Разрешает/Запрещает непосредственный �
 
 #: security/help.pm:33
 #, c-format
-msgid ""
-"Allow the list of users on the system on display managers (kdm and gdm)."
+msgid "Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr ""
 "Разрешает/Запрещает вывод списка пользователей системы в оконных менеджерах "
 "(kdm и gdm)."
@@ -5541,8 +5534,7 @@ msgstr "если установлено Да, ежедневно выполня�
 #: security/help.pm:120
 #, c-format
 msgid "if set to yes, check additions/removals of sgid files."
-msgstr ""
-"если установлено Да, проверяется добавление/удаление файлов с sgid-битами."
+msgstr "если установлено Да, проверяется добавление/удаление файлов с sgid-битами."
 
 #: security/help.pm:121
 #, c-format
@@ -5552,8 +5544,7 @@ msgstr "если установлено Да, проверяется налич�
 #: security/help.pm:122
 #, c-format
 msgid "if set to yes, verify checksum of the suid/sgid files."
-msgstr ""
-"если установлено Да, проверяется контрольная сумма файлов с битами suid/sgid."
+msgstr "если установлено Да, проверяется контрольная сумма файлов с битами suid/sgid."
 
 #: security/help.pm:123
 #, c-format
@@ -5581,8 +5572,7 @@ msgstr "если установлено Да, выполняются прове�
 
 #: security/help.pm:127
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
+msgid "if set, send the mail report to this email address else send it to root."
 msgstr ""
 "если установлено, письмо с отчетом отправляется на этот адрес, иначе "
 "отправляется root'у."
@@ -5595,8 +5585,7 @@ msgstr "если установлено Да, результаты провер�
 #: security/help.pm:129
 #, c-format
 msgid "Do not send mails if there's nothing to warn about"
-msgstr ""
-"если установлено Да, сообщения не отправляются, если не о чем предупреждать."
+msgstr "если установлено Да, сообщения не отправляются, если не о чем предупреждать."
 
 #: security/help.pm:130
 #, c-format
@@ -6019,8 +6008,7 @@ msgstr "Использовать libsafe для серверов"
 
 #: security/level.pm:64
 #, c-format
-msgid ""
-"A library which defends against buffer overflow and format string attacks."
+msgid "A library which defends against buffer overflow and format string attacks."
 msgstr "Библиотека, защищающая от атак переполнения буфера и формата строки."
 
 #: security/level.pm:65
@@ -6031,8 +6019,7 @@ msgstr "Администратор безопасности (логин или e
 #: services.pm:19
 #, c-format
 msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
-msgstr ""
-"Запустить звуковую систему ALSA (Расширенная звуковая архитектура Linux)"
+msgstr "Запустить звуковую систему ALSA (Расширенная звуковая архитектура Linux)"
 
 #: services.pm:20
 #, c-format
@@ -6074,8 +6061,7 @@ msgstr ""
 
 #: services.pm:28
 #, c-format
-msgid ""
-"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr "CUPS - система печати Linux"
 
 #: services.pm:29
@@ -6110,8 +6096,7 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
-"HAL - демон, собирающий информацию об аппаратном обеспечении компьютера"
+msgstr "HAL - демон, собирающий информацию об аппаратном обеспечении компьютера"
 
 #: services.pm:36
 #, c-format
@@ -6124,8 +6109,7 @@ msgstr ""
 
 #: services.pm:38
 #, c-format
-msgid ""
-"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
 "Apache является сервером всемирной паутины. Он используется для обслуживания "
 "файлов HTML и CGI."
@@ -6378,8 +6362,7 @@ msgstr ""
 
 #: services.pm:92
 #, c-format
-msgid ""
-"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr "SANE - система работы со сканерами и камерами"
 
 #: services.pm:93
@@ -6470,8 +6453,7 @@ msgstr "Службы"
 #: services.pm:153
 #, c-format
 msgid "Choose which services should be automatically started at boot time"
-msgstr ""
-"Выберите, какие службы должны быть автоматически запущены во время загрузки"
+msgstr "Выберите, какие службы должны быть автоматически запущены во время загрузки"
 
 #: services.pm:171
 #, c-format
@@ -6898,115 +6880,3 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Установка завершилась неудачей"
 
-#~ msgid "Active Directory with SFU"
-#~ msgstr "Active Directory с SFU"
-
-#~ msgid "Active Directory with Winbind"
-#~ msgstr "Active Directory с Winbind"
-
-#~ msgid "Use information stored in local files for all authentication"
-#~ msgstr "Использовать информацию из локальных файлов для аунтефикации"
-
-#~ msgid "Active Directory with SFU:"
-#~ msgstr "Active Directory с SFU:"
-
-#~ msgid "Active Directory with Winbind:"
-#~ msgstr "Active Directory с Winbind:"
-
-#~ msgid ""
-#~ "Winbind allows the system to authenticate users in a Windows Active "
-#~ "Directory Server."
-#~ msgstr ""
-#~ "Winbind позволяет системе аутентифицировать пользователей на сервере "
-#~ "Windows с Active Directory."
-
-#~ msgid "Authentication LDAP"
-#~ msgstr "Аутентификация LDAP"
-
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid "SSL"
-#~ msgstr "SSL"
-
-#~ msgid "security layout (SASL/Kerberos)"
-#~ msgstr "слой безопасности (SASL/Kerberos)"
-
-#~ msgid "Authentication Active Directory"
-#~ msgstr "Аутентификация Active Directory"
-
-#~ msgid "LDAP users database"
-#~ msgstr "База данных пользователей LDAP"
-
-#~ msgid "LDAP user allowed to browse the Active Directory"
-#~ msgstr "Пользователю LDAP разрешено просматривать Active Directory"
-
-#~ msgid "Password for user"
-#~ msgstr "Пароль для пользователя"
-
-#~ msgid "Authentication NIS"
-#~ msgstr "Аутентификация NIS"
-
-#~ msgid ""
-#~ "For this to work for a W2K PDC, you will probably need to have the admin "
-#~ "run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
-#~ "add and reboot the server.\n"
-#~ "You will also need the username/password of a Domain Admin to join the "
-#~ "machine to the Windows(TM) domain.\n"
-#~ "If networking is not yet enabled, Drakx will attempt to join the domain "
-#~ "after the network setup step.\n"
-#~ "Should this setup fail for some reason and domain authentication is not "
-#~ "working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows"
-#~ "(tm) Domain, and Admin Username/Password, after system boot.\n"
-#~ "The command 'wbinfo -t' will test whether your authentication secrets are "
-#~ "good."
-#~ msgstr ""
-#~ "Для того, чтобы это заработало под W2K PDC, вам, возможно, понадобится "
-#~ "выполнить под админом: C:\\>net localgroup \"Pre-Windows 2000 Compatible "
-#~ "Access\" everyone /add и перезагрузить сервер.\n"
-#~ "Вам также понадобится имя_пользователя/пароль администратора домена, "
-#~ "чтобы подключить машину к домену Windows(TM).\n"
-#~ "Если сеть еще не включена, DrakX попытается подключиться к домену после "
-#~ "завершения этапа установки сети.\n"
-#~ "Если по какой-то причине эта установка завершилась неудачей и "
-#~ "аутентификация в домене не работает, запустите 'smbpasswd -j ДОМЕН -U "
-#~ "ПОЛЬЗОВАТЕЛЬ%%ПАРОЛЬ', используя домен и имя_пользователя/пароль своей "
-#~ "Windows(tm), после загрузки системы.\n"
-#~ "Команда 'wbinfo -t' проверит, насколько секретна ваша аутентификация."
-
-#~ msgid "Authentication Windows Domain"
-#~ msgstr "Аутентификация домена Windows"
-
-#~ msgid "Undo"
-#~ msgstr "Отменить действие"
-
-#~ msgid "Save partition table"
-#~ msgstr "Сохранить таблицу разделов"
-
-#~ msgid "Restore partition table"
-#~ msgstr "Восстановить таблицу разделов"
-
-#~ msgid ""
-#~ "The backup partition table has not the same size\n"
-#~ "Still continue?"
-#~ msgstr ""
-#~ "Резервная таблица разделов диска имеет другой размер\n"
-#~ "Все-таки продолжить?"
-
-#~ msgid "Info: "
-#~ msgstr "Информация: "
-
-#~ msgid "Unknown driver"
-#~ msgstr "Неизвестный драйвер "
-
-#~ msgid "Error reading file %s"
-#~ msgstr "Ошибка при чтении файла %s"
-
-#~ msgid "Restoring from file %s failed: %s"
-#~ msgstr "Восстановление из файла %s завершилось неудачей: %s"
-
-#~ msgid "Bad backup file"
-#~ msgstr "Плохой резервный файл"
-
-#~ msgid "Error writing to file %s"
-#~ msgstr "Ошибка записи в файл %s"
