@@ -95,9 +95,9 @@ sub install_theme {
     load_rc($o, $o->{theme} ||= default_theme($o));
     load_font($o);
 
-	my $win = gtknew('Window', widget_name => 'background', title => 'root window');
-	$win->realize;
-	mygtk2::set_root_window_background_with_gc($win->style->bg_gc('normal'));
+    my $win = gtknew('Window', widget_name => 'background', title => 'root window');
+    $win->realize;
+    mygtk2::set_root_window_background_with_gc($win->style->bg_gc('normal'));
 }
 
 #------------------------------------------------------------------------------
