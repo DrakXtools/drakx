@@ -729,8 +729,7 @@ sub ask_fromW {
 
     filter_widgets($l);
 
-
-    my $mainw = ugtk2->new($common->{title}, %$o, modal => 1, if__($::main_window, transient => $::main_window),
+    my $mainw = ugtk2->new($common->{title}, %$o, if__($::main_window, transient => $::main_window),
                            if_($common->{icon}, icon => $common->{icon}), banner_title => $common->{banner_title},
 		       );
  
