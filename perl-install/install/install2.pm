@@ -545,7 +545,7 @@ sub main {
     }
 
     log::l("META_CLASS=$o->{meta_class}");
-    $ENV{META_CLASS} = 'download'; #- for Ia Ora Smooth
+    $ENV{META_CLASS} = $o->{meta_class}; #- for Ia Ora
 
     foreach (@::auto_steps) {
 	if (my $s = $o->{steps}{/::(.*)/ ? $1 : $_}) {
