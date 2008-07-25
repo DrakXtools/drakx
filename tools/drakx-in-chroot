@@ -82,7 +82,7 @@ eval { cp_af($_, "$SLASH_LOCATION$_") } foreach qw(/etc/resolv.conf);
 }
 
 my $Xnest_pid;
-my $Xnest_bin = find { whereis_binary($_) } 'Xnest', 'Xephyr';
+my $Xnest_bin = find { whereis_binary($_) } 'Xephyr', 'Xnest';
 if (!-f ($SLASH_LOCATION . $AUTO_INSTALL_ROOTED) && $Xnest_bin) {
     my $DISPLAY = ':8';
     $Xnest_pid = fork();
