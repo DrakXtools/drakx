@@ -735,7 +735,7 @@ sub new {
 	$::isInstall ? (banner => Gtk2::Banner->new($icon, $title || (get_default_step_items()))) : (),
 	$::isStandalone && $banner_title && $icon ? (banner => Gtk2::Banner->new($icon, $banner_title)) : (),
 	width => $opts{width}, height => $opts{height}, default_width => $opts{default_width}, default_height => $opts{default_height}, 
-	modal => $opts{modal} || $grab || $o->{grab} || $o->{modal} || $o->{transient},
+	modal => $opts{modal} || $grab || $o->{grab} || $o->{modal},
 	no_Window_Manager => exists $opts{no_Window_Manager} ? $opts{no_Window_Manager} : !$::isStandalone,
 	if_(!$::isInstall, icon_no_error => wm_icon()),
 	if_($o->{transient}, transient_for => $o->{transient}), 
