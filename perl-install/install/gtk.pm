@@ -95,7 +95,7 @@ sub install_theme {
     load_rc($o, $o->{theme} ||= default_theme($o));
     load_font($o);
 
-	my $win = gtknew('Window', widget_name => 'background');
+	my $win = gtknew('Window', widget_name => 'background', title => 'root window');
 	$win->realize;
 	mygtk2::set_root_window_background_with_gc($win->style->bg_gc('normal'));
 }
@@ -137,7 +137,7 @@ sub create_steps_window {
 
     my $offset = 20;
     $o->{steps_window} =
-      gtknew('Window', width => ($::stepswidth - $offset), widget_name => 'Steps',
+      gtknew('Window', width => ($::stepswidth - $offset), widget_name => 'Steps', title => 'Steps',
 	     position => [ lang::text_direction_rtl() ? $::rootwidth - $::stepswidth : $offset, 0 ],
 	     child => gtknew('VBox', spacing => 6, children_tight => \@l));
     $o->{steps_window}->show;
