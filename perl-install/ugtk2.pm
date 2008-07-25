@@ -3,6 +3,7 @@ package ugtk2;
 use diagnostics;
 use strict;
 use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $wm_icon $grab $border); #- leave it on one line, for automatic removal of the line at package creation
+use locale;
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
@@ -726,6 +727,7 @@ sub new {
 
     my $icon = find { _find_imgfile($_) } $::isInstall ? 'empty-banner' : $opts{icon};
     my $banner_title = $opts{banner_title};
+    $title = uc($title) if $::isInstall;
     my $window = gtknew(
 	'MagicWindow',
 	title => $title || '',
