@@ -147,19 +147,12 @@ sub create_steps_window {
 sub update_steps_position {
     my ($o) = @_;
     return if !$steps{steps};
-    my $last_step;
     foreach (@{$o->{orderedSteps}}) {
 	exists $steps{steps}{$_} or next;
 	if ($o->{steps}{$_}{entered} && !$o->{steps}{$_}{done}) {
 	    $steps{steps}{$_}{img}->set_from_pixbuf($steps{on});
-	    $steps{steps}{$_}{text}->set_markup('<b><i>' . $steps{steps}{$_}{raw_text} . '</i></b>');
-	    if ($last_step) {
-             $steps{steps}{$last_step}{img}->set_from_pixbuf($steps{done});
-             $steps{steps}{$last_step}{text}->set_markup('<b>' . $steps{steps}{$last_step}{raw_text} . '</b>');
-         }
 	    return;
 	}
-	$last_step = $_;
     }
     mygtk2::flush(); #- for auto_installs which never go through the Gtk2 main loop
 }
