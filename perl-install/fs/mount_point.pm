@@ -104,7 +104,6 @@ sub ask_mount_points {
     } else {
 	$in->ask_from_({ messages => N("Choose the mount points"),
 			title => N("Partitioning"),
-			icon => 'banner-part',
 			interactive_help_id => 'ask_mntpoint_s',
 			callbacks => {
 			    complete => sub {

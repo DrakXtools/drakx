@@ -281,7 +281,7 @@ sub Done {
 	update_bootloader_for_renumbered_partitions($in, $all_hds);
 
 	if (any { $_->{rebootNeeded} } @{$all_hds->{hds}}) {
-	    $in->ask_warn(N("Partitioning"), N("You need to reboot for the partition table modifications to take place"), icon => 'banner-part');
+	    $in->ask_warn(N("Partitioning"), N("You need to reboot for the partition table modifications to take place"));
 	    tell_wm_and_reboot();
 	}
     }

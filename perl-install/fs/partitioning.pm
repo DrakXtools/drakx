@@ -44,7 +44,6 @@ sub choose_partitions_to_format {
 
     $in->ask_from_(
         { messages => N("Choose the partitions you want to format"),
-	  icon => 'banner-part',
 	  interactive_help_id => 'formatPartitions',
           advanced_messages => N("Check bad blocks?"),
         },

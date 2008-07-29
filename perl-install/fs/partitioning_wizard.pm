@@ -50,7 +50,7 @@ sub partition_with_diskdrake {
 	    $ok = 0;
 	    $in->ask_okcancel(N("Partitioning"), N("You must have a root partition.
 For this, create a partition (or click on an existing one).
-Then choose action ``Mount point'' and set it to `/'"), 1, 'banner-part') or return;
+Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 	}
 	if (!any { isSwap($_) } @fstab) {
 	    $ok &&= $in->ask_okcancel('', N("You do not have a swap partition.\n\nContinue anyway?"));
@@ -204,13 +204,11 @@ filesystem checks will be run on your next boot into Microsoft Windows®")) if $
 	    sub {
 		my $hd = $in->ask_from_listf_raw({ messages => N("You have more than one hard drive, which one do you install linux on?"),
 						  title => N("Partitioning"),
-						  icon => 'banner-part',
 						  interactive_help_id => 'takeOverHdChoose',
 						},
 						\&partition_table::description, \@hds_rw) or return;
 		$in->ask_okcancel_({ messages => N("ALL existing partitions and their data will be lost on drive %s", partition_table::description($hd)),
 				    title => N("Partitioning"),
-				    icon => 'banner-part',
 				    interactive_help_id => 'takeOverHdConfirm' }) or return;
 		fsedit::partition_table_clear_and_initialize($all_hds->{lvms}, $hd, $in);
 		fsedit::auto_allocate($all_hds, $partitions);
@@ -249,7 +247,7 @@ When you are done, do not forget to save using `w'", partition_table::descriptio
 
 sub warn_reboot_needed {
     my ($in) = @_;
-    $in->ask_warn(N("Partitioning"), N("You need to reboot for the partition table modifications to take place"), icon => 'banner-part');
+    $in->ask_warn(N("Partitioning"), N("You need to reboot for the partition table modifications to take place"));
 }
 
 sub main {
@@ -268,13 +266,12 @@ sub main {
 
     @solutions = @sol if @sol > 1;
     log::l("solutions: ", int @solutions);
-    @solutions or $o->ask_warn(N("Partitioning"), N("I can not find any room for installing"), icon => 'banner-part'), die 'already displayed';
+    @solutions or $o->ask_warn(N("Partitioning"), N("I can not find any room for installing")), die 'already displayed';
 
     log::l('HERE: ', join(',', map { $_->[1] } @solutions));
     my $sol;
     $o->ask_from_({ messages => N("The DrakX Partitioning wizard found the following solutions:"),
 		    title => N("Partitioning"),
-		    icon => 'banner-part',
 		    interactive_help_id => 'doPartitionDisks',
 		  }, 
 		  [ { val => \$sol, list => \@solutions, format => sub { $_[0][1] }, type => 'list' } ]);
