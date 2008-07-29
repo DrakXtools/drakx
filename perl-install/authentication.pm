@@ -100,7 +100,7 @@ sub ask_parameters {
                      {},
 		     { label => N("LDAP Server"), val => \$authentication->{LDAP_server} },
 		     { label => N("Base dn"), val => \$authentication->{LDAPDOMAIN} },
-                     { val => N("Fecth base Dn "), type  => button , clicked_may_quit => sub { $authentication->{LDAPDOMAIN} = fetch_dn($authentication->{LDAP_server}); 0 } },
+                     { val => N("Fetch base Dn "), type  => button , clicked_may_quit => sub { $authentication->{LDAPDOMAIN} = fetch_dn($authentication->{LDAP_server}); 0 } },
 		     {},
 		     { text => N("Use encrypt connection with TLS "), val => \$authentication->{cafile}, type => 'bool' },
                      { val => N("Download CA Certificate "), type  => button , disabled => sub { !$authentication->{cafile} }, clicked_may_quit => sub { $authentication->{file} = add_cafile(); 0 }  },
@@ -115,7 +115,7 @@ sub ask_parameters {
 		     { text => N("  "), advanced => 1 },
                      { label => N("Password base"), val => \$authentication->{nss_pwd},  disabled => sub { !$authentication->{nssgrp} }, advanced => 1 },
                      { label => N("Group base"), val => \$authentication->{nss_grp},  disabled => sub { !$authentication->{nssgrp} }, advanced => 1 },
-                     { label => N("Sahdow base"), val => \$authentication->{nss_shadow},  disabled => sub { !$authentication->{nssgrp} }, advanced => 1 },
+                     { label => N("Shadow base"), val => \$authentication->{nss_shadow},  disabled => sub { !$authentication->{nssgrp} }, advanced => 1 },
 		     { text => N("  "), advanced => 1 },
 		     ]) or return;
     } elsif ($kind eq 'KRB5') {
