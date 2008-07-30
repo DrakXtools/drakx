@@ -602,6 +602,10 @@ sub _gtk_any_Window {
 	    $w = "Gtk2::$class"->new;
 	}
 
+        if ($::isInstall) {
+            $w->set_type_hint('dialog'); # for matchbox window manager
+        }
+
 	$w->set_modal(1) if exists $opts->{transient_for};
 	$w->set_modal(delete $opts->{modal}) if exists $opts->{modal};
 	$w->set_transient_for(delete $opts->{transient_for}) if exists $opts->{transient_for};
