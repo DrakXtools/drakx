@@ -122,7 +122,7 @@ sub create_steps_window {
     };
 
     my @l = (
-        create_logo(),
+        gtknew('HBox', height => 145),
         $category->(N("Installation"))
     );
     foreach (grep { !eval $o->{steps}{$_}{hidden} } @{$o->{orderedSteps}}) {
@@ -138,13 +138,35 @@ sub create_steps_window {
         ]);
     }
 
-    my $offset = 20;
-    $o->{steps_window} =
-      gtknew('Window', width => ($::stepswidth - $offset), widget_name => 'Steps', title => 'Steps',
-	     position => [ lang::text_direction_rtl() ? $::rootwidth - $::stepswidth : $offset, 0 ],
-	     child => gtknew('VBox', spacing => 6, children_tight => \@l));
+    my $offset = 10;
+    $o->{steps_widget} =
+      gtknew('Fixed', widget_name => 'Steps', pixbuf_file => 'left-background',
+             has_window => 1, x => 0, y => 0, height => 500, width => $::stepswidth, # -1
+	     child => gtknew('VBox', spacing => 6, width => ($::stepswidth - $offset), children_tight => \@l));
+    $o->{steps_widget}->put(
+        # FIXME: not RTL compliant (lang::text_direction_rtl() ? ...)
+        gtknew('VBox', height => $::rootheight,
+               children => [
+                   0, gtknew('Image', file => 'left-top-corner'),
+                   (map { (1, gtknew('Image', file => 'left-border')) } 1 .. $::rootheight),
+                   0, gtknew('Image', file => 'left-bottom-corner'),
+               ]),
+        $::stepswidth - 21, 0);
 
-    $o->{steps_window}->show;
+    $o->{steps_widget}->show;
+
+    $root_window->add(
+        $o->{steps_window} = 
+          gtknew('HBox',
+                 children =>
+                   [
+                       0, $o->{steps_widget},
+                       1, gtknew('Label', width => -1, height => -1),
+                   ],
+             )
+    );
+        
+    $root_window->show_all
 }
 
 sub update_steps_position {
