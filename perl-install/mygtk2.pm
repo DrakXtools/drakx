@@ -649,10 +649,7 @@ sub _gtk__MagicWindow {
     }
 
     if ($pop_it) {
-	$opts->{child} = $::isInstall ?
-	  gtknew('Frame', shadow_type => 'out', 
-		 child => gtknew('Frame', shadow_type => 'none', border_width => 3, child => $sub_child)) :
-	  $sub_child;
+	$opts->{child} = $sub_child;
 
 	$w = _create_Window($opts);
     } else {
@@ -678,7 +675,7 @@ sub _gtk__MagicWindow {
 		sync($::WizardWindow);
 	    } else {
 		add2hash($opts, {
-		    child => gtknew('Frame', shadow_type => 'out', child => $::WizardTable),
+		    child => $::WizardTable,
 		});
 		$::WizardWindow = _create_Window($opts);
 	    }
