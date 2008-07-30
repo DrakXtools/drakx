@@ -143,6 +143,7 @@ sub create_steps_window {
       gtknew('Window', width => ($::stepswidth - $offset), widget_name => 'Steps', title => 'Steps',
 	     position => [ lang::text_direction_rtl() ? $::rootwidth - $::stepswidth : $offset, 0 ],
 	     child => gtknew('VBox', spacing => 6, children_tight => \@l));
+
     $o->{steps_window}->show;
 }
 
