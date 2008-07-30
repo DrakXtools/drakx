@@ -992,6 +992,7 @@ sub _create_Window {
 	$w->signal_connect(size_allocate => sub {
 	    my (undef, $event) = @_;
 	    my @w_size = $event->values;
+	    return if $w_size[2] < 5;
 	    return if $w_size[2] == $wi && $w_size[3] == $he; #BUG
 	    (undef, undef, $wi, $he) = @w_size;
 
