@@ -89,6 +89,8 @@ sub default_theme {
     $o->{simple_themes} || $o->{vga16} ? 'blue' : 'galaxy';
 }
 
+my $root_window;
+
 sub install_theme {
     my ($o) = @_;
 
@@ -99,6 +101,7 @@ sub install_theme {
     $win->set_type_hint('desktop'); # for matchbox window manager
     $win->realize;
     mygtk2::set_root_window_background_with_gc($win->style->bg_gc('normal'));
+    $root_window = $win;
 }
 
 #------------------------------------------------------------------------------
