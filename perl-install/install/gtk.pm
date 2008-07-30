@@ -117,7 +117,7 @@ sub create_steps_window {
     my $category = sub { 
 	gtknew('HBox', children => [ 
 	    1, '',
-	    0, gtknew('Label', text_markup => '<b>' . $_[0] . '</b>', widget_name => 'Step-categories')
+	    0, gtknew('Label', text_markup => '<b>' . uc($_[0]) . '</b>', widget_name => 'Step-categories')
 	]);
     };
 
