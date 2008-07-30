@@ -380,8 +380,8 @@ sub _gtk__Label {
 }
 
 sub title1_to_markup {
-	my ($label) = @_;
-	'<b><big>' . $label . '</big></b>';
+    my ($label) = @_;
+    '<b><big>' . $label . '</big></b>';
 }
 
 sub _gtk__Title1 {
