@@ -381,7 +381,8 @@ sub _gtk__Label {
 
 sub title1_to_markup {
     my ($label) = @_;
-    '<b><big>' . $label . '</big></b>';
+    $::isInstall ?  '<span foreground="#5A8AD6">' . $label . '</span>'
+      : '<b><big>' . $label . '</big></b>';
 }
 
 sub _gtk__Title1 {
