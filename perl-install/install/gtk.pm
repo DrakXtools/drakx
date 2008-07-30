@@ -157,7 +157,6 @@ sub update_steps_position {
 	    $steps{steps}{$_}{img}->set_from_pixbuf($steps{on});
             if ($last_step) {
                 $steps{steps}{$last_step}{img}->set_from_pixbuf($steps{done});
-                $steps{steps}{$last_step}{text}->set_markup('<b>' . $steps{steps}{$last_step}{raw_text} . '</b>');
             }
 	    return;
 	}
