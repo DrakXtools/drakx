@@ -574,6 +574,18 @@ sub _gtk__Expander {
     $w;
 }
 
+sub _gtk__Fixed {
+    my ($w, $opts, $_class, $action) = @_;
+	
+    if (!$w) {
+	$w = Gtk2::Fixed->new;
+	$w->set_has_window(delete $opts->{has_window}) if exists $opts->{has_window};
+        $w->put(delete $opts->{child}, delete $opts->{x}, delete $opts->{y}) if exists $opts->{child};
+    }
+    $w;
+}
+
+
 sub _gtk__Window { &_gtk_any_Window }
 sub _gtk__Dialog { &_gtk_any_Window }
 sub _gtk__Plug   { &_gtk_any_Window }
