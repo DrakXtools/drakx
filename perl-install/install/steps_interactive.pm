@@ -202,7 +202,7 @@ sub _warn_unsafe_upgrade {
     );
 
     my $choice;
-    $o->ask_from_({ messages => N("Installer have detected your installed Mandriva Linux system could not
+    $o->ask_from_({ messages => N("Installer has detected that your installed Mandriva Linux system could not
 safely be upgraded to %s.
 
 New installation replacing your previous one is recommended.
