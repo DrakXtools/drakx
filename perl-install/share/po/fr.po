@@ -74,7 +74,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fr\n"
 "POT-Creation-Date: 2008-07-20 04:41+0200\n"
-"PO-Revision-Date: 2008-03-23 11:23+0100\n"
+"PO-Revision-Date: 2008-07-31 18:01+0200\n"
 "Last-Translator: Christophe Berthelé <cpjc@free.fr>\n"
 "Language-Team: French <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -156,9 +156,9 @@ msgstr ""
 "Quel est le disque de démarrage ?"
 
 #: any.pm:339
-#, fuzzy, c-format
+#, c-format
 msgid "First sector (MBR) of drive %s"
-msgstr "Premier secteur du disque (MBR)"
+msgstr "Premier secteur (MBR) du disque %s"
 
 #: any.pm:341
 #, c-format
@@ -828,7 +828,7 @@ msgstr "Domaine Windows"
 #: authentication.pm:30
 #, c-format
 msgid "Kerberos 5"
-msgstr ""
+msgstr "Kerberos 5"
 
 #: authentication.pm:64
 #, c-format
@@ -887,7 +887,7 @@ msgstr ""
 #: authentication.pm:68
 #, c-format
 msgid "Kerberos 5 :"
-msgstr ""
+msgstr "Kerberos 5 :"
 
 #: authentication.pm:68
 #, c-format
@@ -900,13 +900,13 @@ msgstr ""
 #: authentication.pm:872
 #, c-format
 msgid " "
-msgstr ""
+msgstr " "
 
 #: authentication.pm:97 authentication.pm:131 authentication.pm:177
 #: authentication.pm:201
-#, fuzzy, c-format
+#, c-format
 msgid "Welcome to the Authentication Wizard"
-msgstr "Domaine d'authentification nécessaire"
+msgstr "Bienvenue dans l'Assistant d'authentification"
 
 #: authentication.pm:99
 #, c-format
@@ -914,6 +914,8 @@ msgid ""
 "You have selected LDAP authentication. Please review the configuration "
 "options below "
 msgstr ""
+"Vous avez choisi l'authentification LDAP. Veuillez vérifier les options de "
+"configuration ci-dessous "
 
 #: authentication.pm:101 authentication.pm:156
 #, c-format
@@ -921,32 +923,32 @@ msgid "LDAP Server"
 msgstr "Serveur LDAP"
 
 #: authentication.pm:102 authentication.pm:157
-#, fuzzy, c-format
+#, c-format
 msgid "Base dn"
-msgstr "Racine (dn) LDAP"
+msgstr "Racine dn"
 
 #: authentication.pm:103 authentication.pm:158
 #, c-format
 msgid "Fetch base Dn "
-msgstr ""
+msgstr "Récupérer le Dn racine"
 
 #: authentication.pm:105 authentication.pm:160
 #, c-format
 msgid "Use encrypt connection with TLS "
-msgstr ""
+msgstr "Utiliser des connexions chiffrées avec TLS"
 
 #: authentication.pm:106 authentication.pm:161
 #, c-format
 msgid "Download CA Certificate "
-msgstr ""
+msgstr "Télécharger le certificat CA"
 
 #: authentication.pm:108 authentication.pm:141
 #, c-format
 msgid "Use Disconnect mode "
-msgstr ""
+msgstr "Utiliser le mode Déconnecté"
 
 #: authentication.pm:109 authentication.pm:162
-#, fuzzy, c-format
+#, c-format
 msgid "Use anonymous BIND "
 msgstr "Utiliser BIND anonyme"
 
@@ -954,7 +956,7 @@ msgstr "Utiliser BIND anonyme"
 #: authentication.pm:119
 #, c-format
 msgid "  "
-msgstr ""
+msgstr "  "
 
 #: authentication.pm:111 authentication.pm:163
 #, c-format
@@ -962,9 +964,9 @@ msgid "Bind DN "
 msgstr ""
 
 #: authentication.pm:112 authentication.pm:164
-#, fuzzy, c-format
+#, c-format
 msgid "Bind Password "
-msgstr "Mot de passe"
+msgstr ""
 
 #: authentication.pm:114
 #, c-format
@@ -972,14 +974,14 @@ msgid "Advanced path for group "
 msgstr ""
 
 #: authentication.pm:116
-#, fuzzy, c-format
+#, c-format
 msgid "Password base"
-msgstr "Mot de passe"
+msgstr ""
 
 #: authentication.pm:117
-#, fuzzy, c-format
+#, c-format
 msgid "Group base"
-msgstr "Groupe"
+msgstr ""
 
 #: authentication.pm:118
 #, c-format
@@ -992,36 +994,38 @@ msgid ""
 "You have selected Kerberos 5 authentication. Please review the configuration "
 "options below "
 msgstr ""
+"Vous avez choisi l'authentification par Kerberos 5. Veuillez vérifier les "
+"options de configuration ci-dessous "
 
 #: authentication.pm:135
-#, fuzzy, c-format
+#, c-format
 msgid "Realm "
-msgstr "Nom et prénom"
+msgstr "Realm "
 
 #: authentication.pm:137
-#, fuzzy, c-format
+#, c-format
 msgid "KDCs Servers"
-msgstr "Serveur LDAP"
+msgstr "Serveur KDCs"
 
 #: authentication.pm:139
 #, c-format
 msgid "Use DNS to resolve hosts for realms "
-msgstr ""
+msgstr "Utiliser DNS pour résoudre les hôtes pour les REALMS"
 
 #: authentication.pm:140
 #, c-format
 msgid "Use DNS to resolve KDCs for realms "
-msgstr ""
+msgstr "Utiliser DNS pour résoudre les KDCs pour les REALMS"
 
 #: authentication.pm:145
-#, fuzzy, c-format
+#, c-format
 msgid "Use local file for users informations"
-msgstr "Utilisation de « libsafe » pour les serveurs"
+msgstr "Utilisation du fichier local pour les informations utilisateurs"
 
 #: authentication.pm:146
-#, fuzzy, c-format
+#, c-format
 msgid "Use Ldap for users informations"
-msgstr "Informations sur les disques durs"
+msgstr "Utilisation de Ldap pour les informations utilisateurs"
 
 #: authentication.pm:152
 #, c-format
@@ -1029,6 +1033,8 @@ msgid ""
 "You have selected Kerberos 5 for authentication, now you must choose the "
 "type of users information "
 msgstr ""
+"Vous avez choisi l'authentification par Kerberos 5, vous devez maintenant "
+"choisir le type des informations utilisateurs "
 
 #: authentication.pm:179
 #, c-format
@@ -1036,6 +1042,8 @@ msgid ""
 "You have selected NIS authentication. Please review the configuration "
 "options below "
 msgstr ""
+"Vous avez choisi l'authentification par NIS. Veuillez vérifier les options "
+"de configuration ci-dessous "
 
 #: authentication.pm:181
 #, c-format
@@ -1053,11 +1061,13 @@ msgid ""
 "You have selected Windows Domain authentication. Please review the "
 "configuration options below "
 msgstr ""
+"Vous avez choisi l'authentification par Domaines Windows. Veuillez vérifier "
+"les options de configuration ci-dessous "
 
 #: authentication.pm:207
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Model "
-msgstr "Domaine"
+msgstr "Modèle de Domaine"
 
 #: authentication.pm:209
 #, c-format
@@ -1093,12 +1103,12 @@ msgstr "On ne peut pas utiliser l'option broadcast sans domaine NIS"
 #: authentication.pm:867
 #, c-format
 msgid "Select file"
-msgstr ""
+msgstr "Sélectionnez un fichier"
 
 #: authentication.pm:873
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Windows for authentication : "
-msgstr "Domaine d'authentification nécessaire"
+msgstr "Domaine Windows pour l'authentification : "
 
 #: authentication.pm:875
 #, c-format
@@ -2603,9 +2613,9 @@ msgstr ""
 "d'espace est disponible)"
 
 #: fs/partitioning_wizard.pm:127
-#, fuzzy, c-format
+#, c-format
 msgid "Use the free space on a Microsoft Windows® partition"
-msgstr "Utiliser l'espace libre sur la partition Windows"
+msgstr "Utiliser l'espace libre sur une partition Microsoft Windows®"
 
 #: fs/partitioning_wizard.pm:129
 #, c-format
@@ -3205,7 +3215,7 @@ msgstr ""
 "Vous pouvez sélectionner ici un pilote alternatif (OSS ou ALSA) pour votre "
 "carte son (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:392
@@ -7036,87 +7046,3 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Échec de l'installation"
-
-#~ msgid "Active Directory with SFU"
-#~ msgstr "Active Directory avec SFU"
-
-#~ msgid "Active Directory with Winbind"
-#~ msgstr "Active Directory avec Winbind"
-
-#~ msgid "Use information stored in local files for all authentication"
-#~ msgstr ""
-#~ "Utiliser les informations des fichiers locaux pour toutes les "
-#~ "authentifications"
-
-#~ msgid "Active Directory with SFU:"
-#~ msgstr "Active Directory avec SFU :"
-
-#~ msgid "Active Directory with Winbind:"
-#~ msgstr "Active Directory avec Winbind :"
-
-#~ msgid ""
-#~ "Winbind allows the system to authenticate users in a Windows Active "
-#~ "Directory Server."
-#~ msgstr ""
-#~ "Winbind permet au sytème d'authentifier les utilisateurs dans un serveur "
-#~ "Windows Active Directory."
-
-#~ msgid "Authentication LDAP"
-#~ msgstr "Authentification LDAP"
-
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid "SSL"
-#~ msgstr "SSL"
-
-#~ msgid "security layout (SASL/Kerberos)"
-#~ msgstr "infrastructure de sécurité (SASL/Kerberos)"
-
-#~ msgid "Authentication Active Directory"
-#~ msgstr "Authentification Active Directory"
-
-#~ msgid "LDAP users database"
-#~ msgstr "Base de données des utilisateurs LDAP"
-
-#~ msgid "LDAP user allowed to browse the Active Directory"
-#~ msgstr "Utilisateur LDAP autorisé à parcourir l'Active Directory"
-
-#~ msgid "Password for user"
-#~ msgstr "Mot de passe de l'utilisateur"
-
-#~ msgid "Authentication NIS"
-#~ msgstr "Authentification NIS"
-
-#~ msgid ""
-#~ "For this to work for a W2K PDC, you will probably need to have the admin "
-#~ "run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
-#~ "add and reboot the server.\n"
-#~ "You will also need the username/password of a Domain Admin to join the "
-#~ "machine to the Windows(TM) domain.\n"
-#~ "If networking is not yet enabled, Drakx will attempt to join the domain "
-#~ "after the network setup step.\n"
-#~ "Should this setup fail for some reason and domain authentication is not "
-#~ "working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows"
-#~ "(tm) Domain, and Admin Username/Password, after system boot.\n"
-#~ "The command 'wbinfo -t' will test whether your authentication secrets are "
-#~ "good."
-#~ msgstr ""
-#~ "Pour que cela fonctionne avec un Contrôleur Principal de Domaine (PDC) "
-#~ "Windows 2000, vous devrez probablement demander à l'administrateur de "
-#~ "lancer : C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" "
-#~ "everyone /add et de redémarrer le serveur.\n"
-#~ "Vous aurez aussi besoin du nom utilisateur et du mot de passe d'un "
-#~ "administrateur de domaine pour joindre la machine au domaine Windows™.\n"
-#~ "Si le réseau n'est pas encore activé, le domaine sera joint après l'étape "
-#~ "de configuration du réseau.\n"
-#~ "Si cette étape échoue pour quelque raison que ce soit et que "
-#~ "l'authentification de domaine ne fonctionne pas, lancez « smbpasswd -j "
-#~ "DOMAINE -U UTILISATEUR%%MOTDEPASSE » en utilisant votre domaine Windows™, "
-#~ "et vos nom d'administrateur et mot de passe, après le démarrage du "
-#~ "système.\n"
-#~ "La commande « wbinfo -t » permet de tester la validité de votre "
-#~ "authentification."
-
-#~ msgid "Authentication Windows Domain"
-#~ msgstr "Authentification au Domaine Windows"
