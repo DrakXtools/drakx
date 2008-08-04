@@ -547,7 +547,7 @@ sub create_okcancel {
             gtknew('HSeparator'),
             gtknew('HBox', children_loose => [
                    map {
-		       gtknew('HButtonBox', layout => $_->[1],
+		       gtknew('HButtonBox', spacing => 5, layout => $_->[1],
 			      children_loose => [
 				  map {
 				      $_->can_default($::isWizard);
