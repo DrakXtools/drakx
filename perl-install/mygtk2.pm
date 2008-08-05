@@ -614,8 +614,8 @@ sub _gtk_any_Window {
             $w->set_type_hint('dialog'); # for matchbox window manager
         }
 
-	$w->set_modal(1) if exists $opts->{transient_for};
 	$w->set_modal(delete $opts->{modal}) if exists $opts->{modal};
+	$w->set_modal(1) if exists $opts->{transient_for};
 	$w->set_transient_for(delete $opts->{transient_for}) if exists $opts->{transient_for};
 	$w->set_border_width(delete $opts->{border_width}) if exists $opts->{border_width};
 	$w->set_shadow_type(delete $opts->{shadow_type}) if exists $opts->{shadow_type};
