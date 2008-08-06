@@ -59,7 +59,7 @@ sub mirrors_raw {
     #- contact the following URL to retrieve the list of mirrors.
     #- http://wiki.mandriva.com/en/Product_id
     my $type = lc($product_id->{type}); $type =~ s/\s//g;
-    my $list = "http://api.mandriva.com/mirrors/$type.$product_id->{version}.$product_id->{arch}.list";
+    my $list = "http://api.mandriva.com/mirrors/$type.$product_id->{version}.$product_id->{arch}.list?product=$product_id->{product}";
     log::explanations("trying mirror list from $list");
     my @lines;
     if ($::isInstall) {
