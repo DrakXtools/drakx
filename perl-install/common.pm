@@ -303,10 +303,10 @@ sub set_permissions {
 sub is_running {
     my ($name, $o_user) = @_;
     my $user = $o_user || $ENV{USER};
-    any {
+    foreach (`ps -o '%P %p %c' -u $user`) {
 	my ($ppid, $pid, $n) = /^\s*(\d+)\s+(\d+)\s+(.*)/;
-	$ppid != 1 && $pid != $$ && $n eq $name;
-    } `ps -o '%P %p %c' -u $user`;
+	return $pid if $ppid != 1 && $pid != $$ && $n eq $name;
+    }
 }
 
 sub parse_release_file {
