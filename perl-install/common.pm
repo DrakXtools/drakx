@@ -10,7 +10,7 @@ use run_program;
 
 use Exporter;
 our @ISA = qw(Exporter);
-our @EXPORT = qw($SECTORSIZE N P N_ check_for_xserver files_exist formatTime MB formatXiB get_parent_uid makedev mandrake_release mandrake_release_info removeXiBSuffix require_root_capability setVirtual set_alternative set_l10n_sort set_permissions to_utf8  translate unmakedev);
+our @EXPORT = qw($SECTORSIZE N P N_ check_for_xserver files_exist formatTime MB formatXiB get_parent_uid is_running makedev mandrake_release mandrake_release_info removeXiBSuffix require_root_capability setVirtual set_alternative set_l10n_sort set_permissions to_utf8  translate unmakedev);
 
 # perl_checker: RE-EXPORT-ALL
 push @EXPORT, @MDK::Common::EXPORT;
@@ -298,6 +298,15 @@ sub set_permissions {
 	chown_(0, $o_owner, $o_group, $file);
     }
     chmod(oct($perms), $file) or die "chmod of file $file failed: $!\n";
+}
+
+sub is_running {
+    my ($name, $o_user) = @_;
+    my $user = $o_user || $ENV{USER};
+    any {
+	my ($ppid, $pid, $n) = /^\s*(\d+)\s+(\d+)\s+(.*)/;
+	$ppid != 1 && $pid != $$ && $n eq $name;
+    } `ps -o '%P %p %c' -u $user`;
 }
 
 sub parse_release_file {
