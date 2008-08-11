@@ -145,7 +145,7 @@ our %l = (
 
   bus => 
   {
-    usb => [ qw(isp116x-hcd ehci-hcd ohci-hcd r8a66597-hcd sl811_cs sl811-hcd uhci-hcd u132-hcd usb-uhci usb-ohci) ],
+    usb => [ qw(ehci-hcd isp116x-hcd isp1760 ohci-hcd r8a66597-hcd sl811_cs sl811-hcd uhci-hcd u132-hcd usb-uhci usb-ohci) ],
     bluetooth => [ qw(bcm203x bfusb bpa10x hci_usb) ],
     firewire => [ qw(ohci1394) ],
     i2c => [
