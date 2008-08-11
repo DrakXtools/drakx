@@ -41,7 +41,7 @@ our %l = (
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
-      qw(atl1 atl1e bnx2 cxgb cxgb3 dl2k e1000 e1000e igb ipg ixgb ixgbe myri_sbus netxen_nic ns83820 qla3xxx r8169 s2io sis190 sk98lin skge sky2 spidernet tehuti tg3 via-velocity yellowfin),
+      qw(atl1 atl1e bnx2 bnx2x cxgb cxgb3 dl2k e1000 e1000e igb ipg ixgb ixgbe myri_sbus netxen_nic ns83820 qla3xxx r8169 s2io sfc sis190 sk98lin skge sky2 spidernet tehuti tg3 via-velocity yellowfin),
       qw(bcm5820 bcm5700), #- encrypted
     ],
 
@@ -64,9 +64,9 @@ our %l = (
       qw(at76_usb ath_pci ath5k atmel_cs atmel_pci b43 b43legacy bcm43xx com20020_cs dyc_ar5),
       qw(hostap_cs hostap_pci hostap_plx ipw2100 ipw2200 ipw3945 iwl3945 iwl4965 iwlwifi),
       qw(madwifi_pci netwave_cs ndiswrapper orinoco orinoco_cs orinoco_nortel orinoco_pci orinoco_plx orinoco_tmd),
-      qw(p54pci p54usb prism2_cs prism2_pci prism2_usb prism54 r8180 ray_cs),
+      qw(p54pci p54usb prism2_cs prism2_pci prism2_usb prism54 r8180 ray_cs rndis_wlan),
       qw(rt2400 rt2500 rt2570 rt61 rt73 rtusb),
-      qw(rt2400pci rt2500pci rt2500usb rt61pci rt73usb),
+      qw(rt2400pci rt2500pci rt2500usb rt61pci rt73usb rtl8180),
       qw(spectrum_cs usbvnet_rfmd vt_ar5k wavelan_cs wl3501_cs wvlan_cs zd1201 zd1211rw),
       if_(arch() =~ /ppc/, qw(airport)),
     ],
@@ -84,7 +84,7 @@ our %l = (
       qw(slamr slusb snd-ali5451 snd-atiixp-modem snd-intel8x0m snd-via82xx-modem),
     ],
     tokenring => [ qw(3c359 abyss ibmtr lanstreamer olympic proteon skisa smctr tms380tr tmspci) ],
-    wan => [ qw(c101 cosa cyclomx cycx_drv dlci dscc4 farsync hdlc hostess_sv11 lmc n2 pc300 pci200syn sbni sdla sdladrv sealevel syncppp wanxl z85230) ],
+    wan => [ qw(c101 cosa cyclomx cycx_drv dlci dscc4 farsync hdlc hostess_sv11 lapbether lmc n2 pc300 pci200syn sbni sdla sdladrv sealevel syncppp wanxl z85230) ],
     usb_dsl => [ qw(cxacru speedtch ueagle-atm usbatm xusbatm) ],
   },
 
@@ -104,8 +104,8 @@ our %l = (
       if_(arch() !~ /alpha/ && arch() !~ /sparc/,
 	'53c7,8xx',
         qw(AM53C974 BusLogic NCR53c406a a100u2w advansys aha152x aha1542 aha1740),
-        qw(atp870u dc395x dc395x_trm dmx3191d dtc g_NCR5380 in2000 initio pas16 pci2220i psi240i fdomain),
-        qw(qla1280 qla2x00 qla2xxx qlogicfas qlogicfc),
+        qw(atp870u dc395x dc395x_trm dmx3191d dtc g_NCR5380 in2000 initio mvsas pas16 pci2220i psi240i fdomain),
+        qw(qla1280 qla2x00 qla2xxx qlogicfas qlogicfc ),
         qw(seagate wd7000 shasta sim710 stex sym53c416 t128 tmscsim u14-34f ultrastor),
         qw(eata eata_pio eata_dma nsp32),
       ),
