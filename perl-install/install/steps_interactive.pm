@@ -486,7 +486,7 @@ sub _chooseDesktop {
 	GNOME  => N("Install Mandriva GNOME Desktop"),
 	Custom => N("Custom install"),
     );
-    my $title = N("Package Group Selection");
+    my $title = N("Desktop Selection");
     my $message = N("You can choose your workstation desktop profile: KDE, GNOME or Custom");
 
     my $choice;
