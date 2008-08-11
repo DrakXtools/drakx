@@ -41,7 +41,7 @@ our %l = (
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
-      qw(atl1 bnx2 cxgb cxgb3 dl2k e1000 e1000e igb ipg ixgb ixgbe myri_sbus netxen_nic ns83820 qla3xxx r8169 s2io sis190 sk98lin skge sky2 spidernet tehuti tg3 via-velocity yellowfin),
+      qw(atl1 atl1e bnx2 cxgb cxgb3 dl2k e1000 e1000e igb ipg ixgb ixgbe myri_sbus netxen_nic ns83820 qla3xxx r8169 s2io sis190 sk98lin skge sky2 spidernet tehuti tg3 via-velocity yellowfin),
       qw(bcm5820 bcm5700), #- encrypted
     ],
 
