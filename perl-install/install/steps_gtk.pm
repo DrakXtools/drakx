@@ -224,11 +224,17 @@ sub reallyChooseDesktop {
     my $w = ugtk2->new($title);
 
     my $choice = $choices->[0];
+    my %tips = (
+        KDE    => N("Install Mandriva KDE Desktop"),
+        GNOME  => N("Install Mandriva GNOME Desktop"),
+        Custom => N("Custom install"),
+    );
     my $prev;
     my @l = map {
 	my $val = $_;
 	$prev = gtknew('RadioButton', child =>
                           gtknew('Label', text => $val->[1]),
+                       tip => $tips{$val->[0]},
 		       toggled => sub { $choice = $val if $_[0]->get_active },
 		       $prev ? (group => $prev->get_group) : ());
 	$prev->signal_connect(key_press_event => sub {
