@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-20 04:44+0200\n"
+"POT-Creation-Date: 2008-08-12 17:54+0200\n"
 "PO-Revision-Date: 2005-09-13 23:24+0200\n"
 "Last-Translator: Albert Astals Cid <astals11@terra.es>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -18,31 +18,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=n!=1;\n"
-
-#: ../../advertising/IM_flash.pl:1
-#, c-format
-msgid "Your desktop on a USB key"
-msgstr ""
-
-#: ../../advertising/IM_free08S.pl:1
-#, c-format
-msgid "The 100%% open source Mandriva Linux distribution"
-msgstr ""
-
-#: ../../advertising/IM_one08S.pl:1
-#, c-format
-msgid "Explore Linux easily with Mandriva One"
-msgstr ""
-
-#: ../../advertising/IM_pwp08S.pl:1
-#, c-format
-msgid "A full Mandriva Linux desktop, with support"
-msgstr ""
-
-#: ../../advertising/IM_range08S.pl:1
-#, c-format
-msgid "Mandriva: distributions for everybody's needs"
-msgstr ""
 
 #: any.pm:109
 #, c-format
@@ -238,7 +213,7 @@ msgstr "FTP"
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1083 steps_interactive.pm:978
+#: any.pm:1083 steps_interactive.pm:972
 #, c-format
 msgid "Network"
 msgstr "Xarxa"
@@ -278,12 +253,12 @@ msgstr "No es poden fer captures de pantalla abans de fer les particions"
 msgid "Screenshots will be available after install in %s"
 msgstr "Les captures estaran disponibles després d'instal·lar a %s"
 
-#: gtk.pm:119
+#: gtk.pm:126
 #, fuzzy, c-format
 msgid "Installation"
 msgstr "S'està instal·lant"
 
-#: gtk.pm:122 share/meta-task/compssUsers.pl:42
+#: gtk.pm:130 share/meta-task/compssUsers.pl:42
 #, c-format
 msgid "Configuration"
 msgstr "Configuració"
@@ -743,73 +718,97 @@ msgstr ""
 "mode text. Per fer-ho, premeu 'F1' en arrencar des del CD-ROM i escriviu "
 "'text'."
 
-#: steps_gtk.pm:261 steps_interactive.pm:490 steps_interactive.pm:619
-#: steps_list.pm:30
+#: steps_gtk.pm:228 steps_interactive.pm:485
+#, c-format
+msgid "Install Mandriva KDE Desktop"
+msgstr ""
+
+#: steps_gtk.pm:229 steps_interactive.pm:486
+#, c-format
+msgid "Install Mandriva GNOME Desktop"
+msgstr ""
+
+#: steps_gtk.pm:230 steps_interactive.pm:487
+#, fuzzy, c-format
+msgid "Custom install"
+msgstr "Instal·lació mínima"
+
+#: steps_gtk.pm:253
+#, c-format
+msgid "Here's a preview of the '%s' desktop."
+msgstr ""
+
+#: steps_gtk.pm:275
+#, c-format
+msgid "Click on images in order to see a bigger preview"
+msgstr ""
+
+#: steps_gtk.pm:287 steps_interactive.pm:618 steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "Selecció del grup de paquets"
 
-#: steps_gtk.pm:282 steps_interactive.pm:636
+#: steps_gtk.pm:308 steps_interactive.pm:635
 #, c-format
 msgid "Individual package selection"
 msgstr "Selecció individual de paquets"
 
-#: steps_gtk.pm:304 steps_interactive.pm:562
+#: steps_gtk.pm:330 steps_interactive.pm:561
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Mida total: %d / %d MB"
 
-#: steps_gtk.pm:349
+#: steps_gtk.pm:375
 #, c-format
 msgid "Bad package"
 msgstr "Paquet incorrecte"
 
-#: steps_gtk.pm:351
+#: steps_gtk.pm:377
 #, c-format
 msgid "Version: "
 msgstr "Versió: "
 
-#: steps_gtk.pm:352
+#: steps_gtk.pm:378
 #, c-format
 msgid "Size: "
 msgstr "Mida:"
 
-#: steps_gtk.pm:352
+#: steps_gtk.pm:378
 #, c-format
 msgid "%d KB\n"
 msgstr "%d kB\n"
 
-#: steps_gtk.pm:353
+#: steps_gtk.pm:379
 #, c-format
 msgid "Importance: "
 msgstr "Importància:"
 
-#: steps_gtk.pm:387
+#: steps_gtk.pm:413
 #, c-format
 msgid "You can not select/unselect this package"
 msgstr "No podeu seleccionar/desseleccionar aquest paquet"
 
-#: steps_gtk.pm:391
+#: steps_gtk.pm:417
 #, c-format
 msgid "due to missing %s"
 msgstr "degut a que falten %s"
 
-#: steps_gtk.pm:392
+#: steps_gtk.pm:418
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "degut a %s no satisfetes"
 
-#: steps_gtk.pm:393
+#: steps_gtk.pm:419
 #, c-format
 msgid "trying to promote %s"
 msgstr ""
 
-#: steps_gtk.pm:394
+#: steps_gtk.pm:420
 #, c-format
 msgid "in order to keep %s"
 msgstr "per tal de mantenir %s"
 
-#: steps_gtk.pm:399
+#: steps_gtk.pm:425
 #, c-format
 msgid ""
 "You can not select this package as there is not enough space left to install "
@@ -818,116 +817,116 @@ msgstr ""
 "No podeu seleccionar aquest paquet perquè no queda prou espai per instal·lar-"
 "lo"
 
-#: steps_gtk.pm:402
+#: steps_gtk.pm:428
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "Ara s'instal·laran els paquets següents"
 
-#: steps_gtk.pm:403
+#: steps_gtk.pm:429
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "Ara s'eliminaran els paquets següents"
 
-#: steps_gtk.pm:428
+#: steps_gtk.pm:454
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
 msgstr "Aquest paquet és obligatori; no es pot desseleccionar"
 
-#: steps_gtk.pm:430
+#: steps_gtk.pm:456
 #, c-format
 msgid "You can not unselect this package. It is already installed"
 msgstr "No podeu desseleccionar aquest paquet; ja està instal·lat"
 
-#: steps_gtk.pm:432
+#: steps_gtk.pm:458
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
 msgstr "No podeu desseleccionar aquest paquet; s'ha d'actualitzar"
 
-#: steps_gtk.pm:436
+#: steps_gtk.pm:462
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "Mostra automàticament els paquets seleccionats"
 
-#: steps_gtk.pm:438
+#: steps_gtk.pm:464
 #, c-format
 msgid "Install"
 msgstr "Instal·la"
 
-#: steps_gtk.pm:441
+#: steps_gtk.pm:467
 #, c-format
 msgid "Load/Save selection"
 msgstr "Carrega/Desa la selecció"
 
-#: steps_gtk.pm:442
+#: steps_gtk.pm:468
 #, c-format
 msgid "Updating package selection"
 msgstr "S'està actualitzant la selecció de paquets"
 
-#: steps_gtk.pm:447
+#: steps_gtk.pm:473
 #, c-format
 msgid "Minimal install"
 msgstr "Instal·lació mínima"
 
-#: steps_gtk.pm:461
+#: steps_gtk.pm:487
 #, c-format
 msgid "Software Management"
 msgstr "Gestor de programari"
 
-#: steps_gtk.pm:461 steps_interactive.pm:448
+#: steps_gtk.pm:487 steps_interactive.pm:447
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Escolliu els paquets que voleu instal·lar"
 
-#: steps_gtk.pm:478 steps_interactive.pm:650 steps_list.pm:32
+#: steps_gtk.pm:504 steps_interactive.pm:649 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "S'està instal·lant"
 
-#: steps_gtk.pm:504
+#: steps_gtk.pm:530
 #, c-format
 msgid "No details"
 msgstr "Sense detalls"
 
-#: steps_gtk.pm:519
+#: steps_gtk.pm:545
 #, c-format
 msgid "Time remaining "
 msgstr "Temps restant "
 
-#: steps_gtk.pm:520
+#: steps_gtk.pm:546
 #, fuzzy, c-format
 msgid "(estimating...)"
 msgstr "S'està estimant"
 
-#: steps_gtk.pm:547
+#: steps_gtk.pm:573
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d paquet"
 msgstr[1] "%d paquets"
 
-#: steps_gtk.pm:593 steps_interactive.pm:838 steps_list.pm:43
+#: steps_gtk.pm:619 steps_interactive.pm:837 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Resum"
 
-#: steps_gtk.pm:610
+#: steps_gtk.pm:636
 #, c-format
 msgid "Configure"
 msgstr "Configura"
 
-#: steps_gtk.pm:627 steps_interactive.pm:834 steps_interactive.pm:990
+#: steps_gtk.pm:653 steps_interactive.pm:833 steps_interactive.pm:984
 #, c-format
 msgid "not configured"
 msgstr "no configurat(da)"
 
-#: steps_gtk.pm:664 steps_interactive.pm:332
+#: steps_gtk.pm:690 steps_interactive.pm:331
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
 "If you want to skip some of them, you can unselect them now."
 msgstr ""
 
-#: steps_gtk.pm:674 steps_interactive.pm:338
+#: steps_gtk.pm:700 steps_interactive.pm:337
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -936,7 +935,7 @@ msgid ""
 "available once the system is fully installed."
 msgstr ""
 
-#: steps_gtk.pm:676 steps_interactive.pm:340
+#: steps_gtk.pm:702 steps_interactive.pm:339
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Copia els CDs sencers"
@@ -946,72 +945,72 @@ msgstr "Copia els CDs sencers"
 msgid "An error occurred"
 msgstr "S'ha produït un error"
 
-#: steps_interactive.pm:97
+#: steps_interactive.pm:96
 #, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Si us plau, seleccioneu la disposició del vostre teclat."
 
-#: steps_interactive.pm:99
+#: steps_interactive.pm:98
 #, c-format
 msgid "Here is the full list of available keyboards"
 msgstr "Aquesta és la llista completa de teclats disponibles"
 
-#: steps_interactive.pm:134
+#: steps_interactive.pm:133
 #, c-format
 msgid "Install/Upgrade"
 msgstr "Instal·la/Actualitza"
 
-#: steps_interactive.pm:135
+#: steps_interactive.pm:134
 #, c-format
 msgid "Is this an install or an upgrade?"
 msgstr "Es tracta d'una instal·lació o d'una actualització?"
 
-#: steps_interactive.pm:139
+#: steps_interactive.pm:138
 #, fuzzy, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
 msgstr "Instal·la"
 
-#: steps_interactive.pm:141
+#: steps_interactive.pm:140
 #, c-format
 msgid "Upgrade %s"
 msgstr "Actualitza %s"
 
-#: steps_interactive.pm:145
+#: steps_interactive.pm:144
 #, c-format
 msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 msgstr ""
 
-#: steps_interactive.pm:149
+#: steps_interactive.pm:148
 #, c-format
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 msgstr ""
 
-#: steps_interactive.pm:168
+#: steps_interactive.pm:167
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Clau de xifratge per a %s"
 
-#: steps_interactive.pm:200
+#: steps_interactive.pm:199
 #, c-format
 msgid "Cancel installation, reboot system"
 msgstr ""
 
-#: steps_interactive.pm:201
+#: steps_interactive.pm:200
 #, fuzzy, c-format
 msgid "New Installation"
 msgstr "S'està instal·lant"
 
-#: steps_interactive.pm:202
+#: steps_interactive.pm:201
 #, c-format
 msgid "Upgrade previous installation (not recommended)"
 msgstr ""
 
-#: steps_interactive.pm:206
+#: steps_interactive.pm:205
 #, c-format
 msgid ""
-"Installer have detected your installed Mandriva Linux system could not\n"
+"Installer has detected that your installed Mandriva Linux system could not\n"
 "safely be upgraded to %s.\n"
 "\n"
 "New installation replacing your previous one is recommended.\n"
@@ -1020,17 +1019,17 @@ msgid ""
 "Installation\"."
 msgstr ""
 
-#: steps_interactive.pm:248
+#: steps_interactive.pm:247
 #, c-format
 msgid "IDE"
 msgstr "IDE"
 
-#: steps_interactive.pm:248
+#: steps_interactive.pm:247
 #, c-format
 msgid "Configuring IDE"
 msgstr "S'està configurant l'IDE"
 
-#: steps_interactive.pm:285
+#: steps_interactive.pm:284
 #, c-format
 msgid ""
 "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1040,7 +1039,7 @@ msgstr ""
 "continuarà, però per iniciar el sistema necessitareu crear la partició de "
 "bootstrap amb el DiskDrake"
 
-#: steps_interactive.pm:290
+#: steps_interactive.pm:289
 #, fuzzy, c-format
 msgid ""
 "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
@@ -1051,7 +1050,7 @@ msgstr ""
 "continuarà, però per iniciar el sistema necessitareu crear la partició de "
 "bootstrap amb el DiskDrake"
 
-#: steps_interactive.pm:382
+#: steps_interactive.pm:381
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -1065,19 +1064,19 @@ msgstr ""
 "Si no el teniu, premeu Cancel·la per no fer la instal·lació des d'aquest Cd-"
 "Rom."
 
-#: steps_interactive.pm:404
+#: steps_interactive.pm:403
 #, c-format
 msgid "Looking for available packages..."
 msgstr "S'estan cercant els paquets disponibles..."
 
-#: steps_interactive.pm:412
+#: steps_interactive.pm:411
 #, c-format
 msgid ""
 "Your system does not have enough space left for installation or upgrade (%"
 "dMB > %dMB)"
 msgstr ""
 
-#: steps_interactive.pm:460
+#: steps_interactive.pm:459
 #, fuzzy, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1087,52 +1086,42 @@ msgstr ""
 "El format és el mateix que en els disquets generats d'instal·lació "
 "automàtica."
 
-#: steps_interactive.pm:462
+#: steps_interactive.pm:461
 #, c-format
 msgid "Load"
 msgstr "Càrrega"
 
-#: steps_interactive.pm:462
+#: steps_interactive.pm:461
 #, c-format
 msgid "Save"
 msgstr "Desa"
 
-#: steps_interactive.pm:470
+#: steps_interactive.pm:469
 #, c-format
 msgid "Bad file"
 msgstr "Fitxer incorrecte"
 
-#: steps_interactive.pm:486
-#, c-format
-msgid "Install Mandriva KDE Desktop"
-msgstr ""
-
-#: steps_interactive.pm:487
-#, c-format
-msgid "Install Mandriva GNOME Desktop"
-msgstr ""
-
-#: steps_interactive.pm:488
+#: steps_interactive.pm:489
 #, fuzzy, c-format
-msgid "Custom install"
-msgstr "Instal·lació mínima"
+msgid "Desktop Selection"
+msgstr "Selecció del grup de paquets"
 
-#: steps_interactive.pm:491
+#: steps_interactive.pm:490
 #, c-format
 msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
 msgstr ""
 
-#: steps_interactive.pm:576
+#: steps_interactive.pm:575
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "La mida seleccionada és superior a la disponible"
 
-#: steps_interactive.pm:591
+#: steps_interactive.pm:590
 #, c-format
 msgid "Type of install"
 msgstr "Tipus d'instal·lació"
 
-#: steps_interactive.pm:592
+#: steps_interactive.pm:591
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1141,82 +1130,82 @@ msgstr ""
 "No heu seleccionat cap grup de paquets.\n"
 "Escolliu la instal·lació mínima que voleu:"
 
-#: steps_interactive.pm:595
+#: steps_interactive.pm:594
 #, c-format
 msgid "With X"
 msgstr "Amb X"
 
-#: steps_interactive.pm:596
+#: steps_interactive.pm:595
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "Amb la documentació bàsica (recomanat!)"
 
-#: steps_interactive.pm:597
+#: steps_interactive.pm:596
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Instal·lació realment mínima (especialment no urpmi)"
 
-#: steps_interactive.pm:651
+#: steps_interactive.pm:650
 #, c-format
 msgid "Preparing installation"
 msgstr "S'està preparant la instal·lació"
 
-#: steps_interactive.pm:659
+#: steps_interactive.pm:658
 #, c-format
 msgid "Installing package %s"
 msgstr "S'està instal·lant el paquet %s"
 
-#: steps_interactive.pm:683
+#: steps_interactive.pm:682
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "S'ha produït un error en ordenar els paquets:"
 
-#: steps_interactive.pm:683
+#: steps_interactive.pm:682
 #, c-format
 msgid "Go on anyway?"
 msgstr "Voleu seguir igualment?"
 
-#: steps_interactive.pm:687
+#: steps_interactive.pm:686
 #, c-format
 msgid "Retry"
 msgstr ""
 
-#: steps_interactive.pm:688
+#: steps_interactive.pm:687
 #, c-format
 msgid "Skip this package"
 msgstr ""
 
-#: steps_interactive.pm:689
+#: steps_interactive.pm:688
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr ""
 
-#: steps_interactive.pm:690
+#: steps_interactive.pm:689
 #, fuzzy, c-format
 msgid "Go back to media and packages selection"
 msgstr "Desa la selecció de paquets"
 
-#: steps_interactive.pm:693
+#: steps_interactive.pm:692
 #, fuzzy, c-format
 msgid "There was an error installing package %s."
 msgstr "S'ha produït un error en instal·lar els paquets:"
 
-#: steps_interactive.pm:711
+#: steps_interactive.pm:710
 #, c-format
 msgid "Post-install configuration"
 msgstr "Configuració posterior a la instal·lació"
 
-#: steps_interactive.pm:718
+#: steps_interactive.pm:717
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr ""
 
-#: steps_interactive.pm:746 steps_list.pm:47
+#: steps_interactive.pm:745 steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "Actualitzacions"
 
-#: steps_interactive.pm:747
+#: steps_interactive.pm:746
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1238,40 +1227,40 @@ msgstr ""
 "\n"
 "Voleu instal·lar les actualitzacions?"
 
-#: steps_interactive.pm:769
+#: steps_interactive.pm:768
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr ""
 "S'està contactant amb la rèplica per obtenir la llista dels paquets "
 "disponibles..."
 
-#: steps_interactive.pm:775
+#: steps_interactive.pm:774
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr "No es pot contactar amb la rèplica: %s"
 
-#: steps_interactive.pm:881
+#: steps_interactive.pm:879
 #, c-format
 msgid "%s on %s"
 msgstr "%s a %s"
 
-#: steps_interactive.pm:915 steps_interactive.pm:922 steps_interactive.pm:936
-#: steps_interactive.pm:954 steps_interactive.pm:969
+#: steps_interactive.pm:912 steps_interactive.pm:919 steps_interactive.pm:932
+#: steps_interactive.pm:949 steps_interactive.pm:964
 #, c-format
 msgid "Hardware"
 msgstr "Maquinari"
 
-#: steps_interactive.pm:937 steps_interactive.pm:955
+#: steps_interactive.pm:933 steps_interactive.pm:950
 #, c-format
 msgid "Sound card"
 msgstr "Targeta de so"
 
-#: steps_interactive.pm:958
+#: steps_interactive.pm:953
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Teniu una targeta de so ISA?"
 
-#: steps_interactive.pm:960
+#: steps_interactive.pm:955
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -1280,64 +1269,64 @@ msgstr ""
 "Executeu \"alsacont\" després de la instal·lació per configurar la targeta "
 "de so"
 
-#: steps_interactive.pm:962
+#: steps_interactive.pm:957
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr ""
 "No s'ha detectat cap targeta de so. Proveu amb \"harddrake\" després de la "
 "instal·lació"
 
-#: steps_interactive.pm:970
+#: steps_interactive.pm:965
 #, c-format
 msgid "Graphical interface"
 msgstr "Interfície gràfica"
 
-#: steps_interactive.pm:977 steps_interactive.pm:988
+#: steps_interactive.pm:971 steps_interactive.pm:982
 #, c-format
 msgid "Network & Internet"
 msgstr "Xarxa i Internet"
 
-#: steps_interactive.pm:989
+#: steps_interactive.pm:983
 #, c-format
 msgid "Proxies"
 msgstr "Intermediaris"
 
-#: steps_interactive.pm:990
+#: steps_interactive.pm:984
 #, c-format
 msgid "configured"
 msgstr "configurat"
 
-#: steps_interactive.pm:1000
+#: steps_interactive.pm:994
 #, c-format
 msgid "Security Level"
 msgstr "Nivell de seguretat:"
 
-#: steps_interactive.pm:1019
+#: steps_interactive.pm:1013
 #, c-format
 msgid "Firewall"
 msgstr "Tallafoc"
 
-#: steps_interactive.pm:1023
+#: steps_interactive.pm:1017
 #, c-format
 msgid "activated"
 msgstr "activat"
 
-#: steps_interactive.pm:1023
+#: steps_interactive.pm:1017
 #, c-format
 msgid "disabled"
 msgstr "inhabilita"
 
-#: steps_interactive.pm:1037
+#: steps_interactive.pm:1031
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "No heu configurat X. Segur que ho voleu així?"
 
-#: steps_interactive.pm:1064
+#: steps_interactive.pm:1058
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "S'està preparant el carregador de l'arrencada..."
 
-#: steps_interactive.pm:1074
+#: steps_interactive.pm:1068
 #, fuzzy, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1350,12 +1339,12 @@ msgstr ""
 "La instal·lació continuarà, però us caldrà utilitzar el BootX\n"
 "o algun altre mètode per arrencar l'ordinador"
 
-#: steps_interactive.pm:1080
+#: steps_interactive.pm:1074
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "Voleu utilitzar l'aboot?"
 
-#: steps_interactive.pm:1083
+#: steps_interactive.pm:1077
 #, c-format
 msgid ""
 "Error installing aboot, \n"
@@ -1365,7 +1354,7 @@ msgstr ""
 "Voleu intentar igualment la instal·lació encara que això destrueixi la "
 "primera partició?"
 
-#: steps_interactive.pm:1095
+#: steps_interactive.pm:1089
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1374,17 +1363,17 @@ msgstr ""
 "En quest nivell de seguretat, l'accés a les particions de Windows està "
 "restringit a l'administrador."
 
-#: steps_interactive.pm:1127
+#: steps_interactive.pm:1121
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Inseriu un disquet en blanc a la unitat %s"
 
-#: steps_interactive.pm:1129
+#: steps_interactive.pm:1123
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "S'està creant el disquet d'instal·lació automàtica"
 
-#: steps_interactive.pm:1140
+#: steps_interactive.pm:1134
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1395,22 +1384,22 @@ msgstr ""
 "\n"
 "Segur que voleu sortir ara?"
 
-#: steps_interactive.pm:1150
+#: steps_interactive.pm:1144
 #, c-format
 msgid "Congratulations"
 msgstr "Felicitats"
 
-#: steps_interactive.pm:1154
+#: steps_interactive.pm:1147
 #, c-format
 msgid "Reboot"
 msgstr "Reinicia"
 
-#: steps_interactive.pm:1158 steps_interactive.pm:1159
+#: steps_interactive.pm:1151 steps_interactive.pm:1152
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "Genera un disquet per a la instal·lació automàtica"
 
-#: steps_interactive.pm:1160
+#: steps_interactive.pm:1153
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"
@@ -1426,17 +1415,17 @@ msgstr ""
 "\n"
 "Potser preferireu repetir la instal·lació.\n"
 
-#: steps_interactive.pm:1165
+#: steps_interactive.pm:1158
 #, c-format
 msgid "Replay"
 msgstr "Repeteix"
 
-#: steps_interactive.pm:1165
+#: steps_interactive.pm:1158
 #, c-format
 msgid "Automated"
 msgstr "Automàtica"
 
-#: steps_interactive.pm:1168
+#: steps_interactive.pm:1161
 #, c-format
 msgid "Save packages selection"
 msgstr "Desa la selecció de paquets"
@@ -1579,6 +1568,31 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "Surt"
+
+#: ../../advertising/IM_flash.pl:1
+#, c-format
+msgid "Your desktop on a USB key"
+msgstr ""
+
+#: ../../advertising/IM_free08S.pl:1
+#, c-format
+msgid "The 100%% open source Mandriva Linux distribution"
+msgstr ""
+
+#: ../../advertising/IM_one08S.pl:1
+#, c-format
+msgid "Explore Linux easily with Mandriva One"
+msgstr ""
+
+#: ../../advertising/IM_pwp08S.pl:1
+#, c-format
+msgid "A full Mandriva Linux desktop, with support"
+msgstr ""
+
+#: ../../advertising/IM_range08S.pl:1
+#, c-format
+msgid "Mandriva: distributions for everybody's needs"
+msgstr ""
 
 #~ msgid "All"
 #~ msgstr "Tots"

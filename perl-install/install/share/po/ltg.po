@@ -6,38 +6,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-20 04:44+0200\n"
+"POT-Creation-Date: 2008-08-12 17:54+0200\n"
 "PO-Revision-Date: 2006-09-24 17:51+0200\n"
 "Last-Translator: Māris Laureckis <marlau@inbox.lv>\n"
 "Language-Team: Latgalian <linux@latgola.lv>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: ../../advertising/IM_flash.pl:1
-#, c-format
-msgid "Your desktop on a USB key"
-msgstr ""
-
-#: ../../advertising/IM_free08S.pl:1
-#, c-format
-msgid "The 100%% open source Mandriva Linux distribution"
-msgstr ""
-
-#: ../../advertising/IM_one08S.pl:1
-#, c-format
-msgid "Explore Linux easily with Mandriva One"
-msgstr ""
-
-#: ../../advertising/IM_pwp08S.pl:1
-#, c-format
-msgid "A full Mandriva Linux desktop, with support"
-msgstr ""
-
-#: ../../advertising/IM_range08S.pl:1
-#, c-format
-msgid "Mandriva: distributions for everybody's needs"
-msgstr ""
 
 #: any.pm:109
 #, c-format
@@ -240,7 +215,7 @@ msgstr "FTP"
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1083 steps_interactive.pm:978
+#: any.pm:1083 steps_interactive.pm:972
 #, c-format
 msgid "Network"
 msgstr "Teiklys"
@@ -280,12 +255,12 @@ msgstr "Navar izveiduot ekrana attālus pyrms sadaļu izveidis"
 msgid "Screenshots will be available after install in %s"
 msgstr "Ekrana attāli byus pīejami piec instaleišonys %s"
 
-#: gtk.pm:119
+#: gtk.pm:126
 #, c-format
 msgid "Installation"
 msgstr "Instalaceja"
 
-#: gtk.pm:122 share/meta-task/compssUsers.pl:42
+#: gtk.pm:130 share/meta-task/compssUsers.pl:42
 #, c-format
 msgid "Configuration"
 msgstr "Konfiguraceja"
@@ -742,73 +717,97 @@ msgstr ""
 "instaleišonu. Lai tū izdareitu,\n"
 "nūspīdit`F1', kod nūteik īluode nu CDROM, tod īvodit `text'."
 
-#: steps_gtk.pm:261 steps_interactive.pm:490 steps_interactive.pm:619
-#: steps_list.pm:30
+#: steps_gtk.pm:228 steps_interactive.pm:485
+#, c-format
+msgid "Install Mandriva KDE Desktop"
+msgstr ""
+
+#: steps_gtk.pm:229 steps_interactive.pm:486
+#, c-format
+msgid "Install Mandriva GNOME Desktop"
+msgstr ""
+
+#: steps_gtk.pm:230 steps_interactive.pm:487
+#, fuzzy, c-format
+msgid "Custom install"
+msgstr "Minimala instaleišona"
+
+#: steps_gtk.pm:253
+#, c-format
+msgid "Here's a preview of the '%s' desktop."
+msgstr ""
+
+#: steps_gtk.pm:275
+#, c-format
+msgid "Click on images in order to see a bigger preview"
+msgstr ""
+
+#: steps_gtk.pm:287 steps_interactive.pm:618 steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "Pakūtņu grupu izviele"
 
-#: steps_gtk.pm:282 steps_interactive.pm:636
+#: steps_gtk.pm:308 steps_interactive.pm:635
 #, c-format
 msgid "Individual package selection"
 msgstr "Atsevišku pakūtņu izviele"
 
-#: steps_gtk.pm:304 steps_interactive.pm:562
+#: steps_gtk.pm:330 steps_interactive.pm:561
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Kūpejais izmārs: %d / %d MB"
 
-#: steps_gtk.pm:349
+#: steps_gtk.pm:375
 #, c-format
 msgid "Bad package"
 msgstr "Slykta pakūtne"
 
-#: steps_gtk.pm:351
+#: steps_gtk.pm:377
 #, c-format
 msgid "Version: "
 msgstr "Verseja: "
 
-#: steps_gtk.pm:352
+#: steps_gtk.pm:378
 #, c-format
 msgid "Size: "
 msgstr "Izmārs: "
 
-#: steps_gtk.pm:352
+#: steps_gtk.pm:378
 #, c-format
 msgid "%d KB\n"
 msgstr "%d KB\n"
 
-#: steps_gtk.pm:353
+#: steps_gtk.pm:379
 #, c-format
 msgid "Importance: "
 msgstr "Svareigums: "
 
-#: steps_gtk.pm:387
+#: steps_gtk.pm:413
 #, c-format
 msgid "You can not select/unselect this package"
 msgstr "Jius varit izavielēt/atsateikt nu ituos pakūtnis"
 
-#: steps_gtk.pm:391
+#: steps_gtk.pm:417
 #, c-format
 msgid "due to missing %s"
 msgstr "tryukuma dieļ %s"
 
-#: steps_gtk.pm:392
+#: steps_gtk.pm:418
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "deļ naapmīrynuojuma %s"
 
-#: steps_gtk.pm:393
+#: steps_gtk.pm:419
 #, c-format
 msgid "trying to promote %s"
 msgstr "teik mieginuots aktivizēt %s"
 
-#: steps_gtk.pm:394
+#: steps_gtk.pm:420
 #, c-format
 msgid "in order to keep %s"
 msgstr "lai saglobuot %s"
 
-#: steps_gtk.pm:399
+#: steps_gtk.pm:425
 #, c-format
 msgid ""
 "You can not select this package as there is not enough space left to install "
@@ -817,109 +816,109 @@ msgstr ""
 "Jius navarit izavielēt itū pakūtni, par tū ka napīteik vītys tuos "
 "instaleišonai"
 
-#: steps_gtk.pm:402
+#: steps_gtk.pm:428
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "Tiks instaleitys sekojūšys pakūtnis"
 
-#: steps_gtk.pm:403
+#: steps_gtk.pm:429
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "Tiks nūjimtys sekojūšys pakūtnis"
 
-#: steps_gtk.pm:428
+#: steps_gtk.pm:454
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
 msgstr "Itei ir obligata pakūtne, nu tuos navar atsateikt"
 
-#: steps_gtk.pm:430
+#: steps_gtk.pm:456
 #, c-format
 msgid "You can not unselect this package. It is already installed"
 msgstr "Jius navarit atsateikt nu ituos pakūtnis. Tei jau ir instaleita"
 
-#: steps_gtk.pm:432
+#: steps_gtk.pm:458
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
 msgstr "Jius navarit atsateikt nu ituos pakūtnis. Tū ir napīcīšoms uzlobuot"
 
-#: steps_gtk.pm:436
+#: steps_gtk.pm:462
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "Paruodeit automatiski izvālātuos pakūtnis"
 
-#: steps_gtk.pm:438
+#: steps_gtk.pm:464
 #, c-format
 msgid "Install"
 msgstr "Instalēt"
 
-#: steps_gtk.pm:441
+#: steps_gtk.pm:467
 #, c-format
 msgid "Load/Save selection"
 msgstr "Īluodēt/Saglobuot izviele"
 
-#: steps_gtk.pm:442
+#: steps_gtk.pm:468
 #, c-format
 msgid "Updating package selection"
 msgstr "Teik atjaunynuota pakūtņu izviele"
 
-#: steps_gtk.pm:447
+#: steps_gtk.pm:473
 #, c-format
 msgid "Minimal install"
 msgstr "Minimala instaleišona"
 
-#: steps_gtk.pm:461
+#: steps_gtk.pm:487
 #, c-format
 msgid "Software Management"
 msgstr "Programmaturys puorvaļdeišona"
 
-#: steps_gtk.pm:461 steps_interactive.pm:448
+#: steps_gtk.pm:487 steps_interactive.pm:447
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Izavielejit pakūtnis, kū gribit instalēt"
 
-#: steps_gtk.pm:478 steps_interactive.pm:650 steps_list.pm:32
+#: steps_gtk.pm:504 steps_interactive.pm:649 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "Teik instaleits"
 
-#: steps_gtk.pm:504
+#: steps_gtk.pm:530
 #, c-format
 msgid "No details"
 msgstr "Nav detaļu"
 
-#: steps_gtk.pm:519
+#: steps_gtk.pm:545
 #, c-format
 msgid "Time remaining "
 msgstr "Atlykušais laiks"
 
-#: steps_gtk.pm:520
+#: steps_gtk.pm:546
 #, fuzzy, c-format
 msgid "(estimating...)"
 msgstr "Aptuvenais nūviertiejums"
 
-#: steps_gtk.pm:547
+#: steps_gtk.pm:573
 #, fuzzy, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d pakūtnis"
 msgstr[1] "%d pakūtnis"
 
-#: steps_gtk.pm:593 steps_interactive.pm:838 steps_list.pm:43
+#: steps_gtk.pm:619 steps_interactive.pm:837 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Kūpsavylkums"
 
-#: steps_gtk.pm:610
+#: steps_gtk.pm:636
 #, c-format
 msgid "Configure"
 msgstr "Konfigurēt"
 
-#: steps_gtk.pm:627 steps_interactive.pm:834 steps_interactive.pm:990
+#: steps_gtk.pm:653 steps_interactive.pm:833 steps_interactive.pm:984
 #, c-format
 msgid "not configured"
 msgstr "nav konfigurāts"
 
-#: steps_gtk.pm:664 steps_interactive.pm:332
+#: steps_gtk.pm:690 steps_interactive.pm:331
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -928,7 +927,7 @@ msgstr ""
 "Atrosti sekojūši instalacejis datu nesieji.\n"
 "Ja jius gribit izlaist dažus nu tim, jius tagad varit nūjimt atzeimi nu tim."
 
-#: steps_gtk.pm:674 steps_interactive.pm:338
+#: steps_gtk.pm:700 steps_interactive.pm:337
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -941,7 +940,7 @@ msgstr ""
 "Taidā veidā turpynuosīs nu cītuo diska un pakūtnis byus pīejamys cikom "
 "sistema tiks piļneibā uzinstaleita."
 
-#: steps_gtk.pm:676 steps_interactive.pm:340
+#: steps_gtk.pm:702 steps_interactive.pm:339
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Kopēt vysu kompaktdisku"
@@ -951,72 +950,72 @@ msgstr "Kopēt vysu kompaktdisku"
 msgid "An error occurred"
 msgstr "Atkluota kliuda"
 
-#: steps_interactive.pm:97
+#: steps_interactive.pm:96
 #, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Lyudzu izavielejit jiusu klaviaturys izkuortuojumu."
 
-#: steps_interactive.pm:99
+#: steps_interactive.pm:98
 #, c-format
 msgid "Here is the full list of available keyboards"
 msgstr "Ite ir pylns pīejamū klaviaturu saroksts"
 
-#: steps_interactive.pm:134
+#: steps_interactive.pm:133
 #, c-format
 msgid "Install/Upgrade"
 msgstr "Instalēt/Atjaunynuot"
 
-#: steps_interactive.pm:135
+#: steps_interactive.pm:134
 #, c-format
 msgid "Is this an install or an upgrade?"
 msgstr "Itei ir instaleišona voi atjaunynuošona?"
 
-#: steps_interactive.pm:139
+#: steps_interactive.pm:138
 #, fuzzy, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
 msgstr "Instalēt"
 
-#: steps_interactive.pm:141
+#: steps_interactive.pm:140
 #, c-format
 msgid "Upgrade %s"
 msgstr "Atjaunynuot %s"
 
-#: steps_interactive.pm:145
+#: steps_interactive.pm:144
 #, c-format
 msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 msgstr ""
 
-#: steps_interactive.pm:149
+#: steps_interactive.pm:148
 #, c-format
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 msgstr ""
 
-#: steps_interactive.pm:168
+#: steps_interactive.pm:167
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Šifreišonys atslāga deļ %s"
 
-#: steps_interactive.pm:200
+#: steps_interactive.pm:199
 #, c-format
 msgid "Cancel installation, reboot system"
 msgstr ""
 
-#: steps_interactive.pm:201
+#: steps_interactive.pm:200
 #, fuzzy, c-format
 msgid "New Installation"
 msgstr "Instalaceja"
 
-#: steps_interactive.pm:202
+#: steps_interactive.pm:201
 #, c-format
 msgid "Upgrade previous installation (not recommended)"
 msgstr ""
 
-#: steps_interactive.pm:206
+#: steps_interactive.pm:205
 #, c-format
 msgid ""
-"Installer have detected your installed Mandriva Linux system could not\n"
+"Installer has detected that your installed Mandriva Linux system could not\n"
 "safely be upgraded to %s.\n"
 "\n"
 "New installation replacing your previous one is recommended.\n"
@@ -1025,17 +1024,17 @@ msgid ""
 "Installation\"."
 msgstr ""
 
-#: steps_interactive.pm:248
+#: steps_interactive.pm:247
 #, c-format
 msgid "IDE"
 msgstr "IDE"
 
-#: steps_interactive.pm:248
+#: steps_interactive.pm:247
 #, c-format
 msgid "Configuring IDE"
 msgstr "Teik konfigurāts IDE"
 
-#: steps_interactive.pm:285
+#: steps_interactive.pm:284
 #, c-format
 msgid ""
 "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1045,7 +1044,7 @@ msgstr ""
 "lai īluodātu sistemu, jiusim vajadzēs izveiduot suokneišonys programmys "
 "diska sadali programmā DiskDrake"
 
-#: steps_interactive.pm:290
+#: steps_interactive.pm:289
 #, c-format
 msgid ""
 "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
@@ -1056,7 +1055,7 @@ msgstr ""
 "turpynuosīs, bet lai īluodātu sistemu, jiusim vajadzēs izveiduot "
 "suokneišonys programmys diska sadali programmā DiskDrake"
 
-#: steps_interactive.pm:382
+#: steps_interactive.pm:381
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -1070,19 +1069,19 @@ msgstr ""
 "Ja jiusim nav ituo diska, nūspīdit Atceļt, lai nainstaleitu nu ituo "
 "kompaktdiska."
 
-#: steps_interactive.pm:404
+#: steps_interactive.pm:403
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Mekleju pīejamuos pakūtnis"
 
-#: steps_interactive.pm:412
+#: steps_interactive.pm:411
 #, c-format
 msgid ""
 "Your system does not have enough space left for installation or upgrade (%"
 "dMB > %dMB)"
 msgstr ""
 
-#: steps_interactive.pm:460
+#: steps_interactive.pm:459
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1091,52 +1090,42 @@ msgstr ""
 "Lyudzu izavielejit īluodēt voi saglobuot pakūtņu izvieli.\n"
 "Formats ir taids pats, kai ar auto_install generātom failim."
 
-#: steps_interactive.pm:462
+#: steps_interactive.pm:461
 #, c-format
 msgid "Load"
 msgstr "Īluodēt"
 
-#: steps_interactive.pm:462
+#: steps_interactive.pm:461
 #, c-format
 msgid "Save"
 msgstr "Saglobuot"
 
-#: steps_interactive.pm:470
+#: steps_interactive.pm:469
 #, c-format
 msgid "Bad file"
 msgstr "Napareizs fails"
 
-#: steps_interactive.pm:486
-#, c-format
-msgid "Install Mandriva KDE Desktop"
-msgstr ""
-
-#: steps_interactive.pm:487
-#, c-format
-msgid "Install Mandriva GNOME Desktop"
-msgstr ""
-
-#: steps_interactive.pm:488
+#: steps_interactive.pm:489
 #, fuzzy, c-format
-msgid "Custom install"
-msgstr "Minimala instaleišona"
+msgid "Desktop Selection"
+msgstr "Pakūtņu grupu izviele"
 
-#: steps_interactive.pm:491
+#: steps_interactive.pm:490
 #, c-format
 msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
 msgstr ""
 
-#: steps_interactive.pm:576
+#: steps_interactive.pm:575
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "Izvālātais apjūms ir leluoks nakai pīejamuo vīta"
 
-#: steps_interactive.pm:591
+#: steps_interactive.pm:590
 #, c-format
 msgid "Type of install"
 msgstr "Instalacejis tips"
 
-#: steps_interactive.pm:592
+#: steps_interactive.pm:591
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1145,82 +1134,82 @@ msgstr ""
 "Jius naizavielēt nivīnu pakūtņu grupu.\n"
 "Lyudzu, izavielejit minimalū instalaceju, kaidu jius gribit:"
 
-#: steps_interactive.pm:595
+#: steps_interactive.pm:594
 #, c-format
 msgid "With X"
 msgstr "Ar X"
 
-#: steps_interactive.pm:596
+#: steps_interactive.pm:595
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "Ar pamatdokumentaceju (īteicams!)"
 
-#: steps_interactive.pm:597
+#: steps_interactive.pm:596
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Patīši minimala instalaceja (īpaši bez urpmi)"
 
-#: steps_interactive.pm:651
+#: steps_interactive.pm:650
 #, c-format
 msgid "Preparing installation"
 msgstr "Sagataveju instaleišonu"
 
-#: steps_interactive.pm:659
+#: steps_interactive.pm:658
 #, c-format
 msgid "Installing package %s"
 msgstr "Instaleju pakūtni %s"
 
-#: steps_interactive.pm:683
+#: steps_interactive.pm:682
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Pakūtņu kuortuošonys laikā atkluota kliuda:"
 
-#: steps_interactive.pm:683
+#: steps_interactive.pm:682
 #, c-format
 msgid "Go on anyway?"
 msgstr "Tūmār turpynuot?"
 
-#: steps_interactive.pm:687
+#: steps_interactive.pm:686
 #, c-format
 msgid "Retry"
 msgstr ""
 
-#: steps_interactive.pm:688
+#: steps_interactive.pm:687
 #, c-format
 msgid "Skip this package"
 msgstr ""
 
-#: steps_interactive.pm:689
+#: steps_interactive.pm:688
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr ""
 
-#: steps_interactive.pm:690
+#: steps_interactive.pm:689
 #, fuzzy, c-format
 msgid "Go back to media and packages selection"
 msgstr "Saglobuot pakūtņu izvieli"
 
-#: steps_interactive.pm:693
+#: steps_interactive.pm:692
 #, fuzzy, c-format
 msgid "There was an error installing package %s."
 msgstr "Pakūtņu instaleišonys laikā atkluota kliuda:"
 
-#: steps_interactive.pm:711
+#: steps_interactive.pm:710
 #, c-format
 msgid "Post-install configuration"
 msgstr "Piecinstaleišonys konfigureišona"
 
-#: steps_interactive.pm:718
+#: steps_interactive.pm:717
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "Lyudzu, puorsalīcynojit ka Update Modules atsarū īkuortā %s"
 
-#: steps_interactive.pm:746 steps_list.pm:47
+#: steps_interactive.pm:745 steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "Atjaunynuojumi"
 
-#: steps_interactive.pm:747
+#: steps_interactive.pm:746
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1242,38 +1231,38 @@ msgstr ""
 "\n"
 "Voi jius gribit instalēt atjaunynuojumus?"
 
-#: steps_interactive.pm:769
+#: steps_interactive.pm:768
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Pīsaslādzu spūguļserveram, lai sajimtu pīejamū pakūtņu sarokstu"
 
-#: steps_interactive.pm:775
+#: steps_interactive.pm:774
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr "Navar dasavīnuot pi spūguļservera %s"
 
-#: steps_interactive.pm:881
+#: steps_interactive.pm:879
 #, c-format
 msgid "%s on %s"
 msgstr "%s iz %s"
 
-#: steps_interactive.pm:915 steps_interactive.pm:922 steps_interactive.pm:936
-#: steps_interactive.pm:954 steps_interactive.pm:969
+#: steps_interactive.pm:912 steps_interactive.pm:919 steps_interactive.pm:932
+#: steps_interactive.pm:949 steps_interactive.pm:964
 #, c-format
 msgid "Hardware"
 msgstr "Aparatura"
 
-#: steps_interactive.pm:937 steps_interactive.pm:955
+#: steps_interactive.pm:933 steps_interactive.pm:950
 #, c-format
 msgid "Sound card"
 msgstr "Skanis karte"
 
-#: steps_interactive.pm:958
+#: steps_interactive.pm:953
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Vai jiusim ir ISA skanis karte?"
 
-#: steps_interactive.pm:960
+#: steps_interactive.pm:955
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -1282,64 +1271,64 @@ msgstr ""
 "Piec instaleišonys palaidit \"alsaconf\" voi \"sndconfig\", lai konfigurātu "
 "jiusu skanis karti"
 
-#: steps_interactive.pm:962
+#: steps_interactive.pm:957
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr "Nav atrosta skanis karte. Piec instaleišonys izmieginit \"harddrake\""
 
-#: steps_interactive.pm:970
+#: steps_interactive.pm:965
 #, c-format
 msgid "Graphical interface"
 msgstr "Grafiskuo saskarne"
 
-#: steps_interactive.pm:977 steps_interactive.pm:988
+#: steps_interactive.pm:971 steps_interactive.pm:982
 #, c-format
 msgid "Network & Internet"
 msgstr "Teiklys & Internets"
 
-#: steps_interactive.pm:989
+#: steps_interactive.pm:983
 #, c-format
 msgid "Proxies"
 msgstr "Storpnīkserveri"
 
-#: steps_interactive.pm:990
+#: steps_interactive.pm:984
 #, c-format
 msgid "configured"
 msgstr "konfigurāts"
 
-#: steps_interactive.pm:1000
+#: steps_interactive.pm:994
 #, c-format
 msgid "Security Level"
 msgstr "Drūšeibys leimiņs"
 
-#: steps_interactive.pm:1019
+#: steps_interactive.pm:1013
 #, c-format
 msgid "Firewall"
 msgstr "Guņsmyurs"
 
-#: steps_interactive.pm:1023
+#: steps_interactive.pm:1017
 #, c-format
 msgid "activated"
 msgstr "aktivizāts"
 
-#: steps_interactive.pm:1023
+#: steps_interactive.pm:1017
 #, c-format
 msgid "disabled"
 msgstr "atslāgts"
 
-#: steps_interactive.pm:1037
+#: steps_interactive.pm:1031
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr ""
 "Jiusim nav nūkonfigurāts X servers. Voi jius asot puorlīcynuoti, ka jius tū "
 "gribit?"
 
-#: steps_interactive.pm:1064
+#: steps_interactive.pm:1058
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Sagataveju suokneituoju"
 
-#: steps_interactive.pm:1074
+#: steps_interactive.pm:1068
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1352,12 +1341,12 @@ msgstr ""
 "juoizmontoj BootX voi kas cyts, lai īluodātu datoru. Kūdula arguments deļ "
 "root fs ir: root=%s"
 
-#: steps_interactive.pm:1080
+#: steps_interactive.pm:1074
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "Voi gribit izmontuot aboot?"
 
-#: steps_interactive.pm:1083
+#: steps_interactive.pm:1077
 #, c-format
 msgid ""
 "Error installing aboot, \n"
@@ -1366,7 +1355,7 @@ msgstr ""
 "Kliuda, instalejūt aboot, \n"
 "voi instalēt pīspīdu kuortā pat tod, ja tiks iznycynuota pyrmuo sadaļa?"
 
-#: steps_interactive.pm:1095
+#: steps_interactive.pm:1089
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1375,17 +1364,17 @@ msgstr ""
 "Šymā drūšeibys leiminī, pīeeja Windows sadalis failim ir tikai "
 "administratoram."
 
-#: steps_interactive.pm:1127
+#: steps_interactive.pm:1121
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Īlicit tukšu disketi īkuortā %s"
 
-#: steps_interactive.pm:1129
+#: steps_interactive.pm:1123
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Sagataveju auto instaleišonys disketi"
 
-#: steps_interactive.pm:1140
+#: steps_interactive.pm:1134
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1396,22 +1385,22 @@ msgstr ""
 "\n"
 "Voi tīšom gribit izīt tagad?"
 
-#: steps_interactive.pm:1150
+#: steps_interactive.pm:1144
 #, c-format
 msgid "Congratulations"
 msgstr "Apsveicam"
 
-#: steps_interactive.pm:1154
+#: steps_interactive.pm:1147
 #, c-format
 msgid "Reboot"
 msgstr "Puorsuoknēt"
 
-#: steps_interactive.pm:1158 steps_interactive.pm:1159
+#: steps_interactive.pm:1151 steps_interactive.pm:1152
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "Sagatavēt auto instaleišonys disketi"
 
-#: steps_interactive.pm:1160
+#: steps_interactive.pm:1153
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"
@@ -1426,17 +1415,17 @@ msgstr ""
 "\n"
 "Jius varbyut gribēsit atkuortuot instalaceju.\n"
 
-#: steps_interactive.pm:1165
+#: steps_interactive.pm:1158
 #, c-format
 msgid "Replay"
 msgstr "Atkuortuot"
 
-#: steps_interactive.pm:1165
+#: steps_interactive.pm:1158
 #, c-format
 msgid "Automated"
 msgstr "Automatisks"
 
-#: steps_interactive.pm:1168
+#: steps_interactive.pm:1161
 #, c-format
 msgid "Save packages selection"
 msgstr "Saglobuot pakūtņu izvieli"
@@ -1579,6 +1568,31 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "Izīt"
+
+#: ../../advertising/IM_flash.pl:1
+#, c-format
+msgid "Your desktop on a USB key"
+msgstr ""
+
+#: ../../advertising/IM_free08S.pl:1
+#, c-format
+msgid "The 100%% open source Mandriva Linux distribution"
+msgstr ""
+
+#: ../../advertising/IM_one08S.pl:1
+#, c-format
+msgid "Explore Linux easily with Mandriva One"
+msgstr ""
+
+#: ../../advertising/IM_pwp08S.pl:1
+#, c-format
+msgid "A full Mandriva Linux desktop, with support"
+msgstr ""
+
+#: ../../advertising/IM_range08S.pl:1
+#, c-format
+msgid "Mandriva: distributions for everybody's needs"
+msgstr ""
 
 #~ msgid "All"
 #~ msgstr "Vyss"

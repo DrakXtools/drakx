@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-20 04:44+0200\n"
+"POT-Creation-Date: 2008-08-12 17:54+0200\n"
 "PO-Revision-Date: 2007-10-27 18:51+0700\n"
 "Last-Translator: Willy Sudiarto Raharjo <willysr@gmail.com>\n"
 "Language-Team: Indonesia <mdk-id@yahoogroups.com>\n"
@@ -25,31 +25,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.6\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-
-#: ../../advertising/IM_flash.pl:1
-#, c-format
-msgid "Your desktop on a USB key"
-msgstr ""
-
-#: ../../advertising/IM_free08S.pl:1
-#, c-format
-msgid "The 100%% open source Mandriva Linux distribution"
-msgstr ""
-
-#: ../../advertising/IM_one08S.pl:1
-#, c-format
-msgid "Explore Linux easily with Mandriva One"
-msgstr ""
-
-#: ../../advertising/IM_pwp08S.pl:1
-#, c-format
-msgid "A full Mandriva Linux desktop, with support"
-msgstr ""
-
-#: ../../advertising/IM_range08S.pl:1
-#, c-format
-msgid "Mandriva: distributions for everybody's needs"
-msgstr ""
 
 #: any.pm:109
 #, c-format
@@ -247,7 +222,7 @@ msgstr "FTP"
 msgid "NFS"
 msgstr "HFS"
 
-#: any.pm:1083 steps_interactive.pm:978
+#: any.pm:1083 steps_interactive.pm:972
 #, c-format
 msgid "Network"
 msgstr "Jaringan"
@@ -287,12 +262,12 @@ msgstr "Tidak bisa membuat screenshot sebelum buat partisi"
 msgid "Screenshots will be available after install in %s"
 msgstr "Screenshot akan tersedia setelah installasi pada %s"
 
-#: gtk.pm:119
+#: gtk.pm:126
 #, c-format
 msgid "Installation"
 msgstr "Installasi"
 
-#: gtk.pm:122 share/meta-task/compssUsers.pl:42
+#: gtk.pm:130 share/meta-task/compssUsers.pl:42
 #, c-format
 msgid "Configuration"
 msgstr "Konfigurasi"
@@ -751,73 +726,97 @@ msgstr ""
 "installasi berbasis teks. Untuk melakukannya, tekan `F1' saat\n"
 "booting pada CDROM, lalu ketikkan `text'."
 
-#: steps_gtk.pm:261 steps_interactive.pm:490 steps_interactive.pm:619
-#: steps_list.pm:30
+#: steps_gtk.pm:228 steps_interactive.pm:485
+#, c-format
+msgid "Install Mandriva KDE Desktop"
+msgstr "Install Desktop KDE Mandriva"
+
+#: steps_gtk.pm:229 steps_interactive.pm:486
+#, c-format
+msgid "Install Mandriva GNOME Desktop"
+msgstr "Install Desktop GNOME Mandriva"
+
+#: steps_gtk.pm:230 steps_interactive.pm:487
+#, c-format
+msgid "Custom install"
+msgstr "Installasi kustomisasi"
+
+#: steps_gtk.pm:253
+#, c-format
+msgid "Here's a preview of the '%s' desktop."
+msgstr ""
+
+#: steps_gtk.pm:275
+#, c-format
+msgid "Click on images in order to see a bigger preview"
+msgstr ""
+
+#: steps_gtk.pm:287 steps_interactive.pm:618 steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "Pilihan Grup Paket"
 
-#: steps_gtk.pm:282 steps_interactive.pm:636
+#: steps_gtk.pm:308 steps_interactive.pm:635
 #, c-format
 msgid "Individual package selection"
 msgstr "Pilih paket individu"
 
-#: steps_gtk.pm:304 steps_interactive.pm:562
+#: steps_gtk.pm:330 steps_interactive.pm:561
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Ukuran total: %d / %d MB"
 
-#: steps_gtk.pm:349
+#: steps_gtk.pm:375
 #, c-format
 msgid "Bad package"
 msgstr "Paket rusak"
 
-#: steps_gtk.pm:351
+#: steps_gtk.pm:377
 #, c-format
 msgid "Version: "
 msgstr "Versi: "
 
-#: steps_gtk.pm:352
+#: steps_gtk.pm:378
 #, c-format
 msgid "Size: "
 msgstr "Ukuran: "
 
-#: steps_gtk.pm:352
+#: steps_gtk.pm:378
 #, c-format
 msgid "%d KB\n"
 msgstr "%d KB\n"
 
-#: steps_gtk.pm:353
+#: steps_gtk.pm:379
 #, c-format
 msgid "Importance: "
 msgstr "Tingkat kepentingan: "
 
-#: steps_gtk.pm:387
+#: steps_gtk.pm:413
 #, c-format
 msgid "You can not select/unselect this package"
 msgstr "Anda tidak bisa memilih/tidak memilih paket ini"
 
-#: steps_gtk.pm:391
+#: steps_gtk.pm:417
 #, c-format
 msgid "due to missing %s"
 msgstr "karena %s hilang"
 
-#: steps_gtk.pm:392
+#: steps_gtk.pm:418
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "karena %s tidak terpenuhi"
 
-#: steps_gtk.pm:393
+#: steps_gtk.pm:419
 #, c-format
 msgid "trying to promote %s"
 msgstr "mencoba mempromosikan %s"
 
-#: steps_gtk.pm:394
+#: steps_gtk.pm:420
 #, c-format
 msgid "in order to keep %s"
 msgstr "untuk menjaga %s"
 
-#: steps_gtk.pm:399
+#: steps_gtk.pm:425
 #, c-format
 msgid ""
 "You can not select this package as there is not enough space left to install "
@@ -825,108 +824,108 @@ msgid ""
 msgstr ""
 "Anda tidak bisa memilih paket ini karena tidak ada ruang kosong yang tersisa"
 
-#: steps_gtk.pm:402
+#: steps_gtk.pm:428
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "Paket berikut akan diinstal"
 
-#: steps_gtk.pm:403
+#: steps_gtk.pm:429
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "Paket berikut akan dihapus"
 
-#: steps_gtk.pm:428
+#: steps_gtk.pm:454
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
 msgstr "Ini merupakan paket wajib, tidak bisa dibuang"
 
-#: steps_gtk.pm:430
+#: steps_gtk.pm:456
 #, c-format
 msgid "You can not unselect this package. It is already installed"
 msgstr "Anda tidak bisa tidak memilih paket ini. Ia sudah terinstall"
 
-#: steps_gtk.pm:432
+#: steps_gtk.pm:458
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
 msgstr "Anda tidak bisa tidak memilih paket. Paket harus diupgrade"
 
-#: steps_gtk.pm:436
+#: steps_gtk.pm:462
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "Tunjukkan paket yang sudah dipilih secara otomatis"
 
-#: steps_gtk.pm:438
+#: steps_gtk.pm:464
 #, c-format
 msgid "Install"
 msgstr "Instal"
 
-#: steps_gtk.pm:441
+#: steps_gtk.pm:467
 #, c-format
 msgid "Load/Save selection"
 msgstr "Pilihan Muat/Simpan"
 
-#: steps_gtk.pm:442
+#: steps_gtk.pm:468
 #, c-format
 msgid "Updating package selection"
 msgstr "Mengupdate pilihan paket"
 
-#: steps_gtk.pm:447
+#: steps_gtk.pm:473
 #, c-format
 msgid "Minimal install"
 msgstr "Installasi minimal"
 
-#: steps_gtk.pm:461
+#: steps_gtk.pm:487
 #, c-format
 msgid "Software Management"
 msgstr "Manajemen Perangkat Lunak"
 
-#: steps_gtk.pm:461 steps_interactive.pm:448
+#: steps_gtk.pm:487 steps_interactive.pm:447
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Pilih paket yang akan diinstal"
 
-#: steps_gtk.pm:478 steps_interactive.pm:650 steps_list.pm:32
+#: steps_gtk.pm:504 steps_interactive.pm:649 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "Menginstall"
 
-#: steps_gtk.pm:504
+#: steps_gtk.pm:530
 #, c-format
 msgid "No details"
 msgstr "Tanpa Detail"
 
-#: steps_gtk.pm:519
+#: steps_gtk.pm:545
 #, c-format
 msgid "Time remaining "
 msgstr "Sisa waktu"
 
-#: steps_gtk.pm:520
+#: steps_gtk.pm:546
 #, fuzzy, c-format
 msgid "(estimating...)"
 msgstr "Memperkirakan"
 
-#: steps_gtk.pm:547
+#: steps_gtk.pm:573
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d paket"
 
-#: steps_gtk.pm:593 steps_interactive.pm:838 steps_list.pm:43
+#: steps_gtk.pm:619 steps_interactive.pm:837 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Ringkasan"
 
-#: steps_gtk.pm:610
+#: steps_gtk.pm:636
 #, c-format
 msgid "Configure"
 msgstr "Konfigurasikan"
 
-#: steps_gtk.pm:627 steps_interactive.pm:834 steps_interactive.pm:990
+#: steps_gtk.pm:653 steps_interactive.pm:833 steps_interactive.pm:984
 #, c-format
 msgid "not configured"
 msgstr "tidak dikonfigurasikan"
 
-#: steps_gtk.pm:664 steps_interactive.pm:332
+#: steps_gtk.pm:690 steps_interactive.pm:331
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -935,7 +934,7 @@ msgstr ""
 "Media installasi berikut ditemukan. Jika Anda ingin\n"
 "melewati beberapa, Anda bisa tidak memilihnya sekarang."
 
-#: steps_gtk.pm:674 steps_interactive.pm:338
+#: steps_gtk.pm:700 steps_interactive.pm:337
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -947,7 +946,7 @@ msgstr ""
 "Proses akan dilanjutkan dari hard disk dan paket akantetap tersedia setelah "
 "sistem terinstall."
 
-#: steps_gtk.pm:676 steps_interactive.pm:340
+#: steps_gtk.pm:702 steps_interactive.pm:339
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Salin seluruh CD"
@@ -957,72 +956,72 @@ msgstr "Salin seluruh CD"
 msgid "An error occurred"
 msgstr "Terjadi kesalahan"
 
-#: steps_interactive.pm:97
+#: steps_interactive.pm:96
 #, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Pilih layout keyboard Anda."
 
-#: steps_interactive.pm:99
+#: steps_interactive.pm:98
 #, c-format
 msgid "Here is the full list of available keyboards"
 msgstr "Berikut daftar keyboard yang tersedia"
 
-#: steps_interactive.pm:134
+#: steps_interactive.pm:133
 #, c-format
 msgid "Install/Upgrade"
 msgstr "Instal/Upgrade"
 
-#: steps_interactive.pm:135
+#: steps_interactive.pm:134
 #, c-format
 msgid "Is this an install or an upgrade?"
 msgstr "Installasi atau upgrade?"
 
-#: steps_interactive.pm:139
+#: steps_interactive.pm:138
 #, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
 msgstr "Install"
 
-#: steps_interactive.pm:141
+#: steps_interactive.pm:140
 #, c-format
 msgid "Upgrade %s"
 msgstr "Upgrade %s"
 
-#: steps_interactive.pm:145
+#: steps_interactive.pm:144
 #, c-format
 msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 msgstr "Upgrade dari distribusi 32bit ke 64bit tidak didukung"
 
-#: steps_interactive.pm:149
+#: steps_interactive.pm:148
 #, c-format
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 msgstr "Upgrade dari distribusi 64bit ke 32bit tidak didukung"
 
-#: steps_interactive.pm:168
+#: steps_interactive.pm:167
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Kunci enkripsi untuk %s"
 
-#: steps_interactive.pm:200
+#: steps_interactive.pm:199
 #, c-format
 msgid "Cancel installation, reboot system"
 msgstr ""
 
-#: steps_interactive.pm:201
+#: steps_interactive.pm:200
 #, fuzzy, c-format
 msgid "New Installation"
 msgstr "Installasi"
 
-#: steps_interactive.pm:202
+#: steps_interactive.pm:201
 #, c-format
 msgid "Upgrade previous installation (not recommended)"
 msgstr ""
 
-#: steps_interactive.pm:206
+#: steps_interactive.pm:205
 #, c-format
 msgid ""
-"Installer have detected your installed Mandriva Linux system could not\n"
+"Installer has detected that your installed Mandriva Linux system could not\n"
 "safely be upgraded to %s.\n"
 "\n"
 "New installation replacing your previous one is recommended.\n"
@@ -1031,17 +1030,17 @@ msgid ""
 "Installation\"."
 msgstr ""
 
-#: steps_interactive.pm:248
+#: steps_interactive.pm:247
 #, c-format
 msgid "IDE"
 msgstr "IDE"
 
-#: steps_interactive.pm:248
+#: steps_interactive.pm:247
 #, c-format
 msgid "Configuring IDE"
 msgstr "Mengkonfigurasi IDE"
 
-#: steps_interactive.pm:285
+#: steps_interactive.pm:284
 #, c-format
 msgid ""
 "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1050,7 +1049,7 @@ msgstr ""
 "Tidak ada ruang 1MB untuk bootstrap! Installasi akan dilanjutkan, tetapi "
 "untuk boot sistem, Anda perlu membuat partisi bootstrap pada DiskDrake"
 
-#: steps_interactive.pm:290
+#: steps_interactive.pm:289
 #, c-format
 msgid ""
 "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
@@ -1060,7 +1059,7 @@ msgstr ""
 "Anda harus membuat PPC PReP Boot bootstrap! Installasi akan dilanjutkan, "
 "tetapi untuk boot sistem, Anda perlu membuat partisi bootstrap pada DiskDrake"
 
-#: steps_interactive.pm:382
+#: steps_interactive.pm:381
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -1073,12 +1072,12 @@ msgstr ""
 "Masukkan Cd-Rom berlabel \"%s\" pada drive dan tekan Ok. Jika Anda tidak \n"
 "punya, tekan Batal untuk menghindari installasi dari Cd-Rom ini."
 
-#: steps_interactive.pm:404
+#: steps_interactive.pm:403
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Mencari paket yang tersedia..."
 
-#: steps_interactive.pm:412
+#: steps_interactive.pm:411
 #, c-format
 msgid ""
 "Your system does not have enough space left for installation or upgrade (%"
@@ -1087,7 +1086,7 @@ msgstr ""
 "Sistem Anda tidak memilih ruang kosong yang cukup untuk installasi atau "
 "upgrade (%dMB > %dMB)"
 
-#: steps_interactive.pm:460
+#: steps_interactive.pm:459
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1096,53 +1095,43 @@ msgstr ""
 "Pilih muat atau simpan pilihan paket.\n"
 "Formatnya sama dengan file auto_install."
 
-#: steps_interactive.pm:462
+#: steps_interactive.pm:461
 #, c-format
 msgid "Load"
 msgstr "Beban"
 
-#: steps_interactive.pm:462
+#: steps_interactive.pm:461
 #, c-format
 msgid "Save"
 msgstr "Simpan"
 
-#: steps_interactive.pm:470
+#: steps_interactive.pm:469
 #, c-format
 msgid "Bad file"
 msgstr "File rusak"
 
-#: steps_interactive.pm:486
-#, c-format
-msgid "Install Mandriva KDE Desktop"
-msgstr "Install Desktop KDE Mandriva"
+#: steps_interactive.pm:489
+#, fuzzy, c-format
+msgid "Desktop Selection"
+msgstr "Pilihan Grup Paket"
 
-#: steps_interactive.pm:487
-#, c-format
-msgid "Install Mandriva GNOME Desktop"
-msgstr "Install Desktop GNOME Mandriva"
-
-#: steps_interactive.pm:488
-#, c-format
-msgid "Custom install"
-msgstr "Installasi kustomisasi"
-
-#: steps_interactive.pm:491
+#: steps_interactive.pm:490
 #, c-format
 msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
 msgstr ""
 "Anda bisa memilih profil desktop workstation Anda: KDE, GNOME atau Kustom"
 
-#: steps_interactive.pm:576
+#: steps_interactive.pm:575
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "Ukuran terpilih melebihi ruang yang ada"
 
-#: steps_interactive.pm:591
+#: steps_interactive.pm:590
 #, c-format
 msgid "Type of install"
 msgstr "Tipe installasi"
 
-#: steps_interactive.pm:592
+#: steps_interactive.pm:591
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1151,82 +1140,82 @@ msgstr ""
 "Anda belum memilih grup paket.\n"
 "Pilih installasi minimal yang Anda inginkan:"
 
-#: steps_interactive.pm:595
+#: steps_interactive.pm:594
 #, c-format
 msgid "With X"
 msgstr "Dengan X"
 
-#: steps_interactive.pm:596
+#: steps_interactive.pm:595
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "Dengan dokumentasi dasar (disarankan!)"
 
-#: steps_interactive.pm:597
+#: steps_interactive.pm:596
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Installasi minimal sesungguhnya (khususnya tanpa urpmi)"
 
-#: steps_interactive.pm:651
+#: steps_interactive.pm:650
 #, c-format
 msgid "Preparing installation"
 msgstr "Mempersiapkan installasi"
 
-#: steps_interactive.pm:659
+#: steps_interactive.pm:658
 #, c-format
 msgid "Installing package %s"
 msgstr "Menginstall paket %s"
 
-#: steps_interactive.pm:683
+#: steps_interactive.pm:682
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Terdapat kesalahan pengurutan paket:"
 
-#: steps_interactive.pm:683
+#: steps_interactive.pm:682
 #, c-format
 msgid "Go on anyway?"
 msgstr "Lanjutkan?"
 
-#: steps_interactive.pm:687
+#: steps_interactive.pm:686
 #, c-format
 msgid "Retry"
 msgstr "Ulang kembali"
 
-#: steps_interactive.pm:688
+#: steps_interactive.pm:687
 #, c-format
 msgid "Skip this package"
 msgstr "Lewati paket ini"
 
-#: steps_interactive.pm:689
+#: steps_interactive.pm:688
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "Lewati semua paket-paket dari media \"%s\""
 
-#: steps_interactive.pm:690
+#: steps_interactive.pm:689
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "Kembali pada media dan pemilihan paket"
 
-#: steps_interactive.pm:693
+#: steps_interactive.pm:692
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "Terdapat kesalahan penginstallan paket %s."
 
-#: steps_interactive.pm:711
+#: steps_interactive.pm:710
 #, c-format
 msgid "Post-install configuration"
 msgstr "Konfigurasi pasca installasi"
 
-#: steps_interactive.pm:718
+#: steps_interactive.pm:717
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "Harap pastikan media Update Modul pada drive %s"
 
-#: steps_interactive.pm:746 steps_list.pm:47
+#: steps_interactive.pm:745 steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "Update"
 
-#: steps_interactive.pm:747
+#: steps_interactive.pm:746
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1246,38 +1235,38 @@ msgstr ""
 "\n"
 "Apakah Anda ingin menginstall update?"
 
-#: steps_interactive.pm:769
+#: steps_interactive.pm:768
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Menghubungi mirror untuk mendapatkan daftar paket yang tersedia..."
 
-#: steps_interactive.pm:775
+#: steps_interactive.pm:774
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr "Tidak dapat menghubungi mirror %s"
 
-#: steps_interactive.pm:881
+#: steps_interactive.pm:879
 #, c-format
 msgid "%s on %s"
 msgstr "%s pada %s"
 
-#: steps_interactive.pm:915 steps_interactive.pm:922 steps_interactive.pm:936
-#: steps_interactive.pm:954 steps_interactive.pm:969
+#: steps_interactive.pm:912 steps_interactive.pm:919 steps_interactive.pm:932
+#: steps_interactive.pm:949 steps_interactive.pm:964
 #, c-format
 msgid "Hardware"
 msgstr "Perangkat Keras"
 
-#: steps_interactive.pm:937 steps_interactive.pm:955
+#: steps_interactive.pm:933 steps_interactive.pm:950
 #, c-format
 msgid "Sound card"
 msgstr "Kartu suara"
 
-#: steps_interactive.pm:958
+#: steps_interactive.pm:953
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Apakah Anda memiliki kartu suara ISA?"
 
-#: steps_interactive.pm:960
+#: steps_interactive.pm:955
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -1286,63 +1275,63 @@ msgstr ""
 "Jalankan \"sndconfig\" atau \"sndconfig\" setelah installasi untuk "
 "mengkonfigurasi kartu suara Anda"
 
-#: steps_interactive.pm:962
+#: steps_interactive.pm:957
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr ""
 "Tidak ada kartu suara yang terdeteksi. Coba \"harddrake\" setelah installasi"
 
-#: steps_interactive.pm:970
+#: steps_interactive.pm:965
 #, c-format
 msgid "Graphical interface"
 msgstr "Antarmuka grafis"
 
-#: steps_interactive.pm:977 steps_interactive.pm:988
+#: steps_interactive.pm:971 steps_interactive.pm:982
 #, c-format
 msgid "Network & Internet"
 msgstr "Jaringan & Internet"
 
-#: steps_interactive.pm:989
+#: steps_interactive.pm:983
 #, c-format
 msgid "Proxies"
 msgstr "Proxy "
 
-#: steps_interactive.pm:990
+#: steps_interactive.pm:984
 #, c-format
 msgid "configured"
 msgstr "terkonfigurasi"
 
-#: steps_interactive.pm:1000
+#: steps_interactive.pm:994
 #, c-format
 msgid "Security Level"
 msgstr "Tingkat Keamanan"
 
-#: steps_interactive.pm:1019
+#: steps_interactive.pm:1013
 #, c-format
 msgid "Firewall"
 msgstr "Firewall"
 
-#: steps_interactive.pm:1023
+#: steps_interactive.pm:1017
 #, c-format
 msgid "activated"
 msgstr "telah diaktifkan"
 
-#: steps_interactive.pm:1023
+#: steps_interactive.pm:1017
 #, c-format
 msgid "disabled"
 msgstr "telah dinonaktifkan"
 
-#: steps_interactive.pm:1037
+#: steps_interactive.pm:1031
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Anda belum mengkonfigurasi X. Apakah Anda yakin?"
 
-#: steps_interactive.pm:1064
+#: steps_interactive.pm:1058
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Mempersiapkan bootloader..."
 
-#: steps_interactive.pm:1074
+#: steps_interactive.pm:1068
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1355,12 +1344,12 @@ msgstr ""
 "BootX atau cara lain untuk boot komputer Anda. Argumen kernel untuk fs root "
 "adalah: root=%s"
 
-#: steps_interactive.pm:1080
+#: steps_interactive.pm:1074
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "Apakah Anda ingin menggunakan aboot?"
 
-#: steps_interactive.pm:1083
+#: steps_interactive.pm:1077
 #, c-format
 msgid ""
 "Error installing aboot, \n"
@@ -1369,7 +1358,7 @@ msgstr ""
 "Kesalahan menginstall aboot,\n"
 "paksakan installasi meskipun merusak partisi pertama?"
 
-#: steps_interactive.pm:1095
+#: steps_interactive.pm:1089
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1378,17 +1367,17 @@ msgstr ""
 "Pada tingkat keamanan ini, akses pada file pada partisi Windows dibatasi "
 "hanya pada administrator."
 
-#: steps_interactive.pm:1127
+#: steps_interactive.pm:1121
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Masukkan disket kosong pada drive %s"
 
-#: steps_interactive.pm:1129
+#: steps_interactive.pm:1123
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Membuat disket installasi otomatis..."
 
-#: steps_interactive.pm:1140
+#: steps_interactive.pm:1134
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1399,22 +1388,22 @@ msgstr ""
 "\n"
 "Apakah Anda ingin keluar sekarang?"
 
-#: steps_interactive.pm:1150
+#: steps_interactive.pm:1144
 #, c-format
 msgid "Congratulations"
 msgstr "Selamat"
 
-#: steps_interactive.pm:1154
+#: steps_interactive.pm:1147
 #, c-format
 msgid "Reboot"
 msgstr "Boot Ulang"
 
-#: steps_interactive.pm:1158 steps_interactive.pm:1159
+#: steps_interactive.pm:1151 steps_interactive.pm:1152
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "Membuat disket installasi otomatis"
 
-#: steps_interactive.pm:1160
+#: steps_interactive.pm:1153
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"
@@ -1429,17 +1418,17 @@ msgstr ""
 "\n"
 "Anda mungkin memilih untuk mengulangi installasi.\n"
 
-#: steps_interactive.pm:1165
+#: steps_interactive.pm:1158
 #, c-format
 msgid "Replay"
 msgstr "Ulang"
 
-#: steps_interactive.pm:1165
+#: steps_interactive.pm:1158
 #, c-format
 msgid "Automated"
 msgstr "Otomatis"
 
-#: steps_interactive.pm:1168
+#: steps_interactive.pm:1161
 #, c-format
 msgid "Save packages selection"
 msgstr "Simpan pilihan paket"
@@ -1582,6 +1571,31 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "Keluar"
+
+#: ../../advertising/IM_flash.pl:1
+#, c-format
+msgid "Your desktop on a USB key"
+msgstr ""
+
+#: ../../advertising/IM_free08S.pl:1
+#, c-format
+msgid "The 100%% open source Mandriva Linux distribution"
+msgstr ""
+
+#: ../../advertising/IM_one08S.pl:1
+#, c-format
+msgid "Explore Linux easily with Mandriva One"
+msgstr ""
+
+#: ../../advertising/IM_pwp08S.pl:1
+#, c-format
+msgid "A full Mandriva Linux desktop, with support"
+msgstr ""
+
+#: ../../advertising/IM_range08S.pl:1
+#, c-format
+msgid "Mandriva: distributions for everybody's needs"
+msgstr ""
 
 #~ msgid "All"
 #~ msgstr "Semua"

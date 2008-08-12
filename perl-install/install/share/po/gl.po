@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-20 04:44+0200\n"
+"POT-Creation-Date: 2008-08-12 17:54+0200\n"
 "PO-Revision-Date: 2008-04-13 20:40+0100\n"
 "Last-Translator: Leandro Regueiro <leandro DOT regueiro AT gmail DOT com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
@@ -17,31 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: ../../advertising/IM_flash.pl:1
-#, c-format
-msgid "Your desktop on a USB key"
-msgstr "O seu escritorio nunha chave USB"
-
-#: ../../advertising/IM_free08S.pl:1
-#, c-format
-msgid "The 100%% open source Mandriva Linux distribution"
-msgstr "A distribución de Mandriva Linux 100%% código aberto"
-
-#: ../../advertising/IM_one08S.pl:1
-#, c-format
-msgid "Explore Linux easily with Mandriva One"
-msgstr "Explore Linux de forma sinxela con Mandriva One"
-
-#: ../../advertising/IM_pwp08S.pl:1
-#, c-format
-msgid "A full Mandriva Linux desktop, with support"
-msgstr "Un escritorio Mandriva Linux completo, son soporte"
-
-#: ../../advertising/IM_range08S.pl:1
-#, c-format
-msgid "Mandriva: distributions for everybody's needs"
-msgstr "Mandriva: distribucións para as necesidades de cada un"
 
 #: any.pm:109
 #, c-format
@@ -242,7 +217,7 @@ msgstr "FTP"
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1083 steps_interactive.pm:978
+#: any.pm:1083 steps_interactive.pm:972
 #, c-format
 msgid "Network"
 msgstr "Rede"
@@ -282,12 +257,12 @@ msgstr "Non se pode captura-la pantalla antes de face-las particións"
 msgid "Screenshots will be available after install in %s"
 msgstr "Poderanse facer capturas de pantalla despois de instalar en %s"
 
-#: gtk.pm:119
+#: gtk.pm:126
 #, c-format
 msgid "Installation"
 msgstr "Instalación"
 
-#: gtk.pm:122 share/meta-task/compssUsers.pl:42
+#: gtk.pm:130 share/meta-task/compssUsers.pl:42
 #, c-format
 msgid "Configuration"
 msgstr "Configuración"
@@ -748,73 +723,97 @@ msgstr ""
 "en modo texto. Para iso, prema 'F1' cando arrinque dende o CDROM,\n"
 "e escriba 'text'."
 
-#: steps_gtk.pm:261 steps_interactive.pm:490 steps_interactive.pm:619
-#: steps_list.pm:30
+#: steps_gtk.pm:228 steps_interactive.pm:485
+#, c-format
+msgid "Install Mandriva KDE Desktop"
+msgstr "Instalar o Escritorio KDE de Mandriva"
+
+#: steps_gtk.pm:229 steps_interactive.pm:486
+#, c-format
+msgid "Install Mandriva GNOME Desktop"
+msgstr "Instalar o Escritorio GNOME de Mandriva"
+
+#: steps_gtk.pm:230 steps_interactive.pm:487
+#, c-format
+msgid "Custom install"
+msgstr "Instalación personalizada"
+
+#: steps_gtk.pm:253
+#, c-format
+msgid "Here's a preview of the '%s' desktop."
+msgstr ""
+
+#: steps_gtk.pm:275
+#, c-format
+msgid "Click on images in order to see a bigger preview"
+msgstr ""
+
+#: steps_gtk.pm:287 steps_interactive.pm:618 steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "Selección de Grupos de Paquetes"
 
-#: steps_gtk.pm:282 steps_interactive.pm:636
+#: steps_gtk.pm:308 steps_interactive.pm:635
 #, c-format
 msgid "Individual package selection"
 msgstr "Selección individual de paquetes"
 
-#: steps_gtk.pm:304 steps_interactive.pm:562
+#: steps_gtk.pm:330 steps_interactive.pm:561
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Tamaño total: %d / %d MB"
 
-#: steps_gtk.pm:349
+#: steps_gtk.pm:375
 #, c-format
 msgid "Bad package"
 msgstr "Paquete erróneo"
 
-#: steps_gtk.pm:351
+#: steps_gtk.pm:377
 #, c-format
 msgid "Version: "
 msgstr "Versión: "
 
-#: steps_gtk.pm:352
+#: steps_gtk.pm:378
 #, c-format
 msgid "Size: "
 msgstr "Tamaño: "
 
-#: steps_gtk.pm:352
+#: steps_gtk.pm:378
 #, c-format
 msgid "%d KB\n"
 msgstr "%d KB\n"
 
-#: steps_gtk.pm:353
+#: steps_gtk.pm:379
 #, c-format
 msgid "Importance: "
 msgstr "Importancia: "
 
-#: steps_gtk.pm:387
+#: steps_gtk.pm:413
 #, c-format
 msgid "You can not select/unselect this package"
 msgstr "Non pode seleccionar/deseleccionar este paquete"
 
-#: steps_gtk.pm:391
+#: steps_gtk.pm:417
 #, c-format
 msgid "due to missing %s"
 msgstr "debido a que falta %s"
 
-#: steps_gtk.pm:392
+#: steps_gtk.pm:418
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "debido a %s non satisfeitas"
 
-#: steps_gtk.pm:393
+#: steps_gtk.pm:419
 #, c-format
 msgid "trying to promote %s"
 msgstr ""
 
-#: steps_gtk.pm:394
+#: steps_gtk.pm:420
 #, c-format
 msgid "in order to keep %s"
 msgstr "para manter %s"
 
-#: steps_gtk.pm:399
+#: steps_gtk.pm:425
 #, c-format
 msgid ""
 "You can not select this package as there is not enough space left to install "
@@ -823,109 +822,109 @@ msgstr ""
 "Non pode seleccionar este paquete xa que non hai espacio dabondo para "
 "instalalo"
 
-#: steps_gtk.pm:402
+#: steps_gtk.pm:428
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "Vanse instala-los seguintes paquetes"
 
-#: steps_gtk.pm:403
+#: steps_gtk.pm:429
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "Vanse elimina-los seguintes paquetes"
 
-#: steps_gtk.pm:428
+#: steps_gtk.pm:454
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
 msgstr "Este é un paquete obrigatorio, non se pode deseleccionar"
 
-#: steps_gtk.pm:430
+#: steps_gtk.pm:456
 #, c-format
 msgid "You can not unselect this package. It is already installed"
 msgstr "Non pode deseleccionar este paquete. Xa está instalado"
 
-#: steps_gtk.pm:432
+#: steps_gtk.pm:458
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
 msgstr "Non pode deseleccionar este paquete. Ten que ser actualizado"
 
-#: steps_gtk.pm:436
+#: steps_gtk.pm:462
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "Amosa-los paquetes seleccionados automáticamente"
 
-#: steps_gtk.pm:438
+#: steps_gtk.pm:464
 #, c-format
 msgid "Install"
 msgstr "Instalar"
 
-#: steps_gtk.pm:441
+#: steps_gtk.pm:467
 #, c-format
 msgid "Load/Save selection"
 msgstr "Cargar/Gardar a selección"
 
-#: steps_gtk.pm:442
+#: steps_gtk.pm:468
 #, c-format
 msgid "Updating package selection"
 msgstr "Actualizando a selección de paquetes"
 
-#: steps_gtk.pm:447
+#: steps_gtk.pm:473
 #, c-format
 msgid "Minimal install"
 msgstr "Instalación mínima"
 
-#: steps_gtk.pm:461
+#: steps_gtk.pm:487
 #, c-format
 msgid "Software Management"
 msgstr "Xestión do Software"
 
-#: steps_gtk.pm:461 steps_interactive.pm:448
+#: steps_gtk.pm:487 steps_interactive.pm:447
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Escolla os paquetes que desexa instalar"
 
-#: steps_gtk.pm:478 steps_interactive.pm:650 steps_list.pm:32
+#: steps_gtk.pm:504 steps_interactive.pm:649 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "Instalando"
 
-#: steps_gtk.pm:504
+#: steps_gtk.pm:530
 #, c-format
 msgid "No details"
 msgstr "Sen detalles"
 
-#: steps_gtk.pm:519
+#: steps_gtk.pm:545
 #, c-format
 msgid "Time remaining "
 msgstr "Tempo restante "
 
-#: steps_gtk.pm:520
+#: steps_gtk.pm:546
 #, c-format
 msgid "(estimating...)"
 msgstr "(estimando...)"
 
-#: steps_gtk.pm:547
+#: steps_gtk.pm:573
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d paquete"
 msgstr[1] "%d paquetes"
 
-#: steps_gtk.pm:593 steps_interactive.pm:838 steps_list.pm:43
+#: steps_gtk.pm:619 steps_interactive.pm:837 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Resumo"
 
-#: steps_gtk.pm:610
+#: steps_gtk.pm:636
 #, c-format
 msgid "Configure"
 msgstr "Configurar"
 
-#: steps_gtk.pm:627 steps_interactive.pm:834 steps_interactive.pm:990
+#: steps_gtk.pm:653 steps_interactive.pm:833 steps_interactive.pm:984
 #, c-format
 msgid "not configured"
 msgstr "non configurado"
 
-#: steps_gtk.pm:664 steps_interactive.pm:332
+#: steps_gtk.pm:690 steps_interactive.pm:331
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -934,7 +933,7 @@ msgstr ""
 "Atopáronse os seguintes soportes de instalación.\n"
 "Se desexa saltar algún deles, pode deseleccionalo agora."
 
-#: steps_gtk.pm:674 steps_interactive.pm:338
+#: steps_gtk.pm:700 steps_interactive.pm:337
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -947,7 +946,7 @@ msgstr ""
 "Esta continuará despois dende o disco duro e os paquetes permanecerán "
 "dispoñibles unha vez que o sistema xa estea instalado."
 
-#: steps_gtk.pm:676 steps_interactive.pm:340
+#: steps_gtk.pm:702 steps_interactive.pm:339
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Copiar CDs enteiros"
@@ -957,76 +956,76 @@ msgstr "Copiar CDs enteiros"
 msgid "An error occurred"
 msgstr "Ocorreu un erro"
 
-#: steps_interactive.pm:97
+#: steps_interactive.pm:96
 #, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Escolla a disposición do seu teclado."
 
-#: steps_interactive.pm:99
+#: steps_interactive.pm:98
 #, c-format
 msgid "Here is the full list of available keyboards"
 msgstr "Esta é a lista completa dos teclados dispoñibles"
 
-#: steps_interactive.pm:134
+#: steps_interactive.pm:133
 #, c-format
 msgid "Install/Upgrade"
 msgstr "Instalar/Actualizar"
 
-#: steps_interactive.pm:135
+#: steps_interactive.pm:134
 #, c-format
 msgid "Is this an install or an upgrade?"
 msgstr "¿É unha instalación ou unha actualización?"
 
-#: steps_interactive.pm:139
+#: steps_interactive.pm:138
 #, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
 msgstr "Instalación"
 
-#: steps_interactive.pm:141
+#: steps_interactive.pm:140
 #, c-format
 msgid "Upgrade %s"
 msgstr "Actualizar %s"
 
-#: steps_interactive.pm:145
+#: steps_interactive.pm:144
 #, c-format
 msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 msgstr ""
 "Non está soportada a actualización dende unha distribución de 32 bits a unha "
 "de 64 bits"
 
-#: steps_interactive.pm:149
+#: steps_interactive.pm:148
 #, c-format
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 msgstr ""
 "Non está soportada a actualización dende unha distribución de 64 bits a unha "
 "de 32 bits"
 
-#: steps_interactive.pm:168
+#: steps_interactive.pm:167
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Clave de cifrado para %s"
 
-#: steps_interactive.pm:200
+#: steps_interactive.pm:199
 #, c-format
 msgid "Cancel installation, reboot system"
 msgstr ""
 
-#: steps_interactive.pm:201
+#: steps_interactive.pm:200
 #, fuzzy, c-format
 msgid "New Installation"
 msgstr "Instalación"
 
-#: steps_interactive.pm:202
+#: steps_interactive.pm:201
 #, c-format
 msgid "Upgrade previous installation (not recommended)"
 msgstr ""
 
-#: steps_interactive.pm:206
+#: steps_interactive.pm:205
 #, c-format
 msgid ""
-"Installer have detected your installed Mandriva Linux system could not\n"
+"Installer has detected that your installed Mandriva Linux system could not\n"
 "safely be upgraded to %s.\n"
 "\n"
 "New installation replacing your previous one is recommended.\n"
@@ -1035,17 +1034,17 @@ msgid ""
 "Installation\"."
 msgstr ""
 
-#: steps_interactive.pm:248
+#: steps_interactive.pm:247
 #, c-format
 msgid "IDE"
 msgstr "IDE"
 
-#: steps_interactive.pm:248
+#: steps_interactive.pm:247
 #, c-format
 msgid "Configuring IDE"
 msgstr "Configurando IDE"
 
-#: steps_interactive.pm:285
+#: steps_interactive.pm:284
 #, c-format
 msgid ""
 "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1055,7 +1054,7 @@ msgstr ""
 "pero para arrincar o seu sistema, cómpre crear a partición bootstrap en "
 "DiskDrake"
 
-#: steps_interactive.pm:290
+#: steps_interactive.pm:289
 #, fuzzy, c-format
 msgid ""
 "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
@@ -1066,7 +1065,7 @@ msgstr ""
 "instalación vai continuar, pero para arrincar o sistema, terá que a "
 "partición bootstrap con DiskDrake"
 
-#: steps_interactive.pm:382
+#: steps_interactive.pm:381
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -1078,12 +1077,12 @@ msgstr ""
 "Insira o CD-ROM que teña a etiqueta \"%s\" na unidade e prema Aceptar.\n"
 "Se non o ten, prema Cancelar para omiti-la instalación deste CD-ROM."
 
-#: steps_interactive.pm:404
+#: steps_interactive.pm:403
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Buscando os paquetes dispoñibles..."
 
-#: steps_interactive.pm:412
+#: steps_interactive.pm:411
 #, c-format
 msgid ""
 "Your system does not have enough space left for installation or upgrade (%"
@@ -1092,7 +1091,7 @@ msgstr ""
 "O seu sistema non ten espacio libre dabondo para a instalación ou "
 "actualización (%dMB > %dMB)"
 
-#: steps_interactive.pm:460
+#: steps_interactive.pm:459
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1101,54 +1100,44 @@ msgstr ""
 "Elixa cargar ou gardar a selección de paquetes.\n"
 "O formato é o mesmo có dos ficheiros xerados por auto_install."
 
-#: steps_interactive.pm:462
+#: steps_interactive.pm:461
 #, c-format
 msgid "Load"
 msgstr "Cargar"
 
-#: steps_interactive.pm:462
+#: steps_interactive.pm:461
 #, c-format
 msgid "Save"
 msgstr "Gardar"
 
-#: steps_interactive.pm:470
+#: steps_interactive.pm:469
 #, c-format
 msgid "Bad file"
 msgstr "Ficheiro erróneo"
 
-#: steps_interactive.pm:486
-#, c-format
-msgid "Install Mandriva KDE Desktop"
-msgstr "Instalar o Escritorio KDE de Mandriva"
+#: steps_interactive.pm:489
+#, fuzzy, c-format
+msgid "Desktop Selection"
+msgstr "Selección de Grupos de Paquetes"
 
-#: steps_interactive.pm:487
-#, c-format
-msgid "Install Mandriva GNOME Desktop"
-msgstr "Instalar o Escritorio GNOME de Mandriva"
-
-#: steps_interactive.pm:488
-#, c-format
-msgid "Custom install"
-msgstr "Instalación personalizada"
-
-#: steps_interactive.pm:491
+#: steps_interactive.pm:490
 #, c-format
 msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
 msgstr ""
 "Pode elixir o seu perfil de escritorio de estación de traballo: KDE, GNOME "
 "ou Personalizado"
 
-#: steps_interactive.pm:576
+#: steps_interactive.pm:575
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "O tamaño seleccionado é maior có tamaño dispoñible"
 
-#: steps_interactive.pm:591
+#: steps_interactive.pm:590
 #, c-format
 msgid "Type of install"
 msgstr "Tipo de instalación"
 
-#: steps_interactive.pm:592
+#: steps_interactive.pm:591
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1157,83 +1146,83 @@ msgstr ""
 "Non seleccionou ningún grupo de paquetes.\n"
 "Seleccione a instalación mínima que desexa:"
 
-#: steps_interactive.pm:595
+#: steps_interactive.pm:594
 #, c-format
 msgid "With X"
 msgstr "Con X"
 
-#: steps_interactive.pm:596
+#: steps_interactive.pm:595
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "Ca documentación básica (¡recomendado!)"
 
-#: steps_interactive.pm:597
+#: steps_interactive.pm:596
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Instalación realmente mínima (especialmente sen urpmi)"
 
-#: steps_interactive.pm:651
+#: steps_interactive.pm:650
 #, c-format
 msgid "Preparing installation"
 msgstr "Preparando a instalación"
 
-#: steps_interactive.pm:659
+#: steps_interactive.pm:658
 #, c-format
 msgid "Installing package %s"
 msgstr "Instalando o paquete %s"
 
-#: steps_interactive.pm:683
+#: steps_interactive.pm:682
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Houbo un erro ó ordena-los paquetes:"
 
-#: steps_interactive.pm:683
+#: steps_interactive.pm:682
 #, c-format
 msgid "Go on anyway?"
 msgstr "¿Continuar de tódolos xeitos?"
 
-#: steps_interactive.pm:687
+#: steps_interactive.pm:686
 #, c-format
 msgid "Retry"
 msgstr "Volver tentar"
 
-#: steps_interactive.pm:688
+#: steps_interactive.pm:687
 #, c-format
 msgid "Skip this package"
 msgstr "Omitir este paquete"
 
-#: steps_interactive.pm:689
+#: steps_interactive.pm:688
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "Omitir tódolos paquetes do soporte \"%s\""
 
-#: steps_interactive.pm:690
+#: steps_interactive.pm:689
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "Volver a soportes e selección de paquetes"
 
-#: steps_interactive.pm:693
+#: steps_interactive.pm:692
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "Houbo un erro ó instala-ls paquetes %s."
 
-#: steps_interactive.pm:711
+#: steps_interactive.pm:710
 #, c-format
 msgid "Post-install configuration"
 msgstr "Configuración trala instalación"
 
-#: steps_interactive.pm:718
+#: steps_interactive.pm:717
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr ""
 "Asegúrese de que o soporte de Módulos de Actualización está na unidade %s"
 
-#: steps_interactive.pm:746 steps_list.pm:47
+#: steps_interactive.pm:745 steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "Actualizacións"
 
-#: steps_interactive.pm:747
+#: steps_interactive.pm:746
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1254,39 +1243,39 @@ msgstr ""
 "\n"
 "Desexa instala-las actualizacións?"
 
-#: steps_interactive.pm:769
+#: steps_interactive.pm:768
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr ""
 "Contactando co sitio espello para obte-la lista dos paquetes dispoñibles..."
 
-#: steps_interactive.pm:775
+#: steps_interactive.pm:774
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr "Non se puido contactar co sitio espello %s"
 
-#: steps_interactive.pm:881
+#: steps_interactive.pm:879
 #, c-format
 msgid "%s on %s"
 msgstr "%s en %s"
 
-#: steps_interactive.pm:915 steps_interactive.pm:922 steps_interactive.pm:936
-#: steps_interactive.pm:954 steps_interactive.pm:969
+#: steps_interactive.pm:912 steps_interactive.pm:919 steps_interactive.pm:932
+#: steps_interactive.pm:949 steps_interactive.pm:964
 #, c-format
 msgid "Hardware"
 msgstr "Hardware"
 
-#: steps_interactive.pm:937 steps_interactive.pm:955
+#: steps_interactive.pm:933 steps_interactive.pm:950
 #, c-format
 msgid "Sound card"
 msgstr "Tarxeta de son"
 
-#: steps_interactive.pm:958
+#: steps_interactive.pm:953
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Ten unha tarxeta de son ISA?"
 
-#: steps_interactive.pm:960
+#: steps_interactive.pm:955
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -1295,64 +1284,64 @@ msgstr ""
 "Execute \"alsaconf\" ou \"sndconfig\" despois da instalación para configura-"
 "la tarxeta de son"
 
-#: steps_interactive.pm:962
+#: steps_interactive.pm:957
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr ""
 "Non se detectou ningunha tarxeta de son. Execute \"harddrake\" trala "
 "instalación"
 
-#: steps_interactive.pm:970
+#: steps_interactive.pm:965
 #, c-format
 msgid "Graphical interface"
 msgstr "Interface Gráfica"
 
-#: steps_interactive.pm:977 steps_interactive.pm:988
+#: steps_interactive.pm:971 steps_interactive.pm:982
 #, c-format
 msgid "Network & Internet"
 msgstr "Rede & Internet"
 
-#: steps_interactive.pm:989
+#: steps_interactive.pm:983
 #, c-format
 msgid "Proxies"
 msgstr "Proxys"
 
-#: steps_interactive.pm:990
+#: steps_interactive.pm:984
 #, c-format
 msgid "configured"
 msgstr "configurado"
 
-#: steps_interactive.pm:1000
+#: steps_interactive.pm:994
 #, c-format
 msgid "Security Level"
 msgstr "Nivel de Seguridade"
 
-#: steps_interactive.pm:1019
+#: steps_interactive.pm:1013
 #, c-format
 msgid "Firewall"
 msgstr "Cortalumes"
 
-#: steps_interactive.pm:1023
+#: steps_interactive.pm:1017
 #, c-format
 msgid "activated"
 msgstr "activado"
 
-#: steps_interactive.pm:1023
+#: steps_interactive.pm:1017
 #, c-format
 msgid "disabled"
 msgstr "desactivado"
 
-#: steps_interactive.pm:1037
+#: steps_interactive.pm:1031
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Non configurou as X. Está seguro de que desexa isto?"
 
-#: steps_interactive.pm:1064
+#: steps_interactive.pm:1058
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Preparando o cargador de arrinque..."
 
-#: steps_interactive.pm:1074
+#: steps_interactive.pm:1068
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1365,12 +1354,12 @@ msgstr ""
 "continuar, pero ha ter que usar BootX ou algún outro recurso para arrincar a "
 "máquina. O argumento do kernel para o sistema de ficheiros raíz é: root=%s"
 
-#: steps_interactive.pm:1080
+#: steps_interactive.pm:1074
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "Desexa usar aboot?"
 
-#: steps_interactive.pm:1083
+#: steps_interactive.pm:1077
 #, c-format
 msgid ""
 "Error installing aboot, \n"
@@ -1380,7 +1369,7 @@ msgstr ""
 "desexa probar a forza-la instalación mesmo se iso destrúe a primeira "
 "partición?"
 
-#: steps_interactive.pm:1095
+#: steps_interactive.pm:1089
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1389,17 +1378,17 @@ msgstr ""
 "Con este nivel de seguridade, o acceso ós ficheiros da partición Windows "
 "está restrinxido ó administrador."
 
-#: steps_interactive.pm:1127
+#: steps_interactive.pm:1121
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Insira un disquete baleiro na unidade %s"
 
-#: steps_interactive.pm:1129
+#: steps_interactive.pm:1123
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Creando un disquete de instalación automática..."
 
-#: steps_interactive.pm:1140
+#: steps_interactive.pm:1134
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1410,22 +1399,22 @@ msgstr ""
 "\n"
 "Desexa saír agora?"
 
-#: steps_interactive.pm:1150
+#: steps_interactive.pm:1144
 #, c-format
 msgid "Congratulations"
 msgstr "Noraboa"
 
-#: steps_interactive.pm:1154
+#: steps_interactive.pm:1147
 #, c-format
 msgid "Reboot"
 msgstr "Reiniciar"
 
-#: steps_interactive.pm:1158 steps_interactive.pm:1159
+#: steps_interactive.pm:1151 steps_interactive.pm:1152
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "Xerar un disquete de instalación automática"
 
-#: steps_interactive.pm:1160
+#: steps_interactive.pm:1153
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"
@@ -1440,17 +1429,17 @@ msgstr ""
 "\n"
 "Pode preferir reproducir outra vez a instalación.\n"
 
-#: steps_interactive.pm:1165
+#: steps_interactive.pm:1158
 #, c-format
 msgid "Replay"
 msgstr "Reproducir"
 
-#: steps_interactive.pm:1165
+#: steps_interactive.pm:1158
 #, c-format
 msgid "Automated"
 msgstr "Automatizada"
 
-#: steps_interactive.pm:1168
+#: steps_interactive.pm:1161
 #, c-format
 msgid "Save packages selection"
 msgstr "Garda-la selección de paquetes"
@@ -1593,6 +1582,31 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "Sair"
+
+#: ../../advertising/IM_flash.pl:1
+#, c-format
+msgid "Your desktop on a USB key"
+msgstr "O seu escritorio nunha chave USB"
+
+#: ../../advertising/IM_free08S.pl:1
+#, c-format
+msgid "The 100%% open source Mandriva Linux distribution"
+msgstr "A distribución de Mandriva Linux 100%% código aberto"
+
+#: ../../advertising/IM_one08S.pl:1
+#, c-format
+msgid "Explore Linux easily with Mandriva One"
+msgstr "Explore Linux de forma sinxela con Mandriva One"
+
+#: ../../advertising/IM_pwp08S.pl:1
+#, c-format
+msgid "A full Mandriva Linux desktop, with support"
+msgstr "Un escritorio Mandriva Linux completo, son soporte"
+
+#: ../../advertising/IM_range08S.pl:1
+#, c-format
+msgid "Mandriva: distributions for everybody's needs"
+msgstr "Mandriva: distribucións para as necesidades de cada un"
 
 #~ msgid "All"
 #~ msgstr "Todas"
