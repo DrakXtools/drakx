@@ -10,14 +10,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"POT-Creation-Date: 2008-07-20 04:41+0200\n"
+"POT-Creation-Date: 2008-08-12 17:53+0200\n"
 "PO-Revision-Date: 2008-07-25 23:11+0400\n"
 "Last-Translator: akdengi <kazancas@gmail.com>\n"
 "Language-Team:  <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
 #: any.pm:245 diskdrake/interactive.pm:554 diskdrake/interactive.pm:741
@@ -120,243 +121,245 @@ msgstr "Пропустить"
 msgid "LILO/grub Installation"
 msgstr "Установка LILO/grub"
 
-#: any.pm:353
+#: any.pm:352
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Куда установить начальный загрузчик?"
 
-#: any.pm:380
+#: any.pm:379
 #, c-format
 msgid "Boot Style Configuration"
 msgstr "Настройка стиля загрузки"
 
-#: any.pm:390 any.pm:422 any.pm:423
+#: any.pm:389 any.pm:420 any.pm:421
 #, c-format
 msgid "Bootloader main options"
 msgstr "Главные параметры начального загрузчика"
 
-#: any.pm:395
+#: any.pm:393
 #, c-format
 msgid "Bootloader"
 msgstr "Начальный загрузчик"
 
-#: any.pm:396 any.pm:427
+#: any.pm:394 any.pm:424
 #, c-format
 msgid "Bootloader to use"
 msgstr "Используемый начальный загрузчик"
 
-#: any.pm:398 any.pm:429
+#: any.pm:396 any.pm:426
 #, c-format
 msgid "Boot device"
 msgstr "Загрузочное устройство"
 
-#: any.pm:400
+#: any.pm:398
 #, c-format
 msgid "Main options"
 msgstr "Основные параметры"
 
-#: any.pm:401
+#: any.pm:399
 #, c-format
 msgid "Delay before booting default image"
 msgstr "Пауза перед загрузкой образа по умолчанию"
 
-#: any.pm:402
+#: any.pm:400
 #, c-format
 msgid "Enable ACPI"
 msgstr "Включить ACPI"
 
-#: any.pm:403
+#: any.pm:401
 #, c-format
 msgid "Enable APIC"
 msgstr "Включить APIC"
 
-#: any.pm:404
+#: any.pm:402
 #, c-format
 msgid "Enable Local APIC"
 msgstr "Включить Local APIC"
 
-#: any.pm:406 any.pm:794 any.pm:803 authentication.pm:240
+#: any.pm:404 any.pm:790 any.pm:799 authentication.pm:239
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
 msgstr "Пароль"
 
-#: any.pm:408 authentication.pm:251
+#: any.pm:406 authentication.pm:250
 #, c-format
 msgid "The passwords do not match"
 msgstr "Пароли не совпадают"
 
-#: any.pm:408 authentication.pm:251 diskdrake/interactive.pm:1300
+#: any.pm:406 authentication.pm:250 diskdrake/interactive.pm:1300
 #, c-format
 msgid "Please try again"
 msgstr "Попробуйте ещё раз"
 
-#: any.pm:409
+#: any.pm:407
 #, c-format
 msgid "You can not use a password with %s"
 msgstr "Нельзя использовать пароль с %s"
 
-#: any.pm:412 any.pm:796 any.pm:805 authentication.pm:241
+#: any.pm:410 any.pm:792 any.pm:801 authentication.pm:240
 #, c-format
 msgid "Password (again)"
 msgstr "Пароль (еще раз)"
 
-#: any.pm:413
+#: any.pm:411
 #, c-format
 msgid "Restrict command line options"
 msgstr "Ограничить параметры командной строки"
 
-#: any.pm:413
+#: any.pm:411
 #, c-format
 msgid "restrict"
 msgstr "ограничить"
 
-#: any.pm:414
+#: any.pm:412
 #, c-format
-msgid "Option ``Restrict command line options'' is of no use without a password"
-msgstr "Опция ``Ограничить параметры командной строки'' не используется без пароля"
+msgid ""
+"Option ``Restrict command line options'' is of no use without a password"
+msgstr ""
+"Опция ``Ограничить параметры командной строки'' не используется без пароля"
 
-#: any.pm:416
+#: any.pm:414
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Очищать /tmp  при каждой загрузке"
 
-#: any.pm:417
+#: any.pm:415
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
 msgstr "Укажите точный объем RAM (найдено %d MB)"
 
-#: any.pm:418
+#: any.pm:416
 #, c-format
 msgid "Give the ram size in MB"
 msgstr "Укажите объем RAM в MB"
 
-#: any.pm:428
+#: any.pm:425
 #, c-format
 msgid "Init Message"
 msgstr "Сообщение инициализации"
 
-#: any.pm:430
+#: any.pm:427
 #, c-format
 msgid "Open Firmware Delay"
 msgstr "Задержка Open Firmware"
 
-#: any.pm:431
+#: any.pm:428
 #, c-format
 msgid "Kernel Boot Timeout"
 msgstr "Тайм-аут при загрузке ядра"
 
-#: any.pm:432
+#: any.pm:429
 #, c-format
 msgid "Enable CD Boot?"
 msgstr "Включить загрузку с CD?"
 
-#: any.pm:433
+#: any.pm:430
 #, c-format
 msgid "Enable OF Boot?"
 msgstr "Включить загрузку OF?"
 
-#: any.pm:434
+#: any.pm:431
 #, c-format
 msgid "Default OS?"
 msgstr "ОС по умолчанию?"
 
-#: any.pm:501
+#: any.pm:498
 #, c-format
 msgid "Image"
 msgstr "Образ"
 
-#: any.pm:502 any.pm:515
+#: any.pm:499 any.pm:512
 #, c-format
 msgid "Root"
 msgstr "Root"
 
-#: any.pm:503 any.pm:528
+#: any.pm:500 any.pm:525
 #, c-format
 msgid "Append"
 msgstr "Дополнение"
 
-#: any.pm:505
+#: any.pm:502
 #, c-format
 msgid "Xen append"
 msgstr "Дополнение Xen"
 
-#: any.pm:508
+#: any.pm:505
 #, c-format
 msgid "Video mode"
 msgstr "Видеорежим"
 
-#: any.pm:510
+#: any.pm:507
 #, c-format
 msgid "Initrd"
 msgstr "Initrd"
 
-#: any.pm:511
+#: any.pm:508
 #, c-format
 msgid "Network profile"
 msgstr "Сетевой профиль"
 
-#: any.pm:520 any.pm:525 any.pm:527 diskdrake/interactive.pm:376
+#: any.pm:517 any.pm:522 any.pm:524 diskdrake/interactive.pm:376
 #, c-format
 msgid "Label"
 msgstr "Метка"
 
-#: any.pm:522 any.pm:530 harddrake/v4l.pm:438
+#: any.pm:519 any.pm:527 harddrake/v4l.pm:438
 #, c-format
 msgid "Default"
 msgstr "По умолчанию"
 
-#: any.pm:529
+#: any.pm:526
 #, c-format
 msgid "NoVideo"
 msgstr "Без видео"
 
-#: any.pm:540
+#: any.pm:537
 #, c-format
 msgid "Empty label not allowed"
 msgstr "Пустая метка не допускается"
 
-#: any.pm:541
+#: any.pm:538
 #, c-format
 msgid "You must specify a kernel image"
 msgstr "Вы должны указать образ ядра"
 
-#: any.pm:541
+#: any.pm:538
 #, c-format
 msgid "You must specify a root partition"
 msgstr "Вы должны указать корневой раздел"
 
-#: any.pm:542
+#: any.pm:539
 #, c-format
 msgid "This label is already used"
 msgstr "Эта метка уже используется"
 
-#: any.pm:560
+#: any.pm:557
 #, c-format
 msgid "Which type of entry do you want to add?"
 msgstr "Какой тип пункта вы хотите добавить?"
 
-#: any.pm:561
+#: any.pm:558
 #, c-format
 msgid "Linux"
 msgstr "Linux"
 
-#: any.pm:561
+#: any.pm:558
 #, c-format
 msgid "Other OS (SunOS...)"
 msgstr "Другая ОС (SunOS...)"
 
-#: any.pm:562
+#: any.pm:559
 #, c-format
 msgid "Other OS (MacOS...)"
 msgstr "Другая ОС (MacOS...)"
 
-#: any.pm:562
+#: any.pm:559
 #, c-format
 msgid "Other OS (Windows...)"
 msgstr "Другая ОС (Windows...)"
 
-#: any.pm:590
+#: any.pm:587
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -365,186 +368,187 @@ msgstr ""
 "На данный момент в вашем меню загрузки имеются следующие пункты.\n"
 "Вы можете добавить еще несколько или изменить существующие."
 
-#: any.pm:754
+#: any.pm:751
 #, c-format
 msgid "access to X programs"
 msgstr "доступ к Х-программам"
 
-#: any.pm:755
+#: any.pm:752
 #, c-format
 msgid "access to rpm tools"
 msgstr "доступ к инструментам rpm"
 
-#: any.pm:756
+#: any.pm:753
 #, c-format
 msgid "allow \"su\""
 msgstr "разрешить \"su\""
 
-#: any.pm:757
+#: any.pm:754
 #, c-format
 msgid "access to administrative files"
 msgstr "доступ к административным файлам"
 
-#: any.pm:758
+#: any.pm:755
 #, c-format
 msgid "access to network tools"
 msgstr "доступ к сетевым утилитам"
 
-#: any.pm:759
+#: any.pm:756
 #, c-format
 msgid "access to compilation tools"
 msgstr "доступ к утилитам компиляции"
 
-#: any.pm:765
+#: any.pm:762
 #, c-format
 msgid "(already added %s)"
 msgstr "(уже добавлено %s)"
 
-#: any.pm:771
+#: any.pm:768
 #, c-format
 msgid "Please give a user name"
 msgstr "Укажите имя пользователя, пожалуйста"
 
-#: any.pm:772
+#: any.pm:769
 #, c-format
-msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgid ""
+"The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr ""
 "Имя пользователя должно содержать только буквы в нижнем регистре, \n"
 "цифры , `-' и `_'"
 
-#: any.pm:773
+#: any.pm:770
 #, c-format
 msgid "The user name is too long"
 msgstr "Имя пользователя слишком длинное"
 
-#: any.pm:774
+#: any.pm:771
 #, c-format
 msgid "This user name has already been added"
 msgstr "Это имя пользователя уже добавлено"
 
-#: any.pm:780 any.pm:807
+#: any.pm:777 any.pm:803
 #, c-format
 msgid "User ID"
 msgstr "ID пользователя"
 
-#: any.pm:780 any.pm:808
+#: any.pm:777 any.pm:804
 #, c-format
 msgid "Group ID"
 msgstr "ID группы"
 
-#: any.pm:781
+#: any.pm:778
 #, c-format
 msgid "%s must be a number"
 msgstr " %s должно быть числом"
 
-#: any.pm:782
+#: any.pm:779
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
 msgstr "%s должно быть больше 500. Принять в любом случае?"
 
-#: any.pm:786
+#: any.pm:783
 #, c-format
 msgid "User management"
 msgstr "Управление пользователями"
 
-#: any.pm:793 authentication.pm:226
+#: any.pm:789 authentication.pm:226
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "Установка пароля администратора (root)"
 
-#: any.pm:798
+#: any.pm:794
 #, c-format
 msgid "Enter a user"
 msgstr "Введите пользователя"
 
-#: any.pm:799
+#: any.pm:795
 #, c-format
 msgid "Real name"
 msgstr "Настоящее имя"
 
-#: any.pm:802
+#: any.pm:798
 #, c-format
 msgid "Login name"
 msgstr "Login name"
 
-#: any.pm:806
+#: any.pm:802
 #, c-format
 msgid "Shell"
 msgstr "Командный процессор"
 
-#: any.pm:810
+#: any.pm:806
 #, c-format
 msgid "Icon"
 msgstr "Значок"
 
-#: any.pm:848 security/l10n.pm:14
+#: any.pm:844 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "Автоматический вход"
 
-#: any.pm:849
+#: any.pm:845
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr ""
 "Я могу настроить ваш компьютер на автоматический вход в систему одного "
 "пользователя."
 
-#: any.pm:850
+#: any.pm:846
 #, c-format
 msgid "Use this feature"
 msgstr "Использовать эту возможность"
 
-#: any.pm:851
+#: any.pm:847
 #, c-format
 msgid "Choose the default user:"
 msgstr "Выберите пользователя по умолчанию:"
 
-#: any.pm:852
+#: any.pm:848
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Выберите запускаемый оконный менеджер:"
 
-#: any.pm:875 any.pm:925
+#: any.pm:871 any.pm:920
 #, c-format
 msgid "Release Notes"
 msgstr "Заметки о релизе"
 
-#: any.pm:882 any.pm:1221 interactive/gtk.pm:766
+#: any.pm:878 any.pm:1214 interactive/gtk.pm:766
 #, c-format
 msgid "Close"
 msgstr "Закрыть"
 
-#: any.pm:918
+#: any.pm:914
 #, c-format
 msgid "License agreement"
 msgstr "Лицензионное соглашение"
 
-#: any.pm:921 diskdrake/dav.pm:26
+#: any.pm:916 diskdrake/dav.pm:26
 #, c-format
 msgid "Quit"
 msgstr "Выход"
 
-#: any.pm:928
+#: any.pm:923
 #, c-format
 msgid "Accept"
 msgstr "Принять"
 
-#: any.pm:928
+#: any.pm:923
 #, c-format
 msgid "Refuse"
 msgstr "Отказаться"
 
-#: any.pm:948 any.pm:1015
+#: any.pm:943 any.pm:1009
 #, c-format
 msgid "Please choose a language to use."
 msgstr "Выберите используемый язык, пожалуйста."
 
-#: any.pm:949 any.pm:1016
+#: any.pm:944 any.pm:1010
 #, c-format
 msgid "Language choice"
 msgstr "Выбор языка"
 
-#: any.pm:979
+#: any.pm:973
 #, c-format
 msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
@@ -555,72 +559,72 @@ msgstr ""
 "языки, которые вы хотите установить. Они будут доступны, когда\n"
 "завершится установка и вы перезапустите свою систему."
 
-#: any.pm:982
+#: any.pm:976
 #, c-format
 msgid "Multi languages"
 msgstr "Многоязычность"
 
-#: any.pm:993 any.pm:1024
+#: any.pm:987 any.pm:1018
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr "Кодировка для обратной совместимости (не UTF-8)"
 
-#: any.pm:995
+#: any.pm:989
 #, c-format
 msgid "All languages"
 msgstr "Все языки"
 
-#: any.pm:1071
+#: any.pm:1065
 #, c-format
 msgid "Country / Region"
 msgstr "Страна / Регион"
 
-#: any.pm:1073
+#: any.pm:1066
 #, c-format
 msgid "Please choose your country."
 msgstr "Выберите свою страну."
 
-#: any.pm:1075
+#: any.pm:1068
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Здесь представлен полный список имеющихся стран"
 
-#: any.pm:1076
+#: any.pm:1069
 #, c-format
 msgid "Other Countries"
 msgstr "Другие страны"
 
-#: any.pm:1076 interactive.pm:481
+#: any.pm:1069 interactive.pm:481
 #, c-format
 msgid "Advanced"
 msgstr "Дополнительно"
 
-#: any.pm:1082
+#: any.pm:1075
 #, c-format
 msgid "Input method:"
 msgstr "Метод ввода:"
 
-#: any.pm:1085
+#: any.pm:1078
 #, c-format
 msgid "None"
 msgstr "Отсутствует"
 
-#: any.pm:1166
+#: any.pm:1159
 #, c-format
 msgid "No sharing"
 msgstr "Нет общего доступа"
 
-#: any.pm:1166
+#: any.pm:1159
 #, c-format
 msgid "Allow all users"
 msgstr "Разрешить всем пользователям"
 
-#: any.pm:1166
+#: any.pm:1159
 #, c-format
 msgid "Custom"
 msgstr "Выборочно"
 
-#: any.pm:1170
+#: any.pm:1163
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -634,7 +638,7 @@ msgstr ""
 "в konqueror и nautilus.\n"
 "\"Выборочно\" разрешит настроить доступ отдельным пользователям.\n"
 
-#: any.pm:1182
+#: any.pm:1175
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
@@ -643,7 +647,7 @@ msgstr ""
 "NFS: традиционная для Unix система раздачи файлов, имеет слабую поддержку в "
 "Mac и Windows."
 
-#: any.pm:1185
+#: any.pm:1178
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
@@ -652,19 +656,20 @@ msgstr ""
 "SMB: система совместного использования файлов, используется в Windows, Mac "
 "OS X и в большинстве современных систем Linux."
 
-#: any.pm:1193
+#: any.pm:1186
 #, c-format
-msgid "You can export using NFS or SMB. Please select which you would like to use."
+msgid ""
+"You can export using NFS or SMB. Please select which you would like to use."
 msgstr ""
 "Вы можете экспортировать при помощи NFS или SMB. Пожалуйста, выберите, "
 "который из них вы желаете использовать."
 
-#: any.pm:1221
+#: any.pm:1214
 #, c-format
 msgid "Launch userdrake"
 msgstr "Запустить userdrake"
 
-#: any.pm:1223
+#: any.pm:1216
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -673,52 +678,52 @@ msgstr ""
 "Общий доступ каждого пользователя использует группу \"fileshare\". \n"
 "Вы можете использовать userdrake для добавления пользователей в эту группу."
 
-#: any.pm:1315
+#: any.pm:1308
 #, c-format
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr "Пожалуйста, выйдите из системы, а затем используйте Ctrl-Alt-BackSpace"
 
-#: any.pm:1319
+#: any.pm:1312
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr "Вам нужно выйти и зайти снова чтобы изменения вступили в силу"
 
-#: any.pm:1354
+#: any.pm:1347
 #, c-format
 msgid "Timezone"
 msgstr "Часовой пояс"
 
-#: any.pm:1354
+#: any.pm:1347
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Какой у вас часовой пояс?"
 
-#: any.pm:1377 any.pm:1379
+#: any.pm:1370 any.pm:1372
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Настройка даты, времени и часового пояса"
 
-#: any.pm:1380
+#: any.pm:1373
 #, c-format
 msgid "What is the best time?"
 msgstr "Какое наилучшее время?"
 
-#: any.pm:1384
+#: any.pm:1377
 #, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "%s (аппаратные часы выставлены по UTC)"
 
-#: any.pm:1385
+#: any.pm:1378
 #, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "%s (Аппаратные часы выставлены по местному времени)"
 
-#: any.pm:1387
+#: any.pm:1380
 #, c-format
 msgid "NTP Server"
 msgstr "Сервер NTP"
 
-#: any.pm:1388
+#: any.pm:1381
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Автоматическая синхронизация времени (через NTP)"
@@ -759,10 +764,12 @@ msgid "Local file:"
 msgstr "Локальный файл:"
 
 #: authentication.pm:64
-#, c-format
-#, fuzzy
-msgid "Use local for all authentication and information user tell in local file"
-msgstr " Всю аутенфикацию производить локально и заносить информацию пользователей в локальный файл."
+#, fuzzy, c-format
+msgid ""
+"Use local for all authentication and information user tell in local file"
+msgstr ""
+" Всю аутенфикацию производить локально и заносить информацию пользователей в "
+"локальный файл."
 
 #: authentication.pm:65
 #, c-format
@@ -819,7 +826,7 @@ msgstr "С Kerberos и Ldap для аутентификации на серве�
 
 #: authentication.pm:96 authentication.pm:130 authentication.pm:149
 #: authentication.pm:150 authentication.pm:176 authentication.pm:200
-#: authentication.pm:872
+#: authentication.pm:871
 #, c-format
 msgid " "
 msgstr ""
@@ -847,7 +854,7 @@ msgstr "Сервер LDAP"
 msgid "Base dn"
 msgstr "LDAP Base dn"
 
-#: authentication.pm:103 authentication.pm:158
+#: authentication.pm:103
 #, c-format
 msgid "Fetch base Dn "
 msgstr ""
@@ -863,8 +870,7 @@ msgid "Download CA Certificate "
 msgstr "Загрузить сертификат CA"
 
 #: authentication.pm:108 authentication.pm:141
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Use Disconnect mode "
 msgstr "Использовать Бесвязный режим"
 
@@ -914,7 +920,8 @@ msgstr ""
 msgid ""
 "You have selected Kerberos 5 authentication. Please review the configuration "
 "options below "
-msgstr "Вы выбрали Kerberos 5 для аутефикации. Проверьте опции конфигурации ниже"
+msgstr ""
+"Вы выбрали Kerberos 5 для аутефикации. Проверьте опции конфигурации ниже"
 
 #: authentication.pm:135
 #, fuzzy, c-format
@@ -951,7 +958,14 @@ msgstr "Информация о жестком диске"
 msgid ""
 "You have selected Kerberos 5 for authentication, now you must choose the "
 "type of users information "
-msgstr "Вы выбрали Kerberos 5 для аутефикации, теперь вы можете изменить тип информации пользователя"
+msgstr ""
+"Вы выбрали Kerberos 5 для аутефикации, теперь вы можете изменить тип "
+"информации пользователя"
+
+#: authentication.pm:158
+#, c-format
+msgid "Fecth base Dn "
+msgstr ""
 
 #: authentication.pm:179
 #, c-format
@@ -976,8 +990,7 @@ msgid ""
 "You have selected Windows Domain authentication. Please review the "
 "configuration options below "
 msgstr ""
-"Вы выбрали домен аутенфикации Windows."
-"Проверьте опции конфигурации ниже"
+"Вы выбрали домен аутенфикации Windows.Проверьте опции конфигурации ниже"
 
 #: authentication.pm:207
 #, fuzzy, c-format
@@ -989,48 +1002,48 @@ msgstr "Домен"
 msgid "Active Directory Realm "
 msgstr "Active Directory Realm "
 
-#: authentication.pm:225 authentication.pm:242
+#: authentication.pm:225 authentication.pm:241
 #, c-format
 msgid "Authentication"
 msgstr "Аутентификация"
 
-#: authentication.pm:228
+#: authentication.pm:227
 #, c-format
 msgid "Authentication method"
 msgstr "Метод аутентификации"
 
 #. -PO: keep this short or else the buttons will not fit in the window
-#: authentication.pm:233
+#: authentication.pm:232
 #, c-format
 msgid "No password"
 msgstr "Без пароля"
 
-#: authentication.pm:254
+#: authentication.pm:253
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Этот пароль слишком прост (его длина должна быть не менее %d символов)"
 
-#: authentication.pm:354
+#: authentication.pm:353
 #, c-format
 msgid "Can not use broadcast with no NIS domain"
 msgstr "Невозможно использовать широковещание без домена NIS"
 
-#: authentication.pm:867
+#: authentication.pm:866
 #, c-format
 msgid "Select file"
 msgstr "Выберите файл"
 
-#: authentication.pm:873
+#: authentication.pm:872
 #, fuzzy, c-format
 msgid "Domain Windows for authentication : "
 msgstr "Требуется аутентификация домена"
 
-#: authentication.pm:875
+#: authentication.pm:874
 #, c-format
 msgid "Domain Admin User Name"
 msgstr "Имя пользователя - администратора домена"
 
-#: authentication.pm:876
+#: authentication.pm:875
 #, c-format
 msgid "Domain Admin Password"
 msgstr "Пароль администратора домена"
@@ -1149,7 +1162,7 @@ msgstr "1 минута"
 msgid "%d seconds"
 msgstr "%d секунд"
 
-#: common.pm:349
+#: common.pm:358
 #, c-format
 msgid "command %s missing"
 msgstr "отсутствует команда %s"
@@ -1252,8 +1265,8 @@ msgstr "Параметры: %s"
 #: diskdrake/hd_gtk.pm:53 diskdrake/interactive.pm:284
 #: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:106
 #: fs/partitioning_wizard.pm:51 fs/partitioning_wizard.pm:206
-#: fs/partitioning_wizard.pm:212 fs/partitioning_wizard.pm:252
-#: fs/partitioning_wizard.pm:271 fs/partitioning_wizard.pm:276
+#: fs/partitioning_wizard.pm:211 fs/partitioning_wizard.pm:250
+#: fs/partitioning_wizard.pm:269 fs/partitioning_wizard.pm:274
 #, c-format
 msgid "Partitioning"
 msgstr "Разметка диска"
@@ -1291,7 +1304,7 @@ msgstr ""
 "в начале диска"
 
 #: diskdrake/hd_gtk.pm:160 interactive.pm:644 interactive/gtk.pm:744
-#: interactive/gtk.pm:759 interactive/gtk.pm:779 ugtk2.pm:936 ugtk2.pm:937
+#: interactive/gtk.pm:759 interactive/gtk.pm:779 ugtk2.pm:938 ugtk2.pm:939
 #, c-format
 msgid "Help"
 msgstr "Справка"
@@ -1456,10 +1469,11 @@ msgstr "Выйти без записи таблицы разделов?"
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "Желаете сохранить изменения /etc/fstab"
 
-#: diskdrake/interactive.pm:284 fs/partitioning_wizard.pm:252
+#: diskdrake/interactive.pm:284 fs/partitioning_wizard.pm:250
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr "Вам нужно перезагрузиться, чтобы изменения таблицы разделов вступили в силу"
+msgstr ""
+"Вам нужно перезагрузиться, чтобы изменения таблицы разделов вступили в силу"
 
 #: diskdrake/interactive.pm:289
 #, c-format
@@ -1620,8 +1634,10 @@ msgstr "Удалить файл loopback?"
 
 #: diskdrake/interactive.pm:532
 #, c-format
-msgid "After changing type of partition %s, all data on this partition will be lost"
-msgstr "После изменения типа раздела %s, все данные в этом разделе будут потеряны"
+msgid ""
+"After changing type of partition %s, all data on this partition will be lost"
+msgstr ""
+"После изменения типа раздела %s, все данные в этом разделе будут потеряны"
 
 #: diskdrake/interactive.pm:545
 #, c-format
@@ -1696,7 +1712,8 @@ msgstr "Для всех данных в этом разделе должна б�
 #: diskdrake/interactive.pm:701
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
-msgstr "После изменения размера раздела %s все данные в этом разделе будут потеряны"
+msgstr ""
+"После изменения размера раздела %s все данные в этом разделе будут потеряны"
 
 #: diskdrake/interactive.pm:708
 #, c-format
@@ -1841,9 +1858,10 @@ msgstr "Таблица разделов устройства %s будет за�
 #: diskdrake/interactive.pm:1098
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
-msgstr "После форматирования раздела %s, все данные на этом разделе будут потеряны"
+msgstr ""
+"После форматирования раздела %s, все данные на этом разделе будут потеряны"
 
-#: diskdrake/interactive.pm:1103 fs/partitioning.pm:49
+#: diskdrake/interactive.pm:1103 fs/partitioning.pm:48
 #, c-format
 msgid "Check bad blocks?"
 msgstr "Проверить плохие блоки?"
@@ -2124,8 +2142,8 @@ msgstr "Изменить тип"
 
 #: diskdrake/smbnfs_gtk.pm:81 interactive.pm:126 interactive.pm:543
 #: interactive/curses.pm:260 interactive/http.pm:104 interactive/http.pm:160
-#: interactive/stdio.pm:39 interactive/stdio.pm:148 ugtk2.pm:408 ugtk2.pm:510
-#: ugtk2.pm:519 ugtk2.pm:801
+#: interactive/stdio.pm:39 interactive/stdio.pm:148 ugtk2.pm:409 ugtk2.pm:511
+#: ugtk2.pm:520 ugtk2.pm:803
 #, c-format
 msgid "Cancel"
 msgstr "Отмена"
@@ -2152,7 +2170,8 @@ msgstr "Еще один"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid "Please enter your username, password and domain name to access this host."
+msgid ""
+"Please enter your username, password and domain name to access this host."
 msgstr ""
 "Пожалуйста, введите свои имя пользователя, пароль и имя домена, чтобы "
 "получить доступ к хосту"
@@ -2285,7 +2304,8 @@ msgstr "Очищать кэш записи при закрытии файла"
 #: fs/mount_options.pm:119
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
-msgstr "Разрешить подсчет дисковых квот для групп и опционально установку лимитов"
+msgstr ""
+"Разрешить подсчет дисковых квот для групп и опционально установку лимитов"
 
 #: fs/mount_options.pm:121
 #, c-format
@@ -2359,7 +2379,8 @@ msgstr "Все I/O для файловой системы должны быть 
 #: fs/mount_options.pm:144
 #, c-format
 msgid "Allow every user to mount and umount the file system."
-msgstr "Разрешить всем пользователям монтировать и размонтировать файловую систему."
+msgstr ""
+"Разрешить всем пользователям монтировать и размонтировать файловую систему."
 
 #: fs/mount_options.pm:146
 #, c-format
@@ -2413,7 +2434,7 @@ msgstr "Выберите точки монтирования"
 msgid "Choose the partitions you want to format"
 msgstr "Выберите разделы, которые вы хотите отформатировать"
 
-#: fs/partitioning.pm:76
+#: fs/partitioning.pm:75
 #, c-format
 msgid ""
 "Failed to check filesystem %s. Do you want to repair the errors? (beware, "
@@ -2422,7 +2443,7 @@ msgstr ""
 "Проверка файловой системы %s завершилась неудачей. Хотите исправить ошибки "
 "(осторожно, вы можете потерять данные)?"
 
-#: fs/partitioning.pm:79
+#: fs/partitioning.pm:78
 #, c-format
 msgid "Not enough swap space to fulfill installation, please add some"
 msgstr ""
@@ -2575,7 +2596,7 @@ msgstr ""
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: fs/partitioning_wizard.pm:165 interactive.pm:542 interactive/curses.pm:263
-#: ugtk2.pm:512
+#: ugtk2.pm:513
 #, c-format
 msgid "Next"
 msgstr "Далее"
@@ -2627,22 +2648,22 @@ msgstr ""
 "У вас есть более одного жёсткого диска. На какой из них вы хотите установить "
 "Linux?"
 
-#: fs/partitioning_wizard.pm:211 fsedit.pm:570
+#: fs/partitioning_wizard.pm:210 fsedit.pm:570
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "ВСЕ существующие разделы и данные на них будут потеряны на диске %s"
 
-#: fs/partitioning_wizard.pm:222
+#: fs/partitioning_wizard.pm:220
 #, c-format
 msgid "Custom disk partitioning"
 msgstr "Ручная разметка диска"
 
-#: fs/partitioning_wizard.pm:228
+#: fs/partitioning_wizard.pm:226
 #, c-format
 msgid "Use fdisk"
 msgstr "Используйте fdisk"
 
-#: fs/partitioning_wizard.pm:231
+#: fs/partitioning_wizard.pm:229
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -2651,17 +2672,17 @@ msgstr ""
 "Теперь вы можете разметить %s.\n"
 "После завершения не забудьте сохранить при помощи `w'"
 
-#: fs/partitioning_wizard.pm:271
+#: fs/partitioning_wizard.pm:269
 #, c-format
 msgid "I can not find any room for installing"
 msgstr "Вообще не могу найти места для установки"
 
-#: fs/partitioning_wizard.pm:275
+#: fs/partitioning_wizard.pm:273
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "Мастер Разметки диска DrakX нашел следующие решения:"
 
-#: fs/partitioning_wizard.pm:287
+#: fs/partitioning_wizard.pm:284
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Разметка на разделы завершилась неудачно: %s"
@@ -3099,7 +3120,7 @@ msgstr ""
 "Здесь можно выбрать альтернативный драйвер (OSS или ALSA) для звуковой карты "
 "(%s)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA",
+#. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:392
@@ -3318,18 +3339,18 @@ msgstr "Тип тюнера :"
 
 #: interactive.pm:125 interactive.pm:542 interactive/curses.pm:263
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
-#: interactive/stdio.pm:148 interactive/stdio.pm:149 ugtk2.pm:414 ugtk2.pm:512
-#: ugtk2.pm:801 ugtk2.pm:824
+#: interactive/stdio.pm:148 interactive/stdio.pm:149 ugtk2.pm:415 ugtk2.pm:513
+#: ugtk2.pm:803 ugtk2.pm:826
 #, c-format
 msgid "Ok"
 msgstr "ОК"
 
-#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:800 wizards.pm:156
+#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:802 wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "Да"
 
-#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:800 wizards.pm:156
+#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:802 wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "Нет"
@@ -3354,12 +3375,12 @@ msgstr "Изменить"
 msgid "Remove"
 msgstr "Удалить"
 
-#: interactive.pm:542 interactive/curses.pm:263 ugtk2.pm:512
+#: interactive.pm:542 interactive/curses.pm:263 ugtk2.pm:513
 #, c-format
 msgid "Finish"
 msgstr "Завершить"
 
-#: interactive.pm:543 interactive/curses.pm:260 ugtk2.pm:510
+#: interactive.pm:543 interactive/curses.pm:260 ugtk2.pm:511
 #, c-format
 msgid "Previous"
 msgstr "Назад"
@@ -5277,7 +5298,8 @@ msgstr "Разрешает/Запрещает непосредственный �
 
 #: security/help.pm:33
 #, c-format
-msgid "Allow the list of users on the system on display managers (kdm and gdm)."
+msgid ""
+"Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr ""
 "Разрешает/Запрещает вывод списка пользователей системы в оконных менеджерах "
 "(kdm и gdm)."
@@ -5534,7 +5556,8 @@ msgstr "если установлено Да, ежедневно выполня�
 #: security/help.pm:120
 #, c-format
 msgid "if set to yes, check additions/removals of sgid files."
-msgstr "если установлено Да, проверяется добавление/удаление файлов с sgid-битами."
+msgstr ""
+"если установлено Да, проверяется добавление/удаление файлов с sgid-битами."
 
 #: security/help.pm:121
 #, c-format
@@ -5544,7 +5567,8 @@ msgstr "если установлено Да, проверяется налич�
 #: security/help.pm:122
 #, c-format
 msgid "if set to yes, verify checksum of the suid/sgid files."
-msgstr "если установлено Да, проверяется контрольная сумма файлов с битами suid/sgid."
+msgstr ""
+"если установлено Да, проверяется контрольная сумма файлов с битами suid/sgid."
 
 #: security/help.pm:123
 #, c-format
@@ -5572,7 +5596,8 @@ msgstr "если установлено Да, выполняются прове�
 
 #: security/help.pm:127
 #, c-format
-msgid "if set, send the mail report to this email address else send it to root."
+msgid ""
+"if set, send the mail report to this email address else send it to root."
 msgstr ""
 "если установлено, письмо с отчетом отправляется на этот адрес, иначе "
 "отправляется root'у."
@@ -5585,7 +5610,8 @@ msgstr "если установлено Да, результаты провер�
 #: security/help.pm:129
 #, c-format
 msgid "Do not send mails if there's nothing to warn about"
-msgstr "если установлено Да, сообщения не отправляются, если не о чем предупреждать."
+msgstr ""
+"если установлено Да, сообщения не отправляются, если не о чем предупреждать."
 
 #: security/help.pm:130
 #, c-format
@@ -5991,27 +6017,28 @@ msgstr "Безопасность"
 msgid "DrakSec Basic Options"
 msgstr "Основные параметры DrakSec"
 
-#: security/level.pm:57
+#: security/level.pm:56
 #, c-format
 msgid "Please choose the desired security level"
 msgstr "Пожалуйста, выберите желаемый уровень безопасности"
 
-#: security/level.pm:61
+#: security/level.pm:60
 #, c-format
 msgid "Security level"
 msgstr "Уровень безопасности"
 
-#: security/level.pm:63
+#: security/level.pm:62
 #, c-format
 msgid "Use libsafe for servers"
 msgstr "Использовать libsafe для серверов"
 
-#: security/level.pm:64
+#: security/level.pm:63
 #, c-format
-msgid "A library which defends against buffer overflow and format string attacks."
+msgid ""
+"A library which defends against buffer overflow and format string attacks."
 msgstr "Библиотека, защищающая от атак переполнения буфера и формата строки."
 
-#: security/level.pm:65
+#: security/level.pm:64
 #, c-format
 msgid "Security Administrator (login or email)"
 msgstr "Администратор безопасности (логин или email)"
@@ -6019,7 +6046,8 @@ msgstr "Администратор безопасности (логин или e
 #: services.pm:19
 #, c-format
 msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
-msgstr "Запустить звуковую систему ALSA (Расширенная звуковая архитектура Linux)"
+msgstr ""
+"Запустить звуковую систему ALSA (Расширенная звуковая архитектура Linux)"
 
 #: services.pm:20
 #, c-format
@@ -6061,7 +6089,8 @@ msgstr ""
 
 #: services.pm:28
 #, c-format
-msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgid ""
+"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr "CUPS - система печати Linux"
 
 #: services.pm:29
@@ -6096,7 +6125,8 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr "HAL - демон, собирающий информацию об аппаратном обеспечении компьютера"
+msgstr ""
+"HAL - демон, собирающий информацию об аппаратном обеспечении компьютера"
 
 #: services.pm:36
 #, c-format
@@ -6109,7 +6139,8 @@ msgstr ""
 
 #: services.pm:38
 #, c-format
-msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid ""
+"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
 "Apache является сервером всемирной паутины. Он используется для обслуживания "
 "файлов HTML и CGI."
@@ -6362,7 +6393,8 @@ msgstr ""
 
 #: services.pm:92
 #, c-format
-msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgid ""
+"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr "SANE - система работы со сканерами и камерами"
 
 #: services.pm:93
@@ -6453,7 +6485,8 @@ msgstr "Службы"
 #: services.pm:153
 #, c-format
 msgid "Choose which services should be automatically started at boot time"
-msgstr "Выберите, какие службы должны быть автоматически запущены во время загрузки"
+msgstr ""
+"Выберите, какие службы должны быть автоматически запущены во время загрузки"
 
 #: services.pm:171
 #, c-format
@@ -6484,7 +6517,7 @@ msgstr ""
 "Извините, дополнительная информация\n"
 "об этой службе отсутствует."
 
-#: services.pm:221 ugtk2.pm:911
+#: services.pm:221 ugtk2.pm:913
 #, c-format
 msgid "Info"
 msgstr "Информация"
@@ -6821,47 +6854,47 @@ msgstr "Российская Федерация"
 msgid "Yugoslavia"
 msgstr "Югославия"
 
-#: ugtk2.pm:801
+#: ugtk2.pm:803
 #, c-format
 msgid "Is this correct?"
 msgstr "Все правильно?"
 
-#: ugtk2.pm:861
+#: ugtk2.pm:863
 #, c-format
 msgid "No file chosen"
 msgstr "Файлы не выбраны"
 
-#: ugtk2.pm:863
+#: ugtk2.pm:865
 #, c-format
 msgid "You have chosen a file, not a directory"
 msgstr "Вы указали файл, а не каталог"
 
-#: ugtk2.pm:865
+#: ugtk2.pm:867
 #, c-format
 msgid "You have chosen a directory, not a file"
 msgstr "Вы указали каталог, а не файл"
 
-#: ugtk2.pm:867
+#: ugtk2.pm:869
 #, c-format
 msgid "No such directory"
 msgstr "Нет такого каталога"
 
-#: ugtk2.pm:867
+#: ugtk2.pm:869
 #, c-format
 msgid "No such file"
 msgstr "Нет такого файла"
 
-#: ugtk2.pm:946
+#: ugtk2.pm:948
 #, c-format
 msgid "Expand Tree"
 msgstr "Развернуть дерево"
 
-#: ugtk2.pm:947
+#: ugtk2.pm:949
 #, c-format
 msgid "Collapse Tree"
 msgstr "Свернуть дерево"
 
-#: ugtk2.pm:948
+#: ugtk2.pm:950
 #, c-format
 msgid "Toggle between flat and group sorted"
 msgstr "Переключение между простым и сортированным по группам списками"
@@ -6879,4 +6912,3 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Установка завершилась неудачей"
-
