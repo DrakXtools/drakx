@@ -982,7 +982,7 @@ when your installation is complete and you restart your system.")),
 	  format => sub { $_[0] =~ /(.*\|)(.*)/ ? $1 . lang::l2name($2) : lang::l2name($_[0]) },
 	  list => \@langs, sort => !$in->isa('interactive::gtk'), changed => sub { 
 	      #- very special cases for langs which do not like UTF-8
-	      $non_utf8 = $lang =~ /\bzh/ if !$utf8_forced;
+	      $non_utf8 = $lang =~ /\bzh_TW/i if !$utf8_forced;
 	  }, focus_out => sub { $langs->{$listval2val->($lang)} = 1 } },
 	  { val => \$non_utf8, type => 'bool', text => N("Old compatibility (non UTF-8) encoding"), 
 	    advanced => 1, changed => sub { $utf8_forced = 1 } },
