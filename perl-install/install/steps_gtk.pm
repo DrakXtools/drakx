@@ -223,16 +223,12 @@ sub reallyChooseDesktop {
 
     my $w = ugtk2->new($title);
 
-    my $sizegrp = Gtk2::SizeGroup->new('horizontal');
     my $choice = $choices->[0];
     my $prev;
     my @l = map {
 	my $val = $_;
 	$prev = gtknew('RadioButton', child =>
-                      gtknew('HBox', border_width => 15, spacing => 10, children => [ 
-                          0, gtknew('Image', file => "desktop-$val->[0]", size_group => $sizegrp),
-                          1, gtknew('Label', text => $val->[1]),
-                      ]),
+                          gtknew('Label', text => $val->[1]),
 		       toggled => sub { $choice = $val if $_[0]->get_active },
 		       $prev ? (group => $prev->get_group) : ());
 	$prev->signal_connect(key_press_event => sub {
@@ -241,13 +237,37 @@ sub reallyChooseDesktop {
 				      Gtk2->main_quit;
 				  }
 			      });
-	$prev
+        my $img = gtksignal_connect(
+            gtkadd(Gtk2::EventBox->new, gtknew('Image', file => "desktop-$val->[0]")),
+            'button-press-event' => sub {
+                my $wp = ugtk2->new(N("Help"), transient => $w->{real_window}, modal => 1,
+                                );
+                gtkadd($wp->{rwindow},
+                       gtkpack_(Gtk2::VBox->new,
+                                0, N("Here's a preview of the '%s' desktop.", $val->[1]),
+                                1, gtknew('Image', file => "desktop-$val->[0]-big"),
+                                0, gtkpack(create_hbox('edge'),
+                                           gtknew('Button', text => N("Close"), clicked => sub { Gtk2->main_quit })
+                                       ),
+                            ),
+                   );
+                $wp->{real_window}->set_size_request(-1, -1);
+                $wp->{real_window}->grab_focus;
+                $wp->{real_window}->grab_focus;
+                $wp->{real_window}->show_all;
+                $wp->main;
+            });
+        gtknew('VBox', border_width => 15, spacing => 10, children_tight => [ 
+            $img,
+            $prev,
+        ]);
     } @$choices;
 
     ugtk2::gtkadd($w->{window},
 	   gtknew('VBox', children => [
-		    0, gtknew('WrappedLabel', text => $message),
-		    (map { (1, $_) } @l),
+		    0, gtknew('WrappedLabel', text => $message . "\n\n" .
+                                N("Click on images in order to see a bigger preview")),
+		    1, gtknew('HButtonBox', children_loose => \@l),
 		    0, $w->create_okcancel(N("Next"), undef),
 		]));
     $w->main;
