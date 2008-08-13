@@ -63,7 +63,7 @@ sub main {
 
     gtkadd($w->{window},
 	   gtkpack_(Gtk2::VBox->new(0,7),
-		    0, N("Click on a partition, choose a filesystem type then choose an action"),
+		    0, gtknew('Label_Left', text => N("Click on a partition, choose a filesystem type then choose an action")),
 		    1, (my $notebook_widget = Gtk2::Notebook->new),
 		    0, (my $per_kind_action_box = Gtk2::HBox->new(0,0)),
 		    0, (my $general_action_box  = Gtk2::HBox->new(0,0)),
