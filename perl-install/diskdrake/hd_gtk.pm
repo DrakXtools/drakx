@@ -130,14 +130,14 @@ sub add_kind2notebook {
     die if $kind->{main_box};
 
     $kind->{display_box} = gtkset_size_request(Gtk2::HBox->new(0,0), $width, $height);
-    $kind->{action_box} = gtkset_size_request(Gtk2::VBox->new(0,0), $::isStandalone ? 165 : 150, $::isEmbedded ? 150 : 180);
+    $kind->{action_box} = gtkset_size_request(Gtk2::VBox->new(), $::isStandalone ? 165 : 150, $::isEmbedded ? 150 : 180);
     $kind->{info_box} = Gtk2::VBox->new(0,0);
     my $box =
       gtkpack_(Gtk2::VBox->new(0,7),
 	       0, $kind->{display_box},
 	       0, filesystems_button_box(),
 	       1, $kind->{info_box});
-    $kind->{main_box} = gtknew('HBox', children => [
+    $kind->{main_box} = gtknew('HBox', spacing => 5, children => [
         1, $box,
         0, $kind->{action_box},
     ]);
