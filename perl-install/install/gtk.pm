@@ -144,6 +144,23 @@ sub create_steps_window {
       gtknew('Fixed', widget_name => 'Steps', pixbuf_file => 'left-background',
              has_window => 1, x => 0, y => 0, height => $height, width => $::stepswidth, # -1
 	     child => gtknew('VBox', spacing => 6, width => ($::stepswidth - $offset), children_tight => \@l));
+
+    $o->{steps_widget}->put(my $da = gtknew('DrawingArea', width => $::stepswidth-11, widget_name => 'Left_background',
+                                   height => 300, # prevent logo to be tiled (do mosazic style rendering)
+                              ), 0, $height);
+
+    my $set_pixmap = sub {
+        my ($darea) = @_;
+        return if !$darea->realized;
+        my $window = $da->window;
+        my $pixmap = $da->{back_pixmap} ||= Gtk2::Gdk::Pixmap->new($window, 1, 1, $window->get_depth);
+        my $style = $da->get_style;
+        $pixmap->draw_points($style->base_gc('normal'), 0, 0);
+        $window->set_back_pixmap($pixmap);
+        $darea->queue_draw;
+    };
+    $da->signal_connect(realize => $set_pixmap);
+
     $o->{steps_widget}->put(
         # FIXME: not RTL compliant (lang::text_direction_rtl() ? ...)
         gtknew('VBox', height => $::rootheight,
