@@ -195,7 +195,7 @@ sub packageCallbackChoices_ {
     if (@$prefer) {
 	@$prefer;
     } elsif ($virtual_pkg_name eq 'kernel') {
-	my $re = join('|', map { "kernel\Q$_-2" } bestKernel_extensions($o_match_all_hardware));
+	my $re = join('|', map { "kernel\Q$_-2" } bestKernel_extensions());
 	my @l = grep { $_->name =~ $re } @$choices;
 	log::l("packageCallbackChoices: kernel chosen ", join(",", map { $_->name } @l), " in ", join(",", map { $_->name } @$choices));
 	@l;
