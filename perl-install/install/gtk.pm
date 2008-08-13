@@ -139,7 +139,7 @@ sub create_steps_window {
     }
 
     my $offset = 10;
-    my $height = 500;
+    my $height = 600;
     $o->{steps_widget} =
       gtknew('Fixed', widget_name => 'Steps', pixbuf_file => 'left-background',
              has_window => 1, x => 0, y => 0, height => $height, width => $::stepswidth, # -1
