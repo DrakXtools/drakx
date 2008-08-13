@@ -356,11 +356,11 @@ sub filesystems_button_box() {
 
     gtkpack(Gtk2::HBox->new(0,0), 
 	    N("Filesystem types:"),
-	    map { my $w = Gtk2::Button->new(translate($_));
+	    map {
 		  my $t = $name2fs_type{$_};
-		  $w->signal_connect(clicked => sub { try_('', \&createOrChangeType, $t, current_hd(), current_part()) });
+                  my $w = gtknew('Button', text => translate($_), widget_name => 'PART_' . ($t || 'empty'),
+                                 clicked => sub { try_('', \&createOrChangeType, $t, current_hd(), current_part()) });
 		  $w->can_focus(0);
-		  $w->set_name('PART_' . ($t || 'empty')); 
 		  $w;
 	    } @types);
 }
