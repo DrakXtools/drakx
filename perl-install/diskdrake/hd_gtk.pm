@@ -63,6 +63,7 @@ sub main {
 
     gtkadd($w->{window},
 	   gtkpack_(Gtk2::VBox->new(0,7),
+		    0, N("Choose action"),
 		    0, filesystems_button_box(),
 		    1, (my $notebook_widget = Gtk2::Notebook->new),
 		    0, (my $per_kind_action_box = Gtk2::HBox->new(0,0)),
@@ -192,7 +193,7 @@ sub per_entry_action_box {
 	    $w;
 	} diskdrake::interactive::part_possible_actions($in, kind2hd($kind), $entry, $all_hds);
 
-	gtkadd($box, gtkadd(Gtk2::Frame->new(N("Choose action")),
+	gtkadd($box, gtkadd(Gtk2::Frame->new(),
 			    create_scrolled_window(gtkpack__(Gtk2::VBox->new(), @buttons)))) if @buttons;
     } else {
 	my $txt = !$::isStandalone && fsedit::is_one_big_fat_or_NT($all_hds->{hds}) ?
