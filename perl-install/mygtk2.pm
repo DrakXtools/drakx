@@ -388,7 +388,7 @@ sub title1_to_markup {
 sub _gtk__Title1 {
     my ($w, $opts) = @_;
     $opts ||= {};
-    $opts->{text_markup} = title1_to_markup(delete($opts->{label}));
+    $opts->{text_markup} = title1_to_markup(delete($opts->{label})) if $opts->{label};
     _gtk__Label($w, $opts);
 }
 
