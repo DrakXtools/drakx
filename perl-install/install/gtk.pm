@@ -139,9 +139,10 @@ sub create_steps_window {
     }
 
     my $offset = 10;
+    my $height = 500;
     $o->{steps_widget} =
       gtknew('Fixed', widget_name => 'Steps', pixbuf_file => 'left-background',
-             has_window => 1, x => 0, y => 0, height => 500, width => $::stepswidth, # -1
+             has_window => 1, x => 0, y => 0, height => $height, width => $::stepswidth, # -1
 	     child => gtknew('VBox', spacing => 6, width => ($::stepswidth - $offset), children_tight => \@l));
     $o->{steps_widget}->put(
         # FIXME: not RTL compliant (lang::text_direction_rtl() ? ...)
