@@ -136,8 +136,7 @@ sub add_kind2notebook {
       gtkpack_(Gtk2::VBox->new(0,7),
 	       0, $kind->{display_box},
 	       0, filesystems_button_box(),
-	       1, gtkpack_(Gtk2::HBox->new(0,7),
-			   1, $kind->{info_box}));
+	       1, $kind->{info_box});
     $kind->{main_box} = gtknew('HBox', children => [
         1, $box,
         0, $kind->{action_box},
