@@ -355,10 +355,10 @@ sub filesystems_button_box() {
     my %name2fs_type = (Ext3 => 'ext3', Ext4 => 'ext4dev', 'XFS' => 'xfs', Swap => 'swap', Other => 'other', "Windows" => 'vfat', HFS => 'hfs');
 
     gtkpack(Gtk2::HBox->new(0,0), 
-	    N("Filesystem types:"),
 	    map {
 		  my $t = $name2fs_type{$_};
                   my $w = gtknew('Button', text => translate($_), widget_name => 'PART_' . ($t || 'empty'),
+                                 tip => N("Filesystem types:"),
                                  clicked => sub { try_('', \&createOrChangeType, $t, current_hd(), current_part()) });
 		  $w->can_focus(0);
 		  $w;
