@@ -1424,11 +1424,9 @@ sub new {
     my ($_class, $icon, $text, $o_options) = @_;
 
     my $darea = Gtk2::DrawingArea->new;
-    $darea->set_name('Banner') if $::isInstall;
-    my $d_height = $::isInstall ? 35 : 75;
+    my $d_height = 75;
     $darea->set_size_request(-1, $d_height);
-    my $font_size = $::isInstaller ? 12 : 14;
-    $darea->modify_font(Gtk2::Pango::FontDescription->from_string("Sans Bold $font_size"));
+    $darea->modify_font(Gtk2::Pango::FontDescription->from_string("Sans Bold 14"));
     $darea->{icon} = ugtk2::gtkcreate_pixbuf($icon);
     $darea->{text} = $text;
     require lang;
@@ -1448,7 +1446,7 @@ sub new {
                                my $x_text = $is_rtl ? $x_icon - $padding - $darea->{txt_width} : $width + $padding*2;
                                $darea->{icon}->render_to_drawable($darea->window, $style->bg_gc('normal'),
                                                                   0, 0, $x_icon, $padding, -1, -1, 'none', 0, 0);
-                               $darea->window->draw_layout($style->fg_gc('normal'), $x_text, $o_options->{txt_ypos} || $::isInstall && 13 || $d_height/3,
+                               $darea->window->draw_layout($style->fg_gc('normal'), $x_text, $o_options->{txt_ypos} || $d_height/3,
                                                            $darea->{layout});
                                1;
                            });
