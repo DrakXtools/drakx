@@ -195,7 +195,7 @@ sub per_entry_action_box {
 	    $w;
 	} diskdrake::interactive::part_possible_actions($in, kind2hd($kind), $entry, $all_hds);
 
-	gtkadd($box, create_scrolled_window(gtkpack__(Gtk2::VBox->new(), @buttons))) if @buttons;
+	gtkadd($box, create_scrolled_window(gtkpack__(Gtk2::VBox->new(), @buttons), shadow_type => 'none')) if @buttons;
     } else {
 	my $txt = !$::isStandalone && fsedit::is_one_big_fat_or_NT($all_hds->{hds}) ?
 N("You have one big Microsoft Windows partition.
