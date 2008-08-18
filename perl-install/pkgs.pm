@@ -197,6 +197,7 @@ sub detect_network_drivers {
 sub detect_hardware_packages {
     my ($do_pkgs, $o_match_all_hardware) = @_;
     (
+        ($::isInstall ? () : list_hardware_packages($o_match_all_hardware)),
         detect_graphical_drivers($do_pkgs, $o_match_all_hardware),
         detect_network_drivers($do_pkgs, $o_match_all_hardware),
     );
