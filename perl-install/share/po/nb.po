@@ -16,7 +16,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
-"POT-Creation-Date: 2008-08-12 17:53+0200\n"
+"POT-Creation-Date: 2008-08-18 18:01+0200\n"
 "PO-Revision-Date: 2007-12-15 15:41+0100\n"
 "Last-Translator: Per Øyvind Karlsen <peroyvind@mandriva.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-no@lister.ping.uio.no>\n"
@@ -27,7 +27,7 @@ msgstr ""
 
 #: any.pm:245 diskdrake/interactive.pm:554 diskdrake/interactive.pm:741
 #: diskdrake/interactive.pm:785 diskdrake/interactive.pm:843
-#: diskdrake/interactive.pm:1133 do_pkgs.pm:220 do_pkgs.pm:262
+#: diskdrake/interactive.pm:1133 do_pkgs.pm:221 do_pkgs.pm:267
 #: harddrake/sound.pm:285 interactive.pm:580
 #, c-format
 msgid "Please wait"
@@ -512,7 +512,7 @@ msgstr "Velg vindushåndtereren som skal kjøres:"
 msgid "Release Notes"
 msgstr "Utgivelsesnotater"
 
-#: any.pm:878 any.pm:1214 interactive/gtk.pm:766
+#: any.pm:878 any.pm:1217 interactive/gtk.pm:774
 #, c-format
 msgid "Close"
 msgstr "Lukk"
@@ -527,27 +527,27 @@ msgstr "Lisensavtale"
 msgid "Quit"
 msgstr "Avslutt"
 
-#: any.pm:923
+#: any.pm:925
+#, fuzzy, c-format
+msgid "Do you accept this license ?"
+msgstr "Har du enda ett?"
+
+#: any.pm:926
 #, c-format
 msgid "Accept"
 msgstr "Godta"
 
-#: any.pm:923
+#: any.pm:926
 #, c-format
 msgid "Refuse"
 msgstr "Nekt"
 
-#: any.pm:943 any.pm:1009
+#: any.pm:947 any.pm:1012
 #, c-format
 msgid "Please choose a language to use."
 msgstr "Velg språk som skal brukes."
 
-#: any.pm:944 any.pm:1010
-#, c-format
-msgid "Language choice"
-msgstr "Spåkvalg"
-
-#: any.pm:973
+#: any.pm:976
 #, c-format
 msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
@@ -558,72 +558,77 @@ msgstr ""
 "språkene du ønsker å installere. Disse vil bli tilgjengelige\n"
 "når installasjonen er ferdig og du har startet systemet på nytt."
 
-#: any.pm:976
+#: any.pm:979
 #, c-format
 msgid "Multi languages"
 msgstr "Flere språk"
 
-#: any.pm:987 any.pm:1018
+#: any.pm:990 any.pm:1021
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr "Gammel kompatibilitetskoding (ikke UTF-8)"
 
-#: any.pm:989
+#: any.pm:992
 #, c-format
 msgid "All languages"
 msgstr "Alle språk"
 
-#: any.pm:1065
+#: any.pm:1013
+#, c-format
+msgid "Language choice"
+msgstr "Spåkvalg"
+
+#: any.pm:1068
 #, c-format
 msgid "Country / Region"
 msgstr "Land"
 
-#: any.pm:1066
+#: any.pm:1069
 #, c-format
 msgid "Please choose your country."
 msgstr "Velg ditt land."
 
-#: any.pm:1068
+#: any.pm:1071
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Her er den komplette lista over tilgjengelige land"
 
-#: any.pm:1069
+#: any.pm:1072
 #, c-format
 msgid "Other Countries"
 msgstr "Andre land"
 
-#: any.pm:1069 interactive.pm:481
+#: any.pm:1072 interactive.pm:481
 #, c-format
 msgid "Advanced"
 msgstr "Avansert"
 
-#: any.pm:1075
+#: any.pm:1078
 #, c-format
 msgid "Input method:"
 msgstr "Inndata-metode:"
 
-#: any.pm:1078
+#: any.pm:1081
 #, c-format
 msgid "None"
 msgstr "Ingen"
 
-#: any.pm:1159
+#: any.pm:1162
 #, c-format
 msgid "No sharing"
 msgstr "Ingen deling"
 
-#: any.pm:1159
+#: any.pm:1162
 #, c-format
 msgid "Allow all users"
 msgstr "Tillat alle brukere"
 
-#: any.pm:1159
+#: any.pm:1162
 #, c-format
 msgid "Custom"
 msgstr "Skreddersydd"
 
-#: any.pm:1163
+#: any.pm:1166
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -638,7 +643,7 @@ msgstr ""
 "\n"
 "«Egendefinert» tillater egne oppsett per bruker.\n"
 
-#: any.pm:1175
+#: any.pm:1178
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
@@ -647,7 +652,7 @@ msgstr ""
 "NFS: Det tradisjonelle Unix-fildelingssystemet, med mindre støtte på Mac og "
 "Windows"
 
-#: any.pm:1178
+#: any.pm:1181
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
@@ -656,18 +661,18 @@ msgstr ""
 "SMB: et fildelingsystem brukt av Windows, Mac OS X og mange moderne Linux-"
 "systemer."
 
-#: any.pm:1186
+#: any.pm:1189
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Du kan eksportere med NFS eller SMB. Velg den du ønsker å bruke."
 
-#: any.pm:1214
+#: any.pm:1217
 #, c-format
 msgid "Launch userdrake"
 msgstr "Start userdrake"
 
-#: any.pm:1216
+#: any.pm:1219
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -676,52 +681,52 @@ msgstr ""
 "Per-bruker deling benytter gruppen «fileshare». \n"
 "Du kan bruke userdrake til å legge til en bruker i denne gruppen."
 
-#: any.pm:1308
+#: any.pm:1311
 #, c-format
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr "Logg ut og bruk så Ctrl-Alt-BackSpace"
 
-#: any.pm:1312
+#: any.pm:1315
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr "Du trenger å logge ut og inn igjen for at fendringene skal tre i kraft"
 
-#: any.pm:1347
+#: any.pm:1350
 #, c-format
 msgid "Timezone"
 msgstr "Tidssone"
 
-#: any.pm:1347
+#: any.pm:1350
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Hva er din tidssone?"
 
-#: any.pm:1370 any.pm:1372
+#: any.pm:1373 any.pm:1375
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Dato-, klokke- og tidssoneoppsett"
 
-#: any.pm:1373
+#: any.pm:1376
 #, c-format
 msgid "What is the best time?"
 msgstr "Hva er den beste tida?"
 
-#: any.pm:1377
+#: any.pm:1380
 #, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "%s (maskinvareklokke satt til UTC)"
 
-#: any.pm:1378
+#: any.pm:1381
 #, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "%s (maskinvareklokke satt til lokal tid) "
 
-#: any.pm:1380
+#: any.pm:1383
 #, c-format
 msgid "NTP Server"
 msgstr "NTP-tjener"
 
-#: any.pm:1381
+#: any.pm:1384
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Automatisk tidssynkronisering (ved hjelp av NTP)"
@@ -1207,13 +1212,13 @@ msgstr "Monteringspunkt"
 msgid "Options"
 msgstr "Valg"
 
-#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:164 diskdrake/removable.pm:26
+#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:167 diskdrake/removable.pm:26
 #: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
 #, c-format
 msgid "Done"
 msgstr "Ferdig"
 
-#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:113 diskdrake/hd_gtk.pm:263
+#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:113 diskdrake/hd_gtk.pm:265
 #: diskdrake/interactive.pm:233 diskdrake/interactive.pm:246
 #: diskdrake/interactive.pm:480 diskdrake/interactive.pm:485
 #: diskdrake/interactive.pm:603 diskdrake/interactive.pm:861
@@ -1263,6 +1268,11 @@ msgstr "Valg: %s"
 msgid "Partitioning"
 msgstr "Partisjonering"
 
+#: diskdrake/hd_gtk.pm:66
+#, c-format
+msgid "Click on a partition, choose a filesystem type then choose an action"
+msgstr ""
+
 #: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1010
 #: diskdrake/interactive.pm:1020 diskdrake/interactive.pm:1073
 #, c-format
@@ -1295,18 +1305,13 @@ msgstr ""
 "sektorer er nok)\n"
 "ved begynnelsen av disken"
 
-#: diskdrake/hd_gtk.pm:160 interactive.pm:644 interactive/gtk.pm:744
-#: interactive/gtk.pm:759 interactive/gtk.pm:779 ugtk2.pm:938 ugtk2.pm:939
+#: diskdrake/hd_gtk.pm:163 interactive.pm:644 interactive/gtk.pm:752
+#: interactive/gtk.pm:767 interactive/gtk.pm:787 ugtk2.pm:942 ugtk2.pm:943
 #, c-format
 msgid "Help"
 msgstr "Hjelp"
 
-#: diskdrake/hd_gtk.pm:195
-#, c-format
-msgid "Choose action"
-msgstr "Velg handling"
-
-#: diskdrake/hd_gtk.pm:199
+#: diskdrake/hd_gtk.pm:201
 #, c-format
 msgid ""
 "You have one big Microsoft Windows partition.\n"
@@ -1317,72 +1322,72 @@ msgstr ""
 "Jeg foreslår at du først endrer størrelsen på denne partisjonen\n"
 "(klikk på den, klikk så på «Endre størrelse»)"
 
-#: diskdrake/hd_gtk.pm:201
+#: diskdrake/hd_gtk.pm:203
 #, c-format
 msgid "Please click on a partition"
 msgstr "Klikk på en partisjon"
 
-#: diskdrake/hd_gtk.pm:215 diskdrake/smbnfs_gtk.pm:63
+#: diskdrake/hd_gtk.pm:217 diskdrake/smbnfs_gtk.pm:63
 #, c-format
 msgid "Details"
 msgstr "Detaljer"
 
-#: diskdrake/hd_gtk.pm:263
+#: diskdrake/hd_gtk.pm:265
 #, c-format
 msgid "No hard drives found"
 msgstr "Ingen harddisker funnet"
 
-#: diskdrake/hd_gtk.pm:290
+#: diskdrake/hd_gtk.pm:292
 #, c-format
 msgid "Unknown"
 msgstr "Ukjent"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "Ext3"
 msgstr "Ext3"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "XFS"
 msgstr "XFS"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "Swap"
 msgstr "Veksel"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "SunOS"
 msgstr "SunOS"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "HFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:353 services.pm:158
+#: diskdrake/hd_gtk.pm:355 services.pm:158
 #, c-format
 msgid "Other"
 msgstr "Andre"
 
-#: diskdrake/hd_gtk.pm:353 diskdrake/interactive.pm:1195
+#: diskdrake/hd_gtk.pm:355 diskdrake/interactive.pm:1195
 #, c-format
 msgid "Empty"
 msgstr "Tom"
 
-#: diskdrake/hd_gtk.pm:357
+#: diskdrake/hd_gtk.pm:362
 #, c-format
 msgid "Filesystem types:"
 msgstr "Filsystemtyper:"
 
-#: diskdrake/hd_gtk.pm:381 diskdrake/interactive.pm:289
+#: diskdrake/hd_gtk.pm:383 diskdrake/interactive.pm:289
 #: diskdrake/interactive.pm:361 diskdrake/interactive.pm:510
 #: diskdrake/interactive.pm:694 diskdrake/interactive.pm:752
 #: diskdrake/interactive.pm:841 diskdrake/interactive.pm:883
@@ -1393,22 +1398,22 @@ msgstr "Filsystemtyper:"
 msgid "Warning"
 msgstr "Advarsel"
 
-#: diskdrake/hd_gtk.pm:381
+#: diskdrake/hd_gtk.pm:383
 #, c-format
 msgid "This partition is already empty"
 msgstr "Partisjonen er allerede tom"
 
-#: diskdrake/hd_gtk.pm:390
+#: diskdrake/hd_gtk.pm:392
 #, c-format
 msgid "Use ``Unmount'' first"
 msgstr "Bruk «Avmonter» først"
 
-#: diskdrake/hd_gtk.pm:390
+#: diskdrake/hd_gtk.pm:392
 #, fuzzy, c-format
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Bruk «%s» istedet"
 
-#: diskdrake/hd_gtk.pm:390 diskdrake/interactive.pm:374
+#: diskdrake/hd_gtk.pm:392 diskdrake/interactive.pm:374
 #: diskdrake/interactive.pm:548 diskdrake/interactive.pm:1026
 #: diskdrake/removable.pm:25 diskdrake/removable.pm:48
 #, c-format
@@ -2133,8 +2138,8 @@ msgstr "Endre type"
 
 #: diskdrake/smbnfs_gtk.pm:81 interactive.pm:126 interactive.pm:543
 #: interactive/curses.pm:260 interactive/http.pm:104 interactive/http.pm:160
-#: interactive/stdio.pm:39 interactive/stdio.pm:148 ugtk2.pm:409 ugtk2.pm:511
-#: ugtk2.pm:520 ugtk2.pm:803
+#: interactive/stdio.pm:39 interactive/stdio.pm:148 ugtk2.pm:411 ugtk2.pm:513
+#: ugtk2.pm:522 ugtk2.pm:807
 #, c-format
 msgid "Cancel"
 msgstr "Avbryt"
@@ -2207,12 +2212,12 @@ msgstr "Obligatorisk pakke %s mangler"
 msgid "The following packages need to be installed:\n"
 msgstr "De følgende pakkene trengs å installeres:\n"
 
-#: do_pkgs.pm:220
+#: do_pkgs.pm:221
 #, c-format
 msgid "Installing packages..."
 msgstr "Installerer pakke..."
 
-#: do_pkgs.pm:262
+#: do_pkgs.pm:267
 #, c-format
 msgid "Removing packages..."
 msgstr "Fjerner pakker..."
@@ -2576,7 +2581,7 @@ msgstr ""
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: fs/partitioning_wizard.pm:165 interactive.pm:542 interactive/curses.pm:263
-#: ugtk2.pm:513
+#: ugtk2.pm:515
 #, c-format
 msgid "Next"
 msgstr "Neste"
@@ -3310,18 +3315,18 @@ msgstr "Mottagertype:"
 
 #: interactive.pm:125 interactive.pm:542 interactive/curses.pm:263
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
-#: interactive/stdio.pm:148 interactive/stdio.pm:149 ugtk2.pm:415 ugtk2.pm:513
-#: ugtk2.pm:803 ugtk2.pm:826
+#: interactive/stdio.pm:148 interactive/stdio.pm:149 ugtk2.pm:417 ugtk2.pm:515
+#: ugtk2.pm:807 ugtk2.pm:830
 #, c-format
 msgid "Ok"
 msgstr "Ok"
 
-#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:802 wizards.pm:156
+#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:806 wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "Ja"
 
-#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:802 wizards.pm:156
+#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:806 wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "Nei"
@@ -3331,32 +3336,32 @@ msgstr "Nei"
 msgid "Choose a file"
 msgstr "Velg en fil"
 
-#: interactive.pm:383 interactive/gtk.pm:420
+#: interactive.pm:383 interactive/gtk.pm:428
 #, c-format
 msgid "Add"
 msgstr "Legg til"
 
-#: interactive.pm:383 interactive/gtk.pm:420
+#: interactive.pm:383 interactive/gtk.pm:428
 #, c-format
 msgid "Modify"
 msgstr "Modifiser"
 
-#: interactive.pm:383 interactive/gtk.pm:420
+#: interactive.pm:383 interactive/gtk.pm:428
 #, c-format
 msgid "Remove"
 msgstr "Fjern"
 
-#: interactive.pm:542 interactive/curses.pm:263 ugtk2.pm:513
+#: interactive.pm:542 interactive/curses.pm:263 ugtk2.pm:515
 #, c-format
 msgid "Finish"
 msgstr "Fullfør"
 
-#: interactive.pm:543 interactive/curses.pm:260 ugtk2.pm:511
+#: interactive.pm:543 interactive/curses.pm:260 ugtk2.pm:513
 #, c-format
 msgid "Previous"
 msgstr "Forrige"
 
-#: interactive/gtk.pm:548
+#: interactive/gtk.pm:556
 #, c-format
 msgid "Beware, Caps Lock is enabled"
 msgstr "Obs! «Caps Lock» er på"
@@ -6459,7 +6464,7 @@ msgstr ""
 "Ingen tilleggsinformasjon\n"
 "om denne tjenesten, beklager."
 
-#: services.pm:221 ugtk2.pm:913
+#: services.pm:221 ugtk2.pm:917
 #, c-format
 msgid "Info"
 msgstr "Info"
@@ -6798,47 +6803,47 @@ msgstr "Russiske føderasjon"
 msgid "Yugoslavia"
 msgstr "Jugoslavia"
 
-#: ugtk2.pm:803
+#: ugtk2.pm:807
 #, c-format
 msgid "Is this correct?"
 msgstr "Er dette riktig?"
 
-#: ugtk2.pm:863
+#: ugtk2.pm:867
 #, c-format
 msgid "No file chosen"
 msgstr "Ingen fil valgt"
 
-#: ugtk2.pm:865
+#: ugtk2.pm:869
 #, c-format
 msgid "You have chosen a file, not a directory"
 msgstr "Du har valgt en fil, ikke en katalog"
 
-#: ugtk2.pm:867
+#: ugtk2.pm:871
 #, c-format
 msgid "You have chosen a directory, not a file"
 msgstr "Du har valgt en katalog, ikke en fil"
 
-#: ugtk2.pm:869
+#: ugtk2.pm:873
 #, c-format
 msgid "No such directory"
 msgstr "Ingen slik katalog"
 
-#: ugtk2.pm:869
+#: ugtk2.pm:873
 #, c-format
 msgid "No such file"
 msgstr "Ingen slik fil"
 
-#: ugtk2.pm:948
+#: ugtk2.pm:952
 #, c-format
 msgid "Expand Tree"
 msgstr "Utvid tre"
 
-#: ugtk2.pm:949
+#: ugtk2.pm:953
 #, c-format
 msgid "Collapse Tree"
 msgstr "Trekk sammen tre"
 
-#: ugtk2.pm:950
+#: ugtk2.pm:954
 #, c-format
 msgid "Toggle between flat and group sorted"
 msgstr "Skift mellom flat og gruppesortert"
@@ -6856,6 +6861,9 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Installasjon mislyktes"
+
+#~ msgid "Choose action"
+#~ msgstr "Velg handling"
 
 #~ msgid "Active Directory with SFU"
 #~ msgstr "Active Directory med SFU"

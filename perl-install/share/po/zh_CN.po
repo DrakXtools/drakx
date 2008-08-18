@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: zh_CN\n"
-"POT-Creation-Date: 2008-08-12 17:53+0200\n"
+"POT-Creation-Date: 2008-08-18 18:01+0200\n"
 "PO-Revision-Date: 2008-03-29 21:33+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 
 #: any.pm:245 diskdrake/interactive.pm:554 diskdrake/interactive.pm:741
 #: diskdrake/interactive.pm:785 diskdrake/interactive.pm:843
-#: diskdrake/interactive.pm:1133 do_pkgs.pm:220 do_pkgs.pm:262
+#: diskdrake/interactive.pm:1133 do_pkgs.pm:221 do_pkgs.pm:267
 #: harddrake/sound.pm:285 interactive.pm:580
 #, c-format
 msgid "Please wait"
@@ -497,7 +497,7 @@ msgstr "选择要运行的窗口管理程序:"
 msgid "Release Notes"
 msgstr "版本通告"
 
-#: any.pm:878 any.pm:1214 interactive/gtk.pm:766
+#: any.pm:878 any.pm:1217 interactive/gtk.pm:774
 #, c-format
 msgid "Close"
 msgstr "关闭"
@@ -512,27 +512,27 @@ msgstr "许可协议"
 msgid "Quit"
 msgstr "退出"
 
-#: any.pm:923
+#: any.pm:925
+#, fuzzy, c-format
+msgid "Do you accept this license ?"
+msgstr "您有其它的吗?"
+
+#: any.pm:926
 #, c-format
 msgid "Accept"
 msgstr "接受"
 
-#: any.pm:923
+#: any.pm:926
 #, c-format
 msgid "Refuse"
 msgstr "拒绝"
 
-#: any.pm:943 any.pm:1009
+#: any.pm:947 any.pm:1012
 #, c-format
 msgid "Please choose a language to use."
 msgstr "请选择要使用的语言。"
 
-#: any.pm:944 any.pm:1010
-#, c-format
-msgid "Language choice"
-msgstr "语言选择"
-
-#: any.pm:973
+#: any.pm:976
 #, c-format
 msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
@@ -542,72 +542,77 @@ msgstr ""
 "Mandriva Linux 可以支持多种语言。请选择您想要安装的语言。\n"
 "安装完成并重新启动系统后它们就可以使用。"
 
-#: any.pm:976
+#: any.pm:979
 #, c-format
 msgid "Multi languages"
 msgstr "多语言"
 
-#: any.pm:987 any.pm:1018
+#: any.pm:990 any.pm:1021
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr "使用旧的编码方式(非 UTF-8)"
 
-#: any.pm:989
+#: any.pm:992
 #, c-format
 msgid "All languages"
 msgstr "全部语言"
 
-#: any.pm:1065
+#: any.pm:1013
+#, c-format
+msgid "Language choice"
+msgstr "语言选择"
+
+#: any.pm:1068
 #, c-format
 msgid "Country / Region"
 msgstr "国家/地区"
 
-#: any.pm:1066
+#: any.pm:1069
 #, c-format
 msgid "Please choose your country."
 msgstr "请选择您的国家/地区。"
 
-#: any.pm:1068
+#: any.pm:1071
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "在此列出了可用的全部国家/地区"
 
-#: any.pm:1069
+#: any.pm:1072
 #, c-format
 msgid "Other Countries"
 msgstr "其它国家"
 
-#: any.pm:1069 interactive.pm:481
+#: any.pm:1072 interactive.pm:481
 #, c-format
 msgid "Advanced"
 msgstr "高级"
 
-#: any.pm:1075
+#: any.pm:1078
 #, c-format
 msgid "Input method:"
 msgstr "输入法:"
 
-#: any.pm:1078
+#: any.pm:1081
 #, c-format
 msgid "None"
 msgstr "无"
 
-#: any.pm:1159
+#: any.pm:1162
 #, c-format
 msgid "No sharing"
 msgstr "禁止共享"
 
-#: any.pm:1159
+#: any.pm:1162
 #, c-format
 msgid "Allow all users"
 msgstr "允许所有用户使用"
 
-#: any.pm:1159
+#: any.pm:1162
 #, c-format
 msgid "Custom"
 msgstr "自定义"
 
-#: any.pm:1163
+#: any.pm:1166
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -620,32 +625,32 @@ msgstr ""
 "选择允许, 用户将只需在 Konqueror 和 Nautilus 中单击“共享”即可开放共享。\n"
 "“自定义”允许按照不同用户细分设置。\n"
 
-#: any.pm:1175
+#: any.pm:1178
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
 "Windows."
 msgstr "NFS: 传统的 Unix 文件共享系统, Mac 和 Windows 上支持较少。"
 
-#: any.pm:1178
+#: any.pm:1181
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
 "systems."
 msgstr "SMB: Windows、MacOS X 和其它现代 Linux 系统所用的文件共享系统。"
 
-#: any.pm:1186
+#: any.pm:1189
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "您可以使用 NFS 或 Samba 导出。请选择您想要使用的协议。"
 
-#: any.pm:1214
+#: any.pm:1217
 #, c-format
 msgid "Launch userdrake"
 msgstr "运行“Drak 用户管理”"
 
-#: any.pm:1216
+#: any.pm:1219
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -654,52 +659,52 @@ msgstr ""
 "按用户设置的共享, 使用组“fileshare”。\n"
 "您可以使用“Drak 用户管理”将用户添加到此组中。"
 
-#: any.pm:1308
+#: any.pm:1311
 #, c-format
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr "请注销, 然后同时按 Ctrl-Alt-BackSpace"
 
-#: any.pm:1312
+#: any.pm:1315
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr "您需要注销后重新登录才能让更改生效"
 
-#: any.pm:1347
+#: any.pm:1350
 #, c-format
 msgid "Timezone"
 msgstr "时区"
 
-#: any.pm:1347
+#: any.pm:1350
 #, c-format
 msgid "Which is your timezone?"
 msgstr "您所在的时区?"
 
-#: any.pm:1370 any.pm:1372
+#: any.pm:1373 any.pm:1375
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "日期、时钟和时区设置"
 
-#: any.pm:1373
+#: any.pm:1376
 #, c-format
 msgid "What is the best time?"
 msgstr "最适合的时间是几点?"
 
-#: any.pm:1377
+#: any.pm:1380
 #, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "%s (硬件时钟设定为 GMT)"
 
-#: any.pm:1378
+#: any.pm:1381
 #, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "%s (硬件时钟设定为本地时间)"
 
-#: any.pm:1380
+#: any.pm:1383
 #, c-format
 msgid "NTP Server"
 msgstr "NTP 服务器"
 
-#: any.pm:1381
+#: any.pm:1384
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "自动时间同步(使用 NTP)"
@@ -1176,13 +1181,13 @@ msgstr "挂载点"
 msgid "Options"
 msgstr "选项"
 
-#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:164 diskdrake/removable.pm:26
+#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:167 diskdrake/removable.pm:26
 #: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
 #, c-format
 msgid "Done"
 msgstr "完成"
 
-#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:113 diskdrake/hd_gtk.pm:263
+#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:113 diskdrake/hd_gtk.pm:265
 #: diskdrake/interactive.pm:233 diskdrake/interactive.pm:246
 #: diskdrake/interactive.pm:480 diskdrake/interactive.pm:485
 #: diskdrake/interactive.pm:603 diskdrake/interactive.pm:861
@@ -1232,6 +1237,11 @@ msgstr "选项: %s"
 msgid "Partitioning"
 msgstr "分区"
 
+#: diskdrake/hd_gtk.pm:66
+#, c-format
+msgid "Click on a partition, choose a filesystem type then choose an action"
+msgstr ""
+
 #: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1010
 #: diskdrake/interactive.pm:1020 diskdrake/interactive.pm:1073
 #, c-format
@@ -1263,18 +1273,13 @@ msgstr ""
 "如果您计划采用 aboot, 请注意在磁盘的开头位置留下一段自由空间\n"
 "(2048 扇区就足够了)"
 
-#: diskdrake/hd_gtk.pm:160 interactive.pm:644 interactive/gtk.pm:744
-#: interactive/gtk.pm:759 interactive/gtk.pm:779 ugtk2.pm:938 ugtk2.pm:939
+#: diskdrake/hd_gtk.pm:163 interactive.pm:644 interactive/gtk.pm:752
+#: interactive/gtk.pm:767 interactive/gtk.pm:787 ugtk2.pm:942 ugtk2.pm:943
 #, c-format
 msgid "Help"
 msgstr "帮助"
 
-#: diskdrake/hd_gtk.pm:195
-#, c-format
-msgid "Choose action"
-msgstr "选择操作"
-
-#: diskdrake/hd_gtk.pm:199
+#: diskdrake/hd_gtk.pm:201
 #, c-format
 msgid ""
 "You have one big Microsoft Windows partition.\n"
@@ -1285,72 +1290,72 @@ msgstr ""
 "我建议您先重新设置这个分区的大小\n"
 "(点中它, 然后按“改变大小”)"
 
-#: diskdrake/hd_gtk.pm:201
+#: diskdrake/hd_gtk.pm:203
 #, c-format
 msgid "Please click on a partition"
 msgstr "请单击一个分区"
 
-#: diskdrake/hd_gtk.pm:215 diskdrake/smbnfs_gtk.pm:63
+#: diskdrake/hd_gtk.pm:217 diskdrake/smbnfs_gtk.pm:63
 #, c-format
 msgid "Details"
 msgstr "细节"
 
-#: diskdrake/hd_gtk.pm:263
+#: diskdrake/hd_gtk.pm:265
 #, c-format
 msgid "No hard drives found"
 msgstr "没有发现硬盘"
 
-#: diskdrake/hd_gtk.pm:290
+#: diskdrake/hd_gtk.pm:292
 #, c-format
 msgid "Unknown"
 msgstr "未知"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "Ext3"
 msgstr "Ext3"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "XFS"
 msgstr "XFS"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "Swap"
 msgstr "交换"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "SunOS"
 msgstr "SunOS"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "HFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:353 services.pm:158
+#: diskdrake/hd_gtk.pm:355 services.pm:158
 #, c-format
 msgid "Other"
 msgstr "其它"
 
-#: diskdrake/hd_gtk.pm:353 diskdrake/interactive.pm:1195
+#: diskdrake/hd_gtk.pm:355 diskdrake/interactive.pm:1195
 #, c-format
 msgid "Empty"
 msgstr "空"
 
-#: diskdrake/hd_gtk.pm:357
+#: diskdrake/hd_gtk.pm:362
 #, c-format
 msgid "Filesystem types:"
 msgstr "文件系统类型: "
 
-#: diskdrake/hd_gtk.pm:381 diskdrake/interactive.pm:289
+#: diskdrake/hd_gtk.pm:383 diskdrake/interactive.pm:289
 #: diskdrake/interactive.pm:361 diskdrake/interactive.pm:510
 #: diskdrake/interactive.pm:694 diskdrake/interactive.pm:752
 #: diskdrake/interactive.pm:841 diskdrake/interactive.pm:883
@@ -1361,22 +1366,22 @@ msgstr "文件系统类型: "
 msgid "Warning"
 msgstr "警告"
 
-#: diskdrake/hd_gtk.pm:381
+#: diskdrake/hd_gtk.pm:383
 #, c-format
 msgid "This partition is already empty"
 msgstr "此分区已经为空"
 
-#: diskdrake/hd_gtk.pm:390
+#: diskdrake/hd_gtk.pm:392
 #, c-format
 msgid "Use ``Unmount'' first"
 msgstr "请先“Unmount”"
 
-#: diskdrake/hd_gtk.pm:390
+#: diskdrake/hd_gtk.pm:392
 #, c-format
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "用“%s”代替(在专家模式中)"
 
-#: diskdrake/hd_gtk.pm:390 diskdrake/interactive.pm:374
+#: diskdrake/hd_gtk.pm:392 diskdrake/interactive.pm:374
 #: diskdrake/interactive.pm:548 diskdrake/interactive.pm:1026
 #: diskdrake/removable.pm:25 diskdrake/removable.pm:48
 #, c-format
@@ -2089,8 +2094,8 @@ msgstr "更改类型"
 
 #: diskdrake/smbnfs_gtk.pm:81 interactive.pm:126 interactive.pm:543
 #: interactive/curses.pm:260 interactive/http.pm:104 interactive/http.pm:160
-#: interactive/stdio.pm:39 interactive/stdio.pm:148 ugtk2.pm:409 ugtk2.pm:511
-#: ugtk2.pm:520 ugtk2.pm:803
+#: interactive/stdio.pm:39 interactive/stdio.pm:148 ugtk2.pm:411 ugtk2.pm:513
+#: ugtk2.pm:522 ugtk2.pm:807
 #, c-format
 msgid "Cancel"
 msgstr "取消"
@@ -2161,12 +2166,12 @@ msgstr "无法找到必需的软件包 %s"
 msgid "The following packages need to be installed:\n"
 msgstr "下列软件包需要安装: \n"
 
-#: do_pkgs.pm:220
+#: do_pkgs.pm:221
 #, c-format
 msgid "Installing packages..."
 msgstr "正在安装软件包..."
 
-#: do_pkgs.pm:262
+#: do_pkgs.pm:267
 #, c-format
 msgid "Removing packages..."
 msgstr "正在删除软件包..."
@@ -2520,7 +2525,7 @@ msgstr ""
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: fs/partitioning_wizard.pm:165 interactive.pm:542 interactive/curses.pm:263
-#: ugtk2.pm:513
+#: ugtk2.pm:515
 #, c-format
 msgid "Next"
 msgstr "下一步"
@@ -3236,18 +3241,18 @@ msgstr "调谐器类型: "
 
 #: interactive.pm:125 interactive.pm:542 interactive/curses.pm:263
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
-#: interactive/stdio.pm:148 interactive/stdio.pm:149 ugtk2.pm:415 ugtk2.pm:513
-#: ugtk2.pm:803 ugtk2.pm:826
+#: interactive/stdio.pm:148 interactive/stdio.pm:149 ugtk2.pm:417 ugtk2.pm:515
+#: ugtk2.pm:807 ugtk2.pm:830
 #, c-format
 msgid "Ok"
 msgstr "确定"
 
-#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:802 wizards.pm:156
+#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:806 wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "是"
 
-#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:802 wizards.pm:156
+#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:806 wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "否"
@@ -3257,32 +3262,32 @@ msgstr "否"
 msgid "Choose a file"
 msgstr "选择文件"
 
-#: interactive.pm:383 interactive/gtk.pm:420
+#: interactive.pm:383 interactive/gtk.pm:428
 #, c-format
 msgid "Add"
 msgstr "添加"
 
-#: interactive.pm:383 interactive/gtk.pm:420
+#: interactive.pm:383 interactive/gtk.pm:428
 #, c-format
 msgid "Modify"
 msgstr "修改"
 
-#: interactive.pm:383 interactive/gtk.pm:420
+#: interactive.pm:383 interactive/gtk.pm:428
 #, c-format
 msgid "Remove"
 msgstr "删除"
 
-#: interactive.pm:542 interactive/curses.pm:263 ugtk2.pm:513
+#: interactive.pm:542 interactive/curses.pm:263 ugtk2.pm:515
 #, c-format
 msgid "Finish"
 msgstr "完成"
 
-#: interactive.pm:543 interactive/curses.pm:260 ugtk2.pm:511
+#: interactive.pm:543 interactive/curses.pm:260 ugtk2.pm:513
 #, c-format
 msgid "Previous"
 msgstr "上一步"
 
-#: interactive/gtk.pm:548
+#: interactive/gtk.pm:556
 #, c-format
 msgid "Beware, Caps Lock is enabled"
 msgstr "注意，Caps Lock 已开启"
@@ -6247,7 +6252,7 @@ msgid ""
 "about this service, sorry."
 msgstr "没有该服务的附加信息。"
 
-#: services.pm:221 ugtk2.pm:913
+#: services.pm:221 ugtk2.pm:917
 #, c-format
 msgid "Info"
 msgstr "信息"
@@ -6571,47 +6576,47 @@ msgstr "俄联邦"
 msgid "Yugoslavia"
 msgstr "南斯拉夫"
 
-#: ugtk2.pm:803
+#: ugtk2.pm:807
 #, c-format
 msgid "Is this correct?"
 msgstr "这样正确吗?"
 
-#: ugtk2.pm:863
+#: ugtk2.pm:867
 #, c-format
 msgid "No file chosen"
 msgstr "未选择文件"
 
-#: ugtk2.pm:865
+#: ugtk2.pm:869
 #, c-format
 msgid "You have chosen a file, not a directory"
 msgstr "您选择了文件，而非目录"
 
-#: ugtk2.pm:867
+#: ugtk2.pm:871
 #, c-format
 msgid "You have chosen a directory, not a file"
 msgstr "您选择了目录，而非文件"
 
-#: ugtk2.pm:869
+#: ugtk2.pm:873
 #, c-format
 msgid "No such directory"
 msgstr "无此目录"
 
-#: ugtk2.pm:869
+#: ugtk2.pm:873
 #, c-format
 msgid "No such file"
 msgstr "非本地文件"
 
-#: ugtk2.pm:948
+#: ugtk2.pm:952
 #, c-format
 msgid "Expand Tree"
 msgstr "展开树"
 
-#: ugtk2.pm:949
+#: ugtk2.pm:953
 #, c-format
 msgid "Collapse Tree"
 msgstr "折叠树"
 
-#: ugtk2.pm:950
+#: ugtk2.pm:954
 #, c-format
 msgid "Toggle between flat and group sorted"
 msgstr "切换清单显示/分组排序"
@@ -6629,6 +6634,9 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "安装失败"
+
+#~ msgid "Choose action"
+#~ msgstr "选择操作"
 
 #~ msgid "Active Directory with SFU"
 #~ msgstr "带 SFU 的活动目录"

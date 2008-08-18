@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-mk\n"
-"POT-Creation-Date: 2008-08-12 17:53+0200\n"
+"POT-Creation-Date: 2008-08-18 18:01+0200\n"
 "PO-Revision-Date: 2004-11-03 18:47+0100\n"
 "Last-Translator: Зоран Димовски <decata@mt.net.mk>\n"
 "Language-Team: Macedonian <mkde-l10n@lists.sourceforge.net>\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: any.pm:245 diskdrake/interactive.pm:554 diskdrake/interactive.pm:741
 #: diskdrake/interactive.pm:785 diskdrake/interactive.pm:843
-#: diskdrake/interactive.pm:1133 do_pkgs.pm:220 do_pkgs.pm:262
+#: diskdrake/interactive.pm:1133 do_pkgs.pm:221 do_pkgs.pm:267
 #: harddrake/sound.pm:285 interactive.pm:580
 #, c-format
 msgid "Please wait"
@@ -505,7 +505,7 @@ msgstr "Изберете во која работна околина да се �
 msgid "Release Notes"
 msgstr "Серија:"
 
-#: any.pm:878 any.pm:1214 interactive/gtk.pm:766
+#: any.pm:878 any.pm:1217 interactive/gtk.pm:774
 #, c-format
 msgid "Close"
 msgstr "Затвори"
@@ -520,27 +520,27 @@ msgstr "Лиценцен договор"
 msgid "Quit"
 msgstr "Излез"
 
-#: any.pm:923
+#: any.pm:925
+#, fuzzy, c-format
+msgid "Do you accept this license ?"
+msgstr "Дали имате уште?"
+
+#: any.pm:926
 #, c-format
 msgid "Accept"
 msgstr "Прифати"
 
-#: any.pm:923
+#: any.pm:926
 #, c-format
 msgid "Refuse"
 msgstr "Одбиј"
 
-#: any.pm:943 any.pm:1009
+#: any.pm:947 any.pm:1012
 #, c-format
 msgid "Please choose a language to use."
 msgstr "Ве молиме изберете јазик кој ќе се користи."
 
-#: any.pm:944 any.pm:1010
-#, c-format
-msgid "Language choice"
-msgstr "Избор на јазик"
-
-#: any.pm:973
+#: any.pm:976
 #, c-format
 msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
@@ -552,72 +552,77 @@ msgstr ""
 "достапни кога инсталацијата ќе заврши и кога ќе го\n"
 "рестартирате системот."
 
-#: any.pm:976
+#: any.pm:979
 #, c-format
 msgid "Multi languages"
 msgstr ""
 
-#: any.pm:987 any.pm:1018
+#: any.pm:990 any.pm:1021
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr ""
 
-#: any.pm:989
+#: any.pm:992
 #, c-format
 msgid "All languages"
 msgstr "Сите јазици"
 
-#: any.pm:1065
+#: any.pm:1013
+#, c-format
+msgid "Language choice"
+msgstr "Избор на јазик"
+
+#: any.pm:1068
 #, c-format
 msgid "Country / Region"
 msgstr "Држава / Регион"
 
-#: any.pm:1066
+#: any.pm:1069
 #, c-format
 msgid "Please choose your country."
 msgstr "Ве молам изберете ја вашата држава."
 
-#: any.pm:1068
+#: any.pm:1071
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Ова е целосна листа на достапни држави"
 
-#: any.pm:1069
+#: any.pm:1072
 #, c-format
 msgid "Other Countries"
 msgstr "Други држави"
 
-#: any.pm:1069 interactive.pm:481
+#: any.pm:1072 interactive.pm:481
 #, c-format
 msgid "Advanced"
 msgstr "Напредно"
 
-#: any.pm:1075
+#: any.pm:1078
 #, c-format
 msgid "Input method:"
 msgstr "Влезен метод:"
 
-#: any.pm:1078
+#: any.pm:1081
 #, c-format
 msgid "None"
 msgstr "Ниедно"
 
-#: any.pm:1159
+#: any.pm:1162
 #, c-format
 msgid "No sharing"
 msgstr "Без споделување (sharing)"
 
-#: any.pm:1159
+#: any.pm:1162
 #, c-format
 msgid "Allow all users"
 msgstr "Дозволи на сите корисници"
 
-#: any.pm:1159
+#: any.pm:1162
 #, c-format
 msgid "Custom"
 msgstr "По избор"
 
-#: any.pm:1163
+#: any.pm:1166
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -633,7 +638,7 @@ msgstr ""
 "\n"
 "\"По избор\" поодделни ѓи третира корисниците.\n"
 
-#: any.pm:1175
+#: any.pm:1178
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
@@ -642,7 +647,7 @@ msgstr ""
 "NFS: традиционалниот датотечен систем за споделување на Unix, со мала "
 "подршка на Mac и Windows."
 
-#: any.pm:1178
+#: any.pm:1181
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
@@ -651,19 +656,19 @@ msgstr ""
 "SMB: датотечен систем користен од Windows, Mac OS X и многу модерни Linux "
 "системи."
 
-#: any.pm:1186
+#: any.pm:1189
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
 msgstr ""
 "Можете да експортирате со NFS или со SMB. Изберете што сакате да користите."
 
-#: any.pm:1214
+#: any.pm:1217
 #, c-format
 msgid "Launch userdrake"
 msgstr "Вклучи userdrake"
 
-#: any.pm:1216
+#: any.pm:1219
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -672,52 +677,52 @@ msgstr ""
 "Споделување по корисник ја користи групата \"fileshare\". \n"
 "Можете да го користите userdrake за да додадете корисник во оваа група."
 
-#: any.pm:1308
+#: any.pm:1311
 #, c-format
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr "Одлогирајте се и тогаш натиснете Ctrl-Alt-BackSpace"
 
-#: any.pm:1312
+#: any.pm:1315
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr ""
 
-#: any.pm:1347
+#: any.pm:1350
 #, c-format
 msgid "Timezone"
 msgstr "Часовна зона"
 
-#: any.pm:1347
+#: any.pm:1350
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Кој е Вашата временска зона?"
 
-#: any.pm:1370 any.pm:1372
+#: any.pm:1373 any.pm:1375
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr ""
 
-#: any.pm:1373
+#: any.pm:1376
 #, c-format
 msgid "What is the best time?"
 msgstr ""
 
-#: any.pm:1377
+#: any.pm:1380
 #, fuzzy, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "Хардверски часовник наместен според GMT"
 
-#: any.pm:1378
+#: any.pm:1381
 #, fuzzy, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "Хардверски часовник наместен според GMT"
 
-#: any.pm:1380
+#: any.pm:1383
 #, c-format
 msgid "NTP Server"
 msgstr "NTP сервер"
 
-#: any.pm:1381
+#: any.pm:1384
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Автоматска синхронизација на време (преку NTP)"
@@ -1192,13 +1197,13 @@ msgstr "Точка на монтирање"
 msgid "Options"
 msgstr "Опции"
 
-#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:164 diskdrake/removable.pm:26
+#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:167 diskdrake/removable.pm:26
 #: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
 #, c-format
 msgid "Done"
 msgstr "Завршено"
 
-#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:113 diskdrake/hd_gtk.pm:263
+#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:113 diskdrake/hd_gtk.pm:265
 #: diskdrake/interactive.pm:233 diskdrake/interactive.pm:246
 #: diskdrake/interactive.pm:480 diskdrake/interactive.pm:485
 #: diskdrake/interactive.pm:603 diskdrake/interactive.pm:861
@@ -1248,6 +1253,11 @@ msgstr "Опции: %s"
 msgid "Partitioning"
 msgstr "Партиционирање"
 
+#: diskdrake/hd_gtk.pm:66
+#, c-format
+msgid "Click on a partition, choose a filesystem type then choose an action"
+msgstr ""
+
 #: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1010
 #: diskdrake/interactive.pm:1020 diskdrake/interactive.pm:1073
 #, c-format
@@ -1279,18 +1289,13 @@ msgstr ""
 "Ако планирате да го користите aboot, внимавајте да оставите празен простор\n"
 "(2048 сектори се доволно) на почетокот на дискот"
 
-#: diskdrake/hd_gtk.pm:160 interactive.pm:644 interactive/gtk.pm:744
-#: interactive/gtk.pm:759 interactive/gtk.pm:779 ugtk2.pm:938 ugtk2.pm:939
+#: diskdrake/hd_gtk.pm:163 interactive.pm:644 interactive/gtk.pm:752
+#: interactive/gtk.pm:767 interactive/gtk.pm:787 ugtk2.pm:942 ugtk2.pm:943
 #, c-format
 msgid "Help"
 msgstr "Помош"
 
-#: diskdrake/hd_gtk.pm:195
-#, c-format
-msgid "Choose action"
-msgstr "Изберете акција"
-
-#: diskdrake/hd_gtk.pm:199
+#: diskdrake/hd_gtk.pm:201
 #, c-format
 msgid ""
 "You have one big Microsoft Windows partition.\n"
@@ -1301,72 +1306,72 @@ msgstr ""
 "Предлагам прво да ја промените големината на таа партиција\n"
 "(кликнете на неа, а потоа на \"Промени Големина\")"
 
-#: diskdrake/hd_gtk.pm:201
+#: diskdrake/hd_gtk.pm:203
 #, c-format
 msgid "Please click on a partition"
 msgstr "Кликнете на партиција"
 
-#: diskdrake/hd_gtk.pm:215 diskdrake/smbnfs_gtk.pm:63
+#: diskdrake/hd_gtk.pm:217 diskdrake/smbnfs_gtk.pm:63
 #, c-format
 msgid "Details"
 msgstr "Детали"
 
-#: diskdrake/hd_gtk.pm:263
+#: diskdrake/hd_gtk.pm:265
 #, c-format
 msgid "No hard drives found"
 msgstr "Не се најдени тврди дискови"
 
-#: diskdrake/hd_gtk.pm:290
+#: diskdrake/hd_gtk.pm:292
 #, c-format
 msgid "Unknown"
 msgstr "Непознат"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, fuzzy, c-format
 msgid "Ext3"
 msgstr "Излез"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, fuzzy, c-format
 msgid "XFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "Swap"
 msgstr "Swap"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "SunOS"
 msgstr "SunOS"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "HFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:353 services.pm:158
+#: diskdrake/hd_gtk.pm:355 services.pm:158
 #, c-format
 msgid "Other"
 msgstr "Друго"
 
-#: diskdrake/hd_gtk.pm:353 diskdrake/interactive.pm:1195
+#: diskdrake/hd_gtk.pm:355 diskdrake/interactive.pm:1195
 #, c-format
 msgid "Empty"
 msgstr "Празно"
 
-#: diskdrake/hd_gtk.pm:357
+#: diskdrake/hd_gtk.pm:362
 #, c-format
 msgid "Filesystem types:"
 msgstr "Типови фајлсистеми:"
 
-#: diskdrake/hd_gtk.pm:381 diskdrake/interactive.pm:289
+#: diskdrake/hd_gtk.pm:383 diskdrake/interactive.pm:289
 #: diskdrake/interactive.pm:361 diskdrake/interactive.pm:510
 #: diskdrake/interactive.pm:694 diskdrake/interactive.pm:752
 #: diskdrake/interactive.pm:841 diskdrake/interactive.pm:883
@@ -1377,22 +1382,22 @@ msgstr "Типови фајлсистеми:"
 msgid "Warning"
 msgstr "Внимание"
 
-#: diskdrake/hd_gtk.pm:381
+#: diskdrake/hd_gtk.pm:383
 #, fuzzy, c-format
 msgid "This partition is already empty"
 msgstr "На оваа партиција не може да и се промени големината"
 
-#: diskdrake/hd_gtk.pm:390
+#: diskdrake/hd_gtk.pm:392
 #, c-format
 msgid "Use ``Unmount'' first"
 msgstr "Прво користи \"Одмонтирај\""
 
-#: diskdrake/hd_gtk.pm:390
+#: diskdrake/hd_gtk.pm:392
 #, fuzzy, c-format
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Користи ``%s'' наместо тоа"
 
-#: diskdrake/hd_gtk.pm:390 diskdrake/interactive.pm:374
+#: diskdrake/hd_gtk.pm:392 diskdrake/interactive.pm:374
 #: diskdrake/interactive.pm:548 diskdrake/interactive.pm:1026
 #: diskdrake/removable.pm:25 diskdrake/removable.pm:48
 #, c-format
@@ -2110,8 +2115,8 @@ msgstr "Промена на тип"
 
 #: diskdrake/smbnfs_gtk.pm:81 interactive.pm:126 interactive.pm:543
 #: interactive/curses.pm:260 interactive/http.pm:104 interactive/http.pm:160
-#: interactive/stdio.pm:39 interactive/stdio.pm:148 ugtk2.pm:409 ugtk2.pm:511
-#: ugtk2.pm:520 ugtk2.pm:803
+#: interactive/stdio.pm:39 interactive/stdio.pm:148 ugtk2.pm:411 ugtk2.pm:513
+#: ugtk2.pm:522 ugtk2.pm:807
 #, c-format
 msgid "Cancel"
 msgstr "Откажи"
@@ -2182,12 +2187,12 @@ msgstr "Неопходниот пакет %s недостига"
 msgid "The following packages need to be installed:\n"
 msgstr "Следниве пакети мора да се инсталирани:\n"
 
-#: do_pkgs.pm:220
+#: do_pkgs.pm:221
 #, c-format
 msgid "Installing packages..."
 msgstr "Инсталирање на пакетите..."
 
-#: do_pkgs.pm:262
+#: do_pkgs.pm:267
 #, c-format
 msgid "Removing packages..."
 msgstr "Отстранување на пакетите..."
@@ -2558,7 +2563,7 @@ msgstr ""
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: fs/partitioning_wizard.pm:165 interactive.pm:542 interactive/curses.pm:263
-#: ugtk2.pm:513
+#: ugtk2.pm:515
 #, c-format
 msgid "Next"
 msgstr "Следно"
@@ -3296,18 +3301,18 @@ msgstr "Тип на тјунер:"
 
 #: interactive.pm:125 interactive.pm:542 interactive/curses.pm:263
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
-#: interactive/stdio.pm:148 interactive/stdio.pm:149 ugtk2.pm:415 ugtk2.pm:513
-#: ugtk2.pm:803 ugtk2.pm:826
+#: interactive/stdio.pm:148 interactive/stdio.pm:149 ugtk2.pm:417 ugtk2.pm:515
+#: ugtk2.pm:807 ugtk2.pm:830
 #, c-format
 msgid "Ok"
 msgstr "Во ред"
 
-#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:802 wizards.pm:156
+#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:806 wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "Да"
 
-#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:802 wizards.pm:156
+#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:806 wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "Не"
@@ -3317,32 +3322,32 @@ msgstr "Не"
 msgid "Choose a file"
 msgstr "Изберете датотека"
 
-#: interactive.pm:383 interactive/gtk.pm:420
+#: interactive.pm:383 interactive/gtk.pm:428
 #, c-format
 msgid "Add"
 msgstr "Додај"
 
-#: interactive.pm:383 interactive/gtk.pm:420
+#: interactive.pm:383 interactive/gtk.pm:428
 #, c-format
 msgid "Modify"
 msgstr "Промени"
 
-#: interactive.pm:383 interactive/gtk.pm:420
+#: interactive.pm:383 interactive/gtk.pm:428
 #, c-format
 msgid "Remove"
 msgstr "Отстрани"
 
-#: interactive.pm:542 interactive/curses.pm:263 ugtk2.pm:513
+#: interactive.pm:542 interactive/curses.pm:263 ugtk2.pm:515
 #, c-format
 msgid "Finish"
 msgstr "Заврши"
 
-#: interactive.pm:543 interactive/curses.pm:260 ugtk2.pm:511
+#: interactive.pm:543 interactive/curses.pm:260 ugtk2.pm:513
 #, c-format
 msgid "Previous"
 msgstr "Претходно"
 
-#: interactive/gtk.pm:548
+#: interactive/gtk.pm:556
 #, c-format
 msgid "Beware, Caps Lock is enabled"
 msgstr ""
@@ -6411,7 +6416,7 @@ msgstr ""
 "Нема дополнителни информации\n"
 "за овој сервис. Жалиме!"
 
-#: services.pm:221 ugtk2.pm:913
+#: services.pm:221 ugtk2.pm:917
 #, c-format
 msgid "Info"
 msgstr "Информации"
@@ -6715,47 +6720,47 @@ msgstr "Руска Федерација"
 msgid "Yugoslavia"
 msgstr "Југославија"
 
-#: ugtk2.pm:803
+#: ugtk2.pm:807
 #, c-format
 msgid "Is this correct?"
 msgstr "Дали е ова точно?"
 
-#: ugtk2.pm:863
+#: ugtk2.pm:867
 #, fuzzy, c-format
 msgid "No file chosen"
 msgstr "одбирач на датотеки"
 
-#: ugtk2.pm:865
+#: ugtk2.pm:869
 #, fuzzy, c-format
 msgid "You have chosen a file, not a directory"
 msgstr "Мора да изберете датотека , не именик.\n"
 
-#: ugtk2.pm:867
+#: ugtk2.pm:871
 #, fuzzy, c-format
 msgid "You have chosen a directory, not a file"
 msgstr "'/' името може да биде само директориум, не клуч"
 
-#: ugtk2.pm:869
+#: ugtk2.pm:873
 #, fuzzy, c-format
 msgid "No such directory"
 msgstr "Не е папка"
 
-#: ugtk2.pm:869
+#: ugtk2.pm:873
 #, fuzzy, c-format
 msgid "No such file"
 msgstr "Не пости таков директориум"
 
-#: ugtk2.pm:948
+#: ugtk2.pm:952
 #, c-format
 msgid "Expand Tree"
 msgstr "Рашири го дрвото"
 
-#: ugtk2.pm:949
+#: ugtk2.pm:953
 #, c-format
 msgid "Collapse Tree"
 msgstr "Собери го дрвото"
 
-#: ugtk2.pm:950
+#: ugtk2.pm:954
 #, c-format
 msgid "Toggle between flat and group sorted"
 msgstr "Избор меѓу линеарно и сортирано по група"
@@ -6773,6 +6778,9 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Неуспешна инсталација"
+
+#~ msgid "Choose action"
+#~ msgstr "Изберете акција"
 
 #~ msgid "Active Directory with SFU"
 #~ msgstr "Active Directory со SFU"

@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
-"POT-Creation-Date: 2008-08-12 17:53+0200\n"
+"POT-Creation-Date: 2008-08-18 18:01+0200\n"
 "PO-Revision-Date: 2006-09-13 19:15+0200\n"
 "Last-Translator: Vedran Ljubovic <vljubovic@smartnet.ba>\n"
 "Language-Team: Bosnian <lokal@linux.org.ba>\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: any.pm:245 diskdrake/interactive.pm:554 diskdrake/interactive.pm:741
 #: diskdrake/interactive.pm:785 diskdrake/interactive.pm:843
-#: diskdrake/interactive.pm:1133 do_pkgs.pm:220 do_pkgs.pm:262
+#: diskdrake/interactive.pm:1133 do_pkgs.pm:221 do_pkgs.pm:267
 #: harddrake/sound.pm:285 interactive.pm:580
 #, c-format
 msgid "Please wait"
@@ -506,7 +506,7 @@ msgstr "Izaberite window manager koji će se pokretati:"
 msgid "Release Notes"
 msgstr "Napomene izdanja"
 
-#: any.pm:878 any.pm:1214 interactive/gtk.pm:766
+#: any.pm:878 any.pm:1217 interactive/gtk.pm:774
 #, c-format
 msgid "Close"
 msgstr "Zatvori"
@@ -521,27 +521,27 @@ msgstr "Licencni ugovor"
 msgid "Quit"
 msgstr "Izlaz"
 
-#: any.pm:923
+#: any.pm:925
+#, fuzzy, c-format
+msgid "Do you accept this license ?"
+msgstr "Imate li neki drugi?"
+
+#: any.pm:926
 #, c-format
 msgid "Accept"
 msgstr "Prihvatam"
 
-#: any.pm:923
+#: any.pm:926
 #, c-format
 msgid "Refuse"
 msgstr "Ne prihvatam"
 
-#: any.pm:943 any.pm:1009
+#: any.pm:947 any.pm:1012
 #, c-format
 msgid "Please choose a language to use."
 msgstr "Molim izaberite jezik koji ćete koristiti."
 
-#: any.pm:944 any.pm:1010
-#, c-format
-msgid "Language choice"
-msgstr "Izbor jezika"
-
-#: any.pm:973
+#: any.pm:976
 #, c-format
 msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
@@ -552,72 +552,77 @@ msgstr ""
 "želite instalirati. Oni će biti dostupni kada se završi vaša\n"
 "instalacija i restartujete vaš sistem."
 
-#: any.pm:976
+#: any.pm:979
 #, c-format
 msgid "Multi languages"
 msgstr "Višejezična podrška"
 
-#: any.pm:987 any.pm:1018
+#: any.pm:990 any.pm:1021
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr "Kompatibilnost sa starim (ne-UTF8) kodiranjem"
 
-#: any.pm:989
+#: any.pm:992
 #, c-format
 msgid "All languages"
 msgstr "Svi jezici"
 
-#: any.pm:1065
+#: any.pm:1013
+#, c-format
+msgid "Language choice"
+msgstr "Izbor jezika"
+
+#: any.pm:1068
 #, c-format
 msgid "Country / Region"
 msgstr "Država / Oblast"
 
-#: any.pm:1066
+#: any.pm:1069
 #, c-format
 msgid "Please choose your country."
 msgstr "Molim izaberite vašu državu."
 
-#: any.pm:1068
+#: any.pm:1071
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Ovdje je puna lista svih dostupnih država"
 
-#: any.pm:1069
+#: any.pm:1072
 #, c-format
 msgid "Other Countries"
 msgstr "Ostale države"
 
-#: any.pm:1069 interactive.pm:481
+#: any.pm:1072 interactive.pm:481
 #, c-format
 msgid "Advanced"
 msgstr "Više opcija"
 
-#: any.pm:1075
+#: any.pm:1078
 #, c-format
 msgid "Input method:"
 msgstr "Metod unosa:"
 
-#: any.pm:1078
+#: any.pm:1081
 #, c-format
 msgid "None"
 msgstr "Ništa"
 
-#: any.pm:1159
+#: any.pm:1162
 #, c-format
 msgid "No sharing"
 msgstr "Bez dijeljenja"
 
-#: any.pm:1159
+#: any.pm:1162
 #, c-format
 msgid "Allow all users"
 msgstr "Dozvoli svim korisnicima"
 
-#: any.pm:1159
+#: any.pm:1162
 #, c-format
 msgid "Custom"
 msgstr "Vlastito"
 
-#: any.pm:1163
+#: any.pm:1166
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -635,7 +640,7 @@ msgstr ""
 "\"Izaberi korisnike\" vam omogućuje da podesite ovu opciju zasebno za svakog "
 "korisnika.\n"
 
-#: any.pm:1175
+#: any.pm:1178
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
@@ -644,7 +649,7 @@ msgstr ""
 "NFS: tradicionalni Unix sistem za dijeljenje datoteka, koji ima slabiju "
 "podršku na Macintoshu i Windowsu."
 
-#: any.pm:1178
+#: any.pm:1181
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
@@ -653,7 +658,7 @@ msgstr ""
 "SMB: sistem za dijeljenje datoteka koji koristi Windows, Mac OS X i većina "
 "modernih Linux sistema."
 
-#: any.pm:1186
+#: any.pm:1189
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
@@ -661,12 +666,12 @@ msgstr ""
 "Možete eksportovati koristeći NFS ili Sambu. Molim izaberite sistem koji "
 "želite koristiti."
 
-#: any.pm:1214
+#: any.pm:1217
 #, c-format
 msgid "Launch userdrake"
 msgstr "Pokreni userdrake"
 
-#: any.pm:1216
+#: any.pm:1219
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -675,54 +680,54 @@ msgstr ""
 "Dijeljenje na nivou korisnika koristi grupu \"fileshare\". \n"
 "Možete dodavati korisnike u ovu grupu pomoću userdrake-a."
 
-#: any.pm:1308
+#: any.pm:1311
 #, c-format
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr "Molim izvršite logout i zatim koristitite Ctrl-Alt-BackSpace"
 
-#: any.pm:1312
+#: any.pm:1315
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr ""
 "Trebate se odjaviti i ponovo prijaviti na sistem kako bi izmjene stupile na "
 "snagu"
 
-#: any.pm:1347
+#: any.pm:1350
 #, c-format
 msgid "Timezone"
 msgstr "Vremenska zona"
 
-#: any.pm:1347
+#: any.pm:1350
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Koja je vaša vremenska zona?"
 
-#: any.pm:1370 any.pm:1372
+#: any.pm:1373 any.pm:1375
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Postavke datuma, sata i vremenske zone"
 
-#: any.pm:1373
+#: any.pm:1376
 #, c-format
 msgid "What is the best time?"
 msgstr "Koje je vrijeme tačnije?"
 
-#: any.pm:1377
+#: any.pm:1380
 #, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "%s (hardverski sat podešen na UTC)"
 
-#: any.pm:1378
+#: any.pm:1381
 #, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "%s (hardverski sat podešen na lokalno vrijeme)"
 
-#: any.pm:1380
+#: any.pm:1383
 #, c-format
 msgid "NTP Server"
 msgstr "NTP server"
 
-#: any.pm:1381
+#: any.pm:1384
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Automatska sinhronizacija vremena (koristeći NTP)"
@@ -1211,13 +1216,13 @@ msgstr "Tačka montiranja"
 msgid "Options"
 msgstr "Opcije"
 
-#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:164 diskdrake/removable.pm:26
+#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:167 diskdrake/removable.pm:26
 #: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
 #, c-format
 msgid "Done"
 msgstr "Gotovo"
 
-#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:113 diskdrake/hd_gtk.pm:263
+#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:113 diskdrake/hd_gtk.pm:265
 #: diskdrake/interactive.pm:233 diskdrake/interactive.pm:246
 #: diskdrake/interactive.pm:480 diskdrake/interactive.pm:485
 #: diskdrake/interactive.pm:603 diskdrake/interactive.pm:861
@@ -1267,6 +1272,11 @@ msgstr "Opcije: %s"
 msgid "Partitioning"
 msgstr "Particioniranje"
 
+#: diskdrake/hd_gtk.pm:66
+#, c-format
+msgid "Click on a partition, choose a filesystem type then choose an action"
+msgstr ""
+
 #: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1010
 #: diskdrake/interactive.pm:1020 diskdrake/interactive.pm:1073
 #, c-format
@@ -1299,18 +1309,13 @@ msgstr ""
 "(2048 sektora je dovoljno)\n"
 "na početku diska"
 
-#: diskdrake/hd_gtk.pm:160 interactive.pm:644 interactive/gtk.pm:744
-#: interactive/gtk.pm:759 interactive/gtk.pm:779 ugtk2.pm:938 ugtk2.pm:939
+#: diskdrake/hd_gtk.pm:163 interactive.pm:644 interactive/gtk.pm:752
+#: interactive/gtk.pm:767 interactive/gtk.pm:787 ugtk2.pm:942 ugtk2.pm:943
 #, c-format
 msgid "Help"
 msgstr "Pomoć"
 
-#: diskdrake/hd_gtk.pm:195
-#, c-format
-msgid "Choose action"
-msgstr "Izaberi akciju"
-
-#: diskdrake/hd_gtk.pm:199
+#: diskdrake/hd_gtk.pm:201
 #, c-format
 msgid ""
 "You have one big Microsoft Windows partition.\n"
@@ -1321,72 +1326,72 @@ msgstr ""
 "Predlažem da najprije promijenite veličinu te particije\n"
 "(kliknite na nju, zatim na \"Promijeni veličinu\")"
 
-#: diskdrake/hd_gtk.pm:201
+#: diskdrake/hd_gtk.pm:203
 #, c-format
 msgid "Please click on a partition"
 msgstr "Kliknite na particiju"
 
-#: diskdrake/hd_gtk.pm:215 diskdrake/smbnfs_gtk.pm:63
+#: diskdrake/hd_gtk.pm:217 diskdrake/smbnfs_gtk.pm:63
 #, c-format
 msgid "Details"
 msgstr "Detalji"
 
-#: diskdrake/hd_gtk.pm:263
+#: diskdrake/hd_gtk.pm:265
 #, c-format
 msgid "No hard drives found"
 msgstr "Nije pronađen nijedan hard disk"
 
-#: diskdrake/hd_gtk.pm:290
+#: diskdrake/hd_gtk.pm:292
 #, c-format
 msgid "Unknown"
 msgstr "Nepoznat"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, fuzzy, c-format
 msgid "Ext3"
 msgstr "Izlaz"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, fuzzy, c-format
 msgid "XFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "Swap"
 msgstr "Swap"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "SunOS"
 msgstr "SunOS"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "HFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:352
+#: diskdrake/hd_gtk.pm:354
 #, c-format
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:353 services.pm:158
+#: diskdrake/hd_gtk.pm:355 services.pm:158
 #, c-format
 msgid "Other"
 msgstr "Ostalo"
 
-#: diskdrake/hd_gtk.pm:353 diskdrake/interactive.pm:1195
+#: diskdrake/hd_gtk.pm:355 diskdrake/interactive.pm:1195
 #, c-format
 msgid "Empty"
 msgstr "Prazno"
 
-#: diskdrake/hd_gtk.pm:357
+#: diskdrake/hd_gtk.pm:362
 #, c-format
 msgid "Filesystem types:"
 msgstr "Tipovi file sistema:"
 
-#: diskdrake/hd_gtk.pm:381 diskdrake/interactive.pm:289
+#: diskdrake/hd_gtk.pm:383 diskdrake/interactive.pm:289
 #: diskdrake/interactive.pm:361 diskdrake/interactive.pm:510
 #: diskdrake/interactive.pm:694 diskdrake/interactive.pm:752
 #: diskdrake/interactive.pm:841 diskdrake/interactive.pm:883
@@ -1397,22 +1402,22 @@ msgstr "Tipovi file sistema:"
 msgid "Warning"
 msgstr "Upozorenje"
 
-#: diskdrake/hd_gtk.pm:381
+#: diskdrake/hd_gtk.pm:383
 #, c-format
 msgid "This partition is already empty"
 msgstr "Ova particija je već prazna"
 
-#: diskdrake/hd_gtk.pm:390
+#: diskdrake/hd_gtk.pm:392
 #, c-format
 msgid "Use ``Unmount'' first"
 msgstr "Najprije koristite \"Demontiraj\""
 
-#: diskdrake/hd_gtk.pm:390
+#: diskdrake/hd_gtk.pm:392
 #, fuzzy, c-format
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Koristi \"%s\" umjesto toga"
 
-#: diskdrake/hd_gtk.pm:390 diskdrake/interactive.pm:374
+#: diskdrake/hd_gtk.pm:392 diskdrake/interactive.pm:374
 #: diskdrake/interactive.pm:548 diskdrake/interactive.pm:1026
 #: diskdrake/removable.pm:25 diskdrake/removable.pm:48
 #, c-format
@@ -2142,8 +2147,8 @@ msgstr "Promijeni tip"
 
 #: diskdrake/smbnfs_gtk.pm:81 interactive.pm:126 interactive.pm:543
 #: interactive/curses.pm:260 interactive/http.pm:104 interactive/http.pm:160
-#: interactive/stdio.pm:39 interactive/stdio.pm:148 ugtk2.pm:409 ugtk2.pm:511
-#: ugtk2.pm:520 ugtk2.pm:803
+#: interactive/stdio.pm:39 interactive/stdio.pm:148 ugtk2.pm:411 ugtk2.pm:513
+#: ugtk2.pm:522 ugtk2.pm:807
 #, c-format
 msgid "Cancel"
 msgstr "Odustani"
@@ -2216,12 +2221,12 @@ msgstr "Nedostaje obavezan paket %s"
 msgid "The following packages need to be installed:\n"
 msgstr "Sljedeći paketi trebaju biti instalirani:\n"
 
-#: do_pkgs.pm:220
+#: do_pkgs.pm:221
 #, c-format
 msgid "Installing packages..."
 msgstr "Instaliram pakete..."
 
-#: do_pkgs.pm:262
+#: do_pkgs.pm:267
 #, c-format
 msgid "Removing packages..."
 msgstr "Uklanjam pakete..."
@@ -2587,7 +2592,7 @@ msgstr ""
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: fs/partitioning_wizard.pm:165 interactive.pm:542 interactive/curses.pm:263
-#: ugtk2.pm:513
+#: ugtk2.pm:515
 #, c-format
 msgid "Next"
 msgstr "Dalje"
@@ -3328,18 +3333,18 @@ msgstr "Vrsta tunera:"
 
 #: interactive.pm:125 interactive.pm:542 interactive/curses.pm:263
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
-#: interactive/stdio.pm:148 interactive/stdio.pm:149 ugtk2.pm:415 ugtk2.pm:513
-#: ugtk2.pm:803 ugtk2.pm:826
+#: interactive/stdio.pm:148 interactive/stdio.pm:149 ugtk2.pm:417 ugtk2.pm:515
+#: ugtk2.pm:807 ugtk2.pm:830
 #, c-format
 msgid "Ok"
 msgstr "U redu"
 
-#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:802 wizards.pm:156
+#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:806 wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "Da"
 
-#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:802 wizards.pm:156
+#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:806 wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "Ne"
@@ -3349,32 +3354,32 @@ msgstr "Ne"
 msgid "Choose a file"
 msgstr "Izaberi datoteku"
 
-#: interactive.pm:383 interactive/gtk.pm:420
+#: interactive.pm:383 interactive/gtk.pm:428
 #, c-format
 msgid "Add"
 msgstr "Dodaj"
 
-#: interactive.pm:383 interactive/gtk.pm:420
+#: interactive.pm:383 interactive/gtk.pm:428
 #, c-format
 msgid "Modify"
 msgstr "Izmijeni"
 
-#: interactive.pm:383 interactive/gtk.pm:420
+#: interactive.pm:383 interactive/gtk.pm:428
 #, c-format
 msgid "Remove"
 msgstr "Pobriši"
 
-#: interactive.pm:542 interactive/curses.pm:263 ugtk2.pm:513
+#: interactive.pm:542 interactive/curses.pm:263 ugtk2.pm:515
 #, c-format
 msgid "Finish"
 msgstr "Kraj"
 
-#: interactive.pm:543 interactive/curses.pm:260 ugtk2.pm:511
+#: interactive.pm:543 interactive/curses.pm:260 ugtk2.pm:513
 #, c-format
 msgid "Previous"
 msgstr "Nazad"
 
-#: interactive/gtk.pm:548
+#: interactive/gtk.pm:556
 #, c-format
 msgid "Beware, Caps Lock is enabled"
 msgstr ""
@@ -6488,7 +6493,7 @@ msgstr ""
 "Nema dodatnih informacija\n"
 "o ovom servisu, žalim."
 
-#: services.pm:221 ugtk2.pm:913
+#: services.pm:221 ugtk2.pm:917
 #, c-format
 msgid "Info"
 msgstr "Info"
@@ -6822,47 +6827,47 @@ msgstr "Ruska Federacija"
 msgid "Yugoslavia"
 msgstr "Jugoslavija"
 
-#: ugtk2.pm:803
+#: ugtk2.pm:807
 #, c-format
 msgid "Is this correct?"
 msgstr "Da li je ovo ispravno?"
 
-#: ugtk2.pm:863
+#: ugtk2.pm:867
 #, c-format
 msgid "No file chosen"
 msgstr "Nije izabrana datoteka"
 
-#: ugtk2.pm:865
+#: ugtk2.pm:869
 #, c-format
 msgid "You have chosen a file, not a directory"
 msgstr "Izabrali ste datoteku, a ne direktorij"
 
-#: ugtk2.pm:867
+#: ugtk2.pm:871
 #, c-format
 msgid "You have chosen a directory, not a file"
 msgstr "Izabrali ste direktorij, a ne datoteku"
 
-#: ugtk2.pm:869
+#: ugtk2.pm:873
 #, c-format
 msgid "No such directory"
 msgstr "Nema tog direktorija"
 
-#: ugtk2.pm:869
+#: ugtk2.pm:873
 #, c-format
 msgid "No such file"
 msgstr "Nema te datoteke"
 
-#: ugtk2.pm:948
+#: ugtk2.pm:952
 #, c-format
 msgid "Expand Tree"
 msgstr "Proširi stablo"
 
-#: ugtk2.pm:949
+#: ugtk2.pm:953
 #, c-format
 msgid "Collapse Tree"
 msgstr "Smanji stablo"
 
-#: ugtk2.pm:950
+#: ugtk2.pm:954
 #, c-format
 msgid "Toggle between flat and group sorted"
 msgstr "Ravno / složeno po grupama"
@@ -6880,6 +6885,9 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Instalacija nije uspjela"
+
+#~ msgid "Choose action"
+#~ msgstr "Izaberi akciju"
 
 #~ msgid "Active Directory with SFU"
 #~ msgstr "Active Directory sa SFU"
