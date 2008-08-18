@@ -339,6 +339,7 @@ sub create_box_with_title {
 
 	chomp(my $text = join("\n", @l));
 	my $wtext = gtknew('TextView', text => markup_to_TextView_format($text));
+	$wtext->set_justification('fill');
 	$wtext->set_left_margin(3);
 	$wtext->can_focus($has_scroll);
 	my $width = 400;
