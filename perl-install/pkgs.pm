@@ -132,12 +132,12 @@ sub read_rpmsrate {
 	if ($::isInstall) {
 	$p->set_rate($rates->{$_});
 	$p->set_rflags(member('FALSE', @flags) ? 'FALSE' : @flags);
-	} elsif ($::isStandalone) {
+	} else {
          $flags->{$_} = \@flags;
 	}
     }
     push @{$packages->{needToCopy} ||= []}, @$need_to_copy if ref($packages);
-    return ($rates, $flags) if $::isStandalone;
+    return ($rates, $flags);
 }
 
 
