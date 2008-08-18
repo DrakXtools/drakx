@@ -728,6 +728,7 @@ sub new {
     my $icon = find { _find_imgfile($_) } $::isInstall ? 'empty-banner' : $opts{icon};
     my $banner_title = $opts{banner_title};
     $title = uc($title) if $::isInstall;
+    $o->{transient} ||= $::main_window if $::main_window;
     my $window = gtknew(
 	'MagicWindow',
 	title => $title || '',
@@ -740,6 +741,7 @@ sub new {
 	if_(!$::isInstall, icon_no_error => wm_icon()),
 	if_($o->{transient}, transient_for => $o->{transient}), 
     );
+    push @::main_windows, $::main_window = $window->{real_window};
     $window->set_border_width(10) if !$window->{pop_it} && !$::noborderWhenEmbedded;
 
     $o->{rwindow} = $o->{window} = $window;

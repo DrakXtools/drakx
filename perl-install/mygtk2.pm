@@ -1182,7 +1182,13 @@ sub flush() {
 
 sub may_destroy {
     my ($w) = @_;
-    $w->destroy if $w;
+    return if !$w;
+    @::main_windows = difference2(\@::main_windows, [ $w->{real_window} ]);
+    if ($::main_window eq $w->{real_window}) {
+        undef $::main_window;
+        $::main_window = $::main_windows[-1];
+    }
+    $w->destroy;
 }
 
 sub root_window() {
