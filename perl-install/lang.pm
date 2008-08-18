@@ -846,9 +846,9 @@ sub get_kde_lang {
     my ($locale, $o_default) = @_;
 
     #- get it using 
-    #- echo C $(rpm -qp --qf "%{name}\n" /RPMS/kde-i18n-*  | sed 's/kde-i18n-//')
+    #- echo C $(rpm -qp --qf "%{name}\n" /RPMS/kde4-l10n-*  | sed 's/kde4-l10n-//')
     my @valid_kde_langs = qw(C
-af ar az be bg bn br bs ca cs cy da de el en_GB eo es et eu fa fi fo fr ga gl he hi hr hsb hu id is it ja ko ku lo lt lv mi mk mn ms mt nb nds nl nn nso oc pa pl pt pt_BR ro ru se sk sl sr ss sv ta tg th tr uk uz ven vi wa wen xh zh_CN zh_TW zu);
+ar be bg ca cs csb da de el en_GB eo es et eu fa fi fr fy ga gl hi hu is it ja kk km ko ku lt lv mk ml nb nds ne nl nn pa pl pt pt_BR ro ru se sl sr sv ta th tr uk wa zh_CN zh_TW);
     my %valid_kde_langs; @valid_kde_langs{@valid_kde_langs} = ();
 
     my $valid_lang = sub {
