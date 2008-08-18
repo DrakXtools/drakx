@@ -487,7 +487,7 @@ sub _chooseDesktop {
 	Custom => N("Custom"),
     );
     my $title = N("Desktop Selection");
-    my $message = N("You can choose your workstation desktop profile: KDE, GNOME or Custom");
+    my $message = N("You can choose your workstation desktop profile:");
 
     my $choice;
     if ($o->isa('interactive::gtk')) {
