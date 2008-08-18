@@ -298,7 +298,8 @@ sub load_rate_files {
     my ($o) = @_;
     #- must be done after getProvides
 
-    install::pkgs::read_rpmsrate($o->{packages}, $o->{rpmsrate_flags_chosen}, '/tmp/rpmsrate', $o->{match_all_hardware});
+    require pkgs;
+    pkgs::read_rpmsrate($o->{packages}, $o->{rpmsrate_flags_chosen}, '/tmp/rpmsrate', $o->{match_all_hardware});
 
     ($o->{compssUsers}, $o->{gtk_display_compssUsers}) = install::pkgs::readCompssUsers('/tmp/compssUsers.pl');
 
@@ -360,7 +361,7 @@ sub setPackages {
 
 	my $rpmsrate_flags_was_chosen = $o->{rpmsrate_flags_chosen};
 
-	put_in_hash($o->{rpmsrate_flags_chosen} ||= {}, rpmsrate_always_flags($o)); #- must be done before install::pkgs::read_rpmsrate()
+	put_in_hash($o->{rpmsrate_flags_chosen} ||= {}, rpmsrate_always_flags($o)); #- must be done before pkgs::read_rpmsrate()
 	load_rate_files($o);
 
 	install::media::copy_rpms_on_disk($o) if $copy_rpms_on_disk;

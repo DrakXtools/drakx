@@ -339,12 +339,6 @@ sub empty_packages {
     $packages;
 }
 
-sub read_rpmsrate {
-    my ($packages, $rpmsrate_flags_chosen, $file, $match_all_hardware) = @_;
-    require pkgs;
-    pkgs::read_rpmsrate($packages, $rpmsrate_flags_chosen, $file, $match_all_hardware);
-}
-
 sub readCompssUsers {
     my ($file) = @_;
 
