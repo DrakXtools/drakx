@@ -523,7 +523,7 @@ sub _gtk__ScrolledWindow {
 	    $w->add_with_viewport($child);
 	}
 	$child->set_focus_vadjustment($w->get_vadjustment) if $child->can('set_focus_vadjustment');
-	$child->set_left_margin(6) if ref($child) =~ /Gtk2::TextView/;
+	$child->set_left_margin(6) if ref($child) =~ /Gtk2::TextView/ && $child->get_left_margin() <= 6;
 	$child->show;
 
 	$w->child->set_shadow_type(delete $opts->{shadow_type}) if exists $opts->{shadow_type};
