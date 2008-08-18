@@ -189,6 +189,7 @@ package do_pkgs_standalone;
 use run_program;
 use common;
 use log;
+use feature qw(state);
 
 our @ISA = qw(do_pkgs_common);
 
@@ -231,14 +232,17 @@ sub are_available {
     my ($_do, @pkgs) = @_;
     my %pkgs = map { $_ => 1 } @pkgs;
 
+    require urpm::media;
+    state $urpm;
     eval {
-	require urpm::media;
-	my $urpm = urpm->new;
-	$urpm->{log} = \&log::l;
-	urpm::media::configure($urpm, 
-			       nocheck_access => 1,
-			       no_skiplist => 1,
-			       no_second_pass => 1);
+	if (!$urpm) {
+	    $urpm = urpm->new;
+	    $urpm->{log} = \&log::l;
+	    urpm::media::configure($urpm, 
+				   nocheck_access => 1,
+				   no_skiplist => 1,
+				   no_second_pass => 1);
+	}
 	map { $_->name } grep { $pkgs{$_->name} } @{$urpm->{depslist} || []};
     };
 }
