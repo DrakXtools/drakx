@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-12 17:54+0200\n"
+"POT-Creation-Date: 2008-08-18 18:03+0200\n"
 "PO-Revision-Date: 2008-04-13 20:40+0100\n"
 "Last-Translator: Leandro Regueiro <leandro DOT regueiro AT gmail DOT com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
@@ -133,23 +133,23 @@ msgstr ""
 "Non se puido atopar un ficheiro de lista de paquetes neste sitio espello.\n"
 "Asegúrese de que a localización é a correcta."
 
-#: any.pm:327
+#: any.pm:328
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Buscando os paquetes que xa están instalados..."
 
-#: any.pm:334
+#: any.pm:335
 #, c-format
 msgid "Removing packages prior to upgrade..."
 msgstr "Eliminando paquetes antes de actualizar..."
 
-#: any.pm:376
+#: any.pm:377
 #, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Buscando paquetes para actualizar..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:561
+#: any.pm:564
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -173,7 +173,7 @@ msgstr ""
 "Desexa instalar estes servidores?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:584
+#: any.pm:587
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -187,72 +187,72 @@ msgstr ""
 "\n"
 "Desexa eliminar estes paquetes?\n"
 
-#: any.pm:798
+#: any.pm:801
 #, c-format
 msgid "Error reading file %s"
 msgstr "Erro ó le-lo ficheiro %s"
 
-#: any.pm:1005
+#: any.pm:1008
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Renomeáronse os seguintes discos:"
 
-#: any.pm:1007
+#: any.pm:1010
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (chamado anteriormente %s)"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1083 steps_interactive.pm:972
+#: any.pm:1086 steps_interactive.pm:972
 #, c-format
 msgid "Network"
 msgstr "Rede"
 
-#: any.pm:1087
+#: any.pm:1090
 #, c-format
 msgid "Please choose a media"
 msgstr "Escolla un soporte"
 
-#: any.pm:1103
+#: any.pm:1106
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "O ficheiro xa existe. ¿Desexa sobreescribilo?"
 
-#: any.pm:1107
+#: any.pm:1110
 #, c-format
 msgid "Permission denied"
 msgstr "Permiso denegado"
 
-#: any.pm:1155
+#: any.pm:1158
 #, c-format
 msgid "Bad NFS name"
 msgstr "Nome NFS incorrecto"
 
-#: any.pm:1176
+#: any.pm:1179
 #, c-format
 msgid "Bad media %s"
 msgstr "O soporte %s é incorrecto"
 
-#: any.pm:1219
+#: any.pm:1222
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Non se pode captura-la pantalla antes de face-las particións"
 
-#: any.pm:1227
+#: any.pm:1230
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Poderanse facer capturas de pantalla despois de instalar en %s"
@@ -723,17 +723,17 @@ msgstr ""
 "en modo texto. Para iso, prema 'F1' cando arrinque dende o CDROM,\n"
 "e escriba 'text'."
 
-#: steps_gtk.pm:228 steps_interactive.pm:485
+#: steps_gtk.pm:228
 #, c-format
 msgid "Install Mandriva KDE Desktop"
 msgstr "Instalar o Escritorio KDE de Mandriva"
 
-#: steps_gtk.pm:229 steps_interactive.pm:486
+#: steps_gtk.pm:229
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
 msgstr "Instalar o Escritorio GNOME de Mandriva"
 
-#: steps_gtk.pm:230 steps_interactive.pm:487
+#: steps_gtk.pm:230
 #, c-format
 msgid "Custom install"
 msgstr "Instalación personalizada"
@@ -1115,14 +1115,24 @@ msgstr "Gardar"
 msgid "Bad file"
 msgstr "Ficheiro erróneo"
 
+#: steps_interactive.pm:485
+#, fuzzy, c-format
+msgid "KDE"
+msgstr "IDE"
+
+#: steps_interactive.pm:486
+#, c-format
+msgid "GNOME"
+msgstr ""
+
 #: steps_interactive.pm:489
 #, fuzzy, c-format
 msgid "Desktop Selection"
 msgstr "Selección de Grupos de Paquetes"
 
 #: steps_interactive.pm:490
-#, c-format
-msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
+#, fuzzy, c-format
+msgid "You can choose your workstation desktop profile:"
 msgstr ""
 "Pode elixir o seu perfil de escritorio de estación de traballo: KDE, GNOME "
 "ou Personalizado"

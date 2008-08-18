@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-sv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-12 17:54+0200\n"
+"POT-Creation-Date: 2008-08-18 18:03+0200\n"
 "PO-Revision-Date: 2008-02-27 17:07+0200\n"
 "Last-Translator: Thomas Backlund <tmb@mandriva.org>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -139,23 +139,23 @@ msgid ""
 "correct."
 msgstr "Kan inte hitta hdlist filen på denna spegel"
 
-#: any.pm:327
+#: any.pm:328
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Söker efter paket som redan är installerade..."
 
-#: any.pm:334
+#: any.pm:335
 #, c-format
 msgid "Removing packages prior to upgrade..."
 msgstr "Tar bort paket före uppgradering..."
 
-#: any.pm:376
+#: any.pm:377
 #, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Söker efter paket att uppdatera..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:561
+#: any.pm:564
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -179,7 +179,7 @@ msgstr ""
 "Vill du verkligen installera dessa servrar?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:584
+#: any.pm:587
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -192,72 +192,72 @@ msgstr ""
 "\n"
 "Vill du verkligen ta bort dessa paket?\n"
 
-#: any.pm:798
+#: any.pm:801
 #, c-format
 msgid "Error reading file %s"
 msgstr "Fel vid läsning av fil %s"
 
-#: any.pm:1005
+#: any.pm:1008
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Följande disk(ar) har döpts om:"
 
-#: any.pm:1007
+#: any.pm:1010
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (gamla namnet %s)"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1083 steps_interactive.pm:972
+#: any.pm:1086 steps_interactive.pm:972
 #, c-format
 msgid "Network"
 msgstr "Nätverk"
 
-#: any.pm:1087
+#: any.pm:1090
 #, c-format
 msgid "Please choose a media"
 msgstr "Välj media"
 
-#: any.pm:1103
+#: any.pm:1106
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Filen finns redan. Skriv över?"
 
-#: any.pm:1107
+#: any.pm:1110
 #, c-format
 msgid "Permission denied"
 msgstr "Åtkomst nekad"
 
-#: any.pm:1155
+#: any.pm:1158
 #, c-format
 msgid "Bad NFS name"
 msgstr "Felaktigt NFS namn"
 
-#: any.pm:1176
+#: any.pm:1179
 #, c-format
 msgid "Bad media %s"
 msgstr "Oanvändbart media %s"
 
-#: any.pm:1219
+#: any.pm:1222
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Kan inte ta skärmdumpar före partitionering"
 
-#: any.pm:1227
+#: any.pm:1230
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Skärmdumpar kommer att finnas tillgängliga efter installationen i %s"
@@ -725,17 +725,17 @@ msgstr ""
 "installationen istället. För att göra det tryck F1 när du startar\n"
 "från cd-skivan, skriv sedan \"text\"."
 
-#: steps_gtk.pm:228 steps_interactive.pm:485
+#: steps_gtk.pm:228
 #, c-format
 msgid "Install Mandriva KDE Desktop"
 msgstr "Installera Mandriva KDE Skrivbordsmiljö"
 
-#: steps_gtk.pm:229 steps_interactive.pm:486
+#: steps_gtk.pm:229
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
 msgstr "Installera Mandriva GNOME Skrivbordsmiljö"
 
-#: steps_gtk.pm:230 steps_interactive.pm:487
+#: steps_gtk.pm:230
 #, c-format
 msgid "Custom install"
 msgstr "Anpassad installation"
@@ -1113,14 +1113,24 @@ msgstr "Spara"
 msgid "Bad file"
 msgstr "Oanvändbar fil"
 
+#: steps_interactive.pm:485
+#, fuzzy, c-format
+msgid "KDE"
+msgstr "IDE"
+
+#: steps_interactive.pm:486
+#, c-format
+msgid "GNOME"
+msgstr ""
+
 #: steps_interactive.pm:489
 #, fuzzy, c-format
 msgid "Desktop Selection"
 msgstr "Val av paketgrupper"
 
 #: steps_interactive.pm:490
-#, c-format
-msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
+#, fuzzy, c-format
+msgid "You can choose your workstation desktop profile:"
 msgstr "Du kan väja din arbetsstationsprofil: KDE, GNOME eller Anpassad"
 
 #: steps_interactive.pm:575

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-12 17:54+0200\n"
+"POT-Creation-Date: 2008-08-18 18:03+0200\n"
 "PO-Revision-Date: 2005-01-04 21:25+CET\n"
 "Last-Translator: auto\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
@@ -123,23 +123,23 @@ msgid ""
 "correct."
 msgstr "Ne mogu otvoriti %s: %s\n"
 
-#: any.pm:327
+#: any.pm:328
 #, fuzzy, c-format
 msgid "Looking at packages already installed..."
 msgstr "Ne možete odznačiti ovaj paket budući da je već instaliran"
 
-#: any.pm:334
+#: any.pm:335
 #, c-format
 msgid "Removing packages prior to upgrade..."
 msgstr ""
 
-#: any.pm:376
+#: any.pm:377
 #, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Tražim pakete koje mogu nadograditi"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:561
+#: any.pm:564
 #, fuzzy, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -165,7 +165,7 @@ msgstr ""
 "Da li zaista želite instalirati te poslužitelje?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:584
+#: any.pm:587
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -174,72 +174,72 @@ msgid ""
 "Do you really want to remove these packages?\n"
 msgstr ""
 
-#: any.pm:798
+#: any.pm:801
 #, c-format
 msgid "Error reading file %s"
 msgstr "Greška prilikom čitanja datoteke %s"
 
-#: any.pm:1005
+#: any.pm:1008
 #, fuzzy, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Slijedeći paketi će biti instalirani"
 
-#: any.pm:1007
+#: any.pm:1010
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr ""
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1064
+#: any.pm:1067
 #, fuzzy, c-format
 msgid "NFS"
 msgstr "FS"
 
-#: any.pm:1083 steps_interactive.pm:972
+#: any.pm:1086 steps_interactive.pm:972
 #, c-format
 msgid "Network"
 msgstr "Mreža"
 
-#: any.pm:1087
+#: any.pm:1090
 #, fuzzy, c-format
 msgid "Please choose a media"
 msgstr "Molim odaberite"
 
-#: any.pm:1103
+#: any.pm:1106
 #, fuzzy, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Datoteka već postoji. Da li da nju upotrijebim?"
 
-#: any.pm:1107
+#: any.pm:1110
 #, c-format
 msgid "Permission denied"
 msgstr "Pristup odbijen"
 
-#: any.pm:1155
+#: any.pm:1158
 #, c-format
 msgid "Bad NFS name"
 msgstr ""
 
-#: any.pm:1176
+#: any.pm:1179
 #, fuzzy, c-format
 msgid "Bad media %s"
 msgstr "dodan medij %s"
 
-#: any.pm:1219
+#: any.pm:1222
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Ne mogu napraviti screenshotove prije particioniranja"
 
-#: any.pm:1227
+#: any.pm:1230
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Screenshotovi će biti raspoloživi poslije instalaciju u %s"
@@ -704,17 +704,17 @@ msgstr ""
 "instalacije Mandriva Linux-a. Ukoliko se to desi, možete probati tekstualnu\n"
 "instalaciju. Za to, pritisnite `F1' kada podižete CDROM, i unesite `text'."
 
-#: steps_gtk.pm:228 steps_interactive.pm:485
+#: steps_gtk.pm:228
 #, c-format
 msgid "Install Mandriva KDE Desktop"
 msgstr ""
 
-#: steps_gtk.pm:229 steps_interactive.pm:486
+#: steps_gtk.pm:229
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
 msgstr ""
 
-#: steps_gtk.pm:230 steps_interactive.pm:487
+#: steps_gtk.pm:230
 #, fuzzy, c-format
 msgid "Custom install"
 msgstr "Minimalna instalacija"
@@ -1088,6 +1088,16 @@ msgstr "Spremi"
 msgid "Bad file"
 msgstr "Učitaj datoteku"
 
+#: steps_interactive.pm:485
+#, fuzzy, c-format
+msgid "KDE"
+msgstr "IDE"
+
+#: steps_interactive.pm:486
+#, c-format
+msgid "GNOME"
+msgstr ""
+
 #: steps_interactive.pm:489
 #, fuzzy, c-format
 msgid "Desktop Selection"
@@ -1095,7 +1105,7 @@ msgstr "Odabir grupe paketa"
 
 #: steps_interactive.pm:490
 #, c-format
-msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
+msgid "You can choose your workstation desktop profile:"
 msgstr ""
 
 #: steps_interactive.pm:575

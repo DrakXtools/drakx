@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uz@cyrillic\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-12 17:54+0200\n"
+"POT-Creation-Date: 2008-08-18 18:03+0200\n"
 "PO-Revision-Date: 2008-03-28 23:58+0100\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <floss-uz-l10n@googlegroups.com>\n"
@@ -134,23 +134,23 @@ msgstr ""
 "Ойнада пакетлар рўйхатини топиб бўлмади. Манзил (URL) тўғри "
 "кўрсатилганлигини текширинг."
 
-#: any.pm:327
+#: any.pm:328
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Аллақачон ўрнатилган пакетлар қидирилмоқда..."
 
-#: any.pm:334
+#: any.pm:335
 #, c-format
 msgid "Removing packages prior to upgrade..."
 msgstr "Янгилашдан аввал пакетлар олиб ташланмоқда..."
 
-#: any.pm:376
+#: any.pm:377
 #, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Янгилаш учун пакетлар қидирилмоқда..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:561
+#: any.pm:564
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -175,7 +175,7 @@ msgstr ""
 "Бу сервер дастурларни ростдан ҳам ўрнатишни истайсизми?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:584
+#: any.pm:587
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -188,72 +188,72 @@ msgstr ""
 "\n"
 "Давом этишни истайсизми?\n"
 
-#: any.pm:798
+#: any.pm:801
 #, c-format
 msgid "Error reading file %s"
 msgstr "%s файлини ўқишда хато рўй берди"
 
-#: any.pm:1005
+#: any.pm:1008
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Қуйидаги диск(лар)нинг номи ўзгартирилди:"
 
-#: any.pm:1007
+#: any.pm:1010
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (олдинги номи %s)"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1083 steps_interactive.pm:972
+#: any.pm:1086 steps_interactive.pm:972
 #, c-format
 msgid "Network"
 msgstr "Тармоқ"
 
-#: any.pm:1087
+#: any.pm:1090
 #, c-format
 msgid "Please choose a media"
 msgstr "Илтимос тўпламни танланг"
 
-#: any.pm:1103
+#: any.pm:1106
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Файл аллақачон мавжуд. Уни алмаштиришни истайсизми?"
 
-#: any.pm:1107
+#: any.pm:1110
 #, c-format
 msgid "Permission denied"
 msgstr "Рухсат йўқ"
 
-#: any.pm:1155
+#: any.pm:1158
 #, c-format
 msgid "Bad NFS name"
 msgstr "NFS номи нотўғри"
 
-#: any.pm:1176
+#: any.pm:1179
 #, c-format
 msgid "Bad media %s"
 msgstr "Нотўғри тўплам %s"
 
-#: any.pm:1219
+#: any.pm:1222
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Скриншотларни дискни бўлишдан аввал олиб бўлмайди"
 
-#: any.pm:1227
+#: any.pm:1230
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr ""
@@ -713,17 +713,17 @@ msgid ""
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 
-#: steps_gtk.pm:228 steps_interactive.pm:485
+#: steps_gtk.pm:228
 #, c-format
 msgid "Install Mandriva KDE Desktop"
 msgstr "KDE иш столи"
 
-#: steps_gtk.pm:229 steps_interactive.pm:486
+#: steps_gtk.pm:229
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
 msgstr "GNOME иш столи"
 
-#: steps_gtk.pm:230 steps_interactive.pm:487
+#: steps_gtk.pm:230
 #, c-format
 msgid "Custom install"
 msgstr "Бошқа"
@@ -1090,14 +1090,24 @@ msgstr "Сақлаш"
 msgid "Bad file"
 msgstr "Нотўғри файл"
 
+#: steps_interactive.pm:485
+#, fuzzy, c-format
+msgid "KDE"
+msgstr "IDE"
+
+#: steps_interactive.pm:486
+#, c-format
+msgid "GNOME"
+msgstr ""
+
 #: steps_interactive.pm:489
 #, fuzzy, c-format
 msgid "Desktop Selection"
 msgstr "Пакетларни гуруҳ бўйича танлаш"
 
 #: steps_interactive.pm:490
-#, c-format
-msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
+#, fuzzy, c-format
+msgid "You can choose your workstation desktop profile:"
 msgstr "Қуйидаги рўйхатдан ўрнатиладиган дастурлар гуруҳини танланг"
 
 #: steps_interactive.pm:575

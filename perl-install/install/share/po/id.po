@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-12 17:54+0200\n"
+"POT-Creation-Date: 2008-08-18 18:03+0200\n"
 "PO-Revision-Date: 2007-10-27 18:51+0700\n"
 "Last-Translator: Willy Sudiarto Raharjo <willysr@gmail.com>\n"
 "Language-Team: Indonesia <mdk-id@yahoogroups.com>\n"
@@ -139,23 +139,23 @@ msgstr ""
 "Tidak dapat menemukan file daftar paket pada mirror ini. Pastikan lokasinya "
 "benar."
 
-#: any.pm:327
+#: any.pm:328
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Mencari paket yang sudah terinstall..."
 
-#: any.pm:334
+#: any.pm:335
 #, c-format
 msgid "Removing packages prior to upgrade..."
 msgstr "Menghapus paket-paket sebelum upgrade..."
 
-#: any.pm:376
+#: any.pm:377
 #, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Mencari paket untuk diupgrade..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:561
+#: any.pm:564
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -179,7 +179,7 @@ msgstr ""
 "Apakah Anda hendak menginstall server ini?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:584
+#: any.pm:587
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -192,72 +192,72 @@ msgstr ""
 "\n"
 "Apakah Anda ingin menghapus paket tersebut?\n"
 
-#: any.pm:798
+#: any.pm:801
 #, c-format
 msgid "Error reading file %s"
 msgstr "Kesalahan membaca file %s"
 
-#: any.pm:1005
+#: any.pm:1008
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Disk berikut telah diubah namanya:"
 
-#: any.pm:1007
+#: any.pm:1010
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (sebelumnya bernama %s)"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "NFS"
 msgstr "HFS"
 
-#: any.pm:1083 steps_interactive.pm:972
+#: any.pm:1086 steps_interactive.pm:972
 #, c-format
 msgid "Network"
 msgstr "Jaringan"
 
-#: any.pm:1087
+#: any.pm:1090
 #, c-format
 msgid "Please choose a media"
 msgstr "Silahkan pilih media"
 
-#: any.pm:1103
+#: any.pm:1106
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "File sudah ada. Timpa file ini ?"
 
-#: any.pm:1107
+#: any.pm:1110
 #, c-format
 msgid "Permission denied"
 msgstr "Izin ditolak"
 
-#: any.pm:1155
+#: any.pm:1158
 #, c-format
 msgid "Bad NFS name"
 msgstr "Nama NFS yang salah"
 
-#: any.pm:1176
+#: any.pm:1179
 #, c-format
 msgid "Bad media %s"
 msgstr "Media rusak %s"
 
-#: any.pm:1219
+#: any.pm:1222
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Tidak bisa membuat screenshot sebelum buat partisi"
 
-#: any.pm:1227
+#: any.pm:1230
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Screenshot akan tersedia setelah installasi pada %s"
@@ -726,17 +726,17 @@ msgstr ""
 "installasi berbasis teks. Untuk melakukannya, tekan `F1' saat\n"
 "booting pada CDROM, lalu ketikkan `text'."
 
-#: steps_gtk.pm:228 steps_interactive.pm:485
+#: steps_gtk.pm:228
 #, c-format
 msgid "Install Mandriva KDE Desktop"
 msgstr "Install Desktop KDE Mandriva"
 
-#: steps_gtk.pm:229 steps_interactive.pm:486
+#: steps_gtk.pm:229
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
 msgstr "Install Desktop GNOME Mandriva"
 
-#: steps_gtk.pm:230 steps_interactive.pm:487
+#: steps_gtk.pm:230
 #, c-format
 msgid "Custom install"
 msgstr "Installasi kustomisasi"
@@ -1110,14 +1110,24 @@ msgstr "Simpan"
 msgid "Bad file"
 msgstr "File rusak"
 
+#: steps_interactive.pm:485
+#, fuzzy, c-format
+msgid "KDE"
+msgstr "IDE"
+
+#: steps_interactive.pm:486
+#, c-format
+msgid "GNOME"
+msgstr ""
+
 #: steps_interactive.pm:489
 #, fuzzy, c-format
 msgid "Desktop Selection"
 msgstr "Pilihan Grup Paket"
 
 #: steps_interactive.pm:490
-#, c-format
-msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
+#, fuzzy, c-format
+msgid "You can choose your workstation desktop profile:"
 msgstr ""
 "Anda bisa memilih profil desktop workstation Anda: KDE, GNOME atau Kustom"
 

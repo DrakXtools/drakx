@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-12 17:54+0200\n"
+"POT-Creation-Date: 2008-08-18 18:03+0200\n"
 "PO-Revision-Date: 2005-03-03 01:06+0300\n"
 "Last-Translator: Ossama M. Khayat <okhayat@yahoo.com>\n"
 "Language-Team: Arabic <support@arabeyes.org>\n"
@@ -128,23 +128,23 @@ msgid ""
 "correct."
 msgstr "لم يمكن العثور على ملف hdlist على هذه المرآة. تأكد من صحة الموقع."
 
-#: any.pm:327
+#: any.pm:328
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "التعرف على الحزم المثبتة مسبقاً..."
 
-#: any.pm:334
+#: any.pm:335
 #, c-format
 msgid "Removing packages prior to upgrade..."
 msgstr ""
 
-#: any.pm:376
+#: any.pm:377
 #, c-format
 msgid "Finding packages to upgrade..."
 msgstr "البحث عن الحزم التي ستتم ترقيتها..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:561
+#: any.pm:564
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -168,7 +168,7 @@ msgstr ""
 "هل أنت متأكد أنك تريد تثبيت هذه الخادمات الآن؟\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:584
+#: any.pm:587
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -181,72 +181,72 @@ msgstr ""
 "\n"
 "هل تريد حذف هذه الحزم فعلاً؟\n"
 
-#: any.pm:798
+#: any.pm:801
 #, c-format
 msgid "Error reading file %s"
 msgstr "خطأ في قراءة الملف %s"
 
-#: any.pm:1005
+#: any.pm:1008
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "تمّ تغيير أسماء القرص التّالي أو الأقراص التّالية:"
 
-#: any.pm:1007
+#: any.pm:1010
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (المسمّى %s سابقاً)"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1083 steps_interactive.pm:972
+#: any.pm:1086 steps_interactive.pm:972
 #, c-format
 msgid "Network"
 msgstr "الشبكة"
 
-#: any.pm:1087
+#: any.pm:1090
 #, c-format
 msgid "Please choose a media"
 msgstr "الرجاء اختيار وسط"
 
-#: any.pm:1103
+#: any.pm:1106
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "الملف موجود مسبقاً. هل تريد الكتابة عليه؟"
 
-#: any.pm:1107
+#: any.pm:1110
 #, c-format
 msgid "Permission denied"
 msgstr "غير مسموح لك بذلك"
 
-#: any.pm:1155
+#: any.pm:1158
 #, c-format
 msgid "Bad NFS name"
 msgstr ""
 
-#: any.pm:1176
+#: any.pm:1179
 #, c-format
 msgid "Bad media %s"
 msgstr "الوسط %s سيء"
 
-#: any.pm:1219
+#: any.pm:1222
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "لا يمكنني عمل لقطات للشاشة قبل التجزئة"
 
-#: any.pm:1227
+#: any.pm:1230
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "ستكون لقطات الشاشة موجودة بعد التثبيت في %s"
@@ -711,17 +711,17 @@ msgstr ""
 "الغرض،\n"
 "اضغط `F1' عند الإقلاع من القرص المدمج، و اكتب `text'."
 
-#: steps_gtk.pm:228 steps_interactive.pm:485
+#: steps_gtk.pm:228
 #, c-format
 msgid "Install Mandriva KDE Desktop"
 msgstr ""
 
-#: steps_gtk.pm:229 steps_interactive.pm:486
+#: steps_gtk.pm:229
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
 msgstr ""
 
-#: steps_gtk.pm:230 steps_interactive.pm:487
+#: steps_gtk.pm:230
 #, fuzzy, c-format
 msgid "Custom install"
 msgstr "تثبيت مصغّر"
@@ -1095,6 +1095,16 @@ msgstr "حفظ"
 msgid "Bad file"
 msgstr "ملف سيء"
 
+#: steps_interactive.pm:485
+#, fuzzy, c-format
+msgid "KDE"
+msgstr "IDE"
+
+#: steps_interactive.pm:486
+#, c-format
+msgid "GNOME"
+msgstr ""
+
 #: steps_interactive.pm:489
 #, fuzzy, c-format
 msgid "Desktop Selection"
@@ -1102,7 +1112,7 @@ msgstr "اختيار مجموعات الحزم"
 
 #: steps_interactive.pm:490
 #, c-format
-msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
+msgid "You can choose your workstation desktop profile:"
 msgstr ""
 
 #: steps_interactive.pm:575

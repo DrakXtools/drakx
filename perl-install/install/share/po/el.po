@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-12 17:54+0200\n"
+"POT-Creation-Date: 2008-08-18 18:03+0200\n"
 "PO-Revision-Date: 2008-07-20 09:14+0200\n"
 "Last-Translator: nikos papadopoulos <231036448@freemail.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -139,23 +139,23 @@ msgstr ""
 "Δεν βρέθηκε το αρχείο με την λίστα των πακέτων σε αυτόν τον mirror. "
 "Σιγουρευτείτε ότι η τοποθεσία είναι σωστή."
 
-#: any.pm:327
+#: any.pm:328
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Ψάχνω για ήδη εγκατεστημένα πακέτα..."
 
-#: any.pm:334
+#: any.pm:335
 #, c-format
 msgid "Removing packages prior to upgrade..."
 msgstr "Αφαίρεση των πακέτων, πριν την αναβάθμιση..."
 
-#: any.pm:376
+#: any.pm:377
 #, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Αναζήτηση πακέτων προς αναβάθμιση..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:561
+#: any.pm:564
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -181,7 +181,7 @@ msgstr ""
 "Είστε βέβαιοι για την εγκατάσταση αυτών των διακομιστών;\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:584
+#: any.pm:587
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -194,72 +194,72 @@ msgstr ""
 "\n"
 "Θέλετε πραγματικά να αφαιρέστε αυτά τα πακέτα;\n"
 
-#: any.pm:798
+#: any.pm:801
 #, c-format
 msgid "Error reading file %s"
 msgstr "Σφάλμα κατά την ανάγνωση του αρχείου %s"
 
-#: any.pm:1005
+#: any.pm:1008
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Έγινε αλλαγή των ονομάτων των παρακάτω πακέτων:"
 
-#: any.pm:1007
+#: any.pm:1010
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (προηγουμένως ονομαζόταν %s)"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1083 steps_interactive.pm:972
+#: any.pm:1086 steps_interactive.pm:972
 #, c-format
 msgid "Network"
 msgstr "Δίκτυο"
 
-#: any.pm:1087
+#: any.pm:1090
 #, c-format
 msgid "Please choose a media"
 msgstr "Παρακαλώ, επέλεξε ένα μέσο"
 
-#: any.pm:1103
+#: any.pm:1106
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Το αρχείο υπάρχει ήδη. Να αντικατασταθεί;"
 
-#: any.pm:1107
+#: any.pm:1110
 #, c-format
 msgid "Permission denied"
 msgstr "Δεν δόθηκε άδεια"
 
-#: any.pm:1155
+#: any.pm:1158
 #, c-format
 msgid "Bad NFS name"
 msgstr "Λανθασμένο όνομα NFS"
 
-#: any.pm:1176
+#: any.pm:1179
 #, c-format
 msgid "Bad media %s"
 msgstr "Εσφαλμένο μέσο %s"
 
-#: any.pm:1219
+#: any.pm:1222
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Αδύνατη η λήψη στιγμιοτύπων πριν από την δημιουργία κατατμήσεων"
 
-#: any.pm:1227
+#: any.pm:1230
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Τα στιγμιότυπα θα είναι διαθέσιμα μετά την εγκατάστασης στο %s"
@@ -729,17 +729,17 @@ msgstr ""
 "Για να γίνει αυτό, πατήστε F1 κατά την εκκίνηση από το CDROM, και μετά "
 "γράψτε `text'."
 
-#: steps_gtk.pm:228 steps_interactive.pm:485
+#: steps_gtk.pm:228
 #, c-format
 msgid "Install Mandriva KDE Desktop"
 msgstr "Εγκατάσταση του Mandriva KDE Desktop"
 
-#: steps_gtk.pm:229 steps_interactive.pm:486
+#: steps_gtk.pm:229
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
 msgstr "Εγκατάσταση του Mandriva GNOME Desktop"
 
-#: steps_gtk.pm:230 steps_interactive.pm:487
+#: steps_gtk.pm:230
 #, c-format
 msgid "Custom install"
 msgstr "Προσαρμοσμένη εγκατάσταση"
@@ -1132,14 +1132,24 @@ msgstr "Αποθήκευση"
 msgid "Bad file"
 msgstr "Λανθασμένο αρχείο"
 
+#: steps_interactive.pm:485
+#, fuzzy, c-format
+msgid "KDE"
+msgstr "IDE"
+
+#: steps_interactive.pm:486
+#, c-format
+msgid "GNOME"
+msgstr ""
+
 #: steps_interactive.pm:489
 #, fuzzy, c-format
 msgid "Desktop Selection"
 msgstr "Επιλογή Ομάδων από Πακέτα"
 
 #: steps_interactive.pm:490
-#, c-format
-msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
+#, fuzzy, c-format
+msgid "You can choose your workstation desktop profile:"
 msgstr ""
 "Μπορείτε να επιλέξετε το προφίλ για το περιβάλλον εργασίας σας : KDE, GNOME "
 "ή εγκατάσταση με προσωπικές ρύθμισεις"

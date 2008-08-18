@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ko(metanav)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-12 17:54+0200\n"
+"POT-Creation-Date: 2008-08-18 18:03+0200\n"
 "PO-Revision-Date: 2007-06-18 14:54+0900\n"
 "Last-Translator: meta <hbahn@metq.com>\n"
 "Language-Team: ahb hong-bae <ko@li.org>\n"
@@ -131,23 +131,23 @@ msgid ""
 msgstr ""
 "미러 사이트에서 패키지 리스트를 찾을 수 없습니다. 이 위치에 만드시겠습니까?"
 
-#: any.pm:327
+#: any.pm:328
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "이미 설치된 패키지 찾는 중..."
 
-#: any.pm:334
+#: any.pm:335
 #, c-format
 msgid "Removing packages prior to upgrade..."
 msgstr "업그레이드된 패키지를 제거하는 중..."
 
-#: any.pm:376
+#: any.pm:377
 #, c-format
 msgid "Finding packages to upgrade..."
 msgstr "업그레이드할 패키지를 검색중..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:561
+#: any.pm:564
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -172,7 +172,7 @@ msgstr ""
 "정말로 이 서버들을 설치합니까?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:584
+#: any.pm:587
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -185,72 +185,72 @@ msgstr ""
 "\n"
 "정말 이 패키지들을 제거 하시겠습니까?\n"
 
-#: any.pm:798
+#: any.pm:801
 #, c-format
 msgid "Error reading file %s"
 msgstr "%s 파일을 읽는중 오류가 발생했습니다."
 
-#: any.pm:1005
+#: any.pm:1008
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "다음 디스크이름이 변경되었습니다. :"
 
-#: any.pm:1007
+#: any.pm:1010
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (이전 이름은 %s였음.)"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "HTTP"
 msgstr "HTTP(하이퍼텍스트 전송 규약)"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "FTP"
 msgstr "FTP(파일 전송규약)"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "NFS"
 msgstr "NFS(망 파일 시스템)"
 
-#: any.pm:1083 steps_interactive.pm:972
+#: any.pm:1086 steps_interactive.pm:972
 #, c-format
 msgid "Network"
 msgstr "망"
 
-#: any.pm:1087
+#: any.pm:1090
 #, c-format
 msgid "Please choose a media"
 msgstr "매체를 선택하시오"
 
-#: any.pm:1103
+#: any.pm:1106
 #, fuzzy, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "파일이 이미 존재합니다. 덮어쓸까요?"
 
-#: any.pm:1107
+#: any.pm:1110
 #, c-format
 msgid "Permission denied"
 msgstr "권한이 없습니다."
 
-#: any.pm:1155
+#: any.pm:1158
 #, c-format
 msgid "Bad NFS name"
 msgstr "부정확한 NFS 이름입니다"
 
-#: any.pm:1176
+#: any.pm:1179
 #, c-format
 msgid "Bad media %s"
 msgstr "알 수 없는 미디어 %s"
 
-#: any.pm:1219
+#: any.pm:1222
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "파티션을 나누기 전에는 스크린샷을 만들 수 없습니다."
 
-#: any.pm:1227
+#: any.pm:1230
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "스크린샷은 설치 이후에 %s에 위치 할 것입니다."
@@ -712,17 +712,17 @@ msgstr ""
 "텍스트 모드 설치는 CDROM으로 부팅후 「F1」을 누르고 「text」를 입력하시면 됩"
 "니다."
 
-#: steps_gtk.pm:228 steps_interactive.pm:485
+#: steps_gtk.pm:228
 #, c-format
 msgid "Install Mandriva KDE Desktop"
 msgstr ""
 
-#: steps_gtk.pm:229 steps_interactive.pm:486
+#: steps_gtk.pm:229
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
 msgstr ""
 
-#: steps_gtk.pm:230 steps_interactive.pm:487
+#: steps_gtk.pm:230
 #, fuzzy, c-format
 msgid "Custom install"
 msgstr "최소 설치"
@@ -1098,6 +1098,16 @@ msgstr "저장"
 msgid "Bad file"
 msgstr "손상된 파일 혹은 없는 파일입니다."
 
+#: steps_interactive.pm:485
+#, fuzzy, c-format
+msgid "KDE"
+msgstr "IDE"
+
+#: steps_interactive.pm:486
+#, c-format
+msgid "GNOME"
+msgstr ""
+
 #: steps_interactive.pm:489
 #, fuzzy, c-format
 msgid "Desktop Selection"
@@ -1105,7 +1115,7 @@ msgstr "패키지 그룹 선택"
 
 #: steps_interactive.pm:490
 #, c-format
-msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
+msgid "You can choose your workstation desktop profile:"
 msgstr ""
 
 #: steps_interactive.pm:575

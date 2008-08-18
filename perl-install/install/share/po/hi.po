@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-hi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-12 17:54+0200\n"
+"POT-Creation-Date: 2008-08-18 18:03+0200\n"
 "PO-Revision-Date: 2004-04-04 21:54+0530\n"
 "Last-Translator: धनञ्जय शर्मा (Dhananjaya Sharma) <dysxhi@yahoo.co.in>\n"
 "Language-Team: हिन्दी (Hindi) <dysxhi@yahoo.co.in>\n"
@@ -125,23 +125,23 @@ msgid ""
 "correct."
 msgstr "%s को %s पर नहीं पाया जा सका"
 
-#: any.pm:327
+#: any.pm:328
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "पहिले से संसाधित पैकेजों को देखा जा रहा है..."
 
-#: any.pm:334
+#: any.pm:335
 #, c-format
 msgid "Removing packages prior to upgrade..."
 msgstr ""
 
-#: any.pm:376
+#: any.pm:377
 #, c-format
 msgid "Finding packages to upgrade..."
 msgstr "उन्नयन के लिये पैकेजों को खोजा जा रहा है..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:561
+#: any.pm:564
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -166,7 +166,7 @@ msgstr ""
 "क्या आप वास्तव में इन सर्वरों को संसाधित करना चाहते है?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:584
+#: any.pm:587
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -179,72 +179,72 @@ msgstr ""
 "\n"
 "क्या वास्तव में इन पैकेजों को हटाना चाहते है?\n"
 
-#: any.pm:798
+#: any.pm:801
 #, c-format
 msgid "Error reading file %s"
 msgstr "%s संचिका को पढ़ने में त्रुटि"
 
-#: any.pm:1005
+#: any.pm:1008
 #, fuzzy, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "निम्नलिखित पैकेजों का संसाधन करना आवश्यक है:\n"
 
-#: any.pm:1007
+#: any.pm:1010
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr ""
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "HTTP"
 msgstr "एचटीटीपी"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "FTP"
 msgstr "एफटीपी"
 
-#: any.pm:1064
+#: any.pm:1067
 #, c-format
 msgid "NFS"
 msgstr "एनएफ़एस"
 
-#: any.pm:1083 steps_interactive.pm:972
+#: any.pm:1086 steps_interactive.pm:972
 #, c-format
 msgid "Network"
 msgstr "नेटवर्क"
 
-#: any.pm:1087
+#: any.pm:1090
 #, fuzzy, c-format
 msgid "Please choose a media"
 msgstr "कृपया चयन करें"
 
-#: any.pm:1103
+#: any.pm:1106
 #, fuzzy, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "फाईल पहले से है पुन बनाएँ"
 
-#: any.pm:1107
+#: any.pm:1110
 #, c-format
 msgid "Permission denied"
 msgstr "अनुमति नहीं है"
 
-#: any.pm:1155
+#: any.pm:1158
 #, c-format
 msgid "Bad NFS name"
 msgstr ""
 
-#: any.pm:1176
+#: any.pm:1179
 #, fuzzy, c-format
 msgid "Bad media %s"
 msgstr "%s माध्यम को जोड़ा गया"
 
-#: any.pm:1219
+#: any.pm:1222
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "विभाजनीकरण के पूर्व स्क्रीन-चित्र-माला को नहीं लिया जा सकता है"
 
-#: any.pm:1227
+#: any.pm:1230
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "%s में संसाधन के उपरान्त स्क्रीन चित्र-माला उपलब्ध होगी"
@@ -710,17 +710,17 @@ msgstr ""
 "देख सकते है, ऐसा करने के लिए, \n"
 "सीडीरॉम से बूट होने के समय `F1' को दबायें, और फ़िर `text' को इन्टर करें ।"
 
-#: steps_gtk.pm:228 steps_interactive.pm:485
+#: steps_gtk.pm:228
 #, c-format
 msgid "Install Mandriva KDE Desktop"
 msgstr ""
 
-#: steps_gtk.pm:229 steps_interactive.pm:486
+#: steps_gtk.pm:229
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
 msgstr ""
 
-#: steps_gtk.pm:230 steps_interactive.pm:487
+#: steps_gtk.pm:230
 #, fuzzy, c-format
 msgid "Custom install"
 msgstr "निम्नतम संसाधन"
@@ -1088,6 +1088,16 @@ msgstr "सुरक्षित"
 msgid "Bad file"
 msgstr "फ़ाइल लोड करें"
 
+#: steps_interactive.pm:485
+#, fuzzy, c-format
+msgid "KDE"
+msgstr "आई०डी०ई०"
+
+#: steps_interactive.pm:486
+#, c-format
+msgid "GNOME"
+msgstr ""
+
 #: steps_interactive.pm:489
 #, fuzzy, c-format
 msgid "Desktop Selection"
@@ -1095,7 +1105,7 @@ msgstr "पैकेज समूह चयन"
 
 #: steps_interactive.pm:490
 #, c-format
-msgid "You can choose your workstation desktop profile: KDE, GNOME or Custom"
+msgid "You can choose your workstation desktop profile:"
 msgstr ""
 
 #: steps_interactive.pm:575
