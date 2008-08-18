@@ -482,9 +482,9 @@ sub _chooseDesktop {
     my ($o, $rpmsrate_flags_chosen, $chooseGroups) = @_;
 
     my @l = group_by2(
-	KDE    => N("Install Mandriva KDE Desktop"),
-	GNOME  => N("Install Mandriva GNOME Desktop"),
-	Custom => N("Custom install"),
+	KDE    => N("KDE"),
+	GNOME  => N("GNOME"),
+	Custom => N("Custom"),
     );
     my $title = N("Desktop Selection");
     my $message = N("You can choose your workstation desktop profile: KDE, GNOME or Custom");
