@@ -920,7 +920,10 @@ sub acceptLicense {
                    more_buttons => [ [ N("Release Notes"), sub { display_release_notes($o) }, 1 ] ]),
 		     callbacks => { ok_disabled => sub { $r eq 'Refuse' } },
 		   },
-		   [ { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list', format => sub { translate($_[0]) } } ])
+
+		   [
+                       { label => N("Do you accept this license ?") },
+                       { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list', format => sub { translate($_[0]) } } ])
       or reboot($o);
 }
 
