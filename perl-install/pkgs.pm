@@ -156,8 +156,16 @@ sub detect_graphical_drivers {
     my ($do_pkgs, $o_match_all_hardware) = @_;
     require Xconfig::card;
     require Xconfig::proprietary;
-    my $cards = Xconfig::card::readCardsDB("$ENV{SHARE_PATH}/ldetect-lst/Cards+");
-    my @drivers = grep { $_ } uniq(map { $_->{Driver2} } values %$cards);
+
+    my @cards;
+    if ($o_match_all_hardware) {
+       my $all_cards = Xconfig::card::readCardsDB("$ENV{SHARE_PATH}/ldetect-lst/Cards+");
+       @cards = values %$all_cards;
+    } else {
+       @cards = Xconfig::card::probe();
+    }
+
+    my @drivers = grep { $_ } uniq(map { $_->{Driver2} } @cards);
     map { Xconfig::proprietary::pkgs_for_Driver2($_, $do_pkgs) } @drivers;
 }
 
