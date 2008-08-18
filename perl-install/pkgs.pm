@@ -141,13 +141,15 @@ sub read_rpmsrate {
 }
 
 
-sub simple_read_rpmsrate() {
-    my ($rates, $flags) = read_rpmsrate({}, {}, $::prefix . '/usr/share/meta-task/rpmsrate-raw', 0);
+sub simple_read_rpmsrate {
+    my ($o_match_all_hardware) = @_;
+    my ($rates, $flags) = read_rpmsrate({}, {}, $::prefix . '/usr/share/meta-task/rpmsrate-raw', $o_match_all_hardware);
     grep { member('TRUE', @{$flags->{$_}}) && $rates->{$_} >= 5 } keys %$flags;
 }
 
-sub list_hardware_packages() {
-    grep { !/openoffice/ } simple_read_rpmsrate();
+sub list_hardware_packages {
+    my ($o_match_all_hardware) = @_;
+    grep { !/openoffice/ } simple_read_rpmsrate($o_match_all_hardware);
 }
 
 1;
