@@ -16,6 +16,7 @@ use ugtk2 qw(:create :helpers :wrappers);
 use interactive;
 use harddrake::data;  #- needs to stay after use-ugtk2 as long as this module defines globals containing some N()
 use fsedit;
+use pkgs;
 use POSIX qw(:sys_wait_h);
 
 
@@ -503,7 +504,7 @@ $tree->signal_connect(realize => sub { $tree->get_selection->select_path(Gtk2::T
     $SIG{CHLD} = undef;
     #local $SIG{CHLD} = sub {};
 
-    if (my @packages = difference2([ list_hardware_packages() ], [ qw(ati.2 dmraid gnome-alsamixer mdadm xmms-alsa) ])) {
+    if (my @packages = difference2([ pkgs::list_hardware_packages() ], [ qw(ati.2 dmraid gnome-alsamixer mdadm xmms-alsa) ])) {
         @packages = grep { !$in->do_pkgs->is_installed($_) } @packages;
 
         # workarounding do_pkgs->is_available() destroying $_:
@@ -577,14 +578,4 @@ sub popup_menu {
           # Tell calling code that we have not handled this event; pass it on.
           return 0;
       };
-}
-
-sub simple_read_rpmsrate() {
-    require pkgs;
-    my ($rates, $flags) = pkgs::read_rpmsrate({}, { }, '/usr/share/meta-task/rpmsrate-raw', 0);
-    grep { member('TRUE', @{$flags->{$_}}) && $rates->{$_} >= 5 } keys %$flags;
-}
-
-sub list_hardware_packages() {
-    grep { !/openoffice/ } simple_read_rpmsrate();
 }

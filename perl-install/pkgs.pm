@@ -140,4 +140,15 @@ sub read_rpmsrate {
     return ($rates, $flags) if $::isStandalone;
 }
 
+
+sub simple_read_rpmsrate() {
+    require pkgs;
+    my ($rates, $flags) = read_rpmsrate({}, { }, '/usr/share/meta-task/rpmsrate-raw', 0);
+    grep { member('TRUE', @{$flags->{$_}}) && $rates->{$_} >= 5 } keys %$flags;
+}
+
+sub list_hardware_packages() {
+    grep { !/openoffice/ } simple_read_rpmsrate();
+}
+
 1;
