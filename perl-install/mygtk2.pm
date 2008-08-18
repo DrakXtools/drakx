@@ -653,7 +653,9 @@ sub _gtk__MagicWindow {
     my $provided_banner = delete $opts->{banner};
 
     if ($pop_it && $provided_banner) {
-	$sub_child = gtknew('VBox', children => [ 0, $provided_banner, if_($sub_child, 1, $sub_child) ]);
+	$sub_child = gtknew('VBox', children => [ 0, $provided_banner,
+                                                  if_($::isInstall, 0, Gtk2::HSeparator->new),
+                                                  if_($sub_child, 1, $sub_child) ]);
     } else {
 	$sub_child ||= gtknew('VBox');
     }
@@ -697,7 +699,9 @@ sub _gtk__MagicWindow {
 
 	$w = $::WizardWindow;
      
-	gtkadd($::WizardTable, children_tight => [ $provided_banner ]) if $provided_banner;
+	gtkadd($::WizardTable, children_tight => [ $provided_banner,
+                                                   if_($::isInstall, Gtk2::HSeparator->new),
+                                               ]) if $provided_banner;
 	gtkadd($::WizardTable, children_loose => [ $sub_child ]);
     }
     bless { 
