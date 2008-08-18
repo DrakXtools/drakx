@@ -142,7 +142,6 @@ sub read_rpmsrate {
 
 
 sub simple_read_rpmsrate() {
-    require pkgs;
     my ($rates, $flags) = read_rpmsrate({}, {}, $::prefix . '/usr/share/meta-task/rpmsrate-raw', 0);
     grep { member('TRUE', @{$flags->{$_}}) && $rates->{$_} >= 5 } keys %$flags;
 }
