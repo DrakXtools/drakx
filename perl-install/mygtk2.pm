@@ -388,6 +388,7 @@ sub title1_to_markup {
 sub _gtk__Install_Title {
     my ($w, $opts) = @_;
     $opts->{widget_name} = 'Banner';
+    $opts->{padding} = [ 20, 0 ];
     _gtk__Title2($w, $opts);
 }
 
