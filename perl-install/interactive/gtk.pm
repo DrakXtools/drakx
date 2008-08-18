@@ -842,7 +842,6 @@ sub wait_messageW {
 			modal => 1, 
 			$::isInstall ? (banner => gtknew('Title1', text => $message, widget_name => 'Banner')) : (),
 			no_Window_Manager => exists $o->{no_Window_Manager} ? $o->{no_Window_Manager} : !$::isStandalone,
-			if__($::main_window, transient_for => $::main_window),
 			child => gtknew('VBox', padding => 4, border_width => 10, children => [
 			    1, $to_modify,
 			    if_(ref($message_modifiable), 0, $message_modifiable),
