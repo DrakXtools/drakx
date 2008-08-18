@@ -177,7 +177,14 @@ sub detect_network_drivers {
     my @l;
     foreach my $type (network::connection->get_types) {
         $type->can('get_thirdparty_settings') or next;
-        foreach my $settings (@{$type->get_thirdparty_settings || []}) {
+        my @network_settings;
+        if ($o_match_all_hardware) {
+            @network_settings = @{$type->get_thirdparty_settings || []};
+        } else {
+            my @connections = $type->get_connections(automatic_only => 1, fast_only => 1);
+            @network_settings = map { @{$_->get_thirdparty_settings || []} } @connections;
+        }
+        foreach my $settings (@network_settings) {
             foreach (@network::thirdparty::thirdparty_types) {
                 my @packages = network::thirdparty::get_required_packages($_, $settings);
                 push @l, network::thirdparty::get_available_packages($_, $do_pkgs, @packages);
