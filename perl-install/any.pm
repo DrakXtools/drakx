@@ -941,7 +941,7 @@ sub selectLanguage_install {
     my ($in, $locale) = @_;
 
     my $common = { 
-		   title => N("Language choice"),
+		   title => N("Please choose a language to use."),
 		   interactive_help_id => 'selectLanguage' };
 
     my $lang = $locale->{lang};
