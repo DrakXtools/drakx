@@ -588,7 +588,7 @@ sub install_hardware_packages {
             foreach my $settings (@{$type->get_thirdparty_settings || []}) {
                 foreach (@network::thirdparty::thirdparty_types) {
                     my @packages = network::thirdparty::get_required_packages($_, $settings);
-                    push @l, network::thirdparty::get_available_packages($_, $o, @packages);
+                    push @l, network::thirdparty::get_available_packages($_, $o->do_pkgs, @packages);
                 }
             }
         }
