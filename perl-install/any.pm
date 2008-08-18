@@ -940,7 +940,7 @@ sub reboot {
 sub selectLanguage_install {
     my ($in, $locale) = @_;
 
-    my $common = { messages => N("Please choose a language to use."),
+    my $common = { 
 		   title => N("Language choice"),
 		   interactive_help_id => 'selectLanguage' };
 
