@@ -409,7 +409,15 @@ sub create_widget {
 	$e->{grow} = 'fill';
 	my $children = [ if_($e->{message}, { type => 'only_label', no_indent => 1, val => \$e->{message} }), @{$e->{children}} ];
 	my $box = create_widgets_block($o, $children, $update, $ignore_ref);
-	$w = gtknew('Expander', text => $e->{text}, child => $box);
+	$w = gtknew('Button', child => gtknew('HBox', spacing => 5, 
+                                              children_tight => [
+                                                  gtknew('Image', file => 'advanced_expander'),
+                                                  gtknew('Label', text => $e->{text}),
+                                              ],
+                                          ),
+                    if_($::isInstall, relief => 'none'),
+                    clicked => sub { ask_fromW($o, { }, $e->{children}) }
+                );
     } elsif ($e->{type} =~ /list/) {
 
 	$e->{formatted_list} = [ map { may_apply($e->{format}, $_) } @{$e->{list}} ];
