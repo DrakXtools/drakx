@@ -504,7 +504,7 @@ $tree->signal_connect(realize => sub { $tree->get_selection->select_path(Gtk2::T
     $SIG{CHLD} = undef;
     #local $SIG{CHLD} = sub {};
 
-    if (my @packages = difference2([ pkgs::list_hardware_packages() ], [ qw(ati.2 dmraid gnome-alsamixer mdadm xmms-alsa) ])) {
+    if (my @packages = difference2([ pkgs::detect_rpmsrate_hardware_packages() ], [ qw(ati.2 dmraid gnome-alsamixer mdadm xmms-alsa) ])) {
         @packages = grep { !$in->do_pkgs->is_installed($_) } @packages;
 
         # workarounding do_pkgs->is_available() destroying $_:

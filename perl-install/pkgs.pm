@@ -147,7 +147,7 @@ sub simple_read_rpmsrate {
     grep { member('TRUE', @{$flags->{$_}}) && $rates->{$_} >= 5 } keys %$flags;
 }
 
-sub list_hardware_packages {
+sub detect_rpmsrate_hardware_packages {
     my ($o_match_all_hardware) = @_;
     grep { !/openoffice/ } simple_read_rpmsrate($o_match_all_hardware);
 }
@@ -197,7 +197,7 @@ sub detect_network_drivers {
 sub detect_hardware_packages {
     my ($do_pkgs, $o_match_all_hardware) = @_;
     (
-        ($::isInstall ? () : list_hardware_packages($o_match_all_hardware)),
+        ($::isInstall ? () : detect_rpmsrate_hardware_packages($o_match_all_hardware)),
         detect_graphical_drivers($do_pkgs, $o_match_all_hardware),
         detect_network_drivers($do_pkgs, $o_match_all_hardware),
     );
