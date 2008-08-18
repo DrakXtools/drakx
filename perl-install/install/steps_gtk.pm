@@ -684,7 +684,7 @@ sub ask_deselect_media__copy_on_disk {
 	$w->sync;
 	ugtk2::gtkadd(
 	    $w->{window},
-	    gtkpack(
+	    create_scrolled_window(gtkpack(
 		Gtk2::VBox->new(0, 5),
 	      @names > 1 ? (
 		Gtk2::WrappedLabel->new(formatAlaTeX(N("The following installation media have been found.
@@ -705,7 +705,7 @@ It will then continue from the hard drive and the packages will remain available
 		gtknew('HBox', children_tight => [
 		    gtknew('Button', text => N("Next"), clicked => sub { Gtk2->main_quit }),
 		]),
-	    ),
+	    )),
 	);
 	$w->main;
     }
