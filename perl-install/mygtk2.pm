@@ -615,7 +615,7 @@ sub _gtk_any_Window {
         }
 
 	$w->set_modal(delete $opts->{modal}) if exists $opts->{modal};
-	$opts->{transient_for} ||= $::main_window;
+	$opts->{transient_for} ||= $::main_window if $::main_window;
 	$w->set_modal(1) if exists $opts->{transient_for};
 	$w->set_transient_for(delete $opts->{transient_for}) if exists $opts->{transient_for};
 	$w->set_border_width(delete $opts->{border_width}) if exists $opts->{border_width};
