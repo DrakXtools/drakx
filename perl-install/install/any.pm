@@ -530,7 +530,9 @@ sub default_packages {
     push @l, uniq(grep { $_ } map { fs::format::package_needed_for_partition_type($_) } @{$o->{fstab}});
     push @l, 'ntfs-3g' if any { $_->{fs_type} eq 'ntfs-3g' } @{$o->{fstab}};
 
-    my @locale_pkgs = map { URPM::packages_providing($o->{packages}, 'locales-' . $_) } lang::langsLANGUAGE($o->{locale}{langs});
+    # handle locales with specified scripting:
+    my @languages = map { s/\@.*//; $_ } lang::langsLANGUAGE($o->{locale}{langs});
+    my @locale_pkgs = map { URPM::packages_providing($o->{packages}, 'locales-' . $_) } @languages;
     unshift @l, uniq(map { $_->name } @locale_pkgs);
 
     @l;
