@@ -257,8 +257,9 @@ sub are_installed {
     @l or return;
 
     my @l2;
-    run_program::run('/bin/rpm', '>', \@l2, '-q', '--qf', "%{name}\n", @l); #- do not care about the return value
-    intersection(\@l, [ chomp_(@l2) ]); #- can not return directly @l2 since it contains things like "package xxx is not installed"
+    my $query_all = (any { /\*/ } @l) ? 'a' : '';
+    run_program::run('/bin/rpm', '>', \@l2, '-q' . $query_all, '--qf', "%{name}\n", @l); #- do not care about the return value
+    $query_all ? chomp_(@l2) : intersection(\@l, [ chomp_(@l2) ]); #- can not return directly @l2 since it contains things like "package xxx is not installed"
 }
 
 sub remove {
