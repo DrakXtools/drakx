@@ -735,7 +735,7 @@ sub new {
 	'MagicWindow',
 	title => $title || '',
 	pop_it => $o->{pop_it},
-	$::isInstall ? (banner => gtknew('Title2', text => $title || get_default_step_items(), widget_name => 'Banner')) : (),
+	$::isInstall ? (banner => gtknew('Install_Title', text => $title || get_default_step_items())) : (),
 	$::isStandalone && $banner_title && $icon ? (banner => Gtk2::Banner->new($icon, $banner_title)) : (),
 	width => $opts{width}, height => $opts{height}, default_width => $opts{default_width}, default_height => $opts{default_height}, 
 	modal => (!$o->{pop_it} && !$::isInstall) && ($opts{modal} || $grab || $o->{grab}) || $o->{modal},

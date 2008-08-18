@@ -385,6 +385,12 @@ sub title1_to_markup {
       : '<b><big>' . $label . '</big></b>';
 }
 
+sub _gtk__Install_Title {
+    my ($w, $opts) = @_;
+    $opts->{widget_name} = 'Banner';
+    _gtk__Title2($w, $opts);
+}
+
 sub _gtk__Title1 {
     my ($w, $opts) = @_;
     $opts ||= {};
