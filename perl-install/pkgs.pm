@@ -152,4 +152,27 @@ sub list_hardware_packages {
     grep { !/openoffice/ } simple_read_rpmsrate($o_match_all_hardware);
 }
 
+sub detect_hardware_packages {
+    my ($do_pkgs, $o_match_all_hardware) = @_;
+    my @l;
+    require Xconfig::card;
+    require Xconfig::proprietary;
+    my $cards = Xconfig::card::readCardsDB("$ENV{SHARE_PATH}/ldetect-lst/Cards+");
+    my @drivers = grep { $_ } uniq(map { $_->{Driver2} } values %$cards);
+    push @l, map { Xconfig::proprietary::pkgs_for_Driver2($_, $do_pkgs) } @drivers;
+
+    require network::connection;
+    require network::thirdparty;
+    foreach my $type (network::connection->get_types) {
+        $type->can('get_thirdparty_settings') or next;
+        foreach my $settings (@{$type->get_thirdparty_settings || []}) {
+            foreach (@network::thirdparty::thirdparty_types) {
+                my @packages = network::thirdparty::get_required_packages($_, $settings);
+                push @l, network::thirdparty::get_available_packages($_, $do_pkgs, @packages);
+            }
+        }
+    }
+    @l;
+}
+
 1;
