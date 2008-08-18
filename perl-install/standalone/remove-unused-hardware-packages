@@ -1,0 +1,34 @@
+#!/usr/bin/perl
+
+use lib qw(/usr/lib/libDrakX);
+use common;
+use pkgs;
+use interactive;
+use do_pkgs;
+use run_program;
+use standalone;
+
+my $in = interactive->vnew;
+
+my $wait = $in->wait_message(N("Hardware packages removal"),
+			     N("Finding unused hardware packages..."));
+
+my $do_pkgs = do_pkgs->do_pkgs($in);
+
+my @all_hardware_packages = (pkgs::detect_hardware_packages($do_pkgs, 'match_all_hardware'));
+my @used_hardware_packages = (pkgs::detect_hardware_packages($do_pkgs));
+my @unneeded_hardware_packages = difference2(\@all_hardware_packages, \@used_hardware_packages);
+my @unused_hardware_packages = $do_pkgs->are_installed(@unneeded_hardware_packages);
+
+undef $wait;
+
+#- we should have some gurpme
+if (@unused_hardware_packages &&
+    $in->ask_yesorno(
+	N("Hardware packages removal"),
+	N("The following hardware packages do not seem to be useful for your system:") . "\n" .
+	join("\n", map { "  " . $_ } sort(@unused_hardware_packages)) . "\n" .
+	N("Do you want to remove these packages?"))) {
+    my $_wait = $in->wait_message(N("Please wait"), N("Removing packages..."));
+    run_program::run('urpme', '--auto', @unused_hardware_packages);
+}

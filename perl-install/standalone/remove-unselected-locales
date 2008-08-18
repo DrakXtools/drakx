@@ -1,0 +1,40 @@
+#!/usr/bin/perl
+
+use lib qw(/usr/lib/libDrakX);
+use common;
+use lang;
+use interactive;
+use do_pkgs;
+use run_program;
+use standalone;
+
+my $locales_prefix = 'locales-';
+
+my $in = interactive->vnew;
+
+my $wait = $in->wait_message(N("Localization packages removal"),
+			     N("Finding unused localization packages..."));
+
+my $do_pkgs = do_pkgs->do_pkgs($in);
+my $locale = lang::read();
+my $selected_locale = $locales_prefix. $locale->{lang};
+my @available_locales = $do_pkgs->are_installed($locales_prefix . '*');
+
+my @unselected_locales;
+@unselected_locales = difference2(\@available_locales, [ $selected_locale ])
+    if member($selected_locale, @available_locales);
+
+undef $wait;
+
+#- we should have some gurpme
+if (@unselected_locales &&
+    $in->ask_yesorno(
+	N("Localization packages removal"),
+	N("The following localization packages do not seem to be useful for your system:") . "\n" .
+	join("\n", map { "  " . $_ } sort(@unselected_locales)) . "\n" .
+	N("Do you want to remove these packages?"))) {
+    my $_wait = $in->wait_message(N("Please wait"), N("Removing packages..."));
+    run_program::run('urpme', '--auto', @unselected_locales);
+}
+
+# use script from One to list language files (/usr/share/locale mainly) and remove them?
