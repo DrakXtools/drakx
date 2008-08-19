@@ -144,6 +144,19 @@ sub _gtk {
     $w;
 }
 
+sub _gtk__Install_Button {
+    my ($w, $opts, $class) = @_;
+    local $opts->{widget_name} = 'Banner';
+    local $opts->{padding} = [ 20, 0 ];
+    local $opts->{child} = gtknew('HBox', spacing => 5, 
+                             children_tight => [
+                                 gtknew('Image', file => 'advanced_expander'),
+                                 gtknew('Label', text => delete $opts->{text}),
+                             ],
+                         );
+    local $opts->{relief} = 'none' if $::isInstall;
+    _gtk__Button($w, $opts, 'Button');
+}
 
 sub _gtk__Button       { &_gtk_any_Button }
 sub _gtk__ToggleButton { &_gtk_any_Button }
