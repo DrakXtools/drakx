@@ -742,7 +742,8 @@ sub ask_fromW {
 
     my @more_buttons = (
 			if_($common->{interactive_help}, 
-			    [ N("Help"), sub { 
+                            [ gtknew('Install_Button', text => N("Help"),
+                                     clicked => sub { 
                          if (my $file = $common->{interactive_help_id}) {
                              require Gtk2::Html2;
                              my $view     = Gtk2::Html2::View->new;
@@ -778,7 +779,7 @@ sub ask_fromW {
                          }
 				  my $message = $common->{interactive_help}->() or return;
 				  $o->ask_warn(N("Help"), $message);
-			      }, 1 ]),
+			      }), undef, 1 ]),
 			if_($common->{more_buttons}, @{$common->{more_buttons}}),
 		       );
     my $buttons_pack = ($common->{ok} || !exists $common->{ok}) && $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @more_buttons);
