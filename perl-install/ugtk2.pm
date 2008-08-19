@@ -525,7 +525,9 @@ sub create_okcancel {
         my $wm = any::running_window_manager();
         $wm_is_kde = !$::isInstall && ($wm eq "kwin" || $wm eq "compiz" && fuzzy_pidofs(qr/\bkde-window-decorator\b/)) || 0;
     }
-    my $f = sub { $w->{buttons}{$_[0][0]} = gtknew('Button', text => $_[0][0], clicked => $_[0][1]) };
+    my $f = sub { $w->{buttons}{$_[0][0]} = ref($_[0][0]) =~ /Gtk2::Button/ ?
+                    $_[0][0] :
+                    gtknew('Button', text => $_[0][0], clicked => $_[0][1]) };
     my @left  = ((map { $f->($_) } grep {  $_->[2] && !$_->[3] } @other),
                   map { $f->($_) } grep { !$_->[2] && !$_->[3] } @other);
     my @right = ((map { $f->($_) } grep {  $_->[2] &&  $_->[3] } @other),
