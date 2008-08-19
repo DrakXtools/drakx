@@ -991,7 +991,7 @@ sub _create_Window {
 
 	if_($::isInstall, position => [
 	    $::rootwidth  + $::stepswidth - ($::o->{windowwidth} + $::real_windowwidth) / 2, 
-	    $::logoheight + ($::o->{windowheight} - $::real_windowheight) / 2,
+	    ($::o->{windowheight} - $::real_windowheight) / 2,
 	]),
     });
     my $w = _gtk(undef, 'Window', 'gtknew', $opts);
@@ -1031,7 +1031,7 @@ sub _create_Window {
 	    (undef, undef, $wi, $he) = @w_size;
 
             $w->move(max(0, $::rootwidth - ($::o->{windowwidth} + $wi) / 2), 
-		     max(0, $::logoheight + ($::o->{windowheight} - $he) / 2));
+		     max(0, ($::o->{windowheight} - $he) / 2));
 	});
 	#- without this, the focus is broken during install, though this is not needed during X test, why??
 	$w->show;
