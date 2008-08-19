@@ -769,8 +769,6 @@ sub ask_fromW {
                                                     ),
                                          ),
                                  );
-                             # make parent visible still visible:
-                             local ($::real_windowwidth, $::real_windowheight) = ($::real_windowwidth - 50, $::real_windowheight - 50);
                              mygtk2::set_main_window_size($w->{rwindow});
                              $w->{real_window}->grab_focus;
                              $w->{real_window}->show_all;
