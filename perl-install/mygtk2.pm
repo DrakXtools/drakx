@@ -387,9 +387,15 @@ sub title1_to_markup {
 
 sub _gtk__Install_Title {
     my ($w, $opts) = @_;
-    $opts->{widget_name} = 'Banner';
-    $opts->{padding} = [ 20, 0 ];
-    _gtk__Title2($w, $opts);
+    local $opts->{widget_name} = 'Banner';
+    gtknew('HBox', widget_name => 'Banner', children => [
+        0, gtknew('Label', padding => [ 6, 0 ]),
+        1, gtknew('VBox', widget_name => 'Banner', children_tight => [
+            _gtk__Title2($w, $opts),
+            if_($::isInstall, Gtk2::HSeparator->new),
+        ]),
+        0, gtknew('Label', padding => [ 6, 0 ]),
+    ]);
 }
 
 sub _gtk__Title1 {
@@ -660,9 +666,7 @@ sub _gtk__MagicWindow {
     my $provided_banner = delete $opts->{banner};
 
     if ($pop_it && $provided_banner) {
-	$sub_child = gtknew('VBox', children => [ 0, $provided_banner,
-                                                  if_($::isInstall, 0, Gtk2::HSeparator->new),
-                                                  if_($sub_child, 1, $sub_child) ]);
+	$sub_child = gtknew('VBox', children => [ 0, $provided_banner, if_($sub_child, 1, $sub_child) ]);
     } else {
 	$sub_child ||= gtknew('VBox');
     }
@@ -706,9 +710,7 @@ sub _gtk__MagicWindow {
 
 	$w = $::WizardWindow;
      
-	gtkadd($::WizardTable, children_tight => [ $provided_banner,
-                                                   if_($::isInstall, Gtk2::HSeparator->new),
-                                               ]) if $provided_banner;
+	gtkadd($::WizardTable, children_tight => [ $provided_banner ]) if $provided_banner;
 	gtkadd($::WizardTable, children_loose => [ $sub_child ]);
     }
     bless { 
