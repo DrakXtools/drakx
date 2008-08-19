@@ -111,7 +111,7 @@ sub _gtk {
 
     $w->set_size_request(delete $opts->{width} || -1, delete $opts->{height} || -1) if exists $opts->{width} || exists $opts->{height};
     if (my $position = delete $opts->{position}) {
-	$w->move($position->[0] /2, $position->[1] /2);
+	$w->move($position->[0], $position->[1]);
     }
     $w->set_name(delete $opts->{widget_name}) if exists $opts->{widget_name};
     $w->can_focus(delete $opts->{can_focus}) if exists $opts->{can_focus};
