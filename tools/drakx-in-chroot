@@ -15,10 +15,19 @@ my $COMPRESSED_FILE_REL = $COMPRESSED_LOCATION_REL . 'mdkinst.sqfs';
 my $AUTO_INSTALL_ROOTED = '/tmp/auto_inst.cfg.pl';
 my $DEFCFG_ROOTED = '/tmp/defcfg.pl';
 my $RPMSRATE_ROOTED = '/tmp/rpmsrate';
+my $resolution = '800x600';
 
-@ARGV >= 2 or die "usage: drakx-in-chroot <root of distrib> <dir to install to> [options]\n";
+@ARGV >= 2 or die "usage: drakx-in-chroot <root of distrib> <dir to install to> [options]\n
+\nOptions specific to drakx-in-chroot:
+    --resolution=XXXxYYYY (eg: --resolution=1024x768)\n";
 
 (my $repository, my $dir, @ARGV) = @ARGV;
+foreach (@ARGV) {
+    $i++;
+    if (/--resolution=(.*)/) {
+        $resolution = $1;
+    }
+}
 my ($repository_without_arch, $repository_arch) = basename($repository) eq arch() ? (dirname($repository), '/' . arch()) : ($repository, '');
 my $STAGE2_LOCATION = $SLASH_LOCATION . $STAGE2_LOCATION_ROOTED;
 
@@ -87,7 +96,7 @@ if (!-f ($SLASH_LOCATION . $AUTO_INSTALL_ROOTED) && $Xnest_bin) {
     my $DISPLAY = ':8';
     $Xnest_pid = fork();
     if (!$Xnest_pid) {
-	exec $Xnest_bin, $DISPLAY, '-ac', ($Xnest_bin eq 'Xephyr' ? '-screen' : '-geometry'), '800x600' or die "Xnest failed\n";
+	exec $Xnest_bin, $DISPLAY, '-ac', ($Xnest_bin eq 'Xephyr' ? '-screen' : '-geometry'), $resolution or die "Xnest failed\n";
     }
     $ENV{DISPLAY} = '127.0.0.1' . $DISPLAY;
 }
