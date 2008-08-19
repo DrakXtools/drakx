@@ -992,7 +992,7 @@ sub _create_Window {
             $no_Window_Manager ? 'center-always' : 'center-on-parent',
 
 	if_($::isInstall, position => [
-	    $::rootwidth  + $::stepswidth - ($::o->{windowwidth} + $::real_windowwidth) / 2, 
+	    $::stepswidth + ($::o->{windowwidth} - $::real_windowwidth) / 2, 
 	    ($::o->{windowheight} - $::real_windowheight) / 2,
 	]),
     });
