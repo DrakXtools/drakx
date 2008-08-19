@@ -578,10 +578,7 @@ sub all_entries {
 
 sub all_focusable_entries {
     my ($l) = @_;
-    map { $_->{type} eq 'expander' 
-	    ? ($_->{w}->get_expanded ? all_focusable_entries($_->{children}) : ())
-	    : $_;
-      } grep { $_->{focus_w} } @$l;
+    grep { $_->{focus_w} } @$l;
 }
 
 sub create_widgets_block {
