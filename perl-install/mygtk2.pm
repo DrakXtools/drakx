@@ -150,6 +150,7 @@ sub _gtk__Install_Button {
     local $opts->{padding} = [ 20, 0 ];
     local $opts->{child} = gtknew('HBox', spacing => 5, 
                              children_tight => [
+                                 # FIXME: not RTL compliant (lang::text_direction_rtl() ? ...)
                                  gtknew('Image', file => 'advanced_expander'),
                                  gtknew('Label', text => delete $opts->{text}),
                              ],
