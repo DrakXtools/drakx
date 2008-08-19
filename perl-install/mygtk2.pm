@@ -1033,6 +1033,7 @@ sub _create_Window {
 	    return if $w_size[2] < 5;
 	    return if $w_size[2] == $wi && $w_size[3] == $he; #BUG
 	    (undef, undef, $wi, $he) = @w_size;
+	    return if $wi <= 200 && $he <= 200;
 
             $w->move(max(0, $::rootwidth - ($::o->{windowwidth} + $wi) / 2), 
 		     max(0, ($::o->{windowheight} - $he) / 2));
