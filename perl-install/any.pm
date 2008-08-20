@@ -931,7 +931,8 @@ sub acceptLicense {
 
 		   [
                        { label => N("Do you accept this license ?") },
-                       { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list', format => sub { translate($_[0]) } } ])
+                       { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list', format => sub { translate($_[0]) } },
+                   ])
       or reboot($o);
 }
 
