@@ -887,13 +887,6 @@ sub display_release_notes {
     return;
 }
 
-sub get_release_notes_button {
-    my ($callback) = @_;
-    require mygtk2;
-    mygtk2->import('gtknew');
-    gtknew('Install_Button', text => N("Release Notes"), clicked => $callback);
-}
-
 sub acceptLicense {
     my ($o) = @_;
     require messages;
@@ -916,22 +909,21 @@ sub acceptLicense {
 
     my $r = $::testing ? 'Accept' : 'Refuse';
 
-    my $callback = sub { display_release_notes($o) };
     $o->ask_from_({ title => N("License agreement"), 
 		    focus_first => 1,
 		     cancel => N("Quit"),
 		     messages => formatAlaTeX(messages::main_license() . "\n\n\n" . messages::warning_about_patents()),
 		     interactive_help_id => 'acceptLicense',
-		     if_($o->{release_notes},
-                   more_buttons => [ [ 
-                       ($o->isa('install::steps_gtk') ? get_release_notes_button($callback) : N("Release Notes")), 
-                       $callback, 1 ] ]),
 		     callbacks => { ok_disabled => sub { $r eq 'Refuse' } },
 		   },
 
 		   [
                        { label => N("Do you accept this license ?") },
                        { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list', format => sub { translate($_[0]) } },
+                       if_($o->{release_notes},
+                           { clicked => sub { display_release_notes($o) },
+                             val => \ (my $_t1 = N("Release Notes")), install_button => 1, no_indent => 1 }
+                       ), 
                    ])
       or reboot($o);
 }
