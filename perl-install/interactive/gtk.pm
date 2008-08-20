@@ -394,8 +394,8 @@ sub create_widget {
     } elsif ($e->{type} eq 'empty') {
 	$w = gtknew('HBox', height => $e->{height});
     } elsif ($e->{type} eq 'button') {
-	$w = Gtk2::Button->new_with_label('');
-	$w->signal_connect(clicked => $e->{clicked_may_quit_cooked});
+	$w = gtknew('Button',
+                    text => '', clicked => $e->{clicked_may_quit_cooked});
 	# guard against 'advanced' widgets that are now in their own dialog
 	# (instead of in another block child of an expander)
 	$set = sub { $w->child && $w->child->set_label(may_apply($e->{format}, $_[0])) };
