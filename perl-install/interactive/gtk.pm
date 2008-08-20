@@ -394,11 +394,18 @@ sub create_widget {
     } elsif ($e->{type} eq 'empty') {
 	$w = gtknew('HBox', height => $e->{height});
     } elsif ($e->{type} eq 'button') {
-	$w = gtknew('Button',
+	$w = gtknew(($e->{install_button} ? 'Install_Button' : 'Button'), 
                     text => '', clicked => $e->{clicked_may_quit_cooked});
-	# guard against 'advanced' widgets that are now in their own dialog
-	# (instead of in another block child of an expander)
-	$set = sub { $w->child && $w->child->set_label(may_apply($e->{format}, $_[0])) };
+	$set = sub {
+            my $w = $w->child;
+            # handle Install_Buttons:
+            if (ref($w) =~ /Gtk2::HBox/) {
+                ($w) = grep { ref($_) =~ /Gtk2::Label/ } $w->get_children;
+            };
+            # guard against 'advanced' widgets that are now in their own dialog
+            # (instead of in another block child of an expander):
+            return if !$w;
+            $w->set_label(may_apply($e->{format}, $_[0])) };
     } elsif ($e->{type} eq 'range') {
 	my $adj = Gtk2::Adjustment->new(${$e->{val}}, $e->{min}, $e->{max} + ($e->{SpinButton} ? 0 : 1), 1, ($e->{max} - $e->{min}) / 10, 1);
 	$w = $e->{SpinButton} ? Gtk2::SpinButton->new($adj, 10, 0) : Gtk2::HScale->new($adj);
