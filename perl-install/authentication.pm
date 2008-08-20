@@ -483,7 +483,7 @@ sub get_pam_authentication_kinds() {
 sub sufficient {
     my ($ccreds, $module, $type) = @_;
 
-    $ccreds && member($module, 'pam_unix' , 'pam_winbind') ?
+    $ccreds && member($module, 'pam_tcb' , 'pam_winbind') ?
       'sufficient' :
     $ccreds && member($module, 'pam_ldap', 'pam_krb5') && $type eq 'account' ?
       '[authinfo_unavail=ignore default=done]' :
@@ -548,7 +548,7 @@ sub set_pam_authentication {
 		#- first removing previous config
 		$_ = '';
 	    }
-	    if ($module eq 'pam_unix' && $special{$type}) {
+	    if ($module eq 'pam_tcb' && $special{$type}) {
 		my @para_for_last = 
 		    member($type, 'auth', 'account') ? qw(use_first_pass) : @{[]};
 		@para = difference2(\@para, \@para_for_last);
@@ -560,7 +560,7 @@ sub set_pam_authentication {
 		}
 
 		my @l = ((map { [ "pam_$_" ] } @$before_noask),
-			 [ 'pam_unix', @para ],
+			 [ 'pam_tcb', @para ],
 			 (map { [ "pam_$_" ] } @$ask),
 			 );
 		push @{$l[-1]}, @para_for_last;
@@ -588,7 +588,7 @@ sub set_pam_authentication {
 	    if (my $s = delete $before_first{$type}) {
 		$_ = $s . $_;
 	    }
-	    if ($control eq 'required' && member($module, 'pam_deny', 'pam_permit', 'pam_unix')) {
+	    if ($control eq 'required' && member($module, 'pam_deny', 'pam_permit', 'pam_tcb')) {
 		if (my $s = delete $after_deny{$type}) {
 		    $_ .= $s;
 		}
