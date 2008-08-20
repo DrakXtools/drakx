@@ -134,7 +134,7 @@ sub bestKernel_extensions {
     $o_match_all_hardware ? (arch() =~ /i.86/ ? '-desktop586' : '-desktop') :
       detect_devices::is_xbox() ? '-xbox' :
       detect_devices::is_i586() ? '-desktop586' :
-      detect_devices::dmi_detect_memory() > 3.8 * 1024 ? '-server' :
+      arch() =~ /i.86/ && detect_devices::dmi_detect_memory() > 3.8 * 1024 ? '-server' :
       '-desktop';
 }
 
