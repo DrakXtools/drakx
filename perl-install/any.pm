@@ -945,7 +945,7 @@ sub selectLanguage_install {
     my ($in, $locale) = @_;
 
     my $common = { 
-		   title => N("Please choose a language to use."),
+		   title => N("Please choose a language to use"),
 		   interactive_help_id => 'selectLanguage' };
 
     my $lang = $locale->{lang};
@@ -1010,7 +1010,7 @@ when your installation is complete and you restart your system.")),
 sub selectLanguage_standalone {
     my ($in, $locale) = @_;
 
-    my $common = { messages => N("Please choose a language to use."),
+    my $common = { messages => N("Please choose a language to use"),
 		   title => N("Language choice"),
 		   interactive_help_id => 'selectLanguage' };
 
