@@ -396,6 +396,8 @@ sub create_widget {
     } elsif ($e->{type} eq 'button') {
 	$w = Gtk2::Button->new_with_label('');
 	$w->signal_connect(clicked => $e->{clicked_may_quit_cooked});
+	# guard against 'advanced' widgets that are now in their own dialog
+	# (instead of in another block child of an expander)
 	$set = sub { $w->child && $w->child->set_label(may_apply($e->{format}, $_[0])) };
     } elsif ($e->{type} eq 'range') {
 	my $adj = Gtk2::Adjustment->new(${$e->{val}}, $e->{min}, $e->{max} + ($e->{SpinButton} ? 0 : 1), 1, ($e->{max} - $e->{min}) / 10, 1);
