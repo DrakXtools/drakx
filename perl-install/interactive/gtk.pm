@@ -413,7 +413,7 @@ sub create_widget {
 	my $box = create_widgets_block($o, $children, $update, $ignore_ref);
 	$w = gtknew('HBox', children_tight => [
             gtknew('Install_Button', text => $e->{text},
-                   clicked => sub { ask_fromW($o, { }, $e->{children}) }
+                   clicked => sub { ask_fromW($o, { title => N("Advanced") }, $e->{children}) }
                )
         ]);
     } elsif ($e->{type} =~ /list/) {
