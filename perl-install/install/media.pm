@@ -647,7 +647,7 @@ sub get_media_cfg {
         }
     }
 
-    my $suppl_CDs = $distribconf->{suppl} || $o->{supplmedia} || 0;
+    my $suppl_CDs = exists $o->{supplmedia} ? $o->{supplmedia} : $distribconf->{suppl} || 0;
     my $deselectionAllowed = $distribconf->{askmedia} || $o->{askmedia} || 0;
 
     associate_phys_media($o->{all_hds}, $phys_medium, $hdlists);
