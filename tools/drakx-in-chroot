@@ -69,12 +69,7 @@ if ($remote_repository) {
 }
 
 sys("$sudo mount -o bind $dir $SLASH_LOCATION$prefix_ROOTED");
-
-if ($repository_uri) {
-    $repository_uri = '/C/cooker/i586';
-} elsif (!$remote_repository) {
-    $repository_uri = $repository_without_arch;
-}
+$repository_uri ||= $repository_without_arch if !$remote_repository;
 sys("$sudo mount -o bind $repository_uri $SLASH_LOCATION$MEDIA_LOCATION_ROOTED") if $repository_uri;
 
 sys("$sudo mount -t proc none $SLASH_LOCATION/proc");
