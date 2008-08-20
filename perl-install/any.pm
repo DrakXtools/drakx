@@ -868,7 +868,7 @@ sub display_release_notes {
     $document->open_stream("text/html");
     $document->write_stream($o->{release_notes});
                                
-    my $w = ugtk2->new(N("Release Notes"), transient => $::main_window, modal => 1);
+    my $w = ugtk2->new(N("Release Notes"), transient => $::main_window, modal => 1, pop_it => 1);
     gtkadd($w->{rwindow},
            gtkpack_(Gtk2::VBox->new,
                     1, create_scrolled_window(ugtk2::gtkset_border_width($view, 5),
