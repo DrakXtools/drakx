@@ -156,7 +156,6 @@ our %l = (
     pcmcia => [
       if_(arch() !~ /^sparc/, qw(au1x00_ss i82365 i82092 pd6729 tcic vrc4171_card vrc4173_cardu yenta_socket)), # cb_enabler
     ],
-    usb_keyboard => [ qw(usbkbd keybdev) ],
    #serial_cs
    #ftl_cs 3c575_cb apa1480_cb epic_cb serial_cb tulip_cb iflash2+_mtd iflash2_mtd
    #cb_enabler

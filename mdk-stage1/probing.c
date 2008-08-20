@@ -294,7 +294,7 @@ void discovered_device(enum driver_type type, const char * description, const ch
 #endif
 #ifdef ENABLE_USB
 	if (type == USB_CONTROLLERS)
-                /* we can't allow additional modules floppy since we need usbkbd for keystrokes of usb keyboards */
+                /* we can't allow additional modules floppy since we need usbhid for keystrokes of usb keyboards */
 		failed = my_insmod(driver, USB_CONTROLLERS, NULL, 0);
 #endif
 }
@@ -377,8 +377,7 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 			}
 			wait_message("Detecting USB devices.");
 			sleep(4); /* sucking background work */
-			my_insmod("usbkbd", ANY_DRIVER_TYPE, NULL, 0);
-			my_insmod("keybdev", ANY_DRIVER_TYPE, NULL, 0);
+			my_insmod("usbhid", ANY_DRIVER_TYPE, NULL, 0);
 			remove_wait_message();
 		}
 

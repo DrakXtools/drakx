@@ -267,7 +267,7 @@ sub when_load_category {
             require fs::mount; fs::mount::usbfs('');
             #- ensure keyboard is working, the kernel must do the job the BIOS was doing
             sleep 4;
-            load("usbkbd", "keybdev") if detect_devices::usbKeyboards();
+            load("usbhid") if detect_devices::usbKeyboards();
         };
     } elsif ($category eq 'bus/firewire') {
 	$conf->set_alias('ieee1394-controller', $name);
