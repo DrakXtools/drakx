@@ -601,6 +601,10 @@ my %IM_config =
              XIM_PROGRAM => 'gcin',
              XMODIFIERS => '@im=gcin',
 	     langs => 'zh',
+	     packages => {
+		     common => sub { if_($is_kde3, 'gcin-qt3'), if_($is_kde4, 'gcin-qt4') },
+		     generic => sub { qw(gcin) },
+	     },
             },
    'im-ja' => {
                GTK_IM_MODULE => 'im-ja',
@@ -685,7 +689,10 @@ my %IM_config =
            XIM_PROGRAM => 'uim-xim',
            XMODIFIERS => '@im=uim',
 	   langs => 'ja',
-	   packages => { generic => sub { qw(uim-gtk uim) } },
+	   packages => {
+		  common => sub { if_($is_kde3, 'uim-qtimmodule'), if_($is_kde4, 'uim-qt4immodule') },
+		  generic => sub { qw(uim-gtk uim) },
+	  },
           },
    xcin => {
             XIM => 'xcin',
