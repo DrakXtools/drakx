@@ -14,6 +14,7 @@ use run_program;
 use devices;
 use log;
 use fsedit;
+use feature qw(state);
 
 my ($width, $height, $minwidth) = (400, 50, 5);
 my ($all_hds, $in, $do_force_reload, $current_kind, $current_entry, $update_all);
@@ -86,8 +87,12 @@ sub main {
     $notebook_widget->signal_connect(switch_page => sub {
 	$current_kind = $notebook[$_[2]];
 	$current_entry = '';
-	$update_all->();
+	state $not_first;
+	$update_all->() if $not_first;
+	$not_first = 1;
     });
+    # ensure partitions bar is properlyz size on first display:
+    $notebook_widget->signal_connect(realize => $update_all);
     $w->sync;
     $done_button->grab_focus;
     $in->ask_from_list_(N("Read carefully!"), N("Please make a backup of your data first"), 
