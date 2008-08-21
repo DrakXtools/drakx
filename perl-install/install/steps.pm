@@ -418,6 +418,7 @@ sub installPackages { #- complete REWORK, TODO and TOCHECK!
 	local $ENV{DURING_INSTALL} = 1;
 	local $ENV{TMPDIR} = '/tmp';
 	local $ENV{TMP} = '/tmp';
+	local $ENV{HOME};
 	install::pkgs::install($o->{isUpgrade}, \@toInstall, $packages, \&installCallback);
     }
     any::writeandclean_ldsoconf($::prefix);
