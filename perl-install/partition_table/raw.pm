@@ -263,8 +263,8 @@ sub pt_info_to_primary {
 sub test_for_bad_drives {
     my ($hd) = @_;
 
-    log::l("test_for_bad_drives($hd->{file})");
     my $sector = $hd->{geom} ? $hd->{geom}{sectors} - 1 : 0;
+    log::l("test_for_bad_drives($hd->{file} on sector #$sector)");
     
     sub error { die "$_[0] error: $_[1]" }
 
