@@ -1,4 +1,7 @@
 - probe floppies only once
+- do not bother probing /dev/fd0 and loading floppy device uselessly,
+  it takes time and it is already done by boot process
+  (just check /proc/devices)
 
 Version 11.21 - 21 August 2008
 

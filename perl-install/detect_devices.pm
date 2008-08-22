@@ -56,7 +56,11 @@ sub floppies {
     if (!$o_not_detect_legacy_floppies && !$legacy_already_detected) {
         $legacy_already_detected = 1;
         eval { modules::load("floppy") if $::isInstall };
-        if (!is_xbox()) {
+        #- do not bother probing /dev/fd0 and loading floppy device uselessly,
+        #- it takes time and it is already done by boot process (if not in install):
+        #-   /dev/fd0 is created by start_udev (/etc/udev/devices.d/default.nodes)
+        #-   then hal probes /dev/fd0 and triggers floppy module loading through kernel's kmod
+        if (any { (split)[1] eq 'fd' } cat_("/proc/devices")) {
             @fds = map {
                 my $info = c::floppy_info(devices::make("fd$_"));
                 if_($info && $info ne '(null)', { device => "fd$_", media_type => 'fd', info => $info });
