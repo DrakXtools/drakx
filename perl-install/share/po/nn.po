@@ -7,13 +7,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
 "POT-Creation-Date: 2008-08-18 18:01+0200\n"
-"PO-Revision-Date: 2008-03-12 09:54+0100\n"
+"PO-Revision-Date: 2008-08-22 18:19+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 0.2\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: any.pm:245 diskdrake/interactive.pm:554 diskdrake/interactive.pm:741
@@ -83,9 +83,9 @@ msgstr ""
 "Kven av diskane er oppstartsdisk?"
 
 #: any.pm:339
-#, fuzzy, c-format
+#, c-format
 msgid "First sector (MBR) of drive %s"
-msgstr "Første sektor på stasjonen (MBR)"
+msgstr "Første sektor på stasjonen %s (MBR)"
 
 #: any.pm:341
 #, c-format
@@ -205,8 +205,7 @@ msgstr "avgrens"
 
 #: any.pm:412
 #, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
+msgid "Option ``Restrict command line options'' is of no use without a password"
 msgstr "Valet «Avgrens kommandolinjeval» er ubrukeleg utan passord"
 
 #: any.pm:414
@@ -400,10 +399,8 @@ msgstr "Skriv inn brukarnamn"
 
 #: any.pm:769
 #, c-format
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
-msgstr ""
-"Brukarnamnet kan berre innehelda små bokstavar, tala og teikna «-» og «_»"
+msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgstr "Brukarnamnet kan berre innehelda små bokstavar, tala og teikna «-» og «_»"
 
 #: any.pm:770
 #, c-format
@@ -516,9 +513,9 @@ msgid "Quit"
 msgstr "Avslutt"
 
 #: any.pm:925
-#, fuzzy, c-format
+#, c-format
 msgid "Do you accept this license ?"
-msgstr "Har du fleire?"
+msgstr "Godtek du lisensvilkåra?"
 
 #: any.pm:926
 #, c-format
@@ -650,8 +647,7 @@ msgstr ""
 
 #: any.pm:1189
 #, c-format
-msgid ""
-"You can export using NFS or SMB. Please select which you would like to use."
+msgid "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Du kan eksportera med NFS og SMB. Vel kven av dei du vil bruka."
 
 #: any.pm:1217
@@ -747,7 +743,7 @@ msgstr "Windows-domene"
 #: authentication.pm:30
 #, c-format
 msgid "Kerberos 5"
-msgstr ""
+msgstr "Kerberos 5"
 
 #: authentication.pm:64
 #, c-format
@@ -756,10 +752,8 @@ msgstr "Lokal fil:"
 
 #: authentication.pm:64
 #, c-format
-msgid ""
-"Use local for all authentication and information user tell in local file"
-msgstr ""
-"Bruk lokal for all autentisering og informasjon brukarar oppgjev i lokal fil"
+msgid "Use local for all authentication and information user tell in local file"
+msgstr "Bruk lokal for all autentisering og informasjon brukarar oppgjev i lokal fil"
 
 #: authentication.pm:65
 #, c-format
@@ -806,7 +800,7 @@ msgstr ""
 #: authentication.pm:68
 #, c-format
 msgid "Kerberos 5 :"
-msgstr ""
+msgstr "Kerberos 5:"
 
 #: authentication.pm:68
 #, c-format
@@ -818,20 +812,20 @@ msgstr "Med Kerberos og Ldap for autotentisering i Active Directory-tenar "
 #: authentication.pm:871
 #, c-format
 msgid " "
-msgstr ""
+msgstr " "
 
 #: authentication.pm:97 authentication.pm:131 authentication.pm:177
 #: authentication.pm:201
-#, fuzzy, c-format
+#, c-format
 msgid "Welcome to the Authentication Wizard"
-msgstr "Treng domeneautentisering"
+msgstr "Velkommen til autentiseringsvegvisaren"
 
 #: authentication.pm:99
 #, c-format
 msgid ""
 "You have selected LDAP authentication. Please review the configuration "
 "options below "
-msgstr ""
+msgstr "Du har valt LDAP-autentisering. Sjå gjennom oppsettvala nedanfor."
 
 #: authentication.pm:101 authentication.pm:156
 #, c-format
@@ -839,32 +833,32 @@ msgid "LDAP Server"
 msgstr "LDAP-tenar"
 
 #: authentication.pm:102 authentication.pm:157
-#, fuzzy, c-format
+#, c-format
 msgid "Base dn"
-msgstr "LDAP-grunn-DN"
+msgstr "Grunn-DN"
 
 #: authentication.pm:103
 #, c-format
 msgid "Fetch base Dn "
-msgstr ""
+msgstr "Hent grunn-Dn "
 
 #: authentication.pm:105 authentication.pm:160
 #, c-format
 msgid "Use encrypt connection with TLS "
-msgstr ""
+msgstr "Bruk kryptert samband med TLS"
 
 #: authentication.pm:106 authentication.pm:161
 #, c-format
 msgid "Download CA Certificate "
-msgstr ""
+msgstr "Last ned CA-sertifikat"
 
 #: authentication.pm:108 authentication.pm:141
 #, c-format
 msgid "Use Disconnect mode "
-msgstr ""
+msgstr "Bruk fråkoplamodus"
 
 #: authentication.pm:109 authentication.pm:162
-#, fuzzy, c-format
+#, c-format
 msgid "Use anonymous BIND "
 msgstr "Bruk anonym BIND "
 
@@ -872,93 +866,93 @@ msgstr "Bruk anonym BIND "
 #: authentication.pm:119
 #, c-format
 msgid "  "
-msgstr ""
+msgstr "  "
 
 #: authentication.pm:111 authentication.pm:163
 #, c-format
 msgid "Bind DN "
-msgstr ""
+msgstr "Bind-DN "
 
 #: authentication.pm:112 authentication.pm:164
-#, fuzzy, c-format
+#, c-format
 msgid "Bind Password "
-msgstr "Passord"
+msgstr "Bind-passord "
 
 #: authentication.pm:114
 #, c-format
 msgid "Advanced path for group "
-msgstr ""
+msgstr "Avansert adresse til gruppe "
 
 #: authentication.pm:116
-#, fuzzy, c-format
+#, c-format
 msgid "Password base"
-msgstr "Passord"
+msgstr "Passordbase"
 
 #: authentication.pm:117
-#, fuzzy, c-format
+#, c-format
 msgid "Group base"
-msgstr "Gruppe-ID"
+msgstr "Gruppebase"
 
 #: authentication.pm:118
 #, c-format
 msgid "Shadow base"
-msgstr ""
+msgstr "Skuggebase"
 
 #: authentication.pm:133
 #, c-format
 msgid ""
 "You have selected Kerberos 5 authentication. Please review the configuration "
 "options below "
-msgstr ""
+msgstr "Du har valt Kerberos 5-autentisering. Sjå gjennom oppsettvala nedanfor."
 
 #: authentication.pm:135
-#, fuzzy, c-format
+#, c-format
 msgid "Realm "
-msgstr "Fullt namn"
+msgstr "Område"
 
 #: authentication.pm:137
-#, fuzzy, c-format
+#, c-format
 msgid "KDCs Servers"
-msgstr "LDAP-tenar"
+msgstr "KDCs-tenarar"
 
 #: authentication.pm:139
 #, c-format
 msgid "Use DNS to resolve hosts for realms "
-msgstr ""
+msgstr "Bruk DNS for vertsoppslag i område"
 
 #: authentication.pm:140
 #, c-format
 msgid "Use DNS to resolve KDCs for realms "
-msgstr ""
+msgstr "Bruk DNS for KDC-oppslag i område"
 
 #: authentication.pm:145
-#, fuzzy, c-format
+#, c-format
 msgid "Use local file for users informations"
-msgstr "Bruk libsafe for tenarar"
+msgstr "Bruk lokalfil for brukarinformasjon"
 
 #: authentication.pm:146
-#, fuzzy, c-format
+#, c-format
 msgid "Use Ldap for users informations"
-msgstr "Harddiskinformasjon"
+msgstr "Bruk LDAP for brukarinformasjon"
 
 #: authentication.pm:152
 #, c-format
 msgid ""
 "You have selected Kerberos 5 for authentication, now you must choose the "
 "type of users information "
-msgstr ""
+msgstr "Du har valt Kerberos 5 for autentisering. No må velja type brukarinformasjon."
 
 #: authentication.pm:158
 #, c-format
 msgid "Fecth base Dn "
-msgstr ""
+msgstr "Hent grunn-Dn "
 
 #: authentication.pm:179
 #, c-format
 msgid ""
 "You have selected NIS authentication. Please review the configuration "
 "options below "
-msgstr ""
+msgstr "Du har valt NIS-autentisering. Sjå gjennom oppsettvala nedanfor."
 
 #: authentication.pm:181
 #, c-format
@@ -975,12 +969,12 @@ msgstr "NIS-tenar"
 msgid ""
 "You have selected Windows Domain authentication. Please review the "
 "configuration options below "
-msgstr ""
+msgstr "Du har valt Windows-domene-autentisering. Sjå gjennom oppsettvala nedanfor."
 
 #: authentication.pm:207
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Model "
-msgstr "Domene"
+msgstr "Domenemodell"
 
 #: authentication.pm:209
 #, c-format
@@ -1019,14 +1013,14 @@ msgid "Select file"
 msgstr "Vel fil"
 
 #: authentication.pm:872
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Windows for authentication : "
-msgstr "Treng domeneautentisering"
+msgstr "Domene for autentisering:"
 
 #: authentication.pm:874
 #, c-format
 msgid "Domain Admin User Name"
-msgstr "Brukarnamn for domeneadministrator"
+msgstr "Brukarnamn til domeneadiministrator"
 
 #: authentication.pm:875
 #, c-format
@@ -1089,8 +1083,7 @@ msgstr "Du kan ikkje installera oppstartslastaren på ein «%s»-partisjon\n"
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
 "renumbered"
-msgstr ""
-"Oppstartslastaren må oppdaterast, då partisjonane har fått ny rekkjefølgje"
+msgstr "Oppstartslastaren må oppdaterast, då partisjonane har fått ny rekkjefølgje"
 
 #: bootloader.pm:1977
 #, c-format
@@ -1258,7 +1251,7 @@ msgstr "Partisjonering"
 #: diskdrake/hd_gtk.pm:66
 #, c-format
 msgid "Click on a partition, choose a filesystem type then choose an action"
-msgstr ""
+msgstr "Trykk på ein partisjon, vel ein filsystemtype og så ei handling."
 
 #: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1010
 #: diskdrake/interactive.pm:1020 diskdrake/interactive.pm:1073
@@ -1455,8 +1448,7 @@ msgstr "Vil du lagra endringar i «/etc/fstab»"
 #: diskdrake/interactive.pm:284 fs/partitioning_wizard.pm:250
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr ""
-"Du må starta på nytt for at endringane i partisjontabellen skal trå i kraft"
+msgstr "Du må starta på nytt for at endringane i partisjontabellen skal trå i kraft"
 
 #: diskdrake/interactive.pm:289
 #, c-format
@@ -1618,8 +1610,7 @@ msgstr "Vil du fjerna filmonteringsfila?"
 
 #: diskdrake/interactive.pm:532
 #, c-format
-msgid ""
-"After changing type of partition %s, all data on this partition will be lost"
+msgid "After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "Når du har endra partisjonstypen til «%s» vil alle data på denne partisjonen "
 "vera tapt"
@@ -1697,8 +1688,7 @@ msgstr "Du bør ta reservekopi av alle data på denne partisjonen"
 #: diskdrake/interactive.pm:701
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
-msgstr ""
-"Når du har endra storleik på «%s» vil alle data på denne partisjonen vera tapt"
+msgstr "Når du har endra storleik på «%s» vil alle data på denne partisjonen vera tapt"
 
 #: diskdrake/interactive.pm:708
 #, c-format
@@ -2150,8 +2140,7 @@ msgstr "Endå ein"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
+msgid "Please enter your username, password and domain name to access this host."
 msgstr "Skriv inn brukarnamn, passord og domenenamn for verten."
 
 #: diskdrake/smbnfs_gtk.pm:180
@@ -2489,9 +2478,9 @@ msgstr ""
 "ikkje nok ledig plass)"
 
 #: fs/partitioning_wizard.pm:127
-#, fuzzy, c-format
+#, c-format
 msgid "Use the free space on a Microsoft Windows® partition"
-msgstr "Bruk ledig plass på Windows-partisjon"
+msgstr "Bruk ledig plass på Microsoft Windows®-partisjonen"
 
 #: fs/partitioning_wizard.pm:129
 #, c-format
@@ -3075,10 +3064,9 @@ msgstr "Lydoppsett"
 msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
 "sound card (%s)."
-msgstr ""
-"Her kan du velja ein annan OSS- eller ALSA-drivar for lydkortet ditt («%s»)."
+msgstr "Her kan du velja ein annan OSS- eller ALSA-drivar for lydkortet ditt («%s»)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:392
@@ -3614,7 +3602,7 @@ msgstr "Den sentralafrikanske republikken"
 #: lang.pm:249
 #, c-format
 msgid "Congo (Brazzaville)"
-msgstr "Kongo-Brazaville"
+msgstr "Kongo-Brazzaville"
 
 #: lang.pm:250 mirror.pm:39 timezone.pm:255
 #, c-format
@@ -5194,8 +5182,7 @@ msgstr "Klarte ikkje installera pakkane for deling av skannar(ar)."
 #: scanner.pm:202
 #, c-format
 msgid "Your scanner(s) will not be available for non-root users."
-msgstr ""
-"Skannaren/-ane vil ikkje vera tilgjengeleg for andre brukarar enn «root»."
+msgstr "Skannaren/-ane vil ikkje vera tilgjengeleg for andre brukarar enn «root»."
 
 #: security/help.pm:11
 #, c-format
@@ -5250,8 +5237,7 @@ msgstr "Godta direkte «root»-innlogging."
 
 #: security/help.pm:33
 #, c-format
-msgid ""
-"Allow the list of users on the system on display managers (kdm and gdm)."
+msgid "Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr "Godta vising av brukarar i innloggingshandsamarar (kdm og gdm)."
 
 #: security/help.pm:35
@@ -5448,8 +5434,7 @@ msgstr "Vel storleik på passordlogg for å hindra gjenbruk av passord."
 msgid ""
 "Set the password minimum length and minimum number of digit and minimum "
 "number of capitalized letters."
-msgstr ""
-"Vel minstelengd på passord og minimum tal på siffer og store bokstavar."
+msgstr "Vel minstelengd på passord og minimum tal på siffer og store bokstavar."
 
 #: security/help.pm:108
 #, c-format
@@ -5483,14 +5468,12 @@ msgstr ""
 #: security/help.pm:117
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
-msgstr ""
-"Kontroller løyve til filer i heimemappe til brukarar viss sett til «ja»."
+msgstr "Kontroller løyve til filer i heimemappe til brukarar viss sett til «ja»."
 
 #: security/help.pm:118
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
-msgstr ""
-"Kontroller om nettverksgrensesnitt er i promiskuitetsmodus viss sett til «ja»."
+msgstr "Kontroller om nettverksgrensesnitt er i promiskuitetsmodus viss sett til «ja»."
 
 #: security/help.pm:119
 #, c-format
@@ -5534,8 +5517,7 @@ msgstr "Køyr «chkrootkit»-kontrollar viss sett til «ja»."
 
 #: security/help.pm:127
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
+msgid "if set, send the mail report to this email address else send it to root."
 msgstr "Send rapport på e-post til denne adressa, eller til «root» viss tom."
 
 #: security/help.pm:128
@@ -5958,10 +5940,8 @@ msgstr "Bruk libsafe for tenarar"
 
 #: security/level.pm:63
 #, c-format
-msgid ""
-"A library which defends against buffer overflow and format string attacks."
-msgstr ""
-"Eit bibliotek som vernar mot overflytsfeil og strengformateringsangrep."
+msgid "A library which defends against buffer overflow and format string attacks."
+msgstr "Eit bibliotek som vernar mot overflytsfeil og strengformateringsangrep."
 
 #: security/level.pm:64
 #, c-format
@@ -6010,8 +5990,7 @@ msgstr ""
 
 #: services.pm:28
 #, c-format
-msgid ""
-"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr "Common UNIX Printing System (CUPS) er eit avansert utskriftskøsystem."
 
 #: services.pm:29
@@ -6045,21 +6024,18 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
-"HAL er ei teneste som samlar inn og vedlikeheld informasjon om maskinvare."
+msgstr "HAL er ei teneste som samlar inn og vedlikeheld informasjon om maskinvare."
 
 #: services.pm:36
 #, c-format
 msgid ""
 "HardDrake runs a hardware probe, and optionally configures\n"
 "new/changed hardware."
-msgstr ""
-"HardDrake køyrer eit maskinvaresøk, og kan setja opp ny og endra maskinvare."
+msgstr "HardDrake køyrer eit maskinvaresøk, og kan setja opp ny og endra maskinvare."
 
 #: services.pm:38
 #, c-format
-msgid ""
-"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr "Apache er ein vevtenar."
 
 #: services.pm:39
@@ -6241,16 +6217,14 @@ msgstr ""
 msgid ""
 "Postfix is a Mail Transport Agent, which is the program that moves mail from "
 "one machine to another."
-msgstr ""
-"Postfix er eit program for overføring av elektronisk post mellom maskiner."
+msgstr "Postfix er eit program for overføring av elektronisk post mellom maskiner."
 
 #: services.pm:79
 #, c-format
 msgid ""
 "Saves and restores system entropy pool for higher quality random\n"
 "number generation."
-msgstr ""
-"Lagrar og gjenopprettar systementropigrunnlag for betre slumptalsgenerering."
+msgstr "Lagrar og gjenopprettar systementropigrunnlag for betre slumptalsgenerering."
 
 #: services.pm:81
 #, c-format
@@ -6302,8 +6276,7 @@ msgstr ""
 
 #: services.pm:92
 #, c-format
-msgid ""
-"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
 "SANE (Scanner Access Now Easy) gjev tilgang til skannarar, filmkamera og "
 "liknande."
@@ -6998,3 +6971,4 @@ msgstr "Feil ved installering."
 
 #~ msgid "Enable/Disable msec hourly security check."
 #~ msgstr "Slå på/av msec-basert tryggleikskontroll."
+
