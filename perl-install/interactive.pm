@@ -46,6 +46,7 @@ use do_pkgs;
 #-  disabled => function returning wether it should be disabled (grayed)
 #-  focus    => function returning wether it should be focused
 #-  do_not_expand => do not eat all horizontal space
+#-  install_button => if possible, use improved graphical style
 #-  gtk      => gtk preferences
 #-  type     => 
 #-     button => (with clicked or clicked_may_quit)
