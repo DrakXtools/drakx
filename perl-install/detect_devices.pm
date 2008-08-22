@@ -13,6 +13,7 @@ use devices;
 use run_program;
 use modules;
 use c;
+use feature 'state';
 
 #-#####################################################################################
 #- Globals
@@ -51,7 +52,9 @@ sub floppies {
     my ($o_not_detect_legacy_floppies) = @_;
     require modules;
     my @fds;
-    if (!$o_not_detect_legacy_floppies) {
+    state $legacy_already_detected;
+    if (!$o_not_detect_legacy_floppies && !$legacy_already_detected) {
+        $legacy_already_detected = 1;
         eval { modules::load("floppy") if $::isInstall };
         if (!is_xbox()) {
             @fds = map {
