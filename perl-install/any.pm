@@ -48,7 +48,7 @@ sub alloc_user_faces {
 }
 
 sub create_user {
-    my ($u, $isMD5) = @_;
+    my ($u, $authentication) = @_;
 
     my @existing = stat("$::prefix/home/$u->{name}");
 
@@ -72,7 +72,7 @@ sub create_user {
 	my $symlink_home_from = $u->{rename_from} && (getpwnam($u->{rename_from}))[7];
 	run_program::raw({ root => $::prefix, sensitive_arguments => 1 },
 			    ($u->{rename_from} ? 'usermod' : 'adduser'), 
-			    '-p', authentication::user_crypted_passwd($u, $isMD5),
+			    '-p', authentication::user_crypted_passwd($u, $authentication),
 			    if_($uid, '-u', $uid), if_($gid, '-g', $gid), 
 			    if_($u->{realname}, '-c', $u->{realname}),
 			    if_($u->{home}, '-d', $u->{home}, if_($u->{rename_from}, '-m')),
@@ -97,7 +97,7 @@ sub add_users {
     alloc_user_faces($users);
 
     foreach (@$users) {
-	create_user($_, $authentication->{md5});
+	create_user($_, $authentication);
 	run_program::rooted($::prefix, "usermod", "-G", join(",", @{$_->{groups}}), $_->{name}) if !is_empty_array_ref($_->{groups});
 	addKdmIcon($_->{name}, delete $_->{auto_icon} || $_->{icon});
     }

@@ -259,8 +259,9 @@ sub check_given_password {
 
 sub get() {
     my $system_auth = cat_("/etc/pam.d/system-auth");
-    my $authentication = { 
-	md5 => to_bool($system_auth =~ /md5/), shadow => to_bool($system_auth =~ /shadow/),
+    my $authentication = {
+	md5      => to_bool($system_auth =~ /md5/), 
+	shadow   => to_bool($system_auth =~ /shadow/),
     };
 
     my @pam_kinds = get_pam_authentication_kinds();
@@ -815,7 +816,8 @@ sub salt {
 }
 
 sub user_crypted_passwd {
-    my ($u, $isMD5) = @_;
+    my ($u, $authentication) = @_;
+    my $isMD5 = $authentication->{md5};
     if ($u->{password}) {
 	require utf8;
 	utf8::encode($u->{password}); #- we don't want perl to do "smart" things in crypt()
@@ -829,14 +831,14 @@ sub user_crypted_passwd {
 sub set_root_passwd {
     my ($superuser, $authentication) = @_;
     $superuser->{name} = 'root';
-    write_passwd_user($superuser, $authentication->{md5});    
+    write_passwd_user($superuser, $authentication);    
     delete $superuser->{name};
 }
 
 sub write_passwd_user {
-    my ($u, $isMD5) = @_;
+    my ($u, $authentication) = @_;
 
-    $u->{pw} = user_crypted_passwd($u, $isMD5);      
+    $u->{pw} = user_crypted_passwd($u, $authentication);
     $u->{shell} ||= '/bin/bash';
 
     substInFile {
