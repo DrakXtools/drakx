@@ -615,6 +615,13 @@ sub create_widgets_block {
 			      size_group => $label_sizegrp, alignment => [ 0, 0.5 ]);
 	}
 
+	if ($e->{do_not_expand}) {
+            $e->{real_w} = gtknew('HBox', children => [
+                0, $e->{real_w},
+                1, gtknew('Label'),
+            ]);
+	}
+
 	$e->{real_w} = gtkpack_(Gtk2::HBox->new,
 				if_($e->{icon}, 0, eval { gtkcreate_img($e->{icon}) }),
 				if_($label_w, 0, $label_w),

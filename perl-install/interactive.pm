@@ -45,6 +45,7 @@ use do_pkgs;
 #-  validate => function called when "Ok" is pressed. If it returns false, this entry is focused, otherwise it quits
 #-  disabled => function returning wether it should be disabled (grayed)
 #-  focus    => function returning wether it should be focused
+#-  do_not_expand => do not eat all horizontal space
 #-  gtk      => gtk preferences
 #-  type     => 
 #-     button => (with clicked or clicked_may_quit)
