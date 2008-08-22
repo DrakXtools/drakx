@@ -1037,7 +1037,8 @@ sub _create_Window {
 	$w->signal_connect(key_press_event => \&install::gtk::special_shortcuts);
 
 	#- force center at a weird position, this can't be handled by position_policy
-	#- because center-on-parent is a window manager hint, and we don't have a WM
+	#- because center-* really are window manager hints for centering, whereas we want
+	#- to center the main window in the right part of the screen
 	my ($wi, $he);
 	$w->signal_connect(size_allocate => sub {
 	    my (undef, $event) = @_;
