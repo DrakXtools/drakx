@@ -1002,7 +1002,7 @@ sub _create_Window {
 
 	#- policy: during install, we need a special code to handle the weird centering, see below
 	position_policy => $::isInstall ?
-          ($opts->{transient_for} ? 'center-always' : 'none') :
+          ($opts->{modal} ? 'center-always' : 'none') :
             $no_Window_Manager ? 'center-always' : 'center-on-parent',
 
 	if_($::isInstall, position => [
