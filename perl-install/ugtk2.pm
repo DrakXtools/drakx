@@ -709,7 +709,7 @@ sub string_width {
 
 my ($def_step_title);
 sub set_default_step_items {
-    ($def_step_title) = @_;
+    $def_step_title = translate($_[0]);
 }
 
 sub get_default_step_items { ($def_step_title) }
