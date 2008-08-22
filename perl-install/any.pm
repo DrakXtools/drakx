@@ -928,7 +928,7 @@ sub acceptLicense {
                        { label => N("Do you accept this license ?") },
                        { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list', format => sub { translate($_[0]) } },
                        if_($o->{release_notes},
-                           { clicked => sub { display_release_notes($o) },
+                           { clicked => sub { display_release_notes($o) }, do_not_expand => 1,
                              val => \ (my $_t1 = N("Release Notes")), install_button => 1, no_indent => 1 }
                        ), 
                    ])
