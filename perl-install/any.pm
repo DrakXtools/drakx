@@ -106,6 +106,7 @@ sub add_users {
 sub install_bootloader_pkgs {
     my ($do_pkgs, $b) = @_;
 
+    bootloader::ensure_pkg_is_installed($do_pkgs, $b);
     install_acpi_pkgs($do_pkgs, $b);
 }
 
