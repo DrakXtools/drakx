@@ -70,8 +70,11 @@ sub main {
 		    0, (my $general_action_box  = Gtk2::HBox->new(0,0)),
 		   ),
 	  );
-    my $lock;
+    my ($lock, $initializing) = (undef, 1);
     $update_all = sub {
+	state $not_first;
+	return if $initializing && $not_first;
+	$not_first = 1;
 	$lock and return;
 	$lock = 1;
 	partition_table::assign_device_numbers($_) foreach fs::get::hds($all_hds);
@@ -87,9 +90,7 @@ sub main {
     $notebook_widget->signal_connect(switch_page => sub {
 	$current_kind = $notebook[$_[2]];
 	$current_entry = '';
-	state $not_first;
-	$update_all->() if $not_first;
-	$not_first = 1;
+	$update_all->();
     });
     # ensure partitions bar is properlyz size on first display:
     $notebook_widget->signal_connect(realize => $update_all);
@@ -102,6 +103,7 @@ sub main {
 N("If you plan to use aboot, be careful to leave a free space (2048 sectors is enough)
 at the beginning of the disk")) if arch() eq 'alpha' && !$::isEmbedded;
 
+    undef $initializing;
     $w->main;
 }
 
