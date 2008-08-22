@@ -925,7 +925,7 @@ sub acceptLicense {
 		   },
 
 		   [
-                       { label => N("Do you accept this license ?") },
+                       { label => N("Do you accept this license ?"), title => 1 },
                        { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list', format => sub { translate($_[0]) } },
                        if_($o->{release_notes},
                            { clicked => sub { display_release_notes($o) }, do_not_expand => 1,

@@ -94,12 +94,13 @@ sub selectKeyboard {
 	my $ext_keyboard = my $KEYBOARD = $o->{keyboard}{KEYBOARD};
 	$o->ask_from_(
 		      { title => N("Keyboard"), 
-			messages => N("Please choose your keyboard layout."),
 			interactive_help_id => 'selectKeyboard',
 			advanced_messages => N("Here is the full list of available keyboards"),
 			advanced_label => N("More"),
 		      },
-		      [ if_(@best, { val => \$KEYBOARD, type => 'list', format => $format, sort => 1,
+		      [
+                          { label => N("Please choose your keyboard layout."), title => 1 },
+                          if_(@best, { val => \$KEYBOARD, type => 'list', format => $format, sort => 1,
 				     list => [ @best ], changed => sub { $other = 0 } }),
 			{ val => \$ext_keyboard, type => 'list', format => $format, changed => sub { $other = 1 },
 			  list => [ difference2([ keyboard::KEYBOARDs() ], \@best) ], advanced => @best > 1 }
