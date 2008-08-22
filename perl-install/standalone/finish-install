@@ -163,7 +163,7 @@ sub ask_encrypt_home() {
                       authentication::check_given_password($in, $user, 6) or return 1,0;
                       return 0;
                   });
-    authentication::write_passwd_user($user);
+    authentication::write_passwd_user($user, $authentication);
     encrypt_home($user);
 }
 
