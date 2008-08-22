@@ -504,7 +504,7 @@ sub allowed_boot_parts {
      if_($bootloader->{method} =~ /lilo/,
 	 grep { $_->{level} eq '1' } @{$all_hds->{raids}}
 	),
-     (grep { !isFat_or_NTFS($_) } fs::get::hds_fstab(@{$all_hds->{hds}})),
+     (grep { !isFat_or_NTFS($_) } fs::get::fstab($all_hds)),
      detect_devices::floppies(),
     );
 }
