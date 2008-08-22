@@ -857,7 +857,8 @@ sub wait_messageW {
 
     my $Window = gtknew('MagicWindow',
 			title => $title,
-			pop_it => defined $o->{pop_wait_messages} ? $o->{pop_wait_messages} : !$::isInstall, 
+			pop_it => defined $o->{pop_wait_messages} ? $o->{pop_wait_messages} : 1, 
+			pop_and_reuse => $::isInstall,
 			modal => 1, 
 			$::isInstall ? (banner => gtknew('Install_Title', text => $message)) : (),
 			no_Window_Manager => exists $o->{no_Window_Manager} ? $o->{no_Window_Manager} : !$::isStandalone,
@@ -880,6 +881,8 @@ sub wait_message_nextW {
 }
 sub wait_message_endW {
     my ($_o, $Window) = @_;
+    $Window->{pop_and_reuse} and return;
+
     mygtk2::may_destroy($Window);
     mygtk2::flush();
 }

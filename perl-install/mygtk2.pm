@@ -667,6 +667,8 @@ sub _gtk_any_Window {
     $w;
 }
 
+my $previous_popped_window;
+
 sub _gtk__MagicWindow {
     my ($w, $opts) = @_;
 
@@ -676,6 +678,7 @@ sub _gtk__MagicWindow {
 	any { !$_->isa('Gtk2::DrawingArea') && $_->visible } $::WizardTable->get_children;
     };
 
+    my $pop_and_reuse = delete $opts->{pop_and_reuse} && $pop_it;
     my $sub_child = delete $opts->{child};
     my $provided_banner = delete $opts->{banner};
 
@@ -684,11 +687,22 @@ sub _gtk__MagicWindow {
     } else {
 	$sub_child ||= gtknew('VBox');
     }
+    if ($previous_popped_window && !$pop_and_reuse) {
+	$previous_popped_window->destroy;
+	$previous_popped_window = undef;
+    }
 
-    if ($pop_it) {
+    if ($previous_popped_window && $pop_and_reuse) {
+	$w = $previous_popped_window;
+	$w->remove($w->child);
+
+	gtkadd($w, child => $sub_child);
+	%$opts = ();
+    } elsif ($pop_it) {
 	$opts->{child} = $sub_child;
 
-	$w = _create_Window($opts);
+	$w = _create_Window($opts, pop_and_reuse => $pop_and_reuse);
+	$previous_popped_window = $w if $pop_and_reuse;
     } else {
 	if (!$::WizardWindow) {
 
@@ -729,7 +743,7 @@ sub _gtk__MagicWindow {
     }
     bless { 
 	real_window => $w, 
-	child => $sub_child, pop_it => $pop_it,
+	child => $sub_child, pop_it => $pop_it, pop_and_reuse => $pop_and_reuse,
 	if_($provided_banner, banner => $provided_banner),
     }, 'mygtk2::MagicWindow';
 }
