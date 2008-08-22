@@ -1433,7 +1433,7 @@ sub new {
     my $d_height = 75;
     $darea->set_size_request(-1, $d_height);
     $darea->modify_font(Gtk2::Pango::FontDescription->from_string("Sans Bold 14"));
-    $darea->{icon} = ugtk2::gtkcreate_pixbuf($icon);
+    eval { $darea->{icon} = ugtk2::gtkcreate_pixbuf($icon) };
     $darea->{text} = $text;
     require lang;
     my $is_rtl = lang::text_direction_rtl();
