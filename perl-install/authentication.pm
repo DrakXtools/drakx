@@ -260,6 +260,7 @@ sub check_given_password {
 sub get() {
     my $system_auth = cat_("/etc/pam.d/system-auth");
     my $authentication = {
+	blowfish => to_bool($system_auth =~ /\$2a\$/),
 	md5      => to_bool($system_auth =~ /md5/), 
 	shadow   => to_bool($system_auth =~ /shadow/),
     };
@@ -817,12 +818,13 @@ sub salt {
 
 sub user_crypted_passwd {
     my ($u, $authentication) = @_;
-    my $isMD5 = !$authentication || $authentication->{md5};
     if ($u->{password}) {
 	require utf8;
 	utf8::encode($u->{password}); #- we don't want perl to do "smart" things in crypt()
 
-	crypt($u->{password}, $isMD5 ? '$1$' . salt(8) : salt(2));
+	crypt($u->{password}, 
+	      !$authentication || $authentication->{blowfish} ? '$2a$08$' . salt(60) :
+	      $authentication->{md5} ? '$1$' . salt(8) : salt(2));
     } else {
 	$u->{pw} || '';
     }
