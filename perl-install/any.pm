@@ -103,6 +103,12 @@ sub add_users {
     }
 }
 
+sub install_bootloader_pkgs {
+    my ($do_pkgs, $b) = @_;
+
+    install_acpi_pkgs($do_pkgs, $b);
+}
+
 sub install_acpi_pkgs {
     my ($do_pkgs, $b) = @_;
 
@@ -236,7 +242,7 @@ sub setupBootloaderUntilInstalled {
 sub installBootloader {
     my ($in, $b, $all_hds) = @_;
     return if detect_devices::is_xbox();
-    install_acpi_pkgs($in->do_pkgs, $b);
+    install_bootloader_pkgs($in->do_pkgs, $b);
 
     eval { run_program::rooted($::prefix, 'echo | lilo -u') } if $::isInstall && !$::o->{isUpgrade} && -e "$::prefix/etc/lilo.conf" && glob("$::prefix/boot/boot.*");
 
