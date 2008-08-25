@@ -120,7 +120,7 @@ sub mkinitrd {
 		  );
     if (!run_program::rooted($::prefix, 'mkinitrd', @options)) {
 	unlink("$::prefix/$initrd");
-	die "mkinitrd failed:\n(mkinitrd @options))";
+	die "mkinitrd failed:\n(mkinitrd @options)";
     }
     add_boot_splash($initrd, $entry->{vga} || $bootloader->{vga});
 
