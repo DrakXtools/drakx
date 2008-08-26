@@ -115,9 +115,10 @@ sub create_steps_window {
 
     $steps{$_} ||= gtknew('Pixbuf', file => "steps_$_") foreach qw(on off done);
     my $category = sub { 
-	gtknew('HBox', children => [ 
+	gtknew('HBox', spacing => 7, children => [ 
 	    1, '',
-	    0, gtknew('Label', text_markup => '<b>' . uc($_[0]) . '</b>', widget_name => 'Step-categories')
+	    0, gtknew('Label', text_markup => '<b>' . uc($_[0]) . '</b>', widget_name => 'Step-categories'),
+	    0, gtknew('Image', file => 'steps_off.png'),
 	]);
     };
 
