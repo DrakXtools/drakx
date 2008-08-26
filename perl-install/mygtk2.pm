@@ -363,6 +363,13 @@ sub _gtk__Label_Left {
     _gtk__Label($w, $opts);
 }
 
+sub _gtk__Label_Right {
+    my ($w, $opts) = @_;
+    $opts->{alignment} ||= [ 1, 0.5 ];
+    _gtk__Label($w, $opts);
+}
+
+
 sub _gtk__Label {
     my ($w, $opts) = @_;
 
