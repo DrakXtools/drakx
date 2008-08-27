@@ -270,11 +270,14 @@ sub main {
 
     log::l('HERE: ', join(',', map { $_->[1] } @solutions));
     my $sol;
-    $o->ask_from_({ messages => N("The DrakX Partitioning wizard found the following solutions:"),
+    $o->ask_from_({ 
 		    title => N("Partitioning"),
 		    interactive_help_id => 'doPartitionDisks',
-		  }, 
-		  [ { val => \$sol, list => \@solutions, format => sub { $_[0][1] }, type => 'list' } ]);
+		  },
+		  [
+                      { label => N("The DrakX Partitioning wizard found the following solutions:"),  title => 1 },
+                      { val => \$sol, list => \@solutions, format => sub { $_[0][1] }, type => 'list' },
+                  ]);
     log::l("partitionWizard calling solution $sol->[1]");
     my $ok = eval { $sol->[2]->() };
     if (my $err = $@) {
