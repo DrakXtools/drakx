@@ -271,7 +271,7 @@ sub reallyChooseDesktop {
 
     ugtk2::gtkadd($w->{window},
 	   gtknew('VBox', children => [
-		    0, gtknew('WrappedLabel', text => $message . "\n\n" .
+		    0, gtknew('Title2', label => $message . 
                                 N("Click on images in order to see a bigger preview")),
 		    1, gtknew('HButtonBox', children_loose => \@l),
 		    0, $w->create_okcancel(N("Next"), undef),
