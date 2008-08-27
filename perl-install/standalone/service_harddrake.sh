@@ -16,7 +16,7 @@
 ### END INIT INFO
 
 # This is an interactive program, we need the current locale
-[[ -f /etc/profile.d/lang.sh ]] && . /etc/profile.d/lang.sh
+[[ -f /etc/profile.d/10lang.sh ]] && . /etc/profile.d/10lang.sh
 
 # Source function library.
 . /etc/rc.d/init.d/functions
