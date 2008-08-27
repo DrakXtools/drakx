@@ -133,10 +133,11 @@ sub selectInstallClass {
       askInstallClass:
 	my $p;
 	$o->ask_from_({ title => N("Install/Upgrade"),
-			messages => N("Is this an install or an upgrade?"),
 			interactive_help_id => 'selectInstallClass',
 		      },
-		      [ { val => \$p,
+		      [
+                          { label => N("Is this an install or an upgrade?"), title => 1 },
+                          { val => \$p,
 			  list => [ @l, N_("_: This is a noun:\nInstall") ], 
 			  type => 'list',
 			  format => sub { ref($_[0]) ? N("Upgrade %s", $_[0]{release}) : translate($_[0]) }
