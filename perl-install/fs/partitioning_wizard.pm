@@ -275,7 +275,7 @@ sub main {
 		    interactive_help_id => 'doPartitionDisks',
 		  },
 		  [
-                      { label => N("The DrakX Partitioning wizard found the following solutions:"),  title => 1 },
+                      { label => N("The DrakX Partitioning wizard found the following solutions:"),  title => $::isInstall },
                       { val => \$sol, list => \@solutions, format => sub { $_[0][1] }, type => 'list' },
                   ]);
     log::l("partitionWizard calling solution $sol->[1]");
