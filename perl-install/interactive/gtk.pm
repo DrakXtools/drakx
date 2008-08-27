@@ -601,6 +601,7 @@ sub create_widgets_block {
     my ($o, $l, $update, $ignore_ref) = @_;
 
     my $label_sizegrp = Gtk2::SizeGroup->new('horizontal');
+    my $realw_sizegrp = Gtk2::SizeGroup->new('horizontal');
 
     @$l = map_index {
 	if ($::i && ($_->{type} eq 'expander' || $_->{title})) {
@@ -624,6 +625,7 @@ sub create_widgets_block {
 	if ($e->{label} || !$e->{no_indent}) {
 	    $label_w = gtknew('Label_Left', text_markup => $e->{label} || '',
 			      size_group => $label_sizegrp, alignment => [ 0, 0.5 ]);
+            $realw_sizegrp->add_widget($e->{real_w});
 	}
 
 	if ($e->{do_not_expand}) {
