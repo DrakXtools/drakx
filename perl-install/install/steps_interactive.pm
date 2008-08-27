@@ -709,6 +709,7 @@ sub installPackages__handle_error {
 
 sub afterInstallPackages($) {
     my ($o) = @_;
+    local $o->{pop_wait_messages} = 1;
     my $_w = $o->wait_message(N("Post-install configuration"), N("Post-install configuration"));
     $o->SUPER::afterInstallPackages;
 }
