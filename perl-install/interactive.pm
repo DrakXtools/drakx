@@ -579,8 +579,10 @@ sub ask_browse_tree_info_refW { #- default definition, do not use with too many 
 
 sub wait_message {
     my ($o, $title, $message, $b_temp) = @_;
+    my $inline_title = $::isInstall ? $title : '';
+    $inline_title ||= N("Please wait");
 
-    my $w = $o->wait_messageW($title, N("Please wait"), $message);
+    my $w = $o->wait_messageW($title, $inline_title, $message);
     push @tempory::objects, $w if $b_temp;
     my $b = before_leaving { $o->wait_message_endW($w) };
 
