@@ -419,8 +419,6 @@ sub create_widget {
 	$set = sub { $adj->set_value($_[0]) };
     } elsif ($e->{type} eq 'expander') {
 	$e->{grow} = 'fill';
-	my $children = [ if_($e->{message}, { type => 'only_label', no_indent => 1, val => \$e->{message} }), @{$e->{children}} ];
-	my $box = create_widgets_block($o, $children, $update, $ignore_ref);
 	$w = gtknew('HBox', children_tight => [
             gtknew('Install_Button', text => $e->{text},
                    clicked => sub {
