@@ -11,7 +11,6 @@ use common;
 use mygtk2;
 use ugtk2 qw(:helpers :wrappers :create);
 use Gtk2::Gdk::Keysyms;
-use feature qw(state);
 
 my $forgetTime = 1000; #- in milli-seconds
 
@@ -419,17 +418,12 @@ sub create_widget {
 	$set = sub { $adj->set_value($_[0]) };
     } elsif ($e->{type} eq 'expander') {
 	$e->{grow} = 'fill';
+	my $children = [ if_($e->{message}, { type => 'only_label', no_indent => 1, val => \$e->{message} }), @{$e->{children}} ];
+	create_widgets_block($o, $children, $update, $ignore_ref);
 	$w = gtknew('HBox', children_tight => [
             gtknew('Install_Button', text => $e->{text},
                    clicked => sub {
-                       state $done;
-                       if (!$done) {
-                           unshift @{$e->{children}},
-                             { type => 'only_label', no_indent => 1, val => \$e->{message} } if $e->{message}; 
-                           $done = 1;
-                       }
-        
-                       ask_fromW($o, { title => N("Advanced") }, $e->{children}) }
+                       ask_fromW($o, { title => N("Advanced") }, $children) }
                )
         ]);
     } elsif ($e->{type} =~ /list/) {
