@@ -51,7 +51,7 @@ sub zips()        {
 sub floppies {
     my ($o_not_detect_legacy_floppies) = @_;
     require modules;
-    my @fds;
+    state @fds;
     state $legacy_already_detected;
     if (!$o_not_detect_legacy_floppies && !$legacy_already_detected) {
         $legacy_already_detected = 1;
