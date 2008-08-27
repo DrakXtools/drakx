@@ -1058,7 +1058,7 @@ sub setRootPassword_addUser {
 #------------------------------------------------------------------------------
 sub setupBootloaderBefore {
     my ($o) = @_;
-    my $_w = $o->wait_message('', N("Preparing bootloader..."));
+    my $_w = $o->wait_message(N("Preparing bootloader..."), N("Preparing bootloader..."));
     $o->SUPER::setupBootloaderBefore;
 }
 
