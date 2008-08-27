@@ -1198,13 +1198,18 @@ sub _allow_scroll_TextView_to_bottom {
     };
 }
 
+
+sub get_main_window_size() {
+    my ($width, $height) = $::real_windowwidth ? ($::real_windowwidth, $::real_windowheight) : $::isWizard ? (540, 360) : (600, 400);
+}
+
 sub get_label_width() {
     first(mygtk2::get_main_window_size()) - 50;
 }
 
 sub set_main_window_size {
     my ($window) = @_;
-    my ($width, $height) = $::real_windowwidth ? ($::real_windowwidth, $::real_windowheight) : $::isWizard ? (540, 360) : (600, 400);
+    my ($width, $height) = get_main_window_size();
     $window->set_size_request($width, $height);
 }
 
