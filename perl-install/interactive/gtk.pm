@@ -87,6 +87,7 @@ sub create_treeview_list {
     
     my $select = sub {
 	my ($path) = @_;
+	return if !$list_tv->get_model;
 	$list_tv->set_cursor($path, undef, 0);
 	Glib::Timeout->add(100, sub { $list_tv->scroll_to_cell($path, undef, 1, 0.5, 0); 0 });
     };
