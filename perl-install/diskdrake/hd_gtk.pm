@@ -66,6 +66,7 @@ sub main {
 	   gtkpack_(Gtk2::VBox->new(0,7),
 		    0, gtknew(($::isInstall ? ('Title1', 'label') : ('Label_Left', 'text'))
                                 => N("Click on a partition, choose a filesystem type then choose an action"),
+                              width => mygtk2::get_label_width()
                             ),
 		    1, (my $notebook_widget = Gtk2::Notebook->new),
 		    0, (my $per_kind_action_box = Gtk2::HBox->new(0,0)),
