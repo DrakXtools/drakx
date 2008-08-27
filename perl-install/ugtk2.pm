@@ -356,7 +356,7 @@ sub create_box_with_title {
     } else {
      my $new_label = sub {
          my ($txt) = @_;
-         ref($txt) ? $txt : gtknew('WrappedLabel', text_markup => $txt, width => 490);
+         ref($txt) ? $txt : gtknew('WrappedLabel', text_markup => $txt, width => mygtk2::get_label_width());
      };
 	    gtkpack__($box,
 		      if_($::isWizard, gtknew('Label', height => 10)),
