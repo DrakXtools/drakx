@@ -403,7 +403,7 @@ sub create_widget {
             # handle Install_Buttons:
             if (ref($w) =~ /Gtk2::HBox/) {
                 ($w) = grep { ref($_) =~ /Gtk2::Label/ } $w->get_children;
-            };
+            }
             # guard against 'advanced' widgets that are now in their own dialog
             # (instead of in another block child of an expander):
             return if !$w;
