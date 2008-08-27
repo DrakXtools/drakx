@@ -589,6 +589,11 @@ sub all_focusable_entries {
     grep { $_->{focus_w} } @$l;
 }
 
+sub all_title_entries {
+    my ($l) = @_;
+    grep { $_->{title} } @$l;
+}
+
 sub create_widgets_block {
     my ($o, $l, $update, $ignore_ref) = @_;
 
@@ -700,6 +705,12 @@ sub create_widgets {
 		0;
 	    }
 	};
+    }
+
+    # add asterisks before titles when there're more than one:
+    my @all_titles = all_title_entries($l);
+    if (1 <= @all_titles) {
+        ${$_->{val}} = "· " . ${$_->{val}} foreach @all_titles;
     }
 
     my $box = create_widgets_block($o, $l, $update, \$ignore);
