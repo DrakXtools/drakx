@@ -365,7 +365,7 @@ sub filesystems_button_box() {
 		 N_("Other"), N_("Empty"));
     my %name2fs_type = (Ext3 => 'ext3', Ext4 => 'ext4dev', 'XFS' => 'xfs', Swap => 'swap', Other => 'other', "Windows" => 'vfat', HFS => 'hfs');
 
-    gtkpack(Gtk2::HBox->new(0,0), 
+    gtkpack(Gtk2::HBox->new(), 
 	    map {
 		  my $t = $name2fs_type{$_};
                   my $w = gtknew('Button', text => translate($_), widget_name => 'PART_' . ($t || 'empty'),
