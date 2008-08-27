@@ -386,7 +386,8 @@ sub create_widget {
 	$set = sub { $w->set_active($_[0]) };
     } elsif ($e->{type} eq 'only_label') {
 	$w = $e->{title} ? 
-	         gtknew('Title2', label => escape_text_for_TextView_markup_format(${$e->{val}})) :
+	         gtknew('Title2', label => escape_text_for_TextView_markup_format(${$e->{val}}),
+                        width => mygtk2::get_label_width()) :
 		 gtknew('Label_Left', line_wrap => 1, text_markup => ${$e->{val}});
     } elsif ($e->{type} eq 'label') {
 	$w = gtknew('WrappedLabel', text_markup => ${$e->{val}});
