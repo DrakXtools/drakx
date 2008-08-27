@@ -628,8 +628,8 @@ sub create_widgets_block {
 
 	$e->{real_w} = gtkpack_(Gtk2::HBox->new,
 				if_($e->{icon}, 0, eval { gtkcreate_img($e->{icon}) }),
-				if_($label_w, 0, $label_w),
 				if_($eater, 1, $eater),
+				if_($label_w, 0, $label_w),
 				(!$eater, $e->{real_w}),
 			    );
     }
