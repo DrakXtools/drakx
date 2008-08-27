@@ -794,21 +794,24 @@ sub ask_user_and_root {
         }, [ 
 	      $superuser ? (
 	  { label => N("Set administrator (root) password"), title => 1 },
-	  { label => N("Password"), val => \$superuser->{password},  hidden => 1,
+	  { label => N("Password"), val => \$superuser->{password},  hidden => 1, alignment => 'right',
 	    validate => sub { authentication::check_given_password($in, $superuser, 2 * $security) } },
-	  { label => N("Password (again)"), val => \$superuser->{password2}, hidden => 1 },
+	  { label => N("Password (again)"), val => \$superuser->{password2}, hidden => 1, alignment => 'right' },
               ) : (),
 	  { label => N("Enter a user"), title => 1 }, if_($names, { label => $names }),
            if_($security <= 3 && !$options{noicons} && @icons,
-	  { label => N("Icon"), val => \ ($u->{icon} ||= 'default'), list => \@icons, icon2f => \&face2png, format => \&translate },
+	  { label => N("Icon"), val => \ ($u->{icon} ||= 'default'), list => \@icons, icon2f => \&face2png,
+            alignment => 'right', format => \&translate },
            ),
-	  { label => N("Real name"), val => \$u->{realname}, focus_out => sub {
+	  { label => N("Real name"), val => \$u->{realname}, alignment => 'right', focus_out => sub {
 		$u->{name} ||= lc first($u->{realname} =~ /([a-zA-Z0-9_-]+)/);
 	    } },
-          { label => N("Login name"), val => \$u->{name}, list => \@suggested_names, not_edit => 0, validate => $validate_name },
-          { label => N("Password"),val => \$u->{password}, hidden => 1,
+
+          { label => N("Login name"), val => \$u->{name}, list => \@suggested_names, alignment => 'right',
+            not_edit => 0, validate => $validate_name },
+          { label => N("Password"),val => \$u->{password}, hidden => 1, alignment => 'right',
 	    validate => sub { authentication::check_given_password($in, $u, $security > 3 ? 6 : 0) } },
-          { label => N("Password (again)"), val => \$u->{password2}, hidden => 1 },
+          { label => N("Password (again)"), val => \$u->{password2}, hidden => 1, alignment => 'right' },
           { label => N("Shell"), val => \$u->{shell}, list => [ shells() ], advanced => 1 },
 	  { label => N("User ID"), val => \$u->{uid}, advanced => 1, validate => sub { $validate_uid_gid->('uid') } },
 	  { label => N("Group ID"), val => \$u->{gid}, advanced => 1, validate => sub { $validate_uid_gid->('gid') } },
