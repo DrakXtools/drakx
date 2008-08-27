@@ -799,6 +799,9 @@ sub ask_user_and_root {
 	  { label => N("Password (again)"), val => \$superuser->{password2}, hidden => 1 },
               ) : (),
 	  { label => N("Enter a user"), title => 1 }, if_($names, { label => $names }),
+           if_($security <= 3 && !$options{noicons} && @icons,
+	  { label => N("Icon"), val => \ ($u->{icon} ||= 'default'), list => \@icons, icon2f => \&face2png, format => \&translate },
+           ),
 	  { label => N("Real name"), val => \$u->{realname}, focus_out => sub {
 		$u->{name} ||= lc first($u->{realname} =~ /([a-zA-Z0-9_-]+)/);
 	    } },
@@ -809,9 +812,6 @@ sub ask_user_and_root {
           { label => N("Shell"), val => \$u->{shell}, list => [ shells() ], advanced => 1 },
 	  { label => N("User ID"), val => \$u->{uid}, advanced => 1, validate => sub { $validate_uid_gid->('uid') } },
 	  { label => N("Group ID"), val => \$u->{gid}, advanced => 1, validate => sub { $validate_uid_gid->('gid') } },
-           if_($security <= 3 && !$options{noicons} && @icons,
-	  { label => N("Icon"), val => \ ($u->{icon} ||= 'default'), list => \@icons, icon2f => \&face2png, format => \&translate },
-           ),
 	    if_($security > 3,
                 map {
                     { label => $_, val => \$groups{$_}, text => $high_security_groups{$_}, type => 'bool' };
