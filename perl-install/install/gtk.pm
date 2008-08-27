@@ -109,8 +109,6 @@ my %steps;
 sub create_steps_window {
     my ($o) = @_;
 
-    return if $::stepswidth == 0;
-
     $o->{steps_window} and $o->{steps_window}->destroy;
 
     $steps{$_} ||= gtknew('Pixbuf', file => "steps_$_") foreach qw(on off done);
@@ -177,6 +175,7 @@ sub create_steps_window {
           gtknew('HBox',
                  children =>
                    [
+                       if_($::stepswidth != 0, 0, $o->{steps_widget}),
                        0, $o->{steps_widget},
                        1, gtknew('Label', width => -1, height => -1),
                    ],
