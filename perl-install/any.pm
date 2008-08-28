@@ -865,6 +865,12 @@ sub autologin {
 
 sub display_release_notes {
     my ($o) = @_;
+    if (!$o->isa('interactive::gtk')) {
+        $o->ask_from_({ title => N("Release Notes"), 
+                        messages => $o->{release_notes}, #formatAlaTeX(messages::main_license()),
+                    }, [ {} ]);
+        return;
+    }
     require Gtk2::Html2;
     require ugtk2;
     ugtk2->import(':all');
@@ -901,7 +907,10 @@ sub acceptLicense {
     my ($o) = @_;
     require messages;
 
-    $o->{release_notes} = join("\n\n", grep { $_ } map {
+    my $ext = $o->isa('interactive::gtk') ? '.html' : '.txt';
+    my $separator = $o->isa('interactive::gtk') ? "\n\n" : '';
+
+    $o->{release_notes} = join($separator, grep { $_ } map {
         if ($::isInstall) {
             my $f = install::any::getFile_($o->{stage2_phys_medium}, $_);
             $f && cat__($f);
@@ -910,7 +919,7 @@ sub acceptLicense {
             my $d = find { -e "$_/$file" } glob_("/usr/share/doc/*-release-*");
             $d && cat_("$d/$file");
         }
-    } 'release-notes.html', 'release-notes.' . arch() . '.html');
+    } "release-notes$ext", 'release-notes.' . arch() . $ext);
 
     # we do not handle links:
     $o->{release_notes} =~ s!<a href=".*?">(.*?)</a>!$1!g;
