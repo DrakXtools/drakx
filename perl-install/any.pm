@@ -837,6 +837,14 @@ sub sessions_with_order() {
     \%h;
 }
 
+sub urpmi_add_all_media {
+    my ($in) = @_;
+
+    return if !network::tools::has_network_connection();
+    my $_wait = $in->wait_message(N("Please wait"), N("Please wait, adding media..."));
+    run_program::rooted($::prefix, 'urpmi.addmedia', '--distrib', '--mirrorlist', '$MIRRORLIST');
+}
+
 sub autologin {
     my ($o, $in) = @_;
 
