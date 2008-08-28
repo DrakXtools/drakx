@@ -88,8 +88,7 @@ sub ask_network() {
 }
 
 sub ask_urpmi() {
-    #- configure urpmi media if network is up and no media are configured
-    require network::tools;
+    #- configure urpmi media if no media are configured
     run_program::get_stdout('urpmq', '--list-media') and return;
     any::urpmi_add_all_media($in);
 }
