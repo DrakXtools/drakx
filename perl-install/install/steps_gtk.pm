@@ -90,21 +90,6 @@ sub new($$) {
 	my @servers = qw(Driver:fbdev Driver:vesa); #-)
 	if ($::testing) {
 	    @servers = 'Xnest';
-	} elsif (arch() eq "alpha") {
-	    require Xconfig::card;
-	    my ($card) = Xconfig::card::probe();
-	    Xconfig::card::add_to_card__using_Cards($card, $card->{type}) if $card && $card->{type};
-	    @servers = $card->{server} || "TGA";
-	    #-@servers = qw(SVGA 3DLabs TGA) 
-	} elsif (arch() =~ /^sparc/) {
-	    local $_ = cat_("/proc/fb");
-	    if (/Mach64/) {
-		@servers = qw(Mach64);
-	    } elsif (/Permedia2/) {
-		@servers = qw(3DLabs);
-	    } else {
-		@servers = qw(Xsun24);
-	    }
 	} elsif (arch() =~ /ia64/) {
 	    require Xconfig::card;
 	    my ($card) = Xconfig::card::probe();
