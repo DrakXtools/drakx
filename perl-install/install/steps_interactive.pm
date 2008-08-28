@@ -1075,14 +1075,7 @@ sub setupBootloader {
 	    return;
 	}
     }
-    if (arch() =~ /^alpha/) {
-	$o->ask_yesorno('', N("Do you want to use aboot?"), 1) or return;
-	catch_cdie { $o->SUPER::setupBootloader } sub {
-	    $o->ask_yesorno('', 
-N("Error installing aboot, 
-try to force installation even if that destroys the first partition?"));
-	};
-    } else {
+    {
 	any::setupBootloader_simple($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) or return;
 	any::installBootloader($o, $o->{bootloader}, $o->{all_hds}) or die "already displayed";
     }
