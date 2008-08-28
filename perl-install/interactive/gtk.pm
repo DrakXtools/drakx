@@ -709,7 +709,7 @@ sub create_widgets {
 
     # add asterisks before titles when there're more than one:
     my @all_titles = all_title_entries($l);
-    if (1 <= @all_titles) {
+    if (2 <= @all_titles) {
         ${$_->{val}} = "\x{2022} " . ${$_->{val}} foreach @all_titles;
     }
 
