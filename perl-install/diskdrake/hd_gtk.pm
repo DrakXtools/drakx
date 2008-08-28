@@ -102,9 +102,6 @@ sub main {
     $in->ask_from_list_(N("Read carefully!"), N("Please make a backup of your data first"), 
 			[ N_("Exit"), N_("Continue") ], N_("Continue")) eq N_("Continue") or return
       if $::isStandalone;
-    $in->ask_warn('', 
-N("If you plan to use aboot, be careful to leave a free space (2048 sectors is enough)
-at the beginning of the disk")) if arch() eq 'alpha' && !$::isEmbedded;
 
     undef $initializing;
     $w->main;

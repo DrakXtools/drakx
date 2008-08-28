@@ -123,12 +123,25 @@ sub new($$) {
     install::gtk::init_sizes($o);
     install::gtk::install_theme($o);
     install::gtk::create_steps_window($o);
+    _may_configure_framebuffer_640x480($o);
 
     $ugtk2::grab = 1;
 
     $o = (bless {}, ref($type) || $type)->SUPER::new($o);
     $o->interactive::gtk::new;
     $o;
+}
+
+#- if we success to start X in 640x480 using driver "vesa", 
+#- we configure to use fb on installed system (to ensure splashy works)
+#- (useful on 800x480 netbooks)
+sub _may_configure_framebuffer_640x480 {
+    my ($o) = @_;
+
+    if ($::rootwidth == 640 && !$o->{allowFB}) {
+	$o->{vga} = 785;
+	$o->{allowFB} = 1;
+    }
 }
 
 sub enteringStep {
