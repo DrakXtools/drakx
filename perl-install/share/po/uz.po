@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: uz@cyrillic\n"
-"POT-Creation-Date: 2008-08-18 18:01+0200\n"
+"POT-Creation-Date: 2008-08-29 18:51+0200\n"
 "PO-Revision-Date: 2008-08-24 01:24+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <floss-uz-l10n@googlegroups.com>\n"
@@ -17,20 +17,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: any.pm:245 diskdrake/interactive.pm:554 diskdrake/interactive.pm:741
-#: diskdrake/interactive.pm:785 diskdrake/interactive.pm:843
-#: diskdrake/interactive.pm:1133 do_pkgs.pm:221 do_pkgs.pm:267
-#: harddrake/sound.pm:285 interactive.pm:580
+#: any.pm:252 any.pm:848 diskdrake/interactive.pm:554
+#: diskdrake/interactive.pm:741 diskdrake/interactive.pm:785
+#: diskdrake/interactive.pm:843 diskdrake/interactive.pm:1133 do_pkgs.pm:221
+#: do_pkgs.pm:267 harddrake/sound.pm:285 interactive.pm:583
 #, c-format
 msgid "Please wait"
 msgstr "Iltimos kutib turing"
 
-#: any.pm:245
+#: any.pm:252
 #, c-format
 msgid "Bootloader installation in progress"
 msgstr "Operatsion tizim yuklagichini oʻrnatish davom etmoqda"
 
-#: any.pm:256
+#: any.pm:263
 #, c-format
 msgid ""
 "LILO wants to assign a new Volume ID to drive %s.  However, changing\n"
@@ -41,14 +41,14 @@ msgid ""
 "Assign a new Volume ID?"
 msgstr ""
 
-#: any.pm:267
+#: any.pm:274
 #, c-format
 msgid "Installation of bootloader failed. The following error occurred:"
 msgstr ""
-"Operatsion tizim yuklagichini oʻrnatish muvaffaqiyatsiz tugadi. Quyidagi xato roʻy "
-"berdi:"
+"Operatsion tizim yuklagichini oʻrnatish muvaffaqiyatsiz tugadi. Quyidagi "
+"xato roʻy berdi:"
 
-#: any.pm:273
+#: any.pm:280
 #, c-format
 msgid ""
 "You may need to change your Open Firmware boot-device to\n"
@@ -59,7 +59,7 @@ msgid ""
 "At your next boot you should see the bootloader prompt."
 msgstr ""
 
-#: any.pm:313
+#: any.pm:320
 #, c-format
 msgid ""
 "You decided to install the bootloader on a partition.\n"
@@ -69,460 +69,468 @@ msgid ""
 "On which drive are you booting?"
 msgstr ""
 
-#: any.pm:339
+#: any.pm:346
 #, c-format
 msgid "First sector (MBR) of drive %s"
 msgstr "%s diskning birinchi sektori (MBR)"
 
-#: any.pm:341
+#: any.pm:348
 #, c-format
 msgid "First sector of drive (MBR)"
 msgstr "Diskning birinchi sektori (MBR)"
 
-#: any.pm:343
+#: any.pm:350
 #, c-format
 msgid "First sector of the root partition"
 msgstr "Tub qismining birinchi sektori"
 
-#: any.pm:345
+#: any.pm:352
 #, c-format
 msgid "On Floppy"
 msgstr "Disketga"
 
-#: any.pm:347
+#: any.pm:354
 #, c-format
 msgid "Skip"
 msgstr "Oʻtkazib yuborish"
 
-#: any.pm:351
+#: any.pm:358
 #, c-format
 msgid "LILO/grub Installation"
 msgstr "LILO/GRUB dasturini oʻrnatish"
 
-#: any.pm:352
+#: any.pm:359
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Operatsion tizim yuklagichini qaerga oʻrnatmoqchisiz?"
 
-#: any.pm:379
+#: any.pm:386
 #, c-format
 msgid "Boot Style Configuration"
 msgstr "Tizimni yukash uslubini moslash"
 
-#: any.pm:389 any.pm:420 any.pm:421
+#: any.pm:396 any.pm:427 any.pm:428
 #, c-format
 msgid "Bootloader main options"
 msgstr "Operatsion tizim yuklagichining asosiy moslamalari"
 
-#: any.pm:393
+#: any.pm:400
 #, c-format
 msgid "Bootloader"
 msgstr "OT yuklagichi"
 
-#: any.pm:394 any.pm:424
+#: any.pm:401 any.pm:431
 #, c-format
 msgid "Bootloader to use"
 msgstr "OT yuklagichi"
 
-#: any.pm:396 any.pm:426
+#: any.pm:403 any.pm:433
 #, c-format
 msgid "Boot device"
 msgstr "Tizimni yuklash uskunasi"
 
-#: any.pm:398
+#: any.pm:405
 #, c-format
 msgid "Main options"
 msgstr "Asosiy moslamalar"
 
-#: any.pm:399
+#: any.pm:406
 #, c-format
 msgid "Delay before booting default image"
 msgstr "Andoza tasvirni yuklashdan oldin kutish vaqti"
 
-#: any.pm:400
+#: any.pm:407
 #, c-format
 msgid "Enable ACPI"
 msgstr "ACPI'ni yoqish"
 
-#: any.pm:401
+#: any.pm:408
 #, c-format
 msgid "Enable APIC"
 msgstr "APIC'ni yoqish"
 
-#: any.pm:402
+#: any.pm:409
 #, c-format
 msgid "Enable Local APIC"
 msgstr "Lokal APIC'ni yoqish"
 
-#: any.pm:404 any.pm:790 any.pm:799 authentication.pm:239
+#: any.pm:411 any.pm:797 any.pm:812 authentication.pm:239
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
 msgstr "Maxfiy soʻz"
 
-#: any.pm:406 authentication.pm:250
+#: any.pm:413 authentication.pm:250
 #, c-format
 msgid "The passwords do not match"
 msgstr "Maxfiy soʻzlar mos kelmaydi"
 
-#: any.pm:406 authentication.pm:250 diskdrake/interactive.pm:1300
+#: any.pm:413 authentication.pm:250 diskdrake/interactive.pm:1300
 #, c-format
 msgid "Please try again"
 msgstr "Iltimos yana urinib koʻring"
 
-#: any.pm:407
+#: any.pm:414
 #, c-format
 msgid "You can not use a password with %s"
 msgstr ""
 
-#: any.pm:410 any.pm:792 any.pm:801 authentication.pm:240
+#: any.pm:417 any.pm:799 any.pm:814 authentication.pm:240
 #, c-format
 msgid "Password (again)"
 msgstr "Maxfiy soʻz (yana)"
 
-#: any.pm:411
+#: any.pm:418
 #, c-format
 msgid "Restrict command line options"
 msgstr ""
 
-#: any.pm:411
+#: any.pm:418
 #, c-format
 msgid "restrict"
 msgstr "chegaralash"
 
-#: any.pm:412
+#: any.pm:419
 #, c-format
-msgid "Option ``Restrict command line options'' is of no use without a password"
+msgid ""
+"Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 
-#: any.pm:414
+#: any.pm:421
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Tizimni yuklashda /tmp direktoriyasini boʻshatish"
 
-#: any.pm:415
+#: any.pm:422
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
 msgstr "Kerak boʻlsa, RAM'ning aniq hajmi (%d Mb topildi)"
 
-#: any.pm:416
+#: any.pm:423
 #, c-format
 msgid "Give the ram size in MB"
 msgstr "RAM'ning hajmini kiriting (Mb)"
 
-#: any.pm:425
+#: any.pm:432
 #, c-format
 msgid "Init Message"
 msgstr ""
 
-#: any.pm:427
+#: any.pm:434
 #, c-format
 msgid "Open Firmware Delay"
 msgstr ""
 
-#: any.pm:428
+#: any.pm:435
 #, c-format
 msgid "Kernel Boot Timeout"
 msgstr ""
 
-#: any.pm:429
+#: any.pm:436
 #, c-format
 msgid "Enable CD Boot?"
 msgstr ""
 
-#: any.pm:430
+#: any.pm:437
 #, c-format
 msgid "Enable OF Boot?"
 msgstr ""
 
-#: any.pm:431
+#: any.pm:438
 #, c-format
 msgid "Default OS?"
 msgstr "Andoza OT?"
 
-#: any.pm:498
+#: any.pm:505
 #, c-format
 msgid "Image"
 msgstr "Rasm"
 
-#: any.pm:499 any.pm:512
+#: any.pm:506 any.pm:519
 #, c-format
 msgid "Root"
 msgstr "Diskning tub qismi"
 
-#: any.pm:500 any.pm:525
+#: any.pm:507 any.pm:532
 #, c-format
 msgid "Append"
 msgstr ""
 
-#: any.pm:502
+#: any.pm:509
 #, c-format
 msgid "Xen append"
 msgstr ""
 
-#: any.pm:505
+#: any.pm:512
 #, c-format
 msgid "Video mode"
 msgstr "Video usuli"
 
-#: any.pm:507
+#: any.pm:514
 #, c-format
 msgid "Initrd"
 msgstr "Initrd"
 
-#: any.pm:508
+#: any.pm:515
 #, c-format
 msgid "Network profile"
 msgstr "Tarmoqning profili"
 
-#: any.pm:517 any.pm:522 any.pm:524 diskdrake/interactive.pm:376
+#: any.pm:524 any.pm:529 any.pm:531 diskdrake/interactive.pm:376
 #, c-format
 msgid "Label"
 msgstr "Yorliq"
 
-#: any.pm:519 any.pm:527 harddrake/v4l.pm:438
+#: any.pm:526 any.pm:534 harddrake/v4l.pm:438
 #, c-format
 msgid "Default"
 msgstr "Andoza"
 
-#: any.pm:526
+#: any.pm:533
 #, c-format
 msgid "NoVideo"
 msgstr "Videosiz"
 
-#: any.pm:537
+#: any.pm:544
 #, c-format
 msgid "Empty label not allowed"
 msgstr "Boʻsh yorliqni ishlatish mumkin emas"
 
-#: any.pm:538
+#: any.pm:545
 #, c-format
 msgid "You must specify a kernel image"
 msgstr "Kernelning tasvirini koʻrsatishingiz kerak."
 
-#: any.pm:538
+#: any.pm:545
 #, c-format
 msgid "You must specify a root partition"
 msgstr "Diskning tub qismini kiritishingiz shart"
 
-#: any.pm:539
+#: any.pm:546
 #, c-format
 msgid "This label is already used"
 msgstr "Yorliq allaqachon ishlatilgan"
 
-#: any.pm:557
+#: any.pm:564
 #, c-format
 msgid "Which type of entry do you want to add?"
 msgstr "Bandning qaysi turini qoʻshmoqchisiz?"
 
-#: any.pm:558
+#: any.pm:565
 #, c-format
 msgid "Linux"
 msgstr "Linux"
 
-#: any.pm:558
+#: any.pm:565
 #, c-format
 msgid "Other OS (SunOS...)"
 msgstr "Boshqa OT (SunOS...)"
 
-#: any.pm:559
+#: any.pm:566
 #, c-format
 msgid "Other OS (MacOS...)"
 msgstr "Boshqa OT (MacOS...)"
 
-#: any.pm:559
+#: any.pm:566
 #, c-format
 msgid "Other OS (Windows...)"
 msgstr "Boshqa OT (Windows...)"
 
-#: any.pm:587
+#: any.pm:594
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
 "You can create additional entries or change the existing ones."
 msgstr ""
 "Tizimni yuklash menyusining bandlari.\n"
-"Qoʻshimcha bandlar yaratishingiz yoki mavjud boʻlgan bandlarni oʻzgartirishingiz "
-"mumkin."
+"Qoʻshimcha bandlar yaratishingiz yoki mavjud boʻlgan bandlarni "
+"oʻzgartirishingiz mumkin."
 
-#: any.pm:751
+#: any.pm:758
 #, c-format
 msgid "access to X programs"
 msgstr "X dasturlaridan foydalanishga ruxsat etish"
 
-#: any.pm:752
+#: any.pm:759
 #, c-format
 msgid "access to rpm tools"
 msgstr "RPM vositalaridan foydalanishga ruxsat etish"
 
-#: any.pm:753
+#: any.pm:760
 #, c-format
 msgid "allow \"su\""
 msgstr "\"su\" buyrugʻidan foydalanishga ruxsat etish"
 
-#: any.pm:754
+#: any.pm:761
 #, c-format
 msgid "access to administrative files"
 msgstr "boshqaruv fayllariga ruxsat"
 
-#: any.pm:755
+#: any.pm:762
 #, c-format
 msgid "access to network tools"
 msgstr "tarmoq vositalardan foydalanishni ruxsat etish"
 
-#: any.pm:756
+#: any.pm:763
 #, c-format
 msgid "access to compilation tools"
 msgstr ""
 
-#: any.pm:762
+#: any.pm:769
 #, c-format
 msgid "(already added %s)"
 msgstr "(%s allaqachon qoʻshilgan)"
 
-#: any.pm:768
+#: any.pm:775
 #, c-format
 msgid "Please give a user name"
 msgstr "Iltimos foydalanuvchining ismini kiriting"
 
-#: any.pm:769
+#: any.pm:776
 #, c-format
-msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgid ""
+"The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr ""
 "Foydalanuvchining ismi faqat kichkina harf, son, \"-\" va \"_\" belgilaridan "
 "iborat boʻlishi shart"
 
-#: any.pm:770
+#: any.pm:777
 #, c-format
 msgid "The user name is too long"
 msgstr "Foydalanuvchining ismi juda uzun"
 
-#: any.pm:771
+#: any.pm:778
 #, c-format
 msgid "This user name has already been added"
 msgstr "Foydalanuvchining ismi allaqachon qoʻshilgan"
 
-#: any.pm:777 any.pm:803
+#: any.pm:784 any.pm:816
 #, c-format
 msgid "User ID"
 msgstr "Foydalanuvchi ID"
 
-#: any.pm:777 any.pm:804
+#: any.pm:784 any.pm:817
 #, c-format
 msgid "Group ID"
 msgstr "Guruh ID"
 
-#: any.pm:778
+#: any.pm:785
 #, c-format
 msgid "%s must be a number"
 msgstr "%s son boʻlishi kerak"
 
-#: any.pm:779
+#: any.pm:786
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
 msgstr ""
 
-#: any.pm:783
+#: any.pm:790
 #, c-format
 msgid "User management"
 msgstr "Foydalanuvchilar"
 
-#: any.pm:789 authentication.pm:226
+#: any.pm:796 authentication.pm:226
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "Administrator (root)"
 
-#: any.pm:794
+#: any.pm:801
 #, c-format
 msgid "Enter a user"
 msgstr "Yangi foydalanuvchi"
 
-#: any.pm:795
-#, c-format
-msgid "Real name"
-msgstr "Haqiqiy ismi-sharifi"
-
-#: any.pm:798
-#, c-format
-msgid "Login name"
-msgstr "Foydalanuvchi"
-
-#: any.pm:802
-#, c-format
-msgid "Shell"
-msgstr "Konsol"
-
-#: any.pm:806
+#: any.pm:803
 #, c-format
 msgid "Icon"
 msgstr "Nishoncha"
 
-#: any.pm:844 security/l10n.pm:14
+#: any.pm:806
+#, c-format
+msgid "Real name"
+msgstr "Haqiqiy ismi-sharifi"
+
+#: any.pm:810
+#, c-format
+msgid "Login name"
+msgstr "Foydalanuvchi"
+
+#: any.pm:815
+#, c-format
+msgid "Shell"
+msgstr "Konsol"
+
+#: any.pm:848
+#, c-format
+msgid "Please wait, adding media..."
+msgstr ""
+
+#: any.pm:866 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "Tizimga avto-kirish"
 
-#: any.pm:845
+#: any.pm:867
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
-msgstr "Kompyuterni bitta foydalanuvchi avtomatik ravishda kirishga moslash mumkin."
+msgstr ""
+"Kompyuterni bitta foydalanuvchi avtomatik ravishda kirishga moslash mumkin."
 
-#: any.pm:846
+#: any.pm:868
 #, c-format
 msgid "Use this feature"
 msgstr "Bu qulaylikdan foydalanish"
 
-#: any.pm:847
+#: any.pm:869
 #, c-format
 msgid "Choose the default user:"
 msgstr "Andoza foydalanuvchini tanlang:"
 
-#: any.pm:848
+#: any.pm:870
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Oynalar boshqaruvchisini tanlang:"
 
-#: any.pm:871 any.pm:920
+#: any.pm:881 any.pm:899 any.pm:957
 #, c-format
 msgid "Release Notes"
 msgstr "Yangi narsalar"
 
-#: any.pm:878 any.pm:1217 interactive/gtk.pm:774
+#: any.pm:906 any.pm:1250 interactive/gtk.pm:804
 #, c-format
 msgid "Close"
 msgstr "Yopish"
 
-#: any.pm:914
+#: any.pm:943
 #, c-format
 msgid "License agreement"
 msgstr "Litsenziya kelishuvi"
 
-#: any.pm:916 diskdrake/dav.pm:26
+#: any.pm:945 diskdrake/dav.pm:26
 #, c-format
 msgid "Quit"
 msgstr "Chiqish"
 
-#: any.pm:925
+#: any.pm:952
 #, c-format
 msgid "Do you accept this license ?"
 msgstr "Ushbu litsenziyani qabul qilasizmi?"
 
-#: any.pm:926
+#: any.pm:953
 #, c-format
 msgid "Accept"
 msgstr "Qabul qilish"
 
-#: any.pm:926
+#: any.pm:953
 #, c-format
 msgid "Refuse"
 msgstr "Rad etish"
 
-#: any.pm:947 any.pm:1012
+#: any.pm:980 any.pm:1045
 #, c-format
 msgid "Please choose a language to use"
 msgstr "Iltimos foydalanish uchun tilni tanlang"
 
-#: any.pm:976
+#: any.pm:1009
 #, c-format
 msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
@@ -530,77 +538,77 @@ msgid ""
 "when your installation is complete and you restart your system."
 msgstr ""
 
-#: any.pm:979
+#: any.pm:1012
 #, c-format
 msgid "Multi languages"
 msgstr ""
 
-#: any.pm:990 any.pm:1021
+#: any.pm:1023 any.pm:1054
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr ""
 
-#: any.pm:992
+#: any.pm:1025
 #, c-format
 msgid "All languages"
 msgstr "Hamma tillar"
 
-#: any.pm:1013
+#: any.pm:1046
 #, c-format
 msgid "Language choice"
 msgstr "Tilni tanlash"
 
-#: any.pm:1068
+#: any.pm:1101
 #, c-format
 msgid "Country / Region"
 msgstr "Davlat / Region"
 
-#: any.pm:1069
+#: any.pm:1102
 #, c-format
 msgid "Please choose your country."
 msgstr "Davlatingizni tanlang."
 
-#: any.pm:1071
+#: any.pm:1104
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Mavjud boʻlgan davlatlarning toʻliq roʻyxati"
 
-#: any.pm:1072
+#: any.pm:1105
 #, c-format
 msgid "Other Countries"
 msgstr "Boshqa davlatlar"
 
-#: any.pm:1072 interactive.pm:481
+#: any.pm:1105 interactive.pm:484 interactive/gtk.pm:426
 #, c-format
 msgid "Advanced"
 msgstr "Qoʻshimcha"
 
-#: any.pm:1078
+#: any.pm:1111
 #, c-format
 msgid "Input method:"
 msgstr "Kiritish usuli:"
 
-#: any.pm:1081
+#: any.pm:1114
 #, c-format
 msgid "None"
 msgstr "Yoʻq"
 
-#: any.pm:1162
+#: any.pm:1195
 #, c-format
 msgid "No sharing"
 msgstr ""
 
-#: any.pm:1162
+#: any.pm:1195
 #, c-format
 msgid "Allow all users"
 msgstr "Hamma foydalanuvchilarga ruxsat"
 
-#: any.pm:1162
+#: any.pm:1195
 #, c-format
 msgid "Custom"
 msgstr "Boshqa"
 
-#: any.pm:1166
+#: any.pm:1199
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -610,85 +618,87 @@ msgid ""
 "\"Custom\" permit a per-user granularity.\n"
 msgstr ""
 
-#: any.pm:1178
+#: any.pm:1211
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
 "Windows."
 msgstr ""
 
-#: any.pm:1181
+#: any.pm:1214
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
 "systems."
 msgstr ""
 
-#: any.pm:1189
+#: any.pm:1222
 #, c-format
-msgid "You can export using NFS or SMB. Please select which you would like to use."
+msgid ""
+"You can export using NFS or SMB. Please select which you would like to use."
 msgstr ""
 "Siz NFS yoki Samba yordamida eksport qilishingiz mumkin. Iltimos bittasini "
 "tanlang."
 
-#: any.pm:1217
+#: any.pm:1250
 #, c-format
 msgid "Launch userdrake"
 msgstr "Userdrake dasturini ishga tushirish"
 
-#: any.pm:1219
+#: any.pm:1252
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
 "You can use userdrake to add a user to this group."
 msgstr ""
 
-#: any.pm:1311
+#: any.pm:1344
 #, c-format
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr "Iltimos tizimdan chiqing va Ctrl+Alt+BackSpace tugmalarni bosing"
 
-#: any.pm:1315
+#: any.pm:1348
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
-msgstr "Oʻzgarishlar toʻliq qoʻllanilishi uchun tizimga boshqadan kirishingiz kerak"
+msgstr ""
+"Oʻzgarishlar toʻliq qoʻllanilishi uchun tizimga boshqadan kirishingiz kerak"
 
-#: any.pm:1350
+#: any.pm:1383
 #, c-format
 msgid "Timezone"
 msgstr "Vaqt zonasi"
 
-#: any.pm:1350
+#: any.pm:1383
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Vaqt zonangizni tanlang?"
 
-#: any.pm:1373 any.pm:1375
+#: any.pm:1406 any.pm:1408
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Sana va soat moslamalari"
 
-#: any.pm:1376
+#: any.pm:1409
 #, c-format
 msgid "What is the best time?"
 msgstr ""
 
-#: any.pm:1380
+#: any.pm:1413
 #, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr ""
 
-#: any.pm:1381
+#: any.pm:1414
 #, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr ""
 
-#: any.pm:1383
+#: any.pm:1416
 #, c-format
 msgid "NTP Server"
 msgstr "NTP serveri"
 
-#: any.pm:1384
+#: any.pm:1417
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr ""
@@ -730,7 +740,8 @@ msgstr "Lokal fayl:"
 
 #: authentication.pm:64
 #, c-format
-msgid "Use local for all authentication and information user tell in local file"
+msgid ""
+"Use local for all authentication and information user tell in local file"
 msgstr ""
 
 #: authentication.pm:65
@@ -781,7 +792,7 @@ msgstr ""
 
 #: authentication.pm:96 authentication.pm:130 authentication.pm:149
 #: authentication.pm:150 authentication.pm:176 authentication.pm:200
-#: authentication.pm:871
+#: authentication.pm:878
 #, c-format
 msgid " "
 msgstr ""
@@ -972,29 +983,30 @@ msgstr "Maxfiy soʻzsiz"
 #: authentication.pm:253
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
-msgstr "Bu maxfiy soʻz juda qisqa (u eng kami %d belgidan iborat boʻlishi shart)"
+msgstr ""
+"Bu maxfiy soʻz juda qisqa (u eng kami %d belgidan iborat boʻlishi shart)"
 
-#: authentication.pm:353
+#: authentication.pm:358
 #, c-format
 msgid "Can not use broadcast with no NIS domain"
 msgstr ""
 
-#: authentication.pm:866
+#: authentication.pm:873
 #, c-format
 msgid "Select file"
 msgstr "Faylni tanlash"
 
-#: authentication.pm:872
+#: authentication.pm:879
 #, c-format
 msgid "Domain Windows for authentication : "
 msgstr ""
 
-#: authentication.pm:874
+#: authentication.pm:881
 #, c-format
 msgid "Domain Admin User Name"
 msgstr ""
 
-#: authentication.pm:875
+#: authentication.pm:882
 #, c-format
 msgid "Domain Admin Password"
 msgstr ""
@@ -1158,13 +1170,13 @@ msgstr "Ulash nuqtasi"
 msgid "Options"
 msgstr "Parametrlar"
 
-#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:167 diskdrake/removable.pm:26
+#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:174 diskdrake/removable.pm:26
 #: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
 #, c-format
 msgid "Done"
 msgstr "Tayyor"
 
-#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:113 diskdrake/hd_gtk.pm:265
+#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:120 diskdrake/hd_gtk.pm:272
 #: diskdrake/interactive.pm:233 diskdrake/interactive.pm:246
 #: diskdrake/interactive.pm:480 diskdrake/interactive.pm:485
 #: diskdrake/interactive.pm:603 diskdrake/interactive.pm:861
@@ -1205,7 +1217,7 @@ msgstr "Ulash nuqtasi: "
 msgid "Options: %s"
 msgstr "Parametrlar: %s"
 
-#: diskdrake/hd_gtk.pm:53 diskdrake/interactive.pm:284
+#: diskdrake/hd_gtk.pm:54 diskdrake/interactive.pm:284
 #: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:106
 #: fs/partitioning_wizard.pm:51 fs/partitioning_wizard.pm:206
 #: fs/partitioning_wizard.pm:211 fs/partitioning_wizard.pm:250
@@ -1214,50 +1226,40 @@ msgstr "Parametrlar: %s"
 msgid "Partitioning"
 msgstr "Diskni boʻlish"
 
-#: diskdrake/hd_gtk.pm:66
+#: diskdrake/hd_gtk.pm:68
 #, c-format
 msgid "Click on a partition, choose a filesystem type then choose an action"
-msgstr "Diskning qismi va fayl tizimini tanlagandan soʻng kerakli amalni tanlang"
+msgstr ""
+"Diskning qismi va fayl tizimini tanlagandan soʻng kerakli amalni tanlang"
 
-#: diskdrake/hd_gtk.pm:93 diskdrake/interactive.pm:1010
+#: diskdrake/hd_gtk.pm:102 diskdrake/interactive.pm:1010
 #: diskdrake/interactive.pm:1020 diskdrake/interactive.pm:1073
 #, c-format
 msgid "Read carefully!"
 msgstr "Diqqat bilan oʻqing!"
 
-#: diskdrake/hd_gtk.pm:93
+#: diskdrake/hd_gtk.pm:102
 #, c-format
 msgid "Please make a backup of your data first"
 msgstr "Iltimos avvalo maʼlumotlaringizdan zahira nusxa oling"
 
-#: diskdrake/hd_gtk.pm:94 diskdrake/interactive.pm:226
+#: diskdrake/hd_gtk.pm:103 diskdrake/interactive.pm:226
 #, c-format
 msgid "Exit"
 msgstr "Chiqish"
 
-#: diskdrake/hd_gtk.pm:94
+#: diskdrake/hd_gtk.pm:103
 #, c-format
 msgid "Continue"
 msgstr "Davom etish"
 
-#: diskdrake/hd_gtk.pm:97
-#, c-format
-msgid ""
-"If you plan to use aboot, be careful to leave a free space (2048 sectors is "
-"enough)\n"
-"at the beginning of the disk"
-msgstr ""
-"Agar rejangizda aboot dasturini ishlatish boʻlsa, diskning boshida boʻsh joy (2048 "
-"sektor yetadi)\n"
-"qoldirish esingizdan chiqmasin"
-
-#: diskdrake/hd_gtk.pm:163 interactive.pm:644 interactive/gtk.pm:752
-#: interactive/gtk.pm:767 interactive/gtk.pm:787 ugtk2.pm:942 ugtk2.pm:943
+#: diskdrake/hd_gtk.pm:170 interactive.pm:649 interactive/gtk.pm:781
+#: interactive/gtk.pm:797 interactive/gtk.pm:815 ugtk2.pm:933 ugtk2.pm:934
 #, c-format
 msgid "Help"
 msgstr "Yordam"
 
-#: diskdrake/hd_gtk.pm:201
+#: diskdrake/hd_gtk.pm:208
 #, c-format
 msgid ""
 "You have one big Microsoft Windows partition.\n"
@@ -1268,72 +1270,72 @@ msgstr ""
 "Avvalo, uning hajmini oʻzgartirishni taklif qilaman\n"
 "(uni bosing keyin \"Hajmini oʻgartirish\" tugmasini bosing)."
 
-#: diskdrake/hd_gtk.pm:203
+#: diskdrake/hd_gtk.pm:210
 #, c-format
 msgid "Please click on a partition"
 msgstr "Diskning qismini sichqoncha bilan tanlang"
 
-#: diskdrake/hd_gtk.pm:217 diskdrake/smbnfs_gtk.pm:63
+#: diskdrake/hd_gtk.pm:224 diskdrake/smbnfs_gtk.pm:63
 #, c-format
 msgid "Details"
 msgstr "Tafsilotlar"
 
-#: diskdrake/hd_gtk.pm:265
+#: diskdrake/hd_gtk.pm:272
 #, c-format
 msgid "No hard drives found"
 msgstr "Qattiq disklar topilmadi"
 
-#: diskdrake/hd_gtk.pm:292
+#: diskdrake/hd_gtk.pm:299
 #, c-format
 msgid "Unknown"
 msgstr "Nomaʼlum"
 
-#: diskdrake/hd_gtk.pm:354
+#: diskdrake/hd_gtk.pm:361
 #, c-format
 msgid "Ext3"
 msgstr "Ext3"
 
-#: diskdrake/hd_gtk.pm:354
+#: diskdrake/hd_gtk.pm:361
 #, c-format
 msgid "XFS"
 msgstr "XFS"
 
-#: diskdrake/hd_gtk.pm:354
+#: diskdrake/hd_gtk.pm:361
 #, c-format
 msgid "Swap"
 msgstr "Svop"
 
-#: diskdrake/hd_gtk.pm:354
+#: diskdrake/hd_gtk.pm:361
 #, c-format
 msgid "SunOS"
 msgstr "SunOS"
 
-#: diskdrake/hd_gtk.pm:354
+#: diskdrake/hd_gtk.pm:361
 #, c-format
 msgid "HFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:354
+#: diskdrake/hd_gtk.pm:361
 #, c-format
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:355 services.pm:158
+#: diskdrake/hd_gtk.pm:362 services.pm:158
 #, c-format
 msgid "Other"
 msgstr "Boshqa"
 
-#: diskdrake/hd_gtk.pm:355 diskdrake/interactive.pm:1195
+#: diskdrake/hd_gtk.pm:362 diskdrake/interactive.pm:1195
 #, c-format
 msgid "Empty"
 msgstr "Boʻsh"
 
-#: diskdrake/hd_gtk.pm:362
+#: diskdrake/hd_gtk.pm:369
 #, c-format
 msgid "Filesystem types:"
 msgstr "Fayl tizimining turlari:"
 
-#: diskdrake/hd_gtk.pm:383 diskdrake/interactive.pm:289
+#: diskdrake/hd_gtk.pm:390 diskdrake/interactive.pm:289
 #: diskdrake/interactive.pm:361 diskdrake/interactive.pm:510
 #: diskdrake/interactive.pm:694 diskdrake/interactive.pm:752
 #: diskdrake/interactive.pm:841 diskdrake/interactive.pm:883
@@ -1344,22 +1346,22 @@ msgstr "Fayl tizimining turlari:"
 msgid "Warning"
 msgstr "Diqqat"
 
-#: diskdrake/hd_gtk.pm:383
+#: diskdrake/hd_gtk.pm:390
 #, c-format
 msgid "This partition is already empty"
 msgstr "Diskning bu qismi allaqachon boʻsh"
 
-#: diskdrake/hd_gtk.pm:392
+#: diskdrake/hd_gtk.pm:399
 #, c-format
 msgid "Use ``Unmount'' first"
 msgstr "Avvalo \"Unmount\"ni ishlating"
 
-#: diskdrake/hd_gtk.pm:392
+#: diskdrake/hd_gtk.pm:399
 #, fuzzy, c-format
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Buning oʻrniga \"%s\"ni ishlating"
 
-#: diskdrake/hd_gtk.pm:392 diskdrake/interactive.pm:374
+#: diskdrake/hd_gtk.pm:399 diskdrake/interactive.pm:374
 #: diskdrake/interactive.pm:548 diskdrake/interactive.pm:1026
 #: diskdrake/removable.pm:25 diskdrake/removable.pm:48
 #, c-format
@@ -1466,7 +1468,8 @@ msgstr "Boshqa qism qoʻshib boʻlmaydi"
 msgid ""
 "To have more partitions, please delete one to be able to create an extended "
 "partition"
-msgstr "Diskda kengaytirilgan qism yaratish uchun iltimos bitta qismni oʻchiring"
+msgstr ""
+"Diskda kengaytirilgan qism yaratish uchun iltimos bitta qismni oʻchiring"
 
 #: diskdrake/interactive.pm:354
 #, c-format
@@ -1577,7 +1580,8 @@ msgstr "Loopback faylini olib tashlaymi?"
 
 #: diskdrake/interactive.pm:532
 #, c-format
-msgid "After changing type of partition %s, all data on this partition will be lost"
+msgid ""
+"After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "Diskning %s qismining turini oʻzgartirishdan keyin undagi hamma maʼlumot "
 "yoʻqoladi"
@@ -1784,7 +1788,8 @@ msgstr "Diskni qismlarga boʻlishning qaysi turi?"
 #: diskdrake/interactive.pm:1064
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
-msgstr "Oʻzgarishlar amalda qoʻllanilishi uchun kompyuterni oʻchirib-yoqish kerak"
+msgstr ""
+"Oʻzgarishlar amalda qoʻllanilishi uchun kompyuterni oʻchirib-yoqish kerak"
 
 #: diskdrake/interactive.pm:1073
 #, c-format
@@ -1794,7 +1799,8 @@ msgstr "%s diskining qismlar jadvali diskga saqlanish arafasida!"
 #: diskdrake/interactive.pm:1098
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
-msgstr "Diskning %s qismi format qilgandan keyin u yerdagi hamma maʼlumot yoʻqoladi"
+msgstr ""
+"Diskning %s qismi format qilgandan keyin u yerdagi hamma maʼlumot yoʻqoladi"
 
 #: diskdrake/interactive.pm:1103 fs/partitioning.pm:48
 #, c-format
@@ -2034,7 +2040,8 @@ msgstr "Fayl tizimining kodlash kalitini tanlang"
 #: diskdrake/interactive.pm:1299
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
-msgstr "Kodlash kaliti juda sodda (u eng kami %d belgidan iborat boʻlishi shart)"
+msgstr ""
+"Kodlash kaliti juda sodda (u eng kami %d belgidan iborat boʻlishi shart)"
 
 #: diskdrake/interactive.pm:1300
 #, c-format
@@ -2061,10 +2068,10 @@ msgstr ""
 msgid "Change type"
 msgstr "Turini oʻzgartirish"
 
-#: diskdrake/smbnfs_gtk.pm:81 interactive.pm:126 interactive.pm:543
+#: diskdrake/smbnfs_gtk.pm:81 interactive.pm:129 interactive.pm:546
 #: interactive/curses.pm:260 interactive/http.pm:104 interactive/http.pm:160
-#: interactive/stdio.pm:39 interactive/stdio.pm:148 ugtk2.pm:411 ugtk2.pm:513
-#: ugtk2.pm:522 ugtk2.pm:807
+#: interactive/stdio.pm:39 interactive/stdio.pm:148 ugtk2.pm:415 ugtk2.pm:517
+#: ugtk2.pm:526 ugtk2.pm:813
 #, c-format
 msgid "Cancel"
 msgstr "Bekor qilish"
@@ -2091,7 +2098,8 @@ msgstr "Boshqasi"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid "Please enter your username, password and domain name to access this host."
+msgid ""
+"Please enter your username, password and domain name to access this host."
 msgstr ""
 
 #: diskdrake/smbnfs_gtk.pm:180
@@ -2340,7 +2348,9 @@ msgstr ""
 #: fs/partitioning.pm:78
 #, c-format
 msgid "Not enough swap space to fulfill installation, please add some"
-msgstr "Oʻrnatishni bajarish uchun yetarli svop xotirasi mavjud emas, iltimos uni qoʻshing"
+msgstr ""
+"Oʻrnatishni bajarish uchun yetarli svop xotirasi mavjud emas, iltimos uni "
+"qoʻshing"
 
 #: fs/partitioning_wizard.pm:51
 #, c-format
@@ -2413,7 +2423,9 @@ msgstr "Diskning svop qismi Mb'da: "
 #: fs/partitioning_wizard.pm:119
 #, c-format
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
-msgstr "Loopback sifatida ishlatish uchun diskda FAT qism yoʻq (yoki yetarli joy yoʻq)"
+msgstr ""
+"Loopback sifatida ishlatish uchun diskda FAT qism yoʻq (yoki yetarli joy "
+"yoʻq)"
 
 #: fs/partitioning_wizard.pm:127
 #, c-format
@@ -2475,17 +2487,17 @@ msgstr ""
 "\n"
 "Juda ehtiyot boʻling, bu amal juda xavfli. Agar jarayon davomida xato roʻy "
 "bersa, diskdagi maʼlumotni yoʻqolishiga olib kelish ehtimoli juda katta. "
-"Birinchi oʻrinda, Windows tizimida chkdsk dasturi yordamida (masalan \"chkdsk c:"
-"\") diskni xatoga tekshiring. Ikkinchidan, diskni defragmentlash tavsiya "
-"qilinadi. Bundan tashqari, diskdagi maʼlumotlardan har ehtimolga qarshi zahira "
-"nusxani olishni ham tavsiya qilinadi.\n"
+"Birinchi oʻrinda, Windows tizimida chkdsk dasturi yordamida (masalan "
+"\"chkdsk c:\") diskni xatoga tekshiring. Ikkinchidan, diskni defragmentlash "
+"tavsiya qilinadi. Bundan tashqari, diskdagi maʼlumotlardan har ehtimolga "
+"qarshi zahira nusxani olishni ham tavsiya qilinadi.\n"
 "\n"
 "\n"
 "Davom etishni istasangiz, %s tugmasini bosing."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:165 interactive.pm:542 interactive/curses.pm:263
-#: ugtk2.pm:515
+#: fs/partitioning_wizard.pm:165 interactive.pm:545 interactive/curses.pm:263
+#: ugtk2.pm:519
 #, c-format
 msgid "Next"
 msgstr "Keyingi"
@@ -2498,7 +2510,8 @@ msgstr "Diskni boʻlish"
 #: fs/partitioning_wizard.pm:168
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
-msgstr "Diskning %s qismida Microsoft Windows® uchun qancha joy qoldirishni istaysiz?"
+msgstr ""
+"Diskning %s qismida Microsoft Windows® uchun qancha joy qoldirishni istaysiz?"
 
 #: fs/partitioning_wizard.pm:169
 #, c-format
@@ -2519,8 +2532,8 @@ msgstr "Diskning FAT qismining hajmini oʻzgartirish muvaffaqiyatsiz tugadi: %s"
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
-"Hajmini oʻzgartirish uchun diskda FAT qism mavjud emas (yoki yetarli joy mavjud "
-"emas)"
+"Hajmini oʻzgartirish uchun diskda FAT qism mavjud emas (yoki yetarli joy "
+"mavjud emas)"
 
 #: fs/partitioning_wizard.pm:203
 #, c-format
@@ -2568,12 +2581,12 @@ msgstr ""
 msgid "I can not find any room for installing"
 msgstr "Oʻrnatish uchun yetarli joy topilmadi"
 
-#: fs/partitioning_wizard.pm:273
+#: fs/partitioning_wizard.pm:278
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "Diskni boʻlish vositasi quyidagi yechimlarni topdi:"
 
-#: fs/partitioning_wizard.pm:284
+#: fs/partitioning_wizard.pm:287
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Diskni boʻlish muvaffaqiyatsiz tugadi: %s"
@@ -2581,7 +2594,9 @@ msgstr "Diskni boʻlish muvaffaqiyatsiz tugadi: %s"
 #: fs/type.pm:370
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
-msgstr "Hajmi 16 Mb'dan kichik boʻlgan qismlar uchun JFS fayl tizimini ishlatib boʻlmaydi"
+msgstr ""
+"Hajmi 16 Mb'dan kichik boʻlgan qismlar uchun JFS fayl tizimini ishlatib "
+"boʻlmaydi"
 
 #: fs/type.pm:371
 #, c-format
@@ -2672,8 +2687,8 @@ msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
 "point\n"
 msgstr ""
-"Bu ulash nuqtasi uchun haqiqiy fayl tizimi (ext2/ext3, reiserfs, xfs, yoki jfs) "
-"kerak\n"
+"Bu ulash nuqtasi uchun haqiqiy fayl tizimi (ext2/ext3, reiserfs, xfs, yoki "
+"jfs) kerak\n"
 
 #: fsedit.pm:423
 #, c-format
@@ -2991,10 +3006,10 @@ msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
 "sound card (%s)."
 msgstr ""
-"Bu yerda %s tovush kartangiz uchun boshqa drayverni (OSS yoki ALSA) tanlashingiz "
-"mumkin."
+"Bu yerda %s tovush kartangiz uchun boshqa drayverni (OSS yoki ALSA) "
+"tanlashingiz mumkin."
 
-#. -PO: here the first %s is either "OSS" or "ALSA",
+#. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:392
@@ -3065,7 +3080,8 @@ msgstr "Maʼlum boʻlgan drayver yoʻq"
 #: harddrake/sound.pm:435
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
-msgstr "Sizning \"%s\" tovush kartangiz uchun maʼlum boʻlgan drayver mavjud emas."
+msgstr ""
+"Sizning \"%s\" tovush kartangiz uchun maʼlum boʻlgan drayver mavjud emas."
 
 #: harddrake/sound.pm:450
 #, c-format
@@ -3118,7 +3134,8 @@ msgid ""
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
-"Agar sizning tovush kartangizga toʻgʻri keladigan drayverni rostdan bilsangiz,\n"
+"Agar sizning tovush kartangizga toʻgʻri keladigan drayverni rostdan "
+"bilsangiz,\n"
 "uni yuqoridagi roʻyxatdan tanlashingiz mumkin.\n"
 "\n"
 "Sizning \"%s\" tovush kartangizning joriy drayveri \"%s\" "
@@ -3162,55 +3179,55 @@ msgstr "Kartaning modeli:"
 msgid "Tuner type:"
 msgstr ""
 
-#: interactive.pm:125 interactive.pm:542 interactive/curses.pm:263
+#: interactive.pm:128 interactive.pm:545 interactive/curses.pm:263
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
-#: interactive/stdio.pm:148 interactive/stdio.pm:149 ugtk2.pm:417 ugtk2.pm:515
-#: ugtk2.pm:807 ugtk2.pm:830
+#: interactive/stdio.pm:148 interactive/stdio.pm:149 ugtk2.pm:421 ugtk2.pm:519
+#: ugtk2.pm:813 ugtk2.pm:836
 #, c-format
 msgid "Ok"
 msgstr "Ok"
 
-#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:806 wizards.pm:156
+#: interactive.pm:227 modules/interactive.pm:71 ugtk2.pm:812 wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "Ha"
 
-#: interactive.pm:224 modules/interactive.pm:71 ugtk2.pm:806 wizards.pm:156
+#: interactive.pm:227 modules/interactive.pm:71 ugtk2.pm:812 wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "Yoʻq"
 
-#: interactive.pm:258
+#: interactive.pm:261
 #, c-format
 msgid "Choose a file"
 msgstr "Faylni tanlang"
 
-#: interactive.pm:383 interactive/gtk.pm:428
+#: interactive.pm:386 interactive/gtk.pm:436
 #, c-format
 msgid "Add"
 msgstr "Qoʻshish"
 
-#: interactive.pm:383 interactive/gtk.pm:428
+#: interactive.pm:386 interactive/gtk.pm:436
 #, c-format
 msgid "Modify"
 msgstr "Oʻzgartirish"
 
-#: interactive.pm:383 interactive/gtk.pm:428
+#: interactive.pm:386 interactive/gtk.pm:436
 #, c-format
 msgid "Remove"
 msgstr "Olib tashlash"
 
-#: interactive.pm:542 interactive/curses.pm:263 ugtk2.pm:515
+#: interactive.pm:545 interactive/curses.pm:263 ugtk2.pm:519
 #, c-format
 msgid "Finish"
 msgstr "Tayyor"
 
-#: interactive.pm:543 interactive/curses.pm:260 ugtk2.pm:513
+#: interactive.pm:546 interactive/curses.pm:260 ugtk2.pm:517
 #, c-format
 msgid "Previous"
 msgstr "Oldingi"
 
-#: interactive/gtk.pm:556
+#: interactive/gtk.pm:564
 #, c-format
 msgid "Beware, Caps Lock is enabled"
 msgstr ""
@@ -4484,7 +4501,7 @@ msgstr "Zambiya"
 msgid "Zimbabwe"
 msgstr "Zimbabve"
 
-#: lang.pm:1201
+#: lang.pm:1208
 #, c-format
 msgid "Welcome to %s"
 msgstr "%s'ga marhamat"
@@ -4638,15 +4655,16 @@ msgstr ""
 "bundan buyon \"Dasturiy Mahsulotlar\" deb yuritiladi. Dasturiy mahsulotlar \n"
 "Mandriva Linux distributivning qismlari va operatsion tizim bilan bogʻliq "
 "boʻlgan\n"
-"dasturlar toʻplami, usullar, qoidalar va qoʻllanmalarni oʻz ichiga oladi, ammo "
-"bu bilan cheklanmaydi.\n"
+"dasturlar toʻplami, usullar, qoidalar va qoʻllanmalarni oʻz ichiga oladi, "
+"ammo bu bilan cheklanmaydi.\n"
 "\n"
 "\n"
 "1. Litsenziya kelishuvi\n"
 "\n"
 "Iltimos, ushbu hujjatni diqqat bilan oʻqib chiqing. Bu hujjat Siz bilan "
 "Mandriva S.A. \n"
-"oʻrtasida Dasturiy Mahsulotlari boʻyicha imzolanadigan litsenziya kelishuvidir.\n"
+"oʻrtasida Dasturiy Mahsulotlari boʻyicha imzolanadigan litsenziya "
+"kelishuvidir.\n"
 "Dasturiy Mahsulotlarni har qanday maqsad bilan oʻrnatib, koʻpaytirib yoki \n"
 "ulardan foydalanib Siz mazkur Litsenziyaning shartlari va qoidalarini toʻliq "
 "qabul \n"
@@ -4655,9 +4673,10 @@ msgstr ""
 "Mahsulotlarni\n"
 "oʻrnatish, koʻpaytirish yoki ulardan foydalanishga ruxsat berilmaydi. Mazkur "
 "litsenziyaning \n"
-"shartlariga zid holda Dasturiy Mahsulotlarni oʻrnatish, koʻpaytirish va ulardan "
-"foydalanishga \n"
-"har qanday urinish ushbu Litsenziya asosida Sizga berilgan barcha huquqlarni\n"
+"shartlariga zid holda Dasturiy Mahsulotlarni oʻrnatish, koʻpaytirish va "
+"ulardan foydalanishga \n"
+"har qanday urinish ushbu Litsenziya asosida Sizga berilgan barcha "
+"huquqlarni\n"
 "bekor qiladi. Litsenziya kelishuvi bekor qilingach, Siz Dasturiy "
 "Mahsulotlarning\n"
 "barcha nusxalarini darhol oʻchirib tashlashingiz lozim.\n"
@@ -4667,38 +4686,39 @@ msgstr ""
 "\n"
 "Dasturiy Mahsulotlar va ularga ilova qilingan qoʻllanmalar \"oʻz holicha\", "
 "qonunda yoʻl qoʻyilgan\n"
-"darajada hech qanday kafolatlarsiz taqdim qilinadi. Mandriva S.A. qonunda yoʻl "
-"qoʻyilgan\n"
+"darajada hech qanday kafolatlarsiz taqdim qilinadi. Mandriva S.A. qonunda "
+"yoʻl qoʻyilgan\n"
 "darajada hech qanday holatda Dasturiy Mahsulotlardan foydalanish yoki "
 "foydalanmaslik oqibatida\n"
-"tasodifiy, toʻgʻridan-toʻgʻri, bevosita yoki bilvosita yetkazilgan zararlar (shu "
-"jumladan biznesning\n"
+"tasodifiy, toʻgʻridan-toʻgʻri, bevosita yoki bilvosita yetkazilgan zararlar "
+"(shu jumladan biznesning\n"
 "kasod boʻlishi, tijorat faoliyatidagi uzilishlar, moliyaviy zararlar, sud "
 "mahkamalari natijasidagi\n"
-"sud xarajatlari yoki jarimalar yoki boshqa har qanday bilvosita yoʻqotishlar) "
-"uchun, hatto Mandriva S.A.'ga\n"
-"shunday zarar koʻrish imkoniyati yoki holatlari maʼlum boʻlgan taqdirda ham,\n"
+"sud xarajatlari yoki jarimalar yoki boshqa har qanday bilvosita "
+"yoʻqotishlar) uchun, hatto Mandriva S.A.'ga\n"
+"shunday zarar koʻrish imkoniyati yoki holatlari maʼlum boʻlgan taqdirda "
+"ham,\n"
 "javobgar boʻlmaydi.\n"
 "\n"
 "BAʼZI MAMLAKATLARDA MAN QILINGAN DASTURIY MAHSULOTLARGA EGALIK QILISH\n"
 "YOKI ULARDAN FOYDALANISH BILAN BOGʻLIQ CHEKLANGAN MASʼULIYAT\n"
 "\n"
-"Mandriva S.A. yoki uning tarqatuvchilari qonunda yoʻl qoʻyilgan darajada hech "
-"qanday holatda\n"
+"Mandriva S.A. yoki uning tarqatuvchilari qonunda yoʻl qoʻyilgan darajada "
+"hech qanday holatda\n"
 "baʼzi mamlakatlarning mahalliy qonunlari bilan cheklangan yoki man qilingan "
 "dasturiy\n"
-"mahsulotlarning qismlariga egalik qilish va ulardan foydalanish, yoki Mandriva "
-"Linux\n"
-"saytlarining biridan dasturiy mahsulotning qismlarini koʻchirib olish oqibatida "
-"tasodifiy,\n"
-"toʻgʻridan-toʻgʻri, bevosita yoki bilvosita yetkazilgan zararlar (shu jumladan "
-"biznesning kasod boʻlishi,\n"
+"mahsulotlarning qismlariga egalik qilish va ulardan foydalanish, yoki "
+"Mandriva Linux\n"
+"saytlarining biridan dasturiy mahsulotning qismlarini koʻchirib olish "
+"oqibatida tasodifiy,\n"
+"toʻgʻridan-toʻgʻri, bevosita yoki bilvosita yetkazilgan zararlar (shu "
+"jumladan biznesning kasod boʻlishi,\n"
 "tijorat faoliyatidagi uzilishlar, moliyaviy zararlar, sud mahkamalari "
 "natijasidagi sud\n"
-"xarajatlari yoki jarimalar yoki boshqa har qanday bilvosita yoʻqotishlar) uchun "
-"javobgar boʻlmaydi.\n"
-"Cheklangan maʼsuliyat Dasturiy Mahsulotlarga kiritiladigan kuchli kriptografiya "
-"qismlariga\n"
+"xarajatlari yoki jarimalar yoki boshqa har qanday bilvosita yoʻqotishlar) "
+"uchun javobgar boʻlmaydi.\n"
+"Cheklangan maʼsuliyat Dasturiy Mahsulotlarga kiritiladigan kuchli "
+"kriptografiya qismlariga\n"
 "nisbatan ham qoʻllaniladi, ammo bu bilan cheklanmaydi.\n"
 "\n"
 "\n"
@@ -4706,23 +4726,24 @@ msgstr ""
 "\n"
 "Dasturiy Mahsulotlar turli kishilar yoki tashkilotlar tomonidan yaratilgan "
 "qismlardan iboratdir.\n"
-"Ushbu qismlarning koʻpchiligi bundan buyon \"GPL\" deb ataladigan GNU General "
-"Public Licence\n"
-"shartlari va qoidalari yoki shunga oʻxshash litsenziyalar taʼsiri ostidadir. Ushbu "
-"litsenziyalarning\n"
+"Ushbu qismlarning koʻpchiligi bundan buyon \"GPL\" deb ataladigan GNU "
+"General Public Licence\n"
+"shartlari va qoidalari yoki shunga oʻxshash litsenziyalar taʼsiri ostidadir. "
+"Ushbu litsenziyalarning\n"
 "koʻpchiligi oʻz taʼsiri ostidagi qismlarni Sizga foydalanish, koʻpaytirish, "
 "moslashtirish yoki tarqatish\n"
-"huquqini beradi. Iltimos, har qanday qismdan foydalanishdan avval qismlarning "
-"har biri\n"
-"uchun litsenziya kelishuvining shartlari va qoidalarini diqqat bilan oʻqib chiqing. "
-"Qismning\n"
+"huquqini beradi. Iltimos, har qanday qismdan foydalanishdan avval "
+"qismlarning har biri\n"
+"uchun litsenziya kelishuvining shartlari va qoidalarini diqqat bilan oʻqib "
+"chiqing. Qismning\n"
 "litsenziyasiga oid har qanday savollar Mandriva'ga emas, balki qismning "
 "muallifiga yuborilishi\n"
 "lozim. Mandriva S.A. tomonidan ishlab chiqilgan dasturlar GPL litsenziyasi "
 "taʼsiri\n"
-"ostidadir. Mandriva S.A. tomonidan yozilgan qoʻllanmalar esa maxsus litsenziya "
-"taʼsiri\n"
-"ostidadir. Iltimos, qoʻshimcha maʼlumot uchun qoʻllanmalarga murojaat qiling.\n"
+"ostidadir. Mandriva S.A. tomonidan yozilgan qoʻllanmalar esa maxsus "
+"litsenziya taʼsiri\n"
+"ostidadir. Iltimos, qoʻshimcha maʼlumot uchun qoʻllanmalarga murojaat "
+"qiling.\n"
 "\n"
 "\n"
 "4. Intellektual mulk huquqlari\n"
@@ -4731,8 +4752,8 @@ msgstr ""
 "mualliflariga\n"
 "tegishli boʻlib, intellektual mulk va dasturiy mahsulotlarga oid mualliflik "
 "huquqi\n"
-"toʻgʻrisidagi qonunlar bilan himoyalanadi. Mandriva S.A. Dasturiy Mahsulotlarni "
-"toʻliq\n"
+"toʻgʻrisidagi qonunlar bilan himoyalanadi. Mandriva S.A. Dasturiy "
+"Mahsulotlarni toʻliq\n"
 "yoki qisman, har qanday yoʻl bilan va istalgan maqsadlarda oʻzgartirish yoki "
 "moslashtirish huquqini\n"
 "oʻzida saqlab qoladi. \"Mandriva\", \"Mandriva Linux\" va tegishli belgilar "
@@ -4754,8 +4775,8 @@ msgstr ""
 "sudda muhokama qilinadi.\n"
 "Soʻnggi navbatda masalaning koʻrilishi tegishli Parij (Fransiya) Qonunchilik "
 "sudiga havola qilinadi.\n"
-"Iltimos, mazkur hujjatga oid har qanday savollar boʻyicha Mandriva S.A. bilan "
-"bogʻlaning.\n"
+"Iltimos, mazkur hujjatga oid har qanday savollar boʻyicha Mandriva S.A. "
+"bilan bogʻlaning.\n"
 
 #: messages.pm:90
 #, c-format
@@ -5079,7 +5100,8 @@ msgstr "Root toʻgʻridan-toʻgʻri kirishiga ruxsat etish."
 
 #: security/help.pm:33
 #, c-format
-msgid "Allow the list of users on the system on display managers (kdm and gdm)."
+msgid ""
+"Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr ""
 
 #: security/help.pm:35
@@ -5282,7 +5304,8 @@ msgstr ""
 #: security/help.pm:121
 #, c-format
 msgid "if set to yes, check empty password in /etc/shadow."
-msgstr "agar \"ha\" boʻlsa, /etc/shadow faylidagi boʻsh maxfiy soʻzlarni tekshirish"
+msgstr ""
+"agar \"ha\" boʻlsa, /etc/shadow faylidagi boʻsh maxfiy soʻzlarni tekshirish"
 
 #: security/help.pm:122
 #, c-format
@@ -5311,7 +5334,8 @@ msgstr "agar \"ha\" boʻlsa, chkrootkit tekshiruvini bajarish"
 
 #: security/help.pm:127
 #, c-format
-msgid "if set, send the mail report to this email address else send it to root."
+msgid ""
+"if set, send the mail report to this email address else send it to root."
 msgstr ""
 
 #: security/help.pm:128
@@ -5342,7 +5366,9 @@ msgstr ""
 #: security/help.pm:134
 #, c-format
 msgid "Set shell commands history size. A value of -1 means unlimited."
-msgstr "Konsoldan kiritilgan buyruqlar tarixining hajmini aniqlash. -1 cheksizga teng."
+msgstr ""
+"Konsoldan kiritilgan buyruqlar tarixining hajmini aniqlash. -1 cheksizga "
+"teng."
 
 #: security/help.pm:136
 #, c-format
@@ -5397,7 +5423,9 @@ msgstr "root'ning toʻgʻridan-toʻgʻri kirishi"
 #: security/l10n.pm:19
 #, c-format
 msgid "List users on display managers (kdm and gdm)"
-msgstr "Foydalanuvchilarning roʻyxatini displey boshqaruvchilarda (KDM va GDM) koʻrsatish"
+msgstr ""
+"Foydalanuvchilarning roʻyxatini displey boshqaruvchilarda (KDM va GDM) "
+"koʻrsatish"
 
 #: security/l10n.pm:20
 #, c-format
@@ -5502,7 +5530,9 @@ msgstr "Maxfiy soʻz tarixining uzunligi"
 #: security/l10n.pm:40
 #, c-format
 msgid "Password minimum length and number of digits and upcase letters"
-msgstr "Maxfiy soʻzning eng qisqa uzunligi, undagi sonlarning va bosh harflarning soni"
+msgstr ""
+"Maxfiy soʻzning eng qisqa uzunligi, undagi sonlarning va bosh harflarning "
+"soni"
 
 #: security/l10n.pm:41
 #, c-format
@@ -5665,8 +5695,8 @@ msgid ""
 "This is the standard security recommended for a computer that will be used "
 "to connect to the Internet as a client."
 msgstr ""
-"Bu Internet tarmogʻida klient sifatida ishlatiladigan kompyuter uchun tavsiya "
-"etilgan xavfsizlikning andoza darajasi."
+"Bu Internet tarmogʻida klient sifatida ishlatiladigan kompyuter uchun "
+"tavsiya etilgan xavfsizlikning andoza darajasi."
 
 #: security/level.pm:46
 #, c-format
@@ -5674,8 +5704,8 @@ msgid ""
 "There are already some restrictions, and more automatic checks are run every "
 "night."
 msgstr ""
-"Tizimda allaqachon baʼzi cheklashlar mavjud va har kuni avtomatik tekshiruvlar "
-"bajariladi."
+"Tizimda allaqachon baʼzi cheklashlar mavjud va har kuni avtomatik "
+"tekshiruvlar bajariladi."
 
 #: security/level.pm:47
 #, c-format
@@ -5690,8 +5720,8 @@ msgstr ""
 "Xavfsizlikning bu darajasida tizimni server sifatida ishlatish mumkin.\n"
 "Tizimni bir qancha klientlar bilan aloqa oʻrnata oladigan server sifatida "
 "ishlatish uchun xavfsizlik darajasi yetarlicha yuqori.\n"
-"Izoh: agar kompyuteringizni Internet tarmogʻida klient sifatida ishlatsangiz, "
-"pastroq darajani tanlang."
+"Izoh: agar kompyuteringizni Internet tarmogʻida klient sifatida "
+"ishlatsangiz, pastroq darajani tanlang."
 
 #: security/level.pm:50
 #, c-format
@@ -5712,35 +5742,42 @@ msgstr "Xavfsizlik"
 msgid "DrakSec Basic Options"
 msgstr "DrakSec asosiy moslamalari"
 
-#: security/level.pm:56
+#: security/level.pm:58
 #, c-format
 msgid "Please choose the desired security level"
 msgstr "Iltimos istalgan xavfsizlik darajasini tanlang"
 
 #: security/level.pm:60
 #, c-format
-msgid "Security level"
-msgstr "Xavfsizlik darajasi"
+msgid "%s: %s"
+msgstr ""
 
-#: security/level.pm:62
+#: security/level.pm:63
 #, c-format
 msgid "Use libsafe for servers"
 msgstr "Serverlar uchun libsafe'dan foydalanish"
 
-#: security/level.pm:63
-#, c-format
-msgid "A library which defends against buffer overflow and format string attacks."
-msgstr ""
-
 #: security/level.pm:64
 #, c-format
-msgid "Security Administrator (login or email)"
+msgid ""
+"A library which defends against buffer overflow and format string attacks."
+msgstr ""
+
+#: security/level.pm:65
+#, fuzzy, c-format
+msgid "Security Administrator:"
 msgstr "Xavfsizlik boshqaruvchi (foydalanuvchi yoki elektron pochtasi)"
+
+#: security/level.pm:66
+#, c-format
+msgid "Login or email:"
+msgstr ""
 
 #: services.pm:19
 #, c-format
 msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
-msgstr "ALSA (Advanced Linux Sound Architecture) tovush tizimini ishga tushirish"
+msgstr ""
+"ALSA (Advanced Linux Sound Architecture) tovush tizimini ishga tushirish"
 
 #: services.pm:20
 #, c-format
@@ -5772,7 +5809,8 @@ msgstr ""
 
 #: services.pm:28
 #, c-format
-msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgid ""
+"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr ""
 
 #: services.pm:29
@@ -5811,7 +5849,8 @@ msgstr ""
 
 #: services.pm:38
 #, c-format
-msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid ""
+"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
 
 #: services.pm:39
@@ -6003,7 +6042,8 @@ msgstr ""
 
 #: services.pm:92
 #, c-format
-msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgid ""
+"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
 
 #: services.pm:93
@@ -6116,7 +6156,7 @@ msgstr ""
 "Uzr, bu xizmat haqida\n"
 "qoʻshimcha maʼlumot yoʻq."
 
-#: services.pm:221 ugtk2.pm:917
+#: services.pm:221 ugtk2.pm:923
 #, c-format
 msgid "Info"
 msgstr "Maʼlumot"
@@ -6361,50 +6401,35 @@ msgstr "Rossiya Federatsiyasi"
 msgid "Yugoslavia"
 msgstr "Yugoslaviya"
 
-#: ugtk2.pm:807
+#: ugtk2.pm:813
 #, c-format
 msgid "Is this correct?"
 msgstr "Bu toʻgʻrimi?"
 
-#: ugtk2.pm:867
+#: ugtk2.pm:873
 #, c-format
 msgid "No file chosen"
 msgstr "Fayl tanlanmagan"
 
-#: ugtk2.pm:869
+#: ugtk2.pm:875
 #, c-format
 msgid "You have chosen a file, not a directory"
 msgstr "Direktoriya oʻrniga fayl tanlangan"
 
-#: ugtk2.pm:871
+#: ugtk2.pm:877
 #, c-format
 msgid "You have chosen a directory, not a file"
 msgstr "Fayl oʻrniga direktoriya tanlangan"
 
-#: ugtk2.pm:873
+#: ugtk2.pm:879
 #, c-format
 msgid "No such directory"
 msgstr "Bunday direktoriya mavjud emas"
 
-#: ugtk2.pm:873
+#: ugtk2.pm:879
 #, c-format
 msgid "No such file"
 msgstr "Bunday fayl mavjud emas"
-
-#: ugtk2.pm:952
-#, c-format
-msgid "Expand Tree"
-msgstr "Roʻyxatni yoyish"
-
-#: ugtk2.pm:953
-#, c-format
-msgid "Collapse Tree"
-msgstr "Roʻyxatni yigʻish"
-
-#: ugtk2.pm:954
-#, c-format
-msgid "Toggle between flat and group sorted"
-msgstr ""
 
 #: wizards.pm:95
 #, c-format
@@ -6413,10 +6438,28 @@ msgid ""
 "Click \"Next\" to install or \"Cancel\" to quit"
 msgstr ""
 "%s oʻrnatilmagan\n"
-"Oʻrnatish uchun \"Keyingi\" yoki chiqish uchun \"Bekor qilish\" tugmasini bosing"
+"Oʻrnatish uchun \"Keyingi\" yoki chiqish uchun \"Bekor qilish\" tugmasini "
+"bosing"
 
 #: wizards.pm:99
 #, c-format
 msgid "Installation failed"
 msgstr "Oʻrnatish muvaffaqiyatsiz tugadi"
 
+#~ msgid ""
+#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
+#~ "is enough)\n"
+#~ "at the beginning of the disk"
+#~ msgstr ""
+#~ "Agar rejangizda aboot dasturini ishlatish boʻlsa, diskning boshida boʻsh "
+#~ "joy (2048 sektor yetadi)\n"
+#~ "qoldirish esingizdan chiqmasin"
+
+#~ msgid "Security level"
+#~ msgstr "Xavfsizlik darajasi"
+
+#~ msgid "Expand Tree"
+#~ msgstr "Roʻyxatni yoyish"
+
+#~ msgid "Collapse Tree"
+#~ msgstr "Roʻyxatni yigʻish"
