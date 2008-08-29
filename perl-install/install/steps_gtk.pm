@@ -632,7 +632,9 @@ sub summary_prompt {
 	    push @widget_list, gtknew('HSeparator', height => 8) if $count;
 	    $count++;
 	    $group = $e->{group};
-	    push @table, [ gtknew('HBox', children_tight => [ gtknew('Title1', label => escape_text_for_TextView_markup_format($group)) ]), '' ];
+	    push @table, [ gtknew('HBox', children_tight => [
+                gtknew('Title1', 
+                       label => mygtk2::asteriskize(escape_text_for_TextView_markup_format($group))) ]), '' ];
 	}
 	$e->{widget} = gtknew('WrappedLabel', width => $::real_windowwidth * 0.72);
 
