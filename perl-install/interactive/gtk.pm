@@ -711,7 +711,7 @@ sub create_widgets {
     # add asterisks before titles when there're more than one:
     my @all_titles = all_title_entries($l);
     if (2 <= @all_titles) {
-        ${$_->{val}} = mygtk2::asteriskize_if_needed(${$_->{val}}) foreach @all_titles;
+        ${$_->{val}} = mygtk2::asteriskize(${$_->{val}}) foreach @all_titles;
     }
 
     my $box = create_widgets_block($o, $l, $update, \$ignore);

@@ -1203,7 +1203,7 @@ sub _allow_scroll_TextView_to_bottom {
     };
 }
 
-sub asteriskize_if_needed {
+sub asteriskize {
     my ($label) = @_;
     "\x{2022} " . $label;
 }
