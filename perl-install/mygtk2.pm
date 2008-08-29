@@ -1203,6 +1203,10 @@ sub _allow_scroll_TextView_to_bottom {
     };
 }
 
+sub asteriskize_if_needed {
+    my ($label) = @_;
+    "\x{2022} " . $label;
+}
 
 sub get_main_window_size() {
     my ($width, $height) = $::real_windowwidth ? ($::real_windowwidth, $::real_windowheight) : $::isWizard ? (540, 360) : (600, 400);
