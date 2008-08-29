@@ -913,7 +913,7 @@ sub ask_browse_tree_info {
 
     gtkadd($w->{window}, 
 	   gtknew('VBox', spacing => 5, children => [
-		    0, $common->{message},
+		    0, gtknew('Title2', label => $common->{message}),
 		    1, gtknew('VBox', children => [
 			       1, gtknew('ScrolledWindow', child => $tree),
 			       0, gtknew('Frame', text => N("Info"), child =>
