@@ -146,7 +146,11 @@ sub gtksetstyle {
 sub gtkradio {
     my $def = shift;
     my $radio;
-    map { gtkset_active($radio = Gtk2::RadioButton->new_with_label($radio ? $radio->get_group : undef, $_), $_ eq $def) } @_;
+    map {
+        my $w = gtkset_active($radio = Gtk2::RadioButton->new_with_label($radio ? $radio->get_group : undef, $_), $_ eq $def);
+        $w->get_child->set_line_wrap(1);
+        $w;
+      } @_;
 }
 
 sub gtkroot() { mygtk2::root_window() }
