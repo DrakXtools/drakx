@@ -53,15 +53,17 @@ connections from many clients. Note: if your machine is only a client on the Int
     my @l = 2 .. 5;
 
     $in->ask_from_({ title => $::isInstall ? N("Security") : N("DrakSec Basic Options"),
-		     messages => N("Please choose the desired security level") . "\n\n" .
-		                 join('', map { to_string($_) . ": " . formatAlaTeX($help{$_}) . "\n\n" } @l),
 		     interactive_help_id => 'miscellaneous',
 		   }, [
-              { label => N("Security level"), val => $security, list => \@l, format => \&to_string },
+              { label => N("Please choose the desired security level"), title => 1 },
+              { val => $security, list => \@l, format => \&to_string,
+                format => sub { warn ">>$_\n"; N("%s: %s", to_string($_), formatAlaTeX($help{$_})) },
+                type => 'list', gtk => { use_boxradio => 1 } },
                 if_($in->do_pkgs->is_installed('libsafe') && arch() =~ /^i.86/,
                 { label => N("Use libsafe for servers"), val => $libsafe, type => 'bool', text =>
                   N("A library which defends against buffer overflow and format string attacks.") }),
-                { label => N("Security Administrator (login or email)"), val => $email, },
+                { label => N("Security Administrator:"), title => 1 },
+                { label => N("Login or email:"), val => $email, },
             ],
     );
 }
