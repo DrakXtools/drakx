@@ -685,6 +685,7 @@ sub create_widgets {
 		    $mainw->{retval} = $v;
 		    Gtk2->main_quit;
 		}
+		mygtk2::destroy_previous_popped_and_reuse_window();
 		$mainw->{rwindow}->show;
 		$update->();
 	    };
