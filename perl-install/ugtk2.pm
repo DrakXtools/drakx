@@ -941,7 +941,7 @@ sub ask_browse_tree_info {
     } @l;
     @buttons = reverse @buttons if !$::isInstall;    
 
-    gtkpack__($box2, gtknew('Button', text => N("Help"), clicked => sub {
+    gtkpack__($box2, gtknew(($::isInstall ? 'Install_Button' : 'Button'), text => N("Help"), clicked => sub {
 					   ask_warn(N("Help"), $common->{interactive_help}->());
 				       })) if $common->{interactive_help};
 
