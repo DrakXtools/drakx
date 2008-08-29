@@ -952,9 +952,7 @@ sub ask_browse_tree_info {
     $buttons[0]->grab_focus;
     $w->{rwindow}->show;
 
-    my @toolbar = (ftout  =>  [ N("Expand Tree"), sub { $tree->expand_all } ],
-		   ftin   =>  [ N("Collapse Tree"), sub { $tree->collapse_all } ],
-		   reload =>  [ N("Toggle between flat and group sorted"), sub { invbool(\$common->{state}{flat}); $common->{rebuild_tree}->() } ]);
+    my @toolbar;
     foreach my $ic (@{$common->{icons} || []}) {
 	push @toolbar, ($ic->{icon} => [ $ic->{help}, sub {
 					     if ($ic->{code}) {
