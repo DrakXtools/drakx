@@ -94,6 +94,12 @@ sub new($$) {
 	    require Xconfig::card;
 	    my ($card) = Xconfig::card::probe();
 	    @servers = map { if_($_, "Driver:$_") } $card && $card->{Driver}, 'fbdev';
+	} elsif (arch() =~ /i.86/) {
+	    require Xconfig::card;
+	    my ($card) = Xconfig::card::probe();
+	    # early i810 do not support VESA:
+	    undef @servers if $card && $card->{card_name} eq 'i810';
+	    log::l("graphical installer not supported on early i810");
         }
 
 	foreach (@servers) {
