@@ -306,7 +306,7 @@ sub reallyChooseGroups {
 			      gtknew('CheckButton', text => N("Individual package selection"), active_ref => $individual),
 			  ),
 		    0, $w_size,
-		    0, gtknew('HBox', children_loose => [
+		    0, gtknew('HButtonBox', layout => 'edge', children_tight => [
 			  gtknew('Install_Button', text => N("Help"), clicked => $o->interactive_help_sub_display_id('choosePackages')),
 			  gtknew('Button', text => N("Next"), clicked => sub { Gtk2->main_quit }),
 			 ]),
