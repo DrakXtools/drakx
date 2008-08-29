@@ -840,11 +840,13 @@ sub sessions_with_order() {
 sub urpmi_add_all_media {
     my ($in) = @_;
 
+    my $binary = find { whereis_binary($_, $::prefix) } 'gurpmi.addmedia', 'urpmi.addmedia' or return;
+    
     #- configure urpmi media if network is up
     require network::tools;
     return if !network::tools::has_network_connection();
     my $_wait = $in->wait_message(N("Please wait"), N("Please wait, adding media..."));
-    run_program::rooted($::prefix, 'urpmi.addmedia', '--distrib', '--mirrorlist', '$MIRRORLIST');
+    run_program::rooted($::prefix, $binary, '--distrib', '--mirrorlist', '$MIRRORLIST');
 }
 
 sub autologin {
