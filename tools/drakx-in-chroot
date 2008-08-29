@@ -20,6 +20,7 @@ my $repository_uri;
 
 @ARGV >= 2 or die "usage: drakx-in-chroot <root of distrib> <dir to install to> [options]\n
 \nOptions specific to drakx-in-chroot:
+    --flang XX            use XX locale
     --resolution=XXXxYYYY (eg: --resolution=1024x768)\n
     --repository=<path>   path of packages repository
 ";
