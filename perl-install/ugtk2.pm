@@ -914,10 +914,10 @@ sub ask_browse_tree_info {
     gtkadd($w->{window}, 
 	   gtknew('VBox', spacing => 5, children => [
 		    0, $common->{message},
-		    1, gtknew('HBox', children_loose => [
-			       gtknew('ScrolledWindow', child => $tree),
-			       gtknew('Frame', text => N("Info"), child =>
-				      gtknew('ScrolledWindow', child => my $info = gtknew('TextView', editable => 0)),
+		    1, gtknew('VBox', children => [
+			       1, gtknew('ScrolledWindow', child => $tree),
+			       0, gtknew('Frame', text => N("Info"), child =>
+				      gtknew('ScrolledWindow', child => my $info = gtknew('TextView', editable => 0, height => 100)),
 				     ) ]),
 		    0, my $status = gtknew('Label'),
 		    if_($common->{auto_deps},
