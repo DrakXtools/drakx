@@ -673,7 +673,14 @@ sub _gtk_any_Window {
     $w;
 }
 
-my $previous_popped_window;
+my $previous_popped_and_reuse_window;
+
+sub destroy_previous_popped_and_reuse_window() {
+    $previous_popped_and_reuse_window or return;
+
+    $previous_popped_and_reuse_window->destroy;
+    $previous_popped_and_reuse_window = undef;
+}
 
 sub _gtk__MagicWindow {
     my ($w, $opts) = @_;
@@ -693,13 +700,12 @@ sub _gtk__MagicWindow {
     } else {
 	$sub_child ||= gtknew('VBox');
     }
-    if ($previous_popped_window && !$pop_and_reuse) {
-	$previous_popped_window->destroy;
-	$previous_popped_window = undef;
+    if (!$pop_and_reuse) {
+	destroy_previous_popped_and_reuse_window();
     }
 
-    if ($previous_popped_window && $pop_and_reuse) {
-	$w = $previous_popped_window;
+    if ($previous_popped_and_reuse_window && $pop_and_reuse) {
+	$w = $previous_popped_and_reuse_window;
 	$w->remove($w->child);
 
 	gtkadd($w, child => $sub_child);
@@ -708,7 +714,7 @@ sub _gtk__MagicWindow {
 	$opts->{child} = $sub_child;
 
 	$w = _create_Window($opts, pop_and_reuse => $pop_and_reuse);
-	$previous_popped_window = $w if $pop_and_reuse;
+	$previous_popped_and_reuse_window = $w if $pop_and_reuse;
     } else {
 	if (!$::WizardWindow) {
 
