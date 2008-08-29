@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 2008 Spring\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-18 18:03+0200\n"
+"POT-Creation-Date: 2008-08-29 19:50+0200\n"
 "PO-Revision-Date: 2008-03-22 13:46+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
@@ -932,17 +932,17 @@ msgstr "复制整张光盘"
 msgid "An error occurred"
 msgstr "发生了一个错误"
 
-#: steps_interactive.pm:96
-#, c-format
-msgid "Please choose your keyboard layout."
-msgstr "请选择您使用的键盘布局。"
-
 #: steps_interactive.pm:98
 #, c-format
 msgid "Here is the full list of available keyboards"
 msgstr "在此列出了可用的全部键盘"
 
-#: steps_interactive.pm:133
+#: steps_interactive.pm:102
+#, c-format
+msgid "Please choose your keyboard layout."
+msgstr "请选择您使用的键盘布局。"
+
+#: steps_interactive.pm:135
 #, c-format
 msgid "Install/Upgrade"
 msgstr "安装/升级"
@@ -1320,21 +1320,7 @@ msgstr ""
 "续, 不过您需要使用 BootX 或其它方式启动您的机器。根文件系统的内核参数是："
 "root=%s"
 
-#: steps_interactive.pm:1074
-#, c-format
-msgid "Do you want to use aboot?"
-msgstr "您要使用 aboot 吗?"
-
-#: steps_interactive.pm:1077
-#, c-format
-msgid ""
-"Error installing aboot, \n"
-"try to force installation even if that destroys the first partition?"
-msgstr ""
-"安装 aboot 时出错, \n"
-"强迫安装会毁坏第一个分区, 要继续吗?"
-
-#: steps_interactive.pm:1089
+#: steps_interactive.pm:1087
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1570,3 +1556,13 @@ msgstr "Mandriva Linux 桌面旗舰产品，附带完善的售后服务支持"
 #, c-format
 msgid "Mandriva: distributions for everybody's needs"
 msgstr "Mandriva 在手，应用无忧"
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "您要使用 aboot 吗?"
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "安装 aboot 时出错, \n"
+#~ "强迫安装会毁坏第一个分区, 要继续吗?"

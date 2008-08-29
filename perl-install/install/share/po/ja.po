@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-ja\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-18 18:03+0200\n"
+"POT-Creation-Date: 2008-08-29 19:50+0200\n"
 "PO-Revision-Date: 2008-08-29 21:50+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <cooker-i18n@mandrivalinux.org>\n"
@@ -945,17 +945,17 @@ msgstr "CD 全体をコピー"
 msgid "An error occurred"
 msgstr "エラーが発生しました"
 
-#: steps_interactive.pm:96
-#, c-format
-msgid "Please choose your keyboard layout."
-msgstr "キーボードの配列を選んでください"
-
 #: steps_interactive.pm:98
 #, c-format
 msgid "Here is the full list of available keyboards"
 msgstr "利用可能なすべてのキーボードのリスト"
 
-#: steps_interactive.pm:133
+#: steps_interactive.pm:102
+#, c-format
+msgid "Please choose your keyboard layout."
+msgstr "キーボードの配列を選んでください"
+
+#: steps_interactive.pm:135
 #, c-format
 msgid "Install/Upgrade"
 msgstr "インストール/更新"
@@ -1354,21 +1354,7 @@ msgstr ""
 "は yaboot は動きません。インストールを続けますが、マシンを起動するには、"
 "BootX もしくは他の方法が必要です。'root fs' のカーネル引数は 'root=%s' です。"
 
-#: steps_interactive.pm:1074
-#, c-format
-msgid "Do you want to use aboot?"
-msgstr "aboot を使いますか？"
-
-#: steps_interactive.pm:1077
-#, c-format
-msgid ""
-"Error installing aboot, \n"
-"try to force installation even if that destroys the first partition?"
-msgstr ""
-"aboot をインストール中にエラーが発生しました。\n"
-"最初のパーティションを破壊しますが、強制的にインストールしますか？"
-
-#: steps_interactive.pm:1089
+#: steps_interactive.pm:1087
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1606,3 +1592,13 @@ msgstr ""
 #, c-format
 msgid "Mandriva: distributions for everybody's needs"
 msgstr ""
+
+#~ msgid "Do you want to use aboot?"
+#~ msgstr "aboot を使いますか？"
+
+#~ msgid ""
+#~ "Error installing aboot, \n"
+#~ "try to force installation even if that destroys the first partition?"
+#~ msgstr ""
+#~ "aboot をインストール中にエラーが発生しました。\n"
+#~ "最初のパーティションを破壊しますが、強制的にインストールしますか？"
