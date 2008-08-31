@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-ja\n"
 "POT-Creation-Date: 2008-08-29 19:14+0200\n"
-"PO-Revision-Date: 2008-08-29 23:26+0900\n"
+"PO-Revision-Date: 2008-08-31 23:15+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -768,7 +768,7 @@ msgstr "ローカルファイル:"
 #, c-format
 msgid ""
 "Use local for all authentication and information user tell in local file"
-msgstr ""
+msgstr "ローカルファイルからユーザ情報を取得してすべての認証を行います。"
 
 #: authentication.pm:65
 #, c-format
@@ -5909,7 +5909,7 @@ msgstr "セキュリティレベルを選んでください"
 #: security/level.pm:62
 #, c-format
 msgid "%s: %s"
-msgstr ""
+msgstr "%s: %s"
 
 #: security/level.pm:66
 #, c-format
@@ -5930,7 +5930,7 @@ msgstr "セキュリティ管理者:"
 #: security/level.pm:69
 #, c-format
 msgid "Login or email:"
-msgstr ""
+msgstr "ログインまたはメールアドレス:"
 
 #: services.pm:19
 #, c-format
@@ -6771,104 +6771,3 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "インストール失敗"
-
-#~ msgid ""
-#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
-#~ "is enough)\n"
-#~ "at the beginning of the disk"
-#~ msgstr ""
-#~ "aboot を使う場合はディスクの先頭に空き領域 (2048 セクタほど)\n"
-#~ "を残してください"
-
-#~ msgid "Security level"
-#~ msgstr "セキュリティレベル"
-
-#~ msgid "Expand Tree"
-#~ msgstr "ツリーを展開する"
-
-#~ msgid "Collapse Tree"
-#~ msgstr "ツリーを折りたたむ"
-
-#~ msgid "Toggle between flat and group sorted"
-#~ msgstr "フラット表示/グループ別表示を切り替える"
-
-#~ msgid "Choose action"
-#~ msgstr "動作を選択"
-
-#~ msgid "Active Directory with SFU"
-#~ msgstr "SFU の Active Directory"
-
-#~ msgid "Active Directory with Winbind"
-#~ msgstr "WinBind の Active Directory"
-
-#~ msgid "Use information stored in local files for all authentication"
-#~ msgstr "ローカルファイルに保存された情報をすべての認証に使う"
-
-#~ msgid "Active Directory with SFU:"
-#~ msgstr "SFU の Active Directory:"
-
-#~ msgid "Active Directory with Winbind:"
-#~ msgstr "Winbind の Active Directory:"
-
-#~ msgid ""
-#~ "Winbind allows the system to authenticate users in a Windows Active "
-#~ "Directory Server."
-#~ msgstr ""
-#~ "Winbind は Windows Active Directory サーバのユーザ認証を可能にします。"
-
-#~ msgid "Authentication LDAP"
-#~ msgstr "LDAP 認証"
-
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid "SSL"
-#~ msgstr "SSL"
-
-#~ msgid "security layout (SASL/Kerberos)"
-#~ msgstr "セキュリティレイアウト (SASL/Kerberos)"
-
-#~ msgid "Authentication Active Directory"
-#~ msgstr "認証の Active Directory"
-
-#~ msgid "LDAP users database"
-#~ msgstr "LDAP ユーザデータベース"
-
-#~ msgid "LDAP user allowed to browse the Active Directory"
-#~ msgstr "Active Directory の閲覧を許可するユーザ"
-
-#~ msgid "Password for user"
-#~ msgstr "ユーザのパスワード"
-
-#~ msgid "Authentication NIS"
-#~ msgstr "NIS 認証"
-
-#~ msgid ""
-#~ "For this to work for a W2K PDC, you will probably need to have the admin "
-#~ "run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
-#~ "add and reboot the server.\n"
-#~ "You will also need the username/password of a Domain Admin to join the "
-#~ "machine to the Windows(TM) domain.\n"
-#~ "If networking is not yet enabled, Drakx will attempt to join the domain "
-#~ "after the network setup step.\n"
-#~ "Should this setup fail for some reason and domain authentication is not "
-#~ "working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows"
-#~ "(tm) Domain, and Admin Username/Password, after system boot.\n"
-#~ "The command 'wbinfo -t' will test whether your authentication secrets are "
-#~ "good."
-#~ msgstr ""
-#~ "これを W2K PDC で動作させるには、恐らく管理者が以下を実行し、その後\n"
-#~ "サーバを再起動しなければなりません:\n"
-#~ "C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add\n"
-#~ "また、マシンを Windows ドメインにつなぐには、ドメイン管理者のユーザ名/\n"
-#~ "パスワードが必要です。\n"
-#~ "ネットワークがまだ有効になっていない場合は、ネットワークの設定後 DrakX "
-#~ "が\n"
-#~ "ドメインに接続を試みます。\n"
-#~ "何らかの理由でこの設定が失敗しドメイン認証ができない場合は、システムを\n"
-#~ "再起動し、Windows(tm) ドメインを使って 'smbpasswd -j DOMAIN -U \n"
-#~ "USER%%PASSWORD' を実行し、管理者のユーザ名/パスワードを入れてください。\n"
-#~ "'wbinfo -t' コマンドで認証が有効かどうかをテストすることができます。"
-
-#~ msgid "Authentication Windows Domain"
-#~ msgstr "認証の Windows ドメイン"
