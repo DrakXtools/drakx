@@ -28,10 +28,10 @@ my $modules_conf = modules::any_conf->read;
 
 my $isLaptop = detect_devices::isLaptop();
 my $curr_kernel = c::kernel_version();
-$curr_kernel =~ s/(^\d+\.\d+).*/$1/;
+my ($kernel_major) = $curr_kernel =~ /(^\d+\.\d+).*/;
 
 my %previous_kernel_config = getVarsFromSh("$hw_sysconfdir/kernel");
-setVarsInSh("$hw_sysconfdir/kernel", { KERNEL => $curr_kernel, IS_LAPTOP => bool2text($isLaptop) });
+setVarsInSh("$hw_sysconfdir/kernel", { KERNEL => $kernel_major, IS_LAPTOP => bool2text($isLaptop) });
 my %cfg = getVarsFromSh("$hw_sysconfdir/service.conf");
 
 # autoreconfigure laptop-dependent services when switching from laptop to desktop, and vice versa
@@ -139,7 +139,7 @@ foreach my $hw_class (@harddrake::data::tree) {
 
     @added || @was_removed or $cfg{"DETECT_$Ident"} ne 'force' and next;
 
-    next if $Ident eq 'MOUSE' && $curr_kernel ne $previous_kernel_config{KERNEL} && $cfg{"DETECT_$Ident"} ne 'force';
+    next if $Ident eq 'MOUSE' && $kernel_major ne $previous_kernel_config{KERNEL} && $cfg{"DETECT_$Ident"} ne 'force';
 
     my @configurator_pool;
     if (harddrake::data::is_auto_configurable_class($Ident)) {
