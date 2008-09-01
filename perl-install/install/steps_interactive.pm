@@ -423,12 +423,13 @@ sub choosePackages {
     my ($individual, $chooseGroups);
 
     if (!$o->{isUpgrade}) {
-	if (install::pkgs::packageByName($o->{packages}, 'task-kde4') &&
-	    install::pkgs::packageByName($o->{packages}, 'task-gnome-minimal') &&
-		$availableC >= 2_500_000_000) { # don't chooseDesktop if not enough place
+	my $tasks_ok = install::pkgs::packageByName($o->{packages}, 'task-kde4') &&
+	               install::pkgs::packageByName($o->{packages}, 'task-gnome-minimal');
+	if ($tasks_ok && $availableC >= 2_500_000_000) { 
 	    _chooseDesktop($o, $o->{rpmsrate_flags_chosen}, \$chooseGroups);
 	} else {
-	    # don't ask for desktop if kde and gnome are not available on media (useful for mini iso)
+	    $tasks_ok ? log::l("not asking for desktop since not enough place") :
+	                log::l("not asking for desktop since kde and gnome are not available on media (useful for mini iso)");
 	    $chooseGroups = 1;
 	}
     }
