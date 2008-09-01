@@ -13,6 +13,8 @@ my @config_groups = (
 	"/etc/modprobe.conf",
 	"/etc/modprobe.d",
     ],
+);
+my @system_groups = (
     [
         "/lib/module-init-tools/ldetect-lst-modules.alias",
     ],
@@ -70,23 +72,25 @@ sub parse_file_modules {
     \%modules;
 }
 
-sub get_alias_groups() {
+sub get_alias_groups {
+    my ($o_skip_config) = @_;
+    #- FIXME: only o_skip_config from the first call is considered
     @alias_groups = map {
         my $group = {};
         parse_path($group, $_) foreach @$_;
         $group;
-    } @config_groups unless @alias_groups;
+    } if_(!$o_skip_config, @config_groups), @system_groups unless @alias_groups;
     @alias_groups;
 }
 
 sub get_modules {
-    my ($modalias) = @_;
+    my ($modalias, $o_skip_config) = @_;
     my ($class) = $modalias =~ /^([^:]+):\S+$/;
     my ($vendor, $device) = alias_to_ids($modalias);
     $class && member($class, @classes) or return;
 
     require File::FnMatch;
-    foreach my $group (get_alias_groups()) {
+    foreach my $group (get_alias_groups($o_skip_config)) {
         my @aliases;
         foreach my $subgroup ($group->{$class}{$vendor}{$device}, $group->{$class}{other}) {
             foreach (group_by2(@$subgroup)) {
