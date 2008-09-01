@@ -845,7 +845,13 @@ sub urpmi_add_all_media {
     #- configure urpmi media if network is up
     require network::tools;
     return if !network::tools::has_network_connection();
-    my $_wait = $in->wait_message(N("Please wait"), N("Please wait, adding media..."));
+    my $wait;
+    if ($binary eq 'urpmi.addmedia') {
+	$wait = $in->wait_message(N("Please wait"), N("Please wait, adding media..."));
+    } elsif ($in->isa('interactive::gtk')) {
+	mygtk2::destroy_previous_popped_and_reuse_window();
+	mygtk2::flush();
+    }
     run_program::rooted($::prefix, $binary, '--distrib', '--mirrorlist', '$MIRRORLIST');
 }
 

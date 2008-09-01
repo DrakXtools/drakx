@@ -756,42 +756,14 @@ connection.
 
 Do you want to install the updates?")),
 			   interactive_help_id => 'installUpdates',
-					       }) or return;
+					       }, 1) or return;
 
     #- bring all interface up for installing updates packages.
     install::interactive::upNetwork($o);
 
-    #- update medium available and working.
-    my $update_medium;
-    do {
-	$u->{url} = install::any::ask_mirror($o, 'updates', $u->{url}) or goto &installUpdates;
-	# FIXME: install all update media
-	my $phys_medium = install::media::url2mounted_phys_medium($o, $u->{url} . '/media/main/updates');
-
-	eval {
-	    my $_w = $o->wait_message('', N("Contacting the mirror to get the list of available packages..."));
-	    $update_medium = { name => "Updates for Mandriva Linux " . $o->{product_id}{version}, update => 1 };
-	    install::media::get_standalone_medium($o, $phys_medium, $o->{packages}, $update_medium);
-	};
-	if ($@) {
-	    undef $update_medium;
-	    $o->ask_warn('', N("Unable to contact mirror %s", $u->{mirror}));
-	}
-    } until $update_medium;
-
-    if ($update_medium) {
-	if ($o->choosePackagesTree($o->{packages}, $update_medium)) {
-	    $o->{isUpgrade} = 1; #- now force upgrade mode, else update will be installed instead of upgraded.
-	    $o->pkg_install;
-	} else {
-	    #- make sure to not try to install the packages (which are automatically selected by getPackage above).
-	    #- this is possible by deselecting the medium (which can be re-selected above).
-	    $update_medium->{selected} = 0;
-	    goto &installUpdates;
-	}
-	#- update urpmi even, because there is an hdlist available and everything is good,
-	#- this will allow user to update the medium but update his machine later.
-	install::steps::install_urpmi($o);
+    if (any::urpmi_add_all_media($o)) {
+	my $binary = find { whereis_binary($_, $::prefix) } 'gurpmi2', 'urpmi' or return;
+	run_program::rooted($::prefix, $binary, 'emacs'); # , '--auto-select', '--updates'
     }
 
     #- not downing network, even ppp. We don't care much since it is the end of install :)

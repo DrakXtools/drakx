@@ -662,25 +662,7 @@ sub configure_firewall {
 }
 
 #------------------------------------------------------------------------------
-sub installUpdates {
-    my ($o) = @_;
-    my $u = $o->{updates} or return; 
-    $u->{url} or return;
-
-    upNetwork($o);
-    require mirror;
-
-    # FIXME: install all update media
-    my $phys_medium = install::media::url2mounted_phys_medium($o, $u->{url} . '/media/main/updates');
-
-    my $update_medium = { name => "Updates for Mandriva Linux " . $o->{product_id}{version}, update => 1 };
-    install::media::get_standalone_medium($o, $phys_medium, $o->{packages}, $update_medium);
-
-    $o->pkg_install(@{$u->{packages} || []});
-
-    #- re-install urpmi with update security medium.
-    install_urpmi($o);
-}
+sub installUpdates {}
 
 sub summaryBefore {}
 
