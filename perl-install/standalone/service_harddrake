@@ -38,7 +38,7 @@ my $modules_conf = modules::any_conf->read;
 
 my $isLaptop = detect_devices::isLaptop();
 my $curr_kernel = c::kernel_version();
-my ($kernel_major) = $curr_kernel =~ /(^\d+\.\d+).*/;
+my ($kernel_major) = $curr_kernel =~ /^(\d+\.\d+)/;
 
 my %previous_kernel_config = getVarsFromSh("$hw_sysconfdir/kernel");
 setVarsInSh("$hw_sysconfdir/kernel", { KERNEL => $kernel_major, IS_LAPTOP => bool2text($isLaptop) });
@@ -48,6 +48,12 @@ my %cfg = getVarsFromSh("$hw_sysconfdir/service.conf");
 if (!exists $previous_kernel_config{IS_LAPTOP} || $force || $isLaptop != text2bool($previous_kernel_config{IS_LAPTOP})) {
     log::explanations("Autoconfiguring laptop tools since we switched between laptop and desktop systems");
     harddrake::autoconf::laptop($isLaptop);
+}
+
+my $known_kernels = "$hw_sysconfdir/kernels";
+if (!member($curr_kernel, chomp_(cat_($known_kernels)))) {
+    harddrake::autoconf::fix_aliases($modules_conf) if !$first_run;
+    append_to_file($known_kernels, "$curr_kernel\n");
 }
 
 my @cards = (

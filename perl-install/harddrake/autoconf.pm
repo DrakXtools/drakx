@@ -83,4 +83,29 @@ sub cpufreq() {
     modules::set_preload_modules("cpufreq", cpufreq::get_modules());
 }
 
+sub fix_aliases {
+    my ($modules_conf) = @_;
+    require modalias;
+    my %new_aliases;
+    #- first pass: find module targets whose modalias is not valid anymore
+    foreach my $module ($modules_conf->modules) {
+	if (my $aliased_to = $modules_conf->get_alias($module)) {
+	    my @valid_modaliases = modalias::get_modules($module, 'skip_config') or next;
+	    my ($found, $others) = partition { $_ eq $aliased_to } @valid_modaliases;
+	    $new_aliases{$aliased_to} = @{$others || []} == 1 && $others->[0] if is_empty_array_ref($found);
+	}
+    }
+    #- second pass: adapt module targets that are not valid anymore
+    foreach my $module ($modules_conf->modules) {
+	if (my $aliased_to = $modules_conf->get_alias($module)) {
+	    if (my $new = exists $new_aliases{$aliased_to} && $new_aliases{$aliased_to}) {
+		$modules_conf->set_alias($module, $new);
+	    } else {
+		$modules_conf->remove_alias($module);
+	    }
+	}
+    }
+    $modules_conf->write;
+}
+
 1;

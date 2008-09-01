@@ -1,3 +1,6 @@
+- service_harddrake: adapt kernel modaliases that are not valid
+  anymore in modprobe.conf when booting a new kernel, this should fix
+  migration from e1000 to e1000e and from iwl4965 to iwlagn (#41248)
 - libDrakX:
   o make all windows are "dialog", so that gurpmi.addmedia during install
     displays nicely
