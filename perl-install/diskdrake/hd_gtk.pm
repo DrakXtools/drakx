@@ -167,7 +167,7 @@ sub general_action_box {
     my ($box) = @_;
     $_->destroy foreach $box->get_children;
 
-    gtkadd($box, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => \&interactive_help));
+    gtkadd($box, gtknew('Install_Button', text => N("Help"), clicked => \&interactive_help));
 
     my @actions = (
 		   diskdrake::interactive::general_possible_actions($in, $all_hds), 
