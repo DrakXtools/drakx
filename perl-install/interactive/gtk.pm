@@ -468,6 +468,7 @@ sub create_widget {
 	    if ($e->{help} || $use_boxradio && $e->{type} ne 'treelist') {
 		#- used only when needed, as key bindings are dropped by List (ListStore does not seems to accepts Tooltips).
 		($w, $set, $focus_w) = create_boxradio($e, $onchange_f, $e->{quit_if_double_click_cooked});
+                $real_w = add_padding($w);
 	    } elsif ($e->{type} eq 'treelist') {
 		($w, $set) = create_treeview_tree($e, $onchange_f, $e->{quit_if_double_click_cooked});
 	    } else {
