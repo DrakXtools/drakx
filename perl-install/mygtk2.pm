@@ -399,6 +399,17 @@ sub _gtk__Label {
     $w;
 }
 
+
+sub _gtk__Alignment {
+    my ($w, $opts) = @_;
+
+    if (!$w) {
+	$w = Gtk2::Alignment->new(0, 0, 0, 0);
+    }
+    $w;
+}
+
+
 sub title1_to_markup {
     my ($label) = @_;
     $::isInstall ?  '<span foreground="#5A8AD6">' . $label . '</span>'
