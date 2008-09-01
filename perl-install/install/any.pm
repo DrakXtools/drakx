@@ -1376,7 +1376,7 @@ sub configure_pcmcia {
     log::l("configuring PCMCIA controller ($o->{pcmcia})");
     symlink "/tmp/stage2/$_", $_ foreach "/etc/pcmcia";
     eval { modules::load($o->{pcmcia}, 'pcmcia') };
-    run_program::run("pcmcia-socket-startup");
+    run_program::run("/lib/udev/pcmcia-socket-startup");
 }
 
 1;
