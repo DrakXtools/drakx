@@ -32,6 +32,7 @@ if (-f $last_boot_config && -s $last_boot_config) {
 }
 $previous_config ||= {};
 $previous_config = $$previous_config if ref($previous_config) !~ /HASH/;
+my $first_run = is_empty_hash_ref($previous_config);
 
 my $modules_conf = modules::any_conf->read;
 
@@ -114,7 +115,7 @@ foreach my $hw_class (@harddrake::data::tree) {
         $id => $i;
     } eval { $detector->({}) };
     $config{$Ident} = \%ID;
-    next if !$is_globetrotter && !$force && is_empty_hash_ref($previous_config); # do not fsck on first run but if --force
+    next if !$is_globetrotter && !$force && $first_run; # do not fsck on first run but if --force
 
     my $oldconfig = $force ? {} : $previous_config->{$Ident};
 
