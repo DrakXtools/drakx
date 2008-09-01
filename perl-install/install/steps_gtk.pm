@@ -40,6 +40,11 @@ sub new($$) {
 	if (!$::testing) {
 	    devices::make("/dev/kbd");
 	}
+
+	#- /tmp is mostly tmpfs, but not fully, since it doesn't allow: mount --bind /tmp/.X11-unix /mnt/tmp/.X11-unix
+	mkdir '/tmp/.X11-unix';
+	run_program::run('mount', '-t', 'tmpfs', 'none', '/tmp/.X11-unix');
+
 	my $launchX = sub {
 	    my ($server, $Driver) = @_;
 

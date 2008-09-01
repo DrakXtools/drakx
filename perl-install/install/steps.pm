@@ -371,6 +371,11 @@ sub beforeInstallPackages {
 	cp_af("/etc/resolv.conf", "$::prefix/etc");
     }
 
+    if (-e '/tmp/.X11-unix') {
+	mkdir "$::prefix/tmp/.X11-unix";
+	run_program::run('mount', '--bind', '/tmp/.X11-unix', "$::prefix/tmp/.X11-unix");
+    }
+
     log::l("setting excludedocs to $o->{excludedocs}");
     substInFile { s/%_excludedocs.*//; $_ .= "%_excludedocs yes\n" if eof && $o->{excludedocs} } "$::prefix/etc/rpm/macros";
 
