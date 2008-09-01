@@ -175,6 +175,7 @@ sub selectInstallClass {
 	# either one root is defined (and all is ok), or we take the first one we find
 	my $p = fs::get::root_($o->{fstab}) || (first(install::any::find_root_parts($o->{fstab}, $::prefix)) || die)->{part};
 	$o->{migrate_device_names} = install::any::use_root_part($o->{all_hds}, $p);
+	$o->{previous_release} = $p if $o->{isUpgrade};
     } 
 }
 

@@ -841,7 +841,7 @@ sub sessions_with_order() {
 }
 
 sub urpmi_add_all_media {
-    my ($in) = @_;
+    my ($in, $o_previous_release) = @_;
 
     my $binary = find { whereis_binary($_, $::prefix) } 'gurpmi.addmedia', 'urpmi.addmedia' or return;
     
@@ -855,6 +855,13 @@ sub urpmi_add_all_media {
 	mygtk2::destroy_previous_popped_and_reuse_window();
 	mygtk2::flush();
     }
+
+    my $reason = join(',', $o_previous_release ? 
+      ('reason=upgrade', 'upgrade_by=drakx', "upgrade_from=$o_previous_release->{version}") :
+       'reason=install');
+    log::l("URPMI_ADDMEDIA_REASON $reason");
+    local $ENV{URPMI_ADDMEDIA_REASON} = $reason;
+
     run_program::rooted($::prefix, $binary, '--distrib', '--mirrorlist', '$MIRRORLIST');
 }
 

@@ -312,9 +312,11 @@ sub is_running {
 sub parse_release_file {
     my ($prefix, $f, $part) = @_;
     chomp(my $s = cat_("$prefix$f"));
+    my $version = $s =~ s/\s+release\s+(\S+)// && $1;
     my $arch = $s =~ s/\s+for\s+(\S+)// && $1;
     log::l("find_root_parts found $part->{device}: $s for $arch" . ($f !~ m!/etc/! ? " in special release file $f" : ''));
-    { release => $s, release_file => $f, part => $part, arch => $arch };
+    { release => $s, version => $version, 
+      release_file => $f, part => $part, arch => $arch };
 }
 
 sub release_file {

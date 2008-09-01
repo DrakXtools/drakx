@@ -171,6 +171,7 @@ sub selectInstallClass {
 				  hidden => 1, val => \$_->{encrypt_key} } ]);
 	    }
 
+	    $o->{previous_release} = $p;
 	    $o->{isUpgrade} = (find { $p->{release_file} =~ /$_/ } 'mandriva', 'mandrake', 'conectiva', 'redhat') || 'unknown';
 	    $o->{upgrade_by_removing_pkgs_matching} ||= {
 		conectiva => 'cl',
@@ -761,7 +762,7 @@ Do you want to install the updates?")),
     #- bring all interface up for installing updates packages.
     install::interactive::upNetwork($o);
 
-    if (any::urpmi_add_all_media($o)) {
+    if (any::urpmi_add_all_media($o, $o->{previous_release})) {
 	my $binary = find { whereis_binary($_, $::prefix) } 'gurpmi2', 'urpmi' or return;
 	run_program::rooted($::prefix, $binary, '--auto-select', '--update');
     }
