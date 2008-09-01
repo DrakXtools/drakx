@@ -154,7 +154,7 @@ sub _gtk__Install_Button {
                                  gtknew('Label', text => delete $opts->{text}),
                              ],
                          );
-    $opts->{relief} = 'none' if $::isInstall;
+    $opts->{relief} = 'none';
     _gtk__Button($w, $opts, 'Button');
 }
 
