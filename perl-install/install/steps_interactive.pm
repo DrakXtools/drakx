@@ -763,7 +763,7 @@ Do you want to install the updates?")),
 
     if (any::urpmi_add_all_media($o)) {
 	my $binary = find { whereis_binary($_, $::prefix) } 'gurpmi2', 'urpmi' or return;
-	run_program::rooted($::prefix, $binary, 'emacs'); # , '--auto-select', '--updates'
+	run_program::rooted($::prefix, $binary, '--auto-select', '--update');
     }
 
     #- not downing network, even ppp. We don't care much since it is the end of install :)
