@@ -632,7 +632,7 @@ sub create_widgets_block {
 	my $label_w;
 	if ($e->{label} || !$e->{no_indent}) {
 	    $label_w = gtknew('Label_Left', text_markup => $e->{label} || '',
-			      size_group => $label_sizegrp, alignment => [ 0, 0.5 ]);
+			      if_($e->{alignment} ne 'right', size_group => $label_sizegrp), alignment => [ 0, 0.5 ]);
             $realw_sizegrp->add_widget($e->{real_w});
 	}
 
