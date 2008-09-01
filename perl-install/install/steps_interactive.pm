@@ -1116,20 +1116,6 @@ Do you really want to quit now?"), 0);
 	 interactive_help_id => 'exitInstall',
 	 ok => $::local_install ? N("Quit") : N("Reboot"),
 	},      
-	[
-	 if_(arch() !~ /^ppc/,
-	     { val => \ (my $_t1 = N("Generate auto install floppy")), clicked => sub {
-		   my $t = $o->ask_from_list_(N("Generate auto install floppy"), 
-N("The auto install can be fully automated if wanted,
-in that case it will take over the hard drive!!
-(this is meant for installing on another box).
-
-You may prefer to replay the installation.
-"), [ N_("Replay"), N_("Automated") ]);
-		   $t and $o->generateAutoInstFloppy($t eq 'Replay');
-	       }, advanced => 1 }),
-	 { val => \ (my $_t2 = N("Save packages selection")), clicked => sub { install::any::g_default_packages($o) }, advanced => 1 },
-	]
 	) if $alldone;
 }
 
