@@ -352,6 +352,14 @@ sub add_modify_remove_action {
     1;
 }
 
+sub add_padding {
+    my ($w) = @_;
+    gtknew('HBox', children => [
+        0, gtknew('Alignment', width => $mygtk2::left_padding),
+        1, $w
+    ]);
+}  
+
 sub create_widget {
     my ($o, $e, $onchange_f, $update, $ignore_ref) = @_;
 
@@ -385,11 +393,7 @@ sub create_widget {
 	}
 	$w->signal_connect(clicked => $onchange->(sub { $w->get_active }));
 	$set = sub { $w->set_active($_[0]) };
-        $real_w = gtknew('HBox', children => [
-            0, gtknew('Alignment', width => $mygtk2::left_padding),
-            1, $w
-            ]);
-        
+        $real_w = add_padding($w);
     } elsif ($e->{type} eq 'only_label') {
 	$w = $e->{title} ? 
 	         gtknew('Title2', label => escape_text_for_TextView_markup_format(${$e->{val}}),
