@@ -385,6 +385,11 @@ sub create_widget {
 	}
 	$w->signal_connect(clicked => $onchange->(sub { $w->get_active }));
 	$set = sub { $w->set_active($_[0]) };
+        $real_w = gtknew('HBox', children => [
+            0, gtknew('Alignment', width => $mygtk2::left_padding),
+            1, $w
+            ]);
+        
     } elsif ($e->{type} eq 'only_label') {
 	$w = $e->{title} ? 
 	         gtknew('Title2', label => escape_text_for_TextView_markup_format(${$e->{val}}),
