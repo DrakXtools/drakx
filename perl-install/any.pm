@@ -356,10 +356,13 @@ sub setupBootloader__mbr_or_not {
 
 	my $default = find { $_->[1] eq $b->{boot} } @l;
 	$in->ask_from_({ title => N("LILO/grub Installation"),
-			 messages => N("Where do you want to install the bootloader?"),
 			 interactive_help_id => 'setupBootloaderBeginner',
 		       },
-		      [ { val => \$default, list => \@l, format => sub { $_[0][0] }, type => 'list' } ]);
+		      [
+                          { label => N("Where do you want to install the bootloader?"), title => 1 },
+                          { val => \$default, list => \@l, format => sub { $_[0][0] }, type => 'list' },
+                       ]
+                  );
 	my $new_boot = $default->[1];
 
 	#- remove bios mapping if the user changed the boot device
