@@ -695,25 +695,25 @@ sub ask_deselect_media__copy_on_disk {
 	$w->sync;
 	ugtk2::gtkadd(
 	    $w->{window},
-	    create_scrolled_window(gtkpack(
+	    create_scrolled_window(gtkpack_(
 		Gtk2::VBox->new(0, 5),
 	      @names > 1 ? (
-		Gtk2::WrappedLabel->new(formatAlaTeX(N("The following installation media have been found.
+		0, Gtk2::WrappedLabel->new(formatAlaTeX(N("The following installation media have been found.
 If you want to skip some of them, you can unselect them now."))),
 		(map {
 			my $b = gtknew('CheckButton', text => $_, active_ref => \$selection{$_});
 			$b->set_sensitive(0) if $_ eq $names[0];
-			$b;
+			(0, $b);
 		    } @names),
-		gtknew('HSeparator'),
+		0, gtknew('HSeparator'),
 	      ) : (),
 		if_($o_copy_rpms_on_disk,
-		    Gtk2::WrappedLabel->new(formatAlaTeX(N("You have the option to copy the contents of the CDs onto the hard drive before installation.
+		    0, Gtk2::WrappedLabel->new(formatAlaTeX(N("You have the option to copy the contents of the CDs onto the hard drive before installation.
 It will then continue from the hard drive and the packages will remain available once the system is fully installed."))),
-		    gtknew('CheckButton', text => N("Copy whole CDs"), active_ref => $o_copy_rpms_on_disk),
-		    gtknew('HSeparator'),
+		    0, gtknew('CheckButton', text => N("Copy whole CDs"), active_ref => $o_copy_rpms_on_disk),
+		    0, gtknew('HSeparator'),
 		),
-		gtknew('HBox', children_tight => [
+		0, gtknew('HBox', children_tight => [
 		    gtknew('Button', text => N("Next"), clicked => sub { Gtk2->main_quit }),
 		]),
 	    )),
