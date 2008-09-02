@@ -698,7 +698,10 @@ sub ask_deselect_media__copy_on_disk {
 	    create_scrolled_window(gtkpack_(
 		Gtk2::VBox->new(0, 5),
 	      @names > 1 ? (
-		0, Gtk2::WrappedLabel->new(formatAlaTeX(N("The following installation media have been found.
+		0, gtknew('Label_Left', padding => [ 0, 0 ],
+                              # workaround infamous 6 years old gnome bug #101968:
+                              width => mygtk2::get_label_width(),
+                              text => formatAlaTeX(N("The following installation media have been found.
 If you want to skip some of them, you can unselect them now."))),
 		(map {
 			my $b = gtknew('CheckButton', text => $_, active_ref => \$selection{$_});
