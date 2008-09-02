@@ -1224,7 +1224,7 @@ sub get_main_window_size() {
 }
 
 sub get_label_width() {
-    first(mygtk2::get_main_window_size()) - 50;
+    first(mygtk2::get_main_window_size()) - 70;
 }
 
 sub set_main_window_size {
