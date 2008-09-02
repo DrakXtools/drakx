@@ -720,7 +720,7 @@ It will then continue from the hard drive and the packages will remain available
 		    0, gtknew('CheckButton', text => N("Copy whole CDs"), active_ref => $o_copy_rpms_on_disk),
 		    0, gtknew('HSeparator'),
 		),
-		0, gtknew('HBox', children_tight => [
+		0, gtknew('HButtonBox', layout => 'end', children_tight => [
 		    gtknew('Button', text => N("Next"), clicked => sub { Gtk2->main_quit }),
 		]),
 	    )),
