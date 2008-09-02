@@ -673,12 +673,15 @@ sub summary_prompt {
 
     ugtk2::gtkadd($w->{window},
 	   gtknew('VBox', spacing => 5, children => [
-		    1, gtknew('ScrolledWindow',
-                        child => gtknew('VBox', children_tight => [ map {
+		    1, gtknew('ScrolledWindow', h_policy => 'never',
+		    child => gtknew('TextView', 
+                        text => [ [ gtknew('VBox', children_tight => [ map {
                             ref($_) eq 'ARRAY' ? gtknew('Table', mcc => 1, row_spacings => 2, children => $_) : $_;
-                        } @widget_list ])),
+                        } @widget_list ]) ] ])),
 		    0, $w->create_okcancel(undef, '', '', if_($help_sub, [ N("Help"), $help_sub, 1 ]))
 		  ]));
+
+    $w->{real_window}->show_all; # else widgets embedded in textview are hidden
 
     $w->main($check_complete);
 }
