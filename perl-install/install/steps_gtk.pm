@@ -642,7 +642,7 @@ sub summary_prompt {
 	}
 	$e->{widget} = gtknew('Label_Right', width => $::real_windowwidth * 0.72, alignment => [ 1, 1 ]);
 
-	push @table, [], [ gtknew('HBox', spacing => 30, children_tight => [ $e->{widget} ]),
+	push @table, [], [ gtknew('HBox', children_tight => [ $e->{widget}, gtknew('Alignment', width => 10) ]),
 			   gtknew('Button', text => N("Configure"), clicked => sub { 
 						 $w->{rwindow}->hide;
 						 my ($old_icon, $old_title) = get_default_step_items();
