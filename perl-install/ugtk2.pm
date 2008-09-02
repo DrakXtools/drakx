@@ -360,7 +360,9 @@ sub create_box_with_title {
     } else {
      my $new_label = sub {
          my ($txt) = @_;
-         ref($txt) ? $txt : gtknew('WrappedLabel', text_markup => $txt, width => mygtk2::get_label_width());
+         ref($txt) ? $txt : gtknew('WrappedLabel', text_markup => $txt,
+                                   # workaround infamous 6 years old gnome bug #101968:
+                                   width => mygtk2::get_label_width());
      };
 	    gtkpack__($box,
 		      if_($::isWizard, gtknew('Label', height => 10)),

@@ -66,6 +66,7 @@ sub main {
 	   gtkpack_(Gtk2::VBox->new(0,7),
 		    0, gtknew(($::isInstall ? ('Title1', 'label') : ('Label_Left', 'text'))
                                 => N("Click on a partition, choose a filesystem type then choose an action"),
+                              # workaround infamous 6 years old gnome bug #101968:
                               width => mygtk2::get_label_width()
                             ),
 		    1, (my $notebook_widget = Gtk2::Notebook->new),

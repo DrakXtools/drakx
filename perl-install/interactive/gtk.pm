@@ -50,6 +50,7 @@ sub create_boxradio {
     my $tips = Gtk2::Tooltips->new;
     mapn {
 	my ($txt, $w) = @_;
+	# workaround infamous 6 years old gnome bug #101968:
 	$w->child->set_size_request(mygtk2::get_label_width(), -1) if $e->{alignment} ne 'right';
 	$w->signal_connect(button_press_event => $double_click) if $double_click;
 
@@ -398,6 +399,7 @@ sub create_widget {
     } elsif ($e->{type} eq 'only_label') {
 	$w = $e->{title} ? 
 	         gtknew('Title2', label => escape_text_for_TextView_markup_format(${$e->{val}}),
+                        # workaround infamous 6 years old gnome bug #101968:
                         if_($e->{alignment} ne 'right', width => mygtk2::get_label_width())) :
 		 gtknew('Label_Left', line_wrap => 1, text_markup => ${$e->{val}});
     } elsif ($e->{type} eq 'label') {

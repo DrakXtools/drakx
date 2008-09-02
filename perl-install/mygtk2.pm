@@ -1223,6 +1223,7 @@ sub get_main_window_size() {
     my ($width, $height) = $::real_windowwidth ? ($::real_windowwidth, $::real_windowheight) : $::isWizard ? (540, 360) : (600, 400);
 }
 
+# in order to workaround infamous 6 years old gnome bug #101968:
 sub get_label_width() {
     first(mygtk2::get_main_window_size()) - 70;
 }
