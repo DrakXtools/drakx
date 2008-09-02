@@ -649,6 +649,7 @@ sub summary_prompt {
 						 set_default_step_items($e->{banner_title} || $old_title);
 						 $e->{clicked}(); 
 						 set_default_step_items($old_title);
+						 mygtk2::destroy_previous_popped_and_reuse_window();
 						 $w->{rwindow}->show;
 						 $set_entry_labels->();
 					     }) ];
