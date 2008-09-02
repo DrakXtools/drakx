@@ -710,6 +710,8 @@ If you want to skip some of them, you can unselect them now."))),
 	      ) : (),
 		if_($o_copy_rpms_on_disk,
 		    0, gtknew('Label_Left', padding => [ 0, 0 ],
+                              # workaround infamous 6 years old gnome bug #101968:
+                              width => mygtk2::get_label_width(),
                               text => N("You have the option to copy the contents of the CDs onto the hard drive before installation.
 It will then continue from the hard drive and the packages will remain available once the system is fully installed.")),
 		    0, gtknew('CheckButton', text => N("Copy whole CDs"), active_ref => $o_copy_rpms_on_disk),
