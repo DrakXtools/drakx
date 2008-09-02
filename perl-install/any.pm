@@ -1300,7 +1300,7 @@ sub monitor_full_edid() {
 }
 
 sub running_window_manager() {
-    my @window_managers = qw(kwin gnome-session icewm wmaker afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce blackbox sawfish olvwm fluxbox compiz);
+    my @window_managers = qw(ksmserver kwin gnome-session icewm wmaker afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce blackbox sawfish olvwm fluxbox compiz);
 
     foreach (@window_managers) {
 	my @pids = fuzzy_pidofs(qr/\b$_\b/) or next;
@@ -1313,6 +1313,7 @@ sub ask_window_manager_to_logout {
     my ($wm) = @_;
     
     my %h = (
+	'ksmserver' => 'qdbus org.kde.ksmserver /KSMServer logout 0 0 0',
 	'kwin' => "dcop kdesktop default logout",
 	'gnome-session' => "gnome-session-save --kill",
 	'icewm' => "killall -QUIT icewm",
@@ -1322,7 +1323,7 @@ sub ask_window_manager_to_logout {
 	#- NB: consolehelper does not destroy $HOME whereas kdesu does
 	#- for gnome, we use consolehelper, so below works
 	$ENV{ICEAUTHORITY} ||= "$ENV{HOME}/.ICEauthority";
-    } elsif ($wm eq 'kwin' && $> == 0) {
+    } elsif (member($wm, 'ksmserver', 'kwin') && $> == 0) {
 	#- we can not use dcop when we are root
 	$cmd = "su $ENV{USER} -c '$cmd'";
     }
