@@ -50,7 +50,7 @@ sub create_boxradio {
     my $tips = Gtk2::Tooltips->new;
     mapn {
 	my ($txt, $w) = @_;
-	$w->child->set_size_request(mygtk2::get_label_width(), -1);
+	$w->child->set_size_request(mygtk2::get_label_width(), -1) if $e->{alignment} ne 'right';
 	$w->signal_connect(button_press_event => $double_click) if $double_click;
 
 	$w->signal_connect(key_press_event => $e->{may_go_to_next});
