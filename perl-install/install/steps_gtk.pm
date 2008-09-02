@@ -640,7 +640,7 @@ sub summary_prompt {
                 gtknew('Title1', 
                        label => mygtk2::asteriskize(escape_text_for_TextView_markup_format($group))) ]), '' ];
 	}
-	$e->{widget} = gtknew('WrappedLabel', width => $::real_windowwidth * 0.72);
+	$e->{widget} = gtknew('Label_Right', width => $::real_windowwidth * 0.72, alignment => [ 1, 1 ]);
 
 	push @table, [], [ gtknew('HBox', spacing => 30, children_tight => [ '', $e->{widget} ]),
 			   gtknew('Button', text => N("Configure"), clicked => sub { 
