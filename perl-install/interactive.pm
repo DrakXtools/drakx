@@ -218,6 +218,7 @@ sub ask_okcancel {
 
 sub ask_warn_ {
     my ($o, $common) = @_;
+    local $o->{modal} = $o->{modal} || $::isInstall; # make these popup at install time
     ask_from_listf_raw_no_check($o, $common, \&translate, [ $o->ok ]);
 }
 
