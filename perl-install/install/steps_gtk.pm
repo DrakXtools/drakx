@@ -691,7 +691,7 @@ sub ask_deselect_media__copy_on_disk {
     my %selection = map { $_ => 1 } @names;
 
     if (@names > 1 || $o_copy_rpms_on_disk) {
-	my $w = ugtk2->new("");
+	my $w = ugtk2->new(N("Media Selection"));
 	$w->sync;
 	ugtk2::gtkadd(
 	    $w->{window},
