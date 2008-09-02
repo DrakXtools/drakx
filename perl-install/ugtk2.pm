@@ -148,7 +148,6 @@ sub gtkradio {
     my $radio;
     map {
         my $w = gtkset_active($radio = Gtk2::RadioButton->new_with_label($radio ? $radio->get_group : undef, $_), $_ eq $def);
-        $w->child->set_size_request(mygtk2::get_label_width(), -1);
         $w->get_child->set_line_wrap(1);
         $w;
       } @_;
