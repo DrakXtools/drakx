@@ -673,7 +673,7 @@ sub summary_prompt {
 
     ugtk2::gtkadd($w->{window},
 	   gtknew('VBox', spacing => 5, children => [
-		    1, gtknew('ScrolledWindow', widget_name => 'white_background',
+		    1, gtknew('ScrolledWindow',
                         child => gtknew('VBox', children_tight => [ map {
                             ref($_) eq 'ARRAY' ? gtknew('Table', mcc => 1, row_spacings => 2, children => $_) : $_;
                         } @widget_list ])),
