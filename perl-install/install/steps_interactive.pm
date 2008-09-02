@@ -1117,8 +1117,7 @@ Do you really want to quit now?"), 0);
 	 messages => formatAlaTeX(messages::install_completed()),
 	 interactive_help_id => 'exitInstall',
 	 ok => $::local_install ? N("Quit") : N("Reboot"),
-	},      
-	) if $alldone;
+	}, []) if $alldone;
 }
 
 
