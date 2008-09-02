@@ -705,6 +705,7 @@ If you want to skip some of them, you can unselect them now."))),
 			$b->set_sensitive(0) if $_ eq $names[0];
 			(0, $b);
 		    } @names),
+		if_(@names <= 8, 1, ''),
 		0, gtknew('HSeparator'),
 	      ) : (),
 		if_($o_copy_rpms_on_disk,
