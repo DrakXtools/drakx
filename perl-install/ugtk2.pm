@@ -919,7 +919,9 @@ sub ask_browse_tree_info {
 
     gtkadd($w->{window}, 
 	   gtknew('VBox', spacing => 5, children => [
-		    0, gtknew('Title2', label => $common->{message}),
+		    0, gtknew('Title2', label => $common->{message},
+                              # workaround infamous 6 years old gnome bug #101968:
+                              width => mygtk2::get_label_width()),
 		    1, gtknew('VBox', children => [
 			       1, gtknew('ScrolledWindow', child => $tree),
 			       0, gtknew('Frame', text => N("Info"), child =>
