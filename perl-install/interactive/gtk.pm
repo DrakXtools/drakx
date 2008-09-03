@@ -699,7 +699,6 @@ sub create_widgets {
 		    $mainw->{retval} = $v;
 		    Gtk2->main_quit;
 		}
-		mygtk2::destroy_previous_popped_and_reuse_window();
 		$mainw->{rwindow}->show;
 		$update->();
 	    };
@@ -881,10 +880,14 @@ sub ask_from__add_modify_removeW {
     $o->ask_from($title, $message, $l, %callback);
 }
 
+my $reuse_timeout;
+
 sub wait_messageW {
     my ($o, $title, $message, $message_modifiable) = @_;
 
     my $to_modify = Gtk2::Label->new(scalar warp_text(ref $message_modifiable ? '' : $message_modifiable));
+
+    Glib::Source->remove($reuse_timeout) if $reuse_timeout; $reuse_timeout = '';
 
     my $Window = gtknew('MagicWindow',
 			title => $title,
@@ -912,10 +915,14 @@ sub wait_message_nextW {
 }
 sub wait_message_endW {
     my ($_o, $Window) = @_;
-    $Window->{pop_and_reuse} and return;
-
-    mygtk2::may_destroy($Window);
-    mygtk2::flush();
+    if ($Window->{pop_and_reuse}) {
+	$reuse_timeout = Glib::Timeout->add(100, sub {
+	    mygtk2::destroy_previous_popped_and_reuse_window();
+	});
+    } else {
+	mygtk2::may_destroy($Window);
+	mygtk2::flush();
+    }
 }
 
 sub wait_message_with_progress_bar {

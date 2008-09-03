@@ -852,7 +852,6 @@ sub urpmi_add_all_media {
     if ($binary eq 'urpmi.addmedia') {
 	$wait = $in->wait_message(N("Please wait"), N("Please wait, adding media..."));
     } elsif ($in->isa('interactive::gtk')) {
-	mygtk2::destroy_previous_popped_and_reuse_window();
 	mygtk2::flush();
     }
 
