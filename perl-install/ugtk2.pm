@@ -935,7 +935,11 @@ sub ask_browse_tree_info {
 		   ]));
 
     gtkpack__($box2, gtknew(($::isInstall ? 'Install_Button' : 'Button'), text => N("Help"), clicked => sub {
+                            if (defined $::o) {
+                                $::o->ask_warn(N("Help"), $common->{interactive_help}->());
+                            } else {
 					   ask_warn(N("Help"), $common->{interactive_help}->());
+                            }
 				       })) if $common->{interactive_help};
 
     #gtkpack__($box2, my $toolbar = Gtk2::Toolbar->new('horizontal', 'icons'));
