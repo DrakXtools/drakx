@@ -755,7 +755,7 @@ sub pack_append {
 sub modify_append {
     my ($b, $f) = @_;
 
-    my @l = grep { $_->{type} eq 'image' && !($::isStandalone && $_->{label} eq 'failsafe') } @{$b->{entries}};
+    my @l = grep { $_->{type} eq 'image' && !$_->{keep_verbatim} && !($::isStandalone && $_->{label} eq 'failsafe') } @{$b->{entries}};
 
     foreach (\$b->{perImageAppend}, map { \$_->{append} } @l) {
 	my ($simple, $dict) = unpack_append($$_);
