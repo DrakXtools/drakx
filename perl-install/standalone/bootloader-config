@@ -37,11 +37,11 @@ usage: bootloader-config --action add-kernel (--image <vmlinuz> | --kernel-versi
 
        bootloader-config --action update-splash
        bootloader-config --action remove-splash
-
        bootloader-config --action rebuild-initrds
+       bootloader-config --action migrate-to-uuids
 EOF
 
-my @known_actions = qw(add-kernel remove-kernel update-splash remove-splash rebuild-initrds detectloader add-entry remove-entry add-resume2);
+my @known_actions = qw(add-kernel remove-kernel update-splash remove-splash rebuild-initrds migrate-to-uuids detectloader add-entry remove-entry add-resume2);
 $action && member($action, @known_actions) or die "<action> must be one of " . join(' ', @known_actions) . "\n";
 
 if ($image) {
@@ -231,6 +231,64 @@ sub add_resume2() {
 sub rebuild_initrds() {    
     bootloader::rebuild_initrds($bootloader);
     bootloader::action($bootloader, 'when_config_changed') if !$no_launch;
+}
+
+#-###############################################################################
+sub migrate_to_uuids() {    
+    _migrate_to_uuids__fstab();
+
+    my $fstab = [ fs::get::fstab($all_hds) ];
+    my $bootloader_migrated;
+    my $may_migrate = sub {
+	my ($label, $dev_ref) = @_;
+	my $dev_ = _migrate_dev_to_uuid($fstab, $$dev_ref) or return;
+
+	log::l("migrate_to_uuids: migrating bootloader $label=$$dev_ref entry");
+	$$dev_ref = $dev_;
+	$bootloader_migrated = 1;
+    };
+    # migrate root=
+    $may_migrate->('root', \$_->{root}) foreach grep { !$_->{keep_verbatim} } @{$bootloader->{entries}};
+
+    # migrate resume=
+    bootloader::modify_append($bootloader, sub {
+	my ($_simple, $dict) = @_;
+	foreach (grep { $_->[0] eq 'resume' } @$dict) {
+	    $may_migrate->($_->[0], \$_->[1]);
+	}
+    });
+
+    if ($bootloader_migrated) {
+	bootloader::action($bootloader, 'write', $all_hds);
+	bootloader::action($bootloader, 'when_config_changed');
+    }
+}
+
+sub _migrate_to_uuids__fstab() {
+    my $fstab_migrated;
+    foreach my $part (fs::get::really_all_fstab($all_hds)) {	
+	if (_set_prefer_device_UUID($part)) {
+	    log::l("migrate_to_uuids: migrating fstab $part->{device} entry");
+	    $fstab_migrated = 1;
+	}
+    }
+    fs::write_fstab($all_hds) if $fstab_migrated;
+}
+
+sub _migrate_dev_to_uuid {
+    my ($fstab, $dev) = @_;
+    $dev && $dev =~ m!/dev/! or next;
+
+    my $part = fs::get::device2part($dev, $fstab);
+    $part && $part->{device_UUID} && "UUID=$part->{device_UUID}";
+}
+
+sub _set_prefer_device_UUID {
+    my ($part) = @_;
+    $part->{device_UUID} && !$part->{prefer_device_UUID} && !$part->{prefer_device_LABEL} or return;
+    $part->{prefer_device_UUID} = 1;
+    $part->{prefer_device} = 0;
+    1;
 }
 
 #-###############################################################################
