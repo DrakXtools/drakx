@@ -1312,7 +1312,7 @@ sub ask_window_manager_to_logout {
     my ($wm) = @_;
     
     my %h = (
-	'ksmserver' => 'qdbus org.kde.ksmserver /KSMServer logout 1 0 0',
+	'ksmserver' => '/usr/lib/qt4/bin/qdbus org.kde.ksmserver /KSMServer logout 1 0 0',
 	'kwin' => "dcop kdesktop default logout",
 	'gnome-session' => "gnome-session-save --kill",
 	'icewm' => "killall -QUIT icewm",
