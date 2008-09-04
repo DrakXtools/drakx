@@ -936,7 +936,7 @@ sub ask_browse_tree_info {
 
     gtkpack__($box2, gtknew(($::isInstall ? 'Install_Button' : 'Button'), text => N("Help"), clicked => sub {
                             # will be a little small in standalone mode:
-                            if (defined $::o) {
+                            if ($::isInstall) {
                                 $::o->ask_warn(N("Help"), $common->{interactive_help}->());
                             } else {
 					   ask_warn(N("Help"), $common->{interactive_help}->());
