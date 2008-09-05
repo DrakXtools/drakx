@@ -221,4 +221,45 @@ sub detect_unselected_locale_packages {
     member($selected_locale, @available_locales) ? difference2(\@available_locales, [ $selected_locale ]) : ();
 }
 
+sub remove_unused_packages {
+    my ($in, $do_pkgs) = @_;
+
+    my $wait;
+    $wait = $in->wait_message(N("Unused packages removal"), N("Finding unused hardware packages..."));
+    my @unused_hardware_packages = detect_unused_hardware_packages($do_pkgs);
+    undef $wait;
+    $wait = $in->wait_message(N("Unused packages removal"), N("Finding unused localization packages..."));
+    my @unselected_locales = detect_unselected_locale_packages($do_pkgs);
+    undef $wait;
+
+    @unused_hardware_packages || @unselected_locales or return;
+
+    my $hardware = @unused_hardware_packages;
+    my $locales = @unselected_locales;
+    $in->ask_from(
+	N("Unused packages removal"),
+	N("The following packages do not seem to be useful for your system.") . "\n" .
+	N("Please select the packages group that should be removed:"),
+	[
+	 if_(@unused_hardware_packages,
+	     { text => N("Unused hardware support"), val => \$hardware, type => "bool" },
+	     { label => N("Unused hardware support") . "\n" . join("\n", map { "  " . $_ } sort(@unused_hardware_packages)), advanced => 1 },
+	 ),
+	 if_(@unselected_locales,
+	     { text => N("Unused localization"), val => \$locales, type => "bool" },
+	     { label => N("Unused localization") . "\n"  . join("\n", map { "  " . $_ } sort(@unselected_locales)), advanced => 1 },
+	 ),
+	],
+	if_($::isWizard, cancel => N("Skip")),
+    ) && ($hardware || $locales) or return;
+
+    #- we should have some gurpme
+    $wait = $in->wait_message(N("Please wait"), N("Removing packages..."));
+    run_program::run('urpme', '--auto',
+		     if_($hardware, @unused_hardware_packages),
+		     if_($locales, @unselected_locales),
+	);
+    #- use script from One to list language files (/usr/share/locale mainly) and remove them?
+}
+
 1;
