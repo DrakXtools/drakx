@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2008-08-29 19:14+0200\n"
+"POT-Creation-Date: 2008-09-05 18:08+0200\n"
 "PO-Revision-Date: 2004-09-15 13:33+0200\n"
 "Last-Translator: Toma Jankovic <tomaja@net.yu>\n"
 "Language-Team: Serbian <i18n@mandrake.co.yu>\n"
@@ -17,10 +17,10 @@ msgstr ""
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: KBabel 0.9.6\n"
 
-#: any.pm:252 any.pm:848 diskdrake/interactive.pm:554
+#: any.pm:252 any.pm:853 diskdrake/interactive.pm:554
 #: diskdrake/interactive.pm:741 diskdrake/interactive.pm:785
 #: diskdrake/interactive.pm:843 diskdrake/interactive.pm:1133 do_pkgs.pm:221
-#: do_pkgs.pm:267 harddrake/sound.pm:285 interactive.pm:583
+#: do_pkgs.pm:267 harddrake/sound.pm:285 interactive.pm:584 pkgs.pm:257
 #, c-format
 msgid "Please wait"
 msgstr "Само моменат..."
@@ -5122,6 +5122,43 @@ msgstr ""
 "Тест интегритета података није прошао. \n"
 "То значи да све што се налази на диску ће завршити као ђубре"
 
+#: pkgs.pm:228 pkgs.pm:231 pkgs.pm:240
+#, c-format
+msgid "Unused packages removal"
+msgstr ""
+
+#: pkgs.pm:228
+#, c-format
+msgid "Finding unused hardware packages..."
+msgstr ""
+
+#: pkgs.pm:231
+#, c-format
+msgid "Finding unused localization packages..."
+msgstr ""
+
+#: pkgs.pm:241
+#, c-format
+msgid ""
+"We have detected that some packages are not needed for your system "
+"configuration."
+msgstr ""
+
+#: pkgs.pm:242
+#, c-format
+msgid "We will remove the following packages, unless you choose otherwise:"
+msgstr ""
+
+#: pkgs.pm:245 pkgs.pm:246
+#, fuzzy, c-format
+msgid "Unused hardware support"
+msgstr "омогући подршку за радио"
+
+#: pkgs.pm:249 pkgs.pm:250
+#, c-format
+msgid "Unused localization"
+msgstr ""
+
 #: raid.pm:42
 #, fuzzy, c-format
 msgid "Can not add a partition to _formatted_ RAID %s"
@@ -7098,9 +7135,6 @@ msgstr "Инсталација није успела"
 
 #~ msgid "Radio support:"
 #~ msgstr "Подршка за радио :"
-
-#~ msgid "enable radio support"
-#~ msgstr "омогући подршку за радио"
 
 #~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
 #~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
