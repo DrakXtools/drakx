@@ -259,7 +259,7 @@ sub migrate_to_uuids() {
     });
 
     if ($bootloader_migrated) {
-	bootloader::action($bootloader, 'write', $all_hds);
+	bootloader::action($bootloader, 'write', $all_hds, '.before-migrate-to-uuids');
 	bootloader::action($bootloader, 'when_config_changed');
     }
 }
@@ -272,7 +272,10 @@ sub _migrate_to_uuids__fstab() {
 	    $fstab_migrated = 1;
 	}
     }
-    fs::write_fstab($all_hds) if $fstab_migrated;
+    if ($fstab_migrated) {
+	cp_af('/etc/fstab', '/etc/fstab.before-migrate-to-uuids');
+	fs::write_fstab($all_hds);
+    }
 }
 
 sub _migrate_dev_to_uuid {

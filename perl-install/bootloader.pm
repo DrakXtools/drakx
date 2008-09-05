@@ -1312,7 +1312,7 @@ sub make_label_lilo_compatible {
 }
 
 sub write_lilo {
-    my ($bootloader, $all_hds) = @_;
+    my ($bootloader, $all_hds, $o_backup_extension) = @_;
     $bootloader->{prompt} ||= $bootloader->{timeout};
 
     my $file2fullname = sub {
@@ -1430,7 +1430,7 @@ sub write_lilo {
     my $f = arch() =~ /ia64/ ? "$::prefix/boot/efi/elilo.conf" : "$::prefix/etc/lilo.conf";
 
     log::l("writing lilo config to $f");
-    renamef($f, "$f.old");
+    renamef($f, $f . ($o_backup_extension || '.old'));
     output_with_perm($f, $bootloader->{password} ? 0600 : 0644, map { "$_\n" } @conf);
 }
 
@@ -1627,7 +1627,7 @@ sub update_copy_in_boot {
 }
 
 sub write_grub {
-    my ($bootloader, $all_hds) = @_;
+    my ($bootloader, $all_hds, $o_backup_extension) = @_;
 
     my $fstab = [ fs::get::fstab($all_hds) ]; 
     my @legacy_floppies = detect_devices::floppies();
@@ -1730,14 +1730,14 @@ sub write_grub {
 	}
 	my $f = "$::prefix/boot/grub/menu.lst";
 	log::l("writing grub config to $f");
-	renamef($f, "$f.old");
+	renamef($f, $f . ($o_backup_extension || '.old'));
 	output($f, map { "$_\n" } @conf);
     }
     {
 	my $f = "$::prefix/boot/grub/install.sh";
 	my $boot_dev = device_string2grub($bootloader->{boot}, \@legacy_floppies, \@sorted_hds);
 	my $files_dev = device2grub(fs::get::root_($fstab, 'boot'), \@sorted_hds);
-	renamef($f, "$f.old");
+	renamef($f, $f . ($o_backup_extension || '.old'));
 	output_with_perm($f, 0755,
 "grub --device-map=/boot/grub/device.map --batch <<EOF
 root $files_dev
