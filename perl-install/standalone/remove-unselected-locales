@@ -17,7 +17,7 @@ my $wait = $in->wait_message(N("Localization packages removal"),
 
 my $do_pkgs = do_pkgs->do_pkgs($in);
 my $locale = lang::read();
-my $selected_locale = $locales_prefix. $locale->{lang};
+my $selected_locale = $locales_prefix . $locale->{lang};
 my @available_locales = $do_pkgs->are_installed($locales_prefix . '*');
 
 my @unselected_locales;
