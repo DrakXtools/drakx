@@ -238,8 +238,8 @@ sub remove_unused_packages {
     my $locales = @unselected_locales;
     $in->ask_from(
 	N("Unused packages removal"),
-	N("The following packages do not seem to be useful for your system.") . "\n" .
-	N("Please select the packages group that should be removed:"),
+	N("We have detected that some packages are not needed for your system configuration.") . "\n" .
+	N("We will remove the following packages, unless you choose otherwise:"),
 	[
 	 if_(@unused_hardware_packages,
 	     { text => N("Unused hardware support"), val => \$hardware, type => "bool" },
