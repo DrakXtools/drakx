@@ -211,4 +211,14 @@ sub detect_unused_hardware_packages {
     $do_pkgs->are_installed(@unneeded_hardware_packages);
 }
 
+sub detect_unselected_locale_packages {
+    my ($do_pkgs) = @_;
+    require lang;
+    my $locales_prefix = 'locales-';
+    my $locale = lang::read();
+    my $selected_locale = $locales_prefix . $locale->{lang};
+    my @available_locales = $do_pkgs->are_installed($locales_prefix . '*');
+    member($selected_locale, @available_locales) ? difference2(\@available_locales, [ $selected_locale ]) : ();
+}
+
 1;
