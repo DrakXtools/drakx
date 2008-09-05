@@ -9,17 +9,10 @@ use run_program;
 use standalone;
 
 my $in = interactive->vnew;
-
 my $wait = $in->wait_message(N("Hardware packages removal"),
 			     N("Finding unused hardware packages..."));
-
 my $do_pkgs = do_pkgs->do_pkgs($in);
-
-my @all_hardware_packages = pkgs::detect_hardware_packages($do_pkgs, 'match_all_hardware');
-my @used_hardware_packages = pkgs::detect_hardware_packages($do_pkgs);
-my @unneeded_hardware_packages = difference2(\@all_hardware_packages, \@used_hardware_packages);
-my @unused_hardware_packages = $do_pkgs->are_installed(@unneeded_hardware_packages);
-
+my @unused_hardware_packages = pkgs::detect_unused_hardware_packages($do_pkgs);
 undef $wait;
 
 #- we should have some gurpme

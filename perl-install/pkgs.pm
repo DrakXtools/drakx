@@ -203,4 +203,12 @@ sub detect_hardware_packages {
     );
 }
 
+sub detect_unused_hardware_packages {
+    my ($do_pkgs) = @_;
+    my @all_hardware_packages = detect_hardware_packages($do_pkgs, 'match_all_hardware');
+    my @used_hardware_packages = detect_hardware_packages($do_pkgs);
+    my @unneeded_hardware_packages = difference2(\@all_hardware_packages, \@used_hardware_packages);
+    $do_pkgs->are_installed(@unneeded_hardware_packages);
+}
+
 1;
