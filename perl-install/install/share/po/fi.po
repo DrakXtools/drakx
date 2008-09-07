@@ -9,14 +9,14 @@
 # Esa Linna <denzo@mbnet.fi>, 2004.
 # Thomas Backlund <tmb@mandrake.org>, 2002, 2003, 2004, 2005.
 # Thomas Backlund <tmb@mandriva.org>, 2006, 2008.
-# Anssi Hannula <anssi@mandriva.org>, 2007.
+# Anssi Hannula <anssi@mandriva.org>, 2007, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: DrakX-fi\n"
+"Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-02 16:49+0200\n"
-"PO-Revision-Date: 2008-02-29 18:31+0200\n"
-"Last-Translator: Thomas Backlund <tmb@mandriva.org>\n"
+"PO-Revision-Date: 2008-09-07 14:13+0300\n"
+"Last-Translator: Anssi Hannula <anssi@mandriva.org>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -75,10 +75,8 @@ msgstr "URL pitää alkaa ftp:// tai http://"
 
 #: any.pm:180
 #, c-format
-msgid ""
-"Contacting Mandriva Linux web site to get the list of available mirrors..."
-msgstr ""
-"Otetaan yhteys Mandriva Linuxin sivustolle peilipalvelinlistan saamiseksi..."
+msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgstr "Otetaan yhteys Mandriva Linuxin sivustolle peilipalvelinlistan saamiseksi..."
 
 #: any.pm:185
 #, c-format
@@ -598,8 +596,7 @@ msgstr "KDE-työasema"
 msgid ""
 "The K Desktop Environment, the basic graphical environment with a collection "
 "of accompanying tools"
-msgstr ""
-"K-työpöytäympäristö. Graafinen perusympäristö ja sen mukana tulevat työkalut"
+msgstr "K-työpöytäympäristö. Graafinen perusympäristö ja sen mukana tulevat työkalut"
 
 #: share/meta-task/compssUsers.pl:138
 #, c-format
@@ -611,8 +608,7 @@ msgstr "GNOME-työasema"
 msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
 "tools"
-msgstr ""
-"Graafinen ympäristö käyttäjäystävällisellä sovelluksilla ja työkaluilla."
+msgstr "Graafinen ympäristö käyttäjäystävällisellä sovelluksilla ja työkaluilla."
 
 #: share/meta-task/compssUsers.pl:142
 #, c-format
@@ -743,12 +739,12 @@ msgstr "Mukautettu asennus"
 #: steps_gtk.pm:253
 #, c-format
 msgid "Here's a preview of the '%s' desktop."
-msgstr ""
+msgstr "Työpöydän '%s' esikatselu."
 
 #: steps_gtk.pm:275
 #, c-format
 msgid "Click on images in order to see a bigger preview"
-msgstr ""
+msgstr "Napsauta kuvia nähdäksesi suuremman esikatselun."
 
 #: steps_gtk.pm:287 steps_interactive.pm:618 steps_list.pm:30
 #, c-format
@@ -931,9 +927,9 @@ msgid "not configured"
 msgstr "ei asetettu"
 
 #: steps_gtk.pm:694
-#, fuzzy, c-format
+#, c-format
 msgid "Media Selection"
-msgstr "Pakettiryhmien valinta"
+msgstr "Lähteiden valinta"
 
 #: steps_gtk.pm:704 steps_interactive.pm:335
 #, c-format
@@ -1002,14 +998,12 @@ msgstr "Päivitä %s"
 #: steps_interactive.pm:144
 #, c-format
 msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-msgstr ""
-"Päivittäminen 32-bittisestä jakelusta 64-bittiseen jakeluun ei ole tuettu."
+msgstr "Päivittäminen 32-bittisestä jakelusta 64-bittiseen jakeluun ei ole tuettu."
 
 #: steps_interactive.pm:148
 #, c-format
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-msgstr ""
-"Päivittäminen 64-bittisestä jakelusta 32-bittiseen jakeluun ei ole tuettu."
+msgstr "Päivittäminen 64-bittisestä jakelusta 32-bittiseen jakeluun ei ole tuettu."
 
 #: steps_interactive.pm:167
 #, c-format
@@ -1019,17 +1013,17 @@ msgstr "Salausavain %s:lle"
 #: steps_interactive.pm:199
 #, c-format
 msgid "Cancel installation, reboot system"
-msgstr ""
+msgstr "Peruuta asennus, käynnistä järjestelmä uudelleen"
 
 #: steps_interactive.pm:200
-#, fuzzy, c-format
+#, c-format
 msgid "New Installation"
-msgstr "Asennus"
+msgstr "Uusi asennus"
 
 #: steps_interactive.pm:201
 #, c-format
 msgid "Upgrade previous installation (not recommended)"
-msgstr ""
+msgstr "Päivitä edellinen asennus (ei suositella)"
 
 #: steps_interactive.pm:205
 #, c-format
@@ -1042,6 +1036,14 @@ msgid ""
 "Warning : you should backup all your personal data before choosing \"New\n"
 "Installation\"."
 msgstr ""
+"Nykyistä Mandriva Linux -asennustasi ei voida turvallisesti päivittää\n"
+"versioon %s.\n"
+"\n"
+"Suositeltavaa on suorittaa edellisen asennuksen ylikirjoittava uusi\n"
+"asennus.\n"
+"\n"
+"Varoitus: Varmuuskopioi kaikki omat tiedostosi ennen kuin valitset\n"
+"\"Uusi asennus\"."
 
 #: steps_interactive.pm:247
 #, c-format
@@ -1125,24 +1127,24 @@ msgid "Bad file"
 msgstr "Huono tiedosto"
 
 #: steps_interactive.pm:485
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:486
 #, c-format
 msgid "GNOME"
-msgstr ""
+msgstr "GNOME"
 
 #: steps_interactive.pm:489
-#, fuzzy, c-format
+#, c-format
 msgid "Desktop Selection"
-msgstr "Pakettiryhmien valinta"
+msgstr "Työpöydän valinta"
 
 #: steps_interactive.pm:490
-#, fuzzy, c-format
+#, c-format
 msgid "You can choose your workstation desktop profile:"
-msgstr "Voit valita asennettavan työpöydän: KDE, GNOME tai mukautettu"
+msgstr "Voit valita asennettavan työpöytäprofiilin:"
 
 #: steps_interactive.pm:575
 #, c-format
@@ -1301,8 +1303,7 @@ msgstr ""
 #: steps_interactive.pm:957
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
-msgstr ""
-"Yhtäkään äänikorttia ei löydetty. Kokeile \"harddrake\" asennuksen jälkeen"
+msgstr "Yhtäkään äänikorttia ei löydetty. Kokeile \"harddrake\" asennuksen jälkeen"
 
 #: steps_interactive.pm:965
 #, c-format
@@ -1588,34 +1589,25 @@ msgstr "Poistu"
 #: ../../advertising/IM_flash.pl:1
 #, c-format
 msgid "Your desktop on a USB key"
-msgstr ""
+msgstr "Työpöytäsi USB-tikulla"
 
 #: ../../advertising/IM_free08S.pl:1
 #, c-format
 msgid "The 100%% open source Mandriva Linux distribution"
-msgstr ""
+msgstr "100%% vapaan lähdekoodin Mandriva Linux -jakelu"
 
 #: ../../advertising/IM_one08S.pl:1
 #, c-format
 msgid "Explore Linux easily with Mandriva One"
-msgstr ""
+msgstr "Tutustu Linuxiin helposti Mandriva Onella"
 
 #: ../../advertising/IM_pwp08S.pl:1
 #, c-format
 msgid "A full Mandriva Linux desktop, with support"
-msgstr ""
+msgstr "Täysi Mandriva Linux -jakelu käyttäjätuella"
 
 #: ../../advertising/IM_range08S.pl:1
 #, c-format
 msgid "Mandriva: distributions for everybody's needs"
-msgstr ""
+msgstr "Mandriva: jakeluja jokaisen tarpeisiin"
 
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Haluatko käyttää aboot:a?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Virhe asennettaessa aboot:a,\n"
-#~ "yritetäänkö pakkoasennusta vaikka se tuhoaa ensimmäisen osion?"
