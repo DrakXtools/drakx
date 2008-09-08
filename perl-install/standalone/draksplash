@@ -61,7 +61,7 @@ $notebook->append_page(gtknew('VBox', spacing => 5, children_tight => [
 				 gtknew('Button', text => N("Choose progress bar color 1"), clicked => sub { choose_color('pc1') }),
 				 gtknew('Button', text => N("Choose progress bar color 2"), clicked => sub { choose_color('pc2') }),
 				 gtknew('Button', text => N("Choose progress bar background"), clicked => sub { choose_color('pbg_c') }),
-				 gtknew('Label', text => N("Gradient type")), gtksignal_connect(Gtk2::ComboBoxEntry->new_with_strings([ 'vertical', 'horizontal' ], 'vertical'), changed => sub { $theme{conf}{gradient} = $_[0]->get_child->get_text }),
+				 gtknew('Label', text => N("Gradient type")), gtksignal_connect(Gtk2::ComboBox->new_with_strings([ 'vertical', 'horizontal' ], 'vertical'), changed => sub { $theme{conf}{gradient} = $_[0]->get_child->get_text }),
 				 gtknew('Button', text => N("Choose text color"), clicked => sub { choose_color('text_color') }),
 				 create_scale_table('text_x', 'text_y', 'text_size'),
 				 gtknew('Button', text => N("Choose picture"), clicked => sub { choose_image('silentjpeg') })]),
@@ -69,10 +69,11 @@ $notebook->append_page(gtknew('VBox', spacing => 5, children_tight => [
 $notebook->append_page(gtknew('VBox', spacing => 5, children_tight => [
 				 create_scale_table('tb_x', 'tb_y', 'tb_w', 'tb_h', 'transp'),
 				 gtknew('Button', text => N("Choose text zone color"), clicked => sub { choose_color('tc') }),
-				 gtknew('Label', text => N("Text color")), gtksignal_connect(Gtk2::ComboBoxEntry->new_with_strings([ 0 .. 15 ], 1), changed => sub { $theme{conf}{fgcolor} = $_[0]->get_child->get_text }),
-				 gtknew('Label', text => N("Background color")), gtksignal_connect(Gtk2::ComboBoxEntry->new_with_strings([ 0 .. 15 ], '0'), changed => sub { $theme{conf}{bgcolor} = $_[0]->get_child->get_text }),
+				 gtknew('Label', text => N("Text color")), gtksignal_connect(Gtk2::ComboBox->new_with_strings([ 0 .. 15 ], 1), changed => sub { $theme{conf}{fgcolor} = $_[0]->get_child->get_text }),
+				 gtknew('Label', text => N("Background color")), gtksignal_connect(Gtk2::ComboBox->new_with_strings([ 0 .. 15 ], '0'), changed => sub { $theme{conf}{bgcolor} = $_[0]->get_child->get_text }),
 				 gtknew('Button', text => N("Choose picture"), clicked => sub { choose_image('jpeg') })]),
 		       N("Verbose bootsplash"));
+
 
 gtkadd($window->{window},
        gtknew('VBox', spacing => 5, children_loose => [
