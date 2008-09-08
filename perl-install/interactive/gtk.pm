@@ -495,6 +495,7 @@ sub create_widget {
 	    if (!$e->{separator}) {
 		if ($e->{not_edit} && $width < 160) { #- ComboBoxes do not have an horizontal scroll-bar. This can cause havoc for long strings (eg: diskdrake Create dialog box in expert mode)
 		    $w = Gtk2::ComboBox->new_text;
+		    # FIXME: the following causes Gtk-CRITICAL but not solvable at realize time:
 		    ($w->child->get_cell_renderers)[0]->set_property('ellipsize', 'end') if !$e->{do_not_ellipsize};
 		    $w->set_wrap_width($e->{gtk}{wrap_width}) if exists $e->{gtk}{wrap_width};
 		} else {
