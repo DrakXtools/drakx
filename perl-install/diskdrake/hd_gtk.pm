@@ -71,7 +71,7 @@ sub main {
                             ),
 		    1, (my $notebook_widget = Gtk2::Notebook->new),
 		    0, (my $per_kind_action_box = Gtk2::HBox->new(0,0)),
-		    0, (my $general_action_box  = Gtk2::HBox->new(0,0)),
+		    0, (my $general_action_box  = gtknew('HButtonBox', spacing => 5, layout => 'spread')),
 		   ),
 	  );
     my ($lock, $initializing) = (undef, 1);
