@@ -51,7 +51,7 @@ sub create_boxradio {
     mapn {
 	my ($txt, $w) = @_;
 	# workaround infamous 6 years old gnome bug #101968:
-	$w->child->set_size_request(mygtk2::get_label_width(), -1) if $e->{alignment} ne 'right';
+	$w->child->set_size_request(mygtk2::get_label_width(), -1) if $e->{alignment} ne 'right' && !$e->{label};
 	$w->signal_connect(button_press_event => $double_click) if $double_click;
 
 	$w->signal_connect(key_press_event => $e->{may_go_to_next});
