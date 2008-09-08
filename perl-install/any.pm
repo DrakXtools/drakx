@@ -676,6 +676,10 @@ sub set_window_manager {
 	$l{DESKTOP} = $wm;
 	setVarsInSh("$p_home/.desktop", \%l);
     }
+    my $sys_conffile = "$::prefix/etc/sysconfig/desktop";
+    my %desktop = getVarsFromSh($sys_conffile);
+    $desktop{DESKTOP} = $wm;
+    setVarsInSh($sys_conffile, \%desktop);
 }
 
 sub rotate_log {
