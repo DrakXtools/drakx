@@ -58,7 +58,7 @@ my %kind2packages = (
 );
 
 
-sub kind2description {
+sub kind2description_raw {
     my (@kinds) = @_;
     my %kind2description = (
 	local     => [ N("Local file:"), N("Use local for all authentication and information user tell in local file"), ],
@@ -67,8 +67,14 @@ sub kind2description {
 	winbind   => [ N("Windows Domain:"), N("Winbind allows the system to retrieve information and authenticate users in a Windows domain."), ],
 	KRB5        => [ N("Kerberos 5 :"), N("With Kerberos and Ldap for authentication in Active Directory Server "), ],
     );
-    join('', map { $_ ? qq($_->[0]\n$_->[1]\n\n) : '' } map { $kind2description{$_} } @kinds);
+    join('', map { $_ ? qq($_->[0]\n$_->[1]) : '' } map { $kind2description{$_} } @kinds);
 }
+
+sub kind2description {
+    my (@kinds) = @_;
+    join('', map { $_ ? qq($_\n\n) : '' } map { kind2description_raw($_) } @kinds);
+}
+
 sub to_kind {
     my ($authentication) = @_;
     (find { exists $authentication->{$_} } kinds()) || 'local';
