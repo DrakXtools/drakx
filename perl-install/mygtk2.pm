@@ -355,6 +355,8 @@ sub _gtk__WrappedLabel {
     _gtk__Label($w, $opts);
 }
 
+our $left_padding = 20;
+
 sub _gtk__Label_Left {
     my ($w, $opts) = @_;
     $opts->{alignment} ||= [ 0, 0 ];
@@ -1220,8 +1222,6 @@ sub asteriskize {
 sub get_main_window_size() {
     my ($width, $height) = $::real_windowwidth ? ($::real_windowwidth, $::real_windowheight) : $::isWizard ? (540, 360) : (600, 400);
 }
-
-our $left_padding = 20;
 
 # in order to workaround infamous 6 years old gnome bug #101968:
 sub get_label_width() {
