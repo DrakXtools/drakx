@@ -283,7 +283,7 @@ sub create_automatic_notebooks {
 sub create_buttons4partitions {
     my ($kind, $totalsectors, @parts) = @_;
 
-    $width = max($width, 0.7 * first($w->{window}->window->get_size)) if $w->{window}->window;
+    $width = first($w->{window}->window->get_size) - first(get_action_box_size()) - 25 if $w->{window}->window;
 
     my $ratio = $totalsectors ? ($width - @parts * $minwidth) / $totalsectors : 1;
     while (1) {
