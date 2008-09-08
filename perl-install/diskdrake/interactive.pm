@@ -449,7 +449,7 @@ sub Create {
          { label => N("Size in MB: "), val => \$mb_size, min => to_Mb(min_partition_size($hd)), max => to_Mb($def_size), 
 	   type => 'range', SpinButton => $::expert, changed => sub { $part->{start} = min($part->{start}, $max - $mb_size * 2048) } },
          { label => N("Filesystem type: "), val => \$type_name, list => [ fs::type::type_names($::expert, $hd) ], 
-	   sort => 0, if_($::expert, gtk => { wrap_width => 4 }) },
+	   sort => 0, if_($::expert, gtk => { wrap_width => 4 }, do_not_ellipsize => 1) },
          { label => N("Mount point: "), val => \$part->{mntpoint}, list => [ fsedit::suggestions_mntpoint($all_hds), '' ],
            disabled => sub { my $p = fs::type::type_name2subpart($type_name); isSwap($p) || isNonMountable($p) }, type => 'combo', not_edit => 0,
          },
