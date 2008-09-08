@@ -24,7 +24,7 @@ main:
 $in->ask_from(N("Authentication"), undef,
 	      [ 
 	       { label => N("Authentication") },
-	       { val => \$kind, type => 'list' , list => \@kinds, format => \&authentication::kind2description },
+	       { val => \$kind, type => 'list' , list => \@kinds, format => \&authentication::kind2description_raw },
 	      ]) or $in->exit;
 
 authentication::ask_parameters($in, $net, $authentication, $kind) or goto main;
