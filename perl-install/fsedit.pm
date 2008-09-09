@@ -547,6 +547,7 @@ sub change_type {
     my ($type, $hd, $part) = @_;
     $type->{pt_type} != $part->{pt_type} || $type->{fs_type} ne $part->{fs_type} or return;
     fs::type::check($type->{fs_type}, $hd, $part);
+    delete $part->{device_UUID};
     $hd->{isDirty} = 1;
     $part->{mntpoint} = '' if isSwap($part) && $part->{mntpoint} eq "swap";
     $part->{mntpoint} = '' if isRawLVM($type) || isRawRAID($type);
