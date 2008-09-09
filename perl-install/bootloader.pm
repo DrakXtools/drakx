@@ -273,7 +273,7 @@ sub read_grub_menu_lst {
     my $menu_lst_file = "$::prefix/boot/grub/menu.lst";
     -e $menu_lst_file or return;
 
-    foreach (cat_($menu_lst_file)) {
+    foreach (MDK::Common::File::cat_utf8($menu_lst_file)) {
 	my $verbatim = $_;
         chomp;
 	s/^\s*//; s/\s*$//;
