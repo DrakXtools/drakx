@@ -76,6 +76,12 @@ sub to_subpart {
     $part;
 }
 
+sub _prefer_device_UUID {
+    my ($part) = @_;
+    $part->{prefer_device_UUID} || 
+      !$::no_uuid_by_default && $part->{device} =~ /^(hd|sd)/;
+}
+
 sub from_part {
     my ($prefix, $part) = @_;
 
@@ -83,7 +89,7 @@ sub from_part {
 	'LABEL=' . $part->{device_LABEL};
     } elsif ($part->{device_alias}) {
 	"/dev/$part->{device_alias}";
-    } elsif (!$part->{prefer_device} && ($part->{prefer_device_UUID} || !$::no_uuid_by_default) && $part->{device_UUID}) {
+    } elsif (!$part->{prefer_device} && $part->{device_UUID} && _prefer_device_UUID($part)) {
 	'UUID=' . $part->{device_UUID};
     } else {
 	my $faked_device = exists $part->{faked_device} ? 
