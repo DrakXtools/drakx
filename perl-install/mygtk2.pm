@@ -656,7 +656,7 @@ sub _gtk_any_Window {
 	    $w = "Gtk2::$class"->new;
 	}
 
-	if ($::isInstall) {
+	if ($::isInstall || $ENV{DURING_INSTALL}) {
 	    $w->set_type_hint('dialog'); # for matchbox window manager
 	}
 
