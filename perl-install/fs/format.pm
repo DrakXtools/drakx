@@ -96,7 +96,7 @@ sub part_raw {
         push @options, '-l', "Untitled";
     } elsif (isAppleBootstrap($part)) {
 	push @options, '-l', 'bootstrap';
-    } elsif ($fs_type eq 'swap') {
+    } elsif (member($fs_type, 'swap', 'ext2', 'ext3')) {
 	push @options, '-U', $part->{device_UUID} if $part->{device_UUID};
     }
 
