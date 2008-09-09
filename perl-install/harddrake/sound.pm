@@ -463,7 +463,7 @@ currently uses
 loaded or not
 
 - \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" will
-tell you if sound and alsa services're configured to be run on
+tell you if sound and alsa services are configured to be run on
 initlevel 3
 
 - \"aumix -q\" will tell you if the sound volume is muted or not
