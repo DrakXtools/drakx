@@ -765,8 +765,6 @@ sub modify_append {
     }
 }
 
-sub append__mem_is_memsize { $_[0] =~ /^\d+[kM]?$/i }
-
 sub get_append_simple {
     my ($b, $key) = @_;
     my ($simple, $_dict) = unpack_append($b->{perImageAppend});
@@ -811,24 +809,6 @@ sub set_append_simple {
 sub may_append_with_key {
     my ($b, $key, $val) = @_;
     set_append_with_key($b, $key, $val) if !get_append_with_key($b, $key);
-}
-
-sub get_append_memsize {
-    my ($b) = @_;
-    my ($_simple, $dict) = unpack_append($b->{perImageAppend});
-    my $e = find { $_->[0] eq 'mem' && append__mem_is_memsize($_->[1]) } @$dict;
-    $e && $e->[1];
-}
-
-sub set_append_memsize {
-    my ($b, $memsize) = @_;
-
-    modify_append($b, sub {
-	my ($_simple, $dict) = @_;
-
-	@$dict = grep { $_->[0] ne 'mem' || !append__mem_is_memsize($_->[1]) } @$dict;
-	push @$dict, [ mem => $memsize ] if $memsize;
-    });
 }
 
 sub get_append_netprofile {

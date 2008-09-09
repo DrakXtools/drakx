@@ -380,7 +380,6 @@ sub setupBootloader__general {
     my $prev_force_acpi = my $force_acpi = bootloader::get_append_with_key($b, 'acpi') !~ /off|ht/;
     my $prev_enable_apic = my $enable_apic = !bootloader::get_append_simple($b, 'noapic');
     my $prev_enable_lapic = my $enable_lapic = !bootloader::get_append_simple($b, 'nolapic');
-    my $memsize = bootloader::get_append_memsize($b);
     my $prev_clean_tmp = my $clean_tmp = any { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special} ||= []};
     my $prev_boot = $b->{boot};
     my $prev_method = $b->{method};
@@ -422,8 +421,6 @@ sub setupBootloader__general {
 	      validate => sub { my $ok = !$b->{restricted} || $b->{password} or $in->ask_warn('', N("Option ``Restrict command line options'' is of no use without a password")); $ok } },
 		),
             { text => N("Clean /tmp at each boot"), val => \$clean_tmp, type => 'bool', advanced => 1 },
-            { label => N("Precise RAM size if needed (found %d MB)", availableRamMB()), val => \$memsize, advanced => 1,
-	      validate => sub { my $ok = !$memsize || $memsize =~ /^\d+K$/ || $memsize =~ s/^(\d+)M?$/$1M/i or $in->ask_warn('', N("Give the ram size in MB")); $ok } },
         ]) or return 0;
     } else {
 	$b->{boot} = $partition_table::mac::bootstrap_part;	
@@ -455,7 +452,6 @@ sub setupBootloader__general {
 
     bootloader::suggest_message_text($b) if ! -e "$::prefix/boot/message-text"; #- in case we switch from grub to lilo
 
-    bootloader::set_append_memsize($b, $memsize);
     if ($prev_force_acpi != $force_acpi) {
 	bootloader::set_append_with_key($b, acpi => ($force_acpi ? '' : 'ht'));
     }
