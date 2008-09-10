@@ -1023,7 +1023,7 @@ sub ask_alldatawillbelost {
 sub partitions_suggestions {
     my ($in) = @_;
     my $t = $::expert ? 
-      $in->ask_from_list_(N("Type"), N("What type of partitioning?"), [ keys %fsedit::suggestions ]) :
+      $in->ask_from_list_(N("Partitioning Type"), N("What type of partitioning?"), [ keys %fsedit::suggestions ]) :
       'simple';
     $fsedit::suggestions{$t};
 }
