@@ -19,6 +19,7 @@ my $authentication = authentication::get();
 my $security = security::level::get();
 my $net = {};
 my $locale;
+my $timezone;
 network::network::read_net_conf($net);
 
 $::isWizard = 1;
@@ -66,12 +67,12 @@ sub ask_keyboard() {
 #- TIMEZONE=simplified: do not ask timezone and make ntp settings advanced
 sub ask_timezone() {
     require timezone;
-    my $t = timezone::read();
-    $t->{timezone} = timezone::bestTimezone($locale->{country}) if $locale->{country};
-    any::configure_timezone($in, $t, 'ask_gmt', lc(get_conf('TIMEZONE')) eq 'simplified');
-    timezone::write($t);
+    $timezone = timezone::read();
+    $timezone->{timezone} = timezone::bestTimezone($locale->{country}) if $locale->{country};
+    any::configure_timezone($in, $timezone, 'ask_gmt', lc(get_conf('TIMEZONE')) eq 'simplified');
+    timezone::write($timezone);
     #- reload sys clock from hc once we know the real timezone
-    timezone::reload_sys_clock($t);
+    timezone::reload_sys_clock($timezone);
 }
 
 sub ask_country() {
