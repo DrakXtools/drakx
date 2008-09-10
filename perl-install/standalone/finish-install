@@ -78,6 +78,16 @@ sub ask_timezone() {
 sub ask_country() {
     require lang;
     $locale ||= lang::read();
+    require Time::ZoneInfo;
+    my $zones = Time::ZoneInfo->new;
+    if ($timezone && $zones) {
+        #- guess only if timezone has been asked already
+        if (my $zone = $zones->current_zone) {
+            if (my $country_code = $zones->country($zone)) {
+                $locale->{country} = $country_code;
+            }
+        }
+    }
     any::selectCountry($in, $locale);
     lang::write_and_install($locale, $in->do_pkgs);
 }
