@@ -363,7 +363,7 @@ sub add_padding {
 }  
 
 sub create_widget {
-    my ($o, $e, $onchange_f, $update, $ignore_ref) = @_;
+    my ($o, $common, $e, $onchange_f, $update, $ignore_ref) = @_;
 
     my $onchange = sub {
 	my ($f) = @_;
@@ -431,11 +431,11 @@ sub create_widget {
     } elsif ($e->{type} eq 'expander') {
 	$e->{grow} = 'fill';
 	my $children = [ if_($e->{message}, { type => 'only_label', no_indent => 1, val => \$e->{message} }), @{$e->{children}} ];
-	create_widgets_block($o, $children, $update, $ignore_ref);
+	create_widgets_block($o, $common, $children, $update, $ignore_ref);
 	$w = gtknew('HBox', children_tight => [
             gtknew('Install_Button', text => $e->{text},
                    clicked => sub {
-                       ask_fromW($o, { title => N("Advanced") }, $children) }
+                       ask_fromW($o, { title => $common->{title} || N("Advanced") }, $children) }
                )
         ]);
     } elsif ($e->{type} =~ /list/) {
@@ -610,7 +610,7 @@ sub all_title_entries {
 }
 
 sub create_widgets_block {
-    my ($o, $l, $update, $ignore_ref) = @_;
+    my ($o, $common, $l, $update, $ignore_ref) = @_;
 
     my $label_sizegrp = Gtk2::SizeGroup->new('horizontal');
     my $realw_sizegrp = Gtk2::SizeGroup->new('horizontal');
@@ -631,7 +631,7 @@ sub create_widgets_block {
 	    $update->($e->{changed});
 	};
 
-	create_widget($o, $e, $onchange_f, $update, $ignore_ref);
+	create_widget($o, $common, $e, $onchange_f, $update, $ignore_ref);
 
 	my $label_w;
 	if ($e->{label} || !$e->{no_indent}) {
@@ -728,7 +728,7 @@ sub create_widgets {
         ${$_->{val}} = mygtk2::asteriskize(${$_->{val}}) foreach @all_titles;
     }
 
-    my $box = create_widgets_block($o, $l, $update, \$ignore);
+    my $box = create_widgets_block($o, $common, $l, $update, \$ignore);
 
     my $tooltips = Gtk2::Tooltips->new;
     foreach my $e (@all) {
