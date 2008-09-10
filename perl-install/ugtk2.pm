@@ -541,7 +541,7 @@ sub create_okcancel {
     # we put space to group buttons in two packs (but if there's only one when not in wizard mode)
     # but in the installer where all windows run in wizard mode because of design even when not in a wizard step
     $bprev = gtknew('Label') if !$cancel && $::Wizard_no_previous && !@left && !@right;
-    if ($::isWizard) {
+    if ($::isWizard || $w->{pop_it}) {
         # wizard mode: order is cancel/left_extras/white/right_extras/prev/next
         unshift @left, $w->{wizcancel} if !$::isInstall;
         push @right, $bprev, $bok;
