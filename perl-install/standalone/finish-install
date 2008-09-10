@@ -236,12 +236,12 @@ sub call {
 }
 
 call('language');
-call('country');
 call('license');
 # "Previous" button isn't functiunnal and acts like "next" (#25349)
 $::Wizard_no_previous = 1;
-call('keyboard');
 call('timezone');
+call('country');
+call('keyboard');
 call('network');
 if (defined $::WizardWindow) {
     $::WizardWindow->destroy;
