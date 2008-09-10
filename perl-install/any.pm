@@ -591,7 +591,7 @@ sub setupBootloader__entries {
     };
 
     my @prev_entries = @{$b->{entries}};
-    if ($in->ask_from__add_modify_remove('',
+    if ($in->ask_from__add_modify_remove(N("Bootloader Configuration"),
 N("Here are the entries on your boot menu so far.
 You can create additional entries or change the existing ones."), [ { 
         format => sub {
