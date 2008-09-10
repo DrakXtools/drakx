@@ -355,7 +355,7 @@ sub setupBootloader__mbr_or_not {
 		);
 
 	my $default = find { $_->[1] eq $b->{boot} } @l;
-	$in->ask_from_({ title => N("LILO/grub Installation"),
+	$in->ask_from_({ title => N("Bootloader Installation"),
 			 interactive_help_id => 'setupBootloaderBeginner',
 		       },
 		      [
