@@ -1059,6 +1059,7 @@ when your installation is complete and you restart your system.")),
 sub selectLanguage_standalone {
     my ($in, $locale) = @_;
 
+    my $old_lang = $locale->{lang};
     my $common = { messages => N("Please choose a language to use"),
 		   title => N("Language choice"),
 		   interactive_help_id => 'selectLanguage' };
@@ -1073,6 +1074,7 @@ sub selectLanguage_standalone {
     $locale->{utf8} = !$non_utf8;
     lang::set($locale);
     Gtk2->set_locale if $in->isa('interactive::gtk');
+    lang::lang_changed($locale) if $old_lang ne $locale->{lang};
 }
 
 sub selectLanguage_and_more_standalone {
@@ -1082,9 +1084,7 @@ sub selectLanguage_and_more_standalone {
       language:
 	# keep around previous settings so that selectLanguage can keep UTF-8 flag:
 	local $::Wizard_no_previous = 1;
-	my $old_lang = $locale->{lang};
 	selectLanguage_standalone($in, $locale);
-	lang::lang_changed($locale) if $old_lang ne $locale->{lang};
 	undef $::Wizard_no_previous;
 	selectCountry($in, $locale) or goto language;
     };
