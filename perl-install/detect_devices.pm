@@ -907,7 +907,7 @@ sub dmi_probe() {
 sub probeall() {
     return if $::noauto;
 
-    pci_probe(), usb_probe(), firewire_probe(), pcmcia_probe(), dmi_probe();
+    pci_probe(), usb_probe(), firewire_probe(), pcmcia_probe(), dmi_probe(), getInputDevices_and_usb();
 }
 sub probeall_update_cache() {
     return if $::noauto;
