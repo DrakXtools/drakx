@@ -1395,13 +1395,13 @@ sub config_mtools {
 }
 
 sub configure_timezone {
-    my ($in, $timezone, $ask_gmt) = @_;
+    my ($in, $timezone, $ask_gmt, $o_hide_ntp) = @_;
 
     require timezone;
     my $selected_timezone = $in->ask_from_treelist(N("Timezone"), N("Which is your timezone?"), '/', [ timezone::getTimeZones() ], $timezone->{timezone}) or return;
     $timezone->{timezone} = $selected_timezone;
 
-    configure_time_more($in, $timezone, undef)
+    configure_time_more($in, $timezone, $o_hide_ntp)
 	or goto &configure_timezone if $ask_gmt || to_bool($timezone->{ntp});
 
     1;
