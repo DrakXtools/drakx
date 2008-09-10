@@ -75,6 +75,7 @@ sub ask_timezone() {
     timezone::reload_sys_clock($timezone);
 }
 
+#- COUNTRY=simplified: guess the country from timezone, do not ask
 sub ask_country() {
     require lang;
     $locale ||= lang::read();
@@ -88,7 +89,7 @@ sub ask_country() {
             }
         }
     }
-    any::selectCountry($in, $locale);
+    any::selectCountry($in, $locale) if lc(get_conf('COUNTRY')) ne 'simplified';
     lang::write_and_install($locale, $in->do_pkgs);
 }
 
