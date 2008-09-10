@@ -421,6 +421,7 @@ sub title1_to_markup {
 sub _gtk__Install_Title {
     my ($w, $opts) = @_;
     local $opts->{widget_name} = 'Banner';
+    $opts->{text} = uc($opts->{text}) if $::isInstall;
     gtknew('HBox', widget_name => 'Banner', children => [
         0, gtknew('Label', padding => [ 6, 0 ]),
         1, gtknew('VBox', widget_name => 'Banner', children_tight => [

@@ -737,7 +737,6 @@ sub new {
 
     my $icon = find { _find_imgfile($_) } $::isInstall ? 'empty-banner' : $opts{icon};
     my $banner_title = $opts{banner_title};
-    $title = uc($title) if $::isInstall;
     $o->{transient} ||= $::main_window if $::main_window && !$opts{do_not_track_main_window};
     my $window = gtknew(
 	'MagicWindow',
