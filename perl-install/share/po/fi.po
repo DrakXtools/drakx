@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fi - LE2005 Release\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2008-03-31 17:58+0300\n"
 "Last-Translator: Anssi Hannula <anssi@mandriva.org>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -116,11 +116,11 @@ msgid "Skip"
 msgstr "Ohita"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "LILO/grub asennus"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Käyttöjärjestelmän lataajan asennus käynnissä"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Minne haluat asentaa käyttöjärjestelmän lataajan?"
@@ -211,27 +211,17 @@ msgstr "Rajoita komentorivioptioita"
 msgid "restrict"
 msgstr "rajoita"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 "Asetus ``Rajoita komentorivioptioita'' ei ole hyödyllinen ilman salasanaa"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Tyhjennä /tmp jokaisella käynnistyskerralla"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Tarkka muistin koko, jos tarpeen (löydettiin %d Mt)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Anna muistin koko megatavuina (Mt)"
 
 #: any.pm:432
 #, c-format
@@ -359,6 +349,11 @@ msgid "Other OS (Windows...)"
 msgstr "Muu käyttöjärjestelmä (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Käynnistystavan asetukset"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1841,6 +1836,11 @@ msgstr "lohkon koko kilotavuina"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Varoitus: tämä on vaarallinen toiminto"
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Osiointi"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -7035,6 +7035,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Asennus epäonnistui"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "LILO/grub asennus"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Tarkka muistin koko, jos tarpeen (löydettiin %d Mt)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Anna muistin koko megatavuina (Mt)"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

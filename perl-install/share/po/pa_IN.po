@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2005-03-27 17:55+0530\n"
 "Last-Translator: Jaswinder Singh Phulewala <jaswinderphulewala@yahoo.com>\n"
 "Language-Team: Punjabi <punlinux-i18n@lists.soruceforge.net>\n"
@@ -108,11 +108,11 @@ msgid "Skip"
 msgstr "ਛੱਡੋ"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "LILO/grub ਇੰਸਟਾਲੇਸ਼ਨ"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "ਬੂਟ-ਲੋਡਰ ਇੰਸਟਾਲੇਸ਼ਨ ਹੋ ਰਹੀ ਹੈ"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "ਤੁਸੀ ਬੂਟ-ਲੋਡਰ ਕਿੱਥੇ ਇੰਸਟਾਲ ਕਰਨਾ ਚਾਹੋਗੇ?"
@@ -203,26 +203,16 @@ msgstr "ਕਮਾਂਡ ਲਾਈਨ ਚੋਣ ਮਨਾਹੀ"
 msgid "restrict"
 msgstr "ਮਨਾਹੀ"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr "ਚੋਣ ``ਕਮਾਂਡ ਲਾਈਨ ਚੋਣ ਮਨਾਹੀ'' ਦਾ ਗੁਪਤ-ਕੋਡ ਤੋਂ ਬਿਨਾ ਕੋਈ ਮਤਲਬ ਨਹੀਂ"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "ਹਰੇਕ ਬੂਟ ਦੌਰਾਨ /tmp ਸਾਫ ਕਰੋ"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "ਜੇ ਲੋੜ ਹੈ RAM ਅਕਾਰ ਠੀਕ ਕਰੋ (%d ਮੈਬਾ ਲੱਭਿਆ ਹੈ)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "ਮੈਬਾ ਵਿੱਚ ਰੈਮ ਅਕਾਰ ਦਿਓ"
 
 #: any.pm:432
 #, c-format
@@ -350,6 +340,11 @@ msgid "Other OS (Windows...)"
 msgstr "ਹੋਰ OS (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "ਬੂਟ ਸ਼ੈਲੀ ਸੰਰਚਨਾ"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1805,6 +1800,11 @@ msgstr "ਕਿਬਾ ਵਿੱਚ chunk ਅਕਾਰ"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "ਸਾਵਧਾਨ: ਇਹ ਕਿਰਿਆ ਖਤਰਨਾਕ ਹੈ।"
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "ਵਿਭਾਗੀਕਰਨ"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6536,6 +6536,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "ਇੰਸਟਾਲੇਸ਼ਨ ਅਸਫਲ"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "LILO/grub ਇੰਸਟਾਲੇਸ਼ਨ"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "ਜੇ ਲੋੜ ਹੈ RAM ਅਕਾਰ ਠੀਕ ਕਰੋ (%d ਮੈਬਾ ਲੱਭਿਆ ਹੈ)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "ਮੈਬਾ ਵਿੱਚ ਰੈਮ ਅਕਾਰ ਦਿਓ"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 1.0\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2002-09-06 00:35+0800\n"
 "Last-Translator: prabu anand <prabu_anand2000@yahoo.com>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
@@ -104,11 +104,11 @@ msgid "Skip"
 msgstr "தவிர்"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "லிலோ/கிரப் நிறுவல்"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "துவங்குநிரல் நிறுவல்"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "உங்கள் துவங்குநிரலை எங்கு நிறுவ விரும்புகிறீர்கள்?"
@@ -199,7 +199,7 @@ msgstr "உரைவழியில் பயன்படுத்தக்க�
 msgid "restrict"
 msgstr "கட்டுபடுத்து"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
@@ -207,20 +207,10 @@ msgstr ""
 "விருப்பத்ேதர்வு ``Restrict command line options''  என்பது கடவுச்ெசால் இல்ைலயென்றால் "
 "பயனற்றது"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "/tmp அடைவை ஒவ்வொரு முறைத் துவங்கும்போதும் துடைத்து விடு"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "சரியான நினைவகத்ைத தெரிவிக்கவும்(கண்டுள்ள அளவு %d MB)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "சரியான நினைவகத்ைத மெகாபைட்டில் தெரிவிக்கவும்"
 
 #: any.pm:432
 #, c-format
@@ -348,6 +338,11 @@ msgid "Other OS (Windows...)"
 msgstr "மற்ற இயங்கு தளம்(விண்ேடாஸ்...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "தொடங்கல் பாந்த வடிவமைப்பு"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1790,6 +1785,11 @@ msgstr "அளவு"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "இந்த செயல் அபாயகரமானது. கவனமாக இருக்கவும்"
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "வகிர் ெசய்தல்"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6473,6 +6473,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "நிறுவுதலில் பிழை நேர்ந்துள்ளது"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "லிலோ/கிரப் நிறுவல்"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "சரியான நினைவகத்ைத தெரிவிக்கவும்(கண்டுள்ள அளவு %d MB)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "சரியான நினைவகத்ைத மெகாபைட்டில் தெரிவிக்கவும்"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fa\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2005-02-26 06:31+0100\n"
 "Last-Translator: Abbas Izad <abbasizad@hotmail.com>\n"
 "Language-Team: Persian\n"
@@ -109,11 +109,11 @@ msgid "Skip"
 msgstr "پرش"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "نصب LILO/grub"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "نصب بارگذارآغازگر در پیشروی است"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "کجا می‌خواهید بارگذارآغازگر را نصب کنید؟"
@@ -205,26 +205,16 @@ msgstr "محدودیت گزینه‌های خط فرمان"
 msgid "restrict"
 msgstr "محدودیت"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr "گزینه‌ی ``محدودیت گزینه‌های خط فرمان'' بدون یک گذرواژه بی‌فایده است"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "پاک کردن شاخه‌ی /tmp در هر آغازگری"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "اندازه‌ی دقیق حافظه اگر لازم باشد (%d مگابایت یافت شد)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "اندازه‌ی حافظه موقت را در مگابایت بدهید"
 
 #: any.pm:432
 #, c-format
@@ -352,6 +342,11 @@ msgid "Other OS (Windows...)"
 msgstr "سیستم عامل دیگر (ویندوز...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "پیکربندی سبک آغازگری"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1825,6 +1820,11 @@ msgstr "اندازه‌ی تکه در کیلوبایت"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "دقت کنید: این عملیات خطرناک است."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "قسمت‌بندی"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6833,6 +6833,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "نصب شکست خورد"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "نصب LILO/grub"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "اندازه‌ی دقیق حافظه اگر لازم باشد (%d مگابایت یافت شد)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "اندازه‌ی حافظه موقت را در مگابایت بدهید"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

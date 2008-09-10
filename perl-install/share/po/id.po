@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2007-10-27 19:26+0700\n"
 "Last-Translator: Willy Sudiarto Raharjo <willysr@gmail.com>\n"
 "Language-Team: Indonesia <mdk-id@yahoogroups.com>\n"
@@ -119,11 +119,11 @@ msgid "Skip"
 msgstr "Lewati"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "Installasi LILO/grub"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Proses installasi Bootloader"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Dimana Anda akan menginstall Bootloader?"
@@ -214,7 +214,7 @@ msgstr "Batasi parameter perintah baris"
 msgid "restrict"
 msgstr "batasi"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
@@ -222,20 +222,10 @@ msgstr ""
 "Pilihan ``Batasi parameter perintah baris'' tidak ada gunanya tanpa kata "
 "sandi"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Hapus /tmp setiap boot"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Ukuran RAM yang tepat jika diperlukan (ditemukan %d MB)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Berikan ukuran RAM dalam MB"
 
 #: any.pm:432
 #, c-format
@@ -363,6 +353,11 @@ msgid "Other OS (Windows...)"
 msgstr "OS Lain (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Konfigurasi Gaya Boot"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1836,6 +1831,11 @@ msgstr "ukuran chunk dalam KiB"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Hati-hati: operasi ini berbahaya"
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Pembuatan partisi"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6890,6 +6890,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Installasi gagal"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "Installasi LILO/grub"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Ukuran RAM yang tepat jika diperlukan (ditemukan %d MB)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Berikan ukuran RAM dalam MB"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

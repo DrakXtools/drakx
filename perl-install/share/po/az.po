@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-az\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2005-03-31 14:21+0200\n"
 "Last-Translator: Mətin Əmirov <metin@karegen.com>\n"
 "Language-Team: Azerbaijani <translation-team-az@lists.sourceforge.net>\n"
@@ -106,11 +106,11 @@ msgid "Skip"
 msgstr "Keç"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "LILO/grub Qurulumu"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Açılış yükləyicisi qurulumu fəaliyyətdədir"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Sistem yükləyicisini hara qurmaq istəyirsiniz?"
@@ -202,27 +202,17 @@ msgstr "Əmr sətiri seçimlərini məhdudlaşdır"
 msgid "restrict"
 msgstr "məhdudlaşdır"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 "``Əmr sətiri seçimlərini məhdudlaşdır`` seçimi şifrəsiz bir işə yaramaz"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "/tmp-i hər açılışda təmizlə"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Ümumi yaddaş miqdarı (%d MB tapıldı)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Yaddaş miqdarını MB cinsindən verin"
 
 #: any.pm:432
 #, c-format
@@ -350,6 +340,11 @@ msgid "Other OS (Windows...)"
 msgstr "Digər ƏS (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Açılış Tərzi Quraşdırılması"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1809,6 +1804,11 @@ msgstr "parça böyüklüyü"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Diqqətlı olun: bu əməliyyat təhlükəlidir."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Bölmələndirmə"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6837,6 +6837,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Qurulum bacarılmadı"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "LILO/grub Qurulumu"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Ümumi yaddaş miqdarı (%d MB tapıldı)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Yaddaş miqdarını MB cinsindən verin"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

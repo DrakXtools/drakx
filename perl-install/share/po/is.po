@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2008-02-18 17:31+0000\n"
 "Last-Translator: Pjetur G. Hjaltason <pjetur@pjetur.net>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
@@ -113,11 +113,11 @@ msgid "Skip"
 msgstr "Sleppa"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "LILO/grub uppsetning"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Er að setja upp ræsistjóra"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Hvert viltu setja ræsistjórann?"
@@ -208,27 +208,17 @@ msgstr "Takmarka alla rofa á skipanalínu"
 msgid "restrict"
 msgstr "takmarka"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 "Valkosturinn ``Takmarka alla rofa á skipanalínu'' gerir ekkert án lykilorðs"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Hreinsa /tmp við hverja ræsingu"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Nákvæm stærð vinnsluminnis (fann %d MB)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Sláðu inn vinnsluminni í MB"
 
 #: any.pm:432
 #, c-format
@@ -356,6 +346,11 @@ msgid "Other OS (Windows...)"
 msgstr "Öðru stýrikerfi (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Uppsetning ræsistíls"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1824,6 +1819,11 @@ msgstr "blokkarstærð í KiB"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Varaðu þig: þessi aðgerð er hættuleg."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Forsníða diska"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6843,6 +6843,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Innsetning mistókst"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "LILO/grub uppsetning"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Nákvæm stærð vinnsluminnis (fann %d MB)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Sláðu inn vinnsluminni í MB"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

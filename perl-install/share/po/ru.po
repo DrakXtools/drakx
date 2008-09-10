@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2008-08-22 08:35+0500\n"
 "Last-Translator: Alexander Kazancev <kazancas@gmail.com>\n"
 "Language-Team: Russian <gnu@mx.ru>\n"
@@ -118,11 +118,11 @@ msgid "Skip"
 msgstr "Пропустить"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "Установка LILO/grub"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Выполняется установка начального загрузчика"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Куда установить начальный загрузчик?"
@@ -213,27 +213,17 @@ msgstr "Ограничить параметры командной строки"
 msgid "restrict"
 msgstr "ограничить"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 "Опция ``Ограничить параметры командной строки'' не используется без пароля"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Очищать /tmp  при каждой загрузке"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Укажите точный объем RAM (найдено %d MB)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Укажите объем RAM в MB"
 
 #: any.pm:432
 #, c-format
@@ -361,6 +351,11 @@ msgid "Other OS (Windows...)"
 msgstr "Другая ОС (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Настройка стиля загрузки"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1839,6 +1834,11 @@ msgstr "размер куска в KiB"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Осторожно: эта операция опасна."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Разметка диска"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6940,6 +6940,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Установка завершилась неудачей"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "Установка LILO/grub"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Укажите точный объем RAM (найдено %d MB)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Укажите объем RAM в MB"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

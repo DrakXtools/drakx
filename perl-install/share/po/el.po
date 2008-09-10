@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-el\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2008-06-15 03:20+0200\n"
 "Last-Translator: nikos papadopoulos <231036448@freemail.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -118,11 +118,11 @@ msgid "Skip"
 msgstr "Παράλειψη"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "Εγκατάσταση LILO/grub"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Γίνεται εγκατάσταση του προγράμματος εκκίνησης του υπολογιστή"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Πού θέλετε να εγκαταστήσετε το πρόγραμμα εκκίνησης;"
@@ -213,7 +213,7 @@ msgstr "Απαγόρευση επιλογών γραμμής εντολής"
 msgid "restrict"
 msgstr "απαγόρευση"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
@@ -221,20 +221,10 @@ msgstr ""
 "Η επιλογή ``Απαγόρευση επιλογών γραμμής εντολής'' είναι άχρηστη χωρίς κωδικό "
 "πρόσβασης"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Καθαρισμός /tmp σε κάθε εκκίνηση"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Ακριβής ποσότητας μνήμης αν χρειάζεται (εντοπίστηκαν %d MB)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Εισάγετε μέγεθος μνήμης σε MB"
 
 #: any.pm:432
 #, c-format
@@ -362,6 +352,11 @@ msgid "Other OS (Windows...)"
 msgstr "Άλλο λειτουργικό (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Ρύθμιση Τύπου Εκκίνησης"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1853,6 +1848,11 @@ msgstr "μέγεθος του chunk σε KiB"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Προσοχή: Αυτή η διαδικασία είναι επικίνδυνη."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Καταμερισμός"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6937,6 +6937,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Η εγκατάσταση απέτυχε"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "Εγκατάσταση LILO/grub"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Ακριβής ποσότητας μνήμης αν χρειάζεται (εντοπίστηκαν %d MB)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Εισάγετε μέγεθος μνήμης σε MB"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

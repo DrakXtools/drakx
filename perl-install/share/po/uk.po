@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-uk\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2005-03-01 01:29+0200\n"
 "Last-Translator: Taras Boychuk <btr1@ukrpost.net>\n"
 "Language-Team: ukrainian <uk@li.org>\n"
@@ -112,11 +112,11 @@ msgid "Skip"
 msgstr "Пропустити"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "Встановлення LILO/grub"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Триває встановлення завантажувача"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Де Ви хочете встановити завантажувач?"
@@ -209,7 +209,7 @@ msgstr "Обмежити параметри командного рядка"
 msgid "restrict"
 msgstr "обмежити"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
@@ -217,20 +217,10 @@ msgstr ""
 "Параметр ``Обмежити параметри командного рядка'' не використовується без "
 "пароля"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Очищати /tmp при кожному перезавантаженні"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Уточніть об'єм RAM, якщо потрібно (знайдено %d Мб)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Вкажіть розмір пам'яті в Мб"
 
 #: any.pm:432
 #, c-format
@@ -358,6 +348,11 @@ msgid "Other OS (Windows...)"
 msgstr "Інші Windows"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Налаштування стилю завантаження"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1831,6 +1826,11 @@ msgstr "розмір ділянки в Кб"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Обережно: ця операція небезпечна."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Розбиття на розділи"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6887,6 +6887,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Встановлення завершилося невдало"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "Встановлення LILO/grub"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Уточніть об'єм RAM, якщо потрібно (знайдено %d Мб)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Вкажіть розмір пам'яті в Мб"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2002-09-27 17:45+0200\n"
 "Last-Translator: Raivo Saars <spaiks@inbox.lv>\n"
 "Language-Team: Latvian <ll10nt@listes.murds.lv>\n"
@@ -94,11 +94,11 @@ msgid "Skip"
 msgstr "Izlaist"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "LILO/grub instalēšana"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Sāknētāja instalēšana"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Kur jūs vēlaties instalēt sāknētāju?"
@@ -189,26 +189,16 @@ msgstr "Ierobežot komandrindas opcijas"
 msgid "restrict"
 msgstr "ierobežot"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr "Opcijai ``Ierobežot komandrindas opcijas'' nav jēgas bez paroles"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Iztīrīt /tmp katras sāknēšanas laikā"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Ja nepieciešams, precizējiet RAM apjomu (atrasti %d MB)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Norādiet atmiņas apjomu Mb"
 
 #: any.pm:432
 #, c-format
@@ -336,6 +326,11 @@ msgid "Other OS (Windows...)"
 msgstr "Cita OS (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Sāknēšanas stila konfigurēšana"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1791,6 +1786,11 @@ msgstr "gabala izmērs"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Esiet uzmanīgi: šī operācija ir bīstama."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Drukāšana"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6479,6 +6479,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Instalēšana neizdevās"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "LILO/grub instalēšana"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Ja nepieciešams, precizējiet RAM apjomu (atrasti %d MB)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Norādiet atmiņas apjomu Mb"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mt\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2004-10-04 18:45+0200\n"
 "Last-Translator: Ramon Casha <ramon.casha@linux.org.mt>\n"
 "Language-Team: Maltese <mt@li.org>\n"
@@ -111,11 +111,11 @@ msgid "Skip"
 msgstr "Aqbeż"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "Installazzjoni LILO/grub"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Għaddejja l-installazzjoni tal-bootloader"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Fejn tixtieq tinstalla l-\"bootloader\"?"
@@ -206,7 +206,7 @@ msgstr "Irrestrinġi l-għażliet tal-linja tal-kmand"
 msgid "restrict"
 msgstr "restrict"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
@@ -214,20 +214,10 @@ msgstr ""
 "L-għażla \"irrestrinġi l-għażliet tal-linja tal-kmand\" m'għandha ebda "
 "effett minngħajr password"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Naddaf /tmp kull meta tixgħel"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Daqs eżatt ta' memorja jekk meħtieġ (sibt %d RAM)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Agħti d-daqs tar-RAM f'MB"
 
 #: any.pm:432
 #, c-format
@@ -355,6 +345,11 @@ msgid "Other OS (Windows...)"
 msgstr "OS ieħor (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Konfigurazzjoni ta' l-istil ta' boot"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1828,6 +1823,11 @@ msgstr "daqs ta' \"chunk\" f' KiB"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Oqgħod attent: dan il-proċess huwa perikoluż."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Partizzjonament"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6686,6 +6686,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Installazzjoni falliet"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "Installazzjoni LILO/grub"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Daqs eżatt ta' memorja jekk meħtieġ (sibt %d RAM)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Agħti d-daqs tar-RAM f'MB"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

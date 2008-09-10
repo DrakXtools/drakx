@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 10.2\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2008-02-23 16:06+0100\n"
 "Last-Translator: Thierry Vignaud <tvignaud@mandriva.com>\n"
 "Language-Team: Brezhoneg <ofisk@wanadoo.fr>\n"
@@ -92,11 +92,11 @@ msgid "Skip"
 msgstr "Tremen e-biou"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "Staliadur LILO/grub"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "O staliañ ar c'harger loc'hañ"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Pelec'h e mennit staliañ ar c'harger loc'hañ ?"
@@ -187,26 +187,16 @@ msgstr "Strishaat dibarzhoù al linenn urzhiañ"
 msgid "restrict"
 msgstr "strishaat"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr "Didalvout eo « Strishaat dibarzhoù al linenn urzhiañ » hep tremenger"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Skarañ /tmp bep ma loc'her"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Spisait ment ar memor bev diouzh ret (kavet %d Mo)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Roit ment ar memor vev e Mo"
 
 #: any.pm:432
 #, c-format
@@ -334,6 +324,11 @@ msgid "Other OS (Windows...)"
 msgstr "Reizhiadoù all (Windows ...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Kefluniadur giz al loc'hañ"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1769,6 +1764,11 @@ msgstr "ment diaoz (KiO)"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Bezit war evezh : arvarus eo an obererezh-mañ."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "O parzhañ"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6407,6 +6407,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Sac'het eo ar staliadur"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "Staliadur LILO/grub"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Spisait ment ar memor bev diouzh ret (kavet %d Mo)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Roit ment ar memor vev e Mo"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

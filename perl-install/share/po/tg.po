@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-tg\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2005-09-17 16:03+0500\n"
 "Last-Translator: Victor Ibragimov <youth_opportunities@tajikngo.org>\n"
 "Language-Team: Tajik\n"
@@ -123,11 +123,11 @@ msgid "Skip"
 msgstr "Гузарондан"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "Коргузориши LILO/ҷустуҷӯ"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Коргузории боркунандаи ибтидоӣ ба пешрафт"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Шумо корандози худборшавро дар куҷо кор гузоштан мехоҳед?"
@@ -220,26 +220,16 @@ msgstr "Маҳдуди хосиятҳои сатри фармон"
 msgid "restrict"
 msgstr "маҳдуд"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr "Хосият ‘’Маҳдуди хосиятҳои сатри фармон‘’ бе гузарвожа суд надорад"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Дар ҳар худборшавӣ /tmp-ро тоза кунед"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Агар зарур бошад ҳаҷми RAM-ро муайян кунед (%d МБ ёфт шуд)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Ҳаҷми ram-ро бо МБ диҳед"
 
 #: any.pm:432
 #, c-format
@@ -367,6 +357,11 @@ msgid "Other OS (Windows...)"
 msgstr "Дигар СО (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Танзимдарории Навъи Худборшавӣ"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1845,6 +1840,11 @@ msgstr "ҳаҷми пора бо KiB"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Оҳиста: ин омил хатарнок аст."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Ҷузъбандӣ"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6979,6 +6979,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Коргузорӣ бо нокомӣ анҷомид"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "Коргузориши LILO/ҷустуҷӯ"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Агар зарур бошад ҳаҷми RAM-ро муайян кунед (%d МБ ёфт шуд)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Ҳаҷми ram-ро бо МБ диҳед"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

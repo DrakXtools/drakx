@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2008-09-05 20:02+0200\n"
 "Last-Translator: Oliver Burger <oliver@mandrivauser.de>\n"
 "Language-Team: deutsch <cooker-i18n@mandrivalinux.org>\n"
@@ -127,11 +127,11 @@ msgid "Skip"
 msgstr "Überspringen"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "LILO/Grub-Installation"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Installation des Bootloaders ..."
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Wo soll der Bootloader installiert werden?"
@@ -222,27 +222,18 @@ msgstr "Gebrauch der Kommandozeilen-Parameter einschränken"
 msgid "restrict"
 msgstr "einschränken"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
-msgid "Option ``Restrict command line options'' is of no use without a password"
+msgid ""
+"Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 "Die Option „Gebrauch der Kommandozeilen-Parameter einschränken“ ist ohne \n"
 "Angabe eines Passwortes wirkungslos."
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr " „/tmp“ bei jedem Systemstart säubern"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Genaue RAM-Größe, falls nötig (%d MB gefunden)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Geben Sie die RAM-Größe in MB an"
 
 #: any.pm:432
 #, c-format
@@ -370,6 +361,11 @@ msgid "Other OS (Windows...)"
 msgstr "Anderes OS (Windows ...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Konfiguration der Boot-Einstellungen"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -420,7 +416,8 @@ msgstr "Bitte geben Sie einen Benutzernamen an"
 
 #: any.pm:776
 #, c-format
-msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgid ""
+"The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr ""
 "Der Benutzername sollte nur aus Kleinbuchstaben, Ziffern, \n"
 "„-“ und „_“ bestehen"
@@ -679,7 +676,8 @@ msgstr ""
 
 #: any.pm:1222
 #, c-format
-msgid "You can export using NFS or SMB. Please select which you would like to use."
+msgid ""
+"You can export using NFS or SMB. Please select which you would like to use."
 msgstr ""
 "Sie können die Dateien mittels SMB oder NFS anbieten. Welche Variante wollen "
 "Sie?"
@@ -787,7 +785,8 @@ msgstr "Lokale Datei:"
 
 #: authentication.pm:64
 #, c-format
-msgid "Use local for all authentication and information user tell in local file"
+msgid ""
+"Use local for all authentication and information user tell in local file"
 msgstr ""
 
 #: authentication.pm:65
@@ -863,7 +862,9 @@ msgstr "Willkommen im Authentifizierungsassistenten"
 msgid ""
 "You have selected LDAP authentication. Please review the configuration "
 "options below "
-msgstr "Sie haben LDAP Authentifizierung gewählt. Bitte überprüfen Sie die unten stehenden Einstellungsmöglichkeiten."
+msgstr ""
+"Sie haben LDAP Authentifizierung gewählt. Bitte überprüfen Sie die unten "
+"stehenden Einstellungsmöglichkeiten."
 
 #: authentication.pm:101 authentication.pm:156
 #, c-format
@@ -941,7 +942,9 @@ msgstr ""
 msgid ""
 "You have selected Kerberos 5 authentication. Please review the configuration "
 "options below "
-msgstr "Sie haben die Kerberos 5 Authentifizierung gewählt. Bitte überprüfen Sie die unten stehenden Einstellungsmöglichkeiten "
+msgstr ""
+"Sie haben die Kerberos 5 Authentifizierung gewählt. Bitte überprüfen Sie die "
+"unten stehenden Einstellungsmöglichkeiten "
 
 #: authentication.pm:135
 #, fuzzy, c-format
@@ -978,7 +981,9 @@ msgstr "Festplatten-Informationen"
 msgid ""
 "You have selected Kerberos 5 for authentication, now you must choose the "
 "type of users information "
-msgstr "Sie haben die Kerberos 5 Authentifizierung gewählt. Nun müssen Sie den Typ der Benutzerinformation auswählen "
+msgstr ""
+"Sie haben die Kerberos 5 Authentifizierung gewählt. Nun müssen Sie den Typ "
+"der Benutzerinformation auswählen "
 
 #: authentication.pm:158
 #, c-format
@@ -990,7 +995,9 @@ msgstr ""
 msgid ""
 "You have selected NIS authentication. Please review the configuration "
 "options below "
-msgstr "Sie haben die NIS Authentifizierung gewählt. Bitte überprüfen Sie die unten stehenden Einstellungsmöglichkeiten "
+msgstr ""
+"Sie haben die NIS Authentifizierung gewählt. Bitte überprüfen Sie die unten "
+"stehenden Einstellungsmöglichkeiten "
 
 #: authentication.pm:181
 #, c-format
@@ -1007,7 +1014,9 @@ msgstr "NIS-Server"
 msgid ""
 "You have selected Windows Domain authentication. Please review the "
 "configuration options below "
-msgstr "Sie haben die Windows Domain Authentifizierung gewählt. Bitte überprüfen Sie die unten stehenden Einstellungsmöglichkeiten "
+msgstr ""
+"Sie haben die Windows Domain Authentifizierung gewählt. Bitte überprüfen Sie "
+"die unten stehenden Einstellungsmöglichkeiten "
 
 #: authentication.pm:207
 #, fuzzy, c-format
@@ -1038,7 +1047,8 @@ msgstr "Kein Passwort"
 #: authentication.pm:253
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
-msgstr "Dieses Passwort ist zu einfach (es muss mindestens %d Zeichen lang sein)!"
+msgstr ""
+"Dieses Passwort ist zu einfach (es muss mindestens %d Zeichen lang sein)!"
 
 #: authentication.pm:358
 #, c-format
@@ -1300,7 +1310,9 @@ msgstr "Partitionierung"
 #: diskdrake/hd_gtk.pm:68
 #, c-format
 msgid "Click on a partition, choose a filesystem type then choose an action"
-msgstr "Klicken Sie auf eine Partition, wählen Sie den Dateisystem-Typ, dann wählen Sie eine Aktion"
+msgstr ""
+"Klicken Sie auf eine Partition, wählen Sie den Dateisystem-Typ, dann wählen "
+"Sie eine Aktion"
 
 #: diskdrake/hd_gtk.pm:102 diskdrake/interactive.pm:1010
 #: diskdrake/interactive.pm:1020 diskdrake/interactive.pm:1073
@@ -1652,7 +1664,8 @@ msgstr "Die Loopback-Datei entfernen?"
 
 #: diskdrake/interactive.pm:532
 #, c-format
-msgid "After changing type of partition %s, all data on this partition will be lost"
+msgid ""
+"After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "Nach Änderung des Partitionstyps von %s, werden sämtliche Daten darauf "
 "gelöscht."
@@ -1862,6 +1875,11 @@ msgid "Be careful: this operation is dangerous."
 msgstr "Vorsicht:!! Diese Aktion ist gefährlich."
 
 #: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Partitionierung"
+
+#: diskdrake/interactive.pm:1026
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Welcher Partitionstyp?"
@@ -1869,7 +1887,8 @@ msgstr "Welcher Partitionstyp?"
 #: diskdrake/interactive.pm:1064
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
-msgstr "Sie müssen Ihren Rechner neu starten, damit die Veränderungen wirksam werden."
+msgstr ""
+"Sie müssen Ihren Rechner neu starten, damit die Veränderungen wirksam werden."
 
 #: diskdrake/interactive.pm:1073
 #, c-format
@@ -1879,7 +1898,8 @@ msgstr "Die Partitionstabelle der Platte „%s“ wird gespeichert!"
 #: diskdrake/interactive.pm:1098
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
-msgstr "Nach Formatieren der Partition %s, werden sämtliche Daten darauf gelöscht."
+msgstr ""
+"Nach Formatieren der Partition %s, werden sämtliche Daten darauf gelöscht."
 
 #: diskdrake/interactive.pm:1103 fs/partitioning.pm:48
 #, c-format
@@ -2134,7 +2154,8 @@ msgstr "Wählen Sie Ihren Dateisystem-Schlüssel (Passwort)"
 #: diskdrake/interactive.pm:1299
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
-msgstr "Dieses Passwort ist zu einfach (es muss mindestens %d Zeichen lang sein)!"
+msgstr ""
+"Dieses Passwort ist zu einfach (es muss mindestens %d Zeichen lang sein)!"
 
 #: diskdrake/interactive.pm:1300
 #, c-format
@@ -2191,7 +2212,8 @@ msgstr "Anderer"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid "Please enter your username, password and domain name to access this host."
+msgid ""
+"Please enter your username, password and domain name to access this host."
 msgstr "Bitte geben Sie Benutzername, Passwort und Domäne des Rechners an."
 
 #: diskdrake/smbnfs_gtk.pm:180
@@ -2628,7 +2650,8 @@ msgstr "Partitionierung"
 #: fs/partitioning_wizard.pm:168
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
-msgstr "Wieviel Platz benötigen sie noch für Microsoft Windows® auf Partition %s?"
+msgstr ""
+"Wieviel Platz benötigen sie noch für Microsoft Windows® auf Partition %s?"
 
 #: fs/partitioning_wizard.pm:169
 #, c-format
@@ -2715,7 +2738,8 @@ msgstr "Partitionierunsgfehler: %s"
 #: fs/type.pm:370
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
-msgstr "Sie können JFS nicht für Partitionen verwenden, die kleiner als 16MB sind!"
+msgstr ""
+"Sie können JFS nicht für Partitionen verwenden, die kleiner als 16MB sind!"
 
 #: fs/type.pm:371
 #, c-format
@@ -2833,12 +2857,14 @@ msgstr ""
 #: fsedit.pm:423
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
-msgstr "Sie können kein verschlüsseltes Medium für den Einhängepunkt %s verwenden."
+msgstr ""
+"Sie können kein verschlüsseltes Medium für den Einhängepunkt %s verwenden."
 
 #: fsedit.pm:487
 #, c-format
 msgid "Not enough free space for auto-allocating"
-msgstr "Nicht genug freier Platz, damit ich selbst eine Partition anlegen kann."
+msgstr ""
+"Nicht genug freier Platz, damit ich selbst eine Partition anlegen kann."
 
 #: fsedit.pm:489
 #, c-format
@@ -3149,7 +3175,7 @@ msgstr ""
 "Hier können Sie einen alternativen Treiber (entweder OSS oder ALSA) für Ihre "
 "Soundkarte (%s) auswählen"
 
-#. -PO: here the first %s is either "OSS" or "ALSA",
+#. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:392
@@ -4703,7 +4729,8 @@ msgstr "Entfernen Sie erst die Logischen Medien\n"
 #: lvm.pm:184
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
-msgstr "Der Bootloader beherrscht „/boot“ nicht auf mehreren physischen Datenträgern"
+msgstr ""
+"Der Bootloader beherrscht „/boot“ nicht auf mehreren physischen Datenträgern"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: messages.pm:10
@@ -5239,12 +5266,16 @@ msgstr "Überprüfe auf nicht benötigte Lokalisierungspakete..."
 msgid ""
 "We have detected that some packages are not needed for your system "
 "configuration."
-msgstr "Es wurde festgestellt, dass einige Pakete für Ihre Systemkonfiguration nicht benötigt werden."
+msgstr ""
+"Es wurde festgestellt, dass einige Pakete für Ihre Systemkonfiguration nicht "
+"benötigt werden."
 
 #: pkgs.pm:242
 #, c-format
 msgid "We will remove the following packages, unless you choose otherwise:"
-msgstr "Die folgenden Pakete werden entfernt, es sei denn Sie entscheiden sich anders:"
+msgstr ""
+"Die folgenden Pakete werden entfernt, es sei denn Sie entscheiden sich "
+"anders:"
 
 #: pkgs.pm:245 pkgs.pm:246
 #, c-format
@@ -5279,7 +5310,8 @@ msgstr "Konnte Verknüpfung /usr/share/sane/%s nicht erstellen!"
 #: scanner.pm:113
 #, c-format
 msgid "Could not copy firmware file %s to /usr/share/sane/firmware!"
-msgstr "Ich konnte die Firmware Datei %s nicht auf /usr/share/sane/firmware kopieren!"
+msgstr ""
+"Ich konnte die Firmware Datei %s nicht auf /usr/share/sane/firmware kopieren!"
 
 #: scanner.pm:120
 #, c-format
@@ -5356,7 +5388,8 @@ msgstr "Erlaube direkte Root Anmeldung."
 
 #: security/help.pm:33
 #, c-format
-msgid "Allow the list of users on the system on display managers (kdm and gdm)."
+msgid ""
+"Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr ""
 "Erlaube die Liste der Benutzer dieses Rechner im Displaymanager (kdm und "
 "gdm)."
@@ -5542,7 +5575,8 @@ msgstr ""
 #: security/help.pm:102
 #, c-format
 msgid "Set password aging to \"max\" days and delay to change to \"inactive\"."
-msgstr "Setze Passwort-Alterung auf „maximal“ Tage um die Alterung abzuschalten."
+msgstr ""
+"Setze Passwort-Alterung auf „maximal“ Tage um die Alterung abzuschalten."
 
 #: security/help.pm:104
 #, c-format
@@ -5621,12 +5655,14 @@ msgstr "Wenn auf „Ja“ gesetzt, prüfe auf leere Passwörter in /etc/shadow."
 #: security/help.pm:122
 #, c-format
 msgid "if set to yes, verify checksum of the suid/sgid files."
-msgstr "Wenn auf „Ja“ gesetzt, kontrolliere die Prüfsumme der suid/sgid Dateien"
+msgstr ""
+"Wenn auf „Ja“ gesetzt, kontrolliere die Prüfsumme der suid/sgid Dateien"
 
 #: security/help.pm:123
 #, c-format
 msgid "if set to yes, check additions/removals of suid root files."
-msgstr "Wenn auf „Ja“ gesetzt, Suche von Veränderungen bei „suid root“ Dateien."
+msgstr ""
+"Wenn auf „Ja“ gesetzt, Suche von Veränderungen bei „suid root“ Dateien."
 
 #: security/help.pm:124
 #, c-format
@@ -5647,8 +5683,10 @@ msgstr "Wenn auf „Ja“ gesetzt, starte chkrootkit Überprüfung"
 
 #: security/help.pm:127
 #, c-format
-msgid "if set, send the mail report to this email address else send it to root."
-msgstr "Wenn ausgefüllt, wird E-Mail an diese Adresse geschickt, sonst an „root“."
+msgid ""
+"if set, send the mail report to this email address else send it to root."
+msgstr ""
+"Wenn ausgefüllt, wird E-Mail an diese Adresse geschickt, sonst an „root“."
 
 #: security/help.pm:128
 #, c-format
@@ -5875,7 +5913,8 @@ msgstr "Prüfe auf ungesicherte Benutzerkonten"
 #: security/l10n.pm:47
 #, c-format
 msgid "Check permissions of files in the users' home"
-msgstr "Überprüfe Dateiberechtigungen in den persönlichen Verzeichnissen (/home)"
+msgstr ""
+"Überprüfe Dateiberechtigungen in den persönlichen Verzeichnissen (/home)"
 
 #: security/l10n.pm:48
 #, c-format
@@ -5930,7 +5969,8 @@ msgstr "Keine leeren E-Mail-Berichte senden"
 #: security/l10n.pm:58
 #, c-format
 msgid "If set, send the mail report to this email address else send it to root"
-msgstr "Wenn ausgefüllt, wird E-Mail an diese Adresse geschickt, sonst an „root“."
+msgstr ""
+"Wenn ausgefüllt, wird E-Mail an diese Adresse geschickt, sonst an „root“."
 
 #: security/l10n.pm:59
 #, c-format
@@ -6076,7 +6116,8 @@ msgstr "„libsafe“ bei Servern verwenden"
 
 #: security/level.pm:67
 #, c-format
-msgid "A library which defends against buffer overflow and format string attacks."
+msgid ""
+"A library which defends against buffer overflow and format string attacks."
 msgstr "Eine Bibliothek, die gegen sog. „buffer overflow“-Angriffe schützt."
 
 #: security/level.pm:68
@@ -6140,7 +6181,8 @@ msgstr ""
 
 #: services.pm:28
 #, c-format
-msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgid ""
+"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr ""
 
 #: services.pm:29
@@ -6188,7 +6230,8 @@ msgstr ""
 
 #: services.pm:38
 #, c-format
-msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid ""
+"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
 "Apache ist ein World-Wide-Web-Server. Mit seiner Hilfe können Sie \n"
 "HTML-Dateien über HTTP publizieren. Der Server ist CGI-fähig."
@@ -6460,7 +6503,8 @@ msgstr ""
 
 #: services.pm:92
 #, c-format
-msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgid ""
+"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
 
 #: services.pm:93
@@ -6960,3 +7004,11 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Die Installation schlug fehl!"
 
+#~ msgid "LILO/grub Installation"
+#~ msgstr "LILO/Grub-Installation"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Genaue RAM-Größe, falls nötig (%d MB gefunden)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Geben Sie die RAM-Größe in MB an"

@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2008-03-12 22:25+0800\n"
 "Last-Translator: You-Cheng Hsieh <yochenhsieh@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
@@ -121,11 +121,11 @@ msgid "Skip"
 msgstr "略過"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "LILO/GRUB 安裝"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "開機載入程式安裝中"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "您要將開機載入程式安裝在那裡？"
@@ -216,26 +216,16 @@ msgstr "限制命令列選項"
 msgid "restrict"
 msgstr "限制"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr "選項 ``限制命令列選項'' 在沒有設定密碼的情況下會無法使用"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "每次開機時清理 /tmp"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "若有需要的話，請輸入正確的記憶體大小 (找到 %d MB)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "輸入記憶體大小 (以 MB 為單位)"
 
 #: any.pm:432
 #, c-format
@@ -363,6 +353,11 @@ msgid "Other OS (Windows...)"
 msgstr "其他作業系統 (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "開機樣式組態設定"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1806,6 +1801,11 @@ msgstr "組塊大小以 KiB 計量"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "請小心：這個動作很危險。"
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "分割磁區"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6521,6 +6521,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "安裝失敗"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "LILO/GRUB 安裝"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "若有需要的話，請輸入正確的記憶體大小 (找到 %d MB)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "輸入記憶體大小 (以 MB 為單位)"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

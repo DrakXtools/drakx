@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2006-09-13 19:15+0200\n"
 "Last-Translator: Vedran Ljubovic <vljubovic@smartnet.ba>\n"
 "Language-Team: Bosnian <lokal@linux.org.ba>\n"
@@ -113,11 +113,11 @@ msgid "Skip"
 msgstr "Preskoči"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "LILO/grub instalacija"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Instalacija bootloadera u toku"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Gdje želite smjestiti bootloader?"
@@ -208,26 +208,16 @@ msgstr "Ograniči opcije komandne linije"
 msgid "restrict"
 msgstr "ograniči"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr "Opcija ``Ograniči opcije komandne linije'' je beskorisna bez šifre"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Očisti /tmp prilikom svakog starta"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Precizna veličina RAMa ako je potrebno (pronađeno %d MB)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Navedite veličinu rama u MB"
 
 #: any.pm:432
 #, c-format
@@ -355,6 +345,11 @@ msgid "Other OS (Windows...)"
 msgstr "Ostali OSi (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Konfiguracija stila boota"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1836,6 +1831,11 @@ msgstr "veličina chunka u KiB"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Budite oprezni: ova operacija je opasna."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Particioniranje"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6907,6 +6907,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Instalacija nije uspjela"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "LILO/grub instalacija"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Precizna veličina RAMa ako je potrebno (pronađeno %d MB)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Navedite veličinu rama u MB"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

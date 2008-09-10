@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-sv\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2008-09-07 03:04+0300\n"
 "Last-Translator: Thomas Backlund <tmb@mandriva.org>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -116,11 +116,11 @@ msgid "Skip"
 msgstr "Hoppa över"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "Installation av Lilo/Grub"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Installation av starthanterare pågår"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Var vill du installera starthanteraren?"
@@ -211,27 +211,18 @@ msgstr "Begränsa alternativen för kommandoraden"
 msgid "restrict"
 msgstr "begränsa"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
-msgid "Option ``Restrict command line options'' is of no use without a password"
+msgid ""
+"Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 "Alternativet \"Begränsa alternativen för kommandoraden\" är värdelöst utan "
 "lösenord."
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Rensa /tmp vid varje start"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Ange RAM-storlek om nödvändigt (hittade %d MB)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Ange RAM-storlek i MB"
 
 #: any.pm:432
 #, c-format
@@ -359,6 +350,11 @@ msgid "Other OS (Windows...)"
 msgstr "Annat OS (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Anpassning av startutförande"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -409,8 +405,10 @@ msgstr "Ange ett användarnamn"
 
 #: any.pm:776
 #, c-format
-msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
-msgstr "Användarnamnet får endast innehålla små bokstäver, siffror,\"-\" och \"_\""
+msgid ""
+"The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgstr ""
+"Användarnamnet får endast innehålla små bokstäver, siffror,\"-\" och \"_\""
 
 #: any.pm:777
 #, c-format
@@ -662,7 +660,8 @@ msgstr ""
 
 #: any.pm:1222
 #, c-format
-msgid "You can export using NFS or SMB. Please select which you would like to use."
+msgid ""
+"You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Du kan exportera med NFS eller SMB. Vilket vill du använda?"
 
 #: any.pm:1250
@@ -687,7 +686,8 @@ msgstr "Logga ut och använd sedan Ctrl+Alt+Backsteg"
 #: any.pm:1348
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
-msgstr "Du måste logga ut och logga in igen för att ändringarna ska verkställas."
+msgstr ""
+"Du måste logga ut och logga in igen för att ändringarna ska verkställas."
 
 #: any.pm:1383
 #, c-format
@@ -766,7 +766,8 @@ msgstr "Lokal fil:"
 
 #: authentication.pm:64
 #, c-format
-msgid "Use local for all authentication and information user tell in local file"
+msgid ""
+"Use local for all authentication and information user tell in local file"
 msgstr "Använd lokal fil för autentikering av lokala användare"
 
 #: authentication.pm:65
@@ -839,7 +840,8 @@ msgstr "Välkommen till Autentikeringsguiden"
 msgid ""
 "You have selected LDAP authentication. Please review the configuration "
 "options below "
-msgstr "Du har valt LDAP autentikering. Kontrollera konfigurationsalternativen nedan "
+msgstr ""
+"Du har valt LDAP autentikering. Kontrollera konfigurationsalternativen nedan "
 
 #: authentication.pm:101 authentication.pm:156
 #, c-format
@@ -917,7 +919,9 @@ msgstr "Skuggbas"
 msgid ""
 "You have selected Kerberos 5 authentication. Please review the configuration "
 "options below "
-msgstr "Du har valt Kerberos 5 autentikering. Kontrollera konfigurationsalternativen nedan"
+msgstr ""
+"Du har valt Kerberos 5 autentikering. Kontrollera konfigurationsalternativen "
+"nedan"
 
 #: authentication.pm:135
 #, c-format
@@ -954,7 +958,9 @@ msgstr "Använd LDAP för användarinformation"
 msgid ""
 "You have selected Kerberos 5 for authentication, now you must choose the "
 "type of users information "
-msgstr "Du har valt Kerberos 5 för autentikering, nu måste du välja typ av användarinformation"
+msgstr ""
+"Du har valt Kerberos 5 för autentikering, nu måste du välja typ av "
+"användarinformation"
 
 #: authentication.pm:158
 #, c-format
@@ -966,7 +972,8 @@ msgstr "Hämta base Dn"
 msgid ""
 "You have selected NIS authentication. Please review the configuration "
 "options below "
-msgstr "Du har valt NIS autentikering. Kontrollera konfigurationsalternativen nedan"
+msgstr ""
+"Du har valt NIS autentikering. Kontrollera konfigurationsalternativen nedan"
 
 #: authentication.pm:181
 #, c-format
@@ -983,7 +990,9 @@ msgstr "NIS-server"
 msgid ""
 "You have selected Windows Domain authentication. Please review the "
 "configuration options below "
-msgstr "Du har valt Windows Domän autentikering. Kontrollera konfigurationsalternativen nedan"
+msgstr ""
+"Du har valt Windows Domän autentikering. Kontrollera "
+"konfigurationsalternativen nedan"
 
 #: authentication.pm:207
 #, c-format
@@ -1619,7 +1628,8 @@ msgstr "Ta bort loopback-filen?"
 
 #: diskdrake/interactive.pm:532
 #, c-format
-msgid "After changing type of partition %s, all data on this partition will be lost"
+msgid ""
+"After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "Efter ändring av partitionstyp %s kommer alla data på denna partition att "
 "försvinna."
@@ -1823,6 +1833,11 @@ msgstr "blockstorlek i KiB"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Var försiktig: Detta moment är farligt."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Partitionering"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -2096,7 +2111,8 @@ msgstr "Välj krypteringsnyckel för filsystemet"
 #: diskdrake/interactive.pm:1299
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
-msgstr "Den här krypteringsnyckeln är för enkel (den måste vara minst %d tecken lång)"
+msgstr ""
+"Den här krypteringsnyckeln är för enkel (den måste vara minst %d tecken lång)"
 
 #: diskdrake/interactive.pm:1300
 #, c-format
@@ -2153,7 +2169,8 @@ msgstr "En annan"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid "Please enter your username, password and domain name to access this host."
+msgid ""
+"Please enter your username, password and domain name to access this host."
 msgstr ""
 "Ange ditt användarnamn, lösenord och domän för att komma åt den här "
 "värddatorn."
@@ -2629,7 +2646,8 @@ msgstr "Du har mer än en hårddisk, vilken vill du installera Linux på?"
 #: fs/partitioning_wizard.pm:210 fsedit.pm:570
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr "Alla existerande partitioner på %s och dess data kommer att gå förlorade."
+msgstr ""
+"Alla existerande partitioner på %s och dess data kommer att gå förlorade."
 
 #: fs/partitioning_wizard.pm:220
 #, c-format
@@ -3095,7 +3113,7 @@ msgstr ""
 "Här kan du välja en alternativ drivrutin (antingen OSS eller Alsa) för "
 "ljudkortet (%s)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA",
+#. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:392
@@ -5298,7 +5316,8 @@ msgstr "Tillåt direkt root-inloggning."
 
 #: security/help.pm:33
 #, c-format
-msgid "Allow the list of users on the system on display managers (kdm and gdm)."
+msgid ""
+"Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr ""
 "Tillåt listan på användare i systemet att synas i inloggnings-hanterarna "
 "(kdm och gdm)."
@@ -5491,7 +5510,8 @@ msgstr ""
 #: security/help.pm:104
 #, c-format
 msgid "Set the password history length to prevent password reuse."
-msgstr "Ange historiken på lösenordslängd för att förhindra lösenordsåteranvändning."
+msgstr ""
+"Ange historiken på lösenordslängd för att förhindra lösenordsåteranvändning."
 
 #: security/help.pm:106
 #, c-format
@@ -5583,7 +5603,8 @@ msgstr "om ja, kör \"chkrootkit\"-kontroller."
 
 #: security/help.pm:127
 #, c-format
-msgid "if set, send the mail report to this email address else send it to root."
+msgid ""
+"if set, send the mail report to this email address else send it to root."
 msgstr ""
 "om angett, skicka e-postrapporten till denna e-postadress, annars skicka den "
 "till root."
@@ -6011,7 +6032,8 @@ msgstr "Använd \"libsafe\" för servrar"
 
 #: security/level.pm:67
 #, c-format
-msgid "A library which defends against buffer overflow and format string attacks."
+msgid ""
+"A library which defends against buffer overflow and format string attacks."
 msgstr "Skydd mot \"buffer overflow\"- och \"format string\"- attacker."
 
 #: security/level.pm:68
@@ -6069,8 +6091,10 @@ msgstr ""
 
 #: services.pm:28
 #, c-format
-msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
-msgstr "Vanligt UNIX Utskrifts System (CUPS) är ett avancerat utskriftskö-system"
+msgid ""
+"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgstr ""
+"Vanligt UNIX Utskrifts System (CUPS) är ett avancerat utskriftskö-system"
 
 #: services.pm:29
 #, c-format
@@ -6116,7 +6140,8 @@ msgstr ""
 
 #: services.pm:38
 #, c-format
-msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid ""
+"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
 "Apache är en www-server (webbserver). Den tillhandahåller HTML-dokument och "
 "CGI-skript."
@@ -6360,7 +6385,8 @@ msgstr ""
 
 #: services.pm:92
 #, c-format
-msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgid ""
+"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
 "SANE (Scanner Access Now Easy (Enkel Skanneraccess Nu)) möjliggör access "
 "till skanners, videokamera, ..."
@@ -6867,6 +6893,15 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Installationen misslyckades"
 
+#~ msgid "LILO/grub Installation"
+#~ msgstr "Installation av Lilo/Grub"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Ange RAM-storlek om nödvändigt (hittade %d MB)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Ange RAM-storlek i MB"
+
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
 #~ "is enough)\n"
@@ -6970,4 +7005,3 @@ msgstr "Installationen misslyckades"
 
 #~ msgid "Authentication Windows Domain"
 #~ msgstr "Autentiserande Windows-domän"
-

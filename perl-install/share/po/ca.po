@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2005-09-13 23:24+0200\n"
 "Last-Translator: Albert Astals Cid <astals11@terra.es>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -108,11 +108,11 @@ msgid "Skip"
 msgstr "Omet"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "Instal·lació del LILO/grub"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Instal·lació del carregador de l'arrencada en curs"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "On voleu instal·lar el carregador de l'arrencada?"
@@ -204,7 +204,7 @@ msgstr "Limita les opcions de la línia d'ordres"
 msgid "restrict"
 msgstr "limita"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
@@ -212,20 +212,10 @@ msgstr ""
 "L'opció \"Limita les opcions de la línia d'ordres\" no té cap utilitat sense "
 "una contrasenya"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Buida /tmp en cada arrencada"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Mida exacta de la RAM, si cal (s'han trobat %d MB)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Introduïu la mida de la RAM en MB"
 
 #: any.pm:432
 #, c-format
@@ -353,6 +343,11 @@ msgid "Other OS (Windows...)"
 msgstr "Un altre SO (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Configuració del tipus d'arrencada"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1825,6 +1820,11 @@ msgstr "mida del fragment en KB"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Aneu amb compte: aquesta operació és perillosa."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Particionament"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6902,6 +6902,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "La instal·lació ha fallat"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "Instal·lació del LILO/grub"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Mida exacta de la RAM, si cal (s'han trobat %d MB)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Introduïu la mida de la RAM en MB"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2008-04-24 12:53+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Euskara <eu@li.org>\n"
@@ -111,11 +111,11 @@ msgid "Skip"
 msgstr "Utzi"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "LILO/grub instalaketa"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Abio zamatzailearen instalaketa egiten ari da"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Non instalatu nahi duzu abio zamatzailea?"
@@ -206,27 +206,17 @@ msgstr "Murriztu komando-lerroko aukerak"
 msgid "restrict"
 msgstr "murriztu"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 "``Murriztu komando-lerroko aukerak'' aukera ezin da erabili pasahitzik gabe"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Garbitu /tmp abiatzen den bakoitzean"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Zehaztu RAM tamaina behar izanez gero (%d MB aurkitu dira)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Eman ram-tamaina MBtan"
 
 #: any.pm:432
 #, c-format
@@ -354,6 +344,11 @@ msgid "Other OS (Windows...)"
 msgstr "Beste SE bat (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Abio tankera konfiguraketa"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1828,6 +1823,11 @@ msgstr "zatiaren neurria KiB-etan"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Kontuz ibili: eragiketa hau arriskutsua da."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Partizioa egiten"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6918,6 +6918,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Instalazioak huts egin du"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "LILO/grub instalaketa"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Zehaztu RAM tamaina behar izanez gero (%d MB aurkitu dira)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Eman ram-tamaina MBtan"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX for MDK 9.2\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2004-09-15 13:33+0200\n"
 "Last-Translator: Naim Daka <naim70@freesurf.ch>\n"
 "Language-Team: Albanian <LL@li.org>\n"
@@ -103,11 +103,11 @@ msgid "Skip"
 msgstr "Hedhe"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "Instalimi i LILO/grub"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Instalimi i Bootloader në vazhdim e sipër"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Ku dëshironi të instaloni programin bootloader?"
@@ -200,26 +200,16 @@ msgstr "Opcion mbrojtës linjën komanduese"
 msgid "restrict"
 msgstr "restrict"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr "Opcioni ``Restrict command line options'' është i pa mundur pa parullë"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Zbraze repertorin /tmp në çdo nisje"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Precizoje madhësinë e memorisë nëse ajo nevojitet (%d MB të gjetura)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Paraqite madhësinë e memorisë në MB"
 
 #: any.pm:432
 #, c-format
@@ -347,6 +337,11 @@ msgid "Other OS (Windows...)"
 msgstr "Sistem tjetër Eksploatues (Windows, etj.)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Konfigurimi i Stilit të nisjes"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1806,6 +1801,11 @@ msgstr "madhësia e blokut"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Keni kujdes: ky operacion është i rrezikshëm."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Shpërndarja"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6869,6 +6869,16 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Instalimi dështio"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "Instalimi i LILO/grub"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr ""
+#~ "Precizoje madhësinë e memorisë nëse ajo nevojitet (%d MB të gjetura)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Paraqite madhësinë e memorisë në MB"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

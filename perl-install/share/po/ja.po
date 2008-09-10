@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-ja\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2008-09-06 20:20+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <cooker-i18n@mandrivalinux.org>\n"
@@ -112,11 +112,11 @@ msgid "Skip"
 msgstr "スキップ"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "LILO/GRUB のインストール"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "ブートローダをインストール中"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "ブートローダをどこにインストールしますか？"
@@ -207,30 +207,16 @@ msgstr "コマンドラインオプションの制限"
 msgid "restrict"
 msgstr "制限"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr "コマンドラインオプションを制限するにはパスワードが必要です"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "起動するたびに /tmp 以下を消す"
-
-# added a \n to the translation to avoid that the dialog window
-# in which it appears to be tooooo laaaaarge
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr ""
-"必要なら正確な RAM サイズを入力してください\n"
-"(検出したサイズ: %dMB)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "RAM のサイズを MB で入力"
 
 #: any.pm:432
 #, c-format
@@ -358,6 +344,11 @@ msgid "Other OS (Windows...)"
 msgstr "他の OS (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "起動方式の設定"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1826,6 +1817,11 @@ msgstr "チャンクサイズ (KiB)"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "注意: この操作は危険です。"
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "パーティションの設定"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6808,3 +6804,16 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "インストール失敗"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "LILO/GRUB のインストール"
+
+# added a \n to the translation to avoid that the dialog window
+# in which it appears to be tooooo laaaaarge
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr ""
+#~ "必要なら正確な RAM サイズを入力してください\n"
+#~ "(検出したサイズ: %dMB)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "RAM のサイズを MB で入力"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2000-09-24 12:30 +0100\n"
 "Last-Translator: Alexander Bokovoy <ab@avilink.net>\n"
 "Language-Team: be\n"
@@ -89,11 +89,11 @@ msgid "Skip"
 msgstr "Прапусціць"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "Усталяванне LILO/GRUB"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Усталяванне загрузчыку"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Куды вы жадаеце ўсталяваць пачатковы загрузчык?"
@@ -184,27 +184,17 @@ msgstr "Абмежаванне опцыяў каманднага радка"
 msgid "restrict"
 msgstr "абмежаванне"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 "Опцыя ‟Абмежаванне опцыяў каманднага радку“ не выкарыстоўваецца без пароля"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Ачышчаць /tmp пры кожнай загрузцы"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Пазначце дакладны памер RAM (знойдзена %d Мб)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Пазначце памер RAM у Мб"
 
 #: any.pm:432
 #, c-format
@@ -332,6 +322,11 @@ msgid "Other OS (Windows...)"
 msgstr "Іншая АС (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Настройка IDE"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1753,6 +1748,11 @@ msgstr "памер блоку"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Будзьце уважлівы. Гэтую аперацыю нельга адмяніць"
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Прынтэр"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6323,6 +6323,15 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Installation failed"
 msgstr "Усталяванне SILO"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "Усталяванне LILO/GRUB"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Пазначце дакладны памер RAM (знойдзена %d Мб)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Пазначце памер RAM у Мб"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

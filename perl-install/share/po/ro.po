@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 7.1\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2008-02-23 14:31+0200\n"
 "Last-Translator: Cosmin Humeniuc <cosmin@mandrivausers.ro>\n"
 "Language-Team: Romanian Translators for Free Software <rtfs-project@lists."
@@ -99,11 +99,11 @@ msgid "Skip"
 msgstr "Sari peste"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "Instalare LILO/grub"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Se instalează gestionarul de demarare"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Unde doriţi să instalaţi Gestionarul de demaraj ?"
@@ -194,27 +194,17 @@ msgstr "Limitează opţiunile liniei de comandă"
 msgid "restrict"
 msgstr "limitează"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 "Opţiunea ``Limitează opţiunile liniei de comandă'' e inutilă fără parolă"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Curăţă /tmp la fiecare demaraj"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Precizează cantintatea de  RAM dacă e necesar (am găsit %d MB)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Introduceţi cantintatea de RAM în MB"
 
 #: any.pm:432
 #, c-format
@@ -342,6 +332,11 @@ msgid "Other OS (Windows...)"
 msgstr "Alt SO (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Configurare stil demarare"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1798,6 +1793,11 @@ msgstr "Mărimea porţiunii în KiB"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Atenţie: aceasta operaţie e periculoasă."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Partiţionare"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6459,6 +6459,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Instalarea a eşuat"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "Instalare LILO/grub"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Precizează cantintatea de  RAM dacă e necesar (am găsit %d MB)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Introduceţi cantintatea de RAM în MB"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

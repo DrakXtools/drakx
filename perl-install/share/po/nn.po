@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2008-08-22 18:19+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -108,11 +108,11 @@ msgid "Skip"
 msgstr "Hopp over"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "LILO-/grub-installering"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Installerer oppstartslastar"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Kor vil du installera oppstartslastaren?"
@@ -203,26 +203,16 @@ msgstr "Avgrens kommandolinjeval"
 msgid "restrict"
 msgstr "avgrens"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr "Valet «Avgrens kommandolinjeval» er ubrukeleg utan passord"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Tøm «/tmp» ved kvar oppstart"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Nøyaktig minnestorleik om nødvendig (fann %d MiB)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Minnestorleik i MiB"
 
 #: any.pm:432
 #, c-format
@@ -350,6 +340,11 @@ msgid "Other OS (Windows...)"
 msgstr "Anna operativsystem (Windows …)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Oppsettype"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1820,6 +1815,11 @@ msgstr "blokkstorleik i KiB"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Åtvaring: Denne operasjonen er farleg."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Partisjonering"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6841,6 +6841,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Feil ved installering."
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "LILO-/grub-installering"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Nøyaktig minnestorleik om nødvendig (fann %d MiB)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Minnestorleik i MiB"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

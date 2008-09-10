@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: zh_CN\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2008-03-29 21:33+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
@@ -106,11 +106,11 @@ msgid "Skip"
 msgstr "跳过"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "LILO/grub 安装"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "启动引导程序安装中"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "您希望启动引导程序安装到哪里?"
@@ -201,26 +201,16 @@ msgstr "限制命令行选项"
 msgid "restrict"
 msgstr "限制"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr "没有密码不能使用“限定命令行选项”"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "每次启动时清除 /tmp"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "精确的内存大小(找到 %d MB)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "以兆为单位给出内存大小"
 
 #: any.pm:432
 #, c-format
@@ -348,6 +338,11 @@ msgid "Other OS (Windows...)"
 msgstr "其它操作系统(Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "启动风格配置"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -753,8 +748,7 @@ msgstr "本地文件:"
 #, c-format
 msgid ""
 "Use local for all authentication and information user tell in local file"
-msgstr ""
-"使用本地文件进行身份验证，并使用本地文件获取用户信息"
+msgstr "使用本地文件进行身份验证，并使用本地文件获取用户信息"
 
 #: authentication.pm:65
 #, c-format
@@ -823,8 +817,7 @@ msgstr "欢迎使用身份验证向导"
 msgid ""
 "You have selected LDAP authentication. Please review the configuration "
 "options below "
-msgstr ""
-"您选择了 LDAP 身份验证。请查看下列配置选项"
+msgstr "您选择了 LDAP 身份验证。请查看下列配置选项"
 
 #: authentication.pm:101 authentication.pm:156
 #, c-format
@@ -902,8 +895,7 @@ msgstr "Shadow 基"
 msgid ""
 "You have selected Kerberos 5 authentication. Please review the configuration "
 "options below "
-msgstr ""
-"您选择了 Kerboros 5 身份验证。请查阅下列配置选项"
+msgstr "您选择了 Kerboros 5 身份验证。请查阅下列配置选项"
 
 #: authentication.pm:135
 #, c-format
@@ -952,8 +944,7 @@ msgstr "获取基 Dn"
 msgid ""
 "You have selected NIS authentication. Please review the configuration "
 "options below "
-msgstr ""
-"您选择了 NIS 身份验证。请查阅下列配置选项"
+msgstr "您选择了 NIS 身份验证。请查阅下列配置选项"
 
 #: authentication.pm:181
 #, c-format
@@ -1796,6 +1787,11 @@ msgstr "组块大小(KB)"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "小心: 该操作有危险。"
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "分区"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -5051,8 +5047,7 @@ msgstr "正在查找不需要的本地化软件包..."
 msgid ""
 "We have detected that some packages are not needed for your system "
 "configuration."
-msgstr ""
-"我们检测到您的系统配置无需下列软件包。"
+msgstr "我们检测到您的系统配置无需下列软件包。"
 
 #: pkgs.pm:242
 #, c-format
@@ -6662,6 +6657,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "安装失败"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "LILO/grub 安装"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "精确的内存大小(找到 %d MB)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "以兆为单位给出内存大小"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2004-06-01 03:36+0100\n"
 "Last-Translator: Alemayehu <alemayehu@gmx.at>\n"
 "Language-Team: Amharic <am-translate@geez.org>\n"
@@ -89,11 +89,11 @@ msgid "Skip"
 msgstr "ዝለል"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "የLILO/grub ተከላ"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "የአስጀማሪ ተከላ በመከናወን ላይ"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "አስጀማሪውን የት መትከል ይፈልጋሉ?"
@@ -184,26 +184,16 @@ msgstr "የትእዛዝ መስመር ምርጫዎችን ወስን"
 msgid "restrict"
 msgstr "ወስን"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "በየጅማሬው /tmpን አጽዳ"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr ""
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr ""
 
 #: any.pm:432
 #, c-format
@@ -331,6 +321,11 @@ msgid "Other OS (Windows...)"
 msgstr "ሌሎች የመጠቀሚያ ዜዴዎች (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "የአጀማመር ዘይቤ ምርጫ"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1742,6 +1737,11 @@ msgstr "የፊደል ቅርጽ መጠን፦"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "ይጠንቀቁ: ይህ አሰራር አደገኛ ነው።"
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "መከፋፈል አልተሳካም: %s"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6202,6 +6202,9 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Installation failed"
 msgstr "%s አልተገኘም"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "የLILO/grub ተከላ"
 
 #, fuzzy
 #~ msgid "Security level"

@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2008-03-31 01:38+0200\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -115,11 +115,11 @@ msgid "Skip"
 msgstr "Preskoči"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "Namestitev LILO/grub"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Teče nameščanje zagonskega nalagalnika."
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Kam želite namestiti zagonski nalagalnik?"
@@ -210,26 +210,16 @@ msgstr "Omejitev možnosti ukazne vrstice"
 msgid "restrict"
 msgstr "omeji"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr "Možnost ``Omejitev možnosti ukazne vrstice'' ni uporabna brez gesla"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Ob vsakem zagonu počisti /tmp"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Natančna velikost pomnilnika, če je potrebno (najdeno %d MB)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Navedite velikost pomnilnika v MB"
 
 #: any.pm:432
 #, c-format
@@ -357,6 +347,11 @@ msgid "Other OS (Windows...)"
 msgstr "Drug OS (Windows ...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Nastavitev zagonskega stila"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1834,6 +1829,11 @@ msgstr "velikost dela v KiB"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Bodite previdni: Ta operacija je nevarna."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Razdelitev diska"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6891,6 +6891,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Namestitev ni uspela"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "Namestitev LILO/grub"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Natančna velikost pomnilnika, če je potrebno (najdeno %d MB)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Navedite velikost pomnilnika v MB"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

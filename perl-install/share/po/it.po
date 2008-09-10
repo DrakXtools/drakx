@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2008-03-21 00:07+0100\n"
 "Last-Translator: Andrea Celli <andrea.celli@libero.it>\n"
 "Language-Team: Italian <timl@freelists.org>\n"
@@ -117,11 +117,11 @@ msgid "Skip"
 msgstr "Salta"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "Installazione di LILO/grub"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Installazione del bootloader in corso"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Dove vuoi installare il bootloader?"
@@ -212,7 +212,7 @@ msgstr "Opzioni da riga di comando solo con password"
 msgid "restrict"
 msgstr "limita"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
@@ -220,20 +220,10 @@ msgstr ""
 "L'opzione \"Opzioni da riga di comando solo con password\" è inutile senza "
 "una password"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Svuota /tmp ad ogni avvio"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Correggi dimensione RAM se necessario (trovati %d MB)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Specifica dimensione RAM (in MB)"
 
 #: any.pm:432
 #, c-format
@@ -361,6 +351,11 @@ msgid "Other OS (Windows...)"
 msgstr "Altro S.O. (Windows, ...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Configurazione stile di avvio"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1835,6 +1830,11 @@ msgstr "dimensione frammento in KiB"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Attenzione: questa operazione è pericolosa."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Partizionamento"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6910,6 +6910,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Install. non riuscita"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "Installazione di LILO/grub"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Correggi dimensione RAM se necessario (trovati %d MB)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Specifica dimensione RAM (in MB)"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

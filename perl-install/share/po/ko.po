@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2007-09-26 20:12+0200\n"
 "Last-Translator: Jaegeum Cze <baedaron@hanafos.com>\n"
 "Language-Team: Korean <beadaron@hanafos.com>\n"
@@ -108,11 +108,11 @@ msgid "Skip"
 msgstr "건너뛰기"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "LILO/GRUB 설치"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "부트로더 설치"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "부트로더를 어디에 설치하고 싶으세요?"
@@ -203,26 +203,16 @@ msgstr "명령행 옵션을 제한합니다."
 msgid "restrict"
 msgstr "제한"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr "옵션: 「명령행 옵션제한」은 암호없이 사용될수 없습니다."
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "부팅시 /tmp 디렉토리 자동 청소"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "옵션: 정확한 메모리 용량 (%d MB 발견)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "메모리 용량를 MB로 입력하세요"
 
 #: any.pm:432
 #, c-format
@@ -350,6 +340,11 @@ msgid "Other OS (Windows...)"
 msgstr "기타 OS (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "부팅 스타일 설정"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1810,6 +1805,11 @@ msgstr "크기"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "주의 : 이 조작은 위험합니다."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "인쇄"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6448,6 +6448,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "설치 실패."
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "LILO/GRUB 설치"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "옵션: 정확한 메모리 용량 (%d MB 발견)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "메모리 용량를 MB로 입력하세요"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

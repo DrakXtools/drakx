@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: uz@cyrillic\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2008-08-24 01:24+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <floss-uz-l10n@googlegroups.com>\n"
@@ -95,11 +95,11 @@ msgid "Skip"
 msgstr "Oʻtkazib yuborish"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "LILO/GRUB dasturini oʻrnatish"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Operatsion tizim yuklagichini oʻrnatish davom etmoqda"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Operatsion tizim yuklagichini qaerga oʻrnatmoqchisiz?"
@@ -190,26 +190,16 @@ msgstr ""
 msgid "restrict"
 msgstr "chegaralash"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Tizimni yuklashda /tmp direktoriyasini boʻshatish"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Kerak boʻlsa, RAM'ning aniq hajmi (%d Mb topildi)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "RAM'ning hajmini kiriting (Mb)"
 
 #: any.pm:432
 #, c-format
@@ -337,6 +327,11 @@ msgid "Other OS (Windows...)"
 msgstr "Boshqa OT (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Tizimni yukash uslubini moslash"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1779,6 +1774,11 @@ msgstr ""
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Diqqat! Bu amal xavfli."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Diskni boʻlish"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6483,6 +6483,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Oʻrnatish muvaffaqiyatsiz tugadi"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "LILO/GRUB dasturini oʻrnatish"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Kerak boʻlsa, RAM'ning aniq hajmi (%d Mb topildi)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "RAM'ning hajmini kiriting (Mb)"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "

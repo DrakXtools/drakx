@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"POT-Creation-Date: 2008-09-10 18:04+0200\n"
 "PO-Revision-Date: 2006-09-05 23:14+0200\n"
 "Last-Translator: Pablo Saratxaga <pablo@walon.org>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
@@ -115,11 +115,11 @@ msgid "Skip"
 msgstr "Passer houte"
 
 #: any.pm:358
-#, c-format
-msgid "LILO/grub Installation"
-msgstr "Astalåcion di LILO/grub"
+#, fuzzy, c-format
+msgid "Bootloader Installation"
+msgstr "Dj' astale l' enondrece"
 
-#: any.pm:359
+#: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Wice ki vos voloz astaler l' enondrece?"
@@ -210,7 +210,7 @@ msgstr "Rastrinde les tchuzes del roye di cmande"
 msgid "restrict"
 msgstr "rastrinde"
 
-#: any.pm:419
+#: any.pm:421
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
@@ -218,20 +218,10 @@ msgstr ""
 "Li tchuze «Rastrinde les tchuzes del roye di cmande» ni sieve a rén\n"
 "sins scret"
 
-#: any.pm:421
+#: any.pm:423
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Netyî «/tmp» a tchaeke renondaedje"
-
-#: any.pm:422
-#, c-format
-msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Grandeu del RAM, s' i fåt (dj' a trové %d Mo)"
-
-#: any.pm:423
-#, c-format
-msgid "Give the ram size in MB"
-msgstr "Dinez li grandeu del RAM e Mo"
 
 #: any.pm:432
 #, c-format
@@ -359,6 +349,11 @@ msgid "Other OS (Windows...)"
 msgstr "Ôtes sistinmes d' operance (Windows...)"
 
 #: any.pm:594
+#, fuzzy, c-format
+msgid "Bootloader Configuration"
+msgstr "Apontiaedje del sôre d' enondaedje"
+
+#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -1832,6 +1827,11 @@ msgstr "grandeu des bokets e Kio"
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Prindoz asteme: cisse operåcion chal est dandjureuse."
+
+#: diskdrake/interactive.pm:1026
+#, fuzzy, c-format
+msgid "Partitioning Type"
+msgstr "Pårtixhaedje"
 
 #: diskdrake/interactive.pm:1026
 #, c-format
@@ -6803,6 +6803,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "L' astalaedje a fwait berwete"
+
+#~ msgid "LILO/grub Installation"
+#~ msgstr "Astalåcion di LILO/grub"
+
+#~ msgid "Precise RAM size if needed (found %d MB)"
+#~ msgstr "Grandeu del RAM, s' i fåt (dj' a trové %d Mo)"
+
+#~ msgid "Give the ram size in MB"
+#~ msgstr "Dinez li grandeu del RAM e Mo"
 
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
