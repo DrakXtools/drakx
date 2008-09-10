@@ -23,7 +23,7 @@ network::network::read_net_conf($net);
 
 $::isWizard = 1;
 my $in = 'interactive'->vnew;
-$in->{no_Window_Manager} = 1;
+$in->{no_Window_Manager} = !any::running_window_manager();
 
 sub get_conf {
 	my ($name) = @_;
