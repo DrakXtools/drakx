@@ -457,9 +457,11 @@ sub setupBootloader__general {
     }
     if ($prev_enable_apic != $enable_apic) {
 	($enable_apic ? \&bootloader::remove_append_simple : \&bootloader::set_append_simple)->($b, 'noapic');
+	($enable_apic ? \&bootloader::set_append_simple : \&bootloader::remove_append_simple)->($b, 'apic');
     }
     if ($prev_enable_lapic != $enable_lapic) {
 	($enable_lapic ? \&bootloader::remove_append_simple : \&bootloader::set_append_simple)->($b, 'nolapic');
+	($enable_lapic ? \&bootloader::set_append_simple : \&bootloader::remove_append_simple)->($b, 'lapic');
     }
 
     if ($prev_clean_tmp != $clean_tmp) {
