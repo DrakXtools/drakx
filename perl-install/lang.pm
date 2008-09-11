@@ -1048,6 +1048,7 @@ sub lang_to_ourlocale {
     my ($lang) = @_;
 
     my $locale = system_locales_to_ourlocale($lang);
+    $locale->{utf8} ||= utf8_should_be_needed($locale);
     lang_changed($locale);
     $locale;
 }
