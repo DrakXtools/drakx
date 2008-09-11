@@ -1,22 +1,22 @@
+# translation of libDrakX.po to Nederlands
 # translation of libDrakX-nl.po to
-# translation of DrakX-nl.po to Nederlands
 # Dutch translation of DrakX.
-# Copyright (C) 2000, 2005, 2006 Free Software Foundation, Inc.
+# Copyright (C) 2000, 2005, 2006, 2008 Free Software Foundation, Inc.
 # Copyright (c) 2000 Mandriva
+#
 # Niels Gras <niels.gras@wanadoo.nl>, 2000.
 # Jeroen ten Berge <j.ten.berge@twinbit.nl>, 2002.
-# Reinout van Schouwen <reinouts@gnome.org>, 2002-2007.
+# Reinout van Schouwen <reinouts@gnome.org>, 2002-2008
 # Peter Bosch <peter.bosch@hccnet.nl>, 2002.
-# Rob Teng <mandrake.tips@free.fr>, 2005.
+# Rob Teng <mandrake.tips@free.fr>, 2005, 2008.
 # Arno Fleming, 2006.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: libDrakX-nl\n"
-"POT-Creation-Date: 2008-09-11 19:34+0200\n"
-"PO-Revision-Date: 2008-03-12 00:43+0100\n"
-"Last-Translator: Reinout van Schouwen <reinouts@gnome.org>\n"
-"Language-Team: Dutch <vertaling@vrijschrift.org>\n"
+"Project-Id-Version: libDrakX\n"
+"POT-Creation-Date: 2008-09-05 18:08+0200\n"
+"PO-Revision-Date: 2008-09-10 23:31+0200\n"
+"Last-Translator: Rob Teng <mandrake.tips@free.fr>\n"
+"Language-Team: Nederlands\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -95,9 +95,9 @@ msgstr ""
 "Van welke schijf start U op ?"
 
 #: any.pm:346
-#, fuzzy, c-format
+#, c-format
 msgid "First sector (MBR) of drive %s"
-msgstr "Eerste sector van schijf (MBR)"
+msgstr "Eerste sector (MBR) van schijf %s"
 
 #: any.pm:348
 #, c-format
@@ -120,11 +120,11 @@ msgid "Skip"
 msgstr "Overslaan"
 
 #: any.pm:358
-#, fuzzy, c-format
-msgid "Bootloader Installation"
-msgstr "Installatie opstartlader is bezig"
+#, c-format
+msgid "LILO/grub Installation"
+msgstr "LILO/grub-installatie"
 
-#: any.pm:362
+#: any.pm:359
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Waar wenst u de opstartlader te installeren?"
@@ -215,17 +215,25 @@ msgstr "Opdrachtregel-opties beperken"
 msgid "restrict"
 msgstr "beperken"
 
-#: any.pm:421
+#: any.pm:419
 #, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
-msgstr ""
-"De optie ``Opdrachtregel-opties beperken'' heeft geen nut zonder wachtwoord"
+msgid "Option ``Restrict command line options'' is of no use without a password"
+msgstr "De optie ``Opdrachtregel-opties beperken'' heeft geen nut zonder wachtwoord"
 
-#: any.pm:423
+#: any.pm:421
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Elke keer bij opstarten /tmp legen"
+
+#: any.pm:422
+#, c-format
+msgid "Precise RAM size if needed (found %d MB)"
+msgstr "Juiste RAM-grootte (indien nodig) (%d MB gevonden)"
+
+#: any.pm:423
+#, c-format
+msgid "Give the ram size in MB"
+msgstr "Geef de RAM-grootte in MB"
 
 #: any.pm:432
 #, c-format
@@ -353,11 +361,6 @@ msgid "Other OS (Windows...)"
 msgstr "Ander OS (Windows...)"
 
 #: any.pm:594
-#, fuzzy, c-format
-msgid "Bootloader Configuration"
-msgstr "Configuratie van opstartstijl"
-
-#: any.pm:595
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -408,10 +411,8 @@ msgstr "Geef een gebruikersnaam"
 
 #: any.pm:776
 #, c-format
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
-msgstr ""
-"De gebruikersnaam mag slechts kleine letters, cijfers, `-' en`_' bevatten"
+msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgstr "De gebruikersnaam mag slechts kleine letters, cijfers, `-' en`_' bevatten"
 
 #: any.pm:777
 #, c-format
@@ -529,9 +530,9 @@ msgid "Quit"
 msgstr "Afsluiten"
 
 #: any.pm:952
-#, fuzzy, c-format
+#, c-format
 msgid "Do you accept this license ?"
-msgstr "Heeft u er nog een?"
+msgstr "Accepteert u deze licentie?"
 
 #: any.pm:953
 #, c-format
@@ -664,8 +665,7 @@ msgstr ""
 
 #: any.pm:1222
 #, c-format
-msgid ""
-"You can export using NFS or SMB. Please select which you would like to use."
+msgid "You can export using NFS or SMB. Please select which you would like to use."
 msgstr ""
 "U kunt bestandssystemen delen met behulp van NFS of SMB. Welke daarvan wilt "
 "u gebruiken?"
@@ -765,7 +765,7 @@ msgstr "Windows-domein"
 #: authentication.pm:30
 #, c-format
 msgid "Kerberos 5"
-msgstr ""
+msgstr "Kerberos 5"
 
 #: authentication.pm:64
 #, c-format
@@ -774,8 +774,7 @@ msgstr "Bestand op deze computer:"
 
 #: authentication.pm:64
 #, c-format
-msgid ""
-"Use local for all authentication and information user tell in local file"
+msgid "Use local for all authentication and information user tell in local file"
 msgstr ""
 "Gebruik local voor alle aanmeldingscontrole en gebruikersinformatie in een "
 "bestand op deze computer."
@@ -825,33 +824,32 @@ msgstr ""
 #: authentication.pm:68
 #, c-format
 msgid "Kerberos 5 :"
-msgstr ""
+msgstr "Kerberos 5:"
 
 #: authentication.pm:68
 #, c-format
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
-msgstr ""
-"Met Kerberos en Ldap voor aanmeldingscontrole in Active Directory Server "
+msgstr "Met Kerberos en Ldap voor aanmeldingscontrole in Active Directory Server "
 
 #: authentication.pm:96 authentication.pm:130 authentication.pm:149
 #: authentication.pm:150 authentication.pm:176 authentication.pm:200
 #: authentication.pm:878
 #, c-format
 msgid " "
-msgstr ""
+msgstr " "
 
 #: authentication.pm:97 authentication.pm:131 authentication.pm:177
 #: authentication.pm:201
-#, fuzzy, c-format
+#, c-format
 msgid "Welcome to the Authentication Wizard"
-msgstr "Domein-aanmeldingscontrole vereist"
+msgstr "Welkom bij de wizard Aanmelding"
 
 #: authentication.pm:99
 #, c-format
 msgid ""
 "You have selected LDAP authentication. Please review the configuration "
 "options below "
-msgstr ""
+msgstr "U heeft LDAP-aanmeldingscontrole geselecteerd. Neem alstublieft de volgende instellingen door "
 
 #: authentication.pm:101 authentication.pm:156
 #, c-format
@@ -859,32 +857,32 @@ msgid "LDAP Server"
 msgstr "LDAP-server"
 
 #: authentication.pm:102 authentication.pm:157
-#, fuzzy, c-format
+#, c-format
 msgid "Base dn"
-msgstr "LDAP Base dn"
+msgstr "Base dn"
 
 #: authentication.pm:103
 #, c-format
 msgid "Fetch base Dn "
-msgstr ""
+msgstr "Base Dn ophalen"
 
 #: authentication.pm:105 authentication.pm:160
 #, c-format
 msgid "Use encrypt connection with TLS "
-msgstr ""
+msgstr "Gebruik versleutelde verbinding met TLS"
 
 #: authentication.pm:106 authentication.pm:161
 #, c-format
 msgid "Download CA Certificate "
-msgstr ""
+msgstr "CA-certificaat downloaden "
 
 #: authentication.pm:108 authentication.pm:141
 #, c-format
 msgid "Use Disconnect mode "
-msgstr ""
+msgstr "Disconnect-modus gebruiken"
 
 #: authentication.pm:109 authentication.pm:162
-#, fuzzy, c-format
+#, c-format
 msgid "Use anonymous BIND "
 msgstr "Anonieme BIND gebruiken"
 
@@ -892,74 +890,74 @@ msgstr "Anonieme BIND gebruiken"
 #: authentication.pm:119
 #, c-format
 msgid "  "
-msgstr ""
+msgstr " "
 
 #: authentication.pm:111 authentication.pm:163
 #, c-format
 msgid "Bind DN "
-msgstr ""
+msgstr "Bind DN "
 
 #: authentication.pm:112 authentication.pm:164
-#, fuzzy, c-format
+#, c-format
 msgid "Bind Password "
-msgstr "Wachtwoord"
+msgstr "Bind-wachtwoord"
 
 #: authentication.pm:114
 #, c-format
 msgid "Advanced path for group "
-msgstr ""
+msgstr "Geavanceerd pad voor groep "
 
 #: authentication.pm:116
-#, fuzzy, c-format
+#, c-format
 msgid "Password base"
-msgstr "Wachtwoord"
+msgstr "Wachtwoordbasis"
 
 #: authentication.pm:117
-#, fuzzy, c-format
+#, c-format
 msgid "Group base"
-msgstr "Groep-ID"
+msgstr "Groepsbasis"
 
 #: authentication.pm:118
 #, c-format
 msgid "Shadow base"
-msgstr ""
+msgstr "Shadowbasis"
 
 #: authentication.pm:133
 #, c-format
 msgid ""
 "You have selected Kerberos 5 authentication. Please review the configuration "
 "options below "
-msgstr ""
+msgstr "U heeft Kerberos 5 aanmeldingscontrole geselecteerd. Neem alstublieft de volgende instellingen door "
 
 #: authentication.pm:135
-#, fuzzy, c-format
+#, c-format
 msgid "Realm "
-msgstr "Volledige naam"
+msgstr "Realm "
 
 #: authentication.pm:137
-#, fuzzy, c-format
+#, c-format
 msgid "KDCs Servers"
-msgstr "LDAP-server"
+msgstr "KDCs-servers"
 
 #: authentication.pm:139
 #, c-format
 msgid "Use DNS to resolve hosts for realms "
-msgstr ""
+msgstr "Gebruik DNS om hosts te vinden voor realms"
 
 #: authentication.pm:140
 #, c-format
 msgid "Use DNS to resolve KDCs for realms "
-msgstr ""
+msgstr "Gebruik DNS om KDCs te vinden voor realms"
 
 #: authentication.pm:145
-#, fuzzy, c-format
+#, c-format
 msgid "Use local file for users informations"
-msgstr "Gebruik libsafe voor servers"
+msgstr "Gebruik lokaal bestand voor gebruikersinformatie"
 
 #: authentication.pm:146
-#, fuzzy, c-format
+#, c-format
 msgid "Use Ldap for users informations"
-msgstr "Informatie over harde schijf"
+msgstr "Gebruik LDAP voor gebruikersinformatie"
 
 #: authentication.pm:152
 #, c-format
@@ -967,18 +965,19 @@ msgid ""
 "You have selected Kerberos 5 for authentication, now you must choose the "
 "type of users information "
 msgstr ""
+"U heeft Kerberos 5-aanmeldingscontrole geselecteerd, nu dient u het type van gebruikersinformatie te kiezen "
 
 #: authentication.pm:158
 #, c-format
 msgid "Fecth base Dn "
-msgstr ""
+msgstr "Base Dn ophalen "
 
 #: authentication.pm:179
 #, c-format
 msgid ""
 "You have selected NIS authentication. Please review the configuration "
 "options below "
-msgstr ""
+msgstr "U heeft NIS-aanmeldingscontrole geselecteerd. Neem alstublieft de volgende instellingen door "
 
 #: authentication.pm:181
 #, c-format
@@ -995,12 +994,12 @@ msgstr "NIS-server"
 msgid ""
 "You have selected Windows Domain authentication. Please review the "
 "configuration options below "
-msgstr ""
+msgstr "U heeft Windows Domein-aanmeldingscontrole geselecteerd. Neem alstublieft de volgende instellingen door "
 
 #: authentication.pm:207
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Model "
-msgstr "Domein"
+msgstr "Domein-model "
 
 #: authentication.pm:209
 #, c-format
@@ -1039,9 +1038,9 @@ msgid "Select file"
 msgstr "Selecteer bestand"
 
 #: authentication.pm:879
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Windows for authentication : "
-msgstr "Domein-aanmeldingscontrole vereist"
+msgstr "Windows-domein voor aanmeldingscontrole: "
 
 #: authentication.pm:881
 #, c-format
@@ -1280,13 +1279,13 @@ msgstr "Partitionering"
 #: diskdrake/hd_gtk.pm:68
 #, c-format
 msgid "Click on a partition, choose a filesystem type then choose an action"
-msgstr ""
+msgstr "Klik op een partitie, kies een bestandssysteemtype en dan een aktie"
 
 #: diskdrake/hd_gtk.pm:102 diskdrake/interactive.pm:1010
 #: diskdrake/interactive.pm:1020 diskdrake/interactive.pm:1073
 #, c-format
-msgid "Read carefully"
-msgstr "Lees aandachtig"
+msgid "Read carefully!"
+msgstr "Lees aandachtig!"
 
 #: diskdrake/hd_gtk.pm:102
 #, c-format
@@ -1467,8 +1466,7 @@ msgstr "Wilt u de /etc/fstab aanpassingen bewaren"
 #: diskdrake/interactive.pm:284 fs/partitioning_wizard.pm:250
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr ""
-"U dient te herstarten om de wijzigingen in de partitietabel te activeren."
+msgstr "U dient te herstarten om de wijzigingen in de partitietabel te activeren."
 
 #: diskdrake/interactive.pm:289
 #, c-format
@@ -1629,8 +1627,7 @@ msgstr "Het loopback-bestand verwijderen?"
 
 #: diskdrake/interactive.pm:532
 #, c-format
-msgid ""
-"After changing type of partition %s, all data on this partition will be lost"
+msgid "After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "Na het veranderen van het type van partitie %s, zullen alle gegevens op deze "
 "partitie verloren gaan"
@@ -1840,11 +1837,6 @@ msgid "Be careful: this operation is dangerous."
 msgstr "Voorzichtig: deze operatie is gevaarlijk."
 
 #: diskdrake/interactive.pm:1026
-#, fuzzy, c-format
-msgid "Partitioning Type"
-msgstr "Partitionering"
-
-#: diskdrake/interactive.pm:1026
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Welk type partitionering?"
@@ -1856,8 +1848,8 @@ msgstr "U zult moeten herstarten voordat de aanpassing van kracht wordt"
 
 #: diskdrake/interactive.pm:1073
 #, c-format
-msgid "Partition table of drive %s is going to be written to disk"
-msgstr "Partitietabel van schijf %s wordt weggeschreven"
+msgid "Partition table of drive %s is going to be written to disk!"
+msgstr "Partitietabel van schijf %s wordt weggeschreven!"
 
 #: diskdrake/interactive.pm:1098
 #, c-format
@@ -2176,8 +2168,7 @@ msgstr "Een andere"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
+msgid "Please enter your username, password and domain name to access this host."
 msgstr ""
 "Voer uw gebruikersnaam, wachtwoord en domeinnaam in om toegang te krijgen "
 "tot deze host."
@@ -2245,8 +2236,7 @@ msgstr ""
 #: fs/any.pm:75 fs/partitioning_wizard.pm:59
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr ""
-"U moet een partitie met FAT-bestandssysteem gekoppeld hebben aan /boot/efi"
+msgstr "U dient een partitie met FAT-bestandssysteem gekoppeld te hebben aan /boot/efi"
 
 #: fs/format.pm:63 fs/format.pm:70
 #, c-format
@@ -2393,8 +2383,7 @@ msgstr "Gewone gebruikers toestaan om het bestandsysteem aan te koppelen."
 #: fs/mount_options.pm:148
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
-msgstr ""
-"Zet harde schijf gebruikersquota aan en bekrachtig optioneel de limieten"
+msgstr "Gebruikersquota voor harde schijf inschakelen en eventueel begrenzingen stellen"
 
 #: fs/mount_options.pm:150
 #, c-format
@@ -2525,9 +2514,9 @@ msgstr ""
 "ruimte over)"
 
 #: fs/partitioning_wizard.pm:127
-#, fuzzy, c-format
+#, c-format
 msgid "Use the free space on a Microsoft Windows® partition"
-msgstr "Gebruik de vrije ruimte op de Windows partitie"
+msgstr "Gebruik de vrije ruimte op een Microsoft Windows® partitie"
 
 #: fs/partitioning_wizard.pm:129
 #, c-format
@@ -3124,7 +3113,7 @@ msgstr ""
 "Hier kunt u een alternatief stuurprogramma selecteren (OSS of ALSA) voor uw "
 "geluidskaart (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:392
@@ -5127,11 +5116,6 @@ msgstr "Installeren van stuurprogramma voor ethernetapparaat %s"
 msgid "Installing driver for %s card %s"
 msgstr "Bezig met installeren van stuurprogramma voor %s kaart %s"
 
-#: modules/interactive.pm:99
-#, c-format
-msgid "Configuring Hardware"
-msgstr ""
-
 #: modules/interactive.pm:110
 #, c-format
 msgid ""
@@ -5236,39 +5220,39 @@ msgstr ""
 #: pkgs.pm:228 pkgs.pm:231 pkgs.pm:240
 #, c-format
 msgid "Unused packages removal"
-msgstr ""
+msgstr "Verwijdering ongebruikte pakketten"
 
 #: pkgs.pm:228
 #, c-format
 msgid "Finding unused hardware packages..."
-msgstr ""
+msgstr "Ongebruikte hardware-pakketten zoeken..."
 
 #: pkgs.pm:231
 #, c-format
 msgid "Finding unused localization packages..."
-msgstr ""
+msgstr "Ongebruikte vertalingspakketten zoeken..."
 
 #: pkgs.pm:241
 #, c-format
 msgid ""
 "We have detected that some packages are not needed for your system "
 "configuration."
-msgstr ""
+msgstr "Er is vastgesteld dat enkele pakketten niet nodig zijn voor deze hardwareconfiguratie"
 
 #: pkgs.pm:242
 #, c-format
 msgid "We will remove the following packages, unless you choose otherwise:"
-msgstr ""
+msgstr "Tenzij u dat niet wilt, zullen de volgende pakketten verwijderd worden:"
 
 #: pkgs.pm:245 pkgs.pm:246
-#, fuzzy, c-format
+#, c-format
 msgid "Unused hardware support"
-msgstr "activeer radio ondersteuning"
+msgstr "Ongebruikte apparatuurondersteuning"
 
 #: pkgs.pm:249 pkgs.pm:250
 #, c-format
 msgid "Unused localization"
-msgstr ""
+msgstr "Ongebruikte localisatie"
 
 #: raid.pm:42
 #, c-format
@@ -5370,8 +5354,7 @@ msgstr "Directe aanmelding van root toestaan."
 
 #: security/help.pm:33
 #, c-format
-msgid ""
-"Allow the list of users on the system on display managers (kdm and gdm)."
+msgid "Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr ""
 "Een lijst van gebruikers op het systeem toestaan op displaybeheer (kdm en "
 "gdm)."
@@ -5616,8 +5599,7 @@ msgstr ""
 #: security/help.pm:118
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
-msgstr ""
-"als ingesteld op ja, nagaan of netwerkapparaten in afluistermodus staan."
+msgstr "als ingesteld op ja, nagaan of netwerkapparaten in afluistermodus staan."
 
 #: security/help.pm:119
 #, c-format
@@ -5665,10 +5647,8 @@ msgstr "als ingesteld op ja, chkrootkit-controles uitvoeren."
 
 #: security/help.pm:127
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
-msgstr ""
-"als ingesteld, de e-mailrapportage naar dit adres sturen, anders naar root."
+msgid "if set, send the mail report to this email address else send it to root."
+msgstr "als ingesteld, de e-mailrapportage naar dit adres sturen, anders naar root."
 
 #: security/help.pm:128
 #, c-format
@@ -5705,8 +5685,7 @@ msgstr ""
 #: security/help.pm:136
 #, c-format
 msgid "Set the shell timeout. A value of zero means no timeout."
-msgstr ""
-"De shell-wachttijd instellen. Een waarde van nul betekent geen wachttijd."
+msgstr "De shell-wachttijd instellen. Een waarde van nul betekent geen wachttijd."
 
 #: security/help.pm:136
 #, c-format
@@ -5761,8 +5740,7 @@ msgstr "Gebruikers opsommen op displaybeheer (kdm en gdm)."
 #: security/l10n.pm:20
 #, c-format
 msgid "Export display when passing from root to the other users"
-msgstr ""
-"Display exporteren wanneer van root overgegaan wordt naar andere gebruikers"
+msgstr "Display exporteren wanneer van root overgegaan wordt naar andere gebruikers"
 
 #: security/l10n.pm:21
 #, c-format
@@ -6042,8 +6020,7 @@ msgstr ""
 msgid ""
 "There are already some restrictions, and more automatic checks are run every "
 "night."
-msgstr ""
-"Er zijn al enkele restricties en meer automatische nachtelijke controles."
+msgstr "Er zijn al enkele restricties en meer automatische nachtelijke controles."
 
 #: security/level.pm:47
 #, c-format
@@ -6090,7 +6067,7 @@ msgstr "Kies het gewenste veiligheidsniveau"
 #: security/level.pm:62
 #, c-format
 msgid "%s: %s"
-msgstr ""
+msgstr "%s: %s"
 
 #: security/level.pm:66
 #, c-format
@@ -6099,8 +6076,7 @@ msgstr "Gebruik libsafe voor servers"
 
 #: security/level.pm:67
 #, c-format
-msgid ""
-"A library which defends against buffer overflow and format string attacks."
+msgid "A library which defends against buffer overflow and format string attacks."
 msgstr ""
 "Een bibliotheek welke bescherming biedt tegen \"buffer-overflow\"- en "
 "\"format string\"-aanvallen."
@@ -6113,7 +6089,7 @@ msgstr "Beveiligingsbeheerder:"
 #: security/level.pm:69
 #, c-format
 msgid "Login or email:"
-msgstr ""
+msgstr "Aanmeldnaam of e-mailadres:"
 
 #: services.pm:19
 #, c-format
@@ -6163,10 +6139,8 @@ msgstr ""
 
 #: services.pm:28
 #, c-format
-msgid ""
-"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
-msgstr ""
-"Common UNIX Printing System (CUPS) is een geavanceerd printerwachtrijsysteem"
+msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgstr "Common UNIX Printing System (CUPS) is een geavanceerd printerwachtrijsysteem"
 
 #: services.pm:29
 #, c-format
@@ -6200,8 +6174,7 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
-"HAL is een voorziening die informatie over apparatuur verzamelt en onderhoudt"
+msgstr "HAL is een voorziening die informatie over apparatuur verzamelt en onderhoudt"
 
 #: services.pm:36
 #, c-format
@@ -6214,8 +6187,7 @@ msgstr ""
 
 #: services.pm:38
 #, c-format
-msgid ""
-"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
 "Apache is een World Wide Web-server. Het wordt gebruikt om HTML-bestanden en "
 "CGI aan te bieden."
@@ -6360,8 +6332,7 @@ msgstr ""
 #: services.pm:68
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
-msgstr ""
-"Synchroniseert de systeemtijd met behulp van Netwerktijd-protocol (NTP)"
+msgstr "Synchroniseert de systeemtijd met behulp van Netwerktijd-protocol (NTP)"
 
 #: services.pm:69
 #, c-format
@@ -6471,10 +6442,8 @@ msgstr ""
 
 #: services.pm:92
 #, c-format
-msgid ""
-"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
-msgstr ""
-"SANE (Scanner Access Now Easy) geeft u toegang tot scanners, videocamera's, …"
+msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgstr "SANE (Scanner Access Now Easy) geeft u toegang tot scanners, videocamera's, …"
 
 #: services.pm:93
 #, c-format
@@ -6563,8 +6532,7 @@ msgstr "Diensten"
 #: services.pm:153
 #, c-format
 msgid "Choose which services should be automatically started at boot time"
-msgstr ""
-"Selecteer welke diensten automatisch gestart moeten worden bij het opstarten"
+msgstr "Selecteer welke diensten automatisch gestart moeten worden bij het opstarten"
 
 #: services.pm:171
 #, c-format
@@ -6977,239 +6945,3 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Installatie mislukt"
 
-#~ msgid "LILO/grub Installation"
-#~ msgstr "LILO/grub-installatie"
-
-#~ msgid "Precise RAM size if needed (found %d MB)"
-#~ msgstr "Juiste RAM-grootte (indien nodig) (%d MB gevonden)"
-
-#~ msgid "Give the ram size in MB"
-#~ msgstr "Geef de RAM-grootte in MB"
-
-#~ msgid ""
-#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
-#~ "is enough)\n"
-#~ "at the beginning of the disk"
-#~ msgstr ""
-#~ "Als u aboot wenst te gebruiken, wees dan voorzichtig en laat vrije ruimte "
-#~ "over (2048 sectoren is genoeg)\n"
-#~ "aan het begin van de schijf"
-
-#~ msgid "Security level"
-#~ msgstr "Veiligheidsniveau"
-
-#~ msgid "Expand Tree"
-#~ msgstr "Boom uitklappen"
-
-#~ msgid "Collapse Tree"
-#~ msgstr "Boom inklappen"
-
-#~ msgid "Toggle between flat and group sorted"
-#~ msgstr "Schakelen tussen gewoon en per-groep-gesorteerd"
-
-#~ msgid "Choose action"
-#~ msgstr "Kies een actie"
-
-#~ msgid "Active Directory with SFU"
-#~ msgstr "Active Directory met SFU"
-
-#~ msgid "Active Directory with Winbind"
-#~ msgstr "Active Directory met Winbind"
-
-#~ msgid "Use information stored in local files for all authentication"
-#~ msgstr ""
-#~ "Informatie opgeslagen in lokale bestanden gebruiken voor "
-#~ "aanmeldingscontrole"
-
-#~ msgid "Active Directory with SFU:"
-#~ msgstr "Active Directory met SFU:"
-
-#~ msgid "Active Directory with Winbind:"
-#~ msgstr "Active Directory met Winbind:"
-
-#~ msgid ""
-#~ "Winbind allows the system to authenticate users in a Windows Active "
-#~ "Directory Server."
-#~ msgstr ""
-#~ "Winbind stelt het systeem in staat om gebruikers aan te melden in een "
-#~ "Windows Active Directory Server."
-
-#~ msgid "Authentication LDAP"
-#~ msgstr "LDAP-aanmeldingscontrole"
-
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid "SSL"
-#~ msgstr "SSL"
-
-#~ msgid "security layout (SASL/Kerberos)"
-#~ msgstr "beveiligingsinrichting (SASL/Kerberos)"
-
-#~ msgid "Authentication Active Directory"
-#~ msgstr "Active Directory-aanmeldingscontrole"
-
-#~ msgid "LDAP users database"
-#~ msgstr "LDAP gebruikersdatabase"
-
-#~ msgid "LDAP user allowed to browse the Active Directory"
-#~ msgstr "LDAP-gebruiker toegestaan om Active Directory door te bladeren"
-
-#~ msgid "Password for user"
-#~ msgstr "Wachtwoord voor gebruiker"
-
-#~ msgid "Authentication NIS"
-#~ msgstr "NIS-aanmeldingscontrole"
-
-#~ msgid ""
-#~ "For this to work for a W2K PDC, you will probably need to have the admin "
-#~ "run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
-#~ "add and reboot the server.\n"
-#~ "You will also need the username/password of a Domain Admin to join the "
-#~ "machine to the Windows(TM) domain.\n"
-#~ "If networking is not yet enabled, Drakx will attempt to join the domain "
-#~ "after the network setup step.\n"
-#~ "Should this setup fail for some reason and domain authentication is not "
-#~ "working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows"
-#~ "(tm) Domain, and Admin Username/Password, after system boot.\n"
-#~ "The command 'wbinfo -t' will test whether your authentication secrets are "
-#~ "good."
-#~ msgstr ""
-#~ "Om dit te laten werken met een W2K PDC, zal de beheerder de volgende "
-#~ "opdracht moeten uitvoeren en de server opnieuw opstarten: 'C:\\>net "
-#~ "localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add'\n"
-#~ "U zult tevens de gebruikersnaam/wachtwoord van de domeinbeheerder nodig "
-#~ "hebben om de computer deel te laten nemen aan het Windows(TM)-domein.\n"
-#~ "Indien de netwerkfunctionaliteit nog niet is ingeschakeld, zal DrakX "
-#~ "trachten zich bij het domein te voegen na afloop van de stap netwerk-"
-#~ "instellingen.\n"
-#~ "Mocht deze instelling om wat voor reden dan ook mislukken en de "
-#~ "domeinaanmeldingscontrole werkt niet, herstart dan het systeem en voer "
-#~ "'smbpasswd -j DOMEIN -U GEBRUIKER%%WACHTWOORD' uit waarbij u uw Windows"
-#~ "(TM)-domein en beheerdersgebruikersnaam en -wachtwoord invult.\n"
-#~ "De opdracht 'wbinfo -t' gaat na of uw aanmeldingscontrole-geheimen "
-#~ "kloppen."
-
-#~ msgid "Authentication Windows Domain"
-#~ msgstr "Aanmeldingscontrole Windows-domein"
-
-#~ msgid "Undo"
-#~ msgstr "Ongedaan maken"
-
-#~ msgid "Save partition table"
-#~ msgstr "Partitietabel schrijven"
-
-#~ msgid "Restore partition table"
-#~ msgstr "Partitietabel terughalen"
-
-#~ msgid ""
-#~ "The backup partition table has not the same size\n"
-#~ "Still continue?"
-#~ msgstr ""
-#~ "De backup partitietabel heeft niet dezelfde grootte\n"
-#~ "Toch verdergaan?"
-
-#~ msgid "Info: "
-#~ msgstr "Info: "
-
-#~ msgid "Unknown driver"
-#~ msgstr "Onbekend stuurprogramma"
-
-#~ msgid "Error reading file %s"
-#~ msgstr "Fout bij het lezen van bestand %s"
-
-#~ msgid "Restoring from file %s failed: %s"
-#~ msgstr "Het herstellen van bestand %s is niet gelukt: %s"
-
-#~ msgid "Bad backup file"
-#~ msgstr "Slechte reservekopie"
-
-#~ msgid "Error writing to file %s"
-#~ msgstr "Fout bij het schrijven naar bestand %s"
-
-#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
-#~ msgstr ""
-#~ "Er is een fout opgetreden: Het stuurprogramma \"%s\" voor uw geluidskaart "
-#~ "staat niet in de lijst"
-
-#~ msgid "Ext2"
-#~ msgstr "Ext2"
-
-#~ msgid "Journalised FS"
-#~ msgstr "Gejournaliseerd bestandssysteem"
-
-#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
-#~ msgstr ""
-#~ "Start de X Font Server (deze is noodzakelijk voor het draaien\n"
-#~ "van Xorg)."
-
-#~ msgid "Add user"
-#~ msgstr "Gebruiker toevoegen"
-
-#~ msgid "Accept user"
-#~ msgstr "Gebruiker OK"
-
-#~ msgid ""
-#~ "Do not update directory inode access times on this filesystem\n"
-#~ "(e.g, for faster access on the news spool to speed up news servers)."
-#~ msgstr ""
-#~ "De directory-inode-toegangstijden op dit bestandssysteem niet bijwerken\n"
-#~ "(bijv. voor snellere toegang op de newsspool om newsservers te "
-#~ "versnellen)."
-
-#~ msgid "No supermount"
-#~ msgstr "Geen supermount"
-
-#~ msgid "Supermount"
-#~ msgstr "Supermount"
-
-#~ msgid "Supermount except for CDROM drives"
-#~ msgstr "Supermount behalve voor CD-ROM-spelers"
-
-#~ msgid "Rescue partition table"
-#~ msgstr "Partitietabel redden"
-
-#~ msgid "Removable media automounting"
-#~ msgstr "Automatische koppeling van verwisselbare media"
-
-#~ msgid "Trying to rescue partition table"
-#~ msgstr "Proberen om partitietabel te redden"
-
-#~ msgid "Accept/Refuse bogus IPv4 error messages."
-#~ msgstr "IPv4-onzinfoutmeldingen accepteren/weigeren."
-
-#~ msgid "Accept/Refuse broadcasted icmp echo."
-#~ msgstr "Uitgezonden icmp-echo accepteren/weigeren."
-
-#~ msgid "Accept/Refuse icmp echo."
-#~ msgstr "icmp-echo accepteren/weigeren."
-
-#~ msgid "Allow/Forbid remote root login."
-#~ msgstr "Op afstand aanmelden van root toestaan/verbieden."
-
-#~ msgid "Enable/Disable IP spoofing protection."
-#~ msgstr "Bescherming tegen nep-IP's in-/uitschakelen."
-
-#~ msgid "Enable/Disable libsafe if libsafe is found on the system."
-#~ msgstr "libsafe in-/uitschakelen als libsafe op het systeem is gevonden."
-
-#~ msgid "Enable/Disable the logging of IPv4 strange packets."
-#~ msgstr "In logboek bijhouden van vreemde IPv4-pakketten."
-
-#~ msgid "Enable/Disable msec hourly security check."
-#~ msgstr "Om het uur-msec beveilingscontrole in-/uitschakelen."
-
-#~ msgid "Number of capture buffers:"
-#~ msgstr "Aantal opnamebuffers:"
-
-#~ msgid "number of capture buffers for mmap'ed capture"
-#~ msgstr "aantal opnamebuffers voor mmap-opname:"
-
-#~ msgid "PLL setting:"
-#~ msgstr "PLL instelling:"
-
-#~ msgid "Radio support:"
-#~ msgstr "Radio ondersteuning:"
-
-#~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
-#~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
