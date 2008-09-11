@@ -1007,7 +1007,7 @@ sub ask_alldatamaybelost {
 
     #- here we may have a non-formatted or a formatted partition
     #- -> doing as if it was formatted
-    $in->ask_okcancel(N("Read carefully!"), 
+    $in->ask_okcancel(N("Read carefully"), 
 		      [ N("Be careful: this operation is dangerous."), sprintf(translate($msg), $part->{device}) ], 1);
 }
 sub ask_alldatawillbelost {
@@ -1017,7 +1017,7 @@ sub ask_alldatawillbelost {
 
     #- here we may have a non-formatted or a formatted partition
     #- -> doing as if it was formatted
-    $in->ask_okcancel(N("Read carefully!"), sprintf(translate($msg), $part->{device}), 1);
+    $in->ask_okcancel(N("Read carefully"), sprintf(translate($msg), $part->{device}), 1);
 }
 
 sub partitions_suggestions {
@@ -1070,7 +1070,7 @@ sub write_partitions {
     $hd->{isDirty} or return 1;
     isLVM($hd) and return 1;
 
-    $in->ask_okcancel(N("Read carefully!"), N("Partition table of drive %s is going to be written to disk!", $hd->{device}), 1) or return;
+    $in->ask_okcancel(N("Read carefully"), N("Partition table of drive %s is going to be written to disk!", $hd->{device}), 1) or return;
     partition_table::write($hd) if !$::testing;
     check_rebootNeeded($in, $hd) if !$b_skip_check_rebootNeeded;
     # fix resizing's failures due to udev's race when writing the partition table
