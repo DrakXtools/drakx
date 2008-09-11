@@ -102,7 +102,7 @@ sub selectKeyboard {
                           { label => N("Please choose your keyboard layout."), title => 1 },
                           if_(@best, { val => \$KEYBOARD, type => 'list', format => $format, sort => 1,
 				     list => [ @best ], changed => sub { $other = 0 } }),
-                          { label => N("Here is the full list of available keyboards"), title => 1, advanced => @best },
+                          { label => N("Here is the full list of available keyboards:"), title => 1, advanced => @best },
 			{ val => \$ext_keyboard, type => 'list', format => $format, changed => sub { $other = 1 },
 			  list => [ difference2([ keyboard::KEYBOARDs() ], \@best) ], advanced => @best > 1 }
 		      ]);
