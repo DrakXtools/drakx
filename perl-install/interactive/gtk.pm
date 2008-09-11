@@ -797,6 +797,7 @@ sub display_help {
                                              1, create_scrolled_window(gtkset_border_width($view, 5),
                                                                        [ 'never', 'automatic' ],
                                                                    ),
+                                             0, Gtk2::HSeparator->new,
                                              0, gtkpack(create_hbox('end'),
                                                         gtknew('Button', text => N("Close"), clicked => sub { Gtk2->main_quit })
                                                     ),
