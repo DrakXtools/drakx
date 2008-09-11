@@ -683,7 +683,8 @@ sub summary_prompt {
                         text => [ [ gtknew('VBox', children_tight => [ map {
                             ref($_) eq 'ARRAY' ? gtknew('Table', mcc => 1, row_spacings => 2, children => $_) : $_;
                         } @widget_list ]) ] ])),
-		    0, $w->create_okcancel(undef, '', '', if_($help_sub, [ N("Help"), $help_sub, 1 ]))
+		    0, $w->create_okcancel(undef, '', '', if_($help_sub, [ gtknew('Install_Button', text => N("Help"),
+                                                                                  clicked => $help_sub), undef, 1 ]))
 		  ]));
 
     $w->{real_window}->show_all; # else widgets embedded in textview are hidden
