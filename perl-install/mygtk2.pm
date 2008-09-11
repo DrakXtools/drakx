@@ -413,8 +413,11 @@ sub _gtk__Alignment {
 
 sub title1_to_markup {
     my ($label) = @_;
-    $::isInstall ?  '<span foreground="#5A8AD6">' . $label . '</span>'
-      : '<b><big>' . $label . '</big></b>';
+    if ($::isInstall) {
+        qq(<span foreground="#5A8AD6">$label</span>);
+    } else {
+        qq(<b><big>$label</big></b>);
+  }
 }
 
 sub _gtk__Install_Title {
