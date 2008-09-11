@@ -350,7 +350,7 @@ sub _gtk__Image {
 sub _gtk__WrappedLabel {
     my ($w, $opts) = @_;
     
-    $opts->{line_wrap} = 1;
+    $opts->{line_wrap} = 1 if not defined $opts->{line_wrap};
     _gtk__Label($w, $opts);
 }
 
