@@ -96,7 +96,7 @@ sub wait_load_module {
 	    N("Installing driver for %s card %s", $category, $text);
 	}
     };
-    $in->wait_message('', $msg);
+    $in->wait_message(N("Configuring Hardware"), $msg);
 }
 
 sub load_module__ask_options {
