@@ -255,8 +255,13 @@ sub reallyChooseDesktop {
         my $img = gtksignal_connect(
             gtkadd(Gtk2::EventBox->new, gtknew('Image', file => "desktop-$val->[0]")),
             'button-press-event' => sub {
-                my $wp = ugtk2->new(N("Help"), transient => $w->{real_window}, modal => 1,
-                                );
+                my %title = (
+                    KDE    => N("KDE Desktop"),
+                    GNOME  => N("GNOME Desktop"),
+                    Custom => N("Custom Desktop"),
+                );
+
+                my $wp = ugtk2->new($title{$val->[1]}, transient => $w->{real_window}, modal => 1,);
                 gtkadd($wp->{rwindow},
                        gtkpack_(Gtk2::VBox->new,
                                 0, N("Here's a preview of the '%s' desktop.", $val->[1]),
