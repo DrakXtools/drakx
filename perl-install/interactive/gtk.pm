@@ -777,40 +777,40 @@ sub get_html_file {
 
 sub display_help {
     my ($o, $common, $mainw) = @_;
-                         if (my $file = $common->{interactive_help_id}) {
-                             require Gtk2::Html2;
-                             my $view     = Gtk2::Html2::View->new;
-                             my $document = Gtk2::Html2::Document->new;
-                             $document->signal_connect(request_url => sub {
-                                 my ($_document, $url, $stream) = @_;
-                                 $stream->write(join('', cat_("$help_path/$url")));
-                                 $stream->close;
-                             });
-                             $document->signal_connect('link-clicked' => \&load_from_uri);
-                             $view->set_document($document);
+    if (my $file = $common->{interactive_help_id}) {
+        require Gtk2::Html2;
+        my $view     = Gtk2::Html2::View->new;
+        my $document = Gtk2::Html2::Document->new;
+        $document->signal_connect(request_url => sub {
+                                      my ($_document, $url, $stream) = @_;
+                                      $stream->write(join('', cat_("$help_path/$url")));
+                                      $stream->close;
+                                  });
+        $document->signal_connect('link-clicked' => \&load_from_uri);
+        $view->set_document($document);
 
-                             load_from_uri($document, "$file.html");
+        load_from_uri($document, "$file.html");
 
-                             my $w = ugtk2->new(N("Help"), transient => $mainw->{real_window}, modal => 1);
-                             gtkadd($w->{rwindow},
-                                    gtkpack_(Gtk2::VBox->new,
-                                             1, create_scrolled_window(gtkset_border_width($view, 5),
-                                                                       [ 'never', 'automatic' ],
-                                                                   ),
-                                             0, Gtk2::HSeparator->new,
-                                             0, gtkpack(create_hbox('end'),
-                                                        gtknew('Button', text => N("Close"), clicked => sub { Gtk2->main_quit })
-                                                    ),
-                                         ),
-                                 );
-                             mygtk2::set_main_window_size($w->{rwindow});
-                             $w->{real_window}->grab_focus;
-                             $w->{real_window}->show_all;
-                             $w->main;
-                             return;
-                         }
-				  my $message = $common->{interactive_help}->() or return;
-				  $o->ask_warn(N("Help"), $message);
+        my $w = ugtk2->new(N("Help"), transient => $mainw->{real_window}, modal => 1);
+        gtkadd($w->{rwindow},
+               gtkpack_(Gtk2::VBox->new,
+                        1, create_scrolled_window(gtkset_border_width($view, 5),
+                                                  [ 'never', 'automatic' ],
+                                              ),
+                        0, Gtk2::HSeparator->new,
+                        0, gtkpack(create_hbox('end'),
+                                   gtknew('Button', text => N("Close"), clicked => sub { Gtk2->main_quit })
+                               ),
+                    ),
+           );
+        mygtk2::set_main_window_size($w->{rwindow});
+        $w->{real_window}->grab_focus;
+        $w->{real_window}->show_all;
+        $w->main;
+        return;
+    } elsif (my $message = $common->{interactive_help}->()) {
+        $o->ask_warn(N("Help"), $message);
+    }
 }
 
 sub ask_fromW {
