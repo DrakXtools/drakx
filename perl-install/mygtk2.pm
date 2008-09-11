@@ -414,7 +414,12 @@ sub _gtk__Alignment {
 sub title1_to_markup {
     my ($label) = @_;
     if ($::isInstall) {
-        qq(<span foreground="#5A8AD6">$label</span>);
+        my $font = lang::l2pango_font($::o->{locale}{lang});
+        if (my ($font_size) = $font =~ /(\d+)/) {
+            $font_size++;
+            $font =~ s/\d+/$font_size/;
+        }
+        qq(<span foreground="#5A8AD6" font="$font">$label</span>);
     } else {
         qq(<b><big>$label</big></b>);
   }
