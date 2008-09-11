@@ -829,7 +829,7 @@ sub ask_fromW {
     mygtk2::set_main_window_size($mainw->{rwindow}) if $mainw->{pop_it} && !$common->{auto_window_size} && (@$l || $mainw->{box_size} == 200);
 
     my @more_buttons = (
-			if_($common->{interactive_help}, 
+			if_($common->{interactive_help} || $common->{interactive_help_id}, 
                             [ gtknew('Install_Button', text => N("Help"),
                                      clicked => sub { display_help($o, $common, $mainw) }), undef, 1 ]),
 			if_($common->{more_buttons}, @{$common->{more_buttons}}),
