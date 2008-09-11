@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-2009.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-11 18:46+0200\n"
+"POT-Creation-Date: 2008-09-11 18:48+0200\n"
 "PO-Revision-Date: 2008-09-08 10:54+0100\n"
 "Last-Translator: Lónyai Gergely <aleph@mandriva.org>\n"
 "Language-Team: Hungarian <aleph@mandriva.org>\n"
@@ -20,31 +20,6 @@ msgstr ""
 "X-Poedit-Language: Hungarian\n"
 "X-Poedit-Country: HUNGARY\n"
 "X-Poedit-SourceCharset: utf-8\n"
-
-#: ../../advertising/IM_flash.pl:1
-#, c-format
-msgid "Your desktop on a USB key"
-msgstr "Az Ön munkaasztala egy USB kulcson"
-
-#: ../../advertising/IM_free09.pl:1
-#, c-format
-msgid "The 100%% open source Mandriva Linux distribution"
-msgstr "A 100%%-ban nyílt forráskódú Mandriva Linux disztribúció"
-
-#: ../../advertising/IM_one09.pl:1
-#, c-format
-msgid "Explore Linux easily with Mandriva One"
-msgstr "A Linux könnyed kipróbálása: Mandriva One"
-
-#: ../../advertising/IM_pwp09.pl:1
-#, c-format
-msgid "A full Mandriva Linux desktop, with support"
-msgstr "Egy teljes Mandriva Linux munkaasztal, támogatással"
-
-#: ../../advertising/IM_range09.pl:1
-#, c-format
-msgid "Mandriva: distributions for everybody's needs"
-msgstr "Mandriva: disztribúciók minden igényre"
 
 #: any.pm:109
 #, c-format
@@ -1009,8 +984,8 @@ msgid "Please choose your keyboard layout."
 msgstr "Válasszon billentyűzetkiosztást."
 
 #: steps_interactive.pm:105
-#, c-format
-msgid "Here is the full list of available keyboards"
+#, fuzzy, c-format
+msgid "Here is the full list of available keyboards:"
 msgstr "Itt található az elérhető billentyűzetek listája"
 
 #: steps_interactive.pm:136
@@ -1035,7 +1010,17 @@ msgstr "Telepítés"
 msgid "Upgrade %s"
 msgstr "Frissítés: %s"
 
-#: steps_interactive.pm:162
+#: steps_interactive.pm:148
+#, c-format
+msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+msgstr "32 bites disztribúcióról 64 bitesre való frissítés nem támogatott"
+
+#: steps_interactive.pm:152
+#, c-format
+msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+msgstr "64 bites disztribúcióról 32 bitesre való frissítés nem támogatott"
+
+#: steps_interactive.pm:171
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Titkosítási kulcs ehhez: %s"
@@ -1571,11 +1556,30 @@ msgid ""
 "Exit"
 msgstr "Kilépés"
 
-#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-#~ msgstr "32 bites disztribúcióról 64 bitesre való frissítés nem támogatott"
+#: ../../advertising/IM_flash.pl:1
+#, c-format
+msgid "Your desktop on a USB key"
+msgstr "Az Ön munkaasztala egy USB kulcson"
 
-#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-#~ msgstr "64 bites disztribúcióról 32 bitesre való frissítés nem támogatott"
+#: ../../advertising/IM_free09.pl:1
+#, c-format
+msgid "The 100%% open source Mandriva Linux distribution"
+msgstr "A 100%%-ban nyílt forráskódú Mandriva Linux disztribúció"
+
+#: ../../advertising/IM_one09.pl:1
+#, c-format
+msgid "Explore Linux easily with Mandriva One"
+msgstr "A Linux könnyed kipróbálása: Mandriva One"
+
+#: ../../advertising/IM_pwp09.pl:1
+#, c-format
+msgid "A full Mandriva Linux desktop, with support"
+msgstr "Egy teljes Mandriva Linux munkaasztal, támogatással"
+
+#: ../../advertising/IM_range09.pl:1
+#, c-format
+msgid "Mandriva: distributions for everybody's needs"
+msgstr "Mandriva: disztribúciók minden igényre"
 
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr ""

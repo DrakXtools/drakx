@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-11 18:46+0200\n"
+"POT-Creation-Date: 2008-09-11 18:48+0200\n"
 "PO-Revision-Date: 2008-09-06 11:39+0100\n"
 "Last-Translator: Zé <ze@mandriva.org>\n"
 "Language-Team: Português <pt@li.org>\n"
@@ -31,31 +31,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
-
-#: ../../advertising/IM_flash.pl:1
-#, c-format
-msgid "Your desktop on a USB key"
-msgstr "O seu ecrã num dispositivo USB"
-
-#: ../../advertising/IM_free09.pl:1
-#, c-format
-msgid "The 100%% open source Mandriva Linux distribution"
-msgstr "A distribuição Mandriva Linux 100%% código livre"
-
-#: ../../advertising/IM_one09.pl:1
-#, c-format
-msgid "Explore Linux easily with Mandriva One"
-msgstr "Explore o Linux facilmente com o Mandriva One"
-
-#: ../../advertising/IM_pwp09.pl:1
-#, c-format
-msgid "A full Mandriva Linux desktop, with support"
-msgstr "Um ecrã Mandriva Linux completo, com suporte"
-
-#: ../../advertising/IM_range09.pl:1
-#, c-format
-msgid "Mandriva: distributions for everybody's needs"
-msgstr "Mandriva: distribuições para as necessidades de todos os utilizadores"
 
 #: any.pm:109
 #, c-format
@@ -1005,8 +980,8 @@ msgid "Please choose your keyboard layout."
 msgstr "Por favor escolha o tipo de teclado."
 
 #: steps_interactive.pm:105
-#, c-format
-msgid "Here is the full list of available keyboards"
+#, fuzzy, c-format
+msgid "Here is the full list of available keyboards:"
 msgstr "Aqui está a lista completa dos teclados disponíveis"
 
 #: steps_interactive.pm:136
@@ -1031,7 +1006,19 @@ msgstr "Instalar"
 msgid "Upgrade %s"
 msgstr "Actualizar %s"
 
-#: steps_interactive.pm:162
+#: steps_interactive.pm:148
+#, c-format
+msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+msgstr ""
+"A actualização de uma distribuição 32bit para uma 64bit não é suportada"
+
+#: steps_interactive.pm:152
+#, c-format
+msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+msgstr ""
+"A actualização de uma distribuição 64bit para uma 32bit não é suportada"
+
+#: steps_interactive.pm:171
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Senha de encriptação para %s"
@@ -1564,13 +1551,30 @@ msgid ""
 "Exit"
 msgstr "Sair"
 
-#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-#~ msgstr ""
-#~ "A actualização de uma distribuição 32bit para uma 64bit não é suportada"
+#: ../../advertising/IM_flash.pl:1
+#, c-format
+msgid "Your desktop on a USB key"
+msgstr "O seu ecrã num dispositivo USB"
 
-#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-#~ msgstr ""
-#~ "A actualização de uma distribuição 64bit para uma 32bit não é suportada"
+#: ../../advertising/IM_free09.pl:1
+#, c-format
+msgid "The 100%% open source Mandriva Linux distribution"
+msgstr "A distribuição Mandriva Linux 100%% código livre"
+
+#: ../../advertising/IM_one09.pl:1
+#, c-format
+msgid "Explore Linux easily with Mandriva One"
+msgstr "Explore o Linux facilmente com o Mandriva One"
+
+#: ../../advertising/IM_pwp09.pl:1
+#, c-format
+msgid "A full Mandriva Linux desktop, with support"
+msgstr "Um ecrã Mandriva Linux completo, com suporte"
+
+#: ../../advertising/IM_range09.pl:1
+#, c-format
+msgid "Mandriva: distributions for everybody's needs"
+msgstr "Mandriva: distribuições para as necessidades de todos os utilizadores"
 
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr ""
