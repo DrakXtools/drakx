@@ -261,6 +261,7 @@ sub reallyChooseDesktop {
                        gtkpack_(Gtk2::VBox->new,
                                 0, N("Here's a preview of the '%s' desktop.", $val->[1]),
                                 1, gtknew('Image', file => "desktop-$val->[0]-big"),
+                                0, Gtk2::HSeparator->new,
                                 0, gtkpack(create_hbox('end'),
                                            gtknew('Button', text => N("Close"), clicked => sub { Gtk2->main_quit })
                                        ),
