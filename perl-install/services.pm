@@ -124,7 +124,7 @@ sub ask_ {
 			 N("Internet") => [ qw(httpd boa tux roxen ftp pftp tftp proftpd wu-ftpd pure-ftpdipsec proftpd-xinetd
                                                ipchains iptables ip6tables ipvsadm isdn4linux ibod jabber jabber-icq adsl squid
                                                portsentry prelude nessusd junkbuster radvd cddbp ippl iptoip jail.init) ],
-			 N("File sharing") => [ qw(nfs nfslock smb nettalk netfs mcserv autofs amd
+			 N("File sharing") => [ qw(nfs-common nfs-server nfslock smb nettalk netfs mcserv autofs amd
                                                    venus.init auth2.init codasrv.init update.init swat) ],
 			 N("System") => [ qw(usb usbd pcmcia irda xinetd inetd kudzu harddrake apmd sound network xfs
                                              alsa functions halt kheader killall mandrake_everytime mandrake_firstime
