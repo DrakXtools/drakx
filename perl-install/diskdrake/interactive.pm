@@ -1070,7 +1070,7 @@ sub write_partitions {
     $hd->{isDirty} or return 1;
     isLVM($hd) and return 1;
 
-    $in->ask_okcancel(N("Read carefully"), N("Partition table of drive %s is going to be written to disk!", $hd->{device}), 1) or return;
+    $in->ask_okcancel(N("Read carefully"), N("Partition table of drive %s is going to be written to disk", $hd->{device}), 1) or return;
     partition_table::write($hd) if !$::testing;
     check_rebootNeeded($in, $hd) if !$b_skip_check_rebootNeeded;
     # fix resizing's failures due to udev's race when writing the partition table
