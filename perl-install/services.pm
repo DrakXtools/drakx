@@ -128,7 +128,7 @@ sub ask_ {
                                                    venus.init auth2.init codasrv.init update.init swat) ],
 			 N("System") => [ qw(usb usbd pcmcia irda xinetd inetd kudzu harddrake apmd sound network xfs
                                              alsa functions halt kheader killall mandrake_everytime mandrake_firstime
-                                             random rawdevices single keytable syslog crond medusa-init portmap acon
+                                             random rawdevices single keytable syslog crond medusa-init portmap rpcbind acon
                                              anacron atd gpm psacct wine acpid numlock jserver sensors mosix bpowerd bpowerfail
                                              fcron powertweak.init ups syslog-ng cvs apcupsd) ],
 			 N("Remote Administration") => [ qw(sshd telnetd telnet rsh rlogin rexec webmin cfd heartbeat ldirectord
