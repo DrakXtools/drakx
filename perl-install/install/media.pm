@@ -419,7 +419,7 @@ sub getAndSaveFile_progress_raw {
 sub print_with_progress {
     my ($in_wait, $msg, $size, $in, $out) = @_;
 
-    my ($_wait, $wait_message) = $in_wait->wait_message_with_progress_bar(N("Please wait"));
+    my ($_wait, $wait_message) = $in_wait->wait_message_with_progress_bar(N("Please wait, retrieving file"));
     $wait_message->($msg);
 
     my $current = 0;
