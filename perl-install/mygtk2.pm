@@ -146,7 +146,6 @@ sub _gtk {
 
 sub _gtk__Install_Button {
     my ($w, $opts, $class) = @_;
-    $opts->{widget_name} = 'Banner';
     $opts->{child} = gtknew('HBox', spacing => 5, 
                              children_tight => [
                                  # FIXME: not RTL compliant (lang::text_direction_rtl() ? ...)
