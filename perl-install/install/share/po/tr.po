@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-02 16:49+0200\n"
+"POT-Creation-Date: 2008-09-11 18:46+0200\n"
 "PO-Revision-Date: 2008-04-17 23:52+0300\n"
 "Last-Translator: Atilla ÖNTAŞ <atilla_ontas@hotmail.com>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
@@ -24,6 +24,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=1; plural=0;\n"
 "X-Generator: KBabel 1.11.4\n"
+
+#: ../../advertising/IM_flash.pl:1
+#, c-format
+msgid "Your desktop on a USB key"
+msgstr "Masaüstünüz bir USB anahtarı üzerinde"
+
+#: ../../advertising/IM_free09.pl:1
+#, c-format
+msgid "The 100%% open source Mandriva Linux distribution"
+msgstr "100%% açık kaynak Mandriva linux dağıtımı"
+
+#: ../../advertising/IM_one09.pl:1
+#, c-format
+msgid "Explore Linux easily with Mandriva One"
+msgstr "Linux'u Mandriva One ile kolayca keşfedin"
+
+#: ../../advertising/IM_pwp09.pl:1
+#, c-format
+msgid "A full Mandriva Linux desktop, with support"
+msgstr "Tam bir Mandriva Linux masaüstü, destek dahil"
+
+#: ../../advertising/IM_range09.pl:1
+#, c-format
+msgid "Mandriva: distributions for everybody's needs"
+msgstr "Mandriva: herkesin ihtiyacına göre dağıtımlar"
 
 #: any.pm:109
 #, c-format
@@ -958,17 +983,17 @@ msgstr "CD'lerin tamamını kopyala"
 msgid "An error occurred"
 msgstr "Bir hata oluştu"
 
-#: steps_interactive.pm:98
-#, c-format
-msgid "Here is the full list of available keyboards"
-msgstr "Mevcut tüm klavye düzenlerinin listesi"
-
 #: steps_interactive.pm:102
 #, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Lütfen klavye düzeninizi seçiniz."
 
-#: steps_interactive.pm:135
+#: steps_interactive.pm:105
+#, c-format
+msgid "Here is the full list of available keyboards"
+msgstr "Mevcut tüm klavye düzenlerinin listesi"
+
+#: steps_interactive.pm:136
 #, c-format
 msgid "Install/Upgrade"
 msgstr "Kur/Yükselt"
@@ -987,22 +1012,12 @@ msgstr ""
 "_: This is a noun:\n"
 "Kurulum"
 
-#: steps_interactive.pm:140
+#: steps_interactive.pm:144
 #, c-format
 msgid "Upgrade %s"
 msgstr "%s Yükselt"
 
-#: steps_interactive.pm:144
-#, c-format
-msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-msgstr "Bir 32 bit'ten 64 bit dağıtıma yükseltme desteklenmemektedir."
-
-#: steps_interactive.pm:148
-#, c-format
-msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-msgstr "Bir 64 bit'ten 32 bit dağıtıma yükseltme desteklenmemektedir."
-
-#: steps_interactive.pm:167
+#: steps_interactive.pm:162
 #, c-format
 msgid "Encryption key for %s"
 msgstr "%s için Parola"
@@ -1253,19 +1268,7 @@ msgstr ""
 "\n"
 "Güncellemeleri kurmak istiyor musunuz ?"
 
-#: steps_interactive.pm:768
-#, c-format
-msgid "Contacting the mirror to get the list of available packages..."
-msgstr ""
-"Güncelleme paketlerinin listesini almak için yansı adresine bağlantı "
-"kuruluyor"
-
-#: steps_interactive.pm:774
-#, c-format
-msgid "Unable to contact mirror %s"
-msgstr "%s yansısı ile iletişim kurulamıyor"
-
-#: steps_interactive.pm:879
+#: steps_interactive.pm:849
 #, c-format
 msgid "%s on %s"
 msgstr "%s üstündeki %s"
@@ -1402,41 +1405,6 @@ msgstr "Tebrikler"
 #, c-format
 msgid "Reboot"
 msgstr "Yeniden başlat"
-
-#: steps_interactive.pm:1151 steps_interactive.pm:1152
-#, c-format
-msgid "Generate auto install floppy"
-msgstr "Otomatik kurulum disketi oluştur"
-
-#: steps_interactive.pm:1153
-#, c-format
-msgid ""
-"The auto install can be fully automated if wanted,\n"
-"in that case it will take over the hard drive!!\n"
-"(this is meant for installing on another box).\n"
-"\n"
-"You may prefer to replay the installation.\n"
-msgstr ""
-"Tam otomatik bir kurulum yapılabilir, ancak\n"
-"bu durumda sabit diskiniz tamamen ele geçirilebilir!!\n"
-"(Yani kurulum programı bütün diski kullanmaya kalkabilir).\n"
-"\n"
-"Etkileşimli bir kurulumu da tercih edebilirsiniz.\n"
-
-#: steps_interactive.pm:1158
-#, c-format
-msgid "Replay"
-msgstr "Etkileşimli"
-
-#: steps_interactive.pm:1158
-#, c-format
-msgid "Automated"
-msgstr "Otomatik"
-
-#: steps_interactive.pm:1161
-#, c-format
-msgid "Save packages selection"
-msgstr "Paket seçimlerini Kaydet"
 
 #. -PO: please keep the following messages very short: they must fit in the left list of the installer!!!
 #: steps_list.pm:16
@@ -1579,30 +1547,44 @@ msgid ""
 "Exit"
 msgstr "Çıkış"
 
-#: ../../advertising/IM_flash.pl:1
-#, c-format
-msgid "Your desktop on a USB key"
-msgstr "Masaüstünüz bir USB anahtarı üzerinde"
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr "Bir 32 bit'ten 64 bit dağıtıma yükseltme desteklenmemektedir."
 
-#: ../../advertising/IM_free08S.pl:1
-#, c-format
-msgid "The 100%% open source Mandriva Linux distribution"
-msgstr "100%% açık kaynak Mandriva linux dağıtımı"
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr "Bir 64 bit'ten 32 bit dağıtıma yükseltme desteklenmemektedir."
 
-#: ../../advertising/IM_one08S.pl:1
-#, c-format
-msgid "Explore Linux easily with Mandriva One"
-msgstr "Linux'u Mandriva One ile kolayca keşfedin"
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr ""
+#~ "Güncelleme paketlerinin listesini almak için yansı adresine bağlantı "
+#~ "kuruluyor"
 
-#: ../../advertising/IM_pwp08S.pl:1
-#, c-format
-msgid "A full Mandriva Linux desktop, with support"
-msgstr "Tam bir Mandriva Linux masaüstü, destek dahil"
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "%s yansısı ile iletişim kurulamıyor"
 
-#: ../../advertising/IM_range08S.pl:1
-#, c-format
-msgid "Mandriva: distributions for everybody's needs"
-msgstr "Mandriva: herkesin ihtiyacına göre dağıtımlar"
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Otomatik kurulum disketi oluştur"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Tam otomatik bir kurulum yapılabilir, ancak\n"
+#~ "bu durumda sabit diskiniz tamamen ele geçirilebilir!!\n"
+#~ "(Yani kurulum programı bütün diski kullanmaya kalkabilir).\n"
+#~ "\n"
+#~ "Etkileşimli bir kurulumu da tercih edebilirsiniz.\n"
+
+#~ msgid "Replay"
+#~ msgstr "Etkileşimli"
+
+#~ msgid "Automated"
+#~ msgstr "Otomatik"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Paket seçimlerini Kaydet"
 
 #~ msgid "Do you want to use aboot?"
 #~ msgstr "aboot uygulamasını kullanmak istiyor musunuz?"

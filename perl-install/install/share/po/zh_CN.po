@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 2008 Spring\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-02 16:49+0200\n"
+"POT-Creation-Date: 2008-09-11 18:46+0200\n"
 "PO-Revision-Date: 2008-03-22 13:46+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
@@ -16,6 +16,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../../advertising/IM_flash.pl:1
+#, c-format
+msgid "Your desktop on a USB key"
+msgstr "U 盘上的桌面"
+
+#: ../../advertising/IM_free09.pl:1
+#, c-format
+msgid "The 100%% open source Mandriva Linux distribution"
+msgstr "100%% 开放源代码的 Mandriva Linux 发行版"
+
+#: ../../advertising/IM_one09.pl:1
+#, c-format
+msgid "Explore Linux easily with Mandriva One"
+msgstr "用 Mandriva One 轻松探索 Linux"
+
+#: ../../advertising/IM_pwp09.pl:1
+#, c-format
+msgid "A full Mandriva Linux desktop, with support"
+msgstr "Mandriva Linux 桌面旗舰产品，附带完善的售后服务支持"
+
+#: ../../advertising/IM_range09.pl:1
+#, c-format
+msgid "Mandriva: distributions for everybody's needs"
+msgstr "Mandriva 在手，应用无忧"
 
 #: any.pm:109
 #, c-format
@@ -937,17 +962,17 @@ msgstr "复制整张光盘"
 msgid "An error occurred"
 msgstr "发生了一个错误"
 
-#: steps_interactive.pm:98
-#, c-format
-msgid "Here is the full list of available keyboards"
-msgstr "在此列出了可用的全部键盘"
-
 #: steps_interactive.pm:102
 #, c-format
 msgid "Please choose your keyboard layout."
 msgstr "请选择您使用的键盘布局。"
 
-#: steps_interactive.pm:135
+#: steps_interactive.pm:105
+#, c-format
+msgid "Here is the full list of available keyboards"
+msgstr "在此列出了可用的全部键盘"
+
+#: steps_interactive.pm:136
 #, c-format
 msgid "Install/Upgrade"
 msgstr "安装/升级"
@@ -964,22 +989,12 @@ msgid ""
 "Install"
 msgstr "安装"
 
-#: steps_interactive.pm:140
+#: steps_interactive.pm:144
 #, c-format
 msgid "Upgrade %s"
 msgstr "升级 %s"
 
-#: steps_interactive.pm:144
-#, c-format
-msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-msgstr "不支持从 32 位发行版升级到 64 位发行版"
-
-#: steps_interactive.pm:148
-#, c-format
-msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-msgstr "不支持从 64 位发行版升级到 32 位发行版"
-
-#: steps_interactive.pm:167
+#: steps_interactive.pm:162
 #, c-format
 msgid "Encryption key for %s"
 msgstr "%s 的加密密钥"
@@ -1225,17 +1240,7 @@ msgstr ""
 "\n"
 "您是否要安装升级包?"
 
-#: steps_interactive.pm:768
-#, c-format
-msgid "Contacting the mirror to get the list of available packages..."
-msgstr "正在连接镜像网站以取得可供安装的软件包的列表..."
-
-#: steps_interactive.pm:774
-#, c-format
-msgid "Unable to contact mirror %s"
-msgstr "无法连接镜像 %s"
-
-#: steps_interactive.pm:879
+#: steps_interactive.pm:849
 #, c-format
 msgid "%s on %s"
 msgstr "位于 %2$s 上的 %1$s"
@@ -1367,41 +1372,6 @@ msgstr "恭喜"
 #, c-format
 msgid "Reboot"
 msgstr "重新启动"
-
-#: steps_interactive.pm:1151 steps_interactive.pm:1152
-#, c-format
-msgid "Generate auto install floppy"
-msgstr "生成自动安装软盘"
-
-#: steps_interactive.pm:1153
-#, c-format
-msgid ""
-"The auto install can be fully automated if wanted,\n"
-"in that case it will take over the hard drive!!\n"
-"(this is meant for installing on another box).\n"
-"\n"
-"You may prefer to replay the installation.\n"
-msgstr ""
-"如果需要的话, 自动安装可以完全自动执行。\n"
-"但此时, 安装程序将会接管硬盘！！\n"
-"(只对在另外的计算机上安装而言)。\n"
-"\n"
-"您可能愿意重现安装过程。\n"
-
-#: steps_interactive.pm:1158
-#, c-format
-msgid "Replay"
-msgstr "重现"
-
-#: steps_interactive.pm:1158
-#, c-format
-msgid "Automated"
-msgstr "自动"
-
-#: steps_interactive.pm:1161
-#, c-format
-msgid "Save packages selection"
-msgstr "保存软件包选择"
 
 #. -PO: please keep the following messages very short: they must fit in the left list of the installer!!!
 #: steps_list.pm:16
@@ -1542,27 +1512,39 @@ msgid ""
 "Exit"
 msgstr "退出"
 
-#: ../../advertising/IM_flash.pl:1
-#, c-format
-msgid "Your desktop on a USB key"
-msgstr "U 盘上的桌面"
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr "不支持从 32 位发行版升级到 64 位发行版"
 
-#: ../../advertising/IM_free08S.pl:1
-#, c-format
-msgid "The 100%% open source Mandriva Linux distribution"
-msgstr "100%% 开放源代码的 Mandriva Linux 发行版"
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr "不支持从 64 位发行版升级到 32 位发行版"
 
-#: ../../advertising/IM_one08S.pl:1
-#, c-format
-msgid "Explore Linux easily with Mandriva One"
-msgstr "用 Mandriva One 轻松探索 Linux"
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "正在连接镜像网站以取得可供安装的软件包的列表..."
 
-#: ../../advertising/IM_pwp08S.pl:1
-#, c-format
-msgid "A full Mandriva Linux desktop, with support"
-msgstr "Mandriva Linux 桌面旗舰产品，附带完善的售后服务支持"
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "无法连接镜像 %s"
 
-#: ../../advertising/IM_range08S.pl:1
-#, c-format
-msgid "Mandriva: distributions for everybody's needs"
-msgstr "Mandriva 在手，应用无忧"
+#~ msgid "Generate auto install floppy"
+#~ msgstr "生成自动安装软盘"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "如果需要的话, 自动安装可以完全自动执行。\n"
+#~ "但此时, 安装程序将会接管硬盘！！\n"
+#~ "(只对在另外的计算机上安装而言)。\n"
+#~ "\n"
+#~ "您可能愿意重现安装过程。\n"
+
+#~ msgid "Replay"
+#~ msgstr "重现"
+
+#~ msgid "Automated"
+#~ msgstr "自动"
+
+#~ msgid "Save packages selection"
+#~ msgstr "保存软件包选择"

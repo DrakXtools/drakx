@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-hi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-02 16:49+0200\n"
+"POT-Creation-Date: 2008-09-11 18:46+0200\n"
 "PO-Revision-Date: 2004-04-04 21:54+0530\n"
 "Last-Translator: धनञ्जय शर्मा (Dhananjaya Sharma) <dysxhi@yahoo.co.in>\n"
 "Language-Team: हिन्दी (Hindi) <dysxhi@yahoo.co.in>\n"
@@ -15,6 +15,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: ../../advertising/IM_flash.pl:1
+#, c-format
+msgid "Your desktop on a USB key"
+msgstr ""
+
+#: ../../advertising/IM_free09.pl:1
+#, c-format
+msgid "The 100%% open source Mandriva Linux distribution"
+msgstr ""
+
+#: ../../advertising/IM_one09.pl:1
+#, c-format
+msgid "Explore Linux easily with Mandriva One"
+msgstr ""
+
+#: ../../advertising/IM_pwp09.pl:1
+#, c-format
+msgid "A full Mandriva Linux desktop, with support"
+msgstr ""
+
+#: ../../advertising/IM_range09.pl:1
+#, c-format
+msgid "Mandriva: distributions for everybody's needs"
+msgstr ""
 
 #: any.pm:109
 #, fuzzy, c-format
@@ -940,17 +965,17 @@ msgstr ""
 msgid "An error occurred"
 msgstr "एक त्रुटि हो गयी है"
 
-#: steps_interactive.pm:98
-#, fuzzy, c-format
-msgid "Here is the full list of available keyboards"
-msgstr "यह है उपलब्ध देशों की सम्पूर्ण सूची"
-
 #: steps_interactive.pm:102
 #, c-format
 msgid "Please choose your keyboard layout."
 msgstr "कृपया अपने की-बोर्ड खाका का चयन करें ।"
 
-#: steps_interactive.pm:135
+#: steps_interactive.pm:105
+#, fuzzy, c-format
+msgid "Here is the full list of available keyboards"
+msgstr "यह है उपलब्ध देशों की सम्पूर्ण सूची"
+
+#: steps_interactive.pm:136
 #, c-format
 msgid "Install/Upgrade"
 msgstr "संसाधन/उन्नयन"
@@ -967,22 +992,12 @@ msgid ""
 "Install"
 msgstr "संसाधन"
 
-#: steps_interactive.pm:140
+#: steps_interactive.pm:144
 #, c-format
 msgid "Upgrade %s"
 msgstr "उन्नयन %s"
 
-#: steps_interactive.pm:144
-#, c-format
-msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-msgstr ""
-
-#: steps_interactive.pm:148
-#, c-format
-msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-msgstr ""
-
-#: steps_interactive.pm:167
+#: steps_interactive.pm:162
 #, c-format
 msgid "Encryption key for %s"
 msgstr "%s के लिए गूढ़लिखित कुँजी"
@@ -1228,17 +1243,7 @@ msgstr ""
 "\n"
 "क्या आप इन अपडेटों को संसाधित करना चाहते है ?"
 
-#: steps_interactive.pm:768
-#, c-format
-msgid "Contacting the mirror to get the list of available packages..."
-msgstr "उपलब्ध पैकेजों की सूची प्राप्त करने के लिए मिरर से सम्पर्क स्थापित किया जा रहा है..."
-
-#: steps_interactive.pm:774
-#, c-format
-msgid "Unable to contact mirror %s"
-msgstr "%s मिरर प्रणाली से संबंध स्थापित करने में असमर्थ"
-
-#: steps_interactive.pm:879
+#: steps_interactive.pm:849
 #, c-format
 msgid "%s on %s"
 msgstr "%s पर %s"
@@ -1372,41 +1377,6 @@ msgstr "बधाई हो"
 #, c-format
 msgid "Reboot"
 msgstr "रीबूट"
-
-#: steps_interactive.pm:1151 steps_interactive.pm:1152
-#, c-format
-msgid "Generate auto install floppy"
-msgstr "स्वतः संसाधान फ़्लापी का निर्माण किया जा रहा है"
-
-#: steps_interactive.pm:1153
-#, c-format
-msgid ""
-"The auto install can be fully automated if wanted,\n"
-"in that case it will take over the hard drive!!\n"
-"(this is meant for installing on another box).\n"
-"\n"
-"You may prefer to replay the installation.\n"
-msgstr ""
-"यदि आवश्यकता हो तो स्वतः संसाधन को पूर्णतया स्वचालित बनाया जा सकता है,\n"
-"ऐसी अवस्था में यह हार्ड ड्राइव पर पूर्ण अधिकार कर लेगा !!\n"
-"(यह समान संसाधन को अन्य मशीन पर संसाधित करने के लिए होता है)।\n"
-"\n"
-"आप हो सकता है कि संसाधन को रीप्ले करन चाहते हो।\n"
-
-#: steps_interactive.pm:1158
-#, c-format
-msgid "Replay"
-msgstr "पुनः चलाना"
-
-#: steps_interactive.pm:1158
-#, c-format
-msgid "Automated"
-msgstr "स्वचालित"
-
-#: steps_interactive.pm:1161
-#, c-format
-msgid "Save packages selection"
-msgstr "पैकेजों के चयन को सुरक्षित करें"
 
 #. -PO: please keep the following messages very short: they must fit in the left list of the installer!!!
 #: steps_list.pm:16
@@ -1547,30 +1517,37 @@ msgid ""
 "Exit"
 msgstr "निकास"
 
-#: ../../advertising/IM_flash.pl:1
-#, c-format
-msgid "Your desktop on a USB key"
-msgstr ""
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr ""
+#~ "उपलब्ध पैकेजों की सूची प्राप्त करने के लिए मिरर से सम्पर्क स्थापित किया जा रहा है..."
 
-#: ../../advertising/IM_free08S.pl:1
-#, c-format
-msgid "The 100%% open source Mandriva Linux distribution"
-msgstr ""
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "%s मिरर प्रणाली से संबंध स्थापित करने में असमर्थ"
 
-#: ../../advertising/IM_one08S.pl:1
-#, c-format
-msgid "Explore Linux easily with Mandriva One"
-msgstr ""
+#~ msgid "Generate auto install floppy"
+#~ msgstr "स्वतः संसाधान फ़्लापी का निर्माण किया जा रहा है"
 
-#: ../../advertising/IM_pwp08S.pl:1
-#, c-format
-msgid "A full Mandriva Linux desktop, with support"
-msgstr ""
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "यदि आवश्यकता हो तो स्वतः संसाधन को पूर्णतया स्वचालित बनाया जा सकता है,\n"
+#~ "ऐसी अवस्था में यह हार्ड ड्राइव पर पूर्ण अधिकार कर लेगा !!\n"
+#~ "(यह समान संसाधन को अन्य मशीन पर संसाधित करने के लिए होता है)।\n"
+#~ "\n"
+#~ "आप हो सकता है कि संसाधन को रीप्ले करन चाहते हो।\n"
 
-#: ../../advertising/IM_range08S.pl:1
-#, c-format
-msgid "Mandriva: distributions for everybody's needs"
-msgstr ""
+#~ msgid "Replay"
+#~ msgstr "पुनः चलाना"
+
+#~ msgid "Automated"
+#~ msgstr "स्वचालित"
+
+#~ msgid "Save packages selection"
+#~ msgstr "पैकेजों के चयन को सुरक्षित करें"
 
 #~ msgid "Do you want to use aboot?"
 #~ msgstr "क्या आप ऐबूट का का उपयोग करना चाहते है?"

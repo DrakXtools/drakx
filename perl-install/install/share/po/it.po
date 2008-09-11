@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-02 16:49+0200\n"
+"POT-Creation-Date: 2008-09-11 18:46+0200\n"
 "PO-Revision-Date: 2008-03-24 21:35+0100\n"
 "Last-Translator: Andrea Celli <andrea.celli@libero.it>\n"
 "Language-Team: Italian <timl@freelists.org>\n"
@@ -20,6 +20,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+
+#: ../../advertising/IM_flash.pl:1
+#, c-format
+msgid "Your desktop on a USB key"
+msgstr "Il tuo desktop su una chiave USB"
+
+#: ../../advertising/IM_free09.pl:1
+#, c-format
+msgid "The 100%% open source Mandriva Linux distribution"
+msgstr "Mandriva Linux, la distribuzione 100%% open source"
+
+#: ../../advertising/IM_one09.pl:1
+#, c-format
+msgid "Explore Linux easily with Mandriva One"
+msgstr "Prova Linux senza fatica con Mandriva One"
+
+#: ../../advertising/IM_pwp09.pl:1
+#, c-format
+msgid "A full Mandriva Linux desktop, with support"
+msgstr "Un sistema Mandriva Linux completo, con supporto"
+
+#: ../../advertising/IM_range09.pl:1
+#, c-format
+msgid "Mandriva: distributions for everybody's needs"
+msgstr "Mandriva: le distribuzioni per le esigenze di ognuno"
 
 #: any.pm:109
 #, c-format
@@ -962,17 +987,17 @@ msgstr "Copia tutti i CD"
 msgid "An error occurred"
 msgstr "Si è verificato un errore"
 
-#: steps_interactive.pm:98
-#, c-format
-msgid "Here is the full list of available keyboards"
-msgstr "Ecco la lista completa delle tastiere disponibili"
-
 #: steps_interactive.pm:102
 #, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Scegli la mappa della tastiera."
 
-#: steps_interactive.pm:135
+#: steps_interactive.pm:105
+#, c-format
+msgid "Here is the full list of available keyboards"
+msgstr "Ecco la lista completa delle tastiere disponibili"
+
+#: steps_interactive.pm:136
 #, c-format
 msgid "Install/Upgrade"
 msgstr "Installazione/Aggiornamento"
@@ -989,26 +1014,12 @@ msgid ""
 "Install"
 msgstr "Installazione"
 
-#: steps_interactive.pm:140
+#: steps_interactive.pm:144
 #, c-format
 msgid "Upgrade %s"
 msgstr "Aggiornamento di %s"
 
-#: steps_interactive.pm:144
-#, c-format
-msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-msgstr ""
-"Non è supportato il passaggio da una versione a 32bit ad una più nuova a "
-"64bit"
-
-#: steps_interactive.pm:148
-#, c-format
-msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-msgstr ""
-"Non è supportato il passaggio da una versione a 64bit ad una più nuova a "
-"32bit"
-
-#: steps_interactive.pm:167
+#: steps_interactive.pm:162
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Chiave di codifica per %s"
@@ -1257,18 +1268,7 @@ msgstr ""
 "\n"
 "Vuoi installare gli aggiornamenti?"
 
-#: steps_interactive.pm:768
-#, c-format
-msgid "Contacting the mirror to get the list of available packages..."
-msgstr ""
-"Connessione al mirror per ricevere l'elenco dei pacchetti disponibili..."
-
-#: steps_interactive.pm:774
-#, c-format
-msgid "Unable to contact mirror %s"
-msgstr "Non si riesce a contattare il mirror %s"
-
-#: steps_interactive.pm:879
+#: steps_interactive.pm:849
 #, c-format
 msgid "%s on %s"
 msgstr "%s in %s"
@@ -1407,41 +1407,6 @@ msgstr "Congratulazioni"
 #, c-format
 msgid "Reboot"
 msgstr "Riavvia"
-
-#: steps_interactive.pm:1151 steps_interactive.pm:1152
-#, c-format
-msgid "Generate auto install floppy"
-msgstr "Crea il floppy di installazione automatica"
-
-#: steps_interactive.pm:1153
-#, c-format
-msgid ""
-"The auto install can be fully automated if wanted,\n"
-"in that case it will take over the hard drive!!\n"
-"(this is meant for installing on another box).\n"
-"\n"
-"You may prefer to replay the installation.\n"
-msgstr ""
-"Se vuoi, l'installazione automatica può essere del tutto automatizzata,\n"
-"ma in tal caso il programma partizionerà automaticamente il disco!!\n"
-"(questa opzione è pensata per l'installazione su un'altra macchina).\n"
-"\n"
-"Probabilmente preferisci ripetere l'installazione.\n"
-
-#: steps_interactive.pm:1158
-#, c-format
-msgid "Replay"
-msgstr "Ripeti"
-
-#: steps_interactive.pm:1158
-#, c-format
-msgid "Automated"
-msgstr "Automatizzata"
-
-#: steps_interactive.pm:1161
-#, c-format
-msgid "Save packages selection"
-msgstr "Salva scelta pacchetti"
 
 #. -PO: please keep the following messages very short: they must fit in the left list of the installer!!!
 #: steps_list.pm:16
@@ -1582,30 +1547,47 @@ msgid ""
 "Exit"
 msgstr "Esci"
 
-#: ../../advertising/IM_flash.pl:1
-#, c-format
-msgid "Your desktop on a USB key"
-msgstr "Il tuo desktop su una chiave USB"
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr ""
+#~ "Non è supportato il passaggio da una versione a 32bit ad una più nuova a "
+#~ "64bit"
 
-#: ../../advertising/IM_free08S.pl:1
-#, c-format
-msgid "The 100%% open source Mandriva Linux distribution"
-msgstr "Mandriva Linux, la distribuzione 100%% open source"
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr ""
+#~ "Non è supportato il passaggio da una versione a 64bit ad una più nuova a "
+#~ "32bit"
 
-#: ../../advertising/IM_one08S.pl:1
-#, c-format
-msgid "Explore Linux easily with Mandriva One"
-msgstr "Prova Linux senza fatica con Mandriva One"
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr ""
+#~ "Connessione al mirror per ricevere l'elenco dei pacchetti disponibili..."
 
-#: ../../advertising/IM_pwp08S.pl:1
-#, c-format
-msgid "A full Mandriva Linux desktop, with support"
-msgstr "Un sistema Mandriva Linux completo, con supporto"
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Non si riesce a contattare il mirror %s"
 
-#: ../../advertising/IM_range08S.pl:1
-#, c-format
-msgid "Mandriva: distributions for everybody's needs"
-msgstr "Mandriva: le distribuzioni per le esigenze di ognuno"
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Crea il floppy di installazione automatica"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Se vuoi, l'installazione automatica può essere del tutto automatizzata,\n"
+#~ "ma in tal caso il programma partizionerà automaticamente il disco!!\n"
+#~ "(questa opzione è pensata per l'installazione su un'altra macchina).\n"
+#~ "\n"
+#~ "Probabilmente preferisci ripetere l'installazione.\n"
+
+#~ msgid "Replay"
+#~ msgstr "Ripeti"
+
+#~ msgid "Automated"
+#~ msgstr "Automatizzata"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Salva scelta pacchetti"
 
 #~ msgid "Do you want to use aboot?"
 #~ msgstr "Vuoi usare aboot?"

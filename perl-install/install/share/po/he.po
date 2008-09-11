@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-02 16:49+0200\n"
+"POT-Creation-Date: 2008-09-11 18:46+0200\n"
 "PO-Revision-Date: 2008-03-22 16:10+0200\n"
 "Last-Translator: Dotan Kamber <kamberd@yahoo.com>\n"
 "Language-Team: Hebrew\n"
@@ -23,6 +23,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: KBabel 1.11.4\n"
+
+#: ../../advertising/IM_flash.pl:1
+#, c-format
+msgid "Your desktop on a USB key"
+msgstr "שולחן העבודה שלך במפתח USB"
+
+#: ../../advertising/IM_free09.pl:1
+#, c-format
+msgid "The 100%% open source Mandriva Linux distribution"
+msgstr "הפצת מנדריבה לינוקס שהיא 100%% קוד פתוח"
+
+#: ../../advertising/IM_one09.pl:1
+#, c-format
+msgid "Explore Linux easily with Mandriva One"
+msgstr "בדוק את לינוקס בקלות עם מנדריבה One"
+
+#: ../../advertising/IM_pwp09.pl:1
+#, c-format
+msgid "A full Mandriva Linux desktop, with support"
+msgstr "שולחן עבודה מלא של מנדריבה לינוקס, עם תמיכה"
+
+#: ../../advertising/IM_range09.pl:1
+#, c-format
+msgid "Mandriva: distributions for everybody's needs"
+msgstr "מנדריבה: הפצות לצרכים של כל אחד"
 
 #: any.pm:109
 #, c-format
@@ -949,17 +974,17 @@ msgstr "העתקת תקליטורים שלמים"
 msgid "An error occurred"
 msgstr "חלה שגיאה"
 
-#: steps_interactive.pm:98
-#, c-format
-msgid "Here is the full list of available keyboards"
-msgstr "להלן הרשימה המלאה של המדפסות הזמינות"
-
 #: steps_interactive.pm:102
 #, c-format
 msgid "Please choose your keyboard layout."
 msgstr "בשלב זה עליך להגדיר את פרישת המקלדת שלך"
 
-#: steps_interactive.pm:135
+#: steps_interactive.pm:105
+#, c-format
+msgid "Here is the full list of available keyboards"
+msgstr "להלן הרשימה המלאה של המדפסות הזמינות"
+
+#: steps_interactive.pm:136
 #, c-format
 msgid "Install/Upgrade"
 msgstr "התקנה/עדכון"
@@ -976,22 +1001,12 @@ msgid ""
 "Install"
 msgstr "התקנה"
 
-#: steps_interactive.pm:140
+#: steps_interactive.pm:144
 #, c-format
 msgid "Upgrade %s"
 msgstr "שידרוג %s"
 
-#: steps_interactive.pm:144
-#, c-format
-msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-msgstr "שדרוג מהפצת 32ביט להפצת 64ביט אינו נתמך"
-
-#: steps_interactive.pm:148
-#, c-format
-msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-msgstr "שרוג מהפצת 64ביט להפצת 32 ביט אינו נתמך"
-
-#: steps_interactive.pm:167
+#: steps_interactive.pm:162
 #, c-format
 msgid "Encryption key for %s"
 msgstr "מפתח הצפנה עבור %s"
@@ -1236,17 +1251,7 @@ msgstr ""
 "להורדת חבילות אלה נדרש חיבור אינטרנט עובד. האם ברצונך לעדכן את המערכת בשלב "
 "זה ?"
 
-#: steps_interactive.pm:768
-#, c-format
-msgid "Contacting the mirror to get the list of available packages..."
-msgstr "מתחבר לאתר המראה כדי לקבל את רשימת החבילות הזמינות..."
-
-#: steps_interactive.pm:774
-#, c-format
-msgid "Unable to contact mirror %s"
-msgstr "לא יכול להתחבר לאתר המראה  %s"
-
-#: steps_interactive.pm:879
+#: steps_interactive.pm:849
 #, c-format
 msgid "%s on %s"
 msgstr "%s על %s"
@@ -1380,41 +1385,6 @@ msgstr "ברכותינו!"
 #, c-format
 msgid "Reboot"
 msgstr "הפעלה מחדש"
-
-#: steps_interactive.pm:1151 steps_interactive.pm:1152
-#, c-format
-msgid "Generate auto install floppy"
-msgstr "בניית תקליטון הפעלה אוטומטית"
-
-#: steps_interactive.pm:1153
-#, c-format
-msgid ""
-"The auto install can be fully automated if wanted,\n"
-"in that case it will take over the hard drive!!\n"
-"(this is meant for installing on another box).\n"
-"\n"
-"You may prefer to replay the installation.\n"
-msgstr ""
-"יש באפשרותך לבצע התקנות חוזרות באופן אוטומטי לחלוטין.\n"
-"במקרה זה יימחק כל תוכן הכונן הקשיח!!\n"
-"תכונה זו שימושית להתקנת המערכת על מספר רב של מחשבים.\n"
-"\n"
-"באם אינך רוצה במחיקת כל תוכן הכונן הקשיח יש לבחור במנגנון שחזור ההתקנה.\n"
-
-#: steps_interactive.pm:1158
-#, c-format
-msgid "Replay"
-msgstr "שחזור התקנה"
-
-#: steps_interactive.pm:1158
-#, c-format
-msgid "Automated"
-msgstr "אוטומטי"
-
-#: steps_interactive.pm:1161
-#, c-format
-msgid "Save packages selection"
-msgstr "שמירת בחירת החבילות"
 
 #. -PO: please keep the following messages very short: they must fit in the left list of the installer!!!
 #: steps_list.pm:16
@@ -1555,30 +1525,42 @@ msgid ""
 "Exit"
 msgstr "יציאה"
 
-#: ../../advertising/IM_flash.pl:1
-#, c-format
-msgid "Your desktop on a USB key"
-msgstr "שולחן העבודה שלך במפתח USB"
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr "שדרוג מהפצת 32ביט להפצת 64ביט אינו נתמך"
 
-#: ../../advertising/IM_free08S.pl:1
-#, c-format
-msgid "The 100%% open source Mandriva Linux distribution"
-msgstr "הפצת מנדריבה לינוקס שהיא 100%% קוד פתוח"
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr "שרוג מהפצת 64ביט להפצת 32 ביט אינו נתמך"
 
-#: ../../advertising/IM_one08S.pl:1
-#, c-format
-msgid "Explore Linux easily with Mandriva One"
-msgstr "בדוק את לינוקס בקלות עם מנדריבה One"
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "מתחבר לאתר המראה כדי לקבל את רשימת החבילות הזמינות..."
 
-#: ../../advertising/IM_pwp08S.pl:1
-#, c-format
-msgid "A full Mandriva Linux desktop, with support"
-msgstr "שולחן עבודה מלא של מנדריבה לינוקס, עם תמיכה"
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "לא יכול להתחבר לאתר המראה  %s"
 
-#: ../../advertising/IM_range08S.pl:1
-#, c-format
-msgid "Mandriva: distributions for everybody's needs"
-msgstr "מנדריבה: הפצות לצרכים של כל אחד"
+#~ msgid "Generate auto install floppy"
+#~ msgstr "בניית תקליטון הפעלה אוטומטית"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "יש באפשרותך לבצע התקנות חוזרות באופן אוטומטי לחלוטין.\n"
+#~ "במקרה זה יימחק כל תוכן הכונן הקשיח!!\n"
+#~ "תכונה זו שימושית להתקנת המערכת על מספר רב של מחשבים.\n"
+#~ "\n"
+#~ "באם אינך רוצה במחיקת כל תוכן הכונן הקשיח יש לבחור במנגנון שחזור ההתקנה.\n"
+
+#~ msgid "Replay"
+#~ msgstr "שחזור התקנה"
+
+#~ msgid "Automated"
+#~ msgstr "אוטומטי"
+
+#~ msgid "Save packages selection"
+#~ msgstr "שמירת בחירת החבילות"
 
 #~ msgid "Do you want to use aboot?"
 #~ msgstr "האם ברצונך להשתמש בaboot?"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-02 16:49+0200\n"
+"POT-Creation-Date: 2008-09-11 18:46+0200\n"
 "PO-Revision-Date: 2008-03-22 12:06+0100\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: dansk <dansk@dansk-gruppen.dk>\n"
@@ -21,6 +21,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10.2\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+
+#: ../../advertising/IM_flash.pl:1
+#, c-format
+msgid "Your desktop on a USB key"
+msgstr "Dit skrivebord på en USB-nøgle"
+
+#: ../../advertising/IM_free09.pl:1
+#, c-format
+msgid "The 100%% open source Mandriva Linux distribution"
+msgstr "Den 100%% open source Mandriva Linux distribution"
+
+#: ../../advertising/IM_one09.pl:1
+#, c-format
+msgid "Explore Linux easily with Mandriva One"
+msgstr "Udforsk Linux nemt med Mandriva One"
+
+#: ../../advertising/IM_pwp09.pl:1
+#, c-format
+msgid "A full Mandriva Linux desktop, with support"
+msgstr "Et fuldt Mandriva Linux skrivebord, med support "
+
+#: ../../advertising/IM_range09.pl:1
+#, c-format
+msgid "Mandriva: distributions for everybody's needs"
+msgstr "Mandriva: distributioner der passer til alles behov"
 
 #: any.pm:109
 #, c-format
@@ -961,17 +986,17 @@ msgstr "Kopiér hele cd'er"
 msgid "An error occurred"
 msgstr "Der er opstået en fejl"
 
-#: steps_interactive.pm:98
-#, c-format
-msgid "Here is the full list of available keyboards"
-msgstr "Her er den komplette liste over tilgængelige tastaturer"
-
 #: steps_interactive.pm:102
 #, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Vælg dit tastaturlayout."
 
-#: steps_interactive.pm:135
+#: steps_interactive.pm:105
+#, c-format
+msgid "Here is the full list of available keyboards"
+msgstr "Her er den komplette liste over tilgængelige tastaturer"
+
+#: steps_interactive.pm:136
 #, c-format
 msgid "Install/Upgrade"
 msgstr "Installér/Opgradér"
@@ -988,24 +1013,12 @@ msgid ""
 "Install"
 msgstr "Installation"
 
-#: steps_interactive.pm:140
+#: steps_interactive.pm:144
 #, c-format
 msgid "Upgrade %s"
 msgstr "Opgradér %s"
 
-#: steps_interactive.pm:144
-#, c-format
-msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-msgstr ""
-"Opgradering fra en 32-bit til en 64-bit distribution er ikke understøttet"
-
-#: steps_interactive.pm:148
-#, c-format
-msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-msgstr ""
-"Opgradering fra en 64-bit til en 32-bit distribution er ikke understøttet"
-
-#: steps_interactive.pm:167
+#: steps_interactive.pm:162
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Krypteringsnøgle for %s"
@@ -1255,17 +1268,7 @@ msgstr ""
 "\n"
 "Ønsker du at installere opdateringerne?"
 
-#: steps_interactive.pm:768
-#, c-format
-msgid "Contacting the mirror to get the list of available packages..."
-msgstr "Kontakter spejlet for at hente listen af tilgængelige pakker"
-
-#: steps_interactive.pm:774
-#, c-format
-msgid "Unable to contact mirror %s"
-msgstr "Kan ikke kontakte spejl: %s"
-
-#: steps_interactive.pm:879
+#: steps_interactive.pm:849
 #, c-format
 msgid "%s on %s"
 msgstr "%s på %s"
@@ -1403,41 +1406,6 @@ msgstr "Tillykke"
 #, c-format
 msgid "Reboot"
 msgstr "Genstart"
-
-#: steps_interactive.pm:1151 steps_interactive.pm:1152
-#, c-format
-msgid "Generate auto install floppy"
-msgstr "Laver autoinstallations-diskette"
-
-#: steps_interactive.pm:1153
-#, c-format
-msgid ""
-"The auto install can be fully automated if wanted,\n"
-"in that case it will take over the hard drive!!\n"
-"(this is meant for installing on another box).\n"
-"\n"
-"You may prefer to replay the installation.\n"
-msgstr ""
-"Autoinstallation kan ske fuldautomatisk hvis ønsket. I så tilfælde vil den "
-"overtage hele harddisken!! (dette er beregnet til at installere på en anden "
-"maskine).\n"
-"\n"
-"Du foretrækker måske at afspille installationen igen\n"
-
-#: steps_interactive.pm:1158
-#, c-format
-msgid "Replay"
-msgstr "Afspil igen"
-
-#: steps_interactive.pm:1158
-#, c-format
-msgid "Automated"
-msgstr "Automatisk"
-
-#: steps_interactive.pm:1161
-#, c-format
-msgid "Save packages selection"
-msgstr "Gem pakke-valg"
 
 #. -PO: please keep the following messages very short: they must fit in the left list of the installer!!!
 #: steps_list.pm:16
@@ -1578,30 +1546,44 @@ msgid ""
 "Exit"
 msgstr "Afslut"
 
-#: ../../advertising/IM_flash.pl:1
-#, c-format
-msgid "Your desktop on a USB key"
-msgstr "Dit skrivebord på en USB-nøgle"
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr ""
+#~ "Opgradering fra en 32-bit til en 64-bit distribution er ikke understøttet"
 
-#: ../../advertising/IM_free08S.pl:1
-#, c-format
-msgid "The 100%% open source Mandriva Linux distribution"
-msgstr "Den 100%% open source Mandriva Linux distribution"
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr ""
+#~ "Opgradering fra en 64-bit til en 32-bit distribution er ikke understøttet"
 
-#: ../../advertising/IM_one08S.pl:1
-#, c-format
-msgid "Explore Linux easily with Mandriva One"
-msgstr "Udforsk Linux nemt med Mandriva One"
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "Kontakter spejlet for at hente listen af tilgængelige pakker"
 
-#: ../../advertising/IM_pwp08S.pl:1
-#, c-format
-msgid "A full Mandriva Linux desktop, with support"
-msgstr "Et fuldt Mandriva Linux skrivebord, med support "
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Kan ikke kontakte spejl: %s"
 
-#: ../../advertising/IM_range08S.pl:1
-#, c-format
-msgid "Mandriva: distributions for everybody's needs"
-msgstr "Mandriva: distributioner der passer til alles behov"
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Laver autoinstallations-diskette"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Autoinstallation kan ske fuldautomatisk hvis ønsket. I så tilfælde vil "
+#~ "den overtage hele harddisken!! (dette er beregnet til at installere på en "
+#~ "anden maskine).\n"
+#~ "\n"
+#~ "Du foretrækker måske at afspille installationen igen\n"
+
+#~ msgid "Replay"
+#~ msgstr "Afspil igen"
+
+#~ msgid "Automated"
+#~ msgstr "Automatisk"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Gem pakke-valg"
 
 #~ msgid "Do you want to use aboot?"
 #~ msgstr "Ønsker du at bruge aboot?"

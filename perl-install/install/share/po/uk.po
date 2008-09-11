@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-02 16:49+0200\n"
+"POT-Creation-Date: 2008-09-11 18:46+0200\n"
 "PO-Revision-Date: 2008-08-19 09:16+0300\n"
 "Last-Translator: Serge A. Ribalchenko <fisher@tpaba.org.ua>\n"
 "Language-Team: ukrainian <translation@linux.org.ua>\n"
@@ -23,6 +23,31 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: ../../advertising/IM_flash.pl:1
+#, c-format
+msgid "Your desktop on a USB key"
+msgstr "Робоча станція на ключі USB"
+
+#: ../../advertising/IM_free09.pl:1
+#, c-format
+msgid "The 100%% open source Mandriva Linux distribution"
+msgstr "Дистрибутив Мандріва Лінакс із 100%% відкритим кодом"
+
+#: ../../advertising/IM_one09.pl:1
+#, c-format
+msgid "Explore Linux easily with Mandriva One"
+msgstr "Легко користуйтеся лінаксом з Mandriva One"
+
+#: ../../advertising/IM_pwp09.pl:1
+#, c-format
+msgid "A full Mandriva Linux desktop, with support"
+msgstr "Повноцінна робоча станція Мандріва з підтримкою"
+
+#: ../../advertising/IM_range09.pl:1
+#, c-format
+msgid "Mandriva: distributions for everybody's needs"
+msgstr "Мандріва: дистрибутив, що задовольняє потреби усіх"
 
 #: any.pm:109
 #, c-format
@@ -966,17 +991,17 @@ msgstr "Копіювати компакт-диски повністю."
 msgid "An error occurred"
 msgstr "Сталася помилка"
 
-#: steps_interactive.pm:98
-#, c-format
-msgid "Here is the full list of available keyboards"
-msgstr "Тут наведено повний список можливих мап клавіатури"
-
 #: steps_interactive.pm:102
 #, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Будь ласка, виберіть розкладку клавіатури."
 
-#: steps_interactive.pm:135
+#: steps_interactive.pm:105
+#, c-format
+msgid "Here is the full list of available keyboards"
+msgstr "Тут наведено повний список можливих мап клавіатури"
+
+#: steps_interactive.pm:136
 #, c-format
 msgid "Install/Upgrade"
 msgstr "Встановити/Поновити"
@@ -993,22 +1018,12 @@ msgid ""
 "Install"
 msgstr "Встановлення"
 
-#: steps_interactive.pm:140
+#: steps_interactive.pm:144
 #, c-format
 msgid "Upgrade %s"
 msgstr "Поновити %s"
 
-#: steps_interactive.pm:144
-#, c-format
-msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-msgstr "Поновлення системи з 32 біт до 64 не підтримується"
-
-#: steps_interactive.pm:148
-#, c-format
-msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-msgstr "Поновлення системи з 64 біт до 32 не підтримується"
-
-#: steps_interactive.pm:167
+#: steps_interactive.pm:162
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Ключ шифрування для %s"
@@ -1265,17 +1280,7 @@ msgstr ""
 "\n"
 "Ви хочете встановити ці поновлення?"
 
-#: steps_interactive.pm:768
-#, c-format
-msgid "Contacting the mirror to get the list of available packages..."
-msgstr "Зв'язуюсь з сервером, щоб прочитати список наявних пакунків..."
-
-#: steps_interactive.pm:774
-#, c-format
-msgid "Unable to contact mirror %s"
-msgstr "Неможливо з'єднатися з дзеркалом %s"
-
-#: steps_interactive.pm:879
+#: steps_interactive.pm:849
 #, c-format
 msgid "%s on %s"
 msgstr "%s на %s"
@@ -1413,42 +1418,6 @@ msgstr "Вітання"
 #, c-format
 msgid "Reboot"
 msgstr "Перезавантажити"
-
-#: steps_interactive.pm:1151 steps_interactive.pm:1152
-#, c-format
-msgid "Generate auto install floppy"
-msgstr "Створити дискету для автовстановлення"
-
-#: steps_interactive.pm:1153
-#, c-format
-msgid ""
-"The auto install can be fully automated if wanted,\n"
-"in that case it will take over the hard drive!!\n"
-"(this is meant for installing on another box).\n"
-"\n"
-"You may prefer to replay the installation.\n"
-msgstr ""
-"Якщо потрібно, автовстановлення може бути повністю\n"
-"автоматизоване. В цьому випадку процес встановлення \n"
-"буде мати повний контроль над вашим диском!! (Застосовується\n"
-"для встановлення на інші комп'ютери)\n"
-"\n"
-"Можливо, Ви захочете повторити встановлення.\n"
-
-#: steps_interactive.pm:1158
-#, c-format
-msgid "Replay"
-msgstr "Повторити"
-
-#: steps_interactive.pm:1158
-#, c-format
-msgid "Automated"
-msgstr "Автоматизована"
-
-#: steps_interactive.pm:1161
-#, c-format
-msgid "Save packages selection"
-msgstr "Зберегти вибір пакунків"
 
 #. -PO: please keep the following messages very short: they must fit in the left list of the installer!!!
 #: steps_list.pm:16
@@ -1589,30 +1558,43 @@ msgid ""
 "Exit"
 msgstr "Вийти"
 
-#: ../../advertising/IM_flash.pl:1
-#, c-format
-msgid "Your desktop on a USB key"
-msgstr "Робоча станція на ключі USB"
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr "Поновлення системи з 32 біт до 64 не підтримується"
 
-#: ../../advertising/IM_free08S.pl:1
-#, c-format
-msgid "The 100%% open source Mandriva Linux distribution"
-msgstr "Дистрибутив Мандріва Лінакс із 100%% відкритим кодом"
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr "Поновлення системи з 64 біт до 32 не підтримується"
 
-#: ../../advertising/IM_one08S.pl:1
-#, c-format
-msgid "Explore Linux easily with Mandriva One"
-msgstr "Легко користуйтеся лінаксом з Mandriva One"
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr "Зв'язуюсь з сервером, щоб прочитати список наявних пакунків..."
 
-#: ../../advertising/IM_pwp08S.pl:1
-#, c-format
-msgid "A full Mandriva Linux desktop, with support"
-msgstr "Повноцінна робоча станція Мандріва з підтримкою"
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Неможливо з'єднатися з дзеркалом %s"
 
-#: ../../advertising/IM_range08S.pl:1
-#, c-format
-msgid "Mandriva: distributions for everybody's needs"
-msgstr "Мандріва: дистрибутив, що задовольняє потреби усіх"
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Створити дискету для автовстановлення"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Якщо потрібно, автовстановлення може бути повністю\n"
+#~ "автоматизоване. В цьому випадку процес встановлення \n"
+#~ "буде мати повний контроль над вашим диском!! (Застосовується\n"
+#~ "для встановлення на інші комп'ютери)\n"
+#~ "\n"
+#~ "Можливо, Ви захочете повторити встановлення.\n"
+
+#~ msgid "Replay"
+#~ msgstr "Повторити"
+
+#~ msgid "Automated"
+#~ msgstr "Автоматизована"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Зберегти вибір пакунків"
 
 #~ msgid "Do you want to use aboot?"
 #~ msgstr "Чи Ви хочете використовувати aboot?"

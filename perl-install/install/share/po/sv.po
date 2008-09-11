@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-sv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-02 16:49+0200\n"
+"POT-Creation-Date: 2008-09-11 18:46+0200\n"
 "PO-Revision-Date: 2008-09-07 03:19+0300\n"
 "Last-Translator: Thomas Backlund <tmb@mandriva.org>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -24,6 +24,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+
+#: ../../advertising/IM_flash.pl:1
+#, c-format
+msgid "Your desktop on a USB key"
+msgstr "Ditt skrivbord på ett USB-minne"
+
+#: ../../advertising/IM_free09.pl:1
+#, c-format
+msgid "The 100%% open source Mandriva Linux distribution"
+msgstr "Den 100%% öppen källkod baserade Mandriva Linux distributionen"
+
+#: ../../advertising/IM_one09.pl:1
+#, c-format
+msgid "Explore Linux easily with Mandriva One"
+msgstr "Utforska Linux enkelt med Mandriva One"
+
+#: ../../advertising/IM_pwp09.pl:1
+#, c-format
+msgid "A full Mandriva Linux desktop, with support"
+msgstr "En komplett Mandriva Linux skrivbordsmiljö, med support"
+
+#: ../../advertising/IM_range09.pl:1
+#, c-format
+msgid "Mandriva: distributions for everybody's needs"
+msgstr "Mandriva: distributioner för allas behov"
 
 #: any.pm:109
 #, c-format
@@ -77,7 +102,8 @@ msgstr "URL måste starta med ftp:// eller http://"
 
 #: any.pm:180
 #, c-format
-msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid ""
+"Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr ""
 "Kontaktar Mandriva Linux webbplats för att hämta listan över tillgängliga "
 "speglar..."
@@ -611,7 +637,8 @@ msgstr "Gnome-arbetsstation"
 msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
 "tools"
-msgstr "Grafisk miljö med en samling användarvänliga program och skrivbordsverktyg"
+msgstr ""
+"Grafisk miljö med en samling användarvänliga program och skrivbordsverktyg"
 
 #: share/meta-task/compssUsers.pl:142
 #, c-format
@@ -961,17 +988,17 @@ msgstr "Kopiera hela CD skivor"
 msgid "An error occurred"
 msgstr "Ett fel inträffade"
 
-#: steps_interactive.pm:98
-#, c-format
-msgid "Here is the full list of available keyboards"
-msgstr "Här är hela listan med tillgängliga tangentbord"
-
 #: steps_interactive.pm:102
 #, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Välj tangentbordslayout."
 
-#: steps_interactive.pm:135
+#: steps_interactive.pm:105
+#, c-format
+msgid "Here is the full list of available keyboards"
+msgstr "Här är hela listan med tillgängliga tangentbord"
+
+#: steps_interactive.pm:136
 #, c-format
 msgid "Install/Upgrade"
 msgstr "Installera/Uppdatera"
@@ -988,22 +1015,12 @@ msgid ""
 "Install"
 msgstr "Installera"
 
-#: steps_interactive.pm:140
+#: steps_interactive.pm:144
 #, c-format
 msgid "Upgrade %s"
 msgstr "Uppdatera %s"
 
-#: steps_interactive.pm:144
-#, c-format
-msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-msgstr "Uppgradering från en 32bit till en 64bit distribution stöds inte."
-
-#: steps_interactive.pm:148
-#, c-format
-msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-msgstr "Uppgradering från en 64bit till en 32bit distribution stöds inte."
-
-#: steps_interactive.pm:167
+#: steps_interactive.pm:162
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Krypteringsnyckel för %s"
@@ -1258,17 +1275,7 @@ msgstr ""
 "\n"
 "Vill du installera uppdateringarna?"
 
-#: steps_interactive.pm:768
-#, c-format
-msgid "Contacting the mirror to get the list of available packages..."
-msgstr "Kontaktar webbplatsen för att hämta en lista över tillgängliga paket..."
-
-#: steps_interactive.pm:774
-#, c-format
-msgid "Unable to contact mirror %s"
-msgstr "Kan inte kontakta spegeln %s"
-
-#: steps_interactive.pm:879
+#: steps_interactive.pm:849
 #, c-format
 msgid "%s on %s"
 msgstr "%s på %s"
@@ -1405,41 +1412,6 @@ msgstr "Gratulerar"
 #, c-format
 msgid "Reboot"
 msgstr "Starta om"
-
-#: steps_interactive.pm:1151 steps_interactive.pm:1152
-#, c-format
-msgid "Generate auto install floppy"
-msgstr "Genererar automatisk installationsdiskett"
-
-#: steps_interactive.pm:1153
-#, c-format
-msgid ""
-"The auto install can be fully automated if wanted,\n"
-"in that case it will take over the hard drive!!\n"
-"(this is meant for installing on another box).\n"
-"\n"
-"You may prefer to replay the installation.\n"
-msgstr ""
-"Automatisk installation kan göras helt automatisk, om så önskas,\n"
-"vilket gör att den tar över hårddisken\n"
-"(syftet är att installera på en annan dator).\n"
-"\n"
-"Du kan tänkas vilja köra samma installation i repris.\n"
-
-#: steps_interactive.pm:1158
-#, c-format
-msgid "Replay"
-msgstr "Repris"
-
-#: steps_interactive.pm:1158
-#, c-format
-msgid "Automated"
-msgstr "Automatiserad"
-
-#: steps_interactive.pm:1161
-#, c-format
-msgid "Save packages selection"
-msgstr "Spara paketval"
 
 #. -PO: please keep the following messages very short: they must fit in the left list of the installer!!!
 #: steps_list.pm:16
@@ -1580,30 +1552,43 @@ msgid ""
 "Exit"
 msgstr "Avsluta"
 
-#: ../../advertising/IM_flash.pl:1
-#, c-format
-msgid "Your desktop on a USB key"
-msgstr "Ditt skrivbord på ett USB-minne"
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr "Uppgradering från en 32bit till en 64bit distribution stöds inte."
 
-#: ../../advertising/IM_free08S.pl:1
-#, c-format
-msgid "The 100%% open source Mandriva Linux distribution"
-msgstr "Den 100%% öppen källkod baserade Mandriva Linux distributionen"
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr "Uppgradering från en 64bit till en 32bit distribution stöds inte."
 
-#: ../../advertising/IM_one08S.pl:1
-#, c-format
-msgid "Explore Linux easily with Mandriva One"
-msgstr "Utforska Linux enkelt med Mandriva One"
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr ""
+#~ "Kontaktar webbplatsen för att hämta en lista över tillgängliga paket..."
 
-#: ../../advertising/IM_pwp08S.pl:1
-#, c-format
-msgid "A full Mandriva Linux desktop, with support"
-msgstr "En komplett Mandriva Linux skrivbordsmiljö, med support"
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Kan inte kontakta spegeln %s"
 
-#: ../../advertising/IM_range08S.pl:1
-#, c-format
-msgid "Mandriva: distributions for everybody's needs"
-msgstr "Mandriva: distributioner för allas behov"
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Genererar automatisk installationsdiskett"
+
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Automatisk installation kan göras helt automatisk, om så önskas,\n"
+#~ "vilket gör att den tar över hårddisken\n"
+#~ "(syftet är att installera på en annan dator).\n"
+#~ "\n"
+#~ "Du kan tänkas vilja köra samma installation i repris.\n"
+
+#~ msgid "Replay"
+#~ msgstr "Repris"
+
+#~ msgid "Automated"
+#~ msgstr "Automatiserad"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Spara paketval"
 
 #~ msgid "Do you want to use aboot?"
 #~ msgstr "Vill du använda aboot?"
@@ -1614,4 +1599,3 @@ msgstr "Mandriva: distributioner för allas behov"
 #~ msgstr ""
 #~ "Fel vid installationen av aboot.\n"
 #~ "Vill du försöka ändå, fast det kan förstöra den första partitionen?"
-

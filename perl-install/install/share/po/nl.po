@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-02 16:49+0200\n"
+"POT-Creation-Date: 2008-09-11 18:46+0200\n"
 "PO-Revision-Date: 2008-09-10 23:02+0200\n"
 "Last-Translator: Rob Teng <mandrake.tips@free.fr>\n"
 "Language-Team: Nederlands\n"
@@ -20,6 +20,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../advertising/IM_flash.pl:1
+#, c-format
+msgid "Your desktop on a USB key"
+msgstr "Uw bureaublad op een USB-stick"
+
+#: ../../advertising/IM_free09.pl:1
+#, c-format
+msgid "The 100%% open source Mandriva Linux distribution"
+msgstr "De 100%% opensource Mandriva Linux-distributie"
+
+#: ../../advertising/IM_one09.pl:1
+#, c-format
+msgid "Explore Linux easily with Mandriva One"
+msgstr "Gemakkelijk Linux verkennen met Mandriva One"
+
+#: ../../advertising/IM_pwp09.pl:1
+#, c-format
+msgid "A full Mandriva Linux desktop, with support"
+msgstr "Een volledig Mandriva Linux-bureaublad, met ondersteuning"
+
+#: ../../advertising/IM_range09.pl:1
+#, c-format
+msgid "Mandriva: distributions for everybody's needs"
+msgstr "Mandriva-distributies: voor elk wat wils"
 
 #: any.pm:109
 #, c-format
@@ -73,7 +98,8 @@ msgstr "URL dient te starten met ftp:// of http://"
 
 #: any.pm:180
 #, c-format
-msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid ""
+"Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr ""
 "Bezig te verbinden met de Mandriva Linux-website om de lijst met beschikbare "
 "mirrors op te halen…"
@@ -963,17 +989,17 @@ msgstr "Hele cd's kopiëren"
 msgid "An error occurred"
 msgstr "Er is een fout opgetreden"
 
-#: steps_interactive.pm:98
-#, c-format
-msgid "Here is the full list of available keyboards"
-msgstr "Dit is de volledige lijst van beschikbare toetsenborden"
-
 #: steps_interactive.pm:102
 #, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Kies uw toetsenbord-indeling."
 
-#: steps_interactive.pm:135
+#: steps_interactive.pm:105
+#, c-format
+msgid "Here is the full list of available keyboards"
+msgstr "Dit is de volledige lijst van beschikbare toetsenborden"
+
+#: steps_interactive.pm:136
 #, c-format
 msgid "Install/Upgrade"
 msgstr "Installatie/Opwaardering"
@@ -990,22 +1016,12 @@ msgid ""
 "Install"
 msgstr "Installatie"
 
-#: steps_interactive.pm:140
+#: steps_interactive.pm:144
 #, c-format
 msgid "Upgrade %s"
 msgstr "%s opwaarderen"
 
-#: steps_interactive.pm:144
-#, c-format
-msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-msgstr "Opwaarderen van een 32-bit naar een 64-bit-distributie wordt niet ondersteund"
-
-#: steps_interactive.pm:148
-#, c-format
-msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-msgstr "Opwaarderen van een 64-bit naar een 32-bit-distributie wordt niet ondersteund"
-
-#: steps_interactive.pm:167
+#: steps_interactive.pm:162
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Vercijferingssleutel voor %s"
@@ -1036,12 +1052,14 @@ msgid ""
 "Warning : you should backup all your personal data before choosing \"New\n"
 "Installation\"."
 msgstr ""
-"Het installatieprogramma heeft vastgesteld dat het geïnstalleerde Mandriva Linux-systeem\n"
+"Het installatieprogramma heeft vastgesteld dat het geïnstalleerde Mandriva "
+"Linux-systeem\n"
 "niet veilig bijgewerkt kan worden tot %s.\n"
 "\n"
 "Een nieuwe installatie die de bestaande vervangt is aan te raden.\n"
 "\n"
-"Waarschuwing: maak veiligheidskopieën van alle persoonlijke gegevens alvorens\n"
+"Waarschuwing: maak veiligheidskopieën van alle persoonlijke gegevens "
+"alvorens\n"
 "\"Nieuwe installatie\" te kiezen."
 
 #: steps_interactive.pm:247
@@ -1262,19 +1280,7 @@ msgstr ""
 "\n"
 "Wenst u de bijgewerkte pakketten te installeren?"
 
-#: steps_interactive.pm:768
-#, c-format
-msgid "Contacting the mirror to get the list of available packages..."
-msgstr ""
-"Bezig met verbinden met de mirror om de lijst met beschikbare pakketten op "
-"te halen..."
-
-#: steps_interactive.pm:774
-#, c-format
-msgid "Unable to contact mirror %s"
-msgstr "Verbinden met mirror %s is onmogelijk"
-
-#: steps_interactive.pm:879
+#: steps_interactive.pm:849
 #, c-format
 msgid "%s on %s"
 msgstr "%s op %s"
@@ -1412,41 +1418,6 @@ msgstr "Gefeliciteerd"
 #, c-format
 msgid "Reboot"
 msgstr "Herstarten"
-
-#: steps_interactive.pm:1151 steps_interactive.pm:1152
-#, c-format
-msgid "Generate auto install floppy"
-msgstr "Auto-installatiediskette aanmaken"
-
-#: steps_interactive.pm:1153
-#, c-format
-msgid ""
-"The auto install can be fully automated if wanted,\n"
-"in that case it will take over the hard drive!!\n"
-"(this is meant for installing on another box).\n"
-"\n"
-"You may prefer to replay the installation.\n"
-msgstr ""
-"Desgewenst kan de auto-installatie volledig geautomatiseerd worden,\n"
-"in dat geval zal het de harde schijf overnemen!\n"
-"(Deze functie is bedoeld voor het installeren op een andere machine.)\n"
-"\n"
-"Wellicht geeft u de voorkeur aan het herhalen van de installatie.\n"
-
-#: steps_interactive.pm:1158
-#, c-format
-msgid "Replay"
-msgstr "Herhalen"
-
-#: steps_interactive.pm:1158
-#, c-format
-msgid "Automated"
-msgstr "Geautomatiseerd"
-
-#: steps_interactive.pm:1161
-#, c-format
-msgid "Save packages selection"
-msgstr "Pakketselectie opslaan"
 
 #. -PO: please keep the following messages very short: they must fit in the left list of the installer!!!
 #: steps_list.pm:16
@@ -1587,28 +1558,45 @@ msgid ""
 "Exit"
 msgstr "Afsluiten"
 
-#: ../../advertising/IM_flash.pl:1
-#, c-format
-msgid "Your desktop on a USB key"
-msgstr "Uw bureaublad op een USB-stick"
+#~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
+#~ msgstr ""
+#~ "Opwaarderen van een 32-bit naar een 64-bit-distributie wordt niet "
+#~ "ondersteund"
 
-#: ../../advertising/IM_free08S.pl:1
-#, c-format
-msgid "The 100%% open source Mandriva Linux distribution"
-msgstr "De 100%% opensource Mandriva Linux-distributie"
+#~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
+#~ msgstr ""
+#~ "Opwaarderen van een 64-bit naar een 32-bit-distributie wordt niet "
+#~ "ondersteund"
 
-#: ../../advertising/IM_one08S.pl:1
-#, c-format
-msgid "Explore Linux easily with Mandriva One"
-msgstr "Gemakkelijk Linux verkennen met Mandriva One"
+#~ msgid "Contacting the mirror to get the list of available packages..."
+#~ msgstr ""
+#~ "Bezig met verbinden met de mirror om de lijst met beschikbare pakketten "
+#~ "op te halen..."
 
-#: ../../advertising/IM_pwp08S.pl:1
-#, c-format
-msgid "A full Mandriva Linux desktop, with support"
-msgstr "Een volledig Mandriva Linux-bureaublad, met ondersteuning"
+#~ msgid "Unable to contact mirror %s"
+#~ msgstr "Verbinden met mirror %s is onmogelijk"
 
-#: ../../advertising/IM_range08S.pl:1
-#, c-format
-msgid "Mandriva: distributions for everybody's needs"
-msgstr "Mandriva-distributies: voor elk wat wils"
+#~ msgid "Generate auto install floppy"
+#~ msgstr "Auto-installatiediskette aanmaken"
 
+#~ msgid ""
+#~ "The auto install can be fully automated if wanted,\n"
+#~ "in that case it will take over the hard drive!!\n"
+#~ "(this is meant for installing on another box).\n"
+#~ "\n"
+#~ "You may prefer to replay the installation.\n"
+#~ msgstr ""
+#~ "Desgewenst kan de auto-installatie volledig geautomatiseerd worden,\n"
+#~ "in dat geval zal het de harde schijf overnemen!\n"
+#~ "(Deze functie is bedoeld voor het installeren op een andere machine.)\n"
+#~ "\n"
+#~ "Wellicht geeft u de voorkeur aan het herhalen van de installatie.\n"
+
+#~ msgid "Replay"
+#~ msgstr "Herhalen"
+
+#~ msgid "Automated"
+#~ msgstr "Geautomatiseerd"
+
+#~ msgid "Save packages selection"
+#~ msgstr "Pakketselectie opslaan"
