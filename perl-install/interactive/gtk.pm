@@ -775,25 +775,8 @@ sub get_html_file {
       } $url;
 }
 
-sub ask_fromW {
-    my ($o, $common, $l) = @_;
-
-    filter_widgets($l);
-
-    my $mainw = ugtk2->new($common->{title}, %$o, if__($::main_window, transient => $::main_window),
-                           if_($common->{icon}, icon => $common->{icon}), banner_title => $common->{banner_title},
-		       );
- 
-    my ($box, $set_all) = create_widgets($o, $common, $mainw, $l);
-
-    $mainw->{box_allow_grow} = 1;
-    my $pack = create_box_with_title($mainw, @{$common->{messages}});
-    mygtk2::set_main_window_size($mainw->{rwindow}) if $mainw->{pop_it} && !$common->{auto_window_size} && (@$l || $mainw->{box_size} == 200);
-
-    my @more_buttons = (
-			if_($common->{interactive_help}, 
-                            [ gtknew('Install_Button', text => N("Help"),
-                                     clicked => sub { 
+sub display_help {
+    my ($o, $common, $mainw) = @_;
                          if (my $file = $common->{interactive_help_id}) {
                              require Gtk2::Html2;
                              my $view     = Gtk2::Html2::View->new;
@@ -827,7 +810,27 @@ sub ask_fromW {
                          }
 				  my $message = $common->{interactive_help}->() or return;
 				  $o->ask_warn(N("Help"), $message);
-			      }), undef, 1 ]),
+}
+
+sub ask_fromW {
+    my ($o, $common, $l) = @_;
+
+    filter_widgets($l);
+
+    my $mainw = ugtk2->new($common->{title}, %$o, if__($::main_window, transient => $::main_window),
+                           if_($common->{icon}, icon => $common->{icon}), banner_title => $common->{banner_title},
+		       );
+ 
+    my ($box, $set_all) = create_widgets($o, $common, $mainw, $l);
+
+    $mainw->{box_allow_grow} = 1;
+    my $pack = create_box_with_title($mainw, @{$common->{messages}});
+    mygtk2::set_main_window_size($mainw->{rwindow}) if $mainw->{pop_it} && !$common->{auto_window_size} && (@$l || $mainw->{box_size} == 200);
+
+    my @more_buttons = (
+			if_($common->{interactive_help}, 
+                            [ gtknew('Install_Button', text => N("Help"),
+                                     clicked => sub { display_help($o, $common, $mainw) }), undef, 1 ]),
 			if_($common->{more_buttons}, @{$common->{more_buttons}}),
 		       );
     my $buttons_pack = ($common->{ok} || !exists $common->{ok}) && $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @more_buttons);
