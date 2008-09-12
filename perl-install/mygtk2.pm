@@ -20,7 +20,7 @@ sub init() {
 
     Gtk2->init;
     Locale::gettext::bind_textdomain_codeset($_, 'UTF8') foreach 'libDrakX', if_(!$::isInstall, 'libDrakX-standalone'),
-        if_($::isInstall, 'draksnapshot'),
+        if_($::isInstall, 'DrakX-help', 'draksnapshot'),
         'drakx-net', 'drakx-kbd-mouse-x11', # shared translation
           @::textdomains;
     Gtk2->croak_execeptions;
