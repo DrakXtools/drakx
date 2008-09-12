@@ -148,8 +148,8 @@ sub ask_parameters {
 		     ]) or return;
 
 my %level = (
-             1 => N("Use local file for users informations"),
-             2 => N("Use Ldap for users informations"),
+             1 => N("Use local file for users information"),
+             2 => N("Use Ldap for users information"),
             );
 
  $in->ask_from('', N(" "),
