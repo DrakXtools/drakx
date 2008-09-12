@@ -556,7 +556,7 @@ sub installPackages {
 	       hide_ref => \$show_advertising, height => 250, to_bottom => 1),
 	gtknew('ProgressBar', fraction_ref => \ (my $pkg_progress), hide_ref => \$show_advertising),
 	gtknew('HButtonBox', layout => 'start', children_loose => [
-	    N("Time remaining "), 
+	    N("Time remaining:"), 
 	    gtknew('Label', text_ref => \ (my $msg_time_remaining = N("(estimating...)"))),
 	]),
 	gtknew('VBox', children_centered => [ gtknew('ProgressBar', fraction_ref => \ (my $progress_total), height => 25) ]),
