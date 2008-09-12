@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 2007\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-04 17:25+0200\n"
+"POT-Creation-Date: 2008-09-12 12:22+0200\n"
 "PO-Revision-Date: 2006-04-22 15:41+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
@@ -99,6 +99,16 @@ msgstr ""
 
 #: ../help.pm:54
 #, c-format
+msgid "User name"
+msgstr ""
+
+#: ../help.pm:54
+#, c-format
+msgid "Accept user"
+msgstr ""
+
+#: ../help.pm:54
+#, c-format
 msgid "Do you want to use this feature?"
 msgstr "您要使用此特性吗?"
 
@@ -180,7 +190,7 @@ msgstr ""
 
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 #: ../help.pm:95
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "It's now time to specify which programs you wish to install on your system.\n"
 "There are thousands of packages available for Mandriva Linux, and to make "
@@ -201,8 +211,7 @@ msgid ""
 "configure your system so that it complies as much as possible with the\n"
 "Linux Standard Base specifications.\n"
 "\n"
-"   Selecting the \"LSB\" group will also install the \"2.4\" kernel series,\n"
-"instead of the default \"2.6\" one. This is to ensure 100%%-LSB compliance\n"
+"   Selecting the \"LSB\" group will ensure 100%%-LSB compliance\n"
 "of the system. However, if you do not select the \"LSB\" group you will\n"
 "still have a system which is nearly 100%% LSB-compliant.\n"
 "\n"
@@ -369,20 +378,7 @@ msgid "Automatic dependencies"
 msgstr "自动依赖性"
 
 # DO NOT BOTHER TO MODIFY HERE, SEE:
-#: ../help.pm:186
-#, c-format
-msgid ""
-"\"%s\": clicking on the \"%s\" button will open the printer configuration\n"
-"wizard. Consult the corresponding chapter of the ``Starter Guide'' for more\n"
-"information on how to set up a new printer. The interface presented in our\n"
-"manual is similar to the one used during installation."
-msgstr ""
-"\"%s\"：单击\"%s\"按钮将打开打印机配置向导。请参看``初学者指南''中的相应章"
-"节, 其中详细描述了如何设置新打印机。那里给出的界面与安装时所用的界面大体相"
-"同。"
-
-# DO NOT BOTHER TO MODIFY HERE, SEE:
-#: ../help.pm:192
+#: ../help.pm:185
 #, c-format
 msgid ""
 "This dialog is used to select which services you wish to start at boot\n"
@@ -443,7 +439,12 @@ msgstr ""
 "Internet。最好选择地理位置离您较近的时间服务器。此选项还会自动安装时间服务"
 "器, 这样您局域网中的其它计算机都能够进行自动校时了。"
 
-#: ../help.pm:220
+#: ../help.pm:213
+#, c-format
+msgid "Hardware clock set to GMT"
+msgstr ""
+
+#: ../help.pm:213
 #, c-format
 msgid "Automatic time synchronization"
 msgstr "自动时间同步"
@@ -758,7 +759,12 @@ msgstr ""
 msgid "Use existing partition"
 msgstr "使用已有分区"
 
-#: ../help.pm:377
+#: ../help.pm:370
+#, c-format
+msgid "Use the free space on the Microsoft Windows® partition"
+msgstr ""
+
+#: ../help.pm:370
 #, c-format
 msgid "Erase entire disk"
 msgstr "清除整个磁盘"
@@ -833,8 +839,23 @@ msgstr ""
 msgid "Generate auto-install floppy"
 msgstr "生成自动安装软盘"
 
+#: ../help.pm:405
+#, c-format
+msgid "Replay"
+msgstr ""
+
+#: ../help.pm:405
+#, c-format
+msgid "Automated"
+msgstr ""
+
+#: ../help.pm:405
+#, c-format
+msgid "Save packages selection"
+msgstr ""
+
 # DO NOT BOTHER TO MODIFY HERE, SEE:
-#: ../help.pm:415
+#: ../help.pm:408
 #, c-format
 msgid ""
 "If you chose to reuse some legacy GNU/Linux partitions, you may wish to\n"
@@ -1069,12 +1090,37 @@ msgstr ""
 "引导程序。如果您创建的分区再稍微大点, 比如说 50MB, 您可能会发现这个分区可用来"
 "存储内核或紧急引导时的虚拟磁盘映像。"
 
-#: ../help.pm:533
+#: ../help.pm:526
+#, c-format
+msgid "Save partition table"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Restore partition table"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Rescue partition table"
+msgstr ""
+
+#: ../help.pm:526
 #, c-format
 msgid "Removable media auto-mounting"
 msgstr "自动挂载可移动介质"
 
-#: ../help.pm:533
+#: ../help.pm:526
+#, c-format
+msgid "Wizard"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Undo"
+msgstr ""
+
+#: ../help.pm:526
 #, c-format
 msgid "Toggle between normal/expert mode"
 msgstr "在正常/专家模式间切换"
@@ -1316,8 +1362,13 @@ msgstr ""
 msgid "Espanol"
 msgstr "西班牙"
 
+#: ../help.pm:643
+#, c-format
+msgid "Use Unicode by default"
+msgstr ""
+
 # DO NOT BOTHER TO MODIFY HERE, SEE:
-#: ../help.pm:653
+#: ../help.pm:646
 #, c-format
 msgid ""
 "Usually, DrakX has no problems detecting the number of buttons on your\n"
@@ -1397,82 +1448,7 @@ msgstr ""
 "Windows 里的 COM1, 在 GNU/Linux 里面叫做 ttyS0。"
 
 # DO NOT BOTHER TO MODIFY HERE, SEE:
-#: ../help.pm:691
-#, c-format
-msgid ""
-"This is the most crucial decision point for the security of your GNU/Linux\n"
-"system: you must enter the \"root\" password. \"Root\" is the system\n"
-"administrator and is the only user authorized to make updates, add users,\n"
-"change the overall system configuration, and so on. In short, \"root\" can\n"
-"do everything! That's why you must choose a password which is difficult to\n"
-"guess: DrakX will tell you if the password you chose is too simple. As you\n"
-"can see, you're not forced to enter a password, but we strongly advise\n"
-"against this. GNU/Linux is just as prone to operator error as any other\n"
-"operating system. Since \"root\" can overcome all limitations and\n"
-"unintentionally erase all data on partitions by carelessly accessing the\n"
-"partitions themselves, it is important that it be difficult to become\n"
-"\"root\".\n"
-"\n"
-"The password should be a mixture of alphanumeric characters and at least 8\n"
-"characters long. Never write down the \"root\" password -- it makes it far\n"
-"too easy to compromise your system.\n"
-"\n"
-"One caveat: do not make the password too long or too complicated because "
-"you\n"
-"must be able to remember it!\n"
-"\n"
-"The password will not be displayed on screen as you type it. To reduce the\n"
-"chance of a blind typing error you'll need to enter the password twice. If\n"
-"you do happen to make the same typing error twice, you'll have to use this\n"
-"``incorrect'' password the first time you'll try to connect as \"root\".\n"
-"\n"
-"If you want an authentication server to control access to your computer,\n"
-"click on the \"%s\" button.\n"
-"\n"
-"If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
-"services, select the appropriate one for \"%s\". If you do not know which\n"
-"one to use, you should ask your network administrator.\n"
-"\n"
-"If you happen to have problems with remembering passwords, or if your\n"
-"computer will never be connected to the Internet and you absolutely trust\n"
-"everybody who uses your computer, you can choose to have \"%s\"."
-msgstr ""
-"要保卫您的 GNU/Linux 系统, 现在是最关键的一步：您需要输入 \"root\" 密码。"
-"\"Root\"\n"
-"是系统管理员, 而且是唯一有权进行更新、添加用户、更改泛系统配置等操作的用户。"
-"简言之, \"root\"\n"
-"可以做任何事！这就是为什么您必须选择难于猜测的密码：如果您的密码太简单了, "
-"DrakX\n"
-"会提醒您的。正如您所看到的那样, 您不必非得输入密码, 但是我们强烈建议您输入一"
-"个密码。GNU/Linux 和其它任何操作系统一样容易遇到错误的操作。由于\n"
-"\"root\" 可以越过所有限制并在访问分区时无意间就删除分区上的全部数据, 所以成"
-"为 \"root\" 应该很难才对。\n"
-"\n"
-"密码应该是字母和数字的无序混合, 并且至少要有 8 位长。绝对不要将 \"root\" 的密"
-"码写下来 -- 这样的密码形同虚设。\n"
-"\n"
-"还有一条准则 -- 不要将密码设置得太长或太复杂, 否则您自己也记不住！\n"
-"\n"
-"您输入的密码不会显示在屏幕上。为了减少盲打所造成的输入错误, 您需要再次输入密"
-"码。如果您碰巧两次都输错了, 那么这个``不正确的''密码将成为您第一次以\n"
-"\"root\" 身份登录时的密码。\n"
-"\n"
-"如果您想要身份验证服务器控制对您计算机的访问, 请单击\"%s\"按钮。\n"
-"\n"
-"如果您的网络使用 LDAP 或 NIS, 又或者 PDC Windows\n"
-"域验证服务, 请选择相应的\"%s\"。如果您不知道应该使用哪种, 请询问您的网络管理"
-"员。\n"
-"\n"
-"如果您记住密码有困难的话, 如果您的计算机不需要连接到 Internet, 您也绝对信任可"
-"使用您计算机的所有人, 您可以选择\"%s\"。"
-
-#: ../help.pm:725
-#, c-format
-msgid "authentication"
-msgstr "认证"
-
-# DO NOT BOTHER TO MODIFY HERE, SEE:
-#: ../help.pm:728
+#: ../help.pm:684
 #, c-format
 msgid ""
 "A boot loader is a little program which is started by the computer at boot\n"
@@ -1563,7 +1539,12 @@ msgstr ""
 msgid "pdq"
 msgstr "pdq"
 
-#: ../help.pm:768
+#: ../help.pm:724
+#, c-format
+msgid "CUPS"
+msgstr ""
+
+#: ../help.pm:724
 #, c-format
 msgid "Expert"
 msgstr "专家"
@@ -1614,7 +1595,7 @@ msgstr ""
 
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 #: ../help.pm:794
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "As a review, DrakX will present a summary of information it has gathered\n"
 "about your system. Depending on the hardware installed on your machine, you\n"
@@ -1636,11 +1617,6 @@ msgid ""
 "\n"
 " * \"%s\": verify the current mouse configuration and click on the button\n"
 "to change it if necessary.\n"
-"\n"
-" * \"%s\": clicking on the \"%s\" button will open the printer\n"
-"configuration wizard. Consult the corresponding chapter of the ``Starter\n"
-"Guide'' for more information on how to set up a new printer. The interface\n"
-"presented in our manual is similar to the one used during installation.\n"
 "\n"
 " * \"%s\": if a sound card is detected on your system, it'll be displayed\n"
 "here. If you notice the sound card is not the one actually present on your\n"
@@ -1738,7 +1714,12 @@ msgstr ""
 " * \"%s\"：在此您可以精确调整要在您的计算机上运行哪些服务。如果您要将此计算机"
 "用作服务器, 那么应该复查这一设置。"
 
-#: ../help.pm:858
+#: ../help.pm:809
+#, fuzzy, c-format
+msgid "TV card"
+msgstr "ISDN 卡"
+
+#: ../help.pm:809
 #, c-format
 msgid "ISDN card"
 msgstr "ISDN 卡"
@@ -1784,3 +1765,100 @@ msgstr "下一步 ->"
 msgid "<- Previous"
 msgstr "<- 上一步"
 
+# DO NOT BOTHER TO MODIFY HERE, SEE:
+#~ msgid ""
+#~ "\"%s\": clicking on the \"%s\" button will open the printer "
+#~ "configuration\n"
+#~ "wizard. Consult the corresponding chapter of the ``Starter Guide'' for "
+#~ "more\n"
+#~ "information on how to set up a new printer. The interface presented in "
+#~ "our\n"
+#~ "manual is similar to the one used during installation."
+#~ msgstr ""
+#~ "\"%s\"：单击\"%s\"按钮将打开打印机配置向导。请参看``初学者指南''中的相应章"
+#~ "节, 其中详细描述了如何设置新打印机。那里给出的界面与安装时所用的界面大体相"
+#~ "同。"
+
+# DO NOT BOTHER TO MODIFY HERE, SEE:
+#~ msgid ""
+#~ "This is the most crucial decision point for the security of your GNU/"
+#~ "Linux\n"
+#~ "system: you must enter the \"root\" password. \"Root\" is the system\n"
+#~ "administrator and is the only user authorized to make updates, add "
+#~ "users,\n"
+#~ "change the overall system configuration, and so on. In short, \"root\" "
+#~ "can\n"
+#~ "do everything! That's why you must choose a password which is difficult "
+#~ "to\n"
+#~ "guess: DrakX will tell you if the password you chose is too simple. As "
+#~ "you\n"
+#~ "can see, you're not forced to enter a password, but we strongly advise\n"
+#~ "against this. GNU/Linux is just as prone to operator error as any other\n"
+#~ "operating system. Since \"root\" can overcome all limitations and\n"
+#~ "unintentionally erase all data on partitions by carelessly accessing the\n"
+#~ "partitions themselves, it is important that it be difficult to become\n"
+#~ "\"root\".\n"
+#~ "\n"
+#~ "The password should be a mixture of alphanumeric characters and at least "
+#~ "8\n"
+#~ "characters long. Never write down the \"root\" password -- it makes it "
+#~ "far\n"
+#~ "too easy to compromise your system.\n"
+#~ "\n"
+#~ "One caveat: do not make the password too long or too complicated because "
+#~ "you\n"
+#~ "must be able to remember it!\n"
+#~ "\n"
+#~ "The password will not be displayed on screen as you type it. To reduce "
+#~ "the\n"
+#~ "chance of a blind typing error you'll need to enter the password twice. "
+#~ "If\n"
+#~ "you do happen to make the same typing error twice, you'll have to use "
+#~ "this\n"
+#~ "``incorrect'' password the first time you'll try to connect as \"root\".\n"
+#~ "\n"
+#~ "If you want an authentication server to control access to your computer,\n"
+#~ "click on the \"%s\" button.\n"
+#~ "\n"
+#~ "If your network uses either LDAP, NIS, or PDC Windows Domain "
+#~ "authentication\n"
+#~ "services, select the appropriate one for \"%s\". If you do not know "
+#~ "which\n"
+#~ "one to use, you should ask your network administrator.\n"
+#~ "\n"
+#~ "If you happen to have problems with remembering passwords, or if your\n"
+#~ "computer will never be connected to the Internet and you absolutely "
+#~ "trust\n"
+#~ "everybody who uses your computer, you can choose to have \"%s\"."
+#~ msgstr ""
+#~ "要保卫您的 GNU/Linux 系统, 现在是最关键的一步：您需要输入 \"root\" 密码。"
+#~ "\"Root\"\n"
+#~ "是系统管理员, 而且是唯一有权进行更新、添加用户、更改泛系统配置等操作的用"
+#~ "户。简言之, \"root\"\n"
+#~ "可以做任何事！这就是为什么您必须选择难于猜测的密码：如果您的密码太简单了, "
+#~ "DrakX\n"
+#~ "会提醒您的。正如您所看到的那样, 您不必非得输入密码, 但是我们强烈建议您输入"
+#~ "一个密码。GNU/Linux 和其它任何操作系统一样容易遇到错误的操作。由于\n"
+#~ "\"root\" 可以越过所有限制并在访问分区时无意间就删除分区上的全部数据, 所以"
+#~ "成为 \"root\" 应该很难才对。\n"
+#~ "\n"
+#~ "密码应该是字母和数字的无序混合, 并且至少要有 8 位长。绝对不要将 \"root\" "
+#~ "的密码写下来 -- 这样的密码形同虚设。\n"
+#~ "\n"
+#~ "还有一条准则 -- 不要将密码设置得太长或太复杂, 否则您自己也记不住！\n"
+#~ "\n"
+#~ "您输入的密码不会显示在屏幕上。为了减少盲打所造成的输入错误, 您需要再次输入"
+#~ "密码。如果您碰巧两次都输错了, 那么这个``不正确的''密码将成为您第一次以\n"
+#~ "\"root\" 身份登录时的密码。\n"
+#~ "\n"
+#~ "如果您想要身份验证服务器控制对您计算机的访问, 请单击\"%s\"按钮。\n"
+#~ "\n"
+#~ "如果您的网络使用 LDAP 或 NIS, 又或者 PDC Windows\n"
+#~ "域验证服务, 请选择相应的\"%s\"。如果您不知道应该使用哪种, 请询问您的网络管"
+#~ "理员。\n"
+#~ "\n"
+#~ "如果您记住密码有困难的话, 如果您的计算机不需要连接到 Internet, 您也绝对信"
+#~ "任可使用您计算机的所有人, 您可以选择\"%s\"。"
+
+#~ msgid "authentication"
+#~ msgstr "认证"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-04 17:25+0200\n"
+"POT-Creation-Date: 2008-09-12 12:22+0200\n"
 "PO-Revision-Date: 2005-02-26 06:31+0100\n"
 "Last-Translator: Abbas Izad <abbasizad@hotmail.com>\n"
 "Language-Team: Persian\n"
@@ -116,6 +116,16 @@ msgstr ""
 
 #: ../help.pm:54
 #, c-format
+msgid "User name"
+msgstr ""
+
+#: ../help.pm:54
+#, c-format
+msgid "Accept user"
+msgstr ""
+
+#: ../help.pm:54
+#, c-format
 msgid "Do you want to use this feature?"
 msgstr "آیا می‌خواهید از این قابلیت استفاده کنید؟"
 
@@ -196,7 +206,7 @@ msgstr ""
 "کلیک کنید و بسته‌های مربوطه نصب نخواهند شد."
 
 #: ../help.pm:95
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "It's now time to specify which programs you wish to install on your system.\n"
 "There are thousands of packages available for Mandriva Linux, and to make "
@@ -217,8 +227,7 @@ msgid ""
 "configure your system so that it complies as much as possible with the\n"
 "Linux Standard Base specifications.\n"
 "\n"
-"   Selecting the \"LSB\" group will also install the \"2.4\" kernel series,\n"
-"instead of the default \"2.6\" one. This is to ensure 100%%-LSB compliance\n"
+"   Selecting the \"LSB\" group will ensure 100%%-LSB compliance\n"
 "of the system. However, if you do not select the \"LSB\" group you will\n"
 "still have a system which is nearly 100%% LSB-compliant.\n"
 "\n"
@@ -404,20 +413,7 @@ msgstr ""
 msgid "Automatic dependencies"
 msgstr "وابستگی‌های خودکار"
 
-#: ../help.pm:186
-#, c-format
-msgid ""
-"\"%s\": clicking on the \"%s\" button will open the printer configuration\n"
-"wizard. Consult the corresponding chapter of the ``Starter Guide'' for more\n"
-"information on how to set up a new printer. The interface presented in our\n"
-"manual is similar to the one used during installation."
-msgstr ""
-"\"%s\": با کلیک بر دکمه‌ی \"%s\" جادوگر پیکربندی چاپگر باز خواهد شد\n"
-"به فصل مربوط در ``Starter Guide'' برای اطلاعات بیشتر برای نصب یک چاپگر\n"
-"جدید مراجعه کنید. ظاهر عرضه شده در آنجا شبیه به آن است که در هنگام\n"
-"نصب استفاده می‌گردد."
-
-#: ../help.pm:192
+#: ../help.pm:185
 #, c-format
 msgid ""
 "This dialog is used to select which services you wish to start at boot\n"
@@ -488,7 +484,12 @@ msgstr ""
 "کارگزار زمانی را نصب می‌کند که می‌تواند بوسیله‌ی ماشین های دیگر بر روی\n"
 "شبکه‌اتان گردد."
 
-#: ../help.pm:220
+#: ../help.pm:213
+#, c-format
+msgid "Hardware clock set to GMT"
+msgstr ""
+
+#: ../help.pm:213
 #, c-format
 msgid "Automatic time synchronization"
 msgstr "هم‌گاه‌سازی خودکار زمان"
@@ -825,7 +826,12 @@ msgstr ""
 msgid "Use existing partition"
 msgstr "استفاده از قسمت‌بندی‌های موجود"
 
-#: ../help.pm:377
+#: ../help.pm:370
+#, c-format
+msgid "Use the free space on the Microsoft Windows® partition"
+msgstr ""
+
+#: ../help.pm:370
 #, c-format
 msgid "Erase entire disk"
 msgstr "تمام دیسک پاک شود"
@@ -902,7 +908,22 @@ msgstr ""
 msgid "Generate auto-install floppy"
 msgstr "تولید دیسکچه‌ی نصب-خودکار"
 
-#: ../help.pm:415
+#: ../help.pm:405
+#, c-format
+msgid "Replay"
+msgstr ""
+
+#: ../help.pm:405
+#, c-format
+msgid "Automated"
+msgstr ""
+
+#: ../help.pm:405
+#, c-format
+msgid "Save packages selection"
+msgstr ""
+
+#: ../help.pm:408
 #, c-format
 msgid ""
 "If you chose to reuse some legacy GNU/Linux partitions, you may wish to\n"
@@ -1159,12 +1180,37 @@ msgstr ""
 "بسازید، مثلاً ۵۰ مگابایت، شما آن را برای انبار یک هسته یدک و تصاویر ramdisk\n"
 "در شرایط آغازگری اضطراری مفید خواهید یافت."
 
-#: ../help.pm:533
+#: ../help.pm:526
+#, c-format
+msgid "Save partition table"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Restore partition table"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Rescue partition table"
+msgstr ""
+
+#: ../help.pm:526
 #, c-format
 msgid "Removable media auto-mounting"
 msgstr "سوارسازی-خودکار رسانه‌ی قابل انتقال"
 
-#: ../help.pm:533
+#: ../help.pm:526
+#, c-format
+msgid "Wizard"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Undo"
+msgstr ""
+
+#: ../help.pm:526
 #, c-format
 msgid "Toggle between normal/expert mode"
 msgstr "تعویض بین حالت عادی/کارشناسی"
@@ -1414,7 +1460,12 @@ msgstr ""
 msgid "Espanol"
 msgstr "اسپانول"
 
-#: ../help.pm:653
+#: ../help.pm:643
+#, c-format
+msgid "Use Unicode by default"
+msgstr ""
+
+#: ../help.pm:646
 #, c-format
 msgid ""
 "Usually, DrakX has no problems detecting the number of buttons on your\n"
@@ -1507,90 +1558,7 @@ msgstr ""
 "لطفاً درگاه درست را انتخاب کنید، برای مثال، درگاه \"COM1\" در ویندوز \n"
 "بنام \"ttyS0\" در لینوکس خوانده می‌شود."
 
-#: ../help.pm:691
-#, c-format
-msgid ""
-"This is the most crucial decision point for the security of your GNU/Linux\n"
-"system: you must enter the \"root\" password. \"Root\" is the system\n"
-"administrator and is the only user authorized to make updates, add users,\n"
-"change the overall system configuration, and so on. In short, \"root\" can\n"
-"do everything! That's why you must choose a password which is difficult to\n"
-"guess: DrakX will tell you if the password you chose is too simple. As you\n"
-"can see, you're not forced to enter a password, but we strongly advise\n"
-"against this. GNU/Linux is just as prone to operator error as any other\n"
-"operating system. Since \"root\" can overcome all limitations and\n"
-"unintentionally erase all data on partitions by carelessly accessing the\n"
-"partitions themselves, it is important that it be difficult to become\n"
-"\"root\".\n"
-"\n"
-"The password should be a mixture of alphanumeric characters and at least 8\n"
-"characters long. Never write down the \"root\" password -- it makes it far\n"
-"too easy to compromise your system.\n"
-"\n"
-"One caveat: do not make the password too long or too complicated because "
-"you\n"
-"must be able to remember it!\n"
-"\n"
-"The password will not be displayed on screen as you type it. To reduce the\n"
-"chance of a blind typing error you'll need to enter the password twice. If\n"
-"you do happen to make the same typing error twice, you'll have to use this\n"
-"``incorrect'' password the first time you'll try to connect as \"root\".\n"
-"\n"
-"If you want an authentication server to control access to your computer,\n"
-"click on the \"%s\" button.\n"
-"\n"
-"If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
-"services, select the appropriate one for \"%s\". If you do not know which\n"
-"one to use, you should ask your network administrator.\n"
-"\n"
-"If you happen to have problems with remembering passwords, or if your\n"
-"computer will never be connected to the Internet and you absolutely trust\n"
-"everybody who uses your computer, you can choose to have \"%s\"."
-msgstr ""
-"این مهمترین نقطه‌ی تصمیم گیری برای امنیت سیستم لینوکس/گنوی شما است.\n"
-"شما باید گذرواژه‌ی \"root\" را وارد کنید. \"Root\" مدیر سیستم است و تنها\n"
-"کاربری است که می‌تواند بروزسازی کرده، کاربران را اضافه کند، پیکربندی همگانی\n"
-"سیستم را تغییر دهد، و همچنین بقیه کارهای از این قبیل را. بطور خلاصه، \"root"
-"\"\n"
-"هر کاری را می‌تواند انجام دهد! برای همین شما باید گذرواژه‌ای را انتخاب کنید "
-"که\n"
-" حدس زدنش سخت باشد - DrakX اگر گذرواژه خیلی ساده باشد به شما تذکر داده\n"
-"خواهد شد. همانطور که مشاهده می‌کنید، شما مجبور به وارد کردن یک گذرواژه "
-"نیستید،\n"
-"ولی ما بشدت برعکس این را به شما نصیحت می‌کنیم. لینوکس/گنو مانند هر سیستم\n"
-"عامل دیگری برای خطاهای کارکنان  مستعد است. چون \"root\" هیچ محدودیت اجرایی\n"
-"ندارد و بطور غیر عمدی تمام دادهها بر قسمت بندیها را بوسیله دستیابی بی توجه "
-"به\n"
-"قسمت بندیهای خود پاک کند، این امر مهمی است که بسختی بتوان \"root\" شد.\n"
-"\n"
-"گذرواژه بایستی ترکیبی از نویسه‌های الفبا و حداقل دارای ۸ نویسه باشد. هرگز\n"
-"گذرواژه \"root\" یادداشت نشود-- آن به آسانی سیستم را تسلیم میکند.\n"
-"\n"
-"یک نصیحت -- گذرواژه را طولانی یا پیچیده نسازید برای اینکه باید بتوانید\n"
-"آنرا بخاطر بسپارید!\n"
-"\n"
-"گذرواژه هنگام نگارش آن برصفحه نشان داده نخواهد شد. برای کم کردن احتمال\n"
-"خطای نگارش کورکورانه لازم است که گذرواژه را دوبار وارد کنید. اگر اتفاقی\n"
-"هر دوبار همان خطای نگارشی را انجام دهید، این گذرواژه‌ی نادرست همانی\n"
-"می‌شود که باید بار اول از آن استفاده کنید.\n"
-"\n"
-"اگر می‌خواهید دستیابی به این رایانه از طریق یک کارگزار تأیید هویت کنترل شود،\n"
-"دکمه‌ی \"%s\" را کلیک کنید.\n"
-"\n"
-"اگر شبکه‌اتان نه از LDAP ،NIS، یا سرویس‌های تأیید هویت دامنه‌ی ویندوز PDC\n"
-"استفاده می‌کند، سرویس مناسبی را برای \"%s\" انتخاب کنید. اگر نمی‌دانید از\n"
-"کدام باید استفاده کنید، باید این را از مدیر سیستم شبکه‌اتان سؤال کنید.\n"
-"\n"
-"اگر شما در بخاطر سپردن گذرواژه مشکل دارید، اگر رایانه شما هرگز به اینترنت\n"
-"وصل نخواهد شد یا شما مطلقاً به همه‌ی کسانی که از رایانه‌تان استفاده\n"
-"می‌کنند اطمینان دارید، می‌توانید داشتن \"%s\" را انتخاب کنید."
-
-#: ../help.pm:725
-#, c-format
-msgid "authentication"
-msgstr "تأیید هویت"
-
-#: ../help.pm:728
+#: ../help.pm:684
 #, c-format
 msgid ""
 "A boot loader is a little program which is started by the computer at boot\n"
@@ -1692,7 +1660,12 @@ msgstr ""
 msgid "pdq"
 msgstr "pdq"
 
-#: ../help.pm:768
+#: ../help.pm:724
+#, c-format
+msgid "CUPS"
+msgstr ""
+
+#: ../help.pm:724
 #, c-format
 msgid "Expert"
 msgstr "کارشناس"
@@ -1748,7 +1721,7 @@ msgstr ""
 "میتوانید بر دکمه کلیک کرده و راه‌انداز دیگری را انتخاب کنید."
 
 #: ../help.pm:794
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "As a review, DrakX will present a summary of information it has gathered\n"
 "about your system. Depending on the hardware installed on your machine, you\n"
@@ -1770,11 +1743,6 @@ msgid ""
 "\n"
 " * \"%s\": verify the current mouse configuration and click on the button\n"
 "to change it if necessary.\n"
-"\n"
-" * \"%s\": clicking on the \"%s\" button will open the printer\n"
-"configuration wizard. Consult the corresponding chapter of the ``Starter\n"
-"Guide'' for more information on how to set up a new printer. The interface\n"
-"presented in our manual is similar to the one used during installation.\n"
 "\n"
 " * \"%s\": if a sound card is detected on your system, it'll be displayed\n"
 "here. If you notice the sound card is not the one actually present on your\n"
@@ -1886,7 +1854,12 @@ msgstr ""
 "خواهند شد را میزان کنید. اگر می‌خواهید از این ماشین مانند یک\n"
 "کارگزار استفاده کنید فکر خوبی است که این برپاسازی را مرور کنید."
 
-#: ../help.pm:858
+#: ../help.pm:809
+#, fuzzy, c-format
+msgid "TV card"
+msgstr "کارت ISDN"
+
+#: ../help.pm:809
 #, c-format
 msgid "ISDN card"
 msgstr "کارت ISDN"
@@ -1936,3 +1909,112 @@ msgstr "بعدی ->"
 msgid "<- Previous"
 msgstr "<- پیشین"
 
+#~ msgid ""
+#~ "\"%s\": clicking on the \"%s\" button will open the printer "
+#~ "configuration\n"
+#~ "wizard. Consult the corresponding chapter of the ``Starter Guide'' for "
+#~ "more\n"
+#~ "information on how to set up a new printer. The interface presented in "
+#~ "our\n"
+#~ "manual is similar to the one used during installation."
+#~ msgstr ""
+#~ "\"%s\": با کلیک بر دکمه‌ی \"%s\" جادوگر پیکربندی چاپگر باز خواهد شد\n"
+#~ "به فصل مربوط در ``Starter Guide'' برای اطلاعات بیشتر برای نصب یک چاپگر\n"
+#~ "جدید مراجعه کنید. ظاهر عرضه شده در آنجا شبیه به آن است که در هنگام\n"
+#~ "نصب استفاده می‌گردد."
+
+#~ msgid ""
+#~ "This is the most crucial decision point for the security of your GNU/"
+#~ "Linux\n"
+#~ "system: you must enter the \"root\" password. \"Root\" is the system\n"
+#~ "administrator and is the only user authorized to make updates, add "
+#~ "users,\n"
+#~ "change the overall system configuration, and so on. In short, \"root\" "
+#~ "can\n"
+#~ "do everything! That's why you must choose a password which is difficult "
+#~ "to\n"
+#~ "guess: DrakX will tell you if the password you chose is too simple. As "
+#~ "you\n"
+#~ "can see, you're not forced to enter a password, but we strongly advise\n"
+#~ "against this. GNU/Linux is just as prone to operator error as any other\n"
+#~ "operating system. Since \"root\" can overcome all limitations and\n"
+#~ "unintentionally erase all data on partitions by carelessly accessing the\n"
+#~ "partitions themselves, it is important that it be difficult to become\n"
+#~ "\"root\".\n"
+#~ "\n"
+#~ "The password should be a mixture of alphanumeric characters and at least "
+#~ "8\n"
+#~ "characters long. Never write down the \"root\" password -- it makes it "
+#~ "far\n"
+#~ "too easy to compromise your system.\n"
+#~ "\n"
+#~ "One caveat: do not make the password too long or too complicated because "
+#~ "you\n"
+#~ "must be able to remember it!\n"
+#~ "\n"
+#~ "The password will not be displayed on screen as you type it. To reduce "
+#~ "the\n"
+#~ "chance of a blind typing error you'll need to enter the password twice. "
+#~ "If\n"
+#~ "you do happen to make the same typing error twice, you'll have to use "
+#~ "this\n"
+#~ "``incorrect'' password the first time you'll try to connect as \"root\".\n"
+#~ "\n"
+#~ "If you want an authentication server to control access to your computer,\n"
+#~ "click on the \"%s\" button.\n"
+#~ "\n"
+#~ "If your network uses either LDAP, NIS, or PDC Windows Domain "
+#~ "authentication\n"
+#~ "services, select the appropriate one for \"%s\". If you do not know "
+#~ "which\n"
+#~ "one to use, you should ask your network administrator.\n"
+#~ "\n"
+#~ "If you happen to have problems with remembering passwords, or if your\n"
+#~ "computer will never be connected to the Internet and you absolutely "
+#~ "trust\n"
+#~ "everybody who uses your computer, you can choose to have \"%s\"."
+#~ msgstr ""
+#~ "این مهمترین نقطه‌ی تصمیم گیری برای امنیت سیستم لینوکس/گنوی شما است.\n"
+#~ "شما باید گذرواژه‌ی \"root\" را وارد کنید. \"Root\" مدیر سیستم است و تنها\n"
+#~ "کاربری است که می‌تواند بروزسازی کرده، کاربران را اضافه کند، پیکربندی "
+#~ "همگانی\n"
+#~ "سیستم را تغییر دهد، و همچنین بقیه کارهای از این قبیل را. بطور خلاصه، "
+#~ "\"root\"\n"
+#~ "هر کاری را می‌تواند انجام دهد! برای همین شما باید گذرواژه‌ای را انتخاب کنید "
+#~ "که\n"
+#~ " حدس زدنش سخت باشد - DrakX اگر گذرواژه خیلی ساده باشد به شما تذکر داده\n"
+#~ "خواهد شد. همانطور که مشاهده می‌کنید، شما مجبور به وارد کردن یک گذرواژه "
+#~ "نیستید،\n"
+#~ "ولی ما بشدت برعکس این را به شما نصیحت می‌کنیم. لینوکس/گنو مانند هر سیستم\n"
+#~ "عامل دیگری برای خطاهای کارکنان  مستعد است. چون \"root\" هیچ محدودیت "
+#~ "اجرایی\n"
+#~ "ندارد و بطور غیر عمدی تمام دادهها بر قسمت بندیها را بوسیله دستیابی بی "
+#~ "توجه به\n"
+#~ "قسمت بندیهای خود پاک کند، این امر مهمی است که بسختی بتوان \"root\" شد.\n"
+#~ "\n"
+#~ "گذرواژه بایستی ترکیبی از نویسه‌های الفبا و حداقل دارای ۸ نویسه باشد. هرگز\n"
+#~ "گذرواژه \"root\" یادداشت نشود-- آن به آسانی سیستم را تسلیم میکند.\n"
+#~ "\n"
+#~ "یک نصیحت -- گذرواژه را طولانی یا پیچیده نسازید برای اینکه باید بتوانید\n"
+#~ "آنرا بخاطر بسپارید!\n"
+#~ "\n"
+#~ "گذرواژه هنگام نگارش آن برصفحه نشان داده نخواهد شد. برای کم کردن احتمال\n"
+#~ "خطای نگارش کورکورانه لازم است که گذرواژه را دوبار وارد کنید. اگر اتفاقی\n"
+#~ "هر دوبار همان خطای نگارشی را انجام دهید، این گذرواژه‌ی نادرست همانی\n"
+#~ "می‌شود که باید بار اول از آن استفاده کنید.\n"
+#~ "\n"
+#~ "اگر می‌خواهید دستیابی به این رایانه از طریق یک کارگزار تأیید هویت کنترل "
+#~ "شود،\n"
+#~ "دکمه‌ی \"%s\" را کلیک کنید.\n"
+#~ "\n"
+#~ "اگر شبکه‌اتان نه از LDAP ،NIS، یا سرویس‌های تأیید هویت دامنه‌ی ویندوز PDC\n"
+#~ "استفاده می‌کند، سرویس مناسبی را برای \"%s\" انتخاب کنید. اگر نمی‌دانید از\n"
+#~ "کدام باید استفاده کنید، باید این را از مدیر سیستم شبکه‌اتان سؤال کنید.\n"
+#~ "\n"
+#~ "اگر شما در بخاطر سپردن گذرواژه مشکل دارید، اگر رایانه شما هرگز به "
+#~ "اینترنت\n"
+#~ "وصل نخواهد شد یا شما مطلقاً به همه‌ی کسانی که از رایانه‌تان استفاده\n"
+#~ "می‌کنند اطمینان دارید، می‌توانید داشتن \"%s\" را انتخاب کنید."
+
+#~ msgid "authentication"
+#~ msgstr "تأیید هویت"

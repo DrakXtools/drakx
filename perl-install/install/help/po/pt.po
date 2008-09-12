@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-04 17:25+0200\n"
+"POT-Creation-Date: 2008-09-12 12:22+0200\n"
 "PO-Revision-Date: 2007-02-18 17:17+0000\n"
 "Last-Translator: Zé <mmodem00@gmail.com>\n"
 "Language-Team: Português <pt@li.org>\n"
@@ -123,6 +123,16 @@ msgstr ""
 
 #: ../help.pm:54
 #, c-format
+msgid "User name"
+msgstr ""
+
+#: ../help.pm:54
+#, c-format
+msgid "Accept user"
+msgstr ""
+
+#: ../help.pm:54
+#, c-format
 msgid "Do you want to use this feature?"
 msgstr "Deseja usar esta opção?"
 
@@ -209,7 +219,7 @@ msgstr ""
 "clique apenas em \"%s\", os pacote correspondentes não será instalados."
 
 #: ../help.pm:95
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "It's now time to specify which programs you wish to install on your system.\n"
 "There are thousands of packages available for Mandriva Linux, and to make "
@@ -230,8 +240,7 @@ msgid ""
 "configure your system so that it complies as much as possible with the\n"
 "Linux Standard Base specifications.\n"
 "\n"
-"   Selecting the \"LSB\" group will also install the \"2.4\" kernel series,\n"
-"instead of the default \"2.6\" one. This is to ensure 100%%-LSB compliance\n"
+"   Selecting the \"LSB\" group will ensure 100%%-LSB compliance\n"
 "of the system. However, if you do not select the \"LSB\" group you will\n"
 "still have a system which is nearly 100%% LSB-compliant.\n"
 "\n"
@@ -413,22 +422,7 @@ msgstr ""
 msgid "Automatic dependencies"
 msgstr "Dependências automáticas"
 
-#: ../help.pm:186
-#, c-format
-msgid ""
-"\"%s\": clicking on the \"%s\" button will open the printer configuration\n"
-"wizard. Consult the corresponding chapter of the ``Starter Guide'' for more\n"
-"information on how to set up a new printer. The interface presented in our\n"
-"manual is similar to the one used during installation."
-msgstr ""
-"\"%s\": ao clicar no botão \"%s\"irá iniciar o assistente de configuração "
-"de\n"
-"impressoras. Consulte o capítulo correspondente no ''Guia do Utilizador''\n"
-"para obter mais informações sobre como configurar uma nova impressora.\n"
-"O interface apresentado no nosso manual é semelhante ao usado durante\n"
-"a instalação."
-
-#: ../help.pm:192
+#: ../help.pm:185
 #, c-format
 msgid ""
 "This dialog is used to select which services you wish to start at boot\n"
@@ -494,7 +488,12 @@ msgstr ""
 "esta opção instala um servidor horário que poderá ser usado por outras\n"
 "máquinas na sua rede local."
 
-#: ../help.pm:220
+#: ../help.pm:213
+#, c-format
+msgid "Hardware clock set to GMT"
+msgstr ""
+
+#: ../help.pm:213
 #, c-format
 msgid "Automatic time synchronization"
 msgstr "Sincronização automática da hora"
@@ -833,7 +832,12 @@ msgstr ""
 msgid "Use existing partition"
 msgstr "Usar partição existente"
 
-#: ../help.pm:377
+#: ../help.pm:370
+#, c-format
+msgid "Use the free space on the Microsoft Windows® partition"
+msgstr ""
+
+#: ../help.pm:370
 #, c-format
 msgid "Erase entire disk"
 msgstr "Apagar disco inteiro"
@@ -915,7 +919,22 @@ msgstr ""
 msgid "Generate auto-install floppy"
 msgstr "Gerar disquete auto-instal"
 
-#: ../help.pm:415
+#: ../help.pm:405
+#, c-format
+msgid "Replay"
+msgstr ""
+
+#: ../help.pm:405
+#, c-format
+msgid "Automated"
+msgstr ""
+
+#: ../help.pm:405
+#, c-format
+msgid "Save packages selection"
+msgstr ""
+
+#: ../help.pm:408
 #, c-format
 msgid ""
 "If you chose to reuse some legacy GNU/Linux partitions, you may wish to\n"
@@ -1173,12 +1192,37 @@ msgstr ""
 "ser útil para gravar um kernel e a uma imagem ramdisk para situações de\n"
 "de emergência."
 
-#: ../help.pm:533
+#: ../help.pm:526
+#, c-format
+msgid "Save partition table"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Restore partition table"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Rescue partition table"
+msgstr ""
+
+#: ../help.pm:526
 #, c-format
 msgid "Removable media auto-mounting"
 msgstr "Automontagem dos dispositivos amovíveis"
 
-#: ../help.pm:533
+#: ../help.pm:526
+#, c-format
+msgid "Wizard"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Undo"
+msgstr ""
+
+#: ../help.pm:526
 #, c-format
 msgid "Toggle between normal/expert mode"
 msgstr "Alterna entre os modos normal/perito"
@@ -1434,7 +1478,12 @@ msgstr ""
 msgid "Espanol"
 msgstr "Espanhol"
 
-#: ../help.pm:653
+#: ../help.pm:643
+#, c-format
+msgid "Use Unicode by default"
+msgstr ""
+
+#: ../help.pm:646
 #, c-format
 msgid ""
 "Usually, DrakX has no problems detecting the number of buttons on your\n"
@@ -1521,88 +1570,7 @@ msgstr ""
 "Por favor escolha a porta correcta. Por exemplo, em Windows é \"COM1\",\n"
 "em GNU/Linux já é \"ttyS0\"."
 
-#: ../help.pm:691
-#, c-format
-msgid ""
-"This is the most crucial decision point for the security of your GNU/Linux\n"
-"system: you must enter the \"root\" password. \"Root\" is the system\n"
-"administrator and is the only user authorized to make updates, add users,\n"
-"change the overall system configuration, and so on. In short, \"root\" can\n"
-"do everything! That's why you must choose a password which is difficult to\n"
-"guess: DrakX will tell you if the password you chose is too simple. As you\n"
-"can see, you're not forced to enter a password, but we strongly advise\n"
-"against this. GNU/Linux is just as prone to operator error as any other\n"
-"operating system. Since \"root\" can overcome all limitations and\n"
-"unintentionally erase all data on partitions by carelessly accessing the\n"
-"partitions themselves, it is important that it be difficult to become\n"
-"\"root\".\n"
-"\n"
-"The password should be a mixture of alphanumeric characters and at least 8\n"
-"characters long. Never write down the \"root\" password -- it makes it far\n"
-"too easy to compromise your system.\n"
-"\n"
-"One caveat: do not make the password too long or too complicated because "
-"you\n"
-"must be able to remember it!\n"
-"\n"
-"The password will not be displayed on screen as you type it. To reduce the\n"
-"chance of a blind typing error you'll need to enter the password twice. If\n"
-"you do happen to make the same typing error twice, you'll have to use this\n"
-"``incorrect'' password the first time you'll try to connect as \"root\".\n"
-"\n"
-"If you want an authentication server to control access to your computer,\n"
-"click on the \"%s\" button.\n"
-"\n"
-"If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
-"services, select the appropriate one for \"%s\". If you do not know which\n"
-"one to use, you should ask your network administrator.\n"
-"\n"
-"If you happen to have problems with remembering passwords, or if your\n"
-"computer will never be connected to the Internet and you absolutely trust\n"
-"everybody who uses your computer, you can choose to have \"%s\"."
-msgstr ""
-"Este é o ponto mais crucial de decisão para a segurança do seu sistema\n"
-"GNU/Linux: deve escolher a senha do \"root\". O \"root\" é o administrador\n"
-"do sistema e é o único utilizador autorizado para fazer actualizações,\n"
-"adicionar utilizadores, mudar a configuração global do sistema, e por aí a\n"
-" fora. Em poucas palavras, o \"root\" pode fazer tudo! É por isso que deve\n"
-"escolher uma senha que seja difícil de adivinhar: o DrakX irá-lhe dizer se\n"
-"a senha que escolheu é muito simples. Como pode ver, não é obrigado a\n"
-"digitar uma senha, mas aconselhamos vivamente a não o fazer.O GNU/Linux\n"
-"é tão propenso ao erro do operador como qualquer outro sistema operativo.\n"
-"Já que o \"root\" pode ultrapassar todas as limitações e involuntariamente\n"
-"apagar todos os dados nas partições ao aceder descuidadamente a estas,\n"
-"é muito importante que haja dificuldades em aceder/tornar-se \"root\".\n"
-"\n"
-"A senha deve ser uma mistura de caracteres alfa numéricos e com pelos\n"
-"menos 8 caracteres de comprimento.Nunca aponte a senha do \"root\" --\n"
-"torna demasiado fácil comprometer o seu sistema.\n"
-"\n"
-"Uma advertência: não faça a senha demasiado longa ou muito complicada\n"
-"para que seja capaz de se lembrar dela.\n"
-"\n"
-"A senha não vai ser mostrada no ecrã à medida que a escreve. Para reduzir\n"
-"a hipótese de ser mal digitado, é necessário que a senha seja digitada duas\n"
-"vezes. Se lhe acontecer o mesmo erro duas vezes, aí terá que usar essa\n"
-"senha ``incorrecta'' na primeira vez que tentar ligar-se como \"root\".\n"
-"\n"
-"Se deseja um servidor de autenticação para controlar o acesso ao seu\n"
-"computador, clique em \"%s\".\n"
-"\n"
-"Se a sua rede usa seja LDAP, NIS ou a autenticação de serviços para um\n"
-"domínio PDC Windows, seleccione o apropriado para \"%s\".\n"
-"Se não sabe qual usar, deve perguntar ao administrador da sua rede.\n"
-"\n"
-"Se lhe acontecer ter problemas em relembrar senhas, ou se o seu\n"
-"computador nunca for conectado à Internet, se confia em toda a gente que\n"
-"usa o seu computador, aí pode escolher em ter \"%s\"."
-
-#: ../help.pm:725
-#, c-format
-msgid "authentication"
-msgstr "Autenticação"
-
-#: ../help.pm:728
+#: ../help.pm:684
 #, c-format
 msgid ""
 "A boot loader is a little program which is started by the computer at boot\n"
@@ -1698,7 +1666,12 @@ msgstr ""
 msgid "pdq"
 msgstr "pdq"
 
-#: ../help.pm:768
+#: ../help.pm:724
+#, c-format
+msgid "CUPS"
+msgstr ""
+
+#: ../help.pm:724
 #, c-format
 msgid "Expert"
 msgstr "Perito"
@@ -1755,7 +1728,7 @@ msgstr ""
 "presente no seu sistema, pode clicar no botão e escolher outro controaldor."
 
 #: ../help.pm:794
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "As a review, DrakX will present a summary of information it has gathered\n"
 "about your system. Depending on the hardware installed on your machine, you\n"
@@ -1777,11 +1750,6 @@ msgid ""
 "\n"
 " * \"%s\": verify the current mouse configuration and click on the button\n"
 "to change it if necessary.\n"
-"\n"
-" * \"%s\": clicking on the \"%s\" button will open the printer\n"
-"configuration wizard. Consult the corresponding chapter of the ``Starter\n"
-"Guide'' for more information on how to set up a new printer. The interface\n"
-"presented in our manual is similar to the one used during installation.\n"
 "\n"
 " * \"%s\": if a sound card is detected on your system, it'll be displayed\n"
 "here. If you notice the sound card is not the one actually present on your\n"
@@ -1891,7 +1859,12 @@ msgstr ""
 "executados na sua máquina. Se planeia configurar esta máquina como\n"
 "um servidor, é uma boa ideia rever a configuração."
 
-#: ../help.pm:858
+#: ../help.pm:809
+#, fuzzy, c-format
+msgid "TV card"
+msgstr "Placa ISDN"
+
+#: ../help.pm:809
 #, c-format
 msgid "ISDN card"
 msgstr "Placa ISDN"
@@ -1941,3 +1914,117 @@ msgstr "Próximo ->"
 msgid "<- Previous"
 msgstr "<- Anterior"
 
+#~ msgid ""
+#~ "\"%s\": clicking on the \"%s\" button will open the printer "
+#~ "configuration\n"
+#~ "wizard. Consult the corresponding chapter of the ``Starter Guide'' for "
+#~ "more\n"
+#~ "information on how to set up a new printer. The interface presented in "
+#~ "our\n"
+#~ "manual is similar to the one used during installation."
+#~ msgstr ""
+#~ "\"%s\": ao clicar no botão \"%s\"irá iniciar o assistente de configuração "
+#~ "de\n"
+#~ "impressoras. Consulte o capítulo correspondente no ''Guia do "
+#~ "Utilizador''\n"
+#~ "para obter mais informações sobre como configurar uma nova impressora.\n"
+#~ "O interface apresentado no nosso manual é semelhante ao usado durante\n"
+#~ "a instalação."
+
+#~ msgid ""
+#~ "This is the most crucial decision point for the security of your GNU/"
+#~ "Linux\n"
+#~ "system: you must enter the \"root\" password. \"Root\" is the system\n"
+#~ "administrator and is the only user authorized to make updates, add "
+#~ "users,\n"
+#~ "change the overall system configuration, and so on. In short, \"root\" "
+#~ "can\n"
+#~ "do everything! That's why you must choose a password which is difficult "
+#~ "to\n"
+#~ "guess: DrakX will tell you if the password you chose is too simple. As "
+#~ "you\n"
+#~ "can see, you're not forced to enter a password, but we strongly advise\n"
+#~ "against this. GNU/Linux is just as prone to operator error as any other\n"
+#~ "operating system. Since \"root\" can overcome all limitations and\n"
+#~ "unintentionally erase all data on partitions by carelessly accessing the\n"
+#~ "partitions themselves, it is important that it be difficult to become\n"
+#~ "\"root\".\n"
+#~ "\n"
+#~ "The password should be a mixture of alphanumeric characters and at least "
+#~ "8\n"
+#~ "characters long. Never write down the \"root\" password -- it makes it "
+#~ "far\n"
+#~ "too easy to compromise your system.\n"
+#~ "\n"
+#~ "One caveat: do not make the password too long or too complicated because "
+#~ "you\n"
+#~ "must be able to remember it!\n"
+#~ "\n"
+#~ "The password will not be displayed on screen as you type it. To reduce "
+#~ "the\n"
+#~ "chance of a blind typing error you'll need to enter the password twice. "
+#~ "If\n"
+#~ "you do happen to make the same typing error twice, you'll have to use "
+#~ "this\n"
+#~ "``incorrect'' password the first time you'll try to connect as \"root\".\n"
+#~ "\n"
+#~ "If you want an authentication server to control access to your computer,\n"
+#~ "click on the \"%s\" button.\n"
+#~ "\n"
+#~ "If your network uses either LDAP, NIS, or PDC Windows Domain "
+#~ "authentication\n"
+#~ "services, select the appropriate one for \"%s\". If you do not know "
+#~ "which\n"
+#~ "one to use, you should ask your network administrator.\n"
+#~ "\n"
+#~ "If you happen to have problems with remembering passwords, or if your\n"
+#~ "computer will never be connected to the Internet and you absolutely "
+#~ "trust\n"
+#~ "everybody who uses your computer, you can choose to have \"%s\"."
+#~ msgstr ""
+#~ "Este é o ponto mais crucial de decisão para a segurança do seu sistema\n"
+#~ "GNU/Linux: deve escolher a senha do \"root\". O \"root\" é o "
+#~ "administrador\n"
+#~ "do sistema e é o único utilizador autorizado para fazer actualizações,\n"
+#~ "adicionar utilizadores, mudar a configuração global do sistema, e por aí "
+#~ "a\n"
+#~ " fora. Em poucas palavras, o \"root\" pode fazer tudo! É por isso que "
+#~ "deve\n"
+#~ "escolher uma senha que seja difícil de adivinhar: o DrakX irá-lhe dizer "
+#~ "se\n"
+#~ "a senha que escolheu é muito simples. Como pode ver, não é obrigado a\n"
+#~ "digitar uma senha, mas aconselhamos vivamente a não o fazer.O GNU/Linux\n"
+#~ "é tão propenso ao erro do operador como qualquer outro sistema "
+#~ "operativo.\n"
+#~ "Já que o \"root\" pode ultrapassar todas as limitações e "
+#~ "involuntariamente\n"
+#~ "apagar todos os dados nas partições ao aceder descuidadamente a estas,\n"
+#~ "é muito importante que haja dificuldades em aceder/tornar-se \"root\".\n"
+#~ "\n"
+#~ "A senha deve ser uma mistura de caracteres alfa numéricos e com pelos\n"
+#~ "menos 8 caracteres de comprimento.Nunca aponte a senha do \"root\" --\n"
+#~ "torna demasiado fácil comprometer o seu sistema.\n"
+#~ "\n"
+#~ "Uma advertência: não faça a senha demasiado longa ou muito complicada\n"
+#~ "para que seja capaz de se lembrar dela.\n"
+#~ "\n"
+#~ "A senha não vai ser mostrada no ecrã à medida que a escreve. Para "
+#~ "reduzir\n"
+#~ "a hipótese de ser mal digitado, é necessário que a senha seja digitada "
+#~ "duas\n"
+#~ "vezes. Se lhe acontecer o mesmo erro duas vezes, aí terá que usar essa\n"
+#~ "senha ``incorrecta'' na primeira vez que tentar ligar-se como \"root\".\n"
+#~ "\n"
+#~ "Se deseja um servidor de autenticação para controlar o acesso ao seu\n"
+#~ "computador, clique em \"%s\".\n"
+#~ "\n"
+#~ "Se a sua rede usa seja LDAP, NIS ou a autenticação de serviços para um\n"
+#~ "domínio PDC Windows, seleccione o apropriado para \"%s\".\n"
+#~ "Se não sabe qual usar, deve perguntar ao administrador da sua rede.\n"
+#~ "\n"
+#~ "Se lhe acontecer ter problemas em relembrar senhas, ou se o seu\n"
+#~ "computador nunca for conectado à Internet, se confia em toda a gente que\n"
+#~ "usa o seu computador, aí pode escolher em ter \"%s\"."
+
+#~ msgid "authentication"
+#~ msgstr "Autenticação"

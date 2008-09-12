@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-04 17:25+0200\n"
+"POT-Creation-Date: 2008-09-12 12:22+0200\n"
 "PO-Revision-Date: 2002-09-06 00:35+0800\n"
 "Last-Translator: prabu anand <prabu_anand2000@yahoo.com>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
@@ -101,6 +101,16 @@ msgstr ""
 "\n"
 "Clicking the \"%s\" button allows you to change the default \"shell\"\n"
 "for that user (bash by default)."
+
+#: ../help.pm:54
+#, c-format
+msgid "User name"
+msgstr ""
+
+#: ../help.pm:54
+#, c-format
+msgid "Accept user"
+msgstr ""
 
 #: ../help.pm:54
 #, c-format
@@ -207,8 +217,7 @@ msgid ""
 "configure your system so that it complies as much as possible with the\n"
 "Linux Standard Base specifications.\n"
 "\n"
-"   Selecting the \"LSB\" group will also install the \"2.4\" kernel series,\n"
-"instead of the default \"2.6\" one. This is to ensure 100%%-LSB compliance\n"
+"   Selecting the \"LSB\" group will ensure 100%%-LSB compliance\n"
 "of the system. However, if you do not select the \"LSB\" group you will\n"
 "still have a system which is nearly 100%% LSB-compliant.\n"
 "\n"
@@ -389,16 +398,7 @@ msgstr ""
 msgid "Automatic dependencies"
 msgstr ""
 
-#: ../help.pm:186
-#, c-format
-msgid ""
-"\"%s\": clicking on the \"%s\" button will open the printer configuration\n"
-"wizard. Consult the corresponding chapter of the ``Starter Guide'' for more\n"
-"information on how to set up a new printer. The interface presented in our\n"
-"manual is similar to the one used during installation."
-msgstr ""
-
-#: ../help.pm:192
+#: ../help.pm:185
 #, fuzzy, c-format
 msgid ""
 "This dialog is used to select which services you wish to start at boot\n"
@@ -465,7 +465,12 @@ msgstr ""
 "actually install on your machine a time server which can be optionally used\n"
 "by other machines on your local network."
 
-#: ../help.pm:220
+#: ../help.pm:213
+#, c-format
+msgid "Hardware clock set to GMT"
+msgstr ""
+
+#: ../help.pm:213
 #, fuzzy, c-format
 msgid "Automatic time synchronization"
 msgstr "தானியங்கி நேர ஒத்தியக்கி(NTP உதவியுடன்)"
@@ -661,7 +666,12 @@ msgstr ""
 msgid "Use existing partition"
 msgstr "இருக்கும் வகிர்களை பயன்படுத்துங்கள்"
 
-#: ../help.pm:377
+#: ../help.pm:370
+#, c-format
+msgid "Use the free space on the Microsoft Windows® partition"
+msgstr ""
+
+#: ../help.pm:370
 #, c-format
 msgid "Erase entire disk"
 msgstr "முழு வட்ைடயும் அழித்து விடு"
@@ -739,7 +749,22 @@ msgstr ""
 msgid "Generate auto-install floppy"
 msgstr "தானியங்கி நிறுவல்வட்ைட உருவாக்கவும்"
 
-#: ../help.pm:415
+#: ../help.pm:405
+#, c-format
+msgid "Replay"
+msgstr ""
+
+#: ../help.pm:405
+#, c-format
+msgid "Automated"
+msgstr ""
+
+#: ../help.pm:405
+#, c-format
+msgid "Save packages selection"
+msgstr ""
+
+#: ../help.pm:408
 #, fuzzy, c-format
 msgid ""
 "If you chose to reuse some legacy GNU/Linux partitions, you may wish to\n"
@@ -996,12 +1021,37 @@ msgstr ""
 "may find it a useful place to store a spare kernel and ramdisk images for\n"
 "emergency boot situations."
 
-#: ../help.pm:533
+#: ../help.pm:526
+#, c-format
+msgid "Save partition table"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Restore partition table"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Rescue partition table"
+msgstr ""
+
+#: ../help.pm:526
 #, fuzzy, c-format
 msgid "Removable media auto-mounting"
 msgstr "கழற்று ஊடகங்கள் தானேற்றம்"
 
-#: ../help.pm:533
+#: ../help.pm:526
+#, c-format
+msgid "Wizard"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Undo"
+msgstr ""
+
+#: ../help.pm:526
 #, fuzzy, c-format
 msgid "Toggle between normal/expert mode"
 msgstr "சாதாரனர் முறைமைக்கு மாறு"
@@ -1199,7 +1249,12 @@ msgstr ""
 msgid "Espanol"
 msgstr ""
 
-#: ../help.pm:653
+#: ../help.pm:643
+#, c-format
+msgid "Use Unicode by default"
+msgstr ""
+
+#: ../help.pm:646
 #, fuzzy, c-format
 msgid ""
 "Usually, DrakX has no problems detecting the number of buttons on your\n"
@@ -1268,88 +1323,7 @@ msgstr ""
 "the \"COM1\" port under\n"
 "Windows is named \"ttyS0\" under GNU/Linux.. "
 
-#: ../help.pm:691
-#, fuzzy, c-format
-msgid ""
-"This is the most crucial decision point for the security of your GNU/Linux\n"
-"system: you must enter the \"root\" password. \"Root\" is the system\n"
-"administrator and is the only user authorized to make updates, add users,\n"
-"change the overall system configuration, and so on. In short, \"root\" can\n"
-"do everything! That's why you must choose a password which is difficult to\n"
-"guess: DrakX will tell you if the password you chose is too simple. As you\n"
-"can see, you're not forced to enter a password, but we strongly advise\n"
-"against this. GNU/Linux is just as prone to operator error as any other\n"
-"operating system. Since \"root\" can overcome all limitations and\n"
-"unintentionally erase all data on partitions by carelessly accessing the\n"
-"partitions themselves, it is important that it be difficult to become\n"
-"\"root\".\n"
-"\n"
-"The password should be a mixture of alphanumeric characters and at least 8\n"
-"characters long. Never write down the \"root\" password -- it makes it far\n"
-"too easy to compromise your system.\n"
-"\n"
-"One caveat: do not make the password too long or too complicated because "
-"you\n"
-"must be able to remember it!\n"
-"\n"
-"The password will not be displayed on screen as you type it. To reduce the\n"
-"chance of a blind typing error you'll need to enter the password twice. If\n"
-"you do happen to make the same typing error twice, you'll have to use this\n"
-"``incorrect'' password the first time you'll try to connect as \"root\".\n"
-"\n"
-"If you want an authentication server to control access to your computer,\n"
-"click on the \"%s\" button.\n"
-"\n"
-"If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
-"services, select the appropriate one for \"%s\". If you do not know which\n"
-"one to use, you should ask your network administrator.\n"
-"\n"
-"If you happen to have problems with remembering passwords, or if your\n"
-"computer will never be connected to the Internet and you absolutely trust\n"
-"everybody who uses your computer, you can choose to have \"%s\"."
-msgstr ""
-"உதவி இன்னமும் மொழிபெயர்கப்படவில்லை. This is the most crucial decision point for "
-"the security of your GNU/Linux\n"
-"system: you have to enter the \"root\" password. \"root\" is the system\n"
-"administrator and is the only one authorized to make updates, add users,\n"
-"change the overall system configuration, and so on. In short, \"root\" can\n"
-"do everything! That is why you must choose a password that is difficult to\n"
-"guess - DrakX will tell you if it is too easy. As you can see, you can\n"
-"choose not to enter a password, but we strongly advise you against this if\n"
-"only for one reason: do not think that because you booted GNU/Linux that\n"
-"your other operating systems are safe from mistakes. Since \"root\" can\n"
-"overcome all limitations and unintentionally erase all data on partitions\n"
-"by carelessly accessing the partitions themselves, it is important for it\n"
-"to be difficult to become \"root\".\n"
-"\n"
-"The password should be a mixture of alphanumeric characters and at least 8\n"
-"characters long. Never write down the \"root\" password - it makes it too\n"
-"easy to compromise a system.\n"
-"\n"
-"However, please do not make the password too long or complicated because\n"
-"you must be able to remember it without too much effort.\n"
-"\n"
-"The password will not be displayed on screen as you type it in. Hence, you\n"
-"will have to type the password twice to reduce the chance of a typing\n"
-"error. If you do happen to make the same typing error twice, this\n"
-"``incorrect'' password will have to be used the first time you connect.\n"
-"\n"
-"In Expert mode, you will be asked if you will be connecting to an\n"
-"authentication server, like NIS or LDAP.\n"
-"\n"
-"If your network uses the LDAP (or NIS) protocol for authentication, select\n"
-"\"LDAP\" (or \"NIS\") as authentication. If you do not know, ask your\n"
-"network administrator.\n"
-"\n"
-"If your computer is not connected to any administrated network, you will\n"
-"want to choose \"Local files\" for authentication."
-
-#: ../help.pm:725
-#, fuzzy, c-format
-msgid "authentication"
-msgstr "நல்குாிமை"
-
-#: ../help.pm:728
+#: ../help.pm:684
 #, c-format
 msgid ""
 "A boot loader is a little program which is started by the computer at boot\n"
@@ -1404,7 +1378,12 @@ msgstr ""
 msgid "pdq"
 msgstr ""
 
-#: ../help.pm:768
+#: ../help.pm:724
+#, c-format
+msgid "CUPS"
+msgstr ""
+
+#: ../help.pm:724
 #, c-format
 msgid "Expert"
 msgstr "நிபுணர்"
@@ -1488,11 +1467,6 @@ msgid ""
 " * \"%s\": verify the current mouse configuration and click on the button\n"
 "to change it if necessary.\n"
 "\n"
-" * \"%s\": clicking on the \"%s\" button will open the printer\n"
-"configuration wizard. Consult the corresponding chapter of the ``Starter\n"
-"Guide'' for more information on how to set up a new printer. The interface\n"
-"presented in our manual is similar to the one used during installation.\n"
-"\n"
 " * \"%s\": if a sound card is detected on your system, it'll be displayed\n"
 "here. If you notice the sound card is not the one actually present on your\n"
 "system, you can click on the button and choose a different driver.\n"
@@ -1535,7 +1509,12 @@ msgid ""
 "idea to review this setup."
 msgstr ""
 
-#: ../help.pm:858
+#: ../help.pm:809
+#, fuzzy, c-format
+msgid "TV card"
+msgstr "ISDN அட்ைட"
+
+#: ../help.pm:809
 #, c-format
 msgid "ISDN card"
 msgstr "ISDN அட்ைட"
@@ -1588,3 +1567,103 @@ msgstr "அடுத்து ->"
 msgid "<- Previous"
 msgstr "<- முன்னது"
 
+#, fuzzy
+#~ msgid ""
+#~ "This is the most crucial decision point for the security of your GNU/"
+#~ "Linux\n"
+#~ "system: you must enter the \"root\" password. \"Root\" is the system\n"
+#~ "administrator and is the only user authorized to make updates, add "
+#~ "users,\n"
+#~ "change the overall system configuration, and so on. In short, \"root\" "
+#~ "can\n"
+#~ "do everything! That's why you must choose a password which is difficult "
+#~ "to\n"
+#~ "guess: DrakX will tell you if the password you chose is too simple. As "
+#~ "you\n"
+#~ "can see, you're not forced to enter a password, but we strongly advise\n"
+#~ "against this. GNU/Linux is just as prone to operator error as any other\n"
+#~ "operating system. Since \"root\" can overcome all limitations and\n"
+#~ "unintentionally erase all data on partitions by carelessly accessing the\n"
+#~ "partitions themselves, it is important that it be difficult to become\n"
+#~ "\"root\".\n"
+#~ "\n"
+#~ "The password should be a mixture of alphanumeric characters and at least "
+#~ "8\n"
+#~ "characters long. Never write down the \"root\" password -- it makes it "
+#~ "far\n"
+#~ "too easy to compromise your system.\n"
+#~ "\n"
+#~ "One caveat: do not make the password too long or too complicated because "
+#~ "you\n"
+#~ "must be able to remember it!\n"
+#~ "\n"
+#~ "The password will not be displayed on screen as you type it. To reduce "
+#~ "the\n"
+#~ "chance of a blind typing error you'll need to enter the password twice. "
+#~ "If\n"
+#~ "you do happen to make the same typing error twice, you'll have to use "
+#~ "this\n"
+#~ "``incorrect'' password the first time you'll try to connect as \"root\".\n"
+#~ "\n"
+#~ "If you want an authentication server to control access to your computer,\n"
+#~ "click on the \"%s\" button.\n"
+#~ "\n"
+#~ "If your network uses either LDAP, NIS, or PDC Windows Domain "
+#~ "authentication\n"
+#~ "services, select the appropriate one for \"%s\". If you do not know "
+#~ "which\n"
+#~ "one to use, you should ask your network administrator.\n"
+#~ "\n"
+#~ "If you happen to have problems with remembering passwords, or if your\n"
+#~ "computer will never be connected to the Internet and you absolutely "
+#~ "trust\n"
+#~ "everybody who uses your computer, you can choose to have \"%s\"."
+#~ msgstr ""
+#~ "உதவி இன்னமும் மொழிபெயர்கப்படவில்லை. This is the most crucial decision point "
+#~ "for the security of your GNU/Linux\n"
+#~ "system: you have to enter the \"root\" password. \"root\" is the system\n"
+#~ "administrator and is the only one authorized to make updates, add users,\n"
+#~ "change the overall system configuration, and so on. In short, \"root\" "
+#~ "can\n"
+#~ "do everything! That is why you must choose a password that is difficult "
+#~ "to\n"
+#~ "guess - DrakX will tell you if it is too easy. As you can see, you can\n"
+#~ "choose not to enter a password, but we strongly advise you against this "
+#~ "if\n"
+#~ "only for one reason: do not think that because you booted GNU/Linux that\n"
+#~ "your other operating systems are safe from mistakes. Since \"root\" can\n"
+#~ "overcome all limitations and unintentionally erase all data on "
+#~ "partitions\n"
+#~ "by carelessly accessing the partitions themselves, it is important for "
+#~ "it\n"
+#~ "to be difficult to become \"root\".\n"
+#~ "\n"
+#~ "The password should be a mixture of alphanumeric characters and at least "
+#~ "8\n"
+#~ "characters long. Never write down the \"root\" password - it makes it "
+#~ "too\n"
+#~ "easy to compromise a system.\n"
+#~ "\n"
+#~ "However, please do not make the password too long or complicated because\n"
+#~ "you must be able to remember it without too much effort.\n"
+#~ "\n"
+#~ "The password will not be displayed on screen as you type it in. Hence, "
+#~ "you\n"
+#~ "will have to type the password twice to reduce the chance of a typing\n"
+#~ "error. If you do happen to make the same typing error twice, this\n"
+#~ "``incorrect'' password will have to be used the first time you connect.\n"
+#~ "\n"
+#~ "In Expert mode, you will be asked if you will be connecting to an\n"
+#~ "authentication server, like NIS or LDAP.\n"
+#~ "\n"
+#~ "If your network uses the LDAP (or NIS) protocol for authentication, "
+#~ "select\n"
+#~ "\"LDAP\" (or \"NIS\") as authentication. If you do not know, ask your\n"
+#~ "network administrator.\n"
+#~ "\n"
+#~ "If your computer is not connected to any administrated network, you will\n"
+#~ "want to choose \"Local files\" for authentication."
+
+#, fuzzy
+#~ msgid "authentication"
+#~ msgstr "நல்குாிமை"

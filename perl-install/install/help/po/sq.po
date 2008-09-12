@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX for MDK 9.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-04 17:25+0200\n"
+"POT-Creation-Date: 2008-09-12 12:22+0200\n"
 "PO-Revision-Date: 2004-09-15 13:33+0200\n"
 "Last-Translator: Naim Daka <naim70@freesurf.ch>\n"
 "Language-Team: Albanian <LL@li.org>\n"
@@ -113,6 +113,16 @@ msgstr ""
 "shumë për sigurinë lokale), zgjedheni përdoruesin e caktuar dhe dritaren\n"
 "administruese, dhe klikoni mbi \"%s\". Nëse kjo nuk ju interson në të\n"
 "ardhmën, atëherë çzgjedheni kutinë \"%s\"."
+
+#: ../help.pm:54
+#, c-format
+msgid "User name"
+msgstr ""
+
+#: ../help.pm:54
+#, c-format
+msgid "Accept user"
+msgstr ""
 
 #: ../help.pm:54
 #, c-format
@@ -224,8 +234,7 @@ msgid ""
 "configure your system so that it complies as much as possible with the\n"
 "Linux Standard Base specifications.\n"
 "\n"
-"   Selecting the \"LSB\" group will also install the \"2.4\" kernel series,\n"
-"instead of the default \"2.6\" one. This is to ensure 100%%-LSB compliance\n"
+"   Selecting the \"LSB\" group will ensure 100%%-LSB compliance\n"
 "of the system. However, if you do not select the \"LSB\" group you will\n"
 "still have a system which is nearly 100%% LSB-compliant.\n"
 "\n"
@@ -405,20 +414,7 @@ msgstr ""
 msgid "Automatic dependencies"
 msgstr "Mvarësit Automatike"
 
-#: ../help.pm:186
-#, fuzzy, c-format
-msgid ""
-"\"%s\": clicking on the \"%s\" button will open the printer configuration\n"
-"wizard. Consult the corresponding chapter of the ``Starter Guide'' for more\n"
-"information on how to set up a new printer. The interface presented in our\n"
-"manual is similar to the one used during installation."
-msgstr ""
-"\"%s\": duke klikuar mbi kopsën \"%s\" e cila do të hapë asistentin\n"
-"konfigurues. Konsultoni kapitujt e caktuar të ``Përcjellësit Nisës''\n"
-"për më shumë informacione se si të konfigurohet një stampues i ri.\n"
-"Interfaci i prezentuar, është i njëjtë me atë gjatë instalimit."
-
-#: ../help.pm:192
+#: ../help.pm:185
 #, fuzzy, c-format
 msgid ""
 "This dialog is used to select which services you wish to start at boot\n"
@@ -489,7 +485,12 @@ msgstr ""
 "të kohës lokale, i cili mund të jetë i mundshëm, që ai të përdoret nga\n"
 "përdoruesit e tjerë të kësaj makine, nga rrjeti i juaj lokal"
 
-#: ../help.pm:220
+#: ../help.pm:213
+#, c-format
+msgid "Hardware clock set to GMT"
+msgstr ""
+
+#: ../help.pm:213
 #, c-format
 msgid "Automatic time synchronization"
 msgstr "Sinkronizimi automatik i orës"
@@ -839,7 +840,12 @@ msgstr ""
 msgid "Use existing partition"
 msgstr "Përdore ndarjen egzistuese"
 
-#: ../help.pm:377
+#: ../help.pm:370
+#, c-format
+msgid "Use the free space on the Microsoft Windows® partition"
+msgstr ""
+
+#: ../help.pm:370
 #, c-format
 msgid "Erase entire disk"
 msgstr "Shlyeje diskun të tërësi"
@@ -918,7 +924,22 @@ msgstr ""
 msgid "Generate auto-install floppy"
 msgstr "krijo një disketë floppy auto instaluese"
 
-#: ../help.pm:415
+#: ../help.pm:405
+#, c-format
+msgid "Replay"
+msgstr ""
+
+#: ../help.pm:405
+#, c-format
+msgid "Automated"
+msgstr ""
+
+#: ../help.pm:405
+#, c-format
+msgid "Save packages selection"
+msgstr ""
+
+#: ../help.pm:408
 #, fuzzy, c-format
 msgid ""
 "If you chose to reuse some legacy GNU/Linux partitions, you may wish to\n"
@@ -1175,12 +1196,37 @@ msgstr ""
 "të gjeni një vegël për të vendosur bërthamat dhe imazhet ramdisk hyrëse në\n"
 "rastë të ndonji problemi."
 
-#: ../help.pm:533
+#: ../help.pm:526
+#, c-format
+msgid "Save partition table"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Restore partition table"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Rescue partition table"
+msgstr ""
+
+#: ../help.pm:526
 #, fuzzy, c-format
 msgid "Removable media auto-mounting"
 msgstr "Automontim i periferikëve lëvizës"
 
-#: ../help.pm:533
+#: ../help.pm:526
+#, c-format
+msgid "Wizard"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Undo"
+msgstr ""
+
+#: ../help.pm:526
 #, c-format
 msgid "Toggle between normal/expert mode"
 msgstr "Kalo mes modit normal/ekspert"
@@ -1425,7 +1471,12 @@ msgstr ""
 msgid "Espanol"
 msgstr "Spanjol"
 
-#: ../help.pm:653
+#: ../help.pm:643
+#, c-format
+msgid "Use Unicode by default"
+msgstr ""
+
+#: ../help.pm:646
 #, fuzzy, c-format
 msgid ""
 "Usually, DrakX has no problems detecting the number of buttons on your\n"
@@ -1505,94 +1556,7 @@ msgstr ""
 "Ju lutemi zgjedheni portën e saktë. Për shembull \"COM1\" është portë ndër\n"
 "Windows, kurse \"ttyS0\" është i emëruar ndër sistemin GNU/Linux."
 
-#: ../help.pm:691
-#, fuzzy, c-format
-msgid ""
-"This is the most crucial decision point for the security of your GNU/Linux\n"
-"system: you must enter the \"root\" password. \"Root\" is the system\n"
-"administrator and is the only user authorized to make updates, add users,\n"
-"change the overall system configuration, and so on. In short, \"root\" can\n"
-"do everything! That's why you must choose a password which is difficult to\n"
-"guess: DrakX will tell you if the password you chose is too simple. As you\n"
-"can see, you're not forced to enter a password, but we strongly advise\n"
-"against this. GNU/Linux is just as prone to operator error as any other\n"
-"operating system. Since \"root\" can overcome all limitations and\n"
-"unintentionally erase all data on partitions by carelessly accessing the\n"
-"partitions themselves, it is important that it be difficult to become\n"
-"\"root\".\n"
-"\n"
-"The password should be a mixture of alphanumeric characters and at least 8\n"
-"characters long. Never write down the \"root\" password -- it makes it far\n"
-"too easy to compromise your system.\n"
-"\n"
-"One caveat: do not make the password too long or too complicated because "
-"you\n"
-"must be able to remember it!\n"
-"\n"
-"The password will not be displayed on screen as you type it. To reduce the\n"
-"chance of a blind typing error you'll need to enter the password twice. If\n"
-"you do happen to make the same typing error twice, you'll have to use this\n"
-"``incorrect'' password the first time you'll try to connect as \"root\".\n"
-"\n"
-"If you want an authentication server to control access to your computer,\n"
-"click on the \"%s\" button.\n"
-"\n"
-"If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
-"services, select the appropriate one for \"%s\". If you do not know which\n"
-"one to use, you should ask your network administrator.\n"
-"\n"
-"If you happen to have problems with remembering passwords, or if your\n"
-"computer will never be connected to the Internet and you absolutely trust\n"
-"everybody who uses your computer, you can choose to have \"%s\"."
-msgstr ""
-"Këtu duhet të dini se do ta merrnji një vendim më të vështirë, për sigurinë\n"
-"e sistemit tuaj GNU/Linux: ju duhet të futni parullën sikur administrator\n"
-"\"root\". \"Root\" është administrues i sistemit me të gjitha të drejtat\n"
-"e konfigurimit, azhurnimit, shtimit të përdoruesëve etj. Konkretisht \"root"
-"\"mund të bëjë çdo gjë në sistemin tuaj! Dhe për atë arësye ju duhet të "
-"futni\n"
-"parullën e tij, që është shumë veshtirë ta merrni me mend atë -- DrakX do\n"
-"të ju tregoj nëse është lehtë. Siq po e shifni, ju mund të mos e futni\n"
-"parullën ne ju rekomandojmë sinqerisht kundër kësaj veprimtarie. Duke ditur\n"
-"se gabimet bëhen shumë lehtë dhe pa ditur, një përdorues me të gjitha të\n"
-"drejtat mund të bëjë çmosë. Prej që se \"root\" mund të përfitojë gjdo\n"
-"të drejtë pa kufi i cili mund të zhdukë të gjitha të dhënat, duke kaluar\n"
-"në secilën ndarje të diskut, është me rëndësi që me vështirësi të madhe të\n"
-"shëndërroheni në administrator \"root\".\n"
-"\n"
-"Zgjedhja e parullës duhet të përmbajë së paku 8 karaktere (shkronja, numra\n"
-"etj) alfanumerikë. Mos e shkruani kurrë parullën \"root\" diku, mundohuni\n"
-"ta mbani në mend.\n"
-"\n"
-"Megjithatë, mos e shkruani parullën shumë të gjatë apo të komplikuar, sepse\n"
-"ju duhet të jeni në gjendje, ta mbani në mend, pa u mundur shumë.\n"
-"\n"
-"Parulla nuk do të paraqitet n'ekran, sikur e shtypni në tastierë direkt, "
-"prej\n"
-"nga, ju duhet ta shtypni dy herë, për të zvogëluar gabimin e mundshëm. Nëse\n"
-"një gabim i tillë arrinë, atëherë kjo parullë ``e pa saktë'' do të "
-"regjistrohet,\n"
-"dhe ju duhet ta rishtypni për të hyrë në sistemin tuaj për të parën herë.\n"
-"\n"
-"Nëse ju dëshironi të hyni në këtë kompjuter për tu kontrolluar nga një "
-"server\n"
-"vërtetues, kliko mbi kopsën \"%s\".\n"
-"\n"
-"Nëse rrjeti i juaj përdorë LDAP, NIS apo një pronë PDC Windows për servise\n"
-"vërtetuese, zgjedheni një qarkullim sikur \"%s\". Nëse ju nuk\n"
-"dini cilin ta përdorni, pyetni administratorin e rrjetit tuaj.\n"
-"\n"
-"Nëse ju hasni në ndonji problem, në lidhje me parullën, ju mund ta zgjedhni\n"
-"mundësinë \"%s\", nëse kompjuteri juaj nuk duhet të kyqet në rrjetin\n"
-"e Internetit, dhe nëse ju keni besim në secilin perdorues i cili hynë në\n"
-"sistemin tuaj."
-
-#: ../help.pm:725
-#, c-format
-msgid "authentication"
-msgstr "vërtetësim"
-
-#: ../help.pm:728
+#: ../help.pm:684
 #, fuzzy, c-format
 msgid ""
 "A boot loader is a little program which is started by the computer at boot\n"
@@ -1690,7 +1654,12 @@ msgstr ""
 msgid "pdq"
 msgstr "pdq"
 
-#: ../help.pm:768
+#: ../help.pm:724
+#, c-format
+msgid "CUPS"
+msgstr ""
+
+#: ../help.pm:724
 #, fuzzy, c-format
 msgid "Expert"
 msgstr "Modë Ekspert"
@@ -1766,11 +1735,6 @@ msgid ""
 "\n"
 " * \"%s\": verify the current mouse configuration and click on the button\n"
 "to change it if necessary.\n"
-"\n"
-" * \"%s\": clicking on the \"%s\" button will open the printer\n"
-"configuration wizard. Consult the corresponding chapter of the ``Starter\n"
-"Guide'' for more information on how to set up a new printer. The interface\n"
-"presented in our manual is similar to the one used during installation.\n"
 "\n"
 " * \"%s\": if a sound card is detected on your system, it'll be displayed\n"
 "here. If you notice the sound card is not the one actually present on your\n"
@@ -1879,7 +1843,12 @@ msgstr ""
 "përdorni këtë makinë sikur një server, është ide e mirë ta riçfaqni këtë\n"
 "instalim."
 
-#: ../help.pm:858
+#: ../help.pm:809
+#, fuzzy, c-format
+msgid "TV card"
+msgstr "Kartelë ISDN"
+
+#: ../help.pm:809
 #, c-format
 msgid "ISDN card"
 msgstr "Kartelë ISDN"
@@ -1929,3 +1898,126 @@ msgstr "Tjetri ->"
 msgid "<- Previous"
 msgstr "<- Mbrapa"
 
+#, fuzzy
+#~ msgid ""
+#~ "\"%s\": clicking on the \"%s\" button will open the printer "
+#~ "configuration\n"
+#~ "wizard. Consult the corresponding chapter of the ``Starter Guide'' for "
+#~ "more\n"
+#~ "information on how to set up a new printer. The interface presented in "
+#~ "our\n"
+#~ "manual is similar to the one used during installation."
+#~ msgstr ""
+#~ "\"%s\": duke klikuar mbi kopsën \"%s\" e cila do të hapë asistentin\n"
+#~ "konfigurues. Konsultoni kapitujt e caktuar të ``Përcjellësit Nisës''\n"
+#~ "për më shumë informacione se si të konfigurohet një stampues i ri.\n"
+#~ "Interfaci i prezentuar, është i njëjtë me atë gjatë instalimit."
+
+#, fuzzy
+#~ msgid ""
+#~ "This is the most crucial decision point for the security of your GNU/"
+#~ "Linux\n"
+#~ "system: you must enter the \"root\" password. \"Root\" is the system\n"
+#~ "administrator and is the only user authorized to make updates, add "
+#~ "users,\n"
+#~ "change the overall system configuration, and so on. In short, \"root\" "
+#~ "can\n"
+#~ "do everything! That's why you must choose a password which is difficult "
+#~ "to\n"
+#~ "guess: DrakX will tell you if the password you chose is too simple. As "
+#~ "you\n"
+#~ "can see, you're not forced to enter a password, but we strongly advise\n"
+#~ "against this. GNU/Linux is just as prone to operator error as any other\n"
+#~ "operating system. Since \"root\" can overcome all limitations and\n"
+#~ "unintentionally erase all data on partitions by carelessly accessing the\n"
+#~ "partitions themselves, it is important that it be difficult to become\n"
+#~ "\"root\".\n"
+#~ "\n"
+#~ "The password should be a mixture of alphanumeric characters and at least "
+#~ "8\n"
+#~ "characters long. Never write down the \"root\" password -- it makes it "
+#~ "far\n"
+#~ "too easy to compromise your system.\n"
+#~ "\n"
+#~ "One caveat: do not make the password too long or too complicated because "
+#~ "you\n"
+#~ "must be able to remember it!\n"
+#~ "\n"
+#~ "The password will not be displayed on screen as you type it. To reduce "
+#~ "the\n"
+#~ "chance of a blind typing error you'll need to enter the password twice. "
+#~ "If\n"
+#~ "you do happen to make the same typing error twice, you'll have to use "
+#~ "this\n"
+#~ "``incorrect'' password the first time you'll try to connect as \"root\".\n"
+#~ "\n"
+#~ "If you want an authentication server to control access to your computer,\n"
+#~ "click on the \"%s\" button.\n"
+#~ "\n"
+#~ "If your network uses either LDAP, NIS, or PDC Windows Domain "
+#~ "authentication\n"
+#~ "services, select the appropriate one for \"%s\". If you do not know "
+#~ "which\n"
+#~ "one to use, you should ask your network administrator.\n"
+#~ "\n"
+#~ "If you happen to have problems with remembering passwords, or if your\n"
+#~ "computer will never be connected to the Internet and you absolutely "
+#~ "trust\n"
+#~ "everybody who uses your computer, you can choose to have \"%s\"."
+#~ msgstr ""
+#~ "Këtu duhet të dini se do ta merrnji një vendim më të vështirë, për "
+#~ "sigurinë\n"
+#~ "e sistemit tuaj GNU/Linux: ju duhet të futni parullën sikur "
+#~ "administrator\n"
+#~ "\"root\". \"Root\" është administrues i sistemit me të gjitha të drejtat\n"
+#~ "e konfigurimit, azhurnimit, shtimit të përdoruesëve etj. Konkretisht "
+#~ "\"root\"mund të bëjë çdo gjë në sistemin tuaj! Dhe për atë arësye ju "
+#~ "duhet të futni\n"
+#~ "parullën e tij, që është shumë veshtirë ta merrni me mend atë -- DrakX "
+#~ "do\n"
+#~ "të ju tregoj nëse është lehtë. Siq po e shifni, ju mund të mos e futni\n"
+#~ "parullën ne ju rekomandojmë sinqerisht kundër kësaj veprimtarie. Duke "
+#~ "ditur\n"
+#~ "se gabimet bëhen shumë lehtë dhe pa ditur, një përdorues me të gjitha të\n"
+#~ "drejtat mund të bëjë çmosë. Prej që se \"root\" mund të përfitojë gjdo\n"
+#~ "të drejtë pa kufi i cili mund të zhdukë të gjitha të dhënat, duke kaluar\n"
+#~ "në secilën ndarje të diskut, është me rëndësi që me vështirësi të madhe "
+#~ "të\n"
+#~ "shëndërroheni në administrator \"root\".\n"
+#~ "\n"
+#~ "Zgjedhja e parullës duhet të përmbajë së paku 8 karaktere (shkronja, "
+#~ "numra\n"
+#~ "etj) alfanumerikë. Mos e shkruani kurrë parullën \"root\" diku, "
+#~ "mundohuni\n"
+#~ "ta mbani në mend.\n"
+#~ "\n"
+#~ "Megjithatë, mos e shkruani parullën shumë të gjatë apo të komplikuar, "
+#~ "sepse\n"
+#~ "ju duhet të jeni në gjendje, ta mbani në mend, pa u mundur shumë.\n"
+#~ "\n"
+#~ "Parulla nuk do të paraqitet n'ekran, sikur e shtypni në tastierë direkt, "
+#~ "prej\n"
+#~ "nga, ju duhet ta shtypni dy herë, për të zvogëluar gabimin e mundshëm. "
+#~ "Nëse\n"
+#~ "një gabim i tillë arrinë, atëherë kjo parullë ``e pa saktë'' do të "
+#~ "regjistrohet,\n"
+#~ "dhe ju duhet ta rishtypni për të hyrë në sistemin tuaj për të parën "
+#~ "herë.\n"
+#~ "\n"
+#~ "Nëse ju dëshironi të hyni në këtë kompjuter për tu kontrolluar nga një "
+#~ "server\n"
+#~ "vërtetues, kliko mbi kopsën \"%s\".\n"
+#~ "\n"
+#~ "Nëse rrjeti i juaj përdorë LDAP, NIS apo një pronë PDC Windows për "
+#~ "servise\n"
+#~ "vërtetuese, zgjedheni një qarkullim sikur \"%s\". Nëse ju nuk\n"
+#~ "dini cilin ta përdorni, pyetni administratorin e rrjetit tuaj.\n"
+#~ "\n"
+#~ "Nëse ju hasni në ndonji problem, në lidhje me parullën, ju mund ta "
+#~ "zgjedhni\n"
+#~ "mundësinë \"%s\", nëse kompjuteri juaj nuk duhet të kyqet në rrjetin\n"
+#~ "e Internetit, dhe nëse ju keni besim në secilin perdorues i cili hynë në\n"
+#~ "sistemin tuaj."
+
+#~ msgid "authentication"
+#~ msgstr "vërtetësim"

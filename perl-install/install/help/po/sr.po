@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-04 17:25+0200\n"
+"POT-Creation-Date: 2008-09-12 12:22+0200\n"
 "PO-Revision-Date: 2004-09-15 13:33+0200\n"
 "Last-Translator: Toma Jankovic <tomaja@net.yu>\n"
 "Language-Team: Serbian <i18n@mandrake.co.yu>\n"
@@ -15,7 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.6\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #: ../help.pm:14
 #, fuzzy, c-format
@@ -116,6 +117,16 @@ msgstr ""
 "->\". Уколико нисте заинтересовани за ову опцију, деселектујте  \"Да ли "
 "желите\n"
 "да користите ову опцију?\" ."
+
+#: ../help.pm:54
+#, c-format
+msgid "User name"
+msgstr ""
+
+#: ../help.pm:54
+#, c-format
+msgid "Accept user"
+msgstr ""
 
 #: ../help.pm:54
 #, c-format
@@ -230,8 +241,7 @@ msgid ""
 "configure your system so that it complies as much as possible with the\n"
 "Linux Standard Base specifications.\n"
 "\n"
-"   Selecting the \"LSB\" group will also install the \"2.4\" kernel series,\n"
-"instead of the default \"2.6\" one. This is to ensure 100%%-LSB compliance\n"
+"   Selecting the \"LSB\" group will ensure 100%%-LSB compliance\n"
 "of the system. However, if you do not select the \"LSB\" group you will\n"
 "still have a system which is nearly 100%% LSB-compliant.\n"
 "\n"
@@ -413,22 +423,7 @@ msgstr ""
 msgid "Automatic dependencies"
 msgstr ""
 
-#: ../help.pm:186
-#, fuzzy, c-format
-msgid ""
-"\"%s\": clicking on the \"%s\" button will open the printer configuration\n"
-"wizard. Consult the corresponding chapter of the ``Starter Guide'' for more\n"
-"information on how to set up a new printer. The interface presented in our\n"
-"manual is similar to the one used during installation."
-msgstr ""
-"\"Штампач\": ако кликнете на тастер \"Без штампача\" покренути ћете "
-"конфигурациони\n"
-"програм за штампаче. Погледајте и одговоарајуће упуство у``Starter\n"
-"Guide'' за више информација о томе како да подесите нови штампач. Програм "
-"које се\n"
-"тада активира је сличан оном који се користи током инсталације."
-
-#: ../help.pm:192
+#: ../help.pm:185
 #, fuzzy, c-format
 msgid ""
 "This dialog is used to select which services you wish to start at boot\n"
@@ -503,7 +498,12 @@ msgstr ""
 "може користити и од\n"
 "стране других машина на вашој локалној мрежи."
 
-#: ../help.pm:220
+#: ../help.pm:213
+#, c-format
+msgid "Hardware clock set to GMT"
+msgstr ""
+
+#: ../help.pm:213
 #, fuzzy, c-format
 msgid "Automatic time synchronization"
 msgstr "Аутоматска синхронизација времена (преко NTP-а)"
@@ -863,7 +863,12 @@ msgstr ""
 msgid "Use existing partition"
 msgstr "Користи постојећу партицију"
 
-#: ../help.pm:377
+#: ../help.pm:370
+#, c-format
+msgid "Use the free space on the Microsoft Windows® partition"
+msgstr ""
+
+#: ../help.pm:370
 #, c-format
 msgid "Erase entire disk"
 msgstr "Избриши цели диск"
@@ -951,7 +956,22 @@ msgstr ""
 msgid "Generate auto-install floppy"
 msgstr "Креирај ауто инсталациону дискету"
 
-#: ../help.pm:415
+#: ../help.pm:405
+#, c-format
+msgid "Replay"
+msgstr ""
+
+#: ../help.pm:405
+#, c-format
+msgid "Automated"
+msgstr ""
+
+#: ../help.pm:405
+#, c-format
+msgid "Save packages selection"
+msgstr ""
+
+#: ../help.pm:408
 #, fuzzy, c-format
 msgid ""
 "If you chose to reuse some legacy GNU/Linux partitions, you may wish to\n"
@@ -1213,12 +1233,37 @@ msgstr ""
 "на пример 50MB, можете искористити тај простор за смештање\n"
 "резервног кернела и ramdisk image за стартање у хитним ситуацијама."
 
-#: ../help.pm:533
+#: ../help.pm:526
+#, c-format
+msgid "Save partition table"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Restore partition table"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Rescue partition table"
+msgstr ""
+
+#: ../help.pm:526
 #, fuzzy, c-format
 msgid "Removable media auto-mounting"
 msgstr "Аутомонтирање преносивог медија"
 
-#: ../help.pm:533
+#: ../help.pm:526
+#, c-format
+msgid "Wizard"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Undo"
+msgstr ""
+
+#: ../help.pm:526
 #, fuzzy, c-format
 msgid "Toggle between normal/expert mode"
 msgstr "Пређи на нормални мод"
@@ -1461,7 +1506,12 @@ msgstr ""
 msgid "Espanol"
 msgstr ""
 
-#: ../help.pm:653
+#: ../help.pm:643
+#, c-format
+msgid "Use Unicode by default"
+msgstr ""
+
+#: ../help.pm:646
 #, fuzzy, c-format
 msgid ""
 "Usually, DrakX has no problems detecting the number of buttons on your\n"
@@ -1542,91 +1592,7 @@ msgstr ""
 "Молим, изаберите одговарајући порт. На пример, COM1 порт под MS Windows-ом\n"
 " у Linux-у има ознаку ttyS0."
 
-#: ../help.pm:691
-#, fuzzy, c-format
-msgid ""
-"This is the most crucial decision point for the security of your GNU/Linux\n"
-"system: you must enter the \"root\" password. \"Root\" is the system\n"
-"administrator and is the only user authorized to make updates, add users,\n"
-"change the overall system configuration, and so on. In short, \"root\" can\n"
-"do everything! That's why you must choose a password which is difficult to\n"
-"guess: DrakX will tell you if the password you chose is too simple. As you\n"
-"can see, you're not forced to enter a password, but we strongly advise\n"
-"against this. GNU/Linux is just as prone to operator error as any other\n"
-"operating system. Since \"root\" can overcome all limitations and\n"
-"unintentionally erase all data on partitions by carelessly accessing the\n"
-"partitions themselves, it is important that it be difficult to become\n"
-"\"root\".\n"
-"\n"
-"The password should be a mixture of alphanumeric characters and at least 8\n"
-"characters long. Never write down the \"root\" password -- it makes it far\n"
-"too easy to compromise your system.\n"
-"\n"
-"One caveat: do not make the password too long or too complicated because "
-"you\n"
-"must be able to remember it!\n"
-"\n"
-"The password will not be displayed on screen as you type it. To reduce the\n"
-"chance of a blind typing error you'll need to enter the password twice. If\n"
-"you do happen to make the same typing error twice, you'll have to use this\n"
-"``incorrect'' password the first time you'll try to connect as \"root\".\n"
-"\n"
-"If you want an authentication server to control access to your computer,\n"
-"click on the \"%s\" button.\n"
-"\n"
-"If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
-"services, select the appropriate one for \"%s\". If you do not know which\n"
-"one to use, you should ask your network administrator.\n"
-"\n"
-"If you happen to have problems with remembering passwords, or if your\n"
-"computer will never be connected to the Internet and you absolutely trust\n"
-"everybody who uses your computer, you can choose to have \"%s\"."
-msgstr ""
-"Ово је најзаначајнија тачка у одлучивању о сигурности вашег GNU/Linux\n"
-"система: морате да унесете \"root\" лозинку. \"root\" је администратор\n"
-"система и једини је овлаштен да врши измене, додаје кориснике,\n"
-"мења основну конфигурацију система, итд. Укратко, \"root\" може\n"
-"да уради све! Због тога морате да изаберете лозинку која тешко може да се\n"
-"погоди - DrakX ће вам рећи уколико је она сувише једноставна. Као што можете "
-"да видите, можете да\n"
-"изаберете и да не унесете лозинку, али вам озбиљно препоручујемо да то\n"
-"нерадите из једног разлога: немојте да мислите да то што сте стартовали GNU/"
-"Linux да\n"
-"ваши други оперативни системи сигурни од грешака. Како \"root\" може да\n"
-"прескочи сва ограничења и ненамерно избрише све податке на партицији\n"
-"неопрезним приступом, важно је да је тешко\n"
-"постати \"root\".\n"
-"\n"
-"Лозинка треба да буде мешавина бројева и слова и треба да садржи најмање 8\n"
-"карактера. Никада не записујте на папир \"root\" лозинку - тако лако\n"
-"можете угрозити систем.\n"
-"\n"
-"Међутим, потрудите се да лозинка не буде превише дуга или комликована зато\n"
-"што треба да је запамтите без много напора.\n"
-"\n"
-"Лозинка неће бити приказана на екрану када је укуцавате. Срећом, моћи ћете\n"
-"да је укуцате два пута да би смањили могућност греше у куцању.\n"
-"Уколико ипак погрешите у куцању, али два пута, ова\n"
-"``неисправна'' лозинка ће бити кориштена када се будете први пут "
-"конектовали.\n"
-"\n"
-"У Експертномм моду, бићете питани да ли ћете се конектовати на\n"
-"аутентификациони сервер, као што је NIS или LDAP.\n"
-"\n"
-"Уколико ваша мрежа користи LDAP (или NIS) протокол за аутентификацију, "
-"селектујте\n"
-"\"LDAP\" (или \"NIS\") за аутентификацију. Уколико то незнате, питајте\n"
-"вашег мрежног администратора.\n"
-"\n"
-"Уколико се ваш рачунар не конектује на администриране мреже, треба да\n"
-"изаберете \"Локални фајлови\" за аутентификацију."
-
-#: ../help.pm:725
-#, fuzzy, c-format
-msgid "authentication"
-msgstr "Аутентификација"
-
-#: ../help.pm:728
+#: ../help.pm:684
 #, c-format
 msgid ""
 "A boot loader is a little program which is started by the computer at boot\n"
@@ -1708,7 +1674,12 @@ msgstr ""
 msgid "pdq"
 msgstr ""
 
-#: ../help.pm:768
+#: ../help.pm:724
+#, c-format
+msgid "CUPS"
+msgstr ""
+
+#: ../help.pm:724
 #, c-format
 msgid "Expert"
 msgstr "Стручни"
@@ -1801,11 +1772,6 @@ msgid ""
 " * \"%s\": verify the current mouse configuration and click on the button\n"
 "to change it if necessary.\n"
 "\n"
-" * \"%s\": clicking on the \"%s\" button will open the printer\n"
-"configuration wizard. Consult the corresponding chapter of the ``Starter\n"
-"Guide'' for more information on how to set up a new printer. The interface\n"
-"presented in our manual is similar to the one used during installation.\n"
-"\n"
 " * \"%s\": if a sound card is detected on your system, it'll be displayed\n"
 "here. If you notice the sound card is not the one actually present on your\n"
 "system, you can click on the button and choose a different driver.\n"
@@ -1848,7 +1814,12 @@ msgid ""
 "idea to review this setup."
 msgstr ""
 
-#: ../help.pm:858
+#: ../help.pm:809
+#, fuzzy, c-format
+msgid "TV card"
+msgstr "Интерна  ISDN картица"
+
+#: ../help.pm:809
 #, fuzzy, c-format
 msgid "ISDN card"
 msgstr "Интерна  ISDN картица"
@@ -1900,3 +1871,118 @@ msgstr "Следећи  ->"
 msgid "<- Previous"
 msgstr "<- Претходни"
 
+#, fuzzy
+#~ msgid ""
+#~ "\"%s\": clicking on the \"%s\" button will open the printer "
+#~ "configuration\n"
+#~ "wizard. Consult the corresponding chapter of the ``Starter Guide'' for "
+#~ "more\n"
+#~ "information on how to set up a new printer. The interface presented in "
+#~ "our\n"
+#~ "manual is similar to the one used during installation."
+#~ msgstr ""
+#~ "\"Штампач\": ако кликнете на тастер \"Без штампача\" покренути ћете "
+#~ "конфигурациони\n"
+#~ "програм за штампаче. Погледајте и одговоарајуће упуство у``Starter\n"
+#~ "Guide'' за више информација о томе како да подесите нови штампач. Програм "
+#~ "које се\n"
+#~ "тада активира је сличан оном који се користи током инсталације."
+
+#, fuzzy
+#~ msgid ""
+#~ "This is the most crucial decision point for the security of your GNU/"
+#~ "Linux\n"
+#~ "system: you must enter the \"root\" password. \"Root\" is the system\n"
+#~ "administrator and is the only user authorized to make updates, add "
+#~ "users,\n"
+#~ "change the overall system configuration, and so on. In short, \"root\" "
+#~ "can\n"
+#~ "do everything! That's why you must choose a password which is difficult "
+#~ "to\n"
+#~ "guess: DrakX will tell you if the password you chose is too simple. As "
+#~ "you\n"
+#~ "can see, you're not forced to enter a password, but we strongly advise\n"
+#~ "against this. GNU/Linux is just as prone to operator error as any other\n"
+#~ "operating system. Since \"root\" can overcome all limitations and\n"
+#~ "unintentionally erase all data on partitions by carelessly accessing the\n"
+#~ "partitions themselves, it is important that it be difficult to become\n"
+#~ "\"root\".\n"
+#~ "\n"
+#~ "The password should be a mixture of alphanumeric characters and at least "
+#~ "8\n"
+#~ "characters long. Never write down the \"root\" password -- it makes it "
+#~ "far\n"
+#~ "too easy to compromise your system.\n"
+#~ "\n"
+#~ "One caveat: do not make the password too long or too complicated because "
+#~ "you\n"
+#~ "must be able to remember it!\n"
+#~ "\n"
+#~ "The password will not be displayed on screen as you type it. To reduce "
+#~ "the\n"
+#~ "chance of a blind typing error you'll need to enter the password twice. "
+#~ "If\n"
+#~ "you do happen to make the same typing error twice, you'll have to use "
+#~ "this\n"
+#~ "``incorrect'' password the first time you'll try to connect as \"root\".\n"
+#~ "\n"
+#~ "If you want an authentication server to control access to your computer,\n"
+#~ "click on the \"%s\" button.\n"
+#~ "\n"
+#~ "If your network uses either LDAP, NIS, or PDC Windows Domain "
+#~ "authentication\n"
+#~ "services, select the appropriate one for \"%s\". If you do not know "
+#~ "which\n"
+#~ "one to use, you should ask your network administrator.\n"
+#~ "\n"
+#~ "If you happen to have problems with remembering passwords, or if your\n"
+#~ "computer will never be connected to the Internet and you absolutely "
+#~ "trust\n"
+#~ "everybody who uses your computer, you can choose to have \"%s\"."
+#~ msgstr ""
+#~ "Ово је најзаначајнија тачка у одлучивању о сигурности вашег GNU/Linux\n"
+#~ "система: морате да унесете \"root\" лозинку. \"root\" је администратор\n"
+#~ "система и једини је овлаштен да врши измене, додаје кориснике,\n"
+#~ "мења основну конфигурацију система, итд. Укратко, \"root\" може\n"
+#~ "да уради све! Због тога морате да изаберете лозинку која тешко може да "
+#~ "се\n"
+#~ "погоди - DrakX ће вам рећи уколико је она сувише једноставна. Као што "
+#~ "можете да видите, можете да\n"
+#~ "изаберете и да не унесете лозинку, али вам озбиљно препоручујемо да то\n"
+#~ "нерадите из једног разлога: немојте да мислите да то што сте стартовали "
+#~ "GNU/Linux да\n"
+#~ "ваши други оперативни системи сигурни од грешака. Како \"root\" може да\n"
+#~ "прескочи сва ограничења и ненамерно избрише све податке на партицији\n"
+#~ "неопрезним приступом, важно је да је тешко\n"
+#~ "постати \"root\".\n"
+#~ "\n"
+#~ "Лозинка треба да буде мешавина бројева и слова и треба да садржи најмање "
+#~ "8\n"
+#~ "карактера. Никада не записујте на папир \"root\" лозинку - тако лако\n"
+#~ "можете угрозити систем.\n"
+#~ "\n"
+#~ "Међутим, потрудите се да лозинка не буде превише дуга или комликована "
+#~ "зато\n"
+#~ "што треба да је запамтите без много напора.\n"
+#~ "\n"
+#~ "Лозинка неће бити приказана на екрану када је укуцавате. Срећом, моћи "
+#~ "ћете\n"
+#~ "да је укуцате два пута да би смањили могућност греше у куцању.\n"
+#~ "Уколико ипак погрешите у куцању, али два пута, ова\n"
+#~ "``неисправна'' лозинка ће бити кориштена када се будете први пут "
+#~ "конектовали.\n"
+#~ "\n"
+#~ "У Експертномм моду, бићете питани да ли ћете се конектовати на\n"
+#~ "аутентификациони сервер, као што је NIS или LDAP.\n"
+#~ "\n"
+#~ "Уколико ваша мрежа користи LDAP (или NIS) протокол за аутентификацију, "
+#~ "селектујте\n"
+#~ "\"LDAP\" (или \"NIS\") за аутентификацију. Уколико то незнате, питајте\n"
+#~ "вашег мрежног администратора.\n"
+#~ "\n"
+#~ "Уколико се ваш рачунар не конектује на администриране мреже, треба да\n"
+#~ "изаберете \"Локални фајлови\" за аутентификацију."
+
+#, fuzzy
+#~ msgid "authentication"
+#~ msgstr "Аутентификација"

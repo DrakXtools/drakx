@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-04 17:25+0200\n"
+"POT-Creation-Date: 2008-09-12 12:22+0200\n"
 "PO-Revision-Date: 2005-09-21 14:03+0100\n"
 "Last-Translator: Tibor Pittich <Tibor.Pittich@mandriva.org>\n"
 "Language-Team:  <i18n@mandrake.sk>\n"
@@ -114,6 +114,16 @@ msgstr ""
 
 #: ../help.pm:54
 #, c-format
+msgid "User name"
+msgstr ""
+
+#: ../help.pm:54
+#, c-format
+msgid "Accept user"
+msgstr ""
+
+#: ../help.pm:54
+#, c-format
 msgid "Do you want to use this feature?"
 msgstr "Chcete použiť túto možnosť?"
 
@@ -198,7 +208,7 @@ msgstr ""
 "nemáte, kliknite na \"%s\" a požadovaný balík nebude nainštalovaný."
 
 #: ../help.pm:95
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "It's now time to specify which programs you wish to install on your system.\n"
 "There are thousands of packages available for Mandriva Linux, and to make "
@@ -219,8 +229,7 @@ msgid ""
 "configure your system so that it complies as much as possible with the\n"
 "Linux Standard Base specifications.\n"
 "\n"
-"   Selecting the \"LSB\" group will also install the \"2.4\" kernel series,\n"
-"instead of the default \"2.6\" one. This is to ensure 100%%-LSB compliance\n"
+"   Selecting the \"LSB\" group will ensure 100%%-LSB compliance\n"
 "of the system. However, if you do not select the \"LSB\" group you will\n"
 "still have a system which is nearly 100%% LSB-compliant.\n"
 "\n"
@@ -409,22 +418,7 @@ msgstr ""
 msgid "Automatic dependencies"
 msgstr "Automatické závislosti"
 
-#: ../help.pm:186
-#, c-format
-msgid ""
-"\"%s\": clicking on the \"%s\" button will open the printer configuration\n"
-"wizard. Consult the corresponding chapter of the ``Starter Guide'' for more\n"
-"information on how to set up a new printer. The interface presented in our\n"
-"manual is similar to the one used during installation."
-msgstr ""
-"\"%s\": kliknutím na \"%s\" tlačidlo sa otvorí sprievodca konfiguráciou "
-"tlačiarne.\n"
-"Ak chcete získať viac informácií o tom, ako nastaviť novú tlačiareň, "
-"použite\n"
-"``Úvodnú príručku''. Rozhranie, ktoré tu vidíte je podobné tomu, ktoré bolo\n"
-"použité pri inštalácii."
-
-#: ../help.pm:192
+#: ../help.pm:185
 #, c-format
 msgid ""
 "This dialog is used to select which services you wish to start at boot\n"
@@ -497,7 +491,12 @@ msgstr ""
 "server, ktorý je\n"
 "potom možné používať aj vo vašej lokálnej sieti."
 
-#: ../help.pm:220
+#: ../help.pm:213
+#, c-format
+msgid "Hardware clock set to GMT"
+msgstr ""
+
+#: ../help.pm:213
 #, c-format
 msgid "Automatic time synchronization"
 msgstr "Automatická synchronizácia času"
@@ -853,7 +852,12 @@ msgstr ""
 msgid "Use existing partition"
 msgstr "Použiť existujúci oddiel"
 
-#: ../help.pm:377
+#: ../help.pm:370
+#, c-format
+msgid "Use the free space on the Microsoft Windows® partition"
+msgstr ""
+
+#: ../help.pm:370
 #, c-format
 msgid "Erase entire disk"
 msgstr "Vymazať celý disk"
@@ -937,7 +941,22 @@ msgstr ""
 msgid "Generate auto-install floppy"
 msgstr "Vygenerovať auto-inštalačnú disketu"
 
-#: ../help.pm:415
+#: ../help.pm:405
+#, c-format
+msgid "Replay"
+msgstr ""
+
+#: ../help.pm:405
+#, c-format
+msgid "Automated"
+msgstr ""
+
+#: ../help.pm:405
+#, c-format
+msgid "Save packages selection"
+msgstr ""
+
+#: ../help.pm:408
 #, c-format
 msgid ""
 "If you chose to reuse some legacy GNU/Linux partitions, you may wish to\n"
@@ -1208,12 +1227,37 @@ msgstr ""
 "to byť vhodné miesto pre uloženie jadra a obrazov ramdisku pre výnimočné\n"
 "situácie, ktoré môžu nastať."
 
-#: ../help.pm:533
+#: ../help.pm:526
+#, c-format
+msgid "Save partition table"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Restore partition table"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Rescue partition table"
+msgstr ""
+
+#: ../help.pm:526
 #, c-format
 msgid "Removable media auto-mounting"
 msgstr "Automatické pripájanie vymeniteľného média"
 
-#: ../help.pm:533
+#: ../help.pm:526
+#, c-format
+msgid "Wizard"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Undo"
+msgstr ""
+
+#: ../help.pm:526
 #, c-format
 msgid "Toggle between normal/expert mode"
 msgstr "Prepnúť medzi normálnym/expertným režimom"
@@ -1474,7 +1518,12 @@ msgstr ""
 msgid "Espanol"
 msgstr "Španielsky"
 
-#: ../help.pm:653
+#: ../help.pm:643
+#, c-format
+msgid "Use Unicode by default"
+msgstr ""
+
+#: ../help.pm:646
 #, c-format
 msgid ""
 "Usually, DrakX has no problems detecting the number of buttons on your\n"
@@ -1561,101 +1610,7 @@ msgstr ""
 "Prosím zvoľte správny port. Napríklad COM1 pod MS Windows sa v\n"
 "GNU/Linux nazýva ttyS0."
 
-#: ../help.pm:691
-#, c-format
-msgid ""
-"This is the most crucial decision point for the security of your GNU/Linux\n"
-"system: you must enter the \"root\" password. \"Root\" is the system\n"
-"administrator and is the only user authorized to make updates, add users,\n"
-"change the overall system configuration, and so on. In short, \"root\" can\n"
-"do everything! That's why you must choose a password which is difficult to\n"
-"guess: DrakX will tell you if the password you chose is too simple. As you\n"
-"can see, you're not forced to enter a password, but we strongly advise\n"
-"against this. GNU/Linux is just as prone to operator error as any other\n"
-"operating system. Since \"root\" can overcome all limitations and\n"
-"unintentionally erase all data on partitions by carelessly accessing the\n"
-"partitions themselves, it is important that it be difficult to become\n"
-"\"root\".\n"
-"\n"
-"The password should be a mixture of alphanumeric characters and at least 8\n"
-"characters long. Never write down the \"root\" password -- it makes it far\n"
-"too easy to compromise your system.\n"
-"\n"
-"One caveat: do not make the password too long or too complicated because "
-"you\n"
-"must be able to remember it!\n"
-"\n"
-"The password will not be displayed on screen as you type it. To reduce the\n"
-"chance of a blind typing error you'll need to enter the password twice. If\n"
-"you do happen to make the same typing error twice, you'll have to use this\n"
-"``incorrect'' password the first time you'll try to connect as \"root\".\n"
-"\n"
-"If you want an authentication server to control access to your computer,\n"
-"click on the \"%s\" button.\n"
-"\n"
-"If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
-"services, select the appropriate one for \"%s\". If you do not know which\n"
-"one to use, you should ask your network administrator.\n"
-"\n"
-"If you happen to have problems with remembering passwords, or if your\n"
-"computer will never be connected to the Internet and you absolutely trust\n"
-"everybody who uses your computer, you can choose to have \"%s\"."
-msgstr ""
-"Toto je veľmi dôležité rozhodnutie zamerané na bezpečnosť vášho GNU/Linux\n"
-"systému: musíte zadať heslo pre používateľa \"root\"-a. Je to systémový "
-"administrátor\n"
-"a ako jediný má oprávnenie vykonávať aktualizácie, pridávať používateľov,\n"
-"meniť nastavenie celého systému a podobne. V skratke sa dá povedať, že \"root"
-"\"\n"
-"môže všetko! Toto je dôvod, prečo si musíte zvoliť heslo tak, aby ho nebolo\n"
-"jednoduché uhádnuť - DrakX vám to povie, ak je príliš jednoduché. Ako "
-"vidíte,\n"
-"môžete sa rozhodnúť nezadať žiadne heslo, ale chceli by sme vás pred tým\n"
-"varovať z jedného dôvodu: nemyslite si, že vaše ostatné nainštalované "
-"operačné\n"
-"systémy sú chránené pred omylmi len preto, že máte spustený operačný systém\n"
-"GNU/Linux. Pretože na \"root\"-a sa nevzťahujú žiadne obmedzenia a je mu\n"
-"umožnené dokonca vymazať všetky údaje na všetkých dostupných oblastiach,\n"
-"je veľmi dôležité aby nebolo príliš jednoduché sa stať \"root\"-om.\n"
-"\n"
-"Toto heslo by malo byť kombináciou alfanumerických znakov a byť aspoň 8\n"
-"znakov dlhé. Nikdy nezadávajte ako heslo \"root\", bolo by ho veľmi "
-"jednoduché\n"
-"uhádnuť a kompromitovať tak systém.\n"
-"\n"
-"V každom prípade, netvorte si heslo príliš dlhé alebo príliš komplikované, "
-"aby ste\n"
-"si ho dokázali zapamätať bez toho aby ste ho mali niekde napísané.\n"
-"\n"
-"Heslo sa počas jeho zadávania nezobrazuje na obrazovke. Budete vyzvaní k "
-"tomu\n"
-"aby ste ho zadali dva krát, aby sa predišlo problémom pri omyle alebo "
-"preklepe. Ak\n"
-"sa vám ale podarí zadať dva krát po sebe heslo s rovnakou chybou, bude toto "
-"``chybné''\n"
-"heslo nastavené!\n"
-"\n"
-"Ak chcete kontrolovať prístup k tomuto počítaču pomocou autorizačného "
-"servera\n"
-"kliknite na tlačidlo \"%s\".\n"
-"\n"
-"Ak vaša sieť používa LDAP, NIS alebo PDC vrámci Windows domény pre "
-"autentikáciu,\n"
-"vyberte si požadované ako \"%s\". Ak neviete na túto otázku odpovedať\n"
-"opýtajte sa vášho sieťového administrátora.\n"
-"\n"
-"Ak máte problém zapamätať si vaše heslo a váš počítač nie je pripojený k "
-"Internetu\n"
-"alebo ak dôverujete každému, kto má k počítaču prístup môžte si zvoliť "
-"nastavenie\n"
-"\"%s\"."
-
-#: ../help.pm:725
-#, c-format
-msgid "authentication"
-msgstr "autentifikácia"
-
-#: ../help.pm:728
+#: ../help.pm:684
 #, c-format
 msgid ""
 "A boot loader is a little program which is started by the computer at boot\n"
@@ -1753,7 +1708,12 @@ msgstr ""
 msgid "pdq"
 msgstr "pdq"
 
-#: ../help.pm:768
+#: ../help.pm:724
+#, c-format
+msgid "CUPS"
+msgstr ""
+
+#: ../help.pm:724
 #, c-format
 msgid "Expert"
 msgstr "Expert"
@@ -1807,7 +1767,7 @@ msgstr ""
 "systéme, môžete kliknúť na tlačidlo a vybrať si iný ovládač."
 
 #: ../help.pm:794
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "As a review, DrakX will present a summary of information it has gathered\n"
 "about your system. Depending on the hardware installed on your machine, you\n"
@@ -1829,11 +1789,6 @@ msgid ""
 "\n"
 " * \"%s\": verify the current mouse configuration and click on the button\n"
 "to change it if necessary.\n"
-"\n"
-" * \"%s\": clicking on the \"%s\" button will open the printer\n"
-"configuration wizard. Consult the corresponding chapter of the ``Starter\n"
-"Guide'' for more information on how to set up a new printer. The interface\n"
-"presented in our manual is similar to the one used during installation.\n"
 "\n"
 " * \"%s\": if a sound card is detected on your system, it'll be displayed\n"
 "here. If you notice the sound card is not the one actually present on your\n"
@@ -1946,7 +1901,12 @@ msgstr ""
 "spúšťané na vašom počítači. Ak plánujete používať tento počítač ako\n"
 "server, je dobrý nápad prezrieť si tieto nastavenia."
 
-#: ../help.pm:858
+#: ../help.pm:809
+#, fuzzy, c-format
+msgid "TV card"
+msgstr "ISDN karta"
+
+#: ../help.pm:809
 #, c-format
 msgid "ISDN card"
 msgstr "ISDN karta"
@@ -1996,3 +1956,126 @@ msgstr "Ďalej ->"
 msgid "<- Previous"
 msgstr "<- Späť"
 
+#~ msgid ""
+#~ "\"%s\": clicking on the \"%s\" button will open the printer "
+#~ "configuration\n"
+#~ "wizard. Consult the corresponding chapter of the ``Starter Guide'' for "
+#~ "more\n"
+#~ "information on how to set up a new printer. The interface presented in "
+#~ "our\n"
+#~ "manual is similar to the one used during installation."
+#~ msgstr ""
+#~ "\"%s\": kliknutím na \"%s\" tlačidlo sa otvorí sprievodca konfiguráciou "
+#~ "tlačiarne.\n"
+#~ "Ak chcete získať viac informácií o tom, ako nastaviť novú tlačiareň, "
+#~ "použite\n"
+#~ "``Úvodnú príručku''. Rozhranie, ktoré tu vidíte je podobné tomu, ktoré "
+#~ "bolo\n"
+#~ "použité pri inštalácii."
+
+#~ msgid ""
+#~ "This is the most crucial decision point for the security of your GNU/"
+#~ "Linux\n"
+#~ "system: you must enter the \"root\" password. \"Root\" is the system\n"
+#~ "administrator and is the only user authorized to make updates, add "
+#~ "users,\n"
+#~ "change the overall system configuration, and so on. In short, \"root\" "
+#~ "can\n"
+#~ "do everything! That's why you must choose a password which is difficult "
+#~ "to\n"
+#~ "guess: DrakX will tell you if the password you chose is too simple. As "
+#~ "you\n"
+#~ "can see, you're not forced to enter a password, but we strongly advise\n"
+#~ "against this. GNU/Linux is just as prone to operator error as any other\n"
+#~ "operating system. Since \"root\" can overcome all limitations and\n"
+#~ "unintentionally erase all data on partitions by carelessly accessing the\n"
+#~ "partitions themselves, it is important that it be difficult to become\n"
+#~ "\"root\".\n"
+#~ "\n"
+#~ "The password should be a mixture of alphanumeric characters and at least "
+#~ "8\n"
+#~ "characters long. Never write down the \"root\" password -- it makes it "
+#~ "far\n"
+#~ "too easy to compromise your system.\n"
+#~ "\n"
+#~ "One caveat: do not make the password too long or too complicated because "
+#~ "you\n"
+#~ "must be able to remember it!\n"
+#~ "\n"
+#~ "The password will not be displayed on screen as you type it. To reduce "
+#~ "the\n"
+#~ "chance of a blind typing error you'll need to enter the password twice. "
+#~ "If\n"
+#~ "you do happen to make the same typing error twice, you'll have to use "
+#~ "this\n"
+#~ "``incorrect'' password the first time you'll try to connect as \"root\".\n"
+#~ "\n"
+#~ "If you want an authentication server to control access to your computer,\n"
+#~ "click on the \"%s\" button.\n"
+#~ "\n"
+#~ "If your network uses either LDAP, NIS, or PDC Windows Domain "
+#~ "authentication\n"
+#~ "services, select the appropriate one for \"%s\". If you do not know "
+#~ "which\n"
+#~ "one to use, you should ask your network administrator.\n"
+#~ "\n"
+#~ "If you happen to have problems with remembering passwords, or if your\n"
+#~ "computer will never be connected to the Internet and you absolutely "
+#~ "trust\n"
+#~ "everybody who uses your computer, you can choose to have \"%s\"."
+#~ msgstr ""
+#~ "Toto je veľmi dôležité rozhodnutie zamerané na bezpečnosť vášho GNU/"
+#~ "Linux\n"
+#~ "systému: musíte zadať heslo pre používateľa \"root\"-a. Je to systémový "
+#~ "administrátor\n"
+#~ "a ako jediný má oprávnenie vykonávať aktualizácie, pridávať "
+#~ "používateľov,\n"
+#~ "meniť nastavenie celého systému a podobne. V skratke sa dá povedať, že "
+#~ "\"root\"\n"
+#~ "môže všetko! Toto je dôvod, prečo si musíte zvoliť heslo tak, aby ho "
+#~ "nebolo\n"
+#~ "jednoduché uhádnuť - DrakX vám to povie, ak je príliš jednoduché. Ako "
+#~ "vidíte,\n"
+#~ "môžete sa rozhodnúť nezadať žiadne heslo, ale chceli by sme vás pred tým\n"
+#~ "varovať z jedného dôvodu: nemyslite si, že vaše ostatné nainštalované "
+#~ "operačné\n"
+#~ "systémy sú chránené pred omylmi len preto, že máte spustený operačný "
+#~ "systém\n"
+#~ "GNU/Linux. Pretože na \"root\"-a sa nevzťahujú žiadne obmedzenia a je mu\n"
+#~ "umožnené dokonca vymazať všetky údaje na všetkých dostupných oblastiach,\n"
+#~ "je veľmi dôležité aby nebolo príliš jednoduché sa stať \"root\"-om.\n"
+#~ "\n"
+#~ "Toto heslo by malo byť kombináciou alfanumerických znakov a byť aspoň 8\n"
+#~ "znakov dlhé. Nikdy nezadávajte ako heslo \"root\", bolo by ho veľmi "
+#~ "jednoduché\n"
+#~ "uhádnuť a kompromitovať tak systém.\n"
+#~ "\n"
+#~ "V každom prípade, netvorte si heslo príliš dlhé alebo príliš "
+#~ "komplikované, aby ste\n"
+#~ "si ho dokázali zapamätať bez toho aby ste ho mali niekde napísané.\n"
+#~ "\n"
+#~ "Heslo sa počas jeho zadávania nezobrazuje na obrazovke. Budete vyzvaní k "
+#~ "tomu\n"
+#~ "aby ste ho zadali dva krát, aby sa predišlo problémom pri omyle alebo "
+#~ "preklepe. Ak\n"
+#~ "sa vám ale podarí zadať dva krát po sebe heslo s rovnakou chybou, bude "
+#~ "toto ``chybné''\n"
+#~ "heslo nastavené!\n"
+#~ "\n"
+#~ "Ak chcete kontrolovať prístup k tomuto počítaču pomocou autorizačného "
+#~ "servera\n"
+#~ "kliknite na tlačidlo \"%s\".\n"
+#~ "\n"
+#~ "Ak vaša sieť používa LDAP, NIS alebo PDC vrámci Windows domény pre "
+#~ "autentikáciu,\n"
+#~ "vyberte si požadované ako \"%s\". Ak neviete na túto otázku odpovedať\n"
+#~ "opýtajte sa vášho sieťového administrátora.\n"
+#~ "\n"
+#~ "Ak máte problém zapamätať si vaše heslo a váš počítač nie je pripojený k "
+#~ "Internetu\n"
+#~ "alebo ak dôverujete každému, kto má k počítaču prístup môžte si zvoliť "
+#~ "nastavenie\n"
+#~ "\"%s\"."
+
+#~ msgid "authentication"
+#~ msgstr "autentifikácia"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-it\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-04 17:25+0200\n"
+"POT-Creation-Date: 2008-09-12 12:22+0200\n"
 "PO-Revision-Date: 2006-02-03 21:33+0100\n"
 "Last-Translator: Andrea Celli <a.celli@caltanet.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -118,6 +118,16 @@ msgstr ""
 
 #: ../help.pm:54
 #, c-format
+msgid "User name"
+msgstr ""
+
+#: ../help.pm:54
+#, c-format
+msgid "Accept user"
+msgstr ""
+
+#: ../help.pm:54
+#, c-format
 msgid "Do you want to use this feature?"
 msgstr "Vuoi sfruttare questa possibilità?"
 
@@ -211,7 +221,7 @@ msgstr ""
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandriva.com:/cooker/doc/manualB/modules/it/drakx-chapter.xml
 #: ../help.pm:95
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "It's now time to specify which programs you wish to install on your system.\n"
 "There are thousands of packages available for Mandriva Linux, and to make "
@@ -232,8 +242,7 @@ msgid ""
 "configure your system so that it complies as much as possible with the\n"
 "Linux Standard Base specifications.\n"
 "\n"
-"   Selecting the \"LSB\" group will also install the \"2.4\" kernel series,\n"
-"instead of the default \"2.6\" one. This is to ensure 100%%-LSB compliance\n"
+"   Selecting the \"LSB\" group will ensure 100%%-LSB compliance\n"
 "of the system. However, if you do not select the \"LSB\" group you will\n"
 "still have a system which is nearly 100%% LSB-compliant.\n"
 "\n"
@@ -430,23 +439,7 @@ msgstr "Dipendenze automatiche"
 
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandriva.com:/cooker/doc/manualB/modules/it/drakx-chapter.xml
-#: ../help.pm:186
-#, c-format
-msgid ""
-"\"%s\": clicking on the \"%s\" button will open the printer configuration\n"
-"wizard. Consult the corresponding chapter of the ``Starter Guide'' for more\n"
-"information on how to set up a new printer. The interface presented in our\n"
-"manual is similar to the one used during installation."
-msgstr ""
-"\"%s\": cliccando sul pulsante \"%s\" sarà avviato l'assistente di\n"
-"configurazione della stampante. Consultate il relativo capitolo della\n"
-"\"Guida introduttiva\" per avere maggiori informazioni su come configurare\n"
-"una nuova stampante. L'interfaccia descritta in tale sede è simile a quella\n"
-"utilizzata nel corso dell'installazione."
-
-# DO NOT BOTHER TO MODIFY HERE, SEE:
-# cvs.mandriva.com:/cooker/doc/manualB/modules/it/drakx-chapter.xml
-#: ../help.pm:192
+#: ../help.pm:185
 #, c-format
 msgid ""
 "This dialog is used to select which services you wish to start at boot\n"
@@ -518,7 +511,12 @@ msgstr ""
 "essere a sua volta usato anche da altre macchine che si trovino sulla\n"
 "stessa rete locale."
 
-#: ../help.pm:220
+#: ../help.pm:213
+#, c-format
+msgid "Hardware clock set to GMT"
+msgstr ""
+
+#: ../help.pm:213
 #, c-format
 msgid "Automatic time synchronization"
 msgstr "Sincronizzazione automatica dell'orario"
@@ -875,7 +873,12 @@ msgstr ""
 msgid "Use existing partition"
 msgstr "Usa partizioni esistenti"
 
-#: ../help.pm:377
+#: ../help.pm:370
+#, c-format
+msgid "Use the free space on the Microsoft Windows® partition"
+msgstr ""
+
+#: ../help.pm:370
 #, c-format
 msgid "Erase entire disk"
 msgstr "Cancella l'intero disco"
@@ -964,9 +967,24 @@ msgstr ""
 msgid "Generate auto-install floppy"
 msgstr "Crea il floppy di installazione automatica"
 
+#: ../help.pm:405
+#, c-format
+msgid "Replay"
+msgstr ""
+
+#: ../help.pm:405
+#, c-format
+msgid "Automated"
+msgstr ""
+
+#: ../help.pm:405
+#, c-format
+msgid "Save packages selection"
+msgstr ""
+
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandriva.com:/cooker/doc/manualB/modules/it/drakx-chapter.xml
-#: ../help.pm:415
+#: ../help.pm:408
 #, c-format
 msgid ""
 "If you chose to reuse some legacy GNU/Linux partitions, you may wish to\n"
@@ -1241,12 +1259,37 @@ msgstr ""
 "utile deposito in cui conservare un kernel di riserva e immagini di avvio\n"
 "da utilizzare in caso di emergenza."
 
-#: ../help.pm:533
+#: ../help.pm:526
+#, c-format
+msgid "Save partition table"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Restore partition table"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Rescue partition table"
+msgstr ""
+
+#: ../help.pm:526
 #, c-format
 msgid "Removable media auto-mounting"
 msgstr "Mount automatico di supporti rimovibili"
 
-#: ../help.pm:533
+#: ../help.pm:526
+#, c-format
+msgid "Wizard"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Undo"
+msgstr ""
+
+#: ../help.pm:526
 #, c-format
 msgid "Toggle between normal/expert mode"
 msgstr "Scambio tra modo normale e esperto"
@@ -1521,9 +1564,14 @@ msgstr ""
 msgid "Espanol"
 msgstr "Spagnolo"
 
+#: ../help.pm:643
+#, c-format
+msgid "Use Unicode by default"
+msgstr ""
+
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandriva.com:/cooker/doc/manualB/modules/it/drakx-chapter.xml
-#: ../help.pm:653
+#: ../help.pm:646
 #, c-format
 msgid ""
 "Usually, DrakX has no problems detecting the number of buttons on your\n"
@@ -1617,95 +1665,7 @@ msgstr ""
 
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandriva.com:/cooker/doc/manualB/modules/it/drakx-chapter.xml
-#: ../help.pm:691
-#, c-format
-msgid ""
-"This is the most crucial decision point for the security of your GNU/Linux\n"
-"system: you must enter the \"root\" password. \"Root\" is the system\n"
-"administrator and is the only user authorized to make updates, add users,\n"
-"change the overall system configuration, and so on. In short, \"root\" can\n"
-"do everything! That's why you must choose a password which is difficult to\n"
-"guess: DrakX will tell you if the password you chose is too simple. As you\n"
-"can see, you're not forced to enter a password, but we strongly advise\n"
-"against this. GNU/Linux is just as prone to operator error as any other\n"
-"operating system. Since \"root\" can overcome all limitations and\n"
-"unintentionally erase all data on partitions by carelessly accessing the\n"
-"partitions themselves, it is important that it be difficult to become\n"
-"\"root\".\n"
-"\n"
-"The password should be a mixture of alphanumeric characters and at least 8\n"
-"characters long. Never write down the \"root\" password -- it makes it far\n"
-"too easy to compromise your system.\n"
-"\n"
-"One caveat: do not make the password too long or too complicated because "
-"you\n"
-"must be able to remember it!\n"
-"\n"
-"The password will not be displayed on screen as you type it. To reduce the\n"
-"chance of a blind typing error you'll need to enter the password twice. If\n"
-"you do happen to make the same typing error twice, you'll have to use this\n"
-"``incorrect'' password the first time you'll try to connect as \"root\".\n"
-"\n"
-"If you want an authentication server to control access to your computer,\n"
-"click on the \"%s\" button.\n"
-"\n"
-"If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
-"services, select the appropriate one for \"%s\". If you do not know which\n"
-"one to use, you should ask your network administrator.\n"
-"\n"
-"If you happen to have problems with remembering passwords, or if your\n"
-"computer will never be connected to the Internet and you absolutely trust\n"
-"everybody who uses your computer, you can choose to have \"%s\"."
-msgstr ""
-"Questo è il punto più critico per la sicurezza del vostro sistema\n"
-"GNU/Linux: state per decidere la password di \"root\". \"root\" è\n"
-"l'amministratore del sistema, ed è l'unico utente autorizzato a compiere\n"
-"aggiornamenti, aggiungere altri utenti, cambiare la configurazione globale\n"
-"del sistema, e così via. In breve, \"root\" può fare tutto ciò che vuole!\n"
-"Questo è il motivo per cui dovete scegliere una password che sia difficile\n"
-"da indovinare, e se ne avete scelta una troppo facile DrakX vi avvertirà.\n"
-"Potete anche scegliere di non digitare alcuna password, ma noi vi\n"
-"consigliamo caldamente di farlo, poiché GNU/Linux è vulnerabile a errori da\n"
-"parte dell'utente esattamente come qualsiasi altro sistema operativo.\n"
-"Quindi è molto importante che sia difficile assumere il ruolo di \"root\",\n"
-"potendo quest'ultimo scavalcare ogni limitazione e, magari\n"
-"involontariamente, cancellare tutti i dati presenti sulle partizioni\n"
-"accedendovi in maniera impropria.\n"
-"\n"
-"La password ideale è costituita da un insieme di almeno 8 caratteri\n"
-"alfanumerici. Non appuntate mai da nessuna parte la password di \"root\",\n"
-"renderebbe troppo facile l'accesso al sistema da parte di estranei.\n"
-"\n"
-"Tuttavia, non scegliete una password troppo lunga o complicata, perché\n"
-"dovete essere in grado di ricordarla senza troppo sforzo.\n"
-"\n"
-"La password non verrà mostrata mentre la digitate; quindi, per ridurre il\n"
-"rischio di un errore di battitura, è necessario che venga inserita due\n"
-"volte. Se per caso però commettete lo stesso errore entrambe le volte,\n"
-"questa password \"sbagliata\" sarà quella che verrà richiesta la prima\n"
-"volta che vi connetterete al sistema come \"root\".\n"
-"\n"
-"Se volete che l'accesso al vostro computer sia controllato da un server di\n"
-"autenticazione, cliccate sul pulsante \"%s\".\n"
-"\n"
-"Se la vostra rete utilizza per l'autenticazione i servizi LDAP, NIS, o il\n"
-"PDC di un dominio Windows, selezionate il pulsante \"%s\". Se non\n"
-"siete sicuri sulla scelta da fare, chiedete al vostro amministratore di\n"
-"rete.\n"
-"\n"
-"Se per qualche motivo per voi fosse un problema dovervi ricordare una\n"
-"password, se il vostro computer non sarà mai collegato a Internet, e se\n"
-"avete piena fiducia nelle persone che lo useranno, allora potete ricorrere\n"
-"all'opzione \"%s\"."
-
-#: ../help.pm:725
-#, c-format
-msgid "authentication"
-msgstr "autenticazione"
-
-# DO NOT BOTHER TO MODIFY HERE, SEE:
-# cvs.mandriva.com:/cooker/doc/manualB/modules/it/drakx-chapter.xml
-#: ../help.pm:728
+#: ../help.pm:684
 #, c-format
 msgid ""
 "A boot loader is a little program which is started by the computer at boot\n"
@@ -1807,7 +1767,12 @@ msgstr ""
 msgid "pdq"
 msgstr "pdq"
 
-#: ../help.pm:768
+#: ../help.pm:724
+#, c-format
+msgid "CUPS"
+msgstr ""
+
+#: ../help.pm:724
 #, c-format
 msgid "Expert"
 msgstr "Esperto"
@@ -1873,7 +1838,7 @@ msgstr ""
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandriva.com:/cooker/doc/manualB/modules/it/drakx-chapter.xml
 #: ../help.pm:794
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "As a review, DrakX will present a summary of information it has gathered\n"
 "about your system. Depending on the hardware installed on your machine, you\n"
@@ -1895,11 +1860,6 @@ msgid ""
 "\n"
 " * \"%s\": verify the current mouse configuration and click on the button\n"
 "to change it if necessary.\n"
-"\n"
-" * \"%s\": clicking on the \"%s\" button will open the printer\n"
-"configuration wizard. Consult the corresponding chapter of the ``Starter\n"
-"Guide'' for more information on how to set up a new printer. The interface\n"
-"presented in our manual is similar to the one used during installation.\n"
 "\n"
 " * \"%s\": if a sound card is detected on your system, it'll be displayed\n"
 "here. If you notice the sound card is not the one actually present on your\n"
@@ -2014,7 +1974,12 @@ msgstr ""
 "attivati sul vostro sistema. Se pensate di utilizzare il computer come\n"
 "server è senz'altro una buona idea controllare queste impostazioni."
 
-#: ../help.pm:858
+#: ../help.pm:809
+#, fuzzy, c-format
+msgid "TV card"
+msgstr "Scheda ISDN"
+
+#: ../help.pm:809
 #, c-format
 msgid "ISDN card"
 msgstr "Scheda ISDN"
@@ -2068,3 +2033,129 @@ msgstr "Avanti ->"
 msgid "<- Previous"
 msgstr "<- Indietro"
 
+# DO NOT BOTHER TO MODIFY HERE, SEE:
+# cvs.mandriva.com:/cooker/doc/manualB/modules/it/drakx-chapter.xml
+#~ msgid ""
+#~ "\"%s\": clicking on the \"%s\" button will open the printer "
+#~ "configuration\n"
+#~ "wizard. Consult the corresponding chapter of the ``Starter Guide'' for "
+#~ "more\n"
+#~ "information on how to set up a new printer. The interface presented in "
+#~ "our\n"
+#~ "manual is similar to the one used during installation."
+#~ msgstr ""
+#~ "\"%s\": cliccando sul pulsante \"%s\" sarà avviato l'assistente di\n"
+#~ "configurazione della stampante. Consultate il relativo capitolo della\n"
+#~ "\"Guida introduttiva\" per avere maggiori informazioni su come "
+#~ "configurare\n"
+#~ "una nuova stampante. L'interfaccia descritta in tale sede è simile a "
+#~ "quella\n"
+#~ "utilizzata nel corso dell'installazione."
+
+# DO NOT BOTHER TO MODIFY HERE, SEE:
+# cvs.mandriva.com:/cooker/doc/manualB/modules/it/drakx-chapter.xml
+#~ msgid ""
+#~ "This is the most crucial decision point for the security of your GNU/"
+#~ "Linux\n"
+#~ "system: you must enter the \"root\" password. \"Root\" is the system\n"
+#~ "administrator and is the only user authorized to make updates, add "
+#~ "users,\n"
+#~ "change the overall system configuration, and so on. In short, \"root\" "
+#~ "can\n"
+#~ "do everything! That's why you must choose a password which is difficult "
+#~ "to\n"
+#~ "guess: DrakX will tell you if the password you chose is too simple. As "
+#~ "you\n"
+#~ "can see, you're not forced to enter a password, but we strongly advise\n"
+#~ "against this. GNU/Linux is just as prone to operator error as any other\n"
+#~ "operating system. Since \"root\" can overcome all limitations and\n"
+#~ "unintentionally erase all data on partitions by carelessly accessing the\n"
+#~ "partitions themselves, it is important that it be difficult to become\n"
+#~ "\"root\".\n"
+#~ "\n"
+#~ "The password should be a mixture of alphanumeric characters and at least "
+#~ "8\n"
+#~ "characters long. Never write down the \"root\" password -- it makes it "
+#~ "far\n"
+#~ "too easy to compromise your system.\n"
+#~ "\n"
+#~ "One caveat: do not make the password too long or too complicated because "
+#~ "you\n"
+#~ "must be able to remember it!\n"
+#~ "\n"
+#~ "The password will not be displayed on screen as you type it. To reduce "
+#~ "the\n"
+#~ "chance of a blind typing error you'll need to enter the password twice. "
+#~ "If\n"
+#~ "you do happen to make the same typing error twice, you'll have to use "
+#~ "this\n"
+#~ "``incorrect'' password the first time you'll try to connect as \"root\".\n"
+#~ "\n"
+#~ "If you want an authentication server to control access to your computer,\n"
+#~ "click on the \"%s\" button.\n"
+#~ "\n"
+#~ "If your network uses either LDAP, NIS, or PDC Windows Domain "
+#~ "authentication\n"
+#~ "services, select the appropriate one for \"%s\". If you do not know "
+#~ "which\n"
+#~ "one to use, you should ask your network administrator.\n"
+#~ "\n"
+#~ "If you happen to have problems with remembering passwords, or if your\n"
+#~ "computer will never be connected to the Internet and you absolutely "
+#~ "trust\n"
+#~ "everybody who uses your computer, you can choose to have \"%s\"."
+#~ msgstr ""
+#~ "Questo è il punto più critico per la sicurezza del vostro sistema\n"
+#~ "GNU/Linux: state per decidere la password di \"root\". \"root\" è\n"
+#~ "l'amministratore del sistema, ed è l'unico utente autorizzato a compiere\n"
+#~ "aggiornamenti, aggiungere altri utenti, cambiare la configurazione "
+#~ "globale\n"
+#~ "del sistema, e così via. In breve, \"root\" può fare tutto ciò che "
+#~ "vuole!\n"
+#~ "Questo è il motivo per cui dovete scegliere una password che sia "
+#~ "difficile\n"
+#~ "da indovinare, e se ne avete scelta una troppo facile DrakX vi "
+#~ "avvertirà.\n"
+#~ "Potete anche scegliere di non digitare alcuna password, ma noi vi\n"
+#~ "consigliamo caldamente di farlo, poiché GNU/Linux è vulnerabile a errori "
+#~ "da\n"
+#~ "parte dell'utente esattamente come qualsiasi altro sistema operativo.\n"
+#~ "Quindi è molto importante che sia difficile assumere il ruolo di \"root"
+#~ "\",\n"
+#~ "potendo quest'ultimo scavalcare ogni limitazione e, magari\n"
+#~ "involontariamente, cancellare tutti i dati presenti sulle partizioni\n"
+#~ "accedendovi in maniera impropria.\n"
+#~ "\n"
+#~ "La password ideale è costituita da un insieme di almeno 8 caratteri\n"
+#~ "alfanumerici. Non appuntate mai da nessuna parte la password di \"root"
+#~ "\",\n"
+#~ "renderebbe troppo facile l'accesso al sistema da parte di estranei.\n"
+#~ "\n"
+#~ "Tuttavia, non scegliete una password troppo lunga o complicata, perché\n"
+#~ "dovete essere in grado di ricordarla senza troppo sforzo.\n"
+#~ "\n"
+#~ "La password non verrà mostrata mentre la digitate; quindi, per ridurre "
+#~ "il\n"
+#~ "rischio di un errore di battitura, è necessario che venga inserita due\n"
+#~ "volte. Se per caso però commettete lo stesso errore entrambe le volte,\n"
+#~ "questa password \"sbagliata\" sarà quella che verrà richiesta la prima\n"
+#~ "volta che vi connetterete al sistema come \"root\".\n"
+#~ "\n"
+#~ "Se volete che l'accesso al vostro computer sia controllato da un server "
+#~ "di\n"
+#~ "autenticazione, cliccate sul pulsante \"%s\".\n"
+#~ "\n"
+#~ "Se la vostra rete utilizza per l'autenticazione i servizi LDAP, NIS, o "
+#~ "il\n"
+#~ "PDC di un dominio Windows, selezionate il pulsante \"%s\". Se non\n"
+#~ "siete sicuri sulla scelta da fare, chiedete al vostro amministratore di\n"
+#~ "rete.\n"
+#~ "\n"
+#~ "Se per qualche motivo per voi fosse un problema dovervi ricordare una\n"
+#~ "password, se il vostro computer non sarà mai collegato a Internet, e se\n"
+#~ "avete piena fiducia nelle persone che lo useranno, allora potete "
+#~ "ricorrere\n"
+#~ "all'opzione \"%s\"."
+
+#~ msgid "authentication"
+#~ msgstr "autenticazione"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-tl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-04 17:25+0200\n"
+"POT-Creation-Date: 2008-09-12 12:22+0200\n"
 "PO-Revision-Date: 2004-09-15 13:35+0200\n"
 "Last-Translator: Arys P. Deloso <arys@deloso.org>\n"
 "Language-Team: Filipino <salinpinoy@comitus.net>\n"
@@ -125,6 +125,16 @@ msgstr ""
 
 #: ../help.pm:54
 #, c-format
+msgid "User name"
+msgstr ""
+
+#: ../help.pm:54
+#, c-format
+msgid "Accept user"
+msgstr ""
+
+#: ../help.pm:54
+#, c-format
 msgid "Do you want to use this feature?"
 msgstr "Gusto ninyong gamitin ang katangian na ito?"
 
@@ -239,8 +249,7 @@ msgid ""
 "configure your system so that it complies as much as possible with the\n"
 "Linux Standard Base specifications.\n"
 "\n"
-"   Selecting the \"LSB\" group will also install the \"2.4\" kernel series,\n"
-"instead of the default \"2.6\" one. This is to ensure 100%%-LSB compliance\n"
+"   Selecting the \"LSB\" group will ensure 100%%-LSB compliance\n"
 "of the system. However, if you do not select the \"LSB\" group you will\n"
 "still have a system which is nearly 100%% LSB-compliant.\n"
 "\n"
@@ -439,21 +448,7 @@ msgstr ""
 msgid "Automatic dependencies"
 msgstr "Automatic dependencies"
 
-#: ../help.pm:186
-#, fuzzy, c-format
-msgid ""
-"\"%s\": clicking on the \"%s\" button will open the printer configuration\n"
-"wizard. Consult the corresponding chapter of the ``Starter Guide'' for more\n"
-"information on how to set up a new printer. The interface presented in our\n"
-"manual is similar to the one used during installation."
-msgstr ""
-"\"%s\": ang pagki-click sa \"%s\" na button ay magbubukas sa \"printer\n"
-"configuration wizard\". Konsultahin ang angkop na kabanata ng ``Starter\n"
-" Guide'' para sa karagdagang inpormasyon sa kung paano mag-setup ng\n"
-"bagong printer. Ang iniharap na interface doon ay katulad ng ginamit noong\n"
-"installation."
-
-#: ../help.pm:192
+#: ../help.pm:185
 #, fuzzy, c-format
 msgid ""
 "This dialog is used to select which services you wish to start at boot\n"
@@ -528,7 +523,12 @@ msgstr ""
 "ito ay talagang mag-i-install ng tagapagsilbi na orasan na magagamit rin ng\n"
 "ibang mga makina sa inyong local network."
 
-#: ../help.pm:220
+#: ../help.pm:213
+#, c-format
+msgid "Hardware clock set to GMT"
+msgstr ""
+
+#: ../help.pm:213
 #, c-format
 msgid "Automatic time synchronization"
 msgstr "Automatic na pagsasabaysabay ng oras"
@@ -891,7 +891,12 @@ msgstr ""
 msgid "Use existing partition"
 msgstr "Gamitin ang namamalaging partisyon"
 
-#: ../help.pm:377
+#: ../help.pm:370
+#, c-format
+msgid "Use the free space on the Microsoft Windows® partition"
+msgstr ""
+
+#: ../help.pm:370
 #, c-format
 msgid "Erase entire disk"
 msgstr "Burahin ang buong disk"
@@ -972,7 +977,22 @@ msgstr ""
 msgid "Generate auto-install floppy"
 msgstr "Lumikha ng auto-install na floppy"
 
-#: ../help.pm:415
+#: ../help.pm:405
+#, c-format
+msgid "Replay"
+msgstr ""
+
+#: ../help.pm:405
+#, c-format
+msgid "Automated"
+msgstr ""
+
+#: ../help.pm:405
+#, c-format
+msgid "Save packages selection"
+msgstr ""
+
+#: ../help.pm:408
 #, fuzzy, c-format
 msgid ""
 "If you chose to reuse some legacy GNU/Linux partitions, you may wish to\n"
@@ -1247,12 +1267,37 @@ msgstr ""
 "sa pag-iimbak ng mga reserbang kernel at mga \"ramdisk image\" para sa\n"
 "panahon ng mahigpit na pangangailangan."
 
-#: ../help.pm:533
+#: ../help.pm:526
+#, c-format
+msgid "Save partition table"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Restore partition table"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Rescue partition table"
+msgstr ""
+
+#: ../help.pm:526
 #, c-format
 msgid "Removable media auto-mounting"
 msgstr "Ino-auto-mount ang removable media"
 
-#: ../help.pm:533
+#: ../help.pm:526
+#, c-format
+msgid "Wizard"
+msgstr ""
+
+#: ../help.pm:526
+#, c-format
+msgid "Undo"
+msgstr ""
+
+#: ../help.pm:526
 #, c-format
 msgid "Toggle between normal/expert mode"
 msgstr "Lipat sa normal o bihasang mode"
@@ -1529,7 +1574,12 @@ msgstr ""
 msgid "Espanol"
 msgstr "Espanol"
 
-#: ../help.pm:653
+#: ../help.pm:643
+#, c-format
+msgid "Use Unicode by default"
+msgstr ""
+
+#: ../help.pm:646
 #, fuzzy, c-format
 msgid ""
 "Usually, DrakX has no problems detecting the number of buttons on your\n"
@@ -1625,97 +1675,7 @@ msgstr ""
 "Pakipili ang tamang port. Halimbawa, ang \"COM1\" port sa Windows\n"
 "ay may pangalang \"ttyS0\" sa ilalim ng GNU/Linux."
 
-#: ../help.pm:691
-#, fuzzy, c-format
-msgid ""
-"This is the most crucial decision point for the security of your GNU/Linux\n"
-"system: you must enter the \"root\" password. \"Root\" is the system\n"
-"administrator and is the only user authorized to make updates, add users,\n"
-"change the overall system configuration, and so on. In short, \"root\" can\n"
-"do everything! That's why you must choose a password which is difficult to\n"
-"guess: DrakX will tell you if the password you chose is too simple. As you\n"
-"can see, you're not forced to enter a password, but we strongly advise\n"
-"against this. GNU/Linux is just as prone to operator error as any other\n"
-"operating system. Since \"root\" can overcome all limitations and\n"
-"unintentionally erase all data on partitions by carelessly accessing the\n"
-"partitions themselves, it is important that it be difficult to become\n"
-"\"root\".\n"
-"\n"
-"The password should be a mixture of alphanumeric characters and at least 8\n"
-"characters long. Never write down the \"root\" password -- it makes it far\n"
-"too easy to compromise your system.\n"
-"\n"
-"One caveat: do not make the password too long or too complicated because "
-"you\n"
-"must be able to remember it!\n"
-"\n"
-"The password will not be displayed on screen as you type it. To reduce the\n"
-"chance of a blind typing error you'll need to enter the password twice. If\n"
-"you do happen to make the same typing error twice, you'll have to use this\n"
-"``incorrect'' password the first time you'll try to connect as \"root\".\n"
-"\n"
-"If you want an authentication server to control access to your computer,\n"
-"click on the \"%s\" button.\n"
-"\n"
-"If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
-"services, select the appropriate one for \"%s\". If you do not know which\n"
-"one to use, you should ask your network administrator.\n"
-"\n"
-"If you happen to have problems with remembering passwords, or if your\n"
-"computer will never be connected to the Internet and you absolutely trust\n"
-"everybody who uses your computer, you can choose to have \"%s\"."
-msgstr ""
-"Ito ang pinakamahalagang punto ng desisyon para sa seguridad ng inyong\n"
-"GNU/Linux na sistema: dapat ninyong ipasok ang password ng \"root\". Ang\n"
-"\"root\" ay siyang tagapamahala ng sistema at siya lamang ang \"user\" o\n"
-"gumagamit na may pahintulot na mag-update, magdagdag ng mga user,\n"
-"baguhin ang kabuuang configuration ng sistema, atbp. Sa maikling salita,\n"
-"ang \"root\" ay may kakayahang gawin ang kahit na anong bagay! Ito ang\n"
-"dahilan kung bakit dapat kayong pumili ng password na mahirap mahulaan -\n"
-"sasabihan kayo ng DrakX kung ang password na pinili ninyo ay masyadong\n"
-"madali. Kung inyong mapapansin, hindi kayo pinipilit na magpasok ng "
-"password,\n"
-"pero matindi namin kayong pinapayuhan laban dito. Ang GNU/Linux na sistema\n"
-"ay makiling sa mga pagkakamali ng tagapagpalakad gaya ng lahat ng ibang\n"
-"\"operating system\". Dahil ang \"root\" ay may kakayahang daigin ang lahat\n"
-"ng mga hanggahan at hindi sinasadyang burahin lahat ng data sa mga\n"
-"partisyon dahil na rin sa walang ingat na pag-access sa mga partisyon,\n"
-"napakaimportante na mahirap maging \"root\".\n"
-"\n"
-"Ang password ay dapat halo ng mga alphanumeric character at hindi iikli sa "
-"8\n"
-"character ang haba. Huwag na huwag isusulat ang password ng \"root\" --\n"
-"mas higit na mapapadaling madala ang sistema sa panganib.\n"
-"\n"
-"Isang babala -- huwag gawing napahaba o napakahirap ng password dahil\n"
-"dapat ay maaalala ninyo ito!\n"
-"\n"
-"Ang password ay hindi ipapakita sa screen habang itina-type ninyo ito. Para\n"
-"mabawasan ang pagkakamali sa pag-type ng hindi nakikita kakailanganin\n"
-"ninyong i-type ng dalawang beses ito. Kung naulit ninyo ang maling pag-type\n"
-"ng dalawang beses, itong maling password na ito ang siyang gagamitin.\n"
-"\n"
-"Kung nais ninyo na ang pagpasok sa computer na ito ay kontrolin ng isang\n"
-"\"authentication server\", i-click ang \"%s\" na pindutan.\n"
-"\n"
-"Kung ang network ninyo ay gumagamit ng LDAP, NIS, o PDC \"Windows Domain\n"
-"authentication service\", piliin ang naaangkop para sa \"%s\". Kung hindi "
-"ninyo\n"
-"alam kung alin ang gagamitin, dapat kayong magtanong sa inyong\n"
-"tagapamahala ng network (\"network administrator\").\n"
-"\n"
-"Kung kayo ay nagkakaproblema sa pagtanda ng mga password, kung ang inyong\n"
-"computer ay hindi kakabit sa Internet at kayo ay lubos na nagtitiwala sa "
-"lahat\n"
-"ng gumagamit ng inyong computer, maaari ninyong piliin na magkaroon ng\n"
-"\"%s\"."
-
-#: ../help.pm:725
-#, c-format
-msgid "authentication"
-msgstr "authentication"
-
-#: ../help.pm:728
+#: ../help.pm:684
 #, fuzzy, c-format
 msgid ""
 "A boot loader is a little program which is started by the computer at boot\n"
@@ -1819,7 +1779,12 @@ msgstr ""
 msgid "pdq"
 msgstr "pdq"
 
-#: ../help.pm:768
+#: ../help.pm:724
+#, c-format
+msgid "CUPS"
+msgstr ""
+
+#: ../help.pm:724
 #, fuzzy, c-format
 msgid "Expert"
 msgstr "Bihasang Mode"
@@ -1899,11 +1864,6 @@ msgid ""
 "\n"
 " * \"%s\": verify the current mouse configuration and click on the button\n"
 "to change it if necessary.\n"
-"\n"
-" * \"%s\": clicking on the \"%s\" button will open the printer\n"
-"configuration wizard. Consult the corresponding chapter of the ``Starter\n"
-"Guide'' for more information on how to set up a new printer. The interface\n"
-"presented in our manual is similar to the one used during installation.\n"
 "\n"
 " * \"%s\": if a sound card is detected on your system, it'll be displayed\n"
 "here. If you notice the sound card is not the one actually present on your\n"
@@ -2023,7 +1983,12 @@ msgstr ""
 "na\n"
 "ito."
 
-#: ../help.pm:858
+#: ../help.pm:809
+#, fuzzy, c-format
+msgid "TV card"
+msgstr "ISDN card"
+
+#: ../help.pm:809
 #, c-format
 msgid "ISDN card"
 msgstr "ISDN card"
@@ -2074,3 +2039,124 @@ msgstr "Kasunod ->"
 msgid "<- Previous"
 msgstr "<- Nakaraan"
 
+#, fuzzy
+#~ msgid ""
+#~ "\"%s\": clicking on the \"%s\" button will open the printer "
+#~ "configuration\n"
+#~ "wizard. Consult the corresponding chapter of the ``Starter Guide'' for "
+#~ "more\n"
+#~ "information on how to set up a new printer. The interface presented in "
+#~ "our\n"
+#~ "manual is similar to the one used during installation."
+#~ msgstr ""
+#~ "\"%s\": ang pagki-click sa \"%s\" na button ay magbubukas sa \"printer\n"
+#~ "configuration wizard\". Konsultahin ang angkop na kabanata ng ``Starter\n"
+#~ " Guide'' para sa karagdagang inpormasyon sa kung paano mag-setup ng\n"
+#~ "bagong printer. Ang iniharap na interface doon ay katulad ng ginamit "
+#~ "noong\n"
+#~ "installation."
+
+#, fuzzy
+#~ msgid ""
+#~ "This is the most crucial decision point for the security of your GNU/"
+#~ "Linux\n"
+#~ "system: you must enter the \"root\" password. \"Root\" is the system\n"
+#~ "administrator and is the only user authorized to make updates, add "
+#~ "users,\n"
+#~ "change the overall system configuration, and so on. In short, \"root\" "
+#~ "can\n"
+#~ "do everything! That's why you must choose a password which is difficult "
+#~ "to\n"
+#~ "guess: DrakX will tell you if the password you chose is too simple. As "
+#~ "you\n"
+#~ "can see, you're not forced to enter a password, but we strongly advise\n"
+#~ "against this. GNU/Linux is just as prone to operator error as any other\n"
+#~ "operating system. Since \"root\" can overcome all limitations and\n"
+#~ "unintentionally erase all data on partitions by carelessly accessing the\n"
+#~ "partitions themselves, it is important that it be difficult to become\n"
+#~ "\"root\".\n"
+#~ "\n"
+#~ "The password should be a mixture of alphanumeric characters and at least "
+#~ "8\n"
+#~ "characters long. Never write down the \"root\" password -- it makes it "
+#~ "far\n"
+#~ "too easy to compromise your system.\n"
+#~ "\n"
+#~ "One caveat: do not make the password too long or too complicated because "
+#~ "you\n"
+#~ "must be able to remember it!\n"
+#~ "\n"
+#~ "The password will not be displayed on screen as you type it. To reduce "
+#~ "the\n"
+#~ "chance of a blind typing error you'll need to enter the password twice. "
+#~ "If\n"
+#~ "you do happen to make the same typing error twice, you'll have to use "
+#~ "this\n"
+#~ "``incorrect'' password the first time you'll try to connect as \"root\".\n"
+#~ "\n"
+#~ "If you want an authentication server to control access to your computer,\n"
+#~ "click on the \"%s\" button.\n"
+#~ "\n"
+#~ "If your network uses either LDAP, NIS, or PDC Windows Domain "
+#~ "authentication\n"
+#~ "services, select the appropriate one for \"%s\". If you do not know "
+#~ "which\n"
+#~ "one to use, you should ask your network administrator.\n"
+#~ "\n"
+#~ "If you happen to have problems with remembering passwords, or if your\n"
+#~ "computer will never be connected to the Internet and you absolutely "
+#~ "trust\n"
+#~ "everybody who uses your computer, you can choose to have \"%s\"."
+#~ msgstr ""
+#~ "Ito ang pinakamahalagang punto ng desisyon para sa seguridad ng inyong\n"
+#~ "GNU/Linux na sistema: dapat ninyong ipasok ang password ng \"root\". Ang\n"
+#~ "\"root\" ay siyang tagapamahala ng sistema at siya lamang ang \"user\" o\n"
+#~ "gumagamit na may pahintulot na mag-update, magdagdag ng mga user,\n"
+#~ "baguhin ang kabuuang configuration ng sistema, atbp. Sa maikling salita,\n"
+#~ "ang \"root\" ay may kakayahang gawin ang kahit na anong bagay! Ito ang\n"
+#~ "dahilan kung bakit dapat kayong pumili ng password na mahirap mahulaan -\n"
+#~ "sasabihan kayo ng DrakX kung ang password na pinili ninyo ay masyadong\n"
+#~ "madali. Kung inyong mapapansin, hindi kayo pinipilit na magpasok ng "
+#~ "password,\n"
+#~ "pero matindi namin kayong pinapayuhan laban dito. Ang GNU/Linux na "
+#~ "sistema\n"
+#~ "ay makiling sa mga pagkakamali ng tagapagpalakad gaya ng lahat ng ibang\n"
+#~ "\"operating system\". Dahil ang \"root\" ay may kakayahang daigin ang "
+#~ "lahat\n"
+#~ "ng mga hanggahan at hindi sinasadyang burahin lahat ng data sa mga\n"
+#~ "partisyon dahil na rin sa walang ingat na pag-access sa mga partisyon,\n"
+#~ "napakaimportante na mahirap maging \"root\".\n"
+#~ "\n"
+#~ "Ang password ay dapat halo ng mga alphanumeric character at hindi iikli "
+#~ "sa 8\n"
+#~ "character ang haba. Huwag na huwag isusulat ang password ng \"root\" --\n"
+#~ "mas higit na mapapadaling madala ang sistema sa panganib.\n"
+#~ "\n"
+#~ "Isang babala -- huwag gawing napahaba o napakahirap ng password dahil\n"
+#~ "dapat ay maaalala ninyo ito!\n"
+#~ "\n"
+#~ "Ang password ay hindi ipapakita sa screen habang itina-type ninyo ito. "
+#~ "Para\n"
+#~ "mabawasan ang pagkakamali sa pag-type ng hindi nakikita kakailanganin\n"
+#~ "ninyong i-type ng dalawang beses ito. Kung naulit ninyo ang maling pag-"
+#~ "type\n"
+#~ "ng dalawang beses, itong maling password na ito ang siyang gagamitin.\n"
+#~ "\n"
+#~ "Kung nais ninyo na ang pagpasok sa computer na ito ay kontrolin ng isang\n"
+#~ "\"authentication server\", i-click ang \"%s\" na pindutan.\n"
+#~ "\n"
+#~ "Kung ang network ninyo ay gumagamit ng LDAP, NIS, o PDC \"Windows Domain\n"
+#~ "authentication service\", piliin ang naaangkop para sa \"%s\". Kung hindi "
+#~ "ninyo\n"
+#~ "alam kung alin ang gagamitin, dapat kayong magtanong sa inyong\n"
+#~ "tagapamahala ng network (\"network administrator\").\n"
+#~ "\n"
+#~ "Kung kayo ay nagkakaproblema sa pagtanda ng mga password, kung ang "
+#~ "inyong\n"
+#~ "computer ay hindi kakabit sa Internet at kayo ay lubos na nagtitiwala sa "
+#~ "lahat\n"
+#~ "ng gumagamit ng inyong computer, maaari ninyong piliin na magkaroon ng\n"
+#~ "\"%s\"."
+
+#~ msgid "authentication"
+#~ msgstr "authentication"
