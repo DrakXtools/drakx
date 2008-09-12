@@ -560,6 +560,7 @@ sub installPackages {
 	    gtknew('Label', text_ref => \ (my $msg_time_remaining = N("(estimating...)"))),
 	]),
 	gtknew('VBox', children_centered => [ gtknew('ProgressBar', fraction_ref => \ (my $progress_total), height => 25) ]),
+	gtknew('HSeparator'),
 	gtknew('HButtonBox', spacing => 5, layout => 'end', children_loose => [ $cancel, $details ]),
     ])), 0, 1, 0);
     
