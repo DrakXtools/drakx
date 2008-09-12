@@ -8,14 +8,13 @@ msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-12 16:44+0200\n"
-"PO-Revision-Date: 2008-09-08 23:48+0200\n"
+"PO-Revision-Date: 2008-09-12 22:54+0200\n"
 "Last-Translator: Michal Bukovjan <bukm@centrum.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
 #: any.pm:109
@@ -69,10 +68,8 @@ msgstr "URL musí začínat na ftp:// nebo http://"
 
 #: any.pm:180
 #, c-format
-msgid ""
-"Contacting Mandriva Linux web site to get the list of available mirrors..."
-msgstr ""
-"Kontaktuji web Mandriva Linux pro získání seznamu dostupných zrcadel..."
+msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgstr "Kontaktuji web Mandriva Linux pro získání seznamu dostupných zrcadel..."
 
 #: any.pm:185
 #, c-format
@@ -294,7 +291,7 @@ msgstr "Zastavuji síť"
 #: media.pm:422
 #, c-format
 msgid "Please wait, retrieving file"
-msgstr ""
+msgstr "Prosím počkejte, získávám soubor"
 
 #: media.pm:703 media.pm:714
 #, c-format
@@ -741,19 +738,19 @@ msgid "Custom install"
 msgstr "Vlastní instalace"
 
 #: steps_gtk.pm:259
-#, fuzzy, c-format
+#, c-format
 msgid "KDE Desktop"
-msgstr "IceWm desktop"
+msgstr "KDE Desktop"
 
 #: steps_gtk.pm:260
-#, fuzzy, c-format
+#, c-format
 msgid "GNOME Desktop"
-msgstr "IceWm desktop"
+msgstr "GNOME Desktop"
 
 #: steps_gtk.pm:261
-#, fuzzy, c-format
+#, c-format
 msgid "Custom Desktop"
-msgstr "IceWm desktop"
+msgstr "Vlastní desktop"
 
 #: steps_gtk.pm:267
 #, c-format
@@ -835,8 +832,7 @@ msgstr "aby bylo zachováno %s"
 msgid ""
 "You can not select this package as there is not enough space left to install "
 "it"
-msgstr ""
-"Nemůžete vybrat tento balíček, protože pro jeho instalaci není dost místa"
+msgstr "Nemůžete vybrat tento balíček, protože pro jeho instalaci není dost místa"
 
 #: steps_gtk.pm:428
 #, c-format
@@ -909,9 +905,9 @@ msgid "No details"
 msgstr "Bez podrobností"
 
 #: steps_gtk.pm:559
-#, fuzzy, c-format
+#, c-format
 msgid "Time remaining:"
-msgstr "Zbývající čas "
+msgstr "Zbývající čas:"
 
 #: steps_gtk.pm:560
 #, c-format
@@ -983,9 +979,9 @@ msgid "Please choose your keyboard layout"
 msgstr "Vyberte si rozložení vaší klávesnice"
 
 #: steps_interactive.pm:105
-#, fuzzy, c-format
+#, c-format
 msgid "Here is the full list of available keyboards:"
-msgstr "Zde je úplný seznam dostupných klávesnic"
+msgstr "Zde je úplný seznam dostupných klávesnic:"
 
 #: steps_interactive.pm:136
 #, c-format
@@ -1308,8 +1304,7 @@ msgstr ""
 #: steps_interactive.pm:957
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
-msgstr ""
-"Nebyla nalezena zvuková karta. Zkuste spustit po instalaci \"harddrake\"."
+msgstr "Nebyla nalezena zvuková karta. Zkuste spustit po instalaci \"harddrake\"."
 
 #: steps_interactive.pm:965
 #, c-format
@@ -1354,8 +1349,7 @@ msgstr "vypnuto"
 #: steps_interactive.pm:1031
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
-msgstr ""
-"Nemáte nastaveno prostředí X. Chcete jej skutečně ponechat nenastavené?"
+msgstr "Nemáte nastaveno prostředí X. Chcete jej skutečně ponechat nenastavené?"
 
 #: steps_interactive.pm:1058
 #, c-format
@@ -1579,33 +1573,3 @@ msgstr "Plné pracovní prostředí Mandriva Linux, s podporou"
 msgid "Mandriva: distributions for everybody's needs"
 msgstr "Mandriva: distribuce pro potřeby každého"
 
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "Stahuji seznam dostupných balíčků ze zrcadla..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Nelze kontaktovat zrcadlo %s"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Vytvořit disketu pro automatickou instalaci"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "Instalace může být v případě potřeby plně automatická,\n"
-#~ "ale použije se celý disk!!!\n"
-#~ "(v případě instalace na druhý počítač)\n"
-#~ "\n"
-#~ "Takto lze jednoduše zopakovat instalaci.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Zopakovat"
-
-#~ msgid "Automated"
-#~ msgstr "Automaticky"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Uložit výběr jednotlivých balíčků"
