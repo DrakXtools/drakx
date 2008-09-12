@@ -559,10 +559,8 @@ sub installPackages {
 	    N("Time remaining "), 
 	    gtknew('Label', text_ref => \ (my $msg_time_remaining = N("(estimating...)"))),
 	] ]),
-	gtknew('HBox', children => [
-	    1, gtknew('VBox', children_centered => [ gtknew('ProgressBar', fraction_ref => \ (my $progress_total), height => 25) ]),
-	    0, gtknew('HButtonBox', spacing => 5, children_loose => [ $cancel, $details ]),
-	]),
+	gtknew('VBox', children_centered => [ gtknew('ProgressBar', fraction_ref => \ (my $progress_total), height => 25) ]),
+	gtknew('HButtonBox', spacing => 5, layout => 'end', children_loose => [ $cancel, $details ]),
     ])), 0, 1, 0);
     
     #- for the hide_ref & show_ref to work, we must set $show_advertising after packing
