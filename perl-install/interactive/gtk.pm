@@ -933,7 +933,7 @@ sub wait_message_endW {
 sub wait_message_with_progress_bar {
     my ($in, $o_title) = @_;
 
-    my $progress = Gtk2::ProgressBar->new;
+    my $progress = gtknew('ProgressBar');
     my $w = $in->wait_message($o_title, $progress);
     my $displayed;
     $progress->signal_connect(expose_event => sub { $displayed = 1; 0 });
