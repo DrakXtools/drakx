@@ -70,7 +70,8 @@ sub main {
                               width => mygtk2::get_label_width()
                             ),
 		    1, (my $notebook_widget = Gtk2::Notebook->new),
-		    0, (my $per_kind_action_box = Gtk2::HBox->new(0,0)),
+		    0, (my $per_kind_action_box = gtknew('HButtonBox', layout => 'edge')),
+		    0, (my $per_kind_action_box2 = gtknew('HButtonBox', layout => 'end')),
 		    0, (my $general_action_box  = gtknew('HButtonBox', spacing => 5, layout => 'spread')),
 		   ),
 	  );
@@ -84,7 +85,7 @@ sub main {
 	partition_table::assign_device_numbers($_) foreach fs::get::hds($all_hds);
 	create_automatic_notebooks($notebook_widget);
 	general_action_box($general_action_box);
-	per_kind_action_box($per_kind_action_box, $current_kind);
+	per_kind_action_box($per_kind_action_box, $per_kind_action_box2, $current_kind);
 	current_kind_changed($in, $current_kind);
 	current_entry_changed($current_kind, $current_entry);
 	$lock = 0;
@@ -184,13 +185,18 @@ sub general_action_box {
     }
 }
 sub per_kind_action_box {
-    my ($box, $kind) = @_;
-    $_->destroy foreach $box->get_children;
+    my ($box, $box2, $kind) = @_;
+    $_->destroy foreach $box->get_children, $box2->get_children;
 
     $kind->{type} =~ /hd|lvm/ or return;
 
-    foreach my $s (diskdrake::interactive::hd_possible_actions($in, kind2hd($kind), $all_hds)) {
+    foreach my $s (diskdrake::interactive::hd_possible_actions_base($in, kind2hd($kind), $all_hds)) {
 	gtkadd($box, 
+	       gtksignal_connect(Gtk2::Button->new(translate($s)),
+				 clicked => sub { try($s, kind2hd($kind)) }));
+    }
+    foreach my $s (diskdrake::interactive::hd_possible_actions_extra($in, kind2hd($kind), $all_hds)) {
+	gtkadd($box2, 
 	       gtksignal_connect(Gtk2::Button->new(translate($s)),
 				 clicked => sub { try($s, kind2hd($kind)) }));
     }

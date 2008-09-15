@@ -256,7 +256,7 @@ sub main {
 ################################################################################
 sub general_possible_actions {
     my ($_in, $_all_hds) = @_;
-    $::expert ? N_("Toggle to normal mode") : N_("Toggle to expert mode");
+    if_($::isInstall, N_("More"));
 }
 
 sub Done {
@@ -296,14 +296,26 @@ Quit anyway?", $part->{device}, $part->{mntpoint})) or return if $::isStandalone
 ################################################################################
 # per-hd actions
 ################################################################################
-sub hd_possible_actions {
-    my ($_in, $hd, $_all_hds) = @_;
+sub hd_possible_actions_base {
+    my ($hd) = @_;
     ( 
      if_(!$hd->{readonly} || $hd->{getting_rid_of_readonly_allowed}, N_("Clear all")), 
      if_(!$hd->{readonly} && $::isInstall, N_("Auto allocate")),
-     if_($::isInstall, N_("More")),
     );
 }
+
+sub hd_possible_actions_extra {
+    my ($hd) = @_;
+    $::expert ? N_("Toggle to normal mode") : N_("Toggle to expert mode");
+}
+
+
+sub hd_possible_actions {
+    my ($_in, $hd, $_all_hds) = @_;
+    hd_possible_actions_base($hd);
+    hd_possible_actions_extra($hd);
+}
+
 sub hd_possible_actions_interactive {
     my ($_in, $_hd, $_all_hds) = @_;
     &hd_possible_actions, N_("Hard drive information");
