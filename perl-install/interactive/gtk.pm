@@ -397,11 +397,13 @@ sub create_widget {
 	$set = sub { $w->set_active($_[0]) };
         $real_w = add_padding($w);
     } elsif ($e->{type} eq 'only_label') {
+        my @common = (
+            # workaround infamous 6 years old gnome bug #101968:
+            if_($e->{alignment} ne 'right', width => mygtk2::get_label_width())
+        );
 	$w = $e->{title} ? 
-	         gtknew('Title2', label => escape_text_for_TextView_markup_format(${$e->{val}}),
-                        # workaround infamous 6 years old gnome bug #101968:
-                        if_($e->{alignment} ne 'right', width => mygtk2::get_label_width())) :
-		 gtknew('Label_Left', line_wrap => 1, text_markup => ${$e->{val}});
+	         gtknew('Title2', label => escape_text_for_TextView_markup_format(${$e->{val}}), @common) :
+		 gtknew('Label_Left', line_wrap => 1, text_markup => ${$e->{val}}, @common);
     } elsif ($e->{type} eq 'label') {
 	$w = gtknew('WrappedLabel', text_markup => ${$e->{val}});
 	$set = sub { $w->set($_[0]) };
