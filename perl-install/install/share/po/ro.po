@@ -4,14 +4,15 @@
 # Dragos Marian Barbu <dragosb@softhome.net>, 2000
 # Ovidiu Constantin <ovidiu.constantin@gmx.net>, 2002, 2003
 # Harald Ersch <harald@ersch.ro>,2003
+# Cosmin Humeniuc <cosmin@mandrivausers.ro>, 2008
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 7.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-12 16:44+0200\n"
-"PO-Revision-Date: 2003-09-11 18:11+0200\n"
-"Last-Translator: Ovidiu Constantin <ovidiu.constantin@gmx.net>\n"
+"PO-Revision-Date: 2008-09-15 16:36+0200\n"
+"Last-Translator: Cosmin Humeniuc <cosmin@mandrivausers.ro>\n"
 "Language-Team: Romanian Translators for Free Software <rtfs-project@lists."
 "sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -21,9 +22,9 @@ msgstr ""
 "2:1))\n"
 
 #: any.pm:109
-#, fuzzy, c-format
+#, c-format
 msgid "Do you have further supplementary media?"
-msgstr "Aveţi o altă interfaţa?"
+msgstr "Mai aveţi medii suplimentare?"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: any.pm:112
@@ -34,6 +35,11 @@ msgid ""
 "\n"
 "Do you have a supplementary installation medium to configure?"
 msgstr ""
+"Următoarele medii au fost găsite şi vor fi folosite în timpul instalării: %"
+"s.\n"
+"\n"
+"\n"
+"Aveţi un mediu de instalare suplimentar pe care doriţi să-l configuraţi?"
 
 #: any.pm:120
 #, c-format
@@ -41,29 +47,29 @@ msgid "CD-ROM"
 msgstr "CD-ROM"
 
 #: any.pm:121
-#, fuzzy, c-format
+#, c-format
 msgid "Network (HTTP)"
-msgstr "Reţea %s"
+msgstr "Reţea (HTTP)"
 
 #: any.pm:122
-#, fuzzy, c-format
+#, c-format
 msgid "Network (FTP)"
-msgstr "Reţea %s"
+msgstr "Reţea (FTP)"
 
 #: any.pm:123
 #, c-format
 msgid "Network (NFS)"
-msgstr ""
+msgstr "Reţea (NFS)"
 
 #: any.pm:163
 #, c-format
 msgid "URL of the mirror?"
-msgstr ""
+msgstr "URL-ul oglinzii?"
 
 #: any.pm:169
 #, c-format
 msgid "URL must start with ftp:// or http://"
-msgstr ""
+msgstr "URL trebuie să înceapă cu ftp:// sau http://"
 
 #: any.pm:180
 #, c-format
@@ -74,12 +80,12 @@ msgstr ""
 "disponibile..."
 
 #: any.pm:185
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Failed contacting Mandriva Linux web site to get the list of available "
 "mirrors"
 msgstr ""
-"Contactez situl Mandriva Linux pentru obţinerea listei oglinzilor "
+"Nu am putut contacta situl Mandriva Linux pentru obţinerea listei oglinzilor "
 "disponibile..."
 
 #: any.pm:195
@@ -90,27 +96,27 @@ msgstr "Alegeţi o oglindă de la care să descărcaţi pachetele"
 #: any.pm:225
 #, c-format
 msgid "NFS setup"
-msgstr ""
+msgstr "Configurare NFS"
 
 #: any.pm:226
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
-msgstr ""
+msgstr "Vă rog să introduceţi numele de gazdă şi directorul mediului NFS"
 
 #: any.pm:230
 #, c-format
 msgid "Hostname missing"
-msgstr ""
+msgstr "Lipseşte numele gazdei"
 
 #: any.pm:231
 #, c-format
 msgid "Directory must begin with \"/\""
-msgstr ""
+msgstr "Directorul trebuie să înceapă cu \"/\""
 
 #: any.pm:235
 #, c-format
 msgid "Hostname of the NFS mount ?"
-msgstr ""
+msgstr "Numele de gazdă al montajului NFS?"
 
 #: any.pm:236
 #, c-format
@@ -120,14 +126,16 @@ msgstr "Director"
 #: any.pm:258
 #, c-format
 msgid "Supplementary"
-msgstr ""
+msgstr "Suplimentar"
 
 #: any.pm:293
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
 "correct."
-msgstr "Nu găsesc %s pe %s"
+msgstr ""
+"Nu pot găsi o listă de pachete pe această oglindă. Asiguraţi-vă că adresa "
+"este corectă."
 
 #: any.pm:328
 #, c-format
@@ -137,7 +145,7 @@ msgstr "Căutare pachetele instalate deja ..."
 #: any.pm:335
 #, c-format
 msgid "Removing packages prior to upgrade..."
-msgstr ""
+msgstr "Înlătur pachetele înainte de actualizare..."
 
 #: any.pm:377
 #, c-format
@@ -158,6 +166,15 @@ msgid ""
 "\n"
 "Do you really want to install these servers?\n"
 msgstr ""
+"Aţi selectat următoarele servere: %s\n"
+"\n"
+"\n"
+"Aceste servere sunt activate implicit. Nu au probleme de securitate\n"
+"cunoscute, dar pot fi găsite unele noi. În acest caz, trebuie să faceţi\n"
+"actualizările cât mai curând cu putinţă.\n"
+"\n"
+"\n"
+"Sigur doriţi să instalaţi aceste servere?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: any.pm:587
@@ -180,14 +197,14 @@ msgid "Error reading file %s"
 msgstr "hEroare la citirea fişierului %s"
 
 #: any.pm:1008
-#, fuzzy, c-format
+#, c-format
 msgid "The following disk(s) were renamed:"
-msgstr "Este necesară instalarea următoarelor pachetele: \n"
+msgstr "Următoarele discuri au fost redenumite:"
 
 #: any.pm:1010
 #, c-format
 msgid "%s (previously named as %s)"
-msgstr ""
+msgstr "%s (denumit anterior %s)"
 
 #: any.pm:1067
 #, c-format
@@ -200,9 +217,9 @@ msgid "FTP"
 msgstr "FTP"
 
 #: any.pm:1067
-#, fuzzy, c-format
+#, c-format
 msgid "NFS"
-msgstr "HFS"
+msgstr "NFS"
 
 #: any.pm:1086 steps_interactive.pm:972
 #, c-format
@@ -210,14 +227,14 @@ msgid "Network"
 msgstr "Reţea"
 
 #: any.pm:1090
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose a media"
-msgstr "Vă rog să alegeţi"
+msgstr "Vă rog să alegeţi un mediu"
 
 #: any.pm:1106
-#, fuzzy, c-format
+#, c-format
 msgid "File already exists. Overwrite it?"
-msgstr "Fişierul există deja. Îl suprascriu?"
+msgstr "Fişierul există deja. Suprascriu?"
 
 #: any.pm:1110
 #, c-format
@@ -227,12 +244,12 @@ msgstr "Permisiune respinsă."
 #: any.pm:1158
 #, c-format
 msgid "Bad NFS name"
-msgstr ""
+msgstr "Nume NFS greşit"
 
 #: any.pm:1179
-#, fuzzy, c-format
+#, c-format
 msgid "Bad media %s"
-msgstr "am adăugat mediul %s"
+msgstr "Mediu %s incorect"
 
 #: any.pm:1222
 #, c-format
@@ -245,9 +262,9 @@ msgid "Screenshots will be available after install in %s"
 msgstr "Capturile ecran vor fi disponibile după instalare în %s"
 
 #: gtk.pm:126
-#, fuzzy, c-format
+#, c-format
 msgid "Installation"
-msgstr "În curs de instalare"
+msgstr "Instalare"
 
 #: gtk.pm:130 share/meta-task/compssUsers.pl:42
 #, c-format
@@ -265,6 +282,9 @@ msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
 msgstr ""
+"Unele componente din calculatorul dumneavoastră au nevoie de drivere "
+"\"proprietare\" pentru a funcţiona.\n"
+"Puteţi găsi informaţii despre ele la: %s"
 
 #: interactive.pm:22
 #, c-format
@@ -279,22 +299,22 @@ msgstr "Oprire reţea"
 #: media.pm:422
 #, c-format
 msgid "Please wait, retrieving file"
-msgstr ""
+msgstr "Vă rog să aşteptaţi, se preia fişierul"
 
 #: media.pm:703 media.pm:714
-#, fuzzy, c-format
+#, c-format
 msgid "Downloading file %s..."
-msgstr "Trimit fişierele..."
+msgstr "Descarc fişierul %s..."
 
 #: media.pm:806
 #, c-format
 msgid "Copying some packages on disks for future use"
-msgstr ""
+msgstr "Copiez unele pachete pe discuri pentru utilizare ulterioară"
 
 #: media.pm:859
-#, fuzzy, c-format
+#, c-format
 msgid "Copying in progress"
-msgstr "Detecţia este în progres..."
+msgstr "Se copiază"
 
 #: pkgs.pm:29
 #, c-format
@@ -327,6 +347,8 @@ msgid ""
 "Some packages requested by %s cannot be installed:\n"
 "%s"
 msgstr ""
+"Unele pachete cerute de %s nu pot fi instalate:\n"
+"%s"
 
 #: share/meta-task/compssUsers.pl:11
 #, c-format
@@ -383,13 +405,13 @@ msgid "Internet station"
 msgstr "Staţie de lucru în Internet"
 
 #: share/meta-task/compssUsers.pl:32
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Set of tools to read and send mail and news (mutt, tin..) and to browse the "
 "Web"
 msgstr ""
-"Set de unelte pt. citire/trimitere poştă şi ştiri (pine, mutt, tin...) şi "
-"navigare pe Web"
+"Set de unelte pt. citire/trimitere poştă şi ştiri (mutt, tin..) şi navigare "
+"pe Web"
 
 #: share/meta-task/compssUsers.pl:37
 #, c-format
@@ -458,9 +480,9 @@ msgid "Apache"
 msgstr "Apache"
 
 #: share/meta-task/compssUsers.pl:75
-#, fuzzy, c-format
+#, c-format
 msgid "Groupware"
-msgstr "Grup"
+msgstr "Groupware"
 
 #: share/meta-task/compssUsers.pl:76
 #, c-format
@@ -478,19 +500,19 @@ msgid "Internet gateway"
 msgstr "Gateway Internet"
 
 #: share/meta-task/compssUsers.pl:83
-#, fuzzy, c-format
+#, c-format
 msgid "Mail/News"
-msgstr "/Fişier/_Nou"
+msgstr "Poştă/Știri"
 
 #: share/meta-task/compssUsers.pl:84
-#, fuzzy, c-format
+#, c-format
 msgid "Postfix mail server, Inn news server"
-msgstr "Server de poştă Postfix"
+msgstr "Server de poştă Postfix, server de ştiri Inn"
 
 #: share/meta-task/compssUsers.pl:87
-#, fuzzy, c-format
+#, c-format
 msgid "Directory Server"
-msgstr "Restaurează de pe CD"
+msgstr ""
 
 #: share/meta-task/compssUsers.pl:91
 #, c-format
@@ -500,7 +522,7 @@ msgstr "Server FTP"
 #: share/meta-task/compssUsers.pl:92
 #, c-format
 msgid "ProFTPd"
-msgstr ""
+msgstr "ProFTPd"
 
 #: share/meta-task/compssUsers.pl:95
 #, c-format
@@ -513,14 +535,14 @@ msgid "Domain Name and Network Information Server"
 msgstr "Server nume de domeniu (DNS) şi NIS"
 
 #: share/meta-task/compssUsers.pl:99
-#, fuzzy, c-format
+#, c-format
 msgid "File and Printer Sharing Server"
-msgstr "Server de imprimantă"
+msgstr "Server de fişiere şi de partajare a imprimantei"
 
 #: share/meta-task/compssUsers.pl:100
-#, fuzzy, c-format
+#, c-format
 msgid "NFS Server, Samba server"
-msgstr "Server SAMBA"
+msgstr "Server NFS, server Samba"
 
 #: share/meta-task/compssUsers.pl:103 share/meta-task/compssUsers.pl:116
 #, c-format
@@ -528,9 +550,9 @@ msgid "Database"
 msgstr "Baze de date"
 
 #: share/meta-task/compssUsers.pl:104
-#, fuzzy, c-format
+#, c-format
 msgid "PostgreSQL and MySQL Database Server"
-msgstr "Server de baze de date MySQL sau PostgreSQL"
+msgstr "Server de baze de date MySQL şi PostgreSQL"
 
 #: share/meta-task/compssUsers.pl:108
 #, c-format
@@ -598,9 +620,9 @@ msgid ""
 msgstr "Un mediu grafic cu un set de aplicaţii prietenoase şi unelte de birou"
 
 #: share/meta-task/compssUsers.pl:142
-#, fuzzy, c-format
+#, c-format
 msgid "IceWm Desktop"
-msgstr "Ecran"
+msgstr "Birou IceWm"
 
 #: share/meta-task/compssUsers.pl:146
 #, c-format
@@ -608,14 +630,14 @@ msgid "Other Graphical Desktops"
 msgstr "Alte desktopuri grafice"
 
 #: share/meta-task/compssUsers.pl:147
-#, fuzzy, c-format
+#, c-format
 msgid "Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgstr "Window Maker, Enlightenment, Fvwm, etc"
 
 #: share/meta-task/compssUsers.pl:170
-#, fuzzy, c-format
+#, c-format
 msgid "Utilities"
-msgstr "Filipine"
+msgstr "Utilitare"
 
 #: share/meta-task/compssUsers.pl:172 share/meta-task/compssUsers.pl:173
 #, c-format
@@ -623,19 +645,19 @@ msgid "SSH Server"
 msgstr "Server SSH"
 
 #: share/meta-task/compssUsers.pl:177
-#, fuzzy, c-format
+#, c-format
 msgid "Webmin"
-msgstr "Webcam-uri"
+msgstr "Webmin"
 
 #: share/meta-task/compssUsers.pl:178
-#, fuzzy, c-format
+#, c-format
 msgid "Webmin Remote Configuration Server"
-msgstr "Configurare Mandriva Linux Terminal Server"
+msgstr ""
 
 #: share/meta-task/compssUsers.pl:182
-#, fuzzy, c-format
+#, c-format
 msgid "Network Utilities/Monitoring"
-msgstr "Monitorizare reţea"
+msgstr ""
 
 #: share/meta-task/compssUsers.pl:183
 #, c-format
@@ -643,14 +665,14 @@ msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
 msgstr ""
 
 #: share/meta-task/compssUsers.pl:187
-#, fuzzy, c-format
+#, c-format
 msgid "Mandriva Wizards"
-msgstr "Centrul de control Mandriva Linux"
+msgstr "Asistenţi Mandriva"
 
 #: share/meta-task/compssUsers.pl:188
-#, fuzzy, c-format
+#, c-format
 msgid "Wizards to configure server"
-msgstr "Nu am putut configura imprimanta \"%s\"!"
+msgstr "Asistenţi de configurare a serverului"
 
 #: steps.pm:85
 #, c-format
@@ -703,41 +725,46 @@ msgid ""
 "this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
+"Sistemul dumneavoastră are resurse puţine. Puteţi întâmpina probleme\n"
+"la instalarea Mandriva Linux. Dacă se întâmplă acest lucru, puteţi încerca o "
+"instalare\n"
+"în mod text. Pentru aceasta, apăsaţi `F1' când demaraţi de pe CDROM, apoi "
+"introduceţi `text'."
 
 #: steps_gtk.pm:228
 #, c-format
 msgid "Install Mandriva KDE Desktop"
-msgstr ""
+msgstr "Instalare biroul Mandriva KDE"
 
 #: steps_gtk.pm:229
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
-msgstr ""
+msgstr "Instalare biroul Mandriva GNOME"
 
 #: steps_gtk.pm:230
-#, fuzzy, c-format
+#, c-format
 msgid "Custom install"
-msgstr "Instalare minimă"
+msgstr "Instalare personalizată"
 
 #: steps_gtk.pm:259
-#, fuzzy, c-format
+#, c-format
 msgid "KDE Desktop"
-msgstr "Ecran"
+msgstr "Birou KDE"
 
 #: steps_gtk.pm:260
-#, fuzzy, c-format
+#, c-format
 msgid "GNOME Desktop"
-msgstr "Ecran"
+msgstr "Birou GNOME"
 
 #: steps_gtk.pm:261
-#, fuzzy, c-format
+#, c-format
 msgid "Custom Desktop"
-msgstr "Ecran"
+msgstr "Birou personalizat"
 
 #: steps_gtk.pm:267
 #, c-format
 msgid "Here's a preview of the '%s' desktop."
-msgstr ""
+msgstr "Iată o previzualizare a biroului '%s'."
 
 #: steps_gtk.pm:275
 #, c-format
@@ -852,9 +879,9 @@ msgid "Install"
 msgstr "Instalare"
 
 #: steps_gtk.pm:467
-#, fuzzy, c-format
+#, c-format
 msgid "Load/Save selection"
-msgstr "Selectare pachete"
+msgstr "Încarcă/Salvează selecţia"
 
 #: steps_gtk.pm:468
 #, c-format
@@ -887,21 +914,21 @@ msgid "No details"
 msgstr "Fără detalii"
 
 #: steps_gtk.pm:559
-#, fuzzy, c-format
+#, c-format
 msgid "Time remaining:"
-msgstr "Timp rămas "
+msgstr "Timp rămas:"
 
 #: steps_gtk.pm:560
-#, fuzzy, c-format
+#, c-format
 msgid "(estimating...)"
-msgstr "Estimare"
+msgstr "(se estimează...)"
 
 #: steps_gtk.pm:573
-#, fuzzy, c-format
+#, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d pachete"
-msgstr[1] "%d pachete"
+msgstr[1] "%d pachet"
 msgstr[2] "%d pachete"
 
 #: steps_gtk.pm:619 steps_interactive.pm:837 steps_list.pm:43
@@ -920,9 +947,9 @@ msgid "not configured"
 msgstr "neconfigurat"
 
 #: steps_gtk.pm:694
-#, fuzzy, c-format
+#, c-format
 msgid "Media Selection"
-msgstr "Selectarea grupurilor de pachete"
+msgstr "Selectare mediu"
 
 #: steps_gtk.pm:704 steps_interactive.pm:335
 #, c-format
@@ -930,6 +957,8 @@ msgid ""
 "The following installation media have been found.\n"
 "If you want to skip some of them, you can unselect them now."
 msgstr ""
+"Au fost găsite următoarele medii de instalare.\n"
+"Dacă doriţi să săriţi peste unele din ele, le puteţi deselecta acum."
 
 #: steps_gtk.pm:700 steps_interactive.pm:337
 #, c-format
@@ -939,11 +968,15 @@ msgid ""
 "It will then continue from the hard drive and the packages will remain "
 "available once the system is fully installed."
 msgstr ""
+"Aveţi opţiunea să copiaţi conţinutul CD-urilor pe hard disc înainte de "
+"instalare.\n"
+"Se va continua de pe hard disc şi pachetele vor rămâne disponibile după "
+"instalarea sistemului."
 
 #: steps_gtk.pm:702 steps_interactive.pm:339
 #, c-format
 msgid "Copy whole CDs"
-msgstr ""
+msgstr "Copiază CD-urile în întregime"
 
 #: steps_interactive.pm:38
 #, c-format
@@ -956,9 +989,9 @@ msgid "Please choose your keyboard layout"
 msgstr "Vă rog să alegeţi dispunerea tastaturii"
 
 #: steps_interactive.pm:105
-#, fuzzy, c-format
+#, c-format
 msgid "Here is the full list of available keyboards:"
-msgstr "Aici este lista tuturor ţărilor disponibile"
+msgstr "Aici este lista tuturor tastaturilor disponibile:"
 
 #: steps_interactive.pm:136
 #, c-format
@@ -971,7 +1004,7 @@ msgid "Is this an install or an upgrade?"
 msgstr "Este vorba de o instalare sau de o actualizare ?"
 
 #: steps_interactive.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
@@ -986,11 +1019,15 @@ msgstr "Actualizare %s"
 #, c-format
 msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 msgstr ""
+"Actualizarea de la o distribuţie pe 32 de biţi la una pe 64 de biţi nu este "
+"suportată."
 
 #: steps_interactive.pm:152
 #, c-format
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 msgstr ""
+"Actualizarea de la o distribuţie pe 64 de biţi la una pe 32 de biţi nu este "
+"suportată."
 
 #: steps_interactive.pm:171
 #, c-format
@@ -1000,17 +1037,17 @@ msgstr "Cheia de criptare pentru %s"
 #: steps_interactive.pm:199
 #, c-format
 msgid "Cancel installation, reboot system"
-msgstr ""
+msgstr "Anulează instalarea, redemarează sistemul"
 
 #: steps_interactive.pm:200
-#, fuzzy, c-format
+#, c-format
 msgid "New Installation"
-msgstr "În curs de instalare"
+msgstr "Instalare nouă"
 
 #: steps_interactive.pm:201
 #, c-format
 msgid "Upgrade previous installation (not recommended)"
-msgstr ""
+msgstr "Actualizează instalarea precedentă (nerecomandat)"
 
 #: steps_interactive.pm:205
 #, c-format
@@ -1023,6 +1060,14 @@ msgid ""
 "Warning : you should backup all your personal data before choosing \"New\n"
 "Installation\"."
 msgstr ""
+"Asistentul de instalare a detectat că sistemul Mandriva Linux instalat nu "
+"poate fi\n"
+"actualizat în siguranţă la %s.\n"
+"\n"
+"Se recomandă o instalare nouă care să o înlocuiască pe cea veche.\n"
+"\n"
+"Atenţie: ar trebui să faceţi copii de siguranţă tuturor datelor personale "
+"înainte de a alege \"Instalare nouă\"."
 
 #: steps_interactive.pm:247
 #, c-format
@@ -1074,6 +1119,8 @@ msgid ""
 "Your system does not have enough space left for installation or upgrade (%"
 "dMB > %dMB)"
 msgstr ""
+"Sistemul dumneavoastră nu are suficient spaţiu liber pentru instalare sau "
+"actualizare (%dMO > %dMO)"
 
 #: steps_interactive.pm:459
 #, c-format
@@ -1093,24 +1140,24 @@ msgid "Save"
 msgstr "Salvează"
 
 #: steps_interactive.pm:469
-#, fuzzy, c-format
+#, c-format
 msgid "Bad file"
-msgstr "Încarcă un fişier"
+msgstr "Fişier rău"
 
 #: steps_interactive.pm:485
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:486
 #, c-format
 msgid "GNOME"
-msgstr ""
+msgstr "GNOME"
 
 #: steps_interactive.pm:489
-#, fuzzy, c-format
+#, c-format
 msgid "Desktop Selection"
-msgstr "Selectarea grupurilor de pachete"
+msgstr "Selectarea biroului"
 
 #: steps_interactive.pm:490
 #, c-format
@@ -1120,7 +1167,7 @@ msgstr ""
 #: steps_interactive.pm:575
 #, c-format
 msgid "Selected size is larger than available space"
-msgstr ""
+msgstr "Dimensiunea selectată este mai mare decât spaţiul disponibil"
 
 #: steps_interactive.pm:590
 #, c-format
@@ -1133,6 +1180,8 @@ msgid ""
 "You have not selected any group of packages.\n"
 "Please choose the minimal installation you want:"
 msgstr ""
+"Nu aţi selectat niciun grup de pachete.\n"
+"Vă rog să alegeţi instalarea minimală pe care o doriţi:"
 
 #: steps_interactive.pm:594
 #, c-format
@@ -1142,7 +1191,7 @@ msgstr "Cu X"
 #: steps_interactive.pm:595
 #, c-format
 msgid "With basic documentation (recommended!)"
-msgstr ""
+msgstr "Cu documentaţia de bază (recomandat!)"
 
 #: steps_interactive.pm:596
 #, c-format
@@ -1172,27 +1221,27 @@ msgstr "Să continui totuşi?"
 #: steps_interactive.pm:686
 #, c-format
 msgid "Retry"
-msgstr ""
+msgstr "Reîncercare"
 
 #: steps_interactive.pm:687
 #, c-format
 msgid "Skip this package"
-msgstr ""
+msgstr "Ignoră acest pachet"
 
 #: steps_interactive.pm:688
 #, c-format
 msgid "Skip all packages from medium \"%s\""
-msgstr ""
+msgstr "Ignoră toate pachetele din mediul \"%s\""
 
 #: steps_interactive.pm:689
-#, fuzzy, c-format
+#, c-format
 msgid "Go back to media and packages selection"
-msgstr "Înregistrare selecţie pachete"
+msgstr "Înapoi la selectarea mediilor şi a pachetelor"
 
 #: steps_interactive.pm:692
-#, fuzzy, c-format
+#, c-format
 msgid "There was an error installing package %s."
-msgstr "A fost o eroare la instalarea pachetelor:"
+msgstr "A apărut o eroare la instalarea pachetului %s."
 
 #: steps_interactive.pm:710
 #, c-format
@@ -1221,6 +1270,14 @@ msgid ""
 "\n"
 "Do you want to install the updates?"
 msgstr ""
+"Aveţi posibilitatea să descărcaţi pachete actualizate. Aceste pachete\n"
+"au fost actualizate după ce a fost lansată distribuţia. Pot să conţină\n"
+"actualizări de securitate sau corectări de erori.\n"
+"\n"
+"Pentru a descărca aceste pachete, veţi avea nevoie de o conexiune la "
+"Internet\n"
+"\n"
+"Doriţi să instalaţi actualizările?"
 
 #: steps_interactive.pm:849
 #, c-format
@@ -1249,6 +1306,8 @@ msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
 "card"
 msgstr ""
+"Rulaţi \"alsaconf\" sau \"sndconfig\" după instalare pentru a vă configura "
+"placa de sunet"
 
 #: steps_interactive.pm:957
 #, c-format
@@ -1267,14 +1326,14 @@ msgid "Network & Internet"
 msgstr "Reţea şi Internet"
 
 #: steps_interactive.pm:983
-#, fuzzy, c-format
+#, c-format
 msgid "Proxies"
-msgstr "Profiluri"
+msgstr "Servere proxy"
 
 #: steps_interactive.pm:984
-#, fuzzy, c-format
+#, c-format
 msgid "configured"
-msgstr "Reconfigurează"
+msgstr "configurat"
 
 #: steps_interactive.pm:994
 #, c-format
@@ -1299,7 +1358,7 @@ msgstr "dezactivat"
 #: steps_interactive.pm:1031
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
-msgstr ""
+msgstr "Nu aţi configurat X. Sunteţi sigur că doriţi acest lucru?"
 
 #: steps_interactive.pm:1058
 #, c-format
@@ -1321,6 +1380,8 @@ msgid ""
 "In this security level, access to the files in the Windows partition is "
 "restricted to the administrator."
 msgstr ""
+"La acest nivel de securitate, accesul la fişierele din partiţia de Windows "
+"este permis doar administratorului."
 
 #: steps_interactive.pm:1121
 #, c-format
@@ -1364,7 +1425,7 @@ msgstr "Alegeţi limba"
 #: steps_list.pm:16 steps_list.pm:23
 #, c-format
 msgid "Localization"
-msgstr ""
+msgstr "Localizare"
 
 #: steps_list.pm:17
 #, c-format
@@ -1392,7 +1453,7 @@ msgstr "Detecţia discului fix"
 msgid ""
 "_: Keep these entry short\n"
 "Installation class"
-msgstr ""
+msgstr "Clasă de instalare"
 
 #: steps_list.pm:23
 #, c-format
@@ -1420,14 +1481,14 @@ msgstr "Partiţionare"
 msgid ""
 "_: Keep these entry short\n"
 "Formatting"
-msgstr ""
+msgstr "Formatare"
 
 #: steps_list.pm:29
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Choosing packages"
-msgstr ""
+msgstr "Alegerea pachetelor"
 
 #: steps_list.pm:31
 #, c-format
@@ -1455,7 +1516,7 @@ msgstr "Reţea"
 msgid ""
 "_: Keep these entry short\n"
 "Bootloader"
-msgstr "Gestionar de demarare"
+msgstr "Gestionar de demaraj"
 
 #: steps_list.pm:40 steps_list.pm:41
 #, c-format
@@ -1495,27 +1556,27 @@ msgstr "Ieşire"
 #: ../../advertising/IM_flash.pl:1
 #, c-format
 msgid "Your desktop on a USB key"
-msgstr ""
+msgstr "Biroul dumneavoastră pe o cheie USB"
 
 #: ../../advertising/IM_free09.pl:1
 #, c-format
 msgid "The 100%% open source Mandriva Linux distribution"
-msgstr ""
+msgstr "Distribuţia Mandriva Linux 100%% open source"
 
 #: ../../advertising/IM_one09.pl:1
 #, c-format
 msgid "Explore Linux easily with Mandriva One"
-msgstr ""
+msgstr "Exploraţi facil Linux cu Mandriva One"
 
 #: ../../advertising/IM_pwp09.pl:1
 #, c-format
 msgid "A full Mandriva Linux desktop, with support"
-msgstr ""
+msgstr "Un birou Mandriva Linux complet, cu suport"
 
 #: ../../advertising/IM_range09.pl:1
 #, c-format
 msgid "Mandriva: distributions for everybody's needs"
-msgstr ""
+msgstr "Mandriva: distribuţii pentru necesităţile fiecăruia"
 
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr ""
