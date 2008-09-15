@@ -72,7 +72,7 @@ sub main {
 		    1, (my $notebook_widget = Gtk2::Notebook->new),
 		    0, (my $per_kind_action_box = gtknew('HButtonBox', layout => 'edge')),
 		    0, (my $per_kind_action_box2 = gtknew('HButtonBox', layout => 'end')),
-		    0, (my $general_action_box  = gtknew('HButtonBox', spacing => 5, layout => 'spread')),
+		    0, (my $general_action_box  = gtknew('HBox', spacing => 5)),
 		   ),
 	  );
     my ($lock, $initializing) = (undef, 1);
@@ -173,16 +173,20 @@ sub general_action_box {
     my ($box) = @_;
     $_->destroy foreach $box->get_children;
 
-    gtkadd($box, gtknew('Install_Button', text => N("Help"), clicked => \&interactive_help));
+    my $box_start = gtknew('HButtonBox', layout => 'start', children_tight => [ 
+        gtknew('Install_Button', text => N("Help"), clicked => \&interactive_help)
+    ]);
 
     my @actions = (
 		   diskdrake::interactive::general_possible_actions($in, $all_hds), 
 		   N_("Done"));
+    my $box_end = gtknew('HButtonBox', layout => 'end', spacing => 5);
     foreach my $s (@actions) {
 	my $button = Gtk2::Button->new(translate($s));
 	$done_button = $button if $s eq 'Done';
-	gtkadd($box, gtksignal_connect($button, clicked => sub { try($s) }));
+	gtkadd($box_end, gtksignal_connect($button, clicked => sub { try($s) }));
     }
+    gtkadd($box, $box_start, $box_end);
 }
 sub per_kind_action_box {
     my ($box, $box2, $kind) = @_;
