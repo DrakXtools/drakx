@@ -72,6 +72,7 @@ sub main {
 		    1, (my $notebook_widget = Gtk2::Notebook->new),
 		    0, (my $per_kind_action_box = gtknew('HButtonBox', layout => 'edge')),
 		    0, (my $per_kind_action_box2 = gtknew('HButtonBox', layout => 'end')),
+		    0, Gtk2::HSeparator->new,
 		    0, (my $general_action_box  = gtknew('HBox', spacing => 5)),
 		   ),
 	  );
