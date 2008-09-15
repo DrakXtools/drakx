@@ -302,7 +302,7 @@ sub reallyChooseGroups {
     my ($o, $size_to_display, $individual, $_compssUsers) = @_;
 
     my $w = ugtk2->new(N("Package Group Selection"));
-    my $w_size = gtknew('Label_Left', text => &$size_to_display);
+    my $w_size = gtknew('Label_Left', text => &$size_to_display, padding => [ 0, 0 ]);
 
     my $entry = sub {
 	my ($e) = @_;
