@@ -440,7 +440,7 @@ our @tree =
       string => N("Printer"),
       icon => "hw_printer.png",
       configurator => "$sbindir/printerdrake",
-      detector => sub { require printer::detect; printer::detect::local_detect() },
+      detector => sub { },
       # we do not check these b/c this need user interaction (auth, ...):
       checked_on_boot => 0,
      },
