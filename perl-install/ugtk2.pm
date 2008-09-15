@@ -926,10 +926,12 @@ sub ask_browse_tree_info {
 			       0, gtknew('Frame', text => N("Info"), child =>
 				      gtknew('ScrolledWindow', child => my $info = gtknew('TextView', editable => 0, height => 100)),
 				     ) ]),
+		    0, Gtk2::HSeparator->new,
 		    0, my $status = gtknew('Label'),
 		    if_($common->{auto_deps},
 		        0, gtknew('CheckButton', text => $common->{auto_deps}, active_ref => \$common->{state}{auto_deps})
 		    ),
+		    0, Gtk2::HSeparator->new,
 		    0, my $box2 = gtknew('HBox', spacing => 10),
 		   ]));
 
