@@ -264,7 +264,10 @@ sub reallyChooseDesktop {
                 my $wp = ugtk2->new($title{$val->[1]}, transient => $w->{real_window}, modal => 1,);
                 gtkadd($wp->{rwindow},
                        gtkpack_(Gtk2::VBox->new,
-                                0, N("Here's a preview of the '%s' desktop.", $val->[1]),
+                                0, gtknew('Title2', label => N("Here's a preview of the '%s' desktop.", $val->[1]),
+                                          # workaround infamous 6 years old gnome bug #101968:
+                                          width => mygtk2::get_label_width(), 
+                                      ),
                                 1, gtknew('Image', file => "desktop-$val->[0]-big"),
                                 0, Gtk2::HSeparator->new,
                                 0, gtkpack(create_hbox('end'),
