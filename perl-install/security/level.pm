@@ -56,7 +56,7 @@ connections from many clients. Note: if your machine is only a client on the Int
 		     interactive_help_id => 'miscellaneous',
 		   }, [
               { label => N("Please choose the desired security level"), title => 1 },
-              { val => $security, list => \@l, format => \&to_string,
+              { val => $security, list => \@l, 
                 format => sub {
                     #-PO: this string is used to properly format "<security level>: <level description>"
                     N("%s: %s", to_string($_), formatAlaTeX($help{$_}));
