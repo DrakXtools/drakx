@@ -261,7 +261,7 @@ sub reallyChooseDesktop {
                     Custom => N("Custom Desktop"),
                 );
 
-                my $wp = ugtk2->new($title{$val->[1]}, transient => $w->{real_window}, modal => 1,);
+                my $wp = ugtk2->new($title{$val->[1]}, transient => $w->{real_window}, modal => 1);
                 gtkadd($wp->{rwindow},
                        gtkpack_(Gtk2::VBox->new,
                                 0, gtknew('Title2', label => N("Here's a preview of the '%s' desktop.", $val->[1]),
