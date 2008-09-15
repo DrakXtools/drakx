@@ -17,7 +17,7 @@ sub max_nb() { 31 }
 
 sub check_prog {
     my ($in) = @_;
-    whereis_binary('mdadm') || $in->do_pkgs->ensure_binary_is_installed('mdadm', 'mdadm');
+    $::prefix ? whereis_binary('mdadm') : $in->do_pkgs->ensure_binary_is_installed('mdadm', 'mdadm');
 }
 
 sub new {
