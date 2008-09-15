@@ -656,7 +656,7 @@ sub g_auto_install {
 	$_->{mntpoint} && fs::format::known_type($_);
     } @{$::o->{fstab}} ];
     
-    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(locale authentication mouse net timezone superuser keyboard users partitioning isUpgrade manualFstab nomouseprobe crypto security security_user libsafe autoExitInstall X services postInstall postInstallNonRooted); #- TODO modules bootloader 
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(locale authentication mouse net timezone superuser keyboard users partitioning isUpgrade manualFstab nomouseprobe crypto security security_user autoExitInstall X services postInstall postInstallNonRooted); #- TODO modules bootloader 
 
     local $o->{partitioning}{auto_allocate} = !$b_replay;
     $o->{autoExitInstall} = !$b_replay;
@@ -1270,7 +1270,6 @@ sub set_security {
     my ($o) = @_;
     require security::various;
     security::level::set($o->{security});
-    security::various::config_libsafe($::prefix, $o->{libsafe});
     security::various::config_security_user($::prefix, $o->{security_user});
 }
 

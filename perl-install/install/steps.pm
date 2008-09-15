@@ -789,7 +789,6 @@ sub miscellaneousBefore {
     require security::various;
     $o->{security} ||= security::level::get();
     $o->{security_user} ||= security::various::config_security_user($::prefix);
-    $o->{libsafe} ||= security::various::config_libsafe($::prefix);
 
     log::l("security level is $o->{security}");
 }
