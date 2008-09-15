@@ -59,7 +59,7 @@ connections from many clients. Note: if your machine is only a client on the Int
               { val => $security, list => \@l, 
                 format => sub {
                     #-PO: this string is used to properly format "<security level>: <level description>"
-                    N("%s: %s", to_string($_), formatAlaTeX($help{$_}));
+                    N("%s[:] %s", to_string($_[0]), formatAlaTeX($help{$_[0]}));
                 },
                 type => 'list', gtk => { use_boxradio => 1 } },
                 { label => N("Security Administrator:"), title => 1 },
