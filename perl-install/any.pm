@@ -1116,7 +1116,7 @@ sub selectCountry {
 
     $in->ask_from_(
 		  { title => N("Country / Region"), 
-		    messages => N("Please choose your country."),
+		    messages => N("Please choose your country"),
 		    interactive_help_id => 'selectCountry',
 		    if_(@best, advanced_messages => N("Here is the full list of available countries")),
 		    advanced_label => @best ? N("Other Countries") : N("Advanced"),
