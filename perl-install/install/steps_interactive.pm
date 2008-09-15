@@ -980,7 +980,7 @@ sub summary {
 	    require security::level;
 	    my $security = $o->{security};
        set_sec_level:
-	    if (security::level::level_choose($o, \$security, \$o->{libsafe}, \$o->{security_user})) {
+	    if (security::level::level_choose($o, \$security, \$o->{security_user})) {
              check_security_level($o, $security) or goto set_sec_level;
 	     $o->{security} = $security;
              install::any::set_security($o);

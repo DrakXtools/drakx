@@ -35,7 +35,7 @@ sub set {
 }
 
 sub level_choose {
-    my ($in, $security, $libsafe, $email) = @_;
+    my ($in, $security, $email) = @_;
 
     my %help = (
       0 => N("This level is to be used with care. It makes your system more easy to use,
