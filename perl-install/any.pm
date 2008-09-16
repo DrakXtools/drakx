@@ -900,18 +900,13 @@ sub display_release_notes {
                     }, [ {} ]);
         return;
     }
-    require Gtk2::Html2;
+    require Gtk2::WebKit;
     require ugtk2;
     ugtk2->import(':all');
     require mygtk2;
     mygtk2->import('gtknew');
-    my $view     = Gtk2::Html2::View->new;
-    my $document = Gtk2::Html2::Document->new;
-    $view->set_document($document);
-                               
-    $document->clear;
-    $document->open_stream("text/html");
-    $document->write_stream($o->{release_notes});
+    my $view     = Gtk2::WebKit::WebView->new;
+    $view->load_html_string($o->{release_notes}, '/');
                                
     my $w = ugtk2->new(N("Release Notes"), transient => $::main_window, modal => 1, pop_it => 1);
     gtkadd($w->{rwindow},

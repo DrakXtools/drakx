@@ -754,17 +754,15 @@ sub filter_widgets {
     }
 }
 
-my $help_path = "/usr/share/doc/installer-help";
+my $help_path = "/usr/share/doc/installer-help/";
 
 sub load_from_uri {
-    my ($document, $url) = @_;
+    my ($view, $url) = @_;
     $url =~ s/#.*$//; # prevent segfaults on anchors
     $url = get_html_file($::o, $url);
     my $str = scalar(cat_($url));
     c::set_tagged_utf8($str);
-    $document->clear;
-    $document->open_stream("text/html");
-    $document->write_stream($str);
+    $view->load_html_string($str, $help_path);
 }
 
 sub get_html_file {
@@ -780,18 +778,10 @@ sub get_html_file {
 sub display_help {
     my ($o, $common, $mainw) = @_;
     if (my $file = $common->{interactive_help_id}) {
-        require Gtk2::Html2;
-        my $view     = Gtk2::Html2::View->new;
-        my $document = Gtk2::Html2::Document->new;
-        $document->signal_connect(request_url => sub {
-                                      my ($_document, $url, $stream) = @_;
-                                      $stream->write(join('', cat_("$help_path/$url")));
-                                      $stream->close;
-                                  });
-        $document->signal_connect('link-clicked' => \&load_from_uri);
-        $view->set_document($document);
+        require Gtk2::WebKit;
+        my $view     = Gtk2::WebKit::WebView->new;
 
-        load_from_uri($document, "$file.html");
+        load_from_uri($view, "$file.html");
 
         my $w = ugtk2->new(N("Help"), transient => $mainw->{real_window}, modal => 1);
         gtkadd($w->{rwindow},
