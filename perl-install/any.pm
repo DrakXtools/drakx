@@ -919,7 +919,7 @@ sub display_release_notes {
                     1, create_scrolled_window(ugtk2::gtkset_border_width($view, 5),
                                               [ 'never', 'automatic' ],
                                           ),
-                    0, gtkpack(create_hbox('edge'),
+                    0, gtkpack(create_hbox('end'),
                                gtknew('Button', text => N("Close"),
                                       clicked => sub { Gtk2->main_quit })
                            ),
