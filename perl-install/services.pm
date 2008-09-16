@@ -173,7 +173,8 @@ sub ask_ {
 				     scalar(values %services));
 			       },
 			       get_info => sub { formatLines(description($_[0])) },
-			       interactive_help_id => 'configureServices',
+			       interactive_help => sub { 
+                                   interactive::gtk::display_help($o, { interactive_help_id => 'misc-params' }, $w) },
 			      }) or return $l, $on_services; #- no change on cancel.
     [ grep { $services{$_} } @$l ];
 }
