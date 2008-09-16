@@ -677,7 +677,7 @@ sub summary_prompt {
     };
     $set_entry_labels->();
 
-    my $help_sub = $o->interactive_help_sub_display_id('summary');
+    my $help_sub = sub { interactive::gtk::display_help($o, { interactive_help_id => 'misc-params' }, $w) };
 
     ugtk2::gtkadd($w->{window},
 	   gtknew('VBox', spacing => 5, children => [
