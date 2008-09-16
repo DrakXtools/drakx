@@ -226,6 +226,9 @@ sub read_grub {
     $bootloader;
 }
 
+# nb: 
+# - $boot_part comes from /boot/grub/install.sh "root (hd...)" line
+# - $grub2dev is /boot/grub/device.map
 sub _may_fix_grub2dev {
     my ($fstab, $grub2dev, $boot_part) = @_;
     my $real_boot_part = fs::get::root_($fstab, 'boot') or
@@ -239,7 +242,7 @@ sub _may_fix_grub2dev {
 
     log::l("WARNING: we have detected that device.map is inconsistent with the system");
 
-    my ($hd_grub, undef, undef) = parse_grub_file($boot_part);
+    my ($hd_grub, undef, undef) = parse_grub_file($boot_part); # extract hdX 
     if (my $prev_hd_grub = find { $grub2dev->{$_} eq $real_boot_dev } keys %$grub2dev) {
 	$grub2dev->{$prev_hd_grub} = $grub2dev->{$hd_grub};
 	log::l("swapping result: $hd_grub/$real_boot_dev and $prev_hd_grub/$grub2dev->{$hd_grub}");
