@@ -235,6 +235,10 @@ sub rebuild_initrds() {
 
 #-###############################################################################
 sub migrate_to_uuids() {    
+    foreach (fs::get::fstab($all_hds)) {
+	_add_uuid_to_swap($_) if $_->{fs_type} eq 'swap' && !$_->{device_UUID};
+    }
+
     _migrate_to_uuids__fstab();
 
     my $fstab = [ fs::get::fstab($all_hds) ];
@@ -292,6 +296,30 @@ sub _set_prefer_device_UUID {
     $part->{prefer_device_UUID} = 1;
     $part->{prefer_device} = 0;
     1;
+}
+
+# add UUID to swap v.2 in case the swap was created long ago when mkswap didn't do it by default
+sub _add_uuid_to_swap {
+    my ($part) = @_;
+
+    my $ids = fs::type::call_vol_id($part);
+    $ids->{ID_FS_VERSION} eq '2' 
+      or log::l("ERROR: do not know swap version $ids->{ID_FS_VERSION}, so can not add UUID to it"), return;
+
+    my $uuid = run_program::get_stdout('uuidgen');
+    log::l("adding UUID=$uuid to $part->{device}");
+    $uuid =~ s/-//g; 
+    $uuid =~ s/(..)/chr(hex($1))/ge;
+
+    {
+	my $F;
+	sysopen($F, devices::make($part->{device}), 2) or die "error opening device $part->{device} for writing";
+	sysseek($F, 1036, 0) && syswrite($F, $uuid) or log::l("writing UUID failed");
+    }
+
+    if (my $p = fs::type::type_subpart_from_magic($part)) {
+	$part->{device_UUID} = $p->{device_UUID};
+    }
 }
 
 #-###############################################################################
