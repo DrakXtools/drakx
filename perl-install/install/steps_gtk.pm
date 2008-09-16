@@ -479,7 +479,8 @@ sub choosePackagesTree {
 				return;
 			    },
 			    auto_deps => N("Show automatically selected packages"),
-			    interactive_help_id => 'choosePackagesTree',
+			    interactive_help => sub { interactive::gtk::display_help($o, { interactive_help_id => 'choosePackages' }, $w) },
+
 			    ok => N("Install"),
 			    cancel => N("Previous"),
 			    icons => [ { icon         => 'floppy',
