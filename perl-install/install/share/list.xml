@@ -145,8 +145,6 @@
   /usr/share/X11/XKeysymDB
   /etc/pango/ARCH/pango.modules
   /usr/LIB/gtk-2.0/*/loaders/libpixbufloader-png.so
-  <!-- XPM loader is needed by Gtk2::Html2 on error -->
-  /usr/LIB/gtk-2.0/*/loaders/libpixbufloader-xpm.so
   /usr/LIB/gtk-2.0/*/immodules/im-cedilla.so
   /usr/LIB/gtk-2.0/*/engines/libia_ora.so
 
@@ -384,7 +382,7 @@
 <from expand="rpm" matching="m!^/usr/lib/perl5! and !/\.pod$/">
   perl-Gtk2
   perl-Glib
-  perl-Gtk2-Html2
+  perl-Gtk2-WebKit
   perl-Curses
   perl-Curses-UI
 </from>
