@@ -935,14 +935,8 @@ sub ask_browse_tree_info {
 		    0, my $box2 = gtknew('HBox', spacing => 10),
 		   ]));
 
-    gtkpack__($box2, gtknew(($::isInstall ? 'Install_Button' : 'Button'), text => N("Help"), clicked => sub {
-                            # will be a little small in standalone mode:
-                            if ($::isInstall) {
-                                $::o->ask_warn(N("Help"), $common->{interactive_help}->());
-                            } else {
-					   ask_warn(N("Help"), $common->{interactive_help}->());
-                            }
-				       })) if $common->{interactive_help};
+    gtkpack__($box2, gtknew(($::isInstall ? 'Install_Button' : 'Button'), text => N("Help"),
+                            clicked => $common->{interactive_help})) if $common->{interactive_help};
 
     #gtkpack__($box2, my $toolbar = Gtk2::Toolbar->new('horizontal', 'icons'));
     gtkpack__($box2, my $toolbar = Gtk2::Toolbar->new);
