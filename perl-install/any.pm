@@ -893,10 +893,10 @@ sub autologin {
 }
 
 sub display_release_notes {
-    my ($o) = @_;
+    my ($o, $release_notes) = @_;
     if (!$o->isa('interactive::gtk')) {
         $o->ask_from_({ title => N("Release Notes"), 
-                        messages => $o->{release_notes}, #formatAlaTeX(messages::main_license()),
+                        messages => $release_notes, #formatAlaTeX(messages::main_license()),
                     }, [ {} ]);
         return;
     }
@@ -906,7 +906,7 @@ sub display_release_notes {
     require mygtk2;
     mygtk2->import('gtknew');
     my $view     = Gtk2::WebKit::WebView->new;
-    $view->load_html_string($o->{release_notes}, '/');
+    $view->load_html_string($release_notes, '/');
                                
     my $w = ugtk2->new(N("Release Notes"), transient => $::main_window, modal => 1, pop_it => 1);
     gtkadd($w->{rwindow},
@@ -934,7 +934,7 @@ sub acceptLicense {
     my $ext = $o->isa('interactive::gtk') ? '.html' : '.txt';
     my $separator = $o->isa('interactive::gtk') ? "\n\n" : '';
 
-    $o->{release_notes} = join($separator, grep { $_ } map {
+    my $release_notes = join($separator, grep { $_ } map {
         if ($::isInstall) {
             my $f = install::any::getFile_($o->{stage2_phys_medium}, $_);
             $f && cat__($f);
@@ -946,11 +946,11 @@ sub acceptLicense {
     } "release-notes$ext", 'release-notes.' . arch() . $ext);
 
     # we do not handle links:
-    $o->{release_notes} =~ s!<a href=".*?">(.*?)</a>!$1!g;
+    $release_notes =~ s!<a href=".*?">(.*?)</a>!$1!g;
 
     return if $o->{useless_thing_accepted};
 
-    my $r = $::testing ? 'Accept' : 'Refuse';
+    my $r = $::testing || 1 ? 'Accept' : 'Refuse';
 
     $o->ask_from_({ title => N("License agreement"), 
 		    focus_first => 1,
@@ -964,8 +964,8 @@ sub acceptLicense {
                        { label => N("Do you accept this license ?"), title => 1, alignment => 'right' },
                        { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list', alignment => 'right',
                          format => sub { translate($_[0]) } },
-                       if_($o->{release_notes},
-                           { clicked => sub { display_release_notes($o) }, do_not_expand => 1,
+                       if_($release_notes,
+                           { clicked => sub { display_release_notes($o, $release_notes) }, do_not_expand => 1,
                              val => \ (my $_t1 = N("Release Notes")), install_button => 1, no_indent => 1 }
                        ), 
                    ])
