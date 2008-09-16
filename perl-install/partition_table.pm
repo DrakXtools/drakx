@@ -85,7 +85,7 @@ sub compute_device_name {
 
 sub _compute_device_name {
     my ($hd, $nb) = @_;
-    my $prefix = $hd->{prefix} || $hd->{device} . ($hd->{device} =~ /\d$/ ? 'p' : '');
+    my $prefix = $hd->{prefix} || devices::prefix_for_dev($hd->{device});
     $prefix . $nb;
 }
 

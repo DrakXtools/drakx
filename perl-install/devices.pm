@@ -203,6 +203,11 @@ sub part_prefix {
     (simple_partition_scan($part))[0];
 }
 
+sub prefix_for_dev {
+    my ($dev) = @_;
+    $dev . ($dev =~ /\d$/ ? 'p' : '');
+}
+
 sub symlink_now_and_register {
     my ($if_struct, $of) = @_;
     my $if = $if_struct->{device};

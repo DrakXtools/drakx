@@ -1551,7 +1551,7 @@ sub grub2dev_and_file {
     my ($hd, $part, $rel_file) = parse_grub_file($grub_file) or return;
     $grub2dev->{$hd} or internal_error("$hd has no mapping in device.map (when translating $grub_file)");
     $part = $o_block_device ? '' : defined $part && $part + 1; #- grub wants "(hdX,Y)" where lilo just want "hdY+1"
-    my $device = '/dev/' . $grub2dev->{$hd} . $part;
+    my $device = '/dev/' . devices::prefix_for_dev($grub2dev->{$hd}) . $part;
     $device, $rel_file;
 }
 sub grub2dev {

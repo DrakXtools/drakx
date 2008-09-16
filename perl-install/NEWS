@@ -3,6 +3,9 @@ Version 11.44 - 16 September 2008
 - bootloader-config:
   o --action migrate-to-uuids: add UUID to swap v.2 in case the swap was
     created long ago when mkswap didn't do it by default
+  o fix reading existing grub conf in present of /dev/mapper/xxxx0p1
+    partitions (which was causing bootloader-config to drop correct entries,
+    cf #37722)
 
 Version 11.43 - 16 September 2008
 
