@@ -758,7 +758,6 @@ my $help_path = "/usr/share/doc/installer-help/";
 
 sub load_from_uri {
     my ($view, $url) = @_;
-    $url =~ s/#.*$//; # prevent segfaults on anchors
     $url = get_html_file($::o, $url);
     my $str = scalar(cat_($url));
     c::set_tagged_utf8($str);
