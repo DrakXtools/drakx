@@ -99,16 +99,16 @@ sub read_rpmsrate {
 	my @flags = @{$flags->{$_}};
 	my $p;
 	if ($::isInstall) {
-	$p = install::pkgs::packageByName($packages, $_)  or next;
-	if (my @l = map { /locales-(.*)/ ? qq(LOCALES"$1") : () } $p->requires_nosense) {
-	    if (@l > 1) {
-		log::l("ERROR: package $_ is requiring many locales") if $_ ne 'lsb';
-	    } else {
-		push @flags, @l;
-	    }	    
+            $p = install::pkgs::packageByName($packages, $_) or next;
+            if (my @l = map { /locales-(.*)/ ? qq(LOCALES"$1") : () } $p->requires_nosense) {
+                if (@l > 1) {
+                    log::l("ERROR: package $_ is requiring many locales") if $_ ne 'lsb';
+                } else {
+                    push @flags, @l;
+                }
+            }
 	}
-	}
-	
+
 	@flags = map {
 	    my ($user_flags, $known_flags) = partition { /^!?CAT_/ } split('\|\|', $_);
 	    my $ok = find {
@@ -130,10 +130,10 @@ sub read_rpmsrate {
 	} @flags;
 
 	if ($::isInstall) {
-	$p->set_rate($rates->{$_});
-	$p->set_rflags(member('FALSE', @flags) ? 'FALSE' : @flags);
+            $p->set_rate($rates->{$_});
+            $p->set_rflags(member('FALSE', @flags) ? 'FALSE' : @flags);
 	} else {
-         $flags->{$_} = \@flags;
+            $flags->{$_} = \@flags;
 	}
     }
     push @{$packages->{needToCopy} ||= []}, @$need_to_copy if ref($packages);
