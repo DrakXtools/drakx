@@ -385,7 +385,11 @@ sub create_widget {
 			       $onchange_f->(sub { next_val_in_array(${$e->{val}}, $e->{list}) });
 			       $set->(${$e->{val}});
 			   });
-	$real_w = gtkpack_(Gtk2::HBox->new(0,10), 1, Gtk2::HBox->new(0,0), 0, $w, 1, Gtk2::HBox->new(0,0));
+        if ($e->{alignment} eq 'right') {
+            $real_w = gtknew('HButtonBox', layout => 'start', children_tight => [ $w ]);
+        } else {
+            $real_w = gtkpack_(Gtk2::HBox->new(0,10), 1, Gtk2::HBox->new(0,0), 0, $w, 1, Gtk2::HBox->new(0,0));
+        }
     } elsif ($e->{type} eq 'bool') {
 	if ($e->{image}) {
 	    $w = ugtk2::gtkadd(Gtk2::CheckButton->new, gtkshow(gtkcreate_img($e->{image})));
