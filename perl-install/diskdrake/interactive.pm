@@ -305,7 +305,7 @@ sub hd_possible_actions_base {
 }
 
 sub hd_possible_actions_extra {
-    my ($hd) = @_;
+    my ($_hd) = @_;
     $::expert ? N_("Toggle to normal mode") : N_("Toggle to expert mode");
 }
 
@@ -358,7 +358,7 @@ sub Auto_allocate {
 }
 
 sub More {
-    my ($in, $hd) = @_;
+    my ($in, $_hd) = @_;
 
     my $r;
     $in->ask_from(N("More"), '',
