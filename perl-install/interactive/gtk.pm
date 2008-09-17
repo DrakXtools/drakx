@@ -403,7 +403,8 @@ sub create_widget {
         );
 	$w = $e->{title} ? 
 	         gtknew('Title2', label => escape_text_for_TextView_markup_format(${$e->{val}}), @common) :
-		 gtknew('Label_Left', line_wrap => 1, text_markup => ${$e->{val}}, @common);
+		 gtknew('Label_Left',
+                        line_wrap => 1, text_markup => ${$e->{val}}, @common);
     } elsif ($e->{type} eq 'label') {
 	$w = gtknew('WrappedLabel', text_markup => ${$e->{val}});
 	$set = sub { $w->set($_[0]) };
