@@ -299,7 +299,7 @@ sub tryConfScanner {
 	return 0;
     }
     if ($scanner::scannerDB->{$model}{server} =~ /(printerdrake|hpoj|hpaio|hplip)/i) {
-     	$in->ask_warn(N("Warning"), N("The %s must be configured by printerdrake.\nYou can launch printerdrake from the %s Control Center in Hardware section.", removeverticalbar($model), $shortdistroname));
+     	$in->ask_warn(N("Warning"), N("The %s must be configured by system-config-printer.\nYou can launch system-config-printer from the %s Control Center in Hardware section.", removeverticalbar($model), $shortdistroname));
      	return 0;
     }
     my @modules = ();
