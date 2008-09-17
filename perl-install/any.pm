@@ -957,7 +957,7 @@ sub acceptLicense {
 
     return if $o->{useless_thing_accepted};
 
-    my $r = $::testing || 1 ? 'Accept' : 'Refuse';
+    my $r = $::testing ? 'Accept' : 'Refuse';
 
     $o->ask_from_({ title => N("License agreement"), 
 		    focus_first => 1,
