@@ -902,7 +902,7 @@ sub display_release_notes {
     }
 
     # workaround too small fonts:
-    $release_notes =~ s!(<head>)!\1      <style type="text/css">
+    $release_notes =~ s!(<head>)!$1      <style type="text/css">
 	      body { font-family: sans-serif; font-size: 13px }
 	      table { font-family: sans-serif; font-size: 13px }
 			</style>!x;
