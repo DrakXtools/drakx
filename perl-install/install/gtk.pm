@@ -182,7 +182,7 @@ sub create_steps_window {
              )
     );
         
-    $root_window->show_all
+    $root_window->show_all;
 }
 
 sub update_steps_position {
