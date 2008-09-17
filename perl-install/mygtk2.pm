@@ -640,6 +640,16 @@ sub _gtk__Fixed {
     $w;
 }
 
+sub _gtk__Layout {
+    my ($w, $opts, $_class, $_action) = @_;
+	
+    if (!$w) {
+	$w = Gtk2::Layout->new;
+        _gtknew_handle_layout_children($w, $opts);
+    }
+    $w;
+}
+
 sub _gtknew_handle_layout_children {
     my ($w, $opts) = @_;
         $opts->{children} ||= [];
