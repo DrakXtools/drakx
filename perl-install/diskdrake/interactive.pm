@@ -1094,9 +1094,8 @@ sub ensure_we_have_encrypt_key_if_needed {
     my ($in, $part) = @_;
 
     if ($part->{options} =~ /encrypted/ && !$part->{encrypt_key}) {
-	my ($options, $unknown) = fs::mount_options::unpack($part);
+	my ($options, $_unknown) = fs::mount_options::unpack($part);
 	$part->{encrypt_key} = choose_encrypt_key($in, $options, 'skip_encrypt_algo') or return;
-	fs::mount_options::pack($part, $options, $unknown);
     }
     1;
 }
