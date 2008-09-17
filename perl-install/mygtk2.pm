@@ -635,7 +635,13 @@ sub _gtk__Fixed {
     if (!$w) {
 	$w = Gtk2::Fixed->new;
 	$w->set_has_window(delete $opts->{has_window}) if exists $opts->{has_window};
+        _gtknew_handle_layout_children($w, $opts);
+    }
+    $w;
+}
 
+sub _gtknew_handle_layout_children {
+    my ($w, $opts) = @_;
         $opts->{children} ||= [];
         push @{$opts->{children}}, [ delete $opts->{child}, delete $opts->{x}, delete $opts->{y} ] if exists $opts->{child};
         foreach (@{$opts->{children}}) {
@@ -650,8 +656,6 @@ sub _gtk__Fixed {
                     ugtk2::set_back_pixbuf($w, $pixbuf);
                 });
         }
-    }
-    $w;
 }
 
 
