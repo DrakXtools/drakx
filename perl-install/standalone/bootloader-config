@@ -284,7 +284,7 @@ sub _migrate_to_uuids__fstab() {
 
 sub _migrate_dev_to_uuid {
     my ($fstab, $dev) = @_;
-    $dev && $dev =~ m!/dev/! or next;
+    $dev && $dev =~ m!/dev/! or return;
 
     my $part = fs::get::device2part($dev, $fstab);
     $part && $part->{device_UUID} && "UUID=$part->{device_UUID}";
@@ -292,7 +292,8 @@ sub _migrate_dev_to_uuid {
 
 sub _set_prefer_device_UUID {
     my ($part) = @_;
-    $part->{device_UUID} && !$part->{prefer_device_UUID} && !$part->{prefer_device_LABEL} or return;
+    $part->{device_UUID} && !$part->{prefer_device_UUID} && !$part->{prefer_device_LABEL}
+      && devices::should_prefer_UUID($part->{device}) or return;
     $part->{prefer_device_UUID} = 1;
     $part->{prefer_device} = 0;
     1;

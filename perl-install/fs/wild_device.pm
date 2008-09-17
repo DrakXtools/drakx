@@ -79,7 +79,7 @@ sub to_subpart {
 sub _prefer_device_UUID {
     my ($part) = @_;
     $part->{prefer_device_UUID} || 
-      !$::no_uuid_by_default && $part->{device} =~ /^(hd|sd)/;
+      !$::no_uuid_by_default && devices::should_prefer_UUID($part->{device});
 }
 
 sub from_part {

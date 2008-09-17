@@ -208,6 +208,11 @@ sub prefix_for_dev {
     $dev . ($dev =~ /\d$/ ? 'p' : '');
 }
 
+sub should_prefer_UUID {
+    my ($dev) = @_;
+    $dev =~ /^(hd|sd)/;
+}
+
 sub symlink_now_and_register {
     my ($if_struct, $of) = @_;
     my $if = $if_struct->{device};
