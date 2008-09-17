@@ -635,7 +635,14 @@ sub _gtk__Fixed {
     if (!$w) {
 	$w = Gtk2::Fixed->new;
 	$w->set_has_window(delete $opts->{has_window}) if exists $opts->{has_window};
-        $w->put(delete $opts->{child}, delete $opts->{x}, delete $opts->{y}) if exists $opts->{child};
+
+        $opts->{children} ||= [];
+        push @{$opts->{children}}, [ delete $opts->{child}, delete $opts->{x}, delete $opts->{y} ] if exists $opts->{child};
+        foreach (@{$opts->{children}}) {
+            $w->put(@$_);
+        }
+        delete $opts->{children};
+
         if ($opts->{pixbuf_file}) {
             my $pixbuf = gtknew('Pixbuf', file => delete $opts->{pixbuf_file}) if $opts->{pixbuf_file};
             $w->signal_connect(
