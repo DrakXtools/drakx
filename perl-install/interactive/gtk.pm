@@ -403,7 +403,7 @@ sub create_widget {
         );
 	$w = $e->{title} ? 
 	         gtknew('Title2', label => escape_text_for_TextView_markup_format(${$e->{val}}), @common) :
-		 gtknew('Label_Left',
+		 gtknew($e->{alignment} eq 'right' ? 'Label_Right' : 'Label_Left',
                         line_wrap => 1, text_markup => ${$e->{val}}, @common);
     } elsif ($e->{type} eq 'label') {
 	$w = gtknew('WrappedLabel', text_markup => ${$e->{val}});
@@ -616,6 +616,7 @@ sub create_widgets_block {
     my ($o, $common, $l, $update, $ignore_ref) = @_;
 
     my $label_sizegrp = Gtk2::SizeGroup->new('horizontal');
+    my $right_label_sizegrp = Gtk2::SizeGroup->new('horizontal');
     my $realw_sizegrp = Gtk2::SizeGroup->new('horizontal');
 
     @$l = map_index {
@@ -638,8 +639,9 @@ sub create_widgets_block {
 
 	my $label_w;
 	if ($e->{label} || !$e->{no_indent}) {
-	    $label_w = gtknew('Label_Left', text_markup => $e->{label} || '',
-			      if_($e->{alignment} ne 'right', size_group => $label_sizegrp), alignment => [ 0, 0.5 ]);
+	    $label_w = gtknew($e->{alignment} eq 'right' ? 'Label_Right' : 'Label_Left', text_markup => $e->{label} || '',
+			      size_group => ($e->{alignment} eq 'right' ? $right_label_sizegrp : $label_sizegrp),
+                          );
             $realw_sizegrp->add_widget($e->{real_w});
 	}
 
@@ -650,13 +652,10 @@ sub create_widgets_block {
             ]);
 	}
 
-	my $eater = gtknew('Label') if $e->{alignment} eq 'right';
-
 	$e->{real_w} = gtkpack_(Gtk2::HBox->new,
 				if_($e->{icon}, 0, eval { gtkcreate_img($e->{icon}) }),
-				if_($eater, 1, $eater),
-				if_($label_w, 0, $label_w),
-				(!$eater, $e->{real_w}),
+				if_($label_w, $e->{alignment} eq 'right', $label_w),
+				(1, $e->{real_w}),
 			    );
     }
     gtknew('VBox', children => [ map { $_->{grow} || 0, $_->{real_w} } @$l ]);
