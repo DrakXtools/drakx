@@ -468,7 +468,7 @@ sub _gtk__Sexy_IconEntry {
         $w->set_icon_highlight('primary', $icon);
     }
     if (my $icon = delete $opts->{secondary_icon}) {
-        $w->set_icon('secondary',i $icon);
+        $w->set_icon('secondary', $icon);
         $w->set_icon_highlight('secondary', $icon);
     }
 
