@@ -324,12 +324,8 @@ sub _gtk__Image {
 	    $w->set_from_pixmap($pixmap, undef);
         } : sub { 
             my ($w, $file, $o_size) = @_;
-            if ($o_size) {
-                my $pixbuf = gtknew('Pixbuf', file => $file, size => $o_size);
-                $w->set_from_pixbuf($pixbuf);
-            } else {
-                $w->set_from_file($file);
-            }
+            my $pixbuf = gtknew('Pixbuf', file => $file, if_($o_size, size => $o_size));
+            $w->set_from_pixbuf($pixbuf);
         };
     }
 
