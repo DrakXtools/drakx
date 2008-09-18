@@ -260,7 +260,7 @@ sub read_primary {
     #- but other sectors (typically for extended partition ones) have to match this type!
 	my @parttype = (
 	  if_(arch() =~ /^ia64/, 'gpt'),
-	  arch() =~ /^sparc/ ? ('sun', 'bsd') : ('lvm', 'dos', 'bsd', 'sun', 'mac'),
+	  arch() =~ /^sparc/ ? ('sun', 'bsd') : ('lvm', 'dmcrypt', 'dos', 'bsd', 'sun', 'mac'),
 	);
 	foreach ('empty', @parttype, 'unknown') {
 	    /unknown/ and die "unknown partition table format on disk " . $hd->{file};
@@ -268,6 +268,7 @@ sub read_primary {
 		# perl_checker: require partition_table::bsd
 		# perl_checker: require partition_table::dos
 		# perl_checker: require partition_table::empty
+		# perl_checker: require partition_table::dmcrypt
 		# perl_checker: require partition_table::lvm
 		# perl_checker: require partition_table::gpt
 		# perl_checker: require partition_table::mac

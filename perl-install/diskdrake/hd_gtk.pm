@@ -29,7 +29,7 @@ struct {
   string name      # which is displayed in tab of the notebook
   bool no_auto     # wether the kind can disappear after creation
   string type      # one of { 'hd', 'raid', 'lvm', 'loopback', 'removable', 'nfs', 'smb' }
-  hd | hd_lvm | part_raid[] | part_loopback[] | raw_hd[]  val
+  hd | hd_lvm | part_raid[] | part_dmcrypt[] | part_loopback[] | raw_hd[]  val
 
   # 
   widget main_box
@@ -250,9 +250,10 @@ sub current_kind_changed {
     my $v = $kind->{val};
     my @parts = 
       $kind->{type} eq 'raid' ? grep { $_ } @$v :
+      $kind->{type} eq 'dmcrypt' ? @$v :
       $kind->{type} eq 'loopback' ? @$v : fs::get::hds_fstab_and_holes($v);
     my $totalsectors = 
-      $kind->{type} =~ /raid|loopback/ ? sum(map { $_->{size} } @parts) : $v->{totalsectors};
+      $kind->{type} =~ /raid|dmcrypt|loopback/ ? sum(map { $_->{size} } @parts) : $v->{totalsectors};
     create_buttons4partitions($kind, $totalsectors, @parts);
 }
 
@@ -279,6 +280,7 @@ sub create_automatic_notebooks {
     $may_add->(hd2kind($_)) foreach @{$all_hds->{hds}};
     $may_add->(lvm2kind($_)) foreach @{$all_hds->{lvms}};
     $may_add->(raid2kind()) if @{$all_hds->{raids}};
+    $may_add->(dmcrypt2kind()) if @{$all_hds->{dmcrypts}};
     $may_add->(loopback2kind()) if @{$all_hds->{loopbacks}};
 
     @notebook = grep_index {
@@ -429,6 +431,13 @@ sub lvm2kind {
 ################################################################################
 sub raid2kind() {
     { type => 'raid', name => 'raid', val => $all_hds->{raids} };
+}
+
+################################################################################
+# loopbacks: helpers
+################################################################################
+sub dmcrypt2kind() {
+    { type => 'dmcrypt', name => 'dmcrypt', val => $all_hds->{dmcrypts} };
 }
 
 ################################################################################

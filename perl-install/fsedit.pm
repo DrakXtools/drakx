@@ -72,6 +72,21 @@ sub raids {
     raid::get_existing(@l);
 }
 
+sub dmcrypts {
+    my ($all_hds) = @_;
+
+    my @parts = fs::get::fstab($all_hds);
+
+    my @l = grep { fs::type::isRawLUKS($_) } @parts or return;
+
+    log::l("using dm-crypt from " . join(' ', map { $_->{device} } @l));
+    
+    require fs::dmcrypt;
+    fs::dmcrypt::read_crypttab($all_hds);
+
+    fs::dmcrypt::get_existing(@l);
+}
+
 sub lvms {
     my ($all_hds) = @_;
     my @pvs = grep { isRawLVM($_) } fs::get::fstab($all_hds) or return;
@@ -266,6 +281,9 @@ Do you agree to lose all the partitions?
     $all_hds->{lvms} = [ lvms($all_hds) ];
 
     fs::get_major_minor([ fs::get::fstab($all_hds) ]);
+
+    # must be done after getting major/minor
+    $all_hds->{dmcrypts} = [ dmcrypts($all_hds) ];
 
     $_->{faked_device} = 0 foreach fs::get::fstab($all_hds);
 

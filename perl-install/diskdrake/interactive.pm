@@ -64,6 +64,10 @@ struct part {
   string lvm        # partition used as a PV for the VG with {lvm} as VG_name  #-#
   loopback loopback[]   # loopback living on this partition
 
+  string dmcrypt_key
+  string dm_name
+  bool dm_active
+
   # internal
   string real_device     # '/dev/loop0', '/dev/loop1' ... (used for encrypted loopback)
 
@@ -87,6 +91,12 @@ struct part_raid inherits part {
   part disks[]
 
   # invalid: active, start, rootDevice, device_windobe?, CHS
+}
+
+struct part_dmcrypt inherits part {
+  string dmcrypt_name
+
+  # rootDevice is special here: it is the device hosting the dm
 }
 
 struct part_loopback inherits part {
@@ -168,6 +178,7 @@ struct all_hds {
   hd hds[]
   hd_lvm lvms[]
   part_raid raids[]
+  part_dmcrypt dmcrypts[]
   part_loopback loopbacks[]
   raw_hd raw_hds[]
   raw_hd nfss[]
@@ -328,6 +339,7 @@ sub Clear_all {
     foreach (@parts) {
 	RemoveFromLVM($in, $hd, $_, $all_hds) if isPartOfLVM($_);
 	RemoveFromRAID($in, $hd, $_, $all_hds) if isPartOfRAID($_);
+	RemoveFromDm($in, $hd, $_, $all_hds) if $_->{dm_active};
     }
     if (isLVM($hd)) {
 	lvm::lv_delete($hd, $_) foreach @parts;
@@ -387,14 +399,16 @@ sub part_possible_actions {
         N_("Options")          => '!isSwap($part) && !isNonMountable && $::expert',
 	N_("Label")            => '!isNonMountable && $::expert',
         N_("Resize")	       => '!isBusy && !readonly && !isSpecial || isLVM($hd) && LVM_resizable',
-        N_("Format")           => '!isBusy && !readonly && ($::expert || $::isStandalone)',
+        N_("Format")           => '!isBusy && (!readonly && ($::expert || $::isStandalone) || fs::type::isRawLUKS($part))',
         N_("Mount")            => '!isBusy && (hasMntpoint || isSwap) && maybeFormatted && ($::expert || $::isStandalone)',
         N_("Add to RAID")      => '!isBusy && isRawRAID && (!isSpecial || isRAID)',
         N_("Add to LVM")       => '!isBusy && isRawLVM',
+        N_("Use")              => '!isBusy && fs::type::isRawLUKS($part) && !$part->{notFormatted}',
         N_("Unmount")          => '!$part->{real_mntpoint} && isMounted',
         N_("Delete")	       => '!isBusy && !readonly',
         N_("Remove from RAID") => 'isPartOfRAID',
         N_("Remove from LVM")  => 'isPartOfLVM',
+        N_("Remove from dm")   => '$part->{dm_active}',
         N_("Modify RAID")      => 'canModifyRAID',
         N_("Use for loopback") => '!$part->{real_mntpoint} && isMountableRW && !isSpecial && hasMntpoint && maybeFormatted && $::expert',
     );
@@ -798,6 +812,30 @@ sub Mount {
         	$w->set($msg);
     });
 }
+
+sub dmcrypt_open {
+    my ($in, $_hd, $part, $all_hds) = @_;
+    $part->{dm_name} ||= do {
+	my $s = $part->{device};
+	$s =~ s/[^\w]/_/g;
+	"crypt_$s";
+    };
+
+    if (!$part->{dmcrypt_key}) {
+	$in->ask_from_({
+	    title => N("Filesystem encryption key"), 
+	    messages => N("Enter your filesystem encryption key"),
+        }, [ { label => N("Encryption key"), val => \$part->{dmcrypt_key}, 
+	       hidden => 1, focus => sub { 1 } } ]) or return;
+    }
+
+    eval { fs::dmcrypt::open_part($all_hds->{dmcrypts}, $part) };
+    if ($@) {
+	delete $part->{dmcrypt_key};
+	die(($? >> 8) == 255 ? N("Invalid key") : $@);
+    }
+}
+
 sub Add2RAID {
     my ($in, $_hd, $part, $all_hds) = @_;
     my $raids = $all_hds->{raids};
@@ -842,6 +880,10 @@ sub Unmount {
 sub RemoveFromRAID { 
     my ($_in, $_hd, $part, $all_hds) = @_;
     raid::removeDisk($all_hds->{raids}, $part);
+}
+sub RemoveFromDm { 
+    my ($_in, $_hd, $part, $all_hds) = @_;
+    fs::dmcrypt::close_part($all_hds->{dmcrypts}, $part);
 }
 sub RemoveFromLVM {
     my ($in, $_hd, $part, $all_hds) = @_;
@@ -979,6 +1021,8 @@ sub Options {
     *{'Modify RAID'} = \&ModifyRAID;
     *{'Add to RAID'} = \&Add2RAID;
     *{'Remove from RAID'} = \&RemoveFromRAID; 
+    *{'Use'} = \&dmcrypt_open;
+    *{'Remove from dm'} = \&RemoveFromDm; 
     *{'Add to LVM'} = \&Add2LVM;
     *{'Remove from LVM'} = \&RemoveFromLVM; 
     *{'Use for loopback'} = \&Loopback;
@@ -1096,8 +1140,19 @@ sub ensure_we_have_encrypt_key_if_needed {
     if ($part->{options} =~ /encrypted/ && !$part->{encrypt_key}) {
 	my ($options, $_unknown) = fs::mount_options::unpack($part);
 	$part->{encrypt_key} = choose_encrypt_key($in, $options, 'skip_encrypt_algo') or return;
+    } elsif (fs::type::isRawLUKS($part)) {
+	$part->{dmcrypt_key} ||= choose_encrypt_key($in, {}, 'skip_encrypt_algo') or return;
     }
     1;
+}
+
+sub dmcrypt_format {
+    my ($in, $hd, $part, $all_hds) = @_;
+    my $_wait = $in->wait_message(N("Please wait"), N("Formatting partition %s", $part->{device}));
+    require fs::dmcrypt;
+    fs::dmcrypt::format_part($part);
+    # we open it now:
+    &dmcrypt_open;
 }
 
 sub format_ {
@@ -1107,6 +1162,10 @@ sub format_ {
     write_partitions($in, $_) or return foreach isRAID($part) ? @{$all_hds->{hds}} : $hd;
 
     ask_alldatawillbelost($in, $part, N_("After formatting partition %s, all data on this partition will be lost")) or return;
+
+    if (fs::type::isRawLUKS($part)) {
+	return &dmcrypt_format;
+    }
     if ($::isStandalone) {
 	fs::format::check_package_is_installed($in->do_pkgs, $part->{fs_type}) or return;
     }
@@ -1218,6 +1277,11 @@ sub format_part_info {
     $info .= N("Not formatted\n") if !$part->{isFormatted} && $part->{notFormatted};
     $info .= N("Mounted\n") if $part->{isMounted};
     $info .= N("RAID %s\n", $part->{raid}) if isPartOfRAID($part);
+    if (fs::type::isRawLUKS($part)) {
+	$info .= N("Encrypted") . ($part->{dm_active} && $part->{dm_name} ? N(" (mapped on %s)", $part->{dm_name}) : 
+				     $part->{dm_name} ? N(" (to map on %s)", $part->{dm_name}) :
+				       N(" (inactive)")) . "\n";
+    }
     if (isPartOfLVM($part)) {
 	$info .= sprintf "LVM %s\n", $part->{lvm};
 	$info .= sprintf "Used physical extents %d / %d\n", lvm::pv_physical_extents($part);

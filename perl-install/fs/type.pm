@@ -39,6 +39,7 @@ if_(arch() =~ /ppc/,
   0x402	=> 'hfs',      'Apple HFS Partition',
   0x41  => '',         'PPC PReP Boot',
 ),
+  0x83 => '',         'Encrypted',
 	],
 
         non_fs_type => [
@@ -291,6 +292,8 @@ sub type_subpart_from_magic {
 	}->{$ids->{ID_FS_TYPE}};
 
 	$p = type_name2subpart($name) if $name;
+    } elsif ($ids->{ID_FS_USAGE} eq 'crypto') {
+	$p = type_name2subpart('Encrypted');
     } elsif (my $fs_type = $ids->{ID_FS_TYPE}) {
 	$fs_type = 'ntfs-3g' if $fs_type eq 'ntfs';
 	$p = fs_type2subpart($fs_type) or log::l("unknown filesystem $fs_type returned by vol_id");
@@ -312,6 +315,7 @@ sub isWholedisk { arch() =~ /^sparc/ && $_[0]{pt_type} == 5 }
 sub isExtended { arch() !~ /^sparc/ && ($_[0]{pt_type} == 5 || $_[0]{pt_type} == 0xf || $_[0]{pt_type} == 0x85) }
 sub isRawLVM { $_[0]{pt_type} == 0x8e || $_[0]{type_name} eq 'Linux Logical Volume Manager' }
 sub isRawRAID { $_[0]{pt_type} == 0xfd || $_[0]{type_name} eq 'Linux RAID' }
+sub isRawLUKS { $_[0]{type_name} eq 'Encrypted' }
 sub isSwap { $_[0]{fs_type} eq 'swap' }
 sub isDos { arch() !~ /^sparc/ && ${{ 1 => 1, 4 => 1, 6 => 1 }}{$_[0]{pt_type}} }
 sub isFat_or_NTFS { member($_[0]{fs_type}, 'vfat', 'ntfs', 'ntfs-3g') }
@@ -325,7 +329,7 @@ sub isOtherAvailableFS { isEfi($_[0]) || isFat_or_NTFS($_[0]) || member($_[0]{fs
 sub isMountableRW { (isTrueFS($_[0]) || isOtherAvailableFS($_[0])) && $_[0]{fs_type} ne 'ntfs' }
 sub cannotBeMountable { 
     my ($part) = @_;
-    isRawRAID($part) || isRawLVM($part);
+    isRawRAID($part) || isRawLUKS($part) || isRawLVM($part);
 }
 sub isNonMountable { 
     my ($part) = @_;
@@ -340,7 +344,7 @@ sub isUBD { $_[0]{device} =~ /^ubd/ } #- should be always true during an $::uml_
 sub isLVM { $_[0]{VG_name} || $_[0]{lv_name} }
 sub isLoopback { defined $_[0]{loopback_file} }
 sub isMounted { $_[0]{isMounted} }
-sub isBusy { isMounted($_[0]) || isPartOfRAID($_[0]) || isPartOfLVM($_[0]) || isPartOfLoopback($_[0]) }
+sub isBusy { isMounted($_[0]) || isPartOfRAID($_[0]) || isPartOfLVM($_[0]) || $_[0]{dm_active} || isPartOfLoopback($_[0]) }
 sub isSpecial { isRAID($_[0]) || isLVM($_[0]) || isLoopback($_[0]) || isUBD($_[0]) }
 
 #- not for partitions, but for hds:

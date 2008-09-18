@@ -12,12 +12,12 @@ use common;
 use log;
 
 sub empty_all_hds() {
-    { hds => [], lvms => [], raids => [], loopbacks => [], raw_hds => [], nfss => [], smbs => [], davs => [], special => [] };
+    { hds => [], lvms => [], raids => [], dmcrypts => [], loopbacks => [], raw_hds => [], nfss => [], smbs => [], davs => [], special => [] };
 }
 sub fstab {
     my ($all_hds) = @_;
     my @parts = map { partition_table::get_normal_parts($_) } hds($all_hds);
-    @parts, @{$all_hds->{raids}}, @{$all_hds->{loopbacks}};
+    @parts, @{$all_hds->{raids}}, @{$all_hds->{dmcrypts}}, @{$all_hds->{loopbacks}};
 }
 sub really_all_fstab {
     my ($all_hds) = @_;
@@ -28,7 +28,7 @@ sub really_all_fstab {
 sub fstab_and_holes {
     my ($all_hds, $b_non_readonly) = @_;
     my @hds = grep { !($b_non_readonly && $_->{readonly}) } hds($all_hds);
-    hds_fstab_and_holes(@hds), @{$all_hds->{raids}}, @{$all_hds->{loopbacks}};
+    hds_fstab_and_holes(@hds), @{$all_hds->{raids}}, @{$all_hds->{dmcrypts}}, @{$all_hds->{loopbacks}};
 }
 
 sub holes {
