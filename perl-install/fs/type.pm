@@ -323,9 +323,13 @@ sub isTrueLocalFS { member($_[0]{fs_type}, true_local_fs_types()) }
 
 sub isOtherAvailableFS { isEfi($_[0]) || isFat_or_NTFS($_[0]) || member($_[0]{fs_type}, 'ufs', 'hfs', 'iso9660') } #- other OS that linux can access its filesystem
 sub isMountableRW { (isTrueFS($_[0]) || isOtherAvailableFS($_[0])) && $_[0]{fs_type} ne 'ntfs' }
+sub cannotBeMountable { 
+    my ($part) = @_;
+    isRawRAID($part) || isRawLVM($part);
+}
 sub isNonMountable { 
     my ($part) = @_;
-    isRawRAID($part) || isRawLVM($part) || $part->{fs_type} eq 'ntfs' && !$part->{isFormatted} && $part->{notFormatted};
+    cannotBeMountable($part) || $part->{fs_type} eq 'ntfs' && !$part->{isFormatted} && $part->{notFormatted};
 }
 
 sub isPartOfLVM { defined $_[0]{lvm} }

@@ -550,7 +550,7 @@ sub change_type {
     delete $part->{device_UUID};
     $hd->{isDirty} = 1;
     $part->{mntpoint} = '' if isSwap($part) && $part->{mntpoint} eq "swap";
-    $part->{mntpoint} = '' if isRawLVM($type) || isRawRAID($type);
+    $part->{mntpoint} = '' if fs::type::cannotBeMountable($part);
     set_isFormatted($part, 0);
     fs::type::set_type_subpart($part, $type);
     fs::mount_options::rationalize($part);
