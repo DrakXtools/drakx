@@ -441,6 +441,7 @@ sub add {
     } else {
 	partition_table::add($hd, $part, $options->{primaryOrExtended});
     }
+    fs::get_major_minor([ $part ]);
 }
 
 sub allocatePartitions {
