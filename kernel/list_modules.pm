@@ -24,7 +24,7 @@ our %l = (
         qw(depca dmfe e2100 eepro eexpress eth16i),
         qw(ewrk3 hp hp-plus hp100),
         qw(iph5526), #- fibre channel
-        qw(lance ne ni5010 ni52 ni65 nvnet),
+        qw(jme lance ne ni5010 ni52 ni65 nvnet),
         qw(prism2_plx r6040 rcpci rhineget),
         qw(sb1000 sc92031 smc-ultra smc9194),
         qw(tc35815 tlan uli526x),
