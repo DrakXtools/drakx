@@ -325,6 +325,7 @@ sub _gtk__Image {
         } : sub { 
             my ($w, $file, $o_size) = @_;
             my $pixbuf = gtknew('Pixbuf', file => $file, if_($o_size, size => $o_size));
+            $pixbuf = $pixbuf->flip(1) if delete $opts->{flip};
             $w->set_from_pixbuf($pixbuf);
         };
     }
