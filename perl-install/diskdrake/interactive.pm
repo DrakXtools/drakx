@@ -1311,7 +1311,7 @@ sub choose_encrypt_key {
 		 $encrypt_key eq $encrypt_key2 or $in->ask_warn(N("Error"), [ N("The encryption keys do not match"), N("Please try again") ]), return 1,1;
 		 return 0;
         } } }, [
-{ label => N("Encryption key"), val => \$encrypt_key,  hidden => 1 },
+{ label => N("Encryption key"), val => \$encrypt_key,  hidden => 1, focus => sub { 1 } },
 { label => N("Encryption key (again)"), val => \$encrypt_key2, hidden => 1 },
 if_(!$skip_encrypt_algo,
 { label => N("Encryption algorithm"), type => 'list', val => \$encrypt_algo, list => \@algorithms },
