@@ -271,6 +271,29 @@ sub secured_file {
     $f;
 }
 
+sub unwind_protect {
+    my ($to_do, $cleanup) = @_;
+    my @l = eval { $to_do->() };
+    my $err = $@;
+    $cleanup->();
+    $err and die $err;
+    wantarray() ? @l : $l[0];
+}
+
+sub with_private_tmp_file {
+    my ($file, $content, $f) = @_;
+
+    my $prev_umask = umask 077;
+
+    unwind_protect(sub { 
+	MDK::Common::File::secured_output($file, $content);
+	$f->($file);
+    }, sub {
+	umask $prev_umask;
+	unlink $file;
+    });
+}
+
 sub chown_ {
     my ($b_recursive, $name, $group, @files) = @_;
 
