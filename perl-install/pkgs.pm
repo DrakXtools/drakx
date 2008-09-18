@@ -178,8 +178,9 @@ sub detect_network_drivers {
     foreach my $type (network::connection->get_types) {
         $type->can('get_thirdparty_settings') or next;
         my @network_settings;
+        my @all_settings = @{$type->get_thirdparty_settings || []};
         if ($o_match_all_hardware) {
-            @network_settings = @{$type->get_thirdparty_settings || []};
+            @network_settings = @all_settings;
         } else {
             my @connections = $type->get_connections(automatic_only => 1, fast_only => 1);
             @network_settings = map { @{$_->get_thirdparty_settings || []} } @connections;
