@@ -1341,4 +1341,9 @@ sub pixmap_from_pixbuf {
     $pixmap;
 }
 
+sub text_direction_rtl() {
+    Gtk2::Widget->get_default_direction() eq 'rtl';
+}
+
+
 1;
