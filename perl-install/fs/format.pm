@@ -133,6 +133,12 @@ sub part_raw {
 	disable_forced_fsck($dev);
     }
 
+    after_formatting($part);
+}
+
+sub after_formatting {
+    my ($part) = @_;
+
     my $p = fs::type::type_subpart_from_magic($part);
     $part->{device_UUID} = $p && $p->{device_UUID};
 
