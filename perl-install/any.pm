@@ -893,9 +893,9 @@ sub autologin {
 }
 
 sub display_release_notes {
-    my ($o, $release_notes) = @_;
-    if (!$o->isa('interactive::gtk')) {
-        $o->ask_from_({ title => N("Release Notes"), 
+    my ($in, $release_notes) = @_;
+    if (!$in->isa('interactive::gtk')) {
+        $in->ask_from_({ title => N("Release Notes"), 
                         messages => $release_notes, #formatAlaTeX(messages::main_license()),
                     }, [ {} ]);
         return;
