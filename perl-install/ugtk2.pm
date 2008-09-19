@@ -1438,7 +1438,7 @@ sub new {
     my ($_class, $icon, $text, $o_options) = @_;
 
     my $darea = Gtk2::DrawingArea->new;
-    my $d_height = 75;
+    my $d_height = 54;
     $darea->set_size_request(-1, $d_height);
     $darea->modify_font(Gtk2::Pango::FontDescription->from_string("Sans Bold 14"));
     eval { $darea->{icon} = ugtk2::gtkcreate_pixbuf($icon) };
