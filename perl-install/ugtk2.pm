@@ -1437,6 +1437,7 @@ sub set_pixmap {
 sub new {
     my ($_class, $icon, $text, $o_options) = @_;
 
+    mygtk2::import_style_ressources();
     my $darea = gtknew('DrawingArea', widget_name => 'Banner');
     my $d_height = 54;
     $darea->set_size_request(-1, $d_height);
