@@ -1445,6 +1445,7 @@ sub new {
     $darea->modify_font(Gtk2::Pango::FontDescription->from_string("Sans 15"));
     eval { $darea->{icon} = ugtk2::gtkcreate_pixbuf($icon) };
     my $blue_part = eval { gtknew('Pixbuf', file => 'banner-blue-part', flip => mygtk2::text_direction_rtl()) };
+    my $blue_width = $blue_part->get_width;
     $darea->{text} = $text;
     require lang;
     my $is_rtl = lang::text_direction_rtl();
@@ -1459,7 +1460,7 @@ sub new {
                                (undef, undef, undef, $d_height) = $darea->window->get_geometry;
                                my $padding = int(($d_height - $height)/2);
                                my $d_width = $darea->allocation->width;
-                               my $x_blue = $is_rtl ? $d_width - $blue_part->get_width : 0;
+                               my $x_blue = $is_rtl ? $d_width - $blue_width : 0;
                                my $x_icon = $is_rtl ? $d_width - $padding - $width : $padding;
                                my $x_text = $is_rtl ? $x_icon - $padding - 32 - $darea->{txt_width} : $width + $padding +32;
                                $darea->{layout_height} ||= (($darea->{layout}->get_size)[1])/Gtk2::Pango->PANGO_SCALE;
