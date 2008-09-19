@@ -1461,11 +1461,13 @@ sub new {
                                my $x_blue = $is_rtl ? $d_width - $blue_part->get_width : 0;
                                my $x_icon = $is_rtl ? $d_width - $padding - $width : $padding;
                                my $x_text = $is_rtl ? $x_icon - $padding - 32 - $darea->{txt_width} : $width + $padding +32;
+                               $darea->{layout_height} ||= (($darea->{layout}->get_size)[1])/Gtk2::Pango->PANGO_SCALE;
                                $blue_part->render_to_drawable($darea->window, $style->bg_gc('normal'),
                                                                   0, 0, $x_blue, 0, -1, -1, 'none', 0, 0);
                                $darea->{icon}->render_to_drawable($darea->window, $style->bg_gc('normal'),
                                                                   0, 0, $x_icon, $padding, -1, -1, 'none', 0, 0);
-                               $darea->window->draw_layout($style->fg_gc('normal'), $x_text, $o_options->{txt_ypos} || $d_height/3,
+                               $darea->window->draw_layout($style->fg_gc('normal'), $x_text,
+                                                           $o_options->{txt_ypos} || ($d_height - $darea->{layout_height})/2,
                                                            $darea->{layout});
                                1;
                            });
