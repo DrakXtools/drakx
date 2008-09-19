@@ -21,7 +21,7 @@ our %l = (
         qw(3c501 3c503 3c505 3c507 3c509 3c515 3c990 3c990fx),
         qw(82596 ac3200 acenic aironet4500_card amd8111e at1700 atl2 atp),
         qw(bcm4400 cassini cs89x0 de600 de620),
-        qw(depca dmfe e2100 eepro eexpress eth16i),
+        qw(depca dmfe e2100 eepro eexpress enic eth16i),
         qw(ewrk3 hp hp-plus hp100),
         qw(iph5526), #- fibre channel
         qw(jme lance ne ni5010 ni52 ni65 nvnet),
