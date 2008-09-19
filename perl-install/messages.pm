@@ -93,38 +93,6 @@ MP3 decoders included may require a licence for further usage (see
 http://www.mp3licensing.com for more details). If you are unsure if a patent
 may be applicable to you, check your local laws.");
 }
-sub com_license() { 
-#-PO: keep the double empty lines between sections, this is formatted a la LaTeX
-N("
-Warning
-
-Please read carefully the terms below. If you disagree with any
-portion, you are not allowed to install the next CD media. Press 'Refuse' 
-to continue the installation without using these media.
-
-
-Some components contained in the next CD media are not governed
-by the GPL License or similar agreements. Each such component is then
-governed by the terms and conditions of its own specific license. 
-Please read carefully and comply with such specific licenses before 
-you use or redistribute the said components. 
-Such licenses will in general prevent the transfer,  duplication 
-(except for backup purposes), redistribution, reverse engineering, 
-de-assembly, de-compilation or modification of the component. 
-Any breach of agreement will immediately terminate your rights under 
-the specific license. Unless the specific license terms grant you such
-rights, you usually cannot install the programs on more than one
-system, or adapt it to be used on a network. In doubt, please contact 
-directly the distributor or editor of the component. 
-Transfer to third parties or copying of such components including the 
-documentation is usually forbidden.
-
-
-All rights to the components of the next CD media belong to their 
-respective authors and are protected by intellectual property and 
-copyright laws applicable to software programs.
-");
-}
 
 sub install_completed() {
 #-PO: keep the double empty lines between sections, this is formatted a la LaTeX

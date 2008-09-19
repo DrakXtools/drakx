@@ -374,12 +374,6 @@ sub ask_change_cd_ {
 
     local $| = 1; print "\a";
 
-    if ($phys_m->{name} =~ /commercial/i) {
-	$o->{useless_thing_accepted2} ||= 
-	  $o->ask_from_list_('', formatAlaTeX(messages::com_license()), 
-			     [ N_("Accept"), N_("Refuse") ], "Accept") eq "Accept" or return;
-    }
-
     foreach (1 .. 32) {
 	install::media::umount_phys_medium($phys_m);
 	install::media::openCdromTray($phys_m->{device});
