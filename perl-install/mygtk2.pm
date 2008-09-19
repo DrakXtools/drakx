@@ -305,6 +305,7 @@ sub _gtk__Pixbuf {
 	} else {
 	    $w = Gtk2::Gdk::Pixbuf->new_from_file($file);
 	}
+        $w = $w->flip(1) if delete $opts->{flip};
     }
     $w;
 }
@@ -324,8 +325,7 @@ sub _gtk__Image {
 	    $w->set_from_pixmap($pixmap, undef);
         } : sub { 
             my ($w, $file, $o_size) = @_;
-            my $pixbuf = gtknew('Pixbuf', file => $file, if_($o_size, size => $o_size));
-            $pixbuf = $pixbuf->flip(1) if delete $opts->{flip};
+            my $pixbuf = gtknew('Pixbuf', file => $file, if_($o_size, size => $o_size), flip => delete $opts->{flip});
             $w->set_from_pixbuf($pixbuf);
         };
     }
