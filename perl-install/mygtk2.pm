@@ -1338,6 +1338,12 @@ sub pixmap_from_pixbuf {
     $pixmap;
 }
 
+sub import_style_ressources {
+    if (!$::isInstall) {
+        Gtk2::Rc->parse_string(scalar cat_('/usr/share/libDrakX/themes-galaxy.rc')); # FIXME DEBUG
+    }
+}
+
 sub text_direction_rtl() {
     Gtk2::Widget->get_default_direction() eq 'rtl';
 }
