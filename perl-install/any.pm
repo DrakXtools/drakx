@@ -955,8 +955,6 @@ sub acceptLicense {
     # we do not handle links:
     $release_notes =~ s!<a href=".*?">(.*?)</a>!$1!g;
 
-    return if $o->{useless_thing_accepted};
-
     my $r = $::testing ? 'Accept' : 'Refuse';
 
     $o->ask_from_({ title => N("License agreement"), 

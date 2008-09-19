@@ -51,6 +51,8 @@ sub kill_action {
 
 sub acceptLicense {
     my ($o) = @_;
+    return if $o->{useless_thing_accepted};
+
     any::acceptLicense($o);
 }
 
