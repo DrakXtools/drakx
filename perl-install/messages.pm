@@ -55,9 +55,7 @@ This limited liability applies to, but is not restricted to, the strong cryptogr
 included in the Software Products.
 However, because some jurisdictions do not allow the exclusion or limitation or liability for 
 consequential or incidental damages, the above limitation may not apply to you.  
-
 %s
-
 
 3. The GPL License and Related Licenses
 
@@ -88,9 +86,8 @@ agreement.
 The terms and conditions of this License are governed by the Laws of France.
 All disputes on the terms of this license will preferably be settled out of court. As a last 
 resort, the dispute will be referred to the appropriate Courts of Law of Paris - France.
-For any question on this document, please contact Mandriva S.A.  
-",
-$us ? N("You agree not to (i) sell, export, re-export, transfer, divert, disclose technical data, or 
+For any question on this document, please contact Mandriva S.A.",
+$us ? "\n\n" . N("You agree not to (i) sell, export, re-export, transfer, divert, disclose technical data, or 
 dispose of, any Software to any person, entity, or destination prohibited by US export laws 
 or regulations including, without limitation, Cuba, Iran, North Korea, Sudan and Syria; or 
 (ii) use any Software for any use prohibited by the laws or regulations of the United States.
@@ -103,7 +100,7 @@ as defined in DFAR 252.227-7013 and as described in FAR 12.212. Any use, modific
 release, performance, display or disclosure of the Software and any accompanying documentation 
 by the United States Government shall be governed solely by the terms of this Agreement and any 
 other applicable licence agreements and shall be prohibited except to the extent expressly permitted 
-by the terms of this Agreement.") : '',
+by the terms of this Agreement.") . "\n" : '',
 $google ? N("Most of these components, but excluding the applications and software provided by Google Inc. or 
 its subsidiaries (\"Google Software\"), are governed under the terms and conditions of the GNU 
 General Public Licence, hereafter called \"GPL\", or of similar licenses.")
