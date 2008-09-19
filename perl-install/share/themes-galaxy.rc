@@ -16,7 +16,6 @@ style "step-categories"
 style "banner"
 {
   fg[NORMAL] = "#5A8AD6"
-  bg[NORMAL] = "#FFD200"
   fg[ACTIVE] = "#5A8AD6"
   fg[PRELIGHT] = "#5A8AD6"
 }
@@ -33,31 +32,9 @@ style "Left_background"
   fg[NORMAL] = "#FFD200"
 }
 
-style "show_images"
-{
-  GtkWidget::gtk-button-images=0
-}
-
-class "GtkRadioButton"   style "show_images"
-
-
 widget "*Steps*" style "white-on-blue"
 widget "*Step-categories*" style "step-categories"
 widget "*Left_background*" style "Left_background"
 widget "*logo*" style "white-on-blue"
 widget "*background*" style "background"
 widget "*Banner*" style "banner"
-
-
-style "pbar"
-{
-  GtkProgressBar::min-vertical-bar-heigh=3
-  GtkProgressBar::min-horizontal-bar-heigh=3
-  GtkWidget::min-vertical-bar-heigh=3
-  GtkWidget::min-horizontal-bar-heigh=3
-}
-
-class "GtkProgressBar"   style "pbar"
-
-
-
