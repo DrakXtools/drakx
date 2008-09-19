@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 10.2\n"
-"POT-Creation-Date: 2008-09-15 17:25+0200\n"
+"POT-Creation-Date: 2008-09-19 14:51+0200\n"
 "PO-Revision-Date: 2008-02-23 16:06+0100\n"
 "Last-Translator: Thierry Vignaud <tvignaud@mandriva.com>\n"
 "Language-Team: Brezhoneg <ofisk@wanadoo.fr>\n"
@@ -1369,18 +1369,14 @@ msgstr "Dibabit ur parzhadur all"
 msgid "Choose a partition"
 msgstr "Dibabit ur parzhadur"
 
-#: diskdrake/interactive.pm:259
+#: diskdrake/interactive.pm:270 diskdrake/interactive.pm:376
+#: interactive/curses.pm:512
 #, c-format
-msgid "Toggle to normal mode"
-msgstr "Tremen er mod boas"
+msgid "More"
+msgstr "Mui"
 
-#: diskdrake/interactive.pm:259
-#, c-format
-msgid "Toggle to expert mode"
-msgstr "Tremen er mod mailh"
-
-#: diskdrake/interactive.pm:267 diskdrake/interactive.pm:277
-#: diskdrake/interactive.pm:1103
+#: diskdrake/interactive.pm:278 diskdrake/interactive.pm:288
+#: diskdrake/interactive.pm:1173
 #, c-format
 msgid "Confirmation"
 msgstr "Kadarnadur"
@@ -1428,13 +1424,17 @@ msgstr "Skarañ an holl"
 msgid "Auto allocate"
 msgstr "Ac'hubiñ ent emgefreek"
 
-#: diskdrake/interactive.pm:304 diskdrake/interactive.pm:352
-#: interactive/curses.pm:512
+#: diskdrake/interactive.pm:320
 #, c-format
-msgid "More"
-msgstr "Mui"
+msgid "Toggle to normal mode"
+msgstr "Tremen er mod boas"
 
-#: diskdrake/interactive.pm:309
+#: diskdrake/interactive.pm:320
+#, c-format
+msgid "Toggle to expert mode"
+msgstr "Tremen er mod mailh"
+
+#: diskdrake/interactive.pm:332
 #, c-format
 msgid "Hard drive information"
 msgstr "Titouroù ar bladenn"
@@ -1488,7 +1488,12 @@ msgstr "Ouzhpennañ da RAID"
 msgid "Add to LVM"
 msgstr "Ouzhpennañ da LVM"
 
-#: diskdrake/interactive.pm:383
+#: diskdrake/interactive.pm:406
+#, fuzzy, c-format
+msgid "Use"
+msgstr "ID an arveriad"
+
+#: diskdrake/interactive.pm:408
 #, c-format
 msgid "Delete"
 msgstr "Dilemel"
@@ -1503,7 +1508,12 @@ msgstr "Lemel diwar RAID"
 msgid "Remove from LVM"
 msgstr "Lemel diwar LVM"
 
-#: diskdrake/interactive.pm:386
+#: diskdrake/interactive.pm:411
+#, fuzzy, c-format
+msgid "Remove from dm"
+msgstr "Lemel diwar LVM"
+
+#: diskdrake/interactive.pm:412
 #, c-format
 msgid "Modify RAID"
 msgstr "Kemmañ RAID"
@@ -1670,7 +1680,27 @@ msgid ""
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
 
-#: diskdrake/interactive.pm:793
+#: diskdrake/interactive.pm:826 diskdrake/interactive.pm:1370
+#, c-format
+msgid "Filesystem encryption key"
+msgstr "Alc'hwez enrinegadur ar reizhiad restroù"
+
+#: diskdrake/interactive.pm:827
+#, fuzzy, c-format
+msgid "Enter your filesystem encryption key"
+msgstr "Dibab hoc'h alc'hwez enrinegadur ar reizhiad restroù"
+
+#: diskdrake/interactive.pm:828 diskdrake/interactive.pm:1378
+#, c-format
+msgid "Encryption key"
+msgstr "Alc'hwez enrinegadur"
+
+#: diskdrake/interactive.pm:835
+#, c-format
+msgid "Invalid key"
+msgstr ""
+
+#: diskdrake/interactive.pm:843
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "Dibabit da be RAID ouzhpennañ"
@@ -1785,7 +1815,12 @@ msgstr "Ret e vo deoc'h adloc'hañ a-raok ma talvezo ar c'hemm"
 msgid "Partition table of drive %s is going to be written to disk"
 msgstr "War-nes bezañ skrivet war bladenn eo taolenn barzhañ an ardivink %s"
 
-#: diskdrake/interactive.pm:1098
+#: diskdrake/interactive.pm:1151 fs/format.pm:63 fs/format.pm:70
+#, c-format
+msgid "Formatting partition %s"
+msgstr "O furmadiñ ar parzhadur %s"
+
+#: diskdrake/interactive.pm:1164
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr ""
@@ -1918,7 +1953,27 @@ msgstr "Marc'het\n"
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1214
+#: diskdrake/interactive.pm:1281
+#, fuzzy, c-format
+msgid "Encrypted"
+msgstr "Alc'hwez enrinegadur"
+
+#: diskdrake/interactive.pm:1281
+#, c-format
+msgid " (mapped on %s)"
+msgstr ""
+
+#: diskdrake/interactive.pm:1282
+#, c-format
+msgid " (to map on %s)"
+msgstr ""
+
+#: diskdrake/interactive.pm:1283
+#, c-format
+msgid " (inactive)"
+msgstr ""
+
+#: diskdrake/interactive.pm:1289
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2014,12 +2069,7 @@ msgstr "Seurt taolenn barzhañ : %s\n"
 msgid "on channel %d id %d\n"
 msgstr "war kanol %d Nn %d\n"
 
-#: diskdrake/interactive.pm:1295
-#, c-format
-msgid "Filesystem encryption key"
-msgstr "Alc'hwez enrinegadur ar reizhiad restroù"
-
-#: diskdrake/interactive.pm:1296
+#: diskdrake/interactive.pm:1371
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Dibab hoc'h alc'hwez enrinegadur ar reizhiad restroù"
@@ -2035,12 +2085,7 @@ msgstr ""
 msgid "The encryption keys do not match"
 msgstr "An alc'hwezoù enrinegadur ne glot ket"
 
-#: diskdrake/interactive.pm:1303
-#, c-format
-msgid "Encryption key"
-msgstr "Alc'hwez enrinegadur"
-
-#: diskdrake/interactive.pm:1304
+#: diskdrake/interactive.pm:1379
 #, c-format
 msgid "Encryption key (again)"
 msgstr "Alc'hwez enrinegadur (adarre)"
@@ -2154,11 +2199,6 @@ msgstr ""
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "Ret eo deoc'h kaout ur parzhadur FAT marc'het war /boot/efi"
-
-#: fs/format.pm:63 fs/format.pm:70
-#, c-format
-msgid "Formatting partition %s"
-msgstr "O furmadiñ ar parzhadur %s"
 
 #: fs/format.pm:67
 #, c-format
@@ -4527,7 +4567,10 @@ msgid ""
 "include, but are not \n"
 "restricted to, the set of programs, methods, rules and documentation related "
 "to the operating \n"
-"system and the different components of the Mandriva Linux distribution.\n"
+"system and the different components of the Mandriva Linux distribution, and "
+"any applications \n"
+"distributed with these products provided by Mandriva's licensors or "
+"suppliers.\n"
 "\n"
 "\n"
 "1. License Agreement\n"
@@ -4535,8 +4578,8 @@ msgid ""
 "Please read this document carefully. This document is a license agreement "
 "between you and  \n"
 "Mandriva S.A. which applies to the Software Products.\n"
-"By installing, duplicating or using the Software Products in any manner, you "
-"explicitly \n"
+"By installing, duplicating or using any of the Software Products in any "
+"manner, you explicitly \n"
 "accept and fully agree to conform to the terms and conditions of this "
 "License. \n"
 "If you disagree with any portion of the License, you are not allowed to "
@@ -4556,52 +4599,57 @@ msgid ""
 "The Software Products and attached documentation are provided \"as is\", "
 "with no warranty, to the \n"
 "extent permitted by law.\n"
-"Mandriva S.A. will, in no circumstances and to the extent permitted by law, "
-"be liable for any special,\n"
-"incidental, direct or indirect damages whatsoever (including without "
-"limitation damages for loss of \n"
-"business, interruption of business, financial loss, legal fees and penalties "
-"resulting from a court \n"
-"judgment, or any other consequential loss) arising out of  the use or "
-"inability to use the Software \n"
-"Products, even if Mandriva S.A. has been advised of the possibility or "
-"occurrence of such \n"
-"damages.\n"
+"Neither Mandriva S.A. nor its licensors or suppliers will, in any "
+"circumstances and to the extent \n"
+"permitted by law, be liable for any special, incidental, direct or indirect "
+"damages whatsoever \n"
+"(including without limitation damages for loss of business, interruption of "
+"business, financial \n"
+"loss, legal fees and penalties resulting from a court judgment, or any other "
+"consequential loss) \n"
+"arising out of  the use or inability to use the Software Products, even if "
+"Mandriva S.A. or its \n"
+"licensors or suppliers have been advised of the possibility or occurrence of "
+"such damages.\n"
 "\n"
 "LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME "
 "COUNTRIES\n"
 "\n"
-"To the extent permitted by law, Mandriva S.A. or its distributors will, in "
-"no circumstances, be \n"
-"liable for any special, incidental, direct or indirect damages whatsoever "
-"(including without \n"
-"limitation damages for loss of business, interruption of business, financial "
-"loss, legal fees \n"
-"and penalties resulting from a court judgment, or any other consequential "
-"loss) arising out \n"
-"of the possession and use of software components or arising out of  "
-"downloading software components \n"
-"from one of Mandriva Linux sites  which are prohibited or restricted in some "
-"countries by local laws.\n"
+"To the extent permitted by law, neither Mandriva S.A. nor its licensors, "
+"suppliers or\n"
+"distributors will, in any circumstances, be liable for any special, "
+"incidental, direct or indirect \n"
+"damages whatsoever (including without limitation damages for loss of "
+"business, interruption of \n"
+"business, financial loss, legal fees and penalties resulting from a court "
+"judgment, or any \n"
+"other consequential loss) arising out of the possession and use of software "
+"components or \n"
+"arising out of  downloading software components from one of Mandriva Linux "
+"sites which are \n"
+"prohibited or restricted in some countries by local laws.\n"
 "This limited liability applies to, but is not restricted to, the strong "
 "cryptography components \n"
 "included in the Software Products.\n"
+"However, because some jurisdictions do not allow the exclusion or limitation "
+"or liability for \n"
+"consequential or incidental damages, the above limitation may not apply to "
+"you.  \n"
+"\n"
+"%s\n"
 "\n"
 "\n"
 "3. The GPL License and Related Licenses\n"
 "\n"
 "The Software Products consist of components created by different persons or "
-"entities.  Most \n"
-"of these components are governed under the terms and conditions of the GNU "
-"General Public \n"
-"Licence, hereafter called \"GPL\", or of similar licenses. Most of these "
-"licenses allow you to use, \n"
-"duplicate, adapt or redistribute the components which they cover. Please "
-"read carefully the terms \n"
-"and conditions of the license agreement for each component before using any "
-"component. Any question \n"
-"on a component license should be addressed to the component author and not "
-"to Mandriva.\n"
+"entities. %s\n"
+"Most of these licenses allow you to use, duplicate, adapt or redistribute "
+"the components which \n"
+"they cover. Please read carefully the terms and conditions of the license "
+"agreement for each component \n"
+"before using any component. Any question on a component license should be "
+"addressed to the component \n"
+"licensor or supplier and not to Mandriva.\n"
 "The programs developed by Mandriva S.A. are governed by the GPL License. "
 "Documentation written \n"
 "by Mandriva S.A. is governed by a specific license. Please refer to the "
@@ -4615,9 +4663,9 @@ msgid ""
 "respective authors and are \n"
 "protected by intellectual property and copyright laws applicable to software "
 "programs.\n"
-"Mandriva S.A. reserves its rights to modify or adapt the Software Products, "
-"as a whole or in \n"
-"parts, by all means and for all purposes.\n"
+"Mandriva S.A. and its suppliers and licensors reserves their rights to "
+"modify or adapt the Software \n"
+"Products, as a whole or in parts, by all means and for all purposes.\n"
 "\"Mandriva\", \"Mandriva Linux\" and associated logos are trademarks of "
 "Mandriva S.A.  \n"
 "\n"
@@ -4638,7 +4686,55 @@ msgid ""
 "For any question on this document, please contact Mandriva S.A.  \n"
 msgstr ""
 
-#: messages.pm:90
+#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
+#: messages.pm:93
+#, c-format
+msgid ""
+"You agree not to (i) sell, export, re-export, transfer, divert, disclose "
+"technical data, or \n"
+"dispose of, any Software to any person, entity, or destination prohibited by "
+"US export laws \n"
+"or regulations including, without limitation, Cuba, Iran, North Korea, Sudan "
+"and Syria; or \n"
+"(ii) use any Software for any use prohibited by the laws or regulations of "
+"the United States.\n"
+"\n"
+"U.S. GOVERNMENT RESTRICTED RIGHTS. \n"
+"\n"
+"The Software Products and any accompanying documentation are and shall be "
+"deemed to be \n"
+"\"commercial computer software\" and \"commercial computer software "
+"documentation,\" respectively, \n"
+"as defined in DFAR 252.227-7013 and as described in FAR 12.212. Any use, "
+"modification, reproduction, \n"
+"release, performance, display or disclosure of the Software and any "
+"accompanying documentation \n"
+"by the United States Government shall be governed solely by the terms of "
+"this Agreement and any \n"
+"other applicable licence agreements and shall be prohibited except to the "
+"extent expressly permitted \n"
+"by the terms of this Agreement."
+msgstr ""
+
+#: messages.pm:107
+#, c-format
+msgid ""
+"Most of these components, but excluding the applications and software "
+"provided by Google Inc. or \n"
+"its subsidiaries (\"Google Software\"), are governed under the terms and "
+"conditions of the GNU \n"
+"General Public Licence, hereafter called \"GPL\", or of similar licenses."
+msgstr ""
+
+#: messages.pm:110
+#, c-format
+msgid ""
+"Most of these components are governed under the terms and conditions of the "
+"GNU \n"
+"General Public Licence, hereafter called \"GPL\", or of similar licenses."
+msgstr ""
+
+#: messages.pm:115
 #, c-format
 msgid ""
 "Warning: Free Software may not necessarily be patent free, and some Free\n"
@@ -4650,38 +4746,54 @@ msgid ""
 "may be applicable to you, check your local laws."
 msgstr ""
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: messages.pm:98
+#: messages.pm:123
 #, c-format
 msgid ""
+"6. Additional provisions applicable to those Software Products provided by "
+"Google Inc. (\"Google Software\")\n"
 "\n"
-"Warning\n"
+"(a)  You acknowledge that Google or third parties own all rights, title and "
+"interest in and to the Google \n"
+"Software, portions thereof, or software provided through or in conjunction "
+"with the Google Software, including\n"
+"without limitation all Intellectual Property Rights. \"Intellectual Property "
+"Rights\" means any and all rights \n"
+"existing from time to time under patent law, copyright law, trade secret "
+"law, trademark law, unfair competition \n"
+"law, database rights and any and all other proprietary rights, and any and "
+"all applications, renewals, extensions \n"
+"and restorations thereof, now or hereafter in force and effect worldwide. "
+"You agree not to modify, adapt, \n"
+"translate, prepare derivative works from, decompile, reverse engineer, "
+"disassemble or otherwise attempt to derive \n"
+"source code from Google Software. You also agree to not remove, obscure, or "
+"alter Google's or any third party's \n"
+"copyright notice, trademarks, or other proprietary rights notices affixed to "
+"or contained within or accessed in \n"
+"conjunction with or through the Google Software.  \n"
 "\n"
-"Please read carefully the terms below. If you disagree with any\n"
-"portion, you are not allowed to install the next CD media. Press 'Refuse' \n"
-"to continue the installation without using these media.\n"
+"(b)  The Google Software is made available to you for your personal, non-"
+"commercial use only.\n"
+"You may not use the Google Software in any manner that could damage, "
+"disable, overburden, or impair Google's \n"
+"search services (e.g., you may not use the Google Software in an automated "
+"manner), nor may you use Google \n"
+"Software in any manner that could interfere with any other party's use and "
+"enjoyment of Google's search services\n"
+"or the services and products of the third party licensors of the Google "
+"Software.\n"
 "\n"
+"(c)  Some of the Google Software is designed to be used in conjunction with "
+"Google's search and other services.\n"
+"Accordingly, your use of such Google Software is also defined by Google's "
+"Terms of Service located at \n"
+"http://www.google.com/terms_of_service.html and Google's Toolbar Privacy "
+"Policy located at \n"
+"http://www.google.com/support/toolbar/bin/static.py?page=privacy.html.\n"
 "\n"
-"Some components contained in the next CD media are not governed\n"
-"by the GPL License or similar agreements. Each such component is then\n"
-"governed by the terms and conditions of its own specific license. \n"
-"Please read carefully and comply with such specific licenses before \n"
-"you use or redistribute the said components. \n"
-"Such licenses will in general prevent the transfer,  duplication \n"
-"(except for backup purposes), redistribution, reverse engineering, \n"
-"de-assembly, de-compilation or modification of the component. \n"
-"Any breach of agreement will immediately terminate your rights under \n"
-"the specific license. Unless the specific license terms grant you such\n"
-"rights, you usually cannot install the programs on more than one\n"
-"system, or adapt it to be used on a network. In doubt, please contact \n"
-"directly the distributor or editor of the component. \n"
-"Transfer to third parties or copying of such components including the \n"
-"documentation is usually forbidden.\n"
-"\n"
-"\n"
-"All rights to the components of the next CD media belong to their \n"
-"respective authors and are protected by intellectual property and \n"
-"copyright laws applicable to software programs.\n"
+"(d)  Google Inc. and each of its subsidiaries and affiliates are third party "
+"beneficiaries of this contract \n"
+"and may enforce its terms."
 msgstr ""
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX

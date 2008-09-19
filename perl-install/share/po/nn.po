@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
-"POT-Creation-Date: 2008-09-15 17:25+0200\n"
+"POT-Creation-Date: 2008-09-19 14:51+0200\n"
 "PO-Revision-Date: 2008-09-17 18:49+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -205,7 +205,8 @@ msgstr "avgrens"
 
 #: any.pm:421
 #, c-format
-msgid "Option ``Restrict command line options'' is of no use without a password"
+msgid ""
+"Option ``Restrict command line options'' is of no use without a password"
 msgstr "Valet «Avgrens kommandolinjeval» er ubrukeleg utan passord"
 
 #: any.pm:423
@@ -394,8 +395,10 @@ msgstr "Skriv inn brukarnamn"
 
 #: any.pm:776
 #, c-format
-msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
-msgstr "Brukarnamnet kan berre innehelda små bokstavar, tala og teikna «-» og «_»"
+msgid ""
+"The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgstr ""
+"Brukarnamnet kan berre innehelda små bokstavar, tala og teikna «-» og «_»"
 
 #: any.pm:777
 #, c-format
@@ -569,7 +572,6 @@ msgstr "Land/område"
 
 #: any.pm:1102
 #, c-format
-#| msgid "Please choose your country."
 msgid "Please choose your country"
 msgstr "Vel land"
 
@@ -648,7 +650,8 @@ msgstr ""
 
 #: any.pm:1222
 #, c-format
-msgid "You can export using NFS or SMB. Please select which you would like to use."
+msgid ""
+"You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Du kan eksportera med NFS og SMB. Vel kven av dei du vil bruka."
 
 #: any.pm:1250
@@ -753,8 +756,10 @@ msgstr "Lokal fil:"
 
 #: authentication.pm:64
 #, c-format
-msgid "Use local for all authentication and information user tell in local file"
-msgstr "Bruk lokal for all autentisering og informasjon brukarar oppgjev i lokal fil"
+msgid ""
+"Use local for all authentication and information user tell in local file"
+msgstr ""
+"Bruk lokal for all autentisering og informasjon brukarar oppgjev i lokal fil"
 
 #: authentication.pm:65
 #, c-format
@@ -904,7 +909,8 @@ msgstr "Skuggebase"
 msgid ""
 "You have selected Kerberos 5 authentication. Please review the configuration "
 "options below "
-msgstr "Du har valt Kerberos 5-autentisering. Sjå gjennom oppsettvala nedanfor."
+msgstr ""
+"Du har valt Kerberos 5-autentisering. Sjå gjennom oppsettvala nedanfor."
 
 #: authentication.pm:135
 #, c-format
@@ -941,7 +947,8 @@ msgstr "Bruk LDAP for brukarinformasjon"
 msgid ""
 "You have selected Kerberos 5 for authentication, now you must choose the "
 "type of users information "
-msgstr "Du har valt Kerberos 5 for autentisering. No må velja type brukarinformasjon."
+msgstr ""
+"Du har valt Kerberos 5 for autentisering. No må velja type brukarinformasjon."
 
 #: authentication.pm:158
 #, c-format
@@ -970,7 +977,8 @@ msgstr "NIS-tenar"
 msgid ""
 "You have selected Windows Domain authentication. Please review the "
 "configuration options below "
-msgstr "Du har valt Windows-domene-autentisering. Sjå gjennom oppsettvala nedanfor."
+msgstr ""
+"Du har valt Windows-domene-autentisering. Sjå gjennom oppsettvala nedanfor."
 
 #: authentication.pm:207
 #, c-format
@@ -1084,7 +1092,8 @@ msgstr "Du kan ikkje installera oppstartslastaren på ein «%s»-partisjon\n"
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
 "renumbered"
-msgstr "Oppstartslastaren må oppdaterast, då partisjonane har fått ny rekkjefølgje"
+msgstr ""
+"Oppstartslastaren må oppdaterast, då partisjonane har fått ny rekkjefølgje"
 
 #: bootloader.pm:1977
 #, c-format
@@ -1400,18 +1409,14 @@ msgstr "Vel ein annan partisjon"
 msgid "Choose a partition"
 msgstr "Vel partisjon"
 
-#: diskdrake/interactive.pm:259
+#: diskdrake/interactive.pm:270 diskdrake/interactive.pm:376
+#: interactive/curses.pm:512
 #, c-format
-msgid "Toggle to normal mode"
-msgstr "Skift til normalmodus"
+msgid "More"
+msgstr "Meir"
 
-#: diskdrake/interactive.pm:259
-#, c-format
-msgid "Toggle to expert mode"
-msgstr "Skift til ekspertmodus"
-
-#: diskdrake/interactive.pm:267 diskdrake/interactive.pm:277
-#: diskdrake/interactive.pm:1103
+#: diskdrake/interactive.pm:278 diskdrake/interactive.pm:288
+#: diskdrake/interactive.pm:1173
 #, c-format
 msgid "Confirmation"
 msgstr "Stadfesting"
@@ -1439,7 +1444,8 @@ msgstr "Vil du lagra endringar i «/etc/fstab»"
 #: diskdrake/interactive.pm:284 fs/partitioning_wizard.pm:250
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr "Du må starta på nytt for at endringane i partisjontabellen skal trå i kraft"
+msgstr ""
+"Du må starta på nytt for at endringane i partisjontabellen skal trå i kraft"
 
 #: diskdrake/interactive.pm:289
 #, c-format
@@ -1463,13 +1469,17 @@ msgstr "Fjern alle"
 msgid "Auto allocate"
 msgstr "Tildel automatisk"
 
-#: diskdrake/interactive.pm:304 diskdrake/interactive.pm:352
-#: interactive/curses.pm:512
+#: diskdrake/interactive.pm:320
 #, c-format
-msgid "More"
-msgstr "Meir"
+msgid "Toggle to normal mode"
+msgstr "Skift til normalmodus"
 
-#: diskdrake/interactive.pm:309
+#: diskdrake/interactive.pm:320
+#, c-format
+msgid "Toggle to expert mode"
+msgstr "Skift til ekspertmodus"
+
+#: diskdrake/interactive.pm:332
 #, c-format
 msgid "Hard drive information"
 msgstr "Harddiskinformasjon"
@@ -1523,7 +1533,12 @@ msgstr "Legg til i RAID"
 msgid "Add to LVM"
 msgstr "Legg til i LVM"
 
-#: diskdrake/interactive.pm:383
+#: diskdrake/interactive.pm:406
+#, fuzzy, c-format
+msgid "Use"
+msgstr "Brukar-ID"
+
+#: diskdrake/interactive.pm:408
 #, c-format
 msgid "Delete"
 msgstr "Slett"
@@ -1538,7 +1553,12 @@ msgstr "Fjern frå RAID"
 msgid "Remove from LVM"
 msgstr "Fjern frå LVM"
 
-#: diskdrake/interactive.pm:386
+#: diskdrake/interactive.pm:411
+#, fuzzy, c-format
+msgid "Remove from dm"
+msgstr "Fjern frå LVM"
+
+#: diskdrake/interactive.pm:412
 #, c-format
 msgid "Modify RAID"
 msgstr "Endra RAID"
@@ -1601,7 +1621,8 @@ msgstr "Vil du fjerna filmonteringsfila?"
 
 #: diskdrake/interactive.pm:532
 #, c-format
-msgid "After changing type of partition %s, all data on this partition will be lost"
+msgid ""
+"After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "Når du har endra partisjonstypen til «%s» vil alle data på denne partisjonen "
 "vera tapt"
@@ -1679,7 +1700,8 @@ msgstr "Du bør ta reservekopi av alle data på denne partisjonen"
 #: diskdrake/interactive.pm:701
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
-msgstr "Når du har endra storleik på «%s» vil alle data på denne partisjonen vera tapt"
+msgstr ""
+"Når du har endra storleik på «%s» vil alle data på denne partisjonen vera tapt"
 
 #: diskdrake/interactive.pm:708
 #, c-format
@@ -1710,7 +1732,27 @@ msgstr ""
 "For å sikra dataintegritet på partisjonen/-ane\n"
 "vert det køyrt filsystemkontroll neste gongar du startar Windows™"
 
-#: diskdrake/interactive.pm:793
+#: diskdrake/interactive.pm:826 diskdrake/interactive.pm:1370
+#, c-format
+msgid "Filesystem encryption key"
+msgstr "Krypteringsnøkkel for filsystem"
+
+#: diskdrake/interactive.pm:827
+#, fuzzy, c-format
+msgid "Enter your filesystem encryption key"
+msgstr "Vel krypteringsnøkkel for filsystemet"
+
+#: diskdrake/interactive.pm:828 diskdrake/interactive.pm:1378
+#, c-format
+msgid "Encryption key"
+msgstr "Krypteringsnøkkel"
+
+#: diskdrake/interactive.pm:835
+#, c-format
+msgid "Invalid key"
+msgstr ""
+
+#: diskdrake/interactive.pm:843
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "Vel ein eksisterande RAID å leggja til i"
@@ -1824,7 +1866,12 @@ msgstr "Du må starta på nytt for at endringane skal trå i kraft"
 msgid "Partition table of drive %s is going to be written to disk"
 msgstr "Partisjonstabellen til «%s» vert no lagra."
 
-#: diskdrake/interactive.pm:1098
+#: diskdrake/interactive.pm:1151 fs/format.pm:63 fs/format.pm:70
+#, c-format
+msgid "Formatting partition %s"
+msgstr "Formaterer partisjonen «%s»"
+
+#: diskdrake/interactive.pm:1164
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr "Når du har formatert «%s» vil alle data på denne partisjonen vera tapt"
@@ -1962,7 +2009,27 @@ msgstr "Montert\n"
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1214
+#: diskdrake/interactive.pm:1281
+#, fuzzy, c-format
+msgid "Encrypted"
+msgstr "Krypteringsnøkkel"
+
+#: diskdrake/interactive.pm:1281
+#, c-format
+msgid " (mapped on %s)"
+msgstr ""
+
+#: diskdrake/interactive.pm:1282
+#, c-format
+msgid " (to map on %s)"
+msgstr ""
+
+#: diskdrake/interactive.pm:1283
+#, c-format
+msgid " (inactive)"
+msgstr ""
+
+#: diskdrake/interactive.pm:1289
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2066,12 +2133,7 @@ msgstr "Partisjonstabelltype: %s\n"
 msgid "on channel %d id %d\n"
 msgstr "på kanal %d – id %d\n"
 
-#: diskdrake/interactive.pm:1295
-#, c-format
-msgid "Filesystem encryption key"
-msgstr "Krypteringsnøkkel for filsystem"
-
-#: diskdrake/interactive.pm:1296
+#: diskdrake/interactive.pm:1371
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Vel krypteringsnøkkel for filsystemet"
@@ -2086,12 +2148,7 @@ msgstr "Krypteringsnøkkelen er for enkel. Han må vera på minst %d teikn."
 msgid "The encryption keys do not match"
 msgstr "Krypteringsnøklane er ikkje like"
 
-#: diskdrake/interactive.pm:1303
-#, c-format
-msgid "Encryption key"
-msgstr "Krypteringsnøkkel"
-
-#: diskdrake/interactive.pm:1304
+#: diskdrake/interactive.pm:1379
 #, c-format
 msgid "Encryption key (again)"
 msgstr "Krypteringsnøkkel (på nytt)"
@@ -2136,7 +2193,8 @@ msgstr "Endå ein"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid "Please enter your username, password and domain name to access this host."
+msgid ""
+"Please enter your username, password and domain name to access this host."
 msgstr "Skriv inn brukarnamn, passord og domenenamn for verten."
 
 #: diskdrake/smbnfs_gtk.pm:180
@@ -2202,11 +2260,6 @@ msgstr ""
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "Du må ha ein FAT-partisjon montert i «/boot/efi»"
-
-#: fs/format.pm:63 fs/format.pm:70
-#, c-format
-msgid "Formatting partition %s"
-msgstr "Formaterer partisjonen «%s»"
 
 #: fs/format.pm:67
 #, c-format
@@ -3060,9 +3113,10 @@ msgstr "Lydoppsett"
 msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
 "sound card (%s)."
-msgstr "Her kan du velja ein annan OSS- eller ALSA-drivar for lydkortet ditt («%s»)."
+msgstr ""
+"Her kan du velja ein annan OSS- eller ALSA-drivar for lydkortet ditt («%s»)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA",
+#. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:392
@@ -4617,7 +4671,7 @@ msgstr "Oppstartslastaren kan ikkje handtera «/boot» på fleire fysiske volum.
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: messages.pm:10
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Introduction\n"
 "\n"
@@ -4627,7 +4681,10 @@ msgid ""
 "include, but are not \n"
 "restricted to, the set of programs, methods, rules and documentation related "
 "to the operating \n"
-"system and the different components of the Mandriva Linux distribution.\n"
+"system and the different components of the Mandriva Linux distribution, and "
+"any applications \n"
+"distributed with these products provided by Mandriva's licensors or "
+"suppliers.\n"
 "\n"
 "\n"
 "1. License Agreement\n"
@@ -4635,8 +4692,8 @@ msgid ""
 "Please read this document carefully. This document is a license agreement "
 "between you and  \n"
 "Mandriva S.A. which applies to the Software Products.\n"
-"By installing, duplicating or using the Software Products in any manner, you "
-"explicitly \n"
+"By installing, duplicating or using any of the Software Products in any "
+"manner, you explicitly \n"
 "accept and fully agree to conform to the terms and conditions of this "
 "License. \n"
 "If you disagree with any portion of the License, you are not allowed to "
@@ -4656,52 +4713,57 @@ msgid ""
 "The Software Products and attached documentation are provided \"as is\", "
 "with no warranty, to the \n"
 "extent permitted by law.\n"
-"Mandriva S.A. will, in no circumstances and to the extent permitted by law, "
-"be liable for any special,\n"
-"incidental, direct or indirect damages whatsoever (including without "
-"limitation damages for loss of \n"
-"business, interruption of business, financial loss, legal fees and penalties "
-"resulting from a court \n"
-"judgment, or any other consequential loss) arising out of  the use or "
-"inability to use the Software \n"
-"Products, even if Mandriva S.A. has been advised of the possibility or "
-"occurrence of such \n"
-"damages.\n"
+"Neither Mandriva S.A. nor its licensors or suppliers will, in any "
+"circumstances and to the extent \n"
+"permitted by law, be liable for any special, incidental, direct or indirect "
+"damages whatsoever \n"
+"(including without limitation damages for loss of business, interruption of "
+"business, financial \n"
+"loss, legal fees and penalties resulting from a court judgment, or any other "
+"consequential loss) \n"
+"arising out of  the use or inability to use the Software Products, even if "
+"Mandriva S.A. or its \n"
+"licensors or suppliers have been advised of the possibility or occurrence of "
+"such damages.\n"
 "\n"
 "LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME "
 "COUNTRIES\n"
 "\n"
-"To the extent permitted by law, Mandriva S.A. or its distributors will, in "
-"no circumstances, be \n"
-"liable for any special, incidental, direct or indirect damages whatsoever "
-"(including without \n"
-"limitation damages for loss of business, interruption of business, financial "
-"loss, legal fees \n"
-"and penalties resulting from a court judgment, or any other consequential "
-"loss) arising out \n"
-"of the possession and use of software components or arising out of  "
-"downloading software components \n"
-"from one of Mandriva Linux sites  which are prohibited or restricted in some "
-"countries by local laws.\n"
+"To the extent permitted by law, neither Mandriva S.A. nor its licensors, "
+"suppliers or\n"
+"distributors will, in any circumstances, be liable for any special, "
+"incidental, direct or indirect \n"
+"damages whatsoever (including without limitation damages for loss of "
+"business, interruption of \n"
+"business, financial loss, legal fees and penalties resulting from a court "
+"judgment, or any \n"
+"other consequential loss) arising out of the possession and use of software "
+"components or \n"
+"arising out of  downloading software components from one of Mandriva Linux "
+"sites which are \n"
+"prohibited or restricted in some countries by local laws.\n"
 "This limited liability applies to, but is not restricted to, the strong "
 "cryptography components \n"
 "included in the Software Products.\n"
+"However, because some jurisdictions do not allow the exclusion or limitation "
+"or liability for \n"
+"consequential or incidental damages, the above limitation may not apply to "
+"you.  \n"
+"\n"
+"%s\n"
 "\n"
 "\n"
 "3. The GPL License and Related Licenses\n"
 "\n"
 "The Software Products consist of components created by different persons or "
-"entities.  Most \n"
-"of these components are governed under the terms and conditions of the GNU "
-"General Public \n"
-"Licence, hereafter called \"GPL\", or of similar licenses. Most of these "
-"licenses allow you to use, \n"
-"duplicate, adapt or redistribute the components which they cover. Please "
-"read carefully the terms \n"
-"and conditions of the license agreement for each component before using any "
-"component. Any question \n"
-"on a component license should be addressed to the component author and not "
-"to Mandriva.\n"
+"entities. %s\n"
+"Most of these licenses allow you to use, duplicate, adapt or redistribute "
+"the components which \n"
+"they cover. Please read carefully the terms and conditions of the license "
+"agreement for each component \n"
+"before using any component. Any question on a component license should be "
+"addressed to the component \n"
+"licensor or supplier and not to Mandriva.\n"
 "The programs developed by Mandriva S.A. are governed by the GPL License. "
 "Documentation written \n"
 "by Mandriva S.A. is governed by a specific license. Please refer to the "
@@ -4715,9 +4777,9 @@ msgid ""
 "respective authors and are \n"
 "protected by intellectual property and copyright laws applicable to software "
 "programs.\n"
-"Mandriva S.A. reserves its rights to modify or adapt the Software Products, "
-"as a whole or in \n"
-"parts, by all means and for all purposes.\n"
+"Mandriva S.A. and its suppliers and licensors reserves their rights to "
+"modify or adapt the Software \n"
+"Products, as a whole or in parts, by all means and for all purposes.\n"
 "\"Mandriva\", \"Mandriva Linux\" and associated logos are trademarks of "
 "Mandriva S.A.  \n"
 "\n"
@@ -4855,7 +4917,55 @@ msgstr ""
 "Paris – France.\n"
 "For any question on this document, please contact Mandriva S.A.  \n"
 
-#: messages.pm:90
+#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
+#: messages.pm:93
+#, c-format
+msgid ""
+"You agree not to (i) sell, export, re-export, transfer, divert, disclose "
+"technical data, or \n"
+"dispose of, any Software to any person, entity, or destination prohibited by "
+"US export laws \n"
+"or regulations including, without limitation, Cuba, Iran, North Korea, Sudan "
+"and Syria; or \n"
+"(ii) use any Software for any use prohibited by the laws or regulations of "
+"the United States.\n"
+"\n"
+"U.S. GOVERNMENT RESTRICTED RIGHTS. \n"
+"\n"
+"The Software Products and any accompanying documentation are and shall be "
+"deemed to be \n"
+"\"commercial computer software\" and \"commercial computer software "
+"documentation,\" respectively, \n"
+"as defined in DFAR 252.227-7013 and as described in FAR 12.212. Any use, "
+"modification, reproduction, \n"
+"release, performance, display or disclosure of the Software and any "
+"accompanying documentation \n"
+"by the United States Government shall be governed solely by the terms of "
+"this Agreement and any \n"
+"other applicable licence agreements and shall be prohibited except to the "
+"extent expressly permitted \n"
+"by the terms of this Agreement."
+msgstr ""
+
+#: messages.pm:107
+#, c-format
+msgid ""
+"Most of these components, but excluding the applications and software "
+"provided by Google Inc. or \n"
+"its subsidiaries (\"Google Software\"), are governed under the terms and "
+"conditions of the GNU \n"
+"General Public Licence, hereafter called \"GPL\", or of similar licenses."
+msgstr ""
+
+#: messages.pm:110
+#, c-format
+msgid ""
+"Most of these components are governed under the terms and conditions of the "
+"GNU \n"
+"General Public Licence, hereafter called \"GPL\", or of similar licenses."
+msgstr ""
+
+#: messages.pm:115
 #, c-format
 msgid ""
 "Warning: Free Software may not necessarily be patent free, and some Free\n"
@@ -4875,69 +4985,55 @@ msgstr ""
 "sikker på om ein patent gjeld deg, bør du sjekka dei lokale lovene der du "
 "bur."
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: messages.pm:98
+#: messages.pm:123
 #, c-format
 msgid ""
+"6. Additional provisions applicable to those Software Products provided by "
+"Google Inc. (\"Google Software\")\n"
 "\n"
-"Warning\n"
+"(a)  You acknowledge that Google or third parties own all rights, title and "
+"interest in and to the Google \n"
+"Software, portions thereof, or software provided through or in conjunction "
+"with the Google Software, including\n"
+"without limitation all Intellectual Property Rights. \"Intellectual Property "
+"Rights\" means any and all rights \n"
+"existing from time to time under patent law, copyright law, trade secret "
+"law, trademark law, unfair competition \n"
+"law, database rights and any and all other proprietary rights, and any and "
+"all applications, renewals, extensions \n"
+"and restorations thereof, now or hereafter in force and effect worldwide. "
+"You agree not to modify, adapt, \n"
+"translate, prepare derivative works from, decompile, reverse engineer, "
+"disassemble or otherwise attempt to derive \n"
+"source code from Google Software. You also agree to not remove, obscure, or "
+"alter Google's or any third party's \n"
+"copyright notice, trademarks, or other proprietary rights notices affixed to "
+"or contained within or accessed in \n"
+"conjunction with or through the Google Software.  \n"
 "\n"
-"Please read carefully the terms below. If you disagree with any\n"
-"portion, you are not allowed to install the next CD media. Press 'Refuse' \n"
-"to continue the installation without using these media.\n"
+"(b)  The Google Software is made available to you for your personal, non-"
+"commercial use only.\n"
+"You may not use the Google Software in any manner that could damage, "
+"disable, overburden, or impair Google's \n"
+"search services (e.g., you may not use the Google Software in an automated "
+"manner), nor may you use Google \n"
+"Software in any manner that could interfere with any other party's use and "
+"enjoyment of Google's search services\n"
+"or the services and products of the third party licensors of the Google "
+"Software.\n"
 "\n"
+"(c)  Some of the Google Software is designed to be used in conjunction with "
+"Google's search and other services.\n"
+"Accordingly, your use of such Google Software is also defined by Google's "
+"Terms of Service located at \n"
+"http://www.google.com/terms_of_service.html and Google's Toolbar Privacy "
+"Policy located at \n"
+"http://www.google.com/support/toolbar/bin/static.py?page=privacy.html.\n"
 "\n"
-"Some components contained in the next CD media are not governed\n"
-"by the GPL License or similar agreements. Each such component is then\n"
-"governed by the terms and conditions of its own specific license. \n"
-"Please read carefully and comply with such specific licenses before \n"
-"you use or redistribute the said components. \n"
-"Such licenses will in general prevent the transfer,  duplication \n"
-"(except for backup purposes), redistribution, reverse engineering, \n"
-"de-assembly, de-compilation or modification of the component. \n"
-"Any breach of agreement will immediately terminate your rights under \n"
-"the specific license. Unless the specific license terms grant you such\n"
-"rights, you usually cannot install the programs on more than one\n"
-"system, or adapt it to be used on a network. In doubt, please contact \n"
-"directly the distributor or editor of the component. \n"
-"Transfer to third parties or copying of such components including the \n"
-"documentation is usually forbidden.\n"
-"\n"
-"\n"
-"All rights to the components of the next CD media belong to their \n"
-"respective authors and are protected by intellectual property and \n"
-"copyright laws applicable to software programs.\n"
+"(d)  Google Inc. and each of its subsidiaries and affiliates are third party "
+"beneficiaries of this contract \n"
+"and may enforce its terms."
 msgstr ""
-"\n"
-"Åtvaring\n"
-"\n"
-"Les nøye gjennom vilkåra nedanfor. Viss du er ueinig me vilkåra, \n"
-"eller delar av vilkåra, har du ikkje rett til å installera dei \n"
-"neste CD-media. Trykk «Ikkje godta» for å halda fram med installeringa \n"
-"utan å bruka desse media.\n"
-"\n"
-"\n"
-"Nokre av komponentane på dei neste CD-media ligg ikkje under GPL-lisensen \n"
-"eller liknande programvarelisensar. Kvar slik komponent følgjer sine \n"
-"eigne bruks- og installeringsvilkår. Du må lesa nøye gjennom og følgja \n"
-"desse lisensvilkåra før du tek i bruk eller vidareformidlar desse \n"
-"komponentane. Lisensane vil typisk forby overføring, kopiering (med \n"
-"unntak av reservekopiering), vidareformidling, «reverse engineering» \n"
-"(«omvend utvikling»), dekompilering eller endringar. \n"
-"\n"
-"Viss du ikkje følgjer lisensvilkåra, vil du automatisk og umiddelbart \n"
-"mista rettane gjevne av dei aktuelle lisensane. Med mindre lisensen \n"
-"spesifikt gjev deg rett til det, kan du ikkje installera programma på \n"
-"meir enn eitt system, eller bruka dei på eit nettverk. Om du er i tvil, \n"
-"kan du kontakta distributøren eller den ansvarlege for komponenten. \n"
-"Overføring til tredjepartar eller kopiering av komponentane, herunder \n"
-"eventuell dokumentasjon, er vanlegvis forbode.\n"
-"\n"
-"\n"
-"Alle rettane til komponentane på dei neste CD-media høyrer til deira \n"
-"respektive utviklarar, og er verna av lov om opphavsrett og andre "
-"relevante \n"
-"programvarelover.\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: messages.pm:131
@@ -5220,7 +5316,8 @@ msgstr "Klarte ikkje installera pakkane for deling av skannar(ar)."
 #: scanner.pm:202
 #, c-format
 msgid "Your scanner(s) will not be available for non-root users."
-msgstr "Skannaren/-ane vil ikkje vera tilgjengeleg for andre brukarar enn «root»."
+msgstr ""
+"Skannaren/-ane vil ikkje vera tilgjengeleg for andre brukarar enn «root»."
 
 #: security/help.pm:11
 #, c-format
@@ -5275,7 +5372,8 @@ msgstr "Godta direkte «root»-innlogging."
 
 #: security/help.pm:33
 #, c-format
-msgid "Allow the list of users on the system on display managers (kdm and gdm)."
+msgid ""
+"Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr "Godta vising av brukarar i innloggingshandsamarar (kdm og gdm)."
 
 #: security/help.pm:35
@@ -5472,7 +5570,8 @@ msgstr "Vel storleik på passordlogg for å hindra gjenbruk av passord."
 msgid ""
 "Set the password minimum length and minimum number of digit and minimum "
 "number of capitalized letters."
-msgstr "Vel minstelengd på passord og minimum tal på siffer og store bokstavar."
+msgstr ""
+"Vel minstelengd på passord og minimum tal på siffer og store bokstavar."
 
 #: security/help.pm:108
 #, c-format
@@ -5506,12 +5605,14 @@ msgstr ""
 #: security/help.pm:117
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
-msgstr "Kontroller løyve til filer i heimemappe til brukarar viss sett til «ja»."
+msgstr ""
+"Kontroller løyve til filer i heimemappe til brukarar viss sett til «ja»."
 
 #: security/help.pm:118
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
-msgstr "Kontroller om nettverksgrensesnitt er i promiskuitetsmodus viss sett til «ja»."
+msgstr ""
+"Kontroller om nettverksgrensesnitt er i promiskuitetsmodus viss sett til «ja»."
 
 #: security/help.pm:119
 #, c-format
@@ -5555,7 +5656,8 @@ msgstr "Køyr «chkrootkit»-kontrollar viss sett til «ja»."
 
 #: security/help.pm:127
 #, c-format
-msgid "if set, send the mail report to this email address else send it to root."
+msgid ""
+"if set, send the mail report to this email address else send it to root."
 msgstr "Send rapport på e-post til denne adressa, eller til «root» viss tom."
 
 #: security/help.pm:128
@@ -6024,7 +6126,8 @@ msgstr ""
 
 #: services.pm:28
 #, c-format
-msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgid ""
+"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr "Common UNIX Printing System (CUPS) er eit avansert utskriftskøsystem."
 
 #: services.pm:29
@@ -6058,18 +6161,21 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr "HAL er ei teneste som samlar inn og vedlikeheld informasjon om maskinvare."
+msgstr ""
+"HAL er ei teneste som samlar inn og vedlikeheld informasjon om maskinvare."
 
 #: services.pm:36
 #, c-format
 msgid ""
 "HardDrake runs a hardware probe, and optionally configures\n"
 "new/changed hardware."
-msgstr "HardDrake køyrer eit maskinvaresøk, og kan setja opp ny og endra maskinvare."
+msgstr ""
+"HardDrake køyrer eit maskinvaresøk, og kan setja opp ny og endra maskinvare."
 
 #: services.pm:38
 #, c-format
-msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid ""
+"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr "Apache er ein vevtenar."
 
 #: services.pm:39
@@ -6251,14 +6357,16 @@ msgstr ""
 msgid ""
 "Postfix is a Mail Transport Agent, which is the program that moves mail from "
 "one machine to another."
-msgstr "Postfix er eit program for overføring av elektronisk post mellom maskiner."
+msgstr ""
+"Postfix er eit program for overføring av elektronisk post mellom maskiner."
 
 #: services.pm:79
 #, c-format
 msgid ""
 "Saves and restores system entropy pool for higher quality random\n"
 "number generation."
-msgstr "Lagrar og gjenopprettar systementropigrunnlag for betre slumptalsgenerering."
+msgstr ""
+"Lagrar og gjenopprettar systementropigrunnlag for betre slumptalsgenerering."
 
 #: services.pm:81
 #, c-format
@@ -6310,7 +6418,8 @@ msgstr ""
 
 #: services.pm:92
 #, c-format
-msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgid ""
+"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
 "SANE (Scanner Access Now Easy) gjev tilgang til skannarar, filmkamera og "
 "liknande."
@@ -6808,6 +6917,69 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Feil ved installering."
 
+#~ msgid ""
+#~ "\n"
+#~ "Warning\n"
+#~ "\n"
+#~ "Please read carefully the terms below. If you disagree with any\n"
+#~ "portion, you are not allowed to install the next CD media. Press "
+#~ "'Refuse' \n"
+#~ "to continue the installation without using these media.\n"
+#~ "\n"
+#~ "\n"
+#~ "Some components contained in the next CD media are not governed\n"
+#~ "by the GPL License or similar agreements. Each such component is then\n"
+#~ "governed by the terms and conditions of its own specific license. \n"
+#~ "Please read carefully and comply with such specific licenses before \n"
+#~ "you use or redistribute the said components. \n"
+#~ "Such licenses will in general prevent the transfer,  duplication \n"
+#~ "(except for backup purposes), redistribution, reverse engineering, \n"
+#~ "de-assembly, de-compilation or modification of the component. \n"
+#~ "Any breach of agreement will immediately terminate your rights under \n"
+#~ "the specific license. Unless the specific license terms grant you such\n"
+#~ "rights, you usually cannot install the programs on more than one\n"
+#~ "system, or adapt it to be used on a network. In doubt, please contact \n"
+#~ "directly the distributor or editor of the component. \n"
+#~ "Transfer to third parties or copying of such components including the \n"
+#~ "documentation is usually forbidden.\n"
+#~ "\n"
+#~ "\n"
+#~ "All rights to the components of the next CD media belong to their \n"
+#~ "respective authors and are protected by intellectual property and \n"
+#~ "copyright laws applicable to software programs.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Åtvaring\n"
+#~ "\n"
+#~ "Les nøye gjennom vilkåra nedanfor. Viss du er ueinig me vilkåra, \n"
+#~ "eller delar av vilkåra, har du ikkje rett til å installera dei \n"
+#~ "neste CD-media. Trykk «Ikkje godta» for å halda fram med installeringa \n"
+#~ "utan å bruka desse media.\n"
+#~ "\n"
+#~ "\n"
+#~ "Nokre av komponentane på dei neste CD-media ligg ikkje under GPL-"
+#~ "lisensen \n"
+#~ "eller liknande programvarelisensar. Kvar slik komponent følgjer sine \n"
+#~ "eigne bruks- og installeringsvilkår. Du må lesa nøye gjennom og følgja \n"
+#~ "desse lisensvilkåra før du tek i bruk eller vidareformidlar desse \n"
+#~ "komponentane. Lisensane vil typisk forby overføring, kopiering (med \n"
+#~ "unntak av reservekopiering), vidareformidling, «reverse engineering» \n"
+#~ "(«omvend utvikling»), dekompilering eller endringar. \n"
+#~ "\n"
+#~ "Viss du ikkje følgjer lisensvilkåra, vil du automatisk og umiddelbart \n"
+#~ "mista rettane gjevne av dei aktuelle lisensane. Med mindre lisensen \n"
+#~ "spesifikt gjev deg rett til det, kan du ikkje installera programma på \n"
+#~ "meir enn eitt system, eller bruka dei på eit nettverk. Om du er i tvil, \n"
+#~ "kan du kontakta distributøren eller den ansvarlege for komponenten. \n"
+#~ "Overføring til tredjepartar eller kopiering av komponentane, herunder \n"
+#~ "eventuell dokumentasjon, er vanlegvis forbode.\n"
+#~ "\n"
+#~ "\n"
+#~ "Alle rettane til komponentane på dei neste CD-media høyrer til deira \n"
+#~ "respektive utviklarar, og er verna av lov om opphavsrett og andre "
+#~ "relevante \n"
+#~ "programvarelover.\n"
+
 #~ msgid "Use libsafe for servers"
 #~ msgstr "Bruk libsafe for tenarar"
 
@@ -7027,4 +7199,3 @@ msgstr "Feil ved installering."
 
 #~ msgid "Enable/Disable msec hourly security check."
 #~ msgstr "Slå på/av msec-basert tryggleikskontroll."
-
