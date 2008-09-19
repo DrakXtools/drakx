@@ -222,7 +222,7 @@ Installation\".", 'Mandriva Linux 2009') },
     log::l("_warn_unsafe_upgrade: got $choice");
 
     if ($choice eq $choices[0]) {
-	any::reboot($o);
+	any::reboot();
     } elsif ($choice eq $choices[1]) {
 	undef;
     } else {
