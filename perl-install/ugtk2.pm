@@ -1442,7 +1442,7 @@ sub new {
     $darea->set_size_request(-1, $d_height);
     $darea->modify_font(Gtk2::Pango::FontDescription->from_string("Sans Bold 14"));
     eval { $darea->{icon} = ugtk2::gtkcreate_pixbuf($icon) };
-    my $blue_part = eval { gtknew('Pixbuf', file => 'banner-blue-part') };
+    my $blue_part = eval { gtknew('Pixbuf', file => 'banner-blue-part', flip => mygtk2::text_direction_rtl()) };
     $darea->{text} = $text;
     require lang;
     my $is_rtl = lang::text_direction_rtl();
