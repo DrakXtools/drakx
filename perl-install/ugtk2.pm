@@ -1427,7 +1427,7 @@ use ugtk2 qw(:helpers :wrappers);
 sub set_pixmap {
     my ($darea) = @_;
     return if !$darea->realized;
-    ugtk2::set_back_pixbuf($darea, gtknew('Pixbuf', file => 'banner-background'));
+    ugtk2::set_back_pixbuf($darea, $darea->{back_pixbuf});
     $darea->{layout} = $darea->create_pango_layout($darea->{text});
     $darea->{txt_width} = ($darea->{layout}->get_pixel_size)[0];
     $darea->queue_draw;
@@ -1439,6 +1439,7 @@ sub new {
 
     mygtk2::import_style_ressources();
     my $darea = gtknew('DrawingArea', widget_name => 'Banner');
+    $darea->{back_pixbuf} = gtknew('Pixbuf', file => 'banner-background');
     my $d_height = 54;
     $darea->set_size_request(-1, $d_height);
     $darea->modify_font(Gtk2::Pango::FontDescription->from_string("Sans 15"));
