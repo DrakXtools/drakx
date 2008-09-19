@@ -53,7 +53,7 @@ sub acceptLicense {
     my ($o) = @_;
     return if $o->{useless_thing_accepted};
 
-    any::acceptLicense($o);
+    any::acceptLicense($o, $o->{meta_class} eq 'powerpack');
 }
 
 sub selectLanguage {

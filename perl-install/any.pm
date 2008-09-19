@@ -935,7 +935,7 @@ sub display_release_notes {
 }
 
 sub acceptLicense {
-    my ($in) = @_;
+    my ($in, $google) = @_;
     require messages;
 
     my $ext = $in->isa('interactive::gtk') ? '.html' : '.txt';
@@ -957,10 +957,15 @@ sub acceptLicense {
 
     my $r = $::testing ? 'Accept' : 'Refuse';
 
+    my $license = join("\n\n\n",
+		       messages::main_license($google, $google),
+		       messages::warning_about_patents(),
+		       if_($google, messages::google_provisions()));
+
     $in->ask_from_({ title => N("License agreement"), 
 		    focus_first => 1,
 		     cancel => N("Quit"),
-		     messages => formatAlaTeX(messages::main_license() . "\n\n\n" . messages::warning_about_patents()),
+		     messages => formatAlaTeX($license),
 		     interactive_help_id => 'acceptLicense',
 		     callbacks => { ok_disabled => sub { $r eq 'Refuse' } },
 		   },
