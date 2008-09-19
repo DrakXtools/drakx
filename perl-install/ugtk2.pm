@@ -1437,7 +1437,7 @@ sub set_pixmap {
 sub new {
     my ($_class, $icon, $text, $o_options) = @_;
 
-    my $darea = gtknew('DrawingArea');
+    my $darea = gtknew('DrawingArea', widget_name => 'Banner');
     my $d_height = 54;
     $darea->set_size_request(-1, $d_height);
     $darea->modify_font(Gtk2::Pango::FontDescription->from_string("Sans Bold 14"));
