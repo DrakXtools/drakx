@@ -30,7 +30,7 @@ install:
 	perl -pi -e "s/\"VER\"(; # version)/\"$(VERSION)\"\1/" standalone.pm
 	mkdir -p $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR)/{applications,harddrake,pixmaps,icons/{large,mini},autostart} $(PIXDIR) $(INITDIR) $(MENUDIR)
 	install -d $(INLIBDEST_DIRS:%=$(LIBDEST)/%)
-	install $(STANDALONEPMS) standalone/service_harddrake.sh standalone/convert $(SBINDEST)
+	install $(STANDALONEPMS) standalone/convert $(SBINDEST)
 	install -s ../tools/rpcinfo-flushed ../tools/serial_probe/serial_probe $(SBINDEST)
 	ln -s XFdrake $(SBINDEST)/Xdrakres
 	ln -s fileshareset $(SBINDEST)/filesharelist
@@ -67,7 +67,6 @@ install:
 	rmdir $(LIBDEST)/icons/harddrake2/menu
 	install -m 644 standalone/menu/*.desktop $(DATADIR)/applications
 	mv $(LIBDEST)/icons/harddrake2/ $(DATADIR)/pixmaps/
-	mv $(SBINDEST)/service_harddrake.sh $(INITDIR)/harddrake
 	mv $(SBINDEST)/convert $(DATADIR)/harddrake
 	mv $(SBINDEST)/service_harddrake $(DATADIR)/harddrake/
 	mv $(SBINDEST)/notify-x11-free-driver-switch $(DATADIR)/harddrake/
