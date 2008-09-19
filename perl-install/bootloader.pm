@@ -268,8 +268,7 @@ sub read_grub_install_sh() {
     \%h;
 }
 
-sub read_grub_menu_lst {
-    my ($fstab, $grub2dev) = @_;
+sub _parse_grub_menu_lst() {
     my $global = 1;
     my ($e, %b);
 
@@ -293,21 +292,17 @@ sub read_grub_menu_lst {
             push @{$b{entries}}, $e = { label => $v };
             $global = 0;
         } elsif ($global) {
-            $b{$keyword} = $v eq '' ? 1 : grub2file($v, $grub2dev, $fstab, \%b);
+            $b{$keyword} = $v;
         } else {
             if ($keyword eq 'kernel') {
                 $e->{type} = 'image';
 		$e->{kernel} = $v;
             } elsif ($keyword eq 'chainloader') {
                 $e->{type} = 'other';
-                $e->{kernel_or_dev} = grub2dev($e->{rootnoverify} || $e->{grub_root}, $grub2dev);
                 $e->{append} = "";
             } elsif ($keyword eq 'configfile') {
                 $e->{type} = 'grub_configfile';
-                $e->{kernel_or_dev} = grub2dev($e->{rootnoverify} || $e->{grub_root}, $grub2dev);
                 $e->{configfile} = $v;
-            } elsif ($keyword eq 'initrd') {
-                $e->{initrd} = grub2file($v, $grub2dev, $fstab, $e);
             } elsif ($keyword eq 'map') {
 		$e->{mapdrive}{$2} = $1 if $v =~ m/\((.*)\) \((.*)\)/;
             } elsif ($keyword eq 'module') {
@@ -319,8 +314,26 @@ sub read_grub_menu_lst {
 	$e and $e->{verbatim} .= $verbatim;
     }
 
+    %b;
+}
+
+sub read_grub_menu_lst {
+    my ($fstab, $grub2dev) = @_;
+
+    my %b = _parse_grub_menu_lst();
+
+    foreach my $keyword (grep { $_ ne 'entries' } keys %b) {
+	$b{$keyword} = $b{$keyword} eq '' ? 1 : grub2file($b{$keyword}, $grub2dev, $fstab, \%b);
+    }
+
     #- sanitize
     foreach my $e (@{$b{entries}}) {
+	if (member($e->{type}, 'chainloader', 'configfile')) {
+	    $e->{kernel_or_dev} = grub2dev($e->{rootnoverify} || $e->{grub_root}, $grub2dev);
+	} elsif ($e->{initrd}) {
+	    $e->{initrd} = grub2file($e->{initrd}, $grub2dev, $fstab, $e);
+	}
+
 	if ($e->{kernel} =~ /xen/ && @{$e->{modules} || []} == 2 && $e->{modules}[1] =~ /initrd/) {
 	    (my $xen, $e->{xen_append}) = split(' ', $e->{kernel}, 2);
 	    ($e->{kernel}, my $initrd) = @{delete $e->{modules}};
