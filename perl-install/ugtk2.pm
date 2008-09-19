@@ -1442,6 +1442,7 @@ sub new {
     $darea->set_size_request(-1, $d_height);
     $darea->modify_font(Gtk2::Pango::FontDescription->from_string("Sans Bold 14"));
     eval { $darea->{icon} = ugtk2::gtkcreate_pixbuf($icon) };
+    my $blue_part = eval { ugtk2::gtkcreate_pixbuf('banner-blue-part') };
     $darea->{text} = $text;
     require lang;
     my $is_rtl = lang::text_direction_rtl();
@@ -1456,8 +1457,11 @@ sub new {
                                (undef, undef, undef, $d_height) = $darea->window->get_geometry;
                                my $padding = int(($d_height - $height)/2);
                                my $d_width = $darea->allocation->width;
+                               my $x_blue = $is_rtl ? $d_width - $width : 0;
                                my $x_icon = $is_rtl ? $d_width - $padding - $width : $padding;
                                my $x_text = $is_rtl ? $x_icon - $padding - $darea->{txt_width} : $width + $padding*2;
+                               $blue_part->render_to_drawable($darea->window, $style->bg_gc('normal'),
+                                                                  0, 0, $x_blue, 0, -1, -1, 'none', 0, 0);
                                $darea->{icon}->render_to_drawable($darea->window, $style->bg_gc('normal'),
                                                                   0, 0, $x_icon, $padding, -1, -1, 'none', 0, 0);
                                $darea->window->draw_layout($style->fg_gc('normal'), $x_text, $o_options->{txt_ypos} || $d_height/3,
