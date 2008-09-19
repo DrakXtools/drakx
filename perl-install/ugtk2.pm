@@ -1421,6 +1421,7 @@ sub new_with_text {
 
 package Gtk2::Banner;
 
+use mygtk2 qw(gtknew);
 use ugtk2 qw(:helpers :wrappers);
 
 sub set_pixmap {
