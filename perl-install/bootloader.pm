@@ -231,6 +231,9 @@ sub read_grub {
 # - $grub2dev is /boot/grub/device.map
 sub _may_fix_grub2dev {
     my ($fstab, $grub2dev, $boot_part) = @_;
+
+    $boot_part or log::l("install.sh does not contain 'root (hd...)' line, no way to magically adapt device.map"), return;
+
     my $real_boot_part = fs::get::root_($fstab, 'boot') or
       log::l("argh... the fstab given is useless, it doesn't contain '/'"), return;
     

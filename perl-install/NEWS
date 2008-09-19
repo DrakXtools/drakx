@@ -1,3 +1,8 @@
+- bootloader-config, drakboot:
+  o handle /boot/grub/install.sh with no "root (hd...)" line
+    (this is the case for grub's installed prior to 2005-06-16)
+    (#43786, #43431)
+
 Version 11.47.1 - 17 September 2008
 
 - bug fix: add mandatory new modules for dm-crypt
