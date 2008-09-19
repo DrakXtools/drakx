@@ -935,15 +935,15 @@ sub display_release_notes {
 }
 
 sub acceptLicense {
-    my ($o) = @_;
+    my ($in) = @_;
     require messages;
 
-    my $ext = $o->isa('interactive::gtk') ? '.html' : '.txt';
-    my $separator = $o->isa('interactive::gtk') ? "\n\n" : '';
+    my $ext = $in->isa('interactive::gtk') ? '.html' : '.txt';
+    my $separator = $in->isa('interactive::gtk') ? "\n\n" : '';
 
     my $release_notes = join($separator, grep { $_ } map {
         if ($::isInstall) {
-            my $f = install::any::getFile_($o->{stage2_phys_medium}, $_);
+            my $f = install::any::getFile_($::o->{stage2_phys_medium}, $_);
             $f && cat__($f);
         } else {
             my $file = $_;
@@ -957,7 +957,7 @@ sub acceptLicense {
 
     my $r = $::testing ? 'Accept' : 'Refuse';
 
-    $o->ask_from_({ title => N("License agreement"), 
+    $in->ask_from_({ title => N("License agreement"), 
 		    focus_first => 1,
 		     cancel => N("Quit"),
 		     messages => formatAlaTeX(messages::main_license() . "\n\n\n" . messages::warning_about_patents()),
@@ -970,17 +970,16 @@ sub acceptLicense {
                        { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list', alignment => 'right',
                          format => sub { translate($_[0]) } },
                        if_($release_notes,
-                           { clicked => sub { display_release_notes($o, $release_notes) }, do_not_expand => 1,
+                           { clicked => sub { display_release_notes($in, $release_notes) }, do_not_expand => 1,
                              val => \ (my $_t1 = N("Release Notes")), install_button => 1, no_indent => 1 }
                        ), 
                    ])
-      or reboot($o);
+      or reboot();
 }
 
-sub reboot {
-    my ($o) = @_;
-
+sub reboot() {
     if ($::isInstall) {
+	my $o = $::o;
 	install::media::umount_phys_medium($o->{stage2_phys_medium});
 	install::media::openCdromTray($o->{stage2_phys_medium}{device}) if !detect_devices::is_xbox() && $o->{method} eq 'cdrom';
 	$o->exit;
