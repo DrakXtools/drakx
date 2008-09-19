@@ -1462,6 +1462,7 @@ sub new {
                                my $d_width = $darea->allocation->width;
                                my $x_blue = $is_rtl ? $d_width - $blue_width : 0;
                                my $x_icon = $is_rtl ? $d_width - $padding - $width : $padding;
+                               # here: 48 is the amount of white background in the blue background we wish to ignore:
                                my $x_text = $is_rtl ? $d_width - $blue_width + 48 - $darea->{txt_width} : $blue_width - 48;
                                $darea->{layout_height} ||= (($darea->{layout}->get_size)[1])/Gtk2::Pango->PANGO_SCALE;
                                $blue_part->render_to_drawable($darea->window, $style->bg_gc('normal'),
