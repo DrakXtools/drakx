@@ -1440,7 +1440,7 @@ sub new {
     mygtk2::import_style_ressources();
     my $darea = gtknew('DrawingArea', widget_name => 'Banner');
     $darea->{back_pixbuf} = gtknew('Pixbuf', file => 'banner-background');
-    my $d_height = 54;
+    my $d_height = $darea->{back_pixbuf}->get_height;
     $darea->set_size_request(-1, $d_height);
     $darea->modify_font(Gtk2::Pango::FontDescription->from_string("Sans 15"));
     eval { $darea->{icon} = ugtk2::gtkcreate_pixbuf($icon) };
