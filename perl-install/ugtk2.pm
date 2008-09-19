@@ -1441,7 +1441,7 @@ sub new {
     my $darea = gtknew('DrawingArea', widget_name => 'Banner');
     my $d_height = 54;
     $darea->set_size_request(-1, $d_height);
-    $darea->modify_font(Gtk2::Pango::FontDescription->from_string("Sans Bold 14"));
+    $darea->modify_font(Gtk2::Pango::FontDescription->from_string("Sans Bold 15"));
     eval { $darea->{icon} = ugtk2::gtkcreate_pixbuf($icon) };
     my $blue_part = eval { gtknew('Pixbuf', file => 'banner-blue-part', flip => mygtk2::text_direction_rtl()) };
     $darea->{text} = $text;
