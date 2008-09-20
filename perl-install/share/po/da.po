@@ -1,26 +1,22 @@
-# translation of da2.po to dansk
-# translation of da.po to dansk
 # translation of da1.po to
 # translation of da.po to
-# translation of da1.po to Danish
 # translation of da.po to Danish
-# translation of DrakX-da.po to Danish
 # Copyright (C) 2000,2003, 2004, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
 # Troels Liebe Bentsen <tlb@iname.com> 2000.
+#
 # Keld Simonsen <keld@dkuug.dk>, 2000-2003, 2004, 2005, 2007, 2008.
 # Keld Simonsen <keld@rap.dk>, 2005, 2006.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "POT-Creation-Date: 2008-09-19 15:04+0200\n"
-"PO-Revision-Date: 2008-03-22 12:06+0100\n"
+"PO-Revision-Date: 2008-09-21 01:54+0200\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
-"Language-Team: dansk <dansk@dansk-gruppen.dk>\n"
+"Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: any.pm:252 any.pm:855 diskdrake/interactive.pm:580
@@ -92,9 +88,9 @@ msgstr ""
 "Hvilket drev starter du op fra?"
 
 #: any.pm:346
-#, fuzzy, c-format
+#, c-format
 msgid "First sector (MBR) of drive %s"
-msgstr "Første sektor på disken (MBR)"
+msgstr "Første sektor (MBR) på drev %s"
 
 #: any.pm:348
 #, c-format
@@ -117,9 +113,9 @@ msgid "Skip"
 msgstr "Spring over"
 
 #: any.pm:358
-#, fuzzy, c-format
+#, c-format
 msgid "Bootloader Installation"
-msgstr "Installation af systemopstarteren er i gang"
+msgstr "Installation af systemopstarter"
 
 #: any.pm:362
 #, c-format
@@ -214,8 +210,7 @@ msgstr "begræns"
 
 #: any.pm:421
 #, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
+msgid "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 "Indstillingen ``Begræns kommandolinie-indstillinger'' er intet værd uden\n"
 "en adgangskode"
@@ -351,9 +346,9 @@ msgid "Other OS (Windows...)"
 msgstr "Andet styresystem (Windows...)"
 
 #: any.pm:594
-#, fuzzy, c-format
+#, c-format
 msgid "Bootloader Configuration"
-msgstr "Konfiguration af opstartsudseende"
+msgstr "Konfiguration af opstarter"
 
 #: any.pm:595
 #, c-format
@@ -406,8 +401,7 @@ msgstr "Indtast et brugernavn"
 
 #: any.pm:781
 #, c-format
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr "Brugernavnet må kun indeholde små bogstaver, tal, `-' og `_'"
 
 #: any.pm:782
@@ -488,8 +482,7 @@ msgstr "Autologin"
 #: any.pm:884
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
-msgstr ""
-"Jeg kan sætte din maskine op til automatisk at logge en bestemt bruger på."
+msgstr "Jeg kan sætte din maskine op til automatisk at logge en bestemt bruger på."
 
 #: any.pm:885
 #, c-format
@@ -527,9 +520,9 @@ msgid "Quit"
 msgstr "Afslut"
 
 #: any.pm:974
-#, fuzzy, c-format
+#, c-format
 msgid "Do you accept this license ?"
-msgstr "Har du én til?"
+msgstr "Accepterer du denne licens?"
 
 #: any.pm:975
 #, c-format
@@ -552,8 +545,7 @@ msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
-msgstr ""
-"Du kan vælge andre sprog der vil være tilgængelige efter installationen"
+msgstr "Du kan vælge andre sprog der vil være tilgængelige efter installationen"
 
 #: any.pm:1033
 #, c-format
@@ -659,8 +651,7 @@ msgstr ""
 
 #: any.pm:1243
 #, c-format
-msgid ""
-"You can export using NFS or SMB. Please select which you would like to use."
+msgid "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Du kan eksportere med NFS eller SMB. Hvilken vil du bruge"
 
 #: any.pm:1271
@@ -764,8 +755,7 @@ msgstr "Lokal fil:"
 
 #: authentication.pm:64
 #, c-format
-msgid ""
-"Use local for all authentication and information user tell in local file"
+msgid "Use local for all authentication and information user tell in local file"
 msgstr ""
 
 #: authentication.pm:65
@@ -1014,8 +1004,7 @@ msgstr "Ingen adgangskode"
 #: authentication.pm:259
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
-msgstr ""
-"Denne adgangskode er for nemt at gætte (det skal mindst være på %d tegn)"
+msgstr "Denne adgangskode er for nemt at gætte (det skal mindst være på %d tegn)"
 
 #: authentication.pm:364
 #, c-format
@@ -1632,10 +1621,8 @@ msgstr "Fjern loopback-filen?"
 
 #: diskdrake/interactive.pm:558
 #, c-format
-msgid ""
-"After changing type of partition %s, all data on this partition will be lost"
-msgstr ""
-"Efter type-ændring af partition %s vil alle data på denne partition gå tabt"
+msgid "After changing type of partition %s, all data on this partition will be lost"
+msgstr "Efter type-ændring af partition %s vil alle data på denne partition gå tabt"
 
 #: diskdrake/interactive.pm:571
 #, c-format
@@ -1887,8 +1874,7 @@ msgstr "Formaterer partition %s"
 #: diskdrake/interactive.pm:1164
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
-msgstr ""
-"Efter formatering af partitionen %s vil alle data på denne partition gå tabt"
+msgstr "Efter formatering af partitionen %s vil alle data på denne partition gå tabt"
 
 #: diskdrake/interactive.pm:1173 fs/partitioning.pm:48
 #, c-format
@@ -2155,8 +2141,7 @@ msgstr "Vælg din krypteringsnøgle for filsystemet"
 #: diskdrake/interactive.pm:1374
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
-msgstr ""
-"Denne krypteringsnøgle er for nem at gætte (skal mindst være på %d tegn)"
+msgstr "Denne krypteringsnøgle er for nem at gætte (skal mindst være på %d tegn)"
 
 #: diskdrake/interactive.pm:1375
 #, c-format
@@ -2208,8 +2193,7 @@ msgstr "En anden"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
+msgid "Please enter your username, password and domain name to access this host."
 msgstr ""
 "Indtast venligst dit brugernavn, din adgangskode og dit domænenavn for at få "
 "adgang til denne vært."
@@ -2577,8 +2561,7 @@ msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
 "computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
 "the Mandriva Linux installation."
-msgstr ""
-"Din Microsoft Windows® partition er for fragmenteret, kør 'defrag' først"
+msgstr "Din Microsoft Windows® partition er for fragmenteret, kør 'defrag' først"
 
 #: fs/partitioning_wizard.pm:156
 #, c-format
@@ -2629,8 +2612,7 @@ msgstr "Opdeling af disk"
 #: fs/partitioning_wizard.pm:168
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
-msgstr ""
-"Hvilken størrelse ønsker du at at beholde Microsoft Windows® på partition %s?"
+msgstr "Hvilken størrelse ønsker du at at beholde Microsoft Windows® på partition %s?"
 
 #: fs/partitioning_wizard.pm:169
 #, c-format
@@ -3137,7 +3119,7 @@ msgstr ""
 "Her kan du vælge et alternativ drivprogram (enten OSS eller ALSA) for "
 "lydkortet (%s)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:392
@@ -4681,8 +4663,7 @@ msgstr "Velkommen til %s"
 #: lvm.pm:84
 #, c-format
 msgid "Moving used physical extents to other physical volumes failed"
-msgstr ""
-"Flytning af brugte fysiske områder til andre fysiske volumener lykkedes ikke"
+msgstr "Flytning af brugte fysiske områder til andre fysiske volumener lykkedes ikke"
 
 #: lvm.pm:141
 #, c-format
@@ -5308,14 +5289,12 @@ msgstr "Skannerdrake"
 #: scanner.pm:201
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
-msgstr ""
-"Kunne ikke installere de nødvendige pakker til deling af dine skannere."
+msgstr "Kunne ikke installere de nødvendige pakker til deling af dine skannere."
 
 #: scanner.pm:202
 #, c-format
 msgid "Your scanner(s) will not be available for non-root users."
-msgstr ""
-"Dinne skannere vil ikke være tilgængelige for brugere, der ikke er root."
+msgstr "Dinne skannere vil ikke være tilgængelige for brugere, der ikke er root."
 
 #: security/help.pm:11
 #, c-format
@@ -5370,10 +5349,8 @@ msgstr "Tillad direkte root-logind."
 
 #: security/help.pm:33
 #, c-format
-msgid ""
-"Allow the list of users on the system on display managers (kdm and gdm)."
-msgstr ""
-"Tillad listen af brugere på systemet på skærmhåndteringer (kdm og gdm)."
+msgid "Allow the list of users on the system on display managers (kdm and gdm)."
+msgstr "Tillad listen af brugere på systemet på skærmhåndteringer (kdm og gdm)."
 
 #: security/help.pm:35
 #, c-format
@@ -5563,8 +5540,7 @@ msgstr ""
 #: security/help.pm:104
 #, c-format
 msgid "Set the password history length to prevent password reuse."
-msgstr ""
-"Sæt længden på adgangskodehistorik for at forhindre genbrug af adgangskoder."
+msgstr "Sæt længden på adgangskodehistorik for at forhindre genbrug af adgangskoder."
 
 #: security/help.pm:106
 #, c-format
@@ -5607,14 +5583,12 @@ msgstr ""
 #: security/help.pm:117
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
-msgstr ""
-"hvis sat til ja, så tjek rettigheder på filer i brugernes hjemmekataloger."
+msgstr "hvis sat til ja, så tjek rettigheder på filer i brugernes hjemmekataloger."
 
 #: security/help.pm:118
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
-msgstr ""
-"hvis sat til ja, så tjek om netværksgrænsesnittene er fuldstændigt åbne."
+msgstr "hvis sat til ja, så tjek om netværksgrænsesnittene er fuldstændigt åbne."
 
 #: security/help.pm:119
 #, c-format
@@ -5658,8 +5632,7 @@ msgstr "hvis sat til ja, så kør chkrootkit-kontroller."
 
 #: security/help.pm:127
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
+msgid "if set, send the mail report to this email address else send it to root."
 msgstr ""
 "hvis sat, så send postrapporter til denne postadresse, ellers send dem til "
 "root."
@@ -5692,8 +5665,7 @@ msgstr "hvis sat til ja, så rapportér kontrolresultat på tty-en."
 #: security/help.pm:134
 #, c-format
 msgid "Set shell commands history size. A value of -1 means unlimited."
-msgstr ""
-"Sæt historiklængden for kommandoskallen. En værdi på -1 betyder ubegrænset."
+msgstr "Sæt historiklængden for kommandoskallen. En værdi på -1 betyder ubegrænset."
 
 #: security/help.pm:136
 #, c-format
@@ -5843,8 +5815,7 @@ msgstr "Ingen ældning af adgangskode for"
 #: security/l10n.pm:38
 #, c-format
 msgid "Set password expiration and account inactivation delays"
-msgstr ""
-"Sæt udløbstid for adgangskoder og forsinkelsestider for deaktivering af konti"
+msgstr "Sæt udløbstid for adgangskoder og forsinkelsestider for deaktivering af konti"
 
 #: security/l10n.pm:39
 #, c-format
@@ -6136,8 +6107,7 @@ msgstr ""
 
 #: services.pm:28
 #, c-format
-msgid ""
-"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr "Common UNIX Printing System (CUPS) er et avanceret udskrifts-køsystem."
 
 #: services.pm:29
@@ -6171,8 +6141,7 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
-"HAL er en tjeneste som indsamler og vedligeholder information om maskinel"
+msgstr "HAL er en tjeneste som indsamler og vedligeholder information om maskinel"
 
 #: services.pm:36
 #, c-format
@@ -6185,8 +6154,7 @@ msgstr ""
 
 #: services.pm:38
 #, c-format
-msgid ""
-"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr "Apache er en webserver.  Den bruges til at betjene HTML-filer og CGI."
 
 #: services.pm:39
@@ -6433,8 +6401,7 @@ msgstr ""
 
 #: services.pm:92
 #, c-format
-msgid ""
-"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
 "SANE (Scanner Access Now Easy) giver adgang til skannere, filmkameraer og "
 "lignende."
@@ -6934,181 +6901,3 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Installation mislykkedes"
 
-#~ msgid ""
-#~ "\n"
-#~ "Warning\n"
-#~ "\n"
-#~ "Please read carefully the terms below. If you disagree with any\n"
-#~ "portion, you are not allowed to install the next CD media. Press "
-#~ "'Refuse' \n"
-#~ "to continue the installation without using these media.\n"
-#~ "\n"
-#~ "\n"
-#~ "Some components contained in the next CD media are not governed\n"
-#~ "by the GPL License or similar agreements. Each such component is then\n"
-#~ "governed by the terms and conditions of its own specific license. \n"
-#~ "Please read carefully and comply with such specific licenses before \n"
-#~ "you use or redistribute the said components. \n"
-#~ "Such licenses will in general prevent the transfer,  duplication \n"
-#~ "(except for backup purposes), redistribution, reverse engineering, \n"
-#~ "de-assembly, de-compilation or modification of the component. \n"
-#~ "Any breach of agreement will immediately terminate your rights under \n"
-#~ "the specific license. Unless the specific license terms grant you such\n"
-#~ "rights, you usually cannot install the programs on more than one\n"
-#~ "system, or adapt it to be used on a network. In doubt, please contact \n"
-#~ "directly the distributor or editor of the component. \n"
-#~ "Transfer to third parties or copying of such components including the \n"
-#~ "documentation is usually forbidden.\n"
-#~ "\n"
-#~ "\n"
-#~ "All rights to the components of the next CD media belong to their \n"
-#~ "respective authors and are protected by intellectual property and \n"
-#~ "copyright laws applicable to software programs.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Advarsel\n"
-#~ "\n"
-#~ "Læs venligst betingelserne nedenfor omhyggeligt. Hvis du ikke er enig i "
-#~ "alt der står, må du ikke installere indholdet af CD-en. Tryk på 'Nægt'  "
-#~ "for at fortsætte installationen uden disse cdrommer.\n"
-#~ "\n"
-#~ "\n"
-#~ "Visse komponenter på den næste CD er ikke omfattet af GPL-licensen eller  "
-#~ "andre lignende licenser. Hver enkelt komponent er derfor omfattet af  de "
-#~ "betingelser der er beskrevet i dets egen licens.  Læs derfor venligst "
-#~ "betingelserne omhyggeligt og følg de opstillede betingelser når du bruger "
-#~ "og/eller videredistribuerer komponenterne. Sådanne licenser forhindrer "
-#~ "normalt kopiering (sikkerhedskopiering undtaget),  videredistribuering, "
-#~ "at folk skiller programmet ad, eller ændrer i komponenterne. Ethvert brud "
-#~ "på licensen vil øjeblikkeligt fratage dig rettighederne beskrevet i den "
-#~ "specifikke licens. Medmindre licensen giver dig lov hertil, vil det  "
-#~ "normalt ikke være tilladt at installere programmet på mere end én "
-#~ "maskine,  eller bruge det på et netværk. Hvis du er i tvivl, så kontakt "
-#~ "venligst producenten af komponenten direkte. Overdragelse til tredjemand "
-#~ "eller kopiering af sådanne komponenter inklusive  dokumentationen er "
-#~ "normalt forbudt.\n"
-#~ "\n"
-#~ "\n"
-#~ "Alle rettigheder til komponenterne på CD-en tilhører deres respektive "
-#~ "skabere og er beskyttet af Lov om Ophavsret.\n"
-
-#~ msgid "Use libsafe for servers"
-#~ msgstr "Brug libsafe for servere"
-
-#~ msgid ""
-#~ "A library which defends against buffer overflow and format string attacks."
-#~ msgstr ""
-#~ "Et bibliotek som beskytter mod angreb via bufferoverløb og formatstrenge."
-
-#~ msgid "LILO/grub Installation"
-#~ msgstr "LILO/grub-installering"
-
-#~ msgid "Precise RAM size if needed (found %d MB)"
-#~ msgstr "Præcis RAM-mængde, hvis påkrævet (fandt %d Mb)"
-
-#~ msgid "Give the ram size in MB"
-#~ msgstr "Angiv RAM-størrelse i Mb"
-
-#~ msgid ""
-#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
-#~ "is enough)\n"
-#~ "at the beginning of the disk"
-#~ msgstr ""
-#~ "Hvis du planlægger at bruge Yaboot, skal du huske at efterlade fri plads "
-#~ "på\n"
-#~ "begyndelsen af disken (2048 sektorer skulle være nok)"
-
-#~ msgid "Security level"
-#~ msgstr "Sikkerhedsniveau"
-
-#~ msgid "Expand Tree"
-#~ msgstr "Udvid træ"
-
-#~ msgid "Collapse Tree"
-#~ msgstr "Sammenfold træ"
-
-#~ msgid "Toggle between flat and group sorted"
-#~ msgstr "Skift mellem flad og gruppesorteret"
-
-#~ msgid "Choose action"
-#~ msgstr "Vælg handling"
-
-#~ msgid "Active Directory with SFU"
-#~ msgstr "Active Directory med SFU"
-
-#~ msgid "Active Directory with Winbind"
-#~ msgstr "Active Directory med Winbind"
-
-#~ msgid "Use information stored in local files for all authentication"
-#~ msgstr "Brug information lagret i lokale filer for al autentisering"
-
-#~ msgid "Active Directory with SFU:"
-#~ msgstr "Active Directory med SFU:"
-
-#~ msgid "Active Directory with Winbind:"
-#~ msgstr "Active Directory med WInbind"
-
-#~ msgid ""
-#~ "Winbind allows the system to authenticate users in a Windows Active "
-#~ "Directory Server."
-#~ msgstr ""
-#~ "Winbind lader systemet autentificere brugere i Windows Active Directory "
-#~ "Server."
-
-#~ msgid "Authentication LDAP"
-#~ msgstr "Autentificering LDAP"
-
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid "SSL"
-#~ msgstr "SSL"
-
-#~ msgid "security layout (SASL/Kerberos)"
-#~ msgstr "sikkerhedsopsætning (SASL/Kerberos)"
-
-#~ msgid "Authentication Active Directory"
-#~ msgstr "Autentifikation for Active Directory"
-
-#~ msgid "LDAP users database"
-#~ msgstr "LDAP-brugerdatabase"
-
-#~ msgid "LDAP user allowed to browse the Active Directory"
-#~ msgstr "LDAP-bruger som har tilladelse til at kigge i Active Directory"
-
-#~ msgid "Password for user"
-#~ msgstr "Adgangskode for bruger"
-
-#~ msgid "Authentication NIS"
-#~ msgstr "Autentificering NIS"
-
-#~ msgid ""
-#~ "For this to work for a W2K PDC, you will probably need to have the admin "
-#~ "run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
-#~ "add and reboot the server.\n"
-#~ "You will also need the username/password of a Domain Admin to join the "
-#~ "machine to the Windows(TM) domain.\n"
-#~ "If networking is not yet enabled, Drakx will attempt to join the domain "
-#~ "after the network setup step.\n"
-#~ "Should this setup fail for some reason and domain authentication is not "
-#~ "working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows"
-#~ "(tm) Domain, and Admin Username/Password, after system boot.\n"
-#~ "The command 'wbinfo -t' will test whether your authentication secrets are "
-#~ "good."
-#~ msgstr ""
-#~ "For at dette kan virke på en W2K PDC skal du nok have administratoren til "
-#~ "at køre: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" "
-#~ "everyone /add og genstarte serveren.\n"
-#~ "Du skal også have et brugernavn og en adgangskode for at maskinen kan "
-#~ "tilsluttes Windows(TM)-domænet.\n"
-#~ "Hvis netværket ikke er aktiveret vil Drakx prøve at slutte til domænet "
-#~ "efter trinnet med opsætning af netværk.\n"
-#~ "Skulle denne opsætning fejle af nogen årsag, og domæneautentifikation "
-#~ "ikke virke, så kør 'smbpasswd -j DOMAIN -U USER%%PASSWORD' med dit Windows"
-#~ "(tm) domæne og administrators brugernavn/adgangskode, efter genstart af "
-#~ "systemet.\n"
-#~ "Kommandoen 'wbinfo -t' vil afprøve om dine hemmelige autentifikationsdata "
-#~ "er i orden."
-
-#~ msgid "Authentication Windows Domain"
-#~ msgstr "Autentifikations Windowsdomæne"
