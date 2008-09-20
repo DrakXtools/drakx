@@ -265,7 +265,8 @@ $error) :
 GDB backtrace was (its interesting part is below Perl_pp_fork() or Perl_pp_waitpid()):
 $gdb_trace)),
                                )
-                                 . qq(Kernel version = $kernel_release
+                                 . qq(
+Kernel version = $kernel_release
 ) . if_($cpuinfo, "CPU=$cpuinfo")
                            ),
                    );
