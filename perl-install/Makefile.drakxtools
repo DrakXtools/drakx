@@ -1,6 +1,8 @@
 # -*- Makefile -*-
 include Makefile.config
 
+.PHONY: install
+
 INLIBDEST_DIRS = c resize_fat xf86misc
 HAVEINST_DIRS = share/po standalone/po standalone/interactive_http standalone/menu
 DIRS = $(INLIBDEST_DIRS) $(HAVEINST_DIRS) harddrake printer ../tools/serial_probe standalone/menu
