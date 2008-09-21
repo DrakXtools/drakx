@@ -1510,9 +1510,9 @@ msgid "Add to LVM"
 msgstr "加入 LVM"
 
 #: diskdrake/interactive.pm:406
-#, fuzzy, c-format
+#, c-format
 msgid "Use"
-msgstr "用户 ID"
+msgstr "使用"
 
 #: diskdrake/interactive.pm:408
 #, c-format
@@ -1530,9 +1530,9 @@ msgid "Remove from LVM"
 msgstr "从 LVM 中移除"
 
 #: diskdrake/interactive.pm:411
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from dm"
-msgstr "从 LVM 中移除"
+msgstr "从 dm 中移除"
 
 #: diskdrake/interactive.pm:412
 #, c-format
@@ -1711,9 +1711,9 @@ msgid "Filesystem encryption key"
 msgstr "文件系统加密密钥"
 
 #: diskdrake/interactive.pm:827
-#, fuzzy, c-format
+#, c-format
 msgid "Enter your filesystem encryption key"
-msgstr "选择该文件系统的加密密钥"
+msgstr "输入您的文件系统加密密钥"
 
 #: diskdrake/interactive.pm:828 diskdrake/interactive.pm:1378
 #, c-format
@@ -1723,7 +1723,7 @@ msgstr "加密密钥"
 #: diskdrake/interactive.pm:835
 #, c-format
 msgid "Invalid key"
-msgstr ""
+msgstr "无效的密钥"
 
 #: diskdrake/interactive.pm:843
 #, c-format
@@ -1982,24 +1982,24 @@ msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
 #: diskdrake/interactive.pm:1281
-#, fuzzy, c-format
+#, c-format
 msgid "Encrypted"
-msgstr "加密密钥"
+msgstr "已加密"
 
 #: diskdrake/interactive.pm:1281
 #, c-format
 msgid " (mapped on %s)"
-msgstr ""
+msgstr " (已映射为 %s)"
 
 #: diskdrake/interactive.pm:1282
 #, c-format
 msgid " (to map on %s)"
-msgstr ""
+msgstr "  (应映射为 %s)"
 
 #: diskdrake/interactive.pm:1283
 #, c-format
 msgid " (inactive)"
-msgstr ""
+msgstr " (交互)"
 
 #: diskdrake/interactive.pm:1289
 #, c-format
@@ -4626,7 +4626,7 @@ msgid "The bootloader can't handle /boot on multiple physical volumes"
 msgstr "引导程序无法识别多个物理卷上的 /boot"
 
 #: messages.pm:11
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Introduction\n"
 "\n"
@@ -4755,7 +4755,7 @@ msgstr ""
 "简介\n"
 "\n"
 "Mandriva Linux 发行版中提供的操作系统和各种程序在此后简称为“本软件产品”。软件"
-"产品包括但不限于与 Mandriva Linux 发行版的操作系统和各个部分有关的程序、方"
+"产品包括但不限于 Mandriva 许可商或供应商提供的与 Mandriva Linux 发行版的操作系统和各个部分有关的程序、方"
 "法、规则和文档。\n"
 "\n"
 "\n"
@@ -4788,9 +4788,8 @@ msgstr ""
 "\n"
 "3. GPL 许可协议和其它有关协议\n"
 "\n"
-"本软件产品由不同个人或组织所创作的各部分组成。这些部分基本上都采用 GNU 通用公"
-"共许可协议(GNU General Public Licence), 此后简称为“GPL”, 或其它类似的许可协议"
-"的条款和条件。这些许可协议大多允许您使用、复制、修改或重新发表协议所覆盖的部"
+"本软件产品由不同个人或组织所创作的各部分组成。%s"
+"这些许可协议大多允许您使用、复制、修改或重新发表协议所覆盖的部"
 "分。使用这些软件之前, 请仔细阅读有关许可协议的条款和条件。如果对任何部分的许"
 "可协议有疑问, 应该与该部分的作者联系, Mandriva 无法解答这些问题。由 Mandriva "
 "S.A. 开发的各个程序受 GPL 许可协议保护。由 Mandriva S.A. 创作的文档采用一个特"
@@ -4810,9 +4809,7 @@ msgstr ""
 "如果本协议的任何部分被法院裁定为无效、非法或不适用, 该部分将被排除在本协议之"
 "外。您仍然需要遵守本协议的其它可使用的部分。本协议的内容和条件受法国法律管"
 "辖。有关本协议的任何争议最好在法庭外解决。作为最后的手段, 争议将被提交法国巴"
-"黎适当的法院审理。对本文档有任何疑问, 请联系 Mandriva S.A.。\n"
-"\n"
-"以上中文翻译仅为方便您理解, 不能作为法律用途, 请以协议英文文本为准。\n"
+"黎适当的法院审理。对本文档有任何疑问, 请联系 Mandriva S.A.。"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: messages.pm:90
@@ -4853,6 +4850,7 @@ msgid ""
 "conditions of the GNU \n"
 "General Public Licence, hereafter called \"GPL\", or of similar licenses."
 msgstr ""
+"除 Goolge Inc 及其子公司所提供的应用软件和软件之外，这些组件中的绝大多数以 GNU GPL 许可协议(以后简称“GPL”)或类似的协议发布。"
 
 #: messages.pm:107
 #, c-format
@@ -4861,6 +4859,7 @@ msgid ""
 "GNU \n"
 "General Public Licence, hereafter called \"GPL\", or of similar licenses."
 msgstr ""
+"这些组件中的绝大多数以 GNU GPL 许可协议(以后简称“GPL”)或类似的协议发布。"
 
 #: messages.pm:112
 #, c-format
