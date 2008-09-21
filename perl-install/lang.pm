@@ -669,6 +669,18 @@ my %IM_config =
            zh => sub { qw(scim-pinyin scim-tables scim-chewing) },
        },
    },
+   'ibus' => {
+	GTK_IM_MODULE => 'ibus',
+	XIM_PROGRAM => 'ibus',
+	XMODIFIERS => '@im=ibus',
+	packages => {
+		common => sub { if_($is_kde4, 'ibus-qt4') },
+		generic => sub { qw(ibus-table ibus-m17n) },
+		ja => sub { qw(ibus-anthy) },
+		zh => sub { qw(ibus-pinyin ibus-chewing) },
+		ko => sub { qw(ibus-hangul) },
+	},
+   },
    skim => {
             GTK_IM_MODULE => 'scim',
             XIM_PROGRAM => 'skim -d',
