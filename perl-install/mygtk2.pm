@@ -625,6 +625,53 @@ sub _gtk__Expander {
     $w;
 }
 
+
+
+sub _gtk__MDV_Notebook {
+    my ($w, $opts, $_class, $action) = @_;
+    if (!$w) {
+        import_style_ressources();
+
+        my ($layout, $selection_arrow, $selection_bar);
+        my $parent_window = delete $opts->{parent_window} || root_window();
+        my $root_height = first($parent_window->get_size());
+        my $suffix = $::testing || $root_height eq 800 ? '_600' : '_768';
+        # the white square is a little bit above the actual left sidepanel:
+        my $offset = 20;
+        my $is_flip_needed = text_direction_rtl();
+        my $left_background = gtknew('Image', file => 'left-background.png');
+        my $right_background = gtknew('Image', file => "right-white-background_left_part$suffix", flip => $is_flip_needed);
+        my $width1 = $left_background->get_pixbuf->get_width;
+        my $total_width = $width1 + $right_background->get_pixbuf->get_width;
+        my $arrow_x = text_direction_rtl() ? $offset/2 -4 : $::stepswidth - $offset -3;
+        $w = gtknew('HBox', spacing => 0, children => [
+            0, $layout = gtknew('Layout', width => $total_width - $offset, children => [ #Layout Fixed
+                # stacking order is important for "Z-buffer":
+                [ $left_background, 0, 0 ],
+                if_($suffix ne '_600',
+                   [ gtknew('Image', file => 'left-background-filler.png'), 0, $left_background->get_pixbuf->get_height ],
+                ),
+                [ $selection_bar = gtknew('Image', file => 'rollover.png'), 0, 0 ], # arbitrary vertical position
+                ($opts->{children} ? @{ delete $opts->{children} } : ()),
+                [ $right_background, (text_direction_rtl() ? 0 : $width1 - $offset), 0 ],
+                # stack on top (vertical position is arbitrary):
+                [ $selection_arrow = gtknew('Image', file => 'steps_on', flip => $is_flip_needed), $arrow_x, 0, ],
+            ]),
+            0, gtknew('Image', file => "right-white-background_right_part$suffix", flip => $is_flip_needed),
+        ]);
+
+        bless($w, 'Gtk2::MDV_Notebook');
+        add2hash($w, {
+            arrow_x         => $arrow_x,
+            layout          => $layout,
+            selection_arrow => $selection_arrow,
+            selection_bar   =>$selection_bar,
+        });
+    }
+    $w;
+}
+
+
 sub _gtk__Fixed {
     my ($w, $opts, $_class, $action) = @_;
 	
@@ -1347,5 +1394,23 @@ sub text_direction_rtl() {
     Gtk2::Widget->get_default_direction() eq 'rtl';
 }
 
+package Gtk2::MDV_Notebook; # helper functions for installer & mcc
+our @ISA = qw(Gtk2::Widget);
+
+sub hide_selection {
+    my ($w) = @_;
+    $_->hide foreach $w->{selection_bar}, $w->{selection_arrow};
+}
+
+sub move_selection {
+    my ($w, $y) = @_;
+    my $layout = $w->{layout};
+    $layout->{arrow_ydiff} ||=
+      ($w->{selection_arrow}->get_pixbuf->get_height - $w->{selection_bar}->get_pixbuf->get_height)/2;
+    my $bar_y = $y -3; # text's pos_y -3
+    $layout->move($w->{selection_bar}, 0, $bar_y);
+    $layout->move($w->{selection_arrow}, $w->{arrow_x}, $bar_y - $layout->{arrow_ydiff}); # arrow is higer
+    $_->show foreach $w->{selection_bar}, $w->{selection_arrow};
+}
 
 1;
