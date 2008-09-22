@@ -362,7 +362,7 @@ sub _gtk__Label_Left {
 sub _gtk__Label_Right {
     my ($w, $opts) = @_;
     $opts->{alignment} ||= [ 1, 0.5 ];
-    _gtk__Label($w, $opts);
+    _gtk__WrappedLabel($w, $opts);
 }
 
 
