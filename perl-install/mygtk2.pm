@@ -12,7 +12,6 @@ use log;
 use common;
 
 use Gtk2;
-use Gtk2::Gdk::Keysyms;
 
 sub init() {
     !check_for_xserver() and print("Cannot be run in console mode.\n"), c::_exit(0);

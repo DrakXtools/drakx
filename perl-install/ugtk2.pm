@@ -39,7 +39,6 @@ use common;
 use mygtk2 qw(gtknew); #- do not import gtkadd which conflicts with ugtk2 version
 
 use Gtk2;
-use Gtk2::Gdk::Keysyms;
 
 
 $border = 5;
