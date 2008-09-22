@@ -104,6 +104,12 @@ sub install_theme {
     $root_window = $win;
 }
 
+sub create_step_box {
+    gtknew('HBox', spacing => 7, children => [
+        @_,
+    ]);
+}
+
 #------------------------------------------------------------------------------
 my %steps;
 sub create_steps_window {
@@ -112,11 +118,12 @@ sub create_steps_window {
     $o->{steps_window} and $o->{steps_window}->destroy;
 
     $steps{$_} ||= gtknew('Pixbuf', file => "steps_$_") foreach qw(on off done);
+
     my $category = sub { 
-	gtknew('HBox', spacing => 7, children => [ 
+	create_step_box(
 	    1, gtknew('Label_Right', text_markup => '<b>' . uc($_[0]) . '</b>', widget_name => 'Step-categories'),
 	    0, gtknew('Image', file => 'steps_off.png'),
-	]);
+	);
     };
 
     my @l = (
@@ -128,10 +135,10 @@ sub create_steps_window {
 	}
 	my $img = gtknew('Image', file => 'steps_off.png');
 	$steps{steps}{$_}{img} = $img;
-	push @l, gtknew('HBox', spacing => 7, children => [
+	push @l, create_step_box(
             1, $steps{steps}{$_}{text} = gtknew('Label_Right', text => translate($o->{steps}{$_}{text})),
             0, $img,
-        ]);
+        );
     }
 
     my $offset = 10;
