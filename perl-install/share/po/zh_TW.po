@@ -97,9 +97,9 @@ msgstr ""
 "您目前是用那顆硬碟開機呢？"
 
 #: any.pm:346
-#, fuzzy, c-format
+#, c-format
 msgid "First sector (MBR) of drive %s"
-msgstr "硬碟的第一個扇區 (MBR)"
+msgstr "%s 硬碟的第一個扇區 (MBR)"
 
 #: any.pm:348
 #, c-format
@@ -755,7 +755,7 @@ msgstr "Windows 網域"
 #: authentication.pm:30
 #, c-format
 msgid "Kerberos 5"
-msgstr ""
+msgstr "Kerberos 5"
 
 #: authentication.pm:64
 #, c-format
@@ -807,7 +807,7 @@ msgstr ""
 #: authentication.pm:68
 #, c-format
 msgid "Kerberos 5 :"
-msgstr ""
+msgstr "Kerberos 5 :"
 
 #: authentication.pm:68
 #, c-format
@@ -819,20 +819,20 @@ msgstr "使用 Kerberos 與 LDAP 來在 Active Directory 伺服器上進行認�
 #: authentication.pm:884
 #, c-format
 msgid " "
-msgstr ""
+msgstr " "
 
 #: authentication.pm:103 authentication.pm:137 authentication.pm:183
 #: authentication.pm:207
-#, fuzzy, c-format
+#, c-format
 msgid "Welcome to the Authentication Wizard"
-msgstr "需要 Domain 認證"
+msgstr "歡迎使用認證設定精靈"
 
 #: authentication.pm:105
 #, c-format
 msgid ""
 "You have selected LDAP authentication. Please review the configuration "
 "options below "
-msgstr ""
+msgstr "您選擇了 LDAP 認證。請檢視以下設定選項"
 
 #: authentication.pm:107 authentication.pm:162
 #, c-format
@@ -857,15 +857,15 @@ msgstr ""
 #: authentication.pm:112 authentication.pm:167
 #, c-format
 msgid "Download CA Certificate "
-msgstr ""
+msgstr "下載 CA 憑證"
 
 #: authentication.pm:114 authentication.pm:147
 #, c-format
 msgid "Use Disconnect mode "
-msgstr ""
+msgstr "使用離線模式"
 
 #: authentication.pm:115 authentication.pm:168
-#, fuzzy, c-format
+#, c-format
 msgid "Use anonymous BIND "
 msgstr "使用匿名 BIND"
 
@@ -873,7 +873,7 @@ msgstr "使用匿名 BIND"
 #: authentication.pm:125
 #, c-format
 msgid "  "
-msgstr ""
+msgstr "  "
 
 #: authentication.pm:117 authentication.pm:169
 #, c-format
@@ -881,9 +881,9 @@ msgid "Bind DN "
 msgstr ""
 
 #: authentication.pm:118 authentication.pm:170
-#, fuzzy, c-format
+#, c-format
 msgid "Bind Password "
-msgstr "密碼"
+msgstr "Bind 密碼"
 
 #: authentication.pm:120
 #, c-format
@@ -910,7 +910,7 @@ msgstr ""
 msgid ""
 "You have selected Kerberos 5 authentication. Please review the configuration "
 "options below "
-msgstr ""
+msgstr "您選擇了 Kerberos 5 認證。請檢視以下設定選項"
 
 #: authentication.pm:141
 #, fuzzy, c-format
@@ -918,9 +918,9 @@ msgid "Realm "
 msgstr "真實名稱"
 
 #: authentication.pm:143
-#, fuzzy, c-format
+#, c-format
 msgid "KDCs Servers"
-msgstr "LDAP 伺服器"
+msgstr "KDCs 伺服器"
 
 #: authentication.pm:145
 #, c-format
@@ -959,7 +959,7 @@ msgstr ""
 msgid ""
 "You have selected NIS authentication. Please review the configuration "
 "options below "
-msgstr ""
+msgstr "您選擇了 NIS 認證。請檢視以下設定選項"
 
 #: authentication.pm:187
 #, c-format
@@ -976,7 +976,7 @@ msgstr "NIS 伺服器"
 msgid ""
 "You have selected Windows Domain authentication. Please review the "
 "configuration options below "
-msgstr ""
+msgstr "您選擇了 Windows 網域認證。請檢視以下設定選項"
 
 #: authentication.pm:213
 #, fuzzy, c-format
@@ -1255,7 +1255,7 @@ msgstr "分割磁區"
 #: diskdrake/hd_gtk.pm:68
 #, c-format
 msgid "Click on a partition, choose a filesystem type then choose an action"
-msgstr ""
+msgstr "點選一個分割區，選擇檔案系統類型然後選擇一個動作"
 
 #: diskdrake/hd_gtk.pm:105 diskdrake/interactive.pm:1066
 #: diskdrake/interactive.pm:1076 diskdrake/interactive.pm:1129
@@ -2081,7 +2081,7 @@ msgstr ""
 #: diskdrake/interactive.pm:1311
 #, c-format
 msgid "Free space on %s (%s)"
-msgstr ""
+msgstr "%s 上的可用空間 (%s)"
 
 #: diskdrake/interactive.pm:1320
 #, c-format
@@ -2502,9 +2502,9 @@ msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr "沒有可用的 FAT 分割區能當成 loopback 使用 (或者是沒有足夠的剩餘空間)"
 
 #: fs/partitioning_wizard.pm:127
-#, fuzzy, c-format
+#, c-format
 msgid "Use the free space on a Microsoft Windows® partition"
-msgstr "使用 Windows 分割區所剩餘的可用空間"
+msgstr "使用 Microsoft Windows® 分割區中所剩餘的可用空間"
 
 #: fs/partitioning_wizard.pm:129
 #, c-format
@@ -5075,39 +5075,39 @@ msgstr ""
 #: pkgs.pm:229 pkgs.pm:232 pkgs.pm:241
 #, c-format
 msgid "Unused packages removal"
-msgstr ""
+msgstr "移除未使用的套件"
 
 #: pkgs.pm:229
 #, c-format
 msgid "Finding unused hardware packages..."
-msgstr ""
+msgstr "尋找未使用的硬體套件..."
 
 #: pkgs.pm:232
 #, c-format
 msgid "Finding unused localization packages..."
-msgstr ""
+msgstr "尋找未使用的語言套件..."
 
 #: pkgs.pm:242
 #, c-format
 msgid ""
 "We have detected that some packages are not needed for your system "
 "configuration."
-msgstr ""
+msgstr "我們偵測到您的系統設定並不需要某些套件。"
 
 #: pkgs.pm:243
 #, c-format
 msgid "We will remove the following packages, unless you choose otherwise:"
-msgstr ""
+msgstr "除非您選擇保留，否則我們將會移除以下套件："
 
 #: pkgs.pm:246 pkgs.pm:247
-#, fuzzy, c-format
+#, c-format
 msgid "Unused hardware support"
-msgstr "啟用音效支援"
+msgstr "未使用的硬體支援"
 
 #: pkgs.pm:250 pkgs.pm:251
 #, c-format
 msgid "Unused localization"
-msgstr ""
+msgstr "未使用的區域設定"
 
 #: raid.pm:42
 #, c-format
@@ -5852,7 +5852,7 @@ msgstr "請選擇您希望的安全層級"
 #: security/level.pm:62
 #, c-format
 msgid "%s: %s"
-msgstr ""
+msgstr "%s: %s"
 
 #: security/level.pm:65
 #, c-format
@@ -5862,7 +5862,7 @@ msgstr "安全性管理者："
 #: security/level.pm:66
 #, c-format
 msgid "Login or email:"
-msgstr ""
+msgstr "登入或郵件帳號："
 
 #: services.pm:19
 #, c-format
@@ -5906,7 +5906,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
-msgstr ""
+msgstr "Common UNIX Printing System (CUPS) 是先進的印表機管理系統"
 
 #: services.pm:29
 #, c-format
@@ -5937,7 +5937,7 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
+msgstr "HAL 是一種收集與維護硬體資訊的常駐服務"
 
 #: services.pm:36
 #, c-format
@@ -6082,7 +6082,7 @@ msgstr ""
 #: services.pm:68
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
-msgstr ""
+msgstr "使用網路時間協定 (NTP) 同步系統時間"
 
 #: services.pm:69
 #, c-format
@@ -6185,7 +6185,7 @@ msgstr ""
 #, c-format
 msgid ""
 "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
-msgstr ""
+msgstr "SANE (Scanner Access Now Easy) 能夠存取掃描器、攝影機、等等"
 
 #: services.pm:93
 #, c-format
@@ -6193,6 +6193,7 @@ msgid ""
 "The SMB/CIFS protocol enables to share access to files & printers and also "
 "integrates with a Windows Server domain"
 msgstr ""
+"SMB/CIFS 協定能夠分享檔案與印表機存取並且和 Windows 伺服器網域整合"
 
 #: services.pm:94
 #, c-format
@@ -6228,7 +6229,7 @@ msgstr "啟動 X 字型伺服器。"
 #: services.pm:100
 #, c-format
 msgid "Starts other deamons on demand."
-msgstr ""
+msgstr "需要時啟動其他常駐服務。"
 
 #: services.pm:123
 #, c-format
