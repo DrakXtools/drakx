@@ -135,26 +135,11 @@ sub create_steps_window {
     }
 
     my $offset = 10;
-    my $height = 600;
     $o->{steps_widget} =
-      gtknew('Fixed', widget_name => 'Steps', pixbuf_file => 'left-background',
-             has_window => 1, x => 0, y => 145, height => $height, width => $::stepswidth, # -1
-	     child => gtknew('VBox', spacing => 6, width => ($::stepswidth - $offset), children_tight => \@l));
-
-    # prevent logo to be tiled (do mosazic style rendering):
-    $o->{steps_widget}->put(gtknew('Image', file => 'left-background-filler.png'), 0, $height);
-
-    $o->{steps_widget}->put(
-        # FIXME: not RTL compliant (lang::text_direction_rtl() ? ...)
-        gtknew('VBox', height => $::rootheight,
-               children => [
-                   0, gtknew('Image', file => 'left-top-corner'),
-                   (map { (1, gtknew('Image', file => 'left-border')) } 1 .. $::rootheight),
-                   0, gtknew('Image', file => 'left-bottom-corner'),
-               ]),
-        $::stepswidth - 21, 0);
-
-    $o->{steps_widget}->show;
+      gtknew('MDV_Notebook', widget_name => 'Steps', children => [
+          # 145 is the vertical offset in order to be below the actual logo:
+          [ gtknew('VBox', spacing => 6, width => ($::stepswidth - $offset), children_tight => \@l), 0, 145 ]
+      ]);
 
     $root_window->add(
         $o->{steps_window} = 
@@ -168,6 +153,9 @@ sub create_steps_window {
     );
         
     $root_window->show_all;
+
+    # hide default selection since its position is bogus:
+    $o->{steps_widget}->hide_selection;
 }
 
 sub update_steps_position {
@@ -177,7 +165,10 @@ sub update_steps_position {
     foreach (@{$o->{orderedSteps}}) {
 	exists $steps{steps}{$_} or next;
 	if ($o->{steps}{$_}{entered} && !$o->{steps}{$_}{done}) {
-	    $steps{steps}{$_}{img}->set_from_pixbuf($steps{on});
+            # we need to flush the X queue since else we got a temporary Y position of -1 when switching locales:
+            mygtk2::flush(); #- for auto_installs which never go through the Gtk2 main loop
+            $o->{steps_widget}->move_selection($steps{steps}{$_}{text}->allocation->y);
+
             if ($last_step) {
                 $steps{steps}{$last_step}{img}->set_from_pixbuf($steps{done});
             }
