@@ -162,7 +162,6 @@ sub create_steps_window {
                  children =>
                    [
                        if_($::stepswidth != 0, 0, $o->{steps_widget}),
-                       0, $o->{steps_widget},
                        1, gtknew('Label', width => -1, height => -1),
                    ],
              )
