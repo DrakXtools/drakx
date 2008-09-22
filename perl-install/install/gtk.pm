@@ -105,8 +105,9 @@ sub install_theme {
 }
 
 sub create_step_box {
-    gtknew('HBox', spacing => 7, children => [
+    gtknew('HBox', spacing => 0, children => [
         @_,
+        0, gtknew('Alignment', width => 24),
     ]);
 }
 
@@ -122,7 +123,6 @@ sub create_steps_window {
     my $category = sub { 
 	create_step_box(
 	    1, gtknew('Label_Right', text_markup => '<b>' . uc($_[0]) . '</b>', widget_name => 'Step-categories'),
-	    0, gtknew('Image', file => 'steps_off.png'),
 	);
     };
 
@@ -137,6 +137,7 @@ sub create_steps_window {
 	$steps{steps}{$_}{img} = $img;
 	push @l, create_step_box(
             1, $steps{steps}{$_}{text} = gtknew('Label_Right', text => translate($o->{steps}{$_}{text})),
+            0, gtknew('Alignment', width => 6),
             0, $img,
         );
     }
