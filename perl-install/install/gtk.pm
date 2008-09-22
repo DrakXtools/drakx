@@ -120,7 +120,6 @@ sub create_steps_window {
     };
 
     my @l = (
-        gtknew('HBox', height => 145),
         $category->(N("Installation"))
     );
     foreach (grep { !eval $o->{steps}{$_}{hidden} } @{$o->{orderedSteps}}) {
@@ -139,7 +138,7 @@ sub create_steps_window {
     my $height = 600;
     $o->{steps_widget} =
       gtknew('Fixed', widget_name => 'Steps', pixbuf_file => 'left-background',
-             has_window => 1, x => 0, y => 0, height => $height, width => $::stepswidth, # -1
+             has_window => 1, x => 0, y => 145, height => $height, width => $::stepswidth, # -1
 	     child => gtknew('VBox', spacing => 6, width => ($::stepswidth - $offset), children_tight => \@l));
 
     # prevent logo to be tiled (do mosazic style rendering):
