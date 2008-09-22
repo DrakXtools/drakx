@@ -313,8 +313,7 @@ sub markup_to_TextView_format {
 	if ($attrs) {
          $attrs->{weight} eq 'bold' and $attrs->{weight} = do { require Gtk2::Pango; Gtk2::Pango->PANGO_WEIGHT_BOLD };
          $attrs->{size} eq 'larger' and do {
-             require Gtk2::Pango;
-             $attrs->{scale} = Gtk2::Pango->PANGO_SCALE_X_LARGE; # equivalent to Label's size => 'larger'
+             $attrs->{scale} = Gtk2::Pango->scale_x_large; # equivalent to Label's size => 'larger'
              delete $attrs->{size};
          };
      }
