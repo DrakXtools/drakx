@@ -1,10 +1,10 @@
 # translation of pt_BR.po to
 # translation of pt_BR.po to Brazilian Portuguese
-# translation of DrakX-pt_BR.po to Brazilian Portuguese
 # tradução de DrakX-pt_BR.po para Português do Brasil
 # DRAKX PT_BR PO FILE
-# Copyright (C) 2003, 2004, 2005 Free Software Foundation, Inc.
+# Copyright (C) 2003, 2004, 2005, 2008 Free Software Foundation, Inc.
 # Lisiane Sztoltz Teixeira <lisiane@mandriva.com>
+#
 # Andrei Bosco Bezerra Torres <andrei_bosco@yahoo.com.br>, 2000, 2003.
 # Bruno Dorfman Buys <brunobuys@zipmail.com.br>, 2002.
 # Tiago da Cruz Bezerra <tiagocruz18@uol.com.br>,2002 2003, 2004.
@@ -14,20 +14,20 @@
 # Cristiano Otto Von Trompczynski <cris@mandriva.com>, 2005.
 # Arthur R. Mello <renato@conectiva.com.br>, 2005.
 # Arthur Renato Mello <renato@conectiva.com.br>, 2005.
-#
+# Felipe Arruda <felipemiguel@gmail.com>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-12 12:22+0200\n"
-"PO-Revision-Date: 2005-10-24 08:51-0200\n"
-"Last-Translator: Arthur Renato Mello <renato@conectiva.com.br>\n"
-"Language-Team:  <pt@li.org>\n"
+"PO-Revision-Date: 2008-09-22 14:14-0300\n"
+"Last-Translator: Felipe Arruda <felipemiguel@gmail.com>\n"
+"Language-Team: Brazilian Portuguese <kde-i18n-pt_br@mail.kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms:  nplurals=2; plural=(n > 1);\n"
 
 #: ../help.pm:14
 #, c-format
@@ -132,12 +132,12 @@ msgstr ""
 #: ../help.pm:54
 #, c-format
 msgid "User name"
-msgstr ""
+msgstr "Nome de usuário"
 
 #: ../help.pm:54
 #, c-format
 msgid "Accept user"
-msgstr ""
+msgstr "Aceitar o usuário"
 
 #: ../help.pm:54
 #, c-format
@@ -229,7 +229,7 @@ msgstr ""
 "serão instalados."
 
 #: ../help.pm:95
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "It's now time to specify which programs you wish to install on your system.\n"
 "There are thousands of packages available for Mandriva Linux, and to make "
@@ -287,26 +287,24 @@ msgid ""
 "command-line interface. The total size of this installation is about 65\n"
 "megabytes."
 msgstr ""
-"Agora você deverá especificar quais programas deseja instalar no seu\n"
+"Agora você deverá especificar quais programas você deseja instalar no\n"
 "sistema. Existem centenas de pacotes disponíveis para o Mandriva Linux, e\n"
-"para facilitar sua escolha eles foram agrupados em grupos de aplicações\n"
+"para facilitar o gerenciamento, os pacotes foram agrupados em grupos de aplicações\n"
 "similares.\n"
 "\n"
 "O Mandriva Linux separou os pacotes em quatro categorias. Você pode\n"
-"misturar as aplicações de vários grupos, e assim a \"Estação de Trabalho\" "
+"misturar as aplicações de outras categorias, assim uma \"Estação de Trabalho\" "
 "pode ter aplicações do grupo \"Servidor\".\n"
 "\n"
 " * \"%s\": Se você planeja usar sua máquina como estação de trabalho,\n"
 "selecione um ou mais dos grupos desta categoria.\n"
 "\n"
-" * \"%s\": Se a máquina será usada para programação e/ou compilação, escolha "
+" * \"%s\": Se a máquina será usada para programação, selecione "
 "os pacotes apropriados desta categoria. O grupo especial\n"
-"\"LSB\" irá configurar seus sistema para ficar o mais compatível possível\n"
-"com a especificação Linux Standard Base.\n"
+"\"LSB\" irá configurar seus sistema para que ele fique o mais compatível possível\n"
+"com as especificações da Linux Standard Base.\n"
 "\n"
-"   Selecionar o grupo \"LSB\" irá também instalar o kernel da séria \"2.4\", "
-"ao\n"
-"invés da série padrão \"2.6\". Isto garante 100%% de compatibilidade com LSB "
+"   Selecionar o grupo \"LSB\" garantirá 100%% de compatibilidade com LSB "
 "no\n"
 "sistema. No entanto, se você não selecionar o grupo \"LSB\" você ainda terá\n"
 "um sistema próximo a 100%% de compatibilidade com a LSB.\n"
@@ -314,37 +312,36 @@ msgstr ""
 " * \"%s\": se a máquina será um servidor, você poderá escolher quais dos\n"
 "serviços deseja instalar na máquina.\n"
 "\n"
-" * \"%s \": este é o grupo em que você escolherá seus ambientes\n"
-"gráficos preferidos. Pelo menos um tem que ser selecionado se você quer\n"
-"ter uma estação de trabalho gráfica.\n"
+" * \"%s \": este é o grupo em que você escolherá seu ambiente\n"
+"gráfico preferido. Pelo menos um tem que ser selecionado se você quiser\n"
+"uma estação de trabalho com ambiente gráfico.\n"
 "\n"
 "Ao mover o ponteiro do mouse sobre um nome de grupo, uma pequena explicação\n"
 "sobre seu conteúdo aparecerá.\n"
 "\n"
 "Você pode marcar a caixa \"%s\", ela é útil se você tiver um pouco de "
 "experiência\n"
-"com o nome dos pacotes oferecidos ou se você deseja ter total controle "
+"com o nome dos pacotes fornecidos ou se você deseja ter controle total "
 "sobre\n"
-"o que irá ser instalado.\n"
+"o que será instalado.\n"
 "\n"
 "Se você iniciar uma instalação no modo \"%s\", você pode desmarcar todos\n"
 "os grupos e prevenir a instalação de qualquer pacote adicional. Isto é útil "
 "para\n"
 "reparar ou atualizar um sistema já existente.\n"
 "\n"
-"Se você não selecionar nenhum grupo quando em uma instalação regular (o "
-"oposto\n"
-"de uma atualização), uma caixa de diálogo aparecerá propondo diferentes\n"
+"Se você não selecionar nenhum grupo ao fazer uma instalação (não uma atualização),\n"
+"uma caixa de diálogo aparecerá propondo diferentes\n"
 "opções para uma instalação mínima:\n"
 "\n"
 " * \"%s\": Instala o mínimo de pacotes possíveis para se ter uma estação\n"
-"de trabalho gráfica.\n"
+"de trabalho com ambiente gráfico.\n"
 "\n"
-" * \"%s\": Instala a base do sistema acrescida de utilitários básicos e\n"
-"documentação. Esta Instalação é útil para configurar um servidor.\n"
+" * \"%s\": Instala a base do sistema acrescida de utilitários básicos e suas \n"
+"respectivas documentações. Esta Instalação é útil para configurar um servidor.\n"
 "\n"
 " * \"%s\": Instala os pacotes mínimos necessários para obter um sistema\n"
-"Linux funcionando. Com esta instalação você terá somente interface de\n"
+"Linux funcionando. Com esta instalação você terá somente a interface de\n"
 "linha de comando. O tamanho total desta instalação é de 65 megabytes."
 
 #: ../help.pm:149 ../help.pm:591
@@ -515,7 +512,7 @@ msgstr ""
 #: ../help.pm:213
 #, c-format
 msgid "Hardware clock set to GMT"
-msgstr ""
+msgstr "Relógio do hardware configurado para GMT"
 
 #: ../help.pm:213
 #, c-format
@@ -869,7 +866,7 @@ msgstr "Usar partição existente"
 #: ../help.pm:370
 #, c-format
 msgid "Use the free space on the Microsoft Windows® partition"
-msgstr ""
+msgstr "Usar o espaço livre da partição Microsoft Windows®"
 
 #: ../help.pm:370
 #, c-format
@@ -958,17 +955,17 @@ msgstr "Criar disquete de instalação automática"
 #: ../help.pm:405
 #, c-format
 msgid "Replay"
-msgstr ""
+msgstr "Replay"
 
 #: ../help.pm:405
 #, c-format
 msgid "Automated"
-msgstr ""
+msgstr "Automático"
 
 #: ../help.pm:405
 #, c-format
 msgid "Save packages selection"
-msgstr ""
+msgstr "Salvar a seleção de pacotes"
 
 #: ../help.pm:408
 #, c-format
@@ -1238,17 +1235,17 @@ msgstr ""
 #: ../help.pm:526
 #, c-format
 msgid "Save partition table"
-msgstr ""
+msgstr "Salvar tabela de partições"
 
 #: ../help.pm:526
 #, c-format
 msgid "Restore partition table"
-msgstr ""
+msgstr "Restaurar tabela de partições"
 
 #: ../help.pm:526
 #, c-format
 msgid "Rescue partition table"
-msgstr ""
+msgstr "Recuperar tabela de partições"
 
 #: ../help.pm:526
 #, c-format
@@ -1258,12 +1255,12 @@ msgstr "Montagem automática de mídia removível"
 #: ../help.pm:526
 #, c-format
 msgid "Wizard"
-msgstr ""
+msgstr "Assistente"
 
 #: ../help.pm:526
 #, c-format
 msgid "Undo"
-msgstr ""
+msgstr "Desfazer"
 
 #: ../help.pm:526
 #, c-format
@@ -1533,7 +1530,7 @@ msgstr "Espanhol"
 #: ../help.pm:643
 #, c-format
 msgid "Use Unicode by default"
-msgstr ""
+msgstr "Usar Unicode por padrão"
 
 #: ../help.pm:646
 #, c-format
@@ -1736,7 +1733,7 @@ msgstr "pdq"
 #: ../help.pm:724
 #, c-format
 msgid "CUPS"
-msgstr ""
+msgstr "CUPS"
 
 #: ../help.pm:724
 #, c-format
@@ -1797,7 +1794,7 @@ msgstr ""
 "outro driver."
 
 #: ../help.pm:794
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "As a review, DrakX will present a summary of information it has gathered\n"
 "about your system. Depending on the hardware installed on your machine, you\n"
@@ -1861,36 +1858,29 @@ msgid ""
 "on your machine. If you plan to use this machine as a server it's a good\n"
 "idea to review this setup."
 msgstr ""
-"A título de revisão, o DrakX irá resumir em uma lista as informações que "
-"tem\n"
+"A título de revisão, o DrakX irá resumir em uma lista as informações \n"
 "sobre o seu sistema. Dependendo do hardware instalado, você pode ter\n"
-"uma ou todas estas entradas. Cada uma delas é um elemento a ser\n"
+"algumas ou todas estas entradas. Cada uma delas é um elemento a ser\n"
 "configurado, seguido de um breve resumo da configuração atual.\n"
 "Clique no botão \"%s\" correspondente para fazer alguma alteração.\n"
 "\n"
-" * \"%s\": verifica a configuração atual do mapa de teclado e modifica-o, \n"
+" * \"%s\": verifica a configuração atual do mapa de teclado e modifica-a, \n"
 "caso necessário.\n"
 "\n"
 " * \"%s\": verifica a seleção atual de país. Se não estiver neste país, "
 "clique\n"
-"no botão \"%s\" e escolha outro. Se o seu país não aparecer na primeira\n"
-"lista mostrada, pressione \"%s\" para obter a lista completa dos\n"
+"no botão \"%s\" e escolha outro. Se o seu país não estiver nesta lista,\n"
+"clique em \"%s\" para obter a lista completa dos\n"
 "países.\n"
 "\n"
 " * \"%s\": Por padrão, o DrakX deduz seu fuso horário baseado no país\n"
-"escolhido. Pressione o botão \"%s\" para mudar caso não esteja correto.\n"
+"escolhido. Pressione o botão \"%s\" para mudar, caso não esteja correto.\n"
 "\n"
 " * \"%s\": verifique a configuração do mouse atual e mude-a se for "
 "necessário.\n"
 "\n"
-" * \"%s\": clique no botão \"%s\" para abrir o assistente de\n"
-"configuração da impressora. Veja o capítulo correspondente no\n"
-"'Guia do Iniciante' para saber mais sobre como configurar uma\n"
-"impressora. A interface utilizada no manual é semelhante à usada\n"
-"durante a instalação\n"
-"\n"
 " * \"%s\": se uma placa de som for detectada no seu sistema, ela\n"
-"será mostrada aqui. Se a placa mostrada for diferente daquela que se\n"
+"será mostrada aqui. Se a placa for diferente daquela que se\n"
 "encontra no seu sistema, clique no botão e escolha a correta.\n"
 "\n"
 " * \"%s\":se uma placa de TV foi detectada no seu sistema, ela será "
@@ -1911,7 +1901,7 @@ msgstr ""
 "utilizar a ajuda integrada completa.\n"
 "\n"
 " * \"%s\": permite configurar endereços de proxies HTTP e FTP se a máquina\n"
-"que você está instalando estiver localizada atrás de um servidor proxy.\n"
+"que você está instalando utiliza um proxy para usar a internet.\n"
 "\n"
 " * \"%s\": aqui você pode redefinir o nível de segurança que escolheu\n"
 "anteriormente.\n"
@@ -1927,14 +1917,14 @@ msgstr ""
 "como configurar o gerenciador de inicialização no Centro de Controle\n"
 "do Mandriva Linux.\n"
 "\n"
-" * \"%s\": você poderá escolher aqui quais serviços que serão iniciados\n"
+" * \"%s\": você poderá escolher aqui quais serviços serão iniciados\n"
 "em sua máquina. Se você pretende usar sua máquina como servidor, é uma\n"
 "boa idéia verificar esta configuração e desativar o que não for necessário."
 
 #: ../help.pm:809
-#, fuzzy, c-format
+#, c-format
 msgid "TV card"
-msgstr "Placa ISDN"
+msgstr "Placa de TV"
 
 #: ../help.pm:809
 #, c-format
@@ -2104,3 +2094,4 @@ msgstr "<- Anterior"
 
 #~ msgid "authentication"
 #~ msgstr "autenticação"
+
