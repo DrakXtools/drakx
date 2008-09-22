@@ -656,10 +656,13 @@ sub create_widgets_block {
             ]);
 	}
 
+	my $eater = gtknew('Label') if $e->{alignment} eq 'right' && !$label_w;
+
 	$e->{real_w} = gtkpack_(Gtk2::HBox->new,
 				if_($e->{icon}, 0, eval { gtkcreate_img($e->{icon}) }),
+				if_($eater, 1, $eater),
 				if_($label_w, $e->{alignment} eq 'right', $label_w),
-				(1, $e->{real_w}),
+				(!$eater, $e->{real_w}),
 			    );
     }
     gtknew('VBox', children => [ map { $_->{grow} || 0, $_->{real_w} } @$l ]);
