@@ -1305,7 +1305,7 @@ sub monitor_full_edid() {
 }
 
 sub running_window_manager() {
-    my @window_managers = qw(ksmserver kwin gnome-session icewm wmaker afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce blackbox sawfish olvwm fluxbox compiz);
+    my @window_managers = qw(ksmserver kwin gnome-session icewm wmaker afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce blackbox sawfish olvwm fluxbox compiz drakx-matchbox-window-manager);
 
     foreach (@window_managers) {
 	my @pids = fuzzy_pidofs(qr/\b$_\b/) or next;
