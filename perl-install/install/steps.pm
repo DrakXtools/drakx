@@ -465,6 +465,7 @@ Consoles 1,3,4,7 may also contain interesting information";
     harddrake::autoconf::pcmcia($o->{pcmcia});
     #- configure CPU frequency modules
     harddrake::autoconf::cpufreq();
+    harddrake::autoconf::floppy();
 
     #- for mandrake_firstime
     touch "$::prefix/var/lock/TMP_1ST";
