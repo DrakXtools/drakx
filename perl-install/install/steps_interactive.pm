@@ -417,7 +417,7 @@ sub choosePackages {
 	install::steps::rebootNeeded($o);
     }
 
-    my $min_mark = 4;
+    my $min_mark = $pkgs::rpmsrate_rate_default;
     my ($individual, $chooseGroups);
 
     if (!$o->{isUpgrade}) {
