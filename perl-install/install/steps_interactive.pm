@@ -322,11 +322,6 @@ sub formatMountPartitions {
 }
 
 #------------------------------------------------------------------------------
-sub setPackages {
-    my ($o) = @_;
-    install::any::setPackages($o);
-}
-
 #- group by CD
 sub ask_deselect_media__copy_on_disk {
     my ($o, $hdlists, $o_copy_rpms_on_disk) = @_;
