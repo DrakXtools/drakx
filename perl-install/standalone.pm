@@ -217,8 +217,10 @@ sub bug_handler {
     c::_exit(1);
 }
 
-$SIG{SEGV} = sub { bug_handler(@_, 1) };
-$SIG{__DIE__} = \&bug_handler;
+if (!$ENV{DISABLE_DRAKBUG}) {
+    $SIG{SEGV} = sub { bug_handler(@_, 1) };
+    $SIG{__DIE__} = \&bug_handler;
+}
 
 sub import() {
     ($standalone_name = $0) =~ s|.*/||;
