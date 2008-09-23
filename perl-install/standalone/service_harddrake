@@ -2,6 +2,8 @@
 
 use lib qw(/usr/lib/libDrakX);
 
+BEGIN { $ENV{DISABLE_DRAKBUG} = 1 }
+
 use strict;
 use diagnostics;
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
