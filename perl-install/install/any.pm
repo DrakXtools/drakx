@@ -515,7 +515,7 @@ sub default_packages {
     push @l, "lvm2" if !is_empty_array_ref($o->{all_hds}{lvms});
     push @l, "cryptsetup" if !is_empty_array_ref($o->{all_hds}{dmcrypts});
     push @l, "dmraid" if any { fs::type::is_dmraid($_) } @{$o->{all_hds}{hds}};
-    push @l, 'powernowd' if cat_('/proc/cpuinfo') =~ /AuthenticAMD/ && arch() =~ /x86_64/
+    push @l, 'cpufreq' if cat_('/proc/cpuinfo') =~ /AuthenticAMD/ && arch() =~ /x86_64/
       || cat_('/proc/cpuinfo') =~ /model name.*Intel\(R\) Core\(TM\)2 CPU/;
     push @l, detect_devices::probe_name('Pkg');
 
