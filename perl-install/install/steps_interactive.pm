@@ -398,7 +398,7 @@ sub choosePackages {
     my ($o) = @_;
 
     my $w = $o->wait_message('', N("Looking for available packages..."));
-    my $availableC = &install::steps::choosePackages;
+    my $availableC = install::steps::choosePackages($o, $pkgs::rpmsrate_rate_max);
 
     require install::pkgs;
 

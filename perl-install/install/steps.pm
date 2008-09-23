@@ -262,7 +262,7 @@ sub ask_change_cd {
 sub selectSupplMedia { '' }
 
 sub choosePackages {
-    my ($o) = @_;
+    my ($o, $o_compssListLevel) = @_;
 
     #- now for upgrade, package that must be upgraded are
     #- selected first, after is used the same scheme as install.
@@ -274,8 +274,8 @@ sub choosePackages {
     log::l(sprintf "available size %s (corrected %s)", formatXiB($available), formatXiB($availableCorrected));
 
     #- !! destroying user selection of packages (they may have done individual selection before)
-    exists $o->{compssListLevel}
-	  and install::pkgs::setSelectedFromCompssList($o->{packages}, $o->{rpmsrate_flags_chosen}, $o->{compssListLevel}, $availableCorrected);
+    exists $o->{compssListLevel} || defined $o_compssListLevel
+	  and install::pkgs::setSelectedFromCompssList($o->{packages}, $o->{rpmsrate_flags_chosen}, $o_compssListLevel || $o->{compssListLevel}, $availableCorrected);
 
     $availableCorrected;
 }
