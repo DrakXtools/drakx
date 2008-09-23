@@ -26,6 +26,7 @@ $::isWizard = 1;
 my $in = 'interactive'->vnew;
 my $wm = any::running_window_manager();
 $in->{no_Window_Manager} = !$wm;
+$::set_dialog_hint = $wm eq 'drakx-matchbox-window-manager';
 
 sub get_conf {
 	my ($name) = @_;
