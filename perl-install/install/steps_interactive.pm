@@ -427,7 +427,7 @@ sub choosePackages {
     }
 
   chooseGroups:
-    $o->chooseGroups($o->{packages}, $o->{compssUsers}, $o->{compssListLevel}, \$individual) if $chooseGroups;
+    $o->chooseGroups($o->{packages}, $o->{compssUsers}, \$individual) if $chooseGroups;
 
     ($o->{packages_}{ind}) =
       install::pkgs::setSelectedFromCompssList($o->{packages}, $o->{rpmsrate_flags_chosen}, $o->{compssListLevel}, $availableC);
@@ -509,7 +509,7 @@ sub _chooseDesktop {
     }
 }
 sub chooseGroups {
-    my ($o, $packages, $compssUsers, $min_level, $individual) = @_;
+    my ($o, $packages, $compssUsers, $individual) = @_;
 
     #- for all groups available, determine package which belongs to each one.
     #- this will enable getting the size of each groups more quickly due to
@@ -518,9 +518,9 @@ sub chooseGroups {
     
     my $b = install::pkgs::saveSelected($packages);
     install::any::unselectMostPackages($o);
-    install::pkgs::setSelectedFromCompssList($packages, { CAT_SYSTEM => 1 }, $min_level, 0);
+    install::pkgs::setSelectedFromCompssList($packages, { CAT_SYSTEM => 1 }, $o->{compssListLevel}, 0);
     my $system_size = install::pkgs::selectedSize($packages);
-    my ($sizes, $pkgs) = install::pkgs::computeGroupSize($packages, $min_level);
+    my ($sizes, $pkgs) = install::pkgs::computeGroupSize($packages, $o->{compssListLevel});
     install::pkgs::restoreSelected($b);
     log::l("system_size: $system_size");
 
