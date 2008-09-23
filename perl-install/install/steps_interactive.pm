@@ -412,7 +412,6 @@ sub choosePackages {
 	install::steps::rebootNeeded($o);
     }
 
-    my $min_mark = $pkgs::rpmsrate_rate_default;
     my ($individual, $chooseGroups);
 
     if (!$o->{isUpgrade}) {
@@ -428,10 +427,10 @@ sub choosePackages {
     }
 
   chooseGroups:
-    $o->chooseGroups($o->{packages}, $o->{compssUsers}, $min_mark, \$individual) if $chooseGroups;
+    $o->chooseGroups($o->{packages}, $o->{compssUsers}, $o->{compssListLevel}, \$individual) if $chooseGroups;
 
     ($o->{packages_}{ind}) =
-      install::pkgs::setSelectedFromCompssList($o->{packages}, $o->{rpmsrate_flags_chosen}, $min_mark, $availableC);
+      install::pkgs::setSelectedFromCompssList($o->{packages}, $o->{rpmsrate_flags_chosen}, $o->{compssListLevel}, $availableC);
 
     $o->choosePackagesTree($o->{packages}) or goto chooseGroups if $individual;
 
