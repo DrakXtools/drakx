@@ -211,6 +211,8 @@ foreach my $hw_class (@harddrake::data::tree) {
         next;
     } elsif ($Ident eq "CPU") {
         harddrake::autoconf::cpufreq();
+    } elsif ($Ident eq "FLOPPY") {
+        harddrake::autoconf::floppy();
     }
 
     next if $is_globetrotter && !$hw_class->{automatic};

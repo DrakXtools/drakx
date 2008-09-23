@@ -83,6 +83,11 @@ sub cpufreq() {
     modules::set_preload_modules("cpufreq", cpufreq::get_modules());
 }
 
+sub floppy() {
+    require detect_devices;
+    modules::set_preload_modules("floppy", if_(detect_devices::floppy(), "floppy"));
+}
+
 sub fix_aliases {
     my ($modules_conf) = @_;
     require modalias;
