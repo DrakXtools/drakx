@@ -1314,6 +1314,13 @@ sub running_window_manager() {
     undef;
 }
 
+sub set_wm_hints_if_needed {
+    my ($o_in) = @_;
+    my $wm = any::running_window_manager();
+    $o_in->{no_Window_Manager} = !$wm if $o_in;
+    $::set_dialog_hint = $wm eq 'drakx-matchbox-window-manager';
+}
+
 sub ask_window_manager_to_logout {
     my ($wm) = @_;
     
