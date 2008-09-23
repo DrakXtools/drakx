@@ -129,9 +129,10 @@ sub format_trace_with_message {
 
 my $parent_uid = get_parent_uid();
 
+my $width = 600;
 gtkadd($window->{window},
        gtkpack_(Gtk2::VBox->new(0, 5),
-                0, gtknew('Title1', label => $mandrake_release),
+                0, gtknew('Title1', label => $mandrake_release, width => $width),
                 1, create_scrolled_window(
                     gtknew('TextView', editable => 0, height => 200,
                            text => [
@@ -149,7 +150,7 @@ gtkadd($window->{window},
                                    N("To submit a bug report, click on the report button.  \nThis will open a web browser window on %s where you'll find a form to fill in.  The information displayed above will be transferred to that server.  \nThings useful to include in your report are the output of lspcidrake -v, kernel version, and /proc/cpuinfo.", $wizard_name)
                                ]
                            ])),
-                0, gtknew('Title2', label => N("Please describe what you were doing when it crashed:")),
+                0, gtknew('Title2', label => N("Please describe what you were doing when it crashed:"), width => $width),
                 if_($incident,
                       1, create_scrolled_window(
                           $user_descr = gtknew('TextView', editable => 1, height => 200)
