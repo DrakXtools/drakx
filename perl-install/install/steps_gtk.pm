@@ -494,7 +494,7 @@ sub choosePackagesTree {
 					 code         => sub {
 					     
 					     install::any::unselectMostPackages($o);
-					     install::pkgs::setSelectedFromCompssList($packages, { SYSTEM => 1 }, $o->{rpmsrate_flags_chosen}, $availableCorrected);
+					     install::pkgs::setSelectedFromCompssList($packages, { SYSTEM => 1 }, $o->{compssListLevel}, $availableCorrected);
 					     1;
 					 } }),
 				     ],
