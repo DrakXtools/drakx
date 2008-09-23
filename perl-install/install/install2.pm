@@ -376,6 +376,7 @@ sub main {
 	    suppl => sub { $o->{supplmedia} = $v },
 	    askmedia => sub { $o->{askmedia} = 1 },
 	    restore => sub { $::isRestore = 1 },
+	    compssListLevel => sub { $o->{compssListLevel} = $v },
 	}}{lc $n}; &$f if $f;
     } %cmdline;
 
