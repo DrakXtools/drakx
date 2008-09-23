@@ -273,8 +273,6 @@ sub choosePackages {
     my $availableCorrected = install::pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
     log::l(sprintf "available size %s (corrected %s)", formatXiB($available), formatXiB($availableCorrected));
 
-    add2hash_($o, { compssListLevel => $pkgs::rpmsrate_rate_max }) if !$::auto_install;
-
     #- !! destroying user selection of packages (they may have done individual selection before)
     exists $o->{compssListLevel}
 	  and install::pkgs::setSelectedFromCompssList($o->{packages}, $o->{rpmsrate_flags_chosen}, $o->{compssListLevel}, $availableCorrected);

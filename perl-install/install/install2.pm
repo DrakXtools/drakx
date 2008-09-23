@@ -192,6 +192,9 @@ sub choosePackages {
     my ($auto) = @_;
     require install::pkgs;
 
+    require pkgs;
+    add2hash_($o, { compssListLevel => $pkgs::rpmsrate_rate_max }) if !$::auto_install;
+
     #- always setPackages as it may have to copy hdlist and synthesis files.
     installStepsCall($o, $auto, 'setPackages');
     installStepsCall($o, $auto, 'choosePackages');
