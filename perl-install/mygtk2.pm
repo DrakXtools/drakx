@@ -321,13 +321,15 @@ sub _gtk__Image {
 	$w = Gtk2::Image->new;
 	$w->{format} = delete $opts->{format} if exists $opts->{format};
 
+        $w->{options} = { if_($o_size, size => $o_size), flip => delete $opts->{flip} };
+
         $w->{set_from_file} = $class =~ /using_pixmap/ ? sub { 
             my ($w, $file) = @_;
             my $pixmap = mygtk2::pixmap_from_pixbuf($w, gtknew('Pixbuf', file => $file));
 	    $w->set_from_pixmap($pixmap, undef);
         } : $class =~ /using_pixbuf/ ? sub { 
             my ($w, $file) = @_;
-            my $pixbuf = _pixbuf_render_alpha(gtknew('Pixbuf', file => $file), 255);
+            my $pixbuf = _pixbuf_render_alpha(gtknew('Pixbuf', file => $file, %{$w->{options}}), 255);
             my ($width, $height) = ($pixbuf->get_width, $pixbuf->get_height);
             $w->set_size_request($width, $height);
             $w->signal_connect(expose_event => sub {
@@ -341,7 +343,7 @@ sub _gtk__Image {
                                });
         } : sub { 
             my ($w, $file, $o_size) = @_;
-            my $pixbuf = gtknew('Pixbuf', file => $file, if_($o_size, size => $o_size), flip => delete $opts->{flip});
+            my $pixbuf = gtknew('Pixbuf', file => $file, %{$w->{options}});
             $w->set_from_pixbuf($pixbuf);
         };
     }
