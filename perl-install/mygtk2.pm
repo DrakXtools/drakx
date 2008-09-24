@@ -1376,6 +1376,21 @@ sub set_root_window_background_with_gc {
     $root->draw_rectangle($gc, 1, 0, 0, $w, $h);
 }
 
+sub _new_alpha_pixbuf {
+    my ($pixbuf) = @_;
+    my ($height, $width) = ($pixbuf->get_height, $pixbuf->get_width);
+    my $new_pixbuf = Gtk2::Gdk::Pixbuf->new('rgb', 1, 8, $width, $height);
+    $new_pixbuf->fill(0x00000000); # transparent white
+    $width, $height, $new_pixbuf;
+}
+
+sub _pixbuf_render_alpha {
+    my ($pixbuf, $alpha_threshold) = @_;
+    my ($width, $height, $new_pixbuf) = _new_alpha_pixbuf($pixbuf);
+    $pixbuf->composite($new_pixbuf, 0, 0, $width, $height, 0, 0, 1, 1, 'bilinear', $alpha_threshold);
+    $new_pixbuf;
+}
+
 sub pixmap_from_pixbuf {
     my ($widget, $pixbuf) = @_;
     my $window = $widget->window or internal_error("you can't use this function if the widget is not realised");
