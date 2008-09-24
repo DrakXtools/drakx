@@ -644,7 +644,7 @@ sub _gtk__MDV_Notebook {
         my $right_background = gtknew('Image', file => "right-white-background_left_part$suffix", flip => $is_flip_needed);
         my $width1 = $left_background->get_pixbuf->get_width;
         my $total_width = $width1 + $right_background->get_pixbuf->get_width;
-        my $arrow_x = text_direction_rtl() ? $offset/2 -3 : $width1 - $offset -4;
+        my $arrow_x = text_direction_rtl() ? $offset/2 -3 : $width1 - $offset -3;
         $w = gtknew('HBox', spacing => 0, children => [
             0, $layout = gtknew('Layout', width => $total_width - $offset, children => [ #Layout Fixed
                 # stacking order is important for "Z-buffer":
