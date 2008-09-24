@@ -1425,7 +1425,7 @@ use ugtk2 qw(:helpers :wrappers);
 sub set_pixmap {
     my ($darea) = @_;
     return if !$darea->realized;
-    ugtk2::set_back_pixbuf($darea, $darea->{back_pixbuf} || gtknew('Pixbuf', file => 'banner-background'));
+    ugtk2::set_back_pixbuf($darea, $darea->{back_pixbuf});
     update_text($darea);
 }
 
