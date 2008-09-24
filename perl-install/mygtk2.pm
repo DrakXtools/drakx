@@ -657,6 +657,7 @@ sub _gtk__MDV_Notebook {
         my $offset = 20;
         my $is_flip_needed = text_direction_rtl();
         my $filler = gtknew('Image', file => 'left-background-filler.png');
+        my $filler_height = $filler->get_pixbuf->get_height;
         my $left_background = gtknew('Image', file => 'left-background.png');
         my $right_background = gtknew('Image', file => "right-white-background_left_part$suffix", flip => $is_flip_needed);
         my $lf_height = $left_background->get_pixbuf->get_height;
@@ -669,6 +670,8 @@ sub _gtk__MDV_Notebook {
                 [ $left_background, 0, 0 ],
                 if_($suffix ne '_600',
                    [ $filler, 0, $lf_height ],
+                   [ gtknew('Image', file => 'left-background-filler.png'), 0, $lf_height + $filler_height ],
+                   [ gtknew('Image', file => 'left-background-filler.png'), 0, $lf_height + $filler_height*2 ],
                 ),
                 [ $selection_bar = gtknew('Image', file => 'rollover.png'), 0, 0 ], # arbitrary vertical position
                 ($opts->{children} ? @{ delete $opts->{children} } : ()),
