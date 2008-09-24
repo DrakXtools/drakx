@@ -119,6 +119,7 @@ sub _gtk {
     $w->set_padding(@{delete $opts->{padding}}) if exists $opts->{padding};
     $w->set_sensitive(delete $opts->{sensitive}) if exists $opts->{sensitive};
     $w->signal_connect(expose_event => delete $opts->{expose_event}) if exists $opts->{expose_event};
+    $w->signal_connect(realize => delete $opts->{realize}) if exists $opts->{realize};
     (delete $opts->{size_group})->add_widget($w) if $opts->{size_group};
     if (my $tip = delete $opts->{tip}) {
 	$global_tooltips ||= Gtk2::Tooltips->new;
