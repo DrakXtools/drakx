@@ -693,7 +693,7 @@ sub _gtk__MDV_Notebook {
                 [ $selection_arrow = gtknew('Image', file => 'steps_on', flip => $is_flip_needed), $arrow_x, 0, ],
             ]),
             1, delete $opts->{right_child} || 
-              gtknew('Image', file => "right-white-background_right_part$suffix", flip => $is_flip_needed),
+              gtknew('Image_using_pixbuf', file => "right-white-background_right_part$suffix", flip => $is_flip_needed),
         ]);
 
         $w->signal_connect('size-allocate' => sub {
