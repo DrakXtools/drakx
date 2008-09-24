@@ -660,9 +660,13 @@ sub _gtk__MDV_Notebook {
         my $filler_height = $filler->get_pixbuf->get_height;
         my $left_background = gtknew('Image', file => 'left-background.png');
         my $lf_height = $left_background->get_pixbuf->get_height;
-        my $right_background = gtknew('Image', file => "right-white-background_left_part$suffix", flip => $is_flip_needed);
+        my @right_background = $::isInstall ? 
+          gtknew('Image', file => "right-white-background_left_part$suffix", flip => $is_flip_needed)
+            : map {
+                gtknew('Image', file => "right-white-background_left_part-$_", flip => $is_flip_needed)
+            } 1, 2, 2, 3;
         my $width1 = $left_background->get_pixbuf->get_width;
-        my $total_width = $width1 + $right_background->get_pixbuf->get_width;
+        my $total_width = $width1 + $right_background[0]->get_pixbuf->get_width;
         my $arrow_x = text_direction_rtl() ? $offset/2 -4 : $width1 - $offset -3;
         $w = gtknew('HBox', spacing => 0, children => [
             0, $layout = gtknew('Layout', width => $total_width - $offset, children => [ #Layout Fixed
@@ -675,7 +679,14 @@ sub _gtk__MDV_Notebook {
                 ),
                 [ $selection_bar = gtknew('Image', file => 'rollover.png'), 0, 0 ], # arbitrary vertical position
                 ($opts->{children} ? @{ delete $opts->{children} } : ()),
-                [ $right_background, (text_direction_rtl() ? 0 : $width1 - $offset), 0 ],
+                [ my $box = gtknew('VBox', spacing => 0, height => -1, children => [
+                    0, $right_background[0],
+                    if_(!$::isInstall,
+                        1, $right_background[1],
+                        1, $right_background[2], # enought up to to XYZx1280 resolution
+                        0, $right_background[3],
+                    ),
+                ]), (text_direction_rtl() ? 0 : $width1 - $offset), 0 ],
                 # stack on top (vertical position is arbitrary):
                 [ $selection_arrow = gtknew('Image', file => 'steps_on', flip => $is_flip_needed), $arrow_x, 0, ],
             ]),
@@ -683,6 +694,11 @@ sub _gtk__MDV_Notebook {
               gtknew('Image', file => "right-white-background_right_part$suffix", flip => $is_flip_needed),
         ]);
 
+        $w->signal_connect('size-allocate' => sub {
+                               my (undef, $requisition) = @_;
+                               state $width ||= $right_background[0]->get_pixbuf->get_width;
+                               $box->set_size_request($width, $requisition->height);
+                           });
         bless($w, 'Gtk2::MDV_Notebook');
         add2hash($w, {
             arrow_x         => $arrow_x,
