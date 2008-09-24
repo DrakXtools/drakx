@@ -540,7 +540,7 @@ sub installPackages {
 	    my $pl = $f; $pl =~ s/\.png$/.pl/;
 	    eval(cat_($pl)) if -e $pl;    
 	    $banner->{text} = $title;
-	    Gtk2::Banner::set_pixmap($banner);
+	    Gtk2::Banner::update_text($banner)
 	}
     };
 
