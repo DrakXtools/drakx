@@ -64,7 +64,7 @@ elif grep -q rest_all /proc/cmdline; then
     else
         partimage_whole_disk -s $partimage_server rest_all $partimage_dir
     fi
-elif grep kamethod /proc/cmdline; then
+elif grep -q kamethod /proc/cmdline; then
     echo "Welcome to Ka"
     drvinst 
     ln -sf /tmp/stage2/ka $KADIR
