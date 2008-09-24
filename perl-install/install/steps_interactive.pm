@@ -397,6 +397,9 @@ sub selectSupplMedia {
 sub choosePackages {
     my ($o) = @_;
 
+    require pkgs;
+    add2hash_($o, { compssListLevel => $pkgs::rpmsrate_rate_default });
+
     my $w = $o->wait_message('', N("Looking for available packages..."));
     my $availableC = install::steps::choosePackages($o, $pkgs::rpmsrate_rate_max);
 
