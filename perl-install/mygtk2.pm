@@ -321,7 +321,7 @@ sub _gtk__Image {
 	$w = Gtk2::Image->new;
 	$w->{format} = delete $opts->{format} if exists $opts->{format};
 
-        $w->{options} = { if_($o_size, size => $o_size), flip => delete $opts->{flip} };
+        $w->{options} = { flip => delete $opts->{flip} };
 
         $w->{set_from_file} = $class =~ /using_pixmap/ ? sub { 
             my ($w, $file) = @_;
@@ -343,7 +343,7 @@ sub _gtk__Image {
                                });
         } : sub { 
             my ($w, $file, $o_size) = @_;
-            my $pixbuf = gtknew('Pixbuf', file => $file, %{$w->{options}});
+            my $pixbuf = gtknew('Pixbuf', file => $file, if_($o_size, size => $o_size), %{$w->{options}});
             $w->set_from_pixbuf($pixbuf);
         };
     }
