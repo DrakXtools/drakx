@@ -1426,6 +1426,11 @@ sub set_pixmap {
     my ($darea) = @_;
     return if !$darea->realized;
     ugtk2::set_back_pixbuf($darea, $darea->{back_pixbuf} || gtknew('Pixbuf', file => 'banner-background'));
+    update_text($darea);
+}
+
+sub update_text {
+    my ($darea) = @_;
     $darea->{layout} = $darea->create_pango_layout($darea->{text});
     $darea->{txt_width} = ($darea->{layout}->get_pixel_size)[0];
     $darea->queue_draw;
