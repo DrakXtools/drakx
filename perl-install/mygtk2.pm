@@ -674,7 +674,8 @@ sub _gtk__MDV_Notebook {
                 # stack on top (vertical position is arbitrary):
                 [ $selection_arrow = gtknew('Image', file => 'steps_on', flip => $is_flip_needed), $arrow_x, 0, ],
             ]),
-            0, gtknew('Image', file => "right-white-background_right_part$suffix", flip => $is_flip_needed),
+            1, delete $opts->{right_child} || 
+              gtknew('Image', file => "right-white-background_right_part$suffix", flip => $is_flip_needed),
         ]);
 
         bless($w, 'Gtk2::MDV_Notebook');
