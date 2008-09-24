@@ -758,10 +758,12 @@ Do you want to install the updates?")),
     #- bring all interface up for installing updates packages.
     install::interactive::upNetwork($o);
 
+    install::pkgs::clean_rpmdb_shared_regions();
     if (any::urpmi_add_all_media($o, $o->{previous_release})) {
 	my $binary = find { whereis_binary($_, $::prefix) } 'gurpmi2', 'urpmi' or return;
 	run_program::rooted($::prefix, $binary, '--auto-select', '--update');
     }
+    install::pkgs::clean_rpmdb_shared_regions();
 
     #- not downing network, even ppp. We don't care much since it is the end of install :)
 }
