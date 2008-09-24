@@ -656,8 +656,10 @@ sub _gtk__MDV_Notebook {
         # the white square is a little bit above the actual left sidepanel:
         my $offset = 20;
         my $is_flip_needed = text_direction_rtl();
+        my $filler = gtknew('Image', file => 'left-background-filler.png');
         my $left_background = gtknew('Image', file => 'left-background.png');
         my $right_background = gtknew('Image', file => "right-white-background_left_part$suffix", flip => $is_flip_needed);
+        my $lf_height = $left_background->get_pixbuf->get_height;
         my $width1 = $left_background->get_pixbuf->get_width;
         my $total_width = $width1 + $right_background->get_pixbuf->get_width;
         my $arrow_x = text_direction_rtl() ? $offset/2 -4 : $width1 - $offset -3;
@@ -666,7 +668,7 @@ sub _gtk__MDV_Notebook {
                 # stacking order is important for "Z-buffer":
                 [ $left_background, 0, 0 ],
                 if_($suffix ne '_600',
-                   [ gtknew('Image', file => 'left-background-filler.png'), 0, $left_background->get_pixbuf->get_height ],
+                   [ $filler, 0, $lf_height ],
                 ),
                 [ $selection_bar = gtknew('Image', file => 'rollover.png'), 0, 0 ], # arbitrary vertical position
                 ($opts->{children} ? @{ delete $opts->{children} } : ()),
