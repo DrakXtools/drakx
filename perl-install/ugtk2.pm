@@ -623,7 +623,7 @@ sub gtkcreate_img {
 # use it if you want to draw an image onto a drawingarea
 sub gtkcreate_pixbuf {
     my ($file, $o_size) = @_;
-    gtknew('Pixbuf', file => $_[0], if_($o_size, size => $o_size));
+    gtknew('Pixbuf', file => $file, if_($o_size, size => $o_size));
 }
 
 sub gtktext_append { gtktext_insert(@_, append => 1) }
