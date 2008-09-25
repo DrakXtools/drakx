@@ -102,7 +102,14 @@ function detect_root()
 function write_image()
 {
 	root=$(detect_root)
-	bzcat $images_dir/$image | dd of=/dev/$root bs=4096 > /tmp/backup.out 2>&1 &
+	image=$(cat $images_dir/list | cut -d ',' -f 3)
+	extension=$(echo $image | cut -d '.' -f 3)
+	case $extension in
+		gz) uncomp=zcat ;;
+		bz2) uncomp=bzcat ;;
+		*) uncomp=cat ;;
+	esac
+	$uncomp $images_dir/$image | dd of=/dev/$root bs=4M > /tmp/backup.out 2>&1 &
 
 	sleep 3
 	pid=$(ps ax | grep 'dd of' | grep -v grep | awk '{ print $1 }')
