@@ -76,20 +76,26 @@ function detect_root()
 	        dev=$(sed '/\/tmp\/media/!d;s/[0-9] .*$//;s/^.*\///' /proc/mounts)
 	        devices=$(grep "^ .*[^0-9]$" < /proc/partitions | grep -v ${dev} | awk '{ print $4,$3 }')
 
-		if [ ! -z ${dev} ]; then
-			opcao=$(dialog --backtitle "$BACKTITLE" --title "$TITLE" --stdout --menu 'Choose one of the detected devices to restore to (check the blocks size column first):' 8 50 0 $devices )
-			if [ "$?" != "0" ]; then
-				_yesno "\nInterrupt installation?\n "
-				if [ "$?" = "0" ]; then
-					_shutdown
-				fi
-			else
-				root=$opcao
-			fi
-
-			echo "$root"
+		devs_found=$(echo $devices | wc -w)
+		if [ "$devs_found" -gt "2" ]; then
+ 			if [ ! -z ${dev} ]; then
+ 				opcao=$(dialog --backtitle "$BACKTITLE" --title "$TITLE" --stdout --menu 'Choose one of the detected devices to restore to (check the blocks size column first):' 8 50 0 $devices )
+ 				if [ "$?" != "0" ]; then
+ 					_yesno "\nInterrupt installation?\n "
+ 					if [ "$?" = "0" ]; then
+ 						_shutdown
+ 					fi
+ 				else
+ 					root=$opcao
+ 				fi
+ 
+	 			echo "$root"
+ 			else
+ 	        	        _msgbox "\nError writing image: disk device not detected\n"
+ 			fi
 		else
-	                _msgbox "\nError writing image: disk device not detected\n"
+			root=$(echo $devices | cut -d ' ' -f 1)
+			echo "$root"
 		fi
 }
 
