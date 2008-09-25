@@ -1,7 +1,7 @@
 #!/bin/bash
 
-TITLE=" Classmate Installation "
-BACKTITLE="Mandriva - Intel"
+TITLE="Mandriva Installer"
+BACKTITLE="Mandriva"
 
 debug="/dev/null"
 
