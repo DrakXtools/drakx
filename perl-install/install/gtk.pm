@@ -309,6 +309,10 @@ Section "Screen"
 EndSection
 
 Section "ServerLayout"
+    Option "BlankTime"   "0"
+    Option "StandbyTime" "0"
+    Option "SuspendTime" "0"
+    Option "OffTime"     "0"
     Identifier "layout"
     Screen "screen"
     InputDevice "Mouse" "CorePointer"

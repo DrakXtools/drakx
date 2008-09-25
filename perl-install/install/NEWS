@@ -1,3 +1,5 @@
+- ensure DPMS screensaver is not triggered during install
+  (it interacts badly with matchbox/compositing) (#44021)
 - generate /root/drakx/package_list.pl at end of install 
   (since we don't propose "Save packages selection" at end of install)
 - generate /var/lib/rpm/installed-through-deps.list

@@ -57,7 +57,7 @@ sub new($$) {
 		install::gtk::createXconf($f, @{$o->{mouse}}{'Protocol', 'device'}, $o->{mouse}{wacom}[0], $Driver);
 
 		push @options, '-allowMouseOpenFail', '-xf86config', $f if arch() !~ /^sparc/;
-		push @options, 'vt7', '-s', '240', '-dpi', '75';
+		push @options, 'vt7', '-dpi', '75';
 		push @options, '-nolisten', 'tcp';
 
 		#- old weird servers: Xsun
