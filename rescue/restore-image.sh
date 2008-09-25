@@ -32,7 +32,7 @@ function welcome()
 {
 	while true; do
 		clear
-		msg="\n       Welcome to Classmate OEM Installer\n\
+		msg="\n       Welcome to $TITLE\n\
 \nThe following images were found, select one:\n "
 		opcao=$(dialog --backtitle "$BACKTITLE" --title "$TITLE" \
 				--stdout --radiolist "$msg" 0 0 0 \
