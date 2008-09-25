@@ -7,7 +7,7 @@ fi
 
 export PATH="/sbin:/bin:/usr/sbin:/usr/bin"
 
-images_dir="/ramdisk/live/media/images"
+images_dir="/tmp/media/images"
 images="$images_dir/list"
 image=""
 
@@ -69,7 +69,7 @@ do you want to continue?\n "
 
 function detect_root()
 {
-	        dev=$(sed '/ramdisk\/live\/media/!d;s/[0-9] .*$//;s/^.*\///' /proc/mounts)
+	        dev=$(sed '/\/tmp\/media/!d;s/[0-9] .*$//;s/^.*\///' /proc/mounts)
 	        devices=$(grep "^ .*[^0-9]$" < /proc/partitions | grep -v ${dev} | awk '{ print $4,$3 }')
 
 		if [ ! -z ${dev} ]; then
