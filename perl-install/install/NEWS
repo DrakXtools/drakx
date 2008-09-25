@@ -2,6 +2,9 @@
   (since we don't propose "Save packages selection" at end of install)
 - generate /var/lib/rpm/installed-through-deps.list
   (to initialize urpmi orphans)
+- drakx-in-chroot: do not require running kernel to be installed,
+  generate empty modules.dep and modules.alias files instead
+  (useful when running drakx-in-chroot from a chroot)
 
 Version 11.53.2 - 25 September 2008
 

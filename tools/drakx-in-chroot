@@ -95,7 +95,7 @@ eval { cp_af($_, "$SLASH_LOCATION$_") } foreach qw(/etc/resolv.conf);
     chomp(my $kernel_version = `uname -r`);
     my $dir = "/modules/$kernel_version";
     mkdir_p("$SLASH_LOCATION$dir");
-    cp_af("/lib/$dir/modules.dep", "/lib/$dir/modules.alias", "$SLASH_LOCATION$dir");
+    output_p("$SLASH_LOCATION$dir" . $_, "\n") foreach "/lib/$dir/modules.dep", "/lib/$dir/modules.alias";
 }
 
 my $Xnest_pid;
