@@ -601,7 +601,7 @@ sub _gtk__ScrolledWindow {
 	    $child->{to_bottom} = _allow_scroll_TextView_to_bottom($w, $child);
 	}
 
-	if ($action eq 'gtknew' && ref($child) =~ /Gtk2::(Html2|SimpleList|TextView|TreeView|WebKit::WebView)/) {
+	if (!delete $opts->{no_shadow} && $action eq 'gtknew' && ref($child) =~ /Gtk2::(Html2|SimpleList|TextView|TreeView|WebKit::WebView)/) {
 	    $faked_w = gtknew('Frame', shadow_type => 'in', child => $w);
 	}
     }
