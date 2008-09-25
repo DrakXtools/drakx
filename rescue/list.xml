@@ -112,6 +112,8 @@
   uniq
   wget
 
+  awk clear dialog
+
   <if ARCH="i.86|x86_64|ia64">
     dmidecode 
   </if>
@@ -306,9 +308,16 @@
     replication.conf
   </to>
 </from>
+<from dir=".">
+    <to dir="/usr/sbin">
+      restore-image.sh
+    </to>
+    <to dir="/usr/lib">
+      restore-image-lib.sh
+    </to>
+</from>
 <if set="RESCUE_FLASH">
   <from expand="binary">
-    clear
     dirname
     losetup
     mlabel
