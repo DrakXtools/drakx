@@ -332,6 +332,7 @@ sub empty_packages {
     @$packages{qw(count media)} = (0, []);
 
     $packages->{log} = \&log::l;
+    $packages->{root} = $::prefix;
     $packages->{prefer_vendor_list} = '/etc/urpmi/prefer.vendor.list';
     $packages->{keep_unrequested_dependencies} =
       defined($o_keep_unrequested_dependencies) ? $o_keep_unrequested_dependencies : 1;
