@@ -1,4 +1,8 @@
 #!/bin/bash
+
+setterm -powersave off
+setterm -blank 0
+
 if [ -r ./restore-image-lib.sh ]; then
 	. ./restore-image-lib.sh
 elif [ -r /usr/lib/restore-image-lib.sh ]; then
