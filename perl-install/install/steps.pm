@@ -826,6 +826,8 @@ sub exitInstall {
 	output "$::prefix$report", install::any::report_bug();
 	run_program::rooted($::prefix, 'gzip', $report);
     };
+    output("$::prefix/root/drakx/package_list.pl", install::any::selected_leaves_pl($o));
+
     eval { install::any::getAndSaveAutoInstallFloppies($o, 1) } if arch() !~ /^ppc/;
     eval { output "$::prefix/root/drakx/README", "This directory contains several installation-related files,
 mostly log files (very useful if you ever report a bug!).
