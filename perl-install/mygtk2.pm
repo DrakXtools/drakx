@@ -654,7 +654,7 @@ sub _gtk__MDV_Notebook {
         my ($layout, $selection_arrow, $selection_bar);
         my $parent_window = delete $opts->{parent_window} || root_window();
         my $root_height = first($parent_window->get_size());
-        my $suffix = $::testing || $root_height eq 800 ? '_600' : '_768';
+        my $suffix = $root_height eq 800 && !$::isStandalone ? '_600' : '_768';
         # the white square is a little bit above the actual left sidepanel:
         my $offset = 20;
         my $is_flip_needed = text_direction_rtl();
