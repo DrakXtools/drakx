@@ -752,14 +752,19 @@ sub g_default_packages {
     my ($o) = @_;
 
     my ($_h, $file) = media_browser($o, 'save', 'package_list.pl') or return;
+    output($file, selected_leaves_pl($o));
+}
+
+sub selected_leaves_pl {
+    my ($o) = @_;
 
     require Data::Dumper;
     my $str = Data::Dumper->Dump([ { default_packages => install::pkgs::selected_leaves($o->{packages}) } ], ['$o']);
     $str =~ s/ {8}/\t/g;
-    output($file,
-	   "# You should always check the syntax with 'perl -cw auto_inst.cfg.pl'\n" .
-	   "# before testing.  To use it, boot with ``linux defcfg=floppy''\n" .
-	   $str);
+
+    "# You should always check the syntax with 'perl -cw auto_inst.cfg.pl'\n" .
+      "# before testing.  To use it, boot with ``linux defcfg=floppy''\n" .
+      $str;
 }
 
 sub loadO {
