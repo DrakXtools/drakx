@@ -482,6 +482,9 @@ sub ask_from_normalize {
     }
     $common->{interactive_help} ||= $o->{interactive_help};
     $common->{interactive_help} ||= $common->{interactive_help_id} && $o->interactive_help_sub_get_id($common->{interactive_help_id});
+    if (!$::isInstall) {
+        delete $common->{$_} foreach qw(interactive_help interactive_help_id);
+    }
     $common->{advanced_label} ||= N("Advanced");
     $common->{advanced_label_close} and log::l("advanced_label_close is not used anymore");
     $common->{$_} = $common->{$_} ? [ map { $o->adapt_markup($_) } deref($common->{$_}) ] : [] 
