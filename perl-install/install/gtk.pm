@@ -161,9 +161,6 @@ sub create_steps_window {
     );
         
     $root_window->show_all;
-
-    # hide default selection since its position is bogus:
-    $o->{steps_widget}->hide_selection;
 }
 
 sub update_steps_position {
