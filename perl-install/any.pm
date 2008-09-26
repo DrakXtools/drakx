@@ -912,7 +912,7 @@ sub display_release_notes {
     ugtk2->import(':all');
     require mygtk2;
     mygtk2->import('gtknew');
-    my $view     = Gtk2::WebKit::WebView->new;
+    my $view = gtknew('WebKit_View', no_popup_menu => 1);
     $view->load_html_string($release_notes, '/');
                                
     my $w = ugtk2->new(N("Release Notes"), transient => $::main_window, modal => 1, pop_it => 1);
