@@ -785,7 +785,7 @@ sub display_help {
     my ($o, $common, $mainw) = @_;
     if (my $file = $common->{interactive_help_id}) {
         require Gtk2::WebKit;
-        my $view     = Gtk2::WebKit::WebView->new;
+        my $view = gtknew('WebKit_View');
 
         load_from_uri($view, "$file.html");
 
