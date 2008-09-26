@@ -90,6 +90,11 @@ sub dmcrypts {
 sub lvms {
     my ($all_hds) = @_;
     my @pvs = grep { isRawLVM($_) } fs::get::fstab($all_hds) or return;
+    scan_pvs(@pvs);
+}
+
+sub scan_pvs {
+    my (@pvs) = @_;
 
     log::l("looking for vgs in " . join(' ', map { $_->{device} } @pvs));
 
