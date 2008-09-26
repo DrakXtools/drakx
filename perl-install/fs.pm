@@ -291,6 +291,7 @@ sub write_fstab {
     log::l("writing $o_prefix/etc/fstab");
     my $fstab = [ fs::get::really_all_fstab($all_hds), @{$all_hds->{special}} ];
     my ($s, $smb_credentials) = prepare_write_fstab($fstab, $o_prefix, '');
+    renamef("$o_prefix/etc/fstab", "$o_prefix/etc/fstab.old");
     output("$o_prefix/etc/fstab", $s);
     fs::remote::smb::save_credentials($_) foreach @$smb_credentials;
     fs::dmcrypt::save_crypttab($all_hds) if @{$all_hds->{dmcrypts}};
