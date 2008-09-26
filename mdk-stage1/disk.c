@@ -42,6 +42,62 @@
 
 #include "disk.h"
 
+static enum return_type try_automatic_with_partition(char *dev) {
+	enum return_type results;
+	int mounted;
+	wait_message("Trying to access " DISTRIB_NAME " disk (partition %s)", dev);
+	mounted = !try_mount(dev, MEDIA_LOCATION);
+	remove_wait_message();
+	if (mounted && !access(MEDIA_LOCATION "/" COMPRESSED_LOCATION_REL, R_OK)) {
+		results = try_with_directory(MEDIA_LOCATION, "disk", "disk-iso");
+		if (results == RETURN_OK) {
+			if (!KEEP_MOUNTED)
+				umount(MEDIA_LOCATION);
+			return RETURN_OK;
+		}
+	}
+	if (mounted)
+		umount(MEDIA_LOCATION);
+	return RETURN_ERROR;
+}
+
+static enum return_type try_automatic_with_disk(char *disk, char *model) {
+	char * parts[50];
+	char * parts_comments[50];
+	enum return_type results;
+	char **dev;
+	wait_message("Trying to access " DISTRIB_NAME " disk (drive %s)", model);
+	if (list_partitions(disk, parts, parts_comments)) {
+		stg1_error_message("Could not read partitions information.");
+		return RETURN_ERROR;
+	}
+	remove_wait_message();
+	dev = parts;
+	while (dev && *dev) {
+		results = try_automatic_with_partition(*dev);
+		if (results == RETURN_OK) {
+			return RETURN_OK;
+		}
+		dev++;
+	}
+	return RETURN_ERROR;
+}
+
+static enum return_type try_automatic(char ** medias, char ** medias_models)
+{
+	char ** model = medias_models;
+	char ** ptr = medias;
+	while (ptr && *ptr) {
+		enum return_type results;
+		results = try_automatic_with_disk(*ptr, *model);
+		if (results == RETURN_OK)
+			return RETURN_OK;
+		ptr++;
+		model++;
+	}
+	return RETURN_ERROR;
+}
+
 static enum return_type try_with_device(char *dev_name)
 {
 	char * questions_location[] = { "Directory or ISO images directory or ISO image", NULL };
@@ -121,6 +177,13 @@ enum return_type disk_prepare(void)
 	static int already_probed_ide_generic = 0;
 
         int count = get_disks(&medias, &medias_models);
+
+	if (IS_AUTOMATIC) {
+		results = try_automatic(medias, medias_models);
+		if (results != RETURN_ERROR)
+			return results;
+		unset_automatic();
+        }
 
 	if (count == 0) {
 		if (!already_probed_ide_generic) {
