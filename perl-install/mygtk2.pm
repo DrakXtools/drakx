@@ -527,6 +527,24 @@ sub _gtk__TextView {
     $w;
 }
 
+sub _gtk__WebKit_View {
+    my ($w, $opts, $_class, $action) = @_;
+    if (!$w) {
+        $w = Gtk2::WebKit::WebView->new;
+    }
+
+    # disable contextual menu:
+    if (delete $opts->{no_popup_menu}) {
+        $w->signal_connect('populate-popup' => sub {
+                               my (undef, $menu) = @_;
+                               $menu->destroy if $menu;
+                               1;
+                           });
+    }
+
+    $w;
+}
+
 sub _gtk__ComboBox {
     my ($w, $opts, $_class, $action) = @_;
 
