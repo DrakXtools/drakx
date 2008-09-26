@@ -719,6 +719,7 @@ sub _gtk__MDV_Notebook {
                                state $width ||= $right_background[0]->get_pixbuf->get_width;
                                $box->set_size_request($width, $requisition->height);
                            });
+        $_->set_property('no-show-all', 1) foreach $selection_bar, $selection_arrow;
         bless($w, 'Gtk2::MDV_Notebook');
         add2hash($w, {
             arrow_x         => $arrow_x,
