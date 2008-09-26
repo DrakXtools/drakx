@@ -834,10 +834,6 @@ sub dmcrypt_open {
 	delete $part->{dmcrypt_key};
 	die(($? >> 8) == 255 ? N("Invalid key") : $@);
     }
-
-    if (isRawLVM($part)) {
-	push @{$all_hds->{lvms}}, fsedit::scan_pvs($part);
-    }
 }
 
 sub Add2RAID {
