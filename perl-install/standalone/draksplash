@@ -10,6 +10,7 @@ use interactive;
 use bootsplash;
 
 my $in = 'interactive'->vnew('su');
+my $global_width = 500;
 
 $in->do_pkgs->ensure_is_installed('ImageMagick', '/usr/bin/convert') or close_all();
 $in->do_pkgs->ensure_is_installed('netpbm', '/usr/bin/jpegtopnm') or close_all();
@@ -116,7 +117,7 @@ gtkadd($window->{window},
 			 gtknew('Button', text => N("Quit"), clicked => \&close_all)])])),
 gtkshow(gtkadd($preview_window->{window}, $scroll));
 
-$window->{rwindow}->set_size_request(500, -1);
+$window->{rwindow}->set_size_request($global_width, -1);
 $window->{rwindow}->set_border_width(5);
 $window->{rwindow}->set_position('center');
 $window->{rwindow}->show_all;
