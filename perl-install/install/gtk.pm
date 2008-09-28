@@ -172,7 +172,7 @@ sub update_steps_position {
 	if ($o->{steps}{$_}{entered} && !$o->{steps}{$_}{done}) {
             # we need to flush the X queue since else we got a temporary Y position of -1 when switching locales:
             mygtk2::flush(); #- for auto_installs which never go through the Gtk2 main loop
-            $o->{steps_widget}->move_selection($steps{steps}{$_}{text}->allocation->y);
+            $o->{steps_widget}->move_selection($steps{steps}{$_}{text});
 
             if ($last_step) {
                 $steps{steps}{$last_step}{img}->set_from_pixbuf($steps{done});

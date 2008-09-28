@@ -1478,11 +1478,11 @@ sub hide_selection {
 }
 
 sub move_selection {
-    my ($w, $y) = @_;
+    my ($w, $label) = @_;
     my $layout = $w->{layout};
     $layout->{arrow_ydiff} ||=
       ($w->{selection_arrow}->get_pixbuf->get_height - $w->{selection_bar}->get_pixbuf->get_height)/2;
-    my $bar_y = $y -3; # text's pos_y -3
+    my $bar_y = $label->allocation->y - ($w->{selection_bar}->get_pixbuf->get_height - $label->allocation->height)/2;
     $layout->move($w->{selection_bar}, 0, $bar_y);
     $layout->move($w->{selection_arrow}, $w->{arrow_x}, $bar_y - $layout->{arrow_ydiff}); # arrow is higer
     $_->show foreach $w->{selection_bar}, $w->{selection_arrow};
