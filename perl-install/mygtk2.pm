@@ -1081,11 +1081,11 @@ sub _gtk__Table {
 	    my $j = $::i;
 	    if ($_) {
 		ref $_ or $_ = Gtk2::WrappedLabel->new($_);
-		$j != $#$l && !$w->{mcc} ?
-		  $w->attach($_, $j, $j + 1, $i, $i + 1,
-			     'fill', 'fill', $w->{xpadding}, $w->{ypadding}) :
-			       $w->attach($_, $j, $j + 1, $i, $i + 1,
-					  ['expand', 'fill'], ref($_) eq 'Gtk2::ScrolledWindow' || $_->get_data('must_grow') ? ['expand', 'fill'] : [], 0, 0);
+                $w->attach($_, $j, $j + 1, $i, $i + 1,
+                           $j != $#$l && !$w->{mcc} ?
+			     ('fill', 'fill', $w->{xpadding}, $w->{ypadding}) :
+                               (['expand', 'fill'], ref($_) eq 'Gtk2::ScrolledWindow' || $_->get_data('must_grow') ?
+                                 ['expand', 'fill'] : [], 0, 0));
 		$_->show;
 	    }
 	} @$l;
