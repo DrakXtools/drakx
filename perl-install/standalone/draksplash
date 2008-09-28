@@ -116,7 +116,7 @@ gtkadd($window->{window},
 			 gtknew('Button', text => N("Quit"), clicked => \&close_all)])])),
 gtkshow(gtkadd($preview_window->{window}, $scroll));
 
-$window->{rwindow}->set_size_request(400, -1);
+$window->{rwindow}->set_size_request(500, -1);
 $window->{rwindow}->set_border_width(5);
 $window->{rwindow}->set_position('center');
 $window->{rwindow}->show_all;
