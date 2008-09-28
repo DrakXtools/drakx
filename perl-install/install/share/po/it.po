@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-12 16:44+0200\n"
-"PO-Revision-Date: 2008-03-24 21:35+0100\n"
+"PO-Revision-Date: 2008-09-28 18:29+0200\n"
 "Last-Translator: Andrea Celli <andrea.celli@libero.it>\n"
 "Language-Team: Italian <timl@freelists.org>\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr ""
 #: any.pm:109
 #, c-format
 msgid "Do you have further supplementary media?"
-msgstr "Hai delle altre fonti d'installazione?"
+msgstr "Ci sono altre fonti d'installazione?"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: any.pm:112
@@ -73,8 +73,7 @@ msgstr "L'URL deve iniziare con ftp:// o http://"
 
 #: any.pm:180
 #, c-format
-msgid ""
-"Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr ""
 "Connessione al sito Mandriva Linux per ricevere l'elenco dei mirror "
 "disponibili..."
@@ -101,8 +100,7 @@ msgstr "Configurazione NFS"
 #: any.pm:226
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
-msgstr ""
-"Immetti il nome dell'host e della directory che userai come supporto NFS"
+msgstr "Immetti il nome dell'host e della directory che userai come supporto NFS"
 
 #: any.pm:230
 #, c-format
@@ -299,7 +297,7 @@ msgstr "Disattivazione della rete..."
 #: media.pm:422
 #, c-format
 msgid "Please wait, retrieving file"
-msgstr ""
+msgstr "Recupero del file in corso..."
 
 #: media.pm:703 media.pm:714
 #, c-format
@@ -746,29 +744,29 @@ msgid "Custom install"
 msgstr "Installazione personalizzata"
 
 #: steps_gtk.pm:259
-#, fuzzy, c-format
+#, c-format
 msgid "KDE Desktop"
-msgstr "Desktop IceWm"
+msgstr "Desktop KDE"
 
 #: steps_gtk.pm:260
-#, fuzzy, c-format
+#, c-format
 msgid "GNOME Desktop"
-msgstr "Desktop IceWm"
+msgstr "Desktop GNOME"
 
 #: steps_gtk.pm:261
-#, fuzzy, c-format
+#, c-format
 msgid "Custom Desktop"
-msgstr "Desktop IceWm"
+msgstr "Desktop personalizzato"
 
 #: steps_gtk.pm:267
 #, c-format
 msgid "Here's a preview of the '%s' desktop."
-msgstr ""
+msgstr "Anteprima del desktop %s"
 
 #: steps_gtk.pm:275
 #, c-format
 msgid "Click on images in order to see a bigger preview"
-msgstr ""
+msgstr "Fai clic sull'immagine per allargare l'anteprima"
 
 #: steps_gtk.pm:287 steps_interactive.pm:618 steps_list.pm:30
 #, c-format
@@ -915,9 +913,9 @@ msgid "No details"
 msgstr "Senza dettagli"
 
 #: steps_gtk.pm:559
-#, fuzzy, c-format
+#, c-format
 msgid "Time remaining:"
-msgstr "Tempo restante: "
+msgstr "Tempo restante:"
 
 #: steps_gtk.pm:560
 #, c-format
@@ -947,9 +945,9 @@ msgid "not configured"
 msgstr "non configurata"
 
 #: steps_gtk.pm:694
-#, fuzzy, c-format
+#, c-format
 msgid "Media Selection"
-msgstr "Selezione per gruppi di pacchetti"
+msgstr "Selezione della fonte"
 
 #: steps_gtk.pm:704 steps_interactive.pm:335
 #, c-format
@@ -988,9 +986,9 @@ msgid "Please choose your keyboard layout"
 msgstr "Scegli la mappa della tastiera"
 
 #: steps_interactive.pm:105
-#, fuzzy, c-format
+#, c-format
 msgid "Here is the full list of available keyboards:"
-msgstr "Ecco la lista completa delle tastiere disponibili"
+msgstr "Elenco completo delle tastiere disponibili:"
 
 #: steps_interactive.pm:136
 #, c-format
@@ -1036,17 +1034,17 @@ msgstr "Chiave di codifica per %s"
 #: steps_interactive.pm:199
 #, c-format
 msgid "Cancel installation, reboot system"
-msgstr ""
+msgstr "Annulla l'installazione e riavvia il sistema"
 
 #: steps_interactive.pm:200
-#, fuzzy, c-format
+#, c-format
 msgid "New Installation"
-msgstr "Installazione"
+msgstr "Nuova installazione"
 
 #: steps_interactive.pm:201
 #, c-format
 msgid "Upgrade previous installation (not recommended)"
-msgstr ""
+msgstr "Aggiorna installazione precedente (non raccomandato)"
 
 #: steps_interactive.pm:205
 #, c-format
@@ -1059,6 +1057,13 @@ msgid ""
 "Warning : you should backup all your personal data before choosing \"New\n"
 "Installation\"."
 msgstr ""
+"Il programma di installazione segnala che potrebbero esserci problemi\n"
+"ad aggiornare l'attuale sistema Mandriva Linux con %s\\ "
+"\n"
+"Si raccomanda una nuova installazione che sostituisca la precedente.\n"
+"\n"
+"Attenzione: dovresti fare una copia di riserva di tutti i dati personali\n"
+"prima di scegliere \"Nuova installazione\"."
 
 #: steps_interactive.pm:247
 #, c-format
@@ -1142,24 +1147,24 @@ msgid "Bad file"
 msgstr "File non valido"
 
 #: steps_interactive.pm:485
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:486
 #, c-format
 msgid "GNOME"
-msgstr ""
+msgstr "GNOME"
 
 #: steps_interactive.pm:489
-#, fuzzy, c-format
+#, c-format
 msgid "Desktop Selection"
-msgstr "Selezione per gruppi di pacchetti"
+msgstr "Selezione del desktop"
 
 #: steps_interactive.pm:490
-#, fuzzy, c-format
+#, c-format
 msgid "You can choose your workstation desktop profile:"
-msgstr "Puoi scegliere l'ambiente desktop: KDE, GNOME o personalizzato"
+msgstr "Puoi scegliere un profilo per l'ambiente desktop:"
 
 #: steps_interactive.pm:575
 #, c-format
@@ -1248,8 +1253,7 @@ msgstr "Configurazione post installazione"
 #: steps_interactive.pm:717
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
-msgstr ""
-"Assicurati che gli \"Update Modules\" siano leggibili dal dispositivo %s"
+msgstr "Assicurati che gli \"Update Modules\" siano leggibili dal dispositivo %s"
 
 #: steps_interactive.pm:745 steps_list.pm:47
 #, c-format
@@ -1581,44 +1585,3 @@ msgstr "Un sistema Mandriva Linux completo, con supporto"
 msgid "Mandriva: distributions for everybody's needs"
 msgstr "Mandriva: le distribuzioni per le esigenze di ognuno"
 
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr ""
-#~ "Connessione al mirror per ricevere l'elenco dei pacchetti disponibili..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Non si riesce a contattare il mirror %s"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Crea il floppy di installazione automatica"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "Se vuoi, l'installazione automatica può essere del tutto automatizzata,\n"
-#~ "ma in tal caso il programma partizionerà automaticamente il disco!!\n"
-#~ "(questa opzione è pensata per l'installazione su un'altra macchina).\n"
-#~ "\n"
-#~ "Probabilmente preferisci ripetere l'installazione.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Ripeti"
-
-#~ msgid "Automated"
-#~ msgstr "Automatizzata"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Salva scelta pacchetti"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Vuoi usare aboot?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Errore installando aboot, \n"
-#~ "vuoi forzare l'installazione anche se distruggerà la prima partizione?"
