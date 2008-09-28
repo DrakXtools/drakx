@@ -58,6 +58,9 @@ my $notebook = gtksignal_connect(gtknew('Notebook'), switch_page => sub {
 				     switch_to_mode($mode);
 				 });
 $notebook->append_page(gtknew('VBox', spacing => 5, children_tight => [
+    gtknew('Notebook', children => [
+        gtknew('Label', text => N("Progress Bar")),
+        gtknew('VBox', spacing => 5, children_tight => [
 				 create_scale_table('px', 'pw', 'py', 'ph', 'ptransp'),
 				 gtknew('Button', text => N("Choose progress bar color 1"),
                                         clicked => sub { choose_color('pc1') }),
@@ -71,11 +74,16 @@ $notebook->append_page(gtknew('VBox', spacing => 5, children_tight => [
                                          Gtk2::ComboBox->new_with_strings([ 'vertical', 'horizontal' ], 'vertical'),
                                          changed => sub { $theme{conf}{gradient} = $_[0]->entry->get_text }),
                                  ]),
+                             ]),
+        gtknew('Label', text => N("Text")),
+        gtknew('VBox', spacing => 5, children_tight => [
 				 gtknew('Button', text => N("Choose text color"),
                                         clicked => sub { choose_color('text_color') }),
 				 create_scale_table('text_x', 'text_y', 'text_size'),
 				 gtknew('Button', text => N("Choose picture"),
                                         clicked => sub { choose_image('silentjpeg') })]),
+    ])
+]),
 		       N("Silent bootsplash"));
 $notebook->append_page(gtknew('VBox', spacing => 5, children_tight => [
 				 create_scale_table('tb_x', 'tb_y', 'tb_w', 'tb_h', 'transp'),
