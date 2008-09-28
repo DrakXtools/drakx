@@ -269,16 +269,20 @@ my %security_checks_value;
 my $check_string = N("Periodic Checks");
 
 register_help_page($check_string);
-gtkappend_page($notebook, gtkshow(gtknew('VBox', children => [
-                                        1, create_scrolled_window(create_packtable($common_opts,
-                                                                                   map {
-                                                                                       my $i = $_;
-                                                                                       my $opt = $inv_fields{$i} || $i;
-                                                                                       $security_checks_value{$i} = new_nonedit_combo([ 'yes', 'no', 'default' ], $msec->get_check_value($opt));
-                                                                                       register_help_entry($i, $msec->get_check_default($opt), $opt);
-                                                                                       [ gtkshow(gtknew('Label_Left', line_wrap => 1, text => $i)), resize($security_checks_value{$i}) ];
-                                                                                   } sort map { $fields{$_} || $_ } $msec->list_checks)) ])),
-                       gtknew('Label', text => $check_string));
+gtkappend_page($notebook, 
+               gtkshow(gtknew('VBox', children => [
+                   1, create_scrolled_window(
+                       create_packtable($common_opts,
+                                        map {
+                                            my $i = $_;
+                                            my $opt = $inv_fields{$i} || $i;
+                                            $security_checks_value{$i} = new_nonedit_combo([ 'yes', 'no', 'default' ],
+                                                                                           $msec->get_check_value($opt));
+                                            register_help_entry($i, $msec->get_check_default($opt), $opt);
+                                            [ gtkshow(gtknew('Label_Left', line_wrap => 1, text => $i)),
+                                              resize($security_checks_value{$i}) ];
+                                        } sort map { $fields{$_} || $_ } $msec->list_checks)) ])),
+               gtknew('Label', text => $check_string));
 
 
 ######################## AUTH ###################################
