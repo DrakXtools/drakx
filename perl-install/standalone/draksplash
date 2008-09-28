@@ -247,7 +247,7 @@ sub create_scale_table {
     gtknew('Table', col_spacings => 10, row_spacings => 5, children => [ map {
 	my $w = gtknew('HScale', adjustment => $adj{$_});
 	$w->set_digits(0);
-	[ gtknew('Label', text => $scale_settings{$_}[1]), $w ];
+	[ gtknew('WrappedLabel', text => formatAlaTeX($scale_settings{$_}[1])), $w ];
     } @settings]);
 }
 
