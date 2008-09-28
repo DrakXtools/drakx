@@ -10,7 +10,7 @@ use interactive;
 use bootsplash;
 
 my $in = 'interactive'->vnew('su');
-my $global_width = 500;
+my $global_width = 700;
 
 $in->do_pkgs->ensure_is_installed('ImageMagick', '/usr/bin/convert') or close_all();
 $in->do_pkgs->ensure_is_installed('netpbm', '/usr/bin/jpegtopnm') or close_all();
@@ -255,7 +255,7 @@ sub create_scale_table {
     gtknew('Table', col_spacings => 10, row_spacings => 5, children => [ map {
 	my $w = gtknew('HScale', adjustment => $adj{$_}, width => 100);
 	$w->set_digits(0);
-	[ gtknew('WrappedLabel', width => ($global_width-200), text => formatAlaTeX($scale_settings{$_}[1])), $w ];
+	[ gtknew('WrappedLabel', width => ($global_width-150), text => formatAlaTeX($scale_settings{$_}[1])), $w ];
     } @settings]);
 }
 
