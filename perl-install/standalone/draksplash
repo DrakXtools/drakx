@@ -244,7 +244,7 @@ sub create_adj_widgets() {
 sub create_scale_table {
     my @settings = @_;
     gtknew('Table', col_spacings => 10, row_spacings => 5, children => [ map {
-	my $w = Gtk2::HScale->new($adj{$_});
+	my $w = gtknew('HScale', adjustment => $adj{$_});
 	$w->set_digits(0);
 	[ gtknew('Label', text => $scale_settings{$_}[1]), $w ];
     } @settings]);
