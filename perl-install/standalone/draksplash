@@ -245,9 +245,9 @@ sub create_adj_widgets() {
 sub create_scale_table {
     my @settings = @_;
     gtknew('Table', col_spacings => 10, row_spacings => 5, children => [ map {
-	my $w = gtknew('HScale', adjustment => $adj{$_});
+	my $w = gtknew('HScale', adjustment => $adj{$_}, width => 100);
 	$w->set_digits(0);
-	[ gtknew('WrappedLabel', text => formatAlaTeX($scale_settings{$_}[1])), $w ];
+	[ gtknew('WrappedLabel', width => ($global_width-200), text => formatAlaTeX($scale_settings{$_}[1])), $w ];
     } @settings]);
 }
 
