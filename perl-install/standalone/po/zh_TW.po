@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-08 14:00+0200\n"
-"PO-Revision-Date: 2008-03-06 17:41+0800\n"
+"PO-Revision-Date: 2008-09-28 12:21+0800\n"
 "Last-Translator: Shiva Huang <shivahuang@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -765,14 +765,14 @@ msgid "Post Install"
 msgstr "後續安裝設定"
 
 #: drakfont:768
-#, fuzzy, c-format
+#, c-format
 msgid "Removing fonts"
-msgstr "正在匯入字型"
+msgstr "正在移除字型"
 
 #: drakfont:774
 #, c-format
 msgid "Remove fonts on your system"
-msgstr "由您的系統移除該字型"
+msgstr "從您的系統中移除字型"
 
 #: drakfont:775
 #, c-format
@@ -1124,7 +1124,7 @@ msgstr "請稍候"
 #. -PO: Translate the security levels (Poor, Standard, High, Higher and Paranoid) in the same way, you translated these individuals words.
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX.
 #: draksec:93
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Here, you can setup the security level and administrator of your machine.\n"
 "\n"
@@ -1182,14 +1182,29 @@ msgstr ""
 "是個使用者名稱或者電子郵件信箱。\n"
 "\n"
 "\n"
-"而 '<span weight=\"bold\">安全層級</span>' 選單則允許您從六個預先設定好的安全"
+"而 '<span weight=\"bold\">安全層級</span>' 選單則允許您從六個 msec 預先設定好的安全"
 "層級中挑一個來使用。\n"
-"它們的範圍從These levels range from '<span weight=\"bold\">poor</span>' "
-"security and ease of use, to\n"
-"'<span weight=\"bold\">paranoid</span>' config, suitable for very sensitive "
-"server applications:\n"
+"它們的範圍從 '<span weight=\"bold\">鬆散</span>' 的安全性卻容易使用，到\n"
+"'<span weight=\"bold\">偏執</span>' 的設定，適合用於非常敏感的伺服器應用：\n"
 "\n"
 "\n"
+"<span foreground=\"royalblue3\">鬆散</span>：這是個完全不安全但卻非常容易使用的安全層級。\n"
+"它只應該供那些不連線到任何網路，也因此無法讓任何人連線到的機器所使用。\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">標準</span>：這是建議用於聯結到網路上作為客戶端電腦的標準安全層級。\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">高</span>：有一些安全性限制，以及更多每晚自動執行的檢查。\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">更高</span>：這個安全層級已經讓這個系統足夠擔負一個\n"
+"接受眾多客戶端連線的伺服器之責任。\n"
+"如果您的機器只是網路上的客戶端，您應該選擇一個低一點的層級。\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">偏執</span>：這與前一個等級類似，但系統是完全封閉且安全性\n"
+"功能都在最嚴密的程度。"
 
 #: draksec:147 harddrake2:214
 #, c-format
@@ -1968,12 +1983,12 @@ msgstr "延伸分割區的數目"
 #: harddrake2:49
 #, c-format
 msgid "Geometry"
-msgstr "幾何"
+msgstr "配置表"
 
 #: harddrake2:49
 #, c-format
 msgid "Cylinder/head/sectors geometry of the disk"
-msgstr ""
+msgstr "磁碟的磁柱/磁頭/磁區配置表"
 
 #: harddrake2:50
 #, c-format
@@ -3004,6 +3019,7 @@ msgid ""
 "The proprietary driver for your graphic card can not be found, the system is "
 "now using the free software driver (%s)."
 msgstr ""
+"找不到您的顯示卡的專利驅動程式，系統現在會使用自由軟體的驅動程式 (%s)。"
 
 #: scannerdrake:51
 #, c-format
@@ -3573,13 +3589,12 @@ msgid "Hardware Central Configuration/information tool"
 msgstr "硬體組態設定中心/資訊工具"
 
 #: ../menu/harddrake.desktop.in.h:3
-#, fuzzy
 msgid "Hardware Configuration Tool"
-msgstr "硬體組態設定"
+msgstr "硬體設定工具"
 
 #: ../menu/localedrake-user.desktop.in.h:1
 msgid "Language & country configuration"
-msgstr "語言與國家組態設定"
+msgstr "語言與國家設定"
 
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
