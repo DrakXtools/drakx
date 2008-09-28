@@ -68,7 +68,7 @@ $notebook->append_page(gtknew('VBox', spacing => 5, children_tight => [
                                      gtknew('Label', text => N("Gradient type")),
                                      gtksignal_connect(
                                          Gtk2::ComboBox->new_with_strings([ 'vertical', 'horizontal' ], 'vertical'),
-                                         changed => sub { $theme{conf}{gradient} = $_[0]->get_child->get_text }),
+                                         changed => sub { $theme{conf}{gradient} = $_[0]->entry->get_text }),
                                  ]),
 				 gtknew('Button', text => N("Choose text color"),
                                         clicked => sub { choose_color('text_color') }),
@@ -82,10 +82,10 @@ $notebook->append_page(gtknew('VBox', spacing => 5, children_tight => [
                                         clicked => sub { choose_color('tc') }),
 				 gtknew('Label', text => N("Text color")), 
                                  gtksignal_connect(Gtk2::ComboBox->new_with_strings([ 0 .. 15 ], 1),
-                                                   changed => sub { $theme{conf}{fgcolor} = $_[0]->get_child->get_text }),
+                                                   changed => sub { $theme{conf}{fgcolor} = $_[0]->entry->get_text }),
 				 gtknew('Label', text => N("Background color")),
                                  gtksignal_connect(Gtk2::ComboBox->new_with_strings([ 0 .. 15 ], '0'), 
-                                                   changed => sub { $theme{conf}{bgcolor} = $_[0]->get_child->get_text }),
+                                                   changed => sub { $theme{conf}{bgcolor} = $_[0]->entry->get_text }),
 				 gtknew('Button', text => N("Choose picture"), clicked => sub { choose_image('jpeg') })]),
 		       N("Verbose bootsplash"));
 
@@ -98,7 +98,7 @@ gtkadd($window->{window},
 					   gtksignal_connect(
                                                Gtk2::ComboBoxEntry->new_with_strings(
                                                    [ bootsplash::themes_list() ], $theme{name}),
-                                               changed => sub { set_theme($_[0]->get_child->get_text) }) ],
+                                               changed => sub { set_theme($_[0]->entry->get_text) }) ],
 					 [ gtknew('Label', text => N("Final resolution")),
 					   gtksignal_connect(gtknew('ComboBox', text => $theme{res},
                                                                     list => \@bootsplash::resolutions),
