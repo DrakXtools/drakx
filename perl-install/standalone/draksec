@@ -227,31 +227,39 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
     my ($domain, $label) = @$_;
     register_help_page($label);
     my %values;
-    gtkappend_page($notebook, gtkshow(gtknew('VBox', children => [
-                                            1, create_scrolled_window(create_packtable($common_opts,
-                                                                                       map {
-                                                                                           my $i = $_;
-                                                                                           
-                                                                                           my $entry;
-                                                                                           my $opt = $inv_fields{$i} || $i;
-                                                                                           my $default = $msec->get_function_default($opt);
-                                                                                           if (member($default, @all_choices)) {
-                                                                                               $values{$i} = new_nonedit_combo(member($default, @yesno_choices) ? \@yesno_choices : if_(member($default, @alllocal_choices), \@alllocal_choices));
-                                                                                               $entry = $values{$i}->entry;
-                                                                                           } else {
-                                                                                               $values{$i} = gtknew('Entry');
-                                                                                               $entry = $values{$i};
-                                                                                           }
-                                                                                           $entry->set_text(to_i18n($msec->get_function_value($opt)));
-                                                                                           register_help_entry($i, $default, $opt);
-                                                                                           [ gtknew('Label_Left', line_wrap => 1, text => $i), resize($values{$i}) ];
-                                                                                       } sort map { $fields{$_} || $_ } $msec->list_functions($domain),
-                                                                                      ),
-                                                                      [ 'never', 'automatic' ],
-                                                                     ),
-                                           ])
+    gtkappend_page(
+        $notebook, 
+        gtkshow(gtknew('VBox', children => [
+            1, create_scrolled_window(create_packtable($common_opts,
+                                                       map {
+                                                           my $i = $_;
+                                                           
+                                                           my $entry;
+                                                           my $opt = $inv_fields{$i} || $i;
+                                                           my $default = $msec->get_function_default($opt);
+                                                           if (member($default, @all_choices)) {
+                                                               $values{$i} = 
+                                                                 new_nonedit_combo(
+                                                                     member($default, @yesno_choices) ?
+                                                                       \@yesno_choices :
+                                                                         if_(member($default, @alllocal_choices),
+                                                                             \@alllocal_choices));
+                                                               $entry = $values{$i}->entry;
+                                                           } else {
+                                                               $values{$i} = gtknew('Entry');
+                                                               $entry = $values{$i};
+                                                           }
+                                                           $entry->set_text(to_i18n($msec->get_function_value($opt)));
+                                                           register_help_entry($i, $default, $opt);
+                                                           [ gtknew('Label_Left', line_wrap => 1, text => $i),
+                                                             resize($values{$i}) ];
+                                                       } sort map { $fields{$_} || $_ } $msec->list_functions($domain),
+                                                   ),
+                                      [ 'never', 'automatic' ],
                                   ),
-                           gtknew('Label_Left', text => $label));
+        ])
+            ),
+        gtknew('Label_Left', text => $label));
     $options_values{$domain} = \%values;
 }
 
