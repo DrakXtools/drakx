@@ -120,7 +120,7 @@ gtkadd($window->{window},
                                   $theme{conf}{logo} = bool2yesno($_[0]->get_active);
                               }),
 	       $notebook,
-	       gtknew('HBox', spacing => 5, children_loose => [
+	       gtknew('HButtonBox', layout => 'edge', children_loose => [
 			 gtknew('Button', text => N("Save theme"), clicked => \&save_theme),
 			 gtknew('Button', text => N("Quit"), clicked => \&close_all)])])),
 gtkshow(gtkadd($preview_window->{window}, $scroll));
