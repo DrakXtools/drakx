@@ -774,6 +774,11 @@ sub _gtk_any_Window {
 	} elsif ($class eq 'Plug') {
 	    $opts->{socket_id} or internal_error("can not create a Plug without a socket_id");
 	    $w = "Gtk2::$class"->new(delete $opts->{socket_id});
+	} elsif ($class eq 'FileChooserDialog') {
+            my $action = delete $opts->{action} || internal_error("missing action for FileChooser");
+            $w = Gtk2::FileChooserDialog->new(delete $opts->{title}, delete $opts->{transient_for} || $::main_window,
+                                              $action, N("Cancel") => 'cancel', delete $opts->{button1} || N("Ok") => 'ok',
+                                          );
 	} else {
 	    $w = "Gtk2::$class"->new;
 	}
@@ -948,6 +953,8 @@ sub _gtk__FileSelection {
     }
     $w;
 }
+
+sub _gtk__FileChooserDialog    { &_gtk_any_Window }
 
 sub _gtk__FileChooser {
     my ($w, $opts) = @_;
