@@ -330,17 +330,7 @@ sub _gtk__Image {
         } : $class =~ /using_pixbuf/ ? sub { 
             my ($w, $file) = @_;
             my $pixbuf = _pixbuf_render_alpha(gtknew('Pixbuf', file => $file, %{$w->{options}}), 255);
-            my ($width, $height) = ($pixbuf->get_width, $pixbuf->get_height);
-            $w->set_size_request($width, $height);
-            $w->signal_connect(expose_event => sub {
-                                   if (!$w->{x}) {
-                                       my $alloc = $w->allocation;
-                                       $w->{x} = $alloc->x;
-                                       $w->{y} = $alloc->y;
-                                   }
-                                   $pixbuf->render_to_drawable($w->window, $w->style->fg_gc('normal'),
-                                                               0, 0, $w->{x}, $w->{y}, $width, $height, 'max', 0, 0);
-                               });
+	    $w->set_from_pixbuf($pixbuf);
         } : sub { 
             my ($w, $file, $o_size) = @_;
             my $pixbuf = gtknew('Pixbuf', file => $file, if_($o_size, size => $o_size), %{$w->{options}});
