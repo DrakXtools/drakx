@@ -202,7 +202,7 @@ sub setupBootloaderBefore {
                                   detect_devices::matching_desc__regexp('GeForce.*Integrated') #- needed for fbdev driver (hack).
                                  );
 
-    #- propose the default fb mode for kernel fb, if aurora or bootsplash is installed.
+    #- propose the default fb mode for kernel fb, if bootsplash is installed.
     my $need_fb = $do_pkgs->are_installed('bootsplash');
     bootloader::suggest($bootloader, $all_hds,
                         vga_fb => ($force_vga || $vga && $need_fb) && $vga_fb,
