@@ -701,7 +701,7 @@ sub ask_deselect_media__copy_on_disk {
     my ($_o, $hdlists, $o_copy_rpms_on_disk) = @_;
 
     my @names = uniq(map { $_->{name} } @$hdlists);
-    my %selection = map { $_ => 1 } @names;
+    my %selection = map { $_->{name} => $_->{selected} } @$hdlists;
 
     if (@names > 1 || $o_copy_rpms_on_disk) {
 	my $w = ugtk2->new(N("Media Selection"));
