@@ -45,7 +45,7 @@ sub ask_fileW {
 sub create_boxradio {
     my ($e, $onchange_f, $double_click) = @_;
 
-    my $boxradio = gtkpack2__(Gtk2::VBox->new(0, 0),
+    my $boxradio = gtkpack2__(Gtk2::VBox->new,
 			      my @radios = gtkradio('', @{$e->{formatted_list}}));
     my $tips = Gtk2::Tooltips->new;
     mapn {
