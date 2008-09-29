@@ -69,7 +69,7 @@ $notebook->append_page(gtknew('VBox', spacing => 5, children_tight => [
 				 gtknew('Button', text => N("Choose progress bar background"),
                                         clicked => sub { choose_color('pbg_c') }),
                                  gtknew('HButtonBox', layout => 'edge', children_tight => [
-                                     gtknew('Label', text => N("Gradient type")),
+                                     my $l = gtknew('Label', text => N("Gradient type")),
                                      gtksignal_connect(
                                          Gtk2::ComboBox->new_with_strings([ 'vertical', 'horizontal' ], 'vertical'),
                                          changed => sub { $theme{conf}{gradient} = $_[0]->entry->get_text }),
@@ -129,6 +129,18 @@ $window->{rwindow}->set_size_request($global_width, -1);
 $window->{rwindow}->set_border_width(5);
 $window->{rwindow}->set_position('center');
 $window->{rwindow}->show_all;
+
+Glib::Timeout->add(100, sub { 
+                       my (undef, $y_pangolayout_offset) = $l->get_layout_offsets;
+                       my $pango_layout = $l->get_layout;
+                       my $y = $pango_layout->get_height; 
+                       my (undef, $t) = $pango_layout->get_pixel_size;
+                       warn ">> [$y_pangolayout_offset] $y => $t\n";
+                       use Data::Dumper;
+                       warn Dumper [ $pango_layout->get_pixel_extents ];
+                       0;
+                   });
+
 $window->main;
 
 # Should never get here
