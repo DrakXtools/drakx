@@ -196,7 +196,7 @@ sub bug_handler {
     return if $error && $^S ne '0' && !$is_signal;
 
     # exceptions with "\n" are normal ways to quit:
-    if (!$is_signal && $error eq MDK::Common::String::formatError($error)) {
+    if (!$is_signal && eval { $error eq MDK::Common::String::formatError($error) }) {
         warn $error;
         exit(255);
     }
