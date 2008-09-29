@@ -302,9 +302,8 @@ sub row_setting_dialog {
      
      
     $browse->signal_connect(clicked => sub {
-                     my $file_dlg = gtknew('FileChooserDialog', title => N("Path selection"), action => 'select_folder');
-                     $file_dlg->set_modal(1);
-                     $file_dlg->set_transient_for($dlg);
+                     my $file_dlg = gtknew('FileChooserDialog', title => N("Path selection"), action => 'select_folder',
+                                           modal => 1, transient_for => $dlg);
                      $file_dlg->set_filename($file->get_text);
                      $file_dlg->show;
                      my $answer = $file_dlg->run;
