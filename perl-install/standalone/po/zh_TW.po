@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-08 14:00+0200\n"
+"POT-Creation-Date: 2008-09-29 14:19+0200\n"
 "PO-Revision-Date: 2008-09-28 12:21+0800\n"
 "Last-Translator: Shiva Huang <shivahuang@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
@@ -1182,28 +1182,33 @@ msgstr ""
 "是個使用者名稱或者電子郵件信箱。\n"
 "\n"
 "\n"
-"而 '<span weight=\"bold\">安全層級</span>' 選單則允許您從六個 msec 預先設定好的安全"
-"層級中挑一個來使用。\n"
+"而 '<span weight=\"bold\">安全層級</span>' 選單則允許您從六個 msec 預先設定好"
+"的安全層級中挑一個來使用。\n"
 "它們的範圍從 '<span weight=\"bold\">鬆散</span>' 的安全性卻容易使用，到\n"
 "'<span weight=\"bold\">偏執</span>' 的設定，適合用於非常敏感的伺服器應用：\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">鬆散</span>：這是個完全不安全但卻非常容易使用的安全層級。\n"
+"<span foreground=\"royalblue3\">鬆散</span>：這是個完全不安全但卻非常容易使用"
+"的安全層級。\n"
 "它只應該供那些不連線到任何網路，也因此無法讓任何人連線到的機器所使用。\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">標準</span>：這是建議用於聯結到網路上作為客戶端電腦的標準安全層級。\n"
+"<span foreground=\"royalblue3\">標準</span>：這是建議用於聯結到網路上作為客戶"
+"端電腦的標準安全層級。\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">高</span>：有一些安全性限制，以及更多每晚自動執行的檢查。\n"
+"<span foreground=\"royalblue3\">高</span>：有一些安全性限制，以及更多每晚自動"
+"執行的檢查。\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">更高</span>：這個安全層級已經讓這個系統足夠擔負一個\n"
+"<span foreground=\"royalblue3\">更高</span>：這個安全層級已經讓這個系統足夠擔"
+"負一個\n"
 "接受眾多客戶端連線的伺服器之責任。\n"
 "如果您的機器只是網路上的客戶端，您應該選擇一個低一點的層級。\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">偏執</span>：這與前一個等級類似，但系統是完全封閉且安全性\n"
+"<span foreground=\"royalblue3\">偏執</span>：這與前一個等級類似，但系統是完全"
+"封閉且安全性\n"
 "功能都在最嚴密的程度。"
 
 #: draksec:147 harddrake2:214
@@ -1510,7 +1515,12 @@ msgstr "進度列透明度"
 msgid "Text size"
 msgstr "文字大小"
 
-#: draksplash:61
+#: draksplash:62
+#, c-format
+msgid "Progress Bar"
+msgstr ""
+
+#: draksplash:65
 #, c-format
 msgid "Choose progress bar color 1"
 msgstr "選擇進度列的第一個顏色"
@@ -1530,7 +1540,12 @@ msgstr "選擇進度列的背景"
 msgid "Gradient type"
 msgstr "漸層類型"
 
-#: draksplash:65
+#: draksplash:78
+#, fuzzy, c-format
+msgid "Text"
+msgstr "只顯示文字"
+
+#: draksplash:80
 #, c-format
 msgid "Choose text color"
 msgstr "選擇文字顏色"
@@ -3231,7 +3246,8 @@ msgstr "不支援 %s"
 #, c-format
 msgid ""
 "The %s must be configured by system-config-printer.\n"
-"You can launch system-config-printer from the %s Control Center in Hardware section."
+"You can launch system-config-printer from the %s Control Center in Hardware "
+"section."
 msgstr ""
 "%s 必須由 system-config-printer 來設定。\n"
 "您可以由 %s 控制中心的硬體項目中啟動 system-config-printer。"
