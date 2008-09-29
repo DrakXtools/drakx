@@ -106,6 +106,7 @@ $permList->signal_connect(button_press_event => sub {
 my $tips = Gtk2::Tooltips->new;
 
 $W->add(gtknew('VBox', spacing => 5, children => [
+    if_(!$::isEmbedded, 0, Gtk2::Banner->new('/usr/share/mcc/themes/default/drakperm-mdk.png', N("Permissions"))),
                  0, gtknew('Label_Left', text => N("Here you can see files to use in order to fix permissions, owners, and groups via msec.\nYou can also edit your own rules which will owerwrite the default rules."), alignment => [ 0.5, 0 ]),
                  1, gtknew('VBox', border_width => 0, children => [
                                     0, gtknew('Label_Left', text => N("The current security level is %s.
