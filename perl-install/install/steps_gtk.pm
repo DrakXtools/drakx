@@ -708,19 +708,20 @@ sub ask_deselect_media__copy_on_disk {
 	$w->sync;
 	ugtk2::gtkadd(
 	    $w->{window},
-	    create_scrolled_window(gtkpack_(
-		Gtk2::VBox->new(0, 5),
+	    gtknew('VBox', children => [
 	      @names > 1 ? (
 		0, gtknew('Label_Left', padding => [ 0, 0 ],
                               # workaround infamous 6 years old gnome bug #101968:
                               width => mygtk2::get_label_width(),
                               text => formatAlaTeX(N("The following installation media have been found.
 If you want to skip some of them, you can unselect them now."))),
-		(map {
+		1, gtknew('ScrolledWindow', child => gtknew('VBox', children => [
+		      map {
 			my $b = gtknew('CheckButton', text => $_, active_ref => \$selection{$_});
 			$b->set_sensitive(0) if $_ eq $names[0];
 			(0, $b);
-		    } @names),
+		      } @names
+		])),
 		if_(@names <= 8, 1, ''),
 		0, gtknew('HSeparator'),
 	      ) : (),
@@ -736,7 +737,7 @@ It will then continue from the hard drive and the packages will remain available
 		0, gtknew('HButtonBox', layout => 'end', children_tight => [
 		    gtknew('Button', text => N("Next"), clicked => sub { Gtk2->main_quit }),
 		]),
-	    )),
+	    ]),
 	);
 	$w->main;
     }
