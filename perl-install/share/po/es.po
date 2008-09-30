@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-es\n"
 "POT-Creation-Date: 2008-09-19 15:04+0200\n"
-"PO-Revision-Date: 2007-09-24 18:26-0300\n"
+"PO-Revision-Date: 2008-09-30 12:53-0300\n"
 "Last-Translator: Fabián Mandelbaum <fmandelbaum@gmail.com>\n"
 "Language-Team: Español <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -90,9 +90,9 @@ msgstr ""
 "¿Desde qué disco arranca?"
 
 #: any.pm:346
-#, fuzzy, c-format
+#, c-format
 msgid "First sector (MBR) of drive %s"
-msgstr "Primer sector del disco (MBR)"
+msgstr "Primer sector (MBR) del disco %s"
 
 #: any.pm:348
 #, c-format
@@ -115,9 +115,9 @@ msgid "Skip"
 msgstr "Omitir"
 
 #: any.pm:358
-#, fuzzy, c-format
+#, c-format
 msgid "Bootloader Installation"
-msgstr "Instalación del cargador de arranque en progreso"
+msgstr "Instalación del cargador de arranque"
 
 #: any.pm:362
 #, c-format
@@ -349,9 +349,9 @@ msgid "Other OS (Windows...)"
 msgstr "Otro SO (Windows...)"
 
 #: any.pm:594
-#, fuzzy, c-format
+#, c-format
 msgid "Bootloader Configuration"
-msgstr "Configuración del estilo de arranque"
+msgstr "Configuración del cargador de arranque"
 
 #: any.pm:595
 #, c-format
@@ -527,9 +527,9 @@ msgid "Quit"
 msgstr "Salir"
 
 #: any.pm:974
-#, fuzzy, c-format
+#, c-format
 msgid "Do you accept this license ?"
-msgstr "¿Tiene alguna otra?"
+msgstr "¿Acepta esta licencia?"
 
 #: any.pm:975
 #, c-format
@@ -760,7 +760,7 @@ msgstr "Dominio Windows"
 #: authentication.pm:30
 #, c-format
 msgid "Kerberos 5"
-msgstr ""
+msgstr "Kerberos 5"
 
 #: authentication.pm:64
 #, c-format
@@ -820,7 +820,7 @@ msgstr ""
 #: authentication.pm:68
 #, c-format
 msgid "Kerberos 5 :"
-msgstr ""
+msgstr "Kerberos 5: "
 
 #: authentication.pm:68
 #, c-format
@@ -832,20 +832,20 @@ msgstr "Con Kerberos y LDAP para autenticación en servidor Active Directory"
 #: authentication.pm:884
 #, c-format
 msgid " "
-msgstr ""
+msgstr " "
 
 #: authentication.pm:103 authentication.pm:137 authentication.pm:183
 #: authentication.pm:207
-#, fuzzy, c-format
+#, c-format
 msgid "Welcome to the Authentication Wizard"
-msgstr "Se necesita autenticación de dominio"
+msgstr "Bienvenido al asistente de autenticación"
 
 #: authentication.pm:105
 #, c-format
 msgid ""
 "You have selected LDAP authentication. Please review the configuration "
 "options below "
-msgstr ""
+msgstr "Seleccionó la autenticación LDAP. Por favor, revise las opciones de configuración "
 
 #: authentication.pm:107 authentication.pm:162
 #, c-format
@@ -853,126 +853,126 @@ msgid "LDAP Server"
 msgstr "Servidor LDAP"
 
 #: authentication.pm:108 authentication.pm:163
-#, fuzzy, c-format
+#, c-format
 msgid "Base dn"
-msgstr "LDAP Base dn"
+msgstr "DN base"
 
 #: authentication.pm:109
 #, c-format
 msgid "Fetch base Dn "
-msgstr ""
+msgstr "Obtener DN base "
 
 #: authentication.pm:111 authentication.pm:166
 #, c-format
 msgid "Use encrypt connection with TLS "
-msgstr ""
+msgstr "Usar conexión cifrada con TLS "
 
 #: authentication.pm:112 authentication.pm:167
 #, c-format
 msgid "Download CA Certificate "
-msgstr ""
+msgstr "Descargar Certificado CA "
 
 #: authentication.pm:114 authentication.pm:147
 #, c-format
 msgid "Use Disconnect mode "
-msgstr ""
+msgstr "Usar modo Desconectado "
 
 #: authentication.pm:115 authentication.pm:168
-#, fuzzy, c-format
+#, c-format
 msgid "Use anonymous BIND "
-msgstr "Usar BIND anónimo"
+msgstr "Usar BIND anónimo "
 
 #: authentication.pm:116 authentication.pm:119 authentication.pm:121
 #: authentication.pm:125
 #, c-format
 msgid "  "
-msgstr ""
+msgstr "  "
 
 #: authentication.pm:117 authentication.pm:169
 #, c-format
 msgid "Bind DN "
-msgstr ""
+msgstr "Asociar DN "
 
 #: authentication.pm:118 authentication.pm:170
-#, fuzzy, c-format
+#, c-format
 msgid "Bind Password "
-msgstr "Contraseña"
+msgstr "Asociar contraseña"
 
 #: authentication.pm:120
 #, c-format
 msgid "Advanced path for group "
-msgstr ""
+msgstr "Ruta avanzada para el grupo "
 
 #: authentication.pm:122
-#, fuzzy, c-format
+#, c-format
 msgid "Password base"
-msgstr "Contraseña"
+msgstr "Contraseña base"
 
 #: authentication.pm:123
-#, fuzzy, c-format
+#, c-format
 msgid "Group base"
-msgstr "ID de grupo"
+msgstr "Grupo base"
 
 #: authentication.pm:124
 #, c-format
 msgid "Shadow base"
-msgstr ""
+msgstr "'Shadow' base"
 
 #: authentication.pm:139
 #, c-format
 msgid ""
 "You have selected Kerberos 5 authentication. Please review the configuration "
 "options below "
-msgstr ""
+msgstr "Seleccionó la autenticación Kerberos 5. Por favor revise las opciones de configuración "
 
 #: authentication.pm:141
-#, fuzzy, c-format
+#, c-format
 msgid "Realm "
-msgstr "Nombre y apellidos"
+msgstr "Reino "
 
 #: authentication.pm:143
-#, fuzzy, c-format
+#, c-format
 msgid "KDCs Servers"
-msgstr "Servidor LDAP"
+msgstr "Servidores KDCs"
 
 #: authentication.pm:145
 #, c-format
 msgid "Use DNS to resolve hosts for realms "
-msgstr ""
+msgstr "Usar DNS para resolver los hosts del reino "
 
 #: authentication.pm:146
 #, c-format
 msgid "Use DNS to resolve KDCs for realms "
-msgstr ""
+msgstr "Usar DNS para resolver los KDCs del reino "
 
 #: authentication.pm:151
-#, fuzzy, c-format
+#, c-format
 msgid "Use local file for users information"
-msgstr "Utilizar libsafe para los servidores"
+msgstr "Usar archivo local para información de usuarios"
 
 #: authentication.pm:152
-#, fuzzy, c-format
+#, c-format
 msgid "Use Ldap for users information"
-msgstr "Información del disco rígido"
+msgstr "Usar LDAP para información de usuarios"
 
 #: authentication.pm:158
 #, c-format
 msgid ""
 "You have selected Kerberos 5 for authentication, now you must choose the "
 "type of users information "
-msgstr ""
+msgstr "Seleccionó Kerberos 5 para la autenticación, ahora debe elegir el tipo de información de usuarios "
 
 #: authentication.pm:164
 #, c-format
 msgid "Fecth base Dn "
-msgstr ""
+msgstr "Obtener DN base "
 
 #: authentication.pm:185
 #, c-format
 msgid ""
 "You have selected NIS authentication. Please review the configuration "
 "options below "
-msgstr ""
+msgstr "Seleccionó la autenticación NIS. Por favor, revise las opciones de configuración "
 
 #: authentication.pm:187
 #, c-format
@@ -989,12 +989,12 @@ msgstr "Servidor NIS"
 msgid ""
 "You have selected Windows Domain authentication. Please review the "
 "configuration options below "
-msgstr ""
+msgstr "Seleccionó la autenticación en un dominio Windows®. Por favor, revise las opciones de configuración "
 
 #: authentication.pm:213
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Model "
-msgstr "Dominio"
+msgstr "Modelo de dominio "
 
 #: authentication.pm:215
 #, c-format
@@ -1035,9 +1035,9 @@ msgid "Select file"
 msgstr "Elija un archivo"
 
 #: authentication.pm:885
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Windows for authentication : "
-msgstr "Se necesita autenticación de dominio"
+msgstr "Dominio Windows® para la autenticación: "
 
 #: authentication.pm:887
 #, c-format
@@ -1276,7 +1276,7 @@ msgstr "Particionando"
 #: diskdrake/hd_gtk.pm:68
 #, c-format
 msgid "Click on a partition, choose a filesystem type then choose an action"
-msgstr ""
+msgstr "Haga clic sobre una partición, elija un sist. de archivos y luego elija una acción"
 
 #: diskdrake/hd_gtk.pm:105 diskdrake/interactive.pm:1066
 #: diskdrake/interactive.pm:1076 diskdrake/interactive.pm:1129
@@ -1403,9 +1403,9 @@ msgid "Use ``Unmount'' first"
 msgstr "Use \"Desmontar\" primero"
 
 #: diskdrake/hd_gtk.pm:417
-#, fuzzy, c-format
+#, c-format
 msgid "Use ``%s'' instead (in expert mode)"
-msgstr "Use \"%s\" en su lugar"
+msgstr "Usar \"%s\" en su lugar (en modo experto)"
 
 #: diskdrake/hd_gtk.pm:417 diskdrake/interactive.pm:398
 #: diskdrake/interactive.pm:574 diskdrake/removable.pm:25
@@ -1550,9 +1550,9 @@ msgid "Add to LVM"
 msgstr "Añadir al LVM"
 
 #: diskdrake/interactive.pm:406
-#, fuzzy, c-format
+#, c-format
 msgid "Use"
-msgstr "ID de usuario"
+msgstr "Usar"
 
 #: diskdrake/interactive.pm:408
 #, c-format
@@ -1570,9 +1570,9 @@ msgid "Remove from LVM"
 msgstr "Quitar del LVM"
 
 #: diskdrake/interactive.pm:411
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from dm"
-msgstr "Quitar del LVM"
+msgstr "Quitar del dm"
 
 #: diskdrake/interactive.pm:412
 #, c-format
@@ -1653,9 +1653,9 @@ msgid "Which filesystem do you want?"
 msgstr "¿Qué sistema de archivos desea?"
 
 #: diskdrake/interactive.pm:580
-#, fuzzy, c-format
+#, c-format
 msgid "Switching from %s to %s"
-msgstr "Cambiando de ext2 a ext3"
+msgstr "Cambiando de %s a %s"
 
 #: diskdrake/interactive.pm:606 diskdrake/interactive.pm:609
 #, c-format
@@ -1755,9 +1755,9 @@ msgid "Filesystem encryption key"
 msgstr "Clave de cifrado del sistema de archivos"
 
 #: diskdrake/interactive.pm:827
-#, fuzzy, c-format
+#, c-format
 msgid "Enter your filesystem encryption key"
-msgstr "Elija la clave de cifrado de su sistema de archivos"
+msgstr "Ingrese la clave de cifrado de su sistema de archivos"
 
 #: diskdrake/interactive.pm:828 diskdrake/interactive.pm:1378
 #, c-format
@@ -1767,7 +1767,7 @@ msgstr "Clave de cifrado"
 #: diskdrake/interactive.pm:835
 #, c-format
 msgid "Invalid key"
-msgstr ""
+msgstr "Clave no válida"
 
 #: diskdrake/interactive.pm:843
 #, c-format
@@ -1864,9 +1864,9 @@ msgid "Be careful: this operation is dangerous."
 msgstr "Cuidado: esta operación es peligrosa."
 
 #: diskdrake/interactive.pm:1082
-#, fuzzy, c-format
+#, c-format
 msgid "Partitioning Type"
-msgstr "Particionando"
+msgstr "Tipo de particionado"
 
 #: diskdrake/interactive.pm:1082
 #, c-format
@@ -2027,24 +2027,24 @@ msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
 #: diskdrake/interactive.pm:1281
-#, fuzzy, c-format
+#, c-format
 msgid "Encrypted"
-msgstr "Clave de cifrado"
+msgstr "Cifrado"
 
 #: diskdrake/interactive.pm:1281
 #, c-format
 msgid " (mapped on %s)"
-msgstr ""
+msgstr " (mapeado en %s)"
 
 #: diskdrake/interactive.pm:1282
 #, c-format
 msgid " (to map on %s)"
-msgstr ""
+msgstr " (a mapear en %s)"
 
 #: diskdrake/interactive.pm:1283
 #, c-format
 msgid " (inactive)"
-msgstr ""
+msgstr " (inactivo)"
 
 #: diskdrake/interactive.pm:1289
 #, c-format
@@ -2131,9 +2131,9 @@ msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Geometría: %s cilindros, %s cabezas, %s sectores\n"
 
 #: diskdrake/interactive.pm:1324
-#, fuzzy, c-format
+#, c-format
 msgid "Medium type: "
-msgstr "Tipo de sistema de. archivos: "
+msgstr "Tipo de soporte: "
 
 #: diskdrake/interactive.pm:1325
 #, c-format
@@ -2338,7 +2338,7 @@ msgstr "Usar un sistema de archivos cifrado"
 #: fs/mount_options.pm:117
 #, c-format
 msgid "Flush write cache on file close"
-msgstr "Vaciar el cache de escritura al cerrar los ficheros"
+msgstr "Vaciar el cache de escritura al cerrar los archivos"
 
 #: fs/mount_options.pm:119
 #, c-format
@@ -2565,9 +2565,9 @@ msgstr ""
 "suficiente)"
 
 #: fs/partitioning_wizard.pm:127
-#, fuzzy, c-format
+#, c-format
 msgid "Use the free space on a Microsoft Windows® partition"
-msgstr "Usar el espacio libre de la partición Windows"
+msgstr "Usar el espacio libre de una partición Windows®"
 
 #: fs/partitioning_wizard.pm:129
 #, c-format
@@ -3106,27 +3106,27 @@ msgstr "Espere, por favor... Aplicando la configuración"
 #: harddrake/sound.pm:346
 #, c-format
 msgid "Enable PulseAudio"
-msgstr ""
+msgstr "Habilitar PulseAudio"
 
 #: harddrake/sound.pm:350
 #, c-format
 msgid "Automatic routing from ALSA to PulseAudio"
-msgstr ""
+msgstr "Enviar automáticamente desde ALSA a PulseAudio"
 
 #: harddrake/sound.pm:355
 #, c-format
 msgid "Enable 5.1 sound with Pulse Audio"
-msgstr ""
+msgstr "Habilitar el sonido 5.1 con PulseAudio"
 
 #: harddrake/sound.pm:360
 #, c-format
 msgid "Enable user switching for audio applications"
-msgstr ""
+msgstr "Habilitar cambio de usuario para aplicaciones de audio"
 
 #: harddrake/sound.pm:365
 #, c-format
 msgid "Reset sound mixer to default values"
-msgstr ""
+msgstr "Restaurar el mezclador de sonido a valores predeterminados"
 
 #: harddrake/sound.pm:370
 #, c-format
@@ -4729,7 +4729,7 @@ msgstr ""
 "El cargador de arranque no puede manejar /boot en múltiples volúmenes físicos"
 
 #: messages.pm:11
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Introduction\n"
 "\n"
@@ -4855,10 +4855,10 @@ msgid ""
 "Paris - France.\n"
 "For any question on this document, please contact Mandriva S.A."
 msgstr ""
-"EL PRESENTE TEXTO ES UNA TRADUCCIÓN A PROPÓSITO EXCLUSIVAMENTE\n"
-"INFORMATIVO DE LOS TÉRMINOS DE LA LICENCIA DE MANDRAKELINUX. EN\n"
+"EL PRESENTE TEXTO ES UNA TRADUCCIÓN A TÍTULO EXCLUSIVAMENTE\n"
+"INFORMATIVO DE LOS TÉRMINOS DE LA LICENCIA DE MANDRIVA LINUX. EN\n"
 "NINGÚN CASO LA PRESENTE TRADUCCIÓN TIENE VALOR LEGAL SIENDO OFICIAL\n"
-"EXCLUSIVAMENTE LA VERSIÓN EN FRANCÉS DE LA LICENCIA DE MANDRAKELINUX.\n"
+"EXCLUSIVAMENTE LA VERSIÓN EN FRANCÉS DE LA LICENCIA DE MANDRIVA LINUX.\n"
 "No obstante, esperamos que esta traducción ayudará a los que hablan\n"
 "castellano a entenderla mejor.\n"
 "\n"
@@ -4871,7 +4871,9 @@ msgstr ""
 "Los Productos Software incluyen, pero no están restringidos a,\n"
 "el conjunto de programas, métodos, reglas y documentación\n"
 "relativas al sistema operativo y a los diferentes componentes de la\n"
-"distribución Mandriva Linux.\n"
+"distribución Mandriva Linux, y cualquier aplicación que se distribuye\n"
+"con estos productos proporcionados por los proveedores o licenciatarios\n"
+"de Mandriva.\n"
 "\n"
 "\n"
 "1. Acuerdo de Licencia\n"
@@ -4895,28 +4897,26 @@ msgstr ""
 "2. Garantía limitada\n"
 "\n"
 "Los Productos Software y la documentación que los acompaña se\n"
-"proporcionan \"tal cual\", sin garantía alguna hasta donde lo permita la "
-"ley.\n"
-"Mandriva S.A. no se responsabilizará, bajo circunstancia alguna,\n"
-"y hasta donde lo permita la ley, por cualquier daño directo o indirecto,\n"
-"especial o accesorio, de cualquier naturaleza (incluyendo\n"
-"sin limitación daños por pérdidas de beneficios, interrupción de\n"
-"actividad, pérdidas financieras,\n"
+"proporcionan \"tal cual\", sin garantía alguna hasta donde lo permita la ley.\n"
+"Ni Mandriva S.A., ni sus licencitarios o proveedores se responsabilizarán,\n"
+"bajo circunstancia alguna, y hasta donde lo permita la ley,\n"
+"por cualquier daño directo o indirecto, especial o accesorio,\n"
+"de cualquier naturaleza (incluyendo sin limitación daños por pérdidas\n"
+"de beneficios, interrupción de actividad, pérdidas financieras,\n"
 "costas legales y penalidades resultantes de un juicio en la corte,\n"
 " o cualquier pérdida consecuente)\n"
 "que resulte del uso o de la incapacidad de uso de los\n"
-"Productos Software, incluso si Mandriva S.A. hubiera sido informada\n"
-"de la posibilidad de ocurrencia de tales daños.\n"
+"Productos Software, incluso si Mandriva S.A., o sus licenciatarios o\n"
+"proveedores hubieran sido informados de la posibilidad de ocurrencia de tales daños.\n"
 "\n"
 "ADVERTENCIA EN CUANTO A LA POSESIÓN O USO DE PROGRAMAS PROHIBIDOS\n"
 "EN CIERTOS PAÍSES\n"
 "\n"
-"Dentro de lo que permita la ley, Mandriva S.A. ni sus proveedores\n"
-"podrán ser responsabilizados en circunstancia alguna por un perjuicio\n"
-"especial, directo, indirecto o accesorio, de cualquier naturaleza\n"
-"(incluyendo sin limitación daños por pérdidas de beneficio, interrupción\n"
-"de actividad, pérdidas financieras, costas legales y penalidades "
-"resultantes\n"
+"Dentro de lo que permita la ley, ni Mandriva S.A., ni sus licenciatarios,\n"
+"proveedores o distribuidores podrán ser responsabilizados en circunstancia alguna\n"
+"por un perjuicio especial, directo, indirecto o accesorio, de cualquier naturaleza\n"
+"(incluyendo sin limitación daños por pérdidas de beneficios, interrupción\n"
+"de actividad, pérdidas financieras, costas legales y penalidades resultantes\n"
 "de un juicio en la corte, o cualquier pérdida consecuente) como\n"
 "consecuencia de la posesión y el uso de los componentes software\n"
 "o como consecuencia de la descarga de los componentes\n"
@@ -4924,17 +4924,17 @@ msgstr ""
 "prohibidos o restringidos en algunos países por las leyes locales.\n"
 "Esta responsabilidad limitada se aplica, pero no esta limitada, a los\n"
 "componentes de criptografía fuerte incluídos en los Productos Software.\n"
+"Sin embargo, debido a que algunas jurisdicciones no permiten la exclusión\n"
+"o limitación o responsabilización por daños incidentes o consecuentes,\n"
+"la limitación anterior puede no aplicar a Usted.  \n"
+"%s\n"
 "\n"
 "\n"
 "3. Licencia GPL y relacionadas\n"
 "\n"
 "Los Productos Software están constituidos por componentes creados\n"
-"por personas o entidades diferentes.\n"
-"La mayoría se distribuyen bajo los términos de la Licencia Pública General "
-"GNU\n"
-"(denominada a partir de ahora \"GPL\"), u otras licencias similares.\n"
-"La mayoría de estas licencias le permiten copiar, adaptar o redistribuir "
-"los\n"
+"por personas o entidades diferentes. %s\n"
+"La mayoría de estas licencias le permiten copiar, adaptar o redistribuir los\n"
 "componentes de los programas que cubren.  Por favor lea y acepte los\n"
 "términos y condiciones de las licencias que acompañan a cada uno de\n"
 "ellos antes de usarlos. Toda pregunta relativa a la licencia de un\n"
@@ -4951,9 +4951,9 @@ msgstr ""
 "pertenecen a sus autores respectivos y están protegidos por la ley\n"
 "de propiedad intelectual y de copyright aplicables a los programas\n"
 "de software.\n"
-"Mandriva S.A. se reserva el derecho de modificar o adaptar los\n"
-"Productos Software, como un todo o en parte, por todos los medios\n"
-"y para cualquier propósito.\n"
+"Mandriva S.A. y sus licenciatarios y proveedores se reservan el derecho\n"
+"de modificar o adaptar los Productos Software, como un todo o en parte,\n"
+"por todos los medios y para cualquier propósito.\n"
 "\"Mandriva\", \"Mandriva Linux\" y los logos asociados están registrados\n"
 "por Mandriva S.A.\n"
 "\n"
@@ -4962,7 +4962,7 @@ msgstr ""
 " \n"
 "Si cualquier disposición de este contrato fuera declarada\n"
 "nula, ilegal o inaplicable por un tribunal competente, esta\n"
-"disposición se excluye del presente contrato.  Usted permanecerá\n"
+"porción se excluye del presente contrato.  Usted permanecerá\n"
 "sometido a las otras disposiciones aplicables del acuerdo.\n"
 "Los términos y condiciones de esta Licencia están regidos por las\n"
 "Leyes de Francia.\n"
@@ -4971,7 +4971,7 @@ msgstr ""
 "la disputa será tramitada en la Corte de Ley correspondiente de\n"
 "París, Francia.\n"
 "Para cualquier pregunta relacionada con este documento, por favor,\n"
-"póngase en contacto con Mandriva S.A.\n"
+"póngase en contacto con Mandriva S.A."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: messages.pm:90
@@ -5012,6 +5012,9 @@ msgid ""
 "conditions of the GNU \n"
 "General Public Licence, hereafter called \"GPL\", or of similar licenses."
 msgstr ""
+"La mayoría de estos componentes, excluyendo las aplicaciones y el software proporcionados por Google Inc. o\n"
+"sus subsidiarias (\"Google Software\") están sujetos a los términos y condiciones\n"
+"de la GNU General Public Licence, en adelante \"GPL\", o licencias similares."
 
 #: messages.pm:107
 #, c-format
@@ -5019,7 +5022,7 @@ msgid ""
 "Most of these components are governed under the terms and conditions of the "
 "GNU \n"
 "General Public Licence, hereafter called \"GPL\", or of similar licenses."
-msgstr ""
+msgstr "La mayoría de estos componentes están sujetos a los términos y condiciones de la GNU General Public Licence, en adelante \"GPL\", o licencias similares"
 
 #: messages.pm:112
 #, c-format
@@ -5191,7 +5194,7 @@ msgstr "Instalando controlador para la tarjeta %s %s"
 #: modules/interactive.pm:99
 #, c-format
 msgid "Configuring Hardware"
-msgstr ""
+msgstr "Configuración del hardware"
 
 #: modules/interactive.pm:110
 #, c-format
@@ -5299,39 +5302,39 @@ msgstr ""
 #: pkgs.pm:229 pkgs.pm:232 pkgs.pm:241
 #, c-format
 msgid "Unused packages removal"
-msgstr ""
+msgstr "Quitar paquetes no usados"
 
 #: pkgs.pm:229
 #, c-format
 msgid "Finding unused hardware packages..."
-msgstr ""
+msgstr "Encontrando paquetes de hardware no usados..."
 
 #: pkgs.pm:232
 #, c-format
 msgid "Finding unused localization packages..."
-msgstr ""
+msgstr "Encontrando paquetes de localización no usados..."
 
 #: pkgs.pm:242
 #, c-format
 msgid ""
 "We have detected that some packages are not needed for your system "
 "configuration."
-msgstr ""
+msgstr "Se detectaron algunos paquetes que no son necesarios para la configuración de su sistema."
 
 #: pkgs.pm:243
 #, c-format
 msgid "We will remove the following packages, unless you choose otherwise:"
-msgstr ""
+msgstr "A menos que elija lo contrario, se quitarán los paquetes siguientes:"
 
 #: pkgs.pm:246 pkgs.pm:247
-#, fuzzy, c-format
+#, c-format
 msgid "Unused hardware support"
-msgstr "habilitar el soporte para radio"
+msgstr "Soporte para hardware no utilizado"
 
 #: pkgs.pm:250 pkgs.pm:251
 #, c-format
 msgid "Unused localization"
-msgstr ""
+msgstr "Idiomas no utilizados"
 
 #: raid.pm:42
 #, c-format
@@ -5644,9 +5647,7 @@ msgstr ""
 #: security/help.pm:108
 #, c-format
 msgid "Set the root's file mode creation mask."
-msgstr ""
-"Configurar la máscara de modo de creación de ficheros para el administrador "
-"del sistema."
+msgstr "Configurar la máscara de modo de creación de archivos para el administrador del sistema."
 
 #: security/help.pm:109
 #, c-format
@@ -5782,7 +5783,7 @@ msgstr "La unidad del tiempo de espera es el segundo"
 #: security/help.pm:138
 #, c-format
 msgid "Set the user's file mode creation mask."
-msgstr "Configurar la máscara de creación de ficheros para los usuarios."
+msgstr "Configurar la máscara de creación de archivos para los usuarios."
 
 #: security/l10n.pm:11
 #, c-format
@@ -6157,7 +6158,7 @@ msgstr "Por favor, elija el nivel de seguridad deseado"
 #: security/level.pm:62
 #, c-format
 msgid "%s: %s"
-msgstr ""
+msgstr "%s: %s"
 
 #: security/level.pm:65
 #, c-format
@@ -6167,7 +6168,7 @@ msgstr "Administrador de seguridad:"
 #: security/level.pm:66
 #, c-format
 msgid "Login or email:"
-msgstr ""
+msgstr "Usuario o correo electrónico:"
 
 #: services.pm:19
 #, c-format
@@ -6539,9 +6540,7 @@ msgstr ""
 msgid ""
 "The SMB/CIFS protocol enables to share access to files & printers and also "
 "integrates with a Windows Server domain"
-msgstr ""
-"El protocolo SMB/CIFS permite compartir el acceso a ficheros e impresoras y "
-"también la integración a un dominio de Windows Server"
+msgstr "El protocolo SMB/CIFS permite compartir el acceso a archivos e impresoras y también la integración a un dominio de Windows Server"
 
 #: services.pm:94
 #, c-format
@@ -7151,8 +7150,7 @@ msgstr "Falló la instalación"
 #~ msgstr "Active Directory con Winbind"
 
 #~ msgid "Use information stored in local files for all authentication"
-#~ msgstr ""
-#~ "Usar información almacenada en ficheros locales para la autenticación"
+#~ msgstr "Usar información almacenada en archivos locales para la autenticación"
 
 #~ msgid "Active Directory with SFU:"
 #~ msgstr "Active Directory con SFU:"
