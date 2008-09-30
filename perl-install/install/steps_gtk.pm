@@ -701,7 +701,7 @@ sub summary_prompt {
 
 #- group by CD
 sub ask_deselect_media__copy_on_disk {
-    my ($_o, $hdlists, $o_copy_rpms_on_disk) = @_;
+    my ($o, $hdlists, $o_copy_rpms_on_disk) = @_;
 
     my @names = uniq(map { $_->{name} } @$hdlists);
     my %selection = map { $_->{name} => $_->{selected} } @$hdlists;
@@ -737,7 +737,9 @@ It will then continue from the hard drive and the packages will remain available
 		    0, gtknew('CheckButton', text => N("Copy whole CDs"), active_ref => $o_copy_rpms_on_disk),
 		    0, gtknew('HSeparator'),
 		),
-		0, gtknew('HButtonBox', layout => 'end', children_tight => [
+		0, gtknew('HButtonBox', layout => 'edge', children_tight => [
+                    gtknew('Install_Button', text => N("Help"), clicked => sub {
+                               interactive::gtk::display_help($o, { interactive_help_id => 'choosePackages' }, $w) }),
 		    gtknew('Button', text => N("Next"), clicked => sub { Gtk2->main_quit }),
 		]),
 	    ]),
