@@ -53,7 +53,7 @@ connections from many clients. Note: if your machine is only a client on the Int
     my @l = 2 .. 5;
 
     $in->ask_from_({ title => $::isInstall ? N("Security") : N("DrakSec Basic Options"),
-		     interactive_help_id => 'miscellaneous',
+		     interactive_help_id => 'misc-params#draxid-miscellaneous',
 		   }, [
               { label => N("Please choose the desired security level"), title => 1 },
               { val => $security, list => \@l, 

@@ -162,7 +162,7 @@ sub add_kind2notebook {
 
 sub interactive_help() {
     if ($::isInstall) {
-        my $func = $in->interactive_help_sub_display_id('partition_with_diskdrake');
+        my $func = $in->interactive_help_sub_display_id('diskdrake');
         $func and $func->();
     } else {
         require run_program;

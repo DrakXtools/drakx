@@ -479,7 +479,10 @@ sub choosePackagesTree {
 				return;
 			    },
 			    auto_deps => N("Show automatically selected packages"),
-			    interactive_help => sub { interactive::gtk::display_help($o, { interactive_help_id => 'choosePackages' }, $w) },
+			    interactive_help => sub { 
+                                interactive::gtk::display_help($o,
+                                                               { interactive_help_id => 
+                                                                   'choosePackages#choosePackagesTree' }, $w) },
 
 			    ok => N("Install"),
 			    cancel => N("Previous"),
