@@ -773,6 +773,8 @@ sub load_from_uri {
 
 sub get_html_file {
     my ($o, $url) = @_;
+    $url =~ s/#.*//;
+    $url .= '.html' if $url !~ /\.html$/;
     find { -e $_ } map { "$help_path/${_}" }
       map {
           my $id = $_;
@@ -787,7 +789,7 @@ sub display_help {
         require Gtk2::WebKit;
         my $view = gtknew('WebKit_View');
 
-        load_from_uri($view, "$file.html");
+        load_from_uri($view, $file);
 
         my $w = ugtk2->new(N("Help"), transient => $mainw->{real_window}, modal => 1);
         gtkadd($w->{rwindow},
