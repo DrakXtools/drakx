@@ -159,6 +159,10 @@ sub selectInstallClass {
 	    _check_unsafe_upgrade_and_warn($o, $p->{part}) or $p = undef;
 	}
 
+	my $_foo = N("You have decided to upgrade your system to %s. KDE 3.5 has been detected
+on your system. In order to process a safe upgrade, please reboot your system
+and use the update applet to upgrade.", 'Mandriva Linux 2009');
+
 	if (ref $p) {
 
 	    if ($p->{part}) {
