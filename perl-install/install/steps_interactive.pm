@@ -160,8 +160,10 @@ sub selectInstallClass {
 	}
 
 	my $_foo = N("You have decided to upgrade your system to %s. KDE 3.5 has been detected
-on your system. In order to process a safe upgrade, please reboot your system
-and use the update applet to upgrade.", 'Mandriva Linux 2009');
+on your system. This installer cannot preserve KDE 3.5 in an upgrade. If you choose to proceed, 
+KDE 4 will replace KDE 3, and you will lose your personal KDE configuration settings. 
+To upgrade with KDE 3.5 and your personal settings preserved, 
+please reboot your system and upgrade using the Mandriva update applet.", 'Mandriva Linux 2009');
 
 	if (ref $p) {
 
