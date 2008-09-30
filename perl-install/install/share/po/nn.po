@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 16:44+0200\n"
+"POT-Creation-Date: 2008-09-30 20:13+0200\n"
 "PO-Revision-Date: 2008-09-12 17:48+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -68,7 +68,8 @@ msgstr "Adresser må starta med «ftp://» eller «http://»."
 
 #: any.pm:180
 #, c-format
-msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid ""
+"Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr "Kontaktar Mandriva Linux-nettstaden for oversikt over speglar …"
 
 #: any.pm:185
@@ -125,7 +126,8 @@ msgstr "Tillegg"
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
 "correct."
-msgstr "Finn ikkje pakkelistfila på denne spegelen. Sjå til at adressa er rett."
+msgstr ""
+"Finn ikkje pakkelistfila på denne spegelen. Sjå til at adressa er rett."
 
 #: any.pm:328
 #, c-format
@@ -605,7 +607,8 @@ msgstr "GNOME-arbeidsstasjon"
 msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
 "tools"
-msgstr "Eit grafisk skrivebordsmiljø med brukarvenlege program og skrivebordsverktøy"
+msgstr ""
+"Eit grafisk skrivebordsmiljø med brukarvenlege program og skrivebordsverktøy"
 
 #: share/meta-task/compssUsers.pl:142
 #, c-format
@@ -1010,7 +1013,19 @@ msgstr "Oppgradering frå 32 bits til 64 bits er ikkje støtta"
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 msgstr "Oppgradering frå 64 bits til 32 bits er ikkje støtta"
 
-#: steps_interactive.pm:171
+#: steps_interactive.pm:162
+#, c-format
+msgid ""
+"You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
+"on your system. This installer cannot preserve KDE 3.5 in an upgrade. If you "
+"choose to proceed, \n"
+"KDE 4 will replace KDE 3, and you will lose your personal KDE configuration "
+"settings. \n"
+"To upgrade with KDE 3.5 and your personal settings preserved, \n"
+"please reboot your system and upgrade using the Mandriva update applet."
+msgstr ""
+
+#: steps_interactive.pm:180
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Krypteringsnøkkel for «%s»"
@@ -1257,11 +1272,14 @@ msgid ""
 "Do you want to install the updates?"
 msgstr ""
 "Du kan no lasta ned oppdaterte pakkar. Desse pakkane vart oppdaterte\n"
-"etter at distribusjonen var ferdigstilt, og kan innehelda tryggleiksforbetringar eller\n"
+"etter at distribusjonen var ferdigstilt, og kan innehelda "
+"tryggleiksforbetringar eller\n"
 "andre feilrettingar.\n"
-"\n\n"
+"\n"
+"\n"
 "For å lasta ned pakkane må du ha eit nettsamband oppe.\n"
-"\n\n"
+"\n"
+"\n"
 "Ønskjer du å installera oppdateringane?"
 
 #: steps_interactive.pm:849
@@ -1290,7 +1308,8 @@ msgstr "Har du eit ISA-lydkort?"
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
 "card"
-msgstr "Køyr «sndconfig» etter installasjonen er ferdig for å setja opp lydkortet."
+msgstr ""
+"Køyr «sndconfig» etter installasjonen er ferdig for å setja opp lydkortet."
 
 #: steps_interactive.pm:957
 #, c-format
@@ -1607,4 +1626,3 @@ msgstr "Mandriva: Distribusjonar for alle behov"
 #~ "Feil ved installering av «aboot».\n"
 #~ "Vil du prøva å tvinga gjennom installering, sjølv om det kan øydeleggja "
 #~ "den første partisjonen?"
-

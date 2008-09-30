@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-sv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 16:44+0200\n"
+"POT-Creation-Date: 2008-09-30 20:13+0200\n"
 "PO-Revision-Date: 2008-09-21 18:57+0300\n"
 "Last-Translator: Thomas Backlund <tmb@mandriva.org>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -77,7 +77,8 @@ msgstr "URL måste starta med ftp:// eller http://"
 
 #: any.pm:180
 #, c-format
-msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid ""
+"Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr ""
 "Kontaktar Mandriva Linux webbplats för att hämta listan över tillgängliga "
 "speglar..."
@@ -616,7 +617,8 @@ msgstr "Gnome-arbetsstation"
 msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
 "tools"
-msgstr "Grafisk miljö med en samling användarvänliga program och skrivbordsverktyg"
+msgstr ""
+"Grafisk miljö med en samling användarvänliga program och skrivbordsverktyg"
 
 #: share/meta-task/compssUsers.pl:142
 #, c-format
@@ -1023,7 +1025,19 @@ msgstr "Uppgradering från en 32bit till en 64bit distribution stöds inte."
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 msgstr "Uppgradering från en 64bit till en 32bit distribution stöds inte."
 
-#: steps_interactive.pm:171
+#: steps_interactive.pm:162
+#, c-format
+msgid ""
+"You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
+"on your system. This installer cannot preserve KDE 3.5 in an upgrade. If you "
+"choose to proceed, \n"
+"KDE 4 will replace KDE 3, and you will lose your personal KDE configuration "
+"settings. \n"
+"To upgrade with KDE 3.5 and your personal settings preserved, \n"
+"please reboot your system and upgrade using the Mandriva update applet."
+msgstr ""
+
+#: steps_interactive.pm:180
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Krypteringsnyckel för %s"
@@ -1621,4 +1635,3 @@ msgstr "Mandriva: distributioner för allas behov"
 #~ msgstr ""
 #~ "Fel vid installationen av aboot.\n"
 #~ "Vill du försöka ändå, fast det kan förstöra den första partitionen?"
-

@@ -7,14 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 16:44+0200\n"
+"POT-Creation-Date: 2008-09-30 20:13+0200\n"
 "PO-Revision-Date: 2008-09-12 22:54+0200\n"
 "Last-Translator: Michal Bukovjan <bukm@centrum.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
 #: any.pm:109
@@ -68,8 +69,10 @@ msgstr "URL musí začínat na ftp:// nebo http://"
 
 #: any.pm:180
 #, c-format
-msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
-msgstr "Kontaktuji web Mandriva Linux pro získání seznamu dostupných zrcadel..."
+msgid ""
+"Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgstr ""
+"Kontaktuji web Mandriva Linux pro získání seznamu dostupných zrcadel..."
 
 #: any.pm:185
 #, c-format
@@ -832,7 +835,8 @@ msgstr "aby bylo zachováno %s"
 msgid ""
 "You can not select this package as there is not enough space left to install "
 "it"
-msgstr "Nemůžete vybrat tento balíček, protože pro jeho instalaci není dost místa"
+msgstr ""
+"Nemůžete vybrat tento balíček, protože pro jeho instalaci není dost místa"
 
 #: steps_gtk.pm:428
 #, c-format
@@ -1015,7 +1019,19 @@ msgstr "Aktualizace z 32bitové na 64bitovou distribuci není podporována"
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 msgstr "Aktualizace ze 64bitové na 32bitovou distribuci není podporována"
 
-#: steps_interactive.pm:171
+#: steps_interactive.pm:162
+#, c-format
+msgid ""
+"You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
+"on your system. This installer cannot preserve KDE 3.5 in an upgrade. If you "
+"choose to proceed, \n"
+"KDE 4 will replace KDE 3, and you will lose your personal KDE configuration "
+"settings. \n"
+"To upgrade with KDE 3.5 and your personal settings preserved, \n"
+"please reboot your system and upgrade using the Mandriva update applet."
+msgstr ""
+
+#: steps_interactive.pm:180
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Šifrovací klíč pro %s"
@@ -1304,7 +1320,8 @@ msgstr ""
 #: steps_interactive.pm:957
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
-msgstr "Nebyla nalezena zvuková karta. Zkuste spustit po instalaci \"harddrake\"."
+msgstr ""
+"Nebyla nalezena zvuková karta. Zkuste spustit po instalaci \"harddrake\"."
 
 #: steps_interactive.pm:965
 #, c-format
@@ -1349,7 +1366,8 @@ msgstr "vypnuto"
 #: steps_interactive.pm:1031
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
-msgstr "Nemáte nastaveno prostředí X. Chcete jej skutečně ponechat nenastavené?"
+msgstr ""
+"Nemáte nastaveno prostředí X. Chcete jej skutečně ponechat nenastavené?"
 
 #: steps_interactive.pm:1058
 #, c-format
@@ -1572,4 +1590,3 @@ msgstr "Plné pracovní prostředí Mandriva Linux, s podporou"
 #, c-format
 msgid "Mandriva: distributions for everybody's needs"
 msgstr "Mandriva: distribuce pro potřeby každého"
-

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 16:44+0200\n"
+"POT-Creation-Date: 2008-09-30 20:13+0200\n"
 "PO-Revision-Date: 2008-09-30 12:19-0300\n"
 "Last-Translator: Fabián Mandelbaum <fmandelbaum@gmail.com>\n"
 "Language-Team: Español <es@li.org>\n"
@@ -1027,7 +1027,19 @@ msgstr "No se soporta la acutalización de una distribución 32 bit a una 64 bit
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 msgstr "No se soporta la actualización de una distribución 64 bit a una 32 bit"
 
-#: steps_interactive.pm:171
+#: steps_interactive.pm:162
+#, c-format
+msgid ""
+"You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
+"on your system. This installer cannot preserve KDE 3.5 in an upgrade. If you "
+"choose to proceed, \n"
+"KDE 4 will replace KDE 3, and you will lose your personal KDE configuration "
+"settings. \n"
+"To upgrade with KDE 3.5 and your personal settings preserved, \n"
+"please reboot your system and upgrade using the Mandriva update applet."
+msgstr ""
+
+#: steps_interactive.pm:180
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Clave de cifrado para %s"
@@ -1380,9 +1392,11 @@ msgid ""
 "BootX or some other means to boot your machine. The kernel argument for the "
 "root fs is: root=%s"
 msgstr ""
-"Parece que tiene una máquina desconocida o \"Old World\", el gestor de arranque yaboot no funcionará en la misma.\n"
+"Parece que tiene una máquina desconocida o \"Old World\", el gestor de "
+"arranque yaboot no funcionará en la misma.\n"
 "La instalación continuará, pero necesitará\n"
-"utilizar BootX o alguna otra manera para arrancar su máquina. El parámetro del kernel para el sistema de archvivos raíz es: root=%s"
+"utilizar BootX o alguna otra manera para arrancar su máquina. El parámetro "
+"del kernel para el sistema de archvivos raíz es: root=%s"
 
 #: steps_interactive.pm:1087
 #, c-format

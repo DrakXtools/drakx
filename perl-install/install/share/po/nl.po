@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 16:44+0200\n"
+"POT-Creation-Date: 2008-09-30 20:13+0200\n"
 "PO-Revision-Date: 2008-09-28 17:42+0200\n"
 "Last-Translator: Reinout van Schouwen <reinouts@gnome.org>\n"
 "Language-Team: Nederlands\n"
@@ -1028,7 +1028,19 @@ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 msgstr ""
 "Opwaarderen van een 64-bit naar een 32-bit-distributie wordt niet ondersteund"
 
-#: steps_interactive.pm:171
+#: steps_interactive.pm:162
+#, c-format
+msgid ""
+"You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
+"on your system. This installer cannot preserve KDE 3.5 in an upgrade. If you "
+"choose to proceed, \n"
+"KDE 4 will replace KDE 3, and you will lose your personal KDE configuration "
+"settings. \n"
+"To upgrade with KDE 3.5 and your personal settings preserved, \n"
+"please reboot your system and upgrade using the Mandriva update applet."
+msgstr ""
+
+#: steps_interactive.pm:180
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Vercijferingssleutel voor %s"

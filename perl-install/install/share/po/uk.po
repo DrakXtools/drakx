@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-11 19:38+0200\n"
+"POT-Creation-Date: 2008-09-30 20:13+0200\n"
 "PO-Revision-Date: 2008-08-25 23:52+0300\n"
 "Last-Translator: Taras Boychuk <btr0001@ukr.net>\n"
 "Language-Team: ukrainian <translation@linux.org.ua>\n"
@@ -21,7 +21,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: any.pm:109
 #, c-format
@@ -74,8 +75,10 @@ msgstr "Посилання має починатися з ftp:// або http://"
 
 #: any.pm:180
 #, c-format
-msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
-msgstr "Зв'язуюсь з веб-сайтом Mandriva Linux, щоб отримати список наявних джерел..."
+msgid ""
+"Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgstr ""
+"Зв'язуюсь з веб-сайтом Mandriva Linux, щоб отримати список наявних джерел..."
 
 #: any.pm:185
 #, c-format
@@ -617,7 +620,8 @@ msgstr "Робоча станція Gnome"
 msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
 "tools"
-msgstr "Графічне середовище з дружнім інтерфейсом та програмами, засоби для стільниці"
+msgstr ""
+"Графічне середовище з дружнім інтерфейсом та програмами, засоби для стільниці"
 
 #: share/meta-task/compssUsers.pl:142
 #, c-format
@@ -912,12 +916,12 @@ msgstr "Встановлюю"
 msgid "No details"
 msgstr "Загально"
 
-#: steps_gtk.pm:545
-#, c-format
-msgid "Time remaining "
+#: steps_gtk.pm:559
+#, fuzzy, c-format
+msgid "Time remaining:"
 msgstr "Залишок часу "
 
-#: steps_gtk.pm:546
+#: steps_gtk.pm:560
 #, c-format
 msgid "(estimating...)"
 msgstr "(наближене обчислення...)"
@@ -1024,7 +1028,19 @@ msgstr "Поновлення системи з 32 біт до 64 не підтр
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 msgstr "Поновлення системи з 64 біт до 32 не підтримується"
 
-#: steps_interactive.pm:171
+#: steps_interactive.pm:162
+#, c-format
+msgid ""
+"You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
+"on your system. This installer cannot preserve KDE 3.5 in an upgrade. If you "
+"choose to proceed, \n"
+"KDE 4 will replace KDE 3, and you will lose your personal KDE configuration "
+"settings. \n"
+"To upgrade with KDE 3.5 and your personal settings preserved, \n"
+"please reboot your system and upgrade using the Mandriva update applet."
+msgstr ""
+
+#: steps_interactive.pm:180
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Ключ шифрування для %s"
@@ -1583,4 +1599,3 @@ msgstr "Повноцінна робоча станція Мандріва з п�
 #, c-format
 msgid "Mandriva: distributions for everybody's needs"
 msgstr "Мандріва: дистрибутив, що задовольняє потреби усіх"
-
