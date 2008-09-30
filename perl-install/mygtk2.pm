@@ -1286,11 +1286,11 @@ sub _text_insert {
         foreach my $token (@$t) {
             my ($item, $tag) = @$token;
             my $iter1 = $buffer->get_end_iter;
-            if ($item =~ /^Gtk2::Gdk::Pixbuf/) {
+            if (ref($item) =~ /^Gtk2::Gdk::Pixbuf/) {
                 $buffer->insert_pixbuf($iter1, $item);
                 next;
             }
-            if ($item =~ /^Gtk2::/) {
+            if (ref($item) =~ /^Gtk2::/) {
                 my $anchor = $buffer->create_child_anchor($iter1);
                 $textview->add_child_at_anchor($item, $anchor);
                 $textview->{anchors} ||= [];
