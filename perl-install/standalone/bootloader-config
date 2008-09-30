@@ -276,7 +276,7 @@ sub _migrate_to_uuids__fstab() {
 
     my $fstab_migrated;
     foreach my $part (@raw_fstab) {
-	devices::should_prefer_UUID($part->{device}) or next;
+	_should_prefer_UUID($part) or next;
 
 	my $part_ = find { fs::get::is_same_hd($part, $_) } @$fstab
 	  or log::l("migrate_to_uuids: do not know $part->{device}, can not migrate it"), next;
@@ -302,7 +302,13 @@ sub _migrate_dev_to_uuid {
     $dev && $dev =~ m!/dev/! or return;
 
     my $part = fs::get::device2part($dev, $fstab);
+    _should_prefer_UUID($part) or return;
     $part && $part->{device_UUID} && "UUID=$part->{device_UUID}";
+}
+
+sub _should_prefer_UUID {
+    my ($part) = @_;
+    devices::should_prefer_UUID($part->{device});
 }
 
 # add UUID to swap v.2 in case the swap was created long ago when mkswap didn't do it by default
