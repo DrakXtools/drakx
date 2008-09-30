@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-12 16:44+0200\n"
-"PO-Revision-Date: 2007-10-02 13:46-0300\n"
+"PO-Revision-Date: 2008-09-30 12:19-0300\n"
 "Last-Translator: Fabián Mandelbaum <fmandelbaum@gmail.com>\n"
 "Language-Team: Español <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -301,12 +301,12 @@ msgstr "Bajando la red"
 #: media.pm:422
 #, c-format
 msgid "Please wait, retrieving file"
-msgstr ""
+msgstr "Por favor espere, recuperando archivo"
 
 #: media.pm:703 media.pm:714
 #, c-format
 msgid "Downloading file %s..."
-msgstr "Transfiriendo el fichero %s..."
+msgstr "Descargando el archivo %s..."
 
 #: media.pm:806
 #, c-format
@@ -538,7 +538,7 @@ msgstr "Servidor de nombres de dominio y servidor de información de red"
 #: share/meta-task/compssUsers.pl:99
 #, c-format
 msgid "File and Printer Sharing Server"
-msgstr "Servidor de ficheros e impresión"
+msgstr "Servidor de archivos e impresión"
 
 #: share/meta-task/compssUsers.pl:100
 #, c-format
@@ -718,7 +718,7 @@ msgstr "<Tab>/<Alt-Tab> entre elementos"
 #: steps_gtk.pm:84
 #, c-format
 msgid "Xorg server is slow to start. Please wait..."
-msgstr ""
+msgstr "El servidor Xorg tarda en iniciar. Por favor, espere..."
 
 #: steps_gtk.pm:194
 #, c-format
@@ -748,29 +748,29 @@ msgid "Custom install"
 msgstr "Instalación personalizada"
 
 #: steps_gtk.pm:259
-#, fuzzy, c-format
+#, c-format
 msgid "KDE Desktop"
-msgstr "Escritorio IceWm"
+msgstr "Escritorio KDE"
 
 #: steps_gtk.pm:260
-#, fuzzy, c-format
+#, c-format
 msgid "GNOME Desktop"
-msgstr "Escritorio IceWm"
+msgstr "Escritorio GNOME"
 
 #: steps_gtk.pm:261
-#, fuzzy, c-format
+#, c-format
 msgid "Custom Desktop"
-msgstr "Escritorio IceWm"
+msgstr "Escritorio personalizado"
 
 #: steps_gtk.pm:267
 #, c-format
 msgid "Here's a preview of the '%s' desktop."
-msgstr ""
+msgstr "Aquí tiene un previsualización del escritorio '%s'."
 
 #: steps_gtk.pm:275
 #, c-format
 msgid "Click on images in order to see a bigger preview"
-msgstr ""
+msgstr "Haga clic sobre las imágenes para agrandarlas"
 
 #: steps_gtk.pm:287 steps_interactive.pm:618 steps_list.pm:30
 #, c-format
@@ -917,14 +917,14 @@ msgid "No details"
 msgstr "Sin detalles"
 
 #: steps_gtk.pm:559
-#, fuzzy, c-format
+#, c-format
 msgid "Time remaining:"
-msgstr "Tiempo restante "
+msgstr "Tiempo restante:"
 
 #: steps_gtk.pm:560
-#, fuzzy, c-format
+#, c-format
 msgid "(estimating...)"
-msgstr "Estimando"
+msgstr "(estimando...)"
 
 #: steps_gtk.pm:573
 #, c-format
@@ -949,9 +949,9 @@ msgid "not configured"
 msgstr "no configurado"
 
 #: steps_gtk.pm:694
-#, fuzzy, c-format
+#, c-format
 msgid "Media Selection"
-msgstr "Selección de grupos de paquetes"
+msgstr "Selección de soportes"
 
 #: steps_gtk.pm:704 steps_interactive.pm:335
 #, c-format
@@ -991,9 +991,9 @@ msgid "Please choose your keyboard layout"
 msgstr "Por favor, elija el tipo de su teclado"
 
 #: steps_interactive.pm:105
-#, fuzzy, c-format
+#, c-format
 msgid "Here is the full list of available keyboards:"
-msgstr "Aquí tiene la lista completa de teclados disponibles"
+msgstr "Aquí tiene la lista completa de teclados disponibles:"
 
 #: steps_interactive.pm:136
 #, c-format
@@ -1035,17 +1035,17 @@ msgstr "Clave de cifrado para %s"
 #: steps_interactive.pm:199
 #, c-format
 msgid "Cancel installation, reboot system"
-msgstr ""
+msgstr "Cancelar la instalación, volver a iniciar el sistema"
 
 #: steps_interactive.pm:200
-#, fuzzy, c-format
+#, c-format
 msgid "New Installation"
-msgstr "Instalación"
+msgstr "Instalación nueva"
 
 #: steps_interactive.pm:201
 #, c-format
 msgid "Upgrade previous installation (not recommended)"
-msgstr ""
+msgstr "Actualizar la instalación previa (no se recomienda)"
 
 #: steps_interactive.pm:205
 #, c-format
@@ -1058,6 +1058,13 @@ msgid ""
 "Warning : you should backup all your personal data before choosing \"New\n"
 "Installation\"."
 msgstr ""
+"El instalador detectó que no se puede actualizar con seguridad a su\n"
+"sistema Mandriva Linux ya instalado a la versión %s.\n"
+"\n"
+"Se recomienda una instalación nueva que reemplace a la anterior.\n"
+"\n"
+"¡Atención: debería hacer copia de respaldo de todos sus datos\n"
+"antes de comenzar con la instalación nueva!"
 
 #: steps_interactive.pm:247
 #, c-format
@@ -1143,26 +1150,24 @@ msgid "Bad file"
 msgstr "Archivo incorrecto"
 
 #: steps_interactive.pm:485
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:486
 #, c-format
 msgid "GNOME"
-msgstr ""
+msgstr "GNOME"
 
 #: steps_interactive.pm:489
-#, fuzzy, c-format
+#, c-format
 msgid "Desktop Selection"
-msgstr "Selección de grupos de paquetes"
+msgstr "Selección del entorno de escritorio"
 
 #: steps_interactive.pm:490
-#, fuzzy, c-format
+#, c-format
 msgid "You can choose your workstation desktop profile:"
-msgstr ""
-"Puede elegir un perfil de escritorio de estación de trabajo: KDE, GNOME o "
-"Instalación personalizada"
+msgstr "Puede elegir un perfil de escritorio de estación de trabajo:"
 
 #: steps_interactive.pm:575
 #, c-format
@@ -1375,11 +1380,9 @@ msgid ""
 "BootX or some other means to boot your machine. The kernel argument for the "
 "root fs is: root=%s"
 msgstr ""
-"Parece que tiene una máquina desconocida o \"Old World\", el gestor de "
-"arranque yaboot no funcionará en la misma.\n"
+"Parece que tiene una máquina desconocida o \"Old World\", el gestor de arranque yaboot no funcionará en la misma.\n"
 "La instalación continuará, pero necesitará\n"
-"utilizar BootX o alguna otra manera para arrancar su máquina. El parámetro "
-"del kernel para el sistema de ficheros raíz es: root=%s"
+"utilizar BootX o alguna otra manera para arrancar su máquina. El parámetro del kernel para el sistema de archvivos raíz es: root=%s"
 
 #: steps_interactive.pm:1087
 #, c-format
@@ -1563,27 +1566,27 @@ msgstr "Salir"
 #: ../../advertising/IM_flash.pl:1
 #, c-format
 msgid "Your desktop on a USB key"
-msgstr ""
+msgstr "Su escritorio en un pendrive USB"
 
 #: ../../advertising/IM_free09.pl:1
 #, c-format
 msgid "The 100%% open source Mandriva Linux distribution"
-msgstr ""
+msgstr "La distribución Mandriva Linux 100% Open Source"
 
 #: ../../advertising/IM_one09.pl:1
 #, c-format
 msgid "Explore Linux easily with Mandriva One"
-msgstr ""
+msgstr "Explore Linux con facilidad por medio de Mandriva One"
 
 #: ../../advertising/IM_pwp09.pl:1
 #, c-format
 msgid "A full Mandriva Linux desktop, with support"
-msgstr ""
+msgstr "Un escritorio Mandriva Linux completo, con soporte"
 
 #: ../../advertising/IM_range09.pl:1
 #, c-format
 msgid "Mandriva: distributions for everybody's needs"
-msgstr ""
+msgstr "Mandriva: distribuciones para las necesidades de todos"
 
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr ""
