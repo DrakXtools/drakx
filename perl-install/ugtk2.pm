@@ -1445,7 +1445,7 @@ sub new {
     $darea->{back_pixbuf} = gtknew('Pixbuf', file => 'banner-background');
     my $d_height = $darea->{back_pixbuf}->get_height;
     $darea->set_size_request(-1, $d_height);
-    $darea->modify_font(Gtk2::Pango::FontDescription->from_string("Sans 15"));
+    $darea->modify_font(Gtk2::Pango::FontDescription->from_string("13"));
     eval { $darea->{icon} = ugtk2::gtkcreate_pixbuf($icon) };
     my $blue_part = eval { gtknew('Pixbuf', file => 'banner-blue-part', flip => mygtk2::text_direction_rtl()) };
     my $blue_width = $blue_part->get_width;
