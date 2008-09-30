@@ -331,7 +331,7 @@ sub read_grub_menu_lst {
 
     #- sanitize
     foreach my $e (@{$b{entries}}) {
-	if (member($e->{type}, 'chainloader', 'configfile')) {
+	if (member($e->{type}, 'other', 'grub_configfile')) {
 	    $e->{kernel_or_dev} = grub2dev($e->{rootnoverify} || $e->{grub_root}, $grub2dev);
 	} elsif ($e->{initrd}) {
 	    $e->{initrd} = grub2file($e->{initrd}, $grub2dev, $fstab, $e);
