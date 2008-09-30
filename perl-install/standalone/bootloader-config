@@ -308,7 +308,8 @@ sub _migrate_dev_to_uuid {
 
 sub _should_prefer_UUID {
     my ($part) = @_;
-    devices::should_prefer_UUID($part->{device});
+    devices::should_prefer_UUID($part->{device})
+	|| $part->{device} =~ m!\bmapper/!; # we want to migrate dmraid devices, because of xxx1 vs xxxp1 device name issue
 }
 
 # add UUID to swap v.2 in case the swap was created long ago when mkswap didn't do it by default

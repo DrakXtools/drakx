@@ -1,6 +1,8 @@
 - bootloader-config:
-  o --action migrate-to-uuids: do not migrate non sdx/hdx to UUID
-    (bootloader config)
+  o --action migrate-to-uuids: 
+    o do not migrate non sdx/hdx to UUID (bootloader config)
+    o do migrate dmraid device names to UUID 
+      (because of xxx1 vs xxxp1 device name issue, cf #44182) 
 - reduce banner font size
 
 Version 11.60 - 30 September 2008
