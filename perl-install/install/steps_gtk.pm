@@ -330,7 +330,8 @@ sub reallyChooseGroups {
 		    0, $w_size,
 		    0, Gtk2::HSeparator->new,
 		    0, gtknew('HButtonBox', layout => 'edge', children_tight => [
-			  gtknew('Install_Button', text => N("Help"), clicked => $o->interactive_help_sub_display_id('choosePackages')),
+                        gtknew('Install_Button', text => N("Help"), clicked => sub {
+                                   interactive::gtk::display_help($o, { interactive_help_id => 'choosePackages#choosePackages' }, $w) }),
 			  gtknew('Button', text => N("Next"), clicked => sub { Gtk2->main_quit }),
 			 ]),
 		  ]),
