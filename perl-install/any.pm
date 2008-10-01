@@ -1331,13 +1331,13 @@ sub ask_window_manager_to_logout {
 	'icewm' => "killall -QUIT icewm",
     );
     my $cmd = $h{$wm} or return;
-    if ($wm eq 'gnome-session') {
-	#- NB: consolehelper does not destroy $HOME whereas kdesu does
-	#- for gnome, we use consolehelper, so below works
-	$ENV{ICEAUTHORITY} ||= "$ENV{HOME}/.ICEauthority";
-    } elsif (member($wm, 'ksmserver', 'kwin') && $> == 0) {
+    if (member($wm, 'ksmserver', 'kwin', 'gnome-session') && $> == 0) {	
 	#- we can not use dcop when we are root
-	$cmd = "su $ENV{USER} -c '$cmd'";
+	if (my $user = $ENV{USERHELPER_UID} && getpwuid($ENV{USERHELPER_UID})) {
+	    $cmd = "su $user -c '$cmd'";
+	} else {
+	    log::l('missing or unknown $USERHELPER_UID');
+	}
     }
     system($cmd);
     1;
