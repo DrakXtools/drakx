@@ -493,7 +493,7 @@ sub _chooseDesktop {
 	Custom => N("Custom"),
     );
     my $title = N("Desktop Selection");
-    my $message = N("You can choose your workstation desktop profile:");
+    my $message = N("You can choose your workstation desktop profile.");
 
     my $choice;
     if ($o->isa('interactive::gtk')) {
