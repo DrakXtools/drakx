@@ -643,7 +643,7 @@ sub helper_separator_tree_to_tree {
 
 sub interactive_help_sub_get_id {
     my ($o, $id) = @_;
-    eval { $o->interactive_help_has_id($id) }
+    eval { $o->is_help_file_exist($id) }
       && sub { $o->interactive_help_get_id($id) };
 }
 
