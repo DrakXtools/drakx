@@ -334,13 +334,17 @@ sub _gtk__Image {
             $w->set_size_request($width, $height);
             $w->{pixbuf} = $pixbuf;
             $w->signal_connect(expose_event => sub {
+                                   my (undef, $event) = @_;
                                    if (!$w->{x}) {
                                        my $alloc = $w->allocation;
                                        $w->{x} = $alloc->x;
                                        $w->{y} = $alloc->y;
                                    }
-                                   $pixbuf->render_to_drawable($w->window, $w->style->fg_gc('normal'),
-                                                               0, 0, $w->{x}, $w->{y}, $width, $height, 'max', 0, 0);
+                                   foreach my $rect($event->region->get_rectangles) {
+                                       my @values = $rect->values;
+                                       $pixbuf->render_to_drawable($w->window, $w->style->fg_gc('normal'),
+                                                               @values[0..1], $w->{x}+$values[0], $w->{y}+$values[1], @values[2..3], 'max', 0, 0);
+				   }
                                });
         } : sub { 
             my ($w, $file, $o_size) = @_;
