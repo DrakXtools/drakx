@@ -388,7 +388,7 @@ If you do not have it, press Cancel to avoid installation from this Cd-Rom.", $p
 	foreach (1 .. 7) {
 	    eval { fs::mount::part($phys_m) };
 	    last if $phys_m->{isMounted};
-	    # we must retry since mount will now fail until the drive recognises the CD (cf #43230)
+	    # we must retry since mount will now fail instead of waiting for the drive to recognise the CD (cf #43230)
 	    sleep 2;
 	}
 
