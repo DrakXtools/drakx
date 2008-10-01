@@ -875,7 +875,7 @@ sub _gtk__MagicWindow {
     } elsif ($pop_it) {
 	$opts->{child} = $sub_child;
 
-	$w = _create_Window($opts, pop_and_reuse => $pop_and_reuse);
+	$w = _create_Window($opts);
 	$previous_popped_and_reuse_window = $w if $pop_and_reuse;
     } else {
 	if (!$::WizardWindow) {
