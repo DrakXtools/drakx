@@ -763,6 +763,12 @@ sub filter_widgets {
 
 my $help_path = "/usr/share/doc/installer-help";
 
+sub is_help_file_exist {
+    my ($id) = @_;
+    $id =~ s/#.*//;
+    -e "$help_path/$id.html";
+}
+
 sub load_from_uri {
     my ($view, $url) = @_;
     $url = get_html_file($::o, $url);
