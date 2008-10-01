@@ -139,6 +139,9 @@ sub handle_dmraid {
 	    return;
 	};
     }
+    if (!$::isInstall) {
+	fs::dmraid::migrate_device_names($_) foreach @vgs;
+    }
     log::l("using dmraid on " . join(' ', map { $_->{device} } @vgs));
 
     my @used_hds = map {

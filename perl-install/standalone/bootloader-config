@@ -285,6 +285,7 @@ sub _migrate_to_uuids__fstab() {
 	  or log::l("migrate_to_uuids: no UUID for $part->{device}, can not migrate it"), next;
 	$part->{prefer_device_UUID} = 1;
 	$part->{prefer_device} = 0;
+	delete $part->{device_alias} if $part->{device_alias} && $part->{device_alias} =~ m!\bmapper/!; # see fs::dmraid::migrate_device_names() for more
 
 	log::l("migrate_to_uuids: migrating fstab $part->{device} entry");
 	$fstab_migrated = 1;

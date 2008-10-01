@@ -112,6 +112,26 @@ sub vgs() {
     } _sets();
 }
 
+# the goal is to handle migration from /dev/mapper/xxx1 to /dev/mapper/xxxp1,
+# as used by initrd/nash.
+# dmraid has been patched to follow xxxp1 device names.
+# so until the box has rebooted on new initrd/dmraid, we must cope with /dev/mapper/xxx1 device names
+# (cf #44182)
+sub migrate_device_names {
+    my ($vg) = @_;
+
+    my $dev_name = basename($vg->{device});
+    foreach (all('/dev/mapper')) {
+	my ($nb) = /^\Q$dev_name\E(\d+)$/ or next;
+	my $new = $dev_name . 'p' . $nb;
+	if (! -e "/dev/mapper/$new") {
+	    log::l("migrating to $new, creating a compat symlink $_");
+	    rename "/dev/mapper/$_", "/dev/mapper/$new";
+	    symlink $new, "/dev/mapper/$_";
+	}
+    }
+}
+
 if ($ENV{DRAKX_DEBUG_DMRAID}) {
     eval(<<'EOF');
     my %debug_data = (
