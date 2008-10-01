@@ -875,7 +875,7 @@ sub _gtk__MagicWindow {
     } elsif ($pop_it) {
 	$opts->{child} = $sub_child;
 
-	$w = _create_Window($opts);
+	$w = _create_Window($opts, '');
 	$previous_popped_and_reuse_window = $w if $pop_and_reuse;
     } else {
 	if (!$::WizardWindow) {
@@ -902,7 +902,7 @@ sub _gtk__MagicWindow {
 		add2hash($opts, {
 		    child => $::WizardTable,
 		});
-		$::WizardWindow = _create_Window($opts);
+		$::WizardWindow = _create_Window($opts, 'special_center');
 	    }
 	} else {
 	    %$opts = ();
@@ -1169,7 +1169,7 @@ sub mygtk2::MagicWindow::AUTOLOAD {
 }
 
 sub _create_Window {
-    my ($opts) = @_;
+    my ($opts, $special_center) = @_;
 
     my $no_Window_Manager = exists $opts->{no_Window_Manager} ? delete $opts->{no_Window_Manager} : !$::isStandalone;
 
@@ -1177,9 +1177,8 @@ sub _create_Window {
 	if_(!$::isInstall && !$::isWizard, border_width => 5),
 
 	#- policy: during install, we need a special code to handle the weird centering, see below
-	position_policy => $::isInstall ?
-          ($opts->{modal} ? 'center-always' : 'none') :
-            $no_Window_Manager ? 'center-always' : 'center-on-parent',
+	position_policy => $special_center ? 'none' : 
+	  $no_Window_Manager ? 'center-always' : 'center-on-parent',
 
 	if_($::isInstall, position => [
 	    $::stepswidth + ($::o->{windowwidth} - $::real_windowwidth) / 2, 
@@ -1227,7 +1226,7 @@ sub _create_Window {
 
             $w->move(max(0, $::rootwidth - ($::o->{windowwidth} + $wi) / 2), 
 		     max(0, ($::o->{windowheight} - $he) / 2));
-	});
+	}) if $special_center;
     }
 
     $w;
