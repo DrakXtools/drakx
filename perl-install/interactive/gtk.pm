@@ -761,7 +761,7 @@ sub filter_widgets {
     }
 }
 
-my $help_path = "/usr/share/doc/installer-help/";
+my $help_path = "/usr/share/doc/installer-help";
 
 sub load_from_uri {
     my ($view, $url) = @_;
