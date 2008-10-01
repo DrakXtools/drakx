@@ -49,7 +49,7 @@ sub to_subpart {
 
 	    if ($symlink && $symlink !~ m!^/!) {
 		my $keep = 1;
-		if ($symlink =~ m!/!) {
+		if ($symlink =~ m!/! || $dev =~ m!/!) {
 		    $symlink = MDK::Common::File::concat_symlink("/dev/" . dirname($dev), $symlink);
 		    $symlink =~ s!^/dev/!! or $keep = 0;
 		}
