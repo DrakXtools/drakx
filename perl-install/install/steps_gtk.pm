@@ -291,7 +291,7 @@ sub reallyChooseDesktop {
 	   gtknew('VBox', children => [
 		    0, gtknew('Title2',
                               # workaround infamous 6 years old gnome bug #101968:
-                              width => mygtk2::get_label_width(), label => $message . 
+                              width => mygtk2::get_label_width(), label => $message . ' ' .
                                 N("Click on images in order to see a bigger preview")),
 		    1, gtknew('HButtonBox', children_loose => \@l),
 		    0, $w->create_okcancel(N("Next"), undef),
