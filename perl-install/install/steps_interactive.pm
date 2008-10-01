@@ -385,7 +385,12 @@ sub ask_change_cd_ {
 Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.
 If you do not have it, press Cancel to avoid installation from this Cd-Rom.", $phys_m->{name}), 1) or return;
 
-	eval { fs::mount::part($phys_m) };
+	foreach (1 .. 7) {
+	    eval { fs::mount::part($phys_m) };
+	    last if $phys_m->{isMounted};
+	    # we must retry since mount will now fail until the drive recognises the CD (cf #43230)
+	    sleep 2;
+	}
 
 	#- it can be a directory, so don't use -f
 	!$o_rel_file || -e install::media::path($phys_m, $o_rel_file) and return 1;
