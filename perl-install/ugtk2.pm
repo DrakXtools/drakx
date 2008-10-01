@@ -675,7 +675,7 @@ sub set_back_pixbuf {
     my $window = $widget->window;
     my ($width, $height) = ($pixbuf->get_width, $pixbuf->get_height);
     my $pixmap = Gtk2::Gdk::Pixmap->new($window, $width, $height, $window->get_depth);
-    $pixbuf->render_to_drawable($pixmap, $widget->style->fg_gc('normal'), 0, 0, 0, 0, $width, $height, 'none', 0, 0);
+    $pixbuf->render_to_drawable($pixmap, $widget->style->fg_gc('normal'), 0, 0, 0, 0, $width, $height, 'max', 0, 0);
     $window->set_back_pixmap($pixmap, 0);
 }
 
