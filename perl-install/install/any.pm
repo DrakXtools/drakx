@@ -517,6 +517,7 @@ sub default_packages {
     push @l, "dmraid" if any { fs::type::is_dmraid($_) } @{$o->{all_hds}{hds}};
     push @l, 'cpufreq' if cat_('/proc/cpuinfo') =~ /AuthenticAMD/ && arch() =~ /x86_64/
       || cat_('/proc/cpuinfo') =~ /model name.*Intel\(R\) Core\(TM\)2 CPU/;
+    push @l, 'apmd' if -e "/proc/apm";
     push @l, detect_devices::probe_name('Pkg');
 
     my $dmi_BIOS = detect_devices::dmidecode_category('BIOS');
