@@ -333,6 +333,7 @@ sub _gtk__Image {
             my ($width, $height) = ($pixbuf->get_width, $pixbuf->get_height);
             $w->set_size_request($width, $height);
             $w->{pixbuf} = $pixbuf;
+            my $not_my_first_event;
             $w->signal_connect(expose_event => sub {
                                    my (undef, $event) = @_;
                                    if (!$w->{x}) {
@@ -345,6 +346,12 @@ sub _gtk__Image {
                                        $pixbuf->render_to_drawable($w->window, $w->style->fg_gc('normal'),
                                                                @values[0..1], $w->{x}+$values[0], $w->{y}+$values[1], @values[2..3], 'max', 0, 0);
 				   }
+                                   # workaround Gtk+ bug: in installer, first event is not complete:
+                                   if ($::isInstall && !$not_my_first_event) {
+                                       $not_my_first_event = 1;
+                                       $pixbuf->render_to_drawable($w->window, $w->style->fg_gc('normal'),
+                                                                   0, 0, $w->{x}, $w->{y}, $width, $height, 'max', 0, 0);
+                                   }
                                });
         } : sub { 
             my ($w, $file, $o_size) = @_;
