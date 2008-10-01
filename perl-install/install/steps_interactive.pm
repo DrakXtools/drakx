@@ -598,9 +598,10 @@ sub chooseGroups {
 	my $docs = !$o->{excludedocs};	
 	my $minimal;
 
-	$o->ask_from(N("Type of install"), 
-		     N("You have not selected any group of packages.
+	$o->ask_from_({ title => N("Type of install"), 
+                        message =>N("You have not selected any group of packages.
 Please choose the minimal installation you want:"),
+                        },
 		     [
 		      { val => \$o->{rpmsrate_flags_chosen}{CAT_X}, type => 'bool', text => N("With X"), disabled => sub { $minimal } },
 		      { val => \$docs, type => 'bool', text => N("With basic documentation (recommended!)"), disabled => sub { $minimal } },
