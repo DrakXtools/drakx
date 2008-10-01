@@ -159,12 +159,6 @@ sub selectInstallClass {
 	    _check_unsafe_upgrade_and_warn($o, $p->{part}) or $p = undef;
 	}
 
-	my $_foo = N("You have decided to upgrade your system to %s. KDE 3.5 has been detected
-on your system. This installer cannot preserve KDE 3.5 in an upgrade. If you choose to proceed, 
-KDE 4 will replace KDE 3, and you will lose your personal KDE configuration settings. 
-To upgrade with KDE 3.5 and your personal settings preserved, 
-please reboot your system and upgrade using the Mandriva update applet.", 'Mandriva Linux 2009');
-
 	if (ref $p) {
 
 	    if ($p->{part}) {
@@ -424,6 +418,19 @@ sub choosePackages {
 	log::l($msg);
 	$o->ask_warn('', $msg);
 	install::steps::rebootNeeded($o);
+    }
+    if ($o->{isUpgrade} && -e "$::prefix/usr/bin/kded"
+	  && !install::pkgs::packageByName($o->{packages}, 'task-kde3')) {
+	log::l("kde3 installed, but task-kde3 not available so can't upgrade correctly");
+
+	my $choice;
+	$o->ask_from_({ messages => formatAlaTeX(N("You have decided to upgrade your system to %s. KDE 3.5 has been detected
+on your system. This installer cannot preserve KDE 3.5 in an upgrade. If you choose to proceed, 
+KDE 4 will replace KDE 3, and you will lose your personal KDE configuration settings. 
+To upgrade with KDE 3.5 and your personal settings preserved, 
+please reboot your system and upgrade using the Mandriva update applet.", 'Mandriva Linux 2009')) },
+				   [ { val => \$choice, type => 'list', list => [ N_("Reboot"), N_("Proceed") ], format => \&translate } ]);
+	$choice eq 'Reboot' and install::steps::rebootNeeded($o);	
     }
 
     my ($individual, $chooseGroups);
