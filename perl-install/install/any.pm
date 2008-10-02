@@ -495,7 +495,10 @@ sub rpmsrate_always_flags {
     $rpmsrate_flags_chosen->{HIGH_SECURITY} = 1 if $o->{security} > 3;
     $rpmsrate_flags_chosen->{BIGMEM} = 1 if detect_devices::BIGMEM();
     $rpmsrate_flags_chosen->{SMP} = 1 if $o->{match_all_hardware} || detect_devices::hasSMP();
-    $rpmsrate_flags_chosen->{LIGHT} = 1 if !$o->{match_all_hardware} && !defined $o->{compssListLevel} && detect_devices::need_light_desktop();
+    if (!$o->{match_all_hardware} && !defined $o->{compssListLevel} && detect_devices::need_light_desktop()) {
+        log::l("activation light desktop mode (for low resources systems or netbook/nettops)");
+        $rpmsrate_flags_chosen->{LIGHT} = 1;
+    }
     $rpmsrate_flags_chosen->{'3D'} = 1 if
       $o->{match_all_hardware} ||
       detect_devices::matching_desc__regexp('Matrox.* G[245][05]0') ||
