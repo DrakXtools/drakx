@@ -494,7 +494,7 @@ sub _chooseDesktop {
     my $title = N("Desktop Selection");
     my $message = N("You can choose your workstation desktop profile.");
 
-    my $default_choice = $choices->[0];
+    my $default_choice = (find { $rpmsrate_flags_chosen->{"CAT_" . $_->[0]} } @l) || $l[0];
     my $choice = $default_choice;
     if ($o->isa('interactive::gtk')) {
 	$choice = install::steps_gtk::reallyChooseDesktop($o, $title, $message, \@l, $default_choice);
