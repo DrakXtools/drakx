@@ -244,6 +244,7 @@ sub reallyChooseDesktop {
                           gtknew('Label', text => $val->[1]),
                        tip => $tips{$val->[0]},
 		       toggled => sub { $choice = $val if $_[0]->get_active },
+                       active => $choice == $val,
 		       $prev ? (group => $prev->get_group) : ());
 	$prev->signal_connect(key_press_event => sub {
 				  my (undef, $event) = @_;
