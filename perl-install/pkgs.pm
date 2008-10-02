@@ -12,7 +12,7 @@ sub rpmsrate_rate_max() {
 }
 
 sub rpmsrate_rate_default() {
-    devices::need_light_desktop() ? 5 : 4;
+    detect_devices::need_light_desktop() ? 5 : 4;
 }
 
 sub read_rpmsrate_raw {
