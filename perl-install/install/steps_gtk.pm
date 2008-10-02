@@ -294,7 +294,13 @@ sub reallyChooseDesktop {
                               width => mygtk2::get_label_width(), label => $message . ' ' .
                                 N("Click on images in order to see a bigger preview")),
 		    1, gtknew('HButtonBox', children_loose => \@l),
-		    0, $w->create_okcancel(N("Next"), undef),
+		    0, $w->create_okcancel(N("Next"), undef, '',
+                                           [ gtknew('Install_Button', text => N("Help"),
+                                                    clicked => sub {
+                                                        interactive::gtk::display_help(
+                                                            $o,
+                                                            { interactive_help_id => 'choosePackages#d4e994' }, $w);
+                                                    }), undef, 1 ])
 		]));
     $w->main;
     
