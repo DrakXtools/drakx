@@ -608,7 +608,7 @@ sub chooseGroups {
 	$o->ask_from_({ title => N("Type of install"), 
                         message =>N("You have not selected any group of packages.
 Please choose the minimal installation you want:"),
-                        interactive_help_id => 'choosePackagesminimal-install'
+                        interactive_help_id => 'choosePackages#minimal-install'
                         },
 		     [
 		      { val => \$o->{rpmsrate_flags_chosen}{CAT_X}, type => 'bool', text => N("With X"), disabled => sub { $minimal } },
