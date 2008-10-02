@@ -228,11 +228,10 @@ sub selectMouse {
 }
 
 sub reallyChooseDesktop {
-    my ($o, $title, $message, $choices) = @_;
+    my ($o, $title, $message, $choices, $choice) = @_;
 
     my $w = ugtk2->new($title);
 
-    my $choice = $choices->[0];
     my %tips = (
         KDE    => N("Install Mandriva KDE Desktop"),
         GNOME  => N("Install Mandriva GNOME Desktop"),

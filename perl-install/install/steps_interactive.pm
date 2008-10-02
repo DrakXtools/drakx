@@ -494,9 +494,10 @@ sub _chooseDesktop {
     my $title = N("Desktop Selection");
     my $message = N("You can choose your workstation desktop profile.");
 
+    my $default_choice = $choices->[0];
     my $choice;
     if ($o->isa('interactive::gtk')) {
-	$choice = install::steps_gtk::reallyChooseDesktop($o, $title, $message, \@l);
+	$choice = install::steps_gtk::reallyChooseDesktop($o, $title, $message, \@l, $default_choice);
     } else {
 	$o->ask_from_({ title => $title, message => $message }, [
 	    { val => \$choice, list => \@l, type => 'list', format => sub { $_[0][1] } }, 
