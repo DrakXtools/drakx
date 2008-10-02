@@ -772,22 +772,21 @@ sub is_help_file_exist {
 
 sub load_from_uri {
     my ($view, $url) = @_;
-    $url = get_html_file($::o, $url);
-    my $str = scalar(cat_($url));
-    c::set_tagged_utf8($str);
-    $view->load_html_string($str, $help_path);
+    $view->open(get_html_file($::o, $url));
 }
 
 sub get_html_file {
     my ($o, $url) = @_;
-    $url =~ s/#.*//;
+    my $anchor;
+    ($url, $anchor) = $url =~ /(.*)#(.*)/ if $url =~ /#/;
     $url .= '.html' if $url !~ /\.html$/;
-    find { -e $_ } map { "$help_path/${_}" }
+    $url = find { -e $_ } map { "$help_path/${_}" }
       map {
           my $id = $_;
           require lang;
           map { ("$_/$id") } map { $_, lc($_) } (split ':', lang::getLANGUAGE($o->{locale}{lang})), '';
       } $url;
+    $anchor ? "$url#$anchor" : $url;
 }
 
 sub display_help {
