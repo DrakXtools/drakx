@@ -299,7 +299,7 @@ sub reallyChooseDesktop {
                                                     clicked => sub {
                                                         interactive::gtk::display_help(
                                                             $o,
-                                                            { interactive_help_id => 'choosePackages#d4e994' }, $w);
+                                                            { interactive_help_id => 'choosePackages#choose-graphical-env' }, $w);
                                                     }), undef, 1 ])
 		]));
     $w->main;
