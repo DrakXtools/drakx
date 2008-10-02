@@ -7,8 +7,13 @@ use run_program;
 use detect_devices;
 use log;
 
-our $rpmsrate_rate_max = 5; # also defined in perl-URPM
-our $rpmsrate_rate_default = 4;
+sub rpmsrate_rate_max() {
+    5; # also defined in perl-URPM
+}
+
+sub rpmsrate_rate_default() {
+    4;
+}
 
 sub read_rpmsrate_raw {
     my ($file) = @_;
