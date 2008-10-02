@@ -419,7 +419,7 @@ sub choosePackages {
 	$o->ask_warn('', $msg);
 	install::steps::rebootNeeded($o);
     }
-    if ($o->{isUpgrade} && -e "$::prefix/usr/bin/kded"
+    if ($o->{isUpgrade} && -e "$::prefix/usr/bin/kicker"
 	  && !install::pkgs::packageByName($o->{packages}, 'task-kde3')) {
 	log::l("kde3 installed, but task-kde3 not available so can't upgrade correctly");
 
