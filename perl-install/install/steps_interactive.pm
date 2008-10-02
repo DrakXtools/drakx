@@ -495,7 +495,7 @@ sub _chooseDesktop {
     my $message = N("You can choose your workstation desktop profile.");
 
     my $default_choice = $choices->[0];
-    my $choice;
+    my $choice = $default_choice;
     if ($o->isa('interactive::gtk')) {
 	$choice = install::steps_gtk::reallyChooseDesktop($o, $title, $message, \@l, $default_choice);
     } else {
