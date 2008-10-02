@@ -626,8 +626,9 @@ sub is_lan_interface {
     #-   ippp%d are created by drivers/isdn/i4l/isdn_ppp.c
     #-   plip%d are created by drivers/net/plip.c
     #-   ppp%d are created by drivers/net/ppp_generic.c
+    #-   pan%d are created by bnep
     is_useful_interface($_[0]) &&
-    $_[0] !~ /^(?:hso|ippp|isdn|plip|ppp)/;
+    $_[0] !~ /^(?:hso|ippp|isdn|plip|ppp|pan)/;
 }
 
 sub is_useful_interface {
