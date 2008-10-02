@@ -393,6 +393,7 @@ To upgrade with KDE 3.5 and your personal settings preserved,
 please reboot your system and upgrade using the Mandriva update applet.", 'Mandriva Linux 2009')) },
 			  [ { val => \$choice, type => 'list', list => [ N_("Reboot"), N_("Proceed") ], format => \&translate } ]);
 	    $choice eq 'Reboot' and install::steps::rebootNeeded($o);	
+	    log::l("ok, continuing anyway, but forcing install of task-kde4");
 	    install::pkgs::select_by_package_names($o->{packages}, ['task-kde4']);
 	}
     }
