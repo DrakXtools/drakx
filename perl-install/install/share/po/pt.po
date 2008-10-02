@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-30 20:13+0200\n"
-"PO-Revision-Date: 2008-09-06 11:39+0100\n"
+"PO-Revision-Date: 2008-10-02 21:35+0100\n"
 "Last-Translator: Zé <ze@mandriva.org>\n"
 "Language-Team: Português <pt@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -83,8 +83,7 @@ msgstr "O URL deve começar por ftp:// ou http://"
 
 #: any.pm:180
 #, c-format
-msgid ""
-"Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr ""
 "A contactar o sítio web Mandriva Linux para obter a lista de espelhos "
 "disponíveis..."
@@ -308,7 +307,7 @@ msgstr "A desligar a rede"
 #: media.pm:422
 #, c-format
 msgid "Please wait, retrieving file"
-msgstr ""
+msgstr "Por favor aguarde, a obter o ficheiro"
 
 #: media.pm:703 media.pm:714
 #, c-format
@@ -444,8 +443,7 @@ msgstr "Ferramentas de Consola"
 #: share/meta-task/compssUsers.pl:48
 #, c-format
 msgid "Editors, shells, file tools, terminals"
-msgstr ""
-"Editores, Linha de Comandos (shell), ferramentas de ficheiros, terminais"
+msgstr "Editores, Linha de Comandos (shell), ferramentas de ficheiros, terminais"
 
 #: share/meta-task/compssUsers.pl:52 share/meta-task/compssUsers.pl:153
 #: share/meta-task/compssUsers.pl:155
@@ -674,8 +672,7 @@ msgstr "Utilidades de Rede/Monitorização"
 #: share/meta-task/compssUsers.pl:183
 #, c-format
 msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-msgstr ""
-"Monitorização de ferramentas, contabilidade de processos, tcpdump, nmap, ..."
+msgstr "Monitorização de ferramentas, contabilidade de processos, tcpdump, nmap, ..."
 
 #: share/meta-task/compssUsers.pl:187
 #, c-format
@@ -758,19 +755,19 @@ msgid "Custom install"
 msgstr "Instalação personalizada"
 
 #: steps_gtk.pm:259
-#, fuzzy, c-format
+#, c-format
 msgid "KDE Desktop"
-msgstr "Ecrâ IceWm"
+msgstr "Ecrâ KDE"
 
 #: steps_gtk.pm:260
-#, fuzzy, c-format
+#, c-format
 msgid "GNOME Desktop"
-msgstr "Ecrâ IceWm"
+msgstr "Ecrâ GNOME"
 
 #: steps_gtk.pm:261
-#, fuzzy, c-format
+#, c-format
 msgid "Custom Desktop"
-msgstr "Ecrâ IceWm"
+msgstr "Ecrâ Personalizado"
 
 #: steps_gtk.pm:267
 #, c-format
@@ -852,8 +849,7 @@ msgstr "para manter %s"
 msgid ""
 "You can not select this package as there is not enough space left to install "
 "it"
-msgstr ""
-"Não pode seleccionar este pacote pois não existe espaço livre para o instalar"
+msgstr "Não pode seleccionar este pacote pois não existe espaço livre para o instalar"
 
 #: steps_gtk.pm:428
 #, c-format
@@ -926,9 +922,9 @@ msgid "No details"
 msgstr "Sem detalhes"
 
 #: steps_gtk.pm:559
-#, fuzzy, c-format
+#, c-format
 msgid "Time remaining:"
-msgstr "Tempo restante "
+msgstr "Tempo restante:"
 
 #: steps_gtk.pm:560
 #, c-format
@@ -1000,9 +996,9 @@ msgid "Please choose your keyboard layout"
 msgstr "Por favor escolha o tipo de teclado"
 
 #: steps_interactive.pm:105
-#, fuzzy, c-format
+#, c-format
 msgid "Here is the full list of available keyboards:"
-msgstr "Aqui está a lista completa dos teclados disponíveis"
+msgstr "Aqui está a lista completa dos teclados disponíveis:"
 
 #: steps_interactive.pm:136
 #, c-format
@@ -1029,14 +1025,12 @@ msgstr "Actualizar %s"
 #: steps_interactive.pm:148
 #, c-format
 msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-msgstr ""
-"A actualização de uma distribuição 32bit para uma 64bit não é suportada"
+msgstr "A actualização de uma distribuição 32bit para uma 64bit não é suportada"
 
 #: steps_interactive.pm:152
 #, c-format
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-msgstr ""
-"A actualização de uma distribuição 64bit para uma 32bit não é suportada"
+msgstr "A actualização de uma distribuição 64bit para uma 32bit não é suportada"
 
 #: steps_interactive.pm:162
 #, c-format
@@ -1049,6 +1043,13 @@ msgid ""
 "To upgrade with KDE 3.5 and your personal settings preserved, \n"
 "please reboot your system and upgrade using the Mandriva update applet."
 msgstr ""
+"Decidiu actualizar o seu sistema para %s. Foi detectado o KDE 3.5 no seu\n"
+"sistema. Este instalador não pode perservar o KDE 3.5 numa actualização. "
+"Se decidir continuar,\n"
+"O KDE 4 irá substituir o KDE 3, e irá perder as suas configurações pessoais.\n"
+"Para actualizar com o KDE 3.5 e as suas configurações pessoais perservadas,\n"
+"por favor reinicie o seu sistema e actualize usando a ferramenta de actualização "
+"Mandriva."
 
 #: steps_interactive.pm:180
 #, c-format
@@ -1608,34 +1609,3 @@ msgstr "Um ecrã Mandriva Linux completo, com suporte"
 msgid "Mandriva: distributions for everybody's needs"
 msgstr "Mandriva: distribuições para as necessidades de todos os utilizadores"
 
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr ""
-#~ "A contactar o espelho para transferir a lista de pacotes disponíveis..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Não é possível contactar o espelho %s"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Gerar disquete de auto instalação"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "A auto instalação pode ser totalmente automatizada\n"
-#~ "se quiser, nesse caso tomará conta do disco rígido!!\n"
-#~ "(isto é feito para instalar outra máquina).\n"
-#~ "\n"
-#~ "Pode preferir repetir a instalação.\n"
-
-#~ msgid "Replay"
-#~ msgstr "Repetir"
-
-#~ msgid "Automated"
-#~ msgstr "Automática"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Gravar selecção de pacotes"
