@@ -3,25 +3,28 @@
 # Copyright (c) 2000 Mandriva
 # ############################################
 #
+#
+# #############################################
+#
 # Ömer Fadıl USTA <omer_fad@hotmail.com> , 1999-2003.
 # Tuncay YENİAY <tuncayyeniay@mynet.com>,2002.
 # Nazmi Savga <nsavga@doruk.net.tr>,2001.
 # Durmuş Celep <durmusc_tr@yahoo.com>,2002.
 # Erçin EKER <erc.caldera@gmx.net>, 2003.
-#
-# #############################################
-#
+# Atilla ÖNTAŞ <atilla_ontas@mandriva.org>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-tr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-19 15:04+0200\n"
-"PO-Revision-Date: 2004-09-15 13:35+0200\n"
-"Last-Translator: Ömer Fadıl USTA <omer_fad@hotmail.com>\n"
-"Language-Team: Turkish <tr@li.org>\n"
+"PO-Revision-Date: 2008-10-05 14:40+0300\n"
+"Last-Translator: Atilla ÖNTAŞ <atilla_ontas@mandriva.org>\n"
+"Language-Team: Turkish <kde-i18n-doc@lists.kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 0.2\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: any.pm:252 any.pm:855 diskdrake/interactive.pm:580
 #: diskdrake/interactive.pm:767 diskdrake/interactive.pm:811
@@ -47,6 +50,10 @@ msgid ""
 "\n"
 "Assign a new Volume ID?"
 msgstr ""
+"LILIO, %s bölümüne yeni bir Bölüm Kimliği vermek istiyor. Ancak, bir Windows NT,\n 2000 veya XP açılış "
+"diskinin Bölüm Kimliğini değiştirmek ölümcül bir Windows  hatasına yol açar.\n Bu uyarı, Windows 95 "
+"veya 98 veya NT veri diskleri için geçerli değildir.\n \n Yeni bir Bölüm Kimliği vermek istiyor "
+"musunuz?"
 
 #: any.pm:274
 #, c-format
@@ -88,9 +95,9 @@ msgstr ""
 "Hangi sürücüden sistemi önyükleme(boot) gerçekleştiriyorsunuz?"
 
 #: any.pm:346
-#, fuzzy, c-format
+#, c-format
 msgid "First sector (MBR) of drive %s"
-msgstr "Diskin ilk sektörü (MBR)"
+msgstr "%s diskinin ilk sektörü (MBR)"
 
 #: any.pm:348
 #, c-format
@@ -113,9 +120,9 @@ msgid "Skip"
 msgstr "Atla"
 
 #: any.pm:358
-#, fuzzy, c-format
+#, c-format
 msgid "Bootloader Installation"
-msgstr "Önyükleyici kurulumu devam ediyor"
+msgstr "Önyükleyici Kurulumu"
 
 #: any.pm:362
 #, c-format
@@ -150,7 +157,7 @@ msgstr "Önyükleme Aygıtı"
 #: any.pm:407
 #, c-format
 msgid "Main options"
-msgstr ""
+msgstr "Ana Seçenekler"
 
 #: any.pm:408
 #, c-format
@@ -163,14 +170,14 @@ msgid "Enable ACPI"
 msgstr "ACPI özelliğini etkinleştir"
 
 #: any.pm:410
-#, fuzzy, c-format
+#, c-format
 msgid "Enable APIC"
-msgstr "ACPI özelliğini etkinleştir"
+msgstr "APIC özelliğini etkinleştir"
 
 #: any.pm:411
-#, fuzzy, c-format
+#, c-format
 msgid "Enable Local APIC"
-msgstr "ACPI özelliğini etkinleştir"
+msgstr "Yerel APIC özelliğini etkinleştir"
 
 #: any.pm:413 any.pm:802 any.pm:817 authentication.pm:245
 #: diskdrake/smbnfs_gtk.pm:181
@@ -189,9 +196,9 @@ msgid "Please try again"
 msgstr "Lütfen tekrar deneyin"
 
 #: any.pm:416
-#, fuzzy, c-format
+#, c-format
 msgid "You can not use a password with %s"
-msgstr "%s bağlama noktası için parolalı dosya sistemi kullanamazsınız"
+msgstr "%s ile bir parola kullanamazsınız"
 
 #: any.pm:419 any.pm:804 any.pm:819 authentication.pm:246
 #, c-format
@@ -210,10 +217,8 @@ msgstr "kısıtla"
 
 #: any.pm:421
 #, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
-msgstr ""
-"\"Komut satırı seçeneklerini kısıtla\" seçeneği parolasız bir işe yaramaz"
+msgid "Option ``Restrict command line options'' is of no use without a password"
+msgstr "\"Komut satırı seçeneklerini kısıtla\" seçeneği parolasız bir işe yaramaz"
 
 #: any.pm:423
 #, c-format
@@ -268,7 +273,7 @@ msgstr "Sonuna ekle"
 #: any.pm:510
 #, c-format
 msgid "Xen append"
-msgstr ""
+msgstr "Sona Xen ekle"
 
 #: any.pm:513
 #, c-format
@@ -281,9 +286,9 @@ msgid "Initrd"
 msgstr "Initrd"
 
 #: any.pm:516
-#, fuzzy, c-format
+#, c-format
 msgid "Network profile"
-msgstr "Yeni profil..."
+msgstr "Ağ profili"
 
 #: any.pm:525 any.pm:530 any.pm:532 diskdrake/interactive.pm:400
 #, c-format
@@ -346,7 +351,7 @@ msgid "Other OS (Windows...)"
 msgstr "Diğer işletim sistemi (Windows...)"
 
 #: any.pm:594
-#, fuzzy, c-format
+#, c-format
 msgid "Bootloader Configuration"
 msgstr "Önyükleme Yapılandırması"
 
@@ -402,8 +407,7 @@ msgstr "Lütfen bir kullanıcı adı verin"
 
 #: any.pm:781
 #, c-format
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr ""
 "Kullanıcı adında sadece küçük harfler, sayılar, `-' ve `_' karakterleri "
 "bulunabilir"
@@ -429,31 +433,29 @@ msgid "Group ID"
 msgstr "Grup ID"
 
 #: any.pm:790
-#, fuzzy, c-format
+#, c-format
 msgid "%s must be a number"
 msgstr "%s seçeneği bir sayı olmalıdır!"
 
 #: any.pm:791
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
-msgstr ""
+msgstr "%s seçeneği 500'den yukarı olmalıdır. Yine de kabul edilsin mi?"
 
 #: any.pm:795
-#, fuzzy, c-format
+#, c-format
 msgid "User management"
-msgstr "Kullanıcı Adı"
+msgstr "Kullanıcı yönetimi"
 
 #: any.pm:801 authentication.pm:232
-#, fuzzy, c-format
+#, c-format
 msgid "Set administrator (root) password"
-msgstr "Root parolası"
+msgstr "Yönetici (kök) parolasını ayarla"
 
 #: any.pm:806
-#, fuzzy, c-format
+#, c-format
 msgid "Enter a user"
-msgstr ""
-"Bir kullanıcı girin\n"
-"%s"
+msgstr "Bir kullanıcı girin"
 
 #: any.pm:808
 #, c-format
@@ -476,9 +478,9 @@ msgid "Shell"
 msgstr "Kabuk"
 
 #: any.pm:855
-#, fuzzy, c-format
+#, c-format
 msgid "Please wait, adding media..."
-msgstr "ttmkfdir çalışıyor, lütfen bekleyiniz..."
+msgstr "Kurulum kaynağı ekleniyor, lütfen bekleyiniz..."
 
 #: any.pm:883 security/l10n.pm:14
 #, c-format
@@ -493,9 +495,9 @@ msgstr ""
 "yapmasını sağlayabilirim."
 
 #: any.pm:885
-#, fuzzy, c-format
+#, c-format
 msgid "Use this feature"
-msgstr "Bu özelliği kullanmak istiyor musunuz?"
+msgstr "Bu özelliği kullan"
 
 #: any.pm:886
 #, c-format
@@ -508,9 +510,9 @@ msgid "Choose the window manager to run:"
 msgstr "Çalıştırmak istediğiniz pencere yöneticisini seçiniz:"
 
 #: any.pm:898 any.pm:918 any.pm:979
-#, fuzzy, c-format
+#, c-format
 msgid "Release Notes"
-msgstr "Sürüm: "
+msgstr "Sürüm Notları"
 
 #: any.pm:925 any.pm:1271 interactive/gtk.pm:797
 #, c-format
@@ -528,9 +530,9 @@ msgid "Quit"
 msgstr "Çık"
 
 #: any.pm:974
-#, fuzzy, c-format
+#, c-format
 msgid "Do you accept this license ?"
-msgstr "Başka var mı?"
+msgstr "Bu lisans sözleşmesini kabul ediyor musunuz?"
 
 #: any.pm:975
 #, c-format
@@ -560,12 +562,12 @@ msgstr ""
 #: any.pm:1033
 #, c-format
 msgid "Multi languages"
-msgstr ""
+msgstr "Çoklu Dil"
 
 #: any.pm:1044 any.pm:1076
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
-msgstr ""
+msgstr "Eskiye uyumlu (UTF-8 olmayan) çözümleme"
 
 #: any.pm:1046
 #, c-format
@@ -573,9 +575,9 @@ msgid "All languages"
 msgstr "Tüm lisanlar"
 
 #: any.pm:1068
-#, fuzzy, c-format
+#, c-format
 msgid "Language choice"
-msgstr "Elle seçim"
+msgstr "Dil seçimi"
 
 #: any.pm:1122
 #, c-format
@@ -593,9 +595,9 @@ msgid "Here is the full list of available countries"
 msgstr "Mevcut tüm ülkelerin listesi"
 
 #: any.pm:1126
-#, fuzzy, c-format
+#, c-format
 msgid "Other Countries"
-msgstr "Diğer portlar"
+msgstr "Diğer Ülkeler"
 
 #: any.pm:1126 interactive.pm:485 interactive/gtk.pm:445
 #, c-format
@@ -603,9 +605,9 @@ msgid "Advanced"
 msgstr "Gelişmiş"
 
 #: any.pm:1132
-#, fuzzy, c-format
+#, c-format
 msgid "Input method:"
-msgstr "Ağ Yöntemi:"
+msgstr "Girdi yöntemi:"
 
 #: any.pm:1135
 #, c-format
@@ -646,7 +648,7 @@ msgstr ""
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
 "Windows."
-msgstr ""
+msgstr "NFS: Geleneksel Unix dosya paylaşım sistemidir. Mac ve Windows üzerinde daha  az destek sunar."
 
 #: any.pm:1235
 #, c-format
@@ -654,13 +656,13 @@ msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
 "systems."
 msgstr ""
+"SMB: Pek çok yeni Linux dağıtımı, Windows ve Mac OS X tarafından kullanılan bir  dosya paylaşım "
+"sistemidir."
 
 #: any.pm:1243
 #, c-format
-msgid ""
-"You can export using NFS or SMB. Please select which you would like to use."
-msgstr ""
-"NFS ya da SMB kullanarak sunabilirsiniz. Hangisini kullanmak isterseniz."
+msgid "You can export using NFS or SMB. Please select which you would like to use."
+msgstr "NFS ya da SMB kullanarak sunabilirsiniz. Hangisini kullanmak isterseniz."
 
 #: any.pm:1271
 #, c-format
@@ -684,7 +686,7 @@ msgstr "Lütfen çıkın ve Ctrl-Alt-BackSpace tuşlarına basın"
 #: any.pm:1370
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
-msgstr ""
+msgstr "Değişikliklerin etkili olması için oturumdan çıkarak yeniden giriş yapmalısınız"
 
 #: any.pm:1405
 #, c-format
@@ -699,22 +701,22 @@ msgstr "Bulunduğunuz zaman dilimi hangisi?"
 #: any.pm:1428 any.pm:1430
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
-msgstr ""
+msgstr "Tarih, Saat & Zaman Dilimi Ayarları"
 
 #: any.pm:1431
 #, c-format
 msgid "What is the best time?"
-msgstr ""
+msgstr "En iyi zaman hangisi?"
 
 #: any.pm:1435
-#, fuzzy, c-format
+#, c-format
 msgid "%s (hardware clock set to UTC)"
-msgstr "Donanım saati GMT'ye göre ayarlansın"
+msgstr "%s (Donanım saati UTC' ye göre ayarlansın)"
 
 #: any.pm:1436
-#, fuzzy, c-format
+#, c-format
 msgid "%s (hardware clock set to local time)"
-msgstr "Donanım saati GMT'ye göre ayarlansın"
+msgstr "%s (Donanım saati yerel zamana göre ayarlansın)"
 
 #: any.pm:1438
 #, c-format
@@ -742,9 +744,9 @@ msgid "NIS"
 msgstr "NIS"
 
 #: authentication.pm:28
-#, fuzzy, c-format
+#, c-format
 msgid "Smart Card"
-msgstr "Ağ kartı"
+msgstr "Akıllı Kart"
 
 #: authentication.pm:29 authentication.pm:211
 #, c-format
@@ -757,15 +759,14 @@ msgid "Kerberos 5"
 msgstr ""
 
 #: authentication.pm:64
-#, fuzzy, c-format
+#, c-format
 msgid "Local file:"
-msgstr "Yerel Dosyalar:"
+msgstr "Yerel Dosya:"
 
 #: authentication.pm:64
 #, c-format
-msgid ""
-"Use local for all authentication and information user tell in local file"
-msgstr ""
+msgid "Use local for all authentication and information user tell in local file"
+msgstr "Kullanıcının yerel dosyada tanımladığı tüm kimlik doğrulama ve bilgi için yerel kullan"
 
 #: authentication.pm:65
 #, c-format
@@ -778,6 +779,8 @@ msgid ""
 "Tells your computer to use LDAP for some or all authentication. LDAP "
 "consolidates certain types of information within your organization."
 msgstr ""
+"Bilgisayarınıza bazı veya tüm kimlik doğrulama işlemleri için LDAP kullanmasını söyler.  LDAP, "
+"kuruluşunuz ile ilgili belirli türdeki bilgileri bir araya getirir."
 
 #: authentication.pm:66
 #, c-format
@@ -790,11 +793,13 @@ msgid ""
 "Allows you to run a group of computers in the same Network Information "
 "Service domain with a common password and group file."
 msgstr ""
+"Bir grup bilgisayarı, ortak bir parola ve grup dosyası ile aynı Ağ Bilgi Hizmeti alanında  çalışmasına "
+"izin verir."
 
 #: authentication.pm:67
 #, c-format
 msgid "Windows Domain:"
-msgstr "Windows Etki alanı:"
+msgstr "Windows Etki Alanı:"
 
 #: authentication.pm:67
 #, c-format
@@ -802,6 +807,8 @@ msgid ""
 "Winbind allows the system to retrieve information and authenticate users in "
 "a Windows domain."
 msgstr ""
+"Winbind, bir Windows etki alanında kullanıcı kimliklerini kanıtlamayı ve sistemin bilgi  almasını "
+"sağlar."
 
 #: authentication.pm:68
 #, c-format
@@ -811,27 +818,27 @@ msgstr ""
 #: authentication.pm:68
 #, c-format
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
-msgstr ""
+msgstr "Etkin Dizin Sunucusunda kimlik kanıtlma için Kerberos ve LDAP ile"
 
 #: authentication.pm:102 authentication.pm:136 authentication.pm:155
 #: authentication.pm:156 authentication.pm:182 authentication.pm:206
 #: authentication.pm:884
 #, c-format
 msgid " "
-msgstr ""
+msgstr " "
 
 #: authentication.pm:103 authentication.pm:137 authentication.pm:183
 #: authentication.pm:207
-#, fuzzy, c-format
+#, c-format
 msgid "Welcome to the Authentication Wizard"
-msgstr "Etki alanı kimlik doğrulaması gerekli"
+msgstr "Kimlik Doğrulama Sihirbazına Hoşgeldiniz"
 
 #: authentication.pm:105
 #, c-format
 msgid ""
 "You have selected LDAP authentication. Please review the configuration "
 "options below "
-msgstr ""
+msgstr "LDAP kimlik doğrulama yöntemini seçtiniz. Lütfen aşağıdaki ayarları gözden  geçirin"
 
 #: authentication.pm:107 authentication.pm:162
 #, c-format
@@ -839,40 +846,40 @@ msgid "LDAP Server"
 msgstr "LDAP Sunucusu"
 
 #: authentication.pm:108 authentication.pm:163
-#, fuzzy, c-format
+#, c-format
 msgid "Base dn"
-msgstr "LDAP Temel dn"
+msgstr "Temel dn"
 
 #: authentication.pm:109
 #, c-format
 msgid "Fetch base Dn "
-msgstr ""
+msgstr "Temel Dn al"
 
 #: authentication.pm:111 authentication.pm:166
 #, c-format
 msgid "Use encrypt connection with TLS "
-msgstr ""
+msgstr "TLS ile şifreli bağlantı kullan"
 
 #: authentication.pm:112 authentication.pm:167
 #, c-format
 msgid "Download CA Certificate "
-msgstr ""
+msgstr "CA Sertifikası indir"
 
 #: authentication.pm:114 authentication.pm:147
 #, c-format
 msgid "Use Disconnect mode "
-msgstr ""
+msgstr "Çevrimdışı kipi kullan"
 
 #: authentication.pm:115 authentication.pm:168
 #, c-format
 msgid "Use anonymous BIND "
-msgstr ""
+msgstr "Anonim BIND kullan"
 
 #: authentication.pm:116 authentication.pm:119 authentication.pm:121
 #: authentication.pm:125
 #, c-format
 msgid "  "
-msgstr ""
+msgstr " "
 
 #: authentication.pm:117 authentication.pm:169
 #, c-format
@@ -880,85 +887,85 @@ msgid "Bind DN "
 msgstr ""
 
 #: authentication.pm:118 authentication.pm:170
-#, fuzzy, c-format
+#, c-format
 msgid "Bind Password "
-msgstr "Parola"
+msgstr "Bind Parolası"
 
 #: authentication.pm:120
 #, c-format
 msgid "Advanced path for group "
-msgstr ""
+msgstr "Grup için gelişmiş konum"
 
 #: authentication.pm:122
-#, fuzzy, c-format
+#, c-format
 msgid "Password base"
-msgstr "Parola"
+msgstr "Parola temeli"
 
 #: authentication.pm:123
-#, fuzzy, c-format
+#, c-format
 msgid "Group base"
-msgstr "Grup ID"
+msgstr "Grup temeli"
 
 #: authentication.pm:124
 #, c-format
 msgid "Shadow base"
-msgstr ""
+msgstr "Gölge temeli"
 
 #: authentication.pm:139
 #, c-format
 msgid ""
 "You have selected Kerberos 5 authentication. Please review the configuration "
 "options below "
-msgstr ""
+msgstr "Kerberos 5 kimlik doğrulama yöntemini seçtiniz. Lütfen aşağıdaki ayarları  gözden geçiriniz."
 
 #: authentication.pm:141
-#, fuzzy, c-format
+#, c-format
 msgid "Realm "
-msgstr "Gerçek adı"
+msgstr "Alan"
 
 #: authentication.pm:143
-#, fuzzy, c-format
+#, c-format
 msgid "KDCs Servers"
-msgstr "LDAP Sunucusu"
+msgstr "KDCs Sunucusu"
 
 #: authentication.pm:145
 #, c-format
 msgid "Use DNS to resolve hosts for realms "
-msgstr ""
+msgstr "Alanlar için makineleri DNS ile çözümle"
 
 #: authentication.pm:146
 #, c-format
 msgid "Use DNS to resolve KDCs for realms "
-msgstr ""
+msgstr "Alanlar için KDCleri DNS ile çözümle"
 
 #: authentication.pm:151
-#, fuzzy, c-format
+#, c-format
 msgid "Use local file for users information"
-msgstr "Sunucular için libsafe kullanılsın"
+msgstr "Kullanıcı bilgileri için yerel dosya kullan"
 
 #: authentication.pm:152
-#, fuzzy, c-format
+#, c-format
 msgid "Use Ldap for users information"
-msgstr "Sabit Disk bilgisi"
+msgstr "Kullanıcı bilgileri için Ldap kullan"
 
 #: authentication.pm:158
 #, c-format
 msgid ""
 "You have selected Kerberos 5 for authentication, now you must choose the "
 "type of users information "
-msgstr ""
+msgstr "Kimlik doğrulama için Kerberos 5 seçtiniz. Şimdi, kullanıcı bilgilerinin türünü  seçmelisiniz"
 
 #: authentication.pm:164
 #, c-format
 msgid "Fecth base Dn "
-msgstr ""
+msgstr "Temel Dn al"
 
 #: authentication.pm:185
 #, c-format
 msgid ""
 "You have selected NIS authentication. Please review the configuration "
 "options below "
-msgstr ""
+msgstr "NIS kmlik doğrulama yöntemini seçtiniz. Lütfen aşağıdaki ayarları gözden  geçirin"
 
 #: authentication.pm:187
 #, c-format
@@ -1496,8 +1503,7 @@ msgstr "Başka disk bölümü eklenemez"
 msgid ""
 "To have more partitions, please delete one to be able to create an extended "
 "partition"
-msgstr ""
-"Daha fazla bölüm oluşturmak için, bir bölümü silip mantıksal bölüm oluşturun"
+msgstr "Daha fazla bölüm oluşturmak için, bir bölümü silip mantıksal bölüm oluşturun"
 
 #: diskdrake/interactive.pm:378
 #, c-format
@@ -1617,8 +1623,7 @@ msgstr "Loopback dosyası kaldırılsın mı ?"
 
 #: diskdrake/interactive.pm:558
 #, c-format
-msgid ""
-"After changing type of partition %s, all data on this partition will be lost"
+msgid "After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "%s bölümünün türü değiştirildikten sonra, üzerindeki tüm bilgiler "
 "silinecektir"
@@ -1696,8 +1701,7 @@ msgstr "Bu bölümdeki tüm bilgiler yedeklenmelidir"
 #: diskdrake/interactive.pm:727
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
-msgstr ""
-"%s yeniden boyutlandırıldıktan sonra üzerindeki tüm bilgiler silinecektir"
+msgstr "%s yeniden boyutlandırıldıktan sonra üzerindeki tüm bilgiler silinecektir"
 
 #: diskdrake/interactive.pm:734
 #, c-format
@@ -2179,10 +2183,8 @@ msgstr "Başka bir"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
-msgstr ""
-"Bu makineye ulaşmak için lütfen kullanıcı adı, şifre ve etki alanı giriniz."
+msgid "Please enter your username, password and domain name to access this host."
+msgstr "Bu makineye ulaşmak için lütfen kullanıcı adı, şifre ve etki alanı giriniz."
 
 #: diskdrake/smbnfs_gtk.pm:180
 #, c-format
@@ -2505,8 +2507,7 @@ msgstr "Takas bölümü boyutu (MB): "
 #: fs/partitioning_wizard.pm:119
 #, c-format
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
-msgstr ""
-"loopback olarak kullanılacak hiç FAT bölümü yok (ya da boş alan kalmamış)"
+msgstr "loopback olarak kullanılacak hiç FAT bölümü yok (ya da boş alan kalmamış)"
 
 #: fs/partitioning_wizard.pm:127
 #, fuzzy, c-format
@@ -3091,10 +3092,9 @@ msgstr "Ses yapılandırması"
 msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
 "sound card (%s)."
-msgstr ""
-"Buradan ses kartınız(%s) için başka bir sürücü (OSS veya ALSA) seçebilirsiniz"
+msgstr "Buradan ses kartınız(%s) için başka bir sürücü (OSS veya ALSA) seçebilirsiniz"
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:392
@@ -5287,8 +5287,7 @@ msgstr "Tüm uzak makineler"
 
 #: security/help.pm:33
 #, c-format
-msgid ""
-"Allow the list of users on the system on display managers (kdm and gdm)."
+msgid "Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr ""
 
 #: security/help.pm:35
@@ -5520,8 +5519,7 @@ msgstr ""
 
 #: security/help.pm:127
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
+msgid "if set, send the mail report to this email address else send it to root."
 msgstr ""
 
 #: security/help.pm:128
@@ -5991,8 +5989,7 @@ msgstr ""
 
 #: services.pm:28
 #, c-format
-msgid ""
-"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr ""
 
 #: services.pm:29
@@ -6036,8 +6033,7 @@ msgstr ""
 
 #: services.pm:38
 #, c-format
-msgid ""
-"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
 "Apache bir World Wide Web sunucusudur. HTML dosyaları ve CGI sunumu için "
 "kullanılır."
@@ -6289,8 +6285,7 @@ msgstr ""
 
 #: services.pm:92
 #, c-format
-msgid ""
-"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
 
 #: services.pm:93
@@ -6979,3 +6974,4 @@ msgstr "Kurulum başarısız!"
 
 #~ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
 #~ msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdp]"
+
