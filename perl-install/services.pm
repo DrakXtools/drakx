@@ -174,9 +174,9 @@ sub ask_ {
 			       },
 			       get_info => sub { formatLines(description($_[0])) },
                                interactive_help => sub { 
-                                   interactive::gtk::display_help($o,
+                                   interactive::gtk::display_help($in,
                                                                { interactive_help_id => 
-                                                                   'misc-params#drakxid-configureServices' }, $w) },
+                                                                   'misc-params#drakxid-configureServices' }, $::main_window) },
 			      }) or return $l, $on_services; #- no change on cancel.
     [ grep { $services{$_} } @$l ];
 }
