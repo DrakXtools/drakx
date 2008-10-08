@@ -543,7 +543,10 @@ sub installPackages {
 	$change_time = time();
 	my $f = $install::any::advertising_images[$i++ % @install::any::advertising_images];
 	log::l("advertising $f");
-	gtkval_modify(\$advertising_image, $f);
+	eval { gtkval_modify(\$advertising_image, $f) };
+        if (my $err = $@) {
+            log::l("cannot load advertising image:\n" . formatError($err));
+        }
 
 	if (my $banner = $w->{window}{banner}) {
 	    my ($title);
