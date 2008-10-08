@@ -80,7 +80,7 @@ sub filter_widget {
     #- combo does not allow modifications
     $e->{type} = 'entry' if $e->{type} eq 'combo' && !$e->{not_edit};
 
-    $e->{formatted_list} = [ map { may_apply($e->{format}, $_) } @{$e->{list}} ];
+    $e->{formatted_list} = [ map { my $t = warp_text(may_apply($e->{format}, $_), 80); $t } @{$e->{list}} ];
 
     $e->{default_curses} ||= delete $e->{curses};
 }
@@ -163,8 +163,8 @@ sub compute_size {
 	$e->{curses}{'-height'} ||= heights(map { $_ + 2 } int(@{$e->{formatted_list}}), 10, 4);
 	$e->{curses}{'-width'} ||= max(map { length } @{$e->{formatted_list}}) + 7;
     } elsif ($e->{type} =~ /list/) {
-	$e->{curses}{'-height'} ||= heights(map { $_ + 2 } int(@{$e->{formatted_list}}), 5, 4);
-	$e->{curses}{'-width'} ||= max(map { length } @{$e->{formatted_list}}) + 3;	
+	$e->{curses}{'-height'} ||= heights(map { $_ + 2 } int(map { split("\n", $_) } @{$e->{formatted_list}}), 5, 4);
+	$e->{curses}{'-width'} ||= max(map { length } map { split("\n", $_) } @{$e->{formatted_list}}) + 3;	
     } elsif ($e->{type} eq 'button') {
 	my $s = sprintf('< %s >', may_apply($e->{format}, ${$e->{val}}));
 	$e->{curses}{'-width'} ||= length($s);
