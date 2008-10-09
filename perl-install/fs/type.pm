@@ -303,6 +303,7 @@ sub type_subpart_from_magic {
 	$part->{fs_type_from_magic} = $p->{fs_type};
 	$p->{device_LABEL} = $ids->{ID_FS_LABEL} if $ids->{ID_FS_LABEL};
 	$p->{device_UUID} = $ids->{ID_FS_UUID} if $ids->{ID_FS_UUID};
+	log::l("vol_id gave: $p->{fs_type} $p->{device_UUID} $p->{device_LABEL}");
     }
     $p;
 }
