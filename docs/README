@@ -1,8 +1,7 @@
-Well here is a little description of what DrakX needs to work in comparison
-to the RH newt install.
+Well here is a little description of what DrakX needs to work
 
 ********************************************************************************
-* CVS **************************************************************************
+* VCS **************************************************************************
 ********************************************************************************
 Like all good free software, DrakX is in SVN :)
 
@@ -15,32 +14,18 @@ svn co http://svn.mandriva.com/svn/soft/drakx/trunk drakx
 
 This is only read-only access. If you want more, tell me (pixel@mandriva.com)
 
-Please note that redoing *all* the stuff is not for the faint of heart. I myself
-sometimes wonder what the whole make does :-%
-Instead, changing some .pm files is quite easy (nice interpreted language)
-
 ********************************************************************************
 * Making your custom install ***************************************************
 ********************************************************************************
 If you have your own rpms you want to add, or make your own updated cdrom, you
 just have to issue:
 
-% gendistrib --noclean --distrib <DIRS>
+% gendistrib --noclean --distrib <DIR>
 
-Where <DIRS> is the root of all the media that the install will see, this first
-one is the main one :
+Where <DIR> is the root of all the distribution.
 
-(1) network or 1-cdrom installs
-	DIRS == the root directory of the Distribution
-
-(2) multi-cdrom install
-	DIRS == the root directories of all the media that the install will see
-
-``gendistrib'' will scan the file media/media_info/hdlists in the main root
-directory (the first one in DIRS) to search for all media used. Typically you
-use media/main for RPM packages repository.
-For multi-cd, please use media/main or media/foo, etc.
-For one CD or a network/hd volume, please use media/main.
+``gendistrib'' will scan the file media/media_info/media.cfg to search for all
+media used. Typically you use media/main for RPM packages repository.
 
 Optionnally, you can modify ``media/media_info/rpmsrate''; this file manages
 the relative importance of the files, and thus their installation or not.
@@ -60,12 +45,12 @@ media/media_info/media.cfg
 	cf MDV::Distribconf(3)
 
 media/media_info/hdlist*.cz
-	table of rpm's headers, referred by ``hdlists''
+	table of rpm's headers, referred by ``media.cfg''
 	their contents can be listed using ``packdrake -l <hdlist_file>'' or
 	or ``parsehdlist <hdlist_file>''.
 	! Need to be remade when media/main changes (with ``gendistrib'') !
 
-media/media_info/compssUsers
+media/media_info/compssUsers.pl
 
 media/media_info/rpmsrate
 	ranks and classify packages, so that the installer will know which
@@ -74,18 +59,14 @@ media/media_info/rpmsrate
 			<level> <packages>
 	where <intern_group> is a symbolic name used in media/media_info/compssUsers* files,
 	and <level> defines importance level as described below :
-		5	must have
+		5	mandatory
 		4	important
-		3	very nice
+		3	interesting
 		2	nice
 		1	maybe
-	installer selects packages for level 4 (important) and 5 (must have).
+	installer selects packages for level 4 (important) and 5 (mandatory).
  	packages in other level (3, 2, 1) can only be selected using
 	individual package selection.
-
-install/stage2/live
-	live system used on certain installs. See ``Ramdisk or not'' below for
-	more.
 
 install/stage2/mdkinst.clp
 	for the compressed loopback of install.
@@ -96,27 +77,22 @@ install/stage2/rescue.clp
 	this is the ramdisk loaded when typing rescue on boot prompt.
 
 install/images/all.img
-	USB image enabling any install
+	fat16 image to dd on a partition (hint: sda1)
 
 install/images/boot.iso
 	iso image to burn enabling any install (cdrom/hd/nfs/ftp)
 
-  Boot from cdrom:
-  - boot.iso : iso image to burn
-  
-  Boot from hd (esp. usb key):
-  - all.img : fat16 image to dd on a partition (hint: sda1)
+  To boot from cdrom, use boot.iso
+  To boot from network, use isolinux/alt0/all.rdz + vmlinuz via pxe
+  To boot from hd (esp. usb key), use all.img.
+
+  NB for usb boot: 
     - it seems some bioses don't use the code on MBR (sda), 
       or at least skip it when it's blanked
       (eg: "dd if=/dev/zero of=/dev/sda bs=1 count=446")
     - some bioses need it. I had some luck using
       dd if=/usr/lib/extipl/aldebaran.bin of=/dev/sda
       (install package extipl first)
-  
-  Boot from network:
-  - all.rdz + vmlinuz via pxe
-
-  dd for windows: http://uranus.it.swin.edu.au/~jn/linux/rawwrite/dd.htm
 
 ********************************************************************************
 * logs *************************************************************************
@@ -151,26 +127,11 @@ the auto-partitionning partitions can be changed, the default user class can be
 set to developer (!)...
 
 ********************************************************************************
-* po translation files *********************************************************
-********************************************************************************
-DrakX uses .po files for its translation. A script takes the different
-strings out of the .pm files. It generates the DrakX.pot file which contains
-all the english strings to translate.
-
-********************************************************************************
-* PCMCIA install ***************************************************************
-********************************************************************************
-If the media you use to install is a pcmcia device, use the pcmcia boot disk.
-
-********************************************************************************
 * modules **********************************************************************
 ********************************************************************************
-Modules can be found in /modules.
-
 To manually install a module during install, switch to console #2
 and type "modprobe <modulename>". The modprobe program is a perl
-wrapper around /usr/bin/insmod. It uses the dependencies found in
-/modules/modules.dep (stage1).
+wrapper around /usr/bin/insmod.
 
 ********************************************************************************
 * Making screenshots ***********************************************************
