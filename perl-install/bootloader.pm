@@ -1065,7 +1065,8 @@ sub suggest {
 	$bootloader->{default} ||= $preferred;
     }
     $bootloader->{default} ||= "linux";
-    $bootloader->{method} ||= first(method_choices($all_hds, 1));
+    $bootloader->{method} ||= first(method_choices($all_hds, 1), # best installed
+				    method_choices($all_hds, 0)); # or best if no valid one is installed
 
     if (main_method($bootloader->{method}) eq 'grub') {
 	foreach my $c (find_other_distros_grub_conf($fstab)) {	    
