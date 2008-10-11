@@ -912,9 +912,9 @@ sub wait_messageW {
 			    if_(ref($message_modifiable), 0, $message_modifiable),
 			]),
 		      );
-    $Window->signal_connect(expose_event => sub { $Window->{displayed} = 1; 0 });
+    mygtk2::enable_sync_flush($Window);
     $Window->{wait_messageW} = $to_modify;
-    mygtk2::sync($Window) while !$Window->{displayed};
+    mygtk2::sync_flush($Window);
     $Window;
 }
 sub wait_message_nextW {

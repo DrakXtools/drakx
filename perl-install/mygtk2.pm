@@ -1413,6 +1413,18 @@ sub flush() {
     Gtk2->main_iteration while Gtk2->events_pending;
 }
 
+sub enable_sync_flush {
+    my ($w) = @_;
+    $w->signal_connect(expose_event => sub { $w->{displayed} = 1; 0 });
+}
+
+sub sync_flush {
+    my ($w) = @_;
+    # hackish :-(
+    mygtk2::sync($w) while !$w->{displayed};
+}
+
+
 sub may_destroy {
     my ($w) = @_;
     return if !$w;
