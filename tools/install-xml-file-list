@@ -352,7 +352,7 @@ sub apply_filter {
 	@l = grep { ! -d $_ } @l;
 
 	if (my $subst = $filter->{subst}) {
-	    system('perl', '-pi', '-e', $subst, @l);
+	    system('perl', '-pi', '-e', $subst, @l) if @l;
 	}
 	if (my $command = $filter->{command}) {
 	    $command = $initial_dir . "/$command" if $command =~ m!^..?/!;
@@ -363,8 +363,10 @@ sub apply_filter {
 		if_($command eq 'gzip', '-9f'),
 		if_($command eq 'strip', '2>/dev/null'),
 	    );
-	    warn "running $command @options @l\n" if $verbose;
-	    system(join(' ', $command, @options, @l));
+	    if (@l) {
+		warn "running $command @options @l\n" if $verbose;
+		system(join(' ', $command, @options, @l));
+	    }
 	}
     }
     chdir $initial_dir;
