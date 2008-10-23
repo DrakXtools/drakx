@@ -349,24 +349,22 @@ sub apply_filter {
     chdir $to_dir;
     foreach (group_by_n(20, $all_files)) {
 	my @l = $b_flatten ? (map { basename($_) } @$_) : (map { "./$_" } @$_);
-	@l = grep { ! -d $_ } @l;
+	@l = grep { ! -d $_ } @l or next;
 
 	if (my $subst = $filter->{subst}) {
-	    system('perl', '-pi', '-e', $subst, @l) if @l;
+	    system('perl', '-pi', '-e', $subst, @l);
 	}
 	if (my $command = $filter->{command}) {
 	    $command = $initial_dir . "/$command" if $command =~ m!^..?/!;
 	    if ($command =~ /simplify-drakx-modules/) {
-		@l = grep { !/\.so($|\.)/ } @l;
+		@l = grep { !/\.so($|\.)/ } @l or next;
 	    }
 	    my @options = (
 		if_($command eq 'gzip', '-9f'),
 		if_($command eq 'strip', '2>/dev/null'),
 	    );
-	    if (@l) {
-		warn "running $command @options @l\n" if $verbose;
-		system(join(' ', $command, @options, @l));
-	    }
+	    warn "running $command @options @l\n" if $verbose;
+	    system(join(' ', $command, @options, @l));
 	}
     }
     chdir $initial_dir;
