@@ -2,6 +2,7 @@
 
 TITLE="Mandriva Installer"
 BACKTITLE="Mandriva"
+MIN_DISKSIZE=800000
 
 debug="/dev/null"
 

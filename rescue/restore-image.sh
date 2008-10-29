@@ -74,7 +74,7 @@ do you want to continue?\n "
 function detect_root()
 {
 	        dev=$(sed '/\/tmp\/media/!d;s/[0-9] .*$//;s/^.*\///' /proc/mounts)
-	        devices=$(grep "^ .*[^0-9]$" < /proc/partitions | grep -v ${dev} | awk '{ print $4,$3 }')
+	        devices=$(grep "^ .*[^0-9]$" < /proc/partitions | grep -v ${dev} | awk '$3 > $MIN_DISKSIZE { print $4,$3 }')
 
 		devs_found=$(echo $devices | wc -w)
 		if [ "$devs_found" -gt "2" ]; then
