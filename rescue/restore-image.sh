@@ -150,9 +150,11 @@ function expand_fs()
 	filesystem_type=$(dumpe2fs -h /dev/${root}1 2>/dev/null| grep "Filesystem OS type" | awk '{ print $4 }')
 	if [ $filesystem_type = "Linux" ]; then
                 dialog --backtitle "$BACKTITLE" --title "$TITLE" --infobox "Installing...  Finishing Install..." 3 40
-		sfdisk -d /dev/$root | sed -e "/${root}1/  s/size=.*,/size= ,/" | sfdisk -f /dev/$root
-		e2fsck -fy /dev/${root}1
-		resize2fs /dev/${root}1
+		disk=/dev/$root
+		main_part=/dev/${root}1
+		sfdisk -d $disk | sed -e "\|$main_part|  s/size=.*,/size= ,/" | sfdisk -f $disk
+		e2fsck -fy $main_part
+		resize2fs $main_part
 	fi
 }
 
