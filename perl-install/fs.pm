@@ -102,6 +102,13 @@ sub read_fstab {
 		$options->{"$_="} = $credentials->{$_} foreach qw(username password domain);
 		fs::mount_options::pack($h, $options, $unknown);
 	    }
+	} elsif ($h->{fs_type} eq 'davfs2' && !member('verbatim_credentials', @reading_options)) {
+	    require fs::remote::davfs;
+	    if (my $credentials = fs::remote::davfs::read_credentials($h->{mntpoint})) {
+		my ($options, $unknown) = fs::mount_options::unpack($h);
+		$options->{"$_="} = $credentials->{$_} foreach qw(username password);
+		fs::mount_options::pack($h, $options, $unknown);
+	    }
 	}
 
 	$h;
@@ -206,11 +213,11 @@ sub get_info_from_fstab {
 }
 
 sub prepare_write_fstab {
-    my ($fstab, $o_prefix, $b_keep_smb_credentials) = @_;
+    my ($fstab, $o_prefix, $b_keep_credentials) = @_;
     $o_prefix ||= '';
 
     my %new;
-    my @smb_credentials;
+    my (@smb_credentials, @davfs_credentials);
     my @l = map { 
 	my $device = 
 	  isLoopback($_) ? 
@@ -239,11 +246,17 @@ sub prepare_write_fstab {
 
 	    my $options = $_->{options} || 'defaults';
 
-	    if ($_->{fs_type} eq 'smbfs' && $options =~ /password=/ && !$b_keep_smb_credentials) {
+	    if ($_->{fs_type} eq 'smbfs' && $options =~ /password=/ && !$b_keep_credentials) {
 		require fs::remote::smb;
 		if (my ($opts, $smb_credentials) = fs::remote::smb::fstab_entry_to_credentials($_)) {
 		    $options = $opts;
 		    push @smb_credentials, $smb_credentials;
+		}
+	    } elsif ($_->{fs_type} eq 'davfs2' && $options =~ /password=/ && !$b_keep_credentials) {
+		require fs::remote::davfs;
+		if (my ($opts, $davfs_credentials) = fs::remote::davfs::fstab_entry_to_credentials($_)) {
+		    $options = $opts || 'defaults';
+		    push @davfs_credentials, $davfs_credentials;
 		}
 	    }
 
@@ -276,13 +289,13 @@ sub prepare_write_fstab {
     }
     @l = sort_it(@l);
 
-    join('', map { $_->[2] } @l), \@smb_credentials;
+    join('', map { $_->[2] } @l), \@smb_credentials, \@davfs_credentials;
 }
 
 sub fstab_to_string {
     my ($all_hds, $o_prefix) = @_;
     my $fstab = [ fs::get::really_all_fstab($all_hds), @{$all_hds->{special}} ];
-    my ($s, undef) = prepare_write_fstab($fstab, $o_prefix, 'keep_smb_credentials');
+    my ($s, undef) = prepare_write_fstab($fstab, $o_prefix, 'keep_credentials');
     $s;
 }
 
@@ -290,10 +303,11 @@ sub write_fstab {
     my ($all_hds, $o_prefix) = @_;
     log::l("writing $o_prefix/etc/fstab");
     my $fstab = [ fs::get::really_all_fstab($all_hds), @{$all_hds->{special}} ];
-    my ($s, $smb_credentials) = prepare_write_fstab($fstab, $o_prefix, '');
+    my ($s, $smb_credentials, $davfs_credentials) = prepare_write_fstab($fstab, $o_prefix, '');
     renamef("$o_prefix/etc/fstab", "$o_prefix/etc/fstab.old");
     output("$o_prefix/etc/fstab", $s);
     fs::remote::smb::save_credentials($_) foreach @$smb_credentials;
+    fs::remote::davfs::save_credentials($davfs_credentials);
     fs::dmcrypt::save_crypttab($all_hds) if @{$all_hds->{dmcrypts}};
 }
 
