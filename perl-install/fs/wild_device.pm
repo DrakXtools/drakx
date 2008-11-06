@@ -23,7 +23,7 @@ sub analyze {
 	'nfs';
     } elsif ($dev =~ m!^//\w!) {
 	'smb';
-    } elsif ($dev =~ m!^http://!) {
+    } elsif ($dev =~ m!^https?://!) {
 	'dav';
     }
 }
