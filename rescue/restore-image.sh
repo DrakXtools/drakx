@@ -93,14 +93,18 @@ function detect_root()
  			else
  	        	        _msgbox "\nError writing image: disk device not detected.\n"
  			fi
-		else
- 	        	_msgbox "\nError writing image: disk device not detected.\n"
 		fi
 }
 
 function write_image()
 {
 	root=$(detect_root)
+	if [ -z ${root} ]; then
+        	_msgbox "\nError writing image: disk device not detected.\n"
+		# so that netbooks using USB sticks as disks can retry (like Gdium)
+		welcome
+	fi
+	
 	image=$(cat $images_dir/list | cut -d ',' -f 3)
 	extension=$(echo $image | cut -d '.' -f 3)
 	case $extension in
