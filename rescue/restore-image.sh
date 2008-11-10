@@ -91,11 +91,10 @@ function detect_root()
  
 	 			echo "$root"
  			else
- 	        	        _msgbox "\nError writing image: disk device not detected\n"
+ 	        	        _msgbox "\nError writing image: disk device not detected.\n"
  			fi
 		else
-			root=$(echo $devices | cut -d ' ' -f 1)
-			echo "$root"
+ 	        	_msgbox "\nError writing image: disk device not detected.\n"
 		fi
 }
 
