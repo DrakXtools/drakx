@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "POT-Creation-Date: 2008-09-19 15:04+0200\n"
-"PO-Revision-Date: 2008-11-11 15:21+0200\n"
+"PO-Revision-Date: 2008-11-11 16:02+0200\n"
 "Last-Translator: Pavel Maryanov <acid_jack@ukr.net>\n"
 "Language-Team: Russian <gnu@mx.ru>\n"
 "MIME-Version: 1.0\n"
@@ -1943,7 +1943,7 @@ msgstr "Какой тип разбиения на разделы?"
 #: diskdrake/interactive.pm:1120
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
-msgstr "Вам необходимо перегрузиться, чтобы изменения вступили в силу"
+msgstr "Необходимо выполнить перегрузку, чтобы изменения вступили в силу"
 
 #: diskdrake/interactive.pm:1129
 #, c-format
@@ -1966,7 +1966,7 @@ msgstr "После форматирования раздела %s, все дан
 #: fs/partitioning.pm:48
 #, c-format
 msgid "Check bad blocks?"
-msgstr "Проверить плохие блоки?"
+msgstr "Выполнить проверку на сбойные сектора?"
 
 #: diskdrake/interactive.pm:1187
 #, c-format
@@ -2528,7 +2528,7 @@ msgstr "Нет доступных разделов"
 #: fs/mount_point.pm:98
 #, c-format
 msgid "Scanning partitions to find mount points"
-msgstr "Сканируются разделы на наличие точек монтирования"
+msgstr "Идёт поиск точек монтирования на разделах"
 
 #: fs/mount_point.pm:105
 #, c-format
@@ -2538,17 +2538,17 @@ msgstr "Выберите точки монтирования"
 #: fs/partitioning.pm:46
 #, c-format
 msgid "Choose the partitions you want to format"
-msgstr "Выберите разделы, которые вы хотите отформатировать"
+msgstr "Выберите разделы для форматирования"
 
 #: fs/partitioning.pm:75
 #, c-format
 msgid "Failed to check filesystem %s. Do you want to repair the errors? (beware, you can lose data)"
-msgstr "Проверка файловой системы %s завершилась неудачей. Хотите исправить ошибки (осторожно, вы можете потерять данные)?"
+msgstr "Ошибка проверки файловой системы %s. Исправить ошибки? (Внимание: возможна потеря данных!)"
 
 #: fs/partitioning.pm:78
 #, c-format
 msgid "Not enough swap space to fulfill installation, please add some"
-msgstr "Не хватает swap-пространства для завершения установки, пожалуйста, увеличьте его немного"
+msgstr "Недостаточно пространства для свопинга для завершения установки. Увеличьте его размер"
 
 #: fs/partitioning_wizard.pm:51
 #, c-format
@@ -2557,9 +2557,9 @@ msgid ""
 "For this, create a partition (or click on an existing one).\n"
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
-"У вас должен быть корневой раздел.\n"
+"Необходимо создать корневой раздел.\n"
 "Для этого создайте раздел (или выберите уже существующий).\n"
-"Затем выберите действие ``Точка монтирования'' и установите ее в `/'"
+"Затем выберите действие «Точка монтирования» и установите её в «/»"
 
 #: fs/partitioning_wizard.pm:56
 #, c-format
@@ -2568,14 +2568,14 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
-"У вас нет раздела swap\n"
+"Отсутствует раздел для свопинга\n"
 "\n"
-"Желаете продолжить?"
+"Продолжить?"
 
 #: fs/partitioning_wizard.pm:84
 #, c-format
 msgid "Use free space"
-msgstr "Использовать свободное место"
+msgstr "использовать свободное место"
 
 #: fs/partitioning_wizard.pm:86
 #, c-format
@@ -2590,7 +2590,7 @@ msgstr "Использовать существующие разделы"
 #: fs/partitioning_wizard.pm:96
 #, c-format
 msgid "There is no existing partition to use"
-msgstr "Нет существующих для использования разделов"
+msgstr "Отсутствуют доступные для использования разделы"
 
 #: fs/partitioning_wizard.pm:103
 #, c-format
@@ -2600,7 +2600,7 @@ msgstr "Использовать раздел Microsoft Windows® для loopbac
 #: fs/partitioning_wizard.pm:106
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
-msgstr "Какой раздел вы хотите использовать для Linux4Win?"
+msgstr "Какой раздел нужно использовать для Linux4Win?"
 
 #: fs/partitioning_wizard.pm:108
 #, c-format
@@ -2610,12 +2610,12 @@ msgstr "Выберите размеры"
 #: fs/partitioning_wizard.pm:109
 #, c-format
 msgid "Root partition size in MB: "
-msgstr "Размер корневого раздела в MB: "
+msgstr "Размер корневого раздела в МБ: "
 
 #: fs/partitioning_wizard.pm:110
 #, c-format
 msgid "Swap partition size in MB: "
-msgstr "Размер раздела swap в MB: "
+msgstr "Размер раздела swap в МБ: "
 
 #: fs/partitioning_wizard.pm:119
 #, c-format
@@ -2630,7 +2630,7 @@ msgstr "Использовать свободное место в разделе
 #: fs/partitioning_wizard.pm:129
 #, c-format
 msgid "Which partition do you want to resize?"
-msgstr "Размер какого из разделов вы хотите изменить?"
+msgstr "Размер какого из разделов нужно изменить?"
 
 #: fs/partitioning_wizard.pm:143
 #, c-format
@@ -2638,8 +2638,8 @@ msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
 msgstr ""
-"Программа изменения размера FAT не может обработать ваш раздел, \n"
-"произошла следующая ошибка: %s"
+"Программа изменения размера FAT не может обработать раздел.\n"
+"Произошла следующая ошибка: %s"
 
 #: fs/partitioning_wizard.pm:146
 #, c-format
@@ -2649,7 +2649,7 @@ msgstr "Вычисляется размер раздела Microsoft Windows®"
 #: fs/partitioning_wizard.pm:153
 #, c-format
 msgid "Your Microsoft Windows® partition is too fragmented. Please reboot your computer under Microsoft Windows®, run the ``defrag'' utility, then restart the Mandriva Linux installation."
-msgstr "Ваш раздел Microsoft Windows® слишком фрагментирован. Пожалуйста, перезагрузите свой компьютер под Microsoft Windows®, запустите утилиту ``defrag'', а затем повторно запустите установку Mandriva Linux."
+msgstr "Раздел Microsoft Windows® слишком фрагментирован. Перезагрузите компьютер в систему Microsoft Windows®, запустите утилиту «defrag», а затем повторно запустите установку Mandriva Linux."
 
 #: fs/partitioning_wizard.pm:156
 #, c-format
@@ -2708,7 +2708,7 @@ msgstr "Изменяется размер раздела Microsoft Windows®"
 #: fs/partitioning_wizard.pm:183
 #, c-format
 msgid "FAT resizing failed: %s"
-msgstr "Изменение размера FAT завершилось неудачно: %s"
+msgstr "Не удалось измененить размер FAT: %s"
 
 #: fs/partitioning_wizard.pm:198
 #, c-format
@@ -2718,28 +2718,28 @@ msgstr "Отсутствует раздел FAT для изменения раз
 #: fs/partitioning_wizard.pm:203
 #, c-format
 msgid "Remove Microsoft Windows®"
-msgstr "Удалить Microsoft Windows®"
+msgstr "Удалить систему Microsoft Windows®"
 
 #: fs/partitioning_wizard.pm:203
 #, c-format
 msgid "Erase and use entire disk"
-msgstr "Очистить и использовать весь диск"
+msgstr "очистить и использовать весь диск"
 
 #: fs/partitioning_wizard.pm:205
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
-msgstr "У вас есть более одного жёсткого диска. На какой из них вы хотите установить Linux?"
+msgstr "Доступно более одного жёсткого диска. На какой из них нужно установить Linux?"
 
 #: fs/partitioning_wizard.pm:210
 #: fsedit.pm:590
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr "ВСЕ существующие разделы и данные на них будут потеряны на диске %s"
+msgstr "На диске %s будут уничтожены ВСЕ существующие разделы и данные"
 
 #: fs/partitioning_wizard.pm:220
 #, c-format
 msgid "Custom disk partitioning"
-msgstr "Ручная разметка диска"
+msgstr "ручная разметка диска"
 
 #: fs/partitioning_wizard.pm:226
 #, c-format
@@ -2752,33 +2752,33 @@ msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
 msgstr ""
-"Теперь вы можете разметить %s.\n"
-"После завершения не забудьте сохранить при помощи `w'"
+"Теперь можно разметить диск %s.\n"
+"После завершения сохраните настройки с помощью клавиши «w»"
 
 #: fs/partitioning_wizard.pm:269
 #, c-format
 msgid "I can not find any room for installing"
-msgstr "Вообще не могу найти места для установки"
+msgstr "Отсутствует дисковое пространство для установки"
 
 #: fs/partitioning_wizard.pm:278
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr "Мастер Разметки диска DrakX нашел следующие решения:"
+msgstr "Мастер разметки диска DrakX предлагает следующие решения:"
 
 #: fs/partitioning_wizard.pm:287
 #, c-format
 msgid "Partitioning failed: %s"
-msgstr "Разметка на разделы завершилась неудачно: %s"
+msgstr "Ошибка разметки: %s"
 
 #: fs/type.pm:378
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
-msgstr "Вы не можете использовать JFS на разделах размером менее 16MB"
+msgstr "Файловую систему JFS нельзя использовать на разделах размером менее 16 МБ"
 
 #: fs/type.pm:379
 #, c-format
 msgid "You can not use ReiserFS for partitions smaller than 32MB"
-msgstr "Вы не можете использовать ReiserFS на разделах менее 32MB"
+msgstr "Файловую систему ReiserFS нельзя использовать на разделах размером менее 32 МБ"
 
 #: fsedit.pm:23
 #, c-format
