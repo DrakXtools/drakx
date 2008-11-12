@@ -177,8 +177,10 @@ function expand_fs()
 		sfdisk -d $disk | sed -e "\|$main_part|  s/size=.*,/size= $main_part_sectors,/" | sfdisk -f $disk
 		e2fsck -fy $main_part
 		resize2fs $main_part
-		parted $disk -- mkpartfs primary linux-swap ${main_part_sectors}s -1s yes
-		mkswap -L swap $swap_part
+		if [ -n "$SWAP_BLOCKS" ]; then
+		    parted $disk -- mkpartfs primary linux-swap ${main_part_sectors}s -1s yes
+		    mkswap -L swap $swap_part
+		fi
 	fi
 }
 
