@@ -11,7 +11,8 @@ fi
 
 export PATH="/sbin:/bin:/usr/sbin:/usr/bin"
 
-images_dir="/tmp/media/images"
+restore_media="/tmp/media"
+images_dir="$restore_media/images"
 images="$images_dir/list"
 image=""
 
@@ -73,7 +74,7 @@ do you want to continue?\n "
 
 function detect_root()
 {
-	        dev=$(sed '/\/tmp\/media/!d;s/[0-9] .*$//;s/^.*\///' /proc/mounts)
+	        dev=$(sed '\|'$restore_media'|!d;s/[0-9] .*$//;s/^.*\///' /proc/mounts)
 	        devices=$(grep "^ .*[^0-9]$" < /proc/partitions | grep -v ${dev} | awk '$3 > '$MIN_DISKSIZE' { print $4,$3 }')
 
 		devs_found=$(echo $devices | wc -w)
