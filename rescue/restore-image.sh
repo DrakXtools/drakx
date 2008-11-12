@@ -162,7 +162,7 @@ function write_image()
 function expand_fs()
 {
 	filesystem_type=$(dumpe2fs -h /dev/${root}1 2>/dev/null| grep "Filesystem OS type" | awk '{ print $4 }')
-	if [ $filesystem_type = "Linux" ]; then
+	if [ "$filesystem_type" = "Linux" ]; then
                 dialog --backtitle "$BACKTITLE" --title "$TITLE" --infobox "Installing...  Finishing Install..." 3 40
 		disk=/dev/$root
 		main_part=/dev/${root}1
