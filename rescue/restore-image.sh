@@ -97,13 +97,14 @@ function detect_root()
  					fi
  				else
  					root=$opcao
- 				fi
- 
-	 			echo "$root"
+ 				fi 
  			else
  	        	        _msgbox "\nError writing image: disk device not detected.\n"
  			fi
+		else
+		    root=$(echo $devices | cut -d ' ' -f 1)
 		fi
+		echo "$root"
 }
 
 function write_image()
