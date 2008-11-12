@@ -168,7 +168,6 @@ function expand_fs()
 		total_blocks=$(sfdisk -s $disk)
 		#part_sectors=$(sfdisk -d $disk | perl -lne 'm|^'$main_part'\b.*,\s*size\s*=\s*(\d+)\b| and print($1), exit')
 		#part_blocks=$((part_sectors/2))
-		SWAP_BLOCKS=150000
 		if [ -n "$SWAP_BLOCKS" ]; then
 		    main_part_blocks=$((total_blocks-SWAP_BLOCKS))
 		    main_part_sectors=$((main_part_blocks*2))
