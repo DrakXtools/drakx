@@ -14,7 +14,15 @@ export PATH="/sbin:/bin:/usr/sbin:/usr/bin"
 restore_media="/tmp/media"
 images_dir="$restore_media/images"
 images="$images_dir/list"
+images_config="$images_dir/config"
 image=""
+
+function read_config()
+{
+    if [ -r "$images_config" ]; then
+        . $images_config
+    fi
+}
 
 function image_list()
 {
@@ -177,6 +185,7 @@ function expand_fs()
 
 # installation steps
 welcome
+read_config
 install_warning
 write_image
 expand_fs
