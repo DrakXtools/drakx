@@ -113,6 +113,7 @@ function write_image()
         	_msgbox "\nError writing image: disk device not detected.\n"
 		# so that netbooks using USB sticks as disks can retry (like Gdium)
 		welcome
+		root=$(detect_root)
 	fi
 	
 	image=$(cat $images_dir/list | cut -d ',' -f 3)
