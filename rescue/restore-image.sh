@@ -191,6 +191,13 @@ function expand_fs()
 		if [ -d "$grub_dir" ]; then
 		    echo "(hd0) $disk" > "$grub_dir/device.map"
 		fi
+		if [ -n "$MKINITRD" ]; then
+		    mount -t sysfs none "$mnt_dir/sys"
+		    mount -t proc none "$mnt_dir/proc"
+		    chroot $mnt_dir bootloader-config --action rebuild-initrds
+		    umount "$mnt_dir/sys"
+		    umount "$mnt_dir/proc"
+		fi
 		umount $mnt_dir
 	fi
 }
