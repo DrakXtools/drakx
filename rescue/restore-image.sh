@@ -170,15 +170,15 @@ function expand_fs()
 		#part_blocks=$((part_sectors/2))
 		SWAP_BLOCKS=150000
 		if [ -n "$SWAP_BLOCKS" ]; then
-		    max_part_blocks=$((total_blocks-SWAP_BLOCKS))
-		    max_part_sectors=$((max_part_blocks*2))
+		    main_part_blocks=$((total_blocks-SWAP_BLOCKS))
+		    main_part_sectors=$((main_part_blocks*2))
 		else
-		    max_part_sectors=
+		    main_part_sectors=
 		fi
-		sfdisk -d $disk | sed -e "\|$main_part|  s/size=.*,/size= $max_part_sectors,/" | sfdisk -f $disk
+		sfdisk -d $disk | sed -e "\|$main_part|  s/size=.*,/size= $main_part_sectors,/" | sfdisk -f $disk
 		e2fsck -fy $main_part
 		resize2fs $main_part
-		parted $disk -- mkpartfs primary linux-swap ${max_part_sectors}s -1s yes
+		parted $disk -- mkpartfs primary linux-swap ${main_part_sectors}s -1s yes
 		mkswap -L swap $swap_part
 	fi
 }
