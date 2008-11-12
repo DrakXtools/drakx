@@ -185,13 +185,13 @@ function expand_fs()
 		    parted $disk -- mkpartfs primary linux-swap ${main_part_sectors}s -1s yes
 		    mkswap -L swap $swap_part
 		fi
-                mkdir -p $mnt_dir
-                mount $main_part $mnt_dir
-                grub_dir="$mnt_dir/boot/grub"
-                if [ -d "$grub_dir" ]; then
-                    echo "(hd0) $disk" > "$grub_dir/device.map"
-                fi
-                umount $mnt_dir
+		mkdir -p $mnt_dir
+		mount $main_part $mnt_dir
+		grub_dir="$mnt_dir/boot/grub"
+		if [ -d "$grub_dir" ]; then
+		    echo "(hd0) $disk" > "$grub_dir/device.map"
+		fi
+		umount $mnt_dir
 	fi
 }
 
