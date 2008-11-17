@@ -666,8 +666,10 @@ sub get_media_cfg {
 
     #- copy latest compssUsers.pl and rpmsrate somewhere locally
     if ($force_rpmsrate || ! -e '/tmp/rpmsrate') {
-	getAndSaveFile_($phys_medium, "media_info/compssUsers.pl", "/tmp/compssUsers.pl");
 	getAndSaveFile_($phys_medium, "media_info/rpmsrate", "/tmp/rpmsrate");
+    }
+    if ($force_rpmsrate || ! -e '/tmp/compssUsers.pl') {
+	getAndSaveFile_($phys_medium, "media_info/compssUsers.pl", "/tmp/compssUsers.pl");
     }
 
 
