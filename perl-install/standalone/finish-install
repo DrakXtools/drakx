@@ -158,7 +158,7 @@ sub ask_users() {
 sub ask_glx() {
     require Xconfig::glx;
     my $glx = Xconfig::glx::detect_may_install($in->do_pkgs);
-    if ($glx->{supported} && Xconfig::glx::choose_interactive($in, $glx)) {
+    if ($glx->{supported} && Xconfig::glx::choose_interactive($in, $glx, 'installed_only')) {
         Xconfig::glx::write($glx);
     }
 }
