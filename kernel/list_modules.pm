@@ -26,7 +26,7 @@ our %l = (
         qw(iph5526), #- fibre channel
         qw(jme lance ne ni5010 ni52 ni65 nvnet),
         qw(prism2_plx qlge r6040 rcpci rhineget),
-        qw(sb1000 sc92031 smc-ultra smc9194),
+        qw(sb1000 sc92031 smc-ultra smc9194 smsc95xx),
         qw(tc35815 tlan uli526x),
       ),
       if_(arch() !~ /alpha/,
@@ -41,7 +41,7 @@ our %l = (
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
-      qw(atl1 atl1e bnx2 bnx2x cxgb cxgb3 dl2k e1000 e1000e igb ipg ixgb ixgbe myri_sbus netxen_nic ns83820 qla3xxx r8169 s2io sfc sis190 sk98lin skge sky2 spidernet tehuti tg3 via-velocity yellowfin),
+      qw(atl1 atl1e bnx2 bnx2x cxgb cxgb3 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe myri_sbus netxen_nic ns83820 qla3xxx r8169 s2io sfc sis190 sk98lin skge sky2 spidernet tehuti tg3 via-velocity yellowfin),
       qw(bcm5820 bcm5700), #- encrypted
     ],
 
@@ -96,7 +96,7 @@ our %l = (
         qw(aec62xx ali14xx alim15x3 amd74xx atiixp cmd64x cy82c693 cs5520 cs5530 cs5535),
         qw(delkin_cb dtc2278 hpt34x hpt366 ns87415 ht6560b it8213 jmicron),
         qw(opti621 pdc202xx_new pdc202xx_old piix qd65xx rz1000 sc1200 serverworks siimage sis5513 slc90e66),
-        qw(tc86c001 triflex trm290 tx4939ide umc8672 via82cxxx ide-pci-generic ide-generic),
+        qw(tc86c001 triflex trm290 tx4938ide tx4939ide umc8672 via82cxxx ide-pci-generic ide-generic),
     ],
     scsi => [
       if_(arch() =~ /ppc/, qw(mesh mac53c94)),
