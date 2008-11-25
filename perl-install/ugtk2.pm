@@ -541,7 +541,7 @@ sub create_okcancel {
     $bprev = gtknew('Label') if !$cancel && $::Wizard_no_previous && !@left && !@right;
     if ($::isWizard || $w->{pop_it}) {
         # wizard mode: order is cancel/left_extras/white/right_extras/prev/next
-        unshift @left, $w->{wizcancel} if !$::isInstall;
+        unshift @left, $w->{wizcancel} if $w->{wizcancel};
         push @right, $bprev, $bok;
     } else { 
         # normal mode: cancel/ok button follow GNOME's HIG
