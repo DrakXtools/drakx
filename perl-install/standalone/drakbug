@@ -268,7 +268,8 @@ $gdb_trace)),
                                )
                                  . qq(
 Kernel version = $kernel_release
-) . if_($cpuinfo, "CPU=$cpuinfo")
+Distribution=) . cat_('/etc/release')
+. if_($cpuinfo, "CPU=$cpuinfo")
                            ),
                    );
     print($bugzilla_url . "?" . $options . "\n");
