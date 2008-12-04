@@ -64,7 +64,7 @@ our @tree =
       string => N("SATA controllers"),
       icon => "ide_hd.png",
       configurator => "",
-      detector => sub { f(detect_devices::probe_category('disk/sata')) },
+      detector => sub { f(grep { $_->{driver} !~ /^pata/ } detect_devices::probe_category('disk/sata')) },
       checked_on_boot => 1,
      },
 
@@ -84,7 +84,8 @@ our @tree =
       icon => "ide_hd.png",
       configurator => "",
       detector => sub { f(detect_devices::probe_category('disk/ide')),
-                          f(grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ } @devices) },
+                          f(grep { $_->{driver} =~ /^pata/ && $_->{media_type} =~ /IDE/ } @devices),
+                              f(grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ } @devices) },
       checked_on_boot => 1,
      },
 
