@@ -3,6 +3,8 @@
 - drakbug:
   o write distro release in bug description
 - finish-install:
+  o use /dev/urandom instead of /dev/random to generate salt for passwords
+    (since reading on /dev/random can block boot process)
   o show only installed 3D desktops
   o adapt to new Xconfig::glx API (drak3d 1.21)
 - harddrake:
