@@ -555,7 +555,8 @@ sub pciusb_id {
                pci_device => 'usb_pci_device',
                vendor => 'usb_vendor',
                );
-    my @fields = ('bus', if_($dev->{bus} =~ /pci/, qw(pci_bus pci_device)), qw(vendor id subvendor subid description));
+    my @fields = ('bus', if_($dev->{bus} =~ /pci/, qw(pci_bus pci_device)), qw(vendor id subvendor subid),
+                  if_($dev->{bus} !~ /usb/i, 'description'));
     join(':', map { uc($dev->{$alt{$_}} || $dev->{$_}) } @fields);
 }
 
