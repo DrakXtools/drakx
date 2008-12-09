@@ -11,6 +11,15 @@ our ($version, $sbindir, $bindir) = ("10", "/usr/sbin", "/usr/bin");
 
 my @devices = (detect_devices::probeall(), detect_devices::getSCSI());
 
+foreach my $dev (@devices) {
+    # normalize device IDs for devices cthat came from mouse.pm:
+    next if !defined $dev->{Synaptics};
+    foreach my $field (qw(vendor id subvendor subid)) {
+        next if !defined $dev->{$field};
+        $dev->{$field} = hex($dev->{$field});
+    }
+}
+
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown() {
     grep { $_->{media_type} !~ /BRIDGE|class\|Mouse|DISPLAY|Hub|MEMORY_RAM|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|NETWORK|Printer|SERIAL_(USB|SMBUS)|STORAGE_(IDE|OTHER|RAID|SCSI)|SYSTEM_OTHER|tape|UPS/
