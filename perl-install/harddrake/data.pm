@@ -478,7 +478,7 @@ our @tree =
       detector => sub {
           f(grep { $_->{description} =~ /Keyboard/i || $_->{media_type} =~ /Subclass\|Keyboard/i } @devices),
             # USB devices are filtered out since we already catch them through probeall():
-          grep { $_->{bus} ne 'usb' && $_->{driver} eq 'kbd' && $_->{description} !~ /PC Speaker/ } detect_devices::getInputDevices();
+          f(grep { $_->{bus} ne 'usb' && $_->{driver} eq 'kbd' && $_->{description} !~ /PC Speaker/ } detect_devices::getInputDevices());
       },
       checked_on_boot => 0,
      },
@@ -500,7 +500,7 @@ our @tree =
       detector => sub {
           f(grep { $_->{driver} =~ /^Mouse:|^Tablet:/ || $_->{media_type} =~ /class\|Mouse/ } @devices),
             # USB devices are filtered out since we already catch them through probeall():
-            grep { $_->{bus} ne 'usb' && $_->{Handlers}{mouse} } detect_devices::getInputDevices();
+            f(grep { $_->{bus} ne 'usb' && $_->{Handlers}{mouse} } detect_devices::getInputDevices());
       },
       checked_on_boot => 1,
       automatic => 1,
