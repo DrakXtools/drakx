@@ -303,7 +303,8 @@ our @tree =
       detector => sub { 
           require list_modules;
           my @modules = list_modules::category2modules('multimedia/sound');
-          f(grep { $_->{media_type} =~ /MULTIMEDIA_AUDIO/  || member($_->{driver}, @modules) } @devices);
+          f(grep { $_->{media_type} =~ /MULTIMEDIA_AUDIO/  || member($_->{driver}, @modules)
+                || $_->{description} =~ /PC Speaker/ } @devices);
       },
       checked_on_boot => 1,
      },
