@@ -451,7 +451,7 @@ our @tree =
       string => N("Printer"),
       icon => "hw_printer.png",
       configurator => "$sbindir/printerdrake",
-      detector => sub { },
+      detector => sub {},
       # we do not check these b/c this need user interaction (auth, ...):
       checked_on_boot => 0,
      },
@@ -487,8 +487,8 @@ our @tree =
       detector => sub {
           f(grep { $_->{description} =~ /Keyboard/i || $_->{media_type} =~ /Subclass\|Keyboard/i ||
                      # USB devices are filtered out since we already catch them through probeall():
-                     $_->{bus} ne 'usb' && $_->{driver} eq 'kbd' && $_->{description} !~ /PC Speaker/
-                 } @devices),
+                     $_->{bus} ne 'usb' && $_->{driver} eq 'kbd' && $_->{description} !~ /PC Speaker/;
+                 } @devices);
       },
       checked_on_boot => 0,
      },
@@ -510,8 +510,8 @@ our @tree =
       detector => sub {
           f(grep { $_->{driver} =~ /^Mouse:|^Tablet:/ || $_->{media_type} =~ /class\|Mouse/ ||
                      # USB devices are filtered out since we already catch them through probeall():
-                     $_->{bus} ne 'usb' && $_->{Handlers}{mouse}
-                 } @devices),
+                     $_->{bus} ne 'usb' && $_->{Handlers}{mouse};
+                 } @devices);
       },
       checked_on_boot => 1,
       automatic => 1,
