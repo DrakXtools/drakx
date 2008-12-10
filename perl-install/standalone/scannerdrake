@@ -441,11 +441,10 @@ sub mainwindow {
 			if_($entry, "  -  $entry\n");
 		    } @configured;
 		if (@scannerlist) {
-		    my $main_msg = 
-			@scannerlist > 1 ?
-			N_("The following scanners\n\n%s\nare available on your system.\n") :
-			N_("The following scanner\n\n%s\nis available on your system.\n");
-		    sprintf($main_msg, join('', @scannerlist));
+                    my $list = join('', @scannerlist);
+                    @scannerlist > 1 ?
+                      N("The following scanners\n\n%s\nare available on your system.\n", $list) :
+                      N("The following scanner\n\n%s\nis available on your system.\n", $list);
 		} else {
 		    N("There are no scanners found which are available on your system.\n");
 		}
