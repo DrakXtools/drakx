@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: DrakX-ky\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-30 20:13+0200\n"
-"PO-Revision-Date: 2008-11-20 16:40+0600\n"
+"PO-Revision-Date: 2008-12-13 21:32+0600\n"
 "Last-Translator: Ilyas Bakirov <just_ilyas@yahoo.com>\n"
 "Language-Team: Kyrgyz\n"
 "MIME-Version: 1.0\n"
@@ -32,6 +32,10 @@ msgid ""
 "\n"
 "Do you have a supplementary installation medium to configure?"
 msgstr ""
+"Төмөнкү булак табылды жана ал орнотуу мезгилинде колдонулат: %s.\n"
+"\n"
+"\n"
+"Ырастоолор үчүн кошумча булагы дагы барбы?"
 
 #: any.pm:120
 #, c-format
@@ -665,6 +669,9 @@ msgid ""
 "Either your cdrom drive or your cdrom is defective.\n"
 "Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm\"\n"
 msgstr ""
+"Кээбир негизги пакеттер туура эмес орнотулду.\n"
+"CDROM түзүлүшү же диск бузук болушу мүмкүн.\n"
+"Киргизилген дискти \"rpm -qpl media/main/*.rpm\" коммандасы менен текшериңиз\n"
 
 #: steps_auto_install.pm:71
 #: steps_stdio.pm:27
@@ -694,6 +701,10 @@ msgid ""
 "Mandriva Linux. If that occurs, you can try a text install instead. For this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
+"Системага жетеринче ресурс жетпей жатат. Mandriva Linux системасын\n"
+"орнотууда проблемалар чыгышы мүмкүн. Андай болсо тексттик режимде\n"
+"орнотууну текшерип көрүңүз. Ал үчүн, дисктен жүктөлүп жаткан учурда\n"
+"`F1' клавишасын басып `text' сөзүн кириңиз."
 
 #: steps_gtk.pm:228
 #, c-format
@@ -807,7 +818,7 @@ msgstr "%s сактоо үчүн"
 #: steps_gtk.pm:425
 #, c-format
 msgid "You can not select this package as there is not enough space left to install it"
-msgstr ""
+msgstr "Сиз бул пакетти тандап алалбайсыз, анткени аны орнотуу үчүн жетеринче бош боштук жок"
 
 #: steps_gtk.pm:428
 #, c-format
@@ -929,6 +940,8 @@ msgid ""
 "The following installation media have been found.\n"
 "If you want to skip some of them, you can unselect them now."
 msgstr ""
+"Төмөнкү орнотуу булактары табылды.\n"
+"Эгерде кээбирин аттап өтүүнү кааласаңыз, анда аларды тандабай өтүңүз."
 
 #: steps_gtk.pm:700
 #: steps_interactive.pm:337
@@ -937,6 +950,8 @@ msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive before installation.\n"
 "It will then continue from the hard drive and the packages will remain available once the system is fully installed."
 msgstr ""
+"Компакт-диск мазмунун орнотуудан мурун компьютер дискине көчүрүп алуу мүмкүн.\n"
+"Андан кийин орнотуу компьютер дискинен улантылат жана пакеттер толук системанын орнотулуп бүткөндөн кийин калышат."
 
 #: steps_gtk.pm:702
 #: steps_interactive.pm:339
@@ -1000,6 +1015,11 @@ msgid ""
 "To upgrade with KDE 3.5 and your personal settings preserved, \n"
 "please reboot your system and upgrade using the Mandriva update applet."
 msgstr ""
+"%s чейин системанын жаңылоосун чечтиңиз. KDE 3.5 системаңызда табылды.\n"
+"Буд орноткуч жаңылоодо KDE 3.5'ти сакатабайт. Эгерде орнотууну уланта берсеңиз, \n"
+"KDE 4 KDE 3'тү алмаштырып салат жана жеке ырастоолоруңуз менен KDE ырастоолору \n"
+"жоголуп кетет. KDE 3.5'тен жаңылоо жана жеке ырастоолорду сактап калуу үчүн, \n"
+"системаны кайрадан жүктөп жана Mandriva жаңылоо аплети менен жаңыланым көрүңүз."
 
 #: steps_interactive.pm:180
 #, c-format
@@ -1032,6 +1052,13 @@ msgid ""
 "Warning : you should backup all your personal data before choosing \"New\n"
 "Installation\"."
 msgstr ""
+"Орноткуч учурдагы орнотулган Mandriva Linux системанын %s жаңылоосун\n"
+"толук алалбашы мүмкүн.\n"
+"\n"
+"Учурдагы системаны жаңыдан жаңы версиясы менен орнотуу сунушталат.\n"
+"\n"
+"Эскертүү : \"Жаңы орнотулуш\" тандоодон мурун, бардык жеке\n"
+"маалыматтарды архивдөө менен көчүрүп алышыңыз керек."
 
 #: steps_interactive.pm:247
 #, c-format
@@ -1046,12 +1073,12 @@ msgstr "IDE конфигурацияланууда"
 #: steps_interactive.pm:284
 #, c-format
 msgid "No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"
-msgstr ""
+msgstr "Өз жүктөлүү программасы үчүн жетеринче бош боштук калган жок! Орнотуу улантылат, бирок системанын жүктөлүшү үчүн DiskDrake менен баштапкы жүктөлүү бөлүгүн түзүү керек"
 
 #: steps_interactive.pm:289
 #, c-format
 msgid "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"
-msgstr ""
+msgstr "PPC PReP жүктөлүү бөлүгүн түзүү керек! Орнотуу улантылат, бирок системанын жүктөлүшү үчүн DiskDrake менен баштапкы жүктөлүү бөлүгүн түзүү керек"
 
 #: steps_interactive.pm:381
 #, c-format
@@ -1072,7 +1099,7 @@ msgstr "Мүмкүн болгон пакеттер изделүүдө..."
 #: steps_interactive.pm:411
 #, c-format
 msgid "Your system does not have enough space left for installation or upgrade (%dMB > %dMB)"
-msgstr ""
+msgstr "Системаңыз орнотууга же жаңылоого жетеринче бош боштукка ээ эмес (%d МБ > %d МБ)"
 
 #: steps_interactive.pm:459
 #, c-format
@@ -1080,6 +1107,8 @@ msgid ""
 "Please choose load or save package selection.\n"
 "The format is the same as auto_install generated files."
 msgstr ""
+"Жүктөө же пакеттер тандоосун сактоону тандаңыз.\n"
+"Файлдар форматы автоматтык орнотууда түзүлгөн файлдар менен окшош."
 
 #: steps_interactive.pm:461
 #, c-format
@@ -1132,6 +1161,8 @@ msgid ""
 "You have not selected any group of packages.\n"
 "Please choose the minimal installation you want:"
 msgstr ""
+"Эч кандай пакеттер группасы тандалган жок.\n"
+"Минималдык орнотуу тибин тандаңыз:"
 
 #: steps_interactive.pm:594
 #, c-format
@@ -1221,6 +1252,14 @@ msgid ""
 "\n"
 "Do you want to install the updates?"
 msgstr ""
+"Азыр жаңыланган пакеттерди жүктөө мүмкүн. Бул пакеттер дистрибутив\n"
+"чыккандан кийин жаңыланган. Алар каталар же коопсуздук\n"
+"жамактарын камтышы мүмкүн.\n"
+"\n"
+"Жаңыланган пакеттерди жүктөп алуу үчүн иштеп жаткан Интернет \n"
+"байланышы керек.\n"
+"\n"
+"Пакеттер орнотулсунбу?"
 
 #: steps_interactive.pm:849
 #, c-format
@@ -1250,7 +1289,7 @@ msgstr "Сизде ISA добуш карточкасы барбы?"
 #: steps_interactive.pm:955
 #, c-format
 msgid "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound card"
-msgstr ""
+msgstr "Үн картасын ырастоо үчүн орнотуудан кийин \"alsaconf\" же \"sndconfig\" коммандаларын аткарыңыз"
 
 #: steps_interactive.pm:957
 #, c-format
@@ -1311,12 +1350,12 @@ msgstr "Система жүктөөгүч даярдалууда..."
 #: steps_interactive.pm:1068
 #, c-format
 msgid "You appear to have an OldWorld or Unknown machine, the yaboot bootloader will not work for you. The install will continue, but you'll need to use BootX or some other means to boot your machine. The kernel argument for the root fs is: root=%s"
-msgstr ""
+msgstr "Сиз өтө эски тарыхый же белгисиз машинанын ээси окшойсуз жана 'yaboot' баштапкы жүктөгүчү машинаңызга иштебеши мүмкүн. Орнотуу улантылат, бирок системанын жүктөлүшү үчүн 'BootX' же башка жүктөгүч колдонулушу керек. Ядронун тамырдык файл системанын параметри: root=%s"
 
 #: steps_interactive.pm:1087
 #, c-format
 msgid "In this security level, access to the files in the Windows partition is restricted to the administrator."
-msgstr ""
+msgstr "Бул коопсудук деңгээлде Windows бөлүмүндө жайгашкан файларда жетүү жалгыз гана администраторга уруксат берилген."
 
 #: steps_interactive.pm:1121
 #, c-format
