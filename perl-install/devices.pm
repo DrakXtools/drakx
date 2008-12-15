@@ -185,7 +185,9 @@ sub make($) {
     #- make a directory for this inode if needed.
     mkdir_p(dirname($file));
 
-    syscall_('mknod', $file, $type | 0600, makedev($major, $minor)) or die "mknod failed (dev $_): $!";
+    syscall_('mknod', $file, $type | 0600, makedev($major, $minor)) or do {
+        die "mknod failed (dev $_): $!" if ! -e $file; # we may have raced with udev
+    };
 
     $file;
 }
