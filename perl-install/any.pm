@@ -380,6 +380,7 @@ sub setupBootloader__general {
     my $prev_force_acpi = my $force_acpi = bootloader::get_append_with_key($b, 'acpi') !~ /off|ht/;
     my $prev_enable_apic = my $enable_apic = !bootloader::get_append_simple($b, 'noapic');
     my $prev_enable_lapic = my $enable_lapic = !bootloader::get_append_simple($b, 'nolapic');
+    my $prev_enable_smp = my $enable_smp = !bootloader::get_append_simple($b, 'nosmp');
     my $prev_clean_tmp = my $clean_tmp = any { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special} ||= []};
     my $prev_boot = $b->{boot};
     my $prev_method = $b->{method};
@@ -407,6 +408,7 @@ sub setupBootloader__general {
             { label => N("Main options"), title => 1 },
             { label => N("Delay before booting default image"), val => \$b->{timeout} },
             { text => N("Enable ACPI"), val => \$force_acpi, type => 'bool' },
+            { text => N("Enable SMP"), val => \$enable_smp, type => 'bool', advanced => 1 },
             { text => N("Enable APIC"), val => \$enable_apic, type => 'bool', advanced => 1, disabled => sub { !$enable_lapic } }, 
             { text => N("Enable Local APIC"), val => \$enable_lapic, type => 'bool', advanced => 1 },
 		if_($security >= 4 || $b->{password} || $b->{restricted},
@@ -455,6 +457,11 @@ sub setupBootloader__general {
     if ($prev_force_acpi != $force_acpi) {
 	bootloader::set_append_with_key($b, acpi => ($force_acpi ? '' : 'ht'));
     }
+
+    if ($prev_enable_smp != $enable_smp) {
+	($enable_smp ? \&bootloader::remove_append_simple : \&bootloader::set_append_simple)->($b, 'nosmp');
+    }
+
     if ($prev_enable_apic != $enable_apic) {
 	($enable_apic ? \&bootloader::remove_append_simple : \&bootloader::set_append_simple)->($b, 'noapic');
 	($enable_apic ? \&bootloader::set_append_simple : \&bootloader::remove_append_simple)->($b, 'apic');
