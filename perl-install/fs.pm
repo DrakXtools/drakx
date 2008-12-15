@@ -306,6 +306,7 @@ sub write_fstab {
     my ($s, $smb_credentials, $davfs_credentials) = prepare_write_fstab($fstab, $o_prefix, '');
     renamef("$o_prefix/etc/fstab", "$o_prefix/etc/fstab.old");
     output("$o_prefix/etc/fstab", $s);
+    require fs::remote::davfs;
     fs::remote::smb::save_credentials($_) foreach @$smb_credentials;
     fs::remote::davfs::save_credentials($davfs_credentials);
     fs::dmcrypt::save_crypttab($all_hds) if @{$all_hds->{dmcrypts}};
