@@ -90,7 +90,7 @@ sub installfirmware {
     return "" if !$firmware;
     # Install firmware
     run_program::rooted($::prefix, "mkdir", "-p",
-			"/usr/share/sane/firmware") || do {
+			"/usr/share/sane/firmware") or do {
 			    $in->ask_warn(N("Error"),
 					  N("Could not create directory /usr/share/sane/firmware!"));
 			    return "";
@@ -101,21 +101,21 @@ sub installfirmware {
     if ($backend) {
 	run_program::rooted($::prefix, "ln", "-sf",
 			    "/usr/share/sane/firmware",
-			    "/usr/share/sane/$backend") || do {
+			    "/usr/share/sane/$backend") or do {
 				$in->ask_warn(N("Error"),
 					      N("Could not create link /usr/share/sane/%s!", $backend));
 				return "";
 			    };
     }
-    run_program::rooted($::prefix, "cp", "-f", "$firmware",
-			"/usr/share/sane/firmware") || do {
+    run_program::rooted($::prefix, "cp", "-f", $firmware,
+			"/usr/share/sane/firmware") or do {
 			    $in->ask_warn(N("Error"),
 					  N("Could not copy firmware file %s to /usr/share/sane/firmware!", $firmware));
 			    return "";
 			};
     $firmware =~ s!^(.*)(/[^/]+)$!/usr/share/sane/firmware$2!;
     run_program::rooted($::prefix, "chmod", "644",
-			$firmware) || do {
+			$firmware) or do {
 			    $in->ask_warn(N("Error"),
 					  N("Could not set permissions of firmware file %s!", $firmware));
 			    return "";
@@ -128,9 +128,8 @@ sub configured {
     my @res;
     my $parportscannerfound = 0;
     # Run "scanimage -L", to find the scanners which are already working
-    local *LIST;
-    open LIST, "LC_ALL=C scanimage -L |";
-    while (my $line = <LIST>) {
+    open my $LIST, "LC_ALL=C scanimage -L |";
+    while (my $line = <$LIST>) {
 	if ($line =~ /^\s*device\s*`([^`']+)'\s+is\s+a\s+(\S.*)$/) {
 	    # Extract port and description
 	    my $port = $1;
@@ -143,8 +142,8 @@ sub configured {
 		$parportscannerfound = 1;
 	    }
 	    # Determine which SANE backend the scanner in question uses
-	    $port =~ /^([^:]+):/;
-	    my $backend = $1;
+	    my $backend;
+            $backend = $1 if $port =~ /^([^:]+):/;
 	    # Does the scanner need a firmware file
 	    my $firmwareline = firmwareline($backend);
 	    # Store collected data
@@ -152,14 +151,14 @@ sub configured {
 		port => $port, 
 		val => { 
 		    DESCRIPTION => $description,
-		    ($backend ? (BACKEND => $backend) : ()),
-		    ($firmwareline ? 
-		     (FIRMWARELINE => $firmwareline) : ()),
+		    if_($backend, BACKEND => $backend),
+		    if_($firmwareline,
+		     FIRMWARELINE => $firmwareline),
 		}
 	    };
 	}
     }
-    close LIST;
+    close $LIST;
     # We have a parallel port scanner, make it working for non-root users
     nonroot_access_for_parport($parportscannerfound, $in);
     return @res;
@@ -260,9 +259,8 @@ sub detect {
 
     my @devices = detect_devices::probeall();
 
-    local *DETECT;
-    open DETECT, "LC_ALL=C sane-find-scanner -q |";
-    while (my $line = <DETECT>) {
+    open my $DETECT, "LC_ALL=C sane-find-scanner -q |";
+    while (my $line = <$DETECT>) {
 	my ($vendorid, $productid, $make, $model, $description, $port, $driver);
 	if ($line =~ /^\s*found\s+USB\s+scanner/i) {
 	    # Found an USB scanner
@@ -293,7 +291,7 @@ sub detect {
 		# the usbtable
 		foreach my $entry (common::catMaybeCompressed("$scannerDBdir/usbtable")) {
 		    if ($entry =~ 
-			/^\s*$vendorid\s+$productid\s+.*\"([^\"]+)\"\s*$/) {
+			/^\s*$vendorid\s+$productid\s+.*"([^"]+)"\s*$/) {
 			$description = $1;
 			$description =~ s/Seiko\s+Epson/Epson/i;
 			if ($description =~ /^([^\|]+)\|(.*)$/) {
@@ -306,7 +304,7 @@ sub detect {
 	    }
 	} elsif ($line =~ /^\s*found\s+SCSI/i) {
 	    # SCSI scanner
-	    if ($line =~ /\"([^\"\s]+)\s+([^\"]+?)\s+([^\"\s]+)\"/) {
+	    if ($line =~ /"([^"\s]+)\s+([^"]+?)\s+([^"\s]+)"/) {
 		$make = $1;
 		$model = $2;
 		$description = "$make|$model";
@@ -354,7 +352,7 @@ sub detect {
 	    } 
 	};
     }
-    close DETECT;
+    close $DETECT;
     if (@configured) {
 	# Remove scanners which are already working
 	foreach my $d (@res) {
@@ -408,21 +406,19 @@ sub resolve_symlinks {
 
 sub get_usb_ids_for_port {
     my ($port) = @_;
-    local *DETECT;
     if ($port =~ /^\s*libusb:(\d+):(\d+)\s*$/) {
 	# Use "lsusb" to find the USB IDs
-	open DETECT, "LC_ALL=C lsusb -s $1:$2 |";
-	while (my $line = <DETECT>) {
+	open my $DETECT, "LC_ALL=C lsusb -s $1:$2 |";
+	while (my $line = <$DETECT>) {
 	    if ($line =~ /ID\s+([0-9a-f]+):(0x[0-9a-f]+)($|\s+)/) {
 		# Scanner connected via scanner.o kernel module
 		return "0x$1", "0x$2";
-		last;
 	    }
 	}
     } else {
 	# Run "sane-find-scanner" on the port
-	open DETECT, "LC_ALL=C sane-find-scanner -q $port |";
-	while (my $line = <DETECT>) {
+	open my $DETECT, "LC_ALL=C sane-find-scanner -q $port |";
+	while (my $line = <$DETECT>) {
 	    if ($line =~ /^\s*found\s+USB\s+scanner/i) {
 		if ($line =~ /vendor=(0x[0-9a-f]+)[^0-9a-f]+.*prod(|uct)=(0x[0-9a-f]+)[^0-9a-f]+/) {
 		    # Scanner connected via scanner.o kernel module
@@ -465,7 +461,8 @@ sub readScannerDB {
 
     my $F = common::openFileMaybeCompressed($file);
 
-    my ($lineno, $cmd, $val) = 0;
+    my ($cmd, $val);
+    my $lineno = 0;
     my $fs = {
         LINE => sub { push @{$card->{lines}}, "LINE $val" },
         SCSILINE => sub { push @{$card->{lines}}, "SCSILINE $val" },
@@ -518,8 +515,8 @@ sub updateScannerDBfromUsbtable() {
     foreach (cat_("$ENV{SHARE_PATH}/ldetect-lst/usbtable")) {
 	my ($vendor_id, $product_id, $mod, $name) = chomp_(split /\s/,$_,4);
 	next if $mod ne '"scanner"';
-	$name =~ s/\"(.*)\"$/$1/;
-	if (member($name, keys %$scanner::scannerDB)) {
+	$name =~ s/"(.*)"$/$1/;
+	if ($scanner::scannerDB->{$name}) {
 	    print "#[$name] already in ScannerDB!\n";
 	    next;
 	}
@@ -577,14 +574,14 @@ sub updateScannerDBfromSane {
 		  mfg => sub { $mfg = $val; $name = undef },#bug when a new mfg comes. should called $fs->{ $name }(); but ??
 		  model => sub {
 		      unless ($name) { $name = $val; return }
-		      $name = member($mfg, keys %$sane2DB) ?
+		      $name = exists $sane2DB->{$mfg} ?
 			ref($sane2DB->{$mfg}) ? $sane2DB->{$mfg}($name) : "$sane2DB->{ $mfg }|$name" : "$mfg|$name";
 		      # When adding the unsupported scanner models, check
 		      # whether the model is not already supported. To
 		      # compare the names ignore upper/lower case.
 		      my $searchname = quotemeta($name);
-		      if (($backend =~ /unsupported/i) &&
-			  ($to_add =~ /^NAME $searchname$/im)) {
+		      if ($backend =~ /unsupported/i &&
+			  $to_add =~ /^NAME $searchname$/im) {
 			  $to_add .= "# $name already supported!\n";
 		      } else {
 			  # SANE bug: "snapscan" calls itself "SnapScan"
@@ -594,7 +591,8 @@ sub updateScannerDBfromSane {
 			  # this backend and add what is needed for the
 			  # interfaces of this scanner
 			  foreach my $line (@{$configlines{$backend}}) {
-			      my $i = $1 if $line =~ /^\s*(\S*?)LINE/;
+			      my $i;
+                              $i = $1 if $line =~ /^\s*(\S*?)LINE/;
 			      if (!$i || $i eq "FIRMWARE" || 
 				  $intf =~ /$i/i) {
 				  $to_add .= "$line\n";
@@ -616,7 +614,7 @@ sub updateScannerDBfromSane {
 	while (<$F>) { $lineno++;
 		       s/\s+$//;
 		       /^;/ and next;
-		       ($cmd, $val) = /:(\S+)\s*\"([^;]*)\"/ or next; #log::l("bad line $lineno ($_)"), next;
+		       ($cmd, $val) = /:(\S+)\s*"([^;]*)"/ or next; #log::l("bad line $lineno ($_)"), next;
 		       my $f = $fs->{$cmd};
 		       $f ? $f->() : log::l("unknown line $lineno ($_)");
 		   }
