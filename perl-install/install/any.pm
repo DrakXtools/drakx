@@ -322,7 +322,7 @@ sub setPackages {
 	}
 
 	#- open rpm db according to right mode needed
-	$o->{packages}{rpmdb} ||= install::pkgs::rpmDbOpen('rebuild_if_needed', $o->{rpm_dbapi});
+	$o->{packages}{rpmdb} ||= install::pkgs::rpmDbOpen('rebuild_if_needed');
 
 	{
 	    my $_wait = $o->wait_message('', N("Looking at packages already installed..."));
