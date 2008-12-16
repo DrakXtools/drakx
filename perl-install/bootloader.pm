@@ -709,18 +709,20 @@ sub add_kernel {
     $b_nolink ||= $kernel_str->{use_long_name};
 
     my $vmlinuz_long = kernel_str2vmlinuz_long($kernel_str);
+    my $initrd_long = kernel_str2initrd_long($kernel_str);
     $v->{kernel_or_dev} = "/boot/$vmlinuz_long";
     -e "$::prefix$v->{kernel_or_dev}" or log::l("unable to find kernel image $::prefix$v->{kernel_or_dev}"), return;
-    if (!$b_nolink) {
-	$v->{kernel_or_dev} = '/boot/' . kernel_str2vmlinuz_short($kernel_str);
-	_do_the_symlink($bootloader, $v->{kernel_or_dev}, $vmlinuz_long);
-    }
     log::l("adding $v->{kernel_or_dev}");
 
     if (!$b_no_initrd) {
-	my $initrd_long = kernel_str2initrd_long($kernel_str);
 	$v->{initrd} = mkinitrd($kernel_str->{version}, $bootloader, $v, "/boot/$initrd_long");
-	if ($v->{initrd} && !$b_nolink) {
+    }
+
+    if (!$b_nolink) {
+	$v->{kernel_or_dev} = '/boot/' . kernel_str2vmlinuz_short($kernel_str);
+	_do_the_symlink($bootloader, $v->{kernel_or_dev}, $vmlinuz_long);
+
+	if ($v->{initrd}) {
 	    $v->{initrd} = '/boot/' . kernel_str2initrd_short($kernel_str);
 	    _do_the_symlink($bootloader, $v->{initrd}, $initrd_long);
 	}

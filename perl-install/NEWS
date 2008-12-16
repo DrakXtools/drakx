@@ -1,3 +1,6 @@
+- bootloader-config:
+  o do not modify /boot/vmlinuz symlinks before doing mkinitrd in case
+    mkinitrd fails (#44862)
 - diskdrake:
   o --nfs: handle "host:/" (#44320)
 
