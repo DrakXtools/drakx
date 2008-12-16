@@ -19,7 +19,7 @@ sub analyze {
 	'uuid', $1;
     } elsif ($dev eq 'none' || $dev eq 'rootfs') {
 	'virtual';
-    } elsif ($dev =~ m!^(\S+):/\w!) {
+    } elsif ($dev =~ m!^(\S+):/(\w|$)!) {
 	'nfs';
     } elsif ($dev =~ m!^//\w!) {
 	'smb';
