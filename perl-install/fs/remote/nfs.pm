@@ -51,7 +51,8 @@ sub find_servers {
 	    $quit = 0;
 	    my ($ip, $name) = $s =~ /(\S+)\s+(\S+)/ or log::explanations("bad line in rpcinfo output"), next;
 	    $name =~ s/\.$//;
-	    $name =~ s/\Q.$domain\E$//;
+	    $domain && $name =~ s/\Q.$domain\E$//
+	      || $name =~ s/^([^.]*)\.local$/$1/;
 	    $servers{$ip} ||= { ip => $ip, if_($name ne '(unknown)', name => $name) };
 	}
     }
