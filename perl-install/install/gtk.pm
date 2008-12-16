@@ -264,6 +264,10 @@ sub createXconf {
 
 if ($Driver) {
      output($file, sprintf(<<'END', $mouse_type, $Driver, $Driver eq 'fbdev' ? '"default"' : '"800x600" "640x480"'));
+Section "ServerFlags"
+   Option "AutoAddDevices" "False"
+EndSection
+
 Section "Files"
    FontPath   "/usr/share/fonts:unscaled"
 EndSection
