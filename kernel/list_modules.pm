@@ -41,7 +41,7 @@ our %l = (
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
-      qw(atl1 atl1e bnx2 bnx2x cxgb cxgb3 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe myri_sbus netxen_nic ns83820 qla3xxx r8169 s2io sfc sis190 sk98lin skge sky2 spidernet tehuti tg3 via-velocity yellowfin),
+      qw(atl1 atl1e bnx2 bnx2x cxgb cxgb3 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe myri_sbus netxen_nic ns83820 qla3xxx r8169 s2io sfc sxg sis190 sk98lin skge sky2 spidernet tehuti tg3 via-velocity yellowfin),
       qw(bcm5820 bcm5700), #- encrypted
     ],
 
@@ -67,7 +67,7 @@ our %l = (
       qw(p54pci p54usb prism2_cs prism2_pci prism2_usb prism54 r8180 ray_cs rndis_wlan),
       qw(rt2400 rt2500 rt2570 rt61 rt73 rtusb),
       qw(rt2400pci rt2500pci rt2500usb rt61pci rt73usb rtl8180),
-      qw(spectrum_cs usbvnet_rfmd vt_ar5k wavelan_cs wl3501_cs wvlan_cs zd1201 zd1211rw),
+      qw(spectrum_cs usbvnet_rfmd vt_ar5k w35und wavelan_cs wl3501_cs wvlan_cs zd1201 zd1211rw),
       if_(arch() =~ /ppc/, qw(airport)),
     ],
     isdn => [
