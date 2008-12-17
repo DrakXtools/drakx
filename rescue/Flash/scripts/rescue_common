@@ -192,3 +192,14 @@ function lumount() {
     umount $dir
     losetup -d $loop
 }
+
+function set_sfs_loop() {
+    local dir=$1
+    sfs_loop_std="$dir$loopbacks_rel/distrib.sqfs"
+    sfs_loop_lzma="$dir$loopbacks_rel/distrib-lzma.sqfs"
+    if [ -e $sfs_loop_lzma ]; then
+	sfs_loop=$sfs_loop_lzma
+    else
+	sfs_loop=$sfs_loop_std
+    fi
+}

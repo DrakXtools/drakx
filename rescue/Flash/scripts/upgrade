@@ -43,6 +43,8 @@ function prepare() {
         return 1
     fi
 
+    set_sfs_loop $rootdir
+
     mount -t ext2 -o loop $sys_loop $tmpdir/user > /dev/null 2>&1
     if [ $? -ne 0 ]; then
         echo "Error mounting system.loop"
@@ -225,7 +227,7 @@ fi
 
 #- works only when upgrading versions with the same layout
 sys_loop="$rootdir$loopbacks_rel/system.loop"
-sfs_loop="$rootdir$loopbacks_rel/distrib.sqfs"
+sfs_loop= #
 
 modules_dir="$rootdir$loopbacks_rel/modules"
 

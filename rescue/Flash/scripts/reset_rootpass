@@ -23,6 +23,8 @@ function prepare() {
         return 1
     fi
 
+    set_sfs_loop $rootdir
+
     mount -t squashfs -o loop $sfs_loop $tmpdir/squash > /dev/null 2>&1
     if [ $? -ne 0 ]; then
         echo "Error mounting distrib.sqfs"
@@ -81,7 +83,7 @@ if ! insert_pendrive; then
 fi
 
 sys_loop="$rootdir$loopbacks_rel/system.loop"
-sfs_loop="$rootdir$loopbacks_rel/distrib.sqfs"
+sfs_loop= #
 
 if ! prepare; then
     cleanup
