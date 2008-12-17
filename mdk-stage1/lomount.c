@@ -167,6 +167,7 @@ lomount(char *loopfile, char *where, char **dev, int compressed)
 
 	my_insmod("loop", ANY_DRIVER_TYPE, "max_loop=256", 1);
 	if (compressed) {
+	    my_insmod("squashfs_lzma", ANY_DRIVER_TYPE, NULL, 1);
 	    my_insmod("squashfs", ANY_DRIVER_TYPE, NULL, 1);
 	}
 
