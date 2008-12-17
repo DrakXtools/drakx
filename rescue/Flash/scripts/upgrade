@@ -29,6 +29,7 @@ function prepare() {
     echo
 
     modprobe unionfs > /dev/null 2>&1
+    modprobe squashfs-lzma > /dev/null 2>&1
     modprobe squashfs > /dev/null 2>&1
     modprobe loop > /dev/null 2>&1
 
