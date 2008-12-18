@@ -131,6 +131,10 @@
   libnss_dns.so.2
   libresolv.so.2
   ld-linux*.so.2
+
+  <!-- modules used by libnss3 -->
+  libfreebl3.so
+  libsoftokn3.so
 </from>
 </filter>
 
@@ -146,10 +150,6 @@
   /usr/LIB/gtk-2.0/*/loaders/libpixbufloader-png.so
   /usr/LIB/gtk-2.0/*/immodules/im-cedilla.so
   /usr/LIB/gtk-2.0/*/engines/libia_ora.so
-
-  <!-- modules used by libnss3 -->
-  /usr/LIB/libfreebl3.so
-  /usr/LIB/libsoftokn3.so
 
   /usr/lib/libDrakX/keyboard.pm
   /usr/lib/libDrakX/mouse.pm
