@@ -453,6 +453,9 @@ sub write {
 	    tell_kernel($hd, $tell_kernel);
 	}
     }
+    # get major/minor again after writing the partition table so that we got them for dynamic devices
+    # (eg: for SCSI like devices with kernel-2.6.28+):
+    fs::get_major_minor([ get_normal_parts($hd) ]);
 }
 
 sub active {
