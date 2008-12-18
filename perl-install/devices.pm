@@ -77,10 +77,9 @@ sub entry {
     if (/^0x([\da-f]{3,4})$/i) {
 	$type = c::S_IFBLK();
 	($major, $minor) = unmakedev(hex $1);
-    } elsif (/^sd(.)(\d{0,2})/) {
+    } elsif (/^(sd.)(\d{0,2})/) {
+        ($major, $minor) = split(':', chomp_(cat_("/sys/block/$1/$1$2/dev")));
 	$type = c::S_IFBLK();
-	$major = 8;
-	$minor = 16 * (ord($1) - ord('a')) + ($2 || 0);
     } elsif (/^hd(.)(\d{0,2})/) {
 	$type = c::S_IFBLK();
 	($major, $minor) =
