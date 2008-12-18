@@ -78,7 +78,8 @@ sub entry {
 	$type = c::S_IFBLK();
 	($major, $minor) = unmakedev(hex $1);
     } elsif (/^(sd.)(\d{0,2})/) {
-        ($major, $minor) = split(':', chomp_(cat_("/sys/block/$1/$1$2/dev")));
+        my $path = $2 ? "/sys/block/$1/$1$2/dev" : "/sys/block/$1/dev";
+        ($major, $minor) = split(':', chomp_(cat_($path)));
 	$type = c::S_IFBLK();
     } elsif (/^hd(.)(\d{0,2})/) {
 	$type = c::S_IFBLK();
