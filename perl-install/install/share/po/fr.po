@@ -74,7 +74,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-30 20:13+0200\n"
+"POT-Creation-Date: 2009-01-01 19:22+0100\n"
 "PO-Revision-Date: 2008-10-01 08:49+0200\n"
 "Last-Translator: Christophe Berthelé <cpjc@free.fr>\n"
 "Language-Team: French <cooker-i18n@mandrivalinux.org>\n"
@@ -83,6 +83,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2;plural=(n>1);\n"
+
+#: ../../advertising/IM_flash.pl:1
+#, c-format
+msgid "Your desktop on a USB key"
+msgstr "Votre bureau sur une clé USB"
+
+#: ../../advertising/IM_free09.pl:1
+#, c-format
+msgid "The 100%% open source Mandriva Linux distribution"
+msgstr "La distribution Mandriva Linux 100%% libre"
+
+#: ../../advertising/IM_one09.pl:1
+#, c-format
+msgid "Explore Linux easily with Mandriva One"
+msgstr "Découvrez Linux facilement grâce à Mandriva One"
+
+#: ../../advertising/IM_pwp09.pl:1
+#, c-format
+msgid "A full Mandriva Linux desktop, with support"
+msgstr "Un bureau Mandriva Linux complet, avec support"
+
+#: ../../advertising/IM_range09.pl:1
+#, c-format
+msgid "Mandriva: distributions for everybody's needs"
+msgstr "Mandriva : les distributions couvrant les besoins de chacun"
 
 #: any.pm:109
 #, c-format
@@ -215,8 +240,40 @@ msgstr "Suppression des paquetages avant la mise à jour ..."
 msgid "Finding packages to upgrade..."
 msgstr "Recherche des paquetages à mettre à jour..."
 
+#: any.pm:389
+#, c-format
+msgid ""
+"You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
+"on your system. This installer cannot preserve KDE 3.5 in an upgrade. If you "
+"choose to proceed, \n"
+"KDE 4 will replace KDE 3, and you will lose your personal KDE configuration "
+"settings. \n"
+"To upgrade with KDE 3.5 and your personal settings preserved, \n"
+"please reboot your system and upgrade using the Mandriva update applet."
+msgstr ""
+"Vous avez choisi de mettre à jour votre système vers %s. KDE 3.5 a été \n"
+"détecté sur votre système. L'installation en mode mise à jour du système ne "
+"permet pas de \n"
+"conserver KDE 3.5. Si vous décidez de poursuivre, KDE 4 remplacera KDE 3 et "
+"vous perdrez\n"
+"les paramètres de votre configuration personnelle. \n"
+"Pour mettre à jour en conservant votre configuration personnelle, veuillez "
+"relancer votre \n"
+"système et effectuez cette opération via l'appliquette de mise à jour "
+"Mandriva."
+
+#: any.pm:394 steps_interactive.pm:1126
+#, c-format
+msgid "Reboot"
+msgstr "Redémarrage"
+
+#: any.pm:394
+#, c-format
+msgid "Proceed"
+msgstr ""
+
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:564
+#: any.pm:584
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -241,7 +298,7 @@ msgstr ""
 "Confirmez-vous l'installation de ces serveurs ?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:587
+#: any.pm:607
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -255,82 +312,82 @@ msgstr ""
 "\n"
 "Souhaitez-vous réellement les désinstaller ?\n"
 
-#: any.pm:801
+#: any.pm:826
 #, c-format
 msgid "Error reading file %s"
 msgstr "Erreur lors de la lecture du fichier %s"
 
-#: any.pm:1008
+#: any.pm:1033
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Les disques suivants ont été renommés :"
 
-#: any.pm:1010
+#: any.pm:1035
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (précédemment nommé %s)"
 
-#: any.pm:1067
+#: any.pm:1092
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1067
+#: any.pm:1092
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1067
+#: any.pm:1092
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1086 steps_interactive.pm:972
+#: any.pm:1111 steps_interactive.pm:955
 #, c-format
 msgid "Network"
 msgstr "Réseau"
 
-#: any.pm:1090
+#: any.pm:1115
 #, c-format
 msgid "Please choose a media"
 msgstr "Veuillez choisir un média"
 
-#: any.pm:1106
+#: any.pm:1131
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Le fichier existe déjà. Voulez-vous l'écraser ?"
 
-#: any.pm:1110
+#: any.pm:1135
 #, c-format
 msgid "Permission denied"
 msgstr "Permission refusée"
 
-#: any.pm:1158
+#: any.pm:1183
 #, c-format
 msgid "Bad NFS name"
 msgstr "Mauvais nom NFS"
 
-#: any.pm:1179
+#: any.pm:1204
 #, c-format
 msgid "Bad media %s"
 msgstr "Média %s incorrect"
 
-#: any.pm:1222
+#: any.pm:1247
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Impossible de faire des captures d'écran avant le partitionnement"
 
-#: any.pm:1230
+#: any.pm:1255
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Les captures d'écran seront disponibles après l'installation dans %s"
 
-#: gtk.pm:126
+#: gtk.pm:130
 #, c-format
 msgid "Installation"
 msgstr "Installation"
 
-#: gtk.pm:130 share/meta-task/compssUsers.pl:42
+#: gtk.pm:134 share/meta-task/compssUsers.pl:44
 #, c-format
 msgid "Configuration"
 msgstr "Configuration"
@@ -365,18 +422,18 @@ msgstr "Arrêt de l'interface réseau..."
 msgid "Please wait, retrieving file"
 msgstr "Veuillez patienter, récupération du fichier en cours"
 
-#: media.pm:703 media.pm:714
+#: media.pm:705 media.pm:716
 #, c-format
 msgid "Downloading file %s..."
 msgstr "Téléchargement du fichier %s ..."
 
-#: media.pm:806
+#: media.pm:808
 #, c-format
 msgid "Copying some packages on disks for future use"
 msgstr ""
 "Copie de certains paquetages sur les disques pour une utilisation future"
 
-#: media.pm:859
+#: media.pm:861
 #, c-format
 msgid "Copying in progress"
 msgstr "Copie en cours"
@@ -415,17 +472,17 @@ msgstr ""
 "Certains paquetages requis par %s ne peuvent être installés :\n"
 "%s"
 
-#: share/meta-task/compssUsers.pl:11
+#: share/meta-task/compssUsers.pl:13
 #, c-format
 msgid "Workstation"
 msgstr "Station de travail"
 
-#: share/meta-task/compssUsers.pl:13
+#: share/meta-task/compssUsers.pl:15
 #, c-format
 msgid "Office Workstation"
 msgstr "Poste bureautique"
 
-#: share/meta-task/compssUsers.pl:15
+#: share/meta-task/compssUsers.pl:17
 #, c-format
 msgid ""
 "Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets "
@@ -434,7 +491,7 @@ msgstr ""
 "Programmes pour la bureautique : traitements de texte (OpenOffice.org "
 "Writer, Kword), tableurs (OpenOffice.org Calc, Kspread), visualiseur pdf, etc"
 
-#: share/meta-task/compssUsers.pl:16
+#: share/meta-task/compssUsers.pl:18
 #, c-format
 msgid ""
 "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -443,33 +500,33 @@ msgstr ""
 "Programmes pour la bureautique : traitements de texte (kword, abiword), "
 "tableurs (kspread, gnumeric), visualiseur pdf, etc"
 
-#: share/meta-task/compssUsers.pl:21
+#: share/meta-task/compssUsers.pl:23
 #, c-format
 msgid "Game station"
 msgstr "Jeux"
 
-#: share/meta-task/compssUsers.pl:22
+#: share/meta-task/compssUsers.pl:24
 #, c-format
 msgid "Amusement programs: arcade, boards, strategy, etc"
 msgstr ""
 "Programmes de divertissement : jeux d'arcade, de plateau, de stratégie, etc"
 
-#: share/meta-task/compssUsers.pl:25
+#: share/meta-task/compssUsers.pl:27
 #, c-format
 msgid "Multimedia station"
 msgstr "Multimédia"
 
-#: share/meta-task/compssUsers.pl:26
+#: share/meta-task/compssUsers.pl:28
 #, c-format
 msgid "Sound and video playing/editing programs"
 msgstr "Programmes pour jouer/éditer du son et de la vidéo"
 
-#: share/meta-task/compssUsers.pl:31
+#: share/meta-task/compssUsers.pl:33
 #, c-format
 msgid "Internet station"
 msgstr "Internet"
 
-#: share/meta-task/compssUsers.pl:32
+#: share/meta-task/compssUsers.pl:34
 #, c-format
 msgid ""
 "Set of tools to read and send mail and news (mutt, tin..) and to browse the "
@@ -478,194 +535,194 @@ msgstr ""
 "Ensemble d'outils pour lire et envoyer des courriers électroniques et des "
 "messages de forums (mutt, tin, ...), ainsi que pour naviguer sur Internet"
 
-#: share/meta-task/compssUsers.pl:37
+#: share/meta-task/compssUsers.pl:39
 #, c-format
 msgid "Network Computer (client)"
 msgstr "Ordinateur réseau (client)"
 
-#: share/meta-task/compssUsers.pl:38
+#: share/meta-task/compssUsers.pl:40
 #, c-format
 msgid "Clients for different protocols including ssh"
 msgstr "Clients pour différents protocoles, dont ssh"
 
-#: share/meta-task/compssUsers.pl:43
+#: share/meta-task/compssUsers.pl:45
 #, c-format
 msgid "Tools to ease the configuration of your computer"
 msgstr "Outils pour faciliter la configuration de votre ordinateur"
 
-#: share/meta-task/compssUsers.pl:47
+#: share/meta-task/compssUsers.pl:49
 #, c-format
 msgid "Console Tools"
 msgstr "Utilitaires console"
 
-#: share/meta-task/compssUsers.pl:48
+#: share/meta-task/compssUsers.pl:50
 #, c-format
 msgid "Editors, shells, file tools, terminals"
 msgstr "Éditeurs, interpréteurs, outils fichiers, terminaux"
 
-#: share/meta-task/compssUsers.pl:52 share/meta-task/compssUsers.pl:153
-#: share/meta-task/compssUsers.pl:155
+#: share/meta-task/compssUsers.pl:54 share/meta-task/compssUsers.pl:156
+#: share/meta-task/compssUsers.pl:158
 #, c-format
 msgid "Development"
 msgstr "Développement"
 
-#: share/meta-task/compssUsers.pl:53 share/meta-task/compssUsers.pl:156
+#: share/meta-task/compssUsers.pl:55 share/meta-task/compssUsers.pl:159
 #, c-format
 msgid "C and C++ development libraries, programs and include files"
 msgstr ""
 "Bibliothèques de développement C et C++, programmes et fichiers d'en-tête"
 
-#: share/meta-task/compssUsers.pl:56 share/meta-task/compssUsers.pl:160
+#: share/meta-task/compssUsers.pl:58 share/meta-task/compssUsers.pl:163
 #, c-format
 msgid "Documentation"
 msgstr "Documentation"
 
-#: share/meta-task/compssUsers.pl:57 share/meta-task/compssUsers.pl:161
+#: share/meta-task/compssUsers.pl:59 share/meta-task/compssUsers.pl:164
 #, c-format
 msgid "Books and Howto's on Linux and Free Software"
 msgstr "Livres et Howto's sur Linux et le Logiciel Libre"
 
-#: share/meta-task/compssUsers.pl:61 share/meta-task/compssUsers.pl:164
+#: share/meta-task/compssUsers.pl:63 share/meta-task/compssUsers.pl:167
 #, c-format
 msgid "LSB"
 msgstr "LSB"
 
-#: share/meta-task/compssUsers.pl:62 share/meta-task/compssUsers.pl:165
+#: share/meta-task/compssUsers.pl:64 share/meta-task/compssUsers.pl:168
 #, c-format
 msgid "Linux Standard Base. Third party applications support"
 msgstr "« Linux Standard Base ». Support des programmes tiers"
 
-#: share/meta-task/compssUsers.pl:71
+#: share/meta-task/compssUsers.pl:73
 #, c-format
 msgid "Web Server"
 msgstr "Serveur Web"
 
-#: share/meta-task/compssUsers.pl:72
+#: share/meta-task/compssUsers.pl:74
 #, c-format
 msgid "Apache"
 msgstr "Apache"
 
-#: share/meta-task/compssUsers.pl:75
+#: share/meta-task/compssUsers.pl:77
 #, c-format
 msgid "Groupware"
 msgstr "Groupware"
 
-#: share/meta-task/compssUsers.pl:76
+#: share/meta-task/compssUsers.pl:78
 #, c-format
 msgid "Kolab Server"
 msgstr "Serveur Kolab"
 
-#: share/meta-task/compssUsers.pl:79 share/meta-task/compssUsers.pl:120
+#: share/meta-task/compssUsers.pl:81 share/meta-task/compssUsers.pl:122
 #, c-format
 msgid "Firewall/Router"
 msgstr "Pare Feu/Routeur"
 
-#: share/meta-task/compssUsers.pl:80 share/meta-task/compssUsers.pl:121
+#: share/meta-task/compssUsers.pl:82 share/meta-task/compssUsers.pl:123
 #, c-format
 msgid "Internet gateway"
 msgstr "Passerelle internet"
 
-#: share/meta-task/compssUsers.pl:83
+#: share/meta-task/compssUsers.pl:85
 #, c-format
 msgid "Mail/News"
 msgstr "Courriel/Nouvelles"
 
-#: share/meta-task/compssUsers.pl:84
+#: share/meta-task/compssUsers.pl:86
 #, c-format
 msgid "Postfix mail server, Inn news server"
 msgstr "Serveur de courrier Postfix, serveur de nouvelles lnn"
 
-#: share/meta-task/compssUsers.pl:87
+#: share/meta-task/compssUsers.pl:89
 #, c-format
 msgid "Directory Server"
 msgstr "Serveur d'annuaire"
 
-#: share/meta-task/compssUsers.pl:91
+#: share/meta-task/compssUsers.pl:93
 #, c-format
 msgid "FTP Server"
 msgstr "Serveur FTP"
 
-#: share/meta-task/compssUsers.pl:92
+#: share/meta-task/compssUsers.pl:94
 #, c-format
 msgid "ProFTPd"
 msgstr "ProFTPd"
 
-#: share/meta-task/compssUsers.pl:95
+#: share/meta-task/compssUsers.pl:97
 #, c-format
 msgid "DNS/NIS"
 msgstr "DNS/NIS"
 
-#: share/meta-task/compssUsers.pl:96
+#: share/meta-task/compssUsers.pl:98
 #, c-format
 msgid "Domain Name and Network Information Server"
 msgstr "Serveur de noms de domaine et d'information réseaux"
 
-#: share/meta-task/compssUsers.pl:99
+#: share/meta-task/compssUsers.pl:101
 #, c-format
 msgid "File and Printer Sharing Server"
 msgstr "Serveur pour partage de fichiers et d'imprimantes"
 
-#: share/meta-task/compssUsers.pl:100
+#: share/meta-task/compssUsers.pl:102
 #, c-format
 msgid "NFS Server, Samba server"
 msgstr "Serveur NFS, Serveur Samba"
 
-#: share/meta-task/compssUsers.pl:103 share/meta-task/compssUsers.pl:116
+#: share/meta-task/compssUsers.pl:105 share/meta-task/compssUsers.pl:118
 #, c-format
 msgid "Database"
 msgstr "Base de Données"
 
-#: share/meta-task/compssUsers.pl:104
+#: share/meta-task/compssUsers.pl:106
 #, c-format
 msgid "PostgreSQL and MySQL Database Server"
 msgstr "Serveurs de bases de données PostgreSQL ou MySQL"
 
-#: share/meta-task/compssUsers.pl:108
+#: share/meta-task/compssUsers.pl:110
 #, c-format
 msgid "Web/FTP"
 msgstr "Web/FTP"
 
-#: share/meta-task/compssUsers.pl:109
+#: share/meta-task/compssUsers.pl:111
 #, c-format
 msgid "Apache, Pro-ftpd"
 msgstr "Apache et Pro-ftpd"
 
-#: share/meta-task/compssUsers.pl:112
+#: share/meta-task/compssUsers.pl:114
 #, c-format
 msgid "Mail"
 msgstr "Courriel"
 
-#: share/meta-task/compssUsers.pl:113
+#: share/meta-task/compssUsers.pl:115
 #, c-format
 msgid "Postfix mail server"
 msgstr "Serveur de courrier Postfix"
 
-#: share/meta-task/compssUsers.pl:117
+#: share/meta-task/compssUsers.pl:119
 #, c-format
 msgid "PostgreSQL or MySQL database server"
 msgstr "Serveurs de bases de données PostgreSQL ou MySQL"
 
-#: share/meta-task/compssUsers.pl:124
+#: share/meta-task/compssUsers.pl:126
 #, c-format
 msgid "Network Computer server"
 msgstr "Serveur réseau"
 
-#: share/meta-task/compssUsers.pl:125
+#: share/meta-task/compssUsers.pl:127
 #, c-format
 msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "Serveur NFS, serveur SMB, serveur Proxy (mandataire), serveur SSH"
 
-#: share/meta-task/compssUsers.pl:131
+#: share/meta-task/compssUsers.pl:133
 #, c-format
 msgid "Graphical Environment"
 msgstr "Environnement graphique"
 
-#: share/meta-task/compssUsers.pl:133
+#: share/meta-task/compssUsers.pl:135
 #, c-format
 msgid "KDE Workstation"
 msgstr "Station de travail KDE"
 
-#: share/meta-task/compssUsers.pl:134
+#: share/meta-task/compssUsers.pl:136
 #, c-format
 msgid ""
 "The K Desktop Environment, the basic graphical environment with a collection "
@@ -674,12 +731,12 @@ msgstr ""
 "L'environnement graphique KDE (K Desktop Environment) avec sa collection "
 "d'outils"
 
-#: share/meta-task/compssUsers.pl:138
+#: share/meta-task/compssUsers.pl:140
 #, c-format
 msgid "GNOME Workstation"
 msgstr "Station de travail GNOME"
 
-#: share/meta-task/compssUsers.pl:139
+#: share/meta-task/compssUsers.pl:141
 #, c-format
 msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
@@ -688,57 +745,57 @@ msgstr ""
 "Un environnement de bureau avec un ensemble de programmes et d'outils "
 "intuitifs"
 
-#: share/meta-task/compssUsers.pl:142
+#: share/meta-task/compssUsers.pl:145
 #, c-format
 msgid "IceWm Desktop"
 msgstr "Bureau IceWm"
 
-#: share/meta-task/compssUsers.pl:146
+#: share/meta-task/compssUsers.pl:149
 #, c-format
 msgid "Other Graphical Desktops"
 msgstr "Autres Environnements de Bureau"
 
-#: share/meta-task/compssUsers.pl:147
+#: share/meta-task/compssUsers.pl:150
 #, c-format
 msgid "Window Maker, Enlightenment, Fvwm, etc"
 msgstr "Window Maker, Enlightenment, Fvwm, etc"
 
-#: share/meta-task/compssUsers.pl:170
+#: share/meta-task/compssUsers.pl:173
 #, c-format
 msgid "Utilities"
 msgstr "Utilitaires"
 
-#: share/meta-task/compssUsers.pl:172 share/meta-task/compssUsers.pl:173
+#: share/meta-task/compssUsers.pl:175 share/meta-task/compssUsers.pl:176
 #, c-format
 msgid "SSH Server"
 msgstr "Serveur SSH"
 
-#: share/meta-task/compssUsers.pl:177
+#: share/meta-task/compssUsers.pl:180
 #, c-format
 msgid "Webmin"
 msgstr "Webmin"
 
-#: share/meta-task/compssUsers.pl:178
+#: share/meta-task/compssUsers.pl:181
 #, c-format
 msgid "Webmin Remote Configuration Server"
 msgstr "Serveur de configuration distante webmin"
 
-#: share/meta-task/compssUsers.pl:182
+#: share/meta-task/compssUsers.pl:185
 #, c-format
 msgid "Network Utilities/Monitoring"
 msgstr "Utilitaires réseau/Surveillance du réseau"
 
-#: share/meta-task/compssUsers.pl:183
+#: share/meta-task/compssUsers.pl:186
 #, c-format
 msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
 msgstr "Outils de surveillance, gestion de processus, tcpdump, nmap, ..."
 
-#: share/meta-task/compssUsers.pl:187
+#: share/meta-task/compssUsers.pl:190
 #, c-format
 msgid "Mandriva Wizards"
 msgstr "Assistants Mandriva"
 
-#: share/meta-task/compssUsers.pl:188
+#: share/meta-task/compssUsers.pl:191
 #, c-format
 msgid "Wizards to configure server"
 msgstr "Assistants pour configurer le serveur"
@@ -752,7 +809,7 @@ msgstr ""
 "Une erreur est survenue et semble difficile à résoudre correctement.\n"
 "Vous pouvez continuer, mais à vos risques et périls."
 
-#: steps.pm:437
+#: steps.pm:442
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -781,12 +838,12 @@ msgstr "Installation de Mandriva Linux %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> entre éléments"
 
-#: steps_gtk.pm:84
+#: steps_gtk.pm:89
 #, c-format
 msgid "Xorg server is slow to start. Please wait..."
 msgstr "Le serveur Xorg est lent à démarrer. Veuillez patienter..."
 
-#: steps_gtk.pm:194
+#: steps_gtk.pm:203
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -800,17 +857,17 @@ msgstr ""
 "touche\n"
 "« F1 » après l'amorçage sur CD-ROM puis entrez « text »."
 
-#: steps_gtk.pm:228
+#: steps_gtk.pm:236
 #, c-format
 msgid "Install Mandriva KDE Desktop"
 msgstr "Installer le bureau KDE de Mandriva"
 
-#: steps_gtk.pm:229
+#: steps_gtk.pm:237
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
 msgstr "Installer le bureau GNOME de Mandriva"
 
-#: steps_gtk.pm:230
+#: steps_gtk.pm:238
 #, c-format
 msgid "Custom install"
 msgstr "Installation personnalisée"
@@ -835,192 +892,192 @@ msgstr "Bureau personnalisé"
 msgid "Here's a preview of the '%s' desktop."
 msgstr "Voici un aperçu du bureau « %s »."
 
-#: steps_gtk.pm:275
+#: steps_gtk.pm:295
 #, c-format
 msgid "Click on images in order to see a bigger preview"
 msgstr "Veuillez cliquer sur l'image afin d'agrandir l'aperçu"
 
-#: steps_gtk.pm:287 steps_interactive.pm:618 steps_list.pm:30
+#: steps_gtk.pm:313 steps_interactive.pm:626 steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "Sélection des groupes de paquetages"
 
-#: steps_gtk.pm:308 steps_interactive.pm:635
+#: steps_gtk.pm:334 steps_interactive.pm:643
 #, c-format
 msgid "Individual package selection"
 msgstr "Sélection individuelle des paquetages"
 
-#: steps_gtk.pm:330 steps_interactive.pm:561
+#: steps_gtk.pm:358 steps_interactive.pm:567
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Taille totale : %d / %d Mo"
 
-#: steps_gtk.pm:375
+#: steps_gtk.pm:401
 #, c-format
 msgid "Bad package"
 msgstr "Mauvais paquetage"
 
-#: steps_gtk.pm:377
+#: steps_gtk.pm:403
 #, c-format
 msgid "Version: "
 msgstr "Version : "
 
-#: steps_gtk.pm:378
+#: steps_gtk.pm:404
 #, c-format
 msgid "Size: "
 msgstr "Taille : "
 
-#: steps_gtk.pm:378
+#: steps_gtk.pm:404
 #, c-format
 msgid "%d KB\n"
 msgstr "%d Ko\n"
 
-#: steps_gtk.pm:379
+#: steps_gtk.pm:405
 #, c-format
 msgid "Importance: "
 msgstr "Importance : "
 
-#: steps_gtk.pm:413
+#: steps_gtk.pm:439
 #, c-format
 msgid "You can not select/unselect this package"
 msgstr "Vous ne pouvez pas sélectionner/désélectionner ce paquetage"
 
-#: steps_gtk.pm:417
+#: steps_gtk.pm:443
 #, c-format
 msgid "due to missing %s"
 msgstr "parce que %s manque"
 
-#: steps_gtk.pm:418
+#: steps_gtk.pm:444
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "car %s n'est pas résolu"
 
-#: steps_gtk.pm:419
+#: steps_gtk.pm:445
 #, c-format
 msgid "trying to promote %s"
 msgstr "Tentative de promouvoir %s"
 
-#: steps_gtk.pm:420
+#: steps_gtk.pm:446
 #, c-format
 msgid "in order to keep %s"
 msgstr "afin de conserver %s"
 
-#: steps_gtk.pm:425
+#: steps_gtk.pm:451
 #, c-format
 msgid ""
 "You can not select this package as there is not enough space left to install "
 "it"
 msgstr "Il n'y a pas assez de place pour installer ce paquetage"
 
-#: steps_gtk.pm:428
+#: steps_gtk.pm:454
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "Les paquetages suivants vont être installés"
 
-#: steps_gtk.pm:429
+#: steps_gtk.pm:455
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "Les paquetages suivants vont être désinstallés"
 
-#: steps_gtk.pm:454
+#: steps_gtk.pm:480
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
 msgstr "Ce paquetage est nécessaire, vous ne pouvez pas le désélectionner"
 
-#: steps_gtk.pm:456
+#: steps_gtk.pm:482
 #, c-format
 msgid "You can not unselect this package. It is already installed"
 msgstr "Vous ne pouvez pas désélectionner ce paquetage. Il est déjà installé"
 
-#: steps_gtk.pm:458
+#: steps_gtk.pm:484
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
 msgstr ""
 "Vous ne pouvez pas désélectionner ce paquetage, il doit être mis à jour."
 
-#: steps_gtk.pm:462
+#: steps_gtk.pm:488
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "Montrer les paquetages sélectionnés automatiquement"
 
-#: steps_gtk.pm:464
+#: steps_gtk.pm:494
 #, c-format
 msgid "Install"
 msgstr "Installation"
 
-#: steps_gtk.pm:467
+#: steps_gtk.pm:497
 #, c-format
 msgid "Load/Save selection"
 msgstr "Charger/Sauvegarder la sélection"
 
-#: steps_gtk.pm:468
+#: steps_gtk.pm:498
 #, c-format
 msgid "Updating package selection"
 msgstr "Mise à jour de la sélection des paquetages"
 
-#: steps_gtk.pm:473
+#: steps_gtk.pm:503
 #, c-format
 msgid "Minimal install"
 msgstr "Installation minimale"
 
-#: steps_gtk.pm:487
+#: steps_gtk.pm:516
 #, c-format
 msgid "Software Management"
 msgstr "Gestion des paquetages"
 
-#: steps_gtk.pm:487 steps_interactive.pm:447
+#: steps_gtk.pm:516 steps_interactive.pm:452
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Choisissez les paquetages que vous voulez installer"
 
-#: steps_gtk.pm:504 steps_interactive.pm:649 steps_list.pm:32
+#: steps_gtk.pm:533 steps_interactive.pm:657 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "Installation"
 
-#: steps_gtk.pm:530
+#: steps_gtk.pm:562
 #, c-format
 msgid "No details"
 msgstr "Pas de détails"
 
-#: steps_gtk.pm:559
+#: steps_gtk.pm:577
 #, c-format
 msgid "Time remaining:"
 msgstr "Temps restant :"
 
-#: steps_gtk.pm:560
+#: steps_gtk.pm:578
 #, c-format
 msgid "(estimating...)"
 msgstr "(estimation en cours...)"
 
-#: steps_gtk.pm:573
+#: steps_gtk.pm:604
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d paquetage"
 msgstr[1] "%d paquetages"
 
-#: steps_gtk.pm:619 steps_interactive.pm:837 steps_list.pm:43
+#: steps_gtk.pm:650 steps_interactive.pm:820 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Résumé"
 
-#: steps_gtk.pm:636
+#: steps_gtk.pm:669
 #, c-format
 msgid "Configure"
 msgstr "Configurer"
 
-#: steps_gtk.pm:653 steps_interactive.pm:833 steps_interactive.pm:984
+#: steps_gtk.pm:686 steps_interactive.pm:816 steps_interactive.pm:967
 #, c-format
 msgid "not configured"
 msgstr "non configuré"
 
-#: steps_gtk.pm:694
+#: steps_gtk.pm:720
 #, c-format
 msgid "Media Selection"
 msgstr "Sélection des média"
 
-#: steps_gtk.pm:704 steps_interactive.pm:335
+#: steps_gtk.pm:729 steps_interactive.pm:334
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -1030,7 +1087,7 @@ msgstr ""
 "Si vous ne désirez pas utiliser certains d'entre eux, vous pouvez les "
 "désélectionner maintenant."
 
-#: steps_gtk.pm:700 steps_interactive.pm:337
+#: steps_gtk.pm:745 steps_interactive.pm:340
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -1043,101 +1100,79 @@ msgstr ""
 "Celle-ci s'effectuera alors à partir du disque dur et les paquetages "
 "resteront disponibles une fois le système installé."
 
-#: steps_gtk.pm:702 steps_interactive.pm:339
+#: steps_gtk.pm:747 steps_interactive.pm:342
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Copier entièrement les CDs"
 
-#: steps_interactive.pm:38
+#: steps_interactive.pm:39
 #, c-format
 msgid "An error occurred"
 msgstr "Une erreur est survenue"
 
-#: steps_interactive.pm:102
+#: steps_interactive.pm:104
 #, c-format
 msgid "Please choose your keyboard layout"
 msgstr "Veuillez choisir votre type de clavier"
 
-#: steps_interactive.pm:105
+#: steps_interactive.pm:108
 #, c-format
 msgid "Here is the full list of available keyboards:"
 msgstr "Voici la liste complète des claviers disponibles :"
 
-#: steps_interactive.pm:136
+#: steps_interactive.pm:139
 #, c-format
 msgid "Install/Upgrade"
 msgstr "Installation/Mise à jour"
 
-#: steps_interactive.pm:134
+#: steps_interactive.pm:143
 #, c-format
 msgid "Is this an install or an upgrade?"
 msgstr "Désirez-vous faire une installation ou une mise à jour ?"
 
-#: steps_interactive.pm:138
+#: steps_interactive.pm:145
 #, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
 msgstr "Installation"
 
-#: steps_interactive.pm:144
+#: steps_interactive.pm:147
 #, c-format
 msgid "Upgrade %s"
 msgstr "Mettre à jour %s"
 
-#: steps_interactive.pm:148
+#: steps_interactive.pm:151
 #, c-format
 msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 msgstr "La mise à jour d'une distribution 32bit vers 64bit n'est pas supportée"
 
-#: steps_interactive.pm:152
+#: steps_interactive.pm:155
 #, c-format
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 msgstr "La mise à jour d'une distribution 64bit vers 32bit n'est pas supportée"
 
-#: steps_interactive.pm:162
-#, c-format
-msgid ""
-"You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
-"on your system. This installer cannot preserve KDE 3.5 in an upgrade. If you "
-"choose to proceed, \n"
-"KDE 4 will replace KDE 3, and you will lose your personal KDE configuration "
-"settings. \n"
-"To upgrade with KDE 3.5 and your personal settings preserved, \n"
-"please reboot your system and upgrade using the Mandriva update applet."
-msgstr ""
-"Vous avez choisi de mettre à jour votre système vers %s. KDE 3.5 a été \n"
-"détecté sur votre système. L'installation en mode mise à jour du système ne "
-"permet pas de \n"
-"conserver KDE 3.5. Si vous décidez de poursuivre, KDE 4 remplacera KDE 3 et "
-"vous perdrez\n"
-"les paramètres de votre configuration personnelle. \n"
-"Pour mettre à jour en conservant votre configuration personnelle, veuillez "
-"relancer votre \n"
-"système et effectuez cette opération via l'appliquette de mise à jour "
-"Mandriva."
-
-#: steps_interactive.pm:180
+#: steps_interactive.pm:174
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Clé de chiffrement pour %s"
 
-#: steps_interactive.pm:199
+#: steps_interactive.pm:207
 #, c-format
 msgid "Cancel installation, reboot system"
 msgstr "Annuler l'installation, relancer le système"
 
-#: steps_interactive.pm:200
+#: steps_interactive.pm:208
 #, c-format
 msgid "New Installation"
 msgstr "Nouvelle installation"
 
-#: steps_interactive.pm:201
+#: steps_interactive.pm:209
 #, c-format
 msgid "Upgrade previous installation (not recommended)"
 msgstr "Mettre à jour la précédente installation (non recommandé)"
 
-#: steps_interactive.pm:205
+#: steps_interactive.pm:213
 #, c-format
 msgid ""
 "Installer has detected that your installed Mandriva Linux system could not\n"
@@ -1156,17 +1191,17 @@ msgstr ""
 "Attention, vous devriez sauvegarder vos informations personnelles\n"
 "avant de choisir « Nouvelle installation »."
 
-#: steps_interactive.pm:247
+#: steps_interactive.pm:255
 #, c-format
 msgid "IDE"
 msgstr "IDE"
 
-#: steps_interactive.pm:247
+#: steps_interactive.pm:255
 #, c-format
 msgid "Configuring IDE"
 msgstr "Configuration IDE"
 
-#: steps_interactive.pm:284
+#: steps_interactive.pm:292
 #, c-format
 msgid ""
 "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1178,7 +1213,7 @@ msgstr ""
 "de\n"
 "créer la partition d'amorçage avec DiskDrake."
 
-#: steps_interactive.pm:289
+#: steps_interactive.pm:297
 #, c-format
 msgid ""
 "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
@@ -1191,7 +1226,7 @@ msgstr ""
 "de\n"
 "créer la partition d'amorçage avec DiskDrake."
 
-#: steps_interactive.pm:381
+#: steps_interactive.pm:378
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -1205,12 +1240,12 @@ msgstr ""
 "Si vous ne le possédez pas, cliquez sur « Annuler » afin de ne rien installer "
 "à partir de ce CD-ROM."
 
-#: steps_interactive.pm:403
+#: steps_interactive.pm:408
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Recherche des paquetages disponibles..."
 
-#: steps_interactive.pm:411
+#: steps_interactive.pm:416
 #, c-format
 msgid ""
 "Your system does not have enough space left for installation or upgrade (%"
@@ -1219,7 +1254,7 @@ msgstr ""
 "Votre système n'a pas assez d'espace libre pour installer ou de mettre à "
 "jour (%dMo > %dMo)"
 
-#: steps_interactive.pm:459
+#: steps_interactive.pm:464
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1229,52 +1264,52 @@ msgstr ""
 "sélection des paquetages. Le format est le même que celui de l'installation "
 "automatisée (auto_install)."
 
-#: steps_interactive.pm:461
+#: steps_interactive.pm:466
 #, c-format
 msgid "Load"
 msgstr "Charger"
 
-#: steps_interactive.pm:461
+#: steps_interactive.pm:466
 #, c-format
 msgid "Save"
 msgstr "Sauvegarder"
 
-#: steps_interactive.pm:469
+#: steps_interactive.pm:474
 #, c-format
 msgid "Bad file"
 msgstr "Mauvais fichier"
 
-#: steps_interactive.pm:485
+#: steps_interactive.pm:490
 #, c-format
 msgid "KDE"
 msgstr "KDE"
 
-#: steps_interactive.pm:486
+#: steps_interactive.pm:491
 #, c-format
 msgid "GNOME"
 msgstr "GNOME"
 
-#: steps_interactive.pm:489
+#: steps_interactive.pm:494
 #, c-format
 msgid "Desktop Selection"
 msgstr "Sélection du bureau"
 
-#: steps_interactive.pm:490
+#: steps_interactive.pm:495
 #, c-format
 msgid "You can choose your workstation desktop profile."
 msgstr "Vous pouvez choisir un profil de bureau de station de travail ."
 
-#: steps_interactive.pm:575
+#: steps_interactive.pm:581
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "La taille sélectionnée est plus importante que la place disponible"
 
-#: steps_interactive.pm:590
+#: steps_interactive.pm:596
 #, c-format
 msgid "Type of install"
 msgstr "Type d'installation"
 
-#: steps_interactive.pm:591
+#: steps_interactive.pm:597
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1283,83 +1318,83 @@ msgstr ""
 "Vous n'avez sélectionné aucun groupe de paquetages.\n"
 "Veuillez choisir l'installation minimale désirée :"
 
-#: steps_interactive.pm:594
+#: steps_interactive.pm:602
 #, c-format
 msgid "With X"
 msgstr "Avec X"
 
-#: steps_interactive.pm:595
+#: steps_interactive.pm:603
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "Avec la documentation de base (recommandé !)"
 
-#: steps_interactive.pm:596
+#: steps_interactive.pm:604
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Installation vraiment minimale (et en particulier pas d'urpmi)"
 
-#: steps_interactive.pm:650
+#: steps_interactive.pm:658
 #, c-format
 msgid "Preparing installation"
 msgstr "Préparation de l'installation"
 
-#: steps_interactive.pm:658
+#: steps_interactive.pm:666
 #, c-format
 msgid "Installing package %s"
 msgstr "Installation du paquetage %s"
 
-#: steps_interactive.pm:682
+#: steps_interactive.pm:690
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Erreur lors du tri des paquetages :"
 
-#: steps_interactive.pm:682
+#: steps_interactive.pm:690
 #, c-format
 msgid "Go on anyway?"
 msgstr "Souhaitez-vous tout de même continuer ?"
 
-#: steps_interactive.pm:686
+#: steps_interactive.pm:694
 #, c-format
 msgid "Retry"
 msgstr "Ré-essayer"
 
-#: steps_interactive.pm:687
+#: steps_interactive.pm:695
 #, c-format
 msgid "Skip this package"
 msgstr "Ignorer ce paquetage"
 
-#: steps_interactive.pm:688
+#: steps_interactive.pm:696
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "Ignorer tous les paquetages du média « %s »"
 
-#: steps_interactive.pm:689
+#: steps_interactive.pm:697
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "Retourner à la sélection du média et des paquetages"
 
-#: steps_interactive.pm:692
+#: steps_interactive.pm:700
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "Erreur lors de l'installation du paquetage %s."
 
-#: steps_interactive.pm:710
+#: steps_interactive.pm:719
 #, c-format
 msgid "Post-install configuration"
 msgstr "Configuration post-installation"
 
-#: steps_interactive.pm:717
+#: steps_interactive.pm:726
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr ""
 "Assurez vous que le média de mise à jour des modules est dans le lecteur %s"
 
-#: steps_interactive.pm:745 steps_list.pm:47
+#: steps_interactive.pm:754 steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "Mises à jour"
 
-#: steps_interactive.pm:746
+#: steps_interactive.pm:755
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1380,28 +1415,28 @@ msgstr ""
 "\n"
 "Souhaitez-vous installer les mises à jour ?"
 
-#: steps_interactive.pm:849
+#: steps_interactive.pm:862
 #, c-format
 msgid "%s on %s"
 msgstr "%s sur %s"
 
-#: steps_interactive.pm:912 steps_interactive.pm:919 steps_interactive.pm:932
-#: steps_interactive.pm:949 steps_interactive.pm:964
+#: steps_interactive.pm:895 steps_interactive.pm:902 steps_interactive.pm:915
+#: steps_interactive.pm:932 steps_interactive.pm:947
 #, c-format
 msgid "Hardware"
 msgstr "Matériel"
 
-#: steps_interactive.pm:933 steps_interactive.pm:950
+#: steps_interactive.pm:916 steps_interactive.pm:933
 #, c-format
 msgid "Sound card"
 msgstr "Carte son"
 
-#: steps_interactive.pm:953
+#: steps_interactive.pm:936
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Possédez-vous une carte son ISA ?"
 
-#: steps_interactive.pm:955
+#: steps_interactive.pm:938
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -1410,65 +1445,70 @@ msgstr ""
 "Lancez « alsaconf » ou « sndconfig » après l'installation pour configurer la "
 "carte son"
 
-#: steps_interactive.pm:957
+#: steps_interactive.pm:940
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr ""
 "Aucune carte son détectée. Essayez avec « harddrake » après l'installation"
 
-#: steps_interactive.pm:965
+#: steps_interactive.pm:948
 #, c-format
 msgid "Graphical interface"
 msgstr "Interface graphique"
 
-#: steps_interactive.pm:971 steps_interactive.pm:982
+#: steps_interactive.pm:954 steps_interactive.pm:965
 #, c-format
 msgid "Network & Internet"
 msgstr "Réseau et Internet"
 
-#: steps_interactive.pm:983
+#: steps_interactive.pm:966
 #, c-format
 msgid "Proxies"
 msgstr "Proxys"
 
-#: steps_interactive.pm:984
+#: steps_interactive.pm:967
 #, c-format
 msgid "configured"
 msgstr "configuré"
 
-#: steps_interactive.pm:994
+#: steps_interactive.pm:977
 #, c-format
 msgid "Security Level"
 msgstr "Niveau de sécurité"
 
-#: steps_interactive.pm:1013
+#: steps_interactive.pm:996
 #, c-format
 msgid "Firewall"
 msgstr "Pare Feu"
 
-#: steps_interactive.pm:1017
+#: steps_interactive.pm:1000
 #, c-format
 msgid "activated"
 msgstr "activé"
 
-#: steps_interactive.pm:1017
+#: steps_interactive.pm:1000
 #, c-format
 msgid "disabled"
 msgstr "désactivé"
 
-#: steps_interactive.pm:1031
+#: steps_interactive.pm:1014
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr ""
 "Vous n'avez pas configuré le serveur d'affichage (X11). Êtes-vous sûr de ce "
 "que vous faites ?"
 
-#: steps_interactive.pm:1058
+#: steps_interactive.pm:1042
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Préparation du programme d'amorçage..."
 
-#: steps_interactive.pm:1068
+#: steps_interactive.pm:1043
+#, c-format
+msgid "Be patient, this may take a while..."
+msgstr ""
+
+#: steps_interactive.pm:1054
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1483,7 +1523,7 @@ msgstr ""
 "d'une autre méthode pour démarrer votre machine. Le paramètre pour la racine "
 "du noyau est : root=%s"
 
-#: steps_interactive.pm:1087
+#: steps_interactive.pm:1068
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1492,17 +1532,17 @@ msgstr ""
 "A ce niveau de sécurité, l'accès aux fichiers de la partition Windows sera "
 "restreint à l'administrateur."
 
-#: steps_interactive.pm:1121
+#: steps_interactive.pm:1100
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Insérez une disquette vierge dans le lecteur %s"
 
-#: steps_interactive.pm:1123
+#: steps_interactive.pm:1102
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Création de la disquette d'auto-installation..."
 
-#: steps_interactive.pm:1134
+#: steps_interactive.pm:1113
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1513,15 +1553,10 @@ msgstr ""
 "\n"
 "Souhaitez-vous vraiment quitter maintenant ?"
 
-#: steps_interactive.pm:1144
+#: steps_interactive.pm:1123
 #, c-format
 msgid "Congratulations"
 msgstr "Félicitations"
-
-#: steps_interactive.pm:1147
-#, c-format
-msgid "Reboot"
-msgstr "Redémarrage"
 
 #. -PO: please keep the following messages very short: they must fit in the left list of the installer!!!
 #: steps_list.pm:16
@@ -1661,28 +1696,3 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "Quitter"
-
-#: ../../advertising/IM_flash.pl:1
-#, c-format
-msgid "Your desktop on a USB key"
-msgstr "Votre bureau sur une clé USB"
-
-#: ../../advertising/IM_free09.pl:1
-#, c-format
-msgid "The 100%% open source Mandriva Linux distribution"
-msgstr "La distribution Mandriva Linux 100%% libre"
-
-#: ../../advertising/IM_one09.pl:1
-#, c-format
-msgid "Explore Linux easily with Mandriva One"
-msgstr "Découvrez Linux facilement grâce à Mandriva One"
-
-#: ../../advertising/IM_pwp09.pl:1
-#, c-format
-msgid "A full Mandriva Linux desktop, with support"
-msgstr "Un bureau Mandriva Linux complet, avec support"
-
-#: ../../advertising/IM_range09.pl:1
-#, c-format
-msgid "Mandriva: distributions for everybody's needs"
-msgstr "Mandriva : les distributions couvrant les besoins de chacun"

@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-30 20:13+0200\n"
+"POT-Creation-Date: 2009-01-01 19:22+0100\n"
 "PO-Revision-Date: 2007-12-16 05:38+0100\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: dansk <dansk@dansk-gruppen.dk>\n"
@@ -29,6 +29,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10.2\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+
+#: ../../advertising/IM_flash.pl:1
+#, c-format
+msgid "Your desktop on a USB key"
+msgstr ""
+
+#: ../../advertising/IM_free09.pl:1
+#, c-format
+msgid "The 100%% open source Mandriva Linux distribution"
+msgstr ""
+
+#: ../../advertising/IM_one09.pl:1
+#, c-format
+msgid "Explore Linux easily with Mandriva One"
+msgstr ""
+
+#: ../../advertising/IM_pwp09.pl:1
+#, c-format
+msgid "A full Mandriva Linux desktop, with support"
+msgstr ""
+
+#: ../../advertising/IM_range09.pl:1
+#, c-format
+msgid "Mandriva: distributions for everybody's needs"
+msgstr ""
 
 #: any.pm:109
 #, c-format
@@ -160,8 +185,30 @@ msgstr "Fjerner pakker før oppgradering..."
 msgid "Finding packages to upgrade..."
 msgstr "Finner pakker som skal oppgraderes..."
 
+#: any.pm:389
+#, c-format
+msgid ""
+"You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
+"on your system. This installer cannot preserve KDE 3.5 in an upgrade. If you "
+"choose to proceed, \n"
+"KDE 4 will replace KDE 3, and you will lose your personal KDE configuration "
+"settings. \n"
+"To upgrade with KDE 3.5 and your personal settings preserved, \n"
+"please reboot your system and upgrade using the Mandriva update applet."
+msgstr ""
+
+#: any.pm:394 steps_interactive.pm:1126
+#, c-format
+msgid "Reboot"
+msgstr "Restart"
+
+#: any.pm:394
+#, c-format
+msgid "Proceed"
+msgstr ""
+
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:564
+#: any.pm:584
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -185,7 +232,7 @@ msgstr ""
 "Ønsker du virkelig å installere disse tjenerene?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:587
+#: any.pm:607
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -199,82 +246,82 @@ msgstr ""
 " \n"
 "Ønsker du å fjerne disse pakkene?\n"
 
-#: any.pm:801
+#: any.pm:826
 #, c-format
 msgid "Error reading file %s"
 msgstr "Feil ved lesing av fil %s"
 
-#: any.pm:1008
+#: any.pm:1033
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "De(n) følgende disken(e) fikk nytt navn:"
 
-#: any.pm:1010
+#: any.pm:1035
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (tidligere kalt %s)"
 
-#: any.pm:1067
+#: any.pm:1092
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1067
+#: any.pm:1092
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1067
+#: any.pm:1092
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1086 steps_interactive.pm:972
+#: any.pm:1111 steps_interactive.pm:955
 #, c-format
 msgid "Network"
 msgstr "Nettverk"
 
-#: any.pm:1090
+#: any.pm:1115
 #, c-format
 msgid "Please choose a media"
 msgstr "Velg et medie"
 
-#: any.pm:1106
+#: any.pm:1131
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Filen eksisterer allerede. Overskriv?"
 
-#: any.pm:1110
+#: any.pm:1135
 #, c-format
 msgid "Permission denied"
 msgstr "Adgang nektet"
 
-#: any.pm:1158
+#: any.pm:1183
 #, c-format
 msgid "Bad NFS name"
 msgstr "Ugyldig NFS-navn"
 
-#: any.pm:1179
+#: any.pm:1204
 #, c-format
 msgid "Bad media %s"
 msgstr "Feil i medie %s"
 
-#: any.pm:1222
+#: any.pm:1247
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Jeg kan ikke ta skjembilder før partisjonering."
 
-#: any.pm:1230
+#: any.pm:1255
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Skjermbilder vil være tilgjengelig etter installasjon i %s"
 
-#: gtk.pm:126
+#: gtk.pm:130
 #, c-format
 msgid "Installation"
 msgstr "Installasjon"
 
-#: gtk.pm:130 share/meta-task/compssUsers.pl:42
+#: gtk.pm:134 share/meta-task/compssUsers.pl:44
 #, c-format
 msgid "Configuration"
 msgstr "Oppsett"
@@ -308,17 +355,17 @@ msgstr "Tar ned nettverket"
 msgid "Please wait, retrieving file"
 msgstr ""
 
-#: media.pm:703 media.pm:714
+#: media.pm:705 media.pm:716
 #, c-format
 msgid "Downloading file %s..."
 msgstr "Laster ned fil %s..."
 
-#: media.pm:806
+#: media.pm:808
 #, c-format
 msgid "Copying some packages on disks for future use"
 msgstr "Kopiér noen pakker på disken for framtidig bruk"
 
-#: media.pm:859
+#: media.pm:861
 #, c-format
 msgid "Copying in progress"
 msgstr "Kopiering pågår"
@@ -357,17 +404,17 @@ msgstr ""
 "Noen pakker krevet av %s kan ikke installeres\n"
 "%s"
 
-#: share/meta-task/compssUsers.pl:11
+#: share/meta-task/compssUsers.pl:13
 #, c-format
 msgid "Workstation"
 msgstr "Arbeidsstasjon"
 
-#: share/meta-task/compssUsers.pl:13
+#: share/meta-task/compssUsers.pl:15
 #, c-format
 msgid "Office Workstation"
 msgstr "Kontorarbeidsstasjon"
 
-#: share/meta-task/compssUsers.pl:15
+#: share/meta-task/compssUsers.pl:17
 #, c-format
 msgid ""
 "Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets "
@@ -376,7 +423,7 @@ msgstr ""
 "Kontorstøtteprogrammer: tekstbehandlere (OpenOffice.org Writer, Kword), "
 "regneark (OpenOffice.org Calc, Kspread), PDF-framvisere, etc"
 
-#: share/meta-task/compssUsers.pl:16
+#: share/meta-task/compssUsers.pl:18
 #, c-format
 msgid ""
 "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -385,32 +432,32 @@ msgstr ""
 "Kontorstøtteprogrammer: tekstbehandlere (kword, abiword), regneark (kspread, "
 "gnumeric), pdf-framvisere etc"
 
-#: share/meta-task/compssUsers.pl:21
+#: share/meta-task/compssUsers.pl:23
 #, c-format
 msgid "Game station"
 msgstr "Spillstasjon"
 
-#: share/meta-task/compssUsers.pl:22
+#: share/meta-task/compssUsers.pl:24
 #, c-format
 msgid "Amusement programs: arcade, boards, strategy, etc"
 msgstr "Underholdningsprogrammer: arkade, brettspill, strategi, etc"
 
-#: share/meta-task/compssUsers.pl:25
+#: share/meta-task/compssUsers.pl:27
 #, c-format
 msgid "Multimedia station"
 msgstr "Multimediastasjon"
 
-#: share/meta-task/compssUsers.pl:26
+#: share/meta-task/compssUsers.pl:28
 #, c-format
 msgid "Sound and video playing/editing programs"
 msgstr "Lyd- og videoavspilling/redigeringsprogrammer"
 
-#: share/meta-task/compssUsers.pl:31
+#: share/meta-task/compssUsers.pl:33
 #, c-format
 msgid "Internet station"
 msgstr "Internettstasjon"
 
-#: share/meta-task/compssUsers.pl:32
+#: share/meta-task/compssUsers.pl:34
 #, c-format
 msgid ""
 "Set of tools to read and send mail and news (mutt, tin..) and to browse the "
@@ -419,193 +466,193 @@ msgstr ""
 "Sett med verktøy for å lese og sende e-post og njus (mutt, tin..) og til å "
 "surfe på nettet"
 
-#: share/meta-task/compssUsers.pl:37
+#: share/meta-task/compssUsers.pl:39
 #, c-format
 msgid "Network Computer (client)"
 msgstr "Nettverksmaskin (klient)"
 
-#: share/meta-task/compssUsers.pl:38
+#: share/meta-task/compssUsers.pl:40
 #, c-format
 msgid "Clients for different protocols including ssh"
 msgstr "Klienter for forskjellige protokoller inkludert ssh"
 
-#: share/meta-task/compssUsers.pl:43
+#: share/meta-task/compssUsers.pl:45
 #, c-format
 msgid "Tools to ease the configuration of your computer"
 msgstr "Verktøy for å forenkle oppsettet av maskinen din"
 
-#: share/meta-task/compssUsers.pl:47
+#: share/meta-task/compssUsers.pl:49
 #, c-format
 msgid "Console Tools"
 msgstr "Konsollverktøy"
 
-#: share/meta-task/compssUsers.pl:48
+#: share/meta-task/compssUsers.pl:50
 #, c-format
 msgid "Editors, shells, file tools, terminals"
 msgstr "Tekstprogrammer, skall, filverktøy, terminaler"
 
-#: share/meta-task/compssUsers.pl:52 share/meta-task/compssUsers.pl:153
-#: share/meta-task/compssUsers.pl:155
+#: share/meta-task/compssUsers.pl:54 share/meta-task/compssUsers.pl:156
+#: share/meta-task/compssUsers.pl:158
 #, c-format
 msgid "Development"
 msgstr "Utvikling"
 
-#: share/meta-task/compssUsers.pl:53 share/meta-task/compssUsers.pl:156
+#: share/meta-task/compssUsers.pl:55 share/meta-task/compssUsers.pl:159
 #, c-format
 msgid "C and C++ development libraries, programs and include files"
 msgstr "C- og C++-utviklingsbibliotek, -programmer og include-filer"
 
-#: share/meta-task/compssUsers.pl:56 share/meta-task/compssUsers.pl:160
+#: share/meta-task/compssUsers.pl:58 share/meta-task/compssUsers.pl:163
 #, c-format
 msgid "Documentation"
 msgstr "Dokumentasjon"
 
-#: share/meta-task/compssUsers.pl:57 share/meta-task/compssUsers.pl:161
+#: share/meta-task/compssUsers.pl:59 share/meta-task/compssUsers.pl:164
 #, c-format
 msgid "Books and Howto's on Linux and Free Software"
 msgstr "Bøker og Howto's om Linux og fri programvare"
 
-#: share/meta-task/compssUsers.pl:61 share/meta-task/compssUsers.pl:164
+#: share/meta-task/compssUsers.pl:63 share/meta-task/compssUsers.pl:167
 #, c-format
 msgid "LSB"
 msgstr "LSB"
 
-#: share/meta-task/compssUsers.pl:62 share/meta-task/compssUsers.pl:165
+#: share/meta-task/compssUsers.pl:64 share/meta-task/compssUsers.pl:168
 #, c-format
 msgid "Linux Standard Base. Third party applications support"
 msgstr "Linux Standard Base. Støtte for tredjeparts programvare"
 
-#: share/meta-task/compssUsers.pl:71
+#: share/meta-task/compssUsers.pl:73
 #, c-format
 msgid "Web Server"
 msgstr "Web-tjener"
 
-#: share/meta-task/compssUsers.pl:72
+#: share/meta-task/compssUsers.pl:74
 #, c-format
 msgid "Apache"
 msgstr "Apache"
 
-#: share/meta-task/compssUsers.pl:75
+#: share/meta-task/compssUsers.pl:77
 #, c-format
 msgid "Groupware"
 msgstr "Gruppevare"
 
-#: share/meta-task/compssUsers.pl:76
+#: share/meta-task/compssUsers.pl:78
 #, c-format
 msgid "Kolab Server"
 msgstr "Kolab-tjener"
 
-#: share/meta-task/compssUsers.pl:79 share/meta-task/compssUsers.pl:120
+#: share/meta-task/compssUsers.pl:81 share/meta-task/compssUsers.pl:122
 #, c-format
 msgid "Firewall/Router"
 msgstr "Brannmur/ruter"
 
-#: share/meta-task/compssUsers.pl:80 share/meta-task/compssUsers.pl:121
+#: share/meta-task/compssUsers.pl:82 share/meta-task/compssUsers.pl:123
 #, c-format
 msgid "Internet gateway"
 msgstr "Internett-gateway"
 
-#: share/meta-task/compssUsers.pl:83
+#: share/meta-task/compssUsers.pl:85
 #, c-format
 msgid "Mail/News"
 msgstr "E-post/Njus"
 
-#: share/meta-task/compssUsers.pl:84
+#: share/meta-task/compssUsers.pl:86
 #, c-format
 msgid "Postfix mail server, Inn news server"
 msgstr "Postfix e-posttjener, Inn njustjener"
 
-#: share/meta-task/compssUsers.pl:87
+#: share/meta-task/compssUsers.pl:89
 #, c-format
 msgid "Directory Server"
 msgstr "Katalogtjener"
 
-#: share/meta-task/compssUsers.pl:91
+#: share/meta-task/compssUsers.pl:93
 #, c-format
 msgid "FTP Server"
 msgstr "FTP-tjener"
 
-#: share/meta-task/compssUsers.pl:92
+#: share/meta-task/compssUsers.pl:94
 #, c-format
 msgid "ProFTPd"
 msgstr "ProFTPd"
 
-#: share/meta-task/compssUsers.pl:95
+#: share/meta-task/compssUsers.pl:97
 #, c-format
 msgid "DNS/NIS"
 msgstr "DNS/NIS"
 
-#: share/meta-task/compssUsers.pl:96
+#: share/meta-task/compssUsers.pl:98
 #, c-format
 msgid "Domain Name and Network Information Server"
 msgstr "Domenenavn- og nettverksinformasjons-tjener"
 
-#: share/meta-task/compssUsers.pl:99
+#: share/meta-task/compssUsers.pl:101
 #, c-format
 msgid "File and Printer Sharing Server"
 msgstr "Fil- og Skriverdelingstjener"
 
-#: share/meta-task/compssUsers.pl:100
+#: share/meta-task/compssUsers.pl:102
 #, c-format
 msgid "NFS Server, Samba server"
 msgstr "NFS-Tjener, Samba-tjener"
 
-#: share/meta-task/compssUsers.pl:103 share/meta-task/compssUsers.pl:116
+#: share/meta-task/compssUsers.pl:105 share/meta-task/compssUsers.pl:118
 #, c-format
 msgid "Database"
 msgstr "Database"
 
-#: share/meta-task/compssUsers.pl:104
+#: share/meta-task/compssUsers.pl:106
 #, c-format
 msgid "PostgreSQL and MySQL Database Server"
 msgstr "PostgreSQL- og MySQL-databasetjener"
 
-#: share/meta-task/compssUsers.pl:108
+#: share/meta-task/compssUsers.pl:110
 #, c-format
 msgid "Web/FTP"
 msgstr "Web/FTP"
 
-#: share/meta-task/compssUsers.pl:109
+#: share/meta-task/compssUsers.pl:111
 #, c-format
 msgid "Apache, Pro-ftpd"
 msgstr "Apache, Pro-ftpd"
 
-#: share/meta-task/compssUsers.pl:112
+#: share/meta-task/compssUsers.pl:114
 #, c-format
 msgid "Mail"
 msgstr "E-post"
 
-#: share/meta-task/compssUsers.pl:113
+#: share/meta-task/compssUsers.pl:115
 #, c-format
 msgid "Postfix mail server"
 msgstr "Postfix e-posttjener"
 
-#: share/meta-task/compssUsers.pl:117
+#: share/meta-task/compssUsers.pl:119
 #, c-format
 msgid "PostgreSQL or MySQL database server"
 msgstr "PostgreSQL eller MySQL-databasetjener"
 
-#: share/meta-task/compssUsers.pl:124
+#: share/meta-task/compssUsers.pl:126
 #, c-format
 msgid "Network Computer server"
 msgstr "Nettverksmaskintjener"
 
-#: share/meta-task/compssUsers.pl:125
+#: share/meta-task/compssUsers.pl:127
 #, c-format
 msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "NFS-tjener, SMB-tjener, Proxy-tjener, SSH-tjener"
 
-#: share/meta-task/compssUsers.pl:131
+#: share/meta-task/compssUsers.pl:133
 #, c-format
 msgid "Graphical Environment"
 msgstr "Grafisk miljø"
 
-#: share/meta-task/compssUsers.pl:133
+#: share/meta-task/compssUsers.pl:135
 #, c-format
 msgid "KDE Workstation"
 msgstr "KDE-arbeidsstasjon"
 
-#: share/meta-task/compssUsers.pl:134
+#: share/meta-task/compssUsers.pl:136
 #, c-format
 msgid ""
 "The K Desktop Environment, the basic graphical environment with a collection "
@@ -614,12 +661,12 @@ msgstr ""
 "K Desktop Environment, grunnleggende grafisk miljø med en samling av "
 "passende verktøy"
 
-#: share/meta-task/compssUsers.pl:138
+#: share/meta-task/compssUsers.pl:140
 #, c-format
 msgid "GNOME Workstation"
 msgstr "GNOME-arbeidsstasjon"
 
-#: share/meta-task/compssUsers.pl:139
+#: share/meta-task/compssUsers.pl:141
 #, c-format
 msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
@@ -628,57 +675,57 @@ msgstr ""
 "Et grafisk miljø med et brukervennlig sett av programmer og "
 "skrivebordsverktøy"
 
-#: share/meta-task/compssUsers.pl:142
+#: share/meta-task/compssUsers.pl:145
 #, c-format
 msgid "IceWm Desktop"
 msgstr "IceWm-skrivebord"
 
-#: share/meta-task/compssUsers.pl:146
+#: share/meta-task/compssUsers.pl:149
 #, c-format
 msgid "Other Graphical Desktops"
 msgstr "Andre grafiske skrivebord"
 
-#: share/meta-task/compssUsers.pl:147
+#: share/meta-task/compssUsers.pl:150
 #, c-format
 msgid "Window Maker, Enlightenment, Fvwm, etc"
 msgstr "Window Maker, Enlightenment, Fvwm etc"
 
-#: share/meta-task/compssUsers.pl:170
+#: share/meta-task/compssUsers.pl:173
 #, c-format
 msgid "Utilities"
 msgstr "Verktøy"
 
-#: share/meta-task/compssUsers.pl:172 share/meta-task/compssUsers.pl:173
+#: share/meta-task/compssUsers.pl:175 share/meta-task/compssUsers.pl:176
 #, c-format
 msgid "SSH Server"
 msgstr "SSH-tjener"
 
-#: share/meta-task/compssUsers.pl:177
+#: share/meta-task/compssUsers.pl:180
 #, c-format
 msgid "Webmin"
 msgstr "Webmin"
 
-#: share/meta-task/compssUsers.pl:178
+#: share/meta-task/compssUsers.pl:181
 #, c-format
 msgid "Webmin Remote Configuration Server"
 msgstr "Webmin Fjernadministrasjonstjener"
 
-#: share/meta-task/compssUsers.pl:182
+#: share/meta-task/compssUsers.pl:185
 #, c-format
 msgid "Network Utilities/Monitoring"
 msgstr "Nettverks-verktøy/overvåkning"
 
-#: share/meta-task/compssUsers.pl:183
+#: share/meta-task/compssUsers.pl:186
 #, c-format
 msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
 msgstr "Overvårkningsverktøy, prosessbokføring, tcpdump, nmap, ..."
 
-#: share/meta-task/compssUsers.pl:187
+#: share/meta-task/compssUsers.pl:190
 #, c-format
 msgid "Mandriva Wizards"
 msgstr "Mandriva-veivisere"
 
-#: share/meta-task/compssUsers.pl:188
+#: share/meta-task/compssUsers.pl:191
 #, c-format
 msgid "Wizards to configure server"
 msgstr "Veivisere til å sette opp tjener"
@@ -693,7 +740,7 @@ msgstr ""
 "måte.\n"
 "Fortsett på eget ansvar."
 
-#: steps.pm:437
+#: steps.pm:442
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -720,12 +767,12 @@ msgstr "Mandriva Linux-installasjon %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> mellom elementene"
 
-#: steps_gtk.pm:84
+#: steps_gtk.pm:89
 #, c-format
 msgid "Xorg server is slow to start. Please wait..."
 msgstr ""
 
-#: steps_gtk.pm:194
+#: steps_gtk.pm:203
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -738,17 +785,17 @@ msgstr ""
 "installasjon i tekstmodus\n"
 "i stedet. Trykk «F1» ved oppstart av CD-ROM, skriv så «text»."
 
-#: steps_gtk.pm:228
+#: steps_gtk.pm:236
 #, c-format
 msgid "Install Mandriva KDE Desktop"
 msgstr "Installer Mandriva KDE-skrivebord"
 
-#: steps_gtk.pm:229
+#: steps_gtk.pm:237
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
 msgstr "Installer Mandriva GNOME-skrivebord"
 
-#: steps_gtk.pm:230
+#: steps_gtk.pm:238
 #, c-format
 msgid "Custom install"
 msgstr "Skreddersydd installasjon"
@@ -773,77 +820,77 @@ msgstr "IceWm-skrivebord"
 msgid "Here's a preview of the '%s' desktop."
 msgstr ""
 
-#: steps_gtk.pm:275
+#: steps_gtk.pm:295
 #, c-format
 msgid "Click on images in order to see a bigger preview"
 msgstr ""
 
-#: steps_gtk.pm:287 steps_interactive.pm:618 steps_list.pm:30
+#: steps_gtk.pm:313 steps_interactive.pm:626 steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "Valg pakkegruppe"
 
-#: steps_gtk.pm:308 steps_interactive.pm:635
+#: steps_gtk.pm:334 steps_interactive.pm:643
 #, c-format
 msgid "Individual package selection"
 msgstr "Individuelt pakkevalg"
 
-#: steps_gtk.pm:330 steps_interactive.pm:561
+#: steps_gtk.pm:358 steps_interactive.pm:567
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Total størrelse: %d / %d MB"
 
-#: steps_gtk.pm:375
+#: steps_gtk.pm:401
 #, c-format
 msgid "Bad package"
 msgstr "Ugyldig pakke"
 
-#: steps_gtk.pm:377
+#: steps_gtk.pm:403
 #, c-format
 msgid "Version: "
 msgstr "Versjon: "
 
-#: steps_gtk.pm:378
+#: steps_gtk.pm:404
 #, c-format
 msgid "Size: "
 msgstr "Størrelse: "
 
-#: steps_gtk.pm:378
+#: steps_gtk.pm:404
 #, c-format
 msgid "%d KB\n"
 msgstr "%d KB\n"
 
-#: steps_gtk.pm:379
+#: steps_gtk.pm:405
 #, c-format
 msgid "Importance: "
 msgstr "Viktighet: "
 
-#: steps_gtk.pm:413
+#: steps_gtk.pm:439
 #, c-format
 msgid "You can not select/unselect this package"
 msgstr "Du kan ikke velge (bort) denne pakken"
 
-#: steps_gtk.pm:417
+#: steps_gtk.pm:443
 #, c-format
 msgid "due to missing %s"
 msgstr "pga. manglende %s"
 
-#: steps_gtk.pm:418
+#: steps_gtk.pm:444
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "pga. utilfredsstilt %s"
 
-#: steps_gtk.pm:419
+#: steps_gtk.pm:445
 #, c-format
 msgid "trying to promote %s"
 msgstr "prøver å promotere %s"
 
-#: steps_gtk.pm:420
+#: steps_gtk.pm:446
 #, c-format
 msgid "in order to keep %s"
 msgstr "for å beholde %s"
 
-#: steps_gtk.pm:425
+#: steps_gtk.pm:451
 #, c-format
 msgid ""
 "You can not select this package as there is not enough space left to install "
@@ -852,114 +899,114 @@ msgstr ""
 "Du kan ikke velge denne pakken da det ikke er igjen nok plass til å "
 "installere den"
 
-#: steps_gtk.pm:428
+#: steps_gtk.pm:454
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "Følgende pakker vil bli installert"
 
-#: steps_gtk.pm:429
+#: steps_gtk.pm:455
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "Følgende pakker vil bli fjernet"
 
-#: steps_gtk.pm:454
+#: steps_gtk.pm:480
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
 msgstr "Dette er en obligatorisk pakke, den kan ikke fjernes"
 
-#: steps_gtk.pm:456
+#: steps_gtk.pm:482
 #, c-format
 msgid "You can not unselect this package. It is already installed"
 msgstr "Du kan ikke fjerne denne pakken. Den er allerede installert"
 
-#: steps_gtk.pm:458
+#: steps_gtk.pm:484
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
 msgstr "Du kan ikke fjerne denne pakken. Den må oppgraderes"
 
-#: steps_gtk.pm:462
+#: steps_gtk.pm:488
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "Vis automatisk valgte pakker"
 
-#: steps_gtk.pm:464
+#: steps_gtk.pm:494
 #, c-format
 msgid "Install"
 msgstr "Installer"
 
-#: steps_gtk.pm:467
+#: steps_gtk.pm:497
 #, c-format
 msgid "Load/Save selection"
 msgstr "Last inn/lagre utvalg"
 
-#: steps_gtk.pm:468
+#: steps_gtk.pm:498
 #, c-format
 msgid "Updating package selection"
 msgstr "Oppdaterer pakkevalg"
 
-#: steps_gtk.pm:473
+#: steps_gtk.pm:503
 #, c-format
 msgid "Minimal install"
 msgstr "Minimal installasjon"
 
-#: steps_gtk.pm:487
+#: steps_gtk.pm:516
 #, c-format
 msgid "Software Management"
 msgstr "Programvarehåndtering"
 
-#: steps_gtk.pm:487 steps_interactive.pm:447
+#: steps_gtk.pm:516 steps_interactive.pm:452
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Velg pakkene du ønsker å installere"
 
-#: steps_gtk.pm:504 steps_interactive.pm:649 steps_list.pm:32
+#: steps_gtk.pm:533 steps_interactive.pm:657 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "Installerer"
 
-#: steps_gtk.pm:530
+#: steps_gtk.pm:562
 #, c-format
 msgid "No details"
 msgstr "Ingen detaljer"
 
-#: steps_gtk.pm:559
+#: steps_gtk.pm:577
 #, fuzzy, c-format
 msgid "Time remaining:"
 msgstr "Tid som gjenstår "
 
-#: steps_gtk.pm:560
+#: steps_gtk.pm:578
 #, fuzzy, c-format
 msgid "(estimating...)"
 msgstr "Beregner"
 
-#: steps_gtk.pm:573
+#: steps_gtk.pm:604
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d pakke"
 msgstr[1] "%d pakker"
 
-#: steps_gtk.pm:619 steps_interactive.pm:837 steps_list.pm:43
+#: steps_gtk.pm:650 steps_interactive.pm:820 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Oppsummering"
 
-#: steps_gtk.pm:636
+#: steps_gtk.pm:669
 #, c-format
 msgid "Configure"
 msgstr "Sett opp"
 
-#: steps_gtk.pm:653 steps_interactive.pm:833 steps_interactive.pm:984
+#: steps_gtk.pm:686 steps_interactive.pm:816 steps_interactive.pm:967
 #, c-format
 msgid "not configured"
 msgstr "ikke satt opp"
 
-#: steps_gtk.pm:694
+#: steps_gtk.pm:720
 #, fuzzy, c-format
 msgid "Media Selection"
 msgstr "Valg pakkegruppe"
 
-#: steps_gtk.pm:704 steps_interactive.pm:335
+#: steps_gtk.pm:729 steps_interactive.pm:334
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -968,7 +1015,7 @@ msgstr ""
 "Følgende installasjonsmedia har blitt funnet.\n"
 "Hvis du vill hoppe over noen av de kan du velge de vekk nå."
 
-#: steps_gtk.pm:700 steps_interactive.pm:337
+#: steps_gtk.pm:745 steps_interactive.pm:340
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -981,91 +1028,79 @@ msgstr ""
 "Den vil da fortsette fra harddisken og pakkene vil forbli tilgjengelige når "
 "systemet er fullstendig installert."
 
-#: steps_gtk.pm:702 steps_interactive.pm:339
+#: steps_gtk.pm:747 steps_interactive.pm:342
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Kopiér hele CDer"
 
-#: steps_interactive.pm:38
+#: steps_interactive.pm:39
 #, c-format
 msgid "An error occurred"
 msgstr "En feil oppstod"
 
-#: steps_interactive.pm:102
+#: steps_interactive.pm:104
 #, c-format
 msgid "Please choose your keyboard layout"
 msgstr "Velg ditt tastaturoppsett"
 
-#: steps_interactive.pm:105
+#: steps_interactive.pm:108
 #, fuzzy, c-format
 msgid "Here is the full list of available keyboards:"
 msgstr "Her er den komplette lista over tilgjengelige tastatur"
 
-#: steps_interactive.pm:136
+#: steps_interactive.pm:139
 #, c-format
 msgid "Install/Upgrade"
 msgstr "Installer/Oppgrader"
 
-#: steps_interactive.pm:134
+#: steps_interactive.pm:143
 #, c-format
 msgid "Is this an install or an upgrade?"
 msgstr "Er dette en installasjon eller en oppgradering?"
 
-#: steps_interactive.pm:138
+#: steps_interactive.pm:145
 #, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
 msgstr "Installér"
 
-#: steps_interactive.pm:144
+#: steps_interactive.pm:147
 #, c-format
 msgid "Upgrade %s"
 msgstr "Oppgrader %s"
 
-#: steps_interactive.pm:148
+#: steps_interactive.pm:151
 #, c-format
 msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 msgstr "Oppgradering fra en 32-bit til en 64-bit distribusjon er ikke støttet"
 
-#: steps_interactive.pm:152
+#: steps_interactive.pm:155
 #, c-format
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 msgstr "Oppgradering fra en 64-bit til en 32-bit distribusjon er ikke støttet"
 
-#: steps_interactive.pm:162
-#, c-format
-msgid ""
-"You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
-"on your system. This installer cannot preserve KDE 3.5 in an upgrade. If you "
-"choose to proceed, \n"
-"KDE 4 will replace KDE 3, and you will lose your personal KDE configuration "
-"settings. \n"
-"To upgrade with KDE 3.5 and your personal settings preserved, \n"
-"please reboot your system and upgrade using the Mandriva update applet."
-msgstr ""
-
-#: steps_interactive.pm:180
+#: steps_interactive.pm:174
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Krypteringsnøkkel for %s"
 
-#: steps_interactive.pm:199
+#: steps_interactive.pm:207
 #, c-format
 msgid "Cancel installation, reboot system"
 msgstr ""
 
-#: steps_interactive.pm:200
+#: steps_interactive.pm:208
 #, fuzzy, c-format
 msgid "New Installation"
 msgstr "Installasjon"
 
-#: steps_interactive.pm:201
+#: steps_interactive.pm:209
 #, c-format
 msgid "Upgrade previous installation (not recommended)"
 msgstr ""
 
-#: steps_interactive.pm:205
+#: steps_interactive.pm:213
 #, c-format
 msgid ""
 "Installer has detected that your installed Mandriva Linux system could not\n"
@@ -1077,17 +1112,17 @@ msgid ""
 "Installation\"."
 msgstr ""
 
-#: steps_interactive.pm:247
+#: steps_interactive.pm:255
 #, c-format
 msgid "IDE"
 msgstr "IDE"
 
-#: steps_interactive.pm:247
+#: steps_interactive.pm:255
 #, c-format
 msgid "Configuring IDE"
 msgstr "Setter opp IDE"
 
-#: steps_interactive.pm:284
+#: steps_interactive.pm:292
 #, c-format
 msgid ""
 "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1096,7 +1131,7 @@ msgstr ""
 "Det er ikke plass for 1 MB bootstrap! Installasjonen vil fortsette, men for "
 "å boote systemet ditt, må du lage en bootstrap-partisjon i DiskDrake"
 
-#: steps_interactive.pm:289
+#: steps_interactive.pm:297
 #, c-format
 msgid ""
 "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
@@ -1107,7 +1142,7 @@ msgstr ""
 "å kunne starte systemet ditt vil du måtte opprette en bootstrap-partisjon i "
 "DiskDrake"
 
-#: steps_interactive.pm:381
+#: steps_interactive.pm:378
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -1120,12 +1155,12 @@ msgstr ""
 "Sett inn CDen merket «%s» i stasjonen og trykk Ok når du er ferdig.\n"
 "Hvis du ikke har den, trykk Avbryt for å unngå installasjon fra denne CDen."
 
-#: steps_interactive.pm:403
+#: steps_interactive.pm:408
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Søker etter tilgjengelige pakker"
 
-#: steps_interactive.pm:411
+#: steps_interactive.pm:416
 #, c-format
 msgid ""
 "Your system does not have enough space left for installation or upgrade (%"
@@ -1134,7 +1169,7 @@ msgstr ""
 "Systemet har ikke nok gjenværende diskplass for installasjon eller "
 "oppgradering (%dMB > %dMB)"
 
-#: steps_interactive.pm:459
+#: steps_interactive.pm:464
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1143,54 +1178,54 @@ msgstr ""
 "Velg lagre eller hent pakkevalg.\n"
 "Formatet er det samme som for auto_install-genererte filer."
 
-#: steps_interactive.pm:461
+#: steps_interactive.pm:466
 #, c-format
 msgid "Load"
 msgstr "Last inn"
 
-#: steps_interactive.pm:461
+#: steps_interactive.pm:466
 #, c-format
 msgid "Save"
 msgstr "Lagre"
 
-#: steps_interactive.pm:469
+#: steps_interactive.pm:474
 #, c-format
 msgid "Bad file"
 msgstr "Ødelagt fil"
 
-#: steps_interactive.pm:485
+#: steps_interactive.pm:490
 #, fuzzy, c-format
 msgid "KDE"
 msgstr "IDE"
 
-#: steps_interactive.pm:486
+#: steps_interactive.pm:491
 #, c-format
 msgid "GNOME"
 msgstr ""
 
-#: steps_interactive.pm:489
+#: steps_interactive.pm:494
 #, fuzzy, c-format
 msgid "Desktop Selection"
 msgstr "Valg pakkegruppe"
 
-#: steps_interactive.pm:490
+#: steps_interactive.pm:495
 #, fuzzy, c-format
 msgid "You can choose your workstation desktop profile."
 msgstr ""
 "Her kan du velga skrivebordsprofil for systemet: KDE, GNOME eller "
 "skreddersydd"
 
-#: steps_interactive.pm:575
+#: steps_interactive.pm:581
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "Valgt størrelse er større enn tilgjengelig plass"
 
-#: steps_interactive.pm:590
+#: steps_interactive.pm:596
 #, c-format
 msgid "Type of install"
 msgstr "Type installasjon"
 
-#: steps_interactive.pm:591
+#: steps_interactive.pm:597
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1199,82 +1234,82 @@ msgstr ""
 "Du har ikke valgt noen pakkegrupper.\n"
 "Velg den minimale installasjonen du ønsker:"
 
-#: steps_interactive.pm:594
+#: steps_interactive.pm:602
 #, c-format
 msgid "With X"
 msgstr "Med X"
 
-#: steps_interactive.pm:595
+#: steps_interactive.pm:603
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "Med grunnleggende dokumentasjon (anbefalt!)"
 
-#: steps_interactive.pm:596
+#: steps_interactive.pm:604
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Virkelig minimal installasjon (uten urpmi)"
 
-#: steps_interactive.pm:650
+#: steps_interactive.pm:658
 #, c-format
 msgid "Preparing installation"
 msgstr "Forbereder installasjon"
 
-#: steps_interactive.pm:658
+#: steps_interactive.pm:666
 #, c-format
 msgid "Installing package %s"
 msgstr "Installerer pakke %s"
 
-#: steps_interactive.pm:682
+#: steps_interactive.pm:690
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Det var en feil ved endring av pakkenes rekkefølge:"
 
-#: steps_interactive.pm:682
+#: steps_interactive.pm:690
 #, c-format
 msgid "Go on anyway?"
 msgstr "Fortsett uansett?"
 
-#: steps_interactive.pm:686
+#: steps_interactive.pm:694
 #, c-format
 msgid "Retry"
 msgstr "Prøv igjen"
 
-#: steps_interactive.pm:687
+#: steps_interactive.pm:695
 #, c-format
 msgid "Skip this package"
 msgstr "Hopp over denne pakken"
 
-#: steps_interactive.pm:688
+#: steps_interactive.pm:696
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "Hopp over alle pakker fra media \"%s\""
 
-#: steps_interactive.pm:689
+#: steps_interactive.pm:697
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "Gå tilbake til valg av media og pakker"
 
-#: steps_interactive.pm:692
+#: steps_interactive.pm:700
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "Feil under installering av pakke %s"
 
-#: steps_interactive.pm:710
+#: steps_interactive.pm:719
 #, c-format
 msgid "Post-install configuration"
 msgstr "Oppsett etter installering"
 
-#: steps_interactive.pm:717
+#: steps_interactive.pm:726
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "Vennligst forsikre deg om at medie med oppdaterte moduler er i %s"
 
-#: steps_interactive.pm:745 steps_list.pm:47
+#: steps_interactive.pm:754 steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "Oppdateringer"
 
-#: steps_interactive.pm:746
+#: steps_interactive.pm:755
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1295,28 +1330,28 @@ msgstr ""
 "\n"
 "Ønsker du å installere oppdateringene?"
 
-#: steps_interactive.pm:849
+#: steps_interactive.pm:862
 #, c-format
 msgid "%s on %s"
 msgstr "%s på %s"
 
-#: steps_interactive.pm:912 steps_interactive.pm:919 steps_interactive.pm:932
-#: steps_interactive.pm:949 steps_interactive.pm:964
+#: steps_interactive.pm:895 steps_interactive.pm:902 steps_interactive.pm:915
+#: steps_interactive.pm:932 steps_interactive.pm:947
 #, c-format
 msgid "Hardware"
 msgstr "Maskinvare"
 
-#: steps_interactive.pm:933 steps_interactive.pm:950
+#: steps_interactive.pm:916 steps_interactive.pm:933
 #, c-format
 msgid "Sound card"
 msgstr "Lydkort"
 
-#: steps_interactive.pm:953
+#: steps_interactive.pm:936
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Har du et ISA-lydkort?"
 
-#: steps_interactive.pm:955
+#: steps_interactive.pm:938
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -1325,64 +1360,69 @@ msgstr ""
 "Kjør «alsaconf» eller «sndconfig» etter installasjonen for å sette opp "
 "lydkortet ditt"
 
-#: steps_interactive.pm:957
+#: steps_interactive.pm:940
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr "Lydkort ikke oppdaget. Prøv «harddrake» etter installasjonen"
 
-#: steps_interactive.pm:965
+#: steps_interactive.pm:948
 #, c-format
 msgid "Graphical interface"
 msgstr "Grafisk grensesnitt"
 
-#: steps_interactive.pm:971 steps_interactive.pm:982
+#: steps_interactive.pm:954 steps_interactive.pm:965
 #, c-format
 msgid "Network & Internet"
 msgstr "Nettverk & internett"
 
-#: steps_interactive.pm:983
+#: steps_interactive.pm:966
 #, c-format
 msgid "Proxies"
 msgstr "Proxyer"
 
-#: steps_interactive.pm:984
+#: steps_interactive.pm:967
 #, c-format
 msgid "configured"
 msgstr "satt opp"
 
-#: steps_interactive.pm:994
+#: steps_interactive.pm:977
 #, c-format
 msgid "Security Level"
 msgstr "Sikkerhetsnivå"
 
-#: steps_interactive.pm:1013
+#: steps_interactive.pm:996
 #, c-format
 msgid "Firewall"
 msgstr "Brannmur"
 
-#: steps_interactive.pm:1017
+#: steps_interactive.pm:1000
 #, c-format
 msgid "activated"
 msgstr "aktivert"
 
-#: steps_interactive.pm:1017
+#: steps_interactive.pm:1000
 #, c-format
 msgid "disabled"
 msgstr "deaktiver"
 
-#: steps_interactive.pm:1031
+#: steps_interactive.pm:1014
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr ""
 "Du har ikke satt opp det grafiske grensesnittet X. Er du sikker på at du "
 "ikke vil gjøre dette?"
 
-#: steps_interactive.pm:1058
+#: steps_interactive.pm:1042
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Klargjør oppstartslaster"
 
-#: steps_interactive.pm:1068
+#: steps_interactive.pm:1043
+#, c-format
+msgid "Be patient, this may take a while..."
+msgstr ""
+
+#: steps_interactive.pm:1054
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1395,7 +1435,7 @@ msgstr ""
 "du må bruke BootX eller andre måter for å starte din maskin. "
 "Kjerneargumentet for root-filsystemet er: root=%s"
 
-#: steps_interactive.pm:1087
+#: steps_interactive.pm:1068
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1404,17 +1444,17 @@ msgstr ""
 "I dette sikkerhetsnivået er tilgang til Windows-partisjonen forbeholdt "
 "administratoren."
 
-#: steps_interactive.pm:1121
+#: steps_interactive.pm:1100
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Sett inn en tom diskett i stasjon %s"
 
-#: steps_interactive.pm:1123
+#: steps_interactive.pm:1102
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Oppretter diskett for autoinstallasjon..."
 
-#: steps_interactive.pm:1134
+#: steps_interactive.pm:1113
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1425,15 +1465,10 @@ msgstr ""
 "\n"
 "Ønsker du virkelig å avslutte nå?"
 
-#: steps_interactive.pm:1144
+#: steps_interactive.pm:1123
 #, c-format
 msgid "Congratulations"
 msgstr "Gratulerer"
-
-#: steps_interactive.pm:1147
-#, c-format
-msgid "Reboot"
-msgstr "Restart"
 
 #. -PO: please keep the following messages very short: they must fit in the left list of the installer!!!
 #: steps_list.pm:16
@@ -1573,31 +1608,6 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "Avslutt"
-
-#: ../../advertising/IM_flash.pl:1
-#, c-format
-msgid "Your desktop on a USB key"
-msgstr ""
-
-#: ../../advertising/IM_free09.pl:1
-#, c-format
-msgid "The 100%% open source Mandriva Linux distribution"
-msgstr ""
-
-#: ../../advertising/IM_one09.pl:1
-#, c-format
-msgid "Explore Linux easily with Mandriva One"
-msgstr ""
-
-#: ../../advertising/IM_pwp09.pl:1
-#, c-format
-msgid "A full Mandriva Linux desktop, with support"
-msgstr ""
-
-#: ../../advertising/IM_range09.pl:1
-#, c-format
-msgid "Mandriva: distributions for everybody's needs"
-msgstr ""
 
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr "Kontakter speilet for å få en liste over tilgjengelige pakker..."

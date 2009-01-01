@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-ja\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-30 20:13+0200\n"
+"POT-Creation-Date: 2009-01-01 19:22+0100\n"
 "PO-Revision-Date: 2008-09-23 20:00+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <cooker-i18n@mandrivalinux.org>\n"
@@ -18,6 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../../advertising/IM_flash.pl:1
+#, c-format
+msgid "Your desktop on a USB key"
+msgstr ""
+
+#: ../../advertising/IM_free09.pl:1
+#, c-format
+msgid "The 100%% open source Mandriva Linux distribution"
+msgstr ""
+
+#: ../../advertising/IM_one09.pl:1
+#, c-format
+msgid "Explore Linux easily with Mandriva One"
+msgstr ""
+
+#: ../../advertising/IM_pwp09.pl:1
+#, c-format
+msgid "A full Mandriva Linux desktop, with support"
+msgstr ""
+
+#: ../../advertising/IM_range09.pl:1
+#, c-format
+msgid "Mandriva: distributions for everybody's needs"
+msgstr ""
 
 #: any.pm:109
 #, c-format
@@ -147,8 +172,30 @@ msgstr "アップグレードする前にパッケージを削除しています
 msgid "Finding packages to upgrade..."
 msgstr "更新するパッケージを探しています..."
 
+#: any.pm:389
+#, c-format
+msgid ""
+"You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
+"on your system. This installer cannot preserve KDE 3.5 in an upgrade. If you "
+"choose to proceed, \n"
+"KDE 4 will replace KDE 3, and you will lose your personal KDE configuration "
+"settings. \n"
+"To upgrade with KDE 3.5 and your personal settings preserved, \n"
+"please reboot your system and upgrade using the Mandriva update applet."
+msgstr ""
+
+#: any.pm:394 steps_interactive.pm:1126
+#, c-format
+msgid "Reboot"
+msgstr "再起動"
+
+#: any.pm:394
+#, c-format
+msgid "Proceed"
+msgstr ""
+
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:564
+#: any.pm:584
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -172,7 +219,7 @@ msgstr ""
 "本当にこれらのサーバをインストールしますか？\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:587
+#: any.pm:607
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -185,83 +232,83 @@ msgstr ""
 "\n"
 "これらのパッケージを削除してよろしいですか？\n"
 
-#: any.pm:801
+#: any.pm:826
 #, c-format
 msgid "Error reading file %s"
 msgstr "ファイル %s を読み込み中にエラー"
 
-#: any.pm:1008
+#: any.pm:1033
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "次のディスクの名前は変更されました:"
 
-#: any.pm:1010
+#: any.pm:1035
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (変更前の名前は %s)"
 
-#: any.pm:1067
+#: any.pm:1092
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1067
+#: any.pm:1092
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1067
+#: any.pm:1092
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1086 steps_interactive.pm:972
+#: any.pm:1111 steps_interactive.pm:955
 #, c-format
 msgid "Network"
 msgstr "ネットワーク"
 
-#: any.pm:1090
+#: any.pm:1115
 #, c-format
 msgid "Please choose a media"
 msgstr "メディアを選んでください"
 
-#: any.pm:1106
+#: any.pm:1131
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "ファイルが既に存在します。上書きしますか？"
 
-#: any.pm:1110
+#: any.pm:1135
 #, c-format
 msgid "Permission denied"
 msgstr "アクセス許可がありません"
 
-#: any.pm:1158
+#: any.pm:1183
 #, c-format
 msgid "Bad NFS name"
 msgstr "不正な NFS 名"
 
-#: any.pm:1179
+#: any.pm:1204
 #, c-format
 msgid "Bad media %s"
 msgstr "不正なメディア %s"
 
-#: any.pm:1222
+#: any.pm:1247
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "パーティション設定が終わるまでスクリーンショットは撮れません"
 
-#: any.pm:1230
+#: any.pm:1255
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr ""
 "スクリーンショットは %s にあります。インストール後に利用可能になります。"
 
-#: gtk.pm:126
+#: gtk.pm:130
 #, c-format
 msgid "Installation"
 msgstr "インストール"
 
-#: gtk.pm:130 share/meta-task/compssUsers.pl:42
+#: gtk.pm:134 share/meta-task/compssUsers.pl:44
 #, c-format
 msgid "Configuration"
 msgstr "設定"
@@ -295,17 +342,17 @@ msgstr "ネットワークを切断"
 msgid "Please wait, retrieving file"
 msgstr "ファイルを取得しています。お待ちください。"
 
-#: media.pm:703 media.pm:714
+#: media.pm:705 media.pm:716
 #, c-format
 msgid "Downloading file %s..."
 msgstr "ファイル %s をダウンロード中..."
 
-#: media.pm:806
+#: media.pm:808
 #, c-format
 msgid "Copying some packages on disks for future use"
 msgstr "後で利用するためにパッケージをディスクにコピー"
 
-#: media.pm:859
+#: media.pm:861
 #, c-format
 msgid "Copying in progress"
 msgstr "コピーしています"
@@ -344,17 +391,17 @@ msgstr ""
 "%s が要求するいくつかのパッケージをインストールできません:\n"
 "%s"
 
-#: share/meta-task/compssUsers.pl:11
+#: share/meta-task/compssUsers.pl:13
 #, c-format
 msgid "Workstation"
 msgstr "ワークステーション"
 
-#: share/meta-task/compssUsers.pl:13
+#: share/meta-task/compssUsers.pl:15
 #, c-format
 msgid "Office Workstation"
 msgstr "オフィスワークステーション"
 
-#: share/meta-task/compssUsers.pl:15
+#: share/meta-task/compssUsers.pl:17
 #, c-format
 msgid ""
 "Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets "
@@ -363,7 +410,7 @@ msgstr ""
 "オフィスソフト: ワープロ (OpenOffice.org Writer, Kword), 表計算 (OpenOffice."
 "org Calc, Kspread), PDF ビューアなど"
 
-#: share/meta-task/compssUsers.pl:16
+#: share/meta-task/compssUsers.pl:18
 #, c-format
 msgid ""
 "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -372,294 +419,294 @@ msgstr ""
 "オフィスソフト: ワープロ (kword,abiword), 表計算 (kspread,gnumeric), PDF "
 "ビューアなど"
 
-#: share/meta-task/compssUsers.pl:21
+#: share/meta-task/compssUsers.pl:23
 #, c-format
 msgid "Game station"
 msgstr "ゲームステーション"
 
-#: share/meta-task/compssUsers.pl:22
+#: share/meta-task/compssUsers.pl:24
 #, c-format
 msgid "Amusement programs: arcade, boards, strategy, etc"
 msgstr "ゲームプログラム: アーケードゲーム, ボードゲーム, 戦略ゲームなど"
 
-#: share/meta-task/compssUsers.pl:25
+#: share/meta-task/compssUsers.pl:27
 #, c-format
 msgid "Multimedia station"
 msgstr "マルチメディアステーション"
 
-#: share/meta-task/compssUsers.pl:26
+#: share/meta-task/compssUsers.pl:28
 #, c-format
 msgid "Sound and video playing/editing programs"
 msgstr "サウンドと動画の再生/編集ソフト"
 
-#: share/meta-task/compssUsers.pl:31
+#: share/meta-task/compssUsers.pl:33
 #, c-format
 msgid "Internet station"
 msgstr "インターネットステーション"
 
-#: share/meta-task/compssUsers.pl:32
+#: share/meta-task/compssUsers.pl:34
 #, c-format
 msgid ""
 "Set of tools to read and send mail and news (mutt, tin..) and to browse the "
 "Web"
 msgstr "メールとニュースの送受信用ツール (mutt,tin..) とウェブブラウズ用ツール"
 
-#: share/meta-task/compssUsers.pl:37
+#: share/meta-task/compssUsers.pl:39
 #, c-format
 msgid "Network Computer (client)"
 msgstr "ネットワーク (クライアント)"
 
-#: share/meta-task/compssUsers.pl:38
+#: share/meta-task/compssUsers.pl:40
 #, c-format
 msgid "Clients for different protocols including ssh"
 msgstr "ssh などの各種プロトコル用クライアント"
 
-#: share/meta-task/compssUsers.pl:43
+#: share/meta-task/compssUsers.pl:45
 #, c-format
 msgid "Tools to ease the configuration of your computer"
 msgstr "コンピュータの設定を簡単にするツール"
 
-#: share/meta-task/compssUsers.pl:47
+#: share/meta-task/compssUsers.pl:49
 #, c-format
 msgid "Console Tools"
 msgstr "コンソールツール"
 
-#: share/meta-task/compssUsers.pl:48
+#: share/meta-task/compssUsers.pl:50
 #, c-format
 msgid "Editors, shells, file tools, terminals"
 msgstr "エディタ, シェル, ファイル関連ツール, ターミナル"
 
-#: share/meta-task/compssUsers.pl:52 share/meta-task/compssUsers.pl:153
-#: share/meta-task/compssUsers.pl:155
+#: share/meta-task/compssUsers.pl:54 share/meta-task/compssUsers.pl:156
+#: share/meta-task/compssUsers.pl:158
 #, c-format
 msgid "Development"
 msgstr "開発用"
 
-#: share/meta-task/compssUsers.pl:53 share/meta-task/compssUsers.pl:156
+#: share/meta-task/compssUsers.pl:55 share/meta-task/compssUsers.pl:159
 #, c-format
 msgid "C and C++ development libraries, programs and include files"
 msgstr "C/C++ の開発ライブラリ, プログラム, include ファイル"
 
-#: share/meta-task/compssUsers.pl:56 share/meta-task/compssUsers.pl:160
+#: share/meta-task/compssUsers.pl:58 share/meta-task/compssUsers.pl:163
 #, c-format
 msgid "Documentation"
 msgstr "ドキュメント"
 
-#: share/meta-task/compssUsers.pl:57 share/meta-task/compssUsers.pl:161
+#: share/meta-task/compssUsers.pl:59 share/meta-task/compssUsers.pl:164
 #, c-format
 msgid "Books and Howto's on Linux and Free Software"
 msgstr "Linux/フリーソフト関連の文書とHowto"
 
-#: share/meta-task/compssUsers.pl:61 share/meta-task/compssUsers.pl:164
+#: share/meta-task/compssUsers.pl:63 share/meta-task/compssUsers.pl:167
 #, c-format
 msgid "LSB"
 msgstr "LSB"
 
-#: share/meta-task/compssUsers.pl:62 share/meta-task/compssUsers.pl:165
+#: share/meta-task/compssUsers.pl:64 share/meta-task/compssUsers.pl:168
 #, c-format
 msgid "Linux Standard Base. Third party applications support"
 msgstr "Linux Standard Base, サードパーティのアプリケーションをサポート"
 
-#: share/meta-task/compssUsers.pl:71
+#: share/meta-task/compssUsers.pl:73
 #, c-format
 msgid "Web Server"
 msgstr "Web サーバ"
 
-#: share/meta-task/compssUsers.pl:72
+#: share/meta-task/compssUsers.pl:74
 #, c-format
 msgid "Apache"
 msgstr "Apache"
 
-#: share/meta-task/compssUsers.pl:75
+#: share/meta-task/compssUsers.pl:77
 #, c-format
 msgid "Groupware"
 msgstr "グループウェア"
 
-#: share/meta-task/compssUsers.pl:76
+#: share/meta-task/compssUsers.pl:78
 #, c-format
 msgid "Kolab Server"
 msgstr "Kolabサーバ"
 
-#: share/meta-task/compssUsers.pl:79 share/meta-task/compssUsers.pl:120
+#: share/meta-task/compssUsers.pl:81 share/meta-task/compssUsers.pl:122
 #, c-format
 msgid "Firewall/Router"
 msgstr "ファイアウォール/ルータ"
 
-#: share/meta-task/compssUsers.pl:80 share/meta-task/compssUsers.pl:121
+#: share/meta-task/compssUsers.pl:82 share/meta-task/compssUsers.pl:123
 #, c-format
 msgid "Internet gateway"
 msgstr "インターネットゲートウェイ"
 
-#: share/meta-task/compssUsers.pl:83
+#: share/meta-task/compssUsers.pl:85
 #, c-format
 msgid "Mail/News"
 msgstr "メール/ニュース"
 
-#: share/meta-task/compssUsers.pl:84
+#: share/meta-task/compssUsers.pl:86
 #, c-format
 msgid "Postfix mail server, Inn news server"
 msgstr "Postfix メールサーバ, Inn ニュースサーバ"
 
-#: share/meta-task/compssUsers.pl:87
+#: share/meta-task/compssUsers.pl:89
 #, c-format
 msgid "Directory Server"
 msgstr "ディレクトリサーバ"
 
-#: share/meta-task/compssUsers.pl:91
+#: share/meta-task/compssUsers.pl:93
 #, c-format
 msgid "FTP Server"
 msgstr "FTP サーバ"
 
-#: share/meta-task/compssUsers.pl:92
+#: share/meta-task/compssUsers.pl:94
 #, c-format
 msgid "ProFTPd"
 msgstr "ProFTPd"
 
-#: share/meta-task/compssUsers.pl:95
+#: share/meta-task/compssUsers.pl:97
 #, c-format
 msgid "DNS/NIS"
 msgstr "DNS/NIS"
 
-#: share/meta-task/compssUsers.pl:96
+#: share/meta-task/compssUsers.pl:98
 #, c-format
 msgid "Domain Name and Network Information Server"
 msgstr "ドメイン名/ネットワークインフォメーションサーバ"
 
-#: share/meta-task/compssUsers.pl:99
+#: share/meta-task/compssUsers.pl:101
 #, c-format
 msgid "File and Printer Sharing Server"
 msgstr "ファイル/プリンタ共有サーバ"
 
-#: share/meta-task/compssUsers.pl:100
+#: share/meta-task/compssUsers.pl:102
 #, c-format
 msgid "NFS Server, Samba server"
 msgstr "NFS サーバ/Samba サーバ"
 
-#: share/meta-task/compssUsers.pl:103 share/meta-task/compssUsers.pl:116
+#: share/meta-task/compssUsers.pl:105 share/meta-task/compssUsers.pl:118
 #, c-format
 msgid "Database"
 msgstr "データベース"
 
-#: share/meta-task/compssUsers.pl:104
+#: share/meta-task/compssUsers.pl:106
 #, c-format
 msgid "PostgreSQL and MySQL Database Server"
 msgstr "PostgreSQL/MySQLデータベースサーバ"
 
-#: share/meta-task/compssUsers.pl:108
+#: share/meta-task/compssUsers.pl:110
 #, c-format
 msgid "Web/FTP"
 msgstr "Web/FTP"
 
-#: share/meta-task/compssUsers.pl:109
+#: share/meta-task/compssUsers.pl:111
 #, c-format
 msgid "Apache, Pro-ftpd"
 msgstr "Apache, Pro-ftpd"
 
-#: share/meta-task/compssUsers.pl:112
+#: share/meta-task/compssUsers.pl:114
 #, c-format
 msgid "Mail"
 msgstr "メール"
 
-#: share/meta-task/compssUsers.pl:113
+#: share/meta-task/compssUsers.pl:115
 #, c-format
 msgid "Postfix mail server"
 msgstr "Postfix メールサーバ"
 
-#: share/meta-task/compssUsers.pl:117
+#: share/meta-task/compssUsers.pl:119
 #, c-format
 msgid "PostgreSQL or MySQL database server"
 msgstr "PostgreSQL/MySQL データベースサーバ"
 
-#: share/meta-task/compssUsers.pl:124
+#: share/meta-task/compssUsers.pl:126
 #, c-format
 msgid "Network Computer server"
 msgstr "ネットワークコンピュータサーバ"
 
-#: share/meta-task/compssUsers.pl:125
+#: share/meta-task/compssUsers.pl:127
 #, c-format
 msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "NFS サーバ, SMB サーバ, プロキシサーバ, SSH サーバ"
 
-#: share/meta-task/compssUsers.pl:131
+#: share/meta-task/compssUsers.pl:133
 #, c-format
 msgid "Graphical Environment"
 msgstr "グラフィカル環境"
 
-#: share/meta-task/compssUsers.pl:133
+#: share/meta-task/compssUsers.pl:135
 #, c-format
 msgid "KDE Workstation"
 msgstr "KDE ワークステーション"
 
-#: share/meta-task/compssUsers.pl:134
+#: share/meta-task/compssUsers.pl:136
 #, c-format
 msgid ""
 "The K Desktop Environment, the basic graphical environment with a collection "
 "of accompanying tools"
 msgstr "KDE - さまざまなツールを含む定番グラフィカル環境"
 
-#: share/meta-task/compssUsers.pl:138
+#: share/meta-task/compssUsers.pl:140
 #, c-format
 msgid "GNOME Workstation"
 msgstr "GNOME ワークステーション"
 
-#: share/meta-task/compssUsers.pl:139
+#: share/meta-task/compssUsers.pl:141
 #, c-format
 msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
 "tools"
 msgstr "使いやすいアプリケーションとデスクトップツールを含むグラフィカル環境"
 
-#: share/meta-task/compssUsers.pl:142
+#: share/meta-task/compssUsers.pl:145
 #, c-format
 msgid "IceWm Desktop"
 msgstr "IceWm デスクトップ"
 
-#: share/meta-task/compssUsers.pl:146
+#: share/meta-task/compssUsers.pl:149
 #, c-format
 msgid "Other Graphical Desktops"
 msgstr "その他のグラフィカルデスクトップ"
 
-#: share/meta-task/compssUsers.pl:147
+#: share/meta-task/compssUsers.pl:150
 #, c-format
 msgid "Window Maker, Enlightenment, Fvwm, etc"
 msgstr "Window Maker, Enlightenment, Fvwm など"
 
-#: share/meta-task/compssUsers.pl:170
+#: share/meta-task/compssUsers.pl:173
 #, c-format
 msgid "Utilities"
 msgstr "ユーティリティ"
 
-#: share/meta-task/compssUsers.pl:172 share/meta-task/compssUsers.pl:173
+#: share/meta-task/compssUsers.pl:175 share/meta-task/compssUsers.pl:176
 #, c-format
 msgid "SSH Server"
 msgstr "SSH サーバ"
 
-#: share/meta-task/compssUsers.pl:177
+#: share/meta-task/compssUsers.pl:180
 #, c-format
 msgid "Webmin"
 msgstr "Webmin"
 
-#: share/meta-task/compssUsers.pl:178
+#: share/meta-task/compssUsers.pl:181
 #, c-format
 msgid "Webmin Remote Configuration Server"
 msgstr "Webmin リモート設定サーバ"
 
-#: share/meta-task/compssUsers.pl:182
+#: share/meta-task/compssUsers.pl:185
 #, c-format
 msgid "Network Utilities/Monitoring"
 msgstr "ネットワークユーティリティ/モニタリング"
 
-#: share/meta-task/compssUsers.pl:183
+#: share/meta-task/compssUsers.pl:186
 #, c-format
 msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
 msgstr "モニタリングツール, プロセス管理, tcpdump, nmap..."
 
-#: share/meta-task/compssUsers.pl:187
+#: share/meta-task/compssUsers.pl:190
 #, c-format
 msgid "Mandriva Wizards"
 msgstr "Mandriva ウィザード"
 
-#: share/meta-task/compssUsers.pl:188
+#: share/meta-task/compssUsers.pl:191
 #, c-format
 msgid "Wizards to configure server"
 msgstr "サーバ設定ウィザード"
@@ -673,7 +720,7 @@ msgstr ""
 "エラーが発生しました。しかし対処する方法がわかりません。\n"
 "自己責任で続けてください。"
 
-#: steps.pm:437
+#: steps.pm:442
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -700,12 +747,12 @@ msgstr "Mandriva Linux のインストール %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt-Tab> 項目間を移動"
 
-#: steps_gtk.pm:84
+#: steps_gtk.pm:89
 #, c-format
 msgid "Xorg server is slow to start. Please wait..."
 msgstr "Xorg サーバの起動には時間がかかります。お待ちください..."
 
-#: steps_gtk.pm:194
+#: steps_gtk.pm:203
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
@@ -718,17 +765,17 @@ msgstr ""
 "インストールを試してみてください。\n"
 "CD-ROM から起動 -> F1 を押す -> 'text' と入力"
 
-#: steps_gtk.pm:228
+#: steps_gtk.pm:236
 #, c-format
 msgid "Install Mandriva KDE Desktop"
 msgstr "Mandriva KDE デスクトップをインストール"
 
-#: steps_gtk.pm:229
+#: steps_gtk.pm:237
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
 msgstr "Mandriva GNOME デスクトップをインストール"
 
-#: steps_gtk.pm:230
+#: steps_gtk.pm:238
 #, c-format
 msgid "Custom install"
 msgstr "カスタムインストール"
@@ -753,79 +800,79 @@ msgstr "カスタムデスクトップ"
 msgid "Here's a preview of the '%s' desktop."
 msgstr "%s デスクトップのプレビューです。"
 
-#: steps_gtk.pm:275
+#: steps_gtk.pm:295
 #, c-format
 msgid "Click on images in order to see a bigger preview"
 msgstr "画像をクリックすると大きなプレビューが表示されます"
 
-#: steps_gtk.pm:287 steps_interactive.pm:618 steps_list.pm:30
+#: steps_gtk.pm:313 steps_interactive.pm:626 steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "パッケージグループを選択"
 
-#: steps_gtk.pm:308 steps_interactive.pm:635
+#: steps_gtk.pm:334 steps_interactive.pm:643
 #, c-format
 msgid "Individual package selection"
 msgstr "パッケージを個別に選択"
 
 # Changed "total size" to "total", due to problem of available
 # space on screen.
-#: steps_gtk.pm:330 steps_interactive.pm:561
+#: steps_gtk.pm:358 steps_interactive.pm:567
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "合計: %d/%d MB"
 
-#: steps_gtk.pm:375
+#: steps_gtk.pm:401
 #, c-format
 msgid "Bad package"
 msgstr "不正なパッケージ"
 
-#: steps_gtk.pm:377
+#: steps_gtk.pm:403
 #, c-format
 msgid "Version: "
 msgstr "バージョン: "
 
-#: steps_gtk.pm:378
+#: steps_gtk.pm:404
 #, c-format
 msgid "Size: "
 msgstr "サイズ: "
 
-#: steps_gtk.pm:378
+#: steps_gtk.pm:404
 #, c-format
 msgid "%d KB\n"
 msgstr "%d KB\n"
 
-#: steps_gtk.pm:379
+#: steps_gtk.pm:405
 #, c-format
 msgid "Importance: "
 msgstr "重要性: "
 
-#: steps_gtk.pm:413
+#: steps_gtk.pm:439
 #, c-format
 msgid "You can not select/unselect this package"
 msgstr "このパッケージの選択/非選択は変更できません"
 
-#: steps_gtk.pm:417
+#: steps_gtk.pm:443
 #, c-format
 msgid "due to missing %s"
 msgstr "%s がないために"
 
-#: steps_gtk.pm:418
+#: steps_gtk.pm:444
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "%s が依存を満たしていないために"
 
-#: steps_gtk.pm:419
+#: steps_gtk.pm:445
 #, c-format
 msgid "trying to promote %s"
 msgstr "%s をアップグレードするために"
 
-#: steps_gtk.pm:420
+#: steps_gtk.pm:446
 #, c-format
 msgid "in order to keep %s"
 msgstr "%s を維持するために"
 
-#: steps_gtk.pm:425
+#: steps_gtk.pm:451
 #, c-format
 msgid ""
 "You can not select this package as there is not enough space left to install "
@@ -833,113 +880,113 @@ msgid ""
 msgstr ""
 "このパッケージは選択できません。インストールに必要な空き容量がありません。"
 
-#: steps_gtk.pm:428
+#: steps_gtk.pm:454
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "以下のパッケージをインストールします"
 
-#: steps_gtk.pm:429
+#: steps_gtk.pm:455
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "以下のパッケージを削除します"
 
-#: steps_gtk.pm:454
+#: steps_gtk.pm:480
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
 msgstr "これは必須パッケージです。選択を解除することはできません。"
 
-#: steps_gtk.pm:456
+#: steps_gtk.pm:482
 #, c-format
 msgid "You can not unselect this package. It is already installed"
 msgstr "このパッケージの選択は解除できません。既にインストールされています。"
 
-#: steps_gtk.pm:458
+#: steps_gtk.pm:484
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
 msgstr "このパッケージの選択は解除できません。アップグレードが必要です。"
 
-#: steps_gtk.pm:462
+#: steps_gtk.pm:488
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "自動的に選択されたパッケージを表示"
 
-#: steps_gtk.pm:464
+#: steps_gtk.pm:494
 #, c-format
 msgid "Install"
 msgstr "インストール"
 
-#: steps_gtk.pm:467
+#: steps_gtk.pm:497
 #, c-format
 msgid "Load/Save selection"
 msgstr "選択を読み込む/保存する"
 
-#: steps_gtk.pm:468
+#: steps_gtk.pm:498
 #, c-format
 msgid "Updating package selection"
 msgstr "パッケージの選択を更新"
 
-#: steps_gtk.pm:473
+#: steps_gtk.pm:503
 #, c-format
 msgid "Minimal install"
 msgstr "最小インストール"
 
-#: steps_gtk.pm:487
+#: steps_gtk.pm:516
 #, c-format
 msgid "Software Management"
 msgstr "ソフトウェアの管理"
 
-#: steps_gtk.pm:487 steps_interactive.pm:447
+#: steps_gtk.pm:516 steps_interactive.pm:452
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "インストールするパッケージを選んでください"
 
-#: steps_gtk.pm:504 steps_interactive.pm:649 steps_list.pm:32
+#: steps_gtk.pm:533 steps_interactive.pm:657 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "インストール中"
 
-#: steps_gtk.pm:530
+#: steps_gtk.pm:562
 #, c-format
 msgid "No details"
 msgstr "詳細なし"
 
-#: steps_gtk.pm:559
+#: steps_gtk.pm:577
 #, c-format
 msgid "Time remaining:"
 msgstr "残り時間:"
 
-#: steps_gtk.pm:560
+#: steps_gtk.pm:578
 #, c-format
 msgid "(estimating...)"
 msgstr "(試算しています...)"
 
-#: steps_gtk.pm:573
+#: steps_gtk.pm:604
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d 個のパッケージ"
 
-#: steps_gtk.pm:619 steps_interactive.pm:837 steps_list.pm:43
+#: steps_gtk.pm:650 steps_interactive.pm:820 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "まとめ"
 
-#: steps_gtk.pm:636
+#: steps_gtk.pm:669
 #, c-format
 msgid "Configure"
 msgstr "設定"
 
-#: steps_gtk.pm:653 steps_interactive.pm:833 steps_interactive.pm:984
+#: steps_gtk.pm:686 steps_interactive.pm:816 steps_interactive.pm:967
 #, c-format
 msgid "not configured"
 msgstr "設定されていません"
 
-#: steps_gtk.pm:694
+#: steps_gtk.pm:720
 #, c-format
 msgid "Media Selection"
 msgstr "メディアの選択"
 
-#: steps_gtk.pm:704 steps_interactive.pm:335
+#: steps_gtk.pm:729 steps_interactive.pm:334
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -948,7 +995,7 @@ msgstr ""
 "次のインストールメディアを検出しました。\n"
 "使用しないものがあればここで選択を解除してください。"
 
-#: steps_gtk.pm:700 steps_interactive.pm:337
+#: steps_gtk.pm:745 steps_interactive.pm:340
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -960,95 +1007,83 @@ msgstr ""
 "そうするとインストーラはハードドライブからインストールを続けます。コピーされ"
 "たパッケージはインストール完了後も利用できます。"
 
-#: steps_gtk.pm:702 steps_interactive.pm:339
+#: steps_gtk.pm:747 steps_interactive.pm:342
 #, c-format
 msgid "Copy whole CDs"
 msgstr "CD 全体をコピー"
 
-#: steps_interactive.pm:38
+#: steps_interactive.pm:39
 #, c-format
 msgid "An error occurred"
 msgstr "エラーが発生しました"
 
-#: steps_interactive.pm:102
+#: steps_interactive.pm:104
 #, c-format
 msgid "Please choose your keyboard layout"
 msgstr "キーボードの配列を選んでください"
 
-#: steps_interactive.pm:105
+#: steps_interactive.pm:108
 #, c-format
 msgid "Here is the full list of available keyboards:"
 msgstr "利用可能なすべてのキーボードのリスト:"
 
-#: steps_interactive.pm:136
+#: steps_interactive.pm:139
 #, c-format
 msgid "Install/Upgrade"
 msgstr "インストール/更新"
 
-#: steps_interactive.pm:134
+#: steps_interactive.pm:143
 #, c-format
 msgid "Is this an install or an upgrade?"
 msgstr "インストールか更新を選んでください"
 
-#: steps_interactive.pm:138
+#: steps_interactive.pm:145
 #, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
 msgstr "インストール"
 
-#: steps_interactive.pm:144
+#: steps_interactive.pm:147
 #, c-format
 msgid "Upgrade %s"
 msgstr "%s を更新"
 
-#: steps_interactive.pm:148
+#: steps_interactive.pm:151
 #, c-format
 msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 msgstr ""
 "32bit から 64bit ディストリビューションへのアップグレードはサポートされていま"
 "せん"
 
-#: steps_interactive.pm:152
+#: steps_interactive.pm:155
 #, c-format
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 msgstr ""
 "64bit から 32bit ディストリビューションへのアップグレードはサポートされていま"
 "せん"
 
-#: steps_interactive.pm:162
-#, c-format
-msgid ""
-"You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
-"on your system. This installer cannot preserve KDE 3.5 in an upgrade. If you "
-"choose to proceed, \n"
-"KDE 4 will replace KDE 3, and you will lose your personal KDE configuration "
-"settings. \n"
-"To upgrade with KDE 3.5 and your personal settings preserved, \n"
-"please reboot your system and upgrade using the Mandriva update applet."
-msgstr ""
-
-#: steps_interactive.pm:180
+#: steps_interactive.pm:174
 #, c-format
 msgid "Encryption key for %s"
 msgstr "%s の暗号鍵"
 
-#: steps_interactive.pm:199
+#: steps_interactive.pm:207
 #, c-format
 msgid "Cancel installation, reboot system"
 msgstr "インストールを中止し、システムを再起動"
 
-#: steps_interactive.pm:200
+#: steps_interactive.pm:208
 #, c-format
 msgid "New Installation"
 msgstr "新しくインストール"
 
-#: steps_interactive.pm:201
+#: steps_interactive.pm:209
 #, c-format
 msgid "Upgrade previous installation (not recommended)"
 msgstr "既存のシステムをアップグレード (非推奨)"
 
-#: steps_interactive.pm:205
+#: steps_interactive.pm:213
 #, c-format
 msgid ""
 "Installer has detected that your installed Mandriva Linux system could not\n"
@@ -1067,17 +1102,17 @@ msgstr ""
 "警告: 「新しくインストール」を選択する前に、必ず個人データの\n"
 "バックアップを作成してください。"
 
-#: steps_interactive.pm:247
+#: steps_interactive.pm:255
 #, c-format
 msgid "IDE"
 msgstr "IDE"
 
-#: steps_interactive.pm:247
+#: steps_interactive.pm:255
 #, c-format
 msgid "Configuring IDE"
 msgstr "IDE を設定"
 
-#: steps_interactive.pm:284
+#: steps_interactive.pm:292
 #, c-format
 msgid ""
 "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1087,7 +1122,7 @@ msgstr ""
 "ステムを起動するには、DiskDrake でブートストラップパーティションを作成する必"
 "要があります。"
 
-#: steps_interactive.pm:289
+#: steps_interactive.pm:297
 #, c-format
 msgid ""
 "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
@@ -1098,7 +1133,7 @@ msgstr ""
 "システムを起動するには、DiskDrake でブートストラップパーティションを作成する"
 "必要があります。"
 
-#: steps_interactive.pm:381
+#: steps_interactive.pm:378
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -1110,12 +1145,12 @@ msgstr ""
 "\"%s\" という CD-ROM をドライブに入れて「OK」を押してください。\n"
 "お持ちでない場合は「キャンセル」を押してください。"
 
-#: steps_interactive.pm:403
+#: steps_interactive.pm:408
 #, c-format
 msgid "Looking for available packages..."
 msgstr "利用可能なパッケージを探しています..."
 
-#: steps_interactive.pm:411
+#: steps_interactive.pm:416
 #, c-format
 msgid ""
 "Your system does not have enough space left for installation or upgrade (%"
@@ -1124,7 +1159,7 @@ msgstr ""
 "あなたのシステムにはインストールまたはアップグレードに必要な空き容量がありま"
 "せん (%dMB > %dMB)"
 
-#: steps_interactive.pm:459
+#: steps_interactive.pm:464
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1133,52 +1168,52 @@ msgstr ""
 "パッケージの選択を読み込むか保存するかを選んでください。\n"
 "形式は auto_install で生成されたファイルと同じです。"
 
-#: steps_interactive.pm:461
+#: steps_interactive.pm:466
 #, c-format
 msgid "Load"
 msgstr "読み込む"
 
-#: steps_interactive.pm:461
+#: steps_interactive.pm:466
 #, c-format
 msgid "Save"
 msgstr "保存する"
 
-#: steps_interactive.pm:469
+#: steps_interactive.pm:474
 #, c-format
 msgid "Bad file"
 msgstr "不正なファイル"
 
-#: steps_interactive.pm:485
+#: steps_interactive.pm:490
 #, c-format
 msgid "KDE"
 msgstr "KDE"
 
-#: steps_interactive.pm:486
+#: steps_interactive.pm:491
 #, c-format
 msgid "GNOME"
 msgstr "GNOME"
 
-#: steps_interactive.pm:489
+#: steps_interactive.pm:494
 #, c-format
 msgid "Desktop Selection"
 msgstr "デスクトップの選択"
 
-#: steps_interactive.pm:490
+#: steps_interactive.pm:495
 #, c-format
 msgid "You can choose your workstation desktop profile."
 msgstr "ワークステーションのデスクトッププロファイルを選択."
 
-#: steps_interactive.pm:575
+#: steps_interactive.pm:581
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "指定されたサイズが空き容量を超えています"
 
-#: steps_interactive.pm:590
+#: steps_interactive.pm:596
 #, c-format
 msgid "Type of install"
 msgstr "インストールの種類"
 
-#: steps_interactive.pm:591
+#: steps_interactive.pm:597
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1187,82 +1222,82 @@ msgstr ""
 "パッケージグループが選択されていません。\n"
 "インストールする最低限のものを選んでください:"
 
-#: steps_interactive.pm:594
+#: steps_interactive.pm:602
 #, c-format
 msgid "With X"
 msgstr "X を使う"
 
-#: steps_interactive.pm:595
+#: steps_interactive.pm:603
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "基本的なドキュメントを入れる (推奨)"
 
-#: steps_interactive.pm:596
+#: steps_interactive.pm:604
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "最小限のインストール (urpmi も含まれません)"
 
-#: steps_interactive.pm:650
+#: steps_interactive.pm:658
 #, c-format
 msgid "Preparing installation"
 msgstr "インストールの準備"
 
-#: steps_interactive.pm:658
+#: steps_interactive.pm:666
 #, c-format
 msgid "Installing package %s"
 msgstr "パッケージ %s をインストール"
 
-#: steps_interactive.pm:682
+#: steps_interactive.pm:690
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "パッケージを並べ替え中にエラーが発生:"
 
-#: steps_interactive.pm:682
+#: steps_interactive.pm:690
 #, c-format
 msgid "Go on anyway?"
 msgstr "続けますか？"
 
-#: steps_interactive.pm:686
+#: steps_interactive.pm:694
 #, c-format
 msgid "Retry"
 msgstr "再試行"
 
-#: steps_interactive.pm:687
+#: steps_interactive.pm:695
 #, c-format
 msgid "Skip this package"
 msgstr "このパッケージを飛ばす"
 
-#: steps_interactive.pm:688
+#: steps_interactive.pm:696
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "メディア %s のすべてのパッケージを飛ばす"
 
-#: steps_interactive.pm:689
+#: steps_interactive.pm:697
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "メディアとパッケージの選択に戻る"
 
-#: steps_interactive.pm:692
+#: steps_interactive.pm:700
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "パッケージ %s のインストール中にエラーが発生しました。"
 
-#: steps_interactive.pm:710
+#: steps_interactive.pm:719
 #, c-format
 msgid "Post-install configuration"
 msgstr "インストール後の設定"
 
-#: steps_interactive.pm:717
+#: steps_interactive.pm:726
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "更新モジュールメディアがドライブ %s に入っていることを確認してください"
 
-#: steps_interactive.pm:745 steps_list.pm:47
+#: steps_interactive.pm:754 steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "更新"
 
-#: steps_interactive.pm:746
+#: steps_interactive.pm:755
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1282,28 +1317,28 @@ msgstr ""
 "\n"
 "更新されたパッケージをインストールしますか？"
 
-#: steps_interactive.pm:849
+#: steps_interactive.pm:862
 #, c-format
 msgid "%s on %s"
 msgstr "%2$s の %1$s"
 
-#: steps_interactive.pm:912 steps_interactive.pm:919 steps_interactive.pm:932
-#: steps_interactive.pm:949 steps_interactive.pm:964
+#: steps_interactive.pm:895 steps_interactive.pm:902 steps_interactive.pm:915
+#: steps_interactive.pm:932 steps_interactive.pm:947
 #, c-format
 msgid "Hardware"
 msgstr "ハードウェア"
 
-#: steps_interactive.pm:933 steps_interactive.pm:950
+#: steps_interactive.pm:916 steps_interactive.pm:933
 #, c-format
 msgid "Sound card"
 msgstr "サウンドカード"
 
-#: steps_interactive.pm:953
+#: steps_interactive.pm:936
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "ISA サウンドカードをお使いですか？"
 
-#: steps_interactive.pm:955
+#: steps_interactive.pm:938
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -1312,64 +1347,69 @@ msgstr ""
 "インストール後に alsaconf か sndconfig を実行してサウンドカードを設定してくだ"
 "さい。"
 
-#: steps_interactive.pm:957
+#: steps_interactive.pm:940
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr ""
 "サウンドカードが見つかりません。インストール後に harddrake で再度設定を試みて"
 "ください。"
 
-#: steps_interactive.pm:965
+#: steps_interactive.pm:948
 #, c-format
 msgid "Graphical interface"
 msgstr "グラフィカルインターフェース"
 
-#: steps_interactive.pm:971 steps_interactive.pm:982
+#: steps_interactive.pm:954 steps_interactive.pm:965
 #, c-format
 msgid "Network & Internet"
 msgstr "ネットワークとインターネット"
 
-#: steps_interactive.pm:983
+#: steps_interactive.pm:966
 #, c-format
 msgid "Proxies"
 msgstr "プロキシ"
 
-#: steps_interactive.pm:984
+#: steps_interactive.pm:967
 #, c-format
 msgid "configured"
 msgstr "設定済み"
 
-#: steps_interactive.pm:994
+#: steps_interactive.pm:977
 #, c-format
 msgid "Security Level"
 msgstr "セキュリティレベル"
 
-#: steps_interactive.pm:1013
+#: steps_interactive.pm:996
 #, c-format
 msgid "Firewall"
 msgstr "ファイアウォール"
 
-#: steps_interactive.pm:1017
+#: steps_interactive.pm:1000
 #, c-format
 msgid "activated"
 msgstr "有効"
 
-#: steps_interactive.pm:1017
+#: steps_interactive.pm:1000
 #, c-format
 msgid "disabled"
 msgstr "無効"
 
-#: steps_interactive.pm:1031
+#: steps_interactive.pm:1014
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "X が設定されていません。本当によろしいですか？"
 
-#: steps_interactive.pm:1058
+#: steps_interactive.pm:1042
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "ブートローダを準備中..."
 
-#: steps_interactive.pm:1068
+#: steps_interactive.pm:1043
+#, c-format
+msgid "Be patient, this may take a while..."
+msgstr ""
+
+#: steps_interactive.pm:1054
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1381,7 +1421,7 @@ msgstr ""
 "は yaboot は動きません。インストールを続けますが、マシンを起動するには、"
 "BootX もしくは他の方法が必要です。'root fs' のカーネル引数は 'root=%s' です。"
 
-#: steps_interactive.pm:1087
+#: steps_interactive.pm:1068
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1390,17 +1430,17 @@ msgstr ""
 "このセキュリティレベルでは、Windows パーティションのファイルへのアクセスが管"
 "理者のみに限定されます。"
 
-#: steps_interactive.pm:1121
+#: steps_interactive.pm:1100
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "空のフロッピーをドライブ %s に入れてください"
 
-#: steps_interactive.pm:1123
+#: steps_interactive.pm:1102
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "インストール自動化フロッピーを作成中..."
 
-#: steps_interactive.pm:1134
+#: steps_interactive.pm:1113
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1411,15 +1451,10 @@ msgstr ""
 "\n"
 "本当に終了しますか？"
 
-#: steps_interactive.pm:1144
+#: steps_interactive.pm:1123
 #, c-format
 msgid "Congratulations"
 msgstr "おめでとうございます"
-
-#: steps_interactive.pm:1147
-#, c-format
-msgid "Reboot"
-msgstr "再起動"
 
 #. -PO: please keep the following messages very short: they must fit in the left list of the installer!!!
 #: steps_list.pm:16
@@ -1559,28 +1594,3 @@ msgid ""
 "_: Keep these entry short\n"
 "Exit"
 msgstr "終了"
-
-#: ../../advertising/IM_flash.pl:1
-#, c-format
-msgid "Your desktop on a USB key"
-msgstr ""
-
-#: ../../advertising/IM_free09.pl:1
-#, c-format
-msgid "The 100%% open source Mandriva Linux distribution"
-msgstr ""
-
-#: ../../advertising/IM_one09.pl:1
-#, c-format
-msgid "Explore Linux easily with Mandriva One"
-msgstr ""
-
-#: ../../advertising/IM_pwp09.pl:1
-#, c-format
-msgid "A full Mandriva Linux desktop, with support"
-msgstr ""
-
-#: ../../advertising/IM_range09.pl:1
-#, c-format
-msgid "Mandriva: distributions for everybody's needs"
-msgstr ""

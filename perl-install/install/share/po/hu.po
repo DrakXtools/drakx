@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-2009.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-30 20:13+0200\n"
+"POT-Creation-Date: 2009-01-01 19:22+0100\n"
 "PO-Revision-Date: 2008-09-30 22:57+0100\n"
 "Last-Translator: Lónyai Gergely <aleph@mandriva.org>\n"
 "Language-Team: Hungarian <aleph@mandriva.org>\n"
@@ -20,6 +20,31 @@ msgstr ""
 "X-Poedit-Language: Hungarian\n"
 "X-Poedit-Country: HUNGARY\n"
 "X-Poedit-SourceCharset: utf-8\n"
+
+#: ../../advertising/IM_flash.pl:1
+#, c-format
+msgid "Your desktop on a USB key"
+msgstr "Az Ön munkaasztala egy USB kulcson"
+
+#: ../../advertising/IM_free09.pl:1
+#, c-format
+msgid "The 100%% open source Mandriva Linux distribution"
+msgstr "A 100%%-ban nyílt forráskódú Mandriva Linux disztribúció"
+
+#: ../../advertising/IM_one09.pl:1
+#, c-format
+msgid "Explore Linux easily with Mandriva One"
+msgstr "A Linux könnyed kipróbálása: Mandriva One"
+
+#: ../../advertising/IM_pwp09.pl:1
+#, c-format
+msgid "A full Mandriva Linux desktop, with support"
+msgstr "Egy teljes Mandriva Linux munkaasztal, támogatással"
+
+#: ../../advertising/IM_range09.pl:1
+#, c-format
+msgid "Mandriva: distributions for everybody's needs"
+msgstr "Mandriva: disztribúciók minden igényre"
 
 #: any.pm:109
 #, c-format
@@ -35,7 +60,8 @@ msgid ""
 "\n"
 "Do you have a supplementary installation medium to configure?"
 msgstr ""
-"A telepítő a következő adathordozókat találta - ezeket fogja használni a telepítéshez: %s.\n"
+"A telepítő a következő adathordozókat találta - ezeket fogja használni a "
+"telepítéshez: %s.\n"
 "\n"
 "\n"
 "Van beállítandó kiegészítő telepítési adathordozója?"
@@ -72,13 +98,20 @@ msgstr "Az URL-nek ftp:// vagy http:// előtaggal kell kezdődnie"
 
 #: any.pm:180
 #, c-format
-msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
-msgstr "Kapcsolódás a Mandriva Linux webkiszolgálójához; az elérhető tükörkiszolgálók listájának lekérdezése..."
+msgid ""
+"Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgstr ""
+"Kapcsolódás a Mandriva Linux webkiszolgálójához; az elérhető "
+"tükörkiszolgálók listájának lekérdezése..."
 
 #: any.pm:185
 #, c-format
-msgid "Failed contacting Mandriva Linux web site to get the list of available mirrors"
-msgstr "Nem sikerült lekérdezni az elérhető tükörkiszolgálók listáját a Mandriva Linux webkiszolgálójától"
+msgid ""
+"Failed contacting Mandriva Linux web site to get the list of available "
+"mirrors"
+msgstr ""
+"Nem sikerült lekérdezni az elérhető tükörkiszolgálók listáját a Mandriva "
+"Linux webkiszolgálójától"
 
 #: any.pm:195
 #, c-format
@@ -122,7 +155,9 @@ msgstr "Kiegészítő"
 
 #: any.pm:293
 #, c-format
-msgid "Can't find a package list file on this mirror. Make sure the location is correct."
+msgid ""
+"Can't find a package list file on this mirror. Make sure the location is "
+"correct."
 msgstr "A tükörkiszolgálón nem található fejléclista"
 
 #: any.pm:328
@@ -140,8 +175,39 @@ msgstr "Csomagok eltávolítása a frissítés előtt..."
 msgid "Finding packages to upgrade..."
 msgstr "A frissítendő csomagok keresése..."
 
+#: any.pm:389
+#, c-format
+msgid ""
+"You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
+"on your system. This installer cannot preserve KDE 3.5 in an upgrade. If you "
+"choose to proceed, \n"
+"KDE 4 will replace KDE 3, and you will lose your personal KDE configuration "
+"settings. \n"
+"To upgrade with KDE 3.5 and your personal settings preserved, \n"
+"please reboot your system and upgrade using the Mandriva update applet."
+msgstr ""
+"A rendszer 2009.0-ra frissítését választotta. KDE 3.5 található a jelenlegi "
+"rendszerén. \n"
+"Ez a telepítő nem tudja a KDE 3.5-öt biztonságosan frissíteni. Ha folytatja "
+"ezt a műveletet, \n"
+"akkor a KDE 4 le fogja cserélni a KDE 3.5-öt, de minden személyes KDE "
+"beállítása el fog veszni. \n"
+"A KDE 3.5 frissítéséhez, illetve a személyes adatainak a megőrzéséhez \n"
+"kérjük indítsa el a saját rendszerét, és használja a Mandriva frissítő "
+"alkalmazását."
+
+#: any.pm:394 steps_interactive.pm:1126
+#, c-format
+msgid "Reboot"
+msgstr "Újraindítás"
+
+#: any.pm:394
+#, c-format
+msgid "Proceed"
+msgstr ""
+
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:564
+#: any.pm:584
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -165,7 +231,7 @@ msgstr ""
 "Biztosan telepíteni szeretné a kiszolgálóprogramo(ka)t?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:587
+#: any.pm:607
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -178,84 +244,82 @@ msgstr ""
 "\n"
 "Szeretné eltávolítani ezeket a csomagokat?\n"
 
-#: any.pm:801
+#: any.pm:826
 #, c-format
 msgid "Error reading file %s"
 msgstr "Hiba a(z) %s fájl olvasása közben"
 
-#: any.pm:1008
+#: any.pm:1033
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "A következő lemezek át lettek nevezve:"
 
-#: any.pm:1010
+#: any.pm:1035
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (korábbi név: %s)"
 
-#: any.pm:1067
+#: any.pm:1092
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1067
+#: any.pm:1092
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1067
+#: any.pm:1092
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1086
-#: steps_interactive.pm:972
+#: any.pm:1111 steps_interactive.pm:955
 #, c-format
 msgid "Network"
 msgstr "Hálózat"
 
-#: any.pm:1090
+#: any.pm:1115
 #, c-format
 msgid "Please choose a media"
 msgstr "Válasszon egy adatforrást"
 
-#: any.pm:1106
+#: any.pm:1131
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "A fájl már létezik. Felülírja?"
 
-#: any.pm:1110
+#: any.pm:1135
 #, c-format
 msgid "Permission denied"
 msgstr "Hozzáférés megtagadva"
 
-#: any.pm:1158
+#: any.pm:1183
 #, c-format
 msgid "Bad NFS name"
 msgstr "Helytelen NFS-név"
 
-#: any.pm:1179
+#: any.pm:1204
 #, c-format
 msgid "Bad media %s"
 msgstr "\"%s\": hibás adatforrás"
 
-#: any.pm:1222
+#: any.pm:1247
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Partícionálás előtt nem készíthetők képernyőfelvételek"
 
-#: any.pm:1230
+#: any.pm:1255
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "A képernyőfelvételek a telepítés után itt lesznek elérhetők: %s"
 
-#: gtk.pm:126
+#: gtk.pm:130
 #, c-format
 msgid "Installation"
 msgstr "Telepítés"
 
-#: gtk.pm:130
-#: share/meta-task/compssUsers.pl:42
+#: gtk.pm:134 share/meta-task/compssUsers.pl:44
 #, c-format
 msgid "Configuration"
 msgstr "Beállítás"
@@ -289,18 +353,17 @@ msgstr "A hálózatkezelés leállítása"
 msgid "Please wait, retrieving file"
 msgstr "Kérem várjon, fájl betöltése"
 
-#: media.pm:703
-#: media.pm:714
+#: media.pm:705 media.pm:716
 #, c-format
 msgid "Downloading file %s..."
 msgstr "%s fájl letöltése..."
 
-#: media.pm:806
+#: media.pm:808
 #, c-format
 msgid "Copying some packages on disks for future use"
 msgstr "Bizonyos csomagok lemezre másolása későbbi használatra"
 
-#: media.pm:859
+#: media.pm:861
 #, c-format
 msgid "Copying in progress"
 msgstr "Másolás folyamatban"
@@ -345,318 +408,326 @@ msgstr ""
 "A(z) %s által kért bizonyos csomagok nem telepíthetők:\n"
 "%s"
 
-#: share/meta-task/compssUsers.pl:11
+#: share/meta-task/compssUsers.pl:13
 #, c-format
 msgid "Workstation"
 msgstr "Munkaállomás"
 
-#: share/meta-task/compssUsers.pl:13
+#: share/meta-task/compssUsers.pl:15
 #, c-format
 msgid "Office Workstation"
 msgstr "Irodai munkaállomás"
 
-#: share/meta-task/compssUsers.pl:15
+#: share/meta-task/compssUsers.pl:17
 #, c-format
-msgid "Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets (OpenOffice.org Calc, Kspread), PDF viewers, etc"
-msgstr "Irodai programok: szövegszerkesztők (OpenOffice.org Writer, KWord), táblázatkezelők (OpenOffice.org Calc, KSpread), PDF-megjelenítők, ..."
+msgid ""
+"Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets "
+"(OpenOffice.org Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"Irodai programok: szövegszerkesztők (OpenOffice.org Writer, KWord), "
+"táblázatkezelők (OpenOffice.org Calc, KSpread), PDF-megjelenítők, ..."
 
-#: share/meta-task/compssUsers.pl:16
+#: share/meta-task/compssUsers.pl:18
 #, c-format
-msgid "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, gnumeric), pdf viewers, etc"
-msgstr "Irodai programok: szövegszerkesztők (KWord, AbiWord), táblázatkezelők (KSpread, Gnumeric), PDF-nézegetők, ..."
+msgid ""
+"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
+"gnumeric), pdf viewers, etc"
+msgstr ""
+"Irodai programok: szövegszerkesztők (KWord, AbiWord), táblázatkezelők "
+"(KSpread, Gnumeric), PDF-nézegetők, ..."
 
-#: share/meta-task/compssUsers.pl:21
+#: share/meta-task/compssUsers.pl:23
 #, c-format
 msgid "Game station"
 msgstr "Játékgép"
 
-#: share/meta-task/compssUsers.pl:22
+#: share/meta-task/compssUsers.pl:24
 #, c-format
 msgid "Amusement programs: arcade, boards, strategy, etc"
 msgstr "Játékprogramok: lövöldözős, táblás, stratégiai, ..."
 
-#: share/meta-task/compssUsers.pl:25
+#: share/meta-task/compssUsers.pl:27
 #, c-format
 msgid "Multimedia station"
 msgstr "Multimédiás munkaállomás"
 
-#: share/meta-task/compssUsers.pl:26
+#: share/meta-task/compssUsers.pl:28
 #, c-format
 msgid "Sound and video playing/editing programs"
 msgstr "Lejátszó- és szerkesztőprogramok hang- és videóanyagokhoz"
 
-#: share/meta-task/compssUsers.pl:31
+#: share/meta-task/compssUsers.pl:33
 #, c-format
 msgid "Internet station"
 msgstr "Internetes munkaállomás"
 
-#: share/meta-task/compssUsers.pl:32
+#: share/meta-task/compssUsers.pl:34
 #, c-format
-msgid "Set of tools to read and send mail and news (mutt, tin..) and to browse the Web"
-msgstr "Eszközök levelezéshez, hírkezeléshez (mutt, tin, ...) és a web böngészéséhez"
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"Eszközök levelezéshez, hírkezeléshez (mutt, tin, ...) és a web böngészéséhez"
 
-#: share/meta-task/compssUsers.pl:37
+#: share/meta-task/compssUsers.pl:39
 #, c-format
 msgid "Network Computer (client)"
 msgstr "Hálózati számítógép (kliens)"
 
-#: share/meta-task/compssUsers.pl:38
+#: share/meta-task/compssUsers.pl:40
 #, c-format
 msgid "Clients for different protocols including ssh"
 msgstr "Kliensprogramok különféle protokollokhoz (például: ssh)"
 
-#: share/meta-task/compssUsers.pl:43
+#: share/meta-task/compssUsers.pl:45
 #, c-format
 msgid "Tools to ease the configuration of your computer"
 msgstr "Segédprogramok a számítógép beállításához"
 
-#: share/meta-task/compssUsers.pl:47
+#: share/meta-task/compssUsers.pl:49
 #, c-format
 msgid "Console Tools"
 msgstr "Parancssori eszközök"
 
-#: share/meta-task/compssUsers.pl:48
+#: share/meta-task/compssUsers.pl:50
 #, c-format
 msgid "Editors, shells, file tools, terminals"
 msgstr "Szövegszerkesztők, parancsértelmezők, fájlkezelők, terminálprogramok"
 
-#: share/meta-task/compssUsers.pl:52
-#: share/meta-task/compssUsers.pl:153
-#: share/meta-task/compssUsers.pl:155
+#: share/meta-task/compssUsers.pl:54 share/meta-task/compssUsers.pl:156
+#: share/meta-task/compssUsers.pl:158
 #, c-format
 msgid "Development"
 msgstr "Fejlesztés"
 
-#: share/meta-task/compssUsers.pl:53
-#: share/meta-task/compssUsers.pl:156
+#: share/meta-task/compssUsers.pl:55 share/meta-task/compssUsers.pl:159
 #, c-format
 msgid "C and C++ development libraries, programs and include files"
 msgstr "C/C++ fejlesztőkönyvtárak, programok és include-fájlok"
 
-#: share/meta-task/compssUsers.pl:56
-#: share/meta-task/compssUsers.pl:160
+#: share/meta-task/compssUsers.pl:58 share/meta-task/compssUsers.pl:163
 #, c-format
 msgid "Documentation"
 msgstr "Dokumentáció"
 
-#: share/meta-task/compssUsers.pl:57
-#: share/meta-task/compssUsers.pl:161
+#: share/meta-task/compssUsers.pl:59 share/meta-task/compssUsers.pl:164
 #, c-format
 msgid "Books and Howto's on Linux and Free Software"
 msgstr "Könyvek és HOGYAN-ok a Linuxról és a szabad szoftverekről"
 
-#: share/meta-task/compssUsers.pl:61
-#: share/meta-task/compssUsers.pl:164
+#: share/meta-task/compssUsers.pl:63 share/meta-task/compssUsers.pl:167
 #, c-format
 msgid "LSB"
 msgstr "LSB"
 
-#: share/meta-task/compssUsers.pl:62
-#: share/meta-task/compssUsers.pl:165
+#: share/meta-task/compssUsers.pl:64 share/meta-task/compssUsers.pl:168
 #, c-format
 msgid "Linux Standard Base. Third party applications support"
 msgstr "Linux Standard Base. Külső társaságok alkalmazásainak támogatása."
 
-#: share/meta-task/compssUsers.pl:71
+#: share/meta-task/compssUsers.pl:73
 #, c-format
 msgid "Web Server"
 msgstr "Webkiszolgáló"
 
-#: share/meta-task/compssUsers.pl:72
+#: share/meta-task/compssUsers.pl:74
 #, c-format
 msgid "Apache"
 msgstr "Apache"
 
-#: share/meta-task/compssUsers.pl:75
+#: share/meta-task/compssUsers.pl:77
 #, c-format
 msgid "Groupware"
 msgstr "Csoportmunka-alkalmazás"
 
-#: share/meta-task/compssUsers.pl:76
+#: share/meta-task/compssUsers.pl:78
 #, c-format
 msgid "Kolab Server"
 msgstr "Kolab kiszolgáló"
 
-#: share/meta-task/compssUsers.pl:79
-#: share/meta-task/compssUsers.pl:120
+#: share/meta-task/compssUsers.pl:81 share/meta-task/compssUsers.pl:122
 #, c-format
 msgid "Firewall/Router"
 msgstr "Tűzfal/útválasztó (router)"
 
-#: share/meta-task/compssUsers.pl:80
-#: share/meta-task/compssUsers.pl:121
+#: share/meta-task/compssUsers.pl:82 share/meta-task/compssUsers.pl:123
 #, c-format
 msgid "Internet gateway"
 msgstr "Internet átjáró"
 
-#: share/meta-task/compssUsers.pl:83
+#: share/meta-task/compssUsers.pl:85
 #, c-format
 msgid "Mail/News"
 msgstr "Levelezés/hírek"
 
-#: share/meta-task/compssUsers.pl:84
+#: share/meta-task/compssUsers.pl:86
 #, c-format
 msgid "Postfix mail server, Inn news server"
 msgstr "Postfix email kiszolgáló, Inn hírkiszolgáló"
 
-#: share/meta-task/compssUsers.pl:87
+#: share/meta-task/compssUsers.pl:89
 #, c-format
 msgid "Directory Server"
 msgstr "Címtárkiszolgáló"
 
-#: share/meta-task/compssUsers.pl:91
+#: share/meta-task/compssUsers.pl:93
 #, c-format
 msgid "FTP Server"
 msgstr "FTP kiszolgáló"
 
-#: share/meta-task/compssUsers.pl:92
+#: share/meta-task/compssUsers.pl:94
 #, c-format
 msgid "ProFTPd"
 msgstr "ProFTPd"
 
-#: share/meta-task/compssUsers.pl:95
+#: share/meta-task/compssUsers.pl:97
 #, c-format
 msgid "DNS/NIS"
 msgstr "DNS/NIS"
 
-#: share/meta-task/compssUsers.pl:96
+#: share/meta-task/compssUsers.pl:98
 #, c-format
 msgid "Domain Name and Network Information Server"
 msgstr "DNS és NIS kiszolgáló"
 
-#: share/meta-task/compssUsers.pl:99
+#: share/meta-task/compssUsers.pl:101
 #, c-format
 msgid "File and Printer Sharing Server"
 msgstr "Fájl- és nyomtatómegosztási kiszolgáló"
 
-#: share/meta-task/compssUsers.pl:100
+#: share/meta-task/compssUsers.pl:102
 #, c-format
 msgid "NFS Server, Samba server"
 msgstr "NFS kiszolgáló, Samba kiszolgáló"
 
-#: share/meta-task/compssUsers.pl:103
-#: share/meta-task/compssUsers.pl:116
+#: share/meta-task/compssUsers.pl:105 share/meta-task/compssUsers.pl:118
 #, c-format
 msgid "Database"
 msgstr "Adatbázis"
 
-#: share/meta-task/compssUsers.pl:104
+#: share/meta-task/compssUsers.pl:106
 #, c-format
 msgid "PostgreSQL and MySQL Database Server"
 msgstr "PostgreSQL és MySQL adatbázis kiszolgáló"
 
-#: share/meta-task/compssUsers.pl:108
+#: share/meta-task/compssUsers.pl:110
 #, c-format
 msgid "Web/FTP"
 msgstr "Web/FTP"
 
-#: share/meta-task/compssUsers.pl:109
+#: share/meta-task/compssUsers.pl:111
 #, c-format
 msgid "Apache, Pro-ftpd"
 msgstr "Apache, Pro-ftpd"
 
-#: share/meta-task/compssUsers.pl:112
+#: share/meta-task/compssUsers.pl:114
 #, c-format
 msgid "Mail"
 msgstr "Levelezés"
 
-#: share/meta-task/compssUsers.pl:113
+#: share/meta-task/compssUsers.pl:115
 #, c-format
 msgid "Postfix mail server"
 msgstr "Postfix email kiszolgáló"
 
-#: share/meta-task/compssUsers.pl:117
+#: share/meta-task/compssUsers.pl:119
 #, c-format
 msgid "PostgreSQL or MySQL database server"
 msgstr "PostgreSQL vagy MySQL adatbázis kiszolgáló"
 
-#: share/meta-task/compssUsers.pl:124
+#: share/meta-task/compssUsers.pl:126
 #, c-format
 msgid "Network Computer server"
 msgstr "Kiszolgáló hálózati számítógépekhez"
 
-#: share/meta-task/compssUsers.pl:125
+#: share/meta-task/compssUsers.pl:127
 #, c-format
 msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "NFS, SMB, proxy és SSH kiszolgáló"
 
-#: share/meta-task/compssUsers.pl:131
+#: share/meta-task/compssUsers.pl:133
 #, c-format
 msgid "Graphical Environment"
 msgstr "Grafikus környezet"
 
-#: share/meta-task/compssUsers.pl:133
+#: share/meta-task/compssUsers.pl:135
 #, c-format
 msgid "KDE Workstation"
 msgstr "KDE munkaállomás"
 
-#: share/meta-task/compssUsers.pl:134
+#: share/meta-task/compssUsers.pl:136
 #, c-format
-msgid "The K Desktop Environment, the basic graphical environment with a collection of accompanying tools"
-msgstr "A K Desktop Environment - az alapvető grafikus környezet - az ahhoz tartozó eszközökkel együtt"
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"A K Desktop Environment - az alapvető grafikus környezet - az ahhoz tartozó "
+"eszközökkel együtt"
 
-#: share/meta-task/compssUsers.pl:138
+#: share/meta-task/compssUsers.pl:140
 #, c-format
 msgid "GNOME Workstation"
 msgstr "GNOME munkaállomás"
 
-#: share/meta-task/compssUsers.pl:139
+#: share/meta-task/compssUsers.pl:141
 #, c-format
-msgid "A graphical environment with user-friendly set of applications and desktop tools"
-msgstr "Grafikus környezet felhasználóbarát alkalmazásokkal és segédprogramokkal"
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr ""
+"Grafikus környezet felhasználóbarát alkalmazásokkal és segédprogramokkal"
 
-#: share/meta-task/compssUsers.pl:142
+#: share/meta-task/compssUsers.pl:145
 #, c-format
 msgid "IceWm Desktop"
 msgstr "IceWm munkaasztal"
 
-#: share/meta-task/compssUsers.pl:146
+#: share/meta-task/compssUsers.pl:149
 #, c-format
 msgid "Other Graphical Desktops"
 msgstr "Más grafikus környezetek"
 
-#: share/meta-task/compssUsers.pl:147
+#: share/meta-task/compssUsers.pl:150
 #, c-format
 msgid "Window Maker, Enlightenment, Fvwm, etc"
 msgstr "WindowMaker, Enlightenment, Fvwm, ..."
 
-#: share/meta-task/compssUsers.pl:170
+#: share/meta-task/compssUsers.pl:173
 #, c-format
 msgid "Utilities"
 msgstr "Segédprogramok"
 
-#: share/meta-task/compssUsers.pl:172
-#: share/meta-task/compssUsers.pl:173
+#: share/meta-task/compssUsers.pl:175 share/meta-task/compssUsers.pl:176
 #, c-format
 msgid "SSH Server"
 msgstr "SSH kiszolgáló"
 
-#: share/meta-task/compssUsers.pl:177
+#: share/meta-task/compssUsers.pl:180
 #, c-format
 msgid "Webmin"
 msgstr "Webmin"
 
-#: share/meta-task/compssUsers.pl:178
+#: share/meta-task/compssUsers.pl:181
 #, c-format
 msgid "Webmin Remote Configuration Server"
 msgstr "Webmin kiszolgáló távoli beállításhoz"
 
-#: share/meta-task/compssUsers.pl:182
+#: share/meta-task/compssUsers.pl:185
 #, c-format
 msgid "Network Utilities/Monitoring"
 msgstr "Hálózati programok/hálózatfigyelés"
 
-#: share/meta-task/compssUsers.pl:183
+#: share/meta-task/compssUsers.pl:186
 #, c-format
 msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
 msgstr "Figyelőeszközök, folyamatszámlázás, tcpdump, nmap, ..."
 
-#: share/meta-task/compssUsers.pl:187
+#: share/meta-task/compssUsers.pl:190
 #, c-format
 msgid "Mandriva Wizards"
 msgstr "Mandriva varázslók"
 
-#: share/meta-task/compssUsers.pl:188
+#: share/meta-task/compssUsers.pl:191
 #, c-format
 msgid "Wizards to configure server"
 msgstr "Varázslók a kiszolgáló beállítására"
@@ -670,12 +741,13 @@ msgstr ""
 "Hiba történt, de nem lett megfelelően lekezelve.\n"
 "Csak akkor lépjen tovább, ha biztos abban, hogy ez nem fog gondot okozni."
 
-#: steps.pm:437
+#: steps.pm:442
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
 "Either your cdrom drive or your cdrom is defective.\n"
-"Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm\"\n"
+"Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm"
+"\"\n"
 msgstr ""
 "Néhány fontos csomag telepítése nem sikerült.\n"
 "Ez azt jelenti, hogy a CD-meghajtó vagy a CD hibás.\n"
@@ -683,8 +755,7 @@ msgstr ""
 "parancs segítségével tesztelheti le:\n"
 "\"rpm -qpl media/main/*.rpm\"\n"
 
-#: steps_auto_install.pm:71
-#: steps_stdio.pm:27
+#: steps_auto_install.pm:71 steps_stdio.pm:27
 #, c-format
 msgid "Entering step `%s'\n"
 msgstr "A következő lépés: \"%s\"\n"
@@ -699,16 +770,17 @@ msgstr "Mandriva Linux telepítés %s"
 msgid "<Tab>/<Alt-Tab> between elements"
 msgstr "<Tab>/<Alt+Tab> lépegetés"
 
-#: steps_gtk.pm:84
+#: steps_gtk.pm:89
 #, c-format
 msgid "Xorg server is slow to start. Please wait..."
 msgstr "Az Xorg kiszolgáló lassan indul. Kérem várjon..."
 
-#: steps_gtk.pm:194
+#: steps_gtk.pm:203
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
-"Mandriva Linux. If that occurs, you can try a text install instead. For this,\n"
+"Mandriva Linux. If that occurs, you can try a text install instead. For "
+"this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "A rendszer gyenge erőforrásokkal rendelkezik. Előfordulhat, hogy problémái\n"
@@ -716,17 +788,17 @@ msgstr ""
 "szöveges módú telepítéssel: CD-ről való rendszerindítást követően nyomjon\n"
 "\"F1\"-et, majd írja be azt, hogy \"text\"."
 
-#: steps_gtk.pm:228
+#: steps_gtk.pm:236
 #, c-format
 msgid "Install Mandriva KDE Desktop"
 msgstr "A Mandriva KDE asztalának telepítése"
 
-#: steps_gtk.pm:229
+#: steps_gtk.pm:237
 #, c-format
 msgid "Install Mandriva GNOME Desktop"
 msgstr "A Mandriva GNOME asztalának telepítése"
 
-#: steps_gtk.pm:230
+#: steps_gtk.pm:238
 #, c-format
 msgid "Custom install"
 msgstr "Egyéni telepítés"
@@ -751,66 +823,62 @@ msgstr "Egyéni munkaasztal"
 msgid "Here's a preview of the '%s' desktop."
 msgstr "Így fog kinézni a '%s' munkaasztala."
 
-#: steps_gtk.pm:275
+#: steps_gtk.pm:295
 #, c-format
 msgid "Click on images in order to see a bigger preview"
 msgstr "Kattintson a képre, ha nagyobb méretben szeretné megtekinteni"
 
-#: steps_gtk.pm:287
-#: steps_interactive.pm:618
-#: steps_list.pm:30
+#: steps_gtk.pm:313 steps_interactive.pm:626 steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "Csomagcsoportok kiválasztása"
 
-#: steps_gtk.pm:308
-#: steps_interactive.pm:635
+#: steps_gtk.pm:334 steps_interactive.pm:643
 #, c-format
 msgid "Individual package selection"
 msgstr "Csomagok egyedi kiválasztása"
 
-#: steps_gtk.pm:330
-#: steps_interactive.pm:561
+#: steps_gtk.pm:358 steps_interactive.pm:567
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Összméret: %d / %d MB"
 
-#: steps_gtk.pm:375
+#: steps_gtk.pm:401
 #, c-format
 msgid "Bad package"
 msgstr "Hibás csomag"
 
-#: steps_gtk.pm:377
+#: steps_gtk.pm:403
 #, c-format
 msgid "Version: "
 msgstr "Verzió: "
 
-#: steps_gtk.pm:378
+#: steps_gtk.pm:404
 #, c-format
 msgid "Size: "
 msgstr "Méret: "
 
-#: steps_gtk.pm:378
+#: steps_gtk.pm:404
 #, c-format
 msgid "%d KB\n"
 msgstr "%d KB\n"
 
-#: steps_gtk.pm:379
+#: steps_gtk.pm:405
 #, c-format
 msgid "Importance: "
 msgstr "Fontosság: "
 
-#: steps_gtk.pm:413
+#: steps_gtk.pm:439
 #, c-format
 msgid "You can not select/unselect this package"
 msgstr "Ez a csomag nem jelölhető ki illetve nem törölhető a kijelölése"
 
-#: steps_gtk.pm:417
+#: steps_gtk.pm:443
 #, c-format
 msgid "due to missing %s"
 msgstr "\"%s\" hiánya miatt"
 
-#: steps_gtk.pm:418
+#: steps_gtk.pm:444
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "\"%s\" igényei miatt"
@@ -828,137 +896,133 @@ msgstr "\"%s\" igényei miatt"
 # continues by not selecting a package which was selected by a promotion (not
 # asked by the user directly but caused by a package which has been upgraded thus
 # breaking existing packages, the promotion concerns this).
-#: steps_gtk.pm:419
+#: steps_gtk.pm:445
 #, c-format
 msgid "trying to promote %s"
 msgstr "a legalkalmasabb \"%s\" keresése"
 
-#: steps_gtk.pm:420
+#: steps_gtk.pm:446
 #, c-format
 msgid "in order to keep %s"
 msgstr "\"%s\" megtartása érdekében"
 
-#: steps_gtk.pm:425
+#: steps_gtk.pm:451
 #, c-format
-msgid "You can not select this package as there is not enough space left to install it"
-msgstr "Nem választhatja ki ezt a csomagot, mert nincs elég hely a merevlemezen."
+msgid ""
+"You can not select this package as there is not enough space left to install "
+"it"
+msgstr ""
+"Nem választhatja ki ezt a csomagot, mert nincs elég hely a merevlemezen."
 
-#: steps_gtk.pm:428
+#: steps_gtk.pm:454
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "A telepítő a következő csomagokat fogja telepíteni:"
 
-#: steps_gtk.pm:429
+#: steps_gtk.pm:455
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "A telepítő a következő csomagokat távolítja el:"
 
-#: steps_gtk.pm:454
+#: steps_gtk.pm:480
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
 msgstr "Ez egy kötelező csomag, nem lehet megszüntetni a kijelölését"
 
-#: steps_gtk.pm:456
+#: steps_gtk.pm:482
 #, c-format
 msgid "You can not unselect this package. It is already installed"
 msgstr "Nem törölhető ennek a csomagnak a kijelölése, mert már telepítve van"
 
-#: steps_gtk.pm:458
+#: steps_gtk.pm:484
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
-msgstr "Nem törölheti ennek a csomagnak a kijelölését. Ez a csomag frissítendő."
+msgstr ""
+"Nem törölheti ennek a csomagnak a kijelölését. Ez a csomag frissítendő."
 
-#: steps_gtk.pm:462
+#: steps_gtk.pm:488
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "Automatikusan kijelölt csomagok mutatása"
 
-#: steps_gtk.pm:464
+#: steps_gtk.pm:494
 #, c-format
 msgid "Install"
 msgstr "Telepítés"
 
-#: steps_gtk.pm:467
+#: steps_gtk.pm:497
 #, c-format
 msgid "Load/Save selection"
 msgstr "Kijelölés betöltése/mentése"
 
-#: steps_gtk.pm:468
+#: steps_gtk.pm:498
 #, c-format
 msgid "Updating package selection"
 msgstr "A csomagkiválasztás frissítése"
 
-#: steps_gtk.pm:473
+#: steps_gtk.pm:503
 #, c-format
 msgid "Minimal install"
 msgstr "Minimális telepítés"
 
-#: steps_gtk.pm:487
+#: steps_gtk.pm:516
 #, c-format
 msgid "Software Management"
 msgstr "Szoftverkezelés"
 
-#: steps_gtk.pm:487
-#: steps_interactive.pm:447
+#: steps_gtk.pm:516 steps_interactive.pm:452
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Válassza ki a telepítendő csomagokat"
 
-#: steps_gtk.pm:504
-#: steps_interactive.pm:649
-#: steps_list.pm:32
+#: steps_gtk.pm:533 steps_interactive.pm:657 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "Telepítés"
 
-#: steps_gtk.pm:530
+#: steps_gtk.pm:562
 #, c-format
 msgid "No details"
 msgstr "Részletek nélkül"
 
-#: steps_gtk.pm:559
+#: steps_gtk.pm:577
 #, c-format
 msgid "Time remaining:"
 msgstr "Hátralevő idő:"
 
-#: steps_gtk.pm:560
+#: steps_gtk.pm:578
 #, c-format
 msgid "(estimating...)"
 msgstr "(becslés...)"
 
-#: steps_gtk.pm:573
+#: steps_gtk.pm:604
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d csomag"
 msgstr[1] "%d csomag"
 
-#: steps_gtk.pm:619
-#: steps_interactive.pm:837
-#: steps_list.pm:43
+#: steps_gtk.pm:650 steps_interactive.pm:820 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Összefoglalás"
 
-#: steps_gtk.pm:636
+#: steps_gtk.pm:669
 #, c-format
 msgid "Configure"
 msgstr "Beállítás"
 
-#: steps_gtk.pm:653
-#: steps_interactive.pm:833
-#: steps_interactive.pm:984
+#: steps_gtk.pm:686 steps_interactive.pm:816 steps_interactive.pm:967
 #, c-format
 msgid "not configured"
 msgstr "nincs beállítva"
 
-#: steps_gtk.pm:694
+#: steps_gtk.pm:720
 #, c-format
 msgid "Media Selection"
 msgstr "Adathordozó kiválasztása"
 
-#: steps_gtk.pm:704
-#: steps_interactive.pm:335
+#: steps_gtk.pm:729 steps_interactive.pm:334
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -967,105 +1031,92 @@ msgstr ""
 "A rendszer a következő telepítési adathordozókat találta.\n"
 "Ha szeretné kihagyni valamelyiket, távolítsa el annak kijelölését."
 
-#: steps_gtk.pm:700
-#: steps_interactive.pm:337
+#: steps_gtk.pm:745 steps_interactive.pm:340
 #, c-format
 msgid ""
-"You have the option to copy the contents of the CDs onto the hard drive before installation.\n"
-"It will then continue from the hard drive and the packages will remain available once the system is fully installed."
+"You have the option to copy the contents of the CDs onto the hard drive "
+"before installation.\n"
+"It will then continue from the hard drive and the packages will remain "
+"available once the system is fully installed."
 msgstr ""
-"Lehetősége van arra, hogy a CD-k tartalmát lemásolja a merevlemezre a telepítés előtt.\n"
-"Ez esetben a telepítés a merevlemezről folytatódik, és annak végeztével a csomagok elérhetők maradnak."
+"Lehetősége van arra, hogy a CD-k tartalmát lemásolja a merevlemezre a "
+"telepítés előtt.\n"
+"Ez esetben a telepítés a merevlemezről folytatódik, és annak végeztével a "
+"csomagok elérhetők maradnak."
 
-#: steps_gtk.pm:702
-#: steps_interactive.pm:339
+#: steps_gtk.pm:747 steps_interactive.pm:342
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Teljes CD-k másolása"
 
-#: steps_interactive.pm:38
+#: steps_interactive.pm:39
 #, c-format
 msgid "An error occurred"
 msgstr "Hiba lépett fel"
 
-#: steps_interactive.pm:102
+#: steps_interactive.pm:104
 #, c-format
 msgid "Please choose your keyboard layout"
 msgstr "Válasszon billentyűzetkiosztást"
 
-#: steps_interactive.pm:105
+#: steps_interactive.pm:108
 #, c-format
 msgid "Here is the full list of available keyboards:"
 msgstr "Az elérhető billentyűzetek teljes listája:"
 
-#: steps_interactive.pm:136
+#: steps_interactive.pm:139
 #, c-format
 msgid "Install/Upgrade"
 msgstr "Telepítés/frissítés"
 
-#: steps_interactive.pm:134
+#: steps_interactive.pm:143
 #, c-format
 msgid "Is this an install or an upgrade?"
 msgstr "Új telepítés vagy frissítés?"
 
-#: steps_interactive.pm:138
+#: steps_interactive.pm:145
 #, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
 msgstr "Telepítés"
 
-#: steps_interactive.pm:144
+#: steps_interactive.pm:147
 #, c-format
 msgid "Upgrade %s"
 msgstr "Frissítés: %s"
 
-#: steps_interactive.pm:148
+#: steps_interactive.pm:151
 #, c-format
 msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 msgstr "32 bites disztribúcióról 64 bitesre való frissítés nem támogatott"
 
-#: steps_interactive.pm:152
+#: steps_interactive.pm:155
 #, c-format
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 msgstr "64 bites disztribúcióról 32 bitesre való frissítés nem támogatott"
 
-#: steps_interactive.pm:162
-#, c-format
-msgid ""
-"You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
-"on your system. This installer cannot preserve KDE 3.5 in an upgrade. If you choose to proceed, \n"
-"KDE 4 will replace KDE 3, and you will lose your personal KDE configuration settings. \n"
-"To upgrade with KDE 3.5 and your personal settings preserved, \n"
-"please reboot your system and upgrade using the Mandriva update applet."
-msgstr ""
-"A rendszer 2009.0-ra frissítését választotta. KDE 3.5 található a jelenlegi rendszerén. \n"
-"Ez a telepítő nem tudja a KDE 3.5-öt biztonságosan frissíteni. Ha folytatja ezt a műveletet, \n"
-"akkor a KDE 4 le fogja cserélni a KDE 3.5-öt, de minden személyes KDE beállítása el fog veszni. \n"
-"A KDE 3.5 frissítéséhez, illetve a személyes adatainak a megőrzéséhez \n"
-"kérjük indítsa el a saját rendszerét, és használja a Mandriva frissítő alkalmazását."
-
-#: steps_interactive.pm:180
+#: steps_interactive.pm:174
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Titkosítási kulcs ehhez: %s"
 
-#: steps_interactive.pm:199
+#: steps_interactive.pm:207
 #, c-format
 msgid "Cancel installation, reboot system"
 msgstr "Telepítés megszakítva, a rendszer újraindul"
 
-#: steps_interactive.pm:200
+#: steps_interactive.pm:208
 #, c-format
 msgid "New Installation"
 msgstr "Új telepítés"
 
-#: steps_interactive.pm:201
+#: steps_interactive.pm:209
 #, c-format
 msgid "Upgrade previous installation (not recommended)"
 msgstr "Előző telepítés frissítése (nem ajánlott)"
 
-#: steps_interactive.pm:205
+#: steps_interactive.pm:213
 #, c-format
 msgid ""
 "Installer has detected that your installed Mandriva Linux system could not\n"
@@ -1084,48 +1135,65 @@ msgstr ""
 "Figyelem: ha az \"Új telepítést\" választja, akkor ajánlott minden \n"
 "személyes adat előzetes lementése."
 
-#: steps_interactive.pm:247
+#: steps_interactive.pm:255
 #, c-format
 msgid "IDE"
 msgstr "IDE"
 
-#: steps_interactive.pm:247
+#: steps_interactive.pm:255
 #, c-format
 msgid "Configuring IDE"
 msgstr "IDE beállítások"
 
-#: steps_interactive.pm:284
+#: steps_interactive.pm:292
 #, c-format
-msgid "No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"
-msgstr "Nincs elég szabad hely az 1 MB-os betöltőprogramnak. A telepítés folytatható, de a rendszer indításához létre kell hozni egy rendszerindító partíciót a DiskDrake-kel."
+msgid ""
+"No free space for 1MB bootstrap! Install will continue, but to boot your "
+"system, you'll need to create the bootstrap partition in DiskDrake"
+msgstr ""
+"Nincs elég szabad hely az 1 MB-os betöltőprogramnak. A telepítés "
+"folytatható, de a rendszer indításához létre kell hozni egy rendszerindító "
+"partíciót a DiskDrake-kel."
 
-#: steps_interactive.pm:289
+#: steps_interactive.pm:297
 #, c-format
-msgid "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"
-msgstr "Létre kell hozni egy PPC PReP rendszerindítót. A telepítés folytatódik, de a rendszer indításához létre kell hozni a rendszerindítási partíciót a DiskDrake-kel."
+msgid ""
+"You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
+"to boot your system, you'll need to create the bootstrap partition in "
+"DiskDrake"
+msgstr ""
+"Létre kell hozni egy PPC PReP rendszerindítót. A telepítés folytatódik, de a "
+"rendszer indításához létre kell hozni a rendszerindítási partíciót a "
+"DiskDrake-kel."
 
-#: steps_interactive.pm:381
+#: steps_interactive.pm:378
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
-"Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.\n"
+"Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when "
+"done.\n"
 "If you do not have it, press Cancel to avoid installation from this Cd-Rom."
 msgstr ""
 "Cserélje ki a CD-t a meghajtóban.\n"
 "Tegye be a(z) \"%s\" feliratú lemezt, és nyomja meg az \"OK\" gombot.\n"
-"Ha nincs ilyen lemeze, akkor nyomja meg a \"Mégsem\" gombot, így erről a CD-ről nem történik telepítés."
+"Ha nincs ilyen lemeze, akkor nyomja meg a \"Mégsem\" gombot, így erről a CD-"
+"ről nem történik telepítés."
 
-#: steps_interactive.pm:403
+#: steps_interactive.pm:408
 #, c-format
 msgid "Looking for available packages..."
 msgstr "A rendelkezésre álló csomagok keresése..."
 
-#: steps_interactive.pm:411
+#: steps_interactive.pm:416
 #, c-format
-msgid "Your system does not have enough space left for installation or upgrade (%dMB > %dMB)"
-msgstr "A rendszerben nincs elegendő szabad hely a telepítéshez illetve frissítéshez (%d MB > %d MB)"
+msgid ""
+"Your system does not have enough space left for installation or upgrade (%"
+"dMB > %dMB)"
+msgstr ""
+"A rendszerben nincs elegendő szabad hely a telepítéshez illetve frissítéshez "
+"(%d MB > %d MB)"
 
-#: steps_interactive.pm:459
+#: steps_interactive.pm:464
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1135,52 +1203,52 @@ msgstr ""
 "csomagkijelölést vagy a jelenlegi kijelölést szeretné elmenteni.\n"
 "A formátum ugyanaz, mint az automatikus telepítési fájloknál."
 
-#: steps_interactive.pm:461
+#: steps_interactive.pm:466
 #, c-format
 msgid "Load"
 msgstr "Terhelés"
 
-#: steps_interactive.pm:461
+#: steps_interactive.pm:466
 #, c-format
 msgid "Save"
 msgstr "Mentés"
 
-#: steps_interactive.pm:469
+#: steps_interactive.pm:474
 #, c-format
 msgid "Bad file"
 msgstr "Hibás fájl"
 
-#: steps_interactive.pm:485
+#: steps_interactive.pm:490
 #, c-format
 msgid "KDE"
 msgstr "KDE"
 
-#: steps_interactive.pm:486
+#: steps_interactive.pm:491
 #, c-format
 msgid "GNOME"
 msgstr "GNOME"
 
-#: steps_interactive.pm:489
+#: steps_interactive.pm:494
 #, c-format
 msgid "Desktop Selection"
 msgstr "Munkaasztal kiválasztása"
 
-#: steps_interactive.pm:490
+#: steps_interactive.pm:495
 #, c-format
 msgid "You can choose your workstation desktop profile."
 msgstr "Kiválaszthatja a munkaállomás asztalprofilját."
 
-#: steps_interactive.pm:575
+#: steps_interactive.pm:581
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "A kijelölt összméret nagyobb, mint a rendelkezésre álló hely"
 
-#: steps_interactive.pm:590
+#: steps_interactive.pm:596
 #, c-format
 msgid "Type of install"
 msgstr "A telepítés típusa"
 
-#: steps_interactive.pm:591
+#: steps_interactive.pm:597
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1189,83 +1257,84 @@ msgstr ""
 "Egyetlen csomagcsoportot sem jelölt ki.\n"
 "Válassza ki, milyen fajta minimális telepítést szeretne."
 
-#: steps_interactive.pm:594
+#: steps_interactive.pm:602
 #, c-format
 msgid "With X"
 msgstr "X-xel együtt"
 
-#: steps_interactive.pm:595
+#: steps_interactive.pm:603
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "Alapvető dokumentációval (javasolt)"
 
-#: steps_interactive.pm:596
+#: steps_interactive.pm:604
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Valóban minimális telepítés (urpmi sincs)"
 
-#: steps_interactive.pm:650
+#: steps_interactive.pm:658
 #, c-format
 msgid "Preparing installation"
 msgstr "A telepítés előkészítése"
 
-#: steps_interactive.pm:658
+#: steps_interactive.pm:666
 #, c-format
 msgid "Installing package %s"
 msgstr "%s csomag telepítése"
 
-#: steps_interactive.pm:682
+#: steps_interactive.pm:690
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Hiba történt a csomagok rendezésekor:"
 
-#: steps_interactive.pm:682
+#: steps_interactive.pm:690
 #, c-format
 msgid "Go on anyway?"
 msgstr "Kívánja folytatni ettől függetlenül?"
 
-#: steps_interactive.pm:686
+#: steps_interactive.pm:694
 #, c-format
 msgid "Retry"
 msgstr "Újra"
 
-#: steps_interactive.pm:687
+#: steps_interactive.pm:695
 #, c-format
 msgid "Skip this package"
 msgstr "Ezen csomag kihagyása"
 
-#: steps_interactive.pm:688
+#: steps_interactive.pm:696
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "A(z) \"%s\" adathordozón levő összes csomag kihagyása"
 
-#: steps_interactive.pm:689
+#: steps_interactive.pm:697
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "Visszalépés az adathordozó és csomagválasztáshoz"
 
-#: steps_interactive.pm:692
+#: steps_interactive.pm:700
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "Hiba történt a(z) %s csomag telepítésekor."
 
-#: steps_interactive.pm:710
+#: steps_interactive.pm:719
 #, c-format
 msgid "Post-install configuration"
 msgstr "Telepítés utáni beállítások"
 
-#: steps_interactive.pm:717
+#: steps_interactive.pm:726
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
-msgstr "Tegye be a frissítési modulokat tartalmazó adathordozót a(z) \"%s\" meghajtóba"
+msgstr ""
+"Tegye be a frissítési modulokat tartalmazó adathordozót a(z) \"%s\" "
+"meghajtóba"
 
-#: steps_interactive.pm:745
-#: steps_list.pm:47
+#: steps_interactive.pm:754 steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "Frissítések"
 
-#: steps_interactive.pm:746
+#: steps_interactive.pm:755
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1284,113 +1353,131 @@ msgstr ""
 "\n"
 "Szeretné feltelepíteni a frissítéseket?"
 
-#: steps_interactive.pm:849
+#: steps_interactive.pm:862
 #, c-format
 msgid "%s on %s"
 msgstr "%s ezen: %s"
 
-#: steps_interactive.pm:912
-#: steps_interactive.pm:919
-#: steps_interactive.pm:932
-#: steps_interactive.pm:949
-#: steps_interactive.pm:964
+#: steps_interactive.pm:895 steps_interactive.pm:902 steps_interactive.pm:915
+#: steps_interactive.pm:932 steps_interactive.pm:947
 #, c-format
 msgid "Hardware"
 msgstr "Hardver"
 
-#: steps_interactive.pm:933
-#: steps_interactive.pm:950
+#: steps_interactive.pm:916 steps_interactive.pm:933
 #, c-format
 msgid "Sound card"
 msgstr "Hangkártya"
 
-#: steps_interactive.pm:953
+#: steps_interactive.pm:936
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Van ISA hangkártyája?"
 
-#: steps_interactive.pm:955
+#: steps_interactive.pm:938
 #, c-format
-msgid "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound card"
-msgstr "A hangkártya beállításához futtassa az \"alsaconf\" vagy az \"sndconfig\" programot a telepítés után."
+msgid ""
+"Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
+"card"
+msgstr ""
+"A hangkártya beállításához futtassa az \"alsaconf\" vagy az \"sndconfig\" "
+"programot a telepítés után."
 
-#: steps_interactive.pm:957
+#: steps_interactive.pm:940
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
-msgstr "A telepítő nem talált hangkártyát. Futtassa a \"harddrake\" programot a telepítés után."
+msgstr ""
+"A telepítő nem talált hangkártyát. Futtassa a \"harddrake\" programot a "
+"telepítés után."
 
-#: steps_interactive.pm:965
+#: steps_interactive.pm:948
 #, c-format
 msgid "Graphical interface"
 msgstr "Grafikus felület"
 
-#: steps_interactive.pm:971
-#: steps_interactive.pm:982
+#: steps_interactive.pm:954 steps_interactive.pm:965
 #, c-format
 msgid "Network & Internet"
 msgstr "Hálózat és internet"
 
-#: steps_interactive.pm:983
+#: steps_interactive.pm:966
 #, c-format
 msgid "Proxies"
 msgstr "Proxyk"
 
-#: steps_interactive.pm:984
+#: steps_interactive.pm:967
 #, c-format
 msgid "configured"
 msgstr "beállítva"
 
-#: steps_interactive.pm:994
+#: steps_interactive.pm:977
 #, c-format
 msgid "Security Level"
 msgstr "Biztonsági szint"
 
-#: steps_interactive.pm:1013
+#: steps_interactive.pm:996
 #, c-format
 msgid "Firewall"
 msgstr "Tűzfal"
 
-#: steps_interactive.pm:1017
+#: steps_interactive.pm:1000
 #, c-format
 msgid "activated"
 msgstr "aktiválva"
 
-#: steps_interactive.pm:1017
+#: steps_interactive.pm:1000
 #, c-format
 msgid "disabled"
 msgstr "kikapcsolva"
 
-#: steps_interactive.pm:1031
+#: steps_interactive.pm:1014
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Az X grafikus rendszert nem állította be. Biztosan megfelel így?"
 
-#: steps_interactive.pm:1058
+#: steps_interactive.pm:1042
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Rendszerbetöltő előkészítése..."
 
+#: steps_interactive.pm:1043
+#, c-format
+msgid "Be patient, this may take a while..."
+msgstr ""
+
+#: steps_interactive.pm:1054
+#, c-format
+msgid ""
+"You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
+"will not work for you. The install will continue, but you'll need to use "
+"BootX or some other means to boot your machine. The kernel argument for the "
+"root fs is: root=%s"
+msgstr ""
+"A gép típusa feltehetően OldWorld vagy ismeretlen, ezért a Yaboot "
+"rendszerindító program nem fog működni. A telepítés folytatódik, de a gép "
+"indításához BootX-re vagy egyéb módszerre lesz szükség. A gyökér-"
+"fájlrendszer kernelparamétere: root=%s"
+
 #: steps_interactive.pm:1068
 #, c-format
-msgid "You appear to have an OldWorld or Unknown machine, the yaboot bootloader will not work for you. The install will continue, but you'll need to use BootX or some other means to boot your machine. The kernel argument for the root fs is: root=%s"
-msgstr "A gép típusa feltehetően OldWorld vagy ismeretlen, ezért a Yaboot rendszerindító program nem fog működni. A telepítés folytatódik, de a gép indításához BootX-re vagy egyéb módszerre lesz szükség. A gyökér-fájlrendszer kernelparamétere: root=%s"
+msgid ""
+"In this security level, access to the files in the Windows partition is "
+"restricted to the administrator."
+msgstr ""
+"Ezen a biztonsági szinten csak a rendszergazda érheti el a windowsos "
+"partíción levő fájlokat."
 
-#: steps_interactive.pm:1087
-#, c-format
-msgid "In this security level, access to the files in the Windows partition is restricted to the administrator."
-msgstr "Ezen a biztonsági szinten csak a rendszergazda érheti el a windowsos partíción levő fájlokat."
-
-#: steps_interactive.pm:1121
+#: steps_interactive.pm:1100
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Tegyen egy üres floppyt a(z) \"%s\" meghajtóba"
 
-#: steps_interactive.pm:1123
+#: steps_interactive.pm:1102
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Automatikus telepítőfloppy készítése..."
 
-#: steps_interactive.pm:1134
+#: steps_interactive.pm:1113
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1401,15 +1488,10 @@ msgstr ""
 "\n"
 "Biztos, hogy ki akar lépni?"
 
-#: steps_interactive.pm:1144
+#: steps_interactive.pm:1123
 #, c-format
 msgid "Congratulations"
 msgstr "Gratulálunk"
-
-#: steps_interactive.pm:1147
-#, c-format
-msgid "Reboot"
-msgstr "Újraindítás"
 
 #. -PO: please keep the following messages very short: they must fit in the left list of the installer!!!
 #: steps_list.pm:16
@@ -1419,8 +1501,7 @@ msgid ""
 "Language"
 msgstr "Nyelv"
 
-#: steps_list.pm:16
-#: steps_list.pm:23
+#: steps_list.pm:16 steps_list.pm:23
 #, c-format
 msgid "Localization"
 msgstr "Lokalizáció"
@@ -1439,16 +1520,14 @@ msgid ""
 "Mouse"
 msgstr "Egér"
 
-#: steps_list.pm:19
-#: steps_list.pm:20
+#: steps_list.pm:19 steps_list.pm:20
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Hard drive detection"
 msgstr "Merevlemez keresése"
 
-#: steps_list.pm:21
-#: steps_list.pm:22
+#: steps_list.pm:21 steps_list.pm:22
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
@@ -1476,8 +1555,7 @@ msgid ""
 "Partitioning"
 msgstr "Partícionálás"
 
-#: steps_list.pm:27
-#: steps_list.pm:28
+#: steps_list.pm:27 steps_list.pm:28
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
@@ -1505,24 +1583,21 @@ msgid ""
 "Users"
 msgstr "Felhasználók"
 
-#: steps_list.pm:36
-#: steps_list.pm:37
+#: steps_list.pm:36 steps_list.pm:37
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "Hálózat"
 
-#: steps_list.pm:38
-#: steps_list.pm:39
+#: steps_list.pm:38 steps_list.pm:39
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Bootloader"
 msgstr "Rendszerbetöltő"
 
-#: steps_list.pm:40
-#: steps_list.pm:41
+#: steps_list.pm:40 steps_list.pm:41
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
@@ -1536,8 +1611,7 @@ msgid ""
 "Summary"
 msgstr "Összefoglalás"
 
-#: steps_list.pm:44
-#: steps_list.pm:45
+#: steps_list.pm:44 steps_list.pm:45
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
@@ -1558,39 +1632,17 @@ msgid ""
 "Exit"
 msgstr "Kilépés"
 
-#: ../../advertising/IM_flash.pl:1
-#, c-format
-msgid "Your desktop on a USB key"
-msgstr "Az Ön munkaasztala egy USB kulcson"
-
-#: ../../advertising/IM_free09.pl:1
-#, c-format
-msgid "The 100%% open source Mandriva Linux distribution"
-msgstr "A 100%%-ban nyílt forráskódú Mandriva Linux disztribúció"
-
-#: ../../advertising/IM_one09.pl:1
-#, c-format
-msgid "Explore Linux easily with Mandriva One"
-msgstr "A Linux könnyed kipróbálása: Mandriva One"
-
-#: ../../advertising/IM_pwp09.pl:1
-#, c-format
-msgid "A full Mandriva Linux desktop, with support"
-msgstr "Egy teljes Mandriva Linux munkaasztal, támogatással"
-
-#: ../../advertising/IM_range09.pl:1
-#, c-format
-msgid "Mandriva: distributions for everybody's needs"
-msgstr "Mandriva: disztribúciók minden igényre"
-
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr ""
 #~ "Kapcsolatfelvétel a tükörkiszolgálóval; az elérhető csomagok listájának "
 #~ "letöltése..."
+
 #~ msgid "Unable to contact mirror %s"
 #~ msgstr "Nem sikerült kapcsolódni ehhez a tükörkiszolgálóhoz: %s"
+
 #~ msgid "Generate auto install floppy"
 #~ msgstr "Automatikus telepítőfloppy készítése"
+
 #~ msgid ""
 #~ "The auto install can be fully automated if wanted,\n"
 #~ "in that case it will take over the hard drive!!\n"
@@ -1604,14 +1656,19 @@ msgstr "Mandriva: disztribúciók minden igényre"
 #~ "a rendszert.\n"
 #~ "\n"
 #~ "Lehetőség van a telepítés újrajátszására is.\n"
+
 #~ msgid "Replay"
 #~ msgstr "Újrajátszás"
+
 #~ msgid "Automated"
 #~ msgstr "Automatikus"
+
 #~ msgid "Save packages selection"
 #~ msgstr "Csomagösszeállítás mentése"
+
 #~ msgid "Do you want to use aboot?"
 #~ msgstr "Szeretné az aboot-ot használni?"
+
 #~ msgid ""
 #~ "Error installing aboot, \n"
 #~ "try to force installation even if that destroys the first partition?"
@@ -1619,4 +1676,3 @@ msgstr "Mandriva: disztribúciók minden igényre"
 #~ "Hiba az aboot telepítésekor.\n"
 #~ "Próbáljam újra a telepítést akkor is, ha ez esetleg tönkreteszi az első\n"
 #~ "partíciót?"
-
