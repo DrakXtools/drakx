@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-el\n"
 "POT-Creation-Date: 2008-09-19 15:04+0200\n"
-"PO-Revision-Date: 2009-01-04 13:30+0100\n"
+"PO-Revision-Date: 2009-01-04 14:47+0100\n"
 "Last-Translator: Glentadakis Dimitrios <dglent@gmail.com>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -865,7 +865,7 @@ msgstr "Εξυπηρετητής LDAP"
 #: authentication.pm:163
 #, fuzzy, c-format
 msgid "Base dn"
-msgstr "LDAP Base dn"
+msgstr "&Βάση DN:"
 
 #: authentication.pm:109
 #, c-format
@@ -929,7 +929,7 @@ msgstr "Κωδικός Πρόσβασης"
 #: authentication.pm:123
 #, fuzzy, c-format
 msgid "Group base"
-msgstr "ID Ομάδας"
+msgstr "Βάση ομάδας:"
 
 #: authentication.pm:124
 #, c-format
@@ -944,7 +944,7 @@ msgstr "Επιλέξατε την πιστοποίηση μέσω Kerberos 5. Π
 #: authentication.pm:141
 #, fuzzy, c-format
 msgid "Realm "
-msgstr "Πραγματικό όνομα"
+msgstr "Περιοχή:"
 
 #: authentication.pm:143
 #, fuzzy, c-format
@@ -1937,7 +1937,7 @@ msgstr "Προσοχή: Αυτή η διαδικασία είναι επικίν
 #: diskdrake/interactive.pm:1082
 #, fuzzy, c-format
 msgid "Partitioning Type"
-msgstr "Καταμερισμός"
+msgstr "Τι τύπος κατάτμησης;"
 
 #: diskdrake/interactive.pm:1082
 #, c-format
@@ -2102,7 +2102,7 @@ msgstr "RAID %s\n"
 #: diskdrake/interactive.pm:1281
 #, fuzzy, c-format
 msgid "Encrypted"
-msgstr "Κλειδί κρυπτογράφησης"
+msgstr "Κρυπτογραφημένο"
 
 #: diskdrake/interactive.pm:1281
 #, c-format
@@ -2421,7 +2421,7 @@ msgstr "Αποβολή της μικροαποθήκευσης (cache) εγγρ�
 #: fs/mount_options.pm:119
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
-msgstr ""
+msgstr "Ενεργοποίηση έλεγχου αναλογίας δίσκου και εξαναγκασμός (προαιρετικά) των ορίων"
 
 #: fs/mount_options.pm:121
 #, c-format
@@ -2429,6 +2429,8 @@ msgid ""
 "Do not update inode access times on this file system\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
+"Να μην γίνει ενημέρωση της ώρας πρόσβασης στα inodes σε αυτό το σύστημα αρχείων\n"
+"(πχ. για ταχύτερη πρόσβαση στον news spool για να επιταχυνθούν οι news servers). "
 
 #: fs/mount_options.pm:124
 #, c-format
@@ -2436,6 +2438,8 @@ msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
+"Ενημέρωση της ώρας πρόσβασης στα inodes σε αυτό το σύστημα αρχείων\n"
+"(πχ. για ταχύτερη πρόσβαση στον news spool για να επιταχυνθούν οι news servers)."
 
 #: fs/mount_options.pm:127
 #, c-format
@@ -2443,11 +2447,13 @@ msgid ""
 "Can only be mounted explicitly (i.e.,\n"
 "the -a option will not cause the file system to be mounted)."
 msgstr ""
+"Μπορεί να γίνει μόνο ρητή προσάρτηση (i.e.,\n"
+"η παράμετρος -a δεν κάνει προσάρτηση του συστήματος αρχείων)."
 
 #: fs/mount_options.pm:130
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
-msgstr ""
+msgstr "Αγνόησε τα ειδικά αρχεία τύπου χαρακτήρα ή block στο σύστημα αρχείων."
 
 #: fs/mount_options.pm:132
 #, c-format
@@ -2466,7 +2472,7 @@ msgid ""
 "Do not allow set-user-identifier or set-group-identifier\n"
 "bits to take effect. (This seems safe, but is in fact rather unsafe if you\n"
 "have suidperl(1) installed.)"
-msgstr ""
+msgstr "Δεν επιτρέπονται τα bits SUID ή SGID να είναι ενεργοποιημένα. ( Αυτό φαίνεται ασφαλές, εκτός αν το suidper(1) είναι εγκατεστημένο. )"
 
 #: fs/mount_options.pm:140
 #, c-format
@@ -2491,12 +2497,12 @@ msgstr "Να επιτρέπεται σε έναν απλό χρήστη να π�
 #: fs/mount_options.pm:148
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
-msgstr ""
+msgstr "Ενεργοποίηση έλεγχου αναλογίας δίσκου, και εξαναγκασμός (προαιρετικά) των ορίων"
 
 #: fs/mount_options.pm:150
 #, c-format
 msgid "Support \"user.\" extended attributes"
-msgstr ""
+msgstr "Υποστήριξη εκτεταμένων δικαιωμάτων για τους χρήστες"
 
 #: fs/mount_options.pm:152
 #, c-format
@@ -5007,6 +5013,22 @@ msgid ""
 "other applicable licence agreements and shall be prohibited except to the extent expressly permitted \n"
 "by the terms of this Agreement."
 msgstr ""
+"Δέχεστε να μην (i) πωλήσετε, να εξαγάγετε, να επανεξαγάγετε, να μεταφέρετε, να εκ τρέψετε, να αποκαλύψετε \n"
+"τεχνικά δεδομένα ούτε να βάλετε το λογισμικό στη διάθεση κανενός προσώπου, οντότητας, ή \n"
+"παραλήπτης απαγορευμένος από τους νόμους ή τους κανονισμούς εξαγωγής των Ηνωμένων Πολιτειών που περιλαμβάνει, χωρίς \n"
+"περιορισμό : Κούβα, Ιράν, Β.Κορέα, Σουδάν και Συρία ή (ii) να κάνετε παράνομη χρήση \n"
+"του λογισμικού κατά τους νόμους ή τους κανονισμούς των Ηνωμένων Πολιτειών.\n"
+"\n"
+"U.S. GOVERNMENT RESTRICTED RIGHTS. \n"
+"\n"
+"\n"
+"Τα προϊόντα λογισμικού καθώς επίσης και όλη η αντίστοιχη τεκμηρίωση είναι και πρέπει να θεωρηθούν \n"
+"όπως « εμπορικά λογισμικά πληροφορικής » και « της τεκμηρίωσης των εμπορικών λογισμικών\n"
+"πληροφορικής », όπως καθορίζονται μέσα στο άρθρο DFAR 252.227-7013 και περιγράφονται μέσα στο άρθρο FAR 12.212. \n"
+"Κάθε χρήση, τροποποίηση, αναπαραγωγή, μετάδοση, επίδειξη, εμφάνιση ή διάθεση του λογισμικού \n"
+"και της τεκμηρίωσης που συνδέεται από την κυβέρνηση των Ηνωμένων Πολιτειών πρέπει να υπόκεινται μόνο από τους όρους \n"
+"αυτής της συμφωνίας ή κάθε άλλης εφαρμόσιμης συμφωνίας της χορήγησης αδειών\n"
+"από τους όρους αυτής της συμφωνίας."
 
 #: messages.pm:104
 #, c-format
@@ -5015,6 +5037,9 @@ msgid ""
 "its subsidiaries (\"Google Software\"), are governed under the terms and conditions of the GNU \n"
 "General Public Licence, hereafter called \"GPL\", or of similar licenses."
 msgstr ""
+"Τα περισσότερα από αυτά τα συστατικά, εξαιρούμενων των εφαρμογών που παρέχονται από την Goggle Inc \n"
+"ή της θυγατρικές της (\"Google Software\"), υπόκεινται στους όρους και προϋποθέσεις της GNU General \n"
+"Public License (Γενική Άδεια Χρήσης), στο εξής « GPL », ή από παρόμοιες άδειες."
 
 #: messages.pm:107
 #, c-format
@@ -5022,6 +5047,9 @@ msgid ""
 "Most of these components are governed under the terms and conditions of the GNU \n"
 "General Public Licence, hereafter called \"GPL\", or of similar licenses."
 msgstr ""
+"Τα περισσότερα απο αυτά τα συστατικά υπόκεινται στους όρους και προυποθέσεις της \n"
+"« GNU General Public Licence », στο εξής « GPL » ή \n"
+"από παρόμοιες άδειες. "
 
 #: messages.pm:112
 #, c-format
@@ -5161,7 +5189,7 @@ msgstr "Εγκατάσταση οδηγού για %s κάρτα %s"
 #: modules/interactive.pm:99
 #, c-format
 msgid "Configuring Hardware"
-msgstr ""
+msgstr "Διαμόρφωση υλικού"
 
 #: modules/interactive.pm:110
 #, c-format
@@ -6060,9 +6088,9 @@ msgid "Security Administrator:"
 msgstr "Διαχειριστής Ασφαλείας:"
 
 #: security/level.pm:66
-#, c-format
+#, fuzzy, c-format
 msgid "Login or email:"
-msgstr ""
+msgstr "Διαχειριστής Ασφαλείας (προσπέλαση ή ταχυδρομείο)"
 
 #: services.pm:19
 #, c-format
