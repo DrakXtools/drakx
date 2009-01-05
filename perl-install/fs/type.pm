@@ -22,6 +22,7 @@ my (%type_name2pt_type, %type_name2fs_type, %fs_type2pt_type, %pt_type2fs_type, 
   0x82 => 'swap',     'Linux swap',
   0x83 => 'ext2',     'Linux native',
   0x83 => 'ext3',     'Journalised FS: ext3',
+  0x83 => 'ext4',     'Journalised FS: ext4',
   0x83 => 'reiserfs', 'Journalised FS: ReiserFS',
 if_(arch() =~ /ppc|i.86|ia64|x86_64/, 
   0x83 => 'xfs',      'Journalised FS: XFS',
@@ -120,7 +121,6 @@ if_(arch() !~ /ppc/,
   0x81 => '',         'Minix / old Linux',
  if_(!$::isInstall,
   0x83 => 'reiser4',  'Journalised FS: Reiser4',
-  0x83 => 'ext4dev',  'Journalised FS: ext4',
  ),
   0x84 => '',         'OS/2 hidden C: drive',
   0x86 => '',         'NTFS volume set (0x86)',
@@ -308,7 +308,7 @@ sub type_subpart_from_magic {
     $p;
 }
 
-sub true_local_fs_types() { qw(ext3 ext2 ext4dev reiserfs reiser4 xfs jfs) }
+sub true_local_fs_types() { qw(ext3 ext2 ext4 reiserfs reiser4 xfs jfs) }
 
 sub isEmpty { !$_[0]{fs_type} && $_[0]{pt_type} == 0 }
 sub isEfi { arch() =~ /ia64/ && $_[0]{pt_type} == 0xef }

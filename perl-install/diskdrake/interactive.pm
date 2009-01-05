@@ -417,7 +417,7 @@ sub part_possible_actions {
     my %macros = (
 	readonly => '$hd->{readonly}',
         hasMntpoint => '$part->{mntpoint}',
-	LVM_resizable => '$part->{fs_type} eq "reiserfs" || (isMounted ? $part->{fs_type} eq "xfs" : member($part->{fs_type}, qw(ext3 ext4dev)))',
+	LVM_resizable => '$part->{fs_type} eq "reiserfs" || (isMounted ? $part->{fs_type} eq "xfs" : member($part->{fs_type}, qw(ext3 ext4)))',
 	canModifyRAID => 'isPartOfRAID($part) && !isMounted(fs::get::device2part($part->{raid}, $all_hds->{raids}))',
     );
     if (isEmpty($part)) {
@@ -564,7 +564,7 @@ sub Type {
     my @types = fs::type::type_names($::expert, $hd);
 
     #- when readonly, Type() is allowed only when changing {fs_type} but not {pt_type}
-    #- eg: switching between ext2, ext3, ext4dev, reiserfs...
+    #- eg: switching between ext2, ext3, ext4, reiserfs...
     @types = grep { fs::type::type_name2pt_type($_) == $part->{pt_type} } @types if $hd->{readonly};
 
     my $type_name = fs::type::part2type_name($part);
@@ -576,7 +576,7 @@ sub Type {
 
     my $type = $type_name && fs::type::type_name2subpart($type_name);
 
-    if (member($type->{fs_type}, qw(ext2 ext3 ext4dev))) {
+    if (member($type->{fs_type}, qw(ext2 ext3 ext4))) {
 	my $_w = $in->wait_message(N("Please wait"), N("Switching from %s to %s", 'ext2', $type->{fs_type}));
 	if (run_program::run("tune2fs", "-j", devices::make($part->{device}))) {
 	    put_in_hash($part, $type);
@@ -687,7 +687,7 @@ sub Resize {
 	    $nice_resize{fat} = resize_fat::main->new($part->{device}, devices::make($part->{device}));
 	    $min = max($min, $nice_resize{fat}->min_size);
 	    $max = min($max, $nice_resize{fat}->max_size);	    
-	} elsif (member($part->{fs_type}, qw(ext2 ext3 ext4dev))) {
+	} elsif (member($part->{fs_type}, qw(ext2 ext3 ext4))) {
 	    write_partitions($in, $hd) or return;
 	    require diskdrake::resize_ext2;
 	    if ($nice_resize{ext2} = diskdrake::resize_ext2->new($part->{device}, devices::make($part->{device}))) {
