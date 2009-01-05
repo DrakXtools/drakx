@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-el\n"
 "POT-Creation-Date: 2008-09-19 15:04+0200\n"
-"PO-Revision-Date: 2009-01-04 14:47+0100\n"
+"PO-Revision-Date: 2009-01-05 21:57+0100\n"
 "Last-Translator: Glentadakis Dimitrios <dglent@gmail.com>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -93,9 +93,9 @@ msgstr ""
 "Από ποιόν δίσκο ξεκινάτε;"
 
 #: any.pm:346
-#, fuzzy, c-format
+#, c-format
 msgid "First sector (MBR) of drive %s"
-msgstr "Πρώτος τομέας του δίσκου (MBR)"
+msgstr "Πρώτος τομέας (MBR) του δίσκου %s"
 
 #: any.pm:348
 #, c-format
@@ -119,9 +119,9 @@ msgid "Skip"
 msgstr "Παράλειψη"
 
 #: any.pm:358
-#, fuzzy, c-format
+#, c-format
 msgid "Bootloader Installation"
-msgstr "Γίνεται εγκατάσταση του προγράμματος εκκίνησης του υπολογιστή"
+msgstr "Εγκατάσταση του προγράμματος εκκίνησης του υπολογιστή"
 
 #: any.pm:362
 #, c-format
@@ -370,9 +370,9 @@ msgid "Other OS (Windows...)"
 msgstr "Άλλο λειτουργικό (Windows...)"
 
 #: any.pm:594
-#, fuzzy, c-format
+#, c-format
 msgid "Bootloader Configuration"
-msgstr "Ρύθμιση Τύπου Εκκίνησης"
+msgstr "Διαμόρφωση του προγράμματος εκκίνησης του υπολογιστή"
 
 #: any.pm:595
 #, c-format
@@ -846,9 +846,9 @@ msgstr " "
 #: authentication.pm:137
 #: authentication.pm:183
 #: authentication.pm:207
-#, fuzzy, c-format
+#, c-format
 msgid "Welcome to the Authentication Wizard"
-msgstr "Απαιτείται Πιστοποίηση Τομέα"
+msgstr "Καλώς Ορίσατε στον Οδηγό Πιστοποίησης"
 
 #: authentication.pm:105
 #, c-format
@@ -863,9 +863,9 @@ msgstr "Εξυπηρετητής LDAP"
 
 #: authentication.pm:108
 #: authentication.pm:163
-#, fuzzy, c-format
+#, c-format
 msgid "Base dn"
-msgstr "&Βάση DN:"
+msgstr "Ριζικό dn"
 
 #: authentication.pm:109
 #, c-format
@@ -5060,6 +5060,12 @@ msgid ""
 "http://www.mp3licensing.com for more details). If you are unsure if a patent\n"
 "may be applicable to you, check your local laws."
 msgstr ""
+"Προσοχή : τα ελεύθερα λογισμικά δεν εξαιρούνται αδειών\n"
+"και μερικά μπορεί να είναι καλυμμένα από πατέντες στην χώρα σας. Για παράδειγμα,\n"
+"οι συμπεριλαμβανόμενοι αποκωδικοποιητές MP3 μπορεί να απαιτούν μια άδεια για πιο προχωρημένη χρήση\n"
+"(βλ. http://www.mp3licensing.com για περισσότερες πληροφορίες).\n"
+"Σε περίπτωση αμφιβολίας μίας άδειας, ελέγξτε την σχετική νομοθεσία\n"
+"της χώρας σας."
 
 #: messages.pm:120
 #, c-format
@@ -5291,17 +5297,17 @@ msgstr ""
 #: pkgs.pm:241
 #, c-format
 msgid "Unused packages removal"
-msgstr ""
+msgstr "Απεγκατάσταση των αχρησιμοποίητων πακέτων"
 
 #: pkgs.pm:229
 #, c-format
 msgid "Finding unused hardware packages..."
-msgstr ""
+msgstr "Αναζήτηση πακέτων υποστήριξης υλικού που δεν χρησιμοποιούνται..."
 
 #: pkgs.pm:232
 #, c-format
 msgid "Finding unused localization packages..."
-msgstr ""
+msgstr "Αναζήτηση πακέτων μεταφράσεων που δεν χρησιμοποιούνται..."
 
 #: pkgs.pm:242
 #, c-format
@@ -5323,7 +5329,7 @@ msgstr "ενεργοποίηση ραδιοφώνου"
 #: pkgs.pm:251
 #, c-format
 msgid "Unused localization"
-msgstr ""
+msgstr "Αχρησιμοποίητες μεταφράσεις"
 
 #: raid.pm:42
 #, c-format
