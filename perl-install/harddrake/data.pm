@@ -312,7 +312,7 @@ our @tree =
       detector => sub { 
           require list_modules;
           my @modules = list_modules::category2modules('multimedia/sound');
-          f(grep { $_->{media_type} =~ /MULTIMEDIA_AUDIO/  || member($_->{driver}, @modules)
+          f(grep { $_->{media_type} =~ /MULTIMEDIA_AUDIO|PROCESSOR_CO/ || member($_->{driver}, @modules)
                 || $_->{description} =~ /PC Speaker/ } @devices);
       },
       checked_on_boot => 1,
@@ -487,7 +487,7 @@ our @tree =
       detector => sub {
           f(grep { $_->{description} =~ /Keyboard/i || $_->{media_type} =~ /Subclass\|Keyboard/i ||
                      # USB devices are filtered out since we already catch them through probeall():
-                     $_->{bus} ne 'usb' && $_->{driver} eq 'kbd' && $_->{description} !~ /PC Speaker/;
+                     $_->{bus} ne 'usb' && $_->{driver} =~ /^event|kbd/ && $_->{description} !~ /PC Speaker/;
                  } @devices);
       },
       checked_on_boot => 0,
