@@ -53,7 +53,7 @@ sub smbclient {
 }
 
 sub find_servers {
-    my (undef, @l) = `nmblookup "*"`;
+    my (undef, @l) = `nmblookup "*"; nmblookup -M -- -`;
     s/\s.*\n// foreach @l;
     require network::network;
     my @servers = grep { network::network::is_ip($_) } @l;
