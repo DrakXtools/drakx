@@ -137,7 +137,7 @@ sub remove_bad_credentials {
 sub save_credentials {
     my ($credentials) = @_;
     my $file = $credentials->{file};
-    output_with_perm("$::prefix$file", 0640, map { "$_ = $credentials->{$_}\n" } qw(username domain password));
+    output_with_perm("$::prefix$file", 0640, map { "$_=$credentials->{$_}\n" } qw(username domain password));
 }
 
 
