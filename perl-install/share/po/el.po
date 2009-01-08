@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-el\n"
 "POT-Creation-Date: 2008-09-19 15:04+0200\n"
-"PO-Revision-Date: 2009-01-07 21:47+0100\n"
+"PO-Revision-Date: 2009-01-08 19:21+0100\n"
 "Last-Translator: Glentadakis Dimitrios <dglent@gmail.com>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -2165,6 +2165,10 @@ msgid ""
 "a Driver partition. You should\n"
 "probably leave it alone.\n"
 msgstr ""
+"\n"
+"Αυτή η κατάτμηση είναι πιθανότατα\n"
+"μια κατάτμηση οδηγών συστήματος,\n"
+"δεν θα πρέπει να την πειράξετε.\n"
 
 #: diskdrake/interactive.pm:1302
 #, c-format
@@ -2619,9 +2623,9 @@ msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr "Δεν υπάρχει κατάτμηση FAT για χρήση ως loopback (ή δεν υπάρχει αρκετός χώρος)"
 
 #: fs/partitioning_wizard.pm:127
-#, fuzzy, c-format
+#, c-format
 msgid "Use the free space on a Microsoft Windows® partition"
-msgstr "Χρήση του ελεύθερου χώρου στην κατάτμηση των Windows"
+msgstr "Χρήση του ελεύθερου χώρου σε μια κατάτμηση των Microsoft Windows®"
 
 #: fs/partitioning_wizard.pm:129
 #, c-format
@@ -2830,29 +2834,31 @@ msgid "There is already a partition with mount point %s\n"
 msgstr "Υπάρχει, ήδη, μία κατάτμηση με το σημείο προσάρτησης %s\n"
 
 #: fsedit.pm:421
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
-"\n"
-" Όχι\n"
+"Προσοχή, έχετε επιλέξει μια κατάτμηση με RAID λογισμικού ως ριζική κατάτμηση (/).\n"
+"Κανένα πρόγραμμα εκκίνησης δεν υποστηρίζει αυτή τη διαμόρφωση χωρίς ξεχωριστή κατάτμηση /boot.\n"
+"Μην ξεχάσετε να προσθέσετε μια κατάτμηση /boot"
 
 #: fsedit.pm:427
-#, fuzzy, c-format
+#, c-format
 msgid "You can not use the LVM Logical Volume for mount point %s since it spans physical volumes"
-msgstr "Δεν μπορείτε να χρησιμοποιήσετε μια κατάτμηση LVM για προσάρτηση %s"
+msgstr "Δεν μπορείτε να χρησιμοποιήσετε το φυσικό τομέα LVM ως σημείο προσάρτησης %s καθώς είναι διαχωρισμένο σε περισσότερους φυσικούς τόμους"
 
 #: fsedit.pm:429
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
 "The bootloader is not able to handle this when the volume spans physical volumes.\n"
 "You should create a /boot partition first"
 msgstr ""
-"\n"
-" Όχι\n"
+"Προσοχή, έχετε επιλέξει ένα φυσικό τομέα LVM ως ριζική κατάτμηση(/).\n"
+"Το πρόγραμμα εκκίνησης δεν υποστηρίζει αυτή τη διαμόρφωση  εάν ο τομέας είναι διαχωρισμένος σε περισσότερους φυσικούς τομείς.\n"
+"Πρέπει πρώτα να δημιουργήσετε μια κατάτμηση για τον κατάλογο /boot."
 
 #: fsedit.pm:433
 #: fsedit.pm:435
