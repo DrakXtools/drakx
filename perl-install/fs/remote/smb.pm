@@ -12,7 +12,7 @@ our @ISA = 'fs::remote';
 
 sub to_fstab_entry {
     my ($class, $e) = @_;
-    my $part = $class->to_fstab_entry_raw($e, 'smbfs');
+    my $part = $class->to_fstab_entry_raw($e, 'cifs');
     if ($e->{server}{username}) {
 	my ($options, $unknown) = fs::mount_options::unpack($part);
 	$options->{"$_="} = $e->{server}{$_} foreach qw(username password domain);

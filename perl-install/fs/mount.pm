@@ -38,7 +38,7 @@ sub mount {
 	my @fs_modules = qw(ext3 ext4 hfs jfs nfs ntfs romfs reiserfs ufs xfs vfat);
 	my @types = (qw(ext2 proc sysfs usbfs usbdevfs iso9660 devfs devpts auto ntfs-3g), @fs_modules);
 
-	push @types, 'smb', 'smbfs', 'davfs2' if !$::isInstall;
+	push @types, 'smb', 'cifs', 'davfs2' if !$::isInstall;
 
 	if (!member($fs, @types)) {
 	    log::l("skipping mounting $dev partition ($fs)");

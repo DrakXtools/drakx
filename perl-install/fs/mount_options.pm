@@ -30,7 +30,7 @@ sub unpack {
 		  vfat => [ qw(flush umask=0 umask=0022) ],
 		  ntfs => [ qw(umask=0 umask=0022) ],
 		  nfs => [ qw(rsize=8192 wsize=8192) ],
-		  smbfs => [ qw(username= password=) ],
+		  cifs => [ qw(username= password=) ],
 		  davfs2 => [ qw(username= password= uid= gid=) ],
 		  ext4 => [ qw(extents) ],
 		  reiserfs => [ 'notail' ],
@@ -164,7 +164,7 @@ sub rationalize {
     if ($part->{fs_type} ne 'reiserfs') {
 	$options->{notail} = 0;
     }
-    if (!fs::type::can_be_one_of_those_fs_types($part, 'vfat', 'smbfs', 'iso9660', 'udf')) {
+    if (!fs::type::can_be_one_of_those_fs_types($part, 'vfat', 'cifs', 'iso9660', 'udf')) {
 	delete $options->{'codepage='};
     }
     if (member($part->{mntpoint}, fs::type::directories_needed_to_boot())) {
@@ -216,7 +216,7 @@ sub set_default {
 			       nosuid => 1, 'rsize=8192,wsize=8192' => 1, soft => 1,
 			      });
     }
-    if ($part->{fs_type} eq 'smbfs') {
+    if ($part->{fs_type} eq 'cifs') {
 	add2hash($options, { 'username=' => '%' }) if !$options->{'credentials='};
     }
     if (fs::type::can_be_this_fs_type($part, 'vfat')) {
