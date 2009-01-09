@@ -1206,7 +1206,7 @@ sub _create_Window {
 	_force_keyboard_focus($w);
     }
 
-    if ($::isInstall) {
+    if ($::isInstall && !$::isStandalone) {
 	require install::gtk; #- for perl_checker
 	install::gtk::handle_unsafe_mouse($::o, $w);
 	$w->signal_connect(key_press_event => \&install::gtk::special_shortcuts);
