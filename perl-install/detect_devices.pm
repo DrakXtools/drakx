@@ -1046,6 +1046,7 @@ sub computer_info() {
 	
      +{ 
 	 isLaptop => member($Chassis, 'Portable', 'Laptop', 'Notebook', 'Hand Held', 'Sub Notebook', 'Docking Station'),
+	 isServer => member($Chassis, 'Pizza Box', 'Main Server Chassis', 'Blade'),
 	 if_($BIOS_Year, BIOS_Year => $BIOS_Year),
      };
 }
@@ -1066,6 +1067,17 @@ sub isLaptop() {
 	|| probe_unique_name("Type") eq 'laptop'
         #- ipw2100/2200/3945 are Mini-PCI (Express) adapters
 	|| (any { member($_->{driver}, qw(ipw2100 ipw2200 ipw3945)) } pci_probe());
+}
+
+sub isServer() {
+    computer_info()->{isServer}
+      || (any { $_->{Type} =~ /ECC/ } dmidecode_category('Memory Module'))
+      || dmidecode_category('System Information')->{Manufacturer} =~ /Supermicro/i
+      || dmidecode_category('System Information')->{'Product Name'} =~ /NetServer|Proliant|PowerEdge|eServer|IBM System x/i
+      || matching_desc__regexp('LSI Logic.*SCSI')
+      || matching_desc__regexp('MegaRAID')
+      || matching_desc__regexp('NetServer')
+      || (any { $_->{'model name'} =~ /(Xeon|Opteron)/i } getCPUs());
 }
 
 sub BIGMEM() {
