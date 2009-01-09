@@ -69,9 +69,6 @@ sub read_fstab {
 		    1;
 		}
 	    } split(',', $options));
-	} elsif ($fs_type eq 'smb') {
-	    # prefering type "smbfs" over "smb"
-	    $fs_type = 'smbfs';
 	}
 	s/\\040/ /g foreach $mntpoint, $dev, $options;
 
@@ -150,7 +147,7 @@ sub add2all_hds {
     foreach (@l) {
 	my $s = 
 	    $_->{fs_type} eq 'nfs' ? 'nfss' :
-	    $_->{fs_type} eq 'smbfs' ? 'smbs' :
+	    $_->{fs_type} eq 'cifs' ? 'smbs' :
 	    $_->{fs_type} eq 'davfs2' ? 'davs' :
 	    isTrueLocalFS($_) || isSwap($_) || isOtherAvailableFS($_) ? '' :
 	    'special';
@@ -246,7 +243,7 @@ sub prepare_write_fstab {
 
 	    my $options = $_->{options} || 'defaults';
 
-	    if ($_->{fs_type} eq 'smbfs' && $options =~ /password=/ && !$b_keep_credentials) {
+	    if ($_->{fs_type} eq 'cifs' && $options =~ /password=/ && !$b_keep_credentials) {
 		require fs::remote::smb;
 		if (my ($opts, $smb_credentials) = fs::remote::smb::fstab_entry_to_credentials($_)) {
 		    $options = $opts;
@@ -335,7 +332,7 @@ sub get_raw_hds {
 
     my @fstab = read_fstab($prefix, '/etc/fstab', 'keep_default');
     $all_hds->{nfss} = [ grep { $_->{fs_type} eq 'nfs' } @fstab ];
-    $all_hds->{smbs} = [ grep { $_->{fs_type} eq 'smbfs' } @fstab ];
+    $all_hds->{smbs} = [ grep { $_->{fs_type} eq 'cifs' } @fstab ];
     $all_hds->{davs} = [ grep { $_->{fs_type} eq 'davfs2' } @fstab ];
     $all_hds->{special} = [
        (grep { $_->{fs_type} eq 'tmpfs' } @fstab),
