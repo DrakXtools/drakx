@@ -49,13 +49,13 @@ struct part {
   string device_windobe # 'C', 'D' ...
   string encrypt_key    # [0-9A-Za-z./]{20,}
   string comment        # comment to have in fstab
-  string volume_label   # 
+  string volume_label   #
 
   bool is_removable     # is the partition on a removable drive
   bool isMounted
 
   bool isFormatted
-  bool notFormatted 
+  bool notFormatted
     #  isFormatted                  means the device is formatted
     # !isFormatted &&  notFormatted means the device is not formatted
     # !isFormatted && !notFormatted means we do not know which state we're in
@@ -72,13 +72,13 @@ struct part {
   string real_device     # '/dev/loop0', '/dev/loop1' ... (used for encrypted loopback)
 
   # internal CHS (Cylinder/Head/Sector)
-  int start_cyl, start_head, start_sec, end_cyl, end_head, end_sec, 
+  int start_cyl, start_head, start_sec, end_cyl, end_head, end_sec,
 }
 
 struct part_allocate inherits part {
   int maxsize        # in sectors (alike "size")
   int min_hd_size    # in sectors (do not allocate if the drive is smaller than the given size)
-  int ratio          # 
+  int ratio          #
   string hd          # 'hda', 'hdc'
   string parts       # for creating raid partitions. eg: 'foo bar' where 'foo' and 'bar' are mntpoint
 }
@@ -121,7 +121,7 @@ struct partition_table_elem {
 }
 
 struct geom {
-  int heads 
+  int heads
   int sectors
   int cylinders
   int totalcylinders # for SUN, forget it
@@ -138,7 +138,7 @@ struct hd {
 
   bool readonly         # is it allowed to modify the partition table
   bool getting_rid_of_readonly_allowed # is it forbidden to write because the partition table is badly handled, or is it because we MUST not change the partition table
-  bool isDirty          # does it need to be written to the disk 
+  bool isDirty          # does it need to be written to the disk
   list will_tell_kernel # list of actions to tell to the kernel so that it knows the new partition table
   bool rebootNeeded     # happens when a kernel reread failed
   list partitionsRenumbered # happens when you
@@ -146,7 +146,7 @@ struct hd {
                             # - add an extended partition which is the first extended partition
   list allPartitionsRenumbered # used to update bootloader configuration
   int bus, id
-  
+
   partition_table_elem primary
   partition_table_elem extended[]
 
@@ -203,12 +203,12 @@ sub main {
     }
 
     my ($current_part, $current_hd);
-    
+
     while (1) {
 	my $choose_txt = $current_part ? N_("Choose another partition") : N_("Choose a partition");
 	my $parts_and_holes = [ fs::get::fstab_and_holes($all_hds) ];
 	my $choose_part = sub {
-	    $current_part = $in->ask_from_listf('diskdrake', translate($choose_txt), 
+	    $current_part = $in->ask_from_listf('diskdrake', translate($choose_txt),
 						sub {
 						    my $hd = fs::get::part2hd($_[0] || return, $all_hds);
 						    format_part_info_short($hd, $_[0]);
@@ -220,33 +220,33 @@ sub main {
 	return if !$current_part;
 
 	my %actions = my @actions = (
-            if_($current_part, 
+            if_($current_part,
           (map { my $s = $_; $_ => sub { $diskdrake::interactive::{$s}($in, $current_hd, $current_part, $all_hds) } } part_possible_actions($in, $current_hd, $current_part, $all_hds)),
 		'____________________________' => sub {},
             ),
             if_(@$parts_and_holes > 1, $choose_txt => $choose_part),
 	    if_($current_hd,
 	  (map { my $s = $_; $_ => sub { $diskdrake::interactive::{$s}($in, $current_hd, $all_hds) } } hd_possible_actions_interactive($in, $current_hd, $all_hds)),
-	    ), 
+	    ),
 	  (map { my $s = $_; $_ => sub { $diskdrake::interactive::{$s}($in, $all_hds) } } general_possible_actions($in, $all_hds)),
         );
 	my ($actions) = list2kv(@actions);
 	my $a;
 	if ($current_part) {
 	    $in->ask_from_({
-			    cancel => N("Exit"), 
+			    cancel => N("Exit"),
 			    title => 'diskdrake',
 			    messages => format_part_info($current_hd, $current_part),
 			   },
 			   [ { val => \$a, list => $actions, format => \&translate, type => 'list', sort => 0, gtk => { use_boxradio => 0 } } ]) or last;
 	    my $v = eval { $actions{$a}() };
 	    if (my $err = $@) {
-		$in->ask_warn(N("Error"), formatError($err));		
+		$in->ask_warn(N("Error"), formatError($err));
 	    }
 	    if ($v eq 'force_reload') {
 		$all_hds = $do_force_reload->();
 	    }
-	    $current_hd = $current_part = '' if !is_part_existing($current_part, $all_hds);	    
+	    $current_hd = $current_part = '' if !is_part_existing($current_part, $all_hds);
 	} else {
 	    $choose_part->();
 	}
@@ -309,8 +309,8 @@ Quit anyway?", $part->{device}, $part->{mntpoint})) or return if $::isStandalone
 ################################################################################
 sub hd_possible_actions_base {
     my ($hd) = @_;
-    ( 
-     if_(!$hd->{readonly} || $hd->{getting_rid_of_readonly_allowed}, N_("Clear all")), 
+    (
+     if_(!$hd->{readonly} || $hd->{getting_rid_of_readonly_allowed}, N_("Clear all")),
      if_(!$hd->{readonly} && $::isInstall, N_("Auto allocate")),
     );
 }
@@ -361,9 +361,9 @@ sub Auto_allocate {
     if ($@) {
 	$@ =~ /partition table already full/ or die;
 
-	$in->ask_warn("", [ 
+	$in->ask_warn("", [
 			   N("All primary partitions are used"),
-			   N("I can not add any more partitions"), 
+			   N("I can not add any more partitions"),
 			   N("To have more partitions, please delete one to be able to create an extended partition"),
 			  ]);
     }
@@ -424,9 +424,9 @@ sub part_possible_actions {
 	if_(!$hd->{readonly}, N_("Create"));
     } elsif ($part->{pt_type} == 0xbf && detect_devices::is_xbox()) {
         #- XBox OS partitions, do not allow anything
-        return;    
+        return;
     } else {
-        grep { 
+        grep {
     	    my $cond = $actions{$_};
     	    while (my ($k, $v) = each %macros) {
     	        $cond =~ s/$k/qq(($v))/e;
@@ -437,7 +437,7 @@ sub part_possible_actions {
     }
 }
 
-#- in case someone use diskdrake only to create partitions, 
+#- in case someone use diskdrake only to create partitions,
 #- ie without assigning a mount point,
 #- do not suggest mount points anymore
 my $do_suggest_mount_point = 1;
@@ -469,12 +469,12 @@ sub Create {
         [
          { label => N("Create a new partition"), title => 1 },
            if_($has_startsector,
-         { label => N("Start sector: "), val => \$part->{start}, min => $def_start, max => ($max - min_partition_size($hd)), 
+         { label => N("Start sector: "), val => \$part->{start}, min => $def_start, max => ($max - min_partition_size($hd)),
 	   type => 'range', SpinButton => $::expert, changed => sub { $mb_size = min($mb_size, to_Mb($max - $part->{start})) } },
            ),
-         { label => N("Size in MB: "), val => \$mb_size, min => to_Mb(min_partition_size($hd)), max => to_Mb($def_size), 
+         { label => N("Size in MB: "), val => \$mb_size, min => to_Mb(min_partition_size($hd)), max => to_Mb($def_size),
 	   type => 'range', SpinButton => $::expert, changed => sub { $part->{start} = min($part->{start}, $max - $mb_size * 2048) } },
-         { label => N("Filesystem type: "), val => \$type_name, list => [ fs::type::type_names($::expert, $hd) ], 
+         { label => N("Filesystem type: "), val => \$type_name, list => [ fs::type::type_names($::expert, $hd) ],
 	   sort => 0, if_($::expert, gtk => { wrap_width => 4 }, do_not_ellipsize => 1) },
          { label => N("Mount point: "), val => \$part->{mntpoint}, list => [ fsedit::suggestions_mntpoint($all_hds), '' ],
            disabled => sub { my $p = fs::type::type_name2subpart($type_name); isSwap($p) || isNonMountable($p) }, type => 'combo', not_edit => 0,
@@ -495,9 +495,9 @@ sub Create {
 
 	    check($in, $hd, $part, $all_hds) or return 1;
 	    $migrate_files = need_migration($in, $part->{mntpoint}) or return 1;
-	    
+
 	    my $seen;
-	    eval { 
+	    eval {
 		catch_cdie { fsedit::add($hd, $part, $all_hds, { force => 1, primaryOrExtended => $primaryOrExtended }) }
 		  sub { $seen = 1; $in->ask_okcancel('', formatError($@)) };
 	    };
@@ -553,8 +553,8 @@ sub Type {
     my ($in, $hd, $part) = @_;
 
     my $warned;
-    my $warn = sub { 
-	$warned = 1; 
+    my $warn = sub {
+	$warned = 1;
 	ask_alldatawillbelost($in, $part, N_("After changing type of partition %s, all data on this partition will be lost"));
     };
 
@@ -583,7 +583,7 @@ sub Type {
 	    set_isFormatted($part, 1); #- assume that if tune2fs works, partition is formatted
 
 	    #- disable the fsck (do not do it together with -j in case -j fails?)
-	    fs::format::disable_forced_fsck($part->{device});	    
+	    fs::format::disable_forced_fsck($part->{device});
 	    return;
 	}
     } elsif ($type->{fs_type} =~ /ntfs/ && $part->{fs_type} =~ /ntfs/) {
@@ -634,7 +634,7 @@ sub Mount_point {
     $in->ask_from_({
 		     callbacks => {
 		         complete => sub {
-	    !isPartOfLoopback($part) || $mntpoint or $in->ask_warn(N("Error"), 
+	    !isPartOfLoopback($part) || $mntpoint or $in->ask_warn(N("Error"),
 N("Can not unset mount point as this partition is used for loop back.
 Remove the loopback first")), return 1;
 	    $part->{mntpoint} eq $mntpoint || check_mntpoint($in, $mntpoint, $part, $all_hds) or return 1;
@@ -644,8 +644,8 @@ Remove the loopback first")), return 1;
 	},
 	[
 	  { label => $msg, title => 1 },
-	  { label => N("Mount point"), val => \$mntpoint, 
-	    list => [ uniq(if_($mntpoint, $mntpoint), fsedit::suggestions_mntpoint($all_hds), '') ], 
+	  { label => N("Mount point"), val => \$mntpoint,
+	    list => [ uniq(if_($mntpoint, $mntpoint), fsedit::suggestions_mntpoint($all_hds), '') ],
 	    focus => sub { 1 },
 	    not_edit => 0 } ],
     ) or return;
@@ -666,8 +666,8 @@ sub Mount_point_raw_hd {
         '',
 	[
 	 { label => N("Where do you want to mount %s?", $part->{device}), title => 1 },
-	 { label => N("Mount point"), val => \$mntpoint, 
-	    list => [ if_($mntpoint, $mntpoint), '', @propositions ], 
+	 { label => N("Mount point"), val => \$mntpoint,
+	    list => [ if_($mntpoint, $mntpoint), '', @propositions ],
 	    not_edit => 0 } ],
 	complete => sub {
 	    $part->{mntpoint} eq $mntpoint || check_mntpoint($in, $mntpoint, $part, $all_hds) or return 1;
@@ -694,7 +694,7 @@ sub Resize {
 	    require resize_fat::main;
 	    $nice_resize{fat} = resize_fat::main->new($part->{device}, devices::make($part->{device}));
 	    $min = max($min, $nice_resize{fat}->min_size);
-	    $max = min($max, $nice_resize{fat}->max_size);	    
+	    $max = min($max, $nice_resize{fat}->max_size);
 	} elsif (member($part->{fs_type}, qw(ext2 ext3 ext4))) {
 	    write_partitions($in, $hd) or return;
 	    require diskdrake::resize_ext2;
@@ -712,10 +712,10 @@ sub Resize {
 	} elsif ($part->{fs_type} eq 'reiserfs') {
 	    write_partitions($in, $hd) or return;
 	    if ($part->{isMounted}) {
-		$nice_resize{reiserfs} = 1;		  
+		$nice_resize{reiserfs} = 1;
 		$min = $part->{size}; #- ensure the user can only increase
 	    } elsif (defined(my $free = fs::df($part))) {
-		$nice_resize{reiserfs} = 1;		  
+		$nice_resize{reiserfs} = 1;
 		$min = max($min, $part->{size} - $free);
 	    }
 	} elsif ($part->{fs_type} eq 'xfs' && isLVM($hd) && $::isStandalone && $part->{isMounted}) {
@@ -738,7 +738,7 @@ sub Resize {
 
     my $mb_size = to_Mb($part->{size});
     my ($gmin, $gmax) = (to_Mb($min), to_Mb($max));
-    $in->ask_from(N("Resize"), '', [ 
+    $in->ask_from(N("Resize"), '', [
 		   { label => N("Choose the new size"), title => 1 },
 		   { label => N("New size in MB: "), val => \$mb_size, min => $gmin, max => $gmax, type => 'range', SpinButton => $::expert },
 		   { label => N("Minimum size: %s MB", $gmin) },
@@ -783,7 +783,7 @@ sub Resize {
 	log::l("ntfs resize to $part->{size} sectors");
 	$nice_resize{ntfs}->resize($part->{size});
 	$wait = undef;
-	$in->ask_warn(N("Warning"), N("To ensure data integrity after resizing the partition(s), 
+	$in->ask_warn(N("Warning"), N("To ensure data integrity after resizing the partition(s),
 filesystem checks will be run on your next boot into Microsoft Windows®"));
     } elsif ($nice_resize{reiserfs}) {
 	log::l("reiser resize to $part->{size} sectors");
@@ -831,9 +831,9 @@ sub dmcrypt_open {
 
     if (!$part->{dmcrypt_key}) {
 	$in->ask_from_({
-	    title => N("Filesystem encryption key"), 
+	    title => N("Filesystem encryption key"),
 	    messages => N("Enter your filesystem encryption key"),
-        }, [ { label => N("Encryption key"), val => \$part->{dmcrypt_key}, 
+        }, [ { label => N("Encryption key"), val => \$part->{dmcrypt_key},
 	       hidden => 1, focus => sub { 1 } } ]) or return;
     }
 
@@ -885,11 +885,11 @@ sub Unmount {
     my ($_in, $_hd, $part) = @_;
     fs::mount::umount_part($part);
 }
-sub RemoveFromRAID { 
+sub RemoveFromRAID {
     my ($_in, $_hd, $part, $all_hds) = @_;
     raid::removeDisk($all_hds->{raids}, $part);
 }
-sub RemoveFromDm { 
+sub RemoveFromDm {
     my ($_in, $_hd, $part, $all_hds) = @_;
     fs::dmcrypt::close_part($all_hds->{dmcrypts}, $part);
 }
@@ -911,7 +911,7 @@ Do you want to move used physical extents on this volume to other volumes?", $pa
 	$all_hds->{lvms} = $other_lvms;
     }
 }
-sub ModifyRAID { 
+sub ModifyRAID {
     my ($in, $_hd, $part, $all_hds) = @_;
     modifyRAID($in, $all_hds->{raids}, fs::get::device2part($part->{raid}, $all_hds->{raids}));
 }
@@ -973,13 +973,13 @@ sub Options {
 	relatime => sub { $options->{noatime} = 0 },
 	noatime => sub { $options->{relatime} = 0 },
     );
-	
+
 
     $in->ask_from(N("Mount options"),
 		  '',
-		  [ 
+		  [
 		    { label => N("Mount options"), title => 1 },
-		   (map { 
+		   (map {
 			 { label => $_, text => scalar warp_text(formatAlaTeX($help{$_}), 60), val => \$options->{$_}, hidden => scalar(/password/),
 			   advanced => !$part->{rootDevice} && !member($_, @simple_options), if_(!/=$/, type => 'bool'),
 			   if_($callbacks{$_}, changed => $callbacks{$_}),
@@ -1019,8 +1019,8 @@ sub Options {
 }
 
 
-{ 
-    no strict; 
+{
+    no strict;
     *{'Toggle to normal mode'} = sub() { $::expert = 0 };
     *{'Toggle to expert mode'} = sub() { $::expert = 1 };
     *{'Clear all'} = \&Clear_all;
@@ -1028,11 +1028,11 @@ sub Options {
     *{'Mount point'} = \&Mount_point;
     *{'Modify RAID'} = \&ModifyRAID;
     *{'Add to RAID'} = \&Add2RAID;
-    *{'Remove from RAID'} = \&RemoveFromRAID; 
+    *{'Remove from RAID'} = \&RemoveFromRAID;
     *{'Use'} = \&dmcrypt_open;
-    *{'Remove from dm'} = \&RemoveFromDm; 
+    *{'Remove from dm'} = \&RemoveFromDm;
     *{'Add to LVM'} = \&Add2LVM;
-    *{'Remove from LVM'} = \&RemoveFromLVM; 
+    *{'Remove from LVM'} = \&RemoveFromLVM;
     *{'Use for loopback'} = \&Loopback;
     *{'Hard drive information'} = \&Hd_info;
 }
@@ -1071,7 +1071,7 @@ sub ask_alldatamaybelost {
 
     #- here we may have a non-formatted or a formatted partition
     #- -> doing as if it was formatted
-    $in->ask_okcancel(N("Read carefully"), 
+    $in->ask_okcancel(N("Read carefully"),
 		      [ N("Be careful: this operation is dangerous."), sprintf(translate($msg), $part->{device}) ], 1);
 }
 sub ask_alldatawillbelost {
@@ -1086,7 +1086,7 @@ sub ask_alldatawillbelost {
 
 sub partitions_suggestions {
     my ($in) = @_;
-    my $t = $::expert ? 
+    my $t = $::expert ?
       $in->ask_from_list_(N("Partitioning Type"), N("What type of partitioning?"), [ keys %fsedit::suggestions ]) :
       'simple';
     $fsedit::suggestions{$t};
@@ -1107,7 +1107,7 @@ sub check_type {
 sub check_mntpoint {
     my ($in, $mntpoint, $part, $all_hds) = @_;
     my $seen;
-    eval { 
+    eval {
 	catch_cdie { fsedit::check_mntpoint($mntpoint, $part, $all_hds) }
 	  sub { $seen = 1; $in->ask_okcancel(N("Error"), formatError($@)) };
     };
@@ -1197,12 +1197,12 @@ sub need_migration {
 (%s)
 
 You can either choose to move the files into the partition that will be mounted there or leave them where they are (which results in hiding them by the contents of the mounted partition)",
-                         $mntpoint, formatList(5, @l)), 
+                         $mntpoint, formatList(5, @l)),
 		      [ { val => \$choice, list => \@choices, type => 'list', format => sub { translate($_[0]) } } ]) or return;
 	$choice eq $choices[0] ? 'migrate' : 'hide';
     } else {
 	'hide';
-    }    
+    }
 }
 
 sub migrate_files {
@@ -1212,11 +1212,11 @@ sub migrate_files {
     my $handle = any::inspect($part, '', 'rw');
     my @l = glob_("$part->{mntpoint}/*");
     foreach (@l) {
-	$wait->set(N("Copying %s", $_)); 
+	$wait->set(N("Copying %s", $_));
 	system("cp", "-a", $_, $handle->{dir}) == 0 or die "copying failed";
     }
     foreach (@l) {
-	$wait->set(N("Removing %s", $_)); 
+	$wait->set(N("Removing %s", $_));
 	system("rm", "-rf", $_) == 0 or die "removing files failed";
     }
 }
@@ -1228,7 +1228,7 @@ sub warn_if_renumbered {
 
     push @{$hd->{allPartitionsRenumbered}}, @$l;
 
-    my @l = map { 
+    my @l = map {
 	my ($old, $new) = @$_;
 	N("partition %s is now known as %s", $old, $new) } @$l;
     $in->ask_warn(N("Warning"), join("\n", N("Partitions have been renumbered: "), @l));
@@ -1286,7 +1286,7 @@ sub format_part_info {
     $info .= N("Mounted\n") if $part->{isMounted};
     $info .= N("RAID %s\n", $part->{raid}) if isPartOfRAID($part);
     if (fs::type::isRawLUKS($part)) {
-	$info .= N("Encrypted") . ($part->{dm_active} && $part->{dm_name} ? N(" (mapped on %s)", $part->{dm_name}) : 
+	$info .= N("Encrypted") . ($part->{dm_active} && $part->{dm_name} ? N(" (mapped on %s)", $part->{dm_name}) :
 				     $part->{dm_name} ? N(" (to map on %s)", $part->{dm_name}) :
 				       N(" (inactive)")) . "\n";
     }
@@ -1314,7 +1314,7 @@ sub format_part_info {
     $info;
 }
 
-sub format_part_info_short { 
+sub format_part_info_short {
     my ($hd, $part) = @_;
     isEmpty($part) ? N("Free space on %s (%s)", $hd->{device}, formatXiB($part->{size}, 512))
                    : partition_table::description($part);
@@ -1375,9 +1375,9 @@ sub choose_encrypt_key {
 
     $in->ask_from_(
 		       {
-         title => N("Filesystem encryption key"), 
+         title => N("Filesystem encryption key"),
 	 messages => N("Choose your filesystem encryption key"),
-	 callbacks => { 
+	 callbacks => {
 	     complete => sub {
 		 length $encrypt_key < 6 and $in->ask_warn(N("Warning"), N("This encryption key is too simple (must be at least %d characters long)", 6)), return 1,0;
 		 $encrypt_key eq $encrypt_key2 or $in->ask_warn(N("Error"), [ N("The encryption keys do not match"), N("Please try again") ]), return 1,1;
@@ -1399,7 +1399,7 @@ sub tell_wm_and_reboot() {
 
     if (!$wm) {
 	system('reboot');
-    } else {    
+    } else {
 	any::ask_window_manager_to_logout_then_do($wm, $pid, 'reboot');
     }
 }
