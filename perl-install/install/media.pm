@@ -7,7 +7,7 @@ our @EXPORT_OK = qw(getFile_ getAndSaveFile_ getAndSaveFile_media_info packageMe
 
 use common;
 use fs::type;
-
+use urpm::download;
 
 #- list of fields for {phys_medium} :
 #-	device
@@ -913,13 +913,6 @@ sub install_urpmi__generate_synthesis {
     $@ and log::l("build_synthesis failed: $@");
 }
 
-#- copied from urpm/media.pm
-sub parse_url_with_login {
-    my ($url) = @_;
-    $url =~ m!([^:]*)://([^/:\@]*)(:([^/:\@]*))?\@([^/]*)(.*)! &&
-      { proto => $1, login => $2, password => $4, machine => $5, dir => $6 };
-}
-
 sub install_urpmi {
     my ($stage2_method, $packages) = @_;
 
@@ -964,7 +957,7 @@ sub install_urpmi {
 
 	    my ($qname, $qdir) = ($medium->{fakemedium}, $dir);
 
-	    if (my $u = parse_url_with_login($qdir)) {
+	    if (my $u = urpm::download::parse_url_with_login($qdir)) {
 		$qdir = sprintf('%s://%s@%s%s', $u->{proto}, $u->{login}, $u->{machine}, $u->{dir});
 		push @netrc, sprintf("machine %s login %s password %s\n", $u->{machine}, $u->{login}, $u->{password});
 	    }
