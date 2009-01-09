@@ -21,19 +21,21 @@
 
   badblocks
   mkswap
-  mkfs.ext2 mkfs.ext3 e2fsck tune2fs dumpe2fs resize2fs
+  mkfs.ext2 mkfs.ext3 mkfs.ext4 e2fsck tune2fs dumpe2fs resize2fs
 
-  mkfs.reiserfs
-  mkfs.xfs
-  resize_reiserfs
+  mkfs.reiserfs resize_reiserfs reiserfstune
+  mkfs.xfs xfs_admin
+ 
   <if ARCH="i.86|x86_64|ia64">
-    mkdosfs 
+    mkdosfs
+    dosfslabel
     mkntfs
     ntfsresize
+    ntfslabel
     dmraid
   </if>
   <if ARCH="i.86|x86_64">
-    mkfs.jfs fsck.jfs
+    mkfs.jfs fsck.jfs jfs_tune
   </if>
   quotacheck
   cryptsetup dmsetup

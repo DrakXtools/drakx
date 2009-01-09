@@ -397,7 +397,7 @@ sub part_possible_actions {
         N_("Mount point")      => '$part->{real_mntpoint} || (!isBusy && !isSwap && !isNonMountable)',
         N_("Type")             => '!isBusy && $::expert && (!readonly || $part->{pt_type} == 0x83)',
         N_("Options")          => '!isSwap($part) && !isNonMountable && $::expert',
-	N_("Label")            => '!isNonMountable && $::expert',
+        N_("Label")            => '!isNonMountable && $::expert && fs::format::canEditLabel($part)',
         N_("Resize")	       => '!isBusy && !readonly && !isSpecial || isLVM($hd) && LVM_resizable',
         N_("Format")           => '!isBusy && (!readonly && ($::expert || $::isStandalone) || fs::type::isRawLUKS($part))',
         N_("Mount")            => '!isBusy && (hasMntpoint || isSwap) && maybeFormatted && ($::expert || $::isStandalone)',
@@ -603,12 +603,20 @@ sub Type {
 
 sub Label {
     my ($in, $_hd, $part) = @_;
-    $in->ask_from(N("Which volume label?"), '',
+    my $old_label = $part->{device_LABEL};
 
+    $in->ask_from(N("Set volume label"), N("Beware, this will be written to disk as soon as you validate!"),
 		  [
 		   { label => N("Which volume label?"), title => 1 },
 		   { label => N("Label:"), val => \$part->{device_LABEL} } ]) or return;
+
+    if (!fs::format::check_package_is_installed_label($in->do_pkgs, $part->{fs_type})) {
+        $part->{device_LABEL} = $old_label;
+        return;
+    }
     $part->{prefer_device_LABEL} = to_bool($part->{device_LABEL});
+    fs::format::clean_label($part);
+    fs::format::write_label($part);
 }
 
 sub Mount_point {
@@ -1092,7 +1100,7 @@ sub check_type {
 	return;
     }
     if ($::isStandalone && $type->{fs_type} && fs::format::known_type($type)) {
-	fs::format::check_package_is_installed($in->do_pkgs, $type->{fs_type}) or return;
+	fs::format::check_package_is_installed_format($in->do_pkgs, $type->{fs_type}) or return;
     }
     1;
 }
@@ -1167,7 +1175,7 @@ sub format_ {
 	return &dmcrypt_format;
     }
     if ($::isStandalone) {
-	fs::format::check_package_is_installed($in->do_pkgs, $part->{fs_type}) or return;
+	fs::format::check_package_is_installed_format($in->do_pkgs, $part->{fs_type}) or return;
     }
     if ($::expert && !member($part->{fs_type}, 'reiserfs', 'xfs')) {
 	$part->{toFormatCheck} = $in->ask_yesorno(N("Confirmation"), N("Check bad blocks?"));

@@ -31,12 +31,33 @@ my %LABELs = ( #- option, length, handled_by_mount
     ext3     => [ '-L', 16, 1 ],
     ext4     => [ '-L', 16, 1 ],
     reiserfs => [ '-l', 16, 1 ],
+    reiser4  => [ '-L', 16, 1 ],
     xfs      => [ '-L', 12, 1 ],
     jfs      => [ '-L', 16, 1 ],
     hfs      => [ '-l', 27, 0 ],
     dos      => [ '-n', 11, 0 ],
     vfat     => [ '-n', 11, 0 ],
     swap     => [ '-L', 15, 1 ],
+    ntfs     => [ '-L', 128, 0 ],
+   'ntfs-3g' => [ '-L', 128, 0 ],
+);
+
+my %edit_LABEL = ( # package, command, option
+# If option is defined, run <command> <option> <label> <device>
+# If no option, run <command> <device> <label>
+    ext2     => [ 'e2fsprogs', 'tune2fs', '-L' ],
+    ext3     => [ 'e2fsprogs', 'tune2fs', '-L' ],
+    ext4     => [ 'e2fsprogs', 'tune2fs', '-L' ],
+    reiserfs => [ 'reiserfsprogs', 'reiserfstune', '-l' ],
+#    reiser4
+    xfs      => [ 'xfsprogs', 'xfs_admin', '-L' ],
+    jfs      => [ 'jfsutils', 'jfs_tune', '-L' ],
+#    hfs
+    dos      => [ 'dosfstools', 'dosfslabel' ],
+    vfat     => [ 'dosfstools', 'dosfslabel' ],
+#    swap     => [ 'util-linux-ng', 'mkswap' ],
+    ntfs     => [ 'ntfsprogs', 'ntfslabel' ],
+   'ntfs-3g' => [ 'ntfsprogs', 'ntfslabel' ],
 );
 
 sub package_needed_for_partition_type {
@@ -50,11 +71,23 @@ sub known_type {
     to_bool($cmds{$part->{fs_type}});
 }
 
-sub check_package_is_installed {
+sub check_package_is_installed_format {
     my ($do_pkgs, $fs_type) = @_;
 
     my ($pkg, $binary) = @{$cmds{$fs_type} || return};
     whereis_binary($binary) || $do_pkgs->ensure_binary_is_installed($pkg, $binary); #- ensure_binary_is_installed checks binary chrooted, whereas we run the binary non-chrooted (pb for Mandriva One)
+}
+
+sub check_package_is_installed_label {
+    my ($do_pkgs, $fs_type) = @_;
+
+    my ($pkg, $binary) = @{$edit_LABEL{$fs_type} || return};
+    whereis_binary($binary) || $do_pkgs->ensure_binary_is_installed($pkg, $binary); #- ensure_binary_is_installed checks binary chrooted, whereas we run the binary non-chrooted (pb for Mandriva One)
+}
+
+sub canEditLabel {
+    my ($part) = @_;
+    to_bool($edit_LABEL{$part->{fs_type}});
 }
 
 sub part {
@@ -70,6 +103,27 @@ sub part {
 	$wait_message->(N("Formatting partition %s", $part->{device})) if $wait_message;
 	part_raw($part, $wait_message);
     }
+}
+
+sub write_label {
+    my ($part) = @_;
+
+    $part->{device_LABEL} or return;
+    $part->{isNotFormatted} and return;
+
+    if ($part->{encrypt_key}) {
+	fs::mount::set_loop($part);
+    }
+
+    my $dev = $part->{real_device} || $part->{device};
+    my ($_pkg, $cmd, @first_options) = @{$edit_LABEL{$part->{fs_type}} || die N("I do not know how to set label on %s with type %s", $part->{device}, $part->{fs_type})};
+    my @args;
+    if (defined $first_options[0]) {
+      @args = ($cmd, @first_options, $part->{device_LABEL}, devices::make($dev));
+    } else {
+      @args = ($cmd, devices::make($dev), $part->{device_LABEL});
+    }
+    run_program::raw({ timeout => 'never' }, @args) or die N("setting label on %s failed", $dev);
 }
 
 sub part_raw {
@@ -101,22 +155,7 @@ sub part_raw {
     }
 
     if ($part->{device_LABEL}) {
-	if ($LABELs{$fs_type}) {
-	    my ($option, $length, $handled_by_mount) = @{$LABELs{$fs_type}};
-	    if (length $part->{device_LABEL} > $length) {
-		my $short = substr($part->{device_LABEL}, 0, $length);
-		log::l("shortening LABEL $part->{device_LABEL} to $short");
-		$part->{device_LABEL} = $short;
-	    }
-	    delete $part->{prefer_device_LABEL}
-	      if !$handled_by_mount || $part->{mntpoint} eq '/' && !member($fs_type, qw(ext2 ext3 ext4));
-
-	    push @options, $option, $part->{device_LABEL};
-	} else {
-	    log::l("dropping LABEL=$part->{device_LABEL} since we don't know how to set labels for fs_type $part->{fs_type}");
-	    delete $part->{device_LABEL};
-	    delete $part->{prefer_device_LABEL};
-	}
+	push @options, @{$LABELs{$fs_type}}[0], $part->{device_LABEL};
     }
 
     my ($_pkg, $cmd, @first_options) = @{$cmds{$fs_type} || die N("I do not know how to format %s in type %s", $part->{device}, $part->{fs_type})};
@@ -166,6 +205,27 @@ sub disable_forced_fsck {
     run_program::run("tune2fs", "-c0", "-i0", devices::make($dev));
 }
 
+sub clean_label {
+    my ($part) = @_;
+    if ($part->{device_LABEL}) {
+	my $fs_type = $part->{fs_type};
+	if ($LABELs{$fs_type}) {
+	    my ($option, $length, $handled_by_mount) = @{$LABELs{$fs_type}};
+	    if (length $part->{device_LABEL} > $length) {
+		my $short = substr($part->{device_LABEL}, 0, $length);
+		log::l("shortening LABEL $part->{device_LABEL} to $short");
+		$part->{device_LABEL} = $short;
+	    }
+	    delete $part->{prefer_device_LABEL}
+	      if !$handled_by_mount || $part->{mntpoint} eq '/' && !member($fs_type, qw(ext2 ext3 ext4));
+	} else {
+	    log::l("dropping LABEL=$part->{device_LABEL} since we don't know how to set labels for fs_type $fs_type");
+	    delete $part->{device_LABEL};
+	    delete $part->{prefer_device_LABEL};
+	}
+    }
+}
+
 sub formatMount_part {
     my ($part, $all_hds, $fstab, $wait_message) = @_;
 
@@ -175,8 +235,13 @@ sub formatMount_part {
     if (my $p = fs::get::up_mount_point($part->{mntpoint}, $fstab)) {
 	formatMount_part($p, $all_hds, $fstab, $wait_message) if !fs::type::carry_root_loopback($part);
     }
+
+    clean_label($part);
+
     if ($part->{toFormat}) {
 	fs::format::part($all_hds, $part, $wait_message);
+    } else {
+	fs::format::write_label($part);
     }
 
     #- setting user_xattr on /home (or "/" if no /home)
@@ -191,7 +256,7 @@ sub formatMount_part {
 
 sub formatMount_all {
     my ($all_hds, $fstab, $wait_message) = @_;
-    formatMount_part($_, $all_hds, $fstab, $wait_message) 
+    formatMount_part($_, $all_hds, $fstab, $wait_message)
       foreach sort { isLoopback($a) ? 1 : isSwap($a) ? -1 : 0 } grep { $_->{mntpoint} } @$fstab;
 
     #- ensure the link is there
