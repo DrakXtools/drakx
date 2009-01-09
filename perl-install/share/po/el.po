@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-el\n"
 "POT-Creation-Date: 2008-09-19 15:04+0200\n"
-"PO-Revision-Date: 2009-01-09 06:44+0100\n"
+"PO-Revision-Date: 2009-01-09 13:27+0100\n"
 "Last-Translator: Glentadakis Dimitrios <dglent@gmail.com>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -3231,7 +3231,7 @@ msgid "Driver:"
 msgstr "Οδηγός:"
 
 #: harddrake/sound.pm:422
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The old \"%s\" driver is blacklisted.\n"
 "\n"
@@ -3239,11 +3239,11 @@ msgid ""
 "\n"
 "The new \"%s\" driver will only be used on next bootstrap."
 msgstr ""
+"Ο παλιός οδηγός « %s » είναι στη μαύρη λίστα.\n"
 "\n"
+"Έχουν αναφερθεί προβλήματα στον πυρήνα κατά τον τερματισμό του.\n"
 "\n"
-"\n"
-"\n"
-" νέο."
+"Ο νέος οδηγός « %s » θα χρησιμοποιηθεί στην επόμενη εκκίνηση."
 
 #: harddrake/sound.pm:430
 #, c-format
@@ -5349,9 +5349,9 @@ msgstr "Θα αφαιρέσουμε τα παρακάτω πακέτα, έκτο
 
 #: pkgs.pm:246
 #: pkgs.pm:247
-#, fuzzy, c-format
+#, c-format
 msgid "Unused hardware support"
-msgstr "ενεργοποίηση ραδιοφώνου"
+msgstr "Υποστήριξη υλικού που δεν χρησιμοποιείται"
 
 #: pkgs.pm:250
 #: pkgs.pm:251
@@ -5644,9 +5644,9 @@ msgid "Set the password minimum length and minimum number of digit and minimum n
 msgstr "Όρισε το ελάχιστο μέγεθος του κωδικού ασφαλείας, καθώς και τον ελάχιστο αριθμό ψηφίων και τον ελάχιστο αριθμό κεφαλαίων γραμμάτων."
 
 #: security/help.pm:108
-#, fuzzy, c-format
+#, c-format
 msgid "Set the root's file mode creation mask."
-msgstr "Κωδικός Root"
+msgstr "Όρισε την μάσκα της κατάστασης δημιουργίας αρχείων για τον root."
 
 #: security/help.pm:109
 #, c-format
@@ -5654,7 +5654,7 @@ msgid "if set to yes, check open ports."
 msgstr "αν οριστεί ναι, έλεγχος για ανοιχτές θύρες."
 
 #: security/help.pm:110
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "if set to yes, check for:\n"
 "\n"
@@ -5663,7 +5663,14 @@ msgid ""
 "- no password in /etc/shadow\n"
 "\n"
 "- for users with the 0 id other than root."
-msgstr "αν οριστεί ναι, έλεγχος για κενούς κωδικούς πρόσβασης, για κανέναν κωδικό πρόσβασης στο /etc/shadow και για χρήστες με id 0 εκτός από τον root."
+msgstr ""
+"Αν ναι, ελέγξτε :\n"
+"\n"
+"- Τους κενούς κωδικούς πρόσβασης,\n"
+"\n"
+"- Τους κωδικούς πρόσβασης που λείπουν απο το /etc/shadow,\n"
+"\n"
+"- Οι χρήστες εκτός του root που έχουν « id » ίσο με 0."
 
 #: security/help.pm:117
 #, c-format
@@ -5761,12 +5768,9 @@ msgid "Timeout unit is second"
 msgstr "Μονάδα του χρόνου λήξης σε δευτερόλεπτα"
 
 #: security/help.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Set the user's file mode creation mask."
-msgstr ""
-"\n"
-"\n"
-" χρήστης."
+msgstr "Όρισε την μάσκα της κατάστασης δημιουργίας αρχείων για τον χρήστη."
 
 #: security/l10n.pm:11
 #, c-format
@@ -6122,9 +6126,9 @@ msgid "Security Administrator:"
 msgstr "Διαχειριστής Ασφαλείας:"
 
 #: security/level.pm:66
-#, fuzzy, c-format
+#, c-format
 msgid "Login or email:"
-msgstr "Διαχειριστής Ασφαλείας (προσπέλαση ή ταχυδρομείο)"
+msgstr "Όνομα χρήστη ή e-mail :"
 
 #: services.pm:19
 #, c-format
