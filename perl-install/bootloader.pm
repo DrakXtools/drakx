@@ -1843,7 +1843,7 @@ sub install {
 
     if (my $part = fs::get::device2part($bootloader->{boot}, [ fs::get::fstab($all_hds) ])) {
 	die N("You can not install the bootloader on a %s partition\n", $part->{fs_type})
-	  if $part->{fs_type} eq 'xfs';
+	  if member($part->{fs_type}, qw(ext4 ext4dev xfs));
     }
     $bootloader->{keytable} = keytable($bootloader->{keytable});
     action($bootloader, 'install', $all_hds);
