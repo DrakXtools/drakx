@@ -440,7 +440,7 @@ sub part_possible_actions {
 #- in case someone use diskdrake only to create partitions,
 #- ie without assigning a mount point,
 #- do not suggest mount points anymore
-my $do_suggest_mount_point = 1;
+my $do_suggest_mount_point = $::isInstall;
 
 sub Create {
     my ($in, $hd, $part, $all_hds) = @_;
