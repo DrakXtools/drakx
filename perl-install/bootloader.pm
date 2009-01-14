@@ -161,7 +161,7 @@ sub update_splash {
     my ($bootloader) = @_;
 
     foreach (@{$bootloader->{entries}}) {
-	bootloader::add_boot_splash($_->{initrd}, $_->{vga} || $bootloader->{vga}) if $_->{initrd};
+	add_boot_splash($_->{initrd}, $_->{vga} || $bootloader->{vga}) if $_->{initrd};
     }
 }
 
@@ -1852,7 +1852,7 @@ sub install {
 sub ensure_pkg_is_installed {
     my ($do_pkgs, $bootloader) = @_;
 
-    my $main_method = bootloader::main_method($bootloader->{method});
+    my $main_method = main_method($bootloader->{method});
     if ($main_method eq 'grub' || $main_method eq 'lilo') {
 	$do_pkgs->ensure_binary_is_installed($main_method, $main_method, 1) or return 0;
 	if ($bootloader->{method} eq 'grub-graphic') {
