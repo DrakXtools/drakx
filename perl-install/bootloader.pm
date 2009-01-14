@@ -175,6 +175,7 @@ sub read {
 
 	cleanup_entries($bootloader);
 
+	# handle raid-extra-boot (lilo)
 	my @devs = $bootloader->{boot};
 	if ($bootloader->{'raid-extra-boot'} =~ /mbr/ && 
 	    (my $md = fs::get::device2part($bootloader->{boot}, $all_hds->{raids}))) {
@@ -227,6 +228,7 @@ sub read_grub {
     $bootloader;
 }
 
+# adapts device.map (aka $grub2dev) when for example hda is now sda
 # nb: 
 # - $boot_part comes from /boot/grub/install.sh "root (hd...)" line
 # - $grub2dev is /boot/grub/device.map
