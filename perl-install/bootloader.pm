@@ -111,6 +111,7 @@ sub mkinitrd {
 
     $::testing || -e "$::prefix/$initrd" and return $initrd;
 
+    # for /boot on dos partitions when installing on loopback file on dos partition
     my $loop_boot = fs::loopback::prepare_boot();
 
     modules::load('loop');
