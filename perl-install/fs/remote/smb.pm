@@ -124,7 +124,7 @@ sub fstab_entry_to_credentials {
 
     my ($options, $unknown) = fs::mount_options::unpack($part);
     $options->{'username='} && $options->{'password='} or return;
-    my %h = map { $_ => delete $options->{"$_="} } qw(username domain password);
+    my %h = map { $_ => delete $options->{"$_="} } qw(username password);
     $h{file} = $options->{'credentials='} = to_credentials($server_name, $h{username});
     fs::mount_options::pack_($part, $options, $unknown), \%h;
 }
@@ -137,7 +137,7 @@ sub remove_bad_credentials {
 sub save_credentials {
     my ($credentials) = @_;
     my $file = $credentials->{file};
-    output_with_perm("$::prefix$file", 0640, map { "$_=$credentials->{$_}\n" } qw(username domain password));
+    output_with_perm("$::prefix$file", 0640, map { "$_=$credentials->{$_}\n" } qw(username password));
 }
 
 
