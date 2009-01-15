@@ -519,14 +519,16 @@ sub suggest_onmbr {
     ($onmbr, $unsafe);
 }
 
+# list of places where we can install the bootloader
 sub allowed_boot_parts {
     my ($bootloader, $all_hds) = @_;
     (
-     @{$all_hds->{hds}},
+     @{$all_hds->{hds}}, # MBR
+
      if_($bootloader->{method} =~ /lilo/,
 	 grep { $_->{level} eq '1' } @{$all_hds->{raids}}
 	),
-     (grep { !isFat_or_NTFS($_) } fs::get::fstab($all_hds)),
+     (grep { !isFat_or_NTFS($_) } fs::get::fstab($all_hds)), # filesystems except those who do not leave space for our bootloaders
      detect_devices::floppies(),
     );
 }
@@ -641,6 +643,7 @@ sub cmp_kernel_versions {
     $r || $rel_a <=> $rel_b || $rel_a cmp $rel_b;
 }
 
+# for lilo & xen
 sub get_mbootpack_filename {
     my ($entry) = @_;
     my $mbootpack_file = $entry->{initrd};
@@ -648,6 +651,7 @@ sub get_mbootpack_filename {
     $entry->{xen} && $mbootpack_file;
 }
 
+# for lilo & xen
 sub build_mbootpack {
     my ($entry) = @_;
 
@@ -747,6 +751,7 @@ sub rebuild_initrds {
     }
 }
 
+# unused (?)
 sub duplicate_kernel_entry {
     my ($bootloader, $new_label) = @_;
 
@@ -848,6 +853,7 @@ sub set_append_netprofile {
     $e->{append} = pack_append($simple, $dict);
 }
 
+# used when a bootloader $entry has been modified (eg: $entry->{vga})
 sub configure_entry {
     my ($bootloader, $entry) = @_;
     $entry->{type} eq 'image' or return;
@@ -937,6 +943,7 @@ sub _sanitize_ver {
     $return;
 }
 
+# for lilo
 sub suggest_message_text {
     my ($bootloader) = @_;
 
@@ -1155,6 +1162,7 @@ sub configured_main_methods() {
     difference2([ main_method_choices(1) ], \@bad_main_methods);
 }
 
+# for lilo
 sub keytable {
     my ($f) = @_;
     $f or return;
