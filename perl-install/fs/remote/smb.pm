@@ -15,7 +15,7 @@ sub to_fstab_entry {
     my $part = $class->to_fstab_entry_raw($e, 'cifs');
     if ($e->{server}{username}) {
 	my ($options, $unknown) = fs::mount_options::unpack($part);
-	$options->{"$_="} = $e->{server}{$_} foreach qw(username password);
+	$options->{"$_="} = $e->{server}{$_} foreach qw(username password domain);
 	fs::mount_options::pack($part, $options, $unknown);
     }
     $part;
@@ -40,7 +40,7 @@ sub smbclient {
     my $ip    = $server->{ip} ? "-I $server->{ip}" : '';
     my $group = $server->{group} ? qq( -W "$server->{group}") : '';
 
-    my $U = $server->{username} ? sprintf("%s/%s%%%s", @$server{'username', 'password'}) : '%';
+    my $U = $server->{username} ? sprintf("%s/%s%%%s", @$server{'domain', 'username', 'password'}) : '%';
     my %h;
     foreach (`smbclient -g -U "$U" -L "$name" $ip$group 2>/dev/null`) {
 	if (my ($type, $v1, $v2) = /(.*)\|(.*)\|(.*)/) {
