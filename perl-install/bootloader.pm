@@ -1569,6 +1569,8 @@ sub write_grub_device_map {
 	   (map_index { "(hd$::i) /dev/$_->{device}\n" } @$sorted_hds));
 }
 
+# parses things like "(hd0,4)/boot/vmlinuz"
+# returns: ("hd0", 4, "boot/vmlinuz")
 sub parse_grub_file {
     my ($grub_file) = @_;
     my ($grub_dev, $rel_file) = $grub_file =~ m!\((.*?)\)/?(.*)! or return;
@@ -1576,6 +1578,8 @@ sub parse_grub_file {
     ($hd, $part, $rel_file);
 }
 
+# takes things like "(hd0,4)/boot/vmlinuz"
+# returns: ("/dev/sda5", "boot/vmlinuz")
 sub grub2dev_and_file {
     my ($grub_file, $grub2dev, $o_block_device) = @_;
     my ($hd, $part, $rel_file) = parse_grub_file($grub_file) or return;
@@ -1584,12 +1588,16 @@ sub grub2dev_and_file {
     my $device = '/dev/' . ($part eq '' ? $grub2dev->{$hd} : devices::prefix_for_dev($grub2dev->{$hd}) . $part);
     $device, $rel_file;
 }
+# takes things like "(hd0,4)/boot/vmlinuz"
+# returns: "/dev/sda5"
 sub grub2dev {
     my ($grub_file, $grub2dev, $o_block_device) = @_;
     first(grub2dev_and_file($grub_file, $grub2dev, $o_block_device));
 }
 
-# replace dummy "(hdX,Y)" in "(hdX,Y)/boot/vmlinuz..." by appropriate path if needed
+# replaces
+# - "/vmlinuz" with "/boot/vmlinuz" when "root" or "rootnoverify" is set for the entry
+# - "(hdX,Y)" in "(hdX,Y)/boot/vmlinuz..." by appropriate path if possible/needed
 sub grub2file {
     my ($grub_file, $grub2dev, $fstab, $o_entry) = @_;
 
@@ -1704,7 +1712,7 @@ sub write_grub {
 		my $vga = $entry->{vga} || $bootloader->{vga};
 		push @conf, join(' ', $entry->{xen} ? 'module' : 'kernel', 
 		       $file2grub->($entry->{kernel_or_dev}),
-		       $entry->{xen} ? '' : 'BOOT_IMAGE=' . simplify_label($entry->{label}),
+		       $entry->{xen} ? () : 'BOOT_IMAGE=' . simplify_label($entry->{label}),
 		       if_($entry->{root}, $entry->{root} =~ /loop7/ ? "root=707" : "root=$entry->{root}"), #- special to workaround bug in kernel (see #ifdef CONFIG_BLK_DEV_LOOP)
 		       $entry->{append},
 		       if_($entry->{'read-write'}, 'rw'),
@@ -1809,7 +1817,7 @@ sub install_grub {
 
     if (!$::testing) {
 	if ($bootloader->{previous_boot} && $bootloader->{previous_boot} eq $bootloader->{boot}) {
-	    # nothing to do
+	    # nothing to do (already installed in {boot})
 	} else {
 	    if ($bootloader->{previous_boot}) {
 		restore_previous_MBR_bootloader(delete $bootloader->{previous_boot});
