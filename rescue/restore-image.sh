@@ -83,30 +83,104 @@ do you want to continue?\n "
 
 function detect_root()
 {
-	        dev=$(sed '\|'$restore_media'|!d;s/[0-9] .*$//;s/^.*\///' /proc/mounts)
-	        devices=$(grep "^ .*[^0-9]$" < /proc/partitions | grep -v ${dev} | awk '$3 > '$MIN_DISKSIZE' { print $4,$3 }')
+		dev=$(sed '\|'$restore_media'|!d;s/[0-9] .*$//;s/^.*\///' /proc/mounts)
+		devices=$(grep "^ .*[^0-9]$" < /proc/partitions | grep -v ${dev} | awk '$3 > '$MIN_DISKSIZE' { print $4,$3 }')
 
 		devs_found=$(echo $devices | wc -w)
-		if [ "$devs_found" -gt "2" ]; then
- 			if [ ! -z ${dev} ]; then
- 				opcao=$(dialog --backtitle "$BACKTITLE" --title "$TITLE" --stdout --menu 'Choose one of the detected devices to restore to (check the blocks size column first):' 8 50 0 $devices )
- 				if [ "$?" != "0" ]; then
- 					_yesno "\nInterrupt installation?\n "
- 					if [ "$?" = "0" ]; then
- 						_shutdown
- 					fi
- 				else
- 					root=$opcao
- 				fi 
- 			fi
+		# we might use it later again
+		fdisk -l | grep "^/dev/" | grep -v ${dev} > /tmp/fdisk.log
+
+		if ! grep -qe "FAT\|NTFS\|HPFS" /tmp/fdisk.log; then
+			rm -rf /tmp/fdisk.log
+			if [ "$devs_found" -gt "2" ]; then
+	 			if [ ! -z ${dev} ]; then
+	 				opcao=$(dialog --backtitle "$BACKTITLE" --title "$TITLE" --stdout --menu 'Choose one of the detected devices to restore to (check the blocks size column first):' 8 50 0 $devices )
+	 				if [ "$?" != "0" ]; then
+	 					_yesno "\nInterrupt installation?\n "
+	 					if [ "$?" = "0" ]; then
+	 						_shutdown
+	 					fi
+	 				else
+	 					root=${opcao}
+	 				fi 
+	 			fi
+			else
+			    root=$(echo ${devices} | cut -d ' ' -f 1)
+			fi
 		else
-		    root=$(echo $devices | cut -d ' ' -f 1)
+			root=$(resize_win32 $(echo ${devices} | cut -d ' ' -f 1))
 		fi
-		echo "$root"
+		
+		echo "${root}"
+}
+
+function resize_win32()
+{
+	# from detect_root()
+	disk=${1}
+
+	# won't handle complex layouts
+	if [ ! $(grep "^/dev" /tmp/fdisk.log | wc -l) -gt 1 ]; then
+		set -f
+		# get the last created windows partition information
+		partition=$(grep -e "FAT\|NTFS" /tmp/fdisk.log | tail -1)
+		device=$(echo ${partition} | sed 's/ .*$//')
+		set +f
+
+		# get the next partition integer
+		number=$(echo ${device} | sed 's@/dev/...@@g')
+		let number++
+	
+		# df for that partition
+		mount ${device} /mnt
+		size=$(df ${device} | tail -1) 
+		umount /mnt
+
+		# its diskspace
+		used=$(echo ${size} | awk '{ print $3 }')
+		left=$(echo ${size} | awk '{ print $4 }')
+		avail=$((${left}/2))
+
+		if [ ! ${avail} -lt ${MIN_DISKSIZE} ]; then
+			# wrapper around libdrakx by blino (it takes half of 'left')
+			diskdrake-resize ${device} ntfs $(($((${used}+${avail}))*2)) &>/dev/null
+
+			# we need some free sector here, rebuilding layout
+			fdisk /dev/${disk} &>/dev/null <<EOF
+d
+n
+p
+$((${number}-1))
+
++$((${used}+${avail}))K
+t
+87
+a
+$((${number}-1))
+w
+EOF
+			# adds linux partition to the end of the working disk
+			fdisk /dev/${disk} &>/dev/null <<EOF
+n
+p
+${number}
+
++1000M
+t
+${number}
+83
+w
+EOF
+		fi
+	fi
+
+	echo "${disk}${number}"
 }
 
 function write_image()
 {
+	dialog --backtitle "$BACKTITLE" --title "$TITLE" --infobox "\nTrying to detect your root partition and disk...\n" 4 55
+
 	root=$(detect_root)
 	if [ -z ${root} ]; then
         	_msgbox "\nError writing image: disk device not detected.\n"
@@ -122,7 +196,16 @@ function write_image()
 		bz2) uncomp=bzcat ;;
 		*) uncomp=cat ;;
 	esac
-	$uncomp $images_dir/$image | dd of=/dev/$root bs=4M > /tmp/backup.out 2>&1 &
+
+	if [ -s /tmp/fdisk.log -a ${uncomp} = "cat" ]; then
+		input=/dev/loop5
+		losetup ${input} $images_dir/$image -o 32256
+	else
+		input=$images_dir/$image
+	fi
+
+	# the actual dumping command, from image to disk
+	$uncomp ${input} | dd of=/dev/$root bs=4M > /tmp/backup.out 2>&1>>/tmp/log &
 
 	sleep 3
 	pid=$(ps ax | grep 'dd of' | grep -v grep | awk '{ print $1 }')
@@ -158,14 +241,47 @@ function write_image()
 	fi
 }
 
+function grub_setup()
+{
+		root=${1}
+		grub_dir=${2}
+
+		# install the bootloader
+		grub <<EOF
+device (hd0) /dev/${root%[0-9]}
+root (hd0,1)
+setup (hd0)
+quit
+EOF
+		# change the partition order and boot timeout accordingly
+		sed -i 's/(hd0,0)/(hd0,1)/g;/^timeout/s/$/0/' ${grub_dir}/menu.lst
+
+		# dualboot configuration for grub
+		cat >> ${grub_dir}/menu.lst <<EOF
+title Microsoft Windows
+root (hd0,0)
+makeactive
+rootnoverify(hd0,0)
+chainloader +1
+EOF
+}
+
 function expand_fs()
 {
-	filesystem_type=$(dumpe2fs -h /dev/${root}1 2>/dev/null| grep "Filesystem OS type" | awk '{ print $4 }')
-	if [ "$filesystem_type" = "Linux" ]; then
-                dialog --backtitle "$BACKTITLE" --title "$TITLE" --infobox "Installing...  Finishing Install..." 3 40
-		disk=/dev/$root
-		main_part=/dev/${root}1
-		swap_part=/dev/${root}2
+	if [ ! -s /tmp/fdisk.log ]; then
+		root=${root%[0-9]}1
+	fi
+	filesystem_type=$(dumpe2fs -h /dev/${root} 2>/dev/null| grep "Filesystem OS type" | awk '{ print $4 }')
+	if [ "${filesystem_type}" = "Linux" ]; then
+                dialog --backtitle "$BACKTITLE" --title "$TITLE" --infobox "Finishing Install... Expanding ${root}" 3 40
+		disk=/dev/${root%[0-9]}
+		main_part=/dev/${root}
+
+		# FIXME: absurdly dirty hack
+                num=${root##sda}
+		let num++
+		swap_part=/dev/${root%[0-9]}${num}
+
 		main_part_sectors=
 		if [ -n "$SWAP_BLOCKS" ]; then
 		    if [ -n "$EXPAND_FS" ]; then
@@ -176,20 +292,23 @@ function expand_fs()
 	                main_part_sectors=$(sfdisk -d $disk | perl -lne 'm|^'$main_part'\b.*,\s*size\s*=\s*(\d+)\b| and print($1), exit')
 		    fi
 		fi
-		if [ -n "$EXPAND_FS" ]; then
-		    sfdisk -d $disk | sed -e "\|$main_part|  s/size=.*,/size= $main_part_sectors,/" | sfdisk -f $disk
-		    e2fsck -fy $main_part
-		    resize2fs $main_part
-		fi
 		if [ -n "$SWAP_BLOCKS" ]; then
 		    parted $disk -- mkpartfs primary linux-swap ${main_part_sectors}s -1s yes
 		    mkswap -L swap $swap_part
+		fi
+		if [ -n "$EXPAND_FS" ]; then
+		    sfdisk -d $disk | sed -e "\|$main_part|  s/size=.*,/size= ,/" | sfdisk -f $disk
+		    e2fsck -fy $main_part
+		    resize2fs $main_part
 		fi
 		mkdir -p $mnt_dir
 		mount $main_part $mnt_dir
 		grub_dir="$mnt_dir/boot/grub"
 		if [ -d "$grub_dir" ]; then
 		    echo "(hd0) $disk" > "$grub_dir/device.map"
+		    if [ -s /tmp/fdisk.log ]; then
+   	                grub_setup ${root} ${grub_dir}
+                    fi
 		fi
 		if [ -n "$MKINITRD" ]; then
 		    mount -t sysfs none "$mnt_dir/sys"
