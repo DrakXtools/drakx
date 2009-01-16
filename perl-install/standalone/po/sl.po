@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-29 14:19+0200\n"
+"POT-Creation-Date: 2009-01-16 11:41+0100\n"
 "PO-Revision-Date: 2008-10-06 22:30+0200\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -21,16 +21,16 @@ msgstr ""
 "Plural-Forms:  nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
 
-#: drakauth:27 drakauth:29 draksec:279 draksec:328
+#: drakauth:24 drakauth:26 draksec:291 draksec:340
 #, c-format
 msgid "Authentication"
 msgstr "Overjanje"
 
-#: drakauth:39 drakclock:111 drakclock:125 drakfont:213 drakfont:226
-#: drakfont:264 draksplash:169 finish-install:104 logdrake:170 logdrake:445
+#: drakauth:37 drakclock:111 drakclock:125 drakfont:213 drakfont:226
+#: drakfont:264 draksplash:202 finish-install:119 logdrake:170 logdrake:445
 #: logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
-#: scannerdrake:200 scannerdrake:259 scannerdrake:730 scannerdrake:741
-#: scannerdrake:880 scannerdrake:891 scannerdrake:961
+#: scannerdrake:200 scannerdrake:259 scannerdrake:729 scannerdrake:740
+#: scannerdrake:879 scannerdrake:890 scannerdrake:960
 #, c-format
 msgid "Error"
 msgstr "Napaka"
@@ -70,10 +70,10 @@ msgstr "Gostobesedno"
 msgid "Silent"
 msgstr "Tiho"
 
-#: drakboot:137 drakbug:233 drakfont:682 drakperm:375 drakperm:385 drakups:27
+#: drakboot:137 drakbug:254 drakfont:682 drakperm:376 drakperm:386 drakups:27
 #: harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
 #: scannerdrake:51 scannerdrake:54 scannerdrake:297 scannerdrake:302
-#: scannerdrake:955
+#: scannerdrake:954
 #, c-format
 msgid "Warning"
 msgstr "Opozorilo"
@@ -122,7 +122,7 @@ msgstr ""
 "Prikaži temo\n"
 "pod konzolo"
 
-#: drakboot:163 draksplash:25
+#: drakboot:163 draksplash:26
 #, c-format
 msgid "Create new theme"
 msgstr "Ustvari novo temo"
@@ -178,7 +178,7 @@ msgstr ""
 "zagonskega nalagalnika.\n"
 "Prepričajte se, da vaša kartica podpira način, ki ga boste izbrali."
 
-#: drakbug:65 drakbug:143
+#: drakbug:65 drakbug:152
 #, c-format
 msgid "The \"%s\" program has crashed with the following error:"
 msgstr "Program »%s« se je sesul s tem sporočilom o napaki:"
@@ -203,7 +203,7 @@ msgstr "Čarovnik za prvikrat"
 msgid "Synchronization tool"
 msgstr "Orodje za sinhronizacijo"
 
-#: drakbug:84 drakbug:195
+#: drakbug:84 drakbug:216
 #, c-format
 msgid "Standalone Tools"
 msgstr "Samostojna orodja"
@@ -262,24 +262,22 @@ msgstr "Paket: "
 msgid "Kernel:"
 msgstr "Jedro:"
 
-#: drakbug:142
+#: drakbug:151
 #, c-format
 msgid "The \"%s\" program has segfaulted with the following error:"
 msgstr "Program »%s« se je sesul s tem sporočilom o napaki:"
 
-#: drakbug:146
+#: drakbug:155
 #, c-format
 msgid "Its gdb trace is:"
 msgstr "Povratna sled je:"
 
-#: drakbug:149
-#, c-format
+#: drakbug:158
+#, fuzzy, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
 "This will open a web browser window on %s where you'll find a form to fill "
-"in.  The information displayed above will be transferred to that server.  \n"
-"Things useful to include in your report are the output of lspcidrake -v, "
-"kernel version, and /proc/cpuinfo."
+"in.  The information displayed above will be transferred to that server"
 msgstr ""
 "Poročilo pošljete tako, da kliknete na gumb »Poročaj«.  \n"
 "Odprl se bo spletni brskalnik na strani %s, kjer boste našli obrazec, ki ga "
@@ -287,37 +285,60 @@ msgstr ""
 "Poročilu je koristno priložiti izpis ukaza lspcidrake -v, različico jedra in "
 "vsebino datoteke /proc/cpuinfo."
 
-#: drakbug:152
+#: drakbug:160
+#, c-format
+msgid ""
+"It would be very useful to attach to your report the output of the following "
+"command: %s."
+msgid_plural ""
+"Things useful to attach to your report are the output of the following "
+"commands: %s."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: drakbug:163
+#, c-format
+msgid "'%s'"
+msgstr ""
+
+#: drakbug:166
+#, fuzzy, c-format
+msgid "You should also attach the following files: %s as well as %s."
+msgstr "Namestite naslednje pakete: %s"
+
+#: drakbug:173
 #, c-format
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Opišite, kaj ste počeli, preden se je sesul:"
 
-#: drakbug:164 drakperm:135 draksec:438 draksec:440 draksec:459 draksec:461
+#: drakbug:185 drakperm:136 draksec:450 draksec:452 draksec:471 draksec:473
 #, c-format
 msgid "Help"
 msgstr "Pomoč"
 
-#: drakbug:168
+#: drakbug:189
 #, c-format
 msgid "Report"
 msgstr "Poročaj"
 
-#: drakbug:169 drakfont:506
+#: drakbug:190 drakfont:506
 #, c-format
 msgid "Close"
 msgstr "Zapri"
 
-#: drakbug:202
+#: drakbug:223
 #, c-format
 msgid "Not installed"
 msgstr "Ni nameščeno"
 
-#: drakbug:215
+#: drakbug:236
 #, c-format
 msgid "Package not installed"
 msgstr "Paket ni nameščen"
 
-#: drakbug:234
+#: drakbug:255
 #, c-format
 msgid ""
 "You must type in what you were doing when this bug happened in order to "
@@ -326,12 +347,12 @@ msgstr ""
 "Opisati morate, kaj ste počeli, preden se je pojavila ta napaka. Na ta način "
 "bomo lahko sami povzročili napako in tako se poveča možnost odprave napake."
 
-#: drakbug:235
+#: drakbug:256
 #, c-format
 msgid "Thanks."
 msgstr "Najlepša hvala."
 
-#: drakclock:30 draksec:334
+#: drakclock:30 draksec:346
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Nastavitev ure in časovnega pasu"
@@ -405,7 +426,7 @@ msgstr "Prosim vnesite veljaven naslov strežnika NTP."
 msgid "Could not synchronize with %s."
 msgstr "Sinhronizacija z %s ni mogoča."
 
-#: drakclock:127 draksplash:93 logdrake:175 scannerdrake:492
+#: drakclock:127 draksplash:125 logdrake:175 scannerdrake:491
 #, c-format
 msgid "Quit"
 msgstr "Končaj"
@@ -663,7 +684,7 @@ msgstr "Abiword"
 msgid "Generic Printers"
 msgstr "Splošni Tiskalniki"
 
-#: drakfont:562 drakfont:572 draksplash:180 drakups:210
+#: drakfont:562 drakfont:572 draksplash:213 drakups:210
 #, c-format
 msgid "Ok"
 msgstr "V redu"
@@ -678,7 +699,7 @@ msgstr "Izberite datoteko s pisavo ali imenik in kliknite na Dodaj"
 msgid "File Selection"
 msgstr "Izbira datoteke"
 
-#: drakfont:572 drakfont:652 drakfont:736 draksplash:180 drakups:217
+#: drakfont:572 drakfont:652 drakfont:736 draksplash:213 drakups:217
 #: logdrake:175
 #, c-format
 msgid "Cancel"
@@ -689,7 +710,7 @@ msgstr "Prekliči"
 msgid "Fonts"
 msgstr "Pisave"
 
-#: drakfont:640 draksec:330
+#: drakfont:640 draksec:342
 #, c-format
 msgid "Import fonts"
 msgstr "Uvozi pisave"
@@ -845,22 +866,22 @@ msgstr "Varnostna dovoljenja"
 msgid "Editable"
 msgstr "Uredljiv"
 
-#: drakperm:50 drakperm:319
+#: drakperm:50 drakperm:320
 #, c-format
 msgid "Path"
 msgstr "Pot"
 
-#: drakperm:50 drakperm:248
+#: drakperm:50 drakperm:249
 #, c-format
 msgid "User"
 msgstr "Uporabnik"
 
-#: drakperm:50 drakperm:248
+#: drakperm:50 drakperm:249
 #, c-format
 msgid "Group"
 msgstr "Skupina"
 
-#: drakperm:50 drakperm:331
+#: drakperm:50 drakperm:109 drakperm:332
 #, c-format
 msgid "Permissions"
 msgstr "Dovoljenja"
@@ -870,12 +891,12 @@ msgstr "Dovoljenja"
 msgid "Add a new rule"
 msgstr "Dodaj novo pravilo"
 
-#: drakperm:67 drakperm:102 drakperm:127
+#: drakperm:67 drakperm:102 drakperm:128
 #, c-format
 msgid "Edit current rule"
 msgstr "Uredi trenutno pravilo"
 
-#: drakperm:109
+#: drakperm:110
 #, c-format
 msgid ""
 "Here you can see files to use in order to fix permissions, owners, and "
@@ -886,7 +907,7 @@ msgstr ""
 "pripadnost skupinam.\n"
 "Tu lahko tudi urejate svoja pravila, ki prepišejo privzeta pravila."
 
-#: drakperm:111
+#: drakperm:112
 #, c-format
 msgid ""
 "The current security level is %s.\n"
@@ -895,115 +916,115 @@ msgstr ""
 "Trenutna varnostna stopnja je %s.\n"
 "Izberite dovoljenja, ki jih želite videti / urejati"
 
-#: drakperm:123
+#: drakperm:124
 #, c-format
 msgid "Up"
 msgstr "Gor"
 
-#: drakperm:123
+#: drakperm:124
 #, c-format
 msgid "Move selected rule up one level"
 msgstr "Premakni izbrano pravilo eno stopnjo višje"
 
-#: drakperm:124
+#: drakperm:125
 #, c-format
 msgid "Down"
 msgstr "Nepovezana"
 
-#: drakperm:124
+#: drakperm:125
 #, c-format
 msgid "Move selected rule down one level"
 msgstr "Premakni izbrano pravilo eno stopnjo nižje"
 
-#: drakperm:125
+#: drakperm:126
 #, c-format
 msgid "Add a rule"
 msgstr "Dodaj pravilo"
 
-#: drakperm:125
+#: drakperm:126
 #, c-format
 msgid "Add a new rule at the end"
 msgstr "Dodaj novo pravilo na konec"
 
-#: drakperm:126
+#: drakperm:127
 #, c-format
 msgid "Delete"
 msgstr "Izbriši"
 
-#: drakperm:126
+#: drakperm:127
 #, c-format
 msgid "Delete selected rule"
 msgstr "Izbriši izbrano pravilo"
 
-#: drakperm:127 drakups:300 drakups:362 drakups:382
+#: drakperm:128 drakups:300 drakups:362 drakups:382
 #, c-format
 msgid "Edit"
 msgstr "Uredi"
 
-#: drakperm:240
+#: drakperm:241
 #, c-format
 msgid "browse"
 msgstr "brskaj"
 
-#: drakperm:245
+#: drakperm:246
 #, c-format
 msgid "user"
 msgstr "uporabnik"
 
-#: drakperm:245
+#: drakperm:246
 #, c-format
 msgid "group"
 msgstr "skupina"
 
-#: drakperm:245
+#: drakperm:246
 #, c-format
 msgid "other"
 msgstr "drugi"
 
-#: drakperm:248
+#: drakperm:249
 #, c-format
 msgid "Other"
 msgstr "Drugo"
 
-#: drakperm:250
+#: drakperm:251
 #, c-format
 msgid "Read"
 msgstr "Branje"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:253
+#: drakperm:254
 #, c-format
 msgid "Enable \"%s\" to read the file"
 msgstr "Omogoči, da »%s« lahko bere to datoteko"
 
-#: drakperm:257
+#: drakperm:258
 #, c-format
 msgid "Write"
 msgstr "Pisanje"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:260
+#: drakperm:261
 #, c-format
 msgid "Enable \"%s\" to write the file"
 msgstr "Omogoči, da »%s« lahko piše v to datoteko"
 
-#: drakperm:264
+#: drakperm:265
 #, c-format
 msgid "Execute"
 msgstr "Izvajanje"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:267
+#: drakperm:268
 #, c-format
 msgid "Enable \"%s\" to execute the file"
 msgstr "Omogoči, da »%s« lahko požene to datoteko"
 
-#: drakperm:270
+#: drakperm:271
 #, c-format
 msgid "Sticky-bit"
 msgstr "Lepljiv bit"
 
-#: drakperm:270
+#: drakperm:271
 #, c-format
 msgid ""
 "Used for directory:\n"
@@ -1012,57 +1033,57 @@ msgstr ""
 "Uporabljeno za mapo:\n"
 "le lastnik mape ali datoteke v tej mapi jo lahko izbriše"
 
-#: drakperm:271
+#: drakperm:272
 #, c-format
 msgid "Set-UID"
 msgstr "Nastavi UID"
 
-#: drakperm:271
+#: drakperm:272
 #, c-format
 msgid "Use owner id for execution"
 msgstr "Pri poganjanju nastavi ID lastnika"
 
-#: drakperm:272
+#: drakperm:273
 #, c-format
 msgid "Set-GID"
 msgstr "Nastavi GID"
 
-#: drakperm:272
+#: drakperm:273
 #, c-format
 msgid "Use group id for execution"
 msgstr "Pri poganjanju nastavi ID skupine"
 
-#: drakperm:289
+#: drakperm:290
 #, c-format
 msgid "User:"
 msgstr "Uporabnik:"
 
-#: drakperm:290
+#: drakperm:291
 #, c-format
 msgid "Group:"
 msgstr "Skupina:"
 
-#: drakperm:294
+#: drakperm:295
 #, c-format
 msgid "Current user"
 msgstr "Trenutni uporabnik"
 
-#: drakperm:295
+#: drakperm:296
 #, c-format
 msgid "When checked, owner and group will not be changed"
 msgstr "Če je omogočeno, uporabnik in skupina ne bosta spremenjena"
 
-#: drakperm:305
+#: drakperm:306
 #, c-format
 msgid "Path selection"
 msgstr "Izbira poti"
 
-#: drakperm:325
+#: drakperm:326
 #, c-format
 msgid "Property"
 msgstr "Lastnost"
 
-#: drakperm:375
+#: drakperm:376
 #, c-format
 msgid ""
 "The first character of the path must be a slash (\"/\"):\n"
@@ -1071,17 +1092,17 @@ msgstr ""
 "Prvi znak v poti mora biti poševnica (»/«):\n"
 "»%s«"
 
-#: drakperm:385
+#: drakperm:386
 #, c-format
 msgid "Both the username and the group must valid!"
 msgstr "Uporabniško ime in skupina morata biti veljavna!"
 
-#: drakperm:386
+#: drakperm:387
 #, c-format
 msgid "User: %s"
 msgstr "Uporabnik: %s"
 
-#: drakperm:387
+#: drakperm:388
 #, c-format
 msgid "Group: %s"
 msgstr "Skupina: %s"
@@ -1112,8 +1133,8 @@ msgid "Ignore"
 msgstr "Zanemari"
 
 #: draksec:72 drakups:99 harddrake2:370 scannerdrake:66 scannerdrake:70
-#: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:505
-#: scannerdrake:509 scannerdrake:531 service_harddrake:259
+#: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:504
+#: scannerdrake:508 scannerdrake:530 service_harddrake:264
 #, c-format
 msgid "Please wait"
 msgstr "Prosim, počakajte!"
@@ -1266,147 +1287,147 @@ msgstr "Omrežne možnosti"
 msgid "System Options"
 msgstr "Sistemske možnosti"
 
-#: draksec:261
+#: draksec:269
 #, c-format
 msgid "Periodic Checks"
 msgstr "Redna preverjanja"
 
-#: draksec:282
+#: draksec:294
 #, c-format
 msgid "No password"
 msgstr "Brez gesla"
 
-#: draksec:283
+#: draksec:295
 #, c-format
 msgid "Root password"
 msgstr "Geslo uporabnika root"
 
-#: draksec:284
+#: draksec:296
 #, c-format
 msgid "User password"
 msgstr "Uporabniško geslo"
 
-#: draksec:314 draksec:360
+#: draksec:326 draksec:372
 #, c-format
 msgid "Software Management"
 msgstr "Upravljanje programja"
 
-#: draksec:315
+#: draksec:327
 #, c-format
 msgid "Mandriva Update"
 msgstr "Posodabljanje Mandrive"
 
-#: draksec:316
+#: draksec:328
 #, c-format
 msgid "Software Media Manager"
 msgstr "Upravitelj virov programske opreme"
 
-#: draksec:317
+#: draksec:329
 #, c-format
 msgid "Configure 3D Desktop effects"
 msgstr "Nastavite 3D učinke namizja"
 
-#: draksec:318
+#: draksec:330
 #, c-format
 msgid "Graphical Server Configuration"
 msgstr "Nastavitve grafičnega strežnika"
 
-#: draksec:319
+#: draksec:331
 #, c-format
 msgid "Mouse Configuration"
 msgstr "Nastavitve miške"
 
-#: draksec:320
+#: draksec:332
 #, c-format
 msgid "Keyboard Configuration"
 msgstr "Nastavitve tipkovnice"
 
-#: draksec:321
+#: draksec:333
 #, c-format
 msgid "UPS Configuration"
 msgstr "Nastavitve neprekinjenega napajanja"
 
-#: draksec:322
+#: draksec:334
 #, c-format
 msgid "Network Configuration"
 msgstr "Nastavitve omrežja"
 
-#: draksec:323
+#: draksec:335
 #, c-format
 msgid "Hosts definitions"
 msgstr "Definicije gostiteljev"
 
-#: draksec:324
+#: draksec:336
 #, c-format
 msgid "Network Center"
 msgstr "Omrežno središče"
 
-#: draksec:325
+#: draksec:337
 #, c-format
 msgid "VPN"
 msgstr "Navidezno zasebno omrežje (VPN)"
 
-#: draksec:326
+#: draksec:338
 #, c-format
 msgid "Proxy Configuration"
 msgstr "Nastavitev posrednika"
 
-#: draksec:327
+#: draksec:339
 #, c-format
 msgid "Connection Sharing"
 msgstr "Souporaba povezave"
 
-#: draksec:329
+#: draksec:341
 #, c-format
 msgid "Backups"
 msgstr "Varnostne kopije"
 
-#: draksec:331 logdrake:52
+#: draksec:343 logdrake:52
 #, c-format
 msgid "Logs"
 msgstr "Dnevniki"
 
-#: draksec:332
+#: draksec:344
 #, c-format
 msgid "Services"
 msgstr "Storitve"
 
-#: draksec:333
+#: draksec:345
 #, c-format
 msgid "Users"
 msgstr "Uporabniki"
 
-#: draksec:335
+#: draksec:347
 #, c-format
 msgid "Boot Configuration"
 msgstr "Nastavitve zagona"
 
-#: draksec:361
+#: draksec:373
 #, c-format
 msgid "Hardware"
 msgstr "Strojna oprema"
 
-#: draksec:362
+#: draksec:374
 #, c-format
 msgid "Network"
 msgstr "Omrežje"
 
-#: draksec:363
+#: draksec:375
 #, c-format
 msgid "System"
 msgstr "Sistem"
 
-#: draksec:364
+#: draksec:376
 #, c-format
 msgid "Boot"
 msgstr "Zagon"
 
-#: draksec:389
+#: draksec:401
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "Prosim počakajte, nastavljanje stopnje varnosti ..."
 
-#: draksec:395
+#: draksec:407
 #, c-format
 msgid "Please wait, setting security options..."
 msgstr "Prosim počakajte, nastavljanje varnostnih možnosti ..."
@@ -1453,27 +1474,27 @@ msgstr ""
 "Če imate PnP zvočno kartico na ISA vodilu, boste morali v konzoli zagnati "
 "ukaz »alsaconf« ali »sndconfig«."
 
-#: draksplash:32
+#: draksplash:33
 #, c-format
 msgid "X coordinate of text box"
 msgstr "Koordinata x za polje z besedilom"
 
-#: draksplash:33
+#: draksplash:34
 #, c-format
 msgid "Y coordinate of text box"
 msgstr "Koordinata y za polje z besedilom"
 
-#: draksplash:34
+#: draksplash:35
 #, c-format
 msgid "Text box width"
 msgstr "Širina polja z besedilom"
 
-#: draksplash:35
+#: draksplash:36
 #, c-format
 msgid "Text box height"
 msgstr "Višina besedilnega polja"
 
-#: draksplash:36
+#: draksplash:37
 #, c-format
 msgid ""
 "The progress bar X coordinate\n"
@@ -1482,7 +1503,7 @@ msgstr ""
 "X koordinata kazalnika poteka\n"
 "iz zgornjega levega kota"
 
-#: draksplash:37
+#: draksplash:38
 #, c-format
 msgid ""
 "The progress bar Y coordinate\n"
@@ -1491,37 +1512,37 @@ msgstr ""
 "Y koordinata kazalnika poteka\n"
 "iz zgornjega levega kota"
 
-#: draksplash:38
+#: draksplash:39
 #, c-format
 msgid "The width of the progress bar"
 msgstr "širina kazalnika poteka"
 
-#: draksplash:39
+#: draksplash:40
 #, c-format
 msgid "The height of the progress bar"
 msgstr "Višina kazalnika poteka"
 
-#: draksplash:40
+#: draksplash:41
 #, c-format
 msgid "X coordinate of the text"
 msgstr "Koordinata x za besedilo"
 
-#: draksplash:41
+#: draksplash:42
 #, c-format
 msgid "Y coordinate of the text"
 msgstr "Koordinata y za besedilo"
 
-#: draksplash:42
+#: draksplash:43
 #, c-format
 msgid "Text box transparency"
 msgstr "Prosojnost polja z besedilom"
 
-#: draksplash:43
+#: draksplash:44
 #, c-format
 msgid "Progress box transparency"
 msgstr "Prosojnost prikaza napredka"
 
-#: draksplash:44
+#: draksplash:45
 #, c-format
 msgid "Text size"
 msgstr "Velikost besedila"
@@ -1536,17 +1557,17 @@ msgstr "Kazalnik napredka"
 msgid "Choose progress bar color 1"
 msgstr "Izbor prve barve za prikaz napredka"
 
-#: draksplash:62
+#: draksplash:67
 #, c-format
 msgid "Choose progress bar color 2"
 msgstr "Izbor druge barve za prikaz napredka"
 
-#: draksplash:63
+#: draksplash:69
 #, c-format
 msgid "Choose progress bar background"
 msgstr "Izbor barve ozadja za prikaz napredka"
 
-#: draksplash:64
+#: draksplash:72
 #, c-format
 msgid "Gradient type"
 msgstr "Vrsta preliva"
@@ -1561,82 +1582,82 @@ msgstr "Besedilo"
 msgid "Choose text color"
 msgstr "Izbor barve besedila"
 
-#: draksplash:67 draksplash:74
+#: draksplash:83 draksplash:102
 #, c-format
 msgid "Choose picture"
 msgstr "Izbor slike"
 
-#: draksplash:68
+#: draksplash:87
 #, c-format
 msgid "Silent bootsplash"
 msgstr "Tiha zagonska tema"
 
-#: draksplash:71
+#: draksplash:90
 #, c-format
 msgid "Choose text zone color"
 msgstr "Izbor barve področja z besedilom"
 
-#: draksplash:72
+#: draksplash:93
 #, c-format
 msgid "Text color"
 msgstr "Barva besedila"
 
-#: draksplash:73
+#: draksplash:97
 #, c-format
 msgid "Background color"
 msgstr "Barva ozadja"
 
-#: draksplash:75
+#: draksplash:103
 #, c-format
 msgid "Verbose bootsplash"
 msgstr "Gostobesedna zagonska tema"
 
-#: draksplash:81
+#: draksplash:110
 #, c-format
 msgid "Theme name"
 msgstr "Ime teme"
 
-#: draksplash:84
+#: draksplash:115
 #, c-format
 msgid "Final resolution"
 msgstr "Končna ločljivost"
 
-#: draksplash:87
+#: draksplash:119
 #, c-format
 msgid "Display logo on Console"
 msgstr "Prikaži logotip na konzoli"
 
-#: draksplash:92
+#: draksplash:124
 #, c-format
 msgid "Save theme"
 msgstr "Shrani temo"
 
-#: draksplash:154
+#: draksplash:187
 #, c-format
 msgid "Please enter a theme name"
 msgstr "Prosim vnesite ime teme."
 
-#: draksplash:157
+#: draksplash:190
 #, c-format
 msgid "Please select a splash image"
 msgstr "Prosimo izberite sliko ob zagonu sistema."
 
-#: draksplash:160
+#: draksplash:193
 #, c-format
 msgid "saving Bootsplash theme..."
 msgstr "Shranjevanje teme Uvodnega zaslona..."
 
-#: draksplash:169
+#: draksplash:202
 #, c-format
 msgid "Unable to load image file %s"
 msgstr "Ni moč naložiti slike %s"
 
-#: draksplash:180
+#: draksplash:213
 #, c-format
 msgid "choose image"
 msgstr "izberite sliko"
 
-#: draksplash:195
+#: draksplash:228
 #, c-format
 msgid "Color selection"
 msgstr "Izbor barve"
@@ -1825,7 +1846,7 @@ msgstr "Raven"
 msgid "ACL name"
 msgstr "ACL ime"
 
-#: drakups:297 finish-install:156
+#: drakups:297 finish-install:171
 #, c-format
 msgid "Password"
 msgstr "Geslo"
@@ -1872,37 +1893,37 @@ msgstr ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 
-#: finish-install:55
+#: finish-install:56
 #, c-format
 msgid "Keyboard"
 msgstr "Tipkovnica"
 
-#: finish-install:56
+#: finish-install:57
 #, c-format
 msgid "Please, choose your keyboard layout."
 msgstr "Izberite razpored tipkovnice"
 
-#: finish-install:154 finish-install:172 finish-install:184
+#: finish-install:169 finish-install:187 finish-install:199
 #, c-format
 msgid "Encrypted home partition"
 msgstr "Šifriran razdelek »home«"
 
-#: finish-install:154
+#: finish-install:169
 #, c-format
 msgid "Please enter a password for the %s user"
 msgstr "Vnesite geslo za uporabnika »%s«"
 
-#: finish-install:157
+#: finish-install:172
 #, c-format
 msgid "Password (again)"
 msgstr "Geslo (ponovno)"
 
-#: finish-install:172
+#: finish-install:187
 #, c-format
 msgid "Creating encrypted home partition"
 msgstr "Ustvarjanje šifriranega razdelka »home«"
 
-#: finish-install:184
+#: finish-install:199
 #, c-format
 msgid "Formatting encrypted home partition"
 msgstr "Formatiranje šifriranega razdelka »home«"
@@ -3097,17 +3118,17 @@ msgstr ""
 msgid "Scannerdrake will not be started now."
 msgstr "Scannerdrake zdaj ne bo zagnan."
 
-#: scannerdrake:67 scannerdrake:506
+#: scannerdrake:67 scannerdrake:505
 #, c-format
 msgid "Searching for configured scanners..."
 msgstr "Iskanje nastavljenih optičnih čitalcev ..."
 
-#: scannerdrake:71 scannerdrake:510
+#: scannerdrake:71 scannerdrake:509
 #, c-format
 msgid "Searching for new scanners..."
 msgstr "Iskanje novih optičnih čitalcev ..."
 
-#: scannerdrake:79 scannerdrake:532
+#: scannerdrake:79 scannerdrake:531
 #, c-format
 msgid "Re-generating list of configured scanners..."
 msgstr "Vzpostavljanje seznama nastavljenih optičnih čitalcev ..."
@@ -3436,52 +3457,52 @@ msgstr ""
 "\n"
 "%s\n"
 
-#: scannerdrake:450 scannerdrake:453
+#: scannerdrake:449 scannerdrake:452
 #, c-format
 msgid "There are no scanners found which are available on your system.\n"
 msgstr "Na vašem sistemu ni bil najden noben optični čitalec.\n"
 
-#: scannerdrake:461
+#: scannerdrake:460
 #, c-format
 msgid "Scanner Management"
 msgstr "Upravljanje z optičnimi čitalniki"
 
-#: scannerdrake:467
+#: scannerdrake:466
 #, c-format
 msgid "Search for new scanners"
 msgstr "Iskanje novih optičnih čitalcev"
 
-#: scannerdrake:473
+#: scannerdrake:472
 #, c-format
 msgid "Add a scanner manually"
 msgstr "Ročno dodaj optični čitalnik"
 
-#: scannerdrake:480
+#: scannerdrake:479
 #, c-format
 msgid "Install/Update firmware files"
 msgstr "Namesti / posodobi datoteke strojnih gonilnikov (firmware)"
 
-#: scannerdrake:486
+#: scannerdrake:485
 #, c-format
 msgid "Scanner sharing"
 msgstr "Souporaba optičnih čitalcev"
 
-#: scannerdrake:545 scannerdrake:710
+#: scannerdrake:544 scannerdrake:709
 #, c-format
 msgid "All remote machines"
 msgstr "Vsi oddaljeni računalniki"
 
-#: scannerdrake:557 scannerdrake:860
+#: scannerdrake:556 scannerdrake:859
 #, c-format
 msgid "This machine"
 msgstr "Ta računalnik"
 
-#: scannerdrake:596
+#: scannerdrake:595
 #, c-format
 msgid "Scanner Sharing"
 msgstr "Souporaba optičnih čitalnikov"
 
-#: scannerdrake:597
+#: scannerdrake:596
 #, c-format
 msgid ""
 "Here you can choose whether the scanners connected to this machine should be "
@@ -3490,7 +3511,7 @@ msgstr ""
 "Tukaj lahko določite, ali bodo optični čitalci na tem računalniku na voljo "
 "oddaljenim računalnikom in če, katerim."
 
-#: scannerdrake:598
+#: scannerdrake:597
 #, c-format
 msgid ""
 "You can also decide here whether scanners on remote machines should be made "
@@ -3499,97 +3520,97 @@ msgstr ""
 "Prav tako lahko določite, ali bodo optični čitalci na oddaljenih "
 "računalnikih na voljo na tem računalniku."
 
-#: scannerdrake:601
+#: scannerdrake:600
 #, c-format
 msgid "The scanners on this machine are available to other computers"
 msgstr "Optični čitalci na tem računalniku so na voljo drugim računalnikom."
 
-#: scannerdrake:603
+#: scannerdrake:602
 #, c-format
 msgid "Scanner sharing to hosts: "
 msgstr "Optični čitalci v skupni rabi so na voljo gostiteljem: "
 
-#: scannerdrake:608 scannerdrake:625
+#: scannerdrake:607 scannerdrake:624
 #, c-format
 msgid "No remote machines"
 msgstr "Ni oddaljenih računalnikov."
 
-#: scannerdrake:617
+#: scannerdrake:616
 #, c-format
 msgid "Use scanners on remote computers"
 msgstr "Uporabi optične čitalce na oddaljenih računalnikih"
 
-#: scannerdrake:620
+#: scannerdrake:619
 #, c-format
 msgid "Use the scanners on hosts: "
 msgstr "Uporabi optične čitalce na gostiteljih: "
 
-#: scannerdrake:647 scannerdrake:719 scannerdrake:869
+#: scannerdrake:646 scannerdrake:718 scannerdrake:868
 #, c-format
 msgid "Sharing of local scanners"
 msgstr "Souporaba krajevnih čitalcev"
 
-#: scannerdrake:648
+#: scannerdrake:647
 #, c-format
 msgid ""
 "These are the machines on which the locally connected scanner(s) should be "
 "available:"
 msgstr "Računalniki,za katere bodo dosegljivi vaši krajevni optični čitalci:"
 
-#: scannerdrake:659 scannerdrake:809
+#: scannerdrake:658 scannerdrake:808
 #, c-format
 msgid "Add host"
 msgstr "Dodaj gostitelja"
 
-#: scannerdrake:665 scannerdrake:815
+#: scannerdrake:664 scannerdrake:814
 #, c-format
 msgid "Edit selected host"
 msgstr "Uredi izbranega gostitelja"
 
-#: scannerdrake:674 scannerdrake:824
+#: scannerdrake:673 scannerdrake:823
 #, c-format
 msgid "Remove selected host"
 msgstr "Odstrani izbranega gostitelja"
 
-#: scannerdrake:683 scannerdrake:833
+#: scannerdrake:682 scannerdrake:832
 #, c-format
 msgid "Done"
 msgstr "Opravljeno"
 
-#: scannerdrake:698 scannerdrake:706 scannerdrake:711 scannerdrake:757
-#: scannerdrake:848 scannerdrake:856 scannerdrake:861 scannerdrake:907
+#: scannerdrake:697 scannerdrake:705 scannerdrake:710 scannerdrake:756
+#: scannerdrake:847 scannerdrake:855 scannerdrake:860 scannerdrake:906
 #, c-format
 msgid "Name/IP address of host:"
 msgstr "Gostiteljevo ime / naslov IP"
 
-#: scannerdrake:720 scannerdrake:870
+#: scannerdrake:719 scannerdrake:869
 #, c-format
 msgid "Choose the host on which the local scanners should be made available:"
 msgstr ""
 "Izberite gostitelja, na katerem naj bo krajevni optični čitalec v skupni "
 "rabi: "
 
-#: scannerdrake:731 scannerdrake:881
+#: scannerdrake:730 scannerdrake:880
 #, c-format
 msgid "You must enter a host name or an IP address.\n"
 msgstr "Vnesti morate gostiteljevo ime ali naslov IP.\n"
 
-#: scannerdrake:742 scannerdrake:892
+#: scannerdrake:741 scannerdrake:891
 #, c-format
 msgid "This host is already in the list, it cannot be added again.\n"
 msgstr "Tega gostitelja ni mogoče dodati, ker je že na seznamu.\n"
 
-#: scannerdrake:797
+#: scannerdrake:796
 #, c-format
 msgid "Usage of remote scanners"
 msgstr "Raba oddaljenih čitalcev"
 
-#: scannerdrake:798
+#: scannerdrake:797
 #, c-format
 msgid "These are the machines from which the scanners should be used:"
 msgstr "Računalniki ki bodo uporabljali čitalce:"
 
-#: scannerdrake:955
+#: scannerdrake:954
 #, c-format
 msgid ""
 "saned needs to be installed to share the local scanner(s).\n"
@@ -3600,39 +3621,39 @@ msgstr ""
 "\n"
 "Želite namestiti paket saned?"
 
-#: scannerdrake:959 scannerdrake:963
+#: scannerdrake:958 scannerdrake:962
 #, c-format
 msgid "Your scanner(s) will not be available on the network."
 msgstr "Vaši optični čitalci ne bodo na voljo omrežju."
 
-#: scannerdrake:962
+#: scannerdrake:961
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr ""
 "Paketov, ki so potrebni za skupno rabo optičnega čitalnika, ni mogoče "
 "namestiti."
 
-#: service_harddrake:131
+#: service_harddrake:134
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Nekateri deli strojne opreme razreda »%s« so bili odstranjeni:\n"
 
-#: service_harddrake:132
+#: service_harddrake:135
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- %s je bil odstranjen\n"
 
-#: service_harddrake:135
+#: service_harddrake:138
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "Dodana je bila nova strojna oprema: %s\n"
 
-#: service_harddrake:136
+#: service_harddrake:139
 #, c-format
 msgid "- %s was added\n"
 msgstr "- %s je bil dodan\n"
 
-#: service_harddrake:259
+#: service_harddrake:264
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "Preizkušanje strojne opreme"

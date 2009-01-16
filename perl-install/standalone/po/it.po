@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-29 14:19+0200\n"
+"POT-Creation-Date: 2009-01-16 11:41+0100\n"
 "PO-Revision-Date: 2008-09-30 09:03+0200\n"
 "Last-Translator: Andrea Celli <andrea.celli@libero.it>\n"
 "Language-Team: Italian <timl@freelists.org>\n"
@@ -22,16 +22,16 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: drakauth:27 drakauth:29 draksec:279 draksec:328
+#: drakauth:24 drakauth:26 draksec:291 draksec:340
 #, c-format
 msgid "Authentication"
 msgstr "Autenticazione"
 
-#: drakauth:39 drakclock:111 drakclock:125 drakfont:213 drakfont:226
-#: drakfont:264 draksplash:169 finish-install:104 logdrake:170 logdrake:445
+#: drakauth:37 drakclock:111 drakclock:125 drakfont:213 drakfont:226
+#: drakfont:264 draksplash:202 finish-install:119 logdrake:170 logdrake:445
 #: logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
-#: scannerdrake:200 scannerdrake:259 scannerdrake:730 scannerdrake:741
-#: scannerdrake:880 scannerdrake:891 scannerdrake:961
+#: scannerdrake:200 scannerdrake:259 scannerdrake:729 scannerdrake:740
+#: scannerdrake:879 scannerdrake:890 scannerdrake:960
 #, c-format
 msgid "Error"
 msgstr "Errore"
@@ -71,10 +71,10 @@ msgstr "Prolisso"
 msgid "Silent"
 msgstr "Senza messaggi"
 
-#: drakboot:137 drakbug:233 drakfont:682 drakperm:375 drakperm:385 drakups:27
+#: drakboot:137 drakbug:254 drakfont:682 drakperm:376 drakperm:386 drakups:27
 #: harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
 #: scannerdrake:51 scannerdrake:54 scannerdrake:297 scannerdrake:302
-#: scannerdrake:955
+#: scannerdrake:954
 #, c-format
 msgid "Warning"
 msgstr "Attenzione"
@@ -123,7 +123,7 @@ msgstr ""
 "Mostra il tema\n"
 "nella console"
 
-#: drakboot:163 draksplash:25
+#: drakboot:163 draksplash:26
 #, c-format
 msgid "Create new theme"
 msgstr "Crea un nuovo tema"
@@ -179,7 +179,7 @@ msgstr ""
 "avvio selezionate qui sotto.\n"
 "Assicurati che la scheda grafica supporti la modalità che hai scelto."
 
-#: drakbug:65 drakbug:143
+#: drakbug:65 drakbug:152
 #, c-format
 msgid "The \"%s\" program has crashed with the following error:"
 msgstr "Il programma \"%s\" si è interrotto per questo errore:"
@@ -204,7 +204,7 @@ msgstr "Assistente per primo accesso"
 msgid "Synchronization tool"
 msgstr "Strumenti di sincronizzazione"
 
-#: drakbug:84 drakbug:195
+#: drakbug:84 drakbug:216
 #, c-format
 msgid "Standalone Tools"
 msgstr "Strumenti non dipendenti da altri"
@@ -263,24 +263,22 @@ msgstr "Pacchetto:"
 msgid "Kernel:"
 msgstr "Kernel:"
 
-#: drakbug:142
+#: drakbug:151
 #, c-format
 msgid "The \"%s\" program has segfaulted with the following error:"
 msgstr "Il programma \"%s\" si è interrotto(SEGV) per questo errore:"
 
-#: drakbug:146
+#: drakbug:155
 #, c-format
 msgid "Its gdb trace is:"
 msgstr "Gdb lo ha registrato così:"
 
-#: drakbug:149
-#, c-format
+#: drakbug:158
+#, fuzzy, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
 "This will open a web browser window on %s where you'll find a form to fill "
-"in.  The information displayed above will be transferred to that server.  \n"
-"Things useful to include in your report are the output of lspcidrake -v, "
-"kernel version, and /proc/cpuinfo."
+"in.  The information displayed above will be transferred to that server"
 msgstr ""
 "Per inviare una segnalazione di bug, clicca sul pulsante Segnalazione.\n"
 "Si aprirà un browser web su %s dove troverai un modulo da compilare. Le "
@@ -288,37 +286,58 @@ msgstr ""
 "Sarebbe utile includere nel tuo rapporto l'output di lspcidrake -v, la "
 "versione del kernel e il contenuto di /proc/cpuinfo."
 
-#: drakbug:152
+#: drakbug:160
+#, c-format
+msgid ""
+"It would be very useful to attach to your report the output of the following "
+"command: %s."
+msgid_plural ""
+"Things useful to attach to your report are the output of the following "
+"commands: %s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: drakbug:163
+#, c-format
+msgid "'%s'"
+msgstr ""
+
+#: drakbug:166
+#, fuzzy, c-format
+msgid "You should also attach the following files: %s as well as %s."
+msgstr "Potresti installare i seguenti pacchetti: %s"
+
+#: drakbug:173
 #, c-format
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Descrivi cosa stavi facendo al momento del crash:"
 
-#: drakbug:164 drakperm:135 draksec:438 draksec:440 draksec:459 draksec:461
+#: drakbug:185 drakperm:136 draksec:450 draksec:452 draksec:471 draksec:473
 #, c-format
 msgid "Help"
 msgstr "Aiuto"
 
-#: drakbug:168
+#: drakbug:189
 #, c-format
 msgid "Report"
 msgstr "Segnalazione"
 
-#: drakbug:169 drakfont:506
+#: drakbug:190 drakfont:506
 #, c-format
 msgid "Close"
 msgstr "Chiudi"
 
-#: drakbug:202
+#: drakbug:223
 #, c-format
 msgid "Not installed"
 msgstr "Non installato"
 
-#: drakbug:215
+#: drakbug:236
 #, c-format
 msgid "Package not installed"
 msgstr "Pacchetto non installato"
 
-#: drakbug:234
+#: drakbug:255
 #, c-format
 msgid ""
 "You must type in what you were doing when this bug happened in order to "
@@ -327,12 +346,12 @@ msgstr ""
 "Serve che tu scriva cosa stavi facendo quando si è verificato il problema. "
 "Ci permetterà di riprodurlo e aumentare le possibilità di risolverlo."
 
-#: drakbug:235
+#: drakbug:256
 #, c-format
 msgid "Thanks."
 msgstr "Grazie."
 
-#: drakclock:30 draksec:334
+#: drakclock:30 draksec:346
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Impostazione di data, ora e fuso orario"
@@ -407,7 +426,7 @@ msgstr "Inserisci un indirizzo valido per il server NTP."
 msgid "Could not synchronize with %s."
 msgstr "Impossibile sincronizzarsi con %s."
 
-#: drakclock:127 draksplash:93 logdrake:175 scannerdrake:492
+#: drakclock:127 draksplash:125 logdrake:175 scannerdrake:491
 #, c-format
 msgid "Quit"
 msgstr "Esci"
@@ -665,7 +684,7 @@ msgstr "Abiword"
 msgid "Generic Printers"
 msgstr "Stampanti generiche"
 
-#: drakfont:562 drakfont:572 draksplash:180 drakups:210
+#: drakfont:562 drakfont:572 draksplash:213 drakups:210
 #, c-format
 msgid "Ok"
 msgstr "OK"
@@ -680,7 +699,7 @@ msgstr "Seleziona il file o la directory del font e clicca su \"Aggiungi\""
 msgid "File Selection"
 msgstr "Selezione file"
 
-#: drakfont:572 drakfont:652 drakfont:736 draksplash:180 drakups:217
+#: drakfont:572 drakfont:652 drakfont:736 draksplash:213 drakups:217
 #: logdrake:175
 #, c-format
 msgid "Cancel"
@@ -691,7 +710,7 @@ msgstr "Annulla"
 msgid "Fonts"
 msgstr "Font"
 
-#: drakfont:640 draksec:330
+#: drakfont:640 draksec:342
 #, c-format
 msgid "Import fonts"
 msgstr "Importa font"
@@ -800,8 +819,10 @@ msgstr " --help                - mostra questo messaggio     \n"
 
 #: drakhelp:23
 #, c-format
-msgid " --id <id_label>       - load the html help page which refers to id_label\n"
-msgstr " --id <id_label>       - carica la pagina html con informazioni su id_label\n"
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
+msgstr ""
+" --id <id_label>       - carica la pagina html con informazioni su id_label\n"
 
 #: drakhelp:24
 #, c-format
@@ -847,22 +868,22 @@ msgstr "Permessi per la sicurezza"
 msgid "Editable"
 msgstr "Modificabile"
 
-#: drakperm:50 drakperm:319
+#: drakperm:50 drakperm:320
 #, c-format
 msgid "Path"
 msgstr "Path"
 
-#: drakperm:50 drakperm:248
+#: drakperm:50 drakperm:249
 #, c-format
 msgid "User"
 msgstr "Utente"
 
-#: drakperm:50 drakperm:248
+#: drakperm:50 drakperm:249
 #, c-format
 msgid "Group"
 msgstr "Gruppo"
 
-#: drakperm:50 drakperm:331
+#: drakperm:50 drakperm:109 drakperm:332
 #, c-format
 msgid "Permissions"
 msgstr "Permessi"
@@ -872,12 +893,12 @@ msgstr "Permessi"
 msgid "Add a new rule"
 msgstr "Aggiungi una nuova regola"
 
-#: drakperm:67 drakperm:102 drakperm:127
+#: drakperm:67 drakperm:102 drakperm:128
 #, c-format
 msgid "Edit current rule"
 msgstr "Modifica regola attuale"
 
-#: drakperm:109
+#: drakperm:110
 #, c-format
 msgid ""
 "Here you can see files to use in order to fix permissions, owners, and "
@@ -889,7 +910,7 @@ msgstr ""
 "Puoi anche stabilire delle regole personalizzate che sostituiranno quelle "
 "preimpostate."
 
-#: drakperm:111
+#: drakperm:112
 #, c-format
 msgid ""
 "The current security level is %s.\n"
@@ -898,115 +919,115 @@ msgstr ""
 "L'attuale livello di sicurezza è %s.\n"
 "Imposta permessi di lettura/modifica"
 
-#: drakperm:123
+#: drakperm:124
 #, c-format
 msgid "Up"
 msgstr "Su"
 
-#: drakperm:123
+#: drakperm:124
 #, c-format
 msgid "Move selected rule up one level"
 msgstr "Alza di una posizione la regola selezionata"
 
-#: drakperm:124
+#: drakperm:125
 #, c-format
 msgid "Down"
 msgstr "Giù"
 
-#: drakperm:124
+#: drakperm:125
 #, c-format
 msgid "Move selected rule down one level"
 msgstr "Abbassa di una posizione la regola selezionata"
 
-#: drakperm:125
+#: drakperm:126
 #, c-format
 msgid "Add a rule"
 msgstr "Aggiungi una regola"
 
-#: drakperm:125
+#: drakperm:126
 #, c-format
 msgid "Add a new rule at the end"
 msgstr "Aggiungi nuova regola alla fine"
 
-#: drakperm:126
+#: drakperm:127
 #, c-format
 msgid "Delete"
 msgstr "Cancella"
 
-#: drakperm:126
+#: drakperm:127
 #, c-format
 msgid "Delete selected rule"
 msgstr "Rimuovi regola selezionata"
 
-#: drakperm:127 drakups:300 drakups:362 drakups:382
+#: drakperm:128 drakups:300 drakups:362 drakups:382
 #, c-format
 msgid "Edit"
 msgstr "Configura"
 
-#: drakperm:240
+#: drakperm:241
 #, c-format
 msgid "browse"
 msgstr "sfogliare"
 
-#: drakperm:245
+#: drakperm:246
 #, c-format
 msgid "user"
 msgstr "utente"
 
-#: drakperm:245
+#: drakperm:246
 #, c-format
 msgid "group"
 msgstr "gruppo"
 
-#: drakperm:245
+#: drakperm:246
 #, c-format
 msgid "other"
 msgstr "altri"
 
-#: drakperm:248
+#: drakperm:249
 #, c-format
 msgid "Other"
 msgstr "Altro"
 
-#: drakperm:250
+#: drakperm:251
 #, c-format
 msgid "Read"
 msgstr "Lettura"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:253
+#: drakperm:254
 #, c-format
 msgid "Enable \"%s\" to read the file"
 msgstr "Permetti a \"%s\" di leggere il file"
 
-#: drakperm:257
+#: drakperm:258
 #, c-format
 msgid "Write"
 msgstr "Scrivere"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:260
+#: drakperm:261
 #, c-format
 msgid "Enable \"%s\" to write the file"
 msgstr "Abilita \"%s\" a scrivere sul file"
 
-#: drakperm:264
+#: drakperm:265
 #, c-format
 msgid "Execute"
 msgstr "Esegui"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:267
+#: drakperm:268
 #, c-format
 msgid "Enable \"%s\" to execute the file"
 msgstr "Autorizza \"%s\" ad eseguire il file"
 
-#: drakperm:270
+#: drakperm:271
 #, c-format
 msgid "Sticky-bit"
 msgstr "Sticky-bit"
 
-#: drakperm:270
+#: drakperm:271
 #, c-format
 msgid ""
 "Used for directory:\n"
@@ -1015,57 +1036,57 @@ msgstr ""
 "Usato per le directory:\n"
 " solo il proprietario può cancellare la directory o i file che contiene"
 
-#: drakperm:271
+#: drakperm:272
 #, c-format
 msgid "Set-UID"
 msgstr "Set-UID"
 
-#: drakperm:271
+#: drakperm:272
 #, c-format
 msgid "Use owner id for execution"
 msgstr "Usa l'id del proprietario per eseguire"
 
-#: drakperm:272
+#: drakperm:273
 #, c-format
 msgid "Set-GID"
 msgstr "Set-GID"
 
-#: drakperm:272
+#: drakperm:273
 #, c-format
 msgid "Use group id for execution"
 msgstr "Usa l'id del gruppo per eseguire"
 
-#: drakperm:289
+#: drakperm:290
 #, c-format
 msgid "User:"
 msgstr "Utente:"
 
-#: drakperm:290
+#: drakperm:291
 #, c-format
 msgid "Group:"
 msgstr "Gruppo:"
 
-#: drakperm:294
+#: drakperm:295
 #, c-format
 msgid "Current user"
 msgstr "Utente attuale"
 
-#: drakperm:295
+#: drakperm:296
 #, c-format
 msgid "When checked, owner and group will not be changed"
 msgstr "Se è marcato, il proprietario e il gruppo non verranno cambiati"
 
-#: drakperm:305
+#: drakperm:306
 #, c-format
 msgid "Path selection"
 msgstr "selezione del path"
 
-#: drakperm:325
+#: drakperm:326
 #, c-format
 msgid "Property"
 msgstr "Proprietà"
 
-#: drakperm:375
+#: drakperm:376
 #, c-format
 msgid ""
 "The first character of the path must be a slash (\"/\"):\n"
@@ -1074,17 +1095,17 @@ msgstr ""
 "Il primo carattere del path deve essere una barra (\"/\"):\n"
 "\"%s\""
 
-#: drakperm:385
+#: drakperm:386
 #, c-format
 msgid "Both the username and the group must valid!"
 msgstr "Sia il nome utente che il gruppo devono essere validi!"
 
-#: drakperm:386
+#: drakperm:387
 #, c-format
 msgid "User: %s"
 msgstr "Utente: %s"
 
-#: drakperm:387
+#: drakperm:388
 #, c-format
 msgid "Group: %s"
 msgstr "Gruppo: %s"
@@ -1115,8 +1136,8 @@ msgid "Ignore"
 msgstr "Ignorare"
 
 #: draksec:72 drakups:99 harddrake2:370 scannerdrake:66 scannerdrake:70
-#: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:505
-#: scannerdrake:509 scannerdrake:531 service_harddrake:259
+#: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:504
+#: scannerdrake:508 scannerdrake:530 service_harddrake:264
 #, c-format
 msgid "Please wait"
 msgstr "Attendere prego"
@@ -1272,147 +1293,147 @@ msgstr "Opzioni di rete"
 msgid "System Options"
 msgstr "Opzioni di sistema"
 
-#: draksec:261
+#: draksec:269
 #, c-format
 msgid "Periodic Checks"
 msgstr "Verifiche periodiche"
 
-#: draksec:282
+#: draksec:294
 #, c-format
 msgid "No password"
 msgstr "No password"
 
-#: draksec:283
+#: draksec:295
 #, c-format
 msgid "Root password"
 msgstr "Password di root"
 
-#: draksec:284
+#: draksec:296
 #, c-format
 msgid "User password"
 msgstr "Password dell'utente"
 
-#: draksec:314 draksec:360
+#: draksec:326 draksec:372
 #, c-format
 msgid "Software Management"
 msgstr "Gestione software"
 
-#: draksec:315
+#: draksec:327
 #, c-format
 msgid "Mandriva Update"
 msgstr "Aggiornamenti Mandriva"
 
-#: draksec:316
+#: draksec:328
 #, c-format
 msgid "Software Media Manager"
 msgstr "Gestione dei supporti software"
 
-#: draksec:317
+#: draksec:329
 #, c-format
 msgid "Configure 3D Desktop effects"
 msgstr "Configura effetti ambiente 3D"
 
-#: draksec:318
+#: draksec:330
 #, c-format
 msgid "Graphical Server Configuration"
 msgstr "Configurazione del server grafico"
 
-#: draksec:319
+#: draksec:331
 #, c-format
 msgid "Mouse Configuration"
 msgstr "Configurazione del mouse"
 
-#: draksec:320
+#: draksec:332
 #, c-format
 msgid "Keyboard Configuration"
 msgstr "Configurazione della tastiera"
 
-#: draksec:321
+#: draksec:333
 #, c-format
 msgid "UPS Configuration"
 msgstr "Configurazione UPS"
 
-#: draksec:322
+#: draksec:334
 #, c-format
 msgid "Network Configuration"
 msgstr "Configurazione della rete"
 
-#: draksec:323
+#: draksec:335
 #, c-format
 msgid "Hosts definitions"
 msgstr "Descrizioni degli host"
 
-#: draksec:324
+#: draksec:336
 #, c-format
 msgid "Network Center"
 msgstr "Rete e Internet"
 
-#: draksec:325
+#: draksec:337
 #, c-format
 msgid "VPN"
 msgstr "VPN"
 
-#: draksec:326
+#: draksec:338
 #, c-format
 msgid "Proxy Configuration"
 msgstr "Configurazione proxy"
 
-#: draksec:327
+#: draksec:339
 #, c-format
 msgid "Connection Sharing"
 msgstr "Condivisione connessioni"
 
-#: draksec:329
+#: draksec:341
 #, c-format
 msgid "Backups"
 msgstr "Backup"
 
-#: draksec:331 logdrake:52
+#: draksec:343 logdrake:52
 #, c-format
 msgid "Logs"
 msgstr "Log"
 
-#: draksec:332
+#: draksec:344
 #, c-format
 msgid "Services"
 msgstr "Servizi"
 
-#: draksec:333
+#: draksec:345
 #, c-format
 msgid "Users"
 msgstr "Utenti"
 
-#: draksec:335
+#: draksec:347
 #, c-format
 msgid "Boot Configuration"
 msgstr "Configurazione del boot"
 
-#: draksec:361
+#: draksec:373
 #, c-format
 msgid "Hardware"
 msgstr "Hardware"
 
-#: draksec:362
+#: draksec:374
 #, c-format
 msgid "Network"
 msgstr "Rete"
 
-#: draksec:363
+#: draksec:375
 #, c-format
 msgid "System"
 msgstr "Sistema"
 
-#: draksec:364
+#: draksec:376
 #, c-format
 msgid "Boot"
 msgstr "Avvio"
 
-#: draksec:389
+#: draksec:401
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "Per favore attendi, ora imposto il livello di sicurezza..."
 
-#: draksec:395
+#: draksec:407
 #, c-format
 msgid "Please wait, setting security options..."
 msgstr "Per favore attendi, ora imposto le opzioni di sicurezza..."
@@ -1460,27 +1481,27 @@ msgstr ""
 "alsaconf o sndconfig. Basterà lanciare \"alsaconf\" o \"sndconfig\" da una "
 "console."
 
-#: draksplash:32
+#: draksplash:33
 #, c-format
 msgid "X coordinate of text box"
 msgstr "Ascissa (x) del riquadro di testo"
 
-#: draksplash:33
+#: draksplash:34
 #, c-format
 msgid "Y coordinate of text box"
 msgstr "Ordinata (y) del riquadro di testo"
 
-#: draksplash:34
+#: draksplash:35
 #, c-format
 msgid "Text box width"
 msgstr "Larghezza del testo"
 
-#: draksplash:35
+#: draksplash:36
 #, c-format
 msgid "Text box height"
 msgstr "Altezza del riquadro di testo"
 
-#: draksplash:36
+#: draksplash:37
 #, c-format
 msgid ""
 "The progress bar X coordinate\n"
@@ -1489,7 +1510,7 @@ msgstr ""
 "Barra di avanzamento: ascissa (x)\n"
 "del suo angolo superiore sinistro"
 
-#: draksplash:37
+#: draksplash:38
 #, c-format
 msgid ""
 "The progress bar Y coordinate\n"
@@ -1498,37 +1519,37 @@ msgstr ""
 "Barra di avanzamento: ordinata (y)\n"
 "del suo angolo superiore sinistro"
 
-#: draksplash:38
+#: draksplash:39
 #, c-format
 msgid "The width of the progress bar"
 msgstr "Lo spessore della barra di avanzamento"
 
-#: draksplash:39
+#: draksplash:40
 #, c-format
 msgid "The height of the progress bar"
 msgstr "L'altezza della barra di avanzamento"
 
-#: draksplash:40
+#: draksplash:41
 #, c-format
 msgid "X coordinate of the text"
 msgstr "Coordinata x del testo"
 
-#: draksplash:41
+#: draksplash:42
 #, c-format
 msgid "Y coordinate of the text"
 msgstr "Coordinata y del testo"
 
-#: draksplash:42
+#: draksplash:43
 #, c-format
 msgid "Text box transparency"
 msgstr "Trasparenza riquadro testo"
 
-#: draksplash:43
+#: draksplash:44
 #, c-format
 msgid "Progress box transparency"
 msgstr "Trasparenza della barra di progressione"
 
-#: draksplash:44
+#: draksplash:45
 #, c-format
 msgid "Text size"
 msgstr "Dimensione testo"
@@ -1543,17 +1564,17 @@ msgstr "Barra di avanzamento"
 msgid "Choose progress bar color 1"
 msgstr "Scelta del colore per la barra di progressione 1"
 
-#: draksplash:62
+#: draksplash:67
 #, c-format
 msgid "Choose progress bar color 2"
 msgstr "Scelta del colore per la barra di progressione 2"
 
-#: draksplash:63
+#: draksplash:69
 #, c-format
 msgid "Choose progress bar background"
 msgstr "Scelta colore sfondo  per barra di progressione"
 
-#: draksplash:64
+#: draksplash:72
 #, c-format
 msgid "Gradient type"
 msgstr "Tipo di gradiente"
@@ -1568,82 +1589,82 @@ msgstr "Testo"
 msgid "Choose text color"
 msgstr "Scelta colore testo"
 
-#: draksplash:67 draksplash:74
+#: draksplash:83 draksplash:102
 #, c-format
 msgid "Choose picture"
 msgstr "Scegli l'immagine"
 
-#: draksplash:68
+#: draksplash:87
 #, c-format
 msgid "Silent bootsplash"
 msgstr "Bootsplash senza messaggi"
 
-#: draksplash:71
+#: draksplash:90
 #, c-format
 msgid "Choose text zone color"
 msgstr "Scelta colore area testuale"
 
-#: draksplash:72
+#: draksplash:93
 #, c-format
 msgid "Text color"
 msgstr "Colore del testo"
 
-#: draksplash:73
+#: draksplash:97
 #, c-format
 msgid "Background color"
 msgstr "Colore sfondo"
 
-#: draksplash:75
+#: draksplash:103
 #, c-format
 msgid "Verbose bootsplash"
 msgstr "Bootsplash con messaggi"
 
-#: draksplash:81
+#: draksplash:110
 #, c-format
 msgid "Theme name"
 msgstr "Nome del tema"
 
-#: draksplash:84
+#: draksplash:115
 #, c-format
 msgid "Final resolution"
 msgstr "Risoluzione finale"
 
-#: draksplash:87
+#: draksplash:119
 #, c-format
 msgid "Display logo on Console"
 msgstr "Mostra il logo nella console"
 
-#: draksplash:92
+#: draksplash:124
 #, c-format
 msgid "Save theme"
 msgstr "Salva il tema"
 
-#: draksplash:154
+#: draksplash:187
 #, c-format
 msgid "Please enter a theme name"
 msgstr "Fornisci il nome di un tema"
 
-#: draksplash:157
+#: draksplash:190
 #, c-format
 msgid "Please select a splash image"
 msgstr "Scegli un'immagine splash"
 
-#: draksplash:160
+#: draksplash:193
 #, c-format
 msgid "saving Bootsplash theme..."
 msgstr "Salvo il tema del Bootsplash..."
 
-#: draksplash:169
+#: draksplash:202
 #, c-format
 msgid "Unable to load image file %s"
 msgstr "Impossibile caricare il file %s con l'immagine"
 
-#: draksplash:180
+#: draksplash:213
 #, c-format
 msgid "choose image"
 msgstr "scegli un'immagine"
 
-#: draksplash:195
+#: draksplash:228
 #, c-format
 msgid "Color selection"
 msgstr "Selezione colore"
@@ -1834,7 +1855,7 @@ msgstr "Livello"
 msgid "ACL name"
 msgstr "Nome ACL"
 
-#: drakups:297 finish-install:156
+#: drakups:297 finish-install:171
 #, c-format
 msgid "Password"
 msgstr "Password"
@@ -1881,37 +1902,37 @@ msgstr ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 
-#: finish-install:55
+#: finish-install:56
 #, c-format
 msgid "Keyboard"
 msgstr "Tastiera"
 
-#: finish-install:56
+#: finish-install:57
 #, c-format
 msgid "Please, choose your keyboard layout."
 msgstr "Indica la mappatura della tastiera."
 
-#: finish-install:154 finish-install:172 finish-install:184
+#: finish-install:169 finish-install:187 finish-install:199
 #, c-format
 msgid "Encrypted home partition"
 msgstr "Partizione home crittata"
 
-#: finish-install:154
+#: finish-install:169
 #, c-format
 msgid "Please enter a password for the %s user"
 msgstr "Fornisci una password per l'utente %s"
 
-#: finish-install:157
+#: finish-install:172
 #, c-format
 msgid "Password (again)"
 msgstr "Password (ripeti)"
 
-#: finish-install:172
+#: finish-install:187
 #, c-format
 msgid "Creating encrypted home partition"
 msgstr "Creazione della partizione home crittata..."
 
-#: finish-install:184
+#: finish-install:199
 #, c-format
 msgid "Formatting encrypted home partition"
 msgstr "Formattazione della partizione home crittata"
@@ -1933,8 +1954,10 @@ msgstr "Bus"
 
 #: harddrake2:32
 #, c-format
-msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
-msgstr "questo è il bus fisico a cui è collegato il dispositivo (ad es. PCI, USB,...)"
+msgid ""
+"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgstr ""
+"questo è il bus fisico a cui è collegato il dispositivo (ad es. PCI, USB,...)"
 
 #: harddrake2:34 harddrake2:149
 #, c-format
@@ -1974,7 +1997,8 @@ msgstr "Caratteristiche dell'unità"
 #: harddrake2:41
 #, c-format
 msgid "special capacities of the driver (burning ability and or DVD support)"
-msgstr "caratteristiche speciali dell'unità (masterizzazione o supporto per DVD)"
+msgstr ""
+"caratteristiche speciali dell'unità (masterizzazione o supporto per DVD)"
 
 #: harddrake2:42
 #, c-format
@@ -2299,7 +2323,8 @@ msgstr "Se la FPU ha un vettore irq"
 #: harddrake2:81
 #, c-format
 msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr "\"si\" significa che il coprocessore aritmetico possiede un vettore-eccezioni"
+msgstr ""
+"\"si\" significa che il coprocessore aritmetico possiede un vettore-eccezioni"
 
 #: harddrake2:82
 #, c-format
@@ -2498,7 +2523,8 @@ msgstr "File del dispositivo"
 
 #: harddrake2:118
 #, c-format
-msgid "the device file used to communicate with the kernel driver for the mouse"
+msgid ""
+"the device file used to communicate with the kernel driver for the mouse"
 msgstr ""
 "il file di dispositivo utilizzato per comunicare con il driver del kernel "
 "per il mouse"
@@ -2695,7 +2721,8 @@ msgstr "Lancia il tool di configurazione"
 
 #: harddrake2:302
 #, c-format
-msgid "Click on a device in the left tree in order to display its information here."
+msgid ""
+"Click on a device in the left tree in order to display its information here."
 msgstr ""
 "Clicca su un dispositivo dell'albero a sinistra per vedere le relative "
 "informazioni. "
@@ -3037,7 +3064,8 @@ msgstr "e fornisci il nome (o l'IP) del server SMTP che vuoi utilizzare"
 #: logdrake:445
 #, c-format
 msgid "\"%s\" neither is a valid email nor is an existing local user!"
-msgstr "\"%s\" non è né un indirizzo email valido, né un utente locale esistente!"
+msgstr ""
+"\"%s\" non è né un indirizzo email valido, né un utente locale esistente!"
 
 #: logdrake:450
 #, c-format
@@ -3090,7 +3118,8 @@ msgstr "Interruzione di Scannerdrake."
 
 #: scannerdrake:60
 #, c-format
-msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr ""
 "Non posso installare i programmi necessari per configurare uno scanner con "
 "Scannerdrake."
@@ -3100,17 +3129,17 @@ msgstr ""
 msgid "Scannerdrake will not be started now."
 msgstr "Scannerdrake non verrà avviato adesso."
 
-#: scannerdrake:67 scannerdrake:506
+#: scannerdrake:67 scannerdrake:505
 #, c-format
 msgid "Searching for configured scanners..."
 msgstr "Sto cercando gli scanner configurati..."
 
-#: scannerdrake:71 scannerdrake:510
+#: scannerdrake:71 scannerdrake:509
 #, c-format
 msgid "Searching for new scanners..."
 msgstr "Sto cercando altri scanner..."
 
-#: scannerdrake:79 scannerdrake:532
+#: scannerdrake:79 scannerdrake:531
 #, c-format
 msgid "Re-generating list of configured scanners..."
 msgstr "Rigenero l'elenco degli scanner configurati..."
@@ -3143,7 +3172,8 @@ msgstr "Configurazione scanner"
 #: scannerdrake:131
 #, c-format
 msgid "Select a scanner model (Detected model: %s, Port: %s)"
-msgstr "Seleziona il modello dello scanner (Modello individuato: %s sulla porta %s)"
+msgstr ""
+"Seleziona il modello dello scanner (Modello individuato: %s sulla porta %s)"
 
 #: scannerdrake:133
 #, c-format
@@ -3297,7 +3327,8 @@ msgid ""
 "section."
 msgstr ""
 "%s deve essere configurato con  system-config-printer.\n"
-"Puoi lanciare  system-config-printer dal Centro di Controllo %s, sezione Hardware."
+"Puoi lanciare  system-config-printer dal Centro di Controllo %s, sezione "
+"Hardware."
 
 #: scannerdrake:320
 #, c-format
@@ -3435,52 +3466,52 @@ msgstr ""
 "%s\n"
 "è disponibile sul tuo sistema.\n"
 
-#: scannerdrake:450 scannerdrake:453
+#: scannerdrake:449 scannerdrake:452
 #, c-format
 msgid "There are no scanners found which are available on your system.\n"
 msgstr "Non sono stati trovati scanner disponibili sulla tua macchina.\n"
 
-#: scannerdrake:461
+#: scannerdrake:460
 #, c-format
 msgid "Scanner Management"
 msgstr "Gestione scanner"
 
-#: scannerdrake:467
+#: scannerdrake:466
 #, c-format
 msgid "Search for new scanners"
 msgstr "Cerca nuovi scanner"
 
-#: scannerdrake:473
+#: scannerdrake:472
 #, c-format
 msgid "Add a scanner manually"
 msgstr "Aggiungi manualmente uno scanner"
 
-#: scannerdrake:480
+#: scannerdrake:479
 #, c-format
 msgid "Install/Update firmware files"
 msgstr "Installa/aggiorna i file del firmware"
 
-#: scannerdrake:486
+#: scannerdrake:485
 #, c-format
 msgid "Scanner sharing"
 msgstr "Condivisione scanner"
 
-#: scannerdrake:545 scannerdrake:710
+#: scannerdrake:544 scannerdrake:709
 #, c-format
 msgid "All remote machines"
 msgstr "Tutte le macchine remote"
 
-#: scannerdrake:557 scannerdrake:860
+#: scannerdrake:556 scannerdrake:859
 #, c-format
 msgid "This machine"
 msgstr "Questa macchina"
 
-#: scannerdrake:596
+#: scannerdrake:595
 #, c-format
 msgid "Scanner Sharing"
 msgstr "Condivisione scanner"
 
-#: scannerdrake:597
+#: scannerdrake:596
 #, c-format
 msgid ""
 "Here you can choose whether the scanners connected to this machine should be "
@@ -3489,7 +3520,7 @@ msgstr ""
 "Qui puoi anche decidere se rendere disponibili a macchine remote gli scanner "
 "collegati a questa macchina e a quali macchine remote."
 
-#: scannerdrake:598
+#: scannerdrake:597
 #, c-format
 msgid ""
 "You can also decide here whether scanners on remote machines should be made "
@@ -3498,37 +3529,37 @@ msgstr ""
 "Qui puoi anche decidere di rendere disponibili su questa macchina degli "
 "scanner collegati ad host remoti."
 
-#: scannerdrake:601
+#: scannerdrake:600
 #, c-format
 msgid "The scanners on this machine are available to other computers"
 msgstr "Gli scanner di questa macchina saranno disponibili per altri computer"
 
-#: scannerdrake:603
+#: scannerdrake:602
 #, c-format
 msgid "Scanner sharing to hosts: "
 msgstr "Condivisione scanner per gli host: "
 
-#: scannerdrake:608 scannerdrake:625
+#: scannerdrake:607 scannerdrake:624
 #, c-format
 msgid "No remote machines"
 msgstr "Nessuna macchina remota"
 
-#: scannerdrake:617
+#: scannerdrake:616
 #, c-format
 msgid "Use scanners on remote computers"
 msgstr "Utilizzare degli scanner su macchine remote"
 
-#: scannerdrake:620
+#: scannerdrake:619
 #, c-format
 msgid "Use the scanners on hosts: "
 msgstr "Utilizza gli scanner sugli host: "
 
-#: scannerdrake:647 scannerdrake:719 scannerdrake:869
+#: scannerdrake:646 scannerdrake:718 scannerdrake:868
 #, c-format
 msgid "Sharing of local scanners"
 msgstr "Condivisione degli scanner locali"
 
-#: scannerdrake:648
+#: scannerdrake:647
 #, c-format
 msgid ""
 "These are the machines on which the locally connected scanner(s) should be "
@@ -3537,58 +3568,59 @@ msgstr ""
 "Queste sono le macchine da cui gli scanner locali dovranno essere "
 "accessibili:"
 
-#: scannerdrake:659 scannerdrake:809
+#: scannerdrake:658 scannerdrake:808
 #, c-format
 msgid "Add host"
 msgstr "Aggiungi un host"
 
-#: scannerdrake:665 scannerdrake:815
+#: scannerdrake:664 scannerdrake:814
 #, c-format
 msgid "Edit selected host"
 msgstr "Configura l'host selezionato"
 
-#: scannerdrake:674 scannerdrake:824
+#: scannerdrake:673 scannerdrake:823
 #, c-format
 msgid "Remove selected host"
 msgstr "Rimuovi l'host selezionato"
 
-#: scannerdrake:683 scannerdrake:833
+#: scannerdrake:682 scannerdrake:832
 #, c-format
 msgid "Done"
 msgstr "Fatto"
 
-#: scannerdrake:698 scannerdrake:706 scannerdrake:711 scannerdrake:757
-#: scannerdrake:848 scannerdrake:856 scannerdrake:861 scannerdrake:907
+#: scannerdrake:697 scannerdrake:705 scannerdrake:710 scannerdrake:756
+#: scannerdrake:847 scannerdrake:855 scannerdrake:860 scannerdrake:906
 #, c-format
 msgid "Name/IP address of host:"
 msgstr "Nome/indirizzo IP dell'host:"
 
-#: scannerdrake:720 scannerdrake:870
+#: scannerdrake:719 scannerdrake:869
 #, c-format
 msgid "Choose the host on which the local scanners should be made available:"
-msgstr "Scegli l'host su cui gli scanner locali dovranno essere resi disponibili:"
+msgstr ""
+"Scegli l'host su cui gli scanner locali dovranno essere resi disponibili:"
 
-#: scannerdrake:731 scannerdrake:881
+#: scannerdrake:730 scannerdrake:880
 #, c-format
 msgid "You must enter a host name or an IP address.\n"
 msgstr "Devi inserire il nome di un host o un indirizzo IP.\n"
 
-#: scannerdrake:742 scannerdrake:892
+#: scannerdrake:741 scannerdrake:891
 #, c-format
 msgid "This host is already in the list, it cannot be added again.\n"
 msgstr "Questo host è già nell'elenco, non puoi aggiungerlo ancora.\n"
 
-#: scannerdrake:797
+#: scannerdrake:796
 #, c-format
 msgid "Usage of remote scanners"
 msgstr "Utilizzo di scanner remoti"
 
-#: scannerdrake:798
+#: scannerdrake:797
 #, c-format
 msgid "These are the machines from which the scanners should be used:"
 msgstr "Queste sono le macchine da cui gli scanner saranno utilizzabili:"
 
-#: scannerdrake:955
+#: scannerdrake:954
 #, c-format
 msgid ""
 "saned needs to be installed to share the local scanner(s).\n"
@@ -3599,39 +3631,40 @@ msgstr ""
 "\n"
 "Vuoi installare saned?"
 
-#: scannerdrake:959 scannerdrake:963
+#: scannerdrake:958 scannerdrake:962
 #, c-format
 msgid "Your scanner(s) will not be available on the network."
 msgstr "I tuoi scanner non saranno disponibili via rete."
 
-#: scannerdrake:962
+#: scannerdrake:961
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr ""
 "Non si possono installare i programmi necessari per condividere lo/gli "
 "scanner."
 
-#: service_harddrake:131
+#: service_harddrake:134
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
-msgstr "Alcuni dispositivi della categoria hardware \"%s\" sono stati rimossi:\n"
+msgstr ""
+"Alcuni dispositivi della categoria hardware \"%s\" sono stati rimossi:\n"
 
-#: service_harddrake:132
+#: service_harddrake:135
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- %s è stato rimosso\n"
 
-#: service_harddrake:135
+#: service_harddrake:138
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "Nuovi dispositivi rilevati:%s\n"
 
-#: service_harddrake:136
+#: service_harddrake:139
 #, c-format
 msgid "- %s was added\n"
 msgstr "- %s è stato aggiunto\n"
 
-#: service_harddrake:259
+#: service_harddrake:264
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "Identificazione dell'hardware in corso"
@@ -3673,4 +3706,3 @@ msgstr "Configurazione di lingua e paese"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Impostazioni locali"
-

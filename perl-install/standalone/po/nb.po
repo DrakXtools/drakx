@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-29 14:19+0200\n"
+"POT-Creation-Date: 2009-01-16 11:41+0100\n"
 "PO-Revision-Date: 2007-12-16 05:34+0100\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: dansk <dansk@dansk-gruppen.dk>\n"
@@ -30,16 +30,16 @@ msgstr ""
 "X-Generator: KBabel 1.10.2\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: drakauth:27 drakauth:29 draksec:279 draksec:328
+#: drakauth:24 drakauth:26 draksec:291 draksec:340
 #, c-format
 msgid "Authentication"
 msgstr "Autentisering"
 
-#: drakauth:39 drakclock:111 drakclock:125 drakfont:213 drakfont:226
-#: drakfont:264 draksplash:169 finish-install:104 logdrake:170 logdrake:445
+#: drakauth:37 drakclock:111 drakclock:125 drakfont:213 drakfont:226
+#: drakfont:264 draksplash:202 finish-install:119 logdrake:170 logdrake:445
 #: logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
-#: scannerdrake:200 scannerdrake:259 scannerdrake:730 scannerdrake:741
-#: scannerdrake:880 scannerdrake:891 scannerdrake:961
+#: scannerdrake:200 scannerdrake:259 scannerdrake:729 scannerdrake:740
+#: scannerdrake:879 scannerdrake:890 scannerdrake:960
 #, c-format
 msgid "Error"
 msgstr "Feil"
@@ -79,10 +79,10 @@ msgstr "Informativ"
 msgid "Silent"
 msgstr "Stille"
 
-#: drakboot:137 drakbug:233 drakfont:682 drakperm:375 drakperm:385 drakups:27
+#: drakboot:137 drakbug:254 drakfont:682 drakperm:376 drakperm:386 drakups:27
 #: harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
 #: scannerdrake:51 scannerdrake:54 scannerdrake:297 scannerdrake:302
-#: scannerdrake:955
+#: scannerdrake:954
 #, c-format
 msgid "Warning"
 msgstr "Advarsel"
@@ -131,7 +131,7 @@ msgstr ""
 "Vis tema\n"
 "under konsoll"
 
-#: drakboot:163 draksplash:25
+#: drakboot:163 draksplash:26
 #, c-format
 msgid "Create new theme"
 msgstr "Opprett nytt tema"
@@ -187,7 +187,7 @@ msgstr ""
 "nedenfor.\n"
 "Vær sikker på at ditt kort støtter moduset du velger."
 
-#: drakbug:65 drakbug:143
+#: drakbug:65 drakbug:152
 #, c-format
 msgid "The \"%s\" program has crashed with the following error:"
 msgstr "Programmet «%s» kræsjet med følgende feil:"
@@ -212,7 +212,7 @@ msgstr "Veiviser for første kjøring"
 msgid "Synchronization tool"
 msgstr "Synkroniseringsverktøy"
 
-#: drakbug:84 drakbug:195
+#: drakbug:84 drakbug:216
 #, c-format
 msgid "Standalone Tools"
 msgstr "Verktøy som fungerer alene"
@@ -271,24 +271,22 @@ msgstr "Pakke:"
 msgid "Kernel:"
 msgstr "Kjerne:"
 
-#: drakbug:142
+#: drakbug:151
 #, fuzzy, c-format
 msgid "The \"%s\" program has segfaulted with the following error:"
 msgstr "Programmet «%s» kræsjet med følgende feil:"
 
-#: drakbug:146
+#: drakbug:155
 #, c-format
 msgid "Its gdb trace is:"
 msgstr ""
 
-#: drakbug:149
-#, c-format
+#: drakbug:158
+#, fuzzy, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
 "This will open a web browser window on %s where you'll find a form to fill "
-"in.  The information displayed above will be transferred to that server.  \n"
-"Things useful to include in your report are the output of lspcidrake -v, "
-"kernel version, and /proc/cpuinfo."
+"in.  The information displayed above will be transferred to that server"
 msgstr ""
 "For å sende en feilrapport, klikk på rapport-knappen.\n"
 "Dette vil åpne et nettleservindu på %s hvor du vil finne ett skjema for "
@@ -296,49 +294,70 @@ msgstr ""
 "Informasjon som kan være bra å inkludere i din feilrapport er resultatet til "
 "lspcidrake -v, kjerneversjon og /proc/cpuinfo."
 
-#: drakbug:152
+#: drakbug:160
+#, c-format
+msgid ""
+"It would be very useful to attach to your report the output of the following "
+"command: %s."
+msgid_plural ""
+"Things useful to attach to your report are the output of the following "
+"commands: %s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: drakbug:163
+#, c-format
+msgid "'%s'"
+msgstr ""
+
+#: drakbug:166
+#, fuzzy, c-format
+msgid "You should also attach the following files: %s as well as %s."
+msgstr "Du burde installere de følgende pakkene: %s"
+
+#: drakbug:173
 #, c-format
 msgid "Please describe what you were doing when it crashed:"
 msgstr ""
 
-#: drakbug:164 drakperm:135 draksec:438 draksec:440 draksec:459 draksec:461
+#: drakbug:185 drakperm:136 draksec:450 draksec:452 draksec:471 draksec:473
 #, c-format
 msgid "Help"
 msgstr "Hjelp"
 
-#: drakbug:168
+#: drakbug:189
 #, c-format
 msgid "Report"
 msgstr "Rapportér"
 
-#: drakbug:169 drakfont:506
+#: drakbug:190 drakfont:506
 #, c-format
 msgid "Close"
 msgstr "Lukk"
 
-#: drakbug:202
+#: drakbug:223
 #, c-format
 msgid "Not installed"
 msgstr "Ikke installert"
 
-#: drakbug:215
+#: drakbug:236
 #, c-format
 msgid "Package not installed"
 msgstr "Pakke ikke installert"
 
-#: drakbug:234
+#: drakbug:255
 #, c-format
 msgid ""
 "You must type in what you were doing when this bug happened in order to "
 "enable us to reproduce this bug and to increase the odds of fixing it"
 msgstr ""
 
-#: drakbug:235
+#: drakbug:256
 #, c-format
 msgid "Thanks."
 msgstr ""
 
-#: drakclock:30 draksec:334
+#: drakclock:30 draksec:346
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Dato-, klokke- og tidssoneoppsett"
@@ -412,7 +431,7 @@ msgstr "Tast inn en gyldig NTP-tjeneradresse."
 msgid "Could not synchronize with %s."
 msgstr "Kunne ikke synkronisere med %s."
 
-#: drakclock:127 draksplash:93 logdrake:175 scannerdrake:492
+#: drakclock:127 draksplash:125 logdrake:175 scannerdrake:491
 #, c-format
 msgid "Quit"
 msgstr "Avslutt"
@@ -677,7 +696,7 @@ msgstr "Abiword"
 msgid "Generic Printers"
 msgstr "Generelle skrivere"
 
-#: drakfont:562 drakfont:572 draksplash:180 drakups:210
+#: drakfont:562 drakfont:572 draksplash:213 drakups:210
 #, c-format
 msgid "Ok"
 msgstr "Ok"
@@ -692,7 +711,7 @@ msgstr "Velg skrifttypefil eller katalog og klikk 'Legg til'"
 msgid "File Selection"
 msgstr "Filvalg"
 
-#: drakfont:572 drakfont:652 drakfont:736 draksplash:180 drakups:217
+#: drakfont:572 drakfont:652 drakfont:736 draksplash:213 drakups:217
 #: logdrake:175
 #, c-format
 msgid "Cancel"
@@ -703,7 +722,7 @@ msgstr "Avbryt"
 msgid "Fonts"
 msgstr "Fonter"
 
-#: drakfont:640 draksec:330
+#: drakfont:640 draksec:342
 #, c-format
 msgid "Import fonts"
 msgstr "Importer skrifttyper"
@@ -861,22 +880,22 @@ msgstr "Sikkerhetsrettigheter"
 msgid "Editable"
 msgstr "Redigerbar"
 
-#: drakperm:50 drakperm:319
+#: drakperm:50 drakperm:320
 #, c-format
 msgid "Path"
 msgstr "Sti"
 
-#: drakperm:50 drakperm:248
+#: drakperm:50 drakperm:249
 #, c-format
 msgid "User"
 msgstr "Bruker"
 
-#: drakperm:50 drakperm:248
+#: drakperm:50 drakperm:249
 #, c-format
 msgid "Group"
 msgstr "Gruppe"
 
-#: drakperm:50 drakperm:331
+#: drakperm:50 drakperm:109 drakperm:332
 #, c-format
 msgid "Permissions"
 msgstr "Rettigheter"
@@ -886,12 +905,12 @@ msgstr "Rettigheter"
 msgid "Add a new rule"
 msgstr "Legg til en ny regel"
 
-#: drakperm:67 drakperm:102 drakperm:127
+#: drakperm:67 drakperm:102 drakperm:128
 #, c-format
 msgid "Edit current rule"
 msgstr "Rediger gjeldende regel"
 
-#: drakperm:109
+#: drakperm:110
 #, c-format
 msgid ""
 "Here you can see files to use in order to fix permissions, owners, and "
@@ -901,7 +920,7 @@ msgstr ""
 "Her kan du se filer for å fikse rettigheter, eiere, og grupper via msec.\n"
 "Du kan også redigere dine egne regler, som vil overskrive standardreglene."
 
-#: drakperm:111
+#: drakperm:112
 #, c-format
 msgid ""
 "The current security level is %s.\n"
@@ -910,115 +929,115 @@ msgstr ""
 "Det nåværende sikkerhetsnivået er %s\n"
 "Velg rettigheter for å se/endre"
 
-#: drakperm:123
+#: drakperm:124
 #, c-format
 msgid "Up"
 msgstr "Opp"
 
-#: drakperm:123
+#: drakperm:124
 #, c-format
 msgid "Move selected rule up one level"
 msgstr "Velg valgte regel opp et nivå"
 
-#: drakperm:124
+#: drakperm:125
 #, c-format
 msgid "Down"
 msgstr "Ned"
 
-#: drakperm:124
+#: drakperm:125
 #, c-format
 msgid "Move selected rule down one level"
 msgstr "Velg valgte regel ned et nivå"
 
-#: drakperm:125
+#: drakperm:126
 #, c-format
 msgid "Add a rule"
 msgstr "Legg til en regel"
 
-#: drakperm:125
+#: drakperm:126
 #, c-format
 msgid "Add a new rule at the end"
 msgstr "Legg til ny regel på slutten"
 
-#: drakperm:126
+#: drakperm:127
 #, c-format
 msgid "Delete"
 msgstr "Slett"
 
-#: drakperm:126
+#: drakperm:127
 #, c-format
 msgid "Delete selected rule"
 msgstr "Fjern vagte regel"
 
-#: drakperm:127 drakups:300 drakups:362 drakups:382
+#: drakperm:128 drakups:300 drakups:362 drakups:382
 #, c-format
 msgid "Edit"
 msgstr "Endre"
 
-#: drakperm:240
+#: drakperm:241
 #, c-format
 msgid "browse"
 msgstr "utforsk"
 
-#: drakperm:245
+#: drakperm:246
 #, c-format
 msgid "user"
 msgstr "bruker"
 
-#: drakperm:245
+#: drakperm:246
 #, c-format
 msgid "group"
 msgstr "gruppe"
 
-#: drakperm:245
+#: drakperm:246
 #, c-format
 msgid "other"
 msgstr "andre"
 
-#: drakperm:248
+#: drakperm:249
 #, c-format
 msgid "Other"
 msgstr "Andre"
 
-#: drakperm:250
+#: drakperm:251
 #, c-format
 msgid "Read"
 msgstr "Les"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:253
+#: drakperm:254
 #, c-format
 msgid "Enable \"%s\" to read the file"
 msgstr "Aktiver «%s» for å lese filen"
 
-#: drakperm:257
+#: drakperm:258
 #, c-format
 msgid "Write"
 msgstr "Skriv"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:260
+#: drakperm:261
 #, c-format
 msgid "Enable \"%s\" to write the file"
 msgstr "Aktiver «%s» for å skrive til filen"
 
-#: drakperm:264
+#: drakperm:265
 #, c-format
 msgid "Execute"
 msgstr "Utfør"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:267
+#: drakperm:268
 #, c-format
 msgid "Enable \"%s\" to execute the file"
 msgstr "Aktiver «%s» for å kjøre filen"
 
-#: drakperm:270
+#: drakperm:271
 #, c-format
 msgid "Sticky-bit"
 msgstr "Sticky-bit"
 
-#: drakperm:270
+#: drakperm:271
 #, c-format
 msgid ""
 "Used for directory:\n"
@@ -1027,57 +1046,57 @@ msgstr ""
 "Brukt for katalog:\n"
 " bare eiere av katalogen eller filen i denne katalogen kan slette den"
 
-#: drakperm:271
+#: drakperm:272
 #, c-format
 msgid "Set-UID"
 msgstr "Set-UID"
 
-#: drakperm:271
+#: drakperm:272
 #, c-format
 msgid "Use owner id for execution"
 msgstr "Bruk eierid for utføring"
 
-#: drakperm:272
+#: drakperm:273
 #, c-format
 msgid "Set-GID"
 msgstr "Set-GID"
 
-#: drakperm:272
+#: drakperm:273
 #, c-format
 msgid "Use group id for execution"
 msgstr "Bruke gruppeid for utføring"
 
-#: drakperm:289
+#: drakperm:290
 #, c-format
 msgid "User:"
 msgstr "Bruker :"
 
-#: drakperm:290
+#: drakperm:291
 #, c-format
 msgid "Group:"
 msgstr "Gruppe :"
 
-#: drakperm:294
+#: drakperm:295
 #, c-format
 msgid "Current user"
 msgstr "Gjeldende bruker"
 
-#: drakperm:295
+#: drakperm:296
 #, c-format
 msgid "When checked, owner and group will not be changed"
 msgstr "Når sjekket, så vil ikke eier og gruppe bli forandret"
 
-#: drakperm:305
+#: drakperm:306
 #, c-format
 msgid "Path selection"
 msgstr "Stivalg"
 
-#: drakperm:325
+#: drakperm:326
 #, c-format
 msgid "Property"
 msgstr "Eiendom"
 
-#: drakperm:375
+#: drakperm:376
 #, c-format
 msgid ""
 "The first character of the path must be a slash (\"/\"):\n"
@@ -1086,17 +1105,17 @@ msgstr ""
 "Det første tegnet i stien må være en skråstrek (\"/\"):\n"
 "«%s»"
 
-#: drakperm:385
+#: drakperm:386
 #, c-format
 msgid "Both the username and the group must valid!"
 msgstr "Både brukernavn og gruppe må være gyldig!"
 
-#: drakperm:386
+#: drakperm:387
 #, c-format
 msgid "User: %s"
 msgstr "Bruker: %s"
 
-#: drakperm:387
+#: drakperm:388
 #, c-format
 msgid "Group: %s"
 msgstr "Gruppe: %s"
@@ -1127,8 +1146,8 @@ msgid "Ignore"
 msgstr "Ignorér"
 
 #: draksec:72 drakups:99 harddrake2:370 scannerdrake:66 scannerdrake:70
-#: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:505
-#: scannerdrake:509 scannerdrake:531 service_harddrake:259
+#: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:504
+#: scannerdrake:508 scannerdrake:530 service_harddrake:264
 #, c-format
 msgid "Please wait"
 msgstr "Vennligst vent"
@@ -1280,147 +1299,147 @@ msgstr "Nettverksinnstillinger"
 msgid "System Options"
 msgstr "Systeminnstillinger"
 
-#: draksec:261
+#: draksec:269
 #, c-format
 msgid "Periodic Checks"
 msgstr "Periodiske sjekker"
 
-#: draksec:282
+#: draksec:294
 #, c-format
 msgid "No password"
 msgstr "Intet passord"
 
-#: draksec:283
+#: draksec:295
 #, c-format
 msgid "Root password"
 msgstr "passord for root"
 
-#: draksec:284
+#: draksec:296
 #, c-format
 msgid "User password"
 msgstr "Passord for bruker"
 
-#: draksec:314 draksec:360
+#: draksec:326 draksec:372
 #, c-format
 msgid "Software Management"
 msgstr "Programvarehåndtering"
 
-#: draksec:315
+#: draksec:327
 #, c-format
 msgid "Mandriva Update"
 msgstr "Mandriva Update"
 
-#: draksec:316
+#: draksec:328
 #, c-format
 msgid "Software Media Manager"
 msgstr "Programvaremediehåndterer"
 
-#: draksec:317
+#: draksec:329
 #, c-format
 msgid "Configure 3D Desktop effects"
 msgstr "Sett opp 3D-skrivebordseffekter"
 
-#: draksec:318
+#: draksec:330
 #, c-format
 msgid "Graphical Server Configuration"
 msgstr "Oppsett av grafisk tjener"
 
-#: draksec:319
+#: draksec:331
 #, c-format
 msgid "Mouse Configuration"
 msgstr "Oppsett av mus"
 
-#: draksec:320
+#: draksec:332
 #, c-format
 msgid "Keyboard Configuration"
 msgstr "Oppsett av tastatur"
 
-#: draksec:321
+#: draksec:333
 #, c-format
 msgid "UPS Configuration"
 msgstr "UPS-oppsett"
 
-#: draksec:322
+#: draksec:334
 #, c-format
 msgid "Network Configuration"
 msgstr "Opsett av nettverk"
 
-#: draksec:323
+#: draksec:335
 #, c-format
 msgid "Hosts definitions"
 msgstr "Vert-definisjoner"
 
-#: draksec:324
+#: draksec:336
 #, c-format
 msgid "Network Center"
 msgstr "Nettverkssenter"
 
-#: draksec:325
+#: draksec:337
 #, c-format
 msgid "VPN"
 msgstr "VPN"
 
-#: draksec:326
+#: draksec:338
 #, c-format
 msgid "Proxy Configuration"
 msgstr "Mellomtjeneroppsett"
 
-#: draksec:327
+#: draksec:339
 #, c-format
 msgid "Connection Sharing"
 msgstr "Deling av tilkoppling"
 
-#: draksec:329
+#: draksec:341
 #, c-format
 msgid "Backups"
 msgstr "Sikkerhetskopier"
 
-#: draksec:331 logdrake:52
+#: draksec:343 logdrake:52
 #, c-format
 msgid "Logs"
 msgstr "Logger"
 
-#: draksec:332
+#: draksec:344
 #, c-format
 msgid "Services"
 msgstr "Tjenester"
 
-#: draksec:333
+#: draksec:345
 #, c-format
 msgid "Users"
 msgstr "Brukere"
 
-#: draksec:335
+#: draksec:347
 #, c-format
 msgid "Boot Configuration"
 msgstr "Oppsett av oppstart"
 
-#: draksec:361
+#: draksec:373
 #, c-format
 msgid "Hardware"
 msgstr "Maskinvare"
 
-#: draksec:362
+#: draksec:374
 #, c-format
 msgid "Network"
 msgstr "Nettverk"
 
-#: draksec:363
+#: draksec:375
 #, c-format
 msgid "System"
 msgstr "System"
 
-#: draksec:364
+#: draksec:376
 #, c-format
 msgid "Boot"
 msgstr "Oppstart"
 
-#: draksec:389
+#: draksec:401
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "Setter sikkerhetsnivå..."
 
-#: draksec:395
+#: draksec:407
 #, c-format
 msgid "Please wait, setting security options..."
 msgstr "Setter sikkerhetsinnstillinger..."
@@ -1467,27 +1486,27 @@ msgstr ""
 "Merk: hvis du har et ISA PnP-lydkort, så må du bruke alsaconf- eller "
 "sndconfig-programmet.  Bare skriv «alsaconf» eller «sndconfig» i et konsoll."
 
-#: draksplash:32
+#: draksplash:33
 #, c-format
 msgid "X coordinate of text box"
 msgstr "X-koordinat til tekstboks"
 
-#: draksplash:33
+#: draksplash:34
 #, c-format
 msgid "Y coordinate of text box"
 msgstr "Y-koordinat til tekstboks"
 
-#: draksplash:34
+#: draksplash:35
 #, c-format
 msgid "Text box width"
 msgstr "Tekstboksvidde"
 
-#: draksplash:35
+#: draksplash:36
 #, c-format
 msgid "Text box height"
 msgstr "Tekstbokshøyde"
 
-#: draksplash:36
+#: draksplash:37
 #, c-format
 msgid ""
 "The progress bar X coordinate\n"
@@ -1496,7 +1515,7 @@ msgstr ""
 "Framgangsviserens x-koordinat\n"
 "i dens øverste venstre hjørne"
 
-#: draksplash:37
+#: draksplash:38
 #, c-format
 msgid ""
 "The progress bar Y coordinate\n"
@@ -1505,37 +1524,37 @@ msgstr ""
 "Framgangsviserens y-koordinat\n"
 "i dens øverste venstre hjørne"
 
-#: draksplash:38
+#: draksplash:39
 #, c-format
 msgid "The width of the progress bar"
 msgstr "Bredden på framgangsviseren"
 
-#: draksplash:39
+#: draksplash:40
 #, c-format
 msgid "The height of the progress bar"
 msgstr "Høyden på framgangsviseren"
 
-#: draksplash:40
+#: draksplash:41
 #, c-format
 msgid "X coordinate of the text"
 msgstr "X-koordinat til tekst"
 
-#: draksplash:41
+#: draksplash:42
 #, c-format
 msgid "Y coordinate of the text"
 msgstr "Y-koordinat til tekst"
 
-#: draksplash:42
+#: draksplash:43
 #, c-format
 msgid "Text box transparency"
 msgstr "Gjennomsiktighet for tekstboks"
 
-#: draksplash:43
+#: draksplash:44
 #, c-format
 msgid "Progress box transparency"
 msgstr "Gjennomsiktighet for framgangsboks"
 
-#: draksplash:44
+#: draksplash:45
 #, c-format
 msgid "Text size"
 msgstr "Tekststørrelse"
@@ -1550,17 +1569,17 @@ msgstr ""
 msgid "Choose progress bar color 1"
 msgstr "Velg framgangsviserfarge 1"
 
-#: draksplash:62
+#: draksplash:67
 #, c-format
 msgid "Choose progress bar color 2"
 msgstr "Velg framgangsviserfarge 2"
 
-#: draksplash:63
+#: draksplash:69
 #, c-format
 msgid "Choose progress bar background"
 msgstr "Velg framgangsviserbakgrunn"
 
-#: draksplash:64
+#: draksplash:72
 #, c-format
 msgid "Gradient type"
 msgstr "Stigningstype"
@@ -1575,82 +1594,82 @@ msgstr "Kun tekst"
 msgid "Choose text color"
 msgstr "Velg tekstfarge"
 
-#: draksplash:67 draksplash:74
+#: draksplash:83 draksplash:102
 #, c-format
 msgid "Choose picture"
 msgstr "Velg bilde"
 
-#: draksplash:68
+#: draksplash:87
 #, c-format
 msgid "Silent bootsplash"
 msgstr "Stille bootsplash"
 
-#: draksplash:71
+#: draksplash:90
 #, c-format
 msgid "Choose text zone color"
 msgstr "Velg tekstsonefarge"
 
-#: draksplash:72
+#: draksplash:93
 #, c-format
 msgid "Text color"
 msgstr "Tekstfarge"
 
-#: draksplash:73
+#: draksplash:97
 #, c-format
 msgid "Background color"
 msgstr "Bakgrunnsfarge"
 
-#: draksplash:75
+#: draksplash:103
 #, c-format
 msgid "Verbose bootsplash"
 msgstr "Informativ bootsplash"
 
-#: draksplash:81
+#: draksplash:110
 #, c-format
 msgid "Theme name"
 msgstr "Temanavn"
 
-#: draksplash:84
+#: draksplash:115
 #, c-format
 msgid "Final resolution"
 msgstr "Endelig oppløsning"
 
-#: draksplash:87
+#: draksplash:119
 #, c-format
 msgid "Display logo on Console"
 msgstr "Vis logo på konsollet"
 
-#: draksplash:92
+#: draksplash:124
 #, c-format
 msgid "Save theme"
 msgstr "Lagre tema"
 
-#: draksplash:154
+#: draksplash:187
 #, c-format
 msgid "Please enter a theme name"
 msgstr "Tast inn ett temanavn"
 
-#: draksplash:157
+#: draksplash:190
 #, c-format
 msgid "Please select a splash image"
 msgstr "Velg ett velkomstbilde"
 
-#: draksplash:160
+#: draksplash:193
 #, c-format
 msgid "saving Bootsplash theme..."
 msgstr "lagrer bootsplash-tema..."
 
-#: draksplash:169
+#: draksplash:202
 #, c-format
 msgid "Unable to load image file %s"
 msgstr "Klarte ikke å laste inn bildefil %s"
 
-#: draksplash:180
+#: draksplash:213
 #, c-format
 msgid "choose image"
 msgstr "velg bildefil"
 
-#: draksplash:195
+#: draksplash:228
 #, c-format
 msgid "Color selection"
 msgstr "Fargevalg"
@@ -1839,7 +1858,7 @@ msgstr "Nivå"
 msgid "ACL name"
 msgstr "ACL-navn"
 
-#: drakups:297 finish-install:156
+#: drakups:297 finish-install:171
 #, c-format
 msgid "Password"
 msgstr "Passord"
@@ -1886,37 +1905,37 @@ msgstr ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 
-#: finish-install:55
+#: finish-install:56
 #, c-format
 msgid "Keyboard"
 msgstr "Tastatur"
 
-#: finish-install:56
+#: finish-install:57
 #, c-format
 msgid "Please, choose your keyboard layout."
 msgstr "Velg tastaturoppsettet ditt."
 
-#: finish-install:154 finish-install:172 finish-install:184
+#: finish-install:169 finish-install:187 finish-install:199
 #, c-format
 msgid "Encrypted home partition"
 msgstr "Kryptert hjemmepartisjon"
 
-#: finish-install:154
+#: finish-install:169
 #, c-format
 msgid "Please enter a password for the %s user"
 msgstr "Oppgi et passord for brukeren %s"
 
-#: finish-install:157
+#: finish-install:172
 #, c-format
 msgid "Password (again)"
 msgstr "Passord (igjen)"
 
-#: finish-install:172
+#: finish-install:187
 #, c-format
 msgid "Creating encrypted home partition"
 msgstr "Lager kryptert hjemmepartisjon"
 
-#: finish-install:184
+#: finish-install:199
 #, c-format
 msgid "Formatting encrypted home partition"
 msgstr "Formaterer kryptert partisjon for hjemmeområder"
@@ -3107,17 +3126,17 @@ msgstr ""
 msgid "Scannerdrake will not be started now."
 msgstr "Scannerdrake vil ikke bli startet nå."
 
-#: scannerdrake:67 scannerdrake:506
+#: scannerdrake:67 scannerdrake:505
 #, c-format
 msgid "Searching for configured scanners..."
 msgstr "Søker etter oppsatte skannere ..."
 
-#: scannerdrake:71 scannerdrake:510
+#: scannerdrake:71 scannerdrake:509
 #, c-format
 msgid "Searching for new scanners..."
 msgstr "Søker etter nye scannere..."
 
-#: scannerdrake:79 scannerdrake:532
+#: scannerdrake:79 scannerdrake:531
 #, c-format
 msgid "Re-generating list of configured scanners..."
 msgstr "Re-genererer liste over oppsatte skannere ..."
@@ -3442,53 +3461,53 @@ msgstr ""
 "%s\n"
 "er tilgjengelig på ditt system.\n"
 
-#: scannerdrake:450 scannerdrake:453
+#: scannerdrake:449 scannerdrake:452
 #, c-format
 msgid "There are no scanners found which are available on your system.\n"
 msgstr ""
 "Det ble ikke funnet noen skannere som er tilgjengelig på ditt system.\n"
 
-#: scannerdrake:461
+#: scannerdrake:460
 #, c-format
 msgid "Scanner Management"
 msgstr "Skannerhåndtering"
 
-#: scannerdrake:467
+#: scannerdrake:466
 #, c-format
 msgid "Search for new scanners"
 msgstr "Søk etter nye skannere"
 
-#: scannerdrake:473
+#: scannerdrake:472
 #, c-format
 msgid "Add a scanner manually"
 msgstr "Legg til skanner manuelt"
 
-#: scannerdrake:480
+#: scannerdrake:479
 #, c-format
 msgid "Install/Update firmware files"
 msgstr "Installer/Oppdater fastvarefiler"
 
-#: scannerdrake:486
+#: scannerdrake:485
 #, c-format
 msgid "Scanner sharing"
 msgstr "Skannerdeling"
 
-#: scannerdrake:545 scannerdrake:710
+#: scannerdrake:544 scannerdrake:709
 #, c-format
 msgid "All remote machines"
 msgstr "Alle eksterne maskiner"
 
-#: scannerdrake:557 scannerdrake:860
+#: scannerdrake:556 scannerdrake:859
 #, c-format
 msgid "This machine"
 msgstr "Denne maskinen"
 
-#: scannerdrake:596
+#: scannerdrake:595
 #, c-format
 msgid "Scanner Sharing"
 msgstr "Skannerdeling"
 
-#: scannerdrake:597
+#: scannerdrake:596
 #, c-format
 msgid ""
 "Here you can choose whether the scanners connected to this machine should be "
@@ -3497,7 +3516,7 @@ msgstr ""
 "Her kan du velge om skannerne tilkoblet denne maskinen skal være "
 "tilgjengelige for andre maskiner og for hvilke."
 
-#: scannerdrake:598
+#: scannerdrake:597
 #, c-format
 msgid ""
 "You can also decide here whether scanners on remote machines should be made "
@@ -3506,37 +3525,37 @@ msgstr ""
 "Du kan også velge om eksterne skannere kan bli gjort tilgjengelige på denne "
 "maskinen."
 
-#: scannerdrake:601
+#: scannerdrake:600
 #, c-format
 msgid "The scanners on this machine are available to other computers"
 msgstr "Skannerne på denne maskinen er tilgjengelig for andre maskiner"
 
-#: scannerdrake:603
+#: scannerdrake:602
 #, c-format
 msgid "Scanner sharing to hosts: "
 msgstr "Skannerdeling til verter: "
 
-#: scannerdrake:608 scannerdrake:625
+#: scannerdrake:607 scannerdrake:624
 #, c-format
 msgid "No remote machines"
 msgstr "Ingen eksterne maskiner"
 
-#: scannerdrake:617
+#: scannerdrake:616
 #, c-format
 msgid "Use scanners on remote computers"
 msgstr "Bruk skannere på eksterne maskiner"
 
-#: scannerdrake:620
+#: scannerdrake:619
 #, c-format
 msgid "Use the scanners on hosts: "
 msgstr "Bruk skannere på verter: "
 
-#: scannerdrake:647 scannerdrake:719 scannerdrake:869
+#: scannerdrake:646 scannerdrake:718 scannerdrake:868
 #, c-format
 msgid "Sharing of local scanners"
 msgstr "Deling av lokale skannere"
 
-#: scannerdrake:648
+#: scannerdrake:647
 #, c-format
 msgid ""
 "These are the machines on which the locally connected scanner(s) should be "
@@ -3545,59 +3564,59 @@ msgstr ""
 "Dette er maskiner som de(n) lokalt tilkoblede skanneren(e) skal være "
 "tilgjengelig(e) for:"
 
-#: scannerdrake:659 scannerdrake:809
+#: scannerdrake:658 scannerdrake:808
 #, c-format
 msgid "Add host"
 msgstr "Legg til vert"
 
-#: scannerdrake:665 scannerdrake:815
+#: scannerdrake:664 scannerdrake:814
 #, c-format
 msgid "Edit selected host"
 msgstr "Endre valgte vert"
 
-#: scannerdrake:674 scannerdrake:824
+#: scannerdrake:673 scannerdrake:823
 #, c-format
 msgid "Remove selected host"
 msgstr "Fjern valgte vert"
 
-#: scannerdrake:683 scannerdrake:833
+#: scannerdrake:682 scannerdrake:832
 #, c-format
 msgid "Done"
 msgstr "Ferdig"
 
-#: scannerdrake:698 scannerdrake:706 scannerdrake:711 scannerdrake:757
-#: scannerdrake:848 scannerdrake:856 scannerdrake:861 scannerdrake:907
+#: scannerdrake:697 scannerdrake:705 scannerdrake:710 scannerdrake:756
+#: scannerdrake:847 scannerdrake:855 scannerdrake:860 scannerdrake:906
 #, c-format
 msgid "Name/IP address of host:"
 msgstr "Navn/IP-adresse på vert"
 
-#: scannerdrake:720 scannerdrake:870
+#: scannerdrake:719 scannerdrake:869
 #, c-format
 msgid "Choose the host on which the local scanners should be made available:"
 msgstr ""
 "Velg verten som de(n) lokale skanneren(e) skal bli gjort tilgjengelig(e) for:"
 
-#: scannerdrake:731 scannerdrake:881
+#: scannerdrake:730 scannerdrake:880
 #, c-format
 msgid "You must enter a host name or an IP address.\n"
 msgstr "Du må spesifisere vertsnavn eller en IP-adresse.\n"
 
-#: scannerdrake:742 scannerdrake:892
+#: scannerdrake:741 scannerdrake:891
 #, c-format
 msgid "This host is already in the list, it cannot be added again.\n"
 msgstr "Denne verten er allerede i listen, den kan ikke bli lagt til igjen.\n"
 
-#: scannerdrake:797
+#: scannerdrake:796
 #, c-format
 msgid "Usage of remote scanners"
 msgstr "Bruk av eksterne scannere"
 
-#: scannerdrake:798
+#: scannerdrake:797
 #, c-format
 msgid "These are the machines from which the scanners should be used:"
 msgstr "Dette er maskinene som skanneren skal kunne bli brukt fra:"
 
-#: scannerdrake:955
+#: scannerdrake:954
 #, c-format
 msgid ""
 "saned needs to be installed to share the local scanner(s).\n"
@@ -3608,37 +3627,37 @@ msgstr ""
 "\n"
 "Vil du installere saned-pakka?"
 
-#: scannerdrake:959 scannerdrake:963
+#: scannerdrake:958 scannerdrake:962
 #, c-format
 msgid "Your scanner(s) will not be available on the network."
 msgstr "Din(e) skanner(e) vil ikke være tilgjengelig(e) på nettverket."
 
-#: scannerdrake:962
+#: scannerdrake:961
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "Kunne ikke installere pakkene som trengs for å dele din(e) skanner(e)."
 
-#: service_harddrake:131
+#: service_harddrake:134
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Noen enheter i «%s»-maskinvareklassen ble fjernet:\n"
 
-#: service_harddrake:132
+#: service_harddrake:135
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- %s ble fjernet\n"
 
-#: service_harddrake:135
+#: service_harddrake:138
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "Noen enheter ble lagt til: %s\n"
 
-#: service_harddrake:136
+#: service_harddrake:139
 #, c-format
 msgid "- %s was added\n"
 msgstr "- %s ble lagt til\n"
 
-#: service_harddrake:259
+#: service_harddrake:264
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "Maskinvareoppdagelse pågår"

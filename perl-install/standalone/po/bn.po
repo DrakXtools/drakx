@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-29 14:19+0200\n"
+"POT-Creation-Date: 2009-01-16 11:41+0100\n"
 "PO-Revision-Date: 2005-03-19 23:18+0600\n"
 "Last-Translator: Samia <mailsamia2001@yahoo.com>\n"
 "Language-Team: Bangla <mdk-translation@bengalinux.org>\n"
@@ -17,16 +17,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: drakauth:27 drakauth:29 draksec:279 draksec:328
+#: drakauth:24 drakauth:26 draksec:291 draksec:340
 #, c-format
 msgid "Authentication"
 msgstr "অনুমোদন"
 
-#: drakauth:39 drakclock:111 drakclock:125 drakfont:213 drakfont:226
-#: drakfont:264 draksplash:169 finish-install:104 logdrake:170 logdrake:445
+#: drakauth:37 drakclock:111 drakclock:125 drakfont:213 drakfont:226
+#: drakfont:264 draksplash:202 finish-install:119 logdrake:170 logdrake:445
 #: logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
-#: scannerdrake:200 scannerdrake:259 scannerdrake:730 scannerdrake:741
-#: scannerdrake:880 scannerdrake:891 scannerdrake:961
+#: scannerdrake:200 scannerdrake:259 scannerdrake:729 scannerdrake:740
+#: scannerdrake:879 scannerdrake:890 scannerdrake:960
 #, c-format
 msgid "Error"
 msgstr "ত্রুটি"
@@ -66,10 +66,10 @@ msgstr ""
 msgid "Silent"
 msgstr "নীরব"
 
-#: drakboot:137 drakbug:233 drakfont:682 drakperm:375 drakperm:385 drakups:27
+#: drakboot:137 drakbug:254 drakfont:682 drakperm:376 drakperm:386 drakups:27
 #: harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
 #: scannerdrake:51 scannerdrake:54 scannerdrake:297 scannerdrake:302
-#: scannerdrake:955
+#: scannerdrake:954
 #, c-format
 msgid "Warning"
 msgstr "সতর্কবাণী"
@@ -117,7 +117,7 @@ msgstr ""
 "কনসোলে\n"
 "থিম দেখাও"
 
-#: drakboot:163 draksplash:25
+#: drakboot:163 draksplash:26
 #, c-format
 msgid "Create new theme"
 msgstr "নতুন থিম তৈরি করো"
@@ -173,7 +173,7 @@ msgstr ""
 "প্রভাব ফেলবে।\n"
 "নিশ্চিত হোন যে আপনার ভিডিও কার্ড আপনার বেছে নেয়া মোড সমর্থন করে কিনা।"
 
-#: drakbug:65 drakbug:143
+#: drakbug:65 drakbug:152
 #, c-format
 msgid "The \"%s\" program has crashed with the following error:"
 msgstr ""
@@ -198,7 +198,7 @@ msgstr "প্রারম্ভিক উইজার্ড"
 msgid "Synchronization tool"
 msgstr "সমন্বয়কারী সফটওয়ার"
 
-#: drakbug:84 drakbug:195
+#: drakbug:84 drakbug:216
 #, c-format
 msgid "Standalone Tools"
 msgstr "স্বয়ংসম্পূর্ণ সফটওয়ার"
@@ -257,24 +257,22 @@ msgstr "প্যাকেজ:"
 msgid "Kernel:"
 msgstr "কার্ণেল:"
 
-#: drakbug:142
+#: drakbug:151
 #, c-format
 msgid "The \"%s\" program has segfaulted with the following error:"
 msgstr ""
 
-#: drakbug:146
+#: drakbug:155
 #, c-format
 msgid "Its gdb trace is:"
 msgstr ""
 
-#: drakbug:149
+#: drakbug:158
 #, fuzzy, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
 "This will open a web browser window on %s where you'll find a form to fill "
-"in.  The information displayed above will be transferred to that server.  \n"
-"Things useful to include in your report are the output of lspcidrake -v, "
-"kernel version, and /proc/cpuinfo."
+"in.  The information displayed above will be transferred to that server"
 msgstr ""
 "ত্রুটি রিপোর্ট প্রেরণের জন্য 'রিপোর্ট' বাটনে ক্লিক করুন।\n"
 "এটি %s এর ওপর একটি ওয়েব ব্রাউজার চালু করবে যেখানে আপনাকে একটি ফর্ম পূরণ করতে "
@@ -282,49 +280,70 @@ msgstr ""
 "আপনার রিপোর্টে lspcidrake -vdrake -v আউটপুট, কার্নেল সংস্করণ এবং /proc/cpuinfo "
 "জাতীয় প্রয়োজনীয় তথ্য সংযুক্ত করুন।"
 
-#: drakbug:152
+#: drakbug:160
+#, c-format
+msgid ""
+"It would be very useful to attach to your report the output of the following "
+"command: %s."
+msgid_plural ""
+"Things useful to attach to your report are the output of the following "
+"commands: %s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: drakbug:163
+#, c-format
+msgid "'%s'"
+msgstr ""
+
+#: drakbug:166
+#, fuzzy, c-format
+msgid "You should also attach the following files: %s as well as %s."
+msgstr "নিম্নের প্যাকেজসমুহ আপনার ইনস্টল করা উচিত: %s"
+
+#: drakbug:173
 #, c-format
 msgid "Please describe what you were doing when it crashed:"
 msgstr ""
 
-#: drakbug:164 drakperm:135 draksec:438 draksec:440 draksec:459 draksec:461
+#: drakbug:185 drakperm:136 draksec:450 draksec:452 draksec:471 draksec:473
 #, c-format
 msgid "Help"
 msgstr "সহায়িকা"
 
-#: drakbug:168
+#: drakbug:189
 #, c-format
 msgid "Report"
 msgstr "রিপোর্ট"
 
-#: drakbug:169 drakfont:506
+#: drakbug:190 drakfont:506
 #, c-format
 msgid "Close"
 msgstr "বন্ধ করো"
 
-#: drakbug:202
+#: drakbug:223
 #, c-format
 msgid "Not installed"
 msgstr "ইনস্টল করা নেই"
 
-#: drakbug:215
+#: drakbug:236
 #, c-format
 msgid "Package not installed"
 msgstr "প্যাকেজ ইনস্টল করা নেই"
 
-#: drakbug:234
+#: drakbug:255
 #, c-format
 msgid ""
 "You must type in what you were doing when this bug happened in order to "
 "enable us to reproduce this bug and to increase the odds of fixing it"
 msgstr ""
 
-#: drakbug:235
+#: drakbug:256
 #, c-format
 msgid "Thanks."
 msgstr ""
 
-#: drakclock:30 draksec:334
+#: drakclock:30 draksec:346
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr ""
@@ -398,7 +417,7 @@ msgstr "অনুগ্রহ করে একটি সঠিক IP ঠিক�
 msgid "Could not synchronize with %s."
 msgstr "%s এর সাথে সিন্‌ক্রোনাইজ করতে পারছে না।"
 
-#: drakclock:127 draksplash:93 logdrake:175 scannerdrake:492
+#: drakclock:127 draksplash:125 logdrake:175 scannerdrake:491
 #, c-format
 msgid "Quit"
 msgstr "প্রস্থান"
@@ -658,7 +677,7 @@ msgstr "এবিওয়ার্ড"
 msgid "Generic Printers"
 msgstr "জেনেরিক প্রিন্টার"
 
-#: drakfont:562 drakfont:572 draksplash:180 drakups:210
+#: drakfont:562 drakfont:572 draksplash:213 drakups:210
 #, c-format
 msgid "Ok"
 msgstr "ঠিক আছে"
@@ -673,7 +692,7 @@ msgstr "ফন্ট ফাইল অথবা ডিরেক্টরি ব�
 msgid "File Selection"
 msgstr "ফাইল বাছাই"
 
-#: drakfont:572 drakfont:652 drakfont:736 draksplash:180 drakups:217
+#: drakfont:572 drakfont:652 drakfont:736 draksplash:213 drakups:217
 #: logdrake:175
 #, c-format
 msgid "Cancel"
@@ -684,7 +703,7 @@ msgstr "বাতিল"
 msgid "Fonts"
 msgstr "ফন্ট"
 
-#: drakfont:640 draksec:330
+#: drakfont:640 draksec:342
 #, c-format
 msgid "Import fonts"
 msgstr "ফন্ট ইমপোর্ট করো"
@@ -841,22 +860,22 @@ msgstr "অনুমতি"
 msgid "Editable"
 msgstr "সম্পাদনাযোগ্য"
 
-#: drakperm:50 drakperm:319
+#: drakperm:50 drakperm:320
 #, c-format
 msgid "Path"
 msgstr "পাথ"
 
-#: drakperm:50 drakperm:248
+#: drakperm:50 drakperm:249
 #, c-format
 msgid "User"
 msgstr "ব্যবহারকারী"
 
-#: drakperm:50 drakperm:248
+#: drakperm:50 drakperm:249
 #, c-format
 msgid "Group"
 msgstr "গ্রুপ"
 
-#: drakperm:50 drakperm:331
+#: drakperm:50 drakperm:109 drakperm:332
 #, c-format
 msgid "Permissions"
 msgstr "অনুমতি"
@@ -866,12 +885,12 @@ msgstr "অনুমতি"
 msgid "Add a new rule"
 msgstr ""
 
-#: drakperm:67 drakperm:102 drakperm:127
+#: drakperm:67 drakperm:102 drakperm:128
 #, c-format
 msgid "Edit current rule"
 msgstr "বর্তমান নীতি সম্পাদনা"
 
-#: drakperm:109
+#: drakperm:110
 #, c-format
 msgid ""
 "Here you can see files to use in order to fix permissions, owners, and "
@@ -881,7 +900,7 @@ msgstr ""
 "এখানে আপনি অনুমতি, ব্যবহারকারী ও গ্রুপ নির্দিষ্ট করার জন্য ফাইলগুলো দেখতে পারেন।\n"
 "আপনি আপনার নিজস্ব নীতিগুলোও সম্পাদিত করতে পারেন যা ডিফল্ট নীতিগুলোকে পরিবর্তন করবে।"
 
-#: drakperm:111
+#: drakperm:112
 #, c-format
 msgid ""
 "The current security level is %s.\n"
@@ -890,116 +909,116 @@ msgstr ""
 "বর্তমান নিরাপত্তা লেভেল হচ্ছে %s।\n"
 "অনুমতি নির্বাচন করুন দেখতে/সম্পাদন করতে"
 
-#: drakperm:123
+#: drakperm:124
 #, c-format
 msgid "Up"
 msgstr "উপরে"
 
-#: drakperm:123
+#: drakperm:124
 #, c-format
 msgid "Move selected rule up one level"
 msgstr "নির্বাচিত নীতি এক লেভেল উপরে সরাও"
 
-#: drakperm:124
+#: drakperm:125
 #, c-format
 msgid "Down"
 msgstr "নিচে"
 
-#: drakperm:124
+#: drakperm:125
 #, c-format
 msgid "Move selected rule down one level"
 msgstr "নির্বাচিত নীতি এক লেভেল উপরে সরাও"
 
-#: drakperm:125
+#: drakperm:126
 #, c-format
 msgid "Add a rule"
 msgstr "নীতি যোগ করো"
 
-#: drakperm:125
+#: drakperm:126
 #, c-format
 msgid "Add a new rule at the end"
 msgstr "সবশেষে একটি নতুন নীতি যোগ করো"
 
-#: drakperm:126
+#: drakperm:127
 #, c-format
 msgid "Delete"
 msgstr "মুছে ফেলো"
 
-#: drakperm:126
+#: drakperm:127
 #, c-format
 msgid "Delete selected rule"
 msgstr "নির্বাচিত নীতি বাদ দাও"
 
 # ##এডিট
-#: drakperm:127 drakups:300 drakups:362 drakups:382
+#: drakperm:128 drakups:300 drakups:362 drakups:382
 #, c-format
 msgid "Edit"
 msgstr "সম্পাদন"
 
-#: drakperm:240
+#: drakperm:241
 #, c-format
 msgid "browse"
 msgstr "ব্রাউজ"
 
-#: drakperm:245
+#: drakperm:246
 #, c-format
 msgid "user"
 msgstr "ব্যবহারকারী"
 
-#: drakperm:245
+#: drakperm:246
 #, c-format
 msgid "group"
 msgstr "গ্রুপ"
 
-#: drakperm:245
+#: drakperm:246
 #, c-format
 msgid "other"
 msgstr "অন্যান্য"
 
-#: drakperm:248
+#: drakperm:249
 #, c-format
 msgid "Other"
 msgstr "অন্যান্য"
 
-#: drakperm:250
+#: drakperm:251
 #, c-format
 msgid "Read"
 msgstr "পড়ো"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:253
+#: drakperm:254
 #, c-format
 msgid "Enable \"%s\" to read the file"
 msgstr "\"%s\" ফাইলটি পড়তে সক্ষম"
 
-#: drakperm:257
+#: drakperm:258
 #, c-format
 msgid "Write"
 msgstr "লেখো"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:260
+#: drakperm:261
 #, c-format
 msgid "Enable \"%s\" to write the file"
 msgstr "\"%s\" ফাইলটি লিখতে সক্ষম"
 
-#: drakperm:264
+#: drakperm:265
 #, c-format
 msgid "Execute"
 msgstr "সম্পাদন করো"
 
 #. -PO: here %s will be either "user", "group" or "other"
-#: drakperm:267
+#: drakperm:268
 #, c-format
 msgid "Enable \"%s\" to execute the file"
 msgstr "\"%s\" ফাইলটি সম্পাদন করতে সক্ষম"
 
-#: drakperm:270
+#: drakperm:271
 #, c-format
 msgid "Sticky-bit"
 msgstr "স্টিকি-বিট"
 
-#: drakperm:270
+#: drakperm:271
 #, c-format
 msgid ""
 "Used for directory:\n"
@@ -1009,74 +1028,74 @@ msgstr ""
 "  এই ডিরেক্টরি বা এই ডিরেক্টরিতে থাকা ফাইলগুলোর মালিক (owner) শুধুমাত্র তা মুছে "
 "ফেলতে পারে"
 
-#: drakperm:271
+#: drakperm:272
 #, c-format
 msgid "Set-UID"
 msgstr "সেট-ইউআইডি(UID)"
 
-#: drakperm:271
+#: drakperm:272
 #, c-format
 msgid "Use owner id for execution"
 msgstr "সম্পাদন করার জন্য মালিকানা(owner) আইডি(ID) ব্যবহার করুন"
 
-#: drakperm:272
+#: drakperm:273
 #, c-format
 msgid "Set-GID"
 msgstr "সেট-জিআইডি(GID)"
 
-#: drakperm:272
+#: drakperm:273
 #, c-format
 msgid "Use group id for execution"
 msgstr "সম্পাদন করার জন্য গ্রুপ আইডি(ID) ব্যবহার করুন"
 
-#: drakperm:289
+#: drakperm:290
 #, c-format
 msgid "User:"
 msgstr "ব্যবহারকারী :"
 
-#: drakperm:290
+#: drakperm:291
 #, c-format
 msgid "Group:"
 msgstr "গ্রুপ :"
 
-#: drakperm:294
+#: drakperm:295
 #, c-format
 msgid "Current user"
 msgstr "বর্তমান ব্যবহারকারী"
 
-#: drakperm:295
+#: drakperm:296
 #, c-format
 msgid "When checked, owner and group will not be changed"
 msgstr "যখন পরীক্ষা করা হবে, তখন মালিকানা এবং গ্রুপ পরিবর্তিত হবে না"
 
-#: drakperm:305
+#: drakperm:306
 #, c-format
 msgid "Path selection"
 msgstr "পাথ নির্বাচন"
 
-#: drakperm:325
+#: drakperm:326
 #, c-format
 msgid "Property"
 msgstr "বৈশিষ্ট্য"
 
-#: drakperm:375
+#: drakperm:376
 #, c-format
 msgid ""
 "The first character of the path must be a slash (\"/\"):\n"
 "\"%s\""
 msgstr ""
 
-#: drakperm:385
+#: drakperm:386
 #, c-format
 msgid "Both the username and the group must valid!"
 msgstr ""
 
-#: drakperm:386
+#: drakperm:387
 #, c-format
 msgid "User: %s"
 msgstr ""
 
-#: drakperm:387
+#: drakperm:388
 #, c-format
 msgid "Group: %s"
 msgstr ""
@@ -1107,8 +1126,8 @@ msgid "Ignore"
 msgstr "অগ্রাহ্য"
 
 #: draksec:72 drakups:99 harddrake2:370 scannerdrake:66 scannerdrake:70
-#: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:505
-#: scannerdrake:509 scannerdrake:531 service_harddrake:259
+#: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:504
+#: scannerdrake:508 scannerdrake:530 service_harddrake:264
 #, c-format
 msgid "Please wait"
 msgstr "অনুগ্রহ করে অপেক্ষা করুন"
@@ -1259,147 +1278,147 @@ msgstr "নেটওয়ার্ক অপশন"
 msgid "System Options"
 msgstr "সিস্টেম অপশন"
 
-#: draksec:261
+#: draksec:269
 #, c-format
 msgid "Periodic Checks"
 msgstr "পুনরাবৃত্তি পরীক্ষা"
 
-#: draksec:282
+#: draksec:294
 #, c-format
 msgid "No password"
 msgstr "পাসওয়ার্ড ছাড়া"
 
-#: draksec:283
+#: draksec:295
 #, c-format
 msgid "Root password"
 msgstr ""
 
-#: draksec:284
+#: draksec:296
 #, c-format
 msgid "User password"
 msgstr ""
 
-#: draksec:314 draksec:360
+#: draksec:326 draksec:372
 #, c-format
 msgid "Software Management"
 msgstr "সফটওয়্যার ম্যানেজমেন্ট"
 
-#: draksec:315
+#: draksec:327
 #, fuzzy, c-format
 msgid "Mandriva Update"
 msgstr "ম্যান্ড্রিব অনলাইন (Mandriva Online)"
 
-#: draksec:316
+#: draksec:328
 #, c-format
 msgid "Software Media Manager"
 msgstr "সফ্টওয়্যার মিডিয়া ম্যানেজার"
 
-#: draksec:317
+#: draksec:329
 #, fuzzy, c-format
 msgid "Configure 3D Desktop effects"
 msgstr "নিউজ গ্রুপ সার্ভার কনফিগার করুন"
 
-#: draksec:318
+#: draksec:330
 #, fuzzy, c-format
 msgid "Graphical Server Configuration"
 msgstr "মেইলের সংকেত কনফিগারেশন"
 
-#: draksec:319
+#: draksec:331
 #, fuzzy, c-format
 msgid "Mouse Configuration"
 msgstr "স্বনির্বাচিত কনফিগারেশন"
 
-#: draksec:320
+#: draksec:332
 #, fuzzy, c-format
 msgid "Keyboard Configuration"
 msgstr "নেটওয়ার্ক কনফিগারেশন"
 
-#: draksec:321
+#: draksec:333
 #, fuzzy, c-format
 msgid "UPS Configuration"
 msgstr "ইউ-পি-এস ড্রাইভার কন্‌ফিগারেশন"
 
-#: draksec:322
+#: draksec:334
 #, fuzzy, c-format
 msgid "Network Configuration"
 msgstr "সংকেত কনফিগারেশন"
 
-#: draksec:323
+#: draksec:335
 #, c-format
 msgid "Hosts definitions"
 msgstr ""
 
-#: draksec:324
+#: draksec:336
 #, fuzzy, c-format
 msgid "Network Center"
 msgstr "নেটওয়ার্ক এবং ইন্টারনেট"
 
-#: draksec:325
+#: draksec:337
 #, c-format
 msgid "VPN"
 msgstr ""
 
-#: draksec:326
+#: draksec:338
 #, c-format
 msgid "Proxy Configuration"
 msgstr "প্রক্‌সি কনফিগারেশন"
 
-#: draksec:327
+#: draksec:339
 #, fuzzy, c-format
 msgid "Connection Sharing"
 msgstr "সংযোগ"
 
-#: draksec:329
+#: draksec:341
 #, c-format
 msgid "Backups"
 msgstr "ব্যাক-আপ"
 
-#: draksec:331 logdrake:52
+#: draksec:343 logdrake:52
 #, c-format
 msgid "Logs"
 msgstr "লগ"
 
-#: draksec:332
+#: draksec:344
 #, c-format
 msgid "Services"
 msgstr "সার্ভিসসমূহ"
 
-#: draksec:333
+#: draksec:345
 #, fuzzy, c-format
 msgid "Users"
 msgstr "ব্যবহারকারী"
 
-#: draksec:335
+#: draksec:347
 #, fuzzy, c-format
 msgid "Boot Configuration"
 msgstr "সংকেত কনফিগারেশন"
 
-#: draksec:361
+#: draksec:373
 #, c-format
 msgid "Hardware"
 msgstr "হার্ডওয়্যার"
 
-#: draksec:362
+#: draksec:374
 #, fuzzy, c-format
 msgid "Network"
 msgstr "নেটওয়ার্ক অপশন"
 
-#: draksec:363
+#: draksec:375
 #, c-format
 msgid "System"
 msgstr "সিস্টেম"
 
-#: draksec:364
+#: draksec:376
 #, c-format
 msgid "Boot"
 msgstr "বুট"
 
-#: draksec:389
+#: draksec:401
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "অনুগ্রহ করে অপেক্ষা করুন, নিরাপত্তা লেভেল সেট করা হচ্ছে..."
 
-#: draksec:395
+#: draksec:407
 #, c-format
 msgid "Please wait, setting security options..."
 msgstr "অনুগ্রহ করে অপেক্ষা করুন, নিরাপত্তা অপশনগুলো সেট করা হচ্ছে..."
@@ -1447,27 +1466,27 @@ msgstr ""
 "প্রোগ্রাম ব্হব্যবহার করতে হবে। কনসোলে শুধুমাত্র \"alsaconf\" বা \"sndconfig\" "
 "ব্যবহার করুন।"
 
-#: draksplash:32
+#: draksplash:33
 #, c-format
 msgid "X coordinate of text box"
 msgstr ""
 
-#: draksplash:33
+#: draksplash:34
 #, c-format
 msgid "Y coordinate of text box"
 msgstr ""
 
-#: draksplash:34
+#: draksplash:35
 #, c-format
 msgid "Text box width"
 msgstr ""
 
-#: draksplash:35
+#: draksplash:36
 #, c-format
 msgid "Text box height"
 msgstr "টেক্সট্ বক্সের উচ্চতা"
 
-#: draksplash:36
+#: draksplash:37
 #, c-format
 msgid ""
 "The progress bar X coordinate\n"
@@ -1476,7 +1495,7 @@ msgstr ""
 "এটার উপরের বাম কোণা থেকে\n"
 "প্রোগ্রেস বারের x অক্ষ"
 
-#: draksplash:37
+#: draksplash:38
 #, c-format
 msgid ""
 "The progress bar Y coordinate\n"
@@ -1485,37 +1504,37 @@ msgstr ""
 "এটার উপরের বাম কোণা থেকে\n"
 "প্রোগ্রেস বারের y অক্ষ"
 
-#: draksplash:38
+#: draksplash:39
 #, c-format
 msgid "The width of the progress bar"
 msgstr "প্রোগ্রেস বারের প্রস্থ"
 
-#: draksplash:39
+#: draksplash:40
 #, c-format
 msgid "The height of the progress bar"
 msgstr "প্রোগ্রেস বারের উচ্চতা"
 
-#: draksplash:40
+#: draksplash:41
 #, c-format
 msgid "X coordinate of the text"
 msgstr ""
 
-#: draksplash:41
+#: draksplash:42
 #, c-format
 msgid "Y coordinate of the text"
 msgstr ""
 
-#: draksplash:42
+#: draksplash:43
 #, c-format
 msgid "Text box transparency"
 msgstr ""
 
-#: draksplash:43
+#: draksplash:44
 #, c-format
 msgid "Progress box transparency"
 msgstr ""
 
-#: draksplash:44
+#: draksplash:45
 #, c-format
 msgid "Text size"
 msgstr ""
@@ -1530,17 +1549,17 @@ msgstr ""
 msgid "Choose progress bar color 1"
 msgstr ""
 
-#: draksplash:62
+#: draksplash:67
 #, c-format
 msgid "Choose progress bar color 2"
 msgstr ""
 
-#: draksplash:63
+#: draksplash:69
 #, c-format
 msgid "Choose progress bar background"
 msgstr ""
 
-#: draksplash:64
+#: draksplash:72
 #, c-format
 msgid "Gradient type"
 msgstr ""
@@ -1555,82 +1574,82 @@ msgstr "শুধুমাত্র টেক্সট"
 msgid "Choose text color"
 msgstr ""
 
-#: draksplash:67 draksplash:74
+#: draksplash:83 draksplash:102
 #, c-format
 msgid "Choose picture"
 msgstr ""
 
-#: draksplash:68
+#: draksplash:87
 #, c-format
 msgid "Silent bootsplash"
 msgstr ""
 
-#: draksplash:71
+#: draksplash:90
 #, c-format
 msgid "Choose text zone color"
 msgstr ""
 
-#: draksplash:72
+#: draksplash:93
 #, c-format
 msgid "Text color"
 msgstr ""
 
-#: draksplash:73
+#: draksplash:97
 #, c-format
 msgid "Background color"
 msgstr "পটভূমির রং"
 
-#: draksplash:75
+#: draksplash:103
 #, c-format
 msgid "Verbose bootsplash"
 msgstr ""
 
-#: draksplash:81
+#: draksplash:110
 #, c-format
 msgid "Theme name"
 msgstr "থীমের নাম"
 
-#: draksplash:84
+#: draksplash:115
 #, c-format
 msgid "Final resolution"
 msgstr "ফাইনাল রেজুলেশন"
 
-#: draksplash:87
+#: draksplash:119
 #, c-format
 msgid "Display logo on Console"
 msgstr "কনসোলে লোগো দেখাও"
 
-#: draksplash:92
+#: draksplash:124
 #, c-format
 msgid "Save theme"
 msgstr "থীম সংরক্ষণ করো"
 
-#: draksplash:154
+#: draksplash:187
 #, fuzzy, c-format
 msgid "Please enter a theme name"
 msgstr "কার্ডের ওয়্যারলেস প্যারামিটার প্রবেশ করান"
 
-#: draksplash:157
+#: draksplash:190
 #, fuzzy, c-format
 msgid "Please select a splash image"
 msgstr "অনুগ্রহ করে আপনার ইউ-পি-এস মডেল নির্বাচন করুন।"
 
-#: draksplash:160
+#: draksplash:193
 #, c-format
 msgid "saving Bootsplash theme..."
 msgstr "bootsplash থীম সেভ করা হচ্ছে..."
 
-#: draksplash:169
+#: draksplash:202
 #, c-format
 msgid "Unable to load image file %s"
 msgstr ""
 
-#: draksplash:180
+#: draksplash:213
 #, c-format
 msgid "choose image"
 msgstr "ছবি (image) পছন্দ করুন"
 
-#: draksplash:195
+#: draksplash:228
 #, c-format
 msgid "Color selection"
 msgstr ""
@@ -1818,7 +1837,7 @@ msgstr "লেভেল"
 msgid "ACL name"
 msgstr "এ-সি-এল (ACL) নাম"
 
-#: drakups:297 finish-install:156
+#: drakups:297 finish-install:171
 #, c-format
 msgid "Password"
 msgstr "পাসওয়ার্ড"
@@ -1866,37 +1885,37 @@ msgstr ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 
-#: finish-install:55
+#: finish-install:56
 #, c-format
 msgid "Keyboard"
 msgstr "কীবোর্ড"
 
-#: finish-install:56
+#: finish-install:57
 #, c-format
 msgid "Please, choose your keyboard layout."
 msgstr "অনুগ্রহ করে আপনার কী-বোর্ড লেআউট পছন্দ করুন।"
 
-#: finish-install:154 finish-install:172 finish-install:184
+#: finish-install:169 finish-install:187 finish-install:199
 #, c-format
 msgid "Encrypted home partition"
 msgstr ""
 
-#: finish-install:154
+#: finish-install:169
 #, c-format
 msgid "Please enter a password for the %s user"
 msgstr ""
 
-#: finish-install:157
+#: finish-install:172
 #, c-format
 msgid "Password (again)"
 msgstr "পাসওয়ার্ড (পুনরায়)"
 
-#: finish-install:172
+#: finish-install:187
 #, c-format
 msgid "Creating encrypted home partition"
 msgstr ""
 
-#: finish-install:184
+#: finish-install:199
 #, c-format
 msgid "Formatting encrypted home partition"
 msgstr ""
@@ -3086,17 +3105,17 @@ msgstr ""
 msgid "Scannerdrake will not be started now."
 msgstr "Scannerdrake এখন চালু হবেনা।"
 
-#: scannerdrake:67 scannerdrake:506
+#: scannerdrake:67 scannerdrake:505
 #, c-format
 msgid "Searching for configured scanners..."
 msgstr "কনফিগার করা স্কেনারগুলি খোঁজা হচ্ছে ..."
 
-#: scannerdrake:71 scannerdrake:510
+#: scannerdrake:71 scannerdrake:509
 #, c-format
 msgid "Searching for new scanners..."
 msgstr "নতুন স্কেনারের জন্য খোঁজ চলছে ..."
 
-#: scannerdrake:79 scannerdrake:532
+#: scannerdrake:79 scannerdrake:531
 #, c-format
 msgid "Re-generating list of configured scanners..."
 msgstr "ফনফিগার করা স্কেনারগুলির লিষ্ট পুনরায় তৈরী করা হচ্ছে ..."
@@ -3418,53 +3437,53 @@ msgstr ""
 "%s\n"
 "আপনার সিস্টেমে উপলব্ধ রয়েছে।\n"
 
-#: scannerdrake:450 scannerdrake:453
+#: scannerdrake:449 scannerdrake:452
 #, c-format
 msgid "There are no scanners found which are available on your system.\n"
 msgstr "আপনার সিস্টেমে উপলব্ধ কোন স্কেনার এখানে পাওয়া যায়নি।\n"
 
 # sam: printer?
-#: scannerdrake:461
+#: scannerdrake:460
 #, fuzzy, c-format
 msgid "Scanner Management"
 msgstr "%s প্রিন্টার ব্যবস্থাপনা"
 
-#: scannerdrake:467
+#: scannerdrake:466
 #, c-format
 msgid "Search for new scanners"
 msgstr "নতুন স্কেনারসমূহের খোঁজ করো"
 
-#: scannerdrake:473
+#: scannerdrake:472
 #, c-format
 msgid "Add a scanner manually"
 msgstr "মেনুয়ালি একটি স্কেনার যোগ করুন"
 
-#: scannerdrake:480
+#: scannerdrake:479
 #, c-format
 msgid "Install/Update firmware files"
 msgstr "Firmware ফাইলসমূহ ইনস্টল/আপগ্রেড করো"
 
-#: scannerdrake:486
+#: scannerdrake:485
 #, c-format
 msgid "Scanner sharing"
 msgstr "স্কেনার শেয়ারিং"
 
-#: scannerdrake:545 scannerdrake:710
+#: scannerdrake:544 scannerdrake:709
 #, c-format
 msgid "All remote machines"
 msgstr "দূরবর্ত সমস্থ মেশিনসমূহ"
 
-#: scannerdrake:557 scannerdrake:860
+#: scannerdrake:556 scannerdrake:859
 #, c-format
 msgid "This machine"
 msgstr "এই মেশিনে"
 
-#: scannerdrake:596
+#: scannerdrake:595
 #, fuzzy, c-format
 msgid "Scanner Sharing"
 msgstr "স্কেনার শেয়ারিং"
 
-#: scannerdrake:597
+#: scannerdrake:596
 #, c-format
 msgid ""
 "Here you can choose whether the scanners connected to this machine should be "
@@ -3473,7 +3492,7 @@ msgstr ""
 "এই মেশিনের সাথে সংযুক্ত স্কেনারগুলি দূরবর্তী কোন মেশিন বা দূরবর্তী কোন মেশিনের "
 "মাধ্যমে ব্যবহার করা যাবে, আপনি তা এখানে পছন্দ করতে পারেন।"
 
-#: scannerdrake:598
+#: scannerdrake:597
 #, c-format
 msgid ""
 "You can also decide here whether scanners on remote machines should be made "
@@ -3482,95 +3501,95 @@ msgstr ""
 "আপনি এখানে সিদ্ধান্তু নিতে পারেন যে দূরবর্তী কোন কম্পিউটারগুলির স্কেনার এখানে বরাদ্দ "
 "থাকবে।"
 
-#: scannerdrake:601
+#: scannerdrake:600
 #, c-format
 msgid "The scanners on this machine are available to other computers"
 msgstr "এই মেশিনের স্কেনারগুলি অন্য কম্পিউটারে বরাদ্দ থাকবে"
 
-#: scannerdrake:603
+#: scannerdrake:602
 #, c-format
 msgid "Scanner sharing to hosts: "
 msgstr "যেই হোস্টগুলিতে স্কেনার শেয়ার হবে:"
 
-#: scannerdrake:608 scannerdrake:625
+#: scannerdrake:607 scannerdrake:624
 #, c-format
 msgid "No remote machines"
 msgstr "দূরবর্তী কোন মেশিন নেই"
 
-#: scannerdrake:617
+#: scannerdrake:616
 #, c-format
 msgid "Use scanners on remote computers"
 msgstr "রিমোট কম্পিউটারের স্কেনার ব্যবহার করো"
 
-#: scannerdrake:620
+#: scannerdrake:619
 #, c-format
 msgid "Use the scanners on hosts: "
 msgstr "এই হোস্টসমূহের স্কেনারগুলি ব্যাবহার করো:"
 
-#: scannerdrake:647 scannerdrake:719 scannerdrake:869
+#: scannerdrake:646 scannerdrake:718 scannerdrake:868
 #, c-format
 msgid "Sharing of local scanners"
 msgstr "লোকাল স্কেনারের শেয়ারিং"
 
-#: scannerdrake:648
+#: scannerdrake:647
 #, c-format
 msgid ""
 "These are the machines on which the locally connected scanner(s) should be "
 "available:"
 msgstr "এগুলি সেই মেশিন যেগুলিতে লোকাল ভাবে সংযুক্ত স্কেনার(গুলি) বরাদ্দ থাকবে:"
 
-#: scannerdrake:659 scannerdrake:809
+#: scannerdrake:658 scannerdrake:808
 #, c-format
 msgid "Add host"
 msgstr "হোস্ট যোগ করো"
 
-#: scannerdrake:665 scannerdrake:815
+#: scannerdrake:664 scannerdrake:814
 #, c-format
 msgid "Edit selected host"
 msgstr "নির্বাচিত হোস্ট এডিট করো"
 
-#: scannerdrake:674 scannerdrake:824
+#: scannerdrake:673 scannerdrake:823
 #, c-format
 msgid "Remove selected host"
 msgstr "নির্বাচিত হোস্ট অপসরণ করো"
 
-#: scannerdrake:683 scannerdrake:833
+#: scannerdrake:682 scannerdrake:832
 #, c-format
 msgid "Done"
 msgstr "সম্পন্ন"
 
-#: scannerdrake:698 scannerdrake:706 scannerdrake:711 scannerdrake:757
-#: scannerdrake:848 scannerdrake:856 scannerdrake:861 scannerdrake:907
+#: scannerdrake:697 scannerdrake:705 scannerdrake:710 scannerdrake:756
+#: scannerdrake:847 scannerdrake:855 scannerdrake:860 scannerdrake:906
 #, c-format
 msgid "Name/IP address of host:"
 msgstr "হোস্টের নাম/IP এড্রেস:"
 
-#: scannerdrake:720 scannerdrake:870
+#: scannerdrake:719 scannerdrake:869
 #, c-format
 msgid "Choose the host on which the local scanners should be made available:"
 msgstr "একটি লোকাল হোস্ট পছন্দ করুন যেখানে স্কেনারগুলি বরাদ্দ থাকবে:"
 
-#: scannerdrake:731 scannerdrake:881
+#: scannerdrake:730 scannerdrake:880
 #, c-format
 msgid "You must enter a host name or an IP address.\n"
 msgstr "আপনাকে অবশ্যই একটি হোস্টের নাম অথবা IP ঠিকানা প্রবেশ করাতে হবে।\n"
 
-#: scannerdrake:742 scannerdrake:892
+#: scannerdrake:741 scannerdrake:891
 #, c-format
 msgid "This host is already in the list, it cannot be added again.\n"
 msgstr "লিষ্টে এই হোস্ট আগে থেকেই আছে, এটা আবার যোগ করা যাবেনা।\n"
 
-#: scannerdrake:797
+#: scannerdrake:796
 #, c-format
 msgid "Usage of remote scanners"
 msgstr "দূরবর্তী স্কেনারসমূহের ব্যাবহার"
 
-#: scannerdrake:798
+#: scannerdrake:797
 #, c-format
 msgid "These are the machines from which the scanners should be used:"
 msgstr "এগুলিই সেই সমস্থ মেশিন যেগুলি থেকে স্কেনার ব্যবহার করা যাবে:"
 
-#: scannerdrake:955
+#: scannerdrake:954
 #, c-format
 msgid ""
 "saned needs to be installed to share the local scanner(s).\n"
@@ -3581,37 +3600,37 @@ msgstr ""
 "\n"
 "আপনি কি saned প্যাকেজটি ইনস্টল করতে চান?"
 
-#: scannerdrake:959 scannerdrake:963
+#: scannerdrake:958 scannerdrake:962
 #, c-format
 msgid "Your scanner(s) will not be available on the network."
 msgstr "আপনার স্কেনার(গুলি) নেটওয়ার্কে বরাদ্দ থাকবে না।"
 
-#: scannerdrake:962
+#: scannerdrake:961
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "আপনার স্ক্যানার(সমূহ) শেয়ার করার জন্য প্রয়োজনীয় প্যাকেজ ইনস্টল করা যায় নি।"
 
-#: service_harddrake:131
+#: service_harddrake:134
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "\"%s\" হার্ডওয়্যার শ্রেণীর কিছু ডিভাইস অপসরণ করা হয়েছে:\n"
 
-#: service_harddrake:132
+#: service_harddrake:135
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- %s অপসারিত হয়েছে\n"
 
-#: service_harddrake:135
+#: service_harddrake:138
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "কিছু ডিভাইস সমূহ যুক্ত করা হয়েছে: %s\n"
 
-#: service_harddrake:136
+#: service_harddrake:139
 #, c-format
 msgid "- %s was added\n"
 msgstr "- %s যুক্ত করা হয়েছে\n"
 
-#: service_harddrake:259
+#: service_harddrake:264
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "হার্ডওয়্যারের অনুসন্ধান চলছে"
