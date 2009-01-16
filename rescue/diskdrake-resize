@@ -1,0 +1,28 @@
+#!/usr/bin/perl
+
+use lib qw(/usr/lib/libDrakX);
+
+use devices;
+use log;
+use resize_fat::main;
+use diskdrake::resize_ntfs;
+use diskdrake::resize_ext2;
+
+my ($device, $fs_type, $size) = @ARGV
+  or die "usage: $0 <device> <fs type> <size>\n";
+
+my %fs_pkgs = (
+    vfat => 'resize_fat::main',
+    ntfs => 'diskdrake::resize_ntfs',
+    ext2 => 'diskdrake::resize_ext2',
+    ext3 => 'diskdrake::resize_ext2',
+);
+
+my $resize_pkg = $fs_pkgs{$fs_type}
+  or die "no support for $fs_type type\n";
+
+log::l("resizing $device to $size");
+
+my $resize = $resize_pkg->new($device, devices::make($device))
+  or die "unable to initialize resize\n";
+$resize->resize($size);
