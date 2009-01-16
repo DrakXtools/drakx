@@ -160,7 +160,14 @@ gtkadd($window->{window},
                                        P("It would be very useful to attach to your report the output of the following command: %s.",
                                          "Things useful to attach to your report are the output of the following commands: %s.",
                                          scalar(@commands),
-                                         join(", ", map { N("'%s'", $_) } @commands))
+                                         join(", ", map { N("'%s'", $_) } @commands)) .
+                                     if_(is_a_boot_issue(),
+                                         "\n" .
+                                         N("You should also attach the following files: %s as well as %s.",
+                                           '/etc/modprobe.conf, /etc/fstab, /boot/grub/menu.lst, /boot/grub/devices.map',
+                                           '/etc/lilo.conf',
+                                       )
+                                     )
                                ]
                            ])),
                 0, gtknew('Title2', label => N("Please describe what you were doing when it crashed:"), width => $width),
