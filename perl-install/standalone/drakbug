@@ -152,7 +152,7 @@ gtkadd($window->{window},
                                                 : N("The \"%s\" program has crashed with the following error:", $prog)),
                                            $error)
                                    ),
-                                   if_($gdb_trace, format_trace_with_message(N("Its gdb trace is:"), $gdb_trace)),
+                                   if_($gdb_trace, format_trace_with_message(N("Its GDB trace is:"), $gdb_trace)),
                                ),
                                [
                                    N("To submit a bug report, click on the report button.  \nThis will open a web browser window on %s where you'll find a form to fill in.  The information displayed above will be transferred to that server",
