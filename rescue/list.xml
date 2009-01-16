@@ -43,7 +43,8 @@
   sync
 
   eject
-  mount mount.nfs umount
+  mount mount.nfs mount.ntfs-3g umount
+  losetup
 
   ldconfig
   mingetty init
@@ -56,7 +57,7 @@
   ping hostname ifconfig route
 
   fdformat badblocks
-  e2fsck fsck.ext2 fsck.ext3 mke2fs mkfs.ext2 mkfs.ext3 resize2fs
+  e2fsck fsck.ext2 fsck.ext3 mke2fs mkfs.ext2 mkfs.ext3 mkfs.ntfs resize2fs
   mkfs.ext3 mkfs.reiserfs mkfs.xfs mkfs.jfs
   debugfs dumpe2fs tune2fs
   fsck.xfs xfs_repair
@@ -310,6 +311,9 @@
   </to>
 </from>
 <from dir=".">
+    <to dir="/usr/sbin">
+      diskdrake-resize
+    </to>
     <to dir="/usr/sbin">
       restore-image.sh
     </to>
