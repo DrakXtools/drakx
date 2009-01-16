@@ -147,7 +147,7 @@ gtkadd($window->{window},
                                    if_($gdb_trace, format_trace_with_message(N("Its gdb trace is:"), $gdb_trace)),
                                ),
                                [
-                                   N("To submit a bug report, click on the report button.  \nThis will open a web browser window on %s where you'll find a form to fill in.  The information displayed above will be transferred to that server.  \nThings useful to include in your report are the output of lspcidrake -v, kernel version, and /proc/cpuinfo.", $wizard_name)
+                                   N("To submit a bug report, click on the report button.  \nThis will open a web browser window on %s where you'll find a form to fill in.  The information displayed above will be transferred to that server.  \nThings useful to include in your report are the output of lspcidrake -v.", $wizard_name)
                                ]
                            ])),
                 0, gtknew('Title2', label => N("Please describe what you were doing when it crashed:"), width => $width),
