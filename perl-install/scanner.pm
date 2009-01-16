@@ -88,6 +88,7 @@ sub installfirmware {
     # Install the firmware file in /usr/share/sane/firmware
     my ($firmware, $backend) = @_;
     return "" if !$firmware;
+    $in ||= interactive->vnew;
     # Install firmware
     run_program::rooted($::prefix, "mkdir", "-p",
 			"/usr/share/sane/firmware") or do {
