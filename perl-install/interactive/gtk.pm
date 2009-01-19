@@ -509,8 +509,8 @@ sub create_widget {
 		    $w->disable_activate;
 		    ($real_w, $w) = ($w, $w->entry);
 		}
-		$w->set_popdown_strings(@formatted_list);
-		$w->set_text(ref($e->{val}) ? may_apply($e->{format}, ${$e->{val}}) : $formatted_list[0]) if $w->isa('Gtk2::ComboBox');
+		$real_w->set_popdown_strings(@formatted_list);
+		$real_w->set_text(ref($e->{val}) ? may_apply($e->{format}, ${$e->{val}}) : $formatted_list[0]) if $real_w->isa('Gtk2::ComboBox');
 	    } else {
 		$model = __create_tree_model($e);
 		$real_w = $w = Gtk2::ComboBox->new_with_model($model);
