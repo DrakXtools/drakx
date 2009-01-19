@@ -503,14 +503,10 @@ sub create_widget {
 		    ($w->child->get_cell_renderers)[0]->set_property('ellipsize', 'end') if !$e->{do_not_ellipsize};
 		    $w->set_wrap_width($e->{gtk}{wrap_width}) if exists $e->{gtk}{wrap_width};
 		} else {
-		    $w = Gtk2::Combo->new;
-		    $w->set_use_arrows_always(1);
-		    $w->entry->set_editable(1);
-		    $w->disable_activate;
-		    ($real_w, $w) = ($w, $w->entry);
+		    $w = Gtk2::ComboBoxEntry->new_text;
+		    ($real_w, $w) = ($w, $w->child);
 		}
 		$real_w->set_popdown_strings(@formatted_list);
-		$real_w->set_text(ref($e->{val}) ? may_apply($e->{format}, ${$e->{val}}) : $formatted_list[0]) if $real_w->isa('Gtk2::ComboBox');
 	    } else {
 		$model = __create_tree_model($e);
 		$real_w = $w = Gtk2::ComboBox->new_with_model($model);
@@ -533,16 +529,7 @@ sub create_widget {
 		};
 		defined $i ? $e->{list}[$i] : $w->get_text;
 	    };
-	    if ($real_w->isa('Gtk2::Combo')) {
-		#- FIXME workaround gtk suckiness (set_text generates two 'change' signals, one when removing the whole, one for inserting the replacement..)
-		my $idle;
-		$w->signal_connect(changed => sub {
-				       return if $$ignore_ref;
-				       $idle ||= Glib::Idle->add(sub { undef $idle; $onchange_f->($get); 0 });
-				   });
-	    } else {
-		$w->signal_connect(changed => $onchange->($get));
-	    }
+	    $w->signal_connect(changed => $onchange->($get));
 
 	    $set = sub {
 		my $s = may_apply($e->{format}, $_[0]);
