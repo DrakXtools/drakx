@@ -614,7 +614,7 @@ sub Label {
         $part->{device_LABEL} = $old_label;
         return;
     }
-    $part->{prefer_device_LABEL} = to_bool($part->{device_LABEL});
+    $part->{prefer_device_LABEL} = to_bool($part->{device_LABEL}) && !isLVM($part);
     fs::format::clean_label($part);
     fs::format::write_label($part);
 }
