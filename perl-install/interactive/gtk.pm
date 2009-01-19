@@ -498,7 +498,7 @@ sub create_widget {
 
 	    if (!$e->{separator}) {
 		if ($e->{not_edit}) {
-		    $w = Gtk2::ComboBox->new_text;
+		    $real_w = $w = Gtk2::ComboBox->new_text;
 		    # FIXME: the following causes Gtk-CRITICAL but not solvable at realize time:
 		    ($w->child->get_cell_renderers)[0]->set_property('ellipsize', 'end') if !$e->{do_not_ellipsize};
 		    $w->set_wrap_width($e->{gtk}{wrap_width}) if exists $e->{gtk}{wrap_width};
@@ -507,12 +507,13 @@ sub create_widget {
 		    $w->set_use_arrows_always(1);
 		    $w->entry->set_editable(1);
 		    $w->disable_activate;
+		    ($real_w, $w) = ($w, $w->entry);
 		}
 		$w->set_popdown_strings(@formatted_list);
 		$w->set_text(ref($e->{val}) ? may_apply($e->{format}, ${$e->{val}}) : $formatted_list[0]) if $w->isa('Gtk2::ComboBox');
 	    } else {
 		$model = __create_tree_model($e);
-		$w = Gtk2::ComboBox->new_with_model($model);
+		$real_w = $w = Gtk2::ComboBox->new_with_model($model);
 
 		$w->pack_start(my $texrender = Gtk2::CellRendererText->new, 0);
 		$w->add_attribute($texrender, text => 0);
@@ -521,7 +522,6 @@ sub create_widget {
 		    $w->add_attribute($pixrender, pixbuf => 1);
 		}
 	    }
-	    ($real_w, $w) = ($w, $w->entry);
 
 	    my $get = sub {
 		my $i = $model ? do {
