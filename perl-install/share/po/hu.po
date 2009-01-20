@@ -6,9 +6,9 @@
 # Tamas Szanto <tszanto@mol.hu>, 2001.
 msgid ""
 msgstr ""
-"Project-Id-Version: libDrakX-2009.0\n"
+"Project-Id-Version: libDrakX-2009.1\n"
 "POT-Creation-Date: 2009-01-16 11:40+0100\n"
-"PO-Revision-Date: 2008-09-25 16:52+0100\n"
+"PO-Revision-Date: 2009-01-20 16:22+0100\n"
 "Last-Translator: Lónyai Gergely <aleph@mandriva.org>\n"
 "Language-Team: Hungarian <aleph@mandriva.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,11 +20,19 @@ msgstr ""
 "X-Poedit-Country: HUNGARY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: any.pm:252 any.pm:862 diskdrake/interactive.pm:580
-#: diskdrake/interactive.pm:775 diskdrake/interactive.pm:819
-#: diskdrake/interactive.pm:905 diskdrake/interactive.pm:1159
-#: diskdrake/interactive.pm:1211 do_pkgs.pm:221 do_pkgs.pm:267
-#: harddrake/sound.pm:285 interactive.pm:587 pkgs.pm:265
+#: any.pm:252
+#: any.pm:862
+#: diskdrake/interactive.pm:580
+#: diskdrake/interactive.pm:775
+#: diskdrake/interactive.pm:819
+#: diskdrake/interactive.pm:905
+#: diskdrake/interactive.pm:1159
+#: diskdrake/interactive.pm:1211
+#: do_pkgs.pm:221
+#: do_pkgs.pm:267
+#: harddrake/sound.pm:285
+#: interactive.pm:587
+#: pkgs.pm:265
 #, c-format
 msgid "Please wait"
 msgstr "Kis türelmet..."
@@ -38,8 +46,7 @@ msgstr "A rendszerindító program telepítése folyamatban"
 #, c-format
 msgid ""
 "LILO wants to assign a new Volume ID to drive %s.  However, changing\n"
-"the Volume ID of a Windows NT, 2000, or XP boot disk is a fatal Windows "
-"error.\n"
+"the Volume ID of a Windows NT, 2000, or XP boot disk is a fatal Windows error.\n"
 "This caution does not apply to Windows 95 or 98, or to NT data disks.\n"
 "\n"
 "Assign a new Volume ID?"
@@ -77,15 +84,12 @@ msgstr ""
 #, c-format
 msgid ""
 "You decided to install the bootloader on a partition.\n"
-"This implies you already have a bootloader on the hard drive you boot (eg: "
-"System Commander).\n"
+"This implies you already have a bootloader on the hard drive you boot (eg: System Commander).\n"
 "\n"
 "On which drive are you booting?"
 msgstr ""
-"Azt a lehetőséget választotta, hogy a rendszerbetöltőt egy partícióra "
-"telepíti.\n"
-"Ez arra utal, hogy már van rendszerbetöltő (például: System Commander) azon "
-"a\n"
+"Azt a lehetőséget választotta, hogy a rendszerbetöltőt egy partícióra telepíti.\n"
+"Ez arra utal, hogy már van rendszerbetöltő (például: System Commander) azon a\n"
 "merevlemezen, amelyről a rendszer indítása történik.\n"
 "\n"
 "Melyik meghajtóról végzi a rendszer indítását?"
@@ -110,7 +114,9 @@ msgstr "A gyökérpartíció első szektora"
 msgid "On Floppy"
 msgstr "Hajlékonylemez"
 
-#: any.pm:354 pkgs.pm:261 ugtk2.pm:526
+#: any.pm:354
+#: pkgs.pm:261
+#: ugtk2.pm:526
 #, c-format
 msgid "Skip"
 msgstr "Kihagyás"
@@ -130,7 +136,9 @@ msgstr "Hová kerüljön a rendszerindító program (bootloader)?"
 msgid "Boot Style Configuration"
 msgstr "A rendszerindítás beállításai"
 
-#: any.pm:399 any.pm:429 any.pm:430
+#: any.pm:399
+#: any.pm:429
+#: any.pm:430
 #, c-format
 msgid "Bootloader main options"
 msgstr "Rendszerindítási beállítások"
@@ -140,12 +148,14 @@ msgstr "Rendszerindítási beállítások"
 msgid "Bootloader"
 msgstr "Rendszerbetöltő"
 
-#: any.pm:404 any.pm:433
+#: any.pm:404
+#: any.pm:433
 #, c-format
 msgid "Bootloader to use"
 msgstr "A használni kívánt rendszerbetöltő"
 
-#: any.pm:406 any.pm:435
+#: any.pm:406
+#: any.pm:435
 #, c-format
 msgid "Boot device"
 msgstr "Rendszerindítási eszköz"
@@ -166,9 +176,9 @@ msgid "Enable ACPI"
 msgstr "ACPI bekapcsolása"
 
 #: any.pm:411
-#, fuzzy, c-format
+#, c-format
 msgid "Enable SMP"
-msgstr "ACPI bekapcsolása"
+msgstr "SMP bekapcsolása"
 
 #: any.pm:412
 #, c-format
@@ -180,18 +190,24 @@ msgstr "APIC bekapcsolása"
 msgid "Enable Local APIC"
 msgstr "Helyi APIC bekapcsolása"
 
-#: any.pm:415 any.pm:809 any.pm:824 authentication.pm:245
+#: any.pm:415
+#: any.pm:809
+#: any.pm:824
+#: authentication.pm:245
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
 msgstr "Jelszó"
 
-#: any.pm:417 authentication.pm:256
+#: any.pm:417
+#: authentication.pm:256
 #, c-format
 msgid "The passwords do not match"
 msgstr "A jelszavak nem egyeznek"
 
-#: any.pm:417 authentication.pm:256 diskdrake/interactive.pm:1383
+#: any.pm:417
+#: authentication.pm:256
+#: diskdrake/interactive.pm:1383
 #, c-format
 msgid "Please try again"
 msgstr "Próbálja meg újra"
@@ -201,7 +217,10 @@ msgstr "Próbálja meg újra"
 msgid "You can not use a password with %s"
 msgstr "Nem használható jelszó ezzel: %s"
 
-#: any.pm:421 any.pm:811 any.pm:826 authentication.pm:246
+#: any.pm:421
+#: any.pm:811
+#: any.pm:826
+#: authentication.pm:246
 #, c-format
 msgid "Password (again)"
 msgstr "Jelszó (még egyszer)"
@@ -218,11 +237,8 @@ msgstr "korlátozás"
 
 #: any.pm:423
 #, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
-msgstr ""
-"\"A parancssorban átadható paraméterek korlátozása\" beállításnak jelszó "
-"nélkül nincs értelme"
+msgid "Option ``Restrict command line options'' is of no use without a password"
+msgstr "\"A parancssorban átadható paraméterek korlátozása\" beállításnak jelszó nélkül nincs értelme"
 
 #: any.pm:425
 #, c-format
@@ -264,12 +280,14 @@ msgstr "Az alapértelmezett op. rendszer?"
 msgid "Image"
 msgstr "Indítófájl"
 
-#: any.pm:514 any.pm:527
+#: any.pm:514
+#: any.pm:527
 #, c-format
 msgid "Root"
 msgstr "Gyökér"
 
-#: any.pm:515 any.pm:540
+#: any.pm:515
+#: any.pm:540
 #, c-format
 msgid "Append"
 msgstr "Hozzáfűzés"
@@ -294,12 +312,17 @@ msgstr "Indítási RAM diszk"
 msgid "Network profile"
 msgstr "Hálózati profil"
 
-#: any.pm:532 any.pm:537 any.pm:539 diskdrake/interactive.pm:400
+#: any.pm:532
+#: any.pm:537
+#: any.pm:539
+#: diskdrake/interactive.pm:400
 #, c-format
 msgid "Label"
 msgstr "Címke"
 
-#: any.pm:534 any.pm:542 harddrake/v4l.pm:438
+#: any.pm:534
+#: any.pm:542
+#: harddrake/v4l.pm:438
 #, c-format
 msgid "Default"
 msgstr "Alapértelmezés"
@@ -410,11 +433,8 @@ msgstr "Adjon meg egy felhasználónevet"
 
 #: any.pm:788
 #, c-format
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
-msgstr ""
-"A felhasználónév csak a következőket tartalmazhatja: kisbetűk, számok, \"-\" "
-"és \"_\""
+msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgstr "A felhasználónév csak a következőket tartalmazhatja: kisbetűk, számok, \"-\" és \"_\""
 
 #: any.pm:789
 #, c-format
@@ -426,12 +446,14 @@ msgstr "A felhasználónév túl hosszú"
 msgid "This user name has already been added"
 msgstr "Már létezik ilyen felhasználónév"
 
-#: any.pm:796 any.pm:828
+#: any.pm:796
+#: any.pm:828
 #, c-format
 msgid "User ID"
 msgstr "Felh.-azonosító"
 
-#: any.pm:796 any.pm:829
+#: any.pm:796
+#: any.pm:829
 #, c-format
 msgid "Group ID"
 msgstr "Csoportazonosító"
@@ -451,7 +473,8 @@ msgstr "A(z) \"%s\" értéknek 500-nál nagyobbnak kell lennie. Mégis elfogadja
 msgid "User management"
 msgstr "Felhasználó kezelés"
 
-#: any.pm:808 authentication.pm:232
+#: any.pm:808
+#: authentication.pm:232
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "A rendszergazdai (root) jelszó beállítása"
@@ -486,7 +509,8 @@ msgstr "Parancsértelmező"
 msgid "Please wait, adding media..."
 msgstr "Adatforrások felvétele..."
 
-#: any.pm:890 security/l10n.pm:14
+#: any.pm:890
+#: security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "Automatikus bejelentkezés"
@@ -494,9 +518,7 @@ msgstr "Automatikus bejelentkezés"
 #: any.pm:891
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
-msgstr ""
-"Beállítható, hogy rendszerindításkor egy felhasználó automatikusan "
-"bejelentkezzen."
+msgstr "Beállítható, hogy rendszerindításkor egy felhasználó automatikusan bejelentkezzen."
 
 #: any.pm:892
 #, c-format
@@ -513,12 +535,16 @@ msgstr "Adja meg az alapértelmezett felhasználónevet:"
 msgid "Choose the window manager to run:"
 msgstr "Válassza ki a használni kívánt ablakkezelőt:"
 
-#: any.pm:905 any.pm:925 any.pm:986
+#: any.pm:905
+#: any.pm:925
+#: any.pm:986
 #, c-format
 msgid "Release Notes"
 msgstr "Verzióinformáció"
 
-#: any.pm:932 any.pm:1278 interactive/gtk.pm:808
+#: any.pm:932
+#: any.pm:1278
+#: interactive/gtk.pm:808
 #, c-format
 msgid "Close"
 msgstr "Bezárás"
@@ -528,7 +554,8 @@ msgstr "Bezárás"
 msgid "License agreement"
 msgstr "Licencegyezmény"
 
-#: any.pm:974 diskdrake/dav.pm:26
+#: any.pm:974
+#: diskdrake/dav.pm:26
 #, c-format
 msgid "Quit"
 msgstr "Kilépés"
@@ -548,7 +575,8 @@ msgstr "Elfogadom"
 msgid "Refuse"
 msgstr "Nem fogadom el"
 
-#: any.pm:1008 any.pm:1074
+#: any.pm:1008
+#: any.pm:1074
 #, c-format
 msgid "Please choose a language to use"
 msgstr "Válasszon nyelvet"
@@ -569,7 +597,8 @@ msgstr ""
 msgid "Multi languages"
 msgstr "Több nyelv"
 
-#: any.pm:1051 any.pm:1083
+#: any.pm:1051
+#: any.pm:1083
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr "Régebbi kompatibilitási (nem UTF-8) kódolás"
@@ -604,7 +633,9 @@ msgstr "Itt található az elérhető országok listája"
 msgid "Other Countries"
 msgstr "Egyéb országok"
 
-#: any.pm:1133 interactive.pm:488 interactive/gtk.pm:445
+#: any.pm:1133
+#: interactive.pm:488
+#: interactive/gtk.pm:445
 #, c-format
 msgid "Advanced"
 msgstr "Speciális"
@@ -638,44 +669,31 @@ msgstr "Egyéni"
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
-"Allowing this will permit users to simply click on \"Share\" in konqueror "
-"and nautilus.\n"
+"Allowing this will permit users to simply click on \"Share\" in konqueror and nautilus.\n"
 "\n"
 "\"Custom\" permit a per-user granularity.\n"
 msgstr ""
-"Szeretné engedélyezni a felhasználók számára azt, hogy a saját "
-"könyvtáraikat\n"
+"Szeretné engedélyezni a felhasználók számára azt, hogy a saját könyvtáraikat\n"
 "megosszák?\n"
-"Ha ez engedélyezve van, akkor a felhasználók a Konquerorban és a "
-"Nautilusban\n"
+"Ha ez engedélyezve van, akkor a felhasználók a Konquerorban és a Nautilusban\n"
 "a \"Megosztás\" funkcióval végezhetnek exportálást.\n"
 "\n"
 "Az \"Egyéni\" opció használatával felhasználónkénti beállítás lehetséges.\n"
 
 #: any.pm:1239
 #, c-format
-msgid ""
-"NFS: the traditional Unix file sharing system, with less support on Mac and "
-"Windows."
-msgstr ""
-"NFS: a hagyományos UNIX-os fájlmegosztási rendszer - Macintosh és Windows "
-"alatt kevésbé támogatott."
+msgid "NFS: the traditional Unix file sharing system, with less support on Mac and Windows."
+msgstr "NFS: a hagyományos UNIX-os fájlmegosztási rendszer - Macintosh és Windows alatt kevésbé támogatott."
 
 #: any.pm:1242
 #, c-format
-msgid ""
-"SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
-"systems."
-msgstr ""
-"SMB: Windows, Mac OS X és Linux alatt használatos fájlmegosztási módszer."
+msgid "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux systems."
+msgstr "SMB: Windows, Mac OS X és Linux alatt használatos fájlmegosztási módszer."
 
 #: any.pm:1250
 #, c-format
-msgid ""
-"You can export using NFS or SMB. Please select which you would like to use."
-msgstr ""
-"Exportálás NFS-sel vagy Sambával végezhető. Válassza ki, melyiket kívánja "
-"használni."
+msgid "You can export using NFS or SMB. Please select which you would like to use."
+msgstr "Exportálás NFS-sel vagy Sambával végezhető. Válassza ki, melyiket kívánja használni."
 
 #: any.pm:1278
 #, c-format
@@ -694,8 +712,7 @@ msgstr ""
 #: any.pm:1380
 #, c-format
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
-msgstr ""
-"Jelentkezzen ki, majd nyomja meg a Ctrl+Alt+BackSpace billentyűkombinációt"
+msgstr "Jelentkezzen ki, majd nyomja meg a Ctrl+Alt+BackSpace billentyűkombinációt"
 
 #: any.pm:1384
 #, c-format
@@ -712,7 +729,8 @@ msgstr "Időzóna"
 msgid "Which is your timezone?"
 msgstr "Melyik időzónát választja?"
 
-#: any.pm:1442 any.pm:1444
+#: any.pm:1442
+#: any.pm:1444
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Dátum-, óra- és időzóna-beállítások"
@@ -762,7 +780,8 @@ msgstr "NIS"
 msgid "Smart Card"
 msgstr "Intelligens kártya"
 
-#: authentication.pm:29 authentication.pm:211
+#: authentication.pm:29
+#: authentication.pm:211
 #, c-format
 msgid "Windows Domain"
 msgstr "Windowsos tartomány"
@@ -779,8 +798,7 @@ msgstr "Helyi fájl:"
 
 #: authentication.pm:64
 #, c-format
-msgid ""
-"Use local for all authentication and information user tell in local file"
+msgid "Use local for all authentication and information user tell in local file"
 msgstr "Helyi felhasználó-azonosítás és információkezelés helyi fájl alapján"
 
 #: authentication.pm:65
@@ -790,13 +808,8 @@ msgstr "LDAP:"
 
 #: authentication.pm:65
 #, c-format
-msgid ""
-"Tells your computer to use LDAP for some or all authentication. LDAP "
-"consolidates certain types of information within your organization."
-msgstr ""
-"LDAP használatát írja elő az azonosítási műveletek egy részéhez vagy "
-"mindegyikükhöz. Az LDAP a szervezeten belüli információk bizonyos részét "
-"gyűjti egy helyre."
+msgid "Tells your computer to use LDAP for some or all authentication. LDAP consolidates certain types of information within your organization."
+msgstr "LDAP használatát írja elő az azonosítási műveletek egy részéhez vagy mindegyikükhöz. Az LDAP a szervezeten belüli információk bizonyos részét gyűjti egy helyre."
 
 #: authentication.pm:66
 #, c-format
@@ -805,12 +818,8 @@ msgstr "NIS:"
 
 #: authentication.pm:66
 #, c-format
-msgid ""
-"Allows you to run a group of computers in the same Network Information "
-"Service domain with a common password and group file."
-msgstr ""
-"Lehetővé teszi számítógépek csoportjának ugyanazon Network Information "
-"Service tartományban való üzemeltetését közös jelszóval és csoportfájllal."
+msgid "Allows you to run a group of computers in the same Network Information Service domain with a common password and group file."
+msgstr "Lehetővé teszi számítógépek csoportjának ugyanazon Network Information Service tartományban való üzemeltetését közös jelszóval és csoportfájllal."
 
 #: authentication.pm:67
 #, c-format
@@ -819,12 +828,8 @@ msgstr "Windowsos tartomány:"
 
 #: authentication.pm:67
 #, c-format
-msgid ""
-"Winbind allows the system to retrieve information and authenticate users in "
-"a Windows domain."
-msgstr ""
-"A Winbind lehetővé teszi a rendszer számára, hogy információt szerezzen és "
-"felhasználókat azonosítson egy windowsos tartományban."
+msgid "Winbind allows the system to retrieve information and authenticate users in a Windows domain."
+msgstr "A Winbind lehetővé teszi a rendszer számára, hogy információt szerezzen és felhasználókat azonosítson egy windowsos tartományban."
 
 #: authentication.pm:68
 #, c-format
@@ -834,17 +839,22 @@ msgstr "Kerberos 5 :"
 #: authentication.pm:68
 #, c-format
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
-msgstr ""
-"Azonosítás Kerberos és LDAP használatával egy Active Directory kiszolgálón "
+msgstr "Azonosítás Kerberos és LDAP használatával egy Active Directory kiszolgálón "
 
-#: authentication.pm:102 authentication.pm:136 authentication.pm:155
-#: authentication.pm:156 authentication.pm:182 authentication.pm:206
+#: authentication.pm:102
+#: authentication.pm:136
+#: authentication.pm:155
+#: authentication.pm:156
+#: authentication.pm:182
+#: authentication.pm:206
 #: authentication.pm:884
 #, c-format
 msgid " "
 msgstr " "
 
-#: authentication.pm:103 authentication.pm:137 authentication.pm:183
+#: authentication.pm:103
+#: authentication.pm:137
+#: authentication.pm:183
 #: authentication.pm:207
 #, c-format
 msgid "Welcome to the Authentication Wizard"
@@ -852,18 +862,17 @@ msgstr "Üdvözli a Felhasználó azonosítás varázslója"
 
 #: authentication.pm:105
 #, c-format
-msgid ""
-"You have selected LDAP authentication. Please review the configuration "
-"options below "
-msgstr ""
-"Az LDAP azonosítást választotta. Kérem nézze át az alábbi beállításokat"
+msgid "You have selected LDAP authentication. Please review the configuration options below "
+msgstr "Az LDAP azonosítást választotta. Kérem nézze át az alábbi beállításokat"
 
-#: authentication.pm:107 authentication.pm:162
+#: authentication.pm:107
+#: authentication.pm:162
 #, c-format
 msgid "LDAP Server"
 msgstr "LDAP kiszolgáló"
 
-#: authentication.pm:108 authentication.pm:163
+#: authentication.pm:108
+#: authentication.pm:163
 #, c-format
 msgid "Base dn"
 msgstr "Alap dn"
@@ -873,38 +882,46 @@ msgstr "Alap dn"
 msgid "Fetch base Dn "
 msgstr "Dn alapú letöltés"
 
-#: authentication.pm:111 authentication.pm:166
+#: authentication.pm:111
+#: authentication.pm:166
 #, c-format
 msgid "Use encrypt connection with TLS "
 msgstr "TLS titkosított kapcsolat használata"
 
-#: authentication.pm:112 authentication.pm:167
+#: authentication.pm:112
+#: authentication.pm:167
 #, c-format
 msgid "Download CA Certificate "
 msgstr "CA minősítés letöltése"
 
-#: authentication.pm:114 authentication.pm:147
+#: authentication.pm:114
+#: authentication.pm:147
 #, c-format
 msgid "Use Disconnect mode "
 msgstr "Kapcsolat nélküli mód használata"
 
-#: authentication.pm:115 authentication.pm:168
+#: authentication.pm:115
+#: authentication.pm:168
 #, c-format
 msgid "Use anonymous BIND "
 msgstr "Névtelen BIND használata "
 
-#: authentication.pm:116 authentication.pm:119 authentication.pm:121
+#: authentication.pm:116
+#: authentication.pm:119
+#: authentication.pm:121
 #: authentication.pm:125
 #, c-format
 msgid "  "
 msgstr "  "
 
-#: authentication.pm:117 authentication.pm:169
+#: authentication.pm:117
+#: authentication.pm:169
 #, c-format
 msgid "Bind DN "
 msgstr "DN illesztése "
 
-#: authentication.pm:118 authentication.pm:170
+#: authentication.pm:118
+#: authentication.pm:170
 #, c-format
 msgid "Bind Password "
 msgstr "Bind jelszó"
@@ -931,11 +948,8 @@ msgstr "Shadow alapú"
 
 #: authentication.pm:139
 #, c-format
-msgid ""
-"You have selected Kerberos 5 authentication. Please review the configuration "
-"options below "
-msgstr ""
-"A Kerberos 5 azonosítást választotta. Kérem nézze át az alábbi beállításokat"
+msgid "You have selected Kerberos 5 authentication. Please review the configuration options below "
+msgstr "A Kerberos 5 azonosítást választotta. Kérem nézze át az alábbi beállításokat"
 
 #: authentication.pm:141
 #, c-format
@@ -969,12 +983,8 @@ msgstr "Ldap felhasználói információk használata"
 
 #: authentication.pm:158
 #, c-format
-msgid ""
-"You have selected Kerberos 5 for authentication, now you must choose the "
-"type of users information "
-msgstr ""
-"Kiválasztotta a Kerberos 5 azonosítást. Most ki kell választani a "
-"felhasználói információ típusát"
+msgid "You have selected Kerberos 5 for authentication, now you must choose the type of users information "
+msgstr "Kiválasztotta a Kerberos 5 azonosítást. Most ki kell választani a felhasználói információ típusát"
 
 #: authentication.pm:164
 #, c-format
@@ -983,9 +993,7 @@ msgstr "Dn alapú letöltés"
 
 #: authentication.pm:185
 #, c-format
-msgid ""
-"You have selected NIS authentication. Please review the configuration "
-"options below "
+msgid "You have selected NIS authentication. Please review the configuration options below "
 msgstr "A NIS azonosítást választotta. Kérem nézze át az alábbi beállításokat"
 
 #: authentication.pm:187
@@ -1000,12 +1008,8 @@ msgstr "NIS kiszolgáló"
 
 #: authentication.pm:209
 #, c-format
-msgid ""
-"You have selected Windows Domain authentication. Please review the "
-"configuration options below "
-msgstr ""
-"A Windows Domain azonosítást választotta. Kérem nézze át az alábbi "
-"beállításokat"
+msgid "You have selected Windows Domain authentication. Please review the configuration options below "
+msgstr "A Windows Domain azonosítást választotta. Kérem nézze át az alábbi beállításokat"
 
 #: authentication.pm:213
 #, c-format
@@ -1017,7 +1021,8 @@ msgstr "Tartomány Modell"
 msgid "Active Directory Realm "
 msgstr "Active Directory realm"
 
-#: authentication.pm:231 authentication.pm:247
+#: authentication.pm:231
+#: authentication.pm:247
 #, c-format
 msgid "Authentication"
 msgstr "Felhasználóazonosítás"
@@ -1120,21 +1125,13 @@ msgstr "A rendszerindító program nem tehető %s partícióra\n"
 
 #: bootloader.pm:1985
 #, c-format
-msgid ""
-"Your bootloader configuration must be updated because partition has been "
-"renumbered"
-msgstr ""
-"A rendszerindító beállításait frissíteni kell, mivel a partíciók számozása "
-"módosult."
+msgid "Your bootloader configuration must be updated because partition has been renumbered"
+msgstr "A rendszerindító beállításait frissíteni kell, mivel a partíciók számozása módosult."
 
 #: bootloader.pm:1998
 #, c-format
-msgid ""
-"The bootloader can not be installed correctly. You have to boot rescue and "
-"choose \"%s\""
-msgstr ""
-"A rendszerindító nem telepíthető. Indítsa el a rendszert egy helyreállítási "
-"lemezzel, majd válassza ezt: \"%s\"."
+msgid "The bootloader can not be installed correctly. You have to boot rescue and choose \"%s\""
+msgstr "A rendszerindító nem telepíthető. Indítsa el a rendszert egy helyreállítási lemezzel, majd válassza ezt: \"%s\"."
 
 #: bootloader.pm:1999
 #, c-format
@@ -1161,7 +1158,8 @@ msgstr "MB"
 msgid "GB"
 msgstr "GB"
 
-#: common.pm:142 common.pm:151
+#: common.pm:142
+#: common.pm:151
 #, c-format
 msgid "TB"
 msgstr "TB"
@@ -1205,12 +1203,16 @@ msgstr ""
 msgid "New"
 msgstr "Új"
 
-#: diskdrake/dav.pm:61 diskdrake/interactive.pm:407 diskdrake/smbnfs_gtk.pm:75
+#: diskdrake/dav.pm:61
+#: diskdrake/interactive.pm:407
+#: diskdrake/smbnfs_gtk.pm:75
 #, c-format
 msgid "Unmount"
 msgstr "Leválasztás"
 
-#: diskdrake/dav.pm:62 diskdrake/interactive.pm:403 diskdrake/smbnfs_gtk.pm:76
+#: diskdrake/dav.pm:62
+#: diskdrake/interactive.pm:403
+#: diskdrake/smbnfs_gtk.pm:76
 #, c-format
 msgid "Mount"
 msgstr "Csatolás"
@@ -1220,37 +1222,64 @@ msgstr "Csatolás"
 msgid "Server"
 msgstr "Kiszolgáló"
 
-#: diskdrake/dav.pm:64 diskdrake/interactive.pm:397
-#: diskdrake/interactive.pm:647 diskdrake/interactive.pm:665
-#: diskdrake/interactive.pm:669 diskdrake/removable.pm:23
+#: diskdrake/dav.pm:64
+#: diskdrake/interactive.pm:397
+#: diskdrake/interactive.pm:647
+#: diskdrake/interactive.pm:665
+#: diskdrake/interactive.pm:669
+#: diskdrake/removable.pm:23
 #: diskdrake/smbnfs_gtk.pm:79
 #, c-format
 msgid "Mount point"
 msgstr "Csatolási pont"
 
-#: diskdrake/dav.pm:65 diskdrake/interactive.pm:399
-#: diskdrake/interactive.pm:1053 diskdrake/removable.pm:24
+#: diskdrake/dav.pm:65
+#: diskdrake/interactive.pm:399
+#: diskdrake/interactive.pm:1053
+#: diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
 msgstr "Beállítások"
 
-#: diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:183 diskdrake/removable.pm:26
-#: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
+#: diskdrake/dav.pm:66
+#: diskdrake/hd_gtk.pm:183
+#: diskdrake/removable.pm:26
+#: diskdrake/smbnfs_gtk.pm:82
+#: interactive/http.pm:151
 #, c-format
 msgid "Done"
 msgstr "Kész"
 
-#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:123 diskdrake/hd_gtk.pm:290
-#: diskdrake/interactive.pm:244 diskdrake/interactive.pm:257
-#: diskdrake/interactive.pm:506 diskdrake/interactive.pm:511
-#: diskdrake/interactive.pm:637 diskdrake/interactive.pm:923
-#: diskdrake/interactive.pm:1099 diskdrake/interactive.pm:1112
-#: diskdrake/interactive.pm:1115 diskdrake/interactive.pm:1383
-#: diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23 do_pkgs.pm:28 do_pkgs.pm:44
-#: do_pkgs.pm:60 do_pkgs.pm:65 fsedit.pm:245 interactive/http.pm:117
-#: interactive/http.pm:118 modules/interactive.pm:19 scanner.pm:94
-#: scanner.pm:105 scanner.pm:112 scanner.pm:119 wizards.pm:95 wizards.pm:99
+#: diskdrake/dav.pm:75
+#: diskdrake/hd_gtk.pm:123
+#: diskdrake/hd_gtk.pm:290
+#: diskdrake/interactive.pm:244
+#: diskdrake/interactive.pm:257
+#: diskdrake/interactive.pm:506
+#: diskdrake/interactive.pm:511
+#: diskdrake/interactive.pm:637
+#: diskdrake/interactive.pm:923
+#: diskdrake/interactive.pm:1099
+#: diskdrake/interactive.pm:1112
+#: diskdrake/interactive.pm:1115
+#: diskdrake/interactive.pm:1383
+#: diskdrake/smbnfs_gtk.pm:42
+#: do_pkgs.pm:23
+#: do_pkgs.pm:28
+#: do_pkgs.pm:44
+#: do_pkgs.pm:60
+#: do_pkgs.pm:65
+#: fsedit.pm:245
+#: interactive/http.pm:117
+#: interactive/http.pm:118
+#: modules/interactive.pm:19
+#: scanner.pm:94
+#: scanner.pm:105
+#: scanner.pm:112
+#: scanner.pm:119
+#: wizards.pm:95
+#: wizards.pm:99
 #: wizards.pm:121
 #, c-format
 msgid "Error"
@@ -1271,22 +1300,30 @@ msgstr "Az URL-nek http:// vagy https:// kezdetűnek kell lenni"
 msgid "Server: "
 msgstr "Kiszolgáló: "
 
-#: diskdrake/dav.pm:110 diskdrake/interactive.pm:479
-#: diskdrake/interactive.pm:1258 diskdrake/interactive.pm:1343
+#: diskdrake/dav.pm:110
+#: diskdrake/interactive.pm:479
+#: diskdrake/interactive.pm:1258
+#: diskdrake/interactive.pm:1343
 #, c-format
 msgid "Mount point: "
 msgstr "Csatolási pont: "
 
-#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1350
+#: diskdrake/dav.pm:111
+#: diskdrake/interactive.pm:1350
 #, c-format
 msgid "Options: %s"
 msgstr "Beállítások: %s"
 
-#: diskdrake/hd_gtk.pm:54 diskdrake/interactive.pm:295
-#: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:106
-#: fs/partitioning_wizard.pm:51 fs/partitioning_wizard.pm:206
-#: fs/partitioning_wizard.pm:211 fs/partitioning_wizard.pm:250
-#: fs/partitioning_wizard.pm:269 fs/partitioning_wizard.pm:274
+#: diskdrake/hd_gtk.pm:54
+#: diskdrake/interactive.pm:295
+#: diskdrake/smbnfs_gtk.pm:22
+#: fs/mount_point.pm:106
+#: fs/partitioning_wizard.pm:51
+#: fs/partitioning_wizard.pm:206
+#: fs/partitioning_wizard.pm:211
+#: fs/partitioning_wizard.pm:250
+#: fs/partitioning_wizard.pm:269
+#: fs/partitioning_wizard.pm:274
 #, c-format
 msgid "Partitioning"
 msgstr "Partícionálás"
@@ -1294,11 +1331,12 @@ msgstr "Partícionálás"
 #: diskdrake/hd_gtk.pm:68
 #, c-format
 msgid "Click on a partition, choose a filesystem type then choose an action"
-msgstr ""
-"Kattintson egy partícióra, és válassza ki a használandó fájlrendszer típusát"
+msgstr "Kattintson egy partícióra, és válassza ki a használandó fájlrendszer típusát"
 
-#: diskdrake/hd_gtk.pm:105 diskdrake/interactive.pm:1074
-#: diskdrake/interactive.pm:1084 diskdrake/interactive.pm:1137
+#: diskdrake/hd_gtk.pm:105
+#: diskdrake/interactive.pm:1074
+#: diskdrake/interactive.pm:1084
+#: diskdrake/interactive.pm:1137
 #, c-format
 msgid "Read carefully"
 msgstr "Olvassa el figyelmesen"
@@ -1308,7 +1346,8 @@ msgstr "Olvassa el figyelmesen"
 msgid "Please make a backup of your data first"
 msgstr "Először készítsen biztonsági mentést az adatokról"
 
-#: diskdrake/hd_gtk.pm:106 diskdrake/interactive.pm:237
+#: diskdrake/hd_gtk.pm:106
+#: diskdrake/interactive.pm:237
 #, c-format
 msgid "Exit"
 msgstr "Kilépés"
@@ -1318,8 +1357,12 @@ msgstr "Kilépés"
 msgid "Continue"
 msgstr "Folytatás"
 
-#: diskdrake/hd_gtk.pm:178 interactive.pm:653 interactive/gtk.pm:800
-#: interactive/gtk.pm:818 interactive/gtk.pm:839 ugtk2.pm:936
+#: diskdrake/hd_gtk.pm:178
+#: interactive.pm:653
+#: interactive/gtk.pm:800
+#: interactive/gtk.pm:818
+#: interactive/gtk.pm:839
+#: ugtk2.pm:936
 #, c-format
 msgid "Help"
 msgstr "Segítség"
@@ -1340,7 +1383,8 @@ msgstr ""
 msgid "Please click on a partition"
 msgstr "Kattintson egy partícióra"
 
-#: diskdrake/hd_gtk.pm:240 diskdrake/smbnfs_gtk.pm:63
+#: diskdrake/hd_gtk.pm:240
+#: diskdrake/smbnfs_gtk.pm:63
 #, c-format
 msgid "Details"
 msgstr "Részletek"
@@ -1385,12 +1429,14 @@ msgstr "HFS"
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:380 services.pm:158
+#: diskdrake/hd_gtk.pm:380
+#: services.pm:158
 #, c-format
 msgid "Other"
 msgstr "Egyéb"
 
-#: diskdrake/hd_gtk.pm:380 diskdrake/interactive.pm:1273
+#: diskdrake/hd_gtk.pm:380
+#: diskdrake/interactive.pm:1273
 #, c-format
 msgid "Empty"
 msgstr "Üres"
@@ -1400,13 +1446,22 @@ msgstr "Üres"
 msgid "Filesystem types:"
 msgstr "Fájlrendszer típusok:"
 
-#: diskdrake/hd_gtk.pm:408 diskdrake/interactive.pm:300
-#: diskdrake/interactive.pm:385 diskdrake/interactive.pm:536
-#: diskdrake/interactive.pm:728 diskdrake/interactive.pm:786
-#: diskdrake/interactive.pm:903 diskdrake/interactive.pm:945
-#: diskdrake/interactive.pm:946 diskdrake/interactive.pm:1196
-#: diskdrake/interactive.pm:1234 diskdrake/interactive.pm:1382 do_pkgs.pm:19
-#: do_pkgs.pm:39 do_pkgs.pm:57 harddrake/sound.pm:422
+#: diskdrake/hd_gtk.pm:408
+#: diskdrake/interactive.pm:300
+#: diskdrake/interactive.pm:385
+#: diskdrake/interactive.pm:536
+#: diskdrake/interactive.pm:728
+#: diskdrake/interactive.pm:786
+#: diskdrake/interactive.pm:903
+#: diskdrake/interactive.pm:945
+#: diskdrake/interactive.pm:946
+#: diskdrake/interactive.pm:1196
+#: diskdrake/interactive.pm:1234
+#: diskdrake/interactive.pm:1382
+#: do_pkgs.pm:19
+#: do_pkgs.pm:39
+#: do_pkgs.pm:57
+#: harddrake/sound.pm:422
 #, c-format
 msgid "Warning"
 msgstr "Figyelmeztetés"
@@ -1426,8 +1481,10 @@ msgstr "Használja először a \"Leválasztás\"-t"
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Használja inkább ezt: \"%s\" (tapasztaltaknak)"
 
-#: diskdrake/hd_gtk.pm:417 diskdrake/interactive.pm:398
-#: diskdrake/interactive.pm:574 diskdrake/removable.pm:25
+#: diskdrake/hd_gtk.pm:417
+#: diskdrake/interactive.pm:398
+#: diskdrake/interactive.pm:574
+#: diskdrake/removable.pm:25
 #: diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
@@ -1443,13 +1500,15 @@ msgstr "Válasszon egy másik partíciót"
 msgid "Choose a partition"
 msgstr "Válasszon egy partíciót"
 
-#: diskdrake/interactive.pm:270 diskdrake/interactive.pm:376
+#: diskdrake/interactive.pm:270
+#: diskdrake/interactive.pm:376
 #: interactive/curses.pm:512
 #, c-format
 msgid "More"
 msgstr "Egyéb"
 
-#: diskdrake/interactive.pm:278 diskdrake/interactive.pm:288
+#: diskdrake/interactive.pm:278
+#: diskdrake/interactive.pm:288
 #: diskdrake/interactive.pm:1181
 #, c-format
 msgid "Confirmation"
@@ -1475,11 +1534,11 @@ msgstr "Ki akar lépni a programból a partíciós tábla mentése nélkül?"
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "El szeretné menteni a /etc/fstab fájlban végrehajtott módosításokat?"
 
-#: diskdrake/interactive.pm:295 fs/partitioning_wizard.pm:250
+#: diskdrake/interactive.pm:295
+#: fs/partitioning_wizard.pm:250
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr ""
-"A partíciós tábla változásai csak a gép újraindítása után lépnek érvénybe"
+msgstr "A partíciós tábla változásai csak a gép újraindítása után lépnek érvénybe"
 
 #: diskdrake/interactive.pm:300
 #, c-format
@@ -1529,12 +1588,8 @@ msgstr "Nem hozható létre több partíció"
 
 #: diskdrake/interactive.pm:367
 #, c-format
-msgid ""
-"To have more partitions, please delete one to be able to create an extended "
-"partition"
-msgstr ""
-"További partíciók létrehozásához törölni kell egyet (hogy egy kiterjesztett "
-"partíciót létre lehessen hozni)"
+msgid "To have more partitions, please delete one to be able to create an extended partition"
+msgstr "További partíciók létrehozásához törölni kell egyet (hogy egy kiterjesztett partíciót létre lehessen hozni)"
 
 #: diskdrake/interactive.pm:378
 #, c-format
@@ -1546,7 +1601,8 @@ msgstr "A partíciós tábla újraolvasása"
 msgid "Detailed information"
 msgstr "Részletes információ"
 
-#: diskdrake/interactive.pm:401 diskdrake/interactive.pm:741
+#: diskdrake/interactive.pm:401
+#: diskdrake/interactive.pm:741
 #, c-format
 msgid "Resize"
 msgstr "Átméretezés"
@@ -1556,12 +1612,14 @@ msgstr "Átméretezés"
 msgid "Format"
 msgstr "Formázás"
 
-#: diskdrake/interactive.pm:404 diskdrake/interactive.pm:851
+#: diskdrake/interactive.pm:404
+#: diskdrake/interactive.pm:851
 #, c-format
 msgid "Add to RAID"
 msgstr "Hozzáadás RAID-hez"
 
-#: diskdrake/interactive.pm:405 diskdrake/interactive.pm:869
+#: diskdrake/interactive.pm:405
+#: diskdrake/interactive.pm:869
 #, c-format
 msgid "Add to LVM"
 msgstr "Hozzáadás LVM-hez"
@@ -1606,7 +1664,8 @@ msgstr "Loopback-hez használva"
 msgid "Create"
 msgstr "Létrehozás"
 
-#: diskdrake/interactive.pm:468 diskdrake/interactive.pm:470
+#: diskdrake/interactive.pm:468
+#: diskdrake/interactive.pm:470
 #, c-format
 msgid "Create a new partition"
 msgstr "Új partíció létrehozása"
@@ -1616,12 +1675,14 @@ msgstr "Új partíció létrehozása"
 msgid "Start sector: "
 msgstr "Kezdőszektor: "
 
-#: diskdrake/interactive.pm:475 diskdrake/interactive.pm:938
+#: diskdrake/interactive.pm:475
+#: diskdrake/interactive.pm:938
 #, c-format
 msgid "Size in MB: "
 msgstr "Méret (MB): "
 
-#: diskdrake/interactive.pm:477 diskdrake/interactive.pm:939
+#: diskdrake/interactive.pm:477
+#: diskdrake/interactive.pm:939
 #, c-format
 msgid "Filesystem type: "
 msgstr "A fájlrendszer típusa: "
@@ -1645,8 +1706,7 @@ msgid ""
 msgstr ""
 "Nem lehet új partíciót létrehozni\n"
 "(mivel elérte az elsődleges partíciók lehetséges maximális számát).\n"
-"Távolítson el egy elsődleges partíciót és hozzon létre egy kiterjesztett "
-"partíciót."
+"Távolítson el egy elsődleges partíciót és hozzon létre egy kiterjesztett partíciót."
 
 #: diskdrake/interactive.pm:536
 #, c-format
@@ -1655,17 +1715,16 @@ msgstr "El szeretné távolítani a loopback fájlt?"
 
 #: diskdrake/interactive.pm:558
 #, c-format
-msgid ""
-"After changing type of partition %s, all data on this partition will be lost"
-msgstr ""
-"A(z) %s partíció típusának módosítása után a partíción levő adatok elvesznek"
+msgid "After changing type of partition %s, all data on this partition will be lost"
+msgstr "A(z) %s partíció típusának módosítása után a partíción levő adatok elvesznek"
 
 #: diskdrake/interactive.pm:571
 #, c-format
 msgid "Change partition type"
 msgstr "A partíciótípus megváltoztatása"
 
-#: diskdrake/interactive.pm:573 diskdrake/removable.pm:47
+#: diskdrake/interactive.pm:573
+#: diskdrake/removable.pm:47
 #, c-format
 msgid "Which filesystem do you want?"
 msgstr "Melyik fájlrendszert szeretné?"
@@ -1676,14 +1735,14 @@ msgid "Switching from %s to %s"
 msgstr "Átváltás %sről %sre"
 
 #: diskdrake/interactive.pm:608
-#, fuzzy, c-format
+#, c-format
 msgid "Set volume label"
-msgstr "Melyik kötetcímke?"
+msgstr "Kötetcímke beállítása"
 
 #: diskdrake/interactive.pm:608
 #, c-format
 msgid "Beware, this will be written to disk as soon as you validate!"
-msgstr ""
+msgstr "Figyelem! Ha jóváhagyja a műveletet, akkor azt már nem lehet visszavonni!"
 
 #: diskdrake/interactive.pm:610
 #, c-format
@@ -1719,8 +1778,10 @@ msgstr ""
 msgid "Where do you want to mount %s?"
 msgstr "Hová szeretné csatolni ezt: \"%s\"?"
 
-#: diskdrake/interactive.pm:692 diskdrake/interactive.pm:775
-#: fs/partitioning_wizard.pm:146 fs/partitioning_wizard.pm:178
+#: diskdrake/interactive.pm:692
+#: diskdrake/interactive.pm:775
+#: fs/partitioning_wizard.pm:146
+#: fs/partitioning_wizard.pm:178
 #, c-format
 msgid "Resizing"
 msgstr "Átméretezés"
@@ -1743,8 +1804,7 @@ msgstr "Készítsen biztonsági mentést erről a partícióról"
 #: diskdrake/interactive.pm:735
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
-msgstr ""
-"A(z) %s partíció átméretezésekor a partíción található adatok elvesznek"
+msgstr "A(z) %s partíció átméretezésekor a partíción található adatok elvesznek"
 
 #: diskdrake/interactive.pm:742
 #, c-format
@@ -1767,16 +1827,16 @@ msgid "Maximum size: %s MB"
 msgstr "Maximális méret: %s MB"
 
 #: diskdrake/interactive.pm:786
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
-"Az adatok épségének biztosítása érdekében a legközelebbi Windows "
-"indításnál \n"
-"fájlrendszer ellenőrzés lesz végezve"
+"Az adatok épségének biztosítása érdekében a partícióátméretezés utáni első\n"
+"Microsoft Windows® indításnál fájlrendszer ellenőrzés lesz végeztetve"
 
-#: diskdrake/interactive.pm:834 diskdrake/interactive.pm:1378
+#: diskdrake/interactive.pm:834
+#: diskdrake/interactive.pm:1378
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "Fájlrendszer titkosítási kulcs"
@@ -1786,7 +1846,8 @@ msgstr "Fájlrendszer titkosítási kulcs"
 msgid "Enter your filesystem encryption key"
 msgstr "Válasszon fájlrendszer titkosítási kulcsot"
 
-#: diskdrake/interactive.pm:836 diskdrake/interactive.pm:1386
+#: diskdrake/interactive.pm:836
+#: diskdrake/interactive.pm:1386
 #, c-format
 msgid "Encryption key"
 msgstr "Titkosítási kulcs"
@@ -1801,7 +1862,8 @@ msgstr "Érvénytelen kulcs"
 msgid "Choose an existing RAID to add to"
 msgstr "Válassza ki azt a RAID-et, amelyikhez hozzá szeretné adni a lemezt"
 
-#: diskdrake/interactive.pm:853 diskdrake/interactive.pm:871
+#: diskdrake/interactive.pm:853
+#: diskdrake/interactive.pm:871
 #, c-format
 msgid "new"
 msgstr "új"
@@ -1823,8 +1885,7 @@ msgid ""
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
 "A(z) \"%s\" fizikai kötet még használatban van.\n"
-"Kívánja áthelyezni a kötet használatban levő fizikai kiterjedéseit (extent) "
-"más kötetekre?"
+"Kívánja áthelyezni a kötet használatban levő fizikai kiterjedéseit (extent) más kötetekre?"
 
 #: diskdrake/interactive.pm:905
 #, c-format
@@ -1854,15 +1915,15 @@ msgstr "Adjon meg egy fájlnevet"
 #: diskdrake/interactive.pm:945
 #, c-format
 msgid "File is already used by another loopback, choose another one"
-msgstr ""
-"Ez a fájl már egy másik loopback-hez van rendelve, válasszon egy másikat"
+msgstr "Ez a fájl már egy másik loopback-hez van rendelve, válasszon egy másikat"
 
 #: diskdrake/interactive.pm:946
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "A fájl már létezik, használjam?"
 
-#: diskdrake/interactive.pm:978 diskdrake/interactive.pm:981
+#: diskdrake/interactive.pm:978
+#: diskdrake/interactive.pm:981
 #, c-format
 msgid "Mount options"
 msgstr "Csatolási (mount) opciók"
@@ -1912,7 +1973,9 @@ msgstr "A változások csak a rendszer újraindításakor lépnek életbe"
 msgid "Partition table of drive %s is going to be written to disk"
 msgstr "A(z) \"%s\" meghajtó partíciótáblájának mentése következik"
 
-#: diskdrake/interactive.pm:1159 fs/format.pm:96 fs/format.pm:103
+#: diskdrake/interactive.pm:1159
+#: fs/format.pm:96
+#: fs/format.pm:103
 #, c-format
 msgid "Formatting partition %s"
 msgstr "A(z) %s partíció formázása"
@@ -1922,7 +1985,8 @@ msgstr "A(z) %s partíció formázása"
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr "A(z) %s partíció formázásakor a partíción található adatok elvesznek!"
 
-#: diskdrake/interactive.pm:1181 fs/partitioning.pm:48
+#: diskdrake/interactive.pm:1181
+#: fs/partitioning.pm:48
 #, c-format
 msgid "Check bad blocks?"
 msgstr "Ellenőrizve legyen, hogy vannak-e hibás blokkok?"
@@ -1943,16 +2007,12 @@ msgid ""
 "Directory %s already contains data\n"
 "(%s)\n"
 "\n"
-"You can either choose to move the files into the partition that will be "
-"mounted there or leave them where they are (which results in hiding them by "
-"the contents of the mounted partition)"
+"You can either choose to move the files into the partition that will be mounted there or leave them where they are (which results in hiding them by the contents of the mounted partition)"
 msgstr ""
 "A(z) \"%s\" könyvtárban már vannak fájlok.\n"
 "(%s)\n"
 "\n"
-"Áthelyezheti a fájlokat az oda csatolandó partícióra, vagy a helyükön "
-"hagyhatja azokat (az utóbbi esetben a már ott levő fájlokat el fogja rejteni "
-"a csatolt partíció tartalma)."
+"Áthelyezheti a fájlokat az oda csatolandó partícióra, vagy a helyükön hagyhatja azokat (az utóbbi esetben a már ott levő fájlokat el fogja rejteni a csatolt partíció tartalma)."
 
 #: diskdrake/interactive.pm:1211
 #, c-format
@@ -1979,7 +2039,8 @@ msgstr "a(z) %s partíció jelenleg \"%s\"-ként ismert"
 msgid "Partitions have been renumbered: "
 msgstr "A partíciók újra lettek számozva: "
 
-#: diskdrake/interactive.pm:1259 diskdrake/interactive.pm:1327
+#: diskdrake/interactive.pm:1259
+#: diskdrake/interactive.pm:1327
 #, c-format
 msgid "Device: "
 msgstr "Eszköz: "
@@ -1999,13 +2060,15 @@ msgstr "UUID: "
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS meghajtó betűjele: %s (ez csak egy tipp)\n"
 
-#: diskdrake/interactive.pm:1266 diskdrake/interactive.pm:1275
+#: diskdrake/interactive.pm:1266
+#: diskdrake/interactive.pm:1275
 #: diskdrake/interactive.pm:1346
 #, c-format
 msgid "Type: "
 msgstr "Típus: "
 
-#: diskdrake/interactive.pm:1270 diskdrake/interactive.pm:1331
+#: diskdrake/interactive.pm:1270
+#: diskdrake/interactive.pm:1331
 #, c-format
 msgid "Name: "
 msgstr "Név: "
@@ -2187,9 +2250,7 @@ msgstr "Válasszon fájlrendszer titkosítási kulcsot"
 #: diskdrake/interactive.pm:1382
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
-msgstr ""
-"Ez a titkosítási kulcs túl egyszerű (legalább %d karakter hosszúnak kell "
-"lennie)"
+msgstr "Ez a titkosítási kulcs túl egyszerű (legalább %d karakter hosszúnak kell lennie)"
 
 #: diskdrake/interactive.pm:1383
 #, c-format
@@ -2211,10 +2272,19 @@ msgstr "Titkosítási módszer"
 msgid "Change type"
 msgstr "A típus megváltoztatása"
 
-#: diskdrake/smbnfs_gtk.pm:81 interactive.pm:129 interactive.pm:550
-#: interactive/curses.pm:260 interactive/http.pm:104 interactive/http.pm:160
-#: interactive/stdio.pm:39 interactive/stdio.pm:148 mygtk2.pm:802 ugtk2.pm:415
-#: ugtk2.pm:517 ugtk2.pm:526 ugtk2.pm:812
+#: diskdrake/smbnfs_gtk.pm:81
+#: interactive.pm:129
+#: interactive.pm:550
+#: interactive/curses.pm:260
+#: interactive/http.pm:104
+#: interactive/http.pm:160
+#: interactive/stdio.pm:39
+#: interactive/stdio.pm:148
+#: mygtk2.pm:802
+#: ugtk2.pm:415
+#: ugtk2.pm:517
+#: ugtk2.pm:526
+#: ugtk2.pm:812
 #, c-format
 msgid "Cancel"
 msgstr "Mégsem"
@@ -2224,7 +2294,8 @@ msgstr "Mégsem"
 msgid "Can not login using username %s (bad password?)"
 msgstr "Nem sikerült bejelentkezni %s néven (helytelen jelszó?)"
 
-#: diskdrake/smbnfs_gtk.pm:168 diskdrake/smbnfs_gtk.pm:177
+#: diskdrake/smbnfs_gtk.pm:168
+#: diskdrake/smbnfs_gtk.pm:177
 #, c-format
 msgid "Domain Authentication Required"
 msgstr "Tartományi azonosítás szükséges"
@@ -2241,11 +2312,8 @@ msgstr "Másik"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
-msgstr ""
-"Adja meg a gép eléréséhez szükséges felhasználónevet, jelszót és "
-"tartománynevet."
+msgid "Please enter your username, password and domain name to access this host."
+msgstr "Adja meg a gép eléréséhez szükséges felhasználónevet, jelszót és tartománynevet."
 
 #: diskdrake/smbnfs_gtk.pm:180
 #, c-format
@@ -2267,17 +2335,21 @@ msgstr "Kiszolgálók keresése"
 msgid "Search new servers"
 msgstr "Új kiszolgálók keresése"
 
-#: do_pkgs.pm:19 do_pkgs.pm:57
+#: do_pkgs.pm:19
+#: do_pkgs.pm:57
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
 msgstr "A(z) %s csomagot telepíteni kell. Szeretné telepíteni?"
 
-#: do_pkgs.pm:23 do_pkgs.pm:44 do_pkgs.pm:60
+#: do_pkgs.pm:23
+#: do_pkgs.pm:44
+#: do_pkgs.pm:60
 #, c-format
 msgid "Could not install the %s package!"
 msgstr "Nem sikerült telepíteni a(z) %s csomagot."
 
-#: do_pkgs.pm:28 do_pkgs.pm:65
+#: do_pkgs.pm:28
+#: do_pkgs.pm:65
 #, c-format
 msgid "Mandatory package %s is missing"
 msgstr "Hiányzik a(z) \"%s\" nevű kötelező csomag"
@@ -2292,21 +2364,19 @@ msgstr "A következő csomagokat szükséges telepíteni:\n"
 msgid "Installing packages..."
 msgstr "Csomagok telepítése..."
 
-#: do_pkgs.pm:267 pkgs.pm:265
+#: do_pkgs.pm:267
+#: pkgs.pm:265
 #, c-format
 msgid "Removing packages..."
 msgstr "Csomagok eltávolítása..."
 
 #: fs/any.pm:17
 #, c-format
-msgid ""
-"An error occurred - no valid devices were found on which to create new "
-"filesystems. Please check your hardware for the cause of this problem"
-msgstr ""
-"Hiba történt - nincs olyan meghajtó, amelyen új fájlrendszert lehetne "
-"létrehozni. Ellenőrizze a gépben található eszközöket."
+msgid "An error occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem"
+msgstr "Hiba történt - nincs olyan meghajtó, amelyen új fájlrendszert lehetne létrehozni. Ellenőrizze a gépben található eszközöket."
 
-#: fs/any.pm:75 fs/partitioning_wizard.pm:59
+#: fs/any.pm:75
+#: fs/partitioning_wizard.pm:59
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "Szükség van egy FAT partícióra a /boot/efi ponthoz csatolva"
@@ -2317,21 +2387,22 @@ msgid "Creating and formatting file %s"
 msgstr "%s fájl létrehozása és formázása"
 
 #: fs/format.pm:119
-#, fuzzy, c-format
+#, c-format
 msgid "I do not know how to set label on %s with type %s"
-msgstr "A(z) %s eszköz nem formázható %s típusúra"
+msgstr "Nem tudom beállítani a %s eszközön (%s típus) a címkét"
 
 #: fs/format.pm:126
-#, fuzzy, c-format
+#, c-format
 msgid "setting label on %s failed"
-msgstr "%s formázás sikertelen a(z) %s eszközön"
+msgstr "%s címke beállítása sikertelen"
 
 #: fs/format.pm:161
 #, c-format
 msgid "I do not know how to format %s in type %s"
 msgstr "A(z) %s eszköz nem formázható %s típusúra"
 
-#: fs/format.pm:166 fs/format.pm:168
+#: fs/format.pm:166
+#: fs/format.pm:168
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "%s formázás sikertelen a(z) %s eszközön"
@@ -2351,12 +2422,14 @@ msgstr "A(z) %s partíció csatolása"
 msgid "mounting partition %s in directory %s failed"
 msgstr "a(z) %s partíció ide történő csatolása sikertelen: %s"
 
-#: fs/mount.pm:85 fs/mount.pm:102
+#: fs/mount.pm:85
+#: fs/mount.pm:102
 #, c-format
 msgid "Checking %s"
 msgstr "%s ellenőrzése"
 
-#: fs/mount.pm:119 partition_table.pm:404
+#: fs/mount.pm:119
+#: partition_table.pm:404
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "hiba történt a(z) %s leválasztásakor: %s"
@@ -2379,9 +2452,7 @@ msgstr "Az írási gyorstár kiírása fájlbezáráskor"
 #: fs/mount_options.pm:119
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
-msgstr ""
-"Csoport lemezkvóta bekapcsolása, esetlegesen bizonyos korlátozások "
-"érvényesítésével"
+msgstr "Csoport lemezkvóta bekapcsolása, esetlegesen bizonyos korlátozások érvényesítésével"
 
 #: fs/mount_options.pm:121
 #, c-format
@@ -2414,9 +2485,7 @@ msgstr ""
 #: fs/mount_options.pm:130
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
-msgstr ""
-"A fájlrendszerben levő karakter- illetve blokkeszközök ne legyenek "
-"értelmezve."
+msgstr "A fájlrendszerben levő karakter- illetve blokkeszközök ne legyenek értelmezve."
 
 #: fs/mount_options.pm:132
 #, c-format
@@ -2425,8 +2494,7 @@ msgid ""
 "file system. This option might be useful for a server that has file systems\n"
 "containing binaries for architectures other than its own."
 msgstr ""
-"A felcsatolt fájlrendszeren levő bináris programok ne legyenek "
-"végrehajthatók.\n"
+"A felcsatolt fájlrendszeren levő bináris programok ne legyenek végrehajthatók.\n"
 "Ez akkor lehet hasznos, ha egy kiszolgálón vannak olyan fájlrendszerek is,\n"
 "amelyek más architektúrákhoz tartozó bináris programokat tartalmaznak."
 
@@ -2438,8 +2506,7 @@ msgid ""
 "have suidperl(1) installed.)"
 msgstr ""
 "A felhasználó- illetve csoportazonosító bitjének (SUID illetve SGID bit)\n"
-"tiltása. (Ez biztonságosnak tűnhet, de valójában nem az, ha fel van "
-"telepítve\n"
+"tiltása. (Ez biztonságosnak tűnhet, de valójában nem az, ha fel van telepítve\n"
 "az suidperl(1).)"
 
 #: fs/mount_options.pm:140
@@ -2455,9 +2522,7 @@ msgstr "A fájlrendszer összes I/O művelete szinkron módon történjen."
 #: fs/mount_options.pm:144
 #, c-format
 msgid "Allow every user to mount and umount the file system."
-msgstr ""
-"A fájlrendszer csatolásának és leválasztásának engedélyezése minden "
-"felhasználó számára."
+msgstr "A fájlrendszer csatolásának és leválasztásának engedélyezése minden felhasználó számára."
 
 #: fs/mount_options.pm:146
 #, c-format
@@ -2467,9 +2532,7 @@ msgstr "A fájlrendszer csatolásának engedélyezése normál felhasználók sz
 #: fs/mount_options.pm:148
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
-msgstr ""
-"Felhasználói lemezkvóta bekapcsolása, esetlegesen bizonyos korlátozások "
-"érvényesítésével"
+msgstr "Felhasználói lemezkvóta bekapcsolása, esetlegesen bizonyos korlátozások érvényesítésével"
 
 #: fs/mount_options.pm:150
 #, c-format
@@ -2513,18 +2576,13 @@ msgstr "Válassza ki a formázandó partíciókat"
 
 #: fs/partitioning.pm:75
 #, c-format
-msgid ""
-"Failed to check filesystem %s. Do you want to repair the errors? (beware, "
-"you can lose data)"
-msgstr ""
-"A(z) \"%s\" fájlrendszer ellenőrzése hibákat eredményezett. Szeretné "
-"kijavítani a hibákat? (Legyen óvatos, mivel ez adatvesztéshez is vezethet.)"
+msgid "Failed to check filesystem %s. Do you want to repair the errors? (beware, you can lose data)"
+msgstr "A(z) \"%s\" fájlrendszer ellenőrzése hibákat eredményezett. Szeretné kijavítani a hibákat? (Legyen óvatos, mivel ez adatvesztéshez is vezethet.)"
 
 #: fs/partitioning.pm:78
 #, c-format
 msgid "Not enough swap space to fulfill installation, please add some"
-msgstr ""
-"A lapozóterület mérete nem elég nagy. Növelje meg a telepítés befejezéséhez."
+msgstr "A lapozóterület mérete nem elég nagy. Növelje meg a telepítés befejezéséhez."
 
 #: fs/partitioning_wizard.pm:51
 #, c-format
@@ -2624,14 +2682,8 @@ msgstr "A windowsos partíció méretének meghatározása"
 
 #: fs/partitioning_wizard.pm:153
 #, c-format
-msgid ""
-"Your Microsoft Windows® partition is too fragmented. Please reboot your "
-"computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
-"the Mandriva Linux installation."
-msgstr ""
-"A windowsos partíció túlzottan töredezett. Indítsa újra a gépet Microsoft "
-"Windows®szal, majd futtassa a \"defrag\" programot. Ennek végeztével indítsa "
-"el újra a Mandriva Linux telepítését."
+msgid "Your Microsoft Windows® partition is too fragmented. Please reboot your computer under Microsoft Windows®, run the ``defrag'' utility, then restart the Mandriva Linux installation."
+msgstr "A windowsos partíció túlzottan töredezett. Indítsa újra a gépet Microsoft Windows®szal, majd futtassa a \"defrag\" programot. Ennek végeztével indítsa el újra a Mandriva Linux telepítését."
 
 #: fs/partitioning_wizard.pm:156
 #, c-format
@@ -2642,12 +2694,7 @@ msgid ""
 "Your Microsoft Windows® partition will be now resized.\n"
 "\n"
 "\n"
-"Be careful: this operation is dangerous. If you have not already done so, "
-"you first need to exit the installation, run \"chkdsk c:\" from a Command "
-"Prompt under Microsoft Windows® (beware, running graphical program \"scandisk"
-"\" is not enough, be sure to use \"chkdsk\" in a Command Prompt!), "
-"optionally run defrag, then restart the installation. You should also backup "
-"your data.\n"
+"Be careful: this operation is dangerous. If you have not already done so, you first need to exit the installation, run \"chkdsk c:\" from a Command Prompt under Microsoft Windows® (beware, running graphical program \"scandisk\" is not enough, be sure to use \"chkdsk\" in a Command Prompt!), optionally run defrag, then restart the installation. You should also backup your data.\n"
 "\n"
 "\n"
 "When sure, press %s."
@@ -2671,7 +2718,9 @@ msgstr ""
 "a(z) \"%s\" gombot."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:165 interactive.pm:549 interactive/curses.pm:263
+#: fs/partitioning_wizard.pm:165
+#: interactive.pm:549
+#: interactive/curses.pm:263
 #: ugtk2.pm:519
 #, c-format
 msgid "Next"
@@ -2685,8 +2734,7 @@ msgstr "Partícionálás"
 #: fs/partitioning_wizard.pm:168
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
-msgstr ""
-"Mekkora helyet szeretne fenntartani a Microsoft Windows®nak itt: %s partíció?"
+msgstr "Mekkora helyet szeretne fenntartani a Microsoft Windows®nak itt: %s partíció?"
 
 #: fs/partitioning_wizard.pm:169
 #, c-format
@@ -2709,8 +2757,7 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
-"Az adatok épségének biztosítása érdekében a legközelebbi Windows "
-"indításnál \n"
+"Az adatok épségének biztosítása érdekében a legközelebbi Windows indításnál \n"
 "fájlrendszer ellenőrzés lesz végezve"
 
 #: fs/partitioning_wizard.pm:198
@@ -2733,11 +2780,11 @@ msgstr "A teljes lemez törlése és felhasználása"
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "Több merevlemeze van. Melyikre kívánja telepíteni a Linuxot?"
 
-#: fs/partitioning_wizard.pm:210 fsedit.pm:598
+#: fs/partitioning_wizard.pm:210
+#: fsedit.pm:598
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr ""
-"MINDEN létező partíció és rajtuk minden adat elvész a(z) \"%s\" meghajtón"
+msgstr "MINDEN létező partíció és rajtuk minden adat elvész a(z) \"%s\" meghajtón"
 
 #: fs/partitioning_wizard.pm:220
 #, c-format
@@ -2801,14 +2848,12 @@ msgstr "kiszolgáló"
 #: fsedit.pm:136
 #, c-format
 msgid "BIOS software RAID detected on disks %s. Activate it?"
-msgstr ""
-"A következő lemezeken BIOS-os szoftveres RAID van: %s. Kívánja aktiválni?"
+msgstr "A következő lemezeken BIOS-os szoftveres RAID van: %s. Kívánja aktiválni?"
 
 #: fsedit.pm:246
 #, c-format
 msgid ""
-"I can not read the partition table of device %s, it's too corrupted for me :"
-"(\n"
+"I can not read the partition table of device %s, it's too corrupted for me :(\n"
 "I can try to go on, erasing over bad partitions (ALL DATA will be lost!).\n"
 "The other solution is to not allow DrakX to modify the partition table.\n"
 "(the error is %s)\n"
@@ -2851,40 +2896,32 @@ msgstr ""
 
 #: fsedit.pm:435
 #, c-format
-msgid ""
-"You can not use the LVM Logical Volume for mount point %s since it spans "
-"physical volumes"
-msgstr ""
-"A(z) \"%s\" csatolási ponthoz nem használható az LVM-es logikai kötet, mivel "
-"több fizikai köteten foglal helyet."
+msgid "You can not use the LVM Logical Volume for mount point %s since it spans physical volumes"
+msgstr "A(z) \"%s\" csatolási ponthoz nem használható az LVM-es logikai kötet, mivel több fizikai köteten foglal helyet."
 
 #: fsedit.pm:437
 #, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
-"The bootloader is not able to handle this when the volume spans physical "
-"volumes.\n"
+"The bootloader is not able to handle this when the volume spans physical volumes.\n"
 "You should create a /boot partition first"
 msgstr ""
 "Egy LVM-es logikai kötetet jelölt ki gyökér-fájlrendszerként (/).\n"
-"A rendszerbetöltő nem képes kezelni ezt abban az esetben, ha a logikai "
-"kötet\n"
+"A rendszerbetöltő nem képes kezelni ezt abban az esetben, ha a logikai kötet\n"
 "több fizikai köteten helyezkedik el.\n"
 "Először hozzon létre egy /boot partíciót."
 
-#: fsedit.pm:441 fsedit.pm:443
+#: fsedit.pm:441
+#: fsedit.pm:443
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Ennek a könyvtárnak a gyökér-fájlrendszeren belül kell maradnia"
 
-#: fsedit.pm:445 fsedit.pm:447
+#: fsedit.pm:445
+#: fsedit.pm:447
 #, c-format
-msgid ""
-"You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
-"point\n"
-msgstr ""
-"Valódi fájlrendszert (Ext2, Ext3, ReiserFS, XFS vagy JFS) kell használni "
-"ennél a csatolási pontnál\n"
+msgid "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount point\n"
+msgstr "Valódi fájlrendszert (Ext2, Ext3, ReiserFS, XFS vagy JFS) kell használni ennél a csatolási pontnál\n"
 
 #: fsedit.pm:449
 #, c-format
@@ -3185,12 +3222,8 @@ msgstr "Nincs alternatív meghajtó"
 # a 2. %s egy drivert jelöl
 #: harddrake/sound.pm:378
 #, c-format
-msgid ""
-"There's no known OSS/ALSA alternative driver for your sound card (%s) which "
-"currently uses \"%s\""
-msgstr ""
-"Nincs ismert OSS/ALSA alternatív meghajtó a hangkártyához (%s) - a kártya "
-"jelenleg ezt a meghajtót használja: \"%s\""
+msgid "There's no known OSS/ALSA alternative driver for your sound card (%s) which currently uses \"%s\""
+msgstr "Nincs ismert OSS/ALSA alternatív meghajtó a hangkártyához (%s) - a kártya jelenleg ezt a meghajtót használja: \"%s\""
 
 #: harddrake/sound.pm:385
 #, c-format
@@ -3199,14 +3232,10 @@ msgstr "Hangbeállítások"
 
 #: harddrake/sound.pm:387
 #, c-format
-msgid ""
-"Here you can select an alternative driver (either OSS or ALSA) for your "
-"sound card (%s)."
-msgstr ""
-"Itt kiválaszthat egy alternatív meghajtót (OSS vagy ALSA) a hangkártyához (%"
-"s)."
+msgid "Here you can select an alternative driver (either OSS or ALSA) for your sound card (%s)."
+msgstr "Itt kiválaszthat egy alternatív meghajtót (OSS vagy ALSA) a hangkártyához (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:392
@@ -3214,50 +3243,40 @@ msgstr ""
 msgid ""
 "\n"
 "\n"
-"Your card currently use the %s\"%s\" driver (default driver for your card is "
-"\"%s\")"
+"Your card currently use the %s\"%s\" driver (default driver for your card is \"%s\")"
 msgstr ""
 "\n"
 "\n"
-"A hangkártya jelenleg a(z) %s\"%s\" meghajtót használja (a kártya "
-"alapértelmezett meghajtója: \"%s\")"
+"A hangkártya jelenleg a(z) %s\"%s\" meghajtót használja (a kártya alapértelmezett meghajtója: \"%s\")"
 
 #: harddrake/sound.pm:394
 #, c-format
 msgid ""
-"OSS (Open Sound System) was the first sound API. It's an OS independent "
-"sound API (it's available on most UNIX(tm) systems) but it's a very basic "
-"and limited API.\n"
+"OSS (Open Sound System) was the first sound API. It's an OS independent sound API (it's available on most UNIX(tm) systems) but it's a very basic and limited API.\n"
 "What's more, OSS drivers all reinvent the wheel.\n"
 "\n"
-"ALSA (Advanced Linux Sound Architecture) is a modularized architecture "
-"which\n"
+"ALSA (Advanced Linux Sound Architecture) is a modularized architecture which\n"
 "supports quite a large range of ISA, USB and PCI cards.\n"
 "\n"
 "It also provides a much higher API than OSS.\n"
 "\n"
 "To use alsa, one can either use:\n"
 "- the old compatibility OSS api\n"
-"- the new ALSA api that provides many enhanced features but requires using "
-"the ALSA library.\n"
+"- the new ALSA api that provides many enhanced features but requires using the ALSA library.\n"
 msgstr ""
-"Az OSS (Open Sound System) volt az első hang függvénykönyvtár. "
-"Operációsrendszer-független (elérhető a legtöbb UNIX-rendszeren), viszont a "
-"képességei korlátozottak.\n"
-"Hátránya az OSS-nek, hogy az ahhoz készült meghajtókban feleslegesen meg "
-"kell valósítani olyan funkciókat is, amelyek máshol már léteznek.\n"
+"Az OSS (Open Sound System) volt az első hang függvénykönyvtár. Operációsrendszer-független (elérhető a legtöbb UNIX-rendszeren), viszont a képességei korlátozottak.\n"
+"Hátránya az OSS-nek, hogy az ahhoz készült meghajtókban feleslegesen meg kell valósítani olyan funkciókat is, amelyek máshol már léteznek.\n"
 "\n"
-"Az ALSA (Advanced Linux Sound Architecture) egy modularizált architektúra, "
-"amely nagyszámú ISA-, USB- és PCI-hangkártyát támogat.\n"
+"Az ALSA (Advanced Linux Sound Architecture) egy modularizált architektúra, amely nagyszámú ISA-, USB- és PCI-hangkártyát támogat.\n"
 "\n"
 "Az ALSA fejlettebb függvénykönyvtárt biztosít, mint az OSS.\n"
 "\n"
 "Az ALSA kétféleképpen használható:\n"
 " - OSS-kompatibilis üzemmódot biztosító hívásokkal;\n"
-" - ALSA-hívásokkal, amelyek fejlettebb funkciókat valósítanak meg, de ehhez "
-"szükség van az ALSA-könyvtár használatára.\n"
+" - ALSA-hívásokkal, amelyek fejlettebb funkciókat valósítanak meg, de ehhez szükség van az ALSA-könyvtár használatára.\n"
 
-#: harddrake/sound.pm:408 harddrake/sound.pm:491
+#: harddrake/sound.pm:408
+#: harddrake/sound.pm:491
 #, c-format
 msgid "Driver:"
 msgstr "Meghajtó:"
@@ -3285,12 +3304,8 @@ msgstr "Nincs nyílt forrású meghajtó"
 # a 2. %s egy drivert jelöl
 #: harddrake/sound.pm:431
 #, c-format
-msgid ""
-"There's no free driver for your sound card (%s), but there's a proprietary "
-"driver at \"%s\"."
-msgstr ""
-"Nincs szabadon használható meghajtó a hangkártyához (%s), viszont létezik "
-"kötött licencelésű meghajtó: \"%s\"."
+msgid "There's no free driver for your sound card (%s), but there's a proprietary driver at \"%s\"."
+msgstr "Nincs szabadon használható meghajtó a hangkártyához (%s), viszont létezik kötött licencelésű meghajtó: \"%s\"."
 
 #: harddrake/sound.pm:434
 #, c-format
@@ -3314,8 +3329,7 @@ msgid ""
 "The classic bug sound tester is to run the following commands:\n"
 "\n"
 "\n"
-"- \"lspcidrake -v | fgrep -i AUDIO\" will tell you which driver your card "
-"uses\n"
+"- \"lspcidrake -v | fgrep -i AUDIO\" will tell you which driver your card uses\n"
 "by default\n"
 "\n"
 "- \"grep sound-slot /etc/modprobe.conf\" will tell you what driver it\n"
@@ -3338,8 +3352,7 @@ msgstr ""
 "- \"lspcidrake -v | fgrep -i AUDIO\": kiírja, melyik meghajtót használja\n"
 "alapértelmezésben a hangkártya\n"
 "\n"
-"- \"grep sound-slot /etc/modprobe.conf\": kiírja, milyen meghajtó "
-"használata\n"
+"- \"grep sound-slot /etc/modprobe.conf\": kiírja, milyen meghajtó használata\n"
 "van jelenleg beállítva\n"
 "\n"
 "- \"/sbin/lsmod\": ezzel ellenőrizhető, hogy be van-e töltve a megfelelő\n"
@@ -3368,8 +3381,7 @@ msgstr "Tetszőleges meghajtó kiválasztása"
 #: harddrake/sound.pm:486
 #, c-format
 msgid ""
-"If you really think that you know which driver is the right one for your "
-"card\n"
+"If you really think that you know which driver is the right one for your card\n"
 "you can pick one in the above list.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
@@ -3384,7 +3396,9 @@ msgstr ""
 msgid "Auto-detect"
 msgstr "Automatikus azonosítás"
 
-#: harddrake/v4l.pm:97 harddrake/v4l.pm:285 harddrake/v4l.pm:337
+#: harddrake/v4l.pm:97
+#: harddrake/v4l.pm:285
+#: harddrake/v4l.pm:337
 #, c-format
 msgid "Unknown|Generic"
 msgstr "Ismeretlen|Általános"
@@ -3402,16 +3416,11 @@ msgstr "Ismeretlen|CPH06X (bt878) [több gyártó]"
 #: harddrake/v4l.pm:475
 #, c-format
 msgid ""
-"For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-"
-"detect the rights parameters.\n"
-"If your card is misdetected, you can force the right tuner and card types "
-"here. Just select your tv card parameters if needed."
+"For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-detect the rights parameters.\n"
+"If your card is misdetected, you can force the right tuner and card types here. Just select your tv card parameters if needed."
 msgstr ""
-"A legtöbb modern tévékártya esetén a Linux kernel bttv modulja automatikusan "
-"meghatározza a megfelelő paramétereket.\n"
-"Ha az Ön kártyáját a rendszer helytelenül határozta meg, akkor itt "
-"beállítható a megfelelő tuner- és kártyatípus. Ha szükséges, adja meg a "
-"tévékártya-paramétereket."
+"A legtöbb modern tévékártya esetén a Linux kernel bttv modulja automatikusan meghatározza a megfelelő paramétereket.\n"
+"Ha az Ön kártyáját a rendszer helytelenül határozta meg, akkor itt beállítható a megfelelő tuner- és kártyatípus. Ha szükséges, adja meg a tévékártya-paramétereket."
 
 #: harddrake/v4l.pm:478
 #, c-format
@@ -3423,20 +3432,35 @@ msgstr "Kártyatípus:"
 msgid "Tuner type:"
 msgstr "Tuner típus:"
 
-#: interactive.pm:128 interactive.pm:549 interactive/curses.pm:263
-#: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
-#: interactive/stdio.pm:148 interactive/stdio.pm:149 mygtk2.pm:802
-#: ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
+#: interactive.pm:128
+#: interactive.pm:549
+#: interactive/curses.pm:263
+#: interactive/http.pm:103
+#: interactive/http.pm:156
+#: interactive/stdio.pm:39
+#: interactive/stdio.pm:148
+#: interactive/stdio.pm:149
+#: mygtk2.pm:802
+#: ugtk2.pm:421
+#: ugtk2.pm:519
+#: ugtk2.pm:812
+#: ugtk2.pm:835
 #, c-format
 msgid "Ok"
 msgstr "OK"
 
-#: interactive.pm:228 modules/interactive.pm:71 ugtk2.pm:811 wizards.pm:156
+#: interactive.pm:228
+#: modules/interactive.pm:71
+#: ugtk2.pm:811
+#: wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "Igen"
 
-#: interactive.pm:228 modules/interactive.pm:71 ugtk2.pm:811 wizards.pm:156
+#: interactive.pm:228
+#: modules/interactive.pm:71
+#: ugtk2.pm:811
+#: wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "Nem"
@@ -3446,27 +3470,34 @@ msgstr "Nem"
 msgid "Choose a file"
 msgstr "Válasszon egy fájlt"
 
-#: interactive.pm:387 interactive/gtk.pm:455
+#: interactive.pm:387
+#: interactive/gtk.pm:455
 #, c-format
 msgid "Add"
 msgstr "Hozzáadás"
 
-#: interactive.pm:387 interactive/gtk.pm:455
+#: interactive.pm:387
+#: interactive/gtk.pm:455
 #, c-format
 msgid "Modify"
 msgstr "Módosítás"
 
-#: interactive.pm:387 interactive/gtk.pm:455
+#: interactive.pm:387
+#: interactive/gtk.pm:455
 #, c-format
 msgid "Remove"
 msgstr "Eltávolítás"
 
-#: interactive.pm:549 interactive/curses.pm:263 ugtk2.pm:519
+#: interactive.pm:549
+#: interactive/curses.pm:263
+#: ugtk2.pm:519
 #, c-format
 msgid "Finish"
 msgstr "Befejezés"
 
-#: interactive.pm:550 interactive/curses.pm:260 ugtk2.pm:517
+#: interactive.pm:550
+#: interactive/curses.pm:260
+#: ugtk2.pm:517
 #, c-format
 msgid "Previous"
 msgstr "Előző"
@@ -3476,12 +3507,14 @@ msgstr "Előző"
 msgid "Beware, Caps Lock is enabled"
 msgstr "Figyelmeztetés: a Caps Lock be van kapcsolva"
 
-#: interactive/stdio.pm:29 interactive/stdio.pm:154
+#: interactive/stdio.pm:29
+#: interactive/stdio.pm:154
 #, c-format
 msgid "Bad choice, try again\n"
 msgstr "Nem megfelelő választás, próbálja meg újra\n"
 
-#: interactive/stdio.pm:30 interactive/stdio.pm:155
+#: interactive/stdio.pm:30
+#: interactive/stdio.pm:155
 #, c-format
 msgid "Your choice? (default %s) "
 msgstr "Melyiket választja? (az alapértelmezés: %s) "
@@ -3565,7 +3598,8 @@ msgstr "default:LTR"
 msgid "Andorra"
 msgstr "Andorra"
 
-#: lang.pm:211 timezone.pm:226
+#: lang.pm:211
+#: timezone.pm:226
 #, c-format
 msgid "United Arab Emirates"
 msgstr "Egyesült Arab Emirátusok"
@@ -3610,7 +3644,8 @@ msgstr "Angola"
 msgid "Antarctica"
 msgstr "Antarktisz"
 
-#: lang.pm:220 timezone.pm:271
+#: lang.pm:220
+#: timezone.pm:271
 #, c-format
 msgid "Argentina"
 msgstr "Argentína"
@@ -3620,12 +3655,16 @@ msgstr "Argentína"
 msgid "American Samoa"
 msgstr "Amerikai Szamoa"
 
-#: lang.pm:222 mirror.pm:12 timezone.pm:229
+#: lang.pm:222
+#: mirror.pm:12
+#: timezone.pm:229
 #, c-format
 msgid "Austria"
 msgstr "Ausztria"
 
-#: lang.pm:223 mirror.pm:11 timezone.pm:267
+#: lang.pm:223
+#: mirror.pm:11
+#: timezone.pm:267
 #, c-format
 msgid "Australia"
 msgstr "Ausztrália"
@@ -3650,12 +3689,15 @@ msgstr "Bosznia és Hercegovina"
 msgid "Barbados"
 msgstr "Barbados"
 
-#: lang.pm:228 timezone.pm:211
+#: lang.pm:228
+#: timezone.pm:211
 #, c-format
 msgid "Bangladesh"
 msgstr "Banglades"
 
-#: lang.pm:229 mirror.pm:13 timezone.pm:231
+#: lang.pm:229
+#: mirror.pm:13
+#: timezone.pm:231
 #, c-format
 msgid "Belgium"
 msgstr "Belgium"
@@ -3665,7 +3707,8 @@ msgstr "Belgium"
 msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
-#: lang.pm:231 timezone.pm:232
+#: lang.pm:231
+#: timezone.pm:232
 #, c-format
 msgid "Bulgaria"
 msgstr "Bulgária"
@@ -3700,7 +3743,9 @@ msgstr "Brunei Darussalam"
 msgid "Bolivia"
 msgstr "Bolívia"
 
-#: lang.pm:238 mirror.pm:14 timezone.pm:272
+#: lang.pm:238
+#: mirror.pm:14
+#: timezone.pm:272
 #, c-format
 msgid "Brazil"
 msgstr "Brazília"
@@ -3725,7 +3770,8 @@ msgstr "Bouvet-sziget"
 msgid "Botswana"
 msgstr "Botswana"
 
-#: lang.pm:243 timezone.pm:230
+#: lang.pm:243
+#: timezone.pm:230
 #, c-format
 msgid "Belarus"
 msgstr "Fehéroroszország"
@@ -3735,7 +3781,9 @@ msgstr "Fehéroroszország"
 msgid "Belize"
 msgstr "Belize"
 
-#: lang.pm:245 mirror.pm:15 timezone.pm:261
+#: lang.pm:245
+#: mirror.pm:15
+#: timezone.pm:261
 #, c-format
 msgid "Canada"
 msgstr "Kanada"
@@ -3760,7 +3808,9 @@ msgstr "Közép-Afrikai Köztársaság"
 msgid "Congo (Brazzaville)"
 msgstr "Kongó (Brazzaville)"
 
-#: lang.pm:250 mirror.pm:39 timezone.pm:255
+#: lang.pm:250
+#: mirror.pm:39
+#: timezone.pm:255
 #, c-format
 msgid "Switzerland"
 msgstr "Svájc"
@@ -3775,7 +3825,8 @@ msgstr "Elefántcsontpart"
 msgid "Cook Islands"
 msgstr "Cook-szigetek"
 
-#: lang.pm:253 timezone.pm:273
+#: lang.pm:253
+#: timezone.pm:273
 #, c-format
 msgid "Chile"
 msgstr "Chile"
@@ -3785,7 +3836,8 @@ msgstr "Chile"
 msgid "Cameroon"
 msgstr "Kamerun"
 
-#: lang.pm:255 timezone.pm:212
+#: lang.pm:255
+#: timezone.pm:212
 #, c-format
 msgid "China"
 msgstr "Kína"
@@ -3795,7 +3847,8 @@ msgstr "Kína"
 msgid "Colombia"
 msgstr "Kolumbia"
 
-#: lang.pm:257 mirror.pm:16
+#: lang.pm:257
+#: mirror.pm:16
 #, c-format
 msgid "Costa Rica"
 msgstr "Costa Rica"
@@ -3825,12 +3878,16 @@ msgstr "Karácsony-sziget"
 msgid "Cyprus"
 msgstr "Ciprus"
 
-#: lang.pm:263 mirror.pm:17 timezone.pm:233
+#: lang.pm:263
+#: mirror.pm:17
+#: timezone.pm:233
 #, c-format
 msgid "Czech Republic"
 msgstr "Cseh Köztársaság"
 
-#: lang.pm:264 mirror.pm:22 timezone.pm:238
+#: lang.pm:264
+#: mirror.pm:22
+#: timezone.pm:238
 #, c-format
 msgid "Germany"
 msgstr "Németország"
@@ -3840,7 +3897,9 @@ msgstr "Németország"
 msgid "Djibouti"
 msgstr "Dzsibuti"
 
-#: lang.pm:266 mirror.pm:18 timezone.pm:234
+#: lang.pm:266
+#: mirror.pm:18
+#: timezone.pm:234
 #, c-format
 msgid "Denmark"
 msgstr "Dánia"
@@ -3865,7 +3924,9 @@ msgstr "Algéria"
 msgid "Ecuador"
 msgstr "Ecuador"
 
-#: lang.pm:271 mirror.pm:19 timezone.pm:235
+#: lang.pm:271
+#: mirror.pm:19
+#: timezone.pm:235
 #, c-format
 msgid "Estonia"
 msgstr "Észtország"
@@ -3885,7 +3946,9 @@ msgstr "Nyugat-Szahara"
 msgid "Eritrea"
 msgstr "Eritrea"
 
-#: lang.pm:275 mirror.pm:37 timezone.pm:253
+#: lang.pm:275
+#: mirror.pm:37
+#: timezone.pm:253
 #, c-format
 msgid "Spain"
 msgstr "Spanyolország"
@@ -3895,7 +3958,9 @@ msgstr "Spanyolország"
 msgid "Ethiopia"
 msgstr "Etiópia"
 
-#: lang.pm:277 mirror.pm:20 timezone.pm:236
+#: lang.pm:277
+#: mirror.pm:20
+#: timezone.pm:236
 #, c-format
 msgid "Finland"
 msgstr "Finnország"
@@ -3920,7 +3985,9 @@ msgstr "Mikronézia"
 msgid "Faroe Islands"
 msgstr "Feröer-szigetek"
 
-#: lang.pm:282 mirror.pm:21 timezone.pm:237
+#: lang.pm:282
+#: mirror.pm:21
+#: timezone.pm:237
 #, c-format
 msgid "France"
 msgstr "Franciaország"
@@ -3930,7 +3997,8 @@ msgstr "Franciaország"
 msgid "Gabon"
 msgstr "Gabon"
 
-#: lang.pm:284 timezone.pm:257
+#: lang.pm:284
+#: timezone.pm:257
 #, c-format
 msgid "United Kingdom"
 msgstr "Egyesült Királyság"
@@ -3985,7 +4053,9 @@ msgstr "Guadeloupe"
 msgid "Equatorial Guinea"
 msgstr "Egyenlítői Guinea"
 
-#: lang.pm:295 mirror.pm:23 timezone.pm:239
+#: lang.pm:295
+#: mirror.pm:23
+#: timezone.pm:239
 #, c-format
 msgid "Greece"
 msgstr "Görögország"
@@ -3995,7 +4065,8 @@ msgstr "Görögország"
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Dél-Georgia és a Dél-Sandwich-szigetek"
 
-#: lang.pm:297 timezone.pm:262
+#: lang.pm:297
+#: timezone.pm:262
 #, c-format
 msgid "Guatemala"
 msgstr "Guatemala"
@@ -4040,27 +4111,35 @@ msgstr "Horvátország"
 msgid "Haiti"
 msgstr "Haiti"
 
-#: lang.pm:306 mirror.pm:24 timezone.pm:240
+#: lang.pm:306
+#: mirror.pm:24
+#: timezone.pm:240
 #, c-format
 msgid "Hungary"
 msgstr "Magyarország"
 
-#: lang.pm:307 timezone.pm:215
+#: lang.pm:307
+#: timezone.pm:215
 #, c-format
 msgid "Indonesia"
 msgstr "Indonézia"
 
-#: lang.pm:308 mirror.pm:25 timezone.pm:241
+#: lang.pm:308
+#: mirror.pm:25
+#: timezone.pm:241
 #, c-format
 msgid "Ireland"
 msgstr "Írország"
 
-#: lang.pm:309 mirror.pm:26 timezone.pm:217
+#: lang.pm:309
+#: mirror.pm:26
+#: timezone.pm:217
 #, c-format
 msgid "Israel"
 msgstr "Izrael"
 
-#: lang.pm:310 timezone.pm:214
+#: lang.pm:310
+#: timezone.pm:214
 #, c-format
 msgid "India"
 msgstr "India"
@@ -4075,7 +4154,8 @@ msgstr "Brit indiai-óceáni terület"
 msgid "Iraq"
 msgstr "Irak"
 
-#: lang.pm:313 timezone.pm:216
+#: lang.pm:313
+#: timezone.pm:216
 #, c-format
 msgid "Iran"
 msgstr "Irán"
@@ -4085,7 +4165,9 @@ msgstr "Irán"
 msgid "Iceland"
 msgstr "Izland"
 
-#: lang.pm:315 mirror.pm:27 timezone.pm:242
+#: lang.pm:315
+#: mirror.pm:27
+#: timezone.pm:242
 #, c-format
 msgid "Italy"
 msgstr "Olaszország"
@@ -4100,7 +4182,9 @@ msgstr "Jamaica"
 msgid "Jordan"
 msgstr "Jordánia"
 
-#: lang.pm:318 mirror.pm:28 timezone.pm:218
+#: lang.pm:318
+#: mirror.pm:28
+#: timezone.pm:218
 #, c-format
 msgid "Japan"
 msgstr "Japán"
@@ -4140,7 +4224,8 @@ msgstr "Saint Kitts és Nevis"
 msgid "Korea (North)"
 msgstr "Korea (Észak)"
 
-#: lang.pm:326 timezone.pm:219
+#: lang.pm:326
+#: timezone.pm:219
 #, c-format
 msgid "Korea"
 msgstr "Korea"
@@ -4195,12 +4280,14 @@ msgstr "Libéria"
 msgid "Lesotho"
 msgstr "Lesotho"
 
-#: lang.pm:337 timezone.pm:243
+#: lang.pm:337
+#: timezone.pm:243
 #, c-format
 msgid "Lithuania"
 msgstr "Litvánia"
 
-#: lang.pm:338 timezone.pm:244
+#: lang.pm:338
+#: timezone.pm:244
 #, c-format
 msgid "Luxembourg"
 msgstr "Luxemburg"
@@ -4300,12 +4387,14 @@ msgstr "Maldív-szigetek"
 msgid "Malawi"
 msgstr "Malawi"
 
-#: lang.pm:358 timezone.pm:263
+#: lang.pm:358
+#: timezone.pm:263
 #, c-format
 msgid "Mexico"
 msgstr "Mexikó"
 
-#: lang.pm:359 timezone.pm:220
+#: lang.pm:359
+#: timezone.pm:220
 #, c-format
 msgid "Malaysia"
 msgstr "Malajzia"
@@ -4345,12 +4434,16 @@ msgstr "Nigéria"
 msgid "Nicaragua"
 msgstr "Nicaragua"
 
-#: lang.pm:367 mirror.pm:29 timezone.pm:245
+#: lang.pm:367
+#: mirror.pm:29
+#: timezone.pm:245
 #, c-format
 msgid "Netherlands"
 msgstr "Hollandia"
 
-#: lang.pm:368 mirror.pm:31 timezone.pm:246
+#: lang.pm:368
+#: mirror.pm:31
+#: timezone.pm:246
 #, c-format
 msgid "Norway"
 msgstr "Norvégia"
@@ -4370,7 +4463,9 @@ msgstr "Nauru"
 msgid "Niue"
 msgstr "Niue"
 
-#: lang.pm:372 mirror.pm:30 timezone.pm:268
+#: lang.pm:372
+#: mirror.pm:30
+#: timezone.pm:268
 #, c-format
 msgid "New Zealand"
 msgstr "Új-Zéland"
@@ -4400,7 +4495,8 @@ msgstr "Francia Polinézia"
 msgid "Papua New Guinea"
 msgstr "Pápua Új-Guinea"
 
-#: lang.pm:378 timezone.pm:221
+#: lang.pm:378
+#: timezone.pm:221
 #, c-format
 msgid "Philippines"
 msgstr "Fülöp-szigetek"
@@ -4410,7 +4506,9 @@ msgstr "Fülöp-szigetek"
 msgid "Pakistan"
 msgstr "Pakisztán"
 
-#: lang.pm:380 mirror.pm:32 timezone.pm:247
+#: lang.pm:380
+#: mirror.pm:32
+#: timezone.pm:247
 #, c-format
 msgid "Poland"
 msgstr "Lengyelország"
@@ -4435,7 +4533,9 @@ msgstr "Puerto Rico"
 msgid "Palestine"
 msgstr "Palesztina"
 
-#: lang.pm:385 mirror.pm:33 timezone.pm:248
+#: lang.pm:385
+#: mirror.pm:33
+#: timezone.pm:248
 #, c-format
 msgid "Portugal"
 msgstr "Portugália"
@@ -4460,12 +4560,14 @@ msgstr "Qatar"
 msgid "Reunion"
 msgstr "Réunion"
 
-#: lang.pm:390 timezone.pm:249
+#: lang.pm:390
+#: timezone.pm:249
 #, c-format
 msgid "Romania"
 msgstr "Románia"
 
-#: lang.pm:391 mirror.pm:34
+#: lang.pm:391
+#: mirror.pm:34
 #, c-format
 msgid "Russia"
 msgstr "Oroszország"
@@ -4495,12 +4597,15 @@ msgstr "Seychelles"
 msgid "Sudan"
 msgstr "Szudán"
 
-#: lang.pm:397 mirror.pm:38 timezone.pm:254
+#: lang.pm:397
+#: mirror.pm:38
+#: timezone.pm:254
 #, c-format
 msgid "Sweden"
 msgstr "Svédország"
 
-#: lang.pm:398 timezone.pm:222
+#: lang.pm:398
+#: timezone.pm:222
 #, c-format
 msgid "Singapore"
 msgstr "Szingapúr"
@@ -4510,7 +4615,8 @@ msgstr "Szingapúr"
 msgid "Saint Helena"
 msgstr "Saint Helena"
 
-#: lang.pm:400 timezone.pm:252
+#: lang.pm:400
+#: timezone.pm:252
 #, c-format
 msgid "Slovenia"
 msgstr "Szlovénia"
@@ -4520,7 +4626,9 @@ msgstr "Szlovénia"
 msgid "Svalbard and Jan Mayen Islands"
 msgstr "Svalbard és Jan Mayen-szigetek"
 
-#: lang.pm:402 mirror.pm:35 timezone.pm:251
+#: lang.pm:402
+#: mirror.pm:35
+#: timezone.pm:251
 #, c-format
 msgid "Slovakia"
 msgstr "Szlovákia"
@@ -4591,7 +4699,9 @@ msgstr "Déli francia területek"
 msgid "Togo"
 msgstr "Togo"
 
-#: lang.pm:416 mirror.pm:41 timezone.pm:224
+#: lang.pm:416
+#: mirror.pm:41
+#: timezone.pm:224
 #, c-format
 msgid "Thailand"
 msgstr "Thaiföld"
@@ -4626,7 +4736,8 @@ msgstr "Tunézia"
 msgid "Tonga"
 msgstr "Tonga"
 
-#: lang.pm:423 timezone.pm:225
+#: lang.pm:423
+#: timezone.pm:225
 #, c-format
 msgid "Turkey"
 msgstr "Törökország"
@@ -4641,17 +4752,21 @@ msgstr "Trinidad és Tobago"
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
-#: lang.pm:426 mirror.pm:40 timezone.pm:223
+#: lang.pm:426
+#: mirror.pm:40
+#: timezone.pm:223
 #, c-format
 msgid "Taiwan"
 msgstr "Tajvan"
 
-#: lang.pm:427 timezone.pm:208
+#: lang.pm:427
+#: timezone.pm:208
 #, c-format
 msgid "Tanzania"
 msgstr "Tanzánia"
 
-#: lang.pm:428 timezone.pm:256
+#: lang.pm:428
+#: timezone.pm:256
 #, c-format
 msgid "Ukraine"
 msgstr "Ukrajna"
@@ -4666,7 +4781,9 @@ msgstr "Uganda"
 msgid "United States Minor Outlying Islands"
 msgstr "Amerikai Egyesült Államok - kisebb külső szigetek"
 
-#: lang.pm:431 mirror.pm:42 timezone.pm:264
+#: lang.pm:431
+#: mirror.pm:42
+#: timezone.pm:264
 #, c-format
 msgid "United States"
 msgstr "Amerikai Egyesült Államok"
@@ -4736,7 +4853,9 @@ msgstr "Jemen"
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: lang.pm:445 mirror.pm:36 timezone.pm:207
+#: lang.pm:445
+#: mirror.pm:36
+#: timezone.pm:207
 #, c-format
 msgid "South Africa"
 msgstr "Dél-Afrika"
@@ -4759,9 +4878,7 @@ msgstr "Üdvözöljük - %s"
 #: lvm.pm:84
 #, c-format
 msgid "Moving used physical extents to other physical volumes failed"
-msgstr ""
-"Nem sikerült áthelyezni a használatban levő fizikai kiterjedéseket más "
-"fizikai kötetekre"
+msgstr "Nem sikerült áthelyezni a használatban levő fizikai kiterjedéseket más fizikai kötetekre"
 
 #: lvm.pm:141
 #, c-format
@@ -4776,361 +4893,236 @@ msgstr "Először törölje az összes logikai kötetet\n"
 #: lvm.pm:184
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
-msgstr ""
-"A rendszerbetöltő nem képes olyan /boot fájlrendszert kezelni, amely több "
-"fizikai köteten helyezkedik el"
+msgstr "A rendszerbetöltő nem képes olyan /boot fájlrendszert kezelni, amely több fizikai köteten helyezkedik el"
 
 #: messages.pm:11
 #, c-format
 msgid ""
 "Introduction\n"
 "\n"
-"The operating system and the different components available in the Mandriva "
-"Linux distribution \n"
-"shall be called the \"Software Products\" hereafter. The Software Products "
-"include, but are not \n"
-"restricted to, the set of programs, methods, rules and documentation related "
-"to the operating \n"
-"system and the different components of the Mandriva Linux distribution, and "
-"any applications \n"
-"distributed with these products provided by Mandriva's licensors or "
-"suppliers.\n"
+"The operating system and the different components available in the Mandriva Linux distribution \n"
+"shall be called the \"Software Products\" hereafter. The Software Products include, but are not \n"
+"restricted to, the set of programs, methods, rules and documentation related to the operating \n"
+"system and the different components of the Mandriva Linux distribution, and any applications \n"
+"distributed with these products provided by Mandriva's licensors or suppliers.\n"
 "\n"
 "\n"
 "1. License Agreement\n"
 "\n"
-"Please read this document carefully. This document is a license agreement "
-"between you and  \n"
+"Please read this document carefully. This document is a license agreement between you and  \n"
 "Mandriva S.A. which applies to the Software Products.\n"
-"By installing, duplicating or using any of the Software Products in any "
-"manner, you explicitly \n"
-"accept and fully agree to conform to the terms and conditions of this "
-"License. \n"
-"If you disagree with any portion of the License, you are not allowed to "
-"install, duplicate or use \n"
+"By installing, duplicating or using any of the Software Products in any manner, you explicitly \n"
+"accept and fully agree to conform to the terms and conditions of this License. \n"
+"If you disagree with any portion of the License, you are not allowed to install, duplicate or use \n"
 "the Software Products. \n"
-"Any attempt to install, duplicate or use the Software Products in a manner "
-"which does not comply \n"
-"with the terms and conditions of this License is void and will terminate "
-"your rights under this \n"
-"License. Upon termination of the License,  you must immediately destroy all "
-"copies of the \n"
+"Any attempt to install, duplicate or use the Software Products in a manner which does not comply \n"
+"with the terms and conditions of this License is void and will terminate your rights under this \n"
+"License. Upon termination of the License,  you must immediately destroy all copies of the \n"
 "Software Products.\n"
 "\n"
 "\n"
 "2. Limited Warranty\n"
 "\n"
-"The Software Products and attached documentation are provided \"as is\", "
-"with no warranty, to the \n"
+"The Software Products and attached documentation are provided \"as is\", with no warranty, to the \n"
 "extent permitted by law.\n"
-"Neither Mandriva S.A. nor its licensors or suppliers will, in any "
-"circumstances and to the extent \n"
-"permitted by law, be liable for any special, incidental, direct or indirect "
-"damages whatsoever \n"
-"(including without limitation damages for loss of business, interruption of "
-"business, financial \n"
-"loss, legal fees and penalties resulting from a court judgment, or any other "
-"consequential loss) \n"
-"arising out of  the use or inability to use the Software Products, even if "
-"Mandriva S.A. or its \n"
-"licensors or suppliers have been advised of the possibility or occurrence of "
-"such damages.\n"
+"Neither Mandriva S.A. nor its licensors or suppliers will, in any circumstances and to the extent \n"
+"permitted by law, be liable for any special, incidental, direct or indirect damages whatsoever \n"
+"(including without limitation damages for loss of business, interruption of business, financial \n"
+"loss, legal fees and penalties resulting from a court judgment, or any other consequential loss) \n"
+"arising out of  the use or inability to use the Software Products, even if Mandriva S.A. or its \n"
+"licensors or suppliers have been advised of the possibility or occurrence of such damages.\n"
 "\n"
-"LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME "
-"COUNTRIES\n"
+"LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME COUNTRIES\n"
 "\n"
-"To the extent permitted by law, neither Mandriva S.A. nor its licensors, "
-"suppliers or\n"
-"distributors will, in any circumstances, be liable for any special, "
-"incidental, direct or indirect \n"
-"damages whatsoever (including without limitation damages for loss of "
-"business, interruption of \n"
-"business, financial loss, legal fees and penalties resulting from a court "
-"judgment, or any \n"
-"other consequential loss) arising out of the possession and use of software "
-"components or \n"
-"arising out of  downloading software components from one of Mandriva Linux "
-"sites which are \n"
+"To the extent permitted by law, neither Mandriva S.A. nor its licensors, suppliers or\n"
+"distributors will, in any circumstances, be liable for any special, incidental, direct or indirect \n"
+"damages whatsoever (including without limitation damages for loss of business, interruption of \n"
+"business, financial loss, legal fees and penalties resulting from a court judgment, or any \n"
+"other consequential loss) arising out of the possession and use of software components or \n"
+"arising out of  downloading software components from one of Mandriva Linux sites which are \n"
 "prohibited or restricted in some countries by local laws.\n"
-"This limited liability applies to, but is not restricted to, the strong "
-"cryptography components \n"
+"This limited liability applies to, but is not restricted to, the strong cryptography components \n"
 "included in the Software Products.\n"
-"However, because some jurisdictions do not allow the exclusion or limitation "
-"or liability for \n"
-"consequential or incidental damages, the above limitation may not apply to "
-"you.  \n"
+"However, because some jurisdictions do not allow the exclusion or limitation or liability for \n"
+"consequential or incidental damages, the above limitation may not apply to you.  \n"
 "%s\n"
 "\n"
 "3. The GPL License and Related Licenses\n"
 "\n"
-"The Software Products consist of components created by different persons or "
-"entities. %s\n"
-"Most of these licenses allow you to use, duplicate, adapt or redistribute "
-"the components which \n"
-"they cover. Please read carefully the terms and conditions of the license "
-"agreement for each component \n"
-"before using any component. Any question on a component license should be "
-"addressed to the component \n"
+"The Software Products consist of components created by different persons or entities. %s\n"
+"Most of these licenses allow you to use, duplicate, adapt or redistribute the components which \n"
+"they cover. Please read carefully the terms and conditions of the license agreement for each component \n"
+"before using any component. Any question on a component license should be addressed to the component \n"
 "licensor or supplier and not to Mandriva.\n"
-"The programs developed by Mandriva S.A. are governed by the GPL License. "
-"Documentation written \n"
-"by Mandriva S.A. is governed by a specific license. Please refer to the "
-"documentation for \n"
+"The programs developed by Mandriva S.A. are governed by the GPL License. Documentation written \n"
+"by Mandriva S.A. is governed by a specific license. Please refer to the documentation for \n"
 "further details.\n"
 "\n"
 "\n"
 "4. Intellectual Property Rights\n"
 "\n"
-"All rights to the components of the Software Products belong to their "
-"respective authors and are \n"
-"protected by intellectual property and copyright laws applicable to software "
-"programs.\n"
-"Mandriva S.A. and its suppliers and licensors reserves their rights to "
-"modify or adapt the Software \n"
+"All rights to the components of the Software Products belong to their respective authors and are \n"
+"protected by intellectual property and copyright laws applicable to software programs.\n"
+"Mandriva S.A. and its suppliers and licensors reserves their rights to modify or adapt the Software \n"
 "Products, as a whole or in parts, by all means and for all purposes.\n"
-"\"Mandriva\", \"Mandriva Linux\" and associated logos are trademarks of "
-"Mandriva S.A.  \n"
+"\"Mandriva\", \"Mandriva Linux\" and associated logos are trademarks of Mandriva S.A.  \n"
 "\n"
 "\n"
 "5. Governing Laws \n"
 "\n"
-"If any portion of this agreement is held void, illegal or inapplicable by a "
-"court judgment, this \n"
-"portion is excluded from this contract. You remain bound by the other "
-"applicable sections of the \n"
+"If any portion of this agreement is held void, illegal or inapplicable by a court judgment, this \n"
+"portion is excluded from this contract. You remain bound by the other applicable sections of the \n"
 "agreement.\n"
-"The terms and conditions of this License are governed by the Laws of "
-"France.\n"
-"All disputes on the terms of this license will preferably be settled out of "
-"court. As a last \n"
-"resort, the dispute will be referred to the appropriate Courts of Law of "
-"Paris - France.\n"
+"The terms and conditions of this License are governed by the Laws of France.\n"
+"All disputes on the terms of this license will preferably be settled out of court. As a last \n"
+"resort, the dispute will be referred to the appropriate Courts of Law of Paris - France.\n"
 "For any question on this document, please contact Mandriva S.A."
 msgstr ""
 "Bevezetés\n"
 "\n"
-"A továbbiakban az operációs rendszerre és a Mandriva Linux disztribúcióban "
-"elérhető\n"
-"különféle komponensekre \"Szoftvertermékek\" néven hivatkozunk. A "
-"Szoftvertermékek körébe - nem\n"
-"kizárólagosan - beletartoznak az operációs rendszerhez és a Mandriva Linux "
-"disztribúció\n"
-"különféle komponenseihez kapcsolódó programok, módszerek, szabályok és "
-"dokumentáció a Mandriva által \n"
+"A továbbiakban az operációs rendszerre és a Mandriva Linux disztribúcióban elérhető\n"
+"különféle komponensekre \"Szoftvertermékek\" néven hivatkozunk. A Szoftvertermékek körébe - nem\n"
+"kizárólagosan - beletartoznak az operációs rendszerhez és a Mandriva Linux disztribúció\n"
+"különféle komponenseihez kapcsolódó programok, módszerek, szabályok és dokumentáció a Mandriva által \n"
 "licencelt és támogatott termékekkel együtt.\n"
 "\n"
 "\n"
 "1. Licencegyezmény\n"
 "\n"
-"Kérjük, olvassa el jelen dokumentumot figyelmesen. Ezen dokumentum egy, a "
-"Szoftvertermékekre vonatkozó \n"
-"licencegyezmény Ön és a Mandriva S.A. között. Ha a Szoftvertermékeket "
-"bármiféle módon telepíti, \n"
-"sokszorosítja vagy felhasználja, azzal Ön elfogadja jelen licenc kikötéseit "
-"és feltételeit, továbbá \n"
-"beleegyezik abba, hogy azoknak teljes mértékben megfelel. Ha Ön a Licenc "
-"bármely részével nem ért egyet, \n"
-"akkor az Ön számára nem engedélyezett a Szoftvertermékek telepítése, "
-"sokszorosítása illetve felhasználása. \n"
-"Bármely olyan kísérlet, amely a Szoftvertermékeknek a jelen licenc "
-"kikötéseitől és feltételeitől \n"
-"eltérően való telepítésére, sokszorosítására illetve felhasználására "
-"irányul, érvénytelenítő jellegű, \n"
-"és megvonja az Önnek ezen licenc által adott jogokat. A licencjogok "
-"megszűnését követően Önnek \n"
+"Kérjük, olvassa el jelen dokumentumot figyelmesen. Ezen dokumentum egy, a Szoftvertermékekre vonatkozó \n"
+"licencegyezmény Ön és a Mandriva S.A. között. Ha a Szoftvertermékeket bármiféle módon telepíti, \n"
+"sokszorosítja vagy felhasználja, azzal Ön elfogadja jelen licenc kikötéseit és feltételeit, továbbá \n"
+"beleegyezik abba, hogy azoknak teljes mértékben megfelel. Ha Ön a Licenc bármely részével nem ért egyet, \n"
+"akkor az Ön számára nem engedélyezett a Szoftvertermékek telepítése, sokszorosítása illetve felhasználása. \n"
+"Bármely olyan kísérlet, amely a Szoftvertermékeknek a jelen licenc kikötéseitől és feltételeitől \n"
+"eltérően való telepítésére, sokszorosítására illetve felhasználására irányul, érvénytelenítő jellegű, \n"
+"és megvonja az Önnek ezen licenc által adott jogokat. A licencjogok megszűnését követően Önnek \n"
 "azonnali hatállyal meg kell semmisítenie a Szoftvertermékek összes, \n"
 "Ön által birtokolt példányát.\n"
 "\n"
 "\n"
 "2. Korlátozott garancia\n"
 "\n"
-"A Szoftvertermékek és az azokhoz tartozó dokumentáció \"olyan amilyen\" "
-"állapotban állnak %s\n"
-"rendelkezésre. Garancia nincsen azokra - a törvények által engedélyezett "
-"mértékben.\n"
-"A Mandriva S.A. - a törvények által engedélyezett mértékben - semmilyen "
-"körülmények\n"
-"között sem vonható felelősségre a Szoftvertermékek használatából vagy "
-"használhatatlanságából\n"
-"származó speciális, előre nem látott, közvetlen vagy közvetett károkért "
-"(korlátozás nélkül\n"
-"beleértve a következőket: üzleti veszteség, üzleti tevékenység megszakadása, "
-"pénzügyi veszteség, \n"
-"jogi díjak illetve bírósági ítéletből származó büntetés, vagy bármilyen "
-"származékos veszteség); még \n"
-"abban az esetben sem, ha a Mandriva S.A. tájékoztatva lett az ilyesféle "
-"károk bekövetkezésének lehetőségéről.\n"
+"A Szoftvertermékek és az azokhoz tartozó dokumentáció \"olyan amilyen\" állapotban állnak %s\n"
+"rendelkezésre. Garancia nincsen azokra - a törvények által engedélyezett mértékben.\n"
+"A Mandriva S.A. - a törvények által engedélyezett mértékben - semmilyen körülmények\n"
+"között sem vonható felelősségre a Szoftvertermékek használatából vagy használhatatlanságából\n"
+"származó speciális, előre nem látott, közvetlen vagy közvetett károkért (korlátozás nélkül\n"
+"beleértve a következőket: üzleti veszteség, üzleti tevékenység megszakadása, pénzügyi veszteség, \n"
+"jogi díjak illetve bírósági ítéletből származó büntetés, vagy bármilyen származékos veszteség); még \n"
+"abban az esetben sem, ha a Mandriva S.A. tájékoztatva lett az ilyesféle károk bekövetkezésének lehetőségéről.\n"
 "\n"
-"KORLÁTOZOTT FELELŐSSÉG A BIZONYOS ORSZÁGOKBAN TILTOTT SZOFTVEREK "
-"BIRTOKLÁSÁVAL ILLETVE \n"
+"KORLÁTOZOTT FELELŐSSÉG A BIZONYOS ORSZÁGOKBAN TILTOTT SZOFTVEREK BIRTOKLÁSÁVAL ILLETVE \n"
 "HASZNÁLATÁVAL KAPCSOLATBAN\n"
-"A Mandriva S.A. és disztribútorai - a törvények által engedélyezett "
-"mértékben - semmilyen\n"
-"körülmények között sem vonhatók felelősségre az olyan - speciális, előre nem "
-"látott, közvetlen\n"
-"vagy közvetett - károkért (korlátozás nélkül beleértve a következőket: "
-"üzleti veszteség,\n"
-"üzleti tevékenység megszakadása, pénzügyi veszteség, jogi díjak illetve "
-"bírósági\n"
-"ítéletből származó büntetés, vagy bármilyen származékos veszteség), amely "
-"károk a\n"
-"szoftverkomponensek birtoklásából vagy használatából illetve a helyi "
-"törvények által\n"
-"tiltott vagy korlátozott szoftverkomponenseknek egy Mandriva Linux-címről "
-"való\n"
+"A Mandriva S.A. és disztribútorai - a törvények által engedélyezett mértékben - semmilyen\n"
+"körülmények között sem vonhatók felelősségre az olyan - speciális, előre nem látott, közvetlen\n"
+"vagy közvetett - károkért (korlátozás nélkül beleértve a következőket: üzleti veszteség,\n"
+"üzleti tevékenység megszakadása, pénzügyi veszteség, jogi díjak illetve bírósági\n"
+"ítéletből származó büntetés, vagy bármilyen származékos veszteség), amely károk a\n"
+"szoftverkomponensek birtoklásából vagy használatából illetve a helyi törvények által\n"
+"tiltott vagy korlátozott szoftverkomponenseknek egy Mandriva Linux-címről való\n"
 "letöltéséből származnak.\n"
-"Ezen korlátozott felelősség vonatkozik többek közt a Szoftvertermékekben "
-"levő titkosító\n"
-"komponensekre is. Mindazonáltal, amennyiben a törvények a fenti "
-"korlátozásokat nem engedélyezik\n"
-"sem közvetett, sem közvetlen mértékben, abban az esetben a fenti korlátozás "
-"nem érvényes.\n"
+"Ezen korlátozott felelősség vonatkozik többek közt a Szoftvertermékekben levő titkosító\n"
+"komponensekre is. Mindazonáltal, amennyiben a törvények a fenti korlátozásokat nem engedélyezik\n"
+"sem közvetett, sem közvetlen mértékben, abban az esetben a fenti korlátozás nem érvényes.\n"
 "%s\n"
 "\n"
 "3. A GPL és az ahhoz kapcsolódó licencek\n"
 "\n"
-"A Szoftvertermékek különböző személyek és intézmények által készített "
-"komponensekből állnak.\n"
-"Ezen licencek java része lehetővé teszi a megfelelő komponensek használatát, "
-"sokszorosítását,\n"
-"módosítását illetve terjesztését. Bármely komponens használata előtt olvassa "
-"el figyelmesen\n"
-"a komponensre vonatkozó licenc kikötéseit és feltételeit. Egy komponens "
-"licencére vonatkozó\n"
-"kérdést nem a Mandriva céghez, hanem az adott komponens szerzőjéhez kell "
-"irányítani.\n"
-"A Mandriva S.A. által fejlesztett programok a GPL licenc hatálya alá "
-"tartoznak.\n"
-"A Mandriva S.A. által írt dokumentációs anyagokra egy speciális licenc "
-"vonatkozik.\n"
+"A Szoftvertermékek különböző személyek és intézmények által készített komponensekből állnak.\n"
+"Ezen licencek java része lehetővé teszi a megfelelő komponensek használatát, sokszorosítását,\n"
+"módosítását illetve terjesztését. Bármely komponens használata előtt olvassa el figyelmesen\n"
+"a komponensre vonatkozó licenc kikötéseit és feltételeit. Egy komponens licencére vonatkozó\n"
+"kérdést nem a Mandriva céghez, hanem az adott komponens szerzőjéhez kell irányítani.\n"
+"A Mandriva S.A. által fejlesztett programok a GPL licenc hatálya alá tartoznak.\n"
+"A Mandriva S.A. által írt dokumentációs anyagokra egy speciális licenc vonatkozik.\n"
 "További részletek a dokumentációban.\n"
 "\n"
 "\n"
 "4. Szellemi tulajdonra vonatkozó jogok\n"
 "\n"
-"A Szoftvertermékek komponenseire vonatkozó összes jog az adott komponensek "
-"szerzőit illeti meg,\n"
-"és a szoftverekre vonatkozó szellemi tulajdoni illetve szerzői jogi "
-"(copyright) törvények védelme alatt áll.\n"
-"A Mandriva S.A. fenntartja a jogot arra, hogy módosítsa illetve átalakítsa "
-"a\n"
-"Szoftvertermékeket - teljes egészében vagy részben, bármilyen módon, illetve "
-"bármilyen célra.\n"
-"A \"Mandriva\", a \"Mandriva Linux\" és az azokhoz tartozó logók a Mandriva "
-"S.A. védjegyei.\n"
+"A Szoftvertermékek komponenseire vonatkozó összes jog az adott komponensek szerzőit illeti meg,\n"
+"és a szoftverekre vonatkozó szellemi tulajdoni illetve szerzői jogi (copyright) törvények védelme alatt áll.\n"
+"A Mandriva S.A. fenntartja a jogot arra, hogy módosítsa illetve átalakítsa a\n"
+"Szoftvertermékeket - teljes egészében vagy részben, bármilyen módon, illetve bármilyen célra.\n"
+"A \"Mandriva\", a \"Mandriva Linux\" és az azokhoz tartozó logók a Mandriva S.A. védjegyei.\n"
 "\n"
 "\n"
 "5. Vonatkozó törvények\n"
 "\n"
-"Ha jelen egyezmény bármely része bírósági ítélet alapján semmisnek, "
-"törvénytelennek vagy alkalmazhatatlannak \n"
-"van nyilvánítva, akkor azon rész jelen szerződésből kizárásra kerül. Az "
-"egyezmény többi - alkalmazható - \n"
-"részét Önnek továbbra is be kell tartania. Jelen licenc kikötései és "
-"feltételei Franciaország törvényeinek \n"
-"hatálya alá tartoznak. A jelen licenc kikötéseivel kapcsolatos viták "
-"lezárásának legelőnyösebb \n"
-"módja egy bíróságon kívül történő megegyezés. Végső lehetőségként a vitás "
-"ügy a megfelelő párizsi \n"
+"Ha jelen egyezmény bármely része bírósági ítélet alapján semmisnek, törvénytelennek vagy alkalmazhatatlannak \n"
+"van nyilvánítva, akkor azon rész jelen szerződésből kizárásra kerül. Az egyezmény többi - alkalmazható - \n"
+"részét Önnek továbbra is be kell tartania. Jelen licenc kikötései és feltételei Franciaország törvényeinek \n"
+"hatálya alá tartoznak. A jelen licenc kikötéseivel kapcsolatos viták lezárásának legelőnyösebb \n"
+"módja egy bíróságon kívül történő megegyezés. Végső lehetőségként a vitás ügy a megfelelő párizsi \n"
 "(Franciaország) bíróságra kerül.\n"
-"Ha jelen dokumentummal kapcsolatban kérdése van, vegye fel a kapcsolatot a "
-"Mandriva S.A. céggel."
+"Ha jelen dokumentummal kapcsolatban kérdése van, vegye fel a kapcsolatot a Mandriva S.A. céggel."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: messages.pm:90
 #, c-format
 msgid ""
-"You agree not to (i) sell, export, re-export, transfer, divert, disclose "
-"technical data, or \n"
-"dispose of, any Software to any person, entity, or destination prohibited by "
-"US export laws \n"
-"or regulations including, without limitation, Cuba, Iran, North Korea, Sudan "
-"and Syria; or \n"
-"(ii) use any Software for any use prohibited by the laws or regulations of "
-"the United States.\n"
+"You agree not to (i) sell, export, re-export, transfer, divert, disclose technical data, or \n"
+"dispose of, any Software to any person, entity, or destination prohibited by US export laws \n"
+"or regulations including, without limitation, Cuba, Iran, North Korea, Sudan and Syria; or \n"
+"(ii) use any Software for any use prohibited by the laws or regulations of the United States.\n"
 "\n"
 "U.S. GOVERNMENT RESTRICTED RIGHTS. \n"
 "\n"
-"The Software Products and any accompanying documentation are and shall be "
-"deemed to be \n"
-"\"commercial computer software\" and \"commercial computer software "
-"documentation,\" respectively, \n"
-"as defined in DFAR 252.227-7013 and as described in FAR 12.212. Any use, "
-"modification, reproduction, \n"
-"release, performance, display or disclosure of the Software and any "
-"accompanying documentation \n"
-"by the United States Government shall be governed solely by the terms of "
-"this Agreement and any \n"
-"other applicable licence agreements and shall be prohibited except to the "
-"extent expressly permitted \n"
+"The Software Products and any accompanying documentation are and shall be deemed to be \n"
+"\"commercial computer software\" and \"commercial computer software documentation,\" respectively, \n"
+"as defined in DFAR 252.227-7013 and as described in FAR 12.212. Any use, modification, reproduction, \n"
+"release, performance, display or disclosure of the Software and any accompanying documentation \n"
+"by the United States Government shall be governed solely by the terms of this Agreement and any \n"
+"other applicable licence agreements and shall be prohibited except to the extent expressly permitted \n"
 "by the terms of this Agreement."
 msgstr ""
-"Elfogadja, hogy tilos (i) eladni, újraexportálni, átadni, bemutatni, "
-"közzétenni a technikai \n"
-"adatokat bármely Szoftver, személy, jogi személy vagy bármely más US "
-"jogszabály \n"
-"vagy előírás által tiltott terület felé, beleértve korlátozás nélkül Kuba, "
-"Irán, Észak-Korea, \n"
-"Szudán és Szíria területeit; vagy (ii) minden Szoftver csak az Egyesült "
-"Államok jog és \n"
+"Elfogadja, hogy tilos (i) eladni, újraexportálni, átadni, bemutatni, közzétenni a technikai \n"
+"adatokat bármely Szoftver, személy, jogi személy vagy bármely más US jogszabály \n"
+"vagy előírás által tiltott terület felé, beleértve korlátozás nélkül Kuba, Irán, Észak-Korea, \n"
+"Szudán és Szíria területeit; vagy (ii) minden Szoftver csak az Egyesült Államok jog és \n"
 "rendszabályai által engedélyezett módon használható.\n"
 "\n"
 "AMERIKAI EGYESÜLT ÁLLAMOK KORLÁTOZÓ JOGSZABÁLYA. \n"
 "\n"
-"A Szoftvertermékek és minden hozzájuk tartozó leírás, illetve a "
-"\"kereskedelmi számítástechnikai szoftver\" \n"
-"és a \"kereskedelmi számítástechnikai szoftverleírás\", illetve a DFAR "
-"252.227-7013 és \n"
-"a FAR 12.212 által meghatározott dolgokra: a Szoftver, és minden hozzá járó "
-"leírás mindennemű \n"
-"módosítása, reprodukálása, kiadása, üzemeltetése, megjelenítése és "
-"közzététele \n"
-"az Amerikai Egyesült Államok kormányának közreműködése által ezen Szerződés "
-"feltételei, \n"
-"és minden egyéb alkalmazott licenc feltétele szerint történhet, és az ettől "
-"való eltérés tilos \n"
+"A Szoftvertermékek és minden hozzájuk tartozó leírás, illetve a \"kereskedelmi számítástechnikai szoftver\" \n"
+"és a \"kereskedelmi számítástechnikai szoftverleírás\", illetve a DFAR 252.227-7013 és \n"
+"a FAR 12.212 által meghatározott dolgokra: a Szoftver, és minden hozzá járó leírás mindennemű \n"
+"módosítása, reprodukálása, kiadása, üzemeltetése, megjelenítése és közzététele \n"
+"az Amerikai Egyesült Államok kormányának közreműködése által ezen Szerződés feltételei, \n"
+"és minden egyéb alkalmazott licenc feltétele szerint történhet, és az ettől való eltérés tilos \n"
 "mindaddig, amíg ezen szerződés hatályban van."
 
 #: messages.pm:104
 #, c-format
 msgid ""
-"Most of these components, but excluding the applications and software "
-"provided by Google Inc. or \n"
-"its subsidiaries (\"Google Software\"), are governed under the terms and "
-"conditions of the GNU \n"
+"Most of these components, but excluding the applications and software provided by Google Inc. or \n"
+"its subsidiaries (\"Google Software\"), are governed under the terms and conditions of the GNU \n"
 "General Public Licence, hereafter called \"GPL\", or of similar licenses."
 msgstr ""
-"A legtöbb program, a Goggle inc. és leányválalataié (továbbiakban: \"Google "
-"Software\") \n"
-"kivételével, általánosságban a GNU General Public Licence (továbbiakban: "
-"\"GPL\"), vagy \n"
+"A legtöbb program, a Goggle inc. és leányválalataié (továbbiakban: \"Google Software\") \n"
+"kivételével, általánosságban a GNU General Public Licence (továbbiakban: \"GPL\"), vagy \n"
 "hasonló licenc, feltételei és szabályai alá tartozik."
 
 #: messages.pm:107
 #, c-format
 msgid ""
-"Most of these components are governed under the terms and conditions of the "
-"GNU \n"
+"Most of these components are governed under the terms and conditions of the GNU \n"
 "General Public Licence, hereafter called \"GPL\", or of similar licenses."
 msgstr ""
-"A legtöbb komponens a GNU General Public Licence (GNU Általános Publikálási "
-"Licensz)\n"
-"(a továbbiakban \"GPL\" néven), vagy hasonló licenc, hatálya és feltételei "
-"alá tartozik."
+"A legtöbb komponens a GNU General Public Licence (GNU Általános Publikálási Licensz)\n"
+"(a továbbiakban \"GPL\" néven), vagy hasonló licenc, hatálya és feltételei alá tartozik."
 
 #: messages.pm:112
 #, c-format
 msgid ""
 "Warning: Free Software may not necessarily be patent free, and some Free\n"
-"Software included may be covered by patents in your country. For example, "
-"the\n"
+"Software included may be covered by patents in your country. For example, the\n"
 "MP3 decoders included may require a licence for further usage (see\n"
-"http://www.mp3licensing.com for more details). If you are unsure if a "
-"patent\n"
+"http://www.mp3licensing.com for more details). If you are unsure if a patent\n"
 "may be applicable to you, check your local laws."
 msgstr ""
-"Figyelmeztetés: A szabad szoftver nem feltétlenül szabadalommentes; "
-"bizonyos\n"
+"Figyelmeztetés: A szabad szoftver nem feltétlenül szabadalommentes; bizonyos\n"
 "komponensekre esetleg vonatkozhatnak szabadalmak az Ön országában. Például\n"
 "az MP3-dekódolók használata esetén szükség lehet licencre (információ:\n"
 "http://www.mp3licensing.com). Ha nem biztos abban, hogy egy bizonyos\n"
@@ -5140,104 +5132,63 @@ msgstr ""
 #: messages.pm:120
 #, c-format
 msgid ""
-"6. Additional provisions applicable to those Software Products provided by "
-"Google Inc. (\"Google Software\")\n"
+"6. Additional provisions applicable to those Software Products provided by Google Inc. (\"Google Software\")\n"
 "\n"
-"(a)  You acknowledge that Google or third parties own all rights, title and "
-"interest in and to the Google \n"
-"Software, portions thereof, or software provided through or in conjunction "
-"with the Google Software, including\n"
-"without limitation all Intellectual Property Rights. \"Intellectual Property "
-"Rights\" means any and all rights \n"
-"existing from time to time under patent law, copyright law, trade secret "
-"law, trademark law, unfair competition \n"
-"law, database rights and any and all other proprietary rights, and any and "
-"all applications, renewals, extensions \n"
-"and restorations thereof, now or hereafter in force and effect worldwide. "
-"You agree not to modify, adapt, \n"
-"translate, prepare derivative works from, decompile, reverse engineer, "
-"disassemble or otherwise attempt to derive \n"
-"source code from Google Software. You also agree to not remove, obscure, or "
-"alter Google's or any third party's \n"
-"copyright notice, trademarks, or other proprietary rights notices affixed to "
-"or contained within or accessed in \n"
+"(a)  You acknowledge that Google or third parties own all rights, title and interest in and to the Google \n"
+"Software, portions thereof, or software provided through or in conjunction with the Google Software, including\n"
+"without limitation all Intellectual Property Rights. \"Intellectual Property Rights\" means any and all rights \n"
+"existing from time to time under patent law, copyright law, trade secret law, trademark law, unfair competition \n"
+"law, database rights and any and all other proprietary rights, and any and all applications, renewals, extensions \n"
+"and restorations thereof, now or hereafter in force and effect worldwide. You agree not to modify, adapt, \n"
+"translate, prepare derivative works from, decompile, reverse engineer, disassemble or otherwise attempt to derive \n"
+"source code from Google Software. You also agree to not remove, obscure, or alter Google's or any third party's \n"
+"copyright notice, trademarks, or other proprietary rights notices affixed to or contained within or accessed in \n"
 "conjunction with or through the Google Software.  \n"
 "\n"
-"(b)  The Google Software is made available to you for your personal, non-"
-"commercial use only.\n"
-"You may not use the Google Software in any manner that could damage, "
-"disable, overburden, or impair Google's \n"
-"search services (e.g., you may not use the Google Software in an automated "
-"manner), nor may you use Google \n"
-"Software in any manner that could interfere with any other party's use and "
-"enjoyment of Google's search services\n"
-"or the services and products of the third party licensors of the Google "
-"Software.\n"
+"(b)  The Google Software is made available to you for your personal, non-commercial use only.\n"
+"You may not use the Google Software in any manner that could damage, disable, overburden, or impair Google's \n"
+"search services (e.g., you may not use the Google Software in an automated manner), nor may you use Google \n"
+"Software in any manner that could interfere with any other party's use and enjoyment of Google's search services\n"
+"or the services and products of the third party licensors of the Google Software.\n"
 "\n"
-"(c)  Some of the Google Software is designed to be used in conjunction with "
-"Google's search and other services.\n"
-"Accordingly, your use of such Google Software is also defined by Google's "
-"Terms of Service located at \n"
-"http://www.google.com/terms_of_service.html and Google's Toolbar Privacy "
-"Policy located at \n"
+"(c)  Some of the Google Software is designed to be used in conjunction with Google's search and other services.\n"
+"Accordingly, your use of such Google Software is also defined by Google's Terms of Service located at \n"
+"http://www.google.com/terms_of_service.html and Google's Toolbar Privacy Policy located at \n"
 "http://www.google.com/support/toolbar/bin/static.py?page=privacy.html.\n"
 "\n"
-"(d)  Google Inc. and each of its subsidiaries and affiliates are third party "
-"beneficiaries of this contract \n"
+"(d)  Google Inc. and each of its subsidiaries and affiliates are third party beneficiaries of this contract \n"
 "and may enforce its terms."
 msgstr ""
-"6. továbbá találkozhat a Szoftvertermékek között Google Inc. szolgáltatással "
-"(\"Google Szoftver\")\n"
+"6. továbbá találkozhat a Szoftvertermékek között Google Inc. szolgáltatással (\"Google Szoftver\")\n"
 "\n"
-"(a) Tudomásul veszi a Google vagy harmadik személy szerzői jogát, jogcímét "
-"és érdeklődését \n"
-"a Google Szoftver termékkel, szolgáltatással vagy azokkal kapcsolatba "
-"hozható dolgokkal, \n"
-"beleértve korlátozás nélkül az összes értelmi szerzőt megillető jogot. A "
-"\"Értelmi Szerzői Jog\" \n"
-"alatt mindig és minden időben, itt és a teljes világban, a szabadalmi "
-"jogokat, a szerzői jogokat, \n"
-"a gyártási titokról szóló jogszabályokat, a védjegyekre vonatkozó "
-"jogszabályokat, \n"
+"(a) Tudomásul veszi a Google vagy harmadik személy szerzői jogát, jogcímét és érdeklődését \n"
+"a Google Szoftver termékkel, szolgáltatással vagy azokkal kapcsolatba hozható dolgokkal, \n"
+"beleértve korlátozás nélkül az összes értelmi szerzőt megillető jogot. A \"Értelmi Szerzői Jog\" \n"
+"alatt mindig és minden időben, itt és a teljes világban, a szabadalmi jogokat, a szerzői jogokat, \n"
+"a gyártási titokról szóló jogszabályokat, a védjegyekre vonatkozó jogszabályokat, \n"
 "tisztességtelen verseny \n"
-"ellen szóló törvényeket, az adattárolásról szóló törvényt és az egyéb "
-"tulajdonjogokról szóló \n"
-"törvényt beleértve ezek minden alkalmazását, megújítását, kibővítését és "
-"megszorítását. \n"
-"Illetve elfogadja, hogy nem módosíthatja, adoptálhatja, fordíthatja le, "
-"származtathatja \n"
-"a saját munkájából, fordíthatja vissza, fejlesztheti vissza, "
-"disassemblelheti és semmilyen módon \n"
-"nem törekedhet a Google Szoftver eredeti kódjának visszanyerésére. Egyetért "
-"azzal, \n"
-"hogy nem eltávolítható és nem eltakarható vagy megváltoztatható a Google és "
-"bármely társának \n"
-"jogvédő megjegyzése, védjegye és tulajdonjogra felhívó figyelmeztetése, "
-"amelyet \n"
+"ellen szóló törvényeket, az adattárolásról szóló törvényt és az egyéb tulajdonjogokról szóló \n"
+"törvényt beleértve ezek minden alkalmazását, megújítását, kibővítését és megszorítását. \n"
+"Illetve elfogadja, hogy nem módosíthatja, adoptálhatja, fordíthatja le, származtathatja \n"
+"a saját munkájából, fordíthatja vissza, fejlesztheti vissza, disassemblelheti és semmilyen módon \n"
+"nem törekedhet a Google Szoftver eredeti kódjának visszanyerésére. Egyetért azzal, \n"
+"hogy nem eltávolítható és nem eltakarható vagy megváltoztatható a Google és bármely társának \n"
+"jogvédő megjegyzése, védjegye és tulajdonjogra felhívó figyelmeztetése, amelyet \n"
 "hozzákapcsoltak vagy tartalmaz a Google Szoftver.\n"
 "\n"
-"(b) A Google Szoftver felhasználása csak személyes, nem üzleti célú "
-"alkalmazásra engedélyezett.\n"
-"Nem használható a Google Szoftvert nem használhatod a Google "
-"szolgáltatásainak \n"
-"kárára, letiltására, túlterhelésére vagy megrongálására (például nem "
-"használhatod \n"
-"automatizált módban), illetve nem használhatod a Google Szoftver felületét "
-"semmilyen más fél \n"
-"termékén keresztül, használva a Google szolgáltatás és szerződött partnerei "
-"által nyújtott előnyöket.\n"
+"(b) A Google Szoftver felhasználása csak személyes, nem üzleti célú alkalmazásra engedélyezett.\n"
+"Nem használható a Google Szoftvert nem használhatod a Google szolgáltatásainak \n"
+"kárára, letiltására, túlterhelésére vagy megrongálására (például nem használhatod \n"
+"automatizált módban), illetve nem használhatod a Google Szoftver felületét semmilyen más fél \n"
+"termékén keresztül, használva a Google szolgáltatás és szerződött partnerei által nyújtott előnyöket.\n"
 "\n"
-"(c)  Maga a Google Szoftver kialakításánál fogva használja a Google "
-"keresőjét illetve egyéb szolgáltatását.\n"
+"(c)  Maga a Google Szoftver kialakításánál fogva használja a Google keresőjét illetve egyéb szolgáltatását.\n"
 "Azaz, a Google Szoftver használatával a Google Szolgáltatások Feltételeit \n"
-"(megtalálható a http://www.google.hu/accounts/TOS oldalon) és a Google "
-"Eszköztár Adatvédelmi irányelvei \n"
-"(megtalálható a http://www.google.com/support/firefox/bin/static.py?"
-"page=privacy.html&hl=hu oldalon) \n"
+"(megtalálható a http://www.google.hu/accounts/TOS oldalon) és a Google Eszköztár Adatvédelmi irányelvei \n"
+"(megtalálható a http://www.google.com/support/firefox/bin/static.py?page=privacy.html&hl=hu oldalon) \n"
 "is el kell fogadni.\n"
 "\n"
-"(d) A Google Inc. és minden partnere a haszonélvezője ezen szerződésnek a "
-"szerződés teljes ideje alatt."
+"(d) A Google Inc. és minden partnere a haszonélvezője ezen szerződésnek a szerződés teljes ideje alatt."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: messages.pm:150
@@ -5247,8 +5198,7 @@ msgid ""
 "Remove the boot media and press Enter to reboot.\n"
 "\n"
 "\n"
-"For information on fixes which are available for this release of Mandriva "
-"Linux,\n"
+"For information on fixes which are available for this release of Mandriva Linux,\n"
 "consult the Errata available from:\n"
 "\n"
 "\n"
@@ -5375,11 +5325,9 @@ msgstr "Melyik %s meghajtóprogramot próbáljam meg?"
 #, c-format
 msgid ""
 "In some cases, the %s driver needs to have extra information to work\n"
-"properly, although it normally works fine without them. Would you like to "
-"specify\n"
+"properly, although it normally works fine without them. Would you like to specify\n"
 "extra options for it or allow the driver to probe your machine for the\n"
-"information it needs? Occasionally, probing will hang a computer, but it "
-"should\n"
+"information it needs? Occasionally, probing will hang a computer, but it should\n"
 "not cause any damage."
 msgstr ""
 "Bizonyos esetekben a(z) %s meghajtóprogramnak további paraméterekre van\n"
@@ -5421,8 +5369,7 @@ msgstr "A kiterjesztett (extended) partíció nem támogatott ezen a platformon"
 #, c-format
 msgid ""
 "You have a hole in your partition table but I can not use it.\n"
-"The only solution is to move your primary partitions to have the hole next "
-"to the extended partitions."
+"The only solution is to move your primary partitions to have the hole next to the extended partitions."
 msgstr ""
 "A partíciós táblában van egy üres tartomány, de nem használható.\n"
 "Az egyetlen megoldás az elsődleges partíciók áthelyezése úgy, hogy\n"
@@ -5433,15 +5380,16 @@ msgstr ""
 msgid ""
 "Something bad is happening on your drive. \n"
 "A test to check the integrity of data has failed. \n"
-"It means writing anything on the disk will end up with random, corrupted "
-"data."
+"It means writing anything on the disk will end up with random, corrupted data."
 msgstr ""
 "Valamilyen probléma van a meghajtóval. \n"
 "Az adatintegritási teszt végrehajtása nem sikerült. \n"
 "Ez azt jelenti, hogy a lemezre való írás tönkreteheti a meghajtó \n"
 "adattartalmát."
 
-#: pkgs.pm:236 pkgs.pm:239 pkgs.pm:248
+#: pkgs.pm:236
+#: pkgs.pm:239
+#: pkgs.pm:248
 #, c-format
 msgid "Unused packages removal"
 msgstr "Nem használt csomagok eltávolítása"
@@ -5458,26 +5406,22 @@ msgstr "Nem használt lokalizációs csomagok keresése..."
 
 #: pkgs.pm:249
 #, c-format
-msgid ""
-"We have detected that some packages are not needed for your system "
-"configuration."
-msgstr ""
-"Olyan csomagok találhatóak a rendszerben, amelyek nem szükségesek a teljes "
-"értékű működéshez."
+msgid "We have detected that some packages are not needed for your system configuration."
+msgstr "Olyan csomagok találhatóak a rendszerben, amelyek nem szükségesek a teljes értékű működéshez."
 
 #: pkgs.pm:250
 #, c-format
 msgid "We will remove the following packages, unless you choose otherwise:"
-msgstr ""
-"Az alábbi csomagok - amennyiben kijelöltek maradnak, - eltávolításra "
-"kerülnek:"
+msgstr "Az alábbi csomagok - amennyiben kijelöltek maradnak, - eltávolításra kerülnek:"
 
-#: pkgs.pm:253 pkgs.pm:254
+#: pkgs.pm:253
+#: pkgs.pm:254
 #, c-format
 msgid "Unused hardware support"
 msgstr "Nem használt hardvertámogatás"
 
-#: pkgs.pm:257 pkgs.pm:258
+#: pkgs.pm:257
+#: pkgs.pm:258
 #, c-format
 msgid "Unused localization"
 msgstr "Nem használt lokalizáció"
@@ -5505,8 +5449,7 @@ msgstr "Nem sikerült létrehozni /usr/share/sane/%s nevű linket."
 #: scanner.pm:113
 #, c-format
 msgid "Could not copy firmware file %s to /usr/share/sane/firmware!"
-msgstr ""
-"Nem sikerült a(z) %s firmware fájlt átmásolni ide: /usr/share/sane/firmware"
+msgstr "Nem sikerült a(z) %s firmware fájlt átmásolni ide: /usr/share/sane/firmware"
 
 #: scanner.pm:120
 #, c-format
@@ -5521,8 +5464,7 @@ msgstr "ScannerDrake"
 #: scanner.pm:200
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
-msgstr ""
-"Nem sikerült telepíteni a lapolvasó(k) megosztásához szükséges csomagokat."
+msgstr "Nem sikerült telepíteni a lapolvasó(k) megosztásához szükséges csomagokat."
 
 #: scanner.pm:201
 #, c-format
@@ -5559,8 +5501,7 @@ msgid ""
 "\n"
 "Else only /etc/issue is allowed."
 msgstr ""
-"\"Mind\" beállítás esetén létezhet /etc/issue és /etc/issue.net nevű fájl "
-"is.\n"
+"\"Mind\" beállítás esetén létezhet /etc/issue és /etc/issue.net nevű fájl is.\n"
 "\n"
 "\"Egyik sem\" beállítás esetén egyik \"issue\" fájl sem létezhet.\n"
 "\n"
@@ -5583,11 +5524,8 @@ msgstr "Közvetlen rendszergazdai bejelentkezés engedélyezése"
 
 #: security/help.pm:33
 #, c-format
-msgid ""
-"Allow the list of users on the system on display managers (kdm and gdm)."
-msgstr ""
-"A felhasználólista megjelenítésének engedélyezése a bejelentkezéskezelőkben "
-"(KDM és GDM)"
+msgid "Allow the list of users on the system on display managers (kdm and gdm)."
+msgstr "A felhasználólista megjelenítésének engedélyezése a bejelentkezéskezelőkben (KDM és GDM)"
 
 #: security/help.pm:35
 #, c-format
@@ -5636,20 +5574,17 @@ msgstr ""
 msgid ""
 "Authorize:\n"
 "\n"
-"- all services controlled by tcp_wrappers (see hosts.deny(5) man page) if "
-"set to \"ALL\",\n"
+"- all services controlled by tcp_wrappers (see hosts.deny(5) man page) if set to \"ALL\",\n"
 "\n"
 "- only local ones if set to \"Local\"\n"
 "\n"
 "- none if set to \"None\".\n"
 "\n"
-"To authorize the services you need, use /etc/hosts.allow (see hosts.allow"
-"(5))."
+"To authorize the services you need, use /etc/hosts.allow (see hosts.allow(5))."
 msgstr ""
 "Engedélyezés a következők számára:\n"
 "\n"
-"- \"Mind\" beállítás esetén: a tcp_wrappers által vezérelt összes "
-"szolgáltatás\n"
+"- \"Mind\" beállítás esetén: a tcp_wrappers által vezérelt összes szolgáltatás\n"
 "(információ a hosts.deny(5) leírásban (\"man\"))\n"
 "\n"
 "- \"Helyi\" beállítás esetén: csak a helyiek\n"
@@ -5717,9 +5652,7 @@ msgstr "Biztonsági figyelmeztetések:"
 #: security/help.pm:82
 #, c-format
 msgid "Enable IP spoofing protection."
-msgstr ""
-"Az 'IP spoofing' (más gép IP-címének használata forráscímként) elleni "
-"védelem bekapcsolása"
+msgstr "Az 'IP spoofing' (más gép IP-címének használata forráscímként) elleni védelem bekapcsolása"
 
 #: security/help.pm:84
 #, c-format
@@ -5738,13 +5671,8 @@ msgstr "Az msec óránkénti biztonsági ellenőrzéseinek bekapcsolása"
 
 #: security/help.pm:90
 #, c-format
-msgid ""
-"Enable su only from members of the wheel group. If set to no, allows su from "
-"any user."
-msgstr ""
-"Az \"su\" parancs használata csak a \"wheel\" nevű csoport tagjainak számára "
-"legyen lehetséges. Ha ki van kapcsolva, akkor bármely felhasználó "
-"használhatja az \"su\" parancsot."
+msgid "Enable su only from members of the wheel group. If set to no, allows su from any user."
+msgstr "Az \"su\" parancs használata csak a \"wheel\" nevű csoport tagjainak számára legyen lehetséges. Ha ki van kapcsolva, akkor bármely felhasználó használhatja az \"su\" parancsot."
 
 #: security/help.pm:92
 #, c-format
@@ -5754,9 +5682,7 @@ msgstr "Jelszó használata a felhasználók azonosításához"
 #: security/help.pm:94
 #, c-format
 msgid "Activate ethernet cards promiscuity check."
-msgstr ""
-"Az Ethernet kártyák 'promiscuous' (minden csomagot megtartó) üzemmódjának "
-"ellenőrzésének bekapcsolása"
+msgstr "Az Ethernet kártyák 'promiscuous' (minden csomagot megtartó) üzemmódjának ellenőrzésének bekapcsolása"
 
 #: security/help.pm:96
 #, c-format
@@ -5771,8 +5697,7 @@ msgstr "Az sulogin(8) engedélyezése egyfelhasználós szinten"
 #: security/help.pm:100
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
-msgstr ""
-"Az adott név felvétele az msec féle jelszóelévülés-kezelés alóli kivételként"
+msgstr "Az adott név felvétele az msec féle jelszóelévülés-kezelés alóli kivételként"
 
 #: security/help.pm:102
 #, c-format
@@ -5790,9 +5715,7 @@ msgstr ""
 
 #: security/help.pm:106
 #, c-format
-msgid ""
-"Set the password minimum length and minimum number of digit and minimum "
-"number of capitalized letters."
+msgid "Set the password minimum length and minimum number of digit and minimum number of capitalized letters."
 msgstr ""
 "A minimális jelszóhossz és a számjegyek illetve a nagybetűk minimális\n"
 "számának beállítása"
@@ -5850,8 +5773,7 @@ msgstr "Ha igenre van állítva: a napi biztonsági ellenőrzések végrehajtás
 #: security/help.pm:120
 #, c-format
 msgid "if set to yes, check additions/removals of sgid files."
-msgstr ""
-"Ha igenre van állítva: SGID-s fájlok létrehozásának/törlésének ellenőrzése"
+msgstr "Ha igenre van állítva: SGID-s fájlok létrehozásának/törlésének ellenőrzése"
 
 #: security/help.pm:121
 #, c-format
@@ -5863,15 +5785,12 @@ msgstr ""
 #: security/help.pm:122
 #, c-format
 msgid "if set to yes, verify checksum of the suid/sgid files."
-msgstr ""
-"Ha igenre van állítva: az SUID/SGID-os fájlok ellenőrzőösszegének ellenőrzése"
+msgstr "Ha igenre van állítva: az SUID/SGID-os fájlok ellenőrzőösszegének ellenőrzése"
 
 #: security/help.pm:123
 #, c-format
 msgid "if set to yes, check additions/removals of suid root files."
-msgstr ""
-"Ha igenre van állítva: 'SUID root'-os fájlok létrehozásának/törlésének "
-"ellenőrzése"
+msgstr "Ha igenre van állítva: 'SUID root'-os fájlok létrehozásának/törlésének ellenőrzése"
 
 #: security/help.pm:124
 #, c-format
@@ -5881,8 +5800,7 @@ msgstr "Ha igenre van állítva: figyelmeztetés a tulajdonos nélküli fájlokr
 #: security/help.pm:125
 #, c-format
 msgid "if set to yes, check files/directories writable by everybody."
-msgstr ""
-"Ha igenre van állítva: a mindenki által írható fájlok/könyvtárak ellenőrzése"
+msgstr "Ha igenre van állítva: a mindenki által írható fájlok/könyvtárak ellenőrzése"
 
 #: security/help.pm:126
 #, c-format
@@ -5891,8 +5809,7 @@ msgstr "Ha igenre van állítva: chkrootkit ellenőrzések elvégzése"
 
 #: security/help.pm:127
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
+msgid "if set, send the mail report to this email address else send it to root."
 msgstr ""
 "Ha be van állítva: a jelentés ezen email címre való küldése; máskülönben a\n"
 "rendszergazdának"
@@ -5915,8 +5832,7 @@ msgstr "Ha igenre van állítva: ellenőrzések elvégzése az RPM adatbázison"
 #: security/help.pm:131
 #, c-format
 msgid "if set to yes, report check result to syslog."
-msgstr ""
-"Ha igenre van állítva: az ellenőrzés eredményének írása a rendszernaplóba"
+msgstr "Ha igenre van állítva: az ellenőrzés eredményének írása a rendszernaplóba"
 
 #: security/help.pm:132
 #, c-format
@@ -5992,9 +5908,7 @@ msgstr ""
 #: security/l10n.pm:20
 #, c-format
 msgid "Export display when passing from root to the other users"
-msgstr ""
-"A képernyő exportálása a rendszergazdai azonosítóról egy másikra való "
-"átlépéskor"
+msgstr "A képernyő exportálása a rendszergazdai azonosítóról egy másikra való átlépéskor"
 
 #: security/l10n.pm:21
 #, c-format
@@ -6037,8 +5951,7 @@ msgstr ""
 #, c-format
 msgid "Enable IP spoofing protection"
 msgstr ""
-"Az 'IP spoofing' (más gép IP címének használata forráscímként) elleni "
-"védelem\n"
+"Az 'IP spoofing' (más gép IP címének használata forráscímként) elleni védelem\n"
 "bekapcsolása"
 
 #: security/l10n.pm:29
@@ -6059,9 +5972,7 @@ msgstr "Az msec óránkénti biztonsági ellenőrzéseinek bekapcsolása"
 #: security/l10n.pm:32
 #, c-format
 msgid "Enable su only from the wheel group members"
-msgstr ""
-"Az \"su\" parancs használata csak a \"wheel\" nevű csoport tagjainak számára "
-"legyen lehetséges."
+msgstr "Az \"su\" parancs használata csak a \"wheel\" nevű csoport tagjainak számára legyen lehetséges."
 
 #: security/l10n.pm:33
 #, c-format
@@ -6093,9 +6004,7 @@ msgstr "Nincs jelszóelévülés:"
 #: security/l10n.pm:38
 #, c-format
 msgid "Set password expiration and account inactivation delays"
-msgstr ""
-"A jelszavak lejáratához és az azonosítók deaktiválásához tartozó várakozási "
-"idők beállítása"
+msgstr "A jelszavak lejáratához és az azonosítók deaktiválásához tartozó várakozási idők beállítása"
 
 #: security/l10n.pm:39
 #, c-format
@@ -6105,8 +6014,7 @@ msgstr "A jelszótörténeti lista mérete"
 #: security/l10n.pm:40
 #, c-format
 msgid "Password minimum length and number of digits and upcase letters"
-msgstr ""
-"A minimális jelszóhossz és a számjegyek illetve a nagybetűk minimális száma"
+msgstr "A minimális jelszóhossz és a számjegyek illetve a nagybetűk minimális száma"
 
 #: security/l10n.pm:41
 #, c-format
@@ -6265,46 +6173,32 @@ msgid ""
 msgstr ""
 "Ezt a szintet csak körültekintéssel használja.\n"
 "Egyszerűbbé teszi a rendszer használatát, de így az sebezhetőbb is lesz:\n"
-"ne válassza ezt a szintet, ha a gép hálózatba van kötve, vagy az "
-"internethez\n"
+"ne válassza ezt a szintet, ha a gép hálózatba van kötve, vagy az internethez\n"
 "csatlakozik. A hozzáférés nincs jelszóval védve."
 
 #: security/level.pm:44
 #, c-format
-msgid ""
-"Passwords are now enabled, but use as a networked computer is still not "
-"recommended."
+msgid "Passwords are now enabled, but use as a networked computer is still not recommended."
 msgstr ""
 "A jelszavak be vannak kapcsolva, de hálózatra kapcsolódó gép esetén\n"
 "ez a konfiguráció még mindig nem ajánlott."
 
 #: security/level.pm:45
 #, c-format
-msgid ""
-"This is the standard security recommended for a computer that will be used "
-"to connect to the Internet as a client."
-msgstr ""
-"Ez a szabványos biztonsági szint, amely az internetre (kliensként) "
-"csatlakozó gépek esetén javasolt."
+msgid "This is the standard security recommended for a computer that will be used to connect to the Internet as a client."
+msgstr "Ez a szabványos biztonsági szint, amely az internetre (kliensként) csatlakozó gépek esetén javasolt."
 
 #: security/level.pm:46
 #, c-format
-msgid ""
-"There are already some restrictions, and more automatic checks are run every "
-"night."
-msgstr ""
-"Már vannak bizonyos megszorítások, és több automatikus ellenőrzés fut "
-"éjszakánként."
+msgid "There are already some restrictions, and more automatic checks are run every night."
+msgstr "Már vannak bizonyos megszorítások, és több automatikus ellenőrzés fut éjszakánként."
 
 #: security/level.pm:47
 #, c-format
 msgid ""
-"With this security level, the use of this system as a server becomes "
-"possible.\n"
-"The security is now high enough to use the system as a server which can "
-"accept\n"
-"connections from many clients. Note: if your machine is only a client on the "
-"Internet, you should choose a lower level."
+"With this security level, the use of this system as a server becomes possible.\n"
+"The security is now high enough to use the system as a server which can accept\n"
+"connections from many clients. Note: if your machine is only a client on the Internet, you should choose a lower level."
 msgstr ""
 "Ezzel a biztonsági szinttel már használhatja a gépét kiszolgálóként.\n"
 "Ez a biztonsági szint elég magas ahhoz, hogy a rendszer sok, hálózaton\n"
@@ -6313,9 +6207,7 @@ msgstr ""
 
 #: security/level.pm:50
 #, c-format
-msgid ""
-"This is similar to the previous level, but the system is entirely closed and "
-"security features are at their maximum."
+msgid "This is similar to the previous level, but the system is entirely closed and security features are at their maximum."
 msgstr ""
 "Az előző szinthez hasonló, de itt a rendszer teljesen zárt.\n"
 "Ez a legbiztonságosabb szint."
@@ -6384,8 +6276,7 @@ msgstr ""
 #, c-format
 msgid ""
 "cron is a standard UNIX program that runs user-specified programs\n"
-"at periodic scheduled times. vixie cron adds a number of features to the "
-"basic\n"
+"at periodic scheduled times. vixie cron adds a number of features to the basic\n"
 "UNIX cron, including better security and more powerful configuration options."
 msgstr ""
 "A cron a szabványos parancsütemező program a UNIX operációs rendszereken.\n"
@@ -6395,8 +6286,7 @@ msgstr ""
 
 #: services.pm:28
 #, c-format
-msgid ""
-"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr "A CUPS (Common UNIX Printing System) egy fejlett nyomtatási rendszer"
 
 #: services.pm:29
@@ -6407,20 +6297,17 @@ msgstr "Elindítja a grafikus bejelentkezéskezelőt"
 #: services.pm:30
 #, c-format
 msgid ""
-"FAM is a file monitoring daemon. It is used to get reports when files "
-"change.\n"
+"FAM is a file monitoring daemon. It is used to get reports when files change.\n"
 "It is used by GNOME and KDE"
 msgstr ""
-"A FAM egy fájlfigyelő szolgáltatás, amely értesítést küld a fájlok "
-"változásakor.\n"
+"A FAM egy fájlfigyelő szolgáltatás, amely értesítést küld a fájlok változásakor.\n"
 "A GNOME és a KDE is használja."
 
 #: services.pm:32
 #, c-format
 msgid ""
 "GPM adds mouse support to text-based Linux applications such the\n"
-"Midnight Commander. It also allows mouse-based console cut-and-paste "
-"operations,\n"
+"Midnight Commander. It also allows mouse-based console cut-and-paste operations,\n"
 "and includes support for pop-up menus on the console."
 msgstr ""
 "A GPM egértámogatást biztosít a szöveg alapú (konzolos) linuxos\n"
@@ -6444,8 +6331,7 @@ msgstr ""
 
 #: services.pm:38
 #, c-format
-msgid ""
-"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
 "Az Apache egy WWW kiszolgáló. HTML fájlokat és CGI-t tesz elérhetővé\n"
 "a hálózaton keresztül."
@@ -6454,10 +6340,8 @@ msgstr ""
 #, c-format
 msgid ""
 "The internet superserver daemon (commonly called inetd) starts a\n"
-"variety of other internet services as needed. It is responsible for "
-"starting\n"
-"many services, including telnet, ftp, rsh, and rlogin. Disabling inetd "
-"disables\n"
+"variety of other internet services as needed. It is responsible for starting\n"
+"many services, including telnet, ftp, rsh, and rlogin. Disabling inetd disables\n"
 "all of the services it is responsible for."
 msgstr ""
 "Az \"internet szuperszerver szolgáltatás\" (inetd) felelős sok hálózati\n"
@@ -6497,9 +6381,7 @@ msgstr ""
 #: services.pm:50
 #, c-format
 msgid "Automatic detection and configuration of hardware at boot."
-msgstr ""
-"A hardvereszközök automatikus felderítése és beállítása a rendszer "
-"indulásakor."
+msgstr "A hardvereszközök automatikus felderítése és beállítása a rendszer indulásakor."
 
 #: services.pm:51
 #, c-format
@@ -6531,18 +6413,14 @@ msgstr ""
 
 #: services.pm:57
 #, c-format
-msgid ""
-"DBUS is a daemon which broadcasts notifications of system events and other "
-"messages"
+msgid "DBUS is a daemon which broadcasts notifications of system events and other messages"
 msgstr ""
 "A DBUS szolgáltatás értesítéseket küld rendszereseményekről, továbbá egyéb\n"
 "üzeneteket közvetít."
 
 #: services.pm:58
 #, c-format
-msgid ""
-"named (BIND) is a Domain Name Server (DNS) that is used to resolve host "
-"names to IP addresses."
+msgid "named (BIND) is a Domain Name Server (DNS) that is used to resolve host names to IP addresses."
 msgstr ""
 "A named (BIND) egy DNS, azaz tartománynév kiszolgáló, ennek segítségével\n"
 "feleltetik meg a gépek az IP címeket és a gépneveket."
@@ -6589,8 +6467,7 @@ msgstr ""
 #: services.pm:68
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
-msgstr ""
-"Szinkronizálja a rendszeridőt az NTP (Network Time Protocol) használatával."
+msgstr "Szinkronizálja a rendszeridőt az NTP (Network Time Protocol) használatával."
 
 #: services.pm:69
 #, c-format
@@ -6610,8 +6487,7 @@ msgstr "Az OKI 4w és az azzal kompatibilis windowsos nyomtatók támogatása."
 #, c-format
 msgid ""
 "PCMCIA support is usually to support things like ethernet and\n"
-"modems in laptops.  It will not get started unless configured so it is safe "
-"to have\n"
+"modems in laptops.  It will not get started unless configured so it is safe to have\n"
 "it installed on machines that do not need it."
 msgstr ""
 "A PCMCIA támogatásra általában azoknak a laptop használóknak van\n"
@@ -6623,8 +6499,7 @@ msgstr ""
 #, c-format
 msgid ""
 "The portmapper manages RPC connections, which are used by\n"
-"protocols such as NFS and NIS. The portmap server must be running on "
-"machines\n"
+"protocols such as NFS and NIS. The portmap server must be running on machines\n"
 "which act as servers for protocols which make use of the RPC mechanism."
 msgstr ""
 "A portmapper kezeli az RPC kapcsolatokat - ezekre többek között az\n"
@@ -6634,9 +6509,7 @@ msgstr ""
 
 #: services.pm:78
 #, c-format
-msgid ""
-"Postfix is a Mail Transport Agent, which is the program that moves mail from "
-"one machine to another."
+msgid "Postfix is a Mail Transport Agent, which is the program that moves mail from one machine to another."
 msgstr ""
 "A Postfix egy levéltovábbító (MTA) program, amely a leveleket továbbítja\n"
 "a különböző gépek között."
@@ -6703,20 +6576,13 @@ msgstr ""
 
 #: services.pm:92
 #, c-format
-msgid ""
-"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
-msgstr ""
-"A SANE (Scanner Access Now Easy) hozzáférést biztosít lapolvasókhoz, "
-"videokamerákhoz és egyéb eszközökhöz."
+msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgstr "A SANE (Scanner Access Now Easy) hozzáférést biztosít lapolvasókhoz, videokamerákhoz és egyéb eszközökhöz."
 
 #: services.pm:93
 #, c-format
-msgid ""
-"The SMB/CIFS protocol enables to share access to files & printers and also "
-"integrates with a Windows Server domain"
-msgstr ""
-"Az SMB/CIFS protokoll lehetővé teszi fájlok és nyomtatók megosztását, "
-"továbbá képes integrálódni windowsos kiszolgálók tartományaiba."
+msgid "The SMB/CIFS protocol enables to share access to files & printers and also integrates with a Windows Server domain"
+msgstr "Az SMB/CIFS protokoll lehetővé teszi fájlok és nyomtatók megosztását, továbbá képes integrálódni windowsos kiszolgálók tartományaiba."
 
 #: services.pm:94
 #, c-format
@@ -6725,12 +6591,8 @@ msgstr "A gép hangrendszerének elindítása"
 
 #: services.pm:95
 #, c-format
-msgid ""
-"Secure Shell is a network protocol that allows data to be exchanged over a "
-"secure channel between two computers"
-msgstr ""
-"Az SSH (Secure Shell) hálózati protokoll biztonságos csatornán való "
-"adatcserét tesz lehetővé két számítógép közt."
+msgid "Secure Shell is a network protocol that allows data to be exchanged over a secure channel between two computers"
+msgstr "Az SSH (Secure Shell) hálózati protokoll biztonságos csatornán való adatcserét tesz lehetővé két számítógép közt."
 
 #: services.pm:96
 #, c-format
@@ -6786,7 +6648,8 @@ msgstr "Távoli adminisztráció"
 msgid "Database Server"
 msgstr "Adatbázis kiszolgáló"
 
-#: services.pm:153 services.pm:192
+#: services.pm:153
+#: services.pm:192
 #, c-format
 msgid "Services"
 msgstr "Szolgáltatások"
@@ -6825,7 +6688,8 @@ msgstr ""
 "Nem érhető el további információ\n"
 "erről a szolgáltatásról."
 
-#: services.pm:224 ugtk2.pm:924
+#: services.pm:224
+#: ugtk2.pm:924
 #, c-format
 msgid "Info"
 msgstr "Információ"
@@ -6865,8 +6729,7 @@ msgid ""
 "\n"
 "You should have received a copy of the GNU General Public License\n"
 "along with this program; if not, write to the Free Software\n"
-"Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, "
-"USA.\n"
+"Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n"
 msgstr ""
 "Ez a program szabad szoftver; terjeszthető és/vagy módosítható\n"
 "a Free Software Foundation által publikált GNU General Public\n"
@@ -6891,8 +6754,7 @@ msgid ""
 "--default             : save default directories.\n"
 "--debug               : show all debug messages.\n"
 "--show-conf           : list of files or directories to backup.\n"
-"--config-info         : explain configuration file options (for non-X "
-"users).\n"
+"--config-info         : explain configuration file options (for non-X users).\n"
 "--daemon              : use daemon configuration. \n"
 "--help                : show this message.\n"
 "--version             : show version number.\n"
@@ -7000,12 +6862,9 @@ msgid ""
 "--start          : start MTS\n"
 "--stop           : stop MTS\n"
 "--adduser        : add an existing system user to MTS (requires username)\n"
-"--deluser        : delete an existing system user from MTS (requires "
-"username)\n"
-"--addclient      : add a client machine to MTS (requires MAC address, IP, "
-"nbi image name)\n"
-"--delclient      : delete a client machine from MTS (requires MAC address, "
-"IP, nbi image name)"
+"--deluser        : delete an existing system user from MTS (requires username)\n"
+"--addclient      : add a client machine to MTS (requires MAC address, IP, nbi image name)\n"
+"--delclient      : delete a client machine from MTS (requires MAC address, IP, nbi image name)"
 msgstr ""
 "[OPCIÓK]...\n"
 "A Mandriva Linux terminálkiszolgáló (MTS) beállítása\n"
@@ -7059,11 +6918,9 @@ msgstr ""
 #, c-format
 msgid ""
 "[OPTION]...\n"
-"  --no-confirmation      do not ask first confirmation question in Mandriva "
-"Update mode\n"
+"  --no-confirmation      do not ask first confirmation question in Mandriva Update mode\n"
 "  --no-verify-rpm        do not verify packages signatures\n"
-"  --changelog-first      display changelog before filelist in the "
-"description window\n"
+"  --changelog-first      display changelog before filelist in the description window\n"
 "  --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"
 msgstr ""
 "[OPCIÓ]...\n"
@@ -7077,12 +6934,8 @@ msgstr ""
 
 #: standalone.pm:117
 #, c-format
-msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
-"usbtable] [--dynamic=dev]"
-msgstr ""
-"[--manual] [--device=eszköz] [--update-sane=sane_forráskönyvtár] [--update-"
-"usbtable] [--dynamic=eszköz]"
+msgid "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-usbtable] [--dynamic=dev]"
+msgstr "[--manual] [--device=eszköz] [--update-sane=sane_forráskönyvtár] [--update-usbtable] [--dynamic=eszköz]"
 
 #: standalone.pm:118
 #, c-format
@@ -7099,14 +6952,13 @@ msgstr ""
 #, c-format
 msgid ""
 "\n"
-"Usage: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
-"testing] [-v|--version] "
+"Usage: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--testing] [-v|--version] "
 msgstr ""
 "\n"
-"Használat: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
-"testing] [-v|--version] "
+"Használat: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--testing] [-v|--version] "
 
-#: timezone.pm:161 timezone.pm:162
+#: timezone.pm:161
+#: timezone.pm:162
 #, c-format
 msgid "All servers"
 msgstr "Az összes kiszolgáló"
@@ -7267,25 +7119,19 @@ msgstr "A telepítés hibával ért véget."
 #~ "A következő CD-n található komponensek minden joga azok szerzőit illeti\n"
 #~ "meg, és a szoftvertermékekre vonatkozó szellemi és szerzői jogi\n"
 #~ "törvények érvényesek rájuk.\n"
-
 #~ msgid "Use libsafe for servers"
 #~ msgstr "A libsafe használata kiszolgálókhoz"
-
 #~ msgid ""
 #~ "A library which defends against buffer overflow and format string attacks."
 #~ msgstr ""
 #~ "Könyvtár, amely védelmet nyújt a puffertúlcsordulásos és a "
 #~ "formátumsztringes támadások ellen."
-
 #~ msgid "LILO/grub Installation"
 #~ msgstr "A LILO/GRUB telepítése"
-
 #~ msgid "Precise RAM size if needed (found %d MB)"
 #~ msgstr "RAM méret, ha szükséges (felismert: %d MB)"
-
 #~ msgid "Give the ram size in MB"
 #~ msgstr "A fizikai memória mérete MB-ban"
-
 #~ msgid ""
 #~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
 #~ "is enough)\n"
@@ -7293,73 +7139,52 @@ msgstr "A telepítés hibával ért véget."
 #~ msgstr ""
 #~ "Ha az aboot-ot fogja használni, először ellenőrizze, hogy maradt-e elég\n"
 #~ "hely (legalább 2048 szektor) a lemez elején"
-
 #~ msgid "Security level"
 #~ msgstr "Biztonsági szint"
-
 #~ msgid "Expand Tree"
 #~ msgstr "A fa kibontása"
-
 #~ msgid "Collapse Tree"
 #~ msgstr "A fa összecsukása"
-
 #~ msgid "Toggle between flat and group sorted"
 #~ msgstr "Váltás sima és csoportok szerint rendezett nézet között"
-
 #~ msgid "Choose action"
 #~ msgstr "Válasszon"
-
 #~ msgid "Active Directory with SFU"
 #~ msgstr "Active Directory SFU-val"
-
 #~ msgid "Active Directory with Winbind"
 #~ msgstr "Active Directory Winbinddal"
-
 #~ msgid "Use information stored in local files for all authentication"
 #~ msgstr ""
 #~ "Helyi fájlokban levő információk használata minden "
 #~ "felhasználóazonosításhoz"
-
 #~ msgid "Active Directory with SFU:"
 #~ msgstr "Active Directory SFU-val:"
-
 #~ msgid "Active Directory with Winbind:"
 #~ msgstr "Active Directory Winbinddal:"
-
 #~ msgid ""
 #~ "Winbind allows the system to authenticate users in a Windows Active "
 #~ "Directory Server."
 #~ msgstr ""
 #~ "A Winbind lehetővé teszi a rendszer számára, hogy felhasználókat "
 #~ "azonosítson egy windowsos Active Directory-kiszolgálón."
-
 #~ msgid "Authentication LDAP"
 #~ msgstr "LDAP-alapú azonosítás"
-
 #~ msgid "TLS"
 #~ msgstr "TLS"
-
 #~ msgid "SSL"
 #~ msgstr "SSL"
-
 #~ msgid "security layout (SASL/Kerberos)"
 #~ msgstr "biztonsági rendszer (SASL/Kerberos)"
-
 #~ msgid "Authentication Active Directory"
 #~ msgstr "Azonosítás - Active Directory"
-
 #~ msgid "LDAP users database"
 #~ msgstr "LDAP-felhasználók adatbázisa"
-
 #~ msgid "LDAP user allowed to browse the Active Directory"
 #~ msgstr "Az LDAP-felhasználó böngészheti az Active Directoryt"
-
 #~ msgid "Password for user"
 #~ msgstr "A felhasználó jelszava"
-
 #~ msgid "Authentication NIS"
 #~ msgstr "NIS-alapú azonosítás"
-
 #~ msgid ""
 #~ "For this to work for a W2K PDC, you will probably need to have the admin "
 #~ "run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
@@ -7388,43 +7213,32 @@ msgstr "A telepítés hibával ért véget."
 #~ "adminisztrátori név illetve jelszó használatával.\n"
 #~ "A 'wbinfo -t' parancs használatával letesztelhető, hogy a hozzáférés "
 #~ "(illetve a létrehozott gépazonosító) működik-e."
-
 #~ msgid "Authentication Windows Domain"
 #~ msgstr "Hitelesítési Windows-tartomány"
-
 #~ msgid "Undo"
 #~ msgstr "Visszavonás"
-
 #~ msgid "Save partition table"
 #~ msgstr "A partíciós tábla mentése"
-
 #~ msgid "Restore partition table"
 #~ msgstr "Partíciós tábla visszatöltése"
-
 #~ msgid ""
 #~ "The backup partition table has not the same size\n"
 #~ "Still continue?"
 #~ msgstr ""
 #~ "A partíciós tábla két példányának mérete eltér.\n"
 #~ "Mégis kívánja folytatni a műveletet?"
-
 #~ msgid "Info: "
 #~ msgstr "Információ: "
-
 #~ msgid "Unknown driver"
 #~ msgstr "Ismeretlen meghajtó"
-
 #~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
 #~ msgstr "Hiba: a hangkártya meghajtója (%s) nem elérhető"
-
 #~ msgid "Error reading file %s"
 #~ msgstr "Hiba a(z) %s fájl olvasása közben"
-
 #~ msgid "Restoring from file %s failed: %s"
 #~ msgstr "A(z) %s fájlból való visszaállítás sikertelen: %s"
-
 #~ msgid "Bad backup file"
 #~ msgstr "Hibás mentésfájl"
-
 #~ msgid "Error writing to file %s"
 #~ msgstr "Hiba a(z) %s fájl írása közben"
+
