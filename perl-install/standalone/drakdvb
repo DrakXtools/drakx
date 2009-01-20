@@ -1,0 +1,106 @@
+#!/usr/bin/perl
+#
+# Copyright (C) 2009 Mandriva
+#                    Pascal Terjan <pterjan@mandriva.com>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+use lib qw(/usr/lib/libDrakX);
+
+use common;
+use standalone;
+use run_program;
+use mygtk2;
+use interactive;
+use ugtk2 qw(:create :helpers :wrappers);
+use Gtk2::SimpleList;
+
+my $title = N("DVB");
+$ugtk2::wm_icon = "/usr/share/mcc/themes/default/tv-mdk.png";
+my $w = ugtk2->new($title);
+$::main_window = $w->{real_window};
+my $in = 'interactive'->vnew;
+
+my $config_file = "$ENV{HOME}/.mplayer/channels.conf";
+
+my $channel_list = Gtk2::SimpleList->new(N("Channel")=> "text");
+my %buttons;
+
+sub get_selected_channel() {
+    my ($index) = $channel_list->get_selected_indices;
+    defined $index && $channel_list->{data}[$index][0];
+}
+
+sub detect_channels {
+    $in->ask_okcancel(N("Warning"), N("%s already exists and its contents will be lost", $config_file)) or return;
+    gtkset_mousecursor_wait($w->{window}->window);
+    $channel_list->set_sensitive(0);
+    $_->set_sensitive(0) foreach values %buttons;
+    gtkflush();
+    my $_w = $in->wait_message(N("Please wait"), N("Detecting DVB channels, this will take a few minutes"));
+    if(run_program::run("w_scan -X > $config_file")){
+        load_channels();
+    } else {
+        $in->ask_warn(N("Error"), N("Could not get the list of available channels"));
+    };
+    gtkset_mousecursor_normal($w->{window}->window);
+    $buttons{detect}->set_sensitive(1);
+    $channel_list->set_sensitive(1);
+}
+
+sub load_channels {
+    @{$channel_list->{data}} = ();
+    open(CHANNELCONF, "<$config_file");
+    while(<CHANNELCONF>) {
+        my($line) = $_;
+        if ($line =~ /^([^:]*)(\([^(:]*\))?:/) {
+            push @{$channel_list->{data}}, $1;
+        }
+    }
+    close(CHANNELCONF);
+    if (defined @{$channel_list->{data}}[0]) {
+        $channel_list->select(0);
+    }
+}
+
+sub launch_tv {
+    system('mplayer "dvb://'.get_selected_channel().'"&');
+}
+
+my $view_channel_button;
+
+gtkadd($w->{window},
+       gtknew('VBox', spacing => 5, children => [
+                  $::isEmbedded ? () : (0, Gtk2::Banner->new($ugtk2::wm_icon, $title)),
+                  1, gtknew('ScrolledWindow', width => 300, height => 400, child => $channel_list),
+                  0, gtknew('HButtonBox', layout => 'end', children_loose => [
+                                $buttons{detect} = gtknew('Button', text => N("Detect Channels"), clicked => \&detect_channels),
+                                gtknew('Button', text => N("Quit"), clicked => sub { Gtk2->main_quit }),
+                                $buttons{view} = gtknew('Button', text => N("View Channel"), clicked => \&launch_tv),
+                            ]),
+              ]),
+    );
+
+$buttons{view}->set_sensitive(0);
+$channel_list->get_selection->signal_connect('changed' => sub {
+    my ($index) = $channel_list->get_selected_indices;
+    $buttons{view}->set_sensitive(defined $index);
+});
+$channel_list->signal_connect('activated' => sub {
+    launch_tv();
+});
+load_channels();
+
+$w->main;
