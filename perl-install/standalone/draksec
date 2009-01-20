@@ -3,6 +3,7 @@
 #
 # Copyright (c) 2002-2008 Christian Belisle
 #                         Thierry Vignaud <tvignaud@mandriva.com>
+#			  Eugeni Dodonov <eugeni@mandriva.com>
 #
 # This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License version 2, as
@@ -81,85 +82,9 @@ sub wait_msg {
 
 sub remove_wait_msg { $_[0]->destroy }
 
-sub basic_seclevel_explanations() {
-    my $text = gtknew('TextView');
-    use Gtk2::Pango;
-    my %common_opts = ('left-margin' => '10', 'right-margin' => '10');
-
-    gtktext_insert($text, ugtk2::markup_to_TextView_format(formatAlaTeX(
-#-PO: Do not alter the <span ..> and </span> tags.
-#-PO: Translate the security levels (Poor, Standard, High, Higher and Paranoid) in the same way, you translated these individuals words.
-#-PO: keep the double empty lines between sections, this is formatted a la LaTeX.
-					  N("Here, you can setup the security level and administrator of your machine.
-
-
-The '<span weight=\"bold\">Security Administrator</span>' is the one who will receive security alerts if the
-'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a username or an email.
-
-
-The '<span weight=\"bold\">Security Level</span>' menu allows you to select one of the six preconfigured security levels
-provided with msec. These levels range from '<span weight=\"bold\">poor</span>' security and ease of use, to
-'<span weight=\"bold\">paranoid</span>' config, suitable for very sensitive server applications:
-
-
-<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but very
-easy to use security level. It should only be used for machines not connected to
-any network and that are not accessible to everybody.
-
-
-<span foreground=\"royalblue3\">Standard</span>: This is the standard security
-recommended for a computer that will be used to connect to the Internet as a
-client.
-
-
-<span foreground=\"royalblue3\">High</span>: There are already some
-restrictions, and more automatic checks are run every night.
-
-
-<span foreground=\"royalblue3\">Higher</span>: The security is now high enough
-to use the system as a server which can accept connections from many clients. If
-your machine is only a client on the Internet, you should choose a lower level.
-
-
-<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the previous
-level, but the system is entirely closed and security features are at their
-maximum")), \%common_opts));
-
-    gtknew('ScrolledWindow', h_policy => 'never', child => $text);
-}
-
 sub new_nonedit_combo {
     my ($string_list, $o_default_value) = @_;
     gtknew('ComboBox', text => to_i18n($o_default_value), list => [ to_i18n(@$string_list) ]);
-}
-
-sub register_help_page {
-     my ($domain) = @_;
-     push @help,
-       ([ 
-         [ $domain . "\n\n", 
-           {
-            justification => 'center',
-            scale => Gtk2::Pango->PANGO_SCALE_LARGE,
-            weight => Gtk2::Pango->PANGO_WEIGHT_BOLD, 
-           },
-         ],
-         [ N("Description of the fields:\n\n"), ],
-        ],
-       );
-}
-
-
-sub register_help_entry {
-     my ($label, $default, $opt) = @_;
-     my $help = $security::help::help{$opt};
-     push @{$help[-1]},
-       ([
-         formatAlaTeX($label) . ":\n",
-         {  foreground => "royalblue3" },
-        ],
-        [ join("\n", formatAlaTeX($help), N("(default value: %s)", map { s/ /, /g; $_ } to_i18n($default)), "\n") ]
-       );
 }
 
 my $msec = new security::msec;
@@ -181,114 +106,12 @@ $window->signal_connect('destroy', sub { ugtk2->exit });
 
 $window->add(my $vbox = gtkshow(gtknew('VBox')));
 
-# Create the notebook (for bookmarks at the top)
-my $notebook = create_notebook();
-
 my $common_opts = { col_spacings => 10, row_spacings => 5, mcc => 1 };
-
-######################## BASIC OPTIONS PAGE ################################
-my ($seclevel_entry, $secadmin_entry);
-
-$notebook->append_page(gtkshow(gtknew('VBox', children => [
-                                       1, basic_seclevel_explanations(),
-                                       0, create_packtable($common_opts,
-                                                        [ 
-                                                          do {
-                                                              my @sec_levels = security::level::get_common_list();
-                                                              my $current_level = security::level::get_string();
-                                                              
-                                                              push(@sec_levels, $current_level) unless member($current_level, @sec_levels);
-                                                              $seclevel_entry = new_nonedit_combo(\@sec_levels, $current_level);
-                                                              
-                                                              gtknew('Label_Left', text => N("Security Level:")), $seclevel_entry;
-                                                          }
-                                                          ],
-                                                        [ gtknew('Label_Left', text => N("Security Alerts:")), 
-                                                          my $secadmin_check = gtksignal_connect(gtknew('CheckButton'), toggled => sub {
-                                                                                                     $secadmin_entry->set_sensitive($_[0]->get_active);
-                                                                                                 }) ],
-                                                        [ gtknew('Label_Left', text => N("Security Administrator:")),
-                                                          $secadmin_entry = Gtk2::Entry->new_with_text($msec->get_check_value("MAIL_USER")) ]) ])),
-                               gtknew('Label', text => N("Basic options")));
-                       
-if ($msec->get_check_value("MAIL_WARN") eq "yes") {
-    $secadmin_check->set_active(1);
-} else {
-    $secadmin_entry->set_sensitive(0);
- }
-                       
-######################### NETWORK & SYSTEM OPTIONS #########################
-my @yesno_choices    = qw(yes no default ignore);
-my @alllocal_choices = qw(ALL LOCAL NONE default);
-my @all_choices = (@yesno_choices, @alllocal_choices);
-my %options_values;
-
-foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ]) {
-    my ($domain, $label) = @$_;
-    register_help_page($label);
-    my %values;
-    gtkappend_page(
-        $notebook, 
-        gtkshow(gtknew('VBox', children => [
-            1, create_scrolled_window(create_packtable($common_opts,
-                                                       map {
-                                                           my $i = $_;
-                                                           
-                                                           my $entry;
-                                                           my $opt = $inv_fields{$i} || $i;
-                                                           my $default = $msec->get_function_default($opt);
-                                                           if (member($default, @all_choices)) {
-                                                               $values{$i} = 
-                                                                 new_nonedit_combo(
-                                                                     member($default, @yesno_choices) ?
-                                                                       \@yesno_choices :
-                                                                         if_(member($default, @alllocal_choices),
-                                                                             \@alllocal_choices));
-                                                               $entry = $values{$i}->entry;
-                                                           } else {
-                                                               $values{$i} = gtknew('Entry');
-                                                               $entry = $values{$i};
-                                                           }
-                                                           $entry->set_text(to_i18n($msec->get_function_value($opt)));
-                                                           register_help_entry($i, $default, $opt);
-                                                           [ gtknew('Label_Left', line_wrap => 1, text => $i),
-                                                             resize($values{$i}) ];
-                                                       } sort map { $fields{$_} || $_ } $msec->list_functions($domain),
-                                                   ),
-                                      [ 'never', 'automatic' ],
-                                  ),
-        ])
-            ),
-        gtknew('Label_Left', text => $label));
-    $options_values{$domain} = \%values;
-}
-
-######################## PERIODIC CHECKS ###################################
-my %security_checks_value;
-
-my $check_string = N("Periodic Checks");
-
-register_help_page($check_string);
-gtkappend_page($notebook, 
-               gtkshow(gtknew('VBox', children => [
-                   1, create_scrolled_window(
-                       create_packtable($common_opts,
-                                        map {
-                                            my $i = $_;
-                                            my $opt = $inv_fields{$i} || $i;
-                                            $security_checks_value{$i} = new_nonedit_combo([ 'yes', 'no', 'default' ],
-                                                                                           $msec->get_check_value($opt));
-                                            register_help_entry($i, $msec->get_check_default($opt), $opt);
-                                            [ gtkshow(gtknew('Label_Left', line_wrap => 1, text => $i)),
-                                              resize($security_checks_value{$i}) ];
-                                        } sort map { $fields{$_} || $_ } $msec->list_checks)) ])),
-               gtknew('Label', text => $check_string));
-
 
 ######################## AUTH ###################################
 my %progs;
 
-my $auth_string = N("Authentication");
+my $auth_string = N("Configure authentication required to access Mandriva tools");
 
 my %auth = (
       no_passwd => N("No password"),
@@ -347,89 +170,49 @@ my %descr = (
     drakboot => N("Boot Configuration"),
 );
 
-gtkappend_page(
-    $notebook,
-    gtkshow(create_scrolled_window(
-        gtknew('VBox', children => [
-            1, create_packtable(
-                $common_opts,
-            map {
-                my ($title, $progs) = @$_;
-                ([ gtknew('Title2', label => $title), '' ],
-                     map {
-                         [
-                             gtkshow(gtknew('Label_Left', line_wrap => 1, text => $descr{$_} || $_)),
-                                 $progs{$_} = new_nonedit_combo([
-                                     @auth{qw(user_passwd root_passwd no_passwd)}
-                                 ],
-                                                                default_auth_value($_)
-                                                                #$msec->get_check_value($opt)
-                                                            )
-                         ];
-                     } split(' ', $progs)
-                );
-            } (
-                [ N("Software Management"), 'rpmdrake mandrivaupdate drakrpm-edit-media' ],
-                [ N("Hardware"), 'drak3d xfdrake drakmouse drakkeyboard drakups' ],
-                [ N("Network"), 'drakconnect drakhosts draknetcenter drakvpn drakproxy drakgw' ],
-                [ N("System"), 'drakauth drakbackup drakfont draklog drakxservices userdrake drakclock' ],
-                [ N("Boot"), 'drakboot' ],
-            )
-        )
-        ]))),
-    gtknew('Label', text => $auth_string));
-
 
 
 
 
 ####################### OK CANCEL BUTTONS ##################################
 gtkpack_($vbox,
-         1, gtkshow($notebook),
+	 0, gtkshow(gtknew('VBox', spacing => 5, children => [
+			if_(!$::isEmbedded, 0, Gtk2::Banner->new('/usr/share/mcc/themes/default/drakperm-mdk.png', N("Permissions"))),
+			0, gtknew('Label', text => $auth_string, alignment => [ 0.5, 0])
+		])),
+         1, gtkshow(create_scrolled_window(
+			gtknew('VBox', children => [
+			    1, create_packtable(
+				$common_opts,
+			    map {
+				my ($title, $progs) = @$_;
+				([ gtknew('Title2', label => $title), '' ],
+				     map {
+					 [
+					     gtkshow(gtknew('Label_Left', line_wrap => 1, text => $descr{$_} || $_)),
+						 $progs{$_} = new_nonedit_combo([
+						     @auth{qw(user_passwd root_passwd no_passwd)}
+						 ],
+										default_auth_value($_)
+										#$msec->get_check_value($opt)
+									    )
+					 ];
+				     } split(' ', $progs)
+				);
+			    } (
+				[ N("Software Management"), 'rpmdrake mandrivaupdate drakrpm-edit-media' ],
+				[ N("Hardware"), 'drak3d xfdrake drakmouse drakkeyboard drakups' ],
+				[ N("Network"), 'drakconnect drakhosts draknetcenter drakvpn drakproxy drakgw' ],
+				[ N("System"), 'drakauth drakbackup drakfont draklog drakxservices userdrake drakclock' ],
+				[ N("Boot"), 'drakboot' ],
+			    )
+			)
+			]))),
+
          0, create_okcancel(my $oc =
                             {
                              cancel_clicked => sub { ugtk2->exit(0) },
                              ok_clicked => sub {
-                                my $seclevel_value = $seclevel_entry->entry->get_text;
-                                my $secadmin_check_value = $secadmin_check->get_active;
-                                my $secadmin_value = $secadmin_entry->get_text;
-                                my $w;
-
-                                log::explanations("Configuring msec");
-
-                                if ($seclevel_value ne security::level::get_string()) {
-                                    $w = wait_msg(N("Please wait, setting security level..."));
-                                    log::explanations(qq(Setting security level to "$seclevel_value"));
-                                    security::level::set(security::level::from_string($seclevel_value));
-                                    remove_wait_msg($w);
-                                }
-
-                                $w = wait_msg(N("Please wait, setting security options..."));
-                                log::explanations(qq(Setting security administrator option to ") . bool2yesno($secadmin_check_value) . '"');
-                                $msec->set_check('MAIL_WARN', bool2yesno($secadmin_check_value));
-
-                                if ($secadmin_value ne $msec->get_check_value('MAIL_USER') && $secadmin_check_value) {
-                                    log::explanations(qq(Setting security administrator contact to "$secadmin_value"));
-                                    $msec->set_check('MAIL_USER', $secadmin_value);
-                                  }
-
-                                log::explanations("Setting security periodic checks");
-                                foreach my $key (keys %security_checks_value) {
-                                    $msec->set_check($inv_fields{$key} || $key, from_i18n($security_checks_value{$key}->entry->get_text));
-                                }
-                                $msec->apply_checks;
-
-                                foreach my $domain (keys %options_values) {
-                                    log::explanations("Setting msec functions related to $domain");
-                                    foreach my $key (keys %{$options_values{$domain}}) {
-                                        my $opt = $options_values{$domain}{$key};
-                                        $msec->set_function($inv_fields{$key} || $key, from_i18n($opt->get_text));
-                                    }
-                                }
-                                $msec->apply_functions;
-                                log::explanations("Applying msec changes");
-                                run_program::run("/usr/sbin/msec");
-
                                 log::explanations("Setting up right delegation");
                                 my %rev_auth = reverse %auth;
                                 foreach my $key (keys %progs) {
@@ -438,43 +221,15 @@ gtkpack_($vbox,
                                 }
 
                                 remove_wait_msg($w);
-
-                                if ($secadmin_value ne $msec->get_check_value('CHKROOTKIT_CHECK')) {
-                                    $in->do_pkgs->ensure_is_installed_if_available('chkrootkit', '/usr/sbin/chkrootkit');
-                                }
-
                                 ugtk2->exit(0);
                             }
                             },
-                            undef, undef, '',
-                            [ N("Help"), sub {
-                                  my $text = gtknew('TextView');
-                                  create_dialog(N("Help"), 
-                                                gtktext_insert($text,
-                                                               [
-                                                                # -1 b/c of main page:
-                                                                @{$help[$notebook->get_current_page-1]}
-                                                               ]
-                                                              ),
-                                                { use_markup => 1,
-                                                  transient => $w->{real_window},
-                                                  height => 400,
-                                                  width => 600,
-                                                  scroll => 1,
-                                                },
-                                               );
-                              } ],
+                            undef, undef, ''
                            ),
         );
 
-$notebook->set_scrollable(1);
-$notebook->signal_connect("switch-page" => sub { $oc->{buttons}{N("Help")}->set_sensitive(!member($_[2], qw(0 4))) });
-
-$oc->{buttons}{N("Help")}->set_sensitive(0);
 $oc->{cancel}->can_default(1);
 $oc->{cancel}->grab_default;
-
-exit(1) if !$in->do_pkgs->ensure_is_installed('msec', '/usr/sbin/msec');
 
 $w->main;
 ugtk2->exit(0);
