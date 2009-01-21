@@ -29,6 +29,7 @@ use Gtk2::SimpleList;
 my $title = N("DVB");
 $ugtk2::wm_icon = "/usr/share/mcc/themes/default/tv-mdk.png";
 my $w = ugtk2->new($title);
+$w->{window}->signal_connect('destroy' => \&exitapp);
 $::main_window = $w->{real_window};
 my $in = 'interactive'->vnew;
 
@@ -37,7 +38,7 @@ my $config_file = "$ENV{HOME}/.mplayer/channels.conf";
 my $channel_list = Gtk2::SimpleList->new(N("Channel")=> "text", "id" => "hidden");
 my %buttons;
 my $pid;
-my $_w = ugtk2->new(N("Please wait"), grab => 1);
+my $_w;
 
 sub get_selected_channel() {
     my ($index) = $channel_list->get_selected_indices;
@@ -71,6 +72,8 @@ sub detect_channels {
         $buttons{detect}->set_sensitive(1);
         $channel_list->set_sensitive(1);
     };
+    $_w = ugtk2->new(N("Please wait"), grab => 1);
+    $_w->{window}->signal_connect('destroy' => \&exitapp);
     if ($pid = fork()) {
         gtkadd($_w->{window},
                gtkpack($_w->create_box_with_title(N("Detecting DVB channels, this will take a few minutes")),
