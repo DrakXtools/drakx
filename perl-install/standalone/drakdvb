@@ -21,7 +21,6 @@ use lib qw(/usr/lib/libDrakX);
 
 use common;
 use standalone;
-use run_program;
 use mygtk2;
 use interactive;
 use ugtk2 qw(:create :helpers :wrappers);
@@ -37,10 +36,17 @@ my $config_file = "$ENV{HOME}/.mplayer/channels.conf";
 
 my $channel_list = Gtk2::SimpleList->new(N("Channel")=> "text", "id" => "hidden");
 my %buttons;
+my $pid;
 
 sub get_selected_channel() {
     my ($index) = $channel_list->get_selected_indices;
     defined $index && $channel_list->{data}[$index][1];
+}
+
+sub exitapp {
+    local $SIG{TERM} = 'IGNORE';
+    kill TERM => -$$;
+    Gtk2->main_quit;
 }
 
 sub detect_channels {
@@ -48,16 +54,33 @@ sub detect_channels {
     gtkset_mousecursor_wait($w->{window}->window);
     $channel_list->set_sensitive(0);
     $_->set_sensitive(0) foreach values %buttons;
+
     gtkflush();
-    my $_w = $in->wait_message(N("Please wait"), N("Detecting DVB channels, this will take a few minutes"));
-    if(run_program::run("w_scan -X > $config_file")){
-        load_channels();
+
+    if ($pid = fork()) {
+        $SIG{CHLD} = sub {
+            $SIG{CHLD} = 'IGNORE';
+            waitpid($pid, 0);
+            if($?){
+                load_channels();
+            } else {
+                $in->ask_warn(N("Error"), N("Could not get the list of available channels"));
+            };
+            gtkset_mousecursor_normal($w->{window}->window);
+            $buttons{detect}->set_sensitive(1);
+            $channel_list->set_sensitive(1);
+        };
+        my $_w = ugtk2->new(N("Please wait"), grab => 1);
+        gtkadd($_w->{window},
+               gtkpack($_w->create_box_with_title(N("Detecting DVB channels, this will take a few minutes")),
+                       my $w = gtknew('Button', text => N("Cancel"), clicked => \&exitapp),
+               )
+            );
+        $_w->main;
     } else {
-        $in->ask_warn(N("Error"), N("Could not get the list of available channels"));
-    };
-    gtkset_mousecursor_normal($w->{window}->window);
-    $buttons{detect}->set_sensitive(1);
-    $channel_list->set_sensitive(1);
+        system("w_scan -X > $config_file");
+        POSIX::_exit($?);
+    }
 }
 
 sub load_channels {
@@ -87,7 +110,7 @@ gtkadd($w->{window},
                   1, gtknew('ScrolledWindow', width => 300, height => 400, child => $channel_list),
                   0, gtknew('HButtonBox', layout => 'end', children_loose => [
                                 $buttons{detect} = gtknew('Button', text => N("Detect Channels"), clicked => \&detect_channels),
-                                gtknew('Button', text => N("Quit"), clicked => sub { Gtk2->main_quit }),
+                                gtknew('Button', text => N("Quit"), clicked => \&exitapp),
                                 $buttons{view} = gtknew('Button', text => N("View Channel"), clicked => \&launch_tv),
                             ]),
               ]),
