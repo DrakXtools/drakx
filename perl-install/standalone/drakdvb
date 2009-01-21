@@ -35,12 +35,12 @@ my $in = 'interactive'->vnew;
 
 my $config_file = "$ENV{HOME}/.mplayer/channels.conf";
 
-my $channel_list = Gtk2::SimpleList->new(N("Channel")=> "text");
+my $channel_list = Gtk2::SimpleList->new(N("Channel")=> "text", "id" => "hidden");
 my %buttons;
 
 sub get_selected_channel() {
     my ($index) = $channel_list->get_selected_indices;
-    defined $index && $channel_list->{data}[$index][0];
+    defined $index && $channel_list->{data}[$index][1];
 }
 
 sub detect_channels {
@@ -65,8 +65,8 @@ sub load_channels {
     open(CHANNELCONF, "<$config_file");
     while(<CHANNELCONF>) {
         my($line) = $_;
-        if ($line =~ /^([^:]*)(\([^(:]*\))?:/) {
-            push @{$channel_list->{data}}, $1;
+        if ($line =~ /^([^:]*?)(\([^(:]*\))?:/) {
+            push @{$channel_list->{data}}, [$1, $1.$2];
         }
     }
     close(CHANNELCONF);
@@ -94,13 +94,16 @@ gtkadd($w->{window},
     );
 
 $buttons{view}->set_sensitive(0);
+
 $channel_list->get_selection->signal_connect('changed' => sub {
     my ($index) = $channel_list->get_selected_indices;
     $buttons{view}->set_sensitive(defined $index);
 });
-$channel_list->signal_connect('activated' => sub {
+
+$channel_list->signal_connect('row-activated' => sub {
     launch_tv();
 });
+
 load_channels();
 
 $w->main;
