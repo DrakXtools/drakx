@@ -37,6 +37,7 @@ my $config_file = "$ENV{HOME}/.mplayer/channels.conf";
 my $channel_list = Gtk2::SimpleList->new(N("Channel")=> "text", "id" => "hidden");
 my %buttons;
 my $pid;
+my $_w = ugtk2->new(N("Please wait"), grab => 1);
 
 sub get_selected_channel() {
     my ($index) = $channel_list->get_selected_indices;
@@ -57,20 +58,20 @@ sub detect_channels {
 
     gtkflush();
 
-    if ($pid = fork()) {
-        $SIG{CHLD} = sub {
-            $SIG{CHLD} = 'IGNORE';
-            waitpid($pid, 0);
-            if($?){
-                load_channels();
-            } else {
-                $in->ask_warn(N("Error"), N("Could not get the list of available channels"));
-            };
-            gtkset_mousecursor_normal($w->{window}->window);
-            $buttons{detect}->set_sensitive(1);
-            $channel_list->set_sensitive(1);
+    $SIG{CHLD} = sub {
+        $SIG{CHLD} = 'IGNORE';
+        $_w->{window}->hide;
+        waitpid($pid, 0);
+        if($?){
+            load_channels();
+        } else {
+            $in->ask_warn(N("Error"), N("Could not get the list of available channels"));
         };
-        my $_w = ugtk2->new(N("Please wait"), grab => 1);
+        gtkset_mousecursor_normal($w->{window}->window);
+        $buttons{detect}->set_sensitive(1);
+        $channel_list->set_sensitive(1);
+    };
+    if ($pid = fork()) {
         gtkadd($_w->{window},
                gtkpack($_w->create_box_with_title(N("Detecting DVB channels, this will take a few minutes")),
                        my $w = gtknew('Button', text => N("Cancel"), clicked => \&exitapp),
@@ -78,7 +79,9 @@ sub detect_channels {
             );
         $_w->main;
     } else {
+        $SIG{CHLD} = 'DEFAULT';
         system("w_scan -X > $config_file");
+        sleep(1);
         POSIX::_exit($?);
     }
 }
