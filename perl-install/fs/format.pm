@@ -108,7 +108,7 @@ sub part {
 sub write_label {
     my ($part) = @_;
 
-    $part->{device_LABEL} or return;
+    $part->{device_LABEL_changed} or return;
     $part->{isNotFormatted} and return;
 
     if ($part->{encrypt_key}) {
@@ -124,6 +124,7 @@ sub write_label {
       @args = ($cmd, devices::make($dev), $part->{device_LABEL});
     }
     run_program::raw({ timeout => 'never' }, @args) or die N("setting label on %s failed", $dev);
+    delete $part->{device_LABEL_changed};
 }
 
 sub part_raw {
@@ -222,6 +223,7 @@ sub clean_label {
 	    log::l("dropping LABEL=$part->{device_LABEL} since we don't know how to set labels for fs_type $fs_type");
 	    delete $part->{device_LABEL};
 	    delete $part->{prefer_device_LABEL};
+	    delete $part->{device_LABEL_changed};
 	}
     }
 }

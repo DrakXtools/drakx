@@ -41,6 +41,7 @@ struct part {
   bool prefer_device_UUID # should the {device_UUID} or the {device} be used in fstab
   bool prefer_device    # should the {device} be used in fstab
   bool faked_device     # false if {device} is a real device, true for nfs/smb/dav/none devices. If the field does not exist, we do not know
+  bool device_LABEL_changed # true if device_LABEL is different from the one on the disk
 
   string rootDevice     # 'sda', 'hdc' ... (can also be a VG_name)
   string real_mntpoint  # directly on real /, '/tmp/hdimage' ...
@@ -603,7 +604,7 @@ sub Type {
 
 sub Label {
     my ($in, $_hd, $part) = @_;
-    my $old_label = $part->{device_LABEL};
+    my $old_label = $part->{device_LABEL} || "";
 
     $in->ask_from(N("Set volume label"), N("Beware, this will be written to disk as soon as you validate!"),
 		  [
@@ -614,6 +615,8 @@ sub Label {
         $part->{device_LABEL} = $old_label;
         return;
     }
+    return if $old_label eq $part->{device_LABEL};
+    $part->{device_LABEL_changed} = 1;
     $part->{prefer_device_LABEL} = to_bool($part->{device_LABEL}) && !isLVM($part);
     fs::format::clean_label($part);
     fs::format::write_label($part);
