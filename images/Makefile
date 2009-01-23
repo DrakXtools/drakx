@@ -23,21 +23,25 @@ dist: tar
 tar:
 	@rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
 	@if [ -e ".svn" ]; then \
-		mkdir -p $(PRODUCT)-$(VERSION); \
-		svn export -q -rBASE . $(PRODUCT)-$(VERSION)/images; \
-		svn export -q -rBASE ../kernel $(PRODUCT)-$(VERSION)/kernel; \
-		cp ../Makefile.config $(PRODUCT)-$(VERSION)/; \
-		tar cfj $(PRODUCT)-$(VERSION).tar.bz2 $(PRODUCT)-$(VERSION); \
-		rm -rf $(PRODUCT)-$(VERSION); \
+		$(MAKE) dist-svn; \
 	elif [ -e "../.git" ]; then \
-		pushd .. &>/dev/null; \
-		git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD images kernel Makefile.config | bzip2 >images/$(PRODUCT)-$(VERSION).tar.bz2; \
-		popd &>/dev/null; \
+		$(MAKE) dist-git; \
 	else \
 		echo "Unknown SCM (not SVN nor GIT)";\
 		exit 1; \
 	fi;
 	$(info $(PRODUCT)-$(VERSION).tar.bz2 is ready)
+
+dist-svn:
+	mkdir -p $(PRODUCT)-$(VERSION) 
+	svn export -q -rBASE . $(PRODUCT)-$(VERSION)/images
+	svn export -q -rBASE ../kernel $(PRODUCT)-$(VERSION)/kernel
+	cp ../Makefile.config $(PRODUCT)-$(VERSION)/
+	tar cfj $(PRODUCT)-$(VERSION).tar.bz2 $(PRODUCT)-$(VERSION)
+	rm -rf $(PRODUCT)-$(VERSION)
+
+dist-git:
+	@cd ..; git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD images kernel Makefile.config | bzip2 >images/$(PRODUCT)-$(VERSION).tar.bz2;
 
 clean:
 	rm -rf images isolinux all.kernels modules.description
