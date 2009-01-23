@@ -118,14 +118,7 @@ display help.msg
 implicit 1
 EOF
     my $header_gfxboot = <<EOF;
-default gfxboot
-timeout 0
-prompt 0
-label harddisk
-  localboot 0x80
-label gfxboot
-  comboot gfxboot.com
-  append bootlogo
+ui gfxboot.com bootlogo
 EOF
     my $header_non_gfxboot = <<EOF;
 F1 help.msg
@@ -751,6 +744,7 @@ sub boot_iso {
     my $with_gfxboot = 0;
     _ "cp /usr/share/gfxboot/themes/Mandriva/install/* .boot_iso/isolinux" if $with_gfxboot;
 # _ "cp /home/pixel/cooker/soft/theme/mandriva-gfxboot-theme/inst/* .boot_iso/isolinux" if $with_gfxboot;
+    #_ "cp /home/teuf/mdv/src/mandriva-gfxboot-theme/inst/* .boot_iso/isolinux" if $with_gfxboot;
     _ "cp /usr/lib/syslinux/gfxboot.com .boot_iso/isolinux/gfxboot.com" if $with_gfxboot;
 
     output('.boot_iso/isolinux/isolinux.cfg', syslinux_cfg_all('', $with_gfxboot));
