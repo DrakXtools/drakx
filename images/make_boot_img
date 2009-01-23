@@ -708,6 +708,7 @@ sub isolinux {
     syslinux_all_files('isolinux', $kernels);
 
     _ "cp $isolinux_bin isolinux/isolinux.bin";
+    _ "cp /usr/lib/syslinux/gfxboot.com isolinux/gfxboot.com";
     output("isolinux/isolinux.cfg", syslinux_cfg_all('cdrom', 1));
 
     xbox_stage1() if arch() =~ /i.86/;
