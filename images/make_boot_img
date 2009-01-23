@@ -119,6 +119,8 @@ implicit 1
 EOF
     my $header_gfxboot = <<EOF;
 ui gfxboot.com bootlogo
+label harddisk
+  localboot 0x80
 EOF
     my $header_non_gfxboot = <<EOF;
 F1 help.msg
