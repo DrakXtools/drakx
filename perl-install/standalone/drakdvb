@@ -53,7 +53,7 @@ sub exitapp() {
 }
 
 sub detect_channels() {
-    if (-e $config_file) {
+    if (-s $config_file) {
         $in->ask_okcancel(N("Warning"), N("%s already exists and its contents will be lost", $config_file)) or return;
     }
     gtkset_mousecursor_wait($w->{window}->window);
