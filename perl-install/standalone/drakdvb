@@ -38,7 +38,7 @@ my $config_file = "$ENV{HOME}/.mplayer/channels.conf";
 my $channel_list = Gtk2::SimpleList->new(N("Channel") => "text", "id" => "hidden");
 my %buttons;
 my $pid;
-my $_w;
+my $wait;
 
 sub get_selected_channel() {
     my ($index) = $channel_list->get_selected_indices;
@@ -63,7 +63,7 @@ sub detect_channels() {
 
     $SIG{CHLD} = sub {
         $SIG{CHLD} = 'IGNORE';
-        $_w->{window}->hide;
+        $wait->{window}->hide;
         waitpid($pid, 0);
         if (($? >> 8) == 0) {
             load_channels();
@@ -74,15 +74,15 @@ sub detect_channels() {
         $buttons{detect}->set_sensitive(1);
         $channel_list->set_sensitive(1);
     };
-    $_w = ugtk2->new(N("Please wait"), grab => 1);
-    $_w->{window}->signal_connect('destroy' => \&exitapp);
+    $wait = ugtk2->new(N("Please wait"), grab => 1);
+    $wait->{window}->signal_connect('destroy' => \&exitapp);
     if ($pid = fork()) {
-        gtkadd($_w->{window},
-               gtkpack($_w->create_box_with_title(N("Detecting DVB channels, this will take a few minutes")),
+        gtkadd($wait->{window},
+               gtkpack($wait->create_box_with_title(N("Detecting DVB channels, this will take a few minutes")),
                        my $w = gtknew('Button', text => N("Cancel"), clicked => \&exitapp),
                )
             );
-        $_w->main;
+        $wait->main;
     } else {
         $SIG{CHLD} = 'DEFAULT';
         mkdir_p(dirname($config_file));
