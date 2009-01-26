@@ -83,7 +83,7 @@ sub detect_channels {
         $_w->main;
     } else {
         $SIG{CHLD} = 'DEFAULT';
-        mkdir_p(dirname(dirname($config_file)));
+        mkdir_p(dirname($config_file));
         system("w_scan -X > $config_file");
         sleep(1);
         POSIX::_exit($?);
