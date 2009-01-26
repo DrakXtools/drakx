@@ -241,6 +241,21 @@ sub set_pulseaudio_routing {
 }
 
 
+my $pa_client_conffile = '/etc/pulse/client.conf';
+
+sub set_PA_autospan {
+    my ($val) = @_;
+    $val = 'autospawn = ' . bool2yesno($val) . "\n";
+    my $done;
+    substInFile {
+        if (/^autospawn\s*=/) {
+            $_ = $val;
+            $done = 1;
+        }
+    } $pa_client_conffile;
+    append_to_file($pa_client_conffile, $val) if !$done;
+}
+
 
 my $pulse_config_file = "$::prefix/etc/pulse/daemon.conf";
 
@@ -328,6 +343,7 @@ sub switch {
         my $write_config = sub {
             set_pulseaudio($is_pulseaudio_enabled);
             set_pulseaudio_routing($is_pulseaudio_enabled && $is_pulseaudio_routing_enabled);
+            set_PA_autospan($is_pulseaudio_enabled);
             set_5_1_in_pulseaudio($is_5_1_in_pulseaudio_enabled);
             set_user_switching($is_user_switching);
             if ($is_pulseaudio_routing_enabled) {
