@@ -79,7 +79,7 @@ sub detect_channels() {
     if ($pid = fork()) {
         gtkadd($wait->{window},
                gtkpack($wait->create_box_with_title(N("Detecting DVB channels, this will take a few minutes")),
-                       my $w = gtknew('Button', text => N("Cancel"), clicked => \&exitapp),
+                       gtknew('Button', text => N("Cancel"), clicked => \&exitapp),
                )
             );
         $wait->main;
