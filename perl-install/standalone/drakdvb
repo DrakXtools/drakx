@@ -35,7 +35,7 @@ my $in = 'interactive'->vnew;
 
 my $config_file = "$ENV{HOME}/.mplayer/channels.conf";
 
-my $channel_list = Gtk2::SimpleList->new(N("Channel")=> "text", "id" => "hidden");
+my $channel_list = Gtk2::SimpleList->new(N("Channel") => "text", "id" => "hidden");
 my %buttons;
 my $pid;
 my $_w;
@@ -45,13 +45,13 @@ sub get_selected_channel() {
     defined $index && $channel_list->{data}[$index][1];
 }
 
-sub exitapp {
+sub exitapp() {
     local $SIG{TERM} = 'IGNORE';
     kill TERM => -$$;
     Gtk2->main_quit;
 }
 
-sub detect_channels {
+sub detect_channels() {
     if (-e $config_file) {
         $in->ask_okcancel(N("Warning"), N("%s already exists and its contents will be lost", $config_file)) or return;
     }
@@ -65,11 +65,11 @@ sub detect_channels {
         $SIG{CHLD} = 'IGNORE';
         $_w->{window}->hide;
         waitpid($pid, 0);
-        if(($? >> 8) == 0){
+        if (($? >> 8) == 0) {
             load_channels();
         } else {
             $in->ask_warn(N("Error"), N("Could not get the list of available channels"));
-        };
+        }
         gtkset_mousecursor_normal($w->{window}->window);
         $buttons{detect}->set_sensitive(1);
         $channel_list->set_sensitive(1);
@@ -92,23 +92,23 @@ sub detect_channels {
     }
 }
 
-sub load_channels {
+sub load_channels() {
     @{$channel_list->{data}} = ();
-    open(CHANNELCONF, "<$config_file");
-    while(<CHANNELCONF>) {
-        my($line) = $_;
+    open(my $CHANNELCONF, "<$config_file");
+    while (<$CHANNELCONF>) {
+        my $line = $_;
         if ($line =~ /^([^:]*?)(\([^(:]*\))?:/) {
-            push @{$channel_list->{data}}, [$1, $1.$2];
+            push @{$channel_list->{data}}, [ $1, $1 . $2 ];
         }
     }
-    close(CHANNELCONF);
+    close($CHANNELCONF);
     if (defined @{$channel_list->{data}}[0]) {
         $channel_list->select(0);
     }
 }
 
-sub launch_tv {
-    system('mplayer "dvb://'.get_selected_channel().'"&');
+sub launch_tv() {
+    system('mplayer "dvb://' . get_selected_channel() . '"&');
 }
 
 my $view_channel_button;
