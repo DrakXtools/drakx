@@ -96,6 +96,7 @@ sub detect_channels() {
 sub load_channels() {
     @{$channel_list->{data}} = ();
     open(my $CHANNELCONF, "<$config_file");
+    local $_;
     while (<$CHANNELCONF>) {
         my $line = $_;
         if ($line =~ /^([^:]*?)(\([^(:]*\))?:/) {
