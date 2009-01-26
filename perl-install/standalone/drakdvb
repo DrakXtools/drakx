@@ -112,8 +112,6 @@ sub launch_tv() {
     system('mplayer "dvb://' . get_selected_channel() . '"&');
 }
 
-my $view_channel_button;
-
 gtkadd($w->{window},
        gtknew('VBox', spacing => 5, children => [
                   $::isEmbedded ? () : (0, Gtk2::Banner->new($ugtk2::wm_icon, $title)),
