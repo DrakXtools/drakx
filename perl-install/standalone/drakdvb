@@ -52,7 +52,9 @@ sub exitapp {
 }
 
 sub detect_channels {
-    $in->ask_okcancel(N("Warning"), N("%s already exists and its contents will be lost", $config_file)) or return;
+    if (-e $config_file) {
+        $in->ask_okcancel(N("Warning"), N("%s already exists and its contents will be lost", $config_file)) or return;
+    }
     gtkset_mousecursor_wait($w->{window}->window);
     $channel_list->set_sensitive(0);
     $_->set_sensitive(0) foreach values %buttons;
