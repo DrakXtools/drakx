@@ -399,7 +399,7 @@ sub setSelectedFromCompssList {
 	}
     }
     my @flags = map_each { if_($::b, $::a) } %$rpmsrate_flags_chosen;
-    log::l("setSelectedFromCompssList: reached size ", int($nb /1024/1024), "MB, up to indice $min_level (less than ", formatXiB($max_size), ") for flags ", join(' ', sort @flags));
+    log::l("setSelectedFromCompssList: reached size ", int($nb / 1024/1024), "MB, up to indice $min_level (less than ", formatXiB($max_size), ") for flags ", join(' ', sort @flags));
     log::l("setSelectedFromCompssList: ", join(" ", sort map { $_->name } grep { $_->flag_selected } @{$packages->{depslist}}));
     $min_level;
 }
@@ -1041,7 +1041,7 @@ sub remove {
     }
 }
 
-sub setup_rpm_summary_translations {
+sub setup_rpm_summary_translations() {
     my @domains = qw(rpm-summary-contrib rpm-summary-devel rpm-summary-main);
     push @::textdomains, @domains;
     foreach (@domains) {
