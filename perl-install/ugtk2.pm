@@ -350,8 +350,8 @@ sub create_box_with_title {
 	$scroll->signal_connect(realize => sub {
                                 my $layout = $wtext->create_pango_layout($text);
                                 $layout->set_width(($width - 10) * Gtk2::Pango->scale);
-                                $wtext->set_size_request($width,  min(200, ($layout->get_pixel_size)[1] + 10));
-                                $scroll->set_size_request($width, min(200, ($layout->get_pixel_size)[1] + 10));
+                                $wtext->set_size_request($width,  min(200, second($layout->get_pixel_size) + 10));
+                                $scroll->set_size_request($width, min(200, second($layout->get_pixel_size) + 10));
                                 $o->{rwindow}->queue_resize;
                             });
 	gtkpack_($box, $o->{box_allow_grow} || 0, $scroll);
@@ -1432,7 +1432,7 @@ sub set_pixmap {
 sub update_text {
     my ($darea) = @_;
     $darea->{layout} = $darea->create_pango_layout($darea->{text});
-    $darea->{txt_width} = ($darea->{layout}->get_pixel_size)[0];
+    $darea->{txt_width} = first($darea->{layout}->get_pixel_size);
     $darea->queue_draw;
 }
 
@@ -1467,7 +1467,7 @@ sub new {
                                my $x_icon = $is_rtl ? $d_width - 12 - $width : 12;
                                # here: 48 is the amount of white background in the blue background we wish to ignore:
                                my $x_text = $is_rtl ? $d_width - $blue_width + 48 - $darea->{txt_width} : $blue_width - 48;
-                               $darea->{layout_height} ||= ($darea->{layout}->get_pixel_size)[1];
+                               $darea->{layout_height} ||= second($darea->{layout}->get_pixel_size);
                                $blue_part->render_to_drawable($darea->window, $style->bg_gc('normal'),
                                                                   0, 0, $x_blue, 0, -1, -1, 'none', 0, 0);
                                $darea->{icon}->render_to_drawable($darea->window, $style->bg_gc('normal'),
@@ -1543,7 +1543,7 @@ sub RENDER { # not that efficient...
   $layout->set_text($cell->get('label'));
 
   my $is_rtl = lang::text_direction_rtl();
-  my $txt_width = ($layout->get_pixel_size)[0];
+  my $txt_width = first($layout->get_pixel_size);
 
   my ($x_offset, $y_offset, $_width, $_height) = calc_size($cell, $layout);
   my $pixbuf = $cell->get('pixbuf');
