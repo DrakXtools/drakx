@@ -408,7 +408,7 @@ sub installCallback {
 #    log::l("$msg: " . join(',', @para));
 }
 
-sub installPackages { #- complete REWORK, TODO and TOCHECK!
+sub installPackages {
     my ($o) = @_;
     my $packages = $o->{packages};
 
