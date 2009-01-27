@@ -55,6 +55,7 @@ typedef __uint8_t u8;
 
 #define SECTORSIZE 512
 
+#include <parted/parted.h>
 ';
 
 $Config{archname} =~ /i.86/ and print '
@@ -509,6 +510,144 @@ get_iso_volume_ids(int fd)
       XPUSHs(sv_2mortal(newSVpv(voldesc.application_id, length_of_space_padded(voldesc.application_id, sizeof(voldesc.application_id)))));
     }
   }
+
+';
+
+print '
+
+const char *
+get_disk_type(char * device_path)
+  CODE:
+  PedDevice *dev = ped_device_get(device_path);
+  if(dev) {
+    PedDisk* disk = ped_disk_new(dev);
+    RETVAL = disk->type->name;
+    ped_disk_destroy(disk);
+  } else RETVAL = NULL;
+  OUTPUT:
+  RETVAL
+
+void
+get_disk_partitions(char * device_path)
+  PPCODE:
+  PedDevice *dev = ped_device_get(device_path);
+  if(dev) {
+    PedDisk* disk = ped_disk_new(dev);
+    PedPartition *part = NULL;
+    if(disk)
+      part = ped_disk_next_partition(disk, NULL);
+    while(part) {
+      if(part->num != -1) {
+        char desc[4196];
+        char *path = ped_partition_get_path(part);
+        sprintf(desc, "%d ", part->num);
+        sprintf(desc+strlen(desc), "%s ", path);
+        ped_free(path);
+        if(part->fs_type)
+          strcat(desc, part->fs_type->name);
+        if(part->type == 0x0)
+          strcat(desc, " normal");
+        else {
+          if(part->type & PED_PARTITION_LOGICAL)
+              strcat(desc, " logical");
+          if(part->type & PED_PARTITION_EXTENDED)
+              strcat(desc, " extended");
+          if(part->type & PED_PARTITION_FREESPACE)
+              strcat(desc, " freespace");
+          if(part->type & PED_PARTITION_METADATA)
+              strcat(desc, " metadata");
+          if(part->type & PED_PARTITION_PROTECTED)
+              strcat(desc, " protected");
+        }
+        sprintf(desc+strlen(desc), " (%lld,%lld,%lld)", part->geom.start, part->geom.end, part->geom.length);
+        XPUSHs(sv_2mortal(newSVpv(desc, 0)));
+      }
+      part = ped_disk_next_partition(disk, part);
+    }
+    if(disk)
+      ped_disk_destroy(disk);
+  }
+
+int
+set_disk_type(char * device_path, const char * type_name)
+  CODE:
+  PedDevice *dev = ped_device_get(device_path);
+  RETVAL = 0;
+  if(dev) {
+    PedDiskType* type = ped_disk_type_get(type_name);
+    if(type) {
+      PedDisk* disk = ped_disk_new_fresh(dev, type);
+      if(disk) {
+        RETVAL = ped_disk_commit(disk);
+        ped_disk_destroy(disk);
+      }
+    }
+  }
+  OUTPUT:
+  RETVAL
+
+int
+disk_delete_all(char * device_path)
+  CODE:
+  PedDevice *dev = ped_device_get(device_path);
+  if(dev) {
+    PedDisk* disk = ped_disk_new(dev);
+    RETVAL = ped_disk_delete_all(disk);
+    if(RETVAL)
+      RETVAL = ped_disk_commit(disk);
+    ped_disk_destroy(disk);
+  } else RETVAL = 0;
+  OUTPUT:
+  RETVAL
+
+int
+disk_del_partition(char * device_path, int part_number)
+  CODE:
+  PedDevice *dev = ped_device_get(device_path);
+  RETVAL = 0;
+  if(dev) {
+    PedDisk* disk = ped_disk_new(dev);
+    PedPartition* part = ped_disk_get_partition(disk, part_number);
+    if(!part) {
+      printf("disk_del_partition: failed to find partition\n");
+    } else {
+      RETVAL=ped_disk_delete_partition(disk, part);
+      if(RETVAL) {
+        RETVAL = ped_disk_commit(disk);
+      } else {
+        printf("del_partition failed\n");
+      }
+    }
+    ped_disk_destroy(disk);
+  }
+  OUTPUT:
+  RETVAL
+
+int
+disk_add_partition(char * device_path, double start, double length, const char * fs_type)
+  CODE:
+  PedDevice *dev = ped_device_get(device_path);
+  RETVAL=0;
+  if(dev) {
+    PedDisk* disk = ped_disk_new(dev);
+    PedGeometry* geom = ped_geometry_new(dev, (long long)start, (long long)length);
+    PedPartition* part = ped_partition_new (disk, PED_PARTITION_NORMAL, ped_file_system_type_get(fs_type), (long long)start, (long long)start+length-1);
+    PedConstraint* constraint = ped_constraint_new_from_max(geom);
+    if(!part) {
+      printf("ped_partition_new failed\n");
+    } else
+      RETVAL = ped_disk_add_partition (disk, part, constraint);
+    if(RETVAL) {
+      RETVAL = ped_disk_commit(disk);
+    } else {
+      printf("add_partition failed\n");
+    }
+    ped_geometry_destroy(geom);
+    ped_constraint_destroy(constraint);
+    ped_disk_destroy(disk);
+  }
+  OUTPUT:
+  RETVAL
 
 ';
 
