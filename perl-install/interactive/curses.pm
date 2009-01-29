@@ -539,6 +539,30 @@ sub ask_fromW_ {
     $v eq '0 but true' ? 0 : $v;
 }
 
+sub ask_fileW {
+    my ($o, $opts) = @_;
+    my ($file, $dir);
+
+    $dir = $opts->{directory} || $opts->{file} && dirname($opts->{file});
+
+    if($opts->{save}) {
+        $file = $o->{cui}->savefilebrowser('-title' => $opts->{title}, '-path' => $dir, '-file' => basename($file));
+    } else {
+        $file = $o->{cui}->loadfilebrowser('-title' => $opts->{title}, '-path' => $dir, '-file' => basename($file));
+    }
+
+    my $err;
+    if (!$file) {
+	$err = N("No file chosen");
+    } elsif(-f $file && $opts->{want_a_dir}) {
+        $file = dirname($file);
+    } elsif(-d $file && !$opts->{want_a_dir}) {
+        $err = N("You have chosen a directory, not a file");
+    } elsif (!-e $file && !$opts->{save}) {
+	$err = $opts->{want_a_dir} ? N("No such directory") : N("No such file");
+    };
+    $err and $o->ask_warn('', $err) or $file;
+}
 
 sub wait_messageW {
     my ($o, $title, $message, $message_modifiable) = @_;
