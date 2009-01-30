@@ -745,6 +745,7 @@ If you want to skip some of them, you can unselect them now."))),
                               text => N("You have the option to copy the contents of the CDs onto the hard drive before installation.
 It will then continue from the hard drive and the packages will remain available once the system is fully installed.")),
 		    0, gtknew('CheckButton', text => N("Copy whole CDs"), active_ref => $o_copy_rpms_on_disk),
+		    1, gtknew('Alignment'),
 		    0, gtknew('HSeparator'),
 		),
 		0, gtknew('HButtonBox', layout => 'edge', children_tight => [
