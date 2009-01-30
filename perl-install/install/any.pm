@@ -575,29 +575,6 @@ sub unselectMostPackages {
     select_default_packages($o);
 }
 
-sub warnAboutNaughtyServers {
-    my ($o) = @_;
-    my @naughtyServers = install::pkgs::naughtyServers($o->{packages}) or return 1;
-    my $r = $o->ask_from_list_('', 
-formatAlaTeX(
-             #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
-             N("You have selected the following server(s): %s
-
-
-These servers are activated by default. They do not have any known security
-issues, but some new ones could be found. In that case, you must make sure
-to upgrade as soon as possible.
-
-
-Do you really want to install these servers?
-", join(", ", @naughtyServers))), [ N_("Yes"), N_("No") ], 'Yes') or return;
-    if ($r ne 'Yes') {
-	log::l("unselecting naughty servers: " . join(' ', @naughtyServers));
-	install::pkgs::unselectPackage($o->{packages}, install::pkgs::packageByName($o->{packages}, $_)) foreach @naughtyServers;
-    }
-    1;
-}
-
 sub warnAboutRemovedPackages {
     my ($o, $packages) = @_;
     my @removedPackages = keys %{$packages->{state}{ask_remove} || {}} or return;

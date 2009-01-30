@@ -443,7 +443,6 @@ sub choosePackages {
     $o->choosePackagesTree($o->{packages}) or goto chooseGroups if $individual;
 
     install::any::warnAboutRemovedPackages($o, $o->{packages});
-    install::any::warnAboutNaughtyServers($o) or goto chooseGroups if !$o->{isUpgrade};
 }
 
 sub choosePackagesTree {
