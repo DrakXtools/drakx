@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: DrakX-el\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-16 11:41+0100\n"
-"PO-Revision-Date: 2009-01-25 14:31+0100\n"
+"PO-Revision-Date: 2009-01-31 18:09+0100\n"
 "Last-Translator: Glentadakis Dimitrios <dglent@gmail.com>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -310,7 +310,7 @@ msgstr "Το πρόγραμμα \"%s\" παρουσίασε σφάλμα (SEGV) 
 #: drakbug:155
 #, c-format
 msgid "Its GDB trace is:"
-msgstr ""
+msgstr "Το ίχνος GDB είναι :"
 
 #: drakbug:158
 #, c-format
@@ -318,13 +318,15 @@ msgid ""
 "To submit a bug report, click on the report button.  \n"
 "This will open a web browser window on %s where you'll find a form to fill in.  The information displayed above will be transferred to that server"
 msgstr ""
+"Για να στείλετε αναφορά ενός bug, πατήστε στο εικονίδιο Αναφορά.\n"
+"Θα ανοίξει ένα παράθυρο του περιηγητή στο %s με μια φόρμα αναφοράς προς συμπλήρωση. Οι πληροφορίες που αναφέρονται παρακάτω θα αποσταλούν προς τον διακομιστή."
 
 #: drakbug:160
 #, c-format
 msgid "It would be very useful to attach to your report the output of the following command: %s."
 msgid_plural "Things useful to attach to your report are the output of the following commands: %s."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ειναι χρήσιμο να συμπεριλάβετε στην αναφορά σας την έξοδο της ακόλουθης εντολής : %s."
+msgstr[1] "Ειναι χρήσιμο να συμπεριλάβετε στην αναφορά σας την έξοδο των ακόλουθων εντολών : %s."
 
 #: drakbug:163
 #, c-format
@@ -339,7 +341,7 @@ msgstr "Θα πρέπει επίσης να επισυνάψτε τα ακόλο
 #: drakbug:173
 #, c-format
 msgid "Please describe what you were doing when it crashed:"
-msgstr ""
+msgstr "Παρακαλω περιγράψτε τι κανατε την στιγμη του crash :"
 
 #: drakbug:185
 #: drakperm:136
@@ -376,6 +378,8 @@ msgstr "Το πακέτο δεν είναι εγκατεστημένο"
 #, c-format
 msgid "You must type in what you were doing when this bug happened in order to enable us to reproduce this bug and to increase the odds of fixing it"
 msgstr ""
+"Πρέπει να περιγράψετε τι κάνατε την στιγμή που εμφανίστηκε το bug ώστε να μπορέσουμε να το επαναλάβουμε\n"
+"και να το επιλύσουμε"
 
 #: drakbug:256
 #, c-format
@@ -386,7 +390,7 @@ msgstr "Ευχαριστώ."
 #: draksec:346
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
-msgstr ""
+msgstr "Ρυθμίσεις Ημερομηνίας, Ώρας & Ζώνη Ώρας"
 
 #: drakclock:39
 #, c-format
@@ -429,6 +433,8 @@ msgid ""
 "Your computer can synchronize its clock\n"
 " with a remote time server using NTP"
 msgstr ""
+"Ο υπολογιστής σας μπορεί να συγχρονίσει την ώρα του\n"
+"με έναν απομακρυσμένο διακομιστή κάνοντας χρήση του NTP"
 
 #: drakclock:73
 #, fuzzy, c-format
@@ -453,7 +459,7 @@ msgstr "Παρακαλώ εισάγετε μια έγκυρη διεύθυνση
 #: drakclock:126
 #, c-format
 msgid "Could not synchronize with %s."
-msgstr ""
+msgstr "Αδύνατος ο συγχρονισμός με %s."
 
 #: drakclock:127
 #: draksplash:125
@@ -477,17 +483,17 @@ msgstr "Επαναφορά"
 #: drakedm:41
 #, c-format
 msgid "GDM (GNOME Display Manager)"
-msgstr ""
+msgstr "GDM (Διαχειριστής Σύνδεσης GNOME)"
 
 #: drakedm:42
 #, c-format
 msgid "KDM (KDE Display Manager)"
-msgstr ""
+msgstr "KDE (Διαχειριστής Σύνδεσης KDE)"
 
 #: drakedm:43
-#, fuzzy, c-format
+#, c-format
 msgid "XDM (X Display Manager)"
-msgstr "Επιλέγοντας έναν διαχειριστή προβολής"
+msgstr "XDM (Διαχειριστής Σύνδεσης X)"
 
 #: drakedm:54
 #, c-format
@@ -513,7 +519,7 @@ msgstr "Το δίκτυο πρέπει να επανεκκινηθεί, Θέλε
 #: drakedm:75
 #, c-format
 msgid "You are going to close all running programs and lose your current session. Are you really sure that you want to restart the dm service?"
-msgstr ""
+msgstr "Πρόκειται να κλείσετε όλα τα τρέχοντα προγράμματα και την τρέχουσα συνεδρία. Θέλετε σίγουρα να επανεκκινησετε την υπηρεσία dm ;"
 
 #: drakfont:187
 #, c-format
@@ -606,13 +612,13 @@ msgstr "Ghostscript"
 #: drakfont:380
 #, c-format
 msgid "Suppress Temporary Files"
-msgstr ""
+msgstr "Διαγραφή των προσωρινών αρχείων"
 
 #: drakfont:425
 #: drakfont:431
 #, c-format
 msgid "Suppress Fonts Files"
-msgstr ""
+msgstr "Διαγραφή των αρχείων γραμματοσειρών"
 
 #: drakfont:439
 #, fuzzy, c-format
@@ -644,7 +650,7 @@ msgstr "Λίστα Γραμματοσειρών"
 #: drakfont:493
 #, c-format
 msgid "Get Windows Fonts"
-msgstr ""
+msgstr "Λήψη γραμματοσειρών των Windows"
 
 #: drakfont:499
 #, c-format
@@ -787,7 +793,7 @@ msgstr "Εγκατάσταση"
 #: drakfont:684
 #, c-format
 msgid "Are you sure you want to uninstall the following fonts?"
-msgstr ""
+msgstr "Θέλετε σίγουρα να απεγκαταστήσετε τις παρακάτω γραμματοσειρές;"
 
 #: drakfont:688
 #: draksec:59
