@@ -2,18 +2,18 @@
 # Translation of nn to Norwegian Nynorsk
 # Copyright (C) 2004, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2004, 2005, 2006, 2007, 2008.
+# Karl Ove Hufthammer <karl@huftis.org>, 2004, 2005, 2006, 2007, 2008, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
 "POT-Creation-Date: 2009-01-16 11:40+0100\n"
-"PO-Revision-Date: 2008-09-19 21:23+0200\n"
+"PO-Revision-Date: 2009-01-31 23:22+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 0.2\n"
+"X-Generator: Lokalize 0.3\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: any.pm:252 any.pm:862 diskdrake/interactive.pm:580
@@ -78,7 +78,7 @@ msgid ""
 "On which drive are you booting?"
 msgstr ""
 "Du har valt å installera oppstartslastaren på ein partisjon.\n"
-"Dette betyr at du allereie har ein oppstartslastar (som System Commander) på "
+"Dette betyr at du alt har ein oppstartslastar (som System Commander) på "
 "oppstartsdisken.\n"
 "\n"
 "Kven av diskane er oppstartsdisk?"
@@ -158,10 +158,10 @@ msgstr "Ventetid før oppstart med standardbilete"
 msgid "Enable ACPI"
 msgstr "Bruk ACPI"
 
-#: any.pm:411
-#, fuzzy, c-format
+#: any.pm:411, c-format
+#| msgid "Enable ACPI"
 msgid "Enable SMP"
-msgstr "Bruk ACPI"
+msgstr "Bruk SMP"
 
 #: any.pm:412
 #, c-format
@@ -211,8 +211,7 @@ msgstr "avgrens"
 
 #: any.pm:423
 #, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
+msgid "Option ``Restrict command line options'' is of no use without a password"
 msgstr "Valet «Avgrens kommandolinjeval» er ubrukeleg utan passord"
 
 #: any.pm:425
@@ -288,7 +287,7 @@ msgstr "Nettverksprofil"
 #: any.pm:532 any.pm:537 any.pm:539 diskdrake/interactive.pm:400
 #, c-format
 msgid "Label"
-msgstr "Merkelapp"
+msgstr "Volumnamn"
 
 #: any.pm:534 any.pm:542 harddrake/v4l.pm:438
 #, c-format
@@ -303,7 +302,7 @@ msgstr "Ingen video"
 #: any.pm:552
 #, c-format
 msgid "Empty label not allowed"
-msgstr "Kan ikkje ha tom merkelapp"
+msgstr "Kan ikkje ha tomt volumnamn"
 
 #: any.pm:553
 #, c-format
@@ -318,7 +317,7 @@ msgstr "Du må velja ein rotpartisjon"
 #: any.pm:554
 #, c-format
 msgid "This label is already used"
-msgstr "Merkelappen er allereie brukt"
+msgstr "Volumnamnet er alt brukt"
 
 #: any.pm:572
 #, c-format
@@ -401,8 +400,7 @@ msgstr "Skriv inn brukarnamn"
 
 #: any.pm:788
 #, c-format
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr ""
 "Brukarnamnet kan berre innehelda små bokstavar, tala og teikna «-» og «_»"
 
@@ -414,7 +412,7 @@ msgstr "Brukarnamnet er for langt"
 #: any.pm:790
 #, c-format
 msgid "This user name has already been added"
-msgstr "Brukarnamnet finst allereie"
+msgstr "Brukarnamnet finst alt"
 
 #: any.pm:796 any.pm:828
 #, c-format
@@ -762,8 +760,7 @@ msgstr "Lokal fil:"
 
 #: authentication.pm:64
 #, c-format
-msgid ""
-"Use local for all authentication and information user tell in local file"
+msgid "Use local for all authentication and information user tell in local file"
 msgstr ""
 "Bruk lokal for all autentisering og informasjon brukarar oppgjev i lokal fil"
 
@@ -915,8 +912,7 @@ msgstr "Skuggebase"
 msgid ""
 "You have selected Kerberos 5 authentication. Please review the configuration "
 "options below "
-msgstr ""
-"Du har valt Kerberos 5-autentisering. Sjå gjennom oppsettvala nedanfor."
+msgstr "Du har valt Kerberos 5-autentisering. Sjå gjennom oppsettvala nedanfor."
 
 #: authentication.pm:141
 #, c-format
@@ -1386,7 +1382,7 @@ msgstr "Åtvaring"
 #: diskdrake/hd_gtk.pm:408
 #, c-format
 msgid "This partition is already empty"
-msgstr "Denne partisjonen er allereie tom."
+msgstr "Denne partisjonen er alt tom."
 
 #: diskdrake/hd_gtk.pm:417
 #, c-format
@@ -1648,15 +1644,15 @@ msgstr "Kva filsystem vil du ha?"
 msgid "Switching from %s to %s"
 msgstr "Byter frå «%s» til «%s»"
 
-#: diskdrake/interactive.pm:608
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:608, c-format
+#| msgid "Which volume label?"
 msgid "Set volume label"
-msgstr "Kva volumnamn?"
+msgstr "Vel volumnamn"
 
 #: diskdrake/interactive.pm:608
 #, c-format
 msgid "Beware, this will be written to disk as soon as you validate!"
-msgstr ""
+msgstr "Merk at denne vert skriven til disken med éin gong."
 
 #: diskdrake/interactive.pm:610
 #, c-format
@@ -1666,7 +1662,7 @@ msgstr "Kva volumnamn?"
 #: diskdrake/interactive.pm:611
 #, c-format
 msgid "Label:"
-msgstr "Merkelapp:"
+msgstr "Volumnamn:"
 
 #: diskdrake/interactive.pm:632
 #, c-format
@@ -1739,14 +1735,16 @@ msgstr "Minste storleik: %s MB"
 msgid "Maximum size: %s MB"
 msgstr "Største storleik: %s MB"
 
-#: diskdrake/interactive.pm:786
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:786, c-format
+#| msgid ""
+#| "To ensure data integrity after resizing the partition(s), \n"
+#| "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
 "For å sikra dataintegritet på partisjonen/-ane\n"
-"vert det køyrt filsystemkontroll neste gongar du startar Windows™"
+"vert det køyrt filsystemkontroll neste gongar du startar Windows®"
 
 #: diskdrake/interactive.pm:834 diskdrake/interactive.pm:1378
 #, c-format
@@ -1825,12 +1823,12 @@ msgstr "Skriv inn filnamn"
 #: diskdrake/interactive.pm:945
 #, c-format
 msgid "File is already used by another loopback, choose another one"
-msgstr "Fila er allereie brukt til filmontering. Vel ei anna fil."
+msgstr "Fila er alt brukt til filmontering. Vel ei anna fil."
 
 #: diskdrake/interactive.pm:946
 #, c-format
 msgid "File already exists. Use it?"
-msgstr "Fila finst allereie. Vil du bruka ho?"
+msgstr "Fila finst alt. Vil du bruka ho?"
 
 #: diskdrake/interactive.pm:978 diskdrake/interactive.pm:981
 #, c-format
@@ -1917,7 +1915,7 @@ msgid ""
 "mounted there or leave them where they are (which results in hiding them by "
 "the contents of the mounted partition)"
 msgstr ""
-"Mappa «%s» inneheld allereie data.\n"
+"Mappa «%s» inneheld alt data.\n"
 "(%s)\n"
 "\n"
 "Du kan velje mellom å flytta filene til partisjonen som vert montert der, "
@@ -1957,7 +1955,7 @@ msgstr "Eining: "
 #: diskdrake/interactive.pm:1260
 #, c-format
 msgid "Volume label: "
-msgstr "Namn på dataområde: "
+msgstr "Volumnamn: "
 
 #: diskdrake/interactive.pm:1261
 #, c-format
@@ -2209,8 +2207,7 @@ msgstr "Endå ein"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
+msgid "Please enter your username, password and domain name to access this host."
 msgstr "Skriv inn brukarnamn, passord og domenenamn for verten."
 
 #: diskdrake/smbnfs_gtk.pm:180
@@ -2282,15 +2279,15 @@ msgstr "Du må ha ein FAT-partisjon montert i «/boot/efi»"
 msgid "Creating and formatting file %s"
 msgstr "Lagar og formaterer partisjonen «%s»"
 
-#: fs/format.pm:119
-#, fuzzy, c-format
+#: fs/format.pm:119, c-format
+#| msgid "I do not know how to format %s in type %s"
 msgid "I do not know how to set label on %s with type %s"
-msgstr "Kan ikkje formatera «%s» som type «%s»"
+msgstr "Kan ikkje lagra volumnamnet på %s med typen %s"
 
-#: fs/format.pm:126
-#, fuzzy, c-format
+#: fs/format.pm:126, c-format
+#| msgid "%s formatting of %s failed"
 msgid "setting label on %s failed"
-msgstr "%s-formatering av %s mislukka"
+msgstr "Klarte ikkje lagra volumnamn på %s"
 
 #: fs/format.pm:161
 #, c-format
@@ -2612,7 +2609,7 @@ msgstr ""
 "Du er no i ferd med å endra storleiken på Windows-partisjonen.\n"
 "\n"
 "\n"
-"Dette er ein farleg operasjon. Om du ikkje allereie har gjort det, bør du "
+"Dette er ein farleg operasjon. Om du ikkje alt har gjort det, bør du "
 "avslutta installasjonen, køyra «chkdsk c:» frå kommandolinja i Windows (det "
 "grafiske programmet «scandisk» er ikkje nok), etterfølgt av defragmentering, "
 "og starta installasjonen på nytt. Du bør òg ta ein reservekopi av alle "
@@ -2784,7 +2781,7 @@ msgstr "Monteringspunkt kan berre innhelda tal og bokstavar"
 #: fsedit.pm:425
 #, c-format
 msgid "There is already a partition with mount point %s\n"
-msgstr "Det finst allereie ein partisjon med monteringspunktet «%s»\n"
+msgstr "Det finst alt ein partisjon med monteringspunktet «%s»\n"
 
 #: fsedit.pm:429
 #, c-format
@@ -3151,7 +3148,7 @@ msgid ""
 msgstr ""
 "Her kan du velja ein annan OSS- eller ALSA-drivar for lydkortet ditt («%s»)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:392
@@ -3473,7 +3470,7 @@ msgid ""
 "=> Notice, a label changed:\n"
 "%s"
 msgstr ""
-"Merk: Ein merkelapp er endra:\n"
+"Merk: Eit volumnamn er endra:\n"
 "%s"
 
 #: interactive/stdio.pm:151
@@ -5487,8 +5484,7 @@ msgstr "Godta direkte «root»-innlogging."
 
 #: security/help.pm:33
 #, c-format
-msgid ""
-"Allow the list of users on the system on display managers (kdm and gdm)."
+msgid "Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr "Godta vising av brukarar i innloggingshandsamarar (kdm og gdm)."
 
 #: security/help.pm:35
@@ -5685,8 +5681,7 @@ msgstr "Vel storleik på passordlogg for å hindra gjenbruk av passord."
 msgid ""
 "Set the password minimum length and minimum number of digit and minimum "
 "number of capitalized letters."
-msgstr ""
-"Vel minstelengd på passord og minimum tal på siffer og store bokstavar."
+msgstr "Vel minstelengd på passord og minimum tal på siffer og store bokstavar."
 
 #: security/help.pm:108
 #, c-format
@@ -5720,8 +5715,7 @@ msgstr ""
 #: security/help.pm:117
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
-msgstr ""
-"Kontroller løyve til filer i heimemappe til brukarar viss sett til «ja»."
+msgstr "Kontroller løyve til filer i heimemappe til brukarar viss sett til «ja»."
 
 #: security/help.pm:118
 #, c-format
@@ -5771,8 +5765,7 @@ msgstr "Køyr «chkrootkit»-kontrollar viss sett til «ja»."
 
 #: security/help.pm:127
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
+msgid "if set, send the mail report to this email address else send it to root."
 msgstr "Send rapport på e-post til denne adressa, eller til «root» viss tom."
 
 #: security/help.pm:128
@@ -6142,7 +6135,7 @@ msgid ""
 "There are already some restrictions, and more automatic checks are run every "
 "night."
 msgstr ""
-"Det finst allereie nokre avgrensingar, og fleire automatiske kontrollar vert "
+"Det finst alt nokre avgrensingar, og fleire automatiske kontrollar vert "
 "køyrde kvar natt."
 
 #: security/level.pm:47
@@ -6241,8 +6234,7 @@ msgstr ""
 
 #: services.pm:28
 #, c-format
-msgid ""
-"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr "Common UNIX Printing System (CUPS) er eit avansert utskriftskøsystem."
 
 #: services.pm:29
