@@ -175,7 +175,7 @@ n
 p
 ${number}
 
-+${MIN_DISKSIZE}
++${MIN_DISKSIZE}K
 t
 ${number}
 83
