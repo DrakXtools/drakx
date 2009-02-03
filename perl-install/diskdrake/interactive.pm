@@ -395,6 +395,7 @@ sub part_possible_actions {
     $part or return;
 
     my %actions = my @l = (
+        N_("View")             => '!isSwap && !isNonMountable && maybeFormatted',
         N_("Mount point")      => '$part->{real_mntpoint} || (!isBusy && !isSwap && !isNonMountable)',
         N_("Type")             => '!isBusy && $::expert && (!readonly || $part->{pt_type} == 0x83)',
         N_("Options")          => '!isSwap($part) && !isNonMountable && $::expert',
@@ -435,6 +436,34 @@ sub part_possible_actions {
     	    $cond =~ s/(^|[^:\$]) \b ([a-z]\w{3,}) \b ($|[\s&\)])/$1 . $2 . '($part)' . $3/exg;
     	    eval $cond;
         } @$actions_names;
+    }
+}
+
+sub View {
+    my ($in, $hd, $part, $all_hds) = @_;
+    my $old_mountpoint = $part->{mntpoint};
+    my $old_real_mountpoint = $part->{real_mntpoint};
+    my $was_mounted = $part->{isMounted};
+    my $mountpoint;
+    if(!$was_mounted) {
+        $part->{mntpoint} = '/tmp/mnt_browse';
+        $mountpoint = $part->{mntpoint};
+        mkdir_p($part->{mntpoint});
+        my $w;
+        fs::mount::part($part, 0, sub {
+            my ($msg) = @_;
+            $w ||= $in->wait_message(N("Please wait"), $msg);
+            $w->set($msg);
+                        });
+    } else {
+        $mountpoint = $part->{real_mntpoint} || $part->{mntpoint};
+    }
+    $in->ask_directory({'directory'=>$part->{mntpoint}});
+    if(!$was_mounted) {
+        fs::mount::umount($part);
+        $part->{mntpoint} = $old_mountpoint;
+        $part->{real_mntpoint} = $old_real_mountpoint;
+        unlink($mountpoint);
     }
 }
 
@@ -698,7 +727,7 @@ sub Resize {
 	    $nice_resize{fat} = resize_fat::main->new($part->{device}, devices::make($part->{device}));
 	    $min = max($min, $nice_resize{fat}->min_size);
 	    $max = min($max, $nice_resize{fat}->max_size);
-	} elsif (member($part->{fs_type}, qw(ext2 ext3))) { # resize2fs is known to be broken regarding extents with ext4 
+	} elsif (member($part->{fs_type}, qw(ext2 ext3))) { # resize2fs is known to be broken regarding extents with ext4
 	    write_partitions($in, $hd) or return;
 	    require diskdrake::resize_ext2;
 	    if ($nice_resize{ext2} = diskdrake::resize_ext2->new($part->{device}, devices::make($part->{device}))) {
