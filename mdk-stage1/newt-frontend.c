@@ -24,6 +24,7 @@
  * Each different frontend must implement all functions defined in frontend.h
  */
 
+#define _GNU_SOURCE
 
 #include <stdlib.h>
 #include <unistd.h>
