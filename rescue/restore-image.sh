@@ -175,7 +175,7 @@ n
 p
 ${number}
 
-+1000M
++${MIN_DISKSIZE}
 t
 ${number}
 83
