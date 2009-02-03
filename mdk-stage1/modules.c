@@ -420,6 +420,11 @@ static enum return_type insmod_with_options(char * mod, enum driver_type type)
 	return RETURN_OK;
 }
 
+static int strsortfunc(const void *a, const void *b)
+{
+    return strcmp(* (char * const *) a, * (char * const *) b);
+}
+
 enum return_type ask_insmod(enum driver_type type)
 {
 	enum return_type results;
@@ -431,11 +436,12 @@ enum return_type ask_insmod(enum driver_type type)
 	char ** p_modules = modules;
 	char ** p_descrs = descrs;
 
+	qsort(dlist, string_array_length(dlist), sizeof(char *), strsortfunc);
+
 	unset_automatic(); /* we are in a fallback mode */
 
 	while (p_dlist && *p_dlist) {
 		struct module_descr_elem * descr;
-
 		if (!strstr(*p_dlist, kernel_module_extension())) {
 			p_dlist++;
 			continue;
