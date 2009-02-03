@@ -181,7 +181,11 @@ ${number}
 83
 w
 EOF
+		else
+			rm -f /tmp/fdisk.log
 		fi
+	else
+		rm -f /tmp/fdisk.log
 	fi
 
 	echo "${disk}${number}"
@@ -207,18 +211,11 @@ function write_image()
 		*) uncomp=cat ;;
 	esac
 
-	if [ -s /tmp/fdisk.log -a ${uncomp} = "cat" ]; then
-		input=/dev/loop5
-		losetup ${input} $images_dir/$image -o 32256
-	else
-		input=$images_dir/$image
-	fi
-
 	# the actual dumping command, from image to disk
-	$uncomp ${input} | dd of=/dev/$root bs=4M > /tmp/backup.out 2>&1>>/tmp/log &
+	${uncomp} ${images_dir}/${image} | (dd of=/dev/null bs=1 count=32256 &>/dev/null; dd bs=4M of=/dev/${root} >/tmp/backup.out) &
 
 	sleep 3
-	pid=$(ps ax | grep 'dd of' | grep -v grep | awk '{ print $1 }')
+	pid=$(ps ax | grep 'dd bs=4M of' | grep -v grep | awk '{ print $1 }')
 	total=1000
 
 	while [ true ]; do
