@@ -441,30 +441,8 @@ sub part_possible_actions {
 
 sub View {
     my ($in, $hd, $part, $all_hds) = @_;
-    my $old_mountpoint = $part->{mntpoint};
-    my $old_real_mountpoint = $part->{real_mntpoint};
-    my $was_mounted = $part->{isMounted};
-    my $mountpoint;
-    if(!$was_mounted) {
-        $part->{mntpoint} = '/tmp/mnt_browse';
-        $mountpoint = $part->{mntpoint};
-        mkdir_p($part->{mntpoint});
-        my $w;
-        fs::mount::part($part, 0, sub {
-            my ($msg) = @_;
-            $w ||= $in->wait_message(N("Please wait"), $msg);
-            $w->set($msg);
-                        });
-    } else {
-        $mountpoint = $part->{real_mntpoint} || $part->{mntpoint};
-    }
-    $in->ask_directory({'directory'=>$part->{mntpoint}});
-    if(!$was_mounted) {
-        fs::mount::umount($part);
-        $part->{mntpoint} = $old_mountpoint;
-        $part->{real_mntpoint} = $old_real_mountpoint;
-        unlink($mountpoint);
-    }
+    my $handle = any::inspect($part, $::prefix);
+    $in->ask_directory({'directory'=>$handle->{dir}});
 }
 
 #- in case someone use diskdrake only to create partitions,
