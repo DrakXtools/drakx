@@ -611,18 +611,16 @@ sub Type {
 
 sub Label {
     my ($in, $_hd, $part) = @_;
-    my $old_label = $part->{device_LABEL} || "";
+    my $new_label = $part->{device_LABEL} || "";
 
     $in->ask_from(N("Set volume label"), N("Beware, this will be written to disk as soon as you validate!"),
 		  [
 		   { label => N("Which volume label?"), title => 1 },
-		   { label => N("Label:"), val => \$part->{device_LABEL} } ]) or return;
+		   { label => N("Label:"), val => \$new_label } ]) or return;
 
-    if (!fs::format::check_package_is_installed_label($in->do_pkgs, $part->{fs_type})) {
-        $part->{device_LABEL} = $old_label;
-        return;
-    }
-    return if $old_label eq $part->{device_LABEL};
+    fs::format::check_package_is_installed_label($in->do_pkgs, $part->{fs_type}) or return;
+    return if $new_label eq $part->{device_LABEL};
+    $part->{device_LABEL} = $new_label;
     $part->{device_LABEL_changed} = 1;
     $part->{prefer_device_LABEL} = to_bool($part->{device_LABEL}) && !isLVM($part);
     fs::format::clean_label($part);
