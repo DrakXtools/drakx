@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2009-01-16 11:40+0100\n"
+"POT-Creation-Date: 2009-02-05 19:33-0200\n"
 "PO-Revision-Date: 2008-10-18 00:45+0800\n"
 "Last-Translator: You-Cheng Hsieh <yochenhsieh@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
@@ -29,11 +29,11 @@ msgstr ""
 "X-Poedit-Language: Chinese\n"
 "X-Poedit-Country: TAIWAN\n"
 
-#: any.pm:252 any.pm:862 diskdrake/interactive.pm:580
-#: diskdrake/interactive.pm:775 diskdrake/interactive.pm:819
-#: diskdrake/interactive.pm:905 diskdrake/interactive.pm:1159
-#: diskdrake/interactive.pm:1211 do_pkgs.pm:221 do_pkgs.pm:267
-#: harddrake/sound.pm:285 interactive.pm:587 pkgs.pm:265
+#: any.pm:252 any.pm:862 diskdrake/interactive.pm:588
+#: diskdrake/interactive.pm:783 diskdrake/interactive.pm:827
+#: diskdrake/interactive.pm:913 diskdrake/interactive.pm:1167
+#: diskdrake/interactive.pm:1219 do_pkgs.pm:221 do_pkgs.pm:267
+#: harddrake/sound.pm:300 interactive.pm:587 pkgs.pm:265
 #, c-format
 msgid "Please wait"
 msgstr "請稍候"
@@ -197,7 +197,7 @@ msgstr "密碼"
 msgid "The passwords do not match"
 msgstr "密碼不符合"
 
-#: any.pm:417 authentication.pm:256 diskdrake/interactive.pm:1383
+#: any.pm:417 authentication.pm:256 diskdrake/interactive.pm:1391
 #, c-format
 msgid "Please try again"
 msgstr "請再試一次"
@@ -298,7 +298,7 @@ msgstr "Initrd"
 msgid "Network profile"
 msgstr "網路 profile"
 
-#: any.pm:532 any.pm:537 any.pm:539 diskdrake/interactive.pm:400
+#: any.pm:532 any.pm:537 any.pm:539 diskdrake/interactive.pm:402
 #, c-format
 msgid "Label"
 msgstr "標籤"
@@ -518,7 +518,7 @@ msgstr "選取您想使用的視窗管理程式："
 msgid "Release Notes"
 msgstr "發行紀錄"
 
-#: any.pm:932 any.pm:1278 interactive/gtk.pm:808
+#: any.pm:932 any.pm:1278 interactive/gtk.pm:792
 #, c-format
 msgid "Close"
 msgstr "關閉"
@@ -1171,12 +1171,12 @@ msgstr ""
 msgid "New"
 msgstr "新增"
 
-#: diskdrake/dav.pm:61 diskdrake/interactive.pm:407 diskdrake/smbnfs_gtk.pm:75
+#: diskdrake/dav.pm:61 diskdrake/interactive.pm:409 diskdrake/smbnfs_gtk.pm:75
 #, c-format
 msgid "Unmount"
 msgstr "卸載"
 
-#: diskdrake/dav.pm:62 diskdrake/interactive.pm:403 diskdrake/smbnfs_gtk.pm:76
+#: diskdrake/dav.pm:62 diskdrake/interactive.pm:405 diskdrake/smbnfs_gtk.pm:76
 #, c-format
 msgid "Mount"
 msgstr "掛載"
@@ -1186,16 +1186,16 @@ msgstr "掛載"
 msgid "Server"
 msgstr "伺服器"
 
-#: diskdrake/dav.pm:64 diskdrake/interactive.pm:397
-#: diskdrake/interactive.pm:647 diskdrake/interactive.pm:665
-#: diskdrake/interactive.pm:669 diskdrake/removable.pm:23
+#: diskdrake/dav.pm:64 diskdrake/interactive.pm:399
+#: diskdrake/interactive.pm:655 diskdrake/interactive.pm:673
+#: diskdrake/interactive.pm:677 diskdrake/removable.pm:23
 #: diskdrake/smbnfs_gtk.pm:79
 #, c-format
 msgid "Mount point"
 msgstr "掛載點"
 
-#: diskdrake/dav.pm:65 diskdrake/interactive.pm:399
-#: diskdrake/interactive.pm:1053 diskdrake/removable.pm:24
+#: diskdrake/dav.pm:65 diskdrake/interactive.pm:401
+#: diskdrake/interactive.pm:1061 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
@@ -1208,15 +1208,15 @@ msgid "Done"
 msgstr "完成"
 
 #: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:123 diskdrake/hd_gtk.pm:290
-#: diskdrake/interactive.pm:244 diskdrake/interactive.pm:257
-#: diskdrake/interactive.pm:506 diskdrake/interactive.pm:511
-#: diskdrake/interactive.pm:637 diskdrake/interactive.pm:923
-#: diskdrake/interactive.pm:1099 diskdrake/interactive.pm:1112
-#: diskdrake/interactive.pm:1115 diskdrake/interactive.pm:1383
+#: diskdrake/interactive.pm:245 diskdrake/interactive.pm:258
+#: diskdrake/interactive.pm:514 diskdrake/interactive.pm:519
+#: diskdrake/interactive.pm:645 diskdrake/interactive.pm:931
+#: diskdrake/interactive.pm:1107 diskdrake/interactive.pm:1120
+#: diskdrake/interactive.pm:1123 diskdrake/interactive.pm:1391
 #: diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23 do_pkgs.pm:28 do_pkgs.pm:44
 #: do_pkgs.pm:60 do_pkgs.pm:65 fsedit.pm:245 interactive/http.pm:117
-#: interactive/http.pm:118 modules/interactive.pm:19 scanner.pm:94
-#: scanner.pm:105 scanner.pm:112 scanner.pm:119 wizards.pm:95 wizards.pm:99
+#: interactive/http.pm:118 modules/interactive.pm:19 scanner.pm:95
+#: scanner.pm:106 scanner.pm:113 scanner.pm:120 wizards.pm:95 wizards.pm:99
 #: wizards.pm:121
 #, c-format
 msgid "Error"
@@ -1237,18 +1237,18 @@ msgstr "URL 格式必須為 http:// 或是 https://"
 msgid "Server: "
 msgstr "伺服器："
 
-#: diskdrake/dav.pm:110 diskdrake/interactive.pm:479
-#: diskdrake/interactive.pm:1258 diskdrake/interactive.pm:1343
+#: diskdrake/dav.pm:110 diskdrake/interactive.pm:487
+#: diskdrake/interactive.pm:1266 diskdrake/interactive.pm:1351
 #, c-format
 msgid "Mount point: "
 msgstr "掛載點："
 
-#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1350
+#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1358
 #, c-format
 msgid "Options: %s"
 msgstr "選項： %s"
 
-#: diskdrake/hd_gtk.pm:54 diskdrake/interactive.pm:295
+#: diskdrake/hd_gtk.pm:54 diskdrake/interactive.pm:296
 #: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:106
 #: fs/partitioning_wizard.pm:51 fs/partitioning_wizard.pm:206
 #: fs/partitioning_wizard.pm:211 fs/partitioning_wizard.pm:250
@@ -1262,8 +1262,8 @@ msgstr "分割磁區"
 msgid "Click on a partition, choose a filesystem type then choose an action"
 msgstr "點選一個分割區，選擇檔案系統類型然後選擇一個動作"
 
-#: diskdrake/hd_gtk.pm:105 diskdrake/interactive.pm:1074
-#: diskdrake/interactive.pm:1084 diskdrake/interactive.pm:1137
+#: diskdrake/hd_gtk.pm:105 diskdrake/interactive.pm:1082
+#: diskdrake/interactive.pm:1092 diskdrake/interactive.pm:1145
 #, c-format
 msgid "Read carefully"
 msgstr "仔細閱讀！"
@@ -1273,7 +1273,7 @@ msgstr "仔細閱讀！"
 msgid "Please make a backup of your data first"
 msgstr "請您先備份您的資料"
 
-#: diskdrake/hd_gtk.pm:106 diskdrake/interactive.pm:237
+#: diskdrake/hd_gtk.pm:106 diskdrake/interactive.pm:238
 #, c-format
 msgid "Exit"
 msgstr "離開"
@@ -1283,8 +1283,8 @@ msgstr "離開"
 msgid "Continue"
 msgstr "繼續"
 
-#: diskdrake/hd_gtk.pm:178 interactive.pm:653 interactive/gtk.pm:800
-#: interactive/gtk.pm:818 interactive/gtk.pm:839 ugtk2.pm:936
+#: diskdrake/hd_gtk.pm:178 interactive.pm:653 interactive/gtk.pm:784
+#: interactive/gtk.pm:802 interactive/gtk.pm:823 ugtk2.pm:936
 #, c-format
 msgid "Help"
 msgstr "輔助說明"
@@ -1355,7 +1355,7 @@ msgstr "Windows"
 msgid "Other"
 msgstr "其他"
 
-#: diskdrake/hd_gtk.pm:380 diskdrake/interactive.pm:1273
+#: diskdrake/hd_gtk.pm:380 diskdrake/interactive.pm:1281
 #, c-format
 msgid "Empty"
 msgstr "空白"
@@ -1365,13 +1365,13 @@ msgstr "空白"
 msgid "Filesystem types:"
 msgstr "檔案系統格式："
 
-#: diskdrake/hd_gtk.pm:408 diskdrake/interactive.pm:300
-#: diskdrake/interactive.pm:385 diskdrake/interactive.pm:536
-#: diskdrake/interactive.pm:728 diskdrake/interactive.pm:786
-#: diskdrake/interactive.pm:903 diskdrake/interactive.pm:945
-#: diskdrake/interactive.pm:946 diskdrake/interactive.pm:1196
-#: diskdrake/interactive.pm:1234 diskdrake/interactive.pm:1382 do_pkgs.pm:19
-#: do_pkgs.pm:39 do_pkgs.pm:57 harddrake/sound.pm:422
+#: diskdrake/hd_gtk.pm:408 diskdrake/interactive.pm:301
+#: diskdrake/interactive.pm:386 diskdrake/interactive.pm:544
+#: diskdrake/interactive.pm:736 diskdrake/interactive.pm:794
+#: diskdrake/interactive.pm:911 diskdrake/interactive.pm:953
+#: diskdrake/interactive.pm:954 diskdrake/interactive.pm:1204
+#: diskdrake/interactive.pm:1242 diskdrake/interactive.pm:1390 do_pkgs.pm:19
+#: do_pkgs.pm:39 do_pkgs.pm:57 harddrake/sound.pm:438
 #, c-format
 msgid "Warning"
 msgstr "警告"
@@ -1391,61 +1391,61 @@ msgstr "要先 ``Unmount''"
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "用 ``%s'' 代替 (在專家模式)"
 
-#: diskdrake/hd_gtk.pm:417 diskdrake/interactive.pm:398
-#: diskdrake/interactive.pm:574 diskdrake/removable.pm:25
+#: diskdrake/hd_gtk.pm:417 diskdrake/interactive.pm:400
+#: diskdrake/interactive.pm:582 diskdrake/removable.pm:25
 #: diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
 msgstr "格式"
 
-#: diskdrake/interactive.pm:208
+#: diskdrake/interactive.pm:209
 #, c-format
 msgid "Choose another partition"
 msgstr "選擇另一個分割區"
 
-#: diskdrake/interactive.pm:208
+#: diskdrake/interactive.pm:209
 #, c-format
 msgid "Choose a partition"
 msgstr "選擇一個分割區"
 
-#: diskdrake/interactive.pm:270 diskdrake/interactive.pm:376
+#: diskdrake/interactive.pm:271 diskdrake/interactive.pm:377
 #: interactive/curses.pm:512
 #, c-format
 msgid "More"
 msgstr "更多"
 
-#: diskdrake/interactive.pm:278 diskdrake/interactive.pm:288
-#: diskdrake/interactive.pm:1181
+#: diskdrake/interactive.pm:279 diskdrake/interactive.pm:289
+#: diskdrake/interactive.pm:1189
 #, c-format
 msgid "Confirmation"
 msgstr "確認"
 
-#: diskdrake/interactive.pm:278
+#: diskdrake/interactive.pm:279
 #, c-format
 msgid "Continue anyway?"
 msgstr "無論如何都要繼續嗎？"
 
-#: diskdrake/interactive.pm:283
+#: diskdrake/interactive.pm:284
 #, c-format
 msgid "Quit without saving"
 msgstr "不儲存就離開"
 
-#: diskdrake/interactive.pm:283
+#: diskdrake/interactive.pm:284
 #, c-format
 msgid "Quit without writing the partition table?"
 msgstr "放棄寫入硬碟分割表就離開？"
 
-#: diskdrake/interactive.pm:288
+#: diskdrake/interactive.pm:289
 #, c-format
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "您想要儲存對 /etc/fstab 檔案的修改嗎？"
 
-#: diskdrake/interactive.pm:295 fs/partitioning_wizard.pm:250
+#: diskdrake/interactive.pm:296 fs/partitioning_wizard.pm:250
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr "您必須重新開機以使更動過的硬碟分割表生效"
 
-#: diskdrake/interactive.pm:300
+#: diskdrake/interactive.pm:301
 #, c-format
 msgid ""
 "You should format partition %s.\n"
@@ -1456,149 +1456,154 @@ msgstr ""
 "否則掛載點 %s 的資訊將不會寫入 fstab 中。\n"
 "仍然要離開嗎？"
 
-#: diskdrake/interactive.pm:313
+#: diskdrake/interactive.pm:314
 #, c-format
 msgid "Clear all"
 msgstr "全部清除"
 
-#: diskdrake/interactive.pm:314
+#: diskdrake/interactive.pm:315
 #, c-format
 msgid "Auto allocate"
 msgstr "自動分配"
 
-#: diskdrake/interactive.pm:320
+#: diskdrake/interactive.pm:321
 #, c-format
 msgid "Toggle to normal mode"
 msgstr "切換到一般模式"
 
-#: diskdrake/interactive.pm:320
+#: diskdrake/interactive.pm:321
 #, c-format
 msgid "Toggle to expert mode"
 msgstr "切換到專家模式"
 
-#: diskdrake/interactive.pm:332
+#: diskdrake/interactive.pm:333
 #, c-format
 msgid "Hard drive information"
 msgstr "硬碟資訊"
 
-#: diskdrake/interactive.pm:365
+#: diskdrake/interactive.pm:366
 #, c-format
 msgid "All primary partitions are used"
 msgstr "主分割區數目已經全被用了"
 
-#: diskdrake/interactive.pm:366
+#: diskdrake/interactive.pm:367
 #, c-format
 msgid "I can not add any more partitions"
 msgstr "我無法再新增任何分割區了"
 
-#: diskdrake/interactive.pm:367
+#: diskdrake/interactive.pm:368
 #, c-format
 msgid ""
 "To have more partitions, please delete one to be able to create an extended "
 "partition"
 msgstr "需要有更多的分割區的話，請刪除一個主分割區以建立延伸分割區"
 
-#: diskdrake/interactive.pm:378
+#: diskdrake/interactive.pm:379
 #, c-format
 msgid "Reload partition table"
 msgstr "重新載入硬碟分割表"
 
-#: diskdrake/interactive.pm:385
+#: diskdrake/interactive.pm:386
 #, c-format
 msgid "Detailed information"
 msgstr "詳細資訊"
 
-#: diskdrake/interactive.pm:401 diskdrake/interactive.pm:741
+#: diskdrake/interactive.pm:398
+#, c-format
+msgid "View"
+msgstr ""
+
+#: diskdrake/interactive.pm:403 diskdrake/interactive.pm:749
 #, c-format
 msgid "Resize"
 msgstr "重新變更大小"
 
-#: diskdrake/interactive.pm:402
+#: diskdrake/interactive.pm:404
 #, c-format
 msgid "Format"
 msgstr "格式化"
 
-#: diskdrake/interactive.pm:404 diskdrake/interactive.pm:851
+#: diskdrake/interactive.pm:406 diskdrake/interactive.pm:859
 #, c-format
 msgid "Add to RAID"
 msgstr "加入到磁碟陣列"
 
-#: diskdrake/interactive.pm:405 diskdrake/interactive.pm:869
+#: diskdrake/interactive.pm:407 diskdrake/interactive.pm:877
 #, c-format
 msgid "Add to LVM"
 msgstr "加入到 LVM"
 
-#: diskdrake/interactive.pm:406
+#: diskdrake/interactive.pm:408
 #, fuzzy, c-format
 msgid "Use"
 msgstr "使用者 ID"
 
-#: diskdrake/interactive.pm:408
+#: diskdrake/interactive.pm:410
 #, c-format
 msgid "Delete"
 msgstr "刪除"
 
-#: diskdrake/interactive.pm:409
+#: diskdrake/interactive.pm:411
 #, c-format
 msgid "Remove from RAID"
 msgstr "由磁碟陣列中移除"
 
-#: diskdrake/interactive.pm:410
+#: diskdrake/interactive.pm:412
 #, c-format
 msgid "Remove from LVM"
 msgstr "由 LVM 中移除"
 
-#: diskdrake/interactive.pm:411
+#: diskdrake/interactive.pm:413
 #, fuzzy, c-format
 msgid "Remove from dm"
 msgstr "由 LVM 中移除"
 
-#: diskdrake/interactive.pm:412
+#: diskdrake/interactive.pm:414
 #, c-format
 msgid "Modify RAID"
 msgstr "變更磁碟陣列"
 
-#: diskdrake/interactive.pm:413
+#: diskdrake/interactive.pm:415
 #, c-format
 msgid "Use for loopback"
 msgstr "作為 loopback"
 
-#: diskdrake/interactive.pm:424
+#: diskdrake/interactive.pm:426
 #, c-format
 msgid "Create"
 msgstr "建立"
 
-#: diskdrake/interactive.pm:468 diskdrake/interactive.pm:470
+#: diskdrake/interactive.pm:476 diskdrake/interactive.pm:478
 #, c-format
 msgid "Create a new partition"
 msgstr "建立新的分割區"
 
-#: diskdrake/interactive.pm:472
+#: diskdrake/interactive.pm:480
 #, c-format
 msgid "Start sector: "
 msgstr "開始的磁區："
 
-#: diskdrake/interactive.pm:475 diskdrake/interactive.pm:938
+#: diskdrake/interactive.pm:483 diskdrake/interactive.pm:946
 #, c-format
 msgid "Size in MB: "
 msgstr "大小 (MB)："
 
-#: diskdrake/interactive.pm:477 diskdrake/interactive.pm:939
+#: diskdrake/interactive.pm:485 diskdrake/interactive.pm:947
 #, c-format
 msgid "Filesystem type: "
 msgstr "檔案系統格式："
 
-#: diskdrake/interactive.pm:483
+#: diskdrake/interactive.pm:491
 #, c-format
 msgid "Preference: "
 msgstr "偏好設定："
 
-#: diskdrake/interactive.pm:486
+#: diskdrake/interactive.pm:494
 #, c-format
 msgid "Logical volume name "
 msgstr "邏輯磁區名稱"
 
-#: diskdrake/interactive.pm:506
+#: diskdrake/interactive.pm:514
 #, c-format
 msgid ""
 "You can not create a new partition\n"
@@ -1609,63 +1614,63 @@ msgstr ""
 "(因為您已經達到主分割區的最大值)。\n"
 "您需要先移除一個主分割區然後建立一個延伸分割區。"
 
-#: diskdrake/interactive.pm:536
+#: diskdrake/interactive.pm:544
 #, c-format
 msgid "Remove the loopback file?"
 msgstr "移除 loopback 檔案？"
 
-#: diskdrake/interactive.pm:558
+#: diskdrake/interactive.pm:566
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr "改變分割區 %s 的格式以後，所有在這個分割區上的資料都會遺失"
 
-#: diskdrake/interactive.pm:571
+#: diskdrake/interactive.pm:579
 #, c-format
 msgid "Change partition type"
 msgstr "改變分割區格式"
 
-#: diskdrake/interactive.pm:573 diskdrake/removable.pm:47
+#: diskdrake/interactive.pm:581 diskdrake/removable.pm:47
 #, c-format
 msgid "Which filesystem do you want?"
 msgstr "您要用那一種檔案系統？"
 
-#: diskdrake/interactive.pm:580
+#: diskdrake/interactive.pm:588
 #, c-format
 msgid "Switching from %s to %s"
 msgstr "正在由 %s 切換至 %s"
 
-#: diskdrake/interactive.pm:608
+#: diskdrake/interactive.pm:616
 #, fuzzy, c-format
 msgid "Set volume label"
 msgstr "哪一個磁區標籤？"
 
-#: diskdrake/interactive.pm:608
+#: diskdrake/interactive.pm:616
 #, c-format
 msgid "Beware, this will be written to disk as soon as you validate!"
 msgstr ""
 
-#: diskdrake/interactive.pm:610
+#: diskdrake/interactive.pm:618
 #, c-format
 msgid "Which volume label?"
 msgstr "哪一個磁區標籤？"
 
-#: diskdrake/interactive.pm:611
+#: diskdrake/interactive.pm:619
 #, c-format
 msgid "Label:"
 msgstr "標籤："
 
-#: diskdrake/interactive.pm:632
+#: diskdrake/interactive.pm:640
 #, c-format
 msgid "Where do you want to mount the loopback file %s?"
 msgstr "您要把 loopback 檔案 %s 掛載在那裡？"
 
-#: diskdrake/interactive.pm:633
+#: diskdrake/interactive.pm:641
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "您要把這個裝置 %s 掛載在那裡？"
 
-#: diskdrake/interactive.pm:638
+#: diskdrake/interactive.pm:646
 #, c-format
 msgid ""
 "Can not unset mount point as this partition is used for loop back.\n"
@@ -1674,58 +1679,58 @@ msgstr ""
 "因為這個分割區被用作 loop back 使用，所以無法解除\n"
 "這個掛載點。請先取消 loopback 的設定"
 
-#: diskdrake/interactive.pm:668
+#: diskdrake/interactive.pm:676
 #, c-format
 msgid "Where do you want to mount %s?"
 msgstr "您要將 %s 掛載在那裡？"
 
-#: diskdrake/interactive.pm:692 diskdrake/interactive.pm:775
+#: diskdrake/interactive.pm:700 diskdrake/interactive.pm:783
 #: fs/partitioning_wizard.pm:146 fs/partitioning_wizard.pm:178
 #, c-format
 msgid "Resizing"
 msgstr "正在重設大小"
 
-#: diskdrake/interactive.pm:692
+#: diskdrake/interactive.pm:700
 #, c-format
 msgid "Computing FAT filesystem bounds"
 msgstr "正在計算 FAT 分割區的邊界"
 
-#: diskdrake/interactive.pm:728
+#: diskdrake/interactive.pm:736
 #, c-format
 msgid "This partition is not resizeable"
 msgstr "這個分割區無法重新調整大小"
 
-#: diskdrake/interactive.pm:733
+#: diskdrake/interactive.pm:741
 #, c-format
 msgid "All data on this partition should be backed-up"
 msgstr "所有在這個分割區上的資料都應該先經過備份"
 
-#: diskdrake/interactive.pm:735
+#: diskdrake/interactive.pm:743
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr "在改變分割區 %s 的大小以後，所有在這個分割區上的資料都會遺失"
 
-#: diskdrake/interactive.pm:742
+#: diskdrake/interactive.pm:750
 #, c-format
 msgid "Choose the new size"
 msgstr "選取新的大小"
 
-#: diskdrake/interactive.pm:743
+#: diskdrake/interactive.pm:751
 #, c-format
 msgid "New size in MB: "
 msgstr "新大小 (MB)："
 
-#: diskdrake/interactive.pm:744
+#: diskdrake/interactive.pm:752
 #, c-format
 msgid "Minimum size: %s MB"
 msgstr "最小容量：%s MB"
 
-#: diskdrake/interactive.pm:745
+#: diskdrake/interactive.pm:753
 #, c-format
 msgid "Maximum size: %s MB"
 msgstr "最大容量：%s MB"
 
-#: diskdrake/interactive.pm:786
+#: diskdrake/interactive.pm:794
 #, fuzzy, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
@@ -1734,47 +1739,47 @@ msgstr ""
 "為確保重新調整分割區大小後的資料正確性，當您下次從 Windows(TM)\n"
 "開機時便會執行檔案系統檢查。"
 
-#: diskdrake/interactive.pm:834 diskdrake/interactive.pm:1378
+#: diskdrake/interactive.pm:842 diskdrake/interactive.pm:1386
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "檔案系統加密金鑰"
 
-#: diskdrake/interactive.pm:835
+#: diskdrake/interactive.pm:843
 #, fuzzy, c-format
 msgid "Enter your filesystem encryption key"
 msgstr "選擇您檔案系統所使用的加密金鑰"
 
-#: diskdrake/interactive.pm:836 diskdrake/interactive.pm:1386
+#: diskdrake/interactive.pm:844 diskdrake/interactive.pm:1394
 #, c-format
 msgid "Encryption key"
 msgstr "加密金鑰"
 
-#: diskdrake/interactive.pm:843
+#: diskdrake/interactive.pm:851
 #, c-format
 msgid "Invalid key"
 msgstr ""
 
-#: diskdrake/interactive.pm:851
+#: diskdrake/interactive.pm:859
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "選取一存在的磁碟陣列加入到"
 
-#: diskdrake/interactive.pm:853 diskdrake/interactive.pm:871
+#: diskdrake/interactive.pm:861 diskdrake/interactive.pm:879
 #, c-format
 msgid "new"
 msgstr "新增"
 
-#: diskdrake/interactive.pm:869
+#: diskdrake/interactive.pm:877
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "選取一個已經存在的 LVM 以加入"
 
-#: diskdrake/interactive.pm:876
+#: diskdrake/interactive.pm:884
 #, c-format
 msgid "LVM name?"
 msgstr "LVM 名稱？"
 
-#: diskdrake/interactive.pm:903
+#: diskdrake/interactive.pm:911
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
@@ -1783,117 +1788,117 @@ msgstr ""
 "實體磁區 %s 仍然在使用中。\n"
 "您要把位於這個磁區的實體延伸移到另一個磁區嗎？"
 
-#: diskdrake/interactive.pm:905
+#: diskdrake/interactive.pm:913
 #, c-format
 msgid "Moving physical extents"
 msgstr "移動實體延伸"
 
-#: diskdrake/interactive.pm:923
+#: diskdrake/interactive.pm:931
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "這個分割區不能用來作為 loopback"
 
-#: diskdrake/interactive.pm:936
+#: diskdrake/interactive.pm:944
 #, c-format
 msgid "Loopback"
 msgstr "Loopback"
 
-#: diskdrake/interactive.pm:937
+#: diskdrake/interactive.pm:945
 #, c-format
 msgid "Loopback file name: "
 msgstr "Loopback 檔案名稱："
 
-#: diskdrake/interactive.pm:942
+#: diskdrake/interactive.pm:950
 #, c-format
 msgid "Give a file name"
 msgstr "輸入一個檔案名稱"
 
-#: diskdrake/interactive.pm:945
+#: diskdrake/interactive.pm:953
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "檔案已被用來作為其他的 loopback，請選擇其他檔案"
 
-#: diskdrake/interactive.pm:946
+#: diskdrake/interactive.pm:954
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "檔案已經存在了。要使用它嗎？"
 
-#: diskdrake/interactive.pm:978 diskdrake/interactive.pm:981
+#: diskdrake/interactive.pm:986 diskdrake/interactive.pm:989
 #, c-format
 msgid "Mount options"
 msgstr "掛載參數"
 
-#: diskdrake/interactive.pm:988
+#: diskdrake/interactive.pm:996
 #, c-format
 msgid "Various"
 msgstr "各種的"
 
-#: diskdrake/interactive.pm:1055
+#: diskdrake/interactive.pm:1063
 #, c-format
 msgid "device"
 msgstr "裝置"
 
-#: diskdrake/interactive.pm:1056
+#: diskdrake/interactive.pm:1064
 #, c-format
 msgid "level"
 msgstr "階層"
 
-#: diskdrake/interactive.pm:1057
+#: diskdrake/interactive.pm:1065
 #, c-format
 msgid "chunk size in KiB"
 msgstr "組塊大小以 KiB 計量"
 
-#: diskdrake/interactive.pm:1075
+#: diskdrake/interactive.pm:1083
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "請小心：這個動作很危險。"
 
-#: diskdrake/interactive.pm:1090
+#: diskdrake/interactive.pm:1098
 #, fuzzy, c-format
 msgid "Partitioning Type"
 msgstr "分割磁區"
 
-#: diskdrake/interactive.pm:1090
+#: diskdrake/interactive.pm:1098
 #, c-format
 msgid "What type of partitioning?"
 msgstr "以那種形式分割？"
 
-#: diskdrake/interactive.pm:1128
+#: diskdrake/interactive.pm:1136
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "您需要重新開機以便於讓異動的設定生效"
 
-#: diskdrake/interactive.pm:1137
+#: diskdrake/interactive.pm:1145
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk"
 msgstr "正在準備將要寫入磁碟 %s 的硬碟分割表！"
 
-#: diskdrake/interactive.pm:1159 fs/format.pm:96 fs/format.pm:103
+#: diskdrake/interactive.pm:1167 fs/format.pm:96 fs/format.pm:103
 #, c-format
 msgid "Formatting partition %s"
 msgstr "正在格式化分割區 %s"
 
-#: diskdrake/interactive.pm:1172
+#: diskdrake/interactive.pm:1180
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr "在對分割區 %s 進行格式化的動作以後，所有在這個分割區上的資料都會遺失"
 
-#: diskdrake/interactive.pm:1181 fs/partitioning.pm:48
+#: diskdrake/interactive.pm:1189 fs/partitioning.pm:48
 #, c-format
 msgid "Check bad blocks?"
 msgstr "檢查壞掉的區塊？"
 
-#: diskdrake/interactive.pm:1195
+#: diskdrake/interactive.pm:1203
 #, c-format
 msgid "Move files to the new partition"
 msgstr "將檔案搬移到新的分割區"
 
-#: diskdrake/interactive.pm:1195
+#: diskdrake/interactive.pm:1203
 #, c-format
 msgid "Hide files"
 msgstr "隱藏檔案"
 
-#: diskdrake/interactive.pm:1196
+#: diskdrake/interactive.pm:1204
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -1909,128 +1914,128 @@ msgstr ""
 "您可以選擇把檔案移入要掛載到此的磁區中，或者把它們留在原地 (這會讓它們隱藏起"
 "來，而目錄中顯示出來的會是掛載上的磁區內容)"
 
-#: diskdrake/interactive.pm:1211
+#: diskdrake/interactive.pm:1219
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "正在將檔案搬移到新的分割區"
 
-#: diskdrake/interactive.pm:1215
+#: diskdrake/interactive.pm:1223
 #, c-format
 msgid "Copying %s"
 msgstr "正在複製 %s"
 
-#: diskdrake/interactive.pm:1219
+#: diskdrake/interactive.pm:1227
 #, c-format
 msgid "Removing %s"
 msgstr "正在移除 %s"
 
-#: diskdrake/interactive.pm:1233
+#: diskdrake/interactive.pm:1241
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "分割區 %s 現在被命名為 %s 了"
 
-#: diskdrake/interactive.pm:1234
+#: diskdrake/interactive.pm:1242
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr "分割區已經重新編號："
 
-#: diskdrake/interactive.pm:1259 diskdrake/interactive.pm:1327
+#: diskdrake/interactive.pm:1267 diskdrake/interactive.pm:1335
 #, c-format
 msgid "Device: "
 msgstr "裝置："
 
-#: diskdrake/interactive.pm:1260
+#: diskdrake/interactive.pm:1268
 #, c-format
 msgid "Volume label: "
 msgstr "磁區標籤："
 
-#: diskdrake/interactive.pm:1261
+#: diskdrake/interactive.pm:1269
 #, c-format
 msgid "UUID: "
 msgstr "UUID:"
 
-#: diskdrake/interactive.pm:1262
+#: diskdrake/interactive.pm:1270
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS 磁碟代號：%s (猜測值)\n"
 
-#: diskdrake/interactive.pm:1266 diskdrake/interactive.pm:1275
-#: diskdrake/interactive.pm:1346
+#: diskdrake/interactive.pm:1274 diskdrake/interactive.pm:1283
+#: diskdrake/interactive.pm:1354
 #, c-format
 msgid "Type: "
 msgstr "格式："
 
-#: diskdrake/interactive.pm:1270 diskdrake/interactive.pm:1331
+#: diskdrake/interactive.pm:1278 diskdrake/interactive.pm:1339
 #, c-format
 msgid "Name: "
 msgstr "名稱："
 
-#: diskdrake/interactive.pm:1277
+#: diskdrake/interactive.pm:1285
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "始於：第 %s 扇區\n"
 
-#: diskdrake/interactive.pm:1278
+#: diskdrake/interactive.pm:1286
 #, c-format
 msgid "Size: %s"
 msgstr "大小：%s"
 
-#: diskdrake/interactive.pm:1280
+#: diskdrake/interactive.pm:1288
 #, c-format
 msgid ", %s sectors"
 msgstr "，%s 扇區"
 
-#: diskdrake/interactive.pm:1282
+#: diskdrake/interactive.pm:1290
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "%d 磁柱到第 %d 磁柱\n"
 
-#: diskdrake/interactive.pm:1283
+#: diskdrake/interactive.pm:1291
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr "邏輯延伸的數目：%d\n"
 
-#: diskdrake/interactive.pm:1284
+#: diskdrake/interactive.pm:1292
 #, c-format
 msgid "Formatted\n"
 msgstr "已格式化\n"
 
-#: diskdrake/interactive.pm:1285
+#: diskdrake/interactive.pm:1293
 #, c-format
 msgid "Not formatted\n"
 msgstr "未格式化\n"
 
-#: diskdrake/interactive.pm:1286
+#: diskdrake/interactive.pm:1294
 #, c-format
 msgid "Mounted\n"
 msgstr "已掛載\n"
 
-#: diskdrake/interactive.pm:1287
+#: diskdrake/interactive.pm:1295
 #, c-format
 msgid "RAID %s\n"
 msgstr "磁碟陣列 %s\n"
 
-#: diskdrake/interactive.pm:1289
+#: diskdrake/interactive.pm:1297
 #, fuzzy, c-format
 msgid "Encrypted"
 msgstr "加密金鑰"
 
-#: diskdrake/interactive.pm:1289
+#: diskdrake/interactive.pm:1297
 #, c-format
 msgid " (mapped on %s)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1290
+#: diskdrake/interactive.pm:1298
 #, c-format
 msgid " (to map on %s)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1291
+#: diskdrake/interactive.pm:1299
 #, c-format
 msgid " (inactive)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1297
+#: diskdrake/interactive.pm:1305
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2039,7 +2044,7 @@ msgstr ""
 "loopback 檔案：\n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1298
+#: diskdrake/interactive.pm:1306
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -2048,27 +2053,27 @@ msgstr ""
 "預設開機的分割區\n"
 "    (給 MS-DOS 開機程式用的，跟 lilo 無關)\n"
 
-#: diskdrake/interactive.pm:1300
+#: diskdrake/interactive.pm:1308
 #, c-format
 msgid "Level %s\n"
 msgstr "階層 %s\n"
 
-#: diskdrake/interactive.pm:1301
+#: diskdrake/interactive.pm:1309
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "組塊大小 %d KiB\n"
 
-#: diskdrake/interactive.pm:1302
+#: diskdrake/interactive.pm:1310
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "磁碟陣列-磁碟 %s\n"
 
-#: diskdrake/interactive.pm:1304
+#: diskdrake/interactive.pm:1312
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Loopback 檔案名稱： %s"
 
-#: diskdrake/interactive.pm:1307
+#: diskdrake/interactive.pm:1315
 #, c-format
 msgid ""
 "\n"
@@ -2081,7 +2086,7 @@ msgstr ""
 "是透過驅動程式產生出來的\n"
 "您應該不要去異動這個分割區資料。\n"
 
-#: diskdrake/interactive.pm:1310
+#: diskdrake/interactive.pm:1318
 #, c-format
 msgid ""
 "\n"
@@ -2093,67 +2098,67 @@ msgstr ""
 "這個特殊分割區是用來作為\n"
 "雙重開機使用的。\n"
 
-#: diskdrake/interactive.pm:1319
+#: diskdrake/interactive.pm:1327
 #, c-format
 msgid "Free space on %s (%s)"
 msgstr "%s 上的可用空間 (%s)"
 
-#: diskdrake/interactive.pm:1328
+#: diskdrake/interactive.pm:1336
 #, c-format
 msgid "Read-only"
 msgstr "唯讀"
 
-#: diskdrake/interactive.pm:1329
+#: diskdrake/interactive.pm:1337
 #, c-format
 msgid "Size: %s\n"
 msgstr "大小：%s\n"
 
-#: diskdrake/interactive.pm:1330
+#: diskdrake/interactive.pm:1338
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "幾何：%s 磁柱，%s 讀寫頭，%s 扇區\n"
 
-#: diskdrake/interactive.pm:1332
+#: diskdrake/interactive.pm:1340
 #, c-format
 msgid "Medium type: "
 msgstr "媒體型式："
 
-#: diskdrake/interactive.pm:1333
+#: diskdrake/interactive.pm:1341
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "LVM-磁碟 %s\n"
 
-#: diskdrake/interactive.pm:1334
+#: diskdrake/interactive.pm:1342
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "硬碟分割表形式：%s\n"
 
-#: diskdrake/interactive.pm:1335
+#: diskdrake/interactive.pm:1343
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "位在通道 %d id %d\n"
 
-#: diskdrake/interactive.pm:1379
+#: diskdrake/interactive.pm:1387
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "選擇您檔案系統所使用的加密金鑰"
 
-#: diskdrake/interactive.pm:1382
+#: diskdrake/interactive.pm:1390
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr "這個加密金鑰太簡單了 (至少要有 %d 個字元才行)"
 
-#: diskdrake/interactive.pm:1383
+#: diskdrake/interactive.pm:1391
 #, c-format
 msgid "The encryption keys do not match"
 msgstr "輸入的加密金鑰不符合"
 
-#: diskdrake/interactive.pm:1387
+#: diskdrake/interactive.pm:1395
 #, c-format
 msgid "Encryption key (again)"
 msgstr "再次輸入加密金鑰"
 
-#: diskdrake/interactive.pm:1389
+#: diskdrake/interactive.pm:1397
 #, c-format
 msgid "Encryption algorithm"
 msgstr "加密演算法"
@@ -2276,12 +2281,12 @@ msgstr "不知道要如何將 %s 格式化為 %s 格式"
 msgid "setting label on %s failed"
 msgstr "以 %s 格式化 %s 失敗"
 
-#: fs/format.pm:161
+#: fs/format.pm:162
 #, c-format
 msgid "I do not know how to format %s in type %s"
 msgstr "不知道要如何將 %s 格式化為 %s 格式"
 
-#: fs/format.pm:166 fs/format.pm:168
+#: fs/format.pm:167 fs/format.pm:169
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "以 %s 格式化 %s 失敗"
@@ -2306,7 +2311,7 @@ msgstr "正在將 %s 分割區掛載於 %s 目錄時失敗"
 msgid "Checking %s"
 msgstr "檢查 %s"
 
-#: fs/mount.pm:119 partition_table.pm:404
+#: fs/mount.pm:119 partition_table.pm:405
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "卸下 %s 的掛載時發生錯誤：%s"
@@ -3055,47 +3060,47 @@ msgstr "未知/其他"
 msgid "cpu # "
 msgstr "CPU 編號"
 
-#: harddrake/sound.pm:285
+#: harddrake/sound.pm:300
 #, c-format
 msgid "Please Wait... Applying the configuration"
 msgstr "請稍待... 正在套用該設定"
 
-#: harddrake/sound.pm:346
+#: harddrake/sound.pm:362
 #, c-format
 msgid "Enable PulseAudio"
 msgstr "啟用 PulseAudio"
 
-#: harddrake/sound.pm:350
+#: harddrake/sound.pm:366
 #, c-format
 msgid "Automatic routing from ALSA to PulseAudio"
 msgstr "自動將 ALSA 導向 PulseAudio"
 
-#: harddrake/sound.pm:355
+#: harddrake/sound.pm:371
 #, c-format
 msgid "Enable 5.1 sound with Pulse Audio"
 msgstr "以 PulseAudio 啟用 5.1 音效"
 
-#: harddrake/sound.pm:360
+#: harddrake/sound.pm:376
 #, c-format
 msgid "Enable user switching for audio applications"
 msgstr "啟用使用者切換音效應用程式"
 
-#: harddrake/sound.pm:365
+#: harddrake/sound.pm:381
 #, c-format
 msgid "Reset sound mixer to default values"
 msgstr "重設混音器為預設值"
 
-#: harddrake/sound.pm:370
+#: harddrake/sound.pm:386
 #, c-format
 msgid "Trouble shooting"
 msgstr "疑難排解"
 
-#: harddrake/sound.pm:377
+#: harddrake/sound.pm:393
 #, c-format
 msgid "No alternative driver"
 msgstr "沒有其他可供選擇的驅動程式"
 
-#: harddrake/sound.pm:378
+#: harddrake/sound.pm:394
 #, c-format
 msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
@@ -3104,12 +3109,12 @@ msgstr ""
 "您的音效卡 (%s) 正在使用 \"%s\" 驅動程式，目前沒有其他可供選擇的 OSS/ALSA 驅"
 "動程式支援它"
 
-#: harddrake/sound.pm:385
+#: harddrake/sound.pm:401
 #, c-format
 msgid "Sound configuration"
 msgstr "音效設定"
 
-#: harddrake/sound.pm:387
+#: harddrake/sound.pm:403
 #, c-format
 msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
@@ -3119,7 +3124,7 @@ msgstr "您可以選擇使用其他的 (OSS 或者 ALSA) 的驅動程式給您�
 #. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
-#: harddrake/sound.pm:392
+#: harddrake/sound.pm:408
 #, c-format
 msgid ""
 "\n"
@@ -3131,7 +3136,7 @@ msgstr ""
 "\n"
 "您的音效卡現在正在使用 %s\"%s\" 驅動程式 (您的音效卡預設的驅動程式為 \"%s\")"
 
-#: harddrake/sound.pm:394
+#: harddrake/sound.pm:410
 #, c-format
 msgid ""
 "OSS (Open Sound System) was the first sound API. It's an OS independent "
@@ -3163,12 +3168,12 @@ msgstr ""
 "- 相容於 OSS 的舊 API\n"
 "- 提供許多強化的功能但需要使用 ALSA 函式庫的新 ALSA API。\n"
 
-#: harddrake/sound.pm:408 harddrake/sound.pm:491
+#: harddrake/sound.pm:424 harddrake/sound.pm:507
 #, c-format
 msgid "Driver:"
 msgstr "驅動程式："
 
-#: harddrake/sound.pm:422
+#: harddrake/sound.pm:438
 #, c-format
 msgid ""
 "The old \"%s\" driver is blacklisted.\n"
@@ -3183,35 +3188,35 @@ msgstr ""
 "\n"
 "於下一次開機時將只會使用新的 \"%s\" 驅動程式。"
 
-#: harddrake/sound.pm:430
+#: harddrake/sound.pm:446
 #, c-format
 msgid "No open source driver"
 msgstr "無開放原始碼的驅動程式可用"
 
-#: harddrake/sound.pm:431
+#: harddrake/sound.pm:447
 #, c-format
 msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
 "driver at \"%s\"."
 msgstr "您的音效卡 (%s) 沒有自由的驅動程式，但是有私有的驅動程式於 \"%s\"."
 
-#: harddrake/sound.pm:434
+#: harddrake/sound.pm:450
 #, c-format
 msgid "No known driver"
 msgstr "無已知的驅動程式"
 
-#: harddrake/sound.pm:435
+#: harddrake/sound.pm:451
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
 msgstr "您使用的音效卡尚未有已知的驅動程式 (%s)"
 
-#: harddrake/sound.pm:450
+#: harddrake/sound.pm:466
 #, c-format
 msgid "Sound trouble shooting"
 msgstr "音效問題排除"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:453
+#: harddrake/sound.pm:469
 #, c-format
 msgid ""
 "The classic bug sound tester is to run the following commands:\n"
@@ -3252,18 +3257,18 @@ msgstr ""
 "\n"
 "- \"/sbin/fuser -v /dev/dsp\" 將指出哪個程式在使用音效卡。\n"
 
-#: harddrake/sound.pm:480
+#: harddrake/sound.pm:496
 #, c-format
 msgid "Let me pick any driver"
 msgstr "讓我選擇任何驅動程式"
 
-#: harddrake/sound.pm:483
+#: harddrake/sound.pm:499
 #, c-format
 msgid "Choosing an arbitrary driver"
 msgstr "正在選擇任意的驅動程式"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:486
+#: harddrake/sound.pm:502
 #, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
@@ -3368,7 +3373,27 @@ msgstr "完成"
 msgid "Previous"
 msgstr "上一步"
 
-#: interactive/gtk.pm:586
+#: interactive/curses.pm:556 ugtk2.pm:872
+#, c-format
+msgid "No file chosen"
+msgstr "未選擇檔案"
+
+#: interactive/curses.pm:560 ugtk2.pm:876
+#, c-format
+msgid "You have chosen a directory, not a file"
+msgstr "您選擇了目錄而非檔案"
+
+#: interactive/curses.pm:562 ugtk2.pm:878
+#, c-format
+msgid "No such directory"
+msgstr "無此目錄"
+
+#: interactive/curses.pm:562 ugtk2.pm:878
+#, c-format
+msgid "No such file"
+msgstr "無此檔案"
+
+#: interactive/gtk.pm:570
 #, c-format
 msgid "Beware, Caps Lock is enabled"
 msgstr "注意，已開啟字母大寫(Caps Lock)"
@@ -5074,17 +5099,17 @@ msgstr ""
 "載入 %s 模組失敗.\n"
 "您要用其他參數再試一次嗎?"
 
-#: partition_table.pm:410
+#: partition_table.pm:411
 #, c-format
 msgid "mount failed: "
 msgstr "掛載失敗："
 
-#: partition_table.pm:522
+#: partition_table.pm:523
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "這個平台並不支援延伸分割區"
 
-#: partition_table.pm:540
+#: partition_table.pm:541
 #, c-format
 msgid ""
 "You have a hole in your partition table but I can not use it.\n"
@@ -5153,37 +5178,37 @@ msgstr "無法在 _已格式_ 化的磁碟陣列 %s 中加入分割區"
 msgid "Not enough partitions for RAID level %d\n"
 msgstr "分割區數目不足以用來設定成為階層 %d 的磁碟陣列\n"
 
-#: scanner.pm:95
+#: scanner.pm:96
 #, c-format
 msgid "Could not create directory /usr/share/sane/firmware!"
 msgstr "無法建立目錄 /usr/share/sane/firmware！"
 
-#: scanner.pm:106
+#: scanner.pm:107
 #, c-format
 msgid "Could not create link /usr/share/sane/%s!"
 msgstr "無法建立連結 /usr/share/sane/%s！"
 
-#: scanner.pm:113
+#: scanner.pm:114
 #, c-format
 msgid "Could not copy firmware file %s to /usr/share/sane/firmware!"
 msgstr "無法複製韌體檔 %s 到 /usr/share/sane/firmware！"
 
-#: scanner.pm:120
+#: scanner.pm:121
 #, c-format
 msgid "Could not set permissions of firmware file %s!"
 msgstr "無法設定韌體檔 %s 的權限！"
 
-#: scanner.pm:199
+#: scanner.pm:200
 #, c-format
 msgid "Scannerdrake"
 msgstr "Scannerdrake"
 
-#: scanner.pm:200
+#: scanner.pm:201
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "無法安裝分享掃描器所需的套件。"
 
-#: scanner.pm:201
+#: scanner.pm:202
 #, c-format
 msgid "Your scanner(s) will not be available for non-root users."
 msgstr "您的掃描器將只供擁有管理者權限的使用者使用。"
@@ -5783,67 +5808,36 @@ msgstr "回報檢查結果到 tty"
 
 #: security/level.pm:10
 #, c-format
-msgid "Welcome To Crackers"
-msgstr "劣"
+msgid "Disable msec"
+msgstr ""
 
 #: security/level.pm:11
-#, c-format
-msgid "Poor"
-msgstr "差"
-
-#: security/level.pm:12
 #, c-format
 msgid "Standard"
 msgstr "標準"
 
-#: security/level.pm:13
-#, c-format
-msgid "High"
-msgstr "高"
+#: security/level.pm:12
+#, fuzzy, c-format
+msgid "Secure"
+msgstr "安全性"
 
-#: security/level.pm:14
+#: security/level.pm:38
 #, c-format
-msgid "Higher"
-msgstr "較高"
-
-#: security/level.pm:15
-#, c-format
-msgid "Paranoid"
-msgstr "嚴密"
+msgid ""
+"This level is to be used with care, as it disables all additional security\n"
+"provided by msec. Use it only when you want to take care of all aspects of "
+"system security\n"
+"on your own."
+msgstr ""
 
 #: security/level.pm:41
-#, c-format
-msgid ""
-"This level is to be used with care. It makes your system more easy to use,\n"
-"but very sensitive. It must not be used for a machine connected to others\n"
-"or to the Internet. There is no password access."
-msgstr ""
-"把安全層級設定在這個等級時必須要非常謹慎，它會讓您的系統容易使用卻極易受到\n"
-"破壞。這個設定不應該被用在有連線其他機器或網際網路的主機上，因為它沒有密碼\n"
-"保護。"
-
-#: security/level.pm:44
-#, c-format
-msgid ""
-"Passwords are now enabled, but use as a networked computer is still not "
-"recommended."
-msgstr "已啟動密碼認證功能，但仍然不建議將此系統運作於網路上網路環境。"
-
-#: security/level.pm:45
 #, c-format
 msgid ""
 "This is the standard security recommended for a computer that will be used "
 "to connect to the Internet as a client."
 msgstr "標準的系統安全性設定，建議用在作為網際網路客戶端的主機上使用。"
 
-#: security/level.pm:46
-#, c-format
-msgid ""
-"There are already some restrictions, and more automatic checks are run every "
-"night."
-msgstr "包含了相關存取限制，以及每日定期系統稽核檢查動作。"
-
-#: security/level.pm:47
+#: security/level.pm:42
 #, c-format
 msgid ""
 "With this security level, the use of this system as a server becomes "
@@ -5858,42 +5852,33 @@ msgstr ""
 "請注意：如果您的機器只是用來作為一個網際網路的客戶端，您應該選擇一個較低的安"
 "全層級。"
 
-#: security/level.pm:50
-#, c-format
-msgid ""
-"This is similar to the previous level, but the system is entirely closed and "
-"security features are at their maximum."
-msgstr ""
-"與上一個模式相同, 不過整個系統幾乎都是封閉的。系統整個安全設定機制都是在最嚴"
-"密的狀態。"
-
-#: security/level.pm:55
+#: security/level.pm:49
 #, c-format
 msgid "Security"
 msgstr "安全性"
 
-#: security/level.pm:55
+#: security/level.pm:49
 #, c-format
 msgid "DrakSec Basic Options"
 msgstr "DrakSec 基本參數選項"
 
-#: security/level.pm:58
+#: security/level.pm:52
 #, c-format
 msgid "Please choose the desired security level"
 msgstr "請選擇您希望的安全層級"
 
 #. -PO: this string is used to properly format "<security level>: <level description>"
-#: security/level.pm:62
+#: security/level.pm:56
 #, c-format
 msgid "%s: %s"
 msgstr "%s: %s"
 
-#: security/level.pm:65
+#: security/level.pm:59
 #, c-format
 msgid "Security Administrator:"
 msgstr "安全性管理者："
 
-#: security/level.pm:66
+#: security/level.pm:60
 #, c-format
 msgid "Login or email:"
 msgstr "登入或郵件帳號："
@@ -6593,30 +6578,10 @@ msgstr "南斯拉夫"
 msgid "Is this correct?"
 msgstr "這樣子正確嗎？"
 
-#: ugtk2.pm:872
-#, c-format
-msgid "No file chosen"
-msgstr "未選擇檔案"
-
 #: ugtk2.pm:874
 #, c-format
 msgid "You have chosen a file, not a directory"
 msgstr "您選擇了檔案而非目錄"
-
-#: ugtk2.pm:876
-#, c-format
-msgid "You have chosen a directory, not a file"
-msgstr "您選擇了目錄而非檔案"
-
-#: ugtk2.pm:878
-#, c-format
-msgid "No such directory"
-msgstr "無此目錄"
-
-#: ugtk2.pm:878
-#, c-format
-msgid "No such file"
-msgstr "無此檔案"
 
 #: wizards.pm:95
 #, c-format
@@ -6631,6 +6596,51 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "安裝失敗"
+
+#~ msgid "Welcome To Crackers"
+#~ msgstr "劣"
+
+#~ msgid "Poor"
+#~ msgstr "差"
+
+#~ msgid "High"
+#~ msgstr "高"
+
+#~ msgid "Higher"
+#~ msgstr "較高"
+
+#~ msgid "Paranoid"
+#~ msgstr "嚴密"
+
+#~ msgid ""
+#~ "This level is to be used with care. It makes your system more easy to "
+#~ "use,\n"
+#~ "but very sensitive. It must not be used for a machine connected to "
+#~ "others\n"
+#~ "or to the Internet. There is no password access."
+#~ msgstr ""
+#~ "把安全層級設定在這個等級時必須要非常謹慎，它會讓您的系統容易使用卻極易受"
+#~ "到\n"
+#~ "破壞。這個設定不應該被用在有連線其他機器或網際網路的主機上，因為它沒有密"
+#~ "碼\n"
+#~ "保護。"
+
+#~ msgid ""
+#~ "Passwords are now enabled, but use as a networked computer is still not "
+#~ "recommended."
+#~ msgstr "已啟動密碼認證功能，但仍然不建議將此系統運作於網路上網路環境。"
+
+#~ msgid ""
+#~ "There are already some restrictions, and more automatic checks are run "
+#~ "every night."
+#~ msgstr "包含了相關存取限制，以及每日定期系統稽核檢查動作。"
+
+#~ msgid ""
+#~ "This is similar to the previous level, but the system is entirely closed "
+#~ "and security features are at their maximum."
+#~ msgstr ""
+#~ "與上一個模式相同, 不過整個系統幾乎都是封閉的。系統整個安全設定機制都是在最"
+#~ "嚴密的狀態。"
 
 #~ msgid ""
 #~ "\n"
