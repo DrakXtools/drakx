@@ -1,3 +1,7 @@
+- include /usr/share/mime/mime.cache in stage2
+  (gdk-pixbuf does not guess anymore image format from file extension,
+   which makes it check MIME cache now)
+
 Version 11.81 - 3 February 2009
 
 - allow browsing partitions content to easily select the ones to destroy
