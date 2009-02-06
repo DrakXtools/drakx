@@ -86,6 +86,10 @@ function detect_root()
 		dev=$(sed '\|'$restore_media'|!d;s/[0-9] .*$//;s/^.*\///' /proc/mounts)
 		devices=$(grep "^ .*[^0-9]$" < /proc/partitions | grep -v ${dev} | awk '$3 > '$MIN_DISKSIZE' { print $4,$3 }')
 
+		if [ -z ${devices} ]; then
+			exit 1
+		fi
+
 		devs_found=$(echo $devices | wc -w)
 		# we might use it later again
 		fdisk -l | grep "^/dev/" | grep -v ${dev} > /tmp/fdisk.log
