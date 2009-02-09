@@ -977,8 +977,16 @@ sub suggest {
     my $boot = fs::get::root($fstab, 'boot')->{device};
     #- PPC xfs module requires enlarged initrd
     my $xfsroot = $root_part->{fs_type} eq 'xfs';
+    my $mbr;
+    
+    # If installing onto an USB drive, put the mbr there, else on the first non removable drive
+    if ($root_part->{is_removable}) {
+        $mbr = find { $_->{device} eq $root_part->{rootDevice} } $all_hds->{hds};
+    } else {
+        $mbr = find { !$_->{is_removable} } $all_hds->{hds};
+    }
 
-    my ($onmbr, $unsafe) = $bootloader->{crushMbr} ? (1, 0) : suggest_onmbr($all_hds->{hds}[0]);
+    my ($onmbr, $unsafe) = $bootloader->{crushMbr} ? (1, 0) : suggest_onmbr($mbr);
     add2hash_($bootloader, arch() =~ /ppc/ ?
 	{
 	 defaultos => "linux",
@@ -999,7 +1007,7 @@ sub suggest {
 	 timeout => $onmbr && 10,
 	 nowarn => 1,
 	   if_(arch() !~ /ia64/,
-	 boot => "/dev/" . ($onmbr ? $all_hds->{hds}[0]{device} : $boot),
+	 boot => "/dev/" . ($onmbr ? $mbr->{device} : $boot),
 	 map => "/boot/map",
 	 compact => 1,
 	 color => 'black/cyan yellow/cyan',
