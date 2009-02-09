@@ -1,6 +1,6 @@
 %define name meta-task
 %define version 2009.1
-%define release %mkrel 3
+%define release %mkrel 4
 
 Summary: Meta task listing packages by group
 Name: %{name}
@@ -44,6 +44,4 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/urpmi/prefer.vendor.list
-%{_datadir}/%name
-
-
+%{_datadir}/%{name}
