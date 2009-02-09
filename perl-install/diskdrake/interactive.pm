@@ -148,6 +148,8 @@ struct hd {
   list allPartitionsRenumbered # used to update bootloader configuration
   int bus, id
 
+  bool is_removable     # is it a removable drive
+
   partition_table_elem primary
   partition_table_elem extended[]
 

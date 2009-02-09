@@ -276,6 +276,7 @@ Do you agree to lose all the partitions?
 	}
 
 	if ($hd->{usb_media_type}) {
+	    $hd->{is_removable} = 1;
 	    $_->{is_removable} = 1 foreach @parts;
 	}
 
