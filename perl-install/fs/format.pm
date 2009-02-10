@@ -151,8 +151,13 @@ sub part_raw {
         push @options, '-l', "Untitled";
     } elsif (isAppleBootstrap($part)) {
 	push @options, '-l', 'bootstrap';
-    } elsif (member($fs_type, 'swap', 'ext2', 'ext3', 'ext4')) {
+    }
+
+    # Preserve UUID
+    if (member($fs_type, 'swap', 'ext2', 'ext3', 'ext4')) {
 	push @options, '-U', $part->{device_UUID} if $part->{device_UUID};
+    } elsif ($fs_type eq 'reiserfs') {
+	push @options, '-u', $part->{device_UUID} if $part->{device_UUID};
     }
 
     if ($part->{device_LABEL}) {
@@ -169,6 +174,13 @@ sub part_raw {
 	run_program::raw({ timeout => 'never' }, @args) or die N("%s formatting of %s failed", $fs_type, $dev);
     }
 
+    # Preserve UUID on fs where we couldn't enforce it while formatting
+    if ($fs_type eq 'jfs') {
+	run_program::raw('jfs_tune', '-U', devices::make($dev));
+    } elsif ($fs_type eq 'xfs') {
+	run_program::raw('xfs_admin', '-U', devices::make($dev));
+    } 
+    
     if (member($fs_type, qw(ext3 ext4))) {
 	disable_forced_fsck($dev);
     }
