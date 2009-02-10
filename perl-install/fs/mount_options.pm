@@ -32,7 +32,6 @@ sub unpack {
 		  nfs => [ qw(rsize=8192 wsize=8192) ],
 		  cifs => [ qw(username= password=) ],
 		  davfs2 => [ qw(username= password= uid= gid=) ],
-		  ext4 => [ qw(extents) ],
 		  reiserfs => [ 'notail' ],
 		 );
     push @{$per_fs{$_}}, 'usrquota', 'grpquota' foreach 'ext2', 'ext3', 'ext4', 'xfs';
