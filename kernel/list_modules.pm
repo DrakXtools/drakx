@@ -288,10 +288,10 @@ our %l = (
 my %moddeps;
 
 sub load_dependencies {
-    my ($file) = @_;
+    my ($file, $o_root) = @_;
 
     %moddeps = ();
-    foreach (cat_($file)) {
+    foreach (cat_($o_root . $file)) {
 	my ($m, $d) = split ':';
 	my $path = $m;
 	my ($filename, @fdeps) = map {
@@ -300,9 +300,15 @@ sub load_dependencies {
 	    s!\.gz!!g;
 	    $_;
 	} $m, split(' ', $d);
+
 	my ($modname, @deps) = map { filename2modname($_) } $filename, @fdeps;
 	$moddeps{$modname}{deps} = \@deps;
 	$moddeps{$modname}{filename} = $filename;
+	if (!begins_with($path, "/")) {
+		#- with newer module-init-tools, modules.dep can contain
+		#- relative paths
+		$path = dirname($file).'/'.$path;
+	}
  	$moddeps{$modname}{path} = $path;
     }
 }
