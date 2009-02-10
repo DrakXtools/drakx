@@ -981,7 +981,7 @@ sub suggest {
     
     # If installing onto an USB drive, put the mbr there, else on the first non removable drive
     if ($root_part->{is_removable}) {
-        $mbr = find { $_->{device} eq $root_part->{rootDevice} } $all_hds->{hds};
+        $mbr = fs::get::part2hd($root_part, $all_hds);
     } else {
         $mbr = find { !$_->{is_removable} } $all_hds->{hds};
     }
