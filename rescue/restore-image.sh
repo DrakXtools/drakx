@@ -209,7 +209,7 @@ w
 EOF
 }
 
-function write_image()
+function detect_device()
 {
 	dialog --backtitle "$BACKTITLE" --title "$TITLE" --infobox "\nTrying to detect your root partition and disk...\n" 4 55
 
@@ -221,6 +221,10 @@ function write_image()
 		root=$(detect_root)
 	fi
 
+}
+
+function write_image()
+{
 	if [ -n "${win32_part_dev}" ]; then
 		resize_win32 ${win32_part_dev} ${win32_part_type} ${win32_part_new_size}
 	fi
@@ -358,6 +362,7 @@ function expand_fs()
 # installation steps
 welcome
 read_config
+detect_device
 install_warning
 write_image
 expand_fs
