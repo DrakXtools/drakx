@@ -103,7 +103,7 @@ function detect_root()
 		set +f
 
 		# won't handle complex layouts
-		if [ ! $(grep "^/dev" /tmp/fdisk.log | wc -l) -gt 1 ]; then
+		if [ "${devs_found}" = 1 ]; then
 		    if [ -n "${first_win32_part_dev}" ]; then
 			root=$(detect_and_resize_win32 $first_win32_part_dev)
 		    fi
