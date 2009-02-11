@@ -234,7 +234,7 @@ function write_image()
 		*) uncomp=cat ;;
 	esac
 
-	if [ -s /tmp/fdisk.log ]; then
+	if [ -n "$win32_part_dev" ]; then
 		skipstart='dd of=/dev/null bs=1 count=32256 &>/dev/null;'
 	fi
 
