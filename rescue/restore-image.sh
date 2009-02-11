@@ -17,6 +17,9 @@ images_dir="$restore_media/images"
 images="$images_dir/list"
 images_config="$images_dir/config"
 image=""
+win32_part_dev=
+win32_part_type=
+win32_part_new_size=
 
 function read_config()
 {
