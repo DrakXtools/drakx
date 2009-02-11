@@ -98,7 +98,12 @@ function detect_root()
 		fdisk -l | grep "^/dev/" | grep -v ${dev} > /tmp/fdisk.log
 		first_disk=$(echo ${devices} | cut -d ' ' -f 1)
 
-		if ! grep -qe "FAT\|NTFS\|HPFS" /tmp/fdisk.log; then
+		# get the last created windows partition information
+		set -f
+		first_win32_part_dev=$(grep -e "FAT\|NTFS\|HPFS" /tmp/fdisk.log | tail -1 | sed 's/ .*$//')
+		set +f
+
+		if [ -z "${first_win32_part_dev}" ]; then
 			rm -rf /tmp/fdisk.log
 			if [ "$devs_found" -gt "2" ]; then
 	 			if [ ! -z ${dev} ]; then
@@ -116,7 +121,7 @@ function detect_root()
 			    root=$first_disk
 			fi
 		else
-			root=$(detect_and_resize_win32 $first_disk)
+			root=$(detect_and_resize_win32 $first_disk $first_win32_part_dev)
 		fi
 		
 		echo "${root}"
@@ -126,15 +131,10 @@ function detect_and_resize_win32()
 {
 	# from detect_root()
 	disk=${1}
+	device=${2}
 
 	# won't handle complex layouts
 	if [ ! $(grep "^/dev" /tmp/fdisk.log | wc -l) -gt 1 ]; then
-		set -f
-		# get the last created windows partition information
-		partition=$(grep -e "FAT\|NTFS\|HPFS" /tmp/fdisk.log | tail -1)
-		device=$(echo ${partition} | sed 's/ .*$//')
-		set +f
-
 		# it might be needed, for safety
 		device_type=$(vol_id --type ${device})
 		modprobe ${device_type}
