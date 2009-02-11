@@ -103,7 +103,11 @@ function detect_root()
 		first_win32_part_dev=$(grep -e "FAT\|NTFS\|HPFS" /tmp/fdisk.log | tail -1 | sed 's/ .*$//')
 		set +f
 
-		if [ -z "${first_win32_part_dev}" ]; then
+		if [ -n "${first_win32_part_dev}" ]; then
+			root=$(detect_and_resize_win32 $first_disk $first_win32_part_dev)
+		fi
+
+		if [ -z "${root}" ]; then
 			rm -rf /tmp/fdisk.log
 			if [ "$devs_found" -gt "2" ]; then
 	 			if [ ! -z ${dev} ]; then
@@ -120,8 +124,6 @@ function detect_root()
 			else
 			    root=$first_disk
 			fi
-		else
-			root=$(detect_and_resize_win32 $first_disk $first_win32_part_dev)
 		fi
 		
 		echo "${root}"
@@ -155,14 +157,9 @@ function detect_and_resize_win32()
 			# our install takes half of 'left'
 			win32_part_new_size=$(($((${used}+${avail}))*2))
 			resize_win32 ${win32_part_dev} ${win32_part_type} ${win32_part_new_size}
-		else
-			rm -f /tmp/fdisk.log
+	                echo "${disk}${number}"
 		fi
-	else
-		rm -f /tmp/fdisk.log
 	fi
-
-	echo "${disk}${number}"
 }
 
 function resize_win32()
