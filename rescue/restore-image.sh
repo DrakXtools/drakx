@@ -250,12 +250,13 @@ function write_image()
 		*) uncomp=cat ;;
 	esac
 
+	skipstart=/bin/true
 	if [ -n "$win32_part_dev" ]; then
-		skipstart='dd of=/dev/null bs=1 count=32256 &>/dev/null;'
+		skipstart='dd of=/dev/null bs=1 count=32256'
 	fi
 
 	# the actual dumping command, from image to disk
-	${uncomp} ${images_dir}/${image} | (${skipstart} dd bs=4M of=/dev/${root} >/tmp/backup.out 2>&1>>/tmp/log) &
+	${uncomp} ${images_dir}/${image} | (${skipstart} &>/dev/null; dd bs=4M of=/dev/${root} >/tmp/backup.out 2>&1>>/tmp/log) &
 
 	sleep 3
 	pid=$(ps ax | grep 'dd bs=4M of' | grep -v grep | awk '{ print $1 }')
