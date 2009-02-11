@@ -158,6 +158,7 @@ function detect_and_resize_win32()
 		# our install takes half of 'left'
 		win32_part_new_size=$(($((${used}+${avail}))*2))
 		resize_win32 ${win32_part_dev} ${win32_part_type} ${win32_part_new_size}
+		number=$(echo ${win32_part_dev} | sed 's@/dev/...@@g')
                 echo "${disk}${number}"
 	fi
 }
@@ -169,10 +170,7 @@ function resize_win32()
 	new_win32_size=${3}
 
 	disk=${device%[0-9]}
-
-	# get the next partition integer
 	number=$(echo ${device} | sed 's@/dev/...@@g')
-	let number++
 
 	case ${device_type} in
 		vfat) device_id=b  ;;
