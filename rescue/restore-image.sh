@@ -177,6 +177,8 @@ function resize_win32()
 	device_type=${2}
 	new_win32_size=${3}
 
+	dialog --backtitle "$BACKTITLE" --title "$TITLE" --infobox "\nResizing Windows partition...\n" 4 55
+
 	dev=${device#/dev/}
 	disk=${dev%[0-9]}
 	win32_number=${dev#[a-w][a-w][a-w]}
