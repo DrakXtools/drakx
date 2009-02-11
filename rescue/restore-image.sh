@@ -145,6 +145,8 @@ function detect_and_resize_win32()
 		used=$(echo ${size} | awk '{ print $3 }')
 		left=$(echo ${size} | awk '{ print $4 }')
 		avail=$((${left}/2))
+		# our install takes half of 'left'
+		new_win32_size=$(($((${used}+${avail}))*2))
 
 		if [ ! ${avail} -lt ${MIN_DISKSIZE} ]; then
 			# get the next partition integer
@@ -157,8 +159,8 @@ function detect_and_resize_win32()
 				hpfs) device_id=87 ;;
 			esac
 
-			# wrapper around libdrakx by blino (it takes half of 'left')
-			diskdrake-resize ${device} ${device_type} $(($((${used}+${avail}))*2)) &>/dev/null
+			# wrapper around libdrakx by blino
+			diskdrake-resize ${device} ${device_type} ${new_win32_size} &>/dev/null
 
 			# we need some free sector here, rebuilding layout
 			fdisk /dev/${disk} &>/dev/null <<EOF
