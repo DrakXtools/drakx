@@ -137,10 +137,10 @@ function detect_win32()
 
 	# get the last created windows partition information
 	set -f
-	first_win32_part_dev=$(fdisk -l | grep "^/dev/" | grep -v ${inst_source_dev} | grep -e "FAT\|NTFS\|HPFS" | tail -1 | sed 's/ .*$//')
+	device=$(fdisk -l | grep "^/dev/" | grep -v ${inst_source_dev} | grep -e "FAT\|NTFS\|HPFS" | tail -1 | sed 's/ .*$//')
 	set +f
 
-	if [ -z "${first_win32_part_dev}" ]; then
+	if [ -z "${device}" ]; then
 		exit
 	fi
 
