@@ -161,9 +161,13 @@ function detect_win32()
 		win32_part_dev=${device}
 		win32_part_type=${device_type}
 		# our install takes half of 'left'
-		win32_part_new_size=$(($((${used}+${avail}))*2))
-		instroot=$(echo ${win32_part_dev} | sed 's@/dev/@@')
-		echo ${instroot} ${win32_part_dev} ${win32_part_type} ${win32_part_new_size}
+		win32_part_new_size=$((${used}+${avail}))
+
+		dev=${win32_part_dev#/dev/}
+		disk=${dev%[0-9]}
+		number=${dev#[a-w][a-w][a-w]}
+		let number++
+		echo ${disk}${number} ${win32_part_dev} ${win32_part_type} ${win32_part_new_size}
 	fi
 }
 
@@ -173,8 +177,9 @@ function resize_win32()
 	device_type=${2}
 	new_win32_size=${3}
 
-	disk=${device%[0-9]}
-	number=$(echo ${device} | sed 's@/dev/...@@g')
+	dev=${device#/dev/}
+	disk=${dev%[0-9]}
+	win32_number=${dev#[a-w][a-w][a-w]}
 
 	case ${device_type} in
 		vfat) device_id=b  ;;
@@ -183,31 +188,31 @@ function resize_win32()
 	esac
 
 	# wrapper around libdrakx by blino
-	diskdrake-resize ${device} ${device_type} ${new_win32_size} &>/dev/null
+	diskdrake-resize ${device} ${device_type} $((${new_win32_size}*2)) &>/dev/null
 
 	# we need some free sector here, rebuilding layout
 	fdisk /dev/${disk} &>/dev/null <<EOF
 d
 n
 p
-$((${number}-1))
+${win32_number}
 
-+$((${used}+${avail}))K
++${new_win32_size}K
 t
 ${device_id}
 a
-$((${number}-1))
+${win32_number}
 w
 EOF
 	# adds linux partition to the end of the working disk
 	fdisk /dev/${disk} &>/dev/null <<EOF
 n
 p
-${number}
+$((${win32_number}+1))
 
 +${MIN_DISKSIZE}K
 t
-${number}
+$((${win32_number}+1))
 83
 w
 EOF
