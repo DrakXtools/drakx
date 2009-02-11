@@ -112,13 +112,13 @@ function detect_root()
 			    root=$(echo ${devices} | cut -d ' ' -f 1)
 			fi
 		else
-			root=$(resize_win32 $(echo ${devices} | cut -d ' ' -f 1))
+			root=$(detect_and_resize_win32 $(echo ${devices} | cut -d ' ' -f 1))
 		fi
 		
 		echo "${root}"
 }
 
-function resize_win32()
+function detect_and_resize_win32()
 {
 	# from detect_root()
 	disk=${1}
