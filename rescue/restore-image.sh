@@ -302,7 +302,7 @@ EOF
 
 function expand_fs()
 {
-	if [ ! -s /tmp/fdisk.log ]; then
+	if [ -z "$win32_part_dev" ]; then
 		root=${root%[0-9]}1
 	fi
 	filesystem_type=$(dumpe2fs -h /dev/${root} 2>/dev/null| grep "Filesystem OS type" | awk '{ print $4 }')
@@ -340,7 +340,7 @@ function expand_fs()
 		grub_dir="$mnt_dir/boot/grub"
 		if [ -d "$grub_dir" ]; then
 		    echo "(hd0) $disk" > "$grub_dir/device.map"
-		    if [ -s /tmp/fdisk.log ]; then
+		    if [ -n "$win32_part_dev" ]; then
    	                grub_setup ${root} ${grub_dir}
                     fi
 		fi
