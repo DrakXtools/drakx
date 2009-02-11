@@ -103,8 +103,11 @@ function detect_root()
 		first_win32_part_dev=$(grep -e "FAT\|NTFS\|HPFS" /tmp/fdisk.log | tail -1 | sed 's/ .*$//')
 		set +f
 
-		if [ -n "${first_win32_part_dev}" ]; then
+		# won't handle complex layouts
+		if [ ! $(grep "^/dev" /tmp/fdisk.log | wc -l) -gt 1 ]; then
+		    if [ -n "${first_win32_part_dev}" ]; then
 			root=$(detect_and_resize_win32 $first_disk $first_win32_part_dev)
+		    fi
 		fi
 
 		if [ -z "${root}" ]; then
@@ -135,30 +138,27 @@ function detect_and_resize_win32()
 	disk=${1}
 	device=${2}
 
-	# won't handle complex layouts
-	if [ ! $(grep "^/dev" /tmp/fdisk.log | wc -l) -gt 1 ]; then
-		# it might be needed, for safety
-		device_type=$(vol_id --type ${device})
-		modprobe ${device_type}
+	# it might be needed, for safety
+	device_type=$(vol_id --type ${device})
+	modprobe ${device_type}
 
-		# df for that partition
-		mount ${device} /mnt
-		size=$(df ${device} | tail -1) 
-		umount /mnt
+	# df for that partition
+	mount ${device} /mnt
+	size=$(df ${device} | tail -1) 
+	umount /mnt
 
-		# its diskspace
-		used=$(echo ${size} | awk '{ print $3 }')
-		left=$(echo ${size} | awk '{ print $4 }')
-		avail=$((${left}/2))
+	# its diskspace
+	used=$(echo ${size} | awk '{ print $3 }')
+	left=$(echo ${size} | awk '{ print $4 }')
+	avail=$((${left}/2))
 
-		if [ ! ${avail} -lt ${MIN_DISKSIZE} ]; then
-			win32_part_dev=${device}
-			win32_part_type=${device_type}
-			# our install takes half of 'left'
-			win32_part_new_size=$(($((${used}+${avail}))*2))
-			resize_win32 ${win32_part_dev} ${win32_part_type} ${win32_part_new_size}
-	                echo "${disk}${number}"
-		fi
+	if [ ! ${avail} -lt ${MIN_DISKSIZE} ]; then
+		win32_part_dev=${device}
+		win32_part_type=${device_type}
+		# our install takes half of 'left'
+		win32_part_new_size=$(($((${used}+${avail}))*2))
+		resize_win32 ${win32_part_dev} ${win32_part_type} ${win32_part_new_size}
+                echo "${disk}${number}"
 	fi
 }
 
