@@ -102,7 +102,7 @@ function detect_root()
 
 		if [ -z "${root}" ]; then
 			if [ "$devs_found" -gt "1" ]; then
-	 			if [ ! -z ${inst_source_dev} ]; then
+	 			if [ -n "${inst_source_dev}" ]; then
 	 				opcao=$(dialog --backtitle "$BACKTITLE" --title "$TITLE" --stdout --menu 'Choose one of the detected devices to restore to (check the blocks size column first):' 8 50 0 $devices )
 	 				if [ "$?" != "0" ]; then
 	 					_yesno "\nInterrupt installation?\n "
