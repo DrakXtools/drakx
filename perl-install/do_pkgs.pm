@@ -68,6 +68,26 @@ sub ensure_binary_is_installed {
     1;
 }
 
+# takes a list of [ "package", "file" ] and installs package if file is not there
+sub ensure_files_are_installed {
+    my ($do, $pkgs, $b_auto) = @_;
+
+    my @not_installed = map { my ($package, $file) = @{$_}; -e "$::prefix$file"?():$package } @{$pkgs};
+
+    $do->in->ask_okcancel(N("Warning"), N("The following packages need to be installed:\n") . join(', ', @not_installed), 1)
+	  or return if !$b_auto && $do->in;
+
+    if (!$do->install(@not_installed)) {
+	if ($do->in) {
+	    $do->in->ask_warn(N("Error"), N("Could not install the %s package!", $not_installed[0]));
+	} else {
+	    log::l("Could not install packages: " . join(' ', @not_installed));
+	}
+	return;
+    }
+    1;
+}
+
 sub ensure_is_installed_if_available {
     my ($do, $pkg, $file) = @_;
     if (-e "$::prefix$file" || $::testing) {
