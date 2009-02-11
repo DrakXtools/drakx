@@ -86,8 +86,8 @@ do you want to continue?\n "
 
 function detect_root()
 {
-		dev=$(sed '\|'$restore_media'|!d;s/[0-9] .*$//;s/^.*\///' /proc/mounts)
-		devices=$(grep "^ .*[^0-9]$" < /proc/partitions | grep -v ${dev} | awk '$3 > '$MIN_DISKSIZE' { print $4,$3 }')
+		inst_source_dev=$(sed '\|'$restore_media'|!d;s/[0-9] .*$//;s/^.*\///' /proc/mounts)
+		devices=$(grep "^ .*[^0-9]$" < /proc/partitions | grep -v ${inst_source_dev} | awk '$3 > '$MIN_DISKSIZE' { print $4,$3 }')
 
 		if [ -z "${devices}" ]; then
 			exit 1
@@ -95,7 +95,7 @@ function detect_root()
 
 		devs_found=$(($(echo $devices | wc -w)/2))
 		# we might use it later again
-		fdisk -l | grep "^/dev/" | grep -v ${dev} > /tmp/fdisk.log
+		fdisk -l | grep "^/dev/" | grep -v ${inst_source_dev} > /tmp/fdisk.log
 
 		# get the last created windows partition information
 		set -f
@@ -112,7 +112,7 @@ function detect_root()
 		if [ -z "${root}" ]; then
 			rm -rf /tmp/fdisk.log
 			if [ "$devs_found" -gt "1" ]; then
-	 			if [ ! -z ${dev} ]; then
+	 			if [ ! -z ${inst_source_dev} ]; then
 	 				opcao=$(dialog --backtitle "$BACKTITLE" --title "$TITLE" --stdout --menu 'Choose one of the detected devices to restore to (check the blocks size column first):' 8 50 0 $devices )
 	 				if [ "$?" != "0" ]; then
 	 					_yesno "\nInterrupt installation?\n "
