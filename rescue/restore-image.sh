@@ -102,14 +102,13 @@ function detect_root()
 
 	devs_found=$(($(echo $devices | wc -w)/2))
 
-	root=
-	win32_part_dev=
+	root_data=
 	# win32 detection won't handle complex layouts
 	if [ "${devs_found}" = 1 ]; then
-		root=$(detect_win32 ${inst_source_dev})
+		root_data=$(detect_win32 ${inst_source_dev})
 	fi
 
-	if [ -z "${root}" ]; then
+	if [ -z "${root_data}" ]; then
 		if [ "$devs_found" -gt "1" ]; then
  			if [ -n "${inst_source_dev}" ]; then
  				opcao=$(dialog --backtitle "$BACKTITLE" --title "$TITLE" --stdout --menu 'Choose one of the detected devices to restore to (check the blocks size column first):' 8 50 0 $devices )
@@ -119,15 +118,15 @@ function detect_root()
  						_shutdown
  					fi
  				else
- 					root=${opcao}
+ 					root_data=${opcao}
  				fi 
  			fi
 		else
-		    root=$(echo ${devices} | cut -d ' ' -f 1)
+		    root_data=$(echo ${devices} | cut -d ' ' -f 1)
 		fi
 	fi
 	
-	echo "${root}"
+	echo ${root_data}
 }
 
 function detect_win32()
@@ -163,8 +162,8 @@ function detect_win32()
 		win32_part_type=${device_type}
 		# our install takes half of 'left'
 		win32_part_new_size=$(($((${used}+${avail}))*2))
-
-		echo ${win32_part_dev} | sed 's@/dev/@@'
+		instroot=$(echo ${win32_part_dev} | sed 's@/dev/@@')
+		echo ${instroot} ${win32_part_dev} ${win32_part_type} ${win32_part_new_size}
 	fi
 }
 
@@ -218,14 +217,18 @@ function detect_device()
 {
 	dialog --backtitle "$BACKTITLE" --title "$TITLE" --infobox "\nTrying to detect your root partition and disk...\n" 4 55
 
-	root=$(detect_root)
-	if [ -z ${root} ]; then
+	root_data=$(detect_root)
+	if [ -z "${root_data}" ]; then
         	_msgbox "\nError writing image: disk device not detected.\n"
 		# so that netbooks using USB sticks as disks can retry (like Gdium)
 		welcome
-		root=$(detect_root)
+		root_data=$(detect_root)
 	fi
-
+	set ${root_data}
+	root=$1
+	win32_part_dev=$2
+	win32_part_type=$3
+	win32_part_new_size=$4
 }
 
 function write_image()
