@@ -159,7 +159,7 @@ function detect_and_resize_win32()
 		win32_part_new_size=$(($((${used}+${avail}))*2))
 		resize_win32 ${win32_part_dev} ${win32_part_type} ${win32_part_new_size}
 		number=$(echo ${win32_part_dev} | sed 's@/dev/...@@g')
-                echo "${disk}${number}"
+		echo "${disk}${number}"
 	fi
 }
 
