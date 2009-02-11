@@ -93,7 +93,7 @@ function detect_root()
 			exit 1
 		fi
 
-		devs_found=$(echo $devices | wc -w)
+		devs_found=$(($(echo $devices | wc -w)/2))
 		# we might use it later again
 		fdisk -l | grep "^/dev/" | grep -v ${dev} > /tmp/fdisk.log
 		first_disk=$(echo ${devices} | cut -d ' ' -f 1)
@@ -112,7 +112,7 @@ function detect_root()
 
 		if [ -z "${root}" ]; then
 			rm -rf /tmp/fdisk.log
-			if [ "$devs_found" -gt "2" ]; then
+			if [ "$devs_found" -gt "1" ]; then
 	 			if [ ! -z ${dev} ]; then
 	 				opcao=$(dialog --backtitle "$BACKTITLE" --title "$TITLE" --stdout --menu 'Choose one of the detected devices to restore to (check the blocks size column first):' 8 50 0 $devices )
 	 				if [ "$?" != "0" ]; then
