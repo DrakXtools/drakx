@@ -60,6 +60,7 @@ function _eject()
 
 function _shutdown()
 {
+	[ -e /tmp/no-shutdown ] && exit
 	clear
 	sync
 	echo s > /proc/sysrq-trigger
@@ -69,6 +70,7 @@ function _shutdown()
 
 function _reboot()
 {
+	[ -e /tmp/no-shutdown ] && exit
 	clear
 	sync
 	echo s > /proc/sysrq-trigger
