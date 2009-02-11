@@ -99,7 +99,7 @@ function detect_root()
 		win32_part_dev=
 		# win32 detection won't handle complex layouts
 		if [ "${devs_found}" = 1 ]; then
-			root=$(detect_and_resize_win32 ${inst_source_dev})
+			root=$(detect_win32 ${inst_source_dev})
 		fi
 
 		if [ -z "${root}" ]; then
@@ -123,7 +123,7 @@ function detect_root()
 		echo "${root}"
 }
 
-function detect_and_resize_win32()
+function detect_win32()
 {
 	# from detect_root()
 	skip_dev=${1}
@@ -156,7 +156,7 @@ function detect_and_resize_win32()
 		win32_part_type=${device_type}
 		# our install takes half of 'left'
 		win32_part_new_size=$(($((${used}+${avail}))*2))
-		resize_win32 ${win32_part_dev} ${win32_part_type} ${win32_part_new_size}
+
 		disk=${device%[0-9]}
 		number=$(echo ${device} | sed 's@/dev/...@@g')
 		echo "${disk}${number}"
@@ -219,6 +219,10 @@ function write_image()
 		# so that netbooks using USB sticks as disks can retry (like Gdium)
 		welcome
 		root=$(detect_root)
+	fi
+
+	if [ -n "${win32_part_dev}" ]; then
+		resize_win32 ${win32_part_dev} ${win32_part_type} ${win32_part_new_size}
 	fi
 	
 	image=$(cat $images_dir/list | cut -d ',' -f 3)
