@@ -127,11 +127,9 @@ function detect_and_resize_win32()
 	# from detect_root()
 	skip_dev=${1}
 
-	# we might use it later again
-	fdisk -l | grep "^/dev/" | grep -v ${inst_source_dev} > /tmp/fdisk.log
 	# get the last created windows partition information
 	set -f
-	first_win32_part_dev=$(grep -e "FAT\|NTFS\|HPFS" /tmp/fdisk.log | tail -1 | sed 's/ .*$//')
+	first_win32_part_dev=$(fdisk -l | grep "^/dev/" | grep -v ${inst_source_dev} | grep -e "FAT\|NTFS\|HPFS" | tail -1 | sed 's/ .*$//')
 	set +f
 
 	if [ -z "${first_win32_part_dev}" ]; then
