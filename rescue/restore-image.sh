@@ -96,6 +96,7 @@ function detect_root()
 		devs_found=$(($(echo $devices | wc -w)/2))
 
 		root=
+		win32_part_dev=
 		# win32 detection won't handle complex layouts
 		if [ "${devs_found}" = 1 ]; then
 			root=$(detect_and_resize_win32 ${inst_source_dev})
