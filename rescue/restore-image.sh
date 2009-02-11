@@ -93,41 +93,41 @@ do you want to continue?"
 
 function detect_root()
 {
-		inst_source_dev=$(sed '\|'$restore_media'|!d;s/[0-9] .*$//;s/^.*\///' /proc/mounts)
-		devices=$(grep "^ .*[^0-9]$" < /proc/partitions | grep -v ${inst_source_dev} | awk '$3 > '$MIN_DISKSIZE' { print $4,$3 }')
+	inst_source_dev=$(sed '\|'$restore_media'|!d;s/[0-9] .*$//;s/^.*\///' /proc/mounts)
+	devices=$(grep "^ .*[^0-9]$" < /proc/partitions | grep -v ${inst_source_dev} | awk '$3 > '$MIN_DISKSIZE' { print $4,$3 }')
 
-		if [ -z "${devices}" ]; then
-			exit 1
+	if [ -z "${devices}" ]; then
+		exit 1
+	fi
+
+	devs_found=$(($(echo $devices | wc -w)/2))
+
+	root=
+	win32_part_dev=
+	# win32 detection won't handle complex layouts
+	if [ "${devs_found}" = 1 ]; then
+		root=$(detect_win32 ${inst_source_dev})
+	fi
+
+	if [ -z "${root}" ]; then
+		if [ "$devs_found" -gt "1" ]; then
+ 			if [ -n "${inst_source_dev}" ]; then
+ 				opcao=$(dialog --backtitle "$BACKTITLE" --title "$TITLE" --stdout --menu 'Choose one of the detected devices to restore to (check the blocks size column first):' 8 50 0 $devices )
+ 				if [ "$?" != "0" ]; then
+ 					_yesno "\nInterrupt installation?\n "
+ 					if [ "$?" = "0" ]; then
+ 						_shutdown
+ 					fi
+ 				else
+ 					root=${opcao}
+ 				fi 
+ 			fi
+		else
+		    root=$(echo ${devices} | cut -d ' ' -f 1)
 		fi
-
-		devs_found=$(($(echo $devices | wc -w)/2))
-
-		root=
-		win32_part_dev=
-		# win32 detection won't handle complex layouts
-		if [ "${devs_found}" = 1 ]; then
-			root=$(detect_win32 ${inst_source_dev})
-		fi
-
-		if [ -z "${root}" ]; then
-			if [ "$devs_found" -gt "1" ]; then
-	 			if [ -n "${inst_source_dev}" ]; then
-	 				opcao=$(dialog --backtitle "$BACKTITLE" --title "$TITLE" --stdout --menu 'Choose one of the detected devices to restore to (check the blocks size column first):' 8 50 0 $devices )
-	 				if [ "$?" != "0" ]; then
-	 					_yesno "\nInterrupt installation?\n "
-	 					if [ "$?" = "0" ]; then
-	 						_shutdown
-	 					fi
-	 				else
-	 					root=${opcao}
-	 				fi 
-	 			fi
-			else
-			    root=$(echo ${devices} | cut -d ' ' -f 1)
-			fi
-		fi
-		
-		echo "${root}"
+	fi
+	
+	echo "${root}"
 }
 
 function detect_win32()
