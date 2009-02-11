@@ -164,9 +164,7 @@ function detect_win32()
 		# our install takes half of 'left'
 		win32_part_new_size=$(($((${used}+${avail}))*2))
 
-		disk=${device%[0-9]}
-		number=$(echo ${device} | sed 's@/dev/...@@g')
-		echo "${disk}${number}"
+		echo ${win32_part_dev} | sed 's@/dev/@@'
 	fi
 }
 
