@@ -96,7 +96,7 @@ function detect_root()
 		devs_found=$(($(echo $devices | wc -w)/2))
 		# we might use it later again
 		fdisk -l | grep "^/dev/" | grep -v ${dev} > /tmp/fdisk.log
-		first_disk=$(echo ${devices} | cut -d ' ' -f 1)
+		first_disk=
 
 		# get the last created windows partition information
 		set -f
@@ -125,7 +125,7 @@ function detect_root()
 	 				fi 
 	 			fi
 			else
-			    root=$first_disk
+			    root=$(echo ${devices} | cut -d ' ' -f 1)
 			fi
 		fi
 		
