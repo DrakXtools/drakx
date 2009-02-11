@@ -106,7 +106,7 @@ function detect_root()
 		# won't handle complex layouts
 		if [ ! $(grep "^/dev" /tmp/fdisk.log | wc -l) -gt 1 ]; then
 		    if [ -n "${first_win32_part_dev}" ]; then
-			root=$(detect_and_resize_win32 $first_disk $first_win32_part_dev)
+			root=$(detect_and_resize_win32 $first_win32_part_dev)
 		    fi
 		fi
 
@@ -135,8 +135,7 @@ function detect_root()
 function detect_and_resize_win32()
 {
 	# from detect_root()
-	disk=${1}
-	device=${2}
+	device=${1}
 
 	# it might be needed, for safety
 	device_type=$(vol_id --type ${device})
@@ -158,7 +157,8 @@ function detect_and_resize_win32()
 		# our install takes half of 'left'
 		win32_part_new_size=$(($((${used}+${avail}))*2))
 		resize_win32 ${win32_part_dev} ${win32_part_type} ${win32_part_new_size}
-		number=$(echo ${win32_part_dev} | sed 's@/dev/...@@g')
+		disk=${device%[0-9]}
+		number=$(echo ${device} | sed 's@/dev/...@@g')
 		echo "${disk}${number}"
 	fi
 }
