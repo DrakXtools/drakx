@@ -145,25 +145,46 @@ function detect_and_resize_win32()
 		used=$(echo ${size} | awk '{ print $3 }')
 		left=$(echo ${size} | awk '{ print $4 }')
 		avail=$((${left}/2))
-		# our install takes half of 'left'
-		new_win32_size=$(($((${used}+${avail}))*2))
 
 		if [ ! ${avail} -lt ${MIN_DISKSIZE} ]; then
-			# get the next partition integer
-			number=$(echo ${device} | sed 's@/dev/...@@g')
-			let number++
+			win32_part_dev=${device}
+			win32_part_type=${device_type}
+			# our install takes half of 'left'
+			win32_part_new_size=$(($((${used}+${avail}))*2))
+			resize_win32 ${win32_part_dev} ${win32_part_type} ${win32_part_new_size}
+		else
+			rm -f /tmp/fdisk.log
+		fi
+	else
+		rm -f /tmp/fdisk.log
+	fi
 
-			case ${device_type} in
-				vfat) device_id=b  ;;
-				ntfs) device_id=7  ;;
-				hpfs) device_id=87 ;;
-			esac
+	echo "${disk}${number}"
+}
 
-			# wrapper around libdrakx by blino
-			diskdrake-resize ${device} ${device_type} ${new_win32_size} &>/dev/null
+function resize_win32()
+{
+	device=${1}
+	device_type=${2}
+	new_win32_size=${3}
 
-			# we need some free sector here, rebuilding layout
-			fdisk /dev/${disk} &>/dev/null <<EOF
+	disk=${device%[0-9]}
+
+	# get the next partition integer
+	number=$(echo ${device} | sed 's@/dev/...@@g')
+	let number++
+
+	case ${device_type} in
+		vfat) device_id=b  ;;
+		ntfs) device_id=7  ;;
+		hpfs) device_id=87 ;;
+	esac
+
+	# wrapper around libdrakx by blino
+	diskdrake-resize ${device} ${device_type} ${new_win32_size} &>/dev/null
+
+	# we need some free sector here, rebuilding layout
+	fdisk /dev/${disk} &>/dev/null <<EOF
 d
 n
 p
@@ -176,8 +197,8 @@ a
 $((${number}-1))
 w
 EOF
-			# adds linux partition to the end of the working disk
-			fdisk /dev/${disk} &>/dev/null <<EOF
+	# adds linux partition to the end of the working disk
+	fdisk /dev/${disk} &>/dev/null <<EOF
 n
 p
 ${number}
@@ -188,14 +209,6 @@ ${number}
 83
 w
 EOF
-		else
-			rm -f /tmp/fdisk.log
-		fi
-	else
-		rm -f /tmp/fdisk.log
-	fi
-
-	echo "${disk}${number}"
 }
 
 function write_image()
