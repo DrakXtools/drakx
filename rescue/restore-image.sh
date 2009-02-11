@@ -93,6 +93,7 @@ function detect_root()
 		devs_found=$(echo $devices | wc -w)
 		# we might use it later again
 		fdisk -l | grep "^/dev/" | grep -v ${dev} > /tmp/fdisk.log
+		first_disk=$(echo ${devices} | cut -d ' ' -f 1)
 
 		if ! grep -qe "FAT\|NTFS\|HPFS" /tmp/fdisk.log; then
 			rm -rf /tmp/fdisk.log
@@ -109,10 +110,10 @@ function detect_root()
 	 				fi 
 	 			fi
 			else
-			    root=$(echo ${devices} | cut -d ' ' -f 1)
+			    root=$first_disk
 			fi
 		else
-			root=$(detect_and_resize_win32 $(echo ${devices} | cut -d ' ' -f 1))
+			root=$(detect_and_resize_win32 $first_disk)
 		fi
 		
 		echo "${root}"
