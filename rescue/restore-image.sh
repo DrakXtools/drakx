@@ -76,9 +76,16 @@ function welcome()
 
 function install_warning()
 {
+	if [ -n "${win32_part_dev}" ]; then
+	    warn_msg="Windows installation detected.\nWe will set it up as dual boot. \
+You may lose some data.\nPlease backup before proceeding."
+	else
+	    warn_msg="WARNING: This process will erase all data in this machine, \
+do you want to continue?"
+	fi
+
 	clear
-	_yesno "\nWARNING: This process will erase all data in this machine, \
-do you want to continue?\n "
+	_yesno "\n$warn_msg\n"
 	if [ "$?" != "0" ]; then
 		_shutdown
 	fi
