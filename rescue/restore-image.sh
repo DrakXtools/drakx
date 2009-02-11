@@ -135,16 +135,6 @@ function resize_win32()
 		device_type=$(vol_id --type ${device})
 		modprobe ${device_type}
 
-		# get the next partition integer
-		number=$(echo ${device} | sed 's@/dev/...@@g')
-		let number++
-	
-		case ${device_type} in
-			vfat) device_id=b  ;;
-			ntfs) device_id=7  ;;
-			hpfs) device_id=87 ;;
-		esac
-
 		# df for that partition
 		mount ${device} /mnt
 		size=$(df ${device} | tail -1) 
@@ -156,6 +146,16 @@ function resize_win32()
 		avail=$((${left}/2))
 
 		if [ ! ${avail} -lt ${MIN_DISKSIZE} ]; then
+			# get the next partition integer
+			number=$(echo ${device} | sed 's@/dev/...@@g')
+			let number++
+
+			case ${device_type} in
+				vfat) device_id=b  ;;
+				ntfs) device_id=7  ;;
+				hpfs) device_id=87 ;;
+			esac
+
 			# wrapper around libdrakx by blino (it takes half of 'left')
 			diskdrake-resize ${device} ${device_type} $(($((${used}+${avail}))*2)) &>/dev/null
 
