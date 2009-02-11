@@ -101,7 +101,6 @@ function detect_root()
 		fi
 
 		if [ -z "${root}" ]; then
-			rm -rf /tmp/fdisk.log
 			if [ "$devs_found" -gt "1" ]; then
 	 			if [ ! -z ${inst_source_dev} ]; then
 	 				opcao=$(dialog --backtitle "$BACKTITLE" --title "$TITLE" --stdout --menu 'Choose one of the detected devices to restore to (check the blocks size column first):' 8 50 0 $devices )
