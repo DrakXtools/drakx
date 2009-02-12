@@ -48,12 +48,15 @@ static enum return_type try_automatic_with_partition(char *dev) {
 	wait_message("Trying to access " DISTRIB_NAME " disk (partition %s)", dev);
 	mounted = !try_mount(dev, MEDIA_LOCATION);
 	remove_wait_message();
-	if (mounted && !access(MEDIA_LOCATION "/" COMPRESSED_LOCATION_REL, R_OK)) {
-		results = try_with_directory(MEDIA_LOCATION, "disk", "disk-iso");
-		if (results == RETURN_OK) {
-			if (!KEEP_MOUNTED)
-				umount(MEDIA_LOCATION);
-			return RETURN_OK;
+	if (mounted) {
+		create_IMAGE_LOCATION(MEDIA_LOCATION);
+		if (image_has_stage2()) {
+			results = try_with_directory(MEDIA_LOCATION, "disk", "disk-iso");
+			if (results == RETURN_OK) {
+				if (!KEEP_MOUNTED)
+					umount(MEDIA_LOCATION);
+				return RETURN_OK;
+			}
 		}
 	}
 	if (mounted)
