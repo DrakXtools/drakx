@@ -983,7 +983,7 @@ sub suggest {
     if ($root_part->{is_removable}) {
         $mbr = fs::get::part2hd($root_part, $all_hds);
     } else {
-        $mbr = find { !$_->{is_removable} } $all_hds->{hds};
+        $mbr = find { !$_->{is_removable} } @{$all_hds->{hds}};
     }
 
     my ($onmbr, $unsafe) = $bootloader->{crushMbr} ? (1, 0) : suggest_onmbr($mbr);
