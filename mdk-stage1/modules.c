@@ -156,7 +156,7 @@ static int load_modules_dependencies(void)
 		while (*ptr && (*ptr == ' ')) ptr++;
 
 		/* sort of a good line */
-		modules_deps[line].filename = strdup(start);
+		modules_deps[line].filename = start[0] == '/' ? strdup(start) : asprintf_("%s/%s", modules_directory, start);
 		modules_deps[line].modname = filename2modname(start);
 
 		start = ptr;
