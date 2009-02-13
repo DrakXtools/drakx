@@ -104,7 +104,6 @@ sub preConfigureTimezone {
 sub ask_suppl_media_method {
     my ($o) = @_;
     our $suppl_already_asked;
-    #TVreturn;
 
     my $msg = $suppl_already_asked
       ? N("Do you have further supplementary media?")
