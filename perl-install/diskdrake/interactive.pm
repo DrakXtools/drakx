@@ -421,7 +421,7 @@ sub part_possible_actions {
     my %macros = (
 	readonly => '$hd->{readonly}',
         hasMntpoint => '$part->{mntpoint}',
-	LVM_resizable => '$part->{fs_type} eq "reiserfs" || (isMounted ? $part->{fs_type} eq "xfs" : member($part->{fs_type}, qw(ext3 ext4)))',
+	LVM_resizable => 'member($part->{fs_type}, qw(reiserfs xfs ext3 ext4))',
 	canModifyRAID => 'isPartOfRAID($part) && !isMounted(fs::get::device2part($part->{raid}, $all_hds->{raids}))',
     );
     if (isEmpty($part)) {
