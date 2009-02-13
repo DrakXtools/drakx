@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-16 11:41+0100\n"
+"POT-Creation-Date: 2009-02-13 16:30+0100\n"
 "PO-Revision-Date: 2004-10-04 18:45+0200\n"
 "Last-Translator: Ramon Casha <ramon.casha@linux.org.mt>\n"
 "Language-Team: Maltese <mt@li.org>\n"
@@ -17,14 +17,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3.1\n"
 
-#: drakauth:24 drakauth:26 draksec:291 draksec:340
+#: drakauth:24 drakauth:26 draksec:163
 #, c-format
 msgid "Authentication"
 msgstr "Awtentikazzjoni"
 
-#: drakauth:37 drakclock:111 drakclock:125 drakfont:213 drakfont:226
-#: drakfont:264 draksplash:202 finish-install:119 logdrake:170 logdrake:445
-#: logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
+#: drakauth:37 drakclock:111 drakclock:125 drakdvb:72 drakfont:213
+#: drakfont:226 drakfont:264 draksplash:202 finish-install:119 logdrake:170
+#: logdrake:445 logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
 #: scannerdrake:200 scannerdrake:259 scannerdrake:729 scannerdrake:740
 #: scannerdrake:879 scannerdrake:890 scannerdrake:960
 #, c-format
@@ -66,8 +66,8 @@ msgstr ""
 msgid "Silent"
 msgstr ""
 
-#: drakboot:137 drakbug:254 drakfont:682 drakperm:376 drakperm:386 drakups:27
-#: harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
+#: drakboot:137 drakbug:254 drakdvb:57 drakfont:682 drakperm:376 drakperm:386
+#: drakups:27 harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
 #: scannerdrake:51 scannerdrake:54 scannerdrake:297 scannerdrake:302
 #: scannerdrake:954
 #, c-format
@@ -306,7 +306,7 @@ msgstr "Trid tinstalla dawn il-pakketti: %s"
 msgid "Please describe what you were doing when it crashed:"
 msgstr ""
 
-#: drakbug:185 drakperm:136 draksec:450 draksec:452 draksec:471 draksec:473
+#: drakbug:185 drakperm:136
 #, c-format
 msgid "Help"
 msgstr "Għajnuna"
@@ -343,7 +343,7 @@ msgstr ""
 msgid "Thanks."
 msgstr ""
 
-#: drakclock:30 draksec:346
+#: drakclock:30 draksec:169
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr ""
@@ -417,7 +417,7 @@ msgstr "Jekk jogħġbok daħħal indirizz IP validu."
 msgid "Could not synchronize with %s."
 msgstr "Ma stajtx nissinkronizza ma' %s"
 
-#: drakclock:127 draksplash:125 logdrake:175 scannerdrake:491
+#: drakclock:127 drakdvb:122 draksplash:125 logdrake:175 scannerdrake:491
 #, c-format
 msgid "Quit"
 msgstr "Oħroġ"
@@ -431,6 +431,54 @@ msgstr "Irrestawra"
 #, c-format
 msgid "Reset"
 msgstr "Irrisettja"
+
+#: drakdvb:30
+#, fuzzy, c-format
+msgid "DVB"
+msgstr "DVD"
+
+#: drakdvb:39 harddrake2:100
+#, c-format
+msgid "Channel"
+msgstr "Kanal"
+
+#: drakdvb:57
+#, c-format
+msgid "%s already exists and its contents will be lost"
+msgstr ""
+
+#: drakdvb:72
+#, c-format
+msgid "Could not get the list of available channels"
+msgstr ""
+
+#: drakdvb:78 draksec:73 drakups:99 harddrake2:370 scannerdrake:66
+#: scannerdrake:70 scannerdrake:78 scannerdrake:319 scannerdrake:368
+#: scannerdrake:504 scannerdrake:508 scannerdrake:530 service_harddrake:264
+#, c-format
+msgid "Please wait"
+msgstr "Stenna ftit"
+
+#: drakdvb:82
+#, c-format
+msgid "Detecting DVB channels, this will take a few minutes"
+msgstr ""
+
+#: drakdvb:83 drakfont:572 drakfont:652 drakfont:736 draksplash:213
+#: drakups:217 logdrake:175
+#, c-format
+msgid "Cancel"
+msgstr "Ikkanċella"
+
+#: drakdvb:121
+#, fuzzy, c-format
+msgid "Detect Channels"
+msgstr "Kanal"
+
+#: drakdvb:123
+#, fuzzy, c-format
+msgid "View Channel"
+msgstr "Kanal"
 
 #: drakedm:41
 #, c-format
@@ -690,18 +738,12 @@ msgstr "Agħżel il-fajl tal-font jew direttorju u agħfas \"Żid\""
 msgid "File Selection"
 msgstr "Għażla ta' fajls"
 
-#: drakfont:572 drakfont:652 drakfont:736 draksplash:213 drakups:217
-#: logdrake:175
-#, c-format
-msgid "Cancel"
-msgstr "Ikkanċella"
-
 #: drakfont:576
 #, c-format
 msgid "Fonts"
 msgstr "Fonts"
 
-#: drakfont:640 draksec:342
+#: drakfont:640 draksec:165
 #, c-format
 msgid "Import fonts"
 msgstr "Importa fonts"
@@ -726,12 +768,12 @@ msgstr "Installa"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr ""
 
-#: drakfont:688 draksec:59 harddrake2:324
+#: drakfont:688 draksec:60 harddrake2:324
 #, c-format
 msgid "Yes"
 msgstr "Iva"
 
-#: drakfont:690 draksec:58 harddrake2:325
+#: drakfont:690 draksec:59 harddrake2:325
 #, c-format
 msgid "No"
 msgstr "Le"
@@ -871,7 +913,7 @@ msgstr "Utent"
 msgid "Group"
 msgstr "Grupp"
 
-#: drakperm:50 drakperm:109 drakperm:332
+#: drakperm:50 drakperm:109 drakperm:332 draksec:180
 #, c-format
 msgid "Permissions"
 msgstr "Permessi"
@@ -1096,331 +1138,170 @@ msgstr ""
 msgid "Group: %s"
 msgstr ""
 
-#: draksec:53
+#: draksec:54
 #, c-format
 msgid "ALL"
 msgstr "KOLLOX"
 
-#: draksec:54
+#: draksec:55
 #, c-format
 msgid "LOCAL"
 msgstr "LOKALI"
 
-#: draksec:55
+#: draksec:56
 #, c-format
 msgid "NONE"
 msgstr "EBDA"
 
-#: draksec:56
+#: draksec:57
 #, c-format
 msgid "Default"
 msgstr "Impliċitu"
 
-#: draksec:57
+#: draksec:58
 #, c-format
 msgid "Ignore"
 msgstr "Injora"
 
-#: draksec:72 drakups:99 harddrake2:370 scannerdrake:66 scannerdrake:70
-#: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:504
-#: scannerdrake:508 scannerdrake:530 service_harddrake:264
-#, c-format
-msgid "Please wait"
-msgstr "Stenna ftit"
-
-#. -PO: Do not alter the <span ..> and </span> tags.
-#. -PO: Translate the security levels (Poor, Standard, High, Higher and Paranoid) in the same way, you translated these individuals words.
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX.
-#: draksec:93
-#, c-format
-msgid ""
-"Here, you can setup the security level and administrator of your machine.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Administrator</span>' is the one who "
-"will receive security alerts if the\n"
-"'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
-"username or an email.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Level</span>' menu allows you to select "
-"one of the six preconfigured security levels\n"
-"provided with msec. These levels range from '<span weight=\"bold\">poor</"
-"span>' security and ease of use, to\n"
-"'<span weight=\"bold\">paranoid</span>' config, suitable for very sensitive "
-"server applications:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
-"very\n"
-"easy to use security level. It should only be used for machines not "
-"connected to\n"
-"any network and that are not accessible to everybody.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
-"security\n"
-"recommended for a computer that will be used to connect to the Internet as "
-"a\n"
-"client.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">High</span>: There are already some\n"
-"restrictions, and more automatic checks are run every night.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
-"enough\n"
-"to use the system as a server which can accept connections from many "
-"clients. If\n"
-"your machine is only a client on the Internet, you should choose a lower "
-"level.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
-"previous\n"
-"level, but the system is entirely closed and security features are at their\n"
-"maximum"
-msgstr ""
-"Hawn tista' tissettja l-livell ta' sigurtà u l-amministratur tal-kompjuter.\n"
-"\n"
-"\n"
-"L-\"<span weight=\"bold\">Amministratur tas-Sistema</span>\" huwa dak li "
-"jirċievi l-allerti tas-sigurtà jekk l-għażla \n"
-"'<span weight=\"bold\">Allerti tas-Sigurtà</span>' hija mixgħula. Dan l-"
-"element jista' jkun isem ta' utent jew imejl.\n"
-"\n"
-"\n"
-"Il-menu \"<span weight=\"bold\">Livell ta' Sigurtà</span>\" iħallik tagħżel "
-"wieħed minn sitt livelli ta' sigurtà pridefiniti ipprovduti minn msec.Dawn "
-"il-livelli jibdew minn \"<span weight=\"bold\">ftit li xejn</span>\" sigurtà "
-"u faċli ħafna tużah, sa\n"
-"\"<span weight=\"bold\">paranojku</span>\" li jgħodd għal servers "
-"sensittivi:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Ftit li xejn</span>: Din l-għażla totalment "
-"mhix sigura \n"
-"imma faċli ħafna tużaha. Għandha tintuża biss għal kompjuters li mhux "
-"imqabbdin ma' ebda\n"
-"network u mhux aċċessibbli minn kulħadd.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standard</span>: Dan huwa l-livell ta' "
-"sigurtà standard\n"
-"rakkomandat għal kompjuter li jaqbad ma' l-internet bħala klijent.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Tajjeb</span>: Diġà hemm xi "
-"restrizzjonijiet, u hemm iżjed\n"
-"iċċekkjar awtomatiċi li jsiru bil-lejl.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Tajjeb ħafna</span>: Is-sigurtà issa hija "
-"għolja biżżejjed biex\n"
-"jintuża bħala server li jaċċetta konnessjonijiet minn ħafna klijenti. Jekk "
-"il-kompjuter tużah\n"
-"biss bħal klijent fuq l-internet, għandek tagħżel livell iżjed baxx.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranojku</span>: Dan huwa simili għal-"
-"livell ta' qabel, imma\n"
-"s-sistema issa hija magħluqa għal kollox u l-karatteristiċi tas-sigurtà huma "
-"fl-ogħla livell."
-
-#: draksec:147 harddrake2:214
-#, c-format
-msgid ""
-"Description of the fields:\n"
-"\n"
-msgstr ""
-"Deskrizzjoni tal-elementi:\n"
-"\n"
-
-#: draksec:161
-#, c-format
-msgid "(default value: %s)"
-msgstr "(valur impliċitu: %s)"
-
-#: draksec:166
+#: draksec:91
 #, fuzzy, c-format
 msgid "Security Level and Checks"
 msgstr "Livell ta' sigurtà:"
 
-#: draksec:203
+#: draksec:114
 #, c-format
-msgid "Security Level:"
-msgstr "Livell ta' sigurtà:"
+msgid "Configure authentication required to access Mandriva tools"
+msgstr ""
 
-#: draksec:206
-#, c-format
-msgid "Security Alerts:"
-msgstr "Allerti ta' sigurtà:"
-
-#: draksec:210
-#, c-format
-msgid "Security Administrator:"
-msgstr "Amministratur tas-sigurtà:"
-
-#: draksec:212
-#, c-format
-msgid "Basic options"
-msgstr "Għażliet bażiċi"
-
-#: draksec:226
-#, c-format
-msgid "Network Options"
-msgstr "Għażliet tan-network"
-
-#: draksec:226
-#, c-format
-msgid "System Options"
-msgstr "Għażliet tas-sistema"
-
-#: draksec:269
-#, c-format
-msgid "Periodic Checks"
-msgstr "Ċekkjar perjodiku"
-
-#: draksec:294
+#: draksec:117
 #, c-format
 msgid "No password"
 msgstr "Ebda password"
 
-#: draksec:295
+#: draksec:118
 #, c-format
 msgid "Root password"
 msgstr ""
 
-#: draksec:296
+#: draksec:119
 #, c-format
 msgid "User password"
 msgstr ""
 
-#: draksec:326 draksec:372
+#: draksec:149 draksec:203
 #, c-format
 msgid "Software Management"
 msgstr "Maniġġjar ta' softwer"
 
-#: draksec:327
+#: draksec:150
 #, fuzzy, c-format
 msgid "Mandriva Update"
 msgstr "Mandriva Online"
 
-#: draksec:328
+#: draksec:151
 #, c-format
 msgid "Software Media Manager"
 msgstr "Maniġġjar ta' sorsi tas-softwer"
 
-#: draksec:329
+#: draksec:152
 #, fuzzy, c-format
 msgid "Configure 3D Desktop effects"
 msgstr "Ikkonfigura web server"
 
-#: draksec:330
+#: draksec:153
 #, fuzzy, c-format
 msgid "Graphical Server Configuration"
 msgstr "Konfigurazzjoni allerti bl-imejl"
 
-#: draksec:331
+#: draksec:154
 #, fuzzy, c-format
 msgid "Mouse Configuration"
 msgstr "Konfigurazzjoni manwali"
 
-#: draksec:332
+#: draksec:155
 #, fuzzy, c-format
 msgid "Keyboard Configuration"
 msgstr "Konfigurazzjoni tan-network"
 
-#: draksec:333
+#: draksec:156
 #, fuzzy, c-format
 msgid "UPS Configuration"
 msgstr "Konfigurazzjoni drajver UPS"
 
-#: draksec:334
+#: draksec:157
 #, fuzzy, c-format
 msgid "Network Configuration"
 msgstr "Konfigurazzjoni tal-allerti"
 
-#: draksec:335
+#: draksec:158
 #, c-format
 msgid "Hosts definitions"
 msgstr ""
 
-#: draksec:336
+#: draksec:159
 #, fuzzy, c-format
 msgid "Network Center"
 msgstr "Network u Internet"
 
-#: draksec:337
+#: draksec:160
 #, c-format
 msgid "VPN"
 msgstr ""
 
-#: draksec:338
+#: draksec:161
 #, c-format
 msgid "Proxy Configuration"
 msgstr "Konfigurazzjoni proxy"
 
-#: draksec:339
+#: draksec:162
 #, fuzzy, c-format
 msgid "Connection Sharing"
 msgstr "Konnessjoni"
 
-#: draksec:341
+#: draksec:164
 #, c-format
 msgid "Backups"
 msgstr "Kopji ta' sigurtà"
 
-#: draksec:343 logdrake:52
+#: draksec:166 logdrake:52
 #, c-format
 msgid "Logs"
 msgstr "Logs"
 
-#: draksec:344
+#: draksec:167
 #, c-format
 msgid "Services"
 msgstr "Servizzi"
 
-#: draksec:345
+#: draksec:168
 #, fuzzy, c-format
 msgid "Users"
 msgstr "Utent"
 
-#: draksec:347
+#: draksec:170
 #, fuzzy, c-format
 msgid "Boot Configuration"
 msgstr "Konfigurazzjoni tal-allerti"
 
-#: draksec:373
+#: draksec:204
 #, c-format
 msgid "Hardware"
 msgstr "Apparat"
 
-#: draksec:374
+#: draksec:205
 #, fuzzy, c-format
 msgid "Network"
 msgstr "Għażliet tan-network"
 
-#: draksec:375
+#: draksec:206
 #, c-format
 msgid "System"
 msgstr "Sistema"
 
-#: draksec:376
+#: draksec:207
 #, c-format
 msgid "Boot"
 msgstr "Boot"
-
-#: draksec:401
-#, c-format
-msgid "Please wait, setting security level..."
-msgstr "Stenna ftit.. qed jissettja l-livell ta' sigurtà..."
-
-#: draksec:407
-#, c-format
-msgid "Please wait, setting security options..."
-msgstr "Stenna ftit.. qed jissettja l-għażliet ta' sigurtà..."
 
 #: draksound:48
 #, c-format
@@ -2406,11 +2287,6 @@ msgstr "Format tal-floppies magħrufa mid-drajv"
 
 #: harddrake2:100
 #, c-format
-msgid "Channel"
-msgstr "Kanal"
-
-#: harddrake2:100
-#, c-format
 msgid "EIDE/SCSI channel"
 msgstr "Kanal EIDE/SCSI"
 
@@ -2636,6 +2512,15 @@ msgstr "/Deskrizzjoni _elementi"
 #, c-format
 msgid "Harddrake help"
 msgstr "Għajnuna ta' Harddrake"
+
+#: harddrake2:214
+#, c-format
+msgid ""
+"Description of the fields:\n"
+"\n"
+msgstr ""
+"Deskrizzjoni tal-elementi:\n"
+"\n"
 
 #: harddrake2:222
 #, c-format
@@ -3665,6 +3550,134 @@ msgstr "Konfigurazzjoni manwali"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "Setings"
+
+#~ msgid ""
+#~ "Here, you can setup the security level and administrator of your "
+#~ "machine.\n"
+#~ "\n"
+#~ "\n"
+#~ "The '<span weight=\"bold\">Security Administrator</span>' is the one who "
+#~ "will receive security alerts if the\n"
+#~ "'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
+#~ "username or an email.\n"
+#~ "\n"
+#~ "\n"
+#~ "The '<span weight=\"bold\">Security Level</span>' menu allows you to "
+#~ "select one of the six preconfigured security levels\n"
+#~ "provided with msec. These levels range from '<span weight=\"bold\">poor</"
+#~ "span>' security and ease of use, to\n"
+#~ "'<span weight=\"bold\">paranoid</span>' config, suitable for very "
+#~ "sensitive server applications:\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+#~ "very\n"
+#~ "easy to use security level. It should only be used for machines not "
+#~ "connected to\n"
+#~ "any network and that are not accessible to everybody.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+#~ "security\n"
+#~ "recommended for a computer that will be used to connect to the Internet "
+#~ "as a\n"
+#~ "client.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">High</span>: There are already some\n"
+#~ "restrictions, and more automatic checks are run every night.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+#~ "enough\n"
+#~ "to use the system as a server which can accept connections from many "
+#~ "clients. If\n"
+#~ "your machine is only a client on the Internet, you should choose a lower "
+#~ "level.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+#~ "previous\n"
+#~ "level, but the system is entirely closed and security features are at "
+#~ "their\n"
+#~ "maximum"
+#~ msgstr ""
+#~ "Hawn tista' tissettja l-livell ta' sigurtà u l-amministratur tal-"
+#~ "kompjuter.\n"
+#~ "\n"
+#~ "\n"
+#~ "L-\"<span weight=\"bold\">Amministratur tas-Sistema</span>\" huwa dak li "
+#~ "jirċievi l-allerti tas-sigurtà jekk l-għażla \n"
+#~ "'<span weight=\"bold\">Allerti tas-Sigurtà</span>' hija mixgħula. Dan l-"
+#~ "element jista' jkun isem ta' utent jew imejl.\n"
+#~ "\n"
+#~ "\n"
+#~ "Il-menu \"<span weight=\"bold\">Livell ta' Sigurtà</span>\" iħallik "
+#~ "tagħżel wieħed minn sitt livelli ta' sigurtà pridefiniti ipprovduti minn "
+#~ "msec.Dawn il-livelli jibdew minn \"<span weight=\"bold\">ftit li xejn</"
+#~ "span>\" sigurtà u faċli ħafna tużah, sa\n"
+#~ "\"<span weight=\"bold\">paranojku</span>\" li jgħodd għal servers "
+#~ "sensittivi:\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Ftit li xejn</span>: Din l-għażla "
+#~ "totalment mhix sigura \n"
+#~ "imma faċli ħafna tużaha. Għandha tintuża biss għal kompjuters li mhux "
+#~ "imqabbdin ma' ebda\n"
+#~ "network u mhux aċċessibbli minn kulħadd.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Standard</span>: Dan huwa l-livell ta' "
+#~ "sigurtà standard\n"
+#~ "rakkomandat għal kompjuter li jaqbad ma' l-internet bħala klijent.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Tajjeb</span>: Diġà hemm xi "
+#~ "restrizzjonijiet, u hemm iżjed\n"
+#~ "iċċekkjar awtomatiċi li jsiru bil-lejl.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Tajjeb ħafna</span>: Is-sigurtà issa hija "
+#~ "għolja biżżejjed biex\n"
+#~ "jintuża bħala server li jaċċetta konnessjonijiet minn ħafna klijenti. "
+#~ "Jekk il-kompjuter tużah\n"
+#~ "biss bħal klijent fuq l-internet, għandek tagħżel livell iżjed baxx.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Paranojku</span>: Dan huwa simili għal-"
+#~ "livell ta' qabel, imma\n"
+#~ "s-sistema issa hija magħluqa għal kollox u l-karatteristiċi tas-sigurtà "
+#~ "huma fl-ogħla livell."
+
+#~ msgid "(default value: %s)"
+#~ msgstr "(valur impliċitu: %s)"
+
+#~ msgid "Security Level:"
+#~ msgstr "Livell ta' sigurtà:"
+
+#~ msgid "Security Alerts:"
+#~ msgstr "Allerti ta' sigurtà:"
+
+#~ msgid "Security Administrator:"
+#~ msgstr "Amministratur tas-sigurtà:"
+
+#~ msgid "Basic options"
+#~ msgstr "Għażliet bażiċi"
+
+#~ msgid "Network Options"
+#~ msgstr "Għażliet tan-network"
+
+#~ msgid "System Options"
+#~ msgstr "Għażliet tas-sistema"
+
+#~ msgid "Periodic Checks"
+#~ msgstr "Ċekkjar perjodiku"
+
+#~ msgid "Please wait, setting security level..."
+#~ msgstr "Stenna ftit.. qed jissettja l-livell ta' sigurtà..."
+
+#~ msgid "Please wait, setting security options..."
+#~ msgstr "Stenna ftit.. qed jissettja l-għażliet ta' sigurtà..."
 
 #, fuzzy
 #~ msgid ""

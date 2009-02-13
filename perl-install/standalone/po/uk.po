@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-16 11:41+0100\n"
+"POT-Creation-Date: 2009-02-13 16:30+0100\n"
 "PO-Revision-Date: 2009-01-17 08:15+0200\n"
 "Last-Translator: Taras Boychuk <btr0001@ukr.net>\n"
 "Language-Team: ukrainian <translation@linux.org.ua>\n"
@@ -19,16 +19,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: drakauth:24 drakauth:26 draksec:291 draksec:340
+#: drakauth:24 drakauth:26 draksec:163
 #, c-format
 msgid "Authentication"
 msgstr "Розпізнавання"
 
-#: drakauth:37 drakclock:111 drakclock:125 drakfont:213 drakfont:226
-#: drakfont:264 draksplash:202 finish-install:119 logdrake:170 logdrake:445
-#: logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
+#: drakauth:37 drakclock:111 drakclock:125 drakdvb:72 drakfont:213
+#: drakfont:226 drakfont:264 draksplash:202 finish-install:119 logdrake:170
+#: logdrake:445 logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
 #: scannerdrake:200 scannerdrake:259 scannerdrake:729 scannerdrake:740
 #: scannerdrake:879 scannerdrake:890 scannerdrake:960
 #, c-format
@@ -70,8 +71,8 @@ msgstr "Детально"
 msgid "Silent"
 msgstr "Мовчки"
 
-#: drakboot:137 drakbug:254 drakfont:682 drakperm:376 drakperm:386 drakups:27
-#: harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
+#: drakboot:137 drakbug:254 drakdvb:57 drakfont:682 drakperm:376 drakperm:386
+#: drakups:27 harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
 #: scannerdrake:51 scannerdrake:54 scannerdrake:297 scannerdrake:302
 #: scannerdrake:954
 #, c-format
@@ -145,7 +146,8 @@ msgstr "Ні, мені не потрібна автоматична реєстр
 #: drakboot:200
 #, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "Так, я хочу автоматично реєструватися в системі з цим (іменем, стільницею)"
+msgstr ""
+"Так, я хочу автоматично реєструватися в системі з цим (іменем, стільницею)"
 
 #: drakboot:207
 #, c-format
@@ -280,9 +282,8 @@ msgid ""
 "in.  The information displayed above will be transferred to that server"
 msgstr ""
 "Щоб відправити звіт про помилку, натисніть на кнопку звіту.\n"
-"Це відкриє вікно переглядача тенет на %s,"
-"де Ви знайдете форму для заповнення. Інформацію, подану вище,"
-"буде відправлено на цей сервер."
+"Це відкриє вікно переглядача тенет на %s,де Ви знайдете форму для "
+"заповнення. Інформацію, подану вище,буде відправлено на цей сервер."
 
 #: drakbug:160
 #, c-format
@@ -292,9 +293,12 @@ msgid ""
 msgid_plural ""
 "Things useful to attach to your report are the output of the following "
 "commands: %s."
-msgstr[0] "Дуже добре, якщо Ви додасте до цього звіту вивід наступної команди: %s."
-msgstr[1] "Дуже добре, якщо Ви додасте до цього звіту вивід наступних команд: %s."
-msgstr[2] "Дуже добре, якщо Ви додасте до цього звіту вивід наступних команд: %s."
+msgstr[0] ""
+"Дуже добре, якщо Ви додасте до цього звіту вивід наступної команди: %s."
+msgstr[1] ""
+"Дуже добре, якщо Ви додасте до цього звіту вивід наступних команд: %s."
+msgstr[2] ""
+"Дуже добре, якщо Ви додасте до цього звіту вивід наступних команд: %s."
 
 #: drakbug:163
 #, c-format
@@ -311,7 +315,7 @@ msgstr "Також Ви можете додати наступні файли: %
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Опишіть свої дії на момент виникнення збою:"
 
-#: drakbug:185 drakperm:136 draksec:450 draksec:452 draksec:471 draksec:473
+#: drakbug:185 drakperm:136
 #, c-format
 msgid "Help"
 msgstr "Довідка"
@@ -350,7 +354,7 @@ msgstr ""
 msgid "Thanks."
 msgstr "Дякуємо."
 
-#: drakclock:30 draksec:346
+#: drakclock:30 draksec:169
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Налаштування дати, годинника і часового поясу"
@@ -424,7 +428,7 @@ msgstr "Введіть правильну адресу сервера NTP."
 msgid "Could not synchronize with %s."
 msgstr "Неможливо синхронізувати з %s."
 
-#: drakclock:127 draksplash:125 logdrake:175 scannerdrake:491
+#: drakclock:127 drakdvb:122 draksplash:125 logdrake:175 scannerdrake:491
 #, c-format
 msgid "Quit"
 msgstr "Вийти"
@@ -438,6 +442,54 @@ msgstr "Спробувати ще раз"
 #, c-format
 msgid "Reset"
 msgstr "Скинути"
+
+#: drakdvb:30
+#, fuzzy, c-format
+msgid "DVB"
+msgstr "DVD"
+
+#: drakdvb:39 harddrake2:100
+#, c-format
+msgid "Channel"
+msgstr "Канал"
+
+#: drakdvb:57
+#, c-format
+msgid "%s already exists and its contents will be lost"
+msgstr ""
+
+#: drakdvb:72
+#, c-format
+msgid "Could not get the list of available channels"
+msgstr ""
+
+#: drakdvb:78 draksec:73 drakups:99 harddrake2:370 scannerdrake:66
+#: scannerdrake:70 scannerdrake:78 scannerdrake:319 scannerdrake:368
+#: scannerdrake:504 scannerdrake:508 scannerdrake:530 service_harddrake:264
+#, c-format
+msgid "Please wait"
+msgstr "Зачекайте, будь ласка"
+
+#: drakdvb:82
+#, c-format
+msgid "Detecting DVB channels, this will take a few minutes"
+msgstr ""
+
+#: drakdvb:83 drakfont:572 drakfont:652 drakfont:736 draksplash:213
+#: drakups:217 logdrake:175
+#, c-format
+msgid "Cancel"
+msgstr "Скасувати"
+
+#: drakdvb:121
+#, fuzzy, c-format
+msgid "Detect Channels"
+msgstr "Канал"
+
+#: drakdvb:123
+#, fuzzy, c-format
+msgid "View Channel"
+msgstr "Канал"
 
 #: drakedm:41
 #, c-format
@@ -697,18 +749,12 @@ msgstr "Виберіть файл шрифта або теку і клацніт
 msgid "File Selection"
 msgstr "Вибір файла"
 
-#: drakfont:572 drakfont:652 drakfont:736 draksplash:213 drakups:217
-#: logdrake:175
-#, c-format
-msgid "Cancel"
-msgstr "Скасувати"
-
 #: drakfont:576
 #, c-format
 msgid "Fonts"
 msgstr "Шрифти"
 
-#: drakfont:640 draksec:342
+#: drakfont:640 draksec:165
 #, c-format
 msgid "Import fonts"
 msgstr "Імпортувати шрифти"
@@ -733,12 +779,12 @@ msgstr "Встановити"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "Ви впевнені, що хочете вилучити наступні шрифти?"
 
-#: drakfont:688 draksec:59 harddrake2:324
+#: drakfont:688 draksec:60 harddrake2:324
 #, c-format
 msgid "Yes"
 msgstr "Так"
 
-#: drakfont:690 draksec:58 harddrake2:325
+#: drakfont:690 draksec:59 harddrake2:325
 #, c-format
 msgid "No"
 msgstr "Ні"
@@ -817,7 +863,8 @@ msgstr " --help                - вивести цю довідку     \n"
 
 #: drakhelp:23
 #, c-format
-msgid " --id <id_label>       - load the html help page which refers to id_label\n"
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
 " --id <id_label>       - завантажити сторінку довідки html, яка відповідає "
 "id_label\n"
@@ -881,7 +928,7 @@ msgstr "Користувач"
 msgid "Group"
 msgstr "Група"
 
-#: drakperm:50 drakperm:109 drakperm:332
+#: drakperm:50 drakperm:109 drakperm:332 draksec:180
 #, c-format
 msgid "Permissions"
 msgstr "Права доступу"
@@ -1108,327 +1155,170 @@ msgstr "Користувач: %s"
 msgid "Group: %s"
 msgstr "Група: %s"
 
-#: draksec:53
+#: draksec:54
 #, c-format
 msgid "ALL"
 msgstr "ВСІ"
 
-#: draksec:54
+#: draksec:55
 #, c-format
 msgid "LOCAL"
 msgstr "МІСЦЕВИЙ"
 
-#: draksec:55
+#: draksec:56
 #, c-format
 msgid "NONE"
 msgstr "НІЧОГО"
 
-#: draksec:56
+#: draksec:57
 #, c-format
 msgid "Default"
 msgstr "Основна"
 
-#: draksec:57
+#: draksec:58
 #, c-format
 msgid "Ignore"
 msgstr "Ігнорувати"
 
-#: draksec:72 drakups:99 harddrake2:370 scannerdrake:66 scannerdrake:70
-#: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:504
-#: scannerdrake:508 scannerdrake:530 service_harddrake:264
-#, c-format
-msgid "Please wait"
-msgstr "Зачекайте, будь ласка"
-
-#. -PO: Do not alter the <span ..> and </span> tags.
-#. -PO: Translate the security levels (Poor, Standard, High, Higher and Paranoid) in the same way, you translated these individuals words.
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX.
-#: draksec:93
-#, c-format
-msgid ""
-"Here, you can setup the security level and administrator of your machine.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Administrator</span>' is the one who "
-"will receive security alerts if the\n"
-"'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
-"username or an email.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Level</span>' menu allows you to select "
-"one of the six preconfigured security levels\n"
-"provided with msec. These levels range from '<span weight=\"bold\">poor</"
-"span>' security and ease of use, to\n"
-"'<span weight=\"bold\">paranoid</span>' config, suitable for very sensitive "
-"server applications:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
-"very\n"
-"easy to use security level. It should only be used for machines not "
-"connected to\n"
-"any network and that are not accessible to everybody.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
-"security\n"
-"recommended for a computer that will be used to connect to the Internet as "
-"a\n"
-"client.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">High</span>: There are already some\n"
-"restrictions, and more automatic checks are run every night.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
-"enough\n"
-"to use the system as a server which can accept connections from many "
-"clients. If\n"
-"your machine is only a client on the Internet, you should choose a lower "
-"level.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
-"previous\n"
-"level, but the system is entirely closed and security features are at their\n"
-"maximum"
-msgstr ""
-"Тут Ви можете встановити рівень безпеки і адміністратора Вашої машини.\n"
-"\n"
-"\n"
-"<span weight=\"bold\">Адміністратор безпеки</span> є єдиним, хто "
-"отримуватиме попередження безпеки,\n"
-"якщо встановлено параметр '<span weight=\"bold\">Попередження безпеки</span> "
-"'. Він може бути іменем\n"
-"користувача або електронною адресою.\n"
-"\n"
-"\n"
-"Меню <span weight=\"bold\">Рівень безпеки</span> дає змогу вибрати один із "
-"шести попередньо\n"
-"налаштованих рівнів, які забезпечуються msec. Вони охоплюють діапазон\n"
-"від <span weight=\"bold\">дуже низького</span> і легкого у використанні "
-"рівня безпеки до <span weight=\"bold\">параноїдального</span>,\n"
-"який використовується для дуже чутливих серверних задач:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\"> Дуже низький</span>: практично не захищає,\n"
-"але дуже легкий у використанні. Повинен використовуватися у машинах,\n"
-"не під'єднаних до мереж і недоступних для інших.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\"> Стандартний</span>: Це стандартний рівень\n"
-"безпеки, який рекомендується для комп'ютера, який буде під'єднано до\n"
-"мережі Інтернет як клієнта.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\"> Високий</span>: Використовуються деякі\n"
-"обмеження, кожної ночі виконуються автоматичні перевірки.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\"> Найвищий</span>: Рівень безпеки достатньо\n"
-"високий, щоб використовувати систему в якості сервера, який має\n"
-"з'єднання з багатьма клієнтами. Якщо Ваша машина є тільки клієнтом\n"
-"мережі Інтернет, можете вибрати нижчий рівень.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\"> Параноїдальний</span>: Подібний до\n"
-"попереднього рівня, але система є закритою і параметри безпеки\n"
-"виставлені по максимуму."
-
-#: draksec:147 harddrake2:214
-#, c-format
-msgid ""
-"Description of the fields:\n"
-"\n"
-msgstr ""
-"Опис полів:\n"
-"\n"
-
-#: draksec:161
-#, c-format
-msgid "(default value: %s)"
-msgstr "(типове значення: %s)"
-
-#: draksec:166
+#: draksec:91
 #, c-format
 msgid "Security Level and Checks"
 msgstr "Рівень безпеки і перевірки"
 
-#: draksec:203
+#: draksec:114
 #, c-format
-msgid "Security Level:"
-msgstr "Рівень безпеки:"
+msgid "Configure authentication required to access Mandriva tools"
+msgstr ""
 
-#: draksec:206
-#, c-format
-msgid "Security Alerts:"
-msgstr "Попередження безпеки:"
-
-#: draksec:210
-#, c-format
-msgid "Security Administrator:"
-msgstr "Адміністратор з безпеки:"
-
-#: draksec:212
-#, c-format
-msgid "Basic options"
-msgstr "Основні параметри"
-
-#: draksec:226
-#, c-format
-msgid "Network Options"
-msgstr "Параметри мережі"
-
-#: draksec:226
-#, c-format
-msgid "System Options"
-msgstr "Параметри системи"
-
-#: draksec:269
-#, c-format
-msgid "Periodic Checks"
-msgstr "Періодичні перевірки"
-
-#: draksec:294
+#: draksec:117
 #, c-format
 msgid "No password"
 msgstr "Без паролю"
 
-#: draksec:295
+#: draksec:118
 #, c-format
 msgid "Root password"
 msgstr "Пароль адміністратора"
 
-#: draksec:296
+#: draksec:119
 #, c-format
 msgid "User password"
 msgstr "Пароль користувача"
 
-#: draksec:326 draksec:372
+#: draksec:149 draksec:203
 #, c-format
 msgid "Software Management"
 msgstr "Керування програми"
 
-#: draksec:327
+#: draksec:150
 #, c-format
 msgid "Mandriva Update"
 msgstr "Mandriva Update"
 
-#: draksec:328
+#: draksec:151
 #, c-format
 msgid "Software Media Manager"
 msgstr "Менеджер джерел програм"
 
-#: draksec:329
+#: draksec:152
 #, c-format
 msgid "Configure 3D Desktop effects"
 msgstr "Налаштувати ефекти 3D-стільниці"
 
-#: draksec:330
+#: draksec:153
 #, c-format
 msgid "Graphical Server Configuration"
 msgstr "Налаштування графічного сервера"
 
-#: draksec:331
+#: draksec:154
 #, c-format
 msgid "Mouse Configuration"
 msgstr "Налаштування миші"
 
-#: draksec:332
+#: draksec:155
 #, c-format
 msgid "Keyboard Configuration"
 msgstr "Налаштування клавіатури"
 
-#: draksec:333
+#: draksec:156
 #, c-format
 msgid "UPS Configuration"
 msgstr "Налаштування ББЖ"
 
-#: draksec:334
+#: draksec:157
 #, c-format
 msgid "Network Configuration"
 msgstr "Налаштування мережі"
 
-#: draksec:335
+#: draksec:158
 #, c-format
 msgid "Hosts definitions"
 msgstr "Клієнти мережі"
 
-#: draksec:336
+#: draksec:159
 #, c-format
 msgid "Network Center"
 msgstr "Мережевий центр"
 
-#: draksec:337
+#: draksec:160
 #, c-format
 msgid "VPN"
 msgstr "VPN"
 
-#: draksec:338
+#: draksec:161
 #, c-format
 msgid "Proxy Configuration"
 msgstr "Конфігурація проксі"
 
-#: draksec:339
+#: draksec:162
 #, c-format
 msgid "Connection Sharing"
 msgstr "Спільне використання під'єднання"
 
-#: draksec:341
+#: draksec:164
 #, c-format
 msgid "Backups"
 msgstr "Резервні копії"
 
-#: draksec:343 logdrake:52
+#: draksec:166 logdrake:52
 #, c-format
 msgid "Logs"
 msgstr "Журнали"
 
-#: draksec:344
+#: draksec:167
 #, c-format
 msgid "Services"
 msgstr "Сервіси"
 
-#: draksec:345
+#: draksec:168
 #, c-format
 msgid "Users"
 msgstr "Користувачі"
 
-#: draksec:347
+#: draksec:170
 #, c-format
 msgid "Boot Configuration"
 msgstr "Налаштування завантаження"
 
-#: draksec:373
+#: draksec:204
 #, c-format
 msgid "Hardware"
 msgstr "Обладнання"
 
-#: draksec:374
+#: draksec:205
 #, c-format
 msgid "Network"
 msgstr "Мережа"
 
-#: draksec:375
+#: draksec:206
 #, c-format
 msgid "System"
 msgstr "Система"
 
-#: draksec:376
+#: draksec:207
 #, c-format
 msgid "Boot"
 msgstr "Завантаження"
-
-#: draksec:401
-#, c-format
-msgid "Please wait, setting security level..."
-msgstr "Зачекайте, будь ласка, встановлюється рівень безпеки..."
-
-#: draksec:407
-#, c-format
-msgid "Please wait, setting security options..."
-msgstr "Зачекайте, будь ласка, встановлюються параметри безпеки..."
 
 #: draksound:48
 #, c-format
@@ -1942,7 +1832,8 @@ msgstr "Шина"
 
 #: harddrake2:32
 #, c-format
-msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgid ""
+"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr "це фізична шина, до якої приєднано пристрій (напр: PCI, USB, ...)"
 
 #: harddrake2:34 harddrake2:149
@@ -1983,7 +1874,8 @@ msgstr "Ємність пристрою"
 #: harddrake2:41
 #, c-format
 msgid "special capacities of the driver (burning ability and or DVD support)"
-msgstr "спеціальні можливості драйвера (можливість записування і/чи підтримка DVD)"
+msgstr ""
+"спеціальні можливості драйвера (можливість записування і/чи підтримка DVD)"
 
 #: harddrake2:42
 #, c-format
@@ -2413,11 +2305,6 @@ msgstr "формати дискет, які підтримуються диск�
 
 #: harddrake2:100
 #, c-format
-msgid "Channel"
-msgstr "Канал"
-
-#: harddrake2:100
-#, c-format
 msgid "EIDE/SCSI channel"
 msgstr "Канал EIDE/SCSI"
 
@@ -2504,7 +2391,8 @@ msgstr "Файл пристрою"
 
 #: harddrake2:118
 #, c-format
-msgid "the device file used to communicate with the kernel driver for the mouse"
+msgid ""
+"the device file used to communicate with the kernel driver for the mouse"
 msgstr "пристрій файла використовується для зв'язку з драйвером ядра для миші"
 
 #: harddrake2:119
@@ -2643,6 +2531,15 @@ msgstr "/Описи полів"
 msgid "Harddrake help"
 msgstr "Довідка HardDrake"
 
+#: harddrake2:214
+#, c-format
+msgid ""
+"Description of the fields:\n"
+"\n"
+msgstr ""
+"Опис полів:\n"
+"\n"
+
 #: harddrake2:222
 #, c-format
 msgid "Select a device!"
@@ -2699,8 +2596,10 @@ msgstr "Запустити інструмент налаштування"
 
 #: harddrake2:302
 #, c-format
-msgid "Click on a device in the left tree in order to display its information here."
-msgstr "Клацніть на пристрої в лівому дереві, щоб побачити інформацію про нього."
+msgid ""
+"Click on a device in the left tree in order to display its information here."
+msgstr ""
+"Клацніть на пристрої в лівому дереві, щоб побачити інформацію про нього."
 
 #: harddrake2:322 notify-x11-free-driver-switch:13
 #, c-format
@@ -3036,7 +2935,8 @@ msgstr "Будь ласка, введіть нижче свою електрон
 #: logdrake:438
 #, c-format
 msgid "and enter the name (or the IP) of the SMTP server you wish to use"
-msgstr "і введіть назву (або IP-адресу) сервера SMTP, який Ви хочете використовувати"
+msgstr ""
+"і введіть назву (або IP-адресу) сервера SMTP, який Ви хочете використовувати"
 
 #: logdrake:445
 #, c-format
@@ -3096,7 +2996,8 @@ msgstr "Вихід зі Scannerdrake."
 
 #: scannerdrake:60
 #, c-format
-msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr ""
 "Неможливо встановити пакунки, необхідні для встановлення сканерів з "
 "допомогою Scannerdrake."
@@ -3193,7 +3094,8 @@ msgstr ""
 #: scannerdrake:174 scannerdrake:226
 #, c-format
 msgid "If this is the case, you can make this be done automatically."
-msgstr "В цьому випадку Ви можете зробити так, щоб це виконувалось автоматично."
+msgstr ""
+"В цьому випадку Ви можете зробити так, щоб це виконувалось автоматично."
 
 #: scannerdrake:175 scannerdrake:229
 #, c-format
@@ -3540,7 +3442,8 @@ msgstr "Спільний доступ до локальних сканерів"
 msgid ""
 "These are the machines on which the locally connected scanner(s) should be "
 "available:"
-msgstr "Це перелік машин, на яких можуть бути доступними локально приєднані сканери:"
+msgstr ""
+"Це перелік машин, на яких можуть бути доступними локально приєднані сканери:"
 
 #: scannerdrake:658 scannerdrake:808
 #, c-format
@@ -3680,3 +3583,128 @@ msgstr "Налаштування мови і країни"
 msgid "Regional Settings"
 msgstr "Регіональні налаштування"
 
+#~ msgid ""
+#~ "Here, you can setup the security level and administrator of your "
+#~ "machine.\n"
+#~ "\n"
+#~ "\n"
+#~ "The '<span weight=\"bold\">Security Administrator</span>' is the one who "
+#~ "will receive security alerts if the\n"
+#~ "'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
+#~ "username or an email.\n"
+#~ "\n"
+#~ "\n"
+#~ "The '<span weight=\"bold\">Security Level</span>' menu allows you to "
+#~ "select one of the six preconfigured security levels\n"
+#~ "provided with msec. These levels range from '<span weight=\"bold\">poor</"
+#~ "span>' security and ease of use, to\n"
+#~ "'<span weight=\"bold\">paranoid</span>' config, suitable for very "
+#~ "sensitive server applications:\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+#~ "very\n"
+#~ "easy to use security level. It should only be used for machines not "
+#~ "connected to\n"
+#~ "any network and that are not accessible to everybody.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+#~ "security\n"
+#~ "recommended for a computer that will be used to connect to the Internet "
+#~ "as a\n"
+#~ "client.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">High</span>: There are already some\n"
+#~ "restrictions, and more automatic checks are run every night.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+#~ "enough\n"
+#~ "to use the system as a server which can accept connections from many "
+#~ "clients. If\n"
+#~ "your machine is only a client on the Internet, you should choose a lower "
+#~ "level.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+#~ "previous\n"
+#~ "level, but the system is entirely closed and security features are at "
+#~ "their\n"
+#~ "maximum"
+#~ msgstr ""
+#~ "Тут Ви можете встановити рівень безпеки і адміністратора Вашої машини.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span weight=\"bold\">Адміністратор безпеки</span> є єдиним, хто "
+#~ "отримуватиме попередження безпеки,\n"
+#~ "якщо встановлено параметр '<span weight=\"bold\">Попередження безпеки</"
+#~ "span> '. Він може бути іменем\n"
+#~ "користувача або електронною адресою.\n"
+#~ "\n"
+#~ "\n"
+#~ "Меню <span weight=\"bold\">Рівень безпеки</span> дає змогу вибрати один "
+#~ "із шести попередньо\n"
+#~ "налаштованих рівнів, які забезпечуються msec. Вони охоплюють діапазон\n"
+#~ "від <span weight=\"bold\">дуже низького</span> і легкого у використанні "
+#~ "рівня безпеки до <span weight=\"bold\">параноїдального</span>,\n"
+#~ "який використовується для дуже чутливих серверних задач:\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\"> Дуже низький</span>: практично не "
+#~ "захищає,\n"
+#~ "але дуже легкий у використанні. Повинен використовуватися у машинах,\n"
+#~ "не під'єднаних до мереж і недоступних для інших.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\"> Стандартний</span>: Це стандартний "
+#~ "рівень\n"
+#~ "безпеки, який рекомендується для комп'ютера, який буде під'єднано до\n"
+#~ "мережі Інтернет як клієнта.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\"> Високий</span>: Використовуються деякі\n"
+#~ "обмеження, кожної ночі виконуються автоматичні перевірки.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\"> Найвищий</span>: Рівень безпеки "
+#~ "достатньо\n"
+#~ "високий, щоб використовувати систему в якості сервера, який має\n"
+#~ "з'єднання з багатьма клієнтами. Якщо Ваша машина є тільки клієнтом\n"
+#~ "мережі Інтернет, можете вибрати нижчий рівень.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\"> Параноїдальний</span>: Подібний до\n"
+#~ "попереднього рівня, але система є закритою і параметри безпеки\n"
+#~ "виставлені по максимуму."
+
+#~ msgid "(default value: %s)"
+#~ msgstr "(типове значення: %s)"
+
+#~ msgid "Security Level:"
+#~ msgstr "Рівень безпеки:"
+
+#~ msgid "Security Alerts:"
+#~ msgstr "Попередження безпеки:"
+
+#~ msgid "Security Administrator:"
+#~ msgstr "Адміністратор з безпеки:"
+
+#~ msgid "Basic options"
+#~ msgstr "Основні параметри"
+
+#~ msgid "Network Options"
+#~ msgstr "Параметри мережі"
+
+#~ msgid "System Options"
+#~ msgstr "Параметри системи"
+
+#~ msgid "Periodic Checks"
+#~ msgstr "Періодичні перевірки"
+
+#~ msgid "Please wait, setting security level..."
+#~ msgstr "Зачекайте, будь ласка, встановлюється рівень безпеки..."
+
+#~ msgid "Please wait, setting security options..."
+#~ msgstr "Зачекайте, будь ласка, встановлюються параметри безпеки..."

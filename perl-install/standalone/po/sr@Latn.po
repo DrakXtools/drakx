@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-16 11:41+0100\n"
+"POT-Creation-Date: 2009-02-13 16:30+0100\n"
 "PO-Revision-Date: 2004-09-15 13:34+0200\n"
 "Last-Translator: Toma Jankovic_<tomaja@net.yu>\n"
 "Language-Team: Serbian <i18n@mandrake.co.yu>\n"
@@ -16,14 +16,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.6\n"
 
-#: drakauth:24 drakauth:26 draksec:291 draksec:340
+#: drakauth:24 drakauth:26 draksec:163
 #, c-format
 msgid "Authentication"
 msgstr "Autentifikacija"
 
-#: drakauth:37 drakclock:111 drakclock:125 drakfont:213 drakfont:226
-#: drakfont:264 draksplash:202 finish-install:119 logdrake:170 logdrake:445
-#: logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
+#: drakauth:37 drakclock:111 drakclock:125 drakdvb:72 drakfont:213
+#: drakfont:226 drakfont:264 draksplash:202 finish-install:119 logdrake:170
+#: logdrake:445 logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
 #: scannerdrake:200 scannerdrake:259 scannerdrake:729 scannerdrake:740
 #: scannerdrake:879 scannerdrake:890 scannerdrake:960
 #, c-format
@@ -65,8 +65,8 @@ msgstr ""
 msgid "Silent"
 msgstr "Tiho"
 
-#: drakboot:137 drakbug:254 drakfont:682 drakperm:376 drakperm:386 drakups:27
-#: harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
+#: drakboot:137 drakbug:254 drakdvb:57 drakfont:682 drakperm:376 drakperm:386
+#: drakups:27 harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
 #: scannerdrake:51 scannerdrake:54 scannerdrake:297 scannerdrake:302
 #: scannerdrake:954
 #, c-format
@@ -298,7 +298,7 @@ msgstr "Instaliram paket %s"
 msgid "Please describe what you were doing when it crashed:"
 msgstr ""
 
-#: drakbug:185 drakperm:136 draksec:450 draksec:452 draksec:471 draksec:473
+#: drakbug:185 drakperm:136
 #, c-format
 msgid "Help"
 msgstr "Pomoć"
@@ -335,7 +335,7 @@ msgstr ""
 msgid "Thanks."
 msgstr ""
 
-#: drakclock:30 draksec:346
+#: drakclock:30 draksec:169
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr ""
@@ -407,7 +407,7 @@ msgstr "Molim unesite ispravnu IP adresu."
 msgid "Could not synchronize with %s."
 msgstr ""
 
-#: drakclock:127 draksplash:125 logdrake:175 scannerdrake:491
+#: drakclock:127 drakdvb:122 draksplash:125 logdrake:175 scannerdrake:491
 #, c-format
 msgid "Quit"
 msgstr "Završi"
@@ -421,6 +421,54 @@ msgstr "Obnovi"
 #, c-format
 msgid "Reset"
 msgstr "Ponovo postavi"
+
+#: drakdvb:30
+#, fuzzy, c-format
+msgid "DVB"
+msgstr "DVD"
+
+#: drakdvb:39 harddrake2:100
+#, c-format
+msgid "Channel"
+msgstr "Kanal"
+
+#: drakdvb:57
+#, c-format
+msgid "%s already exists and its contents will be lost"
+msgstr ""
+
+#: drakdvb:72
+#, c-format
+msgid "Could not get the list of available channels"
+msgstr ""
+
+#: drakdvb:78 draksec:73 drakups:99 harddrake2:370 scannerdrake:66
+#: scannerdrake:70 scannerdrake:78 scannerdrake:319 scannerdrake:368
+#: scannerdrake:504 scannerdrake:508 scannerdrake:530 service_harddrake:264
+#, c-format
+msgid "Please wait"
+msgstr "Samo momenat..."
+
+#: drakdvb:82
+#, c-format
+msgid "Detecting DVB channels, this will take a few minutes"
+msgstr ""
+
+#: drakdvb:83 drakfont:572 drakfont:652 drakfont:736 draksplash:213
+#: drakups:217 logdrake:175
+#, c-format
+msgid "Cancel"
+msgstr "Poništi"
+
+#: drakdvb:121
+#, fuzzy, c-format
+msgid "Detect Channels"
+msgstr "Kanal"
+
+#: drakdvb:123
+#, fuzzy, c-format
+msgid "View Channel"
+msgstr "Kanal"
 
 #: drakedm:41
 #, c-format
@@ -679,18 +727,12 @@ msgstr "Izaberite font ili direktorijum i kliknite na  'Dodaj'"
 msgid "File Selection"
 msgstr "Odabir fajlova"
 
-#: drakfont:572 drakfont:652 drakfont:736 draksplash:213 drakups:217
-#: logdrake:175
-#, c-format
-msgid "Cancel"
-msgstr "Poništi"
-
 #: drakfont:576
 #, c-format
 msgid "Fonts"
 msgstr "Fontovi"
 
-#: drakfont:640 draksec:342
+#: drakfont:640 draksec:165
 #, fuzzy, c-format
 msgid "Import fonts"
 msgstr "Uvoz fontova"
@@ -715,12 +757,12 @@ msgstr "Instaliraj"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr ""
 
-#: drakfont:688 draksec:59 harddrake2:324
+#: drakfont:688 draksec:60 harddrake2:324
 #, c-format
 msgid "Yes"
 msgstr "Da"
 
-#: drakfont:690 draksec:58 harddrake2:325
+#: drakfont:690 draksec:59 harddrake2:325
 #, c-format
 msgid "No"
 msgstr "Ne"
@@ -854,7 +896,7 @@ msgstr "Korisnik"
 msgid "Group"
 msgstr "Grupa"
 
-#: drakperm:50 drakperm:109 drakperm:332
+#: drakperm:50 drakperm:109 drakperm:332 draksec:180
 #, c-format
 msgid "Permissions"
 msgstr "Dozvole"
@@ -1077,286 +1119,170 @@ msgstr ""
 msgid "Group: %s"
 msgstr ""
 
-#: draksec:53
+#: draksec:54
 #, c-format
 msgid "ALL"
 msgstr ""
 
-#: draksec:54
+#: draksec:55
 #, c-format
 msgid "LOCAL"
 msgstr ""
 
-#: draksec:55
+#: draksec:56
 #, c-format
 msgid "NONE"
 msgstr ""
 
-#: draksec:56
+#: draksec:57
 #, c-format
 msgid "Default"
 msgstr "Podrazumevano"
 
-#: draksec:57
+#: draksec:58
 #, c-format
 msgid "Ignore"
 msgstr "Zanemari"
 
-#: draksec:72 drakups:99 harddrake2:370 scannerdrake:66 scannerdrake:70
-#: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:504
-#: scannerdrake:508 scannerdrake:530 service_harddrake:264
-#, c-format
-msgid "Please wait"
-msgstr "Samo momenat..."
-
-#. -PO: Do not alter the <span ..> and </span> tags.
-#. -PO: Translate the security levels (Poor, Standard, High, Higher and Paranoid) in the same way, you translated these individuals words.
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX.
-#: draksec:93
-#, c-format
-msgid ""
-"Here, you can setup the security level and administrator of your machine.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Administrator</span>' is the one who "
-"will receive security alerts if the\n"
-"'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
-"username or an email.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Level</span>' menu allows you to select "
-"one of the six preconfigured security levels\n"
-"provided with msec. These levels range from '<span weight=\"bold\">poor</"
-"span>' security and ease of use, to\n"
-"'<span weight=\"bold\">paranoid</span>' config, suitable for very sensitive "
-"server applications:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
-"very\n"
-"easy to use security level. It should only be used for machines not "
-"connected to\n"
-"any network and that are not accessible to everybody.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
-"security\n"
-"recommended for a computer that will be used to connect to the Internet as "
-"a\n"
-"client.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">High</span>: There are already some\n"
-"restrictions, and more automatic checks are run every night.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
-"enough\n"
-"to use the system as a server which can accept connections from many "
-"clients. If\n"
-"your machine is only a client on the Internet, you should choose a lower "
-"level.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
-"previous\n"
-"level, but the system is entirely closed and security features are at their\n"
-"maximum"
-msgstr ""
-
-#: draksec:147 harddrake2:214
-#, c-format
-msgid ""
-"Description of the fields:\n"
-"\n"
-msgstr ""
-"Opis za polja:\n"
-"\n"
-
-#: draksec:161
-#, c-format
-msgid "(default value: %s)"
-msgstr "(podrazumevana vrednost: %s)"
-
-#: draksec:166
+#: draksec:91
 #, fuzzy, c-format
 msgid "Security Level and Checks"
 msgstr "Nivo sigurnosti:"
 
-#: draksec:203
+#: draksec:114
 #, c-format
-msgid "Security Level:"
-msgstr "Nivo sigurnosti:"
+msgid "Configure authentication required to access Mandriva tools"
+msgstr ""
 
-#: draksec:206
-#, c-format
-msgid "Security Alerts:"
-msgstr "Sigurnosni alarmi:"
-
-#: draksec:210
-#, c-format
-msgid "Security Administrator:"
-msgstr "Administrator za sigurnost:"
-
-#: draksec:212
-#, fuzzy, c-format
-msgid "Basic options"
-msgstr "DrakSec Osnovne Opcije"
-
-#: draksec:226
-#, c-format
-msgid "Network Options"
-msgstr "Mrežne opcije"
-
-#: draksec:226
-#, c-format
-msgid "System Options"
-msgstr "Sisitemske opcije"
-
-#: draksec:269
-#, c-format
-msgid "Periodic Checks"
-msgstr "Periodične provere"
-
-#: draksec:294
+#: draksec:117
 #, c-format
 msgid "No password"
 msgstr "Bez lozinke"
 
-#: draksec:295
+#: draksec:118
 #, c-format
 msgid "Root password"
 msgstr ""
 
-#: draksec:296
+#: draksec:119
 #, c-format
 msgid "User password"
 msgstr ""
 
-#: draksec:326 draksec:372
+#: draksec:149 draksec:203
 #, c-format
 msgid "Software Management"
 msgstr "Podešavanje Softvera"
 
-#: draksec:327
+#: draksec:150
 #, fuzzy, c-format
 msgid "Mandriva Update"
 msgstr "Mandriva Online"
 
-#: draksec:328
+#: draksec:151
 #, c-format
 msgid "Software Media Manager"
 msgstr "Menadžer za Medije sa softverom"
 
-#: draksec:329
+#: draksec:152
 #, fuzzy, c-format
 msgid "Configure 3D Desktop effects"
 msgstr "Podesi veb"
 
-#: draksec:330
+#: draksec:153
 #, fuzzy, c-format
 msgid "Graphical Server Configuration"
 msgstr "KOnfiguracija alarma za Mail"
 
-#: draksec:331
+#: draksec:154
 #, fuzzy, c-format
 msgid "Mouse Configuration"
 msgstr "Ručna konfiguracija"
 
-#: draksec:332
+#: draksec:155
 #, fuzzy, c-format
 msgid "Keyboard Configuration"
 msgstr "Podešavanje mreže"
 
-#: draksec:333
+#: draksec:156
 #, fuzzy, c-format
 msgid "UPS Configuration"
 msgstr "CUPSkonfiguracija za deljenje štampača"
 
-#: draksec:334
+#: draksec:157
 #, fuzzy, c-format
 msgid "Network Configuration"
 msgstr "konfiguracija alarma"
 
-#: draksec:335
+#: draksec:158
 #, c-format
 msgid "Hosts definitions"
 msgstr ""
 
-#: draksec:336
+#: draksec:159
 #, fuzzy, c-format
 msgid "Network Center"
 msgstr "Mreža & Internet"
 
-#: draksec:337
+#: draksec:160
 #, c-format
 msgid "VPN"
 msgstr ""
 
-#: draksec:338
+#: draksec:161
 #, fuzzy, c-format
 msgid "Proxy Configuration"
 msgstr "Proc Konfiguracija"
 
-#: draksec:339
+#: draksec:162
 #, fuzzy, c-format
 msgid "Connection Sharing"
 msgstr "Konekcija"
 
-#: draksec:341
+#: draksec:164
 #, c-format
 msgid "Backups"
 msgstr "Bekap"
 
-#: draksec:343 logdrake:52
+#: draksec:166 logdrake:52
 #, c-format
 msgid "Logs"
 msgstr "Log zapisi"
 
-#: draksec:344
+#: draksec:167
 #, c-format
 msgid "Services"
 msgstr "Servisi"
 
-#: draksec:345
+#: draksec:168
 #, fuzzy, c-format
 msgid "Users"
 msgstr "Korisnik"
 
-#: draksec:347
+#: draksec:170
 #, fuzzy, c-format
 msgid "Boot Configuration"
 msgstr "konfiguracija alarma"
 
-#: draksec:373
+#: draksec:204
 #, c-format
 msgid "Hardware"
 msgstr "Hardver"
 
-#: draksec:374
+#: draksec:205
 #, fuzzy, c-format
 msgid "Network"
 msgstr "Mrežne opcije"
 
-#: draksec:375
+#: draksec:206
 #, c-format
 msgid "System"
 msgstr "Sistem"
 
-#: draksec:376
+#: draksec:207
 #, c-format
 msgid "Boot"
 msgstr "Boot"
-
-#: draksec:401
-#, c-format
-msgid "Please wait, setting security level..."
-msgstr "Samo momenat, podešavam nivo sigurnosti..."
-
-#: draksec:407
-#, c-format
-msgid "Please wait, setting security options..."
-msgstr "Samo momenat, podešavam sigurnosne opcije..."
 
 #: draksound:48
 #, c-format
@@ -2334,11 +2260,6 @@ msgstr "Format disketa koje uređaj prihvata"
 
 #: harddrake2:100
 #, c-format
-msgid "Channel"
-msgstr "Kanal"
-
-#: harddrake2:100
-#, c-format
 msgid "EIDE/SCSI channel"
 msgstr "EIDE/SCSI kanal"
 
@@ -2562,6 +2483,15 @@ msgstr "/_Opis polja"
 #, c-format
 msgid "Harddrake help"
 msgstr "Harddrake pomoć"
+
+#: harddrake2:214
+#, c-format
+msgid ""
+"Description of the fields:\n"
+"\n"
+msgstr ""
+"Opis za polja:\n"
+"\n"
 
 #: harddrake2:222
 #, c-format
@@ -3572,6 +3502,37 @@ msgstr "Ručna konfiguracija"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "Opcije"
+
+#~ msgid "(default value: %s)"
+#~ msgstr "(podrazumevana vrednost: %s)"
+
+#~ msgid "Security Level:"
+#~ msgstr "Nivo sigurnosti:"
+
+#~ msgid "Security Alerts:"
+#~ msgstr "Sigurnosni alarmi:"
+
+#~ msgid "Security Administrator:"
+#~ msgstr "Administrator za sigurnost:"
+
+#, fuzzy
+#~ msgid "Basic options"
+#~ msgstr "DrakSec Osnovne Opcije"
+
+#~ msgid "Network Options"
+#~ msgstr "Mrežne opcije"
+
+#~ msgid "System Options"
+#~ msgstr "Sisitemske opcije"
+
+#~ msgid "Periodic Checks"
+#~ msgstr "Periodične provere"
+
+#~ msgid "Please wait, setting security level..."
+#~ msgstr "Samo momenat, podešavam nivo sigurnosti..."
+
+#~ msgid "Please wait, setting security options..."
+#~ msgstr "Samo momenat, podešavam sigurnosne opcije..."
 
 #, fuzzy
 #~ msgid ""

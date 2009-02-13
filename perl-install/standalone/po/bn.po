@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-16 11:41+0100\n"
+"POT-Creation-Date: 2009-02-13 16:30+0100\n"
 "PO-Revision-Date: 2005-03-19 23:18+0600\n"
 "Last-Translator: Samia <mailsamia2001@yahoo.com>\n"
 "Language-Team: Bangla <mdk-translation@bengalinux.org>\n"
@@ -17,14 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: drakauth:24 drakauth:26 draksec:291 draksec:340
+#: drakauth:24 drakauth:26 draksec:163
 #, c-format
 msgid "Authentication"
 msgstr "অনুমোদন"
 
-#: drakauth:37 drakclock:111 drakclock:125 drakfont:213 drakfont:226
-#: drakfont:264 draksplash:202 finish-install:119 logdrake:170 logdrake:445
-#: logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
+#: drakauth:37 drakclock:111 drakclock:125 drakdvb:72 drakfont:213
+#: drakfont:226 drakfont:264 draksplash:202 finish-install:119 logdrake:170
+#: logdrake:445 logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
 #: scannerdrake:200 scannerdrake:259 scannerdrake:729 scannerdrake:740
 #: scannerdrake:879 scannerdrake:890 scannerdrake:960
 #, c-format
@@ -66,8 +66,8 @@ msgstr ""
 msgid "Silent"
 msgstr "নীরব"
 
-#: drakboot:137 drakbug:254 drakfont:682 drakperm:376 drakperm:386 drakups:27
-#: harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
+#: drakboot:137 drakbug:254 drakdvb:57 drakfont:682 drakperm:376 drakperm:386
+#: drakups:27 harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
 #: scannerdrake:51 scannerdrake:54 scannerdrake:297 scannerdrake:302
 #: scannerdrake:954
 #, c-format
@@ -306,7 +306,7 @@ msgstr "নিম্নের প্যাকেজসমুহ আপনার 
 msgid "Please describe what you were doing when it crashed:"
 msgstr ""
 
-#: drakbug:185 drakperm:136 draksec:450 draksec:452 draksec:471 draksec:473
+#: drakbug:185 drakperm:136
 #, c-format
 msgid "Help"
 msgstr "সহায়িকা"
@@ -343,7 +343,7 @@ msgstr ""
 msgid "Thanks."
 msgstr ""
 
-#: drakclock:30 draksec:346
+#: drakclock:30 draksec:169
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr ""
@@ -417,7 +417,7 @@ msgstr "অনুগ্রহ করে একটি সঠিক IP ঠিক�
 msgid "Could not synchronize with %s."
 msgstr "%s এর সাথে সিন্‌ক্রোনাইজ করতে পারছে না।"
 
-#: drakclock:127 draksplash:125 logdrake:175 scannerdrake:491
+#: drakclock:127 drakdvb:122 draksplash:125 logdrake:175 scannerdrake:491
 #, c-format
 msgid "Quit"
 msgstr "প্রস্থান"
@@ -431,6 +431,54 @@ msgstr "পুনরায় চেষ্টা করো"
 #, c-format
 msgid "Reset"
 msgstr "রিসেট"
+
+#: drakdvb:30
+#, fuzzy, c-format
+msgid "DVB"
+msgstr "DVD"
+
+#: drakdvb:39 harddrake2:100
+#, c-format
+msgid "Channel"
+msgstr "চ্যানেল"
+
+#: drakdvb:57
+#, c-format
+msgid "%s already exists and its contents will be lost"
+msgstr ""
+
+#: drakdvb:72
+#, c-format
+msgid "Could not get the list of available channels"
+msgstr ""
+
+#: drakdvb:78 draksec:73 drakups:99 harddrake2:370 scannerdrake:66
+#: scannerdrake:70 scannerdrake:78 scannerdrake:319 scannerdrake:368
+#: scannerdrake:504 scannerdrake:508 scannerdrake:530 service_harddrake:264
+#, c-format
+msgid "Please wait"
+msgstr "অনুগ্রহ করে অপেক্ষা করুন"
+
+#: drakdvb:82
+#, c-format
+msgid "Detecting DVB channels, this will take a few minutes"
+msgstr ""
+
+#: drakdvb:83 drakfont:572 drakfont:652 drakfont:736 draksplash:213
+#: drakups:217 logdrake:175
+#, c-format
+msgid "Cancel"
+msgstr "বাতিল"
+
+#: drakdvb:121
+#, fuzzy, c-format
+msgid "Detect Channels"
+msgstr "চ্যানেল"
+
+#: drakdvb:123
+#, fuzzy, c-format
+msgid "View Channel"
+msgstr "চ্যানেল"
 
 #: drakedm:41
 #, c-format
@@ -692,18 +740,12 @@ msgstr "ফন্ট ফাইল অথবা ডিরেক্টরি ব�
 msgid "File Selection"
 msgstr "ফাইল বাছাই"
 
-#: drakfont:572 drakfont:652 drakfont:736 draksplash:213 drakups:217
-#: logdrake:175
-#, c-format
-msgid "Cancel"
-msgstr "বাতিল"
-
 #: drakfont:576
 #, c-format
 msgid "Fonts"
 msgstr "ফন্ট"
 
-#: drakfont:640 draksec:342
+#: drakfont:640 draksec:165
 #, c-format
 msgid "Import fonts"
 msgstr "ফন্ট ইমপোর্ট করো"
@@ -728,12 +770,12 @@ msgstr "ইনস্টল করো"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr ""
 
-#: drakfont:688 draksec:59 harddrake2:324
+#: drakfont:688 draksec:60 harddrake2:324
 #, c-format
 msgid "Yes"
 msgstr "হ্যাঁ"
 
-#: drakfont:690 draksec:58 harddrake2:325
+#: drakfont:690 draksec:59 harddrake2:325
 #, c-format
 msgid "No"
 msgstr "না"
@@ -875,7 +917,7 @@ msgstr "ব্যবহারকারী"
 msgid "Group"
 msgstr "গ্রুপ"
 
-#: drakperm:50 drakperm:109 drakperm:332
+#: drakperm:50 drakperm:109 drakperm:332 draksec:180
 #, c-format
 msgid "Permissions"
 msgstr "অনুমতি"
@@ -1100,328 +1142,170 @@ msgstr ""
 msgid "Group: %s"
 msgstr ""
 
-#: draksec:53
+#: draksec:54
 #, c-format
 msgid "ALL"
 msgstr "সব"
 
-#: draksec:54
+#: draksec:55
 #, c-format
 msgid "LOCAL"
 msgstr "স্থানীয়"
 
-#: draksec:55
+#: draksec:56
 #, c-format
 msgid "NONE"
 msgstr "নেই"
 
-#: draksec:56
+#: draksec:57
 #, c-format
 msgid "Default"
 msgstr "স্বাভাবিক"
 
-#: draksec:57
+#: draksec:58
 #, c-format
 msgid "Ignore"
 msgstr "অগ্রাহ্য"
 
-#: draksec:72 drakups:99 harddrake2:370 scannerdrake:66 scannerdrake:70
-#: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:504
-#: scannerdrake:508 scannerdrake:530 service_harddrake:264
-#, c-format
-msgid "Please wait"
-msgstr "অনুগ্রহ করে অপেক্ষা করুন"
-
-#. -PO: Do not alter the <span ..> and </span> tags.
-#. -PO: Translate the security levels (Poor, Standard, High, Higher and Paranoid) in the same way, you translated these individuals words.
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX.
-#: draksec:93
-#, c-format
-msgid ""
-"Here, you can setup the security level and administrator of your machine.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Administrator</span>' is the one who "
-"will receive security alerts if the\n"
-"'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
-"username or an email.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Level</span>' menu allows you to select "
-"one of the six preconfigured security levels\n"
-"provided with msec. These levels range from '<span weight=\"bold\">poor</"
-"span>' security and ease of use, to\n"
-"'<span weight=\"bold\">paranoid</span>' config, suitable for very sensitive "
-"server applications:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
-"very\n"
-"easy to use security level. It should only be used for machines not "
-"connected to\n"
-"any network and that are not accessible to everybody.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
-"security\n"
-"recommended for a computer that will be used to connect to the Internet as "
-"a\n"
-"client.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">High</span>: There are already some\n"
-"restrictions, and more automatic checks are run every night.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
-"enough\n"
-"to use the system as a server which can accept connections from many "
-"clients. If\n"
-"your machine is only a client on the Internet, you should choose a lower "
-"level.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
-"previous\n"
-"level, but the system is entirely closed and security features are at their\n"
-"maximum"
-msgstr ""
-"এখানে, আপনি আপনার মেশিনের নিরাপত্তা স্তর এবং অ্যাডমিনস্ট্রেটর সেটআপ করতে পারেন।\n"
-"\n"
-"\n"
-"যদি '<span weight=\"bold\">নিরাপত্তা সতর্কতা সংকেত</span>' অপশন সেট করা থাকে,\n"
-"'<span weight=\"bold\"> নিরাপত্তা অ্যাডমিনিস্ট্রেটর</span>' সতর্কতাগুলো পেয়ে "
-"থাকেন। অ্যাডমিনিস্ট্রেটর একজন ব্যবহারকারীর নাম অথবা ই-মেইল হতে পারে।\n"
-"\n"
-"\n"
-"'<span weight=\"bold\">নিরাপত্তা স্তর</span>' মেনু আপনাকে msec থেকে সরবরাহকৃত "
-"এবং কনফিগার করা ছয়টি স্তরের\n"
-"মধ্যে যেকোন একটি বেছে নেয়ার সুযোগ দেবে। এই স্তরগুলো '<span weight=\"bold"
-"\">নিম্নমানের</span>'নিরাপত্তা\n"
-"ও ব্যবহারের স্বাচ্ছন্দ্য থেকে, স্পর্শকাতর সার্ভার অ্যাপ্লিকেশনের জন্য প্রযোজ্য '<span "
-"weight=\"bold\">প্যারানয়েড</span>কনফিগারেশন পর্যন্ত বিস্তৃত:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">নিম্নমান</span>: এটি একটি সম্পূর্ণ অনিরাপদ,\n"
-"কিন্তু সহজে ব্যবহারযোগ্য নিরাপত্তা স্তর। নেটওয়ার্কে যুক্ত নয় এবং সবাই প্রবেশ করতে পারে "
-"না,\n"
-"শুধুমাত্র এমন মেশিনে এ স্তর ব্যবহার করা উচিত।\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">আদর্শ</span>: যেসব কম্পিউটার ক্লায়েন্ট হিসেবে\n"
-"ইন্টারনেটে সংযুক্ত হয়, সেসব মেশিনের জন্য এটি আদর্শ\n"
-"নিরাপত্তা স্তর।\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">উচ্চমান</span>: এখানে অনেক সীমাবদ্ধতা প্রয়োগ "
-"করা হয় এবং\n"
-"প্রতিরাতে স্বয়ংক্রিয় পরীক্ষা চালু করা হয়।\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">উচ্চতর</span>: এ স্তরে নিরাপত্তা অনেক বেশি এবং\n"
-"সিস্টেমটি সার্ভার হিসেবে ব্যবহারযোগ্য, যা কিনা অন্যান্য ক্লায়েন্ট থেকে সংযুক্তি গ্রহন "
-"করে যদি আপনার\n"
-"মেশিনটি ইন্টারনেটে শুধুমাত্র ক্লায়েন্ট হিসেবে সংযুক্ত থাকে তাহলে এরচেয়ে অল্পমানের স্তর "
-"ব্যবহার করা উচিত।\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">প্যারানয়েড</span>: এটিও পূর্বের স্তরের মতই,\n"
-"কিন্তু সিস্টেম পুরোপুরি সীমাবন্ধ এবং সম্ভাব্য সর্বোচ্চ\n"
-"নিরাপত্তা প্রয়োগ হয়"
-
-#: draksec:147 harddrake2:214
-#, c-format
-msgid ""
-"Description of the fields:\n"
-"\n"
-msgstr ""
-"ফিল্ডগুলোর বর্ণনা:\n"
-"\n"
-
-#: draksec:161
-#, c-format
-msgid "(default value: %s)"
-msgstr "(ডিফল্ট মান: %s)"
-
-#: draksec:166
+#: draksec:91
 #, fuzzy, c-format
 msgid "Security Level and Checks"
 msgstr "নিরাপত্তা লেভেল:"
 
-#: draksec:203
+#: draksec:114
 #, c-format
-msgid "Security Level:"
-msgstr "নিরাপত্তা লেভেল:"
+msgid "Configure authentication required to access Mandriva tools"
+msgstr ""
 
-#: draksec:206
-#, c-format
-msgid "Security Alerts:"
-msgstr "নিরাপত্তা সতর্কতা:"
-
-#: draksec:210
-#, c-format
-msgid "Security Administrator:"
-msgstr "নিরাপত্ত ব্যবস্থাপক:"
-
-#: draksec:212
-#, c-format
-msgid "Basic options"
-msgstr "বেসিক অপশন"
-
-#: draksec:226
-#, c-format
-msgid "Network Options"
-msgstr "নেটওয়ার্ক অপশন"
-
-#: draksec:226
-#, c-format
-msgid "System Options"
-msgstr "সিস্টেম অপশন"
-
-#: draksec:269
-#, c-format
-msgid "Periodic Checks"
-msgstr "পুনরাবৃত্তি পরীক্ষা"
-
-#: draksec:294
+#: draksec:117
 #, c-format
 msgid "No password"
 msgstr "পাসওয়ার্ড ছাড়া"
 
-#: draksec:295
+#: draksec:118
 #, c-format
 msgid "Root password"
 msgstr ""
 
-#: draksec:296
+#: draksec:119
 #, c-format
 msgid "User password"
 msgstr ""
 
-#: draksec:326 draksec:372
+#: draksec:149 draksec:203
 #, c-format
 msgid "Software Management"
 msgstr "সফটওয়্যার ম্যানেজমেন্ট"
 
-#: draksec:327
+#: draksec:150
 #, fuzzy, c-format
 msgid "Mandriva Update"
 msgstr "ম্যান্ড্রিব অনলাইন (Mandriva Online)"
 
-#: draksec:328
+#: draksec:151
 #, c-format
 msgid "Software Media Manager"
 msgstr "সফ্টওয়্যার মিডিয়া ম্যানেজার"
 
-#: draksec:329
+#: draksec:152
 #, fuzzy, c-format
 msgid "Configure 3D Desktop effects"
 msgstr "নিউজ গ্রুপ সার্ভার কনফিগার করুন"
 
-#: draksec:330
+#: draksec:153
 #, fuzzy, c-format
 msgid "Graphical Server Configuration"
 msgstr "মেইলের সংকেত কনফিগারেশন"
 
-#: draksec:331
+#: draksec:154
 #, fuzzy, c-format
 msgid "Mouse Configuration"
 msgstr "স্বনির্বাচিত কনফিগারেশন"
 
-#: draksec:332
+#: draksec:155
 #, fuzzy, c-format
 msgid "Keyboard Configuration"
 msgstr "নেটওয়ার্ক কনফিগারেশন"
 
-#: draksec:333
+#: draksec:156
 #, fuzzy, c-format
 msgid "UPS Configuration"
 msgstr "ইউ-পি-এস ড্রাইভার কন্‌ফিগারেশন"
 
-#: draksec:334
+#: draksec:157
 #, fuzzy, c-format
 msgid "Network Configuration"
 msgstr "সংকেত কনফিগারেশন"
 
-#: draksec:335
+#: draksec:158
 #, c-format
 msgid "Hosts definitions"
 msgstr ""
 
-#: draksec:336
+#: draksec:159
 #, fuzzy, c-format
 msgid "Network Center"
 msgstr "নেটওয়ার্ক এবং ইন্টারনেট"
 
-#: draksec:337
+#: draksec:160
 #, c-format
 msgid "VPN"
 msgstr ""
 
-#: draksec:338
+#: draksec:161
 #, c-format
 msgid "Proxy Configuration"
 msgstr "প্রক্‌সি কনফিগারেশন"
 
-#: draksec:339
+#: draksec:162
 #, fuzzy, c-format
 msgid "Connection Sharing"
 msgstr "সংযোগ"
 
-#: draksec:341
+#: draksec:164
 #, c-format
 msgid "Backups"
 msgstr "ব্যাক-আপ"
 
-#: draksec:343 logdrake:52
+#: draksec:166 logdrake:52
 #, c-format
 msgid "Logs"
 msgstr "লগ"
 
-#: draksec:344
+#: draksec:167
 #, c-format
 msgid "Services"
 msgstr "সার্ভিসসমূহ"
 
-#: draksec:345
+#: draksec:168
 #, fuzzy, c-format
 msgid "Users"
 msgstr "ব্যবহারকারী"
 
-#: draksec:347
+#: draksec:170
 #, fuzzy, c-format
 msgid "Boot Configuration"
 msgstr "সংকেত কনফিগারেশন"
 
-#: draksec:373
+#: draksec:204
 #, c-format
 msgid "Hardware"
 msgstr "হার্ডওয়্যার"
 
-#: draksec:374
+#: draksec:205
 #, fuzzy, c-format
 msgid "Network"
 msgstr "নেটওয়ার্ক অপশন"
 
-#: draksec:375
+#: draksec:206
 #, c-format
 msgid "System"
 msgstr "সিস্টেম"
 
-#: draksec:376
+#: draksec:207
 #, c-format
 msgid "Boot"
 msgstr "বুট"
-
-#: draksec:401
-#, c-format
-msgid "Please wait, setting security level..."
-msgstr "অনুগ্রহ করে অপেক্ষা করুন, নিরাপত্তা লেভেল সেট করা হচ্ছে..."
-
-#: draksec:407
-#, c-format
-msgid "Please wait, setting security options..."
-msgstr "অনুগ্রহ করে অপেক্ষা করুন, নিরাপত্তা অপশনগুলো সেট করা হচ্ছে..."
 
 #: draksound:48
 #, c-format
@@ -2412,11 +2296,6 @@ msgstr "ড্রাইভ সমর্থিত ফ্লপির ফরম্
 
 #: harddrake2:100
 #, c-format
-msgid "Channel"
-msgstr "চ্যানেল"
-
-#: harddrake2:100
-#, c-format
 msgid "EIDE/SCSI channel"
 msgstr "EIDE/SCSI চ্যানেল"
 
@@ -2643,6 +2522,15 @@ msgstr "/ফিল্ডের বর্ণনা (_ফ)"
 #, c-format
 msgid "Harddrake help"
 msgstr "হার্ডড্রেকের সাহায্য"
+
+#: harddrake2:214
+#, c-format
+msgid ""
+"Description of the fields:\n"
+"\n"
+msgstr ""
+"ফিল্ডগুলোর বর্ণনা:\n"
+"\n"
 
 #: harddrake2:222
 #, c-format
@@ -3677,6 +3565,134 @@ msgstr "স্বনির্বাচিত কনফিগারেশন"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "সেটিং"
+
+#~ msgid ""
+#~ "Here, you can setup the security level and administrator of your "
+#~ "machine.\n"
+#~ "\n"
+#~ "\n"
+#~ "The '<span weight=\"bold\">Security Administrator</span>' is the one who "
+#~ "will receive security alerts if the\n"
+#~ "'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
+#~ "username or an email.\n"
+#~ "\n"
+#~ "\n"
+#~ "The '<span weight=\"bold\">Security Level</span>' menu allows you to "
+#~ "select one of the six preconfigured security levels\n"
+#~ "provided with msec. These levels range from '<span weight=\"bold\">poor</"
+#~ "span>' security and ease of use, to\n"
+#~ "'<span weight=\"bold\">paranoid</span>' config, suitable for very "
+#~ "sensitive server applications:\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+#~ "very\n"
+#~ "easy to use security level. It should only be used for machines not "
+#~ "connected to\n"
+#~ "any network and that are not accessible to everybody.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+#~ "security\n"
+#~ "recommended for a computer that will be used to connect to the Internet "
+#~ "as a\n"
+#~ "client.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">High</span>: There are already some\n"
+#~ "restrictions, and more automatic checks are run every night.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+#~ "enough\n"
+#~ "to use the system as a server which can accept connections from many "
+#~ "clients. If\n"
+#~ "your machine is only a client on the Internet, you should choose a lower "
+#~ "level.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+#~ "previous\n"
+#~ "level, but the system is entirely closed and security features are at "
+#~ "their\n"
+#~ "maximum"
+#~ msgstr ""
+#~ "এখানে, আপনি আপনার মেশিনের নিরাপত্তা স্তর এবং অ্যাডমিনস্ট্রেটর সেটআপ করতে "
+#~ "পারেন।\n"
+#~ "\n"
+#~ "\n"
+#~ "যদি '<span weight=\"bold\">নিরাপত্তা সতর্কতা সংকেত</span>' অপশন সেট করা "
+#~ "থাকে,\n"
+#~ "'<span weight=\"bold\"> নিরাপত্তা অ্যাডমিনিস্ট্রেটর</span>' সতর্কতাগুলো পেয়ে "
+#~ "থাকেন। অ্যাডমিনিস্ট্রেটর একজন ব্যবহারকারীর নাম অথবা ই-মেইল হতে পারে।\n"
+#~ "\n"
+#~ "\n"
+#~ "'<span weight=\"bold\">নিরাপত্তা স্তর</span>' মেনু আপনাকে msec থেকে সরবরাহকৃত "
+#~ "এবং কনফিগার করা ছয়টি স্তরের\n"
+#~ "মধ্যে যেকোন একটি বেছে নেয়ার সুযোগ দেবে। এই স্তরগুলো '<span weight=\"bold"
+#~ "\">নিম্নমানের</span>'নিরাপত্তা\n"
+#~ "ও ব্যবহারের স্বাচ্ছন্দ্য থেকে, স্পর্শকাতর সার্ভার অ্যাপ্লিকেশনের জন্য প্রযোজ্য '<span "
+#~ "weight=\"bold\">প্যারানয়েড</span>কনফিগারেশন পর্যন্ত বিস্তৃত:\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">নিম্নমান</span>: এটি একটি সম্পূর্ণ অনিরাপদ,\n"
+#~ "কিন্তু সহজে ব্যবহারযোগ্য নিরাপত্তা স্তর। নেটওয়ার্কে যুক্ত নয় এবং সবাই প্রবেশ করতে "
+#~ "পারে না,\n"
+#~ "শুধুমাত্র এমন মেশিনে এ স্তর ব্যবহার করা উচিত।\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">আদর্শ</span>: যেসব কম্পিউটার ক্লায়েন্ট "
+#~ "হিসেবে\n"
+#~ "ইন্টারনেটে সংযুক্ত হয়, সেসব মেশিনের জন্য এটি আদর্শ\n"
+#~ "নিরাপত্তা স্তর।\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">উচ্চমান</span>: এখানে অনেক সীমাবদ্ধতা প্রয়োগ "
+#~ "করা হয় এবং\n"
+#~ "প্রতিরাতে স্বয়ংক্রিয় পরীক্ষা চালু করা হয়।\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">উচ্চতর</span>: এ স্তরে নিরাপত্তা অনেক বেশি "
+#~ "এবং\n"
+#~ "সিস্টেমটি সার্ভার হিসেবে ব্যবহারযোগ্য, যা কিনা অন্যান্য ক্লায়েন্ট থেকে সংযুক্তি "
+#~ "গ্রহন করে যদি আপনার\n"
+#~ "মেশিনটি ইন্টারনেটে শুধুমাত্র ক্লায়েন্ট হিসেবে সংযুক্ত থাকে তাহলে এরচেয়ে অল্পমানের "
+#~ "স্তর ব্যবহার করা উচিত।\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">প্যারানয়েড</span>: এটিও পূর্বের স্তরের মতই,\n"
+#~ "কিন্তু সিস্টেম পুরোপুরি সীমাবন্ধ এবং সম্ভাব্য সর্বোচ্চ\n"
+#~ "নিরাপত্তা প্রয়োগ হয়"
+
+#~ msgid "(default value: %s)"
+#~ msgstr "(ডিফল্ট মান: %s)"
+
+#~ msgid "Security Level:"
+#~ msgstr "নিরাপত্তা লেভেল:"
+
+#~ msgid "Security Alerts:"
+#~ msgstr "নিরাপত্তা সতর্কতা:"
+
+#~ msgid "Security Administrator:"
+#~ msgstr "নিরাপত্ত ব্যবস্থাপক:"
+
+#~ msgid "Basic options"
+#~ msgstr "বেসিক অপশন"
+
+#~ msgid "Network Options"
+#~ msgstr "নেটওয়ার্ক অপশন"
+
+#~ msgid "System Options"
+#~ msgstr "সিস্টেম অপশন"
+
+#~ msgid "Periodic Checks"
+#~ msgstr "পুনরাবৃত্তি পরীক্ষা"
+
+#~ msgid "Please wait, setting security level..."
+#~ msgstr "অনুগ্রহ করে অপেক্ষা করুন, নিরাপত্তা লেভেল সেট করা হচ্ছে..."
+
+#~ msgid "Please wait, setting security options..."
+#~ msgstr "অনুগ্রহ করে অপেক্ষা করুন, নিরাপত্তা অপশনগুলো সেট করা হচ্ছে..."
 
 #, fuzzy
 #~ msgid ""

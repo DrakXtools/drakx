@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX for MDK 9.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-16 11:41+0100\n"
+"POT-Creation-Date: 2009-02-13 16:30+0100\n"
 "PO-Revision-Date: 2004-09-15 13:33+0200\n"
 "Last-Translator: Naim Daka <naim70@freesurf.ch>\n"
 "Language-Team: Albanian <LL@li.org>\n"
@@ -15,14 +15,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: drakauth:24 drakauth:26 draksec:291 draksec:340
+#: drakauth:24 drakauth:26 draksec:163
 #, c-format
 msgid "Authentication"
 msgstr "Vërtetësimi"
 
-#: drakauth:37 drakclock:111 drakclock:125 drakfont:213 drakfont:226
-#: drakfont:264 draksplash:202 finish-install:119 logdrake:170 logdrake:445
-#: logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
+#: drakauth:37 drakclock:111 drakclock:125 drakdvb:72 drakfont:213
+#: drakfont:226 drakfont:264 draksplash:202 finish-install:119 logdrake:170
+#: logdrake:445 logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
 #: scannerdrake:200 scannerdrake:259 scannerdrake:729 scannerdrake:740
 #: scannerdrake:879 scannerdrake:890 scannerdrake:960
 #, c-format
@@ -64,8 +64,8 @@ msgstr ""
 msgid "Silent"
 msgstr ""
 
-#: drakboot:137 drakbug:254 drakfont:682 drakperm:376 drakperm:386 drakups:27
-#: harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
+#: drakboot:137 drakbug:254 drakdvb:57 drakfont:682 drakperm:376 drakperm:386
+#: drakups:27 harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
 #: scannerdrake:51 scannerdrake:54 scannerdrake:297 scannerdrake:302
 #: scannerdrake:954
 #, c-format
@@ -300,7 +300,7 @@ msgstr "Instalimi i pakove %s"
 msgid "Please describe what you were doing when it crashed:"
 msgstr ""
 
-#: drakbug:185 drakperm:136 draksec:450 draksec:452 draksec:471 draksec:473
+#: drakbug:185 drakperm:136
 #, c-format
 msgid "Help"
 msgstr "Ndihmë"
@@ -337,7 +337,7 @@ msgstr ""
 msgid "Thanks."
 msgstr ""
 
-#: drakclock:30 draksec:346
+#: drakclock:30 draksec:169
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr ""
@@ -411,7 +411,7 @@ msgstr "Ju lutemi futni emrin e ftuesit apo IP."
 msgid "Could not synchronize with %s."
 msgstr ""
 
-#: drakclock:127 draksplash:125 logdrake:175 scannerdrake:491
+#: drakclock:127 drakdvb:122 draksplash:125 logdrake:175 scannerdrake:491
 #, c-format
 msgid "Quit"
 msgstr "Dil"
@@ -425,6 +425,54 @@ msgstr "Riparo"
 #, c-format
 msgid "Reset"
 msgstr "Nga fillimi"
+
+#: drakdvb:30
+#, fuzzy, c-format
+msgid "DVB"
+msgstr "DVD"
+
+#: drakdvb:39 harddrake2:100
+#, c-format
+msgid "Channel"
+msgstr "Kanal"
+
+#: drakdvb:57
+#, c-format
+msgid "%s already exists and its contents will be lost"
+msgstr ""
+
+#: drakdvb:72
+#, c-format
+msgid "Could not get the list of available channels"
+msgstr ""
+
+#: drakdvb:78 draksec:73 drakups:99 harddrake2:370 scannerdrake:66
+#: scannerdrake:70 scannerdrake:78 scannerdrake:319 scannerdrake:368
+#: scannerdrake:504 scannerdrake:508 scannerdrake:530 service_harddrake:264
+#, c-format
+msgid "Please wait"
+msgstr "Një moment ju lutemi"
+
+#: drakdvb:82
+#, c-format
+msgid "Detecting DVB channels, this will take a few minutes"
+msgstr ""
+
+#: drakdvb:83 drakfont:572 drakfont:652 drakfont:736 draksplash:213
+#: drakups:217 logdrake:175
+#, c-format
+msgid "Cancel"
+msgstr "Anulo"
+
+#: drakdvb:121
+#, fuzzy, c-format
+msgid "Detect Channels"
+msgstr "Kanal"
+
+#: drakdvb:123
+#, fuzzy, c-format
+msgid "View Channel"
+msgstr "Kanal"
 
 #: drakedm:41
 #, c-format
@@ -684,18 +732,12 @@ msgstr "Zgjedhni skedaret apo repertorët e polisave dhe klikoni mbi 'Shto'"
 msgid "File Selection"
 msgstr "Zgjedhja e Skedareve"
 
-#: drakfont:572 drakfont:652 drakfont:736 draksplash:213 drakups:217
-#: logdrake:175
-#, c-format
-msgid "Cancel"
-msgstr "Anulo"
-
 #: drakfont:576
 #, c-format
 msgid "Fonts"
 msgstr "Policë e shkronjave çfaqëse"
 
-#: drakfont:640 draksec:342
+#: drakfont:640 draksec:165
 #, fuzzy, c-format
 msgid "Import fonts"
 msgstr "Importimet e Policës"
@@ -720,12 +762,12 @@ msgstr "Instaloje"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr ""
 
-#: drakfont:688 draksec:59 harddrake2:324
+#: drakfont:688 draksec:60 harddrake2:324
 #, c-format
 msgid "Yes"
 msgstr "Po"
 
-#: drakfont:690 draksec:58 harddrake2:325
+#: drakfont:690 draksec:59 harddrake2:325
 #, c-format
 msgid "No"
 msgstr "Jo"
@@ -868,7 +910,7 @@ msgstr "Përdorues"
 msgid "Group"
 msgstr "Grupi"
 
-#: drakperm:50 drakperm:109 drakperm:332
+#: drakperm:50 drakperm:109 drakperm:332 draksec:180
 #, c-format
 msgid "Permissions"
 msgstr "Autorizimet"
@@ -1094,331 +1136,170 @@ msgstr ""
 msgid "Group: %s"
 msgstr ""
 
-#: draksec:53
+#: draksec:54
 #, c-format
 msgid "ALL"
 msgstr "GJITHA"
 
-#: draksec:54
+#: draksec:55
 #, c-format
 msgid "LOCAL"
 msgstr "LOKAL"
 
-#: draksec:55
+#: draksec:56
 #, c-format
 msgid "NONE"
 msgstr "ASNJË"
 
-#: draksec:56
+#: draksec:57
 #, c-format
 msgid "Default"
 msgstr "Me marrëveshje"
 
-#: draksec:57
+#: draksec:58
 #, c-format
 msgid "Ignore"
 msgstr "Injoroje"
 
-#: draksec:72 drakups:99 harddrake2:370 scannerdrake:66 scannerdrake:70
-#: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:504
-#: scannerdrake:508 scannerdrake:530 service_harddrake:264
-#, c-format
-msgid "Please wait"
-msgstr "Një moment ju lutemi"
-
-#. -PO: Do not alter the <span ..> and </span> tags.
-#. -PO: Translate the security levels (Poor, Standard, High, Higher and Paranoid) in the same way, you translated these individuals words.
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX.
-#: draksec:93
-#, fuzzy, c-format
-msgid ""
-"Here, you can setup the security level and administrator of your machine.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Administrator</span>' is the one who "
-"will receive security alerts if the\n"
-"'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
-"username or an email.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Level</span>' menu allows you to select "
-"one of the six preconfigured security levels\n"
-"provided with msec. These levels range from '<span weight=\"bold\">poor</"
-"span>' security and ease of use, to\n"
-"'<span weight=\"bold\">paranoid</span>' config, suitable for very sensitive "
-"server applications:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
-"very\n"
-"easy to use security level. It should only be used for machines not "
-"connected to\n"
-"any network and that are not accessible to everybody.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
-"security\n"
-"recommended for a computer that will be used to connect to the Internet as "
-"a\n"
-"client.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">High</span>: There are already some\n"
-"restrictions, and more automatic checks are run every night.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
-"enough\n"
-"to use the system as a server which can accept connections from many "
-"clients. If\n"
-"your machine is only a client on the Internet, you should choose a lower "
-"level.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
-"previous\n"
-"level, but the system is entirely closed and security features are at their\n"
-"maximum"
-msgstr ""
-"Këtu, ju keni mundësi ta rregulloni nivelin e sigurisë dhe të "
-"administratorit në makinë tuaj.\n"
-"\n"
-"\n"
-"Seguria Administrator është ajo a cila do të pranoj alertat e sigurisë nëse "
-"opcioni 'Alertat e Segurisë'\n"
-"është i rregulluar. Që mund të jetë emri i përdoruesit apo emaili.\n"
-"\n"
-"\n"
-"Menyja e Nivelit të Sigurisë mundëson zgjedhjen njërën nga gjashtë të "
-"parakonfiguruarat siguria\n"
-"pajiset me msec. Këto nivele rreshtohen nga siguria e varfër dhe përdorimi i "
-"thjesht, në\n"
-"konfigurim paranojak, tabela vijuese për aplikacione të ndieshme në "
-"servera:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Varfër</span>: Ky është një nivel tejet i "
-"lehtë dhe i pa sigurt.\n"
-"Duhet të përdoret vetëm me kompjuter që nuk lidhen fare në internet apo\n"
-"në ndonji rrjet tjetër dhe që nuk ka hyrje për përdorues të tjerë.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standard</span>: Ky është një nivel i "
-"sigurisë standard\n"
-"rekomandohet për kompjuter të cilët lidhen në Internet sikur një\n"
-"klient.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Lartë</span>: Këtu janë veqse disa\n"
-"rregulla, dhe verifikime automatike që nisen gjdo natë.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Më Lartë</span>: Siguria tani është mjaft e "
-"lartë për\n"
-"ta përdorur sistemin tuaj sikur server i cili mund të pranoj lidhje nga "
-"shumë klienta tjerë. Dhe nëse\n"
-"makina e juaj është vetëm një klient në Internet, ju duhet ta zgjedhni një "
-"nivel më të ultë.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranojak</span>: Ky është nivel i njëjtë me "
-"nivelin e kaluar,\n"
-"mirëpo ky sistem është i mbyllur kompletisht dhe siguria do të jetë në\n"
-"maksimum"
-
-#: draksec:147 harddrake2:214
-#, c-format
-msgid ""
-"Description of the fields:\n"
-"\n"
-msgstr ""
-"Përshkrimi i zonave:\n"
-"\n"
-
-#: draksec:161
-#, c-format
-msgid "(default value: %s)"
-msgstr "(vlerë me marrëveshje: %s)"
-
-#: draksec:166
+#: draksec:91
 #, fuzzy, c-format
 msgid "Security Level and Checks"
 msgstr "Niveli i Sigurisë:"
 
-#: draksec:203
+#: draksec:114
 #, c-format
-msgid "Security Level:"
-msgstr "Niveli i Sigurisë:"
+msgid "Configure authentication required to access Mandriva tools"
+msgstr ""
 
-#: draksec:206
-#, c-format
-msgid "Security Alerts:"
-msgstr "Siguria e Alarmeve:"
-
-#: draksec:210
-#, c-format
-msgid "Security Administrator:"
-msgstr "Siguria e Administratorit:"
-
-#: draksec:212
-#, c-format
-msgid "Basic options"
-msgstr "Opcionet Bazë"
-
-#: draksec:226
-#, c-format
-msgid "Network Options"
-msgstr "Opcionet e Rrjetit"
-
-#: draksec:226
-#, c-format
-msgid "System Options"
-msgstr "Opcionet e Sistemit"
-
-#: draksec:269
-#, c-format
-msgid "Periodic Checks"
-msgstr "Verifikime periodike"
-
-#: draksec:294
+#: draksec:117
 #, c-format
 msgid "No password"
 msgstr "Asnjë parullë"
 
-#: draksec:295
+#: draksec:118
 #, c-format
 msgid "Root password"
 msgstr ""
 
-#: draksec:296
+#: draksec:119
 #, c-format
 msgid "User password"
 msgstr ""
 
-#: draksec:326 draksec:372
+#: draksec:149 draksec:203
 #, c-format
 msgid "Software Management"
 msgstr "Menagjuesi Softver"
 
-#: draksec:327
+#: draksec:150
 #, fuzzy, c-format
 msgid "Mandriva Update"
 msgstr "Mandriva Online"
 
-#: draksec:328
+#: draksec:151
 #, c-format
 msgid "Software Media Manager"
 msgstr "Menagjues i Burimit Softver"
 
-#: draksec:329
+#: draksec:152
 #, fuzzy, c-format
 msgid "Configure 3D Desktop effects"
 msgstr "Konfiguroje..."
 
-#: draksec:330
+#: draksec:153
 #, fuzzy, c-format
 msgid "Graphical Server Configuration"
 msgstr "Konfigurimi i lajmit alarmues"
 
-#: draksec:331
+#: draksec:154
 #, fuzzy, c-format
 msgid "Mouse Configuration"
 msgstr "Konfigurimi manuel"
 
-#: draksec:332
+#: draksec:155
 #, fuzzy, c-format
 msgid "Keyboard Configuration"
 msgstr "Konfigurimi i rrjetit (Network)"
 
-#: draksec:333
+#: draksec:156
 #, fuzzy, c-format
 msgid "UPS Configuration"
 msgstr "Konfigurimi i stampuesit CUPS"
 
-#: draksec:334
+#: draksec:157
 #, fuzzy, c-format
 msgid "Network Configuration"
 msgstr "konfigurimi i alertës"
 
-#: draksec:335
+#: draksec:158
 #, c-format
 msgid "Hosts definitions"
 msgstr ""
 
-#: draksec:336
+#: draksec:159
 #, fuzzy, c-format
 msgid "Network Center"
 msgstr "Rrjeti & Internet"
 
-#: draksec:337
+#: draksec:160
 #, c-format
 msgid "VPN"
 msgstr ""
 
-#: draksec:338
+#: draksec:161
 #, c-format
 msgid "Proxy Configuration"
 msgstr "Konfigurimi Proxy"
 
-#: draksec:339
+#: draksec:162
 #, fuzzy, c-format
 msgid "Connection Sharing"
 msgstr "Lidhja"
 
-#: draksec:341
+#: draksec:164
 #, fuzzy, c-format
 msgid "Backups"
 msgstr "Bus"
 
-#: draksec:343 logdrake:52
+#: draksec:166 logdrake:52
 #, c-format
 msgid "Logs"
 msgstr "Të përditëshmet"
 
-#: draksec:344
+#: draksec:167
 #, c-format
 msgid "Services"
 msgstr "Shërbime"
 
-#: draksec:345
+#: draksec:168
 #, fuzzy, c-format
 msgid "Users"
 msgstr "Përdorues"
 
-#: draksec:347
+#: draksec:170
 #, fuzzy, c-format
 msgid "Boot Configuration"
 msgstr "konfigurimi i alertës"
 
-#: draksec:373
+#: draksec:204
 #, c-format
 msgid "Hardware"
 msgstr "Hardware"
 
-#: draksec:374
+#: draksec:205
 #, fuzzy, c-format
 msgid "Network"
 msgstr "Opcionet e Rrjetit"
 
-#: draksec:375
+#: draksec:206
 #, c-format
 msgid "System"
 msgstr "Sistemi"
 
-#: draksec:376
+#: draksec:207
 #, c-format
 msgid "Boot"
 msgstr "Boot"
-
-#: draksec:401
-#, c-format
-msgid "Please wait, setting security level..."
-msgstr "Një moment ju lutemi, konfigurim i nivelit të sigurisë..."
-
-#: draksec:407
-#, c-format
-msgid "Please wait, setting security options..."
-msgstr "Një moment ju lutemi, konfigurimi i mundësive të sigurisë..."
 
 #: draksound:48
 #, c-format
@@ -2407,11 +2288,6 @@ msgstr "formatimi i disketave flopi, përkrahet nga ky lexues"
 
 #: harddrake2:100
 #, c-format
-msgid "Channel"
-msgstr "Kanal"
-
-#: harddrake2:100
-#, c-format
 msgid "EIDE/SCSI channel"
 msgstr "EIDE/Kanali SCSI"
 
@@ -2635,6 +2511,15 @@ msgstr "/_Zonat përshkuese"
 #, c-format
 msgid "Harddrake help"
 msgstr "Ndihma Harddrake"
+
+#: harddrake2:214
+#, c-format
+msgid ""
+"Description of the fields:\n"
+"\n"
+msgstr ""
+"Përshkrimi i zonave:\n"
+"\n"
 
 #: harddrake2:222
 #, c-format
@@ -3653,6 +3538,134 @@ msgstr "Konfigurimi manuel"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "Rregullimet"
+
+#, fuzzy
+#~ msgid ""
+#~ "Here, you can setup the security level and administrator of your "
+#~ "machine.\n"
+#~ "\n"
+#~ "\n"
+#~ "The '<span weight=\"bold\">Security Administrator</span>' is the one who "
+#~ "will receive security alerts if the\n"
+#~ "'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
+#~ "username or an email.\n"
+#~ "\n"
+#~ "\n"
+#~ "The '<span weight=\"bold\">Security Level</span>' menu allows you to "
+#~ "select one of the six preconfigured security levels\n"
+#~ "provided with msec. These levels range from '<span weight=\"bold\">poor</"
+#~ "span>' security and ease of use, to\n"
+#~ "'<span weight=\"bold\">paranoid</span>' config, suitable for very "
+#~ "sensitive server applications:\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+#~ "very\n"
+#~ "easy to use security level. It should only be used for machines not "
+#~ "connected to\n"
+#~ "any network and that are not accessible to everybody.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+#~ "security\n"
+#~ "recommended for a computer that will be used to connect to the Internet "
+#~ "as a\n"
+#~ "client.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">High</span>: There are already some\n"
+#~ "restrictions, and more automatic checks are run every night.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+#~ "enough\n"
+#~ "to use the system as a server which can accept connections from many "
+#~ "clients. If\n"
+#~ "your machine is only a client on the Internet, you should choose a lower "
+#~ "level.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+#~ "previous\n"
+#~ "level, but the system is entirely closed and security features are at "
+#~ "their\n"
+#~ "maximum"
+#~ msgstr ""
+#~ "Këtu, ju keni mundësi ta rregulloni nivelin e sigurisë dhe të "
+#~ "administratorit në makinë tuaj.\n"
+#~ "\n"
+#~ "\n"
+#~ "Seguria Administrator është ajo a cila do të pranoj alertat e sigurisë "
+#~ "nëse opcioni 'Alertat e Segurisë'\n"
+#~ "është i rregulluar. Që mund të jetë emri i përdoruesit apo emaili.\n"
+#~ "\n"
+#~ "\n"
+#~ "Menyja e Nivelit të Sigurisë mundëson zgjedhjen njërën nga gjashtë të "
+#~ "parakonfiguruarat siguria\n"
+#~ "pajiset me msec. Këto nivele rreshtohen nga siguria e varfër dhe "
+#~ "përdorimi i thjesht, në\n"
+#~ "konfigurim paranojak, tabela vijuese për aplikacione të ndieshme në "
+#~ "servera:\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Varfër</span>: Ky është një nivel tejet i "
+#~ "lehtë dhe i pa sigurt.\n"
+#~ "Duhet të përdoret vetëm me kompjuter që nuk lidhen fare në internet apo\n"
+#~ "në ndonji rrjet tjetër dhe që nuk ka hyrje për përdorues të tjerë.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Standard</span>: Ky është një nivel i "
+#~ "sigurisë standard\n"
+#~ "rekomandohet për kompjuter të cilët lidhen në Internet sikur një\n"
+#~ "klient.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Lartë</span>: Këtu janë veqse disa\n"
+#~ "rregulla, dhe verifikime automatike që nisen gjdo natë.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Më Lartë</span>: Siguria tani është mjaft "
+#~ "e lartë për\n"
+#~ "ta përdorur sistemin tuaj sikur server i cili mund të pranoj lidhje nga "
+#~ "shumë klienta tjerë. Dhe nëse\n"
+#~ "makina e juaj është vetëm një klient në Internet, ju duhet ta zgjedhni "
+#~ "një nivel më të ultë.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Paranojak</span>: Ky është nivel i njëjtë "
+#~ "me nivelin e kaluar,\n"
+#~ "mirëpo ky sistem është i mbyllur kompletisht dhe siguria do të jetë në\n"
+#~ "maksimum"
+
+#~ msgid "(default value: %s)"
+#~ msgstr "(vlerë me marrëveshje: %s)"
+
+#~ msgid "Security Level:"
+#~ msgstr "Niveli i Sigurisë:"
+
+#~ msgid "Security Alerts:"
+#~ msgstr "Siguria e Alarmeve:"
+
+#~ msgid "Security Administrator:"
+#~ msgstr "Siguria e Administratorit:"
+
+#~ msgid "Basic options"
+#~ msgstr "Opcionet Bazë"
+
+#~ msgid "Network Options"
+#~ msgstr "Opcionet e Rrjetit"
+
+#~ msgid "System Options"
+#~ msgstr "Opcionet e Sistemit"
+
+#~ msgid "Periodic Checks"
+#~ msgstr "Verifikime periodike"
+
+#~ msgid "Please wait, setting security level..."
+#~ msgstr "Një moment ju lutemi, konfigurim i nivelit të sigurisë..."
+
+#~ msgid "Please wait, setting security options..."
+#~ msgstr "Një moment ju lutemi, konfigurimi i mundësive të sigurisë..."
 
 #, fuzzy
 #~ msgid ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-16 11:41+0100\n"
+"POT-Creation-Date: 2009-02-13 16:30+0100\n"
 "PO-Revision-Date: 2008-09-30 21:45+0200\n"
 "Last-Translator: Michal Bukovjan <bukm@centrum.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -18,14 +18,14 @@ msgstr ""
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: drakauth:24 drakauth:26 draksec:291 draksec:340
+#: drakauth:24 drakauth:26 draksec:163
 #, c-format
 msgid "Authentication"
 msgstr "Ověření"
 
-#: drakauth:37 drakclock:111 drakclock:125 drakfont:213 drakfont:226
-#: drakfont:264 draksplash:202 finish-install:119 logdrake:170 logdrake:445
-#: logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
+#: drakauth:37 drakclock:111 drakclock:125 drakdvb:72 drakfont:213
+#: drakfont:226 drakfont:264 draksplash:202 finish-install:119 logdrake:170
+#: logdrake:445 logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
 #: scannerdrake:200 scannerdrake:259 scannerdrake:729 scannerdrake:740
 #: scannerdrake:879 scannerdrake:890 scannerdrake:960
 #, c-format
@@ -67,8 +67,8 @@ msgstr "Informativní"
 msgid "Silent"
 msgstr "Tichý"
 
-#: drakboot:137 drakbug:254 drakfont:682 drakperm:376 drakperm:386 drakups:27
-#: harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
+#: drakboot:137 drakbug:254 drakdvb:57 drakfont:682 drakperm:376 drakperm:386
+#: drakups:27 harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
 #: scannerdrake:51 scannerdrake:54 scannerdrake:297 scannerdrake:302
 #: scannerdrake:954
 #, c-format
@@ -309,7 +309,7 @@ msgstr "Měli byste nainstalovat následující balíčky: %s"
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Popište prosím, co jste dělali před havárií:"
 
-#: drakbug:185 drakperm:136 draksec:450 draksec:452 draksec:471 draksec:473
+#: drakbug:185 drakperm:136
 #, c-format
 msgid "Help"
 msgstr "Nápověda"
@@ -348,7 +348,7 @@ msgstr ""
 msgid "Thanks."
 msgstr "Děkujeme."
 
-#: drakclock:30 draksec:346
+#: drakclock:30 draksec:169
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Nastavení data, hodin a časové zóny"
@@ -422,7 +422,7 @@ msgstr "Zadejte prosím platnou adresu NTP serveru."
 msgid "Could not synchronize with %s."
 msgstr "Nelze synchronizovat s %s."
 
-#: drakclock:127 draksplash:125 logdrake:175 scannerdrake:491
+#: drakclock:127 drakdvb:122 draksplash:125 logdrake:175 scannerdrake:491
 #, c-format
 msgid "Quit"
 msgstr "Konec"
@@ -436,6 +436,54 @@ msgstr "Zkusit znovu"
 #, c-format
 msgid "Reset"
 msgstr "Přenastavit"
+
+#: drakdvb:30
+#, fuzzy, c-format
+msgid "DVB"
+msgstr "DVD"
+
+#: drakdvb:39 harddrake2:100
+#, c-format
+msgid "Channel"
+msgstr "Kanál"
+
+#: drakdvb:57
+#, c-format
+msgid "%s already exists and its contents will be lost"
+msgstr ""
+
+#: drakdvb:72
+#, c-format
+msgid "Could not get the list of available channels"
+msgstr ""
+
+#: drakdvb:78 draksec:73 drakups:99 harddrake2:370 scannerdrake:66
+#: scannerdrake:70 scannerdrake:78 scannerdrake:319 scannerdrake:368
+#: scannerdrake:504 scannerdrake:508 scannerdrake:530 service_harddrake:264
+#, c-format
+msgid "Please wait"
+msgstr "Prosím počkejte"
+
+#: drakdvb:82
+#, c-format
+msgid "Detecting DVB channels, this will take a few minutes"
+msgstr ""
+
+#: drakdvb:83 drakfont:572 drakfont:652 drakfont:736 draksplash:213
+#: drakups:217 logdrake:175
+#, c-format
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: drakdvb:121
+#, fuzzy, c-format
+msgid "Detect Channels"
+msgstr "Kanál"
+
+#: drakdvb:123
+#, fuzzy, c-format
+msgid "View Channel"
+msgstr "Kanál"
 
 #: drakedm:41
 #, c-format
@@ -695,18 +743,12 @@ msgstr "Vyberte soubor s písmem nebo adresář a klepněte na 'Přidat'"
 msgid "File Selection"
 msgstr "Výběr souboru"
 
-#: drakfont:572 drakfont:652 drakfont:736 draksplash:213 drakups:217
-#: logdrake:175
-#, c-format
-msgid "Cancel"
-msgstr "Zrušit"
-
 #: drakfont:576
 #, c-format
 msgid "Fonts"
 msgstr "Fonty"
 
-#: drakfont:640 draksec:342
+#: drakfont:640 draksec:165
 #, c-format
 msgid "Import fonts"
 msgstr "Import písem"
@@ -731,12 +773,12 @@ msgstr "Instalace"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "Jste si jisti, že chcete odinstalovat následující písma?"
 
-#: drakfont:688 draksec:59 harddrake2:324
+#: drakfont:688 draksec:60 harddrake2:324
 #, c-format
 msgid "Yes"
 msgstr "Ano"
 
-#: drakfont:690 draksec:58 harddrake2:325
+#: drakfont:690 draksec:59 harddrake2:325
 #, c-format
 msgid "No"
 msgstr "Ne"
@@ -879,7 +921,7 @@ msgstr "Uživatel"
 msgid "Group"
 msgstr "Skupina"
 
-#: drakperm:50 drakperm:109 drakperm:332
+#: drakperm:50 drakperm:109 drakperm:332 draksec:180
 #, c-format
 msgid "Permissions"
 msgstr "Oprávnění"
@@ -1105,325 +1147,170 @@ msgstr "Uživatel: %s"
 msgid "Group: %s"
 msgstr "Skupina: %s"
 
-#: draksec:53
+#: draksec:54
 #, c-format
 msgid "ALL"
 msgstr "OBA"
 
-#: draksec:54
+#: draksec:55
 #, c-format
 msgid "LOCAL"
 msgstr "LOKÁLNÍ"
 
-#: draksec:55
+#: draksec:56
 #, c-format
 msgid "NONE"
 msgstr "ŽÁDNÉ"
 
-#: draksec:56
+#: draksec:57
 #, c-format
 msgid "Default"
 msgstr "Výchozí"
 
-#: draksec:57
+#: draksec:58
 #, c-format
 msgid "Ignore"
 msgstr "Ignorovat"
 
-#: draksec:72 drakups:99 harddrake2:370 scannerdrake:66 scannerdrake:70
-#: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:504
-#: scannerdrake:508 scannerdrake:530 service_harddrake:264
-#, c-format
-msgid "Please wait"
-msgstr "Prosím počkejte"
-
-#. -PO: Do not alter the <span ..> and </span> tags.
-#. -PO: Translate the security levels (Poor, Standard, High, Higher and Paranoid) in the same way, you translated these individuals words.
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX.
-#: draksec:93
-#, c-format
-msgid ""
-"Here, you can setup the security level and administrator of your machine.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Administrator</span>' is the one who "
-"will receive security alerts if the\n"
-"'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
-"username or an email.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Level</span>' menu allows you to select "
-"one of the six preconfigured security levels\n"
-"provided with msec. These levels range from '<span weight=\"bold\">poor</"
-"span>' security and ease of use, to\n"
-"'<span weight=\"bold\">paranoid</span>' config, suitable for very sensitive "
-"server applications:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
-"very\n"
-"easy to use security level. It should only be used for machines not "
-"connected to\n"
-"any network and that are not accessible to everybody.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
-"security\n"
-"recommended for a computer that will be used to connect to the Internet as "
-"a\n"
-"client.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">High</span>: There are already some\n"
-"restrictions, and more automatic checks are run every night.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
-"enough\n"
-"to use the system as a server which can accept connections from many "
-"clients. If\n"
-"your machine is only a client on the Internet, you should choose a lower "
-"level.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
-"previous\n"
-"level, but the system is entirely closed and security features are at their\n"
-"maximum"
-msgstr ""
-"Zde můžete nastavit úroveň zabezpečení a administrátora vašeho systému.\n"
-"\n"
-"\n"
-"'<span weight=\"bold\">Administrátor bezpečnosti</span>' je ten, který\n"
-"dostává bezpečnostní upozornění pokud je zvolena volba\n"
-" '<span weight=\"bold\">Bezpečnostní varování</span>'. Může to být jméno\n"
-"uživatele nebo email adresa.\n"
-"\n"
-"\n"
-"Nabídka s '<span weight=\"bold\">úrovněmi zabezpečení</span>' poskytovaných\n"
-"aplikací msec vám dovoluje si vybrat jednu z šesti přednastavených úrovní.\n"
-"Rozsah úrovní je od '<span weight=\"bold\">minimální</span>' zabezpečení\n"
-"až po '<span weight=\"bold\">paranoidní</span>' zabezpečení, vhodné pro \n"
-"velmi citlivé serverové aplikace:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Slabá</span>: Toto je absolutně "
-"nezabezpečená\n"
-"úroveň. Měla by být použita pouze na těch počítačích, které nejsou "
-"připojeny\n"
-"síti a nemá k nim kdokoliv přístup.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standardní</span>: Standardní doporučená\n"
-"úrovně pro počítače, které jsou připojeny k Internetu jako klient.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Vyšší</span>: Zde jsou už nějaké restrikce\n"
-"a každou noc jsou prováděny automatické kontroly.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Vysoká</span>: Tato úroveň je již vhodná "
-"při\n"
-"použití počítače jako serveru s tím, že s k tomuto počítači připojují další\n"
-"klienti. Pokud je počítač pouze klientem, je vhodnější nižší úroveň.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoidní</span>: Je stejná jako předchozí\n"
-"úroveň s tím, že systém je zcela uzavřen a bezpečnost nastavena na maximum"
-
-#: draksec:147 harddrake2:214
-#, c-format
-msgid ""
-"Description of the fields:\n"
-"\n"
-msgstr ""
-"Popis polí:\n"
-"\n"
-
-#: draksec:161
-#, c-format
-msgid "(default value: %s)"
-msgstr "(výchozí hodnota: %s)"
-
-#: draksec:166
+#: draksec:91
 #, c-format
 msgid "Security Level and Checks"
 msgstr "Úroveň zabezpečení a kontroly"
 
-#: draksec:203
+#: draksec:114
 #, c-format
-msgid "Security Level:"
-msgstr "Úroveň zabezpečení:"
+msgid "Configure authentication required to access Mandriva tools"
+msgstr ""
 
-#: draksec:206
-#, c-format
-msgid "Security Alerts:"
-msgstr "Bezpečnostní varování:"
-
-#: draksec:210
-#, c-format
-msgid "Security Administrator:"
-msgstr "Správce zabezpečení:"
-
-#: draksec:212
-#, c-format
-msgid "Basic options"
-msgstr "Základní volby"
-
-#: draksec:226
-#, c-format
-msgid "Network Options"
-msgstr "Volby sítě"
-
-#: draksec:226
-#, c-format
-msgid "System Options"
-msgstr "Systémové volby"
-
-#: draksec:269
-#, c-format
-msgid "Periodic Checks"
-msgstr "Pravidelné kontroly"
-
-#: draksec:294
+#: draksec:117
 #, c-format
 msgid "No password"
 msgstr "Bez hesla"
 
-#: draksec:295
+#: draksec:118
 #, c-format
 msgid "Root password"
 msgstr "Heslo správce systému"
 
-#: draksec:296
+#: draksec:119
 #, c-format
 msgid "User password"
 msgstr "Heslo uživatele"
 
-#: draksec:326 draksec:372
+#: draksec:149 draksec:203
 #, c-format
 msgid "Software Management"
 msgstr "Správa software"
 
-#: draksec:327
+#: draksec:150
 #, c-format
 msgid "Mandriva Update"
 msgstr "Aktualizace Mandriva"
 
-#: draksec:328
+#: draksec:151
 #, c-format
 msgid "Software Media Manager"
 msgstr "Správce zdrojů software"
 
-#: draksec:329
+#: draksec:152
 #, c-format
 msgid "Configure 3D Desktop effects"
 msgstr "Nastavení trojrozměrných efektů grafického pracovního prostředí"
 
-#: draksec:330
+#: draksec:153
 #, c-format
 msgid "Graphical Server Configuration"
 msgstr "Nastavení grafického serveru"
 
-#: draksec:331
+#: draksec:154
 #, c-format
 msgid "Mouse Configuration"
 msgstr "Nastavení myši"
 
-#: draksec:332
+#: draksec:155
 #, c-format
 msgid "Keyboard Configuration"
 msgstr "Nastavení klávesnice"
 
-#: draksec:333
+#: draksec:156
 #, c-format
 msgid "UPS Configuration"
 msgstr "Nastavení UPS"
 
-#: draksec:334
+#: draksec:157
 #, c-format
 msgid "Network Configuration"
 msgstr "Nastavení sítě"
 
-#: draksec:335
+#: draksec:158
 #, c-format
 msgid "Hosts definitions"
 msgstr "Určení adres počítačů"
 
-#: draksec:336
+#: draksec:159
 #, c-format
 msgid "Network Center"
 msgstr "Správa sítí"
 
-#: draksec:337
+#: draksec:160
 #, c-format
 msgid "VPN"
 msgstr "VPN"
 
-#: draksec:338
+#: draksec:161
 #, c-format
 msgid "Proxy Configuration"
 msgstr "Nastavení proxy"
 
-#: draksec:339
+#: draksec:162
 #, c-format
 msgid "Connection Sharing"
 msgstr "Sdílení připojení"
 
-#: draksec:341
+#: draksec:164
 #, c-format
 msgid "Backups"
 msgstr "Zálohy"
 
-#: draksec:343 logdrake:52
+#: draksec:166 logdrake:52
 #, c-format
 msgid "Logs"
 msgstr "Záznamy"
 
-#: draksec:344
+#: draksec:167
 #, c-format
 msgid "Services"
 msgstr "Služby"
 
-#: draksec:345
+#: draksec:168
 #, c-format
 msgid "Users"
 msgstr "Uživatelé"
 
-#: draksec:347
+#: draksec:170
 #, c-format
 msgid "Boot Configuration"
 msgstr "Nastavení zavádění"
 
-#: draksec:373
+#: draksec:204
 #, c-format
 msgid "Hardware"
 msgstr "Hardware"
 
-#: draksec:374
+#: draksec:205
 #, c-format
 msgid "Network"
 msgstr "Síť"
 
-#: draksec:375
+#: draksec:206
 #, c-format
 msgid "System"
 msgstr "Systém"
 
-#: draksec:376
+#: draksec:207
 #, c-format
 msgid "Boot"
 msgstr "Start počítače"
-
-#: draksec:401
-#, c-format
-msgid "Please wait, setting security level..."
-msgstr "Čekejte prosím, nastavuji úroveň zabezpečení..."
-
-#: draksec:407
-#, c-format
-msgid "Please wait, setting security options..."
-msgstr "Čekejte prosím, nastavuji volby zabezpečení..."
 
 #: draksound:48
 #, c-format
@@ -2412,11 +2299,6 @@ msgstr "Druhy formátu disket podporované mechanikou"
 
 #: harddrake2:100
 #, c-format
-msgid "Channel"
-msgstr "Kanál"
-
-#: harddrake2:100
-#, c-format
 msgid "EIDE/SCSI channel"
 msgstr "Kanál EIDE/SCSI"
 
@@ -2644,6 +2526,15 @@ msgstr "/_Popis položek"
 #, c-format
 msgid "Harddrake help"
 msgstr "Nápověda pro HardDrake"
+
+#: harddrake2:214
+#, c-format
+msgid ""
+"Description of the fields:\n"
+"\n"
+msgstr ""
+"Popis polí:\n"
+"\n"
 
 #: harddrake2:222
 #, c-format
@@ -3677,3 +3568,129 @@ msgstr "Nastavení jazyka a země"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Regionální nastavení"
+
+#~ msgid ""
+#~ "Here, you can setup the security level and administrator of your "
+#~ "machine.\n"
+#~ "\n"
+#~ "\n"
+#~ "The '<span weight=\"bold\">Security Administrator</span>' is the one who "
+#~ "will receive security alerts if the\n"
+#~ "'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
+#~ "username or an email.\n"
+#~ "\n"
+#~ "\n"
+#~ "The '<span weight=\"bold\">Security Level</span>' menu allows you to "
+#~ "select one of the six preconfigured security levels\n"
+#~ "provided with msec. These levels range from '<span weight=\"bold\">poor</"
+#~ "span>' security and ease of use, to\n"
+#~ "'<span weight=\"bold\">paranoid</span>' config, suitable for very "
+#~ "sensitive server applications:\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+#~ "very\n"
+#~ "easy to use security level. It should only be used for machines not "
+#~ "connected to\n"
+#~ "any network and that are not accessible to everybody.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+#~ "security\n"
+#~ "recommended for a computer that will be used to connect to the Internet "
+#~ "as a\n"
+#~ "client.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">High</span>: There are already some\n"
+#~ "restrictions, and more automatic checks are run every night.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+#~ "enough\n"
+#~ "to use the system as a server which can accept connections from many "
+#~ "clients. If\n"
+#~ "your machine is only a client on the Internet, you should choose a lower "
+#~ "level.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+#~ "previous\n"
+#~ "level, but the system is entirely closed and security features are at "
+#~ "their\n"
+#~ "maximum"
+#~ msgstr ""
+#~ "Zde můžete nastavit úroveň zabezpečení a administrátora vašeho systému.\n"
+#~ "\n"
+#~ "\n"
+#~ "'<span weight=\"bold\">Administrátor bezpečnosti</span>' je ten, který\n"
+#~ "dostává bezpečnostní upozornění pokud je zvolena volba\n"
+#~ " '<span weight=\"bold\">Bezpečnostní varování</span>'. Může to být jméno\n"
+#~ "uživatele nebo email adresa.\n"
+#~ "\n"
+#~ "\n"
+#~ "Nabídka s '<span weight=\"bold\">úrovněmi zabezpečení</span>' "
+#~ "poskytovaných\n"
+#~ "aplikací msec vám dovoluje si vybrat jednu z šesti přednastavených "
+#~ "úrovní.\n"
+#~ "Rozsah úrovní je od '<span weight=\"bold\">minimální</span>' zabezpečení\n"
+#~ "až po '<span weight=\"bold\">paranoidní</span>' zabezpečení, vhodné pro \n"
+#~ "velmi citlivé serverové aplikace:\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Slabá</span>: Toto je absolutně "
+#~ "nezabezpečená\n"
+#~ "úroveň. Měla by být použita pouze na těch počítačích, které nejsou "
+#~ "připojeny\n"
+#~ "síti a nemá k nim kdokoliv přístup.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Standardní</span>: Standardní doporučená\n"
+#~ "úrovně pro počítače, které jsou připojeny k Internetu jako klient.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Vyšší</span>: Zde jsou už nějaké "
+#~ "restrikce\n"
+#~ "a každou noc jsou prováděny automatické kontroly.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Vysoká</span>: Tato úroveň je již vhodná "
+#~ "při\n"
+#~ "použití počítače jako serveru s tím, že s k tomuto počítači připojují "
+#~ "další\n"
+#~ "klienti. Pokud je počítač pouze klientem, je vhodnější nižší úroveň.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Paranoidní</span>: Je stejná jako "
+#~ "předchozí\n"
+#~ "úroveň s tím, že systém je zcela uzavřen a bezpečnost nastavena na maximum"
+
+#~ msgid "(default value: %s)"
+#~ msgstr "(výchozí hodnota: %s)"
+
+#~ msgid "Security Level:"
+#~ msgstr "Úroveň zabezpečení:"
+
+#~ msgid "Security Alerts:"
+#~ msgstr "Bezpečnostní varování:"
+
+#~ msgid "Security Administrator:"
+#~ msgstr "Správce zabezpečení:"
+
+#~ msgid "Basic options"
+#~ msgstr "Základní volby"
+
+#~ msgid "Network Options"
+#~ msgstr "Volby sítě"
+
+#~ msgid "System Options"
+#~ msgstr "Systémové volby"
+
+#~ msgid "Periodic Checks"
+#~ msgstr "Pravidelné kontroly"
+
+#~ msgid "Please wait, setting security level..."
+#~ msgstr "Čekejte prosím, nastavuji úroveň zabezpečení..."
+
+#~ msgid "Please wait, setting security options..."
+#~ msgstr "Čekejte prosím, nastavuji volby zabezpečení..."

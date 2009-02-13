@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 10.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-16 11:41+0100\n"
+"POT-Creation-Date: 2009-02-13 16:30+0100\n"
 "PO-Revision-Date: 2008-02-23 16:11+0100\n"
 "Last-Translator: Thierry Vignaud <tvignaud@mandriva.com>\n"
 "Language-Team: Brezhoneg <ofisk@wanadoo.fr>\n"
@@ -16,14 +16,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1;plural=0\n"
 
-#: drakauth:24 drakauth:26 draksec:291 draksec:340
+#: drakauth:24 drakauth:26 draksec:163
 #, c-format
 msgid "Authentication"
 msgstr "Dilesadur"
 
-#: drakauth:37 drakclock:111 drakclock:125 drakfont:213 drakfont:226
-#: drakfont:264 draksplash:202 finish-install:119 logdrake:170 logdrake:445
-#: logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
+#: drakauth:37 drakclock:111 drakclock:125 drakdvb:72 drakfont:213
+#: drakfont:226 drakfont:264 draksplash:202 finish-install:119 logdrake:170
+#: logdrake:445 logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
 #: scannerdrake:200 scannerdrake:259 scannerdrake:729 scannerdrake:740
 #: scannerdrake:879 scannerdrake:890 scannerdrake:960
 #, c-format
@@ -65,8 +65,8 @@ msgstr "Flapañ"
 msgid "Silent"
 msgstr "Didrouz"
 
-#: drakboot:137 drakbug:254 drakfont:682 drakperm:376 drakperm:386 drakups:27
-#: harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
+#: drakboot:137 drakbug:254 drakdvb:57 drakfont:682 drakperm:376 drakperm:386
+#: drakups:27 harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
 #: scannerdrake:51 scannerdrake:54 scannerdrake:297 scannerdrake:302
 #: scannerdrake:954
 #, c-format
@@ -295,7 +295,7 @@ msgid "Please describe what you were doing when it crashed:"
 msgstr ""
 "Skrivit ar pezh e oac'h oc'h ober pa eo bet c'hoarvezhet ar gwallzarvoud :"
 
-#: drakbug:185 drakperm:136 draksec:450 draksec:452 draksec:471 draksec:473
+#: drakbug:185 drakperm:136
 #, c-format
 msgid "Help"
 msgstr "Skoazell"
@@ -332,7 +332,7 @@ msgstr ""
 msgid "Thanks."
 msgstr "Mersi bras deoc'h."
 
-#: drakclock:30 draksec:346
+#: drakclock:30 draksec:169
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Kefluniadur an deizid, an eurier hag an amzer"
@@ -406,7 +406,7 @@ msgstr "Roit ur chomlec'h mat evit ar servijer NTP mar plij."
 msgid "Could not synchronize with %s."
 msgstr ""
 
-#: drakclock:127 draksplash:125 logdrake:175 scannerdrake:491
+#: drakclock:127 drakdvb:122 draksplash:125 logdrake:175 scannerdrake:491
 #, c-format
 msgid "Quit"
 msgstr "Kuitaat"
@@ -420,6 +420,54 @@ msgstr "Adklask"
 #, c-format
 msgid "Reset"
 msgstr "Deraouekaat"
+
+#: drakdvb:30
+#, fuzzy, c-format
+msgid "DVB"
+msgstr "DVD"
+
+#: drakdvb:39 harddrake2:100
+#, c-format
+msgid "Channel"
+msgstr "Kanol"
+
+#: drakdvb:57
+#, c-format
+msgid "%s already exists and its contents will be lost"
+msgstr ""
+
+#: drakdvb:72
+#, c-format
+msgid "Could not get the list of available channels"
+msgstr ""
+
+#: drakdvb:78 draksec:73 drakups:99 harddrake2:370 scannerdrake:66
+#: scannerdrake:70 scannerdrake:78 scannerdrake:319 scannerdrake:368
+#: scannerdrake:504 scannerdrake:508 scannerdrake:530 service_harddrake:264
+#, c-format
+msgid "Please wait"
+msgstr "Gortozit mar plij"
+
+#: drakdvb:82
+#, c-format
+msgid "Detecting DVB channels, this will take a few minutes"
+msgstr ""
+
+#: drakdvb:83 drakfont:572 drakfont:652 drakfont:736 draksplash:213
+#: drakups:217 logdrake:175
+#, c-format
+msgid "Cancel"
+msgstr "Nullañ"
+
+#: drakdvb:121
+#, fuzzy, c-format
+msgid "Detect Channels"
+msgstr "Kanol"
+
+#: drakdvb:123
+#, fuzzy, c-format
+msgid "View Channel"
+msgstr "Kanol"
 
 #: drakedm:41
 #, c-format
@@ -671,18 +719,12 @@ msgstr "Dibabit restr pe renkell an nodrezh ha klikit ouzh « Ouzhpennañ »"
 msgid "File Selection"
 msgstr "Choazh ar restr"
 
-#: drakfont:572 drakfont:652 drakfont:736 draksplash:213 drakups:217
-#: logdrake:175
-#, c-format
-msgid "Cancel"
-msgstr "Nullañ"
-
 #: drakfont:576
 #, c-format
 msgid "Fonts"
 msgstr "Nodrezhoù"
 
-#: drakfont:640 draksec:342
+#: drakfont:640 draksec:165
 #, c-format
 msgid "Import fonts"
 msgstr "Enporzh an nodrezhoù"
@@ -707,12 +749,12 @@ msgstr "Staliañ"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "Ha sur oc'h bezañ mennet da zistaliañ an nodezhoù a-heul ?"
 
-#: drakfont:688 draksec:59 harddrake2:324
+#: drakfont:688 draksec:60 harddrake2:324
 #, c-format
 msgid "Yes"
 msgstr "Ya"
 
-#: drakfont:690 draksec:58 harddrake2:325
+#: drakfont:690 draksec:59 harddrake2:325
 #, c-format
 msgid "No"
 msgstr "N'eo ket"
@@ -852,7 +894,7 @@ msgstr "Arveriad"
 msgid "Group"
 msgstr "Strollad"
 
-#: drakperm:50 drakperm:109 drakperm:332
+#: drakperm:50 drakperm:109 drakperm:332 draksec:180
 #, c-format
 msgid "Permissions"
 msgstr "Aotreoù "
@@ -1071,326 +1113,170 @@ msgstr "Arveriad : %s"
 msgid "Group: %s"
 msgstr "Strollad : %s"
 
-#: draksec:53
+#: draksec:54
 #, c-format
 msgid "ALL"
 msgstr "HOLL"
 
-#: draksec:54
+#: draksec:55
 #, c-format
 msgid "LOCAL"
 msgstr "LEC'HEL"
 
-#: draksec:55
+#: draksec:56
 #, c-format
 msgid "NONE"
 msgstr "EBET"
 
-#: draksec:56
+#: draksec:57
 #, c-format
 msgid "Default"
 msgstr "Dre ziouer"
 
-#: draksec:57
+#: draksec:58
 #, c-format
 msgid "Ignore"
 msgstr "Tremen e-biou"
 
-#: draksec:72 drakups:99 harddrake2:370 scannerdrake:66 scannerdrake:70
-#: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:504
-#: scannerdrake:508 scannerdrake:530 service_harddrake:264
-#, c-format
-msgid "Please wait"
-msgstr "Gortozit mar plij"
-
-#. -PO: Do not alter the <span ..> and </span> tags.
-#. -PO: Translate the security levels (Poor, Standard, High, Higher and Paranoid) in the same way, you translated these individuals words.
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX.
-#: draksec:93
-#, c-format
-msgid ""
-"Here, you can setup the security level and administrator of your machine.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Administrator</span>' is the one who "
-"will receive security alerts if the\n"
-"'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
-"username or an email.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Level</span>' menu allows you to select "
-"one of the six preconfigured security levels\n"
-"provided with msec. These levels range from '<span weight=\"bold\">poor</"
-"span>' security and ease of use, to\n"
-"'<span weight=\"bold\">paranoid</span>' config, suitable for very sensitive "
-"server applications:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
-"very\n"
-"easy to use security level. It should only be used for machines not "
-"connected to\n"
-"any network and that are not accessible to everybody.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
-"security\n"
-"recommended for a computer that will be used to connect to the Internet as "
-"a\n"
-"client.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">High</span>: There are already some\n"
-"restrictions, and more automatic checks are run every night.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
-"enough\n"
-"to use the system as a server which can accept connections from many "
-"clients. If\n"
-"your machine is only a client on the Internet, you should choose a lower "
-"level.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
-"previous\n"
-"level, but the system is entirely closed and security features are at their\n"
-"maximum"
-msgstr ""
-"Amañ e c'hellit kefluniañ al live surantez hag melestradur an surentez\n"
-"hoc'h urziataer.\n"
-"\n"
-"\n"
-"Ar « Melestradur an surentez » a vo o resev posteloù surantez ma vez\n"
-"bev an dibarzh « <span weight=\"bold\">Posteloù surantez</span> ». Un\n"
-"anv arveriad pe ur chomlec'h postel e c'hell bezañ.\n"
-"\n"
-"\n"
-"Gant ar meuziad « <span weight=\"bold\">Live surantez</span> », moaien\n"
-"eo dibab unan eus ar c'hwec'h live surantez hag a zo pourvezet. Etre\n"
-"« <span weight=\"bold\">Paour</span> » hag « <span\n"
-"weight=\"bold\">Ankeniet</span> » eo al live surantez. Aes da implij eo\n"
-"« Paour ». Evit ar servijerien eo « Ankeniet ».\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paour</span> : N'eo ket surantezet ar\n"
-"reizhiat met aez da implij eo gant al live-surantez-mañ. Gwell deoc'h\n"
-"implij kement-mañ evit un urzhiatazer hag na vez ket ouzh ur rouedad.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Skouer</span> : Setu al live surentez\n"
-"standard a vez erbedet evit un urzhiataer a vo implijet evit kevreañ\n"
-"evel kliant ouzh ar Genrouedad.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Uhel</span> : Bremañ ez eus gwiriadennoù\n"
-"surentez hag a zo sevenet d'an noz.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Uheloc'h</span> : Uhel a-walc'h eo\n"
-"bremañ ar surentez evit implijout ar reizhiad evel ur servijer o\n"
-"tigemer kevreadennoù a-berzh kliantoù niverus. Ma vez ur c'hliant\n"
-"kenrouedad hepken, neuze e vefe moarvat gwelloc'h deoc'h dibab ul live\n"
-"izeloc'h.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Ankeniet</span> : Kemer a reomp\n"
-"arc'hweloù al live diaraok, hogen bremañ eo peurserret ar reizhiad hag\n"
-"an arc'hweloù surentez zo en o muiañ."
-
-#: draksec:147 harddrake2:214
-#, c-format
-msgid ""
-"Description of the fields:\n"
-"\n"
-msgstr ""
-"Deskrivadur an tachennoù :\n"
-"\n"
-
-#: draksec:161
-#, c-format
-msgid "(default value: %s)"
-msgstr "(gwerzh dre ziouer : %s)"
-
-#: draksec:166
+#: draksec:91
 #, c-format
 msgid "Security Level and Checks"
 msgstr "Live ha gwiriekaat surentez"
 
-#: draksec:203
+#: draksec:114
 #, c-format
-msgid "Security Level:"
-msgstr "Live Surentez :"
-
-#: draksec:206
-#, c-format
-msgid "Security Alerts:"
-msgstr "Posteloù surantez :"
-
-#: draksec:210
-#, c-format
-msgid "Security Administrator:"
-msgstr "Merour surentez :"
-
-#: draksec:212
-#, c-format
-msgid "Basic options"
-msgstr "Dibarzhoù diazeg"
-
-#: draksec:226
-#, c-format
-msgid "Network Options"
-msgstr "Dibarzhoù ar rouedad"
-
-#: draksec:226
-#, c-format
-msgid "System Options"
-msgstr "Dibarzhoù ar reizhiad"
-
-#: draksec:269
-#, c-format
-msgid "Periodic Checks"
+msgid "Configure authentication required to access Mandriva tools"
 msgstr ""
 
-#: draksec:294
+#: draksec:117
 #, c-format
 msgid "No password"
 msgstr "Tremenger ebet"
 
-#: draksec:295
+#: draksec:118
 #, c-format
 msgid "Root password"
 msgstr "Tremenger root"
 
-#: draksec:296
+#: draksec:119
 #, c-format
 msgid "User password"
 msgstr "Tremenger an arveriad"
 
-#: draksec:326 draksec:372
+#: draksec:149 draksec:203
 #, c-format
 msgid "Software Management"
 msgstr "Merour ar meziantoù"
 
-#: draksec:327
+#: draksec:150
 #, c-format
 msgid "Mandriva Update"
 msgstr "Mandriva Update"
 
-#: draksec:328
+#: draksec:151
 #, c-format
 msgid "Software Media Manager"
 msgstr "Merour ar pakadoù"
 
-#: draksec:329
+#: draksec:152
 #, c-format
 msgid "Configure 3D Desktop effects"
 msgstr "Kefluniañ efedoù ar vurev 3D"
 
-#: draksec:330
+#: draksec:153
 #, c-format
 msgid "Graphical Server Configuration"
 msgstr "Kefluniadur ar servijer graphek"
 
-#: draksec:331
+#: draksec:154
 #, c-format
 msgid "Mouse Configuration"
 msgstr "Kefluniadur logod"
 
-#: draksec:332
+#: draksec:155
 #, c-format
 msgid "Keyboard Configuration"
 msgstr "Kefluniadur ar stokellaoueg"
 
-#: draksec:333
+#: draksec:156
 #, c-format
 msgid "UPS Configuration"
 msgstr "Kefluniadur UPS"
 
-#: draksec:334
+#: draksec:157
 #, c-format
 msgid "Network Configuration"
 msgstr "Kefluniadur an rouedad"
 
-#: draksec:335
+#: draksec:158
 #, c-format
 msgid "Hosts definitions"
 msgstr "Liketennoù ostiz"
 
-#: draksec:336
+#: draksec:159
 #, c-format
 msgid "Network Center"
 msgstr "Kreizenn ren rouedad"
 
-#: draksec:337
+#: draksec:160
 #, c-format
 msgid "VPN"
 msgstr "VPN"
 
-#: draksec:338
+#: draksec:161
 #, c-format
 msgid "Proxy Configuration"
 msgstr "Kefluniadur ar proksi"
 
-#: draksec:339
+#: draksec:162
 #, c-format
 msgid "Connection Sharing"
 msgstr "Rannañ ar gevreadenn"
 
-#: draksec:341
+#: draksec:164
 #, c-format
 msgid "Backups"
 msgstr "Dielloù"
 
-#: draksec:343 logdrake:52
+#: draksec:166 logdrake:52
 #, c-format
 msgid "Logs"
 msgstr "Kazetennoù"
 
-#: draksec:344
+#: draksec:167
 #, c-format
 msgid "Services"
 msgstr "Servijerioù"
 
-#: draksec:345
+#: draksec:168
 #, c-format
 msgid "Users"
 msgstr "Arveriaded"
 
-#: draksec:347
+#: draksec:170
 #, c-format
 msgid "Boot Configuration"
 msgstr "Kefluniadur loc'hañ"
 
-#: draksec:373
+#: draksec:204
 #, c-format
 msgid "Hardware"
 msgstr "Periantel"
 
-#: draksec:374
+#: draksec:205
 #, c-format
 msgid "Network"
 msgstr "Rouedad"
 
-#: draksec:375
+#: draksec:206
 #, c-format
 msgid "System"
 msgstr "Reizhiad"
 
-#: draksec:376
+#: draksec:207
 #, c-format
 msgid "Boot"
 msgstr "Loc'hañ"
-
-#: draksec:401
-#, c-format
-msgid "Please wait, setting security level..."
-msgstr "O lakaat al live surentez, gortoz mar plij ..."
-
-#: draksec:407
-#, c-format
-msgid "Please wait, setting security options..."
-msgstr "O lakaat an dibarzhoù surentez, gortoz mar plij ..."
 
 #: draksound:48
 #, c-format
@@ -2323,11 +2209,6 @@ msgstr ""
 
 #: harddrake2:100
 #, c-format
-msgid "Channel"
-msgstr "Kanol"
-
-#: harddrake2:100
-#, c-format
 msgid "EIDE/SCSI channel"
 msgstr "Kanol EIDE/SCSI"
 
@@ -2551,6 +2432,15 @@ msgstr "/Deskrivadur an _tachennoù"
 #, c-format
 msgid "Harddrake help"
 msgstr "Skoazell Harddrake"
+
+#: harddrake2:214
+#, c-format
+msgid ""
+"Description of the fields:\n"
+"\n"
+msgstr ""
+"Deskrivadur an tachennoù :\n"
+"\n"
 
 #: harddrake2:222
 #, c-format
@@ -3534,6 +3424,125 @@ msgstr "Kefluniadur ar yezh hag ar vro"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Dibarzhoù lec'hel"
+
+#~ msgid ""
+#~ "Here, you can setup the security level and administrator of your "
+#~ "machine.\n"
+#~ "\n"
+#~ "\n"
+#~ "The '<span weight=\"bold\">Security Administrator</span>' is the one who "
+#~ "will receive security alerts if the\n"
+#~ "'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
+#~ "username or an email.\n"
+#~ "\n"
+#~ "\n"
+#~ "The '<span weight=\"bold\">Security Level</span>' menu allows you to "
+#~ "select one of the six preconfigured security levels\n"
+#~ "provided with msec. These levels range from '<span weight=\"bold\">poor</"
+#~ "span>' security and ease of use, to\n"
+#~ "'<span weight=\"bold\">paranoid</span>' config, suitable for very "
+#~ "sensitive server applications:\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+#~ "very\n"
+#~ "easy to use security level. It should only be used for machines not "
+#~ "connected to\n"
+#~ "any network and that are not accessible to everybody.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+#~ "security\n"
+#~ "recommended for a computer that will be used to connect to the Internet "
+#~ "as a\n"
+#~ "client.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">High</span>: There are already some\n"
+#~ "restrictions, and more automatic checks are run every night.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+#~ "enough\n"
+#~ "to use the system as a server which can accept connections from many "
+#~ "clients. If\n"
+#~ "your machine is only a client on the Internet, you should choose a lower "
+#~ "level.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+#~ "previous\n"
+#~ "level, but the system is entirely closed and security features are at "
+#~ "their\n"
+#~ "maximum"
+#~ msgstr ""
+#~ "Amañ e c'hellit kefluniañ al live surantez hag melestradur an surentez\n"
+#~ "hoc'h urziataer.\n"
+#~ "\n"
+#~ "\n"
+#~ "Ar « Melestradur an surentez » a vo o resev posteloù surantez ma vez\n"
+#~ "bev an dibarzh « <span weight=\"bold\">Posteloù surantez</span> ». Un\n"
+#~ "anv arveriad pe ur chomlec'h postel e c'hell bezañ.\n"
+#~ "\n"
+#~ "\n"
+#~ "Gant ar meuziad « <span weight=\"bold\">Live surantez</span> », moaien\n"
+#~ "eo dibab unan eus ar c'hwec'h live surantez hag a zo pourvezet. Etre\n"
+#~ "« <span weight=\"bold\">Paour</span> » hag « <span\n"
+#~ "weight=\"bold\">Ankeniet</span> » eo al live surantez. Aes da implij eo\n"
+#~ "« Paour ». Evit ar servijerien eo « Ankeniet ».\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Paour</span> : N'eo ket surantezet ar\n"
+#~ "reizhiat met aez da implij eo gant al live-surantez-mañ. Gwell deoc'h\n"
+#~ "implij kement-mañ evit un urzhiatazer hag na vez ket ouzh ur rouedad.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Skouer</span> : Setu al live surentez\n"
+#~ "standard a vez erbedet evit un urzhiataer a vo implijet evit kevreañ\n"
+#~ "evel kliant ouzh ar Genrouedad.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Uhel</span> : Bremañ ez eus gwiriadennoù\n"
+#~ "surentez hag a zo sevenet d'an noz.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Uheloc'h</span> : Uhel a-walc'h eo\n"
+#~ "bremañ ar surentez evit implijout ar reizhiad evel ur servijer o\n"
+#~ "tigemer kevreadennoù a-berzh kliantoù niverus. Ma vez ur c'hliant\n"
+#~ "kenrouedad hepken, neuze e vefe moarvat gwelloc'h deoc'h dibab ul live\n"
+#~ "izeloc'h.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Ankeniet</span> : Kemer a reomp\n"
+#~ "arc'hweloù al live diaraok, hogen bremañ eo peurserret ar reizhiad hag\n"
+#~ "an arc'hweloù surentez zo en o muiañ."
+
+#~ msgid "(default value: %s)"
+#~ msgstr "(gwerzh dre ziouer : %s)"
+
+#~ msgid "Security Level:"
+#~ msgstr "Live Surentez :"
+
+#~ msgid "Security Alerts:"
+#~ msgstr "Posteloù surantez :"
+
+#~ msgid "Security Administrator:"
+#~ msgstr "Merour surentez :"
+
+#~ msgid "Basic options"
+#~ msgstr "Dibarzhoù diazeg"
+
+#~ msgid "Network Options"
+#~ msgstr "Dibarzhoù ar rouedad"
+
+#~ msgid "System Options"
+#~ msgstr "Dibarzhoù ar reizhiad"
+
+#~ msgid "Please wait, setting security level..."
+#~ msgstr "O lakaat al live surentez, gortoz mar plij ..."
+
+#~ msgid "Please wait, setting security options..."
+#~ msgstr "O lakaat an dibarzhoù surentez, gortoz mar plij ..."
 
 #, fuzzy
 #~ msgid ""

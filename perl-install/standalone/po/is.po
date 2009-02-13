@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-16 11:41+0100\n"
+"POT-Creation-Date: 2009-02-13 16:30+0100\n"
 "PO-Revision-Date: 2008-02-18 17:45+0000\n"
 "Last-Translator: Pjetur G. Hjaltason <pjetur@pjetur.net>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
@@ -21,14 +21,14 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: drakauth:24 drakauth:26 draksec:291 draksec:340
+#: drakauth:24 drakauth:26 draksec:163
 #, c-format
 msgid "Authentication"
 msgstr "Auðkenning"
 
-#: drakauth:37 drakclock:111 drakclock:125 drakfont:213 drakfont:226
-#: drakfont:264 draksplash:202 finish-install:119 logdrake:170 logdrake:445
-#: logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
+#: drakauth:37 drakclock:111 drakclock:125 drakdvb:72 drakfont:213
+#: drakfont:226 drakfont:264 draksplash:202 finish-install:119 logdrake:170
+#: logdrake:445 logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
 #: scannerdrake:200 scannerdrake:259 scannerdrake:729 scannerdrake:740
 #: scannerdrake:879 scannerdrake:890 scannerdrake:960
 #, c-format
@@ -70,8 +70,8 @@ msgstr "Mælskt"
 msgid "Silent"
 msgstr "þögult"
 
-#: drakboot:137 drakbug:254 drakfont:682 drakperm:376 drakperm:386 drakups:27
-#: harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
+#: drakboot:137 drakbug:254 drakdvb:57 drakfont:682 drakperm:376 drakperm:386
+#: drakups:27 harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
 #: scannerdrake:51 scannerdrake:54 scannerdrake:297 scannerdrake:302
 #: scannerdrake:954
 #, c-format
@@ -312,7 +312,7 @@ msgid "Please describe what you were doing when it crashed:"
 msgstr ""
 "Vinsamlega lýstu hvað þú varst að gera þegar forritið hrundi (á ensku):"
 
-#: drakbug:185 drakperm:136 draksec:450 draksec:452 draksec:471 draksec:473
+#: drakbug:185 drakperm:136
 #, c-format
 msgid "Help"
 msgstr "Hjálp"
@@ -352,7 +352,7 @@ msgstr ""
 msgid "Thanks."
 msgstr "Takk."
 
-#: drakclock:30 draksec:346
+#: drakclock:30 draksec:169
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Dagsetning, Tími og tímabelti"
@@ -426,7 +426,7 @@ msgstr "Gefðu upp gilt vistfang NTP miðlara."
 msgid "Could not synchronize with %s."
 msgstr "Gat ekki samstillt við %s."
 
-#: drakclock:127 draksplash:125 logdrake:175 scannerdrake:491
+#: drakclock:127 drakdvb:122 draksplash:125 logdrake:175 scannerdrake:491
 #, c-format
 msgid "Quit"
 msgstr "Hætta"
@@ -440,6 +440,54 @@ msgstr "Reyna aftur"
 #, c-format
 msgid "Reset"
 msgstr "Frumstilla"
+
+#: drakdvb:30
+#, fuzzy, c-format
+msgid "DVB"
+msgstr "DVD"
+
+#: drakdvb:39 harddrake2:100
+#, c-format
+msgid "Channel"
+msgstr "Rás"
+
+#: drakdvb:57
+#, c-format
+msgid "%s already exists and its contents will be lost"
+msgstr ""
+
+#: drakdvb:72
+#, c-format
+msgid "Could not get the list of available channels"
+msgstr ""
+
+#: drakdvb:78 draksec:73 drakups:99 harddrake2:370 scannerdrake:66
+#: scannerdrake:70 scannerdrake:78 scannerdrake:319 scannerdrake:368
+#: scannerdrake:504 scannerdrake:508 scannerdrake:530 service_harddrake:264
+#, c-format
+msgid "Please wait"
+msgstr "Augnablik"
+
+#: drakdvb:82
+#, c-format
+msgid "Detecting DVB channels, this will take a few minutes"
+msgstr ""
+
+#: drakdvb:83 drakfont:572 drakfont:652 drakfont:736 draksplash:213
+#: drakups:217 logdrake:175
+#, c-format
+msgid "Cancel"
+msgstr "Hætta við"
+
+#: drakdvb:121
+#, fuzzy, c-format
+msgid "Detect Channels"
+msgstr "Rás"
+
+#: drakdvb:123
+#, fuzzy, c-format
+msgid "View Channel"
+msgstr "Rás"
 
 #: drakedm:41
 #, c-format
@@ -700,18 +748,12 @@ msgstr "Veldu leturskrá eða möppu og smelltu á 'Bæta við'"
 msgid "File Selection"
 msgstr "Skráaval"
 
-#: drakfont:572 drakfont:652 drakfont:736 draksplash:213 drakups:217
-#: logdrake:175
-#, c-format
-msgid "Cancel"
-msgstr "Hætta við"
-
 #: drakfont:576
 #, c-format
 msgid "Fonts"
 msgstr "Letur"
 
-#: drakfont:640 draksec:342
+#: drakfont:640 draksec:165
 #, c-format
 msgid "Import fonts"
 msgstr "Flytja inn letur"
@@ -736,12 +778,12 @@ msgstr "Setja inn"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "Ert þú viss um að þú viljir fjarlægja eftirfarandi leturgerðir?"
 
-#: drakfont:688 draksec:59 harddrake2:324
+#: drakfont:688 draksec:60 harddrake2:324
 #, c-format
 msgid "Yes"
 msgstr "Já"
 
-#: drakfont:690 draksec:58 harddrake2:325
+#: drakfont:690 draksec:59 harddrake2:325
 #, c-format
 msgid "No"
 msgstr "Nei"
@@ -884,7 +926,7 @@ msgstr "Notandi"
 msgid "Group"
 msgstr "Hópur"
 
-#: drakperm:50 drakperm:109 drakperm:332
+#: drakperm:50 drakperm:109 drakperm:332 draksec:180
 #, c-format
 msgid "Permissions"
 msgstr "Aðgangsheimildir"
@@ -1110,326 +1152,170 @@ msgstr "Notandi: %s"
 msgid "Group: %s"
 msgstr "Hópur:%s"
 
-#: draksec:53
+#: draksec:54
 #, c-format
 msgid "ALL"
 msgstr "ALLT"
 
-#: draksec:54
+#: draksec:55
 #, c-format
 msgid "LOCAL"
 msgstr "STAÐBUNDIÐ"
 
-#: draksec:55
+#: draksec:56
 #, c-format
 msgid "NONE"
 msgstr "ENGAR"
 
-#: draksec:56
+#: draksec:57
 #, c-format
 msgid "Default"
 msgstr "Sjálfgefið"
 
-#: draksec:57
+#: draksec:58
 #, c-format
 msgid "Ignore"
 msgstr "Hunsa"
 
-#: draksec:72 drakups:99 harddrake2:370 scannerdrake:66 scannerdrake:70
-#: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:504
-#: scannerdrake:508 scannerdrake:530 service_harddrake:264
-#, c-format
-msgid "Please wait"
-msgstr "Augnablik"
-
-#. -PO: Do not alter the <span ..> and </span> tags.
-#. -PO: Translate the security levels (Poor, Standard, High, Higher and Paranoid) in the same way, you translated these individuals words.
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX.
-#: draksec:93
-#, c-format
-msgid ""
-"Here, you can setup the security level and administrator of your machine.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Administrator</span>' is the one who "
-"will receive security alerts if the\n"
-"'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
-"username or an email.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Level</span>' menu allows you to select "
-"one of the six preconfigured security levels\n"
-"provided with msec. These levels range from '<span weight=\"bold\">poor</"
-"span>' security and ease of use, to\n"
-"'<span weight=\"bold\">paranoid</span>' config, suitable for very sensitive "
-"server applications:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
-"very\n"
-"easy to use security level. It should only be used for machines not "
-"connected to\n"
-"any network and that are not accessible to everybody.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
-"security\n"
-"recommended for a computer that will be used to connect to the Internet as "
-"a\n"
-"client.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">High</span>: There are already some\n"
-"restrictions, and more automatic checks are run every night.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
-"enough\n"
-"to use the system as a server which can accept connections from many "
-"clients. If\n"
-"your machine is only a client on the Internet, you should choose a lower "
-"level.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
-"previous\n"
-"level, but the system is entirely closed and security features are at their\n"
-"maximum"
-msgstr ""
-"Hér, getur þú sett upp öryggisþrep og skilgreint kerfisstjóra vélarinnar "
-"þinnar.\n"
-"\n"
-"\n"
-"'<span weight=\"bold\">Öryggisstjóri</span>' er sá sem fær öryggisviðvaranir "
-"sendar ef\n"
-"'<span weight=\"bold\">Öryggisviðvaranir</span>' valkosturinn er settur. það "
-"getur verið notendanafn eða netfang.\n"
-"\n"
-"\n"
-"'<span weight=\"bold\">Öryggisþrep</span>' valseðillinn leyfir þér að velja "
-"eitt af sex forstilltum öryggisþrepum\n"
-"sem fyrlgja með msec. þessi þrep spanna frá '<span weight=\"bold\">lélegt</"
-"span>' öryggi og auðveld notkun, til\n"
-"'<span weight=\"bold\">ofsóknaræði</span>' stillingana, sem eru hæfar fyrir "
-"viðkvæmar miðlarauppsetningar:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Lélegt</span>: Þetta er algerlega óöruggt en "
-"mjög\n"
-"einfalt öryggisþrep í notkun. Það ætti aðeins að nota við vélar sem eru ekki "
-"tengdar við neitt net og eru ekki aðgengilegar almenningi.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Venjulegt</span>: Þetta er venjulegt öryggi\n"
-"sem mælt er með fyrir tölvur sem eru tengdar við Internetið sem biðlari.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Hátt</span>: Það eru þegar nokkrar\n"
-"takmarkanir og fleiri sjálfvirkar athuganir keyrðar á hverri nóttu.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Hærra</span>: Öryggið er nú nægilega hátt\n"
-"til að nota kerfið sem miðlara sem getur þjónusta frá marga biðlara. Ef\n"
-"vélin þín er tengd við Internetið þá ættir þú að velja lægra öryggisþrep.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Ofsóknaræði</span>: Þetta er svipað fyrra "
-"öryggisþrepi,\n"
-"en kerfið er algerlega lokað og öryggisstillingar eru í hámarki"
-
-#: draksec:147 harddrake2:214
-#, c-format
-msgid ""
-"Description of the fields:\n"
-"\n"
-msgstr ""
-"Lýsing á svæðum:\n"
-"\n"
-
-#: draksec:161
-#, c-format
-msgid "(default value: %s)"
-msgstr "(sjálfgefið gildi: %s)"
-
-#: draksec:166
+#: draksec:91
 #, c-format
 msgid "Security Level and Checks"
 msgstr "Öryggisþrep og athuganir"
 
-#: draksec:203
+#: draksec:114
 #, c-format
-msgid "Security Level:"
-msgstr "Öryggisþrep:"
+msgid "Configure authentication required to access Mandriva tools"
+msgstr ""
 
-#: draksec:206
-#, c-format
-msgid "Security Alerts:"
-msgstr "Öryggisviðvaranir:"
-
-#: draksec:210
-#, c-format
-msgid "Security Administrator:"
-msgstr "Öryggisfulltrúi:"
-
-#: draksec:212
-#, c-format
-msgid "Basic options"
-msgstr "Grunnvalkostir"
-
-#: draksec:226
-#, c-format
-msgid "Network Options"
-msgstr "Netvalkostir"
-
-#: draksec:226
-#, c-format
-msgid "System Options"
-msgstr "Kerfisvalkostir"
-
-#: draksec:269
-#, c-format
-msgid "Periodic Checks"
-msgstr "Reglulegar athuganir"
-
-#: draksec:294
+#: draksec:117
 #, c-format
 msgid "No password"
 msgstr "Ekkert lykilorð"
 
-#: draksec:295
+#: draksec:118
 #, c-format
 msgid "Root password"
 msgstr "Lykilorð kerfisstjóra"
 
-#: draksec:296
+#: draksec:119
 #, c-format
 msgid "User password"
 msgstr "Lykilorð notanda"
 
-#: draksec:326 draksec:372
+#: draksec:149 draksec:203
 #, c-format
 msgid "Software Management"
 msgstr "Hugbúnaðarumsýsla"
 
-#: draksec:327
+#: draksec:150
 #, c-format
 msgid "Mandriva Update"
 msgstr "Mandriva Uppfærsla"
 
-#: draksec:328
+#: draksec:151
 #, c-format
 msgid "Software Media Manager"
 msgstr "Hugbúnaðar-miðla-tól"
 
-#: draksec:329
+#: draksec:152
 #, c-format
 msgid "Configure 3D Desktop effects"
 msgstr "Stilla þrívíddarvirkni skjáborðs"
 
-#: draksec:330
+#: draksec:153
 #, c-format
 msgid "Graphical Server Configuration"
 msgstr "Uppsetning skjámiðlara"
 
-#: draksec:331
+#: draksec:154
 #, c-format
 msgid "Mouse Configuration"
 msgstr "Músarstillingar"
 
-#: draksec:332
+#: draksec:155
 #, c-format
 msgid "Keyboard Configuration"
 msgstr "Lyklaborðsstillingar"
 
-#: draksec:333
+#: draksec:156
 #, c-format
 msgid "UPS Configuration"
 msgstr "UPS stillingar"
 
-#: draksec:334
+#: draksec:157
 #, c-format
 msgid "Network Configuration"
 msgstr "Netstillingar"
 
-#: draksec:335
+#: draksec:158
 #, c-format
 msgid "Hosts definitions"
 msgstr "Skilgreiningar véla"
 
-#: draksec:336
+#: draksec:159
 #, c-format
 msgid "Network Center"
 msgstr "Netstjórnun"
 
-#: draksec:337
+#: draksec:160
 #, c-format
 msgid "VPN"
 msgstr "VPN"
 
-#: draksec:338
+#: draksec:161
 #, c-format
 msgid "Proxy Configuration"
 msgstr "Sel-stillingar"
 
-#: draksec:339
+#: draksec:162
 #, c-format
 msgid "Connection Sharing"
 msgstr "Miðlun tenginga"
 
-#: draksec:341
+#: draksec:164
 #, c-format
 msgid "Backups"
 msgstr "Afrit"
 
-#: draksec:343 logdrake:52
+#: draksec:166 logdrake:52
 #, c-format
 msgid "Logs"
 msgstr "Annálar"
 
-#: draksec:344
+#: draksec:167
 #, c-format
 msgid "Services"
 msgstr "Þjónustur"
 
-#: draksec:345
+#: draksec:168
 #, c-format
 msgid "Users"
 msgstr "Notendur"
 
-#: draksec:347
+#: draksec:170
 #, c-format
 msgid "Boot Configuration"
 msgstr "Ræsivalkostir"
 
-#: draksec:373
+#: draksec:204
 #, c-format
 msgid "Hardware"
 msgstr "Vélbúnaður"
 
-#: draksec:374
+#: draksec:205
 #, c-format
 msgid "Network"
 msgstr "Net"
 
-#: draksec:375
+#: draksec:206
 #, c-format
 msgid "System"
 msgstr "Kerfi"
 
-#: draksec:376
+#: draksec:207
 #, c-format
 msgid "Boot"
 msgstr "Ræsing"
-
-#: draksec:401
-#, c-format
-msgid "Please wait, setting security level..."
-msgstr "Augnablik, stilli öryggisþrep..."
-
-#: draksec:407
-#, c-format
-msgid "Please wait, setting security options..."
-msgstr "Augnablik stilli öryggisvalkosti..."
 
 #: draksound:48
 #, c-format
@@ -2414,11 +2300,6 @@ msgstr "forsnið sem eru studd af disklingadrifinu"
 
 #: harddrake2:100
 #, c-format
-msgid "Channel"
-msgstr "Rás"
-
-#: harddrake2:100
-#, c-format
 msgid "EIDE/SCSI channel"
 msgstr "EIDE/SCSI rás"
 
@@ -2645,6 +2526,15 @@ msgstr "/_Lýsing svæða"
 #, c-format
 msgid "Harddrake help"
 msgstr "Harddrake hjálp"
+
+#: harddrake2:214
+#, c-format
+msgid ""
+"Description of the fields:\n"
+"\n"
+msgstr ""
+"Lýsing á svæðum:\n"
+"\n"
 
 #: harddrake2:222
 #, c-format
@@ -3678,6 +3568,131 @@ msgstr "Tungumál og land kerfis"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Svæðisbundnar stillingar"
+
+#~ msgid ""
+#~ "Here, you can setup the security level and administrator of your "
+#~ "machine.\n"
+#~ "\n"
+#~ "\n"
+#~ "The '<span weight=\"bold\">Security Administrator</span>' is the one who "
+#~ "will receive security alerts if the\n"
+#~ "'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
+#~ "username or an email.\n"
+#~ "\n"
+#~ "\n"
+#~ "The '<span weight=\"bold\">Security Level</span>' menu allows you to "
+#~ "select one of the six preconfigured security levels\n"
+#~ "provided with msec. These levels range from '<span weight=\"bold\">poor</"
+#~ "span>' security and ease of use, to\n"
+#~ "'<span weight=\"bold\">paranoid</span>' config, suitable for very "
+#~ "sensitive server applications:\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+#~ "very\n"
+#~ "easy to use security level. It should only be used for machines not "
+#~ "connected to\n"
+#~ "any network and that are not accessible to everybody.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+#~ "security\n"
+#~ "recommended for a computer that will be used to connect to the Internet "
+#~ "as a\n"
+#~ "client.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">High</span>: There are already some\n"
+#~ "restrictions, and more automatic checks are run every night.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+#~ "enough\n"
+#~ "to use the system as a server which can accept connections from many "
+#~ "clients. If\n"
+#~ "your machine is only a client on the Internet, you should choose a lower "
+#~ "level.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+#~ "previous\n"
+#~ "level, but the system is entirely closed and security features are at "
+#~ "their\n"
+#~ "maximum"
+#~ msgstr ""
+#~ "Hér, getur þú sett upp öryggisþrep og skilgreint kerfisstjóra vélarinnar "
+#~ "þinnar.\n"
+#~ "\n"
+#~ "\n"
+#~ "'<span weight=\"bold\">Öryggisstjóri</span>' er sá sem fær "
+#~ "öryggisviðvaranir sendar ef\n"
+#~ "'<span weight=\"bold\">Öryggisviðvaranir</span>' valkosturinn er settur. "
+#~ "það getur verið notendanafn eða netfang.\n"
+#~ "\n"
+#~ "\n"
+#~ "'<span weight=\"bold\">Öryggisþrep</span>' valseðillinn leyfir þér að "
+#~ "velja eitt af sex forstilltum öryggisþrepum\n"
+#~ "sem fyrlgja með msec. þessi þrep spanna frá '<span weight=\"bold"
+#~ "\">lélegt</span>' öryggi og auðveld notkun, til\n"
+#~ "'<span weight=\"bold\">ofsóknaræði</span>' stillingana, sem eru hæfar "
+#~ "fyrir viðkvæmar miðlarauppsetningar:\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Lélegt</span>: Þetta er algerlega óöruggt "
+#~ "en mjög\n"
+#~ "einfalt öryggisþrep í notkun. Það ætti aðeins að nota við vélar sem eru "
+#~ "ekki tengdar við neitt net og eru ekki aðgengilegar almenningi.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Venjulegt</span>: Þetta er venjulegt "
+#~ "öryggi\n"
+#~ "sem mælt er með fyrir tölvur sem eru tengdar við Internetið sem biðlari.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Hátt</span>: Það eru þegar nokkrar\n"
+#~ "takmarkanir og fleiri sjálfvirkar athuganir keyrðar á hverri nóttu.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Hærra</span>: Öryggið er nú nægilega "
+#~ "hátt\n"
+#~ "til að nota kerfið sem miðlara sem getur þjónusta frá marga biðlara. Ef\n"
+#~ "vélin þín er tengd við Internetið þá ættir þú að velja lægra "
+#~ "öryggisþrep.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Ofsóknaræði</span>: Þetta er svipað fyrra "
+#~ "öryggisþrepi,\n"
+#~ "en kerfið er algerlega lokað og öryggisstillingar eru í hámarki"
+
+#~ msgid "(default value: %s)"
+#~ msgstr "(sjálfgefið gildi: %s)"
+
+#~ msgid "Security Level:"
+#~ msgstr "Öryggisþrep:"
+
+#~ msgid "Security Alerts:"
+#~ msgstr "Öryggisviðvaranir:"
+
+#~ msgid "Security Administrator:"
+#~ msgstr "Öryggisfulltrúi:"
+
+#~ msgid "Basic options"
+#~ msgstr "Grunnvalkostir"
+
+#~ msgid "Network Options"
+#~ msgstr "Netvalkostir"
+
+#~ msgid "System Options"
+#~ msgstr "Kerfisvalkostir"
+
+#~ msgid "Periodic Checks"
+#~ msgstr "Reglulegar athuganir"
+
+#~ msgid "Please wait, setting security level..."
+#~ msgstr "Augnablik, stilli öryggisþrep..."
+
+#~ msgid "Please wait, setting security options..."
+#~ msgstr "Augnablik stilli öryggisvalkosti..."
 
 #, fuzzy
 #~ msgid ""

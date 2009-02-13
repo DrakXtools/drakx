@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-af\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-16 11:41+0100\n"
+"POT-Creation-Date: 2009-02-13 16:30+0100\n"
 "PO-Revision-Date: 2005-04-21 17:33+0200\n"
 "Last-Translator: Dirk van der Walt <dirkvanderwalt@webmail.co.za>\n"
 "Language-Team: Afrikaans\n"
@@ -20,14 +20,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.0.2\n"
 
-#: drakauth:24 drakauth:26 draksec:291 draksec:340
+#: drakauth:24 drakauth:26 draksec:163
 #, c-format
 msgid "Authentication"
 msgstr "Magtiging"
 
-#: drakauth:37 drakclock:111 drakclock:125 drakfont:213 drakfont:226
-#: drakfont:264 draksplash:202 finish-install:119 logdrake:170 logdrake:445
-#: logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
+#: drakauth:37 drakclock:111 drakclock:125 drakdvb:72 drakfont:213
+#: drakfont:226 drakfont:264 draksplash:202 finish-install:119 logdrake:170
+#: logdrake:445 logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
 #: scannerdrake:200 scannerdrake:259 scannerdrake:729 scannerdrake:740
 #: scannerdrake:879 scannerdrake:890 scannerdrake:960
 #, c-format
@@ -69,8 +69,8 @@ msgstr ""
 msgid "Silent"
 msgstr "Stil"
 
-#: drakboot:137 drakbug:254 drakfont:682 drakperm:376 drakperm:386 drakups:27
-#: harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
+#: drakboot:137 drakbug:254 drakdvb:57 drakfont:682 drakperm:376 drakperm:386
+#: drakups:27 harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
 #: scannerdrake:51 scannerdrake:54 scannerdrake:297 scannerdrake:302
 #: scannerdrake:954
 #, c-format
@@ -305,7 +305,7 @@ msgstr "Installeer pakket %s"
 msgid "Please describe what you were doing when it crashed:"
 msgstr ""
 
-#: drakbug:185 drakperm:136 draksec:450 draksec:452 draksec:471 draksec:473
+#: drakbug:185 drakperm:136
 #, c-format
 msgid "Help"
 msgstr "Hulp"
@@ -342,7 +342,7 @@ msgstr ""
 msgid "Thanks."
 msgstr ""
 
-#: drakclock:30 draksec:346
+#: drakclock:30 draksec:169
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr ""
@@ -416,7 +416,7 @@ msgstr "Voorsien asseblief die inligting vir hierdie draadlose kaart:"
 msgid "Could not synchronize with %s."
 msgstr ""
 
-#: drakclock:127 draksplash:125 logdrake:175 scannerdrake:491
+#: drakclock:127 drakdvb:122 draksplash:125 logdrake:175 scannerdrake:491
 #, c-format
 msgid "Quit"
 msgstr "Verlaat"
@@ -430,6 +430,54 @@ msgstr "Herstel"
 #, c-format
 msgid "Reset"
 msgstr "Herstel"
+
+#: drakdvb:30
+#, fuzzy, c-format
+msgid "DVB"
+msgstr "DVD"
+
+#: drakdvb:39 harddrake2:100
+#, c-format
+msgid "Channel"
+msgstr "Kanaal"
+
+#: drakdvb:57
+#, c-format
+msgid "%s already exists and its contents will be lost"
+msgstr ""
+
+#: drakdvb:72
+#, c-format
+msgid "Could not get the list of available channels"
+msgstr ""
+
+#: drakdvb:78 draksec:73 drakups:99 harddrake2:370 scannerdrake:66
+#: scannerdrake:70 scannerdrake:78 scannerdrake:319 scannerdrake:368
+#: scannerdrake:504 scannerdrake:508 scannerdrake:530 service_harddrake:264
+#, c-format
+msgid "Please wait"
+msgstr "Wag asb."
+
+#: drakdvb:82
+#, c-format
+msgid "Detecting DVB channels, this will take a few minutes"
+msgstr ""
+
+#: drakdvb:83 drakfont:572 drakfont:652 drakfont:736 draksplash:213
+#: drakups:217 logdrake:175
+#, c-format
+msgid "Cancel"
+msgstr "Kanselleer"
+
+#: drakdvb:121
+#, fuzzy, c-format
+msgid "Detect Channels"
+msgstr "Kanaal"
+
+#: drakdvb:123
+#, fuzzy, c-format
+msgid "View Channel"
+msgstr "Kanaal"
 
 #: drakedm:41
 #, c-format
@@ -687,18 +735,12 @@ msgstr "Kies die fontlêer of lêergids en klik op 'Voeg by'"
 msgid "File Selection"
 msgstr "Lêerkeuse"
 
-#: drakfont:572 drakfont:652 drakfont:736 draksplash:213 drakups:217
-#: logdrake:175
-#, c-format
-msgid "Cancel"
-msgstr "Kanselleer"
-
 #: drakfont:576
 #, c-format
 msgid "Fonts"
 msgstr "Fonte"
 
-#: drakfont:640 draksec:342
+#: drakfont:640 draksec:165
 #, c-format
 msgid "Import fonts"
 msgstr "Trek Lettertipes in"
@@ -723,12 +765,12 @@ msgstr "Installasie"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr ""
 
-#: drakfont:688 draksec:59 harddrake2:324
+#: drakfont:688 draksec:60 harddrake2:324
 #, c-format
 msgid "Yes"
 msgstr "Ja"
 
-#: drakfont:690 draksec:58 harddrake2:325
+#: drakfont:690 draksec:59 harddrake2:325
 #, c-format
 msgid "No"
 msgstr "Nee"
@@ -871,7 +913,7 @@ msgstr "Gebruiker"
 msgid "Group"
 msgstr "Groep:"
 
-#: drakperm:50 drakperm:109 drakperm:332
+#: drakperm:50 drakperm:109 drakperm:332 draksec:180
 #, c-format
 msgid "Permissions"
 msgstr "Vergunnigs"
@@ -1095,328 +1137,170 @@ msgstr ""
 msgid "Group: %s"
 msgstr ""
 
-#: draksec:53
+#: draksec:54
 #, c-format
 msgid "ALL"
 msgstr "ALMAL"
 
-#: draksec:54
+#: draksec:55
 #, c-format
 msgid "LOCAL"
 msgstr "PLAASLIK"
 
-#: draksec:55
+#: draksec:56
 #, c-format
 msgid "NONE"
 msgstr "GEEN"
 
-#: draksec:56
+#: draksec:57
 #, c-format
 msgid "Default"
 msgstr "Verstek"
 
-#: draksec:57
+#: draksec:58
 #, c-format
 msgid "Ignore"
 msgstr "Ignoreer"
 
-#: draksec:72 drakups:99 harddrake2:370 scannerdrake:66 scannerdrake:70
-#: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:504
-#: scannerdrake:508 scannerdrake:530 service_harddrake:264
-#, c-format
-msgid "Please wait"
-msgstr "Wag asb."
-
-#. -PO: Do not alter the <span ..> and </span> tags.
-#. -PO: Translate the security levels (Poor, Standard, High, Higher and Paranoid) in the same way, you translated these individuals words.
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX.
-#: draksec:93
-#, fuzzy, c-format
-msgid ""
-"Here, you can setup the security level and administrator of your machine.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Administrator</span>' is the one who "
-"will receive security alerts if the\n"
-"'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
-"username or an email.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Level</span>' menu allows you to select "
-"one of the six preconfigured security levels\n"
-"provided with msec. These levels range from '<span weight=\"bold\">poor</"
-"span>' security and ease of use, to\n"
-"'<span weight=\"bold\">paranoid</span>' config, suitable for very sensitive "
-"server applications:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
-"very\n"
-"easy to use security level. It should only be used for machines not "
-"connected to\n"
-"any network and that are not accessible to everybody.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
-"security\n"
-"recommended for a computer that will be used to connect to the Internet as "
-"a\n"
-"client.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">High</span>: There are already some\n"
-"restrictions, and more automatic checks are run every night.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
-"enough\n"
-"to use the system as a server which can accept connections from many "
-"clients. If\n"
-"your machine is only a client on the Internet, you should choose a lower "
-"level.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
-"previous\n"
-"level, but the system is entirely closed and security features are at their\n"
-"maximum"
-msgstr ""
-"Hier kan u die vlak administrasie van sekuriteit op u rekenaar opstel.\n"
-"\n"
-"\n"
-"Die Sekuriteits-administrateur sal die sekuriteits-waarskuwings ontvang\n"
-"indien\n"
-"die 'Sekuriteits-waarskuwings' opsie gekies is. Dit kan 'n gebruikernaam of\n"
-"'n e-pos adres wees.\n"
-"\n"
-"\n"
-"Die Sekuriteitsvlak-kieslys stel u in staat om een van ses vooraf-"
-"opgestelde\n"
-"vlakke te kies.\n"
-"Hierdie vlakke wissel van ligte sekuriteit en maklike gebruik tot "
-"paranoïes,\n"
-"wat geskik is vir uiters sensitiewe toepassings.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Lig</span>: Hierdie is glad nie veilig nie,\n"
-"alhoewel dit rekenaargebruik vergemaklik.\n"
-"Gebruik dit op masjiene wat nie aan 'n netwerk gekoppel is nie,\n"
-"en nie toeganklik tot almal is nie.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standaard</span>: Hierdie is die standaard\n"
-"sekuriteit\n"
-"wat ons aanbeveel vir rekenaars wat aan die Internet gebruik as 'n kliënt\n"
-"\n"
-"<span foreground=\"royalblue3\">Hoog</span>:Daar is reeds versperrings, en\n"
-"meer outomatise toetse word saans gedoen\n"
-"\n"
-"<span foreground=\"royalblue3\">Hoër</span>: Met hierdie sekuriteitsvlak "
-"kan\n"
-"u stelsel as 'n bediener gebruik.\n"
-"Die sekuriteit is goed genoeg sodat die rekenaar konneksies van kliënte\n"
-"af kan aanvaar.\n"
-"Aandag: Indien u masjien bloot 'n  kliënt op die Internet is, kan u 'n laer\n"
-"vlak kies.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoïes</span>: Soortgelyk aan die vorige\n"
-"vlak, maar die rekenaar is totaal toe en sekuriteit is op sy\n"
-"maksimum"
-
-#: draksec:147 harddrake2:214
-#, c-format
-msgid ""
-"Description of the fields:\n"
-"\n"
-msgstr ""
-"Beskrywing van die velde:\n"
-"\n"
-
-#: draksec:161
-#, c-format
-msgid "(default value: %s)"
-msgstr "(verstek waarde: %s)"
-
-#: draksec:166
+#: draksec:91
 #, fuzzy, c-format
 msgid "Security Level and Checks"
 msgstr "Sekuriteitsvlak:"
 
-#: draksec:203
+#: draksec:114
 #, c-format
-msgid "Security Level:"
-msgstr "Sekuriteitsvlak:"
+msgid "Configure authentication required to access Mandriva tools"
+msgstr ""
 
-#: draksec:206
-#, c-format
-msgid "Security Alerts:"
-msgstr "Sekuriteits-waarskuwings:"
-
-#: draksec:210
-#, c-format
-msgid "Security Administrator:"
-msgstr "Sekuriteits-admin:"
-
-#: draksec:212
-#, c-format
-msgid "Basic options"
-msgstr "Basiese opsies"
-
-#: draksec:226
-#, c-format
-msgid "Network Options"
-msgstr "Netwerk Opsies:"
-
-#: draksec:226
-#, c-format
-msgid "System Options"
-msgstr "Stelsel-opsies"
-
-#: draksec:269
-#, c-format
-msgid "Periodic Checks"
-msgstr "Periodiese Toetse"
-
-#: draksec:294
+#: draksec:117
 #, c-format
 msgid "No password"
 msgstr "Geen wagwoord"
 
-#: draksec:295
+#: draksec:118
 #, c-format
 msgid "Root password"
 msgstr ""
 
-#: draksec:296
+#: draksec:119
 #, c-format
 msgid "User password"
 msgstr ""
 
-#: draksec:326 draksec:372
+#: draksec:149 draksec:203
 #, c-format
 msgid "Software Management"
 msgstr "Sagteware Beheer"
 
-#: draksec:327
+#: draksec:150
 #, fuzzy, c-format
 msgid "Mandriva Update"
 msgstr "Mandriva Online"
 
-#: draksec:328
+#: draksec:151
 #, c-format
 msgid "Software Media Manager"
 msgstr "Software Media Manager"
 
-#: draksec:329
+#: draksec:152
 #, fuzzy, c-format
 msgid "Configure 3D Desktop effects"
 msgstr "Besig met die opstelling....."
 
-#: draksec:330
+#: draksec:153
 #, fuzzy, c-format
 msgid "Graphical Server Configuration"
 msgstr "Konfigurasie van e-pos alarm"
 
-#: draksec:331
+#: draksec:154
 #, fuzzy, c-format
 msgid "Mouse Configuration"
 msgstr "Selfdoen konfigurasie"
 
-#: draksec:332
+#: draksec:155
 #, fuzzy, c-format
 msgid "Keyboard Configuration"
 msgstr "Netwerkkonfigurasie"
 
-#: draksec:333
+#: draksec:156
 #, fuzzy, c-format
 msgid "UPS Configuration"
 msgstr "CUPS-drukkerkonfigurasie"
 
-#: draksec:334
+#: draksec:157
 #, fuzzy, c-format
 msgid "Network Configuration"
 msgstr "Waarsku-konfigurasie"
 
-#: draksec:335
+#: draksec:158
 #, c-format
 msgid "Hosts definitions"
 msgstr ""
 
-#: draksec:336
+#: draksec:159
 #, fuzzy, c-format
 msgid "Network Center"
 msgstr "Netwerk & Internet"
 
-#: draksec:337
+#: draksec:160
 #, c-format
 msgid "VPN"
 msgstr ""
 
-#: draksec:338
+#: draksec:161
 #, fuzzy, c-format
 msgid "Proxy Configuration"
 msgstr "Konfigurasie"
 
-#: draksec:339
+#: draksec:162
 #, fuzzy, c-format
 msgid "Connection Sharing"
 msgstr "Verbinding"
 
-#: draksec:341
+#: draksec:164
 #, fuzzy, c-format
 msgid "Backups"
 msgstr "Bus"
 
-#: draksec:343 logdrake:52
+#: draksec:166 logdrake:52
 #, c-format
 msgid "Logs"
 msgstr "Staaflêers"
 
-#: draksec:344
+#: draksec:167
 #, c-format
 msgid "Services"
 msgstr "dienste"
 
-#: draksec:345
+#: draksec:168
 #, fuzzy, c-format
 msgid "Users"
 msgstr "Gebruiker"
 
-#: draksec:347
+#: draksec:170
 #, fuzzy, c-format
 msgid "Boot Configuration"
 msgstr "Waarsku-konfigurasie"
 
-#: draksec:373
+#: draksec:204
 #, c-format
 msgid "Hardware"
 msgstr "Hardeware"
 
-#: draksec:374
+#: draksec:205
 #, fuzzy, c-format
 msgid "Network"
 msgstr "Netwerk Opsies:"
 
-#: draksec:375
+#: draksec:206
 #, c-format
 msgid "System"
 msgstr "Rekenaar"
 
-#: draksec:376
+#: draksec:207
 #, c-format
 msgid "Boot"
 msgstr "Selflaai"
-
-#: draksec:401
-#, c-format
-msgid "Please wait, setting security level..."
-msgstr "Net 'n oomblik, sekuriteitsvlak word gestel..."
-
-#: draksec:407
-#, c-format
-msgid "Please wait, setting security options..."
-msgstr "Net 'n oomblik, verstel sekuriteitsopsies..."
 
 #: draksound:48
 #, c-format
@@ -2402,11 +2286,6 @@ msgstr "aandrywer ondersteun die volgende formate"
 
 #: harddrake2:100
 #, c-format
-msgid "Channel"
-msgstr "Kanaal"
-
-#: harddrake2:100
-#, c-format
 msgid "EIDE/SCSI channel"
 msgstr "EIDE/SCSI channel"
 
@@ -2631,6 +2510,15 @@ msgstr "/_Velde se beskrywing"
 #, c-format
 msgid "Harddrake help"
 msgstr "Harddrake help"
+
+#: harddrake2:214
+#, c-format
+msgid ""
+"Description of the fields:\n"
+"\n"
+msgstr ""
+"Beskrywing van die velde:\n"
+"\n"
 
 #: harddrake2:222
 #, c-format
@@ -3655,6 +3543,138 @@ msgstr "Selfdoen konfigurasie"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "Verstellings"
+
+#, fuzzy
+#~ msgid ""
+#~ "Here, you can setup the security level and administrator of your "
+#~ "machine.\n"
+#~ "\n"
+#~ "\n"
+#~ "The '<span weight=\"bold\">Security Administrator</span>' is the one who "
+#~ "will receive security alerts if the\n"
+#~ "'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
+#~ "username or an email.\n"
+#~ "\n"
+#~ "\n"
+#~ "The '<span weight=\"bold\">Security Level</span>' menu allows you to "
+#~ "select one of the six preconfigured security levels\n"
+#~ "provided with msec. These levels range from '<span weight=\"bold\">poor</"
+#~ "span>' security and ease of use, to\n"
+#~ "'<span weight=\"bold\">paranoid</span>' config, suitable for very "
+#~ "sensitive server applications:\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+#~ "very\n"
+#~ "easy to use security level. It should only be used for machines not "
+#~ "connected to\n"
+#~ "any network and that are not accessible to everybody.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+#~ "security\n"
+#~ "recommended for a computer that will be used to connect to the Internet "
+#~ "as a\n"
+#~ "client.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">High</span>: There are already some\n"
+#~ "restrictions, and more automatic checks are run every night.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+#~ "enough\n"
+#~ "to use the system as a server which can accept connections from many "
+#~ "clients. If\n"
+#~ "your machine is only a client on the Internet, you should choose a lower "
+#~ "level.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+#~ "previous\n"
+#~ "level, but the system is entirely closed and security features are at "
+#~ "their\n"
+#~ "maximum"
+#~ msgstr ""
+#~ "Hier kan u die vlak administrasie van sekuriteit op u rekenaar opstel.\n"
+#~ "\n"
+#~ "\n"
+#~ "Die Sekuriteits-administrateur sal die sekuriteits-waarskuwings ontvang\n"
+#~ "indien\n"
+#~ "die 'Sekuriteits-waarskuwings' opsie gekies is. Dit kan 'n gebruikernaam "
+#~ "of\n"
+#~ "'n e-pos adres wees.\n"
+#~ "\n"
+#~ "\n"
+#~ "Die Sekuriteitsvlak-kieslys stel u in staat om een van ses vooraf-"
+#~ "opgestelde\n"
+#~ "vlakke te kies.\n"
+#~ "Hierdie vlakke wissel van ligte sekuriteit en maklike gebruik tot "
+#~ "paranoïes,\n"
+#~ "wat geskik is vir uiters sensitiewe toepassings.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Lig</span>: Hierdie is glad nie veilig "
+#~ "nie,\n"
+#~ "alhoewel dit rekenaargebruik vergemaklik.\n"
+#~ "Gebruik dit op masjiene wat nie aan 'n netwerk gekoppel is nie,\n"
+#~ "en nie toeganklik tot almal is nie.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Standaard</span>: Hierdie is die "
+#~ "standaard\n"
+#~ "sekuriteit\n"
+#~ "wat ons aanbeveel vir rekenaars wat aan die Internet gebruik as 'n "
+#~ "kliënt\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Hoog</span>:Daar is reeds versperrings, "
+#~ "en\n"
+#~ "meer outomatise toetse word saans gedoen\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Hoër</span>: Met hierdie sekuriteitsvlak "
+#~ "kan\n"
+#~ "u stelsel as 'n bediener gebruik.\n"
+#~ "Die sekuriteit is goed genoeg sodat die rekenaar konneksies van kliënte\n"
+#~ "af kan aanvaar.\n"
+#~ "Aandag: Indien u masjien bloot 'n  kliënt op die Internet is, kan u 'n "
+#~ "laer\n"
+#~ "vlak kies.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Paranoïes</span>: Soortgelyk aan die "
+#~ "vorige\n"
+#~ "vlak, maar die rekenaar is totaal toe en sekuriteit is op sy\n"
+#~ "maksimum"
+
+#~ msgid "(default value: %s)"
+#~ msgstr "(verstek waarde: %s)"
+
+#~ msgid "Security Level:"
+#~ msgstr "Sekuriteitsvlak:"
+
+#~ msgid "Security Alerts:"
+#~ msgstr "Sekuriteits-waarskuwings:"
+
+#~ msgid "Security Administrator:"
+#~ msgstr "Sekuriteits-admin:"
+
+#~ msgid "Basic options"
+#~ msgstr "Basiese opsies"
+
+#~ msgid "Network Options"
+#~ msgstr "Netwerk Opsies:"
+
+#~ msgid "System Options"
+#~ msgstr "Stelsel-opsies"
+
+#~ msgid "Periodic Checks"
+#~ msgstr "Periodiese Toetse"
+
+#~ msgid "Please wait, setting security level..."
+#~ msgstr "Net 'n oomblik, sekuriteitsvlak word gestel..."
+
+#~ msgid "Please wait, setting security options..."
+#~ msgstr "Net 'n oomblik, verstel sekuriteitsopsies..."
 
 #, fuzzy
 #~ msgid ""

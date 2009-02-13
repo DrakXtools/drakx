@@ -74,7 +74,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-16 11:41+0100\n"
+"POT-Creation-Date: 2009-02-13 16:30+0100\n"
 "PO-Revision-Date: 2009-01-16 11:49+0100\n"
 "Last-Translator: Christophe Berthelé <cpjc@free.fr>\n"
 "Language-Team: French <cooker-i18n@mandrivalinux.org>\n"
@@ -84,14 +84,14 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2;plural=(n>1);\n"
 
-#: drakauth:24 drakauth:26 draksec:291 draksec:340
+#: drakauth:24 drakauth:26 draksec:163
 #, c-format
 msgid "Authentication"
 msgstr "Authentification"
 
-#: drakauth:37 drakclock:111 drakclock:125 drakfont:213 drakfont:226
-#: drakfont:264 draksplash:202 finish-install:119 logdrake:170 logdrake:445
-#: logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
+#: drakauth:37 drakclock:111 drakclock:125 drakdvb:72 drakfont:213
+#: drakfont:226 drakfont:264 draksplash:202 finish-install:119 logdrake:170
+#: logdrake:445 logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
 #: scannerdrake:200 scannerdrake:259 scannerdrake:729 scannerdrake:740
 #: scannerdrake:879 scannerdrake:890 scannerdrake:960
 #, c-format
@@ -134,8 +134,8 @@ msgstr "Verbeux"
 msgid "Silent"
 msgstr "Silencieux"
 
-#: drakboot:137 drakbug:254 drakfont:682 drakperm:376 drakperm:386 drakups:27
-#: harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
+#: drakboot:137 drakbug:254 drakdvb:57 drakfont:682 drakperm:376 drakperm:386
+#: drakups:27 harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
 #: scannerdrake:51 scannerdrake:54 scannerdrake:297 scannerdrake:302
 #: scannerdrake:954
 #, c-format
@@ -356,8 +356,12 @@ msgid ""
 msgid_plural ""
 "Things useful to attach to your report are the output of the following "
 "commands: %s."
-msgstr[0] "Il est très utile d'inclure dans votre rapport la sortie de la commande suivante : %s."
-msgstr[1] "Il est très utile d'inclure dans votre rapport la sortie des commandes suivantes : %s."
+msgstr[0] ""
+"Il est très utile d'inclure dans votre rapport la sortie de la commande "
+"suivante : %s."
+msgstr[1] ""
+"Il est très utile d'inclure dans votre rapport la sortie des commandes "
+"suivantes : %s."
 
 #: drakbug:163
 #, c-format
@@ -374,7 +378,7 @@ msgstr "Vous devriez attacher les fichiers suivants : %s ainsi que %s."
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Veuillez décrire ce que vous faisiez au moment du crash :"
 
-#: drakbug:185 drakperm:136 draksec:450 draksec:452 draksec:471 draksec:473
+#: drakbug:185 drakperm:136
 #, c-format
 msgid "Help"
 msgstr "Aide"
@@ -414,7 +418,7 @@ msgstr ""
 msgid "Thanks."
 msgstr "Merci."
 
-#: drakclock:30 draksec:346
+#: drakclock:30 draksec:169
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Réglages de la date, de l'heure et du fuseau horaire"
@@ -488,7 +492,7 @@ msgstr "Veuillez entrer une adresse de serveur NTP valide."
 msgid "Could not synchronize with %s."
 msgstr "Impossible de synchroniser avec « %s »."
 
-#: drakclock:127 draksplash:125 logdrake:175 scannerdrake:491
+#: drakclock:127 drakdvb:122 draksplash:125 logdrake:175 scannerdrake:491
 #, c-format
 msgid "Quit"
 msgstr "Quitter"
@@ -502,6 +506,54 @@ msgstr "Réessayer"
 #, c-format
 msgid "Reset"
 msgstr "Réinitialiser"
+
+#: drakdvb:30
+#, fuzzy, c-format
+msgid "DVB"
+msgstr "DVD"
+
+#: drakdvb:39 harddrake2:100
+#, c-format
+msgid "Channel"
+msgstr "Canal"
+
+#: drakdvb:57
+#, c-format
+msgid "%s already exists and its contents will be lost"
+msgstr ""
+
+#: drakdvb:72
+#, c-format
+msgid "Could not get the list of available channels"
+msgstr ""
+
+#: drakdvb:78 draksec:73 drakups:99 harddrake2:370 scannerdrake:66
+#: scannerdrake:70 scannerdrake:78 scannerdrake:319 scannerdrake:368
+#: scannerdrake:504 scannerdrake:508 scannerdrake:530 service_harddrake:264
+#, c-format
+msgid "Please wait"
+msgstr "Veuillez patienter"
+
+#: drakdvb:82
+#, c-format
+msgid "Detecting DVB channels, this will take a few minutes"
+msgstr ""
+
+#: drakdvb:83 drakfont:572 drakfont:652 drakfont:736 draksplash:213
+#: drakups:217 logdrake:175
+#, c-format
+msgid "Cancel"
+msgstr "Annuler"
+
+#: drakdvb:121
+#, fuzzy, c-format
+msgid "Detect Channels"
+msgstr "Canal"
+
+#: drakdvb:123
+#, fuzzy, c-format
+msgid "View Channel"
+msgstr "Canal"
 
 #: drakedm:41
 #, c-format
@@ -780,18 +832,12 @@ msgstr "Sélectionnez les polices ou dossiers et cliquez sur « Ajouter »"
 msgid "File Selection"
 msgstr "Sélection de fichiers ou dossiers"
 
-#: drakfont:572 drakfont:652 drakfont:736 draksplash:213 drakups:217
-#: logdrake:175
-#, c-format
-msgid "Cancel"
-msgstr "Annuler"
-
 #: drakfont:576
 #, c-format
 msgid "Fonts"
 msgstr "Polices"
 
-#: drakfont:640 draksec:342
+#: drakfont:640 draksec:165
 #, c-format
 msgid "Import fonts"
 msgstr "Importer les polices"
@@ -816,12 +862,12 @@ msgstr "Installer"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "Voulez-vous réellement désinstaller les polices d'écriture suivantes ?"
 
-#: drakfont:688 draksec:59 harddrake2:324
+#: drakfont:688 draksec:60 harddrake2:324
 #, c-format
 msgid "Yes"
 msgstr "Oui"
 
-#: drakfont:690 draksec:58 harddrake2:325
+#: drakfont:690 draksec:59 harddrake2:325
 #, c-format
 msgid "No"
 msgstr "Non"
@@ -965,7 +1011,7 @@ msgstr "Utilisateur"
 msgid "Group"
 msgstr "Groupe"
 
-#: drakperm:50 drakperm:109 drakperm:332
+#: drakperm:50 drakperm:109 drakperm:332 draksec:180
 #, c-format
 msgid "Permissions"
 msgstr "Permissions"
@@ -1194,328 +1240,170 @@ msgstr "Utilisateur : %s"
 msgid "Group: %s"
 msgstr "Groupe : %s"
 
-#: draksec:53
+#: draksec:54
 #, c-format
 msgid "ALL"
 msgstr "TOUS"
 
-#: draksec:54
+#: draksec:55
 #, c-format
 msgid "LOCAL"
 msgstr "LOCAL"
 
-#: draksec:55
+#: draksec:56
 #, c-format
 msgid "NONE"
 msgstr "AUCUN"
 
-#: draksec:56
+#: draksec:57
 #, c-format
 msgid "Default"
 msgstr "Choix par défaut"
 
-#: draksec:57
+#: draksec:58
 #, c-format
 msgid "Ignore"
 msgstr "Ignorer"
 
-#: draksec:72 drakups:99 harddrake2:370 scannerdrake:66 scannerdrake:70
-#: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:504
-#: scannerdrake:508 scannerdrake:530 service_harddrake:264
-#, c-format
-msgid "Please wait"
-msgstr "Veuillez patienter"
-
-#. -PO: Do not alter the <span ..> and </span> tags.
-#. -PO: Translate the security levels (Poor, Standard, High, Higher and Paranoid) in the same way, you translated these individuals words.
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX.
-#: draksec:93
-#, c-format
-msgid ""
-"Here, you can setup the security level and administrator of your machine.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Administrator</span>' is the one who "
-"will receive security alerts if the\n"
-"'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
-"username or an email.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Level</span>' menu allows you to select "
-"one of the six preconfigured security levels\n"
-"provided with msec. These levels range from '<span weight=\"bold\">poor</"
-"span>' security and ease of use, to\n"
-"'<span weight=\"bold\">paranoid</span>' config, suitable for very sensitive "
-"server applications:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
-"very\n"
-"easy to use security level. It should only be used for machines not "
-"connected to\n"
-"any network and that are not accessible to everybody.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
-"security\n"
-"recommended for a computer that will be used to connect to the Internet as "
-"a\n"
-"client.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">High</span>: There are already some\n"
-"restrictions, and more automatic checks are run every night.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
-"enough\n"
-"to use the system as a server which can accept connections from many "
-"clients. If\n"
-"your machine is only a client on the Internet, you should choose a lower "
-"level.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
-"previous\n"
-"level, but the system is entirely closed and security features are at their\n"
-"maximum"
-msgstr ""
-"Ici, vous pouvez configurer le niveau de sécurité et l'administrateur\n"
-"de la sécurité de votre machine.\n"
-"\n"
-"\n"
-"L' « <span weight=\"bold\">Administrateur de Sécurité</span> » recevra\n"
-"les alertes de sécurité si l'option « <span weight=\"bold\">Alertes de\n"
-"Sécurité</span> » est cochée. Il peut s'agir d'une adresse courriel ou\n"
-"d'un nom d'utilisateur.\n"
-"\n"
-"\n"
-"Le menu « <span weight=\"bold\">Niveau de Sécurité</span> » permet de\n"
-"sélectionner l'un des six niveaux de sécurité préconfigurés par msec.\n"
-"Ces niveaux vont de « <span weight=\"bold\">Très faible</span> » à\n"
-"« <span weight=\"bold\">Paranoïaque</span> », utilisable comme base\n"
-"pour créer un serveur hautement sécurisé.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Très faible</span> : Ce niveau de\n"
-"sécurité n'est absolument pas sûr mais votre système est plus facile à\n"
-"utiliser. Il ne devrait donc pas être utilisé sur une machine\n"
-"connectée à un réseau ou à Internet.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standard</span> : Ceci est le niveau\n"
-"standard de sécurité recommandé pour un ordinateur devant se connecter\n"
-"à Internet en tant que client.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Élevée</span> : il y a déjà quelques\n"
-"restrictions, et un peu plus de vérifications de sécurité sont\n"
-"effectuées chaque nuit.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Plus élevée</span> : La sécurité est ici\n"
-"suffisante pour utiliser la machine comme serveur acceptant de\n"
-"multiples connexions. Si votre machine est simplement une machine\n"
-"cliente pour Internet, un niveau inférieur est préférable.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoïaque</span> : Similaire au\n"
-"précédent, mais le système sera totalement clos et la sécurité au\n"
-"maximum."
-
-#: draksec:147 harddrake2:214
-#, c-format
-msgid ""
-"Description of the fields:\n"
-"\n"
-msgstr ""
-"Description des champs :\n"
-"\n"
-
-#: draksec:161
-#, c-format
-msgid "(default value: %s)"
-msgstr "(valeur par défaut : %s)"
-
-#: draksec:166
+#: draksec:91
 #, c-format
 msgid "Security Level and Checks"
 msgstr "Niveau de sécurité et vérifications périodiques"
 
-#: draksec:203
+#: draksec:114
 #, c-format
-msgid "Security Level:"
-msgstr "Niveau de sécurité :"
+msgid "Configure authentication required to access Mandriva tools"
+msgstr ""
 
-#: draksec:206
-#, c-format
-msgid "Security Alerts:"
-msgstr "Alertes de sécurité :"
-
-#: draksec:210
-#, c-format
-msgid "Security Administrator:"
-msgstr "Administrateur sécurité :"
-
-#: draksec:212
-#, c-format
-msgid "Basic options"
-msgstr "Options de base"
-
-#: draksec:226
-#, c-format
-msgid "Network Options"
-msgstr "Options réseau"
-
-#: draksec:226
-#, c-format
-msgid "System Options"
-msgstr "Options système"
-
-#: draksec:269
-#, c-format
-msgid "Periodic Checks"
-msgstr "Vérifications périodiques"
-
-#: draksec:294
+#: draksec:117
 #, c-format
 msgid "No password"
 msgstr "Aucun"
 
-#: draksec:295
+#: draksec:118
 #, c-format
 msgid "Root password"
 msgstr "Mot de passe root"
 
-#: draksec:296
+#: draksec:119
 #, c-format
 msgid "User password"
 msgstr "Mot de passe utilisateur"
 
-#: draksec:326 draksec:372
+#: draksec:149 draksec:203
 #, c-format
 msgid "Software Management"
 msgstr "Gestionnaire de logiciels"
 
-#: draksec:327
+#: draksec:150
 #, c-format
 msgid "Mandriva Update"
 msgstr "Mandriva Update"
 
-#: draksec:328
+#: draksec:151
 #, c-format
 msgid "Software Media Manager"
 msgstr "Gestionnaire de Médias Logiciels"
 
-#: draksec:329
+#: draksec:152
 #, c-format
 msgid "Configure 3D Desktop effects"
 msgstr "Configurer les effets bureau 3D"
 
-#: draksec:330
+#: draksec:153
 #, c-format
 msgid "Graphical Server Configuration"
 msgstr "Configuration du serveur graphique"
 
-#: draksec:331
+#: draksec:154
 #, c-format
 msgid "Mouse Configuration"
 msgstr "Configuration de la souris"
 
-#: draksec:332
+#: draksec:155
 #, c-format
 msgid "Keyboard Configuration"
 msgstr "Configuration du clavier"
 
-#: draksec:333
+#: draksec:156
 #, c-format
 msgid "UPS Configuration"
 msgstr "Configuration de l'UPS"
 
-#: draksec:334
+#: draksec:157
 #, c-format
 msgid "Network Configuration"
 msgstr "Configuration du réseau"
 
-#: draksec:335
+#: draksec:158
 #, c-format
 msgid "Hosts definitions"
 msgstr "Définitions d'hôtes"
 
-#: draksec:336
+#: draksec:159
 #, c-format
 msgid "Network Center"
 msgstr "Centre réseau"
 
-#: draksec:337
+#: draksec:160
 #, c-format
 msgid "VPN"
 msgstr "VPN"
 
-#: draksec:338
+#: draksec:161
 #, c-format
 msgid "Proxy Configuration"
 msgstr "Configuration des serveurs mandataires"
 
-#: draksec:339
+#: draksec:162
 #, c-format
 msgid "Connection Sharing"
 msgstr "Partage de connexion"
 
-#: draksec:341
+#: draksec:164
 #, c-format
 msgid "Backups"
 msgstr "Sauvegardes"
 
-#: draksec:343 logdrake:52
+#: draksec:166 logdrake:52
 #, c-format
 msgid "Logs"
 msgstr "Journaux"
 
-#: draksec:344
+#: draksec:167
 #, c-format
 msgid "Services"
 msgstr "Services"
 
-#: draksec:345
+#: draksec:168
 #, c-format
 msgid "Users"
 msgstr "Utilisateur"
 
-#: draksec:347
+#: draksec:170
 #, c-format
 msgid "Boot Configuration"
 msgstr "Configuration du démarrage"
 
-#: draksec:373
+#: draksec:204
 #, c-format
 msgid "Hardware"
 msgstr "Matériel"
 
-#: draksec:374
+#: draksec:205
 #, c-format
 msgid "Network"
 msgstr "Réseau"
 
-#: draksec:375
+#: draksec:206
 #, c-format
 msgid "System"
 msgstr "Système"
 
-#: draksec:376
+#: draksec:207
 #, c-format
 msgid "Boot"
 msgstr "Démarrage"
-
-#: draksec:401
-#, c-format
-msgid "Please wait, setting security level..."
-msgstr "Veuillez patienter, configuration du niveau de sécurité..."
-
-#: draksec:407
-#, c-format
-msgid "Please wait, setting security options..."
-msgstr "Veuillez patienter, configuration des options de sécurité..."
 
 #: draksound:48
 #, c-format
@@ -2508,11 +2396,6 @@ msgstr "le format des disquettes que le lecteur accepte"
 
 #: harddrake2:100
 #, c-format
-msgid "Channel"
-msgstr "Canal"
-
-#: harddrake2:100
-#, c-format
 msgid "EIDE/SCSI channel"
 msgstr "Nappe EIDE/Canal SCSI"
 
@@ -2741,6 +2624,15 @@ msgstr "/_Description des champs"
 #, c-format
 msgid "Harddrake help"
 msgstr "Aide de Harddrake"
+
+#: harddrake2:214
+#, c-format
+msgid ""
+"Description of the fields:\n"
+"\n"
+msgstr ""
+"Description des champs :\n"
+"\n"
 
 #: harddrake2:222
 #, c-format
@@ -3794,6 +3686,130 @@ msgstr "Configuration de la langue et du pays"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Paramètres régionaux"
+
+#~ msgid ""
+#~ "Here, you can setup the security level and administrator of your "
+#~ "machine.\n"
+#~ "\n"
+#~ "\n"
+#~ "The '<span weight=\"bold\">Security Administrator</span>' is the one who "
+#~ "will receive security alerts if the\n"
+#~ "'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
+#~ "username or an email.\n"
+#~ "\n"
+#~ "\n"
+#~ "The '<span weight=\"bold\">Security Level</span>' menu allows you to "
+#~ "select one of the six preconfigured security levels\n"
+#~ "provided with msec. These levels range from '<span weight=\"bold\">poor</"
+#~ "span>' security and ease of use, to\n"
+#~ "'<span weight=\"bold\">paranoid</span>' config, suitable for very "
+#~ "sensitive server applications:\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+#~ "very\n"
+#~ "easy to use security level. It should only be used for machines not "
+#~ "connected to\n"
+#~ "any network and that are not accessible to everybody.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+#~ "security\n"
+#~ "recommended for a computer that will be used to connect to the Internet "
+#~ "as a\n"
+#~ "client.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">High</span>: There are already some\n"
+#~ "restrictions, and more automatic checks are run every night.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+#~ "enough\n"
+#~ "to use the system as a server which can accept connections from many "
+#~ "clients. If\n"
+#~ "your machine is only a client on the Internet, you should choose a lower "
+#~ "level.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+#~ "previous\n"
+#~ "level, but the system is entirely closed and security features are at "
+#~ "their\n"
+#~ "maximum"
+#~ msgstr ""
+#~ "Ici, vous pouvez configurer le niveau de sécurité et l'administrateur\n"
+#~ "de la sécurité de votre machine.\n"
+#~ "\n"
+#~ "\n"
+#~ "L' « <span weight=\"bold\">Administrateur de Sécurité</span> » recevra\n"
+#~ "les alertes de sécurité si l'option « <span weight=\"bold\">Alertes de\n"
+#~ "Sécurité</span> » est cochée. Il peut s'agir d'une adresse courriel ou\n"
+#~ "d'un nom d'utilisateur.\n"
+#~ "\n"
+#~ "\n"
+#~ "Le menu « <span weight=\"bold\">Niveau de Sécurité</span> » permet de\n"
+#~ "sélectionner l'un des six niveaux de sécurité préconfigurés par msec.\n"
+#~ "Ces niveaux vont de « <span weight=\"bold\">Très faible</span> » à\n"
+#~ "« <span weight=\"bold\">Paranoïaque</span> », utilisable comme base\n"
+#~ "pour créer un serveur hautement sécurisé.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Très faible</span> : Ce niveau de\n"
+#~ "sécurité n'est absolument pas sûr mais votre système est plus facile à\n"
+#~ "utiliser. Il ne devrait donc pas être utilisé sur une machine\n"
+#~ "connectée à un réseau ou à Internet.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Standard</span> : Ceci est le niveau\n"
+#~ "standard de sécurité recommandé pour un ordinateur devant se connecter\n"
+#~ "à Internet en tant que client.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Élevée</span> : il y a déjà quelques\n"
+#~ "restrictions, et un peu plus de vérifications de sécurité sont\n"
+#~ "effectuées chaque nuit.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Plus élevée</span> : La sécurité est ici\n"
+#~ "suffisante pour utiliser la machine comme serveur acceptant de\n"
+#~ "multiples connexions. Si votre machine est simplement une machine\n"
+#~ "cliente pour Internet, un niveau inférieur est préférable.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Paranoïaque</span> : Similaire au\n"
+#~ "précédent, mais le système sera totalement clos et la sécurité au\n"
+#~ "maximum."
+
+#~ msgid "(default value: %s)"
+#~ msgstr "(valeur par défaut : %s)"
+
+#~ msgid "Security Level:"
+#~ msgstr "Niveau de sécurité :"
+
+#~ msgid "Security Alerts:"
+#~ msgstr "Alertes de sécurité :"
+
+#~ msgid "Security Administrator:"
+#~ msgstr "Administrateur sécurité :"
+
+#~ msgid "Basic options"
+#~ msgstr "Options de base"
+
+#~ msgid "Network Options"
+#~ msgstr "Options réseau"
+
+#~ msgid "System Options"
+#~ msgstr "Options système"
+
+#~ msgid "Periodic Checks"
+#~ msgstr "Vérifications périodiques"
+
+#~ msgid "Please wait, setting security level..."
+#~ msgstr "Veuillez patienter, configuration du niveau de sécurité..."
+
+#~ msgid "Please wait, setting security options..."
+#~ msgstr "Veuillez patienter, configuration des options de sécurité..."
 
 #~ msgid "Please wait, adding media..."
 #~ msgstr "Veuillez patienter, ajout du média..."

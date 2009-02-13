@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-16 11:41+0100\n"
+"POT-Creation-Date: 2009-02-13 16:30+0100\n"
 "PO-Revision-Date: 2009-01-17 10:26+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Euskara <itzulpena@euskalgnu.org>\n"
@@ -19,14 +19,14 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: drakauth:24 drakauth:26 draksec:291 draksec:340
+#: drakauth:24 drakauth:26 draksec:163
 #, c-format
 msgid "Authentication"
 msgstr "Egiaztatzea"
 
-#: drakauth:37 drakclock:111 drakclock:125 drakfont:213 drakfont:226
-#: drakfont:264 draksplash:202 finish-install:119 logdrake:170 logdrake:445
-#: logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
+#: drakauth:37 drakclock:111 drakclock:125 drakdvb:72 drakfont:213
+#: drakfont:226 drakfont:264 draksplash:202 finish-install:119 logdrake:170
+#: logdrake:445 logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
 #: scannerdrake:200 scannerdrake:259 scannerdrake:729 scannerdrake:740
 #: scannerdrake:879 scannerdrake:890 scannerdrake:960
 #, c-format
@@ -68,8 +68,8 @@ msgstr "Berritsua"
 msgid "Silent"
 msgstr "Isila"
 
-#: drakboot:137 drakbug:254 drakfont:682 drakperm:376 drakperm:386 drakups:27
-#: harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
+#: drakboot:137 drakbug:254 drakdvb:57 drakfont:682 drakperm:376 drakperm:386
+#: drakups:27 harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
 #: scannerdrake:51 scannerdrake:54 scannerdrake:297 scannerdrake:302
 #: scannerdrake:954
 #, c-format
@@ -291,11 +291,11 @@ msgid_plural ""
 "Things useful to attach to your report are the output of the following "
 "commands: %s."
 msgstr[0] ""
-"Zure txostenari ondorengo komandoaren irteera eranstea oso "
-"erabilgarria izango litzateke : %s."
+"Zure txostenari ondorengo komandoaren irteera eranstea oso erabilgarria "
+"izango litzateke : %s."
 msgstr[1] ""
-"Zure txostenari ondorengo komandoen irteera eranstea oso "
-"erabilgarria izango litzateke : %s."
+"Zure txostenari ondorengo komandoen irteera eranstea oso erabilgarria izango "
+"litzateke : %s."
 
 #: drakbug:163
 #, c-format
@@ -312,7 +312,7 @@ msgstr "Ondorengo fitxategiak ere erantsi beharko zenituzke: %s zein %s."
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Mesedez azaldu zer egiten ari zinen kraskatu denean:"
 
-#: drakbug:185 drakperm:136 draksec:450 draksec:452 draksec:471 draksec:473
+#: drakbug:185 drakperm:136
 #, c-format
 msgid "Help"
 msgstr "Laguntza"
@@ -351,7 +351,7 @@ msgstr ""
 msgid "Thanks."
 msgstr "Eskerrik asko."
 
-#: drakclock:30 draksec:346
+#: drakclock:30 draksec:169
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Data, ordulari eta ordu gune ezarpenak"
@@ -425,7 +425,7 @@ msgstr "Mesedez sartu baliodun NTP zerbitzari helbide bat."
 msgid "Could not synchronize with %s."
 msgstr "Ezin da %s-rekin sinkronizatu"
 
-#: drakclock:127 draksplash:125 logdrake:175 scannerdrake:491
+#: drakclock:127 drakdvb:122 draksplash:125 logdrake:175 scannerdrake:491
 #, c-format
 msgid "Quit"
 msgstr "Irten"
@@ -439,6 +439,54 @@ msgstr "Berriro saiatu"
 #, c-format
 msgid "Reset"
 msgstr "Berrezarri"
+
+#: drakdvb:30
+#, fuzzy, c-format
+msgid "DVB"
+msgstr "DVD"
+
+#: drakdvb:39 harddrake2:100
+#, c-format
+msgid "Channel"
+msgstr "Kanala"
+
+#: drakdvb:57
+#, c-format
+msgid "%s already exists and its contents will be lost"
+msgstr ""
+
+#: drakdvb:72
+#, c-format
+msgid "Could not get the list of available channels"
+msgstr ""
+
+#: drakdvb:78 draksec:73 drakups:99 harddrake2:370 scannerdrake:66
+#: scannerdrake:70 scannerdrake:78 scannerdrake:319 scannerdrake:368
+#: scannerdrake:504 scannerdrake:508 scannerdrake:530 service_harddrake:264
+#, c-format
+msgid "Please wait"
+msgstr "Itxaron"
+
+#: drakdvb:82
+#, c-format
+msgid "Detecting DVB channels, this will take a few minutes"
+msgstr ""
+
+#: drakdvb:83 drakfont:572 drakfont:652 drakfont:736 draksplash:213
+#: drakups:217 logdrake:175
+#, c-format
+msgid "Cancel"
+msgstr "Utzi"
+
+#: drakdvb:121
+#, fuzzy, c-format
+msgid "Detect Channels"
+msgstr "Kanala"
+
+#: drakdvb:123
+#, fuzzy, c-format
+msgid "View Channel"
+msgstr "Kanala"
 
 #: drakedm:41
 #, c-format
@@ -691,25 +739,20 @@ msgstr "Ados"
 #: drakfont:571
 #, c-format
 msgid "Select the font file or directory and click on 'Add'"
-msgstr "Hautatu letra-tipoen fitxategia edo direktorioa eta egin klik 'Gehitu'n"
+msgstr ""
+"Hautatu letra-tipoen fitxategia edo direktorioa eta egin klik 'Gehitu'n"
 
 #: drakfont:572
 #, c-format
 msgid "File Selection"
 msgstr "Fitxategi-hautapena"
 
-#: drakfont:572 drakfont:652 drakfont:736 draksplash:213 drakups:217
-#: logdrake:175
-#, c-format
-msgid "Cancel"
-msgstr "Utzi"
-
 #: drakfont:576
 #, c-format
 msgid "Fonts"
 msgstr "Letra-tipoak"
 
-#: drakfont:640 draksec:342
+#: drakfont:640 draksec:165
 #, c-format
 msgid "Import fonts"
 msgstr "Inportatu letra-tipoak"
@@ -734,12 +777,12 @@ msgstr "Instalatu"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "Ziur zaude ondorengo letra-tipoak desinstalatu nahi dituzula?"
 
-#: drakfont:688 draksec:59 harddrake2:324
+#: drakfont:688 draksec:60 harddrake2:324
 #, c-format
 msgid "Yes"
 msgstr "Bai"
 
-#: drakfont:690 draksec:58 harddrake2:325
+#: drakfont:690 draksec:59 harddrake2:325
 #, c-format
 msgid "No"
 msgstr "Ez"
@@ -818,15 +861,18 @@ msgstr " --help                - laguntza hau erakusten du     \n"
 
 #: drakhelp:23
 #, c-format
-msgid " --id <id_label>       - load the html help page which refers to id_label\n"
-msgstr " --id <id_label>       - id_label-i dagokion html laguntza-orria kargatu\n"
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
+msgstr ""
+" --id <id_label>       - id_label-i dagokion html laguntza-orria kargatu\n"
 
 #: drakhelp:24
 #, c-format
 msgid ""
 " --doc <link>          - link to another web page ( for WM welcome "
 "frontend)\n"
-msgstr " --doc <link>          - beste web orri baterako esteka ( WM ongietorria)\n"
+msgstr ""
+" --doc <link>          - beste web orri baterako esteka ( WM ongietorria)\n"
 
 #: drakhelp:52
 #, c-format
@@ -878,7 +924,7 @@ msgstr "Erabiltzailea"
 msgid "Group"
 msgstr "Taldea"
 
-#: drakperm:50 drakperm:109 drakperm:332
+#: drakperm:50 drakperm:109 drakperm:332 draksec:180
 #, c-format
 msgid "Permissions"
 msgstr "Baimenak"
@@ -1104,333 +1150,170 @@ msgstr "Erabiltzailea: %s"
 msgid "Group: %s"
 msgstr "Taldea: %s"
 
-#: draksec:53
+#: draksec:54
 #, c-format
 msgid "ALL"
 msgstr "DENAK"
 
-#: draksec:54
+#: draksec:55
 #, c-format
 msgid "LOCAL"
 msgstr "LOCAL"
 
-#: draksec:55
+#: draksec:56
 #, c-format
 msgid "NONE"
 msgstr "BAT ERE EZ"
 
-#: draksec:56
+#: draksec:57
 #, c-format
 msgid "Default"
 msgstr "Lehenetsia"
 
-#: draksec:57
+#: draksec:58
 #, c-format
 msgid "Ignore"
 msgstr "Ez ikusi egin"
 
-#: draksec:72 drakups:99 harddrake2:370 scannerdrake:66 scannerdrake:70
-#: scannerdrake:78 scannerdrake:319 scannerdrake:368 scannerdrake:504
-#: scannerdrake:508 scannerdrake:530 service_harddrake:264
-#, c-format
-msgid "Please wait"
-msgstr "Itxaron"
-
-#. -PO: Do not alter the <span ..> and </span> tags.
-#. -PO: Translate the security levels (Poor, Standard, High, Higher and Paranoid) in the same way, you translated these individuals words.
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX.
-#: draksec:93
-#, c-format
-msgid ""
-"Here, you can setup the security level and administrator of your machine.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Administrator</span>' is the one who "
-"will receive security alerts if the\n"
-"'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
-"username or an email.\n"
-"\n"
-"\n"
-"The '<span weight=\"bold\">Security Level</span>' menu allows you to select "
-"one of the six preconfigured security levels\n"
-"provided with msec. These levels range from '<span weight=\"bold\">poor</"
-"span>' security and ease of use, to\n"
-"'<span weight=\"bold\">paranoid</span>' config, suitable for very sensitive "
-"server applications:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
-"very\n"
-"easy to use security level. It should only be used for machines not "
-"connected to\n"
-"any network and that are not accessible to everybody.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
-"security\n"
-"recommended for a computer that will be used to connect to the Internet as "
-"a\n"
-"client.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">High</span>: There are already some\n"
-"restrictions, and more automatic checks are run every night.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
-"enough\n"
-"to use the system as a server which can accept connections from many "
-"clients. If\n"
-"your machine is only a client on the Internet, you should choose a lower "
-"level.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
-"previous\n"
-"level, but the system is entirely closed and security features are at their\n"
-"maximum"
-msgstr ""
-"Hemen, makinaren segurtasun maila eta administratzailea zehatz ditzakezu.\n"
-"\n"
-"\n"
-"<span weight=\"bold\">Segurtasun administratzailea</span> da segurtasun "
-"alertak jasoko dituena\n"
-"<span weight=\"bold\">'segurtasun alertak'</span> aukera ezarrita badago. "
-"Erabiltzaile izen bat edo posta-e bat izan daiteke.\n"
-"\n"
-"\n"
-"'<span weight=\"bold\">Segurtasun maila</span>' menuan msec-ekin "
-"aurrekonfiguratutako sei mailetako bat hauta dezakezu.\n"
-"Maila horiek segurtasun '<span weight=\"bold\">apala</span>'  eta erabilpen "
-"errazetik hasi, eta\n"
-"erasoen aurka babestu beharreko zerbitzari aplikazio sentiberentzako egokia "
-"den konfigurazio \n"
-"'<span weight=\"bold\">paranoidea</span>' bitartekoak dira:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Apala</span>: Hau erabat segurtasunik "
-"gabeabaina\n"
-"oso segurtasun maila erabilerraza da. Sarean konektatuta ez dauden makinetan "
-"eta edonoren \n"
-"esku ez daudenetan erabili beharko litzateke soilik.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Estandarra</span>: Hau da Internetera "
-"bezero\n"
-"gisa konektatuko diren ordenagailuentzat gomendatzen den segurtasun \n"
-"estandarra.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Handia</span>: Murriztapen batzuk \n"
-"ezartzen dira, eta egiaztapen automatiko gehiago egiten dira gauero.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Handiagoa</span>: Segurtasuna orain nahikoa "
-"da\n"
-"sistema bezero ugariren konexioak onartuko dituen zerbitzari gisa "
-"erabiltzeko. \n"
-"Zure makina Interneteko bezero soila bada, maila apalagoa aukeratu behar "
-"zenuke.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoidea</span>: Aurreko mailaren "
-"antzekoa\n"
-"da, baina sistema erabat itxita uzten du eta segurtasun ezaugarriak\n"
-" mailarik handienean daudehandiena da"
-
-#: draksec:147 harddrake2:214
-#, c-format
-msgid ""
-"Description of the fields:\n"
-"\n"
-msgstr ""
-"Eremuen azalpena:\n"
-"\n"
-
-#: draksec:161
-#, c-format
-msgid "(default value: %s)"
-msgstr "(balio lehenetsia: %s)"
-
-#: draksec:166
+#: draksec:91
 #, c-format
 msgid "Security Level and Checks"
 msgstr "Segurtasun maila eta egiaztapenak"
 
-#: draksec:203
+#: draksec:114
 #, c-format
-msgid "Security Level:"
-msgstr "Segurtasun-maila:"
+msgid "Configure authentication required to access Mandriva tools"
+msgstr ""
 
-#: draksec:206
-#, c-format
-msgid "Security Alerts:"
-msgstr "Segurtasun-abisuak:"
-
-#: draksec:210
-#, c-format
-msgid "Security Administrator:"
-msgstr "Segurtasun-administratzailea:"
-
-#: draksec:212
-#, c-format
-msgid "Basic options"
-msgstr "Oinarrizko aukerak"
-
-#: draksec:226
-#, c-format
-msgid "Network Options"
-msgstr "Sare-aukerak"
-
-#: draksec:226
-#, c-format
-msgid "System Options"
-msgstr "Sistema-aukerak"
-
-#: draksec:269
-#, c-format
-msgid "Periodic Checks"
-msgstr "Aldizkako egiaztapenak"
-
-#: draksec:294
+#: draksec:117
 #, c-format
 msgid "No password"
 msgstr "Pasahitzik ez"
 
-#: draksec:295
+#: draksec:118
 #, c-format
 msgid "Root password"
 msgstr "Root pasahitza"
 
-#: draksec:296
+#: draksec:119
 #, c-format
 msgid "User password"
 msgstr "Erabiltzaile pasahitza"
 
-#: draksec:326 draksec:372
+#: draksec:149 draksec:203
 #, c-format
 msgid "Software Management"
 msgstr "Software kudeaketa"
 
-#: draksec:327
+#: draksec:150
 #, c-format
 msgid "Mandriva Update"
 msgstr "Mandriva Eguneratu"
 
-#: draksec:328
+#: draksec:151
 #, c-format
 msgid "Software Media Manager"
 msgstr "Software-euskarrien kudeatzailea"
 
-#: draksec:329
+#: draksec:152
 #, c-format
 msgid "Configure 3D Desktop effects"
 msgstr "Konfiguratu 3D idaztegi efektuak"
 
-#: draksec:330
+#: draksec:153
 #, c-format
 msgid "Graphical Server Configuration"
 msgstr "Zerbitzari grafikoaren konfiguraketa"
 
-#: draksec:331
+#: draksec:154
 #, c-format
 msgid "Mouse Configuration"
 msgstr "Sagu konfiguraketa"
 
-#: draksec:332
+#: draksec:155
 #, c-format
 msgid "Keyboard Configuration"
 msgstr "Teklatu konfiguraketa"
 
-#: draksec:333
+#: draksec:156
 #, c-format
 msgid "UPS Configuration"
 msgstr "UPS konfiguraketa"
 
-#: draksec:334
+#: draksec:157
 #, c-format
 msgid "Network Configuration"
 msgstr "Sare konfiguraketa"
 
-#: draksec:335
+#: draksec:158
 #, c-format
 msgid "Hosts definitions"
 msgstr "Ostalarien definizioak"
 
-#: draksec:336
+#: draksec:159
 #, c-format
 msgid "Network Center"
 msgstr "Sare gunea"
 
-#: draksec:337
+#: draksec:160
 #, c-format
 msgid "VPN"
 msgstr "VPN"
 
-#: draksec:338
+#: draksec:161
 #, c-format
 msgid "Proxy Configuration"
 msgstr "Proxy Konfiguraketa"
 
-#: draksec:339
+#: draksec:162
 #, c-format
 msgid "Connection Sharing"
 msgstr "Lotura partekatzea"
 
-#: draksec:341
+#: draksec:164
 #, c-format
 msgid "Backups"
 msgstr "Babeskopiak"
 
-#: draksec:343 logdrake:52
+#: draksec:166 logdrake:52
 #, c-format
 msgid "Logs"
 msgstr "Egunkariak"
 
-#: draksec:344
+#: draksec:167
 #, c-format
 msgid "Services"
 msgstr "Zerbitzuak"
 
-#: draksec:345
+#: draksec:168
 #, c-format
 msgid "Users"
 msgstr "Erabiltzaileak"
 
-#: draksec:347
+#: draksec:170
 #, c-format
 msgid "Boot Configuration"
 msgstr "Abio konfiguraketa"
 
-#: draksec:373
+#: draksec:204
 #, c-format
 msgid "Hardware"
 msgstr "Hardwarea"
 
-#: draksec:374
+#: draksec:205
 #, c-format
 msgid "Network"
 msgstr "Sarea"
 
-#: draksec:375
+#: draksec:206
 #, c-format
 msgid "System"
 msgstr "Sistema"
 
-#: draksec:376
+#: draksec:207
 #, c-format
 msgid "Boot"
 msgstr "Abioa"
-
-#: draksec:401
-#, c-format
-msgid "Please wait, setting security level..."
-msgstr "Itxaron, segurtasun-maila ezartzen..."
-
-#: draksec:407
-#, c-format
-msgid "Please wait, setting security options..."
-msgstr "Itxaron, segurtasun-aukerak ezartzen..."
 
 #: draksound:48
 #, c-format
@@ -1944,7 +1827,8 @@ msgstr "Bus"
 
 #: harddrake2:32
 #, c-format
-msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgid ""
+"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr "Gailua konektatutako bus fisikoa da hau (adib.: PCI, USB, ...)"
 
 #: harddrake2:34 harddrake2:149
@@ -2173,7 +2057,8 @@ msgstr "Fabrikatzailearen Azpi-ID"
 #: harddrake2:63
 #, c-format
 msgid "this is the minor numerical identifier of the vendor"
-msgstr "hau da fabrikatzailearen garrantzia apaleko zenbakizko identifikatzailea"
+msgstr ""
+"hau da fabrikatzailearen garrantzia apaleko zenbakizko identifikatzailea"
 
 #: harddrake2:64
 #, c-format
@@ -2301,7 +2186,8 @@ msgstr "FPU badago"
 #: harddrake2:80
 #, c-format
 msgid "yes means the processor has an arithmetic coprocessor"
-msgstr "baiezkoak prozesatzaileak koprozesatzaile aritmetiko bat duela adierazten du"
+msgstr ""
+"baiezkoak prozesatzaileak koprozesatzaile aritmetiko bat duela adierazten du"
 
 #: harddrake2:81
 #, c-format
@@ -2419,11 +2305,6 @@ msgstr "unitateak onartutako diskete-formatuak"
 
 #: harddrake2:100
 #, c-format
-msgid "Channel"
-msgstr "Kanala"
-
-#: harddrake2:100
-#, c-format
 msgid "EIDE/SCSI channel"
 msgstr "EIDE/SCSI kanala"
 
@@ -2511,8 +2392,10 @@ msgstr "Gailu fitxategia"
 
 #: harddrake2:118
 #, c-format
-msgid "the device file used to communicate with the kernel driver for the mouse"
-msgstr "saguaren kernel gidariarekin komunikatzeko erabilitako gailu fitxategia"
+msgid ""
+"the device file used to communicate with the kernel driver for the mouse"
+msgstr ""
+"saguaren kernel gidariarekin komunikatzeko erabilitako gailu fitxategia"
 
 #: harddrake2:119
 #, c-format
@@ -2650,6 +2533,15 @@ msgstr "/_Eremuen azalpena"
 msgid "Harddrake help"
 msgstr "Harddrake-ren laguntza"
 
+#: harddrake2:214
+#, c-format
+msgid ""
+"Description of the fields:\n"
+"\n"
+msgstr ""
+"Eremuen azalpena:\n"
+"\n"
+
 #: harddrake2:222
 #, c-format
 msgid "Select a device!"
@@ -2706,7 +2598,8 @@ msgstr "Exekutatu konfigurazio-tresna"
 
 #: harddrake2:302
 #, c-format
-msgid "Click on a device in the left tree in order to display its information here."
+msgid ""
+"Click on a device in the left tree in order to display its information here."
 msgstr ""
 "Egin klik ezkerreko zuhaitzeko gailu batean, dagokion informazioa hemen "
 "bistaratzeko."
@@ -3101,7 +2994,8 @@ msgstr "Scannerdrake abortatzen."
 
 #: scannerdrake:60
 #, c-format
-msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr ""
 "Ezin izan dira instalatu eskanerra Scannerdrake-rekin instalatzeko behar "
 "diren paketeak."
@@ -3513,7 +3407,8 @@ msgstr ""
 #: scannerdrake:600
 #, c-format
 msgid "The scanners on this machine are available to other computers"
-msgstr "Makina honetako eskanerrak beste ordenagailu batzuentzako erabilgarri daude"
+msgstr ""
+"Makina honetako eskanerrak beste ordenagailu batzuentzako erabilgarri daude"
 
 #: scannerdrake:602
 #, c-format
@@ -3545,7 +3440,8 @@ msgstr "Eskaner lokalak partekatzea"
 msgid ""
 "These are the machines on which the locally connected scanner(s) should be "
 "available:"
-msgstr "Lokalki konektatutako eskanerrak makina hauetan egongo dira erabilgarri:"
+msgstr ""
+"Lokalki konektatutako eskanerrak makina hauetan egongo dira erabilgarri:"
 
 #: scannerdrake:658 scannerdrake:808
 #, c-format
@@ -3682,3 +3578,132 @@ msgstr "Hizkuntza eta herrialde konfiguraketa"
 msgid "Regional Settings"
 msgstr "Eskualdeko ezarpenak"
 
+#~ msgid ""
+#~ "Here, you can setup the security level and administrator of your "
+#~ "machine.\n"
+#~ "\n"
+#~ "\n"
+#~ "The '<span weight=\"bold\">Security Administrator</span>' is the one who "
+#~ "will receive security alerts if the\n"
+#~ "'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
+#~ "username or an email.\n"
+#~ "\n"
+#~ "\n"
+#~ "The '<span weight=\"bold\">Security Level</span>' menu allows you to "
+#~ "select one of the six preconfigured security levels\n"
+#~ "provided with msec. These levels range from '<span weight=\"bold\">poor</"
+#~ "span>' security and ease of use, to\n"
+#~ "'<span weight=\"bold\">paranoid</span>' config, suitable for very "
+#~ "sensitive server applications:\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+#~ "very\n"
+#~ "easy to use security level. It should only be used for machines not "
+#~ "connected to\n"
+#~ "any network and that are not accessible to everybody.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+#~ "security\n"
+#~ "recommended for a computer that will be used to connect to the Internet "
+#~ "as a\n"
+#~ "client.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">High</span>: There are already some\n"
+#~ "restrictions, and more automatic checks are run every night.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+#~ "enough\n"
+#~ "to use the system as a server which can accept connections from many "
+#~ "clients. If\n"
+#~ "your machine is only a client on the Internet, you should choose a lower "
+#~ "level.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+#~ "previous\n"
+#~ "level, but the system is entirely closed and security features are at "
+#~ "their\n"
+#~ "maximum"
+#~ msgstr ""
+#~ "Hemen, makinaren segurtasun maila eta administratzailea zehatz "
+#~ "ditzakezu.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span weight=\"bold\">Segurtasun administratzailea</span> da segurtasun "
+#~ "alertak jasoko dituena\n"
+#~ "<span weight=\"bold\">'segurtasun alertak'</span> aukera ezarrita badago. "
+#~ "Erabiltzaile izen bat edo posta-e bat izan daiteke.\n"
+#~ "\n"
+#~ "\n"
+#~ "'<span weight=\"bold\">Segurtasun maila</span>' menuan msec-ekin "
+#~ "aurrekonfiguratutako sei mailetako bat hauta dezakezu.\n"
+#~ "Maila horiek segurtasun '<span weight=\"bold\">apala</span>'  eta "
+#~ "erabilpen errazetik hasi, eta\n"
+#~ "erasoen aurka babestu beharreko zerbitzari aplikazio sentiberentzako "
+#~ "egokia den konfigurazio \n"
+#~ "'<span weight=\"bold\">paranoidea</span>' bitartekoak dira:\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Apala</span>: Hau erabat segurtasunik "
+#~ "gabeabaina\n"
+#~ "oso segurtasun maila erabilerraza da. Sarean konektatuta ez dauden "
+#~ "makinetan eta edonoren \n"
+#~ "esku ez daudenetan erabili beharko litzateke soilik.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Estandarra</span>: Hau da Internetera "
+#~ "bezero\n"
+#~ "gisa konektatuko diren ordenagailuentzat gomendatzen den segurtasun \n"
+#~ "estandarra.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Handia</span>: Murriztapen batzuk \n"
+#~ "ezartzen dira, eta egiaztapen automatiko gehiago egiten dira gauero.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Handiagoa</span>: Segurtasuna orain "
+#~ "nahikoa da\n"
+#~ "sistema bezero ugariren konexioak onartuko dituen zerbitzari gisa "
+#~ "erabiltzeko. \n"
+#~ "Zure makina Interneteko bezero soila bada, maila apalagoa aukeratu behar "
+#~ "zenuke.\n"
+#~ "\n"
+#~ "\n"
+#~ "<span foreground=\"royalblue3\">Paranoidea</span>: Aurreko mailaren "
+#~ "antzekoa\n"
+#~ "da, baina sistema erabat itxita uzten du eta segurtasun ezaugarriak\n"
+#~ " mailarik handienean daudehandiena da"
+
+#~ msgid "(default value: %s)"
+#~ msgstr "(balio lehenetsia: %s)"
+
+#~ msgid "Security Level:"
+#~ msgstr "Segurtasun-maila:"
+
+#~ msgid "Security Alerts:"
+#~ msgstr "Segurtasun-abisuak:"
+
+#~ msgid "Security Administrator:"
+#~ msgstr "Segurtasun-administratzailea:"
+
+#~ msgid "Basic options"
+#~ msgstr "Oinarrizko aukerak"
+
+#~ msgid "Network Options"
+#~ msgstr "Sare-aukerak"
+
+#~ msgid "System Options"
+#~ msgstr "Sistema-aukerak"
+
+#~ msgid "Periodic Checks"
+#~ msgstr "Aldizkako egiaztapenak"
+
+#~ msgid "Please wait, setting security level..."
+#~ msgstr "Itxaron, segurtasun-maila ezartzen..."
+
+#~ msgid "Please wait, setting security options..."
+#~ msgstr "Itxaron, segurtasun-aukerak ezartzen..."
