@@ -415,7 +415,7 @@ sub count_files {
 
 sub cp_with_progress {
     my $wait_message = shift;
-    my $current = shift;
+    my $_current = shift;
     my $total = shift;
     my $dest = pop @_;
     cp_with_progress_({ keep_special => 1 }, $wait_message, $total, \@_, $dest);
