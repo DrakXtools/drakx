@@ -581,7 +581,7 @@ sub Type {
     $in->ask_from_({ title => N("Change partition type") },
 		  [
 		   { label => N("Which filesystem do you want?"), title => 1 },
-		   { label => N("Type"), val => \$type_name, list => \@types, sort => 0, do_not_ellipsize => 1,
+		   { label => N("Type"), val => \$type_name, type => 'list', list => \@types, sort => 1, do_not_ellipsize => 1,
 		     focus => sub { 1 }, not_edit => 1, gtk => { wrap_width => 4 } } ]) or return;
 
     my $type = $type_name && fs::type::type_name2subpart($type_name);
