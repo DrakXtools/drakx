@@ -104,6 +104,7 @@ sub preConfigureTimezone {
 sub ask_suppl_media_method {
     my ($o) = @_;
     our $suppl_already_asked;
+    #TVreturn;
 
     my $msg = $suppl_already_asked
       ? N("Do you have further supplementary media?")
@@ -381,6 +382,12 @@ sub setPackages {
 	    log::l("selecting task-kde (since kdebase-progs was installed)");
 	    install::pkgs::select_by_package_names($o->{packages}, ['task-kde']);
 	}
+        upgrade_kde3_to_kde4($o);
+    }
+}
+
+sub upgrade_kde3_to_kde4 {
+    my ($o) = @_;
 	if (-e "$::prefix/usr/bin/kicker"
 	      && !install::pkgs::packageByName($o->{packages}, 'task-kde3')) {
 	    log::l("kde3 installed, but task-kde3 not available so can't upgrade correctly");
@@ -396,7 +403,6 @@ please reboot your system and upgrade using the Mandriva update applet.", 'Mandr
 	    log::l("ok, continuing anyway, but forcing install of task-kde4");
 	    install::pkgs::select_by_package_names($o->{packages}, ['task-kde4']);
 	}
-    }
 }
 
 sub count_files {
