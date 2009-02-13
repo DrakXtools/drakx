@@ -232,10 +232,7 @@ sub prepare_write_fstab {
 	my ($freq, $passno) =
 	  exists $_->{freq} ?
 	    ($_->{freq}, $_->{passno}) :
-	  isTrueLocalFS($_) && !$_->{dmcrypt_name} 
-	  	&& $_->{options} !~ /encryption=/
-		&& $_->{options} !~ /noauto/
-		&& (!$_->{is_removable} || member($_->{mntpoint}, fs::type::directories_needed_to_boot())) ? 
+	  isTrueLocalFS($_) && !$_->{dmcrypt_name} && $_->{options} !~ /encryption=/ && (!$_->{is_removable} || member($_->{mntpoint}, fs::type::directories_needed_to_boot())) ? 
 	    (1, $_->{mntpoint} eq '/' ? 1 : fs::type::carry_root_loopback($_) ? 0 : 2) : 
 	    (0, 0);
 
