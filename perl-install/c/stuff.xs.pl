@@ -519,11 +519,14 @@ const char *
 get_disk_type(char * device_path)
   CODE:
   PedDevice *dev = ped_device_get(device_path);
+  RETVAL = NULL;
   if(dev) {
     PedDisk* disk = ped_disk_new(dev);
-    RETVAL = disk->type->name;
-    ped_disk_destroy(disk);
-  } else RETVAL = NULL;
+    if(disk) {
+      RETVAL = disk->type->name;
+      ped_disk_destroy(disk);
+    } 
+  }
   OUTPUT:
   RETVAL
 
@@ -590,13 +593,16 @@ int
 disk_delete_all(char * device_path)
   CODE:
   PedDevice *dev = ped_device_get(device_path);
+  RETVAL = 0;
   if(dev) {
     PedDisk* disk = ped_disk_new(dev);
-    RETVAL = ped_disk_delete_all(disk);
-    if(RETVAL)
-      RETVAL = ped_disk_commit(disk);
-    ped_disk_destroy(disk);
-  } else RETVAL = 0;
+    if(disk) { 
+      RETVAL = ped_disk_delete_all(disk);
+      if(RETVAL)
+        RETVAL = ped_disk_commit(disk);
+      ped_disk_destroy(disk);
+    }
+  }
   OUTPUT:
   RETVAL
 
@@ -607,18 +613,20 @@ disk_del_partition(char * device_path, int part_number)
   RETVAL = 0;
   if(dev) {
     PedDisk* disk = ped_disk_new(dev);
-    PedPartition* part = ped_disk_get_partition(disk, part_number);
-    if(!part) {
-      printf("disk_del_partition: failed to find partition\n");
-    } else {
-      RETVAL=ped_disk_delete_partition(disk, part);
-      if(RETVAL) {
-        RETVAL = ped_disk_commit(disk);
+    if(disk) {
+      PedPartition* part = ped_disk_get_partition(disk, part_number);
+      if(!part) {
+        printf("disk_del_partition: failed to find partition\n");
       } else {
-        printf("del_partition failed\n");
+        RETVAL=ped_disk_delete_partition(disk, part);
+        if(RETVAL) {
+          RETVAL = ped_disk_commit(disk);
+        } else {
+          printf("del_partition failed\n");
+        }
       }
+      ped_disk_destroy(disk);
     }
-    ped_disk_destroy(disk);
   }
   OUTPUT:
   RETVAL
@@ -630,21 +638,23 @@ disk_add_partition(char * device_path, double start, double length, const char *
   RETVAL=0;
   if(dev) {
     PedDisk* disk = ped_disk_new(dev);
-    PedGeometry* geom = ped_geometry_new(dev, (long long)start, (long long)length);
-    PedPartition* part = ped_partition_new (disk, PED_PARTITION_NORMAL, ped_file_system_type_get(fs_type), (long long)start, (long long)start+length-1);
-    PedConstraint* constraint = ped_constraint_new_from_max(geom);
-    if(!part) {
-      printf("ped_partition_new failed\n");
-    } else
-      RETVAL = ped_disk_add_partition (disk, part, constraint);
-    if(RETVAL) {
-      RETVAL = ped_disk_commit(disk);
-    } else {
-      printf("add_partition failed\n");
+    if(disk) {
+      PedGeometry* geom = ped_geometry_new(dev, (long long)start, (long long)length);
+      PedPartition* part = ped_partition_new (disk, PED_PARTITION_NORMAL, ped_file_system_type_get(fs_type), (long long)start, (long long)start+length-1);
+      PedConstraint* constraint = ped_constraint_new_from_max(geom);
+      if(!part) {
+        printf("ped_partition_new failed\n");
+      } else
+        RETVAL = ped_disk_add_partition (disk, part, constraint);
+      if(RETVAL) {
+        RETVAL = ped_disk_commit(disk);
+      } else {
+        printf("add_partition failed\n");
+      }
+      ped_geometry_destroy(geom);
+      ped_constraint_destroy(constraint);
+      ped_disk_destroy(disk);
     }
-    ped_geometry_destroy(geom);
-    ped_constraint_destroy(constraint);
-    ped_disk_destroy(disk);
   }
   OUTPUT:
   RETVAL
