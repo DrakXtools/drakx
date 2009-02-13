@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-16 11:41+0100\n"
+"POT-Creation-Date: 2009-02-13 16:29+0100\n"
 "PO-Revision-Date: 2009-01-27 13:34+0200\n"
 "Last-Translator: Pavel Maryanov <acid_jack@ukr.net>\n"
 "Language-Team: Russian <gnu@mx.ru>\n"
@@ -35,7 +35,8 @@ msgid ""
 "\n"
 "Do you have a supplementary installation medium to configure?"
 msgstr ""
-"Был найден следующий носитель, который будет использован во время установки: %s.\n"
+"Был найден следующий носитель, который будет использован во время установки: "
+"%s.\n"
 "\n"
 "\n"
 "Если ли дополнительный носитель для настройки?"
@@ -72,13 +73,20 @@ msgstr "Адрес должен начинаться с ftp:// или http://"
 
 #: any.pm:180
 #, c-format
-msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
-msgstr "Устанавливается соединение с веб-сайтом Mandriva Linux для загрузки списка доступных пакетов..."
+msgid ""
+"Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgstr ""
+"Устанавливается соединение с веб-сайтом Mandriva Linux для загрузки списка "
+"доступных пакетов..."
 
 #: any.pm:185
 #, c-format
-msgid "Failed contacting Mandriva Linux web site to get the list of available mirrors"
-msgstr "Не удалось соединиться с веб-сайтом Mandriva Linux, чтобы загрузить список доступных зеркал"
+msgid ""
+"Failed contacting Mandriva Linux web site to get the list of available "
+"mirrors"
+msgstr ""
+"Не удалось соединиться с веб-сайтом Mandriva Linux, чтобы загрузить список "
+"доступных зеркал"
 
 #: any.pm:195
 #, c-format
@@ -122,8 +130,12 @@ msgstr "Дополнительный"
 
 #: any.pm:293
 #, c-format
-msgid "Can't find a package list file on this mirror. Make sure the location is correct."
-msgstr "Невозможно найти список пакетов на этом зеркале. Проверьте правильность адреса."
+msgid ""
+"Can't find a package list file on this mirror. Make sure the location is "
+"correct."
+msgstr ""
+"Невозможно найти список пакетов на этом зеркале. Проверьте правильность "
+"адреса."
 
 #: any.pm:328
 #, c-format
@@ -144,19 +156,22 @@ msgstr "Выполняется поиск пакетов для обновлен
 #, c-format
 msgid ""
 "You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
-"on your system. This installer cannot preserve KDE 3.5 in an upgrade. If you choose to proceed, \n"
-"KDE 4 will replace KDE 3, and you will lose your personal KDE configuration settings. \n"
+"on your system. This installer cannot preserve KDE 3.5 in an upgrade. If you "
+"choose to proceed, \n"
+"KDE 4 will replace KDE 3, and you will lose your personal KDE configuration "
+"settings. \n"
 "To upgrade with KDE 3.5 and your personal settings preserved, \n"
 "please reboot your system and upgrade using the Mandriva update applet."
 msgstr ""
 "Вы решили обновить вашу систему до %s. KDE 3.5 обнаружен \n"
-"в вашей системе. Этот установщик  не сохраняет KDE 3.5 при обновлении. Если вы продолжите установку \n"
-"KDE 4 заменит KDE 3 и вы потеряете свою персональную конфигурацию и настройки KDE. \n"
+"в вашей системе. Этот установщик  не сохраняет KDE 3.5 при обновлении. Если "
+"вы продолжите установку \n"
+"KDE 4 заменит KDE 3 и вы потеряете свою персональную конфигурацию и "
+"настройки KDE. \n"
 "Для обновления с KDE 3.5 и сохранения ваших персональных настроек, \n"
 "перезагрузите вашу систему и обновитесь с помощью аплета обновления Mandriva."
 
-#: any.pm:394
-#: steps_interactive.pm:1126
+#: any.pm:394 steps_interactive.pm:1125
 #, c-format
 msgid "Reboot"
 msgstr "Перезагрузка"
@@ -170,30 +185,6 @@ msgstr "Далее"
 #: any.pm:584
 #, c-format
 msgid ""
-"You have selected the following server(s): %s\n"
-"\n"
-"\n"
-"These servers are activated by default. They do not have any known security\n"
-"issues, but some new ones could be found. In that case, you must make sure\n"
-"to upgrade as soon as possible.\n"
-"\n"
-"\n"
-"Do you really want to install these servers?\n"
-msgstr ""
-"Были выбраны следующие серверы: %s\n"
-"\n"
-"\n"
-"Эти серверы активированы по умолчанию. На них отсутствуют пакеты с какими-либо\n"
-"проблемами безопасности, однако некоторые уязвимости ещё могут быть обнаружены.\n"
-"Поэтому их обязательно нужно обновить как можно скорее.\n"
-"\n"
-"\n"
-"Установить эти серверы?\n"
-
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:607
-#, c-format
-msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
 "\n"
 "\n"
@@ -204,73 +195,72 @@ msgstr ""
 "\n"
 "Удалить эти пакеты?\n"
 
-#: any.pm:826
+#: any.pm:803
 #, c-format
 msgid "Error reading file %s"
 msgstr "Ошибка при чтении файла %s"
 
-#: any.pm:1033
+#: any.pm:1010
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Следующие диски были переименованы:"
 
-#: any.pm:1035
+#: any.pm:1012
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (ранее назывался %s)"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1111
-#: steps_interactive.pm:955
+#: any.pm:1088 steps_interactive.pm:954
 #, c-format
 msgid "Network"
 msgstr "Сеть"
 
-#: any.pm:1115
+#: any.pm:1092
 #, c-format
 msgid "Please choose a media"
 msgstr "Выберите носитель"
 
-#: any.pm:1131
+#: any.pm:1108
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Файл уже существует. Переписать его?"
 
-#: any.pm:1135
+#: any.pm:1112
 #, c-format
 msgid "Permission denied"
 msgstr "Доступ запрещён"
 
-#: any.pm:1183
+#: any.pm:1160
 #, c-format
 msgid "Bad NFS name"
 msgstr "Неверное имя NFS"
 
-#: any.pm:1204
+#: any.pm:1181
 #, c-format
 msgid "Bad media %s"
 msgstr "Неверный источник %s"
 
-#: any.pm:1247
+#: any.pm:1224
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Невозможно создать скриншоты перед разметкой диска"
 
-#: any.pm:1255
+#: any.pm:1232
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "После установки скриншоты будут находиться в каталоге %s"
@@ -280,8 +270,7 @@ msgstr "После установки скриншоты будут находи
 msgid "Installation"
 msgstr "Установка"
 
-#: gtk.pm:134
-#: share/meta-task/compssUsers.pl:44
+#: gtk.pm:134 share/meta-task/compssUsers.pl:44
 #, c-format
 msgid "Configuration"
 msgstr "Настройка"
@@ -316,8 +305,7 @@ msgstr "Опускается сеть"
 msgid "Please wait, retrieving file"
 msgstr "Подождите, идёт загрузка"
 
-#: media.pm:705
-#: media.pm:716
+#: media.pm:705 media.pm:716
 #, c-format
 msgid "Downloading file %s..."
 msgstr "Загружается файл %s..."
@@ -378,13 +366,22 @@ msgstr "Офисная рабочая станция"
 
 #: share/meta-task/compssUsers.pl:17
 #, c-format
-msgid "Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets (OpenOffice.org Calc, Kspread), PDF viewers, etc"
-msgstr "Офисные программы: текстовые процессоры (OpenOffice.org Writer, Kword), электронные таблицы (OpenOffice.org Calc, Kspread), программы для просмотра pdf и т.д."
+msgid ""
+"Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets "
+"(OpenOffice.org Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"Офисные программы: текстовые процессоры (OpenOffice.org Writer, Kword), "
+"электронные таблицы (OpenOffice.org Calc, Kspread), программы для просмотра "
+"pdf и т.д."
 
 #: share/meta-task/compssUsers.pl:18
 #, c-format
-msgid "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, gnumeric), pdf viewers, etc"
-msgstr "Офисные программы: текстовые процессоры (kword, abiword), электронные таблицы (kspread, gnumeric), программы для просмотра pdf и т.д."
+msgid ""
+"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
+"gnumeric), pdf viewers, etc"
+msgstr ""
+"Офисные программы: текстовые процессоры (kword, abiword), электронные "
+"таблицы (kspread, gnumeric), программы для просмотра pdf и т.д."
 
 #: share/meta-task/compssUsers.pl:23
 #, c-format
@@ -413,8 +410,11 @@ msgstr "Интернет-компьютер"
 
 #: share/meta-task/compssUsers.pl:34
 #, c-format
-msgid "Set of tools to read and send mail and news (mutt, tin..) and to browse the Web"
-msgstr "Набор программ для работы с корреспонденцией (mutt, tin...) и веб-серфинга"
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"Набор программ для работы с корреспонденцией (mutt, tin...) и веб-серфинга"
 
 #: share/meta-task/compssUsers.pl:39
 #, c-format
@@ -441,39 +441,33 @@ msgstr "Утилиты для консоли"
 msgid "Editors, shells, file tools, terminals"
 msgstr "Редакторы, командные оболочки, файловые утилиты, терминалы"
 
-#: share/meta-task/compssUsers.pl:54
-#: share/meta-task/compssUsers.pl:156
+#: share/meta-task/compssUsers.pl:54 share/meta-task/compssUsers.pl:156
 #: share/meta-task/compssUsers.pl:158
 #, c-format
 msgid "Development"
 msgstr "Разработка"
 
-#: share/meta-task/compssUsers.pl:55
-#: share/meta-task/compssUsers.pl:159
+#: share/meta-task/compssUsers.pl:55 share/meta-task/compssUsers.pl:159
 #, c-format
 msgid "C and C++ development libraries, programs and include files"
 msgstr "Библиотеки для разработки на C и C++, программы и заголовочные файлы"
 
-#: share/meta-task/compssUsers.pl:58
-#: share/meta-task/compssUsers.pl:163
+#: share/meta-task/compssUsers.pl:58 share/meta-task/compssUsers.pl:163
 #, c-format
 msgid "Documentation"
 msgstr "Документация"
 
-#: share/meta-task/compssUsers.pl:59
-#: share/meta-task/compssUsers.pl:164
+#: share/meta-task/compssUsers.pl:59 share/meta-task/compssUsers.pl:164
 #, c-format
 msgid "Books and Howto's on Linux and Free Software"
 msgstr "Книги и документация по Linux и свободному программному обеспечению"
 
-#: share/meta-task/compssUsers.pl:63
-#: share/meta-task/compssUsers.pl:167
+#: share/meta-task/compssUsers.pl:63 share/meta-task/compssUsers.pl:167
 #, c-format
 msgid "LSB"
 msgstr "LSB"
 
-#: share/meta-task/compssUsers.pl:64
-#: share/meta-task/compssUsers.pl:168
+#: share/meta-task/compssUsers.pl:64 share/meta-task/compssUsers.pl:168
 #, c-format
 msgid "Linux Standard Base. Third party applications support"
 msgstr "Linux Standard Base. Поддержка приложений сторонних разработчиков."
@@ -498,14 +492,12 @@ msgstr "ПО для совместной работы"
 msgid "Kolab Server"
 msgstr "Сервер Kolab"
 
-#: share/meta-task/compssUsers.pl:81
-#: share/meta-task/compssUsers.pl:122
+#: share/meta-task/compssUsers.pl:81 share/meta-task/compssUsers.pl:122
 #, c-format
 msgid "Firewall/Router"
 msgstr "Файервол/Маршрутизатор"
 
-#: share/meta-task/compssUsers.pl:82
-#: share/meta-task/compssUsers.pl:123
+#: share/meta-task/compssUsers.pl:82 share/meta-task/compssUsers.pl:123
 #, c-format
 msgid "Internet gateway"
 msgstr "Интернет-шлюз"
@@ -555,8 +547,7 @@ msgstr "Сервер общего доступа к файлам и принте
 msgid "NFS Server, Samba server"
 msgstr "Сервер NFS, сервер Samba"
 
-#: share/meta-task/compssUsers.pl:105
-#: share/meta-task/compssUsers.pl:118
+#: share/meta-task/compssUsers.pl:105 share/meta-task/compssUsers.pl:118
 #, c-format
 msgid "Database"
 msgstr "База данных"
@@ -613,8 +604,12 @@ msgstr "Рабочая станция KDE"
 
 #: share/meta-task/compssUsers.pl:136
 #, c-format
-msgid "The K Desktop Environment, the basic graphical environment with a collection of accompanying tools"
-msgstr "K Desktop Environment - основная графическая среда с коллекцией сопроводительных утилит"
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"K Desktop Environment - основная графическая среда с коллекцией "
+"сопроводительных утилит"
 
 #: share/meta-task/compssUsers.pl:140
 #, c-format
@@ -623,13 +618,17 @@ msgstr "Рабочая станция Gnome"
 
 #: share/meta-task/compssUsers.pl:141
 #, c-format
-msgid "A graphical environment with user-friendly set of applications and desktop tools"
-msgstr "Графическая среда с удобным для пользователя набором приложений и утилит рабочего стола"
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr ""
+"Графическая среда с удобным для пользователя набором приложений и утилит "
+"рабочего стола"
 
 #: share/meta-task/compssUsers.pl:145
-#, c-format
-msgid "IceWm Desktop"
-msgstr "Рабочий стол IceWm"
+#, fuzzy, c-format
+msgid "LXDE Desktop"
+msgstr "Рабочий стол KDE"
 
 #: share/meta-task/compssUsers.pl:149
 #, c-format
@@ -646,8 +645,7 @@ msgstr "Window Maker, Enlightenment, Fvwm и т.п."
 msgid "Utilities"
 msgstr "Утилиты"
 
-#: share/meta-task/compssUsers.pl:175
-#: share/meta-task/compssUsers.pl:176
+#: share/meta-task/compssUsers.pl:175 share/meta-task/compssUsers.pl:176
 #, c-format
 msgid "SSH Server"
 msgstr "Сервер SSH"
@@ -696,14 +694,15 @@ msgstr ""
 msgid ""
 "Some important packages did not get installed properly.\n"
 "Either your cdrom drive or your cdrom is defective.\n"
-"Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm\"\n"
+"Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm"
+"\"\n"
 msgstr ""
 "Некоторые важные пакеты установились некорректно.\n"
 "Повреждён привод CDROM или компакт-диск.\n"
-"Проверьте вставленный в компьютер диск с помощью команды \"rpm -qpl media/main/*.rpm\"\n"
+"Проверьте вставленный в компьютер диск с помощью команды \"rpm -qpl media/"
+"main/*.rpm\"\n"
 
-#: steps_auto_install.pm:71
-#: steps_stdio.pm:27
+#: steps_auto_install.pm:71 steps_stdio.pm:27
 #, c-format
 msgid "Entering step `%s'\n"
 msgstr "Выполняется переход на этап `%s'\n"
@@ -727,7 +726,8 @@ msgstr "Xorg-сервер долго запускается. Подождите.
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
-"Mandriva Linux. If that occurs, you can try a text install instead. For this,\n"
+"Mandriva Linux. If that occurs, you can try a text install instead. For "
+"this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "Системе не хватает ресурсов. Во время установки Mandriva Linux могут\n"
@@ -775,21 +775,17 @@ msgstr "Это предварительный вид рабочего стола
 msgid "Click on images in order to see a bigger preview"
 msgstr "Кликните на картинку для ее увеличения"
 
-#: steps_gtk.pm:313
-#: steps_interactive.pm:626
-#: steps_list.pm:30
+#: steps_gtk.pm:313 steps_interactive.pm:625 steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "Выбор групп пакетов"
 
-#: steps_gtk.pm:334
-#: steps_interactive.pm:643
+#: steps_gtk.pm:334 steps_interactive.pm:642
 #, c-format
 msgid "Individual package selection"
 msgstr "Выбор отдельных пакетов"
 
-#: steps_gtk.pm:358
-#: steps_interactive.pm:567
+#: steps_gtk.pm:358 steps_interactive.pm:566
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Общий объём: %d / %d МБ"
@@ -846,7 +842,9 @@ msgstr "чтобы сохранить %s"
 
 #: steps_gtk.pm:451
 #, c-format
-msgid "You can not select this package as there is not enough space left to install it"
+msgid ""
+"You can not select this package as there is not enough space left to install "
+"it"
 msgstr "Этот пакет нельзя выбрать, т.к. для его установки не хватает места"
 
 #: steps_gtk.pm:454
@@ -904,15 +902,12 @@ msgstr "Минимальная установка"
 msgid "Software Management"
 msgstr "Управление ПО"
 
-#: steps_gtk.pm:516
-#: steps_interactive.pm:452
+#: steps_gtk.pm:516 steps_interactive.pm:451
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Выберите пакеты, которые нужно установить"
 
-#: steps_gtk.pm:533
-#: steps_interactive.pm:657
-#: steps_list.pm:32
+#: steps_gtk.pm:533 steps_interactive.pm:656 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "Устанавливается"
@@ -939,9 +934,7 @@ msgid_plural "%d packages"
 msgstr[0] "%d пакет"
 msgstr[1] "%d пакетов"
 
-#: steps_gtk.pm:650
-#: steps_interactive.pm:820
-#: steps_list.pm:43
+#: steps_gtk.pm:650 steps_interactive.pm:819 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Сводка"
@@ -951,9 +944,7 @@ msgstr "Сводка"
 msgid "Configure"
 msgstr "Настройка"
 
-#: steps_gtk.pm:686
-#: steps_interactive.pm:816
-#: steps_interactive.pm:967
+#: steps_gtk.pm:686 steps_interactive.pm:815 steps_interactive.pm:966
 #, c-format
 msgid "not configured"
 msgstr "не настроен"
@@ -963,8 +954,7 @@ msgstr "не настроен"
 msgid "Media Selection"
 msgstr "Выбор источника"
 
-#: steps_gtk.pm:729
-#: steps_interactive.pm:334
+#: steps_gtk.pm:729 steps_interactive.pm:334
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -973,18 +963,20 @@ msgstr ""
 "Найдены следующие источники для установки.\n"
 "Если нужно пропустить некоторые из них, сейчас с них можно снять флажки."
 
-#: steps_gtk.pm:745
-#: steps_interactive.pm:340
+#: steps_gtk.pm:745 steps_interactive.pm:340
 #, c-format
 msgid ""
-"You have the option to copy the contents of the CDs onto the hard drive before installation.\n"
-"It will then continue from the hard drive and the packages will remain available once the system is fully installed."
+"You have the option to copy the contents of the CDs onto the hard drive "
+"before installation.\n"
+"It will then continue from the hard drive and the packages will remain "
+"available once the system is fully installed."
 msgstr ""
-"Содержимое компакт-диска перед установкой можно скопировать на жёсткий диск.\n"
-"После этого установка продолжится с жёсткого диска, и пакеты будут доступны после полной установки системы."
+"Содержимое компакт-диска перед установкой можно скопировать на жёсткий "
+"диск.\n"
+"После этого установка продолжится с жёсткого диска, и пакеты будут доступны "
+"после полной установки системы."
 
-#: steps_gtk.pm:747
-#: steps_interactive.pm:342
+#: steps_gtk.pm:747 steps_interactive.pm:342
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Целиком скопировать компакт-диски"
@@ -1029,12 +1021,14 @@ msgstr "Обновление %s"
 #: steps_interactive.pm:151
 #, c-format
 msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
-msgstr "Обновление с 32-разрядного до 64-разрядного дистрибутива не поддерживается"
+msgstr ""
+"Обновление с 32-разрядного до 64-разрядного дистрибутива не поддерживается"
 
 #: steps_interactive.pm:155
 #, c-format
 msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
-msgstr "Обновление с 64-разрядного до 32-разрядного дистрибутива не поддерживается"
+msgstr ""
+"Обновление с 64-разрядного до 32-разрядного дистрибутива не поддерживается"
 
 #: steps_interactive.pm:174
 #, c-format
@@ -1072,7 +1066,8 @@ msgstr ""
 "\n"
 "Рекомедуется заново установить систему, заменив существующую.\n"
 "\n"
-"Внимание: вы должны сделать копию всех ваших персональных данных, перед выбором \"Новая\n"
+"Внимание: вы должны сделать копию всех ваших персональных данных, перед "
+"выбором \"Новая\n"
 "Установка\"."
 
 #: steps_interactive.pm:255
@@ -1087,25 +1082,38 @@ msgstr "Настраивается IDE"
 
 #: steps_interactive.pm:292
 #, c-format
-msgid "No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"
-msgstr "Недостаточно свободного места для программы самозагрузки! Установка продолжится, но для загрузки системы будет необходимо создать раздел начальной загрузки в DiskDrake"
+msgid ""
+"No free space for 1MB bootstrap! Install will continue, but to boot your "
+"system, you'll need to create the bootstrap partition in DiskDrake"
+msgstr ""
+"Недостаточно свободного места для программы самозагрузки! Установка "
+"продолжится, но для загрузки системы будет необходимо создать раздел "
+"начальной загрузки в DiskDrake"
 
 #: steps_interactive.pm:297
 #, c-format
-msgid "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"
-msgstr "Необходимо создать загрузочный раздел PPC PReP! Установка продолжится, но для загрузки системы нужно будет создать раздел начальной загрузки в DiskDrake"
+msgid ""
+"You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
+"to boot your system, you'll need to create the bootstrap partition in "
+"DiskDrake"
+msgstr ""
+"Необходимо создать загрузочный раздел PPC PReP! Установка продолжится, но "
+"для загрузки системы нужно будет создать раздел начальной загрузки в "
+"DiskDrake"
 
 #: steps_interactive.pm:378
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
-"Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.\n"
+"Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when "
+"done.\n"
 "If you do not have it, press Cancel to avoid installation from this Cd-Rom."
 msgstr ""
 "Смените компакт-диск!\n"
 "\n"
 "Вставьте в привод компакт-диск под названием \"%s\", а затем нажмите 'ОК'.\n"
-"Если у вас его нет, нажмите 'Отмена', чтобы отказаться от установки с этого диска."
+"Если у вас его нет, нажмите 'Отмена', чтобы отказаться от установки с этого "
+"диска."
 
 #: steps_interactive.pm:408
 #, c-format
@@ -1114,10 +1122,14 @@ msgstr "Поиск доступных пакетов..."
 
 #: steps_interactive.pm:416
 #, c-format
-msgid "Your system does not have enough space left for installation or upgrade (%dMB > %dMB)"
-msgstr "В вашей системе недостаточно свободного дискового пространства для установки или обновления (%d МБ > %d МБ)"
+msgid ""
+"Your system does not have enough space left for installation or upgrade (%"
+"dMB > %dMB)"
+msgstr ""
+"В вашей системе недостаточно свободного дискового пространства для установки "
+"или обновления (%d МБ > %d МБ)"
 
-#: steps_interactive.pm:464
+#: steps_interactive.pm:463
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1126,52 +1138,52 @@ msgstr ""
 "Выберите загрузку или сохранение выбора пакетов.\n"
 "Формат файлов такой же, как и у созданных при автоматической установке."
 
-#: steps_interactive.pm:466
+#: steps_interactive.pm:465
 #, c-format
 msgid "Load"
 msgstr "Загрузить"
 
-#: steps_interactive.pm:466
+#: steps_interactive.pm:465
 #, c-format
 msgid "Save"
 msgstr "Сохранить"
 
-#: steps_interactive.pm:474
+#: steps_interactive.pm:473
 #, c-format
 msgid "Bad file"
 msgstr "Неверный файл"
 
-#: steps_interactive.pm:490
+#: steps_interactive.pm:489
 #, c-format
 msgid "KDE"
 msgstr "KDE"
 
-#: steps_interactive.pm:491
+#: steps_interactive.pm:490
 #, c-format
 msgid "GNOME"
 msgstr "GNOME"
 
-#: steps_interactive.pm:494
+#: steps_interactive.pm:493
 #, c-format
 msgid "Desktop Selection"
 msgstr "Выбор рабочего стола"
 
-#: steps_interactive.pm:495
+#: steps_interactive.pm:494
 #, c-format
 msgid "You can choose your workstation desktop profile."
 msgstr "Можно выбрать профиль настольной среды."
 
-#: steps_interactive.pm:581
+#: steps_interactive.pm:580
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "Выбранный размер превышает доступное место"
 
-#: steps_interactive.pm:596
+#: steps_interactive.pm:595
 #, c-format
 msgid "Type of install"
 msgstr "Тип установки"
 
-#: steps_interactive.pm:597
+#: steps_interactive.pm:596
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1180,83 +1192,82 @@ msgstr ""
 "Не была выбрана ни одна группа пакетов.\n"
 "Выберите тип минимальной установки:"
 
-#: steps_interactive.pm:602
+#: steps_interactive.pm:601
 #, c-format
 msgid "With X"
 msgstr "С Х-сервером"
 
-#: steps_interactive.pm:603
+#: steps_interactive.pm:602
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "С основной документацией (рекомендуется)"
 
-#: steps_interactive.pm:604
+#: steps_interactive.pm:603
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Действительно минимальная установка (даже без urpmi)"
 
-#: steps_interactive.pm:658
+#: steps_interactive.pm:657
 #, c-format
 msgid "Preparing installation"
 msgstr "Подготовка к установке"
 
-#: steps_interactive.pm:666
+#: steps_interactive.pm:665
 #, c-format
 msgid "Installing package %s"
 msgstr "Устанавливается пакет %s"
 
-#: steps_interactive.pm:690
+#: steps_interactive.pm:689
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "При загрузке пакетов возникла ошибка:"
 
-#: steps_interactive.pm:690
+#: steps_interactive.pm:689
 #, c-format
 msgid "Go on anyway?"
 msgstr "Всё равно продолжить?"
 
-#: steps_interactive.pm:694
+#: steps_interactive.pm:693
 #, c-format
 msgid "Retry"
 msgstr "Повторить"
 
-#: steps_interactive.pm:695
+#: steps_interactive.pm:694
 #, c-format
 msgid "Skip this package"
 msgstr "Пропустить этот пакет"
 
-#: steps_interactive.pm:696
+#: steps_interactive.pm:695
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "Пропустить все пакеты из источника \"%s\""
 
-#: steps_interactive.pm:697
+#: steps_interactive.pm:696
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "Вернуться к выбору источника и пакетов"
 
-#: steps_interactive.pm:700
+#: steps_interactive.pm:699
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "При установке пакета %s возникла ошибка."
 
-#: steps_interactive.pm:719
+#: steps_interactive.pm:718
 #, c-format
 msgid "Post-install configuration"
 msgstr "Настройка после установки"
 
-#: steps_interactive.pm:726
+#: steps_interactive.pm:725
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "Проверьте наличие носителя 'Update Modules' в устройстве %s"
 
-#: steps_interactive.pm:754
-#: steps_list.pm:47
+#: steps_interactive.pm:753 steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "Обновления"
 
-#: steps_interactive.pm:755
+#: steps_interactive.pm:754
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1277,118 +1288,131 @@ msgstr ""
 "\n"
 "Установить эти обновления?"
 
-#: steps_interactive.pm:862
+#: steps_interactive.pm:861
 #, c-format
 msgid "%s on %s"
 msgstr "%s на %s"
 
-#: steps_interactive.pm:895
-#: steps_interactive.pm:902
-#: steps_interactive.pm:915
-#: steps_interactive.pm:932
-#: steps_interactive.pm:947
+#: steps_interactive.pm:894 steps_interactive.pm:901 steps_interactive.pm:914
+#: steps_interactive.pm:931 steps_interactive.pm:946
 #, c-format
 msgid "Hardware"
 msgstr "Оборудование"
 
-#: steps_interactive.pm:916
-#: steps_interactive.pm:933
+#: steps_interactive.pm:915 steps_interactive.pm:932
 #, c-format
 msgid "Sound card"
 msgstr "Звуковая карта"
 
-#: steps_interactive.pm:936
+#: steps_interactive.pm:935
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Есть ли у вас звуковая карта ISA?"
 
-#: steps_interactive.pm:938
+#: steps_interactive.pm:937
 #, c-format
-msgid "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound card"
-msgstr "Для настройки звуковой карты запустите после установки утилиту \"alsaconf\" или \"sndconfig\"."
+msgid ""
+"Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
+"card"
+msgstr ""
+"Для настройки звуковой карты запустите после установки утилиту \"alsaconf\" "
+"или \"sndconfig\"."
 
-#: steps_interactive.pm:940
+#: steps_interactive.pm:939
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
-msgstr "Звуковая карта не обнаружена. Попробуйте запустить после установки утилиту \"harddrake\" "
+msgstr ""
+"Звуковая карта не обнаружена. Попробуйте запустить после установки утилиту "
+"\"harddrake\" "
 
-#: steps_interactive.pm:948
+#: steps_interactive.pm:947
 #, c-format
 msgid "Graphical interface"
 msgstr "Графический интерфейс"
 
-#: steps_interactive.pm:954
-#: steps_interactive.pm:965
+#: steps_interactive.pm:953 steps_interactive.pm:964
 #, c-format
 msgid "Network & Internet"
 msgstr "Сеть и Интернет"
 
-#: steps_interactive.pm:966
+#: steps_interactive.pm:965
 #, c-format
 msgid "Proxies"
 msgstr "Прокси"
 
-#: steps_interactive.pm:967
+#: steps_interactive.pm:966
 #, c-format
 msgid "configured"
 msgstr "настроен"
 
-#: steps_interactive.pm:977
+#: steps_interactive.pm:976
 #, c-format
 msgid "Security Level"
 msgstr "Уровень безопасности"
 
-#: steps_interactive.pm:996
+#: steps_interactive.pm:995
 #, c-format
 msgid "Firewall"
 msgstr "Файервол"
 
-#: steps_interactive.pm:1000
+#: steps_interactive.pm:999
 #, c-format
 msgid "activated"
 msgstr "включен"
 
-#: steps_interactive.pm:1000
+#: steps_interactive.pm:999
 #, c-format
 msgid "disabled"
 msgstr "выключен"
 
-#: steps_interactive.pm:1014
+#: steps_interactive.pm:1013
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Х-сервер ещё не настроен. Вы точно уверены в своих действиях?"
 
-#: steps_interactive.pm:1042
+#: steps_interactive.pm:1041
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Подготавливается начальный загрузчик..."
 
-#: steps_interactive.pm:1043
+#: steps_interactive.pm:1042
 #, c-format
 msgid "Be patient, this may take a while..."
 msgstr "Подождите, это может занять некоторое время..."
 
-#: steps_interactive.pm:1054
+#: steps_interactive.pm:1053
 #, c-format
-msgid "You appear to have an OldWorld or Unknown machine, the yaboot bootloader will not work for you. The install will continue, but you'll need to use BootX or some other means to boot your machine. The kernel argument for the root fs is: root=%s"
-msgstr "Похоже, что вы являетесь обладателем очень старой или неизвестной машины, на которой начальный загрузчик 'yaboot' не будет работать. Установка продолжится, однако для загрузки придётся использовать загрузчик 'BootX' или какой-то другой. Параметр ядра для корневой файловой системы: root=%s"
+msgid ""
+"You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
+"will not work for you. The install will continue, but you'll need to use "
+"BootX or some other means to boot your machine. The kernel argument for the "
+"root fs is: root=%s"
+msgstr ""
+"Похоже, что вы являетесь обладателем очень старой или неизвестной машины, на "
+"которой начальный загрузчик 'yaboot' не будет работать. Установка "
+"продолжится, однако для загрузки придётся использовать загрузчик 'BootX' или "
+"какой-то другой. Параметр ядра для корневой файловой системы: root=%s"
 
-#: steps_interactive.pm:1068
+#: steps_interactive.pm:1067
 #, c-format
-msgid "In this security level, access to the files in the Windows partition is restricted to the administrator."
-msgstr "На данном уровне безопасности доступ к файлам на разделе Windows разрешён только администратору. "
+msgid ""
+"In this security level, access to the files in the Windows partition is "
+"restricted to the administrator."
+msgstr ""
+"На данном уровне безопасности доступ к файлам на разделе Windows разрешён "
+"только администратору. "
 
-#: steps_interactive.pm:1100
+#: steps_interactive.pm:1099
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Вставьте чистую дискету в дисковод %s"
 
-#: steps_interactive.pm:1102
+#: steps_interactive.pm:1101
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Создается дискета автоматической установки..."
 
-#: steps_interactive.pm:1113
+#: steps_interactive.pm:1112
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1399,7 +1423,7 @@ msgstr ""
 "\n"
 "Действительно завершить работу?"
 
-#: steps_interactive.pm:1123
+#: steps_interactive.pm:1122
 #, c-format
 msgid "Congratulations"
 msgstr "Поздравляем"
@@ -1412,8 +1436,7 @@ msgid ""
 "Language"
 msgstr "Выбор языка"
 
-#: steps_list.pm:16
-#: steps_list.pm:23
+#: steps_list.pm:16 steps_list.pm:23
 #, c-format
 msgid "Localization"
 msgstr "Локализация"
@@ -1432,16 +1455,14 @@ msgid ""
 "Mouse"
 msgstr "Мышь"
 
-#: steps_list.pm:19
-#: steps_list.pm:20
+#: steps_list.pm:19 steps_list.pm:20
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Hard drive detection"
 msgstr "Поиск жёсткого диска"
 
-#: steps_list.pm:21
-#: steps_list.pm:22
+#: steps_list.pm:21 steps_list.pm:22
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
@@ -1469,8 +1490,7 @@ msgid ""
 "Partitioning"
 msgstr "Разметка диска"
 
-#: steps_list.pm:27
-#: steps_list.pm:28
+#: steps_list.pm:27 steps_list.pm:28
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
@@ -1498,24 +1518,21 @@ msgid ""
 "Users"
 msgstr "Пользователи"
 
-#: steps_list.pm:36
-#: steps_list.pm:37
+#: steps_list.pm:36 steps_list.pm:37
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "Сеть"
 
-#: steps_list.pm:38
-#: steps_list.pm:39
+#: steps_list.pm:38 steps_list.pm:39
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Bootloader"
 msgstr "Загрузчик"
 
-#: steps_list.pm:40
-#: steps_list.pm:41
+#: steps_list.pm:40 steps_list.pm:41
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
@@ -1529,8 +1546,7 @@ msgid ""
 "Summary"
 msgstr "Сводка"
 
-#: steps_list.pm:44
-#: steps_list.pm:45
+#: steps_list.pm:44 steps_list.pm:45
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
@@ -1576,3 +1592,30 @@ msgstr "Полный дистрибутив Mandriva Linux с поддержко
 msgid "Mandriva: distributions for everybody's needs"
 msgstr "Mandriva: дистрибутив для каждого"
 
+#~ msgid ""
+#~ "You have selected the following server(s): %s\n"
+#~ "\n"
+#~ "\n"
+#~ "These servers are activated by default. They do not have any known "
+#~ "security\n"
+#~ "issues, but some new ones could be found. In that case, you must make "
+#~ "sure\n"
+#~ "to upgrade as soon as possible.\n"
+#~ "\n"
+#~ "\n"
+#~ "Do you really want to install these servers?\n"
+#~ msgstr ""
+#~ "Были выбраны следующие серверы: %s\n"
+#~ "\n"
+#~ "\n"
+#~ "Эти серверы активированы по умолчанию. На них отсутствуют пакеты с какими-"
+#~ "либо\n"
+#~ "проблемами безопасности, однако некоторые уязвимости ещё могут быть "
+#~ "обнаружены.\n"
+#~ "Поэтому их обязательно нужно обновить как можно скорее.\n"
+#~ "\n"
+#~ "\n"
+#~ "Установить эти серверы?\n"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "Рабочий стол IceWm"

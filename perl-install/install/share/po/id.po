@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-16 11:41+0100\n"
+"POT-Creation-Date: 2009-02-13 16:29+0100\n"
 "PO-Revision-Date: 2007-10-27 18:51+0700\n"
 "Last-Translator: Willy Sudiarto Raharjo <willysr@gmail.com>\n"
 "Language-Team: Indonesia <mdk-id@yahoogroups.com>\n"
@@ -166,7 +166,7 @@ msgid ""
 "please reboot your system and upgrade using the Mandriva update applet."
 msgstr ""
 
-#: any.pm:394 steps_interactive.pm:1126
+#: any.pm:394 steps_interactive.pm:1125
 #, c-format
 msgid "Reboot"
 msgstr "Boot Ulang"
@@ -180,30 +180,6 @@ msgstr ""
 #: any.pm:584
 #, c-format
 msgid ""
-"You have selected the following server(s): %s\n"
-"\n"
-"\n"
-"These servers are activated by default. They do not have any known security\n"
-"issues, but some new ones could be found. In that case, you must make sure\n"
-"to upgrade as soon as possible.\n"
-"\n"
-"\n"
-"Do you really want to install these servers?\n"
-msgstr ""
-"Anda telah memilih server berikut: %s\n"
-"\n"
-"\n"
-"Server ini aktif secara default. Mereka tidak memiliki masalah keamanan,\n"
-"tetapi bisa saja ditemukan. Pada kasus tersebut, Anda harus memastikan\n"
-"untuk melakukan upgrade secepat mungkin.\n"
-"\n"
-"\n"
-"Apakah Anda hendak menginstall server ini?\n"
-
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:607
-#, c-format
-msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
 "\n"
 "\n"
@@ -214,72 +190,72 @@ msgstr ""
 "\n"
 "Apakah Anda ingin menghapus paket tersebut?\n"
 
-#: any.pm:826
+#: any.pm:803
 #, c-format
 msgid "Error reading file %s"
 msgstr "Kesalahan membaca file %s"
 
-#: any.pm:1033
+#: any.pm:1010
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Disk berikut telah diubah namanya:"
 
-#: any.pm:1035
+#: any.pm:1012
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (sebelumnya bernama %s)"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "NFS"
 msgstr "HFS"
 
-#: any.pm:1111 steps_interactive.pm:955
+#: any.pm:1088 steps_interactive.pm:954
 #, c-format
 msgid "Network"
 msgstr "Jaringan"
 
-#: any.pm:1115
+#: any.pm:1092
 #, c-format
 msgid "Please choose a media"
 msgstr "Silahkan pilih media"
 
-#: any.pm:1131
+#: any.pm:1108
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "File sudah ada. Timpa file ini ?"
 
-#: any.pm:1135
+#: any.pm:1112
 #, c-format
 msgid "Permission denied"
 msgstr "Izin ditolak"
 
-#: any.pm:1183
+#: any.pm:1160
 #, c-format
 msgid "Bad NFS name"
 msgstr "Nama NFS yang salah"
 
-#: any.pm:1204
+#: any.pm:1181
 #, c-format
 msgid "Bad media %s"
 msgstr "Media rusak %s"
 
-#: any.pm:1247
+#: any.pm:1224
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Tidak bisa membuat screenshot sebelum buat partisi"
 
-#: any.pm:1255
+#: any.pm:1232
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Screenshot akan tersedia setelah installasi pada %s"
@@ -644,8 +620,8 @@ msgstr ""
 "pengguna"
 
 #: share/meta-task/compssUsers.pl:145
-#, c-format
-msgid "IceWm Desktop"
+#, fuzzy, c-format
+msgid "LXDE Desktop"
 msgstr "Desktop IceWm"
 
 #: share/meta-task/compssUsers.pl:149
@@ -793,17 +769,17 @@ msgstr ""
 msgid "Click on images in order to see a bigger preview"
 msgstr ""
 
-#: steps_gtk.pm:313 steps_interactive.pm:626 steps_list.pm:30
+#: steps_gtk.pm:313 steps_interactive.pm:625 steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "Pilihan Grup Paket"
 
-#: steps_gtk.pm:334 steps_interactive.pm:643
+#: steps_gtk.pm:334 steps_interactive.pm:642
 #, c-format
 msgid "Individual package selection"
 msgstr "Pilih paket individu"
 
-#: steps_gtk.pm:358 steps_interactive.pm:567
+#: steps_gtk.pm:358 steps_interactive.pm:566
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Ukuran total: %d / %d MB"
@@ -921,12 +897,12 @@ msgstr "Installasi minimal"
 msgid "Software Management"
 msgstr "Manajemen Perangkat Lunak"
 
-#: steps_gtk.pm:516 steps_interactive.pm:452
+#: steps_gtk.pm:516 steps_interactive.pm:451
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Pilih paket yang akan diinstal"
 
-#: steps_gtk.pm:533 steps_interactive.pm:657 steps_list.pm:32
+#: steps_gtk.pm:533 steps_interactive.pm:656 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "Menginstall"
@@ -952,7 +928,7 @@ msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d paket"
 
-#: steps_gtk.pm:650 steps_interactive.pm:820 steps_list.pm:43
+#: steps_gtk.pm:650 steps_interactive.pm:819 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Ringkasan"
@@ -962,7 +938,7 @@ msgstr "Ringkasan"
 msgid "Configure"
 msgstr "Konfigurasikan"
 
-#: steps_gtk.pm:686 steps_interactive.pm:816 steps_interactive.pm:967
+#: steps_gtk.pm:686 steps_interactive.pm:815 steps_interactive.pm:966
 #, c-format
 msgid "not configured"
 msgstr "tidak dikonfigurasikan"
@@ -1133,7 +1109,7 @@ msgstr ""
 "Sistem Anda tidak memilih ruang kosong yang cukup untuk installasi atau "
 "upgrade (%dMB > %dMB)"
 
-#: steps_interactive.pm:464
+#: steps_interactive.pm:463
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1142,53 +1118,53 @@ msgstr ""
 "Pilih muat atau simpan pilihan paket.\n"
 "Formatnya sama dengan file auto_install."
 
-#: steps_interactive.pm:466
+#: steps_interactive.pm:465
 #, c-format
 msgid "Load"
 msgstr "Beban"
 
-#: steps_interactive.pm:466
+#: steps_interactive.pm:465
 #, c-format
 msgid "Save"
 msgstr "Simpan"
 
-#: steps_interactive.pm:474
+#: steps_interactive.pm:473
 #, c-format
 msgid "Bad file"
 msgstr "File rusak"
 
-#: steps_interactive.pm:490
+#: steps_interactive.pm:489
 #, fuzzy, c-format
 msgid "KDE"
 msgstr "IDE"
 
-#: steps_interactive.pm:491
+#: steps_interactive.pm:490
 #, c-format
 msgid "GNOME"
 msgstr ""
 
-#: steps_interactive.pm:494
+#: steps_interactive.pm:493
 #, fuzzy, c-format
 msgid "Desktop Selection"
 msgstr "Pilihan Grup Paket"
 
-#: steps_interactive.pm:495
+#: steps_interactive.pm:494
 #, fuzzy, c-format
 msgid "You can choose your workstation desktop profile."
 msgstr ""
 "Anda bisa memilih profil desktop workstation Anda: KDE, GNOME atau Kustom"
 
-#: steps_interactive.pm:581
+#: steps_interactive.pm:580
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "Ukuran terpilih melebihi ruang yang ada"
 
-#: steps_interactive.pm:596
+#: steps_interactive.pm:595
 #, c-format
 msgid "Type of install"
 msgstr "Tipe installasi"
 
-#: steps_interactive.pm:597
+#: steps_interactive.pm:596
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1197,82 +1173,82 @@ msgstr ""
 "Anda belum memilih grup paket.\n"
 "Pilih installasi minimal yang Anda inginkan:"
 
-#: steps_interactive.pm:602
+#: steps_interactive.pm:601
 #, c-format
 msgid "With X"
 msgstr "Dengan X"
 
-#: steps_interactive.pm:603
+#: steps_interactive.pm:602
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "Dengan dokumentasi dasar (disarankan!)"
 
-#: steps_interactive.pm:604
+#: steps_interactive.pm:603
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Installasi minimal sesungguhnya (khususnya tanpa urpmi)"
 
-#: steps_interactive.pm:658
+#: steps_interactive.pm:657
 #, c-format
 msgid "Preparing installation"
 msgstr "Mempersiapkan installasi"
 
-#: steps_interactive.pm:666
+#: steps_interactive.pm:665
 #, c-format
 msgid "Installing package %s"
 msgstr "Menginstall paket %s"
 
-#: steps_interactive.pm:690
+#: steps_interactive.pm:689
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Terdapat kesalahan pengurutan paket:"
 
-#: steps_interactive.pm:690
+#: steps_interactive.pm:689
 #, c-format
 msgid "Go on anyway?"
 msgstr "Lanjutkan?"
 
-#: steps_interactive.pm:694
+#: steps_interactive.pm:693
 #, c-format
 msgid "Retry"
 msgstr "Ulang kembali"
 
-#: steps_interactive.pm:695
+#: steps_interactive.pm:694
 #, c-format
 msgid "Skip this package"
 msgstr "Lewati paket ini"
 
-#: steps_interactive.pm:696
+#: steps_interactive.pm:695
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "Lewati semua paket-paket dari media \"%s\""
 
-#: steps_interactive.pm:697
+#: steps_interactive.pm:696
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "Kembali pada media dan pemilihan paket"
 
-#: steps_interactive.pm:700
+#: steps_interactive.pm:699
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "Terdapat kesalahan penginstallan paket %s."
 
-#: steps_interactive.pm:719
+#: steps_interactive.pm:718
 #, c-format
 msgid "Post-install configuration"
 msgstr "Konfigurasi pasca installasi"
 
-#: steps_interactive.pm:726
+#: steps_interactive.pm:725
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "Harap pastikan media Update Modul pada drive %s"
 
-#: steps_interactive.pm:754 steps_list.pm:47
+#: steps_interactive.pm:753 steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "Update"
 
-#: steps_interactive.pm:755
+#: steps_interactive.pm:754
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1292,28 +1268,28 @@ msgstr ""
 "\n"
 "Apakah Anda ingin menginstall update?"
 
-#: steps_interactive.pm:862
+#: steps_interactive.pm:861
 #, c-format
 msgid "%s on %s"
 msgstr "%s pada %s"
 
-#: steps_interactive.pm:895 steps_interactive.pm:902 steps_interactive.pm:915
-#: steps_interactive.pm:932 steps_interactive.pm:947
+#: steps_interactive.pm:894 steps_interactive.pm:901 steps_interactive.pm:914
+#: steps_interactive.pm:931 steps_interactive.pm:946
 #, c-format
 msgid "Hardware"
 msgstr "Perangkat Keras"
 
-#: steps_interactive.pm:916 steps_interactive.pm:933
+#: steps_interactive.pm:915 steps_interactive.pm:932
 #, c-format
 msgid "Sound card"
 msgstr "Kartu suara"
 
-#: steps_interactive.pm:936
+#: steps_interactive.pm:935
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Apakah Anda memiliki kartu suara ISA?"
 
-#: steps_interactive.pm:938
+#: steps_interactive.pm:937
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -1322,68 +1298,68 @@ msgstr ""
 "Jalankan \"sndconfig\" atau \"sndconfig\" setelah installasi untuk "
 "mengkonfigurasi kartu suara Anda"
 
-#: steps_interactive.pm:940
+#: steps_interactive.pm:939
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr ""
 "Tidak ada kartu suara yang terdeteksi. Coba \"harddrake\" setelah installasi"
 
-#: steps_interactive.pm:948
+#: steps_interactive.pm:947
 #, c-format
 msgid "Graphical interface"
 msgstr "Antarmuka grafis"
 
-#: steps_interactive.pm:954 steps_interactive.pm:965
+#: steps_interactive.pm:953 steps_interactive.pm:964
 #, c-format
 msgid "Network & Internet"
 msgstr "Jaringan & Internet"
 
-#: steps_interactive.pm:966
+#: steps_interactive.pm:965
 #, c-format
 msgid "Proxies"
 msgstr "Proxy "
 
-#: steps_interactive.pm:967
+#: steps_interactive.pm:966
 #, c-format
 msgid "configured"
 msgstr "terkonfigurasi"
 
-#: steps_interactive.pm:977
+#: steps_interactive.pm:976
 #, c-format
 msgid "Security Level"
 msgstr "Tingkat Keamanan"
 
-#: steps_interactive.pm:996
+#: steps_interactive.pm:995
 #, c-format
 msgid "Firewall"
 msgstr "Firewall"
 
-#: steps_interactive.pm:1000
+#: steps_interactive.pm:999
 #, c-format
 msgid "activated"
 msgstr "telah diaktifkan"
 
-#: steps_interactive.pm:1000
+#: steps_interactive.pm:999
 #, c-format
 msgid "disabled"
 msgstr "telah dinonaktifkan"
 
-#: steps_interactive.pm:1014
+#: steps_interactive.pm:1013
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Anda belum mengkonfigurasi X. Apakah Anda yakin?"
 
-#: steps_interactive.pm:1042
+#: steps_interactive.pm:1041
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Mempersiapkan bootloader..."
 
-#: steps_interactive.pm:1043
+#: steps_interactive.pm:1042
 #, c-format
 msgid "Be patient, this may take a while..."
 msgstr ""
 
-#: steps_interactive.pm:1054
+#: steps_interactive.pm:1053
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1396,7 +1372,7 @@ msgstr ""
 "BootX atau cara lain untuk boot komputer Anda. Argumen kernel untuk fs root "
 "adalah: root=%s"
 
-#: steps_interactive.pm:1068
+#: steps_interactive.pm:1067
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1405,17 +1381,17 @@ msgstr ""
 "Pada tingkat keamanan ini, akses pada file pada partisi Windows dibatasi "
 "hanya pada administrator."
 
-#: steps_interactive.pm:1100
+#: steps_interactive.pm:1099
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Masukkan disket kosong pada drive %s"
 
-#: steps_interactive.pm:1102
+#: steps_interactive.pm:1101
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Membuat disket installasi otomatis..."
 
-#: steps_interactive.pm:1113
+#: steps_interactive.pm:1112
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1426,7 +1402,7 @@ msgstr ""
 "\n"
 "Apakah Anda ingin keluar sekarang?"
 
-#: steps_interactive.pm:1123
+#: steps_interactive.pm:1122
 #, c-format
 msgid "Congratulations"
 msgstr "Selamat"
@@ -1594,6 +1570,32 @@ msgstr ""
 #, c-format
 msgid "Mandriva: distributions for everybody's needs"
 msgstr ""
+
+#~ msgid ""
+#~ "You have selected the following server(s): %s\n"
+#~ "\n"
+#~ "\n"
+#~ "These servers are activated by default. They do not have any known "
+#~ "security\n"
+#~ "issues, but some new ones could be found. In that case, you must make "
+#~ "sure\n"
+#~ "to upgrade as soon as possible.\n"
+#~ "\n"
+#~ "\n"
+#~ "Do you really want to install these servers?\n"
+#~ msgstr ""
+#~ "Anda telah memilih server berikut: %s\n"
+#~ "\n"
+#~ "\n"
+#~ "Server ini aktif secara default. Mereka tidak memiliki masalah keamanan,\n"
+#~ "tetapi bisa saja ditemukan. Pada kasus tersebut, Anda harus memastikan\n"
+#~ "untuk melakukan upgrade secepat mungkin.\n"
+#~ "\n"
+#~ "\n"
+#~ "Apakah Anda hendak menginstall server ini?\n"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "Desktop IceWm"
 
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr "Menghubungi mirror untuk mendapatkan daftar paket yang tersedia..."

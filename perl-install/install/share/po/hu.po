@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-2009.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-16 11:41+0100\n"
+"POT-Creation-Date: 2009-02-13 16:29+0100\n"
 "PO-Revision-Date: 2009-01-10 19:31+0100\n"
 "Last-Translator: Lónyai Gergely <aleph@mandriva.org>\n"
 "Language-Team: Hungarian <aleph@mandriva.org>\n"
@@ -171,7 +171,7 @@ msgstr ""
 "kérjük indítsa el a saját rendszerét, és használja a Mandriva frissítő "
 "alkalmazását."
 
-#: any.pm:394 steps_interactive.pm:1126
+#: any.pm:394 steps_interactive.pm:1125
 #, c-format
 msgid "Reboot"
 msgstr "Újraindítás"
@@ -185,30 +185,6 @@ msgstr "Feldolgozva"
 #: any.pm:584
 #, c-format
 msgid ""
-"You have selected the following server(s): %s\n"
-"\n"
-"\n"
-"These servers are activated by default. They do not have any known security\n"
-"issues, but some new ones could be found. In that case, you must make sure\n"
-"to upgrade as soon as possible.\n"
-"\n"
-"\n"
-"Do you really want to install these servers?\n"
-msgstr ""
-"A következő kiszolgálóprogramo(ka)t választotta ki: %s\n"
-"\n"
-"\n"
-"Ezek alapértelmezésben aktiválva lesznek. Nem tartozik hozzájuk ismert\n"
-"biztonsági probléma, de később ismertté válhatnak újak. Ha ez bekövetkezik,\n"
-"akkor frissítést kell végezni minél hamarabb.\n"
-"\n"
-"\n"
-"Biztosan telepíteni szeretné a kiszolgálóprogramo(ka)t?\n"
-
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:607
-#, c-format
-msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
 "\n"
 "\n"
@@ -219,72 +195,72 @@ msgstr ""
 "\n"
 "Szeretné eltávolítani ezeket a csomagokat?\n"
 
-#: any.pm:826
+#: any.pm:803
 #, c-format
 msgid "Error reading file %s"
 msgstr "Hiba a(z) %s fájl olvasása közben"
 
-#: any.pm:1033
+#: any.pm:1010
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "A következő lemezek át lettek nevezve:"
 
-#: any.pm:1035
+#: any.pm:1012
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (korábbi név: %s)"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1111 steps_interactive.pm:955
+#: any.pm:1088 steps_interactive.pm:954
 #, c-format
 msgid "Network"
 msgstr "Hálózat"
 
-#: any.pm:1115
+#: any.pm:1092
 #, c-format
 msgid "Please choose a media"
 msgstr "Válasszon egy adatforrást"
 
-#: any.pm:1131
+#: any.pm:1108
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "A fájl már létezik. Felülírja?"
 
-#: any.pm:1135
+#: any.pm:1112
 #, c-format
 msgid "Permission denied"
 msgstr "Hozzáférés megtagadva"
 
-#: any.pm:1183
+#: any.pm:1160
 #, c-format
 msgid "Bad NFS name"
 msgstr "Helytelen NFS-név"
 
-#: any.pm:1204
+#: any.pm:1181
 #, c-format
 msgid "Bad media %s"
 msgstr "\"%s\": hibás adatforrás"
 
-#: any.pm:1247
+#: any.pm:1224
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Partícionálás előtt nem készíthetők képernyőfelvételek"
 
-#: any.pm:1255
+#: any.pm:1232
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "A képernyőfelvételek a telepítés után itt lesznek elérhetők: %s"
@@ -653,9 +629,9 @@ msgstr ""
 "Grafikus környezet felhasználóbarát alkalmazásokkal és segédprogramokkal"
 
 #: share/meta-task/compssUsers.pl:145
-#, c-format
-msgid "IceWm Desktop"
-msgstr "IceWm munkaasztal"
+#, fuzzy, c-format
+msgid "LXDE Desktop"
+msgstr "KDE munkaasztal"
 
 #: share/meta-task/compssUsers.pl:149
 #, c-format
@@ -803,17 +779,17 @@ msgstr "Így fog kinézni a '%s' munkaasztala."
 msgid "Click on images in order to see a bigger preview"
 msgstr "Kattintson a képre, ha nagyobb méretben szeretné megtekinteni"
 
-#: steps_gtk.pm:313 steps_interactive.pm:626 steps_list.pm:30
+#: steps_gtk.pm:313 steps_interactive.pm:625 steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "Csomagcsoportok kiválasztása"
 
-#: steps_gtk.pm:334 steps_interactive.pm:643
+#: steps_gtk.pm:334 steps_interactive.pm:642
 #, c-format
 msgid "Individual package selection"
 msgstr "Csomagok egyedi kiválasztása"
 
-#: steps_gtk.pm:358 steps_interactive.pm:567
+#: steps_gtk.pm:358 steps_interactive.pm:566
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Összméret: %d / %d MB"
@@ -945,12 +921,12 @@ msgstr "Minimális telepítés"
 msgid "Software Management"
 msgstr "Szoftverkezelés"
 
-#: steps_gtk.pm:516 steps_interactive.pm:452
+#: steps_gtk.pm:516 steps_interactive.pm:451
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Válassza ki a telepítendő csomagokat"
 
-#: steps_gtk.pm:533 steps_interactive.pm:657 steps_list.pm:32
+#: steps_gtk.pm:533 steps_interactive.pm:656 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "Telepítés"
@@ -977,7 +953,7 @@ msgid_plural "%d packages"
 msgstr[0] "%d csomag"
 msgstr[1] "%d csomag"
 
-#: steps_gtk.pm:650 steps_interactive.pm:820 steps_list.pm:43
+#: steps_gtk.pm:650 steps_interactive.pm:819 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Összefoglalás"
@@ -987,7 +963,7 @@ msgstr "Összefoglalás"
 msgid "Configure"
 msgstr "Beállítás"
 
-#: steps_gtk.pm:686 steps_interactive.pm:816 steps_interactive.pm:967
+#: steps_gtk.pm:686 steps_interactive.pm:815 steps_interactive.pm:966
 #, c-format
 msgid "not configured"
 msgstr "nincs beállítva"
@@ -1168,7 +1144,7 @@ msgstr ""
 "A rendszerben nincs elegendő szabad hely a telepítéshez illetve frissítéshez "
 "(%d MB > %d MB)"
 
-#: steps_interactive.pm:464
+#: steps_interactive.pm:463
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1178,52 +1154,52 @@ msgstr ""
 "csomagkijelölést vagy a jelenlegi kijelölést szeretné elmenteni.\n"
 "A formátum ugyanaz, mint az automatikus telepítési fájloknál."
 
-#: steps_interactive.pm:466
+#: steps_interactive.pm:465
 #, c-format
 msgid "Load"
 msgstr "Terhelés"
 
-#: steps_interactive.pm:466
+#: steps_interactive.pm:465
 #, c-format
 msgid "Save"
 msgstr "Mentés"
 
-#: steps_interactive.pm:474
+#: steps_interactive.pm:473
 #, c-format
 msgid "Bad file"
 msgstr "Hibás fájl"
 
-#: steps_interactive.pm:490
+#: steps_interactive.pm:489
 #, c-format
 msgid "KDE"
 msgstr "KDE"
 
-#: steps_interactive.pm:491
+#: steps_interactive.pm:490
 #, c-format
 msgid "GNOME"
 msgstr "GNOME"
 
-#: steps_interactive.pm:494
+#: steps_interactive.pm:493
 #, c-format
 msgid "Desktop Selection"
 msgstr "Munkaasztal kiválasztása"
 
-#: steps_interactive.pm:495
+#: steps_interactive.pm:494
 #, c-format
 msgid "You can choose your workstation desktop profile."
 msgstr "Kiválaszthatja a munkaállomás asztalprofilját."
 
-#: steps_interactive.pm:581
+#: steps_interactive.pm:580
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "A kijelölt összméret nagyobb, mint a rendelkezésre álló hely"
 
-#: steps_interactive.pm:596
+#: steps_interactive.pm:595
 #, c-format
 msgid "Type of install"
 msgstr "A telepítés típusa"
 
-#: steps_interactive.pm:597
+#: steps_interactive.pm:596
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1232,84 +1208,84 @@ msgstr ""
 "Egyetlen csomagcsoportot sem jelölt ki.\n"
 "Válassza ki, milyen fajta minimális telepítést szeretne."
 
-#: steps_interactive.pm:602
+#: steps_interactive.pm:601
 #, c-format
 msgid "With X"
 msgstr "X-xel együtt"
 
-#: steps_interactive.pm:603
+#: steps_interactive.pm:602
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "Alapvető dokumentációval (javasolt)"
 
-#: steps_interactive.pm:604
+#: steps_interactive.pm:603
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Valóban minimális telepítés (urpmi sincs)"
 
-#: steps_interactive.pm:658
+#: steps_interactive.pm:657
 #, c-format
 msgid "Preparing installation"
 msgstr "A telepítés előkészítése"
 
-#: steps_interactive.pm:666
+#: steps_interactive.pm:665
 #, c-format
 msgid "Installing package %s"
 msgstr "%s csomag telepítése"
 
-#: steps_interactive.pm:690
+#: steps_interactive.pm:689
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Hiba történt a csomagok rendezésekor:"
 
-#: steps_interactive.pm:690
+#: steps_interactive.pm:689
 #, c-format
 msgid "Go on anyway?"
 msgstr "Kívánja folytatni ettől függetlenül?"
 
-#: steps_interactive.pm:694
+#: steps_interactive.pm:693
 #, c-format
 msgid "Retry"
 msgstr "Újra"
 
-#: steps_interactive.pm:695
+#: steps_interactive.pm:694
 #, c-format
 msgid "Skip this package"
 msgstr "Ezen csomag kihagyása"
 
-#: steps_interactive.pm:696
+#: steps_interactive.pm:695
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "A(z) \"%s\" adathordozón levő összes csomag kihagyása"
 
-#: steps_interactive.pm:697
+#: steps_interactive.pm:696
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "Visszalépés az adathordozó és csomagválasztáshoz"
 
-#: steps_interactive.pm:700
+#: steps_interactive.pm:699
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "Hiba történt a(z) %s csomag telepítésekor."
 
-#: steps_interactive.pm:719
+#: steps_interactive.pm:718
 #, c-format
 msgid "Post-install configuration"
 msgstr "Telepítés utáni beállítások"
 
-#: steps_interactive.pm:726
+#: steps_interactive.pm:725
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr ""
 "Tegye be a frissítési modulokat tartalmazó adathordozót a(z) \"%s\" "
 "meghajtóba"
 
-#: steps_interactive.pm:754 steps_list.pm:47
+#: steps_interactive.pm:753 steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "Frissítések"
 
-#: steps_interactive.pm:755
+#: steps_interactive.pm:754
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1328,28 +1304,28 @@ msgstr ""
 "\n"
 "Szeretné feltelepíteni a frissítéseket?"
 
-#: steps_interactive.pm:862
+#: steps_interactive.pm:861
 #, c-format
 msgid "%s on %s"
 msgstr "%s ezen: %s"
 
-#: steps_interactive.pm:895 steps_interactive.pm:902 steps_interactive.pm:915
-#: steps_interactive.pm:932 steps_interactive.pm:947
+#: steps_interactive.pm:894 steps_interactive.pm:901 steps_interactive.pm:914
+#: steps_interactive.pm:931 steps_interactive.pm:946
 #, c-format
 msgid "Hardware"
 msgstr "Hardver"
 
-#: steps_interactive.pm:916 steps_interactive.pm:933
+#: steps_interactive.pm:915 steps_interactive.pm:932
 #, c-format
 msgid "Sound card"
 msgstr "Hangkártya"
 
-#: steps_interactive.pm:936
+#: steps_interactive.pm:935
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Van ISA hangkártyája?"
 
-#: steps_interactive.pm:938
+#: steps_interactive.pm:937
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -1358,69 +1334,69 @@ msgstr ""
 "A hangkártya beállításához futtassa az \"alsaconf\" vagy az \"sndconfig\" "
 "programot a telepítés után."
 
-#: steps_interactive.pm:940
+#: steps_interactive.pm:939
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr ""
 "A telepítő nem talált hangkártyát. Futtassa a \"harddrake\" programot a "
 "telepítés után."
 
-#: steps_interactive.pm:948
+#: steps_interactive.pm:947
 #, c-format
 msgid "Graphical interface"
 msgstr "Grafikus felület"
 
-#: steps_interactive.pm:954 steps_interactive.pm:965
+#: steps_interactive.pm:953 steps_interactive.pm:964
 #, c-format
 msgid "Network & Internet"
 msgstr "Hálózat és internet"
 
-#: steps_interactive.pm:966
+#: steps_interactive.pm:965
 #, c-format
 msgid "Proxies"
 msgstr "Proxyk"
 
-#: steps_interactive.pm:967
+#: steps_interactive.pm:966
 #, c-format
 msgid "configured"
 msgstr "beállítva"
 
-#: steps_interactive.pm:977
+#: steps_interactive.pm:976
 #, c-format
 msgid "Security Level"
 msgstr "Biztonsági szint"
 
-#: steps_interactive.pm:996
+#: steps_interactive.pm:995
 #, c-format
 msgid "Firewall"
 msgstr "Tűzfal"
 
-#: steps_interactive.pm:1000
+#: steps_interactive.pm:999
 #, c-format
 msgid "activated"
 msgstr "aktiválva"
 
-#: steps_interactive.pm:1000
+#: steps_interactive.pm:999
 #, c-format
 msgid "disabled"
 msgstr "kikapcsolva"
 
-#: steps_interactive.pm:1014
+#: steps_interactive.pm:1013
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Az X grafikus rendszert nem állította be. Biztosan megfelel így?"
 
-#: steps_interactive.pm:1042
+#: steps_interactive.pm:1041
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Rendszerbetöltő előkészítése..."
 
-#: steps_interactive.pm:1043
+#: steps_interactive.pm:1042
 #, c-format
 msgid "Be patient, this may take a while..."
 msgstr "Egy kis türelmét kérem..."
 
-#: steps_interactive.pm:1054
+#: steps_interactive.pm:1053
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1433,7 +1409,7 @@ msgstr ""
 "indításához BootX-re vagy egyéb módszerre lesz szükség. A gyökér-"
 "fájlrendszer kernelparamétere: root=%s"
 
-#: steps_interactive.pm:1068
+#: steps_interactive.pm:1067
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1442,17 +1418,17 @@ msgstr ""
 "Ezen a biztonsági szinten csak a rendszergazda érheti el a windowsos "
 "partíción levő fájlokat."
 
-#: steps_interactive.pm:1100
+#: steps_interactive.pm:1099
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Tegyen egy üres floppyt a(z) \"%s\" meghajtóba"
 
-#: steps_interactive.pm:1102
+#: steps_interactive.pm:1101
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Automatikus telepítőfloppy készítése..."
 
-#: steps_interactive.pm:1113
+#: steps_interactive.pm:1112
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1463,7 +1439,7 @@ msgstr ""
 "\n"
 "Biztos, hogy ki akar lépni?"
 
-#: steps_interactive.pm:1123
+#: steps_interactive.pm:1122
 #, c-format
 msgid "Congratulations"
 msgstr "Gratulálunk"
@@ -1631,6 +1607,33 @@ msgstr "Egy teljes Mandriva Linux munkaasztal, támogatással"
 #, c-format
 msgid "Mandriva: distributions for everybody's needs"
 msgstr "Mandriva: disztribúciók minden igényre"
+
+#~ msgid ""
+#~ "You have selected the following server(s): %s\n"
+#~ "\n"
+#~ "\n"
+#~ "These servers are activated by default. They do not have any known "
+#~ "security\n"
+#~ "issues, but some new ones could be found. In that case, you must make "
+#~ "sure\n"
+#~ "to upgrade as soon as possible.\n"
+#~ "\n"
+#~ "\n"
+#~ "Do you really want to install these servers?\n"
+#~ msgstr ""
+#~ "A következő kiszolgálóprogramo(ka)t választotta ki: %s\n"
+#~ "\n"
+#~ "\n"
+#~ "Ezek alapértelmezésben aktiválva lesznek. Nem tartozik hozzájuk ismert\n"
+#~ "biztonsági probléma, de később ismertté válhatnak újak. Ha ez "
+#~ "bekövetkezik,\n"
+#~ "akkor frissítést kell végezni minél hamarabb.\n"
+#~ "\n"
+#~ "\n"
+#~ "Biztosan telepíteni szeretné a kiszolgálóprogramo(ka)t?\n"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "IceWm munkaasztal"
 
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr ""

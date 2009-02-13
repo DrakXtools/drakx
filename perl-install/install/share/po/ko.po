@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ko(metanav)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-16 11:41+0100\n"
+"POT-Creation-Date: 2009-02-13 16:29+0100\n"
 "PO-Revision-Date: 2007-06-18 14:54+0900\n"
 "Last-Translator: meta <hbahn@metq.com>\n"
 "Language-Team: ahb hong-bae <ko@li.org>\n"
@@ -158,7 +158,7 @@ msgid ""
 "please reboot your system and upgrade using the Mandriva update applet."
 msgstr ""
 
-#: any.pm:394 steps_interactive.pm:1126
+#: any.pm:394 steps_interactive.pm:1125
 #, c-format
 msgid "Reboot"
 msgstr "다시 시작"
@@ -172,31 +172,6 @@ msgstr ""
 #: any.pm:584
 #, c-format
 msgid ""
-"You have selected the following server(s): %s\n"
-"\n"
-"\n"
-"These servers are activated by default. They do not have any known security\n"
-"issues, but some new ones could be found. In that case, you must make sure\n"
-"to upgrade as soon as possible.\n"
-"\n"
-"\n"
-"Do you really want to install these servers?\n"
-msgstr ""
-"다음 서버들이 선택되었습니다: %s\n"
-"\n"
-"\n"
-"이 서버들의 기본 설정은 활성화상태입니다. 알려진 보안 문제는 없지만, 새로운 "
-"문제점이 발견될 수도 있습니다.\n"
-" 그럴 경우에는 가능한 한 신속하게\n"
-"업그레이드해야 합니다.\n"
-"\n"
-"\n"
-"정말로 이 서버들을 설치합니까?\n"
-
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:607
-#, c-format
-msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
 "\n"
 "\n"
@@ -207,72 +182,72 @@ msgstr ""
 "\n"
 "정말 이 패키지들을 제거 하시겠습니까?\n"
 
-#: any.pm:826
+#: any.pm:803
 #, c-format
 msgid "Error reading file %s"
 msgstr "%s 파일을 읽는중 오류가 발생했습니다."
 
-#: any.pm:1033
+#: any.pm:1010
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "다음 디스크이름이 변경되었습니다. :"
 
-#: any.pm:1035
+#: any.pm:1012
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (이전 이름은 %s였음.)"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "HTTP"
 msgstr "HTTP(하이퍼텍스트 전송 규약)"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "FTP"
 msgstr "FTP(파일 전송규약)"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "NFS"
 msgstr "NFS(망 파일 시스템)"
 
-#: any.pm:1111 steps_interactive.pm:955
+#: any.pm:1088 steps_interactive.pm:954
 #, c-format
 msgid "Network"
 msgstr "망"
 
-#: any.pm:1115
+#: any.pm:1092
 #, c-format
 msgid "Please choose a media"
 msgstr "매체를 선택하시오"
 
-#: any.pm:1131
+#: any.pm:1108
 #, fuzzy, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "파일이 이미 존재합니다. 덮어쓸까요?"
 
-#: any.pm:1135
+#: any.pm:1112
 #, c-format
 msgid "Permission denied"
 msgstr "권한이 없습니다."
 
-#: any.pm:1183
+#: any.pm:1160
 #, c-format
 msgid "Bad NFS name"
 msgstr "부정확한 NFS 이름입니다"
 
-#: any.pm:1204
+#: any.pm:1181
 #, c-format
 msgid "Bad media %s"
 msgstr "알 수 없는 미디어 %s"
 
-#: any.pm:1247
+#: any.pm:1224
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "파티션을 나누기 전에는 스크린샷을 만들 수 없습니다."
 
-#: any.pm:1255
+#: any.pm:1232
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "스크린샷은 설치 이후에 %s에 위치 할 것입니다."
@@ -629,8 +604,8 @@ msgid ""
 msgstr "사용자 친화적 응용 프로그램들과 데스크탑 도구들을 가진 그래픽 환경"
 
 #: share/meta-task/compssUsers.pl:145
-#, c-format
-msgid "IceWm Desktop"
+#, fuzzy, c-format
+msgid "LXDE Desktop"
 msgstr "IceWm 데스크탑"
 
 #: share/meta-task/compssUsers.pl:149
@@ -779,17 +754,17 @@ msgstr ""
 msgid "Click on images in order to see a bigger preview"
 msgstr ""
 
-#: steps_gtk.pm:313 steps_interactive.pm:626 steps_list.pm:30
+#: steps_gtk.pm:313 steps_interactive.pm:625 steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "패키지 그룹 선택"
 
-#: steps_gtk.pm:334 steps_interactive.pm:643
+#: steps_gtk.pm:334 steps_interactive.pm:642
 #, c-format
 msgid "Individual package selection"
 msgstr "개별 팩키지 선택"
 
-#: steps_gtk.pm:358 steps_interactive.pm:567
+#: steps_gtk.pm:358 steps_interactive.pm:566
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "전체 크기: %d / %d MB"
@@ -906,12 +881,12 @@ msgstr "최소 설치"
 msgid "Software Management"
 msgstr "소프트웨어 관리"
 
-#: steps_gtk.pm:516 steps_interactive.pm:452
+#: steps_gtk.pm:516 steps_interactive.pm:451
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "설치할 패키지를 선택하시오."
 
-#: steps_gtk.pm:533 steps_interactive.pm:657 steps_list.pm:32
+#: steps_gtk.pm:533 steps_interactive.pm:656 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "설치중"
@@ -938,7 +913,7 @@ msgid_plural "%d packages"
 msgstr[0] "%d 패키지"
 msgstr[1] "%d 패키지"
 
-#: steps_gtk.pm:650 steps_interactive.pm:820 steps_list.pm:43
+#: steps_gtk.pm:650 steps_interactive.pm:819 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "요약설명"
@@ -948,7 +923,7 @@ msgstr "요약설명"
 msgid "Configure"
 msgstr "설정"
 
-#: steps_gtk.pm:686 steps_interactive.pm:816 steps_interactive.pm:967
+#: steps_gtk.pm:686 steps_interactive.pm:815 steps_interactive.pm:966
 #, c-format
 msgid "not configured"
 msgstr "설정되지 않음"
@@ -1121,7 +1096,7 @@ msgstr ""
 "현재 시스템에는 설치 또는 업그레이드 할만한 충분한 공간이 \n"
 "남아있지 않습니다.(%dMB > %dMB)"
 
-#: steps_interactive.pm:464
+#: steps_interactive.pm:463
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1130,52 +1105,52 @@ msgstr ""
 "패키지 선택목록을 불러올지 혹은 저장할지를 선택하세요.\n"
 "형식(포맷)은 자동설치 생성 파일과 동일합니다."
 
-#: steps_interactive.pm:466
+#: steps_interactive.pm:465
 #, c-format
 msgid "Load"
 msgstr "불러오기"
 
-#: steps_interactive.pm:466
+#: steps_interactive.pm:465
 #, c-format
 msgid "Save"
 msgstr "저장"
 
-#: steps_interactive.pm:474
+#: steps_interactive.pm:473
 #, c-format
 msgid "Bad file"
 msgstr "손상된 파일 혹은 없는 파일입니다."
 
-#: steps_interactive.pm:490
+#: steps_interactive.pm:489
 #, fuzzy, c-format
 msgid "KDE"
 msgstr "IDE"
 
-#: steps_interactive.pm:491
+#: steps_interactive.pm:490
 #, c-format
 msgid "GNOME"
 msgstr ""
 
-#: steps_interactive.pm:494
+#: steps_interactive.pm:493
 #, fuzzy, c-format
 msgid "Desktop Selection"
 msgstr "패키지 그룹 선택"
 
-#: steps_interactive.pm:495
+#: steps_interactive.pm:494
 #, c-format
 msgid "You can choose your workstation desktop profile."
 msgstr ""
 
-#: steps_interactive.pm:581
+#: steps_interactive.pm:580
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "선택된 용량이 사용할 수 있는 공간보다 큽니다."
 
-#: steps_interactive.pm:596
+#: steps_interactive.pm:595
 #, c-format
 msgid "Type of install"
 msgstr "설치 타입"
 
-#: steps_interactive.pm:597
+#: steps_interactive.pm:596
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1184,82 +1159,82 @@ msgstr ""
 "어떤 패키지 그룹도 선택되지 않았습니다.\n"
 "패키지 최소설치 이상을  선택하십시오."
 
-#: steps_interactive.pm:602
+#: steps_interactive.pm:601
 #, c-format
 msgid "With X"
 msgstr "X 포함"
 
-#: steps_interactive.pm:603
+#: steps_interactive.pm:602
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "기본 문서 포함(추천!)"
 
-#: steps_interactive.pm:604
+#: steps_interactive.pm:603
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "최소 설치(특히 urpmi사용안함)"
 
-#: steps_interactive.pm:658
+#: steps_interactive.pm:657
 #, c-format
 msgid "Preparing installation"
 msgstr "설치 준비중입니다"
 
-#: steps_interactive.pm:666
+#: steps_interactive.pm:665
 #, c-format
 msgid "Installing package %s"
 msgstr "%s 패키지 설치중"
 
-#: steps_interactive.pm:690
+#: steps_interactive.pm:689
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "패키지를 정렬하는 중 오류발생:"
 
-#: steps_interactive.pm:690
+#: steps_interactive.pm:689
 #, c-format
 msgid "Go on anyway?"
 msgstr "계속 진행합니까?"
 
-#: steps_interactive.pm:694
+#: steps_interactive.pm:693
 #, c-format
 msgid "Retry"
 msgstr "재시도"
 
-#: steps_interactive.pm:695
+#: steps_interactive.pm:694
 #, c-format
 msgid "Skip this package"
 msgstr "이 패키지는 설치하지 않고 지나가기"
 
-#: steps_interactive.pm:696
+#: steps_interactive.pm:695
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "\"%s\"에서 모든 패키지를 설치하지 않음"
 
-#: steps_interactive.pm:697
+#: steps_interactive.pm:696
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "미디어나 패키지 선택목록으로 돌아가기"
 
-#: steps_interactive.pm:700
+#: steps_interactive.pm:699
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "다음 패키지 설치중 오류 발생: %s."
 
-#: steps_interactive.pm:719
+#: steps_interactive.pm:718
 #, c-format
 msgid "Post-install configuration"
 msgstr "설치 후 환경설정"
 
-#: steps_interactive.pm:726
+#: steps_interactive.pm:725
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "업데이트 모듈 매체가 %s 드라이브에 있도록 하십시오."
 
-#: steps_interactive.pm:754 steps_list.pm:47
+#: steps_interactive.pm:753 steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "업데이트"
 
-#: steps_interactive.pm:755
+#: steps_interactive.pm:754
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1277,28 +1252,28 @@ msgstr ""
 "이 패키지들을 다운로드 받으려면 인터넷이 연결되어 있어야 합니다.\n"
 "업데이트를 설치 하시겠습니까?"
 
-#: steps_interactive.pm:862
+#: steps_interactive.pm:861
 #, c-format
 msgid "%s on %s"
 msgstr "%s (%s 컴퓨터)"
 
-#: steps_interactive.pm:895 steps_interactive.pm:902 steps_interactive.pm:915
-#: steps_interactive.pm:932 steps_interactive.pm:947
+#: steps_interactive.pm:894 steps_interactive.pm:901 steps_interactive.pm:914
+#: steps_interactive.pm:931 steps_interactive.pm:946
 #, c-format
 msgid "Hardware"
 msgstr "하드웨어"
 
-#: steps_interactive.pm:916 steps_interactive.pm:933
+#: steps_interactive.pm:915 steps_interactive.pm:932
 #, c-format
 msgid "Sound card"
 msgstr "사운드 카드"
 
-#: steps_interactive.pm:936
+#: steps_interactive.pm:935
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "ISA 사운드 카드가 있습니까?"
 
-#: steps_interactive.pm:938
+#: steps_interactive.pm:937
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -1307,69 +1282,69 @@ msgstr ""
 "사운드 카드를 설정하려면 설치 후에\n"
 "「alsaconf」 또는 「sndconfig」명령을 실행해주십시요."
 
-#: steps_interactive.pm:940
+#: steps_interactive.pm:939
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr ""
 "사운드 카드가 발견되지 않았습니다.\n"
 "설치 후에「harddrake」명령을 실행해주십시요."
 
-#: steps_interactive.pm:948
+#: steps_interactive.pm:947
 #, c-format
 msgid "Graphical interface"
 msgstr "시작시 바로 X-Window 실행"
 
-#: steps_interactive.pm:954 steps_interactive.pm:965
+#: steps_interactive.pm:953 steps_interactive.pm:964
 #, c-format
 msgid "Network & Internet"
 msgstr "망과 인터넷"
 
-#: steps_interactive.pm:966
+#: steps_interactive.pm:965
 #, c-format
 msgid "Proxies"
 msgstr "프록시"
 
-#: steps_interactive.pm:967
+#: steps_interactive.pm:966
 #, c-format
 msgid "configured"
 msgstr "재설정되었습니다."
 
-#: steps_interactive.pm:977
+#: steps_interactive.pm:976
 #, c-format
 msgid "Security Level"
 msgstr "보안 등급"
 
-#: steps_interactive.pm:996
+#: steps_interactive.pm:995
 #, c-format
 msgid "Firewall"
 msgstr "방화벽"
 
-#: steps_interactive.pm:1000
+#: steps_interactive.pm:999
 #, c-format
 msgid "activated"
 msgstr "활성화"
 
-#: steps_interactive.pm:1000
+#: steps_interactive.pm:999
 #, c-format
 msgid "disabled"
 msgstr "금지"
 
-#: steps_interactive.pm:1014
+#: steps_interactive.pm:1013
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "X 설정이 되지 않았습니다. 설정하시겠습니까?"
 
-#: steps_interactive.pm:1042
+#: steps_interactive.pm:1041
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "부트 로더 준비중"
 
-#: steps_interactive.pm:1043
+#: steps_interactive.pm:1042
 #, c-format
 msgid "Be patient, this may take a while..."
 msgstr ""
 
-#: steps_interactive.pm:1054
+#: steps_interactive.pm:1053
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1383,7 +1358,7 @@ msgstr ""
 "BootX나 또는 몇몇 방법을 써야 될수도 있습니다. \n"
 "root fs를 위한 kernel argument : root=%s"
 
-#: steps_interactive.pm:1068
+#: steps_interactive.pm:1067
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1392,17 +1367,17 @@ msgstr ""
 "이 보안 등급에서는 윈도우즈 파티션에서의 파일 접근이 관리자에 의해 제한 됩니"
 "다."
 
-#: steps_interactive.pm:1100
+#: steps_interactive.pm:1099
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "%s 드라이브에 빈 플로피 디스크를 넣으세요"
 
-#: steps_interactive.pm:1102
+#: steps_interactive.pm:1101
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "자동 설치 플로피 디스크 생성 중"
 
-#: steps_interactive.pm:1113
+#: steps_interactive.pm:1112
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1413,7 +1388,7 @@ msgstr ""
 "\n"
 "정말 지금 종료 하시겠습니까?"
 
-#: steps_interactive.pm:1123
+#: steps_interactive.pm:1122
 #, c-format
 msgid "Congratulations"
 msgstr "축하합니다."
@@ -1581,6 +1556,33 @@ msgstr ""
 #, c-format
 msgid "Mandriva: distributions for everybody's needs"
 msgstr ""
+
+#~ msgid ""
+#~ "You have selected the following server(s): %s\n"
+#~ "\n"
+#~ "\n"
+#~ "These servers are activated by default. They do not have any known "
+#~ "security\n"
+#~ "issues, but some new ones could be found. In that case, you must make "
+#~ "sure\n"
+#~ "to upgrade as soon as possible.\n"
+#~ "\n"
+#~ "\n"
+#~ "Do you really want to install these servers?\n"
+#~ msgstr ""
+#~ "다음 서버들이 선택되었습니다: %s\n"
+#~ "\n"
+#~ "\n"
+#~ "이 서버들의 기본 설정은 활성화상태입니다. 알려진 보안 문제는 없지만, 새로"
+#~ "운 문제점이 발견될 수도 있습니다.\n"
+#~ " 그럴 경우에는 가능한 한 신속하게\n"
+#~ "업그레이드해야 합니다.\n"
+#~ "\n"
+#~ "\n"
+#~ "정말로 이 서버들을 설치합니까?\n"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "IceWm 데스크탑"
 
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr "사용할 패키지의 리스트를 미러 사이트에서 받습니다."

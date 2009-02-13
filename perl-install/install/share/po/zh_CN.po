@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 2008 Spring\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-16 11:41+0100\n"
+"POT-Creation-Date: 2009-02-13 16:29+0100\n"
 "PO-Revision-Date: 2008-03-22 13:46+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
@@ -160,7 +160,7 @@ msgstr ""
 "使\n"
 "用 Mandriva 更新小程序升级。"
 
-#: any.pm:394 steps_interactive.pm:1126
+#: any.pm:394 steps_interactive.pm:1125
 #, c-format
 msgid "Reboot"
 msgstr "重新启动"
@@ -174,29 +174,6 @@ msgstr ""
 #: any.pm:584
 #, c-format
 msgid ""
-"You have selected the following server(s): %s\n"
-"\n"
-"\n"
-"These servers are activated by default. They do not have any known security\n"
-"issues, but some new ones could be found. In that case, you must make sure\n"
-"to upgrade as soon as possible.\n"
-"\n"
-"\n"
-"Do you really want to install these servers?\n"
-msgstr ""
-"您选择了以下服务器: %s\n"
-"\n"
-"\n"
-"这些服务器默认会被激活。它们没有已知的安全问题, 但可能发现新问题。如果那样, "
-"您一定要立即升级。\n"
-"\n"
-"\n"
-"您真要安装这些服务器吗?\n"
-
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:607
-#, c-format
-msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
 "\n"
 "\n"
@@ -207,72 +184,72 @@ msgstr ""
 "\n"
 "您确定要删除这些软件包吗?\n"
 
-#: any.pm:826
+#: any.pm:803
 #, c-format
 msgid "Error reading file %s"
 msgstr "请取文件 %s 出错"
 
-#: any.pm:1033
+#: any.pm:1010
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "下列盘片已重命名:"
 
-#: any.pm:1035
+#: any.pm:1012
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s(以前的名称为 %s)"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1111 steps_interactive.pm:955
+#: any.pm:1088 steps_interactive.pm:954
 #, c-format
 msgid "Network"
 msgstr "网络"
 
-#: any.pm:1115
+#: any.pm:1092
 #, c-format
 msgid "Please choose a media"
 msgstr "请选择介质"
 
-#: any.pm:1131
+#: any.pm:1108
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "文件已经存在。覆盖吗?"
 
-#: any.pm:1135
+#: any.pm:1112
 #, c-format
 msgid "Permission denied"
 msgstr "没有权限"
 
-#: any.pm:1183
+#: any.pm:1160
 #, c-format
 msgid "Bad NFS name"
 msgstr "无效的 NFS 名称"
 
-#: any.pm:1204
+#: any.pm:1181
 #, c-format
 msgid "Bad media %s"
 msgstr "无效的介质 %s"
 
-#: any.pm:1247
+#: any.pm:1224
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "无法在分区完成之前进行屏幕捕捉"
 
-#: any.pm:1255
+#: any.pm:1232
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "安装完成后, 所有的屏幕抓图都会保存到 %s 之中"
@@ -630,9 +607,9 @@ msgid ""
 msgstr "配备了用户友善的应用程序与桌面工具的图形环境"
 
 #: share/meta-task/compssUsers.pl:145
-#, c-format
-msgid "IceWm Desktop"
-msgstr "IceWM 桌面"
+#, fuzzy, c-format
+msgid "LXDE Desktop"
+msgstr "KDE 桌面"
 
 #: share/meta-task/compssUsers.pl:149
 #, c-format
@@ -777,17 +754,17 @@ msgstr "这是“%s”桌面的预览。"
 msgid "Click on images in order to see a bigger preview"
 msgstr "单击图像可查看更大的预览"
 
-#: steps_gtk.pm:313 steps_interactive.pm:626 steps_list.pm:30
+#: steps_gtk.pm:313 steps_interactive.pm:625 steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "程序组选择"
 
-#: steps_gtk.pm:334 steps_interactive.pm:643
+#: steps_gtk.pm:334 steps_interactive.pm:642
 #, c-format
 msgid "Individual package selection"
 msgstr "选择单个软件包"
 
-#: steps_gtk.pm:358 steps_interactive.pm:567
+#: steps_gtk.pm:358 steps_interactive.pm:566
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "总共大小: %d / %d MB"
@@ -904,12 +881,12 @@ msgstr "最小安装"
 msgid "Software Management"
 msgstr "软件管理"
 
-#: steps_gtk.pm:516 steps_interactive.pm:452
+#: steps_gtk.pm:516 steps_interactive.pm:451
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "选择您想要安装的软件包"
 
-#: steps_gtk.pm:533 steps_interactive.pm:657 steps_list.pm:32
+#: steps_gtk.pm:533 steps_interactive.pm:656 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "安装"
@@ -935,7 +912,7 @@ msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d 个软件包"
 
-#: steps_gtk.pm:650 steps_interactive.pm:820 steps_list.pm:43
+#: steps_gtk.pm:650 steps_interactive.pm:819 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "摘要"
@@ -945,7 +922,7 @@ msgstr "摘要"
 msgid "Configure"
 msgstr "配置"
 
-#: steps_gtk.pm:686 steps_interactive.pm:816 steps_interactive.pm:967
+#: steps_gtk.pm:686 steps_interactive.pm:815 steps_interactive.pm:966
 #, c-format
 msgid "not configured"
 msgstr "未配置"
@@ -1119,7 +1096,7 @@ msgid ""
 "dMB > %dMB)"
 msgstr "系统的剩余空间不足以完成安装或升级(%d MB > %d MB)"
 
-#: steps_interactive.pm:464
+#: steps_interactive.pm:463
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1128,134 +1105,134 @@ msgstr ""
 "请选择装入或保存软件包选择息。\n"
 "格式与自动安装生成的文件一样。"
 
-#: steps_interactive.pm:466
+#: steps_interactive.pm:465
 #, c-format
 msgid "Load"
 msgstr "装入"
 
-#: steps_interactive.pm:466
+#: steps_interactive.pm:465
 #, c-format
 msgid "Save"
 msgstr "保存"
 
-#: steps_interactive.pm:474
+#: steps_interactive.pm:473
 #, c-format
 msgid "Bad file"
 msgstr "文件有错"
 
-#: steps_interactive.pm:490
+#: steps_interactive.pm:489
 #, c-format
 msgid "KDE"
 msgstr "KDE"
 
-#: steps_interactive.pm:491
+#: steps_interactive.pm:490
 #, c-format
 msgid "GNOME"
 msgstr "GNOME"
 
-#: steps_interactive.pm:494
+#: steps_interactive.pm:493
 #, c-format
 msgid "Desktop Selection"
 msgstr "桌面选择"
 
-#: steps_interactive.pm:495
+#: steps_interactive.pm:494
 #, c-format
 msgid "You can choose your workstation desktop profile."
 msgstr "您可以选择您的工作站配置文件："
 
-#: steps_interactive.pm:581
+#: steps_interactive.pm:580
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "您选择的超过可用空间"
 
-#: steps_interactive.pm:596
+#: steps_interactive.pm:595
 #, c-format
 msgid "Type of install"
 msgstr "安装类型"
 
-#: steps_interactive.pm:597
+#: steps_interactive.pm:596
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
 "Please choose the minimal installation you want:"
 msgstr "您没有选择任何的组件, 请选择最小安装:"
 
-#: steps_interactive.pm:602
+#: steps_interactive.pm:601
 #, c-format
 msgid "With X"
 msgstr "安装 X"
 
-#: steps_interactive.pm:603
+#: steps_interactive.pm:602
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "安装基础文档(建议!)"
 
-#: steps_interactive.pm:604
+#: steps_interactive.pm:603
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "真正最小安装(注意没有 urpmi 包管理工具)"
 
-#: steps_interactive.pm:658
+#: steps_interactive.pm:657
 #, c-format
 msgid "Preparing installation"
 msgstr "正在准备安装"
 
-#: steps_interactive.pm:666
+#: steps_interactive.pm:665
 #, c-format
 msgid "Installing package %s"
 msgstr "正在安装软件包 %s"
 
-#: steps_interactive.pm:690
+#: steps_interactive.pm:689
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "排列软件包时出错: "
 
-#: steps_interactive.pm:690
+#: steps_interactive.pm:689
 #, c-format
 msgid "Go on anyway?"
 msgstr "真的要继续?"
 
-#: steps_interactive.pm:694
+#: steps_interactive.pm:693
 #, c-format
 msgid "Retry"
 msgstr "重试"
 
-#: steps_interactive.pm:695
+#: steps_interactive.pm:694
 #, c-format
 msgid "Skip this package"
 msgstr "跳过此软件包"
 
-#: steps_interactive.pm:696
+#: steps_interactive.pm:695
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "跳过介质“%s”中的全部软件包"
 
-#: steps_interactive.pm:697
+#: steps_interactive.pm:696
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "返回介质和软件包选择"
 
-#: steps_interactive.pm:700
+#: steps_interactive.pm:699
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "安装软件包 %s 时出错。"
 
-#: steps_interactive.pm:719
+#: steps_interactive.pm:718
 #, c-format
 msgid "Post-install configuration"
 msgstr "安装后的配置"
 
-#: steps_interactive.pm:726
+#: steps_interactive.pm:725
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "请确定更新模块介质位于驱动器 %s"
 
-#: steps_interactive.pm:754 steps_list.pm:47
+#: steps_interactive.pm:753 steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "更新"
 
-#: steps_interactive.pm:755
+#: steps_interactive.pm:754
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1274,95 +1251,95 @@ msgstr ""
 "\n"
 "您是否要安装升级包?"
 
-#: steps_interactive.pm:862
+#: steps_interactive.pm:861
 #, c-format
 msgid "%s on %s"
 msgstr "位于 %2$s 上的 %1$s"
 
-#: steps_interactive.pm:895 steps_interactive.pm:902 steps_interactive.pm:915
-#: steps_interactive.pm:932 steps_interactive.pm:947
+#: steps_interactive.pm:894 steps_interactive.pm:901 steps_interactive.pm:914
+#: steps_interactive.pm:931 steps_interactive.pm:946
 #, c-format
 msgid "Hardware"
 msgstr "硬件"
 
-#: steps_interactive.pm:916 steps_interactive.pm:933
+#: steps_interactive.pm:915 steps_interactive.pm:932
 #, c-format
 msgid "Sound card"
 msgstr "声卡"
 
-#: steps_interactive.pm:936
+#: steps_interactive.pm:935
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "您有 ISA 声卡吗?"
 
-#: steps_interactive.pm:938
+#: steps_interactive.pm:937
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
 "card"
 msgstr "安装之后运行“alsaconf”或“sndconfig”来配置您的声卡"
 
-#: steps_interactive.pm:940
+#: steps_interactive.pm:939
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr "没有检测到声卡。请在安装之后尝试“Drak 硬件配置”。"
 
-#: steps_interactive.pm:948
+#: steps_interactive.pm:947
 #, c-format
 msgid "Graphical interface"
 msgstr "图形界面"
 
-#: steps_interactive.pm:954 steps_interactive.pm:965
+#: steps_interactive.pm:953 steps_interactive.pm:964
 #, c-format
 msgid "Network & Internet"
 msgstr "网络和 Internet"
 
-#: steps_interactive.pm:966
+#: steps_interactive.pm:965
 #, c-format
 msgid "Proxies"
 msgstr "代理服务器"
 
-#: steps_interactive.pm:967
+#: steps_interactive.pm:966
 #, c-format
 msgid "configured"
 msgstr "已配置"
 
-#: steps_interactive.pm:977
+#: steps_interactive.pm:976
 #, c-format
 msgid "Security Level"
 msgstr "安全级别"
 
-#: steps_interactive.pm:996
+#: steps_interactive.pm:995
 #, c-format
 msgid "Firewall"
 msgstr "防火墙"
 
-#: steps_interactive.pm:1000
+#: steps_interactive.pm:999
 #, c-format
 msgid "activated"
 msgstr "已激活"
 
-#: steps_interactive.pm:1000
+#: steps_interactive.pm:999
 #, c-format
 msgid "disabled"
 msgstr "已禁用"
 
-#: steps_interactive.pm:1014
+#: steps_interactive.pm:1013
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "您还没有配置过 X。您真的想要这样吗?"
 
-#: steps_interactive.pm:1042
+#: steps_interactive.pm:1041
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "正在准备引导程序..."
 
-#: steps_interactive.pm:1043
+#: steps_interactive.pm:1042
 #, c-format
 msgid "Be patient, this may take a while..."
 msgstr ""
 
-#: steps_interactive.pm:1054
+#: steps_interactive.pm:1053
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1374,24 +1351,24 @@ msgstr ""
 "续, 不过您需要使用 BootX 或其它方式启动您的机器。根文件系统的内核参数是："
 "root=%s"
 
-#: steps_interactive.pm:1068
+#: steps_interactive.pm:1067
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
 "restricted to the administrator."
 msgstr "在此安全级别中, 只有管理员才能访问 Windows 分区中的文件。"
 
-#: steps_interactive.pm:1100
+#: steps_interactive.pm:1099
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "请在驱动器 %s 中插入一张空白软盘"
 
-#: steps_interactive.pm:1102
+#: steps_interactive.pm:1101
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "正在创建自动安装软盘..."
 
-#: steps_interactive.pm:1113
+#: steps_interactive.pm:1112
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1402,7 +1379,7 @@ msgstr ""
 "\n"
 "您真的要现在退出吗?"
 
-#: steps_interactive.pm:1123
+#: steps_interactive.pm:1122
 #, c-format
 msgid "Congratulations"
 msgstr "恭喜"
@@ -1570,6 +1547,31 @@ msgstr "Mandriva Linux 桌面旗舰产品，附带完善的售后服务支持"
 #, c-format
 msgid "Mandriva: distributions for everybody's needs"
 msgstr "Mandriva 在手，应用无忧"
+
+#~ msgid ""
+#~ "You have selected the following server(s): %s\n"
+#~ "\n"
+#~ "\n"
+#~ "These servers are activated by default. They do not have any known "
+#~ "security\n"
+#~ "issues, but some new ones could be found. In that case, you must make "
+#~ "sure\n"
+#~ "to upgrade as soon as possible.\n"
+#~ "\n"
+#~ "\n"
+#~ "Do you really want to install these servers?\n"
+#~ msgstr ""
+#~ "您选择了以下服务器: %s\n"
+#~ "\n"
+#~ "\n"
+#~ "这些服务器默认会被激活。它们没有已知的安全问题, 但可能发现新问题。如果那"
+#~ "样, 您一定要立即升级。\n"
+#~ "\n"
+#~ "\n"
+#~ "您真要安装这些服务器吗?\n"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "IceWM 桌面"
 
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr "正在连接镜像网站以取得可供安装的软件包的列表..."

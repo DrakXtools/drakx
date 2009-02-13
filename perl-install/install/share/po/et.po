@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-et\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-16 11:41+0100\n"
+"POT-Creation-Date: 2009-02-13 16:29+0100\n"
 "PO-Revision-Date: 2009-01-02 14:05+0200\n"
 "Last-Translator: Marek Laane <bald@starman.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -165,7 +165,7 @@ msgstr ""
 "käivitage oma süsteem uuesti ja sooritage uuendamine Mandriva uuendusapleti "
 "abil."
 
-#: any.pm:394 steps_interactive.pm:1126
+#: any.pm:394 steps_interactive.pm:1125
 #, c-format
 msgid "Reboot"
 msgstr "Taaskäivitus"
@@ -179,31 +179,6 @@ msgstr "Jätka"
 #: any.pm:584
 #, c-format
 msgid ""
-"You have selected the following server(s): %s\n"
-"\n"
-"\n"
-"These servers are activated by default. They do not have any known security\n"
-"issues, but some new ones could be found. In that case, you must make sure\n"
-"to upgrade as soon as possible.\n"
-"\n"
-"\n"
-"Do you really want to install these servers?\n"
-msgstr ""
-"Olete valinud järgmise(d) serveri(d): %s\n"
-"\n"
-"\n"
-"Need serverid aktiveeritakse vaikimisi. Pole küll teada, et neil oleks\n"
-"turvaprobleeme, aga nende leidmine tulevikus pole sugugi välistatud.\n"
-"Kui peaks nii minema, kontrollige, et suudate uuenduse võimalikult\n"
-"ruttu hankida.\n"
-"\n"
-"\n"
-"Kas tõesti paigaldada need serverid?\n"
-
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:607
-#, c-format
-msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
 "\n"
 "\n"
@@ -214,72 +189,72 @@ msgstr ""
 "\n"
 "Kas tõesti eemaldada need paketid?\n"
 
-#: any.pm:826
+#: any.pm:803
 #, c-format
 msgid "Error reading file %s"
 msgstr "Viga faili %s lugemisel"
 
-#: any.pm:1033
+#: any.pm:1010
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Järgmistele ketastele anti uus nimi:"
 
-#: any.pm:1035
+#: any.pm:1012
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (varem oli %s)"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1111 steps_interactive.pm:955
+#: any.pm:1088 steps_interactive.pm:954
 #, c-format
 msgid "Network"
 msgstr "Võrk"
 
-#: any.pm:1115
+#: any.pm:1092
 #, c-format
 msgid "Please choose a media"
 msgstr "Palun valige andmekandja"
 
-#: any.pm:1131
+#: any.pm:1108
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Fail on juba olemas. Kas kirjutada see üle?"
 
-#: any.pm:1135
+#: any.pm:1112
 #, c-format
 msgid "Permission denied"
 msgstr "Ligipääs keelatud"
 
-#: any.pm:1183
+#: any.pm:1160
 #, c-format
 msgid "Bad NFS name"
 msgstr "Vigane NFS-i nimi"
 
-#: any.pm:1204
+#: any.pm:1181
 #, c-format
 msgid "Bad media %s"
 msgstr "Vigane andmekandja %s"
 
-#: any.pm:1247
+#: any.pm:1224
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Ekraanipilte ei saa teha enne partitsioneerimist"
 
-#: any.pm:1255
+#: any.pm:1232
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Ekraanipildid asuvad pärast paigaldamist asukohas %s"
@@ -640,9 +615,9 @@ msgid ""
 msgstr "Graafiline töökeskkond koos kasutajasõbralike rakendustega"
 
 #: share/meta-task/compssUsers.pl:145
-#, c-format
-msgid "IceWm Desktop"
-msgstr "IceWM töölaud"
+#, fuzzy, c-format
+msgid "LXDE Desktop"
+msgstr "KDE töölaud"
 
 #: share/meta-task/compssUsers.pl:149
 #, c-format
@@ -787,17 +762,17 @@ msgstr "Siin näeb '%s' töölaua eelvaatlust."
 msgid "Click on images in order to see a bigger preview"
 msgstr "Klõpsake piltidel suurema eelvaatluse nägemiseks"
 
-#: steps_gtk.pm:313 steps_interactive.pm:626 steps_list.pm:30
+#: steps_gtk.pm:313 steps_interactive.pm:625 steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "Paketigruppide valik"
 
-#: steps_gtk.pm:334 steps_interactive.pm:643
+#: steps_gtk.pm:334 steps_interactive.pm:642
 #, c-format
 msgid "Individual package selection"
 msgstr "Valik paketthaaval"
 
-#: steps_gtk.pm:358 steps_interactive.pm:567
+#: steps_gtk.pm:358 steps_interactive.pm:566
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Suurus kokku: %d / %d MB"
@@ -914,12 +889,12 @@ msgstr "Minimaalne paigaldus"
 msgid "Software Management"
 msgstr "Tarkvarahaldur"
 
-#: steps_gtk.pm:516 steps_interactive.pm:452
+#: steps_gtk.pm:516 steps_interactive.pm:451
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Valige paketid, mida soovite paigaldada"
 
-#: steps_gtk.pm:533 steps_interactive.pm:657 steps_list.pm:32
+#: steps_gtk.pm:533 steps_interactive.pm:656 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "Paigaldamine"
@@ -946,7 +921,7 @@ msgid_plural "%d packages"
 msgstr[0] "%d pakett"
 msgstr[1] "%d paketti"
 
-#: steps_gtk.pm:650 steps_interactive.pm:820 steps_list.pm:43
+#: steps_gtk.pm:650 steps_interactive.pm:819 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Kokkuvõte"
@@ -956,7 +931,7 @@ msgstr "Kokkuvõte"
 msgid "Configure"
 msgstr "Seadista"
 
-#: steps_gtk.pm:686 steps_interactive.pm:816 steps_interactive.pm:967
+#: steps_gtk.pm:686 steps_interactive.pm:815 steps_interactive.pm:966
 #, c-format
 msgid "not configured"
 msgstr "seadistamata"
@@ -1133,7 +1108,7 @@ msgid ""
 msgstr ""
 "Teie süsteemis ei jagu ruumi paigaldamiseks ega uuendamiseks (%dMB > %dMB)"
 
-#: steps_interactive.pm:464
+#: steps_interactive.pm:463
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1142,52 +1117,52 @@ msgstr ""
 "Valige palun paketivaliku laadimine või salvestamine.\n"
 "Vorming on sama, mis automaatpaigaldusega loodud failide puhul."
 
-#: steps_interactive.pm:466
+#: steps_interactive.pm:465
 #, c-format
 msgid "Load"
 msgstr "Laadi"
 
-#: steps_interactive.pm:466
+#: steps_interactive.pm:465
 #, c-format
 msgid "Save"
 msgstr "Salvesta"
 
-#: steps_interactive.pm:474
+#: steps_interactive.pm:473
 #, c-format
 msgid "Bad file"
 msgstr "Vigane fail"
 
-#: steps_interactive.pm:490
+#: steps_interactive.pm:489
 #, c-format
 msgid "KDE"
 msgstr "KDE"
 
-#: steps_interactive.pm:491
+#: steps_interactive.pm:490
 #, c-format
 msgid "GNOME"
 msgstr "GNOME"
 
-#: steps_interactive.pm:494
+#: steps_interactive.pm:493
 #, c-format
 msgid "Desktop Selection"
 msgstr "Töölaua valik"
 
-#: steps_interactive.pm:495
+#: steps_interactive.pm:494
 #, c-format
 msgid "You can choose your workstation desktop profile."
 msgstr "Siin saab valida oma arvuti töölauaprofiili: "
 
-#: steps_interactive.pm:581
+#: steps_interactive.pm:580
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "Valiku suurus ületab saadaolevat kettaruumi"
 
-#: steps_interactive.pm:596
+#: steps_interactive.pm:595
 #, c-format
 msgid "Type of install"
 msgstr "Paigaldamise tüüp"
 
-#: steps_interactive.pm:597
+#: steps_interactive.pm:596
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1196,82 +1171,82 @@ msgstr ""
 "Te ei valinud ühtegi paketigruppi.\n"
 "Palun valige meelepärane minimaalne paigaldus:"
 
-#: steps_interactive.pm:602
+#: steps_interactive.pm:601
 #, c-format
 msgid "With X"
 msgstr "X'iga"
 
-#: steps_interactive.pm:603
+#: steps_interactive.pm:602
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "Baasdokumentatsiooniga (soovitatav!)"
 
-#: steps_interactive.pm:604
+#: steps_interactive.pm:603
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Tõeliselt minimaalne (eriti just ilma urpmi-ta)"
 
-#: steps_interactive.pm:658
+#: steps_interactive.pm:657
 #, c-format
 msgid "Preparing installation"
 msgstr "Paigaldamiseks valmistumine"
 
-#: steps_interactive.pm:666
+#: steps_interactive.pm:665
 #, c-format
 msgid "Installing package %s"
 msgstr "Paketi %s paigaldamine"
 
-#: steps_interactive.pm:690
+#: steps_interactive.pm:689
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Pakettide tellimisel tekkis viga:"
 
-#: steps_interactive.pm:690
+#: steps_interactive.pm:689
 #, c-format
 msgid "Go on anyway?"
 msgstr "Kas ikkagi jätkata?"
 
-#: steps_interactive.pm:694
+#: steps_interactive.pm:693
 #, c-format
 msgid "Retry"
 msgstr "Proovi uuesti"
 
-#: steps_interactive.pm:695
+#: steps_interactive.pm:694
 #, c-format
 msgid "Skip this package"
 msgstr "Jäta pakett vahele"
 
-#: steps_interactive.pm:696
+#: steps_interactive.pm:695
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "Jäta kõik andmekandja \"%s\" paketid vahele"
 
-#: steps_interactive.pm:697
+#: steps_interactive.pm:696
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "Tagasi andmekandja ja paketivaliku juurde"
 
-#: steps_interactive.pm:700
+#: steps_interactive.pm:699
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "Paketi %s paigaldamisel tekkis viga."
 
-#: steps_interactive.pm:719
+#: steps_interactive.pm:718
 #, c-format
 msgid "Post-install configuration"
 msgstr "Paigaldamisjärgne seadistamine"
 
-#: steps_interactive.pm:726
+#: steps_interactive.pm:725
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "Palun kontrollige, et uuenduste andmekandja on seadmes %s"
 
-#: steps_interactive.pm:754 steps_list.pm:47
+#: steps_interactive.pm:753 steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "Uuendused"
 
-#: steps_interactive.pm:755
+#: steps_interactive.pm:754
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1291,28 +1266,28 @@ msgstr ""
 "\n"
 "Kas soovite uuendusi paigaldada?"
 
-#: steps_interactive.pm:862
+#: steps_interactive.pm:861
 #, c-format
 msgid "%s on %s"
 msgstr "%s asukohas %s"
 
-#: steps_interactive.pm:895 steps_interactive.pm:902 steps_interactive.pm:915
-#: steps_interactive.pm:932 steps_interactive.pm:947
+#: steps_interactive.pm:894 steps_interactive.pm:901 steps_interactive.pm:914
+#: steps_interactive.pm:931 steps_interactive.pm:946
 #, c-format
 msgid "Hardware"
 msgstr "Riistvara"
 
-#: steps_interactive.pm:916 steps_interactive.pm:933
+#: steps_interactive.pm:915 steps_interactive.pm:932
 #, c-format
 msgid "Sound card"
 msgstr "Helikaart"
 
-#: steps_interactive.pm:936
+#: steps_interactive.pm:935
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Kas Teil on ISA helikaart?"
 
-#: steps_interactive.pm:938
+#: steps_interactive.pm:937
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -1321,69 +1296,69 @@ msgstr ""
 "Helikaardi seadistamiseks käivitage pärast paigaldamist \"alsaconf\" või "
 "\"sndconfig\""
 
-#: steps_interactive.pm:940
+#: steps_interactive.pm:939
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr ""
 "Helikaarti ei leitud. Proovige see leida pärast paigaldamist \"harddrake\" "
 "abil"
 
-#: steps_interactive.pm:948
+#: steps_interactive.pm:947
 #, c-format
 msgid "Graphical interface"
 msgstr "Graafiline kasutajaliides"
 
-#: steps_interactive.pm:954 steps_interactive.pm:965
+#: steps_interactive.pm:953 steps_interactive.pm:964
 #, c-format
 msgid "Network & Internet"
 msgstr "Kohtvõrk ja Internet"
 
-#: steps_interactive.pm:966
+#: steps_interactive.pm:965
 #, c-format
 msgid "Proxies"
 msgstr "Puhverserverid"
 
-#: steps_interactive.pm:967
+#: steps_interactive.pm:966
 #, c-format
 msgid "configured"
 msgstr "seadistatud"
 
-#: steps_interactive.pm:977
+#: steps_interactive.pm:976
 #, c-format
 msgid "Security Level"
 msgstr "Turvatase"
 
-#: steps_interactive.pm:996
+#: steps_interactive.pm:995
 #, c-format
 msgid "Firewall"
 msgstr "Tulemüür"
 
-#: steps_interactive.pm:1000
+#: steps_interactive.pm:999
 #, c-format
 msgid "activated"
 msgstr "aktiveeritud"
 
-#: steps_interactive.pm:1000
+#: steps_interactive.pm:999
 #, c-format
 msgid "disabled"
 msgstr "keelatud"
 
-#: steps_interactive.pm:1014
+#: steps_interactive.pm:1013
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Te ei ole seadistanud X'i. Kas Te tõesti ei taha seda teha?"
 
-#: steps_interactive.pm:1042
+#: steps_interactive.pm:1041
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Alglaaduri ettevalmistamine..."
 
-#: steps_interactive.pm:1043
+#: steps_interactive.pm:1042
 #, c-format
 msgid "Be patient, this may take a while..."
 msgstr "Varuge kannatust, see võib võtta veidi aega..."
 
-#: steps_interactive.pm:1054
+#: steps_interactive.pm:1053
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1396,7 +1371,7 @@ msgstr ""
 "tuleb Teil kasutada BootX'i või mingit muud nippi. Kerneli argument "
 "juurfailisüsteemi jaoks on root=%s"
 
-#: steps_interactive.pm:1068
+#: steps_interactive.pm:1067
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1405,17 +1380,17 @@ msgstr ""
 "Sellel turvatasemel pääseb Windowsi partitsioonil asuvatele failidele ligi "
 "ainult administraator."
 
-#: steps_interactive.pm:1100
+#: steps_interactive.pm:1099
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Pange palun tühi diskett seadmesse %s"
 
-#: steps_interactive.pm:1102
+#: steps_interactive.pm:1101
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Kiirpaigaldusdisketi loomine..."
 
-#: steps_interactive.pm:1113
+#: steps_interactive.pm:1112
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1426,7 +1401,7 @@ msgstr ""
 "\n"
 "Kas soovite tõesti praegu lõpetada ja väljuda?"
 
-#: steps_interactive.pm:1123
+#: steps_interactive.pm:1122
 #, c-format
 msgid "Congratulations"
 msgstr "Õnnitleme!"
@@ -1594,6 +1569,33 @@ msgstr "Täielik Mandriva Linuxi töölaud koos kasutajatoega"
 #, c-format
 msgid "Mandriva: distributions for everybody's needs"
 msgstr "Mandriva: distributsioone igale maitsele ja kõigiks vajadusteks"
+
+#~ msgid ""
+#~ "You have selected the following server(s): %s\n"
+#~ "\n"
+#~ "\n"
+#~ "These servers are activated by default. They do not have any known "
+#~ "security\n"
+#~ "issues, but some new ones could be found. In that case, you must make "
+#~ "sure\n"
+#~ "to upgrade as soon as possible.\n"
+#~ "\n"
+#~ "\n"
+#~ "Do you really want to install these servers?\n"
+#~ msgstr ""
+#~ "Olete valinud järgmise(d) serveri(d): %s\n"
+#~ "\n"
+#~ "\n"
+#~ "Need serverid aktiveeritakse vaikimisi. Pole küll teada, et neil oleks\n"
+#~ "turvaprobleeme, aga nende leidmine tulevikus pole sugugi välistatud.\n"
+#~ "Kui peaks nii minema, kontrollige, et suudate uuenduse võimalikult\n"
+#~ "ruttu hankida.\n"
+#~ "\n"
+#~ "\n"
+#~ "Kas tõesti paigaldada need serverid?\n"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "IceWM töölaud"
 
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr "Peeglilt pakettide nimekirja lugemine..."

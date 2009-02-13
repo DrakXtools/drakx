@@ -74,7 +74,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-16 11:41+0100\n"
+"POT-Creation-Date: 2009-02-13 16:29+0100\n"
 "PO-Revision-Date: 2009-01-01 20:55+0100\n"
 "Last-Translator: Christophe Berthelé <cpjc@free.fr>\n"
 "Language-Team: French <cooker-i18n@mandrivalinux.org>\n"
@@ -237,7 +237,7 @@ msgstr ""
 "système et effectuez cette opération via l'appliquette de mise à jour "
 "Mandriva."
 
-#: any.pm:394 steps_interactive.pm:1126
+#: any.pm:394 steps_interactive.pm:1125
 #, c-format
 msgid "Reboot"
 msgstr "Redémarrage"
@@ -251,31 +251,6 @@ msgstr "Poursuivre"
 #: any.pm:584
 #, c-format
 msgid ""
-"You have selected the following server(s): %s\n"
-"\n"
-"\n"
-"These servers are activated by default. They do not have any known security\n"
-"issues, but some new ones could be found. In that case, you must make sure\n"
-"to upgrade as soon as possible.\n"
-"\n"
-"\n"
-"Do you really want to install these servers?\n"
-msgstr ""
-"Vous avez sélectionné le(s) serveur(s) suivant(s) : %s\n"
-"\n"
-"\n"
-"Ces serveurs seront activés par défaut.\n"
-"Ils n'ont actuellement aucun problème de sécurité connu,\n"
-"mais si des vulnérabilités sont découvertes par la suite,\n"
-"vous devrez effectuer une mise à jour le plus rapidement possible.\n"
-"\n"
-"\n"
-"Confirmez-vous l'installation de ces serveurs ?\n"
-
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:607
-#, c-format
-msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
 "\n"
 "\n"
@@ -287,72 +262,72 @@ msgstr ""
 "\n"
 "Souhaitez-vous réellement les désinstaller ?\n"
 
-#: any.pm:826
+#: any.pm:803
 #, c-format
 msgid "Error reading file %s"
 msgstr "Erreur lors de la lecture du fichier %s"
 
-#: any.pm:1033
+#: any.pm:1010
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Les disques suivants ont été renommés :"
 
-#: any.pm:1035
+#: any.pm:1012
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (précédemment nommé %s)"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1111 steps_interactive.pm:955
+#: any.pm:1088 steps_interactive.pm:954
 #, c-format
 msgid "Network"
 msgstr "Réseau"
 
-#: any.pm:1115
+#: any.pm:1092
 #, c-format
 msgid "Please choose a media"
 msgstr "Veuillez choisir un média"
 
-#: any.pm:1131
+#: any.pm:1108
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Le fichier existe déjà. Voulez-vous l'écraser ?"
 
-#: any.pm:1135
+#: any.pm:1112
 #, c-format
 msgid "Permission denied"
 msgstr "Permission refusée"
 
-#: any.pm:1183
+#: any.pm:1160
 #, c-format
 msgid "Bad NFS name"
 msgstr "Mauvais nom NFS"
 
-#: any.pm:1204
+#: any.pm:1181
 #, c-format
 msgid "Bad media %s"
 msgstr "Média %s incorrect"
 
-#: any.pm:1247
+#: any.pm:1224
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Impossible de faire des captures d'écran avant le partitionnement"
 
-#: any.pm:1255
+#: any.pm:1232
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Les captures d'écran seront disponibles après l'installation dans %s"
@@ -721,9 +696,9 @@ msgstr ""
 "intuitifs"
 
 #: share/meta-task/compssUsers.pl:145
-#, c-format
-msgid "IceWm Desktop"
-msgstr "Bureau IceWm"
+#, fuzzy, c-format
+msgid "LXDE Desktop"
+msgstr "Bureau KDE"
 
 #: share/meta-task/compssUsers.pl:149
 #, c-format
@@ -872,17 +847,17 @@ msgstr "Voici un aperçu du bureau « %s »."
 msgid "Click on images in order to see a bigger preview"
 msgstr "Veuillez cliquer sur l'image afin d'agrandir l'aperçu"
 
-#: steps_gtk.pm:313 steps_interactive.pm:626 steps_list.pm:30
+#: steps_gtk.pm:313 steps_interactive.pm:625 steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "Sélection des groupes de paquetages"
 
-#: steps_gtk.pm:334 steps_interactive.pm:643
+#: steps_gtk.pm:334 steps_interactive.pm:642
 #, c-format
 msgid "Individual package selection"
 msgstr "Sélection individuelle des paquetages"
 
-#: steps_gtk.pm:358 steps_interactive.pm:567
+#: steps_gtk.pm:358 steps_interactive.pm:566
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Taille totale : %d / %d Mo"
@@ -1000,12 +975,12 @@ msgstr "Installation minimale"
 msgid "Software Management"
 msgstr "Gestion des paquetages"
 
-#: steps_gtk.pm:516 steps_interactive.pm:452
+#: steps_gtk.pm:516 steps_interactive.pm:451
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Choisissez les paquetages que vous voulez installer"
 
-#: steps_gtk.pm:533 steps_interactive.pm:657 steps_list.pm:32
+#: steps_gtk.pm:533 steps_interactive.pm:656 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "Installation"
@@ -1032,7 +1007,7 @@ msgid_plural "%d packages"
 msgstr[0] "%d paquetage"
 msgstr[1] "%d paquetages"
 
-#: steps_gtk.pm:650 steps_interactive.pm:820 steps_list.pm:43
+#: steps_gtk.pm:650 steps_interactive.pm:819 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Résumé"
@@ -1042,7 +1017,7 @@ msgstr "Résumé"
 msgid "Configure"
 msgstr "Configurer"
 
-#: steps_gtk.pm:686 steps_interactive.pm:816 steps_interactive.pm:967
+#: steps_gtk.pm:686 steps_interactive.pm:815 steps_interactive.pm:966
 #, c-format
 msgid "not configured"
 msgstr "non configuré"
@@ -1229,7 +1204,7 @@ msgstr ""
 "Votre système n'a pas assez d'espace libre pour installer ou de mettre à "
 "jour (%dMo > %dMo)"
 
-#: steps_interactive.pm:464
+#: steps_interactive.pm:463
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1239,52 +1214,52 @@ msgstr ""
 "sélection des paquetages. Le format est le même que celui de l'installation "
 "automatisée (auto_install)."
 
-#: steps_interactive.pm:466
+#: steps_interactive.pm:465
 #, c-format
 msgid "Load"
 msgstr "Charger"
 
-#: steps_interactive.pm:466
+#: steps_interactive.pm:465
 #, c-format
 msgid "Save"
 msgstr "Sauvegarder"
 
-#: steps_interactive.pm:474
+#: steps_interactive.pm:473
 #, c-format
 msgid "Bad file"
 msgstr "Mauvais fichier"
 
-#: steps_interactive.pm:490
+#: steps_interactive.pm:489
 #, c-format
 msgid "KDE"
 msgstr "KDE"
 
-#: steps_interactive.pm:491
+#: steps_interactive.pm:490
 #, c-format
 msgid "GNOME"
 msgstr "GNOME"
 
-#: steps_interactive.pm:494
+#: steps_interactive.pm:493
 #, c-format
 msgid "Desktop Selection"
 msgstr "Sélection du bureau"
 
-#: steps_interactive.pm:495
+#: steps_interactive.pm:494
 #, c-format
 msgid "You can choose your workstation desktop profile."
 msgstr "Vous pouvez choisir un profil de bureau de station de travail ."
 
-#: steps_interactive.pm:581
+#: steps_interactive.pm:580
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "La taille sélectionnée est plus importante que la place disponible"
 
-#: steps_interactive.pm:596
+#: steps_interactive.pm:595
 #, c-format
 msgid "Type of install"
 msgstr "Type d'installation"
 
-#: steps_interactive.pm:597
+#: steps_interactive.pm:596
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1293,83 +1268,83 @@ msgstr ""
 "Vous n'avez sélectionné aucun groupe de paquetages.\n"
 "Veuillez choisir l'installation minimale désirée :"
 
-#: steps_interactive.pm:602
+#: steps_interactive.pm:601
 #, c-format
 msgid "With X"
 msgstr "Avec X"
 
-#: steps_interactive.pm:603
+#: steps_interactive.pm:602
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "Avec la documentation de base (recommandé !)"
 
-#: steps_interactive.pm:604
+#: steps_interactive.pm:603
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Installation vraiment minimale (et en particulier pas d'urpmi)"
 
-#: steps_interactive.pm:658
+#: steps_interactive.pm:657
 #, c-format
 msgid "Preparing installation"
 msgstr "Préparation de l'installation"
 
-#: steps_interactive.pm:666
+#: steps_interactive.pm:665
 #, c-format
 msgid "Installing package %s"
 msgstr "Installation du paquetage %s"
 
-#: steps_interactive.pm:690
+#: steps_interactive.pm:689
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Erreur lors du tri des paquetages :"
 
-#: steps_interactive.pm:690
+#: steps_interactive.pm:689
 #, c-format
 msgid "Go on anyway?"
 msgstr "Souhaitez-vous tout de même continuer ?"
 
-#: steps_interactive.pm:694
+#: steps_interactive.pm:693
 #, c-format
 msgid "Retry"
 msgstr "Ré-essayer"
 
-#: steps_interactive.pm:695
+#: steps_interactive.pm:694
 #, c-format
 msgid "Skip this package"
 msgstr "Ignorer ce paquetage"
 
-#: steps_interactive.pm:696
+#: steps_interactive.pm:695
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "Ignorer tous les paquetages du média « %s »"
 
-#: steps_interactive.pm:697
+#: steps_interactive.pm:696
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "Retourner à la sélection du média et des paquetages"
 
-#: steps_interactive.pm:700
+#: steps_interactive.pm:699
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "Erreur lors de l'installation du paquetage %s."
 
-#: steps_interactive.pm:719
+#: steps_interactive.pm:718
 #, c-format
 msgid "Post-install configuration"
 msgstr "Configuration post-installation"
 
-#: steps_interactive.pm:726
+#: steps_interactive.pm:725
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr ""
 "Assurez vous que le média de mise à jour des modules est dans le lecteur %s"
 
-#: steps_interactive.pm:754 steps_list.pm:47
+#: steps_interactive.pm:753 steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "Mises à jour"
 
-#: steps_interactive.pm:755
+#: steps_interactive.pm:754
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1390,28 +1365,28 @@ msgstr ""
 "\n"
 "Souhaitez-vous installer les mises à jour ?"
 
-#: steps_interactive.pm:862
+#: steps_interactive.pm:861
 #, c-format
 msgid "%s on %s"
 msgstr "%s sur %s"
 
-#: steps_interactive.pm:895 steps_interactive.pm:902 steps_interactive.pm:915
-#: steps_interactive.pm:932 steps_interactive.pm:947
+#: steps_interactive.pm:894 steps_interactive.pm:901 steps_interactive.pm:914
+#: steps_interactive.pm:931 steps_interactive.pm:946
 #, c-format
 msgid "Hardware"
 msgstr "Matériel"
 
-#: steps_interactive.pm:916 steps_interactive.pm:933
+#: steps_interactive.pm:915 steps_interactive.pm:932
 #, c-format
 msgid "Sound card"
 msgstr "Carte son"
 
-#: steps_interactive.pm:936
+#: steps_interactive.pm:935
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Possédez-vous une carte son ISA ?"
 
-#: steps_interactive.pm:938
+#: steps_interactive.pm:937
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -1420,70 +1395,70 @@ msgstr ""
 "Lancez « alsaconf » ou « sndconfig » après l'installation pour configurer la "
 "carte son"
 
-#: steps_interactive.pm:940
+#: steps_interactive.pm:939
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr ""
 "Aucune carte son détectée. Essayez avec « harddrake » après l'installation"
 
-#: steps_interactive.pm:948
+#: steps_interactive.pm:947
 #, c-format
 msgid "Graphical interface"
 msgstr "Interface graphique"
 
-#: steps_interactive.pm:954 steps_interactive.pm:965
+#: steps_interactive.pm:953 steps_interactive.pm:964
 #, c-format
 msgid "Network & Internet"
 msgstr "Réseau et Internet"
 
-#: steps_interactive.pm:966
+#: steps_interactive.pm:965
 #, c-format
 msgid "Proxies"
 msgstr "Proxys"
 
-#: steps_interactive.pm:967
+#: steps_interactive.pm:966
 #, c-format
 msgid "configured"
 msgstr "configuré"
 
-#: steps_interactive.pm:977
+#: steps_interactive.pm:976
 #, c-format
 msgid "Security Level"
 msgstr "Niveau de sécurité"
 
-#: steps_interactive.pm:996
+#: steps_interactive.pm:995
 #, c-format
 msgid "Firewall"
 msgstr "Pare Feu"
 
-#: steps_interactive.pm:1000
+#: steps_interactive.pm:999
 #, c-format
 msgid "activated"
 msgstr "activé"
 
-#: steps_interactive.pm:1000
+#: steps_interactive.pm:999
 #, c-format
 msgid "disabled"
 msgstr "désactivé"
 
-#: steps_interactive.pm:1014
+#: steps_interactive.pm:1013
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr ""
 "Vous n'avez pas configuré le serveur d'affichage (X11). Êtes-vous sûr de ce "
 "que vous faites ?"
 
-#: steps_interactive.pm:1042
+#: steps_interactive.pm:1041
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Préparation du programme d'amorçage..."
 
-#: steps_interactive.pm:1043
+#: steps_interactive.pm:1042
 #, c-format
 msgid "Be patient, this may take a while..."
 msgstr "Merci d'être patient, cela peut prendre quelques instants"
 
-#: steps_interactive.pm:1054
+#: steps_interactive.pm:1053
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1498,7 +1473,7 @@ msgstr ""
 "d'une autre méthode pour démarrer votre machine. Le paramètre pour la racine "
 "du noyau est : root=%s"
 
-#: steps_interactive.pm:1068
+#: steps_interactive.pm:1067
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1507,17 +1482,17 @@ msgstr ""
 "A ce niveau de sécurité, l'accès aux fichiers de la partition Windows sera "
 "restreint à l'administrateur."
 
-#: steps_interactive.pm:1100
+#: steps_interactive.pm:1099
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Insérez une disquette vierge dans le lecteur %s"
 
-#: steps_interactive.pm:1102
+#: steps_interactive.pm:1101
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Création de la disquette d'auto-installation..."
 
-#: steps_interactive.pm:1113
+#: steps_interactive.pm:1112
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1528,7 +1503,7 @@ msgstr ""
 "\n"
 "Souhaitez-vous vraiment quitter maintenant ?"
 
-#: steps_interactive.pm:1123
+#: steps_interactive.pm:1122
 #, c-format
 msgid "Congratulations"
 msgstr "Félicitations"
@@ -1696,3 +1671,30 @@ msgstr "Un bureau Mandriva Linux complet, avec support"
 #, c-format
 msgid "Mandriva: distributions for everybody's needs"
 msgstr "Mandriva : les distributions couvrant les besoins de chacun"
+
+#~ msgid ""
+#~ "You have selected the following server(s): %s\n"
+#~ "\n"
+#~ "\n"
+#~ "These servers are activated by default. They do not have any known "
+#~ "security\n"
+#~ "issues, but some new ones could be found. In that case, you must make "
+#~ "sure\n"
+#~ "to upgrade as soon as possible.\n"
+#~ "\n"
+#~ "\n"
+#~ "Do you really want to install these servers?\n"
+#~ msgstr ""
+#~ "Vous avez sélectionné le(s) serveur(s) suivant(s) : %s\n"
+#~ "\n"
+#~ "\n"
+#~ "Ces serveurs seront activés par défaut.\n"
+#~ "Ils n'ont actuellement aucun problème de sécurité connu,\n"
+#~ "mais si des vulnérabilités sont découvertes par la suite,\n"
+#~ "vous devrez effectuer une mise à jour le plus rapidement possible.\n"
+#~ "\n"
+#~ "\n"
+#~ "Confirmez-vous l'installation de ces serveurs ?\n"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "Bureau IceWm"

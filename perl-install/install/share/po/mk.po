@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-mk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-16 11:41+0100\n"
+"POT-Creation-Date: 2009-02-13 16:29+0100\n"
 "PO-Revision-Date: 2006-09-24 20:39-0700\n"
 "Last-Translator: Zoran Dimovski <zoki.dimovski@gmail.com>\n"
 "Language-Team: Macedonian <mkde-l10n@lists.sourceforge.net>\n"
@@ -164,7 +164,7 @@ msgid ""
 "please reboot your system and upgrade using the Mandriva update applet."
 msgstr ""
 
-#: any.pm:394 steps_interactive.pm:1126
+#: any.pm:394 steps_interactive.pm:1125
 #, c-format
 msgid "Reboot"
 msgstr "Рестартирај"
@@ -178,29 +178,6 @@ msgstr ""
 #: any.pm:584
 #, c-format
 msgid ""
-"You have selected the following server(s): %s\n"
-"\n"
-"\n"
-"These servers are activated by default. They do not have any known security\n"
-"issues, but some new ones could be found. In that case, you must make sure\n"
-"to upgrade as soon as possible.\n"
-"\n"
-"\n"
-"Do you really want to install these servers?\n"
-msgstr ""
-"Сте ги избрале следниве сервери: %s\n"
-"\n"
-"Овие сервери се активираат автоматски. Тие немаат никакви познати стари\n"
-"сигурносни проблеми, но можно е да се појават нови. Во тој случај, треба да\n"
-"ги надградите пакетите што е можно побрзо.\n"
-"\n"
-"\n"
-"Дали навистина сакате да ги инсталирате овие сервери?\n"
-
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:607
-#, c-format
-msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
 "\n"
 "\n"
@@ -212,72 +189,72 @@ msgstr ""
 "\n"
 "Дали навистина сакате да се избришат овие пакети?\n"
 
-#: any.pm:826
+#: any.pm:803
 #, c-format
 msgid "Error reading file %s"
 msgstr "Грешка при читање на датотеката %s"
 
-#: any.pm:1033
+#: any.pm:1010
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Следниве дискови се преименувани:"
 
-#: any.pm:1035
+#: any.pm:1012
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (претходно именувано како %s)"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1092
+#: any.pm:1069
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1111 steps_interactive.pm:955
+#: any.pm:1088 steps_interactive.pm:954
 #, c-format
 msgid "Network"
 msgstr "Мрежа"
 
-#: any.pm:1115
+#: any.pm:1092
 #, c-format
 msgid "Please choose a media"
 msgstr "Ве молиме изберете медиум"
 
-#: any.pm:1131
+#: any.pm:1108
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Датотеката веќе постои. Да се запише врз неа?"
 
-#: any.pm:1135
+#: any.pm:1112
 #, c-format
 msgid "Permission denied"
 msgstr "Недозволен пристап"
 
-#: any.pm:1183
+#: any.pm:1160
 #, c-format
 msgid "Bad NFS name"
 msgstr "Лошо „NFS“ име"
 
-#: any.pm:1204
+#: any.pm:1181
 #, c-format
 msgid "Bad media %s"
 msgstr "Невалиден медиум %s"
 
-#: any.pm:1247
+#: any.pm:1224
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Не можат да се прават снимки на екран пред партицирање"
 
-#: any.pm:1255
+#: any.pm:1232
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Екранските снимки ќе бидат достапни по инсталацијата во %s"
@@ -641,8 +618,8 @@ msgstr ""
 "Графичка околина со кориснички пакет на алатки и алатки за работната површина"
 
 #: share/meta-task/compssUsers.pl:145
-#, c-format
-msgid "IceWm Desktop"
+#, fuzzy, c-format
+msgid "LXDE Desktop"
 msgstr "„IceWm“ работна површина"
 
 #: share/meta-task/compssUsers.pl:149
@@ -790,17 +767,17 @@ msgstr ""
 msgid "Click on images in order to see a bigger preview"
 msgstr ""
 
-#: steps_gtk.pm:313 steps_interactive.pm:626 steps_list.pm:30
+#: steps_gtk.pm:313 steps_interactive.pm:625 steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "Групна селекција на пакети"
 
-#: steps_gtk.pm:334 steps_interactive.pm:643
+#: steps_gtk.pm:334 steps_interactive.pm:642
 #, c-format
 msgid "Individual package selection"
 msgstr "Подделна селекција на пакети"
 
-#: steps_gtk.pm:358 steps_interactive.pm:567
+#: steps_gtk.pm:358 steps_interactive.pm:566
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Вкупна големина: %d / %d MB"
@@ -920,12 +897,12 @@ msgstr "Минимална инсталација"
 msgid "Software Management"
 msgstr "Менаџмент на софтвер"
 
-#: steps_gtk.pm:516 steps_interactive.pm:452
+#: steps_gtk.pm:516 steps_interactive.pm:451
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Изберете ги пакетите што сакате да се инсталираат"
 
-#: steps_gtk.pm:533 steps_interactive.pm:657 steps_list.pm:32
+#: steps_gtk.pm:533 steps_interactive.pm:656 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "Инсталирање"
@@ -952,7 +929,7 @@ msgid_plural "%d packages"
 msgstr[0] "%d пакети"
 msgstr[1] "%d пакети"
 
-#: steps_gtk.pm:650 steps_interactive.pm:820 steps_list.pm:43
+#: steps_gtk.pm:650 steps_interactive.pm:819 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Резиме"
@@ -962,7 +939,7 @@ msgstr "Резиме"
 msgid "Configure"
 msgstr "Конфигурирај"
 
-#: steps_gtk.pm:686 steps_interactive.pm:816 steps_interactive.pm:967
+#: steps_gtk.pm:686 steps_interactive.pm:815 steps_interactive.pm:966
 #, c-format
 msgid "not configured"
 msgstr "не е конфигурирано"
@@ -1134,7 +1111,7 @@ msgid ""
 "dMB > %dMB)"
 msgstr ""
 
-#: steps_interactive.pm:464
+#: steps_interactive.pm:463
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1143,52 +1120,52 @@ msgstr ""
 "Ве молиме изберете „вчитај“ или „зачувај“ го изборот на пакети\n"
 "Форматот е ист како за генерирани датотеки од „auto_install“."
 
-#: steps_interactive.pm:466
+#: steps_interactive.pm:465
 #, c-format
 msgid "Load"
 msgstr "Вчитај"
 
-#: steps_interactive.pm:466
+#: steps_interactive.pm:465
 #, c-format
 msgid "Save"
 msgstr "Зачувај"
 
-#: steps_interactive.pm:474
+#: steps_interactive.pm:473
 #, c-format
 msgid "Bad file"
 msgstr "Лоша датотека"
 
-#: steps_interactive.pm:490
+#: steps_interactive.pm:489
 #, fuzzy, c-format
 msgid "KDE"
 msgstr "IDE"
 
-#: steps_interactive.pm:491
+#: steps_interactive.pm:490
 #, c-format
 msgid "GNOME"
 msgstr ""
 
-#: steps_interactive.pm:494
+#: steps_interactive.pm:493
 #, fuzzy, c-format
 msgid "Desktop Selection"
 msgstr "Групна селекција на пакети"
 
-#: steps_interactive.pm:495
+#: steps_interactive.pm:494
 #, c-format
 msgid "You can choose your workstation desktop profile."
 msgstr ""
 
-#: steps_interactive.pm:581
+#: steps_interactive.pm:580
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "Избраната големина е поголема од слободниот простор"
 
-#: steps_interactive.pm:596
+#: steps_interactive.pm:595
 #, c-format
 msgid "Type of install"
 msgstr "Тип на инсталација"
 
-#: steps_interactive.pm:597
+#: steps_interactive.pm:596
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1197,83 +1174,83 @@ msgstr ""
 "Не сте избрале ниту една група пакети.\n"
 "Изберете ја минималната инсталација што ја сакате:"
 
-#: steps_interactive.pm:602
+#: steps_interactive.pm:601
 #, c-format
 msgid "With X"
 msgstr "Со X"
 
-#: steps_interactive.pm:603
+#: steps_interactive.pm:602
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "Со основна документација (препорачано!)"
 
-#: steps_interactive.pm:604
+#: steps_interactive.pm:603
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Вистински минимална инсталација (без urpmi)"
 
-#: steps_interactive.pm:658
+#: steps_interactive.pm:657
 #, c-format
 msgid "Preparing installation"
 msgstr "Подготовка на инсталацијата"
 
-#: steps_interactive.pm:666
+#: steps_interactive.pm:665
 #, c-format
 msgid "Installing package %s"
 msgstr "Инсталирање на пакетот %s"
 
-#: steps_interactive.pm:690
+#: steps_interactive.pm:689
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Се случи грешка во подредувањето на пакетите:"
 
-#: steps_interactive.pm:690
+#: steps_interactive.pm:689
 #, c-format
 msgid "Go on anyway?"
 msgstr "Да продолжиме?"
 
-#: steps_interactive.pm:694
+#: steps_interactive.pm:693
 #, c-format
 msgid "Retry"
 msgstr ""
 
-#: steps_interactive.pm:695
+#: steps_interactive.pm:694
 #, c-format
 msgid "Skip this package"
 msgstr ""
 
-#: steps_interactive.pm:696
+#: steps_interactive.pm:695
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr ""
 
-#: steps_interactive.pm:697
+#: steps_interactive.pm:696
 #, fuzzy, c-format
 msgid "Go back to media and packages selection"
 msgstr "Зачувување на селекцијата пакети"
 
-#: steps_interactive.pm:700
+#: steps_interactive.pm:699
 #, fuzzy, c-format
 msgid "There was an error installing package %s."
 msgstr "Се случи грешка во инсталирањето на пакетите:"
 
-#: steps_interactive.pm:719
+#: steps_interactive.pm:718
 #, c-format
 msgid "Post-install configuration"
 msgstr "Пост-инсталациона конфигурација"
 
-#: steps_interactive.pm:726
+#: steps_interactive.pm:725
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr ""
 "Ве молиме проверете дали медиумот со модулите за надградување е во уредот %s"
 
-#: steps_interactive.pm:754 steps_list.pm:47
+#: steps_interactive.pm:753 steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "Надградби"
 
-#: steps_interactive.pm:755
+#: steps_interactive.pm:754
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1294,28 +1271,28 @@ msgstr ""
 "\n"
 "Дали сакате да ги инсталирате надградбите?"
 
-#: steps_interactive.pm:862
+#: steps_interactive.pm:861
 #, c-format
 msgid "%s on %s"
 msgstr "%s на %s"
 
-#: steps_interactive.pm:895 steps_interactive.pm:902 steps_interactive.pm:915
-#: steps_interactive.pm:932 steps_interactive.pm:947
+#: steps_interactive.pm:894 steps_interactive.pm:901 steps_interactive.pm:914
+#: steps_interactive.pm:931 steps_interactive.pm:946
 #, c-format
 msgid "Hardware"
 msgstr "Хардвер(машински дел)"
 
-#: steps_interactive.pm:916 steps_interactive.pm:933
+#: steps_interactive.pm:915 steps_interactive.pm:932
 #, c-format
 msgid "Sound card"
 msgstr "Звучна картичка"
 
-#: steps_interactive.pm:936
+#: steps_interactive.pm:935
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Дали имате ISA звучна картичка?"
 
-#: steps_interactive.pm:938
+#: steps_interactive.pm:937
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -1324,69 +1301,69 @@ msgstr ""
 "По инсталацијата вклучете \"alsaconf\" или \"sndconfig\" за да ја "
 "конфигурирате звучаната картичка"
 
-#: steps_interactive.pm:940
+#: steps_interactive.pm:939
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr ""
 "Не е детектирана звучна картичка. Обидете се со \"harddrake\" по "
 "инсталацијата"
 
-#: steps_interactive.pm:948
+#: steps_interactive.pm:947
 #, c-format
 msgid "Graphical interface"
 msgstr "Графички интерфејс"
 
-#: steps_interactive.pm:954 steps_interactive.pm:965
+#: steps_interactive.pm:953 steps_interactive.pm:964
 #, c-format
 msgid "Network & Internet"
 msgstr "Мрежа и Интернет"
 
-#: steps_interactive.pm:966
+#: steps_interactive.pm:965
 #, c-format
 msgid "Proxies"
 msgstr "Прокси"
 
-#: steps_interactive.pm:967
+#: steps_interactive.pm:966
 #, c-format
 msgid "configured"
 msgstr "конфигурирано"
 
-#: steps_interactive.pm:977
+#: steps_interactive.pm:976
 #, c-format
 msgid "Security Level"
 msgstr "Ниво на сигурност"
 
-#: steps_interactive.pm:996
+#: steps_interactive.pm:995
 #, c-format
 msgid "Firewall"
 msgstr "Firewall"
 
-#: steps_interactive.pm:1000
+#: steps_interactive.pm:999
 #, c-format
 msgid "activated"
 msgstr "активиран"
 
-#: steps_interactive.pm:1000
+#: steps_interactive.pm:999
 #, c-format
 msgid "disabled"
 msgstr "оневозможено"
 
-#: steps_interactive.pm:1014
+#: steps_interactive.pm:1013
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Се уште го ш конфигурирано Х. Дали навистина сакаш да го направиш ова?"
 
-#: steps_interactive.pm:1042
+#: steps_interactive.pm:1041
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Подговтвување на подигачот..."
 
-#: steps_interactive.pm:1043
+#: steps_interactive.pm:1042
 #, c-format
 msgid "Be patient, this may take a while..."
 msgstr ""
 
-#: steps_interactive.pm:1054
+#: steps_interactive.pm:1053
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1399,7 +1376,7 @@ msgstr ""
 "или некои други средства за подигнување на вашата машина. Аргументот на "
 "кернелот за „root fs“ е следниов: root=%s"
 
-#: steps_interactive.pm:1068
+#: steps_interactive.pm:1067
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -1408,17 +1385,17 @@ msgstr ""
 "Во ова безбедносно ниво, пристап до датотеките кои се наоѓаат на „Windows“ "
 "партицијата е дозволен само на администраторот."
 
-#: steps_interactive.pm:1100
+#: steps_interactive.pm:1099
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Внесете празна дискета во %s"
 
-#: steps_interactive.pm:1102
+#: steps_interactive.pm:1101
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Создавање дискета за авто-инсталација..."
 
-#: steps_interactive.pm:1113
+#: steps_interactive.pm:1112
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1429,7 +1406,7 @@ msgstr ""
 "\n"
 "Дали навистина сакате сега да напуштите?"
 
-#: steps_interactive.pm:1123
+#: steps_interactive.pm:1122
 #, c-format
 msgid "Congratulations"
 msgstr "Честитки"
@@ -1597,6 +1574,32 @@ msgstr ""
 #, c-format
 msgid "Mandriva: distributions for everybody's needs"
 msgstr ""
+
+#~ msgid ""
+#~ "You have selected the following server(s): %s\n"
+#~ "\n"
+#~ "\n"
+#~ "These servers are activated by default. They do not have any known "
+#~ "security\n"
+#~ "issues, but some new ones could be found. In that case, you must make "
+#~ "sure\n"
+#~ "to upgrade as soon as possible.\n"
+#~ "\n"
+#~ "\n"
+#~ "Do you really want to install these servers?\n"
+#~ msgstr ""
+#~ "Сте ги избрале следниве сервери: %s\n"
+#~ "\n"
+#~ "Овие сервери се активираат автоматски. Тие немаат никакви познати стари\n"
+#~ "сигурносни проблеми, но можно е да се појават нови. Во тој случај, треба "
+#~ "да\n"
+#~ "ги надградите пакетите што е можно побрзо.\n"
+#~ "\n"
+#~ "\n"
+#~ "Дали навистина сакате да ги инсталирате овие сервери?\n"
+
+#~ msgid "IceWm Desktop"
+#~ msgstr "„IceWm“ работна површина"
 
 #~ msgid "Contacting the mirror to get the list of available packages..."
 #~ msgstr "Контактирање со огледалото за добивање листа на достапни пакети..."
