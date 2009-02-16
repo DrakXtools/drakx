@@ -505,7 +505,7 @@ EOF
     }
 
 
-    install::any::disable_user_view() if $o->{security} >= 3 || $o->{authentication}{NIS};
+    install::any::disable_user_view() if $o->{security} > 1 || $o->{authentication}{NIS};
     run_program::rooted($::prefix, "kdeDesktopCleanup");
 
     #- move some file after an upgrade that may be seriously annoying.
@@ -651,7 +651,7 @@ sub configure_firewall {
     my ($o) = @_;
 
     #- set up a firewall if ports have been specified or if the security level is high enough
-    $o->{firewall_ports} ||= '' if $o->{security} >= 3 && !exists $o->{firewall_ports};
+    $o->{firewall_ports} ||= '' if $o->{security} >= 1 && !exists $o->{firewall_ports};
 
     if (defined $o->{firewall_ports}) {
 	require network::drakfirewall;

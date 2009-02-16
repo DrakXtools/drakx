@@ -1000,7 +1000,7 @@ sub summary {
 	},
 	clicked => sub { 
 	    require network::drakfirewall;
-	    if (my @rc = network::drakfirewall::main($o, $o->{security} <= 3)) {
+	    if (my @rc = network::drakfirewall::main($o, $o->{security} < 1)) {
 		$o->{firewall_ports} = !$rc[0] && $rc[1];
 	    }
 	},

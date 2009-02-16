@@ -504,7 +504,7 @@ sub rpmsrate_always_flags {
     $rpmsrate_flags_chosen->{DVD} = 1 if $o->{match_all_hardware} || detect_devices::dvdroms();
     $rpmsrate_flags_chosen->{USB} = 1 if $o->{match_all_hardware} || $o->{modules_conf}->get_probeall("usb-interface");
     $rpmsrate_flags_chosen->{PCMCIA} = 1 if $o->{match_all_hardware} || detect_devices::hasPCMCIA();
-    $rpmsrate_flags_chosen->{HIGH_SECURITY} = 1 if $o->{security} > 3;
+    $rpmsrate_flags_chosen->{HIGH_SECURITY} = 1 if $o->{security} > 1;
     $rpmsrate_flags_chosen->{BIGMEM} = 1 if detect_devices::BIGMEM();
     $rpmsrate_flags_chosen->{SMP} = 1 if $o->{match_all_hardware} || detect_devices::hasSMP();
     if (!$o->{match_all_hardware} && !defined $o->{compssListLevel} && detect_devices::need_light_desktop()) {
