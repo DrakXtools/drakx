@@ -372,9 +372,9 @@ sub setPackages {
 
 sub remove_package_for_upgrade {
     my ($o) = @_;
-    my $extension;
+    my $extension = $o->{upgrade_by_removing_pkgs_matching};
 
-    return if !$extension = $o->{upgrade_by_removing_pkgs_matching};
+    return if !$extension;
 
     my $time = time();
     my ($_w, $wait_message) = $o->wait_message_with_progress_bar;
