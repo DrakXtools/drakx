@@ -241,7 +241,7 @@ sub set_pulseaudio_routing {
 }
 
 
-my $pa_client_conffile = '/etc/pulse/client.conf';
+my $pa_client_conffile = "$::prefix/etc/pulse/client.conf";
 
 sub set_PA_autospan {
     my ($val) = @_;
