@@ -520,6 +520,9 @@ sub _gtk__Entry {
 	my $set = sub { $w->set_text($$text_ref) };
 	gtkval_register($w, $text_ref, $set);
 	$set->();
+	$w->signal_connect(changed => sub {
+		gtkval_modify($text_ref, $w->get_text, $set);
+	});
     }
 
     $w;
