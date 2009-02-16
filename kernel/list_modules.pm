@@ -163,15 +163,14 @@ our %l = (
 
   fs => 
   {
-    network => [ qw(af_packet nfs) ],
+    network => [ qw(af_packet nfs smbfs) ],
     cdrom => [ qw(isofs) ],
     loopback => [ qw(isofs loop squashfs) ],
     local => [
-      if_(arch() =~ /^i.86|x86_64/, qw(vfat ntfs)),
       if_(arch() =~ /^ppc/, qw(hfs)),
-      qw(reiserfs jfs xfs),
+      qw(reiserfs reiser4 jfs xfs ntfs vfat ext3 ext4),
     ],
-    various => [ qw(smbfs romfs ext3 ext4dev ext4 ufs ntfs unionfs) ],
+    various => [ qw(romfs ufs unionfs) ],
 
   },
 
