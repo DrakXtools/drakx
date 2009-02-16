@@ -485,7 +485,7 @@ sub Create {
          { label => N("Size in MB: "), val => \$mb_size, min => to_Mb(min_partition_size($hd)), max => to_Mb($def_size),
 	   type => 'range', SpinButton => $::expert, changed => sub { $part->{start} = min($part->{start}, $max - $mb_size * 2048) } },
          { label => N("Filesystem type: "), val => \$type_name, list => [ fs::type::type_names($::expert, $hd) ],
-	   sort => 0, if_($::expert, gtk => { wrap_width => 4 }, do_not_ellipsize => 1) },
+	   sort => 0, if_($::expert, gtk => { wrap_width => 2 }, do_not_ellipsize => 1) },
          { label => N("Mount point: "), val => \$part->{mntpoint}, list => [ fsedit::suggestions_mntpoint($all_hds), '' ],
            disabled => sub { my $p = fs::type::type_name2subpart($type_name); isSwap($p) || isNonMountable($p) }, type => 'combo', not_edit => 0,
          },
@@ -582,7 +582,7 @@ sub Type {
 		  [
 		   { label => N("Which filesystem do you want?"), title => 1 },
 		   { label => N("Type"), val => \$type_name, type => 'list', list => \@types, sort => 1, do_not_ellipsize => 1,
-		     focus => sub { 1 }, not_edit => 1, gtk => { wrap_width => 4 } } ]) or return;
+		     focus => sub { 1 }, not_edit => 1, gtk => { wrap_width => 2 } } ]) or return;
 
     my $type = $type_name && fs::type::type_name2subpart($type_name);
 
