@@ -403,7 +403,7 @@ sub part_possible_actions {
         N_("Options")          => '!isSwap($part) && !isNonMountable && $::expert',
         N_("Label")            => '!isNonMountable && $::expert && fs::format::canEditLabel($part)',
         N_("Resize")	       => '!isBusy && !readonly && !isSpecial || isLVM($hd) && LVM_resizable',
-        N_("Format")           => '!isBusy && (!readonly && ($::expert || $::isStandalone) || fs::type::isRawLUKS($part))',
+        N_("Format")           => '!isBusy && !isRawLVM && !isPartOfLVM && (!readonly && ($::expert || $::isStandalone) || fs::type::isRawLUKS($part))',
         N_("Mount")            => '!isBusy && (hasMntpoint || isSwap) && maybeFormatted && ($::expert || $::isStandalone)',
         N_("Add to RAID")      => '!isBusy && isRawRAID && (!isSpecial || isRAID)',
         N_("Add to LVM")       => '!isBusy && isRawLVM',
