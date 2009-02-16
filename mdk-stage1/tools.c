@@ -272,10 +272,11 @@ int try_mount(char * dev, char * location)
 	char device_fullname[50];
 	snprintf(device_fullname, sizeof(device_fullname), "/dev/%s", dev);
 
-	if (my_mount(device_fullname, location, "ext2", 0) == -1 &&
+	if (my_mount(device_fullname, location, "ext4", 0) == -1 &&
 	    my_mount(device_fullname, location, "vfat", 0) == -1 &&
 	    my_mount(device_fullname, location, "ntfs", 0) == -1 &&
 	    my_mount(device_fullname, location, "reiserfs", 0) == -1 &&
+	    my_mount(device_fullname, location, "reiser4", 0) == -1 &&
 	    my_mount(device_fullname, location, "jfs", 0) == -1 &&
 	    my_mount(device_fullname, location, "xfs", 0) == -1 &&
 	    my_mount(device_fullname, location, "iso9660", 0) == -1) {
