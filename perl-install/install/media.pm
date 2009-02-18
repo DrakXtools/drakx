@@ -699,7 +699,7 @@ sub get_medium {
     log::l("trying to read $m->{rel_hdlist} for medium '$m->{fakemedium}'");
     
     #- copy hdlist file directly to urpmi directory, this will be used
-    #- for getting header of package during installation or after by urpmi.
+    #- for getting header of package during installation.
     my $hdlist = hdlist_on_disk($m);
     {
 	getAndSaveFile_progress($in_wait, N("Downloading file %s...", $m->{rel_hdlist}),
