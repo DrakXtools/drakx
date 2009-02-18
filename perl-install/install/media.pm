@@ -495,29 +495,6 @@ sub _parse_media_cfg {
     $distribconf, \@hdlists;
 }
 
-sub parse_hdlists {
-    my ($cfg) = @_;
-
-    my (%main_options, @hdlists);
-    foreach (cat_($cfg)) {
-        chomp;
-        s/\s*#.*$//;
-        /^\s*$/ and next;
-        #- we'll ask afterwards for supplementary CDs, if the hdlists file contains
-        #- a line that begins with "suppl"
-        if (/^suppl/) { $main_options{suppl} = 1; next }
-        #- if the hdlists contains a line "askmedia", deletion of media found
-        #- in this hdlist is allowed
-        if (/^askmedia/) { $main_options{askmedia} = 1; next }
-        my ($noauto, $hdlist, $rpmsdir, $name, $size) = m!^\s*(noauto:)?(hdlist\S*\.cz)\s+[^/]*/(\S+)\s*([^(]*)(?:\((.+)\))?$!
-            or die qq(invalid hdlist description "$_" in hdlists file);
-        $name =~ s/\s+$//;
-        $size =~ s/MB?$//i;
-        push @hdlists, { rel_hdlist => "media_info/$hdlist", rpmsdir => $rpmsdir, name => $name, selected => !$noauto, size => $size };
-    }
-    (\%main_options, \@hdlists);
-}
-
 sub get_media {
     my ($o, $media, $packages) = @_;
 
@@ -633,9 +610,7 @@ sub get_media_cfg {
     if (getAndSaveFile_($phys_medium, 'media_info/media.cfg', '/tmp/media.cfg')) {
 	($distribconf, $hdlists) = _parse_media_cfg('/tmp/media.cfg');
     } else {
-	getAndSaveFile_($phys_medium, 'media_info/hdlists', '/tmp/hdlists')
-	  or die "media.cfg not found";
-	($distribconf, $hdlists) = parse_hdlists('/tmp/hdlists');
+        die "media.cfg not found";
     }
 
     if (defined $selected_names) {
