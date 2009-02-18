@@ -30,7 +30,7 @@ use urpm::download;
 #-	fakemedium ("$name ($rpmsdir)", used locally by urpmi)
 #-	rel_hdlist
 #-	hdlist_size
-#-	key-ids (hashref, values are key ids)
+#-	key-ids
 #-	name (text description)
 #-	pubkey (array containing all the keys to import)
 #-	phys_medium
@@ -929,7 +929,7 @@ sub install_urpmi {
 					     my ($id, $imported) = @_;
 					     if ($id) {
 						 log::l(($imported ? "imported" : "found") . " key=$id for medium $medium->{name}");
-						 $medium->{'key-ids'}{$id} = undef;
+						 $medium->{'key-ids'} = $id;
 					     }
 					 });
 	unlink $medium->{pubkey};
@@ -967,8 +967,8 @@ sub install_urpmi {
 	    #- output new urpmi.cfg format here.
 	    push @cfg, map { "$_\n" } 
 	      "$qname $qdir {", 
-		if_(keys(%{$medium->{'key-ids'}}), 
-	      "  key-ids: " . join(',', keys %{$medium->{'key-ids'}})),
+		if_($medium->{'key-ids'},
+	      "  key-ids: " . $medium->{'key-ids'}),
 		if_($removable_device, 
 	      "  removable: $removable_device"),
 		if_($medium->{update},
