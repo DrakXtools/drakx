@@ -864,7 +864,7 @@ sub copy_rpms_on_disk {
 		$m->{selected} = 0;
 	    }
 	}
-	my $dest_medium_dir = $dest_dir . '/'. basename($rpmsdir);
+	my $dest_medium_dir = $dest_dir . '/' . basename($rpmsdir);
 	#- handle rpmsdir being ../../i586/media/main: we flatten it
 	-e "$::prefix$dest_medium_dir" and $dest_medium_dir .= '32';
 	-e "$::prefix$dest_medium_dir" and next;
