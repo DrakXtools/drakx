@@ -219,7 +219,7 @@ sub entries_append {
     my @entries = (
         (map { $_->[0] => "$automatic$default_acpi $_->[1]" } group_by2(@simple_entries)),
 	noacpi => "$automatic$default_vga acpi=off",
-	restore => "$automatic$default_vga restore",
+	restore => "$automatic$default_vga --restore",
     );
 
     map { { label => $_->[0], append => join(' ', grep { $_ } $default_append, $_->[1]) } }
