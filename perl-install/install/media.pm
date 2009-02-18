@@ -43,7 +43,7 @@ use urpm::download;
 our $postinstall_rpms = '';
 my %mounted_media;
 
-sub free_medium_id {
+sub _free_medium_id {
     my ($media) = @_;
     int(@$media);
 }
@@ -54,13 +54,13 @@ sub allMediums {
     @{$packages->{media}};
 }
 
-sub phys_media {
+sub _phys_media {
     my ($packages) = @_;
 
     uniq(map { $_->{phys_medium} } @{$packages->{media}});
 }
 
-sub pkg2media {
+sub _pkg2media {
    my ($media, $p) = @_; 
    $p or internal_error("invalid package");
 
@@ -73,7 +73,7 @@ sub pkg2media {
 sub packageMedium {
    my ($packages, $p) = @_;
 
-   pkg2media($packages->{media}, $p) || {};
+   _pkg2media($packages->{media}, $p) || {};
 }
 sub packagesOfMedium {
     my ($packages, $medium) = @_;
@@ -116,7 +116,7 @@ sub umount_phys_medium {
     }
     $ok;
 }
-sub mount_phys_medium {
+sub _mount_phys_medium {
     my ($phys_m, $o_rel_file, $b_force_change) = @_;
 
     if (!$b_force_change) {
@@ -136,14 +136,14 @@ sub umount_media {
 
     #- we don't bother umounting first phys medium if clp is not on disk
     #- (this is mainly for nfs installs using install/stage2/live)
-    my @l = phys_media($packages);
+    my @l = _phys_media($packages);
     shift @l if !$install::any::compressed_image_on_disk && $l[0]{is_stage2_phys_medium};
 
     umount_phys_medium($_) foreach @l;
     umount_phys_medium($_) foreach grep { $_ } map { $_->{loopback_device} } @l;
 }
 
-sub url_respect_privacy {
+sub _url_respect_privacy {
     my ($url) = @_;
 
     $url =~ s!ftp://.*?\@!ftp://xxx@!;
@@ -151,10 +151,10 @@ sub url_respect_privacy {
 }
 sub phys_medium_to_string {
     my ($phys_m) = @_;
-    url_respect_privacy($phys_m->{url}) . ($phys_m->{name} ? " ($phys_m->{name})" : '');
+    _url_respect_privacy($phys_m->{url}) . ($phys_m->{name} ? " ($phys_m->{name})" : '');
 }
 
-sub stage2_mounted_medium {
+sub _stage2_mounted_medium {
     my ($method, $rel_path) = @_;
 
     my ($device, $real_mntpoint, $fs_type, $url);
@@ -197,8 +197,8 @@ sub stage2_phys_medium {
 	my $rel_iso = $ENV{ISOPATH} =~ m!media/*(/.*)! ? $1 : '';
 	my ($dir_url, $iso) = (dirname($rel_iso), basename($rel_iso));
 
-	my $dir_medium = stage2_mounted_medium($dir_method, $dir_url eq '/' ? '' : $dir_url);
-	my $phys_m = iso_phys_media($dir_medium, $iso, '');
+	my $dir_medium = _stage2_mounted_medium($dir_method, $dir_url eq '/' ? '' : $dir_url);
+	my $phys_m = _iso_phys_media($dir_medium, $iso, '');
 	$phys_m->{real_mntpoint} = '/tmp/loop';
 	$phys_m->{real_device} = cat_("/proc/mounts") =~ m!(/dev/\S+)\s+/tmp/loop\s! && $1;
 	$phys_m->{isMounted} = 1;
@@ -206,7 +206,7 @@ sub stage2_phys_medium {
 	$phys_m;
     } else {
 	my $rel_path = readlink('/tmp/image') =~ m!media/*(/.*)! ? $1 : '';
-	stage2_mounted_medium($method, $rel_path);
+	_stage2_mounted_medium($method, $rel_path);
     }
 }
 
@@ -226,16 +226,16 @@ sub change_phys_medium {
     my $force_change = $phys_m->{method} eq 'cdrom' && $mounted_media{cdrom};
 
     if (my $current = $mounted_media{$phys_m->{method}}) {
-	setup_postinstall_rpms($::o, $o_packages, $current) if $o_packages && $phys_m->{method} eq 'cdrom' && $::o->isa('interactive');
+	_setup_postinstall_rpms($::o, $o_packages, $current) if $o_packages && $phys_m->{method} eq 'cdrom' && $::o->isa('interactive');
 	umount_phys_medium($current) or return;
 	delete $mounted_media{$phys_m->{method}};
     }
-    mount_phys_medium($phys_m, $o_rel_file, $force_change) or return;
-    phys_medium_is_mounted($phys_m);
+    _mount_phys_medium($phys_m, $o_rel_file, $force_change) or return;
+    _phys_medium_is_mounted($phys_m);
     1;
 }
 
-sub phys_medium_is_mounted {
+sub _phys_medium_is_mounted {
     my ($phys_m) = @_;
     if (member($phys_m->{method}, 'cdrom', 'iso')) {
 	#- we can't have more than one cdrom mounted at once
@@ -244,16 +244,16 @@ sub phys_medium_is_mounted {
     }
 }
 
-sub associate_phys_media {
+sub _associate_phys_media {
     my ($all_hds, $main_phys_medium, $hdlists) = @_;
 
     my ($main_name, @other_names) = uniq(map { $_->{name} } @$hdlists);
 
     my @other_phys_media = 
       $main_phys_medium->{method} eq 'iso' ?
-	get_phys_media_iso($all_hds, $main_phys_medium, \@other_names) :
+	_get_phys_media_iso($all_hds, $main_phys_medium, \@other_names) :
       $main_phys_medium->{method} eq 'cdrom' ?
-	(map { get_phys_media_cdrom($main_phys_medium, $_) } @other_names) :
+	(map { _get_phys_media_cdrom($main_phys_medium, $_) } @other_names) :
 	  ();
 
     if (@other_phys_media) {
@@ -278,14 +278,14 @@ sub associate_phys_media {
     }
 }
 
-sub get_phys_media_cdrom {
+sub _get_phys_media_cdrom {
     my ($main_phys_m, $name) = @_;
 
     #- exactly the same as $main_phys_m, but for {name}, {isMounted} and {real_mntpoint}
     +{ %$main_phys_m, name => $name, isMounted => 0, real_mntpoint => undef };
 }
 
-sub iso_phys_media {
+sub _iso_phys_media {
     my ($dir_medium, $iso, $rel_path) = @_;
 
     my $mntpoint = "/mnt/$iso";
@@ -302,19 +302,19 @@ sub iso_phys_media {
 	mntpoint => $mntpoint, rel_path => $rel_path,
     };
 }
-sub get_phys_media_iso {
+sub _get_phys_media_iso {
     my ($all_hds, $main_phys_m, $names) = @_;
 
-    my @ISOs = grep { member($_->{app_id}, @$names) } look_for_ISO_images($main_phys_m->{device});
+    my @ISOs = grep { member($_->{app_id}, @$names) } _look_for_ISO_images($main_phys_m->{device});
 
     map {
-	my $m = iso_phys_media($main_phys_m->{loopback_device}, $_->{file}, $main_phys_m->{rel_path});
+	my $m = _iso_phys_media($main_phys_m->{loopback_device}, $_->{file}, $main_phys_m->{rel_path});
 	$m->{name} = $_->{app_id};
 	push @{$all_hds->{loopbacks}}, $m;
 	$m;
     } @ISOs;
 }
-sub look_for_ISO_images {
+sub _look_for_ISO_images {
     my ($main_iso) = @_;
 
     my $iso_dir = dirname($main_iso);
@@ -339,12 +339,12 @@ sub look_for_ISO_images {
 }
 
 
-sub getFile_media_info {
+sub _getFile_media_info {
     my ($packages, $f) = @_;
     getFile_(first_medium($packages)->{phys_medium}, $f);
 }
 
-sub open_file_and_size {
+sub _open_file_and_size {
     my ($f) = @_;
     my $size = -s $f;
     my $fh = common::open_file($f) or return;
@@ -370,34 +370,34 @@ sub get_file_and_size {
 	require install::http;
 	install::http::get_file_and_size_($f, $phys_m->{url});
     } elsif ($f =~ m!^/!) {
-	open_file_and_size($f);
+	_open_file_and_size($f);
     } elsif ($postinstall_rpms && -e "$postinstall_rpms/$f") {
-	open_file_and_size("$postinstall_rpms/$f");
+	_open_file_and_size("$postinstall_rpms/$f");
     } else {
 	my $f2 = path($phys_m, $f);
 
 	if (! -f $f2) {
 	    change_phys_medium($phys_m, $f, $::o->{packages});
 	}
-	open_file_and_size($f2);
+	_open_file_and_size($f2);
     }
 }
 
 sub getAndSaveFile_ {
     my ($phys_m, $file, $local) = @_;
     my $fh = getFile_($phys_m, $file) or return;
-    getAndSaveFile_raw($fh, $local);
+    _getAndSaveFile_raw($fh, $local);
 }
-sub getAndSaveFile_progress {
+sub _getAndSaveFile_progress {
     my ($in_wait, $msg, $phys_m, $file, $local) = @_;
     my ($size, $fh) = get_file_and_size($phys_m, $file) or return;
     if ($size) {
-	getAndSaveFile_progress_raw($in_wait, $msg, $size, $fh, $local);
+	_getAndSaveFile_progress_raw($in_wait, $msg, $size, $fh, $local);
     } else {
-	getAndSaveFile_raw($fh, $local);
+	_getAndSaveFile_raw($fh, $local);
     }
 }
-sub getAndSaveFile_raw {
+sub _getAndSaveFile_raw {
     my ($fh, $local) = @_;
 
     local $/ = \ (16 * 1024);
@@ -407,14 +407,14 @@ sub getAndSaveFile_raw {
     while (<$fh>) { syswrite($F, $_) or unlink($local), die("getAndSaveFile($local): $!") }
     1;
 }
-sub getAndSaveFile_progress_raw {
+sub _getAndSaveFile_progress_raw {
     my ($in_wait, $msg, $size, $fh, $local) = @_;
 
     unlink $local;
     open(my $out, ">$local") or log::l("getAndSaveFile(opening $local): $!"), return;
-    print_with_progress($in_wait, $msg, $size, $fh, $out) or unlink($local), die("getAndSaveFile($local): $!");
+    _print_with_progress($in_wait, $msg, $size, $fh, $out) or unlink($local), die("getAndSaveFile($local): $!");
 }
-sub print_with_progress {
+sub _print_with_progress {
     my ($in_wait, $msg, $size, $in, $out) = @_;
 
     my ($_wait, $wait_message) = $in_wait->wait_message_with_progress_bar(N("Please wait, retrieving file"));
@@ -451,7 +451,7 @@ sub hdlist_on_disk {
     urpmidir() . "/hdlist.$m->{fakemedium}.cz";
 }
 
-sub allow_copy_rpms_on_disk {
+sub _allow_copy_rpms_on_disk {
     my ($medium, $hdlists) = @_;
 
     $medium->{device} && $medium->{method} ne 'iso' or return;
@@ -470,7 +470,7 @@ sub allow_copy_rpms_on_disk {
     }
 }
 
-sub parse_media_cfg {
+sub _parse_media_cfg {
     my ($cfg) = @_;
 
     require MDV::Distribconf;
@@ -533,7 +533,7 @@ sub get_media {
 	    my ($dir_url, $iso, $rel_path) = $_->{url} =~ m!(.*)/(.*\.iso):(/.*)! or die "bad media_cfg_isos url $_->{url}";
 	    my $dir_medium = url2mounted_phys_medium($o, $dir_url);
 	    $dir_medium->{options} =~ s/\bnoauto\b,?//;
-	    my $phys_m = iso_phys_media($dir_medium, $iso, $rel_path);
+	    my $phys_m = _iso_phys_media($dir_medium, $iso, $rel_path);
 	    push @{$o->{all_hds}{loopbacks}}, $phys_m;
 	    ($suppl_CDs, $copy_rpms_on_disk) = get_media_cfg($o, $phys_m, $packages, $_->{selected_names}, $_->{force_rpmsrate});
 	} else {
@@ -550,7 +550,7 @@ sub remove_from_fstab {
     @{$all_hds->{nfss}} = grep { $_ != $phys_m } @{$all_hds->{nfss}} if $phys_m->{method} eq 'nfs';
 }
 
-sub find_and_add_to_fstab {
+sub _find_and_add_to_fstab {
     my ($all_hds, $phys_m, $b_force_mount) = @_;
 
     if (my $existant = find { $_->{device} eq $phys_m->{device} } fs::get::really_all_fstab($all_hds)) {
@@ -580,24 +580,24 @@ sub find_and_add_to_fstab {
 sub url2mounted_phys_medium {
     my ($o, $url, $o_rel_file, $o_name) = @_;
 
-    my $phys_m = url2phys_medium($o, $url);
+    my $phys_m = _url2phys_medium($o, $url);
     $phys_m->{name} = $o_name if $o_name; #- useful for CDs which prompts a name in change_phys_medium
     change_phys_medium($phys_m, $o_rel_file, $o->{packages}) or return;
     $phys_m;
 }
 
-sub url2phys_medium {
+sub _url2phys_medium {
     my ($o, $url) = @_;
     my ($method, $path) = $url =~ m!([^:]*)://(.*)! or internal_error("bad url $url");
     if ($method eq 'drakx') {
 	my $m = { %{$o->{stage2_phys_medium}}, is_stage2_phys_medium => 1 };
 	if ($m->{loopback_device}) {
-	    $m->{loopback_device} = find_and_add_to_fstab($o->{all_hds}, $m->{loopback_device}, 'force_mount');
+	    $m->{loopback_device} = _find_and_add_to_fstab($o->{all_hds}, $m->{loopback_device}, 'force_mount');
 	}
 	$m->{url} .= "/$path";
 	$m->{rel_path} .= "/$path" if $m->{device};
-	$m = find_and_add_to_fstab($o->{all_hds}, $m) if $m->{device};
-	phys_medium_is_mounted($m);
+	$m = _find_and_add_to_fstab($o->{all_hds}, $m) if $m->{device};
+	_phys_medium_is_mounted($m);
 	$m;
     } elsif ($method eq 'cdrom') {
 	my $cdrom = first(detect_devices::cdroms());
@@ -605,10 +605,10 @@ sub url2phys_medium {
 	    url => $url, method => $method, fs_type => 'iso9660', device => $cdrom->{device}, 
 	    rel_path => "/$path",
 	};
-	my $m_ = find_and_add_to_fstab($o->{all_hds}, $m);
+	my $m_ = _find_and_add_to_fstab($o->{all_hds}, $m);
 	if ($m_->{name}) {
 	    #- we need a new phys medium, different from current CD
-	    $m_ = get_phys_media_cdrom($m_, '');
+	    $m_ = _get_phys_media_cdrom($m_, '');
 	    #- we also need to enforce what we want, especially rel_path
 	    put_in_hash($m_, $m);
 	}
@@ -620,7 +620,7 @@ sub url2phys_medium {
 	    url => $url, method => $method,
 	    fs_type => 'nfs', device => "$server:$nfs_dir", faked_device => 1,
 	};
-	find_and_add_to_fstab($o->{all_hds}, $m);
+	_find_and_add_to_fstab($o->{all_hds}, $m);
     } else {
 	{ url => $url, method => $method };
     }
@@ -631,7 +631,7 @@ sub get_media_cfg {
 
     my ($distribconf, $hdlists);
     if (getAndSaveFile_($phys_medium, 'media_info/media.cfg', '/tmp/media.cfg')) {
-	($distribconf, $hdlists) = parse_media_cfg('/tmp/media.cfg');
+	($distribconf, $hdlists) = _parse_media_cfg('/tmp/media.cfg');
     } else {
 	getAndSaveFile_($phys_medium, 'media_info/hdlists', '/tmp/hdlists')
 	  or die "media.cfg not found";
@@ -648,15 +648,15 @@ sub get_media_cfg {
     my $suppl_CDs = exists $o->{supplmedia} ? $o->{supplmedia} : $distribconf->{suppl} || 0;
     my $deselectionAllowed = $distribconf->{askmedia} || $o->{askmedia} || 0;
 
-    associate_phys_media($o->{all_hds}, $phys_medium, $hdlists);
+    _associate_phys_media($o->{all_hds}, $phys_medium, $hdlists);
 
     if ($deselectionAllowed && !@{$packages->{media}}) {
-	my $allow = allow_copy_rpms_on_disk($phys_medium, $hdlists);
+	my $allow = _allow_copy_rpms_on_disk($phys_medium, $hdlists);
 	$o->ask_deselect_media__copy_on_disk($hdlists, $allow && \$o->{copy_rpms_on_disk}) if $allow || @$hdlists > 1;
     }
 
     foreach my $h (@$hdlists) {
-	get_medium($o, $phys_medium, $packages, $h);
+	_get_medium($o, $phys_medium, $packages, $h);
     }
 
     log::l("get_media_cfg read " . int(@{$packages->{depslist}}) . " headers");
@@ -678,10 +678,10 @@ sub get_standalone_medium {
     my ($in, $phys_m, $packages, $m) = @_;
 
     add2hash($m, { phys_medium => $phys_m, selected => 1, rel_hdlist => 'media_info/hdlist.cz' });
-    get_medium($in, $phys_m, $packages, $m);
+    _get_medium($in, $phys_m, $packages, $m);
 }
 
-sub get_medium {
+sub _get_medium {
     my ($in_wait, $phys_m, $packages, $m) = @_;
 
     $m->{selected} or log::l("ignoring packages in $m->{rel_hdlist}"), return;
@@ -700,7 +700,7 @@ sub get_medium {
     #- for getting header of package during installation.
     my $hdlist = hdlist_on_disk($m);
     {
-	getAndSaveFile_progress($in_wait, N("Downloading file %s...", $m->{rel_hdlist}),
+	_getAndSaveFile_progress($in_wait, N("Downloading file %s...", $m->{rel_hdlist}),
 				$phys_m, $m->{rel_hdlist}, $hdlist) or die "no $m->{rel_hdlist} found";
 
     }
@@ -710,7 +710,7 @@ sub get_medium {
 	my $rel_synthesis = $m->{rel_hdlist};
 	$rel_synthesis =~ s!/hdlist!/synthesis.hdlist! or internal_error("bad {rel_hdlist} $m->{rel_hdlist}");
 	#- copy existing synthesis file too.
-	getAndSaveFile_progress($in_wait, N("Downloading file %s...", $rel_synthesis),
+	_getAndSaveFile_progress($in_wait, N("Downloading file %s...", $rel_synthesis),
 				$phys_m, $rel_synthesis, $synthesis);
     }
 
@@ -769,7 +769,7 @@ sub get_medium {
 #-######################################################################################
 #- Post installation RPMS from cdrom only, functions
 #-######################################################################################
-sub setup_postinstall_rpms {
+sub _setup_postinstall_rpms {
     my ($in, $packages, $current_phys_m) = @_;
 
     $postinstall_rpms and return;
@@ -884,14 +884,14 @@ sub copy_rpms_on_disk {
     our $copied_rpms_on_disk = 1;
 }
 
-sub install_urpmi__generate_names {
+sub _install_urpmi__generate_names {
     my ($packages, $medium) = @_;
 
     #- build a names file
     output("$::prefix/var/lib/urpmi/names.$medium->{fakemedium}",
 	   map { $packages->{depslist}[$_]->name . "\n" } $medium->{start} .. $medium->{end});
 }
-sub install_urpmi__generate_synthesis {
+sub _install_urpmi__generate_synthesis {
     my ($packages, $medium) = @_;
 
     my $synthesis = "/var/lib/urpmi/synthesis.hdlist.$medium->{fakemedium}.cz";
@@ -948,8 +948,8 @@ sub install_urpmi {
 
 	    $dir = MDK::Common::File::concat_symlink($dir, $medium->{rpmsdir});
 
-	    install_urpmi__generate_names($packages, $medium);
-	    install_urpmi__generate_synthesis($packages, $medium);
+	    _install_urpmi__generate_names($packages, $medium);
+	    _install_urpmi__generate_synthesis($packages, $medium);
 
 	    my ($qname, $qdir) = ($medium->{fakemedium}, $dir);
 
