@@ -29,7 +29,6 @@ use urpm::download;
 #-	end (last rpm id, undefined iff not selected)
 #-	fakemedium ("$name ($rpmsdir)", used locally by urpmi)
 #-	rel_hdlist
-#-	hdlist_size
 #-	key-ids
 #-	name (text description)
 #-	pubkey (array containing all the keys to import)
@@ -38,7 +37,6 @@ use urpm::download;
 #-	selected
 #-	size (in MB)
 #-	start (first rpm id, undefined iff not selected)
-#-	synthesis_hdlist_size
 #-	update (for install_urpmi)
 
 
@@ -705,7 +703,6 @@ sub get_medium {
 	getAndSaveFile_progress($in_wait, N("Downloading file %s...", $m->{rel_hdlist}),
 				$phys_m, $m->{rel_hdlist}, $hdlist) or die "no $m->{rel_hdlist} found";
 
-	$m->{hdlist_size} = -s $hdlist; #- keep track of size for post-check.
     }
 
     my $synthesis = urpmidir() . "/synthesis.hdlist.$m->{fakemedium}.cz";
@@ -715,7 +712,6 @@ sub get_medium {
 	#- copy existing synthesis file too.
 	getAndSaveFile_progress($in_wait, N("Downloading file %s...", $rel_synthesis),
 				$phys_m, $rel_synthesis, $synthesis);
-	$m->{synthesis_hdlist_size} = -s $synthesis; #- keep track of size for post-check.
     }
 
     #- get all keys corresponding in the right pubkey file,
