@@ -37,14 +37,14 @@ our %compssListDesc = (
 our $limitMinTrans = 13;
 
 
-sub cleanHeaders() {
+sub _cleanHeaders() {
     rm_rf("$::prefix/tmp/headers") if -e "$::prefix/tmp/headers";
 }
 
 #- get all headers from an hdlist file.
 sub extractHeaders {
     my ($pkgs, $media) = @_;
-    cleanHeaders();
+    _cleanHeaders();
 
     foreach my $medium (@$media) {
 	$medium->{selected} or next;
@@ -128,7 +128,7 @@ sub packageByName {
     $best;
 }
 
-sub bestKernel_extensions {
+sub _bestKernel_extensions {
     my ($o_match_all_hardware) = @_;
 
     $o_match_all_hardware ? (arch() =~ /i.86/ ? '-desktop586' : '-desktop') :
@@ -141,7 +141,7 @@ sub bestKernel_extensions {
 sub bestKernelPackage {
     my ($packages, $o_match_all_hardware) = @_;
 
-    my @preferred_exts = bestKernel_extensions($o_match_all_hardware);
+    my @preferred_exts = _bestKernel_extensions($o_match_all_hardware);
     my @kernels = grep { $_ } map { packageByName($packages, "kernel$_-latest") } @preferred_exts;
 
     log::l("bestKernelPackage (" . join(':', @preferred_exts) . "): " . join(' ', map { $_->name } @kernels) . (@kernels > 1 ? ' (choosing the first)' : ''));
@@ -161,7 +161,7 @@ sub packagesToInstall {
     @packages;
 }
 
-sub packageRequest {
+sub _packageRequest {
     my ($packages, $pkg) = @_;
 
     #- check if the same or better version is installed,
@@ -180,7 +180,7 @@ sub packageCallbackChoices {
   
     if ($prefered && @$prefered) {
 	@$prefered;
-    } elsif (my @l = packageCallbackChoices_($urpm, $choices, $virtual_pkg_name)) {
+    } elsif (my @l = _packageCallbackChoices_($urpm, $choices, $virtual_pkg_name)) {
 	@l;
     } else {
 	log::l("packageCallbackChoices: default choice from " . join(",", map { $_->name } @$choices) . " for $virtual_pkg_name");
@@ -188,14 +188,14 @@ sub packageCallbackChoices {
     }
 }
 
-sub packageCallbackChoices_ {
+sub _packageCallbackChoices_ {
     my ($urpm, $choices, $virtual_pkg_name) = @_;
 
     my ($prefer, $_other) = urpm::select::get_preferred($urpm, $choices, '');
     if (@$prefer) {
 	@$prefer;
     } elsif ($virtual_pkg_name eq 'kernel') {
-	my $re = join('|', map { "kernel\Q$_-2" } bestKernel_extensions());
+	my $re = join('|', map { "kernel\Q$_-2" } _bestKernel_extensions());
 	my @l = grep { $_->name =~ $re } @$choices;
 	log::l("packageCallbackChoices: kernel chosen ", join(",", map { $_->name } @l), " in ", join(",", map { $_->name } @$choices));
 	@l;
@@ -249,12 +249,12 @@ sub select_by_package_names_or_die {
     foreach (@$names) {
 	my $p = packageByName($packages, $_) or die "package $_ not found";
 	!$p->flag_installed && !$p->flag_selected or next;
-	my ($_pkgs, $error) = selectPackage_with_error($packages, $p, $b_base);
+	my ($_pkgs, $error) = _selectPackage_with_error($packages, $p, $b_base);
 	$error and die N("Some packages requested by %s cannot be installed:\n%s", $_, $error);
     }
 }
 
-sub resolve_requested_and_check {
+sub _resolve_requested_and_check {
     my ($packages, $state, $requested) = @_;
 
     my @l = $packages->resolve_requested($packages->{rpmdb}, $state, $requested,
@@ -272,18 +272,18 @@ sub resolve_requested_and_check {
 
 sub selectPackage {
     my ($packages, $pkg, $b_base) = @_;
-    my ($pkgs, $_error) = selectPackage_with_error($packages, $pkg, $b_base);
+    my ($pkgs, $_error) = _selectPackage_with_error($packages, $pkg, $b_base);
     @$pkgs;
 }
 
-sub selectPackage_with_error {
+sub _selectPackage_with_error {
     my ($packages, $pkg, $b_base) = @_;
 
     my $state = $packages->{state} ||= {};
 
     $packages->{rpmdb} ||= rpmDbOpen();
 
-    my ($pkgs, $error) = resolve_requested_and_check($packages, $state, packageRequest($packages, $pkg) || {});
+    my ($pkgs, $error) = _resolve_requested_and_check($packages, $state, _packageRequest($packages, $pkg) || {});
 
     if ($b_base) {
 	$_->set_flag_base foreach @$pkgs;
@@ -321,7 +321,7 @@ sub unselectAllPackages {
     }
     #- clean state, in order to start with a brand new set...
     $packages->{state} = {};
-    resolve_requested_and_check($packages, $packages->{state}, \%keep_selected);
+    _resolve_requested_and_check($packages, $packages->{state}, \%keep_selected);
 }
 
 sub empty_packages {
@@ -384,7 +384,7 @@ sub setSelectedFromCompssList {
 	#- selecting $p. the packages are not selected.
 	my $state = $packages->{state} ||= {};
 
-	my ($l, $_error) = resolve_requested_and_check($packages, $state, packageRequest($packages, $p) || {});
+	my ($l, $_error) = _resolve_requested_and_check($packages, $state, _packageRequest($packages, $p) || {});
 
 	#- this enable an incremental total size.
 	my $old_nb = $nb;
@@ -537,7 +537,7 @@ sub computeGroupSize {
 }
 
 
-sub openInstallLog() {
+sub _openInstallLog() {
     my $f = "$::prefix/root/drakx/install.log";
     open(my $LOG, ">> $f") ? log::l("opened $f") : log::l("Failed to open $f. No install log will be kept."); #-#
     CORE::select((CORE::select($LOG), $| = 1)[0]);
@@ -640,12 +640,12 @@ sub selectPackagesToUpgrade {
     log::l("selected pkgs to upgrade: " . join(' ', map { $packages->{depslist}[$_]->name } keys %selection));
 
     log::l("resolving dependencies...");
-    resolve_requested_and_check($packages, $state, \%selection);
+    _resolve_requested_and_check($packages, $state, \%selection);
     log::l("...done");
     log::l("finally selected pkgs: ", join(" ", sort map { $_->name } grep { $_->flag_selected } @{$packages->{depslist}}));
 }
 
-sub installTransactionClosure {
+sub _installTransactionClosure {
     my ($packages, $id2pkg, $isUpgrade) = @_;
 
     foreach (grep { !$_->{selected} } @{$packages->{media}}) {
@@ -753,7 +753,7 @@ sub install {
 
     URPM::read_config_files();
     URPM::add_macro(join(' ', '__dbi_cdb', URPM::expand('%__dbi_cdb'), 'nofsync'));
-    my $LOG = openInstallLog();
+    my $LOG = _openInstallLog();
 
     #- do not modify/translate the message used with installCallback since
     #- these are keys during progressing installation, or change in other
@@ -761,12 +761,12 @@ sub install {
     $callback->($packages, user => undef, install => $nb, $total);
 
     do {
-	my @transToInstall = installTransactionClosure($packages, \%packages, $isUpgrade);
+	my @transToInstall = _installTransactionClosure($packages, \%packages, $isUpgrade);
 	$nb = values %packages;
 
 	#- added to exit typically after last media unselected.
 	if ($nb == 0 && scalar(@transToInstall) == 0) {
-	    cleanHeaders();
+	    _cleanHeaders();
 
 	    fs::loopback::save_boot($loop_boot);
 	    return;
@@ -829,13 +829,13 @@ sub install {
 	    }
 	}
 	log::l("progression: $nb remaining packages to install");
-	cleanHeaders();
+	_cleanHeaders();
     } while $nb > 0 && !$install::pkgs::cancel_install;
 
     log::l("closing install.log file");
     close $LOG;
 
-    cleanHeaders();
+    _cleanHeaders();
     clean_rpmdb_shared_regions(); #- workaround librpm which is buggy when using librpm rooted and the just installed rooted library
 
     fs::loopback::save_boot($loop_boot);
@@ -933,7 +933,7 @@ sub upgrade_by_removing_pkgs {
 	}
     }
 
-    my @was_installed = remove_pkgs_to_upgrade($packages, $callback, $extension);
+    my @was_installed = _remove_pkgs_to_upgrade($packages, $callback, $extension);
 
     {
 	my @restore_files = qw(/etc/passwd /etc/group /etc/ld.so.conf);
@@ -965,7 +965,7 @@ sub upgrade_by_removing_pkgs {
 
 sub removed_pkgs_to_upgrade_file() { "$::prefix/root/drakx/removed_pkgs_to_upgrade" }
 
-sub remove_pkgs_to_upgrade {
+sub _remove_pkgs_to_upgrade {
     my ($packages, $callback, $extension) = @_;
 
     my @to_remove;
@@ -990,7 +990,7 @@ sub remove_pkgs_to_upgrade {
 
     delete $packages->{rpmdb}; #- make sure rpmdb is closed before.
 
-    remove(\@to_remove, $callback, noscripts => 1);
+    _remove(\@to_remove, $callback, noscripts => 1);
 
     @was_installed;
 }
@@ -1005,12 +1005,12 @@ sub remove_marked_ask_remove {
     #- we are not checking depends since it should come when
     #- upgrading a system. although we may remove some functionalities ?
 
-    remove(\@to_remove, $callback, force => 1);
+    _remove(\@to_remove, $callback, force => 1);
 
     delete $packages->{state}{ask_remove}{$_} foreach @to_remove;
 }
 
-sub remove_raw {
+sub _remove_raw {
     my ($to_remove, $callback, %run_transaction_options) = @_;
 
     log::l("removing: " . join(' ', @$to_remove));
@@ -1028,13 +1028,13 @@ sub remove_raw {
 
     $trans->run(undef, %run_transaction_options, callback_uninst => $callback);
 }
-sub remove {
+sub _remove {
     my ($_to_remove, $_callback, %run_transaction_options) = @_;
 
-    my @pbs = &remove_raw;
+    my @pbs = &_remove_raw;
     if (@pbs && !$run_transaction_options{noscripts}) {
 	$run_transaction_options{noscripts} = 1;
-	@pbs = &remove_raw;
+	@pbs = &_remove_raw;
     }
     if (@pbs) {
 	die "removing of old rpms failed:\n  ", join("\n  ", @pbs);
