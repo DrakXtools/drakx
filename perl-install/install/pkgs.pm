@@ -645,6 +645,22 @@ sub selectPackagesToUpgrade {
     log::l("finally selected pkgs: ", join(" ", sort map { $_->name } grep { $_->flag_selected } @{$packages->{depslist}}));
 }
 
+sub _filter_packages {
+    my ($retry, $packages, @packages) = @_;
+    grep {
+        if ($_->flag_installed || !packageMedium($packages, $_)->{selected}) {
+            if ($_->name eq 'mdv-rpm-summary' && $_->flag_installed) {
+                install::pkgs::setup_rpm_summary_translations();
+            }
+            $_->free_header;
+          0;
+        } else {
+            log::l("failed to install " . $_->fullname . " (will retry)") if !$retry;
+            1;
+        }
+    } @packages;
+}
+
 sub _installTransactionClosure {
     my ($packages, $id2pkg, $isUpgrade) = @_;
 
@@ -785,18 +801,7 @@ sub install {
 	    _install_raw($packages, [ $retry ? $retry_pkg : @transToInstall ],
 			 $isUpgrade, $callback, $LOG, $retry_pkg);
 
-	    @transToInstall = grep {
-		if ($_->flag_installed || !packageMedium($packages, $_)->{selected}) {
-		    if ($_->name eq 'mdv-rpm-summary' && $_->flag_installed) {
-			install::pkgs::setup_rpm_summary_translations();
-		    }
-		    $_->free_header;
-		    0;
-		} else {
-		    log::l("failed to install " . $_->fullname . " (will retry)") if !$retry;
-		    1;
-		}
-	    } @transToInstall;
+	    @transToInstall = _filter_packages($retry, $packages, @transToInstall);
 
 	    if (@transToInstall) {
 		if (!$retry || $retry_pkg != $transToInstall[0]) {
