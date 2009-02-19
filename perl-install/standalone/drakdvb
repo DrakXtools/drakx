@@ -110,9 +110,27 @@ sub load_channels() {
     }
 }
 
+sub get_channel_info {
+    my ($channel) = @_;
+    foreach (cat_($config_file)) {
+        chomp;
+        my %channel_info;
+        @channel_info{qw(name frequency options vpid apid serviceid)} = /^([^:]+):([^:]+):(.*):([^:]+):([^:]+):([^:]+)+$/;
+        next if $channel_info{name} ne $channel;
+        ($channel_info{bandwidth}) = $channel_info{options} =~ /\bBANDWIDTH_(\d+)_MHZ\b/;
+        return \%channel_info;
+    }
+    undef;
+}
+
 sub launch_tv() {
     my $channel = get_selected_channel() or return;
-    system('mplayer "dvb://' . $channel . '"&');
+    if (whereis_binary("vlc")) {
+        my $info = get_channel_info($channel) or return;
+        system("vlc dvb:// --dvb-frequency=$info->{frequency} --dvb-adapter=0 --dvb-bandwidth=$info->{bandwidth} --program=$info->{serviceid} &");
+    } else {
+        system('mplayer "dvb://' . $channel . '"&');
+    }
 }
 
 gtkadd($w->{window},
