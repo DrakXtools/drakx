@@ -94,16 +94,17 @@ sub detect_channels() {
 }
 
 sub load_channels() {
-    @{$channel_list->{data}} = ();
+    my @channels;
     open(my $CHANNELCONF, "<$config_file");
     local $_;
     while (<$CHANNELCONF>) {
         my $line = $_;
         if ($line =~ /^([^:]*?)(\([^(:]*\))?:/) {
-            push @{$channel_list->{data}}, [ $1, $1 . $2 ];
+            push @channels, [ $1, $1 . $2 ];
         }
     }
     close($CHANNELCONF);
+    @{$channel_list->{data}} = sort { $a->[0] cmp $b->[0] } @channels;
     if (defined @{$channel_list->{data}}[0]) {
         $channel_list->select(0);
     }
