@@ -111,7 +111,8 @@ sub load_channels() {
 }
 
 sub launch_tv() {
-    system('mplayer "dvb://' . get_selected_channel() . '"&');
+    my $channel = get_selected_channel() or return;
+    system('mplayer "dvb://' . $channel . '"&');
 }
 
 gtkadd($w->{window},
