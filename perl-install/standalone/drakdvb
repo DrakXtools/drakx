@@ -127,6 +127,11 @@ sub launch_tv() {
     my $channel = get_selected_channel() or return;
     if (whereis_binary("vlc")) {
         my $info = get_channel_info($channel) or return;
+        my %vlc_config = read_gnomekderc("$ENV{HOME}/.config/vlc/vlcrc", "main");
+        if ($vlc_config{'one-instance'}) {
+            # changing dvb options does not work with --one-instance, kill running vlc
+            system("killall vlc");
+        }
         system("vlc dvb:// --dvb-frequency=$info->{frequency} --dvb-adapter=0 --dvb-bandwidth=$info->{bandwidth} --program=$info->{serviceid} &");
     } else {
         system('mplayer "dvb://' . $channel . '"&');
