@@ -43,7 +43,7 @@
   sync
 
   eject
-  mount mount.nfs mount.ntfs-3g umount
+  mount mount.nfs umount
   losetup
 
   ldconfig
@@ -180,6 +180,7 @@
     /usr/share/locale/pt/LC_MESSAGES/partimage.mo
   </if>
 
+  /sbin/mount.ntfs-3g <!-- can not be expanded as binary, not executable for all users -->
 </from>
 
 <from dir="/usr/lib/rpm" expand="glob">
