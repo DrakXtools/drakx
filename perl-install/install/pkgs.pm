@@ -423,52 +423,54 @@ sub restoreSelected {
          } $l, $flags;
 }
 
+sub _inside {
+    my ($l1, $l2) = @_;
+    my $i = 0;
+    return if @$l1 > @$l2;
+    foreach (@$l1) {
+        my $c;
+        while ($c = $l2->[$i++] cmp $_) {
+            return if $c == 1 || $i > @$l2;
+        }
+    }
+    1;
+}
+
+sub _or_ify {
+    my ($first, @other) = @_;
+    my @l = split('\|\|', $first);
+    foreach (@other) {
+        @l = map {
+            my $n = $_;
+            map { "$_&&$n" } @l;
+        } split('\|\|');
+    }
+    @l;
+}
+sub _or_clean {
+    my ($flags) = @_;
+    my @l = split("\t", $flags);
+    @l = map { [ sort split('&&') ] } @l;
+    my @r;
+  B: while (@l) {
+        my $e = shift @l;
+        foreach (@r, @l) {
+            _inside($_, $e) and next B;
+        }
+        push @r, $e;
+    }
+    join("\t", map { join('&&', @$_) } @r);
+}
+
+
 sub computeGroupSize {
     my ($packages, $min_level) = @_;
+    my (%group, %memo);
 
-    sub inside {
-	my ($l1, $l2) = @_;
-	my $i = 0;
-	return if @$l1 > @$l2;
-	foreach (@$l1) {
-	    my $c;
-	    while ($c = $l2->[$i++] cmp $_) {
-		return if $c == 1 || $i > @$l2;
-	    }
-	}
-	1;
-    }
-
-    sub or_ify {
-	my ($first, @other) = @_;
-	my @l = split('\|\|', $first);
-	foreach (@other) {
-	    @l = map {
-		my $n = $_;
-		map { "$_&&$n" } @l;
-	    } split('\|\|');
-	}
-	@l;
-    }
     my %or_ify_cache;
     my $or_ify_cached = sub {
-	$or_ify_cache{$_[0]} ||= join("\t", or_ify(split("\t", $_[0])));
+	$or_ify_cache{$_[0]} ||= join("\t", _or_ify(split("\t", $_[0])));
     };
-    sub or_clean {
-	my ($flags) = @_;
-	my @l = split("\t", $flags);
-	@l = map { [ sort split('&&') ] } @l;
-	my @r;
-	B: while (@l) {
-	    my $e = shift @l;
-	    foreach (@r, @l) {
-		inside($_, $e) and next B;
-	    }
-	    push @r, $e;
-	}
-	join("\t", map { join('&&', @$_) } @r);
-    }
-    my (%group, %memo);
 
     log::l("install::pkgs::computeGroupSize");
     my $time = time();
@@ -522,7 +524,7 @@ sub computeGroupSize {
 	    next if $p->flag_selected; #- always installed (accounted in system_size)
 	    my $s = $group{$p->name} || $or_ify_cached->(join("\t", $p->rflags));
 	    my $m = "$flags\t$s";
-	    $group{$p->name} = ($memo{$m} ||= or_clean($m));
+	    $group{$p->name} = ($memo{$m} ||= _or_clean($m));
 	}
     }
     my (%sizes, %pkgs);
