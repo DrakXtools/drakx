@@ -1,32 +1,43 @@
 # Translation of libDrakX-standalone.po to Romanian
 # Copyright (c) 1999-2009 Mandriva
 #
-# Vă rugăm să nu actualizaţi fişierul, cu excepţia cazului în care sînteţi
-# sigur de calitatea traducerii dumneavoastră, de gramatică şi de ortografie.
-# Acestea din urmă sunt de prea multe ori aproximative.
+# Vă rugăm să nu actualizaţi fișierul, cu excepția cazului în care sînteți
+# sigur de calitatea traducerii dumneavoastră, de gramatică și de ortografie.
+# Acestea din urmă sînt de prea multe ori aproximative.
 # Corectarea lor ulterioară nu are nici un alt rezultat decît acela de
 # pierdere de timp pentru toata lumea.
 #
-# VĂ RUGĂM SĂ RESPECTAŢI SEMNELE DE PUNCTUAŢIE ALE LIMBII ROMÂNE!
+# VĂ RUGĂM SĂ RESPECTAȚI SEMNELE DE PUNCTUAȚIE ALE LIMBII ROMÂNE!
 #
-# Nu suprimaţi spaţiul care urmează unui semn de punctuaţie de sfîrşit de
+# Nu suprimați spațiul care urmează unui semn de punctuație de sfîrșit de
 # frază; trebuie respectată versiunea originală. În acest caz, este foarte
-# probabil ca programul să afişeze un mesaj la sfîrşit. Suprimînd acel spaţiu,
-# cele două cuvintele vor fi afişate legat.
+# probabil ca programul să afișeze un mesaj la sfîrșit. Suprimînd acel spațiu,
+# cele două cuvintele vor fi afișate legat.
 #
-# Traduceţi de manieră INTELIGENTĂ (de ce nu şi prin comparaţie cu alte
-# traduceri ale acestui fişier în alte limbi) şi nu cuvînt cu cuvînt. Unele
+# Traduceți de manieră INTELIGENTĂ (de ce nu și prin comparație cu alte
+# traduceri ale acestui fișier în alte limbi) și nu cuvînt cu cuvînt. Unele
 # astfel de traduceri nu au nici un sens în limba română.
 #
-# Vă mulţumim pentru înţelegere.
-# www.mandrivausers.ro
+# ATENȚIE LA FONTURILE UTILIZATE! Pentru a reda corect diacriticele folosiți
+# disponerea tastaturii românească standard, codarea de caractere UTF-8 și
+# asigurați-vă că fonturile utilizate sînt cu virgulițe, NU CU SEDILE!
+# Exemplu:
+#          font incorect (cu sedile): şŞ ţŢ
+#          font corect (cu virgule): șȘ țȚ
 #
-# Traducători:
+# Pentru a vă asigura că folosiți fonturile corecte, vizitați:
+#          http://i18n.ro/Fonturi_romanesti/testare
 #
-# Florin Grad <florin@mandriva.com>, 1999, 2000
-# Dragos Marian Barbu <dragosb@softhome.net>, 2000
-# Ovidiu Constantin <ovidiu.constantin@gmx.net>, 2002, 2003
-# Harald Ersch <harald@ersch.ro>, 2003
+# Vă mulțumim pentru înțelegere.
+#                                                       Echipa de traducători,
+#                                                       www.Mandrivausers.ro
+#
+# Traducători de-a lungul timpului:
+#
+# Florin GRAD <florin@mandriva.com>, 1999, 2000
+# Dragos Marian BARBU <dragosb@softhome.net>, 2000
+# Ovidiu CONSTANTIN <ovidiu.constantin@gmx.net>, 2002, 2003
+# Harald ERSCH <harald@ersch.ro>, 2003
 # Florin Cătălin RUSSEN <cfrussen@yahoo.co.uk>, 2008, 2009
 #
 msgid ""
@@ -34,12 +45,17 @@ msgstr ""
 "Project-Id-Version: DrakX 7.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-13 16:30+0100\n"
-"PO-Revision-Date: 2009-01-28 15:51+0100\n"
+"PO-Revision-Date: 2009-02-20 23:01+0100\n"
 "Last-Translator: Florin Cătălin RUSSEN <cfrussen@yahoo.co.uk>\n"
 "Language-Team: Mandrivausers.ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Romanian\n"
+"X-Poedit-Country: ROMANIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=3;plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
+"2:1))\n"
 
 #: drakauth:24 drakauth:26 draksec:163
 #, c-format
@@ -59,17 +75,17 @@ msgstr "Eroare"
 #, c-format
 msgid "No bootloader found, creating a new configuration"
 msgstr ""
-"Nu s-a găsit nici un încărcător de sistem, se creează o configuraţie nouă"
+"Nu s-a găsit nici un încărcător de sistem, se creează o configurație nouă"
 
 #: drakboot:88 harddrake2:197 harddrake2:198 logdrake:71
 #, c-format
 msgid "/_File"
-msgstr "/_Fişier"
+msgstr "/_Fișier"
 
 #: drakboot:89 logdrake:77
 #, c-format
 msgid "/File/_Quit"
-msgstr "/Fişier/_Termină"
+msgstr "/Fișier/_Termină"
 
 #: drakboot:89 harddrake2:198 logdrake:77
 #, c-format
@@ -89,7 +105,7 @@ msgstr "Detaliat"
 #: drakboot:131
 #, c-format
 msgid "Silent"
-msgstr "Silenţios"
+msgstr "Silențios"
 
 #: drakboot:137 drakbug:254 drakdvb:57 drakfont:682 drakperm:376 drakperm:386
 #: drakups:27 harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
@@ -106,13 +122,13 @@ msgid ""
 "boot, select a graphic video mode from the bootloader configuration tool."
 msgstr ""
 "Încărcătorul sistemului de operare nu este în mod „framebuffer”. Pentru a "
-"activa demarajul grafic, selecţionaţi un mod grafic din unealta de "
+"activa demarajul grafic, selecționați un mod grafic din unealta de "
 "configurare a încărcătorului de sistem de operare."
 
 #: drakboot:139
 #, c-format
 msgid "Do you want to configure it now?"
-msgstr "Doriţi să-l configuraţi acum?"
+msgstr "Doriți să-l configurați acum?"
 
 #: drakboot:148
 #, c-format
@@ -140,7 +156,7 @@ msgid ""
 "Display theme\n"
 "under console"
 msgstr ""
-"Afişează tema\n"
+"Afișează tema\n"
 "sub consolă"
 
 #: drakboot:163 draksplash:26
@@ -176,7 +192,7 @@ msgstr "Mod sistem"
 #: drakboot:210
 #, c-format
 msgid "Launch the graphical environment when your system starts"
-msgstr "Lansează interfaţa grafică la pornirea sistemului"
+msgstr "Lansează interfața grafică la pornirea sistemului"
 
 #: drakboot:262
 #, c-format
@@ -195,9 +211,9 @@ msgid ""
 "selected below.\n"
 "Be sure your video card supports the mode you choose."
 msgstr ""
-"Alegeţi un mod video, acesta va fi aplicat la fiecare intrare de demaraj "
-"selecţionată mai jos.\n"
-"Asiguraţi-vă mai întîi că placa grafică suportă modul ales."
+"Alegeți un mod video, acesta va fi aplicat la fiecare intrare de demaraj "
+"selecționată mai jos.\n"
+"Asigurați-vă mai întîi că placa grafică suportă modul ales."
 
 #: drakbug:65 drakbug:152
 #, c-format
@@ -217,7 +233,7 @@ msgstr "Centrul de control Mandriva Linux"
 #: drakbug:82
 #, c-format
 msgid "First Time Wizard"
-msgstr "Asistent iniţial"
+msgstr "Asistent inițial"
 
 #: drakbug:83
 #, c-format
@@ -237,7 +253,7 @@ msgstr "Mandriva Online"
 #: drakbug:88
 #, c-format
 msgid "Remote Control"
-msgstr "Control la distanţă"
+msgstr "Control la distanță"
 
 #: drakbug:89
 #, c-format
@@ -252,12 +268,12 @@ msgstr "Unealta de migrare Windows"
 #: drakbug:91
 #, c-format
 msgid "Configuration Wizards"
-msgstr "Asistenţi de configurare"
+msgstr "Asistenți de configurare"
 
 #: drakbug:113
 #, c-format
 msgid "Select Mandriva Tool:"
-msgstr "Alegţi unealta Mandriva:"
+msgstr "Alegți unealta Mandriva:"
 
 #: drakbug:114
 #, c-format
@@ -265,7 +281,7 @@ msgid ""
 "or Application Name\n"
 "(or Full Path):"
 msgstr ""
-"sau numele aplicaţiei\n"
+"sau numele aplicației\n"
 "(sau calea completă):"
 
 #: drakbug:117
@@ -289,12 +305,12 @@ msgid "The \"%s\" program has segfaulted with the following error:"
 msgstr "Programul \"%s\" a crăpat (segfault) cu următoarea eroare:"
 
 #: drakbug:155
-#, fuzzy, c-format
+#, c-format
 msgid "Its GDB trace is:"
-msgstr "Urma lui gdb este:"
+msgstr "Urma sa GDB este:"
 
 #: drakbug:158
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
 "This will open a web browser window on %s where you'll find a form to fill "
@@ -302,36 +318,31 @@ msgid ""
 msgstr ""
 "Pentru a raporta o eroare, apăsați pe butonul de raportare. \n"
 "Acesta va deschide o fereastră de navigator la %s unde veți găsi un formular "
-"de completat. Informațiile afișate mai sus vor fi transferate pe acel "
-"server.\n"
-"Pot fi incluse chestii de folos precum rezultatul comenzii lspcidrake -v, "
-"versiunea nucleului și /proc/cpuinfo."
+"de completat. Informațiile afișate mai sus vor fi transferate pe acel server"
 
 #: drakbug:160
 #, c-format
 msgid ""
 "It would be very useful to attach to your report the output of the following "
 "command: %s."
-msgid_plural ""
+msgstr ""
 "Things useful to attach to your report are the output of the following "
 "commands: %s."
-msgstr[0] ""
-msgstr[1] ""
 
 #: drakbug:163
 #, c-format
 msgid "'%s'"
-msgstr ""
+msgstr "'%s'"
 
 #: drakbug:166
-#, fuzzy, c-format
+#, c-format
 msgid "You should also attach the following files: %s as well as %s."
-msgstr "Trebuie să instalaţi următoarele pachete: %s"
+msgstr "De asemenea va trebui să atașați următoarele fișiere: %s cît și %s."
 
 #: drakbug:173
 #, c-format
 msgid "Please describe what you were doing when it crashed:"
-msgstr "Descrieţi ce făceaţi cînd a crăpat:"
+msgstr "Descrieți ce făceați cînd a crăpat:"
 
 #: drakbug:185 drakperm:136
 #, c-format
@@ -364,18 +375,18 @@ msgid ""
 "You must type in what you were doing when this bug happened in order to "
 "enable us to reproduce this bug and to increase the odds of fixing it"
 msgstr ""
-"Trebuie să indicaţi ce făceaţi cînd eroarea s-a produs ca s-o putem "
-"reproduce şi să ne mărim şansele de a o putea corecta"
+"Trebuie să indicați ce făceați cînd eroarea s-a produs ca s-o putem "
+"reproduce și să ne mărim șansele de a o putea corecta"
 
 #: drakbug:256
 #, c-format
 msgid "Thanks."
-msgstr "Mulţumiri."
+msgstr "Mulțumiri."
 
 #: drakclock:30 draksec:169
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
-msgstr "Parametrii de dată, oră şi fus orar"
+msgstr "Parametrii de dată, oră și fus orar"
 
 #: drakclock:39
 #, c-format
@@ -410,7 +421,7 @@ msgstr "Este ceasul intern fixat pe GMT?"
 #: drakclock:70
 #, c-format
 msgid "Network Time Protocol"
-msgstr "Protocol de timp în reţea (NTP)"
+msgstr "Protocol de timp în rețea (NTP)"
 
 #: drakclock:72
 #, c-format
@@ -418,13 +429,13 @@ msgid ""
 "Your computer can synchronize its clock\n"
 " with a remote time server using NTP"
 msgstr ""
-"Calculatorul îşi poate sincroniza ceasul intern\n"
+"Calculatorul își poate sincroniza ceasul intern\n"
 " cu un server de timp distant utilizînd NTP"
 
 #: drakclock:73
 #, c-format
 msgid "Enable Network Time Protocol"
-msgstr "Activează protocolul de timp în reţea (NTP)"
+msgstr "Activează protocolul de timp în rețea (NTP)"
 
 #: drakclock:81
 #, c-format
@@ -439,7 +450,7 @@ msgstr "Fus orar"
 #: drakclock:111
 #, c-format
 msgid "Please enter a valid NTP server address."
-msgstr "Introduceţi o adresă validă de server NTP."
+msgstr "Introduceți o adresă validă de server NTP."
 
 #: drakclock:126
 #, c-format
@@ -459,12 +470,12 @@ msgstr "Reîncearcă"
 #: drakclock:151 drakclock:161
 #, c-format
 msgid "Reset"
-msgstr "Reiniţializează"
+msgstr "Reinițializează"
 
 #: drakdvb:30
-#, fuzzy, c-format
+#, c-format
 msgid "DVB"
-msgstr "DVD"
+msgstr "DVB"
 
 #: drakdvb:39 harddrake2:100
 #, c-format
@@ -474,40 +485,40 @@ msgstr "Canal"
 #: drakdvb:57
 #, c-format
 msgid "%s already exists and its contents will be lost"
-msgstr ""
+msgstr "%s există deja și tot conținutul său va fi pierdut"
 
 #: drakdvb:72
 #, c-format
 msgid "Could not get the list of available channels"
-msgstr ""
+msgstr "Nu se poate obține lista canalelor disponibile"
 
 #: drakdvb:78 draksec:73 drakups:99 harddrake2:370 scannerdrake:66
 #: scannerdrake:70 scannerdrake:78 scannerdrake:319 scannerdrake:368
 #: scannerdrake:504 scannerdrake:508 scannerdrake:530 service_harddrake:264
 #, c-format
 msgid "Please wait"
-msgstr "Aşteptaţi vă rog"
+msgstr "Așteptați vă rog"
 
 #: drakdvb:82
 #, c-format
 msgid "Detecting DVB channels, this will take a few minutes"
-msgstr ""
+msgstr "Se detectează canalele DVB, asta va dura cîteva minute"
 
 #: drakdvb:83 drakfont:572 drakfont:652 drakfont:736 draksplash:213
 #: drakups:217 logdrake:175
 #, c-format
 msgid "Cancel"
-msgstr "Renuntă"
+msgstr "Anulează"
 
 #: drakdvb:121
-#, fuzzy, c-format
+#, c-format
 msgid "Detect Channels"
-msgstr "Canal"
+msgstr "Detectează canalele"
 
 #: drakdvb:123
-#, fuzzy, c-format
+#, c-format
 msgid "View Channel"
-msgstr "Canal"
+msgstr "Vizualizare canal"
 
 #: drakedm:41
 #, c-format
@@ -538,12 +549,12 @@ msgid ""
 msgstr ""
 "Gestionarul de ecran X11 vă permite conectarea grafică la\n"
 "sistem datorită serverului grafic Xorg, ce suportă mai multe sesiuni Xorg\n"
-"concomitente pe aceaşi mașină."
+"concomitente pe aceași mașină."
 
 #: drakedm:74
 #, c-format
 msgid "The change is done, do you want to restart the dm service?"
-msgstr "Modificarea a fost efectuată, doriţi să reporniți serviciul dm?"
+msgstr "Modificarea a fost efectuată, doriți să reporniți serviciul dm?"
 
 #: drakedm:75
 #, c-format
@@ -551,8 +562,8 @@ msgid ""
 "You are going to close all running programs and lose your current session. "
 "Are you really sure that you want to restart the dm service?"
 msgstr ""
-"Sînteţi pe cale de a închide toate programele pornite şi de a pierde "
-"sesiunea curentă. Sînteţi sigur că doriţi să reporniţi serviciul dm?"
+"Sînteți pe cale de a închide toate programele pornite și de a pierde "
+"sesiunea curentă. Sînteți sigur că doriți să reporniți serviciul dm?"
 
 #: drakfont:187
 #, c-format
@@ -583,12 +594,12 @@ msgstr "Gata"
 #: drakfont:226
 #, c-format
 msgid "Could not find any font in your mounted partitions"
-msgstr "Nu s-a găsit nici un font în partiţiile montate"
+msgstr "Nu s-a găsit nici un font în partițiile montate"
 
 #: drakfont:261
 #, c-format
 msgid "Reselect correct fonts"
-msgstr "Reselectaţi fonturile corecte"
+msgstr "Reselectați fonturile corecte"
 
 #: drakfont:264
 #, c-format
@@ -618,7 +629,7 @@ msgstr "Instalare de fonturi True Type"
 #: drakfont:347
 #, c-format
 msgid "please wait during ttmkfdir..."
-msgstr "Aşteptaţi vă rog în timp ce se execută ttmkfdir..."
+msgstr "Așteptați vă rog în timp ce se execută ttmkfdir..."
 
 #: drakfont:348
 #, c-format
@@ -628,22 +639,22 @@ msgstr "Instalare „True Type” terminată"
 #: drakfont:354 drakfont:369
 #, c-format
 msgid "type1inst building"
-msgstr "se construieşte type1inst"
+msgstr "se construiește type1inst"
 
 #: drakfont:363
 #, c-format
 msgid "Ghostscript referencing"
-msgstr "Referenţiere în ghostscript"
+msgstr "Referențiere în ghostscript"
 
 #: drakfont:380
 #, c-format
 msgid "Suppress Temporary Files"
-msgstr "Eliminare fişiere temporare"
+msgstr "Eliminare fișiere temporare"
 
 #: drakfont:425 drakfont:431
 #, c-format
 msgid "Suppress Fonts Files"
-msgstr "Eliminare fişiere de fonturi"
+msgstr "Eliminare fișiere de fonturi"
 
 #: drakfont:439
 #, c-format
@@ -654,10 +665,10 @@ msgid ""
 "You can install the fonts the normal way. In rare cases, bogus fonts may "
 "hang up your X Server."
 msgstr ""
-"Înainte de a instala orice font, asiguraţi-vă că aveţi drepturile necesare "
+"Înainte de a instala orice font, asigurați-vă că aveți drepturile necesare "
 "pentru utilizarea si instalarea lor în sistem.\n"
 "\n"
-"Puteţi instala fonturile în mod clasic. În cazuri foarte rare, fonturile cu "
+"Puteți instala fonturile în mod clasic. În cazuri foarte rare, fonturile cu "
 "erori pot provoca blocarea serverului Xorg."
 
 #: drakfont:478
@@ -688,7 +699,7 @@ msgstr "Despre"
 #: drakfont:500 drakfont:541
 #, c-format
 msgid "Options"
-msgstr "Opţiuni"
+msgstr "Opțiuni"
 
 #: drakfont:501 drakfont:721
 #, c-format
@@ -726,16 +737,16 @@ msgstr "Mandriva Linux"
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr ""
-"Florin Grad <florin@mandriva.com>, 1999, 2000\n"
-"Dragos Marian Barbu <dragosb@softhome.net>, 2000\n"
-"Ovidiu Constantin <ovidiu.constantin@gmx.net>, 2002, 2003\n"
-"Harald Ersch <harald@ersch.ro>, 2003\n"
+"Florin GRAD <florin@mandriva.com>, 1999, 2000\n"
+"Dragos Marian BARBU <dragosb@softhome.net>, 2000\n"
+"Ovidiu CONSTANTIN <ovidiu.constantin@gmx.net>, 2002, 2003\n"
+"Harald ERSCH <harald@ersch.ro>, 2003\n"
 "Florin Cătălin RUSSEN <cfrussen@yahoo.co.uk>, 2008, 2009\n"
 
 #: drakfont:543
 #, c-format
 msgid "Choose the applications that will support the fonts:"
-msgstr "Alegeţi aplicaţiile ce vor utiliza fonturile:"
+msgstr "Alegeți aplicațiile ce vor utiliza fonturile:"
 
 #: drakfont:554
 #, c-format
@@ -765,12 +776,12 @@ msgstr "Ok"
 #: drakfont:571
 #, c-format
 msgid "Select the font file or directory and click on 'Add'"
-msgstr "Selectaţi fişierul sau directorul cu fonturi şi apăsaţi „Adaugă”"
+msgstr "Selectați fișierul sau directorul cu fonturi și apăsați „Adaugă”"
 
 #: drakfont:572
 #, c-format
 msgid "File Selection"
-msgstr "Selectare de fişiere"
+msgstr "Selectare de fișiere"
 
 #: drakfont:576
 #, c-format
@@ -800,7 +811,7 @@ msgstr "Instalează"
 #: drakfont:684
 #, c-format
 msgid "Are you sure you want to uninstall the following fonts?"
-msgstr "Sînteţi sigur că doriţi să dezinstalaţi următoarele fonturi?"
+msgstr "Sînteți sigur că doriți să dezinstalați următoarele fonturi?"
 
 #: drakfont:688 draksec:60 harddrake2:324
 #, c-format
@@ -830,7 +841,7 @@ msgstr "Se importă fonturi"
 #: drakfont:753 drakfont:773
 #, c-format
 msgid "Initial tests"
-msgstr "Teste iniţiale"
+msgstr "Teste inițiale"
 
 #: drakfont:754
 #, c-format
@@ -840,7 +851,7 @@ msgstr "Copiere de fonturi în sistem"
 #: drakfont:755
 #, c-format
 msgid "Install & convert Fonts"
-msgstr "Instalare şi convertire de fonturi"
+msgstr "Instalare și convertire de fonturi"
 
 #: drakfont:756
 #, c-format
@@ -874,7 +885,7 @@ msgid ""
 msgstr ""
 " drakhelp 0.1\n"
 "Drepturi de autor (C) %s Mandriva.\n"
-"Acesta este un program liber şi poate fi redistribuit conform licenţei GNU "
+"Acesta este un program liber și poate fi redistribuit conform licenței GNU "
 "GPL.\n"
 "\n"
 "Utilizare: \n"
@@ -882,14 +893,14 @@ msgstr ""
 #: drakhelp:22
 #, c-format
 msgid " --help                - display this help     \n"
-msgstr " --help                - afişează acest ajutor     \n"
+msgstr " --help                - afișează acest ajutor     \n"
 
 #: drakhelp:23
 #, c-format
 msgid ""
 " --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
-" --id <id_label>       - încarcă pagina html de ajutor cu referinţă la "
+" --id <id_label>       - încarcă pagina html de ajutor cu referință la "
 "id_label\n"
 
 #: drakhelp:24
@@ -898,7 +909,7 @@ msgid ""
 " --doc <link>          - link to another web page ( for WM welcome "
 "frontend)\n"
 msgstr ""
-" --doc <link>          - legătură către altă pagină web (pentru interfaţa de "
+" --doc <link>          - legătură către altă pagină web (pentru interfața de "
 "bun venit a WM)\n"
 
 #: drakhelp:52
@@ -924,7 +935,7 @@ msgstr "Reglaje personalizate"
 #: drakperm:25
 #, c-format
 msgid "Custom & system settings"
-msgstr "Reglaje personalizate şi sistem"
+msgstr "Reglaje personalizate și sistem"
 
 #: drakperm:33
 #, c-format
@@ -973,9 +984,9 @@ msgid ""
 "groups via msec.\n"
 "You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
-"Aici puteţi vedea fişierele de utilizat pentru a corecta drepturile, "
-"proprietarii şi grupurile via msec.\n"
-"De asemenea, vă puteţi edita propriile reguli, prioritare peste cele "
+"Aici puteți vedea fișierele de utilizat pentru a corecta drepturile, "
+"proprietarii și grupurile via msec.\n"
+"De asemenea, vă puteți edita propriile reguli, prioritare peste cele "
 "implicite."
 
 #: drakperm:112
@@ -985,7 +996,7 @@ msgid ""
 "Select permissions to see/edit"
 msgstr ""
 "Nivelul de securitate curent este %s.\n"
-"Selectaţi permisiunile de consultat/editat"
+"Selectați permisiunile de consultat/editat"
 
 #: drakperm:124
 #, c-format
@@ -1015,17 +1026,17 @@ msgstr "Adaugă o regulă"
 #: drakperm:126
 #, c-format
 msgid "Add a new rule at the end"
-msgstr "Adaugă o regulă nouă la sfîrşit"
+msgstr "Adaugă o regulă nouă la sfîrșit"
 
 #: drakperm:127
 #, c-format
 msgid "Delete"
-msgstr "Şterge"
+msgstr "Șterge"
 
 #: drakperm:127
 #, c-format
 msgid "Delete selected rule"
-msgstr "Şterge regula selectată"
+msgstr "Șterge regula selectată"
 
 #: drakperm:128 drakups:300 drakups:362 drakups:382
 #, c-format
@@ -1066,7 +1077,7 @@ msgstr "Citire"
 #: drakperm:254
 #, c-format
 msgid "Enable \"%s\" to read the file"
-msgstr "Activează \"%s\" pentru a citi fişierul"
+msgstr "Activează \"%s\" pentru a citi fișierul"
 
 #: drakperm:258
 #, c-format
@@ -1077,7 +1088,7 @@ msgstr "Scrie"
 #: drakperm:261
 #, c-format
 msgid "Enable \"%s\" to write the file"
-msgstr "Activează \"%s\" pentru a scrie fişierul"
+msgstr "Activează \"%s\" pentru a scrie fișierul"
 
 #: drakperm:265
 #, c-format
@@ -1088,7 +1099,7 @@ msgstr "Execută"
 #: drakperm:268
 #, c-format
 msgid "Enable \"%s\" to execute the file"
-msgstr "Activează \"%s\" pentru a executa fişierul"
+msgstr "Activează \"%s\" pentru a executa fișierul"
 
 #: drakperm:271
 #, c-format
@@ -1102,8 +1113,8 @@ msgid ""
 " only owner of directory or file in this directory can delete it"
 msgstr ""
 "Utilizat pentru directoare:\n"
-" numai proprietarul directorului sau fişierului din acest director le poate "
-"şterge"
+" numai proprietarul directorului sau fișierului din acest director le poate "
+"șterge"
 
 #: drakperm:272
 #, c-format
@@ -1113,7 +1124,7 @@ msgstr "Set-UID"
 #: drakperm:272
 #, c-format
 msgid "Use owner id for execution"
-msgstr "Utilizează identificatorul proprietarului pentru execuţie"
+msgstr "Utilizează identificatorul proprietarului pentru execuție"
 
 #: drakperm:273
 #, c-format
@@ -1123,7 +1134,7 @@ msgstr "Set-GID"
 #: drakperm:273
 #, c-format
 msgid "Use group id for execution"
-msgstr "Utilizează identificatorul grupului pentru execuţie"
+msgstr "Utilizează identificatorul grupului pentru execuție"
 
 #: drakperm:290
 #, c-format
@@ -1143,7 +1154,7 @@ msgstr "Utilizator curent"
 #: drakperm:296
 #, c-format
 msgid "When checked, owner and group will not be changed"
-msgstr "Odată verificate, proprietarul şi grupul nu vor mai fi modificate"
+msgstr "Odată verificate, proprietarul și grupul nu vor mai fi modificate"
 
 #: drakperm:306
 #, c-format
@@ -1167,7 +1178,7 @@ msgstr ""
 #: drakperm:386
 #, c-format
 msgid "Both the username and the group must valid!"
-msgstr "Utilizatorul şi grupul trebuie să fie valizi!"
+msgstr "Utilizatorul și grupul trebuie să fie valizi!"
 
 #: drakperm:387
 #, c-format
@@ -1182,7 +1193,7 @@ msgstr "Grup: %s"
 #: draksec:54
 #, c-format
 msgid "ALL"
-msgstr "TOŢI"
+msgstr "TOȚI"
 
 #: draksec:55
 #, c-format
@@ -1207,12 +1218,13 @@ msgstr "Ignoră"
 #: draksec:91
 #, c-format
 msgid "Security Level and Checks"
-msgstr "Nivel de securitate şi verificări periodice"
+msgstr "Nivel de securitate și verificări periodice"
 
 #: draksec:114
 #, c-format
 msgid "Configure authentication required to access Mandriva tools"
 msgstr ""
+"Configurează autentificarea necesară pentru accesarea uneltelor Mandriva"
 
 #: draksec:117
 #, c-format
@@ -1252,37 +1264,37 @@ msgstr "Configurare efecte de birou 3D"
 #: draksec:153
 #, c-format
 msgid "Graphical Server Configuration"
-msgstr "Configuraţie server grafic"
+msgstr "Configurație server grafic"
 
 #: draksec:154
 #, c-format
 msgid "Mouse Configuration"
-msgstr "Configuraţie maus"
+msgstr "Configurație maus"
 
 #: draksec:155
 #, c-format
 msgid "Keyboard Configuration"
-msgstr "Configuraţie tastatură"
+msgstr "Configurație tastatură"
 
 #: draksec:156
 #, c-format
 msgid "UPS Configuration"
-msgstr "Configurţie UPS"
+msgstr "Configurție UPS"
 
 #: draksec:157
 #, c-format
 msgid "Network Configuration"
-msgstr "Configuraţie reţea"
+msgstr "Configurație rețea"
 
 #: draksec:158
 #, c-format
 msgid "Hosts definitions"
-msgstr "Definiţii de gazde"
+msgstr "Definiții de gazde"
 
 #: draksec:159
 #, c-format
 msgid "Network Center"
-msgstr "Centru de reţea"
+msgstr "Centru de rețea"
 
 #: draksec:160
 #, c-format
@@ -1292,7 +1304,7 @@ msgstr "VPN"
 #: draksec:161
 #, c-format
 msgid "Proxy Configuration"
-msgstr "Configuraţie Proxy (server mandatar)"
+msgstr "Configurație Proxy (server mandatar)"
 
 #: draksec:162
 #, c-format
@@ -1302,7 +1314,7 @@ msgstr "Partajare conexiune"
 #: draksec:164
 #, c-format
 msgid "Backups"
-msgstr "Salvgardări (copii de siguranţă)"
+msgstr "Salvgardări (copii de siguranță)"
 
 #: draksec:166 logdrake:52
 #, c-format
@@ -1322,7 +1334,7 @@ msgstr "Utilizatori"
 #: draksec:170
 #, c-format
 msgid "Boot Configuration"
-msgstr "Configuraţie demaraj"
+msgstr "Configurație demaraj"
 
 #: draksec:204
 #, c-format
@@ -1332,7 +1344,7 @@ msgstr "Componente materiale"
 #: draksec:205
 #, c-format
 msgid "Network"
-msgstr "Reţea"
+msgstr "Rețea"
 
 #: draksec:206
 #, c-format
@@ -1362,11 +1374,11 @@ msgid ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 msgstr ""
-"Nici o placă de sunet nu a fost detectată în calculator. Verificaţi că o "
+"Nici o placă de sunet nu a fost detectată în calculator. Verificați că o "
 "placă de sunet suportată pe Linux este conectată corect.\n"
 "\n"
 "\n"
-"Ne puteţi vizita baza de date de componente materiale la:\n"
+"Ne puteți vizita baza de date de componente materiale la:\n"
 "\n"
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
@@ -1383,8 +1395,8 @@ msgstr ""
 "\n"
 "\n"
 "\n"
-"Notă: dacă aveţi o placă de sunet ISA PnP, va trebui să folosiţi programul "
-"alsaconf sau sndconfig. Tastaţi \"alsaconf\" sau \"sndconfig\" într-o "
+"Notă: dacă aveți o placă de sunet ISA PnP, va trebui să folosiți programul "
+"alsaconf sau sndconfig. Tastați \"alsaconf\" sau \"sndconfig\" într-o "
 "consolă."
 
 #: draksplash:33
@@ -1400,12 +1412,12 @@ msgstr "Coordonata Y a casetei text"
 #: draksplash:35
 #, c-format
 msgid "Text box width"
-msgstr "Lăţime casetă text"
+msgstr "Lățime casetă text"
 
 #: draksplash:36
 #, c-format
 msgid "Text box height"
-msgstr "Înălţime casetă text"
+msgstr "Înălțime casetă text"
 
 #: draksplash:37
 #, c-format
@@ -1413,7 +1425,7 @@ msgid ""
 "The progress bar X coordinate\n"
 "of its upper left corner"
 msgstr ""
-"Coordonata X din colţul de stînga\n"
+"Coordonata X din colțul de stînga\n"
 "sus a barei de progresie"
 
 #: draksplash:38
@@ -1422,18 +1434,18 @@ msgid ""
 "The progress bar Y coordinate\n"
 "of its upper left corner"
 msgstr ""
-"Coordonata Y din colţul de stînga\n"
+"Coordonata Y din colțul de stînga\n"
 "sus a barei de progresie"
 
 #: draksplash:39
 #, c-format
 msgid "The width of the progress bar"
-msgstr "Lăţimea barei de progresie"
+msgstr "Lățimea barei de progresie"
 
 #: draksplash:40
 #, c-format
 msgid "The height of the progress bar"
-msgstr "Înălţimea barei de progresie"
+msgstr "Înălțimea barei de progresie"
 
 #: draksplash:41
 #, c-format
@@ -1448,12 +1460,12 @@ msgstr "Coordonata Y a textului"
 #: draksplash:43
 #, c-format
 msgid "Text box transparency"
-msgstr "Transparenţă casetă text"
+msgstr "Transparență casetă text"
 
 #: draksplash:44
 #, c-format
 msgid "Progress box transparency"
-msgstr "Transparenţă casetă de progresie"
+msgstr "Transparență casetă de progresie"
 
 #: draksplash:45
 #, c-format
@@ -1468,17 +1480,17 @@ msgstr "Bară de progresie"
 #: draksplash:65
 #, c-format
 msgid "Choose progress bar color 1"
-msgstr "Alegeţi culoarea barei de progresie 1"
+msgstr "Alegeți culoarea barei de progresie 1"
 
 #: draksplash:67
 #, c-format
 msgid "Choose progress bar color 2"
-msgstr "Alegeţi culoarea barei de progresie 2"
+msgstr "Alegeți culoarea barei de progresie 2"
 
 #: draksplash:69
 #, c-format
 msgid "Choose progress bar background"
-msgstr "Alegeţi fundalul barei de progresie"
+msgstr "Alegeți fundalul barei de progresie"
 
 #: draksplash:72
 #, c-format
@@ -1493,22 +1505,22 @@ msgstr "Text"
 #: draksplash:80
 #, c-format
 msgid "Choose text color"
-msgstr "Alegeţi culoarea textului"
+msgstr "Alegeți culoarea textului"
 
 #: draksplash:83 draksplash:102
 #, c-format
 msgid "Choose picture"
-msgstr "Alegeţi imaginea"
+msgstr "Alegeți imaginea"
 
 #: draksplash:87
 #, c-format
 msgid "Silent bootsplash"
-msgstr "Mod silenţios"
+msgstr "Mod silențios"
 
 #: draksplash:90
 #, c-format
 msgid "Choose text zone color"
-msgstr "Alegeţi culoarea zonei de text"
+msgstr "Alegeți culoarea zonei de text"
 
 #: draksplash:93
 #, c-format
@@ -1533,12 +1545,12 @@ msgstr "Nume temă"
 #: draksplash:115
 #, c-format
 msgid "Final resolution"
-msgstr "Rezoluţie finală"
+msgstr "Rezoluție finală"
 
 #: draksplash:119
 #, c-format
 msgid "Display logo on Console"
-msgstr "Afişează logo în consolă"
+msgstr "Afișează logo în consolă"
 
 #: draksplash:124
 #, c-format
@@ -1548,12 +1560,12 @@ msgstr "Salvează tema"
 #: draksplash:187
 #, c-format
 msgid "Please enter a theme name"
-msgstr "Introduceţi numele temei"
+msgstr "Introduceți numele temei"
 
 #: draksplash:190
 #, c-format
 msgid "Please select a splash image"
-msgstr "Alegeţi o imagine de pornire"
+msgstr "Alegeți o imagine de pornire"
 
 #: draksplash:193
 #, c-format
@@ -1563,12 +1575,12 @@ msgstr "se salvează tema de demaraj..."
 #: draksplash:202
 #, c-format
 msgid "Unable to load image file %s"
-msgstr "Nu se poate încărca fişierul imagine %s"
+msgstr "Nu se poate încărca fișierul imagine %s"
 
 #: draksplash:213
 #, c-format
 msgid "choose image"
-msgstr "alegeţi o imagine"
+msgstr "alegeți o imagine"
 
 #: draksplash:228
 #, c-format
@@ -1599,7 +1611,7 @@ msgid ""
 msgstr ""
 "Bun venit la utilitarul de configurare UPS.\n"
 "\n"
-"Aici vă puteţi adăuga un UPS sistemului.\n"
+"Aici vă puteți adăuga un UPS sistemului.\n"
 
 #: drakups:88
 #, c-format
@@ -1611,18 +1623,18 @@ msgid ""
 msgstr ""
 "Vom adăuga un dispozitiv UPS.\n"
 "\n"
-"Doriţi detectarea automată a dispozitivelor UPS conectate sau le selectaţi "
+"Doriți detectarea automată a dispozitivelor UPS conectate sau le selectați "
 "manual?"
 
 #: drakups:91
 #, c-format
 msgid "Autodetection"
-msgstr "Auto-detecţie"
+msgstr "Auto-detecție"
 
 #: drakups:99 harddrake2:370
 #, c-format
 msgid "Detection in progress"
-msgstr "Detecţia este în progres..."
+msgstr "Detecția este în progres..."
 
 #: drakups:118 drakups:157 logdrake:457 logdrake:463
 #, c-format
@@ -1642,12 +1654,12 @@ msgstr "Nu s-a găsit nici un dispozitiv UPS"
 #: drakups:126 drakups:138
 #, c-format
 msgid "UPS driver configuration"
-msgstr "Configuraţie pilot UPS"
+msgstr "Configurație pilot UPS"
 
 #: drakups:126
 #, c-format
 msgid "Please select your UPS model."
-msgstr "Selectaţi-vă modelul de UPS."
+msgstr "Selectați-vă modelul de UPS."
 
 #: drakups:127
 #, c-format
@@ -1747,7 +1759,7 @@ msgstr "Reguli"
 #: drakups:297
 #, c-format
 msgid "Action"
-msgstr "Acţiune"
+msgstr "Acțiune"
 
 #: drakups:297 harddrake2:85
 #, c-format
@@ -1797,11 +1809,11 @@ msgid ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 msgstr ""
-"Nu a fost detectată nici o placă TV în calculator. Verificaţi dacă o placă "
+"Nu a fost detectată nici o placă TV în calculator. Verificați dacă o placă "
 "TV cu suport pe Linux este conectată corect.\n"
 "\n"
 "\n"
-"Ne puteţi vizita baza de date de componente materiale la:\n"
+"Ne puteți vizita baza de date de componente materiale la:\n"
 "\n"
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
@@ -1814,17 +1826,17 @@ msgstr "Tastatură"
 #: finish-install:57
 #, c-format
 msgid "Please, choose your keyboard layout."
-msgstr "Alegeţi dispunerea tastaturii."
+msgstr "Alegeți dispunerea tastaturii."
 
 #: finish-install:169 finish-install:187 finish-install:199
 #, c-format
 msgid "Encrypted home partition"
-msgstr "Partiţie utilizatori criptată"
+msgstr "Partiție utilizatori criptată"
 
 #: finish-install:169
 #, c-format
 msgid "Please enter a password for the %s user"
-msgstr "Introduceţi o parolă pentru utilizatorul %s"
+msgstr "Introduceți o parolă pentru utilizatorul %s"
 
 #: finish-install:172
 #, c-format
@@ -1834,22 +1846,22 @@ msgstr "Parolă (din nou)"
 #: finish-install:187
 #, c-format
 msgid "Creating encrypted home partition"
-msgstr "Se creează o partiţie utilizatori criptată"
+msgstr "Se creează o partiție utilizatori criptată"
 
 #: finish-install:199
 #, c-format
 msgid "Formatting encrypted home partition"
-msgstr "Se formatează partiţia utilizatori criptată"
+msgstr "Se formatează partiția utilizatori criptată"
 
 #: harddrake2:28
 #, c-format
 msgid "Alternative drivers"
-msgstr "Piloţi alternativi"
+msgstr "Piloți alternativi"
 
 #: harddrake2:29
 #, c-format
 msgid "the list of alternative drivers for this sound card"
-msgstr "lista piloţilor alternativi pentru această placa de sunet"
+msgstr "lista piloților alternativi pentru această placa de sunet"
 
 #: harddrake2:31 harddrake2:123
 #, c-format
@@ -1875,13 +1887,13 @@ msgid ""
 "- PCI and USB devices: this lists the vendor, device, subvendor and "
 "subdevice PCI/USB ids"
 msgstr ""
-"- dispozitive PCI şi USB: acesta listează identificatorii fabricantului, "
-"dispozitivului, integratorului şi sub-dispozitivului PCI/USB"
+"- dispozitive PCI și USB: acesta listează identificatorii fabricantului, "
+"dispozitivului, integratorului și sub-dispozitivului PCI/USB"
 
 #: harddrake2:37
 #, c-format
 msgid "Location on the bus"
-msgstr "Poziţionarea pe magistrală"
+msgstr "Poziționarea pe magistrală"
 
 #: harddrake2:38
 #, c-format
@@ -1890,20 +1902,20 @@ msgid ""
 "- eide devices: the device is either a slave or a master device\n"
 "- scsi devices: the scsi bus and the scsi device ids"
 msgstr ""
-"- dispozitive PCI: conectorul, dispozitivul şi funcţia acestei plăci\n"
+"- dispozitive PCI: conectorul, dispozitivul și funcția acestei plăci\n"
 "- dispozitive EIDE: dispozitivul este ori primar ori secundar\n"
-"- dispozitive SCSI: identificatorii magistralei şi dispozitivului SCSI"
+"- dispozitive SCSI: identificatorii magistralei și dispozitivului SCSI"
 
 #: harddrake2:41
 #, c-format
 msgid "Drive capacity"
-msgstr "Specificaţiile unităţii"
+msgstr "Specificațiile unității"
 
 #: harddrake2:41
 #, c-format
 msgid "special capacities of the driver (burning ability and or DVD support)"
 msgstr ""
-"caracteristici speciale ale unităţii (poate scrie sau poate citi DVD-uri)"
+"caracteristici speciale ale unității (poate scrie sau poate citi DVD-uri)"
 
 #: harddrake2:42
 #, c-format
@@ -1918,7 +1930,7 @@ msgstr "acest cîmp descrie dispozitivul"
 #: harddrake2:43
 #, c-format
 msgid "Old device file"
-msgstr "Fişier dispozitiv vechi"
+msgstr "Fișier dispozitiv vechi"
 
 #: harddrake2:44
 #, c-format
@@ -1939,12 +1951,12 @@ msgstr "modulul nucleului GNU/Linux ce va controla dispozitivul"
 #: harddrake2:48
 #, c-format
 msgid "Extended partitions"
-msgstr "Partiţii extinse"
+msgstr "Partiții extinse"
 
 #: harddrake2:48
 #, c-format
 msgid "the number of extended partitions"
-msgstr "numărul partiţiilor extinse"
+msgstr "numărul partițiilor extinse"
 
 #: harddrake2:49
 #, c-format
@@ -1999,17 +2011,17 @@ msgstr "Model de disc dur"
 #: harddrake2:54
 #, c-format
 msgid "network printer port"
-msgstr "port imprimantă de reţea"
+msgstr "port imprimantă de rețea"
 
 #: harddrake2:55
 #, c-format
 msgid "Primary partitions"
-msgstr "Partiţii primare"
+msgstr "Partiții primare"
 
 #: harddrake2:55
 #, c-format
 msgid "the number of the primary partitions"
-msgstr "numărul partiţiilor primare"
+msgstr "numărul partițiilor primare"
 
 #: harddrake2:56 harddrake2:91
 #, c-format
@@ -2054,12 +2066,12 @@ msgstr "Număr dispozitiv PCI"
 #: harddrake2:60
 #, c-format
 msgid "PCI function #"
-msgstr "Funcţie PCI #"
+msgstr "Funcție PCI #"
 
 #: harddrake2:60
 #, c-format
 msgid "PCI function number"
-msgstr "Număr funcţie PCI"
+msgstr "Număr funcție PCI"
 
 #: harddrake2:61
 #, c-format
@@ -2124,8 +2136,8 @@ msgid ""
 "\"benchmark\" the cpu."
 msgstr ""
 "nucleul GNU/Linux trebuie să execute o buclă de calcul la demaraj pentru a "
-"iniţializa contorul de timp. Rezultatul este înregistrat sub formă de "
-"bogomips şi dă o indicaţie asupra performanţelor proccesorului."
+"inițializa contorul de timp. Rezultatul este înregistrat sub formă de "
+"bogomips și dă o indicație asupra performanțelor proccesorului."
 
 #: harddrake2:70
 #, c-format
@@ -2166,12 +2178,12 @@ msgstr "Nivel CPUid"
 #: harddrake2:75
 #, c-format
 msgid "information level that can be obtained through the cpuid instruction"
-msgstr "nivelul de informaţie ce poate fi obţinut cu instrucţiunea cpuid"
+msgstr "nivelul de informație ce poate fi obținut cu instrucțiunea cpuid"
 
 #: harddrake2:76
 #, c-format
 msgid "Frequency (MHz)"
-msgstr "Frecvenţă (MHz)"
+msgstr "Frecvență (MHz)"
 
 #: harddrake2:76
 #, c-format
@@ -2180,8 +2192,8 @@ msgid ""
 "coarsely assimilated to number of instructions the cpu is able to execute "
 "per second)"
 msgstr ""
-"frecvenţa procesorului în MHz (Megaherţi, ca o aproximare poate fi asimilată "
-"cu numărul de instrucţiuni executate pe secundă de către procesor)"
+"frecvența procesorului în MHz (Megaherți, ca o aproximare poate fi asimilată "
+"cu numărul de instrucțiuni executate pe secundă de către procesor)"
 
 #: harddrake2:77
 #, c-format
@@ -2205,8 +2217,8 @@ msgid ""
 "processor which did not achieve the required precision when performing a "
 "Floating point DIVision (FDIV)"
 msgstr ""
-"Primele cipuri Intel Pentium prezentau o defecţiune la procesorul în virgulă "
-"mobilă şi rezultatele nu erau precise cînd se efectua o împărţire cu virgulă "
+"Primele cipuri Intel Pentium prezentau o defecțiune la procesorul în virgulă "
+"mobilă și rezultatele nu erau precise cînd se efectua o împărțire cu virgulă "
 "mobilă (FDIV)"
 
 #: harddrake2:80
@@ -2227,7 +2239,7 @@ msgstr "Dacă FPU are un vector IRQ"
 #: harddrake2:81
 #, c-format
 msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr "da, coprocesorul matematic are ataşat un vector de excepţii"
+msgstr "da, coprocesorul matematic are atașat un vector de excepții"
 
 #: harddrake2:82
 #, c-format
@@ -2238,12 +2250,12 @@ msgstr "Eroare de tip F00F"
 #, c-format
 msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
 msgstr ""
-"primele Pentium-uri aveau erori şi se blocau la decodarea secvenţei F00F"
+"primele Pentium-uri aveau erori și se blocau la decodarea secvenței F00F"
 
 #: harddrake2:83
 #, c-format
 msgid "Halt bug"
-msgstr "Eroare la instrucţiunea halt"
+msgstr "Eroare la instrucțiunea halt"
 
 #: harddrake2:84
 #, c-format
@@ -2252,17 +2264,17 @@ msgid ""
 "after the \"halt\" instruction is used"
 msgstr ""
 "Unele din primele modele de cipuri i486DX-100 nu se puteau întoarce corect "
-"la modul de operare după utilizarea instrucţiunii \"halt\""
+"la modul de operare după utilizarea instrucțiunii \"halt\""
 
 #: harddrake2:85
 #, c-format
 msgid "sub generation of the cpu"
-msgstr "sub-generaţia procesorului"
+msgstr "sub-generația procesorului"
 
 #: harddrake2:86
 #, c-format
 msgid "generation of the cpu (eg: 8 for Pentium III, ...)"
-msgstr "generaţie procesor (ex. 8 pt. Pentium III,...)"
+msgstr "generație procesor (ex. 8 pt. Pentium III,...)"
 
 #: harddrake2:87
 #, c-format
@@ -2307,7 +2319,7 @@ msgstr "numele fabricantului procesorului"
 #: harddrake2:92
 #, c-format
 msgid "Write protection"
-msgstr "Protecţie la scriere"
+msgstr "Protecție la scriere"
 
 #: harddrake2:92
 #, c-format
@@ -2316,14 +2328,14 @@ msgid ""
 "memory page level, thus enabling the processor to prevent unchecked kernel "
 "accesses to user memory (aka this is a bug guard)"
 msgstr ""
-"fanionul WP din registrul CR0 al procesorului activează protecţia la nivelul "
+"fanionul WP din registrul CR0 al procesorului activează protecția la nivelul "
 "paginilor de memorie, prevenind astfel ca erorile din nucleu să scrie în "
 "memoria  utilizator."
 
 #: harddrake2:96
 #, c-format
 msgid "Floppy format"
-msgstr "Formatul unităţii de dischete"
+msgstr "Formatul unității de dischete"
 
 #: harddrake2:96
 #, c-format
@@ -2357,9 +2369,9 @@ msgid ""
 "identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
-"numărul ţintei SCSI (LUN). Dispozitivele SCSI conectate la gzdă sînt "
+"numărul țintei SCSI (LUN). Dispozitivele SCSI conectate la gzdă sînt "
 "identificate în mod unic după\n"
-"numărul de canal, identificator de ţintă şi număr de unitate logică"
+"numărul de canal, identificator de țintă și număr de unitate logică"
 
 #. -PO: here, "size" is the size of the ram chip (eg: 128Mo, 256Mo, ...)
 #: harddrake2:109
@@ -2415,24 +2427,24 @@ msgstr "Denumirea soclului baretei de memmorie"
 #: harddrake2:118
 #, c-format
 msgid "Device file"
-msgstr "Fişier dispozitiv"
+msgstr "Fișier dispozitiv"
 
 #: harddrake2:118
 #, c-format
 msgid ""
 "the device file used to communicate with the kernel driver for the mouse"
 msgstr ""
-"fişierul dispozitivului utilizat comunică cu pilotul de nucleu pentru maus"
+"fișierul dispozitivului utilizat comunică cu pilotul de nucleu pentru maus"
 
 #: harddrake2:119
 #, c-format
 msgid "Emulated wheel"
-msgstr "Rotiţă emulată"
+msgstr "Rotiță emulată"
 
 #: harddrake2:119
 #, c-format
 msgid "whether the wheel is emulated or not"
-msgstr "dacă rotiţa este emulată sau nu"
+msgstr "dacă rotița este emulată sau nu"
 
 #: harddrake2:120
 #, c-format
@@ -2467,7 +2479,7 @@ msgstr "Porotocolul de maus utilizat de X11"
 #: harddrake2:124
 #, c-format
 msgid "the protocol that the graphical desktop use with the mouse"
-msgstr "protocolul pe care mediul grafic îl foloseşte cu mausul"
+msgstr "protocolul pe care mediul grafic îl folosește cu mausul"
 
 #: harddrake2:131 harddrake2:140 harddrake2:147 harddrake2:155 harddrake2:335
 #, c-format
@@ -2482,7 +2494,7 @@ msgstr "Conectare"
 #: harddrake2:141
 #, c-format
 msgid "Performances"
-msgstr "Performanţe"
+msgstr "Performanțe"
 
 #: harddrake2:142
 #, c-format
@@ -2513,7 +2525,7 @@ msgstr "Caracteristici"
 #: harddrake2:179 logdrake:78
 #, c-format
 msgid "/_Options"
-msgstr "/_Opţiuni"
+msgstr "/_Opțiuni"
 
 #: harddrake2:180 harddrake2:209 logdrake:80
 #, c-format
@@ -2523,27 +2535,27 @@ msgstr "/_Ajutor"
 #: harddrake2:184
 #, c-format
 msgid "/Autodetect _printers"
-msgstr "/Auto-detecţie im_primante"
+msgstr "/Auto-detecție im_primante"
 
 #: harddrake2:185
 #, c-format
 msgid "/Autodetect _modems"
-msgstr "/Auto-detecţie _modemuri"
+msgstr "/Auto-detecție _modemuri"
 
 #: harddrake2:186
 #, c-format
 msgid "/Autodetect _jaz drives"
-msgstr "/Auto-detecţie unităţi _JAZ"
+msgstr "/Auto-detecție unități _JAZ"
 
 #: harddrake2:187
 #, c-format
 msgid "/Autodetect parallel _zip drives"
-msgstr "/Autodetectare unităţi zip pe port paralel"
+msgstr "/Autodetectare unități zip pe port paralel"
 
 #: harddrake2:191
 #, c-format
 msgid "Hardware Configuration"
-msgstr "Configuraţie materială"
+msgstr "Configurație materială"
 
 #: harddrake2:198
 #, c-format
@@ -2572,7 +2584,7 @@ msgstr ""
 #: harddrake2:222
 #, c-format
 msgid "Select a device!"
-msgstr "Alegeţi un dispozitiv!"
+msgstr "Alegeți un dispozitiv!"
 
 #: harddrake2:222
 #, c-format
@@ -2580,8 +2592,8 @@ msgid ""
 "Once you've selected a device, you'll be able to see the device information "
 "in fields displayed on the right frame (\"Information\")"
 msgstr ""
-"Odată ce aţi selectat un dispozitiv, îi puteţi consulta informaţiile "
-"corespunzătoare în cadrul din dreapta (\"Informaţii\")"
+"Odată ce ați selectat un dispozitiv, îi puteți consulta informațiile "
+"corespunzătoare în cadrul din dreapta (\"Informații\")"
 
 #: harddrake2:228
 #, c-format
@@ -2601,7 +2613,7 @@ msgstr "Harddrake"
 #: harddrake2:237
 #, c-format
 msgid "This is HardDrake, a %s hardware configuration tool."
-msgstr "HardDrake este unealta de configuraţie materială %s."
+msgstr "HardDrake este unealta de configurație materială %s."
 
 #: harddrake2:270
 #, c-format
@@ -2611,12 +2623,12 @@ msgstr "Componente materiale detectate"
 #: harddrake2:273 scannerdrake:286
 #, c-format
 msgid "Information"
-msgstr "Informaţii"
+msgstr "Informații"
 
 #: harddrake2:275
 #, c-format
 msgid "Set current driver options"
-msgstr "Specificaţi opţiunile pilotului curent"
+msgstr "Specificați opțiunile pilotului curent"
 
 #: harddrake2:282
 #, c-format
@@ -2628,7 +2640,7 @@ msgstr "Execută unealta de configurare"
 msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr ""
-"Clic pe un dispozitiv din arborele din stînga pentru a-i afişa informaţiile "
+"Clic pe un dispozitiv din arborele din stînga pentru a-i afișa informațiile "
 "aici."
 
 #: harddrake2:322 notify-x11-free-driver-switch:13
@@ -2684,7 +2696,7 @@ msgstr "LocaleDrake"
 #: localedrake:44
 #, c-format
 msgid "You should install the following packages: %s"
-msgstr "Trebuie să instalaţi următoarele pachete: %s"
+msgstr "Trebuie să instalați următoarele pachete: %s"
 
 #. -PO: the following is used to combine packages names. eg: "initscripts, harddrake, yudit"
 #: localedrake:47
@@ -2700,12 +2712,12 @@ msgstr "Unelte jurnale Mandriva Linux"
 #: logdrake:65
 #, c-format
 msgid "Show only for the selected day"
-msgstr "Afişează numai pentru ziua selectată"
+msgstr "Afișează numai pentru ziua selectată"
 
 #: logdrake:72
 #, c-format
 msgid "/File/_New"
-msgstr "/Fişier/_Nou"
+msgstr "/Fișier/_Nou"
 
 #: logdrake:72
 #, c-format
@@ -2715,7 +2727,7 @@ msgstr "<control>N"
 #: logdrake:73
 #, c-format
 msgid "/File/_Open"
-msgstr "/Fişier/_Deschide"
+msgstr "/Fișier/_Deschide"
 
 #: logdrake:73
 #, c-format
@@ -2725,7 +2737,7 @@ msgstr "<control>O"
 #: logdrake:74
 #, c-format
 msgid "/File/_Save"
-msgstr "/Fişier/_Salvează"
+msgstr "/Fișier/_Salvează"
 
 #: logdrake:74
 #, c-format
@@ -2735,17 +2747,17 @@ msgstr "<control>S"
 #: logdrake:75
 #, c-format
 msgid "/File/Save _As"
-msgstr "/Fişier/S_alvează ca..."
+msgstr "/Fișier/S_alvează ca..."
 
 #: logdrake:76
 #, c-format
 msgid "/File/-"
-msgstr "/Fişier/-"
+msgstr "/Fișier/-"
 
 #: logdrake:79
 #, c-format
 msgid "/Options/Test"
-msgstr "/Opţiuni/Testează"
+msgstr "/Opțiuni/Testează"
 
 #: logdrake:81
 #, c-format
@@ -2758,7 +2770,7 @@ msgid ""
 "_:this is the auth.log log file\n"
 "Authentication"
 msgstr ""
-"_:acesta este fişierul jurnal auth.log\n"
+"_:acesta este fișierul jurnal auth.log\n"
 "Autentificare"
 
 #: logdrake:111
@@ -2767,7 +2779,7 @@ msgid ""
 "_:this is the user.log log file\n"
 "User"
 msgstr ""
-"_:acesta este fişierul log user.log\n"
+"_:acesta este fișierul log user.log\n"
 "Utilizator"
 
 #: logdrake:112
@@ -2776,7 +2788,7 @@ msgid ""
 "_:this is the /var/log/messages log file\n"
 "Messages"
 msgstr ""
-"_:acesta este fişierul log /var/log/messages\n"
+"_:acesta este fișierul log /var/log/messages\n"
 "Mesaje"
 
 #: logdrake:113
@@ -2785,7 +2797,7 @@ msgid ""
 "_:this is the /var/log/syslog log file\n"
 "Syslog"
 msgstr ""
-"_:acesta este fişierul jurnal /var/log/syslog\n"
+"_:acesta este fișierul jurnal /var/log/syslog\n"
 "Syslog"
 
 #: logdrake:117
@@ -2806,17 +2818,17 @@ msgstr "Parametri"
 #: logdrake:134
 #, c-format
 msgid "Matching"
-msgstr "Conţinînd"
+msgstr "Conținînd"
 
 #: logdrake:135
 #, c-format
 msgid "but not matching"
-msgstr "dar nu conţine"
+msgstr "dar nu conține"
 
 #: logdrake:138
 #, c-format
 msgid "Choose file"
-msgstr "Selectare fişier"
+msgstr "Selectare fișier"
 
 #: logdrake:150
 #, c-format
@@ -2826,7 +2838,7 @@ msgstr "Calendar"
 #: logdrake:159
 #, c-format
 msgid "Content of the file"
-msgstr "Conţinutul fişierului"
+msgstr "Conținutul fișierului"
 
 #: logdrake:163 logdrake:407
 #, c-format
@@ -2836,7 +2848,7 @@ msgstr "Alerte pe email"
 #: logdrake:170
 #, c-format
 msgid "The alert wizard has failed unexpectedly:"
-msgstr "Asistentul de alerte pe mail a eşuat în mod neaşteptat:"
+msgstr "Asistentul de alerte pe mail a eșuat în mod neașteptat:"
 
 #: logdrake:174
 #, c-format
@@ -2846,17 +2858,17 @@ msgstr "Salvează"
 #: logdrake:222
 #, c-format
 msgid "please wait, parsing file: %s"
-msgstr "asteptaţi, se examinează fişierul: %s"
+msgstr "asteptați, se examinează fișierul: %s"
 
 #: logdrake:244
 #, c-format
 msgid "Sorry, log file isn't available!"
-msgstr "Regrete, fişierul jurnal nu este disponibil!"
+msgstr "Regrete, fișierul jurnal nu este disponibil!"
 
 #: logdrake:292
 #, c-format
 msgid "Error while opening \"%s\" log file: %s\n"
-msgstr "Eroare la deschiderea fişierului jurnal \"%s\": %s\n"
+msgstr "Eroare la deschiderea fișierului jurnal \"%s\": %s\n"
 
 #: logdrake:385
 #, c-format
@@ -2906,7 +2918,7 @@ msgstr "Configurează sistemul de alerte pe mail"
 #: logdrake:402
 #, c-format
 msgid "Stop the mail alert system"
-msgstr "Opreşte sistemul de alerte pe mail"
+msgstr "Oprește sistemul de alerte pe mail"
 
 #: logdrake:410
 #, c-format
@@ -2920,14 +2932,14 @@ msgid ""
 "\n"
 "Here, you'll be able to set up the alert system.\n"
 msgstr ""
-"Bine aţi venit la utilitarul de configurare de mail.\n"
+"Bine ați venit la utilitarul de configurare de mail.\n"
 "\n"
-"Aici vă puteţi configura sistemul de alertare.\n"
+"Aici vă puteți configura sistemul de alertare.\n"
 
 #: logdrake:414
 #, c-format
 msgid "What do you want to do?"
-msgstr "Ce doriţi să faceţi?"
+msgstr "Ce doriți să faceți?"
 
 #: logdrake:421
 #, c-format
@@ -2939,7 +2951,7 @@ msgstr "Parametri servicii"
 msgid ""
 "You will receive an alert if one of the selected services is no longer "
 "running"
-msgstr "Veţi fi anunţaţi dacă unul din serviciile selectate nu mai rulează"
+msgstr "Veți fi anunțați dacă unul din serviciile selectate nu mai rulează"
 
 #: logdrake:429
 #, c-format
@@ -2950,7 +2962,7 @@ msgstr "Încărcare de parametri"
 #, c-format
 msgid "You will receive an alert if the load is higher than this value"
 msgstr ""
-"Veţi fi anunţaţi dacă sarcina maşinii este mai mare decît această valoare"
+"Veți fi anunțați dacă sarcina mașinii este mai mare decît această valoare"
 
 #: logdrake:431
 #, c-format
@@ -2964,19 +2976,19 @@ msgstr ""
 #: logdrake:436
 #, c-format
 msgid "Alert configuration"
-msgstr "Configuraţie alerte"
+msgstr "Configurație alerte"
 
 #: logdrake:437
 #, c-format
 msgid "Please enter your email address below "
-msgstr "Introduceţi-vă mai jos adresa de mail "
+msgstr "Introduceți-vă mai jos adresa de mail "
 
 #: logdrake:438
 #, c-format
 msgid "and enter the name (or the IP) of the SMTP server you wish to use"
 msgstr ""
-"şi introduceţi numele (sau adresa IP) a serverului SMTP ce doriţi să-l "
-"utilizaţi"
+"și introduceți numele (sau adresa IP) a serverului SMTP ce doriți să-l "
+"utilizați"
 
 #: logdrake:445
 #, c-format
@@ -2989,8 +3001,8 @@ msgid ""
 "\"%s\" is a local user, but you did not select a local smtp, so you must use "
 "a complete email address!"
 msgstr ""
-"\"%s\" este un utilizator local, dar nu aţi specificat un server smtp local, "
-"folosiţi deci o adresă de mail complectă!"
+"\"%s\" este un utilizator local, dar nu ați specificat un server smtp local, "
+"folosiți deci o adresă de mail complectă!"
 
 #: logdrake:457
 #, c-format
@@ -3025,7 +3037,7 @@ msgid ""
 msgstr ""
 "Pentru a utiliza scanerele trebuiesc instalate pachetele SANE.\n"
 "\n"
-"Doriţi să instalaţi pachetele SANE?"
+"Doriți să instalați pachetele SANE?"
 
 #: scannerdrake:55
 #, c-format
@@ -3073,32 +3085,32 @@ msgstr "Confirmare"
 #: scannerdrake:104
 #, c-format
 msgid "%s found on %s, configure it automatically?"
-msgstr "S-a găsit %s la %s, doriţi o configurare automată?"
+msgstr "S-a găsit %s la %s, doriți o configurare automată?"
 
 #: scannerdrake:116
 #, c-format
 msgid "%s is not in the scanner database, configure it manually?"
-msgstr "%s nu este în baza de date de scanere, configuraţi manual?"
+msgstr "%s nu este în baza de date de scanere, configurați manual?"
 
 #: scannerdrake:130
 #, c-format
 msgid "Scanner configuration"
-msgstr "Configuraţie scaner"
+msgstr "Configurație scaner"
 
 #: scannerdrake:131
 #, c-format
 msgid "Select a scanner model (Detected model: %s, Port: %s)"
-msgstr "Selecţionaţi un model de scaner (model detectat: %s, pe portul: %s)"
+msgstr "Selecționați un model de scaner (model detectat: %s, pe portul: %s)"
 
 #: scannerdrake:133
 #, c-format
 msgid "Select a scanner model (Detected model: %s)"
-msgstr "Selecţionaţi un model de scaner (model detectat: %s)"
+msgstr "Selecționați un model de scaner (model detectat: %s)"
 
 #: scannerdrake:134
 #, c-format
 msgid "Select a scanner model (Port: %s)"
-msgstr "Selecţionaţi un model de scaner (port: %s)"
+msgstr "Selecționați un model de scaner (port: %s)"
 
 #: scannerdrake:136 scannerdrake:139
 #, c-format
@@ -3113,7 +3125,7 @@ msgstr "%s nu este suportat pe Linux."
 #: scannerdrake:169 scannerdrake:183
 #, c-format
 msgid "Do not install firmware file"
-msgstr "Nu instala fişierul de program intrinsec (firmware)"
+msgstr "Nu instala fișierul de program intrinsec (firmware)"
 
 #: scannerdrake:172 scannerdrake:222
 #, c-format
@@ -3132,7 +3144,7 @@ msgstr ""
 #: scannerdrake:174 scannerdrake:226
 #, c-format
 msgid "If this is the case, you can make this be done automatically."
-msgstr "Dacă este cazul, puteţi automatiza această operaţiune."
+msgstr "Dacă este cazul, puteți automatiza această operațiune."
 
 #: scannerdrake:175 scannerdrake:229
 #, c-format
@@ -3140,7 +3152,7 @@ msgid ""
 "To do so, you need to supply the firmware file for your scanner so that it "
 "can be installed."
 msgstr ""
-"Pentru aceasta trebuie să dispuneţi de fişierul programului intrinsec "
+"Pentru aceasta trebuie să dispuneți de fișierul programului intrinsec "
 "(firmware) pentru a putea fi instalat."
 
 #: scannerdrake:176 scannerdrake:230
@@ -3149,13 +3161,13 @@ msgid ""
 "You find the file on the CD or floppy coming with the scanner, on the "
 "manufacturer's home page, or on your Windows partition."
 msgstr ""
-"Găsiţi fişierul pe CD-ul sau discheta livrată cu scanerul, pe situl "
-"fabricantului sau pe partiţia Windows."
+"Găsiți fișierul pe CD-ul sau discheta livrată cu scanerul, pe situl "
+"fabricantului sau pe partiția Windows."
 
 #: scannerdrake:178 scannerdrake:237
 #, c-format
 msgid "Install firmware file from"
-msgstr "Instalare fişier program intrinsec din"
+msgstr "Instalare fișier program intrinsec din"
 
 #: scannerdrake:180 scannerdrake:188 scannerdrake:239 scannerdrake:246
 #, c-format
@@ -3170,17 +3182,17 @@ msgstr "Dischetă"
 #: scannerdrake:182 scannerdrake:192 scannerdrake:241 scannerdrake:250
 #, c-format
 msgid "Other place"
-msgstr "Altă locaţie"
+msgstr "Altă locație"
 
 #: scannerdrake:198
 #, c-format
 msgid "Select firmware file"
-msgstr "Selectează fişierul programului intrinsec"
+msgstr "Selectează fișierul programului intrinsec"
 
 #: scannerdrake:201 scannerdrake:260
 #, c-format
 msgid "The firmware file %s does not exist or is unreadable!"
-msgstr "Fişierul programului intrinsec %s nu există sau este ilizibil!"
+msgstr "Fișierul programului intrinsec %s nu există sau este ilizibil!"
 
 #: scannerdrake:224
 #, c-format
@@ -3188,7 +3200,7 @@ msgid ""
 "It is possible that your scanners need their firmware to be uploaded "
 "everytime when they are turned on."
 msgstr ""
-"Este posibil ca scanerele deţinute să necesite încărcarea programului "
+"Este posibil ca scanerele deținute să necesite încărcarea programului "
 "intrinsec (firmware) la fiecare pornire."
 
 #: scannerdrake:228
@@ -3197,8 +3209,8 @@ msgid ""
 "To do so, you need to supply the firmware files for your scanners so that it "
 "can be installed."
 msgstr ""
-"Pentru a face asta, trebuie să dispuneţi de fişierele programului intrinsec "
-"(firmware) ale scanerelor, ca să le puteţi instala."
+"Pentru a face asta, trebuie să dispuneți de fișierele programului intrinsec "
+"(firmware) ale scanerelor, ca să le puteți instala."
 
 #: scannerdrake:231
 #, c-format
@@ -3206,8 +3218,8 @@ msgid ""
 "If you have already installed your scanner's firmware you can update the "
 "firmware here by supplying the new firmware file."
 msgstr ""
-"Dacă aţi instalat deja programul intrinsec al scanerului, îl puteţi "
-"actualiza aici furnizînd un fişier nou."
+"Dacă ați instalat deja programul intrinsec al scanerului, îl puteți "
+"actualiza aici furnizînd un fișier nou."
 
 #: scannerdrake:233
 #, c-format
@@ -3217,18 +3229,18 @@ msgstr "Instalare program intrinsec pentru"
 #: scannerdrake:256
 #, c-format
 msgid "Select firmware file for the %s"
-msgstr "Selectează fişierul programului intrinsec pentru %s"
+msgstr "Selectează fișierul programului intrinsec pentru %s"
 
 #: scannerdrake:274
 #, c-format
 msgid "Could not install the firmware file for the %s!"
-msgstr "Nu s-a putut instala fişierul programului intrinsec pentru %s!"
+msgstr "Nu s-a putut instala fișierul programului intrinsec pentru %s!"
 
 #: scannerdrake:287
 #, c-format
 msgid "The firmware file for your %s was successfully installed."
 msgstr ""
-"Fişierul cu programul intrinsec (firmware) pentru %s va fost instalat cu "
+"Fișierul cu programul intrinsec (firmware) pentru %s va fost instalat cu "
 "succes."
 
 #: scannerdrake:297
@@ -3244,7 +3256,7 @@ msgid ""
 "section."
 msgstr ""
 "%s trebuie configurat de către system-config-printer.\n"
-"Puteţi lansa system-config-printer în secţiunea %s de componente materiale a "
+"Puteți lansa system-config-printer în secțiunea %s de componente materiale a "
 "centrului de control."
 
 #: scannerdrake:320
@@ -3255,7 +3267,7 @@ msgstr "Se parametrează modulele nucleului..."
 #: scannerdrake:330 scannerdrake:337 scannerdrake:367
 #, c-format
 msgid "Auto-detect available ports"
-msgstr "Auto-detecţie porturi disponibile"
+msgstr "Auto-detecție porturi disponibile"
 
 #: scannerdrake:331 scannerdrake:377
 #, c-format
@@ -3265,7 +3277,7 @@ msgstr "Alegere dispozitiv"
 #: scannerdrake:332 scannerdrake:378
 #, c-format
 msgid "Please select the device where your %s is attached"
-msgstr "Selectaţi dispozitivul la care este conectat %s."
+msgstr "Selectați dispozitivul la care este conectat %s."
 
 #: scannerdrake:333
 #, c-format
@@ -3275,7 +3287,7 @@ msgstr "(Notă: Porturile paralele nu au putut fi auto-detectate)"
 #: scannerdrake:335 scannerdrake:380
 #, c-format
 msgid "choose device"
-msgstr "alegeţi dispozitivul"
+msgstr "alegeți dispozitivul"
 
 #: scannerdrake:369
 #, c-format
@@ -3285,7 +3297,7 @@ msgstr "Se caută scanerele..."
 #: scannerdrake:405 scannerdrake:412
 #, c-format
 msgid "Attention!"
-msgstr "Atenţie!"
+msgstr "Atenție!"
 
 #: scannerdrake:406
 #, c-format
@@ -3297,7 +3309,7 @@ msgid ""
 msgstr ""
 "%s nu poate fi configurat în mod automat.\n"
 "\n"
-"Reglaje manuale sînt necesare. Editaţi fişierul de configurare /etc/sane.d/%"
+"Reglaje manuale sînt necesare. Editați fișierul de configurare /etc/sane.d/%"
 "s.conf. "
 
 #: scannerdrake:407 scannerdrake:416
@@ -3306,7 +3318,7 @@ msgid ""
 "More info in the driver's manual page. Run the command \"man sane-%s\" to "
 "read it."
 msgstr ""
-"Găsiţi mai multe informaţii în pagina de manual a pilotului, lansînd comanda "
+"Găsiți mai multe informații în pagina de manual a pilotului, lansînd comanda "
 "\"man sane-%s\"."
 
 #: scannerdrake:409 scannerdrake:418
@@ -3315,8 +3327,8 @@ msgid ""
 "After that you may scan documents using \"XSane\" or \"Kooka\" from "
 "Multimedia/Graphics in the applications menu."
 msgstr ""
-"După aceea vă puteţi scana documentele folosind \"XSane\" sau \"Kooka\" din "
-"meniul de aplicaţii Multimedia/Grafică."
+"După aceea vă puteți scana documentele folosind \"XSane\" sau \"Kooka\" din "
+"meniul de aplicații Multimedia/Grafică."
 
 #: scannerdrake:413
 #, c-format
@@ -3324,7 +3336,7 @@ msgid ""
 "Your %s has been configured, but it is possible that additional manual "
 "adjustments are needed to get it to work. "
 msgstr ""
-"%s a fost configurat, dar este posibil să recurgeţi la reglaje manuale "
+"%s a fost configurat, dar este posibil să recurgeți la reglaje manuale "
 "pentru a-l face să meargă."
 
 #: scannerdrake:414
@@ -3334,12 +3346,12 @@ msgid ""
 "of Scannerdrake or if it does not work correctly, "
 msgstr ""
 "Dacă nu apare în lista scanerelor configurate din fereastra principală a lui "
-"Scannerdrake sau dacă nu funcţionează corect, "
+"Scannerdrake sau dacă nu funcționează corect, "
 
 #: scannerdrake:415
 #, c-format
 msgid "edit the configuration file /etc/sane.d/%s.conf. "
-msgstr "editaţi fişierul de configurare /etc/sane.d/%s.conf. "
+msgstr "editați fișierul de configurare /etc/sane.d/%s.conf. "
 
 #: scannerdrake:420
 #, c-format
@@ -3354,8 +3366,8 @@ msgid ""
 "Graphics in the applications menu."
 msgstr ""
 "Scanerul %s a fost configurat.\n"
-"Acum puteţi scana documente folosind \"XSane\" sau \"Kooka\" din meniul de "
-"aplicaţii Multimedia/Grafică."
+"Acum puteți scana documente folosind \"XSane\" sau \"Kooka\" din meniul de "
+"aplicații Multimedia/Grafică."
 
 #: scannerdrake:446
 #, c-format
@@ -3406,7 +3418,7 @@ msgstr "Adaugă manual un scaner"
 #: scannerdrake:479
 #, c-format
 msgid "Install/Update firmware files"
-msgstr "Instalare/Actualizare fişiere program intrinsec"
+msgstr "Instalare/Actualizare fișiere program intrinsec"
 
 #: scannerdrake:485
 #, c-format
@@ -3416,12 +3428,12 @@ msgstr "Partajare scaner"
 #: scannerdrake:544 scannerdrake:709
 #, c-format
 msgid "All remote machines"
-msgstr "Toate maşinile de la distanţă"
+msgstr "Toate mașinile de la distanță"
 
 #: scannerdrake:556 scannerdrake:859
 #, c-format
 msgid "This machine"
-msgstr "Pe această maşină"
+msgstr "Pe această mașină"
 
 #: scannerdrake:595
 #, c-format
@@ -3434,8 +3446,8 @@ msgid ""
 "Here you can choose whether the scanners connected to this machine should be "
 "accessible by remote machines and by which remote machines."
 msgstr ""
-"Aici puteţi alege dacă scanerele conectate la această maşină pot fi accesate "
-"de maşinile distante şi care din ele."
+"Aici puteți alege dacă scanerele conectate la această mașină pot fi accesate "
+"de mașinile distante și care din ele."
 
 #: scannerdrake:597
 #, c-format
@@ -3443,13 +3455,13 @@ msgid ""
 "You can also decide here whether scanners on remote machines should be made "
 "available on this machine."
 msgstr ""
-"De asemenea puteţi decide aici dacă scanerele maşinilor distante vor fi puse "
-"la dispoziţia acestei maşini."
+"De asemenea puteți decide aici dacă scanerele mașinilor distante vor fi puse "
+"la dispoziția acestei mașini."
 
 #: scannerdrake:600
 #, c-format
 msgid "The scanners on this machine are available to other computers"
-msgstr "Scanerele de pe această maşină sînt disponibile altor calculatoare"
+msgstr "Scanerele de pe această mașină sînt disponibile altor calculatoare"
 
 #: scannerdrake:602
 #, c-format
@@ -3459,17 +3471,17 @@ msgstr "Partajare scaner către gazdele:"
 #: scannerdrake:607 scannerdrake:624
 #, c-format
 msgid "No remote machines"
-msgstr "Nu există maşini distante"
+msgstr "Nu există mașini distante"
 
 #: scannerdrake:616
 #, c-format
 msgid "Use scanners on remote computers"
-msgstr "Folosiţi scanerele de pe alte calculatoare"
+msgstr "Folosiți scanerele de pe alte calculatoare"
 
 #: scannerdrake:619
 #, c-format
 msgid "Use the scanners on hosts: "
-msgstr "Folosiţi scanerele de pe gazdele: "
+msgstr "Folosiți scanerele de pe gazdele: "
 
 #: scannerdrake:646 scannerdrake:718 scannerdrake:868
 #, c-format
@@ -3482,7 +3494,7 @@ msgid ""
 "These are the machines on which the locally connected scanner(s) should be "
 "available:"
 msgstr ""
-"Acestea sînt maşinile ale căror scanere locale vor fi puse la dispoziţie:"
+"Acestea sînt mașinile ale căror scanere locale vor fi puse la dispoziție:"
 
 #: scannerdrake:658 scannerdrake:808
 #, c-format
@@ -3497,7 +3509,7 @@ msgstr "Editare gazdă selectată"
 #: scannerdrake:673 scannerdrake:823
 #, c-format
 msgid "Remove selected host"
-msgstr "Şterge gazda selectată"
+msgstr "Șterge gazda selectată"
 
 #: scannerdrake:682 scannerdrake:832
 #, c-format
@@ -3513,12 +3525,12 @@ msgstr "Nume/adresă IP a gazdei:"
 #: scannerdrake:719 scannerdrake:869
 #, c-format
 msgid "Choose the host on which the local scanners should be made available:"
-msgstr "Alegeţi gazda ale cărei scanere locale vor fi puse la dispoziţie:"
+msgstr "Alegeți gazda ale cărei scanere locale vor fi puse la dispoziție:"
 
 #: scannerdrake:730 scannerdrake:880
 #, c-format
 msgid "You must enter a host name or an IP address.\n"
-msgstr "Trebuie să introduceţi un nume de gazdă sau o adresă IP.\n"
+msgstr "Trebuie să introduceți un nume de gazdă sau o adresă IP.\n"
 
 #: scannerdrake:741 scannerdrake:891
 #, c-format
@@ -3528,12 +3540,12 @@ msgstr "Această gazdă este deja în listă, nu poate fi adăugată din nou.\n"
 #: scannerdrake:796
 #, c-format
 msgid "Usage of remote scanners"
-msgstr "Folosirea scanerelor de la distanţă"
+msgstr "Folosirea scanerelor de la distanță"
 
 #: scannerdrake:797
 #, c-format
 msgid "These are the machines from which the scanners should be used:"
-msgstr "Acestea sînt maşinile de pe care vor fi folosite scanerele:"
+msgstr "Acestea sînt mașinile de pe care vor fi folosite scanerele:"
 
 #: scannerdrake:954
 #, c-format
@@ -3544,12 +3556,12 @@ msgid ""
 msgstr ""
 "saned trebuie instalat pentru a partaja scanerul local.\n"
 "\n"
-"Doriţi să instalaţi pachetul saned?"
+"Doriți să instalați pachetul saned?"
 
 #: scannerdrake:958 scannerdrake:962
 #, c-format
 msgid "Your scanner(s) will not be available on the network."
-msgstr "Scanerul nu vă va fi disponibil în reţea."
+msgstr "Scanerul nu vă va fi disponibil în rețea."
 
 #: scannerdrake:961
 #, c-format
@@ -3560,7 +3572,7 @@ msgstr "Nu se pot instala pachetele necesare pentru partajarea scanerului."
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr ""
-"Unele dispozitive din clasa de componente materiale \"%s\" au fost şterse:\n"
+"Unele dispozitive din clasa de componente materiale \"%s\" au fost șterse:\n"
 
 #: service_harddrake:135
 #, c-format
@@ -3580,19 +3592,19 @@ msgstr "- a fost adăugat %s\n"
 #: service_harddrake:264
 #, c-format
 msgid "Hardware probing in progress"
-msgstr "Detecţia componentelor materiale este în progres..."
+msgstr "Detecția componentelor materiale este în progres..."
 
 #: service_harddrake_confirm:7
 #, c-format
 msgid "Hardware changes in \"%s\" class (%s seconds to answer)"
 msgstr ""
-"Modificare configuraţie materială în clasa \"%s\" (%s secunde pentru a "
+"Modificare configurație materială în clasa \"%s\" (%s secunde pentru a "
 "răspunde)"
 
 #: service_harddrake_confirm:8
 #, c-format
 msgid "Do you want to run the appropriate config tool?"
-msgstr "Doriţi să lansaţi unealta de configurare adecvată?"
+msgstr "Doriți să lansați unealta de configurare adecvată?"
 
 #: ../menu/localedrake-system.desktop.in.h:1
 msgid "System Regional Settings"
@@ -3600,7 +3612,7 @@ msgstr "Parametri regionali sistem"
 
 #: ../menu/localedrake-system.desktop.in.h:2
 msgid "System wide language & country configurator"
-msgstr "Configurarea limbii şi ţării sistemului"
+msgstr "Configurarea limbii și țării sistemului"
 
 #: ../menu/harddrake.desktop.in.h:1
 msgid "HardDrake"
@@ -3608,15 +3620,15 @@ msgstr "HardDrake"
 
 #: ../menu/harddrake.desktop.in.h:2
 msgid "Hardware Central Configuration/information tool"
-msgstr "Unealta centrală de informaţie/configuraţie materială"
+msgstr "Unealta centrală de informație/configurație materială"
 
 #: ../menu/harddrake.desktop.in.h:3
 msgid "Hardware Configuration Tool"
-msgstr "Unealtă de configuraţie materială"
+msgstr "Unealtă de configurație materială"
 
 #: ../menu/localedrake-user.desktop.in.h:1
 msgid "Language & country configuration"
-msgstr "Configuraţie limbă & ţară"
+msgstr "Configurație limbă & țară"
 
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
@@ -3673,29 +3685,29 @@ msgstr "Parametri regionali"
 #~ "their\n"
 #~ "maximum"
 #~ msgstr ""
-#~ "Aici vă puteţi configura nivelul de securitate şi administratorul "
-#~ "maşinii.\n"
+#~ "Aici vă puteți configura nivelul de securitate și administratorul "
+#~ "mașinii.\n"
 #~ "\n"
 #~ "\n"
 #~ "'<span weight=\"bold\">Administratorul de securitate</span>' este cel "
-#~ "care va primi alertele de securitate dacă opţiunea\n"
+#~ "care va primi alertele de securitate dacă opțiunea\n"
 #~ "'<span weight=\"bold\">Alerte de secutitate</span>' este configurată. "
 #~ "Poate fi un nume de utilizator sau adresă de mail.\n"
 #~ "\n"
 #~ "\n"
 #~ "Meniul '<span weight=\"bold\">Nivel de securitate</span>' vă permite "
-#~ "selecţionarea unuia din cele şase nivele de securitate preconfigurate\n"
+#~ "selecționarea unuia din cele șase nivele de securitate preconfigurate\n"
 #~ "furnizate cu msec. Aceste nivele variază de la '<span weight=\"bold"
-#~ "\">slab</span>' securitate şi uşurinţă în utilizare, la\n"
-#~ "'<span weight=\"bold\">paranoic</span>', configuraţie potrivită pentru un "
-#~ "server cu aplicaţii sensibile:\n"
+#~ "\">slab</span>' securitate și ușurință în utilizare, la\n"
+#~ "'<span weight=\"bold\">paranoic</span>', configurație potrivită pentru un "
+#~ "server cu aplicații sensibile:\n"
 #~ "\n"
 #~ "\n"
 #~ "<span foreground=\"royalblue3\">Slab</span>: este un nivel complet "
 #~ "nesigur\n"
-#~ "dar foarte uşor de utilizat. Trebuie folosit numai pe maşinile care nu "
+#~ "dar foarte ușor de utilizat. Trebuie folosit numai pe mașinile care nu "
 #~ "sînt conectate la\n"
-#~ "nici o reţea şi care nu sînt accesibile tuturor.\n"
+#~ "nici o rețea și care nu sînt accesibile tuturor.\n"
 #~ "\n"
 #~ "\n"
 #~ "<span foreground=\"royalblue3\">Standard</span>: este nivelul de "
@@ -3704,21 +3716,21 @@ msgstr "Parametri regionali"
 #~ "client.\n"
 #~ "\n"
 #~ "\n"
-#~ "<span foreground=\"royalblue3\">Mărit</span>: prezintă cîteva restricţii\n"
-#~ "şi mai multe verificări automate sînt efectuate în fiecare noapte.\n"
+#~ "<span foreground=\"royalblue3\">Mărit</span>: prezintă cîteva restricții\n"
+#~ "și mai multe verificări automate sînt efectuate în fiecare noapte.\n"
 #~ "\n"
 #~ "\n"
 #~ "<span foreground=\"royalblue3\">Avansat</span>: nivelul de securitate "
 #~ "este destul\n"
-#~ "de mare ca să utilizaţi sistemul pe post de server cu conexiuni de la mai "
-#~ "mulţi clienţi.\n"
-#~ "Dacă maşina este un simplu client Internet, alegeţi un nivel de "
+#~ "de mare ca să utilizați sistemul pe post de server cu conexiuni de la mai "
+#~ "mulți clienți.\n"
+#~ "Dacă mașina este un simplu client Internet, alegeți un nivel de "
 #~ "securitate mai redus.\n"
 #~ "\n"
 #~ "\n"
 #~ "<span foreground=\"royalblue3\">Paranoic</span>: este similar cu nivelul "
 #~ "precedent,\n"
-#~ "dar sistemul este complet închis şi opţiunile de securitate sînt la "
+#~ "dar sistemul este complet închis și opțiunile de securitate sînt la "
 #~ "maximum."
 
 #~ msgid "(default value: %s)"
@@ -3734,19 +3746,19 @@ msgstr "Parametri regionali"
 #~ msgstr "Administrator de securitate:"
 
 #~ msgid "Basic options"
-#~ msgstr "Opţiuni de bază"
+#~ msgstr "Opțiuni de bază"
 
 #~ msgid "Network Options"
-#~ msgstr "Opţiuni reţea"
+#~ msgstr "Opțiuni rețea"
 
 #~ msgid "System Options"
-#~ msgstr "Opţiuni sistem"
+#~ msgstr "Opțiuni sistem"
 
 #~ msgid "Periodic Checks"
 #~ msgstr "Verificări periodice"
 
 #~ msgid "Please wait, setting security level..."
-#~ msgstr "Aşteptaţi, se configurează nivelul de securitate..."
+#~ msgstr "Așteptați, se configurează nivelul de securitate..."
 
 #~ msgid "Please wait, setting security options..."
-#~ msgstr "Aşteptaţi, se configurează opţiunile de securitate..."
+#~ msgstr "Așteptați, se configurează opțiunile de securitate..."
