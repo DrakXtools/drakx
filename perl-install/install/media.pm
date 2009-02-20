@@ -141,15 +141,9 @@ sub umount_media {
     umount_phys_medium($_) foreach grep { $_ } map { $_->{loopback_device} } @l;
 }
 
-sub _url_respect_privacy {
-    my ($url) = @_;
-
-    $url =~ s!ftp://.*?\@!ftp://xxx@!;
-    $url;
-}
 sub phys_medium_to_string {
     my ($phys_m) = @_;
-    _url_respect_privacy($phys_m->{url}) . ($phys_m->{name} ? " ($phys_m->{name})" : '');
+    urpm::download::url_obscuring_password($phys_m->{url}) . ($phys_m->{name} ? " ($phys_m->{name})" : '');
 }
 
 sub _stage2_mounted_medium {
