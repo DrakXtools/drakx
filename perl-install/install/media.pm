@@ -11,8 +11,6 @@ use urpm::download;
 
 #- list of fields for {phys_medium} :
 #-	device
-#-	finalpath
-#-	from_iso
 #-	fs_type
 #-	is_suppl (is a supplementary media)
 #-	isMounted
