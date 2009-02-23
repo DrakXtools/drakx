@@ -247,7 +247,7 @@ void init_modules_insmoding(void)
 		fatal_error("warning, error initing modules stuff, modules loading disabled");
 	}
 	if (load_modules_descriptions()) {
-		log_message("warning, error initing modules stuff, modules loading disabled");
+		log_message("warning, error initing modules stuff");
 	}
 }
 
