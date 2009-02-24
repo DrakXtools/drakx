@@ -628,7 +628,13 @@ sub get_media_cfg {
 
     log::l("get_media_cfg read " . int(@{$packages->{depslist}}) . " headers");
 
+    _get_compsUsers_pl($phys_medium, $force_rpmsrate);
 
+    $suppl_CDs, $o->{copy_rpms_on_disk};
+}
+
+sub _get_compsUsers_pl {
+    my ($phys_medium, $force_rpmsrate) = @_;
     #- copy latest compssUsers.pl and rpmsrate somewhere locally
     if ($force_rpmsrate || ! -e '/tmp/rpmsrate') {
 	getAndSaveFile_($phys_medium, "media_info/rpmsrate", "/tmp/rpmsrate");
@@ -636,9 +642,6 @@ sub get_media_cfg {
     if ($force_rpmsrate || ! -e '/tmp/compssUsers.pl') {
 	getAndSaveFile_($phys_medium, "media_info/compssUsers.pl", "/tmp/compssUsers.pl");
     }
-
-
-    $suppl_CDs, $o->{copy_rpms_on_disk};
 }
 
 sub get_standalone_medium {
