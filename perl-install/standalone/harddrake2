@@ -14,6 +14,7 @@ BEGIN { unshift @::textdomains, 'drakconf' }
 use mygtk2 qw(gtknew); #- do not import gtkadd which conflicts with ugtk2 version
 use ugtk2 qw(:create :helpers :wrappers);
 use interactive;
+use modules::parameters;
 use harddrake::data;  #- needs to stay after use-ugtk2 as long as this module defines globals containing some N()
 use fsedit;
 use pkgs;
@@ -302,6 +303,7 @@ sub fill_default_text {
     $text->get_buffer->set_text(N("Click on a device in the left tree in order to display its information here."));
 }
 
+my %has_parameter;
 $tree->get_selection->signal_connect('changed' => sub {
     my ($select) = @_;
     my ($model, $iter) = $select->get_selected;
@@ -352,6 +354,15 @@ $tree->get_selection->signal_connect('changed' => sub {
             
             $current_configurator = $configurators[$idx];
             show_hide($current_configurator && -x first(split /\s+/, $current_configurator), $config_button);  # strip arguments for -x test
+
+            # hide module configuration button if needed:
+            my $driver = $current_device->{driver};
+            if (!defined $has_parameter{$driver}) {
+                local $SIG{CHLD} = undef;
+                $has_parameter{$driver} ||= to_bool(scalar modules::parameters::parameters($driver));
+            }
+            show_hide($has_parameter{$driver}, $module_cfg_button);
+
             return 1;
         }
     }
