@@ -157,6 +157,9 @@ sub ask_users() {
         my $old_home = "/home/$old_user";
         my $new_home = "/home/$users->[0]{name}";
         run_program::run(qq(grep -rl $old_home $new_home/.??* | while read f; do perl -pi -e 's,$old_home,$new_home,g' "\$f"; done));
+        #- give console rights for current session
+        my $console_dir = "/var/run/console";
+        cp_f($console_dir . "/" . $old_user, $console_dir . "/" . $users->[0]{name}) if -e $console_dir . "/" . $old_user;
     }
 }
 
