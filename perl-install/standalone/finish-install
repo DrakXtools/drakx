@@ -147,6 +147,11 @@ sub ask_users() {
     any::add_users($users, $authentication);
     any::set_autologin($in->do_pkgs, $users->[0]{name}, $autologin_first)
 	if $autologin_first;
+    my $finit_conf = "/etc/finit.conf";
+    substInFile {
+        s/^user .*//;
+        $_ .= "user $users->[0]{name}\n" if eof;
+    } $finit_conf if -e $finit_conf;
     if ($old_user) {
         #- replace home path in user config files
         my $old_home = "/home/$old_user";
