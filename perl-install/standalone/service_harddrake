@@ -88,7 +88,7 @@ foreach my $card (@cards) {
         require Xconfig::card;
         my @cards = Xconfig::card::probe();
         my $driver = $cards[0]{Driver};
-        my $new_driver = $1 if cat_('/etc/X11/xorg.conf') =~ /Driver "($card->{xorg_driver_regexp})/;
+        my $new_driver = $1 if cat_('/etc/X11/xorg.conf') =~ /Driver "($card->{xorg_driver_regexp})"/;
         if ($new_driver) {
             cp_af('/etc/X11/xorg.conf', "/etc/X11/xorg.conf.mdv$^T");
             substInFile { s!Driver "($card->{xorg_driver_regexp})"!Driver "$driver"!g } '/etc/X11/xorg.conf';
