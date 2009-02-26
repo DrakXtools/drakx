@@ -858,7 +858,7 @@ sub create_file_selector {
     add2hash(\%opts, { width => 480, height => 250 });
     gtkadd($w->{window},
 	   gtkpack_(create_box_with_title($w, $message),
-		    1, $w->{chooser} = gtknew('FileChooserWidget', action => $action, %opts),
+		    1, $w->{chooser} = gtknew('FileChooser', action => $action, %opts),
 		    0, create_okcancel($w),
 		 ));
     $w->{chooser}->signal_connect(file_activated => sub { $w->{ok}->clicked });
