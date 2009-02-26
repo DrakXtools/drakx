@@ -247,6 +247,8 @@ function write_image()
 	
 	image=$(cat $images_dir/list | cut -d ',' -f 3)
 	extension=$(echo $image | cut -d '.' -f 3)
+	imagesize=$(ls -l $images_dir/$image | awk '{ print $5 }')
+	total=$imagesize
 	case $extension in
 		gz)
 			uncomp=zcat
@@ -269,7 +271,6 @@ function write_image()
 
 	sleep 3
 	pid=$(ps ax | grep 'dd bs=4M of' | grep -v grep | awk '{ print $1 }')
-	total=1000
 
 	while [ true ]; do
 		ps | grep -q $pid
