@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: DrakX-el\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-13 16:30+0100\n"
-"PO-Revision-Date: 2009-02-26 19:25+0100\n"
+"PO-Revision-Date: 2009-02-26 22:26+0100\n"
 "Last-Translator: Glentadakis Dimitrios <dglent@gmail.com>\n"
 "Language-Team: Greek <i18ngr@lists.hellug.gr  >\n"
 "MIME-Version: 1.0\n"
@@ -3006,10 +3006,9 @@ msgstr "Το %s βρέθηκε στο %s,να ρυθμιστεί αυτόματ�
 msgid "%s is not in the scanner database, configure it manually?"
 msgstr "το %s δεν είναι στη βάση δεδομένων των σαρωτών, να ρυθμιστεί χειροκίνητα;"
 
-#: scannerdrake:130
-#, fuzzy, c-format
+#: scannerdrake:130, c-format
 msgid "Scanner configuration"
-msgstr "Ρύθμιση ειδοποιήσεων"
+msgstr "Ρύθμιση σαρωτών"
 
 #: scannerdrake:131
 #, c-format
@@ -3130,17 +3129,15 @@ msgstr ""
 #: scannerdrake:233
 #, c-format
 msgid "Install firmware for the"
-msgstr ""
+msgstr "Εγκατάσταση υλικολογισμικού για το"
 
-#: scannerdrake:256
-#, fuzzy, c-format
+#: scannerdrake:256, c-format
 msgid "Select firmware file for the %s"
-msgstr "Επιλέξτε αρχείο"
+msgstr "Επιλέξτε αρχείο υλικολογισμικού για το %s"
 
-#: scannerdrake:274
-#, fuzzy, c-format
+#: scannerdrake:274, c-format
 msgid "Could not install the firmware file for the %s!"
-msgstr "Επιλέξτε αρχείο"
+msgstr "Αδύνατη η εγκατάσταση του αρχείου υλικολογισμικού για το %s !"
 
 #: scannerdrake:287
 #, c-format
@@ -3152,8 +3149,7 @@ msgstr "Το αρχείο υλικολογισμικού για το %s εγκα
 msgid "The %s is unsupported"
 msgstr "Το %s δεν υποστηρίζεται"
 
-#: scannerdrake:302
-#, fuzzy, c-format
+#: scannerdrake:302, c-format
 msgid ""
 "The %s must be configured by system-config-printer.\n"
 "You can launch system-config-printer from the %s Control Center in Hardware "
@@ -3161,22 +3157,20 @@ msgid ""
 msgstr ""
 "Το %s πρέπει να ρυθμιστεί από το system-config-printer.\n"
 "Μπορείτε να εκκινήσετε το system-config-printer από το Κέντρο Ελέγχου "
-"Mandriva από το τμήμα Υλικό."
+"Mandriva στο τμήμα Υλικό."
 
-#: scannerdrake:320
-#, fuzzy, c-format
+#: scannerdrake:320, c-format
 msgid "Setting up kernel modules..."
-msgstr "Αποθήκευση πληροφ. χρήστη..."
+msgstr "Ρύθμιση αρθρωμάτων πυρήνα..."
 
 #: scannerdrake:330 scannerdrake:337 scannerdrake:367
 #, c-format
 msgid "Auto-detect available ports"
 msgstr "Διαθέσιμες θύρες αυτόματου εντοπισμού"
 
-#: scannerdrake:331 scannerdrake:377
-#, fuzzy, c-format
+#: scannerdrake:331 scannerdrake:377, c-format
 msgid "Device choice"
-msgstr "Παλαιό αρχείο συσκευής"
+msgstr "Επιλογή συσκευής"
 
 #: scannerdrake:332 scannerdrake:378
 #, c-format
@@ -3198,10 +3192,9 @@ msgstr "Επιλέξτε συσκευή"
 msgid "Searching for scanners..."
 msgstr "Γίνεται αναζήτηση για σαρωτές ..."
 
-#: scannerdrake:405 scannerdrake:412
-#, fuzzy, c-format
+#: scannerdrake:405 scannerdrake:412, c-format
 msgid "Attention!"
-msgstr "Έλξη"
+msgstr "Προσοχή!"
 
 #: scannerdrake:406
 #, c-format
@@ -3225,15 +3218,13 @@ msgstr ""
 "Περισσότερες πληροφορίες στην σελίδα τεκμηρίωσης του οδηγού. Εκτελέστε την εντολή "
 "«man sane- %s» για να την διαβάσετε."
 
-#: scannerdrake:409 scannerdrake:418
-#, fuzzy, c-format
+#: scannerdrake:409 scannerdrake:418, c-format
 msgid ""
 "After that you may scan documents using \"XSane\" or \"Kooka\" from "
 "Multimedia/Graphics in the applications menu."
 msgstr ""
-"Το %s σας έχει ρυθμιστεί. \n"
-"Μπορείτε τώρα να σαρώσετε έγγραφα με το \"XSane\" από το Πολυμέσα/Γραφικά "
-"από μενού εφαρμογών."
+"Έπειτα μπορείτε να σαρώσετε έγγραφα με το \"XSane\" από το Πολυμέσα/Γραφικά "
+"στο μενού εφαρμογών."
 
 #: scannerdrake:413
 #, c-format
@@ -3460,80 +3451,72 @@ msgstr ""
 #: scannerdrake:958 scannerdrake:962
 #, c-format
 msgid "Your scanner(s) will not be available on the network."
-msgstr ""
+msgstr "Οι σαρωτές σας δεν θα είναι διαθέσιμοι στο δίκτυο."
 
 #: scannerdrake:961
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
-msgstr ""
+msgstr "Αδύνατη η εγκατάσταση των απαραίτητων πακέτων για την κοινή χρήση των σαρωτών."
 
 #: service_harddrake:134
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
-msgstr "Ορισμένες συσκευές στο τμήμα υλικού \"%s\" αφαιρέθηκαν:\n"
+msgstr "Ορισμένες συσκευές στο τμήμα υλικού \"%s\" αφαιρέθηκαν :\n"
 
 #: service_harddrake:135
 #, c-format
 msgid "- %s was removed\n"
-msgstr ""
+msgstr "- %s αφαιρέθηκε\n"
 
-#: service_harddrake:138
-#, fuzzy, c-format
+#: service_harddrake:138, c-format
 msgid "Some devices were added: %s\n"
-msgstr "Ορισμένες συσκευές προστέθηκαν:\n"
+msgstr "Ορισμένες συσκευές προστέθηκαν : %s\n"
 
 #: service_harddrake:139
 #, c-format
 msgid "- %s was added\n"
-msgstr ""
+msgstr "- %s προστέθηκε\n"
 
 #: service_harddrake:264
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "Ανίχνευση υλικού σε εξέλιξη"
 
-#: service_harddrake_confirm:7
-#, c-format
+#: service_harddrake_confirm:7, c-format
 msgid "Hardware changes in \"%s\" class (%s seconds to answer)"
-msgstr ""
+msgstr "Τροποποίηση υλικού στην κλάση « %s » (%s δευτερόλεπτα για απάντηση)"
 
-#: service_harddrake_confirm:8
-#, fuzzy, c-format
+#: service_harddrake_confirm:8, c-format
 msgid "Do you want to run the appropriate config tool?"
-msgstr "Θέλετε να δοκιμάσετε τις ρυθμίσεις;"
+msgstr "Θέλετε να εκτελέσετε το κατάλληλο εργαλείο ρύθμισης ;"
 
 #: ../menu/localedrake-system.desktop.in.h:1
-#, fuzzy
 msgid "System Regional Settings"
-msgstr "Ρυθμίσεις συστήματος"
+msgstr "Τοπικές ρυθμίσεις του συστήματος"
 
 #: ../menu/localedrake-system.desktop.in.h:2
 msgid "System wide language & country configurator"
-msgstr ""
+msgstr "Ρύθμιση της γλώσσας και της χώρας"
 
 #: ../menu/harddrake.desktop.in.h:1
 msgid "HardDrake"
 msgstr "HardDrake"
 
 #: ../menu/harddrake.desktop.in.h:2
-#, fuzzy
 msgid "Hardware Central Configuration/information tool"
-msgstr "Ρυθμίσεις δικτύου"
+msgstr "Εργαλείο ρυθμίσεων και πληροφοριών υλικού"
 
 #: ../menu/harddrake.desktop.in.h:3
-#, fuzzy
 msgid "Hardware Configuration Tool"
-msgstr "Ρυθμίσεις δικτύου"
+msgstr "Εργαλείο ρυθμίσεων υλικού"
 
 #: ../menu/localedrake-user.desktop.in.h:1
-#, fuzzy
 msgid "Language & country configuration"
-msgstr "Χειροκίνητη ρύθμιση"
+msgstr "Ρύθμιση της γλώσσας και της χώρας"
 
 #: ../menu/localedrake-user.desktop.in.h:2
-#, fuzzy
 msgid "Regional Settings"
-msgstr "Ρυθμίσεις"
+msgstr "Τοπικές ρυθμίσεις"
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "
