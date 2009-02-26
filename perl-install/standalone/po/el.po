@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: DrakX-el\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-13 16:30+0100\n"
-"PO-Revision-Date: 2009-02-26 07:09+0100\n"
+"PO-Revision-Date: 2009-02-26 19:25+0100\n"
 "Last-Translator: Glentadakis Dimitrios <dglent@gmail.com>\n"
 "Language-Team: Greek <i18ngr@lists.hellug.gr  >\n"
 "MIME-Version: 1.0\n"
@@ -3211,6 +3211,10 @@ msgid ""
 "Manual adjustments are required. Please edit the configuration file /etc/"
 "sane.d/%s.conf. "
 msgstr ""
+"Το %s δεν μπορεί να ρυθμιστεί πλήρως αυτόματα.\n"
+"\n"
+"Είναι απαραίτητο να κάνετε κάποιες ρυθμίσεις χειροκίνητα. Παρακαλώ επεξεργαστείτε "
+"το αρχείο /etc/sane.d/%s.conf."
 
 #: scannerdrake:407 scannerdrake:416
 #, c-format
@@ -3218,6 +3222,8 @@ msgid ""
 "More info in the driver's manual page. Run the command \"man sane-%s\" to "
 "read it."
 msgstr ""
+"Περισσότερες πληροφορίες στην σελίδα τεκμηρίωσης του οδηγού. Εκτελέστε την εντολή "
+"«man sane- %s» για να την διαβάσετε."
 
 #: scannerdrake:409 scannerdrake:418
 #, fuzzy, c-format
@@ -3235,6 +3241,8 @@ msgid ""
 "Your %s has been configured, but it is possible that additional manual "
 "adjustments are needed to get it to work. "
 msgstr ""
+"Το %s ρυθμίστηκε, αλλά είναι πιθανό κάποιες πρόσθετες ρυθμίσεις να πρέπει "
+"να γίνουν χειροκίνητα για την σωστή λειτουργία."
 
 #: scannerdrake:414
 #, c-format
@@ -3242,27 +3250,27 @@ msgid ""
 "If it does not appear in the list of configured scanners in the main window "
 "of Scannerdrake or if it does not work correctly, "
 msgstr ""
+"Εάν δεν φαίνεται στην λίστα με τους ρυθμισμένους σαρωτές στο κεντρικό παράθυρο "
+"του Scannerdrake ή αν δεν λειτουργεί σωστά, "
 
-#: scannerdrake:415
-#, fuzzy, c-format
+#: scannerdrake:415, c-format
 msgid "edit the configuration file /etc/sane.d/%s.conf. "
-msgstr "Ενεργοποίηση ρυθμίσεων tos"
+msgstr "επεξεργαστείτε το αρχείο ρυθμίσεων /etc/sane.d/%s.conf. "
 
 #: scannerdrake:420
 #, c-format
 msgid "Congratulations!"
-msgstr "Συγχαρητήρια!"
+msgstr "Συγχαρητήρια !"
 
-#: scannerdrake:421
-#, fuzzy, c-format
+#: scannerdrake:421, c-format
 msgid ""
 "Your %s has been configured.\n"
 "You may now scan documents using \"XSane\" or \"Kooka\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
-"Το %s σας έχει ρυθμιστεί. \n"
-"Μπορείτε τώρα να σαρώσετε έγγραφα με το \"XSane\" από το Πολυμέσα/Γραφικά "
-"από μενού εφαρμογών."
+"Το %s έχει ρυθμιστεί. \n"
+"Μπορείτε τώρα να σαρώσετε έγγραφα με το « XSane » από το Πολυμέσα/Γραφικά "
+"στο μενού εφαρμογών."
 
 #: scannerdrake:446
 #, c-format
@@ -3295,10 +3303,9 @@ msgstr ""
 msgid "There are no scanners found which are available on your system.\n"
 msgstr "Δεν βρέθηκαν σαρωτές που να είναι διαθέσιμοι στο σύστημά σας.\n"
 
-#: scannerdrake:460
-#, fuzzy, c-format
+#: scannerdrake:460, c-format
 msgid "Scanner Management"
-msgstr "Κοινή χρήση εκτυπωτών"
+msgstr "Διαχείριση Σαρωτή"
 
 #: scannerdrake:466
 #, c-format
@@ -3310,10 +3317,9 @@ msgstr "Αναζήτηση για νέους σαρωτές"
 msgid "Add a scanner manually"
 msgstr "Προσθήκη σαρωτή χειροκίνητα"
 
-#: scannerdrake:479
-#, fuzzy, c-format
+#: scannerdrake:479, c-format
 msgid "Install/Update firmware files"
-msgstr "Επιλέξτε αρχείο"
+msgstr "Εγκατάσταση/ενημέρωση αρχείων υλικολογισμικού"
 
 #: scannerdrake:485
 #, c-format
@@ -3330,10 +3336,9 @@ msgstr "Όλα τα απομακρυσμένα μηχανήματα"
 msgid "This machine"
 msgstr "Αυτό το μηχάνημα"
 
-#: scannerdrake:595
-#, fuzzy, c-format
+#: scannerdrake:595, c-format
 msgid "Scanner Sharing"
-msgstr "Κοινή χρήση σαρωτών"
+msgstr "Κοινή χρήση σαρωτή"
 
 #: scannerdrake:596
 #, c-format
@@ -3363,10 +3368,9 @@ msgstr "Οι σαρωτές αυτού του μηχανήματος είναι 
 msgid "Scanner sharing to hosts: "
 msgstr "Κοινόχρηστοι σαρωτές στους υπολογιστές: "
 
-#: scannerdrake:607 scannerdrake:624
-#, fuzzy, c-format
+#: scannerdrake:607 scannerdrake:624, c-format
 msgid "No remote machines"
-msgstr "(σε αυτό το μηχάνημα)"
+msgstr "Κανένας απομακρυσμένος υπολογιστής"
 
 #: scannerdrake:616
 #, c-format
@@ -3443,13 +3447,15 @@ msgstr "Χρήση των απομακρυσμένων σαρωτών"
 msgid "These are the machines from which the scanners should be used:"
 msgstr "Αυτά είναι τα μηχανήματα από όπου οι σαρωτές θα πρέπει να χρησιμοποιηθούν:"
 
-#: scannerdrake:954
-#, fuzzy, c-format
+#: scannerdrake:954, c-format
 msgid ""
 "saned needs to be installed to share the local scanner(s).\n"
 "\n"
 "Do you want to install the saned package?"
-msgstr "Το πακέτο %s πρέπει να αναβαθμιστεί. Θέλετε να το εγκαταστήσετε;"
+msgstr ""
+"Το πακέτο saned πρέπει να εγκατασταθεί για την κοινή χρήση των τοπικών σαρωτών.\n"
+"\n"
+"Θέλετε να εγκαταστήσετε το πακέτο saned ;"
 
 #: scannerdrake:958 scannerdrake:962
 #, c-format
