@@ -60,6 +60,8 @@ sub detect_channels() {
     $channel_list->set_sensitive(0);
     $_->set_sensitive(0) foreach values %buttons;
 
+    $in->do_pkgs->install('w_scan');
+
     gtkflush();
 
     $SIG{CHLD} = sub {
@@ -87,7 +89,6 @@ sub detect_channels() {
     } else {
         $SIG{CHLD} = 'DEFAULT';
         mkdir_p(dirname($config_file));
-        system('/usr/sbin/drakhelp_inst w_scan') unless -e '/usr/bin/w_scan';
         my $ret = system("w_scan -X > $config_file");
         sleep(1);
         POSIX::_exit($ret >> 8);
