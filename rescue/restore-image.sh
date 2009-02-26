@@ -278,16 +278,7 @@ function write_image()
 		ps | grep -q $pid
 		if [ $? -eq 0 ]; then
 			/bin/kill -SIGUSR1 $pid
-			unit=$(tail -n 1 /tmp/backup.out | \
-				cut -d'(' -f2 | cut -d')' -f1 |\
-				awk '{ print $2 }')
-
-			complete=$(tail -n 1 /tmp/backup.out | \
-				cut -d'(' -f2 | cut -d')' -f1 | \
-				awk '{ print $1 }' | cut -d'.' -f1)
-			if [ x"$unit" = x"GB" ]; then
-				complete=$((complete*1000))
-			fi
+			complete=$(tail -n 1 /tmp/backup.out | awk '{ print $1 }')
 			echo $((complete*100/total))
 			sleep 1
 		else
