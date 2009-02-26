@@ -248,7 +248,6 @@ function write_image()
 	image=$(cat $images_dir/list | cut -d ',' -f 3)
 	extension=$(echo $image | cut -d '.' -f 3)
 	imagesize=$(ls -l $images_dir/$image | awk '{ print $5 }')
-	total=$imagesize
 	case $extension in
 		gz)
 			uncomp=zcat
@@ -256,9 +255,11 @@ function write_image()
 			;;
 		bz2)
 			uncomp=bzcat
+			total=$((imagesize * 3))
 			;;
 		*)
 			uncomp=cat
+			total=$imagesize
 			;;
 	esac
 
