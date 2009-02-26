@@ -102,11 +102,7 @@ function detect_root()
 
 	devs_found=$(($(echo $devices | wc -w)/2))
 
-	root_data=
-	# win32 detection won't handle complex layouts
-	if [ "${devs_found}" = 1 ]; then
-		root_data=$(detect_win32 ${inst_source_dev})
-	fi
+	root_data=$(detect_win32 ${inst_source_dev})
 
 	if [ -z "${root_data}" ]; then
 		if [ "$devs_found" -gt "1" ]; then
@@ -133,6 +129,11 @@ function detect_win32()
 {
 	# from detect_root()
 	skip_dev=${1}
+
+	# win32 detection won't handle complex layouts
+	if [ $(fdisk -l | grep "^/dev/" | grep -v ${skip_dev} | wc -l) -gt 1 ]; then
+		exit
+	fi
 
 	# get the last created windows partition information
 	set -f
