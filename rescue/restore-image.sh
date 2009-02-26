@@ -248,9 +248,15 @@ function write_image()
 	image=$(cat $images_dir/list | cut -d ',' -f 3)
 	extension=$(echo $image | cut -d '.' -f 3)
 	case $extension in
-		gz) uncomp=zcat ;;
-		bz2) uncomp=bzcat ;;
-		*) uncomp=cat ;;
+		gz)
+			uncomp=zcat
+			;;
+		bz2)
+			uncomp=bzcat
+			;;
+		*)
+			uncomp=cat
+			;;
 	esac
 
 	skipstart=/bin/true
