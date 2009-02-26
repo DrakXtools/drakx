@@ -252,6 +252,7 @@ function write_image()
 	case $extension in
 		gz)
 			uncomp=zcat
+			total=$(gzip -l $images_dir/$image | tail -n 1 | awk '{ print $2 }')
 			;;
 		bz2)
 			uncomp=bzcat
