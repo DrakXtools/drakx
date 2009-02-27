@@ -1,7 +1,6 @@
 package authentication; # $Id$
 
 use common;
-my $ccreds = 1;
 
 my ($authentication) = @_;
 
@@ -51,8 +50,8 @@ my %kind2nsswitch = (
 my %kind2packages = (
     local     => [],
     SmartCard => [ 'castella-pam' ],
-    LDAP      => [ 'openldap-clients', 'nss_ldap', 'pam_ldap', 'autofs', 'pam_ccreds', 'nss_updatedb' ],
-    KRB5       => [ 'nss_ldap', 'pam_krb5', 'libsasl2-plug-gssapi', 'pam_ccreds', 'nss_updatedb' ],
+    LDAP      => [ 'openldap-clients', 'nss_ldap', 'pam_ldap', 'autofs', 'nss_updatedb' ],
+    KRB5       => [ 'nss_ldap', 'pam_krb5', 'libsasl2-plug-gssapi', 'nss_updatedb' ],
     NIS       => [ 'ypbind', 'autofs' ],
     winbind   => [ 'samba-winbind', 'nss_ldap', 'pam_krb5', 'libsasl2-plug-gssapi', 'samba-server' ],
 );
@@ -92,12 +91,15 @@ sub ask_parameters {
     foreach (kinds()) {
 	delete $authentication->{$_} if $_ ne $kind;
     }
+    # do not enable ccreds unless required
+    undef $authentication->{ccreds};
 
     if ($kind eq 'LDAP') {
 	$authentication->{LDAPDOMAIN} ||= domain_to_ldap_domain($net->{resolv}{DOMAINNAME});
 	#$authentication->{anonymous} = "0";
 	#$authentication->{cafile} = "0";
 	#$authentication->{nssgrp} = "0";
+	$authentication->{ccreds} = 1;
 
 	$in->ask_from('', N(" "),
 		     [ { label => N("Welcome to the Authentication Wizard"), title => 1 },
@@ -111,7 +113,7 @@ sub ask_parameters {
 		     { text => N("Use encrypt connection with TLS "), val => \$authentication->{cafile}, type => 'bool' },
                      { val => N("Download CA Certificate "), type  => button , disabled => sub { !$authentication->{cafile} }, clicked_may_quit => sub { $authentication->{file} = add_cafile(); 0 }  },
 		     
-		     { text => N("Use Disconnect mode "), val => \$ccreds, type => 'bool' },
+		     { text => N("Use Disconnect mode "), val => \$authentication->{ccreds}, type => 'bool' },
 		     { text => N("Use anonymous BIND "), val => \$authentication->{anonymous}, type => 'bool' , advanced => 1 },
 		     { text => N("  "), advanced => 1 },
                      { label => N("Bind DN "), val => \$authentication->{LDAP_binddn}, disabled => sub { !$authentication->{anonymous} }, advanced => 1  },
@@ -131,7 +133,7 @@ sub ask_parameters {
 	my @srvs = query_srv_names($authentication->{AD_domain});
 	$authentication->{AD_server} ||= $srvs[0] if @srvs;
 	my $AD_user = $authentication->{AD_user} =~ /(.*)\@\Q$authentication->{AD_domain}\E$/ ? $1 : $authentication->{AD_user};
-	#my $authentication->{ccreds} ;
+	$authentication->{ccreds} = 1;
 
 	$in->ask_from('', N(" "),
                         [ { label => N("Welcome to the Authentication Wizard"), title => 1 },
@@ -144,7 +146,7 @@ sub ask_parameters {
                        {},
 		       { text => N("Use DNS to resolve hosts for realms "), val => \$authentication->{KRB_host_lookup}, type => 'bool' },
 		       { text => N("Use DNS to resolve KDCs for realms "), val => \$authentication->{KRB_dns_lookup}, type => 'bool' },
-		       { text => N("Use Disconnect mode "), val => \$ccreds, type => 'bool' },
+		       { text => N("Use Disconnect mode "), val => \$authentication->{ccreds}, type => 'bool' },
 		     ]) or return;
 
 my %level = (
@@ -176,7 +178,7 @@ my %level = (
 	$authentication->{AD_password} = '' if !$authentication->{AD_user};
 
 
-    } elsif ($kind eq 'NIS') { 
+    } elsif ($kind eq 'NIS') {
 	$authentication->{NIS_server} ||= 'broadcast';
 	$net->{network}{NISDOMAIN} ||= $net->{resolv}{DOMAINNAME};
 	$in->ask_from('', N(" "),
@@ -285,8 +287,10 @@ sub get() {
 }
 
 sub install_needed_packages {
-    my ($do_pkgs, $kind) = @_;
+    my ($do_pkgs, $kind, $ccreds) = @_;
     if (my $pkgs = $kind2packages{$kind}) {
+	# install ccreds if required
+	$ccreds and push(@$pkgs, 'pam_ccreds');
 	#- automatic during install
 	$do_pkgs->ensure_are_installed($pkgs, $::isInstall) or return;
     } else {
@@ -298,7 +302,7 @@ sub install_needed_packages {
 sub set {
     my ($in, $net, $authentication, $o_when_network_is_up) = @_;
 
-    install_needed_packages($in->do_pkgs, to_kind($authentication)) or return;
+    install_needed_packages($in->do_pkgs, to_kind($authentication), $authentication->{ccreds}) or return;
     set_raw($net, $authentication, $o_when_network_is_up);
 
     require services;
@@ -320,11 +324,11 @@ sub set_raw {
     my $pam_modules = $kind2pam_kind{$kind} or log::l("kind2pam_kind does not know $kind");
     $pam_modules ||= [];
     sshd_config_UsePAM(@$pam_modules > 0);
-    set_pam_authentication($pam_modules, $ccreds);
+    set_pam_authentication($pam_modules, $authentication->{ccreds});
 
     my $nsswitch = $kind2nsswitch{$kind} or log::l("kind2nsswitch does not know $kind");
     $nsswitch ||= [];
-    set_nsswitch_priority($nsswitch,$ccreds);
+    set_nsswitch_priority($nsswitch, $authentication->{ccreds});
 
     if ($kind eq 'local') {
 
