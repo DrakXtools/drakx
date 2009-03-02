@@ -487,9 +487,6 @@ Consoles 1,3,4,7 may also contain interesting information";
 	run_program::rooted($::prefix, "chkconfig", "--del", "gpm"); 
     }
 
-    #- install urpmi before as rpmdb will be opened, this will cause problem with update-menus.
-    $o->install_urpmi;
-
     if ($o->{pcmcia}) {
 	substInFile { s/.*(TaskBarShowAPMStatus).*/$1=1/ } "$::prefix/usr/lib/X11/icewm/preferences";
 	eval { cp_af("$::prefix/usr/share/applnk/System/kapm.kdelnk",
