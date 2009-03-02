@@ -666,20 +666,11 @@ sub _get_medium {
 
     log::l("trying to read $m->{rel_hdlist} for medium '$m->{fakemedium}'");
     
-    #- copy hdlist file directly to urpmi directory, this will be used
-    #- for getting header of package during installation.
-    my $hdlist = hdlist_on_disk($m);
-    {
-	_getAndSaveFile_progress($in_wait, N("Downloading file %s...", $m->{rel_hdlist}),
-				$phys_m, $m->{rel_hdlist}, $hdlist) or die "no $m->{rel_hdlist} found";
-
-    }
-
+    #- copy synthesis file directly to urpmi directory.
     my $synthesis = urpmidir() . "/synthesis.hdlist.$m->{fakemedium}.cz";
     {
 	my $rel_synthesis = $m->{rel_hdlist};
 	$rel_synthesis =~ s!/hdlist!/synthesis.hdlist! or internal_error("bad {rel_hdlist} $m->{rel_hdlist}");
-	#- copy existing synthesis file too.
 	_getAndSaveFile_progress($in_wait, N("Downloading file %s...", $rel_synthesis),
 				$phys_m, $rel_synthesis, $synthesis);
     }
@@ -717,16 +708,13 @@ sub _get_medium {
 	if (-s $synthesis) {
 	    ($m->{start}, $m->{end}) = $packages->parse_synthesis($synthesis, callback => $callback)
 	      or $error = "bad synthesis $synthesis for $m->{fakemedium}";
-	} elsif (-s $hdlist) {
-	    ($m->{start}, $m->{end}) = $packages->parse_hdlist($hdlist, callback => $callback)
-	      or $error = "bad hdlist $hdlist for $m->{fakemedium}";
 	} else {
 	    $error = "fatal: no hdlist nor synthesis to read for $m->{fakemedium}";
 	}
 
 	if ($error) {
 	    pop @{$packages->{media}};
-	    unlink $hdlist, $synthesis;
+	    unlink $synthesis;
 	    die $error;
 	} else {
 	    log::l("medium " . phys_medium_to_string($phys_m) . ", read " . ($m->{end} - $m->{start} + 1) . " packages in $m->{rel_hdlist}, $nb_suppl_pkg_skipped skipped");
