@@ -246,10 +246,6 @@ sub configureNetwork {
 #------------------------------------------------------------------------------
 sub installUpdates {
     my ($auto) = @_;
-
-    require urpm::orphans;
-    urpm::orphans::add_unrequested($o->{packages}, $o->{packages}{state});
-
     installStepsCall($o, $auto, 'installUpdates');
 }
 #------------------------------------------------------------------------------
