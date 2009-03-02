@@ -58,20 +58,9 @@ sub _phys_media {
     uniq(map { $_->{phys_medium} } @{$packages->{media}});
 }
 
-sub _pkg2media {
-   my ($media, $p) = @_; 
-   $p or internal_error("invalid package");
-
-   find {
-       $_->{selected} &&
-	 $p->id >= $_->{start} && $p->id <= $_->{end};
-   } @$media;
-}
-
 sub packageMedium {
    my ($packages, $p) = @_;
-
-   _pkg2media($packages->{media}, $p) || {};
+   URPM::pkg2media($packages->{media}, $p) || {};
 }
 sub packagesOfMedium {
     my ($packages, $medium) = @_;
