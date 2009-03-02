@@ -11,6 +11,7 @@ BEGIN {
 use URPM;
 use URPM::Resolve;
 use URPM::Signature;
+use urpm;
 use urpm::select;
 use common;
 use install::any;
@@ -326,7 +327,7 @@ sub unselectAllPackages {
 
 sub empty_packages {
     my ($o_keep_unrequested_dependencies) = @_;
-    my $packages = new URPM;
+    my $packages = urpm->new;
 
     #- add additional fields used by DrakX.
     @$packages{qw(count media)} = (0, []);
