@@ -12,6 +12,8 @@ use URPM;
 use URPM::Resolve;
 use URPM::Signature;
 use urpm;
+use urpm::args;
+use urpm::main_loop;
 use urpm::select;
 use common;
 use install::any;
@@ -328,11 +330,16 @@ sub unselectAllPackages {
 sub empty_packages {
     my ($o_keep_unrequested_dependencies) = @_;
     my $packages = urpm->new;
+    urpm::get_global_options($packages);
+    urpm::set_files($packages, '/mnt');
 
     #- add additional fields used by DrakX.
     @$packages{qw(count media)} = (0, []);
 
     $packages->{log} = \&log::l;
+    $packages->{info} = \&log::l;
+    $packages->{error} = sub { $::o->ask_warn(undef, $_[0]) };
+    $packages->{fatal} = sub { $::o->ask_warn(undef, $_[0]) };
     $packages->{root} = $::prefix;
     $packages->{prefer_vendor_list} = '/etc/urpmi/prefer.vendor.list';
     $packages->{keep_unrequested_dependencies} =
@@ -785,66 +792,7 @@ sub install {
     #- place (install::steps_gtk.pm,...).
     $callback->($packages, user => undef, install => $nb, $total);
 
-    do {
-	my @transToInstall = _installTransactionClosure($packages, \%packages, $isUpgrade);
-	$nb = values %packages;
-
-	#- added to exit typically after last media unselected.
-	if ($nb == 0 && scalar(@transToInstall) == 0) {
-	    _cleanHeaders();
-
-	    fs::loopback::save_boot($loop_boot);
-	    return;
-	}
-
-	#- extract headers for parent as they are used by callback.
-	extractHeaders(\@transToInstall, $packages->{media});
-
-	my ($retry, $retry_count);
-	while (@transToInstall) {
-	    my $retry_pkg = $retry && $transToInstall[0];
-
-	    if ($retry) {
-		log::l("retrying installing package " . $retry_pkg->fullname . " alone in a transaction ($retry_count)");
-	    }
-	    _install_raw($packages, [ $retry ? $retry_pkg : @transToInstall ],
-			 $isUpgrade, $callback, $LOG, $retry_pkg);
-
-	    @transToInstall = _filter_packages($retry, $packages, @transToInstall);
-
-	    if (@transToInstall) {
-		if (!$retry || $retry_pkg != $transToInstall[0]) {
-		    #- go to next
-		    $retry_count = 1;
-		} elsif ($retry_pkg == $transToInstall[0] && $retry_count < 3) {
-		    $retry_count++;
-		} else {
-		    log::l("failed to install " . $retry_pkg->fullname);
-
-		    my $medium = packageMedium($packages, $retry_pkg);
-		    my $name = $retry_pkg->fullname;
-		    my $rc = cdie("error installing package list: $name $medium->{name}");
-		    if ($rc eq 'retry') {
-			$retry_count = 1;
-		    } else {
-			if ($rc eq 'disable_media') {
-			    $medium->{selected} = 0;
-			}
-			$retry_pkg->set_flag_requested(0);
-			$retry_pkg->set_flag_required(0);
-
-			#- dropping it
-			$retry_pkg->free_header;
-			shift @transToInstall;
-			$retry_count = 1;
-		    }
-		}
-		$retry = 1;
-	    }
-	}
-	log::l("progression: $nb remaining packages to install");
-	_cleanHeaders();
-    } while $nb > 0 && !$install::pkgs::cancel_install;
+    _install_raw($packages, $isUpgrade, $callback, $LOG, 0);
 
     log::l("closing install.log file");
     close $LOG;
@@ -856,7 +804,7 @@ sub install {
 }
 
 sub _install_raw {
-    my ($packages, $transToInstall, $isUpgrade, $callback, $LOG, $noscripts) = @_;
+    my ($packages, $isUpgrade, $callback, $LOG, $noscripts) = @_;
 
     my $close = sub {
 	my ($pkg) = @_;
@@ -873,23 +821,26 @@ sub _install_raw {
     };
 
     my $db = open_rpm_db_rw() or die "error opening RPM database: ", URPM::rpmErrorString();
-    my $trans = $db->create_transaction($::prefix);
 
-    log::l("opened rpm database for transaction of " . int(@$transToInstall) . " packages (isUpgrade=$isUpgrade)");
-    foreach (@$transToInstall) {
-	$trans->add($_, update => $isUpgrade ? 1 : 0)
-	  or log::l("add failed for " . $_->fullname);
-    }
 
-    my @checks = $trans->check; @checks and log::l("check failed : " . join("\n               ", @checks));
-    $trans->order or die "error ordering package list: " . URPM::rpmErrorString();
-    $trans->set_script_fd(fileno $LOG);
+
+    # let's be urpmi's compatible:
+    local $packages->{options}{noscripts} = $noscripts;
+    $urpm::args::options{force_transactions} = 1;
+    local $packages->{options}{ignoresize} = 1;
+    local $packages->{options}{script_fd} = fileno $LOG;
+    local $packages->{options}{'priority-upgrade'};  # prevent priority upgrade
+    # log $trans->add() faillure; FIXME: should we override *urpm::msg::sys_log?
+    local $packages->{error} = \&log::l;
+    local $packages->{debug} = \&log::l;
+
+    my ($retry, $retry_count);
 
     log::l("rpm transactions start");
     my $fd; #- since we return the "fileno", perl does not know we're still using it, and so closes it, and :-(
-    my @probs = $trans->run($packages, force => 1, nosize => 1, 
-			    if_($noscripts, noscripts => 1),
-			    callback_open => sub {
+
+    my $exit_code = urpm::main_loop::run($packages, $packages->{state}, undef, undef, undef, {
+        open_unused => sub {
 				my ($packages, $_type, $id) = @_;
 				&$callback;
 				my $pkg = defined $id && $packages->{depslist}[$id];
@@ -899,7 +850,7 @@ sub _install_raw {
 				undef $fd;
 				$fd = getFile_($medium->{phys_medium}, $f);
 				$fd ? fileno $fd : -1;
-			    }, callback_close => sub {
+        }, close_unused => sub {
 				my ($packages, $_type, $id) = @_;
 				&$callback;
 				my $pkg = defined $id && $packages->{depslist}[$id] or return;
@@ -910,11 +861,37 @@ sub _install_raw {
 						  });
 				$check_installed or log::l($pkg->name . " not installed, " . URPM::rpmErrorString());
 				$check_installed and $close->($pkg);
-			    }, callback_inst => $callback,
-			);
+        }, inst => $callback,
+        trans => $callback,
+        # FIXME: implement already_installed_or_not_installable
+        bad_signature => sub {
+            my ($msg, $msg2) = @_;
+            $msg =~ s/:$/\n\n/m; # FIXME: to be fixed in urpmi after 2008.0 (sic!)
+            interactive->vnew->ask_yesorno(N("Warning"), "$msg\n\n$msg2");
+        },
+        ask_retry => sub {
+        },
+        copy_removable => sub {
+            my ($medium) = @_;
+            $::o->ask_change_cd($medium);
+        },
+        trans_error_summary => sub {
+            my ($nok, $errors) = @_;
+            log::l("%d installation transactions failed", $nok);
+            die "installation of rpms failed:\n  " . join("\n", @$errors);
+        },
+        message => sub {
+            my ($title, $message) = @_;
+            interactive->vnew->ask_warn($title, $message);
+        },
+        ask_yes_or_no => sub {
+            my ($title, $msg) = @_;
+            interactive->vnew->ask_yesorno($title, $msg);
+        },
+        # Uneeded callbacks: success_summary
+    });
+          
     log::l("transactions done, now trying to close still opened fd");
-
-    @probs and die "installation of rpms failed:\n  ", join("\n  ", @probs);
 }
 
 sub upgrade_by_removing_pkgs {
