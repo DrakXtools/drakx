@@ -18,14 +18,13 @@ msgstr ""
 "Project-Id-Version: DrakX-tr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-13 16:30+0100\n"
-"PO-Revision-Date: 2009-02-25 23:01+0200\n"
+"PO-Revision-Date: 2009-03-03 00:22+0200\n"
 "Last-Translator: Atilla ÖNTAŞ <atilla_ontas@mandriva.com>\n"
 "Language-Team: Turkish <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 0.3\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=1; plural=0;"
 
 #: drakauth:24 drakauth:26 draksec:163
 #, c-format
@@ -292,10 +291,10 @@ msgstr ""
 msgid ""
 "It would be very useful to attach to your report the output of the following "
 "command: %s."
-msgid_plural ""
 "Things useful to attach to your report are the output of the following "
 "commands: %s."
-msgstr[0] "Şu komutların çıktılarını rapora eklemniz oldukça yararlı olacaktır: %s."
+msgstr "Şu komutun çıktısını rapora eklemeniz oldukça yararlı olacaktır: %s."
+"Şu komutların çıktılarını da rapora eklemeniz yararlı olacaktır: %s."
 
 #: drakbug:163
 #, c-format
@@ -2086,7 +2085,9 @@ msgid ""
 "the GNU/Linux kernel needs to run a calculation loop at boot time to "
 "initialize a timer counter.  Its result is stored as bogomips as a way to "
 "\"benchmark\" the cpu."
-msgstr ""
+msgstr "GNU/Linux çekirdeğinin bir zamanlayıcı sayacı çalıştırabilmesi için açılış sırasında "
+"bir hesaplama döngü yürütmesi gerekli.  Bunun sonucu işlemcinin \"benchmark\" ı "
+"olması için bogomip çeklinde saklanacaktır."
 
 #: harddrake2:70
 #, c-format
@@ -2135,12 +2136,12 @@ msgid "Frequency (MHz)"
 msgstr "Frekans (MHz)"
 
 #: harddrake2:76
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "the CPU frequency in MHz (Megahertz which in first approximation may be "
 "coarsely assimilated to number of instructions the cpu is able to execute "
 "per second)"
-msgstr ""
+msgstr "MHz cinsinden İşlemci frekansı "
 
 #: harddrake2:77
 #, c-format
@@ -2376,19 +2377,19 @@ msgid "Emulated wheel"
 msgstr ""
 
 #: harddrake2:119
-#, fuzzy, c-format
+#, c-format
 msgid "whether the wheel is emulated or not"
-msgstr "Tekerlek Emülasyonlu"
+msgstr "tekerlek taklidi yapılıp yapılmayacağı"
 
 #: harddrake2:120
-#, fuzzy, c-format
+#, c-format
 msgid "the type of the mouse"
-msgstr "Lütfen farenizi deneyin"
+msgstr "fare türü"
 
 #: harddrake2:121
-#, fuzzy, c-format
+#, c-format
 msgid "the name of the mouse"
-msgstr "CPU'nun ismi"
+msgstr "Farenin ismi"
 
 #: harddrake2:122
 #, c-format
@@ -2535,7 +2536,7 @@ msgid "/_About..."
 msgstr "/_Hakkında..."
 
 #: harddrake2:233
-#, fuzzy, c-format
+#, c-format
 msgid "Harddrake"
 msgstr "HardDrake"
 
@@ -2620,9 +2621,9 @@ msgid "LocaleDrake"
 msgstr "LisanDrake"
 
 #: localedrake:44
-#, fuzzy, c-format
+#, c-format
 msgid "You should install the following packages: %s"
-msgstr "%s paketi kuruluyor"
+msgstr "Şu paketleri kurmalısınız: %s"
 
 #. -PO: the following is used to combine packages names. eg: "initscripts, harddrake, yudit"
 #: localedrake:47
@@ -2631,9 +2632,9 @@ msgid ", "
 msgstr ", "
 
 #: logdrake:51
-#, fuzzy, c-format
+#, c-format
 msgid "Mandriva Linux Tools Logs"
-msgstr "Mandriva Araç Kayıtları"
+msgstr "Mandriva Linux Araçları Kayıtları"
 
 #: logdrake:65
 #, c-format
@@ -2829,9 +2830,9 @@ msgid "Xinetd Service"
 msgstr "Xinetd Servisi"
 
 #: logdrake:401
-#, fuzzy, c-format
+#, c-format
 msgid "Configure the mail alert system"
-msgstr "CUPS yazdırma sistemini yapılandır"
+msgstr "E-posta uyarı sistemini yapılandır"
 
 #: logdrake:402
 #, c-format
@@ -2899,11 +2900,9 @@ msgid "Please enter your email address below "
 msgstr "Lütfen e-posta adresinizi aşağıya giriniz "
 
 #: logdrake:438
-#, fuzzy, c-format
+#, c-format
 msgid "and enter the name (or the IP) of the SMTP server you wish to use"
-msgstr ""
-"Yazıcısını kullanmak istediğiniz sunucunun IP adresini ve liman numarasını "
-"giriniz."
+msgstr "ve kullanmak istediğiniz SMTP sunucu adını (veya IP) girin"
 
 #: logdrake:445
 #, c-format
@@ -2940,17 +2939,19 @@ msgid ""
 msgstr ""
 
 #: scannerdrake:51
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SANE packages need to be installed to use scanners.\n"
 "\n"
 "Do you want to install the SANE packages?"
-msgstr "%s paketinin kurulması gerekiyor. Kurulmasını ister misiniz?"
+msgstr "Tarayıcıların kullanılabilmesi için SANE paketlerinin kurulması gerekiyor.\n"
+"\n"
+"SANE paketlerinin kurulmasını ister misiniz?"
 
 #: scannerdrake:55
-#, fuzzy, c-format
+#, c-format
 msgid "Aborting Scannerdrake."
-msgstr "Scannerdrake"
+msgstr "Scannerdrake iptal ediliyor."
 
 #: scannerdrake:60
 #, c-format
@@ -2960,7 +2961,7 @@ msgstr ""
 #: scannerdrake:61
 #, c-format
 msgid "Scannerdrake will not be started now."
-msgstr ""
+msgstr "Scannerdrake şimdi başlatılmayacak."
 
 #: scannerdrake:67 scannerdrake:505
 #, c-format
@@ -2983,9 +2984,9 @@ msgid "The %s is not supported by this version of %s."
 msgstr "%s aygıtı %s sürümlü dağıtımca desteklenmiyor."
 
 #: scannerdrake:104 scannerdrake:115
-#, fuzzy, c-format
+#, c-format
 msgid "Confirmation"
-msgstr "Yapılandırma"
+msgstr "Onaylama"
 
 #: scannerdrake:104
 #, c-format
@@ -2998,44 +2999,44 @@ msgid "%s is not in the scanner database, configure it manually?"
 msgstr "%s tarayıcı veritabanında değil, elle yapılandırmak ister misiniz?"
 
 #: scannerdrake:130
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner configuration"
-msgstr "Uyarı yapılandırması"
+msgstr "Tarayıcı yapılandırması"
 
 #: scannerdrake:131
 #, c-format
 msgid "Select a scanner model (Detected model: %s, Port: %s)"
-msgstr ""
+msgstr "Bir tarayıcı modeli seçin (Algılanan model %s, Port: %s)"
 
 #: scannerdrake:133
 #, c-format
 msgid "Select a scanner model (Detected model: %s)"
-msgstr ""
+msgstr "Bir tarayıcı modeli seçin (Algılanan model %s)"
 
 #: scannerdrake:134
 #, c-format
 msgid "Select a scanner model (Port: %s)"
-msgstr ""
+msgstr "Bir tarayıcı modeli seçin (Port: %s)"
 
 #: scannerdrake:136 scannerdrake:139
 #, c-format
 msgid " (UNSUPPORTED)"
-msgstr ""
+msgstr " (DESTEKLENMİYOR)"
 
 #: scannerdrake:142
-#, fuzzy, c-format
+#, c-format
 msgid "The %s is not supported under Linux."
-msgstr "%s aygıtı %s sürümlü dağıtımca desteklenmiyor."
+msgstr "%s aygıtı Linux tarafından desteklenmiyor."
 
 #: scannerdrake:169 scannerdrake:183
 #, c-format
 msgid "Do not install firmware file"
-msgstr ""
+msgstr "Donanım yazılımı dosyasını kurma"
 
 #: scannerdrake:172 scannerdrake:222
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner Firmware"
-msgstr "Tarayıcı paylaşımı"
+msgstr "Tarayıcı donanımsal yazılımı"
 
 #: scannerdrake:173 scannerdrake:225
 #, c-format
@@ -3079,9 +3080,9 @@ msgid "Floppy Disk"
 msgstr "Disket"
 
 #: scannerdrake:182 scannerdrake:192 scannerdrake:241 scannerdrake:250
-#, fuzzy, c-format
+#, c-format
 msgid "Other place"
-msgstr "Diğer portlar"
+msgstr "Diğer konum"
 
 #: scannerdrake:198
 #, c-format
@@ -3125,9 +3126,9 @@ msgid "Select firmware file for the %s"
 msgstr "%s için firmware dosyasını seçin"
 
 #: scannerdrake:274
-#, fuzzy, c-format
+#, c-format
 msgid "Could not install the firmware file for the %s!"
-msgstr "%s için firmware dosyasını seçin"
+msgstr "%s için donanım yazılımı kurulamıyor!"
 
 #: scannerdrake:287
 #, c-format
@@ -3140,20 +3141,20 @@ msgid "The %s is unsupported"
 msgstr "%s desteklenmiyor"
 
 #: scannerdrake:302
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The %s must be configured by system-config-printer.\n"
 "You can launch system-config-printer from the %s Control Center in Hardware "
 "section."
 msgstr ""
 "%s system-config-printer ile yapılandırılmalı.\n"
-"system-config-printer uygulamasını Mandriva Kontrol Merkezinin Donanım "
+"system-config-printer uygulamasını %s Denetim Merkezinin Donanım "
 "bölümünden çalıştırabilirsiniz."
 
 #: scannerdrake:320
-#, fuzzy, c-format
+#, c-format
 msgid "Setting up kernel modules..."
-msgstr "Kullanıcı bilgilerini oturtuyorum ..."
+msgstr "Çekirdek modülleri kuruluyor..."
 
 #: scannerdrake:330 scannerdrake:337 scannerdrake:367
 #, c-format
@@ -3161,9 +3162,9 @@ msgid "Auto-detect available ports"
 msgstr "Mevcut limanları otomatik algıla"
 
 #: scannerdrake:331 scannerdrake:377
-#, fuzzy, c-format
+#, c-format
 msgid "Device choice"
-msgstr "Eski aygıt dosyası"
+msgstr "Aygıt seçimi"
 
 #: scannerdrake:332 scannerdrake:378
 #, c-format
@@ -3203,17 +3204,17 @@ msgstr ""
 msgid ""
 "More info in the driver's manual page. Run the command \"man sane-%s\" to "
 "read it."
-msgstr ""
+msgstr "Daha fazla bilgi sürücünün el kitabında bulunmaktadır. \"man sane-%s\" komutunu çalıştırarak "
+"okuyabilirsiniz."
 
 #: scannerdrake:409 scannerdrake:418
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After that you may scan documents using \"XSane\" or \"Kooka\" from "
 "Multimedia/Graphics in the applications menu."
 msgstr ""
-"%s tarayıcınızın yapılandırması tamamlandı.\n"
 "Bundan sonra uygulamalar menüsünden Çoklu Ortam/Grafikler altından \"XSane\" "
-"ile dökümanlarınızı tarayabilirsiniz."
+"veya \"Kooka\" ile belgelerinizi tarayabilirsiniz."
 
 #: scannerdrake:413
 #, c-format
@@ -3230,9 +3231,9 @@ msgid ""
 msgstr ""
 
 #: scannerdrake:415
-#, fuzzy, c-format
+#, c-format
 msgid "edit the configuration file /etc/sane.d/%s.conf. "
-msgstr "ToS yapılandırmasını etkinleştir"
+msgstr "/etc/sane.d/%s.conf yapılandırma dosyasını düzenle. "
 
 #: scannerdrake:420
 #, c-format
@@ -3240,7 +3241,7 @@ msgid "Congratulations!"
 msgstr "Tebrikler!"
 
 #: scannerdrake:421
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your %s has been configured.\n"
 "You may now scan documents using \"XSane\" or \"Kooka\" from Multimedia/"
@@ -3248,7 +3249,7 @@ msgid ""
 msgstr ""
 "%s tarayıcınızın yapılandırması tamamlandı.\n"
 "Bundan sonra uygulamalar menüsünden Çoklu Ortam/Grafikler altından \"XSane\" "
-"ile dökümanlarınızı tarayabilirsiniz."
+"veya \"Kooka\" ile belgelerinizi tarayabilirsiniz."
 
 #: scannerdrake:446
 #, c-format
@@ -3282,9 +3283,9 @@ msgid "There are no scanners found which are available on your system.\n"
 msgstr "Bilgisayarınızda hiçbir mevcut tarayıcı bulunamadı.\n"
 
 #: scannerdrake:460
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner Management"
-msgstr "Yazıcı Yönetimi \n"
+msgstr "Tarayıcı Yönetimi"
 
 #: scannerdrake:466
 #, c-format
@@ -3317,9 +3318,9 @@ msgid "This machine"
 msgstr "Bu makine"
 
 #: scannerdrake:595
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner Sharing"
-msgstr "Tarayıcı paylaşımı"
+msgstr "Tarayıcı Paylaşımı"
 
 #: scannerdrake:596
 #, c-format
@@ -3424,17 +3425,19 @@ msgid "These are the machines from which the scanners should be used:"
 msgstr "Liste tarayıcısı kullanılabilecek makineler gösteriliyor:"
 
 #: scannerdrake:954
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "saned needs to be installed to share the local scanner(s).\n"
 "\n"
 "Do you want to install the saned package?"
-msgstr "%s paketinin kurulması gerekiyor. Kurulmasını ister misiniz?"
+msgstr "Yerel tatarıcı(lar)ın paylaştırılabilmesi için saned paketinin kurulması gerekiyor.\n"
+"\n"
+"Saned paketinin kurulmasını ister misiniz?"
 
 #: scannerdrake:958 scannerdrake:962
 #, c-format
 msgid "Your scanner(s) will not be available on the network."
-msgstr ""
+msgstr "Tarayıcıları(nız) ağda görünmeyecek."
 
 #: scannerdrake:961
 #, c-format
@@ -3449,7 +3452,8 @@ msgstr "\"%s\" donanım sınıfındaki bazı aygıtlar kaldırıldı:\n"
 #: service_harddrake:135
 #, c-format
 msgid "- %s was removed\n"
-msgstr ""
+msgstr "- %s kaldırıldı.\n"
+""
 
 #: service_harddrake:138
 #, c-format
@@ -3459,7 +3463,8 @@ msgstr "Bazı aygıtlar eklendi: %s\n"
 #: service_harddrake:139
 #, c-format
 msgid "- %s was added\n"
-msgstr ""
+msgstr "- %s eklendi.\n"
+""
 
 #: service_harddrake:264
 #, c-format
@@ -3472,14 +3477,13 @@ msgid "Hardware changes in \"%s\" class (%s seconds to answer)"
 msgstr ""
 
 #: service_harddrake_confirm:8
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to run the appropriate config tool?"
-msgstr "Yapılandırmanızı denemek ister misiniz?"
+msgstr "Buna uygun yapılandırma aracını çalıştırmak ister misiniz?"
 
 #: ../menu/localedrake-system.desktop.in.h:1
-#, fuzzy
 msgid "System Regional Settings"
-msgstr "Sistem ayarları"
+msgstr "Sistem Bölgesel Ayarları"
 
 #: ../menu/localedrake-system.desktop.in.h:2
 msgid "System wide language & country configurator"
@@ -3490,24 +3494,20 @@ msgid "HardDrake"
 msgstr "HardDrake"
 
 #: ../menu/harddrake.desktop.in.h:2
-#, fuzzy
 msgid "Hardware Central Configuration/information tool"
-msgstr "Ağ Yapılandırması"
+msgstr "Donanım Merkezi Yapılandırma/Bilgilendirme aracı"
 
 #: ../menu/harddrake.desktop.in.h:3
-#, fuzzy
 msgid "Hardware Configuration Tool"
-msgstr "Ağ Yapılandırması"
+msgstr "Donanım Yapılandırma Aracı"
 
 #: ../menu/localedrake-user.desktop.in.h:1
-#, fuzzy
 msgid "Language & country configuration"
-msgstr "Elle yapılandır"
+msgstr "Dil ve Ülke yapılandırması"
 
 #: ../menu/localedrake-user.desktop.in.h:2
-#, fuzzy
 msgid "Regional Settings"
-msgstr "Ayarlar"
+msgstr "Bölgesel Ayarlar"
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "
