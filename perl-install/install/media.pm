@@ -8,6 +8,7 @@ our @EXPORT_OK = qw(getFile_ getAndSaveFile_ getAndSaveFile_media_info packageMe
 use common;
 use fs::type;
 use urpm::download;
+use urpm::media;
 
 #- list of fields for {phys_medium} :
 #-	device
@@ -483,7 +484,11 @@ sub get_media {
     foreach (@$media) {
 	if ($_->{type} eq 'media_cfg') {
 	    my $phys_m = url2mounted_phys_medium($o, $_->{url}, 'media_info');
-	    ($suppl_CDs, $copy_rpms_on_disk) = get_media_cfg($o, $phys_m, $packages, $_->{selected_names}, $_->{force_rpmsrate});
+            my $uri = $phys_m->{method} =~ m!^(ftp|http)://! && $phys_m->{method}
+              || $phys_m->{real_mntpoint} || $phys_m->{url};
+            urpm::media::add_distrib_media($packages, undef, $uri, ask_media => undef); #allmedia => 1
+            _get_compsUsers_pl($phys_m, $_->{force_rpmsrate});
+            ($suppl_CDs, $copy_rpms_on_disk) = eval { _get_media_cfg_options($o, $phys_m) };
 	} elsif ($_->{type} eq 'media') {
 	    my $phys_m = url2mounted_phys_medium($o, $_->{url});
 	    get_standalone_medium($o, $phys_m, $packages, { name => $_->{id} =~ /media=(.*)/ && $1 });
@@ -498,6 +503,13 @@ sub get_media {
 	    log::l("unknown media type $_->{type}, skipping");
 	}
     }
+
+    urpm::media::update_media($packages, distrib => 1, callback => \&urpm::download::sync_logger) or
+        log::l('updating media failed');
+
+    urpm::media::configure($packages);
+    log::l('urpmi completely set up');
+
     log::l("suppl_CDs=$suppl_CDs copy_rpms_on_disk=$copy_rpms_on_disk");
     $suppl_CDs, $copy_rpms_on_disk;
 }
@@ -583,6 +595,23 @@ sub _url2phys_medium {
 	{ url => $url, method => $method };
     }
 }
+
+# shrinked down get_media_cfg() in order to keep optins that urpmi discards:
+sub _get_media_cfg_options {
+    my ($o, $phys_medium) = @_;
+
+    my ($distribconf);
+    if (getAndSaveFile_($phys_medium, 'media_info/media.cfg', '/tmp/media.cfg')) {
+	($distribconf) = _parse_media_cfg('/tmp/media.cfg', $phys_medium);
+    } else {
+        die "media.cfg not found";
+    }
+
+    my $suppl_CDs = exists $o->{supplmedia} ? $o->{supplmedia} : $distribconf->{suppl} || 0;
+
+    $suppl_CDs, $o->{copy_rpms_on_disk};
+}
+
 
 sub get_media_cfg {
     my ($o, $phys_medium, $packages, $selected_names, $force_rpmsrate) = @_;

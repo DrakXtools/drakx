@@ -125,7 +125,7 @@ sub packagesToInstall {
     my ($packages) = @_;
     my @packages;
     foreach (@{$packages->{media}}) {
-	$_->{selected} or next;
+	!$_->{ignore} or next;
 	log::l("examining packagesToInstall of medium $_->{name}");
 	push @packages, grep { $_->flag_selected } install::media::packagesOfMedium($packages, $_);
     }
@@ -142,7 +142,7 @@ sub _packageRequest {
 
     #- check for medium selection, if the medium has not been
     #- selected, the package cannot be selected.
-    packageMedium($packages, $pkg)->{selected} or return;
+    !packageMedium($packages, $pkg)->{ignore} or return;
 
     +{ $pkg->id => 1 };
 }
@@ -633,7 +633,7 @@ sub selectPackagesToUpgrade {
 sub _filter_packages {
     my ($retry, $packages, @packages) = @_;
     grep {
-        if ($_->flag_installed || !packageMedium($packages, $_)->{selected}) {
+        if ($_->flag_installed || packageMedium($packages, $_)->{ignore}) {
             if ($_->name eq 'mdv-rpm-summary' && $_->flag_installed) {
                 install::pkgs::setup_rpm_summary_translations();
             }
