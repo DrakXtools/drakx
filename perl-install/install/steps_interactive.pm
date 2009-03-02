@@ -361,37 +361,18 @@ sub while_suspending_time {
 
 # nb: $file can be a directory
 sub ask_change_cd {
-    my ($o, $phys_m, $o_rel_file) = @_;
+    my ($o, $medium) = @_;
 
-    while_suspending_time($o, sub { ask_change_cd_($o, $phys_m, $o_rel_file) });
+    while_suspending_time($o, sub { ask_change_cd_($o, $medium) });
 }
 
 sub ask_change_cd_ {
-    my ($o, $phys_m, $o_rel_file) = @_;
-
-    local $| = 1; print "\a";
-
-    foreach (1 .. 32) {
-	install::media::umount_phys_medium($phys_m);
-	install::media::openCdromTray($phys_m->{device});
+    my ($o, $medium) = @_;
 
 	$o->ask_okcancel('', N("Change your Cd-Rom!
 Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.
-If you do not have it, press Cancel to avoid installation from this Cd-Rom.", $phys_m->{name}), 1) or return;
+If you do not have it, press Cancel to avoid installation from this Cd-Rom.", $medium), 1) or return;
 
-	foreach (1 .. 7) {
-	    eval { fs::mount::part($phys_m) };
-	    last if $phys_m->{isMounted};
-	    # we must retry since mount will now fail instead of waiting for the drive to recognise the CD (cf #43230)
-	    sleep 2;
-	}
-
-	#- it can be a directory, so don't use -f
-	!$o_rel_file || -e install::media::path($phys_m, $o_rel_file) and return 1;
-
-	log::l("file " . install::media::path($phys_m, $o_rel_file) . " not found");
-    }
-    undef;
 }
 
 sub selectSupplMedia {

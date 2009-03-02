@@ -254,8 +254,8 @@ sub ask_deselect_media__copy_on_disk {
 }
 
 sub ask_change_cd {
-    my (undef, $phys_m, $_o_rel_file) = @_;
-    log::l("change to medium " . install::media::phys_medium_to_string($phys_m) . " refused (it can't be done automatically)");
+    my (undef, $phys_m) = @_;
+    log::l("change to medium $phys_m refused (it can't be done automatically)");
     0;
 }
 
