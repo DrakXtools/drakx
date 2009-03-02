@@ -2,6 +2,7 @@
 
 <from expand="binary">
   ash echo
+  cp curl md5sum <!-- needed by urpmi -->
   cpio gzip bzip2
   <if-not ARCH="ppc">
     fdisk
@@ -339,6 +340,7 @@
   ARCH-linux-thread-multi/Time/HiRes.pm
   ARCH-linux-thread-multi/auto/Time/HiRes/HiRes.so
   bytes.pm
+  bytes_heavy.pl <!-- needed by urpm::mirrors -->
   integer.pm
   overload.pm
   strict.pm
@@ -369,12 +371,22 @@
   MDV/Snapshot/Common.pm
   MDV/Snapshot/Restore.pm
   urpm.pm
+  urpm/args.pm
+  urpm/cdrom.pm
   urpm/cfg.pm
   urpm/download.pm
+  urpm/get_pkgs.pm
+  urpm/install.pm
+  urpm/lock.pm
+  urpm/main_loop.pm
   urpm/md5sum.pm
+  urpm/media.pm
+  urpm/mirrors.pm
   urpm/msg.pm
   urpm/orphans.pm
+  urpm/removable.pm
   urpm/select.pm
+  urpm/signature.pm
   urpm/util.pm
   urpm/sys.pm
   <if set="DEBUG_INSTALL">
