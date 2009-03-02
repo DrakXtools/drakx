@@ -36,37 +36,6 @@ our %compssListDesc = (
    1 => N_("maybe"),
 );
 
-#- constant for small transaction.
-our $limitMinTrans = 13;
-
-
-sub _cleanHeaders() {
-    rm_rf("$::prefix/tmp/headers") if -e "$::prefix/tmp/headers";
-}
-
-#- get all headers from an hdlist file.
-sub extractHeaders {
-    my ($pkgs, $media) = @_;
-    _cleanHeaders();
-
-    foreach my $medium (@$media) {
-	$medium->{selected} or next;
-
-	my @l = grep { $_->id >= $medium->{start} && $_->id <= $medium->{end} } @$pkgs or next;
-	eval {
-	    require packdrake;
-	    my $packer = new packdrake(install::media::hdlist_on_disk($medium), quiet => 1);
-	    $packer->extract_archive("$::prefix/tmp/headers", map { $_->header_filename } @l);
-	};
-	$@ and log::l("packdrake failed: $@");
-    }
-
-    foreach (@$pkgs) {
-	my $f = "$::prefix/tmp/headers/" . $_->header_filename;
-	$_->update_header($f) or log::l("unable to open header file $f"), next;
-    }
-}
-
 #- TODO BEFORE TODO
 #- size and correction size functions for packages.
 my $B = 1.20873;
@@ -717,7 +686,6 @@ sub install {
     log::l("closing install.log file");
     close $LOG;
 
-    _cleanHeaders();
     clean_rpmdb_shared_regions(); #- workaround librpm which is buggy when using librpm rooted and the just installed rooted library
 
     fs::loopback::save_boot($loop_boot);
