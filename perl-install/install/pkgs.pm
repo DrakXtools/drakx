@@ -728,7 +728,6 @@ sub _install_raw {
     my ($retry, $retry_count);
 
     log::l("rpm transactions start");
-    my $fd; #- since we return the "fileno", perl does not know we're still using it, and so closes it, and :-(
 
     my $exit_code = urpm::main_loop::run($packages, $packages->{state}, undef, undef, undef, {
         open_unused => sub {
@@ -736,11 +735,7 @@ sub _install_raw {
 				&$callback;
 				my $pkg = defined $id && $packages->{depslist}[$id];
 				my $medium = packageMedium($packages, $pkg);
-				my $f = $pkg && install::media::rel_rpm_file($medium, $pkg->filename);
 				print $LOG "$f\n";
-				undef $fd;
-				$fd = getFile_($medium->{phys_medium}, $f);
-				$fd ? fileno $fd : -1;
         }, close_unused => sub {
 				my ($packages, $_type, $id) = @_;
 				&$callback;
