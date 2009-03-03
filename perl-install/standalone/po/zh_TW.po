@@ -278,17 +278,15 @@ msgid "Its GDB trace is:"
 msgstr "它的 GDB 追蹤為："
 
 #: drakbug:158
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
 "This will open a web browser window on %s where you'll find a form to fill "
 "in.  The information displayed above will be transferred to that server"
 msgstr ""
 "要回報臭蟲問題，請點選回報的按鈕。\n"
-"這將會在 %s 開啟瀏覽器，並有一表格可填入。\n"
-"以上顯示的資訊將會被傳送到該伺服器。\n"
-"適合附在報告中的有用資訊包含 lspcidrake -v 的結果、核心版本、和 /proc/"
-"cpuinfo."
+" 這將會在 %s 開啟瀏覽器，並有一表格可填入。以上顯示的資訊將會被傳送到該伺服"
+"器。"
 
 #: drakbug:160
 #, c-format
@@ -299,17 +297,16 @@ msgid_plural ""
 "Things useful to attach to your report are the output of the following "
 "commands: %s."
 msgstr[0] ""
-msgstr[1] ""
 
 #: drakbug:163
 #, c-format
 msgid "'%s'"
-msgstr ""
+msgstr "'%s'"
 
 #: drakbug:166
-#, fuzzy, c-format
+#, c-format
 msgid "You should also attach the following files: %s as well as %s."
-msgstr "您應該安裝下列套件： %s"
+msgstr "您應該附上以下的檔案：%s 與 %s。"
 
 #: drakbug:173
 #, c-format
@@ -445,9 +442,9 @@ msgid "Reset"
 msgstr "重設"
 
 #: drakdvb:30
-#, fuzzy, c-format
+#, c-format
 msgid "DVB"
-msgstr "DVD"
+msgstr "DVB"
 
 #: drakdvb:39 harddrake2:100
 #, c-format
@@ -457,12 +454,12 @@ msgstr "取消"
 #: drakdvb:57
 #, c-format
 msgid "%s already exists and its contents will be lost"
-msgstr ""
+msgstr "%s 已經存在而且它的內容將會消失"
 
 #: drakdvb:72
 #, c-format
 msgid "Could not get the list of available channels"
-msgstr ""
+msgstr "無法取得可用的頻道清單"
 
 #: drakdvb:78 draksec:73 drakups:99 harddrake2:370 scannerdrake:66
 #: scannerdrake:70 scannerdrake:78 scannerdrake:319 scannerdrake:368
@@ -474,7 +471,7 @@ msgstr "請稍候"
 #: drakdvb:82
 #, c-format
 msgid "Detecting DVB channels, this will take a few minutes"
-msgstr ""
+msgstr "正在偵測 DVB 頻道，這會需要幾分鐘"
 
 #: drakdvb:83 drakfont:572 drakfont:652 drakfont:736 draksplash:213
 #: drakups:217 logdrake:175
@@ -483,14 +480,14 @@ msgid "Cancel"
 msgstr "取消"
 
 #: drakdvb:121
-#, fuzzy, c-format
+#, c-format
 msgid "Detect Channels"
-msgstr "取消"
+msgstr "尋找頻道"
 
 #: drakdvb:123
-#, fuzzy, c-format
+#, c-format
 msgid "View Channel"
-msgstr "取消"
+msgstr "檢視頻道"
 
 #: drakedm:41
 #, c-format
@@ -1182,7 +1179,7 @@ msgstr "安全層級與檢查"
 #: draksec:114
 #, c-format
 msgid "Configure authentication required to access Mandriva tools"
-msgstr ""
+msgstr "設定存取 Mandiva 工具所需要的認證"
 
 #: draksec:117
 #, c-format
@@ -1427,7 +1424,7 @@ msgstr "文字大小"
 #: draksplash:62
 #, c-format
 msgid "Progress Bar"
-msgstr ""
+msgstr "進度列"
 
 #: draksplash:65
 #, c-format
@@ -1450,9 +1447,9 @@ msgid "Gradient type"
 msgstr "漸層類型"
 
 #: draksplash:78
-#, fuzzy, c-format
+#, c-format
 msgid "Text"
-msgstr "只顯示文字"
+msgstr "文字"
 
 #: draksplash:80
 #, c-format
@@ -3528,248 +3525,3 @@ msgstr "語言與國家設定"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "區域設定"
-
-#~ msgid ""
-#~ "Here, you can setup the security level and administrator of your "
-#~ "machine.\n"
-#~ "\n"
-#~ "\n"
-#~ "The '<span weight=\"bold\">Security Administrator</span>' is the one who "
-#~ "will receive security alerts if the\n"
-#~ "'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
-#~ "username or an email.\n"
-#~ "\n"
-#~ "\n"
-#~ "The '<span weight=\"bold\">Security Level</span>' menu allows you to "
-#~ "select one of the six preconfigured security levels\n"
-#~ "provided with msec. These levels range from '<span weight=\"bold\">poor</"
-#~ "span>' security and ease of use, to\n"
-#~ "'<span weight=\"bold\">paranoid</span>' config, suitable for very "
-#~ "sensitive server applications:\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
-#~ "very\n"
-#~ "easy to use security level. It should only be used for machines not "
-#~ "connected to\n"
-#~ "any network and that are not accessible to everybody.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Standard</span>: This is the standard "
-#~ "security\n"
-#~ "recommended for a computer that will be used to connect to the Internet "
-#~ "as a\n"
-#~ "client.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">High</span>: There are already some\n"
-#~ "restrictions, and more automatic checks are run every night.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Higher</span>: The security is now high "
-#~ "enough\n"
-#~ "to use the system as a server which can accept connections from many "
-#~ "clients. If\n"
-#~ "your machine is only a client on the Internet, you should choose a lower "
-#~ "level.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
-#~ "previous\n"
-#~ "level, but the system is entirely closed and security features are at "
-#~ "their\n"
-#~ "maximum"
-#~ msgstr ""
-#~ "在這裡，您可以設定您電腦的安全層級以及安全性管理者。\n"
-#~ "\n"
-#~ "\n"
-#~ "所謂的 '<span weight=\"bold\">安全性管理者</span>' 是當\n"
-#~ "'<span weight=\"bold\">安全警示</span>' 項目啟用後會收到安全警示的人。他可"
-#~ "以是個使用者名稱或者電子郵件信箱。\n"
-#~ "\n"
-#~ "\n"
-#~ "而 '<span weight=\"bold\">安全層級</span>' 選單則允許您從六個 msec 預先設"
-#~ "定好的安全層級中挑一個來使用。\n"
-#~ "它們的範圍從 '<span weight=\"bold\">鬆散</span>' 的安全性卻容易使用，到\n"
-#~ "'<span weight=\"bold\">偏執</span>' 的設定，適合用於非常敏感的伺服器應"
-#~ "用：\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">鬆散</span>：這是個完全不安全但卻非常容易"
-#~ "使用的安全層級。\n"
-#~ "它只應該供那些不連線到任何網路，也因此無法讓任何人連線到的機器所使用。\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">標準</span>：這是建議用於聯結到網路上作為"
-#~ "客戶端電腦的標準安全層級。\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">高</span>：有一些安全性限制，以及更多每晚"
-#~ "自動執行的檢查。\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">更高</span>：這個安全層級已經讓這個系統足"
-#~ "夠擔負一個\n"
-#~ "接受眾多客戶端連線的伺服器之責任。\n"
-#~ "如果您的機器只是網路上的客戶端，您應該選擇一個低一點的層級。\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">偏執</span>：這與前一個等級類似，但系統是"
-#~ "完全封閉且安全性\n"
-#~ "功能都在最嚴密的程度。"
-
-#~ msgid "(default value: %s)"
-#~ msgstr "(預設值：%s)"
-
-#~ msgid "Security Level:"
-#~ msgstr "安全層級："
-
-#~ msgid "Security Alerts:"
-#~ msgstr "安全警示："
-
-#~ msgid "Security Administrator:"
-#~ msgstr "安全性管理者："
-
-#~ msgid "Basic options"
-#~ msgstr "基本選項"
-
-#~ msgid "Network Options"
-#~ msgstr "網路選項"
-
-#~ msgid "System Options"
-#~ msgstr "系統選項"
-
-#~ msgid "Periodic Checks"
-#~ msgstr "週期性檢查"
-
-#~ msgid "Please wait, setting security level..."
-#~ msgstr "請稍候，正在設定安全層級..."
-
-#~ msgid "Please wait, setting security options..."
-#~ msgstr "請稍後，正在設定安全選項..."
-
-#, fuzzy
-#~ msgid ""
-#~ "The following localization packages do not seem to be useful for your "
-#~ "system:"
-#~ msgstr "需要安裝下列套件：\n"
-
-#, fuzzy
-#~ msgid "Do you want to remove these packages?"
-#~ msgstr "您想要執行適合的設定工具嗎？"
-
-#, fuzzy
-#~ msgid ""
-#~ "The following hardware packages do not seem to be useful for your system:"
-#~ msgstr "需要安裝下列套件：\n"
-
-#~ msgid "Please wait, adding media..."
-#~ msgstr "請稍後，新增媒體中..."
-
-#~ msgid "The change is done, but to be effective you must logout"
-#~ msgstr "變更已經完成，不過您需要重新登入才能夠生效"
-
-#~ msgid "Restart XFS"
-#~ msgstr "重新啟動 XFS 服務"
-
-#~ msgid "Copyright (C) 2001-2008 by Mandriva"
-#~ msgstr "Copyright (C) 2001-2008 by Mandriva"
-
-#~ msgid "Error!"
-#~ msgstr "錯誤！"
-
-#~ msgid "I can not find needed image file `%s'."
-#~ msgstr "我找不到需要的核心映像檔案 %s 。"
-
-#~ msgid "Auto Install Configurator"
-#~ msgstr "自動安裝設定程式"
-
-#~ msgid ""
-#~ "You are about to configure an Auto Install floppy. This feature is "
-#~ "somewhat dangerous and must be used circumspectly.\n"
-#~ "\n"
-#~ "With that feature, you will be able to replay the installation you've "
-#~ "performed on this computer, being interactively prompted for some steps, "
-#~ "in order to change their values.\n"
-#~ "\n"
-#~ "For maximum safety, the partitioning and formatting will never be "
-#~ "performed automatically, whatever you chose during the install of this "
-#~ "computer.\n"
-#~ "\n"
-#~ "Press ok to continue."
-#~ msgstr ""
-#~ "您將要設定自動安裝磁片。這個功能有點危險，請務必慎重使用。\n"
-#~ "\n"
-#~ "經由此功能，您將能夠在將要安裝的電腦上自動進行在這部電腦\n"
-#~ "安裝的動作，有些步驟則能夠停下來以改變一些選項。\n"
-#~ "\n"
-#~ "為了最安全考量, 所有分割區劃分以及格式化動作將不會自動進行，\n"
-#~ "不論您在這部電腦上如何選擇。\n"
-#~ "\n"
-#~ "按下確定以繼續。"
-
-#~ msgid "replay"
-#~ msgstr "重播"
-
-#~ msgid "manual"
-#~ msgstr "手動"
-
-#~ msgid "Automatic Steps Configuration"
-#~ msgstr "自動化步驟設定"
-
-#~ msgid ""
-#~ "Please choose for each step whether it will replay like your install, or "
-#~ "it will be manual"
-#~ msgstr "請選擇每一個安裝的步驟，這些將會是您所操作的安裝過程"
-
-#~ msgid "Insert a blank floppy in drive %s"
-#~ msgstr "請在 %s 中插入一片空白磁片"
-
-#~ msgid "Creating auto install floppy"
-#~ msgstr "正在製作自動安裝磁片"
-
-#~ msgid "Insert another blank floppy in drive %s (for drivers disk)"
-#~ msgstr "請在 %s 中插入一片空白磁片 (作為驅動程式磁片)"
-
-#~ msgid "Creating auto install floppy (drivers disk)"
-#~ msgstr "正在製作自動安裝磁片 (驅動程式磁片)"
-
-#~ msgid ""
-#~ "\n"
-#~ "Welcome.\n"
-#~ "\n"
-#~ "The parameters of the auto-install are available in the sections on the "
-#~ "left"
-#~ msgstr ""
-#~ "\n"
-#~ "歡迎!\n"
-#~ "\n"
-#~ "自動安裝可用的參數項目都在左邊的區域內"
-
-#~ msgid ""
-#~ "The floppy has been successfully generated.\n"
-#~ "You may now replay your installation."
-#~ msgstr ""
-#~ "已經成功建立自動安裝磁片。\n"
-#~ "您可以使用這張磁片進行自動安裝的程序"
-
-#~ msgid "Auto Install"
-#~ msgstr "自動安裝"
-
-#~ msgid "Add an item"
-#~ msgstr "新增項目"
-
-#~ msgid "Remove the last item"
-#~ msgstr "移除之前項目"
-
-#~ msgid "Menudrake"
-#~ msgstr "Mandriva 選單編輯器"
-
-#~ msgid "Msec"
-#~ msgstr "Msec 安全設定偵測"
-
-#~ msgid "Urpmi"
-#~ msgstr "Urpmi 套件管理"
-
-#~ msgid "Userdrake"
-#~ msgstr "Userdrake 使用者管理"
