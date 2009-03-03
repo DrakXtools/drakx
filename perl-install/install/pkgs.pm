@@ -758,7 +758,7 @@ sub _install_raw {
         bad_signature => sub {
             my ($msg, $msg2) = @_;
             $msg =~ s/:$/\n\n/m; # FIXME: to be fixed in urpmi after 2008.0 (sic!)
-            interactive->vnew->ask_yesorno(N("Warning"), "$msg\n\n$msg2");
+            $::o->ask_yesorno(N("Warning"), "$msg\n\n$msg2");
         },
         ask_retry => sub {
         },
@@ -773,11 +773,11 @@ sub _install_raw {
         },
         message => sub {
             my ($title, $message) = @_;
-            interactive->vnew->ask_warn($title, $message);
+            $o->in and $o->in->ask_warn($title, $message);
         },
         ask_yes_or_no => sub {
             my ($title, $msg) = @_;
-            interactive->vnew->ask_yesorno($title, $msg);
+            $o->in and $o->in->ask_yesorno($title, $msg);
         },
         # Uneeded callbacks: success_summary
     });
