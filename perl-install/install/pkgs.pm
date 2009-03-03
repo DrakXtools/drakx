@@ -773,11 +773,11 @@ sub _install_raw {
         },
         message => sub {
             my ($title, $message) = @_;
-            $o->in and $o->in->ask_warn($title, $message);
+            $::o->ask_warn($title, $message);
         },
         ask_yes_or_no => sub {
             my ($title, $msg) = @_;
-            $o->in and $o->in->ask_yesorno($title, $msg);
+            $::o->ask_yesorno($title, $msg);
         },
         # Uneeded callbacks: success_summary
     });
