@@ -1083,13 +1083,11 @@ sub read {
     my $locale = system_locales_to_ourlocale($h{LC_MESSAGES} || 'en_US', $h{LC_MONETARY} || 'en_US');
     
     if (find { $h{$_} } @IM_i18n_fields) {
-	my @l = grep { !/^scim/ || /\(default\)/ } keys %IM_config;
-	foreach my $field ('XMODIFIERS', 'XIM_PROGRAM') {
-	    $h{$field} or next;
-	    my @m = grep { $h{$field} eq $IM_config{$_}{$field} } @l or last;
-	    @l = @m;
-	}
-	$locale->{IM} = $l[0] if @l;
+        my $current_IM = find {
+            my $i = $IM_config{$_};
+            every { !defined $i->{$_} || $h{$_} eq $i->{$_} } ('GTK_IM_MODULE', 'XMODIFIERS', 'XIM_PROGRAM');
+        } keys %IM_config;
+        $locale->{IM} = $current_IM if $current_IM;
     }
     $locale;
 }
