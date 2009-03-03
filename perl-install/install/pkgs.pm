@@ -778,6 +778,8 @@ sub _install_raw {
     });
           
     log::l("transactions done, now trying to close still opened fd; exit code=$exit_code");
+ 
+    $exit_code;
 }
 
 sub upgrade_by_removing_pkgs {
