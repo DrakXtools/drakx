@@ -409,7 +409,7 @@ sub installCallback {
 }
 
 sub installPackages {
-    my ($o) = @_;
+    my ($o, $o_interactive) = @_;
     my $packages = $o->{packages};
 
     install::pkgs::remove_marked_ask_remove($packages, \&installCallback);
@@ -423,6 +423,7 @@ sub installPackages {
 	local $ENV{TMPDIR} = '/tmp';
 	local $ENV{TMP} = '/tmp';
 	local $ENV{HOME};
+	local $packages->{options}{auto} = to_bool($o_interactive);
 	install::pkgs::install($o->{isUpgrade}, \@toInstall, $packages, \&installCallback);
     }
     any::writeandclean_ldsoconf($::prefix);

@@ -649,7 +649,7 @@ sub installPackages {
     };
 
     my $install_result;
-    catch_cdie { $install_result = $o->install::steps::installPackages($packages) }
+    catch_cdie { $install_result = $o->install::steps::installPackages($packages, 'interactive') }
       sub { installPackages__handle_error($o, $_[0]) };
 
     if ($install::pkgs::cancel_install) {
