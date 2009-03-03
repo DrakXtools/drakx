@@ -122,9 +122,9 @@ msgid "Skip"
 msgstr "略過"
 
 #: any.pm:358
-#, fuzzy, c-format
+#, c-format
 msgid "Bootloader Installation"
-msgstr "開機載入程式安裝中"
+msgstr "開機載入程式安裝"
 
 #: any.pm:362
 #, c-format
@@ -144,7 +144,7 @@ msgstr "開機載入程式主要選項"
 #: any.pm:403
 #, c-format
 msgid "Bootloader"
-msgstr "開機載入器"
+msgstr "開機載入程式"
 
 #: any.pm:404 any.pm:433
 #, c-format
@@ -172,9 +172,9 @@ msgid "Enable ACPI"
 msgstr "啟用 ACPI"
 
 #: any.pm:411
-#, fuzzy, c-format
+#, c-format
 msgid "Enable SMP"
-msgstr "啟用 ACPI"
+msgstr "啟用 SMP"
 
 #: any.pm:412
 #, c-format
@@ -359,9 +359,9 @@ msgid "Other OS (Windows...)"
 msgstr "其他作業系統 (Windows...)"
 
 #: any.pm:601
-#, fuzzy, c-format
+#, c-format
 msgid "Bootloader Configuration"
-msgstr "開機樣式組態設定"
+msgstr "開機載入程式組態設定"
 
 #: any.pm:602
 #, c-format
@@ -534,9 +534,9 @@ msgid "Quit"
 msgstr "離開"
 
 #: any.pm:981
-#, fuzzy, c-format
+#, c-format
 msgid "Do you accept this license ?"
-msgstr "您還有其他的嗎？"
+msgstr "您接受這份授權嗎？"
 
 #: any.pm:982
 #, c-format
@@ -938,14 +938,14 @@ msgid "Use DNS to resolve KDCs for realms "
 msgstr ""
 
 #: authentication.pm:151
-#, fuzzy, c-format
+#, c-format
 msgid "Use local file for users information"
-msgstr "啟用「libsafe」防護功能"
+msgstr "使用本地端檔案的使用者資訊"
 
 #: authentication.pm:152
-#, fuzzy, c-format
+#, c-format
 msgid "Use Ldap for users information"
-msgstr "硬碟資訊"
+msgstr "使用 LDAP 的使用者資訊"
 
 #: authentication.pm:158
 #, c-format
@@ -1534,9 +1534,9 @@ msgid "Add to LVM"
 msgstr "加入到 LVM"
 
 #: diskdrake/interactive.pm:408
-#, fuzzy, c-format
+#, c-format
 msgid "Use"
-msgstr "使用者 ID"
+msgstr "使用"
 
 #: diskdrake/interactive.pm:410
 #, c-format
@@ -1554,9 +1554,9 @@ msgid "Remove from LVM"
 msgstr "由 LVM 中移除"
 
 #: diskdrake/interactive.pm:413
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from dm"
-msgstr "由 LVM 中移除"
+msgstr "從 dm 中移除"
 
 #: diskdrake/interactive.pm:414
 #, c-format
@@ -1641,14 +1641,14 @@ msgid "Switching from %s to %s"
 msgstr "正在由 %s 切換至 %s"
 
 #: diskdrake/interactive.pm:616
-#, fuzzy, c-format
+#, c-format
 msgid "Set volume label"
-msgstr "哪一個磁區標籤？"
+msgstr "設定磁區標籤"
 
 #: diskdrake/interactive.pm:616
 #, c-format
 msgid "Beware, this will be written to disk as soon as you validate!"
-msgstr ""
+msgstr "注意，當您確認之後將會立即寫入磁碟！"
 
 #: diskdrake/interactive.pm:618
 #, c-format
@@ -1731,13 +1731,13 @@ msgid "Maximum size: %s MB"
 msgstr "最大容量：%s MB"
 
 #: diskdrake/interactive.pm:794
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
-"為確保重新調整分割區大小後的資料正確性，當您下次從 Windows(TM)\n"
-"開機時便會執行檔案系統檢查。"
+"為確保重新調整分割區大小後的資料正確性，\n"
+" 您下次從 Microsoft Windows® 開機時會執行檔案系統檢查。 "
 
 #: diskdrake/interactive.pm:842 diskdrake/interactive.pm:1386
 #, c-format
@@ -1745,9 +1745,9 @@ msgid "Filesystem encryption key"
 msgstr "檔案系統加密金鑰"
 
 #: diskdrake/interactive.pm:843
-#, fuzzy, c-format
+#, c-format
 msgid "Enter your filesystem encryption key"
-msgstr "選擇您檔案系統所使用的加密金鑰"
+msgstr "請輸入您檔案系統所使用的加密金鑰"
 
 #: diskdrake/interactive.pm:844 diskdrake/interactive.pm:1394
 #, c-format
@@ -1854,9 +1854,9 @@ msgid "Be careful: this operation is dangerous."
 msgstr "請小心：這個動作很危險。"
 
 #: diskdrake/interactive.pm:1098
-#, fuzzy, c-format
+#, c-format
 msgid "Partitioning Type"
-msgstr "分割磁區"
+msgstr "磁區格式"
 
 #: diskdrake/interactive.pm:1098
 #, c-format
@@ -2016,9 +2016,9 @@ msgid "RAID %s\n"
 msgstr "磁碟陣列 %s\n"
 
 #: diskdrake/interactive.pm:1297
-#, fuzzy, c-format
+#, c-format
 msgid "Encrypted"
-msgstr "加密金鑰"
+msgstr "已加密"
 
 #: diskdrake/interactive.pm:1297
 #, c-format
@@ -2277,9 +2277,9 @@ msgid "I do not know how to set label on %s with type %s"
 msgstr "不知道要如何將 %s 格式化為 %s 格式"
 
 #: fs/format.pm:126
-#, fuzzy, c-format
+#, c-format
 msgid "setting label on %s failed"
-msgstr "以 %s 格式化 %s 失敗"
+msgstr "無法在 %s 上設定標籤"
 
 #: fs/format.pm:162
 #, c-format
@@ -3406,7 +3406,7 @@ msgstr "壞選擇，再試一遍\n"
 #: interactive/stdio.pm:30 interactive/stdio.pm:155
 #, c-format
 msgid "Your choice? (default %s) "
-msgstr "您的選擇為？(預設為 %s) "
+msgstr "您的選擇為？(預設為 %s)"
 
 #: interactive/stdio.pm:54
 #, c-format
@@ -3420,7 +3420,7 @@ msgstr ""
 #: interactive/stdio.pm:70
 #, c-format
 msgid "Your choice? (0/1, default `%s') "
-msgstr "您的選擇為？(0/1，預設為 `%s') "
+msgstr "您的選擇為？(0/1，預設為 `%s')"
 
 #: interactive/stdio.pm:97
 #, c-format
@@ -3435,7 +3435,7 @@ msgstr "您要按這個按鈕嗎？"
 #: interactive/stdio.pm:110
 #, c-format
 msgid "Your choice? (default `%s'%s) "
-msgstr "您的選擇為？(預設為 `%s'%s) "
+msgstr "您的選擇為？(預設為 `%s'%s)"
 
 #: interactive/stdio.pm:110
 #, c-format
@@ -5031,7 +5031,7 @@ msgstr "正在安裝 %s 卡的驅動程式 %s"
 #: modules/interactive.pm:99
 #, c-format
 msgid "Configuring Hardware"
-msgstr ""
+msgstr "正在設定硬體"
 
 #: modules/interactive.pm:110
 #, c-format
@@ -5809,7 +5809,7 @@ msgstr "回報檢查結果到 tty"
 #: security/level.pm:10
 #, c-format
 msgid "Disable msec"
-msgstr ""
+msgstr "停用 msec"
 
 #: security/level.pm:11
 #, c-format
@@ -6596,311 +6596,3 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "安裝失敗"
-
-#~ msgid "Welcome To Crackers"
-#~ msgstr "劣"
-
-#~ msgid "Poor"
-#~ msgstr "差"
-
-#~ msgid "High"
-#~ msgstr "高"
-
-#~ msgid "Higher"
-#~ msgstr "較高"
-
-#~ msgid "Paranoid"
-#~ msgstr "嚴密"
-
-#~ msgid ""
-#~ "This level is to be used with care. It makes your system more easy to "
-#~ "use,\n"
-#~ "but very sensitive. It must not be used for a machine connected to "
-#~ "others\n"
-#~ "or to the Internet. There is no password access."
-#~ msgstr ""
-#~ "把安全層級設定在這個等級時必須要非常謹慎，它會讓您的系統容易使用卻極易受"
-#~ "到\n"
-#~ "破壞。這個設定不應該被用在有連線其他機器或網際網路的主機上，因為它沒有密"
-#~ "碼\n"
-#~ "保護。"
-
-#~ msgid ""
-#~ "Passwords are now enabled, but use as a networked computer is still not "
-#~ "recommended."
-#~ msgstr "已啟動密碼認證功能，但仍然不建議將此系統運作於網路上網路環境。"
-
-#~ msgid ""
-#~ "There are already some restrictions, and more automatic checks are run "
-#~ "every night."
-#~ msgstr "包含了相關存取限制，以及每日定期系統稽核檢查動作。"
-
-#~ msgid ""
-#~ "This is similar to the previous level, but the system is entirely closed "
-#~ "and security features are at their maximum."
-#~ msgstr ""
-#~ "與上一個模式相同, 不過整個系統幾乎都是封閉的。系統整個安全設定機制都是在最"
-#~ "嚴密的狀態。"
-
-#~ msgid ""
-#~ "\n"
-#~ "Warning\n"
-#~ "\n"
-#~ "Please read carefully the terms below. If you disagree with any\n"
-#~ "portion, you are not allowed to install the next CD media. Press "
-#~ "'Refuse' \n"
-#~ "to continue the installation without using these media.\n"
-#~ "\n"
-#~ "\n"
-#~ "Some components contained in the next CD media are not governed\n"
-#~ "by the GPL License or similar agreements. Each such component is then\n"
-#~ "governed by the terms and conditions of its own specific license. \n"
-#~ "Please read carefully and comply with such specific licenses before \n"
-#~ "you use or redistribute the said components. \n"
-#~ "Such licenses will in general prevent the transfer,  duplication \n"
-#~ "(except for backup purposes), redistribution, reverse engineering, \n"
-#~ "de-assembly, de-compilation or modification of the component. \n"
-#~ "Any breach of agreement will immediately terminate your rights under \n"
-#~ "the specific license. Unless the specific license terms grant you such\n"
-#~ "rights, you usually cannot install the programs on more than one\n"
-#~ "system, or adapt it to be used on a network. In doubt, please contact \n"
-#~ "directly the distributor or editor of the component. \n"
-#~ "Transfer to third parties or copying of such components including the \n"
-#~ "documentation is usually forbidden.\n"
-#~ "\n"
-#~ "\n"
-#~ "All rights to the components of the next CD media belong to their \n"
-#~ "respective authors and are protected by intellectual property and \n"
-#~ "copyright laws applicable to software programs.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Warning\n"
-#~ "\n"
-#~ "Please read carefully the terms below. If you disagree with any\n"
-#~ "portion, you are not allowed to install the next CD media. Press "
-#~ "'Refuse' \n"
-#~ "to continue the installation without using these media.\n"
-#~ "\n"
-#~ "\n"
-#~ "Some components contained in the next CD media are not governed\n"
-#~ "by the GPL License or similar agreements. Each such component is then\n"
-#~ "governed by the terms and conditions of its own specific license. \n"
-#~ "Please read carefully and comply with such specific licenses before \n"
-#~ "you use or redistribute the said components. \n"
-#~ "Such licenses will in general prevent the transfer,  duplication \n"
-#~ "(except for backup purposes), redistribution, reverse engineering, \n"
-#~ "de-assembly, de-compilation or modification of the component. \n"
-#~ "Any breach of agreement will immediately terminate your rights under \n"
-#~ "the specific license. Unless the specific license terms grant you such\n"
-#~ "rights, you usually cannot install the programs on more than one\n"
-#~ "system, or adapt it to be used on a network. In doubt, please contact \n"
-#~ "directly the distributor or editor of the component. \n"
-#~ "Transfer to third parties or copying of such components including the \n"
-#~ "documentation is usually forbidden.\n"
-#~ "\n"
-#~ "\n"
-#~ "All rights to the components of the next CD media belong to their \n"
-#~ "respective authors and are protected by intellectual property and \n"
-#~ "copyright laws applicable to software programs.\n"
-
-#~ msgid "Use libsafe for servers"
-#~ msgstr "啟用「libsafe」防護功能"
-
-#~ msgid ""
-#~ "A library which defends against buffer overflow and format string attacks."
-#~ msgstr "能夠偵測防禦緩衝區溢位與格式化字串這類攻擊的程式庫套件。"
-
-#~ msgid "LILO/grub Installation"
-#~ msgstr "LILO/GRUB 安裝"
-
-#~ msgid "Precise RAM size if needed (found %d MB)"
-#~ msgstr "若有需要的話，請輸入正確的記憶體大小 (找到 %d MB)"
-
-#~ msgid "Give the ram size in MB"
-#~ msgstr "輸入記憶體大小 (以 MB 為單位)"
-
-#~ msgid ""
-#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
-#~ "is enough)\n"
-#~ "at the beginning of the disk"
-#~ msgstr ""
-#~ "如果您打算使用 aboot 程式的話，請注意您至少需要在磁碟最前端保留一塊可用的"
-#~ "空間 (2048 扇區就足夠了)"
-
-#~ msgid "Security level"
-#~ msgstr "安全層級"
-
-#~ msgid "Expand Tree"
-#~ msgstr "展開樹狀結構"
-
-#~ msgid "Collapse Tree"
-#~ msgstr "縮疊樹狀結構"
-
-#~ msgid "Toggle between flat and group sorted"
-#~ msgstr "切換是否依照群組來加以排序"
-
-#~ msgid "Choose action"
-#~ msgstr "選擇動作"
-
-#~ msgid "Active Directory with SFU:"
-#~ msgstr "支援 SFU 的 Active Directory："
-
-#~ msgid "Active Directory with Winbind:"
-#~ msgstr "支援 Winbind 的 Active Directory："
-
-#~ msgid ""
-#~ "Winbind allows the system to authenticate users in a Windows Active "
-#~ "Directory Server."
-#~ msgstr ""
-#~ "Winbind 允許這個系統在 Windows Active Directory 伺服器上認證使用者。"
-
-#~ msgid "Authentication LDAP"
-#~ msgstr "LDAP 認證"
-
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid "SSL"
-#~ msgstr "SSL"
-
-#~ msgid "security layout (SASL/Kerberos)"
-#~ msgstr "安全性配置 (SASL/Kerberos)"
-
-#~ msgid "Authentication Active Directory"
-#~ msgstr "Active Directory 認證"
-
-#~ msgid "LDAP users database"
-#~ msgstr "LDAP 使用者資料庫"
-
-#~ msgid "LDAP user allowed to browse the Active Directory"
-#~ msgstr "LDAP 使用者將被被允許瀏覽 Active Directory"
-
-#~ msgid "Password for user"
-#~ msgstr "使用者密碼"
-
-#~ msgid "Authentication NIS"
-#~ msgstr "NIS 認證"
-
-#~ msgid ""
-#~ "For this to work for a W2K PDC, you will probably need to have the admin "
-#~ "run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
-#~ "add and reboot the server.\n"
-#~ "You will also need the username/password of a Domain Admin to join the "
-#~ "machine to the Windows(TM) domain.\n"
-#~ "If networking is not yet enabled, Drakx will attempt to join the domain "
-#~ "after the network setup step.\n"
-#~ "Should this setup fail for some reason and domain authentication is not "
-#~ "working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows"
-#~ "(tm) Domain, and Admin Username/Password, after system boot.\n"
-#~ "The command 'wbinfo -t' will test whether your authentication secrets are "
-#~ "good."
-#~ msgstr ""
-#~ "要能夠在 W2K PDC 下正常使用，您或許需要使用管理者權限在 Windows 主機那邊執"
-#~ "行：C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
-#~ "add然後重新啟動伺服器。\n"
-#~ "您另外還需要網域管理者帳號密碼以便於能夠加入機器到 Windows(TM) 網域內。\n"
-#~ "如果網路沒有被啟用，DrakX 程式會於網路設定步驟後企圖加入網域若是這樣設定失"
-#~ "敗且網域認證莫名其妙不能作用的話，執行'smbpasswd -j DOMAIN -U USER%%"
-#~ "PASSWORD' 指令，其中的 DOMAIN 為你的 Windows(tm) 網域名稱，USER 與 "
-#~ "PASSWORD 為管理者的帳號與密碼。\n"
-#~ "最後使用 'wbinfo -t' 測試確認認證功能是否可以正常工作。"
-
-#~ msgid "Authentication Windows Domain"
-#~ msgstr "Windows 網域認證"
-
-#~ msgid "Undo"
-#~ msgstr "復原"
-
-#~ msgid "Save partition table"
-#~ msgstr "寫入硬碟分割表"
-
-#~ msgid "Restore partition table"
-#~ msgstr "回存硬碟分割表"
-
-#~ msgid ""
-#~ "The backup partition table has not the same size\n"
-#~ "Still continue?"
-#~ msgstr ""
-#~ "備份的硬碟分割表有不一樣的大小\n"
-#~ "要繼續嗎？"
-
-#~ msgid "Info: "
-#~ msgstr "資訊："
-
-#~ msgid "Unknown driver"
-#~ msgstr "未知的驅動程式"
-
-#~ msgid "Error reading file %s"
-#~ msgstr "讀取檔案 %s 時發生錯誤"
-
-#~ msgid "Restoring from file %s failed: %s"
-#~ msgstr "試圖從檔案 %s 恢復時發生錯誤：%s"
-
-#~ msgid "Bad backup file"
-#~ msgstr "壞掉的備份檔案"
-
-#~ msgid "Error writing to file %s"
-#~ msgstr "寫入檔案 %s 時發生錯誤"
-
-#~ msgid "Error: The \"%s\" driver for your sound card is unlisted"
-#~ msgstr "錯誤：您的音效卡驅動程式 \"%s\" 不在列表中"
-
-#~ msgid "Ext2"
-#~ msgstr "Ext2"
-
-#~ msgid "Journalised FS"
-#~ msgstr "日誌式檔案系統 (JFS)"
-
-#~ msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
-#~ msgstr "啟動 X Font Server (這是為了 Xorg 執行一定要的)."
-
-#~ msgid "Add user"
-#~ msgstr "新增使用者"
-
-#~ msgid "Accept user"
-#~ msgstr "接受使用者"
-
-#~ msgid "No supermount"
-#~ msgstr "不使用 supermount"
-
-#~ msgid "Supermount"
-#~ msgstr "Supermount"
-
-#~ msgid "Supermount except for CDROM drives"
-#~ msgstr "在光碟機以外的裝置使用 supermount"
-
-#~ msgid "Rescue partition table"
-#~ msgstr "搶救硬碟分割表"
-
-#~ msgid "Removable media automounting"
-#~ msgstr "自動掛載可移除式裝置"
-
-#~ msgid "Trying to rescue partition table"
-#~ msgstr "正在試圖救回硬碟分割表"
-
-#~ msgid "Accept/Refuse bogus IPv4 error messages."
-#~ msgstr "接收/拒絕偽造的 IPv4 錯誤訊息。"
-
-#~ msgid "Accept/Refuse broadcasted icmp echo."
-#~ msgstr "接收/拒絕廣播的 icmp 回應。"
-
-#~ msgid "Accept/Refuse icmp echo."
-#~ msgstr "接收/拒絕 icmp 回應。"
-
-#~ msgid "Allow/Forbid remote root login."
-#~ msgstr "允許/禁止遠端 root 登入。"
-
-#~ msgid "Enable/Disable libsafe if libsafe is found on the system."
-#~ msgstr "若在系統上找到 libsafe 則啟用/停用 libsafe。"
-
-#~ msgid "Enable/Disable the logging of IPv4 strange packets."
-#~ msgstr "啟用/停用記錄奇怪的 IPv4 封包。"
-
-#~ msgid "Number of capture buffers:"
-#~ msgstr "擷取緩衝的數量："
-
-#~ msgid "PLL setting:"
-#~ msgstr "PLL 設定："
-
-#~ msgid "Radio support:"
-#~ msgstr "音效支援："
