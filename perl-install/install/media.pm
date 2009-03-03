@@ -484,7 +484,8 @@ sub get_media {
     foreach (@$media) {
 	if ($_->{type} eq 'media_cfg') {
 	    my $phys_m = url2mounted_phys_medium($o, $_->{url}, 'media_info');
-            my $uri = $phys_m->{method} =~ m!^(ftp|http)://! && $phys_m->{method}
+            my $uri = $o->{stage2_phys_medium}{url} =~ m!^(http|ftp)://! && $o->{stage2_phys_medium}{url} ||
+              $phys_m->{method} =~ m!^(ftp|http)://! && $phys_m->{method}
               || $phys_m->{real_mntpoint} || $phys_m->{url};
             urpm::media::add_distrib_media($packages, undef, $uri, ask_media => undef); #allmedia => 1
             _get_compsUsers_pl($phys_m, $_->{force_rpmsrate});
