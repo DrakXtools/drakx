@@ -730,13 +730,13 @@ sub _install_raw {
     log::l("rpm transactions start");
 
     my $exit_code = urpm::main_loop::run($packages, $packages->{state}, undef, undef, undef, {
-        open_unused => sub {
+        open_helper => sub {
 				my ($packages, $_type, $id) = @_;
 				&$callback;
 				my $pkg = defined $id && $packages->{depslist}[$id];
 				my $medium = packageMedium($packages, $pkg);
 				print $LOG "$f\n";
-        }, close_unused => sub {
+        }, close_helper => sub {
 				my ($packages, $_type, $id) = @_;
 				&$callback;
 				my $pkg = defined $id && $packages->{depslist}[$id] or return;
