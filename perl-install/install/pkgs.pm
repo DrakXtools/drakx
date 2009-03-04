@@ -740,6 +740,10 @@ sub _install_raw {
 						      my ($p) = @_;
 						      $check_installed ||= $pkg->compare_pkg($p) == 0;
 						  });
+                                if ($pkg->name eq 'mdv-rpm-summary' && $check_installed) {
+                                    install::pkgs::setup_rpm_summary_translations();
+                                }
+
 				$check_installed or log::l($pkg->name . " not installed, " . URPM::rpmErrorString());
 				$check_installed and $close->($pkg);
         }, inst => $callback,
