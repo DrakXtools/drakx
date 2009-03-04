@@ -305,7 +305,7 @@ sub empty_packages {
     #- add additional fields used by DrakX.
     @$packages{qw(count media)} = (0, []);
 
-    urpm::args::set_debug($packages) if $o->{debug_urpmi};
+    urpm::args::set_debug($packages) if $::o->{debug_urpmi};
     $packages->{log} = \&log::l;
     $packages->{info} = \&log::l;
     $packages->{error} = sub { $::o->ask_warn(undef, $_[0]) };
