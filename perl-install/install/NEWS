@@ -1,3 +1,5 @@
+- make sure to free package header so that rpmdb can be closed (else
+  we exhaust the max number of opened fd)
 - really set urpmi in automatic mode for non-interactive installs
   (and not vice-versa)
 - use package summary translations once 'mdv-rpm-summary' is installed
