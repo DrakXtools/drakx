@@ -72,6 +72,10 @@ sub read_fstab {
 	}
 	s/\\040/ /g foreach $mntpoint, $dev, $options;
 
+	if ($fs_type eq 'ext4') {
+	    $options = join(",", grep {	!/extents/ } split(',', $options)) || 'defaults';
+	}
+
 	my $h = { 
 		 mntpoint => $mntpoint, fs_type => $fs_type,
 		 options => $options, comment => $comment,
