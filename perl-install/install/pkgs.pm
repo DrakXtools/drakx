@@ -686,6 +686,8 @@ sub install {
     log::l("closing install.log file");
     close $LOG;
 
+    $packages->{state} = {};
+
     clean_rpmdb_shared_regions(); #- workaround librpm which is buggy when using librpm rooted and the just installed rooted library
 
     fs::loopback::save_boot($loop_boot);
