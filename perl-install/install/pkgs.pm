@@ -746,8 +746,6 @@ sub _install_raw {
 
 				$check_installed or log::l($pkg->name . " not installed, " . URPM::rpmErrorString());
 				$check_installed and $close->($pkg);
-                                # prevent rpmdb to remain open:
-                                $pkg->free_header;
         }, inst => $callback,
         trans => $callback,
         # FIXME: implement already_installed_or_not_installable
