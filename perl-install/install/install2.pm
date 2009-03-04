@@ -344,6 +344,7 @@ sub main {
 	    freedriver => sub { $o->{freedriver} = $v },
 	    no_bad_drives => sub { $o->{partitioning}{no_bad_drives} = 1 },
 	    nodmraid  => sub { $o->{partitioning}{nodmraid} = 1 },
+	    debug_urpmi  => sub { $o->{debug_urpmi} = 1 },
 	    readonly  => sub { $o->{partitioning}{readonly} = $v ne "0" },
 	    display   => sub { $o->{display} = $v },
 	    askdisplay => sub { print "Please enter the X11 display to perform the install on ? "; $o->{display} = chomp_(scalar(<STDIN>)) },
