@@ -764,7 +764,10 @@ sub _install_raw {
         trans_error_summary => sub {
             my ($nok, $errors) = @_;
             log::l($nok . " installation transactions failed");
-            die "installation of rpms failed:\n  " . join("\n", @$errors);
+            if (!$packages->{options}{auto}) {
+                $::o->ask_warn(N("Error"), N("%d installation transactions failed", $nok) . "\n\n" .
+                                 N("Installation of packages failed:") . "\n\n" . join("\n", @$errors));
+            }
         },
         message => sub {
             my ($title, $message) = @_;
