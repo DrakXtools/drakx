@@ -423,7 +423,7 @@ sub installPackages {
 	local $ENV{TMPDIR} = '/tmp';
 	local $ENV{TMP} = '/tmp';
 	local $ENV{HOME};
-	local $packages->{options}{auto} = to_bool($o_interactive);
+	local $packages->{options}{auto} = !$o_interactive;
 	install::pkgs::install($o->{isUpgrade}, \@toInstall, $packages, \&installCallback);
     }
     any::writeandclean_ldsoconf($::prefix);
