@@ -716,7 +716,8 @@ sub _install_raw {
     local $packages->{options}{noscripts} = $noscripts;
     $urpm::args::options{force_transactions} = 1;
     local $packages->{options}{ignoresize} = 1;
-    local $packages->{options}{script_fd} = fileno $LOG;
+    # leaks a fd per transaction:
+    #local $packages->{options}{script_fd} = fileno $LOG;
     local $packages->{options}{'priority-upgrade'};  # prevent priority upgrade
     # log $trans->add() faillure; FIXME: should we override *urpm::msg::sys_log?
     local $packages->{error} = \&log::l;
