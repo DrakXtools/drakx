@@ -308,7 +308,10 @@ sub empty_packages {
     urpm::args::set_debug($packages) if $::o->{debug_urpmi};
     $packages->{log} = \&log::l;
     $packages->{info} = \&log::l;
-    $packages->{fatal} = $packages->{error} = sub { $::o->ask_warn(undef, $_[0]) };
+    $packages->{fatal} = $packages->{error} = sub {
+        log::l("urpmi error: $_[0]");
+        $::o->ask_warn(undef, $_[0]);
+    };
     $packages->{root} = $::prefix;
     $packages->{prefer_vendor_list} = '/etc/urpmi/prefer.vendor.list';
     $packages->{keep_unrequested_dependencies} =
