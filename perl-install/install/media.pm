@@ -477,6 +477,20 @@ sub _parse_media_cfg {
     $distribconf, \@hdlists;
 }
 
+sub select_only_some_media {
+    my ($packages, $selected_names) = @_;
+    my @names = split(',', $selected_names);
+    foreach my $m (@{$packages->{media}}) {
+        my $bool = !member($m->{name}, @names);
+        # workaround urpmi transforming "ignore => ''" or "ignore => 0" into "ignore => 1":
+        undef $bool if !$bool;
+        log::l "disabling '$m->{name}' medium: " . to_bool($bool);
+        urpm::media::_tempignore($m, $bool);
+        # make sure we update un-ignored media (eg: */Testing and the like):
+        $m->{modified} = 1 if !$bool;
+    }
+}
+
 sub get_media {
     my ($o, $media, $packages) = @_;
 
@@ -488,6 +502,11 @@ sub get_media {
               $phys_m->{method} =~ m!^(ftp|http)://! && $phys_m->{method}
               || $phys_m->{real_mntpoint} || $phys_m->{url};
             urpm::media::add_distrib_media($packages, undef, $uri, ask_media => undef); #allmedia => 1
+
+            if (defined $_->{selected_names}) {
+                select_only_some_media($packages, $_->{selected_names});
+            }
+
             _get_compsUsers_pl($phys_m, $_->{force_rpmsrate});
             ($suppl_CDs, $copy_rpms_on_disk) = eval { _get_media_cfg_options($o, $phys_m) };
 	} elsif ($_->{type} eq 'media') {
