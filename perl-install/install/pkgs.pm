@@ -729,9 +729,6 @@ sub _install_raw {
     local $packages->{error} = \&log::l;
     local $packages->{debug} = \&log::l;
 
-    # FIXME: package signature checking is disabled for now due to URPM always complaining
-    local $packages->{options}{'verify-rpm'} = 0;
-
     my ($retry, $retry_count);
 
     log::l("rpm transactions start");
