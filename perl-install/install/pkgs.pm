@@ -697,26 +697,24 @@ sub install {
     fs::loopback::save_boot($loop_boot);
 }
 
+sub _unselect_package {
+    my ($pkg) = @_;
+    #- update flag associated to package.
+    $pkg->set_flag_installed(1);
+    $pkg->set_flag_upgrade(0);
+    #- update obsoleted entry.
+    my $rejected = $packages->{state}{rejected};
+    foreach (keys %$rejected) {
+        if (delete $rejected->{$_}{closure}{$pkg->fullname}) {
+            %{$rejected->{$_}{closure}} or delete $rejected->{$_};
+        }
+    }
+}
+
 sub _install_raw {
     my ($packages, $isUpgrade, $callback, $LOG, $noscripts) = @_;
 
-    my $close = sub {
-	my ($pkg) = @_;
-	#- update flag associated to package.
-	$pkg->set_flag_installed(1);
-	$pkg->set_flag_upgrade(0);
-	#- update obsoleted entry.
-	my $rejected = $packages->{state}{rejected};
-	foreach (keys %$rejected) {
-	    if (delete $rejected->{$_}{closure}{$pkg->fullname}) {
-		%{$rejected->{$_}{closure}} or delete $rejected->{$_};
-	    }
-	}
-    };
-
     my $db = open_rpm_db_rw() or die "error opening RPM database: ", URPM::rpmErrorString();
-
-
 
     # let's be urpmi's compatible:
     local $packages->{options}{noscripts} = $noscripts;
@@ -749,7 +747,7 @@ sub _install_raw {
                                 }
 
 				$check_installed or log::l($pkg->name . " not installed, " . URPM::rpmErrorString());
-				$check_installed and $close->($pkg);
+				$check_installed and _unselect_package($pkg);
         }, inst => $callback,
         trans => $callback,
         # FIXME: implement already_installed_or_not_installable
