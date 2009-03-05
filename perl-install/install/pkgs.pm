@@ -724,7 +724,6 @@ sub _install_raw {
     #local $packages->{options}{script_fd} = fileno $LOG;
     local $packages->{options}{'priority-upgrade'};  # prevent priority upgrade
     # log $trans->add() faillure; FIXME: should we override *urpm::msg::sys_log?
-    local $packages->{error} = \&log::l;
     local $packages->{debug} = \&log::l;
 
     my ($retry, $retry_count);
