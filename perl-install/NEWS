@@ -1,7 +1,11 @@
 - handle new drivers
-  o dvb: firedtv
+  o dvb: dm1105, dvb-usb-af9015, dvb-usb-cinergyT2, firedtv
+  o ethernet: smsc9420
   o gigabit: atl1c
-  o wireless: ath9k, rt2860, rt2870 and rtl8187se
+  * pata: cs5536, it8172, it821x
+  o ISDN: hfcpci, hfcmulti, hfcsusb, solos-pci
+  o USB controllers: hwa-hc, whci-hcd
+  o wireless: ath9k, i2400m-usb, rt2860, rt2870 and rtl8187se
 - drakauth:
   o only install and enable pam_ccreds when required (#44027)
 - finish-install:

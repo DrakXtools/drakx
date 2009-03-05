@@ -13,7 +13,7 @@ our %l = (
   ################################################################################
   network => 
   {
-    atm => [ qw(ambassador eni firestream fore_200e he horizon idt77252 iphase lanai nicstar zatm) ],
+    atm => [ qw(ambassador eni firestream fore_200e he horizon idt77252 iphase lanai nicstar solos-pci zatm) ],
     main => [
       if_(arch() =~ /ppc/, qw(bmac fec_mpc52xx ibm_emac mace oaknet sungem)),
       if_(arch() =~ /^sparc/, qw(sunbmac sunhme sunqe)),
@@ -26,7 +26,7 @@ our %l = (
         qw(iph5526), #- fibre channel
         qw(jme lance ne ni5010 ni52 ni65 nvnet),
         qw(prism2_plx qlge r6040 rcpci rhineget),
-        qw(sb1000 sc92031 smc-ultra smc9194 smsc95xx),
+        qw(sb1000 sc92031 smc-ultra smc9194 smsc9420 smsc95xx),
         qw(tc35815 tlan uli526x),
       ),
       if_(arch() !~ /alpha/,
@@ -62,7 +62,7 @@ our %l = (
     wireless => [
       qw(acx-pci acx-usb adm8211 airo airo_cs aironet4500_cs aironet_cs arlan),
       qw(at76_usb ath_pci ath5k ath9k atmel_cs atmel_pci b43 b43legacy bcm43xx com20020_cs dyc_ar5),
-      qw(hostap_cs hostap_pci hostap_plx ipw2100 ipw2200 ipw3945 iwl3945 iwl4965 iwlwifi),
+      qw(hostap_cs hostap_pci hostap_plx i2400m-usb ipw2100 ipw2200 ipw3945 iwl3945 iwl4965 iwlwifi),
       qw(madwifi_pci netwave_cs ndiswrapper orinoco orinoco_cs orinoco_nortel orinoco_pci orinoco_plx orinoco_tmd),
       qw(p54pci p54usb prism2_cs prism2_pci prism2_usb prism54 r8180 ray_cs rndis_wlan),
       qw(rt2400 rt2500 rt2570 rt2860 rt2870 rt61 rt73 rtusb),
@@ -72,6 +72,7 @@ our %l = (
     ],
     isdn => [
       qw(avmfritz c4 cdc-acm b1pci divas hfc4s8s_l1 hfc_usb hfc4s8s_l1 hisax hisax_st5481 hisax_fcpcipnp hysdn sedlfax t1pci tpam w6692pci),
+      qw(hfcpci hfcmulti hfcsusb), # mISDN
       qw(fcpci fcdsl fcdsl fcdsl2 fcdslsl fcdslslusb fcdslusb fcdslusba fcusb fcusb2 fxusb fxusb_CZ)
     ],
     cellular => [
@@ -93,8 +94,8 @@ our %l = (
   {
     # ide drivers compiled as modules:
     ide => [
-        qw(aec62xx ali14xx alim15x3 amd74xx atiixp cmd64x cy82c693 cs5520 cs5530 cs5535),
-        qw(delkin_cb dtc2278 hpt34x hpt366 ns87415 ht6560b it8213 jmicron),
+        qw(aec62xx ali14xx alim15x3 amd74xx atiixp cmd64x cy82c693 cs5520 cs5530 cs5535 cs5536),
+        qw(delkin_cb dtc2278 hpt34x hpt366 ns87415 ht6560b it8172 it8213 it821x jmicron),
         qw(opti621 pdc202xx_new pdc202xx_old piix qd65xx rz1000 sc1200 serverworks siimage sis5513 slc90e66),
         qw(tc86c001 triflex trm290 tx4938ide tx4939ide umc8672 via82cxxx ide-pci-generic ide-generic),
     ],
@@ -145,7 +146,7 @@ our %l = (
 
   bus => 
   {
-    usb => [ qw(ehci-hcd isp116x-hcd isp1760 ohci-hcd r8a66597-hcd sl811_cs sl811-hcd uhci-hcd u132-hcd usb-uhci usb-ohci) ],
+    usb => [ qw(ehci-hcd hwa-hc isp116x-hcd isp1760 ohci-hcd r8a66597-hcd sl811_cs sl811-hcd uhci-hcd u132-hcd usb-uhci usb-ohci whci-hcd.) ],
     bluetooth => [ qw(bcm203x bfusb bpa10x btusb) ],
     firewire => [ qw(ohci1394) ],
     i2c => [
@@ -204,9 +205,9 @@ our %l = (
     ],
     tv => [ qw(bt878 bttv cx23885 cx8800 cx8802 cx88-blackbird dpc7146 ivtv mxb pvrusb2 saa7134 zr36067) ],
     dvb => [
-        qw(b2c2-flexcop-pci b2c2-flexcop-usb budget budget-av budget-ci cinergyT2),
-        qw(dvb-dibusb dvb-ttpci dvb-ttusb-budget dvb-usb-a800 dvb-usb-cxusb),
-        qw(dvb-usb-dib0700 dvb-usb-dibusb-mb dvb-usb-dibusb-mc dvb-usb-digitv dvb-usb-dtt200u),
+        qw(b2c2-flexcop-pci b2c2-flexcop-usb budget budget-av budget-ci cinergyT2 dm1105),
+        qw(dvb-dibusb dvb-ttpci dvb-ttusb-budget dvb-usb-a800 dvb-usb-af9015 dvb-usb-cinergyT2 dvb-usb-cxusb),
+        qw(dvb-usb-dib0700 dvb-usb-dibusb-mb dvb-usb-dibusb-mc dvb-usb-digitv dvb-usb-dtt200u ),
         qw(dvb-usb-gp8ps dvb-usb-nova-t-usb2 dvb-usb-ttusb2 dvb-usb-umt-010 dvb-usb-vp702x dvb-usb-vp7045),
         qw(firedtv hexium_gemini hexium_orion pluto2 skystar2 ttusb_dec),
     ],
