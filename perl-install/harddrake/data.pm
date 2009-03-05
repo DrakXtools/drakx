@@ -326,7 +326,8 @@ our @tree =
       detector => sub { 
           require list_modules;
           my @modules = (list_modules::category2modules('multimedia/webcam'), 'Removable:camera');
-          f(grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO|Video\|Video Control/ && $_->{bus} ne 'PCI' || member($_->{driver}, @modules) } @devices);
+          f(grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO|Video\|Video Control/ && $_->{bus} ne 'PCI'
+                     || member($_->{driver}, @modules) || $_->{driver} =~ /^gpsca/ } @devices);
       },
       # managed by hotplug:
       checked_on_boot => 0,
