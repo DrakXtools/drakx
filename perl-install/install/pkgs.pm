@@ -316,6 +316,11 @@ sub empty_packages {
     $packages->{prefer_vendor_list} = '/etc/urpmi/prefer.vendor.list';
     $packages->{keep_unrequested_dependencies} =
       defined($o_keep_unrequested_dependencies) ? $o_keep_unrequested_dependencies : 1;
+    $urpm::args::options{force_transactions} = 1;
+    $packages->{options}{ignoresize} = 1;
+    $packages->{options}{'priority-upgrade'};  # prevent priority upgrade
+    # log $trans->add() faillure; FIXME: should we override *urpm::msg::sys_log?
+    $packages->{debug} = \&log::l;
 
     $packages;
 }
@@ -718,13 +723,8 @@ sub _install_raw {
 
     # let's be urpmi's compatible:
     local $packages->{options}{noscripts} = $noscripts;
-    $urpm::args::options{force_transactions} = 1;
-    local $packages->{options}{ignoresize} = 1;
     # leaks a fd per transaction:
     #local $packages->{options}{script_fd} = fileno $LOG;
-    local $packages->{options}{'priority-upgrade'};  # prevent priority upgrade
-    # log $trans->add() faillure; FIXME: should we override *urpm::msg::sys_log?
-    local $packages->{debug} = \&log::l;
 
     my ($retry, $retry_count);
 
