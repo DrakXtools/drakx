@@ -155,7 +155,7 @@ sub packageCallbackChoices {
     } elsif (my @l = _packageCallbackChoices_($urpm, $choices, $virtual_pkg_name)) {
 	@l;
     } else {
-	log::l("packageCallbackChoices: default choice from " . join(",", map { $_->name } @$choices) . " for $virtual_pkg_name");
+	log::l("packageCallbackChoices: default choice ('" . $choices->[0]->name . "') from " . join(",", map { $_->name } @$choices) . " for $virtual_pkg_name");
 	$choices->[0];
     }
 }
