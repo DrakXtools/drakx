@@ -501,13 +501,18 @@ sub get_media {
             my $uri = $o->{stage2_phys_medium}{url} =~ m!^(http|ftp)://! && $o->{stage2_phys_medium}{url} ||
               $phys_m->{method} =~ m!^(ftp|http)://! && $phys_m->{method}
               || $phys_m->{real_mntpoint} || $phys_m->{url};
+            # adjust URI for cdroms if needed:
+            if ($o->{stage2_phys_medium}{method} eq 'cdrom') {
+                $uri .= "/" . arch();
+                system('cp', "$uri/media/media_info/compssUsers.pl", '/tmp/compssUsers.pl');
+            } else {
+                _get_compsUsers_pl($phys_m, $_->{force_rpmsrate});
+            }
             urpm::media::add_distrib_media($packages, undef, $uri, ask_media => undef); #allmedia => 1
 
             if (defined $_->{selected_names}) {
                 select_only_some_media($packages, $_->{selected_names});
             }
-
-            _get_compsUsers_pl($phys_m, $_->{force_rpmsrate});
             ($suppl_CDs, $copy_rpms_on_disk) = eval { _get_media_cfg_options($o, $phys_m) };
 	} elsif ($_->{type} eq 'media') {
 	    my $phys_m = url2mounted_phys_medium($o, $_->{url});
