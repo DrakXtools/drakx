@@ -310,7 +310,7 @@ sub empty_packages {
     $packages->{info} = \&log::l;
     $packages->{fatal} = $packages->{error} = sub {
         log::l("urpmi error: $_[0]");
-        $::o->ask_warn(undef, $_[0]);
+        $::o->ask_warn(undef, N("An error occurred:") . "\n\n" . $_[0]);
     };
     $packages->{root} = $::prefix;
     $packages->{prefer_vendor_list} = '/etc/urpmi/prefer.vendor.list';
