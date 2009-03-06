@@ -1,7 +1,7 @@
 /*
- * Pixel (pixel@mandrakesoft.com)
+ * Pixel (pixel@mandriva.com)
  *
- * Copyright 2004 Mandrakesoft
+ * Copyright 2004 Mandriva
  *
  * This software may be freely redistributed under the terms of the GNU
  * public license.

@@ -1,7 +1,7 @@
 Summary: PPP Over Ethernet (xDSL support)
 Name: rp-pppoe
 Version: 3.0
-%if %(%{expand:test %{_vendor} != mandrake ; echo $?})
+%if %(%{expand:test %{_vendor} != mandriva ; echo $?})
 Release: 1mdk
 %else
 Release: 1

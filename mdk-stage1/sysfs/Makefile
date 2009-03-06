@@ -1,6 +1,6 @@
  #******************************************************************************
  #
- # Guillaume Cottenceau (gc@mandrakesoft.com)
+ # Guillaume Cottenceau (gc@mandriva.com)
  # Olivier Blin (blino@mandriva.com)
  #
  # Copyright 2006 Mandriva

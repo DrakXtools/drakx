@@ -1,7 +1,7 @@
 /*
- * Olivier Blin (oblin@mandrakesoft.com)
+ * Olivier Blin (oblin@mandriva.com)
  *
- * Copyright 2005 Mandrakesoft
+ * Copyright 2005 Mandriva
  *
  * This software may be freely redistributed under the terms of the GNU
  * public license.

@@ -4,9 +4,9 @@
  #
  # $Id$
  #
- # Pixel (pixel@mandrakesoft.com) (mostly done by Guillaume Cottenceau)
+ # Pixel (pixel@mandriva.com) (mostly done by Guillaume Cottenceau)
  #
- # Copyright 2000-2004 Mandrakesoft
+ # Copyright 2000-2004 Mandriva
  #
  # This software may be freely redistributed under the terms of the GNU
  # public license.

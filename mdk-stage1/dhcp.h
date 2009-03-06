@@ -1,9 +1,9 @@
 /*
- * Guillaume Cottenceau (gc@mandrakesoft.com)
+ * Guillaume Cottenceau (gc@mandriva.com)
  *
- * Copyright 2000 Mandrakesoft
+ * Copyright 2000 Mandriva
  *
- * View the homepage: http://us.mandrakesoft.com/~gc/html/stage1.html
+ * View the homepage: http://us.mandriva.com/~gc/html/stage1.html
  *
  *
  * This software may be freely redistributed under the terms of the GNU
