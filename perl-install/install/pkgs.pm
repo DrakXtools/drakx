@@ -757,8 +757,6 @@ sub _install_raw {
             log::l($msg2);
             $::o->ask_yesorno(N("Warning"), "$msg\n\n$msg2");
         },
-        ask_retry => sub {
-        },
         copy_removable => sub {
             my ($medium) = @_;
             $::o->ask_change_cd($medium);
