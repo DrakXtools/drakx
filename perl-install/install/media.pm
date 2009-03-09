@@ -503,6 +503,7 @@ sub get_media {
               || $phys_m->{real_mntpoint} || $phys_m->{url};
             # adjust URI for cdroms if needed:
             if ($o->{stage2_phys_medium}{method} eq 'cdrom') {
+                my $arch = arch();
                 $uri .= "/" . ($arch =~ /i.86/ ? $MDK::Common::System::compat_arch{arch()} : arch());
                 system('cp', "$uri/media/media_info/compssUsers.pl", '/tmp/compssUsers.pl');
             } else {
