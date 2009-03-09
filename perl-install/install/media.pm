@@ -621,7 +621,7 @@ sub _url2phys_medium {
     }
 }
 
-# shrinked down get_media_cfg() in order to keep optins that urpmi discards:
+# shrinked down get_media_cfg() in order to keep options that urpmi discards:
 sub _get_media_cfg_options {
     my ($o, $phys_medium) = @_;
 
