@@ -764,6 +764,7 @@ sub _install_raw {
         trans_error_summary => sub {
             my ($nok, $errors) = @_;
             log::l($nok . " installation transactions failed");
+            log::l(join("\n", @$errors));
             if (!$packages->{options}{auto}) {
                 $::o->ask_warn(N("Error"), N("%d installation transactions failed", $nok) . "\n\n" .
                                  N("Installation of packages failed:") . "\n\n" . join("\n", @$errors));
