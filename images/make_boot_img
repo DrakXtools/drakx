@@ -196,7 +196,7 @@ sub initrd {
 	_ "splash -s -f $o_bootsplash_cfg > $tmp_initrd/bootsplash";
     }
 
-    my $devs = sprintf "ls /dev/{%s}", join(',', qw(console fb0 fd0 loop3 mem null ppp ptyp0 ram3 tty[0-7] ttyp0 ttyS0));
+    my $devs = sprintf "ls /dev/{%s}", join(',', qw(console fb0 fd0 loop3 mem null ppp ptyp0 ram3 random tty[0-7] ttyp0 ttyS0 urandom));
 
     _ "(cd $tmp_initrd; (find . ; $devs) | cpio -o -c --quiet) | gzip -9 > $img";
     _ "rm -rf $tmp_initrd";
