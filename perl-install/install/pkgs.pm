@@ -719,8 +719,6 @@ sub _unselect_package {
 sub _install_raw {
     my ($packages, $isUpgrade, $callback, $LOG, $noscripts) = @_;
 
-    my $db = open_rpm_db_rw() or die "error opening RPM database: ", URPM::rpmErrorString();
-
     # let's be urpmi's compatible:
     local $packages->{options}{noscripts} = $noscripts;
     # leaks a fd per transaction:
