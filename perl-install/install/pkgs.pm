@@ -733,7 +733,7 @@ sub _install_raw {
     my $exit_code = urpm::main_loop::run($packages, $packages->{state}, undef, undef, undef, {
         open_helper => $callback,
         close_helper => sub {
-				my ($packages, $_type, $id) = @_;
+				my ($db, $packages, $_type, $id) = @_;
 				&$callback;
 				my $pkg = defined $id && $packages->{depslist}[$id] or return;
 				my $check_installed;
