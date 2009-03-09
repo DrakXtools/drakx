@@ -885,31 +885,6 @@ sub copy_rpms_on_disk {
     our $copied_rpms_on_disk = 1;
 }
 
-sub _install_urpmi__generate_names {
-    my ($packages, $medium) = @_;
-
-    #- build a names file
-    output("$::prefix/var/lib/urpmi/names.$medium->{fakemedium}",
-	   map { $packages->{depslist}[$_]->name . "\n" } $medium->{start} .. $medium->{end});
-}
-sub _install_urpmi__generate_synthesis {
-    my ($packages, $medium) = @_;
-
-    my $synthesis = "/var/lib/urpmi/synthesis.hdlist.$medium->{fakemedium}.cz";
-
-    #- build synthesis file if there are still not existing (ie not copied from mirror).
-    -s "$::prefix$synthesis" <= 32 or return;
-
-    log::l("building $synthesis");
-
-    eval { $packages->build_synthesis(
-	start     => $medium->{start},
-	end       => $medium->{end},
-	synthesis => "$::prefix$synthesis",
-    ) };
-    $@ and log::l("build_synthesis failed: $@");
-}
-
 sub install_urpmi {
     my ($stage2_method, $packages) = @_;
 
@@ -948,9 +923,6 @@ sub install_urpmi {
 	    }
 
 	    $dir = MDK::Common::File::concat_symlink($dir, $medium->{rpmsdir});
-
-	    _install_urpmi__generate_names($packages, $medium);
-	    _install_urpmi__generate_synthesis($packages, $medium);
 
 	    my ($qname, $qdir) = ($medium->{fakemedium}, $dir);
 
