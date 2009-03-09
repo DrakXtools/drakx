@@ -147,7 +147,7 @@ sub create_initial_symlinks() {
 }
 
 sub create_initial_devices() {
-    sys("$sudo cp -a /dev/{mem,null} $SLASH_LOCATION/dev");
+    sys("$sudo cp -a /dev/{mem,null,random,urandom} $SLASH_LOCATION/dev");
 }
 
 sub umount_all() {
