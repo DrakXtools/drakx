@@ -494,10 +494,10 @@ sub select_only_some_media {
 sub get_media {
     my ($o, $media, $packages) = @_;
 
-    my ($suppl_CDs, $copy_rpms_on_disk);
+    my ($suppl_CDs, $copy_rpms_on_disk, $phys_m);
     foreach (@$media) {
 	if ($_->{type} eq 'media_cfg') {
-	    my $phys_m = url2mounted_phys_medium($o, $_->{url}, 'media_info');
+	    $phys_m = url2mounted_phys_medium($o, $_->{url}, 'media_info');
             my $uri = $o->{stage2_phys_medium}{url} =~ m!^(http|ftp)://! && $o->{stage2_phys_medium}{url} ||
               $phys_m->{method} =~ m!^(ftp|http)://! && $phys_m->{method}
               || $phys_m->{real_mntpoint} || $phys_m->{url};
@@ -515,13 +515,13 @@ sub get_media {
             }
             ($suppl_CDs, $copy_rpms_on_disk) = eval { _get_media_cfg_options($o, $phys_m) };
 	} elsif ($_->{type} eq 'media') {
-	    my $phys_m = url2mounted_phys_medium($o, $_->{url});
+	    $phys_m = url2mounted_phys_medium($o, $_->{url});
 	    get_standalone_medium($o, $phys_m, $packages, { name => $_->{id} =~ /media=(.*)/ && $1 });
 	} elsif ($_->{type} eq 'media_cfg_isos') {
 	    my ($dir_url, $iso, $rel_path) = $_->{url} =~ m!(.*)/(.*\.iso):(/.*)! or die "bad media_cfg_isos url $_->{url}";
 	    my $dir_medium = url2mounted_phys_medium($o, $dir_url);
 	    $dir_medium->{options} =~ s/\bnoauto\b,?//;
-	    my $phys_m = _iso_phys_media($dir_medium, $iso, $rel_path);
+	    $phys_m = _iso_phys_media($dir_medium, $iso, $rel_path);
 	    push @{$o->{all_hds}{loopbacks}}, $phys_m;
 	    ($suppl_CDs, $copy_rpms_on_disk) = get_media_cfg($o, $phys_m, $packages, $_->{selected_names}, $_->{force_rpmsrate});
 	} else {
