@@ -694,7 +694,7 @@ sub install {
     log::l("closing install.log file");
     close $LOG;
 
-    # prevent urpmi from trying to install them again:
+    # prevent urpmi from trying to install them again (CHECKME: maybe uneeded):
     $packages->{state} = {};
 
     clean_rpmdb_shared_regions(); #- workaround librpm which is buggy when using librpm rooted and the just installed rooted library
@@ -703,7 +703,7 @@ sub install {
 }
 
 sub _unselect_package {
-    my ($pkg) = @_;
+    my ($packages, $pkg) = @_;
     #- update flag associated to package.
     $pkg->set_flag_installed(1);
     $pkg->set_flag_upgrade(0);
@@ -746,7 +746,7 @@ sub _install_raw {
                                 }
 
 				$check_installed or log::l($pkg->name . " not installed, " . URPM::rpmErrorString());
-				$check_installed and _unselect_package($pkg);
+				$check_installed and _unselect_package($packages, $pkg);
         }, inst => $callback,
         trans => $callback,
         # FIXME: implement already_installed_or_not_installable
