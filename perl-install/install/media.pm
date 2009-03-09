@@ -894,19 +894,6 @@ sub install_urpmi {
     #- clean to avoid opening twice the rpm db.
     delete $packages->{rpmdb};
 
-    #- import pubkey in rpmdb.
-    my $db = install::pkgs::open_rpm_db_rw();
-    foreach my $medium (@media) {
-	URPM::import_needed_pubkeys_from_file($db, $medium->{pubkey}, sub {
-					     my ($id, $imported) = @_;
-					     if ($id) {
-						 log::l(($imported ? "imported" : "found") . " key=$id for medium $medium->{name}");
-						 $medium->{'key-ids'} = $id;
-					     }
-					 });
-	unlink $medium->{pubkey};
-    }
-
     my (@cfg, @netrc);
     foreach my $medium (@media) {
 	if ($medium->{selected}) {
