@@ -532,11 +532,27 @@ sub get_media {
     urpm::media::update_media($packages, distrib => 1, callback => \&urpm::download::sync_logger) or
         log::l('updating media failed');
 
+    _adjust_paths_in_urpmi_cfg($o, $phys_m);
+
     urpm::media::configure($packages);
     log::l('urpmi completely set up');
 
     log::l("suppl_CDs=$suppl_CDs copy_rpms_on_disk=$copy_rpms_on_disk");
     $suppl_CDs, $copy_rpms_on_disk;
+}
+
+sub _adjust_paths_in_urpmi_cfg {
+    my ($o, $phys_m) = @_;
+    if ($o->{stage2_phys_medium}{method} eq 'cdrom') {
+        my $urpm = install::pkgs::empty_packages();
+        # force rereading media:
+        undef $urpm->{media};
+        urpm::media::read_config($urpm);
+        foreach my $medium (@{$urpm->{media}}) {
+            $medium->{url} =~ s!^$phys_m->{real_mntpoint}/!cdrom://!;
+        }
+        urpm::media::write_config($urpm);
+    }
 }
 
 sub remove_from_fstab {
