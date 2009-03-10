@@ -357,7 +357,7 @@ sub create_buttons4partitions {
 # disks: helpers
 ################################################################################
 sub current_hd() { 
-    $current_kind->{type} eq 'hd' or die 'current_hd called but $current_kind is not an hd ('.$current_kind->{type}.')';
+    $current_kind->{type} =~ /hd|lvm/ or die 'current_hd called but $current_kind is not an hd ('.$current_kind->{type}.')';
     $current_kind->{val};
 }
 sub current_part() {
