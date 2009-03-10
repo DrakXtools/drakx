@@ -25,7 +25,7 @@ use urpm::media;
 #-	url
 
 #- list of fields for {media} :
-#-	end (last rpm id, undefined iff not selected)
+#-	end (last rpm id, undefined if not selected)
 #-	fakemedium ("$name ($rpmsdir)", used locally by urpmi)
 #-	rel_hdlist
 #-	key-ids
