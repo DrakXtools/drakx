@@ -505,6 +505,8 @@ sub get_media {
             if ($o->{stage2_phys_medium}{method} eq 'cdrom') {
                 my $arch = arch();
                 $uri .= "/" . ($arch =~ /i.86/ ? $MDK::Common::System::compat_arch{arch()} : arch());
+                # FIXME: investigate why _get_compsUsers_pl($phys_m, $_->{force_rpmsrate}) didn't worked:o
+                system('cp', "$uri/media/media_info/rpmsrate", "/tmp/rpmsrate");
                 system('cp', "$uri/media/media_info/compssUsers.pl", '/tmp/compssUsers.pl');
             } else {
                 _get_compsUsers_pl($phys_m, $_->{force_rpmsrate});
