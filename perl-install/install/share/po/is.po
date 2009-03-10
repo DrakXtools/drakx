@@ -1,17 +1,17 @@
 # Icelandic translation of DrakX.po
 # Translation file for Mandriva Linux graphic install, DrakX
-# Copyright (C) 1999,2003, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
+# Copyright (C) 1999,2003, 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
 #
 #
 # Jóhann Þorvarðarson <johann.torvardarson@lais.is>, 1999-2000.
 # Þórarinn (Tony) R. Einarsson <thori@mindspring.com>, 1999-2000.
-# Pjetur G. Hjaltason <pjetur@pjetur.net>, 2003, 2005, 2006, 2007, 2008.
+# Pjetur G. Hjaltason <pjetur@pjetur.net>, 2003, 2005, 2006, 2007, 2008, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-13 16:29+0100\n"
-"PO-Revision-Date: 2008-02-17 23:41+0000\n"
+"PO-Revision-Date: 2009-03-10 11:42+0000\n"
 "Last-Translator: Pjetur G. Hjaltason <pjetur@pjetur.net>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
 "MIME-Version: 1.0\n"
@@ -71,8 +71,7 @@ msgstr "Slóð verður að byrja á ftp:// eða http://"
 
 #: any.pm:180
 #, c-format
-msgid ""
-"Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr ""
 "Hef samband við Mandriva Linux vefinn til að sækja lista yfir fáanlega "
 "spegla..."
@@ -161,6 +160,12 @@ msgid ""
 "To upgrade with KDE 3.5 and your personal settings preserved, \n"
 "please reboot your system and upgrade using the Mandriva update applet."
 msgstr ""
+"Þú hefur ákveðið að uppfæra kerfið þitt í %s. KDE 3.5 hefur fundist á\n"
+"kerfinu þínu. Þetta uppsetningarforrit getur ekki varðveitt KDE 3.5 uppsetningu.\n"
+"Ef þú velur að halda áfram, þá verður KDE 4 sett upp í stað KDE 3 og persónulegar\n"
+"stillingar tapast.\n"
+"Til að uppfæra með KDE 3.5, og varðveita persónulegar stillingar, endurræstu\n"
+"þá tölvuna þína og notaðu Mandriva bakka-uppfærsluforritið."
 
 #: any.pm:394 steps_interactive.pm:1125
 #, c-format
@@ -170,7 +175,7 @@ msgstr "Endurræsa"
 #: any.pm:394
 #, c-format
 msgid "Proceed"
-msgstr ""
+msgstr "Halda áfram"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: any.pm:584
@@ -294,7 +299,7 @@ msgstr "Keyri niður netið"
 #: media.pm:422
 #, c-format
 msgid "Please wait, retrieving file"
-msgstr ""
+msgstr "Bíðið, sæki skrá"
 
 #: media.pm:705 media.pm:716
 #, c-format
@@ -613,9 +618,9 @@ msgid ""
 msgstr "Gluggastjóri með notendavænum forritum og skjáborðstólum"
 
 #: share/meta-task/compssUsers.pl:145
-#, fuzzy, c-format
+#, c-format
 msgid "LXDE Desktop"
-msgstr "IceWm Skjáborð"
+msgstr "LXDE Skjáborð"
 
 #: share/meta-task/compssUsers.pl:149
 #, c-format
@@ -739,29 +744,29 @@ msgid "Custom install"
 msgstr "Sérsniðin uppsetning"
 
 #: steps_gtk.pm:259
-#, fuzzy, c-format
+#, c-format
 msgid "KDE Desktop"
-msgstr "IceWm Skjáborð"
+msgstr "KDE Skjáborð"
 
 #: steps_gtk.pm:260
-#, fuzzy, c-format
+#, c-format
 msgid "GNOME Desktop"
-msgstr "IceWm Skjáborð"
+msgstr "GNOME Skjáborð"
 
 #: steps_gtk.pm:261
-#, fuzzy, c-format
+#, c-format
 msgid "Custom Desktop"
-msgstr "IceWm Skjáborð"
+msgstr "Sérsniðið Skjáborð"
 
 #: steps_gtk.pm:267
 #, c-format
 msgid "Here's a preview of the '%s' desktop."
-msgstr ""
+msgstr "Hér er forsýn af '%s' skjáborðinu."
 
 #: steps_gtk.pm:295
 #, c-format
 msgid "Click on images in order to see a bigger preview"
-msgstr ""
+msgstr "Smelltu á myndir til að sjá stærri forsýn"
 
 #: steps_gtk.pm:313 steps_interactive.pm:625 steps_list.pm:30
 #, c-format
@@ -906,9 +911,9 @@ msgid "No details"
 msgstr "Engar upplýsingar"
 
 #: steps_gtk.pm:577
-#, fuzzy, c-format
+#, c-format
 msgid "Time remaining:"
-msgstr "Tími eftir "
+msgstr "Tími eftir:"
 
 #: steps_gtk.pm:578
 #, c-format
@@ -938,9 +943,9 @@ msgid "not configured"
 msgstr "ekki stillt"
 
 #: steps_gtk.pm:720
-#, fuzzy, c-format
+#, c-format
 msgid "Media Selection"
-msgstr "Val á pakkahóp"
+msgstr "Val á miðlum"
 
 #: steps_gtk.pm:729 steps_interactive.pm:334
 #, c-format
@@ -980,9 +985,9 @@ msgid "Please choose your keyboard layout"
 msgstr "Veldu lyklaborðs-uppsetningu"
 
 #: steps_interactive.pm:108
-#, fuzzy, c-format
+#, c-format
 msgid "Here is the full list of available keyboards:"
-msgstr "Hér er tæmandi listi af tiltækum lyklaborðum"
+msgstr "Hér er tæmandi listi af tiltækum lyklaborðum:"
 
 #: steps_interactive.pm:139
 #, c-format
@@ -1024,17 +1029,17 @@ msgstr "Dulritunar-lykill fyrir %s"
 #: steps_interactive.pm:207
 #, c-format
 msgid "Cancel installation, reboot system"
-msgstr ""
+msgstr "Hætta við innsetningu, endurræsa kerfi"
 
 #: steps_interactive.pm:208
-#, fuzzy, c-format
+#, c-format
 msgid "New Installation"
-msgstr "Set inn"
+msgstr "Ný Uppsetning"
 
 #: steps_interactive.pm:209
 #, c-format
 msgid "Upgrade previous installation (not recommended)"
-msgstr ""
+msgstr "Uppfæra fyrri uppsetningu (ekki mælt með)"
 
 #: steps_interactive.pm:213
 #, c-format
@@ -1047,6 +1052,11 @@ msgid ""
 "Warning : you should backup all your personal data before choosing \"New\n"
 "Installation\"."
 msgstr ""
+"Uppsetningarforritið hefur ályktað að ekki sé hægt með öryggi að uppfæra Mandriva Linux kerfið þitt í %s.\n"
+"\n"
+"Mælt er með að setja inn nýja uppsetningu sem kemur í stað þeirrar fyrri.\n"
+"\n"
+"Aðvörun : þú ættir að afrita öll persónuleg gögn áður en þú velur \"Ný Uppsetning\"."
 
 #: steps_interactive.pm:255
 #, c-format
@@ -1130,25 +1140,24 @@ msgid "Bad file"
 msgstr "Gölluð skrá"
 
 #: steps_interactive.pm:489
-#, fuzzy, c-format
+#, c-format
 msgid "KDE"
-msgstr "IDE"
+msgstr "KDE"
 
 #: steps_interactive.pm:490
 #, c-format
 msgid "GNOME"
-msgstr ""
+msgstr "GNOME"
 
 #: steps_interactive.pm:493
-#, fuzzy, c-format
+#, c-format
 msgid "Desktop Selection"
-msgstr "Val á pakkahóp"
+msgstr "Val á Skjáborði"
 
 #: steps_interactive.pm:494
-#, fuzzy, c-format
+#, c-format
 msgid "You can choose your workstation desktop profile."
-msgstr ""
-"Þú getur valið grunnsnið vinnustöðvar-umhverfis, KDE, GNOME eða sérsniðið"
+msgstr "Þú getur valið vinnustöðvar-umhverfi (skjáborð)."
 
 #: steps_interactive.pm:580
 #, c-format
@@ -1297,8 +1306,7 @@ msgstr ""
 #: steps_interactive.pm:939
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
-msgstr ""
-"Ekkert hljóðkort fannst. Reyndu að keyra \"harddrake\" eftir uppsetningu"
+msgstr "Ekkert hljóðkort fannst. Reyndu að keyra \"harddrake\" eftir uppsetningu"
 
 #: steps_interactive.pm:947
 #, c-format
@@ -1353,7 +1361,7 @@ msgstr "Set upp ræsistjórann..."
 #: steps_interactive.pm:1042
 #, c-format
 msgid "Be patient, this may take a while..."
-msgstr ""
+msgstr "Verið þolinmóð þetta getur tekið nokkra stund..."
 
 #: steps_interactive.pm:1053
 #, c-format
@@ -1545,91 +1553,25 @@ msgstr "Hætta"
 #: ../../advertising/IM_flash.pl:1
 #, c-format
 msgid "Your desktop on a USB key"
-msgstr ""
+msgstr "Vinnustöðin þín á USB lykli"
 
 #: ../../advertising/IM_free09.pl:1
 #, c-format
 msgid "The 100%% open source Mandriva Linux distribution"
-msgstr ""
+msgstr "Mandriva uppsetningin með 100% frjálsum, opnum hugbúnaði"
 
 #: ../../advertising/IM_one09.pl:1
 #, c-format
 msgid "Explore Linux easily with Mandriva One"
-msgstr ""
+msgstr "Kannaðu Linux einfaldlega með Mandriva One"
 
 #: ../../advertising/IM_pwp09.pl:1
 #, c-format
 msgid "A full Mandriva Linux desktop, with support"
-msgstr ""
+msgstr "Full Mandriva Linux vinnustöð, með þjónustu"
 
 #: ../../advertising/IM_range09.pl:1
 #, c-format
 msgid "Mandriva: distributions for everybody's needs"
-msgstr ""
+msgstr "Mandriva: dreifingar við allra hæfi"
 
-#~ msgid ""
-#~ "You have selected the following server(s): %s\n"
-#~ "\n"
-#~ "\n"
-#~ "These servers are activated by default. They do not have any known "
-#~ "security\n"
-#~ "issues, but some new ones could be found. In that case, you must make "
-#~ "sure\n"
-#~ "to upgrade as soon as possible.\n"
-#~ "\n"
-#~ "\n"
-#~ "Do you really want to install these servers?\n"
-#~ msgstr ""
-#~ "Þú hefur valið eftirfarandi miðlara: %s\n"
-#~ "\n"
-#~ "\n"
-#~ "Þessir miðlarar eru ræstir sjálfkrafa við ræsingu kerfis. Þeir hafa ekki\n"
-#~ "neinar þekktar öryggisvillur, en nýjar kunna að hafa fundist. Í því\n"
-#~ "tilviki verður þú að uppfæra þá eins fljótt og hægt er.\n"
-#~ "\n"
-#~ "\n"
-#~ "Vilt þú raunverulega setja upp þessa miðlara?\n"
-
-#~ msgid "IceWm Desktop"
-#~ msgstr "IceWm Skjáborð"
-
-#~ msgid "Contacting the mirror to get the list of available packages..."
-#~ msgstr "Hef samband við vélina til að sækja lista yfir fáanlega pakka..."
-
-#~ msgid "Unable to contact mirror %s"
-#~ msgstr "Get ekki tengst spegilvél %s"
-
-#~ msgid "Generate auto install floppy"
-#~ msgstr "Búa til diskling fyrir sjálfvirka uppsetningu"
-
-#~ msgid ""
-#~ "The auto install can be fully automated if wanted,\n"
-#~ "in that case it will take over the hard drive!!\n"
-#~ "(this is meant for installing on another box).\n"
-#~ "\n"
-#~ "You may prefer to replay the installation.\n"
-#~ msgstr ""
-#~ "Uppsetningu er hægt að hafa algerlega sjálfvirka,\n"
-#~ "í því tilfelli tekur uppsetningin yfir diskinn!!\n"
-#~ "(þetta er ætlað til uppsetningar á annari tölvu).\n"
-#~ "\n"
-#~ "Þú vilt kannski endurspila uppsetninguna\n"
-
-#~ msgid "Replay"
-#~ msgstr "Spila aftur"
-
-#~ msgid "Automated"
-#~ msgstr "Sjálfvirkt"
-
-#~ msgid "Save packages selection"
-#~ msgstr "Vista val á pökkum"
-
-#~ msgid "Do you want to use aboot?"
-#~ msgstr "Viltu nota aboot?"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Villa við uppsetningu á aboot, \n"
-#~ "reyna að þvinga uppsetningu, þó það eyðileggi fyrstu disksneiðina?"
