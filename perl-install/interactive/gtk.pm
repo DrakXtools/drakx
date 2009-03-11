@@ -770,6 +770,7 @@ sub get_html_file {
           require lang;
           map { ("$_/$id") } map { $_, lc($_) } (split ':', lang::getLANGUAGE($o->{locale}{lang})), '';
       } $url;
+    $url = "file://$url";
     $anchor ? "$url#$anchor" : $url;
 }
 
