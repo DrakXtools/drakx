@@ -668,8 +668,7 @@ sub install {
     my $loop_boot = fs::loopback::prepare_boot();
 
     #- first stage to extract some important information
-    #- about the selected packages. This is used to select
-    #- one or many transactions.
+    #- about the selected packages.
     my ($total, $nb);
     foreach my $pkg (@$toInstall) {
 	$packages{$pkg->id} = $pkg;
