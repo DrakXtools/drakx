@@ -748,7 +748,7 @@ sub filter_widgets {
 my $help_path = "/usr/share/doc/installer-help/";
 
 sub is_help_file_exist {
-    my ($id) = @_;
+    my ($_o, $id) = @_;
     # just ignore anchors:
     $id =~ s/#.*//;
     -e "$help_path/$id.html";
