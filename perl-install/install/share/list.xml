@@ -2,7 +2,7 @@
 
 <from expand="binary">
   ash echo
-  cp curl md5sum <!-- needed by urpmi -->
+  aria2c cp curl md5sum <!-- needed by urpmi -->
   cpio gzip bzip2
   <if-not ARCH="ppc">
     fdisk
