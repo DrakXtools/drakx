@@ -41,7 +41,7 @@ our %l = (
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
-      qw(atl1 atl1c atl1e bnx2 bnx2x cxgb cxgb3 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe myri_sbus netxen_nic ns83820 qla3xxx r8169 s2io sfc sxg sis190 sk98lin skge sky2 spidernet tehuti tg3 via-velocity yellowfin),
+      qw(atl1 atl1c atl1e bnx2 bnx2x cxgb cxgb3 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe myri_sbus netxen_nic ns83820 qla3xxx r8169 s2io sfc sxg sis190 sk98lin skge sky2 spidernet tehuti tg3 via-velocity virtio_net yellowfin),
       qw(bcm5820 bcm5700), #- encrypted
     ],
 
@@ -135,7 +135,7 @@ our %l = (
       ),
     ],
     pcmcia => [ qw(aha152x_cs fdomain_cs nsp_cs qlogic_cs ide-cs pata_pcmcia sym53c500_cs) ],
-    raw => [ qw(ide-disk sd_mod) ],
+    raw => [ qw(ide-disk sd_mod virtio_blk) ],
     usb => [ qw(usb-storage) ],
     firewire => [ qw(sbp2) ],
     cdrom => [ qw(ide-cd_mod sr_mod) ],
@@ -273,6 +273,8 @@ our %l = (
 
       #- these need checking
       qw(rrunner meye),
+
+      qw(virtio_pci, virtio_balloon),
     ],
     agpgart => [
       if_(arch() =~ /alpha/, qw(alpha-agp)),
