@@ -916,7 +916,7 @@ sub install_urpmi {
     my (@cfg, @netrc);
     foreach my $medium (@media) {
 	if ($medium->{selected}) {
-            my ($dir, $removable_device, $static);
+            my ($dir, $removable_device);
 
 	    my $phys_m = $medium->{phys_medium};
             if ($phys_m->{method} eq 'ftp' || $phys_m->{method} eq 'http' || $phys_m->{method} eq 'cdrom') {
@@ -948,8 +948,6 @@ sub install_urpmi {
 	      "  removable: $removable_device"),
 		if_($medium->{update},
 	      "  update"), 
-		if_($static,
-	      "  static"),
 	      "}";
 	} else {
 	    #- remove deselected media by removing copied hdlist and synthesis files
