@@ -930,9 +930,9 @@ sub install_urpmi {
 	    my $phys_m = $medium->{phys_medium};
             $dir = _get_medium_dir($phys_m);
 
-		if ($phys_m->{method} eq 'iso') {
-		    $removable_device = $phys_m->{loopback_device}{mntpoint} . $phys_m->{loopback_file};
-		}
+            if ($phys_m->{method} eq 'iso') {
+                $removable_device = $phys_m->{loopback_device}{mntpoint} . $phys_m->{loopback_file};
+            }
 
 	    $dir = MDK::Common::File::concat_symlink($dir, $medium->{rpmsdir});
 
