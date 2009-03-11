@@ -904,6 +904,15 @@ sub copy_rpms_on_disk {
     our $copied_rpms_on_disk = 1;
 }
 
+sub _get_medium_dir {
+    my ($phys_m) = @_;
+    if ($phys_m->{method} eq 'ftp' || $phys_m->{method} eq 'http' || $phys_m->{method} eq 'cdrom') {
+        $phys_m->{url};
+    } else {
+        "$phys_m->{mntpoint}$phys_m->{rel_path}";
+    }
+}
+
 sub install_urpmi {
     my ($stage2_method, $packages) = @_;
 
@@ -919,14 +928,11 @@ sub install_urpmi {
             my ($dir, $removable_device);
 
 	    my $phys_m = $medium->{phys_medium};
-            if ($phys_m->{method} eq 'ftp' || $phys_m->{method} eq 'http' || $phys_m->{method} eq 'cdrom') {
-		$dir = $phys_m->{url};
-	    } else {
-		$dir = "$phys_m->{mntpoint}$phys_m->{rel_path}";
+            $dir = _get_medium_dir($phys_m);
+
 		if ($phys_m->{method} eq 'iso') {
 		    $removable_device = $phys_m->{loopback_device}{mntpoint} . $phys_m->{loopback_file};
 		}
-	    }
 
 	    $dir = MDK::Common::File::concat_symlink($dir, $medium->{rpmsdir});
 
