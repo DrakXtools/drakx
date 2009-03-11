@@ -1,17 +1,18 @@
 # Icelandic translation of libDrakX.po
+# translation of libDrakX.po to Icelandic
 # Translation file for Mandriva Linux graphic install, DrakX
-# Copyright (C) 1999,2003, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
+# Copyright (C) 1999,2003, 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
 # Copyright (C) 1999 Mandriva
 #
 #
 # Jóhann Þorvarðarson <johann.torvardarson@lais.is>, 1999-2000.
 # Þórarinn (Tony) R. Einarsson <thori@mindspring.com>, 1999-2000.
-# Pjetur G. Hjaltason <pjetur@pjetur.net>, 2003, 2005, 2006, 2007, 2008.
+# Pjetur G. Hjaltason <pjetur@pjetur.net>, 2003, 2005, 2006, 2007, 2008, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
 "POT-Creation-Date: 2009-02-05 19:33-0200\n"
-"PO-Revision-Date: 2008-02-18 17:31+0000\n"
+"PO-Revision-Date: 2009-03-11 15:24+0000\n"
 "Last-Translator: Pjetur G. Hjaltason <pjetur@pjetur.net>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +47,7 @@ msgid ""
 msgstr ""
 "LILO vill setja nýtt diskauðkenni á disk %s. ATHUGIÐ að ef þú breytir\n"
 "diskauðkenni á Windows NT, 2000, eða XP \"ræsidisk\" þá veldur það\n"
-"alvarlegri Windows villu.\n"
+"\"alvarlegri\" Windows villu.\n"
 "Þetta á ekki við Windows 95 eða 98, eða NT gagnadiska.\n"
 "\n"
 "Breyta diskauðkenni?"
@@ -89,19 +90,19 @@ msgstr ""
 "Af hvaða disk ræsir þú?"
 
 #: any.pm:346
-#, fuzzy, c-format
+#, c-format
 msgid "First sector (MBR) of drive %s"
-msgstr "Í ræsifærsluna (MBR)"
+msgstr "Fyrsta geira (MBR) á disk %s"
 
 #: any.pm:348
 #, c-format
 msgid "First sector of drive (MBR)"
-msgstr "Í ræsifærsluna (MBR)"
+msgstr "Á fyrsta geira disks (MBR)"
 
 #: any.pm:350
 #, c-format
 msgid "First sector of the root partition"
-msgstr "Á fyrsta geira rótardisksneiðar"
+msgstr "Á fyrsta geira rótar-disksneiðar"
 
 #: any.pm:352
 #, c-format
@@ -114,14 +115,14 @@ msgid "Skip"
 msgstr "Sleppa"
 
 #: any.pm:358
-#, fuzzy, c-format
+#, c-format
 msgid "Bootloader Installation"
-msgstr "Er að setja upp ræsistjóra"
+msgstr "Innsetning ræsistjóra"
 
 #: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
-msgstr "Hvert viltu setja ræsistjórann?"
+msgstr "Hvar viltu setja ræsistjórann?"
 
 #: any.pm:389
 #, c-format
@@ -164,9 +165,9 @@ msgid "Enable ACPI"
 msgstr "Virkja ACPI"
 
 #: any.pm:411
-#, fuzzy, c-format
+#, c-format
 msgid "Enable SMP"
-msgstr "Virkja ACPI"
+msgstr "Virkja SMP"
 
 #: any.pm:412
 #, c-format
@@ -216,10 +217,8 @@ msgstr "takmarka"
 
 #: any.pm:423
 #, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
-msgstr ""
-"Valkosturinn ``Takmarka alla rofa á skipanalínu'' gerir ekkert án lykilorðs"
+msgid "Option ``Restrict command line options'' is of no use without a password"
+msgstr "Valkosturinn ``Takmarka alla rofa á skipanalínu'' gerir ekkert án lykilorðs"
 
 #: any.pm:425
 #, c-format
@@ -239,7 +238,7 @@ msgstr "Biðtími Open Firmware"
 #: any.pm:437
 #, c-format
 msgid "Kernel Boot Timeout"
-msgstr "Kjarna ræsibið"
+msgstr "Ræsibið kjarna"
 
 #: any.pm:438
 #, c-format
@@ -289,7 +288,7 @@ msgstr "Initrd"
 #: any.pm:523
 #, c-format
 msgid "Network profile"
-msgstr "Net snið"
+msgstr "Netsnið"
 
 #: any.pm:532 any.pm:537 any.pm:539 diskdrake/interactive.pm:402
 #, c-format
@@ -309,7 +308,7 @@ msgstr "NoVideo"
 #: any.pm:552
 #, c-format
 msgid "Empty label not allowed"
-msgstr "Auðkenni má eki vera autt"
+msgstr "Auðkenni má ekki vera autt"
 
 #: any.pm:553
 #, c-format
@@ -319,7 +318,7 @@ msgstr "Þú verður að skilgreina ræsikjarna"
 #: any.pm:553
 #, c-format
 msgid "You must specify a root partition"
-msgstr "Þú verður að tilgreina rótardisksneiðina"
+msgstr "Þú verður að tilgreina rótar-disksneiðina"
 
 #: any.pm:554
 #, c-format
@@ -352,7 +351,7 @@ msgid "Other OS (Windows...)"
 msgstr "Öðru stýrikerfi (Windows...)"
 
 #: any.pm:601
-#, fuzzy, c-format
+#, c-format
 msgid "Bootloader Configuration"
 msgstr "Uppsetning ræsistíls"
 
@@ -362,7 +361,7 @@ msgid ""
 "Here are the entries on your boot menu so far.\n"
 "You can create additional entries or change the existing ones."
 msgstr ""
-"Hérna eru núverandi færslur á ræsivalmynd.\n"
+"Hérna eru núverandi færslur í ræsivalmynd.\n"
 "Þú getur bætt við fleirum eða breytt þessum."
 
 #: any.pm:770
@@ -407,8 +406,7 @@ msgstr "Vinsamlega sláðu inn notandanafn"
 
 #: any.pm:788
 #, c-format
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr "Notandanafnið má bara innihalda litla stafi, tölustafi, `-' og `_'"
 
 #: any.pm:789
@@ -424,7 +422,7 @@ msgstr "Þetta notandanafn er nú þegar til"
 #: any.pm:796 any.pm:828
 #, c-format
 msgid "User ID"
-msgstr "UID notanda"
+msgstr "ID notanda"
 
 #: any.pm:796 any.pm:829
 #, c-format
@@ -459,7 +457,7 @@ msgstr "Skrá notanda"
 #: any.pm:815
 #, c-format
 msgid "Icon"
-msgstr ""
+msgstr "Táknmynd"
 
 #: any.pm:818
 #, c-format
@@ -489,8 +487,7 @@ msgstr "Skrá notanda sjálfkrafa inn"
 #: any.pm:891
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
-msgstr ""
-"Ég get stillt tölvuna þína til að stimpla sjálfkrafa inn ákveðinn notanda."
+msgstr "Ég get stillt tölvuna þína til að stimpla sjálfkrafa inn ákveðinn notanda."
 
 #: any.pm:892
 #, c-format
@@ -528,9 +525,9 @@ msgid "Quit"
 msgstr "Hætta"
 
 #: any.pm:981
-#, fuzzy, c-format
+#, c-format
 msgid "Do you accept this license ?"
-msgstr "Er kannski eitt enn í vélinni?"
+msgstr "Samþykkir þú þessa skilmála ?"
 
 #: any.pm:982
 #, c-format
@@ -540,7 +537,7 @@ msgstr "Samþykkja"
 #: any.pm:982
 #, c-format
 msgid "Refuse"
-msgstr "Neita"
+msgstr "Hafna"
 
 #: any.pm:1008 any.pm:1074
 #, c-format
@@ -556,7 +553,7 @@ msgid ""
 msgstr ""
 "Mandriva Linux getur stutt mörg tungumál.  Veldu tungumál\n"
 "sem þú vilt setja upp stuðning fyrir. Þau verða tiltæk þegar\n"
-"uppsetningu er lokið. og þú endurræsir kerfið."
+"uppsetningu er lokið, og þú hefur endurræst kerfið."
 
 #: any.pm:1040
 #, c-format
@@ -611,7 +608,7 @@ msgstr "Innsláttaraðferð:"
 #: any.pm:1142
 #, c-format
 msgid "None"
-msgstr "Enginn"
+msgstr "Engin"
 
 #: any.pm:1223
 #, c-format
@@ -657,13 +654,11 @@ msgstr ""
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
 "systems."
-msgstr ""
-"SMB: skráarkerfi notað af Windows, Mac OS X og mörgum nýlegum Linux kerfum."
+msgstr "SMB: skráarkerfi notað af Windows, Mac OS X og mörgum nýlegum Linux kerfum."
 
 #: any.pm:1250
 #, c-format
-msgid ""
-"You can export using NFS or SMB. Please select which you would like to use."
+msgid "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Þú getur miðlað með NFS eða SMB. Veldu hvort þú vilt nota."
 
 #: any.pm:1278
@@ -758,7 +753,7 @@ msgstr "Windows Lén"
 #: authentication.pm:30
 #, c-format
 msgid "Kerberos 5"
-msgstr ""
+msgstr "Kerberos 5"
 
 #: authentication.pm:64
 #, c-format
@@ -767,9 +762,8 @@ msgstr "Staðbundin skrá:"
 
 #: authentication.pm:64
 #, c-format
-msgid ""
-"Use local for all authentication and information user tell in local file"
-msgstr ""
+msgid "Use local for all authentication and information user tell in local file"
+msgstr "Nota staðbundna skrá fyrir allar auðkenningar og upplýsingar um notanda"
 
 #: authentication.pm:65
 #, c-format
@@ -816,32 +810,32 @@ msgstr ""
 #: authentication.pm:68
 #, c-format
 msgid "Kerberos 5 :"
-msgstr ""
+msgstr "Kerberos 5 :"
 
 #: authentication.pm:68
 #, c-format
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
-msgstr "Með Kerberos og Ldap fyrir auðkenningu í upplýsingaveitu miðlara"
+msgstr "Með Kerberos og Ldap fyrir auðkenningu í upplýsingaveitu miðlara "
 
 #: authentication.pm:102 authentication.pm:136 authentication.pm:155
 #: authentication.pm:156 authentication.pm:182 authentication.pm:206
 #: authentication.pm:884
 #, c-format
 msgid " "
-msgstr ""
+msgstr " "
 
 #: authentication.pm:103 authentication.pm:137 authentication.pm:183
 #: authentication.pm:207
-#, fuzzy, c-format
+#, c-format
 msgid "Welcome to the Authentication Wizard"
-msgstr "Lénsauðkenningar er þörf"
+msgstr "Velkomin(n) að auðkenningarráðgjafanum"
 
 #: authentication.pm:105
 #, c-format
 msgid ""
 "You have selected LDAP authentication. Please review the configuration "
 "options below "
-msgstr ""
+msgstr "Þú hefur valið LDAP auðkenningu. Athugið stillingarnar hér að neðan "
 
 #: authentication.pm:107 authentication.pm:162
 #, c-format
@@ -849,32 +843,32 @@ msgid "LDAP Server"
 msgstr "LDAP miðlari"
 
 #: authentication.pm:108 authentication.pm:163
-#, fuzzy, c-format
+#, c-format
 msgid "Base dn"
-msgstr "LDAP Grunn-DN"
+msgstr "Grunn-DN"
 
 #: authentication.pm:109
 #, c-format
 msgid "Fetch base Dn "
-msgstr ""
+msgstr "Sækja grunn-Dn "
 
 #: authentication.pm:111 authentication.pm:166
 #, c-format
 msgid "Use encrypt connection with TLS "
-msgstr ""
+msgstr "Nota dulritaða tengingu með TLS "
 
 #: authentication.pm:112 authentication.pm:167
 #, c-format
 msgid "Download CA Certificate "
-msgstr ""
+msgstr "Sækja CA skírteini "
 
 #: authentication.pm:114 authentication.pm:147
 #, c-format
 msgid "Use Disconnect mode "
-msgstr ""
+msgstr "Nota aftengdan ham "
 
 #: authentication.pm:115 authentication.pm:168
-#, fuzzy, c-format
+#, c-format
 msgid "Use anonymous BIND "
 msgstr "Nota nafnlausa tengingu við BIND "
 
@@ -882,74 +876,74 @@ msgstr "Nota nafnlausa tengingu við BIND "
 #: authentication.pm:125
 #, c-format
 msgid "  "
-msgstr ""
+msgstr "  "
 
 #: authentication.pm:117 authentication.pm:169
 #, c-format
 msgid "Bind DN "
-msgstr ""
+msgstr "Bind DN "
 
 #: authentication.pm:118 authentication.pm:170
-#, fuzzy, c-format
+#, c-format
 msgid "Bind Password "
-msgstr "Lykilorð"
+msgstr "Bind Lykilorð "
 
 #: authentication.pm:120
 #, c-format
 msgid "Advanced path for group "
-msgstr ""
+msgstr "slóð fyrir hóp"
 
 #: authentication.pm:122
-#, fuzzy, c-format
+#, c-format
 msgid "Password base"
-msgstr "Lykilorð"
+msgstr "Lykilorðagrunnur"
 
 #: authentication.pm:123
-#, fuzzy, c-format
+#, c-format
 msgid "Group base"
-msgstr "Hópnúmer"
+msgstr "Hópgrunnur"
 
 #: authentication.pm:124
 #, c-format
 msgid "Shadow base"
-msgstr ""
+msgstr "Skuggagrunnur"
 
 #: authentication.pm:139
 #, c-format
 msgid ""
 "You have selected Kerberos 5 authentication. Please review the configuration "
 "options below "
-msgstr ""
+msgstr "Þú hefur valið Kerberos 5 auðkenningu. Athugið stillingarnar hér að neðan "
 
 #: authentication.pm:141
-#, fuzzy, c-format
+#, c-format
 msgid "Realm "
-msgstr "Fullt nafn"
+msgstr "Umdæmi "
 
 #: authentication.pm:143
-#, fuzzy, c-format
+#, c-format
 msgid "KDCs Servers"
-msgstr "LDAP miðlari"
+msgstr "KDC miðlarar"
 
 #: authentication.pm:145
 #, c-format
 msgid "Use DNS to resolve hosts for realms "
-msgstr ""
+msgstr "Nota DNS til að finna vélar í umdæmi "
 
 #: authentication.pm:146
 #, c-format
 msgid "Use DNS to resolve KDCs for realms "
-msgstr ""
+msgstr "Nota DNS til að finna KDC fyrir umdæmi "
 
 #: authentication.pm:151
-#, fuzzy, c-format
+#, c-format
 msgid "Use local file for users information"
-msgstr "Nota libsafe fyrir þjónustur"
+msgstr "Nota staðbundna skrá fyrir upplýsingar um notendur"
 
 #: authentication.pm:152
-#, fuzzy, c-format
+#, c-format
 msgid "Use Ldap for users information"
-msgstr "Sýna upplýsingar um disk"
+msgstr "Nota Ldap fyrir upplýsingar um notendur"
 
 #: authentication.pm:158
 #, c-format
@@ -957,18 +951,20 @@ msgid ""
 "You have selected Kerberos 5 for authentication, now you must choose the "
 "type of users information "
 msgstr ""
+"Þú hefur valið Kerberos 5 fyrir auðkenningu, nú verður þú að velja tegund "
+"upplýsinga um notendur "
 
 #: authentication.pm:164
 #, c-format
 msgid "Fecth base Dn "
-msgstr ""
+msgstr "Sækja grunn-Dn "
 
 #: authentication.pm:185
 #, c-format
 msgid ""
 "You have selected NIS authentication. Please review the configuration "
 "options below "
-msgstr ""
+msgstr "Þú hefur valið NIS auðkenningu. Athugið stillingarnar hér að neðan "
 
 #: authentication.pm:187
 #, c-format
@@ -985,17 +981,17 @@ msgstr "NIS Miðlari"
 msgid ""
 "You have selected Windows Domain authentication. Please review the "
 "configuration options below "
-msgstr ""
+msgstr "Þú hefur valið Windows-Lén auðkenningu. Athugið stillingarnar hér að neðan "
 
 #: authentication.pm:213
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Model "
-msgstr "Lén"
+msgstr "Lénstegund"
 
 #: authentication.pm:215
 #, c-format
 msgid "Active Directory Realm "
-msgstr "Upplýsingaveitu-lén"
+msgstr "Upplýsingaveitu-umdæmi"
 
 #: authentication.pm:231 authentication.pm:247
 #, c-format
@@ -1016,8 +1012,7 @@ msgstr "Ekkert lykilorð"
 #: authentication.pm:259
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
-msgstr ""
-"Þetta lykilorð er of einfalt (það verður að vera a.m.k. %d stafa langt)"
+msgstr "Þetta lykilorð er of stutt (það verður að vera a.m.k. %d stafa langt)"
 
 #: authentication.pm:364
 #, c-format
@@ -1027,12 +1022,12 @@ msgstr "Get ekki notað útvörpun án NIS léns"
 #: authentication.pm:879
 #, c-format
 msgid "Select file"
-msgstr ""
+msgstr "Veljið skrá"
 
 #: authentication.pm:885
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Windows for authentication : "
-msgstr "Lénsauðkenningar er þörf"
+msgstr "Windows-Lén fyrir auðkenningu : "
 
 #: authentication.pm:887
 #, c-format
@@ -1274,7 +1269,7 @@ msgstr "Forsníða diska"
 #: diskdrake/hd_gtk.pm:68
 #, c-format
 msgid "Click on a partition, choose a filesystem type then choose an action"
-msgstr ""
+msgstr "Smelltu á disksneið, veldu tegund skráakerfis og veldu síðan aðgerð"
 
 #: diskdrake/hd_gtk.pm:105 diskdrake/interactive.pm:1082
 #: diskdrake/interactive.pm:1092 diskdrake/interactive.pm:1145
@@ -1285,7 +1280,7 @@ msgstr "Lestu vandlega"
 #: diskdrake/hd_gtk.pm:105
 #, c-format
 msgid "Please make a backup of your data first"
-msgstr "Vinsamlega taktu fyrst afrit af öllum gögnum"
+msgstr "Taktu fyrst afrit af öllum gögnum"
 
 #: diskdrake/hd_gtk.pm:106 diskdrake/interactive.pm:238
 #, c-format
@@ -1311,7 +1306,7 @@ msgid ""
 "(click on it, then click on \"Resize\")"
 msgstr ""
 "Þú hefur eina stóra Microsoft Windows disksneið.\n"
-"Ég legg til að þú breytir henni\n"
+"Ég legg til að þú breytir henni fyrst\n"
 "(smelltu á hana - síðan á \"Breyta stærð\")"
 
 #: diskdrake/hd_gtk.pm:226
@@ -1457,8 +1452,7 @@ msgstr "Viltu vista /etc/fstab breytingar"
 #: diskdrake/interactive.pm:296 fs/partitioning_wizard.pm:250
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr ""
-"Þú verður að ræsa tölvuna aftur svo breytingar á sneiðatöflunni taki gildi"
+msgstr "Þú verður að ræsa tölvuna aftur svo breytingar á sneiðatöflunni taki gildi"
 
 #: diskdrake/interactive.pm:301
 #, c-format
@@ -1494,7 +1488,7 @@ msgstr "Fara í snillingsham"
 #: diskdrake/interactive.pm:333
 #, c-format
 msgid "Hard drive information"
-msgstr "Sýna upplýsingar um disk"
+msgstr "Upplýsingar um disk"
 
 #: diskdrake/interactive.pm:366
 #, c-format
@@ -1518,7 +1512,7 @@ msgstr ""
 #: diskdrake/interactive.pm:379
 #, c-format
 msgid "Reload partition table"
-msgstr "Endurhlaða sneiðatöflunna"
+msgstr "Endurhlaða sneiðatöflunni"
 
 #: diskdrake/interactive.pm:386
 #, c-format
@@ -1528,7 +1522,7 @@ msgstr "Ítarlegri upplýsingar"
 #: diskdrake/interactive.pm:398
 #, c-format
 msgid "View"
-msgstr ""
+msgstr "Skoða"
 
 #: diskdrake/interactive.pm:403 diskdrake/interactive.pm:749
 #, c-format
@@ -1551,9 +1545,9 @@ msgid "Add to LVM"
 msgstr "Bæta við LVM"
 
 #: diskdrake/interactive.pm:408
-#, fuzzy, c-format
+#, c-format
 msgid "Use"
-msgstr "UID notanda"
+msgstr "Nota"
 
 #: diskdrake/interactive.pm:410
 #, c-format
@@ -1571,9 +1565,9 @@ msgid "Remove from LVM"
 msgstr "Taka úr LVM"
 
 #: diskdrake/interactive.pm:413
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from dm"
-msgstr "Taka úr LVM"
+msgstr "Taka úr dm"
 
 #: diskdrake/interactive.pm:414
 #, c-format
@@ -1618,7 +1612,7 @@ msgstr "Valkostur: "
 #: diskdrake/interactive.pm:494
 #, c-format
 msgid "Logical volume name "
-msgstr "Nafn sýndardisks"
+msgstr "Nafn sýndardisks "
 
 #: diskdrake/interactive.pm:514
 #, c-format
@@ -1638,9 +1632,8 @@ msgstr "Fjarlægja sýndardisk-skrá?"
 
 #: diskdrake/interactive.pm:566
 #, c-format
-msgid ""
-"After changing type of partition %s, all data on this partition will be lost"
-msgstr "Eftir breytingu á sneið %s, hafa öll gögn á þessari disksneið tapast"
+msgid "After changing type of partition %s, all data on this partition will be lost"
+msgstr "Eftir breytingu á sneið %s, munu öll gögn á þessari disksneið tapast"
 
 #: diskdrake/interactive.pm:579
 #, c-format
@@ -1658,14 +1651,14 @@ msgid "Switching from %s to %s"
 msgstr "Breyti frá %s í %s"
 
 #: diskdrake/interactive.pm:616
-#, fuzzy, c-format
+#, c-format
 msgid "Set volume label"
-msgstr "Hvaða Diskauðkenni?"
+msgstr "Setja diskauðkenni"
 
 #: diskdrake/interactive.pm:616
 #, c-format
 msgid "Beware, this will be written to disk as soon as you validate!"
-msgstr ""
+msgstr "Aðvörun, þetta verður skrifað á disk um leið og þú staðfestir!"
 
 #: diskdrake/interactive.pm:618
 #, c-format
@@ -1725,8 +1718,7 @@ msgstr "Öll gögn á þessari disksneið ætti að afrita"
 #: diskdrake/interactive.pm:743
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
-msgstr ""
-"Eftir stærðarbreytingu á sneið %s, hafa öll gögn á þessari disksneið tapast"
+msgstr "Eftir stærðarbreytingu á sneið %s, munu öll gögn á þessari disksneið tapast"
 
 #: diskdrake/interactive.pm:750
 #, c-format
@@ -1749,13 +1741,13 @@ msgid "Maximum size: %s MB"
 msgstr "Hámarksstærð: %s MB"
 
 #: diskdrake/interactive.pm:794
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
 "Til að staðfesta að gögn séu í lagi eftir að disksneiðum hefur verið \n"
-"breytt verður að keyra diskaprófun þegar þú ræsir Windows(tm) næst"
+"breytt verður skráakerfisprófun keyrð næst þegar þú ræsir Windows®"
 
 #: diskdrake/interactive.pm:842 diskdrake/interactive.pm:1386
 #, c-format
@@ -1763,9 +1755,9 @@ msgid "Filesystem encryption key"
 msgstr "Dulritunarlykill skráakerfis"
 
 #: diskdrake/interactive.pm:843
-#, fuzzy, c-format
+#, c-format
 msgid "Enter your filesystem encryption key"
-msgstr "Veldu dulritunarlykil fyrir skráakerfið"
+msgstr "Sláðu inn dulritunarlykil fyrir skráakerfið"
 
 #: diskdrake/interactive.pm:844 diskdrake/interactive.pm:1394
 #, c-format
@@ -1775,12 +1767,12 @@ msgstr "Dulritunarlykill"
 #: diskdrake/interactive.pm:851
 #, c-format
 msgid "Invalid key"
-msgstr ""
+msgstr "Ógildur lykill"
 
 #: diskdrake/interactive.pm:859
 #, c-format
 msgid "Choose an existing RAID to add to"
-msgstr "Veldu RAID sem til er fyrir til að bæta við"
+msgstr "Veldu virkt RAID sem á að bæta við"
 
 #: diskdrake/interactive.pm:861 diskdrake/interactive.pm:879
 #, c-format
@@ -1790,7 +1782,7 @@ msgstr "ný"
 #: diskdrake/interactive.pm:877
 #, c-format
 msgid "Choose an existing LVM to add to"
-msgstr "Veldu LVM sem til er fyrir til að bæta við"
+msgstr "Veldu virkt LVM sem á að bæta við"
 
 #: diskdrake/interactive.pm:884
 #, c-format
@@ -1834,7 +1826,7 @@ msgstr "Gefðu upp skráarnafn"
 #: diskdrake/interactive.pm:953
 #, c-format
 msgid "File is already used by another loopback, choose another one"
-msgstr "Skrá er þegar notuð sem annar sýndardiskur, veldu annan"
+msgstr "Skrá er þegar notuð sem annar sýndardiskur, veldu annann"
 
 #: diskdrake/interactive.pm:954
 #, c-format
@@ -1859,7 +1851,7 @@ msgstr "tæki"
 #: diskdrake/interactive.pm:1064
 #, c-format
 msgid "level"
-msgstr "stig"
+msgstr "þrep"
 
 #: diskdrake/interactive.pm:1065
 #, c-format
@@ -1872,9 +1864,9 @@ msgid "Be careful: this operation is dangerous."
 msgstr "Varaðu þig: þessi aðgerð er hættuleg."
 
 #: diskdrake/interactive.pm:1098
-#, fuzzy, c-format
+#, c-format
 msgid "Partitioning Type"
-msgstr "Forsníða diska"
+msgstr "Tegund disksneiðar"
 
 #: diskdrake/interactive.pm:1098
 #, c-format
@@ -1900,7 +1892,7 @@ msgstr "Forsníð disksneið %s"
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr ""
-"Eftir að diskssneið %s hefur verið forsniðin, hafa öll gögn á þessari "
+"Eftir að diskssneið %s hefur verið forsniðin, munu öll gögn á þessari "
 "disksneið tapast"
 
 #: diskdrake/interactive.pm:1189 fs/partitioning.pm:48
@@ -2037,24 +2029,24 @@ msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
 #: diskdrake/interactive.pm:1297
-#, fuzzy, c-format
+#, c-format
 msgid "Encrypted"
-msgstr "Dulritunarlykill"
+msgstr "Dulritað"
 
 #: diskdrake/interactive.pm:1297
 #, c-format
 msgid " (mapped on %s)"
-msgstr ""
+msgstr " (varpað á %s)"
 
 #: diskdrake/interactive.pm:1298
 #, c-format
 msgid " (to map on %s)"
-msgstr ""
+msgstr " (til að varpa á %s)"
 
 #: diskdrake/interactive.pm:1299
 #, c-format
 msgid " (inactive)"
-msgstr ""
+msgstr " (óvirkur)"
 
 #: diskdrake/interactive.pm:1305
 #, c-format
@@ -2220,8 +2212,7 @@ msgstr "Önnur"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
+msgid "Please enter your username, password and domain name to access this host."
 msgstr ""
 "Vinsamlega gefðu upp notandanafn, lykilorð og nafn léns til að fá aðgang að "
 "þessum miðlara."
@@ -2296,19 +2287,19 @@ msgid "Creating and formatting file %s"
 msgstr "bý til og forsníð skrá %s"
 
 #: fs/format.pm:119
-#, fuzzy, c-format
+#, c-format
 msgid "I do not know how to set label on %s with type %s"
-msgstr "kann ekki að forsníða %s af tegundinni %s"
+msgstr "Kann ekki að setja auðkenni á %s af tegundinni %s"
 
 #: fs/format.pm:126
-#, fuzzy, c-format
+#, c-format
 msgid "setting label on %s failed"
-msgstr "%s forsniðið á %s mistókst"
+msgstr "mistókst að setja auðkenni á %s"
 
 #: fs/format.pm:162
 #, c-format
 msgid "I do not know how to format %s in type %s"
-msgstr "kann ekki að forsníða %s af tegundinni %s"
+msgstr "Kann ekki að forsníða %s af tegundinni %s"
 
 #: fs/format.pm:167 fs/format.pm:169
 #, c-format
@@ -2568,9 +2559,9 @@ msgstr ""
 "pláss laust)"
 
 #: fs/partitioning_wizard.pm:127
-#, fuzzy, c-format
+#, c-format
 msgid "Use the free space on a Microsoft Windows® partition"
-msgstr "Nota laust pláss á Windows disksneiðinni"
+msgstr "Nota lausa plássið á Microsoft Windows® disksneiðinni"
 
 #: fs/partitioning_wizard.pm:129
 #, c-format
@@ -2653,8 +2644,7 @@ msgstr "Forsníða diska"
 #: fs/partitioning_wizard.pm:168
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
-msgstr ""
-"Hvaða stærð viltu skilja eftir fyrir Microsoft Windows® á disksneið %s?"
+msgstr "Hvaða stærð viltu skilja eftir fyrir Microsoft Windows® á disksneið %s?"
 
 #: fs/partitioning_wizard.pm:169
 #, c-format
@@ -3114,27 +3104,27 @@ msgstr "Augnablik... Framkvæmi stillingar"
 #: harddrake/sound.pm:362
 #, c-format
 msgid "Enable PulseAudio"
-msgstr ""
+msgstr "Virkja PulseAudio"
 
 #: harddrake/sound.pm:366
 #, c-format
 msgid "Automatic routing from ALSA to PulseAudio"
-msgstr ""
+msgstr "Beina tengingum frá ALSA að PulseAudio"
 
 #: harddrake/sound.pm:371
 #, c-format
 msgid "Enable 5.1 sound with Pulse Audio"
-msgstr ""
+msgstr "Virkja 5.1 hljóð með Pulse Audio"
 
 #: harddrake/sound.pm:376
 #, c-format
 msgid "Enable user switching for audio applications"
-msgstr ""
+msgstr "Leyfa breytingar notanda á hljóðkerfum"
 
 #: harddrake/sound.pm:381
 #, c-format
 msgid "Reset sound mixer to default values"
-msgstr ""
+msgstr "Endurstilla hljóðblandara í sjálfgefin gildi"
 
 #: harddrake/sound.pm:386
 #, c-format
@@ -3169,7 +3159,7 @@ msgstr ""
 "Hér getur þú valið annan rekil (annað hvort OSS eða ALSA) fyrir hljóðkortið "
 "þitt (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:408
@@ -5194,7 +5184,7 @@ msgstr "Set inn rekil fyrir %s kortið %s"
 #: modules/interactive.pm:99
 #, c-format
 msgid "Configuring Hardware"
-msgstr ""
+msgstr "Stilli Vélbúnað"
 
 #: modules/interactive.pm:110
 #, c-format
@@ -5301,39 +5291,39 @@ msgstr ""
 #: pkgs.pm:236 pkgs.pm:239 pkgs.pm:248
 #, c-format
 msgid "Unused packages removal"
-msgstr ""
+msgstr "Fjarlægi ónotaða pakka"
 
 #: pkgs.pm:236
 #, c-format
 msgid "Finding unused hardware packages..."
-msgstr ""
+msgstr "Leita að ónotuðum vélbúnaðarpökkum..."
 
 #: pkgs.pm:239
 #, c-format
 msgid "Finding unused localization packages..."
-msgstr ""
+msgstr "Leita að ónotuðum staðfærslupökkum..."
 
 #: pkgs.pm:249
 #, c-format
 msgid ""
 "We have detected that some packages are not needed for your system "
 "configuration."
-msgstr ""
+msgstr "Við höfum fundið að ekki er þörf á öllum uppsettum pökkum fyrir kerfið þitt."
 
 #: pkgs.pm:250
 #, c-format
 msgid "We will remove the following packages, unless you choose otherwise:"
-msgstr ""
+msgstr "Þessir pakkar verða fjarlægðir, nema þú veljir annað:"
 
 #: pkgs.pm:253 pkgs.pm:254
-#, fuzzy, c-format
+#, c-format
 msgid "Unused hardware support"
-msgstr "Skoðaðu vélbúnaðarupplýsingar"
+msgstr "Ónýttur vébúnaðarstuðningur"
 
 #: pkgs.pm:257 pkgs.pm:258
 #, c-format
 msgid "Unused localization"
-msgstr ""
+msgstr "Ónýtt staðfærsla"
 
 #: raid.pm:42
 #, c-format
@@ -5433,8 +5423,7 @@ msgstr "Leyfa beina innskráningu kerfisstjóra."
 
 #: security/help.pm:33
 #, c-format
-msgid ""
-"Allow the list of users on the system on display managers (kdm and gdm)."
+msgid "Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr "Leyfa lista af notendum kerfisins í innskráningar-glugga (kdm og gdm)."
 
 #: security/help.pm:35
@@ -5584,8 +5573,7 @@ msgstr "Virkja msec öryggisathugun á hverri klukkustund"
 msgid ""
 "Enable su only from members of the wheel group. If set to no, allows su from "
 "any user."
-msgstr ""
-"Leyfa su aðeins frá meðlimum wheel hópsins eða leyfa su frá öllum notendum."
+msgstr "Leyfa su aðeins frá meðlimum wheel hópsins eða leyfa su frá öllum notendum."
 
 #: security/help.pm:92
 #, c-format
@@ -5610,8 +5598,7 @@ msgstr "Virkja sulogin(8) í eins-notanda ham."
 #: security/help.pm:100
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
-msgstr ""
-"Bæta við nafninu sem undantekningu á úreldingu lykilorða-höndlunar msec."
+msgstr "Bæta við nafninu sem undantekningu á úreldingu lykilorða-höndlunar msec."
 
 #: security/help.pm:102
 #, c-format
@@ -5698,8 +5685,7 @@ msgstr "ef sett já, staðfesta gátsummu á suid/sgid skrám."
 #: security/help.pm:123
 #, c-format
 msgid "if set to yes, check additions/removals of suid root files."
-msgstr ""
-"ef sett já, þá er fylgst með breytingum á suid forritum - sem keyra sem root."
+msgstr "ef sett já, þá er fylgst með breytingum á suid forritum - sem keyra sem root."
 
 #: security/help.pm:124
 #, c-format
@@ -5720,8 +5706,7 @@ msgstr ""
 
 #: security/help.pm:127
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
+msgid "if set, send the mail report to this email address else send it to root."
 msgstr "ef sett, senda skýrslur í pósti á þetta netfang, annars senda á root."
 
 #: security/help.pm:128
@@ -6029,17 +6014,17 @@ msgstr "Senda niðurstöður athugana á tty"
 #: security/level.pm:10
 #, c-format
 msgid "Disable msec"
-msgstr ""
+msgstr "Aftengja msec"
 
 #: security/level.pm:11
 #, c-format
 msgid "Standard"
-msgstr "Venjuleg"
+msgstr "Venjulegt"
 
 #: security/level.pm:12
-#, fuzzy, c-format
+#, c-format
 msgid "Secure"
-msgstr "Öryggi"
+msgstr "Öruggt"
 
 #: security/level.pm:38
 #, c-format
@@ -6049,8 +6034,18 @@ msgid ""
 "system security\n"
 "on your own."
 msgstr ""
+"Þetta þrep ætti að nota með varúð, því það aftengir allt aukalegt öryggi\n"
+"sem msec veitir. Notaðu það aðeins þegar þú vilt sjálfur taka völd yfir öllu\n"
+"öryggi kerfisins."
 
 #: security/level.pm:41
+#, c-format
+msgid ""
+"Passwords are now enabled, but use as a networked computer is still not "
+"recommended."
+msgstr "Lykilorð eru nú virk, en ekki er mælt með notkun að tölvan sé nettengd."
+
+#: security/level.pm:45
 #, c-format
 msgid ""
 "This is the standard security recommended for a computer that will be used "
@@ -6076,6 +6071,13 @@ msgstr ""
 
 #: security/level.pm:49
 #, c-format
+msgid ""
+"This is similar to the previous level, but the system is entirely closed and "
+"security features are at their maximum."
+msgstr "Líkt fyrra þrepi, en kerfið er nú alveg lokað og öryggið er á hæsta stigi."
+
+#: security/level.pm:55
+#, c-format
 msgid "Security"
 msgstr "Öryggi"
 
@@ -6093,7 +6095,7 @@ msgstr "Vinsamlega veldu öryggisþrep"
 #: security/level.pm:56
 #, c-format
 msgid "%s: %s"
-msgstr ""
+msgstr "%s: %s"
 
 #: security/level.pm:59
 #, c-format
@@ -6103,7 +6105,7 @@ msgstr "Öryggisfulltrúi:"
 #: security/level.pm:60
 #, c-format
 msgid "Login or email:"
-msgstr ""
+msgstr "notandanafn eða netfang:"
 
 #: services.pm:19
 #, c-format
@@ -6148,8 +6150,7 @@ msgstr ""
 
 #: services.pm:28
 #, c-format
-msgid ""
-"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr "Common UNIX Printing System (CUPS) er háþróað prentbiðraðakerfi"
 
 #: services.pm:29
@@ -6193,8 +6194,7 @@ msgstr "HardDrake athugar vélbúnað og stillir ný og breytt jaðartæki."
 
 #: services.pm:38
 #, c-format
-msgid ""
-"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr "Apache er vefmiðlari, sem veitir aðgang að HTML skjölum og CGI."
 
 #: services.pm:39
@@ -6279,8 +6279,7 @@ msgstr ""
 msgid ""
 "DBUS is a daemon which broadcasts notifications of system events and other "
 "messages"
-msgstr ""
-"DBUS er þjónusta sem útvarpar tilkynningum um kerfisatburði og öðrum skeytum"
+msgstr "DBUS er þjónusta sem útvarpar tilkynningum um kerfisatburði og öðrum skeytum"
 
 #: services.pm:58
 #, c-format
@@ -6437,10 +6436,8 @@ msgstr ""
 
 #: services.pm:92
 #, c-format
-msgid ""
-"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
-msgstr ""
-"Sane (Scanner Access Now Easy) veitir aðgang að mynskönnum, myndavélum, ..."
+msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgstr "Sane (Scanner Access Now Easy) veitir aðgang að mynskönnum, myndavélum, ..."
 
 #: services.pm:93
 #, c-format
@@ -6915,229 +6912,3 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Innsetning mistókst"
 
-#~ msgid "Welcome To Crackers"
-#~ msgstr "Velkomin(n) í tölvuþrjótinn"
-
-#~ msgid "Poor"
-#~ msgstr "Lélegt"
-
-#~ msgid "High"
-#~ msgstr "Hátt"
-
-#~ msgid "Higher"
-#~ msgstr "Hærra"
-
-#~ msgid "Paranoid"
-#~ msgstr "Taugaveiklað"
-
-#~ msgid ""
-#~ "This level is to be used with care. It makes your system more easy to "
-#~ "use,\n"
-#~ "but very sensitive. It must not be used for a machine connected to "
-#~ "others\n"
-#~ "or to the Internet. There is no password access."
-#~ msgstr ""
-#~ "Þetta þrep verður að nota með varúð. Það gerir einfalt að nota tölvuna\n"
-#~ "þína, en hún verður mjög viðkvæm.  Hún ætti ekki að vera tengd öðrum\n"
-#~ "tölvum á netinu.  Engra lykilorða er krafist."
-
-#~ msgid ""
-#~ "Passwords are now enabled, but use as a networked computer is still not "
-#~ "recommended."
-#~ msgstr ""
-#~ "Lykilorð eru nú virk, en ekki er mælt með notkun að tölvan sé nettengd."
-
-#~ msgid ""
-#~ "There are already some restrictions, and more automatic checks are run "
-#~ "every night."
-#~ msgstr ""
-#~ "Það eru nú þegar nokkrar takmarkanir og sjálfvirkar prófanir eru keyrðar "
-#~ "á hverri nóttu."
-
-#~ msgid ""
-#~ "This is similar to the previous level, but the system is entirely closed "
-#~ "and security features are at their maximum."
-#~ msgstr ""
-#~ "Líkt fyrra þrepi, en kerfið er nú alveg lokað og öryggið er á hæsta stigi."
-
-#~ msgid ""
-#~ "\n"
-#~ "Warning\n"
-#~ "\n"
-#~ "Please read carefully the terms below. If you disagree with any\n"
-#~ "portion, you are not allowed to install the next CD media. Press "
-#~ "'Refuse' \n"
-#~ "to continue the installation without using these media.\n"
-#~ "\n"
-#~ "\n"
-#~ "Some components contained in the next CD media are not governed\n"
-#~ "by the GPL License or similar agreements. Each such component is then\n"
-#~ "governed by the terms and conditions of its own specific license. \n"
-#~ "Please read carefully and comply with such specific licenses before \n"
-#~ "you use or redistribute the said components. \n"
-#~ "Such licenses will in general prevent the transfer,  duplication \n"
-#~ "(except for backup purposes), redistribution, reverse engineering, \n"
-#~ "de-assembly, de-compilation or modification of the component. \n"
-#~ "Any breach of agreement will immediately terminate your rights under \n"
-#~ "the specific license. Unless the specific license terms grant you such\n"
-#~ "rights, you usually cannot install the programs on more than one\n"
-#~ "system, or adapt it to be used on a network. In doubt, please contact \n"
-#~ "directly the distributor or editor of the component. \n"
-#~ "Transfer to third parties or copying of such components including the \n"
-#~ "documentation is usually forbidden.\n"
-#~ "\n"
-#~ "\n"
-#~ "All rights to the components of the next CD media belong to their \n"
-#~ "respective authors and are protected by intellectual property and \n"
-#~ "copyright laws applicable to software programs.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Aðvörun\n"
-#~ "\n"
-#~ "Vinsamlega lestu vandlega skilmálana hér að neðan. Ef þú ert ekki\n"
-#~ "sátt(ur) við einhvern hluta þess þá mátt þú ekki setja inn næsta\n"
-#~ "geisladisk. Ýttu á 'Neita' til að halda áfram uppsetningu á þess að\n"
-#~ "nota þennan miðil.\n"
-#~ "\n"
-#~ "\n"
-#~ "Sumt af þeim hugbúnaði sem er á næsta geisladiski er ekki dreift\n"
-#~ "samkvæmt GPL eða sambærilegum leyfum. Hver og einn af þessum\n"
-#~ "hugbúnaði er með sína eigin notkunarskilmála. Vinsamlega lestu\n"
-#~ "þá vandlega og samþykktu þá sérstöku skilmála áður en þú notar\n"
-#~ "eða dreifir umræddum hugbúnaði.\n"
-#~ "Þessi leyfi munu almennt takmarka flutning, afritun (nema til geymslu),\n"
-#~ "endurdreifingu, rannsókn á vinnslu kerfis, afkóðun, afþýðingu eða\n"
-#~ "breytingu á hugbúnaðinum. Allar vanefndir á þessum skilmálum munu\n"
-#~ "sjálfkrafa binda endi á leyfi þitt til að nota hugbúnaðinn. Nema "
-#~ "sérstaklega\n"
-#~ "sé tekið fram mátt þú ekki setja hugbúnaðinn upp á fleiri en einni vél,\n"
-#~ "eða breyta þannig að hann sé nothæfur á netkerfi. Ef í vafa vinsamlega\n"
-#~ "hafðu samband við dreifingaraðila eða höfund hugbúnaðarins.\n"
-#~ "Flutningur til þriðja aðila eða afritun af þessum hugbúnaði eða\n"
-#~ "handbókum er venjulega ekki leyfður.\n"
-#~ "\n"
-#~ "\n"
-#~ "Allur réttur hugbúnaðar á næsta geisladiski er í höndum höfunda\n"
-#~ "hvers hugbúnaðar fyrir sig og er varin af höfundarréttarlögum\n"
-#~ "og lögum um hugbúnað.\n"
-
-#~ msgid "Use libsafe for servers"
-#~ msgstr "Nota libsafe fyrir þjónustur"
-
-#~ msgid ""
-#~ "A library which defends against buffer overflow and format string attacks."
-#~ msgstr ""
-#~ "Undirforritasafn sem ver gegn yfirflæði á minnissvæðum og prentstrengjum."
-
-#~ msgid "LILO/grub Installation"
-#~ msgstr "LILO/grub uppsetning"
-
-#~ msgid "Precise RAM size if needed (found %d MB)"
-#~ msgstr "Nákvæm stærð vinnsluminnis (fann %d MB)"
-
-#~ msgid "Give the ram size in MB"
-#~ msgstr "Sláðu inn vinnsluminni í MB"
-
-#~ msgid ""
-#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
-#~ "is enough)\n"
-#~ "at the beginning of the disk"
-#~ msgstr ""
-#~ "Ef þú ætlar að nota aboot, þá verður þú að skilja eftir pláss (2048 "
-#~ "sneiðar er nóg)\n"
-#~ "fremst á disknum"
-
-#~ msgid "Security level"
-#~ msgstr "Öryggisþrep"
-
-#~ msgid "Expand Tree"
-#~ msgstr "Opna tré"
-
-#~ msgid "Collapse Tree"
-#~ msgstr "Loka tré"
-
-#~ msgid "Toggle between flat and group sorted"
-#~ msgstr "Víxla milli flats lista og raðaðra hópa"
-
-#~ msgid "Choose action"
-#~ msgstr "Veldu aðgerð"
-
-#~ msgid "Active Directory with SFU"
-#~ msgstr "Gagnvirk upplýsingaveita með SFU"
-
-#~ msgid "Active Directory with Winbind"
-#~ msgstr "Gagnvirk upplýsingaveita með Winbind"
-
-#~ msgid "Use information stored in local files for all authentication"
-#~ msgstr ""
-#~ "Nota upplýsingar vistaðar í staðbundnum skrám fyrir allar auðkenningar"
-
-#~ msgid "Active Directory with SFU:"
-#~ msgstr "Gagnvirk upplýsingaveita með SFU:"
-
-#~ msgid "Active Directory with Winbind:"
-#~ msgstr "Gagnvirk upplýsingaveita með Winbind:"
-
-#~ msgid ""
-#~ "Winbind allows the system to authenticate users in a Windows Active "
-#~ "Directory Server."
-#~ msgstr ""
-#~ "Winbind leyfir kerfinu að auðkenna notendur í Windows gagnvirkri "
-#~ "upplýsingaveitu (Active Directory Server)."
-
-#~ msgid "Authentication LDAP"
-#~ msgstr "Auðkenning LDAP"
-
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid "SSL"
-#~ msgstr "SSL"
-
-#~ msgid "security layout (SASL/Kerberos)"
-#~ msgstr "öryggisupsetning (SASL/Kerberos)"
-
-#~ msgid "Authentication Active Directory"
-#~ msgstr "Auðkenning á gagnvirkri upplýsingaveitu"
-
-#~ msgid "LDAP users database"
-#~ msgstr "LDAP notenda gagnagrunnur"
-
-#~ msgid "LDAP user allowed to browse the Active Directory"
-#~ msgstr "LDAP notanda leyft að flakka í gagnvirkri upplýsingaveitu"
-
-#~ msgid "Password for user"
-#~ msgstr "Lykilorð fyrir notanda"
-
-#~ msgid "Authentication NIS"
-#~ msgstr "Auðkenning NIS"
-
-#~ msgid ""
-#~ "For this to work for a W2K PDC, you will probably need to have the admin "
-#~ "run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
-#~ "add and reboot the server.\n"
-#~ "You will also need the username/password of a Domain Admin to join the "
-#~ "machine to the Windows(TM) domain.\n"
-#~ "If networking is not yet enabled, Drakx will attempt to join the domain "
-#~ "after the network setup step.\n"
-#~ "Should this setup fail for some reason and domain authentication is not "
-#~ "working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows"
-#~ "(tm) Domain, and Admin Username/Password, after system boot.\n"
-#~ "The command 'wbinfo -t' will test whether your authentication secrets are "
-#~ "good."
-#~ msgstr ""
-#~ "Til að þetta gangi á W2K PDC, þá verður þú sennilega að láta kerfisstjóra "
-#~ "keyra: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" "
-#~ "everyone /add og endurræsa miðlarann.\n"
-#~ "Þú þarft einnig notendanafn/lykilorð kerfisstjóra (Domain Admin) til þess "
-#~ "að getatengt vélina við Windows(tm) lénið.\n"
-#~ "Ef netið er ekki sett upp, þá mun Drakx reyna að tengjast netinu eftir að "
-#~ "netið hefur verið sett upp.\n"
-#~ "Ef að þetta mistekst af einhverri ástæðu og lénsauðkenni virkar ekki, "
-#~ "keyrðu þá run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' og notaðu uppgefið "
-#~ "Windows(tm) lén og lykilorð kerfisstjóra (Domain Admin) eftir "
-#~ "kerfisræsingu.\n"
-#~ "Skipunin 'wbinfo -t' mun prófa hvort leyniauðkenni þitt eru í lagi."
-
-#~ msgid "Authentication Windows Domain"
-#~ msgstr "Auðkenning Windows Léns"
