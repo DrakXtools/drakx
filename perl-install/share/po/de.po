@@ -18,18 +18,19 @@
 # Nicolas Bauer <rastafarii@mandrivauser.de>, 2007.
 # Oliver Burger <oliver@mandrivauser.de>, 2008.
 # Wolfgang Bornath <wbo@mandriva.com>, 2009.
+# Oliver Burger <oliver.burger@wizard-fire.de>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-05 19:33-0200\n"
-"PO-Revision-Date: 2008-11-12 09:59+0100\n"
-"Last-Translator: Oliver Burger <oliver@mandrivauser.de>\n"
-"Language-Team: deutsch <cooker-i18n@mandrivalinux.org>\n"
+"PO-Revision-Date: 2009-03-17 10:37+0100\n"
+"Last-Translator: Oliver Burger <oliver.burger@wizard-fire.de>\n"
+"Language-Team: German <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 0.3\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: any.pm:252 any.pm:862 diskdrake/interactive.pm:588
@@ -178,10 +179,9 @@ msgstr "Wartezeit vor dem Starten des Betriebssystems"
 msgid "Enable ACPI"
 msgstr "ACPI aktivieren"
 
-#: any.pm:411
-#, fuzzy, c-format
+#: any.pm:411, c-format
 msgid "Enable SMP"
-msgstr "ACPI aktivieren"
+msgstr "SMP aktivieren"
 
 #: any.pm:412
 #, c-format
@@ -1070,10 +1070,9 @@ msgstr ""
 msgid "Select file"
 msgstr "Datei auswählen"
 
-#: authentication.pm:885
-#, fuzzy, c-format
+#: authentication.pm:885, c-format
 msgid "Domain Windows for authentication : "
-msgstr "Domänen-Authentifizierung nötig"
+msgstr ""
 
 #: authentication.pm:887
 #, c-format
@@ -1576,7 +1575,7 @@ msgstr "Ausführliche Informationen"
 #: diskdrake/interactive.pm:398
 #, c-format
 msgid "View"
-msgstr ""
+msgstr "Ansehen"
 
 #: diskdrake/interactive.pm:403 diskdrake/interactive.pm:749
 #, c-format
@@ -1708,15 +1707,15 @@ msgstr "Welches Dateisystem wollen Sie verwenden?"
 msgid "Switching from %s to %s"
 msgstr "Wechsle von %s zu %s"
 
-#: diskdrake/interactive.pm:616
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:616, c-format
 msgid "Set volume label"
-msgstr "Welche Datenträgerbezeichnung?"
+msgstr "Datenträgerbezeichnung festlegen"
 
 #: diskdrake/interactive.pm:616
 #, c-format
 msgid "Beware, this will be written to disk as soon as you validate!"
 msgstr ""
+"Beachten Sie! Dies wird auf die Platte geschrieben, sobald Sie bestätigen!"
 
 #: diskdrake/interactive.pm:618
 #, c-format
@@ -1800,14 +1799,13 @@ msgstr "Minimale Größe: %s MB"
 msgid "Maximum size: %s MB"
 msgstr "Maximale Größe: %s MB"
 
-#: diskdrake/interactive.pm:794
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:794, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
 "Um nach der Größenänderung der Partition(en) die Datenintegrität\n"
-"zu gewährleisten, wird Windows™ beim nächsten Hochfahren eine\n"
+"zu gewährleisten, wird Microsoft Windows® beim nächsten Hochfahren eine\n"
 "Dateisystemprüfung durchführen."
 
 #: diskdrake/interactive.pm:842 diskdrake/interactive.pm:1386
@@ -2354,17 +2352,13 @@ msgstr "/boot/efi muss eine FAT Partition sein"
 msgid "Creating and formatting file %s"
 msgstr "Erzeugen und Formatieren der Datei %s"
 
-#: fs/format.pm:119
-#, fuzzy, c-format
+#: fs/format.pm:119, c-format
 msgid "I do not know how to set label on %s with type %s"
 msgstr ""
-"Ich bin nicht in der Lage, %s mit einem Dateisystem vom Typ %s zu "
-"formatieren."
 
-#: fs/format.pm:126
-#, fuzzy, c-format
+#: fs/format.pm:126, c-format
 msgid "setting label on %s failed"
-msgstr "%s formatieren von %s schlug fehl"
+msgstr "Das Festlegen einer Datenträgerbezeichnung für %s schlug fehl"
 
 #: fs/format.pm:162
 #, c-format
@@ -3260,7 +3254,7 @@ msgstr ""
 "Hier können Sie einen alternativen Treiber (entweder OSS oder ALSA) für Ihre "
 "Soundkarte (%s) auswählen"
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:408
@@ -6223,7 +6217,7 @@ msgstr "Sendet Prüfbericht an tty"
 #: security/level.pm:10
 #, c-format
 msgid "Disable msec"
-msgstr ""
+msgstr "msec deaktivieren"
 
 #: security/level.pm:11
 #, c-format
@@ -6243,6 +6237,10 @@ msgid ""
 "system security\n"
 "on your own."
 msgstr ""
+"Diese Stufe ist mit Sorgfalt zu benutzen, da alle zusätzlichen, von msec\n"
+"bereitgestellten Sicherheitseinstellungen deaktiviert sind. Nutzen Sie sie "
+"nur,\n"
+"wenn Sie die Systemsicherheit vollständig manuell sicherstellen wollen."
 
 #: security/level.pm:41
 #, c-format
