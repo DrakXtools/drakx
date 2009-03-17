@@ -30,7 +30,6 @@ my ($disk_iso_repository, $repository_uri);
 
 (my $repository, my $dir, @ARGV) = @ARGV;
 foreach (@ARGV) {
-    $i++;
     if (/--resolution=(.*)/) {
         $resolution = $1;
     } elsif (/--disk-iso=(.*)/) {
