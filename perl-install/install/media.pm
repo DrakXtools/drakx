@@ -498,11 +498,13 @@ sub get_media {
     foreach (@$media) {
 	if ($_->{type} eq 'media_cfg') {
 	    $phys_m = url2mounted_phys_medium($o, $_->{url}, 'media_info');
-            my $uri = $o->{stage2_phys_medium}{url} =~ m!^(http|ftp)://! && $o->{stage2_phys_medium}{url} ||
+            my $uri = $o->{stage2_phys_medium}{method} eq 'disk' ? _get_medium_dir($phys_m) :
+              $o->{stage2_phys_medium}{url} =~ m!^(http|ftp)://! && $o->{stage2_phys_medium}{url} ||
               $phys_m->{method} =~ m!^(ftp|http)://! && $phys_m->{method}
               || $phys_m->{real_mntpoint} || $phys_m->{url};
+
             # adjust URI for cdroms if needed:
-            if ($o->{stage2_phys_medium}{method} eq 'cdrom') {
+            if (member($o->{stage2_phys_medium}{method}, qw(iso cdrom))) {
                 my $arch = arch();
                 $uri .= "/" . ($arch =~ /i.86/ ? $MDK::Common::System::compat_arch{arch()} : arch());
                 # FIXME: investigate why _get_compsUsers_pl($phys_m, $_->{force_rpmsrate}) didn't worked:o
