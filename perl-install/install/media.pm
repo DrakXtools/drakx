@@ -493,11 +493,14 @@ sub select_only_some_media {
 
 sub get_media {
     my ($o, $media, $packages) = @_;
+    use Data::Dumper;
 
     my ($suppl_CDs, $copy_rpms_on_disk, $phys_m);
     foreach (@$media) {
 	if ($_->{type} eq 'media_cfg') {
 	    $phys_m = url2mounted_phys_medium($o, $_->{url}, 'media_info');
+            log::l(Data::Dumper->Dump([ $phys_m ], [ 'phys_m' ]));
+            log::l(Data::Dumper->Dump([ $o->{stage2_phys_medium} ], [ 'stage2_phys_medium' ]));
             my $uri = $o->{stage2_phys_medium}{method} eq 'disk' ? _get_medium_dir($phys_m) :
               $o->{stage2_phys_medium}{url} =~ m!^(http|ftp)://! && $o->{stage2_phys_medium}{url} ||
               $phys_m->{method} =~ m!^(ftp|http)://! && $phys_m->{method}
