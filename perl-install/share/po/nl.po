@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
-"POT-Creation-Date: 2009-02-05 19:33-0200\n"
+"POT-Creation-Date: 2009-03-18 18:39+0100\n"
 "PO-Revision-Date: 2008-12-19 15:35+0100\n"
 "Last-Translator: Reinout van Schouwen <reinouts@gnome.org>\n"
 "Language-Team: Nederlands\n"
@@ -22,10 +22,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: any.pm:252 any.pm:862 diskdrake/interactive.pm:588
-#: diskdrake/interactive.pm:783 diskdrake/interactive.pm:827
-#: diskdrake/interactive.pm:913 diskdrake/interactive.pm:1167
-#: diskdrake/interactive.pm:1219 do_pkgs.pm:221 do_pkgs.pm:267
+#: any.pm:252 any.pm:862 diskdrake/interactive.pm:590
+#: diskdrake/interactive.pm:790 diskdrake/interactive.pm:834
+#: diskdrake/interactive.pm:920 diskdrake/interactive.pm:1174
+#: diskdrake/interactive.pm:1226 do_pkgs.pm:241 do_pkgs.pm:287
 #: harddrake/sound.pm:300 interactive.pm:587 pkgs.pm:265
 #, c-format
 msgid "Please wait"
@@ -185,18 +185,18 @@ msgstr "APIC inschakelen"
 msgid "Enable Local APIC"
 msgstr "Lokale APIC inschakelen"
 
-#: any.pm:415 any.pm:809 any.pm:824 authentication.pm:245
+#: any.pm:415 any.pm:809 any.pm:824 authentication.pm:247
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
 msgstr "Wachtwoord"
 
-#: any.pm:417 authentication.pm:256
+#: any.pm:417 authentication.pm:258
 #, c-format
 msgid "The passwords do not match"
 msgstr "De wachtwoorden komen niet overeen"
 
-#: any.pm:417 authentication.pm:256 diskdrake/interactive.pm:1391
+#: any.pm:417 authentication.pm:258 diskdrake/interactive.pm:1398
 #, c-format
 msgid "Please try again"
 msgstr "Probeert u het opnieuw"
@@ -206,7 +206,7 @@ msgstr "Probeert u het opnieuw"
 msgid "You can not use a password with %s"
 msgstr "U kunt geen wachtwoord gebruiken met %s"
 
-#: any.pm:421 any.pm:811 any.pm:826 authentication.pm:246
+#: any.pm:421 any.pm:811 any.pm:826 authentication.pm:248
 #, c-format
 msgid "Password (again)"
 msgstr "Wachtwoord (nogmaals)"
@@ -298,7 +298,7 @@ msgstr "Initrd"
 msgid "Network profile"
 msgstr "Netwerkprofiel"
 
-#: any.pm:532 any.pm:537 any.pm:539 diskdrake/interactive.pm:402
+#: any.pm:532 any.pm:537 any.pm:539 diskdrake/interactive.pm:404
 #, c-format
 msgid "Label"
 msgstr "Naam"
@@ -454,7 +454,7 @@ msgstr "%s behoort groter dan 500 te zijn. Toch doorgaan?"
 msgid "User management"
 msgstr "Gebruikersbeheer"
 
-#: any.pm:808 authentication.pm:232
+#: any.pm:808 authentication.pm:234
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "Beheerderswachtwoord (root) instellen"
@@ -519,7 +519,7 @@ msgstr "Kies de te gebruiken werkomgeving:"
 msgid "Release Notes"
 msgstr "Uitgave-opmerkingen"
 
-#: any.pm:932 any.pm:1278 interactive/gtk.pm:792
+#: any.pm:932 any.pm:1278 interactive/gtk.pm:794
 #, c-format
 msgid "Close"
 msgstr "Sluiten"
@@ -743,42 +743,42 @@ msgstr "NTP-server"
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Automatische tijdssynchronisatie (met gebruik van NTP)"
 
-#: authentication.pm:25
+#: authentication.pm:24
 #, c-format
 msgid "Local file"
 msgstr "Bestand op deze computer"
 
-#: authentication.pm:26
+#: authentication.pm:25
 #, c-format
 msgid "LDAP"
 msgstr "LDAP"
 
-#: authentication.pm:27
+#: authentication.pm:26
 #, c-format
 msgid "NIS"
 msgstr "NIS"
 
-#: authentication.pm:28
+#: authentication.pm:27
 #, c-format
 msgid "Smart Card"
 msgstr "Smartcard"
 
-#: authentication.pm:29 authentication.pm:211
+#: authentication.pm:28 authentication.pm:213
 #, c-format
 msgid "Windows Domain"
 msgstr "Windows-domein"
 
-#: authentication.pm:30
+#: authentication.pm:29
 #, c-format
 msgid "Kerberos 5"
 msgstr "Kerberos 5"
 
-#: authentication.pm:64
+#: authentication.pm:63
 #, c-format
 msgid "Local file:"
 msgstr "Bestand op deze computer:"
 
-#: authentication.pm:64
+#: authentication.pm:63
 #, c-format
 msgid ""
 "Use local for all authentication and information user tell in local file"
@@ -786,12 +786,12 @@ msgstr ""
 "Gebruik local voor alle aanmeldingscontrole en gebruikersinformatie in een "
 "bestand op deze computer."
 
-#: authentication.pm:65
+#: authentication.pm:64
 #, c-format
 msgid "LDAP:"
 msgstr "LDAP:"
 
-#: authentication.pm:65
+#: authentication.pm:64
 #, c-format
 msgid ""
 "Tells your computer to use LDAP for some or all authentication. LDAP "
@@ -800,12 +800,12 @@ msgstr ""
 "Laat uw computer LDAP gebruiken voor sommige of alle aanmeldingscontrole. "
 "LDAP consolideert bepaalde soorten informatie binnen uw organisatie."
 
-#: authentication.pm:66
+#: authentication.pm:65
 #, c-format
 msgid "NIS:"
 msgstr "NIS:"
 
-#: authentication.pm:66
+#: authentication.pm:65
 #, c-format
 msgid ""
 "Allows you to run a group of computers in the same Network Information "
@@ -814,12 +814,12 @@ msgstr ""
 "Stelt u in staat om een groep computers in hetzelfde Network Information "
 "Service-domein te gebruiken met een hetzelfde wachtwoord en group-bestand."
 
-#: authentication.pm:67
+#: authentication.pm:66
 #, c-format
 msgid "Windows Domain:"
 msgstr "Windows-domein:"
 
-#: authentication.pm:67
+#: authentication.pm:66
 #, c-format
 msgid ""
 "Winbind allows the system to retrieve information and authenticate users in "
@@ -828,31 +828,31 @@ msgstr ""
 "Winbind laat een systeem informatie ophalen en stelt het in staat "
 "aanmeldingscontrole uit te voeren op gebruikers in een Windows-domein."
 
-#: authentication.pm:68
+#: authentication.pm:67
 #, c-format
 msgid "Kerberos 5 :"
 msgstr "Kerberos 5:"
 
-#: authentication.pm:68
+#: authentication.pm:67
 #, c-format
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
 msgstr ""
 "Met Kerberos en Ldap voor aanmeldingscontrole in Active Directory Server "
 
-#: authentication.pm:102 authentication.pm:136 authentication.pm:155
-#: authentication.pm:156 authentication.pm:182 authentication.pm:206
-#: authentication.pm:884
+#: authentication.pm:104 authentication.pm:138 authentication.pm:157
+#: authentication.pm:158 authentication.pm:184 authentication.pm:208
+#: authentication.pm:888
 #, c-format
 msgid " "
 msgstr " "
 
-#: authentication.pm:103 authentication.pm:137 authentication.pm:183
-#: authentication.pm:207
+#: authentication.pm:105 authentication.pm:139 authentication.pm:185
+#: authentication.pm:209
 #, c-format
 msgid "Welcome to the Authentication Wizard"
 msgstr "Welkom bij de wizard Aanmelding"
 
-#: authentication.pm:105
+#: authentication.pm:107
 #, c-format
 msgid ""
 "You have selected LDAP authentication. Please review the configuration "
@@ -861,78 +861,78 @@ msgstr ""
 "U heeft LDAP-aanmeldingscontrole geselecteerd. Neem alstublieft de volgende "
 "instellingen door "
 
-#: authentication.pm:107 authentication.pm:162
+#: authentication.pm:109 authentication.pm:164
 #, c-format
 msgid "LDAP Server"
 msgstr "LDAP-server"
 
-#: authentication.pm:108 authentication.pm:163
+#: authentication.pm:110 authentication.pm:165
 #, c-format
 msgid "Base dn"
 msgstr "Base dn"
 
-#: authentication.pm:109
+#: authentication.pm:111
 #, c-format
 msgid "Fetch base Dn "
 msgstr "Base Dn ophalen"
 
-#: authentication.pm:111 authentication.pm:166
+#: authentication.pm:113 authentication.pm:168
 #, c-format
 msgid "Use encrypt connection with TLS "
 msgstr "Gebruik versleutelde verbinding met TLS"
 
-#: authentication.pm:112 authentication.pm:167
+#: authentication.pm:114 authentication.pm:169
 #, c-format
 msgid "Download CA Certificate "
 msgstr "CA-certificaat downloaden "
 
-#: authentication.pm:114 authentication.pm:147
+#: authentication.pm:116 authentication.pm:149
 #, c-format
 msgid "Use Disconnect mode "
 msgstr "Disconnect-modus gebruiken"
 
-#: authentication.pm:115 authentication.pm:168
+#: authentication.pm:117 authentication.pm:170
 #, c-format
 msgid "Use anonymous BIND "
 msgstr "Anonieme BIND gebruiken"
 
-#: authentication.pm:116 authentication.pm:119 authentication.pm:121
-#: authentication.pm:125
+#: authentication.pm:118 authentication.pm:121 authentication.pm:123
+#: authentication.pm:127
 #, c-format
 msgid "  "
 msgstr " "
 
-#: authentication.pm:117 authentication.pm:169
+#: authentication.pm:119 authentication.pm:171
 #, c-format
 msgid "Bind DN "
 msgstr "Bind DN "
 
-#: authentication.pm:118 authentication.pm:170
+#: authentication.pm:120 authentication.pm:172
 #, c-format
 msgid "Bind Password "
 msgstr "Bind-wachtwoord"
 
-#: authentication.pm:120
+#: authentication.pm:122
 #, c-format
 msgid "Advanced path for group "
 msgstr "Geavanceerd pad voor groep "
 
-#: authentication.pm:122
+#: authentication.pm:124
 #, c-format
 msgid "Password base"
 msgstr "Wachtwoordbasis"
 
-#: authentication.pm:123
+#: authentication.pm:125
 #, c-format
 msgid "Group base"
 msgstr "Groepsbasis"
 
-#: authentication.pm:124
+#: authentication.pm:126
 #, c-format
 msgid "Shadow base"
 msgstr "Shadowbasis"
 
-#: authentication.pm:139
+#: authentication.pm:141
 #, c-format
 msgid ""
 "You have selected Kerberos 5 authentication. Please review the configuration "
@@ -941,37 +941,37 @@ msgstr ""
 "U heeft Kerberos 5 aanmeldingscontrole geselecteerd. Neem alstublieft de "
 "volgende instellingen door "
 
-#: authentication.pm:141
+#: authentication.pm:143
 #, c-format
 msgid "Realm "
 msgstr "Realm "
 
-#: authentication.pm:143
+#: authentication.pm:145
 #, c-format
 msgid "KDCs Servers"
 msgstr "KDCs-servers"
 
-#: authentication.pm:145
+#: authentication.pm:147
 #, c-format
 msgid "Use DNS to resolve hosts for realms "
 msgstr "Gebruik DNS om hosts te vinden voor realms"
 
-#: authentication.pm:146
+#: authentication.pm:148
 #, c-format
 msgid "Use DNS to resolve KDCs for realms "
 msgstr "Gebruik DNS om KDCs te vinden voor realms"
 
-#: authentication.pm:151
+#: authentication.pm:153
 #, c-format
 msgid "Use local file for users information"
 msgstr "Gebruik lokaal bestand voor gebruikersinformatie"
 
-#: authentication.pm:152
+#: authentication.pm:154
 #, c-format
 msgid "Use Ldap for users information"
 msgstr "Gebruik LDAP voor gebruikersinformatie"
 
-#: authentication.pm:158
+#: authentication.pm:160
 #, c-format
 msgid ""
 "You have selected Kerberos 5 for authentication, now you must choose the "
@@ -980,12 +980,12 @@ msgstr ""
 "U heeft Kerberos 5-aanmeldingscontrole geselecteerd, nu dient u het type van "
 "gebruikersinformatie te kiezen "
 
-#: authentication.pm:164
+#: authentication.pm:166
 #, c-format
 msgid "Fecth base Dn "
 msgstr "Base Dn ophalen "
 
-#: authentication.pm:185
+#: authentication.pm:187
 #, c-format
 msgid ""
 "You have selected NIS authentication. Please review the configuration "
@@ -994,17 +994,17 @@ msgstr ""
 "U heeft NIS-aanmeldingscontrole geselecteerd. Neem alstublieft de volgende "
 "instellingen door "
 
-#: authentication.pm:187
+#: authentication.pm:189
 #, c-format
 msgid "NIS Domain"
 msgstr "NIS-domein"
 
-#: authentication.pm:188
+#: authentication.pm:190
 #, c-format
 msgid "NIS Server"
 msgstr "NIS-server"
 
-#: authentication.pm:209
+#: authentication.pm:211
 #, c-format
 msgid ""
 "You have selected Windows Domain authentication. Please review the "
@@ -1013,58 +1013,58 @@ msgstr ""
 "U heeft Windows Domein-aanmeldingscontrole geselecteerd. Neem alstublieft de "
 "volgende instellingen door "
 
-#: authentication.pm:213
+#: authentication.pm:215
 #, c-format
 msgid "Domain Model "
 msgstr "Domein-model "
 
-#: authentication.pm:215
+#: authentication.pm:217
 #, c-format
 msgid "Active Directory Realm "
 msgstr "Active Directory-realm"
 
-#: authentication.pm:231 authentication.pm:247
+#: authentication.pm:233 authentication.pm:249
 #, c-format
 msgid "Authentication"
 msgstr "Aanmeldingscontrole"
 
-#: authentication.pm:233
+#: authentication.pm:235
 #, c-format
 msgid "Authentication method"
 msgstr "Aanmeldingscontrole-methode"
 
 #. -PO: keep this short or else the buttons will not fit in the window
-#: authentication.pm:238
+#: authentication.pm:240
 #, c-format
 msgid "No password"
 msgstr "Geen wachtwoord"
 
-#: authentication.pm:259
+#: authentication.pm:261
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Dit wachtwoord is te makkelijk (moet tenminste %d tekens lang zijn)"
 
-#: authentication.pm:364
+#: authentication.pm:368
 #, c-format
 msgid "Can not use broadcast with no NIS domain"
 msgstr "Kan niet uitzenden zonder NIS-domein"
 
-#: authentication.pm:879
+#: authentication.pm:883
 #, c-format
 msgid "Select file"
 msgstr "Selecteer bestand"
 
-#: authentication.pm:885
+#: authentication.pm:889
 #, c-format
 msgid "Domain Windows for authentication : "
 msgstr "Windows-domein voor aanmeldingscontrole: "
 
-#: authentication.pm:887
+#: authentication.pm:891
 #, c-format
 msgid "Domain Admin User Name"
 msgstr "Gebruikersnaam van domeinbeheerder"
 
-#: authentication.pm:888
+#: authentication.pm:892
 #, c-format
 msgid "Domain Admin Password"
 msgstr "Wachtwoord domeinbeheerder"
@@ -1085,42 +1085,42 @@ msgstr ""
 "of wacht even op de standaard-opstartprocedure.\n"
 "\n"
 
-#: bootloader.pm:1122
+#: bootloader.pm:1130
 #, c-format
 msgid "LILO with text menu"
 msgstr "LILO met tekst-menu"
 
-#: bootloader.pm:1123
+#: bootloader.pm:1131
 #, c-format
 msgid "GRUB with graphical menu"
 msgstr "GRUB met grafisch menu"
 
-#: bootloader.pm:1124
+#: bootloader.pm:1132
 #, c-format
 msgid "GRUB with text menu"
 msgstr "GRUB met tekstmenu"
 
-#: bootloader.pm:1125
+#: bootloader.pm:1133
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
 
-#: bootloader.pm:1126
+#: bootloader.pm:1134
 #, c-format
 msgid "SILO"
 msgstr "SILO"
 
-#: bootloader.pm:1208
+#: bootloader.pm:1216
 #, c-format
 msgid "not enough room in /boot"
 msgstr "niet genoeg ruimte in /boot"
 
-#: bootloader.pm:1864
+#: bootloader.pm:1872
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
 msgstr "U kunt de opstartlader niet installeren op een %s-partitie\n"
 
-#: bootloader.pm:1985
+#: bootloader.pm:1993
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1129,7 +1129,7 @@ msgstr ""
 "De configuratie van uw opstartlader moet bijgewerkt worden omdat de partitie "
 "is omgenummerd"
 
-#: bootloader.pm:1998
+#: bootloader.pm:2006
 #, c-format
 msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
@@ -1138,7 +1138,7 @@ msgstr ""
 "Kan de opstartlader niet correct installeren. U dient in rescue-modus op te "
 "starten en \"%s\" te kiezen"
 
-#: bootloader.pm:1999
+#: bootloader.pm:2007
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Opstartlader herinstalleren"
@@ -1207,12 +1207,12 @@ msgstr ""
 msgid "New"
 msgstr "Nieuw"
 
-#: diskdrake/dav.pm:61 diskdrake/interactive.pm:409 diskdrake/smbnfs_gtk.pm:75
+#: diskdrake/dav.pm:61 diskdrake/interactive.pm:411 diskdrake/smbnfs_gtk.pm:75
 #, c-format
 msgid "Unmount"
 msgstr "Ontkoppelen"
 
-#: diskdrake/dav.pm:62 diskdrake/interactive.pm:405 diskdrake/smbnfs_gtk.pm:76
+#: diskdrake/dav.pm:62 diskdrake/interactive.pm:407 diskdrake/smbnfs_gtk.pm:76
 #, c-format
 msgid "Mount"
 msgstr "Koppelen"
@@ -1222,16 +1222,16 @@ msgstr "Koppelen"
 msgid "Server"
 msgstr "Server"
 
-#: diskdrake/dav.pm:64 diskdrake/interactive.pm:399
-#: diskdrake/interactive.pm:655 diskdrake/interactive.pm:673
-#: diskdrake/interactive.pm:677 diskdrake/removable.pm:23
+#: diskdrake/dav.pm:64 diskdrake/interactive.pm:401
+#: diskdrake/interactive.pm:662 diskdrake/interactive.pm:680
+#: diskdrake/interactive.pm:684 diskdrake/removable.pm:23
 #: diskdrake/smbnfs_gtk.pm:79
 #, c-format
 msgid "Mount point"
 msgstr "Koppelpunt"
 
-#: diskdrake/dav.pm:65 diskdrake/interactive.pm:401
-#: diskdrake/interactive.pm:1061 diskdrake/removable.pm:24
+#: diskdrake/dav.pm:65 diskdrake/interactive.pm:403
+#: diskdrake/interactive.pm:1068 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
@@ -1244,16 +1244,16 @@ msgid "Done"
 msgstr "Klaar"
 
 #: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:123 diskdrake/hd_gtk.pm:290
-#: diskdrake/interactive.pm:245 diskdrake/interactive.pm:258
-#: diskdrake/interactive.pm:514 diskdrake/interactive.pm:519
-#: diskdrake/interactive.pm:645 diskdrake/interactive.pm:931
-#: diskdrake/interactive.pm:1107 diskdrake/interactive.pm:1120
-#: diskdrake/interactive.pm:1123 diskdrake/interactive.pm:1391
+#: diskdrake/interactive.pm:247 diskdrake/interactive.pm:260
+#: diskdrake/interactive.pm:516 diskdrake/interactive.pm:521
+#: diskdrake/interactive.pm:652 diskdrake/interactive.pm:938
+#: diskdrake/interactive.pm:1114 diskdrake/interactive.pm:1127
+#: diskdrake/interactive.pm:1130 diskdrake/interactive.pm:1398
 #: diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23 do_pkgs.pm:28 do_pkgs.pm:44
-#: do_pkgs.pm:60 do_pkgs.pm:65 fsedit.pm:245 interactive/http.pm:117
-#: interactive/http.pm:118 modules/interactive.pm:19 scanner.pm:95
-#: scanner.pm:106 scanner.pm:113 scanner.pm:120 wizards.pm:95 wizards.pm:99
-#: wizards.pm:121
+#: do_pkgs.pm:60 do_pkgs.pm:65 do_pkgs.pm:82 fsedit.pm:245
+#: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
+#: scanner.pm:95 scanner.pm:106 scanner.pm:113 scanner.pm:120 wizards.pm:95
+#: wizards.pm:99 wizards.pm:121
 #, c-format
 msgid "Error"
 msgstr "Fout"
@@ -1273,18 +1273,18 @@ msgstr "De URL moet beginnen met http:// of https://"
 msgid "Server: "
 msgstr "Server:"
 
-#: diskdrake/dav.pm:110 diskdrake/interactive.pm:487
-#: diskdrake/interactive.pm:1266 diskdrake/interactive.pm:1351
+#: diskdrake/dav.pm:110 diskdrake/interactive.pm:489
+#: diskdrake/interactive.pm:1273 diskdrake/interactive.pm:1358
 #, c-format
 msgid "Mount point: "
 msgstr "Koppelpunt: "
 
-#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1358
+#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1365
 #, c-format
 msgid "Options: %s"
 msgstr "Opties: %s"
 
-#: diskdrake/hd_gtk.pm:54 diskdrake/interactive.pm:296
+#: diskdrake/hd_gtk.pm:54 diskdrake/interactive.pm:298
 #: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:106
 #: fs/partitioning_wizard.pm:51 fs/partitioning_wizard.pm:206
 #: fs/partitioning_wizard.pm:211 fs/partitioning_wizard.pm:250
@@ -1298,8 +1298,8 @@ msgstr "Partitionering"
 msgid "Click on a partition, choose a filesystem type then choose an action"
 msgstr "Klik op een partitie, kies een bestandssysteemtype en dan een actie"
 
-#: diskdrake/hd_gtk.pm:105 diskdrake/interactive.pm:1082
-#: diskdrake/interactive.pm:1092 diskdrake/interactive.pm:1145
+#: diskdrake/hd_gtk.pm:105 diskdrake/interactive.pm:1089
+#: diskdrake/interactive.pm:1099 diskdrake/interactive.pm:1152
 #, c-format
 msgid "Read carefully"
 msgstr "Lees aandachtig"
@@ -1309,7 +1309,7 @@ msgstr "Lees aandachtig"
 msgid "Please make a backup of your data first"
 msgstr "Maak eerst een veiligheidskopie van uw gegevens"
 
-#: diskdrake/hd_gtk.pm:106 diskdrake/interactive.pm:238
+#: diskdrake/hd_gtk.pm:106 diskdrake/interactive.pm:240
 #, c-format
 msgid "Exit"
 msgstr "Afsluiten"
@@ -1319,8 +1319,8 @@ msgstr "Afsluiten"
 msgid "Continue"
 msgstr "Doorgaan"
 
-#: diskdrake/hd_gtk.pm:178 interactive.pm:653 interactive/gtk.pm:784
-#: interactive/gtk.pm:802 interactive/gtk.pm:823 ugtk2.pm:936
+#: diskdrake/hd_gtk.pm:178 interactive.pm:653 interactive/gtk.pm:786
+#: interactive/gtk.pm:804 interactive/gtk.pm:825 ugtk2.pm:936
 #, c-format
 msgid "Help"
 msgstr "Hulp"
@@ -1391,7 +1391,7 @@ msgstr "Windows"
 msgid "Other"
 msgstr "Overig"
 
-#: diskdrake/hd_gtk.pm:380 diskdrake/interactive.pm:1281
+#: diskdrake/hd_gtk.pm:380 diskdrake/interactive.pm:1288
 #, c-format
 msgid "Empty"
 msgstr "Leeg"
@@ -1401,13 +1401,13 @@ msgstr "Leeg"
 msgid "Filesystem types:"
 msgstr "Bestandssysteemtypes:"
 
-#: diskdrake/hd_gtk.pm:408 diskdrake/interactive.pm:301
-#: diskdrake/interactive.pm:386 diskdrake/interactive.pm:544
-#: diskdrake/interactive.pm:736 diskdrake/interactive.pm:794
-#: diskdrake/interactive.pm:911 diskdrake/interactive.pm:953
-#: diskdrake/interactive.pm:954 diskdrake/interactive.pm:1204
-#: diskdrake/interactive.pm:1242 diskdrake/interactive.pm:1390 do_pkgs.pm:19
-#: do_pkgs.pm:39 do_pkgs.pm:57 harddrake/sound.pm:438
+#: diskdrake/hd_gtk.pm:408 diskdrake/interactive.pm:303
+#: diskdrake/interactive.pm:388 diskdrake/interactive.pm:546
+#: diskdrake/interactive.pm:743 diskdrake/interactive.pm:801
+#: diskdrake/interactive.pm:918 diskdrake/interactive.pm:960
+#: diskdrake/interactive.pm:961 diskdrake/interactive.pm:1211
+#: diskdrake/interactive.pm:1249 diskdrake/interactive.pm:1397 do_pkgs.pm:19
+#: do_pkgs.pm:39 do_pkgs.pm:57 do_pkgs.pm:77 harddrake/sound.pm:439
 #, c-format
 msgid "Warning"
 msgstr "Waarschuwing"
@@ -1427,62 +1427,62 @@ msgstr "Gebruik eerst ``Ontkoppelen''"
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "‘%s’ in plaats gebruiken (in expert-modus)"
 
-#: diskdrake/hd_gtk.pm:417 diskdrake/interactive.pm:400
-#: diskdrake/interactive.pm:582 diskdrake/removable.pm:25
+#: diskdrake/hd_gtk.pm:417 diskdrake/interactive.pm:402
+#: diskdrake/interactive.pm:584 diskdrake/removable.pm:25
 #: diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
 msgstr "Type"
 
-#: diskdrake/interactive.pm:209
+#: diskdrake/interactive.pm:211
 #, c-format
 msgid "Choose another partition"
 msgstr "Kies een andere partitie"
 
-#: diskdrake/interactive.pm:209
+#: diskdrake/interactive.pm:211
 #, c-format
 msgid "Choose a partition"
 msgstr "Kies een partitie"
 
-#: diskdrake/interactive.pm:271 diskdrake/interactive.pm:377
+#: diskdrake/interactive.pm:273 diskdrake/interactive.pm:379
 #: interactive/curses.pm:512
 #, c-format
 msgid "More"
 msgstr "Meer"
 
-#: diskdrake/interactive.pm:279 diskdrake/interactive.pm:289
-#: diskdrake/interactive.pm:1189
+#: diskdrake/interactive.pm:281 diskdrake/interactive.pm:291
+#: diskdrake/interactive.pm:1196
 #, c-format
 msgid "Confirmation"
 msgstr "Bevestiging"
 
-#: diskdrake/interactive.pm:279
+#: diskdrake/interactive.pm:281
 #, c-format
 msgid "Continue anyway?"
 msgstr "Toch doorgaan?"
 
-#: diskdrake/interactive.pm:284
+#: diskdrake/interactive.pm:286
 #, c-format
 msgid "Quit without saving"
 msgstr "Afsluiten zonder opslaan"
 
-#: diskdrake/interactive.pm:284
+#: diskdrake/interactive.pm:286
 #, c-format
 msgid "Quit without writing the partition table?"
 msgstr "Afsluiten zonder de partitietabel weg te schrijven?"
 
-#: diskdrake/interactive.pm:289
+#: diskdrake/interactive.pm:291
 #, c-format
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "Wilt u de /etc/fstab aanpassingen bewaren"
 
-#: diskdrake/interactive.pm:296 fs/partitioning_wizard.pm:250
+#: diskdrake/interactive.pm:298 fs/partitioning_wizard.pm:250
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
 "U dient te herstarten om de wijzigingen in de partitietabel te activeren."
 
-#: diskdrake/interactive.pm:301
+#: diskdrake/interactive.pm:303
 #, c-format
 msgid ""
 "You should format partition %s.\n"
@@ -1493,42 +1493,42 @@ msgstr ""
 "Anders kan er geen regel voor koppelpunt %s in fstab worden gezet.\n"
 "Toch afsluiten?"
 
-#: diskdrake/interactive.pm:314
+#: diskdrake/interactive.pm:316
 #, c-format
 msgid "Clear all"
 msgstr "Alles wissen"
 
-#: diskdrake/interactive.pm:315
+#: diskdrake/interactive.pm:317
 #, c-format
 msgid "Auto allocate"
 msgstr "Automatisch toewijzen"
 
-#: diskdrake/interactive.pm:321
+#: diskdrake/interactive.pm:323
 #, c-format
 msgid "Toggle to normal mode"
 msgstr "Naar normale modus"
 
-#: diskdrake/interactive.pm:321
+#: diskdrake/interactive.pm:323
 #, c-format
 msgid "Toggle to expert mode"
 msgstr "Naar expert-modus"
 
-#: diskdrake/interactive.pm:333
+#: diskdrake/interactive.pm:335
 #, c-format
 msgid "Hard drive information"
 msgstr "Informatie over harde schijf"
 
-#: diskdrake/interactive.pm:366
+#: diskdrake/interactive.pm:368
 #, c-format
 msgid "All primary partitions are used"
 msgstr "Alle primaire partities zijn al toegewezen"
 
-#: diskdrake/interactive.pm:367
+#: diskdrake/interactive.pm:369
 #, c-format
 msgid "I can not add any more partitions"
 msgstr "U kunt geen partitie meer toevoegen"
 
-#: diskdrake/interactive.pm:368
+#: diskdrake/interactive.pm:370
 #, c-format
 msgid ""
 "To have more partitions, please delete one to be able to create an extended "
@@ -1537,112 +1537,112 @@ msgstr ""
 "Om meer partities te kunnen maken, zal u er een moeten verwijderen. Dan kan\n"
 "er een uitgebreide (extended) partitie worden bijgemaakt"
 
-#: diskdrake/interactive.pm:379
+#: diskdrake/interactive.pm:381
 #, c-format
 msgid "Reload partition table"
 msgstr "Partitietabel opnieuw laden"
 
-#: diskdrake/interactive.pm:386
+#: diskdrake/interactive.pm:388
 #, c-format
 msgid "Detailed information"
 msgstr "Gedetailleerde informatie"
 
-#: diskdrake/interactive.pm:398
+#: diskdrake/interactive.pm:400
 #, c-format
 msgid "View"
 msgstr ""
 
-#: diskdrake/interactive.pm:403 diskdrake/interactive.pm:749
+#: diskdrake/interactive.pm:405 diskdrake/interactive.pm:756
 #, c-format
 msgid "Resize"
 msgstr "Grootte aanpassen"
 
-#: diskdrake/interactive.pm:404
+#: diskdrake/interactive.pm:406
 #, c-format
 msgid "Format"
 msgstr "Formatteren"
 
-#: diskdrake/interactive.pm:406 diskdrake/interactive.pm:859
+#: diskdrake/interactive.pm:408 diskdrake/interactive.pm:866
 #, c-format
 msgid "Add to RAID"
 msgstr "Toevoegen aan RAID"
 
-#: diskdrake/interactive.pm:407 diskdrake/interactive.pm:877
+#: diskdrake/interactive.pm:409 diskdrake/interactive.pm:884
 #, c-format
 msgid "Add to LVM"
 msgstr "Toevoegen aan LVM"
 
-#: diskdrake/interactive.pm:408
+#: diskdrake/interactive.pm:410
 #, c-format
 msgid "Use"
 msgstr "Gebruiken"
 
-#: diskdrake/interactive.pm:410
+#: diskdrake/interactive.pm:412
 #, c-format
 msgid "Delete"
 msgstr "Verwijderen"
 
-#: diskdrake/interactive.pm:411
+#: diskdrake/interactive.pm:413
 #, c-format
 msgid "Remove from RAID"
 msgstr "Verwijderen uit RAID"
 
-#: diskdrake/interactive.pm:412
+#: diskdrake/interactive.pm:414
 #, c-format
 msgid "Remove from LVM"
 msgstr "Verwijderen uit LVM"
 
-#: diskdrake/interactive.pm:413
+#: diskdrake/interactive.pm:415
 #, c-format
 msgid "Remove from dm"
 msgstr "Verwijderen uit dm"
 
-#: diskdrake/interactive.pm:414
+#: diskdrake/interactive.pm:416
 #, c-format
 msgid "Modify RAID"
 msgstr "RAID aanpassen"
 
-#: diskdrake/interactive.pm:415
+#: diskdrake/interactive.pm:417
 #, c-format
 msgid "Use for loopback"
 msgstr "Voor Loopback gebruiken"
 
-#: diskdrake/interactive.pm:426
+#: diskdrake/interactive.pm:428
 #, c-format
 msgid "Create"
 msgstr "Aanmaken"
 
-#: diskdrake/interactive.pm:476 diskdrake/interactive.pm:478
+#: diskdrake/interactive.pm:478 diskdrake/interactive.pm:480
 #, c-format
 msgid "Create a new partition"
 msgstr "Nieuwe partitie creëren"
 
-#: diskdrake/interactive.pm:480
+#: diskdrake/interactive.pm:482
 #, c-format
 msgid "Start sector: "
 msgstr "Start-sector: "
 
-#: diskdrake/interactive.pm:483 diskdrake/interactive.pm:946
+#: diskdrake/interactive.pm:485 diskdrake/interactive.pm:953
 #, c-format
 msgid "Size in MB: "
 msgstr "Grootte in MB: "
 
-#: diskdrake/interactive.pm:485 diskdrake/interactive.pm:947
+#: diskdrake/interactive.pm:487 diskdrake/interactive.pm:954
 #, c-format
 msgid "Filesystem type: "
 msgstr "Bestandssysteem-type: "
 
-#: diskdrake/interactive.pm:491
+#: diskdrake/interactive.pm:493
 #, c-format
 msgid "Preference: "
 msgstr "Voorkeur: "
 
-#: diskdrake/interactive.pm:494
+#: diskdrake/interactive.pm:496
 #, c-format
 msgid "Logical volume name "
 msgstr "Logische volumenaam "
 
-#: diskdrake/interactive.pm:514
+#: diskdrake/interactive.pm:516
 #, c-format
 msgid ""
 "You can not create a new partition\n"
@@ -1653,12 +1653,12 @@ msgstr ""
 "het maximale aantal primaire partities bereikt hebt.\n"
 "Verwijder eerst een primaire partitie en creëer een uitgebreide partitie."
 
-#: diskdrake/interactive.pm:544
+#: diskdrake/interactive.pm:546
 #, c-format
 msgid "Remove the loopback file?"
 msgstr "Het loopback-bestand verwijderen?"
 
-#: diskdrake/interactive.pm:566
+#: diskdrake/interactive.pm:568
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
@@ -1666,52 +1666,57 @@ msgstr ""
 "Na het veranderen van het type van partitie %s, zullen alle gegevens op deze "
 "partitie verloren gaan"
 
-#: diskdrake/interactive.pm:579
+#: diskdrake/interactive.pm:581
 #, c-format
 msgid "Change partition type"
 msgstr "Partitietype veranderen"
 
-#: diskdrake/interactive.pm:581 diskdrake/removable.pm:47
+#: diskdrake/interactive.pm:583 diskdrake/removable.pm:47
 #, c-format
 msgid "Which filesystem do you want?"
 msgstr "Welk bestandssysteem wilt u?"
 
-#: diskdrake/interactive.pm:588
+#: diskdrake/interactive.pm:590
 #, c-format
 msgid "Switching from %s to %s"
 msgstr "Omschakelen van %s naar %s"
 
-#: diskdrake/interactive.pm:616
+#: diskdrake/interactive.pm:620
 #, fuzzy, c-format
 msgid "Set volume label"
 msgstr "Welk volumen-label?"
 
-#: diskdrake/interactive.pm:616
+#: diskdrake/interactive.pm:622
 #, c-format
 msgid "Beware, this will be written to disk as soon as you validate!"
 msgstr ""
 
-#: diskdrake/interactive.pm:618
+#: diskdrake/interactive.pm:623
+#, c-format
+msgid "Beware, this will be written to disk only after formatting!"
+msgstr ""
+
+#: diskdrake/interactive.pm:625
 #, c-format
 msgid "Which volume label?"
 msgstr "Welk volumen-label?"
 
-#: diskdrake/interactive.pm:619
+#: diskdrake/interactive.pm:626
 #, c-format
 msgid "Label:"
 msgstr "Label:"
 
-#: diskdrake/interactive.pm:640
+#: diskdrake/interactive.pm:647
 #, c-format
 msgid "Where do you want to mount the loopback file %s?"
 msgstr "Waar wenst u het loopback-bestand %s aan te koppelen?"
 
-#: diskdrake/interactive.pm:641
+#: diskdrake/interactive.pm:648
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "Waar wilt u apparaat %s koppelen?"
 
-#: diskdrake/interactive.pm:646
+#: diskdrake/interactive.pm:653
 #, c-format
 msgid ""
 "Can not unset mount point as this partition is used for loop back.\n"
@@ -1720,62 +1725,62 @@ msgstr ""
 "Kan een koppelpunt niet verzetten omdat deze partitie gebruikt wordt als\n"
 "loopback. Verwijder de loopback eerst."
 
-#: diskdrake/interactive.pm:676
+#: diskdrake/interactive.pm:683
 #, c-format
 msgid "Where do you want to mount %s?"
 msgstr "Waar wilt u %s koppelen?"
 
-#: diskdrake/interactive.pm:700 diskdrake/interactive.pm:783
+#: diskdrake/interactive.pm:707 diskdrake/interactive.pm:790
 #: fs/partitioning_wizard.pm:146 fs/partitioning_wizard.pm:178
 #, c-format
 msgid "Resizing"
 msgstr "Grootte aanpassen"
 
-#: diskdrake/interactive.pm:700
+#: diskdrake/interactive.pm:707
 #, c-format
 msgid "Computing FAT filesystem bounds"
 msgstr "Bezig met berekenen van FAT bestandssysteemgrenzen"
 
-#: diskdrake/interactive.pm:736
+#: diskdrake/interactive.pm:743
 #, c-format
 msgid "This partition is not resizeable"
 msgstr "Deze partitie is niet in grootte aanpasbaar"
 
-#: diskdrake/interactive.pm:741
+#: diskdrake/interactive.pm:748
 #, c-format
 msgid "All data on this partition should be backed-up"
 msgstr ""
 "Er zou een reservekopie gemaakt moeten worden van alle gegevens op deze "
 "partitie."
 
-#: diskdrake/interactive.pm:743
+#: diskdrake/interactive.pm:750
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr ""
 "Na het veranderen van de grootte van partitie %s, zullen alle gegevens op "
 "deze partitie verloren gaan"
 
-#: diskdrake/interactive.pm:750
+#: diskdrake/interactive.pm:757
 #, c-format
 msgid "Choose the new size"
 msgstr "Kies de nieuwe grootte"
 
-#: diskdrake/interactive.pm:751
+#: diskdrake/interactive.pm:758
 #, c-format
 msgid "New size in MB: "
 msgstr "Nieuwe grootte in MB: "
 
-#: diskdrake/interactive.pm:752
+#: diskdrake/interactive.pm:759
 #, c-format
 msgid "Minimum size: %s MB"
 msgstr "Minimale grootte: %s MB"
 
-#: diskdrake/interactive.pm:753
+#: diskdrake/interactive.pm:760
 #, c-format
 msgid "Maximum size: %s MB"
 msgstr "Maximale grootte: %s MB"
 
-#: diskdrake/interactive.pm:794
+#: diskdrake/interactive.pm:801
 #, fuzzy, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
@@ -1785,47 +1790,47 @@ msgstr ""
 "te garanderen, zal het bestandssysteem worden gecontroleerd\n"
 "de volgende keer dat u Windows(TM) opstart"
 
-#: diskdrake/interactive.pm:842 diskdrake/interactive.pm:1386
+#: diskdrake/interactive.pm:849 diskdrake/interactive.pm:1393
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "Sleutel voor bestandssysteemversleuteling"
 
-#: diskdrake/interactive.pm:843
+#: diskdrake/interactive.pm:850
 #, c-format
 msgid "Enter your filesystem encryption key"
 msgstr "Voer uw sleutel voor bestandssysteemversleuteling in"
 
-#: diskdrake/interactive.pm:844 diskdrake/interactive.pm:1394
+#: diskdrake/interactive.pm:851 diskdrake/interactive.pm:1401
 #, c-format
 msgid "Encryption key"
 msgstr "Vercijferingssleutel"
 
-#: diskdrake/interactive.pm:851
+#: diskdrake/interactive.pm:858
 #, c-format
 msgid "Invalid key"
 msgstr "Ongeldige sleutel"
 
-#: diskdrake/interactive.pm:859
+#: diskdrake/interactive.pm:866
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "Kies een bestaande RAID om aan toe te voegen"
 
-#: diskdrake/interactive.pm:861 diskdrake/interactive.pm:879
+#: diskdrake/interactive.pm:868 diskdrake/interactive.pm:886
 #, c-format
 msgid "new"
 msgstr "nieuw"
 
-#: diskdrake/interactive.pm:877
+#: diskdrake/interactive.pm:884
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "Kies een bestaande LVM om aan toe te voegen"
 
-#: diskdrake/interactive.pm:884
+#: diskdrake/interactive.pm:891
 #, c-format
 msgid "LVM name?"
 msgstr "Naam van de LVM?"
 
-#: diskdrake/interactive.pm:911
+#: diskdrake/interactive.pm:918
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
@@ -1835,119 +1840,119 @@ msgstr ""
 "Wilt u de gebruikte fysieke extents van dit volumen naar andere volumina "
 "verplaatsen?"
 
-#: diskdrake/interactive.pm:913
+#: diskdrake/interactive.pm:920
 #, c-format
 msgid "Moving physical extents"
 msgstr "Verplaatsen van fysieke extents"
 
-#: diskdrake/interactive.pm:931
+#: diskdrake/interactive.pm:938
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "Deze partitie kan niet gebruikt worden voor loopback"
 
-#: diskdrake/interactive.pm:944
+#: diskdrake/interactive.pm:951
 #, c-format
 msgid "Loopback"
 msgstr "Loopback"
 
-#: diskdrake/interactive.pm:945
+#: diskdrake/interactive.pm:952
 #, c-format
 msgid "Loopback file name: "
 msgstr "Loopback-bestandsnaam: "
 
-#: diskdrake/interactive.pm:950
+#: diskdrake/interactive.pm:957
 #, c-format
 msgid "Give a file name"
 msgstr "Voer een bestandsnaam in"
 
-#: diskdrake/interactive.pm:953
+#: diskdrake/interactive.pm:960
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "Loopback-bestand is al in gebruik, gelieve een ander te kiezen"
 
-#: diskdrake/interactive.pm:954
+#: diskdrake/interactive.pm:961
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "Het bestand bestaat al. Wenst u het te gebruiken?"
 
-#: diskdrake/interactive.pm:986 diskdrake/interactive.pm:989
+#: diskdrake/interactive.pm:993 diskdrake/interactive.pm:996
 #, c-format
 msgid "Mount options"
 msgstr "Koppel-opties:"
 
-#: diskdrake/interactive.pm:996
+#: diskdrake/interactive.pm:1003
 #, c-format
 msgid "Various"
 msgstr "Diversen"
 
-#: diskdrake/interactive.pm:1063
+#: diskdrake/interactive.pm:1070
 #, c-format
 msgid "device"
 msgstr "apparaat"
 
-#: diskdrake/interactive.pm:1064
+#: diskdrake/interactive.pm:1071
 #, c-format
 msgid "level"
 msgstr "niveau"
 
-#: diskdrake/interactive.pm:1065
+#: diskdrake/interactive.pm:1072
 #, c-format
 msgid "chunk size in KiB"
 msgstr "chunk-grootte in KiB"
 
-#: diskdrake/interactive.pm:1083
+#: diskdrake/interactive.pm:1090
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Voorzichtig: deze operatie is gevaarlijk."
 
-#: diskdrake/interactive.pm:1098
+#: diskdrake/interactive.pm:1105
 #, c-format
 msgid "Partitioning Type"
 msgstr "Type partitionering"
 
-#: diskdrake/interactive.pm:1098
+#: diskdrake/interactive.pm:1105
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Welk type partitionering?"
 
-#: diskdrake/interactive.pm:1136
+#: diskdrake/interactive.pm:1143
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "U zult moeten herstarten voordat de aanpassing van kracht wordt"
 
-#: diskdrake/interactive.pm:1145
+#: diskdrake/interactive.pm:1152
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk"
 msgstr "Partitietabel van station %s zal worden geschreven naar de schijf"
 
-#: diskdrake/interactive.pm:1167 fs/format.pm:96 fs/format.pm:103
+#: diskdrake/interactive.pm:1174 fs/format.pm:96 fs/format.pm:103
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Bezig met formatteren van partitie %s"
 
-#: diskdrake/interactive.pm:1180
+#: diskdrake/interactive.pm:1187
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr ""
 "Na het formatteren van partitie %s, zullen alle gegevens op deze partitie "
 "verloren zijn"
 
-#: diskdrake/interactive.pm:1189 fs/partitioning.pm:48
+#: diskdrake/interactive.pm:1196 fs/partitioning.pm:48
 #, c-format
 msgid "Check bad blocks?"
 msgstr "Controleren op slechte blokken?"
 
-#: diskdrake/interactive.pm:1203
+#: diskdrake/interactive.pm:1210
 #, c-format
 msgid "Move files to the new partition"
 msgstr "Bestanden naar de nieuwe partitie verplaatsen"
 
-#: diskdrake/interactive.pm:1203
+#: diskdrake/interactive.pm:1210
 #, c-format
 msgid "Hide files"
 msgstr "Bestanden verbergen"
 
-#: diskdrake/interactive.pm:1204
+#: diskdrake/interactive.pm:1211
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -1964,128 +1969,128 @@ msgstr ""
 "gekoppeld, of om de bestanden hier te laten staan. Zolang de partitie is "
 "gekoppeld zijn de bestanden niet beschikbaar."
 
-#: diskdrake/interactive.pm:1219
+#: diskdrake/interactive.pm:1226
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "Bezig met verplaatsen van bestanden naar de nieuwe partitie"
 
-#: diskdrake/interactive.pm:1223
+#: diskdrake/interactive.pm:1230
 #, c-format
 msgid "Copying %s"
 msgstr "Bezig met kopiëren van %s"
 
-#: diskdrake/interactive.pm:1227
+#: diskdrake/interactive.pm:1234
 #, c-format
 msgid "Removing %s"
 msgstr "Bezig met verwijderen van %s"
 
-#: diskdrake/interactive.pm:1241
+#: diskdrake/interactive.pm:1248
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "partitie %s heet vanaf nu %s"
 
-#: diskdrake/interactive.pm:1242
+#: diskdrake/interactive.pm:1249
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr "Partities zijn hernummerd: "
 
-#: diskdrake/interactive.pm:1267 diskdrake/interactive.pm:1335
+#: diskdrake/interactive.pm:1274 diskdrake/interactive.pm:1342
 #, c-format
 msgid "Device: "
 msgstr "Apparaat: "
 
-#: diskdrake/interactive.pm:1268
+#: diskdrake/interactive.pm:1275
 #, c-format
 msgid "Volume label: "
 msgstr "Volumen-label: "
 
-#: diskdrake/interactive.pm:1269
+#: diskdrake/interactive.pm:1276
 #, c-format
 msgid "UUID: "
 msgstr "UUID: "
 
-#: diskdrake/interactive.pm:1270
+#: diskdrake/interactive.pm:1277
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS schijfletter: %s (slechts een gok)\n"
 
-#: diskdrake/interactive.pm:1274 diskdrake/interactive.pm:1283
-#: diskdrake/interactive.pm:1354
+#: diskdrake/interactive.pm:1281 diskdrake/interactive.pm:1290
+#: diskdrake/interactive.pm:1361
 #, c-format
 msgid "Type: "
 msgstr "Type: "
 
-#: diskdrake/interactive.pm:1278 diskdrake/interactive.pm:1339
+#: diskdrake/interactive.pm:1285 diskdrake/interactive.pm:1346
 #, c-format
 msgid "Name: "
 msgstr "Naam: "
 
-#: diskdrake/interactive.pm:1285
+#: diskdrake/interactive.pm:1292
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Start: sector %s\n"
 
-#: diskdrake/interactive.pm:1286
+#: diskdrake/interactive.pm:1293
 #, c-format
 msgid "Size: %s"
 msgstr "Grootte: %s"
 
-#: diskdrake/interactive.pm:1288
+#: diskdrake/interactive.pm:1295
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s sectoren"
 
-#: diskdrake/interactive.pm:1290
+#: diskdrake/interactive.pm:1297
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "Cylinder %d tot %d\n"
 
-#: diskdrake/interactive.pm:1291
+#: diskdrake/interactive.pm:1298
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr "Aantal logische extents: %d\n"
 
-#: diskdrake/interactive.pm:1292
+#: diskdrake/interactive.pm:1299
 #, c-format
 msgid "Formatted\n"
 msgstr "Geformatteerd\n"
 
-#: diskdrake/interactive.pm:1293
+#: diskdrake/interactive.pm:1300
 #, c-format
 msgid "Not formatted\n"
 msgstr "Niet geformatteerd\n"
 
-#: diskdrake/interactive.pm:1294
+#: diskdrake/interactive.pm:1301
 #, c-format
 msgid "Mounted\n"
 msgstr "Gekoppeld\n"
 
-#: diskdrake/interactive.pm:1295
+#: diskdrake/interactive.pm:1302
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1297
+#: diskdrake/interactive.pm:1304
 #, c-format
 msgid "Encrypted"
 msgstr "Versleuteld"
 
-#: diskdrake/interactive.pm:1297
+#: diskdrake/interactive.pm:1304
 #, c-format
 msgid " (mapped on %s)"
 msgstr " (afgebeeld op %s)"
 
-#: diskdrake/interactive.pm:1298
+#: diskdrake/interactive.pm:1305
 #, c-format
 msgid " (to map on %s)"
 msgstr " (af te beelden op %s)"
 
-#: diskdrake/interactive.pm:1299
+#: diskdrake/interactive.pm:1306
 #, c-format
 msgid " (inactive)"
 msgstr " (inactief)"
 
-#: diskdrake/interactive.pm:1305
+#: diskdrake/interactive.pm:1312
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2094,7 +2099,7 @@ msgstr ""
 "Loopback-bestand(en):\n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1306
+#: diskdrake/interactive.pm:1313
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -2103,27 +2108,27 @@ msgstr ""
 "Standaard te starten partitie\n"
 "    (om MS-DOS te booten, niet voor lilo)\n"
 
-#: diskdrake/interactive.pm:1308
+#: diskdrake/interactive.pm:1315
 #, c-format
 msgid "Level %s\n"
 msgstr "Niveau %s\n"
 
-#: diskdrake/interactive.pm:1309
+#: diskdrake/interactive.pm:1316
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "Chunk-grootte %d KiB\n"
 
-#: diskdrake/interactive.pm:1310
+#: diskdrake/interactive.pm:1317
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "RAID-schijven %s\n"
 
-#: diskdrake/interactive.pm:1312
+#: diskdrake/interactive.pm:1319
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Loopback bestandsnaam: %s"
 
-#: diskdrake/interactive.pm:1315
+#: diskdrake/interactive.pm:1322
 #, c-format
 msgid ""
 "\n"
@@ -2137,7 +2142,7 @@ msgstr ""
 "U kunt hem waarschijnlijk beter met\n"
 "rust laten.\n"
 
-#: diskdrake/interactive.pm:1318
+#: diskdrake/interactive.pm:1325
 #, c-format
 msgid ""
 "\n"
@@ -2150,69 +2155,69 @@ msgstr ""
 "partitie is voor het\n"
 "multi-opstarten van uw systeem.\n"
 
-#: diskdrake/interactive.pm:1327
+#: diskdrake/interactive.pm:1334
 #, c-format
 msgid "Free space on %s (%s)"
 msgstr "Vrije ruimte op %s (%s)"
 
-#: diskdrake/interactive.pm:1336
+#: diskdrake/interactive.pm:1343
 #, c-format
 msgid "Read-only"
 msgstr "Alleen-lezen"
 
-#: diskdrake/interactive.pm:1337
+#: diskdrake/interactive.pm:1344
 #, c-format
 msgid "Size: %s\n"
 msgstr "Grootte: %s\n"
 
-#: diskdrake/interactive.pm:1338
+#: diskdrake/interactive.pm:1345
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Indeling: %s cylinders, %s koppen, %s sectoren\n"
 
-#: diskdrake/interactive.pm:1340
+#: diskdrake/interactive.pm:1347
 #, c-format
 msgid "Medium type: "
 msgstr "Mediumtype: "
 
-#: diskdrake/interactive.pm:1341
+#: diskdrake/interactive.pm:1348
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "LVM-schijven %s\n"
 
-#: diskdrake/interactive.pm:1342
+#: diskdrake/interactive.pm:1349
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Partitietabel-type: %s\n"
 
-#: diskdrake/interactive.pm:1343
+#: diskdrake/interactive.pm:1350
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "op kanaal %d id %d\n"
 
-#: diskdrake/interactive.pm:1387
+#: diskdrake/interactive.pm:1394
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Kies uw sleutel voor bestandssysteem-versleuteling"
 
-#: diskdrake/interactive.pm:1390
+#: diskdrake/interactive.pm:1397
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr ""
 "Deze versleutelings-sleutel is te makkelijk (moet tenminste %d tekens lang "
 "zijn)"
 
-#: diskdrake/interactive.pm:1391
+#: diskdrake/interactive.pm:1398
 #, c-format
 msgid "The encryption keys do not match"
 msgstr "De versleuteling-sleutels kloppen niet met elkaar"
 
-#: diskdrake/interactive.pm:1395
+#: diskdrake/interactive.pm:1402
 #, c-format
 msgid "Encryption key (again)"
 msgstr "versleutelings sleutel (nogmaals)"
 
-#: diskdrake/interactive.pm:1397
+#: diskdrake/interactive.pm:1404
 #, c-format
 msgid "Encryption algorithm"
 msgstr "Versleutelingsalgoritme"
@@ -2224,7 +2229,7 @@ msgstr "Type veranderen"
 
 #: diskdrake/smbnfs_gtk.pm:81 interactive.pm:129 interactive.pm:550
 #: interactive/curses.pm:260 interactive/http.pm:104 interactive/http.pm:160
-#: interactive/stdio.pm:39 interactive/stdio.pm:148 mygtk2.pm:802 ugtk2.pm:415
+#: interactive/stdio.pm:39 interactive/stdio.pm:148 mygtk2.pm:805 ugtk2.pm:415
 #: ugtk2.pm:517 ugtk2.pm:526 ugtk2.pm:812
 #, c-format
 msgid "Cancel"
@@ -2283,7 +2288,7 @@ msgstr "Nieuwe servers zoeken"
 msgid "The package %s needs to be installed. Do you want to install it?"
 msgstr "Pakket %s dient geïnstalleerd te worden. Wilt u het installeren?"
 
-#: do_pkgs.pm:23 do_pkgs.pm:44 do_pkgs.pm:60
+#: do_pkgs.pm:23 do_pkgs.pm:44 do_pkgs.pm:60 do_pkgs.pm:82
 #, c-format
 msgid "Could not install the %s package!"
 msgstr "Kan het pakket %s niet installeren!"
@@ -2293,17 +2298,17 @@ msgstr "Kan het pakket %s niet installeren!"
 msgid "Mandatory package %s is missing"
 msgstr "Verplicht pakket %s ontbreekt"
 
-#: do_pkgs.pm:39
+#: do_pkgs.pm:39 do_pkgs.pm:77
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "De volgende pakketten dienen geïnstalleerd te worden:\n"
 
-#: do_pkgs.pm:221
+#: do_pkgs.pm:241
 #, c-format
 msgid "Installing packages..."
 msgstr "Bezig met installeren van pakketten..."
 
-#: do_pkgs.pm:267 pkgs.pm:265
+#: do_pkgs.pm:287 pkgs.pm:265
 #, c-format
 msgid "Removing packages..."
 msgstr "Verwijderen van pakketten..."
@@ -2337,15 +2342,15 @@ msgstr "Methode voor formatteren van %s in type %s onbekend"
 
 #: fs/format.pm:126
 #, fuzzy, c-format
-msgid "setting label on %s failed"
+msgid "setting label on %s failed, is it formatted?"
 msgstr "%s formatteren van %s mislukt"
 
-#: fs/format.pm:162
+#: fs/format.pm:167
 #, c-format
 msgid "I do not know how to format %s in type %s"
 msgstr "Methode voor formatteren van %s in type %s onbekend"
 
-#: fs/format.pm:167 fs/format.pm:169
+#: fs/format.pm:172 fs/format.pm:174
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "%s formatteren van %s mislukt"
@@ -2380,22 +2385,22 @@ msgstr "fout bij ontkoppelen %s: %s"
 msgid "Enabling swap partition %s"
 msgstr "Bezig met inschakelen van virtueel geheugen-partitie %s"
 
-#: fs/mount_options.pm:115
+#: fs/mount_options.pm:114
 #, c-format
 msgid "Use an encrypted file system"
 msgstr "Gebruik een versleuteld bestandssysteem"
 
-#: fs/mount_options.pm:117
+#: fs/mount_options.pm:116
 #, c-format
 msgid "Flush write cache on file close"
 msgstr "Schrijfbuffer legen bij sluiten bestand"
 
-#: fs/mount_options.pm:119
+#: fs/mount_options.pm:118
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
 msgstr "Zet harde schijf groepsquota aan en bekrachtig optioneel de limieten"
 
-#: fs/mount_options.pm:121
+#: fs/mount_options.pm:120
 #, c-format
 msgid ""
 "Do not update inode access times on this file system\n"
@@ -2404,7 +2409,7 @@ msgstr ""
 "inode-toegangstijden op dit bestandssysteem niet verversen\n"
 "(bijv. voor snellere toegang op de newsspool om newsservers te versnellen)."
 
-#: fs/mount_options.pm:124
+#: fs/mount_options.pm:123
 #, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
@@ -2414,7 +2419,7 @@ msgstr ""
 "verversen\n"
 "(bijv. voor snellere toegang op de newsspool om newsservers te versnellen)."
 
-#: fs/mount_options.pm:127
+#: fs/mount_options.pm:126
 #, c-format
 msgid ""
 "Can only be mounted explicitly (i.e.,\n"
@@ -2423,14 +2428,14 @@ msgstr ""
 "Kan alleen expliciet gekoppeld worden (bijvoorbeeld\n"
 "de optie -a zorgt er niet voor dat het bestandssysteem gekoppeld wordt)."
 
-#: fs/mount_options.pm:130
+#: fs/mount_options.pm:129
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
 msgstr ""
 "Speciale character- of block-apparaten op het bestandssysteem niet "
 "interpreteren."
 
-#: fs/mount_options.pm:132
+#: fs/mount_options.pm:131
 #, c-format
 msgid ""
 "Do not allow execution of any binaries on the mounted\n"
@@ -2441,7 +2446,7 @@ msgstr ""
 "bestandssysteem niet toestaan. Deze optie kan nuttig zijn voor een server\n"
 "die binaire bestanden bevat voor andere architecturen dan zijn eigen."
 
-#: fs/mount_options.pm:136
+#: fs/mount_options.pm:135
 #, c-format
 msgid ""
 "Do not allow set-user-identifier or set-group-identifier\n"
@@ -2452,44 +2457,44 @@ msgstr ""
 "om effect te hebben. (Dit lijkt veilig, maar is in feite nogal onveilig als\n"
 "u suidperl(1) geïnstalleerd heeft.)"
 
-#: fs/mount_options.pm:140
+#: fs/mount_options.pm:139
 #, c-format
 msgid "Mount the file system read-only."
 msgstr "Het bestandssysteem alleen voor lezen koppelen"
 
-#: fs/mount_options.pm:142
+#: fs/mount_options.pm:141
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
 msgstr "Alle I/O naar het bestandssysteem zou synchroon moeten gebeuren."
 
-#: fs/mount_options.pm:144
+#: fs/mount_options.pm:143
 #, c-format
 msgid "Allow every user to mount and umount the file system."
 msgstr "Alle gebruikers toestaan om het bestandsysteem aan- en af te koppelen."
 
-#: fs/mount_options.pm:146
+#: fs/mount_options.pm:145
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
 msgstr "Gewone gebruikers toestaan om het bestandsysteem aan te koppelen."
 
-#: fs/mount_options.pm:148
+#: fs/mount_options.pm:147
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr ""
 "Gebruikersquota voor harde schijf inschakelen en eventueel begrenzingen "
 "stellen"
 
-#: fs/mount_options.pm:150
+#: fs/mount_options.pm:149
 #, c-format
 msgid "Support \"user.\" extended attributes"
 msgstr "\"user.\"-uitgebreide attributen ondersteunen"
 
-#: fs/mount_options.pm:152
+#: fs/mount_options.pm:151
 #, c-format
 msgid "Give write access to ordinary users"
 msgstr "Schrijftoegang geven aan gewone gebruikers"
 
-#: fs/mount_options.pm:154
+#: fs/mount_options.pm:153
 #, c-format
 msgid "Give read-only access to ordinary users"
 msgstr "Alleen-lezen-toegang geven aan gewone gebruikers"
@@ -2742,7 +2747,7 @@ msgstr "Volledige harde schijf wissen en gebruiken"
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "U heeft meer dan één harde schijf, op welke wilt u Linux installeren?"
 
-#: fs/partitioning_wizard.pm:210 fsedit.pm:598
+#: fs/partitioning_wizard.pm:210 fsedit.pm:599
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr ""
@@ -2836,22 +2841,22 @@ msgstr ""
 "\n"
 "Gaat u ermee akkoord dat alle partities verloren gaan?\n"
 
-#: fsedit.pm:423
+#: fsedit.pm:424
 #, c-format
 msgid "Mount points must begin with a leading /"
 msgstr "Koppelpunten moeten beginnen met een /"
 
-#: fsedit.pm:424
+#: fsedit.pm:425
 #, c-format
 msgid "Mount points should contain only alphanumerical characters"
 msgstr "Koppelpuntnamen kunnen slechts alfanumerieke tekens bevatten"
 
-#: fsedit.pm:425
+#: fsedit.pm:426
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Er is al een partitie met als koppelpunt %s\n"
 
-#: fsedit.pm:429
+#: fsedit.pm:430
 #, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
@@ -2862,7 +2867,7 @@ msgstr ""
 "Geen enkele opstartlader kan dit aan zonder een /boot partitie.\n"
 "Vergeet dus niet om ook een /boot-partitie toe te voegen."
 
-#: fsedit.pm:435
+#: fsedit.pm:436
 #, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
@@ -2871,7 +2876,7 @@ msgstr ""
 "U kunt het LVM logisch volumen voor koppelpunt %s niet gebruiken aangezien "
 "het fysieke volumes omvat"
 
-#: fsedit.pm:437
+#: fsedit.pm:438
 #, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
@@ -2884,12 +2889,12 @@ msgstr ""
 "volumina omvat.\n"
 "U dient eerst een /boot partitie te creëren"
 
-#: fsedit.pm:441 fsedit.pm:443
+#: fsedit.pm:442 fsedit.pm:444
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Deze map zou binnen het root-bestandssysteem moeten blijven"
 
-#: fsedit.pm:445 fsedit.pm:447
+#: fsedit.pm:446 fsedit.pm:448
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
@@ -2898,17 +2903,17 @@ msgstr ""
 "U heeft een echt bestandssysteem (ext2/ext3, reiserfs, xfs of jfs) voor dit "
 "koppelpunt nodig\n"
 
-#: fsedit.pm:449
+#: fsedit.pm:450
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
 msgstr "U kunt geen versleuteld bestandssysteem voor koppelpunt %s gebruiken"
 
-#: fsedit.pm:514
+#: fsedit.pm:515
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "Niet voldoende vrije ruimte voor automatische toewijzing"
 
-#: fsedit.pm:516
+#: fsedit.pm:517
 #, c-format
 msgid "Nothing to do"
 msgstr "Niets meer te doen"
@@ -3043,113 +3048,113 @@ msgstr "Geluidskaart"
 msgid "Webcam"
 msgstr "Webcam"
 
-#: harddrake/data.pm:337
+#: harddrake/data.pm:338
 #, c-format
 msgid "Processors"
 msgstr "Processoren"
 
-#: harddrake/data.pm:347
+#: harddrake/data.pm:348
 #, c-format
 msgid "ISDN adapters"
 msgstr "ISDN-adapters"
 
-#: harddrake/data.pm:358
+#: harddrake/data.pm:359
 #, c-format
 msgid "USB sound devices"
 msgstr "USB geluidsapparaten"
 
-#: harddrake/data.pm:367
+#: harddrake/data.pm:368
 #, c-format
 msgid "Radio cards"
 msgstr "Radio kaarten"
 
-#: harddrake/data.pm:376
+#: harddrake/data.pm:377
 #, c-format
 msgid "ATM network cards"
 msgstr "ATM netwerkkaarten"
 
-#: harddrake/data.pm:385
+#: harddrake/data.pm:386
 #, c-format
 msgid "WAN network cards"
 msgstr "WAN netwerkkaarten"
 
-#: harddrake/data.pm:394
+#: harddrake/data.pm:395
 #, c-format
 msgid "Bluetooth devices"
 msgstr "Bluetooth apparaten"
 
-#: harddrake/data.pm:403
+#: harddrake/data.pm:404
 #, c-format
 msgid "Ethernetcard"
 msgstr "Ethernetkaart"
 
-#: harddrake/data.pm:420
+#: harddrake/data.pm:421
 #, c-format
 msgid "Modem"
 msgstr "Modem"
 
-#: harddrake/data.pm:430
+#: harddrake/data.pm:431
 #, c-format
 msgid "ADSL adapters"
 msgstr "ADSL-adapters"
 
-#: harddrake/data.pm:442
+#: harddrake/data.pm:443
 #, c-format
 msgid "Memory"
 msgstr "Geheugen"
 
-#: harddrake/data.pm:451
+#: harddrake/data.pm:452
 #, c-format
 msgid "Printer"
 msgstr "Printer"
 
 #. -PO: these are joysticks controllers:
-#: harddrake/data.pm:465
+#: harddrake/data.pm:466
 #, c-format
 msgid "Game port controllers"
 msgstr "Gamepoort controllers"
 
-#: harddrake/data.pm:474
+#: harddrake/data.pm:475
 #, c-format
 msgid "Joystick"
 msgstr "Joystick"
 
-#: harddrake/data.pm:484
+#: harddrake/data.pm:485
 #, c-format
 msgid "Keyboard"
 msgstr "Toetsenbord"
 
-#: harddrake/data.pm:498
+#: harddrake/data.pm:499
 #, c-format
 msgid "Tablet and touchscreen"
 msgstr "Tablet en touchscreen"
 
-#: harddrake/data.pm:507
+#: harddrake/data.pm:508
 #, c-format
 msgid "Mouse"
 msgstr "Muis"
 
-#: harddrake/data.pm:522
+#: harddrake/data.pm:523
 #, c-format
 msgid "Biometry"
 msgstr "Biometrie"
 
-#: harddrake/data.pm:530
+#: harddrake/data.pm:531
 #, c-format
 msgid "UPS"
 msgstr "UPS"
 
-#: harddrake/data.pm:539
+#: harddrake/data.pm:540
 #, c-format
 msgid "Scanner"
 msgstr "Scanner"
 
-#: harddrake/data.pm:550
+#: harddrake/data.pm:551
 #, c-format
 msgid "Unknown/Others"
 msgstr "Onbekend/Overige"
 
-#: harddrake/data.pm:580
+#: harddrake/data.pm:581
 #, c-format
 msgid "cpu # "
 msgstr "CVE # "
@@ -3159,42 +3164,42 @@ msgstr "CVE # "
 msgid "Please Wait... Applying the configuration"
 msgstr "Even geduld... bezig met toepassen van de configuratie"
 
-#: harddrake/sound.pm:362
+#: harddrake/sound.pm:363
 #, c-format
 msgid "Enable PulseAudio"
 msgstr "PulseAudio inschakelen"
 
-#: harddrake/sound.pm:366
+#: harddrake/sound.pm:367
 #, c-format
 msgid "Automatic routing from ALSA to PulseAudio"
 msgstr "Automatisch omleiden van ALSA naar PulseAudio"
 
-#: harddrake/sound.pm:371
+#: harddrake/sound.pm:372
 #, c-format
 msgid "Enable 5.1 sound with Pulse Audio"
 msgstr "5.1-geluid inschakelen met PulseAudio"
 
-#: harddrake/sound.pm:376
+#: harddrake/sound.pm:377
 #, c-format
 msgid "Enable user switching for audio applications"
 msgstr "Wisselen van gebruiker inschakelen voor audiotoepassingen"
 
-#: harddrake/sound.pm:381
+#: harddrake/sound.pm:382
 #, c-format
 msgid "Reset sound mixer to default values"
 msgstr "Audiomixer herinitialiseren naar standaardwaarden"
 
-#: harddrake/sound.pm:386
+#: harddrake/sound.pm:387
 #, c-format
 msgid "Trouble shooting"
 msgstr "Probleemaanpak"
 
-#: harddrake/sound.pm:393
+#: harddrake/sound.pm:394
 #, c-format
 msgid "No alternative driver"
 msgstr "Geen alternatief stuurprogramma"
 
-#: harddrake/sound.pm:394
+#: harddrake/sound.pm:395
 #, c-format
 msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
@@ -3203,12 +3208,12 @@ msgstr ""
 "Er is geen alternatief OSS/ALSA-stuurprogramma bekend voor uw geluidskaart(%"
 "s) welke momenteel \"%s\" gebruikt"
 
-#: harddrake/sound.pm:401
+#: harddrake/sound.pm:402
 #, c-format
 msgid "Sound configuration"
 msgstr "Geluidsconfiguratie"
 
-#: harddrake/sound.pm:403
+#: harddrake/sound.pm:404
 #, c-format
 msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
@@ -3220,7 +3225,7 @@ msgstr ""
 #. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
-#: harddrake/sound.pm:408
+#: harddrake/sound.pm:409
 #, c-format
 msgid ""
 "\n"
@@ -3233,7 +3238,7 @@ msgstr ""
 "Uw kaart gebruikt momenteel het %s\"%s\"-stuurprogramma (standaard "
 "stuurprogramma voor uw kaart is \"%s\")"
 
-#: harddrake/sound.pm:410
+#: harddrake/sound.pm:411
 #, c-format
 msgid ""
 "OSS (Open Sound System) was the first sound API. It's an OS independent "
@@ -3268,12 +3273,12 @@ msgstr ""
 "- gebruik maken van de nieuwe ALSA-API welke veel verbeterde  "
 "functionaliteit kent maar vereist dat u de ALSA-bibliotheek gebruikt.\n"
 
-#: harddrake/sound.pm:424 harddrake/sound.pm:507
+#: harddrake/sound.pm:425 harddrake/sound.pm:508
 #, c-format
 msgid "Driver:"
 msgstr "Stuurprogramma:"
 
-#: harddrake/sound.pm:438
+#: harddrake/sound.pm:439
 #, c-format
 msgid ""
 "The old \"%s\" driver is blacklisted.\n"
@@ -3290,12 +3295,12 @@ msgstr ""
 "Het nieuwe \"%s\"-stuurprogramma zal slechts gebruikt worden\n"
 "bij de volgende \"bootstrap\"."
 
-#: harddrake/sound.pm:446
+#: harddrake/sound.pm:447
 #, c-format
 msgid "No open source driver"
 msgstr "Geen stuurprogramma met vrije broncode"
 
-#: harddrake/sound.pm:447
+#: harddrake/sound.pm:448
 #, c-format
 msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
@@ -3304,23 +3309,23 @@ msgstr ""
 "Er is geen vrij stuurprogramma beschikbaar voor uw geluidskaart (%s), maar "
 "er is een fabrikantsgebonden stuurprogramma op \"%s\"."
 
-#: harddrake/sound.pm:450
+#: harddrake/sound.pm:451
 #, c-format
 msgid "No known driver"
 msgstr "Geen stuurprogramma bekend"
 
-#: harddrake/sound.pm:451
+#: harddrake/sound.pm:452
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
 msgstr "Er is geen stuurprogramma bekend voor uw geluidskaart (%s)"
 
-#: harddrake/sound.pm:466
+#: harddrake/sound.pm:467
 #, c-format
 msgid "Sound trouble shooting"
 msgstr "Geluidsproblemen aanpakken"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:469
+#: harddrake/sound.pm:470
 #, c-format
 msgid ""
 "The classic bug sound tester is to run the following commands:\n"
@@ -3368,18 +3373,18 @@ msgstr ""
 "- \"/sbin/fuser -v /dev/dsp\" vertelt u welk programma de geluidskaart "
 "gebruikt.\n"
 
-#: harddrake/sound.pm:496
+#: harddrake/sound.pm:497
 #, c-format
 msgid "Let me pick any driver"
 msgstr "Laat de computer een stuurprogramma uitzoeken"
 
-#: harddrake/sound.pm:499
+#: harddrake/sound.pm:500
 #, c-format
 msgid "Choosing an arbitrary driver"
 msgstr "Kiezen van willekeurig stuurprogramma"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:502
+#: harddrake/sound.pm:503
 #, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
@@ -3439,18 +3444,18 @@ msgstr "Tuner type :"
 
 #: interactive.pm:128 interactive.pm:549 interactive/curses.pm:263
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
-#: interactive/stdio.pm:148 interactive/stdio.pm:149 mygtk2.pm:802
+#: interactive/stdio.pm:148 interactive/stdio.pm:149 mygtk2.pm:805
 #: ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
 #, c-format
 msgid "Ok"
 msgstr "Ok"
 
-#: interactive.pm:228 modules/interactive.pm:71 ugtk2.pm:811 wizards.pm:156
+#: interactive.pm:228 modules/interactive.pm:72 ugtk2.pm:811 wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "Ja"
 
-#: interactive.pm:228 modules/interactive.pm:71 ugtk2.pm:811 wizards.pm:156
+#: interactive.pm:228 modules/interactive.pm:72 ugtk2.pm:811 wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "Nee"
@@ -4782,7 +4787,7 @@ msgstr "Zambia"
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
-#: lang.pm:1221
+#: lang.pm:1222
 #, c-format
 msgid "Welcome to %s"
 msgstr "Welkom bij %s"
@@ -5235,59 +5240,59 @@ msgstr "Moduleconfiguratie"
 msgid "You can configure each parameter of the module here."
 msgstr "U kunt elke vlag van de module hier configureren"
 
-#: modules/interactive.pm:63
+#: modules/interactive.pm:64
 #, c-format
 msgid "Found %s interfaces"
 msgstr "%s-interfaces gevonden"
 
-#: modules/interactive.pm:64
+#: modules/interactive.pm:65
 #, c-format
 msgid "Do you have another one?"
 msgstr "Heeft u er nog een?"
 
-#: modules/interactive.pm:65
+#: modules/interactive.pm:66
 #, c-format
 msgid "Do you have any %s interfaces?"
 msgstr "Heeft u een %s interface?"
 
-#: modules/interactive.pm:71
+#: modules/interactive.pm:72
 #, c-format
 msgid "See hardware info"
 msgstr "Hardware-info bekijken"
 
-#: modules/interactive.pm:82
+#: modules/interactive.pm:83
 #, c-format
 msgid "Installing driver for USB controller"
 msgstr "Installeren van stuurprogramma voor USB-besturingsapparaat"
 
-#: modules/interactive.pm:83
+#: modules/interactive.pm:84
 #, c-format
 msgid "Installing driver for firewire controller %s"
 msgstr "Installeren van stuurprogramma voor Firewire-besturingsapparaat %s"
 
-#: modules/interactive.pm:84
+#: modules/interactive.pm:85
 #, c-format
 msgid "Installing driver for hard drive controller %s"
 msgstr "Installeren van stuurprogramma voor harde schijf-besturingsapparaat %s"
 
-#: modules/interactive.pm:85
+#: modules/interactive.pm:86
 #, c-format
 msgid "Installing driver for ethernet controller %s"
 msgstr "Installeren van stuurprogramma voor ethernetapparaat %s"
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
-#: modules/interactive.pm:96
+#: modules/interactive.pm:97
 #, c-format
 msgid "Installing driver for %s card %s"
 msgstr "Bezig met installeren van stuurprogramma voor %s kaart %s"
 
-#: modules/interactive.pm:99
+#: modules/interactive.pm:100
 #, c-format
 msgid "Configuring Hardware"
 msgstr "Apparatuur configureren"
 
-#: modules/interactive.pm:110
+#: modules/interactive.pm:111
 #, c-format
 msgid ""
 "You may now provide options to module %s.\n"
@@ -5296,7 +5301,7 @@ msgstr ""
 "U kunt nu de opties doorgeven aan module %s.\n"
 "Merk op dat een adres moet worden ingegeven met de prefix 0x zoals '0x123'"
 
-#: modules/interactive.pm:116
+#: modules/interactive.pm:117
 #, c-format
 msgid ""
 "You may now provide options to module %s.\n"
@@ -5307,18 +5312,18 @@ msgstr ""
 "Opties staan in het formaat ``naam=waarde naam2=waarde2 ...''.\n"
 "Bijvoorbeeld, ``io=0x300 irq=7''"
 
-#: modules/interactive.pm:118
+#: modules/interactive.pm:119
 #, c-format
 msgid "Module options:"
 msgstr "Module-opties:"
 
 #. -PO: the %s is the driver type (scsi, network, sound,...)
-#: modules/interactive.pm:131
+#: modules/interactive.pm:132
 #, c-format
 msgid "Which %s driver should I try?"
 msgstr "Welk %s-stuurprogramma te proberen?"
 
-#: modules/interactive.pm:140
+#: modules/interactive.pm:141
 #, c-format
 msgid ""
 "In some cases, the %s driver needs to have extra information to work\n"
@@ -5335,17 +5340,17 @@ msgstr ""
 "zelf zoeken? Soms zal de automatische detectie de computer laten hangen,\n"
 "maar het zou geen schade mogen veroorzaken."
 
-#: modules/interactive.pm:144
+#: modules/interactive.pm:145
 #, c-format
 msgid "Autoprobe"
 msgstr "Automatisch bespeuren"
 
-#: modules/interactive.pm:144
+#: modules/interactive.pm:145
 #, c-format
 msgid "Specify options"
 msgstr "Opties specificeren"
 
-#: modules/interactive.pm:156
+#: modules/interactive.pm:157
 #, c-format
 msgid ""
 "Loading module %s failed.\n"
