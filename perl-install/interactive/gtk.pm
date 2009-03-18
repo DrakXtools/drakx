@@ -681,7 +681,7 @@ sub create_widgets {
     foreach (@all) {
 	my $e = $_; #- for closures
 
-	if (@all == 1 || $e->{quit_if_double_click}) {
+	if ((grep { !$_->{install_button} && $_->{type} ne 'only_label' } @all) == 1 || $e->{quit_if_double_click}) {
 	    #- i'm the only one, double click means accepting
 	    $e->{quit_if_double_click_cooked} = sub { $_[1]->type =~ /^2/ && $ok_clicked->() };
 	}
