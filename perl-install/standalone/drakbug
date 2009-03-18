@@ -239,6 +239,12 @@ sub get_package {
     $rpm_package;
 }
 
+sub get_top_of_trace {
+    my ($error) = @_;
+    return if !$error;
+    sprintf(" (%s)", first(split(/\n/, $error)));
+}
+
 sub report_bug_to_bugzilla() {
     my $p = $package->get_text;
     my ($product, $version) = $p =~ /^(.*)-([^-]+-[^-]+(mdk|mdv.*))$/; # FIXME: fragile!
@@ -274,6 +280,7 @@ sub report_bug_to_bugzilla() {
                        if_($incident,
                            join('', "short_desc=$prog%20",
                                 ($segfaulted ? 'segfaulted' : 'crashed'),
+                                if_(!$gdb_trace, get_top_of_trace($error)),
                             ),
                        ),
                            'comment=' . uri_escape(
