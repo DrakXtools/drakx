@@ -3,6 +3,8 @@
 - diskdrake:
   o don't crash when creating a partition in LVM with the partition type 
     buttons (#38078)
+  o write partition table if needed before setting label
+  o fix setting label on not yet formatted partition
 - drakbug:
   o add error to summary when crashing in order to help sort duplicates
 

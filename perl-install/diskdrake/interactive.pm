@@ -615,8 +615,13 @@ sub Label {
     my ($in, $_hd, $part) = @_;
     my $new_label = $part->{device_LABEL} || "";
 
-    $in->ask_from(N("Set volume label"), N("Beware, this will be written to disk as soon as you validate!"),
-		  [
+    write_partitions($in, $_hd) or return;
+
+    $in->ask_from(N("Set volume label"),
+                  maybeFormatted($part) ? 
+                    N("Beware, this will be written to disk as soon as you validate!")
+                    : N("Beware, this will be written to disk only after formatting!"),
+                  [
 		   { label => N("Which volume label?"), title => 1 },
 		   { label => N("Label:"), val => \$new_label } ]) or return;
 

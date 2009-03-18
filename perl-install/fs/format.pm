@@ -109,7 +109,7 @@ sub write_label {
     my ($part) = @_;
 
     $part->{device_LABEL_changed} or return;
-    $part->{isNotFormatted} and return;
+    maybeFormatted($part) or return;
 
     if ($part->{encrypt_key}) {
 	fs::mount::set_loop($part);
@@ -123,7 +123,7 @@ sub write_label {
     } else {
       @args = ($cmd, devices::make($dev), $part->{device_LABEL});
     }
-    run_program::raw({ timeout => 'never' }, @args) or die N("setting label on %s failed", $dev);
+    run_program::raw({ timeout => 'never' }, @args) or die N("setting label on %s failed, is it formatted?", $dev);
     delete $part->{device_LABEL_changed};
 }
 
@@ -173,6 +173,8 @@ sub part_raw {
     } else {
 	run_program::raw({ timeout => 'never' }, @args) or die N("%s formatting of %s failed", $fs_type, $dev);
     }
+
+    delete $part->{device_LABEL_changed};
 
     # Preserve UUID on fs where we couldn't enforce it while formatting
     if ($fs_type eq 'jfs') {
