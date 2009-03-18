@@ -15,7 +15,7 @@ sub getFile {
     $fh;
 }
 
-sub parse_url {
+sub parse_http_url {
     my ($url) = @_;
     $url =~ m,^(?:http|ftp)://([^/:]+)(?::(\d+))?(/\S*)?$,;
 }
@@ -24,7 +24,7 @@ sub get_file_and_size_ {
     my ($f, $url) = @_;
 
     if ($f =~ m!^/!) {
-	my ($host, $port, $_path) = parse_url($url);
+	my ($host, $port, $_path) = parse_http_url($url);
 	get_file_and_size("http://$host" . ($port ? ":$port" : '') . $f);
     } else {
 	get_file_and_size("$url/$f");
@@ -38,7 +38,7 @@ sub get_file_and_size {
     $sock->close if $sock;
 
     # can be used for ftp urls (with http proxy)
-    my ($host, $port, $path) = parse_url($url);
+    my ($host, $port, $path) = parse_http_url($url);
     defined $host or return undef;
 
     my $use_http_proxy = $ENV{PROXY} && $ENV{PROXYPORT};
