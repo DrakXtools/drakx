@@ -272,7 +272,9 @@ sub report_bug_to_bugzilla() {
                        'classification=Mandriva%20Linux',
                        "rep_platform=$arch",
                        if_($incident,
-                           "short_desc=$prog%20" . ($segfaulted ? 'segfaulted' : 'crashed'),
+                           join('', "short_desc=$prog%20",
+                                ($segfaulted ? 'segfaulted' : 'crashed'),
+                            ),
                        ),
                            'comment=' . uri_escape(
                                if_($incident,
