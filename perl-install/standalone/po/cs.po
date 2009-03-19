@@ -1,21 +1,20 @@
 # Translation of cs.po to Czech
-# Copyright (C) 1999,2003, 2004, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
+# Copyright (C) 1999,2003, 2004, 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
 #
 # Radek Vybiral <Radek.Vybiral@vsb.cz>, 2000, 2001-2003.
-# Michal Bukovjan <bukm@centrum.cz>, 2002-2003, 2004, 2005, 2006, 2007, 2008.
+# Michal Bukovjan <bukm@centrum.cz>, 2002-2003, 2004, 2005, 2006, 2007, 2008, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-13 16:30+0100\n"
-"PO-Revision-Date: 2008-09-30 21:45+0200\n"
+"PO-Revision-Date: 2009-03-20 00:16+0100\n"
 "Last-Translator: Michal Bukovjan <bukm@centrum.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
 #: drakauth:24 drakauth:26 draksec:163
@@ -269,7 +268,7 @@ msgid "Its GDB trace is:"
 msgstr "Příslušný výstup z GDB je:"
 
 #: drakbug:158
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
 "This will open a web browser window on %s where you'll find a form to fill "
@@ -278,9 +277,7 @@ msgstr ""
 "Chcete-li poslat hlášení o chybě, klepněte na tlačítko pro nahlášení chyby.\n"
 "Otevře se okno prohlížeče sítě Internet na adrese %s,\n"
 "kde najdete formulář k vyplnění. Výše zobrazené informace budou přeneseny na "
-"tento server.\n"
-"K nahlášené chybě je užitečné přiložit výstup příkazu lspcidrake -v, verzi "
-"jádra a obsah souboru /proc/cpuinfo."
+"tento server"
 
 #: drakbug:160
 #, c-format
@@ -290,19 +287,19 @@ msgid ""
 msgid_plural ""
 "Things useful to attach to your report are the output of the following "
 "commands: %s."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Bylo by velmi užitečné připojit k vašemu hlášení výstup následujícího příkazu: %s."
+msgstr[1] "Bylo by velmi užitečné připojit k vašemu hlášení výstup následujících příkazů: %s."
+msgstr[2] "Bylo by velmi užitečné připojit k vašemu hlášení výstup následujících příkazů: %s."
 
 #: drakbug:163
 #, c-format
 msgid "'%s'"
-msgstr ""
+msgstr "„%s”"
 
 #: drakbug:166
-#, fuzzy, c-format
+#, c-format
 msgid "You should also attach the following files: %s as well as %s."
-msgstr "Měli byste nainstalovat následující balíčky: %s"
+msgstr "Měli byste rovněž připojit následující soubory: %s a %s."
 
 #: drakbug:173
 #, c-format
@@ -438,9 +435,9 @@ msgid "Reset"
 msgstr "Přenastavit"
 
 #: drakdvb:30
-#, fuzzy, c-format
+#, c-format
 msgid "DVB"
-msgstr "DVD"
+msgstr "DVB"
 
 #: drakdvb:39 harddrake2:100
 #, c-format
@@ -450,12 +447,12 @@ msgstr "Kanál"
 #: drakdvb:57
 #, c-format
 msgid "%s already exists and its contents will be lost"
-msgstr ""
+msgstr "%s již existuje a jeho obsah bude ztracen"
 
 #: drakdvb:72
 #, c-format
 msgid "Could not get the list of available channels"
-msgstr ""
+msgstr "Nelze získat seznam dostupných kanálů"
 
 #: drakdvb:78 draksec:73 drakups:99 harddrake2:370 scannerdrake:66
 #: scannerdrake:70 scannerdrake:78 scannerdrake:319 scannerdrake:368
@@ -467,7 +464,7 @@ msgstr "Prosím počkejte"
 #: drakdvb:82
 #, c-format
 msgid "Detecting DVB channels, this will take a few minutes"
-msgstr ""
+msgstr "Detekují se DVB kanály, zabere to několik minut"
 
 #: drakdvb:83 drakfont:572 drakfont:652 drakfont:736 draksplash:213
 #: drakups:217 logdrake:175
@@ -476,14 +473,14 @@ msgid "Cancel"
 msgstr "Zrušit"
 
 #: drakdvb:121
-#, fuzzy, c-format
+#, c-format
 msgid "Detect Channels"
-msgstr "Kanál"
+msgstr "Detekovat kanály"
 
 #: drakdvb:123
-#, fuzzy, c-format
+#, c-format
 msgid "View Channel"
-msgstr "Kanál"
+msgstr "Zobrazit kanál"
 
 #: drakedm:41
 #, c-format
@@ -856,8 +853,7 @@ msgstr " --help                - zobrazí tuto nápovědu     \n"
 
 #: drakhelp:23
 #, c-format
-msgid ""
-" --id <id_label>       - load the html help page which refers to id_label\n"
+msgid " --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
 " --id <id_label>       - načte HTML stránku s nápovědou, která odpovídá "
 "id_label\n"
@@ -1180,7 +1176,7 @@ msgstr "Úroveň zabezpečení a kontroly"
 #: draksec:114
 #, c-format
 msgid "Configure authentication required to access Mandriva tools"
-msgstr ""
+msgstr "Nastavení ověřování vyžadovaného pro přístup k nástrojům Mandriva"
 
 #: draksec:117
 #, c-format
@@ -1825,8 +1821,7 @@ msgstr "Sběrnice"
 
 #: harddrake2:32
 #, c-format
-msgid ""
-"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr ""
 "toto je fyzická sběrnice, na kterou je připojeno zařízení (např. PCI, "
 "USB, ...)"
@@ -1869,8 +1864,7 @@ msgstr "Kapacita zařízení"
 #: harddrake2:41
 #, c-format
 msgid "special capacities of the driver (burning ability and or DVD support)"
-msgstr ""
-"speciální schopnosti zařízení (schopnost vypalování a/nebo podpora DVD)"
+msgstr "speciální schopnosti zařízení (schopnost vypalování a/nebo podpora DVD)"
 
 #: harddrake2:42
 #, c-format
@@ -2386,10 +2380,8 @@ msgstr "Soubor se zařízením"
 
 #: harddrake2:118
 #, c-format
-msgid ""
-"the device file used to communicate with the kernel driver for the mouse"
-msgstr ""
-"soubor se zařízením, který se používá při komunikaci s ovladačem jádra myši"
+msgid "the device file used to communicate with the kernel driver for the mouse"
+msgstr "soubor se zařízením, který se používá při komunikaci s ovladačem jádra myši"
 
 #: harddrake2:119
 #, c-format
@@ -2592,10 +2584,8 @@ msgstr "Spustit nástroj pro nastavení"
 
 #: harddrake2:302
 #, c-format
-msgid ""
-"Click on a device in the left tree in order to display its information here."
-msgstr ""
-"Klepněte na zařízení v levé části stromu a zobrazíte zde o něm informace."
+msgid "Click on a device in the left tree in order to display its information here."
+msgstr "Klepněte na zařízení v levé části stromu a zobrazíte zde o něm informace."
 
 #: harddrake2:322 notify-x11-free-driver-switch:13
 #, c-format
@@ -2929,14 +2919,12 @@ msgstr "Zadejte prosím níže svou poštovní adresu "
 #: logdrake:438
 #, c-format
 msgid "and enter the name (or the IP) of the SMTP server you wish to use"
-msgstr ""
-"a zadejte název (nebo IP adresu) SMTP serveru, který budete chtít použít"
+msgstr "a zadejte název (nebo IP adresu) SMTP serveru, který budete chtít použít"
 
 #: logdrake:445
 #, c-format
 msgid "\"%s\" neither is a valid email nor is an existing local user!"
-msgstr ""
-"\"%s\" není ani platná emailová adresa ani existující lokální uživatel!"
+msgstr "\"%s\" není ani platná emailová adresa ani existující lokální uživatel!"
 
 #: logdrake:450
 #, c-format
@@ -2989,8 +2977,7 @@ msgstr "Ukončuji Scannerdrake."
 
 #: scannerdrake:60
 #, c-format
-msgid ""
-"Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr ""
 "Nelze nainstalovat balíčky potřebné pro nastavení skeneru pomocí "
 "Scannerdrake."
@@ -3080,8 +3067,7 @@ msgstr "Firmware skeneru"
 msgid ""
 "It is possible that your %s needs its firmware to be uploaded everytime when "
 "it is turned on."
-msgstr ""
-"Je možné, že váš %s potřebuje nahrát svůj firmware pokaždé, když je zapnut."
+msgstr "Je možné, že váš %s potřebuje nahrát svůj firmware pokaždé, když je zapnut."
 
 #: scannerdrake:174 scannerdrake:226
 #, c-format
@@ -3431,8 +3417,7 @@ msgstr "Sdílení lokálních skenerů"
 msgid ""
 "These are the machines on which the locally connected scanner(s) should be "
 "available:"
-msgstr ""
-"Zde je seznam počítačů, na kterých jsou přístupné lokálně připojené skenery: "
+msgstr "Zde je seznam počítačů, na kterých jsou přístupné lokálně připojené skenery: "
 
 #: scannerdrake:658 scannerdrake:808
 #, c-format
@@ -3569,128 +3554,3 @@ msgstr "Nastavení jazyka a země"
 msgid "Regional Settings"
 msgstr "Regionální nastavení"
 
-#~ msgid ""
-#~ "Here, you can setup the security level and administrator of your "
-#~ "machine.\n"
-#~ "\n"
-#~ "\n"
-#~ "The '<span weight=\"bold\">Security Administrator</span>' is the one who "
-#~ "will receive security alerts if the\n"
-#~ "'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
-#~ "username or an email.\n"
-#~ "\n"
-#~ "\n"
-#~ "The '<span weight=\"bold\">Security Level</span>' menu allows you to "
-#~ "select one of the six preconfigured security levels\n"
-#~ "provided with msec. These levels range from '<span weight=\"bold\">poor</"
-#~ "span>' security and ease of use, to\n"
-#~ "'<span weight=\"bold\">paranoid</span>' config, suitable for very "
-#~ "sensitive server applications:\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
-#~ "very\n"
-#~ "easy to use security level. It should only be used for machines not "
-#~ "connected to\n"
-#~ "any network and that are not accessible to everybody.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Standard</span>: This is the standard "
-#~ "security\n"
-#~ "recommended for a computer that will be used to connect to the Internet "
-#~ "as a\n"
-#~ "client.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">High</span>: There are already some\n"
-#~ "restrictions, and more automatic checks are run every night.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Higher</span>: The security is now high "
-#~ "enough\n"
-#~ "to use the system as a server which can accept connections from many "
-#~ "clients. If\n"
-#~ "your machine is only a client on the Internet, you should choose a lower "
-#~ "level.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
-#~ "previous\n"
-#~ "level, but the system is entirely closed and security features are at "
-#~ "their\n"
-#~ "maximum"
-#~ msgstr ""
-#~ "Zde můžete nastavit úroveň zabezpečení a administrátora vašeho systému.\n"
-#~ "\n"
-#~ "\n"
-#~ "'<span weight=\"bold\">Administrátor bezpečnosti</span>' je ten, který\n"
-#~ "dostává bezpečnostní upozornění pokud je zvolena volba\n"
-#~ " '<span weight=\"bold\">Bezpečnostní varování</span>'. Může to být jméno\n"
-#~ "uživatele nebo email adresa.\n"
-#~ "\n"
-#~ "\n"
-#~ "Nabídka s '<span weight=\"bold\">úrovněmi zabezpečení</span>' "
-#~ "poskytovaných\n"
-#~ "aplikací msec vám dovoluje si vybrat jednu z šesti přednastavených "
-#~ "úrovní.\n"
-#~ "Rozsah úrovní je od '<span weight=\"bold\">minimální</span>' zabezpečení\n"
-#~ "až po '<span weight=\"bold\">paranoidní</span>' zabezpečení, vhodné pro \n"
-#~ "velmi citlivé serverové aplikace:\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Slabá</span>: Toto je absolutně "
-#~ "nezabezpečená\n"
-#~ "úroveň. Měla by být použita pouze na těch počítačích, které nejsou "
-#~ "připojeny\n"
-#~ "síti a nemá k nim kdokoliv přístup.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Standardní</span>: Standardní doporučená\n"
-#~ "úrovně pro počítače, které jsou připojeny k Internetu jako klient.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Vyšší</span>: Zde jsou už nějaké "
-#~ "restrikce\n"
-#~ "a každou noc jsou prováděny automatické kontroly.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Vysoká</span>: Tato úroveň je již vhodná "
-#~ "při\n"
-#~ "použití počítače jako serveru s tím, že s k tomuto počítači připojují "
-#~ "další\n"
-#~ "klienti. Pokud je počítač pouze klientem, je vhodnější nižší úroveň.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Paranoidní</span>: Je stejná jako "
-#~ "předchozí\n"
-#~ "úroveň s tím, že systém je zcela uzavřen a bezpečnost nastavena na maximum"
-
-#~ msgid "(default value: %s)"
-#~ msgstr "(výchozí hodnota: %s)"
-
-#~ msgid "Security Level:"
-#~ msgstr "Úroveň zabezpečení:"
-
-#~ msgid "Security Alerts:"
-#~ msgstr "Bezpečnostní varování:"
-
-#~ msgid "Security Administrator:"
-#~ msgstr "Správce zabezpečení:"
-
-#~ msgid "Basic options"
-#~ msgstr "Základní volby"
-
-#~ msgid "Network Options"
-#~ msgstr "Volby sítě"
-
-#~ msgid "System Options"
-#~ msgstr "Systémové volby"
-
-#~ msgid "Periodic Checks"
-#~ msgstr "Pravidelné kontroly"
-
-#~ msgid "Please wait, setting security level..."
-#~ msgstr "Čekejte prosím, nastavuji úroveň zabezpečení..."
-
-#~ msgid "Please wait, setting security options..."
-#~ msgstr "Čekejte prosím, nastavuji volby zabezpečení..."
