@@ -18,8 +18,6 @@ sub init() {
 
     eval { modules::load('dm-crypt', 'cbc', 'sha256_generic', arch() =~ /i.86/ ? 'aes-i586' : 'aes') };
     devices::init_device_mapper();
-    if ($::isInstall) {
-    }
     1;
 }
 my $initialized;
