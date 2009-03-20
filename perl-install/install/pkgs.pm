@@ -715,6 +715,16 @@ sub _unselect_package {
     }
 }
 
+sub is_package_installed {
+    my ($db, $pkg) = @_;
+    my $check_installed;
+    $db->traverse_tag('name', [ $pkg->name ], sub {
+                          my ($p) = @_;
+                          $check_installed ||= $pkg->compare_pkg($p) == 0;
+                      });
+    return $check_installed;
+}
+
 sub _install_raw {
     my ($packages, $isUpgrade, $callback, $LOG, $noscripts) = @_;
 
@@ -733,11 +743,7 @@ sub _install_raw {
 				my ($db, $packages, $_type, $id) = @_;
 				&$callback;
 				my $pkg = defined $id && $packages->{depslist}[$id] or return;
-				my $check_installed;
-				$db->traverse_tag('name', [ $pkg->name ], sub {
-						      my ($p) = @_;
-						      $check_installed ||= $pkg->compare_pkg($p) == 0;
-						  });
+				my $check_installed = is_package_installed($db, $pkg);
                                 if ($pkg->name eq 'mdv-rpm-summary' && $check_installed) {
                                     install::pkgs::setup_rpm_summary_translations();
                                 }
