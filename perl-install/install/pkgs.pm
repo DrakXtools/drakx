@@ -748,8 +748,11 @@ sub _install_raw {
                                     install::pkgs::setup_rpm_summary_translations();
                                 }
 
-				$check_installed or log::l($pkg->name . " not installed, " . URPM::rpmErrorString());
-				$check_installed and _unselect_package($packages, $pkg);
+				if ($check_installed) {
+                                    _unselect_package($packages, $pkg);
+                                } else {
+                                    log::l($pkg->name . " not installed, " . URPM::rpmErrorString());
+                                }
         }, inst => $callback,
         trans => $callback,
         # FIXME: implement already_installed_or_not_installable
