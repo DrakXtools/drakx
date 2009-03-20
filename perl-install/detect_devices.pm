@@ -1099,6 +1099,10 @@ sub is_virtualbox() {
     any { $_->{driver} eq 'vboxadd' } detect_devices::pci_probe();
 }
 
+sub is_vmware() {
+    any { $_->{driver} =~ /Card:VMware/ } detect_devices::pci_probe();
+}
+
 sub is_netbook_nettop() {
     my @cpus = getCPUs();
     (any { $_->{'model name'} =~ /(\bIntel\(R\) Atom\(TM\)\B)/i } @cpus) ||
