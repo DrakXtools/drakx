@@ -40,10 +40,10 @@ if_(arch() =~ /ppc/,
   0x402	=> 'hfs',      'Apple HFS Partition',
   0x41  => '',         'PPC PReP Boot',
 ),
-  0x83 => '',         'Encrypted',
 	],
 
         non_fs_type => [
+  0x83 => '',         'Encrypted',
   0x8e => '',         'Linux Logical Volume Manager',
   0xfd => '',         'Linux RAID',
 	],
@@ -183,7 +183,8 @@ if_(arch() !~ /ppc/,
 sub type_names { 
     my ($expert, $o_hd) = @_;
     my @l = @{$type_names{important}};
-    push @l, @{$type_names{non_fs_type}}, sort @{$type_names{other}} if $expert;
+    push @l, @{$type_names{non_fs_type}};
+    push @l, sort @{$type_names{other}} if $expert;
     if ($o_hd && !$o_hd->use_pt_type) {
 	warn "$_ => $type_name2fs_type{$_}\n" foreach @l;
 	@l = grep { $type_name2fs_type{$_} } @l;
