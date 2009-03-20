@@ -6,16 +6,16 @@
 # Roberto Rosselli Del Turco <rosselli@ling.unipi.it>, 2001, 2002,2003.
 # Marco De Vitis <mdv@spin.it>, 2003.
 # Giuseppe Levi <giuseppe.levi@email.it>, 2005.
-# Andrea Celli <andrea.celli@libero.it>, 2003, 2004, 2005, 2006, 2007, 2008.
+# Andrea Celli <andrea.celli@libero.it>, 2003, 2004, 2005, 2006, 2007, 2008, 2009.
 # Federica De Luca <my_utopia2002@hotmail.com>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-13 16:30+0100\n"
-"PO-Revision-Date: 2008-09-30 09:03+0200\n"
+"PO-Revision-Date: 2009-03-20 23:11+0100\n"
 "Last-Translator: Andrea Celli <andrea.celli@libero.it>\n"
-"Language-Team: Italian <timl@freelists.org>\n"
+"Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -274,7 +274,7 @@ msgid "Its GDB trace is:"
 msgstr "Gdb lo ha registrato così:"
 
 #: drakbug:158
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
 "This will open a web browser window on %s where you'll find a form to fill "
@@ -282,9 +282,7 @@ msgid ""
 msgstr ""
 "Per inviare una segnalazione di bug, clicca sul pulsante Segnalazione.\n"
 "Si aprirà un browser web su %s dove troverai un modulo da compilare. Le "
-"informazioni mostrate qui sopra verranno inviate a quel server.\n"
-"Sarebbe utile includere nel tuo rapporto l'output di lspcidrake -v, la "
-"versione del kernel e il contenuto di /proc/cpuinfo."
+"informazioni mostrate qui sopra verranno inviate a quel server."
 
 #: drakbug:160
 #, c-format
@@ -294,18 +292,18 @@ msgid ""
 msgid_plural ""
 "Things useful to attach to your report are the output of the following "
 "commands: %s."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Sarebbe utile aggiungere alla tua segnalazione l'output del seguente comando: %s."
+msgstr[1] "Sarebbe utile aggiungere alle tue segnalazioni l'output del seguente comando: %s."
 
 #: drakbug:163
 #, c-format
 msgid "'%s'"
-msgstr ""
+msgstr "'%s'"
 
 #: drakbug:166
-#, fuzzy, c-format
+#, c-format
 msgid "You should also attach the following files: %s as well as %s."
-msgstr "Potresti installare i seguenti pacchetti: %s"
+msgstr "Potresti anche allegare i seguenti file: %s e %s."
 
 #: drakbug:173
 #, c-format
@@ -442,9 +440,9 @@ msgid "Reset"
 msgstr "Ripristina"
 
 #: drakdvb:30
-#, fuzzy, c-format
+#, c-format
 msgid "DVB"
-msgstr "DVD"
+msgstr "DVB"
 
 #: drakdvb:39 harddrake2:100
 #, c-format
@@ -454,12 +452,12 @@ msgstr "Canale"
 #: drakdvb:57
 #, c-format
 msgid "%s already exists and its contents will be lost"
-msgstr ""
+msgstr "%s esiste già e il suo contenuto andrà perso"
 
 #: drakdvb:72
 #, c-format
 msgid "Could not get the list of available channels"
-msgstr ""
+msgstr "Impossibile ottenere l'elenco dei canali disponibili"
 
 #: drakdvb:78 draksec:73 drakups:99 harddrake2:370 scannerdrake:66
 #: scannerdrake:70 scannerdrake:78 scannerdrake:319 scannerdrake:368
@@ -471,7 +469,7 @@ msgstr "Attendere prego"
 #: drakdvb:82
 #, c-format
 msgid "Detecting DVB channels, this will take a few minutes"
-msgstr ""
+msgstr "È in corso la ricerca dei canali DVB. Serve qualche minuto."
 
 #: drakdvb:83 drakfont:572 drakfont:652 drakfont:736 draksplash:213
 #: drakups:217 logdrake:175
@@ -480,14 +478,14 @@ msgid "Cancel"
 msgstr "Annulla"
 
 #: drakdvb:121
-#, fuzzy, c-format
+#, c-format
 msgid "Detect Channels"
-msgstr "Canale"
+msgstr "Ricerca dei canali"
 
 #: drakdvb:123
-#, fuzzy, c-format
+#, c-format
 msgid "View Channel"
-msgstr "Canale"
+msgstr "Visualizza canale"
 
 #: drakedm:41
 #, c-format
@@ -861,10 +859,8 @@ msgstr " --help                - mostra questo messaggio     \n"
 
 #: drakhelp:23
 #, c-format
-msgid ""
-" --id <id_label>       - load the html help page which refers to id_label\n"
-msgstr ""
-" --id <id_label>       - carica la pagina html con informazioni su id_label\n"
+msgid " --id <id_label>       - load the html help page which refers to id_label\n"
+msgstr " --id <id_label>       - carica la pagina html con informazioni su id_label\n"
 
 #: drakhelp:24
 #, c-format
@@ -1185,7 +1181,7 @@ msgstr "Livello di sicurezza e verifiche"
 #: draksec:114
 #, c-format
 msgid "Configure authentication required to access Mandriva tools"
-msgstr ""
+msgstr "Configura le autenticazioni richieste per usare gli strumenti Mandriva"
 
 #: draksec:117
 #, c-format
@@ -1833,10 +1829,8 @@ msgstr "Bus"
 
 #: harddrake2:32
 #, c-format
-msgid ""
-"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
-msgstr ""
-"questo è il bus fisico a cui è collegato il dispositivo (ad es. PCI, USB,...)"
+msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgstr "questo è il bus fisico a cui è collegato il dispositivo (ad es. PCI, USB,...)"
 
 #: harddrake2:34 harddrake2:149
 #, c-format
@@ -1876,8 +1870,7 @@ msgstr "Caratteristiche dell'unità"
 #: harddrake2:41
 #, c-format
 msgid "special capacities of the driver (burning ability and or DVD support)"
-msgstr ""
-"caratteristiche speciali dell'unità (masterizzazione o supporto per DVD)"
+msgstr "caratteristiche speciali dell'unità (masterizzazione o supporto per DVD)"
 
 #: harddrake2:42
 #, c-format
@@ -2202,8 +2195,7 @@ msgstr "Se la FPU ha un vettore irq"
 #: harddrake2:81
 #, c-format
 msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr ""
-"\"si\" significa che il coprocessore aritmetico possiede un vettore-eccezioni"
+msgstr "\"si\" significa che il coprocessore aritmetico possiede un vettore-eccezioni"
 
 #: harddrake2:82
 #, c-format
@@ -2397,8 +2389,7 @@ msgstr "File del dispositivo"
 
 #: harddrake2:118
 #, c-format
-msgid ""
-"the device file used to communicate with the kernel driver for the mouse"
+msgid "the device file used to communicate with the kernel driver for the mouse"
 msgstr ""
 "il file di dispositivo utilizzato per comunicare con il driver del kernel "
 "per il mouse"
@@ -2604,8 +2595,7 @@ msgstr "Lancia il tool di configurazione"
 
 #: harddrake2:302
 #, c-format
-msgid ""
-"Click on a device in the left tree in order to display its information here."
+msgid "Click on a device in the left tree in order to display its information here."
 msgstr ""
 "Clicca su un dispositivo dell'albero a sinistra per vedere le relative "
 "informazioni. "
@@ -2947,8 +2937,7 @@ msgstr "e fornisci il nome (o l'IP) del server SMTP che vuoi utilizzare"
 #: logdrake:445
 #, c-format
 msgid "\"%s\" neither is a valid email nor is an existing local user!"
-msgstr ""
-"\"%s\" non è né un indirizzo email valido, né un utente locale esistente!"
+msgstr "\"%s\" non è né un indirizzo email valido, né un utente locale esistente!"
 
 #: logdrake:450
 #, c-format
@@ -3001,8 +2990,7 @@ msgstr "Interruzione di Scannerdrake."
 
 #: scannerdrake:60
 #, c-format
-msgid ""
-"Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr ""
 "Non posso installare i programmi necessari per configurare uno scanner con "
 "Scannerdrake."
@@ -3055,8 +3043,7 @@ msgstr "Configurazione scanner"
 #: scannerdrake:131
 #, c-format
 msgid "Select a scanner model (Detected model: %s, Port: %s)"
-msgstr ""
-"Seleziona il modello dello scanner (Modello individuato: %s sulla porta %s)"
+msgstr "Seleziona il modello dello scanner (Modello individuato: %s sulla porta %s)"
 
 #: scannerdrake:133
 #, c-format
@@ -3480,8 +3467,7 @@ msgstr "Nome/indirizzo IP dell'host:"
 #: scannerdrake:719 scannerdrake:869
 #, c-format
 msgid "Choose the host on which the local scanners should be made available:"
-msgstr ""
-"Scegli l'host su cui gli scanner locali dovranno essere resi disponibili:"
+msgstr "Scegli l'host su cui gli scanner locali dovranno essere resi disponibili:"
 
 #: scannerdrake:730 scannerdrake:880
 #, c-format
@@ -3529,8 +3515,7 @@ msgstr ""
 #: service_harddrake:134
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
-msgstr ""
-"Alcuni dispositivi della categoria hardware \"%s\" sono stati rimossi:\n"
+msgstr "Alcuni dispositivi della categoria hardware \"%s\" sono stati rimossi:\n"
 
 #: service_harddrake:135
 #, c-format
@@ -3590,132 +3575,3 @@ msgstr "Configurazione di lingua e paese"
 msgid "Regional Settings"
 msgstr "Impostazioni locali"
 
-#~ msgid ""
-#~ "Here, you can setup the security level and administrator of your "
-#~ "machine.\n"
-#~ "\n"
-#~ "\n"
-#~ "The '<span weight=\"bold\">Security Administrator</span>' is the one who "
-#~ "will receive security alerts if the\n"
-#~ "'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a "
-#~ "username or an email.\n"
-#~ "\n"
-#~ "\n"
-#~ "The '<span weight=\"bold\">Security Level</span>' menu allows you to "
-#~ "select one of the six preconfigured security levels\n"
-#~ "provided with msec. These levels range from '<span weight=\"bold\">poor</"
-#~ "span>' security and ease of use, to\n"
-#~ "'<span weight=\"bold\">paranoid</span>' config, suitable for very "
-#~ "sensitive server applications:\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
-#~ "very\n"
-#~ "easy to use security level. It should only be used for machines not "
-#~ "connected to\n"
-#~ "any network and that are not accessible to everybody.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Standard</span>: This is the standard "
-#~ "security\n"
-#~ "recommended for a computer that will be used to connect to the Internet "
-#~ "as a\n"
-#~ "client.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">High</span>: There are already some\n"
-#~ "restrictions, and more automatic checks are run every night.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Higher</span>: The security is now high "
-#~ "enough\n"
-#~ "to use the system as a server which can accept connections from many "
-#~ "clients. If\n"
-#~ "your machine is only a client on the Internet, you should choose a lower "
-#~ "level.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
-#~ "previous\n"
-#~ "level, but the system is entirely closed and security features are at "
-#~ "their\n"
-#~ "maximum"
-#~ msgstr ""
-#~ "Qui puoi definire il livello della sicurezza della tua macchina e chi "
-#~ "l'amministra.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span weight=\"bold\">L'amministratore della Sicurezza</span> è colui che "
-#~ "riceverà gli avvisi di sicurezza se\n"
-#~ "l'opzione <span weight=\"bold\">Avvisi di sicurezza</span> è attiva. Puoi "
-#~ "indicare il nome di un utente o\n"
-#~ "un indirizzo email.\n"
-#~ "\n"
-#~ "\n"
-#~ "Il menu <span weight=\"bold\">Livello di Sicurezza</span> ti permette di "
-#~ "selezionare uno dei sei livelli preconfigurati\n"
-#~ "forniti da msec. Questi livelli vanno da sicurezza <span weight=\"bold"
-#~ "\">scarsa</span> (facilità d'uso), fino ad una\n"
-#~ "configurazione <span weight=\"bold\">paranoica</span>, adatta ad "
-#~ "applicazioni server molto delicate:\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Debole</span>: Questo livello è "
-#~ "completamente insicuro\n"
-#~ "però molto facile da usare. Andrebbe utilizzato solo per macchine non "
-#~ "connesse ad alcuna\n"
-#~ "rete e che non siano accessibili da chiunque.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Normale</span>: Questo è il livello di "
-#~ "sicurezza standard,\n"
-#~ "raccomandato per un computer da usare per connettersi ad Internet come "
-#~ "client.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Alto</span>: Ci sono le prime "
-#~ "restrizioni, e vengono eseguiti maggiori controlli automatici ogni "
-#~ "notte.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Più alto</span>: Ora la sicurezza è tale\n"
-#~ "da poter usare il sistema come un server che può accettare connessioni da "
-#~ "diversi client.\n"
-#~ " Se la tua macchina è solo un client su Internet, dovresti scegliere un "
-#~ "livello più basso.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Paranoica</span>: È simile al livello "
-#~ "precedente,\n"
-#~ "ma ora il sistema è completamente chiuso. Le funzioni di sicurezza sono "
-#~ "al massimo."
-
-#~ msgid "(default value: %s)"
-#~ msgstr "(valore predefinito: %s)"
-
-#~ msgid "Security Level:"
-#~ msgstr "Livello di sicurezza:"
-
-#~ msgid "Security Alerts:"
-#~ msgstr "Avvisi di sicurezza:"
-
-#~ msgid "Security Administrator:"
-#~ msgstr "Amministratore per la sicurezza:"
-
-#~ msgid "Basic options"
-#~ msgstr "Opzioni base"
-
-#~ msgid "Network Options"
-#~ msgstr "Opzioni di rete"
-
-#~ msgid "System Options"
-#~ msgstr "Opzioni di sistema"
-
-#~ msgid "Periodic Checks"
-#~ msgstr "Verifiche periodiche"
-
-#~ msgid "Please wait, setting security level..."
-#~ msgstr "Per favore attendi, ora imposto il livello di sicurezza..."
-
-#~ msgid "Please wait, setting security options..."
-#~ msgstr "Per favore attendi, ora imposto le opzioni di sicurezza..."
