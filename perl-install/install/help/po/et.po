@@ -1,16 +1,16 @@
 # Translation of DrakX.po to Estonian.
 # Copyright (C) 2003 Free Software Foundation, Inc.
 # Riho Kurg <rx@linux.ee>, 1999-2003.
-# Marek Laane <bald@starman.ee>, 2002-2006.
+# Marek Laane <bald@starman.ee>, 2002-2006,2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-et\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-12 12:22+0200\n"
-"PO-Revision-Date: 2006-03-07 12:20+0200\n"
+"PO-Revision-Date: 2009-03-20 15:06+0200\n"
 "Last-Translator: Marek Laane <bald@starman.ee>\n"
-"Language-Team: Estonian <et@li.org>\n"
+"Language-Team: Estonian <linux-ee@lists.eenet.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -71,10 +71,8 @@ msgid ""
 "\"%s\". If you're not interested in this feature, uncheck the \"%s\" box."
 msgstr ""
 "GNU/Linux on mitmekasutajasüsteem, mis tähendab, et igal kasutajal\n"
-"võivad olla oma eelistused, failid jne. Selle kontseptsiooni kohta leiab "
-"lähemat\n"
-"infot \"Kasutaja käsiraamatust\". Kuid erinevalt administraatorist ei ole\n"
-"kasutajal õigust muuta midagi muud kui vaid omaenda faile ja seadistusi.\n"
+"võivad olla oma eelistused, failid jne. Kuid erinevalt administraatorist\n"
+"pole kasutajal õigust muuta midagi muud kui vaid omaenda faile ja seadistusi.\n"
 "Te peaksite looma ka endale vähemalt ühe tavakasutaja konto, millele sisse\n"
 "logida igapäevategevuseks. Kuigi võib olla vägagi praktiline logida iga "
 "päev\n"
@@ -104,7 +102,7 @@ msgstr ""
 "Klõps nupule \"%s\" võimaldab muuta kasutajale määratavat shelli\n"
 "(vaikimisi on see bash).\n"
 "\n"
-"Kui olete kasutajate lisamise lõpetanud, pakutakse Teile valida kasutaja, "
+"Kui olete kasutajate lisamise lõpetanud, palutakse Teil valida kasutaja, "
 "kel on\n"
 "õigus logida süsteemi automaatselt, kui arvuti käivitub. Kui see võimalus\n"
 "Teile huvi pakub (ja kohalik turvalisus muret ei valmista), valige "
@@ -116,12 +114,12 @@ msgstr ""
 #: ../help.pm:54
 #, c-format
 msgid "User name"
-msgstr ""
+msgstr "Kasutajanimi"
 
 #: ../help.pm:54
 #, c-format
 msgid "Accept user"
-msgstr ""
+msgstr "Kasutaja kinnitamine"
 
 #: ../help.pm:54
 #, c-format
@@ -161,13 +159,13 @@ msgid ""
 "With SCSI hard drives, an \"a\" means \"lowest SCSI ID\", a \"b\" means\n"
 "\"second lowest SCSI ID\", etc."
 msgstr ""
-"Ülal on toodud kõik Teie kõvakettal olemasolevad Linuxi partitsioonid\n"
+"Ülal on toodud kõik Teie kõvakettal olemasolevad Linuxi partitsioonid.\n"
 "Vaikimisi on need enamasti üsna mõistlikud. Kui teete nendes muutusi,\n"
 "pidage meeles, et kindlasti vajate juurpartitsiooni (\"/\"). Liiga väikeste\n"
 "partitsioonide puhul võib tekkida raskusi piisava hulga tarkvara "
 "paigaldamisel.\n"
 "Kasutajate jaoks on sageli mõistlik luua eraldi \"/home\" partitsioon.\n"
-"(Seda mõistagi juhul, kui tegemist on enam kui ühe Linuxi partitsiooniga).\n"
+"(Seda mõistagi juhul, kui saate kasutada rohkem kui üht Linuxi partitsiooni.)\n"
 "\n"
 "Iga partitsiooni juures on toodud abiinfona \"Nimi\" ja \"Mahutavus\".\n"
 "\n"
@@ -206,7 +204,7 @@ msgstr ""
 "ning vastavat tarkvara ei paigaldata."
 
 #: ../help.pm:95
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "It's now time to specify which programs you wish to install on your system.\n"
 "There are thousands of packages available for Mandriva Linux, and to make "
@@ -280,12 +278,9 @@ msgstr ""
 "nii,\n"
 "et see vastab võimalikult hästi Linux Standard Base'i standardile.\n"
 "\n"
-"   Grupi \"LSB\" valimine paigaldab Teie arvutisse Linuxi kerneli seeriast "
-"\"2.4\",\n"
-"mitte muidu vaikimisi paigaldatavast seeriast \"2.6\".\n"
-"Seda tehakse täieliku ühilduvuse saavutamiseks LSB standardiga.\n"
-"Kui Te aga jätate grupi \"LSB\" valimata, saate ikkagi süsteemi,\n"
-"mis vastab peaaegu täielikult LSB standardile.\n"
+"   Grupi \"LSB\" valimine tagab Teie süsteemi 100-protsendilise\n"
+"ühilduvuse LSB standardiga. Kui Te aga jätate grupi \"LSB\" valimata,\n"
+"saate ikkagi süsteemi, mis vastab peaaegu täielikult LSB standardile.\n"
 "\n"
 " * \"%s\": kui arvuti peab täitma serveri ülesandeid, saate siit valida,\n"
 "milliseid levinumaid teenuseid oma süsteemi paigaldada.\n"
@@ -381,7 +376,7 @@ msgstr ""
 "Kui valite puus mõne paketi, ilmub paremal selle kirjeldus,\n"
 "mis annab teada, milline on paketi ülesanne.\n"
 "\n"
-"!! Kui tahtlikult või seetõttu, et asi kuulus gruppi,\n"
+"NB! Kui tahtlikult või seetõttu, et asi kuulus gruppi,\n"
 "on valitud mõni serveripakett, palutakse Teilt kinnitust,\n"
 "et Te ikka tõesti soovite neid servereid paigaldada.\n"
 "Mandriva Linux käivitab kõik paigaldatud serverid vaikimisi alglaadimise "
@@ -393,7 +388,7 @@ msgstr ""
 "Kui Te ei tea, mida konkreetne teenus pakub või miks see üldse "
 "paigaldatakse,\n"
 "klõpsake nupul \"%s\", sest klõps nupul \"%s\" paigaldab loetletud serverid\n"
-"ning nad käivituvad alglaadimise ajal automaatselt. !!\n"
+"ning nad käivituvad alglaadimise ajal automaatselt.\n"
 "\n"
 "Lisavõimalus \"%s\" lihtsalt keelab hoiatava dialoogi,\n"
 "mis ilmub alati, kui paigaldaja valib automaatselt mõne paketi.\n"
@@ -438,19 +433,14 @@ msgstr ""
 "Uurige neid hoolega ja jätke valimata kõik, mida ei ole alglaadimise ajal\n"
 "tingimata vajalik käivitada.\n"
 "\n"
-"Konkreetset teenust valides näete selle kohta lühikest seletavat teksti. "
-"Kui\n"
-"Te ei ole aga kindel, kas teenus on kasulik või mitte, on mõistlik jätta "
-"kehtima\n"
-"vaikevalik (olgu see siis lubav või mitte).\n"
+"Konkreetset teenust valides näete selle kohta lühikest seletavat teksti.\n"
+"Kui Te ei ole aga kindel, kas teenus on kasulik või mitte, on mõistlik\n"
+"jätta kehtima vaikevalik (olgu see siis lubav või mitte).\n"
 "\n"
-"!! Kui kavatsete oma süsteemi kasutada serverina, olge eriti tähelepanelik:\n"
-"tõenäoliselt ei soovi Te käivitada mittevajalikke teenuseid. Pidage meeles, "
-"et\n"
-"mõned teenused võivad serveris kasutatuna olla isegi ohtlikud. Üldiselt "
-"tasub\n"
-"valida ainult neid teenuseid, mida Teil tõesti vaja läheb.\n"
-"!!"
+"NB! Kui kavatsete oma süsteemi kasutada serverina, olge eriti tähelepanelik:\n"
+"tõenäoliselt ei soovi Te käivitada mittevajalikke teenuseid. Pidage meeles,\n"
+"et mõned teenused võivad serveris kasutatuna olla isegi ohtlikud. Üldiselt\n"
+"tasub valida ainult neid teenuseid, mida Teil tõesti vaja läheb.\n"
 
 #: ../help.pm:209
 #, c-format
@@ -469,24 +459,22 @@ msgid ""
 "server which can be used by other machines on your local network as well."
 msgstr ""
 "GNU/Linux kasutab GMT (Greenwichi) aega ning teisendab selle\n"
-"kohalikuks ajaks vastavalt Teie valitud ajavööndile. Seda võib siiski ka "
-"välja\n"
-"lülitada, kui jätta märkimata \"%s\". Sellisel juhul kajastab\n"
-"arvutikell sama aega, mis süsteemi kell. See võib olla kasulik, kui masinas "
-"on\n"
-"veel mõni operatsioonisüsteem, näiteks Windows.\n"
+"kohalikuks ajaks vastavalt Teie valitud ajavööndile. Seda võib siiski\n"
+"ka välja lülitada, kui jätta märkimata \"%s\". Sellisel juhul kajastab\n"
+"arvutikell sama aega, mis süsteemi kell. See võib olla kasulik, kui\n"
+"masinas on veel mõni operatsioonisüsteem, näiteks Windows.\n"
 "\n"
 "Võimalus \"%s\" võimaldab kellaaega reguleerida,\n"
 "ühendudes Internetis mõne ajaserveriga. Pakutavas nimekirjas valige mõni\n"
 "lähemal asuv server. Mõistagi peab selle võimaluse kasutamiseks olema ka\n"
-"Internetiühendus. Tegelikult paigaldab see Teie arvutisse ajaserveri, mida "
-"saab\n"
-"kasutada isegi teiste kohtvõrgus olevate masinate aja täpsustamiseks."
+"Internetiühendus. Tegelikult paigaldab see Teie arvutisse ajaserveri,\n"
+"mida saab kasutada isegi teiste kohtvõrgus olevate masinate aja\n"
+"täpsustamiseks."
 
 #: ../help.pm:213
 #, c-format
 msgid "Hardware clock set to GMT"
-msgstr ""
+msgstr "Riistvaraline kell kasutab GMT aega"
 
 #: ../help.pm:213
 #, c-format
@@ -813,13 +801,13 @@ msgstr ""
 "langetamist\n"
 "tagasiteed enam ei ole...\n"
 "\n"
-"   !! Kui valite selle võimaluse, kaotate kõik kõvakettal olevad andmed. !!\n"
+"   NB! Kui valite selle võimaluse, kaotate kõik kõvakettal olevad andmed. !!\n"
 "\n"
 " * \"%s\": see puhastab kõvaketta senistest andmetest ja\n"
 "käivitab uue paigaldusprotsessi, luues kõik partitsioonid uuesti. Kaovad ka\n"
 "kõik kettal olnud andmed.\n"
 "\n"
-"   !! Kui valite selle võimaluse, kaotate kõik kõvakettal olevad andmed. !!\n"
+"   NB! Kui valite selle võimaluse, kaotate kõik kõvakettal olevad andmed. !!\n"
 "\n"
 " * \"%s\": valige see, kui soovite ise kontrollida kõvaketta jagamist.\n"
 "Kuid olge ettevaatlik - see on küll võimas, aga ohte sisaldav\n"
@@ -837,7 +825,7 @@ msgstr "Olemasolevate partitsioonide kasutamine"
 #: ../help.pm:370
 #, c-format
 msgid "Use the free space on the Microsoft Windows® partition"
-msgstr ""
+msgstr "Vaba ruumi kasutamine Microsoft Windows® partitsioonil"
 
 #: ../help.pm:370
 #, c-format
@@ -927,17 +915,17 @@ msgstr "Loo kiirpaigaldusdiskett"
 #: ../help.pm:405
 #, c-format
 msgid "Replay"
-msgstr ""
+msgstr "Kordamine"
 
 #: ../help.pm:405
 #, c-format
 msgid "Automated"
-msgstr ""
+msgstr "Automaatne"
 
 #: ../help.pm:405
 #, c-format
 msgid "Save packages selection"
-msgstr ""
+msgstr "Paketivaliku salvestamine"
 
 #: ../help.pm:408
 #, c-format
@@ -1051,7 +1039,7 @@ msgstr ""
 #: ../help.pm:461
 #, c-format
 msgid "Security Administrator"
-msgstr "Turvaadministraator"
+msgstr "Turvahaldur"
 
 #: ../help.pm:464
 #, c-format
@@ -1207,17 +1195,17 @@ msgstr ""
 #: ../help.pm:526
 #, c-format
 msgid "Save partition table"
-msgstr ""
+msgstr "Partitsioonitabeli salvestamine"
 
 #: ../help.pm:526
 #, c-format
 msgid "Restore partition table"
-msgstr ""
+msgstr "Partitsioonitabeli taastamine"
 
 #: ../help.pm:526
 #, c-format
 msgid "Rescue partition table"
-msgstr ""
+msgstr "Partitsioonitabeli päästmine"
 
 #: ../help.pm:526
 #, c-format
@@ -1227,12 +1215,12 @@ msgstr "Eemaldatava andmekandja automaatne haakimine"
 #: ../help.pm:526
 #, c-format
 msgid "Wizard"
-msgstr ""
+msgstr "Nõustaja"
 
 #: ../help.pm:526
 #, c-format
 msgid "Undo"
-msgstr ""
+msgstr "Tagasi"
 
 #: ../help.pm:526
 #, c-format
@@ -1483,7 +1471,7 @@ msgstr "Hispaania"
 #: ../help.pm:643
 #, c-format
 msgid "Use Unicode by default"
-msgstr ""
+msgstr "Vaikimisi Unicode kasutamine"
 
 #: ../help.pm:646
 #, c-format
@@ -1650,7 +1638,7 @@ msgstr ""
 "maailma, valige \"pdq\".\n"
 "\n"
 " * \"%s\" - \"tavaline UNIXi trükkimissüsteem\" (\"Common Unix Printing\n"
-"System\") - on hiilgav valik trükkimiseks Teie kohalikul printeril või ka "
+"System\") - on hiilgav valik trükkimiseks Teie kohalikus printeris või ka "
 "mõnel teisel pool maakera asuvas\n"
 "printeris. See on lihtne süsteem, mis võib olla nii kliendiks kui serveriks "
 "iidsele\n"
@@ -1673,7 +1661,7 @@ msgstr "pdq"
 #: ../help.pm:724
 #, c-format
 msgid "CUPS"
-msgstr ""
+msgstr "CUPS"
 
 #: ../help.pm:724
 #, c-format
@@ -1733,7 +1721,7 @@ msgstr ""
 "Teie teada tegelikult on, klõpsake nuppu ja valige uus draiver."
 
 #: ../help.pm:794
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "As a review, DrakX will present a summary of information it has gathered\n"
 "about your system. Depending on the hardware installed on your machine, you\n"
@@ -1816,11 +1804,6 @@ msgstr ""
 "\n"
 " * \"%s\": võimaldab kontrollida hiire seadistusi ja neid vajadusel muuta.\n"
 "\n"
-" * \"%s\": klõps nupule \"%s\" avab printeri seadistamise nõustaja.\n"
-"Seda, kuidas uut printerit seadistada, vaadake lähemalt \"Põhiteadmiste\n"
-"käsiraamatu\" vastavast peatükist. Siin nähtav on sarnane paigaldamise ajal "
-"nähtuga.\n"
-"\n"
 " * \"%s\": kui süsteemis leiti helikaart, näidatakse seda.\n"
 "Kui märkate, et siintoodud helikaart pole see, mis tegelikult on\n"
 "süsteemi paigaldatud, klõpsake nupule ja valige sobiv draiver.\n"
@@ -1836,9 +1819,10 @@ msgstr ""
 "ekraanilahutuseks \"800x600\" või \"1024x768\". Kui see Teile ei sobi,\n"
 "klõpsake nupule \"%s\" ja valige mõni muu võimalus.\n"
 "\n"
-" * \"%s\": Kui soovite kohe seadistada juurdepääsu Internetti või "
-"kohtvõrku,\n"
-"saate seda teha nupule klõpsates.\n"
+" * \"%s\": Kui soovite kohe seadistada juurdepääsu Internetti või\n"
+"kohtvõrku, saate seda teha nupule klõpsates. Täpsemalt kõnelevad\n"
+"võrgu seadistustest distributsiooniga kaasas olevad trükised või\n"
+"Mandriva Linuxi juhtimiskeskuse abimaterjalid."
 "\n"
 " * \"%s\": siin saab määrata HTTP ja FTP puhverserveri aadressid,\n"
 "kui Teie masin asub puhverserveri taga.\n"
@@ -1859,9 +1843,9 @@ msgstr ""
 "ära seadistused üle vaadata."
 
 #: ../help.pm:809
-#, fuzzy, c-format
+#, c-format
 msgid "TV card"
-msgstr "ISDN kaart"
+msgstr "TV-kaart"
 
 #: ../help.pm:809
 #, c-format
