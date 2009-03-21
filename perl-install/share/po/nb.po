@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "POT-Creation-Date: 2009-03-18 18:39+0100\n"
-"PO-Revision-Date: 2009-03-05 22:45+0100\n"
+"PO-Revision-Date: 2009-03-20 18:23+0100\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -203,7 +203,7 @@ msgstr "Prøv igjen"
 #: any.pm:418
 #, c-format
 msgid "You can not use a password with %s"
-msgstr "Du kan ikke bruka et passord som inneholder «%s»."
+msgstr "Du kan ikke bruke et passord som inneholder \"%s\""
 
 #: any.pm:421 any.pm:811 any.pm:826 authentication.pm:248
 #, c-format
@@ -222,8 +222,7 @@ msgstr "begrens"
 
 #: any.pm:423
 #, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
+msgid "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 "Innstillingen ``Begrense kommandolinje-instillinger'' kan ikke brukes uten "
 "et passord"
@@ -414,8 +413,7 @@ msgstr "Oppgi et brukernavn"
 
 #: any.pm:788
 #, c-format
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr "Brukernavnet kan kun innholde små bokstaver, tall, `-' og `_'"
 
 #: any.pm:789
@@ -669,8 +667,7 @@ msgstr ""
 
 #: any.pm:1250
 #, c-format
-msgid ""
-"You can export using NFS or SMB. Please select which you would like to use."
+msgid "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Du kan eksportere med NFS eller SMB. Velg den du ønsker å bruke."
 
 #: any.pm:1278
@@ -774,8 +771,7 @@ msgstr "Lokal fil:"
 
 #: authentication.pm:63
 #, c-format
-msgid ""
-"Use local for all authentication and information user tell in local file"
+msgid "Use local for all authentication and information user tell in local file"
 msgstr ""
 
 #: authentication.pm:64
@@ -1640,8 +1636,7 @@ msgstr "Fjern loopback-filen?"
 
 #: diskdrake/interactive.pm:568
 #, c-format
-msgid ""
-"After changing type of partition %s, all data on this partition will be lost"
+msgid "After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "Etter endring av type på partisjon %s, vil alle data på denne partisjonen gå "
 "tapt"
@@ -1785,7 +1780,7 @@ msgstr "Krypteringsnøkkel"
 #: diskdrake/interactive.pm:858
 #, c-format
 msgid "Invalid key"
-msgstr ""
+msgstr "ugyldig nøkkel"
 
 #: diskdrake/interactive.pm:866
 #, c-format
@@ -2054,17 +2049,17 @@ msgstr "Krypteringsnøkkel"
 #: diskdrake/interactive.pm:1304
 #, c-format
 msgid " (mapped on %s)"
-msgstr ""
+msgstr "(mappet på %s)"
 
 #: diskdrake/interactive.pm:1305
 #, c-format
 msgid " (to map on %s)"
-msgstr ""
+msgstr "(å mappe på %s)"
 
 #: diskdrake/interactive.pm:1306
 #, c-format
 msgid " (inactive)"
-msgstr ""
+msgstr "(inaktiv)"
 
 #: diskdrake/interactive.pm:1312
 #, c-format
@@ -2231,8 +2226,7 @@ msgstr "Enda ett"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
+msgid "Please enter your username, password and domain name to access this host."
 msgstr ""
 "Tast inn brukernavnet, passordet og domenenavnet ditt for å få tilgang til "
 "denne verten."
@@ -2664,8 +2658,7 @@ msgstr "Partisjonering"
 #: fs/partitioning_wizard.pm:168
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
-msgstr ""
-"Hvilken størrelse ønsker du å beholde Microsoft Windows® på partisjon %s?"
+msgstr "Hvilken størrelse ønsker du å beholde Microsoft Windows® på partisjon %s?"
 
 #: fs/partitioning_wizard.pm:169
 #, c-format
@@ -3126,27 +3119,27 @@ msgstr "Vennligst vent... Aktiverer oppsettet"
 #: harddrake/sound.pm:363
 #, c-format
 msgid "Enable PulseAudio"
-msgstr ""
+msgstr "Aktiver PulseAudio"
 
 #: harddrake/sound.pm:367
 #, c-format
 msgid "Automatic routing from ALSA to PulseAudio"
-msgstr ""
+msgstr "Automatisk ruting fra ALSA til PulseAudio"
 
 #: harddrake/sound.pm:372
 #, c-format
 msgid "Enable 5.1 sound with Pulse Audio"
-msgstr ""
+msgstr "Aktiver 5.1-lyd med PulseAudio"
 
 #: harddrake/sound.pm:377
 #, c-format
 msgid "Enable user switching for audio applications"
-msgstr ""
+msgstr "Aktiver brukerbytting for audioprogrammer"
 
 #: harddrake/sound.pm:382
 #, c-format
 msgid "Reset sound mixer to default values"
-msgstr ""
+msgstr "Nullstill lydmikser til standardverdier"
 
 #: harddrake/sound.pm:387
 #, c-format
@@ -3181,7 +3174,7 @@ msgstr ""
 "Her kan du velge en alternativ driver (enten OSS eller ALSA) for lydkortet "
 "ditt (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:409
@@ -5050,7 +5043,7 @@ msgid ""
 "Most of these components are governed under the terms and conditions of the "
 "GNU \n"
 "General Public Licence, hereafter called \"GPL\", or of similar licenses."
-msgstr ""
+msgstr "De fleste av disse komponentene er styrt av benevnelsene og betingelsene i GNU General Public License, heretter kalt \"GPL\", eller lignende lisenser."
 
 #: messages.pm:112
 #, c-format
@@ -5063,11 +5056,10 @@ msgid ""
 "patent\n"
 "may be applicable to you, check your local laws."
 msgstr ""
-"Advarsel: Fri programvare er ikke nødvendigvis patentfri, og noe fri\n"
-"programvare inkludert kan være dekket av patenter i ditt land.\n"
+"Advarsel: Fri programvare er ikke nødvendigvis patentfri, og inkludert\n"
+"programvare kan være dekket av patenter i landet ditt.\n"
 "For eksempel så kan det være at MP3-dekodere krever en lisens for bruk\n"
-"(se http://www.mp3licensing.com for flere detaljer). Er du usikker om\n"
-"en patent kan gjelde deg, sjekk dine lokale lover."
+"(se http://www.mp3licensing.com for flere detaljer). Sjekk de lokale lovene hvis du er usikker på om\n et patent kan gjelde deg."
 
 #: messages.pm:120
 #, c-format
@@ -5217,7 +5209,7 @@ msgstr "Installerer driver for %s kort %s"
 #: modules/interactive.pm:100
 #, c-format
 msgid "Configuring Hardware"
-msgstr ""
+msgstr "Oppsatt maskinvare"
 
 #: modules/interactive.pm:111
 #, c-format
@@ -5325,29 +5317,29 @@ msgstr ""
 #: pkgs.pm:236 pkgs.pm:239 pkgs.pm:248
 #, c-format
 msgid "Unused packages removal"
-msgstr ""
+msgstr "Fjerning av ubrukte pakker"
 
 #: pkgs.pm:236
 #, c-format
 msgid "Finding unused hardware packages..."
-msgstr ""
+msgstr "Finner ubrukte maskinvarepakker..."
 
 #: pkgs.pm:239
 #, c-format
 msgid "Finding unused localization packages..."
-msgstr ""
+msgstr "Finner ubrukte oversettelsespakker..."
 
 #: pkgs.pm:249
 #, c-format
 msgid ""
 "We have detected that some packages are not needed for your system "
 "configuration."
-msgstr ""
+msgstr "We har funnet ut at noen av pakkene ikke trengs for systemoppsettet ditt."
 
 #: pkgs.pm:250
 #, c-format
 msgid "We will remove the following packages, unless you choose otherwise:"
-msgstr ""
+msgstr "Vi vil fjerne de følgende pakkene hvis du ikke velger motsatt:"
 
 #: pkgs.pm:253 pkgs.pm:254
 #, fuzzy, c-format
@@ -5357,7 +5349,7 @@ msgstr "Se maskinvareinfo"
 #: pkgs.pm:257 pkgs.pm:258
 #, c-format
 msgid "Unused localization"
-msgstr ""
+msgstr "Ubrukt oversettelse"
 
 #: raid.pm:42
 #, c-format
@@ -5402,8 +5394,7 @@ msgstr "Kunne ikke installere pakkene som trengs for å dele din(e) skanner(e)."
 #: scanner.pm:202
 #, c-format
 msgid "Your scanner(s) will not be available for non-root users."
-msgstr ""
-"Din(e) skanner(e) vil ikke være tilgjengelig(e) for brukere som ikke er root."
+msgstr "Din(e) skanner(e) vil ikke være tilgjengelig(e) for brukere som ikke er root."
 
 #: security/help.pm:11
 #, c-format
@@ -5458,8 +5449,7 @@ msgstr "Tillat direkte «root»-innlogging."
 
 #: security/help.pm:33
 #, c-format
-msgid ""
-"Allow the list of users on the system on display managers (kdm and gdm)."
+msgid "Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr "Tillat visning av brukere i innloggingshåndterer (kdm og gdm)."
 
 #: security/help.pm:35
@@ -5637,14 +5627,12 @@ msgstr "Slå på sulogin(8) i enbrukermodus."
 #: security/help.pm:100
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
-msgstr ""
-"Legg til navnet som et unntak for håndteringen av passordforeldelse av msec."
+msgstr "Legg til navnet som et unntak for håndteringen av passordforeldelse av msec."
 
 #: security/help.pm:102
 #, c-format
 msgid "Set password aging to \"max\" days and delay to change to \"inactive\"."
-msgstr ""
-"Sett passordaldring til «max» dager og forsinkelsen for endring til «inactive»."
+msgstr "Sett passordaldring til «max» dager og forsinkelsen for endring til «inactive»."
 
 #: security/help.pm:104
 #, c-format
@@ -5692,8 +5680,7 @@ msgstr ""
 #: security/help.pm:117
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
-msgstr ""
-"hvis satt til ja, sjekk rettigheter på filer i brukerenes hjemmekatalog. "
+msgstr "hvis satt til ja, sjekk rettigheter på filer i brukerenes hjemmekatalog. "
 
 #: security/help.pm:118
 #, c-format
@@ -5733,8 +5720,7 @@ msgstr "hvis satt til ja, rapporter filer uten eier"
 #: security/help.pm:125
 #, c-format
 msgid "if set to yes, check files/directories writable by everybody."
-msgstr ""
-"hvis satt til ja, sjekk filer eller kataloger som er skrivbare av alle."
+msgstr "hvis satt til ja, sjekk filer eller kataloger som er skrivbare av alle."
 
 #: security/help.pm:126
 #, c-format
@@ -5743,8 +5729,7 @@ msgstr "hvis satt til ja, kjør chkrootkit-kontroller"
 
 #: security/help.pm:127
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
+msgid "if set, send the mail report to this email address else send it to root."
 msgstr "sender e-postrapport til denne adressen dersom satt, ellers til root."
 
 #: security/help.pm:128
@@ -6025,8 +6010,7 @@ msgstr "Ikke send tomme e-postrapporter"
 #: security/l10n.pm:58
 #, c-format
 msgid "If set, send the mail report to this email address else send it to root"
-msgstr ""
-"Hvis satt, send e-postrapport til denne e-postadressen, ellers send til root."
+msgstr "Hvis satt, send e-postrapport til denne e-postadressen, ellers send til root."
 
 #: security/l10n.pm:59
 #, c-format
@@ -6051,7 +6035,7 @@ msgstr "Rapporterer kontrollresultat til tty"
 #: security/level.pm:10
 #, c-format
 msgid "Disable msec"
-msgstr ""
+msgstr "Slå av msec"
 
 #: security/level.pm:11
 #, c-format
@@ -6071,6 +6055,8 @@ msgid ""
 "system security\n"
 "on your own."
 msgstr ""
+"Dette nivået bør brukes med forsiktighet ettersom det slår av all tilleggssikkerhet tilbudt av msec. Bruk den kun i situasjoner der "
+"du vil ta deg av sikkerhetsaspektene selv."
 
 #: security/level.pm:41
 #, c-format
@@ -6115,7 +6101,7 @@ msgstr "Velg ønsket sikkerhetsnivå"
 #: security/level.pm:56
 #, c-format
 msgid "%s: %s"
-msgstr ""
+msgstr "%s: %s"
 
 #: security/level.pm:59
 #, c-format
@@ -6125,7 +6111,7 @@ msgstr "Sikkerhetsadministrator"
 #: security/level.pm:60
 #, c-format
 msgid "Login or email:"
-msgstr ""
+msgstr "Innlogging eller epost:"
 
 #: services.pm:19
 #, c-format
@@ -6171,8 +6157,7 @@ msgstr ""
 
 #: services.pm:28
 #, c-format
-msgid ""
-"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr "Common UNIX Printing System (CUPS) er et avansert utskriftskøsystem."
 
 #: services.pm:29
@@ -6207,8 +6192,7 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
-"HAL er en tjeneste som samler inn og vedlikeholder informasjon om maskinvare."
+msgstr "HAL er en tjeneste som samler inn og vedlikeholder informasjon om maskinvare."
 
 #: services.pm:36
 #, c-format
@@ -6221,8 +6205,7 @@ msgstr ""
 
 #: services.pm:38
 #, c-format
-msgid ""
-"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
 "Apache er en World Wide Web-tjener. Den blir brukt til å tjene HTML-filer og "
 "CGI."
@@ -6473,8 +6456,7 @@ msgstr ""
 
 #: services.pm:92
 #, c-format
-msgid ""
-"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
 "SANE (Scanner Access Now Easy) gir tilgang til skannere, filmkamera og "
 "lignende."
@@ -6529,7 +6511,7 @@ msgstr "Starter andre tjenester etter behov."
 #: services.pm:123
 #, c-format
 msgid "Printing"
-msgstr "Skriver ut"
+msgstr "Skriver"
 
 #: services.pm:124
 #, c-format
@@ -6951,9 +6933,10 @@ msgid ""
 "Click \"Next\" to install or \"Cancel\" to quit"
 msgstr ""
 "%s er ikke installert\n"
-"Klikk «Neste» for å installere eller «Avbryt» for å avslutte"
+"Klikk Neste for å installere eller Avbryt for å avslutte"
 
 #: wizards.pm:99
 #, c-format
 msgid "Installation failed"
 msgstr "Installasjon mislyktes"
+
