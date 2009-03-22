@@ -202,7 +202,9 @@ sub getSCSI() {
 
     my @l;
     foreach (all($dev_dir)) {
-	my ($host, $channel, $id, $lun) = split ':' or log::l("bad entry in $dev_dir: $_"), next;
+	my ($host, $channel, $id, $lun) = split ':';
+	defined $lun or log::l("bad entry in $dev_dir: $_"), next;
+
 	my $dir = "$dev_dir/$_";
 
 	# handle both old and new kernels:
