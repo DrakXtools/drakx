@@ -3,13 +3,13 @@
 # Copyright (C) 2000,2003, 2004, 2006 Free Software Foundation, Inc.
 # YAMAGATA Hiroo <hiyori13@alum.mit.edu>, 2000.
 # UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2003, 2004, 2006.
-# Yukiko Bando <ybando@k6.dion.ne.jp>, 2004-2008.
+# Yukiko Bando <ybando@k6.dion.ne.jp>, 2004-2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-ja\n"
 "POT-Creation-Date: 2009-03-18 18:39+0100\n"
-"PO-Revision-Date: 2008-09-23 20:00+0900\n"
+"PO-Revision-Date: 2009-02-22 19:41+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -163,9 +163,9 @@ msgid "Enable ACPI"
 msgstr "ACPI を有効にする"
 
 #: any.pm:411
-#, fuzzy, c-format
+#, c-format
 msgid "Enable SMP"
-msgstr "ACPI を有効にする"
+msgstr "SMP を有効にする"
 
 #: any.pm:412
 #, c-format
@@ -1522,7 +1522,7 @@ msgstr "詳細情報"
 #: diskdrake/interactive.pm:400
 #, c-format
 msgid "View"
-msgstr ""
+msgstr "表示"
 
 #: diskdrake/interactive.pm:405 diskdrake/interactive.pm:756
 #, c-format
@@ -1654,19 +1654,19 @@ msgid "Switching from %s to %s"
 msgstr "%s を %s に変更"
 
 #: diskdrake/interactive.pm:620
-#, fuzzy, c-format
+#, c-format
 msgid "Set volume label"
-msgstr "どのボリュームラベル？"
+msgstr "ボリュームラベルを設定"
 
 #: diskdrake/interactive.pm:622
 #, c-format
 msgid "Beware, this will be written to disk as soon as you validate!"
-msgstr ""
+msgstr "注意: これは確認すると同時にディスクに書き込まれます。"
 
 #: diskdrake/interactive.pm:623
 #, c-format
 msgid "Beware, this will be written to disk only after formatting!"
-msgstr ""
+msgstr "注意: これはフォーマットした後にのみディスクに書き込まれます。"
 
 #: diskdrake/interactive.pm:625
 #, c-format
@@ -1751,7 +1751,7 @@ msgid "Maximum size: %s MB"
 msgstr "最大サイズ: %s MB"
 
 #: diskdrake/interactive.pm:801
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
 "filesystem checks will be run on your next boot into Microsoft Windows®"
@@ -2298,14 +2298,14 @@ msgid "Creating and formatting file %s"
 msgstr "ファイル %s の作成とフォーマット"
 
 #: fs/format.pm:119
-#, fuzzy, c-format
+#, c-format
 msgid "I do not know how to set label on %s with type %s"
-msgstr "%s を %s でフォーマットする方法がわかりません"
+msgstr "%s にタイプ %s のラベルを設定する方法がわかりません"
 
 #: fs/format.pm:126
-#, fuzzy, c-format
+#, c-format
 msgid "setting label on %s failed, is it formatted?"
-msgstr "%2$s を %1$s にフォーマットできませんでした"
+msgstr "%s にラベルを設定できませんでした。フォーマットされていますか？"
 
 #: fs/format.pm:167
 #, c-format
@@ -5004,7 +5004,7 @@ msgid ""
 msgstr ""
 
 #: messages.pm:112
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Warning: Free Software may not necessarily be patent free, and some Free\n"
 "Software included may be covered by patents in your country. For example, "
@@ -5990,7 +5990,7 @@ msgstr "チェック結果を tty に報告"
 #: security/level.pm:10
 #, c-format
 msgid "Disable msec"
-msgstr ""
+msgstr "msec を無効にする"
 
 #: security/level.pm:11
 #, c-format
@@ -5998,9 +5998,9 @@ msgid "Standard"
 msgstr "標準"
 
 #: security/level.pm:12
-#, fuzzy, c-format
+#, c-format
 msgid "Secure"
-msgstr "セキュリティ"
+msgstr "セキュア"
 
 #: security/level.pm:38
 #, c-format
@@ -6010,6 +6010,11 @@ msgid ""
 "system security\n"
 "on your own."
 msgstr ""
+"このレベルは msec が提供する付加的なセキュリティチェックをすべて無効にするの"
+"で\n"
+"注意が必要です。システムのセキュリティのあらゆる点をすべて自分自身で管理した"
+"い\n"
+"場合にのみ選択してください。"
 
 #: security/level.pm:41
 #, c-format
