@@ -42,7 +42,10 @@
   cryptsetup dmsetup
 
   setfont kbd_mode
-  Xorg xset
+  <mode copy="dereference">
+    Xorg
+  </mode>
+  xset
   xkbcomp setxkbmap
 
   fb2png
