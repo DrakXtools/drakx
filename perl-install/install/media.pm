@@ -33,9 +33,9 @@ use urpm::media;
 #-	pubkey (array containing all the keys to import)
 #-	phys_medium
 #-	rpmsdir
-#-	selected
+#-	ignore
 #-	size (in MB)
-#-	start (first rpm id, undefined iff not selected)
+#-	start (first rpm id, undefined if ignored)
 #-	update (for install_urpmi)
 
 
@@ -249,7 +249,7 @@ sub _associate_phys_media {
 		log::l("setting medium $medium->{name} phys_medium to $phys_m->{url}");
 		$medium->{phys_medium} = $phys_m;
 	    } else {
-		$medium->{selected} = 0;
+		$medium->{ignore} = 1;
 		log::l("deselecting missing medium $medium->{rpmsdir}");
 	    }
 	}
@@ -675,7 +675,7 @@ sub get_media_cfg {
     if (defined $selected_names) {
         my @names = split ',', $selected_names;
         foreach my $h (@$hdlists) {
-            $h->{selected} = member($h->{name}, @names);
+            $h->{ignore} = !member($h->{name}, @names);
         }
     }
 
@@ -721,7 +721,7 @@ sub get_standalone_medium {
 sub _get_medium {
     my ($in_wait, $phys_m, $packages, $m) = @_;
 
-    $m->{selected} or log::l("ignoring packages in $m->{rel_hdlist}"), return;
+    !$m->{ignore} or log::l("ignoring packages in $m->{rel_hdlist}"), return;
 
     my $medium_id = int @{$packages->{media}};
     $m->{fakemedium} = $m->{name} || $phys_m->{method};
@@ -886,7 +886,7 @@ sub copy_rpms_on_disk {
 		#- keep in mind the asked medium has been refused.
 		#- this means it is no longer selected.
 		#- (but do not unselect supplementary CDs.)
-		$m->{selected} = 0;
+		$m->{ignore} = 1;
 	    }
 	}
 	my $dest_medium_dir = $dest_dir . '/' . basename($rpmsdir);
@@ -929,7 +929,7 @@ sub install_urpmi {
 
     my (@cfg, @netrc);
     foreach my $medium (@media) {
-	if ($medium->{selected}) {
+	if (!$medium->{ignore}) {
             my ($dir, $removable_device);
 
 	    my $phys_m = $medium->{phys_medium};
