@@ -496,6 +496,7 @@ sub get_media {
     use Data::Dumper;
 
     my ($suppl_CDs, $copy_rpms_on_disk, $phys_m);
+    my @names = map { $_->{name} } @{$packages->{media}};
     foreach (@$media) {
 	if ($_->{type} eq 'media_cfg') {
 	    $phys_m = url2mounted_phys_medium($o, $_->{url}, 'media_info');
@@ -536,11 +537,12 @@ sub get_media {
 	    log::l("unknown media type $_->{type}, skipping");
 	}
     }
+    my @new_media = difference2([ map { $_->{name} } @{$packages->{media}} ], \@names);
 
     urpm::media::update_media($packages, distrib => 1, callback => \&urpm::download::sync_logger) or
         log::l('updating media failed');
 
-    _adjust_paths_in_urpmi_cfg($o, $phys_m);
+    _adjust_paths_in_urpmi_cfg($o, $phys_m, @new_media);
 
     urpm::media::configure($packages);
     log::l('urpmi completely set up');
@@ -550,13 +552,14 @@ sub get_media {
 }
 
 sub _adjust_paths_in_urpmi_cfg {
-    my ($o, $phys_m) = @_;
-    if ($o->{stage2_phys_medium}{method} eq 'cdrom') {
+    my ($o, $phys_m, @new_media) = @_;
+    if ($o->{stage2_phys_medium}{method} ne 'cdrom') {
         my $urpm = install::pkgs::empty_packages();
         # force rereading media:
         undef $urpm->{media};
         urpm::media::read_config($urpm);
         foreach my $medium (@{$urpm->{media}}) {
+            next if !member($medium->{name}, @new_media);
             $medium->{url} =~ s!^$phys_m->{real_mntpoint}/!cdrom://!;
         }
         urpm::media::write_config($urpm);
