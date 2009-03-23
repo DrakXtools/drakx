@@ -715,7 +715,7 @@ sub ask_deselect_media__copy_on_disk {
     my ($o, $hdlists, $o_copy_rpms_on_disk) = @_;
 
     my @names = uniq(map { $_->{name} } @$hdlists);
-    my %selection = map { $_->{name} => $_->{selected} } @$hdlists;
+    my %selection = map { $_->{name} => !$_->{ignore} } @$hdlists;
 
     if (@names > 1 || $o_copy_rpms_on_disk) {
 	my $w = ugtk2->new(N("Media Selection"));
@@ -758,8 +758,8 @@ It will then continue from the hard drive and the packages will remain available
 	);
 	$w->main;
     }
-    $_->{selected} = $selection{$_->{name}} foreach @$hdlists;
-    log::l("keeping media " . join ',', map { $_->{rpmsdir} } grep { $_->{selected} } @$hdlists);
+    !$_->{ignore} = $selection{$_->{name}} foreach @$hdlists;
+    log::l("keeping media " . join ',', map { $_->{rpmsdir} } grep { !$_->{ignore} } @$hdlists);
 }
 
 1;
