@@ -342,7 +342,7 @@ It will then continue from the hard drive and the packages will remain available
 		    { type => 'bool', text => N("Copy whole CDs"), val => $o_copy_rpms_on_disk },
 		  ),
 		]);
-    !$_->{ignore} = $selection{$_->{name}} foreach @$hdlists;
+    $_->{ignore} = !$selection{$_->{name}} foreach @$hdlists;
     log::l("keeping media " . join ',', map { $_->{rpmsdir} } grep { !$_->{ignore} } @$hdlists);
 }
 

@@ -758,7 +758,7 @@ It will then continue from the hard drive and the packages will remain available
 	);
 	$w->main;
     }
-    !$_->{ignore} = $selection{$_->{name}} foreach @$hdlists;
+    $_->{ignore} = !$selection{$_->{name}} foreach @$hdlists;
     log::l("keeping media " . join ',', map { $_->{rpmsdir} } grep { !$_->{ignore} } @$hdlists);
 }
 
