@@ -1,3 +1,7 @@
+- log packages' scripts output (perl-URPM/urpmi aren't regarding
+  script fd leak but older installer was leaking one fd per
+  transaction too)
+
 Version 12.17.3 - 23 March 2009
 
 - fix empty tree at "Individual package selection" step (#48672)

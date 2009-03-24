@@ -731,7 +731,7 @@ sub _install_raw {
     # let's be urpmi's compatible:
     local $packages->{options}{noscripts} = $noscripts;
     # leaks a fd per transaction:
-    #local $packages->{options}{script_fd} = fileno $LOG;
+    local $packages->{options}{script_fd} = fileno $LOG;
 
     my ($retry, $retry_count);
 
