@@ -513,6 +513,18 @@ sub _gtk__Entry {
 	$w->set_editable(delete $opts->{editable}) if exists $opts->{editable};
     }
 
+    if (my $icon = delete $opts->{primary_icon}) {
+        $w->set_icon_from_stock('primary', $icon);
+        #$w->set_icon_highlight('primary', $icon);
+    }
+    if (my $icon = delete $opts->{secondary_icon}) {
+        $w->set_icon_from_stock('secondary', $icon);
+        #$w->set_icon_highlight('secondary', $icon);
+    }
+
+    $w->signal_connect('icon-release' => delete $opts->{'icon-release'}) if exists $opts->{'icon-release'};
+    $w->signal_connect('icon-press' => delete $opts->{'icon-press'}) if exists $opts->{'icon-press'};
+
     $w->set_text(delete $opts->{text}) if exists $opts->{text};
     $w->signal_connect(key_press_event => delete $opts->{key_press_event}) if exists $opts->{key_press_event};
 
