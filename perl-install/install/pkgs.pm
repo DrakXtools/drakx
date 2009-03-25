@@ -730,7 +730,8 @@ sub _install_raw {
 
     # let's be urpmi's compatible:
     local $packages->{options}{noscripts} = $noscripts;
-    # leaks a fd per transaction:
+    # leaks a fd per transaction (around ~100 for a typically gnome install, see #49097):
+    # bug present in 2009.0, 2008.1, 2008.0, ... (probably since r11141 aka when switching to rpm-4.2 in URPM-0.83)
     local $packages->{options}{script_fd} = fileno $LOG;
 
     my ($retry, $retry_count);
