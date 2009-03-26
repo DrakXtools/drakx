@@ -274,7 +274,7 @@ our %l = (
       #- these need checking
       qw(rrunner meye),
 
-      qw(virtio_pci, virtio_balloon),
+      qw(virtio_pci virtio_balloon),
     ],
     agpgart => [
       if_(arch() =~ /alpha/, qw(alpha-agp)),
