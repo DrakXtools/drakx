@@ -858,9 +858,11 @@ sub urpmi_add_all_media {
     require network::tools;
     return if !network::tools::has_network_connection();
     my $wait;
+    my @options = ('--distrib', '--mirrorlist', '$MIRRORLIST');
     if ($binary eq 'urpmi.addmedia') {
 	$wait = $in->wait_message(N("Please wait"), N("Please wait, adding media..."));
     } elsif ($in->isa('interactive::gtk')) {
+	push @options, '--silent-success';
 	mygtk2::flush();
     }
 
@@ -870,7 +872,7 @@ sub urpmi_add_all_media {
     log::l("URPMI_ADDMEDIA_REASON $reason");
     local $ENV{URPMI_ADDMEDIA_REASON} = $reason;
 
-    run_program::rooted($::prefix, $binary, '--distrib', '--mirrorlist', '$MIRRORLIST');
+    run_program::rooted($::prefix, $binary, @options);
 }
 
 sub autologin {
