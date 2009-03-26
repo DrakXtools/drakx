@@ -19,11 +19,12 @@ use devices;
 use log;
 use fs;
 
+# min_hd_size: only suggest this partition if the hd size is bigger than that
 %suggestions = (
   N_("simple") => [
-    { mntpoint => "/",     size => MB(300), fs_type => 'ext3', ratio => 20, maxsize => MB(8000) },
+    { mntpoint => "/",     size => MB(300), fs_type => 'ext3', ratio => 20, maxsize => MB(12300) },
     { mntpoint => "swap",  size => MB(128), fs_type => 'swap', ratio => 1,  maxsize => MB(4000) },
-    { mntpoint => "/home", size => MB(300), fs_type => 'ext3', ratio => 3,  min_hd_size => MB(7000) },
+    { mntpoint => "/home", size => MB(300), fs_type => 'ext3', ratio => 10,  min_hd_size => MB(13000) },
   ], N_("with /usr") => [
     { mntpoint => "/",     size => MB(250), fs_type => 'ext3', ratio => 1, maxsize => MB(8000) },
     { mntpoint => "swap",  size =>  MB(64), fs_type => 'swap', ratio => 1, maxsize => MB(4000) },
