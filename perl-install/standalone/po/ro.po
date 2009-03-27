@@ -44,7 +44,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 7.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-13 16:30+0100\n"
+"POT-Creation-Date: 2009-03-26 22:23-0300\n"
 "PO-Revision-Date: 2009-02-20 23:01+0100\n"
 "Last-Translator: Florin Cătălin RUSSEN <cfrussen@yahoo.co.uk>\n"
 "Language-Team: Mandrivausers.ro\n"
@@ -57,12 +57,12 @@ msgstr ""
 "Plural-Forms: nplurals=3;plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
 "2:1))\n"
 
-#: drakauth:24 drakauth:26 draksec:163
+#: drakauth:24 drakauth:26 draksec:164
 #, c-format
 msgid "Authentication"
 msgstr "Autentificare"
 
-#: drakauth:37 drakclock:111 drakclock:125 drakdvb:72 drakfont:213
+#: drakauth:37 drakclock:111 drakclock:125 drakdvb:74 drakfont:213
 #: drakfont:226 drakfont:264 draksplash:202 finish-install:119 logdrake:170
 #: logdrake:445 logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
 #: scannerdrake:200 scannerdrake:259 scannerdrake:729 scannerdrake:740
@@ -77,7 +77,7 @@ msgid "No bootloader found, creating a new configuration"
 msgstr ""
 "Nu s-a găsit nici un încărcător de sistem, se creează o configurație nouă"
 
-#: drakboot:88 harddrake2:197 harddrake2:198 logdrake:71
+#: drakboot:88 harddrake2:198 harddrake2:199 logdrake:71
 #, c-format
 msgid "/_File"
 msgstr "/_Fișier"
@@ -87,7 +87,7 @@ msgstr "/_Fișier"
 msgid "/File/_Quit"
 msgstr "/Fișier/_Termină"
 
-#: drakboot:89 harddrake2:198 logdrake:77
+#: drakboot:89 harddrake2:199 logdrake:77
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
@@ -107,8 +107,8 @@ msgstr "Detaliat"
 msgid "Silent"
 msgstr "Silențios"
 
-#: drakboot:137 drakbug:254 drakdvb:57 drakfont:682 drakperm:376 drakperm:386
-#: drakups:27 harddrake2:516 localedrake:43 notify-x11-free-driver-switch:15
+#: drakboot:137 drakbug:260 drakdvb:57 drakfont:682 drakperm:376 drakperm:386
+#: drakups:27 harddrake2:527 localedrake:43 notify-x11-free-driver-switch:15
 #: scannerdrake:51 scannerdrake:54 scannerdrake:297 scannerdrake:302
 #: scannerdrake:954
 #, c-format
@@ -321,11 +321,20 @@ msgstr ""
 "de completat. Informațiile afișate mai sus vor fi transferate pe acel server"
 
 #: drakbug:160
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "It would be very useful to attach to your report the output of the following "
 "command: %s."
-msgstr ""
+msgid_plural ""
+"Things useful to attach to your report are the output of the following "
+"commands: %s."
+msgstr[0] ""
+"Things useful to attach to your report are the output of the following "
+"commands: %s."
+msgstr[1] ""
+"Things useful to attach to your report are the output of the following "
+"commands: %s."
+msgstr[2] ""
 "Things useful to attach to your report are the output of the following "
 "commands: %s."
 
@@ -369,7 +378,7 @@ msgstr "Nu este instalat"
 msgid "Package not installed"
 msgstr "Pachet neinstalat"
 
-#: drakbug:255
+#: drakbug:261
 #, c-format
 msgid ""
 "You must type in what you were doing when this bug happened in order to "
@@ -378,12 +387,12 @@ msgstr ""
 "Trebuie să indicați ce făceați cînd eroarea s-a produs ca s-o putem "
 "reproduce și să ne mărim șansele de a o putea corecta"
 
-#: drakbug:256
+#: drakbug:262
 #, c-format
 msgid "Thanks."
 msgstr "Mulțumiri."
 
-#: drakclock:30 draksec:169
+#: drakclock:30 draksec:170
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Parametrii de dată, oră și fus orar"
@@ -457,7 +466,7 @@ msgstr "Introduceți o adresă validă de server NTP."
 msgid "Could not synchronize with %s."
 msgstr "Nu se poate sincroniza cu %s."
 
-#: drakclock:127 drakdvb:122 draksplash:125 logdrake:175 scannerdrake:491
+#: drakclock:127 drakdvb:149 draksplash:125 logdrake:175 scannerdrake:491
 #, c-format
 msgid "Quit"
 msgstr "Terminare"
@@ -477,7 +486,7 @@ msgstr "Reinițializează"
 msgid "DVB"
 msgstr "DVB"
 
-#: drakdvb:39 harddrake2:100
+#: drakdvb:39 harddrake2:101
 #, c-format
 msgid "Channel"
 msgstr "Canal"
@@ -487,35 +496,35 @@ msgstr "Canal"
 msgid "%s already exists and its contents will be lost"
 msgstr "%s există deja și tot conținutul său va fi pierdut"
 
-#: drakdvb:72
+#: drakdvb:74
 #, c-format
 msgid "Could not get the list of available channels"
 msgstr "Nu se poate obține lista canalelor disponibile"
 
-#: drakdvb:78 draksec:73 drakups:99 harddrake2:370 scannerdrake:66
+#: drakdvb:80 draksec:73 drakups:99 harddrake2:381 scannerdrake:66
 #: scannerdrake:70 scannerdrake:78 scannerdrake:319 scannerdrake:368
 #: scannerdrake:504 scannerdrake:508 scannerdrake:530 service_harddrake:264
 #, c-format
 msgid "Please wait"
 msgstr "Așteptați vă rog"
 
-#: drakdvb:82
+#: drakdvb:84
 #, c-format
 msgid "Detecting DVB channels, this will take a few minutes"
 msgstr "Se detectează canalele DVB, asta va dura cîteva minute"
 
-#: drakdvb:83 drakfont:572 drakfont:652 drakfont:736 draksplash:213
+#: drakdvb:85 drakfont:572 drakfont:652 drakfont:736 draksplash:213
 #: drakups:217 logdrake:175
 #, c-format
 msgid "Cancel"
 msgstr "Anulează"
 
-#: drakdvb:121
+#: drakdvb:148
 #, c-format
 msgid "Detect Channels"
 msgstr "Detectează canalele"
 
-#: drakdvb:123
+#: drakdvb:150
 #, c-format
 msgid "View Channel"
 msgstr "Vizualizare canal"
@@ -716,7 +725,7 @@ msgstr "Importă"
 msgid "Drakfont"
 msgstr "Drakfont"
 
-#: drakfont:522 harddrake2:235
+#: drakfont:522 harddrake2:236
 #, c-format
 msgid "Copyright (C) %s by Mandriva"
 msgstr "Drepturi de autor (C) %s Mandriva"
@@ -726,14 +735,14 @@ msgstr "Drepturi de autor (C) %s Mandriva"
 msgid "Font installer."
 msgstr "Instalator de fonturi."
 
-#: drakfont:526 harddrake2:239
+#: drakfont:526 harddrake2:240
 #, c-format
 msgid "Mandriva Linux"
 msgstr "Mandriva Linux"
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:533 harddrake2:244
+#: drakfont:533 harddrake2:245
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr ""
@@ -788,7 +797,7 @@ msgstr "Selectare de fișiere"
 msgid "Fonts"
 msgstr "Fonturi"
 
-#: drakfont:640 draksec:165
+#: drakfont:640 draksec:166
 #, c-format
 msgid "Import fonts"
 msgstr "Importare de fonturi"
@@ -813,12 +822,12 @@ msgstr "Instalează"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "Sînteți sigur că doriți să dezinstalați următoarele fonturi?"
 
-#: drakfont:688 draksec:60 harddrake2:324
+#: drakfont:688 draksec:60 harddrake2:326
 #, c-format
 msgid "Yes"
 msgstr "Da"
 
-#: drakfont:690 draksec:59 harddrake2:325
+#: drakfont:690 draksec:59 harddrake2:327
 #, c-format
 msgid "No"
 msgstr "Nu"
@@ -962,7 +971,7 @@ msgstr "Utilizator"
 msgid "Group"
 msgstr "Grup"
 
-#: drakperm:50 drakperm:109 drakperm:332 draksec:180
+#: drakperm:50 drakperm:109 drakperm:332 draksec:181
 #, c-format
 msgid "Permissions"
 msgstr "Drepturi"
@@ -1241,7 +1250,7 @@ msgstr "Parolă root"
 msgid "User password"
 msgstr "Parolă utilizator"
 
-#: draksec:149 draksec:203
+#: draksec:149 draksec:204
 #, c-format
 msgid "Software Management"
 msgstr "Gestionare de programe"
@@ -1298,60 +1307,65 @@ msgstr "Centru de rețea"
 
 #: draksec:160
 #, c-format
+msgid "Wireless Network Roaming"
+msgstr ""
+
+#: draksec:161
+#, c-format
 msgid "VPN"
 msgstr "VPN"
 
-#: draksec:161
+#: draksec:162
 #, c-format
 msgid "Proxy Configuration"
 msgstr "Configurație Proxy (server mandatar)"
 
-#: draksec:162
+#: draksec:163
 #, c-format
 msgid "Connection Sharing"
 msgstr "Partajare conexiune"
 
-#: draksec:164
+#: draksec:165
 #, c-format
 msgid "Backups"
 msgstr "Salvgardări (copii de siguranță)"
 
-#: draksec:166 logdrake:52
+#: draksec:167 logdrake:52
 #, c-format
 msgid "Logs"
 msgstr "Jurnale"
 
-#: draksec:167
+#: draksec:168
 #, c-format
 msgid "Services"
 msgstr "Servicii"
 
-#: draksec:168
+#: draksec:169
 #, c-format
 msgid "Users"
 msgstr "Utilizatori"
 
-#: draksec:170
+#: draksec:171
 #, c-format
 msgid "Boot Configuration"
 msgstr "Configurație demaraj"
 
-#: draksec:204
+#: draksec:205
 #, c-format
 msgid "Hardware"
 msgstr "Componente materiale"
 
-#: draksec:205
+#: draksec:206
 #, c-format
 msgid "Network"
 msgstr "Rețea"
 
-#: draksec:206
+#: draksec:207
 #, c-format
 msgid "System"
 msgstr "Sistem"
 
-#: draksec:207
+#: draksec:208
 #, c-format
 msgid "Boot"
 msgstr "Demaraj"
@@ -1631,7 +1645,7 @@ msgstr ""
 msgid "Autodetection"
 msgstr "Auto-detecție"
 
-#: drakups:99 harddrake2:370
+#: drakups:99 harddrake2:381
 #, c-format
 msgid "Detection in progress"
 msgstr "Detecția este în progres..."
@@ -1715,18 +1729,18 @@ msgstr "Asistentul a configurat cu succes noul dispozitiv UPS \"%s\"."
 msgid "UPS devices"
 msgstr "Dispozitive UPS"
 
-#: drakups:249 drakups:268 drakups:284 harddrake2:88 harddrake2:114
-#: harddrake2:121
+#: drakups:249 drakups:268 drakups:284 harddrake2:89 harddrake2:115
+#: harddrake2:122
 #, c-format
 msgid "Name"
 msgstr "Nume"
 
-#: drakups:249 harddrake2:136
+#: drakups:249 harddrake2:137
 #, c-format
 msgid "Driver"
 msgstr "Pilot"
 
-#: drakups:249 harddrake2:54
+#: drakups:249 harddrake2:55
 #, c-format
 msgid "Port"
 msgstr "Port"
@@ -1761,7 +1775,7 @@ msgstr "Reguli"
 msgid "Action"
 msgstr "Acțiune"
 
-#: drakups:297 harddrake2:85
+#: drakups:297 harddrake2:86
 #, c-format
 msgid "Level"
 msgstr "Nivel"
@@ -1771,7 +1785,7 @@ msgstr "Nivel"
 msgid "ACL name"
 msgstr "Nume ACL"
 
-#: drakups:297 finish-install:171
+#: drakups:297 finish-install:179
 #, c-format
 msgid "Password"
 msgstr "Parolă"
@@ -1828,47 +1842,47 @@ msgstr "Tastatură"
 msgid "Please, choose your keyboard layout."
 msgstr "Alegeți dispunerea tastaturii."
 
-#: finish-install:169 finish-install:187 finish-install:199
+#: finish-install:177 finish-install:195 finish-install:207
 #, c-format
 msgid "Encrypted home partition"
 msgstr "Partiție utilizatori criptată"
 
-#: finish-install:169
+#: finish-install:177
 #, c-format
 msgid "Please enter a password for the %s user"
 msgstr "Introduceți o parolă pentru utilizatorul %s"
 
-#: finish-install:172
+#: finish-install:180
 #, c-format
 msgid "Password (again)"
 msgstr "Parolă (din nou)"
 
-#: finish-install:187
+#: finish-install:195
 #, c-format
 msgid "Creating encrypted home partition"
 msgstr "Se creează o partiție utilizatori criptată"
 
-#: finish-install:199
+#: finish-install:207
 #, c-format
 msgid "Formatting encrypted home partition"
 msgstr "Se formatează partiția utilizatori criptată"
 
-#: harddrake2:28
+#: harddrake2:29
 #, c-format
 msgid "Alternative drivers"
 msgstr "Piloți alternativi"
 
-#: harddrake2:29
+#: harddrake2:30
 #, c-format
 msgid "the list of alternative drivers for this sound card"
 msgstr "lista piloților alternativi pentru această placa de sunet"
 
-#: harddrake2:31 harddrake2:123
+#: harddrake2:32 harddrake2:124
 #, c-format
 msgid "Bus"
 msgstr "Magistrală"
 
-#: harddrake2:32
+#: harddrake2:33
 #, c-format
 msgid ""
 "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
@@ -1876,12 +1890,12 @@ msgstr ""
 "aceasta este magistrala fizică la care este conectat dispozitivul (ex. PCI, "
 "USB, ...)"
 
-#: harddrake2:34 harddrake2:149
+#: harddrake2:35 harddrake2:150
 #, c-format
 msgid "Bus identification"
 msgstr "Identificare magistrală"
 
-#: harddrake2:35
+#: harddrake2:36
 #, c-format
 msgid ""
 "- PCI and USB devices: this lists the vendor, device, subvendor and "
@@ -1890,12 +1904,12 @@ msgstr ""
 "- dispozitive PCI și USB: acesta listează identificatorii fabricantului, "
 "dispozitivului, integratorului și sub-dispozitivului PCI/USB"
 
-#: harddrake2:37
+#: harddrake2:38
 #, c-format
 msgid "Location on the bus"
 msgstr "Poziționarea pe magistrală"
 
-#: harddrake2:38
+#: harddrake2:39
 #, c-format
 msgid ""
 "- pci devices: this gives the PCI slot, device and function of this card\n"
@@ -1906,229 +1920,229 @@ msgstr ""
 "- dispozitive EIDE: dispozitivul este ori primar ori secundar\n"
 "- dispozitive SCSI: identificatorii magistralei și dispozitivului SCSI"
 
-#: harddrake2:41
+#: harddrake2:42
 #, c-format
 msgid "Drive capacity"
 msgstr "Specificațiile unității"
 
-#: harddrake2:41
+#: harddrake2:42
 #, c-format
 msgid "special capacities of the driver (burning ability and or DVD support)"
 msgstr ""
 "caracteristici speciale ale unității (poate scrie sau poate citi DVD-uri)"
 
-#: harddrake2:42
+#: harddrake2:43
 #, c-format
 msgid "Description"
 msgstr "Descriere"
 
-#: harddrake2:42
+#: harddrake2:43
 #, c-format
 msgid "this field describes the device"
 msgstr "acest cîmp descrie dispozitivul"
 
-#: harddrake2:43
+#: harddrake2:44
 #, c-format
 msgid "Old device file"
 msgstr "Fișier dispozitiv vechi"
 
-#: harddrake2:44
+#: harddrake2:45
 #, c-format
 msgid "old static device name used in dev package"
 msgstr "nume dispozitiv static vechi folosit în pachetul dev"
 
 #. -PO: here "module" is the "jargon term" for a kernel driver
-#: harddrake2:47
+#: harddrake2:48
 #, c-format
 msgid "Module"
 msgstr "Module"
 
-#: harddrake2:47
+#: harddrake2:48
 #, c-format
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "modulul nucleului GNU/Linux ce va controla dispozitivul"
 
-#: harddrake2:48
+#: harddrake2:49
 #, c-format
 msgid "Extended partitions"
 msgstr "Partiții extinse"
 
-#: harddrake2:48
+#: harddrake2:49
 #, c-format
 msgid "the number of extended partitions"
 msgstr "numărul partițiilor extinse"
 
-#: harddrake2:49
+#: harddrake2:50
 #, c-format
 msgid "Geometry"
 msgstr "Geometrie"
 
-#: harddrake2:49
+#: harddrake2:50
 #, c-format
 msgid "Cylinder/head/sectors geometry of the disk"
 msgstr "Geometria discului în cilindri/capete/sectoare"
 
-#: harddrake2:50
+#: harddrake2:51
 #, c-format
 msgid "Disk controller"
 msgstr "Controler de disc"
 
-#: harddrake2:50
+#: harddrake2:51
 #, c-format
 msgid "the disk controller on the host side"
 msgstr "controlerul de disc de partea gazdei"
 
-#: harddrake2:51
+#: harddrake2:52
 #, c-format
 msgid "Identifier"
 msgstr "Identificator"
 
-#: harddrake2:51
+#: harddrake2:52
 #, c-format
 msgid "usually the device serial number"
 msgstr "de obicei numărul de serie al dispozitivului"
 
-#: harddrake2:52
+#: harddrake2:53
 #, c-format
 msgid "Media class"
 msgstr "Clasă de mediu"
 
-#: harddrake2:52
+#: harddrake2:53
 #, c-format
 msgid "class of hardware device"
 msgstr "clasă dispozitiv"
 
-#: harddrake2:53 harddrake2:86
+#: harddrake2:54 harddrake2:87
 #, c-format
 msgid "Model"
 msgstr "Model"
 
-#: harddrake2:53
+#: harddrake2:54
 #, c-format
 msgid "hard disk model"
 msgstr "Model de disc dur"
 
-#: harddrake2:54
+#: harddrake2:55
 #, c-format
 msgid "network printer port"
 msgstr "port imprimantă de rețea"
 
-#: harddrake2:55
+#: harddrake2:56
 #, c-format
 msgid "Primary partitions"
 msgstr "Partiții primare"
 
-#: harddrake2:55
+#: harddrake2:56
 #, c-format
 msgid "the number of the primary partitions"
 msgstr "numărul partițiilor primare"
 
-#: harddrake2:56 harddrake2:91
+#: harddrake2:57 harddrake2:92
 #, c-format
 msgid "Vendor"
 msgstr "Fabricant"
 
-#: harddrake2:56
+#: harddrake2:57
 #, c-format
 msgid "the vendor name of the device"
 msgstr "numele dat de fabricant dispozitivului"
 
-#: harddrake2:57
+#: harddrake2:58
 #, c-format
 msgid "PCI domain"
 msgstr "Domeniu PCI"
 
-#: harddrake2:57
+#: harddrake2:58
 #, c-format
 msgid "the PCI domain of the device"
 msgstr "domeniul dispozitivului PCI"
 
-#: harddrake2:58
+#: harddrake2:59
 #, c-format
 msgid "Bus PCI #"
 msgstr "Magistrală PCI #"
 
-#: harddrake2:58
+#: harddrake2:59
 #, c-format
 msgid "the PCI bus on which the device is plugged"
 msgstr "magistrala PCI în care dispzitivul este conectat"
 
-#: harddrake2:59
+#: harddrake2:60
 #, c-format
 msgid "PCI device #"
 msgstr "Dispozitiv PCI #"
 
-#: harddrake2:59
+#: harddrake2:60
 #, c-format
 msgid "PCI device number"
 msgstr "Număr dispozitiv PCI"
 
-#: harddrake2:60
+#: harddrake2:61
 #, c-format
 msgid "PCI function #"
 msgstr "Funcție PCI #"
 
-#: harddrake2:60
+#: harddrake2:61
 #, c-format
 msgid "PCI function number"
 msgstr "Număr funcție PCI"
 
-#: harddrake2:61
+#: harddrake2:62
 #, c-format
 msgid "Vendor ID"
 msgstr "Identificator fabricant"
 
-#: harddrake2:61
+#: harddrake2:62
 #, c-format
 msgid "this is the standard numerical identifier of the vendor"
 msgstr "acesta este identificatorul numeric minor al fabricantului"
 
-#: harddrake2:62
+#: harddrake2:63
 #, c-format
 msgid "Device ID"
 msgstr "Identificator dispozitiv"
 
-#: harddrake2:62
+#: harddrake2:63
 #, c-format
 msgid "this is the numerical identifier of the device"
 msgstr "acesta este identificatorul numeric al dispozitivului"
 
-#: harddrake2:63
+#: harddrake2:64
 #, c-format
 msgid "Sub vendor ID"
 msgstr "Identificator secundar de fabricant"
 
-#: harddrake2:63
+#: harddrake2:64
 #, c-format
 msgid "this is the minor numerical identifier of the vendor"
 msgstr "acesta este identificatorul numeric minor ar fabricantului"
 
-#: harddrake2:64
+#: harddrake2:65
 #, c-format
 msgid "Sub device ID"
 msgstr "Identificator secundar de dispozitiv"
 
-#: harddrake2:64
+#: harddrake2:65
 #, c-format
 msgid "this is the minor numerical identifier of the device"
 msgstr "acesta este identificatorul numeric secundar al dispozitivului"
 
-#: harddrake2:65
+#: harddrake2:66
 #, c-format
 msgid "Device USB ID"
 msgstr "Identificator dispozitiv USB"
 
-#: harddrake2:65
+#: harddrake2:66
 #, c-format
 msgid ".."
 msgstr ".."
 
-#: harddrake2:69
+#: harddrake2:70
 #, c-format
 msgid "Bogomips"
 msgstr "Bogomips"
 
-#: harddrake2:69
+#: harddrake2:70
 #, c-format
 msgid ""
 "the GNU/Linux kernel needs to run a calculation loop at boot time to "
@@ -2139,53 +2153,53 @@ msgstr ""
 "inițializa contorul de timp. Rezultatul este înregistrat sub formă de "
 "bogomips și dă o indicație asupra performanțelor proccesorului."
 
-#: harddrake2:70
+#: harddrake2:71
 #, c-format
 msgid "Cache size"
 msgstr "Mărime cache "
 
-#: harddrake2:70
+#: harddrake2:71
 #, c-format
 msgid "size of the (second level) cpu cache"
 msgstr "dimensiune cache procesor (nivel doi)"
 
 #. -PO: here "comas" is the medical coma, not the lexical coma!!
-#: harddrake2:73
+#: harddrake2:74
 #, c-format
 msgid "Coma bug"
 msgstr "Eroare de tip Coma"
 
-#: harddrake2:73
+#: harddrake2:74
 #, c-format
 msgid "whether this cpu has the Cyrix 6x86 Coma bug"
 msgstr "dacă acest procesor are eroarea Cyrix 6x86 Coma"
 
-#: harddrake2:74
+#: harddrake2:75
 #, c-format
 msgid "Cpuid family"
 msgstr "Familie CPUid"
 
-#: harddrake2:74
+#: harddrake2:75
 #, c-format
 msgid "family of the cpu (eg: 6 for i686 class)"
 msgstr "familia procesorului (ex. 6 ptentru clasa i686)"
 
-#: harddrake2:75
+#: harddrake2:76
 #, c-format
 msgid "Cpuid level"
 msgstr "Nivel CPUid"
 
-#: harddrake2:75
+#: harddrake2:76
 #, c-format
 msgid "information level that can be obtained through the cpuid instruction"
 msgstr "nivelul de informație ce poate fi obținut cu instrucțiunea cpuid"
 
-#: harddrake2:76
+#: harddrake2:77
 #, c-format
 msgid "Frequency (MHz)"
 msgstr "Frecvență (MHz)"
 
-#: harddrake2:76
+#: harddrake2:77
 #, c-format
 msgid ""
 "the CPU frequency in MHz (Megahertz which in first approximation may be "
@@ -2195,22 +2209,22 @@ msgstr ""
 "frecvența procesorului în MHz (Megaherți, ca o aproximare poate fi asimilată "
 "cu numărul de instrucțiuni executate pe secundă de către procesor)"
 
-#: harddrake2:77
+#: harddrake2:78
 #, c-format
 msgid "Flags"
 msgstr "Fanioane"
 
-#: harddrake2:77
+#: harddrake2:78
 #, c-format
 msgid "CPU flags reported by the kernel"
 msgstr "Fanioanele procesorului raportate de nucleu"
 
-#: harddrake2:78
+#: harddrake2:79
 #, c-format
 msgid "Fdiv bug"
 msgstr "Eroare de tip FDIV"
 
-#: harddrake2:79
+#: harddrake2:80
 #, c-format
 msgid ""
 "Early Intel Pentium chips manufactured have a bug in their floating point "
@@ -2221,43 +2235,43 @@ msgstr ""
 "mobilă și rezultatele nu erau precise cînd se efectua o împărțire cu virgulă "
 "mobilă (FDIV)"
 
-#: harddrake2:80
+#: harddrake2:81
 #, c-format
 msgid "Is FPU present"
 msgstr "Există coprocesor matematic?"
 
-#: harddrake2:80
+#: harddrake2:81
 #, c-format
 msgid "yes means the processor has an arithmetic coprocessor"
 msgstr "da, procesorul are un coprocesor matematic"
 
-#: harddrake2:81
+#: harddrake2:82
 #, c-format
 msgid "Whether the FPU has an irq vector"
 msgstr "Dacă FPU are un vector IRQ"
 
-#: harddrake2:81
+#: harddrake2:82
 #, c-format
 msgid "yes means the arithmetic coprocessor has an exception vector attached"
 msgstr "da, coprocesorul matematic are atașat un vector de excepții"
 
-#: harddrake2:82
+#: harddrake2:83
 #, c-format
 msgid "F00f bug"
 msgstr "Eroare de tip F00F"
 
-#: harddrake2:82
+#: harddrake2:83
 #, c-format
 msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
 msgstr ""
 "primele Pentium-uri aveau erori și se blocau la decodarea secvenței F00F"
 
-#: harddrake2:83
+#: harddrake2:84
 #, c-format
 msgid "Halt bug"
 msgstr "Eroare la instrucțiunea halt"
 
-#: harddrake2:84
+#: harddrake2:85
 #, c-format
 msgid ""
 "Some of the early i486DX-100 chips cannot reliably return to operating mode "
@@ -2266,62 +2280,62 @@ msgstr ""
 "Unele din primele modele de cipuri i486DX-100 nu se puteau întoarce corect "
 "la modul de operare după utilizarea instrucțiunii \"halt\""
 
-#: harddrake2:85
+#: harddrake2:86
 #, c-format
 msgid "sub generation of the cpu"
 msgstr "sub-generația procesorului"
 
-#: harddrake2:86
+#: harddrake2:87
 #, c-format
 msgid "generation of the cpu (eg: 8 for Pentium III, ...)"
 msgstr "generație procesor (ex. 8 pt. Pentium III,...)"
 
-#: harddrake2:87
+#: harddrake2:88
 #, c-format
 msgid "Model name"
 msgstr "Nume model"
 
-#: harddrake2:87
+#: harddrake2:88
 #, c-format
 msgid "official vendor name of the cpu"
 msgstr "numele oficial al fabricantului procesorului"
 
-#: harddrake2:88
+#: harddrake2:89
 #, c-format
 msgid "the name of the CPU"
 msgstr "numele procesorului"
 
-#: harddrake2:89
+#: harddrake2:90
 #, c-format
 msgid "Processor ID"
 msgstr "Identificator procesor"
 
-#: harddrake2:89
+#: harddrake2:90
 #, c-format
 msgid "the number of the processor"
 msgstr "numărul de serie al procesorului"
 
-#: harddrake2:90
+#: harddrake2:91
 #, c-format
 msgid "Model stepping"
 msgstr "Numărul de sub-model"
 
-#: harddrake2:90
+#: harddrake2:91
 #, c-format
 msgid "stepping of the cpu (sub model (generation) number)"
 msgstr "numărul de sub-model al procesorului (stepping)"
 
-#: harddrake2:91
+#: harddrake2:92
 #, c-format
 msgid "the vendor name of the processor"
 msgstr "numele fabricantului procesorului"
 
-#: harddrake2:92
+#: harddrake2:93
 #, c-format
 msgid "Write protection"
 msgstr "Protecție la scriere"
 
-#: harddrake2:92
+#: harddrake2:93
 #, c-format
 msgid ""
 "the WP flag in the CR0 register of the cpu enforce write protection at the "
@@ -2332,37 +2346,37 @@ msgstr ""
 "paginilor de memorie, prevenind astfel ca erorile din nucleu să scrie în "
 "memoria  utilizator."
 
-#: harddrake2:96
+#: harddrake2:97
 #, c-format
 msgid "Floppy format"
 msgstr "Formatul unității de dischete"
 
-#: harddrake2:96
+#: harddrake2:97
 #, c-format
 msgid "format of floppies supported by the drive"
 msgstr "formatul dischetelor suportate de unitate"
 
-#: harddrake2:100
+#: harddrake2:101
 #, c-format
 msgid "EIDE/SCSI channel"
 msgstr "Canal EIDE/SCSI"
 
-#: harddrake2:101
+#: harddrake2:102
 #, c-format
 msgid "Disk identifier"
 msgstr "Identificator de disc"
 
-#: harddrake2:101
+#: harddrake2:102
 #, c-format
 msgid "usually the disk serial number"
 msgstr "de obicei numărul de serie al discului"
 
-#: harddrake2:102
+#: harddrake2:103
 #, c-format
 msgid "Logical unit number"
 msgstr "Număr de unitate logică"
 
-#: harddrake2:102
+#: harddrake2:103
 #, c-format
 msgid ""
 "the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
@@ -2374,205 +2388,205 @@ msgstr ""
 "numărul de canal, identificator de țintă și număr de unitate logică"
 
 #. -PO: here, "size" is the size of the ram chip (eg: 128Mo, 256Mo, ...)
-#: harddrake2:109
+#: harddrake2:110
 #, c-format
 msgid "Installed size"
 msgstr "Capacitate instalată"
 
-#: harddrake2:109
+#: harddrake2:110
 #, c-format
 msgid "Installed size of the memory bank"
 msgstr "Capacitatea instalată a baretelor de memorie"
 
-#: harddrake2:110
+#: harddrake2:111
 #, c-format
 msgid "Enabled Size"
 msgstr "Capacitate activată"
 
-#: harddrake2:110
+#: harddrake2:111
 #, c-format
 msgid "Enabled size of the memory bank"
 msgstr "Capacitatea activată a baretelor de memorie"
 
-#: harddrake2:111 harddrake2:120
+#: harddrake2:112 harddrake2:121
 #, c-format
 msgid "Type"
 msgstr "Tip"
 
-#: harddrake2:111
+#: harddrake2:112
 #, c-format
 msgid "type of the memory device"
 msgstr "tipul dispozitivului de memorie"
 
-#: harddrake2:112
+#: harddrake2:113
 #, c-format
 msgid "Speed"
 msgstr "Viteză"
 
-#: harddrake2:112
+#: harddrake2:113
 #, c-format
 msgid "Speed of the memory bank"
 msgstr "Viteza baretei de memorie"
 
-#: harddrake2:113
+#: harddrake2:114
 #, c-format
 msgid "Bank connections"
 msgstr "Conectorul baretei"
 
-#: harddrake2:114
+#: harddrake2:115
 #, c-format
 msgid "Socket designation of the memory bank"
 msgstr "Denumirea soclului baretei de memmorie"
 
-#: harddrake2:118
+#: harddrake2:119
 #, c-format
 msgid "Device file"
 msgstr "Fișier dispozitiv"
 
-#: harddrake2:118
+#: harddrake2:119
 #, c-format
 msgid ""
 "the device file used to communicate with the kernel driver for the mouse"
 msgstr ""
 "fișierul dispozitivului utilizat comunică cu pilotul de nucleu pentru maus"
 
-#: harddrake2:119
+#: harddrake2:120
 #, c-format
 msgid "Emulated wheel"
 msgstr "Rotiță emulată"
 
-#: harddrake2:119
+#: harddrake2:120
 #, c-format
 msgid "whether the wheel is emulated or not"
 msgstr "dacă rotița este emulată sau nu"
 
-#: harddrake2:120
+#: harddrake2:121
 #, c-format
 msgid "the type of the mouse"
 msgstr "tipul mausului"
 
-#: harddrake2:121
+#: harddrake2:122
 #, c-format
 msgid "the name of the mouse"
 msgstr "numele mausului"
 
-#: harddrake2:122
+#: harddrake2:123
 #, c-format
 msgid "Number of buttons"
 msgstr "Numărul butoanelor"
 
-#: harddrake2:122
+#: harddrake2:123
 #, c-format
 msgid "the number of buttons the mouse has"
 msgstr "numărul de butoane pe care le are mausul"
 
-#: harddrake2:123
+#: harddrake2:124
 #, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "tipul de magistrală la care este conectat mausul"
 
-#: harddrake2:124
+#: harddrake2:125
 #, c-format
 msgid "Mouse protocol used by X11"
 msgstr "Porotocolul de maus utilizat de X11"
 
-#: harddrake2:124
+#: harddrake2:125
 #, c-format
 msgid "the protocol that the graphical desktop use with the mouse"
 msgstr "protocolul pe care mediul grafic îl folosește cu mausul"
 
-#: harddrake2:131 harddrake2:140 harddrake2:147 harddrake2:155 harddrake2:335
+#: harddrake2:132 harddrake2:141 harddrake2:148 harddrake2:156 harddrake2:337
 #, c-format
 msgid "Identification"
 msgstr "Identificare"
 
-#: harddrake2:132 harddrake2:148
+#: harddrake2:133 harddrake2:149
 #, c-format
 msgid "Connection"
 msgstr "Conectare"
 
-#: harddrake2:141
+#: harddrake2:142
 #, c-format
 msgid "Performances"
 msgstr "Performanțe"
 
-#: harddrake2:142
+#: harddrake2:143
 #, c-format
 msgid "Bugs"
 msgstr "Hibe (erori)"
 
-#: harddrake2:143
+#: harddrake2:144
 #, c-format
 msgid "FPU"
 msgstr "FPU"
 
-#: harddrake2:150
+#: harddrake2:151
 #, c-format
 msgid "Device"
 msgstr "Dispozitiv"
 
-#: harddrake2:151
+#: harddrake2:152
 #, c-format
 msgid "Partitions"
 msgstr "Partiții"
 
-#: harddrake2:156
+#: harddrake2:157
 #, c-format
 msgid "Features"
 msgstr "Caracteristici"
 
 #. -PO: please keep all "/" characters !!!
-#: harddrake2:179 logdrake:78
+#: harddrake2:180 logdrake:78
 #, c-format
 msgid "/_Options"
 msgstr "/_Opțiuni"
 
-#: harddrake2:180 harddrake2:209 logdrake:80
+#: harddrake2:181 harddrake2:210 logdrake:80
 #, c-format
 msgid "/_Help"
 msgstr "/_Ajutor"
 
-#: harddrake2:184
+#: harddrake2:185
 #, c-format
 msgid "/Autodetect _printers"
 msgstr "/Auto-detecție im_primante"
 
-#: harddrake2:185
+#: harddrake2:186
 #, c-format
 msgid "/Autodetect _modems"
 msgstr "/Auto-detecție _modemuri"
 
-#: harddrake2:186
+#: harddrake2:187
 #, c-format
 msgid "/Autodetect _jaz drives"
 msgstr "/Auto-detecție unități _JAZ"
 
-#: harddrake2:187
+#: harddrake2:188
 #, c-format
 msgid "/Autodetect parallel _zip drives"
 msgstr "/Autodetectare unități zip pe port paralel"
 
-#: harddrake2:191
+#: harddrake2:192
 #, c-format
 msgid "Hardware Configuration"
 msgstr "Configurație materială"
 
-#: harddrake2:198
+#: harddrake2:199
 #, c-format
 msgid "/_Quit"
 msgstr "/_Termină"
 
-#: harddrake2:211
+#: harddrake2:212
 #, c-format
 msgid "/_Fields description"
 msgstr "/Descriere cîmpuri"
 
-#: harddrake2:213
+#: harddrake2:214
 #, c-format
 msgid "Harddrake help"
 msgstr "Ajutor HardDrake"
 
-#: harddrake2:214
+#: harddrake2:215
 #, c-format
 msgid ""
 "Description of the fields:\n"
@@ -2581,12 +2595,12 @@ msgstr ""
 "Descrierea cîmpurilor:\n"
 "\n"
 
-#: harddrake2:222
+#: harddrake2:223
 #, c-format
 msgid "Select a device!"
 msgstr "Alegeți un dispozitiv!"
 
-#: harddrake2:222
+#: harddrake2:223
 #, c-format
 msgid ""
 "Once you've selected a device, you'll be able to see the device information "
@@ -2595,47 +2609,47 @@ msgstr ""
 "Odată ce ați selectat un dispozitiv, îi puteți consulta informațiile "
 "corespunzătoare în cadrul din dreapta (\"Informații\")"
 
-#: harddrake2:228
+#: harddrake2:229
 #, c-format
 msgid "/_Report Bug"
 msgstr "/_Raportare eroare"
 
-#: harddrake2:230
+#: harddrake2:231
 #, c-format
 msgid "/_About..."
 msgstr "/Despre..."
 
-#: harddrake2:233
+#: harddrake2:234
 #, c-format
 msgid "Harddrake"
 msgstr "Harddrake"
 
-#: harddrake2:237
+#: harddrake2:238
 #, c-format
 msgid "This is HardDrake, a %s hardware configuration tool."
 msgstr "HardDrake este unealta de configurație materială %s."
 
-#: harddrake2:270
+#: harddrake2:271
 #, c-format
 msgid "Detected hardware"
 msgstr "Componente materiale detectate"
 
-#: harddrake2:273 scannerdrake:286
+#: harddrake2:274 scannerdrake:286
 #, c-format
 msgid "Information"
 msgstr "Informații"
 
-#: harddrake2:275
+#: harddrake2:276
 #, c-format
 msgid "Set current driver options"
 msgstr "Specificați opțiunile pilotului curent"
 
-#: harddrake2:282
+#: harddrake2:283
 #, c-format
 msgid "Run config tool"
 msgstr "Execută unealta de configurare"
 
-#: harddrake2:302
+#: harddrake2:303
 #, c-format
 msgid ""
 "Click on a device in the left tree in order to display its information here."
@@ -2643,47 +2657,47 @@ msgstr ""
 "Clic pe un dispozitiv din arborele din stînga pentru a-i afișa informațiile "
 "aici."
 
-#: harddrake2:322 notify-x11-free-driver-switch:13
+#: harddrake2:324 notify-x11-free-driver-switch:13
 #, c-format
 msgid "unknown"
 msgstr "necunoscut"
 
-#: harddrake2:323
+#: harddrake2:325
 #, c-format
 msgid "Unknown"
 msgstr "Necunoscut"
 
-#: harddrake2:343
+#: harddrake2:345
 #, c-format
 msgid "Misc"
 msgstr "Diverse"
 
-#: harddrake2:418
+#: harddrake2:429
 #, c-format
 msgid "secondary"
 msgstr "secundar"
 
-#: harddrake2:418
+#: harddrake2:429
 #, c-format
 msgid "primary"
 msgstr "principal"
 
-#: harddrake2:422
+#: harddrake2:433
 #, c-format
 msgid "burner"
 msgstr "inscriptor"
 
-#: harddrake2:422
+#: harddrake2:433
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:474
+#: harddrake2:485
 #, c-format
 msgid "Unknown/Others"
 msgstr "Necunoscut/Altele"
 
-#: harddrake2:516
+#: harddrake2:527
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Este necesară instalarea următoarelor pachetele: \n"
