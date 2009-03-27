@@ -313,7 +313,7 @@ sub create_buttons4partitions {
     };
 
     foreach my $entry (@parts) {
-	my $info = $entry->{mntpoint};
+	my $info = $entry->{mntpoint} || $entry->{device_LABEL};
 	$info .= "\n" . ($entry->{size} ? formatXiB($entry->{size}, 512) : N("Unknown")) if $info;
 	my $w = Gtk2::ToggleButton->new_with_label($info) or internal_error('new_with_label');
 	$w->signal_connect(clicked => sub { 
