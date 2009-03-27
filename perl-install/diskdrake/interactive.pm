@@ -1272,7 +1272,7 @@ sub format_part_info {
 
     $info .= N("Mount point: ") . "$part->{mntpoint}\n" if $part->{mntpoint};
     $info .= N("Device: ") . "$part->{device}\n" if $part->{device} && !isLoopback($part);
-    $info .= N("Volume label: ") . "$part->{device_LABEL}\n" if $part->{device_LABEL} && $::expert;
+    $info .= N("Volume label: ") . "$part->{device_LABEL}\n" if $part->{device_LABEL};
     $info .= N("UUID: ") . "$part->{device_UUID}\n" if $::expert && $part->{device_UUID};
     $info .= N("DOS drive letter: %s (just a guess)\n", $part->{device_windobe}) if $part->{device_windobe};
     if (arch() eq "ppc") {
