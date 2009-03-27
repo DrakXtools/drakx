@@ -1192,7 +1192,7 @@ sub format_ {
     if ($::isStandalone) {
 	fs::format::check_package_is_installed_format($in->do_pkgs, $part->{fs_type}) or return;
     }
-    if ($::expert && !member($part->{fs_type}, 'reiserfs', 'xfs')) {
+    if ($::expert && !member($part->{fs_type}, 'reiserfs', 'reiser4', 'xfs', 'hfs', 'ntfs', 'ntfs-3g')) {
 	$part->{toFormatCheck} = $in->ask_yesorno(N("Confirmation"), N("Check bad blocks?"));
     }
     $part->{isFormatted} = 0; #- force format;
