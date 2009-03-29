@@ -17,13 +17,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "POT-Creation-Date: 2009-03-26 22:18-0300\n"
-"PO-Revision-Date: 2009-03-29 00:09+0100\n"
+"PO-Revision-Date: 2009-03-29 23:46+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
+"X-Language: nb_NO\n"
 
 #: any.pm:252 any.pm:863 diskdrake/interactive.pm:590
 #: diskdrake/interactive.pm:790 diskdrake/interactive.pm:834
@@ -662,8 +663,8 @@ msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
 "systems."
 msgstr ""
-"SMB: et fildelingsystem brukt av Windows, Mac OS X og mange moderne Linux-"
-"systemer."
+"SMB: et fildelingsystem brukt av Windows, Mac OS X og mange moderne "
+"Linux-systemer."
 
 #: any.pm:1252
 #, c-format
@@ -801,9 +802,9 @@ msgid ""
 "Allows you to run a group of computers in the same Network Information "
 "Service domain with a common password and group file."
 msgstr ""
-"Lar deg kjøre en gruppe av maskiner i samme Nettverks Informasjonstjeneste-"
-"domene (Network Information Service domain) med en felles passord- og "
-"gruppefil"
+"Lar deg kjøre en gruppe av maskiner i samme Nettverks "
+"Informasjonstjeneste-domene (Network Information Service domain) med en "
+"felles passord- og gruppefil"
 
 #: authentication.pm:66
 #, c-format
@@ -2384,8 +2385,8 @@ msgid ""
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
 "Ikke oppdater inodeaksesstid på dette filsystemet\n"
-"(feks. for kjappere tilgang til njus-køen for å øke hastigheten på njus-"
-"tjenere)."
+"(feks. for kjappere tilgang til njus-køen for å øke hastigheten på "
+"njus-tjenere)."
 
 #: fs/mount_options.pm:123
 #, c-format
@@ -2617,8 +2618,8 @@ msgid ""
 "the Mandriva Linux installation."
 msgstr ""
 "Microsoft Windows®-partisjonen din er for fragmentert. Start maskinen din på "
-"nytt til Microsoft Windows®, kjør «defrag»-verktøyet, så start Mandriva Linux-"
-"installasjonen på nytt."
+"nytt til Microsoft Windows®, kjør «defrag»-verktøyet, så start Mandriva "
+"Linux-installasjonen på nytt."
 
 #: fs/partitioning_wizard.pm:156
 #, c-format
@@ -2631,8 +2632,8 @@ msgid ""
 "\n"
 "Be careful: this operation is dangerous. If you have not already done so, "
 "you first need to exit the installation, run \"chkdsk c:\" from a Command "
-"Prompt under Microsoft Windows® (beware, running graphical program \"scandisk"
-"\" is not enough, be sure to use \"chkdsk\" in a Command Prompt!), "
+"Prompt under Microsoft Windows® (beware, running graphical program "
+"\"scandisk\" is not enough, be sure to use \"chkdsk\" in a Command Prompt!), "
 "optionally run defrag, then restart the installation. You should also backup "
 "your data.\n"
 "\n"
@@ -2790,8 +2791,8 @@ msgstr "BIOS-programvare RAID oppdaget på disker %s. Aktiver det?"
 #: fsedit.pm:247
 #, c-format
 msgid ""
-"I can not read the partition table of device %s, it's too corrupted for me :"
-"(\n"
+"I can not read the partition table of device %s, it's too corrupted for me "
+":(\n"
 "I can try to go on, erasing over bad partitions (ALL DATA will be lost!).\n"
 "The other solution is to not allow DrakX to modify the partition table.\n"
 "(the error is %s)\n"
@@ -3199,7 +3200,8 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Kortet ditt bruker nå %s«%s»-driveren (standard driver for kortet ditt er «%s»)"
+"Kortet ditt bruker nå %s«%s»-driveren (standard driver for kortet ditt er "
+"«%s»)"
 
 #: harddrake/sound.pm:411
 #, c-format
@@ -3221,8 +3223,8 @@ msgid ""
 "the ALSA library.\n"
 msgstr ""
 "OSS (Open Sound System) var det første lyd-APIet. OSS er "
-"etoperativsystemuavhengig lyd-API (det er tilgjengelig på de fleste unix-"
-"systemer),\n"
+"etoperativsystemuavhengig lyd-API (det er tilgjengelig på de fleste "
+"unix-systemer),\n"
 "men det er et veldig enkelt og begrenset API. \n"
 "Dessuten så gjenoppfinnere alle OSS-drivere hjulet.\n"
 "\n"
@@ -3250,16 +3252,16 @@ msgid ""
 "\n"
 "The new \"%s\" driver will only be used on next bootstrap."
 msgstr ""
-"Den gamle «%s»-driveren er svartelistet.\n"
+"Den gamle \"%s\"-driveren er svartelistet.\n"
 "\n"
 "Den har blitt rapportert at den oopser kjernen når den lastes ut.\n"
 "\n"
-"Den nye «%s»-driveren vil bare bli brukt på neste bootstrap."
+"Den nye \"%s\"-driveren vil bare bli brukt på neste bootstrap."
 
 #: harddrake/sound.pm:447
 #, c-format
 msgid "No open source driver"
-msgstr "Ingen open source-driver"
+msgstr "Ingen åpen kildekode-driver"
 
 #: harddrake/sound.pm:448
 #, c-format
@@ -3268,7 +3270,7 @@ msgid ""
 "driver at \"%s\"."
 msgstr ""
 "Det er ingen frie drivere for lydkortet ditt (%s), men det er en proprietær "
-"driver på «%s»."
+"driver på \"%s\"."
 
 #: harddrake/sound.pm:451
 #, c-format
@@ -3316,7 +3318,8 @@ msgstr ""
 "\n"
 "- «lspcidrake -v | fgrep -i AUDIO» vil vise hvilken driver lydortet bruker \n"
 "som standard\n"
-"- «grep sound-slot /etc/modprobe.conf» vil vise hvilken driver som er i bruk\n"
+"- «grep sound-slot /etc/modprobe.conf» vil vise hvilken driver som er i "
+"bruk\n"
 "\n"
 "- «/sbin/lsmod» lar deg se om denne driveren er lastet\n"
 "\n"
@@ -3351,7 +3354,7 @@ msgstr ""
 "Hvis du tror du vet hvilken driver som passer til ditt kort kan du velge en\n"
 "i lista over.\n"
 "\n"
-"Den nåværende driveren for ditt «%s»-lydkort er «%s»."
+"Den nåværende driveren for ditt \"%s\"-lydkort er \"%s\""
 
 #: harddrake/v4l.pm:12
 #, c-format
@@ -3376,16 +3379,11 @@ msgstr "Ukjent|CPH06X (bt878) [mange leverandører]"
 #: harddrake/v4l.pm:475
 #, c-format
 msgid ""
-"For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-"
-"detect the rights parameters.\n"
+"For most modern TV cards, the bttv module of the GNU/Linux kernel just "
+"auto-detect the rights parameters.\n"
 "If your card is misdetected, you can force the right tuner and card types "
 "here. Just select your tv card parameters if needed."
-msgstr ""
-"For de fleste moderne TV-kort klarer bttv-modulen til GNU/Linux-kjernen å\n"
-"oppdage de fleste korrekte parametrene automatisk.\n"
-"Dersom kortet ditt er feiloppdaget, kan du spesifisere den korrekte "
-"mottager-\n"
-"og korrtypen her. Velg ditt TV-korts parametre om nødvendig."
+msgstr "bttv-modulet i GNU/Linux-kjernen klarer automatisk å oppdage de fleste parametrene for moderne TV-kort. Dersom kortet ditt er feiloppdaget, kan du spesifisere den korrekte mottager- og kort-typen her. Velg TV-kortets parametre om nødvendig."
 
 #: harddrake/v4l.pm:478
 #, c-format
@@ -3399,8 +3397,8 @@ msgstr "Mottagertype:"
 
 #: interactive.pm:128 interactive.pm:549 interactive/curses.pm:263
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
-#: interactive/stdio.pm:148 interactive/stdio.pm:149 mygtk2.pm:817
-#: ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
+#: interactive/stdio.pm:148 interactive/stdio.pm:149 mygtk2.pm:817 ugtk2.pm:421
+#: ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
 #, c-format
 msgid "Ok"
 msgstr "Ok"
@@ -4894,15 +4892,16 @@ msgid ""
 "Paris - France.\n"
 "For any question on this document, please contact Mandriva S.A."
 msgstr ""
-"Introduksjon\n \n"
+"Introduksjon\n"
+" \n"
 "Dette operativsystemet og de forskjellige komponentene som følger med "
 "Mandriva Linux\n"
 "kalles heretter \"programvareproduktene\". Programvareproduktene inkluderer, "
 "men er ikke\n"
 "begrenset til det settet med programmer, metoder, regler og dokumentasjon "
 "relatert til\n"
-"operativsystemet og de forskjellige komponentene til Mandriva Linux-"
-"distribusjonen.\n"
+"operativsystemet og de forskjellige komponentene til Mandriva "
+"Linux-distribusjonen.\n"
 "\n"
 "\n"
 "1. Lisensavtale\n"
@@ -4959,14 +4958,14 @@ msgstr ""
 "ansvaret gjelder, men er ikke begrenset til, sterke kryptografiprodukter som "
 "er inkludert i\n"
 "programvareproduktene.\n"
-"\n"
+"%s\n"
 "\n"
 "3. GPL-lisensen og relaterte lisenser\n"
 "\n"
 "Programvareproduktene består av komponenter som er skapt av forskjellige "
-"personer eller\n"
-"grupper. De fleste av disse komponentene er regulert under vilkårene og "
-"betingelsene i \"GNU\n"
+"personer eller grupper. %s\n"
+"De fleste av disse komponentene er regulert under vilkårene og betingelsene "
+"i \"GNU\n"
 "General Public License\", heretter kalt \"GPL\", eller tilsvarende lisenser. "
 "De fleste av disse\n"
 "lisensene tillater deg å bruke, duplisere, tilpasse eller redistribuere "
@@ -5102,8 +5101,8 @@ msgid ""
 "or contained within or accessed in \n"
 "conjunction with or through the Google Software.  \n"
 "\n"
-"(b)  The Google Software is made available to you for your personal, non-"
-"commercial use only.\n"
+"(b)  The Google Software is made available to you for your personal, "
+"non-commercial use only.\n"
 "You may not use the Google Software in any manner that could damage, "
 "disable, overburden, or impair Google's \n"
 "search services (e.g., you may not use the Google Software in an automated "
@@ -5233,8 +5232,8 @@ msgid ""
 "You may now provide options to module %s.\n"
 "Note that any address should be entered with the prefix 0x like '0x123'"
 msgstr ""
-"Du kan nå gi modul %s de instillinger du føler for.\n"
-"Merk at addresser bør gis med 0x prefikset som i '0x123'"
+"Du kan nå gi valg til modul %s.\n"
+"Merk at addresser bør gis med prefikset 0x som i '0x123'"
 
 #: modules/interactive.pm:117
 #, c-format
@@ -5243,9 +5242,9 @@ msgid ""
 "Options are in format ``name=value name2=value2 ...''.\n"
 "For instance, ``io=0x300 irq=7''"
 msgstr ""
-"Du kan nå oppgi dens instillinger for modul %s.\n"
-"Instillingene er i format «navn=verdi navn2=verdi2 ...».\n"
-"F.eks., «io=0x300 irq=7»"
+"Du kan nå oppgi valg for modul %s.\n"
+"Instillingene er i format \"navn=verdi navn2=verdi2 ...\".\n"
+"F.eks., \"io=0x300 irq=7\""
 
 #: modules/interactive.pm:119
 #, c-format
@@ -5522,8 +5521,8 @@ msgid ""
 "\n"
 "- none if set to \"None\".\n"
 "\n"
-"To authorize the services you need, use /etc/hosts.allow (see hosts.allow"
-"(5))."
+"To authorize the services you need, use /etc/hosts.allow (see "
+"hosts.allow(5))."
 msgstr ""
 "Tillat:\n"
 "\n"
@@ -5550,8 +5549,8 @@ msgid ""
 "packages."
 msgstr ""
 "Hvis SERVER_LEVEL (eller SECURE_LEVEL hvis fraværende) er større enn 3\n"
-"i /etc/security/msec/security.conf, opprettes symlinken /etc/security/msec/"
-"server\n"
+"i /etc/security/msec/security.conf, opprettes symlinken "
+"/etc/security/msec/server\n"
 "for å peke til /etc/security/msec/server.<SERVER_LEVEL>. \n"
 "/etc/security/msec/server brukes av chkconfig --add for å avgjøre om en\n"
 "tjeneste skal legges til hvis den er til stede i filen under "
@@ -5649,8 +5648,8 @@ msgstr "Legg til navnet som et unntak for håndteringen av passordforeldelse av 
 #, c-format
 msgid "Set password aging to \"max\" days and delay to change to \"inactive\"."
 msgstr ""
-"Sett passordaldring til maks dager og forsinkelsen for endring til \"inaktiv"
-"\"."
+"Sett passordaldring til maks dager og forsinkelsen for endring til "
+"\"inaktiv\"."
 
 #: security/help.pm:104
 #, c-format
@@ -6204,8 +6203,8 @@ msgid ""
 "and includes support for pop-up menus on the console."
 msgstr ""
 "GPM gir musestøtte til tekstbaserte Linux-applikasjoner som\n"
-"Midnight Commander. Den lar også musebaserte konsoller foreta klipp-og-lim-"
-"operasjoner,\n"
+"Midnight Commander. Den lar også musebaserte konsoller foreta "
+"klipp-og-lim-operasjoner,\n"
 "og inkluderer støtte for oppsprettsmenyer i konsollen."
 
 #: services.pm:35
@@ -6852,11 +6851,11 @@ msgstr ""
 #: standalone.pm:117
 #, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
-"usbtable] [--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] "
+"[--update-usbtable] [--dynamic=dev]"
 msgstr ""
-"[--manual] [--device=enhet] [--update-sane=sane_source_dir] [--update-"
-"usbtable] [--dynamic=enhet]"
+"[--manual] [--device=enhet] [--update-sane=sane_source_dir] "
+"[--update-usbtable] [--dynamic=enhet]"
 
 #: standalone.pm:118
 #, c-format
@@ -6873,12 +6872,12 @@ msgstr ""
 #, c-format
 msgid ""
 "\n"
-"Usage: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
-"testing] [-v|--version] "
+"Usage: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] "
+"[--testing] [-v|--version] "
 msgstr ""
 "\n"
-"Bruk: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
-"testing] [-v|--version] "
+"Bruk: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] "
+"[--testing] [-v|--version] "
 
 #: timezone.pm:161 timezone.pm:162
 #, c-format
