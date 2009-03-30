@@ -543,7 +543,7 @@ sub get_media {
 
 sub _adjust_paths_in_urpmi_cfg {
     my ($o, $phys_m, @new_media) = @_;
-    if ($o->{stage2_phys_medium}{method} ne 'cdrom') {
+    if ($o->{stage2_phys_medium}{method} eq 'cdrom') {
         my $urpm = install::pkgs::empty_packages();
         # force rereading media:
         undef $urpm->{media};
