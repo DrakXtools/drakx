@@ -309,7 +309,7 @@ sub load_dependencies {
 	if (!begins_with($path, "/")) {
 		#- with newer module-init-tools, modules.dep can contain
 		#- relative paths
-		$path = dirname($file).'/'.$path;
+		$path = dirname($file) . '/' . $path;
 	}
  	$moddeps{$modname}{path} = $path;
     }
