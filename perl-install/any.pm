@@ -697,7 +697,7 @@ sub rotate_log {
 }
 sub rotate_logs {
     my ($prefix) = @_;
-    rotate_log("$prefix/root/drakx/$_") foreach qw(ddebug.log install.log);
+    rotate_log("$prefix/root/drakx/$_") foreach qw(ddebug.log install.log updates.log);
 }
 
 sub writeandclean_ldsoconf {
