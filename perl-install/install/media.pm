@@ -502,10 +502,8 @@ sub get_media {
 	    $phys_m = url2mounted_phys_medium($o, $_->{url}, 'media_info');
             log::l(Data::Dumper->Dump([ $phys_m ], [ 'phys_m' ]));
             log::l(Data::Dumper->Dump([ $o->{stage2_phys_medium} ], [ 'stage2_phys_medium' ]));
-            my $uri = $o->{stage2_phys_medium}{method} eq 'disk' ? '/tmp/image' :
-              $o->{stage2_phys_medium}{url} =~ m!^(http|ftp)://! && $o->{stage2_phys_medium}{url} ||
-              $phys_m->{method} =~ m!^(ftp|http)://! && $phys_m->{method}
-              || $phys_m->{real_mntpoint} || $phys_m->{url};
+            my $uri = $o->{stage2_phys_medium}{url} =~ m!^(http|ftp)://! && $o->{stage2_phys_medium}{url} ||
+              $phys_m->{method} =~ m!^(ftp|http)://! && $phys_m->{method} || '/tmp/image';
 
             # adjust URI for cdroms if needed:
             if (member($o->{stage2_phys_medium}{method}, qw(iso cdrom))) {
