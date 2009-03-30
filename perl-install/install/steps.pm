@@ -840,7 +840,7 @@ risk!
 	log::l("pid $_ returned $?");
     }
     install::media::umount_media($o->{packages});
-    install::media::openCdromTray(install::media::first_medium($o->{packages})->{phys_medium}{device}) if !detect_devices::is_xbox() && $o->{method} eq 'cdrom';
+    install::media::openCdromTray($o->{stage2_phys_medium}{device}) if !detect_devices::is_xbox() && $o->{method} eq 'cdrom';
     install::media::log_sizes();
 }
 
