@@ -369,6 +369,7 @@ sub ask_change_cd {
 sub ask_change_cd_ {
     my ($o, $medium) = @_;
 
+    local $::isWizard = 0;
 	$o->ask_okcancel('', N("Change your Cd-Rom!
 Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.
 If you do not have it, press Cancel to avoid installation from this Cd-Rom.", $medium), 1) or return;
