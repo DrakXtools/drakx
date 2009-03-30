@@ -749,7 +749,8 @@ Do you want to install the updates?")),
     install::pkgs::clean_rpmdb_shared_regions();
     if (any::urpmi_add_all_media($o, $o->{previous_release})) {
 	my $binary = find { whereis_binary($_, $::prefix) } 'gurpmi2', 'urpmi' or return;
-	run_program::rooted($::prefix, $binary, '--auto-select', '--update');
+	my $log_file = '/root/drakx/updates.log';
+	run_program::rooted($::prefix, $binary, '>>', $log_file, '2>>', $log_file, '--auto-select', '--update');
     }
     install::pkgs::clean_rpmdb_shared_regions();
 
