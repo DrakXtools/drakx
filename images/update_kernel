@@ -15,8 +15,6 @@ use list_modules;
 my $rpm = 'rpm --nosignature';
 
 
-my $MOVE = $ARGV[0] eq '--move' && shift;
-
 @ARGV or die "usage: ./update_kernel [--move] (<kernel rpm> ... | <installed kernel name> ...)\n";
 
 eval { rm_rf('all.kernels') }; #- remove old things
