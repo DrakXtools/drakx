@@ -744,6 +744,7 @@ sub _install_raw {
 				my ($db, $packages, $_type, $id) = @_;
 				&$callback;
 				my $pkg = defined $id && $packages->{depslist}[$id] or return;
+				print $LOG $pkg->fullname . "\n";
 				my $check_installed = is_package_installed($db, $pkg);
                                 if ($pkg->name eq 'mdv-rpm-summary' && $check_installed) {
                                     install::pkgs::setup_rpm_summary_translations();
