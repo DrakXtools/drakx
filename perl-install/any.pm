@@ -816,7 +816,8 @@ sub ask_user_and_root {
             alignment => 'right', format => \&translate },
            ),
 	  { label => N("Real name"), val => \$u->{realname}, alignment => 'right', focus_out => sub {
-		$u->{name} ||= lc first($u->{realname} =~ /([a-zA-Z0-9_-]+)/);
+		$u->{name} ||= Locale::gettext::iconv($u->{realname}, "utf-8", "ascii//TRANSLIT");
+                $u->{name} =~ s/[^a-zA-Z0-9_-]//g; # drop any charcter that would break login program
 	    } },
 
           { label => N("Login name"), val => \$u->{name}, list => \@suggested_names, alignment => 'right',
