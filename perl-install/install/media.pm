@@ -505,16 +505,8 @@ sub get_media {
             my $uri = $o->{stage2_phys_medium}{url} =~ m!^(http|ftp)://! && $o->{stage2_phys_medium}{url} ||
               $phys_m->{method} =~ m!^(ftp|http)://! && $phys_m->{method} || '/tmp/image';
 
-            # adjust URI for cdroms if needed:
-            if (member($o->{stage2_phys_medium}{method}, qw(iso cdrom))) {
-                my $arch = arch();
-                $uri .= "/" . ($arch =~ /i.86/ ? $MDK::Common::System::compat_arch{arch()} : arch());
-                # FIXME: investigate why _get_compsUsers_pl($phys_m, $_->{force_rpmsrate}) didn't worked:o
-                system('cp', "$uri/media/media_info/rpmsrate", "/tmp/rpmsrate");
-                system('cp', "$uri/media/media_info/compssUsers.pl", '/tmp/compssUsers.pl');
-            } else {
-                _get_compsUsers_pl($phys_m, $_->{force_rpmsrate});
-            }
+            _get_compsUsers_pl($phys_m, $_->{force_rpmsrate});
+
             urpm::media::add_distrib_media($packages, undef, $uri, ask_media => undef); #allmedia => 1
 
             if (defined $_->{selected_names}) {
