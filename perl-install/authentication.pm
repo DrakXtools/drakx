@@ -53,7 +53,7 @@ my %kind2packages = (
     LDAP      => [ 'openldap-clients', 'nss_ldap', 'pam_ldap', 'autofs', 'nss_updatedb' ],
     KRB5       => [ 'nss_ldap', 'pam_krb5', 'libsasl2-plug-gssapi', 'nss_updatedb' ],
     NIS       => [ 'ypbind', 'autofs' ],
-    winbind   => [ 'samba-winbind', 'nss_ldap', 'pam_krb5', 'libsasl2-plug-gssapi', 'samba-server' ],
+    winbind   => [ 'samba-winbind', 'nss_ldap', 'pam_krb5', 'libsasl2-plug-gssapi' ],
 );
 
 
@@ -130,7 +130,7 @@ sub ask_parameters {
 	
 	$authentication->{AD_domain} ||= $net->{resolv}{DOMAINNAME};
 	$in->do_pkgs->ensure_are_installed([ 'perl-Net-DNS' ], 1) or return;
-	my @srvs = query_srv_names($authentication->{AD_domain});
+	my @srvs = query_srv_names($authentication->{AD_domain}); #FIXME: update this list if the REALM has changed
 	$authentication->{AD_server} ||= $srvs[0] if @srvs;
 	my $AD_user = $authentication->{AD_user} =~ /(.*)\@\Q$authentication->{AD_domain}\E$/ ? $1 : $authentication->{AD_user};
 	$authentication->{ccreds} = 1;
@@ -142,10 +142,10 @@ sub ask_parameters {
                         {},
 		       { label => N("Realm "),  val => \$authentication->{AD_domain} },
                        {},
-		       { label => N("KDCs Servers"),  title => 1, val => \$authentication->{AD_server} , list => \@srvs , not_edit => 0,  title => 1 },
+		       { label => N("KDCs Servers"), title => 1, val => \$authentication->{AD_server} , list => \@srvs , not_edit => 0,  title => 1 },
                        {},
-		       { text => N("Use DNS to resolve hosts for realms "), val => \$authentication->{KRB_host_lookup}, type => 'bool' },
-		       { text => N("Use DNS to resolve KDCs for realms "), val => \$authentication->{KRB_dns_lookup}, type => 'bool' },
+		       { text => N("Use DNS to locate KDC for the realm"), val => \$authentication->{KRB_host_lookup}, type => 'bool' },
+		       { text => N("Use DNS to locate realms"), val => \$authentication->{KRB_dns_lookup}, type => 'bool' },
 		       { text => N("Use Disconnect mode "), val => \$authentication->{ccreds}, type => 'bool' },
 		     ]) or return;
 
@@ -195,12 +195,12 @@ my %level = (
 	#- but networking is not setup yet necessarily
 	#
 	my @sec_domain = (
-		"Windows NT4 Domain",
 		"Windows Active Directory Domain",
+		"Windows NT4 Domain",
 );
 
 
-	$authentication->{AD_domain} ||= $net->{resolv}{DOMAINNAME};
+	$authentication->{DNS_domain} ||= $net->{resolv}{DOMAINNAME};
 	$authentication->{WINDOMAIN} ||= $net->{resolv}{DOMAINNAME};
 	$in->do_pkgs->ensure_are_installed([ 'samba-client' ], 1) or return;
 	my @domains=list_domains();
@@ -215,8 +215,8 @@ my %level = (
 		        { label => N("Domain Model "), val => \$authentication->{model}, list => \@sec_domain , not_edit => 1 },
 		        {},
 			{ label => N("Active Directory Realm "), val => \$authentication->{AD_domain} , disabled => sub { $authentication->{model} eq "Windows NT4 Domain"  } },
-		        {},
-		        {},
+			{ label => N("DNS Domain"), val => \$authentication->{DNS_domain} , disabled => sub { $authentication->{model} eq "Windows NT4 Domain"  } },
+			{ label => N("DC Server"), val => \$authentication->{AD_server} , disabled => sub { $authentication->{model} eq "Windows NT4 Domain"  } },
 		        {},
 			]) or return;
     }
@@ -428,7 +428,7 @@ EOF
 
 
 	} else { 	
-		
+	# FIXME: the DC isn't named ads.domain... try to do reserve lookup?
 	$authentication->{AD_server} ||= 'ads.' . $authentication->{AD_domain};
 	my $domain = uc $authentication->{WINDOMAIN};
 	my $realm = $authentication->{AD_domain};
@@ -441,14 +441,14 @@ EOF
 	mkdir_p("$::prefix/home/$domain");
 	run_program::rooted($::prefix, 'net', 'time', 'set', '-S', $authentication->{AD_server});
 	run_program::rooted($::prefix, 'service', 'smb', 'restart');
-	run_program::rooted($::prefix, 'service', 'winbind', 'restart');
 	
 	$when_network_is_up->(sub {
 	    run_program::raw({ root => $::prefix, sensitive_arguments => 1 }, 
 			     'net', 'ads', 'join', '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
+	    run_program::rooted($::prefix, 'service', 'winbind', 'restart');
 	});
 
-
+#FIXME: perhaps save the defaults values ?
 output($conf_file, <<EOF);
 auth=Windows Active Directory Domain
 server= none
@@ -704,11 +704,12 @@ sub configure_krb5_for_AD {
  $uc_domain = {
   kdc = $authentication->{AD_server}:88
   admin_server = $authentication->{AD_server}:749
-  default_domain = $authentication->{AD_domain}
+  default_domain = $authentication->{DNS_domain}
  }
 EOF
 		    domain_realm => <<EOF,
- .$authentication->{AD_domain} = $uc_domain
+ .$authentication->{DNS_domain} = $uc_domain
+ $authentication->{DNS_domain} = $uc_domain
 EOF
 		    kdc => <<'EOF',
  profile = /etc/kerberos/krb5kdc/kdc.conf
