@@ -125,9 +125,10 @@ sub selectKeyboard {
 sub selectInstallClass {
     my ($o) = @_;
 
-    if (my @l = install::any::find_root_parts($o->{fstab}, $::prefix)) {
-	# Don't list other archs as ugrading between archs is not supported
-	@l = grep { $_->{arch} eq arch() } @l;
+    my @l = install::any::find_root_parts($o->{fstab}, $::prefix);
+    # Don't list other archs as ugrading between archs is not supported
+    @l = grep { $_->{arch} eq arch() } @l;
+    if (@l) {
 
 	log::l("proposing to upgrade partitions " . join(" ", map { $_->{part} && $_->{part}{device} } @l));
 
