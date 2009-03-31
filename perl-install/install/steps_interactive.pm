@@ -131,7 +131,7 @@ sub selectInstallClass {
 
 	log::l("proposing to upgrade partitions " . join(" ", map { $_->{part} && $_->{part}{device} } @l));
 
-	my @releases = uniq(map { $_->{release} } @l);
+	my @releases = uniq(map { "$_->{version} $_->{release}" } @l);
 	if (@releases != @l) {
 	    #- same release name so adding the device to differentiate them:
 	    $_->{release} .= " ($_->{part}{device})" foreach @l;
@@ -147,7 +147,7 @@ sub selectInstallClass {
                           { val => \$p,
 			  list => [ @l, N_("_: This is a noun:\nInstall") ], 
 			  type => 'list',
-			  format => sub { ref($_[0]) ? N("Upgrade %s", $_[0]{release}) : translate($_[0]) }
+			  format => sub { ref($_[0]) ? N("Upgrade %s", "$_[0]->{version} $_[0]->{release}") : translate($_[0]) }
 			} ]);
 	if (ref $p) {
 	    _check_unsafe_upgrade_and_warn($o, $p->{part}) or $p = undef;
