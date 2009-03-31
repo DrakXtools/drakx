@@ -126,6 +126,9 @@ sub selectInstallClass {
     my ($o) = @_;
 
     if (my @l = install::any::find_root_parts($o->{fstab}, $::prefix)) {
+	# Don't list other archs as ugrading between archs is not supported
+	@l = grep { $_->{arch} eq arch() } @l;
+
 	log::l("proposing to upgrade partitions " . join(" ", map { $_->{part} && $_->{part}{device} } @l));
 
 	my @releases = uniq(map { $_->{release} } @l);
@@ -147,15 +150,6 @@ sub selectInstallClass {
 			  format => sub { ref($_[0]) ? N("Upgrade %s", $_[0]{release}) : translate($_[0]) }
 			} ]);
 	if (ref $p) {
-	    if (arch() =~ /x86_64/ && $p->{arch} eq 'i586') {
-		$o->ask_warn('', N("Upgrade from a 32bit to a 64bit distribution is not supported"));
-		goto askInstallClass;
-	    }
-	    if (arch() =~ /i.86/ && $p->{arch} eq 'x86_64') {
-		$o->ask_warn('', N("Upgrade from a 64bit to a 32bit distribution is not supported"));
-		goto askInstallClass;
-	    }
-
 	    _check_unsafe_upgrade_and_warn($o, $p->{part}) or $p = undef;
 	}
 
