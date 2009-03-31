@@ -769,6 +769,9 @@ sub _install_raw {
             my ($medium) = @_;
             $::o->ask_change_cd($medium);
         },
+        is_canceled => sub {
+            return $install::pkgs::cancel_install;
+        },
         trans_error_summary => sub {
             my ($nok, $errors) = @_;
             log::l($nok . " installation transactions failed");
