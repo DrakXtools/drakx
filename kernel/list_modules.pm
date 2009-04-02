@@ -266,7 +266,7 @@ our %l = (
       qw(parport_pc parport_serial),
       qw(btaudio mmc_block),
 
-      'cryptoloop', arch() =~ /i.86/ ? 'aes-i586' : 'aes',
+      'cryptoloop', if_(arch() =~ /i.86/, 'aes-i586'), if_( arch() =~ /x86_64/, 'aes-x86_64'), 'aes_generic',
       if_(arch() =~ /sparc/, 'openprom'),
       
       qw(evdev), qw(usblp printer), 'floppy',

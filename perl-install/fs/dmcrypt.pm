@@ -16,7 +16,7 @@ sub _crypttab() { "$::prefix/etc/crypttab" }
 sub init() {
     whereis_binary('cryptsetup') or die "cryptsetup not installed";
 
-    eval { modules::load('dm-crypt', 'cbc', 'sha256_generic', arch() =~ /i.86/ ? 'aes-i586' : 'aes') };
+    eval { modules::load('dm-crypt', 'cbc', 'sha256_generic', if_(arch() =~ /i.86/, 'aes-i586'), if_( arch() =~ /x86_64/, 'aes-x86_64'), 'aes_generic') };
     devices::init_device_mapper();
     1;
 }
