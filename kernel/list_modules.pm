@@ -207,7 +207,7 @@ our %l = (
     dvb => [
         qw(b2c2-flexcop-pci b2c2-flexcop-usb budget budget-av budget-ci cinergyT2 dm1105),
         qw(dvb-dibusb dvb-ttpci dvb-ttusb-budget dvb-usb-a800 dvb-usb-af9015 dvb-usb-cinergyT2 dvb-usb-cxusb),
-        qw(dvb-usb-dib0700 dvb-usb-dibusb-mb dvb-usb-dibusb-mc dvb-usb-digitv dvb-usb-dtt200u ),
+        qw(dvb-usb-dib0700 dvb-usb-dibusb-mb dvb-usb-dibusb-mc dvb-usb-digitv dvb-usb-dtt200u dvb-usb-dtv5100),
         qw(dvb-usb-gp8ps dvb-usb-nova-t-usb2 dvb-usb-ttusb2 dvb-usb-umt-010 dvb-usb-vp702x dvb-usb-vp7045),
         qw(firedtv hexium_gemini hexium_orion pluto2 skystar2 ttusb_dec),
     ],
