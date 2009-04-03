@@ -143,7 +143,7 @@ sub initrd {
     my $stage1_root = $ENV{DEBUGSTAGE1} ? "../mdk-stage1" : "/usr/$lib/drakx-installer-binaries";
 
     _ "rm -rf $tmp_initrd";
-    mkdir_p("$tmp_initrd$_") foreach qw(/etc /lib /modules /sbin /tmp /var);
+    mkdir_p("$tmp_initrd$_") foreach qw(/etc /lib/firmware /modules /sbin /tmp /var);
     symlink "../modules", "$tmp_initrd/lib/modules";
 
     symlink "/proc/mounts", "$tmp_initrd/etc/mtab";
@@ -156,6 +156,10 @@ sub initrd {
     foreach ("/usr/share/ldetect-lst/fallback-modules.alias", "/lib/module-init-tools/ldetect-lst-modules.alias") {
         _ "install -D $_ $tmp_initrd$_";
     }
+    foreach (grep { warn "> $_\n"; m!(3com|acenic|adaptec|cxgb3|e100|kaweth|tehuti|tigon)! } glob_("/lib/firmware/*")) {
+		warn ">> $_\n";
+        _ "cp -a $_ $tmp_initrd$_";
+    };
 
     _ "install $stage1_root/init $tmp_initrd/";
     foreach ('stage1', 'pppd', 'pppoe') {
