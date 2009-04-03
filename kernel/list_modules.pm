@@ -60,7 +60,7 @@ our %l = (
       qw(catc cdc_ether kaweth pegasus rtl8150 usbnet),
     ],
     wireless => [
-      qw(acx-pci acx-usb adm8211 airo airo_cs aironet4500_cs aironet_cs arlan),
+      qw(acx-pci acx-usb adm8211 agnx airo airo_cs aironet4500_cs aironet_cs arlan),
       qw(at76_usb ath_pci ath5k ath9k atmel_cs atmel_pci b43 b43legacy bcm43xx com20020_cs dyc_ar5),
       qw(hostap_cs hostap_pci hostap_plx i2400m-usb ipw2100 ipw2200 ipw3945 iwl3945 iwl4965 iwlagn iwlwifi),
       qw(madwifi_pci netwave_cs ndiswrapper orinoco orinoco_cs orinoco_nortel orinoco_pci orinoco_plx orinoco_tmd),
