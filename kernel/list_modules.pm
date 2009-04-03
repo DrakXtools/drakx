@@ -161,7 +161,7 @@ our %l = (
                 hid-cypress hid-ezkey hid-gaff hid-gyration hid-logitech
                 hid-microsoft hid-monterey hid-multilaser hid-ntrig
                 hid-petalynx hid-pl hid-samsung hid-sony hid-sunplus
-                hid-tmff hid-topseed hid-zpff)],
+                hid-tmff hid-topseed hid-zpff ff-memless)],
    #serial_cs
    #ftl_cs 3c575_cb apa1480_cb epic_cb serial_cb tulip_cb iflash2+_mtd iflash2_mtd
    #cb_enabler
