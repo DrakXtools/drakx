@@ -34,6 +34,7 @@
 #include <stdarg.h>
 #include <signal.h>
 #include <linux/unistd.h>
+#include <libldetect.h>
 
 #include "stage1.h"
 
@@ -242,6 +243,18 @@ static void handle_pcmcia(void)
 }
 #endif
 
+static void handle_hid(void)
+{
+	struct hid_entries entry_list;
+	unsigned int i;
+
+	entry_list = hid_probe();
+	for (i = 0; i < entry_list.nb; i++) {
+		if (entry_list.entries[i].module != NULL)
+			my_insmod(entry_list.entries[i].module, ANY_DRIVER_TYPE, NULL, 0);
+	}
+}
+
 
 /************************************************************
  */
@@ -424,6 +437,8 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		handle_pcmcia();
 #endif
         
+	handle_hid();
+
 	if (IS_CHANGEDISK)
 		stg1_info_message("You are starting the installation with an alternate booting method. "
 				  "Please change your disk, and insert the Installation disk.");
