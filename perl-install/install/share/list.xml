@@ -183,15 +183,22 @@
   /usr/bin/drakx-matchbox-window-manager
   /usr/share/matchbox/mbnoapp.xpm
 
-  <from spaces_in_filename="1">
-      /usr/share/themes/Ia Ora Smooth/ 
-  </from>
 
   /lib/udev/pcmcia-socket-startup
   /etc/pcmcia/config.opts
 
   <from expand="glob">
     <from spaces_in_filename="1">
+       /usr/share/themes/Ia Ora*
+    </from>
+    <from spaces_in_filename="1">
+       /usr/share/themes/Ia Ora*/*
+    </from>
+    <from spaces_in_filename="1">
+       /usr/share/themes/Ia Ora*/matchbox/*
+    </from>
+    <from spaces_in_filename="1">
+       /usr/share/themes/Ia Ora*/gtk-2.0/gtkrc
     </from>
     /etc/gtk-2.0/gdk-pixbuf.loaders.*
     /etc/gtk-2.0/gtk.immodules.*
