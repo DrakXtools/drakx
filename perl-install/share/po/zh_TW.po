@@ -144,7 +144,7 @@ msgstr "開機載入程式主要選項"
 #: any.pm:403
 #, c-format
 msgid "Bootloader"
-msgstr "開機載入程式"
+msgstr "開機載入器"
 
 #: any.pm:404 any.pm:433
 #, c-format
@@ -898,14 +898,14 @@ msgid "Advanced path for group "
 msgstr ""
 
 #: authentication.pm:124
-#, fuzzy, c-format
+#, c-format
 msgid "Password base"
-msgstr "密碼"
+msgstr "密碼基礎"
 
 #: authentication.pm:125
-#, fuzzy, c-format
+#, c-format
 msgid "Group base"
-msgstr "群組 ID"
+msgstr "群組基礎"
 
 #: authentication.pm:126
 #, c-format
@@ -920,9 +920,9 @@ msgid ""
 msgstr "您選擇了 Kerberos 5 認證。請檢視以下設定選項"
 
 #: authentication.pm:143
-#, fuzzy, c-format
+#, c-format
 msgid "Realm "
-msgstr "真實名稱"
+msgstr "範圍"
 
 #: authentication.pm:145
 #, c-format
@@ -954,7 +954,7 @@ msgstr "使用 LDAP 的使用者資訊"
 msgid ""
 "You have selected Kerberos 5 for authentication, now you must choose the "
 "type of users information "
-msgstr ""
+msgstr "你已經選擇使用 Kerberos 5 進行認證，現在您必須選定使用者資訊的型態。"
 
 #: authentication.pm:166
 #, c-format
@@ -986,9 +986,9 @@ msgid ""
 msgstr "您選擇了 Windows 網域認證。請檢視以下設定選項"
 
 #: authentication.pm:215
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Model "
-msgstr "網域"
+msgstr "網域模型"
 
 #: authentication.pm:217
 #, c-format
@@ -1027,9 +1027,9 @@ msgid "Select file"
 msgstr "選擇檔案"
 
 #: authentication.pm:889
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Windows for authentication : "
-msgstr "需要 Domain 認證"
+msgstr "認證用的網域視窗："
 
 #: authentication.pm:891
 #, c-format
@@ -1645,17 +1645,17 @@ msgstr "正在由 %s 切換至 %s"
 #: diskdrake/interactive.pm:620
 #, c-format
 msgid "Set volume label"
-msgstr "設定磁區標籤"
+msgstr "設定磁區標籤 "
 
 #: diskdrake/interactive.pm:622
 #, c-format
 msgid "Beware, this will be written to disk as soon as you validate!"
-msgstr "注意，當您確認之後將會立即寫入磁碟！"
+msgstr "注意，在您確定變更之後將會被寫入磁碟！"
 
 #: diskdrake/interactive.pm:623
-#, fuzzy, c-format
+#, c-format
 msgid "Beware, this will be written to disk only after formatting!"
-msgstr "注意，當您確認之後將會立即寫入磁碟！"
+msgstr "注意，這只有在格式化之後才會被寫入磁碟！"
 
 #: diskdrake/interactive.pm:625
 #, c-format
@@ -2040,7 +2040,7 @@ msgstr ""
 #: diskdrake/interactive.pm:1306
 #, c-format
 msgid " (inactive)"
-msgstr ""
+msgstr "(未啟動)"
 
 #: diskdrake/interactive.pm:1312
 #, c-format
@@ -2279,9 +2279,9 @@ msgid "Creating and formatting file %s"
 msgstr "建立並格式化檔案 %s"
 
 #: fs/format.pm:119
-#, fuzzy, c-format
+#, c-format
 msgid "I do not know how to set label on %s with type %s"
-msgstr "不知道要如何將 %s 格式化為 %s 格式"
+msgstr "我不知道如何在 %s 上設定型態 %s 的標籤"
 
 #: fs/format.pm:126
 #, fuzzy, c-format
@@ -3413,7 +3413,7 @@ msgstr "壞選擇，再試一遍\n"
 #: interactive/stdio.pm:30 interactive/stdio.pm:155
 #, c-format
 msgid "Your choice? (default %s) "
-msgstr "您的選擇為？(預設為 %s)"
+msgstr "您的選擇為？(預設為 %s) "
 
 #: interactive/stdio.pm:54
 #, c-format
@@ -3427,7 +3427,7 @@ msgstr ""
 #: interactive/stdio.pm:70
 #, c-format
 msgid "Your choice? (0/1, default `%s') "
-msgstr "您的選擇為？(0/1，預設為 `%s')"
+msgstr "您的選擇為？(0/1，預設為 `%s') "
 
 #: interactive/stdio.pm:97
 #, c-format
@@ -3442,7 +3442,7 @@ msgstr "您要按這個按鈕嗎？"
 #: interactive/stdio.pm:110
 #, c-format
 msgid "Your choice? (default `%s'%s) "
-msgstr "您的選擇為？(預設為 `%s'%s)"
+msgstr "您的選擇為？(預設為 `%s'%s) "
 
 #: interactive/stdio.pm:110
 #, c-format
@@ -5824,7 +5824,7 @@ msgid "Standard"
 msgstr "標準"
 
 #: security/level.pm:12
-#, fuzzy, c-format
+#, c-format
 msgid "Secure"
 msgstr "安全性"
 
@@ -6059,7 +6059,7 @@ msgstr "Linux Virtual Server, 用來架設一個高效能與高效率的 LVS 伺
 msgid ""
 "DBUS is a daemon which broadcasts notifications of system events and other "
 "messages"
-msgstr ""
+msgstr "DBUS 是負責傳遞系統事件與其他訊息的常駐服務程式。"
 
 #: services.pm:58
 #, c-format
@@ -6603,6 +6603,3 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "安裝失敗"
-
-#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
-#~ msgstr "請登出, 然後用 Ctrl-Alt-BackSpace 重新啟動 X"
