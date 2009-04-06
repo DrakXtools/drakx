@@ -673,10 +673,10 @@ my %IM_config =
    },
    'ibus' => {
 	GTK_IM_MODULE => 'ibus',
+	QT_IM_MODULE => 'xim',
 	XIM_PROGRAM => 'ibus',
 	XMODIFIERS => '@im=ibus',
 	packages => {
-		common => sub { if_($is_kde4, 'ibus-qt4') },
 		generic => sub { qw(ibus-table ibus-m17n) },
 		ja => sub { qw(ibus-anthy) },
 		zh => sub { qw(ibus-pinyin ibus-chewing) },
