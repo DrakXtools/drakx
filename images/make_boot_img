@@ -163,9 +163,8 @@ sub initrd {
         _ "cp -a $_ $tmp_initrd$_";
     };
 
-    output("$tmp_initrd/sbin/hotplug", q{
-#!/bin/sh -e
-if [ \$SUBSYSTEM = firmware ] && [ \$ACTION = add ] && [ -n "\$FIRMWARE" ] ; then
+    output("$tmp_initrd/sbin/hotplug", q{#!/bin/sh -e
+if [ "$SUBSYSTEM" = firmware ] && [ "$ACTION" = add ] && [ -n "$FIRMWARE" ] ; then
   if [ ! -e /sys\$DEVPATH/loading ]; then
     exit 1
   fi
