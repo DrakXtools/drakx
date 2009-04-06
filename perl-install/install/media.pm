@@ -621,23 +621,6 @@ sub _url2phys_medium {
     }
 }
 
-# shrinked down get_media_cfg() in order to keep options that urpmi discards:
-sub _get_media_cfg_options {
-    my ($o, $phys_medium) = @_;
-
-    my ($distribconf);
-    if (getAndSaveFile_($phys_medium, 'media_info/media.cfg', '/tmp/media.cfg')) {
-	($distribconf) = _parse_media_cfg('/tmp/media.cfg', $phys_medium);
-    } else {
-        die "media.cfg not found";
-    }
-
-    my $suppl_CDs = exists $o->{supplmedia} ? $o->{supplmedia} : $distribconf->{suppl} || 0;
-
-    $suppl_CDs, $o->{copy_rpms_on_disk};
-}
-
-
 sub get_media_cfg {
     my ($o, $phys_medium, $packages, $selected_names, $force_rpmsrate) = @_;
 
