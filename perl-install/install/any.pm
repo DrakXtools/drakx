@@ -321,6 +321,11 @@ sub setPackages {
 	    1 while $o->selectSupplMedia;
 	}
 
+        urpm::media::update_media($o->{packages}, distrib => 1, callback => \&urpm::download::sync_logger) or
+            log::l('updating media failed');
+        urpm::media::configure($o->{packages});
+        log::l('urpmi completely set up');
+
 	#- open rpm db according to right mode needed
 	$o->{packages}{rpmdb} ||= install::pkgs::rpmDbOpen('rebuild_if_needed');
 

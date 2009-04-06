@@ -668,11 +668,6 @@ sub get_media_cfg {
     }
 
     _associate_phys_media($o->{all_hds}, $phys_medium, $packages->{media});
-    
-    urpm::media::update_media($packages, distrib => 1, callback => \&urpm::download::sync_logger) or
-        log::l('updating media failed');
-    urpm::media::configure($packages);
-    log::l('urpmi completely set up');
 
     log::l("get_media_cfg read " . int(@{$packages->{depslist}}) . " headers");
 
