@@ -636,8 +636,18 @@ sub get_media_cfg {
 
     log::l(Data::Dumper->Dump([ $phys_medium ], [ 'phys_medium' ]));
     log::l(Data::Dumper->Dump([ $o->{stage2_phys_medium} ], [ 'stage2_phys_medium' ]));
-    my $uri = $o->{stage2_phys_medium}{url} =~ m!^(http|ftp)://! && $o->{stage2_phys_medium}{url} ||
-      $phys_medium->{method} =~ m!^(ftp|http)://! && $phys_medium->{method} || '/tmp/image';
+    my $uri;
+    if ($phys_medium->{is_suppl}) {
+        if (member($phys_medium->{method}, qw(ftp http))) {
+            $uri = $phys_medium->{url};
+            $uri =~ s!/media$!!;
+        } elsif ($phys_medium->{method} eq 'nfs') {
+            $uri = "$::prefix/$phys_medium->{mntpoint}";
+        }
+    } else {
+        $uri = $o->{stage2_phys_medium}{url} =~ m!^(http|ftp)://! && $o->{stage2_phys_medium}{url} ||
+          $phys_medium->{method} =~ m!^(ftp|http)://! && $phys_medium->{method} || '/tmp/image';
+    }
     log::l("adding distrib media from $uri");
 
     urpm::media::add_distrib_media($packages, undef, $uri, ask_media => undef); #allmedia => 1
