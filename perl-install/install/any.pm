@@ -323,6 +323,7 @@ sub setPackages {
 
         urpm::media::update_media($o->{packages}, distrib => 1, callback => \&urpm::download::sync_logger) or
             log::l('updating media failed');
+        install::media::adjust_paths_in_urpmi_cfg($o->{packages});
         urpm::media::configure($o->{packages});
         log::l('urpmi completely set up');
 

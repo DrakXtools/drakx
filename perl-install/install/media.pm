@@ -515,28 +515,27 @@ sub get_media {
 	    log::l("unknown media type $_->{type}, skipping");
 	}
     }
-    my @new_media = difference2([ map { $_->{name} } @{$packages->{media}} ], \@names);
-
-
-    _adjust_paths_in_urpmi_cfg($o, $phys_m, @new_media);
 
     log::l("suppl_CDs=$suppl_CDs copy_rpms_on_disk=$copy_rpms_on_disk");
     $suppl_CDs, $copy_rpms_on_disk;
 }
 
-sub _adjust_paths_in_urpmi_cfg {
-    my ($o, $phys_m, @new_media) = @_;
-    if ($o->{stage2_phys_medium}{method} eq 'cdrom') {
-        my $urpm = install::pkgs::empty_packages();
-        # force rereading media:
-        undef $urpm->{media};
-        urpm::media::read_config($urpm);
-        foreach my $medium (@{$urpm->{media}}) {
-            next if !member($medium->{name}, @new_media);
+sub adjust_paths_in_urpmi_cfg {
+    my ($packages) = @_;
+
+    require Clone;
+    my ($urpm) = Clone::clone($packages);
+    foreach my $medium (@{$urpm->{media}}) {
+        my $phys_m = $medium->{phys_medium};
+        my $dir = _get_medium_dir($phys_m);
+        my $old_url = $medium->{url};
+        if ($phys_m->{method} eq 'cdrom') {
             $medium->{url} =~ s!^$phys_m->{real_mntpoint}/!cdrom://!;
+        } elsif ($phys_m->{method} eq 'nfs') {
+            $medium->{url} =~ s!^$::prefix!!;
         }
-        urpm::media::write_config($urpm);
     }
+    urpm::media::write_config($urpm);
 }
 
 sub remove_from_fstab {
