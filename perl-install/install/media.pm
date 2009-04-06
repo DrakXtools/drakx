@@ -500,19 +500,7 @@ sub get_media {
     foreach (@$media) {
 	if ($_->{type} eq 'media_cfg') {
 	    $phys_m = url2mounted_phys_medium($o, $_->{url}, 'media_info');
-            log::l(Data::Dumper->Dump([ $phys_m ], [ 'phys_m' ]));
-            log::l(Data::Dumper->Dump([ $o->{stage2_phys_medium} ], [ 'stage2_phys_medium' ]));
-            my $uri = $o->{stage2_phys_medium}{url} =~ m!^(http|ftp)://! && $o->{stage2_phys_medium}{url} ||
-              $phys_m->{method} =~ m!^(ftp|http)://! && $phys_m->{method} || '/tmp/image';
-
-            _get_compsUsers_pl($phys_m, $_->{force_rpmsrate});
-
-            urpm::media::add_distrib_media($packages, undef, $uri, ask_media => undef); #allmedia => 1
-
-            if (defined $_->{selected_names}) {
-                select_only_some_media($packages, $_->{selected_names});
-            }
-            ($suppl_CDs, $copy_rpms_on_disk) = eval { _get_media_cfg_options($o, $phys_m) };
+            ($suppl_CDs, $copy_rpms_on_disk) = get_media_cfg($o, $phys_m, $packages, $_->{selected_names}, $_->{force_rpmsrate});
 	} elsif ($_->{type} eq 'media') {
 	    $phys_m = url2mounted_phys_medium($o, $_->{url});
 	    get_standalone_medium($o, $phys_m, $packages, { name => $_->{id} =~ /media=(.*)/ && $1 });
@@ -529,13 +517,8 @@ sub get_media {
     }
     my @new_media = difference2([ map { $_->{name} } @{$packages->{media}} ], \@names);
 
-    urpm::media::update_media($packages, distrib => 1, callback => \&urpm::download::sync_logger) or
-        log::l('updating media failed');
 
     _adjust_paths_in_urpmi_cfg($o, $phys_m, @new_media);
-
-    urpm::media::configure($packages);
-    log::l('urpmi completely set up');
 
     log::l("suppl_CDs=$suppl_CDs copy_rpms_on_disk=$copy_rpms_on_disk");
     $suppl_CDs, $copy_rpms_on_disk;
@@ -658,33 +641,39 @@ sub _get_media_cfg_options {
 sub get_media_cfg {
     my ($o, $phys_medium, $packages, $selected_names, $force_rpmsrate) = @_;
 
-    my ($distribconf, $hdlists);
+    my ($distribconf);
     if (getAndSaveFile_($phys_medium, 'media_info/media.cfg', '/tmp/media.cfg')) {
-	($distribconf, $hdlists) = _parse_media_cfg('/tmp/media.cfg');
+	($distribconf) = _parse_media_cfg('/tmp/media.cfg');
     } else {
         die "media.cfg not found";
-    }
-
-    if (defined $selected_names) {
-        my @names = split ',', $selected_names;
-        foreach my $h (@$hdlists) {
-            $h->{ignore} = !member($h->{name}, @names);
-        }
     }
 
     my $suppl_CDs = exists $o->{supplmedia} ? $o->{supplmedia} : $distribconf->{suppl} || 0;
     my $deselectionAllowed = $distribconf->{askmedia} || $o->{askmedia} || 0;
 
-    _associate_phys_media($o->{all_hds}, $phys_medium, $hdlists);
+    log::l(Data::Dumper->Dump([ $phys_medium ], [ 'phys_medium' ]));
+    log::l(Data::Dumper->Dump([ $o->{stage2_phys_medium} ], [ 'stage2_phys_medium' ]));
+    my $uri = $o->{stage2_phys_medium}{url} =~ m!^(http|ftp)://! && $o->{stage2_phys_medium}{url} ||
+      $phys_medium->{method} =~ m!^(ftp|http)://! && $phys_medium->{method} || '/tmp/image';
+    log::l("adding distrib media from $uri");
+
+    urpm::media::add_distrib_media($packages, undef, $uri, ask_media => undef); #allmedia => 1
+
+    if (defined $selected_names) {
+        select_only_some_media($packages, $selected_names);
+    }
 
     if ($deselectionAllowed && !@{$packages->{media}}) {
-	my $allow = _allow_copy_rpms_on_disk($phys_medium, $hdlists);
-	$o->ask_deselect_media__copy_on_disk($hdlists, $allow && \$o->{copy_rpms_on_disk}) if $allow || @$hdlists > 1;
+	my $allow = _allow_copy_rpms_on_disk($phys_medium, $packages->{media});
+	$o->ask_deselect_media__copy_on_disk($packages->{media}, $allow && \$o->{copy_rpms_on_disk}) if $allow || @{$packages->{media}} > 1;
     }
 
-    foreach my $h (@$hdlists) {
-	_get_medium($o, $phys_medium, $packages, $h);
-    }
+    _associate_phys_media($o->{all_hds}, $phys_medium, $packages->{media});
+    
+    urpm::media::update_media($packages, distrib => 1, callback => \&urpm::download::sync_logger) or
+        log::l('updating media failed');
+    urpm::media::configure($packages);
+    log::l('urpmi completely set up');
 
     log::l("get_media_cfg read " . int(@{$packages->{depslist}}) . " headers");
 
