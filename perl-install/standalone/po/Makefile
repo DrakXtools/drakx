@@ -1,4 +1,4 @@
-include ../../Makefile.config
+#include ../../Makefile.config
 
 NAME = libDrakX-standalone
 LOCALEDIR = $(DATADIR)/locale

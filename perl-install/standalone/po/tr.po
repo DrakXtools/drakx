@@ -13,13 +13,14 @@
 # Erçin EKER <erc.caldera@gmx.net>, 2003.
 # Atilla ÖNTAŞ <atilla_ontas@mandriva.org>, 2008.
 # Atilla ÖNTAŞ <atilla_ontas@mandriva.com>, 2009.
+# Atilla ÖNTAŞ <atilla_ontas@mandriva.org>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-tr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-26 22:23-0300\n"
-"PO-Revision-Date: 2009-03-16 18:25+0200\n"
-"Last-Translator: Atilla ÖNTAŞ <atilla_ontas@mandriva.com>\n"
+"PO-Revision-Date: 2009-04-06 07:48+0300\n"
+"Last-Translator: Atilla ÖNTAŞ <atilla_ontas@mandriva.org>\n"
 "Language-Team: Turkish <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -288,7 +289,7 @@ msgstr ""
 "bilgilerilerle birlikte oraya gönderilecektir."
 
 #: drakbug:160
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "It would be very useful to attach to your report the output of the following "
 "command: %s."
@@ -296,8 +297,7 @@ msgid_plural ""
 "Things useful to attach to your report are the output of the following "
 "commands: %s."
 msgstr[0] ""
-"Şu komutun çıktısını rapora eklemeniz oldukça yararlı olacaktır: %s.Şu "
-"komutların çıktılarını da rapora eklemeniz yararlı olacaktır: %s."
+"Şu komutların çıktısını rapora eklemeniz oldukça yararlı olacaktır: %s."
 
 #: drakbug:163
 #, c-format
@@ -1266,7 +1266,7 @@ msgstr "Ağ & İnternet "
 #: draksec:160
 #, c-format
 msgid "Wireless Network Roaming"
-msgstr ""
+msgstr "Kablosuz Ağ Dolaşımı"
 
 #: draksec:161
 #, c-format
@@ -2154,12 +2154,14 @@ msgid "Frequency (MHz)"
 msgstr "Frekans (MHz)"
 
 #: harddrake2:77
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "the CPU frequency in MHz (Megahertz which in first approximation may be "
 "coarsely assimilated to number of instructions the cpu is able to execute "
 "per second)"
-msgstr "MHz cinsinden İşlemci frekansı "
+msgstr ""
+"MHz cinsinden İşlemci frekansı (İşlemcinin saniyede yürütebileceği talimat "
+"sayısına kabaca benzeşen ilk yaklaşık Megahertz değeri)"
 
 #: harddrake2:78
 #, c-format
@@ -2279,7 +2281,7 @@ msgstr "Model numarası"
 #: harddrake2:91
 #, c-format
 msgid "stepping of the cpu (sub model (generation) number)"
-msgstr ""
+msgstr "İşlemci basamağı (alt model (nesil) numarası)"
 
 #: harddrake2:92
 #, c-format
@@ -2298,6 +2300,9 @@ msgid ""
 "memory page level, thus enabling the processor to prevent unchecked kernel "
 "accesses to user memory (aka this is a bug guard)"
 msgstr ""
+"Hafıza sayfalama seviyesinde işlemci yazma korumasına zorlaması CR0 "
+"kaydındaki WP bayrağı; ki kullanıcı hafızasına çekirdeğin denetlenmemiş "
+"erişimlerini engeller (yani bir hata korumasıdır.)"
 
 #: harddrake2:97
 #, c-format
@@ -2336,6 +2341,9 @@ msgid ""
 "identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
+"SCSI hedef numarası (LUN). Bir makineye bağlanan SCSI aygıtlar benzersiz bir "
+"kanal numarası,\n"
+"hedef kimliği ve bir mantıksal birim numarası ile algılanırlar."
 
 #. -PO: here, "size" is the size of the ram chip (eg: 128Mo, 256Mo, ...)
 #: harddrake2:110
@@ -2386,7 +2394,7 @@ msgstr "Banka bağlantıları"
 #: harddrake2:115
 #, c-format
 msgid "Socket designation of the memory bank"
-msgstr ""
+msgstr "Hafıza bankasının soket tasarımı"
 
 #: harddrake2:119
 #, c-format
@@ -2397,7 +2405,7 @@ msgstr "Aygıt dosyası"
 #, c-format
 msgid ""
 "the device file used to communicate with the kernel driver for the mouse"
-msgstr ""
+msgstr "aygıt dosyası, fare için çekirdek sürücüsü ile iletişimde kullanılır."
 
 #: harddrake2:120
 #, c-format
@@ -2801,7 +2809,7 @@ msgstr "Posta uyarısı"
 #: logdrake:170
 #, c-format
 msgid "The alert wizard has failed unexpectedly:"
-msgstr ""
+msgstr "Uyarı sihirbazı beklenmeyen biçimde başarısız oldu:"
 
 #: logdrake:174
 #, c-format
@@ -2942,6 +2950,7 @@ msgstr "ve kullanmak istediğiniz SMTP sunucu adını (veya IP) girin"
 #, c-format
 msgid "\"%s\" neither is a valid email nor is an existing local user!"
 msgstr ""
+"\"%s\" ne geçerli bir e-posta adresi ne de varolan bir yerel kullanıcı!"
 
 #: logdrake:450
 #, c-format
@@ -2949,6 +2958,8 @@ msgid ""
 "\"%s\" is a local user, but you did not select a local smtp, so you must use "
 "a complete email address!"
 msgstr ""
+"\"%s\" bir yerel kullanıcı; ancak bir yerel smtp seçmemiştiniz. Yani, tam "
+"bir e-posta adresi kullanmak durumundasınız!"
 
 #: logdrake:457
 #, c-format
@@ -3083,6 +3094,7 @@ msgid ""
 "It is possible that your %s needs its firmware to be uploaded everytime when "
 "it is turned on."
 msgstr ""
+"%s için her çalıştırılmasında bir donanım yazılımı yüklenmesi gerekebilir."
 
 #: scannerdrake:174 scannerdrake:226
 #, c-format
@@ -3095,6 +3107,8 @@ msgid ""
 "To do so, you need to supply the firmware file for your scanner so that it "
 "can be installed."
 msgstr ""
+"Bunu yapmak için; tarayıcınız için bir donanım yazılımı dosyası "
+"sağlamalısınız ki aygıt kurulabilsin."
 
 #: scannerdrake:176 scannerdrake:230
 #, c-format
@@ -3102,11 +3116,13 @@ msgid ""
 "You find the file on the CD or floppy coming with the scanner, on the "
 "manufacturer's home page, or on your Windows partition."
 msgstr ""
+"Dosyayı tarayıcı ile verilen CD veya disket üzerinde, üreticinin internet "
+"sitesinde veya bilgisayarınızın Windows bölümünde bulabilirsiniz."
 
 #: scannerdrake:178 scannerdrake:237
 #, c-format
 msgid "Install firmware file from"
-msgstr ""
+msgstr "Donanım yazılımını şu kaynaklardan birinden kurun:"
 
 #: scannerdrake:180 scannerdrake:188 scannerdrake:239 scannerdrake:246
 #, c-format
@@ -3126,12 +3142,12 @@ msgstr "Diğer konum"
 #: scannerdrake:198
 #, c-format
 msgid "Select firmware file"
-msgstr "Firmware dosyasını seçin"
+msgstr "Donanım yazılımı dosyasını seçin"
 
 #: scannerdrake:201 scannerdrake:260
 #, c-format
 msgid "The firmware file %s does not exist or is unreadable!"
-msgstr ""
+msgstr "%s donanım yazılımı dosyası ya hiç yok ya da okunamaz durumda!"
 
 #: scannerdrake:224
 #, c-format
@@ -3139,6 +3155,8 @@ msgid ""
 "It is possible that your scanners need their firmware to be uploaded "
 "everytime when they are turned on."
 msgstr ""
+"Tarayıcılarınız için her çalıştırılmalarında bir donanım yazılımı yüklenmesi "
+"gerekebilir."
 
 #: scannerdrake:228
 #, c-format
@@ -3146,6 +3164,8 @@ msgid ""
 "To do so, you need to supply the firmware files for your scanners so that it "
 "can be installed."
 msgstr ""
+"Bunu yapmak için; tarayıcılarınız için birer donanım yazılımı dosyası "
+"sağlamalısınız ki aygıtlar kurulabilsin."
 
 #: scannerdrake:231
 #, c-format
@@ -3153,11 +3173,13 @@ msgid ""
 "If you have already installed your scanner's firmware you can update the "
 "firmware here by supplying the new firmware file."
 msgstr ""
+"Tarayıcınız için bir donanım yazılımını önceden kurduysanız, yeni bir "
+"donanım yazılımı dosyası sağlayarak burada güncelleyebilirsiniz."
 
 #: scannerdrake:233
 #, c-format
 msgid "Install firmware for the"
-msgstr ""
+msgstr "Şunun için donanım yazılımı kur:"
 
 #: scannerdrake:256
 #, c-format
@@ -3172,7 +3194,7 @@ msgstr "%s için donanım yazılımı kurulamıyor!"
 #: scannerdrake:287
 #, c-format
 msgid "The firmware file for your %s was successfully installed."
-msgstr ""
+msgstr "%s için sağlanan donanım yazılımı başarıyla kuruldu."
 
 #: scannerdrake:297
 #, c-format
@@ -3238,6 +3260,9 @@ msgid ""
 "Manual adjustments are required. Please edit the configuration file /etc/"
 "sane.d/%s.conf. "
 msgstr ""
+"%s tamamen otomatik olarak yapılandırılamaz.\n"
+"\n"
+"Elle ayarlama gerekli. Lütfen, etc/sane.d/%s.conf dosyasını düzenleyin."
 
 #: scannerdrake:407 scannerdrake:416
 #, c-format
@@ -3263,6 +3288,8 @@ msgid ""
 "Your %s has been configured, but it is possible that additional manual "
 "adjustments are needed to get it to work. "
 msgstr ""
+"%s yapılandırıldı. Ancak, çalışabilmesi için elle ek ayarlamalar yapmanız "
+"gerekebilir."
 
 #: scannerdrake:414
 #, c-format
@@ -3270,11 +3297,13 @@ msgid ""
 "If it does not appear in the list of configured scanners in the main window "
 "of Scannerdrake or if it does not work correctly, "
 msgstr ""
+"Scannerdrake ana penceresindeki yapılandırılan tarayıcılar arasında "
+"göremezseniz veya düzgün biçimde çalışmazsa, "
 
 #: scannerdrake:415
 #, c-format
 msgid "edit the configuration file /etc/sane.d/%s.conf. "
-msgstr "/etc/sane.d/%s.conf yapılandırma dosyasını düzenle. "
+msgstr "/etc/sane.d/%s.conf yapılandırma dosyasını düzenleyin. "
 
 #: scannerdrake:420
 #, c-format
@@ -3369,6 +3398,9 @@ msgid ""
 "Here you can choose whether the scanners connected to this machine should be "
 "accessible by remote machines and by which remote machines."
 msgstr ""
+"Burada, bu makineye bağlanan tarayıcılara uzak makinelerden erişilip "
+"erişilemeyeceğini ve hangi uzak makinelerden erişilebileceğini "
+"ayarlayabilirsiniz."
 
 #: scannerdrake:597
 #, c-format
@@ -3376,6 +3408,8 @@ msgid ""
 "You can also decide here whether scanners on remote machines should be made "
 "available on this machine."
 msgstr ""
+"Ayrıca, uzak makinelerdeki tarayıcıların bu makine tarafından kullanılıp "
+"kullanılmayacağına karar verebilirsiniz."
 
 #: scannerdrake:600
 #, c-format
@@ -3414,6 +3448,8 @@ msgid ""
 "These are the machines on which the locally connected scanner(s) should be "
 "available:"
 msgstr ""
+"Bunlar yerel bağlanmış tarayıcı(lar)ın kullanılabileceği makineler ve "
+"ağlardır:"
 
 #: scannerdrake:658 scannerdrake:808
 #, c-format
@@ -3444,7 +3480,7 @@ msgstr "Makinenin adı/IP adresi:"
 #: scannerdrake:719 scannerdrake:869
 #, c-format
 msgid "Choose the host on which the local scanners should be made available:"
-msgstr ""
+msgstr "Yerel tarayıcıların kullanılabileceği ağ veya makineleri seçin:"
 
 #: scannerdrake:730 scannerdrake:880
 #, c-format
