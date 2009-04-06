@@ -641,6 +641,8 @@ sub _get_media_url {
 sub get_media_cfg {
     my ($o, $phys_medium, $packages, $selected_names, $force_rpmsrate) = @_;
 
+    my @media = @{$packages->{media}};
+
     my ($distribconf);
     if (getAndSaveFile_($phys_medium, 'media_info/media.cfg', '/tmp/media.cfg')) {
 	($distribconf) = _parse_media_cfg('/tmp/media.cfg');
@@ -667,7 +669,8 @@ sub get_media_cfg {
 	$o->ask_deselect_media__copy_on_disk($packages->{media}, $allow && \$o->{copy_rpms_on_disk}) if $allow || @{$packages->{media}} > 1;
     }
 
-    _associate_phys_media($o->{all_hds}, $phys_medium, $packages->{media});
+    my @new_media = difference2($packages->{media}, \@media);
+    _associate_phys_media($o->{all_hds}, $phys_medium, \@new_media);
 
     log::l("get_media_cfg read " . int(@{$packages->{depslist}}) . " headers");
 
