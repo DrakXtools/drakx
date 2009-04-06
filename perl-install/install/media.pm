@@ -695,7 +695,8 @@ sub _get_compsUsers_pl {
 sub get_standalone_medium {
     my ($in, $phys_m, $packages, $m) = @_;
 
-    add2hash($m, { phys_medium => $phys_m, selected => 1, rel_hdlist => 'media_info/hdlist.cz' });
+    add2hash($m, { phys_medium => $phys_m, rel_hdlist => 'media_info/hdlist.cz' });
+    local $phys_m->{is_suppl} = 1; # so that _get_media_url() works
     _get_medium($in, $phys_m, $packages, $m);
 }
 
@@ -704,70 +705,9 @@ sub _get_medium {
 
     !$m->{ignore} or log::l("ignoring packages in $m->{rel_hdlist}"), return;
 
-    my $medium_id = int @{$packages->{media}};
-    $m->{fakemedium} = $m->{name} || $phys_m->{method};
-    $m->{fakemedium} =~ s!/!_!g; #- remove "/" from name
-    if (find { $m->{fakemedium} eq $_->{fakemedium} } allMediums($packages)) {
-	$m->{fakemedium} .= " (" . ($m->{rpmsdir} || $medium_id) . ")";
-	$m->{fakemedium} =~ s!/!_!g; #- remove "/" from rpmsdir
-    }
-
-    log::l("trying to read $m->{rel_hdlist} for medium '$m->{fakemedium}'");
-    
-    #- copy synthesis file directly to urpmi directory.
-    my $synthesis = urpmidir() . "/synthesis.hdlist.$m->{fakemedium}.cz";
-    {
-	my $rel_synthesis = $m->{rel_hdlist};
-	$rel_synthesis =~ s!/hdlist!/synthesis.hdlist! or internal_error("bad {rel_hdlist} $m->{rel_hdlist}");
-	_getAndSaveFile_progress($in_wait, N("Downloading file %s...", $rel_synthesis),
-				$phys_m, $rel_synthesis, $synthesis);
-    }
-
-    #- get all keys corresponding in the right pubkey file,
-    #- they will be added in rpmdb later if not found.
-    if (!$m->{pubkey}) {
-	my $rel_pubkey = $m->{rel_hdlist};
-	$rel_pubkey =~ s!/hdlist(.*)\.cz!/pubkey$1! or internal_error("bad {rel_hdlist} $m->{rel_hdlist}");
-	$m->{pubkey} = urpmidir() . "/pubkey_$m->{fakemedium}";
-	getAndSaveFile_($phys_m, $rel_pubkey, $m->{pubkey});
-    }
-
-    #- for standalone medium not using media.cfg
-    $phys_m->{name} ||= $m->{name};
-
-    #- integrate medium in media list, only here to avoid download error (update) to be propagated.
-    push @{$packages->{media}}, $m;
-
-    #- parse synthesis (if available) of directly hdlist (with packing).
-    {
-	my $nb_suppl_pkg_skipped = 0;
-	my $callback = sub {
-	    my (undef, $p) = @_;
-	    my $uniq_pkg_seen = $packages->{uniq_pkg_seen} ||= {};
-	    if ($uniq_pkg_seen->{$p->fullname}++) {
-		log::l("skipping " . scalar $p->fullname);
-		++$nb_suppl_pkg_skipped;
-		return 0;
-	    } else {
-		return 1;
-	    }
-	};
-	my $error;
-	if (-s $synthesis) {
-	    ($m->{start}, $m->{end}) = $packages->parse_synthesis($synthesis, callback => $callback)
-	      or $error = "bad synthesis $synthesis for $m->{fakemedium}";
-	} else {
-	    $error = "fatal: no hdlist nor synthesis to read for $m->{fakemedium}";
-	}
-
-	if ($error) {
-	    pop @{$packages->{media}};
-	    unlink $synthesis;
-	    die $error;
-	} else {
-	    log::l("medium " . phys_medium_to_string($phys_m) . ", read " . ($m->{end} - $m->{start} + 1) . " packages in $m->{rel_hdlist}, $nb_suppl_pkg_skipped skipped");
-	}
-    }
+    my $url = _get_media_url({}, $phys_m);
+    log::l("trying '$url'\n");
+    urpm::media::add_medium($packages, $m->{name} || 'Supplementary medium', $url) or $packages->{fatal}(10, N("unable to add medium"));
 }
 
 
