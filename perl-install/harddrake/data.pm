@@ -22,7 +22,7 @@ foreach my $dev (@devices) {
 
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown() {
-    grep { $_->{media_type} !~ /BRIDGE|class\|Mouse|DISPLAY|Hub|MEMORY_RAM|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|NETWORK|Printer|SERIAL_(USB|SMBUS)|STORAGE_(IDE|OTHER|RAID|SCSI)|SYSTEM_OTHER|tape|UPS/
+    grep { $_->{media_type} !~ /BRIDGE|class\|Mouse|DISPLAY|Hub|MEMORY_RAM|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|NETWORK|Printer|SERIAL_(USB|SMBUS)|STORAGE_(IDE|OTHER|RAID|SCSI)|SYSTEM_(OTHER|SDHCI)|tape|UPS/
 	       && !member($_->{driver}, qw(cpia_usb cyber2000fb forcedeth ibmcam megaraid mod_quickcam nvnet ohci1394 ov511 ov518_decomp scanner ultracam usbvideo usbvision))
 	       && $_->{driver} !~ /^ISDN|Mouse:USB|Removable:zip|class\|Mouse|sata|www.linmodems.org/
 	       && $_->{type} ne 'network'
@@ -166,7 +166,7 @@ our @tree =
       string => N("Bridges and system controllers"),
       icon => "memory.png",
       configurator => "",
-      detector => sub { f(grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM|SYSTEM_OTHER|MEMORY_OTHER|SYSTEM_PIC/
+      detector => sub { f(grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM|SYSTEM_(OTHER|SDHCI)|MEMORY_OTHER|SYSTEM_PIC/
                                  || $_->{description} =~ /Parallel Port Adapter/;
 			 } @devices) },
       checked_on_boot => 0,
