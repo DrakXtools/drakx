@@ -243,6 +243,7 @@ static void handle_pcmcia(void)
 }
 #endif
 
+#ifndef ENABLE_NETWORK_STANDALONE
 static void handle_hid(void)
 {
 	struct hid_entries entry_list;
@@ -259,7 +260,6 @@ static void handle_hid(void)
 /************************************************************
  */
 
-#ifndef ENABLE_NETWORK_STANDALONE
 static void method_select_and_prepare(void)
 {
 	enum return_type results;
