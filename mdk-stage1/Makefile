@@ -200,14 +200,29 @@ probe-modules: probe-modules.o probing-FULL.o modules-FULL.o params-FULL.o utils
 	$(DIET) $(CC) $(LDFLAGS) -o $@ $^
 	$(STRIPCMD) $@
 
+dist: tar
 tar:
 	rm -rf $(PRODUCT)*.tar* $(PRODUCT)-$(VERSION)
+	@if [ -e ".svn" ]; then \
+	    $(MAKE) dist-svn; \
+	    elif [ -e "../.git" ]; then \
+	    $(MAKE) dist-git; \
+	    else \
+	    echo "Unknown SCM (not SVN nor GIT)";\
+	    exit 1; \
+	    fi;
+	$(info $(NAME)-$(VERSION).tar.bz2 is ready)
+
+dist-svn:
 	mkdir -p $(PRODUCT)-$(VERSION)
 	svn export -q -rBASE . $(PRODUCT)-$(VERSION)/mdk-stage1
 	svn export -q -rBASE ../kernel $(PRODUCT)-$(VERSION)/kernel
 	cp ../Makefile.config $(PRODUCT)-$(VERSION)/
 	tar cfj $(PRODUCT)-$(VERSION).tar.bz2 $(PRODUCT)-$(VERSION)
 	rm -rf $(PRODUCT)-$(VERSION)
+
+dist-git:
+	@cd ..; git archive --prefix=$(PRODUCT)-$(VERSION)/ HEAD mdk-stage1 kernel Makefile.config | bzip2 >mdk-stage1/$(PRODUCT)-$(VERSION).tar.bz2;
 
 .depend:
 	$(CPP) $(CFLAGS) -M $(ALLSRC) > .depend
