@@ -530,7 +530,8 @@ sub adjust_paths_in_urpmi_cfg {
         my $dir = _get_medium_dir($phys_m);
         my $old_url = $medium->{url};
         if ($phys_m->{method} eq 'cdrom') {
-            $medium->{url} =~ s!^$phys_m->{real_mntpoint}/!cdrom://!;
+            $medium->{url} =~ s!^/tmp/image!cdrom://!; # main media
+            $medium->{url} =~ s!^$phys_m->{real_mntpoint}/!cdrom://!; # supplementary medium
         } elsif ($phys_m->{method} eq 'nfs') {
             $medium->{url} =~ s!^$::prefix!!;
         }
