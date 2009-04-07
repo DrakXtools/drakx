@@ -496,7 +496,6 @@ sub get_media {
     use Data::Dumper;
 
     my ($suppl_CDs, $copy_rpms_on_disk, $phys_m);
-    my @names = map { $_->{name} } @{$packages->{media}};
     foreach (@$media) {
 	if ($_->{type} eq 'media_cfg') {
 	    $phys_m = url2mounted_phys_medium($o, $_->{url}, 'media_info');
@@ -527,8 +526,6 @@ sub adjust_paths_in_urpmi_cfg {
     my ($urpm) = Clone::clone($packages);
     foreach my $medium (@{$urpm->{media}}) {
         my $phys_m = $medium->{phys_medium};
-        my $dir = _get_medium_dir($phys_m);
-        my $old_url = $medium->{url};
         if ($phys_m->{method} eq 'cdrom') {
             $medium->{url} =~ s!^/tmp/image!cdrom://!; # main media
             $medium->{url} =~ s!^$phys_m->{real_mntpoint}/!cdrom://!; # supplementary medium
