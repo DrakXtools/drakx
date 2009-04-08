@@ -51,9 +51,8 @@ sub get_file_and_size {
     
     my $res = urpm::download::sync_url($urpm, $url, dir => $cachedir);
     $res or die N("retrieval of [%s] failed", $file) . "\n";
-    log::l("using $file (" . -s $file . ")");
     open(my $f, $file);
-    +( -s $file, $f);
+    ( -s $file, $f);
 }
 
 1;
