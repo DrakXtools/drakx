@@ -52,16 +52,6 @@ sub set_removable_configurator {
     is_removable($class) ? "/usr/sbin/diskdrake --removable=$device->{device}" : undef;
  }
 
-sub set_media_auto_configurator {
-    my ($device) = @_;
-    is_auto_configurable_media($device) ? "/usr/sbin/drakupdate_fstab --auto --add $device->{device}" : ();
-}
-
-sub set_media_remover {
-    my ($device) = @_;
-    is_auto_configurable_media($device) ? "/usr/sbin/drakupdate_fstab --del $device->{device}" : ();
-}
-
 my $modules_conf = modules::any_conf->read;
 
 # Format is (HW class ID, l18n class name, icon, config tool , is_to_be_detected_on_boot)
