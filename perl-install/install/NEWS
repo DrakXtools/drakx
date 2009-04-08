@@ -2,7 +2,7 @@
 - media management:
   o just use curl instead of using our own http stack to retrieve
     files from network (thus fixing #48887)
-  o fix mount point for disk media
+  o fix mount point for NFS & disk media for both main & suppl media
   o tell urpmi to read synthesis before adding supplementary network
     media in order to be able to install the 'basesystem' package
 - log where we segfaulted
