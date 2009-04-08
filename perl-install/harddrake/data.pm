@@ -45,7 +45,6 @@ sub f {
 # FIXME: add translated items
 
 sub is_removable { member($_[0], qw(FLOPPY ZIP DVDROM CDROM BURNER)) }
-sub is_auto_configurable_class { is_removable($_[0]) || member($_[0], qw(HARDDISK)) }
 sub is_auto_configurable_media { !detect_devices::isKeyUsb($_[0]) }
 
 sub set_removable_configurator {
