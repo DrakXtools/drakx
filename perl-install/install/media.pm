@@ -345,10 +345,7 @@ sub get_file_and_size {
     if ($f =~ m|^http://|) {
 	require install::http;
 	install::http::get_file_and_size($f);
-    } elsif ($phys_m->{method} eq "ftp") {
-	require install::ftp;
-	install::ftp::get_file_and_size($f, $phys_m->{url});
-    } elsif ($phys_m->{method} eq "http") {
+    } elsif (member($phys_m->{method}, qw(ftp http))) {
 	require install::http;
 	install::http::get_file_and_size_($f, $phys_m->{url});
     } elsif ($f =~ m!^/!) {
