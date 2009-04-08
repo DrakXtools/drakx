@@ -635,8 +635,10 @@ sub _get_media_url {
         if (member($phys_medium->{method}, qw(ftp http))) {
             $uri = $phys_medium->{url};
             $uri =~ s!/media$!!;
-        } elsif ($phys_medium->{method} eq 'nfs') {
+        } elsif (member($phys_medium->{method}, qw(cdrom nfs))) {
             $uri = "$::prefix/$phys_medium->{mntpoint}";
+            my $arch = arch() =~ /i.86/ ? $MDK::Common::System::compat_arch{arch()} : arch();
+            $uri .= "/$arch" if -d "$uri/$arch";
         }
     } else {
         $uri = $o->{stage2_phys_medium}{url} =~ m!^(http|ftp)://! && $o->{stage2_phys_medium}{url} ||
