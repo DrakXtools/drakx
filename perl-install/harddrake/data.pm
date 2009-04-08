@@ -205,7 +205,7 @@ our @tree =
       icon => "harddisk.png",
       configurator => "$sbindir/diskdrake",
       detector => sub { f(detect_devices::hds()) },
-      checked_on_boot => 1,
+      checked_on_boot => 0,
       automatic => 1,
      },
 
