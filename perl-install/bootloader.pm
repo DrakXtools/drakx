@@ -1010,6 +1010,7 @@ sub suggest {
 	 boot => "/dev/" . ($onmbr ? $mbr->{device} : $boot),
 	 map => "/boot/map",
 	 compact => 1,
+    	 'large-memory' => 1,
 	 color => 'black/cyan yellow/cyan',
 	 'menu-scheme' => 'wb:bw:wb:bw'
          ),
@@ -1390,7 +1391,7 @@ sub write_lilo {
     push @conf, "# WARNING: do not forget to run lilo after modifying this file\n";
     push @conf, "default=" . make_label_lilo_compatible($bootloader->{default}) if $bootloader->{default};
     push @conf, map { $_ . '=' . $quotes_if_needed->($bootloader->{$_}) } grep { $bootloader->{$_} } qw(boot root map install serial vga keytable raid-extra-boot menu-scheme vmdefault);
-    push @conf, grep { $bootloader->{$_} } qw(linear geometric compact prompt nowarn restricted static-bios-codes);
+    push @conf, grep { $bootloader->{$_} } qw(linear geometric compact prompt nowarn restricted static-bios-codes large-memory);
     push @conf, "append=" . $quotes->($bootloader->{append}) if $bootloader->{append};
     push @conf, "password=" . $bootloader->{password} if $bootloader->{password}; #- also done by msec
     push @conf, "timeout=" . round(10 * $bootloader->{timeout}) if $bootloader->{timeout};
