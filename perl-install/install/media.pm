@@ -520,10 +520,10 @@ sub get_media {
 }
 
 sub adjust_paths_in_urpmi_cfg {
-    my ($packages) = @_;
+    my ($urpm) = @_;
 
     require Clone;
-    my ($urpm) = Clone::clone($packages);
+    local $urpm->{media} = Clone::clone($urpm->{media});
     foreach my $medium (@{$urpm->{media}}) {
         my $phys_m = $medium->{phys_medium};
         if ($phys_m->{method} eq 'cdrom') {
