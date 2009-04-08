@@ -533,8 +533,14 @@ sub adjust_paths_in_urpmi_cfg {
         if ($phys_m->{method} eq 'cdrom') {
             $medium->{url} =~ s!^/tmp/image!cdrom://!; # main media
             $medium->{url} =~ s!^$phys_m->{real_mntpoint}/!cdrom://!; # supplementary medium
-        } elsif ($phys_m->{method} eq 'nfs') {
-            $medium->{url} =~ s!^$::prefix!!;
+        } elsif (member($phys_m->{method}, qw(disk nfs))) {
+            # use the real mount point:
+            if ($medium->{url} =~ m!/tmp/image!) {
+                $medium->{url} =~ s!/tmp/image!$phys_m->{mntpoint}!;
+            } else {
+                # just remove $::prefix and we already have the real mount point:
+                $medium->{url} =~ s!^$::prefix!!;
+            }
         }
     }
     urpm::media::write_config($urpm);
