@@ -1,12 +1,10 @@
 package install::http; # $Id$
 
-use IO::Socket;
+use urpm::download;
+use common;
 
-my $sock;
-
-
+# to be killed once callers got fixed
 sub close() {
-    $sock->close if $sock;
 }
 
 sub getFile {
@@ -32,45 +30,30 @@ sub get_file_and_size_ {
 }
 
 sub get_file_and_size {
-    local ($^W) = 0;
-
     my ($url) = @_;
-    $sock->close if $sock;
 
     # can be used for ftp urls (with http proxy)
-    my ($host, $port, $path) = parse_http_url($url);
+    my ($host) = parse_http_url($url);
     defined $host or return undef;
 
-    my $use_http_proxy = $ENV{PROXY} && $ENV{PROXYPORT};
-
-    $sock = IO::Socket::INET->new(PeerAddr => $use_http_proxy ? $ENV{PROXY} : $host,
-				  PeerPort => $use_http_proxy ? $ENV{PROXYPORT} : $port || 80,
-				  Proto    => 'tcp',
-				  Timeout  => 60) or die "can not connect $@";
-    $sock->autoflush;
-    print $sock join("\015\012" =>
-		     "GET " . ($use_http_proxy ? $url : $path) . " HTTP/1.0",
-		     "Host: $host" . ($port && ":$port"),
-		     "User-Agent: DrakX/vivelinuxabaszindozs",
-		     "", "");
-
-    #- skip until empty line
-    my $now = 0;
-    my ($last, $buf, $tmp);
-    my $read = sub { sysread($sock, $buf, 1) or die ''; $tmp .= $buf };
-    do {
-	$last = $now;
-	&$read; &$read if $buf =~ /\015/;
-	$now = $buf =~ /\012/;
-    } until $now && $last;
-
-    if ($tmp =~ /^(.*\b(\d+)\b.*)/ && $2 == 200) {
-	my ($size) = $tmp =~ /^Content-Length:\s*(\d+)\015?$/m;
-	$size, $sock;
-    } else {
-	log::l("HTTP error: $1");
-        undef;
+    my $urpm = $::o->{packages};
+    my $cachedir = $urpm->{cachedir} || '/root';
+    my $file = $url;
+    $file =~ s!.*/!$cachedir/!;
+    unlink $file;       # prevent "partial file" errors
+    
+    if ($ENV{PROXY}) {
+        my ($proxy, $port) = urpm::download::parse_http_proxy(join(':', $ENV{PROXY}, $ENV{PROXYPORT}))
+          or die "bad proxy declaration\n";
+        $proxy .= ":1080" unless $port;
+        urpm::download::set_cmdline_proxy(http_proxy => "http://$proxy/");
     }
+    
+    my $res = urpm::download::sync_url($urpm, $url, dir => $cachedir);
+    $res or die N("retrieval of [%s] failed", $file) . "\n";
+    log::l("using $file (" . -s $file . ")");
+    open(my $f, $file);
+    +( -s $file, $f);
 }
 
 1;

@@ -1,5 +1,7 @@
 - include vmmouse driver (#49654)
 - media management:
+  o just use curl instead of using our own http stack to retrieve
+    files from network (thus fixing #48887)
   o tell urpmi to read synthesis before adding supplementary network
     media in order to be able to install the 'basesystem' package
 
