@@ -149,17 +149,8 @@ foreach my $hw_class (@harddrake::data::tree) {
 
     next if $Ident eq 'MOUSE' && $kernel_major ne $previous_kernel_config{KERNEL} && $cfg{"DETECT_$Ident"} ne 'force';
 
-    my @configurator_pool;
-    if (harddrake::data::is_auto_configurable_class($Ident)) {
-        foreach my $device (@ID{@added}) {
-            push @configurator_pool, harddrake::data::set_media_auto_configurator($device);
-        }
-        foreach my $device (@$oldconfig{@was_removed}) {
-            push @configurator_pool, harddrake::data::set_media_remover($device);
-        }
-    } else {
-        @configurator_pool = $configurator;
-    }
+    my @configurator_pool = $configurator;
+
     if ($Ident eq "AUDIO") {
         # automatic sound slots configuration
         rm_rf("/etc/asound.state") if -e "/etc/asound.state";
