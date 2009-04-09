@@ -1,3 +1,8 @@
+- diskdrake:
+  o Only write raid config into $::prefix if we are in install mode,
+    this fixes draklive-install which should write to /etc directly as
+    $::prefix does not yet exist (#49632)
+
 Version 12.25 - 08 April 2009
 
 - harddrake service:

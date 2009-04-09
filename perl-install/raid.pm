@@ -247,7 +247,7 @@ sub write_conf {
 
     my @devices = uniq(map { devices::make($_->{device}) } map { @{$_->{disks}} } @$raids);
 
-    output("$::prefix/etc/mdadm.conf",
+    output($::isInstall ? "$::prefix/etc/mdadm.conf" : "/etc/mdadm.conf",
 	   join(' ', 'DEVICE', @devices) . "\n",
 	   map { "ARRAY " . devices::make($_->{device}) . " UUID=$_->{UUID} auto=yes\n" } @$raids);
 }
