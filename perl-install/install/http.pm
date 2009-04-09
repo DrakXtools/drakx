@@ -39,7 +39,7 @@ sub get_file_and_size {
     my $urpm = $::o->{packages};
     if (!$urpm) {
         require install::pkgs;
-        $urpm = install::pkgs::empty_packages($o->{keep_unrequested_dependencies});
+        $urpm = install::pkgs::empty_packages($::o->{keep_unrequested_dependencies});
     }
 
     my $cachedir = $urpm->{cachedir} || '/root';
@@ -57,7 +57,7 @@ sub get_file_and_size {
     my $res = urpm::download::sync_url($urpm, $url, dir => $cachedir);
     $res or die N("retrieval of [%s] failed", $file) . "\n";
     open(my $f, $file);
-    ( -s $file, $f);
+    (-s $file, $f);
 }
 
 1;
