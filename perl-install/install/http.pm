@@ -29,7 +29,7 @@ sub get_file_and_size_ {
     }
 }
 
-sub get_file_and_size {
+sub get_file_and_size1 {
     my ($url) = @_;
 
     # can be used for ftp urls (with http proxy)
@@ -55,9 +55,13 @@ sub get_file_and_size {
     }
     
     my $res = urpm::download::sync_url($urpm, $url, dir => $cachedir);
-    $res or die N("retrieval of [%s] failed", $file) . "\n";
-    open(my $f, $file);
-    (-s $file, $f);
+    if ($res) {
+        open(my $f, $file);
+        (-s $file, $f);
+    } else {
+        log::l("retrieval of [$file] failed");
+        undef;
+    }
 }
 
 1;
