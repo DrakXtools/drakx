@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh_CN\n"
 "POT-Creation-Date: 2009-04-09 05:34+0200\n"
-"PO-Revision-Date: 2008-03-29 21:33+0800\n"
+"PO-Revision-Date: 2009-04-09 11:48+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -157,9 +157,9 @@ msgid "Enable ACPI"
 msgstr "启用 ACPI"
 
 #: any.pm:411
-#, fuzzy, c-format
+#, c-format
 msgid "Enable SMP"
-msgstr "启用 ACPI"
+msgstr "启用 SMP"
 
 #: any.pm:412
 #, c-format
@@ -666,11 +666,11 @@ msgstr ""
 "您可以使用“Drak 用户管理”将用户添加到此组中。"
 
 #: any.pm:1385
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You need to logout and back in again for changes to take effect. Press OK to "
 "logout now."
-msgstr "您需要注销后重新登录才能让更改生效"
+msgstr "您需要注销后重新登录才能让更改生效。单击确定立即注销。"
 
 #: any.pm:1389
 #, c-format
@@ -916,14 +916,14 @@ msgid "KDCs Servers"
 msgstr "KDC 服务器"
 
 #: authentication.pm:147
-#, fuzzy, c-format
+#, c-format
 msgid "Use DNS to locate KDC for the realm"
-msgstr "使用 DNS 解析域 KDC"
+msgstr "使用 DNS 定位域 KDC"
 
 #: authentication.pm:148
-#, fuzzy, c-format
+#, c-format
 msgid "Use DNS to locate realms"
-msgstr "使用 DNS 解析域主机"
+msgstr "使用 DNS 定位域"
 
 #: authentication.pm:153
 #, c-format
@@ -982,14 +982,14 @@ msgid "Active Directory Realm "
 msgstr "活动目录域"
 
 #: authentication.pm:218
-#, fuzzy, c-format
+#, c-format
 msgid "DNS Domain"
-msgstr "NIS 网域"
+msgstr "DNS 域"
 
 #: authentication.pm:219
-#, fuzzy, c-format
+#, c-format
 msgid "DC Server"
-msgstr "KDC 服务器"
+msgstr "DC 服务器"
 
 #: authentication.pm:233 authentication.pm:249
 #, c-format
@@ -1509,7 +1509,7 @@ msgstr "详细信息"
 #: diskdrake/interactive.pm:400
 #, c-format
 msgid "View"
-msgstr ""
+msgstr "查看"
 
 #: diskdrake/interactive.pm:405 diskdrake/interactive.pm:756
 #, c-format
@@ -1639,19 +1639,19 @@ msgid "Switching from %s to %s"
 msgstr "从 %s 切换到 %s"
 
 #: diskdrake/interactive.pm:620
-#, fuzzy, c-format
+#, c-format
 msgid "Set volume label"
-msgstr "哪个卷标？"
+msgstr "设定卷标"
 
 #: diskdrake/interactive.pm:622
 #, c-format
 msgid "Beware, this will be written to disk as soon as you validate!"
-msgstr ""
+msgstr "小心，当您确定之后，这一内容将会立即写入磁盘！"
 
 #: diskdrake/interactive.pm:623
 #, c-format
 msgid "Beware, this will be written to disk only after formatting!"
-msgstr ""
+msgstr "小心，格式化之后这一内容将会立即写入磁盘！"
 
 #: diskdrake/interactive.pm:625
 #, c-format
@@ -1734,13 +1734,13 @@ msgid "Maximum size: %s MB"
 msgstr "最大大小：%s MB"
 
 #: diskdrake/interactive.pm:801
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
 "为了保证更改分区大小之后的数据完整性, 在您下次启动进入 Microsoft Windows® 时"
-"可能会自动运行文件系统检查。"
+"可能会自动运行文件系统检查"
 
 #: diskdrake/interactive.pm:849 diskdrake/interactive.pm:1393
 #, c-format
@@ -2273,14 +2273,14 @@ msgid "Creating and formatting file %s"
 msgstr "正在创建和格式化文件 %s"
 
 #: fs/format.pm:119
-#, fuzzy, c-format
+#, c-format
 msgid "I do not know how to set label on %s with type %s"
-msgstr "不知道如何将 %s 格式化成 %s 类型"
+msgstr "不知道如何设定 %2$s 类型的 %1$s 卷标"
 
 #: fs/format.pm:126
-#, fuzzy, c-format
+#, c-format
 msgid "setting label on %s failed, is it formatted?"
-msgstr "%s 格式化 %s 失败"
+msgstr "设定 %s 的卷标失败，该卷是否已格式化？"
 
 #: fs/format.pm:167
 #, c-format
@@ -4861,6 +4861,7 @@ msgstr ""
 "裁决产生的法律费用和处罚或其他因此产生的损失)将不承担责任。这种有限责任适用但"
 "不限于本软件产品所包括的强大数据加密组件。\n"
 "\n"
+"%s\n"
 "\n"
 "3. GPL 许可协议和其它有关协议\n"
 "\n"
@@ -5911,7 +5912,7 @@ msgstr "将检查结果报告给 tty"
 #: security/level.pm:10
 #, c-format
 msgid "Disable msec"
-msgstr ""
+msgstr "禁用 msec"
 
 #: security/level.pm:11
 #, c-format
@@ -5919,7 +5920,7 @@ msgid "Standard"
 msgstr "标准"
 
 #: security/level.pm:12
-#, fuzzy, c-format
+#, c-format
 msgid "Secure"
 msgstr "安全"
 
@@ -5931,6 +5932,8 @@ msgid ""
 "system security\n"
 "on your own."
 msgstr ""
+"此级别应小心使用，因为该级别将会禁用 msec 提供的全部额外安全性。请仅当您将自\n"
+"行维护系统安全时才使用此级别。"
 
 #: security/level.pm:41
 #, c-format
@@ -6758,212 +6761,3 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "安装失败"
-
-#~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
-#~ msgstr "请注销, 然后同时按 Ctrl-Alt-BackSpace"
-
-#~ msgid "Welcome To Crackers"
-#~ msgstr "欢迎入侵者"
-
-#~ msgid "Poor"
-#~ msgstr "低"
-
-#~ msgid "High"
-#~ msgstr "高"
-
-#~ msgid "Higher"
-#~ msgstr "更高"
-
-#~ msgid "Paranoid"
-#~ msgstr "苛刻"
-
-#~ msgid ""
-#~ "This level is to be used with care. It makes your system more easy to "
-#~ "use,\n"
-#~ "but very sensitive. It must not be used for a machine connected to "
-#~ "others\n"
-#~ "or to the Internet. There is no password access."
-#~ msgstr ""
-#~ "这一级别应慎重使用。它使您的系统更易用, 然而也更脆弱:\n"
-#~ "假如这台机器将要和其它机器联网或者接入互联网, 绝对不要采用这个级别。\n"
-#~ "这个级别连基本的密码检查也没有。"
-
-#~ msgid ""
-#~ "Passwords are now enabled, but use as a networked computer is still not "
-#~ "recommended."
-#~ msgstr "启用了密码检查功能。但是仍不建议用于联网的电脑。"
-
-#~ msgid ""
-#~ "There are already some restrictions, and more automatic checks are run "
-#~ "every night."
-#~ msgstr "添加了某些限制, 每天夜间自动执行更多检查。"
-
-#~ msgid ""
-#~ "This is similar to the previous level, but the system is entirely closed "
-#~ "and security features are at their maximum."
-#~ msgstr ""
-#~ "类似于前一安全级别, 不过系统处于完全封闭状态。所有安全特性达到最大限度。"
-
-#~ msgid ""
-#~ "\n"
-#~ "Warning\n"
-#~ "\n"
-#~ "Please read carefully the terms below. If you disagree with any\n"
-#~ "portion, you are not allowed to install the next CD media. Press "
-#~ "'Refuse' \n"
-#~ "to continue the installation without using these media.\n"
-#~ "\n"
-#~ "\n"
-#~ "Some components contained in the next CD media are not governed\n"
-#~ "by the GPL License or similar agreements. Each such component is then\n"
-#~ "governed by the terms and conditions of its own specific license. \n"
-#~ "Please read carefully and comply with such specific licenses before \n"
-#~ "you use or redistribute the said components. \n"
-#~ "Such licenses will in general prevent the transfer,  duplication \n"
-#~ "(except for backup purposes), redistribution, reverse engineering, \n"
-#~ "de-assembly, de-compilation or modification of the component. \n"
-#~ "Any breach of agreement will immediately terminate your rights under \n"
-#~ "the specific license. Unless the specific license terms grant you such\n"
-#~ "rights, you usually cannot install the programs on more than one\n"
-#~ "system, or adapt it to be used on a network. In doubt, please contact \n"
-#~ "directly the distributor or editor of the component. \n"
-#~ "Transfer to third parties or copying of such components including the \n"
-#~ "documentation is usually forbidden.\n"
-#~ "\n"
-#~ "\n"
-#~ "All rights to the components of the next CD media belong to their \n"
-#~ "respective authors and are protected by intellectual property and \n"
-#~ "copyright laws applicable to software programs.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "警告\n"
-#~ "\n"
-#~ "请仔细阅读下列的条款。如果您不同意其中任何部分, 您就不可以安装下一个光盘上"
-#~ "的软件。选择“拒绝”将继续安装其它介质上的软件。\n"
-#~ "\n"
-#~ "\n"
-#~ "下一个光盘的部分内容的许可协议不是 GPL 或类似的协议。每个这样的内容受到各"
-#~ "自不同的条件和条款的限制。在您使用或重新分发该内容之前, 请仔细阅读并遵守其"
-#~ "特定的许可协议。\n"
-#~ "通常这些协议会限制对该内容进行转换, 复制(备份目的除外), 再次分发, 反向工"
-#~ "程, 反汇编, 反编译或其它修改。如果违背任何协议的条款, 协议赋予您的权利也立"
-#~ "即终止。除非协议中有特定的条款赋予您相关权利, 您通常不能在超过一台系统中安"
-#~ "装该程序, 或者把它应用在网络上。如果有疑问, 请直接与该内容的发行者或作者联"
-#~ "系。\n"
-#~ "向第三方转让或复制这些内容, 包括其文档通常是被禁止的。\n"
-#~ "\n"
-#~ "\n"
-#~ "下一个光盘的内容的全部权利分别属于它们各自的作者, 并受到可应用与软件程序的"
-#~ "知识产权和版权法律的保护。\n"
-
-#~ msgid "Use libsafe for servers"
-#~ msgstr "服务器使用 libsafe"
-
-#~ msgid ""
-#~ "A library which defends against buffer overflow and format string attacks."
-#~ msgstr "防止缓冲溢出和串格式攻击的库。"
-
-#~ msgid "LILO/grub Installation"
-#~ msgstr "LILO/grub 安装"
-
-#~ msgid "Precise RAM size if needed (found %d MB)"
-#~ msgstr "精确的内存大小(找到 %d MB)"
-
-#~ msgid "Give the ram size in MB"
-#~ msgstr "以兆为单位给出内存大小"
-
-#~ msgid ""
-#~ "If you plan to use aboot, be careful to leave a free space (2048 sectors "
-#~ "is enough)\n"
-#~ "at the beginning of the disk"
-#~ msgstr ""
-#~ "如果您计划采用 aboot, 请注意在磁盘的开头位置留下一段自由空间\n"
-#~ "(2048 扇区就足够了)"
-
-#~ msgid "Security level"
-#~ msgstr "安全级别"
-
-#~ msgid "Expand Tree"
-#~ msgstr "展开树"
-
-#~ msgid "Collapse Tree"
-#~ msgstr "折叠树"
-
-#~ msgid "Toggle between flat and group sorted"
-#~ msgstr "切换清单显示/分组排序"
-
-#~ msgid "Choose action"
-#~ msgstr "选择操作"
-
-#~ msgid "Active Directory with SFU"
-#~ msgstr "带 SFU 的活动目录"
-
-#~ msgid "Active Directory with Winbind"
-#~ msgstr "带 Winbind 的活动目录"
-
-#~ msgid "Use information stored in local files for all authentication"
-#~ msgstr "使用本地文件中存储的信息进行全部身份验证"
-
-#~ msgid "Active Directory with SFU:"
-#~ msgstr "带 SFU 的活动目录:"
-
-#~ msgid "Active Directory with Winbind:"
-#~ msgstr "带 Winbind 的活动目录:"
-
-#~ msgid ""
-#~ "Winbind allows the system to authenticate users in a Windows Active "
-#~ "Directory Server."
-#~ msgstr "Winbind 允许系统在 Windows 活动目录服务器中进行用户的身份验证。"
-
-#~ msgid "Authentication LDAP"
-#~ msgstr "LDAP 认证"
-
-#~ msgid "TLS"
-#~ msgstr "TLS"
-
-#~ msgid "SSL"
-#~ msgstr "SSL"
-
-#~ msgid "security layout (SASL/Kerberos)"
-#~ msgstr "安全层(SASL/Kerberos)"
-
-#~ msgid "Authentication Active Directory"
-#~ msgstr "验证活动目录"
-
-#~ msgid "LDAP users database"
-#~ msgstr "LDAP 用户数据库"
-
-#~ msgid "LDAP user allowed to browse the Active Directory"
-#~ msgstr "允许浏览活动目录的 LDAP 用户"
-
-#~ msgid "Password for user"
-#~ msgstr "用户的密码"
-
-#~ msgid "Authentication NIS"
-#~ msgstr "NIS 认证"
-
-#~ msgid ""
-#~ "For this to work for a W2K PDC, you will probably need to have the admin "
-#~ "run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
-#~ "add and reboot the server.\n"
-#~ "You will also need the username/password of a Domain Admin to join the "
-#~ "machine to the Windows(TM) domain.\n"
-#~ "If networking is not yet enabled, Drakx will attempt to join the domain "
-#~ "after the network setup step.\n"
-#~ "Should this setup fail for some reason and domain authentication is not "
-#~ "working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows"
-#~ "(tm) Domain, and Admin Username/Password, after system boot.\n"
-#~ "The command 'wbinfo -t' will test whether your authentication secrets are "
-#~ "good."
-#~ msgstr ""
-#~ "为了在 W2K PDC 服务器的环境中正常使用, 您可能得请 W2K 管理员运行“C:\\>net "
-#~ "localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add”并重启服务"
-#~ "器。\n"
-#~ "您还需要一个域管理员的用户名/密码以便把这个机器添加到 Windows(TM) 域。\n"
-#~ "如果网络还没有启用, DrakX 会在网络设置步骤之后尝试加入域。\n"
-#~ "如果这个设置因为什么失败了而且域认证不起作用, 启动系统之后运行“smbpasswd -"
-#~ "j 域名 -U 用户%%密码”填入您的 Windows(tm) 域名和管理员的用户名/密码。\n"
-#~ "命令“wbinfo -t”会测试您的认证密码是否完好。"
-
-#~ msgid "Authentication Windows Domain"
-#~ msgstr "Windows 域认证"
