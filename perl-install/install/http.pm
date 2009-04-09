@@ -29,7 +29,7 @@ sub get_file_and_size_ {
     }
 }
 
-sub get_file_and_size1 {
+sub get_file_and_size {
     my ($url) = @_;
 
     # can be used for ftp urls (with http proxy)
