@@ -37,6 +37,11 @@ sub get_file_and_size {
     defined $host or return undef;
 
     my $urpm = $::o->{packages};
+    if (!$urpm) {
+        require install::pkgs;
+        $urpm = install::pkgs::empty_packages($o->{keep_unrequested_dependencies});
+    }
+
     my $cachedir = $urpm->{cachedir} || '/root';
     my $file = $url;
     $file =~ s!.*/!$cachedir/!;
