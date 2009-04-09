@@ -9,12 +9,13 @@ msgstr ""
 "Project-Id-Version: DrakX 2007\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-26 22:23-0300\n"
-"PO-Revision-Date: 2006-09-16 07:01+0800\n"
+"PO-Revision-Date: 2009-04-09 11:56+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -266,7 +267,7 @@ msgid "Its GDB trace is:"
 msgstr "GDB 跟踪在此："
 
 #: drakbug:158
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
 "This will open a web browser window on %s where you'll find a form to fill "
@@ -274,9 +275,7 @@ msgid ""
 msgstr ""
 "要提交故障报告, 单击报告按钮。\n"
 "它会打开一个浏览器窗口, 进入 %s, 那里有一个表格需要您填写。上面显示的信息将被"
-"传送到服务器。\n"
-"如果在您的报告中列出 lspcidrake -v 的输出、内核的版本以及 /proc/cpuinfo 的内"
-"容, 可能会更有帮助一些。"
+"传送到服务器"
 
 #: drakbug:160
 #, c-format
@@ -286,18 +285,17 @@ msgid ""
 msgid_plural ""
 "Things useful to attach to your report are the output of the following "
 "commands: %s."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "如果在您的报告中列出以下命令的输出，可能会更有帮助一些：%s。"
 
 #: drakbug:163
 #, c-format
 msgid "'%s'"
-msgstr ""
+msgstr "“%s”"
 
 #: drakbug:166
-#, fuzzy, c-format
+#, c-format
 msgid "You should also attach the following files: %s as well as %s."
-msgstr "您应该安装下列软件包：%s"
+msgstr "您还应该附加下列文件：%s 和 %s。"
 
 #: drakbug:173
 #, c-format
@@ -432,9 +430,9 @@ msgid "Reset"
 msgstr "重置"
 
 #: drakdvb:30
-#, fuzzy, c-format
+#, c-format
 msgid "DVB"
-msgstr "DVD"
+msgstr "DVB"
 
 #: drakdvb:39 harddrake2:101
 #, c-format
@@ -444,12 +442,12 @@ msgstr "通道"
 #: drakdvb:57
 #, c-format
 msgid "%s already exists and its contents will be lost"
-msgstr ""
+msgstr "%s 已经存在，其内容将丢失"
 
 #: drakdvb:74
 #, c-format
 msgid "Could not get the list of available channels"
-msgstr ""
+msgstr "无法获得可用频道的列表"
 
 #: drakdvb:80 draksec:73 drakups:99 harddrake2:381 scannerdrake:66
 #: scannerdrake:70 scannerdrake:78 scannerdrake:319 scannerdrake:368
@@ -461,7 +459,7 @@ msgstr "请稍候"
 #: drakdvb:84
 #, c-format
 msgid "Detecting DVB channels, this will take a few minutes"
-msgstr ""
+msgstr "正在检测 DVB 频道，这一过程将持续几分钟"
 
 #: drakdvb:85 drakfont:572 drakfont:652 drakfont:736 draksplash:213
 #: drakups:217 logdrake:175
@@ -470,14 +468,14 @@ msgid "Cancel"
 msgstr "取消"
 
 #: drakdvb:148
-#, fuzzy, c-format
+#, c-format
 msgid "Detect Channels"
-msgstr "通道"
+msgstr "检测频道"
 
 #: drakdvb:150
-#, fuzzy, c-format
+#, c-format
 msgid "View Channel"
-msgstr "通道"
+msgstr "查看频道"
 
 #: drakedm:41
 #, c-format
@@ -1167,7 +1165,7 @@ msgstr "安全级别和检查"
 #: draksec:114
 #, c-format
 msgid "Configure authentication required to access Mandriva tools"
-msgstr ""
+msgstr "配置访问 Mandriva 工具所需的身份认证"
 
 #: draksec:117
 #, c-format
@@ -1242,7 +1240,7 @@ msgstr "网络中心"
 #: draksec:160
 #, c-format
 msgid "Wireless Network Roaming"
-msgstr ""
+msgstr "无线网络漫游"
 
 #: draksec:161
 #, c-format
