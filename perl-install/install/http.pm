@@ -54,7 +54,7 @@ sub get_file_and_size {
         urpm::download::set_cmdline_proxy(http_proxy => "http://$proxy/");
     }
     
-    my $res = urpm::download::sync_url($urpm, $url, dir => $cachedir);
+    my $res = eval { urpm::download::sync_url($urpm, $url, dir => $cachedir) };
     if ($res) {
         open(my $f, $file);
         (-s $file, $f);
