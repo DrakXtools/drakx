@@ -43,7 +43,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 7.1\n"
 "Report-Msgid-Bugs-To: https://qa.mandriva.com\n"
-"POT-Creation-Date: 2009-04-09 05:34+0200\n"
+"POT-Creation-Date: 2009-04-14 17:26+0200\n"
 "PO-Revision-Date: 2009-04-11 15:49+0100\n"
 "Last-Translator: Florin Cătălin RUSSEN <cfrussen@yahoo.co.uk>\n"
 "Language-Team: Mandrivausers.ro <cfrussen@yahoo.co.uk>\n"
@@ -1836,10 +1836,10 @@ msgid "Maximum size: %s MB"
 msgstr "Mărime maximă: %s Mo"
 
 #: diskdrake/interactive.pm:801
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
-"filesystem checks will be run on your next boot into Microsoft WindowsÂ®"
+"filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
 "Pentru a asigura integritatea datelor după redimensionarea\n"
 "partiției, o verificare de sistem de fișiere va fi lansată la viitoarea "
@@ -2630,8 +2630,8 @@ msgid "There is no existing partition to use"
 msgstr "Nu există partiții utilizabile"
 
 #: fs/partitioning_wizard.pm:103
-#, c-format
-msgid "Use the Microsoft WindowsÂ® partition for loopback"
+#, fuzzy, c-format
+msgid "Use the Microsoft Windows® partition for loopback"
 msgstr "Utilizează partiția Microsoft Windows® pentru loopback"
 
 #: fs/partitioning_wizard.pm:106
@@ -2662,8 +2662,8 @@ msgstr ""
 "suficient)"
 
 #: fs/partitioning_wizard.pm:127
-#, c-format
-msgid "Use the free space on a Microsoft WindowsÂ® partition"
+#, fuzzy, c-format
+msgid "Use the free space on a Microsoft Windows® partition"
 msgstr "Utilizează spațiul liber de pe partiția Microsoft Windows®"
 
 #: fs/partitioning_wizard.pm:129
@@ -2681,15 +2681,15 @@ msgstr ""
 "s-a produs următoarea eroare: %s"
 
 #: fs/partitioning_wizard.pm:146
-#, c-format
-msgid "Computing the size of the Microsoft WindowsÂ® partition"
+#, fuzzy, c-format
+msgid "Computing the size of the Microsoft Windows® partition"
 msgstr "Se calculează dimensiunea partiției Microsoft Windows®"
 
 #: fs/partitioning_wizard.pm:153
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Your Microsoft WindowsÂ® partition is too fragmented. Please reboot your "
-"computer under Microsoft WindowsÂ®, run the ``defrag'' utility, then restart "
+"Your Microsoft Windows® partition is too fragmented. Please reboot your "
+"computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
 "the Mandriva Linux installation."
 msgstr ""
 "Partiția Microsoft Windows® este prea fragmentată. Reporniți calculatorul în "
@@ -2697,18 +2697,18 @@ msgstr ""
 "Mandriva Linux."
 
 #: fs/partitioning_wizard.pm:156
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "WARNING!\n"
 "\n"
 "\n"
-"Your Microsoft WindowsÂ® partition will be now resized.\n"
+"Your Microsoft Windows® partition will be now resized.\n"
 "\n"
 "\n"
 "Be careful: this operation is dangerous. If you have not already done so, "
 "you first need to exit the installation, run \"chkdsk c:\" from a Command "
-"Prompt under Microsoft WindowsÂ® (beware, running graphical program "
-"\"scandisk\" is not enough, be sure to use \"chkdsk\" in a Command Prompt!), "
+"Prompt under Microsoft Windows® (beware, running graphical program \"scandisk"
+"\" is not enough, be sure to use \"chkdsk\" in a Command Prompt!), "
 "optionally run defrag, then restart the installation. You should also backup "
 "your data.\n"
 "\n"
@@ -2744,8 +2744,8 @@ msgid "Partitionning"
 msgstr "Partiționare"
 
 #: fs/partitioning_wizard.pm:168
-#, c-format
-msgid "Which size do you want to keep for Microsoft WindowsÂ® on partition %s?"
+#, fuzzy, c-format
+msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
 msgstr ""
 "Cît spațiu doriți să păstrați pentru Microsoft Windows® pe partiția %s?"
 
@@ -2755,8 +2755,8 @@ msgid "Size"
 msgstr "Mărime"
 
 #: fs/partitioning_wizard.pm:178
-#, c-format
-msgid "Resizing Microsoft WindowsÂ® partition"
+#, fuzzy, c-format
+msgid "Resizing Microsoft Windows® partition"
 msgstr "Se redimensionează partiția Microsoft Windows®"
 
 #: fs/partitioning_wizard.pm:183
@@ -2765,10 +2765,10 @@ msgid "FAT resizing failed: %s"
 msgstr "Redimensionarea FAT a eșuat: %s"
 
 #: fs/partitioning_wizard.pm:186
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
-"filesystem checks will be run on your next boot into Microsoft WindowsÂ®"
+"filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
 "Pentru a asigura integritatea datelor după redimensionarea\n"
 "partiției, o verificare de sistem de fișiere va fi lansată la viitoarea "
@@ -2781,8 +2781,8 @@ msgstr ""
 "Nu se poare redimensiona nici o partiție FAT (sau spațiu liber insuficient)"
 
 #: fs/partitioning_wizard.pm:203
-#, c-format
-msgid "Remove Microsoft WindowsÂ®"
+#, fuzzy, c-format
+msgid "Remove Microsoft Windows®"
 msgstr "Înlătură Microsoft Windows®"
 
 #: fs/partitioning_wizard.pm:203
@@ -3228,7 +3228,12 @@ msgstr "Activează sunet 5.1 cu Pulse Audio"
 msgid "Enable user switching for audio applications"
 msgstr "Activează schimbarea utilizatorului pentru aplicațiile audio"
 
-#: harddrake/sound.pm:382
+#: harddrake/sound.pm:404
+#, fuzzy, c-format
+msgid "Use Glitch-Free mode"
+msgstr "Utilizează modul deconectat"
+
+#: harddrake/sound.pm:410
 #, c-format
 msgid "Reset sound mixer to default values"
 msgstr "Reinițializarea mixerului de sunet cu valorile implicite"
@@ -3266,7 +3271,7 @@ msgstr ""
 "Aici vă puteți selecționa un pilot alternativ (OSS sau ALSA) pentru placa de "
 "sunet (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA",
+#. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:409
