@@ -143,8 +143,9 @@ sub initrd {
     my $stage1_root = $ENV{DEBUGSTAGE1} ? "../mdk-stage1" : "/usr/$lib/drakx-installer-binaries";
 
     _ "rm -rf $tmp_initrd";
-    mkdir_p("$tmp_initrd$_") foreach qw(/etc /lib/firmware /modules /sbin /tmp /var);
+    mkdir_p("$tmp_initrd$_") foreach qw(/etc /firmware /lib /modules /sbin /tmp /var);
     symlink "../modules", "$tmp_initrd/lib/modules";
+    symlink "../firmware", "$tmp_initrd/lib/firmware";
 
     symlink "/proc/mounts", "$tmp_initrd/etc/mtab";
     symlink "../tmp", "$tmp_initrd/var/run";
@@ -163,7 +164,7 @@ sub initrd {
         _ "cp -a $_ $tmp_initrd$_";
     };
 
-    output("$tmp_initrd/sbin/hotplug", q{#!/bin/sh -e
+    output("$tmp_initrd/hotplug", q{#!/bin/sh -e
 if [ "$SUBSYSTEM" = firmware ] && [ "$ACTION" = add ] && [ -n "$FIRMWARE" ] ; then
   if [ ! -e /sys\$DEVPATH/loading ]; then
     exit 1
@@ -178,7 +179,8 @@ if [ "$SUBSYSTEM" = firmware ] && [ "$ACTION" = add ] && [ -n "$FIRMWARE" ] ; th
   exit 1
 fi
 });
-    _ "chmod 755 $tmp_initrd/sbin/hotplug";
+    _ "chmod 755 $tmp_initrd/hotplug";
+    symlink "../hotplug", "$tmp_initrd/sbin/hotplug";
     _ "install $stage1_root/init $tmp_initrd/";
     foreach ('stage1', 'pppd', 'pppoe') {
 	_ "install $stage1_root/$_ $tmp_initrd/sbin/";
