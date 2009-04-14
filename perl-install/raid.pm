@@ -165,10 +165,10 @@ sub inactivate_and_dirty {
 }
 
 sub active_mds() {
-    map { if_(/^(md\d+)\s*:\s*active/, $1) } cat_("/proc/mdstat");
+    map { if_(/^(md\S+)\s*:\s*active/, $1) } cat_("/proc/mdstat");
 }
 sub inactive_mds() {
-    map { if_(/^(md\d+)\s*:\s*inactive/, $1) } cat_("/proc/mdstat");
+    map { if_(/^(md\S+)\s*:\s*inactive/, $1) } cat_("/proc/mdstat");
 }
 
 sub free_mds {
