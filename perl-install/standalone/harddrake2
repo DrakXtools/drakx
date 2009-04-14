@@ -482,7 +482,6 @@ foreach (@classes) {
         push @data, [ $_, $Ident ];
         push @configurators, $configurator;
     }
-    $tree->expand_row($tree_model->get_path($parent_iter), 1) unless $title eq N("Unknown/Others");
 }
 
 undef $flush_guard;
