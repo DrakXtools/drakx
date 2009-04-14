@@ -82,7 +82,7 @@ our @tree =
       icon => "ide_hd.png",
       configurator => "",
       detector => sub { f(detect_devices::probe_category('disk/ide')),
-                          f(grep { $_->{driver} =~ /^pata/ && $_->{media_type} =~ /IDE/ } @devices),
+                          f(grep { $_->{driver} =~ /^pata/ && $_->{media_type} =~ /IDE|STORAGE_SATA/ } @devices),
                               f(grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ } @devices) },
       checked_on_boot => 1,
      },
