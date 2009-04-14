@@ -101,6 +101,9 @@ sub ask_parameters {
 	#$authentication->{nssgrp} = "0";
 	$authentication->{ccreds} = 1;
 
+    # this package must be installed for 'Fetch DN' button to actually work
+    $in->do_pkgs->ensure_are_installed([ 'openldap-clients' ], 1) or return;
+    
 	$in->ask_from('', N(" "),
 		     [ { label => N("Welcome to the Authentication Wizard"), title => 1 },
                      {},
@@ -350,6 +353,10 @@ auth=Ldap Directory
 server=$authentication->{LDAP_server}
 realm=$authentication->{LDAPDOMAIN}
 EOF
+
+    if ($authentication->{ccreds}) {
+	run_program::rooted($::prefix, '/usr/sbin/nss_updatedb.cron');  # updates offline cache.
+    }
 
     } elsif ($kind eq 'KRB5') {
 
@@ -612,7 +619,7 @@ sub set_pam_authentication {
 sub set_nsswitch_priority {
 	#my (@kinds) = @_;
     my ($kinds, $connected) = @_;
-    my @known = qw(nis ldap winbind);
+    my @known = qw(nis ldap winbind compat);
     substInFile {
 	if (my ($database, $l) = /^(\s*(?:passwd|shadow|group|automount):\s*)(.*)/) {
 	    my @l = difference2([ split(' ', $l) ], \@known);
@@ -914,7 +921,6 @@ sub get_server_for_domain {
 
 sub fetch_dn {
 	my ($srv) = @_;
-	#print "$srv";
 	my $s = run_program::rooted_get_stdout($::prefix, 'ldapsearch', '-x', '-h', $srv, '-b', '', '-s', 'base', '+');
 	$authentication->{LDAPDOMAIN} = first($s =~ /namingContexts: (.+)/);
 	return $authentication->{LDAPDOMAIN};
