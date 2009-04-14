@@ -2,6 +2,8 @@
   o Only write raid config into $::prefix if we are in install mode,
     this fixes draklive-install which should write to /etc directly as
     $::prefix does not yet exist (#49632)
+- draksound:
+  o enable to enable/disable glitch-free feature of PA
 - harddrake:
   o do not open branches by default
   o fix listing some ATA (eg: pata_marvell) devices as unknown

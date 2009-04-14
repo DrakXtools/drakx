@@ -241,6 +241,27 @@ sub set_pulseaudio_routing {
 }
 
 
+my $pa_defaultsconfig_file = "$::prefix/etc/pulse/default.pa";
+
+sub is_pulseaudio_glitchfree_enabled() {
+    return -f $pa_defaultsconfig_file &&
+      cat_($pa_defaultsconfig_file) !~ /^load-module\s+module-hal-detect\s+tsched=0/m;
+}
+
+sub set_pulseaudio_glitchfree {
+    my ($val) = @_;
+    my $string = "load-module module-hal-detect tsched=0\n";
+    substInFile {
+        if (/^load-module\s*module-hal-detect/) {
+            if ($val) {
+                s/\s*tsched=0//;
+            } else {
+                $_ = $string;
+            }
+        }
+    } $pa_defaultsconfig_file;
+}
+
 my $pa_client_conffile = "$::prefix/etc/pulse/client.conf";
 
 sub set_PA_autospan {
@@ -335,6 +356,7 @@ sub switch {
         
         my $is_pulseaudio_enabled = is_pulseaudio_enabled();
         my $is_pulseaudio_routing_enabled = is_pulseaudio_routing_enabled();
+        my $is_pulseaudio_glitchfree_enabled = is_pulseaudio_glitchfree_enabled();
         my $is_5_1_in_pulseaudio_enabled = is_5_1_in_pulseaudio_enabled();
         my $is_user_switching = is_user_switching_enabled();
 
@@ -343,6 +365,7 @@ sub switch {
         my $write_config = sub {
             set_pulseaudio($is_pulseaudio_enabled);
             set_pulseaudio_routing($is_pulseaudio_enabled && $is_pulseaudio_routing_enabled);
+            set_pulseaudio_glitchfree($is_pulseaudio_glitchfree_enabled);
             set_PA_autospan($is_pulseaudio_enabled);
             set_5_1_in_pulseaudio($is_5_1_in_pulseaudio_enabled);
             set_user_switching($is_user_switching);
@@ -376,6 +399,11 @@ sub switch {
             {
                 text => N("Enable user switching for audio applications"),
                 type => 'bool', val => \$is_user_switching,
+            },
+            {
+                text => N("Use Glitch-Free mode"),
+                type => 'bool', val => \$is_pulseaudio_glitchfree_enabled,
+                disabled => sub { !$is_pulseaudio_enabled },
             },
             {
                 advanced => 1,
