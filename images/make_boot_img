@@ -209,11 +209,6 @@ fi
 	my @funct = map { /functions:/ .. /^$/ ? do { s/\s//g; split /,/ } : () } `busybox`;
 	shift @funct;
 	symlink('busybox', $tmp_initrd . "/sbin/$_") foreach @funct;
-      }
-
-    if ($ENV{DEBUGSTAGE1}) {
-	_ "cp -f /usr/bin/busybox $tmp_initrd/sbin";
-	symlink "busybox", "$tmp_initrd/sbin/$_" foreach qw(cat chgrp chmod chown chroot chvt clear cp cut date dd df dirname dmesg du echo env false find free grep gunzip gzip halt head id init kill killall klogd linuxrc ln logger ls lsmod mkdir mknod mkswap more mount mv poweroff ps pwd reboot reset rm rmdir sed sleep sh sort swapoff swapon sync syslogd tail tar touch true tty umount uname uniq uptime wc which whoami xargs yes zcat);
     }
 
     if ($o_bootsplash_cfg) {
