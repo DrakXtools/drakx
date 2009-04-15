@@ -444,7 +444,11 @@ sub part_possible_actions {
 sub View {
     my ($in, $hd, $part, $all_hds) = @_;
     my $handle = any::inspect($part, $::prefix);
-    $in->ask_directory({'directory'=>$handle->{dir}});
+    if ($handle) {
+      $in->ask_warn(N("Error"), N("Failed to mount partition"));
+    } else {
+      $in->ask_directory({'directory'=>$handle->{dir}});
+    }
 }
 
 #- in case someone use diskdrake only to create partitions,
