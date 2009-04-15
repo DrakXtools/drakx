@@ -1,6 +1,9 @@
 - diskdrake:
   o handle md devices not called md\d+, like md_d127
   o display an error when mount fails during View action
+- bootloader:
+  o keep grub entries which refer to unknown devices verbatim instead 
+    of crashing (#48728)
 
 Version 12.27 - 14 April 2009
 

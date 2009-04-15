@@ -335,9 +335,16 @@ sub read_grub_menu_lst {
     #- sanitize
     foreach my $e (@{$b{entries}}) {
 	if (member($e->{type}, 'other', 'grub_configfile')) {
-	    $e->{kernel_or_dev} = grub2dev($e->{rootnoverify} || $e->{grub_root}, $grub2dev);
+	    eval { $e->{kernel_or_dev} = grub2dev($e->{rootnoverify} || $e->{grub_root}, $grub2dev); }
+	    $e->{keep_verbatim} = 1 unless $e->{kernel_or_dev}; 
 	} elsif ($e->{initrd}) {
-	    $e->{initrd} = grub2file($e->{initrd}, $grub2dev, $fstab, $e);
+ 	    my $initrd;
+ 	    eval { $initrd = grub2file($e->{initrd}, $grub2dev, $fstab, $e)};
+ 	    if ($initrd) {
+ 		$e->{initrd} = $initrd;
+ 	    } else {
+ 		$e->{keep_verbatim} = 1;
+ 	    }
 	}
 
 	if ($e->{kernel} =~ /xen/ && @{$e->{modules} || []} == 2 && $e->{modules}[1] =~ /initrd/) {
@@ -350,8 +357,8 @@ sub read_grub_menu_lst {
 	    (my $kernel, $e->{append}) = split(' ', $v, 2);
 	    $e->{append} = join(' ', grep { !/^BOOT_IMAGE=/ } split(' ', $e->{append}));
 	    $e->{root} = $1 if $e->{append} =~ s/root=(\S*)\s*//;
-	    $e->{kernel_or_dev} = grub2file($kernel, $grub2dev, $fstab, $e);
-	    $e->{keep_verbatim} = 1 if dirname($e->{kernel_or_dev}) ne '/boot';
+	    eval { $e->{kernel_or_dev} = grub2file($kernel, $grub2dev, $fstab, $e) };
+	    $e->{keep_verbatim} = 1 unless $e->{kernel_or_dev} && dirname($e->{kernel_or_dev}) eq '/boot';
 	}
 	my ($vga, $other) = partition { /^vga=/ } split(' ', $e->{append});
 	if (@$vga) {
