@@ -445,9 +445,9 @@ sub View {
     my ($in, $hd, $part, $all_hds) = @_;
     my $handle = any::inspect($part, $::prefix);
     if ($handle) {
-      $in->ask_warn(N("Error"), N("Failed to mount partition"));
-    } else {
       $in->ask_directory({'directory'=>$handle->{dir}});
+    } else {
+      $in->ask_warn(N("Error"), N("Failed to mount partition"));
     }
 }
 
