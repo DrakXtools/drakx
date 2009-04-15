@@ -43,7 +43,7 @@
   sync
 
   eject
-  mount mount.nfs umount
+  mount mount.nfs mount.ntfs-3g umount
   losetup
 
   ldconfig
@@ -51,37 +51,39 @@
   reboot halt shutdown
   kill killall5 ps strace
   sed tr
+  strings
 
   loadkeys tset stty
 
   ping hostname ifconfig route
 
   fdformat badblocks
-  e2fsck fsck.ext2 fsck.ext3 mke2fs mkfs.ext2 mkfs.ext3 mkfs.ntfs resize2fs
-  mkfs.ext3 mkfs.reiserfs mkfs.xfs mkfs.jfs
-  debugfs dumpe2fs tune2fs
-  fsck.xfs xfs_repair
-  resize_reiserfs reiserfsck
   mkswap swapoff swapon
+  e2fsck fsck.ext2 fsck.ext3 fsck.ext4
+  mke2fs mkfs.ext2 mkfs.ext3 mkfs.ext4 
+  tune2fs resize2fs debugfs
+
+  mkfs.reiserfs resize_reiserfs reiserfstune reiserfsck
+  mkfs.xfs xfs_admin xfs_repair fsck.xfs
+  mkfs.ntfs mkdosfs dosfslabel mkntfs ntfsresize ntfslabel 
   <if ARCH="i.86|x86_64">
-    fsck.jfs
-    strings
+    mkfs.jfs fsck.jfs jfs_tune
   </if>
-  <if ARCH="i.86|x86_64|ia64">
-    ntfsresize
-    mkdosfs
-  </if>
+  quotacheck
+  cryptsetup dmsetup
+
   <if ARCH="ppc">
     hformat
   </if>
 
   <if-not ARCH="ppc">
     fdisk gpart
-    testdisk
+    testdisk photorec
   </if-not>
+
   <if-not ARCH="ppc|sparc">
     sfdisk
-   </if-not>
+  </if-not>
                      
   <if ARCH="ppc">
     pdisk 
