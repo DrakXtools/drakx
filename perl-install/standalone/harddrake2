@@ -392,8 +392,8 @@ foreach my $hw_class (@harddrake::data::tree) {
     next if ref($detector) ne "CODE"; #skip class witouth detector
     next if $Ident =~ /(MODEM|PRINTER)/ && $::testing;
     next if $Ident =~ /JAZZ/ && !$options{JAZZ_DETECTION};
-    next if $Ident =~ /MODEM/ && !$options{MODEMS_DETECTION};
     next if $Ident =~ /PRINTER/ && !$options{PRINTERS_DETECTION};
+    $detect_devices::detect_serial_modem = 0 if $harddrake::data =~ /MODEM/ && !$options{MODEMS_DETECTION};
 
     my @devices = $detector->(\%options);
     next unless @devices; # Skip empty class (no devices)
