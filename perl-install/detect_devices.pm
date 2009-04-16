@@ -561,9 +561,10 @@ sub getSerialModem {
     @modems;
 }
 
+our $detect_serial_modem = 1;
 sub getModem {
     my ($modules_conf) = @_;
-    getSerialModem($modules_conf, {}), get_winmodems();
+    ($detect_serial_modem ? getSerialModem($modules_conf, {}) : ()), get_winmodems();
 }
 
 sub get_winmodems() {
