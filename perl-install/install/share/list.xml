@@ -13,7 +13,7 @@
   insmod modinfo rmmod
   losetup
   lvm2 mdadm
-  mount mount.nfs mount.ntfs-3g umount
+  mount mount.nfs umount
 
   <mode copy="dereference">
     vol_id <!-- needed by libDrakX -->
@@ -180,6 +180,7 @@
   /usr/share/locale/UTF-8
   /usr/share/terminfo/l/linux
   /bin/brltty
+  /sbin/mount.ntfs-3g <!-- can not be expanded as binary, not executable for all users -->
 
   /usr/bin/drakx-matchbox-window-manager
   /usr/share/matchbox/mbnoapp.xpm
