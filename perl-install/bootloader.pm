@@ -335,7 +335,7 @@ sub read_grub_menu_lst {
     #- sanitize
     foreach my $e (@{$b{entries}}) {
 	if (member($e->{type}, 'other', 'grub_configfile')) {
-	    eval { $e->{kernel_or_dev} = grub2dev($e->{rootnoverify} || $e->{grub_root}, $grub2dev); }
+	    eval { $e->{kernel_or_dev} = grub2dev($e->{rootnoverify} || $e->{grub_root}, $grub2dev) };
 	    $e->{keep_verbatim} = 1 unless $e->{kernel_or_dev}; 
 	} elsif ($e->{initrd}) {
  	    my $initrd;
