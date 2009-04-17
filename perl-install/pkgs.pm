@@ -149,14 +149,25 @@ sub read_rpmsrate {
 
 
 sub simple_read_rpmsrate {
-    my ($o_match_all_hardware) = @_;
+    my ($o_match_all_hardware, $o_ignore_flags) = @_;
     my ($rates, $flags) = read_rpmsrate({}, {}, $::prefix . '/usr/share/meta-task/rpmsrate-raw', $o_match_all_hardware);
+
+    # FIXME: we do not handle !CAT_desktop but we do not care for now:
+    if (!$o_match_all_hardware && $o_ignore_flags) {
+        while (my ($pkg, $pkg_flags) = each %$flags) {
+            my $flags_str = "@$pkg_flags";
+            if ($flags_str =~ /TRUE/ && any { $flags_str =~ /[^!]$_/ } @$o_ignore_flags) {
+                delete $flags->{$pkg};
+            }
+        }
+    }
+
     grep { member('TRUE', @{$flags->{$_}}) && $rates->{$_} >= 5 } keys %$flags;
 }
 
 sub detect_rpmsrate_hardware_packages {
-    my ($o_match_all_hardware) = @_;
-    grep { !/openoffice/ } simple_read_rpmsrate($o_match_all_hardware);
+    my ($o_match_all_hardware, $ignore_flags) = @_;
+    grep { !/openoffice/ } simple_read_rpmsrate($o_match_all_hardware, $ignore_flags);
 }
 
 sub detect_graphical_drivers {
@@ -204,8 +215,12 @@ sub detect_network_drivers {
 
 sub detect_hardware_packages {
     my ($do_pkgs, $o_match_all_hardware) = @_;
+    my @ignore_flags = $::isInstall ? () : (
+        if_(!$do_pkgs->are_installed('task-kde4-minimal', 'task-kde3-minimal'), "CAT_KDE"),
+        if_(!$do_pkgs->is_installed('task-gnome'), "CAT_GNOME"),
+    );
     (
-        ($::isInstall ? () : detect_rpmsrate_hardware_packages($o_match_all_hardware)),
+        ($::isInstall ? () : detect_rpmsrate_hardware_packages($o_match_all_hardware, \@ignore_flags)),
         detect_graphical_drivers($do_pkgs, $o_match_all_hardware),
         detect_network_drivers($do_pkgs, $o_match_all_hardware),
     );
