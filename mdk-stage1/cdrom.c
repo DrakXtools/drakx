@@ -158,6 +158,13 @@ enum return_type cdrom_prepare(void)
 		if ((i = try_automatic(medias, medias_models)) != -1)
 			return do_with_device(medias[i], medias_models[i]);
 
+		/* detect hybrid isos (isos dumped to an USB stick) */
+		my_insmod("sd_mod", ANY_DRIVER_TYPE, NULL, 0);
+		get_medias(DISK, &medias, &medias_models, BUS_USB);
+		if ((i = try_automatic(medias, medias_models)) != -1) {
+			return do_with_device(medias[i], medias_models[i]);
+		}
+
 		unset_automatic();
 	} else
 		my_insmod("sr_mod", ANY_DRIVER_TYPE, NULL, 0);
