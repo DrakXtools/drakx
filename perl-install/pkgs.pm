@@ -129,7 +129,7 @@ sub read_rpmsrate {
 		    $match_all_hardware ? 1 : ($inv xor $TYPEs->{$p});
 		} elsif (($p) = /^HW_CAT"(.*)"/) {
 		    $match_all_hardware ? 1 : ($inv xor detect_devices::probe_category($p));
-		} else {
+		} else { # LOCALES"", SOUND, ...
 		    $inv xor $rpmsrate_flags_chosen->{$_};
 		}
 	    } @$known_flags;
