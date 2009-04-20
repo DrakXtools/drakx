@@ -1294,9 +1294,13 @@ sub monitor_full_edid() {
 
     devices::make('zero');
     my ($vbe, $edid);
-    run_program::raw({ timeout => 20 }, 
-		     'monitor-edid', '>', \$edid, '2>', \$vbe, 
-		     '-v', '--perl', if_($::isStandalone, '--try-in-console'));
+    {
+        # prevent warnings in install's logs:
+        local $ENV{LC_ALL} = 'C';
+        run_program::raw({ timeout => 20 }, 
+                         'monitor-edid', '>', \$edid, '2>', \$vbe, 
+                         '-v', '--perl', if_($::isStandalone, '--try-in-console'));
+    }
     if ($::isInstall) {
 	foreach (['edid', \$edid], ['vbe', \$vbe]) {
 	    my ($name, $val) = @$_;

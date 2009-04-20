@@ -728,6 +728,9 @@ sub is_package_installed {
 sub _install_raw {
     my ($packages, $isUpgrade, $callback, $LOG, $noscripts) = @_;
 
+    # prevent warnings in install's logs:
+    local $ENV{LC_ALL} = 'C';
+
     # let's be urpmi's compatible:
     local $packages->{options}{noscripts} = $noscripts;
     # leaks a fd per transaction (around ~100 for a typically gnome install, see #49097):
