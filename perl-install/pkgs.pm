@@ -167,7 +167,7 @@ sub simple_read_rpmsrate {
 
 sub detect_rpmsrate_hardware_packages {
     my ($o_match_all_hardware, $ignore_flags) = @_;
-    grep { !/openoffice/ } simple_read_rpmsrate($o_match_all_hardware, $ignore_flags);
+    grep { !/openoffice|java/ } simple_read_rpmsrate($o_match_all_hardware, $ignore_flags);
 }
 
 sub detect_graphical_drivers {
