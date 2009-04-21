@@ -186,7 +186,10 @@ foreach my $hw_class (@harddrake::data::tree) {
         $modules_conf->remove_module(difference2(\@old_drivers, \@new_drivers));
         # add agpgart and the like modules to modprobe.preload if needed:
         $modules_conf->write;
-        modules::load(difference2(\@new_drivers, \@old_drivers));
+        foreach (difference2(\@new_drivers, \@old_drivers)) {
+            eval { modules::load($_) };
+            warn "warning: $@" if $@;
+        }
         next;
     } elsif ($Ident eq "BLUETOOTH") {
         harddrake::autoconf::bluetooth(scalar keys %ID);
