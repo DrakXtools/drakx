@@ -71,7 +71,10 @@ sub ask_timezone() {
     $timezone = timezone::read();
     $timezone->{timezone} = timezone::bestTimezone($locale->{country}) if $locale->{country};
     any::configure_timezone($in, $timezone, 'ask_gmt', lc(get_conf('TIMEZONE')) eq 'simplified');
+
+    $in->do_pkgs->ensure_is_installed('ntp') if $timezone->{ntp};
     timezone::write($timezone);
+
     #- reload sys clock from hc once we know the real timezone
     timezone::reload_sys_clock($timezone);
 }
