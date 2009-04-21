@@ -136,9 +136,10 @@ sub read_rpmsrate {
 	    $ok ? 'TRUE' : @$user_flags ? join('||', @$user_flags) : 'FALSE';
 	} @flags;
 
+	@flags = member('FALSE', @flags) ? 'FALSE' : @flags;
 	if ($::isInstall) {
             $p->set_rate($rates->{$_});
-            $p->set_rflags(member('FALSE', @flags) ? 'FALSE' : @flags);
+            $p->set_rflags(@flags);
 	} else {
             $flags->{$_} = \@flags;
 	}
