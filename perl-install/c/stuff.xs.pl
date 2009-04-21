@@ -171,7 +171,7 @@ setlocale(category, locale = 0)
 int
 lseek_sector(fd, sector, offset)
   int fd
-  long sector
+  unsigned long sector
   long offset
   CODE:
   RETVAL = lseek64(fd, (off64_t) sector * SECTORSIZE + offset, SEEK_SET) >= 0;
