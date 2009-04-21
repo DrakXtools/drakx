@@ -144,7 +144,7 @@ sub _parse_dmsetup_table {
 }
 
 sub active_dm() {
-    run_program::run('udevadm', 'settle');
+    run_program::run('udevadm', 'settle') unless $::isInstall;
 
     map {
 	my $name = s/(.*?):\s*// && $1;
