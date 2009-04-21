@@ -2,29 +2,31 @@
 #
 # Copyright (C) 2002,2003, 2004, 2005 Free Software Foundation, Inc.
 # Copyright (C) 2002 Mandriva
+#
+#
 # Matias Griese <mahagr@utu.fi>, 2001.
 # Taisto Kuikka <69319@batman.jypoly.fi>, 2003,2004.
 # Esa Linna <denzo@mbnet.fi>, 2004.
 # Thomas Backlund <tmb@mandrake.org>, 2002, 2003, 2004, 2005.
-#
-#
+# Jani Välimaa <jani.valimaa@gmail.com>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: DrakX-fi - LE2005 Release\n"
+"Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-26 22:23-0300\n"
-"PO-Revision-Date: 2005-04-03 20:59+0300\n"
-"Last-Translator: Thomas Backlund <tmb@mandrake.org>\n"
-"Language-Team: Finnish <fi@li.org>\n"
+"PO-Revision-Date: 2009-04-21 15:42+0300\n"
+"Last-Translator: Jani Välimaa <jani.valimaa@gmail.com>\n"
+"Language-Team: Finnish <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: Lokalize 0.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
 msgid "Authentication"
-msgstr "Tunnistustapa"
+msgstr "Tunnistautuminen"
 
 #: drakauth:37 drakclock:111 drakclock:125 drakdvb:74 drakfont:213
 #: drakfont:226 drakfont:264 draksplash:202 finish-install:119 logdrake:170
@@ -38,7 +40,7 @@ msgstr "Virhe"
 #: drakboot:53
 #, c-format
 msgid "No bootloader found, creating a new configuration"
-msgstr ""
+msgstr "Käynnistyslatainta ei löytynyt, luodaan uudet asetukset"
 
 #: drakboot:88 harddrake2:198 harddrake2:199 logdrake:71
 #, c-format
@@ -68,7 +70,7 @@ msgstr "Monisanainen"
 #: drakboot:131
 #, c-format
 msgid "Silent"
-msgstr "Hiljennä"
+msgstr "Hiljainen"
 
 #: drakboot:137 drakbug:260 drakdvb:57 drakfont:682 drakperm:376 drakperm:386
 #: drakups:27 harddrake2:527 localedrake:43 notify-x11-free-driver-switch:15
@@ -84,14 +86,14 @@ msgid ""
 "Your system bootloader is not in framebuffer mode. To activate graphical "
 "boot, select a graphic video mode from the bootloader configuration tool."
 msgstr ""
-"Järjestelmäsi käynnistyslataaja ei ole framebuffer-tilassa. Aktivoidaksesi "
-"graafisen käynnistyksen, valitse graafinen tila käynnistyslataajan "
+"Järjestelmän käynnistyslatain ei ole framebuffer-tilassa. Aktivoidaksesi "
+"graafisen käynnistyksen, valitse graafinen tila käynnistyslataimen "
 "asetustyökalusta."
 
 #: drakboot:139
 #, c-format
 msgid "Do you want to configure it now?"
-msgstr "Haluatko määritellä asetukset nyt?"
+msgstr "Määritelläänkö asetukset nyt?"
 
 #: drakboot:148
 #, c-format
@@ -103,10 +105,9 @@ msgstr "Asenna teemoja"
 msgid "Graphical boot theme selection"
 msgstr "Graafisen käynnistysteeman valinta"
 
-#: drakboot:153
-#, fuzzy, c-format
+#: drakboot:153, c-format
 msgid "Graphical boot mode:"
-msgstr "Käytä graafista käynnistystä"
+msgstr "Graafinen käynnistystapa:"
 
 #: drakboot:155
 #, c-format
@@ -135,17 +136,17 @@ msgstr "Oletuskäyttäjä"
 #: drakboot:196
 #, c-format
 msgid "Default desktop"
-msgstr "Oletus työpöytä"
+msgstr "Oletustyöpöytä"
 
 #: drakboot:199
 #, c-format
 msgid "No, I do not want autologin"
-msgstr "Ei, en halua automaattista sisäänkirjautumista"
+msgstr "Poista automaattinen kirjautuminen käytöstä"
 
 #: drakboot:200
 #, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "Kyllä, haluan automaattisen sisäänkirjautumisen (käyttäjä, ympäristö)"
+msgstr "Ota automaattinen kirjautuminen käyttöön"
 
 #: drakboot:207
 #, c-format
@@ -155,7 +156,7 @@ msgstr "Järjestelmän tila"
 #: drakboot:210
 #, c-format
 msgid "Launch the graphical environment when your system starts"
-msgstr "Käytä graafista ympäristöä järjestelmän käynnistyessä"
+msgstr "Käynnistä graafinen ympäristö automaattisesti koneen käynnistyessä"
 
 #: drakboot:262
 #, c-format
@@ -174,14 +175,14 @@ msgid ""
 "selected below.\n"
 "Be sure your video card supports the mode you choose."
 msgstr ""
-"Ole hyvä ja valitse näyttötila, se otetaan käyttöön jokaisessa alla olevissa "
-"käynistystietueissa.\n"
-"Varmista että näytönohjaimesi ja näyttösi tukee valitsemasi näyttötila."
+"Valitse näyttötila, joka otetaan käyttöön kaikissa käynnistysvaihtoehdoissa."
+"\n"
+"Varmista, että näytönohjain ja näyttö tukevat valittua näyttötilaa."
 
 #: drakbug:65 drakbug:152
 #, c-format
 msgid "The \"%s\" program has crashed with the following error:"
-msgstr ""
+msgstr "Ohjelma \"%s\" kaatui virheeseen:"
 
 #: drakbug:76
 #, c-format
@@ -196,7 +197,7 @@ msgstr "Mandriva Linux Ohjauskeskus"
 #: drakbug:82
 #, c-format
 msgid "First Time Wizard"
-msgstr "Aloittelija velho"
+msgstr "Aloitusvelho"
 
 #: drakbug:83
 #, c-format
@@ -206,7 +207,7 @@ msgstr "Synkronointityökalu"
 #: drakbug:84 drakbug:216
 #, c-format
 msgid "Standalone Tools"
-msgstr "Itsenäisiä työkaluja"
+msgstr "Itsenäiset työkalut"
 
 #: drakbug:86 drakbug:87
 #, c-format
@@ -216,17 +217,17 @@ msgstr "Mandriva Online"
 #: drakbug:88
 #, c-format
 msgid "Remote Control"
-msgstr "Kauko-ohjaus"
+msgstr "Etäkäyttö"
 
 #: drakbug:89
 #, c-format
 msgid "Software Manager"
-msgstr "Ohjelmiston hallinta"
+msgstr "Ohjelmistojen hallinta"
 
 #: drakbug:90
 #, c-format
 msgid "Windows Migration tool"
-msgstr "Windowsista siirtymisen työkalu"
+msgstr "Windows-asetusten tuontityökalu"
 
 #: drakbug:91
 #, c-format
@@ -236,7 +237,7 @@ msgstr "Asetusvelhot"
 #: drakbug:113
 #, c-format
 msgid "Select Mandriva Tool:"
-msgstr "Valitse Mandriva työkalu:"
+msgstr "Valitse Mandrivan työkalu:"
 
 #: drakbug:114
 #, c-format
@@ -262,28 +263,24 @@ msgstr "Paketti: "
 msgid "Kernel:"
 msgstr "Ydin:"
 
-#: drakbug:151
-#, c-format
+#: drakbug:151, c-format
 msgid "The \"%s\" program has segfaulted with the following error:"
-msgstr ""
+msgstr "Ohjelma \"%s\" kaatui segfault-virheeseen:"
 
 #: drakbug:155
 #, c-format
 msgid "Its GDB trace is:"
-msgstr ""
+msgstr "Ohjelman GDB-jäljitys:"
 
-#: drakbug:158
-#, fuzzy, c-format
+#: drakbug:158, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
 "This will open a web browser window on %s where you'll find a form to fill "
 "in.  The information displayed above will be transferred to that server"
 msgstr ""
-"Lähettääksesi virheraportin, paina \"Raportti\" painiketta.\n"
-"Tämä avaa Internetselaimen osoitteeseen: %s josta löydät täytettävän "
-"lomakkeen. Yllä näytetyt tiedot lähetetään edellä mainitulle palvelimelle.\n"
-"Hyödyllisiä tietoja jota kannattaa liittää mukaan virheraportissa on "
-"lspcidrake -vdrake -v tuloste, ytimen versio ja /proc/cpuinfo."
+"Lähettääksesi virheraportin, paina painiketta \"Raportoi\".\n"
+"Painallus avaa Internet-selaimen osoitteeseen: %s, josta löytyy täytettävä"
+"lomake. Yllä näytetyt tiedot lähetetään edellä mainitulle palvelimelle."
 
 #: drakbug:160
 #, c-format
@@ -293,23 +290,23 @@ msgid ""
 msgid_plural ""
 "Things useful to attach to your report are the output of the following "
 "commands: %s."
-msgstr[0] ""
+msgstr[0] "Raporttiin on hyvä liittää mukaan komennon %s tuloste."
 msgstr[1] ""
+"Raporttiin olisi hyvä liittää mukaan seuraavien komentojen tuloste: %s."
 
 #: drakbug:163
 #, c-format
 msgid "'%s'"
-msgstr ""
+msgstr "'%s'"
 
-#: drakbug:166
-#, fuzzy, c-format
+#: drakbug:166, c-format
 msgid "You should also attach the following files: %s as well as %s."
-msgstr "sinun pitäisi asentaa seuraavatr paketit: %s"
+msgstr "Mukaan tulisi liittää myös seuraavat tiedostot: %s ja myös %s."
 
 #: drakbug:173
 #, c-format
 msgid "Please describe what you were doing when it crashed:"
-msgstr ""
+msgstr "Kerro, mitä olit tekemässä, kun ohjelma kaatui:"
 
 #: drakbug:185 drakperm:136
 #, c-format
@@ -319,7 +316,7 @@ msgstr "Ohje"
 #: drakbug:189
 #, c-format
 msgid "Report"
-msgstr "Raportti"
+msgstr "Raportoi"
 
 #: drakbug:190 drakfont:506
 #, c-format
@@ -334,7 +331,7 @@ msgstr "Ei asennettu"
 #: drakbug:236
 #, c-format
 msgid "Package not installed"
-msgstr "Pakettia ei asennettu"
+msgstr "Pakettia ei ole asennettuna"
 
 #: drakbug:261
 #, c-format
@@ -342,16 +339,19 @@ msgid ""
 "You must type in what you were doing when this bug happened in order to "
 "enable us to reproduce this bug and to increase the odds of fixing it"
 msgstr ""
+"Sinun täytyy kertoa mitä olit tekemässä, kun virhe tapahtui, jotta "
+"virhe pystytään toistamaan. Samalla todennäköisyydet virheen "
+"korjaamiseksi paranevat."
 
 #: drakbug:262
 #, c-format
 msgid "Thanks."
-msgstr ""
+msgstr "Kiitos."
 
 #: drakclock:30 draksec:170
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
-msgstr ""
+msgstr "Päivämäärän, kellonajan ja aikavyöhykkeen asetukset"
 
 #: drakclock:39
 #, c-format
@@ -371,7 +371,7 @@ msgstr "Aikavyöhyke - DrakClock"
 #: drakclock:44
 #, c-format
 msgid "Which is your timezone?"
-msgstr "Mikä on järjestelmäsi aikavyöhyke?"
+msgstr "Valitse järjestelmän aikavyöhyke."
 
 #: drakclock:45
 #, c-format
@@ -394,13 +394,13 @@ msgid ""
 "Your computer can synchronize its clock\n"
 " with a remote time server using NTP"
 msgstr ""
-"Tietokoneesi voi tahdistaa kellonsa\n"
-"aikapalvelimeen käyttäen NTP:a"
+"Tietokoneen kello voidaan myös tahdistaa\n"
+"aikapalvelimen kanssa NTP:n avulla"
 
 #: drakclock:73
 #, c-format
 msgid "Enable Network Time Protocol"
-msgstr "Ota käyttöön NTP"
+msgstr "Ota NTP käyttöön"
 
 #: drakclock:81
 #, c-format
@@ -412,35 +412,32 @@ msgstr "Palvelin:"
 msgid "Timezone"
 msgstr "Aikavyöhyke"
 
-#: drakclock:111
-#, fuzzy, c-format
+#: drakclock:111, c-format
 msgid "Please enter a valid NTP server address."
-msgstr "Ole hyvä ja syötä pätevän IP-osoitteen."
+msgstr "Anna kelvollinen NTP-palvelimen osoite."
 
 #: drakclock:126
 #, c-format
 msgid "Could not synchronize with %s."
-msgstr "Ei voitu tahdistaa %s kanssa."
+msgstr "Ei voitu tahdistaa aikapalvelimen %s kanssa."
 
 #: drakclock:127 drakdvb:149 draksplash:125 logdrake:175 scannerdrake:491
 #, c-format
 msgid "Quit"
 msgstr "Lopeta"
 
-#: drakclock:128
-#, fuzzy, c-format
+#: drakclock:128, c-format
 msgid "Retry"
-msgstr "Palauta"
+msgstr "Yritä uudelleen"
 
 #: drakclock:151 drakclock:161
 #, c-format
 msgid "Reset"
-msgstr "Alusta"
+msgstr "Nollaa aika"
 
-#: drakdvb:30
-#, fuzzy, c-format
+#: drakdvb:30, c-format
 msgid "DVB"
-msgstr "DVD"
+msgstr "DVB"
 
 #: drakdvb:39 harddrake2:101
 #, c-format
@@ -450,12 +447,12 @@ msgstr "Kanava"
 #: drakdvb:57
 #, c-format
 msgid "%s already exists and its contents will be lost"
-msgstr ""
+msgstr "%s on jo olemassa ja sen sisältö poistetaan"
 
 #: drakdvb:74
 #, c-format
 msgid "Could not get the list of available channels"
-msgstr ""
+msgstr "Kanavalistaa ei voitu hakea"
 
 #: drakdvb:80 draksec:73 drakups:99 harddrake2:381 scannerdrake:66
 #: scannerdrake:70 scannerdrake:78 scannerdrake:319 scannerdrake:368
@@ -467,7 +464,7 @@ msgstr "Odota hetki"
 #: drakdvb:84
 #, c-format
 msgid "Detecting DVB channels, this will take a few minutes"
-msgstr ""
+msgstr "Haetaan kanavia, haku voi kestää muutamia minuutteja"
 
 #: drakdvb:85 drakfont:572 drakfont:652 drakfont:736 draksplash:213
 #: drakups:217 logdrake:175
@@ -475,52 +472,48 @@ msgstr ""
 msgid "Cancel"
 msgstr "Peruuta"
 
-#: drakdvb:148
-#, fuzzy, c-format
+#: drakdvb:148, c-format
 msgid "Detect Channels"
-msgstr "Kanava"
+msgstr "Etsi kanavat"
 
-#: drakdvb:150
-#, fuzzy, c-format
+#: drakdvb:150, c-format
 msgid "View Channel"
-msgstr "Kanava"
+msgstr "Näytä kanava"
 
 #: drakedm:41
 #, c-format
 msgid "GDM (GNOME Display Manager)"
-msgstr "GDM (GNOME Näytönhallinta)"
+msgstr "GDM (GNOMEn näytönhallinta)"
 
 #: drakedm:42
 #, c-format
 msgid "KDM (KDE Display Manager)"
-msgstr "KDM (KDE Näytönhallinta)"
+msgstr "KDM (KDEn näytönhallinta)"
 
 #: drakedm:43
 #, c-format
 msgid "XDM (X Display Manager)"
-msgstr "XDM (X Näytönhallinta)"
+msgstr "XDM (X:n näytönhallinta)"
 
 #: drakedm:54
 #, c-format
 msgid "Choosing a display manager"
-msgstr "Näytönhallinnan valitseminen"
+msgstr "Näytönhallintaohjelman valinta"
 
-#: drakedm:55
-#, c-format
+#: drakedm:55, c-format
 msgid ""
 "X11 Display Manager allows you to graphically log\n"
 "into your system with the X Window System running and supports running\n"
 "several different X sessions on your local machine at the same time."
 msgstr ""
-"X11 Näytönhallinta sallii sinua käyttämään graafista\n"
-"sisäänkirjautumista järjestelmään, jossa X-ikkunointijärjestelmä on "
-"käytössä\n"
-"ja sallii useita samanaikaisia käyttäjiä paikallisessa koneessa."
+"X11-näytönhallinta sallii graafisen kirjautumisen järjestelmään.\n"
+"Näytönhallinta mahdollistaa myös usean paikallisen ja samanaikaisen\n"
+"graafisen istunnon."
 
 #: drakedm:74
 #, c-format
 msgid "The change is done, do you want to restart the dm service?"
-msgstr "Muutos on tehty, haluatko käynnistää palvelun dm uudelleen?"
+msgstr "Muutos suoritettu, käynnistetäänkö näytönhallinta uudelleen?"
 
 #: drakedm:75
 #, c-format
@@ -529,7 +522,7 @@ msgid ""
 "Are you really sure that you want to restart the dm service?"
 msgstr ""
 "Kaikki käynnissä olevat ohjelmat suljetaan ja nykyinen istunto menetetään. "
-"Oletko varma että haluat käynnistää palvelun dm uudelleen?"
+"Oletko varma, että haluat käynnistää näytönhallinnan uudelleen?"
 
 #: drakfont:187
 #, c-format
@@ -549,7 +542,7 @@ msgstr "Kirjasimia ei löytynyt"
 #: drakfont:217
 #, c-format
 msgid "parse all fonts"
-msgstr "jäsennä kaikki kirjasimet"
+msgstr "jäsennetään kaikki kirjasimet"
 
 #: drakfont:222 drakfont:263 drakfont:338 drakfont:379 drakfont:383
 #: drakfont:409 drakfont:427 drakfont:435
@@ -560,7 +553,7 @@ msgstr "valmis"
 #: drakfont:226
 #, c-format
 msgid "Could not find any font in your mounted partitions"
-msgstr "Liitetyiltä osioilta ei löytynyt yhtään kirjasinta"
+msgstr "Liitetyiltä osioilta ei löytynyt kirjasimia"
 
 #: drakfont:261
 #, c-format
@@ -580,17 +573,17 @@ msgstr "Etsi kirjasimia asennettujen listalta"
 #: drakfont:298
 #, c-format
 msgid "%s fonts conversion"
-msgstr "%s kirjasinten muunnos"
+msgstr "Muunnetaan %s-kirjasimia"
 
 #: drakfont:336
 #, c-format
 msgid "Fonts copy"
-msgstr "Kirjasimien kopioiminen"
+msgstr "Kopioidaan kirjasimia"
 
 #: drakfont:339
 #, c-format
 msgid "True Type fonts installation"
-msgstr "True Type -kirjasimien asennus"
+msgstr "Asennetaan True Type -kirjasimia"
 
 #: drakfont:347
 #, c-format
@@ -600,22 +593,22 @@ msgstr "odota kunnes ttmkfdir on valmis..."
 #: drakfont:348
 #, c-format
 msgid "True Type install done"
-msgstr "True Type -asennus valmis"
+msgstr "True Type -kirjasinten asennus on valmis"
 
 #: drakfont:354 drakfont:369
 #, c-format
 msgid "type1inst building"
-msgstr "rakennetaan: type1inst"
+msgstr "Rakennetaan: type1inst"
 
 #: drakfont:363
 #, c-format
 msgid "Ghostscript referencing"
-msgstr "Ghostscript viittaus"
+msgstr "Asetetaan Ghostscript-viittaukset"
 
 #: drakfont:380
 #, c-format
 msgid "Suppress Temporary Files"
-msgstr "Poista väliaikaistiedostot"
+msgstr "Poistetaan väliaikaiset tiedostot"
 
 #: drakfont:425 drakfont:431
 #, c-format
@@ -631,16 +624,15 @@ msgid ""
 "You can install the fonts the normal way. In rare cases, bogus fonts may "
 "hang up your X Server."
 msgstr ""
-"Ennen kuin asennat uusia kirjasimia varmista, että sinulla on oikeudet "
-"käyttää niitä ja asentaa ne järjestelmääsi.\n"
+"Ennen uusien kirjasinten asentamista, varmista, että sinulla on "
+"oikeudet käyttää ja asentaa kirjasimia järjestelmään.\n"
 "\n"
-"Voit asentaa kirjasimet perinteisellä tavalla. Harvoissa tapauksissa "
+"Kirjasimet voidaan asentaa normaaliin tapaan. Harvoissa tapauksissa "
 "vialliset kirjasimet voivat kaataa X-palvelimen."
 
-#: drakfont:478
-#, fuzzy, c-format
+#: drakfont:478, c-format
 msgid "Font Installation"
-msgstr "Asennuksen jälkeiset toiminnot"
+msgstr "Kirjasinten asennus"
 
 #: drakfont:489
 #, c-format
@@ -650,12 +642,12 @@ msgstr "DrakFont"
 #: drakfont:490 drakfont:642
 #, c-format
 msgid "Font List"
-msgstr "Kirjasinlista"
+msgstr "Lista kirjasimista"
 
 #: drakfont:493
 #, c-format
 msgid "Get Windows Fonts"
-msgstr ""
+msgstr "Tuo Windows-fontit"
 
 #: drakfont:499
 #, c-format
@@ -665,7 +657,7 @@ msgstr "Tietoja"
 #: drakfont:500 drakfont:541
 #, c-format
 msgid "Options"
-msgstr "Optiot"
+msgstr "Asetukset"
 
 #: drakfont:501 drakfont:721
 #, c-format
@@ -677,10 +669,9 @@ msgstr "Poista"
 msgid "Import"
 msgstr "Tuo"
 
-#: drakfont:520
-#, fuzzy, c-format
+#: drakfont:520, c-format
 msgid "Drakfont"
-msgstr "DrakFont"
+msgstr "Drakfont"
 
 #: drakfont:522 harddrake2:236
 #, c-format
@@ -688,10 +679,9 @@ msgid "Copyright (C) %s by Mandriva"
 msgstr "Copyright (C) %s, Mandriva"
 
 # Asennuksen sivuvalikko
-#: drakfont:524
-#, fuzzy, c-format
+#: drakfont:524, c-format
 msgid "Font installer."
-msgstr "Ei asennettu"
+msgstr "Kirjasimien asennus."
 
 #: drakfont:526 harddrake2:240
 #, c-format
@@ -703,7 +693,9 @@ msgstr "Mandriva Linux"
 #: drakfont:533 harddrake2:245
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
-msgstr "Thomas Backlund <tmb@mandrake.org>\n"
+msgstr ""
+"Thomas Backlund <tmb@mandrake.org>\n"
+"Jani Välimaa <jani.valimaa@gmail.com>\n"
 
 #: drakfont:543
 #, c-format
@@ -718,7 +710,7 @@ msgstr "Ghostscript"
 #: drakfont:555
 #, c-format
 msgid "OpenOffice.org"
-msgstr ""
+msgstr "OpenOffice.org"
 
 #: drakfont:556
 #, c-format
@@ -773,7 +765,7 @@ msgstr "Asenna"
 #: drakfont:684
 #, c-format
 msgid "Are you sure you want to uninstall the following fonts?"
-msgstr ""
+msgstr "Haluatko varmasti poistaa seuraavat fontit?"
 
 #: drakfont:688 draksec:60 harddrake2:326
 #, c-format
@@ -788,7 +780,7 @@ msgstr "Ei"
 #: drakfont:729
 #, c-format
 msgid "Unselect All"
-msgstr "Poista valinta kaikista"
+msgstr "Poista valinnat"
 
 #: drakfont:732
 #, c-format
@@ -798,7 +790,7 @@ msgstr "Valitse kaikki"
 #: drakfont:749
 #, c-format
 msgid "Importing fonts"
-msgstr "Tuodaan kirjasimia"
+msgstr "Kirjasimien tuonti"
 
 #: drakfont:753 drakfont:773
 #, c-format
@@ -808,27 +800,26 @@ msgstr "Alkutestit"
 #: drakfont:754
 #, c-format
 msgid "Copy fonts on your system"
-msgstr "Kopioi kirjasimet järjestelmääsi"
+msgstr "Kirjasinten kopiointi järjestelmään"
 
 #: drakfont:755
 #, c-format
 msgid "Install & convert Fonts"
-msgstr "Asenna & muunna kirjasimia"
+msgstr "Kirjasinten asennus ja muunto"
 
 #: drakfont:756
 #, c-format
 msgid "Post Install"
 msgstr "Asennuksen jälkeiset toiminnot"
 
-#: drakfont:768
-#, fuzzy, c-format
+#: drakfont:768, c-format
 msgid "Removing fonts"
-msgstr "Tuodaan kirjasimia"
+msgstr "Kirjasimien poisto"
 
 #: drakfont:774
 #, c-format
 msgid "Remove fonts on your system"
-msgstr "Poista järjestelmässäsi olevia kirjasimia"
+msgstr "Poista kirjasimet järjestelmästä"
 
 #: drakfont:775
 #, c-format
@@ -861,7 +852,7 @@ msgstr " --help                - näytä tämä ohje     \n"
 #, c-format
 msgid ""
 " --id <id_label>       - load the html help page which refers to id_label\n"
-msgstr " --id <id_label>       - lataa html ohjesivu joka koskee id_label\n"
+msgstr " --id <id_label>       - lataa id_label:ia koskeva html-ohjesivu\n"
 
 #: drakhelp:24
 #, c-format
@@ -869,18 +860,18 @@ msgid ""
 " --doc <link>          - link to another web page ( for WM welcome "
 "frontend)\n"
 msgstr ""
-" --doc <linkki>        - linkki toiselle webbisivustolle (WM tervetuloa-"
+" --doc <linkki>        - linkki toiselle Internet-sivulle (WM tervetuloa-"
 "etusivulle)\n"
 
 #: drakhelp:52
 #, c-format
 msgid "Mandriva Linux Help Center"
-msgstr "Mandriva Linux Apukeskus"
+msgstr "Mandriva Linuxin apukeskus"
 
 #: drakhelp:52
 #, c-format
 msgid "No Help entry for %s\n"
-msgstr ""
+msgstr "Ei ohjetta aiheelle %s\n"
 
 #: drakperm:23
 #, c-format
@@ -895,12 +886,11 @@ msgstr "Mukautetut asetukset"
 #: drakperm:25
 #, c-format
 msgid "Custom & system settings"
-msgstr "Mukautetut & järjestelmäasetukset"
+msgstr "Mukautetut ja järjestelmäasetukset"
 
-#: drakperm:33
-#, fuzzy, c-format
+#: drakperm:33, c-format
 msgid "Security Permissions"
-msgstr "Oikeudet"
+msgstr "Oikeusasetukset"
 
 #: drakperm:45
 #, c-format
@@ -930,7 +920,7 @@ msgstr "Oikeudet"
 #: drakperm:60
 #, c-format
 msgid "Add a new rule"
-msgstr ""
+msgstr "Lisää uusi sääntö"
 
 #: drakperm:67 drakperm:102 drakperm:128
 #, c-format
@@ -946,7 +936,7 @@ msgid ""
 msgstr ""
 "Täällä voit nähdä käytettävät tiedostot muuttaaksesi oikeuksia, omistajia ja "
 "ryhmiä msecin kautta.\n"
-"Voit myös lisätä omia sääntöjäsi jotka ohittavat oletussäännöt."
+"Voit myös lisätä oletussääntöjä ohittavia omia sääntöjä."
 
 #: drakperm:112
 #, c-format
@@ -954,8 +944,8 @@ msgid ""
 "The current security level is %s.\n"
 "Select permissions to see/edit"
 msgstr ""
-"Nykyinen turvallisuustaso on %s.\n"
-"Valitse oikeudet jos haluat nähdä/muokata sitä."
+"Nykyinen turvallisuustaso on: %s\n"
+"Valitse oikeudet katsoaksesi tai muokataksesi niitä"
 
 #: drakperm:124
 #, c-format
@@ -965,7 +955,7 @@ msgstr "Ylös"
 #: drakperm:124
 #, c-format
 msgid "Move selected rule up one level"
-msgstr "Ylennä valittua sääntöä yksi taso"
+msgstr "Siirrä sääntöä yksi taso ylemmäs"
 
 #: drakperm:125
 #, c-format
@@ -975,7 +965,7 @@ msgstr "Alas"
 #: drakperm:125
 #, c-format
 msgid "Move selected rule down one level"
-msgstr "Alenna valittua sääntöä yksi taso"
+msgstr "Siirrä sääntöä yksi taso alemmas"
 
 #: drakperm:126
 #, c-format
@@ -1063,7 +1053,7 @@ msgstr "Salli \"%s\" suorittaa tiedostoa"
 #: drakperm:271
 #, c-format
 msgid "Sticky-bit"
-msgstr "Tahmea-bitti"
+msgstr "Sticky-bitti"
 
 #: drakperm:271
 #, c-format
@@ -1082,7 +1072,7 @@ msgstr "Aseta-UID"
 #: drakperm:272
 #, c-format
 msgid "Use owner id for execution"
-msgstr "käytä omistaja-id:tä suoritukseen"
+msgstr "Käytä omistaja-id:tä suoritukseen"
 
 #: drakperm:273
 #, c-format
@@ -1092,7 +1082,7 @@ msgstr "Aseta-GID"
 #: drakperm:273
 #, c-format
 msgid "Use group id for execution"
-msgstr "käytä ryhmä-id:tä suoritukseen"
+msgstr "Käytä ryhmä-id:tä suoritukseen"
 
 #: drakperm:290
 #, c-format
@@ -1130,21 +1120,23 @@ msgid ""
 "The first character of the path must be a slash (\"/\"):\n"
 "\"%s\""
 msgstr ""
+"Polun ensimmäisen merkin tulee olla kauttaviiva \"/\":\n"
+"\"%s\""
 
 #: drakperm:386
 #, c-format
 msgid "Both the username and the group must valid!"
-msgstr ""
+msgstr "Käyttäjätunnuksen ja ryhmän tulee olla olemassa!"
 
 #: drakperm:387
 #, c-format
 msgid "User: %s"
-msgstr ""
+msgstr "Käyttäjä: %s"
 
 #: drakperm:388
 #, c-format
 msgid "Group: %s"
-msgstr ""
+msgstr "Tyhmä: %s"
 
 #: draksec:54
 #, c-format
@@ -1171,15 +1163,14 @@ msgstr "Oletus"
 msgid "Ignore"
 msgstr "Älä huomioi"
 
-#: draksec:91
-#, fuzzy, c-format
+#: draksec:91, c-format
 msgid "Security Level and Checks"
-msgstr "Turvallisuustaso:"
+msgstr "Turvallisuustaso ja -tarkistukset:"
 
 #: draksec:114
 #, c-format
 msgid "Configure authentication required to access Mandriva tools"
-msgstr ""
+msgstr "Määritä Mandrivan asetustyökalujen käyttämiseen tarvittavat oikeudet"
 
 #: draksec:117
 #, c-format
@@ -1189,22 +1180,21 @@ msgstr "Ei salasanaa"
 #: draksec:118
 #, c-format
 msgid "Root password"
-msgstr ""
+msgstr "Pääkäyttäjän salasana"
 
 #: draksec:119
 #, c-format
 msgid "User password"
-msgstr ""
+msgstr "Käyttäjän salasana"
 
 #: draksec:149 draksec:204
 #, c-format
 msgid "Software Management"
 msgstr "Ohjelmistojen hallinta"
 
-#: draksec:150
-#, fuzzy, c-format
+#: draksec:150, c-format
 msgid "Mandriva Update"
-msgstr "Mandriva Online"
+msgstr "Järjestelmän päivitys"
 
 #: draksec:151
 #, c-format
@@ -1214,37 +1204,32 @@ msgstr "Ohjelmistolähteiden hallinta"
 #: draksec:152
 #, c-format
 msgid "Configure 3D Desktop effects"
-msgstr "Aseta 3D Työpöytätehosteita"
+msgstr "3D-työpöytätehosteiden asetukset"
 
-#: draksec:153
-#, fuzzy, c-format
+#: draksec:153, c-format
 msgid "Graphical Server Configuration"
-msgstr "Postihälytyksen asetukset"
+msgstr "Graafisen palvelimen asetukset"
 
-#: draksec:154
-#, fuzzy, c-format
+#: draksec:154, c-format
 msgid "Mouse Configuration"
-msgstr "Manuaalinen asettaminen"
+msgstr "Hiiren asetukset"
 
-#: draksec:155
-#, fuzzy, c-format
+#: draksec:155, c-format
 msgid "Keyboard Configuration"
-msgstr "Verkon asetukset"
+msgstr "Näppäimistön asetukset"
 
-#: draksec:156
-#, fuzzy, c-format
+#: draksec:156, c-format
 msgid "UPS Configuration"
-msgstr "UPS ajurin asetukset"
+msgstr "UPS-asetukset"
 
-#: draksec:157
-#, fuzzy, c-format
+#: draksec:157, c-format
 msgid "Network Configuration"
-msgstr "Hälytyksen asetukset"
+msgstr "Verkkoasetukset"
 
 #: draksec:158
 #, c-format
 msgid "Hosts definitions"
-msgstr "Koneiden määritykset"
+msgstr "Verkkokoneiden nimimääritykset"
 
 #: draksec:159
 #, c-format
@@ -1254,22 +1239,21 @@ msgstr "Verkkokeskus"
 #: draksec:160
 #, c-format
 msgid "Wireless Network Roaming"
-msgstr ""
+msgstr "Langattoman verkon asetukset"
 
 #: draksec:161
 #, c-format
 msgid "VPN"
-msgstr ""
+msgstr "VPN-yhteyksien asetukset"
 
 #: draksec:162
 #, c-format
 msgid "Proxy Configuration"
-msgstr "Välimuistin hallinta"
+msgstr "Välityspalvelimien asetukset"
 
-#: draksec:163
-#, fuzzy, c-format
+#: draksec:163, c-format
 msgid "Connection Sharing"
-msgstr "Yhteys"
+msgstr "Verkkoyhteyden jakaminen"
 
 #: draksec:165
 #, c-format
@@ -1286,30 +1270,27 @@ msgstr "Lokit"
 msgid "Services"
 msgstr "Palvelut"
 
-#: draksec:169
-#, fuzzy, c-format
+#: draksec:169, c-format
 msgid "Users"
-msgstr "Käyttäjä"
+msgstr "Käyttäjien hallinta"
 
-#: draksec:171
-#, fuzzy, c-format
+#: draksec:171, c-format
 msgid "Boot Configuration"
-msgstr "Hälytyksen asetukset"
+msgstr "Käynnistymisasetukset"
 
 #: draksec:205
 #, c-format
 msgid "Hardware"
 msgstr "Laitteisto"
 
-#: draksec:206
-#, fuzzy, c-format
+#: draksec:206, c-format
 msgid "Network"
-msgstr "Verkko-optiot"
+msgstr "Verkko"
 
 #: draksec:207
 #, c-format
 msgid "System"
-msgstr "Järjestelmä"
+msgstr "Järjestelmäasetukset"
 
 #: draksec:208
 #, c-format
@@ -1319,7 +1300,7 @@ msgstr "Käynnistys"
 #: draksound:48
 #, c-format
 msgid "No Sound Card detected!"
-msgstr "Äänikorttia ei löydetty!"
+msgstr "Äänikorttia ei löytynyt!"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: draksound:51
@@ -1334,11 +1315,11 @@ msgid ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 msgstr ""
-"Yhtäkään äänikorttia ei löydetty koneestasi. Varmista, että Linux-tuettu "
-"äänikortti on kytketty oikein.\n"
+"Yhtään äänikorttia ei löytynyt. Varmista, että Linuxissa tuettu "
+"äänikortti on oikein kytketty.\n"
 "\n"
 "\n"
-"Voit katsoa meidän laitteistotietokantaa osoitteesta:\n"
+"Mandriva Linuxin laitteistotietokanta löytyy osoitteesta:\n"
 "\n"
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
@@ -1355,23 +1336,23 @@ msgstr ""
 "\n"
 "\n"
 "\n"
-"Huomaa: Jos sinulla on ISA PnP äänikortti, sinun pitää käyttää alsaconf tai "
-"sndconfig ohjelmaa. Eli kirjoita \"alsaconf\" tai \"sndconfig\" konsolissa."
+"HUOM: Jos koneessa on ISA-väylään kytketty PnP-äänikortti, täytyy "
+"konsolissa suorittaa komento \"alsaconf\" tai \"sndconfig\"."
 
 #: draksplash:33
 #, c-format
 msgid "X coordinate of text box"
-msgstr ""
+msgstr "Tekstiruudun sijainti (X-koordinaatti)"
 
 #: draksplash:34
 #, c-format
 msgid "Y coordinate of text box"
-msgstr ""
+msgstr "Tekstiruudun sijainti (Y-koordinaatti)"
 
 #: draksplash:35
 #, c-format
 msgid "Text box width"
-msgstr ""
+msgstr "Tekstiruudun leveys"
 
 #: draksplash:36
 #, c-format
@@ -1384,8 +1365,8 @@ msgid ""
 "The progress bar X coordinate\n"
 "of its upper left corner"
 msgstr ""
-"Edistymispalkin x-koordinaatti\n"
-"(vasen yläkulma)"
+"Edistymispalkin vasemman\n"
+"yläkulman X-koordinaatti"
 
 #: draksplash:38
 #, c-format
@@ -1393,8 +1374,8 @@ msgid ""
 "The progress bar Y coordinate\n"
 "of its upper left corner"
 msgstr ""
-"Edistymispalkin y-koordinaatti\n"
-"(vasen yläkulma)"
+"Edistymispalkin vasemman\n"
+"yläkulman Y-koordinaatti"
 
 #: draksplash:39
 #, c-format
@@ -1409,77 +1390,76 @@ msgstr "Edistymispalkin korkeus"
 #: draksplash:41
 #, c-format
 msgid "X coordinate of the text"
-msgstr ""
+msgstr "Tekstin sijainti (X-koordinaatti)"
 
 #: draksplash:42
 #, c-format
 msgid "Y coordinate of the text"
-msgstr ""
+msgstr "Tekstin sijainti (Y-koordinaatti)"
 
 #: draksplash:43
 #, c-format
 msgid "Text box transparency"
-msgstr ""
+msgstr "Tekstiruudun läpinäkyvyys"
 
 #: draksplash:44
 #, c-format
 msgid "Progress box transparency"
-msgstr ""
+msgstr "Edistymispalkin läpinäkyvyys"
 
 #: draksplash:45
 #, c-format
 msgid "Text size"
-msgstr ""
+msgstr "Tekstin koko"
 
 #: draksplash:62
 #, c-format
 msgid "Progress Bar"
-msgstr ""
+msgstr "Edistymispalkki"
 
 #: draksplash:65
 #, c-format
 msgid "Choose progress bar color 1"
-msgstr ""
+msgstr "Edistymispalkin väri 1"
 
 #: draksplash:67
 #, c-format
 msgid "Choose progress bar color 2"
-msgstr ""
+msgstr "Edistymispalkin väri 2"
 
 #: draksplash:69
 #, c-format
 msgid "Choose progress bar background"
-msgstr ""
+msgstr "Edistymispalkin taustaväri"
 
 #: draksplash:72
 #, c-format
 msgid "Gradient type"
-msgstr ""
+msgstr "Gradientin tyyppi"
 
-#: draksplash:78
-#, fuzzy, c-format
+#: draksplash:78, c-format
 msgid "Text"
-msgstr "Pelkkä teksti"
+msgstr "Teksti"
 
 #: draksplash:80
 #, c-format
 msgid "Choose text color"
-msgstr ""
+msgstr "Tekstin väri"
 
 #: draksplash:83 draksplash:102
 #, c-format
 msgid "Choose picture"
-msgstr ""
+msgstr "Kuva"
 
 #: draksplash:87
 #, c-format
 msgid "Silent bootsplash"
-msgstr ""
+msgstr "Hiljainen"
 
 #: draksplash:90
 #, c-format
 msgid "Choose text zone color"
-msgstr ""
+msgstr "Tekstialueen väri"
 
 #: draksplash:93
 #, c-format
@@ -1494,7 +1474,7 @@ msgstr "Taustaväri"
 #: draksplash:103
 #, c-format
 msgid "Verbose bootsplash"
-msgstr ""
+msgstr "Monisanainen"
 
 #: draksplash:110
 #, c-format
@@ -1516,25 +1496,23 @@ msgstr "Näytä logo konsolissa"
 msgid "Save theme"
 msgstr "Tallenna teema"
 
-#: draksplash:187
-#, fuzzy, c-format
+#: draksplash:187, c-format
 msgid "Please enter a theme name"
-msgstr "Syötä tälle kortille käytettävät langattoman verkon asetukset:"
+msgstr "Anna teemalle nimi"
 
-#: draksplash:190
-#, fuzzy, c-format
+#: draksplash:190, c-format
 msgid "Please select a splash image"
-msgstr "Ole hyvä ja valitse UPS-laitteesi malli."
+msgstr "Valitse käytettävä kuva"
 
 #: draksplash:193
 #, c-format
 msgid "saving Bootsplash theme..."
-msgstr "tallennetaan Bootsplash teema..."
+msgstr "tallennetaan Bootsplash-teema..."
 
 #: draksplash:202
 #, c-format
 msgid "Unable to load image file %s"
-msgstr ""
+msgstr "Kuvaa %s ei voida avata"
 
 #: draksplash:213
 #, c-format
@@ -1544,7 +1522,7 @@ msgstr "valitse kuva"
 #: draksplash:228
 #, c-format
 msgid "Color selection"
-msgstr ""
+msgstr "Värin valinta"
 
 #: drakups:71
 #, c-format
@@ -1568,9 +1546,9 @@ msgid ""
 "\n"
 "Here, you'll add a new UPS to your system.\n"
 msgstr ""
-"Tervetuloa UPS asetustyökaluun.\n"
+"Tervetuloa UPS-asetustyökaluun.\n"
 "\n"
-"Täältä voit lisätä uuden UPS:in järjestelmääsi.\n"
+"Täältä voit lisätä järjestelmään uuden UPS:in.\n"
 
 #: drakups:88
 #, c-format
@@ -1580,9 +1558,10 @@ msgid ""
 "Do you want to autodetect UPS devices connected to this machine or to "
 "manually select them?"
 msgstr ""
-"Lisäämme nyt UPS-laitetta.\n"
+"Lisätään UPS-laite..\n"
 "\n"
-"Haluatko tunnistaa liitetyt UPS-laitteet automaattisesti vai valita ne itse?"
+"Tunnistetaanko liitetyt UPS-laitteet automaattisesti vai haluatko "
+"valita ne itse?"
 
 #: drakups:91
 #, c-format
@@ -1602,7 +1581,7 @@ msgstr "Onnittelut"
 #: drakups:119
 #, c-format
 msgid "The wizard successfully added the following UPS devices:"
-msgstr "Velho lisäsi seuraavat UPS-laitteet onnistuneesti."
+msgstr "Velho lisäsi onnistuneesti seuraavat UPS-laitteet:"
 
 #: drakups:121
 #, c-format
@@ -1612,12 +1591,12 @@ msgstr "Uusia UPS-laitteita ei löytynyt"
 #: drakups:126 drakups:138
 #, c-format
 msgid "UPS driver configuration"
-msgstr "UPS ajurin asetukset"
+msgstr "UPS-ajurin asetukset"
 
 #: drakups:126
 #, c-format
 msgid "Please select your UPS model."
-msgstr "Ole hyvä ja valitse UPS-laitteesi malli."
+msgstr "Valitse UPS-laitteen malli."
 
 #: drakups:127
 #, c-format
@@ -1630,8 +1609,8 @@ msgid ""
 "We are configuring the \"%s\" UPS from \"%s\".\n"
 "Please fill in its name, its driver and its port."
 msgstr ""
-"Asetamme  \"%s\" UPS laitteesi kohteelta \"%s\".\n"
-"Ole hyvä ja täytä nimi, ajuri ja portti."
+"Asetetaan UPS-laitetta \"%s\" kohteesta \"%s\".\n"
+"Anna laitteen nimi, käytettävä ajuri ja portti."
 
 #: drakups:143
 #, c-format
@@ -1641,7 +1620,7 @@ msgstr "Nimi:"
 #: drakups:143
 #, c-format
 msgid "The name of your ups"
-msgstr "UPS-laitteesi nimi"
+msgstr "Laitteen nimi"
 
 #: drakups:144
 #, c-format
@@ -1651,7 +1630,7 @@ msgstr "Ajuri:"
 #: drakups:144
 #, c-format
 msgid "The driver that manages your ups"
-msgstr "Ajuri joka ohjaa UPS-laitettasi"
+msgstr "UPS-laitetta ohjaava ajuri"
 
 #: drakups:145
 #, c-format
@@ -1661,17 +1640,17 @@ msgstr "Portti:"
 #: drakups:147
 #, c-format
 msgid "The port on which is connected your ups"
-msgstr "Portti johon UPS-laitteesi on kytketty"
+msgstr "Portti, UPS-laite on kytketty"
 
 #: drakups:157
 #, c-format
 msgid "The wizard successfully configured the new \"%s\" UPS device."
-msgstr "Velho asetti onnistuneesti uuden UPS laitteen \"%s\"."
+msgstr "Velho asetti onnistuneesti uuden UPS-laitteen \"%s\"."
 
 #: drakups:248
 #, c-format
 msgid "UPS devices"
-msgstr "UPS laitteet"
+msgstr "UPS-laitteet"
 
 #: drakups:249 drakups:268 drakups:284 harddrake2:89 harddrake2:115
 #: harddrake2:122
@@ -1692,12 +1671,12 @@ msgstr "Portti"
 #: drakups:267
 #, c-format
 msgid "UPS users"
-msgstr "UPS käyttäjät"
+msgstr "UPS-käyttäjät"
 
 #: drakups:283
 #, c-format
 msgid "Access Control Lists"
-msgstr "ACL käyttöoikeuslistat"
+msgstr "Käyttöoikeuslistat (ACL)"
 
 #: drakups:284
 #, c-format
@@ -1707,7 +1686,7 @@ msgstr "IP-osoite"
 #: drakups:284
 #, c-format
 msgid "IP mask"
-msgstr "IP maski"
+msgstr "Aliverkon peite"
 
 #: drakups:296
 #, c-format
@@ -1727,17 +1706,16 @@ msgstr "Taso"
 #: drakups:297
 #, c-format
 msgid "ACL name"
-msgstr "ACL nimi"
+msgstr "Käyttöoikeuslistan nimi"
 
 #: drakups:297 finish-install:179
 #, c-format
 msgid "Password"
 msgstr "Salasana"
 
-#: drakups:329
-#, fuzzy, c-format
+#: drakups:329, c-format
 msgid "UPS Management"
-msgstr "Tulostinhallinta %s"
+msgstr "UPS-laitehallinta"
 
 #: drakups:333 drakups:342
 #, c-format
@@ -1747,12 +1725,12 @@ msgstr "DrakUPS"
 #: drakups:339
 #, c-format
 msgid "Welcome to the UPS configuration tools"
-msgstr "Tervetuloa UPS asetustyökaluihin"
+msgstr "Tervetuloa UPS-laitteiden asetustyökaluihin"
 
 #: drakxtv:67
 #, c-format
 msgid "No TV Card detected!"
-msgstr "Yhtäkään TV-korttia ei löydetty."
+msgstr "Yhtään TV-korttia ei löytynyt!"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: drakxtv:69
@@ -1767,14 +1745,14 @@ msgid ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 msgstr ""
-"Yhtäkään TV-korttia ei löydetty koneestasi. Varmista, että Linux-tuettu "
-"Video/TV-kortti on kytketty oikein.\n"
+"Yhtään TV-korttia ei löytynyt. Varmista, että Linuxissa tuettu "
+"Video/TV-kortti on oikein kytketty.\n"
 "\n"
 "\n"
-"Voit katsoa laitteistotietokantaamme osoitteesta:\n"
+"Mandriva Linuxin laitteistotietokanta löytyy osoitteesta:\n"
 "\n"
 "\n"
-"http://www.mandrivalinux.com/en/hardware.php3"
+"http://www.mandrivalinux.com/en/hardware.php"
 
 #: finish-install:56
 #, c-format
@@ -1784,17 +1762,17 @@ msgstr "Näppäimistö"
 #: finish-install:57
 #, c-format
 msgid "Please, choose your keyboard layout."
-msgstr "Valitse näppäimistösi asettelu."
+msgstr "Valitse näppäimistöasettelu."
 
 #: finish-install:177 finish-install:195 finish-install:207
 #, c-format
 msgid "Encrypted home partition"
-msgstr ""
+msgstr "Salattu kotikansio"
 
 #: finish-install:177
 #, c-format
 msgid "Please enter a password for the %s user"
-msgstr ""
+msgstr "Anna käyttäjän %s salasana"
 
 #: finish-install:180
 #, c-format
@@ -1804,12 +1782,12 @@ msgstr "Salasana (uudelleen)"
 #: finish-install:195
 #, c-format
 msgid "Creating encrypted home partition"
-msgstr ""
+msgstr "Luodaan salattua kotikansiota"
 
 #: finish-install:207
 #, c-format
 msgid "Formatting encrypted home partition"
-msgstr ""
+msgstr "Alustetaan salattua kotikansiota"
 
 #: harddrake2:29
 #, c-format
@@ -1819,7 +1797,7 @@ msgstr "Vaihtoehtoiset ajurit"
 #: harddrake2:30
 #, c-format
 msgid "the list of alternative drivers for this sound card"
-msgstr "lista vaihtoehtoisista ajureista tälle äänikortille"
+msgstr "Äänikortille tarkoitetut vaihtoehtoiset ajurit."
 
 #: harddrake2:32 harddrake2:124
 #, c-format
@@ -1830,7 +1808,7 @@ msgstr "Väylä"
 #, c-format
 msgid ""
 "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
-msgstr "tämä on fyysinen väylä, johon laite on kytketty (esim PCI, USB, ...)"
+msgstr "fyysinen väylä, johon laite on kytketty (esim. PCI tai USB)."
 
 #: harddrake2:35 harddrake2:150
 #, c-format
@@ -1843,8 +1821,8 @@ msgid ""
 "- PCI and USB devices: this lists the vendor, device, subvendor and "
 "subdevice PCI/USB ids"
 msgstr ""
-"- PCI- ja USB-laitteet: tämä listaa valmistajan, laitteen, alivalmistajan ja "
-"alilaitteen PCI/USB id:t"
+"- PCI- ja USB-laitteet: listaa valmistajan, laitteen, alivalmistajan ja "
+"alilaitteen PCI/USB-tunnistenumerot."
 
 #: harddrake2:38
 #, c-format
@@ -1858,10 +1836,9 @@ msgid ""
 "- eide devices: the device is either a slave or a master device\n"
 "- scsi devices: the scsi bus and the scsi device ids"
 msgstr ""
-"- PCI-laitteet: tämä kertoo PCI-korttipaikan, laitteen sekä kortin "
-"toiminnon\n"
-"- EIDE-laitteet: tämä laite on joko orja- tai isäntälaite\n"
-"- SCSI-laitteet: SCSI-väylä sekä SCSI-laitteiden id:t"
+"- PCI-laitteet: Laitteen PCI-väylä, laite ja toiminto"
+"- EIDE-laitteet: Orja- tai isäntälaite\n"
+"- SCSI-laitteet: SCSI-väylä ja laitteen tunnistenumero"
 
 #: harddrake2:42
 #, c-format
@@ -1871,7 +1848,7 @@ msgstr "Aseman kapasiteetti"
 #: harddrake2:42
 #, c-format
 msgid "special capacities of the driver (burning ability and or DVD support)"
-msgstr "erikoisominaisuudet ajurissa (polttomahdollisuus ja/tai DVD tuki)"
+msgstr "Ajurin erikoisominaisuudet (polttomahdollisuus ja/tai DVD-tuki)."
 
 #: harddrake2:43
 #, c-format
@@ -1881,7 +1858,7 @@ msgstr "Kuvaus"
 #: harddrake2:43
 #, c-format
 msgid "this field describes the device"
-msgstr "Tämä kenttä kuvaa laitteen"
+msgstr "Laitteen kuvaus."
 
 #: harddrake2:44
 #, c-format
@@ -1891,7 +1868,7 @@ msgstr "Vanha laitetiedosto"
 #: harddrake2:45
 #, c-format
 msgid "old static device name used in dev package"
-msgstr "vanha staattinen laitenimi jota on käytetty dev-paketissa"
+msgstr "Vanha staattinen laitteen nimi."
 
 #. -PO: here "module" is the "jargon term" for a kernel driver
 #: harddrake2:48
@@ -1902,7 +1879,7 @@ msgstr "Moduuli"
 #: harddrake2:48
 #, c-format
 msgid "the module of the GNU/Linux kernel that handles the device"
-msgstr "GNU/Linux ytimen moduuli joka käsittelee kyseistä laitetta"
+msgstr "GNU/Linux-ytimen moduuli, joka käsittelee kyseistä laitetta."
 
 #: harddrake2:49
 #, c-format
@@ -1912,7 +1889,7 @@ msgstr "Laajennetut osiot"
 #: harddrake2:49
 #, c-format
 msgid "the number of extended partitions"
-msgstr "laajennettujen osioiden lukumäärä"
+msgstr "Laajennettujen osioiden lukumäärä."
 
 #: harddrake2:50
 #, c-format
@@ -1922,37 +1899,35 @@ msgstr "Geometria"
 #: harddrake2:50
 #, c-format
 msgid "Cylinder/head/sectors geometry of the disk"
-msgstr "Levyn sylinteri/pää/sektori-geometria"
+msgstr "Levyn sylinteri/pää/sektori-lukumäärät."
 
 #: harddrake2:51
 #, c-format
 msgid "Disk controller"
-msgstr "Levyohjaimet"
+msgstr "Levyohjain"
 
 #: harddrake2:51
 #, c-format
 msgid "the disk controller on the host side"
-msgstr "levyohjain isäntäpuolella"
+msgstr "Emolevyn levyohjain."
 
-#: harddrake2:52
-#, fuzzy, c-format
+#: harddrake2:52, c-format
 msgid "Identifier"
-msgstr "Levyn tunniste"
+msgstr "Tunniste"
 
-#: harddrake2:52
-#, fuzzy, c-format
+#: harddrake2:52, c-format
 msgid "usually the device serial number"
-msgstr "yleensä levyn sarjanumero"
+msgstr "Yleensä levyn sarjanumero."
 
 #: harddrake2:53
 #, c-format
 msgid "Media class"
-msgstr "Media luokka"
+msgstr "Medialuokka"
 
 #: harddrake2:53
 #, c-format
 msgid "class of hardware device"
-msgstr "rautatason laiteluokka"
+msgstr "Rautatason laiteluokka."
 
 #: harddrake2:54 harddrake2:87
 #, c-format
@@ -1962,12 +1937,12 @@ msgstr "Malli"
 #: harddrake2:54
 #, c-format
 msgid "hard disk model"
-msgstr "kiintolevyn malli"
+msgstr "Kiintolevyn malli."
 
 #: harddrake2:55
 #, c-format
 msgid "network printer port"
-msgstr "verkkotulostimen portti"
+msgstr "Verkkotulostimen portti."
 
 #: harddrake2:56
 #, c-format
@@ -1977,7 +1952,7 @@ msgstr "Ensisijaiset osiot"
 #: harddrake2:56
 #, c-format
 msgid "the number of the primary partitions"
-msgstr "Ensisijaisten osioiden lukumäärä"
+msgstr "Ensisijaisten osioiden lukumäärä."
 
 #: harddrake2:57 harddrake2:92
 #, c-format
@@ -1987,47 +1962,46 @@ msgstr "Valmistaja"
 #: harddrake2:57
 #, c-format
 msgid "the vendor name of the device"
-msgstr "laitteen valmistaja"
+msgstr "Laitteen valmistaja."
 
 #: harddrake2:58
 #, c-format
 msgid "PCI domain"
-msgstr ""
+msgstr "PCI-domain"
 
-#: harddrake2:58
-#, fuzzy, c-format
+#: harddrake2:58, c-format
 msgid "the PCI domain of the device"
-msgstr "laitteen valmistaja"
+msgstr "Laitteen PCI-domain."
 
 #: harddrake2:59
 #, c-format
 msgid "Bus PCI #"
-msgstr "Väylä PCI #"
+msgstr "PCI-väylänumero"
 
 #: harddrake2:59
 #, c-format
 msgid "the PCI bus on which the device is plugged"
-msgstr "PCI-väylä johon laite on kytketty"
+msgstr "PCI-väylä, johon laite on kytketty."
 
 #: harddrake2:60
 #, c-format
 msgid "PCI device #"
-msgstr "PCI laite"
+msgstr "PCI-laitenumero"
 
 #: harddrake2:60
 #, c-format
 msgid "PCI device number"
-msgstr "PCI laitenumero"
+msgstr "PCI-laitteen laitenumero."
 
 #: harddrake2:61
 #, c-format
 msgid "PCI function #"
-msgstr "PCI toiminto #"
+msgstr "PCI-toimintonumero"
 
 #: harddrake2:61
 #, c-format
 msgid "PCI function number"
-msgstr "PCI toimintonumero"
+msgstr "PCI-toimintonumero."
 
 #: harddrake2:62
 #, c-format
@@ -2037,7 +2011,7 @@ msgstr "Valmistajan tunnus"
 #: harddrake2:62
 #, c-format
 msgid "this is the standard numerical identifier of the vendor"
-msgstr "tämä on standardinmukainen numeerinen valmistajan tunniste"
+msgstr "Standardinmukainen valmistajan tunnistenumero."
 
 #: harddrake2:63
 #, c-format
@@ -2047,7 +2021,7 @@ msgstr "Laitetunnus"
 #: harddrake2:63
 #, c-format
 msgid "this is the numerical identifier of the device"
-msgstr "Tämä on laitteen numeerinen tunniste"
+msgstr "Laitteen tunnistenumero."
 
 #: harddrake2:64
 #, c-format
@@ -2057,7 +2031,7 @@ msgstr "Valmistajan alitunniste"
 #: harddrake2:64
 #, c-format
 msgid "this is the minor numerical identifier of the vendor"
-msgstr "tämä on valmistajan tunnisteen tarkenne"
+msgstr "Valmistajan tunnistenumeron tarkenne."
 
 #: harddrake2:65
 #, c-format
@@ -2067,12 +2041,12 @@ msgstr "Laitteen alitunniste"
 #: harddrake2:65
 #, c-format
 msgid "this is the minor numerical identifier of the device"
-msgstr "Tämä on laitteen tunnisteen tarkennin"
+msgstr "Laitteen tunnistenumeron tarkennin."
 
 #: harddrake2:66
 #, c-format
 msgid "Device USB ID"
-msgstr "USB laitetunniste"
+msgstr "USB-laitetunniste"
 
 #: harddrake2:66
 #, c-format
@@ -2092,7 +2066,7 @@ msgid ""
 "\"benchmark\" the cpu."
 msgstr ""
 "GNU/Linuxin ytimen täytyy suorittaa laskentasilmukka käynnistyksen "
-"yhteydessä ajastimen alustamiseksi. Tulos tallennetaan bogomipseinä, joka on "
+"yhteydessä ajastimen alustamiseksi. Tulos tallennetaan Bogomipseinä, joka on "
 "tapa mitata prosessorin suorituskykyä."
 
 #: harddrake2:71
@@ -2103,7 +2077,7 @@ msgstr "Välimuistin koko"
 #: harddrake2:71
 #, c-format
 msgid "size of the (second level) cpu cache"
-msgstr "Prosessorin (kakkostason) välimuistin koko"
+msgstr "Prosessorin L2-välimuistin koko."
 
 #. -PO: here "comas" is the medical coma, not the lexical coma!!
 #: harddrake2:74
@@ -2114,7 +2088,7 @@ msgstr "Coma-virhe"
 #: harddrake2:74
 #, c-format
 msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "löytyykö tästä prosessorista Cyrix 6x86 Coma -virhe"
+msgstr "Onko prosessorissa \"Cyrix 6x86 Coma\"-virhe."
 
 #: harddrake2:75
 #, c-format
@@ -2124,7 +2098,7 @@ msgstr "Cpuid-perhe"
 #: harddrake2:75
 #, c-format
 msgid "family of the cpu (eg: 6 for i686 class)"
-msgstr "prosessoriperhe (esim. i686 luokka on 6)"
+msgstr "Prosessoriperhe (esim: i686-luokka on 6)."
 
 #: harddrake2:76
 #, c-format
@@ -2134,7 +2108,7 @@ msgstr "Cpuid-taso"
 #: harddrake2:76
 #, c-format
 msgid "information level that can be obtained through the cpuid instruction"
-msgstr "tietotaso joka voidaan saada cpuid-käskyn kautta"
+msgstr "Tietotaso, joka voidaan saada cpuid-käskyn kautta."
 
 #: harddrake2:77
 #, c-format
@@ -2148,8 +2122,8 @@ msgid ""
 "coarsely assimilated to number of instructions the cpu is able to execute "
 "per second)"
 msgstr ""
-"Prosessorin taajuus MHz:einä (Megahertziä voidaan karkeasti verrata "
-"tehtävien määrään jotka prosessori suorittaa sekunnissa)"
+"Prosessorin kellotaajuus (MHz). (Kellotaajuutta voidaan karkeasti verrata "
+"sekunnissa suoritettavien tehtävien määrään.)"
 
 #: harddrake2:78
 #, c-format
@@ -2159,12 +2133,12 @@ msgstr "Liput"
 #: harddrake2:78
 #, c-format
 msgid "CPU flags reported by the kernel"
-msgstr "ytimen raportoimat prosessorin liput"
+msgstr "Ytimen raportoimat prosessorin liput."
 
 #: harddrake2:79
 #, c-format
 msgid "Fdiv bug"
-msgstr "Fdiv virhe"
+msgstr "Fdiv-virhe"
 
 #: harddrake2:80
 #, c-format
@@ -2173,8 +2147,8 @@ msgid ""
 "processor which did not achieve the required precision when performing a "
 "Floating point DIVision (FDIV)"
 msgstr ""
-"Varhaisimmista Intel Pentium prosessorien liukulukuyksiköstä löytyy virhe, "
-"joka heikentää tarkkuutta kun suoritetaan liukuluvun jakoa (FDIV)"
+"Varhaisimmista Intel Pentium prosessorien liukulukuyksiköitä löytyy virhe, "
+"joka heikentää tarkkuutta, kun suoritetaan liukuluvun jakoa (FDIV)."
 
 #: harddrake2:81
 #, c-format
@@ -2184,34 +2158,35 @@ msgstr "Löytyykö FPU"
 #: harddrake2:81
 #, c-format
 msgid "yes means the processor has an arithmetic coprocessor"
-msgstr "kyllä tarkoittaa että prosessorissa on liukulukuyksikkö"
+msgstr "Kyllä tarkoittaa, että prosessorissa on liukulukuyksikkö."
 
 #: harddrake2:82
 #, c-format
 msgid "Whether the FPU has an irq vector"
-msgstr "Löytyykö irq-vektori FPU:sta"
+msgstr "Löytyykö FPU:sta irq-vektori"
 
 #: harddrake2:82
 #, c-format
 msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr "kyllä tarkoittaa että laskentaprosessorista löytyy poikkeusvektori"
+msgstr ""
+"Kyllä tarkoittaa, että matematiikkaprosessorista löytyy poikkeusvektori"
 
 #: harddrake2:83
 #, c-format
 msgid "F00f bug"
-msgstr "F00F virhe"
+msgstr "F00F-virhe"
 
 #: harddrake2:83
 #, c-format
 msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
 msgstr ""
-"ensimmäiset pentiumprosessorit olivat virheellisiä ja jumiutuivat "
-"purettaessa F00F tavukoodia"
+"Ensimmäiset Pentium-prosessorit olivat virheellisiä ja jumiutuivat "
+"purettaessa F00F tavukoodia."
 
 #: harddrake2:84
 #, c-format
 msgid "Halt bug"
-msgstr "Halt virhe"
+msgstr "Halt-virhe"
 
 #: harddrake2:85
 #, c-format
@@ -2219,18 +2194,18 @@ msgid ""
 "Some of the early i486DX-100 chips cannot reliably return to operating mode "
 "after the \"halt\" instruction is used"
 msgstr ""
-"Jotkut aikaisimmista i486DX-100 prosessoreista eivät osaa luotettavasti "
-"palata käyttötilaan \"halt\" käskyn jälkeen"
+"Jotkut aikaisimmista \"i486DX-100\"-prosessoreista eivät osaa palata "
+"luotettavasti palata käyttötilaan \"halt\"-käskyn jälkeen."
 
 #: harddrake2:86
 #, c-format
 msgid "sub generation of the cpu"
-msgstr "prosessorin alasukupolvi"
+msgstr "Prosessorin alasukupolvi"
 
 #: harddrake2:87
 #, c-format
 msgid "generation of the cpu (eg: 8 for Pentium III, ...)"
-msgstr "prosessorin sukupolvi (esim.: Pentium III on 8, ...)"
+msgstr "Prosessorin sukupolvi (esim: Pentium III on 8)."
 
 #: harddrake2:88
 #, c-format
@@ -2240,12 +2215,12 @@ msgstr "Mallinimi"
 #: harddrake2:88
 #, c-format
 msgid "official vendor name of the cpu"
-msgstr "prosessorin valmistajan virallinen nimi"
+msgstr "Prosessorin virallinen nimi."
 
 #: harddrake2:89
 #, c-format
 msgid "the name of the CPU"
-msgstr "prosessorin nimi (CPU)"
+msgstr "Prosessorin nimi"
 
 #: harddrake2:90
 #, c-format
@@ -2255,22 +2230,22 @@ msgstr "Prosessorin ID"
 #: harddrake2:90
 #, c-format
 msgid "the number of the processor"
-msgstr "prosessorin numero"
+msgstr "Prosessorin numero"
 
 #: harddrake2:91
 #, c-format
 msgid "Model stepping"
-msgstr "Malli askel"
+msgstr "Sukupolvi"
 
 #: harddrake2:91
 #, c-format
 msgid "stepping of the cpu (sub model (generation) number)"
-msgstr "prosessorin askel (alimalli (sukupolvi) numero)"
+msgstr "Prosessorin sukupolvi (mallin aliversion numero)."
 
 #: harddrake2:92
 #, c-format
 msgid "the vendor name of the processor"
-msgstr "prosessorin valmistaja"
+msgstr "Prosessorin valmistaja."
 
 #: harddrake2:93
 #, c-format
@@ -2284,9 +2259,9 @@ msgid ""
 "memory page level, thus enabling the processor to prevent unchecked kernel "
 "accesses to user memory (aka this is a bug guard)"
 msgstr ""
-"WP lipuke rekisterissä CR0 pakottaa kirjoitussuojan muistisivun tasolla, "
-"jolloin sallitaan prosessorin estää tarkistamattomat ytimen käyttäjämuistin  "
-"käytöt (eli tämä on virhesuoja)"
+"WP-lipuke rekisterissä CR0 pakottaa kirjoitussuojan muistisivutasolla, "
+"jolloin sallitaan prosessorin estää tarkistamattomat ytimen käyttäjämuistin "
+"käytöt (eli tämä on virhesuoja)."
 
 #: harddrake2:97
 #, c-format
@@ -2296,7 +2271,7 @@ msgstr "Levykkeen muoto"
 #: harddrake2:97
 #, c-format
 msgid "format of floppies supported by the drive"
-msgstr "levykkeiden eri muodot joita asema tukee"
+msgstr "Aseman tukemat eri levykkeiden muodot."
 
 #: harddrake2:101
 #, c-format
@@ -2306,12 +2281,12 @@ msgstr "EIDE/SCSI-kanava"
 #: harddrake2:102
 #, c-format
 msgid "Disk identifier"
-msgstr "Levyn tunniste"
+msgstr "Levyn tunniste."
 
 #: harddrake2:102
 #, c-format
 msgid "usually the disk serial number"
-msgstr "yleensä levyn sarjanumero"
+msgstr "Yleensä levyn sarjanumero."
 
 #: harddrake2:103
 #, c-format
@@ -2326,28 +2301,28 @@ msgid ""
 "channel number, a target id and a logical unit number"
 msgstr ""
 "SCSI kohdenumero. Tietokoneeseen kytketyt SCSI-laitteet yksilöidään\n"
-"kanavanumeron, kohdetunnisteen ja loogisen yksikkönumeron perusteella"
+"kanavanumeron, kohdetunnisteen ja loogisen yksikkönumeron perusteella."
 
 #. -PO: here, "size" is the size of the ram chip (eg: 128Mo, 256Mo, ...)
 #: harddrake2:110
 #, c-format
 msgid "Installed size"
-msgstr "Assennettu koko"
+msgstr "Muistin määrä"
 
 #: harddrake2:110
 #, c-format
 msgid "Installed size of the memory bank"
-msgstr "asennetun muistimoduulin koko"
+msgstr "Asennetun muistimoduulin koko"
 
 #: harddrake2:111
 #, c-format
 msgid "Enabled Size"
-msgstr "Käytössä oleva koko"
+msgstr "Käytössä olevan muistin määrä"
 
 #: harddrake2:111
 #, c-format
 msgid "Enabled size of the memory bank"
-msgstr "Käytössä oleva muistimoduulin koko"
+msgstr "Käytössä oleva muistimoduulin koko."
 
 #: harddrake2:112 harddrake2:121
 #, c-format
@@ -2357,7 +2332,7 @@ msgstr "Tyyppi"
 #: harddrake2:112
 #, c-format
 msgid "type of the memory device"
-msgstr "muistilaitteen tyyppi"
+msgstr "Muistilaitteen tyyppi."
 
 #: harddrake2:113
 #, c-format
@@ -2367,7 +2342,7 @@ msgstr "Nopeus"
 #: harddrake2:113
 #, c-format
 msgid "Speed of the memory bank"
-msgstr "Muistilaitteen nopeus"
+msgstr "Muistilaitteen nopeus."
 
 #: harddrake2:114
 #, c-format
@@ -2377,7 +2352,7 @@ msgstr "Moduuliyhteydet"
 #: harddrake2:115
 #, c-format
 msgid "Socket designation of the memory bank"
-msgstr "Muistimoduulin sokkelimalli"
+msgstr "Muistimoduulin kannan tyyppi."
 
 #: harddrake2:119
 #, c-format
@@ -2388,7 +2363,7 @@ msgstr "Laitetiedosto"
 #, c-format
 msgid ""
 "the device file used to communicate with the kernel driver for the mouse"
-msgstr "hiiren laitetiedosto, jonka avulla laite käyttää ytimen ajuria"
+msgstr "Hiiren laitetiedosto, jonka avulla laite käyttää ytimen ajuria."
 
 #: harddrake2:120
 #, c-format
@@ -2398,7 +2373,7 @@ msgstr "Emuloitu rulla"
 #: harddrake2:120
 #, c-format
 msgid "whether the wheel is emulated or not"
-msgstr "Onko hiiren rulla emuloitu vai ei"
+msgstr "Onko hiiren rulla emuloitu vai ei."
 
 #: harddrake2:121
 #, c-format
@@ -2418,22 +2393,22 @@ msgstr "Painikkeiden määrä"
 #: harddrake2:123
 #, c-format
 msgid "the number of buttons the mouse has"
-msgstr "hiiren painikkeiden määrä"
+msgstr "Hiiren painikkeiden määrä."
 
 #: harddrake2:124
 #, c-format
 msgid "the type of bus on which the mouse is connected"
-msgstr "hiiren väylätyyppi"
+msgstr "Hiiren väylätyyppi."
 
 #: harddrake2:125
 #, c-format
 msgid "Mouse protocol used by X11"
-msgstr "X11 hiiriprotokolla"
+msgstr "X11-hiiriprotokolla"
 
 #: harddrake2:125
 #, c-format
 msgid "the protocol that the graphical desktop use with the mouse"
-msgstr "protokolla jota hiiri käyttää graafisen työpöydän kanssa"
+msgstr "Protokolla, jota hiiri käyttää graafisen työpöydän kanssa."
 
 #: harddrake2:132 harddrake2:141 harddrake2:148 harddrake2:156 harddrake2:337
 #, c-format
@@ -2479,7 +2454,7 @@ msgstr "Ominaisuudet"
 #: harddrake2:180 logdrake:78
 #, c-format
 msgid "/_Options"
-msgstr "/_Optiot"
+msgstr "/_Asetukset"
 
 #: harddrake2:181 harddrake2:210 logdrake:80
 #, c-format
@@ -2504,12 +2479,11 @@ msgstr "/_Jaz-asemien automaattitunnistus"
 #: harddrake2:188
 #, c-format
 msgid "/Autodetect parallel _zip drives"
-msgstr "/Rinnakkaisliitettyjen ZIP-asemien automaattitunistus"
+msgstr "/Rinnakkaisporttiin liitettyjen _ZIP-asemien automaattitunnistus"
 
-#: harddrake2:192
-#, fuzzy, c-format
+#: harddrake2:192, c-format
 msgid "Hardware Configuration"
-msgstr "Verkon asetukset"
+msgstr "Laitteistoasetukset"
 
 #: harddrake2:199
 #, c-format
@@ -2544,8 +2518,8 @@ msgid ""
 "Once you've selected a device, you'll be able to see the device information "
 "in fields displayed on the right frame (\"Information\")"
 msgstr ""
-"Kunhan olet valinnut laitteen, näet kuvauksen oikealla näkyvässä kehyksessä "
-"(\"Tiedot\")"
+"Kun laite on valittuna, näkyy sen tiedot oikealla näkyvästä kehyksestä "
+"\"Tiedot\"."
 
 #: harddrake2:229
 #, c-format
@@ -2557,20 +2531,19 @@ msgstr "/_Raportoi virheestä"
 msgid "/_About..."
 msgstr "/_Tietoja..."
 
-#: harddrake2:234
-#, fuzzy, c-format
+#: harddrake2:234, c-format
 msgid "Harddrake"
-msgstr "Harddrake2"
+msgstr "Harddrake"
 
 #: harddrake2:238
 #, c-format
 msgid "This is HardDrake, a %s hardware configuration tool."
-msgstr ""
+msgstr "Tämä on Harddrake, %sin laitteiston asetustyökalu."
 
 #: harddrake2:271
 #, c-format
 msgid "Detected hardware"
-msgstr "Tunnistettu laitteisto"
+msgstr "Tunnistetut laitteet:"
 
 #: harddrake2:274 scannerdrake:286
 #, c-format
@@ -2580,7 +2553,7 @@ msgstr "Tiedot"
 #: harddrake2:276
 #, c-format
 msgid "Set current driver options"
-msgstr ""
+msgstr "Aseta nykyisen ajurin lisäasetukset"
 
 #: harddrake2:283
 #, c-format
@@ -2591,7 +2564,8 @@ msgstr "Suorita asetustyökalu"
 #, c-format
 msgid ""
 "Click on a device in the left tree in order to display its information here."
-msgstr "Valitse laite vasemmalla olevasta puusta nähdäksesi sen tiedot täällä."
+msgstr ""
+"Klikkaa laitetta vasemmalla olevasta puusta nähdäksesi laitteen tiedot."
 
 #: harddrake2:324 notify-x11-free-driver-switch:13
 #, c-format
@@ -2606,7 +2580,7 @@ msgstr "Tuntematon"
 #: harddrake2:345
 #, c-format
 msgid "Misc"
-msgstr "Sekalaista"
+msgstr "Sekalaiset"
 
 #: harddrake2:429
 #, c-format
@@ -2646,7 +2620,7 @@ msgstr "LocaleDrake"
 #: localedrake:44
 #, c-format
 msgid "You should install the following packages: %s"
-msgstr "sinun pitäisi asentaa seuraavatr paketit: %s"
+msgstr "Seuraavat paketit tulisi asentaa: %s"
 
 #. -PO: the following is used to combine packages names. eg: "initscripts, harddrake, yudit"
 #: localedrake:47
@@ -2657,7 +2631,7 @@ msgstr ", "
 #: logdrake:51
 #, c-format
 msgid "Mandriva Linux Tools Logs"
-msgstr "Mandriva Linux työkalujen lokit"
+msgstr "Mandriva Linuxin työkalujen lokit"
 
 #: logdrake:65
 #, c-format
@@ -2719,7 +2693,7 @@ msgstr "/Ohje/_Tietoja..."
 msgid ""
 "_:this is the auth.log log file\n"
 "Authentication"
-msgstr "Tunnistus"
+msgstr "Tunnistautuminen"
 
 #: logdrake:111
 #, c-format
@@ -2745,12 +2719,12 @@ msgstr "Järjestelmäloki"
 #: logdrake:117
 #, c-format
 msgid "search"
-msgstr "etsi"
+msgstr "Etsi"
 
 #: logdrake:129
 #, c-format
 msgid "A tool to monitor your logs"
-msgstr "Työkalu lokien seuraamiseen"
+msgstr "Työkalu lokien seurantaan"
 
 #: logdrake:131
 #, c-format
@@ -2790,7 +2764,7 @@ msgstr "Postihälytys"
 #: logdrake:170
 #, c-format
 msgid "The alert wizard has failed unexpectedly:"
-msgstr "Hälytysvelho on kohdannut odottamattoman virheen:"
+msgstr "Postihälytyksen asetusvelho on kohdannut odottamattoman virheen:"
 
 #: logdrake:174
 #, c-format
@@ -2800,17 +2774,17 @@ msgstr "Tallenna"
 #: logdrake:222
 #, c-format
 msgid "please wait, parsing file: %s"
-msgstr "odota hetki, jäsennetään tiedostoa: %s"
+msgstr "Odota hetki, jäsennetään lokia: %s"
 
 #: logdrake:244
 #, c-format
 msgid "Sorry, log file isn't available!"
-msgstr ""
+msgstr "Lokitiedosto ei ole saatavilla!"
 
 #: logdrake:292
 #, c-format
 msgid "Error while opening \"%s\" log file: %s\n"
-msgstr ""
+msgstr "Virhe avattaessa lokin \"%s\" lokitiedostoa: %s\n"
 
 #: logdrake:385
 #, c-format
@@ -2820,22 +2794,22 @@ msgstr "Apache WWW-palvelin"
 #: logdrake:386
 #, c-format
 msgid "Domain Name Resolver"
-msgstr "Verkkoalueen nimiratkaisija"
+msgstr "DNS-palvelin"
 
 #: logdrake:387
 #, c-format
 msgid "Ftp Server"
-msgstr "FTP palvelin"
+msgstr "FTP-palvelin"
 
 #: logdrake:388
 #, c-format
 msgid "Postfix Mail Server"
-msgstr "Postfix postipalvelin"
+msgstr "Postfix-postipalvelin"
 
 #: logdrake:389
 #, c-format
 msgid "Samba Server"
-msgstr "Samba palvelin"
+msgstr "Samba-palvelin"
 
 #: logdrake:390
 #, c-format
@@ -2845,12 +2819,12 @@ msgstr "SSH-palvelin"
 #: logdrake:391
 #, c-format
 msgid "Webmin Service"
-msgstr "Webmin palvelu"
+msgstr "Webmin"
 
 #: logdrake:392
 #, c-format
 msgid "Xinetd Service"
-msgstr "Xinetd palvelu"
+msgstr "Xinetd-palvelu"
 
 #: logdrake:401
 #, c-format
@@ -2874,9 +2848,9 @@ msgid ""
 "\n"
 "Here, you'll be able to set up the alert system.\n"
 msgstr ""
-"Tervetuloa sähköpostin asetustyökaluun.\n"
+"Tervetuloa postihälytysjärjestelmän asetustyökaluun.\n"
 "\n"
-"Täältä voit asettaa hälytysjärjestelmän.\n"
+"Täältä voit asettaa postihälytysjärjestelmän.\n"
 
 #: logdrake:414
 #, c-format
@@ -2893,7 +2867,8 @@ msgstr "Palvelujen asetukset"
 msgid ""
 "You will receive an alert if one of the selected services is no longer "
 "running"
-msgstr "Saat hälytyksen jos jokin valituista palveluista ei ole enää käynnissä"
+msgstr ""
+"Saat hälytyksen, jos jokin valituista palveluista ei ole enää käynnissä"
 
 #: logdrake:429
 #, c-format
@@ -2903,7 +2878,7 @@ msgstr "Lataa asetukset"
 #: logdrake:430
 #, c-format
 msgid "You will receive an alert if the load is higher than this value"
-msgstr "Saat hälytyksen jos kuorma on tätä arvoa suurempi"
+msgstr "Saat hälytyksen, jos järjestelmän kuorma on suurempi kuin"
 
 #: logdrake:431
 #, c-format
@@ -2920,12 +2895,12 @@ msgstr "Hälytyksen asetukset"
 #: logdrake:437
 #, c-format
 msgid "Please enter your email address below "
-msgstr "Syötä sähköpostiosoitteesi "
+msgstr "Anna sähköpostiosoitteesi"
 
 #: logdrake:438
 #, c-format
 msgid "and enter the name (or the IP) of the SMTP server you wish to use"
-msgstr "ja syötä sen SMTP palvelimen nimi (tai IP-osoite) jota haluat käyttää."
+msgstr "ja syötä käytettävän postipalvelimen nimi tai IP-osoite"
 
 #: logdrake:445
 #, c-format
@@ -2938,8 +2913,9 @@ msgid ""
 "\"%s\" is a local user, but you did not select a local smtp, so you must use "
 "a complete email address!"
 msgstr ""
-"\"%s\" on paikallinen käyttäjä, mutta et valinnut paikallista SMTP-"
-"palvelinta joten sinun täytyy käyttää täydellistä sähköpostiosoitetta!"
+"\"%s\" on paikallinen käyttäjä, mutta et valinnut paikallista "
+"postipalvelinta, "
+"joten on käytettävä täydellistä sähköpostiosoitetta!"
 
 #: logdrake:457
 #, c-format
@@ -2962,6 +2938,9 @@ msgid ""
 "The proprietary driver for your graphic card can not be found, the system is "
 "now using the free software driver (%s)."
 msgstr ""
+"Järjestelmästä ei löytynyt suljettuja ajureita näytönohjaimelle, joten "
+"käytetään "
+"vapaita ajureita (%s)."
 
 #: scannerdrake:51
 #, c-format
@@ -2970,22 +2949,22 @@ msgid ""
 "\n"
 "Do you want to install the SANE packages?"
 msgstr ""
-"Käyttääksesi kuvanlukijaa SANE pitää olla asennettuna.\n"
+"Jotta skannereita voidaan käyttää, täytyy paketti SANE asentaa.\n"
 "\n"
-"Haluatko asentaa SANEn?"
+"Asennetaanko SANE?"
 
 #: scannerdrake:55
 #, c-format
 msgid "Aborting Scannerdrake."
-msgstr "Keskeytetään Scannerdrake."
+msgstr "Keskeytetään ScannerDrake."
 
 #: scannerdrake:60
 #, c-format
 msgid ""
 "Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr ""
-"Paketteja joita tarvitaan kuvanlukijan asettamiseen Scannerdraken avulla ei "
-"voitu asentaa."
+"Paketteja, joita tarvitaan kuvanlukijan asettamiseen ScannerDraken avulla, "
+"ei voitu asentaa."
 
 #: scannerdrake:61
 #, c-format
@@ -3010,12 +2989,12 @@ msgstr "Luodaan asetettujen kuvanlukijoiden lista uudelleen..."
 #: scannerdrake:101
 #, c-format
 msgid "The %s is not supported by this version of %s."
-msgstr "Tämä %s versio ei tue laitetta %s."
+msgstr "%s ei ole tuettu %s:n version kanssa."
 
 #: scannerdrake:104 scannerdrake:115
 #, c-format
 msgid "Confirmation"
-msgstr "Vahvistaminen"
+msgstr "Vahvistus"
 
 #: scannerdrake:104
 #, c-format
@@ -3027,27 +3006,26 @@ msgstr "%s löytyi paikasta %s, aseta se automaattisesti?"
 msgid "%s is not in the scanner database, configure it manually?"
 msgstr ""
 "%s ei löytynyt kuvanlukija-tietokannasta, \n"
-"asetetaanko manuaalisesti?"
+"määritelläänkö se käsin?"
 
-#: scannerdrake:130
-#, fuzzy, c-format
+#: scannerdrake:130, c-format
 msgid "Scanner configuration"
-msgstr "Hälytyksen asetukset"
+msgstr "Kuvanlukijan asetukset"
 
 #: scannerdrake:131
 #, c-format
 msgid "Select a scanner model (Detected model: %s, Port: %s)"
-msgstr ""
+msgstr "Valitse kuvanlukijan malli (Tunnistettu malli %s portissa %s)"
 
 #: scannerdrake:133
 #, c-format
 msgid "Select a scanner model (Detected model: %s)"
-msgstr ""
+msgstr "Valitse kuvanlukijan malli (Tunnistettu malli %s)"
 
 #: scannerdrake:134
 #, c-format
 msgid "Select a scanner model (Port: %s)"
-msgstr ""
+msgstr "Valitse kuvanlukijan malli (Portissa %s)"
 
 #: scannerdrake:136 scannerdrake:139
 #, c-format
@@ -3057,17 +3035,16 @@ msgstr " (EI TUETTU)"
 #: scannerdrake:142
 #, c-format
 msgid "The %s is not supported under Linux."
-msgstr "%s ei ole tuettu Linuxissa."
+msgstr "Malli %s ei ole tuettu Linuxissa."
 
 #: scannerdrake:169 scannerdrake:183
 #, c-format
 msgid "Do not install firmware file"
 msgstr "Älä asenna firmware-tiedostoa"
 
-#: scannerdrake:172 scannerdrake:222
-#, fuzzy, c-format
+#: scannerdrake:172 scannerdrake:222, c-format
 msgid "Scanner Firmware"
-msgstr "Kuvanlukijan jako"
+msgstr "Kuvanlukijan firmware"
 
 #: scannerdrake:173 scannerdrake:225
 #, c-format
@@ -3075,14 +3052,13 @@ msgid ""
 "It is possible that your %s needs its firmware to be uploaded everytime when "
 "it is turned on."
 msgstr ""
-"On mahdollista että %s tarvitsee firmwaren lataamisen laitteeseen joka kerta "
-"kun se kytketään päälle."
+"On mahdollista, että %s tarvitsee firmwaren lataamisen laitteeseen, "
+"joka kerta, kun se kytketään päälle."
 
 #: scannerdrake:174 scannerdrake:226
 #, c-format
 msgid "If this is the case, you can make this be done automatically."
-msgstr ""
-"Siinä tapauksessa voit asettaa, että tämä tehdään sinulle automaattisesti."
+msgstr "Siinä tapauksessa, lataaminen voidaan suorittaa automaattisesti."
 
 #: scannerdrake:175 scannerdrake:229
 #, c-format
@@ -3090,8 +3066,8 @@ msgid ""
 "To do so, you need to supply the firmware file for your scanner so that it "
 "can be installed."
 msgstr ""
-"Tehdäksesi tämän sinun on annettava kuvanlukijallesi tarkoitettu firmware-"
-"tiedosto jotta se voidaan asentaa."
+"Jotta lataaminen voidaan suorittaa automaattisesti, tulee tarvittava "
+"firmware-tiedosto olla saatavilla."
 
 #: scannerdrake:176 scannerdrake:230
 #, c-format
@@ -3099,28 +3075,28 @@ msgid ""
 "You find the file on the CD or floppy coming with the scanner, on the "
 "manufacturer's home page, or on your Windows partition."
 msgstr ""
-"Löydät tiedoston kuvanlukijan mukana tulevalta CD:ltä tai levykkeeltä, "
-"valmistajan kotisivulta tai Windows-osioltasi."
+"Firmware löytyy kuvanlukijan mukana tulleelta levykkeeltä tai "
+"CD/DVD-levyltä, valmistajan kotisivuilta tai Windows-osiolta."
 
 #: scannerdrake:178 scannerdrake:237
 #, c-format
 msgid "Install firmware file from"
-msgstr "Asennetaan firmware-tiedosto paikasta"
+msgstr "Asenna firmware-tiedosto"
 
 #: scannerdrake:180 scannerdrake:188 scannerdrake:239 scannerdrake:246
 #, c-format
 msgid "CD-ROM"
-msgstr "CD-ROM"
+msgstr "CD/DVD-levyltä"
 
 #: scannerdrake:181 scannerdrake:190 scannerdrake:240 scannerdrake:248
 #, c-format
 msgid "Floppy Disk"
-msgstr "Levyke"
+msgstr "Levykkeeltä"
 
 #: scannerdrake:182 scannerdrake:192 scannerdrake:241 scannerdrake:250
 #, c-format
 msgid "Other place"
-msgstr "Muu"
+msgstr "Muualta"
 
 #: scannerdrake:198
 #, c-format
@@ -3138,8 +3114,8 @@ msgid ""
 "It is possible that your scanners need their firmware to be uploaded "
 "everytime when they are turned on."
 msgstr ""
-"On mahdollista että kuvanlukijasi tarvitsee firmwaren lataamisen laitteeseen "
-"joka kerta kun se kytketään päälle."
+"On mahdollista, että kuvanlukija tarvitsee firmwaren lataamisen "
+"laitteeseen, joka kerta, kun se kytketään päälle."
 
 #: scannerdrake:228
 #, c-format
@@ -3147,8 +3123,8 @@ msgid ""
 "To do so, you need to supply the firmware files for your scanners so that it "
 "can be installed."
 msgstr ""
-"Tehdäksesi tämän sinun on annettava kuvanlukijallesi tarkoitettu firmware-"
-"tiedosto jotta se voidaan asentaa."
+"Jotta lataaminen voidaan suorittaa automaattisesti, tulee tarvittava "
+"firmware olla saatavilla."
 
 #: scannerdrake:231
 #, c-format
@@ -3156,8 +3132,8 @@ msgid ""
 "If you have already installed your scanner's firmware you can update the "
 "firmware here by supplying the new firmware file."
 msgstr ""
-"Jos olet jo asentanut kuvanlukijasi firmwaren voit päivittää\n"
-"sen täällä antamalla uuden firmwaren tiedostonimen."
+"Jos kuvanlukijan firmware on jo asennettu, voidaan se päivittää "
+"antamalla uusi firmware-tiedosto."
 
 #: scannerdrake:233
 #, c-format
@@ -3192,7 +3168,7 @@ msgid ""
 "section."
 msgstr ""
 "%s pitää asettaa PrinterDraken kautta. Voit käynnistää\n"
-"PrinterDraken %s Ohjauskeskuksen Laitteisto-osasta."
+"PrinterDraken %sin Ohjauskeskuksen Laitteisto-osasta."
 
 #: scannerdrake:320
 #, c-format
@@ -3204,25 +3180,24 @@ msgstr "Asetetaan ytimen moduuleja..."
 msgid "Auto-detect available ports"
 msgstr "Porttien automaattitunnistus"
 
-#: scannerdrake:331 scannerdrake:377
-#, fuzzy, c-format
+#: scannerdrake:331 scannerdrake:377, c-format
 msgid "Device choice"
-msgstr "Laitetiedosto"
+msgstr "Laitevalinta"
 
 #: scannerdrake:332 scannerdrake:378
 #, c-format
 msgid "Please select the device where your %s is attached"
-msgstr "Valitse laite johon %s on kytketty"
+msgstr "Valitse laite, johon %s on kytketty"
 
 #: scannerdrake:333
 #, c-format
 msgid "(Note: Parallel ports cannot be auto-detected)"
-msgstr "(Huomio: rinnakkaisportteja ei voida tunnistaa automaattisesti)"
+msgstr "(HUOM! Rinnakkaisportteja ei voida tunnistaa automaattisesti.)"
 
 #: scannerdrake:335 scannerdrake:380
 #, c-format
 msgid "choose device"
-msgstr "valitse laite"
+msgstr "Valitse laite"
 
 #: scannerdrake:369
 #, c-format
@@ -3232,7 +3207,7 @@ msgstr "Etsitään kuvanlukijoita..."
 #: scannerdrake:405 scannerdrake:412
 #, c-format
 msgid "Attention!"
-msgstr "Huomio !"
+msgstr "HUOM!"
 
 #: scannerdrake:406
 #, c-format
@@ -3242,10 +3217,10 @@ msgid ""
 "Manual adjustments are required. Please edit the configuration file /etc/"
 "sane.d/%s.conf. "
 msgstr ""
-"Laitteesi %s ei voida asetta täysin automaattisesti.\n"
+"Kuvanlukijaa %s ei voida asettaa täysin automaattisesti.\n"
 "\n"
-"Joitakin säätöjä pitää tehdä käsin. ole hyvä ja muokkaa asetustiedostoa /etc/"
-"sane.d/%s.conf. "
+"Joitakin säätöjä pitää tehdä käsin. Muokkaa asetustiedostoa /etc/sane.d/%s."
+"conf. "
 
 #: scannerdrake:407 scannerdrake:416
 #, c-format
@@ -3254,7 +3229,7 @@ msgid ""
 "read it."
 msgstr ""
 "Lisää tietoja ajurin käyttöohjeissa. Suorita komento \"man sane-%s\" "
-"lukeaaksesi sitä."
+"lukeaksesi sitä."
 
 #: scannerdrake:409 scannerdrake:418
 #, c-format
@@ -3262,8 +3237,8 @@ msgid ""
 "After that you may scan documents using \"XSane\" or \"Kooka\" from "
 "Multimedia/Graphics in the applications menu."
 msgstr ""
-"Nyt voit lukea dokumentit tietokoneeseesi käyttämällä ohjelmaa \"XSane\" tai "
-"\"Kooka\" Multimedia/Grafiikka ohjelmistovalikosta."
+"Tämän jälkeen asiakirjoja voidaan skannata käyttämällä esim. ohjelmia "
+"\"XSane\" tai \"Kooka\"."
 
 #: scannerdrake:413
 #, c-format
@@ -3271,8 +3246,8 @@ msgid ""
 "Your %s has been configured, but it is possible that additional manual "
 "adjustments are needed to get it to work. "
 msgstr ""
-"Laitteesi %s on asetettu, mutta on mahdollista että jotain lisäasetuksia "
-"pitää tehdä käsin saadaaksesi sitä toimimaan. "
+"Kuvanlukija %s on asetettu, mutta on mahdollista, että jotain lisäasetuksia "
+"pitää tehdä käsin, jotta kuvanlukija toimisi."
 
 #: scannerdrake:414
 #, c-format
@@ -3280,13 +3255,13 @@ msgid ""
 "If it does not appear in the list of configured scanners in the main window "
 "of Scannerdrake or if it does not work correctly, "
 msgstr ""
-"Jos sitä ei näy asetettujen kuvanlukijien listauksessa Scannerdraken "
-"pääikkunassa se ei toimi oikein, "
+"Jos kuvanlukijaa ei näy ScannerDraken pääikkunan asetettujen kuvanlukijoiden "
+"ikkunassa tai kuvanlukija ei toimi oikein, "
 
 #: scannerdrake:415
 #, c-format
 msgid "edit the configuration file /etc/sane.d/%s.conf. "
-msgstr "muokkaa tiedostoa /etc/sane.d/%s.conf. "
+msgstr "muokkaa asetustiedostoa /etc/sane.d/%s.conf. "
 
 #: scannerdrake:420
 #, c-format
@@ -3300,9 +3275,9 @@ msgid ""
 "You may now scan documents using \"XSane\" or \"Kooka\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
-"%s on asetettu.\n"
-"Nyt voit lukea dokumentit tietokoneeseesi käyttämällä ohjelmaa \"XSane\" tai "
-"\"Kooka\" Multimedia/Grafiikka valikosta."
+"Kuvanlukija %s on asetettu.\n"
+"Asiakirjoja voidaan nyt skannata käyttämällä esim. ohjelmia "
+"\"XSane\" tai \"Kooka\"."
 
 #: scannerdrake:446
 #, c-format
@@ -3315,7 +3290,7 @@ msgstr ""
 "Seuraavat kuvanlukijat:\n"
 "\n"
 "%s\n"
-"on käytettävissä järjestelmässäsi.\n"
+"ovat käytettävissä.\n"
 
 #: scannerdrake:447
 #, c-format
@@ -3328,18 +3303,16 @@ msgstr ""
 "Seuraava kuvanlukija:\n"
 "\n"
 "%s\n"
-"on käytettävissä järjestelmässäsi.\n"
+"on käytettävissä.\n"
 
 #: scannerdrake:449 scannerdrake:452
 #, c-format
 msgid "There are no scanners found which are available on your system.\n"
-msgstr ""
-"Yhtäkään järjestelmässäsi käytettävissä olevaa kuvanlukijaa ei löydetty.\n"
+msgstr "Järjestelmästä ei löydy yhtään käytettävissä olevaa kuvanlukijaa.\n"
 
-#: scannerdrake:460
-#, fuzzy, c-format
+#: scannerdrake:460, c-format
 msgid "Scanner Management"
-msgstr "Tulostinhallinta %s"
+msgstr "Kuvanlukijoiden hallinta"
 
 #: scannerdrake:466
 #, c-format
@@ -3349,7 +3322,7 @@ msgstr "Etsi uusia kuvanlukijoita ..."
 #: scannerdrake:472
 #, c-format
 msgid "Add a scanner manually"
-msgstr "Lisää kuvanlukija manuaalisesti"
+msgstr "Lisää kuvanlukija käsin"
 
 #: scannerdrake:479
 #, c-format
@@ -3359,7 +3332,7 @@ msgstr "Asenna/Päivitä firmware-tiedostot"
 #: scannerdrake:485
 #, c-format
 msgid "Scanner sharing"
-msgstr "Kuvanlukijan jako"
+msgstr "Kuvanlukijan jakaminen"
 
 #: scannerdrake:544 scannerdrake:709
 #, c-format
@@ -3371,10 +3344,9 @@ msgstr "Kaikki etäkoneet"
 msgid "This machine"
 msgstr "Tämä kone"
 
-#: scannerdrake:595
-#, fuzzy, c-format
+#: scannerdrake:595, c-format
 msgid "Scanner Sharing"
-msgstr "Kuvanlukijan jako"
+msgstr "Kuvanlukijan jakaminen"
 
 #: scannerdrake:596
 #, c-format
@@ -3382,8 +3354,9 @@ msgid ""
 "Here you can choose whether the scanners connected to this machine should be "
 "accessible by remote machines and by which remote machines."
 msgstr ""
-"Täällä voit määrittää mikäli tähän koneeseen liitetyt kuvanlukijat pitäisi "
-"olla käytettävissä etäkoneissa sekä mitkä etäkoneet sallitaan."
+"Täällä voidaan määritellä mikäli tietokoneeseen liitetyt kuvanlukijat tulisi "
+"olla "
+"tiettyjen etäkoneiden käytettävissä. "
 
 #: scannerdrake:597
 #, c-format
@@ -3391,18 +3364,19 @@ msgid ""
 "You can also decide here whether scanners on remote machines should be made "
 "available on this machine."
 msgstr ""
-"Voit myös määrittää täällä pitäisikö etäkoneiden kuvanlukijat "
-"automaattisesti olla käytettävissä tässä koneessa."
+"Täällä voidaan myös määritellä pitäisikö etäkoneiden kuvanlukijoiden olla "
+"tämän "
+"tietokoneen käytettävissä."
 
 #: scannerdrake:600
 #, c-format
 msgid "The scanners on this machine are available to other computers"
-msgstr "Kuvanlukijat tässä koneessa ovat muiden koneiden käytettävissä"
+msgstr "Tämän koneen kuvanlukijat ovat muiden koneiden käytettävissä"
 
 #: scannerdrake:602
 #, c-format
 msgid "Scanner sharing to hosts: "
-msgstr "Kuvanlukijan jako koneille: "
+msgstr "Kuvanlukijan jakaminen koneille: "
 
 #: scannerdrake:607 scannerdrake:624
 #, c-format
@@ -3429,9 +3403,7 @@ msgstr "Paikallisten kuvanlukijoiden jakaminen"
 msgid ""
 "These are the machines on which the locally connected scanner(s) should be "
 "available:"
-msgstr ""
-"Nämä ovat koneet joissa paikallisesti liitetyt kuvanlukijat pitäisi olla "
-"käytettävissä:"
+msgstr "Seuraavien etäkoneiden kuvanlukijoiden pitäisi olla käytettävissä:"
 
 #: scannerdrake:658 scannerdrake:808
 #, c-format
@@ -3463,27 +3435,29 @@ msgstr "Koneen nimi/IP-osoite:"
 #, c-format
 msgid "Choose the host on which the local scanners should be made available:"
 msgstr ""
-"Valitse kone jolle paikalliset kuvanlukijat pitäisi asettaa käytettäviksi:"
+"Valitse kone, jolta on mahdollista käyttää tämän koneen kuvanlukijoita:"
 
 #: scannerdrake:730 scannerdrake:880
 #, c-format
 msgid "You must enter a host name or an IP address.\n"
-msgstr "Sinun pitää syöttää verkkoaseman nimi tai IP-osoite.\n"
+msgstr "Koneen nimi tai IP-osoite tulee antaa.\n"
 
 #: scannerdrake:741 scannerdrake:891
 #, c-format
 msgid "This host is already in the list, it cannot be added again.\n"
-msgstr "Tämä kone on jo listassa, eikä sitä voida lisätä uudestaan.\n"
+msgstr "Kone on jo listassa ja sitä ei voida lisätä uudelleen.\n"
 
 #: scannerdrake:796
 #, c-format
 msgid "Usage of remote scanners"
-msgstr "Etäkoneiden kuvanlukijoiden käyttö"
+msgstr "Etäkoneiden kuvanlukijoiden käyttäminen"
 
 #: scannerdrake:797
 #, c-format
 msgid "These are the machines from which the scanners should be used:"
-msgstr "Nämä ovat koneet joista kuvanlukijoita pitäisi käyttää: "
+msgstr ""
+"Seuraavilta koneilta tulisi pystyä käyttämään tähän koneeseen kytkettyjä "
+"kuvanlukijoita:"
 
 #: scannerdrake:954
 #, c-format
@@ -3492,39 +3466,40 @@ msgid ""
 "\n"
 "Do you want to install the saned package?"
 msgstr ""
-"Jakaaksesi paikalliset kuvanlukijat pitää saned olla asennettuna.\n"
+"Paketti saned tulee olla asennettuna, jotta paikallisia "
+"kuvanlukijoita voidaan jakaa.\n"
 "\n"
-"Haluatko asentaa paketin saned?"
+"Asennetaanko saned?"
 
 #: scannerdrake:958 scannerdrake:962
 #, c-format
 msgid "Your scanner(s) will not be available on the network."
-msgstr "Kuvanlukijasi ei ole käytettävissä verkossa."
+msgstr "Kuvanlukijoita ei voi käyttää verkosta."
 
 #: scannerdrake:961
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
-msgstr "Kuvanlukijasi jakamiseen tarvittavia paketteja ei voitu asentaa."
+msgstr "Kuvanlukijan jakamiseen tarvittavia paketteja ei voitu asentaa."
 
 #: service_harddrake:134
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
-msgstr "Joitakin laitteita luokasta \"%s\" poistettiin:\n"
+msgstr "Poistettiin joitakin laitteita laitteistoluokasta \"%s\":\n"
 
 #: service_harddrake:135
 #, c-format
 msgid "- %s was removed\n"
-msgstr "- %s poistettiin\n"
+msgstr "- poistettiin %s\n"
 
 #: service_harddrake:138
 #, c-format
 msgid "Some devices were added: %s\n"
-msgstr "Joitakin laitteita lisättiin: %s\n"
+msgstr "Lisättiin joitakin laitteita: %s\n"
 
 #: service_harddrake:139
 #, c-format
 msgid "- %s was added\n"
-msgstr "- %s lisättiin\n"
+msgstr "- lisättiin %s\n"
 
 #: service_harddrake:264
 #, c-format
@@ -3542,37 +3517,32 @@ msgid "Do you want to run the appropriate config tool?"
 msgstr "Haluatko suorittaa tarvittavan asetustyökalun?"
 
 #: ../menu/localedrake-system.desktop.in.h:1
-#, fuzzy
 msgid "System Regional Settings"
-msgstr "Järjestelmäasetukset"
+msgstr "Järjestelmän maa-asetukset"
 
 #: ../menu/localedrake-system.desktop.in.h:2
 msgid "System wide language & country configurator"
-msgstr ""
+msgstr "Järjestelmänlaajuinen kieli- ja maa-asetustyökalu"
 
 #: ../menu/harddrake.desktop.in.h:1
 msgid "HardDrake"
 msgstr "HardDrake"
 
 #: ../menu/harddrake.desktop.in.h:2
-#, fuzzy
 msgid "Hardware Central Configuration/information tool"
-msgstr "Verkon asetukset"
+msgstr "Laitteiston asetus- ja tietotyökalu"
 
 #: ../menu/harddrake.desktop.in.h:3
-#, fuzzy
 msgid "Hardware Configuration Tool"
-msgstr "Verkon asetukset"
+msgstr "Laitteiston asetustyökalu"
 
 #: ../menu/localedrake-user.desktop.in.h:1
-#, fuzzy
 msgid "Language & country configuration"
-msgstr "Manuaalinen asettaminen"
+msgstr "Kieli- ja maa-asetukset"
 
 #: ../menu/localedrake-user.desktop.in.h:2
-#, fuzzy
 msgid "Regional Settings"
-msgstr "Asetukset"
+msgstr "Maa-asetukset"
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "
