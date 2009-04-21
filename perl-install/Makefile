@@ -79,3 +79,8 @@ pixel_standalone_links:
 	rm -rf .standalone_apps.swa
 	mkdir .standalone_apps.swa
 	for i in $(STANDALONEPMS_); do ln -sf ../standalone/$$i .standalone_apps.swa/$$i.pm; done
+
+check_perl_checker:
+	rm -f share/po/libDrakX.pot install/share/po/DrakX.pot
+	@make -C share/po libDrakX.pot
+	@make -C install/share/po DrakX.pot
