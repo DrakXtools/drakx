@@ -263,17 +263,7 @@ sub createXconf {
     symlink("/tmp/stage2/etc/X11", "/etc/X11");
 
 if ($Driver) {
-    my $mouse_section = sprintf(<<'END', $mouse_type);
-Section "InputDevice"
-    Identifier "Mouse"
-    Driver "mouse"
-    Option "Protocol" "%s"
-    Option "Device" "/dev/mouse"
-    Option "ZAxisMapping" "4 5"
-EndSection
-END
-
-     output($file, sprintf(<<'END', $mouse_section, $Driver, $Driver eq 'fbdev' ? '"default"' : '"800x600" "640x480"'));
+     output($file, sprintf(<<'END', $mouse_type, $Driver, $Driver eq 'fbdev' ? '"default"' : '"800x600" "640x480"'));
 Section "ServerFlags"
    Option "AutoAddDevices" "False"
 EndSection
@@ -289,7 +279,13 @@ Section "InputDevice"
     Option "XkbLayout" "us"
 EndSection
 
-%s
+Section "InputDevice"
+    Identifier "Mouse"
+    Driver "mouse"
+    Option "Protocol" "%s"
+    Option "Device" "/dev/mouse"
+    Option "ZAxisMapping" "4 5"
+EndSection
 
 Section "Monitor"
     Identifier "monitor"
