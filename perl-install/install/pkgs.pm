@@ -317,6 +317,7 @@ sub empty_packages {
     $packages->{keep_unrequested_dependencies} =
       defined($o_keep_unrequested_dependencies) ? $o_keep_unrequested_dependencies : 1;
     $urpm::args::options{force_transactions} = 1;
+    $urpm::args::options{replacepkgs} = 1;
     $packages->{options}{ignoresize} = 1;
     $packages->{options}{'priority-upgrade'};  # prevent priority upgrade
     # log $trans->add() faillure; FIXME: should we override *urpm::msg::sys_log?
