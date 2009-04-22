@@ -8,6 +8,7 @@ use mygtk2;
 use common;
 use lang;
 use devices;
+use detect_devices;
 
 #-#####################################################################################
 #-INTERN CONSTANT
@@ -263,7 +264,8 @@ sub createXconf {
     symlink("/tmp/stage2/etc/X11", "/etc/X11");
 
 if ($Driver) {
-     output($file, sprintf(<<'END', $mouse_type, $Driver, $Driver eq 'fbdev' ? '"default"' : '"800x600" "640x480"'));
+     my ($mouse_driver, $mouse_protocol) = detect_devices::is_vmware() ? qw(vmmouse auto) : ('mouse', $mouse_type);
+     output($file, sprintf(<<'END', $mouse_driver, $mouse_protocol, $Driver, $Driver eq 'fbdev' ? '"default"' : '"800x600" "640x480"'));
 Section "ServerFlags"
    Option "AutoAddDevices" "False"
 EndSection
@@ -281,7 +283,7 @@ EndSection
 
 Section "InputDevice"
     Identifier "Mouse"
-    Driver "mouse"
+    Driver "%s"
     Option "Protocol" "%s"
     Option "Device" "/dev/mouse"
     Option "ZAxisMapping" "4 5"
