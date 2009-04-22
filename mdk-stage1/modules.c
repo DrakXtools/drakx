@@ -39,8 +39,8 @@
 
 #include "modules.h"
 
-#define FIRMWARE_TIMEOUT_FILE "/sys/class/firmware/timeout"
-#define FIRMWARE_TIMEOUT_VALUE "1"
+#define UEVENT_HELPER_FILE "/sys/kernel/uevent_helper"
+#define UEVENT_HELPER_VALUE "/sbin/hotplug"
 
 static char modules_directory[100];
 static struct module_deps_elem * modules_deps = NULL;
@@ -229,14 +229,14 @@ static int load_modules_descriptions(void)
 	return 0;
 }
 
-void init_firmware_timeout(void)
+void init_firmware_loader(void)
 {
-	int fd = open(FIRMWARE_TIMEOUT_FILE, O_WRONLY|O_TRUNC, 0666);
+	int fd = open(UEVENT_HELPER_FILE, O_WRONLY|O_TRUNC, 0666);
 	if (!fd) {
-		log_message("warning, unable to set firmware timeout");
+		log_message("warning, unable to set firmware loader");
 		return;
 	}
-	write(fd, FIRMWARE_TIMEOUT_VALUE, strlen(FIRMWARE_TIMEOUT_VALUE));
+	write(fd, UEVENT_HELPER_VALUE, strlen(UEVENT_HELPER_VALUE));
 	close(fd);
 }
 
