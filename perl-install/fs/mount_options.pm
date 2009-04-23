@@ -225,13 +225,13 @@ sub set_default {
 			      }) if $part->{is_removable};
 
 	put_in_hash($options, {
-			       'umask=0' => $opts{security} <= 3,
+			       'umask=0' => $opts{security} <= 1,
 			       'iocharset=' => $opts{iocharset}, 'codepage=' => $opts{codepage},
 			      });
     }
     if ($part->{fs_type} eq 'ntfs') {
 	put_in_hash($options, { ro => 1, 'nls=' => $opts{iocharset},
-				'umask=0' => $opts{security} < 3, 'umask=0022' => $opts{security} < 4,
+				'umask=0' => $opts{security} < 1, 'umask=0022' => $opts{security} < 2,
 			      });
     }
     if (fs::type::can_be_this_fs_type($part, 'iso9660')) {
