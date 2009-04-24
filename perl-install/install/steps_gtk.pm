@@ -631,7 +631,7 @@ sub installPackages {
 	}
     };
     my $install_result;
-    catch_cdie { $install_result = $o->install::steps::installPackages($packages) }
+    catch_cdie { $install_result = $o->install::steps::installPackages($packages, 'interactive') }
       sub { 
 	  my $rc = install::steps_interactive::installPackages__handle_error($o, $_[0]);
 	  $rc or $w->destroy;
