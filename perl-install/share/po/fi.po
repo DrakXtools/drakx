@@ -1819,7 +1819,7 @@ msgstr "Virheellinen avain"
 #: diskdrake/interactive.pm:866
 #, c-format
 msgid "Choose an existing RAID to add to"
-msgstr "Valitse laite tai luo uusi"
+msgstr "Valitse RAID-laite tai luo uusi"
 
 #: diskdrake/interactive.pm:868 diskdrake/interactive.pm:886
 #, c-format
@@ -1843,12 +1843,12 @@ msgid ""
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
 "Fyysinen levy %s on vielä käytössä.\n"
-"Siirretäänkö käytetyt fyysiset extent-osat muille levyille?"
+"Siirretäänkö käytetyt fyysiset jatkeet muille levyille?"
 
 #: diskdrake/interactive.pm:920
 #, c-format
 msgid "Moving physical extents"
-msgstr "Siirretään fyysisiä extent-osia"
+msgstr "Siirretään fyysisiä jatkeita"
 
 #: diskdrake/interactive.pm:938
 #, c-format
@@ -1893,7 +1893,7 @@ msgstr "Lisäasetukset"
 #: diskdrake/interactive.pm:1070
 #, c-format
 msgid "device"
-msgstr "Laite"
+msgstr "RAID-laite"
 
 #: diskdrake/interactive.pm:1071
 #, c-format
@@ -1908,7 +1908,7 @@ msgstr "Lohkon koko (kt)"
 #: diskdrake/interactive.pm:1090
 #, c-format
 msgid "Be careful: this operation is dangerous."
-msgstr "Varoitus: tämä on vaarallinen toiminto"
+msgstr "Varoitus: kyseessä on vaarallinen toimenpide"
 
 #: diskdrake/interactive.pm:1105
 #, c-format
@@ -2053,7 +2053,7 @@ msgstr "Sylinteristä %d sylinteriin %d\n"
 #: diskdrake/interactive.pm:1298
 #, c-format
 msgid "Number of logical extents: %d\n"
-msgstr ""
+msgstr "Loogisten jatkeiden määrä: %d\n"
 
 #: diskdrake/interactive.pm:1299
 #, c-format
@@ -4788,7 +4788,7 @@ msgstr "Tervetuloa %s:n"
 #: lvm.pm:84
 #, c-format
 msgid "Moving used physical extents to other physical volumes failed"
-msgstr ""
+msgstr "Käytettyjen fyysisten jatkeiden siirto toiselle levylle epäonnistui"
 
 #: lvm.pm:141
 #, c-format
@@ -4804,8 +4804,8 @@ msgstr "Poista ensin loogiset osiot\n"
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
 msgstr ""
-"Käynnistyslatain ei osaa käsitellä /boot-osiota tai hakemistoa usealla "
-"fyysisellä osiolla"
+"Käynnistyslatain ei osaa käsitellä usealla fyysisellä osiolla sijaitsevaa "
+"/boot-osiota tai hakemistoa"
 
 #: messages.pm:11
 #, fuzzy, c-format
