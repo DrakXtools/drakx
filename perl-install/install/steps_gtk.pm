@@ -526,7 +526,7 @@ sub beforeInstallPackages {
 
 #------------------------------------------------------------------------------
 sub installPackages {
-    my ($o, $packages) = @_;
+    my ($o) = @_;
 
     my ($current_total_size, $last_size, $nb, $total_size, $last_dtime, $_trans_progress_total);
 
@@ -631,7 +631,7 @@ sub installPackages {
 	}
     };
     my $install_result;
-    catch_cdie { $install_result = $o->install::steps::installPackages($packages, 'interactive') }
+    catch_cdie { $install_result = $o->install::steps::installPackages('interactive') }
       sub { 
 	  my $rc = install::steps_interactive::installPackages__handle_error($o, $_[0]);
 	  $rc or $w->destroy;

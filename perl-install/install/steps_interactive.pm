@@ -628,7 +628,7 @@ sub reallyChooseGroups {
 
 #------------------------------------------------------------------------------
 sub installPackages {
-    my ($o, $packages) = @_;
+    my ($o) = @_;
     my ($current, $total) = (0, 0);
 
     my ($_w, $wait_message) = $o->wait_message_with_progress_bar(N("Installing"));
@@ -646,7 +646,7 @@ sub installPackages {
     };
 
     my $install_result;
-    catch_cdie { $install_result = $o->install::steps::installPackages($packages, 'interactive') }
+    catch_cdie { $install_result = $o->install::steps::installPackages('interactive') }
       sub { installPackages__handle_error($o, $_[0]) };
 
     if ($install::pkgs::cancel_install) {
