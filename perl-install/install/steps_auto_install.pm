@@ -131,7 +131,7 @@ sub errorInStep {
 #- Steps Functions
 #-######################################################################################
 sub installPackages {
-    my ($o, $packages) = @_;
+    my ($o) = @_;
     catch_cdie { $o->install::steps::installPackages } sub { print formatError($@), "\n"; 1 };
 }
 
