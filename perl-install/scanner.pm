@@ -263,6 +263,7 @@ sub detect {
     open my $DETECT, "LC_ALL=C sane-find-scanner -q |";
     while (my $line = <$DETECT>) {
 	my ($vendorid, $productid, $make, $model, $description, $port, $driver);
+	my $real_device;
 	if ($line =~ /^\s*found\s+USB\s+scanner/i) {
 	    # Found an USB scanner
 	    if ($line =~ /vendor=(0x[0-9a-f]+)[^0-9a-f\[]+[^\[]*\[([^\[\]]+)\].*prod(|uct)=(0x[0-9a-f]+)[^0-9a-f\[]+[^\[]*\[([^\[\]]+)\]/) {
@@ -284,6 +285,7 @@ sub detect {
 
 		if ($device) {
 		    $driver = $device->{driver};
+		    $real_device = $device
 		} else {
 		    #warn "Failed to lookup $vendorid and $productid!\n";
 		}
@@ -349,7 +351,7 @@ sub detect {
 		id => $productid,
 		vendor => $vendorid,
 		driver => $driver,
-		drakx_device => $device,
+		drakx_device => $real_device,
 	    } 
 	};
     }
