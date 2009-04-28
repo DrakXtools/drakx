@@ -373,7 +373,7 @@ sub detect {
 	@res = grep { ! $_->{configured} } @res;
     }
     # blacklist device that have a driver b/c of buggy sane-find-scanner:
-    return grep { member($_->{val}{driver}, qw(scanner unknown)) } @res;
+    return grep { member($_->{val}{driver}, qw(scanner unknown usbcore)) } @res;
 }
 
 sub resolve_symlinks {
