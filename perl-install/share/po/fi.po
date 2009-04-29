@@ -3,7 +3,6 @@
 # Copyright (C) 2002,2003, 2004, 2005 Free Software Foundation, Inc.
 # Copyright (C) 2002 Mandriva
 #
-#
 # Matias Griese <mahagr@utu.fi>, 2001.
 # Taisto Kuikka <69319@batman.jypoly.fi>, 2003,2004.
 # Esa Linna <denzo@mbnet.fi>, 2004.
@@ -14,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-fi\n"
 "POT-Creation-Date: 2009-04-14 17:26+0200\n"
-"PO-Revision-Date: 2009-04-27 19:49+0300\n"
+"PO-Revision-Date: 2009-04-29 21:51+0300\n"
 "Last-Translator: Jani Välimaa <jani.valimaa@gmail.com>\n"
 "Language-Team: Finnish <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -765,7 +764,7 @@ msgstr "Älykortti"
 #: authentication.pm:28 authentication.pm:213
 #, c-format
 msgid "Windows Domain"
-msgstr "Windows-verkkoalue"
+msgstr "Windows-toimialue"
 
 #: authentication.pm:29
 #, c-format
@@ -780,7 +779,7 @@ msgstr "Paikallinen tiedosto:"
 #: authentication.pm:63
 #, c-format
 msgid "Use local for all authentication and information user tell in local file"
-msgstr "Käytä paikallista tunnistusta ja käyttäjien antamia paikallisia tietoja."
+msgstr "Käytä paikallista tunnistautumista ja käyttäjien antamia paikallisia tietoja."
 
 #: authentication.pm:64
 #, c-format
@@ -793,7 +792,7 @@ msgid ""
 "Tells your computer to use LDAP for some or all authentication. LDAP "
 "consolidates certain types of information within your organization."
 msgstr ""
-"Tietokone käyttää LDAP:a joihinkin tai kaikkiin tunnistuksiin. LDAP "
+"Tietokone käyttää LDAPia joihinkin tai kaikkiin tunnistautumisiin. LDAP "
 "keskittää tietyntyyppiset tiedot organisaation sisällä."
 
 #: authentication.pm:65
@@ -807,13 +806,13 @@ msgid ""
 "Allows you to run a group of computers in the same Network Information "
 "Service domain with a common password and group file."
 msgstr ""
-"Sallii samaan NIS-verkkoalueeseen kuuluvien tietokoneiden käyttää yhteistä "
+"Sallii samaan NIS-toimialueeseen kuuluvien tietokoneiden käyttää yhteistä "
 "salasana- ja ryhmätiedostoa."
 
 #: authentication.pm:66
 #, c-format
 msgid "Windows Domain:"
-msgstr "Windows-verkkoalue:"
+msgstr "Windows-toimialue:"
 
 #: authentication.pm:66
 #, c-format
@@ -822,7 +821,7 @@ msgid ""
 "a Windows domain."
 msgstr ""
 "Winbind sallii järjestelmän noutaa tiedot ja tunnistaa käyttäjät Windows-"
-"verkkoalueella."
+"toimialueella."
 
 #: authentication.pm:67
 #, c-format
@@ -832,7 +831,7 @@ msgstr "Kerberos 5:"
 #: authentication.pm:67
 #, c-format
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
-msgstr "Kerberoksella ja LDAPilla Active Directory Server -todentamiseen"
+msgstr "Kerberoksella ja LDAPilla Active Directory Server -tunnistautumiseen "
 
 #: authentication.pm:104 authentication.pm:138 authentication.pm:157
 #: authentication.pm:158 authentication.pm:184 authentication.pm:208
@@ -845,7 +844,7 @@ msgstr " "
 #: authentication.pm:209
 #, c-format
 msgid "Welcome to the Authentication Wizard"
-msgstr "Tervetuloa todentamisvelhoon"
+msgstr "Tervetuloa tunnistautumisvelhoon"
 
 #: authentication.pm:107
 #, c-format
@@ -853,8 +852,7 @@ msgid ""
 "You have selected LDAP authentication. Please review the configuration "
 "options below "
 msgstr ""
-"Olet valinnut LDAP-tunnistautumisen. Tutustu alla oleviin "
-"asetusvaihtoehtoihin "
+"Valitsit LDAP-tunnistautumisen. Tutustu alla oleviin asetusvaihtoehtoihin "
 
 #: authentication.pm:109 authentication.pm:164
 #, c-format
@@ -879,7 +877,7 @@ msgstr "Käytä TLS-salattua yhteyttä "
 #: authentication.pm:114 authentication.pm:169
 #, c-format
 msgid "Download CA Certificate "
-msgstr "Lataa CA-sertifikaatti"
+msgstr "Lataa CA-sertifikaatti "
 
 #: authentication.pm:116 authentication.pm:149
 #, c-format
@@ -954,7 +952,7 @@ msgstr "Käytä nimipalvelinta selvittämään alueiden KDCs:t"
 #: authentication.pm:148
 #, fuzzy, c-format
 msgid "Use DNS to locate realms"
-msgstr "Käytä nimipalvelinta selvittämään alueiden koneiden nimet"
+msgstr "Käytä nimipalvelinta alueiden koneiden nimien selvittämiseen"
 
 #: authentication.pm:153
 #, c-format
@@ -964,7 +962,7 @@ msgstr "Hae käyttäjätiedot paikallisesta tiedostosta"
 #: authentication.pm:154
 #, c-format
 msgid "Use Ldap for users information"
-msgstr "Käytä LDAP:a käyttäjätietojen hakemiseen"
+msgstr "Käytä LDAPia käyttäjätietojen hakemiseen"
 
 #: authentication.pm:160
 #, c-format
@@ -972,8 +970,7 @@ msgid ""
 "You have selected Kerberos 5 for authentication, now you must choose the "
 "type of users information "
 msgstr ""
-"Valitsit Kerberos 5-todennuksen, sinun pitää nyt valita käyttäjätietojen "
-"tyyppi "
+"Valitsit Kerberos 5-tunnistautumisen, valitse myös käyttäjätietojen tyyppi "
 
 #: authentication.pm:166
 #, fuzzy, c-format
@@ -985,12 +982,13 @@ msgstr "Nouda perusta (Dn)"
 msgid ""
 "You have selected NIS authentication. Please review the configuration "
 "options below "
-msgstr "Olet valinnut NIS-todennuksen.  Tutustu alla oleviin asetusvaihtoehtoihin "
+msgstr ""
+"Valitsit NIS-tunnistautumisen. Tutustu alla oleviin asetusvaihtoehtoihin "
 
 #: authentication.pm:189
 #, c-format
 msgid "NIS Domain"
-msgstr "NIS-verkkoalue"
+msgstr "NIS-toimialue"
 
 #: authentication.pm:190
 #, c-format
@@ -1003,13 +1001,13 @@ msgid ""
 "You have selected Windows Domain authentication. Please review the "
 "configuration options below "
 msgstr ""
-"Olet valinnut tunnistautumisen Windows-toimialueen avulla. Tutustu alla "
+"Valitsit tunnistautumisen Windows-toimialueen avulla. Tutustu alla "
 "oleviin asetusvaihtoehtoihin "
 
 #: authentication.pm:215
 #, c-format
 msgid "Domain Model "
-msgstr "Verkkoalueen malli "
+msgstr "Toimialueen tyyppi "
 
 #: authentication.pm:217
 #, c-format
@@ -1017,9 +1015,9 @@ msgid "Active Directory Realm "
 msgstr "Active Directory Realm "
 
 #: authentication.pm:218
-#, fuzzy, c-format
+#, c-format
 msgid "DNS Domain"
-msgstr "NIS-verkkoalue"
+msgstr "DNS-toimialue"
 
 #: authentication.pm:219
 #, fuzzy, c-format
@@ -1050,7 +1048,7 @@ msgstr "Salasana on liian lyhyt, sen tulee olla vähintään %d merkkiä pitkä.
 #: authentication.pm:368
 #, c-format
 msgid "Can not use broadcast with no NIS domain"
-msgstr "Kuulutusta ei voida käyttää ilman NIS-verkkoaluetta"
+msgstr "Kuulutusta ei voida käyttää ilman NIS-toimialuetta"
 
 #: authentication.pm:884
 #, c-format
@@ -1060,17 +1058,17 @@ msgstr "Valitse tiedosto"
 #: authentication.pm:890
 #, c-format
 msgid "Domain Windows for authentication : "
-msgstr "Windows-verkkoalue tunnistautumista varten: "
+msgstr "Windows-toimialue tunnistautumista varten: "
 
 #: authentication.pm:892
 #, c-format
 msgid "Domain Admin User Name"
-msgstr "Verkkoalueen pääkäyttäjän tunnus"
+msgstr "Toimialueen pääkäyttäjän käyttäjätunnus"
 
 #: authentication.pm:893
 #, c-format
 msgid "Domain Admin Password"
-msgstr "Verkkoalueen pääkäyttäjän salasana"
+msgstr "Toimialueen pääkäyttäjän salasana"
 
 # NOTE: this message will be displayed at boot time; that is
 # only the ascii charset will be available on most machines
