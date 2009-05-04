@@ -1137,6 +1137,7 @@ sub has_cpu_flag {
 sub matching_types() {
     +{
 	laptop => isLaptop(),
+	'touchpad' => hasTouchpad(),
 	'64bit' => to_bool(arch() =~ /64/),
 	wireless => to_bool(get_wireless_interface() || probe_category('network/wireless')),
     };
