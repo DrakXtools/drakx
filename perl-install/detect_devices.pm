@@ -493,6 +493,7 @@ sub getInputDevices() {
 
 	    $device->{Synaptics} = $descr eq 'SynPS/2 Synaptics TouchPad';
 	    $device->{ALPS} = $descr =~ m!^AlpsPS/2 ALPS!;
+	    $device->{Elantech} = $descr eq 'ETPS/2 Elantech Touchpad';
 
 	} elsif (/H: Handlers=(.*)/) {
 	    my @l = split(' ', $1);
