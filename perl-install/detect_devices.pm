@@ -1143,6 +1143,8 @@ sub matching_types() {
 }
 
 sub hasWacom()     { find { $_->{vendor} == 0x056a || $_->{driver} =~ /wacom/ } usb_probe() }
+sub hasTouchpad()  { any { $_->{Synaptics} || $_->{ALPS} || $_->{Elantech} } getInputDevices() };
+
 sub usbWacom()     { grep { $_->{vendor} eq '056a' } getInputDevices() }
 sub usbKeyboards() { grep { $_->{media_type} =~ /\|Keyboard/ } usb_probe() }
 sub usbStorage()   { grep { $_->{media_type} =~ /Mass Storage\|/ } usb_probe() }
