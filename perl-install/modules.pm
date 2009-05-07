@@ -258,7 +258,7 @@ sub when_load_category {
 
     if ($category =~ m,disk/ide,) {
 	$conf->add_probeall('ide-controller', $name);
-	eval { load('ide_disk') };
+	eval { load('ide_gd_mod') };
     } elsif ($category =~ m,disk/(scsi|hardware_raid|sata|firewire),) {
 	$conf->add_probeall('scsi_hostadapter', $name);
 	eval { load('sd_mod') };
