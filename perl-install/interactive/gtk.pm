@@ -661,6 +661,7 @@ sub create_widgets {
 	my @all = all_entries($l);
 	$_->{set}->(${$_->{val}}, $_) foreach @all; #- nb: the parameter "$_" is needed for create_boxradio
 	$_->{disabled} and $_->{real_w}->set_sensitive(!$_->{disabled}()) foreach @all;
+	$_->{hidden} and $_->{w}->set_visibility(!$_->{hidden}()) foreach @all;
 	$mainw->{ok}->set_sensitive(!$common->{ok_disabled}()) if $common->{ok_disabled};
 	$ignore = 0;
     };
