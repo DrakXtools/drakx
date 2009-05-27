@@ -1043,7 +1043,7 @@ sub dmidecode_category {
 #- size in MB
 sub dmi_detect_memory() {
     my @l1 = map { $_->{'Enabled Size'} =~ /(\d+) MB/ && $1 } dmidecode_category('Memory Module');
-    my @l2 = map { $_->{'Form Factor'} =~ /^(SIMM|SIP|DIP|DIMM|RIMM|SODIMM|SRIMM)$/ && 		     
+    my @l2 = map { $_->{'Form Factor'} =~ /^(SIMM|SIP|DIP|DIMM|FB-DIMM|RIMM|SODIMM|SRIMM)$/ && 		     
 		     ($_->{Size} =~ /(\d+) MB/ && $1 || $_->{Size} =~ /(\d+) kB/ && $1 * 1024);
 		 } dmidecode_category('Memory Device');
     max(sum(@l1), sum(@l2));
