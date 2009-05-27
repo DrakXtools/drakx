@@ -246,7 +246,7 @@ function write_image()
 	fi
 	
 	image=$(cat $images_dir/list | cut -d ',' -f 3)
-	extension=$(echo $image | cut -d '.' -f 3)
+	extension=${image/*./}
 	imagesize=$(ls -l $images_dir/$image | awk '{ print $5 }')
 	case $extension in
 		gz)
