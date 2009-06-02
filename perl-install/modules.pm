@@ -193,7 +193,7 @@ sub write_preload_conf {
     push @l, map { $_->{driver} } detect_devices::probe_category($_) foreach qw(multimedia/dvb multimedia/tv various/agpgart various/laptop input/joystick various/crypto disk/card_reader);
     push @l, 'padlock-aes', 'padlock-sha' if cat_("/proc/cpuinfo") =~ /rng_en/;
     push @l, 'evdev' if detect_devices::hasTouchpad();
-    push @l, 'evdev' if any { $_->{HWHEEL} } getInputDevices();
+    push @l, 'evdev' if any { $_->{HWHEEL} } detect_devices::getInputDevices();
     push @l, 'hdaps' if $is_laptop && $manufacturer eq 'LENOVO';
     append_to_modules_loaded_at_startup("$::prefix/etc/modprobe.preload", @l);
 }
