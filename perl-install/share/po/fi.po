@@ -9,17 +9,18 @@
 # Thomas Backlund <tmb@mandrake.org>, 2002, 2003, 2004, 2005.
 # Anssi Hannula <anssi@mandriva.org>, 2008.
 # Jani Välimaa <jani.valimaa@gmail.com>, 2009.
+# Jani Välimaa <wally@mandriva.org>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-fi\n"
 "POT-Creation-Date: 2009-04-14 17:26+0200\n"
-"PO-Revision-Date: 2009-05-15 01:24+0300\n"
-"Last-Translator: Jani Välimaa <jani.valimaa@gmail.com>\n"
+"PO-Revision-Date: 2009-06-05 19:04+0300\n"
+"Last-Translator: Jani Välimaa <wally@mandriva.org>\n"
 "Language-Team: Finnish <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 0.3\n"
+"X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: any.pm:252 any.pm:864 diskdrake/interactive.pm:590
@@ -1489,7 +1490,7 @@ msgstr "Tallennetaanko muutokset tiedostoon /etc/fstab"
 #: diskdrake/interactive.pm:298 fs/partitioning_wizard.pm:250
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr "Järjestelmä tulee käynnistää uudelleen osiotaulun muutosten toteutumiseksi"
+msgstr "Järjestelmä tulee käynnistää uudelleen osiotaulun muutosten toteuttamiseksi"
 
 #: diskdrake/interactive.pm:303
 #, c-format
@@ -1499,7 +1500,7 @@ msgid ""
 "Quit anyway?"
 msgstr ""
 "Osio %s tulisi alustaa.\n"
-"Muuten fstab:iin ei kirjoiteta merkintää liitoskohdasta %s.\n"
+"Muuten fstabiin ei kirjoiteta merkintää liitoskohdasta %s.\n"
 "Lopeta joka tapauksessa?"
 
 #: diskdrake/interactive.pm:316
@@ -1659,7 +1660,7 @@ msgid ""
 "First remove a primary partition and create an extended partition."
 msgstr ""
 "Uutta osiota ei voi luoda.\n"
-"(Koska maksimimäärä ensisijaisia osioita on jo käytössä).\n"
+"(Koska maksimimäärä ensisijaisia osioita on jo olemassa).\n"
 "Ensin on poistettava yksi ensisijainen osio ja luotava tilalle laajennettu "
 "osio."
 
@@ -1795,7 +1796,7 @@ msgid ""
 msgstr ""
 "Tietojen yhtenäisyyden varmistamiseksi osion tai osioiden koon\n"
 "muuttamisen jälkeen suoritetaan tiedostojärjestelmän tarkistus,\n"
-"kun kun Microsoft Windows® käynnistetään seuraavan kerran."
+"kun Windows käynnistetään seuraavan kerran."
 
 #: diskdrake/interactive.pm:849 diskdrake/interactive.pm:1393
 #, c-format
@@ -1805,7 +1806,7 @@ msgstr "Tiedostojärjestelmän salausavain"
 #: diskdrake/interactive.pm:850
 #, c-format
 msgid "Enter your filesystem encryption key"
-msgstr "Annan tiedostojärjestelmän salausavain"
+msgstr "Anna tiedostojärjestelmän salausavain"
 
 #: diskdrake/interactive.pm:851 diskdrake/interactive.pm:1401
 #, c-format
@@ -1909,7 +1910,7 @@ msgstr "Lohkon koko (kt)"
 #: diskdrake/interactive.pm:1090
 #, c-format
 msgid "Be careful: this operation is dangerous."
-msgstr "Varoitus: kyseessä on vaarallinen toimenpide"
+msgstr "Varoitus! Kyseessä on vaarallinen toimenpide."
 
 #: diskdrake/interactive.pm:1105
 #, c-format
@@ -6872,11 +6873,10 @@ msgstr ""
 "\n"
 "--default             : tallenna oletushakemistot.\n"
 "--debug               : näytä kaikki vianjäljitysviestit.\n"
-"--show-conf           : varmistettavien tiedostojen tai hakemistojen "
-"listaus.\n"
+"--show-conf           : listaa varmistettavat tiedostot ja hakemistot.\n"
 "--config-info         : selitä asetustiedoston asetukset (käyttäjille ilman "
 "X-palvelinta).\n"
-"--daemon              : käytä taustaprosessi-asetukset. \n"
+"--daemon              : suorita taustaprosessina.\n"
 "--help                : näytä tämä viesti.\n"
 "--version             : näytä versiotiedot.\n"
 
