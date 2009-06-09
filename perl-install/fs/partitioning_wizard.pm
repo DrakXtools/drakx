@@ -122,7 +122,7 @@ sub partitionWizardSolutions {
 
     
     if (my @ok_for_resize_fat = grep { isFat_or_NTFS($_) && !fs::get::part2hd($_, $all_hds)->{readonly}
-					 && fs::type::part2type_name($_) !~ /^Hidden/ } @$fstab) {
+					 && !isRecovery($_) } @$fstab) {
 	$solutions{resize_fat} = 
 	  [ 20 - @ok_for_resize_fat, N("Use the free space on a Microsoft Windows® partition"),
 	    sub {
