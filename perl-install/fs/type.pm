@@ -270,19 +270,19 @@ sub fs_type_from_magic {
     }
 }
 
-sub call_vol_id {
+sub call_blkid {
     my ($part) = @_;
 
     my %h = map {
 	if_(/(.*?)=(.*)/, $1 => $2);
-    } run_program::get_stdout('vol_id', '2>', '/dev/null', devices::make($part->{device}));
+    } run_program::get_stdout('/sbin/blkid', '-o', 'udev', '-p', devices::make($part->{device}), '2>', '/dev/null');
 
     \%h;
 }
 
 sub type_subpart_from_magic { 
     my ($part) = @_;
-    my $ids = call_vol_id($part);
+    my $ids = call_blkid($part);
 
     my $p;
     if ($ids->{ID_FS_USAGE} eq 'raid') {
@@ -297,14 +297,14 @@ sub type_subpart_from_magic {
 	$p = type_name2subpart('Encrypted');
     } elsif (my $fs_type = $ids->{ID_FS_TYPE}) {
 	$fs_type = 'ntfs-3g' if $fs_type eq 'ntfs';
-	$p = fs_type2subpart($fs_type) or log::l("unknown filesystem $fs_type returned by vol_id");
+	$p = fs_type2subpart($fs_type) or log::l("unknown filesystem $fs_type returned by blkid");
     }
 
     if ($p) {
 	$part->{fs_type_from_magic} = $p->{fs_type};
 	$p->{device_LABEL} = $ids->{ID_FS_LABEL} if $ids->{ID_FS_LABEL};
 	$p->{device_UUID} = $ids->{ID_FS_UUID} if $ids->{ID_FS_UUID};
-	log::l("vol_id gave: $p->{fs_type} $p->{device_UUID} $p->{device_LABEL}");
+	log::l("blkid gave: $p->{fs_type} $p->{device_UUID} $p->{device_LABEL}");
     }
     $p;
 }
