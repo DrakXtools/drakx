@@ -25,10 +25,6 @@
 
   df du
 
-  <mode copy="dereference">
-    vol_id <!-- needed by libDrakX -->
-  </mode>
-
   packdrake
   cpio ftp tar
   rsync
@@ -183,6 +179,7 @@
   </if>
 
   /sbin/mount.ntfs-3g <!-- can not be expanded as binary, not executable for all users -->
+  /sbin/blkid
 </from>
 
 <from dir="/usr/lib/rpm" expand="glob">
