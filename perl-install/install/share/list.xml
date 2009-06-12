@@ -16,7 +16,6 @@
   mount mount.nfs umount
 
   <mode copy="dereference">
-    vol_id <!-- needed by libDrakX -->
     usb_id <!-- needed by mouse::detect -->
   </mode>
 
@@ -181,6 +180,7 @@
   /usr/share/terminfo/l/linux
   /bin/brltty
   /sbin/mount.ntfs-3g <!-- can not be expanded as binary, not executable for all users -->
+  /sbin/blkid
 
   /usr/bin/drakx-matchbox-window-manager
   /usr/share/matchbox/mbnoapp.xpm
