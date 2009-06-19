@@ -77,29 +77,6 @@ sub entry {
     if (/^0x([\da-f]{3,4})$/i) {
 	$type = c::S_IFBLK();
 	($major, $minor) = unmakedev(hex $1);
-    } elsif (/^([sv]d.)(\d{0,2})/) {
-        my $path = $2 ? "/sys/block/$1/$1$2/dev" : "/sys/block/$1/dev";
-        ($major, $minor) = split(':', chomp_(cat_($path)));
-	$type = c::S_IFBLK();
-    } elsif (/^hd(.)(\d{0,2})/) {
-	$type = c::S_IFBLK();
-	($major, $minor) =
-	    @{ ${{'a' => [3, 0], 'b' => [3, 64],
-		   'c' => [22,0], 'd' => [22,64],
-		   'e' => [33,0], 'f' => [33,64],
-		   'g' => [34,0], 'h' => [34,64],
-		   'i' => [56,0], 'j' => [56,64],
-		   'k' => [57,0], 'l' => [57,64],
-                   'm' => [88,0], 'n' => [88,64],
-                   'o' => [89,0], 'p' => [89,64],
-                   'q' => [90,0], 'r' => [90,64],
-                   's' => [91,0], 't' => [91,64],
-	       }}{$1} or internal_error("unknown device $_") };
-	$minor += $2 || 0;
-    } elsif (/^ram(.*)/) {
-	$type = c::S_IFBLK();
-	$major = 1;
-	$minor = $1 eq '' ? 1 : $1;
     } elsif (m|^rd/c(\d+)d(\d+)(p(\d+))?|) {
 	# dac 960 "rd/cXdXXpX"
         $type = c::S_IFBLK();
@@ -164,8 +141,33 @@ sub entry {
 		   "console"  => [ c::S_IFCHR(), 5,  1  ],
 		   "systty"   => [ c::S_IFCHR(), 4,  0  ],
 		   "lvm"   =>    [ c::S_IFBLK(), 109, 0 ],
-	       }}{$_} or internal_error("unknown device $_") };
+	       }}{$_} };
     }
+    # Lookup non listed devices in /sys
+    unless ($type) {
+	my $sysdev;
+        if (m!input/(.*)! && -e "/sys/class/input/$1/dev") {
+	    $sysdev = "/sys/class/input/$1/dev";
+	    $type = c::S_IFCHR();
+	} elsif (-e "/sys/block/$_/dev") {
+	    $sysdev = "/sys/block/$_/dev";
+	    $type = c::S_IFBLK();
+        } elsif (/(.+)(\d+)$/ && -e "/sys/block/$1/$2/dev") {
+	    $sysdev = "/sys/block/$_/dev";
+	    $type = c::S_IFBLK();
+        }
+        ($major, $minor) = split(':', chomp_(cat_($sysdev)));
+    }
+    # Lookup partitions in /proc/partitions in case /sys was not available
+    unless ($type) {
+       	if (-e "/proc/partitions") {
+	    if (cat_("/proc/partitions") =~ /^\s*(\d+)\s+(\d+)\s+\d+\s+$_$/m) { 
+		($major, $minor) = ($1, $2);
+		$type = c::S_IFBLK();
+	    }
+	}
+    }
+    $type or internal_error("unknown device $_");
     ($type, $major, $minor);
 }
 
