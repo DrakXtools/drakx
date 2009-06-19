@@ -77,7 +77,7 @@ sub entry {
     if (/^0x([\da-f]{3,4})$/i) {
 	$type = c::S_IFBLK();
 	($major, $minor) = unmakedev(hex $1);
-    } elsif (/^(sd.)(\d{0,2})/) {
+    } elsif (/^([sv]d.)(\d{0,2})/) {
         my $path = $2 ? "/sys/block/$1/$1$2/dev" : "/sys/block/$1/dev";
         ($major, $minor) = split(':', chomp_(cat_($path)));
 	$type = c::S_IFBLK();
