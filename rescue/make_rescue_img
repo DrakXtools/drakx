@@ -56,6 +56,6 @@ if (my ($LANGUAGE) = map { if_(/LANGUAGE_(.*)/, $1) } keys %ENV) {
 
 exit 0 if $ARGV[0];
 
-_ "mksquashfs $tmp $rescue -all-root -noappend >/dev/null";
+_ "mksquashfs3 $tmp $rescue -all-root -noappend >/dev/null";
 _ "chmod 755 $rescue";
 _ "rm -rf $tmp";
