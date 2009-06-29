@@ -64,6 +64,8 @@ elif grep -q rest_all /proc/cmdline; then
     else
         partimage_whole_disk -s $partimage_server rest_all $partimage_dir
     fi
+elif grep -q oem /proc/cmdline; then
+    /tmp/image/oem-rescue.sh
 elif grep -q restore /proc/cmdline; then
     /usr/sbin/restore-image.sh
 elif grep -q kamethod /proc/cmdline; then
