@@ -323,7 +323,12 @@ EOF
 function expand_fs()
 {
 	if [ -z "$win32_part_dev" ]; then
-		root=${root%[0-9]}1
+		if [ -n "$MAIN_PART_NUMBER" ]; then
+			part_number=$MAIN_PART_NUMBER
+		else
+			part_number=1
+		fi
+		root=${root%[0-9]}$part_number
 	fi
 	filesystem_type=$(dumpe2fs -h /dev/${root} 2>/dev/null| grep "Filesystem OS type" | awk '{ print $4 }')
 	if [ "${filesystem_type}" = "Linux" ]; then
