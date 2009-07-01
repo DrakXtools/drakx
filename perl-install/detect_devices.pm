@@ -544,6 +544,11 @@ sub getInputDevices_and_usb() {
     @l;
 }
 
+sub serialPorts() { map { "ttyS$_" } 0..7 }
+sub serialPort2text {
+    $_[0] =~ /ttyS(\d+)/ ? "$_[0] / COM" . ($1 + 1) : $_[0];
+}
+
 sub getSerialModem {
     my ($modules_conf, $o_mouse) = @_;
     my $mouse = $o_mouse || {};
@@ -554,7 +559,7 @@ sub getSerialModem {
     my @modems;
 
     probeSerialDevices();
-    foreach my $port (map { "ttyS$_" } (0..7)) {
+    foreach my $port (serialPorts()) {
 	next if $mouse->{device} =~ /$port/;
      my $device = "/dev/$port";
 	next if !-e $device || !hasModem($device);
