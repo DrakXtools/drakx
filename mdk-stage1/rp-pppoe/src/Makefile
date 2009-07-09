@@ -28,7 +28,7 @@ all: $(TARGETS)
 clean:
 	rm -f *.o *.a $(BINTARGET) pppoe
 
-FLAGS = -Wall -Werror -Os -fomit-frame-pointer '-DPPPOE_PATH="/sbin/pppoe"' '-DPPPD_PATH="/sbin/pppd"' '-DVERSION="3.0-stg1"'
+FLAGS = -Wall -Werror -Os -fno-strict-aliasing -fomit-frame-pointer '-DPPPOE_PATH="/sbin/pppoe"' '-DPPPD_PATH="/sbin/pppd"' '-DVERSION="3.0-stg1"'
 
 ifeq (GLIBC, $(L))
 EXTRA_LDFLAGS = -static
