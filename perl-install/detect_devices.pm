@@ -203,7 +203,7 @@ sub getSCSI() {
     my @l;
     foreach (all($dev_dir)) {
 	my ($host, $channel, $id, $lun) = split ':';
-	defined $lun or log::l("bad entry in $dev_dir: $_"), next;
+	defined $lun or next;
 
 	my $dir = "$dev_dir/$_";
 
