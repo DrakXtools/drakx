@@ -245,7 +245,7 @@ my $pa_defaultsconfig_file = "$::prefix/etc/pulse/default.pa";
 
 sub is_pulseaudio_glitchfree_enabled() {
     return -f $pa_defaultsconfig_file &&
-      cat_($pa_defaultsconfig_file) !~ /^load-module\s+module-hal-detect\s+tsched=0/m;
+      cat_($pa_defaultsconfig_file) !~ /^load-module\s+module-(udev|hal)-detect\s+tsched=0/m;
 }
 
 sub set_pulseaudio_glitchfree {
