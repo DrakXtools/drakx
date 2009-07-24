@@ -186,14 +186,6 @@ sub update_steps_position {
 }
 
 #------------------------------------------------------------------------------
-sub create_logo {
-    my ($o) = @_;
-
-    return if $::logowidth == 0;
-    gtknew('Image', file => 'logo-mandriva.png');
-}
-
-#------------------------------------------------------------------------------
 sub init_gtk {
     my ($o) = @_;
 
