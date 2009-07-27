@@ -57,6 +57,7 @@ sub find_servers {
     s/\s.*\n// foreach @l;
     require network::network;
     my @servers = grep { network::network::is_ip($_) } @l;
+    return unless @servers;
     my %servers;
     $servers{$_}{ip} = $_ foreach @servers;
     my ($ip, $browse);
