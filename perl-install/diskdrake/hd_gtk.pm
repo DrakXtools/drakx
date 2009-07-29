@@ -28,7 +28,7 @@ my ($w, @notebook, $done_button);
 struct {
   string name      # which is displayed in tab of the notebook
   bool no_auto     # wether the kind can disappear after creation
-  string type      # one of { 'hd', 'raid', 'lvm', 'loopback', 'removable', 'nfs', 'smb' }
+  string type      # one of { 'hd', 'raid', 'lvm', 'loopback', 'removable', 'nfs', 'smb', 'dmcrypt' }
   hd | hd_lvm | part_raid[] | part_dmcrypt[] | part_loopback[] | raw_hd[]  val
 
   # 
