@@ -23,17 +23,12 @@ sub save_credentials {
     @$credentials or return;
 
     output_with_perm(secrets_file(), 0600, 
-		     map { to_double_quoted($_->{mntpoint}, $_->{username}, $_->{password}) . "\n" } @$credentials);
+		     map { to_double_quoted($_->{mntpoint}, $_->{username}, $_->{password}, $_->{comment}) . "\n" } @$credentials);
 }
 
 
 sub read_credentials_raw {
-    my ($file) = @_;
-    map { 
-	my %h;
-	@h{'mntpoint', 'username', 'password'} = from_double_quoted($_);
-	\%h;
-    } cat_(secrets_file());
+    from_double_quoted(cat_(secrets_file()));
 }
 
 sub read_credentials {
@@ -41,18 +36,36 @@ sub read_credentials {
     find { $mntpoint eq $_->{mntpoint} } read_credentials_raw();
 }
 
+# Comments are indicated by a '#' character and the rest of the line
+# is ignored. Empty lines are ignored too.
+#
+# Each line consists of two or three items separated by spaces or tabs.
+# If an item contains one of the characters space, tab, #, \ or ", this
+# character must be escaped by a preceding \. Alternatively, the item
+# may be enclosed in double quotes.
+
 sub from_double_quoted {
-    my ($s) = @_;
+    my ($file) = @_;
     my @l;
-    while (1) {
-	(my $e1, my $e2, $s) = 
-	  $s =~ /^( "((?:\\.|[^"])*)" | (?:\\.|[^"\s])+ ) (.*)$/x or die "bad entry $_[0]\n";
-	my $entry = defined $e2 ? $e2 : $e1;
-	$entry =~ s/\\(.)/$1/g;
-	push @l, $entry;
-	last if $s eq '';
-	$s =~ s/^\s+// or die "bad entry $_[0]\n";
-	last if $s eq '';
+    my @lines = split("\n",$file);
+    foreach (@lines){
+	my ($mnt, $user, $pass, $comment); 
+	if (/^\s*(#.*)?$/) {
+	    $comment = $1;
+	} else {
+            if(/^(?:"((?:\\.|[^"])*)"|((?:\\.|[^"\s#])+))\s+(?:"((?:\\.|[^"])*)"|((?:\\.|[^"\s#])+))(?:\s+(?:"((?:\\.|[^"])*)"|((?:\\.|[^"\s#])+)))?(?:\s*(#.*))?$/) {
+	            $mnt = "$1$2";
+		    $mnt =~ s/\\(.)/$1/g;
+		    $user = "$3$4";
+	            $user =~ s/\\(.)/$1/g;
+		    $pass = "$5$6";
+	            $pass =~ s/\\(.)/$1/g;
+		    $comment=$7;
+	    } else {
+		    die "bad entry $_";
+	    }
+        }
+        push @l, {'mntpoint'=>$mnt, 'username'=>$user, 'password'=>$pass, 'comment'=>$comment};
     }
     @l;
 }
