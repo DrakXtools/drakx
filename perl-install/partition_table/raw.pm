@@ -79,11 +79,13 @@ sub adjustStart($$) {
     my ($hd, $part) = @_;
     my $end = $part->{start} + $part->{size};
 
-    $part->{start} = round_up($part->{start},
-			      $part->{start} % cylinder_size($hd) < 2 * $hd->{geom}{sectors} ?
-   			      $hd->{geom}{sectors} : cylinder_size($hd));
-    $part->{size} = $end - $part->{start};
-    $part->{size} > 0 or die "adjustStart get a too small partition to handle correctly";
+    if(cylinder_size($hd)) {
+	$part->{start} = round_up($part->{start},
+				  $part->{start} % cylinder_size($hd) < 2 * $hd->{geom}{sectors} ?
+				  $hd->{geom}{sectors} : cylinder_size($hd));
+	$part->{size} = $end - $part->{start};
+	$part->{size} > 0 or die "adjustStart get a too small partition to handle correctly";
+    }
 }
 #- adjusting end to match a cylinder boundary, two methods are used and must
 #- match at the end, else something is wrong and nothing will be done on
