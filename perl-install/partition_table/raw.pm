@@ -79,7 +79,7 @@ sub adjustStart($$) {
     my ($hd, $part) = @_;
     my $end = $part->{start} + $part->{size};
 
-    if(cylinder_size($hd)) {
+    if (cylinder_size($hd)) {
 	$part->{start} = round_up($part->{start},
 				  $part->{start} % cylinder_size($hd) < 2 * $hd->{geom}{sectors} ?
 				  $hd->{geom}{sectors} : cylinder_size($hd));
