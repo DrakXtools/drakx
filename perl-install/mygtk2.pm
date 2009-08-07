@@ -1217,9 +1217,7 @@ sub _create_Window {
 	} 
     });
 
-    if ($no_Window_Manager) {
-	_force_keyboard_focus($w);
-    }
+    $w->present();
 
     if ($::isInstall && !$::isStandalone) {
 	require install::gtk; #- for perl_checker
@@ -1245,25 +1243,6 @@ sub _create_Window {
     }
 
     $w;
-}
-
-my $current_window;
-sub _force_keyboard_focus {
-    my ($w) = @_;
-
-    sub _XSetInputFocus {
-	my ($w) = @_;
-	if ($current_window == $w) {
-	    $w->window->XSetInputFocus;
-	}
-	0;
-    }
-
-    #- force keyboard focus instead of mouse focus
-    my $previous_current_window = $current_window;
-    $current_window = $w;
-    $w->signal_connect(expose_event => \&_XSetInputFocus);
-    $w->signal_connect(destroy => sub { $current_window = $previous_current_window });
 }
 
 sub _find_imgfile {

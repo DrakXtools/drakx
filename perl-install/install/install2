@@ -27,9 +27,6 @@ use install::install2;
 $::testing = $ENV{PERL_INSTALL_TEST};
 $::isStandalone = 0;
 
-# Workaround crashes in async mode 
-unshift (@ARGV, "--sync");
-
 install::install2::main(@ARGV);
 
 c::_exit(0);
