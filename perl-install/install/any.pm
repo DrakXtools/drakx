@@ -1287,7 +1287,7 @@ sub set_security {
 sub write_fstab {
     my ($o) = @_;
     fs::write_fstab($o->{all_hds}, $::prefix) 
-	if !$o->{isUpgrade} || $o->{isUpgrade} =~ /redhat|conectiva/ || $o->{migrate_device_names};
+	if !$::local_install && (!$o->{isUpgrade} || $o->{isUpgrade} =~ /redhat|conectiva/ || $o->{migrate_device_names});
 }
 
 sub adjust_files_mtime_to_timezone() {
