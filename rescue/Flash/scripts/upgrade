@@ -201,7 +201,7 @@ function copy_new_version() {
     chmod -R u+w $rootdir
     chmod -R u-w $rootdir$boot_rel $rootdir$loopbacks_rel
 
-    new_label=$(source_version_variables "2.0"; echo $label)
+    new_label=$(source_version_variables "2.05"; echo $label)
     MTOOLS_SKIP_CHECK=1 mlabel -i $usbroot_device ::$new_label
 
     return 0
