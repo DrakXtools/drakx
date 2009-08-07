@@ -23,6 +23,19 @@ config_files="etc/sysconfig/* $config_files_users $config_files_time \
 
 config_files_to_remove="etc/sysconfig/harddrake2"
 
+mozilla_files=".apps/FirefoxPortable/Data/profile/*.sqlite \
+               .apps/FirefoxPortable/Data/profile/prefs.js \
+	       .apps/FirefoxPortable/Data/profile/key3.db \
+	       .apps/FirefoxPortable/Data/profile/signons*.txt \
+	       .apps/FirefoxPortable/Data/profile/Bookmarks.html \
+	       .apps/FirefoxPortable/Data/profile/Cookies.txt \
+	       .apps/FirefoxPortable/Data/profile/Downloads.rdf \
+	       .apps/FirefoxPortable/Data/profile/History.dat \
+	       .apps/ThunderbirdPortable/Data/profile/prefs.js \
+	       .apps/ThunderbirdPortable/Data/profile/abook.mab \
+	       .apps/ThunderbirdPortable/Data/profile/Mail \
+	       .apps/ThunderbirdPortable/Data/profile/ImapMail"
+
 function prepare() {
 
     echo "Mounting Mandriva Flash key..."
@@ -137,6 +150,42 @@ function remove_non_user_nor_config_files() {
     return 0
 }
 
+function backup_portable_apps_user_data() {
+    echo "Backing up Firefox and Thunderbird user data..."
+    echo
+
+    cd $rootdir
+
+    if [ -e ..keep ]; then
+	mv ..keep ..keep.bak
+    fi
+
+    if [ -e ..keep ]; then
+	echo "remove_non_user_nor_config_files can't work with existing temp dir"
+	return 1
+    fi
+
+    mkdir ..keep
+
+    move_files $mozilla_files
+
+    cd - > /dev/null
+
+    return 0
+}
+
+function restore_portable_apps_user_data() {
+    echo "Restoring Firefox and Thunderbird user data..."
+    echo
+
+    cd $rootdir/..keep || return 1
+    tar c -C $rootdir/..keep . | tar x -C $rootdir
+    rm -rf $rootdir/..keep
+    cd - > /dev/null
+
+    return 0
+}
+
 function copy_new_version() {
 
     echo "Copying new Mandriva Flash system..."
@@ -198,7 +247,11 @@ function doit() {
 
     remove_non_user_nor_config_files || return 1
 
+    backup_portable_apps_user_data || return 1
+
     copy_new_version || return 1
+
+    restore_portable_apps_user_data || return 1
 
     merge_config_files || return 1
 
