@@ -106,9 +106,11 @@ sub entry {
 		   "ttyS"        => sub { c::S_IFCHR(), 4, 64  },
 		   "ubd/"        => sub { c::S_IFBLK(), 98, 0  },
 		   "dm-"         => sub { c::S_IFBLK(), get_dynamic_major('device-mapper'), 0 },
-	       }}{$prefix} or internal_error("unknown device $prefix $nb");
-	($type, $major, $minor) = $f->();
-	$minor += $nb;
+	       }}{$prefix};
+	if($f) {
+	    ($type, $major, $minor) = $f->();
+	    $minor += $nb;
+        }
     }
     unless ($type) {
 	($type, $major, $minor) =
@@ -141,7 +143,7 @@ sub entry {
 		   "console"  => [ c::S_IFCHR(), 5,  1  ],
 		   "systty"   => [ c::S_IFCHR(), 4,  0  ],
 		   "lvm"   =>    [ c::S_IFBLK(), 109, 0 ],
-	       }}{$_} };
+	       }}{$_} || [] };
     }
     # Lookup non listed devices in /sys
     unless ($type) {
