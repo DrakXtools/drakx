@@ -47,6 +47,7 @@ our %langs = (
 'en_GB' => [ 'English',             'English',           'en_GB', '123 5', 'iso-8859-15' ],
 'en_IE' => [ 'English (Ireland)',   'English (Ireland)', 'en_IE', '1    ', 'iso-8859-15', 'en_IE:en_GB:en' ],
 'en_NZ' => [ 'English (New-Zealand)', 'English (NZ)',    'en_NZ', '   4 ', 'iso-8859-1', 'en_NZ:en_AU:en_GB:en' ],
+'en_ZA' => [ 'English (South Africa)', 'English (ZA)',   'en_ZA', '   3 ', 'iso-8859-1', 'en_ZA:en_GB:en' ],
 'en_US' => [ 'English (American)', 'English (American)', 'en_US', '    5', 'C' ],
 'eo' =>    [ 'Esperanto',           'Esperanto',         'eo_XX', '12345', 'unicode' ],
 'es' =>    [ 'Spanish',             'Espanol',           'es_ES', '1 3 5', 'iso-8859-15' ],
