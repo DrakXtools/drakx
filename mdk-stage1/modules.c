@@ -161,7 +161,7 @@ static int load_modules_dependencies(void)
 
 		start = ptr;
 		i = 0;
-		while (start && *start) {
+		while (start && *start && i < sizeof(tmp_deps)/sizeof(char *)) {
 			ptr = strchr(start, ' ');
 			if (ptr) *ptr = '\0';
 			tmp_deps[i++] = filename2modname(start);
@@ -171,6 +171,12 @@ static int load_modules_dependencies(void)
 				start = NULL;
 			while (start && *start && *start == ' ')
 				start++;
+		}
+		if(i >= sizeof(tmp_deps)/sizeof(char *)-1) {
+			log_message("warning, more than %d dependencies for module %s",
+				    sizeof(tmp_deps)/sizeof(char *)-1,
+				    modules_deps[line].modname);
+			i = sizeof(tmp_deps)/sizeof(char *)-1;
 		}
 		tmp_deps[i++] = NULL;
 
