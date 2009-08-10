@@ -118,7 +118,7 @@ our %langs = (
 'ne' =>    [ 'Nepali',              'ZZ Nepali',         'ne_NP', ' 2   ', 'utf_deva' ],
 'nl' =>    [ 'Dutch',               'Nederlands',        'nl_NL', '1    ', 'iso-8859-15' ],
 'nn' =>    [ 'Norwegian Nynorsk',   'Norsk, Nynorsk',    'nn_NO', '1    ', 'iso-8859-15',  'nn:no@nynorsk:no_NY:no:nb' ],
-'nr' =>    [ 'Ndebele',             'IsiNdebele',        'nr_ZA', '  3  ', 'utf_lat1', 'nr:en_ZA' ],
+'nr' =>    [ 'Ndebele',             'Ndebele',        'nr_ZA', '  3  ', 'utf_lat1', 'nr:en_ZA' ],
 'nso' =>   [ 'Northern Sotho',      'Sesotho sa Leboa',  'nso_ZA', '  3  ', 'utf_lat1', 'st:nso:en_ZA' ],
 'oc' =>    [ 'Occitan',             'Occitan',           'oc_FR', '1    ', 'utf_lat1',  'oc:fr_FR:fr' ],
 'pa_IN' => [ 'Punjabi (gurmukhi)',  'ZZ Punjabi',        'pa_IN', ' 2   ', 'utf_guru' ],
@@ -164,12 +164,12 @@ our %langs = (
 #- locale "wen_DE" not done yet, using "de_DE" instead
 #- wen disabled until we have a perl-install/pixmaps/langs/lang-wen.png for it
 #'wen' =>   [ 'Sorbian',             'Sorbian',           'de_DE', '1    ', 'utf_lat1', 'wen' ],
-'xh' =>    [ 'Xhosa',               'IsiXhosa',          'xh_ZA', '  3  ', 'utf_lat1', 'xh:en_ZA' ],
+'xh' =>    [ 'Xhosa',               'Xhosa',          'xh_ZA', '  3  ', 'utf_lat1', 'xh:en_ZA' ],
 'yi' =>    [ 'Yiddish',             'AA Yidish',         'yi_US', '1    ', 'utf_he' ],
 'yo' =>    [ 'Yoruba',              'Yoruba',            'yo_NG', '  3  ', 'utf_yo', 'yo:en_NG' ],
 'zh_CN' => [ 'Chinese Simplified',  'ZZ ZhongWen',       'zh_CN', ' 2   ', 'gb2312',      'zh_CN.GBK:zh_CN.GB2312:zh_CN:zh' ],
 'zh_TW' => [ 'Chinese Traditional', 'ZZ ZhongWen',       'zh_TW', ' 2   ', 'Big5',        'zh_TW.Big5:zh_TW:zh_HK:zh' ],
-'zu' =>    [ 'Zulu',                 'IsiZulu',          'zu_ZA', '  3  ', 'utf_lat1', 'xh:en_ZA' ],
+'zu' =>    [ 'Zulu',                 'Zulu',          'zu_ZA', '  3  ', 'utf_lat1', 'xh:en_ZA' ],
 );
 sub l2name           { exists $langs{$_[0]} && $langs{$_[0]}[0] }
 sub l2transliterated { exists $langs{$_[0]} && $langs{$_[0]}[1] }
