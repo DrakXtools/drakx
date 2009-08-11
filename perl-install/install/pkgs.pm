@@ -684,6 +684,10 @@ sub install {
     URPM::add_macro(join(' ', '__dbi_cdb', URPM::expand('%__dbi_cdb'), 'nofsync'));
     my $LOG = _openInstallLog();
 
+    $packages->{log} = $packages->{info} = $packages->{print} = sub {
+        print $LOG "$_[0]\n";
+    };
+
     #- do not modify/translate the message used with installCallback since
     #- these are keys during progressing installation, or change in other
     #- place (install::steps_gtk.pm,...).
