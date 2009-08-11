@@ -1019,7 +1019,10 @@ sub dmidecode() {
     my ($ver, @l) = run_program::get_stdout('dmidecode');
 
     my $tab = "\t";
-    if ($ver =~ /(\d+\.\d+)/ && $1 >= 2.7) {
+
+    my ($major, $minor) = $ver =~ /(\d+)\.(\d+)/;
+
+    if ($major > 2 || $major == 2 && $minor >7) {
 	#- new dmidecode output is less indented
 	$tab = '';
 	#- drop header
