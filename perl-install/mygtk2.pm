@@ -1217,8 +1217,6 @@ sub _create_Window {
 	} 
     });
 
-    $w->present();
-
     if ($::isInstall && !$::isStandalone) {
 	require install::gtk; #- for perl_checker
 	install::gtk::handle_unsafe_mouse($::o, $w);
@@ -1241,6 +1239,8 @@ sub _create_Window {
 		     max(0, ($::o->{windowheight} - $he) / 2));
 	}) if $special_center;
     }
+
+    $w->present() if $no_Window_Manager;
 
     $w;
 }
