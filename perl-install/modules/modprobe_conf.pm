@@ -25,8 +25,9 @@ sub get_above {
 }
 sub set_above {
     my ($conf, $module, $o_modules) = @_;
+    return unless $o_modules;
     $module = $conf->mapping($module);
-    my @modules = $conf->mapping(split(' ', $o_modules || ''));
+    my @modules = $conf->mapping(split(' ', $o_modules));
 
     { #- first add to "install" command
 	my ($before, $after) = parse_non_virtual($module, $conf->{$module}{install});
