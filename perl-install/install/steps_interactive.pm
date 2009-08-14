@@ -254,8 +254,8 @@ sub setupSCSI {
     modules::interactive::load_category($o, $o->{modules_conf}, 'bus/firewire', 1);
 
     my $have_non_scsi = detect_devices::hds(); #- at_least_one scsi device if we have no disks
-    modules::interactive::load_category($o, $o->{modules_conf}, 'disk/card_reader|ide|scsi|hardware_raid|sata|firewire', 1, !$have_non_scsi);
-    modules::interactive::load_category($o, $o->{modules_conf}, 'disk/card_reader|ide|scsi|hardware_raid|sata|firewire') if !detect_devices::hds(); #- we really want a disk!
+    modules::interactive::load_category($o, $o->{modules_conf}, 'disk/card_reader|ide|scsi|hardware_raid|sata|firewire|virtual', 1, !$have_non_scsi);
+    modules::interactive::load_category($o, $o->{modules_conf}, 'disk/card_reader|ide|scsi|hardware_raid|sata|firewire|virtual') if !detect_devices::hds(); #- we really want a disk!
 
     install::interactive::tellAboutProprietaryModules($o);
 
