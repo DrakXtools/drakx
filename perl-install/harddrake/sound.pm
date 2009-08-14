@@ -250,14 +250,11 @@ sub is_pulseaudio_glitchfree_enabled() {
 
 sub set_pulseaudio_glitchfree {
     my ($val) = @_;
-    my $string = "load-module module-hal-detect tsched=0\n";
     substInFile {
-        if (/^load-module\s*module-hal-detect/) {
-            if ($val) {
-                s/\s*tsched=0//;
-            } else {
-                $_ = $string;
-            }
+        if ($val) {
+            s/^(load-module\s+module-(udev|hal)-detect)\s+tsched=0/$1/;
+        } else {
+            s/^(load-module\s+module-(udev|hal)-detect).*/$1 tsched=0/;
         }
     } $pa_defaultsconfig_file;
 }
