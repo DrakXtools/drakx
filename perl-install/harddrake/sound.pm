@@ -181,8 +181,6 @@ our %oss2alsa =
 my @blacklist = qw(cs46xx cs4281);
 my $blacklisted = 0;
 
-my $config_file = "$::prefix/etc/sysconfig/pulseaudio";
-
 sub is_user_switching_enabled() {
     my $output = run_program::get_stdout('polkit-action', '--action',
                                          'org.freedesktop.hal.device-access.sound');
@@ -203,12 +201,19 @@ sub set_user_switching {
 
 
 sub is_pulseaudio_enabled() {
-    my %h = getVarsFromSh($config_file);
-    $h{PULSE_SERVER_TYPE} eq 'personal';
+    my $soundprofile = common::read_alternative('soundprofile');
+    $soundprofile =~ /pulse$/;
 }
 
 sub set_pulseaudio {
     my ($val) = @_;
+
+    my $alterative = '/etc/sound/profiles/' . ($val ? 'pulse' : 'alsa');
+    common::set_alternative('soundprofile', $alterative);
+
+    # (cg) This config file will eventually be dropped, but it is still needed for now
+    # as several packages/patches depend on it.
+    my $config_file = "$::prefix/etc/sysconfig/pulseaudio";
     $val = 'PULSE_SERVER_TYPE=' . ($val ? 'personal' : 'none') . "\n";
     my $done;
     substInFile {
@@ -218,26 +223,6 @@ sub set_pulseaudio {
         }
     } $config_file;
     append_to_file($config_file, $val) if !$done;
-}
-
-
-my $alsa_routing_config_file = "$::prefix/etc/alsa/pulse-default.conf";
-my $disabling = '#DRAKSOUND- ';
-
-sub is_pulseaudio_routing_enabled() {
-    return -f $alsa_routing_config_file &&
-      cat_($alsa_routing_config_file) !~ /$disabling/;
-}
-
-sub set_pulseaudio_routing {
-    my ($val) = @_;
-    substInFile {
-        if ($val) {
-            s/^(?:$disabling)*//g;
-        } else {
-            s/^/$disabling/ if !/^$disabling/;
-        }
-    } $alsa_routing_config_file;
 }
 
 
@@ -352,7 +337,6 @@ sub switch {
         my %des = modules::category2modules_and_description('multimedia/sound');
         
         my $is_pulseaudio_enabled = is_pulseaudio_enabled();
-        my $is_pulseaudio_routing_enabled = is_pulseaudio_routing_enabled();
         my $is_pulseaudio_glitchfree_enabled = is_pulseaudio_glitchfree_enabled();
         my $is_5_1_in_pulseaudio_enabled = is_5_1_in_pulseaudio_enabled();
         my $is_user_switching = is_user_switching_enabled();
@@ -361,12 +345,11 @@ sub switch {
 
         my $write_config = sub {
             set_pulseaudio($is_pulseaudio_enabled);
-            set_pulseaudio_routing($is_pulseaudio_enabled && $is_pulseaudio_routing_enabled);
             set_pulseaudio_glitchfree($is_pulseaudio_glitchfree_enabled);
             set_PA_autospan($is_pulseaudio_enabled);
             set_5_1_in_pulseaudio($is_5_1_in_pulseaudio_enabled);
             set_user_switching($is_user_switching);
-            if ($is_pulseaudio_routing_enabled) {
+            if ($is_pulseaudio_enabled) {
                 $in->do_pkgs->ensure_is_installed('alsa-plugins-pulseaudio', '/usr/'
                                                     . (arch() =~ /x86_64/ ? 'lib64' : 'lib')
                                                     . '/alsa-lib/libasound_module_pcm_pulse.so');
@@ -382,11 +365,6 @@ sub switch {
             {
                 text => N("Enable PulseAudio"),
                 type => 'bool', val => \$is_pulseaudio_enabled,
-            },
-            {
-                text => N("Automatic routing from ALSA to PulseAudio"),
-                type => 'bool', val => \$is_pulseaudio_routing_enabled,
-                disabled => sub { !$is_pulseaudio_enabled },
             },
             {
                 text => N("Enable 5.1 sound with Pulse Audio"),
