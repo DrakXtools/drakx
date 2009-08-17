@@ -65,6 +65,7 @@ sub actions {
      N_("Server") => \&ask_server,
      N_("Mount point") => \&mount_point,
      N_("Options") => \&options,
+     N_("Remove") => \&remove,
      N_("Done") => sub {},
     );
 }
@@ -99,6 +100,16 @@ sub options {
     diskdrake::interactive::Options($in, {}, $dav, $all_hds);
     return;
 }
+
+sub remove {
+    my ($in, $dav, $all_hds) = @_;
+    if ($in->ask_yesorno(N("Warning"), N("Are you sure you want to delete this mountpoint?"))) {
+            @{$all_hds->{davs}} = grep($_->{mntpoint} ne $dav->{mntpoint}, @{$all_hds->{davs}});
+            return 1;
+    }
+    return;
+}
+
 sub mount_point { 
     my ($in, $dav, $all_hds) = @_;
     my $proposition = $dav->{device} =~ /(\w+)/ ? "/mnt/$1" : "/mnt/dav";
