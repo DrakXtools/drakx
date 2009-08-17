@@ -195,6 +195,7 @@ our %l = (
           qw(snd-als4000 snd-atiixp snd-au8810 snd-au8820 snd-au8830 snd-audigyls snd-aw2 snd-azt2316 snd-azt2320 snd-azt3328 snd-azx),
           qw(snd-asihpi snd-at73c213 snd-bt87x snd-ca0106 snd-cmi8330 snd-cmi8788 snd-cmipci),
           qw(snd-cs4231 snd-cs4232 snd-cs4236 snd-cs4281 snd-cs46xx snd-cs5530 snd-cs5535audio),
+          qw(snd_ctxfi),
           qw(snd-darla20 snd-darla24 snd-dt019x snd-echo3g snd-emu10k1 snd-emu10k1x),
           qw(snd-ens1370 snd-ens1371 snd-es1688 snd-es18xx snd-es1938 snd-es1968 snd-es968),
           qw(snd-fm801 snd-gina20 snd-gina24 snd-gina3g),
