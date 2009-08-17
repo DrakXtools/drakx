@@ -37,6 +37,7 @@ sub create {
     ask_server($in, $dav, $all_hds) or return;
     push @{$all_hds->{davs}}, $dav;
     config($in, $dav, $all_hds);
+    return;
 }
 
 sub config {
@@ -45,11 +46,12 @@ sub config {
     my $dav = { %$dav_ }; #- working on a local copy so that "Cancel" works
 
     my $action;
-    while ($action ne 'Done') {
+    my $exit;
+    while (!$exit && $action ne 'Done') {
 	my %actions = my @actions = actions($dav);
 	$action = $in->ask_from_list_('', format_dav_info($dav), 
 					 [ map { $_->[0] } group_by2 @actions ], 'Done') or return;
-	$actions{$action}->($in, $dav, $all_hds);    
+	$exit = $actions{$action}->($in, $dav, $all_hds);    
     }
     %$dav_ = %$dav; #- applying
 }
@@ -95,11 +97,13 @@ sub ask_server {
 sub options {
     my ($in, $dav, $all_hds) = @_;
     diskdrake::interactive::Options($in, {}, $dav, $all_hds);
+    return;
 }
 sub mount_point { 
     my ($in, $dav, $all_hds) = @_;
     my $proposition = $dav->{device} =~ /(\w+)/ ? "/mnt/$1" : "/mnt/dav";
     diskdrake::interactive::Mount_point_raw_hd($in, $dav, $all_hds, $proposition);
+    return;
 }
 
 sub format_dav_info {
