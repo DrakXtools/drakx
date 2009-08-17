@@ -597,6 +597,26 @@ sub setupBootloader__entries {
 	1;
     };
 
+    my $Up = sub {
+	my ($e) = @_;
+	my @entries = @{$b->{entries}};
+	my ($index) = grep { $entries[$_]->{label} eq $e->{label} } 0..$#entries;
+	if ($index > 0) {
+	  (@{$b->{entries}}->[$index - 1], @{$b->{entries}}->[$index]) = (@{$b->{entries}}->[$index], @{$b->{entries}}->[$index - 1]);
+	}
+	1;
+    };
+    
+    my $Down = sub {
+	my ($e) = @_;
+	my @entries = @{$b->{entries}};
+	my ($index) = grep { $entries[$_]->{label} eq $e->{label} } 0..$#entries;
+	if ($index < $#entries) {
+	  (@{$b->{entries}}->[$index + 1], @{$b->{entries}}->[$index]) = (@{$b->{entries}}->[$index], @{$b->{entries}}->[$index + 1]);
+	}
+	1;
+    };
+
     my @prev_entries = @{$b->{entries}};
     if ($in->ask_from__add_modify_remove(N("Bootloader Configuration"),
 N("Here are the entries on your boot menu so far.
@@ -607,7 +627,7 @@ You can create additional entries or change the existing ones."), [ {
 	      ($b->{default} eq $e->{label} ? "  *  " : "     ") . "$e->{label} ($e->{kernel_or_dev})" : 
 		translate($e);
 	}, list => $b->{entries},
-    } ], Add => $Add, Modify => $Modify, Remove => $Remove)) {
+    } ], Add => $Add, Modify => $Modify, Remove => $Remove, Up => $Up, Down => $Down)) {
 	1;
     } else {
 	@{$b->{entries}} = @prev_entries;

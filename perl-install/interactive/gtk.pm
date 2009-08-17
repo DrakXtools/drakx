@@ -450,9 +450,14 @@ sub create_widget {
 	$e->{formatted_list} = [ map { may_apply($e->{format}, $_) } @{$e->{list}} ];
 
 	if (my $actions = $e->{add_modify_remove}) {
+	    my @buttons = ( N_("Add"), N_("Modify"), N_("Remove"));
+	    # Add Up/Down buttons if their actions are defined
+	    foreach (qw(Up Down)) {
+	        push @buttons, N_($_) if ($actions->{$_});
+	    }
 	    my @buttons = map {
 		{ kind => lc $_, action => $actions->{$_}, button => Gtk2::Button->new(translate($_)) };
-	    } N_("Add"), N_("Modify"), N_("Remove");
+	    } @buttons;
 	    my $modify = find { $_->{kind} eq 'modify' } @buttons;
 
 	    my $do_action = sub {
