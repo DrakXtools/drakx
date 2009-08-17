@@ -1,5 +1,9 @@
 - handle new drivers: 
   o sound: snd_ctxfi
+- draksound
+  o fix enabling and disabling with udev-detect properly (new PA)
+  o introduce the concept of soundprofiles for enabling/disabling PA
+  o remove alsa->pulse routing option (enabling pulse but not alsa redirection is a niche setup)
 
 Version 12.44 - 13 August 2009 
 
