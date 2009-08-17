@@ -72,6 +72,9 @@ sub mount {
 	fsck_jfs($dev, $o_wait_message);
     } elsif ($fs eq 'ext2' && !$b_rdonly) {
 	fsck_ext2($dev, $o_wait_message);
+    } elsif ($fs eq 'davfs2') {
+	# username and password options should be handled by /etc/davfs2/secrets file
+	@mount_opt = grep { !/^(username|password)=/ } @mount_opt;
     }
 
     push @mount_opt, 'ro' if $b_rdonly;
