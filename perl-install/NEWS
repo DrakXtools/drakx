@@ -2,6 +2,8 @@
   o never pass username/password as options with davfs2 
   o store credentials in davfs2 secret file before mounting
   o when user does not specify user/pass with davfs2, fallback to nobody/nobody
+  o Fix a crash with regexp when a /etc/davfs2/secrets line is 
+    finished with one or more blank characters without comments
 - adduserdrake
   o now use password weakness display
 - added password weakness display feature in interactive
