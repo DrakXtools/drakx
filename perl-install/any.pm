@@ -822,7 +822,7 @@ sub ask_user_and_root {
 
           { label => N("Login name"), val => \$u->{name}, list => \@suggested_names, alignment => 'right',
             not_edit => 0, validate => $validate_name },
-          { label => N("Password"),val => \$u->{password}, hidden => 1, alignment => 'right',
+          { label => N("Password"),val => \$u->{password}, hidden => 1, alignment => 'right', weakness_check => 1,
 	    validate => sub { authentication::check_given_password($in, $u, $security > 3 ? 6 : 0) } },
           { label => N("Password (again)"), val => \$u->{password2}, hidden => 1, alignment => 'right' },
           { label => N("Shell"), val => \$u->{shell}, list => [ shells() ], advanced => 1 },

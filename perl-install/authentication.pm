@@ -967,4 +967,35 @@ sub configure_nss_ldap {
                 );
         }
  }
+
+ sub compute_password_weakness {
+
+   my ($password) = @_;
+   my $score = 0;
+   my $len = length($password);
+
+   return 0 if $len == 0;
+
+   $score = $len < 5 ? 3 :
+   $len > 4 && $len < 8 ? 6 :
+   $len > 7 && $len < 16 ? 12 : 18;
+
+   $score += 1 if $password =~ /[a-z]/;
+   $score += 5 if $password =~ /[A-Z]/;
+   $score += 5 if $password =~ /\d+/;
+   $score += 5 if $password =~ /(.*[0-9].*[0-9].*[0-9])/;
+   $score += 5 if $password =~ /.[!@#$%^&*?_~,]/;
+   $score += 5 if $password =~ /(.*[!@#$%^&*?_~,].*[!@#$%^&*?_~,])/;
+   $score += 2 if $password =~ /([a-z].*[A-Z])|([A-Z].*[a-z])/;
+   $score += 2 if $password =~ /([a-zA-Z])/ && $password =~ /([0-9])/;
+   $score += 2 if $password =~ /([a-z].*[A-Z])|([A-Z].*[a-z])/;
+   $score += 2 if $password =~ /([a-zA-Z0-9].*[!@#$%^&*?_~])|([!@#$%^&*?_~,].*[a-zA-Z0-9])/;
+
+   my $level = $score < 16 ? 1 :
+   $score > 15 && $score < 25 ? 2 :
+   $score > 24 && $score < 35 ? 3 :
+   $score > 34 && $score < 45 ? 4 : 5;
+
+   return $level;
+ }
 1;
