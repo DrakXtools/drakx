@@ -34,7 +34,7 @@ use run_program;
 
 my $prog;
 my $incident = 0;
-my ($table, $comb_app, $com_app, $button_pkg, $package, $distrocode, $error, $gdb_trace, $user_descr);
+my ($table, $comb_app, $com_app, $button_pkg, $button_browse, $package, $distrocode, $error, $gdb_trace, $user_descr);
 
 my $i;
 foreach (@ARGV) {
@@ -115,6 +115,7 @@ $table = create_packtable({ col_spacings => 5, row_spacings => 10 },
 			  gtkpack_(Gtk2::HBox->new(0, 5),
 				   1, $com_app = gtkset_editable(Gtk2::Entry->new, 1), 
 				   0, $button_pkg = Gtk2::Button->new(N("Find Package")),
+				   0, $button_browse = Gtk2::FileChooserButton->new(N("Browse"), 'GTK_FILE_CHOOSER_ACTION_OPEN'),
 				  ) ],
 			  [ gtknew('Label_Left', text => N("Package: ")), $package = Gtk2::Entry->new_with_text("...") ], # complain on gtk-perl@ml
 			  [ gtknew('Label_Left', text => N("Kernel:")), gtkset_editable(Gtk2::Entry->new_with_text($kernel_release), 0) ]
@@ -204,6 +205,8 @@ $button_pkg->signal_connect('clicked', sub {
 				    my $pkg_name = get_package($com_app->get_text);
 				    $package->set_text($pkg_name);
 				});
+
+$button_browse->signal_connect('file-set', sub { $com_app->set_text($button_browse->get_filename()) });
 
 $window->{window}->show_all;
 $window->main;
