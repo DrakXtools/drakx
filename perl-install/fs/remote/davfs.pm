@@ -26,6 +26,22 @@ sub save_credentials {
 		     map { to_double_quoted($_->{mntpoint}, $_->{username}, $_->{password}, $_->{comment}) . "\n" } @$credentials);
 }
 
+sub mountpoint_credentials_save {
+    my ($mntpoint, $mount_opt) = @_;
+    my @entries = read_credentials_raw();
+    my $entry = find { $mntpoint eq $_->{mntpoint} } @entries;
+    die "mountpoint not found" if !$entry;
+    my %h;
+    foreach (@$mount_opt) {
+        my @var = split(/=/);
+        $h{$var[0]} = $var[1];
+    }
+    foreach my $key qw(username password) {
+        $entry->{$key} = $h{$key};
+    }
+    save_credentials(\@entries);
+}
+
 
 sub read_credentials_raw {
     from_double_quoted(cat_(secrets_file()));

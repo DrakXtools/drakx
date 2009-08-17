@@ -73,6 +73,9 @@ sub mount {
     } elsif ($fs eq 'ext2' && !$b_rdonly) {
 	fsck_ext2($dev, $o_wait_message);
     } elsif ($fs eq 'davfs2') {
+	require fs::remote::davfs;
+	# We have to store credentials in davfs2 secret file before mounting
+	fs::remote::davfs::mountpoint_credentials_save($where, \@mount_opt);
 	# username and password options should be handled by /etc/davfs2/secrets file
 	@mount_opt = grep { !/^(username|password)=/ } @mount_opt;
     }
