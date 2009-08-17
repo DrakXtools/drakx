@@ -253,7 +253,7 @@ sub prepare_write_fstab {
 		    $options = $opts;
 		    push @smb_credentials, $smb_credentials;
 		}
-	    } elsif ($_->{fs_type} eq 'davfs2' && $options =~ /password=/ && !$b_keep_credentials) {
+	    } elsif ($_->{fs_type} eq 'davfs2' && !$b_keep_credentials) {
 		require fs::remote::davfs;
 		if (my ($opts, $davfs_credentials) = fs::remote::davfs::fstab_entry_to_credentials($_)) {
 		    $options = $opts || 'defaults';

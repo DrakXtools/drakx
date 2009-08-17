@@ -12,8 +12,10 @@ sub fstab_entry_to_credentials {
     my ($part) = @_;    
 
     my ($options, $unknown) = fs::mount_options::unpack($part);
-    $options->{'username='} && $options->{'password='} or return;
     my %h = map { $_ => delete $options->{"$_="} } qw(username password);
+    foreach (qw(username password)) {
+        $h{$_} = 'nobody' if !$h{$_};
+    }
     $h{mntpoint} = $part->{mntpoint} or return;
     fs::mount_options::pack_($part, $options, $unknown), \%h;
 }
