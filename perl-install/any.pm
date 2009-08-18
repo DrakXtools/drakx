@@ -826,7 +826,7 @@ sub ask_user_and_root {
         }, [ 
 	      $superuser ? (
 	  { label => N("Set administrator (root) password"), title => 1 },
-	  { label => N("Password"), val => \$superuser->{password},  hidden => 1, alignment => 'right',
+	  { label => N("Password"), val => \$superuser->{password},  hidden => 1, alignment => 'right', weakness_check => 1,
 	    validate => sub { authentication::check_given_password($in, $superuser, 2 * $security) } },
 	  { label => N("Password (again)"), val => \$superuser->{password2}, hidden => 1, alignment => 'right' },
               ) : (),
