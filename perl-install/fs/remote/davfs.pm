@@ -38,7 +38,7 @@ sub mountpoint_credentials_save {
         my @var = split(/=/);
         $h{$var[0]} = $var[1];
     }
-    foreach my $key qw(username password) {
+    foreach my $key (qw(username password)) {
         $entry->{$key} = $h{$key};
     }
     save_credentials(\@entries);
