@@ -545,7 +545,7 @@ get_disk_partitions(char * device_path)
         char *path = ped_partition_get_path(part);
         sprintf(desc, "%d ", part->num);
         sprintf(desc+strlen(desc), "%s ", path);
-        ped_free(path);
+        free(path);
         if(part->fs_type)
           strcat(desc, part->fs_type->name);
         if(part->type == 0x0)
