@@ -371,8 +371,7 @@ sub getATARAID() {
 sub getVirtIO() {
     -d '/sys/bus/virtio/devices' or return;
     map {
-            print basename($_)."\n";
-            { device => "/dev/".basename($_), info => "VirtIO block device", media_type => 'hd', bus => 'virtio' }
+            { device => basename($_), info => "VirtIO block device", media_type => 'hd', bus => 'virtio' }
     }
     glob("/sys/bus/virtio/devices/*/block/*");
 }
