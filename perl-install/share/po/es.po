@@ -1,22 +1,23 @@
 # traducción de DrakX-es.po to Español
 # spanish translation of DrakX
 # Copyright (C) 2000, 2001,2002 Mandriva S.A.
+#
 # Fabián Mandelbaum <fmandelbaum@gmail.com>, 2000-2004, 2006, 2007.
 # Pablo Saratxaga <pablo@mandriva.com>, 2004, 2006.
 # Jaime Crespo <505201@unizar.es>, 2004, 2005.
 # José Manuel Pérez <jmprodu@hotmail.com>, 2005.
-#
+# Andre Paulo Machado <andre.panm@gmail.com>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-es\n"
 "POT-Creation-Date: 2009-04-14 17:26+0200\n"
-"PO-Revision-Date: 2008-09-30 12:53-0300\n"
-"Last-Translator: Fabián Mandelbaum <fmandelbaum@gmail.com>\n"
+"PO-Revision-Date: 2009-08-31 14:12-0300\n"
+"Last-Translator: Andre Paulo Machado <andre.panm@gmail.com>\n"
 "Language-Team: Español <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10\n"
+"X-Generator: Lokalize 0.3\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: any.pm:252 any.pm:864 diskdrake/interactive.pm:590
@@ -164,10 +165,9 @@ msgstr "Demora antes de arrancar la imagen predeterminada"
 msgid "Enable ACPI"
 msgstr "Habilitar ACPI"
 
-#: any.pm:411
-#, fuzzy, c-format
+#: any.pm:411, c-format
 msgid "Enable SMP"
-msgstr "Habilitar ACPI"
+msgstr "Habilitar SMP"
 
 #: any.pm:412
 #, c-format
@@ -686,13 +686,14 @@ msgstr ""
 "Los recursos compartidos por usuario utilizan el grupo \"fileshare\". \n"
 "Puede utilizar UserDrake para añadir un usuario a este grupo."
 
-#: any.pm:1385
-#, fuzzy, c-format
+#: any.pm:1385, c-format
 msgid ""
 "You need to logout and back in again for changes to take effect. Press OK to "
 "logout now."
 msgstr ""
-"Debe desconectarse y volver a conectarse para que los cambios tengan efecto"
+"Debe desconectarse y volver a conectarse para que los cambios tengan efecto. "
+"Pulse OK "
+"para conectarse ahora."
 
 #: any.pm:1389
 #, c-format
@@ -947,15 +948,13 @@ msgstr "Reino "
 msgid "KDCs Servers"
 msgstr "Servidores KDCs"
 
-#: authentication.pm:147
-#, fuzzy, c-format
+#: authentication.pm:147, c-format
 msgid "Use DNS to locate KDC for the realm"
-msgstr "Usar DNS para resolver los KDCs del reino "
+msgstr "Utilizar DNS para resolver los KDCs del reino "
 
-#: authentication.pm:148
-#, fuzzy, c-format
+#: authentication.pm:148, c-format
 msgid "Use DNS to locate realms"
-msgstr "Usar DNS para resolver los hosts del reino "
+msgstr "Utilizar DNS para resolver reinos"
 
 #: authentication.pm:153
 #, c-format
@@ -1019,15 +1018,13 @@ msgstr "Modelo de dominio "
 msgid "Active Directory Realm "
 msgstr "Reino Active Directory"
 
-#: authentication.pm:218
-#, fuzzy, c-format
+#: authentication.pm:218, c-format
 msgid "DNS Domain"
-msgstr "Dominio NIS"
+msgstr "Dominio DNS"
 
-#: authentication.pm:219
-#, fuzzy, c-format
+#: authentication.pm:219, c-format
 msgid "DC Server"
-msgstr "Servidores KDCs"
+msgstr "Servidor DC"
 
 #: authentication.pm:233 authentication.pm:249
 #, c-format
@@ -1562,7 +1559,7 @@ msgstr "Información detallada"
 #: diskdrake/interactive.pm:400
 #, c-format
 msgid "View"
-msgstr ""
+msgstr "Visualizar"
 
 #: diskdrake/interactive.pm:405 diskdrake/interactive.pm:756
 #, c-format
@@ -1692,25 +1689,24 @@ msgstr "¿Qué sistema de archivos desea?"
 msgid "Switching from %s to %s"
 msgstr "Cambiando de %s a %s"
 
-#: diskdrake/interactive.pm:620
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:620, c-format
 msgid "Set volume label"
-msgstr "¿Cual etiqueta de volumen?"
+msgstr "Definir etiqueta de volumen?"
 
 #: diskdrake/interactive.pm:622
 #, c-format
 msgid "Beware, this will be written to disk as soon as you validate!"
-msgstr ""
+msgstr "¡Atención, esto será grabado en disco pos su confirmación!"
 
 #: diskdrake/interactive.pm:623
 #, c-format
 msgid "Beware, this will be written to disk only after formatting!"
-msgstr ""
+msgstr "¡Atención, esto será grabado en disco solamente despues del formateo!"
 
 #: diskdrake/interactive.pm:625
 #, c-format
 msgid "Which volume label?"
-msgstr "¿Cual etiqueta de volumen?"
+msgstr "¿Cuál la etiqueta del volumen?"
 
 #: diskdrake/interactive.pm:626
 #, c-format
@@ -1789,15 +1785,15 @@ msgstr "Tamaño mínimo: %s MB"
 msgid "Maximum size: %s MB"
 msgstr "Tamaño máximo: %s MB"
 
-#: diskdrake/interactive.pm:801
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:801, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
 "Para asegurar la integridad de los datos luego de cambiar el tamaño a\n"
-"las particiones, se pueden ejecutar verificaciones de los sist. de archivos\n"
-"la próxima vez que arranque en Windows(TM)"
+"las particiones, se pueden ejecutar verificaciones de los sistemas de "
+"archivos\n"
+"la próxima vez que arranque en Microsoft Windows®"
 
 #: diskdrake/interactive.pm:849 diskdrake/interactive.pm:1393
 #, c-format
@@ -2340,15 +2336,13 @@ msgstr "Debe tener una partición FAT montada en /boot/efi"
 msgid "Creating and formatting file %s"
 msgstr "Creando y formateando el archivo %s"
 
-#: fs/format.pm:119
-#, fuzzy, c-format
+#: fs/format.pm:119, c-format
 msgid "I do not know how to set label on %s with type %s"
-msgstr "No sé cómo formatear %s en el tipo %s"
+msgstr "No sé cómo definir la etiqueta %s de tipo %s"
 
-#: fs/format.pm:126
-#, fuzzy, c-format
+#: fs/format.pm:126, c-format
 msgid "setting label on %s failed, is it formatted?"
-msgstr "%s formateo de %s falló"
+msgstr "La definición de la etiqueta %s falló, ¿está formateada?"
 
 #: fs/format.pm:167
 #, c-format
@@ -3193,10 +3187,9 @@ msgstr "Habilitar el sonido 5.1 con PulseAudio"
 msgid "Enable user switching for audio applications"
 msgstr "Habilitar cambio de usuario para aplicaciones de audio"
 
-#: harddrake/sound.pm:404
-#, fuzzy, c-format
+#: harddrake/sound.pm:404, c-format
 msgid "Use Glitch-Free mode"
-msgstr "Usar modo Desconectado "
+msgstr "Utilizar modo Glitch-Free"
 
 #: harddrake/sound.pm:410
 #, c-format
@@ -3236,7 +3229,7 @@ msgstr ""
 "Aquí puede seleccionar un controlador alternativo (OSS o ALSA) para su "
 "tarjeta de sonido (%s)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:409
@@ -6158,17 +6151,16 @@ msgstr "Reportar resultados de verificación en tty"
 #: security/level.pm:10
 #, c-format
 msgid "Disable msec"
-msgstr ""
+msgstr "Desabilitar msec"
 
 #: security/level.pm:11
 #, c-format
 msgid "Standard"
 msgstr "Estándar"
 
-#: security/level.pm:12
-#, fuzzy, c-format
+#: security/level.pm:12, c-format
 msgid "Secure"
-msgstr "Seguridad"
+msgstr "Seguro"
 
 #: security/level.pm:38
 #, c-format
@@ -6178,6 +6170,10 @@ msgid ""
 "system security\n"
 "on your own."
 msgstr ""
+"Este nivel es para ser usado con mucho cuidado, yá que esto desabilita toda "
+"la\n"
+"seguridad. Utilícelo sólo si usted maneja a sí mismo la seguridad de su "
+"sistema."
 
 #: security/level.pm:41
 #, c-format
