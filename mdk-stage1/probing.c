@@ -315,6 +315,54 @@ void probe_pci_modules(enum driver_type type, char **pci_modules, unsigned int  
 	pciusb_free(&entries);
 }
 
+/** Loads modules for known virtio devices
+ *
+ * virtio modules are not being loaded using the PCI probing mechanism
+ * because pcitable.gz does not have IDs for these devices.
+ *
+ * The possible correct solution for it is to fix the script which
+ * generates pcitable.gz to handle the virtio_device_id structure.
+ */
+void probe_virtio_modules(void)
+{
+	struct pciusb_entries entries;
+	int i;
+	char *name;
+	char *options;
+
+	entries = pci_probe();
+	for (i = 0; i < entries.nb; i++) {
+		struct pciusb_entry *e = &entries.entries[i];
+		if (e->vendor == VIRTIO_PCI_VENDOR) {
+			name = NULL;
+			options = NULL;
+
+			switch (e->device) {
+			case VIRTIO_ID_PCI:
+				name = "virtio_pci";
+				break;
+			case VIRTIO_ID_NET:
+				name = "virtio_net";
+				options = "csum=0";
+				break;
+			case VIRTIO_ID_BLOCK:
+				name = "virtio_blk";
+				break;
+			case VIRTIO_ID_BALLOON:
+				name = "virtio_balloon";
+				break;
+			default:
+				log_message("warning: unknown virtio device %04x", e->device);
+			}
+			if (name) {
+				log_message("virtio: loading %s", name);
+				my_insmod(name, ANY_DRIVER_TYPE, options, 0);
+			}
+		}
+	}
+	pciusb_free(&entries);
+}
+
 #ifdef ENABLE_USB
 void probe_that_type(enum driver_type type, enum media_bus bus)
 #else
@@ -323,6 +371,7 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 {
         static int already_probed_usb_controllers = 0;
         static int already_loaded_usb_scsi = 0;
+        static int already_probed_virtio_devices = 0;
 
 	/* ---- PCI probe ---------------------------------------------- */
 	if (bus != BUS_USB) {
@@ -352,6 +401,12 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 			probe_pci_modules(type, usb_controller_modules, usb_controller_modules_len);
 			break;
 #endif
+		case VIRTIO_DEVICES:
+			if (already_probed_virtio_devices)
+				break;
+			probe_virtio_modules();
+			already_probed_virtio_devices = 1;
+			break;
 		default:
 			break;
 		}

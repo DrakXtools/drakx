@@ -426,6 +426,8 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	init_firmware_loader();
 	init_frontend("Welcome to " DISTRIB_DESCR ", " __DATE__ " " __TIME__);
 
+	probe_that_type(VIRTIO_DEVICES, BUS_ANY);
+
         /* load usb interface as soon as possible, helps usb mouse detection in stage2 */
 	probe_that_type(USB_CONTROLLERS, BUS_USB);
 
