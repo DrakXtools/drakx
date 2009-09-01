@@ -173,7 +173,7 @@ static int load_modules_dependencies(void)
 				start++;
 		}
 		if(i >= sizeof(tmp_deps)/sizeof(char *)-1) {
-			log_message("warning, more than %d dependencies for module %s",
+			log_message("warning, more than %zu dependencies for module %s",
 				    sizeof(tmp_deps)/sizeof(char *)-1,
 				    modules_deps[line].modname);
 			i = sizeof(tmp_deps)/sizeof(char *)-1;
