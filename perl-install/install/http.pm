@@ -8,8 +8,8 @@ sub close() {
 }
 
 sub getFile {
-    my ($url) = @_;
-    my ($_size, $fh) = get_file_and_size($url) or return;
+    my ($url, %o_options) = @_;
+    my ($_size, $fh) = get_file_and_size($url, %o_options) or return;
     $fh;
 }
 
@@ -30,7 +30,7 @@ sub get_file_and_size_ {
 }
 
 sub get_file_and_size {
-    my ($url) = @_;
+    my ($url, %o_options) = @_;
 
     # can be used for ftp urls (with http proxy)
     my ($host) = parse_http_url($url);
@@ -54,7 +54,7 @@ sub get_file_and_size {
         urpm::download::set_cmdline_proxy(http_proxy => "http://$proxy/");
     }
     
-    my $res = eval { urpm::download::sync_url($urpm, $url, dir => $cachedir) };
+    my $res = eval { urpm::download::sync_url($urpm, $url, %o_options, dir => $cachedir) };
     if ($res) {
         open(my $f, $file);
         (-s $file, $f);

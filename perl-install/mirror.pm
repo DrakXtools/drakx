@@ -59,12 +59,12 @@ sub mirrors_raw {
     #- contact the following URL to retrieve the list of mirrors.
     #- http://wiki.mandriva.com/en/Product_id
     my $type = lc($product_id->{type}); $type =~ s/\s//g;
-    my $list = "http://api.mandriva.com/mirrors/$type.$product_id->{version}.$product_id->{arch}.list?product=$product_id->{product}";
+    my $list = "https://api.mandriva.com/mirrors/$type.$product_id->{version}.$product_id->{arch}.list?product=$product_id->{product}";
     log::explanations("trying mirror list from $list");
     my @lines;
     if ($::isInstall) {
         require install::http;
-        my $f = install::http::getFile($list) or die "mirror list not found";
+        my $f = install::http::getFile($list, "strict-certificate-check" => 1) or die "mirror list not found";
         local $SIG{ALRM} = sub { die "timeout" };
         alarm 60;
         log::l("using mirror list $list");
