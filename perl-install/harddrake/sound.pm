@@ -209,7 +209,7 @@ sub set_pulseaudio {
     my ($val) = @_;
 
     my $alterative = '/etc/sound/profiles/' . ($val ? 'pulse' : 'alsa');
-    common::set_alternative('soundprofile', $alterative);
+    common::symlinkf_update_alternatives('soundprofile', $alterative);
 
     # (cg) This config file will eventually be dropped, but it is still needed for now
     # as several packages/patches depend on it.
