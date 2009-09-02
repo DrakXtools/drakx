@@ -230,7 +230,7 @@ sub _resolve_requested_and_check {
     my ($packages, $state, $requested) = @_;
 
     my @l = $packages->resolve_requested($packages->{rpmdb}, $state, $requested,
-					 callback_choices => \&packageCallbackChoices);
+					 callback_choices => \&packageCallbackChoices, no_suggests => $::o->{no_suggests});
 
     my $error;
     if (find { !exists $state->{selected}{$_} } keys %$requested) {

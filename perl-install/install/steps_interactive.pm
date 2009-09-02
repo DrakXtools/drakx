@@ -569,6 +569,7 @@ sub chooseGroups {
     if (!$o->{isUpgrade} && !any { $_->{selected} } @$compssUsers) {
 	my $docs = !$o->{excludedocs};	
 	my $minimal;
+	my $suggests;
 
 	$o->ask_from_({ title => N("Type of install"), 
                         message =>N("You have not selected any group of packages.
@@ -577,6 +578,7 @@ Please choose the minimal installation you want:"),
                         },
 		     [
 		      { val => \$o->{rpmsrate_flags_chosen}{CAT_X}, type => 'bool', text => N("With X"), disabled => sub { $minimal } },
+		      { val => \$suggests, type => 'bool', text => N("Install suggested packages"), disabled => sub { $minimal } },
 		      { val => \$docs, type => 'bool', text => N("With basic documentation (recommended!)"), disabled => sub { $minimal } },
 		      { val => \$minimal, type => 'bool', text => N("Truly minimal install (especially no urpmi)") },
 		     ],
@@ -588,6 +590,7 @@ Please choose the minimal installation you want:"),
 	}
 	$o->{excludedocs} = !$docs;
 	$o->{rpmsrate_flags_chosen}{CAT_MINIMAL_DOCS} = $docs;
+	$o->{no_suggests} = !$suggests;
 
 	install::any::unselectMostPackages($o);
     }
