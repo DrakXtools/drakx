@@ -554,7 +554,7 @@ sub create_widget {
 	       if ($e->{weakness_check}) {
 		 require authentication;
 		 my $password_weakness = authentication::compute_password_weakness($w->get_text);
-		 $w->modify_base('GTK_STATE_NORMAL', get_weakness_color($password_weakness));
+		 $w->set_icon_from_pixbuf('GTK_ENTRY_ICON_SECONDARY', get_weakness_icon($password_weakness));
 	       }
 	       $w->get_text;
 	      }));
@@ -970,16 +970,16 @@ sub kill {
     @tempory::objects = ();
 }
 
-sub get_weakness_color {
+sub get_weakness_icon {
     my ($password_weakness) = @_;
-    my %weakness_color = (
-        1 => '#fd3434', 
-        2 => '#fd6c34',
-        3 => '#f7871a',
-        4 => '#2ae000', 
-        5 => '#30ff00');
-    my $weakness_color = $weakness_color{$password_weakness} || '#ffffff';
-    Gtk2::Gdk::Color->parse($weakness_color);
+    my %weakness_icon = (
+        1 => gtknew('Pixbuf', file => 'security-low'),
+        2 => gtknew('Pixbuf', file => 'security-low'),
+        3 => gtknew('Pixbuf', file => 'security-medium'),
+        4 => gtknew('Pixbuf', file => 'security-strong'),
+        5 => gtknew('Pixbuf', file => 'security-strong'));
+    my $weakness_icon = $weakness_icon{$password_weakness} || return undef;
+    $weakness_icon;
 }
 
 1;
