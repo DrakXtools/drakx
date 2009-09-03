@@ -991,10 +991,10 @@ sub configure_nss_ldap {
    $score += 2 if $password =~ /([a-z].*[A-Z])|([A-Z].*[a-z])/;
    $score += 2 if $password =~ /([a-zA-Z0-9].*[!@#$%^&*?_~])|([!@#$%^&*?_~,].*[a-zA-Z0-9])/;
 
-   my $level = $score < 16 ? 1 :
-   $score > 15 && $score < 25 ? 2 :
-   $score > 24 && $score < 35 ? 3 :
-   $score > 34 && $score < 45 ? 4 : 5;
+   my $level = $score < 11 ? 1 :
+   $score > 10 && $score < 20 ? 2 :
+   $score > 19 && $score < 30 ? 3 :
+   $score > 29 && $score < 40 ? 4 : 5;
 
    return $level;
  }
