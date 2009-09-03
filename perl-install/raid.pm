@@ -94,6 +94,10 @@ sub updateSize {
     };
 }
 
+sub allmodules {
+    [ 'raid0', 'raid1', 'raid10', 'raid456' ];
+}
+
 sub module {
     my ($part) = @_;
     my $level = $part->{level};
@@ -195,7 +199,7 @@ sub detect_during_install_once {
 				   map { devices::make($_->{device}) } @parts), "\n");
     run_program::run('mdadm', '>>', '/etc/mdadm.conf', '--examine', '--scan');
 
-    foreach (@{parse_mdadm_conf(scalar cat_('/etc/mdadm.conf'))->{ARRAY}}) {
+    foreach (@{allmodules()}) {
 	eval { modules::load(module($_)) };
     }
     run_program::run('mdadm', '--assemble', '--scan');    
