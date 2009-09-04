@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-26 22:23-0300\n"
-"PO-Revision-Date: 2009-08-27 02:34+0200\n"
+"PO-Revision-Date: 2009-09-04 10:00+0200\n"
 "Last-Translator: Olav Dahlum <odahlum@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -36,7 +36,7 @@ msgstr "Feil"
 #: drakboot:53
 #, c-format
 msgid "No bootloader found, creating a new configuration"
-msgstr "Fant ingen oppstartslaster. Lager nytt oppsett."
+msgstr "Fant ingen oppstartslaster, lager nytt oppsett."
 
 #: drakboot:88 harddrake2:198 harddrake2:199 logdrake:71
 #, c-format
@@ -158,7 +158,7 @@ msgstr "Start det grafiske miljøet ved oppstart"
 #: drakboot:262
 #, c-format
 msgid "Boot Style Configuration"
-msgstr "Oppsettype"
+msgstr "Oppsettstype"
 
 #: drakboot:264 drakboot:268
 #, c-format
@@ -173,8 +173,8 @@ msgid ""
 "Be sure your video card supports the mode you choose."
 msgstr ""
 "Velg et skjermmodus. Dette blir brukt for hver av oppstartsoppføringene "
-"merket nedenfor.\n"
-"Husk at skjermkortet ditt må støtte skjermmoduset du velger."
+"valgt nedenfor.\n"
+"Husk at skjermkortet må støtte skjermmoduset som velges."
 
 #: drakbug:65 drakbug:152
 #, c-format
@@ -219,12 +219,12 @@ msgstr "Fjernkontroll"
 #: drakbug:89
 #, c-format
 msgid "Software Manager"
-msgstr "Programhåndtering"
+msgstr "Programvarehåndtering"
 
 #: drakbug:90
 #, c-format
 msgid "Windows Migration tool"
-msgstr "Windows-migreringsverktøy"
+msgstr "Migreringsverktøy for Windows"
 
 #: drakbug:91
 #, c-format
@@ -234,7 +234,7 @@ msgstr "Oppsettveivisere"
 #: drakbug:113
 #, c-format
 msgid "Select Mandriva Tool:"
-msgstr "Velg Mandriva-verktøy:"
+msgstr "Velg verktøy:"
 
 #: drakbug:114
 #, c-format
@@ -242,7 +242,7 @@ msgid ""
 "or Application Name\n"
 "(or Full Path):"
 msgstr ""
-"Programnavn\n"
+"eller programnavn\n"
 "(eller full sti):"
 
 #: drakbug:117
@@ -268,7 +268,7 @@ msgstr "Programmet «%s» krasjet (segfault) med følgende feil:"
 #: drakbug:155
 #, c-format
 msgid "Its GDB trace is:"
-msgstr "GDB-logger er:"
+msgstr "GDB-sporing er:"
 
 #: drakbug:158
 #, c-format
@@ -277,7 +277,7 @@ msgid ""
 "This will open a web browser window on %s where you'll find a form to fill "
 "in.  The information displayed above will be transferred to that server"
 msgstr ""
-"Trykk Rapporter-knappen for å melde fra om en feil du har funnet. \n"
+"Trykk på knappen Rapporter for å melde fra om en feil du har funnet. \n"
 "Dette vil åpne et nettleservindu på %s, med et skjema som du må fylle inn. "
 "Informasjonen vist nedenfor blir overført til tjeneren."
 
@@ -297,12 +297,12 @@ msgstr[1] "Nyttige ting å ta med i feilrapporten er utdata fra denne kommandoen
 #: drakbug:163
 #, c-format
 msgid "'%s'"
-msgstr "'%s'"
+msgstr "«%s»"
 
 #: drakbug:166
 #, c-format
 msgid "You should also attach the following files: %s as well as %s."
-msgstr "Du bør også legge ved filae %s og %s."
+msgstr "Du bør også legge ved filene %s og %s."
 
 #: drakbug:173
 #, c-format
@@ -356,7 +356,7 @@ msgstr "Dato, klokkeslett og tidssone"
 #: drakclock:39
 #, c-format
 msgid "not defined"
-msgstr "ikke definert"
+msgstr "ikke angitt"
 
 #: drakclock:41
 #, c-format
@@ -381,7 +381,7 @@ msgstr "GMT – DrakClock"
 #: drakclock:45
 #, c-format
 msgid "Is your hardware clock set to GMT?"
-msgstr "Bruker maskinvareklokken GMT?"
+msgstr "Bruker maskinvareklokka GMT?"
 
 #: drakclock:70
 #, c-format
@@ -415,7 +415,7 @@ msgstr "Tidssone"
 #: drakclock:111
 #, c-format
 msgid "Please enter a valid NTP server address."
-msgstr "Skriv inn en gyldig NTP-tjeneradresse."
+msgstr "Skriv inn en gyldig tjeneradresse."
 
 #: drakclock:126
 #, c-format
@@ -435,7 +435,7 @@ msgstr "Prøv på nytt"
 #: drakclock:151 drakclock:161
 #, c-format
 msgid "Reset"
-msgstr "Nullstill"
+msgstr "Tilbakestill"
 
 #: drakdvb:30
 #, c-format
@@ -450,7 +450,7 @@ msgstr "Kanal"
 #: drakdvb:57
 #, c-format
 msgid "%s already exists and its contents will be lost"
-msgstr "%s eksisterer allerede og innholdet vil bli tapt"
+msgstr "%s finnes allerede og innholdet vil gå tapt"
 
 #: drakdvb:74
 #, c-format
@@ -514,12 +514,12 @@ msgid ""
 msgstr ""
 "Innloggingsbehandleren lar deg logge inn grafisk\n"
 "på systemet når X kjører, og støtter også flere\n"
-"X-økter på maskinen samtidig."
+"samtidige økter på maskina."
 
 #: drakedm:74
 #, c-format
 msgid "The change is done, do you want to restart the dm service?"
-msgstr "Endringene er nå lagret. Vil du starte dm-tjenesten på nytt?"
+msgstr "Endringene er nå lagret. Vil du starte tjenesten dm på nytt?"
 
 #: drakedm:75
 #, c-format
@@ -527,8 +527,8 @@ msgid ""
 "You are going to close all running programs and lose your current session. "
 "Are you really sure that you want to restart the dm service?"
 msgstr ""
-"Alle program som kjører blir lukket, og du mister den gjeldende økten. Er du "
-"sikker på at du vil starte dm-tenesten på nytt?"
+"Alle program som kjører blir lukket, og du mister den gjeldende økta. Er du "
+"sikker på at du vil starte tenesten dm på nytt?"
 
 #: drakfont:187
 #, c-format
@@ -564,22 +564,22 @@ msgstr "Fant ingen skrifter på de monterte partisjonene"
 #: drakfont:261
 #, c-format
 msgid "Reselect correct fonts"
-msgstr "Velg de rette skriftene på nytt"
+msgstr "Velg på nytt de rette skriftene"
 
 #: drakfont:264
 #, c-format
 msgid "Could not find any font.\n"
-msgstr "Fant ingen skrifter.\n"
+msgstr "Fant ingen skrift.\n"
 
 #: drakfont:274
 #, c-format
 msgid "Search for fonts in installed list"
-msgstr "Søk etter skrifter i installert-listen"
+msgstr "Søk etter skrifter i lista over installerte"
 
 #: drakfont:298
 #, c-format
 msgid "%s fonts conversion"
-msgstr "%s-skriftkonvertering"
+msgstr "skriftkonvertering for %s"
 
 #: drakfont:336
 #, c-format
@@ -594,7 +594,7 @@ msgstr "Installering av TrueType-skrifter"
 #: drakfont:347
 #, c-format
 msgid "please wait during ttmkfdir..."
-msgstr "Vent mens ttmkfdir blir kjørt  … "
+msgstr "Vent litt mens ttmkfdir blir kjørt … "
 
 #: drakfont:348
 #, c-format
@@ -634,7 +634,7 @@ msgstr ""
 "installere de på systemet ditt.\n"
 "\n"
 "Du kan installere skriftene på vanlig måte. I sjeldne tilfeller kan ødelagte "
-"skriftfiler få X-tjeneren til å henge ved oppstart."
+"skrifter få X-tjeneren til å henge ved oppstart."
 
 #: drakfont:478
 #, c-format
@@ -706,7 +706,7 @@ msgstr "Olav Dahlum <odahlum@gmail.com>\n"
 #: drakfont:543
 #, c-format
 msgid "Choose the applications that will support the fonts:"
-msgstr "Velg programmene du vil kunne bruke skriftene i:"
+msgstr "Velg programmene som vil bruke skriftene:"
 
 #: drakfont:554
 #, c-format
@@ -736,7 +736,7 @@ msgstr "OK"
 #: drakfont:571
 #, c-format
 msgid "Select the font file or directory and click on 'Add'"
-msgstr "Velg skriftfila eller skriftmappen, og trykk så «Legg til»."
+msgstr "Velg skriftfila eller skriftmappa, og trykk så «Legg til»."
 
 #: drakfont:572
 #, c-format
@@ -746,7 +746,7 @@ msgstr "Filvalg"
 #: drakfont:576
 #, c-format
 msgid "Fonts"
-msgstr "Skrifttyper"
+msgstr "Skrifter"
 
 #: drakfont:640 draksec:166
 #, c-format
@@ -786,12 +786,12 @@ msgstr "Nei"
 #: drakfont:729
 #, c-format
 msgid "Unselect All"
-msgstr "Valgte vekk alle"
+msgstr "Velg bort alle"
 
 #: drakfont:732
 #, c-format
 msgid "Select All"
-msgstr "Valgte alle"
+msgstr "Velg alle"
 
 #: drakfont:749
 #, c-format
@@ -866,17 +866,17 @@ msgstr ""
 msgid ""
 " --doc <link>          - link to another web page ( for WM welcome "
 "frontend)\n"
-msgstr " --doc <lenkje>        – Lenke til en annen nettside (for velkomstmelding).\n"
+msgstr " --doc <lenke>        – Lenke til en annen nettside (for velkomstmelding).\n"
 
 #: drakhelp:52
 #, c-format
 msgid "Mandriva Linux Help Center"
-msgstr "Mandriva Linux-hjelpesenter"
+msgstr "Hjelpesenter for Mandriva Linux"
 
 #: drakhelp:52
 #, c-format
 msgid "No Help entry for %s\n"
-msgstr "Det finnes ingen hjelpeoppføring for %s\n"
+msgstr "Det finnes ingen oppføring for %s\n"
 
 #: drakperm:23
 #, c-format
@@ -886,12 +886,12 @@ msgstr "Systeminnstillinger"
 #: drakperm:24
 #, c-format
 msgid "Custom settings"
-msgstr "Tilpasset oppsett"
+msgstr "Tilpassa oppsett"
 
 #: drakperm:25
 #, c-format
 msgid "Custom & system settings"
-msgstr "Tilpasset og systemoppsett"
+msgstr "Tilpassa og systemoppsett"
 
 #: drakperm:33
 #, c-format
