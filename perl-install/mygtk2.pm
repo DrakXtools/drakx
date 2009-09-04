@@ -259,6 +259,15 @@ sub _gtk__HScale {
 	$w = Gtk2::HScale->new(delete $opts->{adjustment});
     }
 
+    $w->set_digits(delete $opts->{digits}) if exists $opts->{digits};
+    if (my $value_ref = delete $opts->{value_ref}) {
+	my $set = sub { $w->set_value($$value_ref) };
+	gtkval_register($w, $value_ref, $set);
+	$set->();
+	$w->signal_connect(value_changed => sub {
+		gtkval_modify($value_ref, $w->get_value, $set);
+	});
+    }
     $w->signal_connect(value_changed => delete $opts->{value_changed}) if exists $opts->{value_changed};
     $w;
 }
