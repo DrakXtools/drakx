@@ -253,7 +253,8 @@ sub _gtk__HScale {
 
     if (!$w) {
 	$opts->{adjustment} ||= do {
-	    add2hash_($opts, { step_increment => 1, page_increment => 5, page_size => 1, value => delete $opts->{lower} });
+	    add2hash_($opts, { step_increment => 1, page_increment => 5, page_size => 1 });
+	    add2hash_($opts, { value => $opts->{lower} }) if !exists $opts->{value};
 	    Gtk2::Adjustment->new(delete $opts->{value}, delete $opts->{lower}, (delete $opts->{upper}) + 1, delete $opts->{step_increment}, delete $opts->{page_increment}, delete $opts->{page_size});
 	};
 	$w = Gtk2::HScale->new(delete $opts->{adjustment});
