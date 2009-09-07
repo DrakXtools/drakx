@@ -965,10 +965,8 @@ sub display_release_notes {
     return;
 }
 
-sub acceptLicense {
-    my ($in, $google) = @_;
-    require messages;
-
+sub get_release_notes {
+    my ($in) = @_;
     my $ext = $in->isa('interactive::gtk') ? '.html' : '.txt';
     my $separator = $in->isa('interactive::gtk') ? "\n\n" : '';
 
@@ -985,6 +983,14 @@ sub acceptLicense {
 
     # we do not handle links:
     $release_notes =~ s!<a href=".*?">(.*?)</a>!$1!g;
+    $release_notes;
+}
+
+sub acceptLicense {
+    my ($in, $google) = @_;
+    require messages;
+
+    my $release_notes = get_release_notes($in);
 
     my $r = $::testing ? 'Accept' : 'Refuse';
 
