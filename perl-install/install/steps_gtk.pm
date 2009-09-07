@@ -533,6 +533,7 @@ sub installPackages {
     local $::noborderWhenEmbedded = 1;
     my $w = ugtk2->new(N("Installing"));
     state $show_advertising;
+    my $show_release_notes;
 
     my $pkg_log_widget = gtknew('TextView', editable => 0);
     my ($advertising_image, $change_time, $i);
@@ -566,6 +567,10 @@ sub installPackages {
 			     $pkg_log_widget->{to_bottom}->('force');
 			 });
 
+    my $release_notes = any::get_release_notes($o);
+    my $rel_notes = gtknew('Button', text => N("Release Notes"), 
+                           clicked => sub { $show_release_notes = 1 });
+
     ugtk2::gtkadd($w->{window}, my $box = gtknew('VBox', children_tight => [ 
 	gtknew('Image_using_pixmap', file_ref => \$advertising_image, show_ref => \$show_advertising),
     ]));
@@ -580,7 +585,11 @@ sub installPackages {
 	]),
 	gtknew('VBox', children_centered => [ gtknew('ProgressBar', fraction_ref => \ (my $progress_total), height => 25) ]),
 	gtknew('HSeparator'),
-	gtknew('HButtonBox', spacing => 5, layout => 'end', children_loose => [ $cancel, $details ]),
+	gtknew('HButtonBox', spacing => 0, layout => 'spread', children_loose => [
+            if_($release_notes, $rel_notes),
+            gtknew('HButtonBox', spacing => 5, layout => 'end',
+                   children_loose => [ $cancel, $details ]),
+             ]),
     ])), 0, 1, 0);
     
     #- for the hide_ref & show_ref to work, we must set $show_advertising after packing
@@ -611,6 +620,14 @@ sub installPackages {
 	    $current_total_size += $last_size;
 	    $last_size = $p->size;
 	    $advertize->(1) if $show_advertising && $total_size > 20_000_000 && time() - $change_time > 20;
+
+            # display release notes if requested, when not chrooted:
+            if ($show_release_notes) {
+                undef $show_release_notes;
+                any::run_display_release_notes($release_notes);
+                $w->flush;
+            }
+
 	    $w->flush;
 	} elsif ($type eq 'inst' && $subtype eq 'progress') {
 	    gtkval_modify(\$pkg_progress, $total ? $amount / $total : 0);
