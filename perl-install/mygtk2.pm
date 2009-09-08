@@ -550,6 +550,23 @@ sub _gtk__Entry {
     $w;
 }
 
+sub _gtk__WeaknessCheckEntry {
+    my ($w, $opts) = @_;
+
+    if (!$w) {
+	$w = _gtk__Entry($w, $opts);
+    }
+
+    $w->signal_connect('changed' => sub {
+	require authentication;
+	my $password_weakness = authentication::compute_password_weakness($w->get_text);
+	$w->set_icon_from_pixbuf('GTK_ENTRY_ICON_SECONDARY', _get_weakness_icon($password_weakness));
+	$w->set_icon_tooltip_text('GTK_ENTRY_ICON_SECONDARY', _get_weakness_tooltip($password_weakness));
+    });
+
+    $w;
+}
+
 sub _gtk__TextView {
     my ($w, $opts, $_class, $action) = @_;
 	
@@ -1501,6 +1518,30 @@ sub import_style_ressources() {
 
 sub text_direction_rtl() {
     Gtk2::Widget->get_default_direction() eq 'rtl';
+}
+
+sub _get_weakness_icon {
+    my ($password_weakness) = @_;
+    my %weakness_icon = (
+        1 => gtknew('Pixbuf', file => 'security-low'),
+        2 => gtknew('Pixbuf', file => 'security-low'),
+        3 => gtknew('Pixbuf', file => 'security-medium'),
+        4 => gtknew('Pixbuf', file => 'security-strong'),
+        5 => gtknew('Pixbuf', file => 'security-strong'));
+    my $weakness_icon = $weakness_icon{$password_weakness} || return undef;
+    $weakness_icon;
+}
+
+sub _get_weakness_tooltip {
+    my ($password_weakness) = @_;
+    my %weakness_tooltip = (
+        1 => N("Password is trivial to guess"),
+        2 => N("Password is trivial to guess"),
+        3 => N("Password should resist to basic attacks"),
+        4 => N("Password seems secure"),
+        5 => N("Password seems secure"));
+    my $weakness_tooltip = $weakness_tooltip{$password_weakness} || return undef;
+    return $weakness_tooltip;
 }
 
 package Gtk2::MDV_Notebook; # helper functions for installer & mcc
