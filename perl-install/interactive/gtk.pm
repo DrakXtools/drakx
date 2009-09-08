@@ -555,6 +555,7 @@ sub create_widget {
 		 require authentication;
 		 my $password_weakness = authentication::compute_password_weakness($w->get_text);
 		 $w->set_icon_from_pixbuf('GTK_ENTRY_ICON_SECONDARY', get_weakness_icon($password_weakness));
+		 $w->set_icon_tooltip_text('GTK_ENTRY_ICON_SECONDARY', get_weakness_tooltip($password_weakness));
 	       }
 	       $w->get_text;
 	      }));
@@ -980,6 +981,18 @@ sub get_weakness_icon {
         5 => gtknew('Pixbuf', file => 'security-strong'));
     my $weakness_icon = $weakness_icon{$password_weakness} || return undef;
     $weakness_icon;
+}
+
+sub get_weakness_tooltip {
+    my ($password_weakness) = @_;
+    my %weakness_tooltip = (
+        1 => N("Password is trivial to guess"),
+        2 => N("Password is trivial to guess"),
+        3 => N("Password should resist to basic attacks"),
+        4 => N("Password seems secure"),
+        5 => N("Password seems secure"));
+    my $weakness_tooltip = $weakness_tooltip{$password_weakness} || return undef;
+    return $weakness_tooltip;
 }
 
 1;
