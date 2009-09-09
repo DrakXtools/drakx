@@ -41,6 +41,17 @@ sub modules() {
     @nls_modules, map { category2modules($_) } split(' ', $images_cat);
 }
 
+sub get_firmwares() {
+    my ($kern_ver) = @_;
+
+    foreach (all("all.kernels/$kern_ver/modules")) {
+        foreach(`/sbin/modinfo -Ffirmware "all.kernels/$kern_ver/modules/$_"`) {
+            mkdir_p(dirname("all.kernels/$kern_ver/firmware/$_"));
+            eval { cp_af("/lib/firmware/$_", "all.kernels/$kern_ver/firmware/$_"); };
+	}
+    }
+}
+
 sub remove_unneeded_modules {
     my ($kern_ver) = @_;
 

@@ -157,10 +157,7 @@ sub initrd {
     foreach ("/usr/share/ldetect-lst/fallback-modules.alias", "/lib/module-init-tools/ldetect-lst-modules.alias") {
         _ "install -D $_ $tmp_initrd$_";
     }
-    # FIXME: we could just look at all network modules, run modinfo and them and look for the firmware field:
-    # (we may also want to add firmware for SCSI and the like if any):
-    foreach (grep { warn "> $_\n"; m!(3com|acenic|adaptec|cxgb3|e100|kaweth|tehuti|tigon)! } glob_("/lib/firmware/*")) {
-		warn ">> $_\n";
+    foreach (glob_("all.kernels$I/firmware/*")) {
         _ "cp -a $_ $tmp_initrd$_";
     };
 

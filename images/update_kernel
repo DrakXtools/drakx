@@ -73,6 +73,7 @@ sub extract_installed_rpm {
     }
 
     sys('perl', '../kernel/modules.pl', 'remove_unneeded_modules', $kern_ver);
+    sys('perl', '../kernel/modules.pl', 'get_firmwares', $kern_ver);
     sys('perl', '../kernel/modules.pl', 'make_modules_per_image', $kern_ver);
 
     rm_rf("$local_dir/modules");
