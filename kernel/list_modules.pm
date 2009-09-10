@@ -172,7 +172,7 @@ our %l = (
   {
     network => [ qw(af_packet nfs smbfs) ],
     cdrom => [ qw(isofs) ],
-    loopback => [ qw(isofs loop squashfs squashfs-lzma sqlzma) ],
+    loopback => [ qw(isofs loop squashfs) ],
     local => [
       if_(arch() =~ /^ppc/, qw(hfs)),
       qw(reiserfs reiser4 jfs xfs ntfs vfat ext3 ext4),
