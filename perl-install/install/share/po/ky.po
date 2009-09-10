@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-ky\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-09 05:35+0200\n"
+"POT-Creation-Date: 2009-09-10 12:21+0200\n"
 "PO-Revision-Date: 2009-04-18 19:08+0600\n"
 "Last-Translator: Ilyas Bakirov <just_ilyas@yahoo.com>\n"
 "Language-Team: Kyrgyz\n"
@@ -17,6 +17,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../../advertising/IM_flash.pl:1
+#, c-format
+msgid "Your desktop on a USB key"
+msgstr "Сиздин иш столуңуз USBде"
+
+#: ../../advertising/IM_free09.pl:1
+#, c-format
+msgid "The 100%% open source Mandriva Linux distribution"
+msgstr "100%% ачык кодду Mandriva Linux дистрибутиви"
+
+#: ../../advertising/IM_one09.pl:1
+#, c-format
+msgid "Explore Linux easily with Mandriva One"
+msgstr "Linux'ту Mandriva One менен аралап үйрөнүү"
+
+#: ../../advertising/IM_pwp09.pl:1
+#, c-format
+msgid "A full Mandriva Linux desktop, with support"
+msgstr "Толук Mandriva Linux иш столу жардам менен"
+
+#: ../../advertising/IM_range09.pl:1
+#, c-format
+msgid "Mandriva: distributions for everybody's needs"
+msgstr "Mandriva: ар бирдин керектеген дистрибутив"
 
 #: any.pm:109
 #, c-format
@@ -69,13 +94,18 @@ msgstr "URL ftp:// же http:// менен башталышы керек"
 
 #: any.pm:182
 #, c-format
-msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid ""
+"Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr "Бар болгон күзгүлөр тизмесин Mandriva Linux веб сайтындан алынууда..."
 
 #: any.pm:187
 #, c-format
-msgid "Failed contacting Mandriva Linux web site to get the list of available mirrors"
-msgstr "Бар болгон күзгүлөр тизмесин Mandriva Linux веб сайтындан алынууда ийгиликсиз айяктады..."
+msgid ""
+"Failed contacting Mandriva Linux web site to get the list of available "
+"mirrors"
+msgstr ""
+"Бар болгон күзгүлөр тизмесин Mandriva Linux веб сайтындан алынууда "
+"ийгиликсиз айяктады..."
 
 #: any.pm:197
 #, c-format
@@ -119,52 +149,30 @@ msgstr "Кошумча"
 
 #: any.pm:295
 #, c-format
-msgid "Can't find a package list file on this mirror. Make sure the location is correct."
-msgstr "Бул күзгүдө пакеттердин тизмеси атбылган жок. Жайгашуусунун тууралыгын текшериңиз."
+msgid ""
+"Can't find a package list file on this mirror. Make sure the location is "
+"correct."
+msgstr ""
+"Бул күзгүдө пакеттердин тизмеси атбылган жок. Жайгашуусунун тууралыгын "
+"текшериңиз."
 
 #: any.pm:334
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Орнотулган пакеттер изделип жатат..."
 
-#: any.pm:368
+#: any.pm:369
 #, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Жаңыланычуу пакеттер изделип жатат..."
 
-#: any.pm:387
+#: any.pm:388
 #, c-format
 msgid "Removing packages prior to upgrade..."
 msgstr "Жаңылоодон мурда пакеттер өчүрүлүп жатат..."
 
-#: any.pm:408
-#, c-format
-msgid ""
-"You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
-"on your system. This installer cannot preserve KDE 3.5 in an upgrade. If you choose to proceed, \n"
-"KDE 4 will replace KDE 3, and you will lose your personal KDE configuration settings. \n"
-"To upgrade with KDE 3.5 and your personal settings preserved, \n"
-"please reboot your system and upgrade using the Mandriva update applet."
-msgstr ""
-"%s чейин системанын жаңылоосун чечтиңиз. KDE 3.5 системаңызда табылды.\n"
-"Буд орноткуч жаңылоодо KDE 3.5'ти сакатабайт. Эгерде орнотууну уланта берсеңиз, \n"
-"KDE 4 KDE 3'тү алмаштырып салат жана жеке ырастоолоруңуз менен KDE ырастоолору \n"
-"жоголуп кетет. KDE 3.5'тен жаңылоо жана жеке ырастоолорду сактап калуу үчүн, \n"
-"системаны кайрадан жүктөп жана Mandriva жаңылоо аплети менен жаңыланым көрүңүз."
-
-#: any.pm:413
-#: steps_interactive.pm:1103
-#, c-format
-msgid "Reboot"
-msgstr "Кайра жүктөө"
-
-#: any.pm:413
-#, c-format
-msgid "Proceed"
-msgstr "Аткарылды"
-
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:602
+#: any.pm:594
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -178,92 +186,85 @@ msgstr ""
 "\n"
 "Бул пакеттердин алынып ташталуусун каалайсызбы?\n"
 
-#: any.pm:821
+#: any.pm:813
 #, c-format
 msgid "Error reading file %s"
 msgstr "%s файлын окуудагы ката"
 
-#: any.pm:1028
+#: any.pm:1020
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Төмөнкү диск(тер)дин аты өзгөртүлдү:"
 
-#: any.pm:1030
+#: any.pm:1022
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (мурунку аты %s)"
 
-#: any.pm:1087
+#: any.pm:1079
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: any.pm:1087
+#: any.pm:1079
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1087
+#: any.pm:1079
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1106
-#: steps_interactive.pm:932
+#: any.pm:1098 steps_interactive.pm:936
 #, c-format
 msgid "Network"
 msgstr "Желе"
 
-#: any.pm:1110
+#: any.pm:1102
 #, c-format
 msgid "Please choose a media"
 msgstr "Алып жүрүүчүнү тандаңыз"
 
-#: any.pm:1126
+#: any.pm:1118
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Файл алдагачан бар. Үстүнө кайра жазылсынбы?"
 
-#: any.pm:1130
+#: any.pm:1122
 #, c-format
 msgid "Permission denied"
 msgstr "Кирүү укугу четке кагылды"
 
-#: any.pm:1178
+#: any.pm:1170
 #, c-format
 msgid "Bad NFS name"
 msgstr "Жаман NFS аты"
 
-#: any.pm:1199
+#: any.pm:1191
 #, c-format
 msgid "Bad media %s"
 msgstr "%s жараксыз алып жүрүүчү"
 
-#: any.pm:1242
+#: any.pm:1234
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Бөлүмдөрдү жаратууга чейин скриншотторду түзүүгө болбойт"
 
-#: any.pm:1250
+#: any.pm:1242
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Орнотуудан кийин скриншоттор %s ичинде болот"
 
-#: gtk.pm:130
+#: gtk.pm:131
 #, c-format
 msgid "Installation"
 msgstr "Орнотуу"
 
-#: gtk.pm:134
-#: share/meta-task/compssUsers.pl:44
+#: gtk.pm:135 share/meta-task/compssUsers.pl:44
 #, c-format
 msgid "Configuration"
 msgstr "Конфигурациялоо"
-
-#: http.pm:53
-#, c-format
-msgid "retrieval of [%s] failed"
-msgstr "[%s] чыгаруу ийгиликсиз аякталды"
 
 #: install2.pm:168
 #, c-format
@@ -276,7 +277,8 @@ msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
 msgstr ""
-"Компьютериңизде кээбир жабдыктар иштөө үчүн эркин эмес драйверлерди талап кылат.\n"
+"Компьютериңизде кээбир жабдыктар иштөө үчүн эркин эмес драйверлерди талап "
+"кылат.\n"
 "Алар жөнүндө маалыматты көрсөтүлгөн жерден табып аласыз: %s"
 
 #: interactive.pm:22
@@ -294,17 +296,17 @@ msgstr "Тармак өчүрүлүүдө"
 msgid "Please wait, retrieving file"
 msgstr "Күтө туруңуз, файл жүктөлүп жатат"
 
-#: media.pm:718
+#: media.pm:716
 #, c-format
 msgid "unable to add medium"
 msgstr "булак кошулган жок"
 
-#: media.pm:758
+#: media.pm:756
 #, c-format
 msgid "Copying some packages on disks for future use"
 msgstr "Кээбир пакеттерди келечекте колдонуу үчүн дискке көчүрүп жатат"
 
-#: media.pm:811
+#: media.pm:809
 #, c-format
 msgid "Copying in progress"
 msgstr "Көчүрүү жүрүүдө"
@@ -348,12 +350,12 @@ msgstr ""
 msgid "An error occurred:"
 msgstr "Жаңылыштык орун алды:"
 
-#: pkgs.pm:780
+#: pkgs.pm:792
 #, c-format
 msgid "%d installation transactions failed"
 msgstr "%d орнотуу транзакциялары ишке ашпады"
 
-#: pkgs.pm:781
+#: pkgs.pm:793
 #, c-format
 msgid "Installation of packages failed:"
 msgstr "Пакеттердин орнотулушу ийгиликсиз аяктады:"
@@ -370,13 +372,22 @@ msgstr "Офис станциясы"
 
 #: share/meta-task/compssUsers.pl:17
 #, c-format
-msgid "Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets (OpenOffice.org Calc, Kspread), PDF viewers, etc"
-msgstr "Офис программалары: текст процессорлору (OpenOffice.org Writer, Kword), электрондук таблицалар  (OpenOffice.org Calc, Kspread), pdf файлдарын көрүү программалары, ж.б."
+msgid ""
+"Office programs: wordprocessors (OpenOffice.org Writer, Kword), spreadsheets "
+"(OpenOffice.org Calc, Kspread), PDF viewers, etc"
+msgstr ""
+"Офис программалары: текст процессорлору (OpenOffice.org Writer, Kword), "
+"электрондук таблицалар  (OpenOffice.org Calc, Kspread), pdf файлдарын көрүү "
+"программалары, ж.б."
 
 #: share/meta-task/compssUsers.pl:18
 #, c-format
-msgid "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, gnumeric), pdf viewers, etc"
-msgstr "Офис программалары: текст процессорлору (kword, abiword), электрондук таблицалар  (kspread, gnumeric), pdf файлдарын көрүү программалары, ж.б."
+msgid ""
+"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
+"gnumeric), pdf viewers, etc"
+msgstr ""
+"Офис программалары: текст процессорлору (kword, abiword), электрондук "
+"таблицалар  (kspread, gnumeric), pdf файлдарын көрүү программалары, ж.б."
 
 #: share/meta-task/compssUsers.pl:23
 #, c-format
@@ -386,7 +397,9 @@ msgstr "Оюн станциясы"
 #: share/meta-task/compssUsers.pl:24
 #, c-format
 msgid "Amusement programs: arcade, boards, strategy, etc"
-msgstr "Оюн-зоок программалары: аркада оюндары, тактай оюндары, стратегия оюндары, ж.б."
+msgstr ""
+"Оюн-зоок программалары: аркада оюндары, тактай оюндары, стратегия оюндары, ж."
+"б."
 
 #: share/meta-task/compssUsers.pl:27
 #, c-format
@@ -405,8 +418,12 @@ msgstr "Интернет станциясы"
 
 #: share/meta-task/compssUsers.pl:34
 #, c-format
-msgid "Set of tools to read and send mail and news (mutt, tin..) and to browse the Web"
-msgstr "Почтаны жана жаңылыктарды (mutt, tin..) окууга жана жөнөтүүгө, жана вебде иштөөгө арналган куралдар тобу"
+msgid ""
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
+msgstr ""
+"Почтаны жана жаңылыктарды (mutt, tin..) окууга жана жөнөтүүгө, жана вебде "
+"иштөөгө арналган куралдар тобу"
 
 #: share/meta-task/compssUsers.pl:39
 #, c-format
@@ -433,42 +450,39 @@ msgstr "Консоль куралдары"
 msgid "Editors, shells, file tools, terminals"
 msgstr "Редакторлор, шелдер, файл куралдары, терминалдар"
 
-#: share/meta-task/compssUsers.pl:54
-#: share/meta-task/compssUsers.pl:157
+#: share/meta-task/compssUsers.pl:54 share/meta-task/compssUsers.pl:157
 #: share/meta-task/compssUsers.pl:159
 #, c-format
 msgid "Development"
 msgstr "Иштеп түзүү"
 
-#: share/meta-task/compssUsers.pl:55
-#: share/meta-task/compssUsers.pl:160
+#: share/meta-task/compssUsers.pl:55 share/meta-task/compssUsers.pl:160
 #, c-format
 msgid "C and C++ development libraries, programs and include files"
-msgstr "C жана C++ иштеп чыгуу библиотекалары, программалар жана include файлдары"
+msgstr ""
+"C жана C++ иштеп чыгуу библиотекалары, программалар жана include файлдары"
 
-#: share/meta-task/compssUsers.pl:58
-#: share/meta-task/compssUsers.pl:164
+#: share/meta-task/compssUsers.pl:58 share/meta-task/compssUsers.pl:164
 #, c-format
 msgid "Documentation"
 msgstr "Документация"
 
-#: share/meta-task/compssUsers.pl:59
-#: share/meta-task/compssUsers.pl:165
+#: share/meta-task/compssUsers.pl:59 share/meta-task/compssUsers.pl:165
 #, c-format
 msgid "Books and Howto's on Linux and Free Software"
 msgstr "Linux жана Free Software жөнүндөгү китептер жана HOWTOлар"
 
-#: share/meta-task/compssUsers.pl:63
-#: share/meta-task/compssUsers.pl:168
+#: share/meta-task/compssUsers.pl:63 share/meta-task/compssUsers.pl:168
 #, c-format
 msgid "LSB"
 msgstr "LSB"
 
-#: share/meta-task/compssUsers.pl:64
-#: share/meta-task/compssUsers.pl:169
+#: share/meta-task/compssUsers.pl:64 share/meta-task/compssUsers.pl:169
 #, c-format
 msgid "Linux Standard Base. Third party applications support"
-msgstr "Linux стандарттык базасы. Үчүнчү тараптык иштеп чыгуучулардын тиркемелерин колдоо"
+msgstr ""
+"Linux стандарттык базасы. Үчүнчү тараптык иштеп чыгуучулардын тиркемелерин "
+"колдоо"
 
 #: share/meta-task/compssUsers.pl:73
 #, c-format
@@ -490,14 +504,12 @@ msgstr "Groupware"
 msgid "Kolab Server"
 msgstr "Kolab сервери"
 
-#: share/meta-task/compssUsers.pl:81
-#: share/meta-task/compssUsers.pl:122
+#: share/meta-task/compssUsers.pl:81 share/meta-task/compssUsers.pl:122
 #, c-format
 msgid "Firewall/Router"
 msgstr "Файрволл/Маршруттагыч"
 
-#: share/meta-task/compssUsers.pl:82
-#: share/meta-task/compssUsers.pl:123
+#: share/meta-task/compssUsers.pl:82 share/meta-task/compssUsers.pl:123
 #, c-format
 msgid "Internet gateway"
 msgstr "Интернет дарбазасы"
@@ -547,8 +559,7 @@ msgstr "Файл жана принтер бөлүшүү сервери"
 msgid "NFS Server, Samba server"
 msgstr "NFS сервери, Samba сервери"
 
-#: share/meta-task/compssUsers.pl:105
-#: share/meta-task/compssUsers.pl:118
+#: share/meta-task/compssUsers.pl:105 share/meta-task/compssUsers.pl:118
 #, c-format
 msgid "Database"
 msgstr "Берилиштер базасы"
@@ -605,8 +616,12 @@ msgstr "KDE иш станциясы"
 
 #: share/meta-task/compssUsers.pl:136
 #, c-format
-msgid "The K Desktop Environment, the basic graphical environment with a collection of accompanying tools"
-msgstr "K Desktop Environment - негизги графикалык чөйрө, кошумча куралдар коллекциясы менен"
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"K Desktop Environment - негизги графикалык чөйрө, кошумча куралдар "
+"коллекциясы менен"
 
 #: share/meta-task/compssUsers.pl:140
 #, c-format
@@ -615,8 +630,12 @@ msgstr "GNOME иш станциясы"
 
 #: share/meta-task/compssUsers.pl:141
 #, c-format
-msgid "A graphical environment with user-friendly set of applications and desktop tools"
-msgstr "Колдонуучуга ыңгайлашкан тиркемелерин жана иш столунун кураларын камтыган графикалык чөйрө"
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr ""
+"Колдонуучуга ыңгайлашкан тиркемелерин жана иш столунун кураларын камтыган "
+"графикалык чөйрө"
 
 #: share/meta-task/compssUsers.pl:145
 #, c-format
@@ -625,8 +644,12 @@ msgstr "LXDE иш столу"
 
 #: share/meta-task/compssUsers.pl:147
 #, c-format
-msgid "A lightweight & fast graphical environment with user-friendly set of applications and desktop tools"
-msgstr "Колдонуучуга ыңгайлашкан тиркемелерин жана иш столунун кураларын камтыган графикалык чөйрө"
+msgid ""
+"A lightweight & fast graphical environment with user-friendly set of "
+"applications and desktop tools"
+msgstr ""
+"Колдонуучуга ыңгайлашкан тиркемелерин жана иш столунун кураларын камтыган "
+"графикалык чөйрө"
 
 #: share/meta-task/compssUsers.pl:150
 #, c-format
@@ -643,8 +666,7 @@ msgstr "Window Maker, Enlightenment, Fvwm, ж.б. "
 msgid "Utilities"
 msgstr "Утилиталар"
 
-#: share/meta-task/compssUsers.pl:176
-#: share/meta-task/compssUsers.pl:177
+#: share/meta-task/compssUsers.pl:176 share/meta-task/compssUsers.pl:177
 #, c-format
 msgid "SSH Server"
 msgstr "SSH сервери"
@@ -693,14 +715,15 @@ msgstr ""
 msgid ""
 "Some important packages did not get installed properly.\n"
 "Either your cdrom drive or your cdrom is defective.\n"
-"Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm\"\n"
+"Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm"
+"\"\n"
 msgstr ""
 "Кээбир негизги пакеттер туура эмес орнотулду.\n"
 "CDROM түзүлүшү же диск бузук болушу мүмкүн.\n"
-"Киргизилген дискти \"rpm -qpl media/main/*.rpm\" коммандасы менен текшериңиз\n"
+"Киргизилген дискти \"rpm -qpl media/main/*.rpm\" коммандасы менен "
+"текшериңиз\n"
 
-#: steps_auto_install.pm:71
-#: steps_stdio.pm:27
+#: steps_auto_install.pm:71 steps_stdio.pm:27
 #, c-format
 msgid "Entering step `%s'\n"
 msgstr "`%s' кадамына өтүү аракети\n"
@@ -724,7 +747,8 @@ msgstr "Xorg жай башталып жатат. Күтө туруңуз..."
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
-"Mandriva Linux. If that occurs, you can try a text install instead. For this,\n"
+"Mandriva Linux. If that occurs, you can try a text install instead. For "
+"this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "Системага жетеринче ресурс жетпей жатат. Mandriva Linux системасын\n"
@@ -772,21 +796,17 @@ msgstr "Мына '%s' иш столдун алдын ала көрүнүшү."
 msgid "Click on images in order to see a bigger preview"
 msgstr "Чоң көрүнүштү көрүү үчүн сүрөткө басыңыз"
 
-#: steps_gtk.pm:315
-#: steps_interactive.pm:602
-#: steps_list.pm:30
+#: steps_gtk.pm:315 steps_interactive.pm:606 steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "Пакеттердин группасын тандоо"
 
-#: steps_gtk.pm:336
-#: steps_interactive.pm:619
+#: steps_gtk.pm:336 steps_interactive.pm:623
 #, c-format
 msgid "Individual package selection"
 msgstr "Пакеттерди өз алдынча тандоо"
 
-#: steps_gtk.pm:360
-#: steps_interactive.pm:543
+#: steps_gtk.pm:360 steps_interactive.pm:544
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Жалпы көлөмү: %d / %d Мб"
@@ -843,8 +863,12 @@ msgstr "%s сактоо үчүн"
 
 #: steps_gtk.pm:452
 #, c-format
-msgid "You can not select this package as there is not enough space left to install it"
-msgstr "Сиз бул пакетти тандап алалбайсыз, анткени аны орнотуу үчүн жетеринче бош боштук жок"
+msgid ""
+"You can not select this package as there is not enough space left to install "
+"it"
+msgstr ""
+"Сиз бул пакетти тандап алалбайсыз, анткени аны орнотуу үчүн жетеринче бош "
+"боштук жок"
 
 #: steps_gtk.pm:455
 #, c-format
@@ -901,66 +925,58 @@ msgstr "Минималдык орнотуу"
 msgid "Software Management"
 msgstr "Пакеттерди башкаруу"
 
-#: steps_gtk.pm:517
-#: steps_interactive.pm:428
+#: steps_gtk.pm:517 steps_interactive.pm:429
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Сиз орнотууну каалаган пакеттерди тандаңыз"
 
-#: steps_gtk.pm:534
-#: steps_interactive.pm:633
-#: steps_list.pm:32
+#: steps_gtk.pm:534 steps_interactive.pm:637 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "Орнотуу"
 
-#: steps_gtk.pm:563
+#: steps_gtk.pm:564
 #, c-format
 msgid "No details"
 msgstr "Кеңири маалыматсыз"
 
-#: steps_gtk.pm:578
+#: steps_gtk.pm:583
 #, c-format
 msgid "Time remaining:"
 msgstr "Калган убакыт:"
 
-#: steps_gtk.pm:579
+#: steps_gtk.pm:584
 #, c-format
 msgid "(estimating...)"
 msgstr "(болжолдуу убакыт..)"
 
-#: steps_gtk.pm:605
+#: steps_gtk.pm:614
 #, c-format
 msgid "%d package"
 msgid_plural "%d packages"
 msgstr[0] "%d- пакет"
 
-#: steps_gtk.pm:651
-#: steps_interactive.pm:797
-#: steps_list.pm:43
+#: steps_gtk.pm:668 steps_interactive.pm:801 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Жыйынтык"
 
-#: steps_gtk.pm:670
+#: steps_gtk.pm:687
 #, c-format
 msgid "Configure"
 msgstr "Конфигурация"
 
-#: steps_gtk.pm:687
-#: steps_interactive.pm:793
-#: steps_interactive.pm:944
+#: steps_gtk.pm:704 steps_interactive.pm:797 steps_interactive.pm:948
 #, c-format
 msgid "not configured"
 msgstr "конфигурацияланбаган"
 
-#: steps_gtk.pm:721
+#: steps_gtk.pm:738
 #, c-format
 msgid "Media Selection"
 msgstr "Пакеттердин группасын тандоо"
 
-#: steps_gtk.pm:730
-#: steps_interactive.pm:329
+#: steps_gtk.pm:747 steps_interactive.pm:330
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -969,18 +985,20 @@ msgstr ""
 "Төмөнкү орнотуу булактары табылды.\n"
 "Эгерде кээбирин аттап өтүүнү кааласаңыз, анда аларды тандабай өтүңүз."
 
-#: steps_gtk.pm:746
-#: steps_interactive.pm:335
+#: steps_gtk.pm:763 steps_interactive.pm:336
 #, c-format
 msgid ""
-"You have the option to copy the contents of the CDs onto the hard drive before installation.\n"
-"It will then continue from the hard drive and the packages will remain available once the system is fully installed."
+"You have the option to copy the contents of the CDs onto the hard drive "
+"before installation.\n"
+"It will then continue from the hard drive and the packages will remain "
+"available once the system is fully installed."
 msgstr ""
-"Компакт-диск мазмунун орнотуудан мурун компьютер дискине көчүрүп алуу мүмкүн.\n"
-"Андан кийин орнотуу компьютер дискинен улантылат жана пакеттер толук системанын орнотулуп бүткөндөн кийин калышат."
+"Компакт-диск мазмунун орнотуудан мурун компьютер дискине көчүрүп алуу "
+"мүмкүн.\n"
+"Андан кийин орнотуу компьютер дискинен улантылат жана пакеттер толук "
+"системанын орнотулуп бүткөндөн кийин калышат."
 
-#: steps_gtk.pm:748
-#: steps_interactive.pm:337
+#: steps_gtk.pm:765 steps_interactive.pm:338
 #, c-format
 msgid "Copy whole CDs"
 msgstr "CD дискти толугу менен көчүрүү"
@@ -1000,49 +1018,49 @@ msgstr "Өзүңүздүн алиптакта картасын тандаңыз"
 msgid "Here is the full list of available keyboards:"
 msgstr "Мүмкүн болгон бардык клавиөлкөлөр тизмеси"
 
-#: steps_interactive.pm:143
+#: steps_interactive.pm:144
 #, c-format
 msgid "Install/Upgrade"
 msgstr "Орнотуу/Жаңылоо"
 
-#: steps_interactive.pm:147
+#: steps_interactive.pm:148
 #, c-format
 msgid "Is this an install or an upgrade?"
 msgstr "Бул орнотуубу же жаңылообу?"
 
-#: steps_interactive.pm:149
+#: steps_interactive.pm:150
 #, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
 msgstr "Орнотуу"
 
-#: steps_interactive.pm:151
+#: steps_interactive.pm:152
 #, c-format
 msgid "Upgrade %s"
 msgstr "%s жаңылоо"
 
-#: steps_interactive.pm:169
+#: steps_interactive.pm:170
 #, c-format
 msgid "Encryption key for %s"
 msgstr "%s үчүн шифрлөө ачкычы"
 
-#: steps_interactive.pm:202
+#: steps_interactive.pm:203
 #, c-format
 msgid "Cancel installation, reboot system"
 msgstr "Орнотууну айну, система өчүп жандыруу"
 
-#: steps_interactive.pm:203
+#: steps_interactive.pm:204
 #, c-format
 msgid "New Installation"
 msgstr "Жаңы орнотуу"
 
-#: steps_interactive.pm:204
+#: steps_interactive.pm:205
 #, c-format
 msgid "Upgrade previous installation (not recommended)"
 msgstr "Мурунку орнотууну жаңылоо (сунуш кылынбайт)"
 
-#: steps_interactive.pm:208
+#: steps_interactive.pm:209
 #, c-format
 msgid ""
 "Installer has detected that your installed Mandriva Linux system could not\n"
@@ -1061,48 +1079,64 @@ msgstr ""
 "Эскертүү : \"Жаңы орнотулуш\" тандоодон мурун, бардык жеке\n"
 "маалыматтарды архивдөө менен көчүрүп алышыңыз керек."
 
-#: steps_interactive.pm:250
+#: steps_interactive.pm:251
 #, c-format
 msgid "IDE"
 msgstr "IDE"
 
-#: steps_interactive.pm:250
+#: steps_interactive.pm:251
 #, c-format
 msgid "Configuring IDE"
 msgstr "IDE конфигурацияланууда"
 
-#: steps_interactive.pm:287
+#: steps_interactive.pm:288
 #, c-format
-msgid "No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"
-msgstr "Өз жүктөлүү программасы үчүн жетеринче бош боштук калган жок! Орнотуу улантылат, бирок системанын жүктөлүшү үчүн DiskDrake менен баштапкы жүктөлүү бөлүгүн түзүү керек"
+msgid ""
+"No free space for 1MB bootstrap! Install will continue, but to boot your "
+"system, you'll need to create the bootstrap partition in DiskDrake"
+msgstr ""
+"Өз жүктөлүү программасы үчүн жетеринче бош боштук калган жок! Орнотуу "
+"улантылат, бирок системанын жүктөлүшү үчүн DiskDrake менен баштапкы жүктөлүү "
+"бөлүгүн түзүү керек"
 
-#: steps_interactive.pm:292
+#: steps_interactive.pm:293
 #, c-format
-msgid "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"
-msgstr "PPC PReP жүктөлүү бөлүгүн түзүү керек! Орнотуу улантылат, бирок системанын жүктөлүшү үчүн DiskDrake менен баштапкы жүктөлүү бөлүгүн түзүү керек"
+msgid ""
+"You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
+"to boot your system, you'll need to create the bootstrap partition in "
+"DiskDrake"
+msgstr ""
+"PPC PReP жүктөлүү бөлүгүн түзүү керек! Орнотуу улантылат, бирок системанын "
+"жүктөлүшү үчүн DiskDrake менен баштапкы жүктөлүү бөлүгүн түзүү керек"
 
-#: steps_interactive.pm:368
+#: steps_interactive.pm:369
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
-"Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.\n"
+"Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when "
+"done.\n"
 "If you do not have it, press Cancel to avoid installation from this Cd-Rom."
 msgstr ""
 "Компакт-дискти алмаштырыңыз!\n"
 "\"%s\" атту компакт-дискти киргизиңиз, андан кийин \"Ok\" баскычын басыңыз.\n"
-"Эгерде сизде жок болсо, анда ушул компакт-дисктен орнотууну айнуу үчүн \"Айнуу\" баскычын басыңыз."
+"Эгерде сизде жок болсо, анда ушул компакт-дисктен орнотууну айнуу үчүн "
+"\"Айнуу\" баскычын басыңыз."
 
-#: steps_interactive.pm:385
+#: steps_interactive.pm:386
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Мүмкүн болгон пакеттер изделүүдө..."
 
-#: steps_interactive.pm:393
+#: steps_interactive.pm:394
 #, c-format
-msgid "Your system does not have enough space left for installation or upgrade (%dMB > %dMB)"
-msgstr "Системаңыз орнотууга же жаңылоого жетеринче бош боштукка ээ эмес (%d МБ > %d МБ)"
+msgid ""
+"Your system does not have enough space left for installation or upgrade (%"
+"dMB > %dMB)"
+msgstr ""
+"Системаңыз орнотууга же жаңылоого жетеринче бош боштукка ээ эмес (%d МБ > %d "
+"МБ)"
 
-#: steps_interactive.pm:440
+#: steps_interactive.pm:441
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1111,52 +1145,52 @@ msgstr ""
 "Жүктөө же пакеттер тандоосун сактоону тандаңыз.\n"
 "Файлдар форматы автоматтык орнотууда түзүлгөн файлдар менен окшош."
 
-#: steps_interactive.pm:442
+#: steps_interactive.pm:443
 #, c-format
 msgid "Load"
 msgstr "Жүктөө"
 
-#: steps_interactive.pm:442
+#: steps_interactive.pm:443
 #, c-format
 msgid "Save"
 msgstr "Сактоо"
 
-#: steps_interactive.pm:450
+#: steps_interactive.pm:451
 #, c-format
 msgid "Bad file"
 msgstr "Туура эмес файл"
 
-#: steps_interactive.pm:466
+#: steps_interactive.pm:467
 #, c-format
 msgid "KDE"
 msgstr "KDE"
 
-#: steps_interactive.pm:467
+#: steps_interactive.pm:468
 #, c-format
 msgid "GNOME"
 msgstr "GNOME"
 
-#: steps_interactive.pm:470
+#: steps_interactive.pm:471
 #, c-format
 msgid "Desktop Selection"
 msgstr "Иш столун тандоо"
 
-#: steps_interactive.pm:471
+#: steps_interactive.pm:472
 #, c-format
 msgid "You can choose your workstation desktop profile."
 msgstr "Иштоо станцияңыздын иш столдун профилин тандап аласыз."
 
-#: steps_interactive.pm:557
+#: steps_interactive.pm:558
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "Тандалган өлчөм бар болгон боштуктан чоң"
 
-#: steps_interactive.pm:572
+#: steps_interactive.pm:574
 #, c-format
 msgid "Type of install"
 msgstr "Орнотуу тиби"
 
-#: steps_interactive.pm:573
+#: steps_interactive.pm:575
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1165,83 +1199,87 @@ msgstr ""
 "Эч кандай пакеттер группасы тандалган жок.\n"
 "Минималдык орнотуу тибин тандаңыз:"
 
-#: steps_interactive.pm:578
+#: steps_interactive.pm:580
 #, c-format
 msgid "With X"
 msgstr "X менен"
 
-#: steps_interactive.pm:579
+#: steps_interactive.pm:581
+#, fuzzy, c-format
+msgid "Install suggested packages"
+msgstr "%s пакети орнотуулууда"
+
+#: steps_interactive.pm:582
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "Башкы документация менен (сунушталат!)"
 
-#: steps_interactive.pm:580
+#: steps_interactive.pm:583
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Чыныгы минималдуу орнотуулуш (атайын urpmi'сиз)"
 
-#: steps_interactive.pm:634
+#: steps_interactive.pm:638
 #, c-format
 msgid "Preparing installation"
 msgstr "Орнотуу даярдалууда"
 
-#: steps_interactive.pm:642
+#: steps_interactive.pm:646
 #, c-format
 msgid "Installing package %s"
 msgstr "%s пакети орнотуулууда"
 
-#: steps_interactive.pm:666
+#: steps_interactive.pm:670
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Пакеттерди кабыл алууда ката пайда болду:"
 
-#: steps_interactive.pm:666
+#: steps_interactive.pm:670
 #, c-format
 msgid "Go on anyway?"
 msgstr "Буга карабай улантайынбы?"
 
-#: steps_interactive.pm:670
+#: steps_interactive.pm:674
 #, c-format
 msgid "Retry"
 msgstr "Кайталоо"
 
-#: steps_interactive.pm:671
+#: steps_interactive.pm:675
 #, c-format
 msgid "Skip this package"
 msgstr "Бул пакетти аттап өтүү"
 
-#: steps_interactive.pm:672
+#: steps_interactive.pm:676
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr "\"%s\" ичинен бардык пакеттерди аттап өтүү"
 
-#: steps_interactive.pm:673
+#: steps_interactive.pm:677
 #, c-format
 msgid "Go back to media and packages selection"
 msgstr "Артка баруу жана орнотууга пакеттерди нандоо"
 
-#: steps_interactive.pm:676
+#: steps_interactive.pm:680
 #, c-format
 msgid "There was an error installing package %s."
 msgstr "%s пакетти орнотууда ката чыкты."
 
-#: steps_interactive.pm:695
+#: steps_interactive.pm:699
 #, c-format
 msgid "Post-install configuration"
 msgstr "Орнотуулуштан кийинки ырастоолор"
 
-#: steps_interactive.pm:702
+#: steps_interactive.pm:706
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "%s ичинде Update Modules топтомунун бар экендигин текшерип көрүңүз"
 
-#: steps_interactive.pm:730
-#: steps_list.pm:47
+#: steps_interactive.pm:734 steps_list.pm:47
 #, c-format
 msgid "Updates"
 msgstr "Жаңылоолор"
 
-#: steps_interactive.pm:731
+#: steps_interactive.pm:735
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1262,118 +1300,131 @@ msgstr ""
 "\n"
 "Пакеттер орнотулсунбу?"
 
-#: steps_interactive.pm:839
+#: steps_interactive.pm:843
 #, c-format
 msgid "%s on %s"
 msgstr "%s %s'да"
 
-#: steps_interactive.pm:872
-#: steps_interactive.pm:879
-#: steps_interactive.pm:892
-#: steps_interactive.pm:909
-#: steps_interactive.pm:924
+#: steps_interactive.pm:876 steps_interactive.pm:883 steps_interactive.pm:896
+#: steps_interactive.pm:913 steps_interactive.pm:928
 #, c-format
 msgid "Hardware"
 msgstr "Техникалык жабдуу"
 
-#: steps_interactive.pm:893
-#: steps_interactive.pm:910
+#: steps_interactive.pm:897 steps_interactive.pm:914
 #, c-format
 msgid "Sound card"
 msgstr "Добуш картасы"
 
-#: steps_interactive.pm:913
+#: steps_interactive.pm:917
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Сизде ISA добуш карточкасы барбы?"
 
-#: steps_interactive.pm:915
+#: steps_interactive.pm:919
 #, c-format
-msgid "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound card"
-msgstr "Үн картасын ырастоо үчүн орнотуудан кийин \"alsaconf\" же \"sndconfig\" коммандаларын аткарыңыз"
+msgid ""
+"Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
+"card"
+msgstr ""
+"Үн картасын ырастоо үчүн орнотуудан кийин \"alsaconf\" же \"sndconfig\" "
+"коммандаларын аткарыңыз"
 
-#: steps_interactive.pm:917
+#: steps_interactive.pm:921
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
-msgstr "Эч кандай добуш карточкасы табылган жок. Орнотуудан кийин \"harddrake\" кайталап көрүңүз"
+msgstr ""
+"Эч кандай добуш карточкасы табылган жок. Орнотуудан кийин \"harddrake\" "
+"кайталап көрүңүз"
 
-#: steps_interactive.pm:925
+#: steps_interactive.pm:929
 #, c-format
 msgid "Graphical interface"
 msgstr "Графикалык интерфейс"
 
-#: steps_interactive.pm:931
-#: steps_interactive.pm:942
+#: steps_interactive.pm:935 steps_interactive.pm:946
 #, c-format
 msgid "Network & Internet"
 msgstr "Тармак жана Интернет"
 
-#: steps_interactive.pm:943
+#: steps_interactive.pm:947
 #, c-format
 msgid "Proxies"
 msgstr "Проксилер"
 
-#: steps_interactive.pm:944
+#: steps_interactive.pm:948
 #, c-format
 msgid "configured"
 msgstr "ырасталды"
 
-#: steps_interactive.pm:954
+#: steps_interactive.pm:958
 #, c-format
 msgid "Security Level"
 msgstr "Коосуздук деңгээли"
 
-#: steps_interactive.pm:973
+#: steps_interactive.pm:977
 #, c-format
 msgid "Firewall"
 msgstr "Файервол"
 
-#: steps_interactive.pm:977
+#: steps_interactive.pm:981
 #, c-format
 msgid "activated"
 msgstr "активдештирилди"
 
-#: steps_interactive.pm:977
+#: steps_interactive.pm:981
 #, c-format
 msgid "disabled"
 msgstr "өчүк"
 
-#: steps_interactive.pm:991
+#: steps_interactive.pm:995
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Сиз X'ти ырастаган жоксуз.Чындап ушуну каалайсызбы?"
 
-#: steps_interactive.pm:1019
+#: steps_interactive.pm:1023
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Система жүктөөгүч даярдалууда..."
 
-#: steps_interactive.pm:1020
+#: steps_interactive.pm:1024
 #, c-format
 msgid "Be patient, this may take a while..."
 msgstr "Күтө туруңуз, бул бир нече убакытты алышы мүмкүн..."
 
-#: steps_interactive.pm:1031
+#: steps_interactive.pm:1035
 #, c-format
-msgid "You appear to have an OldWorld or Unknown machine, the yaboot bootloader will not work for you. The install will continue, but you'll need to use BootX or some other means to boot your machine. The kernel argument for the root fs is: root=%s"
-msgstr "Сиз өтө эски тарыхый же белгисиз машинанын ээси окшойсуз жана 'yaboot' баштапкы жүктөгүчү машинаңызга иштебеши мүмкүн. Орнотуу улантылат, бирок системанын жүктөлүшү үчүн 'BootX' же башка жүктөгүч колдонулушу керек. Ядронун тамырдык файл системанын параметри: root=%s"
+msgid ""
+"You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
+"will not work for you. The install will continue, but you'll need to use "
+"BootX or some other means to boot your machine. The kernel argument for the "
+"root fs is: root=%s"
+msgstr ""
+"Сиз өтө эски тарыхый же белгисиз машинанын ээси окшойсуз жана 'yaboot' "
+"баштапкы жүктөгүчү машинаңызга иштебеши мүмкүн. Орнотуу улантылат, бирок "
+"системанын жүктөлүшү үчүн 'BootX' же башка жүктөгүч колдонулушу керек. "
+"Ядронун тамырдык файл системанын параметри: root=%s"
 
-#: steps_interactive.pm:1045
+#: steps_interactive.pm:1049
 #, c-format
-msgid "In this security level, access to the files in the Windows partition is restricted to the administrator."
-msgstr "Бул коопсудук деңгээлде Windows бөлүмүндө жайгашкан файларда жетүү жалгыз гана администраторга уруксат берилген."
+msgid ""
+"In this security level, access to the files in the Windows partition is "
+"restricted to the administrator."
+msgstr ""
+"Бул коопсудук деңгээлде Windows бөлүмүндө жайгашкан файларда жетүү жалгыз "
+"гана администраторга уруксат берилген."
 
-#: steps_interactive.pm:1077
+#: steps_interactive.pm:1081
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "%s ичине бош флоппи дискти киргизиңиз"
 
-#: steps_interactive.pm:1079
+#: steps_interactive.pm:1083
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Авто орнотуу флоппини түзүү..."
 
-#: steps_interactive.pm:1090
+#: steps_interactive.pm:1094
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1384,10 +1435,15 @@ msgstr ""
 "\n"
 "Сиз чындап азыр чыгууну каалайсызбы?"
 
-#: steps_interactive.pm:1100
+#: steps_interactive.pm:1104
 #, c-format
 msgid "Congratulations"
 msgstr "Конфигурациялар"
+
+#: steps_interactive.pm:1107
+#, c-format
+msgid "Reboot"
+msgstr "Кайра жүктөө"
 
 #. -PO: please keep the following messages very short: they must fit in the left list of the installer!!!
 #: steps_list.pm:16
@@ -1397,8 +1453,7 @@ msgid ""
 "Language"
 msgstr "Тил тандоо"
 
-#: steps_list.pm:16
-#: steps_list.pm:23
+#: steps_list.pm:16 steps_list.pm:23
 #, c-format
 msgid "Localization"
 msgstr "Локализация"
@@ -1417,16 +1472,14 @@ msgid ""
 "Mouse"
 msgstr "Чычкан"
 
-#: steps_list.pm:19
-#: steps_list.pm:20
+#: steps_list.pm:19 steps_list.pm:20
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Hard drive detection"
 msgstr "Таш дискти аныктоо"
 
-#: steps_list.pm:21
-#: steps_list.pm:22
+#: steps_list.pm:21 steps_list.pm:22
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
@@ -1454,8 +1507,7 @@ msgid ""
 "Partitioning"
 msgstr "Бөлүмдөргө бөлүү"
 
-#: steps_list.pm:27
-#: steps_list.pm:28
+#: steps_list.pm:27 steps_list.pm:28
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
@@ -1483,24 +1535,21 @@ msgid ""
 "Users"
 msgstr "Колдонуучулар"
 
-#: steps_list.pm:36
-#: steps_list.pm:37
+#: steps_list.pm:36 steps_list.pm:37
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Networking"
 msgstr "Тармактар"
 
-#: steps_list.pm:38
-#: steps_list.pm:39
+#: steps_list.pm:38 steps_list.pm:39
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
 "Bootloader"
 msgstr "Баштапкы жүктөгүч"
 
-#: steps_list.pm:40
-#: steps_list.pm:41
+#: steps_list.pm:40 steps_list.pm:41
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
@@ -1514,8 +1563,7 @@ msgid ""
 "Summary"
 msgstr "Жыйынтык"
 
-#: steps_list.pm:44
-#: steps_list.pm:45
+#: steps_list.pm:44 steps_list.pm:45
 #, c-format
 msgid ""
 "_: Keep these entry short\n"
@@ -1536,22 +1584,40 @@ msgid ""
 "Exit"
 msgstr "Чыгуу"
 
-#~ msgid "Your desktop on a USB key"
-#~ msgstr "Сиздин иш столуңуз USBде"
-#~ msgid "The 100%% open source Mandriva Linux distribution"
-#~ msgstr "100%% ачык кодду Mandriva Linux дистрибутиви"
-#~ msgid "Explore Linux easily with Mandriva One"
-#~ msgstr "Linux'ту Mandriva One менен аралап үйрөнүү"
-#~ msgid "A full Mandriva Linux desktop, with support"
-#~ msgstr "Толук Mandriva Linux иш столу жардам менен"
-#~ msgid "Mandriva: distributions for everybody's needs"
-#~ msgstr "Mandriva: ар бирдин керектеген дистрибутив"
+#~ msgid ""
+#~ "You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
+#~ "on your system. This installer cannot preserve KDE 3.5 in an upgrade. If "
+#~ "you choose to proceed, \n"
+#~ "KDE 4 will replace KDE 3, and you will lose your personal KDE "
+#~ "configuration settings. \n"
+#~ "To upgrade with KDE 3.5 and your personal settings preserved, \n"
+#~ "please reboot your system and upgrade using the Mandriva update applet."
+#~ msgstr ""
+#~ "%s чейин системанын жаңылоосун чечтиңиз. KDE 3.5 системаңызда табылды.\n"
+#~ "Буд орноткуч жаңылоодо KDE 3.5'ти сакатабайт. Эгерде орнотууну уланта "
+#~ "берсеңиз, \n"
+#~ "KDE 4 KDE 3'тү алмаштырып салат жана жеке ырастоолоруңуз менен KDE "
+#~ "ырастоолору \n"
+#~ "жоголуп кетет. KDE 3.5'тен жаңылоо жана жеке ырастоолорду сактап калуу "
+#~ "үчүн, \n"
+#~ "системаны кайрадан жүктөп жана Mandriva жаңылоо аплети менен жаңыланым "
+#~ "көрүңүз."
+
+#~ msgid "Proceed"
+#~ msgstr "Аткарылды"
+
+#~ msgid "retrieval of [%s] failed"
+#~ msgstr "[%s] чыгаруу ийгиликсиз аякталды"
+
 #~ msgid "Downloading file %s..."
 #~ msgstr "%s файлы жүктөөлүп жатат..."
+
 #~ msgid "Upgrade from a 32bit to a 64bit distribution is not supported"
 #~ msgstr "32bit тен 64bit ке жаңылоо мүмкүе эмес"
+
 #~ msgid "Upgrade from a 64bit to a 32bit distribution is not supported"
 #~ msgstr "64bit тен 32bit ке жаңылоо мүмкүн эмес"
+
 #~ msgid ""
 #~ "You have selected the following server(s): %s\n"
 #~ "\n"
@@ -1576,24 +1642,33 @@ msgstr "Чыгуу"
 #~ "\n"
 #~ "\n"
 #~ "Сиз бул серверлерди орнотууну каалайсызбы?\n"
+
 #~ msgid "IceWm Desktop"
 #~ msgstr "IceWm иш столу"
+
 #~ msgid "Replay"
 #~ msgstr "Кайталоо"
+
 #~ msgid "Automated"
 #~ msgstr "Автоматтык"
+
 #~ msgid "Save packages selection"
 #~ msgstr "Тандалган пакеттерди сактоо"
+
 #~ msgid "All"
 #~ msgstr "Бардыгы"
+
 #~ msgid "TV card"
 #~ msgstr "ТВ-карта"
+
 #~ msgid "Boot"
 #~ msgstr "Жүктөө"
+
 #~ msgid ""
 #~ "_: Keep these entry short\n"
 #~ "Authentication"
 #~ msgstr "Аутентификация"
+
 #~ msgid "Gwenview"
 #~ msgstr "Gwenview"
 
@@ -1608,10 +1683,12 @@ msgstr "Чыгуу"
 #, fuzzy
 #~ msgid "Choosing packages"
 #~ msgstr "Орнотуу үчүн пакеттерди тандаңыз"
+
 #~ msgid "Users"
 #~ msgstr "Колдонуучулар"
+
 #~ msgid "Networking"
 #~ msgstr "Тармактар"
+
 #~ msgid "Configure X"
 #~ msgstr "X конфигурациялоо"
-

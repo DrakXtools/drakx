@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-09 05:35+0200\n"
+"POT-Creation-Date: 2009-09-10 12:21+0200\n"
 "PO-Revision-Date: 2002-09-27 17:45+0200\n"
 "Last-Translator: Raivo Saars <spaiks@inbox.lv>\n"
 "Language-Team: Latvian <ll10nt@listes.murds.lv>\n"
@@ -15,6 +15,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
+
+#: ../../advertising/IM_flash.pl:1
+#, c-format
+msgid "Your desktop on a USB key"
+msgstr ""
+
+#: ../../advertising/IM_free09.pl:1
+#, c-format
+msgid "The 100%% open source Mandriva Linux distribution"
+msgstr ""
+
+#: ../../advertising/IM_one09.pl:1
+#, c-format
+msgid "Explore Linux easily with Mandriva One"
+msgstr ""
+
+#: ../../advertising/IM_pwp09.pl:1
+#, c-format
+msgid "A full Mandriva Linux desktop, with support"
+msgstr ""
+
+#: ../../advertising/IM_range09.pl:1
+#, c-format
+msgid "Mandriva: distributions for everybody's needs"
+msgstr ""
 
 #: any.pm:109
 #, fuzzy, c-format
@@ -130,40 +155,18 @@ msgstr "Nevar atrast %s uz %s"
 msgid "Looking at packages already installed..."
 msgstr "Meklēju jau iepriekš uzinstalētās pakotnes..."
 
-#: any.pm:368
+#: any.pm:369
 #, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Meklēju uzlabojamās pakotnes"
 
-#: any.pm:387
+#: any.pm:388
 #, c-format
 msgid "Removing packages prior to upgrade..."
 msgstr ""
 
-#: any.pm:408
-#, c-format
-msgid ""
-"You have decided to upgrade your system to %s. KDE 3.5 has been detected\n"
-"on your system. This installer cannot preserve KDE 3.5 in an upgrade. If you "
-"choose to proceed, \n"
-"KDE 4 will replace KDE 3, and you will lose your personal KDE configuration "
-"settings. \n"
-"To upgrade with KDE 3.5 and your personal settings preserved, \n"
-"please reboot your system and upgrade using the Mandriva update applet."
-msgstr ""
-
-#: any.pm:413 steps_interactive.pm:1103
-#, c-format
-msgid "Reboot"
-msgstr "Pārstartēt"
-
-#: any.pm:413
-#, c-format
-msgid "Proceed"
-msgstr ""
-
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: any.pm:602
+#: any.pm:594
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -176,90 +179,85 @@ msgstr ""
 "\n"
 "Vai tiešām vēlaties noņemt šīs pakotnes?\n"
 
-#: any.pm:821
+#: any.pm:813
 #, c-format
 msgid "Error reading file %s"
 msgstr "Kļūda, nolasot failu %s"
 
-#: any.pm:1028
+#: any.pm:1020
 #, fuzzy, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Tiks instalētas sekojošas pakotnes"
 
-#: any.pm:1030
+#: any.pm:1022
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr ""
 
-#: any.pm:1087
+#: any.pm:1079
 #, c-format
 msgid "HTTP"
 msgstr ""
 
-#: any.pm:1087
+#: any.pm:1079
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: any.pm:1087
+#: any.pm:1079
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: any.pm:1106 steps_interactive.pm:932
+#: any.pm:1098 steps_interactive.pm:936
 #, c-format
 msgid "Network"
 msgstr "Tīkls"
 
-#: any.pm:1110
+#: any.pm:1102
 #, fuzzy, c-format
 msgid "Please choose a media"
 msgstr "Lūdzu izvēlieties"
 
-#: any.pm:1126
+#: any.pm:1118
 #, fuzzy, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Fails jau eksistē. Pārrakstīt?"
 
-#: any.pm:1130
+#: any.pm:1122
 #, c-format
 msgid "Permission denied"
 msgstr "Pieeja liegta"
 
-#: any.pm:1178
+#: any.pm:1170
 #, c-format
 msgid "Bad NFS name"
 msgstr ""
 
-#: any.pm:1199
+#: any.pm:1191
 #, fuzzy, c-format
 msgid "Bad media %s"
 msgstr "pievienoju datu nesēju %s."
 
-#: any.pm:1242
+#: any.pm:1234
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Nevar izveidot ekrāna attēlus pirms sadaļu izveides"
 
-#: any.pm:1250
+#: any.pm:1242
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Ekrāna attēli būs pieejami pēc instalēšanas %s."
 
-#: gtk.pm:130
+#: gtk.pm:131
 #, fuzzy, c-format
 msgid "Installation"
 msgstr "Instalēju"
 
-#: gtk.pm:134 share/meta-task/compssUsers.pl:44
+#: gtk.pm:135 share/meta-task/compssUsers.pl:44
 #, c-format
 msgid "Configuration"
 msgstr "Konfigurācija"
-
-#: http.pm:53
-#, c-format
-msgid "retrieval of [%s] failed"
-msgstr ""
 
 #: install2.pm:168
 #, c-format
@@ -290,17 +288,17 @@ msgstr "Atslēdzu tīklu"
 msgid "Please wait, retrieving file"
 msgstr ""
 
-#: media.pm:718
+#: media.pm:716
 #, c-format
 msgid "unable to add medium"
 msgstr ""
 
-#: media.pm:758
+#: media.pm:756
 #, c-format
 msgid "Copying some packages on disks for future use"
 msgstr ""
 
-#: media.pm:811
+#: media.pm:809
 #, fuzzy, c-format
 msgid "Copying in progress"
 msgstr "Notiek noteikšana"
@@ -342,12 +340,12 @@ msgstr ""
 msgid "An error occurred:"
 msgstr "Atklāta kļūda"
 
-#: pkgs.pm:780
+#: pkgs.pm:792
 #, fuzzy, c-format
 msgid "%d installation transactions failed"
 msgstr "Instalēšana neizdevās"
 
-#: pkgs.pm:781
+#: pkgs.pm:793
 #, fuzzy, c-format
 msgid "Installation of packages failed:"
 msgstr "Instalēju pakotni %s"
@@ -781,17 +779,17 @@ msgstr ""
 msgid "Click on images in order to see a bigger preview"
 msgstr ""
 
-#: steps_gtk.pm:315 steps_interactive.pm:602 steps_list.pm:30
+#: steps_gtk.pm:315 steps_interactive.pm:606 steps_list.pm:30
 #, c-format
 msgid "Package Group Selection"
 msgstr "Pakotņu grupu izvēle"
 
-#: steps_gtk.pm:336 steps_interactive.pm:619
+#: steps_gtk.pm:336 steps_interactive.pm:623
 #, c-format
 msgid "Individual package selection"
 msgstr "Atsevišķu pakotņu izvēle"
 
-#: steps_gtk.pm:360 steps_interactive.pm:543
+#: steps_gtk.pm:360 steps_interactive.pm:544
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Kopējais izmērs: %d / %d MB"
@@ -909,32 +907,32 @@ msgstr "Minimāla instalēšana"
 msgid "Software Management"
 msgstr "Software Management"
 
-#: steps_gtk.pm:517 steps_interactive.pm:428
+#: steps_gtk.pm:517 steps_interactive.pm:429
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Izvēlieties pakotnes, ko vēlaties instalēt"
 
-#: steps_gtk.pm:534 steps_interactive.pm:633 steps_list.pm:32
+#: steps_gtk.pm:534 steps_interactive.pm:637 steps_list.pm:32
 #, c-format
 msgid "Installing"
 msgstr "Instalēju"
 
-#: steps_gtk.pm:563
+#: steps_gtk.pm:564
 #, fuzzy, c-format
 msgid "No details"
 msgstr "Detaļas"
 
-#: steps_gtk.pm:578
+#: steps_gtk.pm:583
 #, fuzzy, c-format
 msgid "Time remaining:"
 msgstr "Atlikušais laiks"
 
-#: steps_gtk.pm:579
+#: steps_gtk.pm:584
 #, fuzzy, c-format
 msgid "(estimating...)"
 msgstr "Aprēķinu"
 
-#: steps_gtk.pm:605
+#: steps_gtk.pm:614
 #, fuzzy, c-format
 msgid "%d package"
 msgid_plural "%d packages"
@@ -942,34 +940,34 @@ msgstr[0] "%d pakotnes"
 msgstr[1] "%d pakotnes"
 msgstr[2] "%d pakotnes"
 
-#: steps_gtk.pm:651 steps_interactive.pm:797 steps_list.pm:43
+#: steps_gtk.pm:668 steps_interactive.pm:801 steps_list.pm:43
 #, c-format
 msgid "Summary"
 msgstr "Kopsavilkums"
 
-#: steps_gtk.pm:670
+#: steps_gtk.pm:687
 #, c-format
 msgid "Configure"
 msgstr "Konfigurēt"
 
-#: steps_gtk.pm:687 steps_interactive.pm:793 steps_interactive.pm:944
+#: steps_gtk.pm:704 steps_interactive.pm:797 steps_interactive.pm:948
 #, fuzzy, c-format
 msgid "not configured"
 msgstr "pārkonfigurēt"
 
-#: steps_gtk.pm:721
+#: steps_gtk.pm:738
 #, fuzzy, c-format
 msgid "Media Selection"
 msgstr "Pakotņu grupu izvēle"
 
-#: steps_gtk.pm:730 steps_interactive.pm:329
+#: steps_gtk.pm:747 steps_interactive.pm:330
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
 "If you want to skip some of them, you can unselect them now."
 msgstr ""
 
-#: steps_gtk.pm:746 steps_interactive.pm:335
+#: steps_gtk.pm:763 steps_interactive.pm:336
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -978,7 +976,7 @@ msgid ""
 "available once the system is fully installed."
 msgstr ""
 
-#: steps_gtk.pm:748 steps_interactive.pm:337
+#: steps_gtk.pm:765 steps_interactive.pm:338
 #, c-format
 msgid "Copy whole CDs"
 msgstr ""
@@ -998,49 +996,49 @@ msgstr "Lūdzu izvēlieties jūsu tastatūras izkārtojumu"
 msgid "Here is the full list of available keyboards:"
 msgstr "Šeit ir pilns pieejamo tastatūru saraksts"
 
-#: steps_interactive.pm:143
+#: steps_interactive.pm:144
 #, fuzzy, c-format
 msgid "Install/Upgrade"
 msgstr "Instalēt/Atjaunināt"
 
-#: steps_interactive.pm:147
+#: steps_interactive.pm:148
 #, fuzzy, c-format
 msgid "Is this an install or an upgrade?"
 msgstr "Šī ir instalēšana vai atjaunināšana?"
 
-#: steps_interactive.pm:149
+#: steps_interactive.pm:150
 #, fuzzy, c-format
 msgid ""
 "_: This is a noun:\n"
 "Install"
 msgstr "Instalēt"
 
-#: steps_interactive.pm:151
+#: steps_interactive.pm:152
 #, fuzzy, c-format
 msgid "Upgrade %s"
 msgstr "Atjaunināt"
 
-#: steps_interactive.pm:169
+#: steps_interactive.pm:170
 #, fuzzy, c-format
 msgid "Encryption key for %s"
 msgstr "Šifrēšanas atslēga"
 
-#: steps_interactive.pm:202
+#: steps_interactive.pm:203
 #, c-format
 msgid "Cancel installation, reboot system"
 msgstr ""
 
-#: steps_interactive.pm:203
+#: steps_interactive.pm:204
 #, fuzzy, c-format
 msgid "New Installation"
 msgstr "Instalēju"
 
-#: steps_interactive.pm:204
+#: steps_interactive.pm:205
 #, c-format
 msgid "Upgrade previous installation (not recommended)"
 msgstr ""
 
-#: steps_interactive.pm:208
+#: steps_interactive.pm:209
 #, c-format
 msgid ""
 "Installer has detected that your installed Mandriva Linux system could not\n"
@@ -1052,17 +1050,17 @@ msgid ""
 "Installation\"."
 msgstr ""
 
-#: steps_interactive.pm:250
+#: steps_interactive.pm:251
 #, c-format
 msgid "IDE"
 msgstr "IDE"
 
-#: steps_interactive.pm:250
+#: steps_interactive.pm:251
 #, c-format
 msgid "Configuring IDE"
 msgstr "Konfigurēju IDE"
 
-#: steps_interactive.pm:287
+#: steps_interactive.pm:288
 #, fuzzy, c-format
 msgid ""
 "No free space for 1MB bootstrap! Install will continue, but to boot your "
@@ -1072,7 +1070,7 @@ msgstr ""
 "lai ielādētu sistēmu, Jums būs nepieciešams izveidot sāknēšanas programmas "
 "disaka sadaļu programmā DiskDrake"
 
-#: steps_interactive.pm:292
+#: steps_interactive.pm:293
 #, fuzzy, c-format
 msgid ""
 "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
@@ -1083,7 +1081,7 @@ msgstr ""
 "lai ielādētu sistēmu, Jums būs nepieciešams izveidot sāknēšanas programmas "
 "disaka sadaļu programmā DiskDrake"
 
-#: steps_interactive.pm:368
+#: steps_interactive.pm:369
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -1096,19 +1094,19 @@ msgstr ""
 "Lūdzu ielieciet iekārtā Cd-Rom \"%s\", kad tas ir izdarīts, nospiediet Labi\n"
 "Ja jums nav šī diska, nospiediet Atcelt, lai neinstalētu no šī Cd-Rom."
 
-#: steps_interactive.pm:385
+#: steps_interactive.pm:386
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Meklēju pieejamās pakotnes"
 
-#: steps_interactive.pm:393
+#: steps_interactive.pm:394
 #, c-format
 msgid ""
 "Your system does not have enough space left for installation or upgrade (%"
 "dMB > %dMB)"
 msgstr ""
 
-#: steps_interactive.pm:440
+#: steps_interactive.pm:441
 #, fuzzy, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -1117,52 +1115,52 @@ msgstr ""
 "Lūdzu izvēlieties ielādēt vai saglabāt pakotnes no/uz disketes.\n"
 "Formāts ir tāds pats, kā ar auto_install ģenerētām disketēm."
 
-#: steps_interactive.pm:442
+#: steps_interactive.pm:443
 #, c-format
 msgid "Load"
 msgstr "Ielādēt"
 
-#: steps_interactive.pm:442
+#: steps_interactive.pm:443
 #, c-format
 msgid "Save"
 msgstr "Saglabāt"
 
-#: steps_interactive.pm:450
+#: steps_interactive.pm:451
 #, fuzzy, c-format
 msgid "Bad file"
 msgstr "Ielādēt failu"
 
-#: steps_interactive.pm:466
+#: steps_interactive.pm:467
 #, fuzzy, c-format
 msgid "KDE"
 msgstr "IDE"
 
-#: steps_interactive.pm:467
+#: steps_interactive.pm:468
 #, c-format
 msgid "GNOME"
 msgstr "GNOME"
 
-#: steps_interactive.pm:470
+#: steps_interactive.pm:471
 #, fuzzy, c-format
 msgid "Desktop Selection"
 msgstr "Pakotņu grupu izvēle"
 
-#: steps_interactive.pm:471
+#: steps_interactive.pm:472
 #, c-format
 msgid "You can choose your workstation desktop profile."
 msgstr ""
 
-#: steps_interactive.pm:557
+#: steps_interactive.pm:558
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "Izvēlētais apjoms ir lielāks nekā pieejamā vieta"
 
-#: steps_interactive.pm:572
+#: steps_interactive.pm:574
 #, c-format
 msgid "Type of install"
 msgstr "Instalācijas tips"
 
-#: steps_interactive.pm:573
+#: steps_interactive.pm:575
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -1171,82 +1169,87 @@ msgstr ""
 "Jūs neizvēlējāties nevienu pakotņu grupu.\n"
 "Lūdzu, izvēlieties minimālo instalāciju, kādu vēlaties:"
 
-#: steps_interactive.pm:578
+#: steps_interactive.pm:580
 #, c-format
 msgid "With X"
 msgstr "Ar X"
 
-#: steps_interactive.pm:579
+#: steps_interactive.pm:581
+#, fuzzy, c-format
+msgid "Install suggested packages"
+msgstr "Instalēju pakotni %s"
+
+#: steps_interactive.pm:582
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "Ar pamatdokumentāciju (ieteicams!)"
 
-#: steps_interactive.pm:580
+#: steps_interactive.pm:583
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Patiesi minimāla instalācija (īpaši bez urpmi)"
 
-#: steps_interactive.pm:634
+#: steps_interactive.pm:638
 #, c-format
 msgid "Preparing installation"
 msgstr "Sagatavoju instalēšanu"
 
-#: steps_interactive.pm:642
+#: steps_interactive.pm:646
 #, c-format
 msgid "Installing package %s"
 msgstr "Instalēju pakotni %s"
 
-#: steps_interactive.pm:666
+#: steps_interactive.pm:670
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Pakotņu kārtošanas laikā atklāta kļūda:"
 
-#: steps_interactive.pm:666
+#: steps_interactive.pm:670
 #, c-format
 msgid "Go on anyway?"
 msgstr "Tomēr turpināt?"
 
-#: steps_interactive.pm:670
+#: steps_interactive.pm:674
 #, c-format
 msgid "Retry"
 msgstr ""
 
-#: steps_interactive.pm:671
+#: steps_interactive.pm:675
 #, c-format
 msgid "Skip this package"
 msgstr ""
 
-#: steps_interactive.pm:672
+#: steps_interactive.pm:676
 #, c-format
 msgid "Skip all packages from medium \"%s\""
 msgstr ""
 
-#: steps_interactive.pm:673
+#: steps_interactive.pm:677
 #, fuzzy, c-format
 msgid "Go back to media and packages selection"
 msgstr "Saglabāt pakotņu izvēli"
 
-#: steps_interactive.pm:676
+#: steps_interactive.pm:680
 #, fuzzy, c-format
 msgid "There was an error installing package %s."
 msgstr "Pakotņu instalēšanas laikā atklāta kļūda:"
 
-#: steps_interactive.pm:695
+#: steps_interactive.pm:699
 #, c-format
 msgid "Post-install configuration"
 msgstr "Pēcinstalēšanas konfigurēšana"
 
-#: steps_interactive.pm:702
+#: steps_interactive.pm:706
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr ""
 
-#: steps_interactive.pm:730 steps_list.pm:47
+#: steps_interactive.pm:734 steps_list.pm:47
 #, fuzzy, c-format
 msgid "Updates"
 msgstr "Atjaunināt"
 
-#: steps_interactive.pm:731
+#: steps_interactive.pm:735
 #, fuzzy, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -1267,95 +1270,95 @@ msgstr ""
 "\n"
 "Vai Jūs vēlaties instalēt jauninājumus?"
 
-#: steps_interactive.pm:839
+#: steps_interactive.pm:843
 #, c-format
 msgid "%s on %s"
 msgstr "%s uz %s"
 
-#: steps_interactive.pm:872 steps_interactive.pm:879 steps_interactive.pm:892
-#: steps_interactive.pm:909 steps_interactive.pm:924
+#: steps_interactive.pm:876 steps_interactive.pm:883 steps_interactive.pm:896
+#: steps_interactive.pm:913 steps_interactive.pm:928
 #, c-format
 msgid "Hardware"
 msgstr "Dzelži"
 
-#: steps_interactive.pm:893 steps_interactive.pm:910
+#: steps_interactive.pm:897 steps_interactive.pm:914
 #, c-format
 msgid "Sound card"
 msgstr "Skaņas karte"
 
-#: steps_interactive.pm:913
+#: steps_interactive.pm:917
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Vai Jums ir ISA skaņas karte?"
 
-#: steps_interactive.pm:915
+#: steps_interactive.pm:919
 #, fuzzy, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
 "card"
 msgstr "Pēc instalēšanas palaidiet \"sndconfig\", lai konfigurētu skaņu karti"
 
-#: steps_interactive.pm:917
+#: steps_interactive.pm:921
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr "Nav atrasta skaņu karte. Pēc instalēšanas izmēģiniet \"harddrake\""
 
-#: steps_interactive.pm:925
+#: steps_interactive.pm:929
 #, fuzzy, c-format
 msgid "Graphical interface"
 msgstr "X pēc startēšanas"
 
-#: steps_interactive.pm:931 steps_interactive.pm:942
+#: steps_interactive.pm:935 steps_interactive.pm:946
 #, c-format
 msgid "Network & Internet"
 msgstr "Tīkls & Internets"
 
-#: steps_interactive.pm:943
+#: steps_interactive.pm:947
 #, fuzzy, c-format
 msgid "Proxies"
 msgstr "Profils: "
 
-#: steps_interactive.pm:944
+#: steps_interactive.pm:948
 #, fuzzy, c-format
 msgid "configured"
 msgstr "pārkonfigurēt"
 
-#: steps_interactive.pm:954
+#: steps_interactive.pm:958
 #, c-format
 msgid "Security Level"
 msgstr "Drošības Līmenis"
 
-#: steps_interactive.pm:973
+#: steps_interactive.pm:977
 #, c-format
 msgid "Firewall"
 msgstr "Ugunssiena"
 
-#: steps_interactive.pm:977
+#: steps_interactive.pm:981
 #, fuzzy, c-format
 msgid "activated"
 msgstr "aktivizēt"
 
-#: steps_interactive.pm:977
+#: steps_interactive.pm:981
 #, c-format
 msgid "disabled"
 msgstr "aizliegts"
 
-#: steps_interactive.pm:991
+#: steps_interactive.pm:995
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr ""
 
-#: steps_interactive.pm:1019
+#: steps_interactive.pm:1023
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Sagatavoju sāknētāju"
 
-#: steps_interactive.pm:1020
+#: steps_interactive.pm:1024
 #, c-format
 msgid "Be patient, this may take a while..."
 msgstr ""
 
-#: steps_interactive.pm:1031
+#: steps_interactive.pm:1035
 #, fuzzy, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -1368,24 +1371,24 @@ msgstr ""
 "Instalēšana turpināsies, bet Jums būs jāizmanto\n"
 "BootX, lai ielādētu datoru"
 
-#: steps_interactive.pm:1045
+#: steps_interactive.pm:1049
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
 "restricted to the administrator."
 msgstr ""
 
-#: steps_interactive.pm:1077
+#: steps_interactive.pm:1081
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Ielieciet tukšu disketi iekārtā %s"
 
-#: steps_interactive.pm:1079
+#: steps_interactive.pm:1083
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Sagatavoju auto instalēšanas disketi"
 
-#: steps_interactive.pm:1090
+#: steps_interactive.pm:1094
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -1396,10 +1399,15 @@ msgstr ""
 "\n"
 "Vai tiešām vēlaties iziet tūlīt?"
 
-#: steps_interactive.pm:1100
+#: steps_interactive.pm:1104
 #, c-format
 msgid "Congratulations"
 msgstr "Apsveicam"
+
+#: steps_interactive.pm:1107
+#, c-format
+msgid "Reboot"
+msgstr "Pārstartēt"
 
 #. -PO: please keep the following messages very short: they must fit in the left list of the installer!!!
 #: steps_list.pm:16
