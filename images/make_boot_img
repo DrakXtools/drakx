@@ -141,6 +141,7 @@ EOF
 sub initrd {
     my ($type, $I, $img, $o_bootsplash_cfg) = @_;
     my $stage1_root = $ENV{DEBUGSTAGE1} ? "../mdk-stage1" : "/usr/$lib/drakx-installer-binaries";
+    my ($ext) = $img =~ /rdz-(.*)/ or die "bad initrd name ($img)";
 
     _ "rm -rf $tmp_initrd";
     mkdir_p("$tmp_initrd$_") foreach qw(/etc /firmware /lib /modules /sbin /tmp /var);
@@ -157,13 +158,15 @@ sub initrd {
     foreach ("/usr/share/ldetect-lst/fallback-modules.alias", "/lib/module-init-tools/ldetect-lst-modules.alias") {
         _ "install -D $_ $tmp_initrd$_";
     }
-    foreach (glob_("all.kernels$I/firmware/*")) {
-        _ "cp -a $_ $tmp_initrd$_";
+    foreach my $firm (glob_("all.kernels$I/$ext/firmware/*")) {
+        my $dest=$firm;
+        $dest =~ s|all.kernels$I/$ext/firmware/||;
+        _ "cp -a $firm $tmp_initrd/$dest";
     };
 
     output("$tmp_initrd/hotplug", q{#!/bin/sh -e
 if [ "$SUBSYSTEM" = firmware ] && [ "$ACTION" = add ] && [ -n "$FIRMWARE" ] ; then
-  if [ ! -e /sys\$DEVPATH/loading ]; then
+  if [ ! -e /sys$DEVPATH/loading ]; then
     exit 1
   fi
   if [ -e "/lib/firmware/$FIRMWARE" ]; then
@@ -188,7 +191,6 @@ fi
 	 _ "cp -a /etc/pcmcia/config.opts $tmp_initrd/etc/pcmcia";
     }
     {
-	my ($ext) = $img =~ /rdz-(.*)/ or die "bad initrd name ($img)";
 	my $modz = "all.kernels$I/$ext";
 	mkdir_p("$tmp_initrd/modules/$ext");
 	__ "tar xC $tmp_initrd/modules/$ext -f $modz/${type}_modules.tar";
@@ -198,7 +200,7 @@ fi
     }
     # ka deploy need some files in all.rdz 
     {
-	mkdir_p("$tmp_initrd/$_") foreach qw(sbin dev ka proc sbin var/tmp);
+	mkdir_p("$tmp_initrd/$_") foreach qw(dev ka proc var/tmp);
 	symlink("/sbin", "$tmp_initrd/bin");
 	cp_af("/usr/bin/ka-d-client", "$tmp_initrd/ka/ka-d-client");
 	cp_af("/usr/bin/mke2fs_diet", "$tmp_initrd/sbin/mke2fs");
