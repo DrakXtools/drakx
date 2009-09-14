@@ -1,10 +1,7 @@
-# translation of pt_BR.po to Brazilian portuguese
-# translation of pt_BR.po to
 # tradução de DrakX-pt_BR.po para Português do Brasil
 # DRAKX PT_BR PO FILE
 # Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
 # Lisiane Sztoltz Teixeira <lisiane@mandriva.com>
-#
 # Andrei Bosco Bezerra Torres <andrei_bosco@yahoo.com.br>, 2000, 2003.
 # Bruno Dorfman Buys <brunobuys@zipmail.com.br>, 2002.
 # Tiago da Cruz Bezerra <tiagocruz18@uol.com.br>,2002 2003, 2004.
@@ -15,13 +12,13 @@
 # Arthur Renato Mello <renato@conectiva.com.br>, 2005.
 # Wanderlei Antonio Cavassin <cavassin@mandriva.com>, 2006.
 # Felipe Arruda <felipemiguel@gmail.com>, 2006, 2007, 2008.
-# Sergio Rafael Lemke <sergio@mandriva.com.br>, 2009.
+# Sergio Rafael Lemke (bedi) <sergio@mandriva.com.br>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: pt_BR\n"
 "POT-Creation-Date: 2009-09-10 12:20+0200\n"
-"PO-Revision-Date: 2009-02-06 14:39-0200\n"
-"Last-Translator: Sergio Rafael Lemke <sergio@mandriva.com.br>\n"
+"PO-Revision-Date: 2009-09-14 14:32-0300\n"
+"Last-Translator: Sergio Rafael Lemke (bedi) <sergio@mandriva.com.br>\n"
 "Language-Team: Brazilian Portuguese <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,12 +50,12 @@ msgid ""
 "\n"
 "Assign a new Volume ID?"
 msgstr ""
-"O LILO precisa designar um novo Nome de Volume (ID) para o drive %s.  No\n"
+"O LILO quer inserir um novo Nome de Volume (ID) para o drive %s.  No\n"
 "entanto, modificar o ID de um disco de boot do Windows NT, 2000 ou XP é um "
 "erro fatal do Windows.\n"
 "Este problema não ocorre em Windows 95 ou 98, ou em discos de dados NT.\n"
 "\n"
-"Especificar um novo Nome de Volume (ID)?"
+"Especificar um novo Nome de Volume (ID) ?"
 
 #: any.pm:274
 #, c-format
@@ -99,7 +96,7 @@ msgstr ""
 "Isto implica em já ter um gerenciador de inicialização do sistema no disco "
 "que você iniciar (ex: System Commander).\n"
 "\n"
-"Qual é o drive que você está inicializando?"
+"Qual é o drive que você está inicializando ?"
 
 #: any.pm:346
 #, c-format
@@ -134,7 +131,7 @@ msgstr "Instalação do Gerenciador de Inicialização"
 #: any.pm:362
 #, c-format
 msgid "Where do you want to install the bootloader?"
-msgstr "Onde você quer instalar o gerenciador de inicialização?"
+msgstr "Onde você quer instalar o gerenciador de inicialização ?"
 
 #: any.pm:389
 #, c-format
@@ -257,17 +254,17 @@ msgstr "Tempo limite de boot do kernel"
 #: any.pm:438
 #, c-format
 msgid "Enable CD Boot?"
-msgstr "Habilitar Boot pelo CD?"
+msgstr "Habilitar Boot pelo CD ?"
 
 #: any.pm:439
 #, c-format
 msgid "Enable OF Boot?"
-msgstr "Permitir OF Boot?"
+msgstr "Permitir OF Boot ?"
 
 #: any.pm:440
 #, c-format
 msgid "Default OS?"
-msgstr "Sistema Operacional Padrão?"
+msgstr "Sistema Operacional Padrão ?"
 
 #: any.pm:513
 #, c-format
@@ -342,7 +339,7 @@ msgstr "Este nome já está sendo utilizado"
 #: any.pm:572
 #, c-format
 msgid "Which type of entry do you want to add?"
-msgstr "Qual tipo de entrada você quer adicionar?"
+msgstr "Qual tipo de entrada você quer adicionar ?"
 
 #: any.pm:573
 #, c-format
@@ -454,7 +451,7 @@ msgstr "A opção %s tem que ser um número"
 #: any.pm:818
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
-msgstr "%s deve ser acima de 500. Aceitar mesmo assim?"
+msgstr "%s deve ser acima de 500. Aceitar mesmo assim ?"
 
 #: any.pm:822
 #, c-format
@@ -546,7 +543,7 @@ msgstr "Sair"
 #: any.pm:1017
 #, c-format
 msgid "Do you accept this license ?"
-msgstr "Você aceita esta licença?"
+msgstr "Você aceita esta licença ?"
 
 #: any.pm:1018
 #, c-format
@@ -654,7 +651,7 @@ msgid ""
 "\"Custom\" permit a per-user granularity.\n"
 msgstr ""
 "Você deseja permitir aos usuários que compartilhem alguns de seus "
-"diretórios?\n"
+"diretórios ?\n"
 "Ao habilitar isto, bastará aos usuários simplesmente clicar em "
 "\"Compartilhamento\" no Konqueror e no Nautilus.\n"
 "\n"
@@ -724,7 +721,7 @@ msgstr "Fuso horário"
 #: any.pm:1460
 #, c-format
 msgid "Which is your timezone?"
-msgstr "Qual é o seu fuso horário?"
+msgstr "Qual é o seu fuso horário ?"
 
 #: any.pm:1483 any.pm:1485
 #, c-format
@@ -734,7 +731,7 @@ msgstr "Configurações de Data, Hora e Fuso Horário"
 #: any.pm:1486
 #, c-format
 msgid "What is the best time?"
-msgstr "Qual é a hora certa?"
+msgstr "Qual é a hora certa ?"
 
 #: any.pm:1490
 #, c-format
@@ -1313,10 +1310,9 @@ msgstr "O início da URL deve começar com http:// ou https://"
 msgid "Warning"
 msgstr "Aviso"
 
-#: diskdrake/dav.pm:106
-#, fuzzy, c-format
+#: diskdrake/dav.pm:106, c-format
 msgid "Are you sure you want to delete this mountpoint?"
-msgstr "Você quer clicar neste botão?"
+msgstr "Você tem certeza em apagar este ponto de montagem ?"
 
 #: diskdrake/dav.pm:124
 #, c-format
@@ -1500,7 +1496,7 @@ msgstr "Confirmação"
 #: diskdrake/interactive.pm:281
 #, c-format
 msgid "Continue anyway?"
-msgstr "Continuar mesmo assim?"
+msgstr "Continuar mesmo assim ?"
 
 #: diskdrake/interactive.pm:286
 #, c-format
@@ -1510,7 +1506,7 @@ msgstr "Sair sem salvar"
 #: diskdrake/interactive.pm:286
 #, c-format
 msgid "Quit without writing the partition table?"
-msgstr "Sair sem gravar a tabela de partições?"
+msgstr "Sair sem gravar a tabela de partições ?"
 
 #: diskdrake/interactive.pm:291
 #, c-format
@@ -1534,7 +1530,7 @@ msgstr ""
 "Você deveria formatar a partição %s.\n"
 "Caso contrário, nenhuma entrada para o ponto de montagem %s será escrita no "
 "fstab.\n"
-"Sair assim mesmo?"
+"Sair mesmo assim ?"
 
 #: diskdrake/interactive.pm:316
 #, c-format
@@ -1655,10 +1651,9 @@ msgstr "Usar para loopback"
 msgid "Create"
 msgstr "Criar"
 
-#: diskdrake/interactive.pm:450
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:450, c-format
 msgid "Failed to mount partition"
-msgstr "Mover arquivos para nova partição"
+msgstr "Falhou em montar a partição"
 
 #: diskdrake/interactive.pm:482 diskdrake/interactive.pm:484
 #, c-format
@@ -1704,7 +1699,7 @@ msgstr ""
 #: diskdrake/interactive.pm:550
 #, c-format
 msgid "Remove the loopback file?"
-msgstr "Remover o arquivo de loopback?"
+msgstr "Remover o arquivo de loopback ?"
 
 #: diskdrake/interactive.pm:572
 #, c-format
@@ -1722,7 +1717,7 @@ msgstr "Mudar tipo de partição"
 #: diskdrake/interactive.pm:587 diskdrake/removable.pm:47
 #, c-format
 msgid "Which filesystem do you want?"
-msgstr "Qual sistema de arquivos você quer?"
+msgstr "Qual sistema de arquivos você quer ?"
 
 #: diskdrake/interactive.pm:594
 #, c-format
@@ -1747,7 +1742,7 @@ msgstr "Atenção, isto será gravado em disco somente depois de fomatar!"
 #: diskdrake/interactive.pm:629
 #, c-format
 msgid "Which volume label?"
-msgstr "Qual etiqueta do volume?"
+msgstr "Qual etiqueta do volume ?"
 
 #: diskdrake/interactive.pm:630
 #, c-format
@@ -1757,12 +1752,12 @@ msgstr "Etiqueta:"
 #: diskdrake/interactive.pm:651
 #, c-format
 msgid "Where do you want to mount the loopback file %s?"
-msgstr "Onde você quer montar o arquivo loopback %s?"
+msgstr "Onde você quer montar o arquivo loopback %s ?"
 
 #: diskdrake/interactive.pm:652
 #, c-format
 msgid "Where do you want to mount device %s?"
-msgstr "Onde você quer montar o dispositivo %s?"
+msgstr "Onde você quer montar o dispositivo %s ?"
 
 #: diskdrake/interactive.pm:657
 #, c-format
@@ -1776,7 +1771,7 @@ msgstr ""
 #: diskdrake/interactive.pm:687
 #, c-format
 msgid "Where do you want to mount %s?"
-msgstr "Onde você quer montar o dispositivo %s?"
+msgstr "Onde você quer montar o dispositivo %s ?"
 
 #: diskdrake/interactive.pm:711 diskdrake/interactive.pm:794
 #: fs/partitioning_wizard.pm:146 fs/partitioning_wizard.pm:178
@@ -1872,7 +1867,7 @@ msgstr "Escolha um LVM existente para adicionar"
 #: diskdrake/interactive.pm:895
 #, c-format
 msgid "LVM name?"
-msgstr "Nome do LVM?"
+msgstr "Nome do LVM ?"
 
 #: diskdrake/interactive.pm:922
 #, c-format
@@ -1881,7 +1876,7 @@ msgid ""
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
 "Volume físico %s ainda está sendo utilizado.\n"
-"Você quer mover as extensões físicas usadas neste volume pra outros volumes?"
+"Você quer mover as extensões físicas usadas neste volume pra outros volumes ?"
 
 #: diskdrake/interactive.pm:924
 #, c-format
@@ -1916,7 +1911,7 @@ msgstr "O arquivo já está sendo utilizado por outro loopback, escolha outro"
 #: diskdrake/interactive.pm:965
 #, c-format
 msgid "File already exists. Use it?"
-msgstr "O arquivo já existe. Usá-lo?"
+msgstr "O arquivo já existe. Usá-lo ?"
 
 #: diskdrake/interactive.pm:997 diskdrake/interactive.pm:1000
 #, c-format
@@ -1956,7 +1951,7 @@ msgstr "Tipo de Particionamento"
 #: diskdrake/interactive.pm:1109
 #, c-format
 msgid "What type of partitioning?"
-msgstr "Qual o tipo de Particionamento?"
+msgstr "Qual o tipo de Particionamento ?"
 
 #: diskdrake/interactive.pm:1147
 #, c-format
@@ -1982,7 +1977,7 @@ msgstr ""
 #: diskdrake/interactive.pm:1200 fs/partitioning.pm:48
 #, c-format
 msgid "Check bad blocks?"
-msgstr "Verificar blocos defeituosos?"
+msgstr "Verificar blocos defeituosos ?"
 
 #: diskdrake/interactive.pm:1214
 #, c-format
@@ -2277,7 +2272,7 @@ msgstr "Cancelar"
 #: diskdrake/smbnfs_gtk.pm:164
 #, c-format
 msgid "Can not login using username %s (bad password?)"
-msgstr "Não foi possível fazer o login do usuário %s (senha errada?)"
+msgstr "Não foi possível fazer o login do usuário %s (senha errada ?)"
 
 #: diskdrake/smbnfs_gtk.pm:168 diskdrake/smbnfs_gtk.pm:177
 #, c-format
@@ -2324,7 +2319,7 @@ msgstr "Procurar novos servidores"
 #: do_pkgs.pm:19 do_pkgs.pm:57
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
-msgstr "O pacote %s precisa ser instalado. Você deseja instalá-lo?"
+msgstr "O pacote %s precisa ser instalado. Você deseja instalá-lo ?"
 
 #: do_pkgs.pm:23 do_pkgs.pm:44 do_pkgs.pm:60 do_pkgs.pm:82
 #, c-format
@@ -2379,7 +2374,7 @@ msgstr "Não sei como colocar a etiqueta em %s do tipo %s"
 #: fs/format.pm:126
 #, c-format
 msgid "setting label on %s failed, is it formatted?"
-msgstr "Configurar etiqueta em %s falhou, está formatado?"
+msgstr "Configurar etiqueta em %s falhou, está formatado ?"
 
 #: fs/format.pm:167
 #, c-format
@@ -2569,7 +2564,7 @@ msgid ""
 "you can lose data)"
 msgstr ""
 "Ocorreu uma falha ao verificar o sistema de arquivos %s. Você quer reparar "
-"os erros? (cuidado, você pode perder dados)"
+"os erros ? (cuidado, você pode perder dados)"
 
 #: fs/partitioning.pm:78
 #, c-format
@@ -2597,7 +2592,7 @@ msgid ""
 msgstr ""
 "Você não possui partição swap.\n"
 "\n"
-"Continuar mesmo assim?"
+"Continuar mesmo assim ?"
 
 #: fs/partitioning_wizard.pm:84
 #, c-format
@@ -2627,7 +2622,7 @@ msgstr "Usar a partição Microsoft Windows® para loopback"
 #: fs/partitioning_wizard.pm:106
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
-msgstr "Qual partição você quer usar para o Linux4Win?"
+msgstr "Qual partição você quer usar para o Linux4Win ?"
 
 #: fs/partitioning_wizard.pm:108
 #, c-format
@@ -2659,7 +2654,7 @@ msgstr "Usar o espaço livre em uma partição Microsoft Windows®"
 #: fs/partitioning_wizard.pm:129
 #, c-format
 msgid "Which partition do you want to resize?"
-msgstr "Qual partição você quer redimensionar?"
+msgstr "Qual partição você quer redimensionar ?"
 
 #: fs/partitioning_wizard.pm:143
 #, c-format
@@ -2737,7 +2732,7 @@ msgstr "Particionamento"
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
 msgstr ""
-"Quanto de espaço você quer deixar para o Microsoft Windows® na partição %s?"
+"Quanto de espaço você quer deixar para o Microsoft Windows® na partição %s ?"
 
 #: fs/partitioning_wizard.pm:169
 #, c-format
@@ -2784,7 +2779,7 @@ msgstr "Apagar e usar disco inteiro"
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr ""
-"Você tem mais de um disco rígido; em qual deles você quer instalar o Linux?"
+"Você tem mais de um disco rígido; em qual deles você quer instalar o Linux ?"
 
 #: fs/partitioning_wizard.pm:210 fsedit.pm:600
 #, c-format
@@ -2853,7 +2848,7 @@ msgstr "servidor"
 #: fsedit.pm:137
 #, c-format
 msgid "BIOS software RAID detected on disks %s. Activate it?"
-msgstr "BIOS software RAID detectado nos discos %s. Ativá-lo?"
+msgstr "BIOS software RAID detectado nos discos %s. Ativá-lo ?"
 
 #: fsedit.pm:247
 #, c-format
@@ -2873,7 +2868,7 @@ msgstr ""
 "A outra solução é não deixar o DrakX modificar a tabela de partição\n"
 "(o erro é em %s)\n"
 "\n"
-"Você concorda em perder todas as suas partições?\n"
+"Você concorda em perder todas as suas partições ?\n"
 
 #: fsedit.pm:425
 #, c-format
@@ -3258,7 +3253,7 @@ msgstr ""
 "Aqui você pode selecionar um driver alternativo (como um OSS ou ALSA) para "
 "sua placa de som (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
@@ -3547,7 +3542,7 @@ msgstr "Escolha ruim, tente novamente\n"
 #: interactive/stdio.pm:30 interactive/stdio.pm:155
 #, c-format
 msgid "Your choice? (default %s) "
-msgstr "Sua escolha? (padrão %s) "
+msgstr "Sua escolha ? (padrão %s) "
 
 #: interactive/stdio.pm:54
 #, c-format
@@ -3561,7 +3556,7 @@ msgstr ""
 #: interactive/stdio.pm:70
 #, c-format
 msgid "Your choice? (0/1, default `%s') "
-msgstr "Sua escolha? (0/1, padrão `%s') "
+msgstr "Sua escolha ? (0/1, padrão `%s') "
 
 #: interactive/stdio.pm:97
 #, c-format
@@ -3571,12 +3566,12 @@ msgstr "Botão `%s': %s"
 #: interactive/stdio.pm:98
 #, c-format
 msgid "Do you want to click on this button?"
-msgstr "Você quer clicar neste botão?"
+msgstr "Você quer clicar neste botão ?"
 
 #: interactive/stdio.pm:110
 #, c-format
 msgid "Your choice? (default `%s'%s) "
-msgstr "Sua escolha? (padrão `%s'%s)"
+msgstr "Sua escolha ? (padrão `%s'%s)"
 
 #: interactive/stdio.pm:110
 #, c-format
@@ -3598,7 +3593,7 @@ msgstr ""
 "Por favor, escolha o primeiro número dentro do intervalo de 10 que você "
 "deseja\n"
 "editar, ou apenas aperte Enter para continuar.\n"
-"Sua escolha?"
+"Sua escolha ?"
 
 #: interactive/stdio.pm:144
 #, c-format
@@ -5334,12 +5329,12 @@ msgstr "Interfaces %s encontradas"
 #: modules/interactive.pm:65
 #, c-format
 msgid "Do you have another one?"
-msgstr "Você tem outra?"
+msgstr "Você tem outra ?"
 
 #: modules/interactive.pm:66
 #, c-format
 msgid "Do you have any %s interfaces?"
-msgstr "Você tem alguma interface %s?"
+msgstr "Você tem alguma interface %s ?"
 
 #: modules/interactive.pm:72
 #, c-format
@@ -5407,7 +5402,7 @@ msgstr "Opções do módulo:"
 #: modules/interactive.pm:132
 #, c-format
 msgid "Which %s driver should I try?"
-msgstr "Qual driver %s eu deveria tentar?"
+msgstr "Qual driver %s eu deveria tentar ?"
 
 #: modules/interactive.pm:141
 #, c-format
@@ -5423,7 +5418,7 @@ msgstr ""
 "Em alguns casos, o driver %s precisa de informação extra para funcionar\n"
 "corretamente, embora ele normalmente funcione bem sem esta informação. Você\n"
 "gostaria de especificar opções extras ou deixar o driver localizar na sua\n"
-"máquina a informação de que ele precisa? Ocasionalmente, isto poderá travar\n"
+"máquina a informação de que ele precisa ? Ocasionalmente, isto poderá travar\n"
 "o computador, mas não deve causar nenhum dano."
 
 #: modules/interactive.pm:145
@@ -5443,22 +5438,21 @@ msgid ""
 "Do you want to try again with other parameters?"
 msgstr ""
 "Falha ao carregar o módulo %s.\n"
-"Você quer tentar novamente com outros parâmetros?"
+"Você quer tentar novamente com outros parâmetros ?"
 
 #: mygtk2.pm:1538 mygtk2.pm:1539
 #, c-format
 msgid "Password is trivial to guess"
-msgstr ""
+msgstr "Senha fácil de adivinhar"
 
 #: mygtk2.pm:1540
 #, c-format
 msgid "Password should resist to basic attacks"
-msgstr ""
+msgstr "Senha deve resistir a ataques básicos"
 
-#: mygtk2.pm:1541 mygtk2.pm:1542
-#, fuzzy, c-format
+#: mygtk2.pm:1541 mygtk2.pm:1542, c-format
 msgid "Password seems secure"
-msgstr "Password base"
+msgstr "Senha parece segura"
 
 #: partition_table.pm:411
 #, c-format
@@ -7152,7 +7146,7 @@ msgstr "Iugoslávia"
 #: ugtk2.pm:812
 #, c-format
 msgid "Is this correct?"
-msgstr "Isto está correto?"
+msgstr "Está correto ?"
 
 #: ugtk2.pm:874
 #, c-format
