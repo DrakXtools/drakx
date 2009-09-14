@@ -1351,6 +1351,7 @@ sub monitor_full_edid() {
     ($edid, $vbe);
 }
 
+# FIXME: is buggy regarding multiple sessions
 sub running_window_manager() {
     my @window_managers = qw(ksmserver kwin gnome-session icewm wmaker afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce blackbox sawfish olvwm fluxbox compiz drakx-matchbox-window-manager);
 
