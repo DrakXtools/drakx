@@ -203,7 +203,7 @@ our @tree =
       string => N("USB Mass Storage Devices"),
       icon => "usb.png",
       configurator => "",
-      detector => sub { f(grep { member($_->{driver}, qw(usb_storage ub)) } @devices) },
+      detector => sub { f(grep { member($_->{driver}, qw(usb_storage ub Removable:memory_card)) } @devices) },
       checked_on_boot => 0,
      },
 
