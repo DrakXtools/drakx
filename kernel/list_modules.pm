@@ -42,7 +42,7 @@ our %l = (
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
       qw(atl1 atl1c atl1e be2net bnx2 bnx2x cxgb cxgb3 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe myri_sbus netxen_nic ns83820 qla3xxx r8169 s2io sfc sxg_nic
-      sis190 sk98lin skge sky2 slicoss spidernet tehuti tg3 via-velocity virtio_net yellowfin),
+      sis190 sk98lin skge sky2 slicoss spidernet tehuti tg3 via-velocity virtio_net vxge yellowfin),
       qw(bcm5820 bcm5700), #- encrypted
     ],
 
@@ -160,10 +160,10 @@ our %l = (
       if_(arch() !~ /^sparc/, qw(au1x00_ss i82365 i82092 pd6729 tcic vrc4171_card vrc4173_cardu yenta_socket)), # cb_enabler
     ],
     hid => [ qw(hid-a4tech hid-apple hid-belkin hid-cherry hid-chicony
-                hid-cypress hid-ezkey hid-gaff hid-gyration hid-logitech
-                hid-microsoft hid-monterey hid-multilaser hid-ntrig
-                hid-petalynx hid-pl hid-samsung hid-sony hid-sunplus
-                hid-tmff hid-topseed hid-zpff ff-memless)],
+                hid-cypress hid-drff hid-ezkey hid-gaff hid-gyration hid-kensington hid-kye
+                hid-logitech hid-microsoft hid-monterey hid-multilaser hid-ntrig
+                hid-petalynx hid-pl hid-samsung hid-sjoy hid-sony hid-sunplus
+                hid-tmff hid-topseed hid-zpff hid-wacom ff-memless)],
    #serial_cs
    #ftl_cs 3c575_cb apa1480_cb epic_cb serial_cb tulip_cb iflash2+_mtd iflash2_mtd
    #cb_enabler
