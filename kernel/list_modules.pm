@@ -41,7 +41,8 @@ our %l = (
     ],
     firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
-      qw(atl1 atl1c atl1e be2net bnx2 bnx2x cxgb cxgb3 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe myri_sbus netxen_nic ns83820 qla3xxx r8169 s2io sfc sxg sis190 sk98lin skge sky2 slicoss spidernet tehuti tg3 via-velocity virtio_net yellowfin),
+      qw(atl1 atl1c atl1e be2net bnx2 bnx2x cxgb cxgb3 dl2k e1000 e1000e et131x igb ipg ixgb ixgbe myri_sbus netxen_nic ns83820 qla3xxx r8169 s2io sfc sxg_nic
+      sis190 sk98lin skge sky2 slicoss spidernet tehuti tg3 via-velocity virtio_net yellowfin),
       qw(bcm5820 bcm5700), #- encrypted
     ],
 
@@ -217,7 +218,7 @@ our %l = (
         qw(dvb-usb-ce6230 dvb-usb-cinergyT2 dvb-usb-cxusb),
         qw(dvb-usb-dib0700 dvb-usb-dibusb-mb dvb-usb-dibusb-mc dvb-usb-digitv dvb-usb-dtt200u dvb-usb-dtv5100),
         qw(dvb-usb-gp8ps dvb-usb-nova-t-usb2 dvb-usb-ttusb2 dvb-usb-umt-010 dvb-usb-vp702x dvb-usb-vp7045),
-        qw(firedtv hexium_gemini hexium_orion pluto2 skystar2 ttusb_dec),
+        qw(firedtv hexium_gemini hexium_orion pluto2 skystar2 ttusb_dec smsusb),
     ],
     photo => [ qw(dc2xx mdc800) ],
     radio => [ qw(radio-gemtek-pci radio-maestro radio-maxiradio) ],
