@@ -30,10 +30,9 @@ enum driver_type { MEDIA_ADAPTERS, NETWORK_DEVICES, USB_CONTROLLERS,
 enum media_bus { BUS_IDE, BUS_SCSI, BUS_USB, BUS_PCMCIA, BUS_ANY };
 
 #define VIRTIO_PCI_VENDOR	0x1af4
-#define VIRTIO_ID_PCI		0x1000
-#define VIRTIO_ID_NET		0x1001
-#define VIRTIO_ID_BLOCK		0x1002
-#define VIRTIO_ID_BALLOON	0x1005
+#define VIRTIO_ID_NET		0x0001
+#define VIRTIO_ID_BLOCK		0x0002
+#define VIRTIO_ID_BALLOON	0x0005
 
 void find_media(enum media_bus bus);
 void get_medias(enum media_type media, char *** names, char *** models, enum media_bus bus);

@@ -329,18 +329,22 @@ void probe_virtio_modules(void)
 	int i;
 	char *name;
 	char *options;
+	int loaded_pci = 0;
 
 	entries = pci_probe();
 	for (i = 0; i < entries.nb; i++) {
 		struct pciusb_entry *e = &entries.entries[i];
 		if (e->vendor == VIRTIO_PCI_VENDOR) {
+			if (!loaded_pci) {
+				log_message("loading virtio-pci");
+				my_insmod("virtio_pci", ANY_DRIVER_TYPE, NULL, 0);
+				loaded_pci = 1;
+			}
+
 			name = NULL;
 			options = NULL;
 
-			switch (e->device) {
-			case VIRTIO_ID_PCI:
-				name = "virtio_pci";
-				break;
+			switch (e->subdevice) {
 			case VIRTIO_ID_NET:
 				name = "virtio_net";
 				options = "csum=0";
