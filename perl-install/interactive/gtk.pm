@@ -421,7 +421,7 @@ sub create_widget {
             my $w = $w->child;
             # handle Install_Buttons:
             if (ref($w) =~ /Gtk2::HBox/) {
-                ($w) = grep { ref($_) =~ /Gtk2::Label/ } $w->get_children;
+                ($w) = find { ref($_) =~ /Gtk2::Label/ } $w->get_children;
             }
             # guard against 'advanced' widgets that are now in their own dialog
             # (instead of in another block child of an expander):
@@ -450,12 +450,12 @@ sub create_widget {
 	$e->{formatted_list} = [ map { may_apply($e->{format}, $_) } @{$e->{list}} ];
 
 	if (my $actions = $e->{add_modify_remove}) {
-	    my @buttons = ( N_("Add"), N_("Modify"), N_("Remove"));
+	    my @buttons = (N_("Add"), N_("Modify"), N_("Remove"));
 	    # Add Up/Down buttons if their actions are defined
 	    foreach (qw(Up Down)) {
-	        push @buttons, $_ if ($actions->{$_});
+	        push @buttons, $_ if $actions->{$_};
 	    }
-	    my @buttons = map {
+	    @buttons = map {
 		{ kind => lc $_, action => $actions->{$_}, button => Gtk2::Button->new(translate($_)) };
 	    } @buttons;
 	    my $modify = find { $_->{kind} eq 'modify' } @buttons;
