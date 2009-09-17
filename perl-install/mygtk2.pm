@@ -330,6 +330,8 @@ sub _gtk__Image {
     if (!$w) {
 	$w = Gtk2::Image->new;
 	$w->{format} = delete $opts->{format} if exists $opts->{format};
+        
+        $w->set_from_stock(delete $opts->{stock}, 'button') if exists $opts->{stock};
 
         $w->{options} = { flip => delete $opts->{flip} };
 
