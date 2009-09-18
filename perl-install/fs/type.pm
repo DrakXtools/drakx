@@ -349,7 +349,7 @@ sub isNonMountable {
 sub isPartOfLVM { defined $_[0]{lvm} }
 sub isPartOfRAID { defined $_[0]{raid} }
 sub isPartOfLoopback { defined $_[0]{loopback} }
-sub isRAID { $_[0]{device} =~ /^md/ }
+sub isRAID { $_[0]{device} =~ /^md/ && $_[0]{level} }
 sub isUBD { $_[0]{device} =~ /^ubd/ } #- should be always true during an $::uml_install
 sub isLVM { $_[0]{VG_name} || $_[0]{lv_name} }
 sub isLoopback { defined $_[0]{loopback_file} }
