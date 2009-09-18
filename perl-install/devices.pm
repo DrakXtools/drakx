@@ -198,7 +198,7 @@ sub make($) {
 
 sub simple_partition_scan {
     my ($part) = @_;
-    $part->{device} =~ /([vhs]d[a-z])(\d+)$/;
+    $part->{device} =~ /([hsv]d[a-z])(\d+)$/;
 }
 sub part_number {
     my ($part) = @_;
