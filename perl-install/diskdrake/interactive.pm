@@ -883,6 +883,9 @@ sub Add2RAID {
 sub Add2LVM {
     my ($in, $hd, $part, $all_hds) = @_;
     my $lvms = $all_hds->{lvms};
+    my @lvm_names = map { $_->{VG_name} } @$lvms;
+    use Data::Dumper;
+    print Dumper(@lvm_names);
     write_partitions($in, $_) or return foreach isRAID($part) ? @{$all_hds->{hds}} : $hd;
 
     my $lvm = $in->ask_from_listf_(N("Add to LVM"), N("Choose an existing LVM to add to"),
@@ -891,8 +894,23 @@ sub Add2LVM {
     require lvm;
     if (!ref $lvm) {
 	# create new lvm
-        # FIXME: when mdv2006 is out: remove the question mark from the dialog title
-	my $name = $in->ask_from_entry(N("LVM name?"), N("LVM name?")) or return;
+	my $n = 0;
+	while (member("vg$n", @lvm_names)) {
+	    $n++;
+	}
+
+	my $name = "vg$n";
+	$in->ask_from_({ title => N("LVM name"), 
+			messages => N("Enter a name for the new LVM volume group"),
+		       	focus_first => 1,
+			ok_disabled => sub { !$name },
+			validate => sub {
+				member($name, @lvm_names) or return 1;
+				$in->ask_warn(N("Error"), N('"%s" already exists', $name));
+				return 0;
+			} },
+			[{label=>N("LVM name"),val=> \$name}]) or return;
+
 	$lvm = new lvm($name);
 	push @$lvms, $lvm;
     }
