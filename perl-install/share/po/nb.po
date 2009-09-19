@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "POT-Creation-Date: 2009-09-10 12:20+0200\n"
-"PO-Revision-Date: 2009-09-16 23:17+0200\n"
+"PO-Revision-Date: 2009-09-19 07:13+0200\n"
 "Last-Translator: Olav Dahlum <odahlum@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -1727,13 +1727,13 @@ msgid ""
 "Can not unset mount point as this partition is used for loop back.\n"
 "Remove the loopback first"
 msgstr ""
-"Kan ikke fjerne monteringspunkt da denne partisjonen blir brukt til\n"
-"loopback. Fjern loopback først"
+"Klarte ikke  å fjerne monteringspunkt, da partisjonen er brukt\n"
+"til filmontering. Du må først fjerne filmonteringsfila."
 
 #: diskdrake/interactive.pm:687
 #, c-format
 msgid "Where do you want to mount %s?"
-msgstr "Hvor vil du montere %s?"
+msgstr "Hvor vil du montere «%s»?"
 
 #: diskdrake/interactive.pm:711 diskdrake/interactive.pm:794
 #: fs/partitioning_wizard.pm:146 fs/partitioning_wizard.pm:178
@@ -1744,44 +1744,44 @@ msgstr "Endrer størrelse"
 #: diskdrake/interactive.pm:711
 #, c-format
 msgid "Computing FAT filesystem bounds"
-msgstr "Beregner FAT-filsystemgrense"
+msgstr "Regner ut grenser for FAT-filsystem"
 
 #: diskdrake/interactive.pm:747
 #, c-format
 msgid "This partition is not resizeable"
-msgstr "Denne partisjonen kan ikke størrelsen forandres på"
+msgstr "Kan ikke endre størrelse på partisjonenen"
 
 #: diskdrake/interactive.pm:752
 #, c-format
 msgid "All data on this partition should be backed-up"
-msgstr "Alle data på denne partisjonen burde sikkerhetskopieres"
+msgstr "Du bør ta reservekopi av alle data på denne partisjonen"
 
 #: diskdrake/interactive.pm:754
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr ""
-"Etter endring av størrelse for partisjon %s, vil alle data på denne "
+"Etter endring av størrelse på partisjon %s vil alle data på denne "
 "partisjonen gå tapt"
 
 #: diskdrake/interactive.pm:761
 #, c-format
 msgid "Choose the new size"
-msgstr "Velg den nye størrelsen"
+msgstr "Velg ny størrelse"
 
 #: diskdrake/interactive.pm:762
 #, c-format
 msgid "New size in MB: "
-msgstr "Ny størrelse i MB: "
+msgstr "Ny størrelse i MiB: "
 
 #: diskdrake/interactive.pm:763
 #, c-format
 msgid "Minimum size: %s MB"
-msgstr "Minimumsstørrelse: %s MB"
+msgstr "Minste størrelse: %s MB"
 
 #: diskdrake/interactive.pm:764
 #, c-format
 msgid "Maximum size: %s MB"
-msgstr "Maksimumsstørrelse: %s MB"
+msgstr "Største størrelse: %s MB"
 
 #: diskdrake/interactive.pm:805
 #, c-format
@@ -1789,8 +1789,8 @@ msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
-"For å sikre dataintegritet etter at partisjonen(e) har blitt endret, \n"
-"vil kontroll av filsystemene kjøres neste gang du starter Windows(TM)"
+"For å sikre dataintegritet på partisjonen/-ene\n"
+"vil det bli kjørt filsystemkontroll neste gang du starter Windows®"
 
 #: diskdrake/interactive.pm:853 diskdrake/interactive.pm:1397
 #, c-format
@@ -1800,7 +1800,7 @@ msgstr "Krypteringsnøkkel for filsystem"
 #: diskdrake/interactive.pm:854
 #, c-format
 msgid "Enter your filesystem encryption key"
-msgstr "Skriv inn krypteringsnøkkelen for filsystemet ditt"
+msgstr "Skriv inn krypteringsnøkkelen for filsystemet"
 
 #: diskdrake/interactive.pm:855 diskdrake/interactive.pm:1405
 #, c-format
@@ -1815,7 +1815,7 @@ msgstr "Ugyldig nøkkel"
 #: diskdrake/interactive.pm:870
 #, c-format
 msgid "Choose an existing RAID to add to"
-msgstr "Velg et eksisterende RAID for å legge til"
+msgstr "Velg et eksisterende RAID å legge til i"
 
 #: diskdrake/interactive.pm:872 diskdrake/interactive.pm:890
 #, c-format
@@ -1825,7 +1825,7 @@ msgstr "ny"
 #: diskdrake/interactive.pm:888
 #, c-format
 msgid "Choose an existing LVM to add to"
-msgstr "Velg et eksisterende LVM for å legge til"
+msgstr "Velg en eksisterende LVM å legge til i"
 
 #: diskdrake/interactive.pm:895
 #, c-format
@@ -1838,48 +1838,48 @@ msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
-"Fysisk volum %s er fortsatt i bruk.\n"
-"Ønsker å flytte brukte fysiske områder på dette volumet til andre volum?"
+"Det fysiske volumet «%s» er ennå i bruk.\n"
+"Vil du flytte brukte fysiske områder på dette volumet til andre volum?"
 
 #: diskdrake/interactive.pm:924
 #, c-format
 msgid "Moving physical extents"
-msgstr "Flytter fysiske områder"
+msgstr "Flytting av fysiske områder"
 
 #: diskdrake/interactive.pm:942
 #, c-format
 msgid "This partition can not be used for loopback"
-msgstr "Denne partisjonen kan ikke brukes for loopback"
+msgstr "Partisjonen kan ikke brukes til filmontering."
 
 #: diskdrake/interactive.pm:955
 #, c-format
 msgid "Loopback"
-msgstr "Loopback"
+msgstr "Filmontering"
 
 #: diskdrake/interactive.pm:956
 #, c-format
 msgid "Loopback file name: "
-msgstr "Loopback-filnavn: "
+msgstr "Filmonteringsfil: "
 
 #: diskdrake/interactive.pm:961
 #, c-format
 msgid "Give a file name"
-msgstr "Gi ett filnavn"
+msgstr "Skriv inn filnavn"
 
 #: diskdrake/interactive.pm:964
 #, c-format
 msgid "File is already used by another loopback, choose another one"
-msgstr "Filen blir allerede brukt av et annen loopback, velg en annen"
+msgstr "Fila er allerede brukt til filmontering. Velg en annen fil."
 
 #: diskdrake/interactive.pm:965
 #, c-format
 msgid "File already exists. Use it?"
-msgstr "Filen eksisterer allerede. Bruk denne?"
+msgstr "Fila finnes allerede. Vil du bruke denne?"
 
 #: diskdrake/interactive.pm:997 diskdrake/interactive.pm:1000
 #, c-format
 msgid "Mount options"
-msgstr "Monteringsvalg:"
+msgstr "Monteringsvalg"
 
 #: diskdrake/interactive.pm:1007
 #, c-format
@@ -1899,17 +1899,17 @@ msgstr "nivå"
 #: diskdrake/interactive.pm:1076
 #, c-format
 msgid "chunk size in KiB"
-msgstr "skivestørrelse i KB"
+msgstr "blokkstørrelse i KiB"
 
 #: diskdrake/interactive.pm:1094
 #, c-format
 msgid "Be careful: this operation is dangerous."
-msgstr "Vær forsiktig: denne operasjonen er farlig."
+msgstr "Advarsel: denne operasjonen er farlig."
 
 #: diskdrake/interactive.pm:1109
 #, c-format
 msgid "Partitioning Type"
-msgstr "Partisjonstype"
+msgstr "Partisjoneringsstype"
 
 #: diskdrake/interactive.pm:1109
 #, c-format
@@ -1924,27 +1924,27 @@ msgstr "Du må starte maskinen på nytt for at endringene skal tre i kraft"
 #: diskdrake/interactive.pm:1156
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk"
-msgstr "Partisjonstabellen på disk %s blir nå skrevet til disk"
+msgstr "Partisjonstabellen til «%s» blir nå lagra"
 
 #: diskdrake/interactive.pm:1178 fs/format.pm:96 fs/format.pm:103
 #, c-format
 msgid "Formatting partition %s"
-msgstr "Formaterer partisjon %s"
+msgstr "Formaterer partisjonen «%s»"
 
 #: diskdrake/interactive.pm:1191
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
-msgstr "Etter formatering av partisjon %s vil alle data på denne partisjonen gå tapt"
+msgstr "Når du har formatert «%s» vil alle data på denne partisjonen gå tapt"
 
 #: diskdrake/interactive.pm:1200 fs/partitioning.pm:48
 #, c-format
 msgid "Check bad blocks?"
-msgstr "Sjekk for dårlige blokker?"
+msgstr "Se etter ødelagte blokker?"
 
 #: diskdrake/interactive.pm:1214
 #, c-format
 msgid "Move files to the new partition"
-msgstr "Flytt filer til en ny partisjon"
+msgstr "Flytt filer til ny partisjon"
 
 #: diskdrake/interactive.pm:1214
 #, c-format
@@ -1961,37 +1961,37 @@ msgid ""
 "mounted there or leave them where they are (which results in hiding them by "
 "the contents of the mounted partition)"
 msgstr ""
-"Katalog %s inneholder allerede data\n"
+"Mappa «%s» inneholder allerede data.\n"
 "(%s)\n"
 "\n"
-"Du kan enten velge å flytte filene over på partisjonen som vil bli montert "
-"der eller la de være der de befinner seg (som resulterer i at de blir gjemt "
-"av innholdet på den montert partisjonen)"
+"Du kan velge mellom å flytte filene til partisjonen som ble montert der, "
+"eller la de bli der de er (resultatet er at de blir gjemt av "
+"innholdet på den monterte partisjonen)."
 
 #: diskdrake/interactive.pm:1230
 #, c-format
 msgid "Moving files to the new partition"
-msgstr "Flytt filer til den nye partisjonen"
+msgstr "Flytt filer til ny partisjonen"
 
 #: diskdrake/interactive.pm:1234
 #, c-format
 msgid "Copying %s"
-msgstr "Kopierer %s"
+msgstr "Kopierer «%s»"
 
 #: diskdrake/interactive.pm:1238
 #, c-format
 msgid "Removing %s"
-msgstr "Fjerner %s"
+msgstr "Fjerner «%s»"
 
 #: diskdrake/interactive.pm:1252
 #, c-format
 msgid "partition %s is now known as %s"
-msgstr "partisjon %s er nå kjent som %s"
+msgstr "Partisjonen «%s» har nå navnet «%s»"
 
 #: diskdrake/interactive.pm:1253
 #, c-format
 msgid "Partitions have been renumbered: "
-msgstr "Partisjoner har blitt omnummerert: "
+msgstr "Partisjonene har fått nye numre: "
 
 #: diskdrake/interactive.pm:1278 diskdrake/interactive.pm:1346
 #, c-format
@@ -2011,7 +2011,7 @@ msgstr "UUID: "
 #: diskdrake/interactive.pm:1281
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
-msgstr "DOS-diskbokstav: %s (bare en gjetning)\n"
+msgstr "DOS-stasjonsbokstav: %s (bare gjetting)\n"
 
 #: diskdrake/interactive.pm:1285 diskdrake/interactive.pm:1294
 #: diskdrake/interactive.pm:1365
@@ -2047,7 +2047,7 @@ msgstr "Sylinder %d til %d\n"
 #: diskdrake/interactive.pm:1302
 #, c-format
 msgid "Number of logical extents: %d\n"
-msgstr "Nummer på logiske områder: %d\n"
+msgstr "Antall logiske områder: %d\n"
 
 #: diskdrake/interactive.pm:1303
 #, c-format
@@ -2077,17 +2077,17 @@ msgstr "Kryptert"
 #: diskdrake/interactive.pm:1308
 #, c-format
 msgid " (mapped on %s)"
-msgstr "(mappet på %s)"
+msgstr "(kobla på %s)"
 
 #: diskdrake/interactive.pm:1309
 #, c-format
 msgid " (to map on %s)"
-msgstr "(å mappe på %s)"
+msgstr " (til å kobles på %s)"
 
 #: diskdrake/interactive.pm:1310
 #, c-format
 msgid " (inactive)"
-msgstr "(inaktiv)"
+msgstr " (uvirksom)"
 
 #: diskdrake/interactive.pm:1316
 #, c-format
@@ -2095,7 +2095,7 @@ msgid ""
 "Loopback file(s):\n"
 "   %s\n"
 msgstr ""
-"Loopback-fil(er): \n"
+"Filmonteringsfil(er):\n"
 "   %s\n"
 
 #: diskdrake/interactive.pm:1317
@@ -2105,7 +2105,7 @@ msgid ""
 "    (for MS-DOS boot, not for lilo)\n"
 msgstr ""
 "Partisjon startet opp som standard\n"
-"    (for MS-DOS oppstart, ikke for lilo)\n"
+"    (for MS-DOS-oppstart, ikke for lilo)\n"
 
 #: diskdrake/interactive.pm:1319
 #, c-format
@@ -2115,7 +2115,7 @@ msgstr "Nivå %s\n"
 #: diskdrake/interactive.pm:1320
 #, c-format
 msgid "Chunk size %d KiB\n"
-msgstr "Skivestørrelse %d i KB\n"
+msgstr "Blokkstørrelse %d i KiB\n"
 
 #: diskdrake/interactive.pm:1321
 #, c-format
@@ -2125,7 +2125,7 @@ msgstr "RAID-disker %s\n"
 #: diskdrake/interactive.pm:1323
 #, c-format
 msgid "Loopback file name: %s"
-msgstr "Loopback-filnavn: %s"
+msgstr "Filmonteringsfil: %s"
 
 #: diskdrake/interactive.pm:1326
 #, c-format
@@ -2136,10 +2136,9 @@ msgid ""
 "probably leave it alone.\n"
 msgstr ""
 "\n"
-"Det er store sjanser for at\n"
-"denne partisjonen er en\n"
-"driverpartisjon, du bør nok\n"
-"la den være i fred.\n"
+"Denne partisjonen er trolig\n"
+"en driverpartisjon. Da bør\n"
+"du ikke røre den.\n"
 
 #: diskdrake/interactive.pm:1329
 #, c-format
@@ -2150,9 +2149,9 @@ msgid ""
 "dual-booting your system.\n"
 msgstr ""
 "\n"
-"Denne spesielle Bootstrap-\n"
-"partisjonen er for å\n"
-"dual-boote ditt system.\n"
+"Denne spesielle\n"
+"oppstartslasterpartisjonen\n"
+"er for flersystemoppsett.\n"
 
 #: diskdrake/interactive.pm:1338
 #, c-format
@@ -2162,7 +2161,7 @@ msgstr "Ledig plass på %s (%s)"
 #: diskdrake/interactive.pm:1347
 #, c-format
 msgid "Read-only"
-msgstr "Skrivebeskyttet"
+msgstr "Skrivebeskytta"
 
 #: diskdrake/interactive.pm:1348
 #, c-format
@@ -2172,12 +2171,12 @@ msgstr "Størrelse: %s\n"
 #: diskdrake/interactive.pm:1349
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
-msgstr "Geometri: %s sylindere, %s hoder, %s sektorer\n"
+msgstr "Geometri: %s sylindre – %s hoder –%s sektorer\n"
 
 #: diskdrake/interactive.pm:1351
 #, c-format
 msgid "Medium type: "
-msgstr "Mediumstype: "
+msgstr "Medietype: "
 
 #: diskdrake/interactive.pm:1352
 #, c-format
@@ -2187,17 +2186,17 @@ msgstr "LVM-disker %s\n"
 #: diskdrake/interactive.pm:1353
 #, c-format
 msgid "Partition table type: %s\n"
-msgstr "Type partisjonstabell: %s\n"
+msgstr "Partisjonstabelltype: %s\n"
 
 #: diskdrake/interactive.pm:1354
 #, c-format
 msgid "on channel %d id %d\n"
-msgstr "på kanal %d id %d\n"
+msgstr "på kanal %d id – %d\n"
 
 #: diskdrake/interactive.pm:1398
 #, c-format
 msgid "Choose your filesystem encryption key"
-msgstr "Velg ditt filsystems krypteringsnøkkel"
+msgstr "Velg krypteringsnøkkel for filsystemet"
 
 #: diskdrake/interactive.pm:1401
 #, c-format
@@ -2207,12 +2206,12 @@ msgstr "Denne krypteringsnøkkelen er for enkel (må være minst %d tegn lang)"
 #: diskdrake/interactive.pm:1402
 #, c-format
 msgid "The encryption keys do not match"
-msgstr "Krypteringsnøklene stemmer ikke overens"
+msgstr "Krypteringsnøklene er ikke like"
 
 #: diskdrake/interactive.pm:1406
 #, c-format
 msgid "Encryption key (again)"
-msgstr "Krypteringsnøkkel (igjen)"
+msgstr "Krypteringsnøkkel (på nytt)"
 
 #: diskdrake/interactive.pm:1408
 #, c-format
@@ -2235,12 +2234,12 @@ msgstr "Avbryt"
 #: diskdrake/smbnfs_gtk.pm:164
 #, c-format
 msgid "Can not login using username %s (bad password?)"
-msgstr "Kan ikke logge inn med brukernavn %s (ugyldig passord?)"
+msgstr "Klarte ikke å logge på med brukarnavnet «%s» (feil passord?)"
 
 #: diskdrake/smbnfs_gtk.pm:168 diskdrake/smbnfs_gtk.pm:177
 #, c-format
 msgid "Domain Authentication Required"
-msgstr "Domene-autentisering nødvendig"
+msgstr "Trenger domeneautentisering"
 
 #: diskdrake/smbnfs_gtk.pm:169
 #, c-format
@@ -2250,14 +2249,12 @@ msgstr "Hvilket brukernavn"
 #: diskdrake/smbnfs_gtk.pm:169
 #, c-format
 msgid "Another one"
-msgstr "Enda ett"
+msgstr "Enda en"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
 msgid "Please enter your username, password and domain name to access this host."
-msgstr ""
-"Tast inn brukernavnet, passordet og domenenavnet ditt for å få tilgang til "
-"denne verten."
+msgstr "Tast inn brukernavnet, passordet og domenenavn for verten."
 
 #: diskdrake/smbnfs_gtk.pm:180
 #, c-format
@@ -2272,42 +2269,42 @@ msgstr "Domene"
 #: diskdrake/smbnfs_gtk.pm:206
 #, c-format
 msgid "Search servers"
-msgstr "Søk gjennom tjenere"
+msgstr "Søk etter tjenere"
 
 #: diskdrake/smbnfs_gtk.pm:211
 #, c-format
 msgid "Search new servers"
-msgstr "Søk nye tjenere"
+msgstr "Søk etter nye tjenere"
 
 #: do_pkgs.pm:19 do_pkgs.pm:57
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
-msgstr "Pakken %s må installeres. Vil du installere den?"
+msgstr "Pakken %s må installeres. Vil du installere den nå?"
 
 #: do_pkgs.pm:23 do_pkgs.pm:44 do_pkgs.pm:60 do_pkgs.pm:82
 #, c-format
 msgid "Could not install the %s package!"
-msgstr "Kunne ikke installere %s-pakken!"
+msgstr "Klarte ikke å installere pakka «%s»."
 
 #: do_pkgs.pm:28 do_pkgs.pm:65
 #, c-format
 msgid "Mandatory package %s is missing"
-msgstr "Obligatorisk pakke %s mangler"
+msgstr "Mangler den obligatoriske pakka «%s»"
 
 #: do_pkgs.pm:39 do_pkgs.pm:77
 #, c-format
 msgid "The following packages need to be installed:\n"
-msgstr "De følgende pakkene trengs å installeres:\n"
+msgstr "Disse pakkane må installeres:\n"
 
 #: do_pkgs.pm:241
 #, c-format
 msgid "Installing packages..."
-msgstr "Installerer pakke … "
+msgstr "Installerer pakke …"
 
 #: do_pkgs.pm:287 pkgs.pm:281
 #, c-format
 msgid "Removing packages..."
-msgstr "Fjerner pakker … "
+msgstr "Fjerner pakker …"
 
 #: fs/any.pm:17
 #, c-format
@@ -2315,33 +2312,33 @@ msgid ""
 "An error occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
 msgstr ""
-"En feil har oppstått - ingen gyldige enheter ble funnet for å opprette nye "
-"filsystemer. Sjekk maskinvaren din for årsaken til dette problemet"
+"Det oppstod en feil: Fant ingen gyldige enheter for nytt filsystem. "
+"Kontroller maskinvaren."
 
 #: fs/any.pm:75 fs/partitioning_wizard.pm:59
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr "Du må ha en FAT-partisjonen montert under /boot/efi"
+msgstr "Du må ha en FAT-partisjon montert i «/boot/efi»"
 
 #: fs/format.pm:100
 #, c-format
 msgid "Creating and formatting file %s"
-msgstr "Oppretter og formaterer fila %s"
+msgstr "Lager og formaterer partisjonen «%s»"
 
 #: fs/format.pm:119
 #, c-format
 msgid "I do not know how to set label on %s with type %s"
-msgstr "Jeg vet ikke hvordan man setter etikett på %s med type %s"
+msgstr "Kan ikke lagre volumnavnet på %s med typen %s"
 
 #: fs/format.pm:126
 #, c-format
 msgid "setting label on %s failed, is it formatted?"
-msgstr "Setting av etikett på %s mislyktes, er den formatert?"
+msgstr "Klarte ikke å lagre volumnavn på %s. Kontroller at partisjonen er formatert."
 
 #: fs/format.pm:167
 #, c-format
 msgid "I do not know how to format %s in type %s"
-msgstr "Jeg vet ikke hvordan å formatere %s i type %s"
+msgstr "Kan ikke formatere «%s» som type «%s»"
 
 #: fs/format.pm:172 fs/format.pm:174
 #, c-format
@@ -2351,37 +2348,37 @@ msgstr "%s formatering av %s mislykket"
 #: fs/loopback.pm:24
 #, c-format
 msgid "Circular mounts %s\n"
-msgstr "Sirkulære monteringer %s\n"
+msgstr "Sirkelmontering %s\n"
 
 #: fs/mount.pm:85
 #, c-format
 msgid "Mounting partition %s"
-msgstr "Monterer partisjon %s"
+msgstr "Monterer partisjonen «%s»"
 
 #: fs/mount.pm:86
 #, c-format
 msgid "mounting partition %s in directory %s failed"
-msgstr "monterer partisjon %s i katalog %s gikk ikke"
+msgstr "Klarte ikke å montere partisjonen «%s» i mappa «%s»"
 
 #: fs/mount.pm:91 fs/mount.pm:108
 #, c-format
 msgid "Checking %s"
-msgstr "Sjekker %s"
+msgstr "Kontrollerer «%s»"
 
 #: fs/mount.pm:125 partition_table.pm:405
 #, c-format
 msgid "error unmounting %s: %s"
-msgstr "feil ved avmontering av %s: %s"
+msgstr "Feil ved avmontering av «%s»: %s"
 
 #: fs/mount.pm:140
 #, c-format
 msgid "Enabling swap partition %s"
-msgstr "Aktiverer swap-partisjon %s"
+msgstr "Slår på vekselpartisjonen «%s»"
 
 #: fs/mount_options.pm:114
 #, c-format
 msgid "Use an encrypted file system"
-msgstr "Bruk et kryptert filsystem"
+msgstr "Bruk kryptert filsystem"
 
 #: fs/mount_options.pm:116
 #, c-format
@@ -2391,17 +2388,14 @@ msgstr "Tøm skrivecache ved fillukking"
 #: fs/mount_options.pm:118
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
-msgstr "Aktiver bokføring av gruppediskkvota og valgfritt påfør grenser"
+msgstr "Bruk gruppekvoter og håndhev grenser (valgfritt)."
 
 #: fs/mount_options.pm:120
 #, c-format
 msgid ""
 "Do not update inode access times on this file system\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
-msgstr ""
-"Ikke oppdater inodeaksesstid på dette filsystemet\n"
-"(feks. for kjappere tilgang til njus-køen for å øke hastigheten på njus-"
-"tjenere)."
+msgstr "Ikke oppdater tilgangstider på inoder på filsystemet."
 
 #: fs/mount_options.pm:123
 #, c-format
@@ -2418,13 +2412,13 @@ msgid ""
 "Can only be mounted explicitly (i.e.,\n"
 "the -a option will not cause the file system to be mounted)."
 msgstr ""
-"Kan bare bli eksplisitt montert (feks.,\n"
-"-a-valget vil ikke forårsake at filsystemet blir montert)."
+"Kan bare monteres eksplisitt (for eksempel vil\n"
+"ikke «-a»-valget montere filsystemet)."
 
 #: fs/mount_options.pm:129
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
-msgstr "Ikke tyd tegn- eller blokkspesialenheter på filsystemet."
+msgstr "Ikke tolk tegn- og blokkspesialenheter på filsystemet."
 
 #: fs/mount_options.pm:131
 #, c-format
@@ -2433,9 +2427,9 @@ msgid ""
 "file system. This option might be useful for a server that has file systems\n"
 "containing binaries for architectures other than its own."
 msgstr ""
-"Ikke tillat kjøring av binære filer på det monterte filsystemet.\n"
-"Dette valget kan være nyttig på en tjener som har filsystem som\n"
-"inneholder binære filer for andre arkitekturer enn sin egen."
+"Ikke tillat kjøring av programfiler på det monterte\n"
+"filsystemet. Dette valget kan være nyttig for tjenere som\n"
+"har filsystemer med programfiler for andre operativsystemer."
 
 #: fs/mount_options.pm:135
 #, c-format
@@ -2444,54 +2438,54 @@ msgid ""
 "bits to take effect. (This seems safe, but is in fact rather unsafe if you\n"
 "have suidperl(1) installed.)"
 msgstr ""
-"Ikke tillat set-user-identifisere- eller set-group-identifiserer-biter\n"
-"å trå i effekt. (Dette ser trygt ut, men er faktisk rimelig utrygt hvis du\n"
-"har suidperl(1) installert.)"
+"Ikke tillat «set-user-identifier»- og «set-group-identifier»-bitene\n"
+"å ha noen virkning. (Dette er ikke trygt om du har\n"
+"suidperl(1) installert, selv om det kan virke slik.)"
 
 #: fs/mount_options.pm:139
 #, c-format
 msgid "Mount the file system read-only."
-msgstr "Monter filsystemet som read-only."
+msgstr "Monter filsystemet som skrivebeskytta."
 
 #: fs/mount_options.pm:141
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
-msgstr "All I/O til filsystemet bør gjøres synkront."
+msgstr "All lesing og skriving til filsystemet skal gjøres synkront."
 
 #: fs/mount_options.pm:143
 #, c-format
 msgid "Allow every user to mount and umount the file system."
-msgstr "Tillat alle brukere å montere og avmontere filsystemet."
+msgstr "La alle brukere montere og avmontere filsystemet."
 
 #: fs/mount_options.pm:145
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
-msgstr "Tillat ordinære brukere å montere filsystemet."
+msgstr "La en vanlig bruker montere filsystemet."
 
 #: fs/mount_options.pm:147
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
-msgstr "Aktiver bokføring av brukerdiskkvota og valgfritt påfør grenser"
+msgstr "Bruk brukerkvoter og håndhev grenser (valgfritt)."
 
 #: fs/mount_options.pm:149
 #, c-format
 msgid "Support \"user.\" extended attributes"
-msgstr "Støtte «user.»-utvidede egenskaper"
+msgstr "Støtt «user.»-baserte utvidet attributt."
 
 #: fs/mount_options.pm:151
 #, c-format
 msgid "Give write access to ordinary users"
-msgstr "Gi skrivetilgang til ordinære brukere"
+msgstr "Gi skrivetilgang til vanlige brukere."
 
 #: fs/mount_options.pm:153
 #, c-format
 msgid "Give read-only access to ordinary users"
-msgstr "Gi lesetilgang til ordinære brukere"
+msgstr "Gi bare lesetilgang til vanlige brukere."
 
 #: fs/mount_point.pm:80
 #, c-format
 msgid "Duplicate mount point %s"
-msgstr "Duplisér monteringspunkt %s"
+msgstr "Kopier monteringspunktet «%s»"
 
 #: fs/mount_point.pm:95
 #, c-format
@@ -2501,7 +2495,7 @@ msgstr "Ingen tilgjengelige partisjoner"
 #: fs/mount_point.pm:98
 #, c-format
 msgid "Scanning partitions to find mount points"
-msgstr "Skanner partisjoner for å finne monteringspunkter"
+msgstr "Ser gjennom partisjoner etter monteringspunkter"
 
 #: fs/mount_point.pm:105
 #, c-format
@@ -2511,7 +2505,7 @@ msgstr "Velg monteringspunktene"
 #: fs/partitioning.pm:46
 #, c-format
 msgid "Choose the partitions you want to format"
-msgstr "Velg partisjonene du ønsker å formatere"
+msgstr "Velg partisjonene du vil formatere"
 
 #: fs/partitioning.pm:75
 #, c-format
@@ -2519,8 +2513,8 @@ msgid ""
 "Failed to check filesystem %s. Do you want to repair the errors? (beware, "
 "you can lose data)"
 msgstr ""
-"Klarte ikke å sjekke filsystemet %s. Vil du forsøke å reparere feilene? "
-"(Advarsel! Du kan miste data!)"
+"Klarte ikke å kontrollere filsystemet «%s». Vil du ordne feilene? (Merk at du da "
+"kan tape data.)"
 
 #: fs/partitioning.pm:78
 #, c-format
