@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "POT-Creation-Date: 2009-09-10 12:20+0200\n"
-"PO-Revision-Date: 2009-09-19 07:13+0200\n"
+"PO-Revision-Date: 2009-09-19 19:08+0200\n"
 "Last-Translator: Olav Dahlum <odahlum@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -2519,7 +2519,7 @@ msgstr ""
 #: fs/partitioning.pm:78
 #, c-format
 msgid "Not enough swap space to fulfill installation, please add some"
-msgstr "Det er ikke nok swap til å fullføre installasjonen, legg til mer"
+msgstr "Ikke nok vekselplass for installering. Du må legge til mer."
 
 #: fs/partitioning_wizard.pm:51
 #, c-format
@@ -2528,9 +2528,9 @@ msgid ""
 "For this, create a partition (or click on an existing one).\n"
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
-"Du må ha en root-partisjon.\n"
-"Opprett en partisjon for dette (eller klikk på en eksisterende).\n"
-"Velg så ``Monteringspunkt'' og sett dette til `/'"
+"Du må ha en rotpartisjon.\n"
+"Lag en ny partisjon (eller velg en gammel),\n"
+"og velg så «Monteringspunkt». Sett dette til «/»."
 
 #: fs/partitioning_wizard.pm:56
 #, c-format
@@ -2541,7 +2541,7 @@ msgid ""
 msgstr ""
 "Du har ingen vekselpartisjon\n"
 "\n"
-"Fortsett likevel?"
+"Vil du likevel fortsette?"
 
 #: fs/partitioning_wizard.pm:84
 #, c-format
@@ -2551,22 +2551,22 @@ msgstr "Bruk ledig plass"
 #: fs/partitioning_wizard.pm:86
 #, c-format
 msgid "Not enough free space to allocate new partitions"
-msgstr "Ikke nok plass til tildeling av nye partisjoner"
+msgstr "Ikke nok ledig plass til nye partisjoner"
 
 #: fs/partitioning_wizard.pm:94
 #, c-format
 msgid "Use existing partitions"
-msgstr "Bruk eksisterende partisjon"
+msgstr "Bruk gamle partisjoner"
 
 #: fs/partitioning_wizard.pm:96
 #, c-format
 msgid "There is no existing partition to use"
-msgstr "Det finnes ingen eksisterende partisjon som kan brukes"
+msgstr "Det finnes ingen gammel partisjon å bruke"
 
 #: fs/partitioning_wizard.pm:103
 #, c-format
 msgid "Use the Microsoft Windows® partition for loopback"
-msgstr "Bruk Microsoft Windows®-partisjonen for loopback"
+msgstr "Bruk Microsoft Windows®-partisjonen til filmontering"
 
 #: fs/partitioning_wizard.pm:106
 #, c-format
@@ -2576,34 +2576,34 @@ msgstr "Hvilken partisjon vil du bruke for Linux4Win?"
 #: fs/partitioning_wizard.pm:108
 #, c-format
 msgid "Choose the sizes"
-msgstr "Velg størrelsene"
+msgstr "Velg størrelser"
 
 #: fs/partitioning_wizard.pm:109
 #, c-format
 msgid "Root partition size in MB: "
-msgstr "Root-partisjonsstørrelse i MB: "
+msgstr "Størrelse på rotpartisjon i MiB: "
 
 #: fs/partitioning_wizard.pm:110
 #, c-format
 msgid "Swap partition size in MB: "
-msgstr "Swap-partisjonsstørrelse i MB: "
+msgstr "Størrelse på vekselpartisjon i MiB: "
 
 #: fs/partitioning_wizard.pm:119
 #, c-format
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
-"Det finnes ingen FAT-partisjon til å bruke som loopback (eller ikke nok "
-"plass igjen)"
+"Det finnes ingen FAT-partisjon som kan brukes til filmontering (eller det er "
+"ikke nok ledig plass)"
 
 #: fs/partitioning_wizard.pm:127
 #, c-format
 msgid "Use the free space on a Microsoft Windows® partition"
-msgstr "Bruk den ledige plassen på en Windows-partisjon"
+msgstr "Bruk ledig plass på Microsoft Windows®-partisjonen"
 
 #: fs/partitioning_wizard.pm:129
 #, c-format
 msgid "Which partition do you want to resize?"
-msgstr "Hvilken partisjon ønsker du å forandre størrelse til?"
+msgstr "Hvilken partisjon vil du endre størrelse på?"
 
 #: fs/partitioning_wizard.pm:143
 #, c-format
@@ -2611,13 +2611,13 @@ msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
 msgstr ""
-"Størrelsesendreren for FAT greide ikke å håndtere din partisjon, \n"
-"følgende feil oppsto: %s"
+"Klarte ikke å endre størrelse på partisjonen:\n"
+"%s"
 
 #: fs/partitioning_wizard.pm:146
 #, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
-msgstr "Beregner den ledige plassen på Microsoft Windows®-partisjonen"
+msgstr "Beregner størrelsen på Microsoft Windows®-partisjon"
 
 #: fs/partitioning_wizard.pm:153
 #, c-format
@@ -2626,9 +2626,9 @@ msgid ""
 "computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
 "the Mandriva Linux installation."
 msgstr ""
-"Microsoft Windows®-partisjonen din er for fragmentert. Start maskinen din på "
-"nytt til Microsoft Windows®, kjør «defrag»-verktøyet, så start Mandriva Linux-"
-"installasjonen på nytt."
+"Microsoft Windows®-partisjonen for fragmentert. Start maskina på nytt under "
+"Microsoft Windows®, og kjør defragmenteringsverktøyet. Prøv så å installere "
+"Mandriva Linux på nytt."
 
 #: fs/partitioning_wizard.pm:156
 #, c-format
@@ -2649,21 +2649,20 @@ msgid ""
 "\n"
 "When sure, press %s."
 msgstr ""
-"ADVARSEL!\n"
+"ÅTVARING!\n"
 "\n"
 "\n"
-"DrakX vil nå endre størrelsen på Windows-partisjonen din.\n"
+"Du er nå i ferd med å endre størrelsen på Windows-partisjonen.\n"
 "\n"
 "\n"
-"Vær forsiktig: denne operasjonen er farlig. Hvis du ikke allerede har gjort "
-"det, bør du først kjøre «chkdsk c:» fra en kommandolinje under Windows (vær "
-"oppmerksom på at å kjøre et grafisk program som «scandisk»\n"
-"ikke er nok, vær sikker på å kjøre «chkdsk» i en kommandolinje!), og det "
-"anbefales også å defragmentere, deretter start installasjonen på nytt. Du "
-"burde også ta sikkerhetskopi av dine data.\n"
+"Dette er en farleg operasjon. Om du ikke alt har gjort det, bør du "
+"avslutte installasjonen, kjøre «chkdsk c:» fra kommandolinja i Windows (det "
+"grafiske programmet «scandisk» er ikke nok), etterfulgt av defragmentering, "
+"og start installasjonen på nytt. Du bør også ta en reservekopi av alle "
+"data.\n"
 "\n"
 "\n"
-"Når du er sikker, trykk %s."
+"Trykk «%s» når du er klar."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: fs/partitioning_wizard.pm:165 interactive.pm:549 interactive/curses.pm:263
@@ -2680,7 +2679,7 @@ msgstr "Partisjonering"
 #: fs/partitioning_wizard.pm:168
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
-msgstr "Hvilken størrelse ønsker du å beholde Microsoft Windows® på partisjon %s?"
+msgstr "Hvilken størrelse vil du beholde for Microsoft Windows® på partisjon %s?"
 
 #: fs/partitioning_wizard.pm:169
 #, c-format
@@ -2690,12 +2689,12 @@ msgstr "Størrelse"
 #: fs/partitioning_wizard.pm:178
 #, c-format
 msgid "Resizing Microsoft Windows® partition"
-msgstr "Endrer størrelse på  Microsoft Windows®-partisjon"
+msgstr "Endrer størrelse på Microsoft Windows®-partisjon"
 
 #: fs/partitioning_wizard.pm:183
 #, c-format
 msgid "FAT resizing failed: %s"
-msgstr "Endring av størrelse på FAT-partisjon feilet: %s"
+msgstr "Klarte ikke krympe/øke FAT: %s"
 
 #: fs/partitioning_wizard.pm:186
 #, c-format
@@ -2703,40 +2702,38 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
-"For å sikre dataintegritet etter at partisjonen(e) har blitt endret, \n"
-"vil kontroll av filsystemene kjøres neste gang du starter Windows(TM)"
+"For å sikre dataintegritet på partisjonen/-ene\n"
+"blir det kjørt filsystemkontroll neste gang du starter Windows™"
 
 #: fs/partitioning_wizard.pm:198
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
-msgstr ""
-"Det finnes ingen FAT-partisjon å forandre størrelsen på(eller ikke nok plass "
-"igjen)"
+msgstr "Det finnes ingen FAT-partisjon å endre størrelsen på (eller det ikke nok ledig plass)."
 
 #: fs/partitioning_wizard.pm:203
 #, c-format
 msgid "Remove Microsoft Windows®"
-msgstr "Fjern Microsoft Windows®"
+msgstr "Fjern Windows™"
 
 #: fs/partitioning_wizard.pm:203
 #, c-format
 msgid "Erase and use entire disk"
-msgstr "Slett og bruk hele disk"
+msgstr "Slett og bruk hele disken"
 
 #: fs/partitioning_wizard.pm:205
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
-msgstr "Du har mer enn en harddisk, hvilken ønsker du å installere linux på?"
+msgstr "Du har mer enn en harddisk. Hvilken av dem vil du installere Linux på?"
 
 #: fs/partitioning_wizard.pm:210 fsedit.pm:600
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr "ALLE eksisterende partisjoner og deres data vil bli tapt på disk %s"
+msgstr "Alle eksisterende partisjoner og data går tapt på stasjon «%s»."
 
 #: fs/partitioning_wizard.pm:220
 #, c-format
 msgid "Custom disk partitioning"
-msgstr "Egendefinert diskpartisjonering"
+msgstr "Egendefinert partisjonering"
 
 #: fs/partitioning_wizard.pm:226
 #, c-format
@@ -2749,33 +2746,33 @@ msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
 msgstr ""
-"Du kan nå partisjonere %s.\n"
-"Når du er ferdig ikke glem å lagre med `w'"
+"Du kan nå partisjonere «%s».\n"
+"Husk å lagre med «w» når du er ferdig."
 
 #: fs/partitioning_wizard.pm:269
 #, c-format
 msgid "I can not find any room for installing"
-msgstr "Jeg kan ikke finne noe plass for installasjon"
+msgstr "Ikke nok plass for installering"
 
 #: fs/partitioning_wizard.pm:278
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr "DrakX partisjoneringsveiviseren fant følgende løsninger:"
+msgstr "Partisjonsveiviseren fant følgende løsninger:"
 
 #: fs/partitioning_wizard.pm:287
 #, c-format
 msgid "Partitioning failed: %s"
-msgstr "Partisjonering feilet: %s"
+msgstr "Feil ved partisjonering: %s"
 
 #: fs/type.pm:388
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
-msgstr "Du kan ikke bruke JFS for partisjoner mindre enn 16 MB"
+msgstr "Du kan ikke bruke JFS på partisjoner mindre enn 16 MiB"
 
 #: fs/type.pm:389
 #, c-format
 msgid "You can not use ReiserFS for partitions smaller than 32MB"
-msgstr "Du kan ikke bruke ReiserFS for partisjoner mindre enn 32MB"
+msgstr "Du kan ikke bruke ReiserFS på partisjoner mindre enn 32 MiB"
 
 #: fsedit.pm:24
 #, c-format
@@ -2785,7 +2782,7 @@ msgstr "enkel"
 #: fsedit.pm:28
 #, c-format
 msgid "with /usr"
-msgstr "med /usr"
+msgstr "med «/usr»"
 
 #: fsedit.pm:33
 #, c-format
@@ -2795,7 +2792,7 @@ msgstr "tjener"
 #: fsedit.pm:137
 #, c-format
 msgid "BIOS software RAID detected on disks %s. Activate it?"
-msgstr "BIOS-programvare RAID oppdaget på disker %s. Aktiver det?"
+msgstr "Fant BIOS-programvare-RAID på diskene %s. Vil du bruke dette?"
 
 #: fsedit.pm:247
 #, c-format
@@ -2808,27 +2805,27 @@ msgid ""
 "\n"
 "Do you agree to lose all the partitions?\n"
 msgstr ""
-"Jeg kan ikke lese partisjonstabellen på %s, den er for ødelagt for meg :(\n"
-"Jeg kan forsøke å blanke ut dårlige partisjoner (ALLE DATA vil gå tapt!)\n"
-"Den andre løsningen er å ikke la DrakX endre på partisjonstabellen.\n"
-"(feilen er %s)\n"
+"Klarte ikke å lese partisjonstabellen for enheten «%s», da den er\n"
+"altfor ødelagt. Du kan velge å slette alle ødelagte partisjoner.\n"
+"Alle data går da tapt. En annen løsning er å ikke la DrakX endre\n"
+"partisjonstabellen. Feilen er «%s».\n"
 "\n"
-"Vil du miste alle partisjonene?\n"
+"Godtar du å slette alle partisjonene?\n"
 
 #: fsedit.pm:425
 #, c-format
 msgid "Mount points must begin with a leading /"
-msgstr "Monteringspunkter må begynne med /"
+msgstr "Alle monteringspunkter må starte med tegnet «/»"
 
 #: fsedit.pm:426
 #, c-format
 msgid "Mount points should contain only alphanumerical characters"
-msgstr "Monteringspunkt burde innholde alfanumeriske tegn"
+msgstr "Monteringspunkt kan bare inneholde tall og bokstaver"
 
 #: fsedit.pm:427
 #, c-format
 msgid "There is already a partition with mount point %s\n"
-msgstr "Det finnes allerede en partisjon med monteringspunkt %s\n"
+msgstr "Det finnes allerede en partisjon med monteringspunktet «%s»\n"
 
 #: fsedit.pm:431
 #, c-format
@@ -2837,9 +2834,9 @@ msgid ""
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
-"Du har valgt en programvare-RAID-partisjon som root (/).\n"
-"Ingen oppstartslaster kan håndtere dette uten en /boot partisjon.\n"
-"Så vær nøye med å legge til en /boot-partisjon"
+"Du har valgt programvare-RAID-partisjon som rot («/»).\n"
+"Ingen oppstartslastar kan bruke denne uten en «/boot»-partisjon.\n"
+"Husk derfor å legge til en «/boot»-partisjon."
 
 #: fsedit.pm:437
 #, c-format
@@ -2847,8 +2844,8 @@ msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr ""
-"Du kan ikke bruke LVM Logisk Volum for monteringspunkt %s siden det omfanger "
-"fysiske volum"
+"Du kan ikke bruka et LVM-basert logisk volum for monteringspunktet «%s», da "
+"volumet dekker flere fysiske volum."
 
 #: fsedit.pm:439
 #, c-format
@@ -2858,15 +2855,15 @@ msgid ""
 "volumes.\n"
 "You should create a /boot partition first"
 msgstr ""
-"Du har valgt LVM Logisk Volum som root (/).\n"
-"Oppstartslasteren er ikke i stand til å håndtere dette når volumet omfanger "
+"Du har valgt et LVM-basert logisk volum som rot («/»).\n"
+"Oppstartslasteren kan ikke håndtere dette når volumet dekker flere "
 "fysiske volum.\n"
-"Du burde opprette en /boot-partisjon først"
+"Du bør derfor lage en «/boot»-partisjon først."
 
 #: fsedit.pm:443 fsedit.pm:445
 #, c-format
 msgid "This directory should remain within the root filesystem"
-msgstr "Denne katalogen bør forbli i root-filsystemet"
+msgstr "Denne mappa bør bli værende i rotfilsystemet"
 
 #: fsedit.pm:447 fsedit.pm:449
 #, c-format
@@ -2874,18 +2871,18 @@ msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
 "point\n"
 msgstr ""
-"Du trenger et virkelig filsystem (ext2, reiserfs, xfs eller jfs) for dette "
-"monteringspunktet\n"
+"Du trenger et ekte filsystem(«ext2», «ext3», «reiserfs», «xfs» eller «jfs») for "
+"dette monteringspunktet\n"
 
 #: fsedit.pm:451
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
-msgstr "Du kan ikke bruke ett kryptert filsystem som monteringspunkt %s"
+msgstr "Du kan ikke bruke et kryptert filsystem for monteringspunktet «%s»"
 
 #: fsedit.pm:516
 #, c-format
 msgid "Not enough free space for auto-allocating"
-msgstr "Ikke nok plass for automatisk tildeling"
+msgstr "Ikke nok ledig plass for automatisk oppsett"
 
 #: fsedit.pm:518
 #, c-format
@@ -2970,12 +2967,12 @@ msgstr "USB-masselagringsenheter"
 #: harddrake/data.pm:212
 #, c-format
 msgid "CDROM"
-msgstr "CDROM"
+msgstr "CD-ROM"
 
 #: harddrake/data.pm:222
 #, c-format
 msgid "CD/DVD burners"
-msgstr "CD/DVD-brennere"
+msgstr "CD- og DVD-brennere"
 
 #: harddrake/data.pm:232
 #, c-format
@@ -3005,7 +3002,7 @@ msgstr "DVB-kort"
 #: harddrake/data.pm:279
 #, c-format
 msgid "Tvcard"
-msgstr "TV-kort"
+msgstr "Fjernsynskort"
 
 #: harddrake/data.pm:289
 #, c-format
@@ -3020,7 +3017,7 @@ msgstr "Lydkort"
 #: harddrake/data.pm:312
 #, c-format
 msgid "Webcam"
-msgstr "Webkamera"
+msgstr "Vevkamera"
 
 #: harddrake/data.pm:327
 #, c-format
@@ -3030,7 +3027,7 @@ msgstr "Prosessorer"
 #: harddrake/data.pm:337
 #, c-format
 msgid "ISDN adapters"
-msgstr "ISDN-adaptere"
+msgstr "ISDN-kort"
 
 #: harddrake/data.pm:348
 #, c-format
@@ -3060,7 +3057,7 @@ msgstr "Bluetooth-enheter"
 #: harddrake/data.pm:393
 #, c-format
 msgid "Ethernetcard"
-msgstr "Ethernettkort"
+msgstr "Nettverkskort"
 
 #: harddrake/data.pm:410
 #, c-format
@@ -3070,7 +3067,7 @@ msgstr "Modem"
 #: harddrake/data.pm:420
 #, c-format
 msgid "ADSL adapters"
-msgstr "ADSL-adaptere"
+msgstr "ADSL-kort"
 
 #: harddrake/data.pm:432
 #, c-format
@@ -3086,7 +3083,7 @@ msgstr "Skriver"
 #: harddrake/data.pm:455
 #, c-format
 msgid "Game port controllers"
-msgstr "Spillport-kontrollere"
+msgstr "Spillportkontrollere"
 
 #: harddrake/data.pm:464
 #, c-format
@@ -3101,7 +3098,7 @@ msgstr "Tastatur"
 #: harddrake/data.pm:488
 #, c-format
 msgid "Tablet and touchscreen"
-msgstr "Tablet og touchscreen"
+msgstr "Tavlemaskin og pekeskjerm."
 
 #: harddrake/data.pm:497
 #, c-format
@@ -3121,37 +3118,37 @@ msgstr "UPS"
 #: harddrake/data.pm:529
 #, c-format
 msgid "Scanner"
-msgstr "Scanner"
+msgstr "Skanner"
 
 #: harddrake/data.pm:540
 #, c-format
 msgid "Unknown/Others"
-msgstr "Ukjent/Andre"
+msgstr "Ukjent/andre"
 
 #: harddrake/data.pm:570
 #, c-format
 msgid "cpu # "
-msgstr "CPU #"
+msgstr "Prosessornummer "
 
 #: harddrake/sound.pm:303
 #, c-format
 msgid "Please Wait... Applying the configuration"
-msgstr "Vennligst vent …  Aktiverer oppsettet"
+msgstr "Vent litt … Gjør klar oppsett"
 
 #: harddrake/sound.pm:366
 #, c-format
 msgid "Enable PulseAudio"
-msgstr "Aktiver PulseAudio"
+msgstr "Bruk PulseAudio"
 
 #: harddrake/sound.pm:370
 #, c-format
 msgid "Enable 5.1 sound with Pulse Audio"
-msgstr "Aktiver 5.1-lyd med PulseAudio"
+msgstr "Bruk 5.1-lyd med PulseAudio"
 
 #: harddrake/sound.pm:375
 #, c-format
 msgid "Enable user switching for audio applications"
-msgstr "Aktiver brukerbytting for audioprogrammer"
+msgstr "Tillat brukerbytte for lydprogrammer"
 
 #: harddrake/sound.pm:379
 #, c-format
@@ -3161,7 +3158,7 @@ msgstr "Bruk «Glitch-Free»-modus"
 #: harddrake/sound.pm:385
 #, c-format
 msgid "Reset sound mixer to default values"
-msgstr "Nullstill lydmikser til standardverdier"
+msgstr "Tilbakestill lydmikseren til standardverdiene"
 
 #: harddrake/sound.pm:390
 #, c-format
@@ -3179,8 +3176,8 @@ msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
 "currently uses \"%s\""
 msgstr ""
-"Det er ingen alternative OSS/ALSA-drivere for lydkortet ditt (%s) som nå "
-"bruker «%s»"
+"Det finnes ingen OSS- eller ALSA-drivere for lydkortet ditt («%s») som bruker "
+"«%s»"
 
 #: harddrake/sound.pm:405
 #, c-format
@@ -3192,9 +3189,7 @@ msgstr "Lydoppsett"
 msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
 "sound card (%s)."
-msgstr ""
-"Her kan du velge en alternativ driver (enten OSS eller ALSA) for lydkortet "
-"ditt (%s)."
+msgstr "Her kan du velge en annen OSS- eller ALSA-driver for lydkortet ditt («%s»)."
 
 #. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
@@ -3209,7 +3204,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Kortet ditt bruker nå %s«%s»-driveren (standard driver for kortet ditt er «%s»)"
+"Kortet ditt bruker nå %s«%s»-driveren (standarddriveren for kortet ditt er «%s»)."
 
 #: harddrake/sound.pm:414
 #, c-format
@@ -3230,21 +3225,17 @@ msgid ""
 "- the new ALSA api that provides many enhanced features but requires using "
 "the ALSA library.\n"
 msgstr ""
-"OSS (Open Sound System) var det første lyd-APIet. OSS er "
-"etoperativsystemuavhengig lyd-API (det er tilgjengelig på de fleste unix-"
-"systemer),\n"
-"men det er et veldig enkelt og begrenset API. \n"
-"Dessuten så gjenoppfinnere alle OSS-drivere hjulet.\n"
+"OSS (Open Sound System) var det første lydgrensesnittet. Det er\n"
+"operativsystemuavhengig (og tilgjengelig på de fleste UNIX™-systemer),\n"
+"men er òg ganske teknisk begrensa.\n"
 "\n"
-"ALSA (Advanced Linux Sound Architecture) er en modulærisert lydarkitektur\n"
-"som støtter en stor mengde med ISA-, USB- og PCI-baserte lydkort.\n"
+"ALSA (Advanced Linux Sound Architecture) er en modularisert arkitektur som\n"
+"støtter veldig mange ISA-, USB- og PCI-kort.\n"
 "\n"
-"ALSA tilbyr også et mye bredere API enn OSS.\n"
+"Systemet har også et bedre grensesnitt enn OSS har.\n"
 "\n"
-"For å bruke ALSA kan du enten bruke:\n"
-"- det gamle OSS-kompatibilitets api'et,\n"
-"- det nye ALSA-api'et som tilbyr mange forbedringer men som krever bruk av "
-"ALSA-bibliotekene.\n"
+"For å bruke ALSA kan du enten bruke det gamle OSS-grensesnittet, eller det "
+"nye ALSA-grensesnittet, med mange nye funksjoner.\n"
 
 #: harddrake/sound.pm:428 harddrake/sound.pm:511
 #, c-format
@@ -3260,11 +3251,10 @@ msgid ""
 "\n"
 "The new \"%s\" driver will only be used on next bootstrap."
 msgstr ""
-"Den gamle \"%s\"-driveren er svartelistet.\n"
+"Den gamle «%s»-driveren er svartelista, da han visstnok kan «oopsa» kjernen "
+"ved utlasting.\n"
 "\n"
-"Den har blitt rapportert at den oopser kjernen når den lastes ut.\n"
-"\n"
-"Den nye \"%s\"-driveren vil bare bli brukt på neste bootstrap."
+"Den nye «%s»-driveren blir bare brukt ved neste oppstart."
 
 #: harddrake/sound.pm:450
 #, c-format
@@ -3277,8 +3267,8 @@ msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
 "driver at \"%s\"."
 msgstr ""
-"Det er ingen frie drivere for lydkortet ditt (%s), men det er en proprietær "
-"driver på \"%s\"."
+"Det finnes ingen fri driver for lydkortet ditt («%s»), men det finnes en "
+"godseid driver på «%s»."
 
 #: harddrake/sound.pm:454
 #, c-format
@@ -3288,7 +3278,7 @@ msgstr "Ingen kjent driver"
 #: harddrake/sound.pm:455
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
-msgstr "Det er ingen kjent driver for lydkortet ditt (%s)"
+msgstr "Det er ingen kjent driver for lydkortet ditt («%s»)"
 
 #: harddrake/sound.pm:470
 #, c-format
@@ -3320,33 +3310,32 @@ msgid ""
 "\n"
 "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
 msgstr ""
-"Den klassiske metoden for å avluse lydoppsettet er å kjøre følgende\n"
-"kommandoer:\n"
+"Dette er den vanlige måten feilsøke lydoppsett på:\n"
 "\n"
 "\n"
-"- «lspcidrake -v | fgrep -i AUDIO» vil vise hvilken driver lydortet bruker \n"
-"som standard\n"
-"- «grep sound-slot /etc/modprobe.conf» vil vise hvilken driver som er i bruk\n"
+"– «lspcidrake -v | fgrep -i AUDIO» forteller deg hvilken driver kortet bruker som "
+"standard.\n"
 "\n"
-"- «/sbin/lsmod» lar deg se om denne driveren er lastet\n"
+"– «grep sound-slot /etc/modprobe.conf» forteller deg hvilken driver kortet bruker "
+"nå.\n"
 "\n"
-"- «/sbin/chkconfig --list sound» og «/sbin/chkconfig --list alsa» vil\n"
-"vise om sound- og alsa-tjenestene er satt opp til å kjøres i\n"
-"initnivå\n"
+"– «/sbin/lsmod» lar deg se om driveren er lasta.\n"
+"– «/sbin/chkconfig --list sound» and «/sbin/chkconfig --list alsa» forteller\n"
+"deg om lyd- og ALSA-tjenestene er satt opp til å kjøre på initlevel 3.\n"
 "\n"
-"- «aumix -q» vil vise om lydvolumet er skrudd ned eller ikke\n"
+"– «aumix -q» forteller deg om lydvolumet er skrudd ned.\n"
 "\n"
-"- «/sbin/fuser -v /dev/dsp» vil vise hvilke programmer som bruker lydkortet\n"
+"– «/sbin/fuser -v /dev/dsp» forteller deg hvilke programmer som bruker lydkortet.\n"
 
 #: harddrake/sound.pm:500
 #, c-format
 msgid "Let me pick any driver"
-msgstr "La meg velge driver"
+msgstr "Velg driver"
 
 #: harddrake/sound.pm:503
 #, c-format
 msgid "Choosing an arbitrary driver"
-msgstr "Valg av en vilkårlig driver"
+msgstr "Valg av annen driver"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: harddrake/sound.pm:506
@@ -3358,30 +3347,30 @@ msgid ""
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
-"Hvis du tror du vet hvilken driver som passer til ditt kort kan du velge en\n"
-"i lista over.\n"
+"Hvis du kjenner til en annen driver som fungerer med lydkortet ditt, kan du "
+"velge den her.\n"
 "\n"
-"Den nåværende driveren for ditt \"%s\"-lydkort er \"%s\""
+"Lydkortet «%s» bruker nå driveren «%s»."
 
 #: harddrake/v4l.pm:12
 #, c-format
 msgid "Auto-detect"
-msgstr "Automatisk oppdagelse"
+msgstr "Finn automatisk"
 
 #: harddrake/v4l.pm:97 harddrake/v4l.pm:285 harddrake/v4l.pm:337
 #, c-format
 msgid "Unknown|Generic"
-msgstr "Ukjent|Generisk"
+msgstr "Ukjent/generell"
 
 #: harddrake/v4l.pm:130
 #, c-format
 msgid "Unknown|CPH05X (bt878) [many vendors]"
-msgstr "Ukjent|CPH05X (bt878) [mange leverandører]"
+msgstr "Ukjent|CPH05X (bt878) (mange merker)"
 
 #: harddrake/v4l.pm:131
 #, c-format
 msgid "Unknown|CPH06X (bt878) [many vendors]"
-msgstr "Ukjent|CPH06X (bt878) [mange leverandører]"
+msgstr "Ukjent|CPH06X (bt878) (mange merker)"
 
 #: harddrake/v4l.pm:475
 #, c-format
@@ -3391,10 +3380,9 @@ msgid ""
 "If your card is misdetected, you can force the right tuner and card types "
 "here. Just select your tv card parameters if needed."
 msgstr ""
-"bttv-modulet i GNU/Linux-kjernen klarer automatisk å oppdage de fleste "
-"parametrene for moderne TV-kort. Dersom kortet ditt er feiloppdaget, kan du "
-"spesifisere den korrekte mottager- og kort-typen her. Velg TV-kortets "
-"parametre om nødvendig."
+"For de fleste moderne fjernsynskort vil bttv-modulet i GNU/Linux-kjerna "
+"automatisk finne de rette parametrene.\n"
+"Hvis ikke dette går, kan du selv velge rett mottaker og korttype her."
 
 #: harddrake/v4l.pm:478
 #, c-format
@@ -3404,7 +3392,7 @@ msgstr "Kortmodell:"
 #: harddrake/v4l.pm:479
 #, c-format
 msgid "Tuner type:"
-msgstr "Mottagertype:"
+msgstr "Mottakertype:"
 
 #: interactive.pm:128 interactive.pm:549 interactive/curses.pm:263
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
@@ -3412,7 +3400,7 @@ msgstr "Mottagertype:"
 #: ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
 #, c-format
 msgid "Ok"
-msgstr "Ok"
+msgstr "OK"
 
 #: interactive.pm:228 modules/interactive.pm:72 ugtk2.pm:811 wizards.pm:156
 #, c-format
@@ -3427,7 +3415,7 @@ msgstr "Nei"
 #: interactive.pm:262
 #, c-format
 msgid "Choose a file"
-msgstr "Velg en fil"
+msgstr "Velg fil"
 
 #: interactive.pm:387 interactive/gtk.pm:453
 #, c-format
@@ -3437,7 +3425,7 @@ msgstr "Legg til"
 #: interactive.pm:387 interactive/gtk.pm:453
 #, c-format
 msgid "Modify"
-msgstr "Modifiser"
+msgstr "Endre"
 
 #: interactive.pm:549 interactive/curses.pm:263 ugtk2.pm:519
 #, c-format
@@ -3457,32 +3445,32 @@ msgstr "Ingen fil valgt"
 #: interactive/curses.pm:560 ugtk2.pm:876
 #, c-format
 msgid "You have chosen a directory, not a file"
-msgstr "Du har valgt en katalog, ikke en fil"
+msgstr "Du har valgt en mappe og ikke en fil."
 
 #: interactive/curses.pm:562 ugtk2.pm:878
 #, c-format
 msgid "No such directory"
-msgstr "Ingen slik katalog"
+msgstr "Mappa finnes ikke"
 
 #: interactive/curses.pm:562 ugtk2.pm:878
 #, c-format
 msgid "No such file"
-msgstr "Ingen slik fil"
+msgstr "Fila finnes ikke"
 
 #: interactive/gtk.pm:580
 #, c-format
 msgid "Beware, Caps Lock is enabled"
-msgstr "Obs! «Caps Lock» er på"
+msgstr "Obs! «Caps Lock» er på."
 
 #: interactive/stdio.pm:29 interactive/stdio.pm:154
 #, c-format
 msgid "Bad choice, try again\n"
-msgstr "Ugyldig valg, prøv igjen\n"
+msgstr "Ugyldig valg. Prøv på nytt.\n"
 
 #: interactive/stdio.pm:30 interactive/stdio.pm:155
 #, c-format
 msgid "Your choice? (default %s) "
-msgstr "Ditt valg? (standard %s) "
+msgstr "Valg? (Standard: «%s».) "
 
 #: interactive/stdio.pm:54
 #, c-format
@@ -3496,32 +3484,32 @@ msgstr ""
 #: interactive/stdio.pm:70
 #, c-format
 msgid "Your choice? (0/1, default `%s') "
-msgstr "Ditt valg? (0/1, standard `%s') "
+msgstr "Valg? («0» eller «1». Standard: «%s».) "
 
 #: interactive/stdio.pm:97
 #, c-format
 msgid "Button `%s': %s"
-msgstr "Valg: `%s': %s"
+msgstr "Knapp «%s»: %s"
 
 #: interactive/stdio.pm:98
 #, c-format
 msgid "Do you want to click on this button?"
-msgstr "Ønsker du å klikke på denne knappen? "
+msgstr "Vil du trykke på knappen?"
 
 #: interactive/stdio.pm:110
 #, c-format
 msgid "Your choice? (default `%s'%s) "
-msgstr "Ditt valg? (standard `%s'%s) "
+msgstr "Valg? (Standard: «%s»%s) "
 
 #: interactive/stdio.pm:110
 #, c-format
 msgid " enter `void' for void entry"
-msgstr " skriv `void' for tomt felt"
+msgstr "skriv inn «void» for tomt felt"
 
 #: interactive/stdio.pm:128
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
-msgstr "=> Det er mange ting å velge fra (%s).\n"
+msgstr "Det er mange ting å velge fra (%s).\n"
 
 #: interactive/stdio.pm:131
 #, c-format
@@ -3530,9 +3518,8 @@ msgid ""
 "or just hit Enter to proceed.\n"
 "Your choice? "
 msgstr ""
-"Velg det første nummeret av 10-rekke du ønsker å redigere,\n"
-"eller bare trykk Enter for å fortsette.\n"
-"Ditt valg? "
+"Velg det første tallet du ønsker å endre, eller trykk «Enter» for å fortsette.\n"
+"Velg: "
 
 #: interactive/stdio.pm:144
 #, c-format
@@ -3540,13 +3527,13 @@ msgid ""
 "=> Notice, a label changed:\n"
 "%s"
 msgstr ""
-"=> Merk, en etikett ble endret:\n"
+"Merk: Et volumnavn er endra:\n"
 "%s"
 
 #: interactive/stdio.pm:151
 #, c-format
 msgid "Re-submit"
-msgstr "Re-submit"
+msgstr "Send inn på nytt"
 
 #. -PO: the string "default:LTR" can be translated *ONLY* as "default:LTR"
 #. -PO: or as "default:RTL", depending if your language is written from
@@ -3564,7 +3551,7 @@ msgstr "Andorra"
 #: lang.pm:212 timezone.pm:226
 #, c-format
 msgid "United Arab Emirates"
-msgstr "Forente Arabiske Emirater"
+msgstr "De Forente Arabiske Emirater"
 
 #: lang.pm:213
 #, c-format
@@ -3594,7 +3581,7 @@ msgstr "Armenia"
 #: lang.pm:218
 #, c-format
 msgid "Netherlands Antilles"
-msgstr "Nederlanske Atiller"
+msgstr "De nederlandske Antillane"
 
 #: lang.pm:219
 #, c-format
@@ -3634,12 +3621,12 @@ msgstr "Aruba"
 #: lang.pm:226
 #, c-format
 msgid "Azerbaijan"
-msgstr "Azerbaijan"
+msgstr "Aserbajdsjan"
 
 #: lang.pm:227
 #, c-format
 msgid "Bosnia and Herzegovina"
-msgstr "Bosnia og Herzegovina"
+msgstr "Bosnia-Hercegovina"
 
 #: lang.pm:228
 #, c-format
@@ -3689,7 +3676,7 @@ msgstr "Bermuda"
 #: lang.pm:237
 #, c-format
 msgid "Brunei Darussalam"
-msgstr "Brunei Darussalam"
+msgstr "Brunei"
 
 #: lang.pm:238
 #, c-format
@@ -3739,12 +3726,12 @@ msgstr "Canada"
 #: lang.pm:247
 #, c-format
 msgid "Cocos (Keeling) Islands"
-msgstr "Kokos-øyene (Keeling)"
+msgstr "Kokosøyene"
 
 #: lang.pm:248
 #, c-format
 msgid "Congo (Kinshasa)"
-msgstr "Kongo (Kinshasa)"
+msgstr "Kongo"
 
 #: lang.pm:249
 #, c-format
@@ -3754,7 +3741,7 @@ msgstr "Den sentralafrikanske republikk"
 #: lang.pm:250
 #, c-format
 msgid "Congo (Brazzaville)"
-msgstr "Kongo (Brazzaville)"
+msgstr "Kongo-Brazzaville"
 
 #: lang.pm:251 mirror.pm:39 timezone.pm:255
 #, c-format
@@ -3764,12 +3751,12 @@ msgstr "Sveits"
 #: lang.pm:252
 #, c-format
 msgid "Cote d'Ivoire"
-msgstr "Cote d'Ivoire"
+msgstr "Elfenbenskysten"
 
 #: lang.pm:253
 #, c-format
 msgid "Cook Islands"
-msgstr "Cook-øyene"
+msgstr "Cookøyene"
 
 #: lang.pm:254 timezone.pm:273
 #, c-format
@@ -3799,7 +3786,7 @@ msgstr "Costa Rica"
 #: lang.pm:259
 #, c-format
 msgid "Serbia & Montenegro"
-msgstr "Serbia & Montenegro"
+msgstr "Serbia og Montenegro"
 
 #: lang.pm:260
 #, c-format
@@ -3814,7 +3801,7 @@ msgstr "Kapp Verde"
 #: lang.pm:262
 #, c-format
 msgid "Christmas Island"
-msgstr "Juleøyene"
+msgstr "Christmasøya"
 
 #: lang.pm:263
 #, c-format
@@ -3824,7 +3811,7 @@ msgstr "Kypros"
 #: lang.pm:264 mirror.pm:17 timezone.pm:233
 #, c-format
 msgid "Czech Republic"
-msgstr "Den Tsjekkiske republikk"
+msgstr "Tsjekkia"
 
 #: lang.pm:265 mirror.pm:22 timezone.pm:238
 #, c-format
@@ -3844,12 +3831,12 @@ msgstr "Danmark"
 #: lang.pm:268
 #, c-format
 msgid "Dominica"
-msgstr "Dominika"
+msgstr "Dominica"
 
 #: lang.pm:269
 #, c-format
 msgid "Dominican Republic"
-msgstr "Dominikanske republikk"
+msgstr "Den dominikanske republikken"
 
 #: lang.pm:270
 #, c-format
@@ -3859,7 +3846,7 @@ msgstr "Algerie"
 #: lang.pm:271
 #, c-format
 msgid "Ecuador"
-msgstr "Ekvador"
+msgstr "Ecuador"
 
 #: lang.pm:272 mirror.pm:19 timezone.pm:235
 #, c-format
@@ -3904,17 +3891,17 @@ msgstr "Fiji"
 #: lang.pm:280
 #, c-format
 msgid "Falkland Islands (Malvinas)"
-msgstr "Falklandsøyene (Malvinas)"
+msgstr "Falklandsøyene"
 
 #: lang.pm:281
 #, c-format
 msgid "Micronesia"
-msgstr "Mikronesia"
+msgstr "Mikronesiaføderasjonen"
 
 #: lang.pm:282
 #, c-format
 msgid "Faroe Islands"
-msgstr "Faro-øyene"
+msgstr "Færøyane"
 
 #: lang.pm:283 mirror.pm:21 timezone.pm:237
 #, c-format
@@ -3929,7 +3916,7 @@ msgstr "Gabon"
 #: lang.pm:285 timezone.pm:257
 #, c-format
 msgid "United Kingdom"
-msgstr "United Kingdom"
+msgstr "Storbritannia"
 
 #: lang.pm:286
 #, c-format
@@ -3944,7 +3931,7 @@ msgstr "Georgia"
 #: lang.pm:288
 #, c-format
 msgid "French Guiana"
-msgstr "French Guiana"
+msgstr "Fransk Guyana"
 
 #: lang.pm:289
 #, c-format
@@ -3974,12 +3961,12 @@ msgstr "Guinea"
 #: lang.pm:294
 #, c-format
 msgid "Guadeloupe"
-msgstr "Guadelopa"
+msgstr "Guadeloupe"
 
 #: lang.pm:295
 #, c-format
 msgid "Equatorial Guinea"
-msgstr "Ekvatorisk Guinea"
+msgstr "Ekvatorial-Guinea"
 
 #: lang.pm:296 mirror.pm:23 timezone.pm:239
 #, c-format
@@ -4014,7 +4001,7 @@ msgstr "Guyana"
 #: lang.pm:302
 #, c-format
 msgid "Hong Kong SAR (China)"
-msgstr "Hong Kong SAR (Kina)"
+msgstr "Kina (Hongkong)"
 
 #: lang.pm:303
 #, c-format
@@ -4064,7 +4051,7 @@ msgstr "India"
 #: lang.pm:312
 #, c-format
 msgid "British Indian Ocean Territory"
-msgstr "Britisk Indisk Hav-Territorie"
+msgstr "Det britiske området i Indiahavet"
 
 #: lang.pm:313
 #, c-format
@@ -4089,7 +4076,7 @@ msgstr "Italia"
 #: lang.pm:317
 #, c-format
 msgid "Jamaica"
-msgstr "Jamaika"
+msgstr "Jamaica"
 
 #: lang.pm:318
 #, c-format
@@ -4109,12 +4096,12 @@ msgstr "Kenya"
 #: lang.pm:321
 #, c-format
 msgid "Kyrgyzstan"
-msgstr "Kyrgyzstan"
+msgstr "Kirgisistan"
 
 #: lang.pm:322
 #, c-format
 msgid "Cambodia"
-msgstr "Kambodia"
+msgstr "Kambodsja"
 
 #: lang.pm:323
 #, c-format
@@ -4124,22 +4111,22 @@ msgstr "Kiribati"
 #: lang.pm:324
 #, c-format
 msgid "Comoros"
-msgstr "Comoros"
+msgstr "Komorane"
 
 #: lang.pm:325
 #, c-format
 msgid "Saint Kitts and Nevis"
-msgstr "Saint Kitts and Nevis"
+msgstr "St. Kitts og Nevis"
 
 #: lang.pm:326
 #, c-format
 msgid "Korea (North)"
-msgstr "Nordkorea"
+msgstr "Nord-Korea"
 
 #: lang.pm:327 timezone.pm:219
 #, c-format
 msgid "Korea"
-msgstr "Korea"
+msgstr "Sør-Korea"
 
 #: lang.pm:328
 #, c-format
@@ -4149,12 +4136,12 @@ msgstr "Kuwait"
 #: lang.pm:329
 #, c-format
 msgid "Cayman Islands"
-msgstr "Cayman Islands"
+msgstr "Caymanøyane"
 
 #: lang.pm:330
 #, c-format
 msgid "Kazakhstan"
-msgstr "Kazakhstan"
+msgstr "Kasakhstan"
 
 #: lang.pm:331
 #, c-format
@@ -4164,12 +4151,12 @@ msgstr "Laos"
 #: lang.pm:332
 #, c-format
 msgid "Lebanon"
-msgstr "Lebanon"
+msgstr "Libanon"
 
 #: lang.pm:333
 #, c-format
 msgid "Saint Lucia"
-msgstr "Saint Lucia"
+msgstr "St. Lucia"
 
 #: lang.pm:334
 #, c-format
@@ -4209,7 +4196,7 @@ msgstr "Latvia"
 #: lang.pm:341
 #, c-format
 msgid "Libya"
-msgstr "Liberia"
+msgstr "Libya"
 
 #: lang.pm:342
 #, c-format
@@ -4259,7 +4246,7 @@ msgstr "Mongolia"
 #: lang.pm:351
 #, c-format
 msgid "Northern Mariana Islands"
-msgstr "Nordre Mariana-øyene"
+msgstr "Nord-Marianane"
 
 #: lang.pm:352
 #, c-format
@@ -4309,7 +4296,7 @@ msgstr "Malaysia"
 #: lang.pm:361
 #, c-format
 msgid "Mozambique"
-msgstr "Mozambique"
+msgstr "Mosambik"
 
 #: lang.pm:362
 #, c-format
@@ -4319,7 +4306,7 @@ msgstr "Namibia"
 #: lang.pm:363
 #, c-format
 msgid "New Caledonia"
-msgstr "New Caledonia"
+msgstr "Ny-Caledonia"
 
 #: lang.pm:364
 #, c-format
@@ -4389,7 +4376,7 @@ msgstr "Peru"
 #: lang.pm:377
 #, c-format
 msgid "French Polynesia"
-msgstr "French Polynesia"
+msgstr "Fransk Polynesia"
 
 #: lang.pm:378
 #, c-format
@@ -4414,7 +4401,7 @@ msgstr "Polen"
 #: lang.pm:382
 #, c-format
 msgid "Saint Pierre and Miquelon"
-msgstr "Saint Pierre og Miquelon"
+msgstr "Saint-Pierre-et-Miquelon"
 
 #: lang.pm:383
 #, c-format
@@ -4454,7 +4441,7 @@ msgstr "Qatar"
 #: lang.pm:390
 #, c-format
 msgid "Reunion"
-msgstr "Reunion"
+msgstr "Réunion"
 
 #: lang.pm:391 timezone.pm:249
 #, c-format
@@ -4479,7 +4466,7 @@ msgstr "Saudi Arabia"
 #: lang.pm:395
 #, c-format
 msgid "Solomon Islands"
-msgstr "Solomon-øyene"
+msgstr "Salomonøyane"
 
 #: lang.pm:396
 #, c-format
@@ -4504,7 +4491,7 @@ msgstr "Singapore"
 #: lang.pm:400
 #, c-format
 msgid "Saint Helena"
-msgstr "Sankt Helena"
+msgstr "St. Helena"
 
 #: lang.pm:401 timezone.pm:252
 #, c-format
@@ -4514,7 +4501,7 @@ msgstr "Slovenia"
 #: lang.pm:402
 #, c-format
 msgid "Svalbard and Jan Mayen Islands"
-msgstr "Svalbard og Jan Mayen-øyene"
+msgstr "Svalbard og Jan Mayen"
 
 #: lang.pm:403 mirror.pm:35 timezone.pm:251
 #, c-format
@@ -4544,12 +4531,12 @@ msgstr "Somalia"
 #: lang.pm:408
 #, c-format
 msgid "Suriname"
-msgstr "Suriname"
+msgstr "Surinam"
 
 #: lang.pm:409
 #, c-format
 msgid "Sao Tome and Principe"
-msgstr "Sao Tome and Principe"
+msgstr "São Tomé og Príncipe"
 
 #: lang.pm:410
 #, c-format
@@ -4574,12 +4561,12 @@ msgstr "Turks og Caicos-øyene"
 #: lang.pm:414
 #, c-format
 msgid "Chad"
-msgstr "Chad"
+msgstr "Tsjad"
 
 #: lang.pm:415
 #, c-format
 msgid "French Southern Territories"
-msgstr "Franske Sør-territorier"
+msgstr "Franske sørlige territorium"
 
 #: lang.pm:416
 #, c-format
@@ -4594,7 +4581,7 @@ msgstr "Thailand"
 #: lang.pm:418
 #, c-format
 msgid "Tajikistan"
-msgstr "Tajikistan"
+msgstr "Tadsjikistan"
 
 #: lang.pm:419
 #, c-format
@@ -4674,17 +4661,17 @@ msgstr "Uruguay"
 #: lang.pm:434
 #, c-format
 msgid "Uzbekistan"
-msgstr "Uzbekistan"
+msgstr "Usbekistan"
 
 #: lang.pm:435
 #, c-format
 msgid "Vatican"
-msgstr "Vatikanstatene"
+msgstr "Vatikanstaten"
 
 #: lang.pm:436
 #, c-format
 msgid "Saint Vincent and the Grenadines"
-msgstr "Sankt Vincent og Grenadiene"
+msgstr "St. Vincent og Grenadinene"
 
 #: lang.pm:437
 #, c-format
@@ -4694,7 +4681,7 @@ msgstr "Venezuela"
 #: lang.pm:438
 #, c-format
 msgid "Virgin Islands (British)"
-msgstr "Jomfruøyene (Britisk)"
+msgstr "Jomfruøyene (Storbritannia)"
 
 #: lang.pm:439
 #, c-format
@@ -4714,7 +4701,7 @@ msgstr "Vanuatu"
 #: lang.pm:442
 #, c-format
 msgid "Wallis and Futuna"
-msgstr "Wallis og Futuna"
+msgstr "Wallis- og Futunaøyene"
 
 #: lang.pm:443
 #, c-format
@@ -4724,7 +4711,7 @@ msgstr "Samoa"
 #: lang.pm:444
 #, c-format
 msgid "Yemen"
-msgstr "Yemen"
+msgstr "Jemen"
 
 #: lang.pm:445
 #, c-format
@@ -4754,22 +4741,22 @@ msgstr "Velkommen til %s"
 #: lvm.pm:84
 #, c-format
 msgid "Moving used physical extents to other physical volumes failed"
-msgstr "Flytting av brukte fysiske områder til andre fysiske volum mislykket"
+msgstr "Feil ved flytting av brukte fysiske områder til andre fysiske volumer."
 
 #: lvm.pm:141
 #, c-format
 msgid "Physical volume %s is still in use"
-msgstr "Fysisk volum %s er fortsatt i bruk"
+msgstr "Det fysiske volumet «%s» er fremdeles i bruk."
 
 #: lvm.pm:151
 #, c-format
 msgid "Remove the logical volumes first\n"
-msgstr "Fjern de logiske partisjonene først\n"
+msgstr "Du må først fjerne det logiske dataområdet.\n"
 
 #: lvm.pm:184
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
-msgstr "Oppstartslasteren kan ikke håndtere /boot på flere fysiske volum"
+msgstr "Oppstartslasteren kan ikke håndtere «/boot» på flere fysiske volumer."
 
 #: messages.pm:11
 #, c-format
@@ -5105,7 +5092,7 @@ msgid ""
 "may be applicable to you, check your local laws."
 msgstr ""
 "Advarsel: Fri programvare er ikke nødvendigvis patentfri, og inkludert\n"
-"programvare kan være dekket av patenter i landet ditt.\n"
+"programvare kan være dekket av patenter i hjemlandet ditt.\n"
 "For eksempel så kan det være at MP3-dekodere krever en lisens for bruk\n"
 "(se http://www.mp3licensing.com for flere detaljer). Sjekk de lokale lovene "
 "hvis du er usikker på om\n"
@@ -5227,23 +5214,22 @@ msgid ""
 "install chapter of the Official Mandriva Linux User's Guide."
 msgstr ""
 "Gratulerer, installasjonen er fullført.\n"
-"Fjern oppstartsmediet og trykk enter for å starte på nytt.\n"
+"Fjern oppstartsmediet og trykk «Enter» for å starte på nytt.\n"
 "\n"
 "\n"
-"For informasjon om fikser som er tilgjengelige for denne utgaven av Mandriva "
-"Linux, sjekk errataen tilgjengelig fra:\n"
+"For informasjon om rettelser som er tilgjengelige for denne utgaven av Mandriva "
+"Linux:\n"
 "\n"
 "\n"
 "%s\n"
 "\n"
 "\n"
-"Informasjon om oppsett av systemet ditt finnes i kapitlene for "
-"etterinstallasjon i den offisielle brukerguiden for Mandriva."
+"Mer informasjon om oppsett av systemet ditt finnes i den offisielle brukerveiledninga for Mandriva Linux."
 
 #: modules/interactive.pm:19
 #, c-format
 msgid "This driver has no configuration parameter!"
-msgstr "Denne driveren har ingen oppsettsparametre!"
+msgstr "Driveren har ingen oppsettsparametre."
 
 #: modules/interactive.pm:22
 #, c-format
@@ -5253,59 +5239,59 @@ msgstr "Moduloppsett"
 #: modules/interactive.pm:22
 #, c-format
 msgid "You can configure each parameter of the module here."
-msgstr "Du kan sette opp hver parameter til modulen her."
+msgstr "Du kan velge modulparametre her."
 
 #: modules/interactive.pm:64
 #, c-format
 msgid "Found %s interfaces"
-msgstr "Fant %s grensesnitt"
+msgstr "Fant %s-grensesnitt"
 
 #: modules/interactive.pm:65
 #, c-format
 msgid "Do you have another one?"
-msgstr "Har du enda ett?"
+msgstr "Har du flere?"
 
 #: modules/interactive.pm:66
 #, c-format
 msgid "Do you have any %s interfaces?"
-msgstr "Har du noen %s-grensesnitt?"
+msgstr "Har du flere %s-grensesnitt?"
 
 #: modules/interactive.pm:72
 #, c-format
 msgid "See hardware info"
-msgstr "Se maskinvareinfo"
+msgstr "Se maskinvareinformasjon"
 
 #: modules/interactive.pm:83
 #, c-format
 msgid "Installing driver for USB controller"
-msgstr "Installerer driver for USB-kontroller"
+msgstr "Installerer driveren for USB-kontrolleren"
 
 #: modules/interactive.pm:84
 #, c-format
 msgid "Installing driver for firewire controller %s"
-msgstr "Installerer driver for firewire-kontroller %s"
+msgstr "Installerer driveren for firewire-kontrolleren «%s»"
 
 #: modules/interactive.pm:85
 #, c-format
 msgid "Installing driver for hard drive controller %s"
-msgstr "Installerer driver for harddisk-kontroller %s"
+msgstr "Installerer driveren for harddisk-kontrolleren «%s»"
 
 #: modules/interactive.pm:86
 #, c-format
 msgid "Installing driver for ethernet controller %s"
-msgstr "Installerer driver for Ethernet-kontroller %s"
+msgstr "Installerer driveren til nettverkskontrolleren «%s»"
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
 #: modules/interactive.pm:97
 #, c-format
 msgid "Installing driver for %s card %s"
-msgstr "Installerer driver for %s kort %s"
+msgstr "Installerer driveren til %s-kortet «%s»"
 
 #: modules/interactive.pm:100
 #, c-format
 msgid "Configuring Hardware"
-msgstr "Oppsatt maskinvare"
+msgstr "Sett opp maskinvare"
 
 #: modules/interactive.pm:111
 #, c-format
@@ -5313,8 +5299,8 @@ msgid ""
 "You may now provide options to module %s.\n"
 "Note that any address should be entered with the prefix 0x like '0x123'"
 msgstr ""
-"Du kan nå gi valg til modul %s.\n"
-"Merk at addresser bør gis med prefikset 0x som i '0x123'"
+"Du kan nå velge parametre for modulet «%s».\n"
+"Merk at alle adresser må skrives med prefikset «0x», som «0x123»."
 
 #: modules/interactive.pm:117
 #, c-format
@@ -5323,20 +5309,20 @@ msgid ""
 "Options are in format ``name=value name2=value2 ...''.\n"
 "For instance, ``io=0x300 irq=7''"
 msgstr ""
-"Du kan nå oppgi valg for modul %s.\n"
-"Instillingene er i format \"navn=verdi navn2=verdi2  … \".\n"
-"F.eks., \"io=0x300 irq=7\""
+"Du kan nå velge parametre for modulet «%s».\n"
+"Parametrene er på formatet «navn1=verdi1 navn2=verdi2 …».\n"
+"Eksempel: «io=0x300 irq=7»."
 
 #: modules/interactive.pm:119
 #, c-format
 msgid "Module options:"
-msgstr "Modulinstillinger:"
+msgstr "Modulvalg:"
 
 #. -PO: the %s is the driver type (scsi, network, sound,...)
 #: modules/interactive.pm:132
 #, c-format
 msgid "Which %s driver should I try?"
-msgstr "Hvilken %s-driver skal jeg prøve?"
+msgstr "Hvilken %s-driver vil du bruke?"
 
 #: modules/interactive.pm:141
 #, c-format
@@ -5349,23 +5335,21 @@ msgid ""
 "should\n"
 "not cause any damage."
 msgstr ""
-"I noen tilfeller trenger %s-driveren å ha ekstra informasjon for å virke\n"
-"ordentlig, selv om den normalt virker fint foruten. Ønsker du å spesifisere "
-"ekstra\n"
-"instillinger for den eller tillate driveren å sondere maskinen din for\n"
-"informasjonen den trenger? Av og til kan sondering fryse maskinen, men "
-"burde\n"
-"ikke forårsake noen skader."
+"I noen tilfeller trenger %s-driveren ekstra informasjon for å fungere riktig,\n"
+"selv om den vanligvis vil fungere uten. Vil du skrive inn ekstravalg for\n"
+"driveren nå, eller heller la den prøve å finne ut nødvendig informasjon "
+"selv.\n"
+"Sistnevnte kan av og til krasje maskina, men vil ikke gjøre fysisk skade."
 
 #: modules/interactive.pm:145
 #, c-format
 msgid "Autoprobe"
-msgstr "Automatisk sondering"
+msgstr "Automatisk søk"
 
 #: modules/interactive.pm:145
 #, c-format
 msgid "Specify options"
-msgstr "Spesifiser instillinger"
+msgstr "Endre oppsett"
 
 #: modules/interactive.pm:157
 #, c-format
@@ -5373,8 +5357,8 @@ msgid ""
 "Loading module %s failed.\n"
 "Do you want to try again with other parameters?"
 msgstr ""
-"Lasting av modul %s feilet.\n"
-"Ønsker du å prøve igjen med andre parametere?"
+"Klarte ikke å laste modulet «%s».\n"
+"Vil du prøve på nytt med andre parametre?"
 
 #: mygtk2.pm:1538 mygtk2.pm:1539
 #, c-format
@@ -5394,7 +5378,7 @@ msgstr "Passordet ser ut til å være sikkert"
 #: partition_table.pm:411
 #, c-format
 msgid "mount failed: "
-msgstr "montering mislykket: "
+msgstr "Feil ved montering: "
 
 #: partition_table.pm:523
 #, c-format
@@ -5408,8 +5392,8 @@ msgid ""
 "The only solution is to move your primary partitions to have the hole next "
 "to the extended partitions."
 msgstr ""
-"Du har et hull i partisjonstabellen din, men jeg kan ikke bruke det.\n"
-"Den eneste løsningen er å flytte primærpartisjonene dine for å ha hullet ved "
+"Du har et hull i partisjonstabellen din, men dette kan ikke brukes.\n"
+"Den eneste løsningen er å flytte primærpartisjonene slik at de har hullet ved "
 "siden av de utvidede partisjonene."
 
 #: partition_table/raw.pm:287
@@ -5420,9 +5404,9 @@ msgid ""
 "It means writing anything on the disk will end up with random, corrupted "
 "data."
 msgstr ""
-"Noe som ikke er bra skjer med disken din. \n"
-"En test for å sjekke dataintegriteten var mislykket. \n"
-"Dette betyr at å skrive noe til disken vil ende opp med tilfeldige,\n"
+"Noe er galt med disken din.\n"
+"En test av dataintegriteten påviste feil.\n"
+"Dette vil si at alt som blir skrevet på disken blir lagra som tilfeldig, "
 "ubrukelige data."
 
 #: pkgs.pm:252 pkgs.pm:255 pkgs.pm:264
@@ -5433,24 +5417,24 @@ msgstr "Fjerning av ubrukte pakker"
 #: pkgs.pm:252
 #, c-format
 msgid "Finding unused hardware packages..."
-msgstr "Finner ubrukte maskinvarepakker … "
+msgstr "Finner ubrukte maskinvarepakker …"
 
 #: pkgs.pm:255
 #, c-format
 msgid "Finding unused localization packages..."
-msgstr "Finner ubrukte oversettelsespakker … "
+msgstr "Finner ubrukte språkpakker …"
 
 #: pkgs.pm:265
 #, c-format
 msgid ""
 "We have detected that some packages are not needed for your system "
 "configuration."
-msgstr "Vi har funnet ut at noen av pakkene ikke trengs for systemoppsettet ditt."
+msgstr "Noen av pakkene er ikke nødvendige for dette systemet."
 
 #: pkgs.pm:266
 #, c-format
 msgid "We will remove the following packages, unless you choose otherwise:"
-msgstr "Vi vil fjerne de følgende pakkene hvis du ikke velger motsatt:"
+msgstr "Disse pakkane blir fjerna, med mindre du velger noe annet:"
 
 #: pkgs.pm:269 pkgs.pm:270
 #, c-format
@@ -5460,37 +5444,37 @@ msgstr "Ubrukt maskinvarestøtte"
 #: pkgs.pm:273 pkgs.pm:274
 #, c-format
 msgid "Unused localization"
-msgstr "Ubrukt oversettelse"
+msgstr "Ubrukt språkpakke"
 
 #: raid.pm:42
 #, c-format
 msgid "Can not add a partition to _formatted_ RAID %s"
-msgstr "Kan ikke legge til en partisjon til _formatert_ RAID %s"
+msgstr "Kan ikke legge partisjon til _formatert_ RAID %s"
 
 #: raid.pm:161
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
-msgstr "Ikke nok partisjoner for RAID-nivå %d\n"
+msgstr "Ikke nok partisjoner for RAID nivå %d\n"
 
 #: scanner.pm:96
 #, c-format
 msgid "Could not create directory /usr/share/sane/firmware!"
-msgstr "Kunne ikke opprette katalog /usr/share/sane/firmware!"
+msgstr "Klarte ikke opprette mappa «/usr/share/sane/firmware»."
 
 #: scanner.pm:107
 #, c-format
 msgid "Could not create link /usr/share/sane/%s!"
-msgstr "Kunne ikke opprette lenke /usr/share/sane/%s!"
+msgstr "Klarte ikke lage lenka «/usr/share/sane/%s»."
 
 #: scanner.pm:114
 #, c-format
 msgid "Could not copy firmware file %s to /usr/share/sane/firmware!"
-msgstr "Kunne ikke kopiere firmware-fil %s til /usr/share/sane/firmware!"
+msgstr "Klarte ikke å kopiere fastvarefila «%s» til «/usr/share/sane/firmware»."
 
 #: scanner.pm:121
 #, c-format
 msgid "Could not set permissions of firmware file %s!"
-msgstr "Kunne ikke sette rettigheter på firmware-fil %s!"
+msgstr "Klarte ikke å velge rettigheter for fastvarefila «%s»."
 
 #: scanner.pm:200
 #, c-format
@@ -5500,32 +5484,32 @@ msgstr "Scannerdrake"
 #: scanner.pm:201
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
-msgstr "Kunne ikke installere pakkene som trengs for å dele din(e) skanner(e)."
+msgstr "Klarte ikke å installere pakkene for deling av skanner(e)."
 
 #: scanner.pm:202
 #, c-format
 msgid "Your scanner(s) will not be available for non-root users."
-msgstr "Din(e) skanner(e) vil ikke være tilgjengelig(e) for brukere som ikke er root."
+msgstr "Skanneren/-ene vil ikke være tilgjengelige for andre brukere enn «root»."
 
 #: security/help.pm:11
 #, c-format
 msgid "Accept bogus IPv4 error messages."
-msgstr "Tillat ugyldige IPv4-feilmeldinger."
+msgstr "Godta ugyldige IPv4-feilmeldinger."
 
 #: security/help.pm:13
 #, c-format
 msgid "Accept broadcasted icmp echo."
-msgstr "Tillat kringkastet icmp-ekko."
+msgstr "Godta kringkasta icmp-ekko."
 
 #: security/help.pm:15
 #, c-format
 msgid "Accept icmp echo."
-msgstr "Tillat icmp-ekko."
+msgstr "Godta icmp-ekko."
 
 #: security/help.pm:17
 #, c-format
 msgid "Allow autologin."
-msgstr "Tillat autoinnlogging."
+msgstr "Godta autoinnlogging."
 
 #. -PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
 #: security/help.pm:21
@@ -5537,31 +5521,31 @@ msgid ""
 "\n"
 "Else only /etc/issue is allowed."
 msgstr ""
-"Hvis satt til \"ALLE\", kan «/etc/issue» og «/etc/issue.net» eksistere.\n"
+"Hvis satt til «ALLE», kan «/etc/issue» og «/etc/issue.net» eksistere.\n"
 "\n"
-"Hvis satt til \"Ingen\" kan ingen av de eksistere.\n"
+"Hvis satt til «Ingen» kan ingen av de eksistere.\n"
 "\n"
-"Elles kan bare /etc/issue eksistere."
+"Ellers kan bare «/etc/issue» eksistere."
 
 #: security/help.pm:27
 #, c-format
 msgid "Allow reboot by the console user."
-msgstr "Tillat omstart av konsollbruker."
+msgstr "Godta omstart av konsollbruker."
 
 #: security/help.pm:29
 #, c-format
 msgid "Allow remote root login."
-msgstr "Tillat root-innlogging over nett."
+msgstr "Godta «root»-innlogging utenfra."
 
 #: security/help.pm:31
 #, c-format
 msgid "Allow direct root login."
-msgstr "Tillat direkte root-innlogging."
+msgstr "Godta direkte «root»-innlogging."
 
 #: security/help.pm:33
 #, c-format
 msgid "Allow the list of users on the system on display managers (kdm and gdm)."
-msgstr "Tillat visning av brukere i innloggingshåndterer (kdm og gdm)."
+msgstr "Godta visning av brukere i innloggingshåndterer (kdm og gdm)."
 
 #: security/help.pm:35
 #, c-format
@@ -5571,10 +5555,10 @@ msgid ""
 "\n"
 "See pam_xauth(8) for more details.'"
 msgstr ""
-"Tillat skjermbildeeksportering fra\n"
-"root-bruker til andre brukere.\n"
+"Godta skjermbileteksportering fra\n"
+"«root»-bruker til andre brukere.\n"
 "\n"
-"Se  pam_xauth(8) for mer informasjon."
+"Se pam_xauth(8) for mer informasjon."
 
 #: security/help.pm:40
 #, c-format
@@ -5587,13 +5571,13 @@ msgid ""
 "\n"
 "- \"None\" (no connection)."
 msgstr ""
-"Tillat X-tilkoblinger:\n"
+"Godta X-tilkoblinger:\n"
 "\n"
-"- \"Alle \" (tillat alle tilkoblinger)\n"
+"– «Alle» (godta alle tilkoblinger)\n"
 "\n"
-"- \"Lokale\" (bare tillat tilkoblinger fra lokale maskiner)\n"
+"– «Lokale» (bare godta tilkoblinger fra lokale maskiner)\n"
 "\n"
-"- \"Ingen\" (ikke tillat noen tilkoblinger)."
+"– «Ingen» (ikke godta noen tilkoblinger)"
 
 #: security/help.pm:48
 #, c-format
@@ -5601,8 +5585,8 @@ msgid ""
 "The argument specifies if clients are authorized to connect\n"
 "to the X server from the network on the tcp port 6000 or not."
 msgstr ""
-"Dette argumentet spesifiserer om klienter er autentiserte til å koble\n"
-"til X-tjeneren fra nettverket på tcp-port 6000 eller ikke."
+"Argumentet angir om klienter får koble til X-tjeneren fra nettverket på TCP-"
+"port 6000."
 
 #. -PO: here "ALL", "Local" and "None" are values in a pull-down menu; translate them the same as they're
 #: security/help.pm:53
@@ -5620,16 +5604,16 @@ msgid ""
 "To authorize the services you need, use /etc/hosts.allow (see hosts.allow"
 "(5))."
 msgstr ""
-"Tillat:\n"
+"Godta:\n"
 "\n"
-"- Alle tjenester kontrollert av tcp_wrappers (se manualsida hosts.deny(5)) "
-"hvis satt til \"ALLE\".\n"
+"– Alle tjenester kontrollert av tcp_wrappers (se manualsida hosts.deny(5)) "
+"hvis satt til «ALLE».\n"
 "\n"
-"- Bare lokale hvis satt til \"Lokale\".\n"
+"– Bare lokale hvis satt til «Lokale».\n"
 "\n"
-"- Ingen hvis satt til Ingen.\n"
+"– Ingen hvis satt til «Ingen».\n"
 "\n"
-"Bruk /etc/hosts.allow (se hosts.allow (5)) for å tillate de tjenestene du "
+"Bruk /etc/hosts.allow (se hosts.allow (5)) for å godta de tjenestene du "
 "trenger."
 
 #: security/help.pm:63
@@ -5644,14 +5628,16 @@ msgid ""
 "add a service if it is present in the file during the installation of\n"
 "packages."
 msgstr ""
-"Hvis SERVER_LEVEL (eller SECURE_LEVEL hvis fraværende) er større enn 3\n"
-"i /etc/security/msec/security.conf, opprettes symlinken /etc/security/msec/"
-"server\n"
-"for å peke til /etc/security/msec/server.<SERVER_LEVEL>. \n"
-"/etc/security/msec/server brukes av chkconfig --add for å avgjøre om en\n"
-"tjeneste skal legges til hvis den er til stede i filen under "
-"installasjonenen\n"
-"av pakker."
+"Hvis SERVER_LEVEL (eller SECURE_LEVEL hvis SERVER_LEVEL mangler)\n"
+"er større enn 3 i «/etc/security/msec/security.conf», blir det laga en "
+"symbolsk\n"
+"lenke «/etc/security/msec/server» til «/etc/security/msec/server."
+"<SERVER_LEVEL>».\n"
+"\n"
+"Fila «/etc/security/msec/server» blir bruk av «chkconfig --add» til å avgjøre "
+"om\n"
+"e n tjeneste skal legges til når den finnes i en programpakke som blir "
+"installert."
 
 #: security/help.pm:72
 #, c-format
@@ -5661,16 +5647,16 @@ msgid ""
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
 msgstr ""
-"Slå på crontab og at for brukere.\n"
+"Slå på «crontab» og «at» for brukere.\n"
 "\n"
-"Legg til brukere som får tilgang i /etc/cron.allow og /etc/at.allow (se man "
-"at(1)\n"
+"Legg brukere som får tilgang til «/etc/cron.allow» og «/etc/at.allow» (se "
+"man at(1)\n"
 "og crontab(1))."
 
 #: security/help.pm:77
 #, c-format
 msgid "Enable syslog reports to console 12"
-msgstr "Slå på systemloggrapportar til konsoll 12."
+msgstr "Slå på systemloggrapporter til konsoll 12."
 
 #: security/help.pm:79
 #, c-format
@@ -5679,7 +5665,7 @@ msgid ""
 "\"%s\" is true, also reports to syslog."
 msgstr ""
 "Slå på beskyttelse mot navneoppslagforfalskning. Hvis\n"
-"\"%s\" er på, vil dette òg loggføres i systemloggen."
+"«%s» er på, vil dette også loggføres i systemloggen."
 
 #: security/help.pm:80
 #, c-format
@@ -5712,18 +5698,18 @@ msgid ""
 "Enable su only from members of the wheel group. If set to no, allows su from "
 "any user."
 msgstr ""
-"Aktiver su kun for medlemmer av wheel-gruppen. Hvis satt til nei, så "
-"tillates su fra alle brukere."
+"Bare godta «su» fra medlemmer i «wheel»-gruppa. Hvis satt til nei, kan «su» "
+"brukes av alle."
 
 #: security/help.pm:92
 #, c-format
 msgid "Use password to authenticate users."
-msgstr "Bruk passord for å autentisere brukere."
+msgstr "Bruk passord for brukerautentisering."
 
 #: security/help.pm:94
 #, c-format
 msgid "Activate ethernet cards promiscuity check."
-msgstr "Slå på løsaktighetskontroll for nettverkskort."
+msgstr "Slå på promiskuitetskontroll for nettverkskort."
 
 #: security/help.pm:96
 #, c-format
@@ -5738,38 +5724,34 @@ msgstr "Slå på sulogin(8) i enbrukermodus."
 #: security/help.pm:100
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
-msgstr "Legg til navnet som et unntak for håndteringen av passordforeldelse av msec."
+msgstr "Legg til navnet som et unntak til passordaldringa i msec."
 
 #: security/help.pm:102
 #, c-format
 msgid "Set password aging to \"max\" days and delay to change to \"inactive\"."
-msgstr ""
-"Sett passordaldring til maks dager og forsinkelsen for endring til \"inaktiv"
-"\"."
+msgstr "Sett passordaldring til «maks» dager og endre til «ikke i bruk»."
 
 #: security/help.pm:104
 #, c-format
 msgid "Set the password history length to prevent password reuse."
-msgstr "Setter passordhistorielengden for å hindre gjenbruk av passord."
+msgstr "Velg størrelse på passordlogg for å hindre gjenbruk av passord."
 
 #: security/help.pm:106
 #, c-format
 msgid ""
 "Set the password minimum length and minimum number of digit and minimum "
 "number of capitalized letters."
-msgstr ""
-"Sett minimum passordlengde, minimum antall sifre, og minimum antall store "
-"bokstaver."
+msgstr "Velg minstelengde på passord og minimum tall på siffer og store bokstaver."
 
 #: security/help.pm:108
 #, c-format
 msgid "Set the root's file mode creation mask."
-msgstr "Velg umask-modus for nye filer på rot."
+msgstr "Velg modus for nye filer («umask») til «root»."
 
 #: security/help.pm:109
 #, c-format
 msgid "if set to yes, check open ports."
-msgstr "hvis satt til ja, sjekker for åpne porter."
+msgstr "Kontroller åpne porter hvis satt til «ja»."
 
 #: security/help.pm:110
 #, c-format
@@ -5782,103 +5764,103 @@ msgid ""
 "\n"
 "- for users with the 0 id other than root."
 msgstr ""
-"Hvis satt til ja, sjekk etter:\n"
+"Kontroller følgende hvis satt til «ja»:\n"
 "\n"
-"- tomme passord,\n"
-"n \n"
-"- tomme passord i /etc/shadow\n"
+"– tomme passord\n"
 "\n"
-"- for brukere med 0-iden utenom root."
+"– ingen passord i «/etc/shadow»\n"
+"\n"
+"– for brukere med 0-ID utenom «root»"
 
 #: security/help.pm:117
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
-msgstr "hvis satt til ja, sjekk rettigheter på filer i brukerenes hjemmekatalog."
+msgstr "Kontroller tilgang til filer i hjememappe til brukere hvis satt til «ja»."
 
 #: security/help.pm:118
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
-msgstr "hvis satt til ja, sjekk om nettverksenhetene er i promiskuøst modus."
+msgstr "Kontroller om nettverksgrensesnitt er i promiskuitetsmodus hvis satt til «ja»."
 
 #: security/help.pm:119
 #, c-format
 msgid "if set to yes, run the daily security checks."
-msgstr "hvis satt til ja, kjør de daglige sikkerhetskontrollene."
+msgstr "Kjør daglige sikkerhetskontroller hvis satt til «ja»."
 
 #: security/help.pm:120
 #, c-format
 msgid "if set to yes, check additions/removals of sgid files."
-msgstr "hvis satt til ja, sjekk for opprettelse/fjerning av sgid filer."
+msgstr "Kontroller nye og fjerna sgid-filer hvis satt til «ja»."
 
 #: security/help.pm:121
 #, c-format
 msgid "if set to yes, check empty password in /etc/shadow."
-msgstr "hvis satt til ja, sjekk tomme passord i /etc/shadow."
+msgstr "Kontroller tomt passord i «/etc/shadow» hvis satt til «ja»."
 
 #: security/help.pm:122
 #, c-format
 msgid "if set to yes, verify checksum of the suid/sgid files."
-msgstr "hvis satt til ja. sjekk kontrollsum på suid/guid filer."
+msgstr "Kontroller kontrollsum i suid/sgid-filer hvis satt til «ja»."
 
 #: security/help.pm:123
 #, c-format
 msgid "if set to yes, check additions/removals of suid root files."
-msgstr "hvis satt til ja, sjekk for opprettelse/fjerning av suid root-filer."
+msgstr "Kontroller nye og fjerna suid-filer til «root» hvis satt til «ja»."
 
 #: security/help.pm:124
 #, c-format
 msgid "if set to yes, report unowned files."
-msgstr "hvis satt til ja, rapporter filer uten eier."
+msgstr "Rapporter eierløse filer hvis satt til «ja»."
 
 #: security/help.pm:125
 #, c-format
 msgid "if set to yes, check files/directories writable by everybody."
-msgstr "hvis satt til ja, sjekk filer eller kataloger som er skrivbare av alle."
+msgstr "Kontroller om filer og mapper er skrivbare for alle hvis satt til «ja»."
 
 #: security/help.pm:126
 #, c-format
 msgid "if set to yes, run chkrootkit checks."
-msgstr "hvis satt til ja, kjør chkrootkit-kontroller."
+msgstr "Kjør «chkrootkit»-kontroller hvis satt til «ja»."
 
 #: security/help.pm:127
 #, c-format
 msgid "if set, send the mail report to this email address else send it to root."
-msgstr "sender e-postrapport til denne adressen dersom satt, ellers til root."
+msgstr "Send rapport på e-post til denne adressa, eller til «root» hvis tom."
 
 #: security/help.pm:128
 #, c-format
 msgid "if set to yes, report check result by mail."
-msgstr "rapporterer kontrollresultat på e-post når satt til ja."
+msgstr "Send rapport på e-post hvis sett til «ja»."
 
 #: security/help.pm:129
 #, c-format
 msgid "Do not send mails if there's nothing to warn about"
-msgstr "Ikke send e-post med mindre det er noe å varsle om"
+msgstr "Ikkje send e-poster om det ikke er noe å advare om."
 
 #: security/help.pm:130
 #, c-format
 msgid "if set to yes, run some checks against the rpm database."
-msgstr "Kjører noen kontroller mot rpm-databasen dersom satt til ja."
+msgstr "Kjør noen kontroller mot rpm-databasen hvis satt til «ja»."
 
 #: security/help.pm:131
 #, c-format
 msgid "if set to yes, report check result to syslog."
-msgstr "rapporterer kontrollresultat til systemloggen dersom satt til ja."
+msgstr "Rapporter resultatet av kontroller til systemloggen hvis satt til «ja»."
 
 #: security/help.pm:132
 #, c-format
 msgid "if set to yes, reports check result to tty."
-msgstr "rapporterer kontrollresultat til tty dersom satt til ja."
+msgstr "Rapporter resultatet av kontroller til tty hvis satt til «ja»."
 
 #: security/help.pm:134
 #, c-format
 msgid "Set shell commands history size. A value of -1 means unlimited."
-msgstr "Setter skallets kommandohistoriestørrelse. -1 betyr ubegrenset."
+msgstr "Velg størrelse på kommandologg for skallet. Bruk «-1» for ingen grense."
 
 #: security/help.pm:136
 #, c-format
 msgid "Set the shell timeout. A value of zero means no timeout."
-msgstr "Sett skallets tidsavbrudd. Null betyr inget tidsavbrudd."
+msgstr "Vel avbruddsgrense for skallet. Bruk «0» for ingen tidsavbrudd."
 
 #: security/help.pm:136
 #, c-format
@@ -5888,27 +5870,27 @@ msgstr "Tidsavbruddenhet er sekund"
 #: security/help.pm:138
 #, c-format
 msgid "Set the user's file mode creation mask."
-msgstr "Velg umask-modus for nye filer til bruker."
+msgstr "Velg modus for nye filer («umask») til bruker."
 
 #: security/l10n.pm:11
 #, c-format
 msgid "Accept bogus IPv4 error messages"
-msgstr "Akseptér ugyldige IPv4-feilmeldinger."
+msgstr "Godta ugyldige IPv4-feilmeldinger"
 
 #: security/l10n.pm:12
 #, c-format
 msgid "Accept broadcasted icmp echo"
-msgstr "Akseptér kringkastede icmp echo."
+msgstr "Godta kringkastede icmp-ekko"
 
 #: security/l10n.pm:13
 #, c-format
 msgid "Accept icmp echo"
-msgstr "Akseptér icmp echo"
+msgstr "Godta icmp-ekko"
 
 #: security/l10n.pm:15
 #, c-format
 msgid "/etc/issue* exist"
-msgstr "/etc/issue* eksisterer"
+msgstr "«/etc/issue*» finnes"
 
 #: security/l10n.pm:16
 #, c-format
@@ -5918,7 +5900,7 @@ msgstr "Omstart av konsollbruker"
 #: security/l10n.pm:17
 #, c-format
 msgid "Allow remote root login"
-msgstr "Tillat ekstern root-innlogging"
+msgstr "Godta «root»-innlogging utenfra"
 
 #: security/l10n.pm:18
 #, c-format
@@ -5928,22 +5910,22 @@ msgstr "Direkte root-innlogging"
 #: security/l10n.pm:19
 #, c-format
 msgid "List users on display managers (kdm and gdm)"
-msgstr "List opp brukere på innloggingshåndterer (kdm og gdm)"
+msgstr "Vis brukere på innloggingshåndterer (kdm og gdm)"
 
 #: security/l10n.pm:20
 #, c-format
 msgid "Export display when passing from root to the other users"
-msgstr "Eksporter display når det sendes fra root-kontoen til andre brukere."
+msgstr "Eksporter skjermbilde ved sending fra «root» til andre brukere"
 
 #: security/l10n.pm:21
 #, c-format
 msgid "Allow X Window connections"
-msgstr "Tillat X Window-tilkoblinger"
+msgstr "Godta X Window-tilkoblinger"
 
 #: security/l10n.pm:22
 #, c-format
 msgid "Authorize TCP connections to X Window"
-msgstr "Autoriser TCP-tilkoblinger til X Windows"
+msgstr "Autoriser TCP-tilkoblinger til X Window"
 
 #: security/l10n.pm:23
 #, c-format
@@ -5953,12 +5935,12 @@ msgstr "Autoriser alle tjenester kontrollert av tcp_wrappers"
 #: security/l10n.pm:24
 #, c-format
 msgid "Chkconfig obey msec rules"
-msgstr "Chkconfig adlyd msec-regler"
+msgstr "Chkconfig skal følge msec-regler"
 
 #: security/l10n.pm:25
 #, c-format
 msgid "Enable \"crontab\" and \"at\" for users"
-msgstr "Aktiver \"crontab\" og \"at\" for brukere"
+msgstr "Slå på «crontab» og «at» for brukere"
 
 #: security/l10n.pm:26
 #, c-format
@@ -5968,42 +5950,42 @@ msgstr "Syslog rapporterer til konsoll 12"
 #: security/l10n.pm:27
 #, c-format
 msgid "Name resolution spoofing protection"
-msgstr "Navneoppslagsforfalskningsbeskyttelse."
+msgstr "Beskyttelse mot navneoppslagforfalsking."
 
 #: security/l10n.pm:28
 #, c-format
 msgid "Enable IP spoofing protection"
-msgstr "Aktiver IP-forfalskningsbeskyttelse."
+msgstr "Bruk beskyttelse mot IP-forfalskning"
 
 #: security/l10n.pm:29
 #, c-format
 msgid "Enable libsafe if libsafe is found on the system"
-msgstr "Aktiver libsafe hvis libsafe er funnet på systemet."
+msgstr "Bruk libsafe om libsafe er tilgjengelig på systemet"
 
 #: security/l10n.pm:30
 #, c-format
 msgid "Enable the logging of IPv4 strange packets"
-msgstr "Aktiver loggingen av rare IPv4 pakker."
+msgstr "Loggfør merkelige IPv4-pakker"
 
 #: security/l10n.pm:31
 #, c-format
 msgid "Enable msec hourly security check"
-msgstr "Aktiver msec sikkerhetssjekk hver time"
+msgstr "Kjør msec-sikkerhetsskontroll hver time"
 
 #: security/l10n.pm:32
 #, c-format
 msgid "Enable su only from the wheel group members"
-msgstr "Aktiver su kun for medlemmer av wheel-gruppen."
+msgstr "Godta «su» berre fra medlemmer i «wheel»-gruppa"
 
 #: security/l10n.pm:33
 #, c-format
 msgid "Use password to authenticate users"
-msgstr "Bruk passord for å autentisere brukere."
+msgstr "Bruk passord til å autentisere brukere"
 
 #: security/l10n.pm:34
 #, c-format
 msgid "Ethernet cards promiscuity check"
-msgstr "Ethernettkorts promiskiøssjekk."
+msgstr "Promiskuitetskontroll for nettverkskort"
 
 #: security/l10n.pm:35
 #, c-format
@@ -6013,7 +5995,7 @@ msgstr "Daglig sikkerhetssjekk"
 #: security/l10n.pm:36
 #, c-format
 msgid "Sulogin(8) in single user level"
-msgstr "Sulogin(8) i enbruker-nivå."
+msgstr "Sulogin(8) i enbrukernivå."
 
 #: security/l10n.pm:37
 #, c-format
@@ -6023,7 +6005,7 @@ msgstr "Ingen passordaldring for"
 #: security/l10n.pm:38
 #, c-format
 msgid "Set password expiration and account inactivation delays"
-msgstr "Sett passordforelding og konto-inaktiveringsforsinkelser"
+msgstr "Vel passordutløps- og kontodeaktiveringsforsinkelse"
 
 #: security/l10n.pm:39
 #, c-format
@@ -6033,7 +6015,7 @@ msgstr "Passordhistorielengde"
 #: security/l10n.pm:40
 #, c-format
 msgid "Password minimum length and number of digits and upcase letters"
-msgstr "Passords minimumlengde og antall sifre og store bokstaver"
+msgstr "Minstegrense for passordlengde og tallet på siffre og store bokstaver"
 
 #: security/l10n.pm:41
 #, c-format
