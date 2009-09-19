@@ -1,6 +1,13 @@
 #!/bin/sh
 # chkconfig: 235 99 00
 # description: Start or stop the miniserv administration server
+### BEGIN INIT INFO
+# Provides: drakxtools_http
+# Should-Start: $network
+# Default-Start: 3 4 5
+# Short-Description: Web administration server for Mandriva utilities
+# Description: Start or stop the miniserv administration server for Mandriva utilities
+### END INIT INFO
 
 # Source function library.
 . /etc/rc.d/init.d/functions
