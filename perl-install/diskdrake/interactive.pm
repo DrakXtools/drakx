@@ -714,7 +714,7 @@ sub Resize {
 	    $nice_resize{fat} = resize_fat::main->new($part->{device}, devices::make($part->{device}));
 	    $min = max($min, $nice_resize{fat}->min_size);
 	    $max = min($max, $nice_resize{fat}->max_size);
-	} elsif (member($part->{fs_type}, qw(ext2 ext3))) { # resize2fs is known to be broken regarding extents with ext4
+	} elsif (member($part->{fs_type}, qw(ext2 ext3 ext4))) {
 	    write_partitions($in, $hd) or return;
 	    require diskdrake::resize_ext2;
 	    if ($nice_resize{ext2} = diskdrake::resize_ext2->new($part->{device}, devices::make($part->{device}))) {
