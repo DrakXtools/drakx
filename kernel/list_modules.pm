@@ -58,7 +58,7 @@ our %l = (
    #- protocol reported are not accurate) so we match network adapters against
    #- known drivers :-(
     usb => [ 
-      qw(catc cdc_ether kaweth pegasus rtl8150 usbnet),
+      qw(asix catc cdc_ether kaweth pegasus rtl8150 usbnet),
     ],
     wireless => [
       qw(acx-pci acx-usb adm8211 agnx airo airo_cs aironet4500_cs aironet_cs ar9170usb arlan arusb_lnx),
