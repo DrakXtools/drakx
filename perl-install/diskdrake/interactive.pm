@@ -906,7 +906,7 @@ sub Add2LVM {
 			ok_disabled => sub { !$name },
 			validate => sub {
 				member($name, @lvm_names) or return 1;
-				$in->ask_warn(N("Error"), N('"%s" already exists', $name));
+				$in->ask_warn(N("Error"), N("\"%s\" already exists", $name));
 				return 0;
 			} },
 			[{label=>N("LVM name"),val=> \$name}]) or return;
