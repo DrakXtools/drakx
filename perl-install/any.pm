@@ -703,6 +703,7 @@ sub set_autologin {
     my $sys_conffile = "$::prefix/etc/sysconfig/desktop";
     my %desktop = getVarsFromSh($sys_conffile);
     $desktop{DESKTOP} = $autologin->{desktop};
+    $desktop{DISPLAYMANAGER} = $autologin->{dm};
     setVarsInSh($sys_conffile, \%desktop);
 
     if ($autologin->{user}) {
