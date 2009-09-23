@@ -371,7 +371,7 @@ sub getATARAID() {
 sub getVirtIO() {
     -d '/sys/bus/virtio/devices' or return;
     map {
-            { device => basename($_), info => "VirtIO block device", media_type => 'hd', bus => 'virtio' }
+            { device => basename($_), info => "VirtIO block device", media_type => 'hd', bus => 'virtio' };
     }
     glob("/sys/bus/virtio/devices/*/block/*");
 }
@@ -1021,7 +1021,7 @@ sub dmidecode() {
 
     my ($major, $minor) = $ver =~ /(\d+)\.(\d+)/;
 
-    if ($major > 2 || $major == 2 && $minor >7) {
+    if ($major > 2 || $major == 2 && $minor > 7) {
 	#- new dmidecode output is less indented
 	$tab = '';
 	#- drop header
@@ -1151,7 +1151,7 @@ sub matching_types() {
 }
 
 sub hasWacom()     { find { $_->{vendor} == 0x056a || $_->{driver} =~ /wacom/ } usb_probe() }
-sub hasTouchpad()  { any { $_->{Synaptics} || $_->{ALPS} || $_->{Elantech} } getInputDevices() };
+sub hasTouchpad()  { any { $_->{Synaptics} || $_->{ALPS} || $_->{Elantech} } getInputDevices() }
 
 sub usbWacom()     { grep { $_->{vendor} eq '056a' } getInputDevices() }
 sub usbKeyboards() { grep { $_->{media_type} =~ /\|Keyboard/ } usb_probe() }
@@ -1216,7 +1216,7 @@ sub hasMousePS2 {
     my $t; sysread(tryOpen($_[0]) || return, $t, 256) != 1 || $t ne "\xFE";
 }
 
-sub probeall_unavailable_modules {
+sub probeall_unavailable_modules() {
     map {
         my $driver = $_->{driver};
         $driver !~ /:/ &&
@@ -1227,7 +1227,7 @@ sub probeall_unavailable_modules {
     } probeall();
 }
 
-sub probeall_dkms_modules {
+sub probeall_dkms_modules() {
     my @unavailable_modules = probeall_unavailable_modules() or return;
     require modalias;
     my $dkms_modules = modalias::parse_file_modules($::prefix . "/usr/share/ldetect-lst/dkms-modules.alias");
