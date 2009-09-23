@@ -805,7 +805,14 @@ sub get_pci_sysfs_path {
 }
 
 
-my (@pci, @usb);
+my (@pci, @pcie_bridges, @usb);
+
+sub is_child_of_a_pcie_bridge {
+    my ($l) = @_;
+    my $sysfs_device = get_pci_sysfs_path($l);
+    return 1 if grep { -e "$_->{sysfs_device}/$sysfs_device" } @pcie_bridges;
+}
+
 sub pci_probe__real() {
     add_addons($pcitable_addons, map {
 	my %l;
@@ -817,7 +824,13 @@ sub pci_probe__real() {
     } c::pci_probe());
 }
 sub pci_probe() {
-    @pci = pci_probe__real() if !@pci;
+    if (!$done) {
+        @pci = pci_probe__real() if !@pci;
+        @pcie_bridges = grep { readlink("$_->{sysfs_device}/driver") =~ /pcieport/ } @pci;
+        foreach (@pci) {
+            $_->{nice_bus} = is_child_of_a_pcie_bridge($_) ? "PCI Express" : "PCI";
+        }
+    }
     @pci;
 }
 
