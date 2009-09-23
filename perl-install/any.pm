@@ -658,7 +658,7 @@ sub get_autologin() {
     if ($dm eq "gdm") {
         my %conf = read_gnomekderc($gdm_file, 'daemon');
         $autologin_user = text2bool($conf{AutomaticLoginEnable}) && $conf{AutomaticLogin};
-    } else { # KDM / MdkKDM
+    } elsif ($dm eq "kdm") {
         my %conf = read_gnomekderc($kdm_file, 'X-:0-Core');
         $autologin_user = text2bool($conf{AutoLoginEnable}) && $conf{AutoLoginUser};
     }
