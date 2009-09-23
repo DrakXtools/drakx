@@ -224,10 +224,13 @@ sub autologin_choice() {
                         Xconfig::various::runlevel($x_mode ? 5 : 3);
                         $::testing and return;
                         if ($auto_buttons[1]->get_active) {
-                            any::set_autologin($in->do_pkgs, $user_combo->entry->get_text, $desktop_combo->entry->get_text);
+                            $auto_mode->{user} = $user_combo->entry->get_text;
+                            $auto_mode->{desktop} = $desktop_combo->entry->get_text;
 			} else {
-                            any::set_autologin($in->do_pkgs);
-			}
+                            $auto_mode->{user} = undef;
+                            $auto_mode->{desktop} = undef;
+                        }
+                        any::set_autologin($in->do_pkgs, $auto_mode);
                     });
 }
 

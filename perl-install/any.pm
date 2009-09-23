@@ -671,34 +671,34 @@ sub get_autologin() {
 }
 
 sub set_autologin {
-    my ($do_pkgs, $o_user, $o_wm) = @_;
-    log::l("set_autologin $o_user $o_wm");
-    my $autologin = bool2text($o_user);
+    my ($do_pkgs, $autologin) = @_;
+    log::l("set_autologin $autologin->{user} $autologin->{desktop}");
+    my $do_autologin = bool2text($autologin->{user});
 
     #- Configure KDM / MDKKDM
     eval { common::update_gnomekderc_no_create(common::read_alternative('kdm4-config'), 'X-:0-Core' => (
-	AutoLoginEnable => $autologin,
-	AutoLoginUser => $o_user,
+	AutoLoginEnable => $do_autologin,
+	AutoLoginUser => $autologin->{user},
     )) };
 
     #- Configure GDM
     eval { update_gnomekderc("$::prefix/etc/X11/gdm/custom.conf", daemon => (
-	AutomaticLoginEnable => $autologin,
-	AutomaticLogin => $o_user,
+	AutomaticLoginEnable => $do_autologin,
+	AutomaticLogin => $autologin->{user},
     )) };
   
     my $xdm_autologin_cfg = "$::prefix/etc/sysconfig/autologin";
-    if (member($o_wm, 'KDE', 'KDE4', 'GNOME')) {
+    if (member($autologin->{desktop}, 'KDE', 'KDE4', 'GNOME')) {
 	unlink $xdm_autologin_cfg;
     } else {
-	$do_pkgs->ensure_is_installed('autologin', '/usr/bin/startx.autologin') if $o_user;
+	$do_pkgs->ensure_is_installed('autologin', '/usr/bin/startx.autologin') if $autologin->{user};
 	setVarsInShMode($xdm_autologin_cfg, 0644,
-			{ USER => $o_user, AUTOLOGIN => bool2yesno($o_user), EXEC => '/usr/bin/startx.autologin' });
+			{ USER => $autologin->{user}, AUTOLOGIN => bool2yesno($autologin->{user}), EXEC => '/usr/bin/startx.autologin' });
     }
 
-    if ($o_user) {
-	my $home = (getpwnam($o_user))[7];
-	set_window_manager($home, $o_wm);
+    if ($autologin->{user}) {
+	my $home = (getpwnam($autologin->{user}))[7];
+	set_window_manager($home, $autologin->{desktop});
     }
 }
 sub set_window_manager {

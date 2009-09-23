@@ -149,8 +149,11 @@ sub ask_users() {
         set_authentication($superuser) or goto &ask_users;
     }
     any::add_users($users, $authentication);
-    any::set_autologin($in->do_pkgs, $users->[0]{name}, $autologin_first)
-	if $autologin_first;
+    if ($autologin_first) {
+        $autologin->{user} = $users->[0]{name};
+        $autologin->{desktop} = $autologin_first;
+        any::set_autologin($in->do_pkgs, $autologin);
+    }
     my $finit_conf = "/etc/finit.conf";
     substInFile {
         s/^user .*//;

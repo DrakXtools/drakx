@@ -721,11 +721,12 @@ sub addUser {
 
     any::add_users($users, $o->{authentication});
 
-    if ($o->{autologin}) {
-	$o->{desktop} ||= first(any::sessions());
-	$o->pkg_install("autologin") if !member($o->{desktop}, 'KDE', 'KDE4', 'GNOME');
+    my $autologin = { user => $o->{autologin}, desktop => $o->{desktop} };
+    if ($autologin->{user}) {
+	$autologin->{desktop} ||= first(any::sessions());
+	$o->pkg_install("autologin") if !member($autologin->{desktop}, 'KDE', 'KDE4', 'GNOME');
     }
-    any::set_autologin($o->do_pkgs, $o->{autologin}, $o->{desktop});
+    any::set_autologin($o->do_pkgs, $autologin);
 
     install::any::disable_user_view() if @$users == ();
 }
