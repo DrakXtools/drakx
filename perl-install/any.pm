@@ -693,11 +693,11 @@ sub set_autologin {
     )) };
   
     my $xdm_autologin_cfg = "$::prefix/etc/sysconfig/autologin";
-    if (member($autologin->{desktop}, 'KDE', 'KDE4', 'GNOME')) {
-	unlink $xdm_autologin_cfg;
-    } else {
+    if ($autologin->{dm} eq 'xdm') {
 	setVarsInShMode($xdm_autologin_cfg, 0644,
 			{ USER => $autologin->{user}, AUTOLOGIN => bool2yesno($autologin->{user}), EXEC => '/usr/bin/startx.autologin' });
+    } else {
+	unlink $xdm_autologin_cfg;
     }
 
     if ($autologin->{user}) {
