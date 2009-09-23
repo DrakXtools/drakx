@@ -653,16 +653,16 @@ sub get_autologin() {
       $desktop_to_dm{$desktop} ||
       chomp_(run_program::rooted_get_stdout("/etc/X11/lookupdm"));
     $dm = $dm_canonical{$dm} if exists $dm_canonical{$dm};
-    my $autologin = do {
-	if ($dm eq "gdm") {
-	    my %conf = read_gnomekderc($gdm_file, 'daemon');
-	    text2bool($conf{AutomaticLoginEnable}) && $conf{AutomaticLogin};
-	} else { # KDM / MdkKDM
-	    my %conf = read_gnomekderc($kdm_file, 'X-:0-Core');
-	    text2bool($conf{AutoLoginEnable}) && $conf{AutoLoginUser};
-	}
-    };
-    { autologin => $autologin, desktop => $desktop };
+
+    my $autologin_user;
+    if ($dm eq "gdm") {
+        my %conf = read_gnomekderc($gdm_file, 'daemon');
+        $autologin_user = text2bool($conf{AutomaticLoginEnable}) && $conf{AutomaticLogin};
+    } else { # KDM / MdkKDM
+        my %conf = read_gnomekderc($kdm_file, 'X-:0-Core');
+        $autologin_user = text2bool($conf{AutoLoginEnable}) && $conf{AutoLoginUser};
+    }
+    { autologin => $autologin_user, desktop => $desktop };
 }
 
 sub set_autologin {
