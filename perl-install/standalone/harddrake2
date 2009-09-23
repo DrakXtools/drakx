@@ -466,6 +466,7 @@ foreach (@classes) {
             rename_field($_, 'nice_media_type', 'media_type');
         }
         rename_field($_, 'usb_pci_bus', 'bus');
+        rename_field($_, 'nice_bus', 'bus');
         rename_field($_, 'usb_vendor', 'vendor');
         rename_field($_, 'vendor_name', 'Vendor');
 
