@@ -675,6 +675,11 @@ sub set_autologin {
     log::l("set_autologin $autologin->{user} $autologin->{desktop}");
     my $do_autologin = bool2text($autologin->{user});
 
+    $autologin->{dm} || = 'xdm';
+    $do_pkgs->ensure_is_installed($autologin->{dm});
+    $do_pkgs->ensure_is_installed('autologin', '/usr/bin/startx.autologin')
+      if $autologin->{user} && $autologin->{dm} eq 'xdm';
+
     #- Configure KDM / MDKKDM
     eval { common::update_gnomekderc_no_create(common::read_alternative('kdm4-config'), 'X-:0-Core' => (
 	AutoLoginEnable => $do_autologin,
@@ -691,7 +696,6 @@ sub set_autologin {
     if (member($autologin->{desktop}, 'KDE', 'KDE4', 'GNOME')) {
 	unlink $xdm_autologin_cfg;
     } else {
-	$do_pkgs->ensure_is_installed('autologin', '/usr/bin/startx.autologin') if $autologin->{user};
 	setVarsInShMode($xdm_autologin_cfg, 0644,
 			{ USER => $autologin->{user}, AUTOLOGIN => bool2yesno($autologin->{user}), EXEC => '/usr/bin/startx.autologin' });
     }
