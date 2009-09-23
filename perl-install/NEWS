@@ -1,5 +1,17 @@
 - drakboot:
   o don't detect disks if we are not in bootloader or splash mode
+- autologin/desktop configuration (drakboot/finish-install):
+  o when detecting default desktop, use first session
+    (instead of using hacks with dm config files)
+  o guess display manager from /etc/sysconfig/desktop,
+    or default session, or /etc/X11/lookupdm
+  o read autologin settings from /etc/sysconfig/autologin as fallback
+  o read kdm config file only if kdm is to be used
+  o always ensure dm is installed before configuring autologin/desktop
+  o test display manager instead of desktop when configuring autologin
+  o always write /etc/sysconfig/desktop
+  o write DISPLAYMANAGER in /etc/sysconfig/desktop too
+  o only write dm conf files if they exist before
 
 Version 12.53 - 22 September 2009
 
