@@ -681,16 +681,18 @@ sub set_autologin {
       if $autologin->{user} && $autologin->{dm} eq 'xdm';
 
     #- Configure KDM / MDKKDM
-    eval { common::update_gnomekderc_no_create(common::read_alternative('kdm4-config'), 'X-:0-Core' => (
+    my $kdm_conffile = common::read_alternative('kdm4-config');
+    eval { common::update_gnomekderc_no_create($kdm_conffile, 'X-:0-Core' => (
 	AutoLoginEnable => $do_autologin,
 	AutoLoginUser => $autologin->{user},
-    )) };
+    )) } if -e $kdm_conffile;
 
     #- Configure GDM
-    eval { update_gnomekderc("$::prefix/etc/X11/gdm/custom.conf", daemon => (
+    my $gdm_conffile = "$::prefix/etc/X11/gdm/custom.conf";
+    eval { update_gnomekderc($gdm_conffile, daemon => (
 	AutomaticLoginEnable => $do_autologin,
 	AutomaticLogin => $autologin->{user},
-    )) };
+    )) } if -e $gdm_conffile;
 
     my $xdm_autologin_cfg = "$::prefix/etc/sysconfig/autologin";
     if ($autologin->{dm} eq 'xdm') {
