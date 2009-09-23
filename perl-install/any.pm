@@ -640,8 +640,21 @@ sub get_autologin() {
     my $gdm_file = "$::prefix/etc/X11/gdm/custom.conf";
     my $kdm_file = common::read_alternative('kdm4-config');
     my $desktop = $desktop{DESKTOP} || first(sessions());
+    my %desktop_to_dm = (
+        GNOME => 'gdm',
+        KDE4 => 'kdm',
+    );
+    my %dm_canonical = (
+        gnome => 'gdm',
+        kde => 'kdm',
+    );
+    my $dm =
+      lc($desktop{DISPLAYMANAGER}) ||
+      $desktop_to_dm{$desktop} ||
+      chomp_(run_program::rooted_get_stdout("/etc/X11/lookupdm"));
+    $dm = $dm_canonical{$dm} if exists $dm_canonical{$dm};
     my $autologin = do {
-	if (($desktop{DISPLAYMANAGER} || $desktop) eq 'GNOME') {
+	if ($dm eq "gdm") {
 	    my %conf = read_gnomekderc($gdm_file, 'daemon');
 	    text2bool($conf{AutomaticLoginEnable}) && $conf{AutomaticLogin};
 	} else { # KDM / MdkKDM
