@@ -1,6 +1,6 @@
 package detect_devices; # $Id$
 
-use diagnostics;
+#use diagnostics;
 use strict;
 use vars qw($pcitable_addons $usbtable_addons);
 
@@ -803,7 +803,7 @@ my (@pci, @usb);
 sub pci_probe__real() {
     add_addons($pcitable_addons, map {
 	my %l;
-	@l{qw(vendor id subvendor subid pci_domain pci_bus pci_device pci_function media_type nice_media_type driver description)} = split "\t";
+	@l{qw(vendor id subvendor subid pci_domain pci_bus pci_device pci_function pci_revision media_type nice_media_type driver description)} = split "\t";
 	$l{$_} = hex $l{$_} foreach qw(vendor id subvendor subid);
 	$l{bus} = 'PCI';
 	$l{sysfs_device} = sprintf('/sys/bus/pci/devices/%04x:%02x:%02x.%d', $l{pci_domain}, $l{pci_bus}, $l{pci_device}, $l{pci_function});
