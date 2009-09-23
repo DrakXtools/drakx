@@ -56,6 +56,7 @@ my %fields =
       "primary_partitions" => [ N("Primary partitions"), N("the number of the primary partitions") ],
       "Vendor" => [ N("Vendor"), N("the vendor name of the device") ],
       "pci_domain" => [ N("PCI domain"), N("the PCI domain of the device") ],
+      "pci_revision" => [ N("PCI revision"), N("the PCI domain of the device") ],
       "pci_bus" => [ N("Bus PCI #"), N("the PCI bus on which the device is plugged") ],
       "pci_device" => [ N("PCI device #"), N("PCI device number") ],
       "pci_function" => [ N("PCI function #"), N("PCI function number") ],
@@ -130,7 +131,7 @@ my %groups = (
               generic =>
               {
                N("Identification") => [ qw(Vendor model description info media_type) ],
-               N("Connection") => [ qw(bus pci_domain pci_bus pci_device pci_function vendor id subvendor subid) ],
+               N("Connection") => [ qw(bus pci_domain pci_bus pci_device pci_function pci_revision vendor id subvendor subid) ],
               },
               AUDIO =>
               {
@@ -478,6 +479,12 @@ foreach (@classes) {
             $_->{$field} = sprintf("0x%04x", $_->{$field});
             delete $_->{$field} if $_->{$field} eq "0xffff";  # 0xffff equals to '*'
         }
+        if ($_->{pci_revision}) {
+            $_->{pci_revision} = sprintf("0x%02x", $_->{pci_revision});
+        } else {
+            delete $_->{pci_revision};# if $_->{pci_revision} eq "0x0000";
+        }
+
         $tree_model->append_set($parent_iter, [ 1 => $custom_id, 2 => $index++ ]);
         push @data, [ $_, $Ident ];
         push @configurators, $configurator;
