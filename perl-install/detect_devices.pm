@@ -8,6 +8,7 @@ use vars qw($pcitable_addons $usbtable_addons);
 #- misc imports
 #-######################################################################################
 use log;
+use MDK::Common; # help perl_checker
 use common;
 use devices;
 use run_program;
