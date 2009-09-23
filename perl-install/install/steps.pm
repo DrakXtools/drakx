@@ -724,6 +724,7 @@ sub addUser {
     my $autologin = any::get_autologin();
     $autologin->{user} = $o->{autologin};
     $autologin->{desktop} = $o->{desktop} if $o->{desktop};
+    $autologin->{dm} = $o->{dm} if $o->{dm};
     any::set_autologin($o->do_pkgs, $autologin);
 
     install::any::disable_user_view() if @$users == ();
