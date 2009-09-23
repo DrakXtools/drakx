@@ -799,6 +799,12 @@ sub add_addons {
     @l;
 }
 
+sub get_pci_sysfs_path {
+    my ($l) = @_;
+    sprintf('%04x:%02x:%02x.%d', $l->{pci_domain}, $l->{pci_bus}, $l->{pci_device}, $l->{pci_function});
+}
+
+
 my (@pci, @usb);
 sub pci_probe__real() {
     add_addons($pcitable_addons, map {
@@ -806,7 +812,7 @@ sub pci_probe__real() {
 	@l{qw(vendor id subvendor subid pci_domain pci_bus pci_device pci_function pci_revision media_type nice_media_type driver description)} = split "\t";
 	$l{$_} = hex $l{$_} foreach qw(vendor id subvendor subid);
 	$l{bus} = 'PCI';
-	$l{sysfs_device} = sprintf('/sys/bus/pci/devices/%04x:%02x:%02x.%d', $l{pci_domain}, $l{pci_bus}, $l{pci_device}, $l{pci_function});
+	$l{sysfs_device} = '/sys/bus/pci/devices/' . get_pci_sysfs_path(\%l);
 	\%l;
     } c::pci_probe());
 }
