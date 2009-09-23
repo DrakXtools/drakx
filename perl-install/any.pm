@@ -675,7 +675,7 @@ sub set_autologin {
     log::l("set_autologin $autologin->{user} $autologin->{desktop}");
     my $do_autologin = bool2text($autologin->{user});
 
-    $autologin->{dm} || = 'xdm';
+    $autologin->{dm} ||= 'xdm';
     $do_pkgs->ensure_is_installed($autologin->{dm});
     $do_pkgs->ensure_is_installed('autologin', '/usr/bin/startx.autologin')
       if $autologin->{user} && $autologin->{dm} eq 'xdm';
