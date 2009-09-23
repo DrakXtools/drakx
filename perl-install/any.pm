@@ -691,7 +691,7 @@ sub set_autologin {
 	AutomaticLoginEnable => $do_autologin,
 	AutomaticLogin => $autologin->{user},
     )) };
-  
+
     my $xdm_autologin_cfg = "$::prefix/etc/sysconfig/autologin";
     if ($autologin->{dm} eq 'xdm') {
 	setVarsInShMode($xdm_autologin_cfg, 0644,
