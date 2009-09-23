@@ -184,7 +184,7 @@ sub autologin_choice() {
     my $x_mode = Xconfig::various::runlevel() == 5;
     my $auto_mode = any::get_autologin();
 
-    my $user = member($auto_mode->{autologin}, @users) ? $auto_mode->{autologin} : $users[0];
+    my $user = member($auto_mode->{user}, @users) ? $auto_mode->{user} : $users[0];
     if (!$user) {
         # no user, bad but add root anyway:
         $user = "root";
@@ -196,14 +196,14 @@ sub autologin_choice() {
     my $auto_box = gtknew('Table', col_spacings => 5, row_spacings => 5, homogeneous => 1, children => [
                                     [ gtknew('Label_Left', text => N("Default user")), $user_combo ],
                                     [ gtknew('Label_Left', text => N("Default desktop")), $desktop_combo ] ]);
-    $auto_box->set_sensitive($auto_mode->{autologin} ? 1 : 0);
+    $auto_box->set_sensitive($auto_mode->{user} ? 1 : 0);
 
     my @auto_buttons = gtkradio((N("No, I do not want autologin")) x 2,
                                 N("Yes, I want autologin with this (user, desktop)"));
     $auto_buttons[1]->signal_connect('toggled' => sub { $auto_box->set_sensitive($auto_buttons[1]->get_active) });
     $auto_buttons[0]->signal_connect('toggled' => sub { $auto_box->set_sensitive(!$auto_buttons[0]->get_active) });
-    $auto_buttons[1]->set_active(1) if $auto_mode->{autologin};
-    $auto_buttons[0]->set_active(1) if !$auto_mode->{autologin};
+    $auto_buttons[1]->set_active(1) if $auto_mode->{user};
+    $auto_buttons[0]->set_active(1) if !$auto_mode->{user};
 
     my $x_box;
     run_boot_window(N("System mode"),

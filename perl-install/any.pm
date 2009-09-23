@@ -667,7 +667,7 @@ sub get_autologin() {
         $autologin_user = text2bool($conf{AUTOLOGIN}) && $conf{USER};
     }
 
-    { autologin => $autologin_user, desktop => $desktop, dm => $dm };
+    { user => $autologin_user, desktop => $desktop, dm => $dm };
 }
 
 sub set_autologin {

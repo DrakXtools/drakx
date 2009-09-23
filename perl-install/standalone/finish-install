@@ -144,7 +144,7 @@ sub ask_users() {
       $users->[0]{home} ||= '/home/' . $users->[0]{name};
     }
     my $autologin = any::get_autologin();
-    my $autologin_first = ($autologin->{autologin} eq $old_user || lc(get_conf('USER_AUTOLOGIN_FIRST')) eq "yes") && $autologin->{desktop};
+    my $autologin_first = ($autologin->{user} eq $old_user || lc(get_conf('USER_AUTOLOGIN_FIRST')) eq "yes") && $autologin->{desktop};
     if ($superuser) {
         set_authentication($superuser) or goto &ask_users;
     }
