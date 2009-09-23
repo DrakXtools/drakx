@@ -825,6 +825,7 @@ sub pci_probe__real() {
     } c::pci_probe());
 }
 sub pci_probe() {
+    state $done;
     if (!$done) {
         @pci = pci_probe__real() if !@pci;
         @pcie_bridges = grep { readlink("$_->{sysfs_device}/driver") =~ /pcieport/ } @pci;
