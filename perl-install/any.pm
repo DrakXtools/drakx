@@ -831,7 +831,7 @@ sub ask_user_and_root {
     require authentication;
     my $validate_name = sub {
 	$u->{name} or $in->ask_warn('', N("Please give a user name")), return;
-        $u->{name} =~ /^[a-z]+?[a-z0-9_-]*?$/ or $in->ask_warn('', N("The user name must contain only lower cased letters, numbers, `-' and `_'")), return;
+        $u->{name} =~ /^[a-z]+[a-z0-9_-]*$/ or $in->ask_warn('', N("The user name must start with a lower case letter followed by only lower cased letters, numbers, `-' and `_'")), return;
         length($u->{name}) <= 32 or $in->ask_warn('', N("The user name is too long")), return;
         defined getpwnam($u->{name}) || member($u->{name}, map { $_->{name} } @$users) and $in->ask_warn('', N("This user name has already been added")), return;
 	'ok';
