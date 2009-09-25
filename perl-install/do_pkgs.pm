@@ -56,6 +56,7 @@ sub ensure_binary_is_installed {
     if (!whereis_binary($binary, $::prefix)) {
 	$do->in->ask_okcancel(N("Warning"), N("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
 	  or return if !$b_auto && $do->in;
+        log::l("need to install $pkg\n");
 	if (!$do->install($pkg)) {
             $do->in->ask_warn(N("Error"), N("Could not install the %s package!", $pkg)) if $do->in;
 	    return;
@@ -156,6 +157,7 @@ sub install {
 	log::l("i would install packages " . join(' ', @l));
 	1;
     } else {
+	log::l("i will install packages " . join(' ', @l));
 	$do->{o}->pkg_install(@l);
 	1; #- HACK, need better fix in install::steps::pkg_install()
     }

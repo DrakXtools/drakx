@@ -1,6 +1,6 @@
 package interactive::gtk; # $Id$
 
-use diagnostics;
+#use diagnostics;
 use strict;
 use vars qw(@ISA);
 

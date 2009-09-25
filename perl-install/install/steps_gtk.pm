@@ -30,6 +30,8 @@ use log;
 #-######################################################################################
 sub new($$) {
     my ($type, $o) = @_;
+    warn ">> INITIALIZING GTK\n";
+    log::l("INITIALIZING GTK");
 
     $ENV{DISPLAY} ||= $o->{display} || ":0";
     my $wanted_DISPLAY = $::testing && -x '/usr/bin/Xnest' ? ':9' : $ENV{DISPLAY};
@@ -329,9 +331,18 @@ sub reallyChooseGroups {
     #- when restarting this step, it might be necessary to reload the compssUsers.pl (bug 11558). kludgy.
     if (!ref $o->{gtk_display_compssUsers}) { install::any::load_rate_files($o) }
     ugtk2::gtkadd($w->{window},
+    gtknew('ScrolledWindow', child => 
 	   gtknew('VBox', children => [
 		    1, $o->{gtk_display_compssUsers}->($entry),
 		    1, '',
+                    if_(0,
+		    1, gtknew('ScrolledWindow',
+                              child => gtknew('VBox', 
+                                              children => [
+                                                  0, $o->{gtk_display_compssUsers}->($entry),
+                                                  1, '',
+                                              ])),
+                    ),
 		    0, if_($individual,
 			      gtknew('CheckButton', text => N("Individual package selection"), active_ref => $individual),
 			  ),
@@ -343,6 +354,7 @@ sub reallyChooseGroups {
 			  gtknew('Button', text => N("Next"), clicked => sub { Gtk2->main_quit }),
 			 ]),
 		  ]),
+              )
 	  );
     $w->main;
     1;
@@ -541,7 +553,7 @@ sub installPackages {
 	my ($update) = @_;
 
 	@install::any::advertising_images && $show_advertising && $update or return;
-	
+
 	$change_time = time();
 	my $f = $install::any::advertising_images[$i++ % @install::any::advertising_images];
 	log::l("advertising $f");
@@ -567,6 +579,7 @@ sub installPackages {
 			     $pkg_log_widget->{to_bottom}->('force');
 			 });
 
+    warn ">> O IS A " . ref($o) . "\n";
     my $release_notes = any::get_release_notes($o);
     my $rel_notes = gtknew('Button', text => N("Release Notes"), 
                            clicked => sub { $show_release_notes = 1 });

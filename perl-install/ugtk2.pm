@@ -130,9 +130,9 @@ sub gtkappend_page {
 }
 
 sub gtkentry {
-    my ($o_text) = @_;
+    my ($text) = @_;
     my $e = gtknew('Entry');
-    $o_text and $e->set_text($o_text);
+    $text and $e->set_text($text);
     $e;
 }
 
@@ -215,7 +215,7 @@ sub gtkpowerpack {
 	ref($_[0]) eq 'HASH' || ref($_[0]) eq 'ARRAY' and $attrs = shift;
 	foreach (@attributes_list) {
 	    if (($default_attrs->{$_} || '') eq 'arg') {
-		ref($_[0]) and internal_error "error in packing definition\n";
+		ref($_[0]) and die "error in packing definition\n";
 		$attr{$_} = shift;
 		ref($attrs) eq 'ARRAY' and shift @$attrs;
 	    } elsif (ref($attrs) eq 'HASH' && defined($attrs->{$_})) {
@@ -240,7 +240,7 @@ sub gtkpowerpack {
 sub gtktreeview_children {
     my ($model, $iter) = @_;
     my @l;
-    $model or return;
+    $model && $iter or return;
     for (my $p = $model->iter_children($iter); $p; $p = $model->iter_next($p)) {
 	push @l, $p;
     }
@@ -273,8 +273,22 @@ sub create_adjustment {
 
 sub create_scrolled_window {
     my ($W, $o_policy, $o_viewport_shadow) = @_;
-    gtknew('ScrolledWindow', ($o_policy ? (h_policy => $o_policy->[0], v_policy => $o_policy->[1]) : ()),
-               child => $W, if_($o_viewport_shadow, shadow_type => $o_viewport_shadow));
+    my $w = Gtk2::ScrolledWindow->new(undef, undef);
+    $w->set_policy($o_policy ? @$o_policy : ('automatic', 'automatic'));
+    if (member(ref($W), qw(Gtk2::Layout Gtk2::Html2::View Gtk2::Text Gtk2::TextView Gtk2::TreeView))) {
+	$w->add($W);
+    } else {
+	$w->add_with_viewport($W);
+    }
+    $o_viewport_shadow and gtkset_shadow_type($w->child, $o_viewport_shadow);
+    $W->can('set_focus_vadjustment') and $W->set_focus_vadjustment($w->get_vadjustment);
+    $W->set_left_margin(6) if ref($W) =~ /Gtk2::TextView/;
+    $W->show;
+    if (ref($W) =~ /Gtk2::TextView|Gtk2::TreeView/) {
+    	gtknew('Frame', shadow_type => 'in', child => $w);
+    } else {
+	$w;
+    }
 }
 
 sub n_line_size {
@@ -370,6 +384,7 @@ sub create_box_with_title {
 			              : $w;
 		      } @l),
 		      if_($::isWizard, gtknew('Label', height => 15)),
+		      #if_($a, gtknew('HSeparator')),
 		     );
     }
 }
@@ -523,7 +538,7 @@ sub create_okcancel {
         $bprev = $w->{cancel} = gtknew('Button', text => $cancel, clicked => $w->{cancel_clicked} || 
                                    sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk2->main_quit });
     }
-    $w->{wizcancel} = gtknew('Button', text =>  ($::Wizard_skip ? N("Skip") : N("Cancel")), clicked => sub { die 'wizcancel' }) if $::isWizard && !$::isInstall && !$::Wizard_no_cancel;;
+    $w->{wizcancel} = gtknew('Button', text =>  ($::Wizard_skip ? N("Skip") : N("Cancel")), clicked => sub { die 'wizcancel' }) if $::isWizard && !$::isInstall && !$::Wizard_no_cancel;
     if (!defined $wm_is_kde) {
         require any;
         my $wm = any::running_window_manager();
@@ -689,6 +704,28 @@ sub set_back_pixmap {
     $pixmap->draw_points($style->bg_gc('normal'), 0, 0);
     $pixmap->draw_points($style->base_gc('normal'), 0, 1);
     $window->set_back_pixmap($pixmap);
+}
+
+sub fill_tiled_coords {
+    my ($widget, $pixbuf, $x_back, $y_back, $width, $height) = @_;
+    my ($x2, $y2) = (0, 0);
+    while (1) {
+	$x2 = 0;
+	while (1) {
+	    $pixbuf->render_to_drawable($widget->window, $widget->style->fg_gc('normal'),
+					0, 0, $x2, $y2, $x_back, $y_back, 'none', 0, 0);
+	    $x2 += $x_back;
+	    $x2 >= $width and last;
+	}
+	$y2 += $y_back;
+	$y2 >= $height and last;
+    }
+}
+
+sub fill_tiled {
+    my ($widget, $pixbuf) = @_;
+    my ($window_width, $window_height) = $widget->window->get_size;
+    fill_tiled_coords($widget, $pixbuf, $pixbuf->get_width, $pixbuf->get_height, $window_width, $window_height);
 }
 
 sub add2notebook {
@@ -974,7 +1011,7 @@ sub ask_browse_tree_info {
     }
 
     $pixcolumn->{is_pix} = 1;
-    $common->{widgets} = { w => $w, tree => $tree, tree_model => $tree_model,
+    $common->{widgets} = { w => $w, tree => $tree, tree_model => $tree_model, textcolumn => $textcolumn, pixcolumn => $pixcolumn,
                            info => $info, status => $status };
     ask_browse_tree_info_given_widgets($common);
 }
@@ -1122,7 +1159,7 @@ sub ask_browse_tree_info_given_widgets {
     };
     
     $common->{display_info} = sub { gtktext_insert($w->{info}, $common->{get_info}($curr)); 0 };
-    my $children = sub { map { $w->{tree_model}->get($_, 0) } gtktreeview_children($w->{tree_model}, $_[0]) };
+    my $children = sub { map { my $v = $w->{tree_model}->get($_, 0); $v } gtktreeview_children($w->{tree_model}, $_[0]) };
     my $toggle = sub {
 	if (ref($curr) && !$_[0]) {
 	    $w->{tree}->toggle_expansion($w->{tree_model}->get_path($curr));
@@ -1199,7 +1236,7 @@ sub gtk_TextView_get_log {
     my ($log_w, $command, $filter_output, $when_command_is_over) = @_;
 
     my $pid = open(my $F, "$command |") or return;
-    common::nonblock($F);
+    fcntl($F, c::F_SETFL(), c::O_NONBLOCK()) or die "can not fcntl F_SETFL: $!";
 
     my $gtk_buffer = $log_w->get_buffer;
     $log_w->signal_connect(destroy => sub { 

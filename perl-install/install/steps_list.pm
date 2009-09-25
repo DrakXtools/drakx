@@ -11,16 +11,16 @@ use common;
     my @installStepsFields = qw(text redoable onError hidden needs banner_title); 
     #entered reachable toBeDone next done;
     my @installSteps = (
-  selectLanguage     => [
+#  selectLanguage     => [
       #-PO: please keep the following messages very short: they must fit in the left list of the installer!!!
-      N_("_: Keep these entry short\nLanguage"), 1, 1, '', '', N_("Localization") ],
+#      N_("_: Keep these entry short\nLanguage"), 1, 1, '', '', N_("Localization") ],
   acceptLicense      => [ N_("_: Keep these entry short\nLicense"), 1, -1, '', '', N_("License agreement") ],
   selectMouse        => [ N_("_: Keep these entry short\nMouse"), 1, 1, '1', '', N_("Mouse") ],
   setupSCSI          => [ N_("_: Keep these entry short\nHard drive detection"), 1, 0, '1', '',
                           N_("_: Keep these entry short\nHard drive detection") ],
   selectInstallClass => [ N_("_: Keep these entry short\nInstallation class"), 1, 1, '1', '',
                           N_("_: Keep these entry short\nInstallation class") ],
-  selectKeyboard     => [ N_("_: Keep these entry short\nKeyboard"), 1, 1, '1', '', N_("Localization") ],
+#  selectKeyboard     => [ N_("_: Keep these entry short\nKeyboard"), 1, 1, '1', '', N_("Localization") ],
   miscellaneous      => [ N_("_: Keep these entry short\nSecurity"), 1, 1, '1', '', N_("Security") ],
   doPartitionDisks   => [ N_("_: Keep these entry short\nPartitioning"), 1, 0, '', "selectInstallClass",
                           N_("Partitioning") ],
@@ -30,9 +30,9 @@ use common;
                           N_("Package Group Selection") ],
   installPackages    => [ N_("_: Keep these entry short\nInstalling"), 1, -1, '', ["formatPartitions", "selectInstallClass"],
                           N_("Installing") ],
-  setRootPassword_addUser
-                     => [ N_("_: Keep these entry short\nUsers"), 1, 1, '', "installPackages",
-                          N_("User management") ],
+  #setRootPassword_addUser
+  #                   => [ N_("_: Keep these entry short\nUsers"), 1, 1, '', "installPackages",
+  #                        N_("User management") ],
   configureNetwork   => [ N_("_: Keep these entry short\nNetworking"), 1, 1, '1', "formatPartitions",
                           N_("_: Keep these entry short\nNetworking") ],
   setupBootloader    => [ N_("_: Keep these entry short\nBootloader"), 1, 0, '', "installPackages",

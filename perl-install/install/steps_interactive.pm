@@ -403,7 +403,7 @@ sub choosePackages {
     if (!$o->{isUpgrade}) {
 	my $tasks_ok = install::pkgs::packageByName($o->{packages}, 'task-kde4') &&
 	               install::pkgs::packageByName($o->{packages}, 'task-gnome-minimal');
-	if ($tasks_ok && $availableC >= 2_500_000_000) { 
+	if ($tasks_ok && $availableC >= 1_000_000_000) { 
 	    _chooseDesktop($o, $o->{rpmsrate_flags_chosen}, \$chooseGroups);
 	} else {
 	    $tasks_ok ? log::l("not asking for desktop since not enough place") :
@@ -748,6 +748,7 @@ Do you want to install the updates?")),
 
     install::pkgs::clean_rpmdb_shared_regions();
     if (any::urpmi_add_all_media($o, $o->{previous_release})) {
+	local $ENV{GTK2_RC_FILES} = '/usr/share/themes/Ia Ora Smooth/gtk-2.0/gtkrc'; # force same theme as installer's one
 	my $binary = find { whereis_binary($_, $::prefix) } 'gurpmi2', 'urpmi' or return;
 	my $log_file = '/root/drakx/updates.log';
 	run_program::rooted($::prefix, $binary, '>>', $log_file, '2>>', $log_file, '--auto-select', '--update');

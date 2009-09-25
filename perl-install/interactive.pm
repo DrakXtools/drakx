@@ -649,6 +649,8 @@ sub interactive_help_sub_get_id {
 
 sub interactive_help_sub_display_id {
     my ($o, $id) = @_;
+    my $a = eval { $o->interactive_help_has_id($id) };
+    warn ">> ID=$id ($a)\n";
     eval { $o->interactive_help_has_id($id) }
       && sub { $o->ask_warn(N("Help"), $o->interactive_help_get_id($id)) };
 }

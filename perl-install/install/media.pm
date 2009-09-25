@@ -26,13 +26,13 @@ use urpm::media;
 
 #- list of fields for {media} :
 #-	end (last rpm id, undefined if not selected)
-#-	fakemedium ("$name ($rpmsdir)", used locally by urpmi)
+#-	fakemedium ("$name ($rpmsdir)", used locally by urpmi) (no more present)
 #-	rel_hdlist
 #-	key-ids
 #-	name (text description)
 #-	pubkey (array containing all the keys to import)
 #-	phys_medium
-#-	rpmsdir
+#-	rpmsdir (no more present)
 #-	ignore
 #-	size (in MB)
 #-	start (first rpm id, undefined if ignored)
@@ -125,6 +125,7 @@ sub umount_media {
     #- we don't bother umounting first phys medium if clp is not on disk
     #- (this is mainly for nfs installs using install/stage2/live)
     my @l = _phys_media($packages);
+    use Data::Dumper; log::l Dumper [ \@l, $l[0]{is_stage2_phys_medium} ];
     shift @l if !$install::any::compressed_image_on_disk && $l[0]{is_stage2_phys_medium};
 
     umount_phys_medium($_) foreach @l;
@@ -165,6 +166,7 @@ sub _stage2_mounted_medium {
 #- used once at beginning of install
 sub stage2_phys_medium {
     my ($method) = @_;
+    warn ">> method=$method\n";
 
     if ($method eq 'ftp' && !$ENV{URLPREFIX}) {
 	my $user = $ENV{LOGIN} && ($ENV{LOGIN} . ($ENV{PASSWORD} && ":$ENV{PASSWORD}") . '@');
@@ -523,16 +525,37 @@ sub get_media {
     $suppl_CDs, $copy_rpms_on_disk;
 }
 
+# perl -MData::Dumper -Mstrict -e 'my %a; @a{qw(a b)} = ({}, [ 1 ]); warn Dumper \%a'
+# perl -MData::Dumper -Mstrict -e 'my $a; @$a{qw(a b)} = ({}, [ 1 ]); $a->{c} = 3; warn Dumper $a'
+#11801 root      20   0  521m 322m  14m S  0.0 32.1   0:16.17 runinstall2
+
+#    #my $packages = { %$packages };
+#    local @$packages{qw(depslist obsoletes provides)} = ([ ], {}, {});
+#    #delete @$packages{qw(depslist obsoletes provides)};
+#    #delete $packages->{depslist};
+
+    #my $urpm = install::pkgs::empty_packages();
+    ## force rereading media:
+    #undef $urpm->{media};
+    #urpm::media::read_config($urpm);
+
 sub adjust_paths_in_urpmi_cfg {
     my ($urpm) = @_;
 
     require Clone;
     local $urpm->{media} = Clone::clone($urpm->{media});
+    #local @$urpm{qw(depslist obsoletes provides)} = ([ ], {}, {});
+    local $urpm->{depslist} = [];
+    local $urpm->{obsoletes} = {};
+    local $urpm->{provides} = {};
+    require Data::Dumper; output('/urpmi2.pm', Dumper $urpm);
     foreach my $medium (@{$urpm->{media}}) {
         my $phys_m = $medium->{phys_medium};
+        my $old_url = $medium->{url};
         if ($phys_m->{method} eq 'cdrom') {
             $medium->{url} =~ s!^.*?/media/!$phys_m->{url}/!;
         } elsif (member($phys_m->{method}, qw(disk nfs))) {
+            log::l("___ should be using dir=$phys_m->{mntpoint}");
             # use the real mount point:
             if ($medium->{url} =~ m!/tmp/image!) {
                 $medium->{url} =~ s!/tmp/image!$phys_m->{mntpoint}!;
@@ -541,6 +564,7 @@ sub adjust_paths_in_urpmi_cfg {
                 $medium->{url} =~ s!^$::prefix!!;
             }
         }
+        log::l("___ adjusting $medium->{name} ($phys_m->{method}) : '$old_url' => '$medium->{url}'");
     }
     urpm::media::write_config($urpm);
 }
@@ -630,14 +654,21 @@ sub _url2phys_medium {
 sub _get_media_url {
     my ($o, $phys_medium) = @_;
     my $uri;
+    log::l("is suppl: $phys_medium->{is_suppl}, method: '$phys_medium->{method}'");
+    log::l(Data::Dumper->Dump([ $phys_medium ], [ 'phys_medium' ]));
     if ($phys_medium->{is_suppl}) {
         if (member($phys_medium->{method}, qw(ftp http))) {
+            log::l("is ftp or http");
             $uri = $phys_medium->{url};
             $uri =~ s!/media$!!;
         } elsif (member($phys_medium->{method}, qw(cdrom nfs))) {
+            log::l("is $phys_medium->{method}");
             $uri = "$::prefix/$phys_medium->{mntpoint}";
             my $arch = arch() =~ /i.86/ ? $MDK::Common::System::compat_arch{arch()} : arch();
+            log::l("checking $uri with $arch");
             $uri .= "/$arch" if -d "$uri/$arch";
+        } else {
+            log::l("is ????");
         }
     } else {
         $uri = $o->{stage2_phys_medium}{url} =~ m!^(http|ftp)://! && $o->{stage2_phys_medium}{url} ||
@@ -658,8 +689,9 @@ sub get_media_cfg {
         die "media.cfg not found";
     }
 
-    my $suppl_CDs = exists $o->{supplmedia} ? $o->{supplmedia} : $distribconf->{suppl} || 0;
+    my $suppl_CDs = exists $o->{supplmedia} ? $o->{supplmedia} : $distribconf->{suppl} || 1;
     my $deselectionAllowed = $distribconf->{askmedia} || $o->{askmedia} || 0;
+    warn ">> suppl_CDs=$suppl_CDs ; deselectionAllowed=$deselectionAllowed\n"; $deselectionAllowed = 1;
 
     log::l(Data::Dumper->Dump([ $phys_medium ], [ 'phys_medium' ]));
     log::l(Data::Dumper->Dump([ $o->{stage2_phys_medium} ], [ 'stage2_phys_medium' ]));
@@ -678,6 +710,7 @@ sub get_media_cfg {
     }
 
     my @new_media = difference2($packages->{media}, \@media);
+    use Data::Dumper; warn Dumper \@new_media;
     _associate_phys_media($o->{all_hds}, $phys_medium, \@new_media);
 
     log::l("get_media_cfg read " . int(@{$packages->{depslist}}) . " headers");
@@ -703,6 +736,8 @@ sub get_standalone_medium {
 
     add2hash($m, { phys_medium => $phys_m, rel_hdlist => 'media_info/hdlist.cz' });
     local $phys_m->{is_suppl} = 1; # so that _get_media_url() works
+    use Data::Dumper;
+    log::l(Data::Dumper->Dump([ $m ], [ 'standalone_medium' ]));
     _get_medium($in, $phys_m, $packages, $m);
 }
 

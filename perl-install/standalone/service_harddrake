@@ -5,7 +5,7 @@ use lib qw(/usr/lib/libDrakX);
 BEGIN { $ENV{DISABLE_DRAKBUG} = 1 }
 
 use strict;
-use diagnostics;
+#use diagnostics;
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 use c;
 use common;
@@ -49,6 +49,7 @@ my %cfg = getVarsFromSh("$hw_sysconfdir/service.conf");
 # autoreconfigure laptop-dependent services when switching from laptop to desktop, and vice versa
 if (!exists $previous_kernel_config{IS_LAPTOP} || $force || $isLaptop != text2bool($previous_kernel_config{IS_LAPTOP})) {
     log::explanations("Autoconfiguring laptop tools since we switched between laptop and desktop systems");
+    warn ">> LAPTOP\n";
     harddrake::autoconf::laptop($isLaptop);
 }
 
@@ -65,14 +66,18 @@ my @cards = (
         module_names => [ qw(NVdriver nvidia.o nvidia.ko nvidia71xx.ko nvidia96xx.ko nvidia97xx.ko nvidia173.ko nvidia-current.ko) ]
     },
     {
-        ldetect_driver_regexp => 'Card:ATI Radeon',
+        ldetect_driver_regexp => 'Card:ATI R',
         xorg_driver_regexp => 'fglrx',
         module_names => [ qw(fglrx.ko fglrx-hd2000.ko) ]
     }
 );
 
+use Data::Dumper;
 foreach my $card (@cards) {
+    warn ">> DRV=$_->{driver} vs $card->{ldetect_driver_regexp} vs:\n" . 
+      Dumper([ grep { /Card:/ } map { $_->{driver} } detect_devices::probeall() ]);
     next if !find { $_->{driver} =~ /$card->{ldetect_driver_regexp}/ } detect_devices::probeall();
+    warn ">> 2: DRV=$_->{driver} vs $card->{ldetect_driver_regexp}\n";
     if (find { -e join('', "/lib/modules/", c::kernel_version(), $_) }
           map { ("/dkms/$_", "/dkms-binary/$_", "/kernel/$_") } map { "/drivers/$_" } map { ("extra/$_", "video/$_", "char/$_", "char/drm/$_") } map { $_, "$_.gz" } @{$card->{module_names}}) {
 
@@ -85,10 +90,12 @@ foreach my $card (@cards) {
         #    s!#*( Load.*glx)!\1!g;
         # } $_ foreach "/etc/X11/XF86Config-4", "/etc/X11/XF86Config";
     } else {
+        warn ">> 3: DRV=$_->{driver} vs $card->{ldetect_driver_regexp}\n";
         require Xconfig::card;
         my @cards = Xconfig::card::probe();
         my $driver = $cards[0]{Driver};
         my $new_driver = $1 if cat_('/etc/X11/xorg.conf') =~ /Driver "($card->{xorg_driver_regexp})"/;
+        warn ">> 4: DRV=$new_driver\n";
         if ($new_driver) {
             cp_af('/etc/X11/xorg.conf', "/etc/X11/xorg.conf.mdv$^T");
             substInFile { s!Driver "($card->{xorg_driver_regexp})"!Driver "$driver"!g } '/etc/X11/xorg.conf';
@@ -110,7 +117,9 @@ my $splash_was_silent = cat_('/proc/splash') =~ /, silent : on/;
 # For each hw, class, detect device, compare and offer to reconfigure if needed
 foreach my $hw_class (@harddrake::data::tree) {
     my ($Ident, $item, $configurator, $detector, $do_it) = @$hw_class{qw(class string configurator detector checked_on_boot)};
+    #warn ">> $Ident => " . $cfg{"DETECT_$Ident"} . "\n";
     next if member($cfg{"DETECT_$Ident"}, qw(NO no));
+    #warn ">> HERE for $Ident\n";
 
     $configurator ||= $hw_class->{configurator};
 
@@ -207,6 +216,7 @@ foreach my $hw_class (@harddrake::data::tree) {
         harddrake::autoconf::mouse_conf($modules_conf);
         next;
     } elsif ($Ident eq "CPU") {
+        warn ">> CPUFREQ\n";
         harddrake::autoconf::cpufreq();
     } elsif ($Ident eq "FLOPPY") {
         harddrake::autoconf::floppy();

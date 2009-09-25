@@ -1,6 +1,6 @@
 package install::install2; # $Id$
 
-use diagnostics;
+#use diagnostics;
 use strict;
 use vars qw($o);
 
@@ -138,6 +138,7 @@ sub selectKeyboard {
 sub selectInstallClass {
     my ($auto) = @_;
 
+    log::l("here 1");
     installStepsCall($o, $auto, 'selectInstallClass');
 
     if ($o->{isUpgrade}) {
@@ -387,6 +388,7 @@ sub main {
 
     undef $::auto_install if $cfg;
 
+    log::l("using '$o->{method}' method");
     $o->{stage2_phys_medium} = install::media::stage2_phys_medium($o->{method});
 
     log::l("second stage install running (", install::any::drakx_version($o), ")");

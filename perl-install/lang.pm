@@ -1,6 +1,6 @@
 package lang; # $Id$
 
-use diagnostics;
+#use diagnostics;
 use strict;
 use common;
 use utf8;
@@ -1044,7 +1044,9 @@ sub pack_langs {
 sub system_locales_to_ourlocale {
     my ($locale_lang, $locale_country) = @_;
     my $locale = {};
+    warn ">> $locale_lang\n";
     my $h = analyse_locale_name($locale_lang);
+    use Data::Dumper; warn Data::Dumper->Dump([ $h ], [ 'in_system' ]);
     my $locale_lang_no_encoding = join('_', $h->{main}, if_($h->{country}, $h->{country}));
     $locale->{lang} = member($locale_lang_no_encoding, list_langs()) ?
 	$locale_lang_no_encoding : #- special lang's such as en_US pt_BR
@@ -1064,7 +1066,9 @@ sub lang_to_ourlocale {
     my ($lang) = @_;
 
     my $locale = system_locales_to_ourlocale($lang);
+    warn ">>  UTF=$locale->{utf8}\n";
     $locale->{utf8} ||= utf8_should_be_needed($locale);
+    warn ">>  UTF=$locale->{utf8}\n";
     lang_changed($locale);
     $locale;
 }

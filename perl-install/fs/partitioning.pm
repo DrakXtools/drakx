@@ -1,6 +1,6 @@
 package fs::partitioning; # $Id$
 
-use diagnostics;
+#use diagnostics;
 use strict;
 
 use common;
@@ -40,7 +40,7 @@ sub choose_partitions_to_format {
     return if @l == 0 || every { $_->{toFormat} } @l;
 
     #- keep it temporary until the guy has accepted
-    $_->{toFormatTmp} = $_->{toFormat} || $_->{toFormatUnsure} foreach @l;
+    #$_->{toFormatTmp} = $_->{toFormat} || $_->{toFormatUnsure} foreach @l;
 
     $in->ask_from_(
         { messages => N("Choose the partitions you want to format"),

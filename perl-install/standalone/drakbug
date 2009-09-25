@@ -245,7 +245,9 @@ sub get_package {
 sub get_top_of_trace {
     my ($error) = @_;
     return if !$error;
-    sprintf(" (%s)", first(split(/\n/, $error)));
+    my $str = first(split(/\n/, $error));
+    $str =~ s!(/usr/lib/libDrakX|/usr/lib/perl5)!!;
+    sprintf(" (%s)", $str);
 }
 
 sub report_bug_to_bugzilla() {
@@ -300,6 +302,8 @@ $gdb_trace)),
                                )
                                  . qq(
 Kernel version = $kernel_release
+Locale=
+Drakxtools=
 Distribution=) . cat_('/etc/release')
 . if_($cpuinfo, "CPU=$cpuinfo")
                            ),

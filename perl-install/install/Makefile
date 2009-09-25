@@ -22,7 +22,7 @@ tar:
 	svn export -q -rBASE ../../tools $(PRODUCT)-$(VERSION)/tools
 	svn export -q -rBASE ../../kernel $(PRODUCT)-$(VERSION)/kernel
 	cp ../../Makefile.config $(PRODUCT)-$(VERSION)/
-	tar cfY $(PRODUCT)-$(VERSION).tar.lzma $(PRODUCT)-$(VERSION)
+	tar cfJ $(PRODUCT)-$(VERSION).tar.lzma $(PRODUCT)-$(VERSION)
 	rm -rf $(PRODUCT)-$(VERSION)
 
 install:
@@ -75,10 +75,10 @@ endif
 
 full_stage2:
 	$(MAKE) stage2
-	$(MAKE) compress
+	#$(MAKE) compress
 
 compress:
-	../../tools/mdkinst_stage2_tool --clean --compress $(STAGE2_DEST)
+	../../tools/mdkinst_stage2_tool --compress $(STAGE2_DEST)
 
 stage2:
 	rm -rf $(DEST)

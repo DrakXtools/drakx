@@ -1,6 +1,6 @@
 package install::steps; # $Id$
 
-use diagnostics;
+#use diagnostics;
 use strict;
 use vars qw(@filesToSaveForUpgrade @filesNewerToUseAfterUpgrade);
 
@@ -873,9 +873,12 @@ sub stop_network_interface {
 sub upNetwork {
     my ($o, $b_pppAvoided) = @_;
 
+    log::l("in steps::upNetwork(); is_network_install=" . install::any::is_network_install($o) . " || $::local_install");
     install::any::is_network_install($o) || $::local_install and return 1;
     $o->{modules_conf}->write;
+    log::l("will symlink /etc/resolv.conf");
     if (! -e "/etc/resolv.conf") {
+	    log::l("symlinking /etc/resolv.conf");
         #- symlink resolv.conf in install root too so that updates and suppl media can be added
         symlink "$::prefix/etc/resolv.conf", "/etc/resolv.conf";
     }

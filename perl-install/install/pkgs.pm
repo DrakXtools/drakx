@@ -164,26 +164,27 @@ sub packageCallbackChoices {
 sub _packageCallbackChoices_ {
     my ($urpm, $choices, $virtual_pkg_name) = @_;
 
+    my $kernel_flavor = 'kernel-tmb';
     my ($prefer, $_other) = urpm::select::get_preferred($urpm, $choices, '');
     if (@$prefer) {
 	@$prefer;
     } elsif ($virtual_pkg_name eq 'kernel') {
-	my $re = join('|', map { "kernel\Q$_-2" } _bestKernel_extensions());
+	my $re = join('|', map { "$kernel_flavor\Q$_-2" } _bestKernel_extensions());
 	my @l = grep { $_->name =~ $re } @$choices;
 	log::l("packageCallbackChoices: kernel chosen ", join(",", map { $_->name } @l), " in ", join(",", map { $_->name } @$choices));
 	@l;
-    } elsif ($choices->[0]->name =~ /^kernel-(.*source-|.*-devel-)/) {
+    } elsif ($choices->[0]->name =~ /^$kernel_flavor-(.*source-|.*-devel-)/) {
 	my @l = grep {
-	    if ($_->name =~ /^kernel-.*source-stripped-(.*)/) {
+	    if ($_->name =~ /^$kernel_flavor-.*source-stripped-(.*)/) {
 		my $version = quotemeta($1);
 		find {
 		    $_->name =~ /-$version$/ && ($_->flag_installed || $_->flag_selected);
 		} $urpm->packages_providing('kernel');
-	    } elsif ($_->name =~ /(kernel-.*)-devel-(.*)/) {
+	    } elsif ($_->name =~ /($kernel_flavor-.*)-devel-(.*)/) {
 		my $kernel = "$1-$2";
 		my $p = packageByName($urpm, $kernel);
 		$p && ($p->flag_installed || $p->flag_selected);
-	    } elsif ($_->name =~ /^kernel-.*source-/) {
+	    } elsif ($_->name =~ /^$kernel_flavor-.*source-/) {
 		#- hopefully we don't have a media with kernel-source but not kernel-source-stripped nor kernel-.*-devel
 		0;
 	    } else {
@@ -686,7 +687,7 @@ sub install {
     my $LOG = _openInstallLog();
 
     $packages->{log} = $packages->{info} = $packages->{print} = sub {
-        print $LOG "$_[0]\n";
+        print $LOG join('', @_) . "\n";
     };
 
     #- do not modify/translate the message used with installCallback since
@@ -707,30 +708,6 @@ sub install {
     fs::loopback::save_boot($loop_boot);
 }
 
-sub _unselect_package {
-    my ($packages, $pkg) = @_;
-    #- update flag associated to package.
-    $pkg->set_flag_installed(1);
-    $pkg->set_flag_upgrade(0);
-    #- update obsoleted entry.
-    my $rejected = $packages->{state}{rejected};
-    foreach (keys %$rejected) {
-        if (delete $rejected->{$_}{closure}{$pkg->fullname}) {
-            %{$rejected->{$_}{closure}} or delete $rejected->{$_};
-        }
-    }
-}
-
-sub is_package_installed {
-    my ($db, $pkg) = @_;
-    my $check_installed;
-    $db->traverse_tag('name', [ $pkg->name ], sub {
-                          my ($p) = @_;
-                          $check_installed ||= $pkg->compare_pkg($p) == 0;
-                      });
-    return $check_installed;
-}
-
 sub _install_raw {
     my ($packages, $isUpgrade, $callback, $LOG, $noscripts) = @_;
 
@@ -742,26 +719,23 @@ sub _install_raw {
     # leaks a fd per transaction (around ~100 for a typically gnome install, see #49097):
     # bug present in 2009.0, 2008.1, 2008.0, ... (probably since r11141 aka when switching to rpm-4.2 in URPM-0.83)
     local $packages->{options}{script_fd} = fileno $LOG;
+    local $packages->{options}{justdb} = 1;
 
     my ($retry, $retry_count);
 
-    log::l("rpm transactions start");
+    print $LOG "rpm transactions start\n";
 
     my $exit_code = urpm::main_loop::run($packages, $packages->{state}, undef, undef, undef, {
         open_helper => $callback,
-        close_helper => sub {
-				my ($db, $packages, $_type, $id) = @_;
-				&$callback;
-				my $pkg = defined $id && $packages->{depslist}[$id] or return;
+        log_and_check => sub {
+				my ($_db, $pkg, $check_installed) = @_;
 				print $LOG $pkg->fullname . "\n";
-				my $check_installed = is_package_installed($db, $pkg);
+
                                 if ($pkg->name eq 'mdv-rpm-summary' && $check_installed) {
                                     install::pkgs::setup_rpm_summary_translations();
                                 }
 
-				if ($check_installed) {
-                                    _unselect_package($packages, $pkg);
-                                } else {
+				if (!$check_installed) {
                                     log::l($pkg->name . " not installed, " . URPM::rpmErrorString());
                                 }
         }, inst => $callback,

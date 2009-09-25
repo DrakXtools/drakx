@@ -63,8 +63,11 @@ sub mirrors_raw {
     log::explanations("trying mirror list from $list");
     my @lines;
     if ($::isInstall) {
+        # FIXME: better use urpm::download::sync_url($urpm, $url, dir => '/tmp', callback =>=,
         require install::http;
         my $f = install::http::getFile($list, "strict-certificate-check" => 1) or die "mirror list not found";
+        warn ">> size=$size, GLOB is '$f'\n";
+        $f or die "mirror list not found";
         local $SIG{ALRM} = sub { die "timeout" };
         alarm 60;
         log::l("using mirror list $list");
