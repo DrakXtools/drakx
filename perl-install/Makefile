@@ -65,7 +65,7 @@ localcopy: clean
 localdist: tar
 
 tar: localcopy
-	tar cfY $(PACKAGE)-$(PKGVERSION).tar.lzma $(PACKAGE)-$(PKGVERSION)
+	tar cfJ $(PACKAGE)-$(PKGVERSION).tar.lzma $(PACKAGE)-$(PKGVERSION)
 	rm -rf $(PACKAGE)-$(PKGVERSION)
 
 # rules to build a distributable rpm
