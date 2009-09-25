@@ -1,0 +1,271 @@
+#!/usr/bin/perl
+
+use lib qw(/usr/lib/libDrakX);
+
+BEGIN { $ENV{DISABLE_DRAKBUG} = 1 }
+
+use strict;
+use diagnostics;
+use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+use c;
+use common;
+use interactive;
+use detect_devices;
+use harddrake::data;
+use harddrake::autoconf;
+use harddrake::sound;
+use modules;
+use Storable qw(store retrieve);
+
+
+my $force = member('--force', @ARGV);
+
+my $invert_do_it = $ARGV[0] eq 'X11' ? 1 : 0;
+my ($hw_sysconfdir, $timeout) = ("/etc/sysconfig/harddrake2", $invert_do_it ? 600 : 25);
+my $last_boot_config = "$hw_sysconfdir/previous_hw";
+
+$last_boot_config .= '_X11' if $invert_do_it;
+
+# first run ? if not read old hw config
+my $previous_config;
+if (-f $last_boot_config && -s $last_boot_config) {
+    eval { $previous_config = Storable::retrieve($last_boot_config) };
+    log::explanations("resetting previous hardware file ($@)") if $@;
+}
+$previous_config ||= {};
+$previous_config = $$previous_config if ref($previous_config) !~ /HASH/;
+my $first_run = is_empty_hash_ref($previous_config);
+
+my $modules_conf = modules::any_conf->read;
+
+my $isLaptop = detect_devices::isLaptop();
+my $curr_kernel = c::kernel_version();
+my ($kernel_major) = $curr_kernel =~ /^(\d+\.\d+)/;
+
+my %previous_kernel_config = getVarsFromSh("$hw_sysconfdir/kernel");
+setVarsInSh("$hw_sysconfdir/kernel", { KERNEL => $kernel_major, IS_LAPTOP => bool2text($isLaptop) });
+my %cfg = getVarsFromSh("$hw_sysconfdir/service.conf");
+
+# autoreconfigure laptop-dependent services when switching from laptop to desktop, and vice versa
+if (!exists $previous_kernel_config{IS_LAPTOP} || $force || $isLaptop != text2bool($previous_kernel_config{IS_LAPTOP})) {
+    log::explanations("Autoconfiguring laptop tools since we switched between laptop and desktop systems");
+    harddrake::autoconf::laptop($isLaptop);
+}
+
+my $known_kernels = "$hw_sysconfdir/kernels";
+if (!member($curr_kernel, chomp_(cat_($known_kernels)))) {
+    harddrake::autoconf::fix_aliases($modules_conf) if !$first_run;
+    append_to_file($known_kernels, "$curr_kernel\n");
+}
+
+my @cards = (
+    {
+        ldetect_driver_regexp => 'Card:NVIDIA',
+        xorg_driver_regexp => 'nv.+',
+        module_names => [ qw(NVdriver nvidia.o nvidia.ko nvidia71xx.ko nvidia96xx.ko nvidia97xx.ko nvidia173.ko nvidia-current.ko) ]
+    },
+    {
+        ldetect_driver_regexp => 'Card:ATI Radeon',
+        xorg_driver_regexp => 'fglrx',
+        module_names => [ qw(fglrx.ko fglrx-hd2000.ko) ]
+    }
+);
+
+foreach my $card (@cards) {
+    next if !find { $_->{driver} =~ /$card->{ldetect_driver_regexp}/ } detect_devices::probeall();
+    if (find { -e join('', "/lib/modules/", c::kernel_version(), $_) }
+          map { ("/dkms/$_", "/dkms-binary/$_", "/kernel/$_") } map { "/drivers/$_" } map { ("extra/$_", "video/$_", "char/$_", "char/drm/$_") } map { $_, "$_.gz" } @{$card->{module_names}}) {
+
+        # do not automatically switch from nv to nvidia (in order to handle
+        # cases where nvidia module crashes the system):
+        #
+        # substInFile {
+        #    log::explanations("switch XFree86 driver from nv to nvidia") if /Driver "nv"/;
+        #    s!Driver "nv.*"!Driver "nvidia"!g;
+        #    s!#*( Load.*glx)!\1!g;
+        # } $_ foreach "/etc/X11/XF86Config-4", "/etc/X11/XF86Config";
+    } else {
+        require Xconfig::card;
+        my @cards = Xconfig::card::probe();
+        my $driver = $cards[0]{Driver};
+        my $new_driver = $1 if cat_('/etc/X11/xorg.conf') =~ /Driver "($card->{xorg_driver_regexp})"/;
+        if ($new_driver) {
+            cp_af('/etc/X11/xorg.conf', "/etc/X11/xorg.conf.mdv$^T");
+            substInFile { s!Driver "($card->{xorg_driver_regexp})"!Driver "$driver"!g } '/etc/X11/xorg.conf';
+            touch('/var/run/harddrake_swithed_to_free_driver');
+            log::explanations("switch X.org driver from $new_driver to $driver");
+            touch('/var/run/harddrake-notify-x11-free-driver-switch');
+            Xconfig::card::libgl_config_and_more({ Driver => $driver });
+        }
+    }
+}
+
+my $is_globetrotter = -f '/usr/sbin/mdkmove';
+
+my (%config, $wait);
+my $in;
+my $splash = -f '/proc/splash';
+my $splash_was_silent = cat_('/proc/splash') =~ /, silent : on/;
+
+# For each hw, class, detect device, compare and offer to reconfigure if needed
+foreach my $hw_class (@harddrake::data::tree) {
+    my ($Ident, $item, $configurator, $detector, $do_it) = @$hw_class{qw(class string configurator detector checked_on_boot)};
+    next if member($cfg{"DETECT_$Ident"}, qw(NO no));
+
+    $configurator ||= $hw_class->{configurator};
+
+    next unless $do_it ^ $invert_do_it;
+    # No detector ? (should never happen but who know ?)
+    ref($detector) eq 'CODE' or next;
+
+    my %ID = map {
+        my $i = $_;
+        my $id = defined $i->{device} ? $i->{device} : join(':', map { $i->{$_} } qw(vendor id subvendor subid));
+        $id => $i;
+    } eval { $detector->({}) };
+    $config{$Ident} = \%ID;
+    next if !$is_globetrotter && !$force && $first_run; # do not fsck on first run but if --force
+
+    my $oldconfig = $force ? {} : $previous_config->{$Ident};
+
+    my $msg;
+    my @was_removed = difference2([ keys %$oldconfig ], [ keys %ID ]);
+    if (@was_removed) {
+     $msg .= N("Some devices in the \"%s\" hardware class were removed:\n", $item) .
+       join('', map { N("- %s was removed\n", harddrake::data::custom_id($oldconfig->{$_}, $item)) } @was_removed) . "\n";
+    }
+    my @added = difference2([ keys %ID ], [ keys %$oldconfig ]);
+    $msg .= N("Some devices were added: %s\n", $item) if @added;
+    $msg .= N("- %s was added\n", harddrake::data::custom_id($ID{$_}, $item)) foreach @added;
+    log::explanations("removed $Ident: " . harddrake::data::custom_id($oldconfig->{$_}, $item)) foreach @was_removed;
+    log::explanations("added $Ident: " . harddrake::data::custom_id($ID{$_}, $item)) foreach @added;
+
+    if ($Ident eq 'FIREWIRE_CONTROLLER' && any { $_->{driver} eq 'ohci1394' } @ID{@added}) {
+        modules::load_and_configure($modules_conf, 'ohci1394');
+        $modules_conf->write;
+    }
+
+    @added || @was_removed or $cfg{"DETECT_$Ident"} ne 'force' and next;
+
+    next if $Ident eq 'MOUSE' && $kernel_major ne $previous_kernel_config{KERNEL} && $cfg{"DETECT_$Ident"} ne 'force';
+
+    my @configurator_pool = $configurator;
+
+    if ($Ident eq "AUDIO") {
+        # automatic sound slots configuration
+        rm_rf("/etc/asound.state") if -e "/etc/asound.state";
+        harddrake::sound::configure_sound_slots($modules_conf);
+        next;
+    } elsif ($Ident eq "ETHERNET") {
+        $modules_conf->remove_alias_regexp('^(wlan|eth)[0-9]*$');
+        modules::load_category($modules_conf, 'network/main|gigabit|usb|wireless|firewire|pcmcia');
+        require network::connection::ethernet;
+        network::connection::ethernet::configure_eth_aliases($modules_conf);
+        require network::rfswitch;
+        network::rfswitch::configure();
+        require network::shorewall;
+        network::shorewall::update_interfaces_list();
+        $modules_conf->write;
+        next;
+    } elsif (member($Ident, qw(ATA_STORAGE CARD_READER RAID_STORAGE SATA_STORAGE SCSI_CONTROLLER))) {
+        # set scsi_hostadapter in modprobe.conf:
+        modules::load_category($modules_conf, 'disk/' . {
+			ATA_STORAGE => 'ide',
+			SATA_STORAGE => 'sata',
+			SCSI_CONTROLLER => 'scsi',
+			RAID_STORAGE => 'hardware_raid',
+			CARD_READER => 'card_reader'
+		}->{$Ident});
+        $modules_conf->write;
+        next;
+    } elsif (member($Ident, qw(AGP DVB TV))) {
+        my @old_drivers = uniq(map { $_->{driver} } values %$oldconfig);
+        my @new_drivers = uniq(map { $_->{driver} } values %ID);
+        # load DVB & TV drivers (eg: for One), not for AGP (done by X):
+        modules::load_category($modules_conf, 'multimedia/' . lc($Ident)) if member($Ident, qw(DVB TV));
+        $modules_conf->remove_module(difference2(\@old_drivers, \@new_drivers));
+        # add agpgart and the like modules to modprobe.preload if needed:
+        $modules_conf->write;
+        foreach (difference2(\@new_drivers, \@old_drivers)) {
+            eval { modules::load($_) };
+            warn "warning: $@" if $@;
+        }
+        next;
+    } elsif ($Ident eq "BLUETOOTH") {
+        harddrake::autoconf::bluetooth(scalar keys %ID);
+    } elsif ($Ident eq "PCMCIA_CONTROLLER") {
+        harddrake::autoconf::pcmcia(keys %ID ? first(values(%ID))->{driver} : '');
+    } elsif ($Ident eq "USB_CONTROLLER") {
+        # nearly useless (only mkinitrd uses it):
+        modules::load_category($modules_conf, 'bus/usb');
+        $modules_conf->write;
+    } elsif ($Ident eq "VIDEO") {
+        # explicitely NOT read the existing config (eg: new profile with globetrotter)
+        harddrake::autoconf::xconf($modules_conf, {}, member($cfg{SETUP_FB}, qw(NO no)));
+        next;
+    } elsif ($Ident eq "MOUSE") {
+        harddrake::autoconf::mouse_conf($modules_conf);
+        next;
+    } elsif ($Ident eq "CPU") {
+        harddrake::autoconf::cpufreq();
+    } elsif ($Ident eq "FLOPPY") {
+        harddrake::autoconf::floppy();
+    }
+
+    next if $is_globetrotter && !$hw_class->{automatic};
+    next unless $configurator_pool[0];
+    if (ref($configurator) ne 'CODE' && !-x first(split /\s+/, $configurator_pool[0])) {
+        log::explanations(qw(skip $Ident configuration since "$configurator" is not executable));
+        next;
+    }
+    my ($pid, $no, $res);
+    $hw_class->{automatic} ||= ref($configurator) eq 'CODE';
+
+    if (!$hw_class->{automatic}) {
+        $SIG{ALRM} = sub { $no = 1; kill 15, $pid };
+        unless ($pid = fork()) {
+            $splash and eval { output('/proc/splash', 'verbose') } and $splash = 0;
+            exec("/usr/share/harddrake/confirm", $Ident, $timeout, $msg);
+        }
+        alarm($timeout);
+        wait();
+        $res = $?;
+        alarm(0);
+    } else {
+        $res = 1;
+    }
+    if (ref($configurator) eq 'CODE') {
+        eval { $configurator->() };
+        log::explanations(qw(cannot run "$configurator": $@)) if $@;
+    } elsif (!$no && $res) {
+        foreach my $program (@configurator_pool) {
+            if (fork()) {
+                wait();
+            } else {
+                log::explanations(qq(run "$program"));
+                exec("$program 2>/dev/null") or do {
+                    log::explanations(qq(cannot run "$program"));
+                    require POSIX;
+                    POSIX::_exit();
+                };
+            }
+        }
+    }
+    if (!$hw_class->{automatic}) {
+        require interactive;
+        undef $wait;
+        $in ||= interactive->vnew;
+        $wait = $in->wait_message(N("Please wait"), N("Hardware probing in progress"));
+    }
+
+}
+
+# output new hw config
+log::explanations("created file $last_boot_config");
+Storable::store(\%config, $last_boot_config);
+
+# restore bootsplash mode
+$splash_was_silent and eval { output('/proc/splash', 'silent') };
+
+
+$in->exit(0) if $in;

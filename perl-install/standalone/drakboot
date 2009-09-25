@@ -1,0 +1,300 @@
+#!/usr/bin/perl
+
+# DrakBoot
+# $Id$
+# Copyright (C) 2001-2008 Mandriva
+# Yves Duret, Thierry Vignaud
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+use strict;
+use diagnostics;
+use lib qw(/usr/lib/libDrakX);
+
+use standalone; #- warning, standalone must be loaded very first, for 'explanations'
+use c;
+use common;
+use interactive;
+use any;
+use bootloader;
+use fsedit;
+use fs;
+use Config;
+use POSIX;
+use Xconfig::various;
+use log;
+
+my $in = 'interactive'->vnew('su');
+
+my $all_hds;
+my $fstab;
+my $bootloader;
+my $cmdline = cat_('/proc/cmdline');
+
+my $is_bootloader_mode = !$in->isa('interactive::gtk') || any { /^--boot$/ } @ARGV;
+
+if ($is_bootloader_mode || any { /^--splash$/ } @ARGV) {
+    $all_hds = fsedit::get_hds();
+    fs::get_raw_hds('', $all_hds);
+    fs::get_info_from_fstab($all_hds);
+    $fstab = [ fs::get::fstab($all_hds) ];
+    $bootloader = bootloader::read($all_hds);
+    if (!$bootloader) {
+        $in->ask_okcancel('', N("No bootloader found, creating a new configuration"), 0) or $in->exit;
+        any::setupBootloaderBeforeStandalone($in->do_pkgs, $bootloader ||= {}, $all_hds, $fstab);
+    }
+}
+
+if ($is_bootloader_mode) {
+    $::isWizard = 1;
+    eval { any::setupBootloaderUntilInstalled($in, $bootloader, $all_hds, $fstab, $ENV{SECURE_LEVEL}) };
+    die if $@ && $@ !~ /^wizcancel/;
+    $in->exit(0);
+}
+
+require ugtk2;
+ugtk2->import(qw(:helpers :wrappers :create));
+require mygtk2;
+mygtk2->import(qw(gtknew));
+
+if (any { /^--splash$/ } @ARGV) {
+    splash_choice();
+} else {
+    autologin_choice();
+}
+
+sub run_boot_window {
+    my ($title, $pack_list, $apply_sub) = @_;
+
+    my $w = ugtk2->new($title);
+    my $window = $w->{window};
+    $::main_window = $w->{real_window};
+
+    $window->signal_connect(delete_event => sub { ugtk2->exit(0) });
+    unless ($::isEmbedded) {
+        $window->set_border_width(2);
+        ### menus definition
+        # the menus are not shown but they provides shiny shortcut like C-q
+        my @menu_items = ([ N("/_File"), undef, undef, undef, '<Branch>' ],
+                          [ N("/File/_Quit"), N("<control>Q"), sub { ugtk2->exit(0) }, undef, '<Item>' ],
+                         );
+        create_factory_menu($w->{rwindow}, @menu_items);
+        ######### menus end
+    }
+    gtkadd($window, gtknew('VBox', children => [
+                             @$pack_list,
+                             0, create_okcancel({
+                                                 cancel_clicked => sub { ugtk2->exit(0) },
+                                                 ok_clicked => sub {
+                                                     $apply_sub->();
+                                                     ugtk2->exit(0);
+                                                 }
+                                                }) ]));
+    $window->show_all;
+    gtkflush();
+    $w->main;
+    $in->exit(0);
+}
+
+sub splash_choice() {
+    require bootsplash;
+    my ($cur_res, $bootsplash_available) = bootsplash::get_framebuffer_resolution();
+    $bootsplash_available = 1 if $::testing;
+
+    my $theme = bootsplash::themes_read_sysconfig($cur_res);
+    $bootsplash_available or $theme->{enabled} = 0;
+
+    my $boot_pic = gtknew('Image', file => $bootsplash::default_thumbnail);
+    change_image($boot_pic, $theme->{name}, $cur_res);
+
+    my $theme_combo = gtknew('ComboBox', text => $theme->{name}, list => [ bootsplash::themes_list_for_resolution($cur_res) ]);
+    $theme_combo->entry->signal_connect(changed => sub {
+                                            $theme->{name} = $theme_combo->entry->get_text;
+                                            change_image($boot_pic, $theme->{name}, $cur_res);
+                                        });
+
+    my $splash_box;
+    my $boot_warn = 1;
+    my %modes = (
+		 text => N("Text only"),
+		 verbose => N("Verbose"),
+		 silent => N("Silent"),
+		);
+    my $mode_combo = gtknew('ComboBox', text => $modes{$theme->{enabled} ? $cmdline =~ /\bsplash=silent\b/ ? 'silent' : 'verbose' : 'text'}, list => [ values %modes  ]);
+    $mode_combo->entry->signal_connect(changed => sub {
+					    $theme->{enabled} = $mode_combo->entry->get_text ne $modes{text};
+					    if ($boot_warn && !$bootsplash_available && $theme->{enabled}) {
+						if ($in->ask_yesorno(N("Warning"),
+								     [ N("Your system bootloader is not in framebuffer mode. To activate graphical boot, select a graphic video mode from the bootloader configuration tool.") . "\n" .
+								       N("Do you want to configure it now?") ])) {
+						    enable_framebuffer();
+						    #- it would be nice to get available themes for new cur_res here
+						}
+						$boot_warn = 0;
+					    }
+					    $splash_box->set_sensitive($theme->{enabled});
+					});
+
+    my $_thm_button = gtknew('Button', text => N("Install themes"));
+
+    run_boot_window(N("Graphical boot theme selection"),
+                       [
+                        1, gtknew('VBox', spacing => 5, border_width => 5, children => [
+				    0, gtknew('HBox', spacing => 5, children_tight => [ gtknew('Label', text => N("Graphical boot mode:")), $mode_combo ]),
+				    0, $splash_box = gtknew('HBox', sensitive => $theme->{enabled}, children_loose => [
+					       gtkadd(gtkcreate_frame(N("Theme")),
+						      gtknew('VBox', spacing => 5, children_tight => [
+								$theme_combo,
+								gtksignal_connect(gtkset_active(gtknew('CheckButton', text => N("Display theme\nunder console")),
+												$theme->{keep_logo}),
+										  clicked => sub { invbool(\$theme->{keep_logo}) }) ])),
+					       gtknew('VSeparator'),
+					       gtknew('VBox', spacing => 5, children_tight => [ $boot_pic ]) ]),
+				    0, gtknew('Button', text => N("Create new theme"), clicked => sub { exec '/usr/sbin/draksplash' }) ]),
+                       ],
+                       sub {
+                           bootsplash::set_logo_console($theme->{keep_logo});
+                           if ($theme->{enabled}) {
+                               bootsplash::switch($theme->{name});
+                           } else {
+                               bootsplash::remove();
+                           }
+			   my $text = $mode_combo->entry->get_text;
+			   my $mode = find { $modes{$_} eq $text } keys %modes;
+			   set_splash_append($mode ne 'text' ? $mode : undef);
+                       });
+}
+
+sub autologin_choice() {
+    my @users = sort(list_users());
+    my @sessions = sort(split(' ', `/usr/sbin/chksession -l`));
+
+    my $x_mode = Xconfig::various::runlevel() == 5;
+    my $auto_mode = any::get_autologin();
+
+    my $user = member($auto_mode->{user}, @users) ? $auto_mode->{user} : $users[0];
+    if (!$user) {
+        # no user, bad but add root anyway:
+        $user = "root";
+        push @users, $user;
+    }
+    my $user_combo = gtknew('ComboBox', text => $user, list => \@users);
+    my $desktop_combo = Gtk2::ComboBox->new_with_strings(\@sessions, if_(member($auto_mode->{desktop}, @sessions), $auto_mode->{desktop}));
+
+    my $auto_box = gtknew('Table', col_spacings => 5, row_spacings => 5, homogeneous => 1, children => [
+                                    [ gtknew('Label_Left', text => N("Default user")), $user_combo ],
+                                    [ gtknew('Label_Left', text => N("Default desktop")), $desktop_combo ] ]);
+    $auto_box->set_sensitive($auto_mode->{user} ? 1 : 0);
+
+    my @auto_buttons = gtkradio((N("No, I do not want autologin")) x 2,
+                                N("Yes, I want autologin with this (user, desktop)"));
+    $auto_buttons[1]->signal_connect('toggled' => sub { $auto_box->set_sensitive($auto_buttons[1]->get_active) });
+    $auto_buttons[0]->signal_connect('toggled' => sub { $auto_box->set_sensitive(!$auto_buttons[0]->get_active) });
+    $auto_buttons[1]->set_active(1) if $auto_mode->{user};
+    $auto_buttons[0]->set_active(1) if !$auto_mode->{user};
+
+    my $x_box;
+    run_boot_window(N("System mode"),
+                    [
+                     1, gtknew('VBox', spacing => 5, children_tight => [
+                                  gtksignal_connect(gtkset_active(gtknew('CheckButton', text => N("Launch the graphical environment when your system starts")),
+                                                                  $x_mode),
+                                                    clicked => sub {
+                                                        $x_box->set_sensitive(!$x_mode);
+                                                        $x_mode = !$x_mode;
+                                                    }),
+                                  $x_box = gtknew('VBox', sensitive => $x_mode, children_tight => [
+                                            gtknew('VBox', children_tight => [ @auto_buttons ]),
+                                            $auto_box
+                                           ]) ])
+                    ],
+                    sub {
+                        Xconfig::various::runlevel($x_mode ? 5 : 3);
+                        $::testing and return;
+                        if ($auto_buttons[1]->get_active) {
+                            $auto_mode->{user} = $user_combo->entry->get_text;
+                            $auto_mode->{desktop} = $desktop_combo->entry->get_text;
+			} else {
+                            $auto_mode->{user} = undef;
+                            $auto_mode->{desktop} = undef;
+                        }
+                        any::set_autologin($in->do_pkgs, $auto_mode);
+                    });
+}
+
+
+#-------------------------------------------------------------
+# launch autologin functions
+#-------------------------------------------------------------
+
+sub change_image {
+    my ($boot_pic, $theme, $res) = @_;
+    my $img_file = bootsplash::theme_get_image_for_resolution($theme, $res);
+    -f $img_file or return;
+    my $boot_pixbuf = gtknew('Pixbuf', file => $img_file);
+    $boot_pixbuf = $boot_pixbuf->scale_simple(300, 200, 'nearest');
+    $boot_pic->set_from_pixbuf($boot_pixbuf);
+}
+
+sub set_splash_append {
+    my ($val) = @_;
+    bootloader::set_append_with_key($bootloader, 'splash', undef);
+    bootloader::set_append_with_key($bootloader, 'splash', $val);
+    modify_bootloader($bootloader, $all_hds);
+}
+
+sub enable_framebuffer() {
+    my $vga = bootsplash::get_framebuffer_resolution();
+    my ($current_entry) = $cmdline =~ /^BOOT_IMAGE=(\S+)/;
+    my %entries = (
+                   $current_entry => 1
+                  );
+    local $::isWizard = 1;
+    local $::Wizard_no_previous = 1;
+    local $::Wizard_finished = 1;
+    $::Wizard_title = N("Boot Style Configuration");
+    eval {
+        $in->ask_from(N("Video mode"),
+                      N("Please choose a video mode, it will be applied to each of the boot entries selected below.
+Be sure your video card supports the mode you choose."),
+                      [
+                       { label => N("Video mode"), val => \$vga,
+                         list => [ '', Xconfig::resolution_and_depth::bios_vga_modes() ],
+                         format => \&Xconfig::resolution_and_depth::to_string
+                       },
+                       map {
+                           { text => $_->{label}, val => \$entries{$_->{label}}, type => 'bool' };
+                       } grep { $_->{label} !~ /failsafe|floppy|memtest/ } @{$bootloader->{entries}}
+                      ]);
+        if ($vga) {
+            $vga = $vga->{bios} if ref($vga);
+            while (my ($label, $e) = each %entries) {
+                $e or next;
+                my $entry = find { $_->{label} eq $label } @{$bootloader->{entries}};
+                $entry->{vga} = $vga;
+            }
+            modify_bootloader($bootloader, $all_hds);
+        }
+    };
+    die if $@ && $@ !~ /^wizcancel/;
+    $::WizardWindow->destroy unless $::isEmbedded;
+    $vga;
+}
+
+sub modify_bootloader {
+    my ($bootloader, $all_hds) = @_;
+    bootloader::action($bootloader, 'write', $all_hds);
+    bootloader::action($bootloader, 'when_config_changed');
+}

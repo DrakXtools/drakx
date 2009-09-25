@@ -1,0 +1,167 @@
+#!/usr/bin/perl
+
+# drakupdate_fstab
+# Copyright (C) 2002-2008 Mandriva (pixel@mandriva.com)
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+use lib qw(/usr/lib/libDrakX);
+
+use detect_devices;
+use security::level;
+use common;
+use fsedit;
+use lang;
+use any;
+use fs;
+
+$::isStandalone = 1; #- not using standalone.pm which generates too many logs for drakupdate_fstab purpose
+
+log::l("drakupdate_fstab called with @ARGV\n");
+
+my ($debug, $verbose, $removed);
+
+my %args = (
+            '--auto' => \$::auto,
+            '--debug' => \$debug,
+            '--test' => \$::testing,
+            '--verbose' => \$verbose,
+           );
+
+each_index {
+    if ($args{$_}) {
+        ${$args{$_}} = 1;
+        splice @ARGV, $::i - $removed, 1;
+        $removed++;
+    }
+} @ARGV;
+
+my ($raw_action, $device_name) = @ARGV;
+my ($action) = $raw_action =~ /^--(add|del)/;
+
+@ARGV == 2 && $action or die "usage: drakupdate_fstab [--test] [--verbose] [--auto] [--add | --del] <device>\n";
+
+main($action, $device_name);
+
+sub device_name_to_entry {
+    my ($name) = @_;
+    $name =~ s|/dev/||;
+    $name =~ /fd[01]/ && !$::auto and return { device => $name };
+    my @l = detect_devices::get();
+    if ($debug) {
+	require Data::Dumper;
+	output("/tmp/drakdump_devices-$action", Data::Dumper->Dump([ \@l ], [ qw($l) ]));
+    }
+
+    my $e;
+    {
+	unless ($e = find { $name eq $_->{device} } @l) {
+	    my ($prefix) = $name =~ m/^(.*?)\d*$/;
+	    $e = find { $prefix eq ($_->{prefix} || $_->{device}) } @l;
+	    $e->{device} = $name;
+	}
+    }
+
+    $e->{media_type} = 'fd' if $name =~ /fd[01]/;
+    $e;
+}
+
+sub set_options {
+    my ($part) = @_;
+    $part->{is_removable} = 1;
+}
+
+sub set_mount_point {
+    my ($part, $fstab, $is_hd) = @_;
+
+    my $mntpoint = $is_hd ? 'hd' : detect_devices::suggest_mount_point($part);
+    $mntpoint = "/media/$mntpoint";
+
+    foreach ('', 2 .. 10) {
+	next if fs::get::mntpoint2part("$mntpoint$_", $fstab);
+	$part->{mntpoint} = "$mntpoint$_";
+	return 1;
+    }
+    0;
+}
+
+sub main {
+    my ($action, $device_name) = @_;	
+    my $device = device_name_to_entry($device_name);
+    if ($device->{media_type} eq 'hd') {
+	my $all_hds = fsedit::get_hds();
+	my $hd = find { fs::get::is_same_hd($_, $device) } fs::get::hds($all_hds);
+	$hd or die "unable to find hd for $device->{device}";
+	my @parts = grep { !fsedit::isSwap($_) && fs::type::maybeFormatted($_) } partition_table::get_normal_parts($hd);
+	configure_part($action, $_, 'hd') foreach @parts;
+    } else {
+        configure_part($action, $device, undef);
+    }
+}
+
+sub configure_part {
+    my ($action, $part, $is_hd) = @_;
+    my $fstab_file = '/etc/fstab';
+    if (!$part) {
+	print STDERR "Can not find device $device_name\n" if $::testing;
+	return;
+    } elsif ($::testing) {
+	cp_af('/etc/fstab', $fstab_file = '/tmp/fstab');
+    }
+
+    my $fstab = [ fs::read_fstab('', '/etc/fstab', 'keep_freq_passno', 'verbatim_credentials') ];
+    my ($existing_fstab_entries, $fstab_) = partition { fs::get::is_same_hd($_, $part) } @$fstab;
+
+    if ($debug) {
+	require Data::Dumper;
+	output("/tmp/drakdump_entries-$action", Data::Dumper->Dump([ \@ARGV, $part, $fstab, $fstab_, $existing_fstab_entries ],
+								   [ qw($ARGV $part $fstab $fstab_ $existing_fstab_entries) ]));
+    }
+    if ($action eq 'add') {
+	if (@$existing_fstab_entries) {
+	    print STDERR "Already in fstab\n" if $::testing;
+	    return;
+	}
+	set_mount_point($part, $fstab, $is_hd) or return;
+	set_options($part);
+
+	my ($line) = fs::prepare_write_fstab([$part]);
+	if ($line) {
+	    append_to_file($fstab_file, $line);
+	    system("mount $part->{mntpoint}") if !$::testing && ($device_name =~ /^fd\d+/ || $is_hd);
+	}
+
+	if ($verbose) {
+	    print $part->{mntpoint}, " user\n";
+	}
+    } else {
+	if (!@$existing_fstab_entries) {
+	    print STDERR "Not found in fstab\n" if $::testing;
+	    return;
+	}
+
+	my ($s) = fs::prepare_write_fstab($fstab_, '', 'keep_smb_credentials');
+	output($fstab_file, $s);
+
+	if ($verbose) {
+	    print "$_->{mntpoint}\n" foreach @$existing_fstab_entries;
+	}
+    }
+
+    if ($::testing) {
+	print "fstab would have changed:\n";
+	system("diff -u /etc/fstab $fstab_file");
+    }
+}

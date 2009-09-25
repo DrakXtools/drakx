@@ -1,0 +1,32 @@
+#!/usr/bin/perl
+#- PERL_INSTALL_TEST is used to launch stage2 in debug mode
+
+#- Mandrake Graphic Install $Id$
+#- Copyright (C) 1999/2000 Mandrakesoft (pixel@mandrakesoft.com)
+#-
+#- This program is free software; you can redistribute it and/or modify
+#- it under the terms of the GNU General Public License as published by
+#- the Free Software Foundation; either version 2, or (at your option)
+#- any later version.
+#-
+#- This program is distributed in the hope that it will be useful,
+#- but WITHOUT ANY WARRANTY; without even the implied warranty of
+#- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#- GNU General Public License for more details.
+#-
+#- You should have received a copy of the GNU General Public License
+#- along with this program; if not, write to the Free Software
+#- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+use diagnostics;
+use strict;
+
+use lib qw(/usr/lib/libDrakX .);
+use install::install2;
+
+$::testing = $ENV{PERL_INSTALL_TEST};
+$::isStandalone = 0;
+
+install::install2::main(@ARGV);
+
+c::_exit(0);

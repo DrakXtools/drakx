@@ -1,0 +1,55 @@
+#!/usr/bin/perl
+
+use lib qw(/usr/lib/libDrakX);
+
+use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+
+use interactive;
+use common;
+use lang;
+use any;
+
+my ($klang, $kcountry, $apply);
+
+foreach (@ARGV) {
+    $apply = 1 if /--apply/;
+    $klang = $1 if /--kde_lang=(.*)/;
+    $kcountry = uc($1) if /--kde_country=(.*)/;
+}
+
+if (defined $klang) {
+    $klang or exit(-1);
+    my $lang = member($klang, lang::list_langs()) ? $klang : 'en_US';
+    my $country = member($kcountry, lang::list_countries()) ? $kcountry : 'US';
+    my $locale = lang::read($>);
+    $klang and $locale->{lang} = $lang;
+    $kcountry and $locale->{country} = $country;
+    lang::write_and_install($locale, do_pkgs_standalone->new, $>, 'dont_touch_kde_files') if $apply;
+
+    #- help KDE defaulting to the right charset
+    print lang::charset2kde_charset(lang::l2charset($lang)), "\n";
+    exit(0);
+}
+
+my $locale = lang::read($>);
+my $in = 'interactive'->vnew;
+
+$ugtk2::wm_icon = "localedrake";
+$::Wizard_title = N("LocaleDrake");
+
+any::selectLanguage_and_more_standalone($in, $locale);
+
+if ($> && lang::IM2packages($locale)) {
+    $in->ask_warn(N("Warning"),
+		  N("You should install the following packages: %s", 
+		    join(
+			#-PO: the following is used to combine packages names. eg: "initscripts, harddrake, yudit"
+			N(", "),
+			lang::IM2packages($locale)
+		    ),
+		)
+	      );
+}
+lang::write_and_install($locale, $in->do_pkgs, $>);
+
+any::ask_for_X_restart($in);

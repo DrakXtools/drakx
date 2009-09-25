@@ -1,0 +1,168 @@
+#!/usr/bin/perl
+#
+# Copyright (C) 2009 Mandriva
+#                    Pascal Terjan <pterjan@mandriva.com>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+use lib qw(/usr/lib/libDrakX);
+
+use MDK::Common;
+use common;
+use standalone;
+use mygtk2;
+use interactive;
+use ugtk2 qw(:create :helpers :wrappers);
+use Gtk2::SimpleList;
+
+my $title = N("DVB");
+$ugtk2::wm_icon = "/usr/share/mcc/themes/default/tv-mdk.png";
+my $w = ugtk2->new($title);
+$w->{window}->signal_connect('destroy' => \&exitapp);
+$::main_window = $w->{real_window};
+my $in = 'interactive'->vnew;
+
+my $config_file = "$ENV{HOME}/.mplayer/channels.conf";
+
+my $channel_list = Gtk2::SimpleList->new(N("Channel") => "text", "id" => "hidden");
+my %buttons;
+my $pid;
+my $wait;
+
+sub get_selected_channel() {
+    my ($index) = $channel_list->get_selected_indices;
+    defined $index && $channel_list->{data}[$index][1];
+}
+
+sub exitapp() {
+    local $SIG{TERM} = 'IGNORE';
+    kill TERM => -$$;
+    Gtk2->main_quit;
+}
+
+sub detect_channels() {
+    if (-s $config_file) {
+        $in->ask_okcancel(N("Warning"), N("%s already exists and its contents will be lost", $config_file)) or return;
+    }
+    gtkset_mousecursor_wait($w->{window}->window);
+    $channel_list->set_sensitive(0);
+    $_->set_sensitive(0) foreach values %buttons;
+
+    $in->do_pkgs->install('w_scan');
+
+    gtkflush();
+
+    $SIG{CHLD} = sub {
+        $SIG{CHLD} = 'IGNORE';
+        $wait->{window}->hide;
+        waitpid($pid, 0);
+        if (($? >> 8) == 0) {
+            load_channels();
+        } else {
+            $in->ask_warn(N("Error"), N("Could not get the list of available channels"));
+        }
+        gtkset_mousecursor_normal($w->{window}->window);
+        $buttons{detect}->set_sensitive(1);
+        $channel_list->set_sensitive(1);
+    };
+    $wait = ugtk2->new(N("Please wait"), grab => 1);
+    $wait->{window}->signal_connect('destroy' => \&exitapp);
+    if ($pid = fork()) {
+        gtkadd($wait->{window},
+               gtkpack($wait->create_box_with_title(N("Detecting DVB channels, this will take a few minutes")),
+                       gtknew('Button', text => N("Cancel"), clicked => \&exitapp),
+               )
+            );
+        $wait->main;
+    } else {
+        $SIG{CHLD} = 'DEFAULT';
+        mkdir_p(dirname($config_file));
+        my $ret = system("w_scan -X > $config_file");
+        sleep(1);
+        POSIX::_exit($ret >> 8);
+    }
+}
+
+sub load_channels() {
+    my @channels;
+    open(my $CHANNELCONF, "<$config_file");
+    local $_;
+    while (<$CHANNELCONF>) {
+        my $line = $_;
+        if ($line =~ /^([^:]*?)(\([^(:]*\))?:/) {
+            push @channels, [ $1, $1 . $2 ];
+        }
+    }
+    close($CHANNELCONF);
+    @{$channel_list->{data}} = sort { $a->[0] cmp $b->[0] } @channels;
+    if (defined @{$channel_list->{data}}[0]) {
+        $channel_list->select(0);
+    }
+}
+
+sub get_channel_info {
+    my ($channel) = @_;
+    foreach (cat_($config_file)) {
+        chomp;
+        my %channel_info;
+        @channel_info{qw(name frequency options vpid apid serviceid)} = /^([^:]+):([^:]+):(.*):([^:]+):([^:]+):([^:]+)+$/;
+        next if $channel_info{name} ne $channel;
+        ($channel_info{bandwidth}) = $channel_info{options} =~ /\bBANDWIDTH_(\d+)_MHZ\b/;
+        return \%channel_info;
+    }
+    undef;
+}
+
+sub launch_tv() {
+    my $channel = get_selected_channel() or return;
+    if (whereis_binary("vlc")) {
+        my $info = get_channel_info($channel) or return;
+        my %vlc_config = read_gnomekderc("$ENV{HOME}/.config/vlc/vlcrc", "main");
+        if ($vlc_config{'one-instance'}) {
+            # changing dvb options does not work with --one-instance, kill running vlc
+            system("killall vlc");
+        }
+        system("vlc dvb:// --dvb-frequency=$info->{frequency} --dvb-adapter=0 --dvb-bandwidth=$info->{bandwidth} --program=$info->{serviceid} &");
+    } else {
+        system('mplayer "dvb://' . $channel . '"&');
+    }
+}
+
+gtkadd($w->{window},
+       gtknew('VBox', spacing => 5, children => [
+                  $::isEmbedded ? () : (0, Gtk2::Banner->new($ugtk2::wm_icon, $title)),
+                  1, gtknew('ScrolledWindow', width => 300, height => 400, child => $channel_list),
+                  0, gtknew('HButtonBox', layout => 'end', children_loose => [
+                                $buttons{detect} = gtknew('Button', text => N("Detect Channels"), clicked => \&detect_channels),
+                                gtknew('Button', text => N("Quit"), clicked => \&exitapp),
+                                $buttons{view} = gtknew('Button', text => N("View Channel"), clicked => \&launch_tv),
+                            ]),
+              ]),
+    );
+
+$buttons{view}->set_sensitive(0);
+
+$channel_list->get_selection->signal_connect('changed' => sub {
+    my ($index) = $channel_list->get_selected_indices;
+    $buttons{view}->set_sensitive(defined $index);
+});
+
+$channel_list->signal_connect('row-activated' => sub {
+    launch_tv();
+});
+
+load_channels();
+
+$w->main;

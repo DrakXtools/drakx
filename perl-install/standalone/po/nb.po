@@ -1,0 +1,3564 @@
+# translation of nb.po to Norwegian Bokmål
+# Olav Dahlum <odahlum@gmal.com>, 2009.
+# Olav Dahlum <odahlum@gmail.com>, 2009.
+# translation of nb.po to
+# Translation of nb to Norwegian Bokmål
+# Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
+msgid ""
+msgstr ""
+"Project-Id-Version: nb\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"PO-Revision-Date: 2009-09-09 16:57+0200\n"
+"Last-Translator: Olav Dahlum <odahlum@gmail.com>\n"
+"Language-Team: Norwegian Bokmål <cooker-i18n@mandrivalinux.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"X-Language: nb_NO\n"
+
+#: drakauth:24 drakauth:26 draksec:164
+#, c-format
+msgid "Authentication"
+msgstr "Autentisering"
+
+#: drakauth:37 drakclock:111 drakclock:125 drakdvb:74 drakfont:213
+#: drakfont:226 drakfont:264 draksplash:202 finish-install:119 logdrake:170
+#: logdrake:445 logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
+#: scannerdrake:200 scannerdrake:259 scannerdrake:729 scannerdrake:740
+#: scannerdrake:879 scannerdrake:890 scannerdrake:960
+#, c-format
+msgid "Error"
+msgstr "Feil"
+
+#: drakboot:53
+#, c-format
+msgid "No bootloader found, creating a new configuration"
+msgstr "Fant ingen oppstartslaster, lager nytt oppsett."
+
+#: drakboot:88 harddrake2:198 harddrake2:199 logdrake:71
+#, c-format
+msgid "/_File"
+msgstr "/_Fil"
+
+#: drakboot:89 logdrake:77
+#, c-format
+msgid "/File/_Quit"
+msgstr "/Fil/_Avslutt"
+
+#: drakboot:89 harddrake2:199 logdrake:77
+#, c-format
+msgid "<control>Q"
+msgstr "<control>A"
+
+#: drakboot:129
+#, c-format
+msgid "Text only"
+msgstr "Bare tekst"
+
+#: drakboot:130
+#, c-format
+msgid "Verbose"
+msgstr "Utvidete meldinger"
+
+#: drakboot:131
+#, c-format
+msgid "Silent"
+msgstr "Stille"
+
+#: drakboot:137 drakbug:260 drakdvb:57 drakfont:682 drakperm:376 drakperm:386
+#: drakups:27 harddrake2:527 localedrake:43 notify-x11-free-driver-switch:15
+#: scannerdrake:51 scannerdrake:54 scannerdrake:297 scannerdrake:302
+#: scannerdrake:954
+#, c-format
+msgid "Warning"
+msgstr "Advarsel"
+
+#: drakboot:138
+#, c-format
+msgid ""
+"Your system bootloader is not in framebuffer mode. To activate graphical "
+"boot, select a graphic video mode from the bootloader configuration tool."
+msgstr ""
+"Oppstartslasteren er ikke i framebuffer-modus (grafisk modus). For å bruke "
+"grafisk oppstart må du velge et skjermmodus fra oppsettverktøyet for "
+"oppstartslasteren."
+
+#: drakboot:139
+#, c-format
+msgid "Do you want to configure it now?"
+msgstr "Vil du sette det opp nå?"
+
+#: drakboot:148
+#, c-format
+msgid "Install themes"
+msgstr "Installer temaer"
+
+#: drakboot:150
+#, c-format
+msgid "Graphical boot theme selection"
+msgstr "Valg av grafisk oppstartstema"
+
+#: drakboot:153
+#, c-format
+msgid "Graphical boot mode:"
+msgstr "Grafisk oppstartsmodus:"
+
+#: drakboot:155
+#, c-format
+msgid "Theme"
+msgstr "Tema"
+
+#: drakboot:158
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+"Vis tema\n"
+"under konsoll"
+
+#: drakboot:163 draksplash:26
+#, c-format
+msgid "Create new theme"
+msgstr "Lag nytt tema"
+
+#: drakboot:195
+#, c-format
+msgid "Default user"
+msgstr "Forhåndsvalgt bruker:"
+
+#: drakboot:196
+#, c-format
+msgid "Default desktop"
+msgstr "Forhåndsvalgt skrivebord:"
+
+#: drakboot:199
+#, c-format
+msgid "No, I do not want autologin"
+msgstr "Ikke logg inn automatisk"
+
+#: drakboot:200
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr "Logg inn automatisk med følgende bruker og skrivebord"
+
+#: drakboot:207
+#, c-format
+msgid "System mode"
+msgstr "Systemmodus"
+
+#: drakboot:210
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr "Start det grafiske miljøet ved oppstart"
+
+#: drakboot:262
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "Oppsettstype"
+
+#: drakboot:264 drakboot:268
+#, c-format
+msgid "Video mode"
+msgstr "Videomodus"
+
+#: drakboot:265
+#, c-format
+msgid ""
+"Please choose a video mode, it will be applied to each of the boot entries "
+"selected below.\n"
+"Be sure your video card supports the mode you choose."
+msgstr ""
+"Velg et skjermmodus. Dette blir brukt for hver av oppstartsoppføringene "
+"valgt nedenfor.\n"
+"Husk at skjermkortet må støtte skjermmoduset som velges."
+
+#: drakbug:65 drakbug:152
+#, c-format
+msgid "The \"%s\" program has crashed with the following error:"
+msgstr "Programmet «%s» krasjet med følgende feil:"
+
+#: drakbug:76
+#, c-format
+msgid "Mandriva Linux Bug Report Tool"
+msgstr "Feilrapporteringsverktøy for Mandriva Linux"
+
+#: drakbug:81
+#, c-format
+msgid "Mandriva Linux Control Center"
+msgstr "Mandriva Linux Kontrollsenter"
+
+#: drakbug:82
+#, c-format
+msgid "First Time Wizard"
+msgstr "Førstegangsveiviser"
+
+#: drakbug:83
+#, c-format
+msgid "Synchronization tool"
+msgstr "Synkroniseringsverktøy"
+
+#: drakbug:84 drakbug:216
+#, c-format
+msgid "Standalone Tools"
+msgstr "Frittstående verktøy"
+
+#: drakbug:86 drakbug:87
+#, c-format
+msgid "Mandriva Online"
+msgstr "Mandriva Online"
+
+#: drakbug:88
+#, c-format
+msgid "Remote Control"
+msgstr "Fjernkontroll"
+
+#: drakbug:89
+#, c-format
+msgid "Software Manager"
+msgstr "Programvarehåndtering"
+
+#: drakbug:90
+#, c-format
+msgid "Windows Migration tool"
+msgstr "Migreringsverktøy for Windows"
+
+#: drakbug:91
+#, c-format
+msgid "Configuration Wizards"
+msgstr "Oppsettveivisere"
+
+#: drakbug:113
+#, c-format
+msgid "Select Mandriva Tool:"
+msgstr "Velg verktøy:"
+
+#: drakbug:114
+#, c-format
+msgid ""
+"or Application Name\n"
+"(or Full Path):"
+msgstr ""
+"eller programnavn\n"
+"(eller full sti):"
+
+#: drakbug:117
+#, c-format
+msgid "Find Package"
+msgstr "Finn pakke"
+
+#: drakbug:119
+#, c-format
+msgid "Package: "
+msgstr "Pakke: "
+
+#: drakbug:120
+#, c-format
+msgid "Kernel:"
+msgstr "Kjerne:"
+
+#: drakbug:151
+#, c-format
+msgid "The \"%s\" program has segfaulted with the following error:"
+msgstr "Programmet «%s» krasjet (segfault) med følgende feil:"
+
+#: drakbug:155
+#, c-format
+msgid "Its GDB trace is:"
+msgstr "GDB-sporing er:"
+
+#: drakbug:158
+#, c-format
+msgid ""
+"To submit a bug report, click on the report button.  \n"
+"This will open a web browser window on %s where you'll find a form to fill "
+"in.  The information displayed above will be transferred to that server"
+msgstr ""
+"Trykk på knappen Rapporter for å melde fra om en feil du har funnet. \n"
+"Dette vil åpne et nettleservindu på %s, med et skjema som du må fylle inn. "
+"Informasjonen vist nedenfor blir overført til tjeneren."
+
+#: drakbug:160
+#, c-format
+msgid ""
+"It would be very useful to attach to your report the output of the following "
+"command: %s."
+msgid_plural ""
+"Things useful to attach to your report are the output of the following "
+"commands: %s."
+msgstr[0] ""
+"Det ville være veldig nyttig om du tok med utdata fra den følgende "
+"kommandoen %s i feilrapporten."
+msgstr[1] "Nyttige ting å ta med i feilrapporten er utdata fra denne kommandoen: %s."
+
+#: drakbug:163
+#, c-format
+msgid "'%s'"
+msgstr "«%s»"
+
+#: drakbug:166
+#, c-format
+msgid "You should also attach the following files: %s as well as %s."
+msgstr "Du bør også legge ved filene %s og %s."
+
+#: drakbug:173
+#, c-format
+msgid "Please describe what you were doing when it crashed:"
+msgstr "Skriv inn hva du gjorde når programmet krasjet:"
+
+#: drakbug:185 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Hjelp"
+
+#: drakbug:189
+#, c-format
+msgid "Report"
+msgstr "Rapporter"
+
+#: drakbug:190 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Lukk"
+
+#: drakbug:223
+#, c-format
+msgid "Not installed"
+msgstr "Ikke installert"
+
+#: drakbug:236
+#, c-format
+msgid "Package not installed"
+msgstr "Pakke ikke installert"
+
+#: drakbug:261
+#, c-format
+msgid ""
+"You must type in what you were doing when this bug happened in order to "
+"enable us to reproduce this bug and to increase the odds of fixing it"
+msgstr ""
+"Du må skrive inn hva du gjorde når denne feilen oppstod, slik at vi kan "
+"klare å reprodusere den, for så å rette den opp."
+
+#: drakbug:262
+#, c-format
+msgid "Thanks."
+msgstr "Takk."
+
+#: drakclock:30 draksec:170
+#, c-format
+msgid "Date, Clock & Time Zone Settings"
+msgstr "Dato, klokkeslett og tidssone"
+
+#: drakclock:39
+#, c-format
+msgid "not defined"
+msgstr "ikke angitt"
+
+#: drakclock:41
+#, c-format
+msgid "Change Time Zone"
+msgstr "Endre tidssone"
+
+#: drakclock:44
+#, c-format
+msgid "Timezone - DrakClock"
+msgstr "Tidssone – DrakClock"
+
+#: drakclock:44
+#, c-format
+msgid "Which is your timezone?"
+msgstr "I hvilken tidssone holder du til?"
+
+#: drakclock:45
+#, c-format
+msgid "GMT - DrakClock"
+msgstr "GMT – DrakClock"
+
+#: drakclock:45
+#, c-format
+msgid "Is your hardware clock set to GMT?"
+msgstr "Bruker maskinvareklokka GMT?"
+
+#: drakclock:70
+#, c-format
+msgid "Network Time Protocol"
+msgstr "Nettverkstidsprotokoll"
+
+#: drakclock:72
+#, c-format
+msgid ""
+"Your computer can synchronize its clock\n"
+" with a remote time server using NTP"
+msgstr ""
+"Datamaskinen din kan automatisk synkronisere klokken\n"
+" med en tidstjener på nettverket ved hjelp av NTP."
+
+#: drakclock:73
+#, c-format
+msgid "Enable Network Time Protocol"
+msgstr "Bruk nettverktidsprotokoll"
+
+#: drakclock:81
+#, c-format
+msgid "Server:"
+msgstr "Tjener:"
+
+#: drakclock:95
+#, c-format
+msgid "Timezone"
+msgstr "Tidssone"
+
+#: drakclock:111
+#, c-format
+msgid "Please enter a valid NTP server address."
+msgstr "Skriv inn en gyldig tjeneradresse."
+
+#: drakclock:126
+#, c-format
+msgid "Could not synchronize with %s."
+msgstr "Klarte ikke å synkronisere med %s."
+
+#: drakclock:127 drakdvb:149 draksplash:125 logdrake:175 scannerdrake:491
+#, c-format
+msgid "Quit"
+msgstr "Avslutt"
+
+#: drakclock:128
+#, c-format
+msgid "Retry"
+msgstr "Prøv på nytt"
+
+#: drakclock:151 drakclock:161
+#, c-format
+msgid "Reset"
+msgstr "Tilbakestill"
+
+#: drakdvb:30
+#, c-format
+msgid "DVB"
+msgstr "DVB"
+
+#: drakdvb:39 harddrake2:101
+#, c-format
+msgid "Channel"
+msgstr "Kanal"
+
+#: drakdvb:57
+#, c-format
+msgid "%s already exists and its contents will be lost"
+msgstr "%s finnes allerede og innholdet vil gå tapt"
+
+#: drakdvb:74
+#, c-format
+msgid "Could not get the list of available channels"
+msgstr "Kunne ikke motta listen over tilgjengelige kanaler"
+
+#: drakdvb:80 draksec:73 drakups:99 harddrake2:381 scannerdrake:66
+#: scannerdrake:70 scannerdrake:78 scannerdrake:319 scannerdrake:368
+#: scannerdrake:504 scannerdrake:508 scannerdrake:530 service_harddrake:264
+#, c-format
+msgid "Please wait"
+msgstr "Vent litt"
+
+#: drakdvb:84
+#, c-format
+msgid "Detecting DVB channels, this will take a few minutes"
+msgstr "Oppdager DVB-kanaler, dette vil ta et par minutter"
+
+#: drakdvb:85 drakfont:572 drakfont:652 drakfont:736 draksplash:213
+#: drakups:217 logdrake:175
+#, c-format
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: drakdvb:148
+#, c-format
+msgid "Detect Channels"
+msgstr "Oppdag kanaler"
+
+#: drakdvb:150
+#, c-format
+msgid "View Channel"
+msgstr "Vis kanal"
+
+#: drakedm:41
+#, c-format
+msgid "GDM (GNOME Display Manager)"
+msgstr "GDM (GNOME Display Manager)"
+
+#: drakedm:42
+#, c-format
+msgid "KDM (KDE Display Manager)"
+msgstr "KDM (KDE Display Manager)"
+
+#: drakedm:43
+#, c-format
+msgid "XDM (X Display Manager)"
+msgstr "XDM (X Display Manager)"
+
+#: drakedm:54
+#, c-format
+msgid "Choosing a display manager"
+msgstr "Velg innloggingsbehandler"
+
+#: drakedm:55
+#, c-format
+msgid ""
+"X11 Display Manager allows you to graphically log\n"
+"into your system with the X Window System running and supports running\n"
+"several different X sessions on your local machine at the same time."
+msgstr ""
+"Innloggingsbehandleren lar deg logge inn grafisk\n"
+"på systemet når X kjører, og støtter også flere\n"
+"samtidige økter på maskina."
+
+#: drakedm:74
+#, c-format
+msgid "The change is done, do you want to restart the dm service?"
+msgstr "Endringene er nå lagret. Vil du starte tjenesten dm på nytt?"
+
+#: drakedm:75
+#, c-format
+msgid ""
+"You are going to close all running programs and lose your current session. "
+"Are you really sure that you want to restart the dm service?"
+msgstr ""
+"Alle program som kjører blir lukket, og du mister den gjeldende økta. Er du "
+"sikker på at du vil starte tenesten dm på nytt?"
+
+#: drakfont:187
+#, c-format
+msgid "Search installed fonts"
+msgstr "Søk gjennom installerte skrifter"
+
+#: drakfont:189
+#, c-format
+msgid "Unselect fonts installed"
+msgstr "Velg bort installerte skrifter"
+
+#: drakfont:213
+#, c-format
+msgid "No fonts found"
+msgstr "Fant ingen skrifter"
+
+#: drakfont:217
+#, c-format
+msgid "parse all fonts"
+msgstr "Les alle skrifter"
+
+#: drakfont:222 drakfont:263 drakfont:338 drakfont:379 drakfont:383
+#: drakfont:409 drakfont:427 drakfont:435
+#, c-format
+msgid "done"
+msgstr "ferdig"
+
+#: drakfont:226
+#, c-format
+msgid "Could not find any font in your mounted partitions"
+msgstr "Fant ingen skrifter på de monterte partisjonene"
+
+#: drakfont:261
+#, c-format
+msgid "Reselect correct fonts"
+msgstr "Velg på nytt de rette skriftene"
+
+#: drakfont:264
+#, c-format
+msgid "Could not find any font.\n"
+msgstr "Fant ingen skrift.\n"
+
+#: drakfont:274
+#, c-format
+msgid "Search for fonts in installed list"
+msgstr "Søk etter skrifter i lista over installerte"
+
+#: drakfont:298
+#, c-format
+msgid "%s fonts conversion"
+msgstr "skriftkonvertering for %s"
+
+#: drakfont:336
+#, c-format
+msgid "Fonts copy"
+msgstr "Skriftkopiering"
+
+#: drakfont:339
+#, c-format
+msgid "True Type fonts installation"
+msgstr "Installering av TrueType-skrifter"
+
+#: drakfont:347
+#, c-format
+msgid "please wait during ttmkfdir..."
+msgstr "Vent litt mens ttmkfdir blir kjørt … "
+
+#: drakfont:348
+#, c-format
+msgid "True Type install done"
+msgstr "TrueType-installering fullført"
+
+#: drakfont:354 drakfont:369
+#, c-format
+msgid "type1inst building"
+msgstr "bygger btype1inst"
+
+#: drakfont:363
+#, c-format
+msgid "Ghostscript referencing"
+msgstr "Ghostscript-referanser"
+
+#: drakfont:380
+#, c-format
+msgid "Suppress Temporary Files"
+msgstr "Ikke bruk midlertidige filer"
+
+#: drakfont:425 drakfont:431
+#, c-format
+msgid "Suppress Fonts Files"
+msgstr "Ikke vis skriftfiler"
+
+#: drakfont:439
+#, c-format
+msgid ""
+"Before installing any fonts, be sure that you have the right to use and "
+"install them on your system.\n"
+"\n"
+"You can install the fonts the normal way. In rare cases, bogus fonts may "
+"hang up your X Server."
+msgstr ""
+"Før du installer skrifter, bør du kontrollere at du har rett til å bruke og "
+"installere de på systemet ditt.\n"
+"\n"
+"Du kan installere skriftene på vanlig måte. I sjeldne tilfeller kan ødelagte "
+"skrifter få X-tjeneren til å henge ved oppstart."
+
+#: drakfont:478
+#, c-format
+msgid "Font Installation"
+msgstr "Skriftinstallering"
+
+#: drakfont:489
+#, c-format
+msgid "DrakFont"
+msgstr "DrakFont"
+
+#: drakfont:490 drakfont:642
+#, c-format
+msgid "Font List"
+msgstr "Skriftliste"
+
+#: drakfont:493
+#, c-format
+msgid "Get Windows Fonts"
+msgstr "Hent Windows-skrifter"
+
+#: drakfont:499
+#, c-format
+msgid "About"
+msgstr "Om"
+
+#: drakfont:500 drakfont:541
+#, c-format
+msgid "Options"
+msgstr "Valg"
+
+#: drakfont:501 drakfont:721
+#, c-format
+msgid "Uninstall"
+msgstr "Avinstaller"
+
+#: drakfont:502
+#, c-format
+msgid "Import"
+msgstr "Importer"
+
+#: drakfont:520
+#, c-format
+msgid "Drakfont"
+msgstr "DrakFont"
+
+#: drakfont:522 harddrake2:236
+#, c-format
+msgid "Copyright (C) %s by Mandriva"
+msgstr "Copyright © %s Mandriva"
+
+#: drakfont:524
+#, c-format
+msgid "Font installer."
+msgstr "Skriftinstallering."
+
+#: drakfont:526 harddrake2:240
+#, c-format
+msgid "Mandriva Linux"
+msgstr "Mandriva Linux"
+
+#. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
+#. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
+#: drakfont:533 harddrake2:245
+#, c-format
+msgid "_: Translator(s) name(s) & email(s)\n"
+msgstr "Olav Dahlum <odahlum@gmail.com>\n"
+
+#: drakfont:543
+#, c-format
+msgid "Choose the applications that will support the fonts:"
+msgstr "Velg programmene som vil bruke skriftene:"
+
+#: drakfont:554
+#, c-format
+msgid "Ghostscript"
+msgstr "Ghostscript"
+
+#: drakfont:555
+#, c-format
+msgid "OpenOffice.org"
+msgstr "OpenOffice.org"
+
+#: drakfont:556
+#, c-format
+msgid "Abiword"
+msgstr "Abiword"
+
+#: drakfont:557
+#, c-format
+msgid "Generic Printers"
+msgstr "Generelle skrivere"
+
+#: drakfont:562 drakfont:572 draksplash:213 drakups:210
+#, c-format
+msgid "Ok"
+msgstr "OK"
+
+#: drakfont:571
+#, c-format
+msgid "Select the font file or directory and click on 'Add'"
+msgstr "Velg skriftfila eller skriftmappa, og trykk så «Legg til»."
+
+#: drakfont:572
+#, c-format
+msgid "File Selection"
+msgstr "Filvalg"
+
+#: drakfont:576
+#, c-format
+msgid "Fonts"
+msgstr "Skrifter"
+
+#: drakfont:640 draksec:166
+#, c-format
+msgid "Import fonts"
+msgstr "Importer skrifter"
+
+#: drakfont:646 drakups:299 drakups:361 drakups:381
+#, c-format
+msgid "Add"
+msgstr "Legg til"
+
+#: drakfont:647 drakfont:735 drakups:301 drakups:363 drakups:383
+#, c-format
+msgid "Remove"
+msgstr "Fjern"
+
+#: drakfont:653
+#, c-format
+msgid "Install"
+msgstr "Installer"
+
+#: drakfont:684
+#, c-format
+msgid "Are you sure you want to uninstall the following fonts?"
+msgstr "Er du sikker på at du vil avinstallere disse skriftene?"
+
+#: drakfont:688 draksec:60 harddrake2:326
+#, c-format
+msgid "Yes"
+msgstr "Ja"
+
+#: drakfont:690 draksec:59 harddrake2:327
+#, c-format
+msgid "No"
+msgstr "Nei"
+
+#: drakfont:729
+#, c-format
+msgid "Unselect All"
+msgstr "Velg bort alle"
+
+#: drakfont:732
+#, c-format
+msgid "Select All"
+msgstr "Velg alle"
+
+#: drakfont:749
+#, c-format
+msgid "Importing fonts"
+msgstr "Importerer skrifter"
+
+#: drakfont:753 drakfont:773
+#, c-format
+msgid "Initial tests"
+msgstr "Førtest"
+
+#: drakfont:754
+#, c-format
+msgid "Copy fonts on your system"
+msgstr "Kopier skrifter på systemet"
+
+#: drakfont:755
+#, c-format
+msgid "Install & convert Fonts"
+msgstr "Installer og konverter skrifter"
+
+#: drakfont:756
+#, c-format
+msgid "Post Install"
+msgstr "Etterinstallering"
+
+#: drakfont:768
+#, c-format
+msgid "Removing fonts"
+msgstr "Fjerner skrifter"
+
+#: drakfont:774
+#, c-format
+msgid "Remove fonts on your system"
+msgstr "Fjern skrifter fra systemet"
+
+#: drakfont:775
+#, c-format
+msgid "Post Uninstall"
+msgstr "Etteravinstallering"
+
+#: drakhelp:17
+#, c-format
+msgid ""
+" drakhelp 0.1\n"
+"Copyright (C) %s Mandriva.\n"
+"This is free software and may be redistributed under the terms of the GNU "
+"GPL.\n"
+"\n"
+"Usage: \n"
+msgstr ""
+" drakhelp 0.1\n"
+"Copyright © %s Mandriva.\n"
+"Dette er fri programvare, og du kan distribuere det under GNU GPL-lisensen.\n"
+"\n"
+"Bruk: \n"
+
+#: drakhelp:22
+#, c-format
+msgid " --help                - display this help     \n"
+msgstr " --help                – Vis denne hjelpeteksten.\n"
+
+#: drakhelp:23
+#, c-format
+msgid " --id <id_label>       - load the html help page which refers to id_label\n"
+msgstr ""
+" --id <identifikator>  – Last HTML-hjelpesiden som refererer til "
+"«identifikator».\n"
+
+#: drakhelp:24
+#, c-format
+msgid ""
+" --doc <link>          - link to another web page ( for WM welcome "
+"frontend)\n"
+msgstr " --doc <lenke>        – Lenke til en annen nettside (for velkomstmelding).\n"
+
+#: drakhelp:52
+#, c-format
+msgid "Mandriva Linux Help Center"
+msgstr "Hjelpesenter for Mandriva Linux"
+
+#: drakhelp:52
+#, c-format
+msgid "No Help entry for %s\n"
+msgstr "Det finnes ingen oppføring for %s\n"
+
+#: drakperm:23
+#, c-format
+msgid "System settings"
+msgstr "Systeminnstillinger"
+
+#: drakperm:24
+#, c-format
+msgid "Custom settings"
+msgstr "Tilpassa oppsett"
+
+#: drakperm:25
+#, c-format
+msgid "Custom & system settings"
+msgstr "Tilpassa og systemoppsett"
+
+#: drakperm:33
+#, c-format
+msgid "Security Permissions"
+msgstr "Sikkerhetstillatelser"
+
+#: drakperm:45
+#, c-format
+msgid "Editable"
+msgstr "Redigerbar"
+
+#: drakperm:50 drakperm:320
+#, c-format
+msgid "Path"
+msgstr "Sti"
+
+#: drakperm:50 drakperm:249
+#, c-format
+msgid "User"
+msgstr "Bruker"
+
+#: drakperm:50 drakperm:249
+#, c-format
+msgid "Group"
+msgstr "Gruppe"
+
+#: drakperm:50 drakperm:109 drakperm:332 draksec:181
+#, c-format
+msgid "Permissions"
+msgstr "Tillatelser"
+
+#: drakperm:60
+#, c-format
+msgid "Add a new rule"
+msgstr "Legg til ny regel"
+
+#: drakperm:67 drakperm:102 drakperm:128
+#, c-format
+msgid "Edit current rule"
+msgstr "Rediger gjeldende regel"
+
+#: drakperm:110
+#, c-format
+msgid ""
+"Here you can see files to use in order to fix permissions, owners, and "
+"groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
+msgstr ""
+"Her kan du se filer som du kan bruke i msec for å rette tillatelse, eiere og "
+"grupper.\n"
+"Du kan ogå legge til egne regler, som så vil overstyre standardreglene."
+
+#: drakperm:112
+#, c-format
+msgid ""
+"The current security level is %s.\n"
+"Select permissions to see/edit"
+msgstr ""
+"Gjeldende sikkerhetsnivå er %s.\n"
+"Velg tillatelsene du vil se/endre."
+
+#: drakperm:124
+#, c-format
+msgid "Up"
+msgstr "Opp"
+
+#: drakperm:124
+#, c-format
+msgid "Move selected rule up one level"
+msgstr "Flytt den merkede regelen opp et nivå."
+
+#: drakperm:125
+#, c-format
+msgid "Down"
+msgstr "Ned"
+
+#: drakperm:125
+#, c-format
+msgid "Move selected rule down one level"
+msgstr "Flytt den merkede regelen ned et nivå."
+
+#: drakperm:126
+#, c-format
+msgid "Add a rule"
+msgstr "Legg til regel"
+
+#: drakperm:126
+#, c-format
+msgid "Add a new rule at the end"
+msgstr "Legg til regel på slutten"
+
+#: drakperm:127
+#, c-format
+msgid "Delete"
+msgstr "Slett"
+
+#: drakperm:127
+#, c-format
+msgid "Delete selected rule"
+msgstr "Slett den merkede regelen."
+
+#: drakperm:128 drakups:300 drakups:362 drakups:382
+#, c-format
+msgid "Edit"
+msgstr "Rediger"
+
+#: drakperm:241
+#, c-format
+msgid "browse"
+msgstr "Bla gjennom"
+
+#: drakperm:246
+#, c-format
+msgid "user"
+msgstr "bruker"
+
+#: drakperm:246
+#, c-format
+msgid "group"
+msgstr "gruppe"
+
+#: drakperm:246
+#, c-format
+msgid "other"
+msgstr "andre"
+
+#: drakperm:249
+#, c-format
+msgid "Other"
+msgstr "Annet"
+
+#: drakperm:251
+#, c-format
+msgid "Read"
+msgstr "Les"
+
+#. -PO: here %s will be either "user", "group" or "other"
+#: drakperm:254
+#, c-format
+msgid "Enable \"%s\" to read the file"
+msgstr "Tillat «%s» å lese fila"
+
+#: drakperm:258
+#, c-format
+msgid "Write"
+msgstr "Skriv"
+
+#. -PO: here %s will be either "user", "group" or "other"
+#: drakperm:261
+#, c-format
+msgid "Enable \"%s\" to write the file"
+msgstr "Tillat «%s» å endre fila"
+
+#: drakperm:265
+#, c-format
+msgid "Execute"
+msgstr "Kjør"
+
+#. -PO: here %s will be either "user", "group" or "other"
+#: drakperm:268
+#, c-format
+msgid "Enable \"%s\" to execute the file"
+msgstr "Tillat «%s» å kjøre fila."
+
+#: drakperm:271
+#, c-format
+msgid "Sticky-bit"
+msgstr "Låst"
+
+#: drakperm:271
+#, c-format
+msgid ""
+"Used for directory:\n"
+" only owner of directory or file in this directory can delete it"
+msgstr ""
+"Brukt for mapper:\n"
+"Bare eieren av mappa eller filer i denne mappa kan slette den."
+
+#: drakperm:272
+#, c-format
+msgid "Set-UID"
+msgstr "Sett-UID"
+
+#: drakperm:272
+#, c-format
+msgid "Use owner id for execution"
+msgstr "Bruk eier-ID-en ved kjøring."
+
+#: drakperm:273
+#, c-format
+msgid "Set-GID"
+msgstr "Sett-GID"
+
+#: drakperm:273
+#, c-format
+msgid "Use group id for execution"
+msgstr "Bruk gruppe-ID-en ved kjøring."
+
+#: drakperm:290
+#, c-format
+msgid "User:"
+msgstr "Bruker:"
+
+#: drakperm:291
+#, c-format
+msgid "Group:"
+msgstr "Gruppe:"
+
+#: drakperm:295
+#, c-format
+msgid "Current user"
+msgstr "Gjeldende bruker"
+
+#: drakperm:296
+#, c-format
+msgid "When checked, owner and group will not be changed"
+msgstr "Når avkrysset, blir ikke eier eller grupper endret."
+
+#: drakperm:306
+#, c-format
+msgid "Path selection"
+msgstr "Stivalg"
+
+#: drakperm:326
+#, c-format
+msgid "Property"
+msgstr "Egenskap"
+
+#: drakperm:376
+#, c-format
+msgid ""
+"The first character of the path must be a slash (\"/\"):\n"
+"\"%s\""
+msgstr ""
+"Første tegnet i stien må være en skråstrek («/»):\n"
+"«%s»"
+
+#: drakperm:386
+#, c-format
+msgid "Both the username and the group must valid!"
+msgstr "Både brukernavnet og gruppa må være gyldig."
+
+#: drakperm:387
+#, c-format
+msgid "User: %s"
+msgstr "Bruker: %s"
+
+#: drakperm:388
+#, c-format
+msgid "Group: %s"
+msgstr "Gruppe: %s"
+
+#: draksec:54
+#, c-format
+msgid "ALL"
+msgstr "ALLE"
+
+#: draksec:55
+#, c-format
+msgid "LOCAL"
+msgstr "LOKALE"
+
+#: draksec:56
+#, c-format
+msgid "NONE"
+msgstr "INGEN"
+
+#: draksec:57
+#, c-format
+msgid "Default"
+msgstr "Standard"
+
+#: draksec:58
+#, c-format
+msgid "Ignore"
+msgstr "Ignorer"
+
+#: draksec:91
+#, c-format
+msgid "Security Level and Checks"
+msgstr "Sikkerhetsnivå og kontroller"
+
+#: draksec:114
+#, c-format
+msgid "Configure authentication required to access Mandriva tools"
+msgstr "Sett opp autentisering nødvendig for tilgang til Mandrivas verktøy"
+
+#: draksec:117
+#, c-format
+msgid "No password"
+msgstr "Ingen passord"
+
+#: draksec:118
+#, c-format
+msgid "Root password"
+msgstr "Root-passord"
+
+#: draksec:119
+#, c-format
+msgid "User password"
+msgstr "Brukerpassord"
+
+#: draksec:149 draksec:204
+#, c-format
+msgid "Software Management"
+msgstr "Programvarehåndtering"
+
+#: draksec:150
+#, c-format
+msgid "Mandriva Update"
+msgstr "Mandriva oppdatering"
+
+#: draksec:151
+#, c-format
+msgid "Software Media Manager"
+msgstr "Mediahåndterer"
+
+#: draksec:152
+#, c-format
+msgid "Configure 3D Desktop effects"
+msgstr "Sett opp 3D-effekter for skrivebord"
+
+#: draksec:153
+#, c-format
+msgid "Graphical Server Configuration"
+msgstr "Oppsett av skjermtjener"
+
+#: draksec:154
+#, c-format
+msgid "Mouse Configuration"
+msgstr "Oppsett av mus"
+
+#: draksec:155
+#, c-format
+msgid "Keyboard Configuration"
+msgstr "Tastaturoppsett"
+
+#: draksec:156
+#, c-format
+msgid "UPS Configuration"
+msgstr "UPS-oppsett"
+
+#: draksec:157
+#, c-format
+msgid "Network Configuration"
+msgstr "Nettverksoppsett"
+
+#: draksec:158
+#, c-format
+msgid "Hosts definitions"
+msgstr "Vertsdefinisjoner"
+
+#: draksec:159
+#, c-format
+msgid "Network Center"
+msgstr "Nettverkssenter"
+
+#: draksec:160
+#, c-format
+msgid "Wireless Network Roaming"
+msgstr "Trådløs nettverksvandring"
+
+#: draksec:161
+#, c-format
+msgid "VPN"
+msgstr "VPN"
+
+#: draksec:162
+#, c-format
+msgid "Proxy Configuration"
+msgstr "Mellomtjener"
+
+#: draksec:163
+#, c-format
+msgid "Connection Sharing"
+msgstr "Tilkoblingsdeling"
+
+#: draksec:165
+#, c-format
+msgid "Backups"
+msgstr "Sikkerhetskopiering"
+
+#: draksec:167 logdrake:52
+#, c-format
+msgid "Logs"
+msgstr "Logger"
+
+#: draksec:168
+#, c-format
+msgid "Services"
+msgstr "Tjenester"
+
+#: draksec:169
+#, c-format
+msgid "Users"
+msgstr "Brukere"
+
+#: draksec:171
+#, c-format
+msgid "Boot Configuration"
+msgstr "Oppsett for oppstart"
+
+#: draksec:205
+#, c-format
+msgid "Hardware"
+msgstr "Maskinvare"
+
+#: draksec:206
+#, c-format
+msgid "Network"
+msgstr "Nettverk"
+
+#: draksec:207
+#, c-format
+msgid "System"
+msgstr "System"
+
+#: draksec:208
+#, c-format
+msgid "Boot"
+msgstr "Oppstart"
+
+#: draksound:48
+#, c-format
+msgid "No Sound Card detected!"
+msgstr "Fant ingen lydkort."
+
+#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
+#: draksound:51
+#, c-format
+msgid ""
+"No Sound Card has been detected on your machine. Please verify that a Linux-"
+"supported Sound Card is correctly plugged in.\n"
+"\n"
+"\n"
+"You can visit our hardware database at:\n"
+"\n"
+"\n"
+"http://www.mandrivalinux.com/en/hardware.php3"
+msgstr ""
+"Fant ingen lydkort pål maskina. Kontroller at du har et lydkort "
+"som er støttet i Linux koblet til.\n"
+"\n"
+"\n"
+"Du finner maskinvaredatabasen vår på:\n"
+"\n"
+"\n"
+"http://www.mandrivalinux.com/en/hardware.php3"
+
+#: draksound:58
+#, c-format
+msgid ""
+"\n"
+"\n"
+"\n"
+"Note: if you've an ISA PnP sound card, you'll have to use the alsaconf or "
+"the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console."
+msgstr ""
+"\n"
+"\n"
+"\n"
+"Hvis du har et ISA PnP-basert lydkort, må du bruke alsaconf eller "
+"sndconfig-programmene. Skriv alsaconf eller sndconfig i et konsoll."
+
+#: draksplash:33
+#, c-format
+msgid "X coordinate of text box"
+msgstr "X-koordinat til skrivefeltet"
+
+#: draksplash:34
+#, c-format
+msgid "Y coordinate of text box"
+msgstr "Y-koordinat til skrivefeltet"
+
+#: draksplash:35
+#, c-format
+msgid "Text box width"
+msgstr "Bredde på skrivefeltet"
+
+#: draksplash:36
+#, c-format
+msgid "Text box height"
+msgstr "Høyde på skrivefeltet"
+
+#: draksplash:37
+#, c-format
+msgid ""
+"The progress bar X coordinate\n"
+"of its upper left corner"
+msgstr ""
+"X-koordinat for øvre venstre\n"
+"hjørne til fremgangsviseren."
+
+#: draksplash:38
+#, c-format
+msgid ""
+"The progress bar Y coordinate\n"
+"of its upper left corner"
+msgstr ""
+"Y-koordinat for øvre venstre\n"
+"hjørne til fremgangsviseren."
+
+#: draksplash:39
+#, c-format
+msgid "The width of the progress bar"
+msgstr "Bredden til skrivefeltet."
+
+#: draksplash:40
+#, c-format
+msgid "The height of the progress bar"
+msgstr "Høyden til skrivefeltet."
+
+#: draksplash:41
+#, c-format
+msgid "X coordinate of the text"
+msgstr "X-koordinat til teksten"
+
+#: draksplash:42
+#, c-format
+msgid "Y coordinate of the text"
+msgstr "Y-koordinat til teksten"
+
+#: draksplash:43
+#, c-format
+msgid "Text box transparency"
+msgstr "Gjennomsiktighet for skrivefeltet"
+
+#: draksplash:44
+#, c-format
+msgid "Progress box transparency"
+msgstr "Gjennomsiktighet for framgangslinja"
+
+#: draksplash:45
+#, c-format
+msgid "Text size"
+msgstr "Tekststørrelse"
+
+#: draksplash:62
+#, c-format
+msgid "Progress Bar"
+msgstr "Framdriftsviser "
+
+#: draksplash:65
+#, c-format
+msgid "Choose progress bar color 1"
+msgstr "Velg farge 1 for framgangslinja"
+
+#: draksplash:67
+#, c-format
+msgid "Choose progress bar color 2"
+msgstr "Velg farge 2 for framgangslinja"
+
+#: draksplash:69
+#, c-format
+msgid "Choose progress bar background"
+msgstr "Velg bakgrunn for framgangslinja"
+
+#: draksplash:72
+#, c-format
+msgid "Gradient type"
+msgstr "Fargeovergangtype"
+
+#: draksplash:78
+#, c-format
+msgid "Text"
+msgstr "Tekst"
+
+#: draksplash:80
+#, c-format
+msgid "Choose text color"
+msgstr "Velg tekstfarge"
+
+#: draksplash:83 draksplash:102
+#, c-format
+msgid "Choose picture"
+msgstr "Velg bilde"
+
+#: draksplash:87
+#, c-format
+msgid "Silent bootsplash"
+msgstr "Stille oppstartsbilde"
+
+#: draksplash:90
+#, c-format
+msgid "Choose text zone color"
+msgstr "Velg tekstsonefarge"
+
+#: draksplash:93
+#, c-format
+msgid "Text color"
+msgstr "Tekstfarge"
+
+#: draksplash:97
+#, c-format
+msgid "Background color"
+msgstr "Bakgrunnsfarge"
+
+#: draksplash:103
+#, c-format
+msgid "Verbose bootsplash"
+msgstr "Oppstart med utvidete meldinger"
+
+#: draksplash:110
+#, c-format
+msgid "Theme name"
+msgstr "Temanavn"
+
+#: draksplash:115
+#, c-format
+msgid "Final resolution"
+msgstr "Endelig oppløsning"
+
+#: draksplash:119
+#, c-format
+msgid "Display logo on Console"
+msgstr "Vis logo på konsollet"
+
+#: draksplash:124
+#, c-format
+msgid "Save theme"
+msgstr "Lagre tema"
+
+#: draksplash:187
+#, c-format
+msgid "Please enter a theme name"
+msgstr "Skriv inn et temanavn"
+
+#: draksplash:190
+#, c-format
+msgid "Please select a splash image"
+msgstr "Velg oppstartsbilde"
+
+#: draksplash:193
+#, c-format
+msgid "saving Bootsplash theme..."
+msgstr "Lagrer oppstartstema …"
+
+#: draksplash:202
+#, c-format
+msgid "Unable to load image file %s"
+msgstr "Klarte ikke å åpne bildefila %s"
+
+#: draksplash:213
+#, c-format
+msgid "choose image"
+msgstr "Velg bilde"
+
+#: draksplash:228
+#, c-format
+msgid "Color selection"
+msgstr "Fargevalg"
+
+#: drakups:71
+#, c-format
+msgid "Connected through a serial port or an usb cable"
+msgstr "Koble til gjennom serieport eller USB-kabel"
+
+#: drakups:72
+#, c-format
+msgid "Manual configuration"
+msgstr "Manuelt oppsett"
+
+#: drakups:78
+#, c-format
+msgid "Add an UPS device"
+msgstr "Legg til en UPS-enhet"
+
+#: drakups:81
+#, c-format
+msgid ""
+"Welcome to the UPS configuration utility.\n"
+"\n"
+"Here, you'll add a new UPS to your system.\n"
+msgstr ""
+"Velkommen til oppsettverktøyet for UPS.\n"
+"\n"
+"Her kan du legge en ny UPS til systemet.\n"
+
+#: drakups:88
+#, c-format
+msgid ""
+"We're going to add an UPS device.\n"
+"\n"
+"Do you want to autodetect UPS devices connected to this machine or to "
+"manually select them?"
+msgstr ""
+"Vi skal nå legge til en UPS-enhet.\n"
+"\n"
+"Vil du søke etter UPS-enheter koblet til maskina, eller velge de manuelt?"
+
+#: drakups:91
+#, c-format
+msgid "Autodetection"
+msgstr "Automatisk søk"
+
+#: drakups:99 harddrake2:381
+#, c-format
+msgid "Detection in progress"
+msgstr "Søking pågår"
+
+#: drakups:118 drakups:157 logdrake:457 logdrake:463
+#, c-format
+msgid "Congratulations"
+msgstr "Gratulerer"
+
+#: drakups:119
+#, c-format
+msgid "The wizard successfully added the following UPS devices:"
+msgstr "Veiviseren har nå lagt til følgende UPS-enhet(er):"
+
+#: drakups:121
+#, c-format
+msgid "No new UPS devices was found"
+msgstr "Fant ingen nye UPS-enheter"
+
+#: drakups:126 drakups:138
+#, c-format
+msgid "UPS driver configuration"
+msgstr "Driveroppsett for UPS"
+
+#: drakups:126
+#, c-format
+msgid "Please select your UPS model."
+msgstr "Velg UPS-modell."
+
+#: drakups:127
+#, c-format
+msgid "Manufacturer / Model:"
+msgstr "Produsent/modell:"
+
+#: drakups:138
+#, c-format
+msgid ""
+"We are configuring the \"%s\" UPS from \"%s\".\n"
+"Please fill in its name, its driver and its port."
+msgstr ""
+"Setter opp «%s» fra «%s».\n"
+"Skriv inn navn, driver og port."
+
+#: drakups:143
+#, c-format
+msgid "Name:"
+msgstr "Navn:"
+
+#: drakups:143
+#, c-format
+msgid "The name of your ups"
+msgstr "Navnet på UPS."
+
+#: drakups:144
+#, c-format
+msgid "Driver:"
+msgstr "Driver:"
+
+#: drakups:144
+#, c-format
+msgid "The driver that manages your ups"
+msgstr "Driveren som håndterer UPS-en."
+
+#: drakups:145
+#, c-format
+msgid "Port:"
+msgstr "Port:"
+
+#: drakups:147
+#, c-format
+msgid "The port on which is connected your ups"
+msgstr "Porten som UPS-en er koblet til."
+
+#: drakups:157
+#, c-format
+msgid "The wizard successfully configured the new \"%s\" UPS device."
+msgstr "Veiviseren har nå satt opp «%s»."
+
+#: drakups:248
+#, c-format
+msgid "UPS devices"
+msgstr "UPS-er"
+
+#: drakups:249 drakups:268 drakups:284 harddrake2:89 harddrake2:115
+#: harddrake2:122
+#, c-format
+msgid "Name"
+msgstr "Navn"
+
+#: drakups:249 harddrake2:137
+#, c-format
+msgid "Driver"
+msgstr "Driver"
+
+#: drakups:249 harddrake2:55
+#, c-format
+msgid "Port"
+msgstr "Port"
+
+#: drakups:267
+#, c-format
+msgid "UPS users"
+msgstr "UPS-brukere"
+
+#: drakups:283
+#, c-format
+msgid "Access Control Lists"
+msgstr "Tilgangskontrollister"
+
+#: drakups:284
+#, c-format
+msgid "IP address"
+msgstr "IP-adresse"
+
+#: drakups:284
+#, c-format
+msgid "IP mask"
+msgstr "IP-maske"
+
+#: drakups:296
+#, c-format
+msgid "Rules"
+msgstr "Regler"
+
+#: drakups:297
+#, c-format
+msgid "Action"
+msgstr "Handling"
+
+#: drakups:297 harddrake2:86
+#, c-format
+msgid "Level"
+msgstr "Nivå"
+
+#: drakups:297
+#, c-format
+msgid "ACL name"
+msgstr "ACL-navn"
+
+#: drakups:297 finish-install:179
+#, c-format
+msgid "Password"
+msgstr "Passord"
+
+#: drakups:329
+#, c-format
+msgid "UPS Management"
+msgstr "UPS-håndtering"
+
+#: drakups:333 drakups:342
+#, c-format
+msgid "DrakUPS"
+msgstr "DrakUPS"
+
+#: drakups:339
+#, c-format
+msgid "Welcome to the UPS configuration tools"
+msgstr "Velkommen til oppsettverktøyet for UPS-er"
+
+#: drakxtv:67
+#, c-format
+msgid "No TV Card detected!"
+msgstr "Fant ingen TV-kort."
+
+#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
+#: drakxtv:69
+#, c-format
+msgid ""
+"No TV Card has been detected on your machine. Please verify that a Linux-"
+"supported Video/TV Card is correctly plugged in.\n"
+"\n"
+"\n"
+"You can visit our hardware database at:\n"
+"\n"
+"\n"
+"http://www.mandrivalinux.com/en/hardware.php3"
+msgstr ""
+"Fant ingen TV-kort koblet til maskina. Kontroller at du har et "
+"kort som er støttet i Linux koblet til.\n"
+"\n"
+"\n"
+"Du finner maskinvaredatabasen vår på:\n"
+"\n"
+"\n"
+"http://www.mandrivalinux.com/en/hardware.php3"
+
+#: finish-install:56
+#, c-format
+msgid "Keyboard"
+msgstr "Tastatur"
+
+#: finish-install:57
+#, c-format
+msgid "Please, choose your keyboard layout."
+msgstr "Velg tastaturoppsett."
+
+#: finish-install:177 finish-install:195 finish-install:207
+#, c-format
+msgid "Encrypted home partition"
+msgstr "Kryptert hjemmepartisjon"
+
+#: finish-install:177
+#, c-format
+msgid "Please enter a password for the %s user"
+msgstr "Skriv inn et passord for brukeren «%s»"
+
+#: finish-install:180
+#, c-format
+msgid "Password (again)"
+msgstr "Passord (igjen)"
+
+#: finish-install:195
+#, c-format
+msgid "Creating encrypted home partition"
+msgstr "Lager kryptert hjemmepartisjon"
+
+#: finish-install:207
+#, c-format
+msgid "Formatting encrypted home partition"
+msgstr "Formaterer kryptert hjemmepartisjon"
+
+#: harddrake2:29
+#, c-format
+msgid "Alternative drivers"
+msgstr "Alternative drivere"
+
+#: harddrake2:30
+#, c-format
+msgid "the list of alternative drivers for this sound card"
+msgstr "oversikt over alternative drivere for dette lydkortet"
+
+#: harddrake2:32 harddrake2:124
+#, c-format
+msgid "Bus"
+msgstr "Buss"
+
+#: harddrake2:33
+#, c-format
+msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgstr ""
+"Dette er den fysiske bussen som enheten er koblet til (for eksempel: PCI "
+"eller USB)."
+
+#: harddrake2:35 harddrake2:150
+#, c-format
+msgid "Bus identification"
+msgstr "Bussidentifisering"
+
+#: harddrake2:36
+#, c-format
+msgid ""
+"- PCI and USB devices: this lists the vendor, device, subvendor and "
+"subdevice PCI/USB ids"
+msgstr ""
+"– PCI- og USB-enheter: Her står PCI/USB-ID-ene til produsent, enhet, "
+"underprodusent og underenhet."
+
+#: harddrake2:38
+#, c-format
+msgid "Location on the bus"
+msgstr "Plassering på bussen"
+
+#: harddrake2:39
+#, c-format
+msgid ""
+"- pci devices: this gives the PCI slot, device and function of this card\n"
+"- eide devices: the device is either a slave or a master device\n"
+"- scsi devices: the scsi bus and the scsi device ids"
+msgstr ""
+"– PCI-enheter: PCI-sport, enhet og funksjon til kortet.\n"
+"– EIDE-enheter: Enheten er enten en slave- eller en mesterenhet.\n"
+"– SCSI-enheter: SCSI-bussen og enhets-ID."
+
+#: harddrake2:42
+#, c-format
+msgid "Drive capacity"
+msgstr "Diskkapasitet"
+
+#: harddrake2:42
+#, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr "spesialfunksjoner i driveren (brennefunksjonalitet og DVD-støtte)"
+
+#: harddrake2:43
+#, c-format
+msgid "Description"
+msgstr "Beskrivelse"
+
+#: harddrake2:43
+#, c-format
+msgid "this field describes the device"
+msgstr "dette feltet beskriver enheten"
+
+#: harddrake2:44
+#, c-format
+msgid "Old device file"
+msgstr "Gammel enhetsfil"
+
+#: harddrake2:45
+#, c-format
+msgid "old static device name used in dev package"
+msgstr "gammelt statisk enhetsnavn brukt i dev-pakke"
+
+#. -PO: here "module" is the "jargon term" for a kernel driver
+#: harddrake2:48
+#, c-format
+msgid "Module"
+msgstr "Modul"
+
+#: harddrake2:48
+#, c-format
+msgid "the module of the GNU/Linux kernel that handles the device"
+msgstr "Kjernemodulet som håndterer enheten"
+
+#: harddrake2:49
+#, c-format
+msgid "Extended partitions"
+msgstr "Utvidete partisjoner"
+
+#: harddrake2:49
+#, c-format
+msgid "the number of extended partitions"
+msgstr "antall utvidete partisjoner"
+
+#: harddrake2:50
+#, c-format
+msgid "Geometry"
+msgstr "Geometri"
+
+#: harddrake2:50
+#, c-format
+msgid "Cylinder/head/sectors geometry of the disk"
+msgstr "Sylinder/hoved/sektor-geometrien til disken"
+
+#: harddrake2:51
+#, c-format
+msgid "Disk controller"
+msgstr "Diskkontroller"
+
+#: harddrake2:51
+#, c-format
+msgid "the disk controller on the host side"
+msgstr "diskkontrolleren på vertssida"
+
+#: harddrake2:52
+#, c-format
+msgid "Identifier"
+msgstr "Identifikator"
+
+#: harddrake2:52
+#, c-format
+msgid "usually the device serial number"
+msgstr "vanligvis serienummeret til enheten"
+
+#: harddrake2:53
+#, c-format
+msgid "Media class"
+msgstr "Mediaklasse"
+
+#: harddrake2:53
+#, c-format
+msgid "class of hardware device"
+msgstr "type maskinvareenhet"
+
+#: harddrake2:54 harddrake2:87
+#, c-format
+msgid "Model"
+msgstr "Modell"
+
+#: harddrake2:54
+#, c-format
+msgid "hard disk model"
+msgstr "Harddiskmodell"
+
+#: harddrake2:55
+#, c-format
+msgid "network printer port"
+msgstr "Nettverksskriverport"
+
+#: harddrake2:56
+#, c-format
+msgid "Primary partitions"
+msgstr "Primærpartisjoner"
+
+#: harddrake2:56
+#, c-format
+msgid "the number of the primary partitions"
+msgstr "antall primærpartisjoner"
+
+#: harddrake2:57 harddrake2:92
+#, c-format
+msgid "Vendor"
+msgstr "Produsent"
+
+#: harddrake2:57
+#, c-format
+msgid "the vendor name of the device"
+msgstr "produsentnavnet til enheten"
+
+#: harddrake2:58
+#, c-format
+msgid "PCI domain"
+msgstr "PCI-domene"
+
+#: harddrake2:58
+#, c-format
+msgid "the PCI domain of the device"
+msgstr "PCI-domenet til enheten"
+
+#: harddrake2:59
+#, c-format
+msgid "Bus PCI #"
+msgstr "PCI-bussnr."
+
+#: harddrake2:59
+#, c-format
+msgid "the PCI bus on which the device is plugged"
+msgstr "PCI-bussen som enheten er plugget i"
+
+#: harddrake2:60
+#, c-format
+msgid "PCI device #"
+msgstr "PCI-enhet #"
+
+#: harddrake2:60
+#, c-format
+msgid "PCI device number"
+msgstr "PCI-enhetsnummer"
+
+#: harddrake2:61
+#, c-format
+msgid "PCI function #"
+msgstr "PCI-funksjon #"
+
+#: harddrake2:61
+#, c-format
+msgid "PCI function number"
+msgstr "PCI-funksjonsnummer"
+
+#: harddrake2:62
+#, c-format
+msgid "Vendor ID"
+msgstr "Produsent-ID"
+
+#: harddrake2:62
+#, c-format
+msgid "this is the standard numerical identifier of the vendor"
+msgstr "dette er ID-nummeret til produsenten"
+
+#: harddrake2:63
+#, c-format
+msgid "Device ID"
+msgstr "Enhets-ID"
+
+#: harddrake2:63
+#, c-format
+msgid "this is the numerical identifier of the device"
+msgstr "dette er ID-nummeret til enheten"
+
+#: harddrake2:64
+#, c-format
+msgid "Sub vendor ID"
+msgstr "Underprodusent-ID"
+
+#: harddrake2:64
+#, c-format
+msgid "this is the minor numerical identifier of the vendor"
+msgstr "dette er den minste numeriske identifikatoren til produsenten"
+
+#: harddrake2:65
+#, c-format
+msgid "Sub device ID"
+msgstr "Underenhets-ID"
+
+#: harddrake2:65
+#, c-format
+msgid "this is the minor numerical identifier of the device"
+msgstr "dette er den minste numeriske identifikatoren til enheten"
+
+#: harddrake2:66
+#, c-format
+msgid "Device USB ID"
+msgstr "USB-ID for enhet"
+
+#: harddrake2:66
+#, c-format
+msgid ".."
+msgstr ".."
+
+#: harddrake2:70
+#, c-format
+msgid "Bogomips"
+msgstr "Bogomips"
+
+#: harddrake2:70
+#, c-format
+msgid ""
+"the GNU/Linux kernel needs to run a calculation loop at boot time to "
+"initialize a timer counter.  Its result is stored as bogomips as a way to "
+"\"benchmark\" the cpu."
+msgstr ""
+"GNU/Linux-kjernen må kjøre en regneløkkee ved oppstart for å starte en "
+"tidtaker. Resultatet blir lagret som bogomips for å ytelsesteste "
+"prosessoren."
+
+#: harddrake2:71
+#, c-format
+msgid "Cache size"
+msgstr "Hurtigminnestørrelse"
+
+#: harddrake2:71
+#, c-format
+msgid "size of the (second level) cpu cache"
+msgstr "størrelsen på (andrenivås) prosessorhurtigminnet"
+
+#. -PO: here "comas" is the medical coma, not the lexical coma!!
+#: harddrake2:74
+#, c-format
+msgid "Coma bug"
+msgstr "Coma-feil"
+
+#: harddrake2:74
+#, c-format
+msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+msgstr "om prosessoren har Cyrix 6x86 Coma-feilen"
+
+#: harddrake2:75
+#, c-format
+msgid "Cpuid family"
+msgstr "Prosessorfamilie"
+
+#: harddrake2:75
+#, c-format
+msgid "family of the cpu (eg: 6 for i686 class)"
+msgstr "prosessorfamilie (f.eks. 6 for i686)"
+
+#: harddrake2:76
+#, c-format
+msgid "Cpuid level"
+msgstr "Cpuid-nivå"
+
+#: harddrake2:76
+#, c-format
+msgid "information level that can be obtained through the cpuid instruction"
+msgstr "Informasjonsnivå som kan skaffes gjennom cpuid-instruksjonen"
+
+#: harddrake2:77
+#, c-format
+msgid "Frequency (MHz)"
+msgstr "Frekvens (MHz)"
+
+#: harddrake2:77
+#, c-format
+msgid ""
+"the CPU frequency in MHz (Megahertz which in first approximation may be "
+"coarsely assimilated to number of instructions the cpu is able to execute "
+"per second)"
+msgstr ""
+"Prosessorklokkefrekvensen målt i MHz (Megahertz er omtrent likt tallet på "
+"instruksjoner prosessoren kan utføre per sekund)"
+
+#: harddrake2:78
+#, c-format
+msgid "Flags"
+msgstr "Flagg"
+
+#: harddrake2:78
+#, c-format
+msgid "CPU flags reported by the kernel"
+msgstr "CPU-flagg rapportert av kjernen"
+
+#: harddrake2:79
+#, c-format
+msgid "Fdiv bug"
+msgstr "FDIV-feil"
+
+#: harddrake2:80
+#, c-format
+msgid ""
+"Early Intel Pentium chips manufactured have a bug in their floating point "
+"processor which did not achieve the required precision when performing a "
+"Floating point DIVision (FDIV)"
+msgstr ""
+"Tidlige Intel Pentium-brikker hadde en feil i flytetallsprosessoren som førte "
+"til dårlig presisjon ved flytetallsdivisjoner (FDIV)"
+
+#: harddrake2:81
+#, c-format
+msgid "Is FPU present"
+msgstr "Finnes FPU"
+
+#: harddrake2:81
+#, c-format
+msgid "yes means the processor has an arithmetic coprocessor"
+msgstr "ja tyder på at prosessoren har en mattekoprosessor"
+
+#: harddrake2:82
+#, c-format
+msgid "Whether the FPU has an irq vector"
+msgstr "Om mattekoprosessoren har en avbruddsvektor"
+
+#: harddrake2:82
+#, c-format
+msgid "yes means the arithmetic coprocessor has an exception vector attached"
+msgstr "ja tyder på at mattekoprosessoren har en unntaksvektor tilkoblet"
+
+#: harddrake2:83
+#, c-format
+msgid "F00f bug"
+msgstr "F00f-feil"
+
+#: harddrake2:83
+#, c-format
+msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
+msgstr ""
+"tidlige Pentium-prosessorer innehodt en feil, og frøs ved dekoding av F00F-"
+"bytekode"
+
+#: harddrake2:84
+#, c-format
+msgid "Halt bug"
+msgstr "Halt-feil"
+
+#: harddrake2:85
+#, c-format
+msgid ""
+"Some of the early i486DX-100 chips cannot reliably return to operating mode "
+"after the \"halt\" instruction is used"
+msgstr ""
+"Noen av de tidlige i486DX-100-brikkene kan ikke vende tilbake til "
+"kjøremodus etter at instruksjonen «halt» er brukt"
+
+#: harddrake2:86
+#, c-format
+msgid "sub generation of the cpu"
+msgstr "undergenerasjon til prosessoren"
+
+#: harddrake2:87
+#, c-format
+msgid "generation of the cpu (eg: 8 for Pentium III, ...)"
+msgstr "prosessorgenerasjon (f.eks. 8 for pentium III, …)"
+
+#: harddrake2:88
+#, c-format
+msgid "Model name"
+msgstr "Modellnavn"
+
+#: harddrake2:88
+#, c-format
+msgid "official vendor name of the cpu"
+msgstr "offisielt produsentnavn"
+
+#: harddrake2:89
+#, c-format
+msgid "the name of the CPU"
+msgstr "navnet på prosessoren"
+
+#: harddrake2:90
+#, c-format
+msgid "Processor ID"
+msgstr "Prosessor-ID"
+
+#: harddrake2:90
+#, c-format
+msgid "the number of the processor"
+msgstr "tallet til prosessoren"
+
+#: harddrake2:91
+#, c-format
+msgid "Model stepping"
+msgstr "Modellserie"
+
+#: harddrake2:91
+#, c-format
+msgid "stepping of the cpu (sub model (generation) number)"
+msgstr "serie av prosessoren (undermodells(generasjons)nummer)"
+
+#: harddrake2:92
+#, c-format
+msgid "the vendor name of the processor"
+msgstr "Produsentnavnet på prosessoren"
+
+#: harddrake2:93
+#, c-format
+msgid "Write protection"
+msgstr "Skrivebeskyttelse"
+
+#: harddrake2:93
+#, c-format
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write protection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
+"WP-flagget i CR0-registeret til prosessoren tvinger skrivebeskyttelse på "
+"minnesidenivå, og dermed kan prosessoren hindre ukontrollert kjernetilgang "
+"til brukerminnet (dette er altså en feilvakt)"
+
+#: harddrake2:97
+#, c-format
+msgid "Floppy format"
+msgstr "Diskettformat"
+
+#: harddrake2:97
+#, c-format
+msgid "format of floppies supported by the drive"
+msgstr "støttet diskformat"
+
+#: harddrake2:101
+#, c-format
+msgid "EIDE/SCSI channel"
+msgstr "EIDE/SCSI-kanal"
+
+#: harddrake2:102
+#, c-format
+msgid "Disk identifier"
+msgstr "Diskidentifikator"
+
+#: harddrake2:102
+#, c-format
+msgid "usually the disk serial number"
+msgstr "vanligvis serienummeret til disken"
+
+#: harddrake2:103
+#, c-format
+msgid "Logical unit number"
+msgstr "Logisk enhetsnummer"
+
+#: harddrake2:103
+#, c-format
+msgid ""
+"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
+"identified by a\n"
+"channel number, a target id and a logical unit number"
+msgstr ""
+"SCSI-målnummeret (LUB). SCSI-enheter koblet til en vert blir unikt "
+"idenfisert med et kanalnummer, en mål-ID og et logisk enhetsnummer."
+
+#. -PO: here, "size" is the size of the ram chip (eg: 128Mo, 256Mo, ...)
+#: harddrake2:110
+#, c-format
+msgid "Installed size"
+msgstr "Installert størrelse"
+
+#: harddrake2:110
+#, c-format
+msgid "Installed size of the memory bank"
+msgstr "Installert størrelse på minnebank"
+
+#: harddrake2:111
+#, c-format
+msgid "Enabled Size"
+msgstr "Påslått størrelse"
+
+#: harddrake2:111
+#, c-format
+msgid "Enabled size of the memory bank"
+msgstr "Påslått størrelse på minnebank"
+
+#: harddrake2:112 harddrake2:121
+#, c-format
+msgid "Type"
+msgstr "Type"
+
+#: harddrake2:112
+#, c-format
+msgid "type of the memory device"
+msgstr "type minneenhet"
+
+#: harddrake2:113
+#, c-format
+msgid "Speed"
+msgstr "Fart"
+
+#: harddrake2:113
+#, c-format
+msgid "Speed of the memory bank"
+msgstr "Farten til minnebanken"
+
+#: harddrake2:114
+#, c-format
+msgid "Bank connections"
+msgstr "Bank-tilkoblinger"
+
+#: harddrake2:115
+#, c-format
+#, fuzzy
+msgid "Socket designation of the memory bank"
+msgstr "Sokkelnavn på minnebank"
+
+#: harddrake2:119
+#, c-format
+msgid "Device file"
+msgstr "Enhetsfil"
+
+#: harddrake2:119
+#, c-format
+msgid "the device file used to communicate with the kernel driver for the mouse"
+msgstr "enhetsfila for musa brukt til å kommunisere med kjernedriveren"
+
+#: harddrake2:120
+#, c-format
+msgid "Emulated wheel"
+msgstr "Emulert hjul"
+
+#: harddrake2:120
+#, c-format
+msgid "whether the wheel is emulated or not"
+msgstr "om det skal brukes hjulemulering eller ikke"
+
+#: harddrake2:121
+#, c-format
+msgid "the type of the mouse"
+msgstr "type mus"
+
+#: harddrake2:122
+#, c-format
+msgid "the name of the mouse"
+msgstr "navnet på musa"
+
+#: harddrake2:123
+#, c-format
+msgid "Number of buttons"
+msgstr "Antall knapper"
+
+#: harddrake2:123
+#, c-format
+msgid "the number of buttons the mouse has"
+msgstr "antall knapper på musa"
+
+#: harddrake2:124
+#, c-format
+msgid "the type of bus on which the mouse is connected"
+msgstr "busstypen musa er koblet til"
+
+#: harddrake2:125
+#, c-format
+msgid "Mouse protocol used by X11"
+msgstr "Musprotokoll brukt av X11"
+
+#: harddrake2:125
+#, c-format
+msgid "the protocol that the graphical desktop use with the mouse"
+msgstr ""
+"protokollen som det grafiske skrivebordet skal bruke for å kommunisere med "
+"musa"
+
+#: harddrake2:132 harddrake2:141 harddrake2:148 harddrake2:156 harddrake2:337
+#, c-format
+msgid "Identification"
+msgstr "Identifisering"
+
+#: harddrake2:133 harddrake2:149
+#, c-format
+msgid "Connection"
+msgstr "Tilkobling"
+
+#: harddrake2:142
+#, c-format
+msgid "Performances"
+msgstr "Ytelser"
+
+#: harddrake2:143
+#, c-format
+msgid "Bugs"
+msgstr "Feil"
+
+#: harddrake2:144
+#, c-format
+msgid "FPU"
+msgstr "FPU"
+
+#: harddrake2:151
+#, c-format
+msgid "Device"
+msgstr "Enhet"
+
+#: harddrake2:152
+#, c-format
+msgid "Partitions"
+msgstr "Partisjoner"
+
+#: harddrake2:157
+#, c-format
+msgid "Features"
+msgstr "Funksjoner"
+
+#. -PO: please keep all "/" characters !!!
+#: harddrake2:180 logdrake:78
+#, c-format
+msgid "/_Options"
+msgstr "/_Innstillinger"
+
+#: harddrake2:181 harddrake2:210 logdrake:80
+#, c-format
+msgid "/_Help"
+msgstr "/_Hjelp"
+
+#: harddrake2:185
+#, c-format
+msgid "/Autodetect _printers"
+msgstr "/Finn _skrivere automatisk"
+
+#: harddrake2:186
+#, c-format
+msgid "/Autodetect _modems"
+msgstr "/Finn _modem automatisk"
+
+#: harddrake2:187
+#, c-format
+msgid "/Autodetect _jaz drives"
+msgstr "/Finn _JAZ-stasjoner automatisk"
+
+#: harddrake2:188
+#, c-format
+msgid "/Autodetect parallel _zip drives"
+msgstr "/Finn automatisk _ZIP-stasjoner på parallellporter"
+
+#: harddrake2:192
+#, c-format
+msgid "Hardware Configuration"
+msgstr "Oppsett av maskinvare"
+
+#: harddrake2:199
+#, c-format
+msgid "/_Quit"
+msgstr "/_Avslutt"
+
+#: harddrake2:212
+#, c-format
+msgid "/_Fields description"
+msgstr "/_Feltbeskrivelser"
+
+#: harddrake2:214
+#, c-format
+msgid "Harddrake help"
+msgstr "Hjelp"
+
+#: harddrake2:215
+#, c-format
+msgid ""
+"Description of the fields:\n"
+"\n"
+msgstr ""
+"Feltbeskrivelser:\n"
+"\n"
+
+#: harddrake2:223
+#, c-format
+msgid "Select a device!"
+msgstr "Velg en enhet."
+
+#: harddrake2:223
+#, c-format
+msgid ""
+"Once you've selected a device, you'll be able to see the device information "
+"in fields displayed on the right frame (\"Information\")"
+msgstr ""
+"Når du har valgt en enhet, vil du se informasjon om enheten i feltet i høyre "
+"vindusramme («Informasjon»)."
+
+#: harddrake2:229
+#, c-format
+msgid "/_Report Bug"
+msgstr "/_Meld fra om feil"
+
+#: harddrake2:231
+#, c-format
+msgid "/_About..."
+msgstr "/_Om …"
+
+#: harddrake2:234
+#, c-format
+msgid "Harddrake"
+msgstr "Harddrake"
+
+#: harddrake2:238
+#, c-format
+msgid "This is HardDrake, a %s hardware configuration tool."
+msgstr "Dette er HardDrake, et %s oppsettsverktøy for maskinvare."
+
+#: harddrake2:271
+#, c-format
+msgid "Detected hardware"
+msgstr "Fant maskinvare"
+
+#: harddrake2:274 scannerdrake:286
+#, c-format
+msgid "Information"
+msgstr "Informasjon"
+
+#: harddrake2:276
+#, c-format
+msgid "Set current driver options"
+msgstr "Sett gjeldende drivervalg"
+
+#: harddrake2:283
+#, c-format
+msgid "Run config tool"
+msgstr "Kjør oppsettverktøy"
+
+#: harddrake2:303
+#, c-format
+msgid "Click on a device in the left tree in order to display its information here."
+msgstr "Trykk på en enhet til venstre for å se informasjon om enheten her."
+
+#: harddrake2:324 notify-x11-free-driver-switch:13
+#, c-format
+msgid "unknown"
+msgstr "ukjent"
+
+#: harddrake2:325
+#, c-format
+msgid "Unknown"
+msgstr "Ukjent"
+
+#: harddrake2:345
+#, c-format
+msgid "Misc"
+msgstr "Forskjellig"
+
+#: harddrake2:429
+#, c-format
+msgid "secondary"
+msgstr "sekundær"
+
+#: harddrake2:429
+#, c-format
+msgid "primary"
+msgstr "primær"
+
+#: harddrake2:433
+#, c-format
+msgid "burner"
+msgstr "brenner"
+
+#: harddrake2:433
+#, c-format
+msgid "DVD"
+msgstr "DVD"
+
+#: harddrake2:485
+#, c-format
+msgid "Unknown/Others"
+msgstr "Ukjent/andre"
+
+#: harddrake2:527
+#, c-format
+msgid "The following packages need to be installed:\n"
+msgstr "Disse pakkene må installeres:\n"
+
+#: localedrake:38
+#, c-format
+msgid "LocaleDrake"
+msgstr "Språkoppsett"
+
+#: localedrake:44
+#, c-format
+msgid "You should install the following packages: %s"
+msgstr "Du bør installere disse pakkene: %s"
+
+#. -PO: the following is used to combine packages names. eg: "initscripts, harddrake, yudit"
+#: localedrake:47
+#, c-format
+msgid ", "
+msgstr ", "
+
+#: logdrake:51
+#, c-format
+msgid "Mandriva Linux Tools Logs"
+msgstr "Loggverktøy for Mandriva Linux"
+
+#: logdrake:65
+#, c-format
+msgid "Show only for the selected day"
+msgstr "Vis bare for valgt dag"
+
+#: logdrake:72
+#, c-format
+msgid "/File/_New"
+msgstr "/Fil/_Ny"
+
+#: logdrake:72
+#, c-format
+msgid "<control>N"
+msgstr "<control>N"
+
+#: logdrake:73
+#, c-format
+msgid "/File/_Open"
+msgstr "/Fil/_Åpne"
+
+#: logdrake:73
+#, c-format
+msgid "<control>O"
+msgstr "<control>O"
+
+#: logdrake:74
+#, c-format
+msgid "/File/_Save"
+msgstr "/Fil/_Lagre"
+
+#: logdrake:74
+#, c-format
+msgid "<control>S"
+msgstr "<control>S"
+
+#: logdrake:75
+#, c-format
+msgid "/File/Save _As"
+msgstr "/Fil/Lagre _som"
+
+#: logdrake:76
+#, c-format
+msgid "/File/-"
+msgstr "/Fil/–"
+
+#: logdrake:79
+#, c-format
+msgid "/Options/Test"
+msgstr "/Innstillinger/Test"
+
+#: logdrake:81
+#, c-format
+msgid "/Help/_About..."
+msgstr "/Hjelp/_Om …"
+
+#: logdrake:110
+#, c-format
+msgid ""
+"_:this is the auth.log log file\n"
+"Authentication"
+msgstr "Autentisering"
+
+#: logdrake:111
+#, c-format
+msgid ""
+"_:this is the user.log log file\n"
+"User"
+msgstr "Bruker"
+
+#: logdrake:112
+#, c-format
+msgid ""
+"_:this is the /var/log/messages log file\n"
+"Messages"
+msgstr "Meldinger"
+
+#: logdrake:113
+#, c-format
+msgid ""
+"_:this is the /var/log/syslog log file\n"
+"Syslog"
+msgstr "Systemlogg"
+
+#: logdrake:117
+#, c-format
+msgid "search"
+msgstr "søk"
+
+#: logdrake:129
+#, c-format
+msgid "A tool to monitor your logs"
+msgstr "Et verktøy for å lese loggfiler"
+
+#: logdrake:131
+#, c-format
+msgid "Settings"
+msgstr "Innstillinger"
+
+#: logdrake:134
+#, c-format
+#, fuzzy
+msgid "Matching"
+msgstr "Samsvar"
+
+#: logdrake:135
+#, c-format
+#, fuzzy
+msgid "but not matching"
+msgstr "men ikke samsvar"
+
+#: logdrake:138
+#, c-format
+msgid "Choose file"
+msgstr "Velg fil"
+
+#: logdrake:150
+#, c-format
+msgid "Calendar"
+msgstr "Kalender"
+
+#: logdrake:159
+#, c-format
+msgid "Content of the file"
+msgstr "Innhold i fila"
+
+#: logdrake:163 logdrake:407
+#, c-format
+msgid "Mail alert"
+msgstr "E-postvarsling"
+
+#: logdrake:170
+#, c-format
+msgid "The alert wizard has failed unexpectedly:"
+msgstr "Varslingsveiviseren fikk en uventet feil:"
+
+#: logdrake:174
+#, c-format
+msgid "Save"
+msgstr "Lagre"
+
+#: logdrake:222
+#, c-format
+msgid "please wait, parsing file: %s"
+msgstr "Vent litt, tolker fil: %s"
+
+#: logdrake:244
+#, c-format
+msgid "Sorry, log file isn't available!"
+msgstr "Loggfila er ikke tilgjengelig."
+
+#: logdrake:292
+#, c-format
+msgid "Error while opening \"%s\" log file: %s\n"
+msgstr "Feil ved åpning av «%s». Loggfil: %s\n"
+
+#: logdrake:385
+#, c-format
+msgid "Apache World Wide Web Server"
+msgstr "Vevtjeneren Apache"
+
+#: logdrake:386
+#, c-format
+msgid "Domain Name Resolver"
+msgstr "Domenenavnoppslagstjeneste"
+
+#: logdrake:387
+#, c-format
+msgid "Ftp Server"
+msgstr "FTP-tjener"
+
+#: logdrake:388
+#, c-format
+msgid "Postfix Mail Server"
+msgstr "E-posttjeneren Postfix"
+
+#: logdrake:389
+#, c-format
+msgid "Samba Server"
+msgstr "Samba-tjener"
+
+#: logdrake:390
+#, c-format
+msgid "SSH Server"
+msgstr "SSH-tjener"
+
+#: logdrake:391
+#, c-format
+msgid "Webmin Service"
+msgstr "Webmin-tjeneste"
+
+#: logdrake:392
+#, c-format
+msgid "Xinetd Service"
+msgstr "Xinetd-tjeneste"
+
+#: logdrake:401
+#, c-format
+msgid "Configure the mail alert system"
+msgstr "Sett opp e-postvarslingstjenesten"
+
+#: logdrake:402
+#, c-format
+msgid "Stop the mail alert system"
+msgstr "Stopp e-postvarslingstjenesten"
+
+#: logdrake:410
+#, c-format
+msgid "Mail alert configuration"
+msgstr "Sett opp e-postvarsling"
+
+#: logdrake:411
+#, c-format
+msgid ""
+"Welcome to the mail configuration utility.\n"
+"\n"
+"Here, you'll be able to set up the alert system.\n"
+msgstr ""
+"Velkommen til oppsettsverktøyet for e-post.\n"
+"\n"
+"Her kan du sette opp varslingssystemet.\n"
+
+#: logdrake:414
+#, c-format
+msgid "What do you want to do?"
+msgstr "Hva vil du gjøre?"
+
+#: logdrake:421
+#, c-format
+msgid "Services settings"
+msgstr "Tjenesteoppsett"
+
+#: logdrake:422
+#, c-format
+msgid ""
+"You will receive an alert if one of the selected services is no longer "
+"running"
+msgstr "Du vil motta et varsel om en av de valgte tjenestene ikke lengre kjører"
+
+#: logdrake:429
+#, c-format
+msgid "Load setting"
+msgstr "Lastoppsett"
+
+#: logdrake:430
+#, c-format
+msgid "You will receive an alert if the load is higher than this value"
+msgstr "Du vil motta et varsel om lasten/ressursbruken er høyere enn denne verdien"
+
+#: logdrake:431
+#, c-format
+msgid ""
+"_: load here is a noun, the load of the system\n"
+"Load"
+msgstr "Last"
+
+#: logdrake:436
+#, c-format
+msgid "Alert configuration"
+msgstr "Varseloppsett"
+
+#: logdrake:437
+#, c-format
+msgid "Please enter your email address below "
+msgstr "Skriv inn e-postadressen din under"
+
+#: logdrake:438
+#, c-format
+msgid "and enter the name (or the IP) of the SMTP server you wish to use"
+msgstr "og skriv inn navnet (eller IP-adressen) til SMTP-tjeneren som skal brukes"
+
+#: logdrake:445
+#, c-format
+msgid "\"%s\" neither is a valid email nor is an existing local user!"
+msgstr "«%s» er verken en gyldig e-postadresse eller en lokal bruker."
+
+#: logdrake:450
+#, c-format
+msgid ""
+"\"%s\" is a local user, but you did not select a local smtp, so you must use "
+"a complete email address!"
+msgstr ""
+"«%s» er en lokal bruker, men du har ikke valgt noen lokal SMTP, og du må "
+"derfor bruke en fullstendig e-postadresse."
+
+#: logdrake:457
+#, c-format
+msgid "The wizard successfully configured the mail alert."
+msgstr "E-postvarsel er nå satt opp."
+
+#: logdrake:463
+#, c-format
+msgid "The wizard successfully disabled the mail alert."
+msgstr "E-postvarsel er nå slått av."
+
+#: logdrake:522
+#, c-format
+msgid "Save as.."
+msgstr "Lagre som …"
+
+#: notify-x11-free-driver-switch:15
+#, c-format
+msgid ""
+"The proprietary driver for your graphic card can not be found, the system is "
+"now using the free software driver (%s)."
+msgstr ""
+"Fant ikke den godseide skjermkortdriveren. Bruker derfor den frie driveren (%"
+"s)."
+
+#: scannerdrake:51
+#, c-format
+msgid ""
+"SANE packages need to be installed to use scanners.\n"
+"\n"
+"Do you want to install the SANE packages?"
+msgstr ""
+"SANE-pakkene må være installert før du kan bruke skannere.\n"
+"\n"
+"Ønsker du å installere SANE-pakkene?"
+
+#: scannerdrake:55
+#, c-format
+msgid "Aborting Scannerdrake."
+msgstr "Avbryter skanneroppsett."
+
+#: scannerdrake:60
+#, c-format
+msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
+msgstr "Klarte ikke å installere pakker nødvendige for å sette opp skannere."
+
+#: scannerdrake:61
+#, c-format
+msgid "Scannerdrake will not be started now."
+msgstr "Skanneroppsettet vil ikke bli startet nå."
+
+#: scannerdrake:67 scannerdrake:505
+#, c-format
+msgid "Searching for configured scanners..."
+msgstr "Ser etter oppsatte skannere …"
+
+#: scannerdrake:71 scannerdrake:509
+#, c-format
+msgid "Searching for new scanners..."
+msgstr "Ser etter nye skannere …"
+
+#: scannerdrake:79 scannerdrake:531
+#, c-format
+msgid "Re-generating list of configured scanners..."
+msgstr "Lager på nytt liste over oppsatte skannere …"
+
+#: scannerdrake:101
+#, c-format
+msgid "The %s is not supported by this version of %s."
+msgstr "%s er ikke støttet i denne versjonen av %s."
+
+#: scannerdrake:104 scannerdrake:115
+#, c-format
+msgid "Confirmation"
+msgstr "Bekreftelse"
+
+#: scannerdrake:104
+#, c-format
+msgid "%s found on %s, configure it automatically?"
+msgstr "Fant %s på %s. Vil du sette den opp automatisk?"
+
+#: scannerdrake:116
+#, c-format
+msgid "%s is not in the scanner database, configure it manually?"
+msgstr "%s finnes ikke i skannerdatabasen, vil du sette den opp manuelt?"
+
+#: scannerdrake:130
+#, c-format
+msgid "Scanner configuration"
+msgstr "Skanneroppsett"
+
+#: scannerdrake:131
+#, c-format
+msgid "Select a scanner model (Detected model: %s, Port: %s)"
+msgstr "Velg skannermodell (fant modell: %s – port: %s)"
+
+#: scannerdrake:133
+#, c-format
+msgid "Select a scanner model (Detected model: %s)"
+msgstr "Velg skannermodell (fant modell: %s)"
+
+#: scannerdrake:134
+#, c-format
+msgid "Select a scanner model (Port: %s)"
+msgstr "Velg skannermodell (port: %s)"
+
+#: scannerdrake:136 scannerdrake:139
+#, c-format
+msgid " (UNSUPPORTED)"
+msgstr " (IKKE STØTTET)"
+
+#: scannerdrake:142
+#, c-format
+msgid "The %s is not supported under Linux."
+msgstr "%s er ikke støttet under Linux."
+
+#: scannerdrake:169 scannerdrake:183
+#, c-format
+msgid "Do not install firmware file"
+msgstr "Ikke installer fastvarefil"
+
+#: scannerdrake:172 scannerdrake:222
+#, c-format
+msgid "Scanner Firmware"
+msgstr "Skannerfastvare"
+
+#: scannerdrake:173 scannerdrake:225
+#, c-format
+msgid ""
+"It is possible that your %s needs its firmware to be uploaded everytime when "
+"it is turned on."
+msgstr ""
+"Det er mulig at %s trenger oppdatering av fastvaren hver gang den blir "
+"slått på."
+
+#: scannerdrake:174 scannerdrake:226
+#, c-format
+msgid "If this is the case, you can make this be done automatically."
+msgstr "Hvis dette er tilfellet, kan du la dette bli gjort automatisk."
+
+#: scannerdrake:175 scannerdrake:229
+#, c-format
+msgid ""
+"To do so, you need to supply the firmware file for your scanner so that it "
+"can be installed."
+msgstr "For å kunne gjøre dette trenger du fastvarefila til skanneren."
+
+#: scannerdrake:176 scannerdrake:230
+#, c-format
+msgid ""
+"You find the file on the CD or floppy coming with the scanner, on the "
+"manufacturer's home page, or on your Windows partition."
+msgstr ""
+"Du finner fila på CD-en eller disketten som kom med skanneren, på "
+"hjemmesiden til skannerprodusenten eller på Windows-partisjonen din."
+
+#: scannerdrake:178 scannerdrake:237
+#, c-format
+msgid "Install firmware file from"
+msgstr "Installer fastvarefil fra"
+
+#: scannerdrake:180 scannerdrake:188 scannerdrake:239 scannerdrake:246
+#, c-format
+msgid "CD-ROM"
+msgstr "CD-ROM"
+
+#: scannerdrake:181 scannerdrake:190 scannerdrake:240 scannerdrake:248
+#, c-format
+msgid "Floppy Disk"
+msgstr "Diskett"
+
+#: scannerdrake:182 scannerdrake:192 scannerdrake:241 scannerdrake:250
+#, c-format
+msgid "Other place"
+msgstr "Annen plassering"
+
+#: scannerdrake:198
+#, c-format
+msgid "Select firmware file"
+msgstr "Velg fastvarefil"
+
+#: scannerdrake:201 scannerdrake:260
+#, c-format
+msgid "The firmware file %s does not exist or is unreadable!"
+msgstr "Fastvarefila %s finnes ikke, eller er ikke lesbar."
+
+#: scannerdrake:224
+#, c-format
+msgid ""
+"It is possible that your scanners need their firmware to be uploaded "
+"everytime when they are turned on."
+msgstr ""
+"Det er mulig at skannerene trenger oppdatering av fastvaren hver gang de "
+"blir slått på."
+
+#: scannerdrake:228
+#, c-format
+msgid ""
+"To do so, you need to supply the firmware files for your scanners so that it "
+"can be installed."
+msgstr "For å kunne gjøre dette trenger du fastvarefila til skannerene."
+
+#: scannerdrake:231
+#, c-format
+msgid ""
+"If you have already installed your scanner's firmware you can update the "
+"firmware here by supplying the new firmware file."
+msgstr ""
+"Om du allerede har installert fastvaren til skanneren, kan du oppdatere den "
+"her med en ny fastvarefil."
+
+#: scannerdrake:233
+#, c-format
+msgid "Install firmware for the"
+msgstr "Installer fastvare for"
+
+#: scannerdrake:256
+#, c-format
+msgid "Select firmware file for the %s"
+msgstr "Velg fastvarefil for %s"
+
+#: scannerdrake:274
+#, c-format
+msgid "Could not install the firmware file for the %s!"
+msgstr "Klarte ikke å installere fastvarefila for %s."
+
+#: scannerdrake:287
+#, c-format
+msgid "The firmware file for your %s was successfully installed."
+msgstr "Fastvarefila for %s er nå installert."
+
+#: scannerdrake:297
+#, c-format
+msgid "The %s is unsupported"
+msgstr "%s er ikke støttet"
+
+#: scannerdrake:302
+#, c-format
+msgid ""
+"The %s must be configured by system-config-printer.\n"
+"You can launch system-config-printer from the %s Control Center in Hardware "
+"section."
+msgstr ""
+"%s må være satt opp av system-config-printer.\n"
+"Du finner programmet i %s Kontrollsenter, under Maskinvare."
+
+#: scannerdrake:320
+#, c-format
+msgid "Setting up kernel modules..."
+msgstr "Setter opp kjernemoduler …"
+
+#: scannerdrake:330 scannerdrake:337 scannerdrake:367
+#, c-format
+msgid "Auto-detect available ports"
+msgstr "Finn automatisk tilgjengelige porter"
+
+#: scannerdrake:331 scannerdrake:377
+#, c-format
+msgid "Device choice"
+msgstr "Enhetsvalg"
+
+#: scannerdrake:332 scannerdrake:378
+#, c-format
+msgid "Please select the device where your %s is attached"
+msgstr "Velg enheten der %s er koblet til"
+
+#: scannerdrake:333
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr "(Merk: Parallellporter kan ikke oppdages automatisk)"
+
+#: scannerdrake:335 scannerdrake:380
+#, c-format
+msgid "choose device"
+msgstr "velg enhet"
+
+#: scannerdrake:369
+#, c-format
+msgid "Searching for scanners..."
+msgstr "Søker etter skannere …"
+
+#: scannerdrake:405 scannerdrake:412
+#, c-format
+msgid "Attention!"
+msgstr "Obs!"
+
+#: scannerdrake:406
+#, c-format
+msgid ""
+"Your %s cannot be configured fully automatically.\n"
+"\n"
+"Manual adjustments are required. Please edit the configuration file /etc/"
+"sane.d/%s.conf. "
+msgstr ""
+"%s kan ikke settes opp helt automatisk.\n"
+"\n"
+"Du må gjøre manuelle innstillinger. Rediger oppsettfila /etc/sane.d/%s."
+"conf. "
+
+#: scannerdrake:407 scannerdrake:416
+#, c-format
+msgid ""
+"More info in the driver's manual page. Run the command \"man sane-%s\" to "
+"read it."
+msgstr ""
+"Du finner mer informasjon i manualsiden til driveren. Kjør kommandoen «man "
+"sane-%s» for å lese denne."
+
+#: scannerdrake:409 scannerdrake:418
+#, c-format
+msgid ""
+"After that you may scan documents using \"XSane\" or \"Kooka\" from "
+"Multimedia/Graphics in the applications menu."
+msgstr ""
+"Du kan så skanne dokumenter med programmene «Kooka» eller «XSane» fra "
+"menyen «Multimedia/Grafikk."
+
+#: scannerdrake:413
+#, c-format
+msgid ""
+"Your %s has been configured, but it is possible that additional manual "
+"adjustments are needed to get it to work. "
+msgstr ""
+"%s er nå satt opp, men det kan hende at du må gjøre noen flere fininnstillinger "
+"for at alt skal fungere."
+
+#: scannerdrake:414
+#, c-format
+msgid ""
+"If it does not appear in the list of configured scanners in the main window "
+"of Scannerdrake or if it does not work correctly, "
+msgstr ""
+"Hvis du ikke finner den i lista over oppsatte skannere i hovedvinduet til "
+"Scannerdrake, eller om den ikke fungerer skikkelig, "
+
+#: scannerdrake:415
+#, c-format
+msgid "edit the configuration file /etc/sane.d/%s.conf. "
+msgstr "må du redigere oppsettfila /etc/sane.d/%s.conf. "
+
+#: scannerdrake:420
+#, c-format
+msgid "Congratulations!"
+msgstr "Gratulerer."
+
+#: scannerdrake:421
+#, c-format
+msgid ""
+"Your %s has been configured.\n"
+"You may now scan documents using \"XSane\" or \"Kooka\" from Multimedia/"
+"Graphics in the applications menu."
+msgstr ""
+"%s er nå satt opp.\n"
+"Du kan nå skanne dokumenter med programmene «Kooka» eller «XSane» fra "
+"menyen Multimedia/Grafikk."
+
+#: scannerdrake:446
+#, c-format
+msgid ""
+"The following scanners\n"
+"\n"
+"%s\n"
+"are available on your system.\n"
+msgstr ""
+"De følgende skannerene\n"
+"\n"
+"%s\n"
+"er tilgjengelige på systemet.\n"
+
+#: scannerdrake:447
+#, c-format
+msgid ""
+"The following scanner\n"
+"\n"
+"%s\n"
+"is available on your system.\n"
+msgstr ""
+"Skanneren\n"
+"\n"
+"%s\n"
+"er tilgjengelig på systemet.\n"
+
+#: scannerdrake:449 scannerdrake:452
+#, c-format
+msgid "There are no scanners found which are available on your system.\n"
+msgstr "Fant ingen tilgjengelige skannere på systemet.\n"
+
+#: scannerdrake:460
+#, c-format
+msgid "Scanner Management"
+msgstr "Skannerhåndtering"
+
+#: scannerdrake:466
+#, c-format
+msgid "Search for new scanners"
+msgstr "Søk etter nye skannere"
+
+#: scannerdrake:472
+#, c-format
+msgid "Add a scanner manually"
+msgstr "Legg til skanner manuelt"
+
+#: scannerdrake:479
+#, c-format
+msgid "Install/Update firmware files"
+msgstr "Installer/oppdater fastvarefiler"
+
+#: scannerdrake:485
+#, c-format
+msgid "Scanner sharing"
+msgstr "Skannerdeling"
+
+#: scannerdrake:544 scannerdrake:709
+#, c-format
+msgid "All remote machines"
+msgstr "Alle maskiner på nettverket"
+
+#: scannerdrake:556 scannerdrake:859
+#, c-format
+msgid "This machine"
+msgstr "Denne maskina"
+
+#: scannerdrake:595
+#, c-format
+msgid "Scanner Sharing"
+msgstr "Skannerdeling"
+
+#: scannerdrake:596
+#, c-format
+msgid ""
+"Here you can choose whether the scanners connected to this machine should be "
+"accessible by remote machines and by which remote machines."
+msgstr ""
+"Her kan du velge om skannere koblet til denne maskinen skal være "
+"tilgjengelige for andre maskiner på nettverket, og eventuelt hvilke maskiner."
+
+#: scannerdrake:597
+#, c-format
+msgid ""
+"You can also decide here whether scanners on remote machines should be made "
+"available on this machine."
+msgstr ""
+"Du kan også velge hvilke skannere på andre maskiner som skal være "
+"tilgjengelig fra denne maskina."
+
+#: scannerdrake:600
+#, c-format
+msgid "The scanners on this machine are available to other computers"
+msgstr "Skannerene på denne maskina er tilgjengelig for andre maskiner"
+
+#: scannerdrake:602
+#, c-format
+msgid "Scanner sharing to hosts: "
+msgstr "Skannerdeling til vertene: "
+
+#: scannerdrake:607 scannerdrake:624
+#, c-format
+msgid "No remote machines"
+msgstr "Ingen maskiner på nettverket"
+
+#: scannerdrake:616
+#, c-format
+msgid "Use scanners on remote computers"
+msgstr "Bruk skannere på eksterne maskiner"
+
+#: scannerdrake:619
+#, c-format
+msgid "Use the scanners on hosts: "
+msgstr "Bruk skannerene på vertene: "
+
+#: scannerdrake:646 scannerdrake:718 scannerdrake:868
+#, c-format
+msgid "Sharing of local scanners"
+msgstr "Deling av lokale skannere"
+
+#: scannerdrake:647
+#, c-format
+msgid ""
+"These are the machines on which the locally connected scanner(s) should be "
+"available:"
+msgstr ""
+"Dette er maskinene som de lokalt tilkoblede skannerene skal være "
+"tilgjengelige fra:"
+
+#: scannerdrake:658 scannerdrake:808
+#, c-format
+msgid "Add host"
+msgstr "Legg til vert"
+
+#: scannerdrake:664 scannerdrake:814
+#, c-format
+msgid "Edit selected host"
+msgstr "Rediger valgt vert"
+
+#: scannerdrake:673 scannerdrake:823
+#, c-format
+msgid "Remove selected host"
+msgstr "Fjern valgt vert"
+
+#: scannerdrake:682 scannerdrake:832
+#, c-format
+msgid "Done"
+msgstr "Ferdig"
+
+#: scannerdrake:697 scannerdrake:705 scannerdrake:710 scannerdrake:756
+#: scannerdrake:847 scannerdrake:855 scannerdrake:860 scannerdrake:906
+#, c-format
+msgid "Name/IP address of host:"
+msgstr "Navn/IP-adresse til vert:"
+
+#: scannerdrake:719 scannerdrake:869
+#, c-format
+msgid "Choose the host on which the local scanners should be made available:"
+msgstr "Velg verten som de lokale skannerene skal være tilgjengelige på:"
+
+#: scannerdrake:730 scannerdrake:880
+#, c-format
+msgid "You must enter a host name or an IP address.\n"
+msgstr "Du må skrive inn et vertsnavn eller en IP-adresse.\n"
+
+#: scannerdrake:741 scannerdrake:891
+#, c-format
+msgid "This host is already in the list, it cannot be added again.\n"
+msgstr "Verten finnes allerede i lista, og kan ikke legges til.\n"
+
+#: scannerdrake:796
+#, c-format
+msgid "Usage of remote scanners"
+msgstr "Bruk av skannere på nettverket"
+
+#: scannerdrake:797
+#, c-format
+msgid "These are the machines from which the scanners should be used:"
+msgstr "Dette er maskinene som skannerene skal brukes fra:"
+
+#: scannerdrake:954
+#, c-format
+msgid ""
+"saned needs to be installed to share the local scanner(s).\n"
+"\n"
+"Do you want to install the saned package?"
+msgstr ""
+"Du må installere saned for å kunne dele lokale skannere.\n"
+"\n"
+"Ønsker du å installere pakka saned nå?"
+
+#: scannerdrake:958 scannerdrake:962
+#, c-format
+msgid "Your scanner(s) will not be available on the network."
+msgstr "Skanneren/-ene vil ikke være tilgjengelig(e) på nettverket."
+
+#: scannerdrake:961
+#, c-format
+msgid "Could not install the packages needed to share your scanner(s)."
+msgstr "Klarte ikke installere pakkene for deling av skanner(e)."
+
+#: service_harddrake:134
+#, c-format
+msgid "Some devices in the \"%s\" hardware class were removed:\n"
+msgstr "Noen enheter i maskinvareklassen «%s» ble fjernet:\n"
+
+#: service_harddrake:135
+#, c-format
+msgid "- %s was removed\n"
+msgstr "– %s ble fjernet\n"
+
+#: service_harddrake:138
+#, c-format
+msgid "Some devices were added: %s\n"
+msgstr "Noen enheter ble lagt til: %s\n"
+
+#: service_harddrake:139
+#, c-format
+msgid "- %s was added\n"
+msgstr "– %s ble lagt til\n"
+
+#: service_harddrake:264
+#, c-format
+msgid "Hardware probing in progress"
+msgstr "Søker etter maskinvare"
+
+#: service_harddrake_confirm:7
+#, c-format
+msgid "Hardware changes in \"%s\" class (%s seconds to answer)"
+msgstr "Maskinvareendringer i klassen «%s» (%s sekunder å svare på)"
+
+#: service_harddrake_confirm:8
+#, c-format
+msgid "Do you want to run the appropriate config tool?"
+msgstr "Vil du kjøre det nødvendige oppsettverktøyet?"
+
+#: ../menu/localedrake-system.desktop.in.h:1
+msgid "System Regional Settings"
+msgstr "Regionale systeminnstillinger"
+
+#: ../menu/localedrake-system.desktop.in.h:2
+msgid "System wide language & country configurator"
+msgstr "Oppsett av systemspråk og land"
+
+#: ../menu/harddrake.desktop.in.h:1
+msgid "HardDrake"
+msgstr "Maskinvareoppsett"
+
+#: ../menu/harddrake.desktop.in.h:2
+msgid "Hardware Central Configuration/information tool"
+msgstr "Sentralt verktøy for maskinvareoppsett/informasjon"
+
+#: ../menu/harddrake.desktop.in.h:3
+msgid "Hardware Configuration Tool"
+msgstr "Verktøy for maskinvareoppsett"
+
+#: ../menu/localedrake-user.desktop.in.h:1
+msgid "Language & country configuration"
+msgstr "Oppsett av språk og land"
+
+#: ../menu/localedrake-user.desktop.in.h:2
+msgid "Regional Settings"
+msgstr "Språk og land"
+

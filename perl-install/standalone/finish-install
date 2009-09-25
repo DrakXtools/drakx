@@ -1,0 +1,274 @@
+#!/usr/bin/perl
+
+use lib qw(/usr/lib/libDrakX);
+
+# i18n: IMPORTANT: to get correct namespace (drakx-kbd-mouse-x11 and drak3d instead of libDrakX)
+BEGIN { unshift @::textdomains, 'drakx-net', 'drakx-kbd-mouse-x11', 'drak3d' }
+
+use standalone;
+use common;
+use interactive;
+use any;
+use authentication;
+use network::network;
+use security::level;
+
+my $conf_file = '/etc/sysconfig/finish-install';
+my %conf = getVarsFromSh($conf_file);
+my $authentication = authentication::get();
+my $security = security::level::get();
+my $net = {};
+my $locale;
+my $timezone;
+network::network::read_net_conf($net);
+
+$::isWizard = 1;
+my $in = 'interactive'->vnew;
+any::set_wm_hints_if_needed($in);
+
+sub get_conf {
+	my ($name) = @_;
+	$conf{lc($name)} || $conf{uc($name)};
+}
+
+sub ask_license() {
+    local $::isWizard = 0;
+    any::acceptLicense($in);
+}
+
+sub ask_language() {
+    require lang;
+    $locale = lang::read();
+    my ($lang) = cat_("/proc/cmdline") =~ /\blang=(.+?)\b/;
+    my $h = lang::lang_to_ourlocale($lang);
+    if ($lang && member($h->{lang}, lang::list_langs(exclude_non_installed => 1))) {
+	put_in_hash($locale, $h);
+	lang::set($locale);
+    }
+    any::selectLanguage_standalone($in, $locale);
+    lang::write_and_install($locale, $in->do_pkgs);
+}
+
+sub ask_keyboard() {
+    require keyboard;
+    my $keyboard = $locale ? keyboard::lang2keyboard($locale->{lang}) : keyboard::read_or_default();
+
+  choose:
+    $keyboard->{KEYBOARD} = $in->ask_from_listf(N("Keyboard"),
+                                                N("Please, choose your keyboard layout."),
+                                                sub { translate(keyboard::KEYBOARD2text($_[0])) },
+                                                [ keyboard::KEYBOARDs() ],
+                                                $keyboard->{KEYBOARD}) or return;
+
+    keyboard::group_toggle_choose($in, $keyboard) or goto choose;
+
+    keyboard::configure_and_set_standalone($keyboard);
+}
+
+#- TIMEZONE=simplified: do not ask timezone and make ntp settings advanced
+sub ask_timezone() {
+    require timezone;
+    $timezone = timezone::read();
+    $timezone->{timezone} = timezone::bestTimezone($locale->{country}) if $locale->{country};
+    any::configure_timezone($in, $timezone, 'ask_gmt', lc(get_conf('TIMEZONE')) eq 'simplified');
+
+    $in->do_pkgs->ensure_is_installed('ntp') if $timezone->{ntp};
+    timezone::write($timezone);
+
+    #- reload sys clock from hc once we know the real timezone
+    timezone::reload_sys_clock($timezone);
+}
+
+#- COUNTRY=simplified: guess the country from timezone, do not ask
+sub ask_country() {
+    require lang;
+    $locale ||= lang::read();
+    require Time::ZoneInfo;
+    my $zones = Time::ZoneInfo->new;
+    if ($timezone && $zones) {
+        #- guess only if timezone has been asked already
+        if (my $zone = $zones->current_zone) {
+            if (my $country_code = $zones->country($zone)) {
+                $locale->{country} = $country_code;
+            }
+        }
+    }
+    any::selectCountry($in, $locale) if lc(get_conf('COUNTRY')) ne 'simplified';
+    lang::write_and_install($locale, $in->do_pkgs);
+}
+
+sub ask_network() {
+    require network::tools;
+    return if network::tools::has_network_connection();
+    require network::netconnect;
+    my $modules_conf = modules::any_conf->read;
+    network::netconnect::real_main($net, $in, $modules_conf);
+    $modules_conf->write;
+}
+
+sub ask_urpmi() {
+    #- configure urpmi media if no media are configured
+    run_program::get_stdout('urpmq', '--list-media') and return;
+    any::urpmi_add_all_media($in);
+}
+
+sub set_authentication {
+    my ($superuser) = @_;
+    authentication::set_root_passwd($superuser, $authentication);
+    my $ok = eval {
+	authentication::set($in, $net, $authentication) or return;
+	network::network::write_network_conf($net);
+        1;
+    };
+    $in->ask_warn(N("Error"), formatError($@)) if $@;
+    return $ok;
+}
+
+sub ask_authentication() {
+    my $meta_class = { getVarsFromSh("/etc/sysconfig/system") }->{META_CLASS};
+    my $superuser = {};
+    authentication::ask_root_password_and_authentication($in, $net, $superuser, $authentication, $meta_class, $security);
+    set_authentication($superuser) or goto &ask_authentication;
+}
+
+#- USERS=with_root: asks both root and user accounts
+#- USER_RENAME_FROM=<old user>: create the new user by renaming <old user>
+#- USER_AUTOLOGIN_FIRST: configure autologin for the first added user
+sub ask_users() {
+    my $users = [];
+    my $superuser = to_bool(lc(get_conf('USERS')) eq 'with_root') && {};
+    any::ask_user_and_root($in, $superuser, $users, $security);
+    my $old_user = get_conf('USER_RENAME_FROM');
+    if (@$users && $old_user) {
+      $users->[0]{rename_from} = $old_user;
+      $users->[0]{home} ||= '/home/' . $users->[0]{name};
+    }
+    my $autologin = any::get_autologin();
+    my $autologin_first = ($autologin->{user} eq $old_user || lc(get_conf('USER_AUTOLOGIN_FIRST')) eq "yes") && $autologin->{desktop};
+    if ($superuser) {
+        set_authentication($superuser) or goto &ask_users;
+    }
+    any::add_users($users, $authentication);
+    if ($autologin_first) {
+        $autologin->{user} = $users->[0]{name};
+        $autologin->{desktop} = $autologin_first;
+        any::set_autologin($in->do_pkgs, $autologin);
+    }
+    my $finit_conf = "/etc/finit.conf";
+    substInFile {
+        s/^user .*//;
+        $_ .= "user $users->[0]{name}\n" if eof;
+    } $finit_conf if -e $finit_conf;
+    if ($old_user) {
+        #- replace home path in user config files
+        my $old_home = "/home/$old_user";
+        my $new_home = "/home/$users->[0]{name}";
+        run_program::run(qq(grep -rl $old_home $new_home/.??* | while read f; do perl -pi -e 's,$old_home,$new_home,g' "\$f"; done));
+        #- give console rights for current session
+        my $console_dir = "/var/run/console";
+        cp_f($console_dir . "/" . $old_user, $console_dir . "/" . $users->[0]{name}) if -e $console_dir . "/" . $old_user;
+    }
+}
+
+sub ask_glx() {
+    require Xconfig::glx;
+    my $glx = Xconfig::glx::detect_may_install($in->do_pkgs);
+    if ($glx->{supported} && Xconfig::glx::choose_interactive($in, $glx, 'installed_only')) {
+        Xconfig::glx::write($glx);
+    }
+}
+
+sub ask_encrypt_home() {
+    my $user = { name => get_conf('ENCRYPT_HOME_USER'), device => get_conf('ENCRYPT_HOME_DEVICE') };
+    any { !defined $_ } values %$user and return;
+    $in->ask_from(N("Encrypted home partition"), N("Please enter a password for the %s user", $user->{name}),
+                  [
+                      { label => N("Password"), val => \$user->{password},  hidden => 1 },
+                      { label => N("Password (again)"), val => \$user->{password2}, hidden => 1 },
+                  ],
+                  complete => sub {
+                      authentication::check_given_password($in, $user, 6) or return 1,0;
+                      return 0;
+                  });
+    authentication::write_passwd_user($user, $authentication);
+    encrypt_home($user);
+}
+
+sub encrypt_home {
+    my ($user) = @_;
+    my $device = $user->{device};
+    my $mapper = '/dev/mapper/' . $user->{name};
+    my $home = '/home/' . $user->{name};
+    my $wait = $in->wait_message(N("Encrypted home partition"), N("Creating encrypted home partition"));
+
+    substInFile {
+        s/^volume $user->{name}.*//;
+        $_ .= "volume $user->{name} crypt - $device $home - - -\n" if eof;
+    } $::prefix . '/etc/security/pam_mount.conf';
+    authentication::set_pam_authentication('mount');
+
+    run_program::raw({ root => $::prefix, sensitive_arguments => 1 },
+                     "echo -e $user->{password} | cryptsetup luksFormat $device");
+    run_program::raw({ root => $::prefix, sensitive_arguments => 1 },
+                     "echo -e $user->{password} | cryptsetup luksOpen $device $user->{name}");
+    $wait = $in->wait_message(N("Encrypted home partition"), N("Formatting encrypted home partition"));
+    run_program::rooted($::prefix, 'mke2fs', '-qj', '-m', 0, '-L', 'Home', $mapper);
+
+    my $old_home;
+    if (-d $::prefix . $home) {
+        #- if already existing, move home to a temporary folder
+        require File::Temp;
+        $old_home = File::Temp::tempdir(DIR => dirname($::prefix . $home));
+        rmdir $old_home;
+        rename $::prefix . $home, $old_home;
+    }
+
+    mkdir_p($::prefix . $home);
+    run_program::rooted($::prefix, 'mount', $mapper, $home);
+
+    if ($old_home) {
+        #- copy previous home back
+        require File::Copy::Recursive;
+        File::Copy::Recursive::dirmove($old_home, $::prefix . $home);
+    }
+    run_program::rooted($::prefix, 'chown', '-R', join(':', ($user->{name}) x 2), $home);
+    rmdir $::prefix . $home . '/lost+found';
+
+    run_program::rooted($::prefix, 'umount', $home);
+    run_program::rooted($::prefix, 'cryptsetup', 'luksClose', $user->{name});
+}
+
+sub call {
+    my ($step_name) = @_;
+    my $f_name = 'ask_' . $step_name;
+    if (lc(get_conf($step_name)) eq 'no') {
+        log::l("ignoring $f_name");
+    } else {
+        log::l("calling $f_name");
+        my $f = $::{$f_name} or internal_error "bad function $f_name";
+        eval { $f->() };
+        log::l("$f_name failed: $@") if $@;
+    }
+}
+
+call('language');
+call('license');
+# "Previous" button isn't functiunnal and acts like "next" (#25349)
+$::Wizard_no_previous = 1;
+call('timezone');
+call('country');
+call('keyboard');
+call('network');
+if (defined $::WizardWindow) {
+    $::WizardWindow->destroy;
+    undef $::WizardWindow;
+}
+call('urpmi');
+$::Wizard_pix_up = 'redhat-config-users';
+call('authentication');
+call('users');
+call('encrypt_home');
+call('glx');
+setVarsInSh($conf_file, { FINISH_INSTALL => 'no' });
+
+$in->exit(0);

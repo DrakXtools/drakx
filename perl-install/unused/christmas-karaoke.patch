@@ -1,0 +1,98 @@
+Index: Makefile
+===================================================================
+RCS file: /home/cvs/cooker/gi/perl-install/Makefile,v
+retrieving revision 1.151
+diff -u -r1.151 Makefile
+--- Makefile	2000/12/19 18:21:05	1.151
++++ Makefile	2000/12/20 23:29:33
+@@ -44,7 +44,7 @@
+ 
+ 	cp share/*.rc $(DESTREP4PMS)
+ 	install -d $(DESTREP4PMS)/po
+-	cp -f share/po/*.po* $(DESTREP4PMS)/po ||:
++#	cp -f share/po/*.po* $(DESTREP4PMS)/po ||:
+ 	chmod a+x $(DESTREP4PMS)/install2
+ 	chmod a+x $(DESTREP4PMS)/commands
+ 	chmod a+x $(DESTREP4PMS)/standalone/*
+@@ -61,6 +61,21 @@
+ 	cat `../tools/specific_arch share/list` >> /tmp/list
+ 	find auto -follow -name "*.so" >> /tmp/list
+ 
++	rpm -ql icewm-light | grep /usr/X11R6 >> /tmp/list
++	rpm -ql xmms libao0 | grep /usr/lib >> /tmp/list
++	echo /sbin/isapnp >> /tmp/list
++	echo /sbin/pnpdump >> /tmp/list
++	echo /usr/sbin/sndconfig >> /tmp/list
++	echo /usr/bin/vim >> /tmp/list
++	echo /usr/bin/aumix >> /tmp/list
++	echo /usr/bin/ogg123 >> /tmp/list
++	echo /usr/bin/qiv >> /tmp/list
++	echo /usr/lib/libimlib-jpeg.so >> /tmp/list
++	echo /usr/bin/xmms >> /tmp/list
++	echo /usr/lib/xmms/Visualization/libxmms_singit.so >> /tmp/list
++	echo /usr/X11R6/lib/X11/rgb.txt >> /tmp/list
++	echo /bin/bash >> /tmp/list
++
+ 	for i in $(LOCALFILES) `cat /tmp/list` ; do \
+ 		ldd $$i 2>/dev/null | grep "=>" | sed -e 's/.*=> //' -e 's/ .*//' | uniq | sort >> /tmp/list; \
+ 	done
+@@ -106,6 +121,7 @@
+ 	    fi; \
+ 	done
+ 	mv -f $(DEST)/lib/libimlib-png.so $(DEST)/usr/lib
++	mv -f $(DEST)/lib/libimlib-jpeg.so $(DEST)/usr/lib
+ 
+ 	mv -f $(DEST)/bin/* $(DEST)/sbin/* $(DEST)/usr/bin
+ 	cd $(DEST)/usr/bin ; mv insmod insmod_
+@@ -135,6 +151,16 @@
+ 
+ #	echo -e '#!/bin/sh\n\nexec "/usr/bin/sh"' > $(DEST)/usr/bin/runinstall2
+ #	chmod a+x $(DEST)/usr/bin/runinstall2
++
++	rm -f $(DEST)/usr/X11R6/lib/X11/fonts/{gb16st,k14,taipei16,baekmuk_gulim_12}.pcf.gz
++	cp -f /usr/X11R6/lib/X11/fonts2/75dpi/helv* $(DEST)/usr/X11R6/lib/X11/fonts/
++	mkfontdir $(DEST)/usr/X11R6/lib/X11/fonts 2>/dev/null
++	install $(ROOTDEST)/Mandrake/images/rotate $(DEST)/usr/bin
++
++	echo -e "prog xmms xmms xmms\nprog aumix aumix aumix" > $(DEST)/usr/X11R6/lib/X11/icewm/toolbar
++	echo -e "prog xmms xmms xmms\nprog aumix aumix aumix" > $(DEST)/usr/X11R6/lib/X11/icewm/menu
++	echo -e "Theme=bluePlastic/default.theme\nTaskBarAutoHide=1" > $(DEST)/usr/X11R6/lib/X11/icewm/preferences
++
+ 
+ ifeq (i386,$(ARCH))
+ 	cp -a /etc/pcmcia $(DEST)/etc
+Index: install_steps_gtk.pm
+===================================================================
+RCS file: /home/cvs/cooker/gi/perl-install/install_steps_gtk.pm,v
+retrieving revision 1.171
+diff -u -r1.171 install_steps_gtk.pm
+--- install_steps_gtk.pm	2000/12/20 21:57:35	1.171
++++ install_steps_gtk.pm	2000/12/20 23:29:33
+@@ -99,6 +99,27 @@
+ 	}
+     }
+   OK:
++    keyboard::setup("fr");
++    commands::mknod("/dev/dsp", "c", 14, 3);
++    commands::mknod("/dev/mixer", "c", 14, 0);
++    if (!$::expert) {
++	if (!modules::load_thiskind("sound")) {
++	    eval {
++		symlink "/usr/bin/pnpdump", "/sbin/pnpdump";
++		run_program::run("sndconfig", "--quiet");
++		run_program::run("isapnp", "/etc/isapnp.conf");
++		my @l = cat_("/etc/modules.conf");
++		my $module; /alias sound-slot-0 (\S+)/ and $module = $1 foreach @l;
++		my @options; /options\s+$module\s+(.*)/ and @options = split ' ', $1 foreach @l;
++		modules::load($module, 'sound', @options);
++	    }
++	}
++    }
++    symlink "/tmp/rhimage/lyrics", "/lyrics";
++    symlink "/tmp/rhimage", "/Sound";
++    fork or exec "rotate /tmp/rhimage/Mandrake/images" or die;
++    fork or exec $_ or die foreach "xmms";
++    exec "icewm-light" or die;
+     install_gtk::init_sizes();
+     install_gtk::default_theme($o);
+     install_gtk::create_logo_window($o);

@@ -1,0 +1,62 @@
+#!/usr/bin/perl
+# DrakxSound
+# Copyright (C) 2002-2008 Mandriva (tvignaud@mandriva.com)
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+use lib qw(/usr/lib/libDrakX);
+
+use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+
+use strict;
+use interactive;
+use common;
+use harddrake::sound;
+use modules;
+use detect_devices;
+
+my $in = 'interactive'->vnew('su');
+
+$ugtk2::wm_icon = 'draksound-16';
+my $modules_conf = modules::any_conf->read;
+
+if (my @devices = detect_devices::probe_category('multimedia/sound')) {
+    # TODO: That need some work for multiples sound cards
+    map_index {
+	   # allocate sound-slot in the same order as install2.pm
+	   # fill $device->{driver} with the right sound-slot-XX or default driver if missing sound-slot [real fix'll be in harddrake service]
+	   my $driver = $modules_conf->get_alias("sound-slot-$::i");
+	   $driver = $modules_conf->get_alias($driver) if $driver =~ /sound-card/; # alsaconf ...
+	   $driver =~ s/-/_/g;
+	   $_->{current_driver} = $driver if $driver;
+	   $_->{sound_slot_index} = $::i;
+	   harddrake::sound::config($in, $modules_conf, $_);
+	 } @devices;
+} else {
+    $in->ask_warn(N("No Sound Card detected!"), 
+			   formatAlaTeX(
+                               #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
+                               N("No Sound Card has been detected on your machine. Please verify that a Linux-supported Sound Card is correctly plugged in.
+
+
+You can visit our hardware database at:
+
+
+http://www.mandrivalinux.com/en/hardware.php3") .
+N("\n\n\nNote: if you've an ISA PnP sound card, you'll have to use the alsaconf or the sndconfig program.  Just type \"alsaconf\" or \"sndconfig\" in a console.")));
+}
+
+$modules_conf->write;
+$in->exit(0);

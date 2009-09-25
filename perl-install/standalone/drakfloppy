@@ -1,0 +1,340 @@
+#!/usr/bin/perl
+
+# DrakFloppy
+# $Id$
+# 
+# Copyright (C) 2001-2008 Mandriva
+# Yves Duret
+# Thierry Vignaud
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, 
+# MA 02111-1307, USA.
+
+
+use strict;
+use diagnostics;
+use lib qw(/usr/lib/libDrakX);
+
+use standalone; #- warning, standalone must be loaded very first, for 'explanations'
+use common;
+use mygtk2 qw(gtknew);
+use ugtk2 qw(:create :dialogs :helpers :wrappers);
+use detect_devices;
+
+$ugtk2::wm_icon = "/usr/share/mcc/themes/default/drakfloppy-mdk.png";
+require_root_capability();
+
+my $window = ugtk2->new(N("Boot Floppy"));
+unless ($::isEmbedded) {
+    $window->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
+    $window->{rwindow}->set_border_width(5);
+    
+    ### menus definition
+    # the menus are not shown but they provides shiny shortcut like C-q
+    create_factory_menu($window->{rwindow}, ( 
+                                             { path => N("/_File"), item_type => '<Branch>' },
+                                             { path => N("/File/_Quit"), accelerator => N("<control>Q"), callback => sub { ugtk2->exit(0) } },
+                                            )
+                       );
+}
+
+
+my (@modules, @temp_modules, %buttons, %options, $tree_model, $tree, $list_model, $list);
+
+my $conffile = "/etc/sysconfig/drakfloppy";
+
+# we must be robust against config file parsing
+eval { %options = getVarsFromSh($conffile) };
+@modules  = split(' ', $options{MODULES});
+
+
+######## up part
+
+# device part
+my $device_combo = gtknew('ComboBox', list => [ map { "/dev/$_" } detect_devices::floppies_dev() ]);
+$device_combo->set_active(0);
+
+# kernel part
+my $kernel_combo = gtknew('ComboBox', text => chomp_(`uname -r`), list => [ sort grep { !/^\.\.?$/ } sort(all("/lib/modules")) ]);
+
+
+##########################################################
+
+### main window
+$window->{window}->add(
+                       gtknew('VBox', children => [
+                                if_($::isEmbedded, 0, gtknew('Label', text => N("Boot disk creation"))),
+                                0, gtknew('Frame', text => N("General"), child => 
+                                          gtknew('VBox', children_tight => [
+                                                    gtknew('HBox', homogenous => 1, children_tight => [
+                                                              gtknew('Label', text => N("Device")),
+                                                              $device_combo,
+                                                              gtknew('Button', text => N("Default"), 
+                                                                                clicked => sub { $device_combo->entry->set_text("/dev/fd0") }),
+                                                             ]),
+                                                    gtknew('HBox', homogenous => 1, children_tight => [
+                                                              gtknew('Label', text => N("Kernel version")),
+                                                              $kernel_combo,
+                                                              gtknew('Button', text => N("Default"), 
+                                                                                clicked => sub { 
+                                                                                    $kernel_combo->entry->set_text(chomp_(`uname -r`));
+                                                                                }),
+                                                             ]),
+                                                   ]),
+                                         ),
+                                1, gtknew('VBox'),
+                                0, create_okcancel({
+                                                    cancel_clicked => sub { ugtk2->exit(0) },
+                                                    ok_clicked  => \&build_it,
+                                                   },
+                                                   undef, undef, '',
+                                                   [ N("Preferences"), \&pref_dialog, 0 ],
+                                                  ),
+                               ]),
+                      );
+
+$window->{rwindow}->show_all;
+
+$window->main;
+ugtk2->exit(0);
+
+
+my $remove_but;
+
+sub pref_dialog() {
+    my $dialog = gtkset_modal(gtkset_size_request(_create_dialog(N("Advanced preferences")), 600, -1), 1);
+    $dialog->set_transient_for($window->{real_window});
+    
+
+    # Create root tree:
+    $tree_model = Gtk2::TreeStore->new(("Glib::String") x 2, "Glib::Int");
+    $tree = Gtk2::TreeView->new_with_model($tree_model);
+    $tree->set_headers_visible(0);
+    $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+    $tree->signal_connect('row-expanded', \&expand_tree);
+    $tree->get_selection->signal_connect('changed' => \&selected_tree);
+
+    # Create modules list:
+    $list_model = Gtk2::ListStore->new(("Glib::String") x 3); # relative path, size, (hidden full path)
+    $list  = Gtk2::TreeView->new_with_model($list_model);
+    each_index {
+        $list->append_column(my $col = Gtk2::TreeViewColumn->new_with_attributes($_, Gtk2::CellRendererText->new, 'text' => $::i));
+        $col->set_sort_column_id($::i);
+        $col->set_min_width((200, 50)[$::i]);
+    } (N("Module name"), N("Size"));
+    
+    gtkpack_($dialog->vbox,
+             0, gtknew('Frame', text => N("Mkinitrd optional arguments"), child => 
+                       gtknew('VBox', spacing => 5, children_tight => [
+                                 $buttons{force} = gtknew('CheckButton', text => N("force")),
+                                 $buttons{raid} = gtknew('CheckButton', text => N("omit raid modules")),
+                                 $buttons{needed} = gtknew('CheckButton', text => N("if needed")),
+                                 $buttons{scsi} = gtknew('CheckButton', text => N("omit scsi modules")),
+                                ]),
+                      ),
+             1, gtknew('Frame', text => N("Add a module"), child => 
+                       create_hpaned(
+                                     gtkset_size_request(
+                                                         gtknew('ScrolledWindow', child => $tree),
+                                                         200, $::isEmbedded ? 0 : 175),
+                                     gtknew('VBox', children => [
+                                              1, gtkadd(Gtk2::ScrolledWindow->new,
+                                                        $list
+                                                       ),
+                                              0, $remove_but = gtknew('Button', text => N("Remove a module"), 
+                                                                   clicked => sub {
+                                                                       my $iter = ($list->get_selection->get_selected)[1];
+                                                                       return unless $iter;
+                                                                       my $removed = $list_model->get($iter, 2);
+                                                                       $list_model->remove($iter);
+                                                                       @temp_modules = grep { $_ ne $removed } @temp_modules;
+                                                                       $remove_but->set_sensitive(scalar @temp_modules);
+                                                                   }),
+                                             ]),
+                                    ),
+                      ),
+                                      );
+
+    # restore values:
+    $buttons{$_}->set_active($options{$_}) foreach keys %buttons;
+    fill_tree($kernel_combo->entry->get_text);
+    foreach my $module (@modules) {
+        my $full_path = join('/', "/lib/modules", $kernel_combo->entry->get_text, $module);
+        $full_path =~ s/\.(ko|o)(|.gz)//;
+        my $size = get_file_size(glob_("$full_path.*"));
+        $list_model->append_set(map_index { $::i => $_ } $module, $size, $full_path);
+    }
+    
+    $remove_but->set_sensitive(scalar @modules);
+    @temp_modules = ();
+
+    gtkadd($dialog->action_area,
+           create_okcancel({
+                            cancel_clicked => sub { $dialog->destroy },
+                            ok_clicked => sub { 
+                                # save values:
+                                $options{$_} = $buttons{$_}->get_active foreach keys %buttons;
+                                my $val;
+                                @modules = ();
+                                $list_model->foreach(sub {
+                                                         my ($model, $_path, $iter) = @_;
+                                                         push @modules, $model->get($iter, 0);
+                                                         return 0;
+                                                     }, $val);
+                                $dialog->destroy;
+                            },
+                           }),
+          );
+    $dialog->show_all;
+    $dialog->run;
+}
+
+#-------------------------------------------------------------
+# tree functions
+#-------------------------------------------------------------
+### Subroutines
+
+sub fill_tree {
+    my ($root_dir) = @_;
+    $root_dir = "/lib/modules/" . $root_dir;
+    # Create root tree item widget
+    my $parent_iter = $tree_model->append_set(undef, [ 0 => $root_dir, 1 => $root_dir, 2 => has_sub_trees($root_dir) ]);
+
+    # Create the subtree
+    expand_tree($tree, $parent_iter, $tree_model->get_path($parent_iter)) if has_sub_trees($root_dir);
+}
+
+
+# Called whenever an item is clicked on the tree widget.
+sub selected_tree {
+    my ($select) = @_;
+    my ($model, $iter) = $select->get_selected;
+    $remove_but->set_sensitive($model && $iter);
+
+    return unless $model;       # no real selection
+    my $file = $model->get($iter, 1);
+    
+    return if -d $file;
+
+    my $size = get_file_size($file);
+
+    return if member($file, @temp_modules);
+    push @temp_modules, $file;
+    $list_model->append_set([ 0 => stripit($file), 1 => $size, 2 => $file ]);
+}
+
+# Callback for expanding a tree - find subdirectories, files and add them to tree
+sub expand_tree {
+    my ($tree, $parent_iter, $path) = @_;
+    return if !$tree || !$parent_iter;
+    my $dir   = $tree_model->get($parent_iter, 1);
+
+    #- if we're hinted to be expandable
+    if ($tree_model->get($parent_iter, 2)) {
+        #- hackish: if first child has '' as name, then we need to expand on the fly
+        if ($tree_model->iter_has_child($parent_iter)) {
+            my $child = $tree_model->iter_children($parent_iter);
+            # BUG: ->iter_children return invalid iterators !!! thus the dummy empty line
+            $tree_model->remove($child);
+        }
+        # do not refill the parent anymore
+        $tree_model->set($parent_iter, 2 => 0);
+        
+        foreach my $dir_entry (sort(all($dir))) {
+            my $entry_path = $dir . "/" . $dir_entry;
+            if (-d $entry_path || $dir_entry =~ /\.(k|)o(\.gz)?$/) {
+                $entry_path =~ s|//|/|g;
+                my $iter = $tree_model->append_set($parent_iter, [ 0 => $dir_entry, 1 => $entry_path, 2 => has_sub_trees($entry_path) ]);
+                #- hackery for partial displaying of trees, used in rpmdrake:
+                #- if leaf is void, we may create the parent and one child (to have the [+] in front of the parent in the ctree)
+                #- though we use '' as the label of the child; then rpmdrake will connect on tree_expand, and whenever
+                #- the first child has '' as the label, it will remove the child and add all the "right" children
+                $tree_model->append_set($iter, [ 0 => '' ]) if has_sub_trees($entry_path);
+            }
+        }
+    }
+    $tree->expand_row($path, 0);
+}
+
+
+
+#-------------------------------------------------------------
+# the function
+#-------------------------------------------------------------
+sub build_it() {
+    my $initrd_args = join(' ',
+                           if_($options{force},  "-f"),
+                           if_($options{needed}, "--ifneeded"),
+                           if_($options{scsi},   "--omit-scsi-modules"),
+                           if_($options{raid},   "--omit-raid-modules"),
+                           if_(@modules, map { my $i = $_; $i =~ s!.*/!!; "--with=$i" } @modules),
+                          );
+    $initrd_args = qq(--mkinitrdargs "$initrd_args") if $initrd_args;
+    my $co = join(' ', "/sbin/mkbootdisk --noprompt --verbose --device", $device_combo->entry->get_text, $initrd_args);
+    $options{MODULES} = join(' ', @modules);
+    setVarsInSh($conffile, \%options);
+
+    $co .= " " . $kernel_combo->entry->get_text;
+    $co .= " 2>&1 |";
+    $::testing or warn_dialog(N("Warning"), N("Be sure a media is present for the device %s",  $device_combo->entry->get_text)) or return;
+    # we test if the media is present
+  test:
+    my $a = "dd count=1 if=/dev/null of=" . $device_combo->entry->get_text . " 2>&1";
+    my $b = `$a`;
+    if (!$::testing && $b =~ /dd/) {
+        err_dialog(N("Error"), N("There is no medium or it is write-protected for device %s.\nPlease insert one.", $device_combo->entry->get_text), { cancel => 1 }) ? goto test : return 0;
+    }
+  
+    open(my $STATUS, $co) or do { err_dialog(N("Error"), N("Unable to fork: %s", $!)); return };
+    my $log = join('', <$STATUS>);
+    if (close $STATUS) {
+        info_dialog(N("Floppy creation completed"), N("The creation of the boot floppy has been successfully completed \n"));
+        ugtk2->exit;
+    } else {
+        err_dialog(N("Error"),
+                   #-PO: Do not alter the <span ..> and </span> tags
+                   N("Unable to properly close mkbootdisk:\n\n<span foreground=\"Red\"><tt>%s</tt></span>", $log), { use_markup => 1 });
+    }
+  
+    return 0;
+}
+
+sub get_file_size {
+    my ($file) = @_;
+    (lstat($file))[7];
+}
+
+####
+# This is put at the end of the file because any translatable string
+# appearing after this will not be found by xgettext, and so wont end in
+# the pot file...
+####
+
+# Test whether a directory has subdirectories
+sub has_sub_trees {
+    my ($dir) = @_;
+    
+    foreach my $file (glob_("$dir/*")) {
+        return 1 if -d $file || $file =~ /\.(k|)o(\.gz)?$/;
+    }
+    
+    return 0;
+}
+
+sub stripit {
+    my ($file) = @_;
+    $file =~ s|/lib/modules/.*?/||g;
+    $file;
+}

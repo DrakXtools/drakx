@@ -1,0 +1,995 @@
+#!/usr/bin/perl
+
+# scannerdrake $Id$
+# Yves Duret
+# Till Kamppeter
+# Copyright (C) 2001-2008 Mandriva
+# 
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+use lib qw(/usr/lib/libDrakX);
+use strict;
+use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+use common;
+
+use interactive;
+use scanner;
+use handle_configs;
+use services;
+
+my $companyname = "Mandriva";
+my $distroname = "Mandriva Linux";
+my $shortdistroname = "Mandriva Linux";
+my $domainname = "mandriva.com";
+
+foreach (@ARGV) {
+    /^--update-usbtable$/ and do { scanner::updateScannerDBfromUsbtable(); exit() };
+    /^--update-sane=(.*)$/ and do { scanner::updateScannerDBfromSane($1); exit() };
+    /^--manual$/ and $::Manual=1;
+    /^--dynamic=(.*)$/ and do { dynamic(); exit() };
+}
+
+$ugtk2::wm_icon = "scannerdrake";
+my $in = 'interactive'->vnew('su');
+if (!files_exist(qw(/usr/bin/scanimage
+		    /etc/sane.d/dll.conf)) ||
+    (!files_exist(qw(/usr/bin/xsane)) &&
+     !files_exist(qw(/usr/bin/kooka)) &&
+     !$in->do_pkgs->is_installed('scanner-gui'))) {
+    if (!$in->ask_yesorno(N("Warning"), N("SANE packages need to be installed to use scanners.
+
+Do you want to install the SANE packages?"))) {
+	$in->ask_warn(N("Warning"), 
+		      N("Aborting Scannerdrake."));
+	exit 0;
+    }
+    if (!$in->do_pkgs->install('task-scanning')) {
+	$in->ask_warn(N("Error"),
+		      N("Could not install the packages needed to set up a scanner with Scannerdrake.") . " " .
+		      N("Scannerdrake will not be started now."));
+	exit 0;
+    }
+}
+if ($::Manual) { manual(); quit() }
+my $wait = $in->wait_message(N("Please wait"),
+			     N("Searching for configured scanners..."));
+my @c = scanner::configured($in);
+$wait = undef;
+$wait = $in->wait_message(N("Please wait"),
+			     N("Searching for new scanners..."));
+my @f = scanner::detect(@c);
+$wait = undef;
+my $changed = 0;
+@f and $changed = auto();
+if ($changed) {
+    my $_wait =
+	$in->wait_message(N("Please wait"),
+			  N("Re-generating list of configured scanners..."));
+    @c = scanner::configured($in);
+}
+mainwindow(@c);
+quit();
+
+sub removeverticalbar {
+    my ($s) = @_;
+    $s =~ s/\|/ /g;
+    my $searchmake = handle_configs::searchstr(first($s =~ /^\s*(\S+)\s+/));
+    $s =~ s/($searchmake)\s*$searchmake/$1/;
+    return $s; 
+}
+
+sub auto() {
+    my $changed = 0;
+    foreach (@f) {
+	my $c = 0;
+	if (member($_->{val}{DESCRIPTION}, keys %$scanner::scannerDB)) {
+	    my $name = $_->{val}{DESCRIPTION};
+	    $name =~ s/\s$//; # some HP entries have a trailing space, i will correct usbtable asap
+	    if ($scanner::scannerDB->{$name}{flags}{unsupported}) {
+		$in->ask_warn(N("Error"), N("The %s is not supported by this version of %s.", removeverticalbar($name), $distroname));
+		next;
+	    }
+	    if ($in->ask_yesorno(N("Confirmation"), N("%s found on %s, configure it automatically?", removeverticalbar($name), $_->{port}),1)) {
+		$c = (tryConfScanner($name, $_->{port}, 
+				     $_->{val}{vendor},
+				     $_->{val}{id}) || 
+		      manual($_->{port}, $_->{val}{vendor},
+			     $_->{val}{id}, $name));
+	    } else {
+		$c = manual($_->{port}, $_->{val}{vendor},
+			    $_->{val}{id}, $name);
+	    }
+	} else {
+	    $in->ask_yesorno(N("Confirmation"),
+			     N("%s is not in the scanner database, configure it manually?", 
+			       removeverticalbar($_->{val}{DESCRIPTION})),1)
+		and $c =
+		     manual($_->{port}, $_->{val}{vendor}, $_->{val}{id},
+			    $_->{val}{DESCRIPTION});
+	}
+	$changed ||= $c;
+    }
+    return $changed;
+}
+
+sub manual {
+    my ($port, $vendor, $product, $name) = @_;
+    my $s = 
+	$in->ask_from_treelist(N("Scanner configuration"), 
+			       ($port && $name ? N("Select a scanner model (Detected model: %s, Port: %s)",
+                                          removeverticalbar($name), $port)
+                         : $name ? N("Select a scanner model (Detected model: %s)", removeverticalbar($name))
+                           : $port ? N("Select a scanner model (Port: %s)", $port) : ""
+                      ),
+			       '|', [' None', map { $_ . if_($scanner::scannerDB->{$_}{flags}{unsupported}, N(" (UNSUPPORTED)")) } keys %$scanner::scannerDB],
+			       '') or return 0;
+    return 0 if $s eq ' None';
+    my $unsuppstr = quotemeta(N(" (UNSUPPORTED)"));
+    $s =~ s/$unsuppstr$//;
+    if ($scanner::scannerDB->{$s}{flags}{unsupported}) {
+	$in->ask_warn(N("Error"), N("The %s is not supported under Linux.", removeverticalbar($s)));
+	return 0;
+    }
+    return tryConfScanner($s, $port, $vendor, $product);
+}
+
+sub dynamic() {
+    @f = scanner::detect();
+    my $name;
+    foreach (@f) { 
+	if (member($_->{val}{DESCRIPTION}, keys %$scanner::scannerDB)) {
+	    $name = $_->{val}{DESCRIPTION};
+	    $name =~ s/\s$//; #some HP entry have a trailing space, i will correct usbtable asap
+	    next if ($scanner::scannerDB->{$name}{flags}{unsupported});
+	    if (my @modules = @{$scanner::scannerDB->{$name}{kernel}}) {
+		modules::load(@modules);
+		modules::append_to_modules_loaded_at_startup_for_all_kernels(@modules);
+	    }
+	    scanner::confScanner($name, $_->{port},
+				 $_->{val}{vendor}, $_->{val}{id}, "");
+	}
+    }
+}
+
+sub installfirmware {
+    my ($model, $backend) = @_;
+    my $firmware;
+    my $choice = N("Do not install firmware file");
+    while (1) {
+	# Tell user about firmware installation
+	$in->ask_from(N("Scanner Firmware"),
+		      N("It is possible that your %s needs its firmware to be uploaded everytime when it is turned on.", removeverticalbar($model)) . " " .
+		      N("If this is the case, you can make this be done automatically.") . " " .
+		      N("To do so, you need to supply the firmware file for your scanner so that it can be installed.") . " " .
+		      N("You find the file on the CD or floppy coming with the scanner, on the manufacturer's home page, or on your Windows partition."),
+		      [
+		       { label => N("Install firmware file from"), 
+			 val => \$choice,
+			 list => [N("CD-ROM"),
+				  N("Floppy Disk"), 
+				  N("Other place"),
+				  N("Do not install firmware file")], 
+			 not_edit => 1, sort => 0 },
+		       ],
+		      ) or return "///";
+	my $dir;
+	if ($choice eq N("CD-ROM")) {
+	    $dir = "/mnt/cdrom";
+	} elsif ($choice eq N("Floppy Disk")) {
+	    $dir = "/mnt/floppy";
+	} elsif ($choice eq N("Other place")) {
+	    $dir = "/mnt";
+	} else {
+	    return "";
+	}
+	# Let user select a firmware file from a floppy, hard disk, ...
+        $firmware = $in->ask_file(N("Select firmware file"), "$dir");
+	last if !$firmware || (-r $firmware);
+	$in->ask_warn(N("Error"),
+		      N("The firmware file %s does not exist or is unreadable!",
+			$firmware));
+	
+    }
+    # Install the firmware file in /usr/share/sane/firmware
+    $firmware = scanner::installfirmware($firmware, $backend);
+    return $firmware;
+}
+
+sub updatefirmware {
+    my (@configured) = @_;
+    my $firmware;
+    my @scanners =
+	map { 
+	    $_->{val}{DESCRIPTION}
+	} grep { 
+	    $_->{val}{FIRMWARELINE}
+	} @configured;
+    my ($scannerchoice, $mediachoice);
+    while (1) {
+	# Tell user about firmware installation
+	$in->ask_from(N("Scanner Firmware"),
+		      ($#scanners > 0 ?
+		       N("It is possible that your scanners need their firmware to be uploaded everytime when they are turned on.") :
+		       N("It is possible that your %s needs its firmware to be uploaded everytime when it is turned on.", $scanners[0])) . " " .
+		      N("If this is the case, you can make this be done automatically.") . " " .
+		      ($#scanners > 0 ?
+		       N("To do so, you need to supply the firmware files for your scanners so that it can be installed.") :
+		       N("To do so, you need to supply the firmware file for your scanner so that it can be installed.")) . " " .
+		       N("You find the file on the CD or floppy coming with the scanner, on the manufacturer's home page, or on your Windows partition.") . "\n" .
+		      N("If you have already installed your scanner's firmware you can update the firmware here by supplying the new firmware file."),
+		      [
+		       { label => N("Install firmware for the"), 
+			 val => \$scannerchoice,
+			 list => \@scanners, 
+			 not_edit => 1, sort => 1 },
+		       { label => N("Install firmware file from"), 
+			 val => \$mediachoice,
+			 list => [N("CD-ROM"),
+				  N("Floppy Disk"), 
+				  N("Other place")], 
+			 not_edit => 1, sort => 0 },
+		       ],
+		      ) or return 0;
+	my $dir;
+	if ($mediachoice eq N("CD-ROM")) {
+	    $dir = "/mnt/cdrom";
+	} elsif ($mediachoice eq N("Floppy Disk")) {
+	    $dir = "/mnt/floppy";
+	} elsif ($mediachoice eq N("Other place")) {
+	    $dir = "/mnt";
+	} else {
+	    return 0;
+	}
+	# Let user select a firmware file from a floppy, hard disk, ...
+        $firmware = $in->ask_file(N("Select firmware file for the %s",
+				    $scannerchoice), "$dir");
+	last if !$firmware || (-r $firmware);
+	$in->ask_warn(N("Error"),
+		      N("The firmware file %s does not exist or is unreadable!",
+			$firmware));
+	
+    }
+
+    return 0 if !$firmware;
+
+    foreach (@configured) {
+	next if $_->{val}{DESCRIPTION} ne $scannerchoice; 
+	# Install the firmware file in /usr/share/sane/firmware
+	my $backend = $_->{val}{BACKEND};
+	$firmware = scanner::installfirmware($firmware, $backend);
+	if (!$firmware) {
+	    $in->ask_warn('Error',
+			  N("Could not install the firmware file for the %s!",
+			    $scannerchoice));
+	    return 0;
+	}
+	# Enter the path to the firmware in the appropriate config file
+	my $firmwareline =$_->{val}{FIRMWARELINE};
+	$firmwareline =~ s/\$FIRMWARE/$firmware/sg;
+	scanner::setfirmware($backend, $firmwareline);
+	last;
+    }
+
+    # Success message
+    $in->ask_warn(N("Information"),
+		  N("The firmware file for your %s was successfully installed.",
+		    $scannerchoice));
+    
+    return 1;
+}
+
+sub tryConfScanner {
+    # take care if interactive output is needed (unsupported, parallel..)
+    my ($model, $port, $vendor, $product) = @_;
+    if ($scanner::scannerDB->{$model}{flags}{unsupported}) {
+	$in->ask_warn(N("Warning"), N("The %s is unsupported", 
+					removeverticalbar($model)));
+	return 0;
+    }
+    if ($scanner::scannerDB->{$model}{server} =~ /(printerdrake|hpoj|hpaio|hplip)/i) {
+     	$in->ask_warn(N("Warning"), N("The %s must be configured by system-config-printer.\nYou can launch system-config-printer from the %s Control Center in Hardware section.", removeverticalbar($model), $shortdistroname));
+     	return 0;
+    }
+    my @modules = ();
+    if (defined($scanner::scannerDB->{$model}{kernel})) {
+	push(@modules, @{$scanner::scannerDB->{$model}{kernel}});
+    } elsif ((defined($scanner::scannerDB->{$model}{scsikernel})) &&
+	     ($scanner::scannerDB->{$model}{driver} =~ /SCSI/i)) {
+	push(@modules, @{$scanner::scannerDB->{$model}{scsikernel}});
+    } elsif ((defined($scanner::scannerDB->{$model}{usbkernel})) &&
+	     ($scanner::scannerDB->{$model}{driver} =~ /USB/i)) {
+	push(@modules, @{$scanner::scannerDB->{$model}{usbkernel}});
+    } elsif ((defined($scanner::scannerDB->{$model}{parportkernel})) &&
+	     ($scanner::scannerDB->{$model}{driver} =~ /Parport/i)) {
+	push(@modules, @{$scanner::scannerDB->{$model}{parportkernel}});
+    }
+    if ($#modules >= 0) {
+	my $wait = $in->wait_message(N("Please wait"),
+				     N("Setting up kernel modules..."));
+	foreach my $m (@modules) {
+	    eval { modules::load($m) };
+	    if (!$@) {
+		modules::append_to_modules_loaded_at_startup_for_all_kernels
+		    ($m);
+	    }
+	}
+    }
+    if ($scanner::scannerDB->{$model}{ask} =~ /DEVICE/ || !$port) {
+	$port ||= N("Auto-detect available ports");
+	$in->ask_from(N("Device choice"),
+		      N("Please select the device where your %s is attached", removeverticalbar($model)) . " " .
+		      N("(Note: Parallel ports cannot be auto-detected)"),
+		      [
+		       { label => N("choose device"), 
+			 val => \$port,
+			 list => [N("Auto-detect available ports"),
+				  '/dev/scanner', 
+				  '/dev/usb/scanner0',
+				  '/dev/usb/scanner1',
+				  '/dev/usb/scanner2',
+				  'libusb:001:001',
+				  'libusb:001:002',
+				  'libusb:001:003',
+				  'libusb:001:004',
+				  'libusb:001:005',
+				  'libusb:001:006',
+				  'libusb:001:007',
+				  'libusb:001:008',
+				  'libusb:001:009',
+				  'libusb:001:010', 
+				  '/dev/sg0',
+				  '/dev/sg1',
+				  '/dev/sg2',
+				  '/dev/sg3',
+				  '/dev/sg4',
+				  '/dev/parport0',
+				  '/dev/parport1',
+				  '/dev/parport2',
+				  '/dev/pt_drv',
+				  '/dev/ttyS0',
+				  '/dev/ttyS1',
+				  '/dev/ttyS2'], 
+			 not_edit => 0, sort => 0 },
+		       ],
+		      ) or return 0;
+	if ($port eq N("Auto-detect available ports")) {
+	    $wait = $in->wait_message(N("Please wait"),
+				      N("Searching for scanners..."));
+	    my @d = scanner::detect();
+	    undef $wait;
+	    my @list = map {
+		$_->{port} . " (" .
+		    removeverticalbar($_->{val}{DESCRIPTION}) . ")";
+	    } @d;
+	    $port ||= $list[0];
+	    $in->ask_from(N("Device choice"),
+			  N("Please select the device where your %s is attached", removeverticalbar($model)),
+			  [
+			   { label => N("choose device"), 
+			     val => \$port,
+			     list => \@list,
+			     not_edit => 1, sort => 0 },
+			   ],
+			  ) or return 0;
+	    $port =~ s/^\s*([^\(\s]*)\s*\(.*$/$1/;
+	    foreach (@d) {
+		next if $_->{port} ne $port;
+		$vendor = $_->{val}{vendor};
+		$product = $_->{val}{id};
+		last;
+	    }
+	}
+    }
+    ($vendor, $product) = scanner::get_usb_ids_for_port($port);
+    my $firmware;
+    my $server = $scanner::scannerDB->{$model}{server};
+    if (grep { /FIRMWARELINE/ } @{$scanner::scannerDB->{$model}{lines}} ) {
+	$firmware = installfirmware($model, $server);
+	return 0 if $firmware eq "///";
+    }
+    scanner::confScanner($model, $port, $vendor, $product, $firmware);
+    if ($scanner::scannerDB->{$model}{flags}{manual} == 2) {
+	# MANUALREQUIRED in ScannerDB
+	$in->ask_warn(N("Attention!"),
+		      N("Your %s cannot be configured fully automatically.\n\nManual adjustments are required. Please edit the configuration file /etc/sane.d/%s.conf. ", removeverticalbar($model), $server) .
+		      N("More info in the driver's manual page. Run the command \"man sane-%s\" to read it.", $server) .
+		      "\n\n" .
+		      N("After that you may scan documents using \"XSane\" or \"Kooka\" from Multimedia/Graphics in the applications menu."));
+    } elsif ($scanner::scannerDB->{$model}{flags}{manual} == 1) {
+	# MANUAL in ScannerDB
+	$in->ask_warn(N("Attention!"),
+		      N("Your %s has been configured, but it is possible that additional manual adjustments are needed to get it to work. ", removeverticalbar($model)) .
+		      N("If it does not appear in the list of configured scanners in the main window of Scannerdrake or if it does not work correctly, ") .
+		      N("edit the configuration file /etc/sane.d/%s.conf. ", $server) .
+		      N("More info in the driver's manual page. Run the command \"man sane-%s\" to read it.", $server) .
+		      "\n\n" .
+		      N("After that you may scan documents using \"XSane\" or \"Kooka\" from Multimedia/Graphics in the applications menu."));
+    } else {
+	$in->ask_warn(N("Congratulations!"),
+		      N("Your %s has been configured.\nYou may now scan documents using \"XSane\" or \"Kooka\" from Multimedia/Graphics in the applications menu.", removeverticalbar($model)));
+    }
+    return 1;
+}
+
+sub quit() {
+    $in->exit(0);
+}
+
+sub mainwindow {
+    my @configured = @_;
+    # main loop
+    my $maindone;
+    while (!$maindone) {
+	# Generate list of configured scanners
+	my $msg = do {
+	    if (@configured) {
+		my @scannerlist = 
+		    map {
+			my $entry = $_->{val}{DESCRIPTION};
+			if_($entry, "  -  $entry\n");
+		    } @configured;
+		if (@scannerlist) {
+                    my $list = join('', @scannerlist);
+                    @scannerlist > 1 ?
+                      N("The following scanners\n\n%s\nare available on your system.\n", $list) :
+                      N("The following scanner\n\n%s\nis available on your system.\n", $list);
+		} else {
+		    N("There are no scanners found which are available on your system.\n");
+		}
+	    } else {
+		N("There are no scanners found which are available on your system.\n");
+	    }
+	};
+	my $buttonclicked;
+	#- Show dialog
+	if ($in->ask_from_
+	    (
+	     { 
+		 title => N("Scanner Management"),
+		 messages => $msg,
+		 ok => "",
+		 cancel => "",
+	     },
+	     [
+	      { val => N("Search for new scanners"),
+		type => 'button',
+		clicked_may_quit => sub {
+		    $buttonclicked = "autoadd";
+		    1;
+		} },
+	      { val => N("Add a scanner manually"),
+		type => 'button',
+		clicked_may_quit => sub {
+		    $buttonclicked = "manualadd";
+		    1;
+		} },
+	      ( (grep { $_->{val}{FIRMWARELINE} } @configured) ?
+		{ val => N("Install/Update firmware files"),
+		  type => 'button',
+		  clicked_may_quit => sub {
+		      $buttonclicked = "firmware";
+		      1;
+		  } } : () ),
+	      { val => N("Scanner sharing"),
+		type => 'button',
+		clicked_may_quit => sub {
+		    $buttonclicked = "sharing";
+		    1;
+		} },
+	      { val => N("Quit"),
+		type => 'button',
+		clicked_may_quit => sub {
+		    $buttonclicked = "quit";
+		    1;
+		} },
+	      ]
+	     )
+	    ) {
+	    my $changed = 0;
+	    if ($buttonclicked eq "autoadd") {
+		# Do scanner auto-detection
+		my $wait =
+		    $in->wait_message(N("Please wait"),
+				      N("Searching for configured scanners..."));
+		@configured = scanner::configured($in);
+		$wait = 
+		    $in->wait_message(N("Please wait"),
+				      N("Searching for new scanners..."));
+		my @f = scanner::detect(@configured);
+		$wait = undef;
+		if (@f) { 
+		    $changed = auto();
+		}
+	    } elsif ($buttonclicked eq "manualadd") {
+		# Show dialogs to manually add a scanner
+		$changed = manual();
+	    } elsif ($buttonclicked eq "sharing") {
+		# Show dialog to set up scanner sharing
+		$changed = sharewindow(@configured);
+	    } elsif ($buttonclicked eq "firmware") {
+		# Show dialog to select the firmware file
+		updatefirmware(@configured);
+	    } elsif ($buttonclicked eq "quit") {
+		# We have clicked "Quit"
+		$maindone = 1;
+	    }
+	    if ($changed) {
+		my $_wait =
+		    $in->wait_message(N("Please wait"),
+				      N("Re-generating list of configured scanners..."));
+		@configured = scanner::configured($in);
+	    }
+	} else {
+	    # Cancel clicked
+	    $maindone = 1;
+	}
+    }
+}
+
+sub makeexportmenues {
+    my @exports = @_;
+    my %menuexports = map {
+	($_ eq '+' ? N("All remote machines") : $_) => $_;
+    } map {
+	# Remove comments and blank lines
+	(/^\s*($|#)/ ? () : chomp_($_));
+    } @exports;
+    my %menuexports_inv = reverse %menuexports;
+    return (\%menuexports, \%menuexports_inv);
+}
+
+sub makeimportmenues {
+    my @imports = @_;
+    my %menuimports = map {
+	($_ eq 'localhost' ? N("This machine") : $_) => $_;
+    } map {
+	# Remove comments and blank lines
+	if_(!/^\s*($|#)/, chomp_($_));
+    } @imports;
+    my %menuimports_inv = reverse %menuimports;
+    return (\%menuimports, \%menuimports_inv);
+}
+
+sub sharewindow {
+    my @_configured = @_;
+    # Read list of hosts to where to export the local scanners
+    my @exports = cat_("/etc/sane.d/saned.conf");
+    my ($menuexports, $menuexports_inv) =
+	makeexportmenues(@exports);
+    # Read list of hosts from where to import scanners
+    my @imports = cat_("/etc/sane.d/net.conf");
+    my ($menuimports, $menuimports_inv) =
+	makeimportmenues(@imports);
+    # Is saned running?
+    my $sanedrunning = services::starts_on_boot("saned");
+    my $oldsanedrunning = $sanedrunning;
+    # Is the "net" SANE backend active
+    my $netbackendactive = grep { /^\s*net\s*$/ }
+      cat_("/etc/sane.d/dll.conf");
+    my $oldnetbackendactive = $netbackendactive;
+    # Set this to 1 to tell the caller that the list of locally available
+    # scanners has changed (Here if the SANE client configuration has
+    # changed)
+    my $changed = 0;
+    my $importschanged = 0;
+    # main loop
+    my $maindone;
+    while (!$maindone) {
+	my $buttonclicked;
+	#- Show dialog
+	if ($in->ask_from_
+	    (
+	     { 
+		 title => N("Scanner Sharing"),
+		 messages => N("Here you can choose whether the scanners connected to this machine should be accessible by remote machines and by which remote machines.") .
+                     N("You can also decide here whether scanners on remote machines should be made available on this machine."),
+	     },
+	     [
+	      { text => N("The scanners on this machine are available to other computers"), type => 'bool',
+		val => \$sanedrunning },
+	      { val => N("Scanner sharing to hosts: ") .
+		    (keys %$menuexports > 0 ?
+		     (keys %$menuexports > 2 ?
+		      join(", ", (keys %$menuexports)[0,1]) . " ..." :
+		      join(", ", keys %$menuexports)) :
+		     N("No remote machines")), 
+		type => 'button',
+		clicked_may_quit => sub {
+		    $buttonclicked = "exports";
+		    1;
+		},
+		disabled => sub {
+		    !$sanedrunning;
+		} },
+	      { text => N("Use scanners on remote computers"),
+		type => 'bool',
+		val => \$netbackendactive },
+	      { val => N("Use the scanners on hosts: ") .
+		    (keys %$menuimports > 0 ?
+		     (keys %$menuimports > 2 ?
+		      join(", ", (keys %$menuimports)[0,1]) . " ..." :
+		      join(", ", keys %$menuimports)) :
+		     N("No remote machines")), 
+		type => 'button',
+		clicked_may_quit => sub {
+		    $buttonclicked = "imports";
+		    1;
+		},
+		disabled => sub {
+		    !$netbackendactive;
+		} },
+	      ]
+	     )
+	    ) {
+	    if ($buttonclicked eq "exports") {
+		# Show dialog to add hosts to share scanners to
+		my $subdone = 0;
+		my $choice;
+		while (!$subdone) {
+		    my @list = keys %$menuexports;
+		    # Entry should be edited when double-clicked
+		    $buttonclicked = "edit";
+		    $in->ask_from_
+			(
+			 { title => N("Sharing of local scanners"),
+			   messages => N("These are the machines on which the locally connected scanner(s) should be available:"),
+			   ok => "",
+			   cancel => "",
+		         },
+			 # List the hosts
+			 [ { val => \$choice, format => \&translate,
+			     sort => 0, separator => "####",
+			     tree_expanded => 1,
+			     quit_if_double_click => 1,
+			     allow_empty_list => 1,
+			     list => \@list },
+			   { val => N("Add host"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "add";
+				 1; 
+			     } },
+			   { val => N("Edit selected host"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "edit";
+				 1; 
+			     },
+			     disabled => sub {
+				 return ($#list < 0);
+			     } },
+			   { val => N("Remove selected host"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "remove";
+				 1; 
+			     },
+			     disabled => sub {
+				 return ($#list < 0);
+			     } },
+			   { val => N("Done"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "";
+				 $subdone = 1;
+				 1; 
+			     } },
+			   ]
+			 );
+		    if ($buttonclicked eq "add" ||
+			$buttonclicked eq "edit") {
+			my ($hostchoice, $ip);
+			if ($buttonclicked eq "add") {
+			    # Use first entry as default for a new entry
+			    $hostchoice = 
+				N("Name/IP address of host:");
+			} else {
+			    if ($menuexports->{$choice} eq '+') {
+				# Entry is "All hosts"
+				$hostchoice = $choice;
+			    } else {
+				# Entry is a name/an IP address
+				$hostchoice = 
+				    N("Name/IP address of host:");
+				$ip = $choice;
+			    }
+			}
+			my @menu = (N("All remote machines"),
+			            N("Name/IP address of host:"));
+			# Show the dialog
+			my $address;
+			my $oldaddress = 
+			    ($buttonclicked eq "edit" ?
+			     $menuexports->{$choice} : "");
+			if ($in->ask_from_
+			    (
+			     { title => N("Sharing of local scanners"),
+			       messages => N("Choose the host on which the local scanners should be made available:"),
+			       callbacks => {
+				   complete => sub {
+				       if ($hostchoice eq $menu[0]) {
+					   $address = "+";
+				       } elsif ($hostchoice eq $menu[1]) {
+					   $address = $ip;
+				       }
+				       # Do not allow an empty address
+				       if ($address !~ /\S/) {
+					   $in->ask_warn(N("Error"), 
+							 N("You must enter a host name or an IP address.\n"));
+					   return (1,0);
+				       }
+				       # Strip off leading and trailing
+				       # spaces
+				       $address =~ s/^\s*(.*?)\s*$/$1/;
+				       # Check whether item is duplicate
+				       if ($address ne $oldaddress &&
+					   member("$address\n",
+						   @exports)) {
+					   $in->ask_warn(N("Error"), 
+							 N("This host is already in the list, it cannot be added again.\n"));
+					   return (1,1);
+				       }
+				       return 0;
+				   },
+			       },
+			   },
+			     # List the host types
+			     [ { val => \$hostchoice, format => \&translate,
+				 type => 'list',
+				 sort => 0,
+				 list => \@menu },
+			       { val => \$ip, 
+				 disabled => sub {
+				     $hostchoice ne 
+					 N("Name/IP address of host:");
+			         } },
+			       ],
+			     )) {
+			    # OK was clicked, insert new item into the list
+			    if ($buttonclicked eq "add") {
+				handle_configs::set_directive(\@exports,
+							      $address);
+			    } else {
+				handle_configs::replace_directive(\@exports,
+								  $oldaddress,
+								  $address);
+			    }
+			    # Refresh list of hosts
+			    ($menuexports, $menuexports_inv) =
+				makeexportmenues(@exports);
+			    # Position the list cursor on the new/modified
+			    # item
+			    $choice = $menuexports_inv->{$address};
+			}
+		    } elsif ($buttonclicked eq "remove") {
+			my $address = $menuexports->{$choice};
+			handle_configs::remove_directive(\@exports,
+							 $address);
+			# Refresh list of hosts
+			($menuexports, $menuexports_inv) =
+			    makeexportmenues(@exports);
+		    }
+		}
+	    } elsif ($buttonclicked eq "imports") {
+		# Show dialog to add hosts on which the scanners should be
+		# used
+		my $subdone = 0;
+		my $choice;
+		while (!$subdone) {
+		    my @list = keys %$menuimports;
+		    # Entry should be edited when double-clicked
+		    $buttonclicked = "edit";
+		    $in->ask_from_
+			(
+			 { title => N("Usage of remote scanners"),
+			   messages => N("These are the machines from which the scanners should be used:"),
+			   ok => "",
+			   cancel => "",
+		         },
+			 # List the hosts
+			 [ { val => \$choice, format => \&translate,
+			     sort => 0, separator => "####",
+			     tree_expanded => 1,
+			     quit_if_double_click => 1,
+			     allow_empty_list => 1,
+			     list => \@list },
+			   { val => N("Add host"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "add";
+				 1; 
+			     } },
+			   { val => N("Edit selected host"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "edit";
+				 1; 
+			     },
+			     disabled => sub {
+				 return ($#list < 0);
+			     } },
+			   { val => N("Remove selected host"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "remove";
+				 1; 
+			     },
+			     disabled => sub {
+				 return ($#list < 0);
+			     } },
+			   { val => N("Done"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "";
+				 $subdone = 1;
+				 1; 
+			     } },
+			   ]
+			 );
+		    if ($buttonclicked eq "add" ||
+			$buttonclicked eq "edit") {
+			my ($hostchoice, $ip);
+			if ($buttonclicked eq "add") {
+			    # Use first entry as default for a new entry
+			    $hostchoice = 
+				N("Name/IP address of host:");
+			} else {
+			    if ($menuimports->{$choice} eq 'localhost') {
+				# Entry is "This machine"
+				$hostchoice = $choice;
+			    } else {
+				# Entry is a name/an IP address
+				$hostchoice = 
+				    N("Name/IP address of host:");
+				$ip = $choice;
+			    }
+			}
+			my @menu = (N("This machine"),
+			            N("Name/IP address of host:"));
+			# Show the dialog
+			my $address;
+			my $oldaddress = 
+			    ($buttonclicked eq "edit" ?
+			     $menuimports->{$choice} : "");
+			if ($in->ask_from_
+			    (
+			     { title => N("Sharing of local scanners"),
+			       messages => N("Choose the host on which the local scanners should be made available:"),
+			       callbacks => {
+				   complete => sub {
+				       if ($hostchoice eq $menu[0]) {
+					   $address = 'localhost';
+				       } elsif ($hostchoice eq $menu[1]) {
+					   $address = $ip;
+				       }
+				       # Do not allow an empty address
+				       if ($address !~ /\S/) {
+					   $in->ask_warn(N("Error"), 
+							 N("You must enter a host name or an IP address.\n"));
+					   return (1,0);
+				       }
+				       # Strip off leading and trailing
+				       # spaces
+				       $address =~ s/^\s*(.*?)\s*$/$1/;
+				       # Check whether item is duplicate
+				       if ($address ne $oldaddress &&
+					   member("$address\n",
+						   @imports)) {
+					   $in->ask_warn(N("Error"), 
+							 N("This host is already in the list, it cannot be added again.\n"));
+					   return (1,1);
+				       }
+				       return 0;
+				   },
+			       },
+			   },
+			     # List the host types
+			     [ { val => \$hostchoice, format => \&translate,
+				 type => 'list',
+				 sort => 0,
+				 list => \@menu },
+			       { val => \$ip, 
+				 disabled => sub {
+				     $hostchoice ne 
+					 N("Name/IP address of host:");
+			         } },
+			       ],
+			     )) {
+			    # OK was clicked, insert new item into the list
+			    if ($buttonclicked eq "add") {
+				handle_configs::set_directive(\@imports,
+							      $address);
+			    } else {
+				handle_configs::replace_directive(\@imports,
+								  $oldaddress,
+								  $address);
+			    }
+			    $importschanged = 1;
+			    # Refresh list of hosts
+			    ($menuimports, $menuimports_inv) =
+				makeimportmenues(@imports);
+			    # Position the list cursor on the new/modified
+			    # item
+			    $choice = $menuimports_inv->{$address};
+			}
+		    } elsif ($buttonclicked eq "remove") {
+			my $address = $menuimports->{$choice};
+			handle_configs::remove_directive(\@imports,
+							 $address);
+			# Refresh list of hosts
+			($menuimports, $menuimports_inv) =
+			    makeimportmenues(@imports);
+			$importschanged = 1;
+		    }
+		}
+	    } else {
+		# We have clicked "OK"
+		$maindone = 1;
+		if ($importschanged) {
+		    $changed = 1;
+		}
+		# Write /etc/sane.d/saned.conf
+		output("/etc/sane.d/saned.conf", @exports);
+		# Write /etc/sane.d/net.conf
+		output("/etc/sane.d/net.conf", @imports);
+		# Turn on/off saned
+		if ($sanedrunning != $oldsanedrunning) {
+		    if ($sanedrunning) {
+			# Make sure saned and xinetd is installed and 
+			# running
+			if (!files_exist('/usr/sbin/xinetd',
+					 '/usr/sbin/saned')) {
+			    if (!$in->ask_yesorno(N("Warning"), N("saned needs to be installed to share the local scanner(s).
+
+Do you want to install the saned package?"))) {
+				$in->ask_warn("Warning", 
+					      N("Your scanner(s) will not be available on the network."));
+			    } elsif (!$in->do_pkgs->install('xinetd', 'saned')) {
+				$in->ask_warn(N("Error"),
+					      N("Could not install the packages needed to share your scanner(s).") . " " .
+					      N("Your scanner(s) will not be available on the network."));
+			    }
+			}
+			# Start saned and make sure that it gets started on
+			# every boot
+			services::start_service_on_boot("saned");
+			services::start_service_on_boot("xinetd");
+			services::restart("xinetd");
+		    } else {
+			# Stop saned and make sure that it does not get
+			# started when booting
+			services::do_not_start_service_on_boot("saned");
+			services::restart("xinetd");
+		    }
+		}
+		# Turn on/off "net" SANE backend
+		if ($netbackendactive != $oldnetbackendactive) {
+		    my @dllconf = cat_("/etc/sane.d/dll.conf");
+		    if ($netbackendactive) {
+			handle_configs::set_directive(\@dllconf, "net");
+		    } else {
+			handle_configs::comment_directive(\@dllconf, "net");
+		    }
+		    output("/etc/sane.d/dll.conf", @dllconf);
+		    $changed = 1;
+		}
+	    }
+	} else {
+	    # Cancel clicked
+	    $maindone = 1;
+	}
+    }
+    return $changed;
+}

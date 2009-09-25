@@ -1,0 +1,310 @@
+#!/usr/bin/perl
+
+# Drak Bug Report 
+# Copyright (C) 2002-2008 Mandriva (daouda at mandriva dot com)
+#                          Stew Benedict (sbenedict at mandriva dot com) 
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+use strict;
+use diagnostics;
+use lib qw(/usr/lib/libDrakX);
+use any;
+use standalone;
+use MDK::Common;
+use common;
+BEGIN { $::no_ugtk_init = 1 }
+use mygtk2 qw(gtknew);
+use ugtk2 qw(:all);
+use Config;
+use URI::Escape;
+use run_program;
+
+my $prog;
+my $incident = 0;
+my ($table, $comb_app, $com_app, $button_pkg, $button_browse, $package, $distrocode, $error, $gdb_trace, $user_descr);
+
+my $i;
+foreach (@ARGV) {
+    next unless defined $_;
+    $i++;
+    /^--error$/ and do { $error = splice(@ARGV, $i, 1) };
+    /^--report$/ and $prog = splice(@ARGV, $i, 1);
+    /^--incident$/ and do { $incident = 1; $prog = splice(@ARGV, $i, 1) };
+}
+
+my $segfaulted = $error =~ /SEGV/;
+if ($segfaulted && -x '/usr/bin/gdb') {
+    local $ENV{TMP} = $ENV{TMP} || '/tmp';
+    my $file = chomp_(`mktemp $ENV{TMP}/drakbug.XXXXXXXX`);
+    my $_guard = before_leaving { rm_rf $file };
+    if (-e $file) {
+        output($file, qq(bt
+quit));
+        local $ENV{LANGUAGE} = 'C';
+        my $temp = run_program::get_stdout('gdb', '-q', 'perl', $$, '-x', $file);
+        $gdb_trace = join "\n", grep { !/^done\.$/ && !/Reading symbols from/
+                                         && !/Loaded symbols/ && !/The program is run/ } split(/\n/, $temp);
+    }
+}
+if (!check_for_xserver()) {
+    print("Cannot be run in console mode.\n");
+    print join("\n", 
+               N("The \"%s\" program has crashed with the following error:", $prog),
+               $error,
+               $gdb_trace,
+               '')
+      if $error;
+    c::_exit(0);
+}
+
+mygtk2::init();
+
+$ugtk2::wm_icon = 'drakbug-16';
+my $window = ugtk2->new(N("Mandriva Linux Bug Report Tool"), center => 1);
+$window->{rwindow}->set_border_width(5);
+$window->{window}->signal_connect("delete_event", sub { ugtk2->exit(0) });
+
+my $mdk_app = { 
+	       N("Mandriva Linux Control Center") => 'drakconf',
+	       N("First Time Wizard") => 'drakfw',
+	       N("Synchronization tool") => 'draksync',  
+	       N("Standalone Tools") => 'drakxtools',
+	       "harddrake" => 'harddrake2',
+	       N("Mandriva Online") => 'mdkonline',
+	       N("Mandriva Online") => 'mdkapplet',
+	       N("Remote Control") => 'rfbdrake',
+	       N("Software Manager") => 'rpmdrake',
+	       N("Windows Migration tool") => 'transfugdrake',
+	       N("Configuration Wizards") => 'wizdrake',
+	      };
+
+my @generic_tool = keys %$mdk_app; 
+my @all_drakxtools = qw(adduserdrake diskdrake drakautoinst drakboot drakbug drakclock drakfloppy drakfont draksec drakxservices draksplash drakxtools drakxtv logdrake scannerdrake);
+push @generic_tool, @all_drakxtools, qw(MandrivaUpdate drakbackup drakconnect drakfirewall drakhosts drakmenustyle draknfs draksambashare drakgw drakroam drakvpn keyboarddrake msec mousedrake net_monitor printerdrake urpmi userdrake XFdrake);
+
+my $kernel_release = chomp_(`uname -r`);
+my $mandrake_release = chomp_(cat_('/etc/mandrakelinux-release'));
+#- unused for now
+#- (my $mandrake_version) = $mandrake_release =~ /(\d+\.\d+)/;
+
+if ($mandrake_release =~ /(official|community)/i) {
+    $distrocode = $mandrake_release;
+    $distrocode =~ s/^.*?(\d+\.\d+) \((\w+)\).*$/$1-\l$2/;
+} else {
+    $distrocode = "cooker";
+}
+my $bugzilla_url = 'http://qa.mandriva.com/enter_bug.cgi';
+my $wizard_name = "Bugzilla";
+
+$table = create_packtable({ col_spacings => 5, row_spacings => 10 },
+		          [ gtknew('Label_Left', text => N("Select Mandriva Tool:")), $comb_app = Gtk2::ComboBox->new_text, $comb_app->set_wrap_width(3) ],
+                          [ gtknew('Label_Left', text => N("or Application Name\n(or Full Path):")), 
+			  gtkpack_(Gtk2::HBox->new(0, 5),
+				   1, $com_app = gtkset_editable(Gtk2::Entry->new, 1), 
+				   0, $button_pkg = Gtk2::Button->new(N("Find Package")),
+				   0, $button_browse = Gtk2::FileChooserButton->new(N("Browse"), 'GTK_FILE_CHOOSER_ACTION_OPEN'),
+				  ) ],
+			  [ gtknew('Label_Left', text => N("Package: ")), $package = Gtk2::Entry->new_with_text("...") ], # complain on gtk-perl@ml
+			  [ gtknew('Label_Left', text => N("Kernel:")), gtkset_editable(Gtk2::Entry->new_with_text($kernel_release), 0) ]
+                         );
+$comb_app->set_popdown_strings("", uniq(sort(@generic_tool), if_($prog, $prog)));
+$comb_app->set_text("");
+
+sub is_a_boot_issue() {
+    $prog =~ /boot|mkinitrd/;
+}
+
+sub format_trace_with_message {
+    my ($message, $trace) = @_;
+    ([ $message ], [ "\n\n  " . join("\n  ", split("\n", $trace)) . "\n\n", { family => 'monospace' }]);
+}
+
+my @commands = 'lspcidrake -v';
+
+push @commands, 'blkid' if is_a_boot_issue();
+
+my $parent_uid = get_parent_uid();
+
+my $width = 600;
+gtkadd($window->{window},
+       gtkpack_(Gtk2::VBox->new(0, 5),
+                0, gtknew('Title1', label => $mandrake_release, width => $width),
+                1, create_scrolled_window(
+                    gtknew('TextView', editable => 0, height => 150,
+                           text => [
+                               if_($prog,
+                                   if_($error,
+                                       format_trace_with_message(
+                                           ($gdb_trace ?
+                                              N("The \"%s\" program has segfaulted with the following error:", $prog)
+                                                : N("The \"%s\" program has crashed with the following error:", $prog)),
+                                           $error)
+                                   ),
+                                   if_($gdb_trace, format_trace_with_message(N("Its GDB trace is:"), $gdb_trace)),
+                               ),
+                               [
+                                   N("To submit a bug report, click on the report button.  \nThis will open a web browser window on %s where you'll find a form to fill in.  The information displayed above will be transferred to that server",
+                                     $wizard_name).  "\n" .
+                                       P("It would be very useful to attach to your report the output of the following command: %s.",
+                                         "Things useful to attach to your report are the output of the following commands: %s.",
+                                         scalar(@commands),
+                                         join(", ", map { N("'%s'", $_) } @commands)) .
+                                     if_(is_a_boot_issue(),
+                                         "\n" .
+                                         N("You should also attach the following files: %s as well as %s.",
+                                           '/etc/modprobe.conf, /etc/fstab, /boot/grub/menu.lst, /boot/grub/devices.map',
+                                           '/etc/lilo.conf',
+                                       )
+                                     )
+                               ]
+                           ])),
+                0, gtknew('Title2', label => N("Please describe what you were doing when it crashed:"), width => $width),
+                if_($incident,
+                      1, create_scrolled_window(
+                          $user_descr = gtknew('TextView', editable => 1, height => 200)
+                      ),
+                ),
+		if_(!$error,
+                    0, gtkadd($table),
+                ),
+		0, gtkpack(Gtk2::HSeparator->new),
+		0, gtkpack(create_hbox('edge'),
+                           gtksignal_connect(
+                               Gtk2::Button->new(N("Help")), clicked => sub {
+                                   run_program::raw({ detach => 1, setuid => $parent_uid }, 'drakhelp', '--id', 'drakbug');
+                               }),
+                           gtkpack(create_hbox('end'),
+                                   gtksignal_connect(Gtk2::Button->new(N("Report")), clicked => \&report_bug_to_bugzilla),
+                                   gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub { ugtk2->exit(0) }),
+                               ))));
+
+if (defined $prog) {
+    update_app($prog); 
+    $comb_app->set_text($prog);
+}
+$comb_app->entry->signal_connect('changed', sub {
+    my $text = $comb_app->entry->get_text;
+    $text and update_app($text);
+ });
+
+$button_pkg->signal_connect('clicked', sub { 
+				    $comb_app->set_text("");
+				    my $pkg_name = get_package($com_app->get_text);
+				    $package->set_text($pkg_name);
+				});
+
+$button_browse->signal_connect('file-set', sub { $com_app->set_text($button_browse->get_filename()) });
+
+$window->{window}->show_all;
+$window->main;
+ugtk2->exit(0);
+
+sub update_app {
+    my ($text) = @_;
+    my $app_choice;
+    $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
+    if (member($text, @all_drakxtools) || $text eq N("Standalone Tools")) {
+	$app_choice = chomp_(`rpm -q drakxtools`);
+    } elsif (exists($mdk_app->{$text})) {
+	$app_choice = get_package($mdk_app->{$text});
+    } else {
+        $app_choice = get_package($text);
+    }
+    $app_choice ? $package->set_text($app_choice) : $package->set_text(N("Not installed"));
+}
+
+my %packages;
+
+sub get_package {
+    my ($executable) = @_;
+    my ($rpm_package, $which_app);
+    $rpm_package = $packages{$executable};
+    if (!defined $rpm_package) {
+        local $ENV{PATH} = "$ENV{PATH}:/sbin:/usr/sbin";
+        $which_app = chomp_(`which '$executable' 2> /dev/null`);
+        # deush, rpm can takes some time aka it'll sleeps if something has opened rpm db !
+        $rpm_package = $which_app eq "" ? N("Package not installed") : common::to_utf8(chomp_(`rpm -qf '$which_app' 2>&1`));
+        $packages{$executable} = $rpm_package;
+    }
+    $rpm_package;
+}
+
+sub get_top_of_trace {
+    my ($error) = @_;
+    return if !$error;
+    sprintf(" (%s)", first(split(/\n/, $error)));
+}
+
+sub report_bug_to_bugzilla() {
+    my $p = $package->get_text;
+    my ($product, $version) = $p =~ /^(.*)-([^-]+-[^-]+(mdk|mdv.*))$/; # FIXME: fragile!
+    my $app = $comb_app->entry->get_text;
+    my $_component = $app ?
+      if_(member($app, @all_drakxtools), $app) || $mdk_app->{$app} :
+        $product;
+    my $text;
+    if ($incident) {
+        my $buffer = $user_descr->get_buffer;
+        $text = $buffer->get_text($buffer->get_start_iter, $buffer->get_end_iter, 0);
+        if (!$text) {
+            err_dialog(N("Warning"),
+                       N("You must type in what you were doing when this bug happened in order to enable us to reproduce this bug and to increase the odds of fixing it")
+                         . "\n\n" . N("Thanks."));
+            return;
+        }
+    }
+    my $rel_data = mandrake_release_info();
+    my $rel = standalone::real_version();
+    my $cpuinfo;
+    if (cat_('/proc/cpuinfo') =~ /model name\s*:\s*(.*)$/m) {
+        $cpuinfo = $1;
+    }
+    my $arch = arch();
+    $arch = 'i586' if arch =~ /^i.86/;
+    my $options = join('&',
+                       ($product || $version ? 'cf_rpmpkg=' . join('-', $product, $version) : ()),
+                       'version=' . ($rel_data->{branch} eq 'Devel' ? 'Cooker' : $rel_data->{version}),
+                       'component=Core%20Packages',
+                       'classification=Mandriva%20Linux',
+                       "rep_platform=$arch",
+                       if_($incident,
+                           join('', "short_desc=$prog%20",
+                                ($segfaulted ? 'segfaulted' : 'crashed'),
+                                if_(!$gdb_trace, get_top_of_trace($error)),
+                            ),
+                       ),
+                           'comment=' . uri_escape(
+                               if_($incident,
+                                   qq(The "$prog" program crashed. Drakbug-$rel caught it.
+
+) . ($text || "Please describe what you were doing when it crashed.") . "\n\n"
+  . ($error ? qq(Backtrace was:
+$error) :
+  qq(If you can, try to run the "$prog" program from a terminal and copy and paste here any error messages and/or backtrace))
+    . if_($gdb_trace, qq(
+GDB backtrace was (its interesting part is below Perl_pp_fork() or Perl_pp_waitpid()):
+$gdb_trace)),
+                               )
+                                 . qq(
+Kernel version = $kernel_release
+Distribution=) . cat_('/etc/release')
+. if_($cpuinfo, "CPU=$cpuinfo")
+                           ),
+                   );
+    print($bugzilla_url . "?" . $options . "\n");
+    run_program::raw({ detach => 1, setuid => $parent_uid }, '/usr/bin/www-browser', "$bugzilla_url?$options");
+}
+

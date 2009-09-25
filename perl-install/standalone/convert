@@ -1,0 +1,10 @@
+#!/usr/bin/perl
+use Storable;
+use MDK::Common::File qw(cat_);
+ 
+my $last_boot_config = "/etc/sysconfig/harddrake2/previous_hw";
+ 
+if (cat_($last_boot_config) !~ /^pst0/) {
+    my $config = do $last_boot_config;
+    store($config, $last_boot_config);
+}
