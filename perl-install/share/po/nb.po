@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "POT-Creation-Date: 2009-09-10 12:20+0200\n"
-"PO-Revision-Date: 2009-09-29 22:36+0200\n"
+"PO-Revision-Date: 2009-09-29 22:58+0200\n"
 "Last-Translator: Olav Dahlum <odahlum@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -6391,8 +6391,8 @@ msgid ""
 "named (BIND) is a Domain Name Server (DNS) that is used to resolve host "
 "names to IP addresses."
 msgstr ""
-"named (BIND) er en Domenenavntjener (DNS) som brukes til å bestemme "
-"vertsnavn til IP-adresser."
+"named (BIND) er en domenenavntjener (DNS) som brukes til å stille inn "
+"IP-adresser ut i fra vertsnavn."
 
 #: services.pm:59
 #, c-format
@@ -6400,8 +6400,8 @@ msgid ""
 "Mounts and unmounts all Network File System (NFS), SMB (Lan\n"
 "Manager/Windows), and NCP (NetWare) mount points."
 msgstr ""
-"Monterer og avmonterer alle Network File System- (NFS), SMB- (Lan\n"
-"Manager/Windows), og NCP- (NetWare) monteringspunkter."
+"Monterer og avmonterer alle nettverksfilsystem- (NFS), SMB- (Lan\n"
+"Manager / Windows) og NCP-monteringspunkt (NetWare)."
 
 #: services.pm:61
 #, c-format
@@ -6409,8 +6409,8 @@ msgid ""
 "Activates/Deactivates all network interfaces configured to start\n"
 "at boot time."
 msgstr ""
-"Aktiverer/deaktiverer alle nettverksgrensesnitt satt opp til å starte\n"
-"ved oppstart."
+"Slå på/av alle nettverksgrensesnitt satt opp til å startes ved "
+"systemoppstart."
 
 #: services.pm:63
 #, c-format
@@ -6420,8 +6420,8 @@ msgid ""
 "/etc/exports file."
 msgstr ""
 "NFS er en populær protokoll for fildeling over TCP/IP-nettverk.\n"
-"Denne tjenesten tilbyr NFS-tjenerfunksjonalitet som er satt opp via\n"
-"/etc/exports-filen."
+"Denne tjenesten gir NFS-tjenerfunksjonalitet, som er satt opp via fila «/etc/"
+"exports»."
 
 #: services.pm:66
 #, c-format
@@ -6430,7 +6430,7 @@ msgid ""
 "networks. This service provides NFS file locking functionality."
 msgstr ""
 "NFS er en populær protokoll for fildeling over TCP/IP-nettverk.\n"
-"Denne tjenesten tilbyr NFS-fillåsingfunksjonalitet."
+"Denne tjenesten tilbyr fillåsingsstøtte i NFS."
 
 #: services.pm:68
 #, c-format
@@ -6442,14 +6442,12 @@ msgstr "Synkroniserer systemklokka med nettverkstidsprotokollen NTP."
 msgid ""
 "Automatically switch on numlock key locker under console\n"
 "and Xorg at boot."
-msgstr ""
-"Slår automatisk på numlock-tast i konsoll og Xorg ved\n"
-"oppstart."
+msgstr "Slå automatisk på «Num Lock» på konsoller og X.org ved systemoppstart."
 
 #: services.pm:71
 #, c-format
 msgid "Support the OKI 4w and compatible winprinters."
-msgstr "Støtter OKI 4w og kompatible winskrivere."
+msgstr "Støtte OKI 4w og kompatible Windows-skrivere."
 
 #: services.pm:72
 #, c-format
@@ -6459,9 +6457,9 @@ msgid ""
 "to have\n"
 "it installed on machines that do not need it."
 msgstr ""
-"PCMCIA-støtte er vanligvis støtte for ting som ethernet og\n"
-"modem i bærbare PC'er. Den vil ikke starte uten oppsett så det er trygt\n"
-"å ha det installert på maskiner som ikke trenger det."
+"Du trenger vanligvis PCMCIA-støtta til nettverkskort og modem i\n"
+"bærbare maskiner. Støtta blir ikke slått på med mindre den er\n"
+"satt opp slik at den er trygg å bruke på maskiner som ikke treng den."
 
 #: services.pm:75
 #, c-format
@@ -6471,27 +6469,23 @@ msgid ""
 "machines\n"
 "which act as servers for protocols which make use of the RPC mechanism."
 msgstr ""
-"Portmapper håndterer RPC-tilkoblinger, som brukes av protokoller\n"
-"som NFS og NIS. Portmap-tjeneren må kjøres på maskiner som brukes som\n"
-"tjenere for protokoller som bruker RPC-mekanismen."
+"Portmapper håndterer RPC-tilkoblinger, som blir brukt av blant annet\n"
+"protokollene NFS og NIS. Du må kjøre portmap-tjeneren på maskiner\n"
+"som blir brukt som tjenere for protokoller som bruker RPC."
 
 #: services.pm:78
 #, c-format
 msgid ""
 "Postfix is a Mail Transport Agent, which is the program that moves mail from "
 "one machine to another."
-msgstr ""
-"Postfix er en posttransporteringsagent (MTA), som er et program som flytter "
-"post fra en maskin til en annen."
+msgstr "Postfix er et program for overføring av elektronisk post mellom maskiner."
 
 #: services.pm:79
 #, c-format
 msgid ""
 "Saves and restores system entropy pool for higher quality random\n"
 "number generation."
-msgstr ""
-"Lagrer og gjenoppretter systementropigrunnlag for høyere kvalitet på\n"
-"tilfeldig nummergenerering."
+msgstr "Lagrer og gjenoppretter systementropigrunnlag for bedre slumptalsgenerering."
 
 #: services.pm:81
 #, c-format
@@ -6499,8 +6493,8 @@ msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
 "partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
-"Tilordne rå enheter til blokkenheter (som harddisk-partisjoner),\n"
-"for bruk av applikasjoner som Oracle eller DVD-spillere"
+"Tildeler råenheter til blokkenheter (som harddiskpartisjoner) for bruk\n"
+"av program som for eksempel Oracle og DVD-spillere."
 
 #: services.pm:83
 #, c-format
@@ -6509,10 +6503,10 @@ msgid ""
 "the RIP protocol. While RIP is widely used on small networks, more complex\n"
 "routing protocols are needed for complex networks."
 msgstr ""
-"routed-tjenesten tillater automatisk oppdatering av IP-rutertabell via\n"
-"RIP-protokollen. Mens RIP er mye brukt på små nettverk, trengs mere "
-"komplekse\n"
-"rutingprotokoller for komplekse nettverk."
+"Tjenesten routed gjør det mulig med automatisk oppdatering av IP-tabellen\n"
+"til ruteren via RIP-protokollen. RIP blir mye brukt i mindre nettverk, men "
+"du\n"
+"trenger mer avanserte ruteprotokoller for store nettverk."
 
 #: services.pm:86
 #, c-format
@@ -6520,8 +6514,8 @@ msgid ""
 "The rstat protocol allows users on a network to retrieve\n"
 "performance metrics for any machine on that network."
 msgstr ""
-"rstat-protokollen lar brukere på et nettverk finne ytelses-\n"
-"metrikser for alle maskinene på nettverket."
+"Protokollen rstat lar brukere på nettverket hente\n"
+"ytingsstatistikk for andre maskiner på nettverket."
 
 #: services.pm:88
 #, c-format
@@ -6529,8 +6523,8 @@ msgid ""
 "The rusers protocol allows users on a network to identify who is\n"
 "logged in on other responding machines."
 msgstr ""
-"rusers-protokollen lar brukere på et nettverk identifisere hvem som\n"
-"er logget inn på andre svarende maskiner."
+"Protokollen rusers lar brukere på nettverket identifisere\n"
+"hvem som er logga inn på andre maskiner."
 
 #: services.pm:90
 #, c-format
@@ -6538,15 +6532,15 @@ msgid ""
 "The rwho protocol lets remote users get a list of all of the users\n"
 "logged into a machine running the rwho daemon (similar to finger)."
 msgstr ""
-"rwho-protokollen lar eksterne brukere motta en liste over alle brukerne\n"
-"som er logget på en maskin som kjører rwho-tjenesten (lik finger)."
+"Protokollen rwho lar fjernbrukere hente en oversikt over alle\n"
+"brukere logga på maskiner som kjører rwho-tjenesten."
 
 #: services.pm:92
 #, c-format
 msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
 "SANE (Scanner Access Now Easy) gir tilgang til skannere, filmkamera og "
-"lignende … "
+"lignende."
 
 #: services.pm:93
 #, c-format
@@ -6554,13 +6548,13 @@ msgid ""
 "The SMB/CIFS protocol enables to share access to files & printers and also "
 "integrates with a Windows Server domain"
 msgstr ""
-"SMB/CIFS-protokollen gjør det mulig å dele tilgang til filer og skrivere, og "
-"integrerering med Windows Server-domene."
+"SMB/CIFS-protokollen gjør det mulig å dele tilgang til filer og skrivere, "
+"og integrerer med Windows Server-domene."
 
 #: services.pm:94
 #, c-format
 msgid "Launch the sound system on your machine"
-msgstr "Start lydsystemet på maskinen din"
+msgstr "Start lydsystemet på maskina"
 
 #: services.pm:95
 #, c-format
@@ -6568,8 +6562,8 @@ msgid ""
 "Secure Shell is a network protocol that allows data to be exchanged over a "
 "secure channel between two computers"
 msgstr ""
-"Secure Shell er en nettverksprotokoll som gjør det mulig å utveksle data "
-"over en sikker tilkobling mellom to datamaskiner."
+"Secure Shell er en nettverksprotokoll som gjør det mulig å dele data over "
+"en sikker tilkobling mellom to datamaskiner."
 
 #: services.pm:96
 #, c-format
@@ -6577,13 +6571,13 @@ msgid ""
 "Syslog is the facility by which many daemons use to log messages\n"
 "to various system log files.  It is a good idea to always run syslog."
 msgstr ""
-"Syslog er et fasilitet som mange tjenester bruker for å logge beskjeder\n"
-"til forskjellige systemloggfiler. Det er en god idé å alltid kjøre syslog."
+"Syslog er en tjeneste mange andre tjenester bruker til å logge\n"
+"meldinger til systemloggfilene. Du bør alltid kjøre syslog."
 
 #: services.pm:98
 #, c-format
 msgid "Load the drivers for your usb devices."
-msgstr "Last driverne for dine usb-enheter."
+msgstr "Last driverene for USB-enhetene dine."
 
 #: services.pm:99
 #, c-format
@@ -6593,12 +6587,12 @@ msgstr "Starter X-skrifttjeneren."
 #: services.pm:100
 #, c-format
 msgid "Starts other deamons on demand."
-msgstr "Starter andre tjenester etter behov."
+msgstr "Starter andre tjenester ved behov."
 
 #: services.pm:123
 #, c-format
 msgid "Printing"
-msgstr "Skriver"
+msgstr "Utskrift"
 
 #: services.pm:124
 #, c-format
@@ -6618,7 +6612,7 @@ msgstr "System"
 #: services.pm:134
 #, c-format
 msgid "Remote Administration"
-msgstr "Fjernadministrasjon"
+msgstr "Fjernadministrering"
 
 #: services.pm:142
 #, c-format
@@ -6638,7 +6632,7 @@ msgstr "Velg hvilke tjenester som skal startes automatisk ved oppstart"
 #: services.pm:171
 #, c-format
 msgid "Services: %d activated for %d registered"
-msgstr "Tjenester: %d aktivert for %d registrert"
+msgstr "Tjenester: %d slått på av %d registrerte"
 
 #: services.pm:208
 #, c-format
@@ -6662,7 +6656,7 @@ msgid ""
 "about this service, sorry."
 msgstr ""
 "Ingen tilleggsinformasjon\n"
-"om denne tjenesten, beklager."
+"om denne tjenesten."
 
 #: services.pm:224 ugtk2.pm:924
 #, c-format
@@ -6742,16 +6736,16 @@ msgid ""
 "--version             : show version number.\n"
 msgstr ""
 "[--config-info] [--daemon] [--debug] [--default] [--show-conf]\n"
-"Backup og gjenopprettingsapplikasjon\n"
+"Program for reservekopiering og gjenoppretting.\n"
 "\n"
-"--default             : lagre standardkataloger.\n"
-"--debug               : vis alle avlusningsmeldinger.\n"
-"--show-conf           : liste over filer eller kataloger til å ta backup "
-"av.\n"
-"--config-info         : forklar oppsettsfilvalg (for ikke-X-brukere)\n"
-"--daemon              : bruk tjenesteoppsett. \n"
-"--help                : vis denne meldingen.\n"
-"--version             : vis versjonsnummer.\n"
+"--default             – Lagre standardmapper.\n"
+"--debug               – Vis alle feilsøkingsmeldinger.\n"
+"--show-conf           – Oversikt over filer og mapper å ta kopi av.\n"
+"--config-info         – Forklar valg for oppsettfila (for ikke-grafiske "
+"brukere).\n"
+"--daemon              – Bruk daemon-oppsett. \n"
+"--help                – Vis denne meldinga.\n"
+"--version             – Vis versjonsnummer.\n"
 
 #: standalone.pm:56
 #, c-format
@@ -6763,10 +6757,10 @@ msgid ""
 "default mode: offer to configure autologin feature"
 msgstr ""
 "[--boot] [--splash]\n"
-"OPTIONS:\n"
-"  --boot            - aktiver for å sette opp oppstartslaster\n"
-"  --splash          - aktiver for å sette opp oppstartstema\n"
-"standardmodus: tilby å sette opp autologin-finesse"
+"VALG:\n"
+"  --boot            – Sett opp oppstartslastar.\n"
+"  --splash          – Sett opp oppstartstema.\n"
+"Standardmodus: Spør om oppsett av autoinnlogging."
 
 #: standalone.pm:61
 #, c-format
@@ -6780,10 +6774,10 @@ msgid ""
 msgstr ""
 "[VALG] [PROGRAMNAVN]\n"
 "\n"
-"VALG:\n"
-"  --help            - vis denne hjelpemeldingen.\n"
-"  --report          - program må være et av Mandriva Linux-verktøyene\n"
-"  --incident        - program må være et av Mandriva Linux-verktøyene"
+"VAL:\n"
+"  --help            – Vis denne hjelpeteksten.\n"
+"  --report          – Programmet må være et av verktøya i Mandriva Linux.\n"
+"  --incident        – Programmet må være et av verktøya i Mandriva Linux."
 
 #: standalone.pm:67
 #, c-format
@@ -6796,11 +6790,11 @@ msgid ""
 "  --wizard          - like --add"
 msgstr ""
 "[--add]\n"
-"  --add             - «legg til et nettverksgrensesnitt»-veiviser\n"
-"  --del             - «slett et nettverksgrensesnitt»-veiviser\n"
-"  --skip-wizard     - håndter tilkoblinger\n"
-"  --internet        - sett opp internett\n"
-"  --wizard          - samme som --add"
+"  --add             – «Legg til nettverksgrensesnitt»-veiviseren.\n"
+"  --del             – «Fjern nettverksgrensesnitt»-veiviseren.\n"
+"  --skip-wizard     – Ordne tilkoblinger.\n"
+"  --internet        – Sett opp Internett.\n"
+"  --wizard          – Det samme som «--add»."
 
 #: standalone.pm:73
 #, c-format
@@ -6820,18 +6814,18 @@ msgid ""
 "                 : and gs for ghostscript for only this one."
 msgstr ""
 "\n"
-"Skrifttypeimportering- og overvåkningsapplikasjon\n"
+"Program for skriftimport og skriftovervåkning.\n"
 "\n"
 "VALG:\n"
-"--windows_import : importér fra alle tilgjengelige windows-partisjoner.\n"
-"--xls_fonts      : vis alle typer som allerede eksisterer fra xls\n"
-"--install        : installer alle typer og kataloger.\n"
-"--uninstall      : avinstaller alle typer og kataloger.\n"
-"--replace        : erstatt typer som eksisterer fra før\n"
-"--application    : 0 ingen applikasjon.\n"
-"                 : 1 alle tilgjengelige støttede applikasjoner.\n"
-"                 : applikasjonsnavn som «so» for staroffice \n"
-"                 : og gs for ghostscript bare for denne."
+"--windows_import – Importer fra alle tilgjengelige Windows-partisjoner.\n"
+"--xls_fonts      – Vis alle skrifter som allerede finnes fra xls\n"
+"--install        – Bruk alle skrifterfiler og skriftmapper.\n"
+"--uninstall      – Avinstaller alle skrifter og skriftmapper.\n"
+"--replace        – Erstatt alle skrifter som allerede finnes\n"
+"--application    – 0: Ingen program:.\n"
+"                 – 1: alle støtta program.\n"
+"                 – navn på program (for eksempel «so» for StarOffice)\n"
+"                   og «gs» for GhostScript."
 
 #: standalone.pm:88
 #, c-format
@@ -6850,19 +6844,18 @@ msgid ""
 "--delclient      : delete a client machine from MTS (requires MAC address, "
 "IP, nbi image name)"
 msgstr ""
-"[VALG] … \n"
-"Mandriva Linux Terminaltjener-oppsett\n"
-"--enable         : aktiver MTS\n"
-"--disable        : deaktiver MTS\n"
-"--start          : start MTS\n"
-"--stop           : stopp MTS\n"
-"--adduser        : legg til en eksisterende systembruker til MTS (krever "
-"brukernavn)\n"
-"--deluser        : fjern en systembruker fra MTS (krever brukernavn)\n"
-"--addclient      : legg til en klientmaskin til MTS (krever MAC-addresse, "
-"IP, nbi-imagefilnavn)\n"
-"--delclient      : slett en klientmaskin fra MTS (krever MAC-addresse, IP, "
-"nbi-imagefilnavn)"
+"[VAL] …\n"
+"Oppsett av terminaltjener for Mandriva Linux.\n"
+"--enable         – Bruk MTS.\n"
+"--disable        – Ikke bruk MTS.\n"
+"--start          – Start MTS.\n"
+"--stop           – Stop MTS.\n"
+"--adduser        – Legg en gammel systembruker til MTS (krever brukernavn).\n"
+"--deluser        – Slett en gammel systembruker fra MTS (krever brukernavn).\n"
+"--addclient      – Legg en klientmaskin til MTS (krever MAC-adresse, IP-"
+"adresse og nbi-bildenavn).\n"
+"--delclient      – Fjern en klientmaskin fra MTS (krever MAC-adresse, IP-"
+"adresse og nbi-bildenavn)."
 
 #: standalone.pm:100
 #, c-format
@@ -6872,7 +6865,7 @@ msgstr "[tastatur]"
 #: standalone.pm:101
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
-msgstr "[--file=minfil] [--word=mittord] [--explain=regexp] [--alert]"
+msgstr "[--file=mifil] [--word=mittord] [--explain=regulært-uttrykk] [--alert]"
 
 #: standalone.pm:102
 #, c-format
@@ -6888,14 +6881,14 @@ msgid ""
 "--quiet : do not be interactive. To be used with (dis)connect."
 msgstr ""
 "[VALG]\n"
-"Nettverks- & internettforbindelse og overvåkningsapplikasjon\n"
+"Nettverk & Internetttilkobling og -overvåkingsprogram.\n"
 "\n"
-"--defaultintf interface : vis dette grensesnittet som standard\n"
-"--connect : Koble til internett dersom ikke allerede tilkoblet\n"
-"--disconnect : koble fra internett dersom tilkoblet\n"
-"--force : tving til/frakobling. Brukes med --(dis)connect.\n"
-"--status : returnerer 1 dersom tilkoblet, 0 hvis ikke.\n"
-"--quiet : ikke vær interaktiv. Brukes med --(dis)connect."
+"--defaultintf grensesnitt – Vis dette grensesnittet som standard.\n"
+"--connect – Koble til Internett (hvis ikke allerede tilkobla).\n"
+"--disconnect – Koble fra Internett (hvis allerede tilkobla).\n"
+"--force – Tving gjennom. Bruk sammen med «--(dis)connect».\n"
+"--status – Gir 1 viss tilkobla og ellers 0.\n"
+"--quiet – Ikke vær interaktiv. Bruk sammen med «--(dis)connect»."
 
 #: standalone.pm:112
 #, c-format
@@ -6908,14 +6901,13 @@ msgid ""
 "description window\n"
 "  --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"
 msgstr ""
-"[VALG] … \n"
-"  --no-confirmation      ikke spør det første bekreftelsesspørsmålet i "
-"Mandriva Update-modus\n"
-"  --no-verify-rpm        ikke kontroller pakkesignaturer\n"
-"  --changelog-first      vis endringslogg før filliste i "
-"beskrivelsesvinduet\n"
-"   --merge-all-rpmnew     foreslå å slå sammen alle .rpmnew/.rpmsave-filer "
-"funnet"
+"[VALG] …\n"
+"  --no-confirmation      Ikke spør første bekreftelsesspørsmål i Mandriva "
+"Update-modus.\n"
+"  --no-verify-rpm        Ikke bekreft pakkesignaturar.\n"
+"  --changelog-first      Vis endringslogg før filliste i pakkebeskrivelsen.\n"
+"  --merge-all-rpmnew     Spør om å slå sammen alle «.rpmnew»- «.rpmsave» filer "
+"funnet."
 
 #: standalone.pm:117
 #, c-format
@@ -6923,7 +6915,7 @@ msgid ""
 "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
 "usbtable] [--dynamic=dev]"
 msgstr ""
-"[--manual] [--device=enhet] [--update-sane=sane_source_dir] [--update-"
+"[--manual] [--device=eining] [--update-sane=sane-kilde-mappe] [--update-"
 "usbtable] [--dynamic=enhet]"
 
 #: standalone.pm:118
@@ -6934,7 +6926,7 @@ msgid ""
 "       XFdrake resolution"
 msgstr ""
 " [alt]\n"
-"       XFdrake [--noauto] monitor\n"
+"       XFdrake [--noauto] skjerm\n"
 "       XFdrake oppløsning"
 
 #: standalone.pm:154
@@ -6956,7 +6948,7 @@ msgstr "Alle tjenere"
 #: timezone.pm:196
 #, c-format
 msgid "Global"
-msgstr "Globalt"
+msgstr "Global"
 
 #: timezone.pm:199
 #, c-format
@@ -6996,7 +6988,7 @@ msgstr "Hong Kong"
 #: timezone.pm:250
 #, c-format
 msgid "Russian Federation"
-msgstr "Russiske føderasjon"
+msgstr "Russland"
 
 #: timezone.pm:258
 #, c-format
@@ -7011,7 +7003,7 @@ msgstr "Er dette riktig?"
 #: ugtk2.pm:874
 #, c-format
 msgid "You have chosen a file, not a directory"
-msgstr "Du har valgt en fil, ikke en katalog"
+msgstr "Du har valgt en fil og ikke en mappe."
 
 #: wizards.pm:95
 #, c-format
@@ -7019,11 +7011,11 @@ msgid ""
 "%s is not installed\n"
 "Click \"Next\" to install or \"Cancel\" to quit"
 msgstr ""
-"%s er ikke installert\n"
-"Klikk Neste for å installere eller Avbryt for å avslutte"
+"«%s» er ikke installert.\n"
+"Trykk «Neste» for å installere, eller «Avbryt» for å avslutte."
 
 #: wizards.pm:99
 #, c-format
 msgid "Installation failed"
-msgstr "Installasjon mislyktes"
+msgstr "Feil ved installering."
 
