@@ -462,10 +462,7 @@ foreach (@classes) {
         rename_field($_, 'usb_driver', 'driver');
         rename_field($_, 'usb_id', 'id');
         rename_field($_, 'usb_media_type', 'media_type');
-        if ($_->{nice_media_type}) {
-            delete $_->{media_type};
-            rename_field($_, 'nice_media_type', 'media_type');
-        }
+        force_rename_field($_, 'nice_media_type', 'media_type');
         rename_field($_, 'usb_pci_bus', 'bus');
         rename_field($_, 'nice_bus', 'bus');
         rename_field($_, 'usb_vendor', 'vendor');
@@ -572,6 +569,15 @@ sub titleFormat {
     my ($title) = @_;
     [ $title . "\n", { 'weight' => Gtk2::Pango->PANGO_WEIGHT_BOLD, scale => Gtk2::Pango->PANGO_SCALE_LARGE } ];
 }
+
+sub force_rename_field {
+    my ($dev, $new_field, $field) = @_;
+    if ($dev->{$new_field}) {
+        delete $dev->{$field};
+        rename_field($dev, $new_field, $field);
+    }
+}
+
 
 sub rename_field {
     my ($dev, $field, $new_field) = @_;
