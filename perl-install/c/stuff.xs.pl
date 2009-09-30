@@ -263,8 +263,8 @@ pci_probe()
     EXTEND(SP, entries.nb);
     for (i = 0; i < entries.nb; i++) {
       struct pciusb_entry *e = &entries.entries[i];
-      snprintf(buf, sizeof(buf), "%04x\t%04x\t%04x\t%04x\t%d\t%d\t%d\t%d\t%d\t%s\t%s\t%s\t%s", 
-               e->vendor, e->device, e->subvendor, e->subdevice, e->pci_domain, e->pci_bus, e->pci_device, e->pci_function, e->pci_revision,
+      snprintf(buf, sizeof(buf), "%04x\t%04x\t%04x\t%04x\t%d\t%d\t%d\t%d\t%d\t%d\t%s\t%s\t%s\t%s", 
+               e->vendor, e->device, e->subvendor, e->subdevice, e->pci_domain, e->pci_bus, e->pci_device, e->pci_function, e->pci_revision, e->is_pciexpress,
                pci_class2text(e->class_id), e->class, e->module ? e->module : "unknown", e->text);
       PUSHs(sv_2mortal(newSVpv(buf, 0)));
     }
