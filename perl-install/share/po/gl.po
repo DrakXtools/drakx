@@ -1,21 +1,23 @@
 # translation of libDrakX to Galician
 #
-# Jesús Bravo Álvarez (mdk) <jba@pobox.com>, 2001.
-# Leandro Regueiro <leandro.regueiro@gmail.com>, 2004, 2005, 2006, 2008.
 #
 # Proxecto Trasno http://trasno.net
 #
+# Jesús Bravo Álvarez (mdk) <jba@pobox.com>, 2001.
+# Leandro Regueiro <leandro.regueiro@gmail.com>, 2004, 2005, 2006, 2008.
+# Alejo Pacín Jul <alejopj@gmail.com>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-gl\n"
 "POT-Creation-Date: 2009-09-10 12:20+0200\n"
-"PO-Revision-Date: 2008-04-13 20:37+0100\n"
-"Last-Translator: Leandro Regueiro <leandro DOT regueiro AT gmail DOT com>\n"
-"Language-Team: Galician <proxecto@trasno.net>\n"
+"PO-Revision-Date: 2009-09-25 18:43+0200\n"
+"Last-Translator: Alejo Pacín Jul <alejopj@gmail.com>\n"
+"Language-Team: Galician <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 0.3\n"
 
 #: any.pm:252 any.pm:884 diskdrake/interactive.pm:594
 #: diskdrake/interactive.pm:794 diskdrake/interactive.pm:838
@@ -87,10 +89,9 @@ msgstr ""
 "\n"
 "¿Dende qué unidade está arrincando?"
 
-#: any.pm:346
-#, fuzzy, c-format
+#: any.pm:346, c-format
 msgid "First sector (MBR) of drive %s"
-msgstr "Primeiro sector do disco (MBR)"
+msgstr "Primeiro sector (MBR) do disco %s"
 
 #: any.pm:348
 #, c-format
@@ -112,10 +113,9 @@ msgstr "Nun Disquete"
 msgid "Skip"
 msgstr "Omitir"
 
-#: any.pm:358
-#, fuzzy, c-format
+#: any.pm:358, c-format
 msgid "Bootloader Installation"
-msgstr "Instalando o cargador de arrinque"
+msgstr "Instalación do cargador de arrinque"
 
 #: any.pm:362
 #, c-format
@@ -160,22 +160,21 @@ msgstr "Retardo antes de arrinca-la imaxe por omisión"
 #: any.pm:410
 #, c-format
 msgid "Enable ACPI"
-msgstr "Activar ACPI"
+msgstr "Habilitar ACPI"
 
-#: any.pm:411
-#, fuzzy, c-format
+#: any.pm:411, c-format
 msgid "Enable SMP"
-msgstr "Activar ACPI"
+msgstr "Habilitar SMP"
 
 #: any.pm:412
 #, c-format
 msgid "Enable APIC"
-msgstr "Activar APIC"
+msgstr "Habilitar APIC"
 
 #: any.pm:413
 #, c-format
 msgid "Enable Local APIC"
-msgstr "Activar APIC Local"
+msgstr "Habilitar APIC Local"
 
 #: any.pm:415 any.pm:829 any.pm:845 authentication.pm:250
 #: diskdrake/smbnfs_gtk.pm:181
@@ -249,12 +248,12 @@ msgstr "Permiti-lo arrinque dende un CD?"
 #: any.pm:439
 #, c-format
 msgid "Enable OF Boot?"
-msgstr "Activar o Arrinque OF?"
+msgstr "Habilitar o Arrinque OF?"
 
 #: any.pm:440
 #, c-format
 msgid "Default OS?"
-msgstr "¿S.O. por omisión?"
+msgstr "¿S.O. por defecto?"
 
 #: any.pm:513
 #, c-format
@@ -299,7 +298,7 @@ msgstr "Etiqueta"
 #: any.pm:534 any.pm:542 harddrake/v4l.pm:438
 #, c-format
 msgid "Default"
-msgstr "Por omisión"
+msgstr "Por defecto"
 
 #: any.pm:541
 #, c-format
@@ -351,10 +350,9 @@ msgstr "Outros S.O. (MacOS...)"
 msgid "Other OS (Windows...)"
 msgstr "Outros S.O. (Windows...)"
 
-#: any.pm:621
-#, fuzzy, c-format
+#: any.pm:621, c-format
 msgid "Bootloader Configuration"
-msgstr "Configuración do Estilo de Arrinque"
+msgstr "Configuración do Cargador de Arrinque"
 
 #: any.pm:622
 #, c-format
@@ -481,7 +479,7 @@ msgstr "Shell"
 #: any.pm:884
 #, c-format
 msgid "Please wait, adding media..."
-msgstr "agarde, engadindo soportes..."
+msgstr "Agarde, engadindo soportes..."
 
 #: any.pm:914 security/l10n.pm:14
 #, c-format
@@ -523,17 +521,16 @@ msgstr "Pechar"
 #: any.pm:1008
 #, c-format
 msgid "License agreement"
-msgstr "Acordo da licencia"
+msgstr "Acordo da licenza"
 
 #: any.pm:1010 diskdrake/dav.pm:26
 #, c-format
 msgid "Quit"
 msgstr "Saír"
 
-#: any.pm:1017
-#, fuzzy, c-format
+#: any.pm:1017, c-format
 msgid "Do you accept this license ?"
-msgstr "¿Ten algunha outra?"
+msgstr "Acepta esta licenza?"
 
 #: any.pm:1018
 #, c-format
@@ -548,7 +545,7 @@ msgstr "Rexeitar"
 #: any.pm:1044 any.pm:1110
 #, c-format
 msgid "Please choose a language to use"
-msgstr "Por favor, escolla a lingua que desexe usar"
+msgstr "Por favor, escolla a lingua que desexe empregar"
 
 #: any.pm:1073
 #, c-format
@@ -684,19 +681,19 @@ msgstr ""
 "O compartimento por usuario usa o grupo \"fileshare\". \n"
 "Pode usar userdrake para engadir un usuario a este grupo."
 
-#: any.pm:1421
-#, fuzzy, c-format
+#: any.pm:1421, c-format
 msgid ""
 "You need to logout and back in again for changes to take effect. Press OK to "
 "logout now."
 msgstr ""
-"Cómpre que saia do sistema e volva entrar para que os cambios teñan efecto"
+"Cómpre que saia do sistema e volva entrar para que os cambios surtan efecto. "
+"Prema OK para saír agora."
 
 #: any.pm:1425
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr ""
-"Cómpre que saia do sistema e volva entrar para que os cambios teñan efecto"
+"Cómpre que saia do sistema e volva entrar para que os cambios surtan efecto"
 
 #: any.pm:1460
 #, c-format
@@ -766,7 +763,7 @@ msgstr "Dominio Windows"
 #: authentication.pm:29
 #, c-format
 msgid "Kerberos 5"
-msgstr ""
+msgstr "Kerberos 5"
 
 #: authentication.pm:63
 #, c-format
@@ -824,7 +821,7 @@ msgstr ""
 #: authentication.pm:67
 #, c-format
 msgid "Kerberos 5 :"
-msgstr ""
+msgstr "Kerberos 5 :"
 
 #: authentication.pm:67
 #, c-format
@@ -837,13 +834,12 @@ msgstr ""
 #: authentication.pm:896
 #, c-format
 msgid " "
-msgstr ""
+msgstr " "
 
 #: authentication.pm:108 authentication.pm:142 authentication.pm:188
-#: authentication.pm:212
-#, fuzzy, c-format
+#: authentication.pm:212, c-format
 msgid "Welcome to the Authentication Wizard"
-msgstr "Autenticación no Dominio Requirida"
+msgstr "Benvido ó Asistente de Autenticación"
 
 #: authentication.pm:110
 #, c-format
@@ -870,53 +866,49 @@ msgstr ""
 #: authentication.pm:116 authentication.pm:171
 #, c-format
 msgid "Use encrypt connection with TLS "
-msgstr ""
+msgstr "Empregar unha conexión encriptada con TLS"
 
 #: authentication.pm:117 authentication.pm:172
 #, c-format
 msgid "Download CA Certificate "
-msgstr ""
+msgstr "Descargar o Certificado CA"
 
 #: authentication.pm:119 authentication.pm:152
 #, c-format
 msgid "Use Disconnect mode "
-msgstr ""
+msgstr "Empregar modo Sen Conexión"
 
-#: authentication.pm:120 authentication.pm:173
-#, fuzzy, c-format
+#: authentication.pm:120 authentication.pm:173, c-format
 msgid "Use anonymous BIND "
-msgstr "Usar BIND anónimo"
+msgstr "Empregar BIND anónimo"
 
 #: authentication.pm:121 authentication.pm:124 authentication.pm:126
 #: authentication.pm:130
 #, c-format
 msgid "  "
-msgstr ""
+msgstr "  "
 
 #: authentication.pm:122 authentication.pm:174
 #, c-format
 msgid "Bind DN "
 msgstr ""
 
-#: authentication.pm:123 authentication.pm:175
-#, fuzzy, c-format
+#: authentication.pm:123 authentication.pm:175, c-format
 msgid "Bind Password "
-msgstr "Contrasinal"
+msgstr ""
 
 #: authentication.pm:125
 #, c-format
 msgid "Advanced path for group "
 msgstr ""
 
-#: authentication.pm:127
-#, fuzzy, c-format
+#: authentication.pm:127, c-format
 msgid "Password base"
-msgstr "Contrasinal"
+msgstr ""
 
-#: authentication.pm:128
-#, fuzzy, c-format
+#: authentication.pm:128, c-format
 msgid "Group base"
-msgstr "ID do Grupo"
+msgstr ""
 
 #: authentication.pm:129
 #, c-format
@@ -930,15 +922,13 @@ msgid ""
 "options below "
 msgstr ""
 
-#: authentication.pm:146
-#, fuzzy, c-format
+#: authentication.pm:146, c-format
 msgid "Realm "
-msgstr "Nome real"
+msgstr ""
 
-#: authentication.pm:148
-#, fuzzy, c-format
+#: authentication.pm:148, c-format
 msgid "KDCs Servers"
-msgstr "Servidor LDAP"
+msgstr "Servidores KDCs"
 
 #: authentication.pm:150
 #, c-format
@@ -950,15 +940,13 @@ msgstr ""
 msgid "Use DNS to locate realms"
 msgstr ""
 
-#: authentication.pm:156
-#, fuzzy, c-format
+#: authentication.pm:156, c-format
 msgid "Use local file for users information"
-msgstr "Usar libsafe para os servidores"
+msgstr "Empregar un ficheiro local para a información dos usuarios"
 
-#: authentication.pm:157
-#, fuzzy, c-format
+#: authentication.pm:157, c-format
 msgid "Use Ldap for users information"
-msgstr "Información da unidade de disco duro"
+msgstr "Empregar Ldap para a información dos usuarios"
 
 #: authentication.pm:163
 #, c-format
@@ -996,25 +984,22 @@ msgid ""
 "configuration options below "
 msgstr ""
 
-#: authentication.pm:218
-#, fuzzy, c-format
+#: authentication.pm:218, c-format
 msgid "Domain Model "
-msgstr "Dominio"
+msgstr "Modelo de Dominio"
 
 #: authentication.pm:220
 #, c-format
 msgid "Active Directory Realm "
 msgstr ""
 
-#: authentication.pm:221
-#, fuzzy, c-format
+#: authentication.pm:221, c-format
 msgid "DNS Domain"
-msgstr "Dominio NIS"
+msgstr "Dominio de DNS"
 
-#: authentication.pm:222
-#, fuzzy, c-format
+#: authentication.pm:222, c-format
 msgid "DC Server"
-msgstr "Servidor LDAP"
+msgstr "Servidor DC"
 
 #: authentication.pm:236 authentication.pm:252
 #, c-format
@@ -1048,10 +1033,9 @@ msgstr ""
 msgid "Select file"
 msgstr "Seleccione un ficheiro"
 
-#: authentication.pm:897
-#, fuzzy, c-format
+#: authentication.pm:897, c-format
 msgid "Domain Windows for authentication : "
-msgstr "Autenticación no Dominio Requirida"
+msgstr ""
 
 #: authentication.pm:899
 #, c-format
@@ -1184,7 +1168,7 @@ msgstr "%d segundos"
 #: common.pm:383
 #, c-format
 msgid "command %s missing"
-msgstr "falta o comando %s"
+msgstr "Non se atopa o comando %s"
 
 #: diskdrake/dav.pm:17
 #, c-format
@@ -1282,10 +1266,9 @@ msgstr "A URL debe comezar con http:// ou https://"
 msgid "Warning"
 msgstr "Advertencia"
 
-#: diskdrake/dav.pm:106
-#, fuzzy, c-format
+#: diskdrake/dav.pm:106, c-format
 msgid "Are you sure you want to delete this mountpoint?"
-msgstr "Desexa premer neste botón?"
+msgstr "Está seguro de querer eliminar este punto de montaxe?"
 
 #: diskdrake/dav.pm:124
 #, c-format
@@ -1310,18 +1293,20 @@ msgstr "Opcións: %s"
 #: fs/partitioning_wizard.pm:269 fs/partitioning_wizard.pm:274
 #, c-format
 msgid "Partitioning"
-msgstr "Facendo as particións"
+msgstr "Creando as particións"
 
 #: diskdrake/hd_gtk.pm:68
 #, c-format
 msgid "Click on a partition, choose a filesystem type then choose an action"
 msgstr ""
+"Seleccione unha partición, escolla o tipo de sistema de ficheiros e logo "
+"escolla unha acción"
 
 #: diskdrake/hd_gtk.pm:105 diskdrake/interactive.pm:1093
 #: diskdrake/interactive.pm:1103 diskdrake/interactive.pm:1156
 #, c-format
 msgid "Read carefully"
-msgstr "¡Lea con moita atención"
+msgstr "Lea con coidado"
 
 #: diskdrake/hd_gtk.pm:105
 #, c-format
@@ -1388,7 +1373,7 @@ msgstr "XFS"
 #: diskdrake/hd_gtk.pm:378
 #, c-format
 msgid "Swap"
-msgstr "Intercambio"
+msgstr "Swap"
 
 #: diskdrake/hd_gtk.pm:378
 #, c-format
@@ -1488,7 +1473,7 @@ msgstr "¿Desexa garda-las modificacións de /etc/fstab?"
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
-"Necesita reinicia-lo equipo para que a modificación da táboa\n"
+"Precisa reinicia-lo equipo para que a modificación da táboa\n"
 "de particións se tome en conta"
 
 #: diskdrake/interactive.pm:303
@@ -1560,7 +1545,7 @@ msgstr "Información detallada"
 #: diskdrake/interactive.pm:400
 #, c-format
 msgid "View"
-msgstr ""
+msgstr "Ver"
 
 #: diskdrake/interactive.pm:405 diskdrake/interactive.pm:760
 #, c-format
@@ -1582,10 +1567,9 @@ msgstr "Engadir ó RAID"
 msgid "Add to LVM"
 msgstr "Engadir ó LVM"
 
-#: diskdrake/interactive.pm:410
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:410, c-format
 msgid "Use"
-msgstr "ID de Usuario"
+msgstr "Usar"
 
 #: diskdrake/interactive.pm:412
 #, c-format
@@ -1602,10 +1586,9 @@ msgstr "Quitar do RAID"
 msgid "Remove from LVM"
 msgstr "Quitar do LVM"
 
-#: diskdrake/interactive.pm:415
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:415, c-format
 msgid "Remove from dm"
-msgstr "Quitar do LVM"
+msgstr "Quitar do dm"
 
 #: diskdrake/interactive.pm:416
 #, c-format
@@ -1622,10 +1605,9 @@ msgstr "Usar para loopback"
 msgid "Create"
 msgstr "Crear"
 
-#: diskdrake/interactive.pm:450
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:450, c-format
 msgid "Failed to mount partition"
-msgstr "Despraza-los ficheiros á nova partición"
+msgstr "Ocorreu un erro ó montar a partición"
 
 #: diskdrake/interactive.pm:482 diskdrake/interactive.pm:484
 #, c-format
@@ -1695,10 +1677,9 @@ msgstr "¿Qué sistema de ficheiros desexa?"
 msgid "Switching from %s to %s"
 msgstr "Cambiando de %s a %s"
 
-#: diskdrake/interactive.pm:624
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:624, c-format
 msgid "Set volume label"
-msgstr "Que etiqueta de volume?"
+msgstr "Definir etiqueta do volume"
 
 #: diskdrake/interactive.pm:626
 #, c-format
@@ -1806,22 +1787,21 @@ msgstr ""
 #: diskdrake/interactive.pm:853 diskdrake/interactive.pm:1397
 #, c-format
 msgid "Filesystem encryption key"
-msgstr "Clave de cifrado do sistema de ficheiros"
+msgstr "Chave de cifrado do sistema de ficheiros"
 
-#: diskdrake/interactive.pm:854
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:854, c-format
 msgid "Enter your filesystem encryption key"
-msgstr "Escolla a clave de cifrado do seu sistema de ficheiros"
+msgstr "Introduza a chave de cifrado do seu sistema de ficheiros"
 
 #: diskdrake/interactive.pm:855 diskdrake/interactive.pm:1405
 #, c-format
 msgid "Encryption key"
-msgstr "Clave de cifrado"
+msgstr "Chave de cifrado"
 
 #: diskdrake/interactive.pm:862
 #, c-format
 msgid "Invalid key"
-msgstr ""
+msgstr "Chave inválida"
 
 #: diskdrake/interactive.pm:870
 #, c-format
@@ -1870,7 +1850,7 @@ msgstr "Loopback"
 #: diskdrake/interactive.pm:956
 #, c-format
 msgid "Loopback file name: "
-msgstr "Nome do ficheiro loopback: "
+msgstr "Nome do ficheiro de loopback: "
 
 #: diskdrake/interactive.pm:961
 #, c-format
@@ -1917,10 +1897,9 @@ msgstr "tamaño do fragmento en KiB"
 msgid "Be careful: this operation is dangerous."
 msgstr "Teña coidado: esta operación é perigosa."
 
-#: diskdrake/interactive.pm:1109
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:1109, c-format
 msgid "Partitioning Type"
-msgstr "Facendo as particións"
+msgstr "Tipo de Particionamento"
 
 #: diskdrake/interactive.pm:1109
 #, c-format
@@ -1946,7 +1925,7 @@ msgstr "Formatando a partición %s"
 #: diskdrake/interactive.pm:1191
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
-msgstr "Ó formata-la partición %s, perderanse tódolos datos da partición"
+msgstr "Ó formata-la partición %s, perderanse tódolos datos da mesma"
 
 #: diskdrake/interactive.pm:1200 fs/partitioning.pm:48
 #, c-format
@@ -2023,7 +2002,7 @@ msgstr "UUID: "
 #: diskdrake/interactive.pm:1281
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
-msgstr "Letra de unidade DOS: %s (aproximación)\n"
+msgstr "Letra de unidade DOS: %s (só é unha aproximación)\n"
 
 #: diskdrake/interactive.pm:1285 diskdrake/interactive.pm:1294
 #: diskdrake/interactive.pm:1365
@@ -2059,7 +2038,7 @@ msgstr "Cilindros %d a %d\n"
 #: diskdrake/interactive.pm:1302
 #, c-format
 msgid "Number of logical extents: %d\n"
-msgstr "Número de extensións físicas: %d\n"
+msgstr "Número de extensións lóxicas: %d\n"
 
 #: diskdrake/interactive.pm:1303
 #, c-format
@@ -2081,10 +2060,9 @@ msgstr "Montado\n"
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1308
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:1308, c-format
 msgid "Encrypted"
-msgstr "Clave de cifrado"
+msgstr "Cifrado"
 
 #: diskdrake/interactive.pm:1308
 #, c-format
@@ -2099,7 +2077,7 @@ msgstr ""
 #: diskdrake/interactive.pm:1310
 #, c-format
 msgid " (inactive)"
-msgstr ""
+msgstr "(inactivo)"
 
 #: diskdrake/interactive.pm:1316
 #, c-format
@@ -2137,7 +2115,7 @@ msgstr "Discos RAID %s\n"
 #: diskdrake/interactive.pm:1323
 #, c-format
 msgid "Loopback file name: %s"
-msgstr "Nome do ficheiro loopback: %s"
+msgstr "Nome do ficheiro de loopback: %s"
 
 #: diskdrake/interactive.pm:1326
 #, c-format
@@ -2204,23 +2182,23 @@ msgstr "na canle %d id %d\n"
 #: diskdrake/interactive.pm:1398
 #, c-format
 msgid "Choose your filesystem encryption key"
-msgstr "Escolla a clave de cifrado do seu sistema de ficheiros"
+msgstr "Escolla a chave de cifrado do seu sistema de ficheiros"
 
 #: diskdrake/interactive.pm:1401
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr ""
-"Esta clave de cifrado é moi sinxela (ten que ter polo menos %d caracteres)"
+"Esta chave de cifrado é moi sinxela (ten que ter polo menos %d caracteres)"
 
 #: diskdrake/interactive.pm:1402
 #, c-format
 msgid "The encryption keys do not match"
-msgstr "As claves de cifrado non coinciden"
+msgstr "As chaves de cifrado non coinciden"
 
 #: diskdrake/interactive.pm:1406
 #, c-format
 msgid "Encryption key (again)"
-msgstr "Clave de cifrado (outra vez)"
+msgstr "Chave de cifrado (outra vez)"
 
 #: diskdrake/interactive.pm:1408
 #, c-format
@@ -2244,8 +2222,7 @@ msgstr "Cancelar"
 #, c-format
 msgid "Can not login using username %s (bad password?)"
 msgstr ""
-"Non se puido entrar usando o nome de usuario %s (¿era o contrasinal "
-"correcto?)"
+"Non se puido entrar usando o nome de usuario %s (contrasinal incorrecto?)"
 
 #: diskdrake/smbnfs_gtk.pm:168 diskdrake/smbnfs_gtk.pm:177
 #, c-format
@@ -2293,7 +2270,7 @@ msgstr "Buscar novos servidores"
 #: do_pkgs.pm:19 do_pkgs.pm:57
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
-msgstr "Necesitase instala-lo paquete %s. ¿Desexa instalalo?"
+msgstr "Precísase instala-lo paquete %s. ¿Desexa instalalo?"
 
 #: do_pkgs.pm:23 do_pkgs.pm:44 do_pkgs.pm:60 do_pkgs.pm:82
 #, c-format
@@ -2303,7 +2280,7 @@ msgstr "¡Non se puido instala-lo paquete %s!"
 #: do_pkgs.pm:28 do_pkgs.pm:65
 #, c-format
 msgid "Mandatory package %s is missing"
-msgstr "Falta o paquete obrigatorio %s"
+msgstr "Non se atopa o paquete obrigatorio %s"
 
 #: do_pkgs.pm:39 do_pkgs.pm:77
 #, c-format
@@ -2313,12 +2290,12 @@ msgstr "Cómpre instala-los seguintes paquetes:\n"
 #: do_pkgs.pm:241
 #, c-format
 msgid "Installing packages..."
-msgstr "Instalando paquetes..."
+msgstr "Instalando os paquetes..."
 
 #: do_pkgs.pm:287 pkgs.pm:281
 #, c-format
 msgid "Removing packages..."
-msgstr "Eliminando paquetes..."
+msgstr "Eliminando os paquetes..."
 
 #: fs/any.pm:17
 #, c-format
@@ -2340,15 +2317,13 @@ msgstr "Debe ter unha partición FAT montada en /boot/efi"
 msgid "Creating and formatting file %s"
 msgstr "Creando e formatando o ficheiro %s"
 
-#: fs/format.pm:119
-#, fuzzy, c-format
+#: fs/format.pm:119, c-format
 msgid "I do not know how to set label on %s with type %s"
-msgstr "Descoñécese o xeito de formatar %s de tipo %s"
+msgstr "Descoñécese cómo definir a etiqueta de %s de tipo %s"
 
-#: fs/format.pm:126
-#, fuzzy, c-format
+#: fs/format.pm:126, c-format
 msgid "setting label on %s failed, is it formatted?"
-msgstr "O formato %s de %s fallou"
+msgstr "Ocorreu un erro ó intentar darlle unha etiqueta a %s, está formatada?"
 
 #: fs/format.pm:167
 #, c-format
@@ -2363,7 +2338,7 @@ msgstr "O formato %s de %s fallou"
 #: fs/loopback.pm:24
 #, c-format
 msgid "Circular mounts %s\n"
-msgstr "Puntos de montaxe circulares %s\n"
+msgstr "Montaxes circulares %s\n"
 
 #: fs/mount.pm:85
 #, c-format
@@ -2373,7 +2348,7 @@ msgstr "Montando a partición %s"
 #: fs/mount.pm:86
 #, c-format
 msgid "mounting partition %s in directory %s failed"
-msgstr "fallo ó monta-la partición %s no directorio %s"
+msgstr "Ocorreu un erro ó monta-la partición %s no directorio %s"
 
 #: fs/mount.pm:91 fs/mount.pm:108
 #, c-format
@@ -2400,10 +2375,9 @@ msgstr "Usar un sistema de ficheiros cifrado"
 msgid "Flush write cache on file close"
 msgstr "Escribir a caché de escritura ó pechar o ficheiro"
 
-#: fs/mount_options.pm:118
-#, fuzzy, c-format
+#: fs/mount_options.pm:118, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
-msgstr "Activar a cota de disco"
+msgstr ""
 
 #: fs/mount_options.pm:120
 #, c-format
@@ -2482,15 +2456,13 @@ msgstr "Permite a tódolos usuarios montar e desmontar o sistema de ficheiros."
 msgid "Allow an ordinary user to mount the file system."
 msgstr "Permitir que os usuarios normais monten o sistema de ficheiros."
 
-#: fs/mount_options.pm:147
-#, fuzzy, c-format
+#: fs/mount_options.pm:147, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
-msgstr "Activar a cota de disco por usuario"
+msgstr ""
 
-#: fs/mount_options.pm:149
-#, fuzzy, c-format
+#: fs/mount_options.pm:149, c-format
 msgid "Support \"user.\" extended attributes"
-msgstr "Soportar os atributos extendidos de usuario"
+msgstr "Soportar atributos extendidos de \"user.\""
 
 #: fs/mount_options.pm:151
 #, c-format
@@ -2616,10 +2588,9 @@ msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
 "Non hai particións FAT para usar coma loopback (ou non hai espacio nelas)"
 
-#: fs/partitioning_wizard.pm:127
-#, fuzzy, c-format
+#: fs/partitioning_wizard.pm:127, c-format
 msgid "Use the free space on a Microsoft Windows® partition"
-msgstr "Usa-lo espacio libre da partición de Microsoft Windows®"
+msgstr "Emprega-lo espacio libre dunha partición de Microsoft Windows®"
 
 #: fs/partitioning_wizard.pm:129
 #, c-format
@@ -2970,10 +2941,9 @@ msgstr "Portos USB"
 msgid "SMBus controllers"
 msgstr "Controladores SMBus"
 
-#: harddrake/data.pm:155
-#, fuzzy, c-format
+#: harddrake/data.pm:155, c-format
 msgid "Bridges and system controllers"
-msgstr "          e controladores do sistema"
+msgstr "Bridges e controladores do sistema"
 
 #: harddrake/data.pm:167
 #, c-format
@@ -3126,10 +3096,9 @@ msgstr "Joystick"
 msgid "Keyboard"
 msgstr "Teclado"
 
-#: harddrake/data.pm:488
-#, fuzzy, c-format
+#: harddrake/data.pm:488, c-format
 msgid "Tablet and touchscreen"
-msgstr "Tableta e "
+msgstr "Tableta e pantalla táctil"
 
 #: harddrake/data.pm:497
 #, c-format
@@ -3169,22 +3138,22 @@ msgstr "Por Favor, Agarde... Aplicando a configuración"
 #: harddrake/sound.pm:366
 #, c-format
 msgid "Enable PulseAudio"
-msgstr "Activar PulseAudio"
+msgstr "Habilitar PulseAudio"
 
 #: harddrake/sound.pm:370
 #, c-format
 msgid "Enable 5.1 sound with Pulse Audio"
-msgstr "Activar son 5.1 con Pulse Audio"
+msgstr "Habilitar son 5.1 con Pulse Audio"
 
 #: harddrake/sound.pm:375
 #, c-format
 msgid "Enable user switching for audio applications"
-msgstr "Activar o cambio de usuario para as aplicacións de audio"
+msgstr "Habilitar o cambio de usuario para as aplicacións de audio"
 
 #: harddrake/sound.pm:379
 #, c-format
 msgid "Use Glitch-Free mode"
-msgstr ""
+msgstr "Empregar o modo Glitch-Free"
 
 #: harddrake/sound.pm:385
 #, c-format
@@ -3199,7 +3168,7 @@ msgstr "Solución de problemas"
 #: harddrake/sound.pm:397
 #, c-format
 msgid "No alternative driver"
-msgstr "Non hai driver alternativo"
+msgstr "Non hai controlador alternativo"
 
 #: harddrake/sound.pm:398
 #, c-format
@@ -3224,7 +3193,7 @@ msgstr ""
 "Aquí pode seleccionar un driver alternativo (tanto OSS coma ALSA) para a súa "
 "tarxeta de son (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
@@ -3277,7 +3246,7 @@ msgstr ""
 #: harddrake/sound.pm:428 harddrake/sound.pm:511
 #, c-format
 msgid "Driver:"
-msgstr "Driver:"
+msgstr "Controlador:"
 
 #: harddrake/sound.pm:442
 #, c-format
@@ -3297,7 +3266,7 @@ msgstr ""
 #: harddrake/sound.pm:450
 #, c-format
 msgid "No open source driver"
-msgstr "Non hai un driver de código aberto"
+msgstr "Non hai un controlador de código aberto"
 
 #: harddrake/sound.pm:451
 #, c-format
@@ -3311,7 +3280,7 @@ msgstr ""
 #: harddrake/sound.pm:454
 #, c-format
 msgid "No known driver"
-msgstr "Driver descoñecido"
+msgstr "Controlador descoñecido"
 
 #: harddrake/sound.pm:455
 #, c-format
@@ -3515,7 +3484,7 @@ msgstr "Elección incorrecta, inténteo de novo\n"
 #: interactive/stdio.pm:30 interactive/stdio.pm:155
 #, c-format
 msgid "Your choice? (default %s) "
-msgstr "¿A súa elección? (por omisión %s)"
+msgstr "¿A súa elección? (por defecto %s)"
 
 #: interactive/stdio.pm:54
 #, c-format
@@ -3529,7 +3498,7 @@ msgstr ""
 #: interactive/stdio.pm:70
 #, c-format
 msgid "Your choice? (0/1, default `%s') "
-msgstr "¿A súa elección? (0/1, por omisión `%s') "
+msgstr "¿A súa elección? (0/1, por defecto `%s') "
 
 #: interactive/stdio.pm:97
 #, c-format
@@ -3544,7 +3513,7 @@ msgstr "Desexa premer neste botón?"
 #: interactive/stdio.pm:110
 #, c-format
 msgid "Your choice? (default `%s'%s) "
-msgstr "¿A súa elección? (por omisión `%s'%s) "
+msgstr "¿A súa elección? (por defecto `%s'%s) "
 
 #: interactive/stdio.pm:110
 #, c-format
@@ -3554,7 +3523,7 @@ msgstr " introduza `void' para a entrada void"
 #: interactive/stdio.pm:128
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
-msgstr ""
+msgstr "=> Hay moitas cousas que seleccionar de (%s).\n"
 
 #: interactive/stdio.pm:131
 #, c-format
@@ -4779,7 +4748,7 @@ msgstr "Cimbabue"
 #: lang.pm:1223
 #, c-format
 msgid "Welcome to %s"
-msgstr "Benvid@ a %s"
+msgstr "Benvido a %s"
 
 #: lvm.pm:84
 #, c-format
@@ -5215,17 +5184,17 @@ msgstr ""
 #: modules/interactive.pm:19
 #, c-format
 msgid "This driver has no configuration parameter!"
-msgstr "Este driver non ten parámetros de configuración!"
+msgstr "Este controlador non ten parámetros de configuración!"
 
 #: modules/interactive.pm:22
 #, c-format
 msgid "Module configuration"
-msgstr "Configuración dos módulos"
+msgstr "Configuración do módulo"
 
 #: modules/interactive.pm:22
 #, c-format
 msgid "You can configure each parameter of the module here."
-msgstr "Aqui pode configurar cada parárametro dos módulos."
+msgstr "Aquí pode configurar cada parárametro do módulo."
 
 #: modules/interactive.pm:64
 #, c-format
@@ -5245,7 +5214,7 @@ msgstr "¿Ten algunha interface %s?"
 #: modules/interactive.pm:72
 #, c-format
 msgid "See hardware info"
-msgstr "Mire a información sobre o hardware"
+msgstr "Consulte a información sobre o hardware"
 
 #: modules/interactive.pm:83
 #, c-format
@@ -5277,7 +5246,7 @@ msgstr "Instalando o controlador para a tarxeta %s %s"
 #: modules/interactive.pm:100
 #, c-format
 msgid "Configuring Hardware"
-msgstr ""
+msgstr "Configurando o Hardware"
 
 #: modules/interactive.pm:111
 #, c-format
@@ -5351,17 +5320,16 @@ msgstr ""
 #: mygtk2.pm:1538 mygtk2.pm:1539
 #, c-format
 msgid "Password is trivial to guess"
-msgstr ""
+msgstr "O contrasinal é sinxela de adiviñar"
 
 #: mygtk2.pm:1540
 #, c-format
 msgid "Password should resist to basic attacks"
-msgstr ""
+msgstr "O contrasinal debe ser resistente a ataques básicos"
 
-#: mygtk2.pm:1541 mygtk2.pm:1542
-#, fuzzy, c-format
+#: mygtk2.pm:1541 mygtk2.pm:1542, c-format
 msgid "Password seems secure"
-msgstr "Contrasinal para o usuario"
+msgstr "O contrasinal semella seguro"
 
 #: partition_table.pm:411
 #, c-format
@@ -5371,7 +5339,7 @@ msgstr "mount fallou: "
 #: partition_table.pm:523
 #, c-format
 msgid "Extended partition not supported on this platform"
-msgstr "As particións estendidas non están soportadas nesta plataforma"
+msgstr "As particións extendidas non están soportadas nesta plataforma"
 
 #: partition_table.pm:541
 #, c-format
@@ -5418,16 +5386,17 @@ msgid ""
 "We have detected that some packages are not needed for your system "
 "configuration."
 msgstr ""
+"Detectouse que algúns paquetes non son precisos para a configuración "
+"seu sistema."
 
 #: pkgs.pm:266
 #, c-format
 msgid "We will remove the following packages, unless you choose otherwise:"
-msgstr ""
+msgstr "Removeranse os seguintes paquetes, se non escolle outra alternativa:"
 
-#: pkgs.pm:269 pkgs.pm:270
-#, fuzzy, c-format
+#: pkgs.pm:269 pkgs.pm:270, c-format
 msgid "Unused hardware support"
-msgstr "activar o soporte de radio"
+msgstr ""
 
 #: pkgs.pm:273 pkgs.pm:274
 #, c-format
@@ -5483,10 +5452,9 @@ msgid "Your scanner(s) will not be available for non-root users."
 msgstr ""
 "Os seus escáners non estarán dispoñibles para os usuarios que non sexan root"
 
-#: security/help.pm:11
-#, fuzzy, c-format
+#: security/help.pm:11, c-format
 msgid "Accept bogus IPv4 error messages."
-msgstr "Aceptar mensaxes de erro IPv4             ."
+msgstr ""
 
 #: security/help.pm:13
 #, c-format
@@ -5886,10 +5854,9 @@ msgstr "A unidade de tempo de espera é o segundo"
 msgid "Set the user's file mode creation mask."
 msgstr "Establecer a máscara do modo de creación de ficheiros de usuario."
 
-#: security/l10n.pm:11
-#, fuzzy, c-format
+#: security/l10n.pm:11, c-format
 msgid "Accept bogus IPv4 error messages"
-msgstr "Aceptar mensaxes de erro IPv4                   <====="
+msgstr ""
 
 #: security/l10n.pm:12
 #, c-format
@@ -5909,7 +5876,7 @@ msgstr "/etc/issue* existe"
 #: security/l10n.pm:16
 #, c-format
 msgid "Reboot by the console user"
-msgstr "Reinicio por usuario de consola"
+msgstr "Rearrincar polo usuario da consola"
 
 #: security/l10n.pm:17
 #, c-format
@@ -6037,7 +6004,7 @@ msgstr ""
 #: security/l10n.pm:41
 #, c-format
 msgid "Root umask"
-msgstr ""
+msgstr "Umask do root"
 
 #: security/l10n.pm:42
 #, c-format
@@ -6052,7 +6019,7 @@ msgstr "Tempo de espera da shell"
 #: security/l10n.pm:44
 #, c-format
 msgid "User umask"
-msgstr ""
+msgstr "Umask do usuario"
 
 #: security/l10n.pm:45
 #, c-format
@@ -6150,17 +6117,16 @@ msgstr "Enviar o resultado da comprobación a unha tty"
 #: security/level.pm:10
 #, c-format
 msgid "Disable msec"
-msgstr ""
+msgstr "Desactivar msec"
 
 #: security/level.pm:11
 #, c-format
 msgid "Standard"
 msgstr "Estándar"
 
-#: security/level.pm:12
-#, fuzzy, c-format
+#: security/level.pm:12, c-format
 msgid "Secure"
-msgstr "Seguridade"
+msgstr "Seguro"
 
 #: security/level.pm:40
 #, c-format
@@ -6215,7 +6181,7 @@ msgstr "Escolla o nivel de seguridade"
 #: security/level.pm:58
 #, c-format
 msgid "%s: %s"
-msgstr ""
+msgstr "%s: %s"
 
 #: security/level.pm:61
 #, c-format
@@ -6225,7 +6191,7 @@ msgstr "Administrador de Seguridade:"
 #: security/level.pm:62
 #, c-format
 msgid "Login or email:"
-msgstr ""
+msgstr "Nome de usuario ou enderezo electrónico:"
 
 #: services.pm:19
 #, c-format
@@ -6475,11 +6441,13 @@ msgid ""
 "Automatically switch on numlock key locker under console\n"
 "and Xorg at boot."
 msgstr ""
+"Activar automaticamente o teclado numérico tanto na consola\n"
+"coma no Xorg ó arrincar."
 
 #: services.pm:71
 #, c-format
 msgid "Support the OKI 4w and compatible winprinters."
-msgstr ""
+msgstr "Soporta as OKI 4w e impresoras compatibles."
 
 #: services.pm:72
 #, c-format
