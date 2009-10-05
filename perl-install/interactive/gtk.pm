@@ -458,7 +458,8 @@ sub create_widget {
 	    @buttons = map {
                 my $button = /^gtk-/ ? gtknew('Button', image => gtknew('Image', stock => $_))
                   : Gtk2::Button->new(translate($_));
-		{ kind => lc $_, action => $actions->{$_}, button => $button };
+		my $kind = $_;
+		{ kind => lc $kind, action => $actions->{$kind}, button => $button };
 	    } @buttons;
 	    my $modify = find { $_->{kind} eq 'modify' } @buttons;
 
