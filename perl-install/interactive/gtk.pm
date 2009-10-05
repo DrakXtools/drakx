@@ -453,7 +453,7 @@ sub create_widget {
 	    my @buttons = (N_("Add"), N_("Modify"), N_("Remove"));
 	    # Add Up/Down buttons if their actions are defined
 	    foreach (qw(Up Down)) {
-	        push @buttons, 'gtk-go-' . lc($_) if $actions->{$_};
+	        push @buttons, 'gtk-go-' . $_ if $actions->{$_};
 	    }
 	    @buttons = map {
                 my $button = /^gtk-/ ? gtknew('Button', image => gtknew('Image', stock => $_))
