@@ -44,6 +44,13 @@ notebook current_kind[]
 
 =cut
 
+sub load_theme {
+    my $rc = "/usr/share/libDrakX/diskdrake.rc";
+    -r $rc or $rc = dirname(__FILE__) . "/../diskdrake.rc";
+    -r $rc or $rc = dirname(__FILE__) . "/../share/diskdrake.rc";
+    Gtk2::Rc->parse($rc);
+}
+
 sub main {
     ($in, $all_hds, $do_force_reload) = @_;
 
@@ -53,10 +60,8 @@ sub main {
 
     $w = ugtk2->new(N("Partitioning"));
     $::main_window = $w->{real_window} if !$::isEmbedded && !$::isInstall;
-    my $rc = "/usr/share/libDrakX/diskdrake.rc";
-    -r $rc or $rc = dirname(__FILE__) . "/../diskdrake.rc";
-    -r $rc or $rc = dirname(__FILE__) . "/../share/diskdrake.rc";
-    Gtk2::Rc->parse($rc);
+
+    load_theme();
 
     # TODO
 #    is_empty_array_ref($all_hds->{raids}) or raid::stopAll;
