@@ -34,8 +34,9 @@ $view->open($ARGV[0]);
 my ($rootwin_width, $rootwin_height) = gtkroot()->get_size;
 my ($default_width, $default_height);
 my $wm = any::running_window_manager();
+my $is_firstime = to_bool($wm =~ /drakx-matchbox-window-manager/);
 
-if ($wm) {
+if (!$is_firstime) {
     # wide enough to embedd help snapshots:
     $default_width  = $rootwin_width  <= 800 ? 720 : 840;
     $default_height = $rootwin_height <= 480 ? 420 : $rootwin_height <= 600 ? 523 : 600;
@@ -49,12 +50,12 @@ my $w = ugtk2->new(N("Help"), width => $default_width, height => $default_height
 
 gtkadd($w->{rwindow},
        gtkpack_(Gtk2::VBox->new,
-                if_($wm, 0, gtknew('Title2', label => N("Help"))),
+                if_(!$is_firstime, 0, gtknew('Title2', label => N("Help"))),
                 0, Gtk2::HSeparator->new,
                 1, create_scrolled_window(gtkset_border_width($view, 5), [ 'never', 'automatic' ]),
                 #1, gtknew('ScrolledWindow', child => $view, border_width => 5, h_policy => 'never');
                 0, Gtk2::HSeparator->new,
-                #if_($wm, # We have JavaScritp issues for now, so let's keep the "close" button:
+                #if_($_firsttime, # We have JavaScritp issues for now, so let's keep the "close" button:
                     0, gtkpack(create_hbox('end'),
                                gtknew('Button', text => N("Close"), clicked => sub { Gtk2->main_quit })
                            ),
