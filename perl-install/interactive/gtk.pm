@@ -459,7 +459,8 @@ sub create_widget {
                 my $button = /^gtk-/ ? gtknew('Button', image => gtknew('Image', stock => $_))
                   : Gtk2::Button->new(translate($_));
 		my $kind = $_;
-		{ kind => lc $kind, action => $actions->{$kind}, button => $button };
+		$kind =~ s/^gtk-go-//;
+		{ kind => lc $kind, action => $actions->{$kind}, button => $button, real_kind => $_ };
 	    } @buttons;
 	    my $modify = find { $_->{kind} eq 'modify' } @buttons;
 
@@ -476,7 +477,7 @@ sub create_widget {
 	    }
 	    add_modify_remove_sensitive(\@buttons, $e);
 
-	    my ($images, $real_buttons) = partition { $_->{kind} =~ /^gtk-/ } @buttons;
+	    my ($images, $real_buttons) = partition { $_->{real_kind} =~ /^gtk-/ } @buttons;
 	    $real_w = gtkpack_(Gtk2::HBox->new(0,0),
 			       1, create_scrolled_window($w), 
 			       0, gtkpack__(Gtk2::VBox->new(0,0),
