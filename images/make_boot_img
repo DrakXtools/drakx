@@ -139,7 +139,7 @@ EOF
 }
 
 sub initrd {
-    my ($type, $I, $img, $o_bootsplash_cfg) = @_;
+    my ($type, $I, $img) = @_;
     my $stage1_root = $ENV{DEBUGSTAGE1} ? "../mdk-stage1" : "/usr/$lib/drakx-installer-binaries";
     my ($ext) = $img =~ /rdz-(.*)/ or die "bad initrd name ($img)";
 
@@ -208,10 +208,6 @@ fi
 	my @funct = map { /functions:/ .. /^$/ ? do { s/\s//g; split /,/ } : () } `busybox`;
 	shift @funct;
 	symlink('busybox', $tmp_initrd . "/sbin/$_") foreach @funct;
-    }
-
-    if ($o_bootsplash_cfg) {
-	_ "splash -s -f $o_bootsplash_cfg > $tmp_initrd/bootsplash";
     }
 
     my $devs = sprintf "ls /dev/{%s}", join(',', qw(console fb0 fd0 loop3 mem null ppp ptmx ptyp0 ram3 random tty[0-7] ttyp0 ttyS0 urandom));
@@ -705,13 +701,11 @@ sub syslinux_all_files {
 
     $default_vga =~ /788/ or die 'we rely on vga=788 for bootsplash';
     my $theme = $ENV{THEME} || 'Mandriva-Free';
-    my $bootsplash_cfg = "/etc/bootsplash/themes/$theme/config/bootsplash-800x600.cfg";
-    -e $bootsplash_cfg or die "can't find $bootsplash_cfg";
 
     each_index {
 	mkdir "$dir/alt$::i", 0777;
 	_ "cp all.kernels/$_/vmlinuz $dir/alt$::i";
-	initrd('all', '', "images/all.rdz-$_", $bootsplash_cfg);
+	initrd('all', '', "images/all.rdz-$_");
 	rename("images/all.rdz-$_", "$dir/alt$::i/all.rdz");
     } @$kernels;
 
