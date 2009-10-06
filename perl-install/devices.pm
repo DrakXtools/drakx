@@ -77,6 +77,10 @@ sub entry {
     if (/^0x([\da-f]{3,4})$/i) {
 	$type = c::S_IFBLK();
 	($major, $minor) = unmakedev(hex $1);
+    } elsif (/^ram(.*)/) {
+	$type = c::S_IFBLK();
+	$major = 1;
+	$minor = $1 eq '' ? 1 : $1;
     } elsif (m|^rd/c(\d+)d(\d+)(p(\d+))?|) {
 	# dac 960 "rd/cXdXXpX"
         $type = c::S_IFBLK();
