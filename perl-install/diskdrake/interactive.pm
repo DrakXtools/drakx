@@ -465,7 +465,7 @@ sub Create {
 	$part->{mntpoint} = '' if !$do_suggest_mount_point;
     } else {
 	$part->{size} = $part->{maxsize};
-	fs::type::suggest_fs_type($part, 'ext3');
+	fs::type::suggest_fs_type($part, defaultFS());
     }
     if (isLVM($hd)) {
 	lvm::suggest_lv_name($hd, $part);
@@ -964,7 +964,7 @@ sub Loopback {
     my $part = { maxsize => $max, size => 0, loopback_device => $real_part, notFormatted => 1 };
     if (!fsedit::suggest_part($part, $all_hds)) {
 	$part->{size} = $part->{maxsize};
-	fs::type::suggest_fs_type($part, 'ext3');
+	fs::type::suggest_fs_type($part, defaultFS());
     }
     delete $part->{mntpoint}; # we do not want the suggested mntpoint
 

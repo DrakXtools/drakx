@@ -124,7 +124,7 @@ sub _get_existing_one {
     }
     fs::type::set_isFormatted($part, to_bool($part->{fs_type}));
     
-    $part->{fs_type} or fs::type::set_fs_type($part, 'ext3');
+    $part->{fs_type} or fs::type::set_fs_type($part, defaultFS());
 
     log::l("dmcrypt: found $part->{device} type $part->{fs_type} with rootDevice $part->{rootDevice}");
 

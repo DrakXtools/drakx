@@ -24,7 +24,7 @@ sub new {
     my ($raids, %opts) = @_;
     my $md_part = { %opts };
     add2hash_($md_part, { 'chunk-size' => '64', disks => [], 
-			  fs_type => 'ext3',
+			  fs_type => defaultFS(),
 			  device => first(free_mds($raids)), 
 			  notFormatted => 1, level => 1 });
     push @$raids, $md_part;
@@ -229,7 +229,7 @@ sub get_existing {
 	if ($type) {
 	    put_in_hash($md_part, $type);
 	} else {
-	    fs::type::set_fs_type($md_part, 'ext3');
+	    fs::type::set_fs_type($md_part, defaultFS());
 	}
 	my $fs_type = $type && $type->{fs_type};
 	fs::type::set_isFormatted($md_part, to_bool($fs_type));

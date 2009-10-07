@@ -10,7 +10,7 @@ use devices;
 our @ISA = qw(Exporter);
 our @EXPORT = qw(
    isEmpty isExtended isTrueLocalFS isTrueFS isDos isSwap isOtherAvailableFS isRawLVM isRawRAID isRAID isLVM isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial isApple isAppleBootstrap isWholedisk isFat_or_NTFS isRecovery
-   maybeFormatted set_isFormatted
+   maybeFormatted set_isFormatted defaultFS
 );
 
 
@@ -308,6 +308,8 @@ sub type_subpart_from_magic {
     }
     $p;
 }
+
+sub defaultFS { 'ext4' }
 
 sub true_local_fs_types() { qw(ext3 ext2 ext4 reiserfs reiser4 xfs jfs) }
 
