@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: uz@cyrillic\n"
-"POT-Creation-Date: 2009-09-10 12:20+0200\n"
+"POT-Creation-Date: 2009-10-07 13:57+0200\n"
 "PO-Revision-Date: 2008-08-24 01:24+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <floss-uz-l10n@googlegroups.com>\n"
@@ -17,10 +17,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: any.pm:252 any.pm:884 diskdrake/interactive.pm:594
+#: any.pm:252 any.pm:910 diskdrake/interactive.pm:594
 #: diskdrake/interactive.pm:794 diskdrake/interactive.pm:838
-#: diskdrake/interactive.pm:924 diskdrake/interactive.pm:1178
-#: diskdrake/interactive.pm:1230 do_pkgs.pm:241 do_pkgs.pm:287
+#: diskdrake/interactive.pm:942 diskdrake/interactive.pm:1196
+#: diskdrake/interactive.pm:1248 do_pkgs.pm:241 do_pkgs.pm:287
 #: harddrake/sound.pm:303 interactive.pm:587 pkgs.pm:281
 #, c-format
 msgid "Please wait"
@@ -160,7 +160,7 @@ msgstr "APIC'ни ёқиш"
 msgid "Enable Local APIC"
 msgstr "Локал APIC'ни ёқиш"
 
-#: any.pm:415 any.pm:829 any.pm:845 authentication.pm:250
+#: any.pm:415 any.pm:855 any.pm:871 authentication.pm:250
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
@@ -171,7 +171,7 @@ msgstr "Махфий сўз"
 msgid "The passwords do not match"
 msgstr "Махфий сўзлар мос келмайди"
 
-#: any.pm:417 authentication.pm:261 diskdrake/interactive.pm:1402
+#: any.pm:417 authentication.pm:261 diskdrake/interactive.pm:1420
 #, c-format
 msgid "Please try again"
 msgstr "Илтимос яна уриниб кўринг"
@@ -181,7 +181,7 @@ msgstr "Илтимос яна уриниб кўринг"
 msgid "You can not use a password with %s"
 msgstr ""
 
-#: any.pm:421 any.pm:831 any.pm:847 authentication.pm:251
+#: any.pm:421 any.pm:857 any.pm:873 authentication.pm:251
 #, c-format
 msgid "Password (again)"
 msgstr "Махфий сўз (яна)"
@@ -347,191 +347,192 @@ msgstr ""
 "Қўшимча бандлар яратишингиз ёки мавжуд бўлган бандларни ўзгартиришингиз "
 "мумкин."
 
-#: any.pm:790
+#: any.pm:816
 #, c-format
 msgid "access to X programs"
 msgstr "Х дастурларидан фойдаланишга рухсат этиш"
 
-#: any.pm:791
+#: any.pm:817
 #, c-format
 msgid "access to rpm tools"
 msgstr "RPM воситаларидан фойдаланишга рухсат этиш"
 
-#: any.pm:792
+#: any.pm:818
 #, c-format
 msgid "allow \"su\""
 msgstr "\"su\" буйруғидан фойдаланишга рухсат этиш"
 
-#: any.pm:793
+#: any.pm:819
 #, c-format
 msgid "access to administrative files"
 msgstr "бошқарув файлларига рухсат"
 
-#: any.pm:794
+#: any.pm:820
 #, c-format
 msgid "access to network tools"
 msgstr "тармоқ воситалардан фойдаланишни рухсат этиш"
 
-#: any.pm:795
+#: any.pm:821
 #, c-format
 msgid "access to compilation tools"
 msgstr ""
 
-#: any.pm:801
+#: any.pm:827
 #, c-format
 msgid "(already added %s)"
 msgstr "(%s аллақачон қўшилган)"
 
-#: any.pm:807
+#: any.pm:833
 #, c-format
 msgid "Please give a user name"
 msgstr "Илтимос фойдаланувчининг исмини киритинг"
 
-#: any.pm:808
-#, c-format
+#: any.pm:834
+#, fuzzy, c-format
 msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
+"The user name must start with a lower case letter followed by only lower "
+"cased letters, numbers, `-' and `_'"
 msgstr ""
 "Фойдаланувчининг исми фақат кичкина ҳарф, сон, \"-\" ва \"_\" белгиларидан "
 "иборат бўлиши шарт"
 
-#: any.pm:809
+#: any.pm:835
 #, c-format
 msgid "The user name is too long"
 msgstr "Фойдаланувчининг исми жуда узун"
 
-#: any.pm:810
+#: any.pm:836
 #, c-format
 msgid "This user name has already been added"
 msgstr "Фойдаланувчининг исми аллақачон қўшилган"
 
-#: any.pm:816 any.pm:849
+#: any.pm:842 any.pm:875
 #, c-format
 msgid "User ID"
 msgstr "Фойдаланувчи ID"
 
-#: any.pm:816 any.pm:850
+#: any.pm:842 any.pm:876
 #, c-format
 msgid "Group ID"
 msgstr "Гуруҳ ID"
 
-#: any.pm:817
+#: any.pm:843
 #, c-format
 msgid "%s must be a number"
 msgstr "%s сон бўлиши керак"
 
-#: any.pm:818
+#: any.pm:844
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
 msgstr ""
 
-#: any.pm:822
+#: any.pm:848
 #, c-format
 msgid "User management"
 msgstr "Фойдаланувчилар"
 
-#: any.pm:828 authentication.pm:237
+#: any.pm:854 authentication.pm:237
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "Администратор (root)"
 
-#: any.pm:833
+#: any.pm:859
 #, c-format
 msgid "Enter a user"
 msgstr "Янги фойдаланувчи"
 
-#: any.pm:835
+#: any.pm:861
 #, c-format
 msgid "Icon"
 msgstr "Нишонча"
 
-#: any.pm:838
+#: any.pm:864
 #, c-format
 msgid "Real name"
 msgstr "Ҳақиқий исми-шарифи"
 
-#: any.pm:843
+#: any.pm:869
 #, c-format
 msgid "Login name"
 msgstr "Фойдаланувчи"
 
-#: any.pm:848
+#: any.pm:874
 #, c-format
 msgid "Shell"
 msgstr "Консол"
 
-#: any.pm:884
+#: any.pm:910
 #, c-format
 msgid "Please wait, adding media..."
 msgstr "Тўплам қўшилмоқда, илтимос кутиб туринг..."
 
-#: any.pm:914 security/l10n.pm:14
+#: any.pm:940 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "Тизимга авто-кириш"
 
-#: any.pm:915
+#: any.pm:941
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr ""
 "Компьютерни битта фойдаланувчи автоматик равишда киришга мослаш мумкин."
 
-#: any.pm:916
+#: any.pm:942
 #, c-format
 msgid "Use this feature"
 msgstr "Бу қулайликдан фойдаланиш"
 
-#: any.pm:917
+#: any.pm:943
 #, c-format
 msgid "Choose the default user:"
 msgstr "Андоза фойдаланувчини танланг:"
 
-#: any.pm:918
+#: any.pm:944
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Ойналар бошқарувчисини танланг:"
 
-#: any.pm:929 any.pm:949 any.pm:1022
+#: any.pm:955 any.pm:975 any.pm:1048
 #, c-format
 msgid "Release Notes"
 msgstr "Янги нарсалар"
 
-#: any.pm:956 any.pm:1314 interactive/gtk.pm:805
+#: any.pm:982 any.pm:1340 interactive/gtk.pm:819
 #, c-format
 msgid "Close"
 msgstr "Ёпиш"
 
-#: any.pm:1008
+#: any.pm:1034
 #, c-format
 msgid "License agreement"
 msgstr "Лицензия келишуви"
 
-#: any.pm:1010 diskdrake/dav.pm:26
+#: any.pm:1036 diskdrake/dav.pm:26
 #, c-format
 msgid "Quit"
 msgstr "Чиқиш"
 
-#: any.pm:1017
+#: any.pm:1043
 #, c-format
 msgid "Do you accept this license ?"
 msgstr "Ушбу лицензияни қабул қиласизми?"
 
-#: any.pm:1018
+#: any.pm:1044
 #, c-format
 msgid "Accept"
 msgstr "Қабул қилиш"
 
-#: any.pm:1018
+#: any.pm:1044
 #, c-format
 msgid "Refuse"
 msgstr "Рад этиш"
 
-#: any.pm:1044 any.pm:1110
+#: any.pm:1070 any.pm:1136
 #, c-format
 msgid "Please choose a language to use"
 msgstr "Илтимос фойдаланиш учун тилни танланг"
 
-#: any.pm:1073
+#: any.pm:1099
 #, c-format
 msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
@@ -539,77 +540,77 @@ msgid ""
 "when your installation is complete and you restart your system."
 msgstr ""
 
-#: any.pm:1076
+#: any.pm:1102
 #, c-format
 msgid "Multi languages"
 msgstr ""
 
-#: any.pm:1087 any.pm:1119
+#: any.pm:1113 any.pm:1145
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr ""
 
-#: any.pm:1089
+#: any.pm:1115
 #, c-format
 msgid "All languages"
 msgstr "Ҳамма тиллар"
 
-#: any.pm:1111
+#: any.pm:1137
 #, c-format
 msgid "Language choice"
 msgstr "Тилни танлаш"
 
-#: any.pm:1165
+#: any.pm:1191
 #, c-format
 msgid "Country / Region"
 msgstr "Давлат / Регион"
 
-#: any.pm:1166
+#: any.pm:1192
 #, c-format
 msgid "Please choose your country"
 msgstr "Давлатингизни танланг"
 
-#: any.pm:1168
+#: any.pm:1194
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Мавжуд бўлган давлатларнинг тўлиқ рўйхати"
 
-#: any.pm:1169
+#: any.pm:1195
 #, c-format
 msgid "Other Countries"
 msgstr "Бошқа давлатлар"
 
-#: any.pm:1169 interactive.pm:488 interactive/gtk.pm:445
+#: any.pm:1195 interactive.pm:488 interactive/gtk.pm:445
 #, c-format
 msgid "Advanced"
 msgstr "Қўшимча"
 
-#: any.pm:1175
+#: any.pm:1201
 #, c-format
 msgid "Input method:"
 msgstr "Киритиш усули:"
 
-#: any.pm:1178
+#: any.pm:1204
 #, c-format
 msgid "None"
 msgstr "Йўқ"
 
-#: any.pm:1259
+#: any.pm:1285
 #, c-format
 msgid "No sharing"
 msgstr ""
 
-#: any.pm:1259
+#: any.pm:1285
 #, c-format
 msgid "Allow all users"
 msgstr "Ҳамма фойдаланувчиларга рухсат"
 
-#: any.pm:1259
+#: any.pm:1285
 #, c-format
 msgid "Custom"
 msgstr "Бошқа"
 
-#: any.pm:1263
+#: any.pm:1289
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -619,21 +620,21 @@ msgid ""
 "\"Custom\" permit a per-user granularity.\n"
 msgstr ""
 
-#: any.pm:1275
+#: any.pm:1301
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
 "Windows."
 msgstr ""
 
-#: any.pm:1278
+#: any.pm:1304
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
 "systems."
 msgstr ""
 
-#: any.pm:1286
+#: any.pm:1312
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
@@ -641,66 +642,66 @@ msgstr ""
 "Сиз NFS ёки Samba ёрдамида экспорт қилишингиз мумкин. Илтимос биттасини "
 "танланг."
 
-#: any.pm:1314
+#: any.pm:1340
 #, c-format
 msgid "Launch userdrake"
 msgstr "Userdrake дастурини ишга тушириш"
 
-#: any.pm:1316
+#: any.pm:1342
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
 "You can use userdrake to add a user to this group."
 msgstr ""
 
-#: any.pm:1421
+#: any.pm:1448
 #, fuzzy, c-format
 msgid ""
 "You need to logout and back in again for changes to take effect. Press OK to "
 "logout now."
 msgstr "Ўзгаришлар тўлиқ қўлланилиши учун тизимга бошқадан киришингиз керак"
 
-#: any.pm:1425
+#: any.pm:1452
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr "Ўзгаришлар тўлиқ қўлланилиши учун тизимга бошқадан киришингиз керак"
 
-#: any.pm:1460
+#: any.pm:1487
 #, c-format
 msgid "Timezone"
 msgstr "Вақт зонаси"
 
-#: any.pm:1460
+#: any.pm:1487
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Вақт зонангизни танланг?"
 
-#: any.pm:1483 any.pm:1485
+#: any.pm:1510 any.pm:1512
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Сана ва соат мосламалари"
 
-#: any.pm:1486
+#: any.pm:1513
 #, c-format
 msgid "What is the best time?"
 msgstr ""
 
-#: any.pm:1490
+#: any.pm:1517
 #, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr ""
 
-#: any.pm:1491
+#: any.pm:1518
 #, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr ""
 
-#: any.pm:1493
+#: any.pm:1520
 #, c-format
 msgid "NTP Server"
 msgstr "NTP сервери"
 
-#: any.pm:1494
+#: any.pm:1521
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr ""
@@ -1175,7 +1176,7 @@ msgid "Mount point"
 msgstr "Улаш нуқтаси"
 
 #: diskdrake/dav.pm:67 diskdrake/interactive.pm:403
-#: diskdrake/interactive.pm:1072 diskdrake/removable.pm:24
+#: diskdrake/interactive.pm:1090 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
@@ -1186,23 +1187,24 @@ msgstr "Параметрлар"
 msgid "Remove"
 msgstr "Олиб ташлаш"
 
-#: diskdrake/dav.pm:69 diskdrake/hd_gtk.pm:182 diskdrake/removable.pm:26
+#: diskdrake/dav.pm:69 diskdrake/hd_gtk.pm:187 diskdrake/removable.pm:26
 #: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
 #, c-format
 msgid "Done"
 msgstr "Тайёр"
 
-#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:123 diskdrake/hd_gtk.pm:289
+#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:128 diskdrake/hd_gtk.pm:294
 #: diskdrake/interactive.pm:247 diskdrake/interactive.pm:260
 #: diskdrake/interactive.pm:450 diskdrake/interactive.pm:520
 #: diskdrake/interactive.pm:525 diskdrake/interactive.pm:656
-#: diskdrake/interactive.pm:942 diskdrake/interactive.pm:1118
-#: diskdrake/interactive.pm:1131 diskdrake/interactive.pm:1134
-#: diskdrake/interactive.pm:1402 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23
-#: do_pkgs.pm:28 do_pkgs.pm:44 do_pkgs.pm:60 do_pkgs.pm:65 do_pkgs.pm:82
-#: fsedit.pm:246 interactive/http.pm:117 interactive/http.pm:118
-#: modules/interactive.pm:19 scanner.pm:95 scanner.pm:106 scanner.pm:113
-#: scanner.pm:120 wizards.pm:95 wizards.pm:99 wizards.pm:121
+#: diskdrake/interactive.pm:909 diskdrake/interactive.pm:960
+#: diskdrake/interactive.pm:1136 diskdrake/interactive.pm:1149
+#: diskdrake/interactive.pm:1152 diskdrake/interactive.pm:1420
+#: diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23 do_pkgs.pm:28 do_pkgs.pm:44
+#: do_pkgs.pm:60 do_pkgs.pm:65 do_pkgs.pm:82 fsedit.pm:246
+#: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
+#: scanner.pm:95 scanner.pm:106 scanner.pm:113 scanner.pm:120 wizards.pm:95
+#: wizards.pm:99 wizards.pm:121
 #, c-format
 msgid "Error"
 msgstr "Хато"
@@ -1217,12 +1219,12 @@ msgstr "Илтимос WebDAV серверининг URL'ини киритинг
 msgid "The URL must begin with http:// or https://"
 msgstr "URL http:// ёки https:// билан бошланиши шарт"
 
-#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:407 diskdrake/interactive.pm:303
+#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:412 diskdrake/interactive.pm:303
 #: diskdrake/interactive.pm:388 diskdrake/interactive.pm:550
 #: diskdrake/interactive.pm:747 diskdrake/interactive.pm:805
-#: diskdrake/interactive.pm:922 diskdrake/interactive.pm:964
-#: diskdrake/interactive.pm:965 diskdrake/interactive.pm:1215
-#: diskdrake/interactive.pm:1253 diskdrake/interactive.pm:1401 do_pkgs.pm:19
+#: diskdrake/interactive.pm:940 diskdrake/interactive.pm:982
+#: diskdrake/interactive.pm:983 diskdrake/interactive.pm:1233
+#: diskdrake/interactive.pm:1271 diskdrake/interactive.pm:1419 do_pkgs.pm:19
 #: do_pkgs.pm:39 do_pkgs.pm:57 do_pkgs.pm:77 harddrake/sound.pm:442
 #, c-format
 msgid "Warning"
@@ -1239,59 +1241,61 @@ msgid "Server: "
 msgstr "Сервер: "
 
 #: diskdrake/dav.pm:125 diskdrake/interactive.pm:493
-#: diskdrake/interactive.pm:1277 diskdrake/interactive.pm:1362
+#: diskdrake/interactive.pm:1295 diskdrake/interactive.pm:1380
 #, c-format
 msgid "Mount point: "
 msgstr "Улаш нуқтаси: "
 
-#: diskdrake/dav.pm:126 diskdrake/interactive.pm:1369
+#: diskdrake/dav.pm:126 diskdrake/interactive.pm:1387
 #, c-format
 msgid "Options: %s"
 msgstr "Параметрлар: %s"
 
-#: diskdrake/hd_gtk.pm:54 diskdrake/interactive.pm:298
+#: diskdrake/hd_gtk.pm:61 diskdrake/interactive.pm:298
 #: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:106
-#: fs/partitioning_wizard.pm:51 fs/partitioning_wizard.pm:206
-#: fs/partitioning_wizard.pm:211 fs/partitioning_wizard.pm:250
-#: fs/partitioning_wizard.pm:269 fs/partitioning_wizard.pm:274
+#: fs/partitioning_wizard.pm:52 fs/partitioning_wizard.pm:222
+#: fs/partitioning_wizard.pm:230 fs/partitioning_wizard.pm:269
+#: fs/partitioning_wizard.pm:388 fs/partitioning_wizard.pm:445
+#: fs/partitioning_wizard.pm:518 fs/partitioning_wizard.pm:521
 #, c-format
 msgid "Partitioning"
 msgstr "Дискни бўлиш"
 
-#: diskdrake/hd_gtk.pm:68
+#: diskdrake/hd_gtk.pm:73
 #, c-format
 msgid "Click on a partition, choose a filesystem type then choose an action"
 msgstr ""
 "Дискнинг қисми ва файл тизимини танлагандан сўнг керакли амални танланг"
 
-#: diskdrake/hd_gtk.pm:105 diskdrake/interactive.pm:1093
-#: diskdrake/interactive.pm:1103 diskdrake/interactive.pm:1156
+#: diskdrake/hd_gtk.pm:110 diskdrake/interactive.pm:1111
+#: diskdrake/interactive.pm:1121 diskdrake/interactive.pm:1174
 #, c-format
 msgid "Read carefully"
 msgstr "Диққат билан ўқинг"
 
-#: diskdrake/hd_gtk.pm:105
+#: diskdrake/hd_gtk.pm:110
 #, c-format
 msgid "Please make a backup of your data first"
 msgstr "Илтимос аввало маълумотларингиздан заҳира нусха олинг"
 
-#: diskdrake/hd_gtk.pm:106 diskdrake/interactive.pm:240
+#: diskdrake/hd_gtk.pm:111 diskdrake/interactive.pm:240
 #, c-format
 msgid "Exit"
 msgstr "Чиқиш"
 
-#: diskdrake/hd_gtk.pm:106
+#: diskdrake/hd_gtk.pm:111
 #, c-format
 msgid "Continue"
 msgstr "Давом этиш"
 
-#: diskdrake/hd_gtk.pm:177 interactive.pm:653 interactive/gtk.pm:797
-#: interactive/gtk.pm:815 interactive/gtk.pm:836 ugtk2.pm:936
+#: diskdrake/hd_gtk.pm:182 fs/partitioning_wizard.pm:493 interactive.pm:653
+#: interactive/gtk.pm:811 interactive/gtk.pm:829 interactive/gtk.pm:850
+#: ugtk2.pm:936
 #, c-format
 msgid "Help"
 msgstr "Ёрдам"
 
-#: diskdrake/hd_gtk.pm:223
+#: diskdrake/hd_gtk.pm:228
 #, c-format
 msgid ""
 "You have one big Microsoft Windows partition.\n"
@@ -1302,87 +1306,87 @@ msgstr ""
 "Аввало, унинг ҳажмини ўзгартиришни таклиф қиламан\n"
 "(уни босинг кейин \"Ҳажмини ўгартириш\" тугмасини босинг)."
 
-#: diskdrake/hd_gtk.pm:225
+#: diskdrake/hd_gtk.pm:230
 #, c-format
 msgid "Please click on a partition"
 msgstr "Дискнинг қисмини сичқонча билан танланг"
 
-#: diskdrake/hd_gtk.pm:239 diskdrake/smbnfs_gtk.pm:63
+#: diskdrake/hd_gtk.pm:244 diskdrake/smbnfs_gtk.pm:63
 #, c-format
 msgid "Details"
 msgstr "Тафсилотлар"
 
-#: diskdrake/hd_gtk.pm:289
+#: diskdrake/hd_gtk.pm:294
 #, c-format
 msgid "No hard drives found"
 msgstr "Қаттиқ дисклар топилмади"
 
-#: diskdrake/hd_gtk.pm:316
+#: diskdrake/hd_gtk.pm:321
 #, c-format
 msgid "Unknown"
 msgstr "Номаълум"
 
-#: diskdrake/hd_gtk.pm:378
+#: diskdrake/hd_gtk.pm:383
 #, c-format
 msgid "Ext3"
 msgstr "Ext3"
 
-#: diskdrake/hd_gtk.pm:378
+#: diskdrake/hd_gtk.pm:383
 #, c-format
 msgid "XFS"
 msgstr "XFS"
 
-#: diskdrake/hd_gtk.pm:378
+#: diskdrake/hd_gtk.pm:383
 #, c-format
 msgid "Swap"
 msgstr "Своп"
 
-#: diskdrake/hd_gtk.pm:378
+#: diskdrake/hd_gtk.pm:383
 #, c-format
 msgid "SunOS"
 msgstr "SunOS"
 
-#: diskdrake/hd_gtk.pm:378
+#: diskdrake/hd_gtk.pm:383
 #, c-format
 msgid "HFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:378
+#: diskdrake/hd_gtk.pm:383
 #, c-format
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:379 services.pm:158
+#: diskdrake/hd_gtk.pm:384 services.pm:158
 #, c-format
 msgid "Other"
 msgstr "Бошқа"
 
-#: diskdrake/hd_gtk.pm:379 diskdrake/interactive.pm:1292
+#: diskdrake/hd_gtk.pm:384 diskdrake/interactive.pm:1310
 #, c-format
 msgid "Empty"
 msgstr "Бўш"
 
-#: diskdrake/hd_gtk.pm:386
+#: diskdrake/hd_gtk.pm:391
 #, c-format
 msgid "Filesystem types:"
 msgstr "Файл тизимининг турлари:"
 
-#: diskdrake/hd_gtk.pm:407
+#: diskdrake/hd_gtk.pm:412
 #, c-format
 msgid "This partition is already empty"
 msgstr "Дискнинг бу қисми аллақачон бўш"
 
-#: diskdrake/hd_gtk.pm:416
+#: diskdrake/hd_gtk.pm:421
 #, c-format
 msgid "Use ``Unmount'' first"
 msgstr "Аввало \"Unmount\"ни ишлатинг"
 
-#: diskdrake/hd_gtk.pm:416
+#: diskdrake/hd_gtk.pm:421
 #, fuzzy, c-format
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Бунинг ўрнига \"%s\"ни ишлатинг"
 
-#: diskdrake/hd_gtk.pm:416 diskdrake/interactive.pm:402
+#: diskdrake/hd_gtk.pm:421 diskdrake/interactive.pm:402
 #: diskdrake/interactive.pm:588 diskdrake/removable.pm:25
 #: diskdrake/removable.pm:48
 #, c-format
@@ -1406,7 +1410,7 @@ msgid "More"
 msgstr "Кўпроқ"
 
 #: diskdrake/interactive.pm:281 diskdrake/interactive.pm:291
-#: diskdrake/interactive.pm:1200
+#: diskdrake/interactive.pm:1218
 #, c-format
 msgid "Confirmation"
 msgstr "Тасдиқлаш"
@@ -1431,7 +1435,7 @@ msgstr "Дискнинг қисмлар жадвалини сақламасда�
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "/etc/fstab файлига киритилган ўзгаришларни сақлашни истайсизми?"
 
-#: diskdrake/interactive.pm:298 fs/partitioning_wizard.pm:250
+#: diskdrake/interactive.pm:298 fs/partitioning_wizard.pm:269
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
@@ -1521,7 +1525,7 @@ msgstr "Формат қилиш"
 msgid "Add to RAID"
 msgstr "RAID'га қўшиш"
 
-#: diskdrake/interactive.pm:409 diskdrake/interactive.pm:888
+#: diskdrake/interactive.pm:409 diskdrake/interactive.pm:891
 #, c-format
 msgid "Add to LVM"
 msgstr "LVM'га қўшиш"
@@ -1581,12 +1585,12 @@ msgstr "Дискда янги қисм яратиш"
 msgid "Start sector: "
 msgstr "Бошланғич сектор: "
 
-#: diskdrake/interactive.pm:489 diskdrake/interactive.pm:957
+#: diskdrake/interactive.pm:489 diskdrake/interactive.pm:975
 #, c-format
 msgid "Size in MB: "
 msgstr "Ҳажми (Мб): "
 
-#: diskdrake/interactive.pm:491 diskdrake/interactive.pm:958
+#: diskdrake/interactive.pm:491 diskdrake/interactive.pm:976
 #, c-format
 msgid "Filesystem type: "
 msgstr "Файл тизимининг тури: "
@@ -1689,7 +1693,7 @@ msgid "Where do you want to mount %s?"
 msgstr "Дискнинг %s қисмини қаерга уламоқчисиз?"
 
 #: diskdrake/interactive.pm:711 diskdrake/interactive.pm:794
-#: fs/partitioning_wizard.pm:146 fs/partitioning_wizard.pm:178
+#: fs/partitioning_wizard.pm:129 fs/partitioning_wizard.pm:191
 #, c-format
 msgid "Resizing"
 msgstr "Ҳажм ўзгартирилмоқда"
@@ -1743,7 +1747,7 @@ msgid ""
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
 
-#: diskdrake/interactive.pm:853 diskdrake/interactive.pm:1397
+#: diskdrake/interactive.pm:853 diskdrake/interactive.pm:1415
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "Файл тизимининг кодлаш калити"
@@ -1753,7 +1757,7 @@ msgstr "Файл тизимининг кодлаш калити"
 msgid "Enter your filesystem encryption key"
 msgstr "Файл тизимининг кодлаш калитини танланг"
 
-#: diskdrake/interactive.pm:855 diskdrake/interactive.pm:1405
+#: diskdrake/interactive.pm:855 diskdrake/interactive.pm:1423
 #, c-format
 msgid "Encryption key"
 msgstr "Кодлаш калити"
@@ -1768,140 +1772,150 @@ msgstr ""
 msgid "Choose an existing RAID to add to"
 msgstr "Қўшиш учун мавжуд бўлган RAID'ни танланг"
 
-#: diskdrake/interactive.pm:872 diskdrake/interactive.pm:890
+#: diskdrake/interactive.pm:872 diskdrake/interactive.pm:893
 #, c-format
 msgid "new"
 msgstr "янги"
 
-#: diskdrake/interactive.pm:888
+#: diskdrake/interactive.pm:891
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "Қўшиш учун мавжуд бўлган LVM'ни танланг"
 
-#: diskdrake/interactive.pm:895
-#, c-format
-msgid "LVM name?"
+#: diskdrake/interactive.pm:903 diskdrake/interactive.pm:912
+#, fuzzy, c-format
+msgid "LVM name"
 msgstr "LVM номи?"
 
-#: diskdrake/interactive.pm:922
+#: diskdrake/interactive.pm:904
+#, c-format
+msgid "Enter a name for the new LVM volume group"
+msgstr ""
+
+#: diskdrake/interactive.pm:909
+#, fuzzy, c-format
+msgid "\"%s\" already exists"
+msgstr "Файл аллақачон мавжуд. Ишлатайми?"
+
+#: diskdrake/interactive.pm:940
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
 
-#: diskdrake/interactive.pm:924
+#: diskdrake/interactive.pm:942
 #, c-format
 msgid "Moving physical extents"
 msgstr ""
 
-#: diskdrake/interactive.pm:942
+#: diskdrake/interactive.pm:960
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "Дискнинг бу қисмини loopback учун ишлатиб бўлмайди"
 
-#: diskdrake/interactive.pm:955
+#: diskdrake/interactive.pm:973
 #, c-format
 msgid "Loopback"
 msgstr "Loopback"
 
-#: diskdrake/interactive.pm:956
+#: diskdrake/interactive.pm:974
 #, c-format
 msgid "Loopback file name: "
 msgstr "Loopback файлининг номи:"
 
-#: diskdrake/interactive.pm:961
+#: diskdrake/interactive.pm:979
 #, c-format
 msgid "Give a file name"
 msgstr "Файлнинг номини киритинг"
 
-#: diskdrake/interactive.pm:964
+#: diskdrake/interactive.pm:982
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "Файлни бошқа loopback ишлатаяпти, бошқасини танланг"
 
-#: diskdrake/interactive.pm:965
+#: diskdrake/interactive.pm:983
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "Файл аллақачон мавжуд. Ишлатайми?"
 
-#: diskdrake/interactive.pm:997 diskdrake/interactive.pm:1000
+#: diskdrake/interactive.pm:1015 diskdrake/interactive.pm:1018
 #, c-format
 msgid "Mount options"
 msgstr "Улаш мосламалари"
 
-#: diskdrake/interactive.pm:1007
+#: diskdrake/interactive.pm:1025
 #, c-format
 msgid "Various"
 msgstr "Ҳар хил"
 
-#: diskdrake/interactive.pm:1074
+#: diskdrake/interactive.pm:1092
 #, c-format
 msgid "device"
 msgstr "ускуна"
 
-#: diskdrake/interactive.pm:1075
+#: diskdrake/interactive.pm:1093
 #, c-format
 msgid "level"
 msgstr "даража"
 
-#: diskdrake/interactive.pm:1076
+#: diskdrake/interactive.pm:1094
 #, c-format
 msgid "chunk size in KiB"
 msgstr ""
 
-#: diskdrake/interactive.pm:1094
+#: diskdrake/interactive.pm:1112
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Диққат! Бу амал хавфли."
 
-#: diskdrake/interactive.pm:1109
+#: diskdrake/interactive.pm:1127
 #, fuzzy, c-format
 msgid "Partitioning Type"
 msgstr "Дискни бўлиш"
 
-#: diskdrake/interactive.pm:1109
+#: diskdrake/interactive.pm:1127
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Дискни қисмларга бўлишнинг қайси тури?"
 
-#: diskdrake/interactive.pm:1147
+#: diskdrake/interactive.pm:1165
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Ўзгаришлар амалда қўлланилиши учун компьютерни ўчириб-ёқиш керак"
 
-#: diskdrake/interactive.pm:1156
+#: diskdrake/interactive.pm:1174
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk"
 msgstr "%s дискининг қисмлар жадвали дискга сақланиш арафасида"
 
-#: diskdrake/interactive.pm:1178 fs/format.pm:96 fs/format.pm:103
+#: diskdrake/interactive.pm:1196 fs/format.pm:96 fs/format.pm:103
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Дискнинг қисми (%s) формат қилинмоқда"
 
-#: diskdrake/interactive.pm:1191
+#: diskdrake/interactive.pm:1209
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr ""
 "Дискнинг %s қисми формат қилгандан кейин у ердаги ҳамма маълумот йўқолади"
 
-#: diskdrake/interactive.pm:1200 fs/partitioning.pm:48
+#: diskdrake/interactive.pm:1218 fs/partitioning.pm:48
 #, c-format
 msgid "Check bad blocks?"
 msgstr " Хато блокларни текширайми?"
 
-#: diskdrake/interactive.pm:1214
+#: diskdrake/interactive.pm:1232
 #, c-format
 msgid "Move files to the new partition"
 msgstr "Файлларни дискнинг янги қисмига кўчириш"
 
-#: diskdrake/interactive.pm:1214
+#: diskdrake/interactive.pm:1232
 #, c-format
 msgid "Hide files"
 msgstr "Файлларни яшириш"
 
-#: diskdrake/interactive.pm:1215
+#: diskdrake/interactive.pm:1233
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -1912,128 +1926,128 @@ msgid ""
 "the contents of the mounted partition)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1230
+#: diskdrake/interactive.pm:1248
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "Файллар дискнинг янги қисмига кўчирилмоқда"
 
-#: diskdrake/interactive.pm:1234
+#: diskdrake/interactive.pm:1252
 #, c-format
 msgid "Copying %s"
 msgstr "%s'дан нусха кўчирилмоқда"
 
-#: diskdrake/interactive.pm:1238
+#: diskdrake/interactive.pm:1256
 #, c-format
 msgid "Removing %s"
 msgstr "%s олиб ташланмоқда"
 
-#: diskdrake/interactive.pm:1252
+#: diskdrake/interactive.pm:1270
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "дискнинг %s қисми энди %s сифатида маълум"
 
-#: diskdrake/interactive.pm:1253
+#: diskdrake/interactive.pm:1271
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr ""
 
-#: diskdrake/interactive.pm:1278 diskdrake/interactive.pm:1346
+#: diskdrake/interactive.pm:1296 diskdrake/interactive.pm:1364
 #, c-format
 msgid "Device: "
 msgstr "Ускуна: "
 
-#: diskdrake/interactive.pm:1279
+#: diskdrake/interactive.pm:1297
 #, c-format
 msgid "Volume label: "
 msgstr ""
 
-#: diskdrake/interactive.pm:1280
+#: diskdrake/interactive.pm:1298
 #, c-format
 msgid "UUID: "
 msgstr ""
 
-#: diskdrake/interactive.pm:1281
+#: diskdrake/interactive.pm:1299
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS дискининг ҳарфи: %s (таваккалига)\n"
 
-#: diskdrake/interactive.pm:1285 diskdrake/interactive.pm:1294
-#: diskdrake/interactive.pm:1365
+#: diskdrake/interactive.pm:1303 diskdrake/interactive.pm:1312
+#: diskdrake/interactive.pm:1383
 #, c-format
 msgid "Type: "
 msgstr "Тури: "
 
-#: diskdrake/interactive.pm:1289 diskdrake/interactive.pm:1350
+#: diskdrake/interactive.pm:1307 diskdrake/interactive.pm:1368
 #, c-format
 msgid "Name: "
 msgstr "Номи: "
 
-#: diskdrake/interactive.pm:1296
+#: diskdrake/interactive.pm:1314
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Боши: сектор %s\n"
 
-#: diskdrake/interactive.pm:1297
+#: diskdrake/interactive.pm:1315
 #, c-format
 msgid "Size: %s"
 msgstr "Ҳажми: %s"
 
-#: diskdrake/interactive.pm:1299
+#: diskdrake/interactive.pm:1317
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s сектор"
 
-#: diskdrake/interactive.pm:1301
+#: diskdrake/interactive.pm:1319
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "Цилиндр %d дан %d гача\n"
 
-#: diskdrake/interactive.pm:1302
+#: diskdrake/interactive.pm:1320
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr ""
 
-#: diskdrake/interactive.pm:1303
+#: diskdrake/interactive.pm:1321
 #, c-format
 msgid "Formatted\n"
 msgstr "Формат қилинган\n"
 
-#: diskdrake/interactive.pm:1304
+#: diskdrake/interactive.pm:1322
 #, c-format
 msgid "Not formatted\n"
 msgstr "Формат қилинмаган\n"
 
-#: diskdrake/interactive.pm:1305
+#: diskdrake/interactive.pm:1323
 #, c-format
 msgid "Mounted\n"
 msgstr "Уланган\n"
 
-#: diskdrake/interactive.pm:1306
+#: diskdrake/interactive.pm:1324
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1308
+#: diskdrake/interactive.pm:1326
 #, fuzzy, c-format
 msgid "Encrypted"
 msgstr "Кодлаш калити"
 
-#: diskdrake/interactive.pm:1308
+#: diskdrake/interactive.pm:1326
 #, c-format
 msgid " (mapped on %s)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1309
+#: diskdrake/interactive.pm:1327
 #, c-format
 msgid " (to map on %s)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1310
+#: diskdrake/interactive.pm:1328
 #, c-format
 msgid " (inactive)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1316
+#: diskdrake/interactive.pm:1334
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2042,34 +2056,34 @@ msgstr ""
 "Loopback файл(лар):\n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1317
+#: diskdrake/interactive.pm:1335
 #, c-format
 msgid ""
 "Partition booted by default\n"
 "    (for MS-DOS boot, not for lilo)\n"
 msgstr ""
 
-#: diskdrake/interactive.pm:1319
+#: diskdrake/interactive.pm:1337
 #, c-format
 msgid "Level %s\n"
 msgstr "%s даража\n"
 
-#: diskdrake/interactive.pm:1320
+#: diskdrake/interactive.pm:1338
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr ""
 
-#: diskdrake/interactive.pm:1321
+#: diskdrake/interactive.pm:1339
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "RAID дисклар %s\n"
 
-#: diskdrake/interactive.pm:1323
+#: diskdrake/interactive.pm:1341
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Loopback файлининг номи: %s"
 
-#: diskdrake/interactive.pm:1326
+#: diskdrake/interactive.pm:1344
 #, c-format
 msgid ""
 "\n"
@@ -2082,7 +2096,7 @@ msgstr ""
 "драйвернинг қисмидир.\n"
 "Яхшиси унга тегинманг.\n"
 
-#: diskdrake/interactive.pm:1329
+#: diskdrake/interactive.pm:1347
 #, c-format
 msgid ""
 "\n"
@@ -2091,67 +2105,67 @@ msgid ""
 "dual-booting your system.\n"
 msgstr ""
 
-#: diskdrake/interactive.pm:1338
+#: diskdrake/interactive.pm:1356
 #, c-format
 msgid "Free space on %s (%s)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1347
+#: diskdrake/interactive.pm:1365
 #, c-format
 msgid "Read-only"
 msgstr "Фақат ўқишга"
 
-#: diskdrake/interactive.pm:1348
+#: diskdrake/interactive.pm:1366
 #, c-format
 msgid "Size: %s\n"
 msgstr "Ҳажми: %s\n"
 
-#: diskdrake/interactive.pm:1349
+#: diskdrake/interactive.pm:1367
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Геометрия: %s цилиндр, %s каллача, %s сектор\n"
 
-#: diskdrake/interactive.pm:1351
+#: diskdrake/interactive.pm:1369
 #, fuzzy, c-format
 msgid "Medium type: "
 msgstr "Файл тизимининг тури: "
 
-#: diskdrake/interactive.pm:1352
+#: diskdrake/interactive.pm:1370
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "LVM дисклар %s\n"
 
-#: diskdrake/interactive.pm:1353
+#: diskdrake/interactive.pm:1371
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Диск қисмлар жадвалининг тури: %s\n"
 
-#: diskdrake/interactive.pm:1354
+#: diskdrake/interactive.pm:1372
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr ""
 
-#: diskdrake/interactive.pm:1398
+#: diskdrake/interactive.pm:1416
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Файл тизимининг кодлаш калитини танланг"
 
-#: diskdrake/interactive.pm:1401
+#: diskdrake/interactive.pm:1419
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr "Кодлаш калити жуда содда (у энг ками %d белгидан иборат бўлиши шарт)"
 
-#: diskdrake/interactive.pm:1402
+#: diskdrake/interactive.pm:1420
 #, c-format
 msgid "The encryption keys do not match"
 msgstr "Кодлаш калитлари мос келмайди"
 
-#: diskdrake/interactive.pm:1406
+#: diskdrake/interactive.pm:1424
 #, c-format
 msgid "Encryption key (again)"
 msgstr "Кодлаш калити (яна)"
 
-#: diskdrake/interactive.pm:1408
+#: diskdrake/interactive.pm:1426
 #, c-format
 msgid "Encryption algorithm"
 msgstr ""
@@ -2163,7 +2177,7 @@ msgstr "Турини ўзгартириш"
 
 #: diskdrake/smbnfs_gtk.pm:81 interactive.pm:129 interactive.pm:550
 #: interactive/curses.pm:260 interactive/http.pm:104 interactive/http.pm:160
-#: interactive/stdio.pm:39 interactive/stdio.pm:148 mygtk2.pm:844 ugtk2.pm:415
+#: interactive/stdio.pm:39 interactive/stdio.pm:148 mygtk2.pm:846 ugtk2.pm:415
 #: ugtk2.pm:517 ugtk2.pm:526 ugtk2.pm:812
 #, c-format
 msgid "Cancel"
@@ -2252,7 +2266,7 @@ msgid ""
 "filesystems. Please check your hardware for the cause of this problem"
 msgstr ""
 
-#: fs/any.pm:75 fs/partitioning_wizard.pm:59
+#: fs/any.pm:75 fs/partitioning_wizard.pm:60
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "Сизда /boot/efi нуқтасига уланган дискнинг FAT қисми бўлиши шарт"
@@ -2449,7 +2463,7 @@ msgid "Not enough swap space to fulfill installation, please add some"
 msgstr ""
 "Ўрнатишни бажариш учун етарли своп хотираси мавжуд эмас, илтимос уни қўшинг"
 
-#: fs/partitioning_wizard.pm:51
+#: fs/partitioning_wizard.pm:52
 #, c-format
 msgid ""
 "You must have a root partition.\n"
@@ -2461,7 +2475,7 @@ msgstr ""
 "Кейин, \"Улаш нуқтаси\" амали ёрдамида улаш нуқтаси сифатида \"/\"ни "
 "кўрсатинг"
 
-#: fs/partitioning_wizard.pm:56
+#: fs/partitioning_wizard.pm:57
 #, c-format
 msgid ""
 "You do not have a swap partition.\n"
@@ -2472,83 +2486,42 @@ msgstr ""
 "\n"
 "Бунга қарамасдан давом этишни истайсизми?"
 
-#: fs/partitioning_wizard.pm:84
+#: fs/partitioning_wizard.pm:93
 #, c-format
 msgid "Use free space"
 msgstr "Бўш жойдан фойдаланиш"
 
-#: fs/partitioning_wizard.pm:86
+#: fs/partitioning_wizard.pm:95
 #, c-format
 msgid "Not enough free space to allocate new partitions"
 msgstr "Янги қисм яратиш учун дискда етарли жой йўқ"
 
-#: fs/partitioning_wizard.pm:94
+#: fs/partitioning_wizard.pm:103
 #, c-format
 msgid "Use existing partitions"
 msgstr "Дискда бор қисмлардан фойдаланиш"
 
-#: fs/partitioning_wizard.pm:96
+#: fs/partitioning_wizard.pm:105
 #, c-format
 msgid "There is no existing partition to use"
 msgstr "Фойдаланиш учун дискнинг қисми мавжуд эмас"
 
-#: fs/partitioning_wizard.pm:103
-#, c-format
-msgid "Use the Microsoft Windows® partition for loopback"
-msgstr "Loopback учун дискнинг Microsoft Windows® қисмини ишлатиш"
-
-#: fs/partitioning_wizard.pm:106
-#, c-format
-msgid "Which partition do you want to use for Linux4Win?"
-msgstr "Linux4Win учун дискнинг қайси қисмини ишлатишни истайсиз?"
-
-#: fs/partitioning_wizard.pm:108
-#, c-format
-msgid "Choose the sizes"
-msgstr "Ҳажмни танлаш"
-
-#: fs/partitioning_wizard.pm:109
-#, c-format
-msgid "Root partition size in MB: "
-msgstr "Дискнинг туб қисми Мб'да: "
-
-#: fs/partitioning_wizard.pm:110
-#, c-format
-msgid "Swap partition size in MB: "
-msgstr "Дискнинг своп қисми Мб'да: "
-
-#: fs/partitioning_wizard.pm:119
-#, c-format
-msgid "There is no FAT partition to use as loopback (or not enough space left)"
-msgstr ""
-"Loopback сифатида ишлатиш учун дискда FAT қисм йўқ (ёки етарли жой йўқ)"
-
-#: fs/partitioning_wizard.pm:127
-#, c-format
-msgid "Use the free space on a Microsoft Windows® partition"
-msgstr "Дискнинг Windows® қисмидаги бўш жойдан фойдаланиш"
-
 #: fs/partitioning_wizard.pm:129
-#, c-format
-msgid "Which partition do you want to resize?"
-msgstr "Дискнинг қайси қисмининг ҳажмини ўзгартиришни истайсиз?"
-
-#: fs/partitioning_wizard.pm:143
-#, c-format
-msgid ""
-"The FAT resizer is unable to handle your partition, \n"
-"the following error occurred: %s"
-msgstr ""
-"Дискнинг FAT қисмининг ҳажмини ўзгартириш дастури кўрсатилган\n"
-"дискнинг қисми устида ишлаолмади. Қуйидаги хато рўй берди:\n"
-"%s"
-
-#: fs/partitioning_wizard.pm:146
 #, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
 msgstr "Дискнинг Microsoft Windows® қисмининг ҳажми ҳисобланмоқда"
 
-#: fs/partitioning_wizard.pm:153
+#: fs/partitioning_wizard.pm:148
+#, c-format
+msgid "Use the free space on a Microsoft Windows® partition"
+msgstr "Дискнинг Windows® қисмидаги бўш жойдан фойдаланиш"
+
+#: fs/partitioning_wizard.pm:152
+#, c-format
+msgid "Which partition do you want to resize?"
+msgstr "Дискнинг қайси қисмининг ҳажмини ўзгартиришни истайсиз?"
+
+#: fs/partitioning_wizard.pm:162
 #, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
@@ -2556,7 +2529,7 @@ msgid ""
 "the Mandriva Linux installation."
 msgstr ""
 
-#: fs/partitioning_wizard.pm:156
+#: fs/partitioning_wizard.pm:166
 #, c-format
 msgid ""
 "WARNING!\n"
@@ -2592,85 +2565,85 @@ msgstr ""
 "Давом этишни истасангиз, %s тугмасини босинг."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:165 interactive.pm:549 interactive/curses.pm:263
-#: ugtk2.pm:519
+#: fs/partitioning_wizard.pm:175 fs/partitioning_wizard.pm:498
+#: interactive.pm:549 interactive/curses.pm:263 ugtk2.pm:519
 #, c-format
 msgid "Next"
 msgstr "Кейинги"
 
-#: fs/partitioning_wizard.pm:168
+#: fs/partitioning_wizard.pm:180
 #, c-format
 msgid "Partitionning"
 msgstr "Дискни бўлиш"
 
-#: fs/partitioning_wizard.pm:168
+#: fs/partitioning_wizard.pm:180
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
 msgstr ""
 "Дискнинг %s қисмида Microsoft Windows® учун қанча жой қолдиришни истайсиз?"
 
-#: fs/partitioning_wizard.pm:169
+#: fs/partitioning_wizard.pm:181
 #, c-format
 msgid "Size"
 msgstr "Ҳажми"
 
-#: fs/partitioning_wizard.pm:178
+#: fs/partitioning_wizard.pm:191
 #, c-format
 msgid "Resizing Microsoft Windows® partition"
 msgstr "Дискнинг Microsoft Windows® қисмининг ҳажмини ўзгартириш"
 
-#: fs/partitioning_wizard.pm:183
+#: fs/partitioning_wizard.pm:196
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr "Дискнинг FAT қисмининг ҳажмини ўзгартириш муваффақиятсиз тугади: %s"
 
-#: fs/partitioning_wizard.pm:186
+#: fs/partitioning_wizard.pm:199
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
 
-#: fs/partitioning_wizard.pm:198
+#: fs/partitioning_wizard.pm:212
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "Ҳажмини ўзгартириш учун дискда FAT қисм мавжуд эмас (ёки етарли жой мавжуд "
 "эмас)"
 
-#: fs/partitioning_wizard.pm:203
+#: fs/partitioning_wizard.pm:217
 #, c-format
 msgid "Remove Microsoft Windows®"
 msgstr "Microsoft Windows®'ни ўчириш"
 
-#: fs/partitioning_wizard.pm:203
+#: fs/partitioning_wizard.pm:217
 #, c-format
 msgid "Erase and use entire disk"
 msgstr "Бутун дискни ўчириб ишлатиш"
 
-#: fs/partitioning_wizard.pm:205
+#: fs/partitioning_wizard.pm:221
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr ""
 "Сизда биттадан кўп қаттиқ диск мавжуд. Уларни қайсига Mandriva Linux ОТни "
 "ўрнатишни истайсиз?"
 
-#: fs/partitioning_wizard.pm:210 fsedit.pm:600
+#: fs/partitioning_wizard.pm:229 fsedit.pm:600
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "%s дискнинг барча қисмлари ва улардаги барча маълумот ўчирилади"
 
-#: fs/partitioning_wizard.pm:220
+#: fs/partitioning_wizard.pm:239
 #, c-format
 msgid "Custom disk partitioning"
 msgstr "Дискни бошқача бўлиш"
 
-#: fs/partitioning_wizard.pm:226
+#: fs/partitioning_wizard.pm:245
 #, c-format
 msgid "Use fdisk"
 msgstr "Fdisk дастуридан фойдаланиш"
 
-#: fs/partitioning_wizard.pm:229
+#: fs/partitioning_wizard.pm:248
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -2679,28 +2652,33 @@ msgstr ""
 "Энди сиз %s дискни бўлишингиз мумкин.\n"
 "Тугатгач \"w\" билан сақлаш эсингиздан чиқмасин."
 
-#: fs/partitioning_wizard.pm:269
+#: fs/partitioning_wizard.pm:388 fs/partitioning_wizard.pm:518
 #, c-format
 msgid "I can not find any room for installing"
 msgstr "Ўрнатиш учун етарли жой топилмади"
 
-#: fs/partitioning_wizard.pm:278
+#: fs/partitioning_wizard.pm:397 fs/partitioning_wizard.pm:525
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "Дискни бўлиш воситаси қуйидаги ечимларни топди:"
 
-#: fs/partitioning_wizard.pm:287
+#: fs/partitioning_wizard.pm:459
+#, c-format
+msgid "Here is the content of you disk drive "
+msgstr ""
+
+#: fs/partitioning_wizard.pm:535
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Дискни бўлиш муваффақиятсиз тугади: %s"
 
-#: fs/type.pm:388
+#: fs/type.pm:390
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
 msgstr ""
 "Ҳажми 16 Мб'дан кичик бўлган қисмлар учун JFS файл тизимини ишлатиб бўлмайди"
 
-#: fs/type.pm:389
+#: fs/type.pm:391
 #, c-format
 msgid "You can not use ReiserFS for partitions smaller than 32MB"
 msgstr ""
@@ -2786,10 +2764,10 @@ msgstr "Бу директория туб файл тизимида бўлиши 
 #: fsedit.pm:447 fsedit.pm:449
 #, c-format
 msgid ""
-"You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
+"You need a true filesystem (ext2/3/4, reiserfs, xfs, or jfs) for this mount "
 "point\n"
 msgstr ""
-"Бу улаш нуқтаси учун ҳақиқий файл тизими (ext2/ext3, reiserfs, xfs, ёки jfs) "
+"Бу улаш нуқтаси учун ҳақиқий файл тизими (ext2/3/4, reiserfs, xfs, ёки jfs) "
 "керак\n"
 
 #: fsedit.pm:451
@@ -3281,7 +3259,7 @@ msgstr ""
 
 #: interactive.pm:128 interactive.pm:549 interactive/curses.pm:263
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
-#: interactive/stdio.pm:148 interactive/stdio.pm:149 mygtk2.pm:844
+#: interactive/stdio.pm:148 interactive/stdio.pm:149 mygtk2.pm:846
 #: ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
 #, c-format
 msgid "Ok"
@@ -3342,7 +3320,7 @@ msgstr "Бундай директория мавжуд эмас"
 msgid "No such file"
 msgstr "Бундай файл мавжуд эмас"
 
-#: interactive/gtk.pm:580
+#: interactive/gtk.pm:594
 #, c-format
 msgid "Beware, Caps Lock is enabled"
 msgstr ""
@@ -5165,17 +5143,17 @@ msgstr ""
 "%s модулини юклаш муваффақиятсиз тугади.\n"
 "Бошқа мосламалар билан яна уриниб кўришни истайсизми?"
 
-#: mygtk2.pm:1538 mygtk2.pm:1539
+#: mygtk2.pm:1540 mygtk2.pm:1541
 #, c-format
 msgid "Password is trivial to guess"
 msgstr ""
 
-#: mygtk2.pm:1540
+#: mygtk2.pm:1542
 #, c-format
 msgid "Password should resist to basic attacks"
 msgstr ""
 
-#: mygtk2.pm:1541 mygtk2.pm:1542
+#: mygtk2.pm:1543 mygtk2.pm:1544
 #, fuzzy, c-format
 msgid "Password seems secure"
 msgstr "Махфий сўз"
@@ -6607,6 +6585,34 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Ўрнатиш муваффақиятсиз тугади"
+
+#~ msgid "Use the Microsoft Windows® partition for loopback"
+#~ msgstr "Loopback учун дискнинг Microsoft Windows® қисмини ишлатиш"
+
+#~ msgid "Which partition do you want to use for Linux4Win?"
+#~ msgstr "Linux4Win учун дискнинг қайси қисмини ишлатишни истайсиз?"
+
+#~ msgid "Choose the sizes"
+#~ msgstr "Ҳажмни танлаш"
+
+#~ msgid "Root partition size in MB: "
+#~ msgstr "Дискнинг туб қисми Мб'да: "
+
+#~ msgid "Swap partition size in MB: "
+#~ msgstr "Дискнинг своп қисми Мб'да: "
+
+#~ msgid ""
+#~ "There is no FAT partition to use as loopback (or not enough space left)"
+#~ msgstr ""
+#~ "Loopback сифатида ишлатиш учун дискда FAT қисм йўқ (ёки етарли жой йўқ)"
+
+#~ msgid ""
+#~ "The FAT resizer is unable to handle your partition, \n"
+#~ "the following error occurred: %s"
+#~ msgstr ""
+#~ "Дискнинг FAT қисмининг ҳажмини ўзгартириш дастури кўрсатилган\n"
+#~ "дискнинг қисми устида ишлаолмади. Қуйидаги хато рўй берди:\n"
+#~ "%s"
 
 #~ msgid "Please log out and then use Ctrl-Alt-BackSpace"
 #~ msgstr "Илтимос тизимдан чиқинг ва Ctrl+Alt+BackSpace тугмаларни босинг"

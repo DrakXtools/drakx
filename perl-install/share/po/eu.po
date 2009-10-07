@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
-"POT-Creation-Date: 2009-09-10 12:20+0200\n"
+"POT-Creation-Date: 2009-10-07 13:57+0200\n"
 "PO-Revision-Date: 2009-09-27 18:14+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque <kde-i18n-doc@kde.org>\n"
@@ -17,10 +17,10 @@ msgstr ""
 "X-Generator: Lokalize 0.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: any.pm:252 any.pm:884 diskdrake/interactive.pm:594
+#: any.pm:252 any.pm:910 diskdrake/interactive.pm:594
 #: diskdrake/interactive.pm:794 diskdrake/interactive.pm:838
-#: diskdrake/interactive.pm:924 diskdrake/interactive.pm:1178
-#: diskdrake/interactive.pm:1230 do_pkgs.pm:241 do_pkgs.pm:287
+#: diskdrake/interactive.pm:942 diskdrake/interactive.pm:1196
+#: diskdrake/interactive.pm:1248 do_pkgs.pm:241 do_pkgs.pm:287
 #: harddrake/sound.pm:303 interactive.pm:587 pkgs.pm:281
 #, c-format
 msgid "Please wait"
@@ -177,7 +177,7 @@ msgstr "Gaitu APIC"
 msgid "Enable Local APIC"
 msgstr "Gaitu bertako APIC"
 
-#: any.pm:415 any.pm:829 any.pm:845 authentication.pm:250
+#: any.pm:415 any.pm:855 any.pm:871 authentication.pm:250
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
@@ -188,7 +188,7 @@ msgstr "Pasahitza"
 msgid "The passwords do not match"
 msgstr "Pasahitzak ez datoz bat"
 
-#: any.pm:417 authentication.pm:261 diskdrake/interactive.pm:1402
+#: any.pm:417 authentication.pm:261 diskdrake/interactive.pm:1420
 #, c-format
 msgid "Please try again"
 msgstr "Saiatu berriro"
@@ -198,7 +198,7 @@ msgstr "Saiatu berriro"
 msgid "You can not use a password with %s"
 msgstr "Ezin duzu %s-rekin pasahitz bat erabili"
 
-#: any.pm:421 any.pm:831 any.pm:847 authentication.pm:251
+#: any.pm:421 any.pm:857 any.pm:873 authentication.pm:251
 #, c-format
 msgid "Password (again)"
 msgstr "Pasahitza (berriro)"
@@ -364,190 +364,191 @@ msgstr ""
 "Hona hemen abioko menuko orain arteko sarrerak.\n"
 "Sarrera gehgiago sor ditzakezu, edo lehendik daudenak aldatu."
 
-#: any.pm:790
+#: any.pm:816
 #, c-format
 msgid "access to X programs"
 msgstr "X programen atzipena"
 
-#: any.pm:791
+#: any.pm:817
 #, c-format
 msgid "access to rpm tools"
 msgstr "rpm tresnen atzipena"
 
-#: any.pm:792
+#: any.pm:818
 #, c-format
 msgid "allow \"su\""
 msgstr "onartu \"su\""
 
-#: any.pm:793
+#: any.pm:819
 #, c-format
 msgid "access to administrative files"
 msgstr "administrazio-fitxategien atzipena"
 
-#: any.pm:794
+#: any.pm:820
 #, c-format
 msgid "access to network tools"
 msgstr "sare-tresnen atzipena"
 
-#: any.pm:795
+#: any.pm:821
 #, c-format
 msgid "access to compilation tools"
 msgstr "konpilazio-tresnen atzipena"
 
-#: any.pm:801
+#: any.pm:827
 #, c-format
 msgid "(already added %s)"
 msgstr "(%s jadanik gehituta)"
 
-#: any.pm:807
+#: any.pm:833
 #, c-format
 msgid "Please give a user name"
 msgstr "Eman erabiltzaile-izen bat"
 
-#: any.pm:808
-#, c-format
+#: any.pm:834
+#, fuzzy, c-format
 msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
+"The user name must start with a lower case letter followed by only lower "
+"cased letters, numbers, `-' and `_'"
 msgstr ""
 "Erabiltzaile-izenak minuskulaz idatzitako letrak, zenbakiak, `-' eta `_' "
 "soilik izan ditzake"
 
-#: any.pm:809
+#: any.pm:835
 #, c-format
 msgid "The user name is too long"
 msgstr "Erabiltzaile-izena luzeegia da"
 
-#: any.pm:810
+#: any.pm:836
 #, c-format
 msgid "This user name has already been added"
 msgstr "Erabiltzaile-izen hau gehituta dago jadanik"
 
-#: any.pm:816 any.pm:849
+#: any.pm:842 any.pm:875
 #, c-format
 msgid "User ID"
 msgstr "Erabiltzaile ID"
 
-#: any.pm:816 any.pm:850
+#: any.pm:842 any.pm:876
 #, c-format
 msgid "Group ID"
 msgstr "Talde ID"
 
-#: any.pm:817
+#: any.pm:843
 #, c-format
 msgid "%s must be a number"
 msgstr "%s zenbakia izan behar da"
 
-#: any.pm:818
+#: any.pm:844
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
 msgstr "%s 500 gainetik egon behar luke. Onartu hala ere?"
 
-#: any.pm:822
+#: any.pm:848
 #, c-format
 msgid "User management"
 msgstr "Erabiltzaile kudeaketa"
 
-#: any.pm:828 authentication.pm:237
+#: any.pm:854 authentication.pm:237
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "Ezarri administratzaile (root) pasahitza"
 
-#: any.pm:833
+#: any.pm:859
 #, c-format
 msgid "Enter a user"
 msgstr "Sartu erabiltzaile bat"
 
-#: any.pm:835
+#: any.pm:861
 #, c-format
 msgid "Icon"
 msgstr "Ikonoa"
 
-#: any.pm:838
+#: any.pm:864
 #, c-format
 msgid "Real name"
 msgstr "Benetako izena"
 
-#: any.pm:843
+#: any.pm:869
 #, c-format
 msgid "Login name"
 msgstr "Saioa hasteko izena"
 
-#: any.pm:848
+#: any.pm:874
 #, c-format
 msgid "Shell"
 msgstr "Shell"
 
-#: any.pm:884
+#: any.pm:910
 #, c-format
 msgid "Please wait, adding media..."
 msgstr "Itxoin mesedez, euskarria eransten..."
 
-#: any.pm:914 security/l10n.pm:14
+#: any.pm:940 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "Automatikoki hasi saioa"
 
-#: any.pm:915
+#: any.pm:941
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr "Ordenagailua konfigura dezaket automatikoki erabiltzaile bat sartzeko."
 
-#: any.pm:916
+#: any.pm:942
 #, c-format
 msgid "Use this feature"
 msgstr "Ezaugarri hau erabili"
 
-#: any.pm:917
+#: any.pm:943
 #, c-format
 msgid "Choose the default user:"
 msgstr "Aukeratu erabiltzaile lehenetsia:"
 
-#: any.pm:918
+#: any.pm:944
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Aukeratu exekutatu beharreko leiho-kudeatzailea:"
 
-#: any.pm:929 any.pm:949 any.pm:1022
+#: any.pm:955 any.pm:975 any.pm:1048
 #, c-format
 msgid "Release Notes"
 msgstr "Askapen Oharrak"
 
-#: any.pm:956 any.pm:1314 interactive/gtk.pm:805
+#: any.pm:982 any.pm:1340 interactive/gtk.pm:819
 #, c-format
 msgid "Close"
 msgstr "Itxi"
 
-#: any.pm:1008
+#: any.pm:1034
 #, c-format
 msgid "License agreement"
 msgstr "Lizentzia-kontratua"
 
-#: any.pm:1010 diskdrake/dav.pm:26
+#: any.pm:1036 diskdrake/dav.pm:26
 #, c-format
 msgid "Quit"
 msgstr "Irten"
 
-#: any.pm:1017
+#: any.pm:1043
 #, c-format
 msgid "Do you accept this license ?"
 msgstr "Lizentzia hau onartzen duzu ?"
 
-#: any.pm:1018
+#: any.pm:1044
 #, c-format
 msgid "Accept"
 msgstr "Onartu"
 
-#: any.pm:1018
+#: any.pm:1044
 #, c-format
 msgid "Refuse"
 msgstr "Ezetsi"
 
-#: any.pm:1044 any.pm:1110
+#: any.pm:1070 any.pm:1136
 #, c-format
 msgid "Please choose a language to use"
 msgstr "Aukeratu erabiltzeko hizkuntza bat"
 
-#: any.pm:1073
+#: any.pm:1099
 #, c-format
 msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
@@ -558,77 +559,77 @@ msgstr ""
 "instalatu nahi dituzun hizkuntzak. Instalazioa osatzean eta\n"
 "sistema berrabiaraztean, erabilgarri egongo dira."
 
-#: any.pm:1076
+#: any.pm:1102
 #, c-format
 msgid "Multi languages"
 msgstr "Hizkuntza anitz"
 
-#: any.pm:1087 any.pm:1119
+#: any.pm:1113 any.pm:1145
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr "Kodeketa bateragarritasun zaharra (ez UTF-8)"
 
-#: any.pm:1089
+#: any.pm:1115
 #, c-format
 msgid "All languages"
 msgstr "Hizkuntza guztiak"
 
-#: any.pm:1111
+#: any.pm:1137
 #, c-format
 msgid "Language choice"
 msgstr "Hizkuntza aukera"
 
-#: any.pm:1165
+#: any.pm:1191
 #, c-format
 msgid "Country / Region"
 msgstr "Estatua / Eskualdea"
 
-#: any.pm:1166
+#: any.pm:1192
 #, c-format
 msgid "Please choose your country"
 msgstr "Aukeratu zure herrialdea edo estatua"
 
-#: any.pm:1168
+#: any.pm:1194
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Hona hemen herrialde erabilgarri guztien zerrenda"
 
-#: any.pm:1169
+#: any.pm:1195
 #, c-format
 msgid "Other Countries"
 msgstr "Beste Herrialde batzuk"
 
-#: any.pm:1169 interactive.pm:488 interactive/gtk.pm:445
+#: any.pm:1195 interactive.pm:488 interactive/gtk.pm:445
 #, c-format
 msgid "Advanced"
 msgstr "Aurreratua"
 
-#: any.pm:1175
+#: any.pm:1201
 #, c-format
 msgid "Input method:"
 msgstr "Sarrera metodoa:"
 
-#: any.pm:1178
+#: any.pm:1204
 #, c-format
 msgid "None"
 msgstr "Bat ere ez"
 
-#: any.pm:1259
+#: any.pm:1285
 #, c-format
 msgid "No sharing"
 msgstr "Ez partekatu"
 
-#: any.pm:1259
+#: any.pm:1285
 #, c-format
 msgid "Allow all users"
 msgstr "Eman baimena erabiltzaile guztiei"
 
-#: any.pm:1259
+#: any.pm:1285
 #, c-format
 msgid "Custom"
 msgstr "Pertsonalizatua"
 
-#: any.pm:1263
+#: any.pm:1289
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -643,7 +644,7 @@ msgstr ""
 "\n"
 "\"Custom\"ek erabiltzaileen araberako banaketa egiteko aukera ematen du.\n"
 
-#: any.pm:1275
+#: any.pm:1301
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
@@ -652,7 +653,7 @@ msgstr ""
 "NFS: usadioz Unixen fitxategiak elkarbanatzeko sistema, Mac eta Windowsen "
 "euskarri gutxiago duena."
 
-#: any.pm:1278
+#: any.pm:1304
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
@@ -661,18 +662,18 @@ msgstr ""
 "SMB: fitxategiak elkarbanatzeko sistema, Windows, Mac OS X eta gaur egungo "
 "hainbat Linux sistemek erabiltzen dutena."
 
-#: any.pm:1286
+#: any.pm:1312
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "NFS edo SMB-rekin esporta dezakezu. Hautatu zein erabili nahi duzun."
 
-#: any.pm:1314
+#: any.pm:1340
 #, c-format
 msgid "Launch userdrake"
 msgstr "Abiarazi userdrake"
 
-#: any.pm:1316
+#: any.pm:1342
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -682,7 +683,7 @@ msgstr ""
 "taldea erabiltzen du. \n"
 "Userdrake erabil dezakezu talde honetan erabiltzaileak gehitzeko."
 
-#: any.pm:1421
+#: any.pm:1448
 #, c-format
 msgid ""
 "You need to logout and back in again for changes to take effect. Press OK to "
@@ -691,48 +692,48 @@ msgstr ""
 "Saioa amaitu eta berriro hasi behar duzu aldaketek eragina izan dezaten. "
 "Sakatu Ados saioa orain amaitzeko."
 
-#: any.pm:1425
+#: any.pm:1452
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr ""
 "Saioa amaitu eta berriro hasi behar duzu aldaketek eragina izan dezaten"
 
-#: any.pm:1460
+#: any.pm:1487
 #, c-format
 msgid "Timezone"
 msgstr "Ordu-zona"
 
-#: any.pm:1460
+#: any.pm:1487
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Zein da zure ordu-zona?"
 
-#: any.pm:1483 any.pm:1485
+#: any.pm:1510 any.pm:1512
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Data, ordulari eta ordu gune ezarpenak"
 
-#: any.pm:1486
+#: any.pm:1513
 #, c-format
 msgid "What is the best time?"
 msgstr "Zein da ordu onena?"
 
-#: any.pm:1490
+#: any.pm:1517
 #, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "%s (hardware ordularia UTC-ra ezarria)"
 
-#: any.pm:1491
+#: any.pm:1518
 #, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "%s (hardware ordularia bertako ordura ezarria)"
 
-#: any.pm:1493
+#: any.pm:1520
 #, c-format
 msgid "NTP Server"
 msgstr "NTP Zerbitzaria"
 
-#: any.pm:1494
+#: any.pm:1521
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Ordu-sinkronizazio automatikoa (NTP erabiliz)"
@@ -1236,7 +1237,7 @@ msgid "Mount point"
 msgstr "Muntatze-puntua"
 
 #: diskdrake/dav.pm:67 diskdrake/interactive.pm:403
-#: diskdrake/interactive.pm:1072 diskdrake/removable.pm:24
+#: diskdrake/interactive.pm:1090 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
@@ -1247,23 +1248,24 @@ msgstr "Aukerak"
 msgid "Remove"
 msgstr "Kendu"
 
-#: diskdrake/dav.pm:69 diskdrake/hd_gtk.pm:182 diskdrake/removable.pm:26
+#: diskdrake/dav.pm:69 diskdrake/hd_gtk.pm:187 diskdrake/removable.pm:26
 #: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
 #, c-format
 msgid "Done"
 msgstr "Eginda"
 
-#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:123 diskdrake/hd_gtk.pm:289
+#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:128 diskdrake/hd_gtk.pm:294
 #: diskdrake/interactive.pm:247 diskdrake/interactive.pm:260
 #: diskdrake/interactive.pm:450 diskdrake/interactive.pm:520
 #: diskdrake/interactive.pm:525 diskdrake/interactive.pm:656
-#: diskdrake/interactive.pm:942 diskdrake/interactive.pm:1118
-#: diskdrake/interactive.pm:1131 diskdrake/interactive.pm:1134
-#: diskdrake/interactive.pm:1402 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23
-#: do_pkgs.pm:28 do_pkgs.pm:44 do_pkgs.pm:60 do_pkgs.pm:65 do_pkgs.pm:82
-#: fsedit.pm:246 interactive/http.pm:117 interactive/http.pm:118
-#: modules/interactive.pm:19 scanner.pm:95 scanner.pm:106 scanner.pm:113
-#: scanner.pm:120 wizards.pm:95 wizards.pm:99 wizards.pm:121
+#: diskdrake/interactive.pm:909 diskdrake/interactive.pm:960
+#: diskdrake/interactive.pm:1136 diskdrake/interactive.pm:1149
+#: diskdrake/interactive.pm:1152 diskdrake/interactive.pm:1420
+#: diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23 do_pkgs.pm:28 do_pkgs.pm:44
+#: do_pkgs.pm:60 do_pkgs.pm:65 do_pkgs.pm:82 fsedit.pm:246
+#: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
+#: scanner.pm:95 scanner.pm:106 scanner.pm:113 scanner.pm:120 wizards.pm:95
+#: wizards.pm:99 wizards.pm:121
 #, c-format
 msgid "Error"
 msgstr "Errorea"
@@ -1278,18 +1280,19 @@ msgstr "Sartu WebDAV zerbitzariaren URLa"
 msgid "The URL must begin with http:// or https://"
 msgstr "URLak honela hasi behar du: http:// edo https://"
 
-#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:407 diskdrake/interactive.pm:303
+#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:412 diskdrake/interactive.pm:303
 #: diskdrake/interactive.pm:388 diskdrake/interactive.pm:550
 #: diskdrake/interactive.pm:747 diskdrake/interactive.pm:805
-#: diskdrake/interactive.pm:922 diskdrake/interactive.pm:964
-#: diskdrake/interactive.pm:965 diskdrake/interactive.pm:1215
-#: diskdrake/interactive.pm:1253 diskdrake/interactive.pm:1401 do_pkgs.pm:19
+#: diskdrake/interactive.pm:940 diskdrake/interactive.pm:982
+#: diskdrake/interactive.pm:983 diskdrake/interactive.pm:1233
+#: diskdrake/interactive.pm:1271 diskdrake/interactive.pm:1419 do_pkgs.pm:19
 #: do_pkgs.pm:39 do_pkgs.pm:57 do_pkgs.pm:77 harddrake/sound.pm:442
 #, c-format
 msgid "Warning"
 msgstr "Kontuz"
 
-#: diskdrake/dav.pm:106, c-format
+#: diskdrake/dav.pm:106
+#, c-format
 msgid "Are you sure you want to delete this mountpoint?"
 msgstr "Ziur zaude muntaia puntu hau ezabatu nahi duzu?"
 
@@ -1299,60 +1302,62 @@ msgid "Server: "
 msgstr "Zerbitzaria: "
 
 #: diskdrake/dav.pm:125 diskdrake/interactive.pm:493
-#: diskdrake/interactive.pm:1277 diskdrake/interactive.pm:1362
+#: diskdrake/interactive.pm:1295 diskdrake/interactive.pm:1380
 #, c-format
 msgid "Mount point: "
 msgstr "Muntatze-puntua: "
 
-#: diskdrake/dav.pm:126 diskdrake/interactive.pm:1369
+#: diskdrake/dav.pm:126 diskdrake/interactive.pm:1387
 #, c-format
 msgid "Options: %s"
 msgstr "Aukerak: %s"
 
-#: diskdrake/hd_gtk.pm:54 diskdrake/interactive.pm:298
+#: diskdrake/hd_gtk.pm:61 diskdrake/interactive.pm:298
 #: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:106
-#: fs/partitioning_wizard.pm:51 fs/partitioning_wizard.pm:206
-#: fs/partitioning_wizard.pm:211 fs/partitioning_wizard.pm:250
-#: fs/partitioning_wizard.pm:269 fs/partitioning_wizard.pm:274
+#: fs/partitioning_wizard.pm:52 fs/partitioning_wizard.pm:222
+#: fs/partitioning_wizard.pm:230 fs/partitioning_wizard.pm:269
+#: fs/partitioning_wizard.pm:388 fs/partitioning_wizard.pm:445
+#: fs/partitioning_wizard.pm:518 fs/partitioning_wizard.pm:521
 #, c-format
 msgid "Partitioning"
 msgstr "Partizioa egiten"
 
-#: diskdrake/hd_gtk.pm:68
+#: diskdrake/hd_gtk.pm:73
 #, c-format
 msgid "Click on a partition, choose a filesystem type then choose an action"
 msgstr ""
 "Klikatu partizio batean, aukeratu fitxategi sistema mota ondoren ekintza bat "
 "aukeratu"
 
-#: diskdrake/hd_gtk.pm:105 diskdrake/interactive.pm:1093
-#: diskdrake/interactive.pm:1103 diskdrake/interactive.pm:1156
+#: diskdrake/hd_gtk.pm:110 diskdrake/interactive.pm:1111
+#: diskdrake/interactive.pm:1121 diskdrake/interactive.pm:1174
 #, c-format
 msgid "Read carefully"
 msgstr "Irakurri arretaz"
 
-#: diskdrake/hd_gtk.pm:105
+#: diskdrake/hd_gtk.pm:110
 #, c-format
 msgid "Please make a backup of your data first"
 msgstr "Egin zure datuen babeskopia lehendabizi"
 
-#: diskdrake/hd_gtk.pm:106 diskdrake/interactive.pm:240
+#: diskdrake/hd_gtk.pm:111 diskdrake/interactive.pm:240
 #, c-format
 msgid "Exit"
 msgstr "Irten"
 
-#: diskdrake/hd_gtk.pm:106
+#: diskdrake/hd_gtk.pm:111
 #, c-format
 msgid "Continue"
 msgstr "Jarraitu"
 
-#: diskdrake/hd_gtk.pm:177 interactive.pm:653 interactive/gtk.pm:797
-#: interactive/gtk.pm:815 interactive/gtk.pm:836 ugtk2.pm:936
+#: diskdrake/hd_gtk.pm:182 fs/partitioning_wizard.pm:493 interactive.pm:653
+#: interactive/gtk.pm:811 interactive/gtk.pm:829 interactive/gtk.pm:850
+#: ugtk2.pm:936
 #, c-format
 msgid "Help"
 msgstr "Laguntza"
 
-#: diskdrake/hd_gtk.pm:223
+#: diskdrake/hd_gtk.pm:228
 #, c-format
 msgid ""
 "You have one big Microsoft Windows partition.\n"
@@ -1363,87 +1368,87 @@ msgstr ""
 "Lehendabizi partizio horren tamaina aldatzea gomendatzen dizut\n"
 "(egin klik partizioaren gainean, eta sakatu \"Tamainaz aldatu\")"
 
-#: diskdrake/hd_gtk.pm:225
+#: diskdrake/hd_gtk.pm:230
 #, c-format
 msgid "Please click on a partition"
 msgstr "Egin klik partizio batean"
 
-#: diskdrake/hd_gtk.pm:239 diskdrake/smbnfs_gtk.pm:63
+#: diskdrake/hd_gtk.pm:244 diskdrake/smbnfs_gtk.pm:63
 #, c-format
 msgid "Details"
 msgstr "Xehetasunak"
 
-#: diskdrake/hd_gtk.pm:289
+#: diskdrake/hd_gtk.pm:294
 #, c-format
 msgid "No hard drives found"
 msgstr "Ez da disko zurrunik aurkitu"
 
-#: diskdrake/hd_gtk.pm:316
+#: diskdrake/hd_gtk.pm:321
 #, c-format
 msgid "Unknown"
 msgstr "Ezezaguna"
 
-#: diskdrake/hd_gtk.pm:378
+#: diskdrake/hd_gtk.pm:383
 #, c-format
 msgid "Ext3"
 msgstr "Ext3"
 
-#: diskdrake/hd_gtk.pm:378
+#: diskdrake/hd_gtk.pm:383
 #, c-format
 msgid "XFS"
 msgstr "XFS"
 
-#: diskdrake/hd_gtk.pm:378
+#: diskdrake/hd_gtk.pm:383
 #, c-format
 msgid "Swap"
 msgstr "Swap"
 
-#: diskdrake/hd_gtk.pm:378
+#: diskdrake/hd_gtk.pm:383
 #, c-format
 msgid "SunOS"
 msgstr "SunOS"
 
-#: diskdrake/hd_gtk.pm:378
+#: diskdrake/hd_gtk.pm:383
 #, c-format
 msgid "HFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:378
+#: diskdrake/hd_gtk.pm:383
 #, c-format
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:379 services.pm:158
+#: diskdrake/hd_gtk.pm:384 services.pm:158
 #, c-format
 msgid "Other"
 msgstr "Bestelakoak"
 
-#: diskdrake/hd_gtk.pm:379 diskdrake/interactive.pm:1292
+#: diskdrake/hd_gtk.pm:384 diskdrake/interactive.pm:1310
 #, c-format
 msgid "Empty"
 msgstr "Hutsik"
 
-#: diskdrake/hd_gtk.pm:386
+#: diskdrake/hd_gtk.pm:391
 #, c-format
 msgid "Filesystem types:"
 msgstr "Fitxategi-sistemen motak:"
 
-#: diskdrake/hd_gtk.pm:407
+#: diskdrake/hd_gtk.pm:412
 #, c-format
 msgid "This partition is already empty"
 msgstr "Partizio hau dagoeneko hutsik dago"
 
-#: diskdrake/hd_gtk.pm:416
+#: diskdrake/hd_gtk.pm:421
 #, c-format
 msgid "Use ``Unmount'' first"
 msgstr "Erabili ``Desmuntatu'' lehendabizi"
 
-#: diskdrake/hd_gtk.pm:416
+#: diskdrake/hd_gtk.pm:421
 #, c-format
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Horren ordez erabili ``%s'' (aditu moduan)"
 
-#: diskdrake/hd_gtk.pm:416 diskdrake/interactive.pm:402
+#: diskdrake/hd_gtk.pm:421 diskdrake/interactive.pm:402
 #: diskdrake/interactive.pm:588 diskdrake/removable.pm:25
 #: diskdrake/removable.pm:48
 #, c-format
@@ -1467,7 +1472,7 @@ msgid "More"
 msgstr "Gehiago"
 
 #: diskdrake/interactive.pm:281 diskdrake/interactive.pm:291
-#: diskdrake/interactive.pm:1200
+#: diskdrake/interactive.pm:1218
 #, c-format
 msgid "Confirmation"
 msgstr "Baieztapena"
@@ -1492,7 +1497,7 @@ msgstr "Partizio-taula idatzi gabe irten?"
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "/etc/fstab aldaketak gorde nahi dituzu?"
 
-#: diskdrake/interactive.pm:298 fs/partitioning_wizard.pm:250
+#: diskdrake/interactive.pm:298 fs/partitioning_wizard.pm:269
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
@@ -1583,7 +1588,7 @@ msgstr "Formateatu"
 msgid "Add to RAID"
 msgstr "Gehitu RAIDi"
 
-#: diskdrake/interactive.pm:409 diskdrake/interactive.pm:888
+#: diskdrake/interactive.pm:409 diskdrake/interactive.pm:891
 #, c-format
 msgid "Add to LVM"
 msgstr "Gehitu LVMri"
@@ -1628,7 +1633,8 @@ msgstr "Erabili atzera-begiztarako"
 msgid "Create"
 msgstr "Sortu"
 
-#: diskdrake/interactive.pm:450, c-format
+#: diskdrake/interactive.pm:450
+#, c-format
 msgid "Failed to mount partition"
 msgstr "Partizioaren muntaketak huts egin du"
 
@@ -1642,12 +1648,12 @@ msgstr "Sortu partizio berria"
 msgid "Start sector: "
 msgstr "Hasierako sektorea: "
 
-#: diskdrake/interactive.pm:489 diskdrake/interactive.pm:957
+#: diskdrake/interactive.pm:489 diskdrake/interactive.pm:975
 #, c-format
 msgid "Size in MB: "
 msgstr "Tamaina MBtan: "
 
-#: diskdrake/interactive.pm:491 diskdrake/interactive.pm:958
+#: diskdrake/interactive.pm:491 diskdrake/interactive.pm:976
 #, c-format
 msgid "Filesystem type: "
 msgstr "Fitxategi-sistemaren mota: "
@@ -1750,7 +1756,7 @@ msgid "Where do you want to mount %s?"
 msgstr "Non muntatu nahi duzu %s?"
 
 #: diskdrake/interactive.pm:711 diskdrake/interactive.pm:794
-#: fs/partitioning_wizard.pm:146 fs/partitioning_wizard.pm:178
+#: fs/partitioning_wizard.pm:129 fs/partitioning_wizard.pm:191
 #, c-format
 msgid "Resizing"
 msgstr "Tamaina aldatzen"
@@ -1806,7 +1812,7 @@ msgstr ""
 "fitxategi sistemaren egiaztapenak exekutatuko dira Windows®\n"
 "abiarazten duzun hurrengo aldian."
 
-#: diskdrake/interactive.pm:853 diskdrake/interactive.pm:1397
+#: diskdrake/interactive.pm:853 diskdrake/interactive.pm:1415
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "Fitxategi-sistema enkriptatzeko gakoa"
@@ -1816,7 +1822,7 @@ msgstr "Fitxategi-sistema enkriptatzeko gakoa"
 msgid "Enter your filesystem encryption key"
 msgstr "Sartu zure fitxategi sistema zifratzeko gakoa"
 
-#: diskdrake/interactive.pm:855 diskdrake/interactive.pm:1405
+#: diskdrake/interactive.pm:855 diskdrake/interactive.pm:1423
 #, c-format
 msgid "Encryption key"
 msgstr "Enkriptatze-gakoa"
@@ -1831,22 +1837,32 @@ msgstr "Gako baliogabea"
 msgid "Choose an existing RAID to add to"
 msgstr "Aukeratu lehendik dagoen RAID bat gehitzeko"
 
-#: diskdrake/interactive.pm:872 diskdrake/interactive.pm:890
+#: diskdrake/interactive.pm:872 diskdrake/interactive.pm:893
 #, c-format
 msgid "new"
 msgstr "berria"
 
-#: diskdrake/interactive.pm:888
+#: diskdrake/interactive.pm:891
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "Aukeratu lehendik dagoen LVM bat gehitzeko"
 
-#: diskdrake/interactive.pm:895
-#, c-format
-msgid "LVM name?"
+#: diskdrake/interactive.pm:903 diskdrake/interactive.pm:912
+#, fuzzy, c-format
+msgid "LVM name"
 msgstr "LVM izena?"
 
-#: diskdrake/interactive.pm:922
+#: diskdrake/interactive.pm:904
+#, c-format
+msgid "Enter a name for the new LVM volume group"
+msgstr ""
+
+#: diskdrake/interactive.pm:909
+#, fuzzy, c-format
+msgid "\"%s\" already exists"
+msgstr "Fitxategia badago lehendik ere. Erabili?"
+
+#: diskdrake/interactive.pm:940
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
@@ -1856,119 +1872,119 @@ msgstr ""
 "Bolumen honetan erabilitako luzapen fisikoak beste bolumen batzuetara mugitu "
 "nahi dituzu?"
 
-#: diskdrake/interactive.pm:924
+#: diskdrake/interactive.pm:942
 #, c-format
 msgid "Moving physical extents"
 msgstr "Luzapen fisikoak mugitzen"
 
-#: diskdrake/interactive.pm:942
+#: diskdrake/interactive.pm:960
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "Partizio hau ezin da atzera-begiztarako erabili"
 
-#: diskdrake/interactive.pm:955
+#: diskdrake/interactive.pm:973
 #, c-format
 msgid "Loopback"
 msgstr "Atzera-begizta"
 
-#: diskdrake/interactive.pm:956
+#: diskdrake/interactive.pm:974
 #, c-format
 msgid "Loopback file name: "
 msgstr "Atzera-begiztako fitxategi-izena: "
 
-#: diskdrake/interactive.pm:961
+#: diskdrake/interactive.pm:979
 #, c-format
 msgid "Give a file name"
 msgstr "Eman fitxategi-izen bat"
 
-#: diskdrake/interactive.pm:964
+#: diskdrake/interactive.pm:982
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr ""
 "Fitxategi hau beste atzera-begizta batek erabiltzen du, aukeratu beste bat"
 
-#: diskdrake/interactive.pm:965
+#: diskdrake/interactive.pm:983
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "Fitxategia badago lehendik ere. Erabili?"
 
-#: diskdrake/interactive.pm:997 diskdrake/interactive.pm:1000
+#: diskdrake/interactive.pm:1015 diskdrake/interactive.pm:1018
 #, c-format
 msgid "Mount options"
 msgstr "Muntatze-aukerak"
 
-#: diskdrake/interactive.pm:1007
+#: diskdrake/interactive.pm:1025
 #, c-format
 msgid "Various"
 msgstr "Hainbat"
 
-#: diskdrake/interactive.pm:1074
+#: diskdrake/interactive.pm:1092
 #, c-format
 msgid "device"
 msgstr "gailua"
 
-#: diskdrake/interactive.pm:1075
+#: diskdrake/interactive.pm:1093
 #, c-format
 msgid "level"
 msgstr "maila"
 
-#: diskdrake/interactive.pm:1076
+#: diskdrake/interactive.pm:1094
 #, c-format
 msgid "chunk size in KiB"
 msgstr "zatiaren neurria KiB-etan"
 
-#: diskdrake/interactive.pm:1094
+#: diskdrake/interactive.pm:1112
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Kontuz ibili: eragiketa hau arriskutsua da."
 
-#: diskdrake/interactive.pm:1109
+#: diskdrake/interactive.pm:1127
 #, c-format
 msgid "Partitioning Type"
 msgstr "Partizionaketa mota"
 
-#: diskdrake/interactive.pm:1109
+#: diskdrake/interactive.pm:1127
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Nolako partizioa?"
 
-#: diskdrake/interactive.pm:1147
+#: diskdrake/interactive.pm:1165
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Berrabiarazi egin beharko duzu aldaketek eragina izan dezaten"
 
-#: diskdrake/interactive.pm:1156
+#: diskdrake/interactive.pm:1174
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk"
 msgstr "%s unitateko partizio-taula diskoan idaztera doa"
 
-#: diskdrake/interactive.pm:1178 fs/format.pm:96 fs/format.pm:103
+#: diskdrake/interactive.pm:1196 fs/format.pm:96 fs/format.pm:103
 #, c-format
 msgid "Formatting partition %s"
 msgstr "%s partizioa formateatzen"
 
-#: diskdrake/interactive.pm:1191
+#: diskdrake/interactive.pm:1209
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr ""
 "%s partizioa formateatu ondoren, partizioko datu guztiak galdu egingo dira"
 
-#: diskdrake/interactive.pm:1200 fs/partitioning.pm:48
+#: diskdrake/interactive.pm:1218 fs/partitioning.pm:48
 #, c-format
 msgid "Check bad blocks?"
 msgstr "Bloke txarrak egiaztatu?"
 
-#: diskdrake/interactive.pm:1214
+#: diskdrake/interactive.pm:1232
 #, c-format
 msgid "Move files to the new partition"
 msgstr "Eraman fitxategiak partizio berrira"
 
-#: diskdrake/interactive.pm:1214
+#: diskdrake/interactive.pm:1232
 #, c-format
 msgid "Hide files"
 msgstr "Ezkutatu fitxategiak"
 
-#: diskdrake/interactive.pm:1215
+#: diskdrake/interactive.pm:1233
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -1985,128 +2001,128 @@ msgstr ""
 "tokian utzi ditzakezu (ondorioz muntatutako partizioaren edukinak ezkutatuko "
 "ditu)"
 
-#: diskdrake/interactive.pm:1230
+#: diskdrake/interactive.pm:1248
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "Fitxategiak partizio berrira eramaten"
 
-#: diskdrake/interactive.pm:1234
+#: diskdrake/interactive.pm:1252
 #, c-format
 msgid "Copying %s"
 msgstr "%s kopiatzen"
 
-#: diskdrake/interactive.pm:1238
+#: diskdrake/interactive.pm:1256
 #, c-format
 msgid "Removing %s"
 msgstr "%s kentzen"
 
-#: diskdrake/interactive.pm:1252
+#: diskdrake/interactive.pm:1270
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "%s partizioa %s da orain"
 
-#: diskdrake/interactive.pm:1253
+#: diskdrake/interactive.pm:1271
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr "Partizioak berriro zenbakitu dira: "
 
-#: diskdrake/interactive.pm:1278 diskdrake/interactive.pm:1346
+#: diskdrake/interactive.pm:1296 diskdrake/interactive.pm:1364
 #, c-format
 msgid "Device: "
 msgstr "Gailua: "
 
-#: diskdrake/interactive.pm:1279
+#: diskdrake/interactive.pm:1297
 #, c-format
 msgid "Volume label: "
 msgstr "Bolumenaren etiketa: "
 
-#: diskdrake/interactive.pm:1280
+#: diskdrake/interactive.pm:1298
 #, c-format
 msgid "UUID: "
 msgstr "UUID: "
 
-#: diskdrake/interactive.pm:1281
+#: diskdrake/interactive.pm:1299
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS unitate-letra: %s (uste hutsa)\n"
 
-#: diskdrake/interactive.pm:1285 diskdrake/interactive.pm:1294
-#: diskdrake/interactive.pm:1365
+#: diskdrake/interactive.pm:1303 diskdrake/interactive.pm:1312
+#: diskdrake/interactive.pm:1383
 #, c-format
 msgid "Type: "
 msgstr "Mota: "
 
-#: diskdrake/interactive.pm:1289 diskdrake/interactive.pm:1350
+#: diskdrake/interactive.pm:1307 diskdrake/interactive.pm:1368
 #, c-format
 msgid "Name: "
 msgstr "Izena: "
 
-#: diskdrake/interactive.pm:1296
+#: diskdrake/interactive.pm:1314
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Hasiera: %s sektorea\n"
 
-#: diskdrake/interactive.pm:1297
+#: diskdrake/interactive.pm:1315
 #, c-format
 msgid "Size: %s"
 msgstr "Tamaina: %s"
 
-#: diskdrake/interactive.pm:1299
+#: diskdrake/interactive.pm:1317
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s sektore"
 
-#: diskdrake/interactive.pm:1301
+#: diskdrake/interactive.pm:1319
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "%d zilindrotik %d zilindrora\n"
 
-#: diskdrake/interactive.pm:1302
+#: diskdrake/interactive.pm:1320
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr "Luzapen logiko kopurua: %d\n"
 
-#: diskdrake/interactive.pm:1303
+#: diskdrake/interactive.pm:1321
 #, c-format
 msgid "Formatted\n"
 msgstr "Formateatua\n"
 
-#: diskdrake/interactive.pm:1304
+#: diskdrake/interactive.pm:1322
 #, c-format
 msgid "Not formatted\n"
 msgstr "Formateatu gabe\n"
 
-#: diskdrake/interactive.pm:1305
+#: diskdrake/interactive.pm:1323
 #, c-format
 msgid "Mounted\n"
 msgstr "Muntatuta\n"
 
-#: diskdrake/interactive.pm:1306
+#: diskdrake/interactive.pm:1324
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1308
+#: diskdrake/interactive.pm:1326
 #, c-format
 msgid "Encrypted"
 msgstr "Zifratuta"
 
-#: diskdrake/interactive.pm:1308
+#: diskdrake/interactive.pm:1326
 #, c-format
 msgid " (mapped on %s)"
 msgstr " (%s-n mapeatuta)"
 
-#: diskdrake/interactive.pm:1309
+#: diskdrake/interactive.pm:1327
 #, c-format
 msgid " (to map on %s)"
 msgstr " (%s-n mapeatu)"
 
-#: diskdrake/interactive.pm:1310
+#: diskdrake/interactive.pm:1328
 #, c-format
 msgid " (inactive)"
 msgstr " (geldi)"
 
-#: diskdrake/interactive.pm:1316
+#: diskdrake/interactive.pm:1334
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2115,7 +2131,7 @@ msgstr ""
 "Atzera-begiztako fitxategia(k):\n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1317
+#: diskdrake/interactive.pm:1335
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -2124,27 +2140,27 @@ msgstr ""
 "Lehenespenez abiarazteko partizioa\n"
 "    (MS-DOS abiorako, ez lilo-rako)\n"
 
-#: diskdrake/interactive.pm:1319
+#: diskdrake/interactive.pm:1337
 #, c-format
 msgid "Level %s\n"
 msgstr "%s maila\n"
 
-#: diskdrake/interactive.pm:1320
+#: diskdrake/interactive.pm:1338
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "Zatiaren neurria %d KiB\n"
 
-#: diskdrake/interactive.pm:1321
+#: diskdrake/interactive.pm:1339
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "%s RAID-diskoak\n"
 
-#: diskdrake/interactive.pm:1323
+#: diskdrake/interactive.pm:1341
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Atzera-begiztako fitxategi-izena: %s"
 
-#: diskdrake/interactive.pm:1326
+#: diskdrake/interactive.pm:1344
 #, c-format
 msgid ""
 "\n"
@@ -2157,7 +2173,7 @@ msgstr ""
 "partizioa izan daiteke. Hobe duzu\n"
 "bere horretan uztea.\n"
 
-#: diskdrake/interactive.pm:1329
+#: diskdrake/interactive.pm:1347
 #, c-format
 msgid ""
 "\n"
@@ -2170,68 +2186,68 @@ msgstr ""
 "sistemaren abio bikoitza\n"
 "egiteko da.\n"
 
-#: diskdrake/interactive.pm:1338
+#: diskdrake/interactive.pm:1356
 #, c-format
 msgid "Free space on %s (%s)"
 msgstr "Leku askea %s-n (%s)"
 
-#: diskdrake/interactive.pm:1347
+#: diskdrake/interactive.pm:1365
 #, c-format
 msgid "Read-only"
 msgstr "Irakurtzeko soilik"
 
-#: diskdrake/interactive.pm:1348
+#: diskdrake/interactive.pm:1366
 #, c-format
 msgid "Size: %s\n"
 msgstr "Tamaina: %s\n"
 
-#: diskdrake/interactive.pm:1349
+#: diskdrake/interactive.pm:1367
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Geometria: %s zilindro, %s buru, %s sektore\n"
 
-#: diskdrake/interactive.pm:1351
+#: diskdrake/interactive.pm:1369
 #, c-format
 msgid "Medium type: "
 msgstr "Euskarri mota: "
 
-#: diskdrake/interactive.pm:1352
+#: diskdrake/interactive.pm:1370
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "%s LVM-diskoak\n"
 
-#: diskdrake/interactive.pm:1353
+#: diskdrake/interactive.pm:1371
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Partizio-taularen mota: %s\n"
 
-#: diskdrake/interactive.pm:1354
+#: diskdrake/interactive.pm:1372
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "-  kanala: %d id %d\n"
 
-#: diskdrake/interactive.pm:1398
+#: diskdrake/interactive.pm:1416
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Aukeratu fitxategi-sistema enkriptatzeko gakoa"
 
-#: diskdrake/interactive.pm:1401
+#: diskdrake/interactive.pm:1419
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr ""
 "Enkriptatze-gako hau sinpleegia da (gutxienez %d karaktere izan behar ditu)"
 
-#: diskdrake/interactive.pm:1402
+#: diskdrake/interactive.pm:1420
 #, c-format
 msgid "The encryption keys do not match"
 msgstr "Enkriptatze-gakoak ez datoz bat"
 
-#: diskdrake/interactive.pm:1406
+#: diskdrake/interactive.pm:1424
 #, c-format
 msgid "Encryption key (again)"
 msgstr "Enkriptatze-gakoa (berriro)"
 
-#: diskdrake/interactive.pm:1408
+#: diskdrake/interactive.pm:1426
 #, c-format
 msgid "Encryption algorithm"
 msgstr "Enkriptatze-algoritmoa"
@@ -2243,7 +2259,7 @@ msgstr "Aldatu mota"
 
 #: diskdrake/smbnfs_gtk.pm:81 interactive.pm:129 interactive.pm:550
 #: interactive/curses.pm:260 interactive/http.pm:104 interactive/http.pm:160
-#: interactive/stdio.pm:39 interactive/stdio.pm:148 mygtk2.pm:844 ugtk2.pm:415
+#: interactive/stdio.pm:39 interactive/stdio.pm:148 mygtk2.pm:846 ugtk2.pm:415
 #: ugtk2.pm:517 ugtk2.pm:526 ugtk2.pm:812
 #, c-format
 msgid "Cancel"
@@ -2335,7 +2351,7 @@ msgstr ""
 "Errorea gertatu da - ez da fitxategi-sistema berriak sortzeko gailu "
 "baliozkorik aurkitu. Aztertu zure hardwarea arazo honen arrazoia bilatzeko"
 
-#: fs/any.pm:75 fs/partitioning_wizard.pm:59
+#: fs/any.pm:75 fs/partitioning_wizard.pm:60
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "FAT partizio bat eduki behar duzu /boot/efi-n muntatuta"
@@ -2550,7 +2566,7 @@ msgstr ""
 msgid "Not enough swap space to fulfill installation, please add some"
 msgstr "Ez dago nahikoa swap instalazioa burutzeko, gehitu egin beharko duzu"
 
-#: fs/partitioning_wizard.pm:51
+#: fs/partitioning_wizard.pm:52
 #, c-format
 msgid ""
 "You must have a root partition.\n"
@@ -2561,7 +2577,7 @@ msgstr ""
 "Horretarako, sortu partizio bat (edo egin klik lehendik dagoen batean).\n"
 "Gero aukeratu ``Muntatze-puntua'' ekintza eta ezarri `/'"
 
-#: fs/partitioning_wizard.pm:56
+#: fs/partitioning_wizard.pm:57
 #, c-format
 msgid ""
 "You do not have a swap partition.\n"
@@ -2572,83 +2588,42 @@ msgstr ""
 "\n"
 "Jarraitu hala ere?"
 
-#: fs/partitioning_wizard.pm:84
+#: fs/partitioning_wizard.pm:93
 #, c-format
 msgid "Use free space"
 msgstr "Erabili leku librea"
 
-#: fs/partitioning_wizard.pm:86
+#: fs/partitioning_wizard.pm:95
 #, c-format
 msgid "Not enough free space to allocate new partitions"
 msgstr "Ez dago partizio berriak esleitzeko adina leku"
 
-#: fs/partitioning_wizard.pm:94
+#: fs/partitioning_wizard.pm:103
 #, c-format
 msgid "Use existing partitions"
 msgstr "Lehendik dauden partizioak erabili"
 
-#: fs/partitioning_wizard.pm:96
+#: fs/partitioning_wizard.pm:105
 #, c-format
 msgid "There is no existing partition to use"
 msgstr "Ez dago erabiltzeko moduko partiziorik"
 
-#: fs/partitioning_wizard.pm:103
-#, c-format
-msgid "Use the Microsoft Windows® partition for loopback"
-msgstr "Erabili Microsoft Windows® partizioa atzera-begiztarako"
-
-#: fs/partitioning_wizard.pm:106
-#, c-format
-msgid "Which partition do you want to use for Linux4Win?"
-msgstr "Zein partizio erabili nahi duzu Linux4Win-erako?"
-
-#: fs/partitioning_wizard.pm:108
-#, c-format
-msgid "Choose the sizes"
-msgstr "Aukeratu tamainak"
-
-#: fs/partitioning_wizard.pm:109
-#, c-format
-msgid "Root partition size in MB: "
-msgstr "Erroko partizioaren tamaina MBtan: "
-
-#: fs/partitioning_wizard.pm:110
-#, c-format
-msgid "Swap partition size in MB: "
-msgstr "Swap partizioaren tamaina MBtan: "
-
-#: fs/partitioning_wizard.pm:119
-#, c-format
-msgid "There is no FAT partition to use as loopback (or not enough space left)"
-msgstr ""
-"Ez dago FAT partiziorik atzera-begizta gisa erabiltzeko (edo ez dago nahikoa "
-"leku)"
-
-#: fs/partitioning_wizard.pm:127
-#, c-format
-msgid "Use the free space on a Microsoft Windows® partition"
-msgstr "Erabili Microsoft Windows® partizio batetako leku askea"
-
 #: fs/partitioning_wizard.pm:129
-#, c-format
-msgid "Which partition do you want to resize?"
-msgstr "Zein partiziori aldatu nahi diozu tamaina?"
-
-#: fs/partitioning_wizard.pm:143
-#, c-format
-msgid ""
-"The FAT resizer is unable to handle your partition, \n"
-"the following error occurred: %s"
-msgstr ""
-"FAT tamaina-aldatzaileak ezin du zure partizioa maneiatu, \n"
-"errore hau gertatu da: %s"
-
-#: fs/partitioning_wizard.pm:146
 #, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
 msgstr "Microsoft Windows®-en partizioaren tamaina kalkulatzen"
 
-#: fs/partitioning_wizard.pm:153
+#: fs/partitioning_wizard.pm:148
+#, c-format
+msgid "Use the free space on a Microsoft Windows® partition"
+msgstr "Erabili Microsoft Windows® partizio batetako leku askea"
+
+#: fs/partitioning_wizard.pm:152
+#, c-format
+msgid "Which partition do you want to resize?"
+msgstr "Zein partiziori aldatu nahi diozu tamaina?"
+
+#: fs/partitioning_wizard.pm:162
 #, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
@@ -2659,7 +2634,7 @@ msgstr ""
 "computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
 "the Mandriva Linux installation."
 
-#: fs/partitioning_wizard.pm:156
+#: fs/partitioning_wizard.pm:166
 #, c-format
 msgid ""
 "WARNING!\n"
@@ -2695,38 +2670,38 @@ msgstr ""
 "Ziur bazaude, sakatu '%s'."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:165 interactive.pm:549 interactive/curses.pm:263
-#: ugtk2.pm:519
+#: fs/partitioning_wizard.pm:175 fs/partitioning_wizard.pm:498
+#: interactive.pm:549 interactive/curses.pm:263 ugtk2.pm:519
 #, c-format
 msgid "Next"
 msgstr "Hurrengoa"
 
-#: fs/partitioning_wizard.pm:168
+#: fs/partitioning_wizard.pm:180
 #, c-format
 msgid "Partitionning"
 msgstr "Zatikatzen"
 
-#: fs/partitioning_wizard.pm:168
+#: fs/partitioning_wizard.pm:180
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
 msgstr "Zein tamaina utzi nahi duzu Microsoft Windows®-entzat %s partizioan?"
 
-#: fs/partitioning_wizard.pm:169
+#: fs/partitioning_wizard.pm:181
 #, c-format
 msgid "Size"
 msgstr "Tamaina"
 
-#: fs/partitioning_wizard.pm:178
+#: fs/partitioning_wizard.pm:191
 #, c-format
 msgid "Resizing Microsoft Windows® partition"
 msgstr "Microsoft Windows® partizioaren tamaina aldatzen"
 
-#: fs/partitioning_wizard.pm:183
+#: fs/partitioning_wizard.pm:196
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr "FAT tamaina aldatzeak huts egin du: %s"
 
-#: fs/partitioning_wizard.pm:186
+#: fs/partitioning_wizard.pm:199
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
@@ -2736,42 +2711,42 @@ msgstr ""
 "fitxategi-sistemaren probak exekutatuko dira Windows(TM) hurrengo\n"
 "aldiz abiaraztean."
 
-#: fs/partitioning_wizard.pm:198
+#: fs/partitioning_wizard.pm:212
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr "Ez dago FAT partiziorik tamainaz aldatzeko (edo ez dago nahikoa leku)"
 
-#: fs/partitioning_wizard.pm:203
+#: fs/partitioning_wizard.pm:217
 #, c-format
 msgid "Remove Microsoft Windows®"
 msgstr "Kendu Microsoft Windows®"
 
-#: fs/partitioning_wizard.pm:203
+#: fs/partitioning_wizard.pm:217
 #, c-format
 msgid "Erase and use entire disk"
 msgstr "Ezabatu eta erabili disko osoa"
 
-#: fs/partitioning_wizard.pm:205
+#: fs/partitioning_wizard.pm:221
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "Disko zurrun bat baino gehiago duzu, zeinetan instalatuko duzu linux?"
 
-#: fs/partitioning_wizard.pm:210 fsedit.pm:600
+#: fs/partitioning_wizard.pm:229 fsedit.pm:600
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "%s unitatean dauden partizio eta datu GUZTIAK galdu egingo dira"
 
-#: fs/partitioning_wizard.pm:220
+#: fs/partitioning_wizard.pm:239
 #, c-format
 msgid "Custom disk partitioning"
 msgstr "Disko-partizio pertsonalizatua"
 
-#: fs/partitioning_wizard.pm:226
+#: fs/partitioning_wizard.pm:245
 #, c-format
 msgid "Use fdisk"
 msgstr "Erabili fdisk"
 
-#: fs/partitioning_wizard.pm:229
+#: fs/partitioning_wizard.pm:248
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -2780,27 +2755,32 @@ msgstr ""
 "Orain egin dezakezu %s partizioa.\n"
 "Egin ondoren, ez ahaztu `w' erabiliz gordetzea"
 
-#: fs/partitioning_wizard.pm:269
+#: fs/partitioning_wizard.pm:388 fs/partitioning_wizard.pm:518
 #, c-format
 msgid "I can not find any room for installing"
 msgstr "Ezin dut instalatzeko lekurik aurkitu"
 
-#: fs/partitioning_wizard.pm:278
+#: fs/partitioning_wizard.pm:397 fs/partitioning_wizard.pm:525
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "DrakX Partizio-morroiak irtenbide hauek aurkitu ditu:"
 
-#: fs/partitioning_wizard.pm:287
+#: fs/partitioning_wizard.pm:459
+#, c-format
+msgid "Here is the content of you disk drive "
+msgstr ""
+
+#: fs/partitioning_wizard.pm:535
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Partizioak huts egin du: %s"
 
-#: fs/type.pm:388
+#: fs/type.pm:390
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
 msgstr "Ezin da JFS erabili 16MB baino gutxiagoko partizioetarako"
 
-#: fs/type.pm:389
+#: fs/type.pm:391
 #, c-format
 msgid "You can not use ReiserFS for partitions smaller than 32MB"
 msgstr "Ezin da ReiserFS erabili 32MB baino gutxiagoko partizioetarako"
@@ -2901,10 +2881,10 @@ msgstr "Direktorio honek erroko fitxategi-sisteman egon behar du"
 #: fsedit.pm:447 fsedit.pm:449
 #, c-format
 msgid ""
-"You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
+"You need a true filesystem (ext2/3/4, reiserfs, xfs, or jfs) for this mount "
 "point\n"
 msgstr ""
-"Egiazko fitxategi-sistema (ext2/ext3, reiserfs, xfs, edo jfs) behar duzu "
+"Egiazko fitxategi-sistema (ext2/3/4, reiserfs, xfs, edo jfs) behar duzu "
 "muntatze-puntu honetarako\n"
 
 #: fsedit.pm:451
@@ -3226,7 +3206,7 @@ msgstr ""
 "Beste kontrolatzaile bat hauta dezakezu (OSS edo ALSA) (%s) soinu-"
 "txartelarentzat."
 
-#. -PO: here the first %s is either "OSS" or "ALSA",
+#. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
@@ -3443,7 +3423,7 @@ msgstr "Sintonizadore-mota:"
 
 #: interactive.pm:128 interactive.pm:549 interactive/curses.pm:263
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
-#: interactive/stdio.pm:148 interactive/stdio.pm:149 mygtk2.pm:844
+#: interactive/stdio.pm:148 interactive/stdio.pm:149 mygtk2.pm:846
 #: ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
 #, c-format
 msgid "Ok"
@@ -3504,7 +3484,7 @@ msgstr "Ez dago horrelako direktoriorik"
 msgid "No such file"
 msgstr "Ez dago horrelako fitxategirik"
 
-#: interactive/gtk.pm:580
+#: interactive/gtk.pm:594
 #, c-format
 msgid "Beware, Caps Lock is enabled"
 msgstr "Kontuz, Blok Maius gaituta dago"
@@ -5419,17 +5399,18 @@ msgstr ""
 "Huts egin du %s modulua kargatzean.\n"
 "Beste parametro batzuekin saiatu nahi duzu berriro?"
 
-#: mygtk2.pm:1538 mygtk2.pm:1539
+#: mygtk2.pm:1540 mygtk2.pm:1541
 #, c-format
 msgid "Password is trivial to guess"
 msgstr "Pasahitza antzematen errazegia da"
 
-#: mygtk2.pm:1540
+#: mygtk2.pm:1542
 #, c-format
 msgid "Password should resist to basic attacks"
 msgstr "Pasahitzak oinarrizko erasoa jasan beharko luke"
 
-#: mygtk2.pm:1541 mygtk2.pm:1542, c-format
+#: mygtk2.pm:1543 mygtk2.pm:1544
+#, c-format
 msgid "Password seems secure"
 msgstr "Pasahitza segurua dirudi"
 
@@ -7132,6 +7113,34 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Instalazioak huts egin du"
+
+#~ msgid "Use the Microsoft Windows® partition for loopback"
+#~ msgstr "Erabili Microsoft Windows® partizioa atzera-begiztarako"
+
+#~ msgid "Which partition do you want to use for Linux4Win?"
+#~ msgstr "Zein partizio erabili nahi duzu Linux4Win-erako?"
+
+#~ msgid "Choose the sizes"
+#~ msgstr "Aukeratu tamainak"
+
+#~ msgid "Root partition size in MB: "
+#~ msgstr "Erroko partizioaren tamaina MBtan: "
+
+#~ msgid "Swap partition size in MB: "
+#~ msgstr "Swap partizioaren tamaina MBtan: "
+
+#~ msgid ""
+#~ "There is no FAT partition to use as loopback (or not enough space left)"
+#~ msgstr ""
+#~ "Ez dago FAT partiziorik atzera-begizta gisa erabiltzeko (edo ez dago "
+#~ "nahikoa leku)"
+
+#~ msgid ""
+#~ "The FAT resizer is unable to handle your partition, \n"
+#~ "the following error occurred: %s"
+#~ msgstr ""
+#~ "FAT tamaina-aldatzaileak ezin du zure partizioa maneiatu, \n"
+#~ "errore hau gertatu da: %s"
 
 #~ msgid "Automatic routing from ALSA to PulseAudio"
 #~ msgstr "ALSA-tik PulseAudio-rako bideraketa automatikoa"
