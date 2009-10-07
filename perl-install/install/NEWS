@@ -1,7 +1,7 @@
 Version 12.60.1 - 7 October 2009
 
-- include MDK::Common after XML::Parser as XML::Parser breaks if 
-  File::Sync was used before...
+- ude FileHandle before XML::Parser, else XML::Parser breaks if 
+  File::Sync is used...
 - include File::Sync in install
 
 Version 12.60 - 7 October 2009
