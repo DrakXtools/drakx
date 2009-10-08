@@ -12,6 +12,7 @@ use fs::mount_point;
 use partition_table;
 use partition_table::raw;
 use partition_table::dos;
+use POSIX qw(ceil);
 
 #- unit of $mb is mega bytes, min and max are in sectors, this
 #- function is used to convert back to sectors count the size of
@@ -310,7 +311,7 @@ sub create_display_box {
         }
         if($resize && $part && !$desc) {
             $ev->set_name("PART_vfat");
-            $w->set_size_request($ratio * $part->{min_win}, 0);
+            $w->set_size_request(ceil($ratio * $part->{min_win}), 0);
             my $ev2 = Gtk2::EventBox->new();
             my $b2 = Gtk2::Label->new("");
             $ev2->add($b2);
@@ -322,7 +323,7 @@ sub create_display_box {
             $hpane->child1_shrink(0);
             $hpane->add2($ev2);
             $hpane->child2_shrink(0);
-            $hpane->set_position($ratio * $part->{min_win});
+            $hpane->set_position(ceil($ratio * $part->{min_win}));
             ugtk2::gtkset_size_request($hpane, $ratio * $part->{size}, 30);
             ugtk2::gtkpack__($display_box, $hpane);
 
