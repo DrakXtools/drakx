@@ -480,9 +480,9 @@ sub main {
         
         ugtk2::gtkpack2__($mainbox, $hdchoice);
         
-        my $contentbox = Gtk2::VBox->new();
+        my $contentbox = Gtk2::VBox->new(0, 24);
         $mainbox->add($contentbox);
-        
+
         my $kind = @kinds[$combobox->get_active];
         my %solutions = partitionWizardSolutions($o, $all_hds, $fstab, $manual_fstab, $partitions, $partitioning_flags, $skip_mtab, diskdrake::hd_gtk::kind2hd($kind));
         delete $solutions{diskdrake} if $b_nodiskdrake;
