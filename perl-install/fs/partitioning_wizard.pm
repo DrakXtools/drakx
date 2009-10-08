@@ -329,30 +329,36 @@ sub create_display_box {
 
             my $size = int($hpane->get_position / $ratio);
 
-            $desc = ugtk2::gtkset_size_request(Gtk2::HBox->new(0,0), $width, 20);
+            $desc = Gtk2::HBox->new(0,0);
             $ev = Gtk2::EventBox->new();
             $ev->add(Gtk2::Label->new(" " x 4));
             $ev->set_name("PART_vfat");
             ugtk2::gtkpack__($desc, $ev);
-            ugtk2::gtkpack__($desc, Gtk2::Label->new(" Windows "));
-            my $win_size_label = Gtk2::Label->new(sprintf("%10s", formatXiB($size, 512)));
-            $desc->add($win_size_label);
+            my $win_size_label = Gtk2::Label->new();
+            
+            ugtk2::gtkset_size_request($win_size_label, 150, 20);
+            ugtk2::gtkpack__($desc, $win_size_label);
             $ev = Gtk2::EventBox->new();
             $ev->add(Gtk2::Label->new(" " x 4));
             $ev->set_name("PART_ext4");
             ugtk2::gtkpack__($desc, $ev); 
-            ugtk2::gtkpack__($desc, Gtk2::Label->new(" Mandriva "));
-            my $mdv_size_label = Gtk2::Label->new(sprintf("%10s", formatXiB($part->{size}-$size, 512)));
-            $desc->add($mdv_size_label);
+            my $mdv_size_label = Gtk2::Label->new();
+            ugtk2::gtkset_size_request($mdv_size_label, 150, 20);
+            ugtk2::gtkpack__($desc, $mdv_size_label);
             $hpane->signal_connect('size-allocate' => sub {
                 my (undef, $alloc) = @_;
                 $part->{width} = $alloc->width;
                 0;
             });
+            sub update_size_labels {
+                my ($size1, $size2) = @_;
+                $win_size_label->set_label(" Windows (".formatXiB($size1, 512).")");
+                $mdv_size_label->set_label(" Mandriva (".formatXiB($size2, 512).")");
+            }
+            update_size_labels($size, $part->{size}-$size);
             $hpane->signal_connect('motion-notify-event' => sub {
                 $part->{req_size} = int($hpane->get_position * $part->{size} / $part->{width});
-                $win_size_label->set_label(sprintf("%10s", formatXiB( $part->{req_size}, 512)));
-                $mdv_size_label->set_label(sprintf("%10s", formatXiB($part->{size}- $part->{req_size}, 512)));
+                update_size_labels($part->{req_size}, $part->{size}-$part->{req_size});
                 1;
             });
             $hpane->signal_connect('button-press-event' => sub {
@@ -486,7 +492,7 @@ sub main {
         
         ugtk2::gtkpack2__($mainbox, $hdchoice);
         
-        my $contentbox = Gtk2::VBox->new(0, 24);
+        my $contentbox = Gtk2::VBox->new(0, 12);
         $mainbox->add($contentbox);
 
         my $kind = @kinds[$combobox->get_active];
