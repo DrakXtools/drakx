@@ -404,6 +404,7 @@ sub display_choices {
     
     my $choicesbox = ugtk2::gtknew('VBox');
     my $button;
+    my $sep;
     foreach my $s (@solutions) {
         my $item;
         if($s eq 'free_space') {
@@ -434,7 +435,10 @@ sub display_choices {
                                 $button?(group=>$button->get_group):());
         $button->signal_connect('pressed', sub {$mainw->{sol} = $solutions{$s}; });
         ugtk2::gtkpack2__($choicesbox, $button);
+        $sep = ugtk2::gtknew('HSeparator');
+        ugtk2::gtkpack2__($choicesbox, $sep);
     }
+    $choicesbox->remove($sep);
     ugtk2::gtkadd($contentbox, $choicesbox);
     $mainw->{sol} = $solutions{@solutions[0]}
 }
