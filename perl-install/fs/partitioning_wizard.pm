@@ -276,7 +276,7 @@ sub warn_reboot_needed {
 }
 
 sub create_display_box {
-    my ($kind, $resize, $fill_empty) = @_;
+    my ($kind, $resize, $fill_empty, $button) = @_;
     my @parts = fs::get::hds_fstab_and_holes($kind->{val});
 
     my $totalsectors = $kind->{val}->{totalsectors};
@@ -347,11 +347,17 @@ sub create_display_box {
             $hpane->signal_connect('size-allocate' => sub {
                 my (undef, $alloc) = @_;
                 $part->{width} = $alloc->width;
+                0;
             });
             $hpane->signal_connect('motion-notify-event' => sub {
                 $part->{req_size} = int($hpane->get_position * $part->{size} / $part->{width});
                 $win_size_label->set_label(sprintf("%10s", formatXiB( $part->{req_size}, 512)));
                 $mdv_size_label->set_label(sprintf("%10s", formatXiB($part->{size}- $part->{req_size}, 512)));
+                1;
+            });
+            $hpane->signal_connect('button-press-event' => sub {
+                $button->activate;
+                0;
             });
         } else {
             if($fill_empty && isEmpty($entry)) {
@@ -404,14 +410,16 @@ sub display_choices {
                                                 alignment=> [0, 0]));
     
     my $choicesbox = ugtk2::gtknew('VBox');
-    my $button;
+    my $oldbutton;
     my $sep;
     foreach my $s (@solutions) {
         my $item;
+        my $vbox = ugtk2::gtknew('VBox');
+        my $button = ugtk2::gtknew('RadioButton', child => $vbox);
         if($s eq 'free_space') {
             $item = create_display_box($mainw->{kind}, undef, 1);
         } elsif($s eq 'resize_fat') {
-            $item = create_display_box($mainw->{kind}, $solutions{$s}->[3]);
+            $item = create_display_box($mainw->{kind}, $solutions{$s}->[3], undef, $button);
         } elsif($s eq 'existing_part') {
         } elsif($s eq 'wipe_drive') {
             $item = Gtk2::EventBox->new();
@@ -424,16 +432,13 @@ sub display_choices {
             log::l("$s");
             next;
         }
-        $button = ugtk2::gtknew('RadioButton',
-                                child => ugtk2::gtknew('VBox',
-                                                       children_tight => [
-                                                           ugtk2::gtknew('Label',
-                                                                         text => $solutions{$s}->[1],
-                                                                         alignment=> [0, 0]),
-                                                           if_(defined($item), $item)
-                                                       ],
-                                ),
-                                $button?(group=>$button->get_group):());
+        ugtk2::gtkpack2__($vbox, 
+                          ugtk2::gtknew('Label',
+                                        text => $solutions{$s}->[1],
+                                        alignment=> [0, 0]));
+        ugtk2::gtkpack2__($vbox, $item) if defined($item);
+        $button->set_group($oldbutton->get_group) if $oldbutton;
+        $oldbutton = $button;
         $button->signal_connect('pressed', sub {$mainw->{sol} = $solutions{$s}; });
         ugtk2::gtkpack2__($choicesbox, $button);
         $sep = ugtk2::gtknew('HSeparator');
