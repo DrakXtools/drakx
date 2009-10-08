@@ -338,6 +338,7 @@ sub create_display_box {
             
             ugtk2::gtkset_size_request($win_size_label, 150, 20);
             ugtk2::gtkpack__($desc, $win_size_label);
+            $win_size_label->set_alignment(0,0.5);
             $ev = Gtk2::EventBox->new();
             $ev->add(Gtk2::Label->new(" " x 4));
             $ev->set_name("PART_ext4");
@@ -345,6 +346,7 @@ sub create_display_box {
             my $mdv_size_label = Gtk2::Label->new();
             ugtk2::gtkset_size_request($mdv_size_label, 150, 20);
             ugtk2::gtkpack__($desc, $mdv_size_label);
+            $mdv_size_label->set_alignment(0,0.5);
             $hpane->signal_connect('size-allocate' => sub {
                 my (undef, $alloc) = @_;
                 $part->{width} = $alloc->width;
