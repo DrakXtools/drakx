@@ -125,20 +125,25 @@ sub partitionWizardSolutions {
                 undef $part;
             }
             if ($part) {
-                my $min_win = do {
+                my $min_win = eval {
                     my $_w = $in->wait_message(N("Resizing"), N("Computing the size of the Microsoft Windows® partition"));
                     $resize_fat->min_size;
                 };
-                #- make sure that even after normalizing the size to cylinder boundaries, the minimun will be saved,
-                #- this save at least a cylinder (less than 8Mb).
-                $min_win += partition_table::raw::cylinder_size($hd);
-                
-                if ($part->{size} <= $min_linux + $min_swap + $min_freewin + $min_win) {
-#                die N("Your Microsoft Windows® partition is too fragmented. Please reboot your computer under Microsoft Windows®, run the ``defrag'' utility, then restart the Mandriva Linux installation.");
+                if($@) {
+                    log::l("The FAT resizer is unable to get minimal size for $part->{device} partition %s", formatError($@));
                     undef $part;
                 } else {
-                    $part->{resize_fat} = $resize_fat;
-                    $part->{min_win} = $min_win;
+                    #- make sure that even after normalizing the size to cylinder boundaries, the minimun will be saved,
+                    #- this save at least a cylinder (less than 8Mb).
+                    $min_win += partition_table::raw::cylinder_size($hd);
+                    
+                    if ($part->{size} <= $min_linux + $min_swap + $min_freewin + $min_win) {
+#                die N("Your Microsoft Windows® partition is too fragmented. Please reboot your computer under Microsoft Windows®, run the ``defrag'' utility, then restart the Mandriva Linux installation.");
+                        undef $part;
+                    } else {
+                        $part->{resize_fat} = $resize_fat;
+                        $part->{min_win} = $min_win;
+                    }
                 }
             }
             $part || ();

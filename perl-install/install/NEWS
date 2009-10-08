@@ -1,6 +1,8 @@
+- do not fail when a windows partition is corrupted
+
 Version 12.60.1 - 7 October 2009
 
-- ude FileHandle before XML::Parser, else XML::Parser breaks if 
+- use FileHandle before XML::Parser, else XML::Parser breaks if 
   File::Sync is used...
 - include File::Sync in install
 
