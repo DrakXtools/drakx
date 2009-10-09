@@ -678,9 +678,12 @@ sub set_autologin {
     my $do_autologin = bool2text($autologin->{user});
 
     $autologin->{dm} ||= 'xdm';
-    $do_pkgs->ensure_is_installed($autologin->{dm});
-    $do_pkgs->ensure_is_installed('autologin', '/usr/bin/startx.autologin')
-      if $autologin->{user} && $autologin->{dm} eq 'xdm';
+    $do_pkgs->ensure_is_installed($autologin->{dm})
+      or return;
+    if ($autologin->{user} && $autologin->{dm} eq 'xdm') {
+        $do_pkgs->ensure_is_installed('autologin', '/usr/bin/startx.autologin')
+          or return;
+    }
 
     #- Configure KDM / MDKKDM
     my $kdm_conffile = common::read_alternative('kdm4-config');
