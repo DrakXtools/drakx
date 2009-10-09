@@ -3,6 +3,9 @@
   o re-read partition table after writing image
   o do not extend / to the end of the disk, it overlaps with swap
     partition
+- do not make de-latin1 keymap a symlink loop (#45109)
+- use extipl from /usr/lib/extipl on x86_64 too
+  (to fix restore_ms_boot, hardcoding this path)
 
 Version 1.15 - 3 September 2009, by Thierry Vignaud
 
