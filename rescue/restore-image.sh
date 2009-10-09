@@ -340,9 +340,9 @@ function expand_fs()
 		main_part=/dev/${root}
 
 		# FIXME: absurdly dirty hack
-                num=${root##sda}
-		let num++
-		swap_part=/dev/${root%[0-9]}${num}
+		main_part_num=${root:3}
+		swap_part_num=$((main_part_num+1))
+		swap_part=${disk}${swap_part_num}
 
 		main_part_sectors=
 		if [ -n "$SWAP_BLOCKS" ]; then
@@ -359,7 +359,20 @@ function expand_fs()
 		    mkswap -L swap $swap_part
 		fi
 		if [ -n "$EXPAND_FS" ]; then
-		    sfdisk -d $disk | sed -e "\|$main_part|  s/size=.*,/size= ,/" | sfdisk -f $disk
+		    e2fsck -fy $main_part
+		    fdisk $disk << EOF
+d
+$main_part_num
+n
+p
+$main_part_num
+
+
+a
+$main_part_num
+w
+EOF
+		    sfdisk -R $disk
 		    e2fsck -fy $main_part
 		    resize2fs $main_part
 		fi
