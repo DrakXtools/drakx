@@ -293,6 +293,9 @@ function write_image()
 		_msgbox "\nError writing image!\n"
 		sleep 24h
 	fi
+
+	# Now re-read the partition table because 'dd' might have changed it
+    	sfdisk -R /dev/${root}
 }
 
 function grub_setup()
