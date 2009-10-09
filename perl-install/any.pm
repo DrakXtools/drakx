@@ -654,7 +654,7 @@ sub get_autologin() {
     my $dm =
       lc($desktop{DISPLAYMANAGER}) ||
       $desktop_to_dm{$desktop} ||
-      basename(chomp_(run_program::rooted_get_stdout($::prefix, "/etc/X11/lookupdm"));
+      basename(chomp_(run_program::rooted_get_stdout($::prefix, "/etc/X11/lookupdm")));
     $dm = $dm_canonical{$dm} if exists $dm_canonical{$dm};
 
     my $autologin_user;
