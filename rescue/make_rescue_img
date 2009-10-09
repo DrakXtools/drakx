@@ -28,7 +28,7 @@ substInFile { s/DISTRIB_DESCR/$ENV{DISTRIB_DESCR}/ } "$tmp/etc/issue";
 _ "../tools/install-xml-file-list list.xml $tmp";
 
 my %keytable_conflicts;
-my @less_important_keytables = qw(am_old am_phonetic no-dvorak);
+my @less_important_keytables = qw(am_old am_phonetic no-dvorak de-latin1);
 foreach (keyboard::loadkeys_files()) {
     my ($dir, $fname) = (dirname($_), basename($_));
     my ($name) = $fname =~ /(.*)\.map\.gz/ or next;
