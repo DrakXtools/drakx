@@ -456,7 +456,7 @@ sub create_widget {
 	        push @buttons, 'gtk-go-' . $_ if $actions->{$_};
 	    }
 	    @buttons = map {
-                my $button = /^gtk-/ ? gtknew('Button', image => gtknew('Image', stock => $_))
+                my $button = /^gtk-/ ? gtknew('Button', image => gtknew('Image', stock => lc($_)))
                   : Gtk2::Button->new(translate($_));
 		my $kind = $_;
 		$kind =~ s/^gtk-go-//;
