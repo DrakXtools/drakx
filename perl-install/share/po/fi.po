@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-fi\n"
 "POT-Creation-Date: 2009-10-07 13:57+0200\n"
-"PO-Revision-Date: 2009-10-04 22:26+0300\n"
+"PO-Revision-Date: 2009-10-09 17:08+0300\n"
 "Last-Translator: Jani Välimaa <wally@mandriva.org>\n"
 "Language-Team: Finnish <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -410,14 +410,12 @@ msgstr "(lisätty jo: %s)"
 msgid "Please give a user name"
 msgstr "Anna käyttäjätunnus"
 
-#: any.pm:834
-#, fuzzy, c-format
+#: any.pm:834, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
 "cased letters, numbers, `-' and `_'"
 msgstr ""
-"Käyttäjätunnus saa sisältää vain pieniä kirjaimia, numeroita ja merkit \"-\" "
-"ja \"_\""
+"Käyttäjätunnus saa sisältää vain pieniä kirjaimia, numeroita ja merkit - ja _"
 
 #: any.pm:835
 #, c-format
@@ -1869,20 +1867,18 @@ msgstr "Uusi"
 msgid "Choose an existing LVM to add to"
 msgstr "Valitse taltioryhmä tai luo uusi"
 
-#: diskdrake/interactive.pm:903 diskdrake/interactive.pm:912
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:903 diskdrake/interactive.pm:912, c-format
 msgid "LVM name"
-msgstr "Taltioryhmän nimi?"
+msgstr "Taltioryhmän nimi"
 
 #: diskdrake/interactive.pm:904
 #, c-format
 msgid "Enter a name for the new LVM volume group"
-msgstr ""
+msgstr "Anna uuden LVM-taltioryhmän nimi"
 
-#: diskdrake/interactive.pm:909
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:909, c-format
 msgid "\"%s\" already exists"
-msgstr "Tiedosto on jo olemassa. Käytetäänkö sitä?"
+msgstr "%s on jo olemassa"
 
 #: diskdrake/interactive.pm:940
 #, c-format
@@ -2762,7 +2758,8 @@ msgstr ""
 #: fs/partitioning_wizard.pm:229 fsedit.pm:600
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr "KAIKKI olemassa olevat osiot ja niissä oleva tieto tuhoutuu levyltä %s"
+msgstr ""
+"KAIKKI olemassa olevat osiot ja niissä olevat tiedot tuhoutuvat levyltä %s"
 
 #: fs/partitioning_wizard.pm:239
 #, c-format
@@ -2796,7 +2793,7 @@ msgstr "DrakX Osiointivelho löysi seuraavat vaihtoehdot:"
 #: fs/partitioning_wizard.pm:459
 #, c-format
 msgid "Here is the content of you disk drive "
-msgstr ""
+msgstr "Kiintolevyn sisältö"
 
 # mat
 #: fs/partitioning_wizard.pm:535
@@ -3231,7 +3228,7 @@ msgid ""
 "sound card (%s)."
 msgstr "Valitse vaihtoehtoinen OSS- tai ALSA-ajuri äänikortille \"%s\"."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
