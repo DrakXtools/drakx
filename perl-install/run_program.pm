@@ -112,6 +112,7 @@ sub raw {
         if ($options->{setuid}) {
             require POSIX;
             $ENV{LOGNAME} = getpwuid($options->{setuid}) || $ENV{LOGNAME};
+            # drop privileges:
             POSIX::setuid($options->{setuid});
         }
 
