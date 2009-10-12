@@ -514,7 +514,7 @@ sub main {
         my @more_buttons = (
             [ ugtk2::gtknew('Install_Button',
                             text => N("Help"),
-                            clicked => sub { display_help($o, {interactive_help_id => 'doPartitionDisks'}, $mainw) }),
+                            clicked => sub { interactive::gtk::display_help($o, {interactive_help_id => 'doPartitionDisks'}, $mainw) }),
               undef, 1 ],
             );
         $::Wizard_no_previous = 1;
