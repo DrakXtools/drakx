@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 
 use Config;
+use FileHandle;
 use MDK::Common;
 Config->import;
 my ($arch) = $Config{archname} =~ /(.*?)-/;
