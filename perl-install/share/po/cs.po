@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "POT-Creation-Date: 2009-10-07 13:57+0200\n"
-"PO-Revision-Date: 2009-09-18 00:02+0200\n"
+"PO-Revision-Date: 2009-10-12 21:24+0200\n"
 "Last-Translator: Michal Bukovjan <bukm@centrum.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 0.3\n"
 
 #: any.pm:252 any.pm:910 diskdrake/interactive.pm:594
@@ -403,12 +403,13 @@ msgstr "(už byl přidán %s)"
 msgid "Please give a user name"
 msgstr "Prosím zadejte uživatelské jméno"
 
-#: any.pm:834
-#, fuzzy, c-format
+#: any.pm:834, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
 "cased letters, numbers, `-' and `_'"
-msgstr "Uživatelské jméno může obsahovat pouze malá písmena, čísla, '-' a '_'"
+msgstr ""
+"Uživatelské jméno musí začínat malým písmenem a pokračovat "
+"pouze malými písmeny, číslicemi nebo znaky „-” a „_”"
 
 #: any.pm:835
 #, c-format
@@ -1843,20 +1844,18 @@ msgstr "nový"
 msgid "Choose an existing LVM to add to"
 msgstr "Zvolte existující LVM pro přidání"
 
-#: diskdrake/interactive.pm:903 diskdrake/interactive.pm:912
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:903 diskdrake/interactive.pm:912, c-format
 msgid "LVM name"
-msgstr "Název pro LVM?"
+msgstr "Název LVM"
 
 #: diskdrake/interactive.pm:904
 #, c-format
 msgid "Enter a name for the new LVM volume group"
-msgstr ""
+msgstr "Zadejte název nové skupiny svazků LVM"
 
-#: diskdrake/interactive.pm:909
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:909, c-format
 msgid "\"%s\" already exists"
-msgstr "Soubor už existuje. Mám ho použít?"
+msgstr "„%s” už existuje"
 
 #: diskdrake/interactive.pm:940
 #, c-format
@@ -2761,7 +2760,7 @@ msgstr "Průvodce oddíly DrakX našel následující řešení rozdělení disk
 #: fs/partitioning_wizard.pm:459
 #, c-format
 msgid "Here is the content of your disk drive "
-msgstr ""
+msgstr "Zde je obsah vašeho disku "
 
 #: fs/partitioning_wizard.pm:535
 #, c-format
@@ -3198,7 +3197,7 @@ msgstr ""
 "Zde si pro vaši zvukovou (%s) kartu můžete vybrat alternativní ovladač (buď "
 "OSS nebo ALSA)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
