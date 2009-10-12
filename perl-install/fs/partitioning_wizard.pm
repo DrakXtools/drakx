@@ -479,7 +479,7 @@ sub main {
 
         my $hdchoice = Gtk2::HBox->new();
     
-        my $hdchoicelabel = Gtk2::Label->new(N("Here is the content of you disk drive "));
+        my $hdchoicelabel = Gtk2::Label->new(N("Here is the content of your disk drive "));
 
         my $combobox = Gtk2::ComboBox->new_text;
         foreach (@kinds) {
