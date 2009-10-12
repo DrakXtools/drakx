@@ -154,7 +154,7 @@ sub partitionWizardSolutions {
                 [ 20 - @ok_for_resize_fat, N("Use the free space on a Microsoft Windows® partition"),
                   sub {
                       my $part;
-                      if ($in->{interactive} ne 'gtk') {
+                      if (!$in->isa('interactive::gtk')) {
                           $part = $in->ask_from_listf_raw({ messages => N("Which partition do you want to resize?"),
                                                                interactive_help_id => 'resizeFATChoose',
                                                              }, \&partition_table::description, \@ok_for_resize_fat) or return;
@@ -164,7 +164,7 @@ sub partitionWizardSolutions {
                       my $resize_fat = $part->{resize_fat} ;
                       my $min_win = $part->{min_win};
                       my $hd = fs::get::part2hd($part, $all_hds);
-                      if ($in->{interactive} ne 'gtk') {
+                      if (!$in->isa('interactive::gtk')) {
                           $part->{size} > $min_linux + $min_swap + $min_freewin + $min_win or die N("Your Microsoft Windows® partition is too fragmented. Please reboot your computer under Microsoft Windows®, run the ``defrag'' utility, then restart the Mandriva Linux installation.");
                       }
                       $in->ask_okcancel('', formatAlaTeX(
@@ -181,7 +181,7 @@ Be careful: this operation is dangerous. If you have not already done so, you fi
 When sure, press %s.", N("Next")))) or return;
 
                       my $oldsize = $part->{size};
-                      if($in->{interactive} ne 'gtk') {
+                      if (!$in->isa('interactive::gtk')) {
                           my $mb_size = to_Mb($part->{size});
                           $in->ask_from(N("Partitionning"), N("Which size do you want to keep for Microsoft Windows® on partition %s?", partition_table::description($part)), [
                                         { label => N("Size"), val => \$mb_size, min => to_Mb($min_win), max => to_Mb($part->{size} - $min_linux - $min_swap), type => 'range' },
@@ -223,7 +223,7 @@ filesystem checks will be run on your next boot into Microsoft Windows®")) if $
 	  [ 10, fsedit::is_one_big_fat_or_NT($hds) ? N("Remove Microsoft Windows®") : N("Erase and use entire disk"), 
 	    sub {
                 my $hd;
-                if($in->{interactive} ne 'gtk') {
+                if (!$in->isa('interactive::gtk')) {
                     $hd = $in->ask_from_listf_raw({ messages => N("You have more than one hard drive, which one do you install linux on?"),
                                                        title => N("Partitioning"),
                                                        interactive_help_id => 'takeOverHdChoose',
@@ -462,7 +462,7 @@ sub main {
 
     my $sol;
 
-    if ($o->{interactive} eq 'gtk') {
+    if ($o->isa('interactive::gtk')) {
         use ugtk2;
     
         my $mainw = ugtk2->new(N("Partitioning"), %$o, if__($::main_window, transient => $::main_window));
