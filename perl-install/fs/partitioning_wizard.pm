@@ -517,7 +517,6 @@ sub main {
                             clicked => sub { interactive::gtk::display_help($o, {interactive_help_id => 'doPartitionDisks'}, $mainw) }),
               undef, 1 ],
             );
-        $::Wizard_no_previous = 1;
         my $buttons_pack = $mainw->create_okcancel(N("Next"), undef, '', @more_buttons);
         $mainbox->pack_end($buttons_pack, 0, 0, 0);
         ugtk2::gtkadd($mainw->{window}, $mainbox);
