@@ -5,6 +5,7 @@ use strict;
 use c;
 
 use MDK::Common;
+use common; # for get_parent_uid()
 use log;
 
 1;
@@ -46,6 +47,13 @@ sub raw {
     my ($stdout_raw, $stdout_mode, $stderr_raw, $stderr_mode);
     ($stdout_mode, $stdout_raw, @args) = @args if $args[0] =~ /^>>?$/;
     ($stderr_mode, $stderr_raw, @args) = @args if $args[0] =~ /^2>>?$/;
+
+    if ($options->{as_user}) {
+        my $user;
+        $user = $ENV{USERHELPER_UID} && getpwuid($ENV{USERHELPER_UID});
+        $user ||= common::get_parent_uid();
+        $options->{setuid} = getpwnam($user) if $user;
+    }
 
     my $args = $options->{sensitive_arguments} ? '<hidden arguments>' : join(' ', @args);
     log::explanations("running: $real_name $args" . ($root ? " with root $root" : ""));
@@ -111,7 +119,18 @@ sub raw {
     } else {
         if ($options->{setuid}) {
             require POSIX;
-            $ENV{LOGNAME} = getpwuid($options->{setuid}) || $ENV{LOGNAME};
+            my ($logname, $home) = (getpwuid(501))[0,7];
+            $ENV{LOGNAME} = $logname if $logname;
+
+            # if we were root and are going to drop privilege, keep a copy of the X11 cookie:
+            if (!$> && $home) {
+                # FIXME: it would be better to remove this but most callers are using 'detach => 1'...
+                my $xauth = chomp_(`mktemp $home/.Xauthority.XXXXX`);
+                system('cp', '-a', $ENV{XAUTHORITY}, $xauth);
+                system('chown', $logname, $xauth);
+                $ENV{XAUTHORITY} = $xauth;
+            }
+
             # drop privileges:
             POSIX::setuid($options->{setuid});
         }
