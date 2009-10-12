@@ -160,7 +160,7 @@ sub initrd {
     }
     foreach my $firm (glob_("all.kernels$I/$ext/firmware/*")) {
         my $dest=$firm;
-        $dest =~ s|all.kernels$I/$ext/firmware/||;
+        $dest =~ s|all.kernels$I/$ext/||;
         _ "cp -a $firm $tmp_initrd/$dest";
     };
 
