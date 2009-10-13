@@ -52,7 +52,7 @@ sub vmlinuz2kernel_str {
 
 sub kernel_str2short_name {
     my ($kernel) = @_;
-    $kernel->{ext} =~ /^xen/ ? 'xen' : $kernel->{basename};
+    $kernel->{basename};
 }
 
 sub basename2initrd_basename {
@@ -91,7 +91,7 @@ sub kernel_str2label {
 	_sanitize_ver($kernel);
     } else {
 	my $short_name = kernel_str2short_name($kernel);
-	$short_name eq 'vmlinuz' ? 'linux' : $short_name;
+	$kernel->{ext} =~ /^xen/ ? 'xen' : ($short_name eq 'vmlinuz' ? 'linux' : $short_name);
     }
 }
 
