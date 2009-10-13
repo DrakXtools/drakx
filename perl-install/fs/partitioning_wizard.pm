@@ -67,14 +67,14 @@ Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 
 sub partitionWizardSolutions {
     my ($in, $all_hds, $all_fstab, $manual_fstab, $partitions, $partitioning_flags, $skip_mtab, $target) = @_;
-    my $hds;
+    my $hds = $all_hds->{hds};
     my $fstab;
+    my $full_fstab = [ fs::get::fstab($all_hds) ];
     if($target) {
         $hds = [ $target ];
         $fstab = [ grep { $_->{rootDevice} eq $target->{device} } fs::get::fstab($all_hds) ];
     } else {
-        $hds = $all_hds->{hds};
-        $fstab = [ fs::get::fstab($all_hds) ];
+        $fstab = $full_fstab;
     }
 
     my @wizlog;
@@ -101,7 +101,7 @@ sub partitionWizardSolutions {
 
     if (my @truefs = grep { isTrueLocalFS($_) } @$fstab) {
 	#- value twice the ext2 partitions
-	$solutions{existing_part} = [ 20 + @truefs + @$fstab, N("Use existing partitions"), sub { fs::mount_point::ask_mount_points($in, $fstab, $all_hds) } ];
+	$solutions{existing_part} = [ 20 + @truefs + @$fstab, N("Use existing partitions"), sub { fs::mount_point::ask_mount_points($in, $full_fstab, $all_hds) } ];
     } else {
 	push @wizlog, N("There is no existing partition to use");
     }
