@@ -639,7 +639,7 @@ sub get_autologin() {
     my %desktop = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
     my $gdm_file = "$::prefix/etc/X11/gdm/custom.conf";
     my $kdm_file = common::read_alternative('kdm4-config');
-    my $autologin_file = "/etc/sysconfig/autologin";
+    my $autologin_file = "$::prefix/etc/sysconfig/autologin";
     my $desktop = $desktop{DESKTOP} || first(sessions());
     my %desktop_to_dm = (
         GNOME => 'gdm',
@@ -665,7 +665,7 @@ sub get_autologin() {
         my %conf = read_gnomekderc($kdm_file, 'X-:0-Core');
         $autologin_user = text2bool($conf{AutoLoginEnable}) && $conf{AutoLoginUser};
     } else {
-        my %conf = getVarsFromSh("$::prefix/etc/sysconfig/autologin");
+        my %conf = getVarsFromSh($autologin_file);
         $autologin_user = text2bool($conf{AUTOLOGIN}) && $conf{USER};
     }
 
