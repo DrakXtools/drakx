@@ -283,7 +283,7 @@ sub create_display_box {
     $width -= 24 if $resize || $fill_empty;
     my $minwidth = 40;
 
-    my $display_box = ugtk2::gtkset_size_request(Gtk2::HBox->new(0,0), $width, 30);
+    my $display_box = ugtk2::gtkset_size_request(Gtk2::HBox->new(0,0), $width, 24);
 
     my $ratio = $totalsectors ? ($width - @parts * ($minwidth+1)) / $totalsectors : 1;
     while (1) {
@@ -321,8 +321,8 @@ sub create_display_box {
             $hpane->child1_shrink(0);
             $hpane->add2($ev2);
             $hpane->child2_shrink(0);
-            $hpane->set_position(ceil($ratio * $part->{min_win}));
-            ugtk2::gtkset_size_request($hpane, $ratio * $part->{size}, 30);
+            $hpane->set_position(ceil($ratio * $part->{min_win} + $minwidth * $part->{min_win} / $part->{size}));
+            ugtk2::gtkset_size_request($hpane, $ratio * $part->{size} + $minwidth, 0);
             ugtk2::gtkpack__($display_box, $hpane);
 
             my $size = int($hpane->get_position / $ratio);
@@ -431,7 +431,7 @@ sub display_choices {
             $item = Gtk2::EventBox->new;
             my $b2 = Gtk2::Label->new("Mandriva");
             $item->add($b2);
-            $b2->set_size_request(516,30);
+            $b2->set_size_request(516,24);
             $item->set_name("PART_ext4");
         } elsif ($s eq 'diskdrake') {
         } else {
