@@ -70,7 +70,7 @@ sub partitionWizardSolutions {
     my $hds = $all_hds->{hds};
     my $fstab;
     my $full_fstab = [ fs::get::fstab($all_hds) ];
-    if($target) {
+    if ($target) {
         $hds = [ $target ];
         $fstab = [ grep { $_->{rootDevice} eq $target->{device} } fs::get::fstab($all_hds) ];
     } else {
@@ -81,9 +81,7 @@ sub partitionWizardSolutions {
     my (%solutions);
 
     my $min_linux = MB(600);
-    my $max_linux = MB(2000);
     my $min_swap = MB(50);
-    my $max_swap = MB(300);
     my $min_freewin = MB(100);
 
     # each solution is a [ score, text, function ], where the function retunrs true if succeeded
@@ -107,7 +105,7 @@ sub partitionWizardSolutions {
     }
 
     if (my @ok_for_resize_fat = grep { isFat_or_NTFS($_) && !fs::get::part2hd($_, $all_hds)->{readonly}
-					 && !isRecovery($_) && $_->{size} > $min_linux + $min_swap + $min_freewin} @$fstab) {
+					 && !isRecovery($_) && $_->{size} > $min_linux + $min_swap + $min_freewin } @$fstab) {
         @ok_for_resize_fat = map {
             my $part = $_;
             my $hd = fs::get::part2hd($part, $all_hds);
@@ -121,7 +119,7 @@ sub partitionWizardSolutions {
                 };
                 $pkg->new($part->{device}, devices::make($part->{device}));
             };
-            if($@) {
+            if ($@) {
                 log::l("The FAT resizer is unable to handle $part->{device} partition%s", formatError($@));
                 undef $part;
             }
@@ -130,7 +128,7 @@ sub partitionWizardSolutions {
                     my $_w = $in->wait_message(N("Resizing"), N("Computing the size of the Microsoft Windows® partition"));
                     $resize_fat->min_size;
                 };
-                if($@) {
+                if ($@) {
                     log::l("The FAT resizer is unable to get minimal size for $part->{device} partition %s", formatError($@));
                     undef $part;
                 } else {
@@ -149,7 +147,7 @@ sub partitionWizardSolutions {
             }
             $part || ();
         } @ok_for_resize_fat;
-	if(@ok_for_resize_fat) {
+	if (@ok_for_resize_fat) {
             $solutions{resize_fat} = 
                 [ 20 - @ok_for_resize_fat, N("Use the free space on a Microsoft Windows® partition"),
                   sub {
@@ -159,9 +157,9 @@ sub partitionWizardSolutions {
                                                                interactive_help_id => 'resizeFATChoose',
                                                              }, \&partition_table::description, \@ok_for_resize_fat) or return;
                       } else {
-                          ($part) = grep { $_->{req_size}} @ok_for_resize_fat;
+                          ($part) = grep { $_->{req_size} } @ok_for_resize_fat;
                       }
-                      my $resize_fat = $part->{resize_fat} ;
+                      my $resize_fat = $part->{resize_fat};
                       my $min_win = $part->{min_win};
                       my $hd = fs::get::part2hd($part, $all_hds);
                       if (!$in->isa('interactive::gtk')) {
@@ -279,10 +277,10 @@ sub create_display_box {
     my ($kind, $resize, $fill_empty, $button) = @_;
     my @parts = fs::get::hds_fstab_and_holes($kind->{val});
 
-    my $totalsectors = $kind->{val}->{totalsectors};
+    my $totalsectors = $kind->{val}{totalsectors};
 
     my $width = 540;
-    $width -= 24 if($resize || $fill_empty);
+    $width -= 24 if $resize || $fill_empty;
     my $minwidth = 40;
 
     my $display_box = ugtk2::gtkset_size_request(Gtk2::HBox->new(0,0), $width, 30);
@@ -294,7 +292,7 @@ sub create_display_box {
         $ratio /= $totalwidth / $width * 1.1;
     }
 
-    my $vbox = Gtk2::VBox->new();
+    my $vbox = Gtk2::VBox->new;
 
     my $ev;
     my $desc;
@@ -303,22 +301,22 @@ sub create_display_box {
 	my $info = $entry->{device_LABEL};
 	my $w = Gtk2::Label->new($info);
 	my @colorized_fs_types = qw(ext3 ext4 xfs swap vfat ntfs ntfs-3g);
-        $ev = Gtk2::EventBox->new();
+        $ev = Gtk2::EventBox->new;
 	$ev->add($w);
         my $part;
-        if($resize) {
-            ($part) = grep {$_->{device} eq "$entry->{device}"} @$resize;
+        if ($resize) {
+            ($part) = grep { $_->{device} eq "$entry->{device}" } @$resize;
         }
-        if($resize && $part && !$desc) {
+        if ($resize && $part && !$desc) {
             $ev->set_name("PART_vfat");
             $w->set_size_request(ceil($ratio * $part->{min_win}), 0);
-            my $ev2 = Gtk2::EventBox->new();
+            my $ev2 = Gtk2::EventBox->new;
             my $b2 = Gtk2::Label->new("");
             $ev2->add($b2);
             $b2->set_size_request($ratio * MB(600), 0);
             $ev2->set_name("PART_ext4");
             
-            my $hpane = Gtk2::HPaned->new();
+            my $hpane = Gtk2::HPaned->new;
             $hpane->add1($ev);
             $hpane->child1_shrink(0);
             $hpane->add2($ev2);
@@ -330,20 +328,20 @@ sub create_display_box {
             my $size = int($hpane->get_position / $ratio);
 
             $desc = Gtk2::HBox->new(0,0);
-            $ev = Gtk2::EventBox->new();
+            $ev = Gtk2::EventBox->new;
             $ev->add(Gtk2::Label->new(" " x 4));
             $ev->set_name("PART_vfat");
             ugtk2::gtkpack__($desc, $ev);
-            my $win_size_label = Gtk2::Label->new();
+            my $win_size_label = Gtk2::Label->new;
             
             ugtk2::gtkset_size_request($win_size_label, 150, 20);
             ugtk2::gtkpack__($desc, $win_size_label);
             $win_size_label->set_alignment(0,0.5);
-            $ev = Gtk2::EventBox->new();
+            $ev = Gtk2::EventBox->new;
             $ev->add(Gtk2::Label->new(" " x 4));
             $ev->set_name("PART_ext4");
             ugtk2::gtkpack__($desc, $ev); 
-            my $mdv_size_label = Gtk2::Label->new();
+            my $mdv_size_label = Gtk2::Label->new;
             ugtk2::gtkset_size_request($mdv_size_label, 150, 20);
             ugtk2::gtkpack__($desc, $mdv_size_label);
             $mdv_size_label->set_alignment(0,0.5);
@@ -354,8 +352,8 @@ sub create_display_box {
             });
             sub update_size_labels {
                 my ($size1, $size2) = @_;
-                $win_size_label->set_label(" Windows (".formatXiB($size1, 512).")");
-                $mdv_size_label->set_label(" Mandriva (".formatXiB($size2, 512).")");
+                $win_size_label->set_label(" Windows (" . formatXiB($size1, 512) . ")");
+                $mdv_size_label->set_label(" Mandriva (" . formatXiB($size2, 512) . ")");
             }
             update_size_labels($size, $part->{size}-$size);
             $hpane->signal_connect('motion-notify-event' => sub {
@@ -368,7 +366,7 @@ sub create_display_box {
                 0;
             });
         } else {
-            if($fill_empty && isEmpty($entry)) {
+            if ($fill_empty && isEmpty($entry)) {
                 $w->set_text("Mandriva");
                 $ev->set_name("PART_ext4");
             } else {
@@ -381,7 +379,7 @@ sub create_display_box {
         }
 
 	my $sep = Gtk2::Label->new(".");
-	$ev = Gtk2::EventBox->new();
+	$ev = Gtk2::EventBox->new;
 	$ev->add($sep);
 	$sep->set_size_request(1, 0);
 
@@ -397,25 +395,25 @@ sub create_display_box {
 
 sub display_choices {
     my ($o, $contentbox, $mainw, %solutions) = @_;
-    my @solutions = sort { $solutions{$b}->[0] <=> $solutions{$a}->[0] } keys %solutions;
-    my @sol = grep { $solutions{$_}->[0] >= 0 } @solutions;
+    my @solutions = sort { $solutions{$b}[0] <=> $solutions{$a}[0] } keys %solutions;
+    my @sol = grep { $solutions{$_}[0] >= 0 } @solutions;
     
-    log::l(''  . "solutions found: " . join('', map { $solutions{$_}->[1] } @sol) . 
-           " (all solutions found: " . join('', map { $solutions{$_}->[1] } @solutions) . ")");
+    log::l(''  . "solutions found: " . join('', map { $solutions{$_}[1] } @sol) . 
+           " (all solutions found: " . join('', map { $solutions{$_}[1] } @solutions) . ")");
     
     @solutions = @sol if @sol > 1;
     log::l("solutions: ", int @solutions);
     @solutions or $o->ask_warn(N("Partitioning"), N("I can not find any room for installing")), die 'already displayed';
     
-    log::l('HERE: ', join(',', map { $solutions{$_}->[1] } @solutions));
+    log::l('HERE: ', join(',', map { $solutions{$_}[1] } @solutions));
     
     $contentbox->foreach(sub { $contentbox->remove($_[0]) });
     
-    $mainw->{kind}->{display_box} = create_display_box($mainw->{kind}) unless $mainw->{kind}->{display_box};
-    ugtk2::gtkpack2__($contentbox, $mainw->{kind}->{display_box});
+    $mainw->{kind}{display_box} ||= create_display_box($mainw->{kind});
+    ugtk2::gtkpack2__($contentbox, $mainw->{kind}{display_box});
     ugtk2::gtkpack__($contentbox, ugtk2::gtknew('Label',
                                                 text => N("The DrakX Partitioning wizard found the following solutions:"),
-                                                alignment=> [0, 0]));
+                                                alignment => [0, 0]));
     
     my $choicesbox = ugtk2::gtknew('VBox');
     my $oldbutton;
@@ -424,37 +422,37 @@ sub display_choices {
         my $item;
         my $vbox = ugtk2::gtknew('VBox');
         my $button = ugtk2::gtknew('RadioButton', child => $vbox);
-        if($s eq 'free_space') {
+        if ($s eq 'free_space') {
             $item = create_display_box($mainw->{kind}, undef, 1);
-        } elsif($s eq 'resize_fat') {
-            $item = create_display_box($mainw->{kind}, $solutions{$s}->[3], undef, $button);
-        } elsif($s eq 'existing_part') {
-        } elsif($s eq 'wipe_drive') {
-            $item = Gtk2::EventBox->new();
+        } elsif ($s eq 'resize_fat') {
+            $item = create_display_box($mainw->{kind}, $solutions{$s}[3], undef, $button);
+        } elsif ($s eq 'existing_part') {
+        } elsif ($s eq 'wipe_drive') {
+            $item = Gtk2::EventBox->new;
             my $b2 = Gtk2::Label->new("Mandriva");
             $item->add($b2);
             $b2->set_size_request(516,30);
             $item->set_name("PART_ext4");
-        } elsif($s eq 'diskdrake') {
+        } elsif ($s eq 'diskdrake') {
         } else {
-            log::l("$s");
+            log::l($s);
             next;
         }
         ugtk2::gtkpack2__($vbox, 
                           ugtk2::gtknew('Label',
-                                        text => $solutions{$s}->[1],
-                                        alignment=> [0, 0]));
+                                        text => $solutions{$s}[1],
+                                        alignment => [0, 0]));
         ugtk2::gtkpack2__($vbox, $item) if defined($item);
         $button->set_group($oldbutton->get_group) if $oldbutton;
         $oldbutton = $button;
-        $button->signal_connect('pressed', sub {$mainw->{sol} = $solutions{$s}; });
+        $button->signal_connect('pressed', sub { $mainw->{sol} = $solutions{$s} });
         ugtk2::gtkpack2__($choicesbox, $button);
         $sep = ugtk2::gtknew('HSeparator');
         ugtk2::gtkpack2__($choicesbox, $sep);
     }
     $choicesbox->remove($sep);
     ugtk2::gtkadd($contentbox, $choicesbox);
-    $mainw->{sol} = $solutions{@solutions[0]}
+    $mainw->{sol} = $solutions{@solutions[0]};
 }
 
 sub main {
@@ -473,18 +471,18 @@ sub main {
         use diskdrake::hd_gtk;
         diskdrake::hd_gtk::load_theme();
 
-        my $mainbox = Gtk2::VBox->new();
+        my $mainbox = Gtk2::VBox->new;
 
         my @kinds = map { diskdrake::hd_gtk::hd2kind($_) } @{$all_hds->{hds}};
 
-        my $hdchoice = Gtk2::HBox->new();
+        my $hdchoice = Gtk2::HBox->new;
     
         my $hdchoicelabel = Gtk2::Label->new(N("Here is the content of your disk drive "));
 
         my $combobox = Gtk2::ComboBox->new_text;
         foreach (@kinds) {
-            my $info = $_->{val}->{info};
-            $info .= " (".formatXiB($_->{val}->{totalsectors}, 512).")" if $_->{val}->{totalsectors};
+            my $info = $_->{val}{info};
+            $info .= " (" . formatXiB($_->{val}{totalsectors}, 512) . ")" if $_->{val}{totalsectors};
             $combobox->append_text($info);
         }
         $combobox->set_active(0);
@@ -522,7 +520,7 @@ sub main {
         ugtk2::gtkadd($mainw->{window}, $mainbox);
         $mainw->{window}->show_all;
         
-        $mainw->main();
+        $mainw->main;
 
         $sol=$mainw->{sol};
     } else {
