@@ -143,12 +143,6 @@ sub selectKeyboard {
 	    or log::l("loadkeys failed");
 	keyboard::write($o->{keyboard});
     } 'installPackages' if !$o->{isUpgrade} || !$o->{keyboard}{unsafe};
-
-    if ($o->{raw_X}) {
-	require Xconfig::default;
-	Xconfig::default::config_keyboard($o->{raw_X}, $o->{keyboard});
-	$o->{raw_X}->write;
-    }
 }
 #------------------------------------------------------------------------------
 sub acceptLicense {}
