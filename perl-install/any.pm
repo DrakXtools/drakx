@@ -1098,7 +1098,6 @@ sub selectLanguage_install {
     }
 
     my $non_utf8 = 0;
-    my $utf8_forced;
     add2hash($common, { cancel => '',
 			focus_first => 1,
 			advanced_messages => formatAlaTeX(N("Mandriva Linux can support multiple languages. Select
@@ -1111,12 +1110,9 @@ when your installation is complete and you restart your system.")),
 	{ val => \$lang, separator => '|', 
 	  if_($using_images, image2f => sub { $name2l{$_[0]} =~ /^[a-z]/ && "langs/lang-$name2l{$_[0]}" }),
 	  format => sub { $_[0] =~ /(.*\|)(.*)/ ? $1 . lang::l2name($2) : lang::l2name($_[0]) },
-	  list => \@langs, sort => !$in->isa('interactive::gtk'), changed => sub { 
-	      #- very special cases for langs which do not like UTF-8
-	      $non_utf8 = 0 if !$utf8_forced;
-	  }, focus_out => sub { $langs->{$listval2val->($lang)} = 1 } },
-	  { val => \$non_utf8, type => 'bool', text => N("Old compatibility (non UTF-8) encoding"), 
-	    advanced => 1, changed => sub { $utf8_forced = 1 } },
+	  list => \@langs, sort => !$in->isa('interactive::gtk'),
+	  focus_out => sub { $langs->{$listval2val->($lang)} = 1 } },
+	  { val => \$non_utf8, type => 'bool', text => N("Old compatibility (non UTF-8) encoding"), advanced => 1 },
 	  { val => \$langs->{all}, type => 'bool', text => N("All languages"), advanced => 1 },
 	map {
 	    { val => \$langs->{$_->[0]}, type => 'bool', disabled => sub { $langs->{all} },
