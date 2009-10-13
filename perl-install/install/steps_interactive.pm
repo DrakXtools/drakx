@@ -585,7 +585,7 @@ Please choose the minimal installation you want:"),
 	) or return &chooseGroups;
 
 	if ($minimal) {
-	    $o->{rpmsrate_flags_chosen}{CAT_X} = $docs = 0;
+	    $o->{rpmsrate_flags_chosen}{CAT_X} = $docs = $suggests = 0;
 	    $o->{rpmsrate_flags_chosen}{CAT_SYSTEM} = 0;
 	}
 	$o->{excludedocs} = !$docs;
