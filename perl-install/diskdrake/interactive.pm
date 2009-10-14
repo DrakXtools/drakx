@@ -285,6 +285,7 @@ sub Done {
 	    return if !$::isStandalone;
 	    $in->ask_yesorno(N("Quit without saving"), N("Quit without writing the partition table?"), 1) or return;
 	}
+        raid::make($all_hds->{raids}, $_) if isRAID($_);
     }
     if (!$::isInstall) {
 	my $new = fs::fstab_to_string($all_hds);
