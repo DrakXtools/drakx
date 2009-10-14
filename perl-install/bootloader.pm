@@ -722,6 +722,9 @@ sub add_kernel {
 
     $b_nolink ||= $kernel_str->{use_long_name};
 
+    #- do not link /boot/vmlinuz to xen
+    $b_nolink ||= $v->{xen};
+
     my $vmlinuz_long = kernel_str2vmlinuz_long($kernel_str);
     my $initrd_long = kernel_str2initrd_long($kernel_str);
     $v->{kernel_or_dev} = "/boot/$vmlinuz_long";
