@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-el\n"
 "POT-Creation-Date: 2009-10-07 13:57+0200\n"
-"PO-Revision-Date: 2009-09-20 11:29+0200\n"
+"PO-Revision-Date: 2009-10-14 18:39+0200\n"
 "Last-Translator: Glentadakis Dimitrios <dglent@gmail.com>\n"
 "Language-Team: Greek <i18ngr@lists.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -414,13 +414,13 @@ msgstr "(το %s έχει ήδη προστεθεί)"
 msgid "Please give a user name"
 msgstr "Παρακαλώ εισάγετε όνομα χρήστη"
 
-#: any.pm:834
-#, fuzzy, c-format
+#: any.pm:834, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
 "cased letters, numbers, `-' and `_'"
 msgstr ""
-"Το όνομα χρήστη μπορεί να περιέχει μόνο πεζά γράμματα, αριθμούς, `-' και `_'"
+"Το όνομα χρήστη πρέπει να αρχίζει με πεζό γράμμα και τα γράμματα που "
+"ακολουθούν να είναι επίσης πεζά, αριθμούς, `-' και `_'"
 
 #: any.pm:835
 #, c-format
@@ -1876,20 +1876,18 @@ msgstr "νέο"
 msgid "Choose an existing LVM to add to"
 msgstr "Επιλέξτε ένα υπάρχον LVM στο οποίο θα γίνει η προσθήκη"
 
-#: diskdrake/interactive.pm:903 diskdrake/interactive.pm:912
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:903 diskdrake/interactive.pm:912, c-format
 msgid "LVM name"
-msgstr "όνομα LVM;"
+msgstr "Όνομα LVM"
 
 #: diskdrake/interactive.pm:904
 #, c-format
 msgid "Enter a name for the new LVM volume group"
-msgstr ""
+msgstr "Εισάγετε ένα όνομα για τη νέα ομάδα τόμου LVM"
 
-#: diskdrake/interactive.pm:909
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:909, c-format
 msgid "\"%s\" already exists"
-msgstr "Το αρχείο υπάρχει ήδη. Να το χρησιμοποιήσω;"
+msgstr "\"%s\" υπάρχει ήδη"
 
 #: diskdrake/interactive.pm:940
 #, c-format
@@ -2815,7 +2813,7 @@ msgstr "Ο Οδηγός Κατάτμησης DrakX βρήκε τις παρακ�
 #: fs/partitioning_wizard.pm:459
 #, c-format
 msgid "Here is the content of your disk drive "
-msgstr ""
+msgstr "Εδώ είναι το περιεχόμενο του δίσκου σας"
 
 #: fs/partitioning_wizard.pm:535
 #, c-format
@@ -3264,7 +3262,7 @@ msgstr ""
 "Εδώ μπορείτε να επιλέξετε έναν εναλλακτικό οδηγό (OSS ή ALSA) για την κάρτα "
 "ήχου σας (%s)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
