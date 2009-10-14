@@ -585,7 +585,7 @@ sub installPackages {
 	]),
 	gtknew('VBox', children_centered => [ gtknew('ProgressBar', fraction_ref => \ (my $progress_total), height => 25) ]),
 	gtknew('HSeparator'),
-	gtknew('HButtonBox', spacing => 0, layout => 'spread', children_loose => [
+	gtknew('HButtonBox', spacing => 0, layout => 'edge', children_loose => [
             if_($release_notes, $rel_notes),
             gtknew('HButtonBox', spacing => 5, layout => 'end',
                    children_loose => [ $cancel, $details ]),
