@@ -297,6 +297,9 @@ sub create_display_box {
     my $ev;
     my $desc;
 
+    my $last;
+
+    $last = $resize->[-1] if $resize;
     foreach my $entry (@parts) {
 	my $info = $entry->{device_LABEL};
 	my $w = Gtk2::Label->new($info);
@@ -304,10 +307,10 @@ sub create_display_box {
         $ev = Gtk2::EventBox->new;
 	$ev->add($w);
         my $part;
-        if ($resize) {
-            ($part) = grep { $_->{device} eq "$entry->{device}" } @$resize;
+        if ($last && $last->{device} eq "$entry->{device}") {
+            $part = $last;
         }
-        if ($resize && $part && !$desc) {
+        if ($part) {
             $ev->set_name("PART_vfat");
             $w->set_size_request(ceil($ratio * $part->{min_win}), 0);
             my $ev2 = Gtk2::EventBox->new;
