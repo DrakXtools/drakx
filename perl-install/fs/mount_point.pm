@@ -51,11 +51,11 @@ sub suggest_mount_points_always {
     log::l("win parts: ", join ",", map { $_->{device} } @win) if @win;
     if (@win == 1) {
 	#- Suggest /boot/efi on ia64.
-	$win[0]{mntpoint} = arch() =~ /ia64/ ? "/boot/efi" : "/mnt/windows";
+	$win[0]{mntpoint} = arch() =~ /ia64/ ? "/boot/efi" : "/media/windows";
     } else {
 	my %w; foreach (@win) {
 	    my $v = $w{$_->{device_windobe}}++;
-	    $_->{mntpoint} = $_->{unsafeMntpoint} = "/mnt/win_" . lc($_->{device_windobe}) . ($v ? $v+1 : ''); #- lc cuz of StartOffice(!) cf dadou
+	    $_->{mntpoint} = $_->{unsafeMntpoint} = "/media/win_" . lc($_->{device_windobe}) . ($v ? $v+1 : ''); #- lc cuz of StartOffice(!) cf dadou
 	}
     }
 
