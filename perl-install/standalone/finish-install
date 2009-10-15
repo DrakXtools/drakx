@@ -172,6 +172,8 @@ sub ask_users() {
 
 sub ask_glx() {
     require Xconfig::glx;
+    my @installed_types = Xconfig::glx::filter_installed_types(\@Xconfig::glx::gl_compositing_types);
+    any { $_->{type} ne "none" } @installed_types or return;
     my $glx = Xconfig::glx::detect_may_install($in->do_pkgs);
     if ($glx->{supported} && Xconfig::glx::choose_interactive($in, $glx, 'installed_only')) {
         Xconfig::glx::write($glx);
