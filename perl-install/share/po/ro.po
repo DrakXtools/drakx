@@ -44,9 +44,9 @@ msgstr ""
 "Project-Id-Version: DrakX 7.1\n"
 "Report-Msgid-Bugs-To: https://qa.mandriva.com\n"
 "POT-Creation-Date: 2009-10-07 13:57+0200\n"
-"PO-Revision-Date: 2009-09-11 21:47+0200\n"
+"PO-Revision-Date: 2009-10-16 00:13+0200\n"
 "Last-Translator: Florin Cătălin RUSSEN <cfrussen@yahoo.co.uk>\n"
-"Language-Team: Romanian <cooker-i18n@mandrivalinux.org  >\n"
+"Language-Team: Romanian <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -55,7 +55,7 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "Plural-Forms: nplurals=3;plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
 "2:1))\n"
-"X-Generator: Lokalize 0.3\n"
+"X-Generator: Lokalize 1.0\n"
 
 #: any.pm:252 any.pm:910 diskdrake/interactive.pm:594
 #: diskdrake/interactive.pm:794 diskdrake/interactive.pm:838
@@ -445,14 +445,13 @@ msgstr "(%s este deja adăugat)"
 msgid "Please give a user name"
 msgstr "Introduceți un nume de utilizator"
 
-#: any.pm:834
-#, fuzzy, c-format
+#: any.pm:834, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
 "cased letters, numbers, `-' and `_'"
 msgstr ""
-"Numele utilizatorului trebuie sa conțină numai caractere minuscule, numere, "
-"`-' și `_'"
+"Numele utilizatorului trebuie sa înceapă și să conțină numai caractere "
+"minuscule, numere, `-' și `_'"
 
 #: any.pm:835
 #, c-format
@@ -1900,20 +1899,18 @@ msgstr "nou"
 msgid "Choose an existing LVM to add to"
 msgstr "Alegeți un LVM existent la care să adăugați"
 
-#: diskdrake/interactive.pm:903 diskdrake/interactive.pm:912
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:903 diskdrake/interactive.pm:912, c-format
 msgid "LVM name"
-msgstr "Nume LVM?"
+msgstr "Nume LVM"
 
 #: diskdrake/interactive.pm:904
 #, c-format
 msgid "Enter a name for the new LVM volume group"
-msgstr ""
+msgstr "Introduceți un nume pentru noul grup de volume LVM"
 
-#: diskdrake/interactive.pm:909
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:909, c-format
 msgid "\"%s\" already exists"
-msgstr "Fișierul există deja. Să se folosească?"
+msgstr "\"%s\" există deja"
 
 #: diskdrake/interactive.pm:940
 #, c-format
@@ -2725,7 +2722,7 @@ msgstr ""
 #: interactive.pm:549 interactive/curses.pm:263 ugtk2.pm:519
 #, c-format
 msgid "Next"
-msgstr "Înainte »"
+msgstr "Înainte"
 
 #: fs/partitioning_wizard.pm:180
 #, c-format
@@ -2822,7 +2819,7 @@ msgstr "Asistentul de partiționare DrakX a găsit următoarele soluții:"
 #: fs/partitioning_wizard.pm:459
 #, c-format
 msgid "Here is the content of your disk drive "
-msgstr ""
+msgstr "Iată conținutul discului vostru "
 
 #: fs/partitioning_wizard.pm:535
 #, c-format
@@ -3260,7 +3257,7 @@ msgstr ""
 "Aici vă puteți selecționa un pilot alternativ (OSS sau ALSA) pentru placa de "
 "sunet (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
@@ -3515,7 +3512,7 @@ msgstr "Finalizare"
 #: interactive.pm:550 interactive/curses.pm:260 ugtk2.pm:517
 #, c-format
 msgid "Previous"
-msgstr "« Înapoi"
+msgstr "Înapoi"
 
 #: interactive/curses.pm:556 ugtk2.pm:872
 #, c-format
