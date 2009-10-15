@@ -348,7 +348,7 @@ sub create_buttons4partitions {
 				$entry->{fs_type} && member($entry->{fs_type}, @colorized_fs_types) ? $entry->{fs_type} :
 				'other'));
 	$w->set_size_request($entry->{size} * $ratio + $minwidth, 0);
-	gtkpack__($kind->{display_box}, $w);
+	gtkpack($kind->{display_box}, $w);
 	if ($current_entry && fsedit::are_same_partitions($current_entry, $entry)) {
 	    $set_current_button->($w);
 	    $w->grab_focus;
