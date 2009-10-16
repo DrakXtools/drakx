@@ -35,8 +35,7 @@ print STDERR "\nPlease wait, trying to find your root device...\n";
 
 mkdir_p($target);
 
-run_program::run('lvm2', 'vgscan');
-run_program::run('lvm2', 'vgchange', '-a', 'y');
+lvm::detect_during_install();
 
 my @parts = map {
     $_->{device} = delete $_->{dev};
