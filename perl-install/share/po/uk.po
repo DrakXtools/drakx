@@ -12,14 +12,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
 "POT-Creation-Date: 2009-10-07 13:57+0200\n"
-"PO-Revision-Date: 2009-10-11 20:15+0300\n"
-"Last-Translator: Taras Boychuk <btr0001@ukr.net>\n"
-"Language-Team: ukrainian <translation@linux.org.ua>\n"
+"PO-Revision-Date: 2009-10-12 08:01+0300\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
+"Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 0.3\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: any.pm:252 any.pm:910 diskdrake/interactive.pm:594
 #: diskdrake/interactive.pm:794 diskdrake/interactive.pm:838
@@ -188,7 +189,7 @@ msgstr "Пароль"
 #: any.pm:417 authentication.pm:261
 #, c-format
 msgid "The passwords do not match"
-msgstr "Паролі не співпадають"
+msgstr "Паролі не збігаються"
 
 #: any.pm:417 authentication.pm:261 diskdrake/interactive.pm:1420
 #, c-format
@@ -217,7 +218,8 @@ msgstr "обмежити"
 
 #: any.pm:423
 #, c-format
-msgid "Option ``Restrict command line options'' is of no use without a password"
+msgid ""
+"Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 "Параметр \"Обмежити параметри командного рядка\" не використовується без "
 "пароля"
@@ -406,14 +408,13 @@ msgstr "(вже додано %s)"
 msgid "Please give a user name"
 msgstr "Дайте, будь ласка, ім'я користувача"
 
-#: any.pm:834
-#, c-format
+#: any.pm:834, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
 "cased letters, numbers, `-' and `_'"
 msgstr ""
-"Ім'я користувача повинно складатися тільки з малих латинських літер, "
-"чисел, `-' та `_'"
+"Ім'я користувача має починатися з малої латинської літери, слідом за якою "
+"можна використовувати малі латинські літери, цифри, символи `-' та `_'"
 
 #: any.pm:835
 #, c-format
@@ -669,7 +670,8 @@ msgstr ""
 
 #: any.pm:1312
 #, c-format
-msgid "You can export using NFS or SMB. Please select which you would like to use."
+msgid ""
+"You can export using NFS or SMB. Please select which you would like to use."
 msgstr ""
 "Ви можете експортувати з допомогою NFS або SMB. Будь ласка, вкажіть, що "
 "хочете використовувати."
@@ -779,7 +781,8 @@ msgstr "Локальний файл:"
 
 #: authentication.pm:63
 #, c-format
-msgid "Use local for all authentication and information user tell in local file"
+msgid ""
+"Use local for all authentication and information user tell in local file"
 msgstr ""
 "Використовувати локально для всіх розпізнавань і інформації, вказаної "
 "користувачем у локальному файлі."
@@ -1049,7 +1052,8 @@ msgstr "Без паролю"
 #: authentication.pm:264
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
-msgstr "Цей пароль занадто короткий (він повинен бути завдовжки хоча б %d літер)"
+msgstr ""
+"Цей пароль занадто короткий (він повинен бути завдовжки хоча б %d літер)"
 
 #: authentication.pm:375
 #, c-format
@@ -1554,7 +1558,8 @@ msgstr "Не можу додати жодного розділу"
 msgid ""
 "To have more partitions, please delete one to be able to create an extended "
 "partition"
-msgstr "Щоб мати більше розділів, зітріть один з них, щоб створити розширений розділ"
+msgstr ""
+"Щоб мати більше розділів, зітріть один з них, щоб створити розширений розділ"
 
 #: diskdrake/interactive.pm:381
 #, c-format
@@ -1684,7 +1689,8 @@ msgstr "Стерти файл зворотнього монтування?"
 
 #: diskdrake/interactive.pm:572
 #, c-format
-msgid "After changing type of partition %s, all data on this partition will be lost"
+msgid ""
+"After changing type of partition %s, all data on this partition will be lost"
 msgstr "Після зміни типу розділу %s всі дані на ньому буде втрачено"
 
 #: diskdrake/interactive.pm:585
@@ -1843,20 +1849,18 @@ msgstr "новий"
 msgid "Choose an existing LVM to add to"
 msgstr "Виберіть існуючий LVM, до якого додати"
 
-#: diskdrake/interactive.pm:903 diskdrake/interactive.pm:912
-#, c-format
+#: diskdrake/interactive.pm:903 diskdrake/interactive.pm:912, c-format
 msgid "LVM name"
 msgstr "Назва LVM"
 
 #: diskdrake/interactive.pm:904
 #, c-format
 msgid "Enter a name for the new LVM volume group"
-msgstr "Введіть назву для нової групи томів LVM"
+msgstr "Введіть назву нової групи томів LVM"
 
-#: diskdrake/interactive.pm:909
-#, c-format
+#: diskdrake/interactive.pm:909, c-format
 msgid "\"%s\" already exists"
-msgstr "\"%s\" вже існує"
+msgstr "«%s» вже існує"
 
 #: diskdrake/interactive.pm:940
 #, c-format
@@ -2229,12 +2233,13 @@ msgstr "Виберіть ключ шифрування Вашої файлово
 #: diskdrake/interactive.pm:1419
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
-msgstr "Цей пароль занадто простий (він повинен бути хоча б %d літер завдовжки)"
+msgstr ""
+"Цей пароль занадто простий (він повинен бути хоча б %d літер завдовжки)"
 
 #: diskdrake/interactive.pm:1420
 #, c-format
 msgid "The encryption keys do not match"
-msgstr "Ключі шифрування не співпадають"
+msgstr "Ключі шифрування не збігаються"
 
 #: diskdrake/interactive.pm:1424
 #, c-format
@@ -2262,7 +2267,8 @@ msgstr "Скасувати"
 #: diskdrake/smbnfs_gtk.pm:164
 #, c-format
 msgid "Can not login using username %s (bad password?)"
-msgstr "Неможливо зареєструватися з іменем користувача %s (неправильний пароль?)"
+msgstr ""
+"Неможливо зареєструватися з іменем користувача %s (неправильний пароль?)"
 
 #: diskdrake/smbnfs_gtk.pm:168 diskdrake/smbnfs_gtk.pm:177
 #, c-format
@@ -2281,7 +2287,8 @@ msgstr "Ще один"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid "Please enter your username, password and domain name to access this host."
+msgid ""
+"Please enter your username, password and domain name to access this host."
 msgstr ""
 "Будь ласка, введіть своє ім'я користувача, пароль і назву домену, щоб "
 "отримати доступ до цієї машини."
@@ -2419,7 +2426,8 @@ msgstr "Очищувати кеш запису по закриттю файла"
 #: fs/mount_options.pm:118
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
-msgstr "Увімкнути групову дискову квоту і, за бажанням, примусово вказати обмеження"
+msgstr ""
+"Увімкнути групову дискову квоту і, за бажанням, примусово вказати обмеження"
 
 #: fs/mount_options.pm:120
 #, c-format
@@ -2487,7 +2495,8 @@ msgstr "Монтувати файлову систему в режимі тіл�
 #: fs/mount_options.pm:141
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
-msgstr "Всі операції вводу/виводу файлової системи повинні виконуватися синхронно."
+msgstr ""
+"Всі операції вводу/виводу файлової системи повинні виконуватися синхронно."
 
 #: fs/mount_options.pm:143
 #, c-format
@@ -2626,7 +2635,7 @@ msgid ""
 "computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
 "the Mandriva Linux installation."
 msgstr ""
-"Розділ з Microsoft Windows® на Вашому комп'ютері занадто фраґментований. "
+"Розділ з Microsoft Windows® на Вашому комп'ютері занадто фрагментований. "
 "Будь ласка, перезавантажте свій комп'ютер під Microsoft Windows®, запустіть "
 "програму 'defrag', тоді перезапустіть встановлення Мандріва лінакса."
 
@@ -2764,7 +2773,7 @@ msgstr "Помічник розбивки на розділи DrakX знайшо
 #: fs/partitioning_wizard.pm:459
 #, c-format
 msgid "Here is the content of you disk drive "
-msgstr "Тут знаходиться вміст носія"
+msgstr "Тут наведено вміст вашого дискового пристрою"
 
 #: fs/partitioning_wizard.pm:535
 #, c-format
@@ -4183,7 +4192,7 @@ msgstr "Ліван"
 #: lang.pm:333
 #, c-format
 msgid "Saint Lucia"
-msgstr "Санта-Лючія"
+msgstr "Сент-Люсія"
 
 #: lang.pm:334
 #, c-format
@@ -5452,7 +5461,8 @@ msgstr "Пошук непотрібних пакунків з локалізац
 msgid ""
 "We have detected that some packages are not needed for your system "
 "configuration."
-msgstr "Було виявлено, що деякі пакунки не потрібні для Вашої конфігурації системи."
+msgstr ""
+"Було виявлено, що деякі пакунки не потрібні для Вашої конфігурації системи."
 
 #: pkgs.pm:266
 #, c-format
@@ -5492,7 +5502,8 @@ msgstr "Неможливо створити посилання link /usr/share/s
 #: scanner.pm:114
 #, c-format
 msgid "Could not copy firmware file %s to /usr/share/sane/firmware!"
-msgstr "Не можу скопіювати файл мікропрограми %s в теку /usr/share/sane/firmware!"
+msgstr ""
+"Не можу скопіювати файл мікропрограми %s в теку /usr/share/sane/firmware!"
 
 #: scanner.pm:121
 #, c-format
@@ -5569,8 +5580,10 @@ msgstr "Дозволити безпосередню реєстрацію кор�
 
 #: security/help.pm:33
 #, c-format
-msgid "Allow the list of users on the system on display managers (kdm and gdm)."
-msgstr "Дозволити показ списку користувачів системи в менеджерах дисплею (kdm і gdm)."
+msgid ""
+"Allow the list of users on the system on display managers (kdm and gdm)."
+msgstr ""
+"Дозволити показ списку користувачів системи в менеджерах дисплею (kdm і gdm)."
 
 #: security/help.pm:35
 #, c-format
@@ -5751,12 +5764,14 @@ msgstr "Додати name як виняток до керування термі
 #: security/help.pm:102
 #, c-format
 msgid "Set password aging to \"max\" days and delay to change to \"inactive\"."
-msgstr "Встановлює термін дії пароля в \"max\" днів і затримку зміни в \"inactive\"."
+msgstr ""
+"Встановлює термін дії пароля в \"max\" днів і затримку зміни в \"inactive\"."
 
 #: security/help.pm:104
 #, c-format
 msgid "Set the password history length to prevent password reuse."
-msgstr "Встановити довжину історії паролів, щоб уникнути їх повторного використання."
+msgstr ""
+"Встановити довжину історії паролів, щоб уникнути їх повторного використання."
 
 #: security/help.pm:106
 #, c-format
@@ -5833,7 +5848,8 @@ msgstr "якщо встановлено в так, перевіряє контр
 #: security/help.pm:123
 #, c-format
 msgid "if set to yes, check additions/removals of suid root files."
-msgstr "якщо встановлено в так, перевіряє додатки/переміщувані файлів адміністратора."
+msgstr ""
+"якщо встановлено в так, перевіряє додатки/переміщувані файлів адміністратора."
 
 #: security/help.pm:124
 #, c-format
@@ -5843,7 +5859,8 @@ msgstr "якщо встановлено в 'так', повідомляє про
 #: security/help.pm:125
 #, c-format
 msgid "if set to yes, check files/directories writable by everybody."
-msgstr "якщо встановлено в 'так', перевіряє для всіх права запису у файли/теки."
+msgstr ""
+"якщо встановлено в 'так', перевіряє для всіх права запису у файли/теки."
 
 #: security/help.pm:126
 #, c-format
@@ -5852,7 +5869,8 @@ msgstr "якщо встановлено в 'так', виконує переві
 
 #: security/help.pm:127
 #, c-format
-msgid "if set, send the mail report to this email address else send it to root."
+msgid ""
+"if set, send the mail report to this email address else send it to root."
 msgstr ""
 "якщо встановлено, відсилає поштове повідомлення на цю поштову адресу, ще "
 "відсилає його rootу."
@@ -5949,7 +5967,8 @@ msgstr "Показувати список користувачів в менед
 #: security/l10n.pm:20
 #, c-format
 msgid "Export display when passing from root to the other users"
-msgstr "Показувати перебіг експорту при передаванні від root іншим користувачам"
+msgstr ""
+"Показувати перебіг експорту при передаванні від root іншим користувачам"
 
 #: security/l10n.pm:21
 #, c-format
@@ -6291,7 +6310,8 @@ msgstr ""
 
 #: services.pm:28
 #, c-format
-msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgid ""
+"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr ""
 "Common UNIX Printing System (CUPS) — це система буферизації друку з "
 "додатковими можливостями"
@@ -6328,7 +6348,8 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr "HAL — це фонова служба, яка збирає і зберігає відомості щодо обладнання"
+msgstr ""
+"HAL — це фонова служба, яка збирає і зберігає відомості щодо обладнання"
 
 #: services.pm:36
 #, c-format
@@ -6341,7 +6362,8 @@ msgstr ""
 
 #: services.pm:38
 #, c-format
-msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid ""
+"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
 "Apache - це сервер для World Wide Web. Він використовується з файлами HTML "
 "та CGI."
@@ -6600,7 +6622,8 @@ msgstr ""
 
 #: services.pm:92
 #, c-format
-msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgid ""
+"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
 "SANE (Scanner Access Now Easy) надає змогу працювати зі сканерами, відео-"
 "камерами..."
@@ -6691,7 +6714,8 @@ msgstr "Сервіси"
 #: services.pm:153
 #, c-format
 msgid "Choose which services should be automatically started at boot time"
-msgstr "Виберіть, які сервіси мають стартувати автоматично при завантаженні системи"
+msgstr ""
+"Виберіть, які сервіси мають стартувати автоматично при завантаженні системи"
 
 #: services.pm:171
 #, c-format
@@ -6928,7 +6952,8 @@ msgstr "[клавіатура]"
 #: standalone.pm:101
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
-msgstr "[--file=мій_файл] [--word=моє_слово] [--explain=регулярний_вираз] [--alert]"
+msgstr ""
+"[--file=мій_файл] [--word=моє_слово] [--explain=регулярний_вираз] [--alert]"
 
 #: standalone.pm:102
 #, c-format
@@ -7083,3 +7108,34 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Встановлення завершилося невдало"
 
+#~ msgid "Use the Microsoft Windows® partition for loopback"
+#~ msgstr ""
+#~ "Використовувати розділ Microsoft Windows® для зворотнього монтування"
+
+#~ msgid "Which partition do you want to use for Linux4Win?"
+#~ msgstr "Який розділ Ви хочете використовувати для Linux4Win?"
+
+#~ msgid "Choose the sizes"
+#~ msgstr "Виберіть розміри"
+
+#~ msgid "Root partition size in MB: "
+#~ msgstr "Розмір розділу root в Мб:"
+
+#~ msgid "Swap partition size in MB: "
+#~ msgstr "Розмір розділу Swap в Мб: "
+
+#~ msgid ""
+#~ "There is no FAT partition to use as loopback (or not enough space left)"
+#~ msgstr ""
+#~ "Немає розділу FAT для використання як пристрою зворотнього монтування "
+#~ "(або не вистачає вільного місця)"
+
+#~ msgid ""
+#~ "The FAT resizer is unable to handle your partition, \n"
+#~ "the following error occurred: %s"
+#~ msgstr ""
+#~ "Програма зміни розміру розділу FAT не може працювати з Вашим\n"
+#~ "розділом, при роботі сталася така помилка: %s"
+
+#~ msgid "Automatic routing from ALSA to PulseAudio"
+#~ msgstr "Автоматична маршрутизація з ALSA на PulseAudio"
