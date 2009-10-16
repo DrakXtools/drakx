@@ -3,7 +3,7 @@ package harddrake::autoconf;
 use common;
 
 sub xconf {
-    my ($modules_conf, $o, $o_skip_fb_setup) = @_;
+    my ($modules_conf, $o, $o_skip_fb_setup, $o_resolution_wanted) = @_;
 
     log::l('automatic XFree configuration');
     
@@ -12,8 +12,10 @@ sub xconf {
     my $do_pkgs = do_pkgs_standalone->new;
     $o->{raw_X} = Xconfig::default::configure($do_pkgs);
     
+    my $old_x = { if_($o_resolution_wanted, resolution_wanted => $o_resolution_wanted) };
+
     require Xconfig::main;
-    Xconfig::main::configure_everything_auto_install($o->{raw_X}, $do_pkgs, {}, { allowFB => listlength(cat_("/proc/fb")), skip_fb_setup => $o_skip_fb_setup });
+    Xconfig::main::configure_everything_auto_install($o->{raw_X}, $do_pkgs, $old_x, { allowFB => listlength(cat_("/proc/fb")), skip_fb_setup => $o_skip_fb_setup });
 
     #- always disable compositing desktop effects when configuring a new video card
     require Xconfig::glx;
