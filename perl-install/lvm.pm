@@ -31,12 +31,14 @@ sub cylinder_size {
 
 init() or log::l("lvm::init failed");
 
+sub detect_during_install() {
+    run_program::run('lvm2', 'vgscan');
+    run_program::run('lvm2', 'vgchange', '-a', 'y');
+}
+
 sub init() {
     devices::init_device_mapper();
-    if ($::isInstall) {
-	run_program::run('lvm2', 'vgscan');
-	run_program::run('lvm2', 'vgchange', '-a', 'y');
-    }
+    detect_during_install() if $::isInstall;
     1;
 }
 
