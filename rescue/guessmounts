@@ -17,7 +17,8 @@ use common;
 use fs;
 use fs::proc_partitions;
 use fs::type;
-
+use lvm;
+use run_program;
 
 my @proc_mounts = fs::read_fstab('', '/proc/mounts');
 
@@ -33,6 +34,9 @@ system('drvinst', 'STORAGE');
 print STDERR "\nPlease wait, trying to find your root device...\n";
 
 mkdir_p($target);
+
+run_program::run('lvm2', 'vgscan');
+run_program::run('lvm2', 'vgchange', '-a', 'y');
 
 my @parts = map {
     $_->{device} = delete $_->{dev};
