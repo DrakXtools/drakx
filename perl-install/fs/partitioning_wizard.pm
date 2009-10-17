@@ -301,9 +301,9 @@ sub create_display_box {
 
     $last = $resize->[-1] if $resize;
     foreach my $entry (@parts) {
-	my $info = $entry->{device_LABEL};
+	my $info = $entry->{mntpoint} || $entry->{device_LABEL};
 	my $w = Gtk2::Label->new($info);
-	my @colorized_fs_types = qw(ext3 ext4 xfs swap vfat ntfs ntfs-3g);
+	my @colorized_fs_types = qw(ext2 ext3 ext4 xfs swap vfat ntfs ntfs-3g);
         $ev = Gtk2::EventBox->new;
 	$ev->add($w);
         my $part;
@@ -391,6 +391,20 @@ sub create_display_box {
 	ugtk2::gtkpack__($display_box, $ev);
     }
     $display_box->remove($ev);
+    unless($resize || $fill_empty) {
+        my @types = (N_("Ext2/3/4"), N_("XFS"), N_("Swap"), arch() =~ /sparc/ ? N_("SunOS") : arch() eq "ppc" ? N_("HFS") : N_("Windows"),
+                    N_("Other"), N_("Empty"));
+        my %name2fs_type = ('Ext2/3/4' => 'ext3', 'XFS' => 'xfs', Swap => 'swap', Other => 'other', "Windows" => 'vfat', HFS => 'hfs');
+        $desc = ugtk2::gtkpack(Gtk2::HBox->new(), 
+                map {
+                     my $t = $name2fs_type{$_};
+                     my $ev = Gtk2::EventBox->new;
+		     my $w = Gtk2::Label->new(translate($_));
+	             $ev->add($w);
+		     $ev->set_name('PART_' . ($t || 'empty'));
+                     $ev;
+                } @types);
+    }
 
     $vbox->add($display_box);
     $vbox->add($desc) if $desc;
