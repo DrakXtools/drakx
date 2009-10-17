@@ -399,6 +399,8 @@ msgstr "Skriv inn brukarnamn"
 
 #: any.pm:834
 #, fuzzy, c-format
+#| msgid ""
+#| "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
 "cased letters, numbers, `-' and `_'"
@@ -1828,6 +1830,7 @@ msgstr "Vel ein eksisterande LVM å leggja til i"
 
 #: diskdrake/interactive.pm:903 diskdrake/interactive.pm:912
 #, fuzzy, c-format
+#| msgid "LVM name?"
 msgid "LVM name"
 msgstr "LVM-namn?"
 
@@ -1838,6 +1841,7 @@ msgstr ""
 
 #: diskdrake/interactive.pm:909
 #, fuzzy, c-format
+#| msgid "File already exists. Use it?"
 msgid "\"%s\" already exists"
 msgstr "Fila finst alt. Vil du bruka ho?"
 
@@ -2843,7 +2847,10 @@ msgid "This directory should remain within the root filesystem"
 msgstr "Denne mappa bør verta verande i rotfilsystemet"
 
 #: fsedit.pm:447 fsedit.pm:449
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this "
+#| "mount point\n"
 msgid ""
 "You need a true filesystem (ext2/3/4, reiserfs, xfs, or jfs) for this mount "
 "point\n"
