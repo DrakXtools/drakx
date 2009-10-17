@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
 "POT-Creation-Date: 2009-10-07 13:57+0200\n"
-"PO-Revision-Date: 2009-09-27 18:14+0200\n"
+"PO-Revision-Date: 2009-10-18 00:28+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -404,14 +404,13 @@ msgstr "(%s jadanik gehituta)"
 msgid "Please give a user name"
 msgstr "Eman erabiltzaile-izen bat"
 
-#: any.pm:834
-#, fuzzy, c-format
+#: any.pm:834, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
 "cased letters, numbers, `-' and `_'"
 msgstr ""
-"Erabiltzaile-izenak minuskulaz idatzitako letrak, zenbakiak, `-' eta `_' "
-"soilik izan ditzake"
+"Erabiltzaile izena letra minuskulaz hasi behar da eta jarraian soilik letra "
+"minuskulak, zenbakiak, `-' eta `_' izan ditzake"
 
 #: any.pm:835
 #, c-format
@@ -1847,20 +1846,18 @@ msgstr "berria"
 msgid "Choose an existing LVM to add to"
 msgstr "Aukeratu lehendik dagoen LVM bat gehitzeko"
 
-#: diskdrake/interactive.pm:903 diskdrake/interactive.pm:912
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:903 diskdrake/interactive.pm:912, c-format
 msgid "LVM name"
-msgstr "LVM izena?"
+msgstr "LVM izena"
 
 #: diskdrake/interactive.pm:904
 #, c-format
 msgid "Enter a name for the new LVM volume group"
-msgstr ""
+msgstr "Sartu izen bat LVM bolumen talde berriarentzako"
 
-#: diskdrake/interactive.pm:909
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:909, c-format
 msgid "\"%s\" already exists"
-msgstr "Fitxategia badago lehendik ere. Erabili?"
+msgstr "\"%s\" badago lehendik ere"
 
 #: diskdrake/interactive.pm:940
 #, c-format
@@ -2768,7 +2765,7 @@ msgstr "DrakX Partizio-morroiak irtenbide hauek aurkitu ditu:"
 #: fs/partitioning_wizard.pm:459
 #, c-format
 msgid "Here is the content of your disk drive "
-msgstr ""
+msgstr "Hemen dago zure disko unitatearen edukia"
 
 #: fs/partitioning_wizard.pm:535
 #, c-format
@@ -3206,7 +3203,7 @@ msgstr ""
 "Beste kontrolatzaile bat hauta dezakezu (OSS edo ALSA) (%s) soinu-"
 "txartelarentzat."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
