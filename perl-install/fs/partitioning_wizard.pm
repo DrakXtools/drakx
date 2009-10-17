@@ -317,7 +317,7 @@ sub create_display_box {
             my $b2 = Gtk2::Label->new("");
             $ev2->add($b2);
             $b2->set_size_request($ratio * MB(600), 0);
-            $ev2->set_name("PART_ext4");
+            $ev2->set_name("PART_new");
             
             my $hpane = Gtk2::HPaned->new;
             $hpane->add1($ev);
@@ -342,7 +342,7 @@ sub create_display_box {
             $win_size_label->set_alignment(0,0.5);
             $ev = Gtk2::EventBox->new;
             $ev->add(Gtk2::Label->new(" " x 4));
-            $ev->set_name("PART_ext4");
+            $ev->set_name("PART_new");
             ugtk2::gtkpack__($desc, $ev); 
             my $mdv_size_label = Gtk2::Label->new;
             ugtk2::gtkset_size_request($mdv_size_label, 150, 20);
@@ -373,7 +373,7 @@ sub create_display_box {
         } else {
             if ($fill_empty && isEmpty($entry)) {
                 $w->set_text("Mandriva");
-                $ev->set_name("PART_ext4");
+                $ev->set_name("PART_new");
             } else {
                 $ev->set_name("PART_" . (isEmpty($entry) ? 'empty' : 
                                          $entry->{fs_type} && member($entry->{fs_type}, @colorized_fs_types) ? $entry->{fs_type} :
@@ -437,7 +437,7 @@ sub display_choices {
             my $b2 = Gtk2::Label->new("Mandriva");
             $item->add($b2);
             $b2->set_size_request(516,24);
-            $item->set_name("PART_ext4");
+            $item->set_name("PART_new");
         } elsif ($s eq 'diskdrake') {
         } else {
             log::l($s);

@@ -44,6 +44,13 @@ style "gray" = "font"
   bg[PRELIGHT] = { 0.57, 0.62, 0.57 }
   fg[NORMAL] = { 0, 0, 0 }
 }
+style "yellow" = "font"
+{
+  bg[NORMAL] = { 1.0, 1.0, 0 }
+  bg[ACTIVE] = { 1.0, 1.0, 0 }
+  bg[PRELIGHT] = { 1.0, 1.0, 0 }
+  fg[NORMAL] = { 0, 0, 0 }
+}
 
 widget "*PART_ext3"	style "red" 
 widget "*PART_ext4"	style "red" 
@@ -53,3 +60,4 @@ widget "*PART_vfat"	style "blue"
 widget "*PART_ntfs*"	style "blue"
 widget "*PART_empty"	style "white"
 widget "*PART_other"	style "gray"
+widget "*PART_new"	style "yellow"
