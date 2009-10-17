@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
 "POT-Creation-Date: 2009-10-07 13:57+0200\n"
-"PO-Revision-Date: 2009-10-17 13:22+0200\n"
+"PO-Revision-Date: 2009-10-17 18:16+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -398,14 +398,12 @@ msgid "Please give a user name"
 msgstr "Skriv inn brukarnamn"
 
 #: any.pm:834
-#, fuzzy, c-format
-#| msgid ""
-#| "The user name must contain only lower cased letters, numbers, `-' and `_'"
+#, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
 "cased letters, numbers, `-' and `_'"
 msgstr ""
-"Brukarnamnet kan berre innehelda små bokstavar, tala og teikna «-» og «_»"
+"Brukarnamnet kan berre innehelda små bokstavar, tal og teikna «-» og «_»."
 
 #: any.pm:835
 #, c-format
@@ -1831,21 +1829,19 @@ msgid "Choose an existing LVM to add to"
 msgstr "Vel ein eksisterande LVM å leggja til i"
 
 #: diskdrake/interactive.pm:903 diskdrake/interactive.pm:912
-#, fuzzy, c-format
-#| msgid "LVM name?"
+#, c-format
 msgid "LVM name"
-msgstr "LVM-namn?"
+msgstr "LVM-namn"
 
 #: diskdrake/interactive.pm:904
 #, c-format
 msgid "Enter a name for the new LVM volume group"
-msgstr ""
+msgstr "Skriv inn eit namn på den nye LVM-dataområdegruppa"
 
 #: diskdrake/interactive.pm:909
-#, fuzzy, c-format
-#| msgid "File already exists. Use it?"
+#, c-format
 msgid "\"%s\" already exists"
-msgstr "Fila finst alt. Vil du bruka ho?"
+msgstr "«%s» finst frå før"
 
 #: diskdrake/interactive.pm:940
 #, c-format
@@ -2740,7 +2736,7 @@ msgstr "Partisjonsvegvisaren fann følgjande løysingar:"
 #: fs/partitioning_wizard.pm:459
 #, c-format
 msgid "Here is the content of your disk drive "
-msgstr ""
+msgstr "Her er innhaldet på stasjonen "
 
 #: fs/partitioning_wizard.pm:535
 #, c-format
@@ -2849,16 +2845,13 @@ msgid "This directory should remain within the root filesystem"
 msgstr "Denne mappa bør verta verande i rotfilsystemet"
 
 #: fsedit.pm:447 fsedit.pm:449
-#, fuzzy, c-format
-#| msgid ""
-#| "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this "
-#| "mount point\n"
+#, c-format
 msgid ""
 "You need a true filesystem (ext2/3/4, reiserfs, xfs, or jfs) for this mount "
 "point\n"
 msgstr ""
-"Du treng eit ekte filsystem(«ext2», «ext3», «reiserfs», «xfs» eller «jfs») for "
-"dette monteringspunktet\n"
+"Du treng eit ekte filsystem(«ext2», «ext3», «ext4», «reiserfs», «xfs» eller «jfs») "
+"for dette monteringspunktet\n"
 
 #: fsedit.pm:451
 #, c-format
