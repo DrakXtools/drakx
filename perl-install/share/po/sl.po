@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "POT-Creation-Date: 2009-10-07 13:57+0200\n"
-"PO-Revision-Date: 2009-10-03 17:37+0200\n"
+"PO-Revision-Date: 2009-10-18 14:09+0200\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "MIME-Version: 1.0\n"
@@ -218,8 +218,7 @@ msgstr "omeji"
 
 #: any.pm:423
 #, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
+msgid "Option ``Restrict command line options'' is of no use without a password"
 msgstr "Možnost ``Omejitev možnosti ukazne vrstice'' ni uporabna brez gesla"
 
 #: any.pm:425
@@ -406,12 +405,13 @@ msgstr "(že dodano %s)"
 msgid "Please give a user name"
 msgstr "Vnesite uporabniško ime:"
 
-#: any.pm:834
-#, fuzzy, c-format
+#: any.pm:834, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
 "cased letters, numbers, `-' and `_'"
-msgstr "Uporabniško ime mora vsebovati samo male črke, številke, `-' in `_'"
+msgstr ""
+"Uporabniško ime se mora začeti z malo črko in mora vsebovati samo male črke, "
+"številke, »-« in »_«"
 
 #: any.pm:835
 #, c-format
@@ -775,8 +775,7 @@ msgstr "Krajevna datoteka:"
 
 #: authentication.pm:63
 #, c-format
-msgid ""
-"Use local for all authentication and information user tell in local file"
+msgid "Use local for all authentication and information user tell in local file"
 msgstr "Uporabi krajevno datoteko za vse overjanje in podatke o uporabnikih"
 
 #: authentication.pm:64
@@ -1846,20 +1845,18 @@ msgstr "nov"
 msgid "Choose an existing LVM to add to"
 msgstr "Izberite obstoječ LVM za dodajanje"
 
-#: diskdrake/interactive.pm:903 diskdrake/interactive.pm:912
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:903 diskdrake/interactive.pm:912, c-format
 msgid "LVM name"
-msgstr "Ime LVM?"
+msgstr "Ime LVM"
 
 #: diskdrake/interactive.pm:904
 #, c-format
 msgid "Enter a name for the new LVM volume group"
-msgstr ""
+msgstr "Vnesite ime nove skupine nosilcev LVM"
 
-#: diskdrake/interactive.pm:909
-#, fuzzy, c-format
+#: diskdrake/interactive.pm:909, c-format
 msgid "\"%s\" already exists"
-msgstr "Datoteka že obstaja. Jo uporabim?"
+msgstr "»%s« že obstaja"
 
 #: diskdrake/interactive.pm:940
 #, c-format
@@ -1964,8 +1961,7 @@ msgstr "Formatiranje razdelka %s"
 #: diskdrake/interactive.pm:1209
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
-msgstr ""
-"Po formatiranju razdelka %s bodo vsi podatki na tem razdelku izgubljeni."
+msgstr "Po formatiranju razdelka %s bodo vsi podatki na tem razdelku izgubljeni."
 
 #: diskdrake/interactive.pm:1218 fs/partitioning.pm:48
 #, c-format
@@ -2285,10 +2281,8 @@ msgstr "Drugo"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
-msgstr ""
-"Vnesite svoje uporabniško ime, geslo in domeno za dostop do gostitelja."
+msgid "Please enter your username, password and domain name to access this host."
+msgstr "Vnesite svoje uporabniško ime, geslo in domeno za dostop do gostitelja."
 
 #: diskdrake/smbnfs_gtk.pm:180
 #, c-format
@@ -2458,8 +2452,7 @@ msgstr ""
 #: fs/mount_options.pm:129
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
-msgstr ""
-"Ne tolmači posebnih znakovnih ali blokovnih naprav v datotečnem sistemu."
+msgstr "Ne tolmači posebnih znakovnih ali blokovnih naprav v datotečnem sistemu."
 
 #: fs/mount_options.pm:131
 #, c-format
@@ -2766,7 +2759,7 @@ msgstr "Čarovnik za razdeljevanje diska je našel naslednje rešitve:"
 #: fs/partitioning_wizard.pm:459
 #, c-format
 msgid "Here is the content of your disk drive "
-msgstr ""
+msgstr "To je vsebina trdega diska "
 
 #: fs/partitioning_wizard.pm:535
 #, c-format
@@ -3204,7 +3197,7 @@ msgstr ""
 "Izbirate lahko med naštetimi nadomestnimi gonilniki (OSS ali ALSA) za vašo "
 "zvočno kartico (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
@@ -5497,8 +5490,7 @@ msgstr "Dovoli neposredno prijavo uporabniku root."
 
 #: security/help.pm:33
 #, c-format
-msgid ""
-"Allow the list of users on the system on display managers (kdm and gdm)."
+msgid "Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr "Dovoli prikaz seznama uporabnikov v upravitelju prikaza (kdm in gdm)."
 
 #: security/help.pm:35
@@ -5687,8 +5679,7 @@ msgstr "Za izklop nastavite zakasnitev na »max« dni."
 #: security/help.pm:104
 #, c-format
 msgid "Set the password history length to prevent password reuse."
-msgstr ""
-"Nastavi velikost zgodovine gesel, da se prepreči ponovna uporaba gesla."
+msgstr "Nastavi velikost zgodovine gesel, da se prepreči ponovna uporaba gesla."
 
 #: security/help.pm:106
 #, c-format
@@ -5788,8 +5779,7 @@ msgstr "Če je nastavljeno na »da«, poženi preverjanje chkrootkit."
 
 #: security/help.pm:127
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
+msgid "if set, send the mail report to this email address else send it to root."
 msgstr ""
 "Če je nastavljeno, pošlji e-poštno poročilo na ta e-poštni naslov, v "
 "nasprotnem primeru pošlji uporabniku »root«."
@@ -6049,8 +6039,7 @@ msgstr "Preveri kontrolno vsoto datotek suid/sgid."
 #: security/l10n.pm:53
 #, c-format
 msgid "Check additions/removals of suid root files"
-msgstr ""
-"Preveri, ali so bile dodane / odstranjene datoteke suid uporabnika root."
+msgstr "Preveri, ali so bile dodane / odstranjene datoteke suid uporabnika root."
 
 #: security/l10n.pm:54
 #, c-format
@@ -6224,8 +6213,7 @@ msgstr ""
 
 #: services.pm:28
 #, c-format
-msgid ""
-"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr "Common UNIX Printing System (CUPS) je napreden tiskalniški sistem"
 
 #: services.pm:29
@@ -6258,8 +6246,7 @@ msgstr ""
 #: services.pm:35
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
-"HAL je pritajeni program, ki zbira in vzdržuje podatke o strojni opremi"
+msgstr "HAL je pritajeni program, ki zbira in vzdržuje podatke o strojni opremi"
 
 #: services.pm:36
 #, c-format
@@ -6413,16 +6400,14 @@ msgstr ""
 #: services.pm:68
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
-msgstr ""
-"Usklajuje sistemski čas z uporabo protokola NTP (Network Time Protocol)"
+msgstr "Usklajuje sistemski čas z uporabo protokola NTP (Network Time Protocol)"
 
 #: services.pm:69
 #, c-format
 msgid ""
 "Automatically switch on numlock key locker under console\n"
 "and Xorg at boot."
-msgstr ""
-"Ob zagonu samodejno vklopi številčni del tipkovnice za konzolo in Xorg."
+msgstr "Ob zagonu samodejno vklopi številčni del tipkovnice za konzolo in Xorg."
 
 #: services.pm:71
 #, c-format
