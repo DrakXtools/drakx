@@ -283,7 +283,7 @@ sub create_display_box {
     $width -= 24 if $resize || $fill_empty;
     my $minwidth = 40;
 
-    my $display_box = ugtk2::gtkset_size_request(Gtk2::HBox->new(0,0), $width, 24);
+    my $display_box = ugtk2::gtkset_size_request(Gtk2::HBox->new(0,0), -1, 24);
 
     my $ratio = $totalsectors ? ($width - @parts * ($minwidth+1)) / $totalsectors : 1;
     while (1) {
@@ -393,7 +393,7 @@ sub create_display_box {
                                          'other'));
             }
             $w->set_size_request($entry->{size} * $ratio + $minwidth, 0);
-            ugtk2::gtkpack__($display_box, $ev);
+            ugtk2::gtkpack($display_box, $ev);
         }
 
 	my $sep = Gtk2::Label->new(".");
@@ -463,18 +463,19 @@ sub display_choices {
             $item = Gtk2::EventBox->new;
             my $b2 = Gtk2::Label->new("Mandriva");
             $item->add($b2);
-            $b2->set_size_request(516,24);
+            $b2->set_size_request(-1,24);
             $item->set_name("PART_new");
         } elsif ($s eq 'diskdrake') {
         } else {
             log::l($s);
             next;
         }
-        ugtk2::gtkpack2__($vbox, 
+        $vbox->set_size_request(1024, -1);
+        ugtk2::gtkpack($vbox, 
                           ugtk2::gtknew('Label',
                                         text => $solutions{$s}[1],
                                         alignment => [0, 0]));
-        ugtk2::gtkpack2__($vbox, $item) if defined($item);
+        ugtk2::gtkpack($vbox, $item) if defined($item);
         $button->set_group($oldbutton->get_group) if $oldbutton;
         $oldbutton = $button;
         $button->signal_connect('pressed', sub { $mainw->{sol} = $solutions{$s} });
