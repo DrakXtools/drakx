@@ -364,10 +364,23 @@ sub create_display_box {
             $hpane->signal_connect('motion-notify-event' => sub {
                 $part->{req_size} = int($hpane->get_position * $part->{size} / $part->{width});
                 $update_size_labels->($part->{req_size}, $part->{size}-$part->{req_size});
-                1;
+                0;
+            });
+            $hpane->signal_connect('move-handle' => sub {
+                $part->{req_size} = int($hpane->get_position * $part->{size} / $part->{width});
+                $update_size_labels->($part->{req_size}, $part->{size}-$part->{req_size});
+                0;
             });
             $hpane->signal_connect('button-press-event' => sub {
                 $button->activate;
+                0;
+            });
+            $vbox->signal_connect('button-press-event' => sub {
+                $button->activate;
+                0;
+            });
+            $button->signal_connect('focus-in-event' => sub {
+                $hpane->grab_focus;
                 0;
             });
         } else {
