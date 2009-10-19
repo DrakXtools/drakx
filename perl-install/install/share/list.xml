@@ -410,15 +410,13 @@
     ARCH-linux-thread-multi/auto/Term/ReadLine/Gnu/Gnu.so
     ARCH-linux-thread-multi/auto/Term/ReadLine/Gnu/XS/autosplit.ix
   </if>
-  ARCH-linux-thread-multi/File/Sync.pm
-  ARCH-linux-thread-multi/auto/File/Sync/Sync.so
-  ARCH-linux-thread-multi/auto/File/Sync/autosplit.ix
 </from>
 
 <from expand="rpm" matching="m!^/usr/lib/perl5! and !/\.pod$/">
   perl-Curses
   perl-Curses-UI
   perl-File-FnMatch
+  perl-File-Sync
   perl-Clone
   perl-Filesys-Df
   perl-Glib
