@@ -60,7 +60,7 @@ sub lvm_cmd_or_die {
 
 sub check {
     my ($do_pkgs) = @_;
-
+    local $::prefix = ''; # We want lvm2 on current system
     $do_pkgs->ensure_binary_is_installed('lvm2', 'lvm2') or return;
     init();
     1;
