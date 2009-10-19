@@ -164,7 +164,7 @@ sub packageCallbackChoices {
 sub _packageCallbackChoices_ {
     my ($urpm, $choices, $virtual_pkg_name) = @_;
 
-    my ($prefer, $_other) = urpm::select::get_preferred($urpm, $choices, '');
+    my ($prefer, $_other) = urpm::select::get_preferred($urpm, $choices, $::o->{preferred_packages});
     if (@$prefer) {
 	@$prefer;
     } elsif ($virtual_pkg_name eq 'kernel') {
