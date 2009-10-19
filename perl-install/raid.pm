@@ -182,6 +182,9 @@ sub free_mds {
 
 sub detect_during_install {
     my (@parts) = @_;
+    foreach (@{allmodules()}) {
+	eval { modules::load($_) };
+    }
     detect_during_install_once(@parts);
     detect_during_install_once(@parts) if active_mds(); #- try again to detect RAID 10
 
@@ -198,10 +201,6 @@ sub detect_during_install_once {
 				   (map { "/dev/$_" } active_mds()), 
 				   map { devices::make($_->{device}) } @parts), "\n");
     run_program::run('mdadm', '>>', '/etc/mdadm.conf', '--examine', '--scan');
-
-    foreach (@{allmodules()}) {
-	eval { modules::load(module($_)) };
-    }
     run_program::run('mdadm', '--assemble', '--scan');    
 }
 
