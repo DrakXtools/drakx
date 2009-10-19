@@ -283,7 +283,7 @@ sub create_display_box {
     $width -= 24 if $resize || $fill_empty;
     my $minwidth = 40;
 
-    my $display_box = ugtk2::gtkset_size_request(Gtk2::HBox->new(0,0), -1, 24);
+    my $display_box = ugtk2::gtkset_size_request(Gtk2::HBox->new(0,0), -1, 26);
 
     my $ratio = $totalsectors ? ($width - @parts * ($minwidth+1)) / $totalsectors : 1;
     while (1) {
@@ -301,11 +301,10 @@ sub create_display_box {
 
     $last = $resize->[-1] if $resize;
     foreach my $entry (@parts) {
-	my $info = $entry->{mntpoint} || $entry->{device_LABEL};
+	my $info = $entry->{device_LABEL};
 	my $w = Gtk2::Label->new($info);
 	my @colorized_fs_types = qw(ext2 ext3 ext4 xfs swap vfat ntfs ntfs-3g);
         $ev = Gtk2::EventBox->new;
-	$ev->add($w);
         my $part;
         if ($last && $last->{device} eq "$entry->{device}") {
             $part = $last;
@@ -314,7 +313,7 @@ sub create_display_box {
             $ev->set_name("PART_vfat");
             $w->set_size_request(ceil($ratio * $part->{min_win}), 0);
             my $ev2 = Gtk2::EventBox->new;
-            my $b2 = Gtk2::Label->new("");
+            my $b2 = gtknew("Image", file=>"small-logo");
             $ev2->add($b2);
             $b2->set_size_request($ratio * MB(600), 0);
             $ev2->set_name("PART_new");
@@ -331,19 +330,19 @@ sub create_display_box {
             my $size = int($hpane->get_position / $ratio);
 
             $desc = Gtk2::HBox->new(0,0);
-            $ev = Gtk2::EventBox->new;
-            $ev->add(Gtk2::Label->new(" " x 4));
-            $ev->set_name("PART_vfat");
-            ugtk2::gtkpack__($desc, $ev);
+            $ev2 = Gtk2::EventBox->new;
+            $ev2->add(Gtk2::Label->new(" " x 4));
+            $ev2->set_name("PART_vfat");
+            ugtk2::gtkpack__($desc, $ev2);
             my $win_size_label = Gtk2::Label->new;
             
             ugtk2::gtkset_size_request($win_size_label, 150, 20);
             ugtk2::gtkpack__($desc, $win_size_label);
             $win_size_label->set_alignment(0,0.5);
-            $ev = Gtk2::EventBox->new;
-            $ev->add(Gtk2::Label->new(" " x 4));
-            $ev->set_name("PART_new");
-            ugtk2::gtkpack__($desc, $ev); 
+            $ev2 = Gtk2::EventBox->new;
+            $ev2->add(Gtk2::Label->new(" " x 4));
+            $ev2->set_name("PART_new");
+            ugtk2::gtkpack__($desc, $ev2);
             my $mdv_size_label = Gtk2::Label->new;
             ugtk2::gtkset_size_request($mdv_size_label, 150, 20);
             ugtk2::gtkpack__($desc, $mdv_size_label);
@@ -385,17 +384,17 @@ sub create_display_box {
             });
         } else {
             if ($fill_empty && isEmpty($entry)) {
-                $w->set_text("Mandriva");
+                $w = gtknew("Image", file=>"small-logo");
                 $ev->set_name("PART_new");
             } else {
                 $ev->set_name("PART_" . (isEmpty($entry) ? 'empty' : 
                                          $entry->{fs_type} && member($entry->{fs_type}, @colorized_fs_types) ? $entry->{fs_type} :
                                          'other'));
             }
-            $w->set_size_request($entry->{size} * $ratio + $minwidth, 0);
+            $ev->set_size_request($entry->{size} * $ratio + $minwidth, 0);
             ugtk2::gtkpack($display_box, $ev);
         }
-
+	$ev->add($w);
 	my $sep = Gtk2::Label->new(".");
 	$ev = Gtk2::EventBox->new;
 	$ev->add($sep);
@@ -443,17 +442,17 @@ sub display_choices {
     
     $mainw->{kind}{display_box} ||= create_display_box($mainw->{kind});
     ugtk2::gtkpack2__($contentbox, $mainw->{kind}{display_box});
-    ugtk2::gtkpack__($contentbox, ugtk2::gtknew('Label',
-                                                text => N("The DrakX Partitioning wizard found the following solutions:"),
-                                                alignment => [0, 0]));
+    ugtk2::gtkpack__($contentbox, gtknew('Label',
+                                         text => N("The DrakX Partitioning wizard found the following solutions:"),
+                                         alignment => [0, 0]));
     
-    my $choicesbox = ugtk2::gtknew('VBox');
+    my $choicesbox = gtknew('VBox');
     my $oldbutton;
     my $sep;
     foreach my $s (@solutions) {
         my $item;
-        my $vbox = ugtk2::gtknew('VBox');
-        my $button = ugtk2::gtknew('RadioButton', child => $vbox);
+        my $vbox = gtknew('VBox');
+        my $button = gtknew('RadioButton', child => $vbox);
         if ($s eq 'free_space') {
             $item = create_display_box($mainw->{kind}, undef, 1);
         } elsif ($s eq 'resize_fat') {
@@ -461,9 +460,9 @@ sub display_choices {
         } elsif ($s eq 'existing_part') {
         } elsif ($s eq 'wipe_drive') {
             $item = Gtk2::EventBox->new;
-            my $b2 = Gtk2::Label->new("Mandriva");
+            my $b2 = gtknew("Image", file=>"small-logo");
             $item->add($b2);
-            $b2->set_size_request(-1,24);
+            $item->set_size_request(-1,26);
             $item->set_name("PART_new");
         } elsif ($s eq 'diskdrake') {
         } else {
@@ -472,15 +471,15 @@ sub display_choices {
         }
         $vbox->set_size_request(1024, -1);
         ugtk2::gtkpack($vbox, 
-                          ugtk2::gtknew('Label',
-                                        text => $solutions{$s}[1],
-                                        alignment => [0, 0]));
+                       gtknew('Label',
+                              text => $solutions{$s}[1],
+                              alignment => [0, 0]));
         ugtk2::gtkpack($vbox, $item) if defined($item);
         $button->set_group($oldbutton->get_group) if $oldbutton;
         $oldbutton = $button;
         $button->signal_connect('pressed', sub { $mainw->{sol} = $solutions{$s} });
         ugtk2::gtkpack2__($choicesbox, $button);
-        $sep = ugtk2::gtknew('HSeparator');
+        $sep = gtknew('HSeparator');
         ugtk2::gtkpack2__($choicesbox, $sep);
     }
     $choicesbox->remove($sep);
@@ -494,7 +493,7 @@ sub main {
     my $sol;
 
     if ($o->isa('interactive::gtk')) {
-        use ugtk2;
+        use mygtk2;
     
         my $mainw = ugtk2->new(N("Partitioning"), %$o, if__($::main_window, transient => $::main_window));
         $mainw->{box_allow_grow} = 1;
@@ -543,9 +542,9 @@ sub main {
         });
 
         my @more_buttons = (
-            [ ugtk2::gtknew('Install_Button',
-                            text => N("Help"),
-                            clicked => sub { interactive::gtk::display_help($o, {interactive_help_id => 'doPartitionDisks'}, $mainw) }),
+            [ gtknew('Install_Button',
+                     text => N("Help"),
+                     clicked => sub { interactive::gtk::display_help($o, {interactive_help_id => 'doPartitionDisks'}, $mainw) }),
               undef, 1 ],
             );
         my $buttons_pack = $mainw->create_okcancel(N("Next"), undef, '', @more_buttons);
