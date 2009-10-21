@@ -806,8 +806,14 @@ sub ask_user {
     ask_user_and_root($in, undef, $users, $security, %options);
 }
 
+sub is_xguest_installed() {
+    -e "$::prefix/etc/security/namespace.d/guest.conf";
+}
+
 sub ask_user_and_root {
     my ($in, $superuser, $users, $security, %options) = @_;
+
+    my $xguest = is_xguest_installed();
 
     $options{needauser} ||= $security >= 3;
 
@@ -856,6 +862,7 @@ sub ask_user_and_root {
           focus_first => 1,
         }, [ 
 	      $superuser ? (
+	  { text => N("Enable guest account"), val => \$xguest, type => 'bool', advanced => 1 },
 	  { label => N("Set administrator (root) password"), title => 1 },
 	  { label => N("Password"), val => \$superuser->{password},  hidden => 1, alignment => 'right', weakness_check => 1,
 	    validate => sub { authentication::check_given_password($in, $superuser, 2 * $security) } },
@@ -886,6 +893,13 @@ sub ask_user_and_root {
                ),
 	  ],
     );
+
+    if ($xguest && !is_xguest_installed()) {
+        $in->do_pkgs->ensure_is_installed('xguest', '/etc/security/namespace.d/guest.conf');
+    } elsif (!$xguest && is_xguest_installed()) {
+        $in->do_pkgs->remove('xguest') or return;
+    }
+
     $u->{groups} = [ grep { $groups{$_} } keys %groups ];
 
     push @$users, $u if $u->{name};
