@@ -37,8 +37,8 @@ sub new {
 
 sub enter_console { &suspend }
 sub leave_console { &end }
-sub suspend { Curses::UI->leave_curses }
-sub resume { Curses::UI->reset_curses }
+sub suspend { $cui->leave_curses }
+sub resume { $cui->reset_curses }
 sub end { &suspend; print $SAVEERR $_ foreach cat_($stderr_file); unlink $stderr_file }
 sub exit { end(); CORE::exit($_[1] || 0) }
 END { end() }
