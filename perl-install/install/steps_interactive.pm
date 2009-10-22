@@ -587,6 +587,7 @@ Please choose the minimal installation you want:"),
 	if ($minimal) {
 	    $o->{rpmsrate_flags_chosen}{CAT_X} = $docs = $suggests = 0;
 	    $o->{rpmsrate_flags_chosen}{CAT_SYSTEM} = 0;
+	    $o->{compssListLevel} = pkgs::rpmsrate_rate_max();
 	}
 	$o->{excludedocs} = !$docs;
 	$o->{rpmsrate_flags_chosen}{CAT_MINIMAL_DOCS} = $docs;
