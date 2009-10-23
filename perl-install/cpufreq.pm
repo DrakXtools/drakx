@@ -123,6 +123,15 @@ sub probe_longhaul() {
     } get_cpus();
 }
 
+sub probe_e_powersaver() {
+    any {
+        get_vendor($_) eq "Centaur" &&
+        has_flag($_, 'est') &&
+        $_->{'cpu family'} == 6 &&
+        member($_->{model}, 10, 13);
+    } get_cpus();
+}
+
 sub probe_longrun() {
     any {
         get_vendor($_) eq "Transmeta" &&
@@ -146,6 +155,7 @@ my @modules = (
     [ "powernow-k7", \&probe_powernow_k7 ],
     [ "powernow-k8", \&probe_powernow_k8 ],
     [ "longhaul", \&probe_longhaul ],
+    [ "e_powersaver", \&probe_e_powersaver ],
     [ "longrun", \&probe_longrun ],
 );
 
