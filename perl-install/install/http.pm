@@ -15,7 +15,7 @@ sub getFile {
 
 sub parse_http_url {
     my ($url) = @_;
-    $url =~ m,^(?:http|ftp)://([^/:]+)(?::(\d+))?(/\S*)?$,;
+    $url =~ m,^(?:http|ftp)://(?:[^:/]+:[^:/]+\@)?([^/:@]+)(?::(\d+))?(/\S*)?$,;
 }
 
 sub get_file_and_size_ {
