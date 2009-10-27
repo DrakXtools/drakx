@@ -59,6 +59,19 @@ if (!member($curr_kernel, chomp_(cat_($known_kernels)))) {
     append_to_file($known_kernels, "$curr_kernel\n");
 }
 
+sub schedule_warn_about_switch() {
+    touch('/var/run/harddrake_swithed_to_free_driver');
+    touch('/var/run/harddrake-notify-x11-free-driver-switch');
+}
+
+sub switch_x_driver {
+    my ($old_driver, $new_driver) = @_;
+    cp_af('/etc/X11/xorg.conf', "/etc/X11/xorg.conf.mdv$^T");
+    substInFile { s!Driver "($old_driver)"!Driver "$new_driver"!g } '/etc/X11/xorg.conf';
+    log::explanations("switch X.org driver from $old_driver to $new_driver");
+    Xconfig::card::libgl_config_and_more({ Driver => $new_driver });
+}
+
 my @cards = (
     {
         ldetect_driver_regexp => 'Card:NVIDIA',
@@ -93,12 +106,8 @@ foreach my $card (@cards) {
         my $driver = $cards[0]{Driver};
         my $old_driver = $1 if cat_('/etc/X11/xorg.conf') =~ /Driver "($card->{xorg_driver_regexp})"/;
         if ($old_driver) {
-            cp_af('/etc/X11/xorg.conf', "/etc/X11/xorg.conf.mdv$^T");
-            substInFile { s!Driver "($card->{xorg_driver_regexp})"!Driver "$driver"!g } '/etc/X11/xorg.conf';
-            touch('/var/run/harddrake_swithed_to_free_driver');
-            log::explanations("switch X.org driver from $old_driver to $driver");
-            touch('/var/run/harddrake-notify-x11-free-driver-switch');
-            Xconfig::card::libgl_config_and_more({ Driver => $driver });
+            switch_x_driver($card->{xorg_driver_regexp}, $driver);
+            schedule_warn_about_switch();
         }
     }
 }
