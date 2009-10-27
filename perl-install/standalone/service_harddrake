@@ -123,7 +123,7 @@ foreach my $card (@cards) {
     } else {
         my @cards = Xconfig::card::probe();
         my $driver = $cards[0]{Driver};
-        my $old_driver = $1 if cat_('/etc/X11/xorg.conf') =~ /Driver "($card->{xorg_driver_regexp})"/;
+        my $old_driver = cat_('/etc/X11/xorg.conf') =~ /Driver "($card->{xorg_driver_regexp})"/ && $1;
         if ($old_driver) {
             switch_x_driver($card->{xorg_driver_regexp}, $driver,
                             'proprietary driver not found for current driver');
