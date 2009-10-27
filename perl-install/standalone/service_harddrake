@@ -73,7 +73,9 @@ my @cards = (
 );
 
 foreach my $card (@cards) {
-    next if !find { $_->{driver} =~ /$card->{ldetect_driver_regexp}/ } detect_devices::probeall();
+    my $device = find { $_->{driver} =~ /$card->{ldetect_driver_regexp}/ } detect_devices::probeall();
+    next if !$device;
+
     if (find { -e join('', "/lib/modules/", c::kernel_version(), $_) }
           map { ("/dkms/$_", "/dkms-binary/$_", "/kernel/$_") } map { "/drivers/$_" } map { ("extra/$_", "video/$_", "char/$_", "char/drm/$_") } map { $_, "$_.gz" } @{$card->{module_names}}) {
 
