@@ -53,10 +53,9 @@ Backup and Restore application
 --version             : show version number.
 "),
 
-           'drakboot' => N_("[--boot] [--splash]
+           'drakboot' => N_("[--boot]
 OPTIONS:
   --boot            - enable to configure boot loader
-  --splash          - enable to configure boot theme
 default mode: offer to configure autologin feature"),
            'drakbug' => N_("[OPTIONS] [PROGRAM_NAME]
 
