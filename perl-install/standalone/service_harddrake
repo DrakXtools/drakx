@@ -2,6 +2,7 @@
 
 use lib qw(/usr/lib/libDrakX);
 
+# prevent firing up drakbug (doesn't work w/o X11):
 BEGIN { $ENV{DISABLE_DRAKBUG} = 1 }
 
 use strict;
