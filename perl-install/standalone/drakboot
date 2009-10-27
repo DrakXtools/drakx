@@ -69,11 +69,7 @@ ugtk2->import(qw(:helpers :wrappers :create));
 require mygtk2;
 mygtk2->import(qw(gtknew));
 
-if (any { /^--splash$/ } @ARGV) {
-    splash_choice();
-} else {
-    autologin_choice();
-}
+autologin_choice();
 
 sub run_boot_window {
     my ($title, $pack_list, $apply_sub) = @_;
