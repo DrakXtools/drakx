@@ -75,10 +75,10 @@ sub schedule_warn_about_switch() {
 }
 
 sub switch_x_driver {
-    my ($old_driver, $new_driver) = @_;
+    my ($old_driver, $new_driver, $reason) = @_;
     cp_af('/etc/X11/xorg.conf', "/etc/X11/xorg.conf.mdv$^T");
     substInFile { s!Driver "($old_driver)"!Driver "$new_driver"!g } '/etc/X11/xorg.conf';
-    log::explanations("switch X.org driver from $old_driver to $new_driver");
+    log::explanations("switch X.org driver from $old_driver to $new_driver ($reason)");
     Xconfig::card::libgl_config_and_more({ Driver => $new_driver });
 }
 
@@ -104,7 +104,7 @@ foreach my $card (@cards) {
     my $current_driver = get_xorg_driver(); 
 
     if (!member($current_driver, $card_data->{Driver}, $card_data->{Driver2}, 'fbdev', 'vesa')) {
-        switch_x_driver($current_driver, $card_data->{Driver});
+        switch_x_driver($current_driver, $card_data->{Driver}, 'no more supported by this driver');
         schedule_warn_about_switch() if $current_driver =~ $card->{xorg_driver_regexp};
         next;
     }
@@ -125,7 +125,8 @@ foreach my $card (@cards) {
         my $driver = $cards[0]{Driver};
         my $old_driver = $1 if cat_('/etc/X11/xorg.conf') =~ /Driver "($card->{xorg_driver_regexp})"/;
         if ($old_driver) {
-            switch_x_driver($card->{xorg_driver_regexp}, $driver);
+            switch_x_driver($card->{xorg_driver_regexp}, $driver,
+                            'proprietary driver not found for current driver');
             schedule_warn_about_switch();
         }
     }
