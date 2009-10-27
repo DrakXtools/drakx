@@ -15,6 +15,7 @@ use detect_devices;
 use harddrake::data;
 use harddrake::autoconf;
 use harddrake::sound;
+use Xconfig::card;
 use modules;
 use Storable qw(store retrieve);
 
@@ -59,6 +60,15 @@ if (!member($curr_kernel, chomp_(cat_($known_kernels)))) {
     append_to_file($known_kernels, "$curr_kernel\n");
 }
 
+
+sub get_xorg_driver() {
+    my $x = Xconfig::xfree->read;
+    if ($x) {
+        my ($dev_section) = grep { $_->{name} eq 'Device' } @{$x->{raw}};
+        $dev_section && $dev_section->{l}{Driver}{val};
+    }
+}
+
 sub schedule_warn_about_switch() {
     touch('/var/run/harddrake_swithed_to_free_driver');
     touch('/var/run/harddrake-notify-x11-free-driver-switch');
@@ -89,6 +99,16 @@ foreach my $card (@cards) {
     my $device = find { $_->{driver} =~ /$card->{ldetect_driver_regexp}/ } detect_devices::probeall();
     next if !$device;
 
+    my $id = $device->{driver} =~ /Card:(.*)/ && $1;
+    my $card_data = Xconfig::card::readCardsDB("/usr/share/ldetect-lst/Cards+")->{$id};
+    my $current_driver = get_xorg_driver(); 
+
+    if (!member($current_driver, $card_data->{Driver}, $card_data->{Driver2}, 'fbdev', 'vesa')) {
+        switch_x_driver($current_driver, $card_data->{Driver});
+        schedule_warn_about_switch() if $current_driver =~ $card->{xorg_driver_regexp};
+        next;
+    }
+    
     if (find { -e join('', "/lib/modules/", c::kernel_version(), $_) }
           map { ("/dkms/$_", "/dkms-binary/$_", "/kernel/$_") } map { "/drivers/$_" } map { ("extra/$_", "video/$_", "char/$_", "char/drm/$_") } map { $_, "$_.gz" } @{$card->{module_names}}) {
 
@@ -101,7 +121,6 @@ foreach my $card (@cards) {
         #    s!#*( Load.*glx)!\1!g;
         # } $_ foreach "/etc/X11/XF86Config-4", "/etc/X11/XF86Config";
     } else {
-        require Xconfig::card;
         my @cards = Xconfig::card::probe();
         my $driver = $cards[0]{Driver};
         my $old_driver = $1 if cat_('/etc/X11/xorg.conf') =~ /Driver "($card->{xorg_driver_regexp})"/;
