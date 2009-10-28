@@ -299,11 +299,6 @@ sub create_display_box {
     #- though, the pixel/sectors ratio can not be the same for all the partitions
     my $initial_ratio = $totalsectors ? ($width - @parts * $minwidth - $sep_count) / $totalsectors : 1;
     my $ration = $initial_ratio;
-    while (1) {
-        my $totalwidth = sum(map { $_->{size} * $ratio + $minwidth } @parts);
-        $totalwidth <= $width and last;
-        $ratio /= $totalwidth / $width * 1.1;
-    }
 
     my $vbox = Gtk2::VBox->new;
 
