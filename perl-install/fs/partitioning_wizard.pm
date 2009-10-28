@@ -298,7 +298,6 @@ sub create_display_box {
     #- ratio used to compute initial partition pixel width (each partition should be > min_width)
     #- though, the pixel/sectors ratio can not be the same for all the partitions
     my $initial_ratio = $totalsectors ? ($width - @parts * $minwidth - $sep_count) / $totalsectors : 1;
-    my $ration = $initial_ratio;
 
     my $vbox = Gtk2::VBox->new;
 
@@ -319,6 +318,7 @@ sub create_display_box {
             $part = $last;
         }
         if ($part) {
+            my $ratio = $part->{width} / $part->{size};
             $ev->set_name("PART_vfat");
             $w->set_size_request(ceil($ratio * $part->{min_win}), 0);
             my $ev2 = Gtk2::EventBox->new;
