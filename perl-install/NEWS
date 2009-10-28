@@ -9,13 +9,13 @@ Version 12.74 - 28 October 2009
   o really ensure keeping free space for Linux partition
   o really ensure keeping free space for Windows partition
 - service_harddrake: 
+  o auto reconfigure x11 only on first time default driver have changed
   o do not auto reconfigure if more than one graphic card
   o do not reconfigure to default driver if driver is not installed
   o enable to disable reconfiguring to default driver through
     /etc/sysconfig/harddrake2/service.conf
   o fix detecting nvidia proprietary driver when checking if current
     xorg driver still supports current card (#54943)
-  o auto reconfigure x11 only on first time default driver have changed
   o reconfigure X11 driver if current X11 driver is neither one of
     currently supported driver for the card for drivers other than ATI
    & NVidia too (eg: poulsbo)
