@@ -144,6 +144,7 @@ sub partitionWizardSolutions {
                         $part->{resize_fat} = $resize_fat;
                         $part->{min_win} = $min_win;
                         $part->{min_linux} = $min_linux_all;
+                        $part->{req_size} = $part->{size};
                     }
                 }
             }
@@ -179,7 +180,7 @@ When sure, press %s.", N("Next")))) or return;
 
                       my $oldsize = $part->{size};
                       if (!$in->isa('interactive::gtk')) {
-                          my $mb_size = to_Mb($part->{size});
+                          my $mb_size = to_Mb($part->{req_size});
                           my $max_win = $part->{size} - $part->{min_linux};
                           $in->ask_from(N("Partitionning"), N("Which size do you want to keep for Microsoft Windows® on partition %s?", partition_table::description($part)), [
                                         { label => N("Size"), val => \$mb_size, min => to_Mb($part->{min_win}), max => to_Mb($max_win), type => 'range' },
