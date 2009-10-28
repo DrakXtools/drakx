@@ -315,7 +315,9 @@ sub create_display_box {
         $entry->{width} = $entry->{size} * $initial_ratio + $minwidth;
         if ($last && $last->{device} eq "$entry->{device}") {
             #- entry is the last resizable partition
-            my $ratio = $entry->{width} / $entry->{size};
+            my $ratio;
+            my $update_ratio = sub { $ratio = $entry->{width} / $entry->{size} };
+            $update_ratio->();
             $ev->set_name("PART_vfat");
             $w->set_size_request(ceil($ratio * $entry->{min_win}), 0);
             my $ev2 = Gtk2::EventBox->new;
@@ -366,6 +368,8 @@ sub create_display_box {
             };
             $hpane->signal_connect('size-allocate' => sub {
                 my (undef, $alloc) = @_;
+                $entry->{width} = $alloc->width;
+                $update_ratio->();
                 $update_req_size->();
             });
             $update_size_labels->();
