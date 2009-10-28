@@ -302,6 +302,7 @@ sub create_display_box {
     my $vbox = Gtk2::VBox->new;
 
     my $ev;
+    my $part_sep;
     my $desc;
 
     my $last;
@@ -394,14 +395,12 @@ sub create_display_box {
             ugtk2::gtkpack($display_box, $ev);
         }
 	$ev->add($w);
-	my $sep = Gtk2::Label->new(".");
-	$ev = Gtk2::EventBox->new;
-	$ev->add($sep);
-	$sep->set_size_request(1, 0);
 
-	ugtk2::gtkpack__($display_box, $ev);
+	$part_sep = gtkadd(Gtk2::EventBox->new,
+                     gtkset_size_request(Gtk2::Label->new("."), 1, 0));
+	gtkpack__($display_box, $part_sep);
     }
-    $display_box->remove($ev);
+    $display_box->remove($part_sep);
     unless($resize || $fill_empty) {
         my @types = (N_("Ext2/3/4"), N_("XFS"), N_("Swap"), arch() =~ /sparc/ ? N_("SunOS") : arch() eq "ppc" ? N_("HFS") : N_("Windows"),
                     N_("Other"), N_("Empty"));
