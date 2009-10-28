@@ -186,10 +186,9 @@ When sure, press %s.", N("Next")))) or return;
                           $in->ask_from(N("Partitionning"), N("Which size do you want to keep for Microsoft Windows® on partition %s?", partition_table::description($part)), [
                                         { label => N("Size"), val => \$mb_size, min => to_Mb($part->{min_win}), max => to_Mb($max_win), type => 'range' },
                                     ]) or return;
-                          $part->{size} = from_Mb($mb_size, $part->{min_win}, $part->{max_win});
-                      } else {
-                          $part->{size} = $part->{req_size};
+                          $part->{req_size} = from_Mb($mb_size, $part->{min_win}, $part->{max_win});
                       }
+                      $part->{size} = $part->{req_size};
                       
                       $hd->adjustEnd($part);
                       
