@@ -149,7 +149,7 @@ sub partitionWizardSolutions {
                         my $suggested_size = max(
                             $part->{min_win} + 1*MB(1024),
                             min(
-                                $part->{size} - 0.1 * ($part->{size} - $part->{min_win}),
+                                $part->{size} - int(0.1 * ($part->{size} - $part->{min_win})),
                                 $part->{size} - 6*MB(1024),
                             ),
                         );
@@ -310,7 +310,7 @@ sub create_display_box {
 	my $part_info = Gtk2::Label->new($entry->{device_LABEL});
 	my @colorized_fs_types = qw(ext2 ext3 ext4 xfs swap vfat ntfs ntfs-3g);
         my $part_widget = Gtk2::EventBox->new;
-        $entry->{width} = $entry->{size} * $initial_ratio + $minwidth;
+        $entry->{width} = int($entry->{size} * $initial_ratio) + $minwidth;
         if ($last && $last->{device} eq $entry->{device}) {
             #- entry is the last resizable partition
 
