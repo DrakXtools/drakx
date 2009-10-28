@@ -494,14 +494,15 @@ sub main {
     my $sol;
 
     if ($o->isa('interactive::gtk')) {
-        use mygtk2;
-    
+        require mygtk2;
+        import mygtk2 qw(gtknew);
+
         my $mainw = ugtk2->new(N("Partitioning"), %$o, if__($::main_window, transient => $::main_window));
         $mainw->{box_allow_grow} = 1;
         
         mygtk2::set_main_window_size($mainw->{rwindow});
         
-        use diskdrake::hd_gtk;
+        require diskdrake::hd_gtk;
         diskdrake::hd_gtk::load_theme();
 
         my $mainbox = Gtk2::VBox->new;
