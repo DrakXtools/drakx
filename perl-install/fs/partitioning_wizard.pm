@@ -363,7 +363,6 @@ sub create_display_box {
             };
             $hpane->signal_connect('size-allocate' => sub {
                 my (undef, $alloc) = @_;
-                $part->{width} = $alloc->width;
                 $part->{req_size} = int($hpane->get_position * $part->{size} / $part->{width});
                 $update_size_labels->($part->{req_size}, $part->{size}-$part->{req_size});
                 0;
