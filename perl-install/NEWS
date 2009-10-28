@@ -1,3 +1,11 @@
+- partitioning wizard (Windows resize):
+  o fix partition size computing (fixing pixel/sectors ratio)
+  o improve default resizing suggestion:
+    * try to keep at least 1GB free for Windows
+    * try to use from 6GB to 10% free space for Linux
+  o use same windows partition size suggestion for gtk and text installs
+  o really ensure keeping free space for Linux partition
+  o really ensure keeping free space for Windows partition
 - service_harddrake: 
   o fix detecting nvidia proprietary driver when checking if current
     xorg driver still supports current card (#54943)
