@@ -48,6 +48,9 @@ my %previous_kernel_config = getVarsFromSh("$hw_sysconfdir/kernel");
 setVarsInSh("$hw_sysconfdir/kernel", { KERNEL => $kernel_major, IS_LAPTOP => bool2text($isLaptop) });
 my %cfg = getVarsFromSh("$hw_sysconfdir/service.conf");
 
+# default to 'yes' on upgrade:
+$cfg{AUTORECONFIGURE_RIGHT_XORG_DRIVER} = 'yes' if !exists $cfg{AUTORECONFIGURE_RIGHT_XORG_DRIVER};
+
 # autoreconfigure laptop-dependent services when switching from laptop to desktop, and vice versa
 if (!exists $previous_kernel_config{IS_LAPTOP} || $force || $isLaptop != text2bool($previous_kernel_config{IS_LAPTOP})) {
     log::explanations("Autoconfiguring laptop tools since we switched between laptop and desktop systems");
