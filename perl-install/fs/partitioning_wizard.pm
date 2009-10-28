@@ -159,7 +159,7 @@ sub partitionWizardSolutions {
                                                                interactive_help_id => 'resizeFATChoose',
                                                              }, \&partition_table::description, \@ok_for_resize_fat) or return;
                       } else {
-                          ($part) = grep { $_->{req_size} } @ok_for_resize_fat;
+                          $part = top(grep { $_->{req_size} } @ok_for_resize_fat);
                       }
                       my $resize_fat = $part->{resize_fat};
                       my $hd = fs::get::part2hd($part, $all_hds);
