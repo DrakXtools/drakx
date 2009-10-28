@@ -182,9 +182,9 @@ When sure, press %s.", N("Next")))) or return;
                       if (!$in->isa('interactive::gtk')) {
                           my $mb_size = to_Mb($part->{size});
                           $in->ask_from(N("Partitionning"), N("Which size do you want to keep for Microsoft Windows® on partition %s?", partition_table::description($part)), [
-                                        { label => N("Size"), val => \$mb_size, min => to_Mb($min_win), max => to_Mb($part->{size} - $min_linux - $min_swap), type => 'range' },
+                                        { label => N("Size"), val => \$mb_size, min => to_Mb($min_win + $min_freewin), max => to_Mb($part->{size} - $min_linux - $min_swap), type => 'range' },
                                     ]) or return;
-                          $part->{size} = from_Mb($mb_size, $min_win, $part->{size});
+                          $part->{size} = from_Mb($mb_size, $min_win + $min_freewin, $part->{size});
                       } else {
                           $part->{size} = $part->{req_size};
                       }
