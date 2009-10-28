@@ -370,7 +370,7 @@ sub create_display_box {
                 my (undef, $alloc) = @_;
                 $entry->{width} = $alloc->width;
                 $update_ratio->();
-                $update_req_size->();
+                0;
             });
             $update_size_labels->();
             $hpane->signal_connect('motion-notify-event' => $update_req_size);
