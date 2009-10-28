@@ -114,6 +114,9 @@ my @cards = (
 
 my @devices = grep { $_->{driver} =~ /^Card:/ } detect_devices::probeall();
 
+# do not auto reconfigure if more than one graphic card:
+$cfg{AUTORECONFIGURE_RIGHT_XORG_DRIVER} = 'no' if scalar(@devices) > 1;
+
 foreach my $device (@devices) {
     next if !text2bool($cfg{AUTORECONFIGURE_RIGHT_XORG_DRIVER});
 
