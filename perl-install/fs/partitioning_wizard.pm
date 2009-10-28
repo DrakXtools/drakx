@@ -360,7 +360,7 @@ sub create_display_box {
                 0;
             };
             my $update_req_size = sub {
-                $part->{req_size} = int($hpane->get_position * $part->{size} / $part->{width});
+                $part->{req_size} = int($hpane->get_position / $ratio);
                 $update_size_labels->();
             };
             my $button_activate = sub {
