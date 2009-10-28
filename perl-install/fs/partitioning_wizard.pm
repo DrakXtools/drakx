@@ -31,7 +31,7 @@ sub to_Mb {
 
 sub partition_with_diskdrake {
     my ($in, $all_hds, $fstab, $manual_fstab, $partitions, $partitioning_flags, $skip_mtab) = @_;
-    my $ok; 
+    my $ok;
 
     do {
 	$ok = 1;
@@ -47,7 +47,7 @@ sub partition_with_diskdrake {
 	    diskdrake::interactive::main($in, $all_hds, $do_force_reload);
 	}
 	my @fstab = fs::get::fstab($all_hds);
-	
+
 	unless (fs::get::root_(\@fstab)) {
 	    $ok = 0;
 	    $in->ask_okcancel(N("Partitioning"), N("You must have a root partition.
@@ -136,7 +136,7 @@ sub partitionWizardSolutions {
                     #- make sure that even after normalizing the size to cylinder boundaries, the minimun will be saved,
                     #- this save at least a cylinder (less than 8Mb).
                     $min_win += partition_table::raw::cylinder_size($hd);
-                    
+
                     if ($part->{size} <= $min_linux_all + $min_win) {
 #                die N("Your Microsoft Windows® partition is too fragmented. Please reboot your computer under Microsoft Windows®, run the ``defrag'' utility, then restart the Mandriva Linux installation.");
                         undef $part;
@@ -160,7 +160,7 @@ sub partitionWizardSolutions {
             $part || ();
         } @ok_for_resize_fat;
 	if (@ok_for_resize_fat) {
-            $solutions{resize_fat} = 
+            $solutions{resize_fat} =
                 [ 20 - @ok_for_resize_fat, N("Use the free space on a Microsoft Windows® partition"),
                   sub {
                       my $part;
@@ -197,10 +197,10 @@ When sure, press %s.", N("Next")))) or return;
                           $part->{req_size} = from_Mb($mb_size, $part->{min_win}, $part->{max_win});
                       }
                       $part->{size} = $part->{req_size};
-                      
+
                       $hd->adjustEnd($part);
-                      
-                      eval { 
+
+                      eval {
                           my $_w = $in->wait_message(N("Resizing"), N("Resizing Microsoft Windows® partition"));
                           $resize_fat->resize($part->{size});
                       };
@@ -208,15 +208,15 @@ When sure, press %s.", N("Next")))) or return;
                           $part->{size} = $oldsize;
                           die N("FAT resizing failed: %s", formatError($err));
                       }
-                      
-                      $in->ask_warn('', N("To ensure data integrity after resizing the partition(s), 
+
+                      $in->ask_warn('', N("To ensure data integrity after resizing the partition(s),
 filesystem checks will be run on your next boot into Microsoft Windows®")) if $part->{fs_type} ne 'vfat';
-                      
+
                       set_isFormatted($part, 1);
                       partition_table::will_tell_kernel($hd, resize => $part); #- down-sizing, write_partitions is not needed
                       partition_table::adjust_local_extended($hd, $part);
                       partition_table::adjust_main_extended($hd);
-                      
+
                       fsedit::auto_allocate($all_hds, $partitions);
                       1;
                   }, \@ok_for_resize_fat ];
@@ -227,7 +227,7 @@ filesystem checks will be run on your next boot into Microsoft Windows®")) if $
 
     if (@$fstab && @hds_rw) {
 	$solutions{wipe_drive} =
-	  [ 10, fsedit::is_one_big_fat_or_NT($hds) ? N("Remove Microsoft Windows®") : N("Erase and use entire disk"), 
+	  [ 10, fsedit::is_one_big_fat_or_NT($hds) ? N("Remove Microsoft Windows®") : N("Erase and use entire disk"),
 	    sub {
                 my $hd;
                 if (!$in->isa('interactive::gtk')) {
@@ -255,7 +255,7 @@ filesystem checks will be run on your next boot into Microsoft Windows®")) if $
     }
 
     $solutions{fdisk} =
-      [ -10, N("Use fdisk"), sub { 
+      [ -10, N("Use fdisk"), sub {
 	    $in->enter_console;
 	    foreach (@$hds) {
 		print "\n" x 10, N("You can now partition %s.
@@ -266,7 +266,7 @@ When you are done, do not forget to save using `w'", partition_table::descriptio
 			$pid = fork() or exec "pdisk", devices::make($_->{device});
 		} else {
 			$pid = fork() or exec "fdisk", devices::make($_->{device});
-		}			
+		}
 		waitpid($pid, 0);
 	    }
 	    $in->leave_console;
@@ -323,7 +323,7 @@ sub create_display_box {
             $mdv_widget->add($b2);
             $b2->set_size_request($ratio * MB(600), 0);
             $mdv_widget->set_name("PART_new");
-            
+
             my $hpane = Gtk2::HPaned->new;
             $hpane->add1($part_widget);
             $hpane->child1_shrink(0);
@@ -384,7 +384,7 @@ sub create_display_box {
                 $part_info = gtknew("Image", file => "small-logo");
                 $part_widget->set_name("PART_new");
             } else {
-                $part_widget->set_name("PART_" . (isEmpty($entry) ? 'empty' : 
+                $part_widget->set_name("PART_" . (isEmpty($entry) ? 'empty' :
                                          $entry->{fs_type} && member($entry->{fs_type}, @colorized_fs_types) ? $entry->{fs_type} :
                                          'other'));
             }
@@ -423,24 +423,24 @@ sub display_choices {
     my ($o, $contentbox, $mainw, %solutions) = @_;
     my @solutions = sort { $solutions{$b}[0] <=> $solutions{$a}[0] } keys %solutions;
     my @sol = grep { $solutions{$_}[0] >= 0 } @solutions;
-    
-    log::l(''  . "solutions found: " . join('', map { $solutions{$_}[1] } @sol) . 
+
+    log::l(''  . "solutions found: " . join('', map { $solutions{$_}[1] } @sol) .
            " (all solutions found: " . join('', map { $solutions{$_}[1] } @solutions) . ")");
-    
+
     @solutions = @sol if @sol > 1;
     log::l("solutions: ", int @solutions);
     @solutions or $o->ask_warn(N("Partitioning"), N("I can not find any room for installing")), die 'already displayed';
-    
+
     log::l('HERE: ', join(',', map { $solutions{$_}[1] } @solutions));
-    
+
     $contentbox->foreach(sub { $contentbox->remove($_[0]) });
-    
+
     $mainw->{kind}{display_box} ||= create_display_box($mainw->{kind});
     ugtk2::gtkpack2__($contentbox, $mainw->{kind}{display_box});
     ugtk2::gtkpack__($contentbox, gtknew('Label',
                                          text => N("The DrakX Partitioning wizard found the following solutions:"),
                                          alignment => [0, 0]));
-    
+
     my $choicesbox = gtknew('VBox');
     my $oldbutton;
     my $sep;
@@ -495,9 +495,9 @@ sub main {
 
         my $mainw = ugtk2->new(N("Partitioning"), %$o, if__($::main_window, transient => $::main_window));
         $mainw->{box_allow_grow} = 1;
-        
+
         mygtk2::set_main_window_size($mainw->{rwindow});
-        
+
         require diskdrake::hd_gtk;
         diskdrake::hd_gtk::load_theme();
 
@@ -506,7 +506,7 @@ sub main {
         my @kinds = map { diskdrake::hd_gtk::hd2kind($_) } @{$all_hds->{hds}};
 
         my $hdchoice = Gtk2::HBox->new;
-    
+
         my $hdchoicelabel = Gtk2::Label->new(N("Here is the content of your disk drive "));
 
         my $combobox = Gtk2::ComboBox->new_text;
@@ -516,12 +516,12 @@ sub main {
             $combobox->append_text($info);
         }
         $combobox->set_active(0);
-        
+
         ugtk2::gtkpack2__($hdchoice, $hdchoicelabel);
         $hdchoice->add($combobox);
-        
+
         ugtk2::gtkpack2__($mainbox, $hdchoice);
-        
+
         my $contentbox = Gtk2::VBox->new(0, 12);
         $mainbox->add($contentbox);
 
@@ -530,7 +530,7 @@ sub main {
         delete $solutions{diskdrake} if $b_nodiskdrake;
         $mainw->{kind} = $kind;
         display_choices($o, $contentbox, $mainw, %solutions);
-        
+
         $combobox->signal_connect("changed", sub {        
             $mainw->{kind} = @kinds[$combobox->get_active];
             my %solutions = partitionWizardSolutions($o, $all_hds, $fstab, $manual_fstab, $partitions, $partitioning_flags, $skip_mtab, diskdrake::hd_gtk::kind2hd($mainw->{kind}));
@@ -549,7 +549,7 @@ sub main {
         $mainbox->pack_end($buttons_pack, 0, 0, 0);
         ugtk2::gtkadd($mainw->{window}, $mainbox);
         $mainw->{window}->show_all;
-        
+
         $mainw->main;
 
         $sol=$mainw->{sol};
@@ -557,7 +557,7 @@ sub main {
         my %solutions = partitionWizardSolutions($o, $all_hds, $fstab, $manual_fstab, $partitions, $partitioning_flags, $skip_mtab);
 
         delete $solutions{diskdrake} if $b_nodiskdrake;
-        
+
         my @solutions = sort { $b->[0] <=> $a->[0] } values %solutions;
 
         my @sol = grep { $_->[0] >= 0 } @solutions;
