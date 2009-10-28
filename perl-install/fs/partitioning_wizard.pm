@@ -144,7 +144,16 @@ sub partitionWizardSolutions {
                         $part->{resize_fat} = $resize_fat;
                         $part->{min_win} = $min_win;
                         $part->{min_linux} = $min_linux_all;
-                        $part->{req_size} = $part->{size};
+                        #- try to keep at least 1GB free for Windows
+                        #- try to use from 6GB to 10% free space for Linux
+                        my $suggested_size = max(
+                            $part->{min_win} + 1*MB(1024),
+                            min(
+                                $part->{size} - 0.1 * ($part->{size} - $part->{min_win}),
+                                $part->{size} - 6*MB(1024),
+                            ),
+                        );
+                        $part->{req_size} = max(min($suggested_size, $part->{size} - $part->{min_linux}), $part->{min_win});
                     }
                 }
             }
