@@ -490,7 +490,7 @@ sub main {
 
     if ($o->isa('interactive::gtk')) {
         require mygtk2;
-        import mygtk2 qw(gtknew);
+        mygtk2->import(qw(gtknew));
         require ugtk2;
         ugtk2->import(qw(:wrappers));
 
