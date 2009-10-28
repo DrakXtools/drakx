@@ -103,6 +103,10 @@ foreach my $device (@devices) {
     my $card_data = Xconfig::card::readCardsDB("/usr/share/ldetect-lst/Cards+")->{$id};
     my $current_driver = get_xorg_driver(); 
 
+    # nvidia proprietary driver in ldetect-lst can be 'nvidia173', 'nvidia-current', ...
+    # but really is just 'nvidia' in xorg.conf:
+    $card_data->{Driver2} =~ s/(nvidia)-.*/$1/;
+
     if (!member($current_driver, $card_data->{Driver}, $card_data->{Driver2}, 'fbdev', 'vesa')) {
         switch_x_driver($current_driver, $card_data->{Driver}, 'no more supported by this driver');
         schedule_warn_about_switch() if any { $current_driver =~ $_->{xorg_driver_regexp} } @cards;
