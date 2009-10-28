@@ -294,7 +294,11 @@ sub create_display_box {
 
     my $display_box = ugtk2::gtkset_size_request(Gtk2::HBox->new(0,0), -1, 26);
 
-    my $ratio = $totalsectors ? ($width - @parts * ($minwidth+1)) / $totalsectors : 1;
+    my $sep_count = @parts - 1;
+    #- ratio used to compute initial partition pixel width (each partition should be > min_width)
+    #- though, the pixel/sectors ratio can not be the same for all the partitions
+    my $initial_ratio = $totalsectors ? ($width - @parts * $min_width - $sep_count) / $totalsectors : 1;
+    my $ration = $initial_ratio;
     while (1) {
         my $totalwidth = sum(map { $_->{size} * $ratio + $minwidth } @parts);
         $totalwidth <= $width and last;
