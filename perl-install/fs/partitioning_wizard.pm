@@ -323,7 +323,7 @@ sub create_display_box {
             $hpane->child1_shrink(0);
             $hpane->add2($ev2);
             $hpane->child2_shrink(0);
-            $hpane->set_position(ceil($ratio * $part->{min_win} + $minwidth * $part->{min_win} / $part->{size}));
+            $hpane->set_position(ceil($ratio * $part->{req_size}));
             ugtk2::gtkset_size_request($hpane, $ratio * $part->{size} + $minwidth, 0);
             ugtk2::gtkpack__($display_box, $hpane);
 
