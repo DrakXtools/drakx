@@ -75,11 +75,17 @@ sub schedule_warn_about_switch() {
 }
 
 my $lib = arch() =~ /x86_64/ ? "lib64" : "lib";
+
+sub find_xorg_driver {
+    my ($new_driver) = @_;
+    # nvidia driver has special place:
+    -e "/usr/$lib/xorg/modules/drivers/${new_driver}_drv.so"
+      || -e "/usr/$lib/xorg/extra-modules/${new_driver}_drv.so";
+}
+
 sub switch_x_driver {
     my ($old_driver, $new_driver, $reason) = @_;
-    # nvidia driver has special place:
-    if (!-e "/usr/$lib/xorg/modules/drivers/${new_driver}_drv.so"
-          && !-e "/usr/$lib/xorg/extra-modules/${new_driver}_drv.so") {
+    if (!find_xorg_driver($new_driver)) {
         log::explanations("would switch X.org driver from '$old_driver' to '$new_driver' ($reason); but new driver is not installed");
         return;
     }
