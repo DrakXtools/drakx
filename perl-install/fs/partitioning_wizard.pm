@@ -336,7 +336,7 @@ sub create_display_box {
             ugtk2::gtkset_size_request($hpane, $entry->{width}, 0);
             ugtk2::gtkpack__($display_box, $hpane);
 
-            my $add_part_info = sub {
+            my $add_part_size_info = sub {
                 my ($name, $label) = @_;
                 my $color_widget = Gtk2::EventBox->new;
                 $color_widget->add(Gtk2::Label->new(" " x 4));
@@ -349,10 +349,10 @@ sub create_display_box {
             $desc = Gtk2::HBox->new(0,0);
 
             my $win_size_label = Gtk2::Label->new;
-            $add_part_info->("PART_vfat", $win_size_label);
+            $add_part_size_info->("PART_vfat", $win_size_label);
 
             my $mdv_size_label = Gtk2::Label->new;
-            $add_part_info->("PART_new", $mdv_size_label);
+            $add_part_size_info->("PART_new", $mdv_size_label);
 
             my $update_size_labels = sub {
                 $win_size_label->set_label(" Windows (" . formatXiB($entry->{req_size}, 512) . ")");
