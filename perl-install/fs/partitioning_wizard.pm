@@ -333,24 +333,24 @@ sub create_display_box {
             ugtk2::gtkset_size_request($hpane, $entry->{width}, 0);
             ugtk2::gtkpack__($display_box, $hpane);
 
+            my $add_part_info = sub {
+                my ($name, $label) = @_;
+                my $color_widget = Gtk2::EventBox->new;
+                $color_widget->add(Gtk2::Label->new(" " x 4));
+                $color_widget->set_name($name);
+                ugtk2::gtkpack__($desc, $color_widget);
+                ugtk2::gtkpack__($desc, $label);
+                $label->set_alignment(0,0.5);
+                ugtk2::gtkset_size_request($label, 150, 20);
+            };
             $desc = Gtk2::HBox->new(0,0);
-            $ev2 = Gtk2::EventBox->new;
-            $ev2->add(Gtk2::Label->new(" " x 4));
-            $ev2->set_name("PART_vfat");
-            ugtk2::gtkpack__($desc, $ev2);
+
             my $win_size_label = Gtk2::Label->new;
-            
-            ugtk2::gtkset_size_request($win_size_label, 150, 20);
-            ugtk2::gtkpack__($desc, $win_size_label);
-            $win_size_label->set_alignment(0,0.5);
-            $ev2 = Gtk2::EventBox->new;
-            $ev2->add(Gtk2::Label->new(" " x 4));
-            $ev2->set_name("PART_new");
-            ugtk2::gtkpack__($desc, $ev2);
+            $add_part_info->("PART_vfat", $win_size_label);
+
             my $mdv_size_label = Gtk2::Label->new;
-            ugtk2::gtkset_size_request($mdv_size_label, 150, 20);
-            ugtk2::gtkpack__($desc, $mdv_size_label);
-            $mdv_size_label->set_alignment(0,0.5);
+            $add_part_info->("PART_new", $mdv_size_label);
+
             my $update_size_labels = sub {
                 $win_size_label->set_label(" Windows (" . formatXiB($entry->{req_size}, 512) . ")");
                 $mdv_size_label->set_label(" Mandriva (" . formatXiB($entry->{size} - $entry->{req_size}, 512) . ")");
