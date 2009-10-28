@@ -361,20 +361,17 @@ sub create_display_box {
                 $mdv_size_label->set_label(" Mandriva (" . formatXiB($part->{size} - $part->{req_size}, 512) . ")");
                 0;
             };
+            my $update_req_size = sub {
+                $part->{req_size} = int($hpane->get_position * $part->{size} / $part->{width});
+                $update_size_labels->();
+            };
             $hpane->signal_connect('size-allocate' => sub {
                 my (undef, $alloc) = @_;
-                $part->{req_size} = int($hpane->get_position * $part->{size} / $part->{width});
-                $update_size_labels->();
+                $update_req_size->();
             });
             $update_size_labels->();
-            $hpane->signal_connect('motion-notify-event' => sub {
-                $part->{req_size} = int($hpane->get_position * $part->{size} / $part->{width});
-                $update_size_labels->();
-            });
-            $hpane->signal_connect('move-handle' => sub {
-                $part->{req_size} = int($hpane->get_position * $part->{size} / $part->{width});
-                $update_size_labels->();
-            });
+            $hpane->signal_connect('motion-notify-event' => $update_req_size);
+            $hpane->signal_connect('move-handle' => $update_req_size);
             $hpane->signal_connect('button-press-event' => sub {
                 $button->activate;
                 0;
