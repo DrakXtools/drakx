@@ -318,16 +318,16 @@ sub create_display_box {
             $update_ratio->();
             $part_widget->set_name("PART_vfat");
             $part_info->set_size_request(ceil($ratio * $entry->{min_win}), 0);
-            my $ev2 = Gtk2::EventBox->new;
+            my $mdv_widget = Gtk2::EventBox->new;
             my $b2 = gtknew("Image", file => "small-logo");
-            $ev2->add($b2);
+            $mdv_widget->add($b2);
             $b2->set_size_request($ratio * MB(600), 0);
-            $ev2->set_name("PART_new");
+            $mdv_widget->set_name("PART_new");
             
             my $hpane = Gtk2::HPaned->new;
             $hpane->add1($part_widget);
             $hpane->child1_shrink(0);
-            $hpane->add2($ev2);
+            $hpane->add2($mdv_widget);
             $hpane->child2_shrink(0);
             $hpane->set_position(ceil($ratio * $entry->{req_size}));
             ugtk2::gtkset_size_request($hpane, $entry->{width}, 0);
