@@ -98,19 +98,22 @@ my @cards = (
 
 my @devices = grep { $_->{driver} =~ /^Card:/ } detect_devices::probeall();
 
-foreach my $card (@cards) {
-    my $device = find { $_->{driver} =~ /$card->{ldetect_driver_regexp}/ } @devices;
-    next if !$device;
-
+foreach my $device (@devices) {
     my $id = $device->{driver} =~ /Card:(.*)/ && $1;
     my $card_data = Xconfig::card::readCardsDB("/usr/share/ldetect-lst/Cards+")->{$id};
     my $current_driver = get_xorg_driver(); 
 
     if (!member($current_driver, $card_data->{Driver}, $card_data->{Driver2}, 'fbdev', 'vesa')) {
         switch_x_driver($current_driver, $card_data->{Driver}, 'no more supported by this driver');
-        schedule_warn_about_switch() if $current_driver =~ $card->{xorg_driver_regexp};
+        schedule_warn_about_switch() if any { $current_driver =~ $_->{xorg_driver_regexp} } @cards;
         next;
     }
+}
+
+
+foreach my $card (@cards) {
+    my $device = find { $_->{driver} =~ /$card->{ldetect_driver_regexp}/ } @devices;
+    next if !$device;
     
     if (find { -e join('', "/lib/modules/", c::kernel_version(), $_) }
           map { ("/dkms/$_", "/dkms-binary/$_", "/kernel/$_") } map { "/drivers/$_" } map { ("extra/$_", "video/$_", "char/$_", "char/drm/$_") } map { $_, "$_.gz" } @{$card->{module_names}}) {
