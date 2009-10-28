@@ -95,8 +95,11 @@ my @cards = (
     }
 );
 
+
+my @devices = grep { $_->{driver} =~ /^Card:/ } detect_devices::probeall();
+
 foreach my $card (@cards) {
-    my $device = find { $_->{driver} =~ /$card->{ldetect_driver_regexp}/ } detect_devices::probeall();
+    my $device = find { $_->{driver} =~ /$card->{ldetect_driver_regexp}/ } @devices;
     next if !$device;
 
     my $id = $device->{driver} =~ /Card:(.*)/ && $1;
