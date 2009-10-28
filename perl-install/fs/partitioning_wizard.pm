@@ -308,8 +308,7 @@ sub create_display_box {
 
     $last = $resize->[-1] if $resize;
     foreach my $entry (@parts) {
-	my $info = $entry->{device_LABEL};
-	my $w = Gtk2::Label->new($info);
+	my $part_info = Gtk2::Label->new($entry->{device_LABEL});
 	my @colorized_fs_types = qw(ext2 ext3 ext4 xfs swap vfat ntfs ntfs-3g);
         my $part_widget = Gtk2::EventBox->new;
         $entry->{width} = $entry->{size} * $initial_ratio + $minwidth;
@@ -319,7 +318,7 @@ sub create_display_box {
             my $update_ratio = sub { $ratio = $entry->{width} / $entry->{size} };
             $update_ratio->();
             $part_widget->set_name("PART_vfat");
-            $w->set_size_request(ceil($ratio * $entry->{min_win}), 0);
+            $part_info->set_size_request(ceil($ratio * $entry->{min_win}), 0);
             my $ev2 = Gtk2::EventBox->new;
             my $b2 = gtknew("Image", file=>"small-logo");
             $ev2->add($b2);
@@ -383,7 +382,7 @@ sub create_display_box {
             });
         } else {
             if ($fill_empty && isEmpty($entry)) {
-                $w = gtknew("Image", file=>"small-logo");
+                $part_info = gtknew("Image", file=>"small-logo");
                 $part_widget->set_name("PART_new");
             } else {
                 $part_widget->set_name("PART_" . (isEmpty($entry) ? 'empty' : 
@@ -393,7 +392,7 @@ sub create_display_box {
             $part_widget->set_size_request($entry->{width}, 0);
             ugtk2::gtkpack($display_box, $part_widget);
         }
-	$part_widget->add($w);
+	$part_widget->add($part_info);
 
 	$part_sep = gtkadd(Gtk2::EventBox->new,
                      gtkset_size_request(Gtk2::Label->new("."), 1, 0));
