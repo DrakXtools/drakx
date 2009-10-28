@@ -126,7 +126,7 @@ sub partitionWizardSolutions {
             if ($part) {
                 my $min_win = eval {
                     my $_w = $in->wait_message(N("Resizing"), N("Computing the size of the Microsoft Windows® partition"));
-                    $resize_fat->min_size;
+                    $resize_fat->min_size + $min_freewin;
                 };
                 if ($@) {
                     log::l("The FAT resizer is unable to get minimal size for $part->{device} partition %s", formatError($@));
@@ -136,7 +136,7 @@ sub partitionWizardSolutions {
                     #- this save at least a cylinder (less than 8Mb).
                     $min_win += partition_table::raw::cylinder_size($hd);
                     
-                    if ($part->{size} <= $min_linux + $min_swap + $min_freewin + $min_win) {
+                    if ($part->{size} <= $min_linux + $min_swap + $min_win) {
 #                die N("Your Microsoft Windows® partition is too fragmented. Please reboot your computer under Microsoft Windows®, run the ``defrag'' utility, then restart the Mandriva Linux installation.");
                         undef $part;
                     } else {
@@ -160,10 +160,9 @@ sub partitionWizardSolutions {
                           ($part) = grep { $_->{req_size} } @ok_for_resize_fat;
                       }
                       my $resize_fat = $part->{resize_fat};
-                      my $min_win = $part->{min_win};
                       my $hd = fs::get::part2hd($part, $all_hds);
                       if (!$in->isa('interactive::gtk')) {
-                          $part->{size} > $min_linux + $min_swap + $min_freewin + $min_win or die N("Your Microsoft Windows® partition is too fragmented. Please reboot your computer under Microsoft Windows®, run the ``defrag'' utility, then restart the Mandriva Linux installation.");
+                          $part->{size} > $min_linux + $min_swap + $part->{min_win} or die N("Your Microsoft Windows® partition is too fragmented. Please reboot your computer under Microsoft Windows®, run the ``defrag'' utility, then restart the Mandriva Linux installation.");
                       }
                       $in->ask_okcancel('', formatAlaTeX(
                                             #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
@@ -182,9 +181,9 @@ When sure, press %s.", N("Next")))) or return;
                       if (!$in->isa('interactive::gtk')) {
                           my $mb_size = to_Mb($part->{size});
                           $in->ask_from(N("Partitionning"), N("Which size do you want to keep for Microsoft Windows® on partition %s?", partition_table::description($part)), [
-                                        { label => N("Size"), val => \$mb_size, min => to_Mb($min_win + $min_freewin), max => to_Mb($part->{size} - $min_linux - $min_swap), type => 'range' },
+                                        { label => N("Size"), val => \$mb_size, min => to_Mb($part->{min_win}), max => to_Mb($part->{size} - $min_linux - $min_swap), type => 'range' },
                                     ]) or return;
-                          $part->{size} = from_Mb($mb_size, $min_win + $min_freewin, $part->{size});
+                          $part->{size} = from_Mb($mb_size, $part->{min_win}, $part->{size});
                       } else {
                           $part->{size} = $part->{req_size};
                       }
