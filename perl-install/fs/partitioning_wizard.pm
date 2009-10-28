@@ -304,9 +304,8 @@ sub create_display_box {
     my $part_sep;
     my $desc;
 
-    my $last;
+    my $last = $resize && $resize->[-1];
 
-    $last = $resize->[-1] if $resize;
     foreach my $entry (@parts) {
 	my $part_info = Gtk2::Label->new($entry->{device_LABEL});
 	my @colorized_fs_types = qw(ext2 ext3 ext4 xfs swap vfat ntfs ntfs-3g);
