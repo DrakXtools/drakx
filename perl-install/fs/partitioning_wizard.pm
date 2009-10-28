@@ -158,14 +158,12 @@ sub partitionWizardSolutions {
                           $part = $in->ask_from_listf_raw({ messages => N("Which partition do you want to resize?"),
                                                                interactive_help_id => 'resizeFATChoose',
                                                              }, \&partition_table::description, \@ok_for_resize_fat) or return;
+                          $part->{size} > $part->{min_linux} + $part->{min_win} or die N("Your Microsoft Windows® partition is too fragmented. Please reboot your computer under Microsoft Windows®, run the ``defrag'' utility, then restart the Mandriva Linux installation.");
                       } else {
                           $part = top(grep { $_->{req_size} } @ok_for_resize_fat);
                       }
                       my $resize_fat = $part->{resize_fat};
                       my $hd = fs::get::part2hd($part, $all_hds);
-                      if (!$in->isa('interactive::gtk')) {
-                          $part->{size} > $part->{min_linux} + $part->{min_win} or die N("Your Microsoft Windows® partition is too fragmented. Please reboot your computer under Microsoft Windows®, run the ``defrag'' utility, then restart the Mandriva Linux installation.");
-                      }
                       $in->ask_okcancel('', formatAlaTeX(
                                             #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
                                             N("WARNING!
