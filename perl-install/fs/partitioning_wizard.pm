@@ -313,11 +313,14 @@ sub create_display_box {
         $entry->{width} = $entry->{size} * $initial_ratio + $minwidth;
         if ($last && $last->{device} eq $entry->{device}) {
             #- entry is the last resizable partition
+
             my $ratio;
             my $update_ratio = sub { $ratio = $entry->{width} / $entry->{size} };
             $update_ratio->();
+
             $part_widget->set_name("PART_vfat");
             $part_info->set_size_request(ceil($ratio * $entry->{min_win}), 0);
+
             my $mdv_widget = Gtk2::EventBox->new;
             my $b2 = gtknew("Image", file => "small-logo");
             $mdv_widget->add($b2);
