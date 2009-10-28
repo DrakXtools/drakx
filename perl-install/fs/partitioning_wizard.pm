@@ -336,13 +336,11 @@ sub create_display_box {
 
             my $add_part_size_info = sub {
                 my ($name, $label) = @_;
-                my $color_widget = Gtk2::EventBox->new;
-                $color_widget->add(Gtk2::Label->new(" " x 4));
-                $color_widget->set_name($name);
-                ugtk2::gtkpack__($desc, $color_widget);
-                ugtk2::gtkpack__($desc, $label);
-                $label->set_alignment(0,0.5);
-                ugtk2::gtkset_size_request($label, 150, 20);
+                ugtk2::gtkpack__($desc,
+                                 gtkadd(gtkset_name(Gtk2::EventBox->new, $name),
+                                        Gtk2::Label->new(" " x 4)),
+                                 gtkset_size_request(gtkset_alignment($label, 0, 0.5),
+                                                     150, 20));
             };
             $desc = Gtk2::HBox->new(0,0);
 
