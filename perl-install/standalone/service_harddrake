@@ -78,7 +78,7 @@ sub switch_x_driver {
     my ($old_driver, $new_driver, $reason) = @_;
     cp_af('/etc/X11/xorg.conf', "/etc/X11/xorg.conf.mdv$^T");
     substInFile { s!Driver "($old_driver)"!Driver "$new_driver"!g } '/etc/X11/xorg.conf';
-    log::explanations("switch X.org driver from $old_driver to $new_driver ($reason)");
+    log::explanations("switch X.org driver from '$old_driver' to '$new_driver' ($reason)");
     Xconfig::card::libgl_config_and_more({ Driver => $new_driver });
 }
 
