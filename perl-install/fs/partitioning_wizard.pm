@@ -494,6 +494,8 @@ sub main {
     if ($o->isa('interactive::gtk')) {
         require mygtk2;
         import mygtk2 qw(gtknew);
+        require ugtk2;
+        ugtk2->import(qw(:wrappers));
 
         my $mainw = ugtk2->new(N("Partitioning"), %$o, if__($::main_window, transient => $::main_window));
         $mainw->{box_allow_grow} = 1;
