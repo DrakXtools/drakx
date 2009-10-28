@@ -301,7 +301,6 @@ sub create_display_box {
 
     my $vbox = Gtk2::VBox->new;
 
-    my $ev;
     my $part_sep;
     my $desc;
 
@@ -312,14 +311,14 @@ sub create_display_box {
 	my $info = $entry->{device_LABEL};
 	my $w = Gtk2::Label->new($info);
 	my @colorized_fs_types = qw(ext2 ext3 ext4 xfs swap vfat ntfs ntfs-3g);
-        $ev = Gtk2::EventBox->new;
+        my $part_widget = Gtk2::EventBox->new;
         $entry->{width} = $entry->{size} * $initial_ratio + $minwidth;
         if ($last && $last->{device} eq "$entry->{device}") {
             #- entry is the last resizable partition
             my $ratio;
             my $update_ratio = sub { $ratio = $entry->{width} / $entry->{size} };
             $update_ratio->();
-            $ev->set_name("PART_vfat");
+            $part_widget->set_name("PART_vfat");
             $w->set_size_request(ceil($ratio * $entry->{min_win}), 0);
             my $ev2 = Gtk2::EventBox->new;
             my $b2 = gtknew("Image", file=>"small-logo");
@@ -328,7 +327,7 @@ sub create_display_box {
             $ev2->set_name("PART_new");
             
             my $hpane = Gtk2::HPaned->new;
-            $hpane->add1($ev);
+            $hpane->add1($part_widget);
             $hpane->child1_shrink(0);
             $hpane->add2($ev2);
             $hpane->child2_shrink(0);
@@ -385,16 +384,16 @@ sub create_display_box {
         } else {
             if ($fill_empty && isEmpty($entry)) {
                 $w = gtknew("Image", file=>"small-logo");
-                $ev->set_name("PART_new");
+                $part_widget->set_name("PART_new");
             } else {
-                $ev->set_name("PART_" . (isEmpty($entry) ? 'empty' : 
+                $part_widget->set_name("PART_" . (isEmpty($entry) ? 'empty' : 
                                          $entry->{fs_type} && member($entry->{fs_type}, @colorized_fs_types) ? $entry->{fs_type} :
                                          'other'));
             }
-            $ev->set_size_request($entry->{width}, 0);
-            ugtk2::gtkpack($display_box, $ev);
+            $part_widget->set_size_request($entry->{width}, 0);
+            ugtk2::gtkpack($display_box, $part_widget);
         }
-	$ev->add($w);
+	$part_widget->add($w);
 
 	$part_sep = gtkadd(Gtk2::EventBox->new,
                      gtkset_size_request(Gtk2::Label->new("."), 1, 0));
