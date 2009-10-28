@@ -13,6 +13,7 @@
     /etc/sysconfig/harddrake2/service.conf
   o fix detecting nvidia proprietary driver when checking if current
     xorg driver still supports current card (#54943)
+  o auto reconfigure x11 only on first time default driver have changed
   o reconfigure X11 driver if current X11 driver is neither one of
     currently supported driver for the card for drivers other than ATI
    & NVidia too (eg: poulsbo)

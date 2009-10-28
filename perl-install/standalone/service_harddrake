@@ -45,6 +45,7 @@ my $curr_kernel = c::kernel_version();
 my ($kernel_major) = $curr_kernel =~ /^(\d+\.\d+)/;
 
 my %previous_kernel_config = getVarsFromSh("$hw_sysconfdir/kernel");
+my %previous_xorg_config = getVarsFromSh("$hw_sysconfdir/xorg");
 setVarsInSh("$hw_sysconfdir/kernel", { KERNEL => $kernel_major, IS_LAPTOP => bool2text($isLaptop) });
 my %cfg = getVarsFromSh("$hw_sysconfdir/service.conf");
 
@@ -127,6 +128,11 @@ foreach my $device (@devices) {
     # nvidia proprietary driver in ldetect-lst can be 'nvidia173', 'nvidia-current', ...
     # but really is just 'nvidia' in xorg.conf:
     $card_data->{Driver2} =~ s/(nvidia)-.*/$1/;
+
+    # auto reconfigure x11 only on first time default driver have changed:
+    my $new_key = $card_data->{Driver} . $card_data->{Driver2};
+    setVarsInSh("$hw_sysconfdir/xorg", { XORG_DRV => $new_key });
+    next if $previous_xorg_config{XORG_DRV} eq $new_key;
 
     if (!member($current_driver, $card_data->{Driver}, $card_data->{Driver2}, 'fbdev', 'vesa')) {
         switch_x_driver($current_driver, $card_data->{Driver}, 'no more supported by this driver');
