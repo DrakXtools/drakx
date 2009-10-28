@@ -7,6 +7,8 @@
   o really ensure keeping free space for Linux partition
   o really ensure keeping free space for Windows partition
 - service_harddrake: 
+  o enable to disable reconfiguring to default driver through
+    /etc/sysconfig/harddrake2/service.conf
   o fix detecting nvidia proprietary driver when checking if current
     xorg driver still supports current card (#54943)
   o do not reconfigure to default driver if it's not installed

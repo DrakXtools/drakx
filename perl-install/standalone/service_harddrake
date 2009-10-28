@@ -112,6 +112,8 @@ my @cards = (
 my @devices = grep { $_->{driver} =~ /^Card:/ } detect_devices::probeall();
 
 foreach my $device (@devices) {
+    next if !text2bool($cfg{AUTORECONFIGURE_RIGHT_XORG_DRIVER});
+
     my $id = $device->{driver} =~ /Card:(.*)/ && $1;
     my $card_data = Xconfig::card::readCardsDB("/usr/share/ldetect-lst/Cards+")->{$id};
     my $current_driver = get_xorg_driver(); 
