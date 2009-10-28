@@ -312,7 +312,7 @@ sub create_display_box {
 	my @colorized_fs_types = qw(ext2 ext3 ext4 xfs swap vfat ntfs ntfs-3g);
         my $part_widget = Gtk2::EventBox->new;
         $entry->{width} = $entry->{size} * $initial_ratio + $minwidth;
-        if ($last && $last->{device} eq "$entry->{device}") {
+        if ($last && $last->{device} eq $entry->{device}) {
             #- entry is the last resizable partition
             my $ratio;
             my $update_ratio = sub { $ratio = $entry->{width} / $entry->{size} };
@@ -320,7 +320,7 @@ sub create_display_box {
             $part_widget->set_name("PART_vfat");
             $part_info->set_size_request(ceil($ratio * $entry->{min_win}), 0);
             my $ev2 = Gtk2::EventBox->new;
-            my $b2 = gtknew("Image", file=>"small-logo");
+            my $b2 = gtknew("Image", file => "small-logo");
             $ev2->add($b2);
             $b2->set_size_request($ratio * MB(600), 0);
             $ev2->set_name("PART_new");
@@ -382,7 +382,7 @@ sub create_display_box {
             });
         } else {
             if ($fill_empty && isEmpty($entry)) {
-                $part_info = gtknew("Image", file=>"small-logo");
+                $part_info = gtknew("Image", file => "small-logo");
                 $part_widget->set_name("PART_new");
             } else {
                 $part_widget->set_name("PART_" . (isEmpty($entry) ? 'empty' : 
@@ -399,11 +399,11 @@ sub create_display_box {
 	gtkpack__($display_box, $part_sep);
     }
     $display_box->remove($part_sep);
-    unless($resize || $fill_empty) {
+    unless ($resize || $fill_empty) {
         my @types = (N_("Ext2/3/4"), N_("XFS"), N_("Swap"), arch() =~ /sparc/ ? N_("SunOS") : arch() eq "ppc" ? N_("HFS") : N_("Windows"),
                     N_("Other"), N_("Empty"));
         my %name2fs_type = ('Ext2/3/4' => 'ext3', 'XFS' => 'xfs', Swap => 'swap', Other => 'other', "Windows" => 'vfat', HFS => 'hfs');
-        $desc = ugtk2::gtkpack(Gtk2::HBox->new(), 
+        $desc = ugtk2::gtkpack(Gtk2::HBox->new,
                 map {
                      my $t = $name2fs_type{$_};
                      my $ev = Gtk2::EventBox->new;
@@ -456,7 +456,7 @@ sub display_choices {
         } elsif ($s eq 'existing_part') {
         } elsif ($s eq 'wipe_drive') {
             $item = Gtk2::EventBox->new;
-            my $b2 = gtknew("Image", file=>"small-logo");
+            my $b2 = gtknew("Image", file => "small-logo");
             $item->add($b2);
             $item->set_size_request(-1,26);
             $item->set_name("PART_new");
@@ -473,7 +473,7 @@ sub display_choices {
         ugtk2::gtkpack($vbox, $item) if defined($item);
         $button->set_group($oldbutton->get_group) if $oldbutton;
         $oldbutton = $button;
-        $button->signal_connect('toggled', sub { $mainw->{sol} = $solutions{$s} if($_[0]->get_active)});
+        $button->signal_connect('toggled', sub { $mainw->{sol} = $solutions{$s} if $_[0]->get_active });
         ugtk2::gtkpack2__($choicesbox, $button);
         $sep = gtknew('HSeparator');
         ugtk2::gtkpack2__($choicesbox, $sep);
@@ -543,7 +543,7 @@ sub main {
         my @more_buttons = (
             [ gtknew('Install_Button',
                      text => N("Help"),
-                     clicked => sub { interactive::gtk::display_help($o, {interactive_help_id => 'doPartitionDisks'}, $mainw) }),
+                     clicked => sub { interactive::gtk::display_help($o, {interactive_help_id => 'doPartitionDisks' }, $mainw) }),
               undef, 1 ],
             );
         my $buttons_pack = $mainw->create_okcancel(N("Next"), undef, '', @more_buttons);
