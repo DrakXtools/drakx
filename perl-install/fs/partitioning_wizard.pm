@@ -313,6 +313,7 @@ sub create_display_box {
 	my $w = Gtk2::Label->new($info);
 	my @colorized_fs_types = qw(ext2 ext3 ext4 xfs swap vfat ntfs ntfs-3g);
         $ev = Gtk2::EventBox->new;
+        $entry->{width} = $entry->{size} * $initial_ratio + $minwidth;
         my $part;
         if ($last && $last->{device} eq "$entry->{device}") {
             $part = $last;
@@ -332,7 +333,7 @@ sub create_display_box {
             $hpane->add2($ev2);
             $hpane->child2_shrink(0);
             $hpane->set_position(ceil($ratio * $part->{req_size}));
-            ugtk2::gtkset_size_request($hpane, $ratio * $part->{size} + $minwidth, 0);
+            ugtk2::gtkset_size_request($hpane, $entry->{width}, 0);
             ugtk2::gtkpack__($display_box, $hpane);
 
             my $size = int($hpane->get_position / $ratio);
@@ -399,7 +400,7 @@ sub create_display_box {
                                          $entry->{fs_type} && member($entry->{fs_type}, @colorized_fs_types) ? $entry->{fs_type} :
                                          'other'));
             }
-            $ev->set_size_request($entry->{size} * $ratio + $minwidth, 0);
+            $ev->set_size_request($entry->{width}, 0);
             ugtk2::gtkpack($display_box, $ev);
         }
 	$ev->add($w);
