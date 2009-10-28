@@ -313,14 +313,11 @@ sub create_display_box {
 	my @colorized_fs_types = qw(ext2 ext3 ext4 xfs swap vfat ntfs ntfs-3g);
         $ev = Gtk2::EventBox->new;
         $entry->{width} = $entry->{size} * $initial_ratio + $minwidth;
-        my $part;
         if ($last && $last->{device} eq "$entry->{device}") {
-            $part = $last;
-        }
-        if ($part) {
-            my $ratio = $part->{width} / $part->{size};
+            #- entry is the last resizable partition
+            my $ratio = $entry->{width} / $entry->{size};
             $ev->set_name("PART_vfat");
-            $w->set_size_request(ceil($ratio * $part->{min_win}), 0);
+            $w->set_size_request(ceil($ratio * $entry->{min_win}), 0);
             my $ev2 = Gtk2::EventBox->new;
             my $b2 = gtknew("Image", file=>"small-logo");
             $ev2->add($b2);
@@ -332,7 +329,7 @@ sub create_display_box {
             $hpane->child1_shrink(0);
             $hpane->add2($ev2);
             $hpane->child2_shrink(0);
-            $hpane->set_position(ceil($ratio * $part->{req_size}));
+            $hpane->set_position(ceil($ratio * $entry->{req_size}));
             ugtk2::gtkset_size_request($hpane, $entry->{width}, 0);
             ugtk2::gtkpack__($display_box, $hpane);
 
@@ -355,12 +352,12 @@ sub create_display_box {
             ugtk2::gtkpack__($desc, $mdv_size_label);
             $mdv_size_label->set_alignment(0,0.5);
             my $update_size_labels = sub {
-                $win_size_label->set_label(" Windows (" . formatXiB($part->{req_size}, 512) . ")");
-                $mdv_size_label->set_label(" Mandriva (" . formatXiB($part->{size} - $part->{req_size}, 512) . ")");
+                $win_size_label->set_label(" Windows (" . formatXiB($entry->{req_size}, 512) . ")");
+                $mdv_size_label->set_label(" Mandriva (" . formatXiB($entry->{size} - $entry->{req_size}, 512) . ")");
                 0;
             };
             my $update_req_size = sub {
-                $part->{req_size} = int($hpane->get_position / $ratio);
+                $entry->{req_size} = int($hpane->get_position / $ratio);
                 $update_size_labels->();
             };
             my $button_activate = sub {
