@@ -357,25 +357,24 @@ sub create_display_box {
             ugtk2::gtkpack__($desc, $mdv_size_label);
             $mdv_size_label->set_alignment(0,0.5);
             my $update_size_labels = sub {
-                my ($size1, $size2) = @_;
-                $win_size_label->set_label(" Windows (" . formatXiB($size1, 512) . ")");
-                $mdv_size_label->set_label(" Mandriva (" . formatXiB($size2, 512) . ")");
+                $win_size_label->set_label(" Windows (" . formatXiB($part->{req_size}, 512) . ")");
+                $mdv_size_label->set_label(" Mandriva (" . formatXiB($part->{size} - $part->{req_size}, 512) . ")");
             };
             $hpane->signal_connect('size-allocate' => sub {
                 my (undef, $alloc) = @_;
                 $part->{req_size} = int($hpane->get_position * $part->{size} / $part->{width});
-                $update_size_labels->($part->{req_size}, $part->{size}-$part->{req_size});
+                $update_size_labels->();
                 0;
             });
-            $update_size_labels->($size, $part->{size}-$size);
+            $update_size_labels->();
             $hpane->signal_connect('motion-notify-event' => sub {
                 $part->{req_size} = int($hpane->get_position * $part->{size} / $part->{width});
-                $update_size_labels->($part->{req_size}, $part->{size}-$part->{req_size});
+                $update_size_labels->();
                 0;
             });
             $hpane->signal_connect('move-handle' => sub {
                 $part->{req_size} = int($hpane->get_position * $part->{size} / $part->{width});
-                $update_size_labels->($part->{req_size}, $part->{size}-$part->{req_size});
+                $update_size_labels->();
                 0;
             });
             $hpane->signal_connect('button-press-event' => sub {
