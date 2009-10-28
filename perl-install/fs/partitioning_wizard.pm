@@ -336,8 +336,6 @@ sub create_display_box {
             ugtk2::gtkset_size_request($hpane, $entry->{width}, 0);
             ugtk2::gtkpack__($display_box, $hpane);
 
-            my $size = int($hpane->get_position / $ratio);
-
             $desc = Gtk2::HBox->new(0,0);
             $ev2 = Gtk2::EventBox->new;
             $ev2->add(Gtk2::Label->new(" " x 4));
