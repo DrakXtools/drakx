@@ -365,6 +365,10 @@ sub create_display_box {
                 $part->{req_size} = int($hpane->get_position * $part->{size} / $part->{width});
                 $update_size_labels->();
             };
+            my $button_activate = sub {
+                $button->activate;
+                0;
+            };
             $hpane->signal_connect('size-allocate' => sub {
                 my (undef, $alloc) = @_;
                 $update_req_size->();
@@ -372,14 +376,8 @@ sub create_display_box {
             $update_size_labels->();
             $hpane->signal_connect('motion-notify-event' => $update_req_size);
             $hpane->signal_connect('move-handle' => $update_req_size);
-            $hpane->signal_connect('button-press-event' => sub {
-                $button->activate;
-                0;
-            });
-            $vbox->signal_connect('button-press-event' => sub {
-                $button->activate;
-                0;
-            });
+            $hpane->signal_connect('button-press-event' => $button_activate);
+            $vbox->signal_connect('button-press-event' => $button_activate);
             $button->signal_connect('focus-in-event' => sub {
                 $hpane->grab_focus;
                 0;
