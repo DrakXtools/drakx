@@ -164,7 +164,7 @@ foreach my $card (@cards) {
         my $driver = $cards[0]{Driver};
         my $old_driver = cat_('/etc/X11/xorg.conf') =~ /Driver "($card->{xorg_driver_regexp})"/ && $1;
         if ($old_driver) {
-            my $reason = N("The proprietary kernel driver was not found for '%s' xorg driver",
+            my $reason = N("The proprietary kernel driver was not found for '%s' X.org driver",
                            $old_driver);
             switch_x_driver($card->{xorg_driver_regexp}, $driver, $reason);
             schedule_warn_about_switch($reason);
