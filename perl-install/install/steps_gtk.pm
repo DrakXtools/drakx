@@ -131,6 +131,7 @@ sub new($$) {
         modules::load('xpad');
         run_program::run('xset', 'm', '1/8', '1');
     }
+    any::disable_x_screensaver();
     run_program::raw({ detach => 1 }, 'drakx-matchbox-window-manager');
     install::gtk::init_gtk($o);
     install::gtk::init_sizes($o);
