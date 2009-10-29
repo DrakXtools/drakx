@@ -75,7 +75,6 @@ sub get_xorg_driver() {
 
 sub schedule_warn_about_switch {
     my ($reason) = @_;
-    output('/var/run/harddrake_swithed_to_free_driver', $reason);
     output('/var/run/harddrake-notify-x11-free-driver-switch', $reason);
 }
 
