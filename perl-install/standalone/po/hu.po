@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone-2009.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2009-03-27 11:17+0100\n"
 "Last-Translator: Gergely Lónyai <aleph@mandriva.org>\n"
 "Language-Team: Hungarian <aleph@mandriva.org>\n"
@@ -21,6 +21,16 @@ msgstr ""
 "X-Poedit-Language: Hungarian\n"
 "X-Poedit-Country: HUNGARY\n"
 "X-Poedit-SourceCharset: utf-8\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Segítség"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Bezárás"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -253,12 +263,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Csomag keresése"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "Böngészés"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Csomag: "
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Kernel:"
@@ -314,22 +329,12 @@ msgstr "Csatolja a következő fájlokat: %s mint %s."
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Kérjük határozza meg, hogy mit csinált a program hibás kilépése előtt:"
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Segítség"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Bejelentés"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Bezárás"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "Nincs telepítve"
@@ -2013,7 +2018,12 @@ msgstr "PCI-tartomány"
 msgid "the PCI domain of the device"
 msgstr "Az eszköz PCI-tartománya"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Engedélyek"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr "PCI-busz azonosítója"
@@ -2646,12 +2656,7 @@ msgstr "író"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Ismeretlen/Egyéb"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "A következő csomagokat szükséges telepíteni:\n"
@@ -2985,6 +2990,11 @@ msgid ""
 msgstr ""
 "Nem található a grafikus kártyájához szabadalmi szoftvert. A rendszer szabad "
 "licenc alatt kibocsájtott meghajtót (%s) fog használni."
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
+msgstr ""
 
 #: scannerdrake:51
 #, c-format
@@ -3523,7 +3533,17 @@ msgid "Could not install the packages needed to share your scanner(s)."
 msgstr ""
 "Nem sikerült telepíteni a lapolvasó(k) megosztásához szükséges csomagokat."
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "A(z) %s nem támogatott a(z) %s jelenleg használt verziójában."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "A(z) \"%s\" hardverosztály bizonyos eszközei el lettek távolítva:\n"
@@ -3585,6 +3605,9 @@ msgstr "Nyelv és ország beállítása"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Helyi beállítások"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Ismeretlen/Egyéb"
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "

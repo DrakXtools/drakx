@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2009-05-05 16:10+0300\n"
 "Last-Translator: Jani Välimaa <jani.valimaa@gmail.com>\n"
 "Language-Team: Finnish <cooker-i18n@mandrivalinux.org>\n"
@@ -21,6 +21,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Lokalize 0.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Ohje"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Sulje"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -254,12 +264,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Etsi paketti"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "selaa"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Paketti: "
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Ydin:"
@@ -312,22 +327,12 @@ msgstr "Mukaan tulisi liittää myös seuraavat tiedostot: %s ja %s."
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Mitä olit tekemässä, kun ohjelma kaatui:"
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Ohje"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Raportoi"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Sulje"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "Ei asennettu"
@@ -2006,7 +2011,12 @@ msgstr "PCI-domain"
 msgid "the PCI domain of the device"
 msgstr "Laitteen PCI-domain."
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Oikeudet"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr "PCI-väylänumero"
@@ -2636,12 +2646,7 @@ msgstr "poltin"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Tuntematon/Muut"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Seuraavat paketit pitää asentaa:\n"
@@ -2973,6 +2978,11 @@ msgid ""
 msgstr ""
 "Järjestelmästä ei löytynyt suljettuja ajureita näytönohjaimelle, joten "
 "käytetään vapaita ajureita (%s)."
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
+msgstr ""
 
 #: scannerdrake:51
 #, c-format
@@ -3516,7 +3526,17 @@ msgstr "Kuvanlukijoita ei voi käyttää verkosta."
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "Kuvanlukijan jakamiseen tarvittavia paketteja ei voitu asentaa."
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "%s ei ole tuettu %s:n version kanssa."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Poistettiin joitakin laitteita laitteistoluokasta \"%s\":\n"
@@ -3578,6 +3598,9 @@ msgstr "Kieli- ja maa-asetukset"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Maa-asetukset"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Tuntematon/Muut"
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "

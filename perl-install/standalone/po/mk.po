@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-mk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2004-11-03 18:47+0100\n"
 "Last-Translator: Зоран Димовски <decata@mt.net.mk>\n"
 "Language-Team: Macedonian <mkde-l10n@lists.sourceforge.net>\n"
@@ -20,6 +20,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Помош"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Затвори"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -244,12 +254,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Пронајдете пакет"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "разгледај"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Пакет:"
 
-#: drakbug:120
+#: drakbug:121
 #, fuzzy, c-format
 msgid "Kernel:"
 msgstr "Кернел:"
@@ -304,22 +319,12 @@ msgstr "Треба да ги инсталирате следниве пакет�
 msgid "Please describe what you were doing when it crashed:"
 msgstr ""
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Помош"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Извештај"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Затвори"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "Не е инсталиран"
@@ -1972,7 +1977,12 @@ msgstr ""
 msgid "the PCI domain of the device"
 msgstr "името на производителот на уредот"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Дозоли"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr ""
@@ -2602,12 +2612,7 @@ msgstr "режач"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Непознато/Други"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Следниве пакети мора да се инсталирани:\n"
@@ -2935,6 +2940,11 @@ msgstr "Зачувај како.."
 msgid ""
 "The proprietary driver for your graphic card can not be found, the system is "
 "now using the free software driver (%s)."
+msgstr ""
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
 msgstr ""
 
 #: scannerdrake:51
@@ -3451,7 +3461,17 @@ msgstr "Ваши(те)от скенер/и нема да се доспани н�
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr ""
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "%s не е поддржан од оваа верзија на %s."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Некои уреди се отстрането од класата на хардвер \"%s\":\n"
@@ -3518,6 +3538,9 @@ msgstr "Рачна конфигурација"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "Подесувања"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Непознато/Други"
 
 #, fuzzy
 #~ msgid ""

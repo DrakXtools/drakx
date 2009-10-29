@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2009-04-07 15:09+0200\n"
 "Last-Translator: Pavel Maryanov <acid_jack@ukr.net>\n"
 "Language-Team: Russian <gnu@mx.ru>\n"
@@ -18,6 +18,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Справка"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Закрыть"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -252,12 +262,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Найти пакет"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "найти"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Пакет:"
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Ядро:"
@@ -309,22 +324,12 @@ msgstr "Следует вложить следующие файлы: %s, а та
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Опишите свои действия на момент возникновения сбоя:"
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Справка"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Отчёт"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Закрыть"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "Не установлен"
@@ -2005,7 +2010,12 @@ msgstr "PCI-домен"
 msgid "the PCI domain of the device"
 msgstr "PCI-домен устройства"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Права"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr "Шина PCI #"
@@ -2641,12 +2651,7 @@ msgstr "записывающий"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Неизвестный/Другие"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Следующие пакеты должны быть установлены:\n"
@@ -2980,6 +2985,11 @@ msgid ""
 msgstr ""
 "Проприетарный драйвер для вашей графической карты не найден - система будет "
 "использовать свободный драйвер  (%s)."
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
+msgstr ""
 
 #: scannerdrake:51
 #, c-format
@@ -3522,7 +3532,17 @@ msgstr ""
 "Не получается установить пакеты, необходимые для совместного использования "
 "ваших сканеров."
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "%s не поддерживается этой версией %s."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Были удалены некоторые устройства из оборудования класса \"%s\":\n"
@@ -3584,6 +3604,9 @@ msgstr "Настройка языковых и региональных пара
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Региональные настройки"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Неизвестный/Другие"
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "

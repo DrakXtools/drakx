@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2009-09-29 23:10+0200\n"
 "Last-Translator: Olav Dahlum <odahlum@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <cooker-i18n@mandrivalinux.org>\n"
@@ -18,6 +18,16 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 "X-Language: nb_NO\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Hjelp"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Lukk"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -250,12 +260,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Finn pakke"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "Bla gjennom"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Pakke: "
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Kjerne:"
@@ -292,7 +307,8 @@ msgid_plural ""
 msgstr[0] ""
 "Det ville være veldig nyttig om du tok med utdata fra den følgende "
 "kommandoen %s i feilrapporten."
-msgstr[1] "Nyttige ting å ta med i feilrapporten er utdata fra denne kommandoen: %s."
+msgstr[1] ""
+"Nyttige ting å ta med i feilrapporten er utdata fra denne kommandoen: %s."
 
 #: drakbug:163
 #, c-format
@@ -309,22 +325,12 @@ msgstr "Du bør også legge ved filene %s og %s."
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Skriv inn hva du gjorde når programmet krasjet:"
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Hjelp"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Rapporter"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Lukk"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "Ikke installert"
@@ -856,7 +862,8 @@ msgstr " --help                – Vis denne hjelpeteksten.\n"
 
 #: drakhelp:23
 #, c-format
-msgid " --id <id_label>       - load the html help page which refers to id_label\n"
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
 " --id <identifikator>  – Last HTML-hjelpesiden som refererer til "
 "«identifikator».\n"
@@ -866,7 +873,8 @@ msgstr ""
 msgid ""
 " --doc <link>          - link to another web page ( for WM welcome "
 "frontend)\n"
-msgstr " --doc <lenke>        – Lenke til en annen nettside (for velkomstmelding).\n"
+msgstr ""
+" --doc <lenke>        – Lenke til en annen nettside (for velkomstmelding).\n"
 
 #: drakhelp:52
 #, c-format
@@ -1332,8 +1340,8 @@ msgid ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 msgstr ""
-"Fant ingen lydkort pål maskina. Kontroller at du har et lydkort "
-"som er støttet i Linux koblet til.\n"
+"Fant ingen lydkort pål maskina. Kontroller at du har et lydkort som er "
+"støttet i Linux koblet til.\n"
 "\n"
 "\n"
 "Du finner maskinvaredatabasen vår på:\n"
@@ -1353,8 +1361,8 @@ msgstr ""
 "\n"
 "\n"
 "\n"
-"Hvis du har et ISA PnP-basert lydkort, må du bruke alsaconf eller "
-"sndconfig-programmene. Skriv alsaconf eller sndconfig i et konsoll."
+"Hvis du har et ISA PnP-basert lydkort, må du bruke alsaconf eller sndconfig-"
+"programmene. Skriv alsaconf eller sndconfig i et konsoll."
 
 #: draksplash:33
 #, c-format
@@ -1765,8 +1773,8 @@ msgid ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 msgstr ""
-"Fant ingen TV-kort koblet til maskina. Kontroller at du har et "
-"kort som er støttet i Linux koblet til.\n"
+"Fant ingen TV-kort koblet til maskina. Kontroller at du har et kort som er "
+"støttet i Linux koblet til.\n"
 "\n"
 "\n"
 "Du finner maskinvaredatabasen vår på:\n"
@@ -1826,7 +1834,8 @@ msgstr "Buss"
 
 #: harddrake2:33
 #, c-format
-msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgid ""
+"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr ""
 "Dette er den fysiske bussen som enheten er koblet til (for eksempel: PCI "
 "eller USB)."
@@ -1997,7 +2006,12 @@ msgstr "PCI-domene"
 msgid "the PCI domain of the device"
 msgstr "PCI-domenet til enheten"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Tillatelser"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr "PCI-bussnr."
@@ -2090,8 +2104,7 @@ msgid ""
 "\"benchmark\" the cpu."
 msgstr ""
 "GNU/Linux-kjernen må kjøre en regneløkkee ved oppstart for å starte en "
-"tidtaker. Resultatet blir lagret som bogomips for å ytelsesteste "
-"prosessoren."
+"tidtaker. Resultatet blir lagret som bogomips for å ytelsesteste prosessoren."
 
 #: harddrake2:71
 #, c-format
@@ -2171,8 +2184,8 @@ msgid ""
 "processor which did not achieve the required precision when performing a "
 "Floating point DIVision (FDIV)"
 msgstr ""
-"Tidlige Intel Pentium-brikker hadde en feil i flytetallsprosessoren som førte "
-"til dårlig presisjon ved flytetallsdivisjoner (FDIV)"
+"Tidlige Intel Pentium-brikker hadde en feil i flytetallsprosessoren som "
+"førte til dårlig presisjon ved flytetallsdivisjoner (FDIV)"
 
 #: harddrake2:81
 #, c-format
@@ -2217,8 +2230,8 @@ msgid ""
 "Some of the early i486DX-100 chips cannot reliably return to operating mode "
 "after the \"halt\" instruction is used"
 msgstr ""
-"Noen av de tidlige i486DX-100-brikkene kan ikke vende tilbake til "
-"kjøremodus etter at instruksjonen «halt» er brukt"
+"Noen av de tidlige i486DX-100-brikkene kan ikke vende tilbake til kjøremodus "
+"etter at instruksjonen «halt» er brukt"
 
 #: harddrake2:86
 #, c-format
@@ -2384,7 +2397,8 @@ msgstr "Enhetsfil"
 
 #: harddrake2:119
 #, c-format
-msgid "the device file used to communicate with the kernel driver for the mouse"
+msgid ""
+"the device file used to communicate with the kernel driver for the mouse"
 msgstr "enhetsfila for musa brukt til å kommunisere med kjernedriveren"
 
 #: harddrake2:120
@@ -2590,7 +2604,8 @@ msgstr "Kjør oppsettverktøy"
 
 #: harddrake2:303
 #, c-format
-msgid "Click on a device in the left tree in order to display its information here."
+msgid ""
+"Click on a device in the left tree in order to display its information here."
 msgstr "Trykk på en enhet til venstre for å se informasjon om enheten her."
 
 #: harddrake2:324 notify-x11-free-driver-switch:13
@@ -2628,12 +2643,7 @@ msgstr "brenner"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Ukjent/andre"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Disse pakkene må installeres:\n"
@@ -2893,7 +2903,8 @@ msgstr "Tjenesteoppsett"
 msgid ""
 "You will receive an alert if one of the selected services is no longer "
 "running"
-msgstr "Du vil motta et varsel om en av de valgte tjenestene ikke lengre kjører"
+msgstr ""
+"Du vil motta et varsel om en av de valgte tjenestene ikke lengre kjører"
 
 #: logdrake:429
 #, c-format
@@ -2903,7 +2914,8 @@ msgstr "Lastoppsett"
 #: logdrake:430
 #, c-format
 msgid "You will receive an alert if the load is higher than this value"
-msgstr "Du vil motta et varsel om lasten/ressursbruken er høyere enn denne verdien"
+msgstr ""
+"Du vil motta et varsel om lasten/ressursbruken er høyere enn denne verdien"
 
 #: logdrake:431
 #, c-format
@@ -2925,7 +2937,8 @@ msgstr "Skriv inn e-postadressen din under"
 #: logdrake:438
 #, c-format
 msgid "and enter the name (or the IP) of the SMTP server you wish to use"
-msgstr "og skriv inn navnet (eller IP-adressen) til SMTP-tjeneren som skal brukes"
+msgstr ""
+"og skriv inn navnet (eller IP-adressen) til SMTP-tjeneren som skal brukes"
 
 #: logdrake:445
 #, c-format
@@ -2965,6 +2978,11 @@ msgstr ""
 "Fant ikke den godseide skjermkortdriveren. Bruker derfor den frie driveren (%"
 "s)."
 
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
+msgstr ""
+
 #: scannerdrake:51
 #, c-format
 msgid ""
@@ -2983,7 +3001,8 @@ msgstr "Avbryter skanneroppsett."
 
 #: scannerdrake:60
 #, c-format
-msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr "Klarte ikke å installere pakker nødvendige for å sette opp skannere."
 
 #: scannerdrake:61
@@ -3072,8 +3091,8 @@ msgid ""
 "It is possible that your %s needs its firmware to be uploaded everytime when "
 "it is turned on."
 msgstr ""
-"Det er mulig at %s trenger oppdatering av fastvaren hver gang den blir "
-"slått på."
+"Det er mulig at %s trenger oppdatering av fastvaren hver gang den blir slått "
+"på."
 
 #: scannerdrake:174 scannerdrake:226
 #, c-format
@@ -3236,8 +3255,7 @@ msgid ""
 msgstr ""
 "%s kan ikke settes opp helt automatisk.\n"
 "\n"
-"Du må gjøre manuelle innstillinger. Rediger oppsettfila /etc/sane.d/%s."
-"conf. "
+"Du må gjøre manuelle innstillinger. Rediger oppsettfila /etc/sane.d/%s.conf. "
 
 #: scannerdrake:407 scannerdrake:416
 #, c-format
@@ -3254,8 +3272,8 @@ msgid ""
 "After that you may scan documents using \"XSane\" or \"Kooka\" from "
 "Multimedia/Graphics in the applications menu."
 msgstr ""
-"Du kan så skanne dokumenter med programmene «Kooka» eller «XSane» fra "
-"menyen «Multimedia/Grafikk."
+"Du kan så skanne dokumenter med programmene «Kooka» eller «XSane» fra menyen "
+"«Multimedia/Grafikk."
 
 #: scannerdrake:413
 #, c-format
@@ -3263,8 +3281,8 @@ msgid ""
 "Your %s has been configured, but it is possible that additional manual "
 "adjustments are needed to get it to work. "
 msgstr ""
-"%s er nå satt opp, men det kan hende at du må gjøre noen flere fininnstillinger "
-"for at alt skal fungere."
+"%s er nå satt opp, men det kan hende at du må gjøre noen flere "
+"fininnstillinger for at alt skal fungere."
 
 #: scannerdrake:414
 #, c-format
@@ -3293,8 +3311,8 @@ msgid ""
 "Graphics in the applications menu."
 msgstr ""
 "%s er nå satt opp.\n"
-"Du kan nå skanne dokumenter med programmene «Kooka» eller «XSane» fra "
-"menyen Multimedia/Grafikk."
+"Du kan nå skanne dokumenter med programmene «Kooka» eller «XSane» fra menyen "
+"Multimedia/Grafikk."
 
 #: scannerdrake:446
 #, c-format
@@ -3496,7 +3514,17 @@ msgstr "Skanneren/-ene vil ikke være tilgjengelig(e) på nettverket."
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "Klarte ikke installere pakkene for deling av skanner(e)."
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "%s er ikke støttet i denne versjonen av %s."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Noen enheter i maskinvareklassen «%s» ble fjernet:\n"
@@ -3559,3 +3587,5 @@ msgstr "Oppsett av språk og land"
 msgid "Regional Settings"
 msgstr "Språk og land"
 
+#~ msgid "Unknown/Others"
+#~ msgstr "Ukjent/andre"

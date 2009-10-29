@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2009-04-22 05:41+0200\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -20,6 +20,16 @@ msgstr ""
 "X-Generator: Lokalize 0.3\n"
 "Plural-Forms:  nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3);\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Pomoč"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Zapri"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -252,12 +262,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Poišči paket"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "brskaj"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Paket: "
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Jedro:"
@@ -319,22 +334,12 @@ msgstr "Pripnite tudi sledeči datoteki: %s in tudi %s"
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Opišite, kaj ste počeli, preden se je sesul:"
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Pomoč"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Poročaj"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Zapri"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "Ni nameščeno"
@@ -1777,8 +1782,8 @@ msgid ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 msgstr ""
-"V vašem računalniku kartica za TV ni bila zaznana. Preverite, da je v "
-"Linuxu podprta kartica za TV pravilno vstavljena.\n"
+"V vašem računalniku kartica za TV ni bila zaznana. Preverite, da je v Linuxu "
+"podprta kartica za TV pravilno vstavljena.\n"
 "\n"
 "\n"
 "Lahko obiščete bazo podprte strojne opreme na:\n"
@@ -2011,7 +2016,12 @@ msgstr "Domena PCI"
 msgid "the PCI domain of the device"
 msgstr "domena PCI naprave"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Dovoljenja"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr "# vodila PCI"
@@ -2400,7 +2410,8 @@ msgstr "Datoteka naprave"
 
 #: harddrake2:119
 #, c-format
-msgid "the device file used to communicate with the kernel driver for the mouse"
+msgid ""
+"the device file used to communicate with the kernel driver for the mouse"
 msgstr ""
 "Datoteka naprave uporabljeno za komunikacijo z jedrnim gonilnikom za miško"
 
@@ -2646,12 +2657,7 @@ msgstr "pekač"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Neznane naprave"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Namestiti je treba sledeče pakete:\n"
@@ -2984,6 +2990,11 @@ msgid ""
 msgstr ""
 "Zaprto-kodnega gonilnika za grafično kartico ni moč najti. Računalnik sedaj "
 "uporablja odprto-kodni gonilnik (%s)."
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
+msgstr ""
 
 #: scannerdrake:51
 #, c-format
@@ -3529,7 +3540,17 @@ msgstr ""
 "Paketov, ki so potrebni za skupno rabo optičnega čitalnika, ni mogoče "
 "namestiti."
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "Ta različica %2$s ne podpira %1$s."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Nekateri deli strojne opreme razreda »%s« so bili odstranjeni:\n"
@@ -3591,6 +3612,9 @@ msgstr "Nastavitev jezika in države"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Področne nastavitve"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Neznane naprave"
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "

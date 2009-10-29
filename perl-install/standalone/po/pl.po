@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2009-03-30 07:46+0200\n"
 "Last-Translator: Amazis.net sp. z o.o. - Tomasz Bednarski <tomasz."
 "bednarski@amazis.pl>\n"
@@ -27,6 +27,16 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Pomoc"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Zamknij"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -260,12 +270,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Znajdź pakiet"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "przeglądaj"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Pakiet: "
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Jądro:"
@@ -321,22 +336,12 @@ msgstr "Dołącz także następujące pliki: %s oraz %s."
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Opisz czynności, które wykonywałeś podczas awarii programu:"
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Pomoc"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Raport"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Zamknij"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "Nie zainstalowano"
@@ -2017,7 +2022,12 @@ msgstr "Zakres PCI"
 msgid "the PCI domain of the device"
 msgstr "zakres PCI urządzenia"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Prawa dostępu"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr "Szyna PCI #"
@@ -2661,12 +2671,7 @@ msgstr "nagrywarka"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Nieznane/Inne"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Następujące pakiety wymagają zainstalowania:\n"
@@ -3010,6 +3015,11 @@ msgid ""
 msgstr ""
 "Własnościowy sterownik dla Twojej karty graficznej nie został odnaleziony. "
 "System używa teraz sterownika na licencji wolnego oprogramowania (%s)."
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
+msgstr ""
 
 #: scannerdrake:51
 #, c-format
@@ -3550,7 +3560,17 @@ msgid "Could not install the packages needed to share your scanner(s)."
 msgstr ""
 "Nie można zainstalować pakietów wymaganych do udostępnienia twojego skanera."
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "%s nie jest obsługiwany przez tą wersję %s."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Niektóre urządzenia w klasie sprzętowej \"%s\" zostały usunięte:\n"
@@ -3612,3 +3632,6 @@ msgstr "Konfiguracja języka i kraju"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Ustawienia regionalne"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Nieznane/Inne"

@@ -7,16 +7,26 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2009-09-09 23:33+0200\n"
 "Last-Translator: Michal Bukovjan <bukm@centrum.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 0.3\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Nápověda"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Zavřít"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -248,12 +258,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Najít balíček"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "procházet"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Balíček: "
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Jádro: "
@@ -313,22 +328,12 @@ msgstr "Měli byste rovněž připojit následující soubory: %s a %s."
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Popište prosím, co jste dělali před havárií:"
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Nápověda"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Hlášení"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Zavřít"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "Není instalováno"
@@ -2007,7 +2012,12 @@ msgstr "PCI doména"
 msgid "the PCI domain of the device"
 msgstr "PCI doména zařízení"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Oprávnění"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr "Sběrnice PCI #"
@@ -2641,12 +2651,7 @@ msgstr "vypalovačka"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Neznámý/Jiný"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Je potřeba nainstalovat tyto balíčky:\n"
@@ -2979,6 +2984,11 @@ msgid ""
 msgstr ""
 "Nelze nalézt proprietární ovladač pro vaši grafickou kartu, systém nyní "
 "používá svobodný ovladač (%s)."
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
+msgstr ""
 
 #: scannerdrake:51
 #, c-format
@@ -3515,7 +3525,17 @@ msgstr "Váš skener(y) nebude přístupný na síti."
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "Nelze nainstalovat balíčky potřebné pro sdílené skeneru(ů)."
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "Tato verze %s nepodporuje %s."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Některá zařízení v třídě hardware \"%s\" byla odstraněna:\n"
@@ -3578,3 +3598,5 @@ msgstr "Nastavení jazyka a země"
 msgid "Regional Settings"
 msgstr "Regionální nastavení"
 
+#~ msgid "Unknown/Others"
+#~ msgstr "Neznámý/Jiný"

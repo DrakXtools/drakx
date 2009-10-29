@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2002-09-06 00:35+0800\n"
 "Last-Translator: prabu anand <prabu_anand2000@yahoo.com>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
@@ -17,6 +17,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.6\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "உதவி"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "மூடு"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -241,12 +251,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "பொதியைக் கண்டுபிடி"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "விளக்கமான"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "பொதி: "
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "கரு: "
@@ -295,22 +310,12 @@ msgstr "%s பொதி நிறுவப்படுகிறது"
 msgid "Please describe what you were doing when it crashed:"
 msgstr ""
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "உதவி"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "அறிக்ைக"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "மூடு"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "நிறுவப்படவில்ைல"
@@ -1919,7 +1924,12 @@ msgstr ""
 msgid "the PCI domain of the device"
 msgstr "சாதனங்களின் விற்பவர் பெயர்"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "அனுமதிகள்"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr ""
@@ -2532,12 +2542,7 @@ msgstr "அச்சுப்ெபாறி"
 msgid "DVD"
 msgstr "டிவிடி இயக்கி"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "ெதரியாத/மற்றவை"
-
-#: harddrake2:527
+#: harddrake2:531
 #, fuzzy, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "கிழ்கானும் பொதிகள் நிறுவுவதற்கு தேர்வுச் செய்யப்பட்டுள்ளது"
@@ -2860,6 +2865,11 @@ msgstr "எனச் சேமி.."
 msgid ""
 "The proprietary driver for your graphic card can not be found, the system is "
 "now using the free software driver (%s)."
+msgstr ""
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
 msgstr ""
 
 #: scannerdrake:51
@@ -3357,7 +3367,17 @@ msgstr ""
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr ""
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr ""
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "\"%s\"  வகை சாதனம் ஒன்று பிரிக்கப்பட்டுள்ளது:\n"
@@ -3424,6 +3444,9 @@ msgstr "கைமுறை வடிவமைப்பு "
 #, fuzzy
 msgid "Regional Settings"
 msgstr "அமைப்புகள்"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "ெதரியாத/மற்றவை"
 
 #, fuzzy
 #~ msgid "(default value: %s)"

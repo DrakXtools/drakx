@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2009-03-27 11:38+0000\n"
 "Last-Translator: Pjetur G. Hjaltason <pjetur@pjetur.net>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
@@ -20,6 +20,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Hjálp"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Loka"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -251,12 +261,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Finna pakka"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "flakka"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Pakki: "
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Kjarni:"
@@ -309,22 +324,12 @@ msgstr "Þú ættir einnig að hengja við eftirfarandi skrár: %s sem og %s."
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Lýstu því hvað þú varst að gera þegar forritið hrundi (á ensku):"
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Hjálp"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Skýrsla"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Loka"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "Ekki settur inn"
@@ -2002,7 +2007,12 @@ msgstr "PCI lén"
 msgid "the PCI domain of the device"
 msgstr "PCI lén tækisins"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Aðgangsheimildir"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr "Brautar PCI #"
@@ -2634,12 +2644,7 @@ msgstr "brennari"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Óþekkt/Annað"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Eftirfarandi pakka þarf að setja inn:\n"
@@ -2970,6 +2975,11 @@ msgid ""
 msgstr ""
 "Sérsniðinn rekil framleiðanda fyrir grafíska skjákortið þitt finnst ekki, "
 "kerfið notar nú opinn og frjálsan rekil (%s)."
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
+msgstr ""
 
 #: scannerdrake:51
 #, c-format
@@ -3510,7 +3520,17 @@ msgstr "Myndskanninn þinn verður ekki boðinn fram á netinu."
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "Gat ekki sett inn pakka sem þarf til að miðla skannanum þínum."
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "Það er ekki stuðningur fyrir %s í þessari útgáfu af %s."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Nokkur tæki í \"%s\" vélbúnaðarhlutanum voru fjarlægð:\n"
@@ -3572,3 +3592,6 @@ msgstr "Tungumál og land kerfis"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Svæðisbundnar stillingar"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Óþekkt/Annað"

@@ -9,13 +9,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2005-03-19 23:18+0600\n"
 "Last-Translator: Samia <mailsamia2001@yahoo.com>\n"
 "Language-Team: Bangla <mdk-translation@bengalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "সহায়িকা"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "বন্ধ করো"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -247,12 +257,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "প্যাকেজ অনুসন্ধান করো"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "ব্রাউজ"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "প্যাকেজ:"
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "কার্ণেল:"
@@ -306,22 +321,12 @@ msgstr "নিম্নের প্যাকেজসমুহ আপনার 
 msgid "Please describe what you were doing when it crashed:"
 msgstr ""
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "সহায়িকা"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "রিপোর্ট"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "বন্ধ করো"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "ইনস্টল করা নেই"
@@ -1998,7 +2003,12 @@ msgstr ""
 msgid "the PCI domain of the device"
 msgstr "ডিভাইস নির্মাতার নাম"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "অনুমতি"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr "বাস পিসিআই #"
@@ -2633,12 +2643,7 @@ msgstr "বার্ণার"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "অজানা/অন্যান্য"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "নিম্নোক্ত প্যাকেজসমূহ ইনস্টল করা প্রয়োজন:\n"
@@ -2967,6 +2972,11 @@ msgstr "...এর মত সেভ করো"
 msgid ""
 "The proprietary driver for your graphic card can not be found, the system is "
 "now using the free software driver (%s)."
+msgstr ""
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
 msgstr ""
 
 #: scannerdrake:51
@@ -3503,7 +3513,17 @@ msgstr "আপনার স্কেনার(গুলি) নেটওয়া�
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "আপনার স্ক্যানার(সমূহ) শেয়ার করার জন্য প্রয়োজনীয় প্যাকেজ ইনস্টল করা যায় নি।"
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "%s-টি এই ভার্সনের %s-এ সাপোর্ট করেনা।"
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "\"%s\" হার্ডওয়্যার শ্রেণীর কিছু ডিভাইস অপসরণ করা হয়েছে:\n"
@@ -3570,6 +3590,9 @@ msgstr "স্বনির্বাচিত কনফিগারেশন"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "সেটিং"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "অজানা/অন্যান্য"
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "

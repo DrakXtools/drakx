@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2009-04-13 14:30+0200\n"
 "Last-Translator: Glentadakis Dimitrios <dglent@gmail.com>\n"
 "Language-Team: Greek <i18ngr@lists.hellug.gr>\n"
@@ -27,6 +27,16 @@ msgstr ""
 "X-Poedit-Language: Greek\n"
 "X-Poedit-Country: GREECE\n"
 "X-Poedit-SourceCharset: utf-8\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Βοήθεια"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Κλείσιμο"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -262,12 +272,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Εύρεση πακέτου"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "αναζήτηση"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Πακέτο:"
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Πυρήνας:"
@@ -324,22 +339,12 @@ msgstr "Θα πρέπει επίσης να επισυνάψτε τα ακόλο
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Παρακαλω περιγράψτε τι κανατε την στιγμη του crash :"
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Βοήθεια"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Αναφορά"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Κλείσιμο"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "Μη εγκατεστημένα"
@@ -2027,7 +2032,12 @@ msgstr "Τομέας PCI"
 msgid "the PCI domain of the device"
 msgstr "ο τομέας PCI της συσκευής"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Άδειες"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr "Bus PCI #"
@@ -2669,12 +2679,7 @@ msgstr "εγγραφέας"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Άγνωστο/Άλλο"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Τα παρακάτω πακέτα πρέπει να εγκατασταθούν:\n"
@@ -3013,6 +3018,11 @@ msgid ""
 msgstr ""
 "Ο ιδιόκτητος οδηγός για την κάρτα γραφικών σας δεν βρέθηκε, το σύστημα "
 "χρησιμοποιεί τώρα τον ανοιχτού κώδικα οδηγό (%s)."
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
+msgstr ""
 
 #: scannerdrake:51
 #, c-format
@@ -3564,7 +3574,17 @@ msgstr ""
 "Αδύνατη η εγκατάσταση των απαραίτητων πακέτων για την κοινή χρήση των "
 "σαρωτών."
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "Το %s δεν υποστηρίζεται από αυτή την έκδοση του %s."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Ορισμένες συσκευές στο τμήμα υλικού \"%s\" αφαιρέθηκαν :\n"
@@ -3626,6 +3646,9 @@ msgstr "Ρύθμιση της γλώσσας και της χώρας"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Τοπικές ρυθμίσεις"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Άγνωστο/Άλλο"
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "

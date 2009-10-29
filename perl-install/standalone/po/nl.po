@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2009-04-10 10:33+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@gmail.com>\n"
 "Language-Team: Nederlands\n"
@@ -21,6 +21,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Hulp"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Sluiten"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -253,12 +263,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Pakket zoeken"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "bladeren"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Pakket: "
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Kernel:"
@@ -281,9 +296,8 @@ msgid ""
 "in.  The information displayed above will be transferred to that server"
 msgstr ""
 "Om een foutrapport te versturen, klikt u op de rapporteren-knop.  \n"
-"Hierdoor wordt een webbrowservenster geopend op %s waar u een "
-"invulformulier vindt. De bovenstaande informatie zal worden verstuurd naar "
-"die server."
+"Hierdoor wordt een webbrowservenster geopend op %s waar u een invulformulier "
+"vindt. De bovenstaande informatie zal worden verstuurd naar die server."
 
 #: drakbug:160
 #, c-format
@@ -293,10 +307,12 @@ msgid ""
 msgid_plural ""
 "Things useful to attach to your report are the output of the following "
 "commands: %s."
-msgstr[0] "Het zou behulpzaam zijn als u in uw rapport de uitvoer van de volgende opdracht bijvoegt: %s"
-msgstr[1] "Zaken die behulpzaam zijn om in uw rapport op te nemen zijn de uitvoer van de volgende "
-"opdrachten: %s"
-
+msgstr[0] ""
+"Het zou behulpzaam zijn als u in uw rapport de uitvoer van de volgende "
+"opdracht bijvoegt: %s"
+msgstr[1] ""
+"Zaken die behulpzaam zijn om in uw rapport op te nemen zijn de uitvoer van "
+"de volgende opdrachten: %s"
 
 #: drakbug:163
 #, c-format
@@ -313,22 +329,12 @@ msgstr "U dient tevens de volgende bestanden bij te voegen: %s zowel als %s."
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Beschrijf wat u deed toen het vastliep:"
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Hulp"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Rapporteren"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Sluiten"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "Niet geïnstalleerd"
@@ -1193,7 +1199,8 @@ msgstr "Beveiligingsniveau en controles"
 #: draksec:114
 #, c-format
 msgid "Configure authentication required to access Mandriva tools"
-msgstr "Aanmeldingscontrole voor toegang tot Mandriva-hulpprogramma's configureren"
+msgstr ""
+"Aanmeldingscontrole voor toegang tot Mandriva-hulpprogramma's configureren"
 
 #: draksec:117
 #, c-format
@@ -2016,7 +2023,12 @@ msgstr "PCI-domein"
 msgid "the PCI domain of the device"
 msgstr "het PCI-domein van dit apparaat"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Permissies"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr "Bus PCI #"
@@ -2656,12 +2668,7 @@ msgstr "brander"
 msgid "DVD"
 msgstr "dvd"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Onbekend/Overige"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "De volgende pakketten dienen geïnstalleerd te worden:\n"
@@ -3004,6 +3011,11 @@ msgid ""
 msgstr ""
 "Het fabrikantseigen stuurprogramma voor uw grafische kaart is niet gevonden, "
 "het systeem gebruikt nu het vrije software-stuurprogramma (%s)."
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
+msgstr ""
 
 #: scannerdrake:51
 #, c-format
@@ -3546,7 +3558,17 @@ msgstr "Uw scanner(s) zullen niet beschikbaar zijn op het netwerk."
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "Kan de benodigde pakketten om scanner(s) te delen niet installeren."
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "De %s wordt niet ondersteund in deze versie van %s."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Bepaalde apparaten in de apparatuurklasse \"%s\" zijn verwijderd:\n"
@@ -3608,6 +3630,9 @@ msgstr "Taal- & landconfiguratie"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Regionale instellingen"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Onbekend/Overige"
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "

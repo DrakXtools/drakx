@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2009-08-31 14:29-0300\n"
 "Last-Translator: Andre Paulo Machado <andre.panm@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -21,6 +21,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Lokalize 0.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Ayuda"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Cerrar"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -254,12 +264,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Encontrar paquete"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "examinar"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Paquete:"
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Kernel:"
@@ -276,7 +291,8 @@ msgstr ""
 msgid "Its GDB trace is:"
 msgstr "La traza GDB es:"
 
-#: drakbug:158, c-format
+#: drakbug:158
+#, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
 "This will open a web browser window on %s where you'll find a form to fill "
@@ -305,7 +321,8 @@ msgstr[1] ""
 msgid "'%s'"
 msgstr "'%s'"
 
-#: drakbug:166, c-format
+#: drakbug:166
+#, c-format
 msgid "You should also attach the following files: %s as well as %s."
 msgstr "Usted debería adicionar los archivos siguientes: %s e %s."
 
@@ -314,22 +331,12 @@ msgstr "Usted debería adicionar los archivos siguientes: %s e %s."
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Por favor, describa lo que estaba haciendo cuando falló:"
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Ayuda"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Informe"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Cerrar"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "No instalado"
@@ -442,7 +449,8 @@ msgstr "Reintentarlo"
 msgid "Reset"
 msgstr "Resetear"
 
-#: drakdvb:30, c-format
+#: drakdvb:30
+#, c-format
 msgid "DVB"
 msgstr "DVB"
 
@@ -479,11 +487,13 @@ msgstr "Detectando canales DVB, esto se tardará pocos minutos"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: drakdvb:148, c-format
+#: drakdvb:148
+#, c-format
 msgid "Detect Channels"
 msgstr "Detectar Canales"
 
-#: drakdvb:150, c-format
+#: drakdvb:150
+#, c-format
 msgid "View Channel"
 msgstr "Ver Canal"
 
@@ -2016,7 +2026,12 @@ msgstr "Dominio PCI"
 msgid "the PCI domain of the device"
 msgstr "el dominio PCI del dispositivo"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Permisos"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr "Bus PCI nº"
@@ -2659,12 +2674,7 @@ msgstr "grabadora"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Desconocido/Otros"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Se deben instalar los siguientes paquetes:\n"
@@ -2997,6 +3007,11 @@ msgid ""
 msgstr ""
 "No se encuentra el controlador propietario para su tarjeta, el sistema ahora "
 "está utilizando el controlador de software libre (%s)."
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
+msgstr ""
 
 #: scannerdrake:51
 #, c-format
@@ -3542,7 +3557,17 @@ msgid "Could not install the packages needed to share your scanner(s)."
 msgstr ""
 "No se pueden instalar los paquetes necesarios para compartir sus escáneres."
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "El %s no está soportado por esta versión de %s."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Se quitaron algunos dispositivos en la clase de hardware \"%s\":\n"
@@ -3604,6 +3629,9 @@ msgstr "Configuración del idioma y país"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Ajustes regionales"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Desconocido/Otros"
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "

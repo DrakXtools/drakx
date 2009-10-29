@@ -5,13 +5,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2005-09-12 18:04+0200\n"
 "Last-Translator: Alastair McKinstry <mckinstry@computer.org>\n"
 "Language-Team: Irish <ga@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Cabhair"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Dún"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -234,12 +244,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Aimsigh Pacáiste"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "brabhsáil"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Pacáiste: "
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Eithne:"
@@ -288,22 +303,12 @@ msgstr "Ag feistiál  pacáiste %s"
 msgid "Please describe what you were doing when it crashed:"
 msgstr ""
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Cabhair"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Tuairisc"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Dún"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "Gan Suiteáil"
@@ -1908,7 +1913,12 @@ msgstr ""
 msgid "the PCI domain of the device"
 msgstr "2 cnaipí"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Ceadanna"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr ""
@@ -2519,12 +2529,7 @@ msgstr "dóire"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Anaithnid/Eile"
-
-#: harddrake2:527
+#: harddrake2:531
 #, fuzzy, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Roghnaigh pacáistí ..."
@@ -2847,6 +2852,11 @@ msgstr "Sábháil mar..."
 msgid ""
 "The proprietary driver for your graphic card can not be found, the system is "
 "now using the free software driver (%s)."
+msgstr ""
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
 msgstr ""
 
 #: scannerdrake:51
@@ -3336,7 +3346,17 @@ msgstr ""
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr ""
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr ""
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr ""
@@ -3403,6 +3423,9 @@ msgstr "Cumraigh Idirlíon"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "Roghnachais"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Anaithnid/Eile"
 
 #, fuzzy
 #~ msgid "(default value: %s)"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2009-04-08 10:33+0200\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -18,6 +18,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Hjælp"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Luk"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -250,12 +260,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Find pakke"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "bladr"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Pakke: "
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Kerne:"
@@ -312,22 +327,12 @@ msgstr "Du bør også vedlægge de følgende filer: %s og %s."
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Beskriv hvad du var ved at lave da det gik ned:"
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Hjælp"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Rapport"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Luk"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "Ikke installeret"
@@ -2009,7 +2014,12 @@ msgstr "PCI-domæne"
 msgid "the PCI domain of the device"
 msgstr "PCI-domænet for enheden"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Rettigheder"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr "Bus PCI-nummer"
@@ -2642,12 +2652,7 @@ msgstr "brænder"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Ukendt|andre"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "De følgende pakker behøver at blive installeret\n"
@@ -2981,6 +2986,11 @@ msgid ""
 msgstr ""
 "Den proprietære driver til dit grafikkort kan ikke findes, systemet bruger "
 "nu den frie driver (%s)"
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
+msgstr ""
 
 #: scannerdrake:51
 #, c-format
@@ -3522,7 +3532,17 @@ msgid "Could not install the packages needed to share your scanner(s)."
 msgstr ""
 "Kunne ikke installere de nødvendige pakker til deling af dine skannere."
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "%s understøttes ikke af denne version af %s."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Nogen enheder i maskinelklassen '%s' blev fjernet:\n"
@@ -3584,3 +3604,6 @@ msgstr "Opsætning af sprog og land"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Regionale indstillinger"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Ukendt|andre"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2009-03-29 13:52+0300\n"
 "Last-Translator: Taras Boychuk <btr0001@ukr.net>\n"
 "Language-Team: ukrainian <translation@linux.org.ua>\n"
@@ -21,6 +21,16 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Довідка"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Закрити"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -254,12 +264,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Знайти пакунок"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "переглянути"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Пакунок: "
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Ядро:"
@@ -315,22 +330,12 @@ msgstr "Також Ви можете додати наступні файли: %
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Опишіть свої дії на момент виникнення збою:"
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Довідка"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Звіт"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Закрити"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "Не встановлено"
@@ -2008,7 +2013,12 @@ msgstr "PCI-домен"
 msgid "the PCI domain of the device"
 msgstr "PCI-домен пристрою"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Права доступу"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr "Шина PCI #"
@@ -2641,12 +2651,7 @@ msgstr "записувач"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Невідомий/Інші"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Наступні пакунки повинні бути встановлені:\n"
@@ -2982,6 +2987,11 @@ msgid ""
 msgstr ""
 "Драйвер виробника для Вашої графічної плати не знайдено, система "
 "використовує зараз вільний драйвер (%s)."
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
+msgstr ""
 
 #: scannerdrake:51
 #, c-format
@@ -3525,7 +3535,17 @@ msgstr ""
 "Неможливо встановити пакунки, необхідні для організації спільного доступу до "
 "сканерів."
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "%s не підтримується цією версією %s."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Деякі пристрої в обладнанні класу \"%s\" було видалено:\n"
@@ -3587,3 +3607,6 @@ msgstr "Налаштування мови і країни"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Регіональні налаштування"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Невідомий/Інші"

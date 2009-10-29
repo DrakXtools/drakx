@@ -6,15 +6,24 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8-bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr ""
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr ""
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -237,12 +246,17 @@ msgstr ""
 msgid "Find Package"
 msgstr ""
 
-#: drakbug:119
+#: drakbug:118
+#, c-format
+msgid "Browse"
+msgstr ""
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr ""
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr ""
@@ -291,22 +305,12 @@ msgstr ""
 msgid "Please describe what you were doing when it crashed:"
 msgstr ""
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr ""
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr ""
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr ""
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr ""
@@ -1911,7 +1915,12 @@ msgstr ""
 msgid "the PCI domain of the device"
 msgstr ""
 
-#: harddrake2:59
+#: harddrake2:60
+#, c-format
+msgid "PCI revision"
+msgstr ""
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr ""
@@ -2522,12 +2531,7 @@ msgstr ""
 msgid "DVD"
 msgstr ""
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr ""
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr ""
@@ -2850,6 +2854,11 @@ msgstr ""
 msgid ""
 "The proprietary driver for your graphic card can not be found, the system is "
 "now using the free software driver (%s)."
+msgstr ""
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
 msgstr ""
 
 #: scannerdrake:51
@@ -3339,7 +3348,17 @@ msgstr ""
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr ""
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr ""
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr ""

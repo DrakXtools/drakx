@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2009-03-30 21:31+0200\n"
 "Last-Translator: Andrea Celli <andrea.celli@libero.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -21,6 +21,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Aiuto"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Chiudi"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -253,12 +263,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Cerca il pacchetto"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "sfogliare"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Pacchetto:"
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Kernel:"
@@ -314,22 +329,12 @@ msgstr "Potresti anche allegare i seguenti file: %s e %s."
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Descrivi cosa stavi facendo al momento del crash:"
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Aiuto"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Segnalazione"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Chiudi"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "Non installato"
@@ -2012,7 +2017,12 @@ msgstr "Dominio PCI"
 msgid "the PCI domain of the device"
 msgstr "il dominio PCI del dispositivo"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Permessi"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr "Bus PCI n°"
@@ -2652,12 +2662,7 @@ msgstr "masterizzatore"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Sconosciuto/Altri"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "I seguenti pacchetti devono essere installati:\n"
@@ -2989,6 +2994,11 @@ msgid ""
 msgstr ""
 "Impossibile trovare il driver proprietario per la tua scheda grafica, il "
 "sistema ora sta utilizzando il driver free (%s)."
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
+msgstr ""
 
 #: scannerdrake:51
 #, c-format
@@ -3533,7 +3543,17 @@ msgstr ""
 "Non si possono installare i programmi necessari per condividere lo/gli "
 "scanner."
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "%s non è supportato da questa versione di %s."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr ""
@@ -3596,3 +3616,6 @@ msgstr "Configurazione di lingua e paese"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Impostazioni locali"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Sconosciuto/Altri"

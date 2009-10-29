@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 2007\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2009-04-09 11:56+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
@@ -16,6 +16,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "帮助"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "关闭"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -246,12 +256,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "查找软件包"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "浏览"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "软件包: "
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "内核: "
@@ -302,22 +317,12 @@ msgstr "您还应该附加下列文件：%s 和 %s。"
 msgid "Please describe what you were doing when it crashed:"
 msgstr "请描述崩溃时您正在执行的操作："
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "帮助"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "报告"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "关闭"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "没有安装"
@@ -1979,7 +1984,12 @@ msgstr "PCI 域名"
 msgid "the PCI domain of the device"
 msgstr "设备的 PCI 域名"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "权限"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr "总线 PCI #"
@@ -2601,12 +2611,7 @@ msgstr "刻录机"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "未知/其它"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "下列软件包需要安装: \n"
@@ -2934,6 +2939,11 @@ msgid ""
 "The proprietary driver for your graphic card can not be found, the system is "
 "now using the free software driver (%s)."
 msgstr "找不到您显示卡的私有驱动程序，系统现在正使用自有软件驱动程序(%s)。"
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
+msgstr ""
 
 #: scannerdrake:51
 #, c-format
@@ -3452,7 +3462,17 @@ msgstr "您的扫描仪将不会在网络上出现。"
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "无法安装共享您的扫描仪所需的软件包。"
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "%2$s 版本不支持 %1$s。"
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "删除了一些“%s”类别的设备:\n"
@@ -3514,6 +3534,9 @@ msgstr "语言和国家配置"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "区域设置"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "未知/其它"
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "

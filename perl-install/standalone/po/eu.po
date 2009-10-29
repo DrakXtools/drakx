@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2009-04-14 21:28+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque <kde-i18n-doc@kde.org>\n"
@@ -18,6 +18,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Lokalize 0.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Laguntza"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Itxi"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -250,12 +260,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Bilatu paketea"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "arakatu"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Paketea: "
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Nukleoa:"
@@ -312,22 +327,12 @@ msgstr "Ondorengo fitxategiak ere erantsi beharko zenituzke: %s zein %s."
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Mesedez azaldu zer egiten ari zinen kraskatu denean:"
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Laguntza"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Berri-ematea"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Itxi"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "Instalatu gabe"
@@ -2004,7 +2009,12 @@ msgstr "PCI domeinua"
 msgid "the PCI domain of the device"
 msgstr "gailuaren PCI domeinua"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Baimenak"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr "Bus PCI #"
@@ -2644,12 +2654,7 @@ msgstr "grabagailua"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Ezezaguna/Beste batzuk"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Ondorengo paketeak instalatu behar dituzu:\n"
@@ -2980,6 +2985,11 @@ msgid ""
 msgstr ""
 "Zure txartela grafikoarentzako jabetzadun gidaria ezin da aurkitu, sistema "
 "software askedun gidaria erabiltzen ari da (%s)."
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
+msgstr ""
 
 #: scannerdrake:51
 #, c-format
@@ -3520,7 +3530,17 @@ msgstr "Zure eskanerrak ez dira erabilgarri egongo sarean."
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "Ezin dira instalatu eskanerrak partekatzeko behar diren paketeak."
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "%s ez du onartzen %s(r)en bertsio honek."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "\"%s\" hardware-klaseko gailu batzuk kendu dira:\n"
@@ -3582,6 +3602,9 @@ msgstr "Hizkuntza eta herrialde konfiguraketa"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Eskualdeko ezarpenak"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Ezezaguna/Beste batzuk"
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "

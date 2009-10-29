@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-tl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2004-09-15 13:35+0200\n"
 "Last-Translator: Arys P. Deloso <arys@deloso.org>\n"
 "Language-Team: Filipino <salinpinoy@comitus.net>\n"
@@ -15,6 +15,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Tulong"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Isara"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -244,12 +254,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Hanapin ang Package"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "i-browse"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Package: "
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Kernel:"
@@ -303,22 +318,12 @@ msgstr "Hindi ma-install ang mga package na %s!"
 msgid "Please describe what you were doing when it crashed:"
 msgstr ""
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Tulong"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Mag-ulat"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Isara"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "Hindi naka-install"
@@ -1993,7 +1998,12 @@ msgstr ""
 msgid "the PCI domain of the device"
 msgstr "ang pangalan ng vendor ng device"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Mga Permission"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr ""
@@ -2629,12 +2639,7 @@ msgstr "burner"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Hindi kilala/Iba pa"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Kailangang i-install ang mga sumusunod na package:\n"
@@ -2966,6 +2971,11 @@ msgstr "I-save na..."
 msgid ""
 "The proprietary driver for your graphic card can not be found, the system is "
 "now using the free software driver (%s)."
+msgstr ""
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
 msgstr ""
 
 #: scannerdrake:51
@@ -3504,7 +3514,17 @@ msgstr ""
 "Hindi ma-install ang mga package na kailangan para mai-share ang inyong "
 "scanner."
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "Ang %s ay hindi suportado ng version na ito ng %s."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Ilang mga device sa \"%s\" na hardware class ay inalis:\n"
@@ -3571,6 +3591,9 @@ msgstr "Mano-manong pag-configure"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "Mga setting"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Hindi kilala/Iba pa"
 
 #, fuzzy
 #~ msgid ""

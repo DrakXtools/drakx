@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2005-09-21 14:03+0100\n"
 "Last-Translator: Tibor Pittich <Tibor.Pittich@mandriva.org>\n"
 "Language-Team:  <i18n@mandrake.sk>\n"
@@ -15,6 +15,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Pomoc"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Zavrieť"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -246,12 +256,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Nájsť balík"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "prehliadanie"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Balík:"
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Kernel:"
@@ -306,22 +321,12 @@ msgstr "Mali by ste nainštalovať nasledovné balíky: %s"
 msgid "Please describe what you were doing when it crashed:"
 msgstr ""
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Pomoc"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Správa"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Zavrieť"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "Nenainštalované"
@@ -1996,7 +2001,12 @@ msgstr ""
 msgid "the PCI domain of the device"
 msgstr "výrobca zariadenia"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Práva"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr "Zbernica PCI #"
@@ -2630,12 +2640,7 @@ msgstr "napaľovačka"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Neznáme/Iné"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Nasledovné balíky je potrebné nainštalovať:\n"
@@ -2972,6 +2977,11 @@ msgstr "Ulož ako.."
 msgid ""
 "The proprietary driver for your graphic card can not be found, the system is "
 "now using the free software driver (%s)."
+msgstr ""
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
 msgstr ""
 
 #: scannerdrake:51
@@ -3514,7 +3524,17 @@ msgstr "Váš skener nebude dostupný pomocou siete."
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "Nie je možné nainštalovať balíky potrebné k zdieľaniu skenera."
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "%s nie je podporované touto verziou %s."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Niektoré zariadenia v hardvérovej triede \"%s\" boli zrušené:\n"
@@ -3581,6 +3601,9 @@ msgstr "Ručné nastavenie"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "Nastavenia"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Neznáme/Iné"
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "

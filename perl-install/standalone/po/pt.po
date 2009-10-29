@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2008-10-03 04:59+0100\n"
 "Last-Translator: Zé <ze@mandriva.org>\n"
 "Language-Team: Português <pt@li.org>\n"
@@ -30,6 +30,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Ajuda"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Fechar"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -263,12 +273,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Procurar Pacote"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "procurar"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Pacote: "
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Kernel:"
@@ -322,22 +337,12 @@ msgstr "Deve instalar os seguintes pacotes: %s"
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Por favor descreva o que estava a fazer quando estoirou."
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Ajuda"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Enviar"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Fechar"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "Não instalado"
@@ -2017,7 +2022,12 @@ msgstr "Domínio PCI"
 msgid "the PCI domain of the device"
 msgstr "o domínio PCI do dispositivo"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Permissões"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr "Bus PCI #"
@@ -2659,12 +2669,7 @@ msgstr "gravador"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Desconhecido/Outros"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Os seguintes pacotes precisam ser instalados:\n"
@@ -2999,6 +3004,11 @@ msgid ""
 msgstr ""
 "Não é possível encontrar o controlador proprietário para a sua placa "
 "gráfica, o sistema está agora a suar o controlador livre (%s)."
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
+msgstr ""
 
 #: scannerdrake:51
 #, c-format
@@ -3544,7 +3554,17 @@ msgid "Could not install the packages needed to share your scanner(s)."
 msgstr ""
 "Não foi possível instalar os pacotes precisos para partilhar o seu scanner."
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "O %s não é suportado por esta versão do %s."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Alguns dispositivos na classe de material \"%s\" foram removidos:\n"
@@ -3606,6 +3626,9 @@ msgstr "Configuração da língua e país"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Configurações Regionais"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Desconhecido/Outros"
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "

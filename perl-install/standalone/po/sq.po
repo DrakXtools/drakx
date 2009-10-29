@@ -7,13 +7,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX for MDK 9.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2004-09-15 13:33+0200\n"
 "Last-Translator: Naim Daka <naim70@freesurf.ch>\n"
 "Language-Team: Albanian <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Ndihmë"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Mbylle"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -241,12 +251,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Hulumtoje Pakon"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "shfletues"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Pako: "
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Bërthama:"
@@ -300,22 +315,12 @@ msgstr "Instalimi i pakove %s"
 msgid "Please describe what you were doing when it crashed:"
 msgstr ""
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Ndihmë"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Raporti"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Mbylle"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "I pa instaluar"
@@ -1988,7 +1993,12 @@ msgstr ""
 msgid "the PCI domain of the device"
 msgstr "emri i shitësit të këtij periferiku"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Autorizimet"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr ""
@@ -2623,12 +2633,7 @@ msgstr "gdhendës"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "I pa njoftur/Tjerët"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Pakot e radhitura duhet të instalohen:\n"
@@ -2960,6 +2965,11 @@ msgstr "Shpëtoje si.."
 msgid ""
 "The proprietary driver for your graphic card can not be found, the system is "
 "now using the free software driver (%s)."
+msgstr ""
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
 msgstr ""
 
 #: scannerdrake:51
@@ -3476,7 +3486,17 @@ msgstr ""
 "Nuk mund ti instaloj pakotë, që nevojiten në shpërndarjen e skanerit(ve) "
 "tuaj."
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "%s nuk përkrahet nga ky version i Mandriva Linux."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Disa mjete në listën e klasës \"%s\" janë zhdukur:\n"
@@ -3543,6 +3563,9 @@ msgstr "Konfigurimi manuel"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "Rregullimet"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "I pa njoftur/Tjerët"
 
 #, fuzzy
 #~ msgid ""

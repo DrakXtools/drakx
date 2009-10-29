@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2009-10-17 13:19+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -14,6 +14,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Hjelp"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Lukk"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -246,12 +256,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Finn pakke"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "Bla gjennom …"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Pakke: "
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Kjerne:"
@@ -285,8 +300,10 @@ msgid ""
 msgid_plural ""
 "Things useful to attach to your report are the output of the following "
 "commands: %s."
-msgstr[0] "Nyttige ting å ta med i feilrapporten er utdata frå denne kommandoen: %s."
-msgstr[1] "Nyttige ting å ta med i feilrapporten er utdata frå desse kommandoane: %s."
+msgstr[0] ""
+"Nyttige ting å ta med i feilrapporten er utdata frå denne kommandoen: %s."
+msgstr[1] ""
+"Nyttige ting å ta med i feilrapporten er utdata frå desse kommandoane: %s."
 
 #: drakbug:163
 #, c-format
@@ -303,22 +320,12 @@ msgstr "Du bør òg leggja ved filene %s og %s."
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Skriv inn kva du gjorde når programmet krasja:"
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Hjelp"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Rapporter"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Lukk"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "Ikkje installert"
@@ -850,7 +857,8 @@ msgstr " --help                – Vis denne hjelpeteksten.\n"
 
 #: drakhelp:23
 #, c-format
-msgid " --id <id_label>       - load the html help page which refers to id_label\n"
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
 " --id <identifikator>  – Last HTML-hjelpesida som refererer til "
 "«identifikator».\n"
@@ -860,7 +868,8 @@ msgstr ""
 msgid ""
 " --doc <link>          - link to another web page ( for WM welcome "
 "frontend)\n"
-msgstr " --doc <lenkje>        – Lenkje til ei anna nettside (for velkomstmelding).\n"
+msgstr ""
+" --doc <lenkje>        – Lenkje til ei anna nettside (for velkomstmelding).\n"
 
 #: drakhelp:52
 #, c-format
@@ -1820,7 +1829,8 @@ msgstr "Buss"
 
 #: harddrake2:33
 #, c-format
-msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgid ""
+"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr ""
 "Dette er den fysiske bussen som eininga er kopla til (eksempel: PCI eller "
 "USB)."
@@ -1991,7 +2001,12 @@ msgstr "PCI-domene"
 msgid "the PCI domain of the device"
 msgstr "PCI-domenet til eininga"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Løyve"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr "PCI-bussnr."
@@ -2378,7 +2393,8 @@ msgstr "Einingsfil"
 
 #: harddrake2:119
 #, c-format
-msgid "the device file used to communicate with the kernel driver for the mouse"
+msgid ""
+"the device file used to communicate with the kernel driver for the mouse"
 msgstr "einingsfila for musa brukt til å kommunisera med kjernedrivaren"
 
 #: harddrake2:120
@@ -2539,7 +2555,8 @@ msgid ""
 "Once you've selected a device, you'll be able to see the device information "
 "in fields displayed on the right frame (\"Information\")"
 msgstr ""
-"Når du har valt ei eining, dukkar det her opp informasjon om felta i ruta til høgre i hovudvindauget."
+"Når du har valt ei eining, dukkar det her opp informasjon om felta i ruta "
+"til høgre i hovudvindauget."
 
 #: harddrake2:229
 #, c-format
@@ -2583,7 +2600,8 @@ msgstr "Køyr oppsettverktøy"
 
 #: harddrake2:303
 #, c-format
-msgid "Click on a device in the left tree in order to display its information here."
+msgid ""
+"Click on a device in the left tree in order to display its information here."
 msgstr "Trykk på ei eining til venstre for å sjå informasjon om ho her."
 
 #: harddrake2:324 notify-x11-free-driver-switch:13
@@ -2621,12 +2639,7 @@ msgstr "brennar"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Ukjend/andre"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Desse pakkane må installerast:\n"
@@ -2886,7 +2899,8 @@ msgstr "Tenesteoppsett"
 msgid ""
 "You will receive an alert if one of the selected services is no longer "
 "running"
-msgstr "Du vil motta ei varsling om ei av avmerkte tenestene ikkje lenger køyrer"
+msgstr ""
+"Du vil motta ei varsling om ei av avmerkte tenestene ikkje lenger køyrer"
 
 #: logdrake:429
 #, c-format
@@ -2960,6 +2974,11 @@ msgstr ""
 "Fann ikkje den godseigde skjermkortdrivaren. Brukar derfor den frie drivaren "
 "(%s)."
 
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
+msgstr ""
+
 #: scannerdrake:51
 #, c-format
 msgid ""
@@ -2978,7 +2997,8 @@ msgstr "Avbryt skannaroppsett."
 
 #: scannerdrake:60
 #, c-format
-msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr "Klarte ikkje installera pakkar nødvendige for å setja opp skannarar."
 
 #: scannerdrake:61
@@ -3491,7 +3511,17 @@ msgstr "Skannaren/-ane vil vikkje vera tilgjengeleg på nettverket."
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "Klarte ikkje installera pakkane for deling av skannar(ar)."
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "%s er ikkje støtta i denne versjonen av %s."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Nokre einingar i maskinvareklassen «%s» vart fjerna:\n"
@@ -3553,6 +3583,9 @@ msgstr "Oppsett av språk og land"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Språk og land"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Ukjend/andre"
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "

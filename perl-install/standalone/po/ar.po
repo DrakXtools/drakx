@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2005-03-03 01:06+0300\n"
 "Last-Translator: Ossama M. Khayat <okhayat@yahoo.com>\n"
 "Language-Team: Arabic <support@arabeyes.org>\n"
@@ -20,6 +20,16 @@ msgstr ""
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 0 : n==2 ? 1 : n>=3 && n<=10 ? 2 : "
 "3\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "مساعدة"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "إغلاق"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -251,12 +261,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "بحث عن حزمة"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "استعراض"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "الحزمة: "
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "النواة:"
@@ -313,22 +328,12 @@ msgstr "عليك بتثبيت الحزم التالية: %s"
 msgid "Please describe what you were doing when it crashed:"
 msgstr ""
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "مساعدة"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "تقرير"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "إغلاق"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "غير مثبت"
@@ -1995,7 +2000,12 @@ msgstr ""
 msgid "the PCI domain of the device"
 msgstr "اسم مصنّع الجهاز"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "التصاريح"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr "ناقل PCI #"
@@ -2625,12 +2635,7 @@ msgstr "ناسخ أقراص"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "غير معروف/أخرى"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "يجب تثبيت الحزم التالية:\n"
@@ -2958,6 +2963,11 @@ msgstr "حفظ باسم.."
 msgid ""
 "The proprietary driver for your graphic card can not be found, the system is "
 "now using the free software driver (%s)."
+msgstr ""
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
 msgstr ""
 
 #: scannerdrake:51
@@ -3486,7 +3496,17 @@ msgstr "ماسحاتك لن تكون متوفّرة على الشّبكة."
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "لم يمكن تثبيت الحزم المطلوبة لمشاركة الماسحات الضّوئيّة."
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "الـ%s غير مدعوم من قبل هذا الإصدار من %s."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "تمت إزالة بعض الأجهزة في فئة العتاد \"%s\":\n"
@@ -3553,6 +3573,9 @@ msgstr "تهيئة يدوية"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "الإعدادات"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "غير معروف/أخرى"
 
 #~ msgid ""
 #~ "Here, you can setup the security level and administrator of your "

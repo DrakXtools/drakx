@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-26 22:23-0300\n"
+"POT-Creation-Date: 2009-10-29 18:09+0100\n"
 "PO-Revision-Date: 2004-09-15 13:34+0200\n"
 "Last-Translator: Toma Jankovic_<tomaja@net.yu>\n"
 "Language-Team: Serbian <i18n@mandrake.co.yu>\n"
@@ -15,6 +15,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.6\n"
+
+#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#, c-format
+msgid "Help"
+msgstr "Pomoć"
+
+#: display_help:62 drakbug:191 drakfont:506
+#, c-format
+msgid "Close"
+msgstr "Zatvori"
 
 #: drakauth:24 drakauth:26 draksec:164
 #, c-format
@@ -239,12 +249,17 @@ msgstr ""
 msgid "Find Package"
 msgstr "Nađi paket"
 
-#: drakbug:119
+#: drakbug:118
+#, fuzzy, c-format
+msgid "Browse"
+msgstr "pretraži"
+
+#: drakbug:120
 #, c-format
 msgid "Package: "
 msgstr "Paket: "
 
-#: drakbug:120
+#: drakbug:121
 #, c-format
 msgid "Kernel:"
 msgstr "Kernel:"
@@ -298,22 +313,12 @@ msgstr "Instaliram paket %s"
 msgid "Please describe what you were doing when it crashed:"
 msgstr ""
 
-#: drakbug:185 drakperm:136
-#, c-format
-msgid "Help"
-msgstr "Pomoć"
-
-#: drakbug:189
+#: drakbug:190
 #, c-format
 msgid "Report"
 msgstr "Prijava"
 
-#: drakbug:190 drakfont:506
-#, c-format
-msgid "Close"
-msgstr "Zatvori"
-
-#: drakbug:223
+#: drakbug:226
 #, c-format
 msgid "Not installed"
 msgstr "Nije instalirano"
@@ -1966,7 +1971,12 @@ msgstr ""
 msgid "the PCI domain of the device"
 msgstr "Ime prizovđača uređaja"
 
-#: harddrake2:59
+#: harddrake2:60
+#, fuzzy, c-format
+msgid "PCI revision"
+msgstr "Dozvole"
+
+#: harddrake2:61
 #, c-format
 msgid "Bus PCI #"
 msgstr ""
@@ -2593,12 +2603,7 @@ msgstr "Štampač"
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:485
-#, c-format
-msgid "Unknown/Others"
-msgstr "Nepoznati/Ostali"
-
-#: harddrake2:527
+#: harddrake2:531
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Sledeći paketi treba da budu instalirani:\n"
@@ -2924,6 +2929,11 @@ msgstr "Snimi Kao..."
 msgid ""
 "The proprietary driver for your graphic card can not be found, the system is "
 "now using the free software driver (%s)."
+msgstr ""
+
+#: notify-x11-free-driver-switch:21
+#, c-format
+msgid "Reason: %s."
 msgstr ""
 
 #: scannerdrake:51
@@ -3440,7 +3450,17 @@ msgstr ""
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr ""
 
-#: service_harddrake:134
+#: service_harddrake:138
+#, fuzzy, c-format
+msgid "The graphic card '%s' is no more supported by the '%s' driver"
+msgstr "%s nije podržan u ovoj verziji Mandriva Linux-a."
+
+#: service_harddrake:167
+#, c-format
+msgid "The proprietary kernel driver was not found for '%s' xorg driver"
+msgstr ""
+
+#: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Neki uređaji u \"%s\" klasi hardvera su uklonjeni:\n"
@@ -3507,6 +3527,9 @@ msgstr "Ručna konfiguracija"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "Opcije"
+
+#~ msgid "Unknown/Others"
+#~ msgstr "Nepoznati/Ostali"
 
 #~ msgid "(default value: %s)"
 #~ msgstr "(podrazumevana vrednost: %s)"
