@@ -73,9 +73,10 @@ sub get_xorg_driver() {
     }
 }
 
-sub schedule_warn_about_switch() {
-    touch('/var/run/harddrake_swithed_to_free_driver');
-    touch('/var/run/harddrake-notify-x11-free-driver-switch');
+sub schedule_warn_about_switch {
+    my ($reason) = @_;
+    output('/var/run/harddrake_swithed_to_free_driver', $reason);
+    output('/var/run/harddrake-notify-x11-free-driver-switch', $reason);
 }
 
 my $lib = arch() =~ /x86_64/ ? "lib64" : "lib";
@@ -137,7 +138,7 @@ foreach my $device (@devices) {
     if (!member($current_driver, $card_data->{Driver}, $card_data->{Driver2}, 'fbdev', 'vesa')) {
         my $reason = N("no more supported by this driver");
         switch_x_driver($current_driver, $card_data->{Driver}, $reason);
-        schedule_warn_about_switch() if any { $current_driver =~ $_->{xorg_driver_regexp} } @cards;
+        schedule_warn_about_switch($reason) if any { $current_driver =~ $_->{xorg_driver_regexp} } @cards;
         next;
     }
 }
@@ -165,7 +166,7 @@ foreach my $card (@cards) {
         if ($old_driver) {
             my $reason = N("proprietary driver not found for current driver");
             switch_x_driver($card->{xorg_driver_regexp}, $driver, $reason);
-            schedule_warn_about_switch();
+            schedule_warn_about_switch($reason);
         }
     }
 }

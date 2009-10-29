@@ -12,5 +12,12 @@ my $driver = eval {
     $raw_X->get_Driver;
 } || N("unknown");
 
-$in->ask_warn(N("Warning"), N("The proprietary driver for your graphic card can not be found, the system is now using the free software driver (%s).", $driver));
+
+my $reason = cat_($ENV{LOCK});
+
+$in->ask_warn(N("Warning"),
+              join("\n\n",
+                   N("The proprietary driver for your graphic card can not be found, the system is now using the free software driver (%s).", $driver),
+                   if_($reason, N("Reason: %s", $reason)),
+               ));
 unlink $0 if $0 =~ m!/etc/X11/xsetup.d/!;
