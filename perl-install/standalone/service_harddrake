@@ -135,7 +135,8 @@ foreach my $device (@devices) {
     next if $previous_xorg_config{XORG_DRV} eq $new_key;
 
     if (!member($current_driver, $card_data->{Driver}, $card_data->{Driver2}, 'fbdev', 'vesa')) {
-        switch_x_driver($current_driver, $card_data->{Driver}, 'no more supported by this driver');
+        my $reason = 'no more supported by this driver';
+        switch_x_driver($current_driver, $card_data->{Driver}, $reason);
         schedule_warn_about_switch() if any { $current_driver =~ $_->{xorg_driver_regexp} } @cards;
         next;
     }
@@ -162,8 +163,8 @@ foreach my $card (@cards) {
         my $driver = $cards[0]{Driver};
         my $old_driver = cat_('/etc/X11/xorg.conf') =~ /Driver "($card->{xorg_driver_regexp})"/ && $1;
         if ($old_driver) {
-            switch_x_driver($card->{xorg_driver_regexp}, $driver,
-                            'proprietary driver not found for current driver');
+            my $reason = 'proprietary driver not found for current driver';
+            switch_x_driver($card->{xorg_driver_regexp}, $driver, $reason);
             schedule_warn_about_switch();
         }
     }
