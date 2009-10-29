@@ -127,7 +127,7 @@ foreach my $device (@devices) {
 
     # nvidia proprietary driver in ldetect-lst can be 'nvidia173', 'nvidia-current', ...
     # but really is just 'nvidia' in xorg.conf:
-    $card_data->{Driver2} =~ s/(nvidia)-.*/$1/;
+    $card_data->{Driver2} =~ s/(nvidia).*/$1/;
 
     # auto reconfigure x11 only on first time default driver have changed:
     my $new_key = $card_data->{Driver} . $card_data->{Driver2};
