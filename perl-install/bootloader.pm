@@ -1041,6 +1041,9 @@ sub suggest {
     my %old_kernels = map { vmlinuz2version($_->{kernel_or_dev}) => 1 } @{$bootloader->{entries}};
     @kernels = grep { !$old_kernels{$_->{version}} } @kernels;
 
+    #- remove existing failsafe and linux-nonfb, do not care if the previous one was modified by the user?
+    @{$bootloader->{entries}} = grep { !member($_->{label}, qw(failsafe linux-nonfb)) } @{$bootloader->{entries}};
+
     foreach my $kernel (@kernels) {
 	my $e = add_kernel($bootloader, $kernel,
 	       {
@@ -1053,9 +1056,6 @@ sub suggest {
 	    add_kernel($bootloader, $kernel, { root => $root, label => 'linux-nonfb' });
 	}
     }
-
-    #- remove existing failsafe, do not care if the previous one was modified by the user?
-    @{$bootloader->{entries}} = grep { $_->{label} ne 'failsafe' } @{$bootloader->{entries}};
 
     add_kernel($bootloader, $kernels[0],
 	       { root => $root, label => 'failsafe', append => 'failsafe' });
