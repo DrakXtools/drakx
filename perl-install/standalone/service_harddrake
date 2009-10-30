@@ -113,7 +113,9 @@ my @cards = (
 );
 
 
-my @devices = grep { $_->{driver} =~ /^Card:/ } detect_devices::probeall();
+my @devices;
+@devices = grep { $_->{driver} =~ /^Card:/ } detect_devices::probeall()
+       if -f '/etc/X11/xorg.conf';
 
 # do not auto reconfigure if more than one graphic card:
 $cfg{AUTORECONFIGURE_RIGHT_XORG_DRIVER} = 'no' if scalar(@devices) > 1;

@@ -1,3 +1,5 @@
+- harddrake service: do not try to reconfigure xorg driver and crash
+  if /etc/X11/xorg does not exist (breaks One startup)
 - bootloader suggestion fixes (to fix removal of vga= option when
   updating with the installer):
   o make sure we use long name when adding second kernel with same
