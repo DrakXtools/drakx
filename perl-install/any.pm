@@ -203,7 +203,7 @@ sub setupBootloaderBefore {
                                  );
 
     #- propose the default fb mode for kernel fb, if bootsplash is installed.
-    my $need_fb = $do_pkgs->are_installed('bootsplash');
+    my $need_fb = -e "$::prefix/usr/share/bootsplash/scripts/make-boot-splash";
     bootloader::suggest($bootloader, $all_hds,
                         vga_fb => ($force_vga || $vga && $need_fb) && $vga_fb,
                         quiet => $quiet);
