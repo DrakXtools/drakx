@@ -1038,6 +1038,9 @@ sub suggest {
 
     my @kernels = get_kernels_and_labels() or die "no kernel installed";
 
+    my %old_kernels = map { vmlinuz2version($_->{kernel_or_dev}) => 1 } @{$bootloader->{entries}};
+    @kernels = grep { !$old_kernels{$_->{version}} } @kernels;
+
     foreach my $kernel (@kernels) {
 	my $e = add_kernel($bootloader, $kernel,
 	       {
