@@ -1058,7 +1058,8 @@ sub suggest {
     }
 
     add_kernel($bootloader, $kernels[0],
-	       { root => $root, label => 'failsafe', append => 'failsafe' });
+	       { root => $root, label => 'failsafe', append => 'failsafe' })
+      if @kernels;
 
     if (arch() =~ /ppc/) {
 	#- if we identified a MacOS partition earlier - add it
