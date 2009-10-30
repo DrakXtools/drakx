@@ -1,3 +1,12 @@
+- bootloader suggestion fixes (to fix removal of vga= option when
+  updating with the installer):
+  o make sure we use long name when adding second kernel with same
+    extension than preferred one
+  o do not add again kernels that are already in bootloader config file
+  o add vga= option for kernels that are not the preferred one as well
+  o remove previous linux-nonfb entries (like done for failsafe),
+    not to add them twice or more
+
 Version 12.74.1 - 29 October 2009
 
 - disable X11 support for dpms
