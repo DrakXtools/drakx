@@ -117,6 +117,13 @@ sub bestKernelPackage {
     my @preferred_exts = _bestKernel_extensions($o_match_all_hardware);
     my @kernels = grep { $_ } map { packageByName($packages, "kernel$_-latest") } @preferred_exts;
 
+    if (!@kernels) {
+        #- fallback on most generic kernel if the suitable one is not available
+        #- (only kernel-desktop586-latest is available on Dual ISO for i586)
+        my @fallback_exts = _bestKernel_extensions('force');
+        @kernels = grep { $_ } map { packageByName($packages, "kernel$_-latest") } @fallback_exts;
+    }
+
     log::l("bestKernelPackage (" . join(':', @preferred_exts) . "): " . join(' ', map { $_->name } @kernels) . (@kernels > 1 ? ' (choosing the first)' : ''));
 
     $kernels[0];
