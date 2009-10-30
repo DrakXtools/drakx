@@ -899,8 +899,6 @@ sub get_kernel_labels {
 	@kernels_str = (@$kernel_24, @$other);
     }
 
-    $kernels_str[0]{ext} = '';
-
     my %labels;
     foreach (@kernels_str) {
 	if ($labels{$_->{ext}}) {
@@ -909,6 +907,9 @@ sub get_kernel_labels {
 	    $labels{$_->{ext}} = 1;
 	}
     }
+
+    $kernels_str[0]{ext} = '';
+
     @kernels_str;
 }
 
