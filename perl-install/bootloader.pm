@@ -1048,7 +1048,7 @@ sub suggest {
 	my $e = add_kernel($bootloader, $kernel,
 	       {
 		root => $root,
-		if_($options{vga_fb} && $kernel->{ext} eq '', vga => $options{vga_fb}), #- using framebuffer
+		if_($options{vga_fb}, vga => $options{vga_fb}), #- using framebuffer
 		if_($options{vga_fb} && $options{quiet}, append => "splash=silent"),
 	       });
 
