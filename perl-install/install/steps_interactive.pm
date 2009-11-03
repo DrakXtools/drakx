@@ -125,6 +125,8 @@ sub selectKeyboard {
 sub selectInstallClass {
     my ($o) = @_;
 
+    return if $::isRestore;
+
     my @l = install::any::find_root_parts($o->{fstab}, $::prefix);
     # Don't list other archs as ugrading between archs is not supported
     my $arch = arch() =~ /i.86/ ? $MDK::Common::System::compat_arch{arch()} : arch();
