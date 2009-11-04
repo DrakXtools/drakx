@@ -29,14 +29,12 @@ sub themes_read_sysconfig {
     my %theme = (
                  name => $default_theme,
                  enabled => 1,
-                 keep_logo => 1
                 );
     if (-r $::prefix . $sysconfig_file) {
         local $_;
         foreach (cat_($::prefix . $sysconfig_file)) {
             /^SPLASH=no/ and $theme{enabled} = 0;
             /^THEME=(.*)/ && -f theme_get_image_for_resolution($1, $res) and $theme{name} = $1;
-            /^LOGO_CONSOLE=(.*)/ and $theme{keep_logo} = $1 ne "no";
         }
     }
     \%theme;
@@ -82,12 +80,6 @@ sub remove() {
     } else {
         system($::prefix . $bootsplash_scripts . '/remove-theme');
     }
-}
-
-sub set_logo_console {
-    my ($keep_logo) = @_;
-    my $logo_console = $keep_logo ? 'theme' : 'no';
-    substInFile { s/^LOGO_CONSOLE=.*/LOGO_CONSOLE=$logo_console/ } $::prefix . $sysconfig_file;
 }
 
 1;
