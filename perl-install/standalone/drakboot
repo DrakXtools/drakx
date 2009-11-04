@@ -152,16 +152,12 @@ sub splash_choice() {
 				    0, $splash_box = gtknew('HBox', sensitive => $theme->{enabled}, children_loose => [
 					       gtkadd(gtkcreate_frame(N("Theme")),
 						      gtknew('VBox', spacing => 5, children_tight => [
-								$theme_combo,
-								gtksignal_connect(gtkset_active(gtknew('CheckButton', text => N("Display theme\nunder console")),
-												$theme->{keep_logo}),
-										  clicked => sub { invbool(\$theme->{keep_logo}) }) ])),
+								$theme_combo ])),
 					       gtknew('VSeparator'),
 					       gtknew('VBox', spacing => 5, children_tight => [ $boot_pic ]) ]),
 				    0, gtknew('Button', text => N("Create new theme"), clicked => sub { exec '/usr/sbin/draksplash' }) ]),
                        ],
                        sub {
-                           bootsplash::set_logo_console($theme->{keep_logo});
                            if ($theme->{enabled}) {
                                bootsplash::switch($theme->{name});
                            } else {
