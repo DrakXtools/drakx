@@ -92,7 +92,7 @@ my $mdk_app = {
 	      };
 
 my @generic_tool = keys %$mdk_app; 
-my @all_drakxtools = qw(adduserdrake diskdrake drakautoinst drakboot drakbug drakclock drakfloppy drakfont draksec drakxservices draksplash drakxtools drakxtv logdrake scannerdrake);
+my @all_drakxtools = qw(adduserdrake diskdrake drakautoinst drakboot drakbug drakclock drakfloppy drakfont draksec drakxservices drakxtools drakxtv logdrake scannerdrake);
 push @generic_tool, @all_drakxtools, qw(MandrivaUpdate drakbackup drakconnect drakfirewall drakhosts drakmenustyle draknfs draksambashare drakgw drakroam drakvpn keyboarddrake msec mousedrake net_monitor printerdrake urpmi userdrake XFdrake);
 
 my $kernel_release = chomp_(`uname -r`);
