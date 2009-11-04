@@ -148,16 +148,15 @@ sub splash_choice() {
     run_boot_window(N("Graphical boot theme selection"),
                        [
                         1, gtknew('VBox', spacing => 5, border_width => 5, children => [
-				    0, gtknew('HBox', spacing => 5, children_tight => [ gtknew('Label', text => N("Graphical boot mode:")), $mode_combo ]),
+				    0, gtknew('HBox', padding => 12, spacing => 5, children_tight => [ gtknew('Label', text => N("Graphical boot mode:")), $mode_combo ]),
 				    0, $splash_box = gtknew('HBox', sensitive => $theme->{enabled}, children_loose => [
 					       gtkadd(gtkcreate_frame(N("Theme")),
-						      gtknew('VBox', spacing => 5, children_tight => [
-								$theme_combo ])),
-					       gtknew('VSeparator'),
-					       gtknew('VBox', spacing => 5, children_tight => [ $boot_pic ]) ]),
-				    0, gtknew('Button', text => N("Create new theme"), clicked => sub { exec '/usr/sbin/draksplash' }) ]),
+						      gtknew('VBox', border_width => 12, spacing => 12, children_tight => [
+								$theme_combo, $boot_pic ])), ]),
+			]),
                        ],
                        sub {
+                           bootsplash::set_logo_console($theme->{keep_logo});
                            if ($theme->{enabled}) {
                                bootsplash::switch($theme->{name});
                            } else {
