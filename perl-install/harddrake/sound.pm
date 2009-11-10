@@ -263,7 +263,7 @@ sub set_PA_autospan {
 my $pulse_config_file = "$::prefix/etc/pulse/daemon.conf";
 
 sub is_5_1_in_pulseaudio_enabled() {
-    my ($val) = (cat_($pulse_config_file) =~ /^default-sample-channels\s*=\s*(\d+)/m); #^
+    my ($val) = cat_($pulse_config_file) =~ /^default-sample-channels\s*=\s*(\d+)/m; #^
     $val ||= 2;
     $val == 6;
 }
