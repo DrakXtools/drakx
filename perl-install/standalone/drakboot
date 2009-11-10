@@ -156,7 +156,6 @@ sub splash_choice() {
 			]),
                        ],
                        sub {
-                           bootsplash::set_logo_console($theme->{keep_logo});
                            if ($theme->{enabled}) {
                                bootsplash::switch($theme->{name});
                            } else {
