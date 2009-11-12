@@ -27,6 +27,7 @@ use ugtk2 qw(:wrappers :create);
 use Gtk2::WebKit;
 
 my $view = gtknew('WebKit_View', no_popup_menu => 1);
+$view->signal_connect('close-web-view', sub { ugtk2::exit(0) });
 
 $view->open($ARGV[0]);
 
