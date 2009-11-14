@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-fi\n"
 "POT-Creation-Date: 2009-10-07 13:57+0200\n"
-"PO-Revision-Date: 2009-10-20 02:09+0300\n"
-"Last-Translator: Thomas Backlund <tmb@mandriva.org>\n"
-"Language-Team: Swedish <sv@li.org>\n"
+"PO-Revision-Date: 2009-11-14 14:15+0200\n"
+"Last-Translator: Jani Välimaa <wally@mandriva.org>\n"
+"Language-Team: Finnish <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -647,9 +647,9 @@ msgid ""
 "\n"
 "\"Custom\" permit a per-user granularity.\n"
 msgstr ""
-"Sallitaanko käyttäjien jakaa joitakin omia hakemistojaan?\n"
+"Sallitaanko käyttäjien jakaa omia hakemistojaan?\n"
 "Sallimalla tämän käyttäjien tarvitsee vain painaa \"Jakaminen\"\n"
-"Konquerorissa tai Nautiluksessa\n"
+"Konquerorissa tai Nautiluksessa.\n"
 "\n"
 "\"Mukautettu\" sallii käyttäjäkohtaiset oikeudet.\n"
 
@@ -691,7 +691,7 @@ msgid ""
 "You can use userdrake to add a user to this group."
 msgstr ""
 "Käyttäjäkohtainen jako käyttää ryhmää \"fileshare\".\n"
-"Käyttäjä voidaan lisätä ryhmään Userdraken avulla."
+"Käyttäjä voidaan lisätä ryhmään Userdrake:n avulla."
 
 #: any.pm:1448
 #, c-format
@@ -798,7 +798,7 @@ msgstr "LDAP:"
 msgid ""
 "Tells your computer to use LDAP for some or all authentication. LDAP "
 "consolidates certain types of information within your organization."
-msgstr "Käytetään LDAPia osaan tai kaikkeen tunnistautumiseen."
+msgstr "Käytetään LDAP:ia osaan tai kaikkeen tunnistautumiseen."
 
 #: authentication.pm:65
 #, c-format
@@ -834,7 +834,7 @@ msgstr "Kerberos 5:"
 #: authentication.pm:67
 #, c-format
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
-msgstr "Active Directory -tunnistautuminen Kerberoksen ja LDAPin avulla."
+msgstr "Active Directory -tunnistautuminen Kerberoksen ja LDAP:n avulla."
 
 #: authentication.pm:107 authentication.pm:141 authentication.pm:160
 #: authentication.pm:161 authentication.pm:187 authentication.pm:211
@@ -976,7 +976,7 @@ msgstr "Hae käyttäjätiedot paikallisesta tiedostosta"
 #: authentication.pm:157
 #, c-format
 msgid "Use Ldap for users information"
-msgstr "Käytä LDAPia käyttäjätietojen hakemiseen"
+msgstr "Käytä LDAP:ia käyttäjätietojen hakemiseen"
 
 #: authentication.pm:163
 #, c-format
@@ -1640,7 +1640,7 @@ msgstr "Poista dm:stä"
 #: diskdrake/interactive.pm:416
 #, c-format
 msgid "Modify RAID"
-msgstr "Muokkaa RAIDia"
+msgstr "Muokkaa RAID:ia"
 
 #: diskdrake/interactive.pm:417
 #, c-format
@@ -2773,7 +2773,7 @@ msgstr "Mukautettu levyn osiointi"
 #: fs/partitioning_wizard.pm:245
 #, c-format
 msgid "Use fdisk"
-msgstr "Käytä fdiskiä"
+msgstr "Käytä fdisk:iä"
 
 #: fs/partitioning_wizard.pm:248
 #, c-format
@@ -3184,7 +3184,7 @@ msgstr "Ota PulseAudio käyttöön"
 #: harddrake/sound.pm:370
 #, c-format
 msgid "Enable 5.1 sound with Pulse Audio"
-msgstr "Ota 5.1-äänet käyttöön PulseAudion kanssa"
+msgstr "Ota 5.1-äänet käyttöön PulseAudio:n kanssa"
 
 #: harddrake/sound.pm:375
 #, c-format
@@ -3278,7 +3278,7 @@ msgstr ""
 "\n"
 "Se tarjoaa myös paljon korkeamman tason API:n kuin OSS.\n"
 "\n"
-"Käyttääksesi ALSAa, voit käyttää yhtä näistä:\n"
+"Käyttääksesi ALSA:a, voit käyttää yhtä näistä:\n"
 "- vanha OSS-yhteensopiva api.\n"
 "- uusi ALSA-api, joka tarjoaa useita parannettuja ominaisuuksia,\n"
 "mutta vaatii ALSA-kirjaston käyttöä.\n"
@@ -4811,10 +4811,11 @@ msgstr "Poista ensin loogiset osiot\n"
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
 msgstr ""
-"Käynnistyslatain ei osaa käsitellä usealla fyysisellä osiolla sijaitsevaa /"
-"boot-osiota tai hakemistoa"
+"Käynnistyslatain ei osaa käsitellä usealla fyysisellä osiolla sijaitsevaa "
+"/boot-osiota tai hakemistoa"
 
-#: messages.pm:11, c-format
+#: messages.pm:11
+#, c-format
 msgid ""
 "Introduction\n"
 "\n"
@@ -5611,12 +5612,13 @@ msgstr "Etsitään käyttämättömiä kieli-paketteja..."
 msgid ""
 "We have detected that some packages are not needed for your system "
 "configuration."
-msgstr "Havaittiin, että jotkut asennetut paketit ovat tarpeettomia."
+msgstr ""
+"Asennusohjelma havaitsi, että osa asennetuista paketeista on tarpeettomia."
 
 #: pkgs.pm:266
 #, c-format
 msgid "We will remove the following packages, unless you choose otherwise:"
-msgstr "Paketit poistetaan, ellei toisin määrätä:"
+msgstr "Seuraavat paketit poistetaan:"
 
 #: pkgs.pm:269 pkgs.pm:270
 #, c-format
@@ -6352,7 +6354,7 @@ msgid ""
 "on your own."
 msgstr ""
 "Tasoa on käytettävä varoen, koska se poistaa käytöstä kaiken\n"
-"msecin tarjoaman ylimääräisen turvallisuuden. Käytä tasoa\n"
+"msec:n tarjoaman ylimääräisen turvallisuuden. Käytä tasoa\n"
 "vain, jos haluat huolehtia itse järjestelmän turvallisuudesta."
 
 #: security/level.pm:43
@@ -6486,9 +6488,9 @@ msgid ""
 "and includes support for pop-up menus on the console."
 msgstr ""
 "GPM lisää hiirituen tekstipohjaisiin Linux-sovelluksiin kuten\n"
-"Midnight Commanderiin. GPM mahdollistaa myös konsolissa\n"
-"\"Copy and Paste\"-toiminnot hiirellä ja sisältää tuen valikoille\n"
-"konsolissa."
+"Midnight Commanderiin. GPM mahdollistaa myös \"Leikkaa ja\n"
+"Liimaa\" -toiminnot konsolissa hiiren avulla ja sisältää tuen\n"
+"valikoille konsolissa."
 
 #: services.pm:35
 #, c-format
@@ -6753,7 +6755,7 @@ msgid ""
 "logged into a machine running the rwho daemon (similar to finger)."
 msgstr ""
 "Rwho-protokollalla etäkäyttäjät voivat listata kaikki\n"
-"koneella olevat käyttäjät (vastaa fingeriä)."
+"koneella olevat käyttäjät (vastaa komentoa finger)."
 
 #: services.pm:92
 #, c-format
@@ -6769,8 +6771,8 @@ msgid ""
 "The SMB/CIFS protocol enables to share access to files & printers and also "
 "integrates with a Windows Server domain"
 msgstr ""
-"SMB/CIFS-protokolla mahdollistaa tiedostojen ja tulostimien jakamisen sekä\n"
-"Windows-toimialueeseen yhdistämisen."
+"SMB/CIFS-protokolla mahdollistaa sekä tiedostojen ja tulostimien jakamisen\n"
+"että Windows-toimialueeseen yhdistämisen."
 
 #: services.pm:94
 #, c-format
@@ -6853,7 +6855,7 @@ msgstr "Valitse automaattisesti käynnistettävät palvelut"
 #: services.pm:171
 #, c-format
 msgid "Services: %d activated for %d registered"
-msgstr "Palvelut: %d aktivoitu, %d rekisteröity"
+msgstr "Palvelut: %d aktivoitu, %d asennettu"
 
 #: services.pm:208
 #, c-format
