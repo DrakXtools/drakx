@@ -317,7 +317,7 @@ sub _should_prefer_UUID {
 sub _add_uuid_to_swap {
     my ($part) = @_;
 
-    my $ids = fs::type::call_vol_id($part);
+    my $ids = fs::type::call_blkid($part);
     $ids->{ID_FS_VERSION} eq '2' 
       or log::l("ERROR: do not know swap version $ids->{ID_FS_VERSION}, so can not add UUID to it"), return;
 
