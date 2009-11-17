@@ -609,6 +609,7 @@ sub Type {
 	return;
     } elsif ($type->{fs_type} =~ /ntfs/ && $part->{fs_type} =~ /ntfs/) {
 	if ($type->{fs_type} eq 'ntfs-3g') {
+	    local $::prefix = ''; # For draklive-install
 	    $in->do_pkgs->ensure_binary_is_installed('ntfs-3g', 'mount.ntfs-3g') or return;
 	}
 	put_in_hash($part, $type);
