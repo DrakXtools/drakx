@@ -575,8 +575,8 @@ sub Type {
 	ask_alldatawillbelost($in, $part, N_("After changing type of partition %s, all data on this partition will be lost"));
     };
 
-    #- for ext2, warn after choosing as ext2->ext3 can be achieved without loosing any data :)
-    $part->{fs_type} eq 'ext2' || $part->{fs_type} =~ /ntfs/ or $warn->() or return;
+    #- for ext2/ext3, warn after choosing as ext2->ext3 and ext*->ext4 can be achieved without loosing any data :)
+    member($part->{fs_type}, qw(ext2 ext3)) || $part->{fs_type} =~ /ntfs/ or $warn->() or return;
 
     my @types = fs::type::type_names($::expert, $hd);
 
@@ -593,7 +593,7 @@ sub Type {
 
     my $type = $type_name && fs::type::type_name2subpart($type_name);
 
-    if (member($type->{fs_type}, qw(ext2 ext3 ext4))) {
+    if ($part->{fs_type} eq 'ext2' && $type->{fs_type} eq 'ext3') {
 	my $_w = $in->wait_message(N("Please wait"), N("Switching from %s to %s", 'ext2', $type->{fs_type}));
 	if (run_program::run("tune2fs", "-j", devices::make($part->{device}))) {
 	    put_in_hash($part, $type);
@@ -603,6 +603,10 @@ sub Type {
 	    fs::format::disable_forced_fsck($part->{device});
 	    return;
 	}
+    } elsif (member($part->{fs_type}, qw(ext2 ext3)) && $type->{fs_type} eq 'ext4') {
+	# FIXME enable some nice flags
+	put_in_hash($part, $type);
+	return;
     } elsif ($type->{fs_type} =~ /ntfs/ && $part->{fs_type} =~ /ntfs/) {
 	if ($type->{fs_type} eq 'ntfs-3g') {
 	    $in->do_pkgs->ensure_binary_is_installed('ntfs-3g', 'mount.ntfs-3g') or return;
