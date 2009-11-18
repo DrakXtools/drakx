@@ -9,6 +9,8 @@
   o rework UI layout to account for CONSOLE_LOGO support removal
 - display_help:
   o handle window.close() events (#55099)
+  o hide Gtk+ "close" button when displaying first time wizard that
+    now has a HTML "close" button again
 - fix detecting hidden partitions as recovery
 - diskdrake:
   o allow to convert ext2/3 to ext4 but do not enable flags
