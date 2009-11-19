@@ -208,7 +208,7 @@ sub dd {
     my $u = "usage: dd [-h] [-p] [if=<file>] [of=<file>] [bs=<number>] [count=<number>]\n";
     my ($help, $percent) = getopts(\@_, qw(hp));
     die $u if $help;
-    my %h = (if => *STDIN, of => *STDOUT, bs => 512, count => undef);
+    my %h = (if => \*STDIN, of => \*STDOUT, bs => 512, count => undef);
     foreach (@_) {
 	/(.*?)=(.*)/ && exists $h{$1} or die $u;
 	$h{$1} = $2;
