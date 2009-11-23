@@ -895,7 +895,7 @@ sub ask_user_and_root {
     );
 
     if ($xguest && !is_xguest_installed()) {
-        $in->do_pkgs->ensure_is_installed('xguest', '/etc/security/namespace.d/guest.conf');
+        $in->do_pkgs->ensure_is_installed('xguest', '/etc/security/namespace.d/xguest.conf');
     } elsif (!$xguest && is_xguest_installed()) {
         $in->do_pkgs->remove('xguest') or return;
     }
