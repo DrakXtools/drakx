@@ -807,7 +807,7 @@ sub ask_user {
 }
 
 sub is_xguest_installed() {
-    -e "$::prefix/etc/security/namespace.d/guest.conf";
+    -e "$::prefix/etc/security/namespace.d/xguest.conf";
 }
 
 sub ask_user_and_root {
