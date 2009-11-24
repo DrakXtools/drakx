@@ -121,10 +121,10 @@ sub complete_usb_storage_info {
 	if (my $e = find { !$_->{found} && $_->{usb_vendor} == $usb->{vendor} && $_->{usb_id} == $usb->{id} } @usb) {
          my $host = get_sysfs_usbpath_for_block($e->{device});
          if ($host) {
-             $e->{info} = chomp_(cat_("/sys/block/$e->{device}/$host/../serial"));
+             $e->{info} = chomp_(cat_("/sys/block/$host/../serial"));
              $e->{usb_description} = join('|', 
-                                          chomp_(cat_("/sys/block/$e->{device}/$host/../manufacturer")),
-                                          chomp_(cat_("/sys/block/$e->{device}/$host/../product")));
+                                          chomp_(cat_("/sys/block/$host/../manufacturer")),
+                                          chomp_(cat_("/sys/block/$host/../product")));
          }
          local $e->{found} = 1;
 	    $e->{"usb_$_"} ||= $usb->{$_} foreach keys %$usb;
@@ -170,7 +170,7 @@ sub get_sysfs_field_from_link {
 
 sub get_sysfs_usbpath_for_block {
     my ($device) = @_;
-    my $host = readlink("/sys/block/$device/device");
+    my $host = readlink("/sys/block/$device");
     $host =~ s!/host.*!!;
     $host;
 }
@@ -181,7 +181,7 @@ sub get_scsi_driver {
     foreach (@l) {
 	next if $_->{driver};
 	my $host = get_sysfs_usbpath_for_block($_->{device});
-	$_->{driver} = get_sysfs_field_from_link("/sys/block/$_->{device}/$host", 'driver');
+	$_->{driver} = get_sysfs_field_from_link("/sys/block/$host", 'driver');
     }
 }
 
