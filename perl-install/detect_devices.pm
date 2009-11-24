@@ -181,7 +181,8 @@ sub get_scsi_driver {
     foreach (@l) {
 	next if $_->{driver};
 	my $host = get_sysfs_usbpath_for_block($_->{device});
-	$_->{driver} = get_sysfs_field_from_link("/sys/block/$host", 'driver');
+	require list_modules;
+	$_->{driver} = list_modules::filename2modname(get_sysfs_field_from_link("/sys/block/$host", 'driver'));
     }
 }
 
