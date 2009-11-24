@@ -24,6 +24,7 @@ my %cmds = (
     swap     => [ 'util-linux-ng', 'mkswap' ],
     ntfs     => [ 'ntfsprogs', 'mkntfs', '--fast' ],
    'ntfs-3g' => [ 'ntfsprogs', 'mkntfs', '--fast' ],
+    btrfs    => [ 'btrfs-progs', 'mkfs.btrfs' ],
 );
 
 my %LABELs = ( #- option, length, handled_by_mount
@@ -40,6 +41,7 @@ my %LABELs = ( #- option, length, handled_by_mount
     swap     => [ '-L', 15, 1 ],
     ntfs     => [ '-L', 128, 0 ],
    'ntfs-3g' => [ '-L', 128, 0 ],
+    btrfs    => [ '-L', 256, 1 ],
 );
 
 my %edit_LABEL = ( # package, command, option
@@ -58,6 +60,7 @@ my %edit_LABEL = ( # package, command, option
 #    swap     => [ 'util-linux-ng', 'mkswap' ],
     ntfs     => [ 'ntfsprogs', 'ntfslabel' ],
    'ntfs-3g' => [ 'ntfsprogs', 'ntfslabel' ],
+#    btrfs
 );
 
 sub package_needed_for_partition_type {
@@ -181,7 +184,9 @@ sub part_raw {
 	run_program::raw('jfs_tune', '-U', devices::make($dev));
     } elsif ($fs_type eq 'xfs') {
 	run_program::raw('xfs_admin', '-U', devices::make($dev));
-    } 
+    } elsif ($fs_type eq 'btrfs') {
+	#FIXME
+    }
     
     if (member($fs_type, qw(ext3 ext4))) {
 	disable_forced_fsck($dev);
