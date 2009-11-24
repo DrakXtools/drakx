@@ -491,6 +491,8 @@ undef $flush_guard;
 
 sub format_bus_ids {
     my ($device) = $_;
+    # do not vivify ids:
+    return if !($device->{vendor} && $device->{id});
     foreach my $field (qw(vendor id subvendor subid)) {
         next if !$device->{$field};
         $device->{$field} = sprintf("0x%04x", $device->{$field});
