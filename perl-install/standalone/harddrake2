@@ -102,6 +102,7 @@ my %fields =
      {
       channel => [ N("Channel"), N("EIDE/SCSI channel") ],
       info => [ N("Disk identifier"), N("usually the disk serial number") ],
+      id => [ N("Target id number"), N("the SCSI target identifier") ],
       lun => [ N("Logical unit number"), N("the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are uniquely identified by a
 channel number, a target id and a logical unit number") ],
      },
@@ -148,7 +149,7 @@ my %groups = (
               HARDDISK =>
               {
                N("Identification") => [ qw(Vendor Model description info media_type) ],
-               N("Connection") => [ qw(bus channel lun) ],
+               N("Connection") => [ qw(bus channel lun id) ],
                N("Bus identification") => [ qw(vendor id subvendor subid) ],
                N("Device") => [ qw(device) ],
                N("Partitions") => [ qw(primary_partitions extended_partitions) ],
