@@ -498,7 +498,7 @@ our @tree =
       icon => "hw_mouse.png",
       configurator => "$sbindir/mousedrake",
       detector => sub {
-          f(grep { $_->{driver} =~ /^Mouse:|^Tablet:/ || $_->{media_type} =~ /class\|Mouse/ ||
+          f(grep { $_->{driver} =~ /^Mouse:|^Tablet:|^mouse/ || $_->{media_type} =~ /class\|Mouse/ ||
                      # USB devices are filtered out since we already catch them through probeall():
                      $_->{bus} ne 'usb' && $_->{Handlers}{mouse};
                  } @devices);
