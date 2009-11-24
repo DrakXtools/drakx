@@ -216,7 +216,7 @@ sub getSCSI() {
         }
 	warn("cannot get info for device ($_)"), next if !$device;
 
-	my $usb_dir = readlink("$node/device") =~ m!/usb! && "$node/device/../../../..";
+	my $usb_dir = readlink("$dir") =~ m!/usb! && "$dir/../../../..";
 	my $get_usb = sub { chomp_(cat_("$usb_dir/$_[0]")) };
 
 	my $get = sub {
