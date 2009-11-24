@@ -474,10 +474,7 @@ foreach (@classes) {
         foreach my $field (qw(device)) {
             $_->{$field} = "/dev/$_->{$field}" if $_->{$field};
         }
-        foreach my $field (qw(vendor id subvendor subid)) {
-            $_->{$field} = sprintf("0x%04x", $_->{$field});
-            delete $_->{$field} if $_->{$field} eq "0xffff";  # 0xffff equals to '*'
-        }
+        format_bus_ids($_);
         if ($_->{pci_revision}) {
             $_->{pci_revision} = sprintf("0x%02x", $_->{pci_revision});
         } else {
@@ -491,6 +488,15 @@ foreach (@classes) {
 }
 
 undef $flush_guard;
+
+sub format_bus_ids {
+    my ($device) = $_;
+    foreach my $field (qw(vendor id subvendor subid)) {
+        next if !$device->{$field};
+        $device->{$field} = sprintf("0x%04x", $device->{$field});
+        delete $device->{$field} if $device->{$field} eq "0xffff";  # 0xffff equals to '*'
+    }
+}
 
 sub reap_children() {
     # reap zombies
