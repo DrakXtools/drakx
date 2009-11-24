@@ -222,7 +222,7 @@ sub umount_all {
     log::l("unmounting all filesystems");
 
     foreach (sort { $b->{mntpoint} cmp $a->{mntpoint} } 
-	       grep { $_->{mntpoint} && !$_->{real_mntpoint} } @$fstab) {
+	       grep { $_->{mntpoint} && !$_->{real_mntpoint} || isSwap($_) } @$fstab) {
 	umount_part($_);
     }
 }
