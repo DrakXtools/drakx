@@ -1075,6 +1075,7 @@ sub suggest {
 	my @windows_boot_parts =
 	  grep { $_->{active}
 		 && isFat_or_NTFS($_) && member(fs::type::fs_type_from_magic($_), 'vfat', 'ntfs', 'ntfs-3g')
+		 && !$_->{is_removable}
 		 && !isRecovery($_);
 	     }
 	    map { @{$_->{primary}{normal}} } @{$all_hds->{hds}};
