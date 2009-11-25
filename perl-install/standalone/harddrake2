@@ -129,10 +129,11 @@ channel number, a target id and a logical unit number") ],
      }
     );
 
+my $identification = N("Identification");
 my %groups = (
               generic =>
               {
-               N("Identification") => [ qw(Vendor model description info media_type) ],
+               $identification => [ qw(Vendor model description info media_type) ],
                N("Connection") => [ qw(bus pci_domain pci_bus pci_device pci_function pci_revision vendor id subvendor subid) ],
               },
               AUDIO =>
@@ -141,14 +142,14 @@ my %groups = (
               },
               CPU =>
               {
-               N("Identification") => [ qw(processor vendor_id), "model name", "cpu family", qw(model level stepping) ],
+               $identification => [ qw(processor vendor_id), "model name", "cpu family", qw(model level stepping) ],
                N("Performances") => [ "cpu MHz", "cache size", "bogomips" ],
                N("Bugs") => [ qw(fdiv_bug coma_bug f00f_bug hlt_bug) ],
                N("FPU")  => [ qw(fpu fpu_exception) ],
               },
               HARDDISK =>
               {
-               N("Identification") => [ qw(Vendor Model description info media_type) ],
+               $identification => [ qw(Vendor Model description info media_type) ],
                N("Connection") => [ qw(bus channel lun id) ],
                N("Bus identification") => [ qw(vendor id subvendor subid) ],
                N("Device") => [ qw(device) ],
@@ -156,7 +157,7 @@ my %groups = (
               },
               MOUSE =>
               {
-               N("Identification") => [ qw(name type MOUSETYPE Protocol) ],
+               $identification => [ qw(name type MOUSETYPE Protocol) ],
                N("Features") => [ qw(EmulateWheel nbuttons) ],
               },
              );
@@ -337,7 +338,7 @@ $tree->get_selection->signal_connect('changed' => sub {
                 member($field, map { @$_ } values %groups);
             } keys %device_fields;
             my @formated;
-            foreach my $group (N("Identification"), grep { $_ ne N("Identification") } keys %groups) {
+            foreach my $group ($identification, grep { $_ ne $identification } keys %groups) {
                 my @fields = @{$groups{$group}};
                 # have we at least a member in that group?
                 next unless any { member($_, @fields) } @$grouped;
