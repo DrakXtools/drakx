@@ -835,10 +835,10 @@ sub usb_probe__real() {
 
     add_addons($usbtable_addons, map {
 	my %l;
-	@l{qw(vendor id media_type driver description pci_bus pci_device)} = split "\t";
+	@l{qw(vendor id media_type driver description pci_bus pci_device usb_port)} = split "\t";
 	$l{media_type} = join('|', grep { $_ ne '(null)' } split('\|', $l{media_type}));
 	$l{$_} = hex $l{$_} foreach qw(vendor id);
-	$l{sysfs_device} = "/sys/class/usb_device/usbdev$l{pci_bus}.$l{pci_device}/device";
+	$l{sysfs_device} = "/sys/bus/usb/devices/$l{pci_bus}-" . ($l{usb_port} + 1);
 	$l{bus} = 'USB';
 	\%l;
     } c::usb_probe());
