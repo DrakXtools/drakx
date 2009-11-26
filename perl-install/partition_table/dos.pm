@@ -226,7 +226,6 @@ sub read_one {
 	$hd->{fs_type_from_magic} and die "unpartitionned disk";
 	my $primary = partition_table::raw::pt_info_to_primary($hd, [ @pt ]);
        foreach my $i (@{$primary->{normal}}) {
-          print Dumper($hd);
           if (($i->{active} && $i->{active} != 0x80) || 
              ($hd->{totalsectors} && $i->{start} > $hd->{totalsectors})) {
                 die "Invalid DOS partition table";
