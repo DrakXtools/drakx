@@ -243,7 +243,7 @@ sub per_entry_info_box {
     }
     gtkpack($box, gtkadd(gtkcreate_frame(N("Details")), 
                          gtknew('HBox', border_width => 5, children_loose => [
-                         gtkset_alignment(gtkset_justify(Gtk2::Label->new($info), 'left'), 0, 0) ])));
+                         gtkset_alignment(gtkset_justify(gtknew('Label', selectable => 1, text => $info), 'left'), 0, 0) ])));
 }
 
 sub current_kind_changed {
