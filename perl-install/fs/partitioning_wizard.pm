@@ -502,7 +502,7 @@ sub main {
 
         my $mainbox = Gtk2::VBox->new;
 
-        my @kinds = map { diskdrake::hd_gtk::hd2kind($_) } @{$all_hds->{hds}};
+        my @kinds = map { diskdrake::hd_gtk::hd2kind($_) } sort { $a->{is_removable} <=> $b->{is_removable} } @{$all_hds->{hds}};
 
         my $hdchoice = Gtk2::HBox->new;
 
