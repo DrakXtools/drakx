@@ -163,7 +163,6 @@ sub install {
 
 sub what_provides {
     my ($do, $name) = @_;
-    #- FIXME: install::pkgs::packagesProviding() is not implemented anymore
     map { $_->name } install::pkgs::packagesProviding($do->{o}{packages}, $name);
 }
 

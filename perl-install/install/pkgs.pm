@@ -81,12 +81,17 @@ sub size2time {
     }
 }
 
+sub packagesProviding {
+    my ($packages, $name) = @_;
+    grep { $_->is_arch_compat } URPM::packages_providing($packages, $name);
+}
+
 #- search package with given name and compatible with current architecture.
 #- take the best one found (most up-to-date).
 sub packageByName {
     my ($packages, $name) = @_;
 
-    my @l = grep { $_->is_arch_compat && $_->name eq $name } URPM::packages_providing($packages, $name);
+    my @l =  grep { $_->name } eq $name packagesProviding($packages, $name);
 
     my $best;
     foreach (@l) {
