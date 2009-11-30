@@ -279,7 +279,7 @@ sub remove_unused_packages {
 
     #- we should have some gurpme
     $wait = $in->wait_message(N("Please wait"), N("Removing packages..."));
-    run_program::run('urpme', '--auto',
+    run_program::rooted($::prefix, 'urpme', '--auto',
 		     if_($hardware, @unused_hardware_packages),
 		     if_($locales, @unselected_locales),
 	);
