@@ -503,6 +503,7 @@ sub get_media {
     foreach (@$media) {
 	if ($_->{type} eq 'media_cfg') {
 	    $phys_m = url2mounted_phys_medium($o, $_->{url}, 'media_info');
+            local $phys_m->{is_suppl} = $_->{url} ne "drakx://media"; # so that _get_media_url() works
             ($suppl_CDs, $copy_rpms_on_disk) = get_media_cfg($o, $phys_m, $packages, $_->{selected_names}, $_->{force_rpmsrate});
 	} elsif ($_->{type} eq 'media') {
 	    $phys_m = url2mounted_phys_medium($o, $_->{url});
