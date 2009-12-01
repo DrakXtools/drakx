@@ -91,7 +91,7 @@ sub packagesProviding {
 sub packageByName {
     my ($packages, $name) = @_;
 
-    my @l =  grep { $_->name } eq $name packagesProviding($packages, $name);
+    my @l =  grep { $_->name eq $name } packagesProviding($packages, $name);
 
     my $best;
     foreach (@l) {
