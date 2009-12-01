@@ -675,7 +675,7 @@ my %IM_config =
    'ibus' => {
 	GTK_IM_MODULE => 'ibus',
 	QT_IM_MODULE => 'xim',
-	XIM_PROGRAM => 'ibus',
+	XIM_PROGRAM => 'ibus-daemon -d -x',
 	XMODIFIERS => '@im=ibus',
 	packages => {
 		generic => sub { qw(ibus-table ibus-m17n) },
