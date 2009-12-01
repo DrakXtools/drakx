@@ -55,6 +55,7 @@ my %edit_LABEL = ( # package, command, option
     xfs      => [ 'xfsprogs', 'xfs_admin', '-L' ],
     jfs      => [ 'jfsutils', 'jfs_tune', '-L' ],
 #    hfs
+    #FIXME we should use mlabel -i <device> ::<label> (#52853)
     dos      => [ 'dosfstools', 'dosfslabel' ],
     vfat     => [ 'dosfstools', 'dosfslabel' ],
 #    swap     => [ 'util-linux-ng', 'mkswap' ],
