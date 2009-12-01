@@ -246,7 +246,7 @@ sub detect_unselected_locale_packages {
 }
 
 sub remove_unused_packages {
-    my ($in, $do_pkgs) = @_;
+    my ($in, $do_pkgs, $o_prefix) = @_;
 
     my $wait;
     $wait = $in->wait_message(N("Unused packages removal"), N("Finding unused hardware packages..."));
@@ -279,7 +279,7 @@ sub remove_unused_packages {
 
     #- we should have some gurpme
     $wait = $in->wait_message(N("Please wait"), N("Removing packages..."));
-    run_program::rooted($::prefix, 'urpme', '--auto',
+    run_program::rooted($o_prefix, 'urpme', '--auto',
 		     if_($hardware, @unused_hardware_packages),
 		     if_($locales, @unselected_locales),
 	);
