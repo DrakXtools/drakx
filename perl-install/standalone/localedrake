@@ -39,16 +39,18 @@ $::Wizard_title = N("LocaleDrake");
 
 any::selectLanguage_and_more_standalone($in, $locale);
 
-if ($> && lang::IM2packages($locale)) {
+if ($>) {
+    my @required_packages = lang::IM2packages($locale);
+    my @missing_packages = difference2(\@required_packages, [ $in->do_pkgs->are_installed(@required_packages) ]);
     $in->ask_warn(N("Warning"),
 		  N("You should install the following packages: %s", 
 		    join(
 			#-PO: the following is used to combine packages names. eg: "initscripts, harddrake, yudit"
 			N(", "),
-			lang::IM2packages($locale)
+			@missing_packages,
 		    ),
 		)
-	      );
+	      ) if @missing_packages;
 }
 lang::write_and_install($locale, $in->do_pkgs, $>);
 
