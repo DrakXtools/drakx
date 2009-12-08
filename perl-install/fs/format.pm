@@ -55,9 +55,8 @@ my %edit_LABEL = ( # package, command, option
     xfs      => [ 'xfsprogs', 'xfs_admin', '-L' ],
     jfs      => [ 'jfsutils', 'jfs_tune', '-L' ],
 #    hfs
-    #FIXME we should use mlabel -i <device> ::<label> (#52853)
-    dos      => [ 'dosfstools', 'dosfslabel' ],
-    vfat     => [ 'dosfstools', 'dosfslabel' ],
+    dos      => [ 'mtools', 'mlabel', '-i' ],
+    vfat     => [ 'mtools', 'mlabel', '-i' ],
 #    swap     => [ 'util-linux-ng', 'mkswap' ],
     ntfs     => [ 'ntfsprogs', 'ntfslabel' ],
    'ntfs-3g' => [ 'ntfsprogs', 'ntfslabel' ],
@@ -122,7 +121,9 @@ sub write_label {
     my $dev = $part->{real_device} || $part->{device};
     my ($_pkg, $cmd, @first_options) = @{$edit_LABEL{$part->{fs_type}} || die N("I do not know how to set label on %s with type %s", $part->{device}, $part->{fs_type})};
     my @args;
-    if (defined $first_options[0]) {
+    if ($cmd eq 'mlabel') {
+      @args = ($cmd, @first_options, devices::make($dev), '::' . $part->{device_LABEL});
+    } elsif (defined $first_options[0]) {
       @args = ($cmd, @first_options, $part->{device_LABEL}, devices::make($dev));
     } else {
       @args = ($cmd, devices::make($dev), $part->{device_LABEL});
