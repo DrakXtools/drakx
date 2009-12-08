@@ -13,7 +13,7 @@ use log;
 my %cmds = (
     ext2     => [ 'e2fsprogs', 'mkfs.ext2', '-F' ],
     ext3     => [ 'e2fsprogs', 'mkfs.ext3', '-F' ],
-    ext4     => [ 'e2fsprogs', 'mkfs.ext4', '-F' ], # FIXME: enable more options once we've better mkfs support
+    ext4     => [ 'e2fsprogs', 'mkfs.ext4', '-F' ],
     reiserfs => [ 'reiserfsprogs', 'mkfs.reiserfs', '-ff' ],
     reiser4  => [ 'reiser4progs', 'mkfs.reiser4', '-f', '-y' ],
     xfs      => [ 'xfsprogs', 'mkfs.xfs', '-f', '-q' ],
