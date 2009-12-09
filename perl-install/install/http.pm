@@ -2,6 +2,7 @@ package install::http; # $Id$
 
 use urpm::download;
 use common;
+use Cwd;
 
 # to be killed once callers got fixed
 sub close() {
