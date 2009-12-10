@@ -673,7 +673,7 @@ my %IM_config =
    },
    'ibus' => {
 	GTK_IM_MODULE => 'ibus',
-	QT_IM_MODULE => 'xim',
+	QT_IM_MODULE => 'ibus',
 	XIM_PROGRAM => 'ibus-daemon -d -x',
 	XMODIFIERS => '@im=ibus',
 	packages => {
