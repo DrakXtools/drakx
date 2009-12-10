@@ -571,7 +571,7 @@ my @IM_i18n_fields = (
 #-     XIM server; or a Qt plugin if exists)
 );
 
-my ($is_kde3, $is_kde4);
+my ($is_kde4);
 
 # keep the 'packages' field in sync with share/rpmsrate:
 my %IM_config =
@@ -603,7 +603,7 @@ my %IM_config =
              XMODIFIERS => '@im=gcin',
 	     langs => 'zh',
 	     packages => {
-		     common => sub { if_($is_kde3, 'gcin-qt3'), if_($is_kde4, 'gcin-qt4') },
+		     common => sub { if_($is_kde4, 'gcin-qt4') },
 		     generic => sub { qw(gcin) },
 	     },
             },
@@ -645,7 +645,6 @@ my %IM_config =
             XIM_PROGRAM => 'scim -d',
             XMODIFIERS => '@im=SCIM',
 	    packages => {
-		common => sub { if_($is_kde3, 'scim-qtimm') },
 		generic => sub { qw(scim-m17n scim-tables) },
 		am => sub { qw(scim-tables) },
 		ja => sub { qw(scim-anthy scim-input-pad scim-tomoe) },
@@ -662,7 +661,7 @@ my %IM_config =
        XMODIFIERS => '@im=SCIM',
        default_for_lang => 'am ja ko th vi zh_CN zh_TW',
        packages => {
-	   common => sub { if_($is_kde3, 'scim-bridge-qt3'), if_($is_kde4, 'scim-bridge-qt4') },
+	   common => sub { if_($is_kde4, 'scim-bridge-qt4') },
            generic => sub { qw(scim-m17n scim-tables) },
            am => sub { qw(scim-tables) },
            ja => sub { qw(scim-anthy scim-input-pad scim-tomoe) },
@@ -689,7 +688,6 @@ my %IM_config =
             XIM_PROGRAM => 'skim -d',
             XMODIFIERS => '@im=SCIM',
             packages => {
-		common => sub { if_($is_kde3, 'scim-qtimm') },
                 generic => sub { qw(skim-scim-tables scim-m17n) },
                 am => sub { qw(skim-scim-tables) },
                 ja => sub { qw(skim-scim-anthy scim-input-pad scim-tomoe) },
@@ -706,7 +704,7 @@ my %IM_config =
            XMODIFIERS => '@im=uim',
 	   langs => 'ja',
 	   packages => {
-		  common => sub { if_($is_kde3, 'uim-qtimmodule'), if_($is_kde4, 'uim-qt4immodule') },
+		  common => sub { if_($is_kde4, 'uim-qt4immodule') },
 		  generic => sub { qw(uim-gtk uim) },
 	  },
           },
@@ -773,7 +771,6 @@ sub IM2packages {
     if ($locale->{IM}) {
 	require any;
 	my @sessions = any::sessions();
-	$is_kde3 = member('KDE', @sessions);
 	$is_kde4 = member('KDE4', @sessions);
 	my $per_lang = $IM_config{$locale->{IM}}{packages} || {};
 	my $main_lang = analyse_locale_name($locale->{lang})->{main};
