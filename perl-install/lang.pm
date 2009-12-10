@@ -677,7 +677,7 @@ my %IM_config =
 	XIM_PROGRAM => 'ibus-daemon -d -x',
 	XMODIFIERS => '@im=ibus',
 	packages => {
-		generic => sub { qw(ibus-table ibus-m17n) },
+		generic => sub { qw(ibus-table ibus-m17n), if_($is_kde4, 'ibus-qt4') },
 		ja => sub { qw(ibus-anthy) },
 		zh => sub { qw(ibus-pinyin ibus-chewing) },
 		ko => sub { qw(ibus-hangul) },
