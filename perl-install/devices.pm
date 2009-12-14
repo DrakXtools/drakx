@@ -159,7 +159,7 @@ sub entry {
 	    $sysdev = "/sys/block/$_/dev";
 	    $type = c::S_IFBLK();
         } elsif (/^(.+)(\d+)$/ && -e "/sys/block/$1/$_/dev") {
-	    $sysdev = "/sys/block/$_/dev";
+	    $sysdev = "/sys/block/$1/$_/dev";
 	    $type = c::S_IFBLK();
         }
         ($major, $minor) = split(':', chomp_(cat_($sysdev)));
