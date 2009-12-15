@@ -80,8 +80,8 @@ sub validate_mount_points {
 	$m{$m} and die N("Duplicate mount point %s", $m);
 	$m{$m} = 1;
 
-	#- in case the type does not correspond, force it to ext3
-	fs::type::set_fs_type($_, 'ext3') if !isTrueFS($_) && !isOtherAvailableFS($_);
+	#- in case the type does not correspond, force it to default fs (ext4 currently)
+	fs::type::set_fs_type($_, defaultFS()) if !isTrueFS($_) && !isOtherAvailableFS($_);
     }
     1;
 }
