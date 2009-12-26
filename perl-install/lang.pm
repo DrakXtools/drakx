@@ -657,7 +657,7 @@ my %IM_config =
 
    'scim-bridge' => {
        GTK_IM_MODULE => 'scim-bridge',
-       XIM_PROGRAM => 'scim -d',
+       XIM_PROGRAM => 'scim-bridge',
        XMODIFIERS => '@im=SCIM',
        default_for_lang => 'am ja ko th vi zh_CN zh_TW',
        packages => {
