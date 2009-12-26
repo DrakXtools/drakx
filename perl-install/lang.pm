@@ -651,7 +651,7 @@ my %IM_config =
 		ko => sub { qw(scim-hangul) },
 		th => sub { qw(scim-thai) },
 		vi => sub { qw(scim-m17n) },
-		zh => sub { qw(scim-pinyin scim-tables scim-chewing) },
+		zh => sub { qw(scim-googlepinyin scim-tables-zh scim-chewing) },
 	    },
            },
 
@@ -668,7 +668,7 @@ my %IM_config =
            ko => sub { qw(scim-hangul) },
 	   th => sub { qw(scim-thai) },
            vi => sub { qw(scim-m17n) },
-           zh => sub { qw(scim-pinyin scim-tables scim-chewing) },
+           zh => sub { qw(scim-googlepinyin scim-tables-zh scim-chewing) },
        },
    },
    'ibus' => {
@@ -683,20 +683,6 @@ my %IM_config =
 		ko => sub { qw(ibus-hangul) },
 	},
    },
-   skim => {
-            GTK_IM_MODULE => 'scim',
-            XIM_PROGRAM => 'skim -d',
-            XMODIFIERS => '@im=SCIM',
-            packages => {
-                generic => sub { qw(skim-scim-tables scim-m17n) },
-                am => sub { qw(skim-scim-tables) },
-                ja => sub { qw(skim-scim-anthy scim-input-pad scim-tomoe) },
-                ko => sub { qw(scim-hangul-skim) },
-		th => sub { qw(scim-thai) },
-                vi => sub { qw(skim scim-m17n) },
-                zh => sub { qw(skim-scim-pinyin skim-scim-tables scim-chewing) },
-            },
-        },
    uim => {
            GTK_IM_MODULE => 'uim',
            XIM => 'uim',
