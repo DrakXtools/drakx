@@ -205,7 +205,7 @@ fi
 	symlink("/sbin", "$tmp_initrd/bin");
 	cp_af("/usr/bin/ka-d-client", "$tmp_initrd/ka/ka-d-client");
 	cp_af("/usr/bin/mke2fs_diet", "$tmp_initrd/sbin/mke2fs");
-	cp_af("/usr/bin/busybox", "$tmp_initrd/sbin/busybox");
+	cp_af("/bin/busybox.static", "$tmp_initrd/sbin/busybox");
 	my @funct = map { /functions:/ .. /^$/ ? do { s/\s//g; split /,/ } : () } `busybox`;
 	shift @funct;
 	symlink('busybox', $tmp_initrd . "/sbin/$_") foreach @funct;
