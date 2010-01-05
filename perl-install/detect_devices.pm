@@ -906,8 +906,8 @@ sub pcmcia_probe() {
     map {
         my $dir = "$dev_dir/$_";
         my $get = sub { chomp_(cat_("$dir/$_[0]")) };
-        my $class_dev = first(glob_("$dir/tty*"));
-        my $device = $class_dev && get_sysfs_field_from_link($dir, basename($class_dev));
+        my $class_dev = first(glob_("$dir/tty/tty*"));
+        my $device = $class_dev && basename($class_dev);
         my $modalias = $get->('modalias');
         my $driver = get_sysfs_field_from_link($dir, 'driver');
         #- fallback on modalias result
