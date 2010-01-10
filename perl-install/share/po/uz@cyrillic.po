@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uz@cyrillic\n"
 "POT-Creation-Date: 2009-10-07 13:57+0200\n"
-"PO-Revision-Date: 2010-01-08 21:34+0500\n"
+"PO-Revision-Date: 2010-01-09 21:22+0500\n"
 "Last-Translator: Nurali Abdurahmonov <mavnur@gmail.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -1728,6 +1728,9 @@ msgid ""
 "Can not unset mount point as this partition is used for loop back.\n"
 "Remove the loopback first"
 msgstr ""
+"Ушбу диск қисми loop back учун ишлатилаётганлиги учун уланиш нуқтасини узиб "
+"бўлмайди.\n"
+"Аввал loopback олиб ташлансинми"
 
 #: diskdrake/interactive.pm:687
 #, c-format
@@ -1743,23 +1746,23 @@ msgstr "Ҳажм ўзгартирилмоқда"
 #: diskdrake/interactive.pm:711
 #, c-format
 msgid "Computing FAT filesystem bounds"
-msgstr "FAT файл тизимининг боғлари ҳисобланмоқда"
+msgstr "FAT файл тизимининг чегаралари ҳисобланмоқда"
 
 #: diskdrake/interactive.pm:747
 #, c-format
 msgid "This partition is not resizeable"
-msgstr "Дискнинг бу қисмининг ҳажмини ўзгартириб бўлмайди"
+msgstr "Дискнинг бу қисмини ҳажмини ўзгартириб бўлмайди"
 
 #: diskdrake/interactive.pm:752
 #, c-format
 msgid "All data on this partition should be backed-up"
-msgstr ""
+msgstr "Ушбу диск қисмидаги барча маълумотлардан заҳира нусха олиниши керак"
 
 #: diskdrake/interactive.pm:754
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr ""
-"Дискнинг %s қисмининг ҳажмини ўзгартиргандан кейин у ердаги ҳамма маълумот "
+"Дискнинг %s қисмини ҳажми ўзгартирилгандан кейин у ердаги ҳамма маълумот "
 "йўқолади"
 
 #: diskdrake/interactive.pm:761
@@ -1788,11 +1791,13 @@ msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
+"Диск қисми ҳажми ўзгартирилганда маълумот бутунлиги сақлаб қолиш учун\n"
+"Microsoft Windows® кейинги юкланганда файл тизими текширилади"
 
 #: diskdrake/interactive.pm:853 diskdrake/interactive.pm:1415
 #, c-format
 msgid "Filesystem encryption key"
-msgstr "Файл тизимининг кодлаш калити"
+msgstr "Файл тизимининг шифрлаш калити"
 
 #: diskdrake/interactive.pm:854, c-format
 msgid "Enter your filesystem encryption key"
@@ -1801,12 +1806,12 @@ msgstr "Файл тизими шифрлаш калитини киритинг"
 #: diskdrake/interactive.pm:855 diskdrake/interactive.pm:1423
 #, c-format
 msgid "Encryption key"
-msgstr "Кодлаш калити"
+msgstr "Шифрлаш калити"
 
 #: diskdrake/interactive.pm:862
 #, c-format
 msgid "Invalid key"
-msgstr ""
+msgstr "хато калит"
 
 #: diskdrake/interactive.pm:870
 #, c-format
@@ -1846,7 +1851,7 @@ msgstr ""
 #: diskdrake/interactive.pm:942
 #, c-format
 msgid "Moving physical extents"
-msgstr ""
+msgstr "Физик кенгайтмаларни кўчириш"
 
 #: diskdrake/interactive.pm:960
 #, c-format
@@ -1861,12 +1866,12 @@ msgstr "Loopback"
 #: diskdrake/interactive.pm:974
 #, c-format
 msgid "Loopback file name: "
-msgstr "Loopback файлининг номи:"
+msgstr "Loopback файлининг номи: "
 
 #: diskdrake/interactive.pm:979
 #, c-format
 msgid "Give a file name"
-msgstr "Файлнинг номини киритинг"
+msgstr "Файл номини киритинг"
 
 #: diskdrake/interactive.pm:982
 #, c-format
@@ -1876,12 +1881,12 @@ msgstr "Файлни бошқа loopback ишлатаяпти, бошқасин�
 #: diskdrake/interactive.pm:983
 #, c-format
 msgid "File already exists. Use it?"
-msgstr "Файл аллақачон мавжуд. Ишлатайми?"
+msgstr "Файл аллақачон мавжуд. Ундан фойдаланилсинми?"
 
 #: diskdrake/interactive.pm:1015 diskdrake/interactive.pm:1018
 #, c-format
 msgid "Mount options"
-msgstr "Улаш мосламалари"
+msgstr "Улаш параметрлари"
 
 #: diskdrake/interactive.pm:1025
 #, c-format
@@ -1906,7 +1911,7 @@ msgstr ""
 #: diskdrake/interactive.pm:1112
 #, c-format
 msgid "Be careful: this operation is dangerous."
-msgstr "Диққат! Бу амал хавфли."
+msgstr "Диққат: Бу амал хавфли."
 
 #: diskdrake/interactive.pm:1127, c-format
 msgid "Partitioning Type"
@@ -1941,7 +1946,7 @@ msgstr ""
 #: diskdrake/interactive.pm:1218 fs/partitioning.pm:48
 #, c-format
 msgid "Check bad blocks?"
-msgstr " Хато блокларни текширайми?"
+msgstr "Хато блокларни текширайми?"
 
 #: diskdrake/interactive.pm:1232
 #, c-format
@@ -1987,7 +1992,7 @@ msgstr "дискнинг %s қисми энди %s сифатида маълум
 #: diskdrake/interactive.pm:1271
 #, c-format
 msgid "Partitions have been renumbered: "
-msgstr ""
+msgstr "Диск қисми рақами ўзгартирилди: "
 
 #: diskdrake/interactive.pm:1296 diskdrake/interactive.pm:1364
 #, c-format
@@ -2002,7 +2007,7 @@ msgstr ""
 #: diskdrake/interactive.pm:1298
 #, c-format
 msgid "UUID: "
-msgstr ""
+msgstr "UUID: "
 
 #: diskdrake/interactive.pm:1299
 #, c-format
@@ -2043,12 +2048,12 @@ msgstr "Цилиндр %d дан %d гача\n"
 #: diskdrake/interactive.pm:1320
 #, c-format
 msgid "Number of logical extents: %d\n"
-msgstr ""
+msgstr "Логик кенгайтмаларнинг сони: %d\n"
 
 #: diskdrake/interactive.pm:1321
 #, c-format
 msgid "Formatted\n"
-msgstr "Формат қилинган\n"
+msgstr "Форматланган\n"
 
 #: diskdrake/interactive.pm:1322
 #, c-format
@@ -2082,7 +2087,7 @@ msgstr ""
 #: diskdrake/interactive.pm:1328
 #, c-format
 msgid " (inactive)"
-msgstr ""
+msgstr " (актив эмас)"
 
 #: diskdrake/interactive.pm:1334
 #, c-format
@@ -2099,6 +2104,8 @@ msgid ""
 "Partition booted by default\n"
 "    (for MS-DOS boot, not for lilo)\n"
 msgstr ""
+"Андоза юкланадиган диск қисми\n"
+"    (MS-DOS юкланиши учун, lilo учун эмас)\n"
 
 #: diskdrake/interactive.pm:1337
 #, c-format
@@ -2145,7 +2152,7 @@ msgstr ""
 #: diskdrake/interactive.pm:1356
 #, c-format
 msgid "Free space on %s (%s)"
-msgstr ""
+msgstr "%s (%s) даги бўш жой"
 
 #: diskdrake/interactive.pm:1365
 #, c-format
@@ -2174,37 +2181,37 @@ msgstr "LVM дисклар %s\n"
 #: diskdrake/interactive.pm:1371
 #, c-format
 msgid "Partition table type: %s\n"
-msgstr "Диск қисмлар жадвалининг тури: %s\n"
+msgstr "Диск қисми жадвали тури: %s\n"
 
 #: diskdrake/interactive.pm:1372
 #, c-format
 msgid "on channel %d id %d\n"
-msgstr ""
+msgstr "%d id %d каналида\n"
 
 #: diskdrake/interactive.pm:1416
 #, c-format
 msgid "Choose your filesystem encryption key"
-msgstr "Файл тизимининг кодлаш калитини танланг"
+msgstr "Файл тизими шифрлаш калитини танланг"
 
 #: diskdrake/interactive.pm:1419
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
-msgstr "Кодлаш калити жуда содда (у энг ками %d белгидан иборат бўлиши шарт)"
+msgstr "Шифрлаш калити жуда содда (у энг ками %d белгидан иборат бўлиши шарт)"
 
 #: diskdrake/interactive.pm:1420
 #, c-format
 msgid "The encryption keys do not match"
-msgstr "Кодлаш калитлари мос келмайди"
+msgstr "Шифрлар калитлари мос келмайди"
 
 #: diskdrake/interactive.pm:1424
 #, c-format
 msgid "Encryption key (again)"
-msgstr "Кодлаш калити (яна)"
+msgstr "Шифрлаш калити (яна)"
 
 #: diskdrake/interactive.pm:1426
 #, c-format
 msgid "Encryption algorithm"
-msgstr ""
+msgstr "Шифрлаш алгоритми"
 
 #: diskdrake/removable.pm:46
 #, c-format
@@ -2222,12 +2229,12 @@ msgstr "Бекор қилиш"
 #: diskdrake/smbnfs_gtk.pm:164
 #, c-format
 msgid "Can not login using username %s (bad password?)"
-msgstr ""
+msgstr "%s фойдаланувчи номи остида кириб бўлмайди (махфий сўз хатоми?)"
 
 #: diskdrake/smbnfs_gtk.pm:168 diskdrake/smbnfs_gtk.pm:177
 #, c-format
 msgid "Domain Authentication Required"
-msgstr ""
+msgstr "Домен аутентификацияси талаб қилинади"
 
 #: diskdrake/smbnfs_gtk.pm:169
 #, c-format
@@ -2244,6 +2251,8 @@ msgstr "Бошқаси"
 msgid ""
 "Please enter your username, password and domain name to access this host."
 msgstr ""
+"Ушбу хостга кириш учун фойдаланувчи номи, махфий сўз ва домен номини "
+"киритинг."
 
 #: diskdrake/smbnfs_gtk.pm:180
 #, c-format
@@ -2268,7 +2277,7 @@ msgstr "Янги серверларни қидириш"
 #: do_pkgs.pm:19 do_pkgs.pm:57
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
-msgstr "Пакет (%s) ўрнатилиши керак. Уни ўрнатишни истайсизми?"
+msgstr "%s пакети ўрнатилиши керак. Уни ўрнатишни истайсизми?"
 
 #: do_pkgs.pm:23 do_pkgs.pm:44 do_pkgs.pm:60 do_pkgs.pm:82
 #, c-format
@@ -2278,7 +2287,7 @@ msgstr "%s пакетини ўрнатиб бўлмади!"
 #: do_pkgs.pm:28 do_pkgs.pm:65
 #, c-format
 msgid "Mandatory package %s is missing"
-msgstr "Шарт бўлган пакет (%s) етишмаяпти"
+msgstr "Шарт бўлган %s пакети етишмаяпти"
 
 #: do_pkgs.pm:39 do_pkgs.pm:77
 #, c-format
@@ -2293,7 +2302,7 @@ msgstr "Пакетлар ўрнатилмоқда..."
 #: do_pkgs.pm:287 pkgs.pm:281
 #, c-format
 msgid "Removing packages..."
-msgstr "Пакетлар ўчирилмоқда..."
+msgstr "Пакетлар олиб ташланмоқда..."
 
 #: fs/any.pm:17
 #, c-format
@@ -2301,6 +2310,8 @@ msgid ""
 "An error occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
 msgstr ""
+"Хатолик рўй берди - файл тизимини яратиш учун яроқли ускуна топилмади. "
+"Илтимос ушбу муаммони тузатиш учун ускунангизни текшириб кўринг"
 
 #: fs/any.pm:75 fs/partitioning_wizard.pm:60
 #, c-format
@@ -2343,7 +2354,7 @@ msgstr "Диск қисми (%s) уланмоқда"
 #: fs/mount.pm:86
 #, c-format
 msgid "mounting partition %s in directory %s failed"
-msgstr "Диск қисмини (%s) директорияга (%s) улаш муваффақиятсиз тугади"
+msgstr "%s диск қисмини %s директорияга улаш муваффақиятсиз тугади"
 
 #: fs/mount.pm:91 fs/mount.pm:108
 #, c-format
@@ -2363,12 +2374,12 @@ msgstr "Дискнинг своп қисми (%s) ёқилмоқда"
 #: fs/mount_options.pm:114
 #, c-format
 msgid "Use an encrypted file system"
-msgstr ""
+msgstr "Шифрланган файл тизимидан фойдаланиш"
 
 #: fs/mount_options.pm:116
 #, c-format
 msgid "Flush write cache on file close"
-msgstr ""
+msgstr "Файлни ёпишда кэшни тозалаш"
 
 #: fs/mount_options.pm:118
 #, c-format
@@ -2430,12 +2441,12 @@ msgstr ""
 #: fs/mount_options.pm:143
 #, c-format
 msgid "Allow every user to mount and umount the file system."
-msgstr ""
+msgstr "Барча фойдаланувчиларга файл тизимини улаш ва узишга рухсат бериш."
 
 #: fs/mount_options.pm:145
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
-msgstr ""
+msgstr "Оддий фойдаланувчига файл тизимини улашга рухсат бериш."
 
 #: fs/mount_options.pm:147
 #, c-format
@@ -2445,7 +2456,7 @@ msgstr ""
 #: fs/mount_options.pm:149
 #, c-format
 msgid "Support \"user.\" extended attributes"
-msgstr ""
+msgstr "\"user.\" кенгайтирилган атрибутларини қўллаш"
 
 #: fs/mount_options.pm:151
 #, c-format
@@ -2455,7 +2466,7 @@ msgstr "Оддий фойдаланувчиларга ёзиш рухсатин�
 #: fs/mount_options.pm:153
 #, c-format
 msgid "Give read-only access to ordinary users"
-msgstr "Оддий фойдаланувчиларга фақат ўқишга рухсатини бериш"
+msgstr "Оддий фойдаланувчиларга фақат ўқишга рухсатини бериш"
 
 #: fs/mount_point.pm:80
 #, c-format
@@ -2538,12 +2549,12 @@ msgstr "Дискда бор қисмлардан фойдаланиш"
 #: fs/partitioning_wizard.pm:105
 #, c-format
 msgid "There is no existing partition to use"
-msgstr "Фойдаланиш учун дискнинг қисми мавжуд эмас"
+msgstr "Фойдаланиш учун диск қисми мавжуд эмас"
 
 #: fs/partitioning_wizard.pm:129
 #, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
-msgstr "Дискнинг Microsoft Windows® қисмининг ҳажми ҳисобланмоқда"
+msgstr "Дискнинг Microsoft Windows® қисми ҳажми ҳисобланмоқда"
 
 #: fs/partitioning_wizard.pm:148
 #, c-format
@@ -2553,7 +2564,7 @@ msgstr "Дискнинг Windows® қисмидаги бўш жойдан фой
 #: fs/partitioning_wizard.pm:152
 #, c-format
 msgid "Which partition do you want to resize?"
-msgstr "Дискнинг қайси қисмининг ҳажмини ўзгартиришни истайсиз?"
+msgstr "Дискнинг қайси қисми ҳажмини ўзгартиришни истайсиз?"
 
 #: fs/partitioning_wizard.pm:162
 #, c-format
@@ -2562,6 +2573,9 @@ msgid ""
 "computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
 "the Mandriva Linux installation."
 msgstr ""
+"Microsoft Windows® диск қисми дефрагментация қилиниши керак. Илтимос "
+"Microsoft Windows® тизимини юкланг ва ``defrag'' воситасини ишга туширинг ва "
+"яна қайтадан Mandriva Linux тизимини ўрнатиб кўринг."
 
 #: fs/partitioning_wizard.pm:166
 #, c-format
@@ -2585,7 +2599,7 @@ msgstr ""
 "ДИҚҚАТ!\n"
 "\n"
 "\n"
-"Дискнинг танланган Microsoft Windows® қисмининг ҳажми ўзгартирилади.\n"
+"Дискнинг танланган Microsoft Windows® қисми ҳажми ўзгартирилади.\n"
 "\n"
 "\n"
 "Жуда эҳтиёт бўлинг, бу амал жуда хавфли. Агар жараён давомида хато рўй "
@@ -2624,12 +2638,12 @@ msgstr "Ҳажми"
 #: fs/partitioning_wizard.pm:191
 #, c-format
 msgid "Resizing Microsoft Windows® partition"
-msgstr "Дискнинг Microsoft Windows® қисмининг ҳажмини ўзгартириш"
+msgstr "Дискнинг Microsoft Windows® қисми ҳажмини ўзгартириш"
 
 #: fs/partitioning_wizard.pm:196
 #, c-format
 msgid "FAT resizing failed: %s"
-msgstr "Дискнинг FAT қисмининг ҳажмини ўзгартириш муваффақиятсиз тугади: %s"
+msgstr "Дискнинг FAT қисми ҳажмини ўзгартириш муваффақиятсиз тугади: %s"
 
 #: fs/partitioning_wizard.pm:199
 #, c-format
@@ -2637,6 +2651,8 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
+"Диск қисми ҳажми ўзгартирилганда маълумот бутунлиги сақлаб қолиш учун\n"
+"Microsoft Windows® кейинги юкланганда файл тизими текширилади"
 
 #: fs/partitioning_wizard.pm:212
 #, c-format
@@ -2648,12 +2664,12 @@ msgstr ""
 #: fs/partitioning_wizard.pm:217
 #, c-format
 msgid "Remove Microsoft Windows®"
-msgstr "Microsoft Windows®'ни ўчириш"
+msgstr "Microsoft Windows® тизимиини олиб ташлаш"
 
 #: fs/partitioning_wizard.pm:217
 #, c-format
 msgid "Erase and use entire disk"
-msgstr "Бутун дискни ўчириб ишлатиш"
+msgstr "Бутун дискни ўчириб ташлаб фойдаланиш"
 
 #: fs/partitioning_wizard.pm:221
 #, c-format
@@ -2699,7 +2715,7 @@ msgstr "Дискни бўлиш воситаси қуйидаги ечимлар
 #: fs/partitioning_wizard.pm:459
 #, c-format
 msgid "Here is the content of your disk drive "
-msgstr ""
+msgstr "Бу қаттиқ дискнинг таркиби "
 
 #: fs/partitioning_wizard.pm:535
 #, c-format
@@ -2737,7 +2753,7 @@ msgstr "сервер"
 #: fsedit.pm:137
 #, c-format
 msgid "BIOS software RAID detected on disks %s. Activate it?"
-msgstr ""
+msgstr "%s дискда дастурий BIOS RAID топилди. У активлаштирилсинми?"
 
 #: fsedit.pm:247
 #, c-format
@@ -2773,6 +2789,9 @@ msgid ""
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
+"Сиз root (/) сифатида дастурий RAID диск қисмини танладингиз.\n"
+"Ҳеч бир юкловчи уларни /boot диск қисмисиз бошқара олмайди.\n"
+"Илтимос /boot диск қисми қўшилганлигини текшириб кўринг"
 
 #: fsedit.pm:437
 #, c-format
@@ -2807,7 +2826,7 @@ msgstr ""
 #: fsedit.pm:451
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
-msgstr "%s улаш нуқтаси учун кодланган файл тизимини ишлатиб бўлмайди"
+msgstr "%s улаш нуқтаси учун шифрланган файл тизимини ишлатиб бўлмайди"
 
 #: fsedit.pm:516
 #, c-format
@@ -2837,12 +2856,12 @@ msgstr "(E)IDE/ATA контроллерлар"
 #: harddrake/data.pm:92
 #, c-format
 msgid "Card readers"
-msgstr "Карта ўқувчиси"
+msgstr "Картадан ўқиш воситаси"
 
 #: harddrake/data.pm:101
 #, c-format
 msgid "Firewire controllers"
-msgstr "Файервол контроллерлар"
+msgstr "Firewire контроллерлари"
 
 #: harddrake/data.pm:110
 #, c-format
@@ -2872,7 +2891,7 @@ msgstr "SMBus контроллерлар"
 #: harddrake/data.pm:155
 #, c-format
 msgid "Bridges and system controllers"
-msgstr "Кўприклар ва тизимнинг контроллерлари"
+msgstr "Кўприклар ва тизим контроллерлари"
 
 #: harddrake/data.pm:167
 #, c-format
@@ -2887,22 +2906,22 @@ msgstr "Zip"
 #: harddrake/data.pm:193
 #, c-format
 msgid "Hard Disk"
-msgstr "Диск"
+msgstr "Қаттиқ диск"
 
 #: harddrake/data.pm:203
 #, c-format
 msgid "USB Mass Storage Devices"
-msgstr "USB сақлаш ускуналар"
+msgstr "USB маълумот сақлаш ускуналар"
 
 #: harddrake/data.pm:212
 #, c-format
 msgid "CDROM"
-msgstr "Компакт-диск"
+msgstr "CDROM"
 
 #: harddrake/data.pm:222
 #, c-format
 msgid "CD/DVD burners"
-msgstr "Ёзадиган компакт-диск/DVD"
+msgstr "CD/DVD ёзувчилари"
 
 #: harddrake/data.pm:232
 #, c-format
@@ -3013,7 +3032,7 @@ msgstr "Принтер"
 #: harddrake/data.pm:455
 #, c-format
 msgid "Game port controllers"
-msgstr ""
+msgstr "Ўйин порти контроллерлари"
 
 #: harddrake/data.pm:464
 #, c-format
@@ -3028,7 +3047,7 @@ msgstr "Клавиатура"
 #: harddrake/data.pm:488
 #, c-format
 msgid "Tablet and touchscreen"
-msgstr ""
+msgstr "Планшет ва сенсорли экран"
 
 #: harddrake/data.pm:497
 #, c-format
@@ -3038,7 +3057,7 @@ msgstr "Сичқонча"
 #: harddrake/data.pm:512
 #, c-format
 msgid "Biometry"
-msgstr ""
+msgstr "Биометрия"
 
 #: harddrake/data.pm:520
 #, c-format
@@ -3068,27 +3087,27 @@ msgstr "Илтимос кутиб туринг... Мосламалар қўлл�
 #: harddrake/sound.pm:366
 #, c-format
 msgid "Enable PulseAudio"
-msgstr ""
+msgstr "PulseAudio'ни ёқиш"
 
 #: harddrake/sound.pm:370
 #, c-format
 msgid "Enable 5.1 sound with Pulse Audio"
-msgstr ""
+msgstr "Pulse Audio 5.1 товушини ёқиш"
 
 #: harddrake/sound.pm:375
 #, c-format
 msgid "Enable user switching for audio applications"
-msgstr ""
+msgstr "Товуш дастурларида фойдаланувчиларни алмаштиришни ёқиш"
 
 #: harddrake/sound.pm:379
 #, c-format
 msgid "Use Glitch-Free mode"
-msgstr ""
+msgstr "Glitch-Free усулидан фойдаланиш"
 
 #: harddrake/sound.pm:385
 #, c-format
 msgid "Reset sound mixer to default values"
-msgstr ""
+msgstr "Товуш микшери андоза қийматларини  тиклаш"
 
 #: harddrake/sound.pm:390
 #, c-format
@@ -3112,7 +3131,7 @@ msgstr ""
 #: harddrake/sound.pm:405
 #, c-format
 msgid "Sound configuration"
-msgstr "Товушни мослаш"
+msgstr "Товушни созлаш"
 
 #: harddrake/sound.pm:407
 #, c-format
@@ -3177,7 +3196,7 @@ msgstr ""
 #: harddrake/sound.pm:450
 #, c-format
 msgid "No open source driver"
-msgstr ""
+msgstr "Очиқ кодли драйвер мавжуд эмас"
 
 #: harddrake/sound.pm:451
 #, c-format
@@ -3289,7 +3308,7 @@ msgstr "Картанинг модели:"
 #: harddrake/v4l.pm:479
 #, c-format
 msgid "Tuner type:"
-msgstr ""
+msgstr "Тюнер тури:"
 
 #: interactive.pm:128 interactive.pm:549 interactive/curses.pm:263
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
@@ -3357,12 +3376,12 @@ msgstr "Бундай файл мавжуд эмас"
 #: interactive/gtk.pm:594
 #, c-format
 msgid "Beware, Caps Lock is enabled"
-msgstr ""
+msgstr "Caps Lock босилганига эътибор беринг"
 
 #: interactive/stdio.pm:29 interactive/stdio.pm:154
 #, c-format
 msgid "Bad choice, try again\n"
-msgstr "Нотўғри танлов, бошқадан уриниб кўринг\n"
+msgstr "Нотўғри танлов, қайтадан уриниб кўринг\n"
 
 #: interactive/stdio.pm:30 interactive/stdio.pm:155
 #, c-format
@@ -3711,7 +3730,7 @@ msgstr "Чех Республикаси"
 #: lang.pm:265 mirror.pm:22 timezone.pm:238
 #, c-format
 msgid "Germany"
-msgstr "Олмония"
+msgstr "Германия"
 
 #: lang.pm:266
 #, c-format
@@ -3726,12 +3745,12 @@ msgstr "Дания"
 #: lang.pm:268
 #, c-format
 msgid "Dominica"
-msgstr "Доминика"
+msgstr "Доминикан"
 
 #: lang.pm:269
 #, c-format
 msgid "Dominican Republic"
-msgstr "Доминикана Республикаси"
+msgstr "Доминикан Республикаси"
 
 #: lang.pm:270
 #, c-format
@@ -3776,7 +3795,7 @@ msgstr "Эфиопия"
 #: lang.pm:278 mirror.pm:20 timezone.pm:236
 #, c-format
 msgid "Finland"
-msgstr "Финляндия"
+msgstr "Финландия"
 
 #: lang.pm:279
 #, c-format
@@ -3821,7 +3840,7 @@ msgstr "Гренада"
 #: lang.pm:287
 #, c-format
 msgid "Georgia"
-msgstr "Гуржистон"
+msgstr "Грузия"
 
 #: lang.pm:288
 #, c-format
@@ -4026,7 +4045,7 @@ msgstr "Корея"
 #: lang.pm:328
 #, c-format
 msgid "Kuwait"
-msgstr "Кувайт"
+msgstr "Қувайт"
 
 #: lang.pm:329
 #, c-format
@@ -4136,7 +4155,7 @@ msgstr "Мянмар"
 #: lang.pm:350
 #, c-format
 msgid "Mongolia"
-msgstr "Муғилистон"
+msgstr "Мўғилистон"
 
 #: lang.pm:351
 #, c-format
@@ -4351,7 +4370,7 @@ msgstr "Россия"
 #: lang.pm:393
 #, c-format
 msgid "Rwanda"
-msgstr "Рванда"
+msgstr "Руанда"
 
 #: lang.pm:394
 #, c-format
@@ -4653,8 +4672,7 @@ msgstr ""
 msgid "The bootloader can't handle /boot on multiple physical volumes"
 msgstr ""
 
-#: messages.pm:11
-#, fuzzy, c-format
+#: messages.pm:11, c-format
 msgid ""
 "Introduction\n"
 "\n"
@@ -5053,12 +5071,12 @@ msgstr ""
 #: modules/interactive.pm:19
 #, c-format
 msgid "This driver has no configuration parameter!"
-msgstr ""
+msgstr "Ушбу драйверда созлаш параметрлари йўқ!"
 
 #: modules/interactive.pm:22
 #, c-format
 msgid "Module configuration"
-msgstr "Модулни мослаш"
+msgstr "Модулни созлаш"
 
 #: modules/interactive.pm:22
 #, c-format
@@ -5115,7 +5133,7 @@ msgstr "%s картаси (%s) учун драйвер ўрнатилмоқда"
 #: modules/interactive.pm:100
 #, c-format
 msgid "Configuring Hardware"
-msgstr ""
+msgstr "Асбоб-ускуналарни созлаш"
 
 #: modules/interactive.pm:111
 #, c-format
@@ -5138,7 +5156,7 @@ msgstr ""
 #: modules/interactive.pm:119
 #, c-format
 msgid "Module options:"
-msgstr "Модулнинг мосламалари:"
+msgstr "Модулнинг параметрлари:"
 
 #. -PO: the %s is the driver type (scsi, network, sound,...)
 #: modules/interactive.pm:132
@@ -5180,12 +5198,12 @@ msgstr ""
 #: mygtk2.pm:1540 mygtk2.pm:1541
 #, c-format
 msgid "Password is trivial to guess"
-msgstr ""
+msgstr "Махфий сўз жуда содда"
 
 #: mygtk2.pm:1542
 #, c-format
 msgid "Password should resist to basic attacks"
-msgstr ""
+msgstr "Махфий сўз оддий ҳужумларга чидамли бўлиши керак"
 
 #: mygtk2.pm:1543 mygtk2.pm:1544, c-format
 msgid "Password seems secure"
@@ -5199,7 +5217,7 @@ msgstr "улаш муваффақиятсиз тугади: "
 #: partition_table.pm:523
 #, c-format
 msgid "Extended partition not supported on this platform"
-msgstr ""
+msgstr "Ушбу платформада кенгайтирилган диск қисми қўлланилмайди"
 
 #: partition_table.pm:541
 #, c-format
@@ -5221,29 +5239,29 @@ msgstr ""
 #: pkgs.pm:252 pkgs.pm:255 pkgs.pm:264
 #, c-format
 msgid "Unused packages removal"
-msgstr ""
+msgstr "Ишлатилмайдиган пакетларни олиб ташлаш"
 
 #: pkgs.pm:252
 #, c-format
 msgid "Finding unused hardware packages..."
-msgstr ""
+msgstr "Ишлатилмайдиган ускуна пакетлари қидирилмоқда..."
 
 #: pkgs.pm:255
 #, c-format
 msgid "Finding unused localization packages..."
-msgstr ""
+msgstr "Ишлатилмайдиган маҳаллийлаштириш пакетлари қидирилмоқда..."
 
 #: pkgs.pm:265
 #, c-format
 msgid ""
 "We have detected that some packages are not needed for your system "
 "configuration."
-msgstr ""
+msgstr "Баъзи пакетлар жорий тизим мосламаси учун керак эмас деб аниқланди."
 
 #: pkgs.pm:266
 #, c-format
 msgid "We will remove the following packages, unless you choose otherwise:"
-msgstr ""
+msgstr "Агар ҳеч нарсани ўзгартирмасангиз, қуйидаги пакетлар олиб ташланади:"
 
 #: pkgs.pm:269 pkgs.pm:270, c-format
 msgid "Unused hardware support"
@@ -5252,12 +5270,12 @@ msgstr "Фойдаланилмайдиган ускуналар қўлланув
 #: pkgs.pm:273 pkgs.pm:274
 #, c-format
 msgid "Unused localization"
-msgstr ""
+msgstr "Ишлатилмайдиган маҳаллийлаштириш"
 
 #: raid.pm:42
 #, c-format
 msgid "Can not add a partition to _formatted_ RAID %s"
-msgstr ""
+msgstr "_Форматланган_ RAID %s га диск қисмини қўшиб бўлмади"
 
 #: raid.pm:161
 #, c-format
@@ -5272,17 +5290,17 @@ msgstr "/usr/share/sane/firmware директориясини яратиб бў�
 #: scanner.pm:107
 #, c-format
 msgid "Could not create link /usr/share/sane/%s!"
-msgstr "/usr/share/sane/%s боғини яратиб бўлмади!"
+msgstr "/usr/share/sane/%s боғламасини яратиб бўлмади!"
 
 #: scanner.pm:114
 #, c-format
 msgid "Could not copy firmware file %s to /usr/share/sane/firmware!"
-msgstr ""
+msgstr "%s прошивка файлидан  /usr/share/sane/firmware га нусха олиб бўлмади!"
 
 #: scanner.pm:121
 #, c-format
 msgid "Could not set permissions of firmware file %s!"
-msgstr ""
+msgstr "%s прошивка файли учун ҳуқуқларни ўрнатиб бўлмаяпти!"
 
 #: scanner.pm:200
 #, c-format
@@ -5292,27 +5310,27 @@ msgstr "Scannerdrake"
 #: scanner.pm:201
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
-msgstr ""
+msgstr "Сканер(лар)ни бўлиш учун фойдаланиладиган пакетларни ўрнатиб бўлмади."
 
 #: scanner.pm:202
 #, c-format
 msgid "Your scanner(s) will not be available for non-root users."
-msgstr ""
+msgstr "Сканер(лар) учун оддий фойдаланувчиларга рухсат йўқ."
 
 #: security/help.pm:11
 #, c-format
 msgid "Accept bogus IPv4 error messages."
-msgstr ""
+msgstr "bogus IPv4 хатолик хабарини қабул қилиш."
 
 #: security/help.pm:13
 #, c-format
 msgid "Accept broadcasted icmp echo."
-msgstr ""
+msgstr "Бродкаст icmp эхо пакетини қабул қилиш."
 
 #: security/help.pm:15
 #, c-format
 msgid "Accept icmp echo."
-msgstr ""
+msgstr "icmp эхо пакетини қабул қилиш."
 
 #: security/help.pm:17
 #, c-format
@@ -5338,18 +5356,18 @@ msgstr "Терминал орқали компьютерни ўчириб-ёқи
 #: security/help.pm:29
 #, c-format
 msgid "Allow remote root login."
-msgstr "Фойдаланувчи root масофадан киришига рухсат этиш."
+msgstr "Root фойдаланувчисига масофадан киришига рухсат этиш."
 
 #: security/help.pm:31
 #, c-format
 msgid "Allow direct root login."
-msgstr "Root тўғридан-тўғри киришига рухсат этиш."
+msgstr "Root фойдаланувчисига тўғридан-тўғри киришига рухсат этиш."
 
 #: security/help.pm:33
 #, c-format
 msgid ""
 "Allow the list of users on the system on display managers (kdm and gdm)."
-msgstr ""
+msgstr "Ойна бошқарувчиларида (kdm ва gdm) фойдаланувчилар рўйхатини чиқариш."
 
 #: security/help.pm:35
 #, c-format
@@ -5359,6 +5377,10 @@ msgid ""
 "\n"
 "See pam_xauth(8) for more details.'"
 msgstr ""
+"Root фойдаланувчисидан бошқасига ўтганда\n"
+"дисплейни экспорт қилишга рухсат бериш.\n"
+"\n"
+"Тафсилот учун pam_xauth(8) га қаранг.'"
 
 #: security/help.pm:40
 #, c-format
@@ -5371,6 +5393,13 @@ msgid ""
 "\n"
 "- \"None\" (no connection)."
 msgstr ""
+"X уланишга рухсат бериш:\n"
+"\n"
+"- \"Ҳаммаси\" (барча уланишларга рухсат берилади),\n"
+"\n"
+"- \"Локал\" (фақат локал компьютерлардан уланишга рухсат),\n"
+"\n"
+"- \"Йўқ\" (уланиш йўқ)."
 
 #: security/help.pm:48
 #, c-format
@@ -6517,6 +6546,8 @@ msgid ""
 "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
 "usbtable] [--dynamic=dev]"
 msgstr ""
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 
 #: standalone.pm:118
 #, c-format
@@ -6525,6 +6556,9 @@ msgid ""
 "       XFdrake [--noauto] monitor\n"
 "       XFdrake resolution"
 msgstr ""
+" [everything]\n"
+"       XFdrake [--noauto] монитор\n"
+"       XFdrake ўлчам"
 
 #: standalone.pm:154
 #, c-format
