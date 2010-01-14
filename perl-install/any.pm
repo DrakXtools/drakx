@@ -411,7 +411,7 @@ sub setupBootloader__general {
             { text => N("Enable SMP"), val => \$enable_smp, type => 'bool', advanced => 1 },
             { text => N("Enable APIC"), val => \$enable_apic, type => 'bool', advanced => 1, disabled => sub { !$enable_lapic } }, 
             { text => N("Enable Local APIC"), val => \$enable_lapic, type => 'bool', advanced => 1 },
-		if_($security >= 4 || $b->{password} || $b->{restricted},
+		if_($security >= 2 || $b->{password} || $b->{restricted},
 	    { label => N("Password"), val => \$b->{password}, hidden => 1,
 	      validate => sub { 
 		  my $ok = $b->{password} eq $b->{password2} or $in->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]);
