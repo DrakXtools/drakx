@@ -59,7 +59,9 @@ if ($is_bootloader_mode || any { /^--splash$/ } @ARGV) {
 
 if ($is_bootloader_mode) {
     $::isWizard = 1;
-    eval { any::setupBootloaderUntilInstalled($in, $bootloader, $all_hds, $fstab, $ENV{SECURE_LEVEL}) };
+    require security::level;
+    my $level = security::level::from_string(security::level::get());
+    eval { any::setupBootloaderUntilInstalled($in, $bootloader, $all_hds, $fstab, $level) };
     die if $@ && $@ !~ /^wizcancel/;
     $in->exit(0);
 }
