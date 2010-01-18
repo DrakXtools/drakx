@@ -19,7 +19,7 @@ use feature 'state';
 #-#####################################################################################
 #- Globals
 #-#####################################################################################
-my (%serialprobe, %eide_hds);
+my (%serialprobe, %hd_vendors);
 
 #-######################################################################################
 #- Functions
@@ -235,9 +235,9 @@ sub getSCSI() {
 	  $raw_type =~ /Scanner|Processor/ && 'scanner';
 
 	my ($vendor, $model) = ($get->('vendor'), $get->('model'));
-	foreach my $name (keys %eide_hds) {
+	foreach my $name (keys %hd_vendors) {
 	  next if !$name;
-	  ($vendor, $model) = ($eide_hds{$name}, $2) if $model =~ /^$name(-|\s)*(.*)/;
+	  ($vendor, $model) = ($hd_vendors{$name}, $2) if $model =~ /^$name(-|\s)*(.*)/;
 	};
 	push @l, { info =>  $vendor . ' ' . $model, host => $host, channel => $channel, id => $id, lun => $lun, 
 	  description => join('|', $vendor, $model),
@@ -262,7 +262,7 @@ sub getSCSI() {
 }
 
 
-%eide_hds = (
+%hd_vendors = (
     "ASUS" => "Asus",
     "CD-ROM CDU" => "Sony",
     "CD-ROM Drive/F5D" => "ASUSTeK",
@@ -305,8 +305,8 @@ sub getIDE() {
 
 	my $num = ord(($d =~ /(.)$/)[0]) - ord 'a';
 	my ($vendor, $model) = map { 
-	    if_($info =~ /^$_(-|\s)*(.*)/, $eide_hds{$_}, $2);
-	} keys %eide_hds;
+	    if_($info =~ /^$_(-|\s)*(.*)/, $hd_vendors{$_}, $2);
+	} keys %hd_vendors;
 
 	my $host = $num;
 	($host, my $id) = divide($host, 2);
