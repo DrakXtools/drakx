@@ -218,7 +218,7 @@ sub getSCSI() {
         }
 	warn("cannot get info for device ($_)"), next if !$device;
 
-	my $usb_dir = readlink("$dir") =~ m!/usb! && "$dir/../../../..";
+	my $usb_dir = readlink($dir) =~ m!/usb! && "$dir/../../../..";
 	my $get_usb = sub { chomp_(cat_("$usb_dir/$_[0]")) };
 
 	my $get = sub {
@@ -238,7 +238,7 @@ sub getSCSI() {
 	foreach my $name (keys %hd_vendors) {
 	  next if !$name;
 	  ($vendor, $model) = ($hd_vendors{$name}, $2) if $model =~ /^$name(-|\s)*(.*)/;
-	};
+	}	
 	push @l, { info =>  $vendor . ' ' . $model, host => $host, channel => $channel, id => $id, lun => $lun, 
 	  description => join('|', $vendor, $model),
 	  bus => 'SCSI', media_type => $media_type, device => $device,
@@ -717,7 +717,7 @@ sub get_ids_from_sysfs_device {
         if ($bus eq 'pci') {
             my $device = basename(readlink $dev_path);
             my @ids = $device =~ /^(.{4}):(.{2}):(.{2})\.(.+)$/;
-            @{$sysfs_ids}{qw(pci_domain pci_bus pci_device pci_function)} = map { hex($_) } @ids if @ids;
+            @$sysfs_ids{qw(pci_domain pci_bus pci_device pci_function)} = map { hex($_) } @ids if @ids;
         }
     }
     $sysfs_ids;
