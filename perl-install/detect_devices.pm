@@ -235,6 +235,10 @@ sub getSCSI() {
 	  $raw_type =~ /Scanner|Processor/ && 'scanner';
 
 	my ($vendor, $model) = ($get->('vendor'), $get->('model'));
+	foreach my $name (keys %eide_hds) {
+	  next if !$name;
+	  ($vendor, $model) = ($eide_hds{$name}, $2) if $model =~ /^$name(-|\s)*(.*)/;
+	};
 	push @l, { info =>  $vendor . ' ' . $model, host => $host, channel => $channel, id => $id, lun => $lun, 
 	  description => join('|', $vendor, $model),
 	  bus => 'SCSI', media_type => $media_type, device => $device,
