@@ -234,8 +234,9 @@ sub getSCSI() {
 	my $media_type = ${{ st => 'tape', sr => 'cdrom', sd => 'hd', sg => 'generic' }}{substr($device, 0, 2)} ||
 	  $raw_type =~ /Scanner|Processor/ && 'scanner';
 
-	push @l, { info =>  $get->('vendor') . ' ' . $get->('model'), host => $host, channel => $channel, id => $id, lun => $lun, 
-	  description => join('|', $get->('vendor'), $get->('model')),
+	my ($vendor, $model) = ($get->('vendor'), $get->('model'));
+	push @l, { info =>  $vendor . ' ' . $model, host => $host, channel => $channel, id => $id, lun => $lun, 
+	  description => join('|', $vendor, $model),
 	  bus => 'SCSI', media_type => $media_type, device => $device,
 	    $usb_dir ? (
 	  usb_vendor => hex($get_usb->('idVendor')), usb_id => hex($get_usb->('idProduct')),
