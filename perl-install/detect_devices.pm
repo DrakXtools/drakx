@@ -264,6 +264,7 @@ sub getSCSI() {
 
 %hd_vendors = (
     "ASUS" => "Asus",
+    "ATA Maxtor" => "Maxtor",
     "CD-ROM CDU" => "Sony",
     "CD-ROM Drive/F5D" => "ASUSTeK",
     "Compaq" => "Compaq",
