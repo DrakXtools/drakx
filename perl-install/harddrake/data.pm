@@ -101,7 +101,7 @@ our @tree =
       string => N("Firewire controllers"),
       icon => "usb.png",
       configurator => "",
-      detector => sub { f(grep { $_->{driver} =~ /ohci1394/ } @devices) },
+      detector => sub { f(grep { $_->{driver} =~ /firewire_ohci|ohci1394/ } @devices) },
       checked_on_boot => 1,
      },
 
