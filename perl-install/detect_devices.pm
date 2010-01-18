@@ -235,10 +235,10 @@ sub getSCSI() {
 	  $raw_type =~ /Scanner|Processor/ && 'scanner';
 
 	my ($vendor, $model) = ($get->('vendor'), $get->('model'));
-	foreach my $name (keys %hd_vendors) {
-	  next if !$name;
-	  ($vendor, $model) = ($hd_vendors{$name}, $2) if $model =~ /^$name(-|\s)*(.*)/;
-	}	
+	my ($v, $m) = _get_hd_vendor($model);
+	if ($v && $v) {
+            ($vendor, $model) = ($v, $m);
+	}
 	push @l, { info =>  $vendor . ' ' . $model, host => $host, channel => $channel, id => $id, lun => $lun, 
 	  description => join('|', $vendor, $model),
 	  bus => 'SCSI', media_type => $media_type, device => $device,
@@ -290,6 +290,15 @@ sub getSCSI() {
     "WDC" => "Western Digital Corp.",
 );
 
+# return ($vendor, $model)
+sub _get_hd_vendor {
+    my ($info) = @_;
+    foreach my $name (keys %hd_vendors) {
+        next if !$name;
+        return ($hd_vendors{$name}, $2) if $info =~ /^$name(-|\s)*(.*)/;
+    }
+}
+
 
 sub getIDE() {
     my @idi;
@@ -305,9 +314,7 @@ sub getIDE() {
 	my $info = chomp_(cat_("$d/model")) || "(none)";
 
 	my $num = ord(($d =~ /(.)$/)[0]) - ord 'a';
-	my ($vendor, $model) = map { 
-	    if_($info =~ /^$_(-|\s)*(.*)/, $hd_vendors{$_}, $2);
-	} keys %hd_vendors;
+	my ($vendor, $model) = _get_hd_vendor($info);
 
 	my $host = $num;
 	($host, my $id) = divide($host, 2);
