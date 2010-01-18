@@ -297,6 +297,7 @@ sub _get_hd_vendor {
         next if !$name;
         return ($hd_vendors{$name}, $2) if $info =~ /^$name(-|\s)*(.*)/;
     }
+    return ("Hitachi", $info) if $info =~ /^HD[ST][0-9]/;
 }
 
 
