@@ -121,7 +121,8 @@ sub complete_usb_storage_info {
 	if (my $e = find { !$_->{found} && $_->{usb_vendor} == $usb->{vendor} && $_->{usb_id} == $usb->{id} } @usb) {
          my $host = get_sysfs_usbpath_for_block($e->{device});
          if ($host) {
-             $e->{info} = chomp_(cat_("/sys/block/$host/../serial"));
+             my $file = "/sys/block/$host/../serial";
+             $e->{info} = chomp_(cat_($file)) if -e $file;
              $e->{usb_description} = join('|', 
                                           chomp_(cat_("/sys/block/$host/../manufacturer")),
                                           chomp_(cat_("/sys/block/$host/../product")));
