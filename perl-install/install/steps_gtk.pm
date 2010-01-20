@@ -611,7 +611,7 @@ sub installPackages {
 	    #- $amount and $total are used to return number of package and total size.
 	    $nb = $amount;
 	    $total_size = $total; $current_total_size = 0;
-	    $o->{install_start_time} = time();
+	    $o->{install_start_time} = 0;
 	    mygtk2::gtkadd($pkg_log_widget, text => P("%d package", "%d packages", $nb, $nb));
 	    $w->flush;
 	} elsif ($type eq 'open') {
@@ -631,6 +631,7 @@ sub installPackages {
 
 	    $w->flush;
 	} elsif ($type eq 'inst' && $subtype eq 'progress') {
+	    $o->{install_start_time} = time() unless $o->{install_start_time};
 	    gtkval_modify(\$pkg_progress, $total ? $amount / $total : 0);
 
 	    my $dtime = time() - $o->{install_start_time};
