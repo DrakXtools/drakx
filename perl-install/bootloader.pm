@@ -942,7 +942,7 @@ sub _sanitize_ver {
 	$name = join(' ', grep { $_ } $name, 'multimedia');
     }
 
-    $v =~ s!md[kv]$!!;
+    $v =~ s!(md[kv]|mnb)$!!;
     $v =~ s!-0\.(pre|rc)(\d+)\.!$1$2-!;
 
     my $return = join(' ', grep { $_ } $name, short_ext($kernel_str), $v);
