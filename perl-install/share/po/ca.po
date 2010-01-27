@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
-"POT-Creation-Date: 2009-10-07 13:57+0200\n"
+"POT-Creation-Date: 2010-01-27 17:55+0100\n"
 "PO-Revision-Date: 2005-09-13 23:24+0200\n"
 "Last-Translator: Albert Astals Cid <astals11@terra.es>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -17,10 +17,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 
-#: any.pm:252 any.pm:910 diskdrake/interactive.pm:594
-#: diskdrake/interactive.pm:794 diskdrake/interactive.pm:838
-#: diskdrake/interactive.pm:942 diskdrake/interactive.pm:1196
-#: diskdrake/interactive.pm:1248 do_pkgs.pm:241 do_pkgs.pm:287
+#: any.pm:252 any.pm:929 diskdrake/interactive.pm:597
+#: diskdrake/interactive.pm:802 diskdrake/interactive.pm:846
+#: diskdrake/interactive.pm:950 diskdrake/interactive.pm:1204
+#: diskdrake/interactive.pm:1256 do_pkgs.pm:241 do_pkgs.pm:287
 #: harddrake/sound.pm:303 interactive.pm:587 pkgs.pm:281
 #, c-format
 msgid "Please wait"
@@ -173,7 +173,7 @@ msgstr "Habilita l'ACPI"
 msgid "Enable Local APIC"
 msgstr "Habilita l'ACPI"
 
-#: any.pm:415 any.pm:855 any.pm:871 authentication.pm:250
+#: any.pm:415 any.pm:867 any.pm:883 authentication.pm:250
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
@@ -184,7 +184,7 @@ msgstr "Contrasenya"
 msgid "The passwords do not match"
 msgstr "Les contrasenyes no coincideixen"
 
-#: any.pm:417 authentication.pm:261 diskdrake/interactive.pm:1420
+#: any.pm:417 authentication.pm:261 diskdrake/interactive.pm:1428
 #, c-format
 msgid "Please try again"
 msgstr "Si us plau, torneu-ho a intentar"
@@ -195,7 +195,7 @@ msgid "You can not use a password with %s"
 msgstr ""
 "No podeu utilitzar un sistema d'arxius xifrat per al punt de muntatge %s"
 
-#: any.pm:421 any.pm:857 any.pm:873 authentication.pm:251
+#: any.pm:421 any.pm:869 any.pm:885 authentication.pm:251
 #, c-format
 msgid "Password (again)"
 msgstr "Contrasenya (un altre cop)"
@@ -288,7 +288,7 @@ msgstr "Initrd"
 msgid "Network profile"
 msgstr "Perfil de xarxa"
 
-#: any.pm:532 any.pm:537 any.pm:539 diskdrake/interactive.pm:404
+#: any.pm:532 any.pm:537 any.pm:539 diskdrake/interactive.pm:407
 #, c-format
 msgid "Label"
 msgstr "Etiqueta"
@@ -362,47 +362,47 @@ msgstr ""
 "Aquestes són les diferents entrades en el menú d'arrencada.\n"
 "Podeu afegir-ne més o canviar-ne les existents."
 
-#: any.pm:816
+#: any.pm:827
 #, c-format
 msgid "access to X programs"
 msgstr "accés a programes X"
 
-#: any.pm:817
+#: any.pm:828
 #, c-format
 msgid "access to rpm tools"
 msgstr "accés a les eines rpm"
 
-#: any.pm:818
+#: any.pm:829
 #, c-format
 msgid "allow \"su\""
 msgstr "permet \"su\""
 
-#: any.pm:819
+#: any.pm:830
 #, c-format
 msgid "access to administrative files"
 msgstr "accés a fitxers administratius"
 
-#: any.pm:820
+#: any.pm:831
 #, c-format
 msgid "access to network tools"
 msgstr "accés a les eines de xarxa"
 
-#: any.pm:821
+#: any.pm:832
 #, c-format
 msgid "access to compilation tools"
 msgstr "accés a les eines de compilació"
 
-#: any.pm:827
+#: any.pm:838
 #, c-format
 msgid "(already added %s)"
 msgstr "(ja s'ha afegit %s)"
 
-#: any.pm:833
+#: any.pm:844
 #, c-format
 msgid "Please give a user name"
 msgstr "Si us plau, introduïu un nom d'usuari"
 
-#: any.pm:834
+#: any.pm:845
 #, fuzzy, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
@@ -410,146 +410,151 @@ msgid ""
 msgstr ""
 "El nom d'usuari només pot contenir lletres en minúscula, números, '-' i '_'"
 
-#: any.pm:835
+#: any.pm:846
 #, c-format
 msgid "The user name is too long"
 msgstr "El nom d'usuari és massa llarg"
 
-#: any.pm:836
+#: any.pm:847
 #, c-format
 msgid "This user name has already been added"
 msgstr "Aquest nom d'usuari ja s'ha afegit"
 
-#: any.pm:842 any.pm:875
+#: any.pm:853 any.pm:887
 #, c-format
 msgid "User ID"
 msgstr "ID d'usuari"
 
-#: any.pm:842 any.pm:876
+#: any.pm:853 any.pm:888
 #, c-format
 msgid "Group ID"
 msgstr "ID de grup"
 
-#: any.pm:843
+#: any.pm:854
 #, c-format
 msgid "%s must be a number"
 msgstr "%s ha de ser un número"
 
-#: any.pm:844
+#: any.pm:855
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
 msgstr "%s hauria de ser superior a 500. Continuar tot i això?"
 
-#: any.pm:848
+#: any.pm:859
 #, fuzzy, c-format
 msgid "User management"
 msgstr "Nom d'usuari"
 
-#: any.pm:854 authentication.pm:237
+#: any.pm:865
+#, c-format
+msgid "Enable guest account"
+msgstr ""
+
+#: any.pm:866 authentication.pm:237
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "Estableix la contrasenya de l'administrador (root)"
 
-#: any.pm:859
+#: any.pm:871
 #, fuzzy, c-format
 msgid "Enter a user"
 msgstr ""
 "Introduïu un usuari\n"
 "%s"
 
-#: any.pm:861
+#: any.pm:873
 #, c-format
 msgid "Icon"
 msgstr "Icona"
 
-#: any.pm:864
+#: any.pm:876
 #, c-format
 msgid "Real name"
 msgstr "Nom real"
 
-#: any.pm:869
+#: any.pm:881
 #, c-format
 msgid "Login name"
 msgstr "Nom d'accés"
 
-#: any.pm:874
+#: any.pm:886
 #, c-format
 msgid "Shell"
 msgstr "Shell"
 
-#: any.pm:910
+#: any.pm:929
 #, c-format
 msgid "Please wait, adding media..."
 msgstr "Si us plau espereu, s'estan afegint fonts..."
 
-#: any.pm:940 security/l10n.pm:14
+#: any.pm:959 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "Entrada automàtica"
 
-#: any.pm:941
+#: any.pm:960
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr ""
 "Puc configurar el vostre ordinador de manera que entri automàticament amb un "
 "nom d'usuari."
 
-#: any.pm:942
+#: any.pm:961
 #, c-format
 msgid "Use this feature"
 msgstr "Utilitza aquesta característica"
 
-#: any.pm:943
+#: any.pm:962
 #, c-format
 msgid "Choose the default user:"
 msgstr "Escolliu l'usuari per defecte:"
 
-#: any.pm:944
+#: any.pm:963
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Escolliu el gestor de finestres per executar:"
 
-#: any.pm:955 any.pm:975 any.pm:1048
+#: any.pm:974 any.pm:994 any.pm:1067
 #, c-format
 msgid "Release Notes"
 msgstr ""
 
-#: any.pm:982 any.pm:1340 interactive/gtk.pm:819
+#: any.pm:1001 any.pm:1355 interactive/gtk.pm:819
 #, c-format
 msgid "Close"
 msgstr "Tanca"
 
-#: any.pm:1034
+#: any.pm:1053
 #, c-format
 msgid "License agreement"
 msgstr "Acord de llicència"
 
-#: any.pm:1036 diskdrake/dav.pm:26
+#: any.pm:1055 diskdrake/dav.pm:26
 #, c-format
 msgid "Quit"
 msgstr "Surt"
 
-#: any.pm:1043
+#: any.pm:1062
 #, fuzzy, c-format
 msgid "Do you accept this license ?"
 msgstr "En teniu una altra?"
 
-#: any.pm:1044
+#: any.pm:1063
 #, c-format
 msgid "Accept"
 msgstr "Accepta"
 
-#: any.pm:1044
+#: any.pm:1063
 #, c-format
 msgid "Refuse"
 msgstr "Rebutja"
 
-#: any.pm:1070 any.pm:1136
+#: any.pm:1089 any.pm:1151
 #, c-format
 msgid "Please choose a language to use"
 msgstr "Si us plau, trieu un idioma per utilitzar"
 
-#: any.pm:1099
+#: any.pm:1117
 #, c-format
 msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
@@ -560,77 +565,77 @@ msgstr ""
 "els llenguatges que vulgueu instal·lar. Estaran disponibles\n"
 "quan reinicieu el sistema, després que la instal·lació s'hagi completat."
 
-#: any.pm:1102
+#: any.pm:1120
 #, c-format
 msgid "Multi languages"
 msgstr ""
 
-#: any.pm:1113 any.pm:1145
+#: any.pm:1129 any.pm:1160
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr ""
 
-#: any.pm:1115
+#: any.pm:1130
 #, c-format
 msgid "All languages"
 msgstr "Tots els idiomes"
 
-#: any.pm:1137
+#: any.pm:1152
 #, c-format
 msgid "Language choice"
 msgstr "Tria d'idioma"
 
-#: any.pm:1191
+#: any.pm:1206
 #, c-format
 msgid "Country / Region"
 msgstr "País / Regió"
 
-#: any.pm:1192
+#: any.pm:1207
 #, c-format
 msgid "Please choose your country"
 msgstr "Si us plau, seleccioneu el vostre país"
 
-#: any.pm:1194
+#: any.pm:1209
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Aquesta és la llista completa de països"
 
-#: any.pm:1195
+#: any.pm:1210
 #, c-format
 msgid "Other Countries"
 msgstr "Altres països"
 
-#: any.pm:1195 interactive.pm:488 interactive/gtk.pm:445
+#: any.pm:1210 interactive.pm:488 interactive/gtk.pm:445
 #, c-format
 msgid "Advanced"
 msgstr "Avançat"
 
-#: any.pm:1201
+#: any.pm:1216
 #, c-format
 msgid "Input method:"
 msgstr "Mètode d'entrada:"
 
-#: any.pm:1204
+#: any.pm:1219
 #, c-format
 msgid "None"
 msgstr "Cap"
 
-#: any.pm:1285
+#: any.pm:1300
 #, c-format
 msgid "No sharing"
 msgstr "No es comparteix"
 
-#: any.pm:1285
+#: any.pm:1300
 #, c-format
 msgid "Allow all users"
 msgstr "Permet tots els usuaris"
 
-#: any.pm:1285
+#: any.pm:1300
 #, c-format
 msgid "Custom"
 msgstr "Personalitzada"
 
-#: any.pm:1289
+#: any.pm:1304
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -645,7 +650,7 @@ msgstr ""
 "\n"
 "\"Personalitzat\" permet configurar cada usuari per separat.\n"
 
-#: any.pm:1301
+#: any.pm:1316
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
@@ -654,7 +659,7 @@ msgstr ""
 "NFS: el sistema de compartició de fitxers tradicional de Unix, amb menys "
 "suport a Mac i Windows."
 
-#: any.pm:1304
+#: any.pm:1319
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
@@ -663,18 +668,18 @@ msgstr ""
 "SMB: un sistema de compartició de fitxers usat per Windows, Mac OS X i "
 "bastants sistemes Linux moderns."
 
-#: any.pm:1312
+#: any.pm:1327
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Podeu exportar utilitzant NFS o SMB. Seleccioneu quin voleu utilitzar."
 
-#: any.pm:1340
+#: any.pm:1355
 #, c-format
 msgid "Launch userdrake"
 msgstr "Executa userdrake"
 
-#: any.pm:1342
+#: any.pm:1357
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -683,56 +688,56 @@ msgstr ""
 "La compartició per usuari utilitza el grup \"fileshare\".\n"
 "Podeu utilitzar userdrake per a afegir un usuari a aquest grup."
 
-#: any.pm:1448
+#: any.pm:1463
 #, fuzzy, c-format
 msgid ""
 "You need to logout and back in again for changes to take effect. Press OK to "
 "logout now."
 msgstr "Heu de sortir i tornar a entrar per tal que els canvis tinguin efecte"
 
-#: any.pm:1452
+#: any.pm:1467
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr "Heu de sortir i tornar a entrar per tal que els canvis tinguin efecte"
 
-#: any.pm:1487
+#: any.pm:1502
 #, c-format
 msgid "Timezone"
 msgstr "Fus horari"
 
-#: any.pm:1487
+#: any.pm:1502
 #, c-format
 msgid "Which is your timezone?"
 msgstr "En quina zona horària us trobeu?"
 
-#: any.pm:1510 any.pm:1512
+#: any.pm:1525 any.pm:1527
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr ""
 
-#: any.pm:1513
+#: any.pm:1528
 #, c-format
 msgid "What is the best time?"
 msgstr ""
 
 #
-#: any.pm:1517
+#: any.pm:1532
 #, fuzzy, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "El rellotge del vostre ordinador està regulat per GMT"
 
 #
-#: any.pm:1518
+#: any.pm:1533
 #, fuzzy, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "El rellotge del vostre ordinador està regulat per GMT"
 
-#: any.pm:1520
+#: any.pm:1535
 #, c-format
 msgid "NTP Server"
 msgstr "Servidor NTP"
 
-#: any.pm:1521
+#: any.pm:1536
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Sincronització automàtica de la hora (usant NTP)"
@@ -1062,7 +1067,7 @@ msgstr "Contrasenya de l'administrador del domini"
 # so use only 7bit for this message (and do transliteration or
 # leave it in English, as it is the best for your language)
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: bootloader.pm:960
+#: bootloader.pm:964
 #, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
@@ -1077,42 +1082,42 @@ msgstr ""
 "per arrencar en el sistema operatiu predeterminat.\n"
 "\n"
 
-#: bootloader.pm:1132
+#: bootloader.pm:1141
 #, c-format
 msgid "LILO with text menu"
 msgstr "LILO amb menú de text"
 
-#: bootloader.pm:1133
+#: bootloader.pm:1142
 #, c-format
 msgid "GRUB with graphical menu"
 msgstr "GRUB amb menú gràfic"
 
-#: bootloader.pm:1134
+#: bootloader.pm:1143
 #, c-format
 msgid "GRUB with text menu"
 msgstr "GRUB amb menú de text"
 
-#: bootloader.pm:1135
+#: bootloader.pm:1144
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
 
-#: bootloader.pm:1136
+#: bootloader.pm:1145
 #, c-format
 msgid "SILO"
 msgstr "SILO"
 
-#: bootloader.pm:1218
+#: bootloader.pm:1227
 #, c-format
 msgid "not enough room in /boot"
 msgstr "no hi ha prou espai a /boot"
 
-#: bootloader.pm:1874
+#: bootloader.pm:1883
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
 msgstr "No podeu instal·lar el carregador de l'arrencada a una partició %s\n"
 
-#: bootloader.pm:1995
+#: bootloader.pm:2004
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1121,7 +1126,7 @@ msgstr ""
 "La configuració del vostre carregador d'arrencada s'ha d'actualitzar ja que "
 "la partició ha estat renumerada"
 
-#: bootloader.pm:2008
+#: bootloader.pm:2017
 #, c-format
 msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
@@ -1130,7 +1135,7 @@ msgstr ""
 "El carregador d'arrencada no s'ha pogut instal·lar correctament. Heu "
 "d'arrencar amb l'opció de rescat i escollir \"%s\""
 
-#: bootloader.pm:2009
+#: bootloader.pm:2018
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Reinstal·la el carregador de l'arrencada"
@@ -1199,12 +1204,12 @@ msgstr ""
 msgid "New"
 msgstr "Nou"
 
-#: diskdrake/dav.pm:63 diskdrake/interactive.pm:411 diskdrake/smbnfs_gtk.pm:75
+#: diskdrake/dav.pm:63 diskdrake/interactive.pm:414 diskdrake/smbnfs_gtk.pm:75
 #, c-format
 msgid "Unmount"
 msgstr "Desmunta"
 
-#: diskdrake/dav.pm:64 diskdrake/interactive.pm:407 diskdrake/smbnfs_gtk.pm:76
+#: diskdrake/dav.pm:64 diskdrake/interactive.pm:410 diskdrake/smbnfs_gtk.pm:76
 #, c-format
 msgid "Mount"
 msgstr "Munta"
@@ -1214,16 +1219,16 @@ msgstr "Munta"
 msgid "Server"
 msgstr "Servidor"
 
-#: diskdrake/dav.pm:66 diskdrake/interactive.pm:401
-#: diskdrake/interactive.pm:666 diskdrake/interactive.pm:684
-#: diskdrake/interactive.pm:688 diskdrake/removable.pm:23
+#: diskdrake/dav.pm:66 diskdrake/interactive.pm:404
+#: diskdrake/interactive.pm:674 diskdrake/interactive.pm:692
+#: diskdrake/interactive.pm:696 diskdrake/removable.pm:23
 #: diskdrake/smbnfs_gtk.pm:79
 #, c-format
 msgid "Mount point"
 msgstr "Punt de muntatge"
 
-#: diskdrake/dav.pm:67 diskdrake/interactive.pm:403
-#: diskdrake/interactive.pm:1090 diskdrake/removable.pm:24
+#: diskdrake/dav.pm:67 diskdrake/interactive.pm:406
+#: diskdrake/interactive.pm:1098 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
@@ -1242,11 +1247,11 @@ msgstr "Fet"
 
 #: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:128 diskdrake/hd_gtk.pm:294
 #: diskdrake/interactive.pm:247 diskdrake/interactive.pm:260
-#: diskdrake/interactive.pm:450 diskdrake/interactive.pm:520
-#: diskdrake/interactive.pm:525 diskdrake/interactive.pm:656
-#: diskdrake/interactive.pm:909 diskdrake/interactive.pm:960
-#: diskdrake/interactive.pm:1136 diskdrake/interactive.pm:1149
-#: diskdrake/interactive.pm:1152 diskdrake/interactive.pm:1420
+#: diskdrake/interactive.pm:453 diskdrake/interactive.pm:523
+#: diskdrake/interactive.pm:528 diskdrake/interactive.pm:664
+#: diskdrake/interactive.pm:917 diskdrake/interactive.pm:968
+#: diskdrake/interactive.pm:1144 diskdrake/interactive.pm:1157
+#: diskdrake/interactive.pm:1160 diskdrake/interactive.pm:1428
 #: diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23 do_pkgs.pm:28 do_pkgs.pm:44
 #: do_pkgs.pm:60 do_pkgs.pm:65 do_pkgs.pm:82 fsedit.pm:246
 #: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
@@ -1266,12 +1271,12 @@ msgstr "Si us plau introduïu l'URL del servidor WebDAV"
 msgid "The URL must begin with http:// or https://"
 msgstr "L'URL ha de començar per http:// o https://"
 
-#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:412 diskdrake/interactive.pm:303
-#: diskdrake/interactive.pm:388 diskdrake/interactive.pm:550
-#: diskdrake/interactive.pm:747 diskdrake/interactive.pm:805
-#: diskdrake/interactive.pm:940 diskdrake/interactive.pm:982
-#: diskdrake/interactive.pm:983 diskdrake/interactive.pm:1233
-#: diskdrake/interactive.pm:1271 diskdrake/interactive.pm:1419 do_pkgs.pm:19
+#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:412 diskdrake/interactive.pm:306
+#: diskdrake/interactive.pm:391 diskdrake/interactive.pm:553
+#: diskdrake/interactive.pm:755 diskdrake/interactive.pm:813
+#: diskdrake/interactive.pm:948 diskdrake/interactive.pm:990
+#: diskdrake/interactive.pm:991 diskdrake/interactive.pm:1241
+#: diskdrake/interactive.pm:1279 diskdrake/interactive.pm:1427 do_pkgs.pm:19
 #: do_pkgs.pm:39 do_pkgs.pm:57 do_pkgs.pm:77 harddrake/sound.pm:442
 #, c-format
 msgid "Warning"
@@ -1287,23 +1292,23 @@ msgstr "Voleu fer clic en aquest botó?"
 msgid "Server: "
 msgstr "Servidor: "
 
-#: diskdrake/dav.pm:125 diskdrake/interactive.pm:493
-#: diskdrake/interactive.pm:1295 diskdrake/interactive.pm:1380
+#: diskdrake/dav.pm:125 diskdrake/interactive.pm:496
+#: diskdrake/interactive.pm:1303 diskdrake/interactive.pm:1388
 #, c-format
 msgid "Mount point: "
 msgstr "Punt de muntatge: "
 
-#: diskdrake/dav.pm:126 diskdrake/interactive.pm:1387
+#: diskdrake/dav.pm:126 diskdrake/interactive.pm:1395
 #, c-format
 msgid "Options: %s"
 msgstr "Opcions: %s"
 
-#: diskdrake/hd_gtk.pm:61 diskdrake/interactive.pm:298
+#: diskdrake/hd_gtk.pm:61 diskdrake/interactive.pm:301
 #: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:106
-#: fs/partitioning_wizard.pm:52 fs/partitioning_wizard.pm:222
-#: fs/partitioning_wizard.pm:230 fs/partitioning_wizard.pm:269
-#: fs/partitioning_wizard.pm:388 fs/partitioning_wizard.pm:445
-#: fs/partitioning_wizard.pm:518 fs/partitioning_wizard.pm:521
+#: fs/partitioning_wizard.pm:53 fs/partitioning_wizard.pm:235
+#: fs/partitioning_wizard.pm:243 fs/partitioning_wizard.pm:282
+#: fs/partitioning_wizard.pm:431 fs/partitioning_wizard.pm:495
+#: fs/partitioning_wizard.pm:568 fs/partitioning_wizard.pm:571
 #, c-format
 msgid "Partitioning"
 msgstr "Particionament"
@@ -1313,8 +1318,8 @@ msgstr "Particionament"
 msgid "Click on a partition, choose a filesystem type then choose an action"
 msgstr ""
 
-#: diskdrake/hd_gtk.pm:110 diskdrake/interactive.pm:1111
-#: diskdrake/interactive.pm:1121 diskdrake/interactive.pm:1174
+#: diskdrake/hd_gtk.pm:110 diskdrake/interactive.pm:1119
+#: diskdrake/interactive.pm:1129 diskdrake/interactive.pm:1182
 #, c-format
 msgid "Read carefully"
 msgstr "Llegiu-ho atentament"
@@ -1334,7 +1339,7 @@ msgstr "Surt"
 msgid "Continue"
 msgstr "Continua"
 
-#: diskdrake/hd_gtk.pm:182 fs/partitioning_wizard.pm:493 interactive.pm:653
+#: diskdrake/hd_gtk.pm:182 fs/partitioning_wizard.pm:544 interactive.pm:653
 #: interactive/gtk.pm:811 interactive/gtk.pm:829 interactive/gtk.pm:850
 #: ugtk2.pm:936
 #, c-format
@@ -1374,40 +1379,41 @@ msgstr "Desconegut"
 
 #: diskdrake/hd_gtk.pm:383
 #, fuzzy, c-format
-msgid "Ext3"
+msgid "Ext4"
 msgstr "Surt"
 
-#: diskdrake/hd_gtk.pm:383
+#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
 #, fuzzy, c-format
 msgid "XFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:383
+#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
 #, c-format
 msgid "Swap"
 msgstr "Intercanvi"
 
-#: diskdrake/hd_gtk.pm:383
+#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
 #, c-format
 msgid "SunOS"
 msgstr "SunOS"
 
-#: diskdrake/hd_gtk.pm:383
+#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
 #, c-format
 msgid "HFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:383
+#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
 #, c-format
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:384 services.pm:158
+#: diskdrake/hd_gtk.pm:384 fs/partitioning_wizard.pm:402 services.pm:158
 #, c-format
 msgid "Other"
 msgstr "Altres"
 
-#: diskdrake/hd_gtk.pm:384 diskdrake/interactive.pm:1310
+#: diskdrake/hd_gtk.pm:384 diskdrake/interactive.pm:1318
+#: fs/partitioning_wizard.pm:402
 #, c-format
 msgid "Empty"
 msgstr "Buit"
@@ -1432,8 +1438,8 @@ msgstr "Utilitzeu primer \"Unmount\""
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Utilitzeu \"%s\" al seu lloc"
 
-#: diskdrake/hd_gtk.pm:421 diskdrake/interactive.pm:402
-#: diskdrake/interactive.pm:588 diskdrake/removable.pm:25
+#: diskdrake/hd_gtk.pm:421 diskdrake/interactive.pm:405
+#: diskdrake/interactive.pm:591 diskdrake/removable.pm:25
 #: diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
@@ -1449,15 +1455,15 @@ msgstr "Trieu una altra partició"
 msgid "Choose a partition"
 msgstr "Trieu una partició"
 
-#: diskdrake/interactive.pm:273 diskdrake/interactive.pm:379
+#: diskdrake/interactive.pm:273 diskdrake/interactive.pm:382
 #: interactive/curses.pm:512
 #, c-format
 msgid "More"
 msgstr "Més"
 
 #
-#: diskdrake/interactive.pm:281 diskdrake/interactive.pm:291
-#: diskdrake/interactive.pm:1218
+#: diskdrake/interactive.pm:281 diskdrake/interactive.pm:294
+#: diskdrake/interactive.pm:1226
 #, fuzzy, c-format
 msgid "Confirmation"
 msgstr "Configuració"
@@ -1477,19 +1483,19 @@ msgstr "Surt sense desar"
 msgid "Quit without writing the partition table?"
 msgstr "Voleu sortir sense escriure la taula de particions?"
 
-#: diskdrake/interactive.pm:291
+#: diskdrake/interactive.pm:294
 #, c-format
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "Voleu desar les modificacions a /etc/fstab"
 
-#: diskdrake/interactive.pm:298 fs/partitioning_wizard.pm:269
+#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:282
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
 "Us caldrà tornar a arrencar per tal que les modificacions de la taula de "
 "particions tinguin efecte"
 
-#: diskdrake/interactive.pm:303
+#: diskdrake/interactive.pm:306
 #, c-format
 msgid ""
 "You should format partition %s.\n"
@@ -1497,42 +1503,42 @@ msgid ""
 "Quit anyway?"
 msgstr ""
 
-#: diskdrake/interactive.pm:316
+#: diskdrake/interactive.pm:319
 #, c-format
 msgid "Clear all"
 msgstr "Buida-ho tot"
 
-#: diskdrake/interactive.pm:317
+#: diskdrake/interactive.pm:320
 #, c-format
 msgid "Auto allocate"
 msgstr "Assigna automàticament"
 
-#: diskdrake/interactive.pm:323
+#: diskdrake/interactive.pm:326
 #, c-format
 msgid "Toggle to normal mode"
 msgstr "Canvia al mode normal"
 
-#: diskdrake/interactive.pm:323
+#: diskdrake/interactive.pm:326
 #, c-format
 msgid "Toggle to expert mode"
 msgstr "Canvia al mode expert"
 
-#: diskdrake/interactive.pm:335
+#: diskdrake/interactive.pm:338
 #, c-format
 msgid "Hard drive information"
 msgstr "Informació del disc dur"
 
-#: diskdrake/interactive.pm:368
+#: diskdrake/interactive.pm:371
 #, c-format
 msgid "All primary partitions are used"
 msgstr "S'utilitzen totes les particions primàries"
 
-#: diskdrake/interactive.pm:369
+#: diskdrake/interactive.pm:372
 #, c-format
 msgid "I can not add any more partitions"
 msgstr "No es pot afegir cap més partició"
 
-#: diskdrake/interactive.pm:370
+#: diskdrake/interactive.pm:373
 #, c-format
 msgid ""
 "To have more partitions, please delete one to be able to create an extended "
@@ -1541,117 +1547,117 @@ msgstr ""
 "Si voleu tenir més particions, suprimiu-ne una per poder crear una partició "
 "ampliada"
 
-#: diskdrake/interactive.pm:381
+#: diskdrake/interactive.pm:384
 #, c-format
 msgid "Reload partition table"
 msgstr "Torna a carregar la taula de particions"
 
-#: diskdrake/interactive.pm:388
+#: diskdrake/interactive.pm:391
 #, c-format
 msgid "Detailed information"
 msgstr "Informació detallada"
 
-#: diskdrake/interactive.pm:400
+#: diskdrake/interactive.pm:403
 #, c-format
 msgid "View"
 msgstr ""
 
-#: diskdrake/interactive.pm:405 diskdrake/interactive.pm:760
+#: diskdrake/interactive.pm:408 diskdrake/interactive.pm:768
 #, c-format
 msgid "Resize"
 msgstr "Canvia la mida"
 
-#: diskdrake/interactive.pm:406
+#: diskdrake/interactive.pm:409
 #, c-format
 msgid "Format"
 msgstr "Formata"
 
-#: diskdrake/interactive.pm:408 diskdrake/interactive.pm:870
+#: diskdrake/interactive.pm:411 diskdrake/interactive.pm:878
 #, c-format
 msgid "Add to RAID"
 msgstr "Afegeix al RAID"
 
-#: diskdrake/interactive.pm:409 diskdrake/interactive.pm:891
+#: diskdrake/interactive.pm:412 diskdrake/interactive.pm:899
 #, c-format
 msgid "Add to LVM"
 msgstr "Afegeix a l'LVM"
 
-#: diskdrake/interactive.pm:410
+#: diskdrake/interactive.pm:413
 #, fuzzy, c-format
 msgid "Use"
 msgstr "ID d'usuari"
 
-#: diskdrake/interactive.pm:412
+#: diskdrake/interactive.pm:415
 #, c-format
 msgid "Delete"
 msgstr "Suprimeix"
 
-#: diskdrake/interactive.pm:413
+#: diskdrake/interactive.pm:416
 #, c-format
 msgid "Remove from RAID"
 msgstr "Elimina del RAID"
 
-#: diskdrake/interactive.pm:414
+#: diskdrake/interactive.pm:417
 #, c-format
 msgid "Remove from LVM"
 msgstr "Elimina de l'LVM"
 
-#: diskdrake/interactive.pm:415
+#: diskdrake/interactive.pm:418
 #, fuzzy, c-format
 msgid "Remove from dm"
 msgstr "Elimina de l'LVM"
 
-#: diskdrake/interactive.pm:416
+#: diskdrake/interactive.pm:419
 #, c-format
 msgid "Modify RAID"
 msgstr "Modifica el RAID"
 
-#: diskdrake/interactive.pm:417
+#: diskdrake/interactive.pm:420
 #, c-format
 msgid "Use for loopback"
 msgstr "Utilitza per a loopback"
 
-#: diskdrake/interactive.pm:428
+#: diskdrake/interactive.pm:431
 #, c-format
 msgid "Create"
 msgstr "Crea"
 
-#: diskdrake/interactive.pm:450
+#: diskdrake/interactive.pm:453
 #, fuzzy, c-format
 msgid "Failed to mount partition"
 msgstr "Mou els fitxers a la nova partició"
 
-#: diskdrake/interactive.pm:482 diskdrake/interactive.pm:484
+#: diskdrake/interactive.pm:485 diskdrake/interactive.pm:487
 #, c-format
 msgid "Create a new partition"
 msgstr "Crea una nova partició"
 
-#: diskdrake/interactive.pm:486
+#: diskdrake/interactive.pm:489
 #, c-format
 msgid "Start sector: "
 msgstr "Sector d'inici: "
 
-#: diskdrake/interactive.pm:489 diskdrake/interactive.pm:975
+#: diskdrake/interactive.pm:492 diskdrake/interactive.pm:983
 #, c-format
 msgid "Size in MB: "
 msgstr "Mida en MB: "
 
-#: diskdrake/interactive.pm:491 diskdrake/interactive.pm:976
+#: diskdrake/interactive.pm:494 diskdrake/interactive.pm:984
 #, c-format
 msgid "Filesystem type: "
 msgstr "Tipus de sistema de fitxers: "
 
-#: diskdrake/interactive.pm:497
+#: diskdrake/interactive.pm:500
 #, c-format
 msgid "Preference: "
 msgstr "Preferència: "
 
-#: diskdrake/interactive.pm:500
+#: diskdrake/interactive.pm:503
 #, c-format
 msgid "Logical volume name "
 msgstr "Nom del volum lògic"
 
-#: diskdrake/interactive.pm:520
+#: diskdrake/interactive.pm:523
 #, c-format
 msgid ""
 "You can not create a new partition\n"
@@ -1662,69 +1668,69 @@ msgstr ""
 "(perquè heu arribat al màxim nombre de particions primàries).\n"
 "Esborreu primer una partició primària i creeu una partició ampliada."
 
-#: diskdrake/interactive.pm:550
+#: diskdrake/interactive.pm:553
 #, c-format
 msgid "Remove the loopback file?"
 msgstr "Voleu suprimir el fitxer de loopback?"
 
-#: diskdrake/interactive.pm:572
+#: diskdrake/interactive.pm:575
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "Després de canviar el tipus de la partició %s, se'n perdran totes les dades"
 
-#: diskdrake/interactive.pm:585
+#: diskdrake/interactive.pm:588
 #, c-format
 msgid "Change partition type"
 msgstr "Canvia el tipus de partició"
 
-#: diskdrake/interactive.pm:587 diskdrake/removable.pm:47
+#: diskdrake/interactive.pm:590 diskdrake/removable.pm:47
 #, c-format
 msgid "Which filesystem do you want?"
 msgstr "Quin sistema de fitxers voleu?"
 
-#: diskdrake/interactive.pm:594
+#: diskdrake/interactive.pm:597
 #, fuzzy, c-format
 msgid "Switching from %s to %s"
 msgstr "S'està canviant de ext2 a ext3"
 
-#: diskdrake/interactive.pm:624
+#: diskdrake/interactive.pm:632
 #, fuzzy, c-format
 msgid "Set volume label"
 msgstr "Etiqueta del volum: "
 
-#: diskdrake/interactive.pm:626
+#: diskdrake/interactive.pm:634
 #, c-format
 msgid "Beware, this will be written to disk as soon as you validate!"
 msgstr ""
 
-#: diskdrake/interactive.pm:627
+#: diskdrake/interactive.pm:635
 #, c-format
 msgid "Beware, this will be written to disk only after formatting!"
 msgstr ""
 
-#: diskdrake/interactive.pm:629
+#: diskdrake/interactive.pm:637
 #, c-format
 msgid "Which volume label?"
 msgstr ""
 
-#: diskdrake/interactive.pm:630
+#: diskdrake/interactive.pm:638
 #, fuzzy, c-format
 msgid "Label:"
 msgstr "Etiqueta"
 
-#: diskdrake/interactive.pm:651
+#: diskdrake/interactive.pm:659
 #, c-format
 msgid "Where do you want to mount the loopback file %s?"
 msgstr "On voleu muntar el fitxer de loopback %s?"
 
-#: diskdrake/interactive.pm:652
+#: diskdrake/interactive.pm:660
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "On voleu muntar el dispositiu %s?"
 
-#: diskdrake/interactive.pm:657
+#: diskdrake/interactive.pm:665
 #, c-format
 msgid ""
 "Can not unset mount point as this partition is used for loop back.\n"
@@ -1733,59 +1739,59 @@ msgstr ""
 "No es pot anul·lar el punt de muntatge, perquè aquesta partició\n"
 "s'utilitza per al loopback. Elimineu primer el loopback"
 
-#: diskdrake/interactive.pm:687
+#: diskdrake/interactive.pm:695
 #, c-format
 msgid "Where do you want to mount %s?"
 msgstr "On voleu muntar %s?"
 
-#: diskdrake/interactive.pm:711 diskdrake/interactive.pm:794
-#: fs/partitioning_wizard.pm:129 fs/partitioning_wizard.pm:191
+#: diskdrake/interactive.pm:719 diskdrake/interactive.pm:802
+#: fs/partitioning_wizard.pm:128 fs/partitioning_wizard.pm:204
 #, c-format
 msgid "Resizing"
 msgstr "S'està canviant la mida"
 
-#: diskdrake/interactive.pm:711
+#: diskdrake/interactive.pm:719
 #, c-format
 msgid "Computing FAT filesystem bounds"
 msgstr "S'estan calculant els límits del sistema de fitxers de la FAT"
 
-#: diskdrake/interactive.pm:747
+#: diskdrake/interactive.pm:755
 #, c-format
 msgid "This partition is not resizeable"
 msgstr "No es pot canviar la mida d'aquesta partició"
 
-#: diskdrake/interactive.pm:752
+#: diskdrake/interactive.pm:760
 #, c-format
 msgid "All data on this partition should be backed-up"
 msgstr "Cal fer una còpia de seguretat de totes les dades d'aquesta partició"
 
-#: diskdrake/interactive.pm:754
+#: diskdrake/interactive.pm:762
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr ""
 "Després de canviar la mida de la partició %s, se'n perdran totes les dades"
 
-#: diskdrake/interactive.pm:761
+#: diskdrake/interactive.pm:769
 #, c-format
 msgid "Choose the new size"
 msgstr "Escolliu la nova mida"
 
-#: diskdrake/interactive.pm:762
+#: diskdrake/interactive.pm:770
 #, c-format
 msgid "New size in MB: "
 msgstr "Nova mida en MB: "
 
-#: diskdrake/interactive.pm:763
+#: diskdrake/interactive.pm:771
 #, c-format
 msgid "Minimum size: %s MB"
 msgstr ""
 
-#: diskdrake/interactive.pm:764
+#: diskdrake/interactive.pm:772
 #, c-format
 msgid "Maximum size: %s MB"
 msgstr ""
 
-#: diskdrake/interactive.pm:805
+#: diskdrake/interactive.pm:813 fs/partitioning_wizard.pm:212
 #, fuzzy, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
@@ -1796,175 +1802,175 @@ msgstr ""
 "les comprovacions del sistema de fitxers es realitzaran el proper cop que "
 "arrenqueu en Windows(TM)"
 
-#: diskdrake/interactive.pm:853 diskdrake/interactive.pm:1415
+#: diskdrake/interactive.pm:861 diskdrake/interactive.pm:1423
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "Clau de xifratge del sistema de fitxers: "
 
-#: diskdrake/interactive.pm:854
+#: diskdrake/interactive.pm:862
 #, fuzzy, c-format
 msgid "Enter your filesystem encryption key"
 msgstr "Escolliu la clau de xifratge del sistema de fitxers"
 
-#: diskdrake/interactive.pm:855 diskdrake/interactive.pm:1423
+#: diskdrake/interactive.pm:863 diskdrake/interactive.pm:1431
 #, c-format
 msgid "Encryption key"
 msgstr "Clau de xifratge"
 
-#: diskdrake/interactive.pm:862
+#: diskdrake/interactive.pm:870
 #, c-format
 msgid "Invalid key"
 msgstr ""
 
-#: diskdrake/interactive.pm:870
+#: diskdrake/interactive.pm:878
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "Escolliu un RAID existent al qual afegir-ho"
 
-#: diskdrake/interactive.pm:872 diskdrake/interactive.pm:893
+#: diskdrake/interactive.pm:880 diskdrake/interactive.pm:901
 #, c-format
 msgid "new"
 msgstr "nou"
 
-#: diskdrake/interactive.pm:891
+#: diskdrake/interactive.pm:899
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "Escolliu un LVM existent al qual afegir-ho"
 
-#: diskdrake/interactive.pm:903 diskdrake/interactive.pm:912
+#: diskdrake/interactive.pm:911 diskdrake/interactive.pm:920
 #, fuzzy, c-format
 msgid "LVM name"
 msgstr "Nom LVM?"
 
-#: diskdrake/interactive.pm:904
+#: diskdrake/interactive.pm:912
 #, c-format
 msgid "Enter a name for the new LVM volume group"
 msgstr ""
 
-#: diskdrake/interactive.pm:909
+#: diskdrake/interactive.pm:917
 #, fuzzy, c-format
 msgid "\"%s\" already exists"
 msgstr "El fitxer ja existeix. El voleu utilitzar?"
 
-#: diskdrake/interactive.pm:940
+#: diskdrake/interactive.pm:948
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
 
-#: diskdrake/interactive.pm:942
+#: diskdrake/interactive.pm:950
 #, c-format
 msgid "Moving physical extents"
 msgstr ""
 
-#: diskdrake/interactive.pm:960
+#: diskdrake/interactive.pm:968
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "Aquesta partició no es pot utilitzar per al loopback"
 
-#: diskdrake/interactive.pm:973
+#: diskdrake/interactive.pm:981
 #, c-format
 msgid "Loopback"
 msgstr "Loopback"
 
-#: diskdrake/interactive.pm:974
+#: diskdrake/interactive.pm:982
 #, c-format
 msgid "Loopback file name: "
 msgstr "Nom del fitxer de loopback: "
 
-#: diskdrake/interactive.pm:979
+#: diskdrake/interactive.pm:987
 #, c-format
 msgid "Give a file name"
 msgstr "Proporcioneu un nom de fitxer"
 
-#: diskdrake/interactive.pm:982
+#: diskdrake/interactive.pm:990
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "Un altre loopback ja està utilitzant el fitxer, escolliu-ne un altre"
 
-#: diskdrake/interactive.pm:983
+#: diskdrake/interactive.pm:991
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "El fitxer ja existeix. El voleu utilitzar?"
 
-#: diskdrake/interactive.pm:1015 diskdrake/interactive.pm:1018
+#: diskdrake/interactive.pm:1023 diskdrake/interactive.pm:1026
 #, c-format
 msgid "Mount options"
 msgstr "Opcions de muntatge"
 
-#: diskdrake/interactive.pm:1025
+#: diskdrake/interactive.pm:1033
 #, c-format
 msgid "Various"
 msgstr "Diversos"
 
-#: diskdrake/interactive.pm:1092
+#: diskdrake/interactive.pm:1100
 #, c-format
 msgid "device"
 msgstr "dispositiu"
 
-#: diskdrake/interactive.pm:1093
+#: diskdrake/interactive.pm:1101
 #, c-format
 msgid "level"
 msgstr "nivell"
 
-#: diskdrake/interactive.pm:1094
+#: diskdrake/interactive.pm:1102
 #, c-format
 msgid "chunk size in KiB"
 msgstr "mida del fragment en KB"
 
-#: diskdrake/interactive.pm:1112
+#: diskdrake/interactive.pm:1120
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Aneu amb compte: aquesta operació és perillosa."
 
-#: diskdrake/interactive.pm:1127
+#: diskdrake/interactive.pm:1135
 #, fuzzy, c-format
 msgid "Partitioning Type"
 msgstr "Particionament"
 
-#: diskdrake/interactive.pm:1127
+#: diskdrake/interactive.pm:1135
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Quin tipus de particionament voleu?"
 
-#: diskdrake/interactive.pm:1165
+#: diskdrake/interactive.pm:1173
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr ""
 "Us caldrà tornar a arrencar per tal que les modificacions tinguin efecte"
 
-#: diskdrake/interactive.pm:1174
+#: diskdrake/interactive.pm:1182
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk"
 msgstr "La taula de particions de la unitat %s s'escriurà al disc"
 
-#: diskdrake/interactive.pm:1196 fs/format.pm:96 fs/format.pm:103
+#: diskdrake/interactive.pm:1204 fs/format.pm:99 fs/format.pm:106
 #, c-format
 msgid "Formatting partition %s"
 msgstr "S'està formatant la partició %s"
 
-#: diskdrake/interactive.pm:1209
+#: diskdrake/interactive.pm:1217
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr "Després de formatar la partició %s, se'n perdran totes les dades"
 
-#: diskdrake/interactive.pm:1218 fs/partitioning.pm:48
+#: diskdrake/interactive.pm:1226 fs/partitioning.pm:48
 #, c-format
 msgid "Check bad blocks?"
 msgstr "Voleu comprovar els blocs incorrectes?"
 
-#: diskdrake/interactive.pm:1232
+#: diskdrake/interactive.pm:1240
 #, c-format
 msgid "Move files to the new partition"
 msgstr "Mou els fitxers a la nova partició"
 
-#: diskdrake/interactive.pm:1232
+#: diskdrake/interactive.pm:1240
 #, c-format
 msgid "Hide files"
 msgstr "Fitxers ocults"
 
-#: diskdrake/interactive.pm:1233
+#: diskdrake/interactive.pm:1241
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -1975,128 +1981,128 @@ msgid ""
 "the contents of the mounted partition)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1248
+#: diskdrake/interactive.pm:1256
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "S'estan movent els fitxers a la nova partició"
 
-#: diskdrake/interactive.pm:1252
+#: diskdrake/interactive.pm:1260
 #, c-format
 msgid "Copying %s"
 msgstr "S'està copiant %s"
 
-#: diskdrake/interactive.pm:1256
+#: diskdrake/interactive.pm:1264
 #, c-format
 msgid "Removing %s"
 msgstr "S'està esborrant %s"
 
-#: diskdrake/interactive.pm:1270
+#: diskdrake/interactive.pm:1278
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "la partició %s ara és %s"
 
-#: diskdrake/interactive.pm:1271
+#: diskdrake/interactive.pm:1279
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr ""
 
-#: diskdrake/interactive.pm:1296 diskdrake/interactive.pm:1364
+#: diskdrake/interactive.pm:1304 diskdrake/interactive.pm:1372
 #, c-format
 msgid "Device: "
 msgstr "Dispositiu: "
 
-#: diskdrake/interactive.pm:1297
+#: diskdrake/interactive.pm:1305
 #, c-format
 msgid "Volume label: "
 msgstr "Etiqueta del volum: "
 
-#: diskdrake/interactive.pm:1298
+#: diskdrake/interactive.pm:1306
 #, c-format
 msgid "UUID: "
 msgstr ""
 
-#: diskdrake/interactive.pm:1299
+#: diskdrake/interactive.pm:1307
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "Lletra d'unitat de DOS: %s (només és una suposició)\n"
 
-#: diskdrake/interactive.pm:1303 diskdrake/interactive.pm:1312
-#: diskdrake/interactive.pm:1383
+#: diskdrake/interactive.pm:1311 diskdrake/interactive.pm:1320
+#: diskdrake/interactive.pm:1391
 #, c-format
 msgid "Type: "
 msgstr "Tipus: "
 
-#: diskdrake/interactive.pm:1307 diskdrake/interactive.pm:1368
+#: diskdrake/interactive.pm:1315 diskdrake/interactive.pm:1376
 #, c-format
 msgid "Name: "
 msgstr "Nom: "
 
-#: diskdrake/interactive.pm:1314
+#: diskdrake/interactive.pm:1322
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Inici: sector %s\n"
 
-#: diskdrake/interactive.pm:1315
+#: diskdrake/interactive.pm:1323
 #, c-format
 msgid "Size: %s"
 msgstr "Mida: %s"
 
-#: diskdrake/interactive.pm:1317
+#: diskdrake/interactive.pm:1325
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s sectors"
 
-#: diskdrake/interactive.pm:1319
+#: diskdrake/interactive.pm:1327
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "Cilindre %d a %d\n"
 
-#: diskdrake/interactive.pm:1320
+#: diskdrake/interactive.pm:1328
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr ""
 
-#: diskdrake/interactive.pm:1321
+#: diskdrake/interactive.pm:1329
 #, c-format
 msgid "Formatted\n"
 msgstr "Formatat\n"
 
-#: diskdrake/interactive.pm:1322
+#: diskdrake/interactive.pm:1330
 #, c-format
 msgid "Not formatted\n"
 msgstr "Sense formatar\n"
 
-#: diskdrake/interactive.pm:1323
+#: diskdrake/interactive.pm:1331
 #, c-format
 msgid "Mounted\n"
 msgstr "Muntat\n"
 
-#: diskdrake/interactive.pm:1324
+#: diskdrake/interactive.pm:1332
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1326
+#: diskdrake/interactive.pm:1334
 #, fuzzy, c-format
 msgid "Encrypted"
 msgstr "Clau de xifratge"
 
-#: diskdrake/interactive.pm:1326
+#: diskdrake/interactive.pm:1334
 #, c-format
 msgid " (mapped on %s)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1327
+#: diskdrake/interactive.pm:1335
 #, c-format
 msgid " (to map on %s)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1328
+#: diskdrake/interactive.pm:1336
 #, c-format
 msgid " (inactive)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1334
+#: diskdrake/interactive.pm:1342
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2105,7 +2111,7 @@ msgstr ""
 "Fitxer(s) de loopback:\n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1335
+#: diskdrake/interactive.pm:1343
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -2114,27 +2120,27 @@ msgstr ""
 "Partició arrencada per defecte\n"
 "    (per a l'arrencada de l'MS-DOS, no per a LILO)\n"
 
-#: diskdrake/interactive.pm:1337
+#: diskdrake/interactive.pm:1345
 #, c-format
 msgid "Level %s\n"
 msgstr "Nivell %s\n"
 
-#: diskdrake/interactive.pm:1338
+#: diskdrake/interactive.pm:1346
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "Mida del fragment %d KB\n"
 
-#: diskdrake/interactive.pm:1339
+#: diskdrake/interactive.pm:1347
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "Discs RAID %s\n"
 
-#: diskdrake/interactive.pm:1341
+#: diskdrake/interactive.pm:1349
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Nom del fitxer de loopback: %s"
 
-#: diskdrake/interactive.pm:1344
+#: diskdrake/interactive.pm:1352
 #, c-format
 msgid ""
 "\n"
@@ -2147,7 +2153,7 @@ msgstr ""
 "una partició de programes de control. Potser\n"
 "és millor que no la toqueu.\n"
 
-#: diskdrake/interactive.pm:1347
+#: diskdrake/interactive.pm:1355
 #, c-format
 msgid ""
 "\n"
@@ -2160,69 +2166,69 @@ msgstr ""
 "Bootstrap és per arrencar\n"
 "el vostre sistema en dual.\n"
 
-#: diskdrake/interactive.pm:1356
+#: diskdrake/interactive.pm:1364
 #, c-format
 msgid "Free space on %s (%s)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1365
+#: diskdrake/interactive.pm:1373
 #, c-format
 msgid "Read-only"
 msgstr "Només lectura"
 
-#: diskdrake/interactive.pm:1366
+#: diskdrake/interactive.pm:1374
 #, c-format
 msgid "Size: %s\n"
 msgstr "Mida: %s\n"
 
-#: diskdrake/interactive.pm:1367
+#: diskdrake/interactive.pm:1375
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Geometria: %s cilindres, %s capçals, %s sectors\n"
 
-#: diskdrake/interactive.pm:1369
+#: diskdrake/interactive.pm:1377
 #, fuzzy, c-format
 msgid "Medium type: "
 msgstr "Tipus de sistema de fitxers: "
 
-#: diskdrake/interactive.pm:1370
+#: diskdrake/interactive.pm:1378
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "Discs LVM %s\n"
 
-#: diskdrake/interactive.pm:1371
+#: diskdrake/interactive.pm:1379
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Tipus de taula de particions: %s\n"
 
-#: diskdrake/interactive.pm:1372
+#: diskdrake/interactive.pm:1380
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "al canal %d amb id %d\n"
 
-#: diskdrake/interactive.pm:1416
+#: diskdrake/interactive.pm:1424
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Escolliu la clau de xifratge del sistema de fitxers"
 
-#: diskdrake/interactive.pm:1419
+#: diskdrake/interactive.pm:1427
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr ""
 "Aquesta clau de xifratge és massa senzilla (ha de tenir com a mínim %d "
 "caràcters)"
 
-#: diskdrake/interactive.pm:1420
+#: diskdrake/interactive.pm:1428
 #, c-format
 msgid "The encryption keys do not match"
 msgstr "Les claus de xifratge no coincideixen"
 
-#: diskdrake/interactive.pm:1424
+#: diskdrake/interactive.pm:1432
 #, c-format
 msgid "Encryption key (again)"
 msgstr "Clau de xifratge (un altre cop)"
 
-#: diskdrake/interactive.pm:1426
+#: diskdrake/interactive.pm:1434
 #, c-format
 msgid "Encryption algorithm"
 msgstr "Algoritme de xifrat"
@@ -2234,7 +2240,7 @@ msgstr "Canvia el tipus"
 
 #: diskdrake/smbnfs_gtk.pm:81 interactive.pm:129 interactive.pm:550
 #: interactive/curses.pm:260 interactive/http.pm:104 interactive/http.pm:160
-#: interactive/stdio.pm:39 interactive/stdio.pm:148 mygtk2.pm:846 ugtk2.pm:415
+#: interactive/stdio.pm:39 interactive/stdio.pm:148 mygtk2.pm:847 ugtk2.pm:415
 #: ugtk2.pm:517 ugtk2.pm:526 ugtk2.pm:812
 #, c-format
 msgid "Cancel"
@@ -2330,32 +2336,32 @@ msgstr ""
 "sistemes de fitxers. Si us plau, comproveu el vostre maquinari per trobar el "
 "problema"
 
-#: fs/any.pm:75 fs/partitioning_wizard.pm:60
+#: fs/any.pm:75 fs/partitioning_wizard.pm:61
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "Heu de tenir una partició FAT muntada en /boot/efi"
 
-#: fs/format.pm:100
+#: fs/format.pm:103
 #, c-format
 msgid "Creating and formatting file %s"
 msgstr "S'està creant i formatant el fitxer %s"
 
-#: fs/format.pm:119
+#: fs/format.pm:122
 #, fuzzy, c-format
 msgid "I do not know how to set label on %s with type %s"
 msgstr "No sé com formatar %s amb el tipus %s"
 
-#: fs/format.pm:126
+#: fs/format.pm:131
 #, fuzzy, c-format
 msgid "setting label on %s failed, is it formatted?"
 msgstr "%s formatació de %s ha fallat"
 
-#: fs/format.pm:167
+#: fs/format.pm:172
 #, c-format
 msgid "I do not know how to format %s in type %s"
 msgstr "No sé com formatar %s amb el tipus %s"
 
-#: fs/format.pm:172 fs/format.pm:174
+#: fs/format.pm:177 fs/format.pm:179
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "%s formatació de %s ha fallat"
@@ -2546,7 +2552,7 @@ msgstr ""
 "No hi ha prou espai d'intercanvi per completar la instal·lació; si us plau, "
 "afegiu-ne"
 
-#: fs/partitioning_wizard.pm:52
+#: fs/partitioning_wizard.pm:53
 #, c-format
 msgid ""
 "You must have a root partition.\n"
@@ -2557,7 +2563,7 @@ msgstr ""
 "Per fer-ho, creeu una partició (o feu clic a una d'existent).\n"
 "Després, trieu l'acció \"Punt de muntatge\" i doneu-li el valor '/'"
 
-#: fs/partitioning_wizard.pm:57
+#: fs/partitioning_wizard.pm:58
 #, c-format
 msgid ""
 "You do not have a swap partition.\n"
@@ -2568,42 +2574,42 @@ msgstr ""
 "\n"
 "Voleu continuar igualment?"
 
-#: fs/partitioning_wizard.pm:93
+#: fs/partitioning_wizard.pm:92
 #, c-format
 msgid "Use free space"
 msgstr "Utilitza l'espai lliure"
 
-#: fs/partitioning_wizard.pm:95
+#: fs/partitioning_wizard.pm:94
 #, c-format
 msgid "Not enough free space to allocate new partitions"
 msgstr "No hi ha prou espai lliure per assignar noves particions"
 
-#: fs/partitioning_wizard.pm:103
+#: fs/partitioning_wizard.pm:102
 #, c-format
 msgid "Use existing partitions"
 msgstr "Utilitza les particions existents"
 
-#: fs/partitioning_wizard.pm:105
+#: fs/partitioning_wizard.pm:104
 #, c-format
 msgid "There is no existing partition to use"
 msgstr "No hi ha cap partició que es pugui utilitzar"
 
-#: fs/partitioning_wizard.pm:129
+#: fs/partitioning_wizard.pm:128
 #, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
 msgstr "S'està calculant la mida de la partició de Microsoft Windows®"
 
-#: fs/partitioning_wizard.pm:148
+#: fs/partitioning_wizard.pm:164
 #, fuzzy, c-format
 msgid "Use the free space on a Microsoft Windows® partition"
 msgstr "Utilitza l'espai lliure de la partició de Windows"
 
-#: fs/partitioning_wizard.pm:152
+#: fs/partitioning_wizard.pm:168
 #, c-format
 msgid "Which partition do you want to resize?"
 msgstr "A quina partició voleu canviar-li la mida?"
 
-#: fs/partitioning_wizard.pm:162
+#: fs/partitioning_wizard.pm:171
 #, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
@@ -2614,7 +2620,7 @@ msgstr ""
 "reinicieu l'ordinador sota Microsoft Windows® i executeu l'eina \"defrag\". "
 "Llavors, torneu a començar la instal·lació del Mandriva Linux."
 
-#: fs/partitioning_wizard.pm:166
+#: fs/partitioning_wizard.pm:179
 #, c-format
 msgid ""
 "WARNING!\n"
@@ -2650,87 +2656,76 @@ msgstr ""
 "Quan estigueu segur, premeu %s."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:175 fs/partitioning_wizard.pm:498
+#: fs/partitioning_wizard.pm:188 fs/partitioning_wizard.pm:548
 #: interactive.pm:549 interactive/curses.pm:263 ugtk2.pm:519
 #, c-format
 msgid "Next"
 msgstr "Següent"
 
-#: fs/partitioning_wizard.pm:180
+#: fs/partitioning_wizard.pm:194
 #, fuzzy, c-format
 msgid "Partitionning"
 msgstr "Particionament"
 
-#: fs/partitioning_wizard.pm:180
+#: fs/partitioning_wizard.pm:194
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
 msgstr ""
 "Quina mida voleu deixar per a la partició de Microsoft Windows® partició %s?"
 
-#: fs/partitioning_wizard.pm:181
+#: fs/partitioning_wizard.pm:195
 #, c-format
 msgid "Size"
 msgstr "Mida"
 
-#: fs/partitioning_wizard.pm:191
+#: fs/partitioning_wizard.pm:204
 #, c-format
 msgid "Resizing Microsoft Windows® partition"
 msgstr "S'està redimensionant la partició de Microsoft Windows®"
 
-#: fs/partitioning_wizard.pm:196
+#: fs/partitioning_wizard.pm:209
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr "Ha fallat el redimensionament de la FAT: %s"
 
-#: fs/partitioning_wizard.pm:199
-#, c-format
-msgid ""
-"To ensure data integrity after resizing the partition(s), \n"
-"filesystem checks will be run on your next boot into Microsoft Windows®"
-msgstr ""
-"Per assegurar la integritat de les dades després de canviar la mida de la o "
-"les particions,\n"
-"les comprovacions del sistema de fitxers es realitzaran el proper cop que "
-"arrenqueu en Windows(TM)"
-
-#: fs/partitioning_wizard.pm:212
+#: fs/partitioning_wizard.pm:225
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "No hi ha cap partició FAT a la qual canviar la mida (o no queda prou espai)"
 
-#: fs/partitioning_wizard.pm:217
+#: fs/partitioning_wizard.pm:230
 #, c-format
 msgid "Remove Microsoft Windows®"
 msgstr "Elimina el Microsoft Windows®"
 
-#: fs/partitioning_wizard.pm:217
+#: fs/partitioning_wizard.pm:230
 #, fuzzy, c-format
 msgid "Erase and use entire disk"
 msgstr "Esborra tot el disc"
 
-#: fs/partitioning_wizard.pm:221
+#: fs/partitioning_wizard.pm:234
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "Teniu més d'un disc dur; en quin voleu instal·lar el Linux?"
 
-#: fs/partitioning_wizard.pm:229 fsedit.pm:600
+#: fs/partitioning_wizard.pm:242 fsedit.pm:600
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr ""
 "Es perdran TOTES les particions, i les dades que contenen, de la unitat %s"
 
-#: fs/partitioning_wizard.pm:239
+#: fs/partitioning_wizard.pm:252
 #, c-format
 msgid "Custom disk partitioning"
 msgstr "Particionament personalitzat de disc"
 
-#: fs/partitioning_wizard.pm:245
+#: fs/partitioning_wizard.pm:258
 #, c-format
 msgid "Use fdisk"
 msgstr "Utilitza l'fdisk"
 
-#: fs/partitioning_wizard.pm:248
+#: fs/partitioning_wizard.pm:261
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -2739,23 +2734,28 @@ msgstr ""
 "Ara podeu fer les particions a %s.\n"
 "Quan acabeu, no oblideu desar-les utilitzant 'w'"
 
-#: fs/partitioning_wizard.pm:388 fs/partitioning_wizard.pm:518
+#: fs/partitioning_wizard.pm:401
+#, fuzzy, c-format
+msgid "Ext2/3/4"
+msgstr "Surt"
+
+#: fs/partitioning_wizard.pm:431 fs/partitioning_wizard.pm:568
 #, c-format
 msgid "I can not find any room for installing"
 msgstr "No es pot trobar espai per a la instal·lació"
 
-#: fs/partitioning_wizard.pm:397 fs/partitioning_wizard.pm:525
+#: fs/partitioning_wizard.pm:440 fs/partitioning_wizard.pm:575
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr ""
 "L'auxiliar de particionament del DrakX ha trobat les solucions següents:"
 
-#: fs/partitioning_wizard.pm:459
+#: fs/partitioning_wizard.pm:509
 #, c-format
 msgid "Here is the content of your disk drive "
 msgstr ""
 
-#: fs/partitioning_wizard.pm:535
+#: fs/partitioning_wizard.pm:585
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Ha fallat el particionament: %s"
@@ -3407,7 +3407,7 @@ msgstr "Tipus de sintonitzador:"
 
 #: interactive.pm:128 interactive.pm:549 interactive/curses.pm:263
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
-#: interactive/stdio.pm:148 interactive/stdio.pm:149 mygtk2.pm:846
+#: interactive/stdio.pm:148 interactive/stdio.pm:149 mygtk2.pm:847
 #: ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
 #, c-format
 msgid "Ok"
@@ -4745,27 +4745,27 @@ msgstr "Zàmbia"
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
-#: lang.pm:1223
+#: lang.pm:1206
 #, c-format
 msgid "Welcome to %s"
 msgstr "Benvingut a %s"
 
-#: lvm.pm:84
+#: lvm.pm:86
 #, c-format
 msgid "Moving used physical extents to other physical volumes failed"
 msgstr ""
 
-#: lvm.pm:141
+#: lvm.pm:143
 #, c-format
 msgid "Physical volume %s is still in use"
 msgstr "El volum físic %s encara està en ús"
 
-#: lvm.pm:151
+#: lvm.pm:153
 #, c-format
 msgid "Remove the logical volumes first\n"
 msgstr "Elimineu primer els volums lògics\n"
 
-#: lvm.pm:184
+#: lvm.pm:186
 #, fuzzy, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
 msgstr ""
@@ -5289,17 +5289,17 @@ msgstr ""
 "Ha fallat la càrrega del mòdul %s.\n"
 "Voleu tornar-ho a intentar amb altres paràmetres?"
 
-#: mygtk2.pm:1540 mygtk2.pm:1541
+#: mygtk2.pm:1541 mygtk2.pm:1542
 #, c-format
 msgid "Password is trivial to guess"
 msgstr ""
 
-#: mygtk2.pm:1542
+#: mygtk2.pm:1543
 #, c-format
 msgid "Password should resist to basic attacks"
 msgstr ""
 
-#: mygtk2.pm:1543 mygtk2.pm:1544
+#: mygtk2.pm:1544 mygtk2.pm:1545
 #, fuzzy, c-format
 msgid "Password seems secure"
 msgstr "Contrasenya"
@@ -6728,7 +6728,7 @@ msgstr ""
 "  --boot            - habilita la configuració del carregador d'arrencada\n"
 "mode per defecte: ofereix la configuració de l'entrada automàtica"
 
-#: standalone.pm:61
+#: standalone.pm:60
 #, c-format
 msgid ""
 "[OPTIONS] [PROGRAM_NAME]\n"
@@ -6747,7 +6747,7 @@ msgstr ""
 "  --incident        - el programa ha de ser una de les eines de Mandriva "
 "Linux"
 
-#: standalone.pm:67
+#: standalone.pm:66
 #, c-format
 msgid ""
 "[--add]\n"
@@ -6758,7 +6758,7 @@ msgid ""
 "  --wizard          - like --add"
 msgstr ""
 
-#: standalone.pm:73
+#: standalone.pm:72
 #, c-format
 msgid ""
 "\n"
@@ -6792,7 +6792,7 @@ msgstr ""
 "                 : nom_de_l'aplicació, com ara so per a l'StarOffice \n"
 "                 : i gs per al ghostscript per utilitzar només aquesta."
 
-#: standalone.pm:88
+#: standalone.pm:87
 #, fuzzy, c-format
 msgid ""
 "[OPTIONS]...\n"
@@ -6824,17 +6824,17 @@ msgstr ""
 "--delclient      : suprimeix de l'MTS una màquina client (cal una adreça "
 "MAC, IP, nom d'imatge nbi)"
 
-#: standalone.pm:100
+#: standalone.pm:99
 #, c-format
 msgid "[keyboard]"
 msgstr "[teclat]"
 
-#: standalone.pm:101
+#: standalone.pm:100
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 msgstr "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 
-#: standalone.pm:102
+#: standalone.pm:101
 #, c-format
 msgid ""
 "[OPTIONS]\n"
@@ -6857,7 +6857,7 @@ msgstr ""
 "--status : torna 1 si està connectat, 0 si no, i després surt.\n"
 "--quiet : no siguis interactiu. Per utilitzar amb (dis)connect."
 
-#: standalone.pm:112
+#: standalone.pm:111
 #, c-format
 msgid ""
 "[OPTION]...\n"
@@ -6877,7 +6877,7 @@ msgstr ""
 "  --merge-all-rpmnew     proposa fusionar tots els fitxers .rpmnew/.rpmsave "
 "trobats"
 
-#: standalone.pm:117
+#: standalone.pm:116
 #, c-format
 msgid ""
 "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
@@ -6886,7 +6886,7 @@ msgstr ""
 "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
 "usbtable] [--dynamic=dev]"
 
-#: standalone.pm:118
+#: standalone.pm:117
 #, c-format
 msgid ""
 " [everything]\n"
@@ -6897,7 +6897,7 @@ msgstr ""
 "       XFdrake [--noauto] monitor\n"
 "       XFdrake resolució"
 
-#: standalone.pm:154
+#: standalone.pm:153
 #, c-format
 msgid ""
 "\n"
@@ -6986,6 +6986,15 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "La instal·lació ha fallat"
+
+#~ msgid ""
+#~ "To ensure data integrity after resizing the partition(s), \n"
+#~ "filesystem checks will be run on your next boot into Microsoft Windows®"
+#~ msgstr ""
+#~ "Per assegurar la integritat de les dades després de canviar la mida de la "
+#~ "o les particions,\n"
+#~ "les comprovacions del sistema de fitxers es realitzaran el proper cop que "
+#~ "arrenqueu en Windows(TM)"
 
 #~ msgid "Use the Microsoft Windows® partition for loopback"
 #~ msgstr "Utilitza la partició Microsoft Windows® per al loopback"
