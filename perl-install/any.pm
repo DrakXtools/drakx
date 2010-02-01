@@ -326,6 +326,19 @@ On which drive are you booting?"), \&partition_table::description, $hds) or retu
     1;
 }
 
+sub _ask_mbr_or_not {
+    my ($in, $default, @l) = @_;
+    $in->ask_from_({ title => N("Bootloader Installation"),
+                     interactive_help_id => 'setupBootloaderBeginner',
+                 },
+                   [
+                       { label => N("Where do you want to install the bootloader?"), title => 1 },
+                       { val => \$default, list => \@l, format => sub { $_[0][0] }, type => 'list' },
+                   ]
+               );
+    $default;
+}
+
 sub setupBootloader__mbr_or_not {
     my ($in, $b, $hds, $fstab) = @_;
 
@@ -355,14 +368,7 @@ sub setupBootloader__mbr_or_not {
 		);
 
 	my $default = find { $_->[1] eq $b->{boot} } @l;
-	$in->ask_from_({ title => N("Bootloader Installation"),
-			 interactive_help_id => 'setupBootloaderBeginner',
-		       },
-		      [
-                          { label => N("Where do you want to install the bootloader?"), title => 1 },
-                          { val => \$default, list => \@l, format => sub { $_[0][0] }, type => 'list' },
-                       ]
-                  );
+        $default = _ask_mbr_or_not($in, $default, @l);
 	my $new_boot = $default->[1];
 
 	#- remove bios mapping if the user changed the boot device
