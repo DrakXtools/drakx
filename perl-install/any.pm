@@ -368,7 +368,9 @@ sub setupBootloader__mbr_or_not {
 		);
 
 	my $default = find { $_->[1] eq $b->{boot} } @l;
-        $default = _ask_mbr_or_not($in, $default, @l);
+        if (!$::isInstall) {
+            $default = _ask_mbr_or_not($in, $default, @l);
+        }
 	my $new_boot = $default->[1];
 
 	#- remove bios mapping if the user changed the boot device
