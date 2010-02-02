@@ -1,6 +1,6 @@
 %define name meta-task
-%define version 2010.0
-%define release %mkrel 15
+%define version 2010.1
+%define release %mkrel 1
 
 Summary: Meta task listing packages by group
 Name: %{name}
