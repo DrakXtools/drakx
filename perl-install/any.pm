@@ -427,8 +427,12 @@ sub setupBootloader__general {
 	      } },
             { label => N("Password (again)"), val => \$b->{password2}, hidden => 1 },
             { text => N("Restrict command line options"), val => \$b->{restricted}, type => "bool",
-              text => N("restrict"), advanced => 1
-	      validate => sub { my $ok = !$b->{restricted} || $b->{password} or $in->ask_warn('', N("Option ``Restrict command line options'' is of no use without a password")); $ok } },
+              text => N("restrict"), advanced => 1,
+	      validate => sub { 
+                  my $ok = !$b->{restricted} || $b->{password}
+                    or $in->ask_warn('', N("Option ``Restrict command line options'' is of no use without a password"));
+                  $ok;
+              } },
             { text => N("Clean /tmp at each boot"), val => \$clean_tmp, type => 'bool', advanced => 1 },
         ]) or return 0;
     } else {
