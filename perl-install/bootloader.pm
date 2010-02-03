@@ -1711,7 +1711,8 @@ sub write_grub {
     {
 	my @conf;
 
-	push @conf, map { "$_ $bootloader->{$_}" } grep { $bootloader->{$_} } qw(timeout color password serial shade terminal viewport background foreground);
+	push @conf, map { "$_ $bootloader->{$_}" } grep { defined $bootloader->{$_} } qw(timeout);
+	push @conf, map { "$_ $bootloader->{$_}" } grep { $bootloader->{$_} } qw(color password serial shade terminal viewport background foreground);
 	push @conf, map { $_ . ' ' . $file2grub->($bootloader->{$_}) } grep { $bootloader->{$_} } qw(gfxmenu);
 
 	eval {
