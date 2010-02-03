@@ -380,6 +380,11 @@ sub setupBootloader__mbr_or_not {
     1;
 }
 
+sub get_apple_boot_parts {
+    my ($fstab) = @_;
+    map { "/dev/$_" } (map { $_->{device} } (grep { isAppleBootstrap($_) } @$fstab));
+}
+
 sub setupBootloader__general {
     my ($in, $b, $all_hds, $fstab, $security) = @_;
 
@@ -451,7 +456,7 @@ sub setupBootloader__general {
             { label => N("Bootloader to use"), val => \$b->{method},
               list => \@method_choices, format => \&bootloader::method2text },
             { label => N("Init Message"), val => \$b->{'init-message'} },
-            { label => N("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (grep { isAppleBootstrap($_) } @$fstab)) ] },
+            { label => N("Boot device"), val => \$b->{boot}, list => [ get_apple_boot_parts($fstab) ] },
             { label => N("Open Firmware Delay"), val => \$b->{delay} },
             { label => N("Kernel Boot Timeout"), val => \$b->{timeout} },
             { label => N("Enable CD Boot?"), val => \$b->{enablecdboot}, type => "bool" },
