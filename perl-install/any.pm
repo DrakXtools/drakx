@@ -419,7 +419,6 @@ sub setupBootloader__general {
             { text => N("Enable SMP"), val => \$enable_smp, type => 'bool', advanced => 1 },
             { text => N("Enable APIC"), val => \$enable_apic, type => 'bool', advanced => 1, disabled => sub { !$enable_lapic } }, 
             { text => N("Enable Local APIC"), val => \$enable_lapic, type => 'bool', advanced => 1 },
-		if_($security >= 2 || $b->{password} || $b->{restricted},
 	    { label => N("Password"), val => \$b->{password}, hidden => 1,
 	      validate => sub { 
 		  my $ok = $b->{password} eq $b->{password2} or $in->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]);
@@ -429,7 +428,6 @@ sub setupBootloader__general {
             { label => N("Password (again)"), val => \$b->{password2}, hidden => 1 },
             { text => N("Restrict command line options"), val => \$b->{restricted}, type => "bool", text => N("restrict"),
 	      validate => sub { my $ok = !$b->{restricted} || $b->{password} or $in->ask_warn('', N("Option ``Restrict command line options'' is of no use without a password")); $ok } },
-		),
             { text => N("Clean /tmp at each boot"), val => \$clean_tmp, type => 'bool', advanced => 1 },
         ]) or return 0;
     } else {
