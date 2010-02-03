@@ -323,6 +323,11 @@ sub _parse_grub_menu_lst() {
     %b;
 }
 
+sub is_already_crypted {
+    my ($password) = @_;
+    $password =~ /^$1\$/; # CHECKME: EMPIRIC 
+}
+
 sub read_grub_menu_lst {
     my ($fstab, $grub2dev) = @_;
 
@@ -331,6 +336,7 @@ sub read_grub_menu_lst {
     foreach my $keyword (grep { $_ ne 'entries' } keys %b) {
 	$b{$keyword} = $b{$keyword} eq '' ? 1 : grub2file($b{$keyword}, $grub2dev, $fstab, \%b);
     }
+    $b{encrypted} = is_already_crypted($b{password});
 
     #- sanitize
     foreach my $e (@{$b{entries}}) {
@@ -1666,6 +1672,28 @@ sub update_copy_in_boot {
     }
 }
 
+sub crypt_grub_password {
+    my ($password) = @_;
+    require IPC::Open2;
+    local $ENV{LC_ALL} = 'C';
+    my ($his_out, $his_in);
+    my $pid = IPC::Open2::open2($his_out, $his_in, "$::prefix/sbin/grub-md5-crypt");
+
+    my ($line, $res);
+    while (sysread($his_out, $line, 100)) {
+        if ($line =~ /Password/i) {
+            syswrite($his_in, "$password\n");
+        } else {
+            $res = $line;
+        }
+    }
+    waitpid($pid, 0);
+    my $status = $? >> 8;           
+    die "failed to encrypt password (status=$status)" if $status != 0;
+    chomp_($res);
+}
+
+
 sub write_grub {
     my ($bootloader, $all_hds, $o_backup_extension) = @_;
 
@@ -1714,7 +1742,14 @@ sub write_grub {
 	my @conf;
 
 	push @conf, $format->(grep { defined $bootloader->{$_} } qw(timeout));
-	push @conf, $format->(grep { $bootloader->{$_} } qw(color password serial shade terminal viewport background foreground));
+	push @conf, $format->(grep { $bootloader->{$_} } qw(color serial shade terminal viewport background foreground));
+        if (my $pw = $bootloader->{password}) {
+            if ($bootloader->{encrypted} && !is_already_crypted($pw)) {
+                $bootloader->{password} = crypt_grub_password($pw);
+            }
+            push @conf, $format->('password');
+        }
+
 	push @conf, map { $_ . ' ' . $file2grub->($bootloader->{$_}) } grep { $bootloader->{$_} } qw(gfxmenu);
 
 	eval {
