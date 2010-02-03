@@ -1708,11 +1708,13 @@ sub write_grub {
 	delete $bootloader->{gfxmenu};
     }
 
+    my $format = sub { map { "$_ $bootloader->{$_}" } @_ };
+
     {
 	my @conf;
 
-	push @conf, map { "$_ $bootloader->{$_}" } grep { defined $bootloader->{$_} } qw(timeout);
-	push @conf, map { "$_ $bootloader->{$_}" } grep { $bootloader->{$_} } qw(color password serial shade terminal viewport background foreground);
+	push @conf, $format->(grep { defined $bootloader->{$_} } qw(timeout));
+	push @conf, $format->(grep { $bootloader->{$_} } qw(color password serial shade terminal viewport background foreground));
 	push @conf, map { $_ . ' ' . $file2grub->($bootloader->{$_}) } grep { $bootloader->{$_} } qw(gfxmenu);
 
 	eval {
