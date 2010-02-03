@@ -234,7 +234,7 @@ sub install {
 	    @l = grep { eval $re } @l;
 	}
 
-	collect_needed_libraries(grep { -x $_ } @l);
+	collect_needed_libraries(grep { -f $_ && -x $_ } @l);
 
 	chdir $initial_dir;
 	@l;
