@@ -339,7 +339,7 @@ sub read_grub_menu_lst {
 	    $e->{keep_verbatim} = 1 unless $e->{kernel_or_dev}; 
 	} elsif ($e->{initrd}) {
  	    my $initrd;
- 	    eval { $initrd = grub2file($e->{initrd}, $grub2dev, $fstab, $e)};
+ 	    eval { $initrd = grub2file($e->{initrd}, $grub2dev, $fstab, $e) };
  	    if ($initrd) {
  		$e->{initrd} = $initrd;
  	    } else {
