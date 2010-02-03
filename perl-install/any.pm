@@ -422,7 +422,7 @@ sub setupBootloader__general {
 		),
             { label => N("Main options"), title => 1 },
             { label => N("Delay before booting default image"), val => \$b->{timeout} },
-            { text => N("Enable ACPI"), val => \$force_acpi, type => 'bool' },
+            { text => N("Enable ACPI"), val => \$force_acpi, type => 'bool', advanced => 1 },
             { text => N("Enable SMP"), val => \$enable_smp, type => 'bool', advanced => 1 },
             { text => N("Enable APIC"), val => \$enable_apic, type => 'bool', advanced => 1,
               disabled => sub { !$enable_lapic } }, 
