@@ -409,21 +409,27 @@ sub setupBootloader__general {
 		       }, [
 			 #title => N("Bootloader main options"),
             { label => N("Bootloader"), title => 1 },
-            { label => N("Bootloader to use"), val => \$b->{method}, list => \@method_choices, format => \&bootloader::method2text },
+            { label => N("Bootloader to use"), val => \$b->{method},
+              list => \@method_choices, format => \&bootloader::method2text },
                 if_(arch() !~ /ia64/,
-            { label => N("Boot device"), val => \$b->{boot}, list => \@boot_devices, format => sub { $boot_devices{$_[0]} } },
+            { label => N("Boot device"), val => \$b->{boot}, list => \@boot_devices,
+              format => sub { $boot_devices{$_[0]} } },
 		),
             { label => N("Main options"), title => 1 },
             { label => N("Delay before booting default image"), val => \$b->{timeout} },
             { text => N("Enable ACPI"), val => \$force_acpi, type => 'bool' },
             { text => N("Enable SMP"), val => \$enable_smp, type => 'bool', advanced => 1 },
-            { text => N("Enable APIC"), val => \$enable_apic, type => 'bool', advanced => 1, disabled => sub { !$enable_lapic } }, 
+            { text => N("Enable APIC"), val => \$enable_apic, type => 'bool', advanced => 1,
+              disabled => sub { !$enable_lapic } }, 
             { text => N("Enable Local APIC"), val => \$enable_lapic, type => 'bool', advanced => 1 },
             { label => N("Security"), title => 1 },
 	    { label => N("Password"), val => \$b->{password}, hidden => 1,
 	      validate => sub { 
-		  my $ok = $b->{password} eq $b->{password2} or $in->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]);
-		  my $ok2 = !($b->{password} && $b->{method} eq 'grub-graphic') or $in->ask_warn('', N("You can not use a password with %s", bootloader::method2text($b->{method})));
+		  my $ok = $b->{password} eq $b->{password2}
+                    or $in->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]);
+		  my $ok2 = !($b->{password} && $b->{method} eq 'grub-graphic')
+                    or $in->ask_warn('', N("You can not use a password with %s",
+                                           bootloader::method2text($b->{method})));
 		  $ok && $ok2;
 	      } },
             { label => N("Password (again)"), val => \$b->{password2}, hidden => 1 },
@@ -442,7 +448,8 @@ sub setupBootloader__general {
 			 title => N("Bootloader main options"),
 			 interactive_help_id => 'setupYabootGeneral',
 		       }, [
-            { label => N("Bootloader to use"), val => \$b->{method}, list => \@method_choices, format => \&bootloader::method2text },
+            { label => N("Bootloader to use"), val => \$b->{method},
+              list => \@method_choices, format => \&bootloader::method2text },
             { label => N("Init Message"), val => \$b->{'init-message'} },
             { label => N("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (grep { isAppleBootstrap($_) } @$fstab)) ] },
             { label => N("Open Firmware Delay"), val => \$b->{delay} },
