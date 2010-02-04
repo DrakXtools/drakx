@@ -201,10 +201,11 @@ fi
     }
     # ka deploy need some files in all.rdz 
     {
-	mkdir_p("$tmp_initrd/$_") foreach qw(dev ka proc var/tmp);
+	mkdir_p("$tmp_initrd/$_") foreach qw(dev ka proc var/tmp tmp/stage2);
 	symlink("/sbin", "$tmp_initrd/bin");
 	cp_af("/usr/bin/ka-d-client", "$tmp_initrd/ka/ka-d-client");
-	cp_af("/usr/bin/mke2fs_diet", "$tmp_initrd/sbin/mke2fs");
+	# new busibox (1.6.0) will provide mke2fs tool
+	cp_af("/usr/bin/mke2fs.static", "$tmp_initrd/sbin/mke2fs");
 	cp_af("/bin/busybox.static", "$tmp_initrd/sbin/busybox");
 	my @funct = map { /functions:/ .. /^$/ ? do { s/\s//g; split /,/ } : () } `busybox`;
 	shift @funct;
