@@ -336,7 +336,10 @@ sub read_grub_menu_lst {
     foreach my $keyword (grep { $_ ne 'entries' } keys %b) {
 	$b{$keyword} = $b{$keyword} eq '' ? 1 : grub2file($b{$keyword}, $grub2dev, $fstab, \%b);
     }
-    $b{encrypted} = is_already_crypted($b{password});
+    if ($b{password} =~ /^--md5 (.*)/) {
+        $b{password} = $1;
+        $b{encrypted} = 1;
+    }
 
     #- sanitize
     foreach my $e (@{$b{entries}}) {
@@ -1744,10 +1747,13 @@ sub write_grub {
 	push @conf, $format->(grep { defined $bootloader->{$_} } qw(timeout));
 	push @conf, $format->(grep { $bootloader->{$_} } qw(color serial shade terminal viewport background foreground));
         if (my $pw = $bootloader->{password}) {
-            if ($bootloader->{encrypted} && !is_already_crypted($pw)) {
-                $bootloader->{password} = crypt_grub_password($pw);
+            if ($bootloader->{encrypted}) {
+                $pw = crypt_grub_password($pw) if !is_already_crypted($pw);
+                $bootloader->{'password --md5'} = $pw;
+                push @conf, $format->('password --md5');
+            } else {
+                push @conf, $format->('password');
             }
-            push @conf, $format->('password');
         }
 
 	push @conf, map { $_ . ' ' . $file2grub->($bootloader->{$_}) } grep { $bootloader->{$_} } qw(gfxmenu);
