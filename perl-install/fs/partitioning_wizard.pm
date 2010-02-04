@@ -504,7 +504,6 @@ sub main {
 
         my @kinds = map { diskdrake::hd_gtk::hd2kind($_) } sort { $a->{is_removable} <=> $b->{is_removable} } @{$all_hds->{hds} };
         push @kinds, map { diskdrake::hd_gtk::raid2kind($_) } @{$all_hds->{raids}};
-        push @kinds, map { diskdrake::hd_gtk::lvm2kind($_) } @{$all_hds->{lvms}};
 
         my $hdchoice = Gtk2::HBox->new;
 
@@ -512,7 +511,7 @@ sub main {
 
         my $combobox = Gtk2::ComboBox->new_text;
         foreach (@kinds) {
-            my $info = $_->{val}{info};
+            my $info = $_->{val}{info} || $_->{val}{name};
             $info .= " (" . formatXiB($_->{val}{totalsectors}, 512) . ")" if $_->{val}{totalsectors};
             $combobox->append_text($info);
         }
