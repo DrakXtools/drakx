@@ -338,7 +338,6 @@ sub read_grub_menu_lst {
     }
     if ($b{password} =~ /^--md5 (.*)/) {
         $b{password} = $1;
-        $b{encrypted} = 1;
     }
 
     #- sanitize
@@ -1747,13 +1746,9 @@ sub write_grub {
 	push @conf, $format->(grep { defined $bootloader->{$_} } qw(timeout));
 	push @conf, $format->(grep { $bootloader->{$_} } qw(color serial shade terminal viewport background foreground));
         if (my $pw = $bootloader->{password}) {
-            if ($bootloader->{encrypted}) {
-                $pw = crypt_grub_password($pw) if !is_already_crypted($pw);
-                $bootloader->{'password --md5'} = $pw;
-                push @conf, $format->('password --md5');
-            } else {
-                push @conf, $format->('password');
-            }
+            $pw = crypt_grub_password($pw) if !is_already_crypted($pw);
+            $bootloader->{'password --md5'} = $pw;
+            push @conf, $format->('password --md5');
         }
 
 	push @conf, map { $_ . ' ' . $file2grub->($bootloader->{$_}) } grep { $bootloader->{$_} } qw(gfxmenu);

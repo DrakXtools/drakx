@@ -428,8 +428,6 @@ sub setupBootloader__general {
               disabled => sub { !$enable_lapic } }, 
             { text => N("Enable Local APIC"), val => \$enable_lapic, type => 'bool', advanced => 1 },
             { label => N("Security"), title => 1 },
-            { text => N("Encrypted password"), val => \$b->{encrypted}, type => "bool",
-              disabled => sub { $b->{method} !~ /^grub/ } },
 	    { label => N("Password"), val => \$b->{password}, hidden => 1,
 	      validate => sub { 
 		  my $ok = $b->{password} eq $b->{password2}
