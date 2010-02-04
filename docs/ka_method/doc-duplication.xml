@@ -1,12 +1,13 @@
 <?xml version="1.0"  encoding="ISO-8859-1"?>
   <article lang="en">
-  <title>Clone a node using KA method</title>
+      <title>Clone a node/computer using KA method</title>
   <sect1>
     <title>Clone a computer over the network</title>
     <para>
       Goal of duplication is to easily deploy a computer over network without taking care of numbers of computer. In this documentation, we call golden node the node we want to clone.
-      We can duplicate SCSI or IDE hard drive, and duplication support multiple filesystem (reiserfs, ext2, ext3, xfs, jfs).
+      We can duplicate SCSI or IDE hard drive, and duplication support multiple filesystem (reiserfs, ext2, ext3, ext4, xfs, jfs).
     </para>
+    <para>WARNING: all data on client nodes will be erased ! We ducplicate partitions of HDD' golden node, and the process will do a fdisk command on the client node, so ALL YOUR DATA will be erased on client nodes.</para>
     <sect2>
       <title>KA method</title>
       <para>
@@ -21,7 +22,6 @@
 	<itemizedlist>
 	  <listitem><para>KA method doesn't support RAID software</para></listitem>
 	  <listitem><para>you can only clone Linux filesystems (if you want to duplicate another kinf of FS, it's up to you to modify the scripts)</para></listitem>
-	  <listitem><para>you can only duplicate same kind of HDD (IDE or SCSI)</para></listitem>
 	</itemizedlist>
       </para>
     </sect2>
@@ -33,21 +33,21 @@
 	  The clone process works in three steps
 	</para>
 	<itemizedlist>
-	  <listitem><para><emphasis role="bold">PXE boot to retrieve stage1</emphasis>: the computer boot on PXE mode, retrieve <emphasis role="bold">vmlinuz</emphasis> and an <emphasis role="bold">initrd</emphasis>. The computer is in <emphasis role="bold">stage1</emphasis> mode, and is able to get the stage2 throug KA. Network is up.</para></listitem>
-	  <listitem><para><emphasis role="bold">get stage2</emphasis>: the computer gets the stage2 with KA method. The <emphasis role="bold">stage2</emphasis> contains all necessary tools to recognize your hardware (the most important things is to detect your HDD), and all necessary tools to finalize the cloning process.</para></listitem>
-	  <listitem><para><emphasis role="bold">Duplication process</emphasis>: the computer auto-probes needed modules to be able to access to HDD. A basic log server is launched on the client node to be able to run command and get status of the KA duplication process.</para></listitem>
+	  <listitem><para><emphasis role="bold">PXE boot to retrieve stage1</emphasis>: the computer boot on PXE mode, retrieve <emphasis role="bold">vmlinuz</emphasis> and an <emphasis role="bold">initrd</emphasis> image. The computer is in <emphasis role="bold">stage1</emphasis> mode, and is able to get the stage2 throug KA. Network is up.</para></listitem>
+	  <listitem><para><emphasis role="bold">get stage2</emphasis>: the computer gets the stage2 with the KA method. The <emphasis role="bold">stage2</emphasis> contains all necessary tools to recognize your hardware (the most important things is to detect your HDD and your network card), and all necessary tools to finalize the cloning process.</para></listitem>
+	  <listitem><para><emphasis role="bold">Duplication process</emphasis>: the computer auto-probes needed modules to be able to access the HDD. A basic log server is launched on the client node to be able to run command and get status of the KA duplication process. The computer reconfigure the modprobe.conf and restore the booloader (grub or lilo)</para></listitem>
 	</itemizedlist>
       </sect3>
       <sect3>
 	<title>Needed files</title>
 	<para>
-	  All needed files are available on Mandriva Linux cooker.
+	  All needed files are available in Mandriva Linux cooker.
 	</para>
 	<para>
 	  <itemizedlist>
 	    <listitem><para><emphasis role="bold">install/stage2/rescue.sqhfs</emphasis>: this is the stage2 file with all needed files to detect and probe modules, and launch the third step of the duplication process. This file will be used on the golden node.</para></listitem>
 	    <listitem><para><emphasis role="bold">isolinux/alt0/vmlinuz</emphasis>: linux kernel, needed in the <emphasis role="bold">/var/lib/tftpboot/X86PC/linux/images/</emphasis> directory of the PXE server</para></listitem>
-	    <listitem><para><emphasis role="bold">isolinux/alt0/all.rdz</emphasis>: stage1 and all needed modules.</para></listitem>
+	    <listitem><para><emphasis role="bold">isolinux/alt0/all.rdz</emphasis>: stage1 and all needed modules and tools.</para></listitem>
 	  </itemizedlist>
 	</para>
       </sect3>
@@ -76,7 +76,7 @@ label local
 label kamethod
     KERNEL images/vmlinuz
     APPEND initrd=images/all.rdz ramdisk_size=64000 vga=788 \
-	      automatic=method:ka,interface:eth0,network:dhcp root=/dev/ram3 rw rescue kamethod</screen>
+	      automatic=method:ka,interface:eth0,network:dhcp root=/dev/ram3 rw kamethod</screen>
 	</para>
 	<para>
 	  At boot prompt no you can boot:
@@ -143,8 +143,8 @@ prompt_timeout=2
 # what services to provide, priority in ordering
 # CSA = Client System Architecture
 # service=<CSA>,<min layer>,<max layer>,<basename>,<menu entry>
-service=X86PC,0,2,linux,Mandrake Linux x86
-service=IA64PC,0,2,linux,Mandrake Linux IA64
+service=X86PC,0,2,linux,Mandriva Linux x86
+service=IA64PC,0,2,linux,Mandriva Linux IA64
 service=X86PC,0,0,local,Local boot
 
 # tftpd base dir
@@ -255,18 +255,20 @@ subnet NET.0 netmask 255.255.255.0 {
       <title>The rescue.sqfs file</title>
       <para>
 	You need the rescue disk (wich contains the <emphasis role="bold">/ka</emphasis> directory),
-	and mount it loop in <emphasis role="bold">/mnt/ka</emphasis>.
+	Just extract this file, and copy all directory in <emphasis role="bold">/mnt/ka</emphasis>.
       </para>
       <para>
 	<screen>
-mkdir /mnt/ka
-mount -o loop -t squashfs rescue.sqfs /mnt/ka</screen>
+[root@guibpiv ~]# mkdir /mnt/ka
+[root@guibpiv ~]# cd /mnt/ka/
+[root@guibpiv ka]# unsquashfs rescue.sqfs
+[root@guibpiv ka]# mv squashfs-root/* .
+[root@guibpiv ka]# ls
+bin/  dev/  etc/  ka/  lib/  modules/  proc/  sbin/  squashfs-root/  tmp/  usr/  var/
+</screen>
       </para>
       <para>
-	Go in the <emphasis role="bold">/mnt/ka/ka</emphasis> directory, and see all new files available. All those files are needed
-	to do a <emphasis role="bold">KA</emphasis> duplication process. We will explain now the rule of each of them. If you want
-	to modify the content of this rescue disk (add scripts...), mount it in a tempory directory, and copy the content
-	into the <emphasis role="bold">/mnt/ka</emphasis> directory.
+	  Go in the <emphasis role="bold">/mnt/ka/ka</emphasis> directory, and see all new files available. All those files are needed to do a <emphasis role="bold">KA</emphasis> duplication process. We will explain now the rule of each of them.i You can modify all them, those files will be copied onto the directory <emphasis role="bold">/tmp/stage2</emphasis> of the client node.
       </para>
       <sect3>
 	<title>ka-d.sh</title>
@@ -276,7 +278,7 @@ mount -o loop -t squashfs rescue.sqfs /mnt/ka</screen>
     -h, --help : display this message
     -n num : specify the number of (destination) nodes
     -x dir : exclude directory
-    -X sdb : exclude sdb for the replication
+    -X sdb|sdc : exclude sdb for the replication
     -m drive : copy the master boot record (for windows) of this drive
     -M drive file : use 'file' as master boot record (must be 446 bytes long) for the specified drive
     -D partition : also copy partition 'partition'
@@ -284,7 +286,7 @@ mount -o loop -t squashfs rescue.sqfs /mnt/ka</screen>
     -d delay : delay beteween the release of 2 clients (1/10 second)
     -r 'grub|lilo' : choose the bootloader (you can add mkinitrd options)
 
-    ie: ka-d.sh -n 3 -p sda /tmp/desc -X sdb -r 'grub --with=ata_piix --with=piix'</screen>
+    ie: ka-d.sh -n 3 -p sda /tmp/desc -X 'sdb|sdc' -r 'grub --with=ata_piix --with=piix'</screen>
 	</para>
       </sect3>
       <sect3>
@@ -321,24 +323,20 @@ mount -o loop -t squashfs rescue.sqfs /mnt/ka</screen>
       <sect3>
 	<title>ka-d-server</title>
 	<para>
-	  The <emphasis role="bold">ka-d-server</emphasis> binary file is used to be a <emphasis role="bold">KA</emphasis> golden node server.
-	  Like the <emphasis role="bold">ka-d-client</emphasis> the session arguments is an important parameter (<emphasis role="bold">-s session_name</emphasis>).
-	  The code source is available in the ka-deploy-0.92 SRPM.
+	    The <emphasis role="bold">ka-d-server</emphasis> binary file is used to be a <emphasis role="bold">KA</emphasis> golden node server. Like the <emphasis role="bold">ka-d-client</emphasis> the session arguments is an important parameter (<emphasis role="bold">-s session_name</emphasis>). The session name will be <emphasis role="bold">getstage2</emphasis> to retrieve the stage2 (after the PXE boot) and will be <emphasis role="bold">kainstall1</emphasis> at duplication process step. If you want to do more than one duplication process of nodes at the same time, you should synchronize the ka_sesion name between the server and the client. The code source is available in the ka-deploy SRPM.
 	</para>
       </sect3>
       <sect3>
 	<title>ka_replication.sh</title>
 	<para>
-	  Script launched on the <emphasis role="bold">KA</emphasis> client (after getting stage2 and probing modules), to do the full process of the
-	  <emphasis role="bold">Ka</emphasis> duplication.
+	  Script launched on the <emphasis role="bold">KA</emphasis> client (after getting stage2 and probing modules), to do the full process of the <emphasis role="bold">Ka</emphasis> duplication.
 	  This script call other scripts to prepare the node (prepare_node.sh), configure the bootloader (make_initrd_grub or make_initrd_lilo).
 	</para>
       </sect3>
       <sect3>
 	<title>store_log.sh</title>
 	<para>
-	  Basic script to store the log of the <emphasis role="bold">KA</emphasis> duplication process on an FTP server. Adjust to feet your need, and uncomment
-	  the line <emphasis role="bold">#store_log.sh</emphasis> in the <emphasis role="bold">/mnt/ka/ka/ka_replication.sh</emphasis> file.
+	  Basic script to store the log of the <emphasis role="bold">KA</emphasis> duplication process on an FTP server. Adjust to feet your need, and uncomment the line <emphasis role="bold">#store_log.sh</emphasis> in the <emphasis role="bold">/mnt/ka/ka/ka_replication.sh</emphasis> file.
 	</para>
       </sect3>
       <sect3>
@@ -350,30 +348,24 @@ mount -o loop -t squashfs rescue.sqfs /mnt/ka</screen>
       <sect3>
         <title>make_initrd_grub</title>
 	<para>
-	  Restore and reload the Grub bootloader in the <emphasis role="bold">/mnt/disk</emphasis> directory. It's a very basic script, and perhaps
-	  use the <emphasis role="bold">restore_bootloader</emphasis> of the Mandriva Linux Rescue should be a better idea.
-	</para>
+	  Restore and reload the Grub bootloader in the <emphasis role="bold">/mnt/disk</emphasis> directory. It's a very basic script, and perhaps use the <emphasis role="bold">restore_bootloader</emphasis> of the Mandriva Linux Rescue should be a better idea.	</para>
       </sect3>
       <sect3>
         <title>make_initrd_lilo</title>
 	<para>
-	  Restore and reload the lilo bootloader in the <emphasis role="bold">/mnt/disk</emphasis> directory. Again it's a very basic script, perhaps we should use the
-	  <emphasis role="bold">restore_bootloader</emphasis> of the Mandriva Linux Rescue.
+	  Restore and reload the lilo bootloader in the <emphasis role="bold">/mnt/disk</emphasis> directory. Again it's a very basic script, perhaps we should use the <emphasis role="bold">restore_bootloader</emphasis> of the Mandriva Linux Rescue.
 	</para>
       </sect3>
       <sect3>
         <title>prepare_node.sh</title>
 	<para>
-	  This script remove in the futur system the old network's udev rules, old dhcp cache files, launch the script <emphasis role="bold">gen_modprobe_conf.pl</emphasis> to
-	  regenerate an uptodate <emphasis role="bold">/etc/modprobe.conf</emphasis> in the new system, and launch the script to restore the bootloader.
-	  If you want to do more action on the installed, system, you can modify this script.
+	  This script remove in the futur system the old network's udev rules, old dhcp cache files, launch the script <emphasis role="bold">gen_modprobe_conf.pl</emphasis> to regenerate an up to date <emphasis role="bold">/etc/modprobe.conf</emphasis> in the new system, and launch the script to restore the bootloader.  If you want to do more action on the installed, system, you can modify this script.
 	</para>
       </sect3>
       <sect3>
         <title>send_status.pl</title>
 	<para>
-	  Very basic perl script to open the port 12345, and paste the content of the <emphasis role="bold">/tmp/ka*</emphasis> file. It also
-	  permit the execution of commands on node, if user send a message from the golden node with the <emphasis role="bold">exec</emphasis> prefix.
+	  Very basic perl script to open the port 12345, and paste the content of the <emphasis role="bold">/tmp/ka*</emphasis> file. It also permit the execution of commands on node, if user send a message from the golden node with the <emphasis role="bold">exec</emphasis> prefix.
 	</para>
       </sect3>
       <sect3>
@@ -387,8 +379,7 @@ mount -o loop -t squashfs rescue.sqfs /mnt/ka</screen>
   <sect1>
     <title>The golden node, KA server</title>
     <para>
-      Now, it is time to build a description of the node partitions. You can use the script
-      <emphasis role="bold">/mnt/ka/ka/fdisk_to_desc</emphasis> as root user, or your favorite text editor,
+      Now, it is time to build a description of the node partitions. You can use the script <emphasis role="bold">/mnt/ka/ka/fdisk_to_desc</emphasis> as root user, or your favorite text editor,
       you can write a file like this one:
     </para>
     <para>
@@ -405,7 +396,7 @@ logical linux fill</screen>
       sizes accoding to your system.
     </para>
     <para>
-      Type the following to start the ka replication server as root user:
+      Type the following to start the ka replication server as root user on the golden node:
     </para>
     <para>
 <programlisting><![CDATA[
@@ -443,7 +434,7 @@ Socket 5 on port 30764 on node40.guibland.com ready.
       </itemizedlist>
     </para>
     <para>
-      Now the node is waiting for the rest of the nodes to start replication.
+      Now the golden node is waiting for clients nodes to start replication.
     </para>
   </sect1>
   <sect1>
@@ -457,8 +448,7 @@ Socket 5 on port 30764 on node40.guibland.com ready.
       </para>
       <screen>DEFAULT kamethod</screen>
       <para>
-	So, next time a node boots, the PXE server will force the
-	node to boot using the kamethod.
+	So, next time a node boots, the PXE server will force the node to boot using the kamethod entry.
       </para>
     </sect2>
     <sect2>
@@ -480,16 +470,14 @@ Socket 5 on port 30764 on node40.guibland.com ready.
       <para>
 	Once all the nodes have found the <emphasis role="bold">KA</emphasis> server, the first
 	duplication process will start. This step duplicates the
-	<emphasis role="bold">rescue_stage2</emphasis> from the <emphasis role="bold">/mnt/ka</emphasis> directory
-	of the golden node, in the client's nodes memory (<emphasis role="bold">/dev/ram3</emphasis>). Then, nodes chroot their
-	memories (the <emphasis role="bold">/tmp/stage2</emphasis> directory), and launch the <emphasis role="bold">drvinst</emphasis> command from the rescue disk, to probe all needed their modules (drivers).
-	Then, the second step of the duplication starts.
+	<emphasis role="bold">stage2</emphasis> from the <emphasis role="bold">/mnt/ka</emphasis> directory
+	of the golden node, in the client's nodes memory (<emphasis role="bold">/dev/ram3</emphasis> formated as ext2). Then, nodes chroot their memories (the <emphasis role="bold">/tmp/stage2</emphasis> directory), and launch the <emphasis role="bold">drvinst</emphasis> command from the stage2, to probe all needed their modules (drivers). Then, the second step of the duplication starts.
       </para>
       <para>
 	The duplication process will clone your drives following
 	the description you have made (<emphasis role="bold">/tmp/desc</emphasis> of the golden node).
 	Nodes will rewrite their partition table, then format their filesystems (ReiserFs, XFS,
-	ext2/3, JFS). All new partitions will be mounted in the <emphasis role="bold">/mnt/disk</emphasis> directory.
+	ext2/3/4, JFS). All new partitions will be mounted in the <emphasis role="bold">/mnt/disk</emphasis> directory.
 	Then, the drive duplication process will begin. On a fast Ethernet switch you can reach speeds of 10MBytes/sec.
       </para>
     </sect2>
