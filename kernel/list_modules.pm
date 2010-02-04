@@ -103,7 +103,7 @@ our %l = (
     scsi => [
       if_(arch() =~ /ppc/, qw(mesh mac53c94)),
       if_(arch() =~ /^sparc/, qw(qlogicpti)),
-      if_(arch() !~ /alpha/ && arch() !~ /sparc/,
+      if_(arch() !~ /alpha|sparc/,
 	'53c7,8xx',
         qw(a100u2w advansys aha152x aha1542 aha1740 AM53C974 atp870u),
         qw(BusLogic dc395x dc395x_trm dmx3191d dtc eata eata_dma),
@@ -136,7 +136,7 @@ our %l = (
     ],
     hardware_raid => [
       if_(arch() =~ /^sparc/, qw(pluto)),
-      if_(arch() !~ /alpha/ && arch() !~ /sparc/,
+      if_(arch() !~ /alpha|sparc/,
         # 3w-xxxx drives ATA-RAID, 3w-9xxx and arcmsr drive SATA-RAID
         qw(3w-9xxx 3w-xxxx a320raid aacraid arcmsr cciss cpqarray),
         qw(cpqfc DAC960 dpt_i2o gdth hptiop i2o_block imm ipr ips),
