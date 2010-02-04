@@ -1810,7 +1810,7 @@ sub write_grub {
 	my $f = "$::prefix/boot/grub/menu.lst";
 	log::l("writing grub config to $f");
 	renamef($f, $f . ($o_backup_extension || '.old'));
-	output($f, map { "$_\n" } @conf);
+	output_with_perm($f, 0600, map { "$_\n" } @conf);
     }
     {
 	my $f = "$::prefix/boot/grub/install.sh";

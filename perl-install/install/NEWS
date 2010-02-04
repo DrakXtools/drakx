@@ -13,6 +13,8 @@
   o always display security settings
   o allow timeout to be '0'
   o default to always crypt grub passwords
+  o ensure /boot/grub/menu.lst permissions are 0600 since it can
+    contains a password
 - partitioning wizard:
   o offer to install on dmraid (instead of crashing if no other disk)
   o offer to install on existing lvm

@@ -10,6 +10,8 @@
   o wifi: r8187se, r8192_pci, r8192u_usb, rt2800pci, vt6655_stage, vt6656_stage
 - drakboot:
   o default to always crypt grub passwords
+  o ensure /boot/grub/menu.lst permissions are 0600 since it can
+    contains a password
   o fix support for crypted grub passwords
 
 Version 13.9 - 4 February 2010
