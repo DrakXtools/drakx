@@ -81,6 +81,8 @@ void process_cmdline(void)
 		if (!strcmp(name, "changedisk")) set_param(MODE_CHANGEDISK);
 		if (!strcmp(name, "updatemodules") ||
 		    !strcmp(name, "thirdparty")) set_param(MODE_THIRDPARTY);
+		if (!strcmp(name, "rescue") ||
+	            !strcmp(name, "kamethod")) set_param(MODE_RESCUE);
 		if (!strcmp(name, "rescue")) set_param(MODE_RESCUE);
 		if (!strcmp(name, "keepmounted")) set_param(MODE_KEEP_MOUNTED);
 		if (!strcmp(name, "noauto")) set_param(MODE_NOAUTO);
