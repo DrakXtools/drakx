@@ -44,14 +44,16 @@ static void my_pause(void) {
 static enum return_type ka_wait_for_stage2(int count)
 {
 	char * ramdisk = "/dev/ram3"; /* warning, verify that this file exists in the initrd*/
-	char * ka_launch[] = { "/ka/ka-d-client", "-w","-s","getstage2","-e","(cd /tmp/stage2; tar --extract  --read-full-records --same-permissions --numeric-owner --sparse --file - )", NULL }; /* The command line for ka_launch */
+	char * ka_launch[] = { "/ka/ka-d-client", "-w","-s","getstage2","-e","(cd /tmp/stage2; tar -x -f - )", NULL }; /* The command line for ka_launch */
 	char * mkfs_launch[] = { "/sbin/mke2fs", ramdisk, NULL}; /* The mkfs command for formating the ramdisk */
 
 	log_message("KA: Preparing to receive stage 2....");
+        wait_message("Preparing to receive stage 2");
+
 	int pida, wait_status;
 
 	if (!(pida = fork())) { /* Forking current process for running mkfs */
-		    close(1);
+		    //close(1);
 		    close(2);
 		execv(mkfs_launch[0], mkfs_launch); /* Formating the ramdisk */
 		printf("KA: Can't execute %s\n<press Enter>\n", mkfs_launch[0]);
@@ -59,10 +61,13 @@ static enum return_type ka_wait_for_stage2(int count)
 		return KAERR_CANTFORK;
 	}
 	while (wait4(-1, &wait_status, 0, NULL) != pida) {}; /* Waiting the end of mkfs */
+	remove_wait_message();
 
+        wait_message("Mounting /dev/ram3 at %s", STAGE2_LOCATION);
 	if (my_mount(ramdisk, STAGE2_LOCATION, "ext2", 1)) {/* Trying to mount the ramdisk */
 		return RETURN_ERROR;
 	}
+	remove_wait_message();
 
 	log_message("KA: Waiting for stage 2....");
 	wait_message("Waiting for rescue from KA server (Try %d/%d)", count, KA_MAX_RETRY);
