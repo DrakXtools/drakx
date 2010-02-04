@@ -1,6 +1,6 @@
 package bootloader; # $Id$
 
-#use diagnostics;
+use diagnostics;
 use strict;
 
 #-######################################################################################
