@@ -25,6 +25,7 @@ our %langs = (
 'am' =>    [ 'Amharic',             'ZZ emarNa',         'am_ET', '  3  ', 'utf_ethi' ],
 'ar' =>    [ 'Arabic',              'AA Arabic',         'ar_EG', ' 23  ', 'utf_ar' ],
 'as' =>    [ 'Assamese',            'ZZ Assamese',       'as_IN', ' 2   ', 'utf_beng' ],
+'ast' =>   [ 'Asturian',            'Asturianu',         'ast_ES', ' 1   ', 'unicode' ],
 'az' =>    [ 'Azeri (Latin)',       'Azerbaycanca',      'az_AZ', ' 2   ', 'utf_az' ],
 'be' =>    [ 'Belarussian',         'Belaruskaya',       'be_BY', '1    ', 'utf_cyr1' ],
 'ber' =>   [ 'Berber',              'ZZ Tamazight',      'ber_MA', '  3  ', 'utf_tfng', 'ber_MA:ber:fr' ],
