@@ -17,7 +17,7 @@ sub new {
     my ($class, $name) = @_;
     $name =~ s/[^\w-]/_/g;
     $name = substr($name, 0, 63); # max length must be < NAME_LEN / 2  where NAME_LEN is 128
-    bless { disks => [], VG_name => $name }, $class;
+    bless { disks => [], VG_name => $name, device => $name }, $class;
 }
 sub use_pt_type { 0 }
 sub hasExtended { 0 }
