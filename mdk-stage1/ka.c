@@ -45,7 +45,7 @@ static enum return_type ka_wait_for_stage2(int count)
 {
 	char * ramdisk = "/dev/ram3"; /* warning, verify that this file exists in the initrd*/
 	char * ka_launch[] = { "/ka/ka-d-client", "-w","-s","getstage2","-e","(cd /tmp/stage2; tar -x -f - )", NULL }; /* The command line for ka_launch */
-	char * mkfs_launch[] = { "/sbin/mke2fs", ramdisk, NULL}; /* The mkfs command for formating the ramdisk */
+	char * mkfs_launch[] = { "/sbin/mke2fs", "-m", "0", ramdisk, NULL}; /* The mkfs command for formating the ramdisk */
 
 	log_message("KA: Preparing to receive stage 2....");
         wait_message("Preparing to receive stage 2");
