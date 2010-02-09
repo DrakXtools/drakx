@@ -124,7 +124,19 @@ sub get_geometries {
     my (@hds) = @_;
 
     @hds = grep {
-	if (my $h = get_geometry($_->{file})) {
+	if ($_->{bus} =~ /dmraid/) {
+	    sysopen(my $F, $_->{file}, 0);
+	    my $total = c::total_sectors(fileno $F);
+	    my %geom;
+	    $geom{heads} = 255;
+	    $geom{sectors} = 63;
+	    $geom{start} = 1;
+	    compute_nb_cylinders(\%geom, $total);
+	    $geom{totalcylinders} = $geom{cylinders};
+	    log::l("Fake geometry on ".$_->{file}.": heads=$geom{heads} sectors=$geom{sectors} cylinders=$geom{cylinders} start=$geom{start}");
+	    add2hash_($_, { totalsectors => $total, geom => \%geom });
+	    1;
+        } elsif (my $h = get_geometry($_->{file})) {
 	    add2hash_($_, $h);
 	    1;
 	} else {

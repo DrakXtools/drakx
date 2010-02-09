@@ -491,7 +491,7 @@ sub choosePackagesTree {
 			    interactive_help => sub { 
                                 interactive::gtk::display_help($o,
                                                                { interactive_help_id => 
-                                                                   'choosePackages#choosePackagesTree' }, $w) },
+                                                                   'choosePackages#choosePackagesTree' }, my $w) },
 
 			    ok => N("Install"),
 			    cancel => N("Previous"),
