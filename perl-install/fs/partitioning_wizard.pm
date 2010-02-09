@@ -396,7 +396,7 @@ sub create_display_box {
                      gtkset_size_request(Gtk2::Label->new("."), 1, 0));
 	gtkpack__($display_box, $part_sep);
     }
-    $display_box->remove($part_sep);
+    $display_box->remove($part_sep) if $part_sep;
     unless ($resize || $fill_empty) {
         my @types = (N_("Ext2/3/4"), N_("XFS"), N_("Swap"), arch() =~ /sparc/ ? N_("SunOS") : arch() eq "ppc" ? N_("HFS") : N_("Windows"),
                     N_("Other"), N_("Empty"));
