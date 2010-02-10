@@ -1,5 +1,3 @@
-- fix invocation of grub-md5-crypt from within installer (#57461)
-
 Version 13.11 - 10 February 2010
 
 - add support for asturian (#56990)
@@ -8,6 +6,9 @@ Version 13.11 - 10 February 2010
   o allow reusing existing partitions in lvm
   o fix a crash on empty disk
   o fix using empty dmraid
+- drakboot:
+  o fix crypted password detection
+  o fix invocation of grub-md5-crypt from within installer (#57461)
 
 Version 13.10 - 4 February 2010
 
