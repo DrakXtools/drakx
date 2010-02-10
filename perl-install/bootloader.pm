@@ -325,7 +325,7 @@ sub _parse_grub_menu_lst() {
 
 sub is_already_crypted {
     my ($password) = @_;
-    $password =~ /^$1\$/; # CHECKME: EMPIRIC 
+    $password =~ /^\$1\$/; # CHECKME: EMPIRIC 
 }
 
 sub read_grub_menu_lst {
