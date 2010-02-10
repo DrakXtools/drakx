@@ -1679,7 +1679,7 @@ sub crypt_grub_password {
     require IPC::Open2;
     local $ENV{LC_ALL} = 'C';
     my ($his_out, $his_in);
-    my $pid = IPC::Open2::open2($his_out, $his_in, "$::prefix/sbin/grub-md5-crypt");
+    my $pid = IPC::Open2::open2($his_out, $his_in, "$::prefix/sbin/grub-md5-crypt", $::prefix ? "--grub-shell=$::prefix/sbin/grub" : ());
 
     my ($line, $res);
     while (sysread($his_out, $line, 100)) {
