@@ -119,7 +119,7 @@ sub raw {
     } else {
         if ($options->{setuid}) {
             require POSIX;
-            my ($logname, $home) = (getpwuid(501))[0,7];
+            my ($logname, $home) = (getpwuid($options->{setuid}))[0,7];
             $ENV{LOGNAME} = $logname if $logname;
 
             # if we were root and are going to drop privilege, keep a copy of the X11 cookie:
