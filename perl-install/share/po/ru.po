@@ -6,9 +6,7 @@
 # Alice Lafox <alice@lafox.com.ua>, 2003.
 # Alice Lafox <alice@lafox.net>, 2004, 2005.
 # Alexander Kuzmenkov <rc@mezon.ru>, 2007.
-# akdengi <kazancas@gmail.com>, 2008.
-# Alexander Kazancev <kazancas@gmail.com>, 2008.
-# akdengi <kazancas@mandriva.ru>, 2009.
+# Alexander Kazancev <kazancas@mandriva.org>, 2008,2009,2010
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
@@ -24,6 +22,7 @@ msgstr ""
 "\n"
 "\n"
 "X-Generator: KBabel 1.11.4\n"
+"X-Language: ru_RU\n"
 
 #: any.pm:252 any.pm:929 diskdrake/interactive.pm:597
 #: diskdrake/interactive.pm:802 diskdrake/interactive.pm:846
@@ -460,7 +459,7 @@ msgstr "Управление пользователями"
 #: any.pm:865
 #, c-format
 msgid "Enable guest account"
-msgstr ""
+msgstr "Включить аккаунт гостя"
 
 #: any.pm:866 authentication.pm:237
 #, c-format
@@ -1394,9 +1393,9 @@ msgid "Unknown"
 msgstr "Неизвестный"
 
 #: diskdrake/hd_gtk.pm:383
-#, fuzzy, c-format
+#, c-format
 msgid "Ext4"
-msgstr "Выход"
+msgstr "Ext4"
 
 #: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
 #, c-format
@@ -2658,8 +2657,8 @@ msgid ""
 "\n"
 "Be careful: this operation is dangerous. If you have not already done so, "
 "you first need to exit the installation, run \"chkdsk c:\" from a Command "
-"Prompt under Microsoft Windows® (beware, running graphical program \"scandisk"
-"\" is not enough, be sure to use \"chkdsk\" in a Command Prompt!), "
+"Prompt under Microsoft Windows® (beware, running graphical program "
+"\"scandisk\" is not enough, be sure to use \"chkdsk\" in a Command Prompt!), "
 "optionally run defrag, then restart the installation. You should also backup "
 "your data.\n"
 "\n"
@@ -2760,9 +2759,9 @@ msgstr ""
 "После завершения сохраните настройки с помощью клавиши «w»"
 
 #: fs/partitioning_wizard.pm:401
-#, fuzzy, c-format
+#, c-format
 msgid "Ext2/3/4"
-msgstr "Ext3"
+msgstr "Ext2/3/4"
 
 #: fs/partitioning_wizard.pm:431 fs/partitioning_wizard.pm:568
 #, c-format
@@ -2820,8 +2819,8 @@ msgstr "На дисках %s обнаружен программный (BIOS) RA
 #: fsedit.pm:247
 #, c-format
 msgid ""
-"I can not read the partition table of device %s, it's too corrupted for me :"
-"(\n"
+"I can not read the partition table of device %s, it's too corrupted for me "
+":(\n"
 "I can try to go on, erasing over bad partitions (ALL DATA will be lost!).\n"
 "The other solution is to not allow DrakX to modify the partition table.\n"
 "(the error is %s)\n"
@@ -3220,7 +3219,7 @@ msgstr ""
 "Здесь можно выбрать альтернативный драйвер (OSS или ALSA) для звуковой карты "
 "(%s)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
@@ -3261,8 +3260,8 @@ msgstr ""
 "Куда уж больше, все драйверы OSS и так заново открывают колесо.\n"
 "\n"
 "ALSA (расширенная звуковая архитектура Linux) представляет собой модульную "
-"архитектуру, которая поддерживает довольно широкий диапазон ISA, USB и PCI-"
-"карт.\n"
+"архитектуру, которая поддерживает довольно широкий диапазон ISA, USB и "
+"PCI-карт.\n"
 "\n"
 "Она также предоставляет значительно большую API, чем OSS.\n"
 "\n"
@@ -3416,8 +3415,8 @@ msgstr "Неизвестный|CPH06X (bt878) [большинство произ
 #: harddrake/v4l.pm:475
 #, c-format
 msgid ""
-"For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-"
-"detect the rights parameters.\n"
+"For most modern TV cards, the bttv module of the GNU/Linux kernel just "
+"auto-detect the rights parameters.\n"
 "If your card is misdetected, you can force the right tuner and card types "
 "here. Just select your tv card parameters if needed."
 msgstr ""
@@ -3439,8 +3438,8 @@ msgstr "Тип тюнера :"
 
 #: interactive.pm:128 interactive.pm:549 interactive/curses.pm:263
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
-#: interactive/stdio.pm:148 interactive/stdio.pm:149 mygtk2.pm:847
-#: ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
+#: interactive/stdio.pm:148 interactive/stdio.pm:149 mygtk2.pm:847 ugtk2.pm:421
+#: ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
 #, c-format
 msgid "Ok"
 msgstr "ОК"
@@ -4953,8 +4952,8 @@ msgstr ""
 "к \n"
 "Программным Продуктам. Устанавливая, тиражируя или используя Программные "
 "Продукты \n"
-"в любых других целях, вы явным образом принимаете и полностью соглашаетесь "
-"с \n"
+"в любых других целях, вы явным образом принимаете и полностью соглашаетесь с "
+"\n"
 "условиями и положениями данной Лицензии. Если вы не согласны с какой-либо "
 "частью данной \n"
 "Лицензии, вам не разрешается устанавливать, тиражировать или использовать "
@@ -4962,8 +4961,8 @@ msgstr ""
 "Продукты.\n"
 "Любые попытки использовать, тиражировать или использовать Программные "
 "Продукты \n"
-"способом, противоречащим условиям данной Лицензии, являются "
-"аннулированием, \n"
+"способом, противоречащим условиям данной Лицензии, являются аннулированием, "
+"\n"
 "и освобождают вас от всех прав, предоставляемых данной Лицензией. При "
 "прекращении \n"
 "действия Лицензии вы должны немедленно удалить все копии Программных "
@@ -4994,8 +4993,8 @@ msgstr ""
 "\n"
 "В пределах, дозволенных законом, ни компания Mandriva S.A., ни её "
 "лицензиары, поставщики \n"
-"или распространители ни при каких условиях не несут ответственности за какие-"
-"либо специальные, \n"
+"или распространители ни при каких условиях не несут ответственности за "
+"какие-либо специальные, \n"
 "случайные, прямые или косвенные убытки (включая неограниченные убытки от "
 "потери бизнеса, прерывания \n"
 "коммерческой деятельности, финансовых потерь, судебных издержек и штрафов, "
@@ -5196,8 +5195,8 @@ msgid ""
 "or contained within or accessed in \n"
 "conjunction with or through the Google Software.  \n"
 "\n"
-"(b)  The Google Software is made available to you for your personal, non-"
-"commercial use only.\n"
+"(b)  The Google Software is made available to you for your personal, "
+"non-commercial use only.\n"
 "You may not use the Google Software in any manner that could damage, "
 "disable, overburden, or impair Google's \n"
 "search services (e.g., you may not use the Google Software in an automated "
@@ -5595,8 +5594,8 @@ msgid ""
 "\n"
 "Else only /etc/issue is allowed."
 msgstr ""
-"Если установлено «ВСЕ», разрешено существовать файлам /etc/issue и /etc/issue."
-"net.\n"
+"Если установлено «ВСЕ», разрешено существовать файлам /etc/issue и "
+"/etc/issue.net.\n"
 "\n"
 "Если установлено «НЕТ», запрещены все issue-файлы.\n"
 "\n"
@@ -5679,8 +5678,8 @@ msgid ""
 "\n"
 "- none if set to \"None\".\n"
 "\n"
-"To authorize the services you need, use /etc/hosts.allow (see hosts.allow"
-"(5))."
+"To authorize the services you need, use /etc/hosts.allow (see "
+"hosts.allow(5))."
 msgstr ""
 "Разрешает:\n"
 "\n"
@@ -5895,8 +5894,8 @@ msgstr ""
 #, c-format
 msgid "if set to yes, check additions/removals of suid root files."
 msgstr ""
-"если установлено Да, проверяется добавление/удаление файлов root'а с suid-"
-"битом."
+"если установлено Да, проверяется добавление/удаление файлов root'а с "
+"suid-битом."
 
 #: security/help.pm:124
 #, c-format
@@ -5907,8 +5906,8 @@ msgstr "если установлено Да, создается отчет о �
 #, c-format
 msgid "if set to yes, check files/directories writable by everybody."
 msgstr ""
-"если установлено Да, проверяются файлы/каталоги с возможностью записи кем-"
-"угодно."
+"если установлено Да, проверяются файлы/каталоги с возможностью записи "
+"кем-угодно."
 
 #: security/help.pm:126
 #, c-format
@@ -6870,8 +6869,8 @@ msgstr ""
 "--default             : сохранить каталоги по умолчанию.\n"
 "--debug               : показать все отладочные сообщения.\n"
 "--show-conf           : перечислить резервируемые файлы или каталоги.\n"
-"--config-info         : разъяснять параметры файла настройки (не "
-"для                         пользователей Х).\n"
+"--config-info         : разъяснять параметры файла настройки (не для         "
+"                пользователей Х).\n"
 "--daemon              : использовать конфигурацию демона. \n"
 "--help                : показать это сообщение.\n"
 "--version             : показать номер версии.\n"
@@ -6995,8 +6994,8 @@ msgstr "[клавиатура]"
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 msgstr ""
-"[--file=мой_файл] [--word=мое_слово] [--explain=регулярное_выражение] [--"
-"alert]"
+"[--file=мой_файл] [--word=мое_слово] [--explain=регулярное_выражение] "
+"[--alert]"
 
 #: standalone.pm:101
 #, c-format
@@ -7038,17 +7037,17 @@ msgstr ""
 "  --no-verify-rpm        не проверять подписи пакетов\n"
 "  --changelog-first      показывать журнал изменений перед списком файлов в "
 "окне описания\n"
-"  --merge-all-rpmnew     предлагать объединить все найденные файлы .rpmnew/."
-"rpmsave"
+"  --merge-all-rpmnew     предлагать объединить все найденные файлы "
+".rpmnew/.rpmsave"
 
 #: standalone.pm:116
 #, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
-"usbtable] [--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] "
+"[--update-usbtable] [--dynamic=dev]"
 msgstr ""
-"[--manual] [--device=устройство] [--update-sane=sane_source_dir] [--update-"
-"usbtable] [--dynamic=устройство]"
+"[--manual] [--device=устройство] [--update-sane=sane_source_dir] "
+"[--update-usbtable] [--dynamic=устройство]"
 
 #: standalone.pm:117
 #, c-format
@@ -7065,8 +7064,8 @@ msgstr ""
 #, c-format
 msgid ""
 "\n"
-"Usage: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
-"testing] [-v|--version] "
+"Usage: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] "
+"[--testing] [-v|--version] "
 msgstr ""
 "\n"
 "Использование: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] "
