@@ -132,7 +132,7 @@ my %groups = (
               },
               CPU =>
               {
-               $identification => [ qw(processor vendor_id), "model name", "cpu family", qw(model level stepping) ],
+               $identification => [ qw(processor vendor_id), "model name", "cpu family", qw(model level stepping), "cpuid level" ],
                N("Performances") => [ "cpu MHz", "cache size", "bogomips" ],
               },
               HARDDISK =>
