@@ -75,6 +75,11 @@ my %fields =
       "cpuid level" => [ N("Cpuid level"), N("information level that can be obtained through the cpuid instruction") ],
       "cpu MHz" => [ N("Frequency (MHz)"), N("the CPU frequency in MHz (Megahertz which in first approximation may be coarsely assimilated to number of instructions the cpu is able to execute per second)") ],
       "flags" => [ N("Flags"), N("CPU flags reported by the kernel") ],
+      "cpu cores" => [ N("Cores"), N("CPU cores") ],
+      "core id" => [ N("Core ID"), N("Core ID") ],
+      "physical id" => [ N("Physical ID"), N("Physical ID") ],
+      "apicid" => [ N("ACPI ID"), N("ACPI ID") ],
+      "siblings" => [ N("Siblings"), N("Siblings") ],
       "level" => [ N("Level"), N("sub generation of the cpu") ],
       "model" => [ N("Model"), N("generation of the cpu (eg: 8 for Pentium III, ...)") ],
       "model name" => [ N("Model name"), N("official vendor name of the cpu") ],
@@ -133,6 +138,7 @@ my %groups = (
               CPU =>
               {
                $identification => [ qw(processor vendor_id), "model name", "cpu family", qw(model level stepping), "cpuid level" ],
+               N("Cores") => [ 'cpu cores', 'core id', 'physical id', 'apicid', 'siblings' ],
                N("Performances") => [ "cpu MHz", "cache size", "bogomips" ],
               },
               HARDDISK =>
