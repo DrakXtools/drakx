@@ -707,7 +707,7 @@ sub get_ids_from_sysfs_device {
     my $usb_root = -f "$dev_path/bInterfaceNumber" && "../" || -f "$dev_path/idVendor" && "";
     my $is_pcmcia = -f "$dev_path/card_id";
     my $sysfs_ids;
-    my $bus = get_sysfs_field_from_link($dev_path, "bus");
+    my $bus = get_sysfs_field_from_link($dev_path, "subsystem");
     #- FIXME: use $bus
     if ($is_pcmcia) {
       $sysfs_ids = { modalias => $dev_cat->('modalias') };
