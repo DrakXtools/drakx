@@ -248,7 +248,9 @@ our %l = (
         qw(cafe_ccic cpia2 cpia_usb cyber2000fb em28xx et61x251 gspca),
         qw(ibmcam konicawc mod_quickcam ov511 ov511-alt ov518_decomp),
         qw(ov51x-jpeg ovfx2 pwc qc-usb-messenger quickcam quickcam_messenger),
-        qw(se401 sn9c102 stv680 tcm825x ultracam),
+        # both STV06xx & stv06xx b/c drivers/media/video/gspca/stv06xx/stv06xx.h
+        # wrongly use upcase letters:
+        qw(se401 sn9c102 STV06xx stv06xx stv680 tcm825x ultracam),
         qw(usbvideo usbvision vicam w9968cf zc0301),
   },
 
