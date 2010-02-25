@@ -252,6 +252,7 @@ our %l = (
         # wrongly use upcase letters:
         qw(se401 sn9c102 STV06xx stv06xx stv680 tcm825x ultracam),
         qw(usbvideo usbvision vicam w9968cf zc0301),
+    ],
   },
 
   # USB input stuff get automagically loaded by hotplug and thus
