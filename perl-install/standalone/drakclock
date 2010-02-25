@@ -112,13 +112,13 @@ $my_win->{window}->add(gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, chi
                                                                 return;
                                                             }
                                                             timezone::set_ntp_server($choosed_serv);
-                                                            system("/sbin/chkconfig --level 35 ntpd on");
-                                                            system("service ntpd stop");
+                                                            system(qw(/sbin/chkconfig --level 35 ntpd on));
+                                                            system(qw(service ntpd stop));
                                                             #verify that we have a valid hostname (thx sam)
                                                             $choosed_serv =~ s/[^-a-zA-Z0-9.]//g;
 							    if (!system("/usr/sbin/ntpdate", $choosed_serv)) {
 								update_time(); #- get the new time before updating the hwclock
-								system("service ntpd start");
+								system(qw(service ntpd start));
 								$need_date = 0;
 							    } else {
                                                                 $in->ask_from_no_check({
@@ -130,8 +130,8 @@ $my_win->{window}->add(gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, chi
 							    }
                                                         } else {
                                                             if (-e $ntpdlock) { 
-								system("service ntpd stop");
-								system("/sbin/chkconfig --level 35 ntpd off");
+								system(qw(service ntpd stop));
+								system(qw(/sbin/chkconfig --level 35 ntpd off));
 							    }
 							}
 							if ($need_date) {
@@ -141,9 +141,9 @@ $my_win->{window}->add(gtknew('VBox', border_width => $::isEmbedded ? 0 : 5, chi
 							    system("date " .
 							           join('', map { print_it0($_) } ($month, $day, $hour, $min, $year)) . '.' . print_it0($sec));
 							}
-							-e '/sbin/hwclock' and system('/sbin/hwclock --systohc');
+							-e '/sbin/hwclock' and system('/sbin/hwclock', '--systohc');
                                                         any::enable_x_screensaver();
-                                                        system("dcop kicker Panel restart") if $ENV{DESKTOP} eq 'kde';
+                                                        system(qw(dcop kicker Panel restart)) if $ENV{DESKTOP} eq 'kde';
                                                         ugtk2->exit(0);
                                                     },
                                                    },
