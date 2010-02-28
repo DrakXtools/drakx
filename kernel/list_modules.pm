@@ -112,7 +112,7 @@ our %l = (
 	'53c7,8xx',
         qw(a100u2w advansys aha152x aha1542 aha1740 AM53C974 atp870u),
         qw(be2iscsi bfa BusLogic dc395x dc395x_trm dmx3191d dtc eata eata_dma),
-        qw(eata_pio fdomain g_NCR5380 in2000 initio mvsas NCR53c406a),
+        qw(eata_pio fdomain g_NCR5380 in2000 initio mpt2sas mvsas NCR53c406a),
         qw(nsp32 pas16 pci2220i pm8001 psi240i qla1280 qla2x00 qla2xxx),
         qw(qlogicfas qlogicfc seagate shasta sim710 stex sym53c416),
         qw(t128 tmscsim u14-34f ultrastor vmw_pvscsi wd7000),
