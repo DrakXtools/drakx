@@ -1122,7 +1122,7 @@ sub isServer() {
     computer_info()->{isServer}
       || (any { $_->{Type} =~ /ECC/ } dmidecode_category('Memory Module'))
       || dmidecode_category('System Information')->{Manufacturer} =~ /Supermicro/i
-      || dmidecode_category('System Information')->{'Product Name'} =~ /NetServer|Proliant|PowerEdge|eServer|IBM System x/i
+      || dmidecode_category('System Information')->{'Product Name'} =~ /NetServer|Proliant|PowerEdge|eServer|IBM System x|ThinkServer/i
       || matching_desc__regexp('LSI Logic.*SCSI')
       || matching_desc__regexp('MegaRAID')
       || matching_desc__regexp('NetServer')
