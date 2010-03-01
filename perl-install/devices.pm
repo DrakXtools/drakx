@@ -96,6 +96,11 @@ sub entry {
 	$type = c::S_IFBLK();
 	$major = 114;
 	$minor = 16 * $1 + ($2 || 0);
+    } elsif (m,(mmcblk)(\d+)(?:p(\d+))?,) {
+	# MMC/SD "mmcblk0{p1}"
+	$type = c::S_IFBLK();
+	$major = 179;
+	$minor = 8 * $1 + ($2 || 0);
     } elsif (my ($prefix, $nb) = /(.*?)(\d+)$/) {	
 	my $f = ${{"fd"          => sub { c::S_IFBLK(), 2,  0  },
 		   "hidbp-mse-"  => sub { c::S_IFCHR(), 10, 32 },
