@@ -800,23 +800,25 @@ void find_media(enum media_bus bus)
 		static char cpq_descr[] = "Compaq RAID logical disk";
 		char ** procfile = procfiles;
 		FILE * f;
-		while (procfile && *procfile && (f = fopen(*procfile, "rb"))) {
-			while (fgets(buf, sizeof(buf), f)) {
-				if (ptr_begins_static_str(buf, "ida/") || ptr_begins_static_str(buf, "cciss/")) {
-					char * end = strchr(buf, ':');
-					if (!end)
-						log_message("Inconsistency in %s, line:\n%s", *procfile, buf);
-					else {
-						*end = '\0';
-						tmp[count].name = strdup(buf);
-						tmp[count].type = DISK;
-						tmp[count].model = cpq_descr;
-						log_message("CPQ: found %s", tmp[count].name);
-						count++;
+		while (procfile && *procfile) {
+			if(f = fopen(*procfile, "rb")) {
+				while (fgets(buf, sizeof(buf), f)) {
+					if (ptr_begins_static_str(buf, "ida/") || ptr_begins_static_str(buf, "cciss/")) {
+						char * end = strchr(buf, ':');
+						if (!end)
+							log_message("Inconsistency in %s, line:\n%s", *procfile, buf);
+						else {
+							*end = '\0';
+							tmp[count].name = strdup(buf);
+							tmp[count].type = DISK;
+							tmp[count].model = cpq_descr;
+							log_message("CPQ: found %s", tmp[count].name);
+							count++;
+						}
 					}
 				}
+				fclose(f);
 			}
-			fclose(f);
 			procfile++;
 		}
 	}
