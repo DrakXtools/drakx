@@ -798,10 +798,10 @@ void find_media(enum media_bus bus)
 				       "/proc/array/ida", "/proc/cciss/cciss",                 // 2.2 style
 				       NULL };
 		static char cpq_descr[] = "Compaq RAID logical disk";
-		char ** procfile = procfiles;
+		char ** procfile;
 		FILE * f;
-		while (procfile && *procfile) {
-			if(f = fopen(*procfile, "rb")) {
+		for (procfile = procfiles; procfile && *procfile; procfile++) {
+			if((f = fopen(*procfile, "rb"))) {
 				while (fgets(buf, sizeof(buf), f)) {
 					if (ptr_begins_static_str(buf, "ida/") || ptr_begins_static_str(buf, "cciss/")) {
 						char * end = strchr(buf, ':');
@@ -819,7 +819,6 @@ void find_media(enum media_bus bus)
 				}
 				fclose(f);
 			}
-			procfile++;
 		}
 	}
 
