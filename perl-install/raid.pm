@@ -91,6 +91,7 @@ sub updateSize {
 	elsif (/1/)     { min @l }
 	elsif (/4|5/)   { min(@l) * (@l - 1) }
 	elsif (/6/)     { min(@l) * (@l - 2) }
+	elsif (/10/)	{ min(@l) * (@l / 2) }
     };
 }
 
@@ -105,6 +106,8 @@ sub module {
 
     if (member($level, 4, 5, 6)) {
 	'raid456';
+    } elsif (member($level, 10)) {
+	'raid10';
     } elsif ($level =~ /^\d+$/) {
 	"raid$level";
     } else {
@@ -157,7 +160,7 @@ sub format_part {
 sub verify {
     my ($raids) = @_;
     foreach (@$raids) {
-	my $nb = $_->{level} =~ /6/ ? 4 : $_->{level} =~ /4|5/ ? 3 : 2;
+	my $nb = $_->{level} =~ /6|10/ ? 4 : $_->{level} =~ /4|5/ ? 3 : 2;
 	@{$_->{disks}} >= $nb or die N("Not enough partitions for RAID level %d\n", $_->{level});
     }
 }

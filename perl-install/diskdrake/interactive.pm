@@ -1098,7 +1098,7 @@ sub modifyRAID {
     $in->ask_from(N("Options"), '',
 		  [
 { label => N("device"), val => \$new_device, list => [ $md_part->{device}, raid::free_mds($raids) ], sort => 0 },
-{ label => N("level"), val => \$md_part->{level}, list => [ qw(0 1 4 5 6 linear) ] },
+{ label => N("level"), val => \$md_part->{level}, list => [ qw(0 1 4 5 6 10 linear) ] },
 { label => N("chunk size in KiB"), val => \$md_part->{'chunk-size'} },
 		  ],
 		 ) or return;
