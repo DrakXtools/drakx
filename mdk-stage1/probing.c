@@ -800,6 +800,7 @@ void find_media(enum media_bus bus)
 		static char cpq_descr[] = "Compaq RAID logical disk";
 		char ** procfile;
 		FILE * f;
+
 		for (procfile = procfiles; procfile && *procfile; procfile++) {
 			if((f = fopen(*procfile, "rb"))) {
 				while (fgets(buf, sizeof(buf), f)) {
