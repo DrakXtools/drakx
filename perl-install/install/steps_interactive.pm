@@ -867,7 +867,7 @@ sub summary {
 	val => sub {
 	    require services;
 	    my ($l, $activated) = services::services();
-	    N("Services: %d activated for %d registered", int(@$activated), int(@$l));
+	    N("%d activated for %d registered", int(@$activated), int(@$l));
 	},
 	clicked => sub { 
 	    require services;
