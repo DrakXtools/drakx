@@ -168,7 +168,7 @@ sub ask_ {
 				   }
 			       },
 			       get_status => sub {
-				   N("Services: %d activated for %d registered", 
+				   N("%d activated for %d registered", 
 				     scalar(grep { $_ } values %services),
 				     scalar(values %services));
 			       },
