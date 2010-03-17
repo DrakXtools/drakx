@@ -41,6 +41,7 @@ install:
 	mv -f $(SBINDEST)/drakdvb $(BINDEST)
 	mv -f $(SBINDEST)/drakhelp $(BINDEST)
 	mv -f $(SBINDEST)/display_help $(BINDEST)
+	mv -f $(SBINDEST)/display_release_notes.pl $(BINDEST)
 	mv -f $(SBINDEST)/localedrake $(BINDEST)
 
 	install -m 644 *.pm $(LIBDEST)

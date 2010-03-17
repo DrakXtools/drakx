@@ -453,15 +453,17 @@
   </to>
 </from>
 
+<from dir="../standalone">
+  <to dir="/usr/bin">
+    display_release_notes.pl
+  </to>
+</from>
+
 <from dir="share">
   <from expand="tar">
     fonts.tar.bz2
     keymaps.tar.bz2
   </from>
-
-  <to dir="/usr/bin">
-    display_release_notes.pl
-  </to>
 
   <to dir="/usr/share">
     consolefonts symlinks
