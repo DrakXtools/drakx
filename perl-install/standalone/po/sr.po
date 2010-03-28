@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 18:09+0100\n"
+"POT-Creation-Date: 2010-03-28 14:49+0200\n"
 "PO-Revision-Date: 2004-09-15 13:33+0200\n"
 "Last-Translator: Toma Jankovic <tomaja@net.yu>\n"
 "Language-Team: Serbian <i18n@mandrake.co.yu>\n"
@@ -2081,18 +2081,7 @@ msgstr "Величина кеша"
 msgid "size of the (second level) cpu cache"
 msgstr "Величина (други ниво) процесорског кеша"
 
-#. -PO: here "comas" is the medical coma, not the lexical coma!!
 #: harddrake2:74
-#, c-format
-msgid "Coma bug"
-msgstr "Coma bug"
-
-#: harddrake2:74
-#, fuzzy, c-format
-msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "Да ли овај процесор има Cyrix 6x86 Coma баг"
-
-#: harddrake2:75
 #, c-format
 msgid "Cpuid family"
 msgstr "Cpuid фамилија"
@@ -2137,69 +2126,37 @@ msgstr "Заставе"
 msgid "CPU flags reported by the kernel"
 msgstr "CPU заставе пријављена од стране кернела"
 
-#: harddrake2:79
+#: harddrake2:78 harddrake2:141
+#, fuzzy, c-format
+msgid "Cores"
+msgstr "Затвори"
+
+#: harddrake2:78
 #, c-format
-msgid "Fdiv bug"
-msgstr "Fdiv bug"
+msgid "CPU cores"
+msgstr ""
+
+#: harddrake2:79
+#, fuzzy, c-format
+msgid "Core ID"
+msgstr "Произвођач"
 
 #: harddrake2:80
 #, c-format
-msgid ""
-"Early Intel Pentium chips manufactured have a bug in their floating point "
-"processor which did not achieve the required precision when performing a "
-"Floating point DIVision (FDIV)"
+msgid "Physical ID"
 msgstr ""
-"Рани Intel Pentium чипови су имали грешку у floating тачки процесора који "
-"није успевао да постигне захтевану прецизност при извођењу Floating point "
-"DIVision (FDIV)"
 
 #: harddrake2:81
 #, c-format
-msgid "Is FPU present"
-msgstr "да је FPU присутан"
-
-#: harddrake2:81
-#, c-format
-msgid "yes means the processor has an arithmetic coprocessor"
-msgstr "да значи да процесор има аритметички копроцесор"
+msgid "ACPI ID"
+msgstr ""
 
 #: harddrake2:82
-#, c-format
-msgid "Whether the FPU has an irq vector"
-msgstr "Где год FPU има irq вектор"
-
-#: harddrake2:82
-#, c-format
-msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr "са значи да аритметички копроцесор има прикачен додатни вектор"
-
-#: harddrake2:83
-#, c-format
-msgid "F00f bug"
-msgstr "F00f bug"
-
-#: harddrake2:83
 #, fuzzy, c-format
-msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
-msgstr ""
-"Први pentium процесори су били баговити и блокирали су рад при ддекодирању "
-"F00F bytecode"
+msgid "Siblings"
+msgstr "Опције"
 
-#: harddrake2:84
-#, c-format
-msgid "Halt bug"
-msgstr "Halt bug"
-
-#: harddrake2:85
-#, c-format
-msgid ""
-"Some of the early i486DX-100 chips cannot reliably return to operating mode "
-"after the \"halt\" instruction is used"
-msgstr ""
-"Неки рани i486DX-100 чипови не могу да се поуздано врате у оперативно стање "
-"после коришћења \"halt\" инструкције"
-
-#: harddrake2:86
+#: harddrake2:83
 #, fuzzy, c-format
 msgid "sub generation of the cpu"
 msgstr "Под генерација за процесор"
@@ -2287,16 +2244,26 @@ msgstr "Штампач"
 msgid "usually the disk serial number"
 msgstr ""
 
-#: harddrake2:103
+#: harddrake2:100
+#, c-format
+msgid "Target id number"
+msgstr ""
+
+#: harddrake2:100
+#, c-format
+msgid "the SCSI target identifier"
+msgstr ""
+
+#: harddrake2:101
 #, fuzzy, c-format
 msgid "Logical unit number"
 msgstr "Локална мера"
 
-#: harddrake2:103
+#: harddrake2:101
 #, c-format
 msgid ""
-"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
-"identified by a\n"
+"the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
+"uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
 
@@ -2422,17 +2389,7 @@ msgstr "Конекција"
 msgid "Performances"
 msgstr "Карактеристике: "
 
-#: harddrake2:143
-#, fuzzy, c-format
-msgid "Bugs"
-msgstr "Бус"
-
-#: harddrake2:144
-#, c-format
-msgid "FPU"
-msgstr ""
-
-#: harddrake2:151
+#: harddrake2:149
 #, c-format
 msgid "Device"
 msgstr "Уређај"
@@ -3526,6 +3483,62 @@ msgstr "Ручна конфигурација"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "Опције"
+
+#~ msgid "Coma bug"
+#~ msgstr "Coma bug"
+
+#, fuzzy
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "Да ли овај процесор има Cyrix 6x86 Coma баг"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "Fdiv bug"
+
+#~ msgid ""
+#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
+#~ "processor which did not achieve the required precision when performing a "
+#~ "Floating point DIVision (FDIV)"
+#~ msgstr ""
+#~ "Рани Intel Pentium чипови су имали грешку у floating тачки процесора који "
+#~ "није успевао да постигне захтевану прецизност при извођењу Floating point "
+#~ "DIVision (FDIV)"
+
+#~ msgid "Is FPU present"
+#~ msgstr "да је FPU присутан"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "да значи да процесор има аритметички копроцесор"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "Где год FPU има irq вектор"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr "са значи да аритметички копроцесор има прикачен додатни вектор"
+
+#~ msgid "F00f bug"
+#~ msgstr "F00f bug"
+
+#, fuzzy
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr ""
+#~ "Први pentium процесори су били баговити и блокирали су рад при "
+#~ "ддекодирању F00F bytecode"
+
+#~ msgid "Halt bug"
+#~ msgstr "Halt bug"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "Неки рани i486DX-100 чипови не могу да се поуздано врате у оперативно "
+#~ "стање после коришћења \"halt\" инструкције"
+
+#, fuzzy
+#~ msgid "Bugs"
+#~ msgstr "Бус"
 
 #~ msgid "Unknown/Others"
 #~ msgstr "Непознати/Остали"

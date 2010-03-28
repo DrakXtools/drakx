@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 18:09+0100\n"
+"POT-Creation-Date: 2010-03-28 14:49+0200\n"
 "PO-Revision-Date: 2009-10-30 08:31+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
@@ -20,8 +20,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Lokalize 0.3\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: display_help:49 display_help:54 drakbug:186 drakperm:136
 #, c-format
@@ -265,7 +265,8 @@ msgstr ""
 msgid "Find Package"
 msgstr "Знайти пакунок"
 
-#: drakbug:118, c-format
+#: drakbug:118
+#, c-format
 msgid "Browse"
 msgstr "Навігація"
 
@@ -2013,7 +2014,8 @@ msgstr "PCI-домен"
 msgid "the PCI domain of the device"
 msgstr "PCI-домен пристрою"
 
-#: harddrake2:60, c-format
+#: harddrake2:60
+#, c-format
 msgid "PCI revision"
 msgstr "Версія PCI"
 
@@ -2123,18 +2125,7 @@ msgstr "Розмір кешу"
 msgid "size of the (second level) cpu cache"
 msgstr "розмір кешу процесора другого рівня"
 
-#. -PO: here "comas" is the medical coma, not the lexical coma!!
 #: harddrake2:74
-#, c-format
-msgid "Coma bug"
-msgstr "Coma bug"
-
-#: harddrake2:74
-#, c-format
-msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "якщо цей процесор має помилку Cyrix 6x86 Coma"
-
-#: harddrake2:75
 #, c-format
 msgid "Cpuid family"
 msgstr "Сімейство cpu"
@@ -2180,68 +2171,37 @@ msgstr "Прапорці"
 msgid "CPU flags reported by the kernel"
 msgstr "Прапорці CPU, повідомлені ядром"
 
-#: harddrake2:79
+#: harddrake2:78 harddrake2:141
+#, fuzzy, c-format
+msgid "Cores"
+msgstr "Закрити"
+
+#: harddrake2:78
 #, c-format
-msgid "Fdiv bug"
-msgstr "Помилка Fdiv"
+msgid "CPU cores"
+msgstr ""
+
+#: harddrake2:79
+#, fuzzy, c-format
+msgid "Core ID"
+msgstr "ID виробника"
 
 #: harddrake2:80
 #, c-format
-msgid ""
-"Early Intel Pentium chips manufactured have a bug in their floating point "
-"processor which did not achieve the required precision when performing a "
-"Floating point DIVision (FDIV)"
+msgid "Physical ID"
 msgstr ""
-"Перші чіпи Intel Pentium мали помилку в математичному співпроцесорі, яка не "
-"забезпечувала необхідної точності при діленні з плаваючою крапкою (FDIV)"
 
 #: harddrake2:81
 #, c-format
-msgid "Is FPU present"
-msgstr "Чи є FPU"
-
-#: harddrake2:81
-#, c-format
-msgid "yes means the processor has an arithmetic coprocessor"
-msgstr "'так' означає, що процесор має арифметичний співпроцесор"
+msgid "ACPI ID"
+msgstr ""
 
 #: harddrake2:82
-#, c-format
-msgid "Whether the FPU has an irq vector"
-msgstr "Чи має FPU вектор irq"
-
-#: harddrake2:82
-#, c-format
-msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr ""
-"так означає, що арифметичний співпроцесор має вмонтований вектор виняткових "
-"операцій"
+#, fuzzy, c-format
+msgid "Siblings"
+msgstr "Налаштування"
 
 #: harddrake2:83
-#, c-format
-msgid "F00f bug"
-msgstr "Помилка F00f"
-
-#: harddrake2:83
-#, c-format
-msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
-msgstr "ранні пентіуми мали помилку і зависали при декодуванні F00F"
-
-#: harddrake2:84
-#, c-format
-msgid "Halt bug"
-msgstr "Помилка зупину"
-
-#: harddrake2:85
-#, c-format
-msgid ""
-"Some of the early i486DX-100 chips cannot reliably return to operating mode "
-"after the \"halt\" instruction is used"
-msgstr ""
-"Деякі з ранніх чіпів i486DX-100 не могли точно повертатися в робочий режим "
-"після використання інструкції \"halt\""
-
-#: harddrake2:86
 #, c-format
 msgid "sub generation of the cpu"
 msgstr "покоління процесора"
@@ -2332,16 +2292,26 @@ msgstr "Ідентифікатор диску"
 msgid "usually the disk serial number"
 msgstr "звичайний серійний номер диску"
 
-#: harddrake2:103
+#: harddrake2:100
+#, c-format
+msgid "Target id number"
+msgstr ""
+
+#: harddrake2:100
+#, c-format
+msgid "the SCSI target identifier"
+msgstr ""
+
+#: harddrake2:101
 #, c-format
 msgid "Logical unit number"
 msgstr "Логічний номер модуля"
 
-#: harddrake2:103
-#, c-format
+#: harddrake2:101
+#, fuzzy, c-format
 msgid ""
-"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
-"identified by a\n"
+"the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
+"uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
 "номер пристрою SCSI (LUN). Під'єднані до комп'ютера пристрої SCSI унікально\n"
@@ -2469,17 +2439,7 @@ msgstr "Під'єднання"
 msgid "Performances"
 msgstr "Характеристики"
 
-#: harddrake2:143
-#, c-format
-msgid "Bugs"
-msgstr "Помилки"
-
-#: harddrake2:144
-#, c-format
-msgid "FPU"
-msgstr "FPU"
-
-#: harddrake2:151
+#: harddrake2:149
 #, c-format
 msgid "Device"
 msgstr "Пристрій: "
@@ -3534,7 +3494,8 @@ msgstr ""
 "Неможливо встановити пакунки, необхідні для організації спільного доступу до "
 "сканерів."
 
-#: service_harddrake:138, c-format
+#: service_harddrake:138
+#, c-format
 msgid "The graphic card '%s' is no more supported by the '%s' driver"
 msgstr "Графічна картка «%s» вже не підтримується драйвером «%s»"
 
@@ -3542,8 +3503,7 @@ msgstr "Графічна картка «%s» вже не підтримуєть�
 #, c-format
 msgid "The proprietary kernel driver was not found for '%s' X.org driver"
 msgstr ""
-"Для драйвера X.org «%s» не знайдено відповідного пропрієтарного драйвера "
-"ядра."
+"Для драйвера X.org «%s» не знайдено відповідного пропрієтарного драйвера ядра."
 
 #: service_harddrake:206
 #, c-format
@@ -3607,6 +3567,62 @@ msgstr "Налаштування мови і країни"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Регіональні налаштування"
+
+#~ msgid "Coma bug"
+#~ msgstr "Coma bug"
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "якщо цей процесор має помилку Cyrix 6x86 Coma"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "Помилка Fdiv"
+
+#~ msgid ""
+#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
+#~ "processor which did not achieve the required precision when performing a "
+#~ "Floating point DIVision (FDIV)"
+#~ msgstr ""
+#~ "Перші чіпи Intel Pentium мали помилку в математичному співпроцесорі, яка "
+#~ "не забезпечувала необхідної точності при діленні з плаваючою крапкою "
+#~ "(FDIV)"
+
+#~ msgid "Is FPU present"
+#~ msgstr "Чи є FPU"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "'так' означає, що процесор має арифметичний співпроцесор"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "Чи має FPU вектор irq"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr ""
+#~ "так означає, що арифметичний співпроцесор має вмонтований вектор "
+#~ "виняткових операцій"
+
+#~ msgid "F00f bug"
+#~ msgstr "Помилка F00f"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr "ранні пентіуми мали помилку і зависали при декодуванні F00F"
+
+#~ msgid "Halt bug"
+#~ msgstr "Помилка зупину"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "Деякі з ранніх чіпів i486DX-100 не могли точно повертатися в робочий "
+#~ "режим після використання інструкції \"halt\""
+
+#~ msgid "Bugs"
+#~ msgstr "Помилки"
+
+#~ msgid "FPU"
+#~ msgstr "FPU"
 
 #~ msgid "Unknown/Others"
 #~ msgstr "Невідомий/Інші"

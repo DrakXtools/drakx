@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 18:09+0100\n"
+"POT-Creation-Date: 2010-03-28 14:49+0200\n"
 "PO-Revision-Date: 2009-11-01 23:31+0100\n"
 "Last-Translator: Michal Bukovjan <bukm@centrum.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 0.3\n"
 
 #: display_help:49 display_help:54 drakbug:186 drakperm:136
@@ -258,7 +258,8 @@ msgstr ""
 msgid "Find Package"
 msgstr "Najít balíček"
 
-#: drakbug:118, c-format
+#: drakbug:118
+#, c-format
 msgid "Browse"
 msgstr "Procházet"
 
@@ -2011,7 +2012,8 @@ msgstr "PCI doména"
 msgid "the PCI domain of the device"
 msgstr "PCI doména zařízení"
 
-#: harddrake2:60, c-format
+#: harddrake2:60
+#, c-format
 msgid "PCI revision"
 msgstr "PCI revize"
 
@@ -2121,18 +2123,7 @@ msgstr "Velikost vyrovnávací paměti"
 msgid "size of the (second level) cpu cache"
 msgstr "Velikost cache (druhá úroveň) na cpu"
 
-#. -PO: here "comas" is the medical coma, not the lexical coma!!
 #: harddrake2:74
-#, c-format
-msgid "Coma bug"
-msgstr "Chyba čárky"
-
-#: harddrake2:74
-#, c-format
-msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "Zda má cpu chybu čárky Cyrix 6x86"
-
-#: harddrake2:75
 #, c-format
 msgid "Cpuid family"
 msgstr "Rodina CPU"
@@ -2177,68 +2168,37 @@ msgstr "Příznaky"
 msgid "CPU flags reported by the kernel"
 msgstr "Příznaky CPU nalezené jádrem"
 
-#: harddrake2:79
+#: harddrake2:78 harddrake2:141
+#, fuzzy, c-format
+msgid "Cores"
+msgstr "Zavřít"
+
+#: harddrake2:78
 #, c-format
-msgid "Fdiv bug"
-msgstr "Fdiv chyba"
+msgid "CPU cores"
+msgstr ""
+
+#: harddrake2:79
+#, fuzzy, c-format
+msgid "Core ID"
+msgstr "ID dodavatele"
 
 #: harddrake2:80
 #, c-format
-msgid ""
-"Early Intel Pentium chips manufactured have a bug in their floating point "
-"processor which did not achieve the required precision when performing a "
-"Floating point DIVision (FDIV)"
+msgid "Physical ID"
 msgstr ""
-"První verze procesorů Pentium měly z výroby chybu v jednotce pro plovoucí "
-"řádovou čárku, která nedosahovala požadované přesnosti při operaci FDIV"
 
 #: harddrake2:81
 #, c-format
-msgid "Is FPU present"
-msgstr "Přítomnost FPU"
-
-#: harddrake2:81
-#, c-format
-msgid "yes means the processor has an arithmetic coprocessor"
-msgstr "ano znamená, že procesor má aritmetický koprocesor"
+msgid "ACPI ID"
+msgstr ""
 
 #: harddrake2:82
-#, c-format
-msgid "Whether the FPU has an irq vector"
-msgstr "Zda má FPU irq vektor"
-
-#: harddrake2:82
-#, c-format
-msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr "ano znamená, že aritmetický koprocesor je vybaven vektorem výjimek"
+#, fuzzy, c-format
+msgid "Siblings"
+msgstr "Nastavení"
 
 #: harddrake2:83
-#, c-format
-msgid "F00f bug"
-msgstr "F00f chyba"
-
-#: harddrake2:83
-#, c-format
-msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
-msgstr ""
-"První verze procesorů Pentium byly chybové a způsobovaly zatuhnutí při "
-"dekódování instrukce F00F"
-
-#: harddrake2:84
-#, c-format
-msgid "Halt bug"
-msgstr "Halt chyba"
-
-#: harddrake2:85
-#, c-format
-msgid ""
-"Some of the early i486DX-100 chips cannot reliably return to operating mode "
-"after the \"halt\" instruction is used"
-msgstr ""
-"Některé první modely čipsetů i486DX100  neprováděly správně po instrukci "
-"\"halt\" návrat do operačního režimu"
-
-#: harddrake2:86
 #, c-format
 msgid "sub generation of the cpu"
 msgstr "Specifická třída cpu"
@@ -2329,16 +2289,26 @@ msgstr "Identifikátor disku"
 msgid "usually the disk serial number"
 msgstr "obvykle sériové číslo disku"
 
-#: harddrake2:103
+#: harddrake2:100
+#, c-format
+msgid "Target id number"
+msgstr ""
+
+#: harddrake2:100
+#, c-format
+msgid "the SCSI target identifier"
+msgstr ""
+
+#: harddrake2:101
 #, c-format
 msgid "Logical unit number"
 msgstr "Logické číslo jednotky"
 
-#: harddrake2:103
-#, c-format
+#: harddrake2:101
+#, fuzzy, c-format
 msgid ""
-"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
-"identified by a\n"
+"the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
+"uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
 "logické číslo zařízení SCSI (LUN). SCSI zařízení připojená k řadiči jsou "
@@ -2468,17 +2438,7 @@ msgstr "Připojení"
 msgid "Performances"
 msgstr "Výkony"
 
-#: harddrake2:143
-#, c-format
-msgid "Bugs"
-msgstr "Chyby"
-
-#: harddrake2:144
-#, c-format
-msgid "FPU"
-msgstr "FPU"
-
-#: harddrake2:151
+#: harddrake2:149
 #, c-format
 msgid "Device"
 msgstr "Zařízení"
@@ -3523,7 +3483,8 @@ msgstr "Váš skener(y) nebude přístupný na síti."
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "Nelze nainstalovat balíčky potřebné pro sdílené skeneru(ů)."
 
-#: service_harddrake:138, c-format
+#: service_harddrake:138
+#, c-format
 msgid "The graphic card '%s' is no more supported by the '%s' driver"
 msgstr "Grafická karta „%s” již není podporována ovladačem „%s”"
 
@@ -3594,6 +3555,61 @@ msgstr "Nastavení jazyka a země"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Regionální nastavení"
+
+#~ msgid "Coma bug"
+#~ msgstr "Chyba čárky"
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "Zda má cpu chybu čárky Cyrix 6x86"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "Fdiv chyba"
+
+#~ msgid ""
+#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
+#~ "processor which did not achieve the required precision when performing a "
+#~ "Floating point DIVision (FDIV)"
+#~ msgstr ""
+#~ "První verze procesorů Pentium měly z výroby chybu v jednotce pro plovoucí "
+#~ "řádovou čárku, která nedosahovala požadované přesnosti při operaci FDIV"
+
+#~ msgid "Is FPU present"
+#~ msgstr "Přítomnost FPU"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "ano znamená, že procesor má aritmetický koprocesor"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "Zda má FPU irq vektor"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr "ano znamená, že aritmetický koprocesor je vybaven vektorem výjimek"
+
+#~ msgid "F00f bug"
+#~ msgstr "F00f chyba"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr ""
+#~ "První verze procesorů Pentium byly chybové a způsobovaly zatuhnutí při "
+#~ "dekódování instrukce F00F"
+
+#~ msgid "Halt bug"
+#~ msgstr "Halt chyba"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "Některé první modely čipsetů i486DX100  neprováděly správně po instrukci "
+#~ "\"halt\" návrat do operačního režimu"
+
+#~ msgid "Bugs"
+#~ msgstr "Chyby"
+
+#~ msgid "FPU"
+#~ msgstr "FPU"
 
 #~ msgid "Unknown/Others"
 #~ msgstr "Neznámý/Jiný"

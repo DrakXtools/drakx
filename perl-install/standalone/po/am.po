@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 18:09+0100\n"
+"POT-Creation-Date: 2010-03-28 14:49+0200\n"
 "PO-Revision-Date: 2004-06-01 03:36+0100\n"
 "Last-Translator: Alemayehu <alemayehu@gmx.at>\n"
 "Language-Team: Amharic <am-translate@geez.org>\n"
@@ -2022,18 +2022,7 @@ msgstr "የፊደል ቅርጽ መጠን፦"
 msgid "size of the (second level) cpu cache"
 msgstr ""
 
-#. -PO: here "comas" is the medical coma, not the lexical coma!!
 #: harddrake2:74
-#, fuzzy, c-format
-msgid "Coma bug"
-msgstr "የሶፍትዌሩን ችግር ዘግብ"
-
-#: harddrake2:74
-#, c-format
-msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr ""
-
-#: harddrake2:75
 #, fuzzy, c-format
 msgid "Cpuid family"
 msgstr "የፊደል ቅርጽ ቤተሰብ"
@@ -2076,62 +2065,37 @@ msgstr "ባንዲራዎች፦"
 msgid "CPU flags reported by the kernel"
 msgstr ""
 
+#: harddrake2:78 harddrake2:141
+#, fuzzy, c-format
+msgid "Cores"
+msgstr "ዝጋ"
+
+#: harddrake2:78
+#, c-format
+msgid "CPU cores"
+msgstr ""
+
 #: harddrake2:79
 #, fuzzy, c-format
-msgid "Fdiv bug"
-msgstr "የሶፍትዌሩን ችግር ዘግብ"
+msgid "Core ID"
+msgstr "መለያ አስገባ"
 
 #: harddrake2:80
 #, c-format
-msgid ""
-"Early Intel Pentium chips manufactured have a bug in their floating point "
-"processor which did not achieve the required precision when performing a "
-"Floating point DIVision (FDIV)"
+msgid "Physical ID"
 msgstr ""
 
 #: harddrake2:81
-#, fuzzy, c-format
-msgid "Is FPU present"
-msgstr "ባትሪ፦ የለም"
-
-#: harddrake2:81
 #, c-format
-msgid "yes means the processor has an arithmetic coprocessor"
+msgid "ACPI ID"
 msgstr ""
 
 #: harddrake2:82
-#, c-format
-msgid "Whether the FPU has an irq vector"
-msgstr ""
-
-#: harddrake2:82
-#, c-format
-msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr ""
+#, fuzzy, c-format
+msgid "Siblings"
+msgstr "ስየማዎች"
 
 #: harddrake2:83
-#, fuzzy, c-format
-msgid "F00f bug"
-msgstr "የሶፍትዌሩን ችግር ዘግብ"
-
-#: harddrake2:83
-#, c-format
-msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
-msgstr ""
-
-#: harddrake2:84
-#, fuzzy, c-format
-msgid "Halt bug"
-msgstr "የሶፍትዌሩን ችግር ዘግብ"
-
-#: harddrake2:85
-#, c-format
-msgid ""
-"Some of the early i486DX-100 chips cannot reliably return to operating mode "
-"after the \"halt\" instruction is used"
-msgstr ""
-
-#: harddrake2:86
 #, c-format
 msgid "sub generation of the cpu"
 msgstr ""
@@ -2219,16 +2183,26 @@ msgstr "የኔ ቇቋንቋዎች"
 msgid "usually the disk serial number"
 msgstr ""
 
-#: harddrake2:103
+#: harddrake2:100
+#, c-format
+msgid "Target id number"
+msgstr ""
+
+#: harddrake2:100
+#, c-format
+msgid "the SCSI target identifier"
+msgstr ""
+
+#: harddrake2:101
 #, fuzzy, c-format
 msgid "Logical unit number"
 msgstr "ህገ ወጥ የዶሴ ስም"
 
-#: harddrake2:103
+#: harddrake2:101
 #, c-format
 msgid ""
-"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
-"identified by a\n"
+"the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
+"uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
 
@@ -2354,17 +2328,7 @@ msgstr "ግንኙነት"
 msgid "Performances"
 msgstr "ምርጫዎች"
 
-#: harddrake2:143
-#, fuzzy, c-format
-msgid "Bugs"
-msgstr "ኦገስት"
-
-#: harddrake2:144
-#, c-format
-msgid "FPU"
-msgstr ""
-
-#: harddrake2:151
+#: harddrake2:149
 #, c-format
 msgid "Device"
 msgstr "መሳሪያ"
@@ -3425,6 +3389,30 @@ msgstr "በእጅ ምርጫ"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "ስየማዎች"
+
+#, fuzzy
+#~ msgid "Coma bug"
+#~ msgstr "የሶፍትዌሩን ችግር ዘግብ"
+
+#, fuzzy
+#~ msgid "Fdiv bug"
+#~ msgstr "የሶፍትዌሩን ችግር ዘግብ"
+
+#, fuzzy
+#~ msgid "Is FPU present"
+#~ msgstr "ባትሪ፦ የለም"
+
+#, fuzzy
+#~ msgid "F00f bug"
+#~ msgstr "የሶፍትዌሩን ችግር ዘግብ"
+
+#, fuzzy
+#~ msgid "Halt bug"
+#~ msgstr "የሶፍትዌሩን ችግር ዘግብ"
+
+#, fuzzy
+#~ msgid "Bugs"
+#~ msgstr "ኦገስት"
 
 #~ msgid "Unknown/Others"
 #~ msgstr "ያልታወቀ/ሌሎች"

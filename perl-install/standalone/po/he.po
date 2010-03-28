@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 18:09+0100\n"
+"POT-Creation-Date: 2010-03-28 14:49+0200\n"
 "PO-Revision-Date: 2008-03-24 03:26+0200\n"
 "Last-Translator: Dotan Kamber <kamberd@yahoo.com>\n"
 "Language-Team: Hebrew\n"
@@ -2112,18 +2112,7 @@ msgstr "גודל מטמון"
 msgid "size of the (second level) cpu cache"
 msgstr "גודל מטמון המעבד (רמה שניה)"
 
-#. -PO: here "comas" is the medical coma, not the lexical coma!!
 #: harddrake2:74
-#, c-format
-msgid "Coma bug"
-msgstr "באג תרדמת"
-
-#: harddrake2:74
-#, c-format
-msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "האם למעבד הזה יש את באג התרדמת של Cyrix 6x86?"
-
-#: harddrake2:75
 #, c-format
 msgid "Cpuid family"
 msgstr "משפחת Cpuid"
@@ -2168,66 +2157,37 @@ msgstr "דגלים"
 msgid "CPU flags reported by the kernel"
 msgstr "דגלי מעבד מדווחים על ידי הגרעין"
 
-#: harddrake2:79
+#: harddrake2:78 harddrake2:141
+#, fuzzy, c-format
+msgid "Cores"
+msgstr "סגור"
+
+#: harddrake2:78
 #, c-format
-msgid "Fdiv bug"
-msgstr "באג Fdiv"
+msgid "CPU cores"
+msgstr ""
+
+#: harddrake2:79
+#, fuzzy, c-format
+msgid "Core ID"
+msgstr "קוד יצרן"
 
 #: harddrake2:80
 #, c-format
-msgid ""
-"Early Intel Pentium chips manufactured have a bug in their floating point "
-"processor which did not achieve the required precision when performing a "
-"Floating point DIVision (FDIV)"
+msgid "Physical ID"
 msgstr ""
-"לחלק ממעבדי הפנטיום הראשונים היא באג בחשובים של נקודה צפה המעבדים לא חישבו "
-"בצורה נכונה חלק מהחישובים שתלוים בנקודה צפה Floating point DIVision (FDIV)"
 
 #: harddrake2:81
 #, c-format
-msgid "Is FPU present"
-msgstr "האם FPU נוכח"
-
-#: harddrake2:81
-#, c-format
-msgid "yes means the processor has an arithmetic coprocessor"
-msgstr "כן אומר שלמעבד יש יחידת עיבוד מתמטית"
-
-#: harddrake2:82
-#, c-format
-msgid "Whether the FPU has an irq vector"
-msgstr "האם מעבד העזר המתמתטי תומך ב-IRQ וקטורי"
-
-#: harddrake2:82
-#, c-format
-msgid "yes means the arithmetic coprocessor has an exception vector attached"
+msgid "ACPI ID"
 msgstr ""
 
-#: harddrake2:83
-#, c-format
-msgid "F00f bug"
-msgstr "באג F00f"
+#: harddrake2:82
+#, fuzzy, c-format
+msgid "Siblings"
+msgstr "הגדרות"
 
 #: harddrake2:83
-#, c-format
-msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
-msgstr "למעבדי פנטיום הראשונים היא באג שגרם להם לקפוא כאשר חישבו את הקוד F00F"
-
-#: harddrake2:84
-#, c-format
-msgid "Halt bug"
-msgstr "באג HALT"
-
-#: harddrake2:85
-#, c-format
-msgid ""
-"Some of the early i486DX-100 chips cannot reliably return to operating mode "
-"after the \"halt\" instruction is used"
-msgstr ""
-"חלק משבבי ה- i486DX-100 המוקדמים אינם יכולים לחזור לפעולה באופן אמין אחרי "
-"שימוש בפקודה \"halt\""
-
-#: harddrake2:86
 #, c-format
 msgid "sub generation of the cpu"
 msgstr "תת-דור של המעבד"
@@ -2318,16 +2278,26 @@ msgstr "מזהה דיסק"
 msgid "usually the disk serial number"
 msgstr "בדרך כלל המספר הסידורי של הכונן"
 
-#: harddrake2:103
+#: harddrake2:100
+#, c-format
+msgid "Target id number"
+msgstr ""
+
+#: harddrake2:100
+#, c-format
+msgid "the SCSI target identifier"
+msgstr ""
+
+#: harddrake2:101
 #, c-format
 msgid "Logical unit number"
 msgstr "מספר יחידה לוגית "
 
-#: harddrake2:103
-#, c-format
+#: harddrake2:101
+#, fuzzy, c-format
 msgid ""
-"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
-"identified by a\n"
+"the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
+"uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
 "מספר יעד ה-SCSI (ה-LUN). התקני SCSI המחוברים למארח מזוהים באופן פרטני על ידי "
@@ -2456,17 +2426,7 @@ msgstr "חיבור"
 msgid "Performances"
 msgstr "ביצועים"
 
-#: harddrake2:143
-#, c-format
-msgid "Bugs"
-msgstr "באגיםפס"
-
-#: harddrake2:144
-#, c-format
-msgid "FPU"
-msgstr "FPU"
-
-#: harddrake2:151
+#: harddrake2:149
 #, c-format
 msgid "Device"
 msgstr "התקן"
@@ -3568,6 +3528,57 @@ msgstr "הגדרת שפה ומדינה"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "הגדרות אזוריות"
+
+#~ msgid "Coma bug"
+#~ msgstr "באג תרדמת"
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "האם למעבד הזה יש את באג התרדמת של Cyrix 6x86?"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "באג Fdiv"
+
+#~ msgid ""
+#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
+#~ "processor which did not achieve the required precision when performing a "
+#~ "Floating point DIVision (FDIV)"
+#~ msgstr ""
+#~ "לחלק ממעבדי הפנטיום הראשונים היא באג בחשובים של נקודה צפה המעבדים לא "
+#~ "חישבו בצורה נכונה חלק מהחישובים שתלוים בנקודה צפה Floating point DIVision "
+#~ "(FDIV)"
+
+#~ msgid "Is FPU present"
+#~ msgstr "האם FPU נוכח"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "כן אומר שלמעבד יש יחידת עיבוד מתמטית"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "האם מעבד העזר המתמתטי תומך ב-IRQ וקטורי"
+
+#~ msgid "F00f bug"
+#~ msgstr "באג F00f"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr ""
+#~ "למעבדי פנטיום הראשונים היא באג שגרם להם לקפוא כאשר חישבו את הקוד F00F"
+
+#~ msgid "Halt bug"
+#~ msgstr "באג HALT"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "חלק משבבי ה- i486DX-100 המוקדמים אינם יכולים לחזור לפעולה באופן אמין אחרי "
+#~ "שימוש בפקודה \"halt\""
+
+#~ msgid "Bugs"
+#~ msgstr "באגיםפס"
+
+#~ msgid "FPU"
+#~ msgstr "FPU"
 
 #~ msgid "Unknown/Others"
 #~ msgstr "לא ידוע/אחרים"

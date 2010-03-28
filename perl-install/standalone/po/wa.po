@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 18:09+0100\n"
+"POT-Creation-Date: 2010-03-28 14:49+0200\n"
 "PO-Revision-Date: 2006-09-05 19:54+0200\n"
 "Last-Translator: Pablo Saratxaga <pablo@walon.org>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
@@ -2126,18 +2126,7 @@ msgstr "Grandeu del muchete"
 msgid "size of the (second level) cpu cache"
 msgstr "grandeu del muchete (di deujhinme livea) do cpu"
 
-#. -PO: here "comas" is the medical coma, not the lexical coma!!
 #: harddrake2:74
-#, c-format
-msgid "Coma bug"
-msgstr "Bug «coma»"
-
-#: harddrake2:74
-#, c-format
-msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "si ç' processeu chal a l' bug di coma des Cyrix 6x86 ou nén"
-
-#: harddrake2:75
 #, c-format
 msgid "Cpuid family"
 msgstr "Famile do cpuid"
@@ -2182,71 +2171,37 @@ msgstr "Drapeas"
 msgid "CPU flags reported by the kernel"
 msgstr "Drapeas CPU rapoirtés på nawea"
 
-#: harddrake2:79
+#: harddrake2:78 harddrake2:141
+#, fuzzy, c-format
+msgid "Cores"
+msgstr "Clôre"
+
+#: harddrake2:78
 #, c-format
-msgid "Fdiv bug"
-msgstr "Bug «fdiv»"
+msgid "CPU cores"
+msgstr ""
+
+#: harddrake2:79
+#, fuzzy, c-format
+msgid "Core ID"
+msgstr "ID vindeu"
 
 #: harddrake2:80
 #, c-format
-msgid ""
-"Early Intel Pentium chips manufactured have a bug in their floating point "
-"processor which did not achieve the required precision when performing a "
-"Floating point DIVision (FDIV)"
+msgid "Physical ID"
 msgstr ""
-"Les prumires tchikes di pentiums fabrikêyes pa Intel avént on bug dins leu "
-"processeu di carculaedje e coma flotant ki fjheut ki l' precizion di "
-"carculaedje esteut crombe cwand on fjheut ene operåcion di pårtaedje e coma "
-"flotant (fdiv)"
 
 #: harddrake2:81
 #, c-format
-msgid "Is FPU present"
-msgstr "I gn a-st on FPU"
-
-#: harddrake2:81
-#, c-format
-msgid "yes means the processor has an arithmetic coprocessor"
-msgstr "«oyi» vout dire ki l' processeu a-st on coprocesseu aritmetike"
+msgid "ACPI ID"
+msgstr ""
 
 #: harddrake2:82
-#, c-format
-msgid "Whether the FPU has an irq vector"
-msgstr "Si l' FPU a-st on vecteur d' irq ou nén"
-
-#: harddrake2:82
-#, c-format
-msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr ""
-"«oyi» vout dire ki l' coprocesseu aritmetike a-st on vecteur d' egzepcions"
+#, fuzzy, c-format
+msgid "Siblings"
+msgstr "Apontiaedjes"
 
 #: harddrake2:83
-#, c-format
-msgid "F00f bug"
-msgstr "Bug «f00f»"
-
-#: harddrake2:83
-#, c-format
-msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
-msgstr ""
-"les prumîs pentiums avént-st on bug ki les fjheut edjaler å moumint di "
-"discôder l' comande F00F"
-
-#: harddrake2:84
-#, c-format
-msgid "Halt bug"
-msgstr "Bug «halt»"
-
-#: harddrake2:85
-#, c-format
-msgid ""
-"Some of the early i486DX-100 chips cannot reliably return to operating mode "
-"after the \"halt\" instruction is used"
-msgstr ""
-"Sacwantes des prumirès tchikes i486DX-100 èn polént nén ritourner comifåt å "
-"môde d' ovraedje après aveur riçuvou l' instruccion «halt»"
-
-#: harddrake2:86
 #, c-format
 msgid "sub generation of the cpu"
 msgstr "dizo-djermêye do processeu"
@@ -2338,16 +2293,26 @@ msgstr "Idintifiant plake"
 msgid "usually the disk serial number"
 msgstr "d' åbitude li limero d' séreye del plake"
 
-#: harddrake2:103
+#: harddrake2:100
+#, c-format
+msgid "Target id number"
+msgstr ""
+
+#: harddrake2:100
+#, c-format
+msgid "the SCSI target identifier"
+msgstr ""
+
+#: harddrake2:101
 #, c-format
 msgid "Logical unit number"
 msgstr "Limero d' unité lodjike"
 
-#: harddrake2:103
-#, c-format
+#: harddrake2:101
+#, fuzzy, c-format
 msgid ""
-"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
-"identified by a\n"
+"the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
+"uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
 "li limero d' såme SCSI (LUN). Les éndjins SCSI raloyîs a on lodjoe sont-st "
@@ -2478,17 +2443,7 @@ msgstr "Raloyaedje"
 msgid "Performances"
 msgstr "Performances"
 
-#: harddrake2:143
-#, c-format
-msgid "Bugs"
-msgstr "Bugs"
-
-#: harddrake2:144
-#, c-format
-msgid "FPU"
-msgstr "FPU"
-
-#: harddrake2:151
+#: harddrake2:149
 #, c-format
 msgid "Device"
 msgstr "Éndjin"
@@ -3619,6 +3574,64 @@ msgstr "Apontiaedje manuwel"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "Apontiaedjes"
+
+#~ msgid "Coma bug"
+#~ msgstr "Bug «coma»"
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "si ç' processeu chal a l' bug di coma des Cyrix 6x86 ou nén"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "Bug «fdiv»"
+
+#~ msgid ""
+#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
+#~ "processor which did not achieve the required precision when performing a "
+#~ "Floating point DIVision (FDIV)"
+#~ msgstr ""
+#~ "Les prumires tchikes di pentiums fabrikêyes pa Intel avént on bug dins "
+#~ "leu processeu di carculaedje e coma flotant ki fjheut ki l' precizion di "
+#~ "carculaedje esteut crombe cwand on fjheut ene operåcion di pårtaedje e "
+#~ "coma flotant (fdiv)"
+
+#~ msgid "Is FPU present"
+#~ msgstr "I gn a-st on FPU"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "«oyi» vout dire ki l' processeu a-st on coprocesseu aritmetike"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "Si l' FPU a-st on vecteur d' irq ou nén"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr ""
+#~ "«oyi» vout dire ki l' coprocesseu aritmetike a-st on vecteur d' egzepcions"
+
+#~ msgid "F00f bug"
+#~ msgstr "Bug «f00f»"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr ""
+#~ "les prumîs pentiums avént-st on bug ki les fjheut edjaler å moumint di "
+#~ "discôder l' comande F00F"
+
+#~ msgid "Halt bug"
+#~ msgstr "Bug «halt»"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "Sacwantes des prumirès tchikes i486DX-100 èn polént nén ritourner comifåt "
+#~ "å môde d' ovraedje après aveur riçuvou l' instruccion «halt»"
+
+#~ msgid "Bugs"
+#~ msgstr "Bugs"
+
+#~ msgid "FPU"
+#~ msgstr "FPU"
 
 #~ msgid "Unknown/Others"
 #~ msgstr "Nén cnoxhou|Ôtes"

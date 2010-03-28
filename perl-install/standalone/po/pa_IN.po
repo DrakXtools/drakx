@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 18:09+0100\n"
+"POT-Creation-Date: 2010-03-28 14:49+0200\n"
 "PO-Revision-Date: 2005-03-27 17:55+0530\n"
 "Last-Translator: Jaswinder Singh Phulewala <jaswinderphulewala@yahoo.com>\n"
 "Language-Team: Punjabi <punlinux-i18n@lists.soruceforge.net>\n"
@@ -2096,18 +2096,7 @@ msgstr "ਕੈਸ਼ ਅਕਾਰ"
 msgid "size of the (second level) cpu cache"
 msgstr "cpu ਕੈਸ਼ (ਦੂਜਾ ਪੱਧਰ) ਦਾ ਅਕਾਰ"
 
-#. -PO: here "comas" is the medical coma, not the lexical coma!!
 #: harddrake2:74
-#, c-format
-msgid "Coma bug"
-msgstr "Coma ਬੱਗ"
-
-#: harddrake2:74
-#, c-format
-msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "ਭਾਵੇਂ cpu ਕੋਲ Cyrix 6x86 Coma ਬੱਗ ਹੈ"
-
-#: harddrake2:75
 #, c-format
 msgid "Cpuid family"
 msgstr "Cpuid ਸ਼੍ਰੇਣੀ"
@@ -2152,66 +2141,37 @@ msgstr "ਨਿਸ਼ਾਨ"
 msgid "CPU flags reported by the kernel"
 msgstr "ਕਰਨਲ ਦੁਆਰਾ ਰਿਪੋਰਟ ਕੀਤੇ CPU ਚਿੰਨ"
 
-#: harddrake2:79
+#: harddrake2:78 harddrake2:141
+#, fuzzy, c-format
+msgid "Cores"
+msgstr "ਬੰਦ"
+
+#: harddrake2:78
 #, c-format
-msgid "Fdiv bug"
-msgstr "Fdiv ਬੱਗ"
+msgid "CPU cores"
+msgstr ""
+
+#: harddrake2:79
+#, fuzzy, c-format
+msgid "Core ID"
+msgstr "ਵਿਕ੍ਰੇਤਾ ID"
 
 #: harddrake2:80
 #, c-format
-msgid ""
-"Early Intel Pentium chips manufactured have a bug in their floating point "
-"processor which did not achieve the required precision when performing a "
-"Floating point DIVision (FDIV)"
+msgid "Physical ID"
 msgstr ""
-"ਪਹਿਲਾਂ Intel Pentium ਚਿੱਪਾਂ ਵਿੱਚ ਬੱਗ ਸੀ, ਜਿਸ ਕਰਕੇ ਉਹਨਾਂ ਦਾ ਫਲੋਟਿੰਗ ਬਿੰਦੂ ਪ੍ਰੋਸੈਂਸਰ ਫਲੋਟਿੰਗ "
-"ਪੁਆਇੰਟ ਡੀਵਿਜ਼ਨ (FDIV) ਕਾਰਵਾਈ ਦੌਰਾਨ ਲੋੜੀਦਾ ਪੱਧਰ ਪ੍ਰਾਪਤ ਨਹੀਂ ਸੀ ਕਰ ਸਕਦਾ"
 
 #: harddrake2:81
 #, c-format
-msgid "Is FPU present"
-msgstr "ਕੀ FPU ਮੌਜੂਦ ਹੈ"
-
-#: harddrake2:81
-#, c-format
-msgid "yes means the processor has an arithmetic coprocessor"
-msgstr "ਹਾਂ ਦਾ ਮਤਲਬ ਹੈ ਪਰੋਸੈੱਸਰ ਕੋਲ ਇੱਕ ਹਿਸਾਬ ਕੋਪਰੋਸੈੱਸਰ ਹੈ"
-
-#: harddrake2:82
-#, c-format
-msgid "Whether the FPU has an irq vector"
-msgstr "ਭਾਵੇਂ FPU ਕੋਲ irq ਵਿਕਟਰ ਹੈ"
-
-#: harddrake2:82
-#, c-format
-msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr "ਹਾਂ ਦਾ ਮਤਲਬ ਹੈ ਹਿਸਾਬ ਕੋਪਰੋਸੈੱਸਰ ਨਾਲ ਇੱਕ ਐਕਸੈਪਸ਼ਨ ਵਿਕਟਰ ਜੁੜਿਆ ਹੈ"
-
-#: harddrake2:83
-#, c-format
-msgid "F00f bug"
-msgstr "F00f ਬੱਗ"
-
-#: harddrake2:83
-#, c-format
-msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
-msgstr "ਹਰੇਕ ਪੈਂਟੀਅਮ ਬੱਗੀ ਹੈ ਅਤੇ ਸਥਿਰ ਹੁੰਦਾ ਹੈ ਜਦੋਂ F00F ਬਾਈਟ-ਕੋਡ ਦੀ ਡੀਕੋਡਿੰਗ ਹੁੰਦੀ ਹੈ"
-
-#: harddrake2:84
-#, c-format
-msgid "Halt bug"
-msgstr "ਬੱਗ ਰੋਕ"
-
-#: harddrake2:85
-#, c-format
-msgid ""
-"Some of the early i486DX-100 chips cannot reliably return to operating mode "
-"after the \"halt\" instruction is used"
+msgid "ACPI ID"
 msgstr ""
-"ਪਹਿਲੀਆਂ i486DX-100 ਚਿੱਪਾਂ ਵਿੱਚੋਂ ਕੁਝ \"halt\" ਹਦਾਇਤ ਵਰਤਣ ਤੋਂ ਬਾਅਦ ਆਪਰੇਟਿੰਗ ਵਿਧੀ ਵਿੱਚ "
-"ਵਾਪਿਸ ਗਈਆਂ"
 
-#: harddrake2:86
+#: harddrake2:82
+#, fuzzy, c-format
+msgid "Siblings"
+msgstr "ਵਿਵਸਥਾ"
+
+#: harddrake2:83
 #, c-format
 msgid "sub generation of the cpu"
 msgstr "cpu ਦਾ ਉਪ ਉਤਪਾਦ"
@@ -2301,16 +2261,26 @@ msgstr "ਡਿਸਕ ਪਛਾਣ"
 msgid "usually the disk serial number"
 msgstr "ਆਮ ਵਰਤਿਆ ਡਿਸਕ ਲੜੀ ਅੰਕ"
 
-#: harddrake2:103
+#: harddrake2:100
+#, c-format
+msgid "Target id number"
+msgstr ""
+
+#: harddrake2:100
+#, c-format
+msgid "the SCSI target identifier"
+msgstr ""
+
+#: harddrake2:101
 #, c-format
 msgid "Logical unit number"
 msgstr "ਲੌਜ਼ੀਕਲ ਇਕਾਈ ਅੰਕ"
 
-#: harddrake2:103
-#, c-format
+#: harddrake2:101
+#, fuzzy, c-format
 msgid ""
-"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
-"identified by a\n"
+"the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
+"uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
 "SCSI ਮੰਜ਼ਿਲ ਅੰਕ (LUN)। ਮੇਜ਼ਬਾਨ ਨਾਲ ਜੁੜੇ SCSI ਜੰਤਰਾਂ ਦੀ ਵੱਖਰੀ ਪਛਾਣ\n"
@@ -2438,17 +2408,7 @@ msgstr "ਕੁਨੈਕਸ਼ਨ"
 msgid "Performances"
 msgstr "ਅਦਾਕਾਰੀ"
 
-#: harddrake2:143
-#, c-format
-msgid "Bugs"
-msgstr "ਬੱਗ"
-
-#: harddrake2:144
-#, c-format
-msgid "FPU"
-msgstr "FPU"
-
-#: harddrake2:151
+#: harddrake2:149
 #, c-format
 msgid "Device"
 msgstr "ਜੰਤਰ"
@@ -3551,6 +3511,59 @@ msgstr "ਦਸਤੀ ਸੰਰਚਨਾ"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "ਵਿਵਸਥਾ"
+
+#~ msgid "Coma bug"
+#~ msgstr "Coma ਬੱਗ"
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "ਭਾਵੇਂ cpu ਕੋਲ Cyrix 6x86 Coma ਬੱਗ ਹੈ"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "Fdiv ਬੱਗ"
+
+#~ msgid ""
+#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
+#~ "processor which did not achieve the required precision when performing a "
+#~ "Floating point DIVision (FDIV)"
+#~ msgstr ""
+#~ "ਪਹਿਲਾਂ Intel Pentium ਚਿੱਪਾਂ ਵਿੱਚ ਬੱਗ ਸੀ, ਜਿਸ ਕਰਕੇ ਉਹਨਾਂ ਦਾ ਫਲੋਟਿੰਗ ਬਿੰਦੂ ਪ੍ਰੋਸੈਂਸਰ ਫਲੋਟਿੰਗ "
+#~ "ਪੁਆਇੰਟ ਡੀਵਿਜ਼ਨ (FDIV) ਕਾਰਵਾਈ ਦੌਰਾਨ ਲੋੜੀਦਾ ਪੱਧਰ ਪ੍ਰਾਪਤ ਨਹੀਂ ਸੀ ਕਰ ਸਕਦਾ"
+
+#~ msgid "Is FPU present"
+#~ msgstr "ਕੀ FPU ਮੌਜੂਦ ਹੈ"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "ਹਾਂ ਦਾ ਮਤਲਬ ਹੈ ਪਰੋਸੈੱਸਰ ਕੋਲ ਇੱਕ ਹਿਸਾਬ ਕੋਪਰੋਸੈੱਸਰ ਹੈ"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "ਭਾਵੇਂ FPU ਕੋਲ irq ਵਿਕਟਰ ਹੈ"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr "ਹਾਂ ਦਾ ਮਤਲਬ ਹੈ ਹਿਸਾਬ ਕੋਪਰੋਸੈੱਸਰ ਨਾਲ ਇੱਕ ਐਕਸੈਪਸ਼ਨ ਵਿਕਟਰ ਜੁੜਿਆ ਹੈ"
+
+#~ msgid "F00f bug"
+#~ msgstr "F00f ਬੱਗ"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr "ਹਰੇਕ ਪੈਂਟੀਅਮ ਬੱਗੀ ਹੈ ਅਤੇ ਸਥਿਰ ਹੁੰਦਾ ਹੈ ਜਦੋਂ F00F ਬਾਈਟ-ਕੋਡ ਦੀ ਡੀਕੋਡਿੰਗ ਹੁੰਦੀ ਹੈ"
+
+#~ msgid "Halt bug"
+#~ msgstr "ਬੱਗ ਰੋਕ"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "ਪਹਿਲੀਆਂ i486DX-100 ਚਿੱਪਾਂ ਵਿੱਚੋਂ ਕੁਝ \"halt\" ਹਦਾਇਤ ਵਰਤਣ ਤੋਂ ਬਾਅਦ ਆਪਰੇਟਿੰਗ ਵਿਧੀ ਵਿੱਚ "
+#~ "ਵਾਪਿਸ ਗਈਆਂ"
+
+#~ msgid "Bugs"
+#~ msgstr "ਬੱਗ"
+
+#~ msgid "FPU"
+#~ msgstr "FPU"
 
 #~ msgid "Unknown/Others"
 #~ msgstr "ਅਣਪਛਾਤੇ/ਹੋਰ"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 18:09+0100\n"
+"POT-Creation-Date: 2010-03-28 14:49+0200\n"
 "PO-Revision-Date: 2009-11-01 10:34+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque <kde-i18n-doc@kde.org>\n"
@@ -260,7 +260,8 @@ msgstr ""
 msgid "Find Package"
 msgstr "Bilatu paketea"
 
-#: drakbug:118, c-format
+#: drakbug:118
+#, c-format
 msgid "Browse"
 msgstr "Arakatu"
 
@@ -2008,7 +2009,8 @@ msgstr "PCI domeinua"
 msgid "the PCI domain of the device"
 msgstr "gailuaren PCI domeinua"
 
-#: harddrake2:60, c-format
+#: harddrake2:60
+#, c-format
 msgid "PCI revision"
 msgstr "PCI berrikuspena"
 
@@ -2119,18 +2121,7 @@ msgstr "Cache-tamaina"
 msgid "size of the (second level) cpu cache"
 msgstr "(bigarren mailako) PUZeko cache-aren tamaina"
 
-#. -PO: here "comas" is the medical coma, not the lexical coma!!
 #: harddrake2:74
-#, c-format
-msgid "Coma bug"
-msgstr "Coma programa-errorea"
-
-#: harddrake2:74
-#, c-format
-msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "PUZ honek Cyrix 6x86 Coma programa-errorea baduen ala ez"
-
-#: harddrake2:75
 #, c-format
 msgid "Cpuid family"
 msgstr "Cpuid familia"
@@ -2175,72 +2166,37 @@ msgstr "Banderak"
 msgid "CPU flags reported by the kernel"
 msgstr "PUZ-banderen berri eman du nukleoak"
 
-#: harddrake2:79
+#: harddrake2:78 harddrake2:141
+#, fuzzy, c-format
+msgid "Cores"
+msgstr "Itxi"
+
+#: harddrake2:78
 #, c-format
-msgid "Fdiv bug"
-msgstr "Fdiv programa-errorea"
+msgid "CPU cores"
+msgstr ""
+
+#: harddrake2:79
+#, fuzzy, c-format
+msgid "Core ID"
+msgstr "Fabrikatzailearen ID"
 
 #: harddrake2:80
 #, c-format
-msgid ""
-"Early Intel Pentium chips manufactured have a bug in their floating point "
-"processor which did not achieve the required precision when performing a "
-"Floating point DIVision (FDIV)"
+msgid "Physical ID"
 msgstr ""
-"Hasierako Intel Pentium txipek akats bat dute koma higikorreko "
-"prozesatzailean, eta ez dute lortzen behar adinako doitasuna koma "
-"higikorreko zatiketetan (FDIV)"
 
 #: harddrake2:81
 #, c-format
-msgid "Is FPU present"
-msgstr "FPU badago"
-
-#: harddrake2:81
-#, c-format
-msgid "yes means the processor has an arithmetic coprocessor"
+msgid "ACPI ID"
 msgstr ""
-"baiezkoak prozesatzaileak koprozesatzaile aritmetiko bat duela adierazten du"
 
 #: harddrake2:82
-#, c-format
-msgid "Whether the FPU has an irq vector"
-msgstr "FPUk irq bektorea duen edo ez"
-
-#: harddrake2:82
-#, c-format
-msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr ""
-"baiezkoak koprozesatzaile aritmetikoak salbuespen bektore bat erantsita "
-"duela adierazten du"
+#, fuzzy, c-format
+msgid "Siblings"
+msgstr "Ezarpenak"
 
 #: harddrake2:83
-#, c-format
-msgid "F00f bug"
-msgstr "F00f programa-errorea"
-
-#: harddrake2:83
-#, c-format
-msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
-msgstr ""
-"hasierako pentium-ek programa-errore asko zituzten eta blokeatu egiten ziren "
-"FOOF bytecode deskodetzean"
-
-#: harddrake2:84
-#, c-format
-msgid "Halt bug"
-msgstr "Halt instrukzioaren programa-errorea"
-
-#: harddrake2:85
-#, c-format
-msgid ""
-"Some of the early i486DX-100 chips cannot reliably return to operating mode "
-"after the \"halt\" instruction is used"
-msgstr ""
-"i486DX-100 txip zahar batzuk ezin dira behar bezala berrabiarazi \"halt\" "
-"instrukzioa erabili ondoren"
-
-#: harddrake2:86
 #, c-format
 msgid "sub generation of the cpu"
 msgstr "PUZaren azpi-belaunaldia"
@@ -2331,16 +2287,26 @@ msgstr "Disko identifikatzailea"
 msgid "usually the disk serial number"
 msgstr "orokorrean diskoaren serie zenbakia"
 
-#: harddrake2:103
+#: harddrake2:100
+#, c-format
+msgid "Target id number"
+msgstr ""
+
+#: harddrake2:100
+#, c-format
+msgid "the SCSI target identifier"
+msgstr ""
+
+#: harddrake2:101
 #, c-format
 msgid "Logical unit number"
 msgstr "Unitate logikoaren zenbakia"
 
-#: harddrake2:103
-#, c-format
+#: harddrake2:101
+#, fuzzy, c-format
 msgid ""
-"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
-"identified by a\n"
+"the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
+"uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
 "SCSI helburu zenbakia (LUN). Ostalari bati lotutako SCSI gailuak era "
@@ -2470,17 +2436,7 @@ msgstr "Lotura"
 msgid "Performances"
 msgstr "Errendimendua"
 
-#: harddrake2:143
-#, c-format
-msgid "Bugs"
-msgstr "Akatsak"
-
-#: harddrake2:144
-#, c-format
-msgid "FPU"
-msgstr "FPU"
-
-#: harddrake2:151
+#: harddrake2:149
 #, c-format
 msgid "Device"
 msgstr "Gailua"
@@ -3528,7 +3484,8 @@ msgstr "Zure eskanerrak ez dira erabilgarri egongo sarean."
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr "Ezin dira instalatu eskanerrak partekatzeko behar diren paketeak."
 
-#: service_harddrake:138, c-format
+#: service_harddrake:138
+#, c-format
 msgid "The graphic card '%s' is no more supported by the '%s' driver"
 msgstr ""
 "'%s' txartela grafikoari ez dio aurrerantzean '%s' gidariak euskarri emango"
@@ -3600,6 +3557,66 @@ msgstr "Hizkuntza eta herrialde konfiguraketa"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Eskualdeko ezarpenak"
+
+#~ msgid "Coma bug"
+#~ msgstr "Coma programa-errorea"
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "PUZ honek Cyrix 6x86 Coma programa-errorea baduen ala ez"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "Fdiv programa-errorea"
+
+#~ msgid ""
+#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
+#~ "processor which did not achieve the required precision when performing a "
+#~ "Floating point DIVision (FDIV)"
+#~ msgstr ""
+#~ "Hasierako Intel Pentium txipek akats bat dute koma higikorreko "
+#~ "prozesatzailean, eta ez dute lortzen behar adinako doitasuna koma "
+#~ "higikorreko zatiketetan (FDIV)"
+
+#~ msgid "Is FPU present"
+#~ msgstr "FPU badago"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr ""
+#~ "baiezkoak prozesatzaileak koprozesatzaile aritmetiko bat duela adierazten "
+#~ "du"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "FPUk irq bektorea duen edo ez"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr ""
+#~ "baiezkoak koprozesatzaile aritmetikoak salbuespen bektore bat erantsita "
+#~ "duela adierazten du"
+
+#~ msgid "F00f bug"
+#~ msgstr "F00f programa-errorea"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr ""
+#~ "hasierako pentium-ek programa-errore asko zituzten eta blokeatu egiten "
+#~ "ziren FOOF bytecode deskodetzean"
+
+#~ msgid "Halt bug"
+#~ msgstr "Halt instrukzioaren programa-errorea"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "i486DX-100 txip zahar batzuk ezin dira behar bezala berrabiarazi \"halt\" "
+#~ "instrukzioa erabili ondoren"
+
+#~ msgid "Bugs"
+#~ msgstr "Akatsak"
+
+#~ msgid "FPU"
+#~ msgstr "FPU"
 
 #~ msgid "Unknown/Others"
 #~ msgstr "Ezezaguna/Beste batzuk"

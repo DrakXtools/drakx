@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 18:09+0100\n"
+"POT-Creation-Date: 2010-03-28 14:49+0200\n"
 "PO-Revision-Date: 2000-09-24 12:30 +0100\n"
 "Last-Translator: Alexander Bokovoy <ab@avilink.net>\n"
 "Language-Team: be\n"
@@ -2026,18 +2026,7 @@ msgstr "памер блоку"
 msgid "size of the (second level) cpu cache"
 msgstr ""
 
-#. -PO: here "comas" is the medical coma, not the lexical coma!!
 #: harddrake2:74
-#, c-format
-msgid "Coma bug"
-msgstr ""
-
-#: harddrake2:74
-#, c-format
-msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr ""
-
-#: harddrake2:75
 #, c-format
 msgid "Cpuid family"
 msgstr ""
@@ -2080,62 +2069,37 @@ msgstr "Сьцягі"
 msgid "CPU flags reported by the kernel"
 msgstr ""
 
-#: harddrake2:79
+#: harddrake2:78 harddrake2:141
+#, fuzzy, c-format
+msgid "Cores"
+msgstr "Зачыніць"
+
+#: harddrake2:78
 #, c-format
-msgid "Fdiv bug"
+msgid "CPU cores"
 msgstr ""
+
+#: harddrake2:79
+#, fuzzy, c-format
+msgid "Core ID"
+msgstr "Рэдактары"
 
 #: harddrake2:80
 #, c-format
-msgid ""
-"Early Intel Pentium chips manufactured have a bug in their floating point "
-"processor which did not achieve the required precision when performing a "
-"Floating point DIVision (FDIV)"
+msgid "Physical ID"
 msgstr ""
 
 #: harddrake2:81
 #, c-format
-msgid "Is FPU present"
-msgstr ""
-
-#: harddrake2:81
-#, c-format
-msgid "yes means the processor has an arithmetic coprocessor"
+msgid "ACPI ID"
 msgstr ""
 
 #: harddrake2:82
-#, c-format
-msgid "Whether the FPU has an irq vector"
-msgstr ""
-
-#: harddrake2:82
-#, c-format
-msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr ""
+#, fuzzy, c-format
+msgid "Siblings"
+msgstr "Усталёўкі"
 
 #: harddrake2:83
-#, c-format
-msgid "F00f bug"
-msgstr ""
-
-#: harddrake2:83
-#, c-format
-msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
-msgstr ""
-
-#: harddrake2:84
-#, c-format
-msgid "Halt bug"
-msgstr ""
-
-#: harddrake2:85
-#, c-format
-msgid ""
-"Some of the early i486DX-100 chips cannot reliably return to operating mode "
-"after the \"halt\" instruction is used"
-msgstr ""
-
-#: harddrake2:86
 #, c-format
 msgid "sub generation of the cpu"
 msgstr ""
@@ -2223,16 +2187,26 @@ msgstr "Прынтэры"
 msgid "usually the disk serial number"
 msgstr ""
 
-#: harddrake2:103
+#: harddrake2:100
+#, c-format
+msgid "Target id number"
+msgstr ""
+
+#: harddrake2:100
+#, c-format
+msgid "the SCSI target identifier"
+msgstr ""
+
+#: harddrake2:101
 #, fuzzy, c-format
 msgid "Logical unit number"
 msgstr "Гульня ў косьці"
 
-#: harddrake2:103
+#: harddrake2:101
 #, c-format
 msgid ""
-"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
-"identified by a\n"
+"the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
+"uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
 
@@ -2358,17 +2332,7 @@ msgstr "Імя злучэння"
 msgid "Performances"
 msgstr "Усталяваньні"
 
-#: harddrake2:143
-#, fuzzy, c-format
-msgid "Bugs"
-msgstr "Прац."
-
-#: harddrake2:144
-#, c-format
-msgid "FPU"
-msgstr ""
-
-#: harddrake2:151
+#: harddrake2:149
 #, c-format
 msgid "Device"
 msgstr "Прылада"
@@ -3429,6 +3393,10 @@ msgstr "Захаваць канфігурацыю меню"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "Усталёўкі"
+
+#, fuzzy
+#~ msgid "Bugs"
+#~ msgstr "Прац."
 
 #, fuzzy
 #~ msgid "(default value: %s)"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone-ja\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 18:09+0100\n"
+"POT-Creation-Date: 2010-03-28 14:49+0200\n"
 "PO-Revision-Date: 2009-03-22 19:59+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <cooker-i18n@mandrivalinux.org>\n"
@@ -2112,18 +2112,7 @@ msgstr "キャッシュサイズ"
 msgid "size of the (second level) cpu cache"
 msgstr "CPU の第二キャッシュのサイズ"
 
-#. -PO: here "comas" is the medical coma, not the lexical coma!!
 #: harddrake2:74
-#, c-format
-msgid "Coma bug"
-msgstr "Coma バグ"
-
-#: harddrake2:74
-#, c-format
-msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "この CPU に Cyrix 6x86 の Coma バグがあるかどうか"
-
-#: harddrake2:75
 #, c-format
 msgid "Cpuid family"
 msgstr "Cpuid ファミリー"
@@ -2168,66 +2157,37 @@ msgstr "フラグ"
 msgid "CPU flags reported by the kernel"
 msgstr "カーネルが報告する CPU フラグ"
 
-#: harddrake2:79
+#: harddrake2:78 harddrake2:141
+#, fuzzy, c-format
+msgid "Cores"
+msgstr "閉じる"
+
+#: harddrake2:78
 #, c-format
-msgid "Fdiv bug"
-msgstr "Fdiv バグ"
+msgid "CPU cores"
+msgstr ""
+
+#: harddrake2:79
+#, fuzzy, c-format
+msgid "Core ID"
+msgstr "ベンダー ID"
 
 #: harddrake2:80
 #, c-format
-msgid ""
-"Early Intel Pentium chips manufactured have a bug in their floating point "
-"processor which did not achieve the required precision when performing a "
-"Floating point DIVision (FDIV)"
+msgid "Physical ID"
 msgstr ""
-"初期の Intel Pentium プロセッサには浮動小数点に関するバグがあります。そのた"
-"め、FDIV (Floating point DIVision) の実行時に、必要な精密性を実現できません。"
 
 #: harddrake2:81
 #, c-format
-msgid "Is FPU present"
-msgstr "FPU の状態を表示"
-
-#: harddrake2:81
-#, c-format
-msgid "yes means the processor has an arithmetic coprocessor"
-msgstr "プロセッサが演算コプロセッサを有しているかどうか"
-
-#: harddrake2:82
-#, c-format
-msgid "Whether the FPU has an irq vector"
-msgstr "FPU に irq vector があるかどうか"
-
-#: harddrake2:82
-#, c-format
-msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr "演算コプロセッサに exception vector が付いているかどうか"
-
-#: harddrake2:83
-#, c-format
-msgid "F00f bug"
-msgstr "F00F バグ"
-
-#: harddrake2:83
-#, c-format
-msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
-msgstr "初期のペンティアムは F00F バイトコードをデコードすると固まります。"
-
-#: harddrake2:84
-#, c-format
-msgid "Halt bug"
-msgstr "Halt バグ"
-
-#: harddrake2:85
-#, c-format
-msgid ""
-"Some of the early i486DX-100 chips cannot reliably return to operating mode "
-"after the \"halt\" instruction is used"
+msgid "ACPI ID"
 msgstr ""
-"初期の i486DX-100 チップの一部は、「halt」機能を使うと操作に戻れなくことがあ"
-"ります"
 
-#: harddrake2:86
+#: harddrake2:82
+#, fuzzy, c-format
+msgid "Siblings"
+msgstr "設定"
+
+#: harddrake2:83
 #, c-format
 msgid "sub generation of the cpu"
 msgstr "CPU サブジェネレーション"
@@ -2318,16 +2278,26 @@ msgstr "ディスクの識別子"
 msgid "usually the disk serial number"
 msgstr "多くの場合ディスクのシリアルナンバー"
 
-#: harddrake2:103
+#: harddrake2:100
+#, c-format
+msgid "Target id number"
+msgstr ""
+
+#: harddrake2:100
+#, c-format
+msgid "the SCSI target identifier"
+msgstr ""
+
+#: harddrake2:101
 #, c-format
 msgid "Logical unit number"
 msgstr "論理ユニット番号"
 
-#: harddrake2:103
-#, c-format
+#: harddrake2:101
+#, fuzzy, c-format
 msgid ""
-"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
-"identified by a\n"
+"the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
+"uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
 "SCSI ターゲット番号 (LUN)。ホストに接続された SCSI デバイスは、チャンネル番"
@@ -2456,17 +2426,7 @@ msgstr "接続"
 msgid "Performances"
 msgstr "パフォーマンス"
 
-#: harddrake2:143
-#, c-format
-msgid "Bugs"
-msgstr "バグ"
-
-#: harddrake2:144
-#, c-format
-msgid "FPU"
-msgstr "FPU"
-
-#: harddrake2:151
+#: harddrake2:149
 #, c-format
 msgid "Device"
 msgstr "デバイス"
@@ -3581,6 +3541,60 @@ msgstr "言語と国の設定"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "言語と国の設定"
+
+#~ msgid "Coma bug"
+#~ msgstr "Coma バグ"
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "この CPU に Cyrix 6x86 の Coma バグがあるかどうか"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "Fdiv バグ"
+
+#~ msgid ""
+#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
+#~ "processor which did not achieve the required precision when performing a "
+#~ "Floating point DIVision (FDIV)"
+#~ msgstr ""
+#~ "初期の Intel Pentium プロセッサには浮動小数点に関するバグがあります。その"
+#~ "ため、FDIV (Floating point DIVision) の実行時に、必要な精密性を実現できま"
+#~ "せん。"
+
+#~ msgid "Is FPU present"
+#~ msgstr "FPU の状態を表示"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "プロセッサが演算コプロセッサを有しているかどうか"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "FPU に irq vector があるかどうか"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr "演算コプロセッサに exception vector が付いているかどうか"
+
+#~ msgid "F00f bug"
+#~ msgstr "F00F バグ"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr "初期のペンティアムは F00F バイトコードをデコードすると固まります。"
+
+#~ msgid "Halt bug"
+#~ msgstr "Halt バグ"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "初期の i486DX-100 チップの一部は、「halt」機能を使うと操作に戻れなくことが"
+#~ "あります"
+
+#~ msgid "Bugs"
+#~ msgstr "バグ"
+
+#~ msgid "FPU"
+#~ msgstr "FPU"
 
 #~ msgid "Unknown/Others"
 #~ msgstr "不明/その他"

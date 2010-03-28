@@ -12,14 +12,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 18:09+0100\n"
+"POT-Creation-Date: 2010-03-28 14:49+0200\n"
 "PO-Revision-Date: 2009-10-30 21:24+0400\n"
 "Last-Translator: akdengi <kazancas@mandriva.ru>\n"
 "Language-Team: Russian <gnu@mx.ru>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=2; plural=(n!=1);\n\n"
+"Plural-Forms:  nplurals=2; plural=(n!=1);\n"
+"\n"
 "X-Generator: KBabel 1.11.4\n"
 
 #: display_help:49 display_help:54 drakbug:186 drakperm:136
@@ -865,7 +866,8 @@ msgstr " --help                - вывести эту справку     \n"
 
 #: drakhelp:23
 #, c-format
-msgid " --id <id_label>       - load the html help page which refers to id_label\n"
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
 " --id <id_label>       - загрузить html-страницу справки,\n"
 "                         которая ссылается на id_label\n"
@@ -1841,8 +1843,10 @@ msgstr "Шина"
 
 #: harddrake2:33
 #, c-format
-msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
-msgstr "это физическая шина, к которой подключено устройство (напр.: PCI, USB, ...)"
+msgid ""
+"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgstr ""
+"это физическая шина, к которой подключено устройство (напр.: PCI, USB, ...)"
 
 #: harddrake2:35 harddrake2:150
 #, c-format
@@ -2122,18 +2126,7 @@ msgstr "Размер кэша"
 msgid "size of the (second level) cpu cache"
 msgstr "размер кэша (второго уровня) процессора"
 
-#. -PO: here "comas" is the medical coma, not the lexical coma!!
 #: harddrake2:74
-#, c-format
-msgid "Coma bug"
-msgstr "Coma ошибка"
-
-#: harddrake2:74
-#, c-format
-msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "имеет ли этот процессор ошибку запятой Cyrix 6x86"
-
-#: harddrake2:75
 #, c-format
 msgid "Cpuid family"
 msgstr "Семейство cpuid"
@@ -2178,69 +2171,37 @@ msgstr "Флаги"
 msgid "CPU flags reported by the kernel"
 msgstr "Флаги процессора, выданные ядром"
 
-#: harddrake2:79
+#: harddrake2:78 harddrake2:141
+#, fuzzy, c-format
+msgid "Cores"
+msgstr "Закрыть"
+
+#: harddrake2:78
 #, c-format
-msgid "Fdiv bug"
-msgstr "Ошибка Fdiv"
+msgid "CPU cores"
+msgstr ""
+
+#: harddrake2:79
+#, fuzzy, c-format
+msgid "Core ID"
+msgstr "ID производителя"
 
 #: harddrake2:80
 #, c-format
-msgid ""
-"Early Intel Pentium chips manufactured have a bug in their floating point "
-"processor which did not achieve the required precision when performing a "
-"Floating point DIVision (FDIV)"
+msgid "Physical ID"
 msgstr ""
-"Выпущенные ранее чипы Intel Pentium имеют ошибку в узле вычислений с "
-"плавающей точкой, который не достиг требуемой точности при выполнении "
-"деления с плавающей точкой (FDIV)"
 
 #: harddrake2:81
 #, c-format
-msgid "Is FPU present"
-msgstr "Имеется ли FPU"
-
-#: harddrake2:81
-#, c-format
-msgid "yes means the processor has an arithmetic coprocessor"
-msgstr "да означает, что процессор имеет арифметический сопроцессор"
+msgid "ACPI ID"
+msgstr ""
 
 #: harddrake2:82
-#, c-format
-msgid "Whether the FPU has an irq vector"
-msgstr "Имеет ли FPU вектор прерываний"
-
-#: harddrake2:82
-#, c-format
-msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr ""
-"да означает, что арифметический сопроцессор имеет встроенный вектор "
-"исключительных операций"
+#, fuzzy, c-format
+msgid "Siblings"
+msgstr "Настройки"
 
 #: harddrake2:83
-#, c-format
-msgid "F00f bug"
-msgstr "Ошибка F00f"
-
-#: harddrake2:83
-#, c-format
-msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
-msgstr "раньше Pentium-ы имели ошибки и зависали при декодировании байт-кода F00F"
-
-#: harddrake2:84
-#, c-format
-msgid "Halt bug"
-msgstr "Ошибка Halt"
-
-#: harddrake2:85
-#, c-format
-msgid ""
-"Some of the early i486DX-100 chips cannot reliably return to operating mode "
-"after the \"halt\" instruction is used"
-msgstr ""
-"Некоторые из ранних чипов i486DX-100 не могли точно возвращаться в рабочий "
-"режим после использования инструкции \"halt\""
-
-#: harddrake2:86
 #, c-format
 msgid "sub generation of the cpu"
 msgstr "поколение процессора"
@@ -2331,16 +2292,26 @@ msgstr "Идентификатор диска"
 msgid "usually the disk serial number"
 msgstr "обычно серийный номер диска"
 
-#: harddrake2:103
+#: harddrake2:100
+#, c-format
+msgid "Target id number"
+msgstr ""
+
+#: harddrake2:100
+#, c-format
+msgid "the SCSI target identifier"
+msgstr ""
+
+#: harddrake2:101
 #, c-format
 msgid "Logical unit number"
 msgstr "Номер логического юнита"
 
-#: harddrake2:103
-#, c-format
+#: harddrake2:101
+#, fuzzy, c-format
 msgid ""
-"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
-"identified by a\n"
+"the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
+"uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
 "номер SCSI цели (LUN). SCSI устройства, подключённые к хосту "
@@ -2405,7 +2376,8 @@ msgstr "Файл устройства"
 
 #: harddrake2:119
 #, c-format
-msgid "the device file used to communicate with the kernel driver for the mouse"
+msgid ""
+"the device file used to communicate with the kernel driver for the mouse"
 msgstr "файл устройства используется для общения с драйвером ядра для мыши"
 
 #: harddrake2:120
@@ -2468,17 +2440,7 @@ msgstr "Соединение"
 msgid "Performances"
 msgstr "Производительность"
 
-#: harddrake2:143
-#, c-format
-msgid "Bugs"
-msgstr "Ошибки"
-
-#: harddrake2:144
-#, c-format
-msgid "FPU"
-msgstr "FPU"
-
-#: harddrake2:151
+#: harddrake2:149
 #, c-format
 msgid "Device"
 msgstr "Устройство"
@@ -2609,8 +2571,10 @@ msgstr "Запустить утилиту настройки"
 
 #: harddrake2:303
 #, c-format
-msgid "Click on a device in the left tree in order to display its information here."
-msgstr "Выберите устройство в дереве слева, чтобы увидеть здесь информацию о нём."
+msgid ""
+"Click on a device in the left tree in order to display its information here."
+msgstr ""
+"Выберите устройство в дереве слева, чтобы увидеть здесь информацию о нём."
 
 #: harddrake2:324 notify-x11-free-driver-switch:13
 #, c-format
@@ -2907,7 +2871,8 @@ msgstr "Настройка служб"
 msgid ""
 "You will receive an alert if one of the selected services is no longer "
 "running"
-msgstr "Вы получите уведомление, если одна из выбранных служб больше не выполняется"
+msgstr ""
+"Вы получите уведомление, если одна из выбранных служб больше не выполняется"
 
 #: logdrake:429
 #, c-format
@@ -3004,7 +2969,8 @@ msgstr "Прекращение работы Scannerdrake."
 
 #: scannerdrake:60
 #, c-format
-msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr ""
 "Не получается установить пакеты, необходимые для настройки сканера с помощью "
 "Scannerdrake."
@@ -3599,3 +3565,59 @@ msgstr "Настройка языковых и региональных пара
 msgid "Regional Settings"
 msgstr "Региональные настройки"
 
+#~ msgid "Coma bug"
+#~ msgstr "Coma ошибка"
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "имеет ли этот процессор ошибку запятой Cyrix 6x86"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "Ошибка Fdiv"
+
+#~ msgid ""
+#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
+#~ "processor which did not achieve the required precision when performing a "
+#~ "Floating point DIVision (FDIV)"
+#~ msgstr ""
+#~ "Выпущенные ранее чипы Intel Pentium имеют ошибку в узле вычислений с "
+#~ "плавающей точкой, который не достиг требуемой точности при выполнении "
+#~ "деления с плавающей точкой (FDIV)"
+
+#~ msgid "Is FPU present"
+#~ msgstr "Имеется ли FPU"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "да означает, что процессор имеет арифметический сопроцессор"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "Имеет ли FPU вектор прерываний"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr ""
+#~ "да означает, что арифметический сопроцессор имеет встроенный вектор "
+#~ "исключительных операций"
+
+#~ msgid "F00f bug"
+#~ msgstr "Ошибка F00f"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr ""
+#~ "раньше Pentium-ы имели ошибки и зависали при декодировании байт-кода F00F"
+
+#~ msgid "Halt bug"
+#~ msgstr "Ошибка Halt"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "Некоторые из ранних чипов i486DX-100 не могли точно возвращаться в "
+#~ "рабочий режим после использования инструкции \"halt\""
+
+#~ msgid "Bugs"
+#~ msgstr "Ошибки"
+
+#~ msgid "FPU"
+#~ msgstr "FPU"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-vi version\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 18:09+0100\n"
+"POT-Creation-Date: 2010-03-28 14:49+0200\n"
 "PO-Revision-Date: 2005-06-02 21:17+0700\n"
 "Last-Translator: Larry Nguyen <larry@vnlinux.org>\n"
 "Language-Team:  <gnomevi-list@lists.sourceforge.net>\n"
@@ -2112,18 +2112,7 @@ msgstr "Kích thước cache"
 msgid "size of the (second level) cpu cache"
 msgstr "Kích thước cache (L2) của CPU"
 
-#. -PO: here "comas" is the medical coma, not the lexical coma!!
 #: harddrake2:74
-#, c-format
-msgid "Coma bug"
-msgstr "Lỗi Coma"
-
-#: harddrake2:74
-#, c-format
-msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "CPU này có Cyrix 6x86 Coma bug hay không"
-
-#: harddrake2:75
 #, c-format
 msgid "Cpuid family"
 msgstr "Họ CPUID"
@@ -2168,67 +2157,37 @@ msgstr "Flags"
 msgid "CPU flags reported by the kernel"
 msgstr "CPU flags do kernel báo cáo"
 
-#: harddrake2:79
+#: harddrake2:78 harddrake2:141
+#, fuzzy, c-format
+msgid "Cores"
+msgstr "Đóng"
+
+#: harddrake2:78
 #, c-format
-msgid "Fdiv bug"
-msgstr "Lỗi Fdiv"
+msgid "CPU cores"
+msgstr ""
+
+#: harddrake2:79
+#, fuzzy, c-format
+msgid "Core ID"
+msgstr "Vendor ID"
 
 #: harddrake2:80
 #, c-format
-msgid ""
-"Early Intel Pentium chips manufactured have a bug in their floating point "
-"processor which did not achieve the required precision when performing a "
-"Floating point DIVision (FDIV)"
+msgid "Physical ID"
 msgstr ""
-"Các chip Intel Pentium cũ hơn có một lỗi trong tiến trình dấu phẩy động "
-"không đạt được sự chính xác đi cùng khi thực hiện một Floating point "
-"DIVision (FDIV)"
 
 #: harddrake2:81
 #, c-format
-msgid "Is FPU present"
-msgstr "FPU có mặt không"
-
-#: harddrake2:81
-#, c-format
-msgid "yes means the processor has an arithmetic coprocessor"
-msgstr "có nghĩa là bộ vi xử lý có một bộ đồng bộ vi xử lý số học"
-
-#: harddrake2:82
-#, c-format
-msgid "Whether the FPU has an irq vector"
-msgstr "FPU có một irq vector hay không"
-
-#: harddrake2:82
-#, c-format
-msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr "có nghĩa là bộ đồng xử lý số học có kèm một exception vector"
-
-#: harddrake2:83
-#, c-format
-msgid "F00f bug"
-msgstr "Lỗi F00f"
-
-#: harddrake2:83
-#, c-format
-msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
-msgstr "Pentium cũ bị lỗi và ì ra khi giải mã F00F bytecode"
-
-#: harddrake2:84
-#, c-format
-msgid "Halt bug"
-msgstr "Ngừng lỗi"
-
-#: harddrake2:85
-#, c-format
-msgid ""
-"Some of the early i486DX-100 chips cannot reliably return to operating mode "
-"after the \"halt\" instruction is used"
+msgid "ACPI ID"
 msgstr ""
-"Một số i486DX-100 chip cũ không thể thật sự trở về chế độ hoạt động sau khi "
-"dùng hướng dẫn \"ngừng\""
 
-#: harddrake2:86
+#: harddrake2:82
+#, fuzzy, c-format
+msgid "Siblings"
+msgstr "Các thiết lập"
+
+#: harddrake2:83
 #, c-format
 msgid "sub generation of the cpu"
 msgstr "Thế hệ con của CPU"
@@ -2319,16 +2278,26 @@ msgstr "Trình nhận dạng đĩa"
 msgid "usually the disk serial number"
 msgstr "thường là số serial của đĩa"
 
-#: harddrake2:103
+#: harddrake2:100
+#, c-format
+msgid "Target id number"
+msgstr ""
+
+#: harddrake2:100
+#, c-format
+msgid "the SCSI target identifier"
+msgstr ""
+
+#: harddrake2:101
 #, c-format
 msgid "Logical unit number"
 msgstr "Số đơn vị logic"
 
-#: harddrake2:103
-#, c-format
+#: harddrake2:101
+#, fuzzy, c-format
 msgid ""
-"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
-"identified by a\n"
+"the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
+"uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
 "SCSI target number (LUN). Các thiết bị SCSI kết nối với một host được nhận "
@@ -2457,17 +2426,7 @@ msgstr "Kết nối"
 msgid "Performances"
 msgstr "Hiệu suất"
 
-#: harddrake2:143
-#, c-format
-msgid "Bugs"
-msgstr "Bugs"
-
-#: harddrake2:144
-#, c-format
-msgid "FPU"
-msgstr "FPU"
-
-#: harddrake2:151
+#: harddrake2:149
 #, c-format
 msgid "Device"
 msgstr "Thiết bị"
@@ -3584,6 +3543,60 @@ msgstr "Cấu hình thủ công"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "Các thiết lập"
+
+#~ msgid "Coma bug"
+#~ msgstr "Lỗi Coma"
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "CPU này có Cyrix 6x86 Coma bug hay không"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "Lỗi Fdiv"
+
+#~ msgid ""
+#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
+#~ "processor which did not achieve the required precision when performing a "
+#~ "Floating point DIVision (FDIV)"
+#~ msgstr ""
+#~ "Các chip Intel Pentium cũ hơn có một lỗi trong tiến trình dấu phẩy động "
+#~ "không đạt được sự chính xác đi cùng khi thực hiện một Floating point "
+#~ "DIVision (FDIV)"
+
+#~ msgid "Is FPU present"
+#~ msgstr "FPU có mặt không"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "có nghĩa là bộ vi xử lý có một bộ đồng bộ vi xử lý số học"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "FPU có một irq vector hay không"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr "có nghĩa là bộ đồng xử lý số học có kèm một exception vector"
+
+#~ msgid "F00f bug"
+#~ msgstr "Lỗi F00f"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr "Pentium cũ bị lỗi và ì ra khi giải mã F00F bytecode"
+
+#~ msgid "Halt bug"
+#~ msgstr "Ngừng lỗi"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "Một số i486DX-100 chip cũ không thể thật sự trở về chế độ hoạt động sau "
+#~ "khi dùng hướng dẫn \"ngừng\""
+
+#~ msgid "Bugs"
+#~ msgstr "Bugs"
+
+#~ msgid "FPU"
+#~ msgstr "FPU"
 
 #~ msgid "Unknown/Others"
 #~ msgstr "Không xác định/Cái khác"

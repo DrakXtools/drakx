@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 18:09+0100\n"
+"POT-Creation-Date: 2010-03-28 14:49+0200\n"
 "PO-Revision-Date: 2008-09-28 12:21+0800\n"
 "Last-Translator: Shiva Huang <shivahuang@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
@@ -2106,18 +2106,7 @@ msgstr "快取大小"
 msgid "size of the (second level) cpu cache"
 msgstr "CPU 的第二層快取記憶體大小"
 
-#. -PO: here "comas" is the medical coma, not the lexical coma!!
 #: harddrake2:74
-#, c-format
-msgid "Coma bug"
-msgstr "Coma 臭蟲"
-
-#: harddrake2:74
-#, c-format
-msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "這顆 CPU 是否有 Cyrix 6x86 Coma 臭蟲"
-
-#: harddrake2:75
 #, c-format
 msgid "Cpuid family"
 msgstr "CPU 家族"
@@ -2162,64 +2151,37 @@ msgstr "標誌"
 msgid "CPU flags reported by the kernel"
 msgstr "核心回報的 CPU 標誌"
 
-#: harddrake2:79
+#: harddrake2:78 harddrake2:141
+#, fuzzy, c-format
+msgid "Cores"
+msgstr "關閉"
+
+#: harddrake2:78
 #, c-format
-msgid "Fdiv bug"
-msgstr "Fdiv 臭蟲"
+msgid "CPU cores"
+msgstr ""
+
+#: harddrake2:79
+#, fuzzy, c-format
+msgid "Core ID"
+msgstr "廠商 ID"
 
 #: harddrake2:80
 #, c-format
-msgid ""
-"Early Intel Pentium chips manufactured have a bug in their floating point "
-"processor which did not achieve the required precision when performing a "
-"Floating point DIVision (FDIV)"
+msgid "Physical ID"
 msgstr ""
-"早期的 Intel Pentium 晶片生產時有個浮點數處理器的臭蟲，無法達到浮點數除法"
-"(FDIV) 所要求的精確度"
 
 #: harddrake2:81
 #, c-format
-msgid "Is FPU present"
-msgstr "是否擁有 FPU"
-
-#: harddrake2:81
-#, c-format
-msgid "yes means the processor has an arithmetic coprocessor"
-msgstr "是代表這顆處理器有算數協同處理器"
+msgid "ACPI ID"
+msgstr ""
 
 #: harddrake2:82
-#, c-format
-msgid "Whether the FPU has an irq vector"
-msgstr "這個 FPU 是否有個 irq 向量"
-
-#: harddrake2:82
-#, c-format
-msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr "是代表這個算數協同處理器擁有個例外向量"
+#, fuzzy, c-format
+msgid "Siblings"
+msgstr "設定"
 
 #: harddrake2:83
-#, c-format
-msgid "F00f bug"
-msgstr "F00f 臭蟲"
-
-#: harddrake2:83
-#, c-format
-msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
-msgstr "早期的 Pentium 在解譯 F00F 二進碼時臭蟲百出並且常常掛點"
-
-#: harddrake2:84
-#, c-format
-msgid "Halt bug"
-msgstr "待機臭蟲"
-
-#: harddrake2:85
-#, c-format
-msgid ""
-"Some of the early i486DX-100 chips cannot reliably return to operating mode "
-"after the \"halt\" instruction is used"
-msgstr "有些早期的 i486DX-100 晶片無法在 \"halt\" 指令之後成功的回到工作模式"
-
-#: harddrake2:86
 #, c-format
 msgid "sub generation of the cpu"
 msgstr "CPU 的次世代"
@@ -2309,16 +2271,26 @@ msgstr "磁碟標識"
 msgid "usually the disk serial number"
 msgstr "通常是磁碟的序號"
 
-#: harddrake2:103
+#: harddrake2:100
+#, c-format
+msgid "Target id number"
+msgstr ""
+
+#: harddrake2:100
+#, c-format
+msgid "the SCSI target identifier"
+msgstr ""
+
+#: harddrake2:101
 #, c-format
 msgid "Logical unit number"
 msgstr "邏輯單位號碼"
 
-#: harddrake2:103
-#, c-format
+#: harddrake2:101
+#, fuzzy, c-format
 msgid ""
-"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
-"identified by a\n"
+"the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
+"uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
 "SCSI 目標編號 (LUN)。藉由一個頻道號碼、目標 ID，以及邏輯單位號碼，連結到 "
@@ -2447,17 +2419,7 @@ msgstr "連線"
 msgid "Performances"
 msgstr "效能"
 
-#: harddrake2:143
-#, c-format
-msgid "Bugs"
-msgstr "臭蟲報告"
-
-#: harddrake2:144
-#, c-format
-msgid "FPU"
-msgstr "FPU"
-
-#: harddrake2:151
+#: harddrake2:149
 #, c-format
 msgid "Device"
 msgstr "裝置"
@@ -3550,6 +3512,58 @@ msgstr "語言與國家設定"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "區域設定"
+
+#~ msgid "Coma bug"
+#~ msgstr "Coma 臭蟲"
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "這顆 CPU 是否有 Cyrix 6x86 Coma 臭蟲"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "Fdiv 臭蟲"
+
+#~ msgid ""
+#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
+#~ "processor which did not achieve the required precision when performing a "
+#~ "Floating point DIVision (FDIV)"
+#~ msgstr ""
+#~ "早期的 Intel Pentium 晶片生產時有個浮點數處理器的臭蟲，無法達到浮點數除法"
+#~ "(FDIV) 所要求的精確度"
+
+#~ msgid "Is FPU present"
+#~ msgstr "是否擁有 FPU"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "是代表這顆處理器有算數協同處理器"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "這個 FPU 是否有個 irq 向量"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr "是代表這個算數協同處理器擁有個例外向量"
+
+#~ msgid "F00f bug"
+#~ msgstr "F00f 臭蟲"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr "早期的 Pentium 在解譯 F00F 二進碼時臭蟲百出並且常常掛點"
+
+#~ msgid "Halt bug"
+#~ msgstr "待機臭蟲"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "有些早期的 i486DX-100 晶片無法在 \"halt\" 指令之後成功的回到工作模式"
+
+#~ msgid "Bugs"
+#~ msgstr "臭蟲報告"
+
+#~ msgid "FPU"
+#~ msgstr "FPU"
 
 #~ msgid "Unknown/Others"
 #~ msgstr "未知/其他"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 18:09+0100\n"
+"POT-Creation-Date: 2010-03-28 14:49+0200\n"
 "PO-Revision-Date: 2009-03-27 11:38+0000\n"
 "Last-Translator: Pjetur G. Hjaltason <pjetur@pjetur.net>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
@@ -2118,18 +2118,7 @@ msgstr "Stærð skyndiminnis"
 msgid "size of the (second level) cpu cache"
 msgstr "stærð á (annars þreps) skyndiminni örgjörva"
 
-#. -PO: here "comas" is the medical coma, not the lexical coma!!
 #: harddrake2:74
-#, c-format
-msgid "Coma bug"
-msgstr "Dásvefnsvilla"
-
-#: harddrake2:74
-#, c-format
-msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "hvort þessi örgjörvi er haldinn Cyrix 6x86 dásvefnsvillunni"
-
-#: harddrake2:75
 #, c-format
 msgid "Cpuid family"
 msgstr "Fjölskylduauðkenni örgjörva"
@@ -2174,68 +2163,37 @@ msgstr "Flögg"
 msgid "CPU flags reported by the kernel"
 msgstr "Örgjörvaflögg eins og þau eru gefin upp af kjarna"
 
-#: harddrake2:79
+#: harddrake2:78 harddrake2:141
+#, fuzzy, c-format
+msgid "Cores"
+msgstr "Loka"
+
+#: harddrake2:78
 #, c-format
-msgid "Fdiv bug"
-msgstr "Fdiv villa"
+msgid "CPU cores"
+msgstr ""
+
+#: harddrake2:79
+#, fuzzy, c-format
+msgid "Core ID"
+msgstr "Auðkenni framleiðanda"
 
 #: harddrake2:80
 #, c-format
-msgid ""
-"Early Intel Pentium chips manufactured have a bug in their floating point "
-"processor which did not achieve the required precision when performing a "
-"Floating point DIVision (FDIV)"
+msgid "Physical ID"
 msgstr ""
-"Eldri Pentium örgjörvar voru með villu í fleytitölu-örgjörva sem olli "
-"ónákvæmni í útreikningum þegar fleytitöludeiling var framkvæmd (FDIV)"
 
 #: harddrake2:81
 #, c-format
-msgid "Is FPU present"
-msgstr "Er FPU til staðar"
-
-#: harddrake2:81
-#, c-format
-msgid "yes means the processor has an arithmetic coprocessor"
-msgstr "já þýðir að örgjörvinn hefur fleytitölu-örgjörva"
+msgid "ACPI ID"
+msgstr ""
 
 #: harddrake2:82
-#, c-format
-msgid "Whether the FPU has an irq vector"
-msgstr "Hvort fleytitölu-örgjörvinn hefur sérstakt ígrip"
-
-#: harddrake2:82
-#, c-format
-msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr "já þýðir að fleytitölu-örgjörvinn hefur tengt sig sérstöku ígripi"
+#, fuzzy, c-format
+msgid "Siblings"
+msgstr "Stillingar"
 
 #: harddrake2:83
-#, c-format
-msgid "F00f bug"
-msgstr "F00f villa"
-
-#: harddrake2:83
-#, c-format
-msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
-msgstr ""
-"eldri pentium örgjörvar voru gallaðir og frusu þegar þeir þýddu F00F "
-"aðgerðina"
-
-#: harddrake2:84
-#, c-format
-msgid "Halt bug"
-msgstr "Halt villa"
-
-#: harddrake2:85
-#, c-format
-msgid ""
-"Some of the early i486DX-100 chips cannot reliably return to operating mode "
-"after the \"halt\" instruction is used"
-msgstr ""
-"Sumir eldri i486DX örgjörvar gátu ekki snúið eðlilega til baka til "
-"venjulegrar vinnslu eftir að \"halt\" skipunin var framkvæmd"
-
-#: harddrake2:86
 #, c-format
 msgid "sub generation of the cpu"
 msgstr "undir-flokkur örgjörva"
@@ -2326,16 +2284,26 @@ msgstr "Diskauðkenni"
 msgid "usually the disk serial number"
 msgstr "venjulega raðnúmer disksins"
 
-#: harddrake2:103
+#: harddrake2:100
+#, c-format
+msgid "Target id number"
+msgstr ""
+
+#: harddrake2:100
+#, c-format
+msgid "the SCSI target identifier"
+msgstr ""
+
+#: harddrake2:101
 #, c-format
 msgid "Logical unit number"
 msgstr "Lógiskt númer tækis"
 
-#: harddrake2:103
-#, c-format
+#: harddrake2:101
+#, fuzzy, c-format
 msgid ""
-"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
-"identified by a\n"
+"the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
+"uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
 "SCSI númerið (LUN). SCSI tæki sem eru tengd við tölvuna auðkennast einkvæmt\n"
@@ -2464,17 +2432,7 @@ msgstr "Tenging"
 msgid "Performances"
 msgstr "Afköst"
 
-#: harddrake2:143
-#, c-format
-msgid "Bugs"
-msgstr "Villur"
-
-#: harddrake2:144
-#, c-format
-msgid "FPU"
-msgstr "FPU"
-
-#: harddrake2:151
+#: harddrake2:149
 #, c-format
 msgid "Device"
 msgstr "Tæki"
@@ -3592,6 +3550,61 @@ msgstr "Tungumál og land kerfis"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Svæðisbundnar stillingar"
+
+#~ msgid "Coma bug"
+#~ msgstr "Dásvefnsvilla"
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "hvort þessi örgjörvi er haldinn Cyrix 6x86 dásvefnsvillunni"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "Fdiv villa"
+
+#~ msgid ""
+#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
+#~ "processor which did not achieve the required precision when performing a "
+#~ "Floating point DIVision (FDIV)"
+#~ msgstr ""
+#~ "Eldri Pentium örgjörvar voru með villu í fleytitölu-örgjörva sem olli "
+#~ "ónákvæmni í útreikningum þegar fleytitöludeiling var framkvæmd (FDIV)"
+
+#~ msgid "Is FPU present"
+#~ msgstr "Er FPU til staðar"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "já þýðir að örgjörvinn hefur fleytitölu-örgjörva"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "Hvort fleytitölu-örgjörvinn hefur sérstakt ígrip"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr "já þýðir að fleytitölu-örgjörvinn hefur tengt sig sérstöku ígripi"
+
+#~ msgid "F00f bug"
+#~ msgstr "F00f villa"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr ""
+#~ "eldri pentium örgjörvar voru gallaðir og frusu þegar þeir þýddu F00F "
+#~ "aðgerðina"
+
+#~ msgid "Halt bug"
+#~ msgstr "Halt villa"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "Sumir eldri i486DX örgjörvar gátu ekki snúið eðlilega til baka til "
+#~ "venjulegrar vinnslu eftir að \"halt\" skipunin var framkvæmd"
+
+#~ msgid "Bugs"
+#~ msgstr "Villur"
+
+#~ msgid "FPU"
+#~ msgstr "FPU"
 
 #~ msgid "Unknown/Others"
 #~ msgstr "Óþekkt/Annað"

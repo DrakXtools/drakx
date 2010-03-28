@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 18:09+0100\n"
+"POT-Creation-Date: 2010-03-28 14:49+0200\n"
 "PO-Revision-Date: 2010-03-17 05:33+0100\n"
 "Last-Translator: Olav Dahlum <odahlum@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <cooker-i18n@mandrivalinux.org>\n"
@@ -307,7 +307,8 @@ msgid_plural ""
 msgstr[0] ""
 "Det ville være veldig nyttig om du tok med utdata fra den følgende "
 "kommandoen %s i feilrapporten."
-msgstr[1] "Nyttige ting å ta med i feilrapporten er utdata fra denne kommandoen: %s."
+msgstr[1] ""
+"Nyttige ting å ta med i feilrapporten er utdata fra denne kommandoen: %s."
 
 #: drakbug:163
 #, c-format
@@ -861,7 +862,8 @@ msgstr " --help                – Vis denne hjelpeteksten.\n"
 
 #: drakhelp:23
 #, c-format
-msgid " --id <id_label>       - load the html help page which refers to id_label\n"
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
 " --id <identifikator>  – Last HTML-hjelpesiden som refererer til "
 "«identifikator».\n"
@@ -871,7 +873,8 @@ msgstr ""
 msgid ""
 " --doc <link>          - link to another web page ( for WM welcome "
 "frontend)\n"
-msgstr " --doc <lenke>        – Lenke til en annen nettside (for velkomstmelding).\n"
+msgstr ""
+" --doc <lenke>        – Lenke til en annen nettside (for velkomstmelding).\n"
 
 #: drakhelp:52
 #, c-format
@@ -1831,7 +1834,8 @@ msgstr "Buss"
 
 #: harddrake2:33
 #, c-format
-msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgid ""
+"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr ""
 "Dette er den fysiske bussen som enheten er koblet til (for eksempel: PCI "
 "eller USB)."
@@ -2112,18 +2116,7 @@ msgstr "Hurtigminnestørrelse"
 msgid "size of the (second level) cpu cache"
 msgstr "størrelsen på (andrenivås) prosessorhurtigminnet"
 
-#. -PO: here "comas" is the medical coma, not the lexical coma!!
 #: harddrake2:74
-#, c-format
-msgid "Coma bug"
-msgstr "Coma-feil"
-
-#: harddrake2:74
-#, c-format
-msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "om prosessoren har Cyrix 6x86 Coma-feilen"
-
-#: harddrake2:75
 #, c-format
 msgid "Cpuid family"
 msgstr "Prosessorfamilie"
@@ -2168,68 +2161,37 @@ msgstr "Flagg"
 msgid "CPU flags reported by the kernel"
 msgstr "CPU-flagg rapportert av kjernen"
 
-#: harddrake2:79
+#: harddrake2:78 harddrake2:141
+#, fuzzy, c-format
+msgid "Cores"
+msgstr "Lukk"
+
+#: harddrake2:78
 #, c-format
-msgid "Fdiv bug"
-msgstr "FDIV-feil"
+msgid "CPU cores"
+msgstr ""
+
+#: harddrake2:79
+#, fuzzy, c-format
+msgid "Core ID"
+msgstr "Produsent-ID"
 
 #: harddrake2:80
 #, c-format
-msgid ""
-"Early Intel Pentium chips manufactured have a bug in their floating point "
-"processor which did not achieve the required precision when performing a "
-"Floating point DIVision (FDIV)"
+msgid "Physical ID"
 msgstr ""
-"Tidlige Intel Pentium-brikker hadde en feil i flytetallsprosessoren som "
-"førte til dårlig presisjon ved flytetallsdivisjoner (FDIV)"
 
 #: harddrake2:81
 #, c-format
-msgid "Is FPU present"
-msgstr "Finnes FPU"
-
-#: harddrake2:81
-#, c-format
-msgid "yes means the processor has an arithmetic coprocessor"
-msgstr "ja tyder på at prosessoren har en mattekoprosessor"
+msgid "ACPI ID"
+msgstr ""
 
 #: harddrake2:82
-#, c-format
-msgid "Whether the FPU has an irq vector"
-msgstr "Om mattekoprosessoren har en avbruddsvektor"
-
-#: harddrake2:82
-#, c-format
-msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr "ja tyder på at mattekoprosessoren har en unntaksvektor tilkoblet"
+#, fuzzy, c-format
+msgid "Siblings"
+msgstr "Innstillinger"
 
 #: harddrake2:83
-#, c-format
-msgid "F00f bug"
-msgstr "F00f-feil"
-
-#: harddrake2:83
-#, c-format
-msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
-msgstr ""
-"tidlige Pentium-prosessorer innehodt en feil, og frøs ved dekoding av F00F-"
-"bytekode"
-
-#: harddrake2:84
-#, c-format
-msgid "Halt bug"
-msgstr "Halt-feil"
-
-#: harddrake2:85
-#, c-format
-msgid ""
-"Some of the early i486DX-100 chips cannot reliably return to operating mode "
-"after the \"halt\" instruction is used"
-msgstr ""
-"Noen av de tidlige i486DX-100-brikkene kan ikke vende tilbake til kjøremodus "
-"etter at instruksjonen «halt» er brukt"
-
-#: harddrake2:86
 #, c-format
 msgid "sub generation of the cpu"
 msgstr "undergenerasjon til prosessoren"
@@ -2320,16 +2282,26 @@ msgstr "Diskidentifikator"
 msgid "usually the disk serial number"
 msgstr "vanligvis serienummeret til disken"
 
-#: harddrake2:103
+#: harddrake2:100
+#, c-format
+msgid "Target id number"
+msgstr ""
+
+#: harddrake2:100
+#, c-format
+msgid "the SCSI target identifier"
+msgstr ""
+
+#: harddrake2:101
 #, c-format
 msgid "Logical unit number"
 msgstr "Logisk enhetsnummer"
 
-#: harddrake2:103
-#, c-format
+#: harddrake2:101
+#, fuzzy, c-format
 msgid ""
-"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
-"identified by a\n"
+"the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
+"uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
 "SCSI-målnummeret (LUB). SCSI-enheter koblet til en vert blir unikt "
@@ -2393,7 +2365,8 @@ msgstr "Enhetsfil"
 
 #: harddrake2:119
 #, c-format
-msgid "the device file used to communicate with the kernel driver for the mouse"
+msgid ""
+"the device file used to communicate with the kernel driver for the mouse"
 msgstr "enhetsfila for musa brukt til å kommunisere med kjernedriveren"
 
 #: harddrake2:120
@@ -2458,17 +2431,7 @@ msgstr "Tilkobling"
 msgid "Performances"
 msgstr "Ytelser"
 
-#: harddrake2:143
-#, c-format
-msgid "Bugs"
-msgstr "Feil"
-
-#: harddrake2:144
-#, c-format
-msgid "FPU"
-msgstr "FPU"
-
-#: harddrake2:151
+#: harddrake2:149
 #, c-format
 msgid "Device"
 msgstr "Enhet"
@@ -2599,7 +2562,8 @@ msgstr "Kjør oppsettverktøy"
 
 #: harddrake2:303
 #, c-format
-msgid "Click on a device in the left tree in order to display its information here."
+msgid ""
+"Click on a device in the left tree in order to display its information here."
 msgstr "Trykk på en enhet til venstre for å se informasjon om enheten her."
 
 #: harddrake2:324 notify-x11-free-driver-switch:13
@@ -2897,7 +2861,8 @@ msgstr "Tjenesteoppsett"
 msgid ""
 "You will receive an alert if one of the selected services is no longer "
 "running"
-msgstr "Du vil motta et varsel om en av de valgte tjenestene ikke lengre kjører"
+msgstr ""
+"Du vil motta et varsel om en av de valgte tjenestene ikke lengre kjører"
 
 #: logdrake:429
 #, c-format
@@ -2907,7 +2872,8 @@ msgstr "Lastoppsett"
 #: logdrake:430
 #, c-format
 msgid "You will receive an alert if the load is higher than this value"
-msgstr "Du vil motta et varsel om lasten/ressursbruken er høyere enn denne verdien"
+msgstr ""
+"Du vil motta et varsel om lasten/ressursbruken er høyere enn denne verdien"
 
 #: logdrake:431
 #, c-format
@@ -2929,7 +2895,8 @@ msgstr "Skriv inn e-postadressen din under"
 #: logdrake:438
 #, c-format
 msgid "and enter the name (or the IP) of the SMTP server you wish to use"
-msgstr "og skriv inn navnet (eller IP-adressen) til SMTP-tjeneren som skal brukes"
+msgstr ""
+"og skriv inn navnet (eller IP-adressen) til SMTP-tjeneren som skal brukes"
 
 #: logdrake:445
 #, c-format
@@ -2992,7 +2959,8 @@ msgstr "Avbryter skanneroppsett."
 
 #: scannerdrake:60
 #, c-format
-msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr "Klarte ikke å installere pakker nødvendige for å sette opp skannere."
 
 #: scannerdrake:61
@@ -3577,4 +3545,57 @@ msgstr "Oppsett for språk og land"
 msgid "Regional Settings"
 msgstr "Språk og land"
 
+#~ msgid "Coma bug"
+#~ msgstr "Coma-feil"
 
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "om prosessoren har Cyrix 6x86 Coma-feilen"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "FDIV-feil"
+
+#~ msgid ""
+#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
+#~ "processor which did not achieve the required precision when performing a "
+#~ "Floating point DIVision (FDIV)"
+#~ msgstr ""
+#~ "Tidlige Intel Pentium-brikker hadde en feil i flytetallsprosessoren som "
+#~ "førte til dårlig presisjon ved flytetallsdivisjoner (FDIV)"
+
+#~ msgid "Is FPU present"
+#~ msgstr "Finnes FPU"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "ja tyder på at prosessoren har en mattekoprosessor"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "Om mattekoprosessoren har en avbruddsvektor"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr "ja tyder på at mattekoprosessoren har en unntaksvektor tilkoblet"
+
+#~ msgid "F00f bug"
+#~ msgstr "F00f-feil"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr ""
+#~ "tidlige Pentium-prosessorer innehodt en feil, og frøs ved dekoding av "
+#~ "F00F-bytekode"
+
+#~ msgid "Halt bug"
+#~ msgstr "Halt-feil"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "Noen av de tidlige i486DX-100-brikkene kan ikke vende tilbake til "
+#~ "kjøremodus etter at instruksjonen «halt» er brukt"
+
+#~ msgid "Bugs"
+#~ msgstr "Feil"
+
+#~ msgid "FPU"
+#~ msgstr "FPU"

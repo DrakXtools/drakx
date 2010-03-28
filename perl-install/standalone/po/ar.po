@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 18:09+0100\n"
+"POT-Creation-Date: 2010-03-28 14:49+0200\n"
 "PO-Revision-Date: 2005-03-03 01:06+0300\n"
 "Last-Translator: Ossama M. Khayat <okhayat@yahoo.com>\n"
 "Language-Team: Arabic <support@arabeyes.org>\n"
@@ -2111,18 +2111,7 @@ msgstr "حجم الذاكرة المخبئية"
 msgid "size of the (second level) cpu cache"
 msgstr "حجم ذاكرة وحدة المعالجة المركزية (cpu) المخبئية (المستوى الثاني)"
 
-#. -PO: here "comas" is the medical coma, not the lexical coma!!
 #: harddrake2:74
-#, c-format
-msgid "Coma bug"
-msgstr "علّة الغيبوبة"
-
-#: harddrake2:74
-#, c-format
-msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "إذا كان المرشد لديه علّة الغيبوبة Cyrix 6x86"
-
-#: harddrake2:75
 #, c-format
 msgid "Cpuid family"
 msgstr "عائلة Cpuid"
@@ -2168,66 +2157,37 @@ msgstr "الأعلام"
 msgid "CPU flags reported by the kernel"
 msgstr "علامات وحدة المعالجة المركزية (cpu) التي قرّرتها النّواة"
 
-#: harddrake2:79
+#: harddrake2:78 harddrake2:141
+#, fuzzy, c-format
+msgid "Cores"
+msgstr "إغلاق"
+
+#: harddrake2:78
 #, c-format
-msgid "Fdiv bug"
-msgstr "علّة Fdiv"
+msgid "CPU cores"
+msgstr ""
+
+#: harddrake2:79
+#, fuzzy, c-format
+msgid "Core ID"
+msgstr "معرّف الصّانع"
 
 #: harddrake2:80
 #, c-format
-msgid ""
-"Early Intel Pentium chips manufactured have a bug in their floating point "
-"processor which did not achieve the required precision when performing a "
-"Floating point DIVision (FDIV)"
+msgid "Physical ID"
 msgstr ""
-"بعض رقاقات إنتل بنتيوم المصنّعة قديما تحتوي على علّة في مُعالج النّقاط العائمة "
-"والتي لا تحقّق الدقّة المطلوبة عند أداء قسمة النّقاط العائمة (FDIV)"
 
 #: harddrake2:81
 #, c-format
-msgid "Is FPU present"
-msgstr "هل FPU موجود"
-
-#: harddrake2:81
-#, c-format
-msgid "yes means the processor has an arithmetic coprocessor"
-msgstr "نعم تعني أن المعالج لديه معالج مساعد للعمليات الحسابية"
-
-#: harddrake2:82
-#, c-format
-msgid "Whether the FPU has an irq vector"
-msgstr "إذا كان الـFPU لديه متجه irq"
-
-#: harddrake2:82
-#, c-format
-msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr "نعم تعني أن المرشد المساعد للعمليات الحسابية لديه متجه للإستثناءات"
-
-#: harddrake2:83
-#, c-format
-msgid "F00f bug"
-msgstr "علّة F00f"
-
-#: harddrake2:83
-#, c-format
-msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
-msgstr "معالجات pentium القديمة كانت تتوقف عن العمل عند استخدام F00F bytecode"
-
-#: harddrake2:84
-#, c-format
-msgid "Halt bug"
-msgstr "علّة Halt"
-
-#: harddrake2:85
-#, c-format
-msgid ""
-"Some of the early i486DX-100 chips cannot reliably return to operating mode "
-"after the \"halt\" instruction is used"
+msgid "ACPI ID"
 msgstr ""
-"بعض رقاقات i486DX-100 القديمة لا يمكنها الرّجوع إلى وضع التّشغيل بعد أن تستخدم "
-"تعليمة \"halt\" "
 
-#: harddrake2:86
+#: harddrake2:82
+#, fuzzy, c-format
+msgid "Siblings"
+msgstr "الإعدادات"
+
+#: harddrake2:83
 #, c-format
 msgid "sub generation of the cpu"
 msgstr "الجيل الثانوي لوحدة المعالجة المركزيّة (cpu)"
@@ -2318,16 +2278,26 @@ msgstr "معرّف القرص"
 msgid "usually the disk serial number"
 msgstr "عامّة العدد التّسلسلي للقرص"
 
-#: harddrake2:103
+#: harddrake2:100
+#, c-format
+msgid "Target id number"
+msgstr ""
+
+#: harddrake2:100
+#, c-format
+msgid "the SCSI target identifier"
+msgstr ""
+
+#: harddrake2:101
 #, c-format
 msgid "Logical unit number"
 msgstr "رقم الوحدة المنطقيّة"
 
-#: harddrake2:103
-#, c-format
+#: harddrake2:101
+#, fuzzy, c-format
 msgid ""
-"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
-"identified by a\n"
+"the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
+"uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
 "رقم الهدف SCSI (LUN). يتمّ تعريف أجهزة SCSI المتّصلة بمضيف (بطريقة وحيدة)\n"
@@ -2455,17 +2425,7 @@ msgstr "الوصلة"
 msgid "Performances"
 msgstr "الأداء"
 
-#: harddrake2:143
-#, c-format
-msgid "Bugs"
-msgstr "العلل"
-
-#: harddrake2:144
-#, c-format
-msgid "FPU"
-msgstr "FPU"
-
-#: harddrake2:151
+#: harddrake2:149
 #, c-format
 msgid "Device"
 msgstr "الجهاز"
@@ -3573,6 +3533,60 @@ msgstr "تهيئة يدوية"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "الإعدادات"
+
+#~ msgid "Coma bug"
+#~ msgstr "علّة الغيبوبة"
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "إذا كان المرشد لديه علّة الغيبوبة Cyrix 6x86"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "علّة Fdiv"
+
+#~ msgid ""
+#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
+#~ "processor which did not achieve the required precision when performing a "
+#~ "Floating point DIVision (FDIV)"
+#~ msgstr ""
+#~ "بعض رقاقات إنتل بنتيوم المصنّعة قديما تحتوي على علّة في مُعالج النّقاط "
+#~ "العائمة والتي لا تحقّق الدقّة المطلوبة عند أداء قسمة النّقاط العائمة (FDIV)"
+
+#~ msgid "Is FPU present"
+#~ msgstr "هل FPU موجود"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "نعم تعني أن المعالج لديه معالج مساعد للعمليات الحسابية"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "إذا كان الـFPU لديه متجه irq"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr "نعم تعني أن المرشد المساعد للعمليات الحسابية لديه متجه للإستثناءات"
+
+#~ msgid "F00f bug"
+#~ msgstr "علّة F00f"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr ""
+#~ "معالجات pentium القديمة كانت تتوقف عن العمل عند استخدام F00F bytecode"
+
+#~ msgid "Halt bug"
+#~ msgstr "علّة Halt"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "بعض رقاقات i486DX-100 القديمة لا يمكنها الرّجوع إلى وضع التّشغيل بعد أن "
+#~ "تستخدم تعليمة \"halt\" "
+
+#~ msgid "Bugs"
+#~ msgstr "العلل"
+
+#~ msgid "FPU"
+#~ msgstr "FPU"
 
 #~ msgid "Unknown/Others"
 #~ msgstr "غير معروف/أخرى"

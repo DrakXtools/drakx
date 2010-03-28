@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 18:09+0100\n"
+"POT-Creation-Date: 2010-03-28 14:49+0200\n"
 "PO-Revision-Date: 2005-03-19 23:18+0600\n"
 "Last-Translator: Samia <mailsamia2001@yahoo.com>\n"
 "Language-Team: Bangla <mdk-translation@bengalinux.org>\n"
@@ -2114,18 +2114,7 @@ msgstr "ক্যাশ সাইজ"
 msgid "size of the (second level) cpu cache"
 msgstr "সি-পি-ইউ'র (দ্বিতীয় লেভেল) আকার"
 
-#. -PO: here "comas" is the medical coma, not the lexical coma!!
 #: harddrake2:74
-#, c-format
-msgid "Coma bug"
-msgstr "Coma ত্রুটি"
-
-#: harddrake2:74
-#, c-format
-msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "যেখানে এই সি-পি-ইউ'র Cyrix ৬x৮৬ Coma ত্রুটি আছে"
-
-#: harddrake2:75
 #, c-format
 msgid "Cpuid family"
 msgstr "Cpuid পরিবার"
@@ -2170,70 +2159,37 @@ msgstr "ফ্ল্যাগ"
 msgid "CPU flags reported by the kernel"
 msgstr "কার্ণেলের দ্বারা রিপোর্টকৃত CPU ফ্ল্যাগ"
 
-#: harddrake2:79
+#: harddrake2:78 harddrake2:141
+#, fuzzy, c-format
+msgid "Cores"
+msgstr "বন্ধ করো"
+
+#: harddrake2:78
 #, c-format
-msgid "Fdiv bug"
-msgstr "Fdiv ত্রুটি"
+msgid "CPU cores"
+msgstr ""
+
+#: harddrake2:79
+#, fuzzy, c-format
+msgid "Core ID"
+msgstr "পরিবেশক আইডি"
 
 #: harddrake2:80
 #, c-format
-msgid ""
-"Early Intel Pentium chips manufactured have a bug in their floating point "
-"processor which did not achieve the required precision when performing a "
-"Floating point DIVision (FDIV)"
+msgid "Physical ID"
 msgstr ""
-"প্রথম দিককার প্রস্তুতকৃত ইন্টেল পেন্টিয়াম চিপে তাদের দশমিক সংখ্যার প্রসেসরে কিছু ত্রুটি "
-"আছে যেগুলো যথাযথভাবে দশমিক সংখ্যার ভাগ করতে পারত না (FDIV)"
 
 #: harddrake2:81
 #, c-format
-msgid "Is FPU present"
-msgstr "FPU কি উপস্থিত আছে"
-
-#: harddrake2:81
-#, c-format
-msgid "yes means the processor has an arithmetic coprocessor"
-msgstr "হ্যা তার মানে প্রসেসরের একটি পাটীগাণিতিক (arithmatic) কো-প্রসেসর আছে"
+msgid "ACPI ID"
+msgstr ""
 
 #: harddrake2:82
-#, c-format
-msgid "Whether the FPU has an irq vector"
-msgstr "যখন FPU এর একটি irq ভেক্টর আছে"
-
-#: harddrake2:82
-#, c-format
-msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr ""
-"হ্যা তার মানে পাটীগাণিতিক (arithmatic) কো-প্রসেসরের সাথে ব্যতিক্রমি একটি ভেক্টর "
-"যুক্ত আছে"
+#, fuzzy, c-format
+msgid "Siblings"
+msgstr "সেটিং"
 
 #: harddrake2:83
-#, c-format
-msgid "F00f bug"
-msgstr "F00f ত্রুটি"
-
-#: harddrake2:83
-#, c-format
-msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
-msgstr ""
-"প্রথম দিককার পেন্টিয়ামগুলো ত্রুটিযুক্ত এবং স্থির হয়ে যায় যখন তা F00F বাইটকোড ডিকোড "
-"করে"
-
-#: harddrake2:84
-#, c-format
-msgid "Halt bug"
-msgstr "ত্রুটি থামাও"
-
-#: harddrake2:85
-#, c-format
-msgid ""
-"Some of the early i486DX-100 chips cannot reliably return to operating mode "
-"after the \"halt\" instruction is used"
-msgstr ""
-"প্রথম দিক্‌কার কিছু i486DX-100 চিপ \"থামো\" আদেশ ব্যবহৃত হওয়ার পর আর স্বাভাবিক "
-"অবস্থায় ফিরতে পারে না"
-
-#: harddrake2:86
 #, c-format
 msgid "sub generation of the cpu"
 msgstr "cpu এর সাব-জেনারেশন"
@@ -2324,16 +2280,26 @@ msgstr "ডিস্ক চিহ্নিতকারক"
 msgid "usually the disk serial number"
 msgstr "ডিস্কের স্বাভাবিক ধারাবাহিক সংখ্যা"
 
-#: harddrake2:103
+#: harddrake2:100
+#, c-format
+msgid "Target id number"
+msgstr ""
+
+#: harddrake2:100
+#, c-format
+msgid "the SCSI target identifier"
+msgstr ""
+
+#: harddrake2:101
 #, c-format
 msgid "Logical unit number"
 msgstr "লজিকাল ইউনিট সংখ্যা"
 
-#: harddrake2:103
-#, c-format
+#: harddrake2:101
+#, fuzzy, c-format
 msgid ""
-"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
-"identified by a\n"
+"the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
+"uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
 "SCSI লক্ষ্য সংখ্যা (LUN)। SCSI যন্ত্রগুলো একটি হোস্টের সংগে যুক্ত যেগুলো এটি একটি "
@@ -2462,17 +2428,7 @@ msgstr "সংযোগ"
 msgid "Performances"
 msgstr "সম্পাদন কার্য"
 
-#: harddrake2:143
-#, c-format
-msgid "Bugs"
-msgstr "প্রোগ্রাম ত্রুটিসমূহ"
-
-#: harddrake2:144
-#, c-format
-msgid "FPU"
-msgstr "এফপিউ"
-
-#: harddrake2:151
+#: harddrake2:149
 #, c-format
 msgid "Device"
 msgstr "ডিভাইস"
@@ -3590,6 +3546,63 @@ msgstr "স্বনির্বাচিত কনফিগারেশন"
 #, fuzzy
 msgid "Regional Settings"
 msgstr "সেটিং"
+
+#~ msgid "Coma bug"
+#~ msgstr "Coma ত্রুটি"
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "যেখানে এই সি-পি-ইউ'র Cyrix ৬x৮৬ Coma ত্রুটি আছে"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "Fdiv ত্রুটি"
+
+#~ msgid ""
+#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
+#~ "processor which did not achieve the required precision when performing a "
+#~ "Floating point DIVision (FDIV)"
+#~ msgstr ""
+#~ "প্রথম দিককার প্রস্তুতকৃত ইন্টেল পেন্টিয়াম চিপে তাদের দশমিক সংখ্যার প্রসেসরে কিছু "
+#~ "ত্রুটি আছে যেগুলো যথাযথভাবে দশমিক সংখ্যার ভাগ করতে পারত না (FDIV)"
+
+#~ msgid "Is FPU present"
+#~ msgstr "FPU কি উপস্থিত আছে"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "হ্যা তার মানে প্রসেসরের একটি পাটীগাণিতিক (arithmatic) কো-প্রসেসর আছে"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "যখন FPU এর একটি irq ভেক্টর আছে"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr ""
+#~ "হ্যা তার মানে পাটীগাণিতিক (arithmatic) কো-প্রসেসরের সাথে ব্যতিক্রমি একটি "
+#~ "ভেক্টর যুক্ত আছে"
+
+#~ msgid "F00f bug"
+#~ msgstr "F00f ত্রুটি"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr ""
+#~ "প্রথম দিককার পেন্টিয়ামগুলো ত্রুটিযুক্ত এবং স্থির হয়ে যায় যখন তা F00F বাইটকোড "
+#~ "ডিকোড করে"
+
+#~ msgid "Halt bug"
+#~ msgstr "ত্রুটি থামাও"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "প্রথম দিক্‌কার কিছু i486DX-100 চিপ \"থামো\" আদেশ ব্যবহৃত হওয়ার পর আর স্বাভাবিক "
+#~ "অবস্থায় ফিরতে পারে না"
+
+#~ msgid "Bugs"
+#~ msgstr "প্রোগ্রাম ত্রুটিসমূহ"
+
+#~ msgid "FPU"
+#~ msgstr "এফপিউ"
 
 #~ msgid "Unknown/Others"
 #~ msgstr "অজানা/অন্যান্য"

@@ -75,7 +75,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 18:09+0100\n"
+"POT-Creation-Date: 2010-03-28 14:49+0200\n"
 "PO-Revision-Date: 2009-10-29 18:12+0100\n"
 "Last-Translator: Christophe Berthelé <berthy@mandriva.org>\n"
 "Language-Team: French <cooker-i18n@mandrivalinux.org>\n"
@@ -2215,18 +2215,7 @@ msgstr "Taille du cache"
 msgid "size of the (second level) cpu cache"
 msgstr "taille du cache (de second niveau) du processeur"
 
-#. -PO: here "comas" is the medical coma, not the lexical coma!!
 #: harddrake2:74
-#, c-format
-msgid "Coma bug"
-msgstr "Bogue de « coma »"
-
-#: harddrake2:74
-#, c-format
-msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "le processeur a-t-il le bogue « coma » du Cyrix 6x86 ?"
-
-#: harddrake2:75
 #, c-format
 msgid "Cpuid family"
 msgstr "Famille CPUID"
@@ -2272,69 +2261,37 @@ msgstr "Drapeaux"
 msgid "CPU flags reported by the kernel"
 msgstr "Drapeaux processeurs indiqués par du noyau"
 
-#: harddrake2:79
+#: harddrake2:78 harddrake2:141
+#, fuzzy, c-format
+msgid "Cores"
+msgstr "Fermer"
+
+#: harddrake2:78
 #, c-format
-msgid "Fdiv bug"
-msgstr "Bogue de l'instruction FDIV"
+msgid "CPU cores"
+msgstr ""
+
+#: harddrake2:79
+#, fuzzy, c-format
+msgid "Core ID"
+msgstr "Identifiant du fabricant"
 
 #: harddrake2:80
 #, c-format
-msgid ""
-"Early Intel Pentium chips manufactured have a bug in their floating point "
-"processor which did not achieve the required precision when performing a "
-"Floating point DIVision (FDIV)"
+msgid "Physical ID"
 msgstr ""
-"Les premiers Pentium produits ont un bogue dans leur unité de calcul en "
-"nombres flottants qui empêche d'avoir la précision nécessaire lors d'une "
-"opération de division en flottants (FDIV)."
 
 #: harddrake2:81
 #, c-format
-msgid "Is FPU present"
-msgstr "Coprocesseur arithmétique présent"
-
-#: harddrake2:81
-#, c-format
-msgid "yes means the processor has an arithmetic coprocessor"
-msgstr "« oui » signifie qu'un coprocesseur arithmétique est présent"
+msgid "ACPI ID"
+msgstr ""
 
 #: harddrake2:82
-#, c-format
-msgid "Whether the FPU has an irq vector"
-msgstr "Est-ce que le FPU a un vecteur d'IRQ"
-
-#: harddrake2:82
-#, c-format
-msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr "« oui » signifie que le coprocesseur possède un vecteur d'exception"
+#, fuzzy, c-format
+msgid "Siblings"
+msgstr "Paramètres"
 
 #: harddrake2:83
-#, c-format
-msgid "F00f bug"
-msgstr "Bogue f00f"
-
-#: harddrake2:83
-#, c-format
-msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
-msgstr ""
-"les premiers Pentium étaient bogués et se bloquaient pendant le décodage du "
-"bytecode f00f"
-
-#: harddrake2:84
-#, c-format
-msgid "Halt bug"
-msgstr "Bogue de l'instruction halt"
-
-#: harddrake2:85
-#, c-format
-msgid ""
-"Some of the early i486DX-100 chips cannot reliably return to operating mode "
-"after the \"halt\" instruction is used"
-msgstr ""
-"Certaines vieilles puces i486DX-100 ne peuvent pas redémarrer de façon "
-"fiable après une instruction « halt »."
-
-#: harddrake2:86
 #, c-format
 msgid "sub generation of the cpu"
 msgstr "sous-génération de processeur"
@@ -2425,16 +2382,26 @@ msgstr "Identifiant du disque"
 msgid "usually the disk serial number"
 msgstr "généralement le numéro de série du disque"
 
-#: harddrake2:103
+#: harddrake2:100
+#, c-format
+msgid "Target id number"
+msgstr ""
+
+#: harddrake2:100
+#, c-format
+msgid "the SCSI target identifier"
+msgstr ""
+
+#: harddrake2:101
 #, c-format
 msgid "Logical unit number"
 msgstr "Numéro d'unité logique"
 
-#: harddrake2:103
-#, c-format
+#: harddrake2:101
+#, fuzzy, c-format
 msgid ""
-"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
-"identified by a\n"
+"the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
+"uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
 "le numéro de la cible SCSI (LUN). Les périphériques SCSI connectés à l'hôte "
@@ -2565,17 +2532,7 @@ msgstr "Connexion"
 msgid "Performances"
 msgstr "Performances"
 
-#: harddrake2:143
-#, c-format
-msgid "Bugs"
-msgstr "Bogues"
-
-#: harddrake2:144
-#, c-format
-msgid "FPU"
-msgstr "Coprocesseur arithmétique"
-
-#: harddrake2:151
+#: harddrake2:149
 #, c-format
 msgid "Device"
 msgstr "Périphérique"
@@ -3648,7 +3605,8 @@ msgstr "La carte « %s » n'est plus supportée par le pilote « %s »"
 #: service_harddrake:167
 #, c-format
 msgid "The proprietary kernel driver was not found for '%s' X.org driver"
-msgstr "Le pilote noyau propriétaire n'a pas été trouvé pour le pilote X.org « %s »"
+msgstr ""
+"Le pilote noyau propriétaire n'a pas été trouvé pour le pilote X.org « %s »"
 
 #: service_harddrake:206
 #, c-format
@@ -3712,6 +3670,62 @@ msgstr "Configuration de la langue et du pays"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Paramètres régionaux"
+
+#~ msgid "Coma bug"
+#~ msgstr "Bogue de « coma »"
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "le processeur a-t-il le bogue « coma » du Cyrix 6x86 ?"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "Bogue de l'instruction FDIV"
+
+#~ msgid ""
+#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
+#~ "processor which did not achieve the required precision when performing a "
+#~ "Floating point DIVision (FDIV)"
+#~ msgstr ""
+#~ "Les premiers Pentium produits ont un bogue dans leur unité de calcul en "
+#~ "nombres flottants qui empêche d'avoir la précision nécessaire lors d'une "
+#~ "opération de division en flottants (FDIV)."
+
+#~ msgid "Is FPU present"
+#~ msgstr "Coprocesseur arithmétique présent"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "« oui » signifie qu'un coprocesseur arithmétique est présent"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "Est-ce que le FPU a un vecteur d'IRQ"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr "« oui » signifie que le coprocesseur possède un vecteur d'exception"
+
+#~ msgid "F00f bug"
+#~ msgstr "Bogue f00f"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr ""
+#~ "les premiers Pentium étaient bogués et se bloquaient pendant le décodage "
+#~ "du bytecode f00f"
+
+#~ msgid "Halt bug"
+#~ msgstr "Bogue de l'instruction halt"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "Certaines vieilles puces i486DX-100 ne peuvent pas redémarrer de façon "
+#~ "fiable après une instruction « halt »."
+
+#~ msgid "Bugs"
+#~ msgstr "Bogues"
+
+#~ msgid "FPU"
+#~ msgstr "Coprocesseur arithmétique"
 
 #~ msgid "Unknown/Others"
 #~ msgstr "Inconnus/Autres"

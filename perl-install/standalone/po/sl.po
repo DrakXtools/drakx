@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 18:09+0100\n"
+"POT-Creation-Date: 2010-03-28 14:49+0200\n"
 "PO-Revision-Date: 2009-11-01 16:32+0100\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -262,7 +262,8 @@ msgstr ""
 msgid "Find Package"
 msgstr "Poišči paket"
 
-#: drakbug:118, c-format
+#: drakbug:118
+#, c-format
 msgid "Browse"
 msgstr "Brskanje"
 
@@ -2015,7 +2016,8 @@ msgstr "Domena PCI"
 msgid "the PCI domain of the device"
 msgstr "domena PCI naprave"
 
-#: harddrake2:60, c-format
+#: harddrake2:60
+#, c-format
 msgid "PCI revision"
 msgstr "Revizija PCI"
 
@@ -2125,18 +2127,7 @@ msgstr "Velikost predpomnilnika"
 msgid "size of the (second level) cpu cache"
 msgstr "velikost drugostopenjskega CPE predpomnilnika"
 
-#. -PO: here "comas" is the medical coma, not the lexical coma!!
 #: harddrake2:74
-#, c-format
-msgid "Coma bug"
-msgstr "Hrošč Coma"
-
-#: harddrake2:74
-#, c-format
-msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "ali ima ta CPE Cyrix 6x86 hrošča Coma"
-
-#: harddrake2:75
 #, c-format
 msgid "Cpuid family"
 msgstr "Identifikacija družine CPE"
@@ -2181,69 +2172,37 @@ msgstr "Zastavice"
 msgid "CPU flags reported by the kernel"
 msgstr "Zastavice CPE, ki jih sporoča od jedro"
 
-#: harddrake2:79
+#: harddrake2:78 harddrake2:141
+#, fuzzy, c-format
+msgid "Cores"
+msgstr "Zapri"
+
+#: harddrake2:78
 #, c-format
-msgid "Fdiv bug"
-msgstr "Hrošč FDIV"
+msgid "CPU cores"
+msgstr ""
+
+#: harddrake2:79
+#, fuzzy, c-format
+msgid "Core ID"
+msgstr "ID Proizvajalca"
 
 #: harddrake2:80
 #, c-format
-msgid ""
-"Early Intel Pentium chips manufactured have a bug in their floating point "
-"processor which did not achieve the required precision when performing a "
-"Floating point DIVision (FDIV)"
+msgid "Physical ID"
 msgstr ""
-"zgodnji čipi Pentium so imeli hrošča v procesorju za plavajočo vejico, ki ni "
-"dosegel zahtevane točnosti ob izvajanju deljenja (Floating point DIVision "
-"(FDIV))"
 
 #: harddrake2:81
 #, c-format
-msgid "Is FPU present"
-msgstr "Enota za plavajočo vejico"
-
-#: harddrake2:81
-#, c-format
-msgid "yes means the processor has an arithmetic coprocessor"
-msgstr "»da« pomeni, da ima procesor aritmetični koprocesor"
+msgid "ACPI ID"
+msgstr ""
 
 #: harddrake2:82
-#, c-format
-msgid "Whether the FPU has an irq vector"
-msgstr "Enota za plavajočo vejico ima vektor IRQ"
-
-#: harddrake2:82
-#, c-format
-msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr "»da« pomeni, da ima aritmetični koprocesor vgrajen vektor za izjeme"
+#, fuzzy, c-format
+msgid "Siblings"
+msgstr "Nastavitve"
 
 #: harddrake2:83
-#, c-format
-msgid "F00f bug"
-msgstr "Hrošč F00F"
-
-#: harddrake2:83
-#, c-format
-msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
-msgstr ""
-"zgodnji Pentiumi so bili hroščati in so se prenehali odzivati, ko so "
-"dekodirali bitno kodo F00F"
-
-#: harddrake2:84
-#, c-format
-msgid "Halt bug"
-msgstr "Hrošč Halt"
-
-#: harddrake2:85
-#, c-format
-msgid ""
-"Some of the early i486DX-100 chips cannot reliably return to operating mode "
-"after the \"halt\" instruction is used"
-msgstr ""
-"nekateri od zgodnjih čipov i486DX-100 se niso mogli zanesljivo vrniti v "
-"način delovanja po tem, ko je bil uporabljen ukaz »halt«"
-
-#: harddrake2:86
 #, c-format
 msgid "sub generation of the cpu"
 msgstr "pod generacija CPE"
@@ -2334,16 +2293,26 @@ msgstr "Določilnik diska"
 msgid "usually the disk serial number"
 msgstr "navadno serijska številka diska"
 
-#: harddrake2:103
+#: harddrake2:100
+#, c-format
+msgid "Target id number"
+msgstr ""
+
+#: harddrake2:100
+#, c-format
+msgid "the SCSI target identifier"
+msgstr ""
+
+#: harddrake2:101
 #, c-format
 msgid "Logical unit number"
 msgstr "Številka logične enote"
 
-#: harddrake2:103
-#, c-format
+#: harddrake2:101
+#, fuzzy, c-format
 msgid ""
-"the SCSI target number (LUN). SCSI devices connected to a host are uniquely "
-"identified by a\n"
+"the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
+"uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
 "številka ciljne SCSI naprave (LUN). SCSI naprave povezane z gostiteljem so "
@@ -2408,7 +2377,8 @@ msgstr "Datoteka naprave"
 
 #: harddrake2:119
 #, c-format
-msgid "the device file used to communicate with the kernel driver for the mouse"
+msgid ""
+"the device file used to communicate with the kernel driver for the mouse"
 msgstr ""
 "Datoteka naprave uporabljeno za komunikacijo z jedrnim gonilnikom za miško"
 
@@ -2472,17 +2442,7 @@ msgstr "Povezava"
 msgid "Performances"
 msgstr "Lastnosti:"
 
-#: harddrake2:143
-#, c-format
-msgid "Bugs"
-msgstr "Hrošči"
-
-#: harddrake2:144
-#, c-format
-msgid "FPU"
-msgstr "Enota za računanje s plavajočo vejico"
-
-#: harddrake2:151
+#: harddrake2:149
 #, c-format
 msgid "Device"
 msgstr "Naprava"
@@ -3537,7 +3497,8 @@ msgstr ""
 "Paketov, ki so potrebni za skupno rabo optičnega čitalnika, ni mogoče "
 "namestiti."
 
-#: service_harddrake:138, c-format
+#: service_harddrake:138
+#, c-format
 msgid "The graphic card '%s' is no more supported by the '%s' driver"
 msgstr "Grafične kartice »%s« gonilnik »%s« ne podpira več"
 
@@ -3608,6 +3569,62 @@ msgstr "Nastavitev jezika in države"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Področne nastavitve"
+
+#~ msgid "Coma bug"
+#~ msgstr "Hrošč Coma"
+
+#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+#~ msgstr "ali ima ta CPE Cyrix 6x86 hrošča Coma"
+
+#~ msgid "Fdiv bug"
+#~ msgstr "Hrošč FDIV"
+
+#~ msgid ""
+#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
+#~ "processor which did not achieve the required precision when performing a "
+#~ "Floating point DIVision (FDIV)"
+#~ msgstr ""
+#~ "zgodnji čipi Pentium so imeli hrošča v procesorju za plavajočo vejico, ki "
+#~ "ni dosegel zahtevane točnosti ob izvajanju deljenja (Floating point "
+#~ "DIVision (FDIV))"
+
+#~ msgid "Is FPU present"
+#~ msgstr "Enota za plavajočo vejico"
+
+#~ msgid "yes means the processor has an arithmetic coprocessor"
+#~ msgstr "»da« pomeni, da ima procesor aritmetični koprocesor"
+
+#~ msgid "Whether the FPU has an irq vector"
+#~ msgstr "Enota za plavajočo vejico ima vektor IRQ"
+
+#~ msgid ""
+#~ "yes means the arithmetic coprocessor has an exception vector attached"
+#~ msgstr "»da« pomeni, da ima aritmetični koprocesor vgrajen vektor za izjeme"
+
+#~ msgid "F00f bug"
+#~ msgstr "Hrošč F00F"
+
+#~ msgid ""
+#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
+#~ msgstr ""
+#~ "zgodnji Pentiumi so bili hroščati in so se prenehali odzivati, ko so "
+#~ "dekodirali bitno kodo F00F"
+
+#~ msgid "Halt bug"
+#~ msgstr "Hrošč Halt"
+
+#~ msgid ""
+#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
+#~ "mode after the \"halt\" instruction is used"
+#~ msgstr ""
+#~ "nekateri od zgodnjih čipov i486DX-100 se niso mogli zanesljivo vrniti v "
+#~ "način delovanja po tem, ko je bil uporabljen ukaz »halt«"
+
+#~ msgid "Bugs"
+#~ msgstr "Hrošči"
+
+#~ msgid "FPU"
+#~ msgstr "Enota za računanje s plavajočo vejico"
 
 #~ msgid "Unknown/Others"
 #~ msgstr "Neznane naprave"
