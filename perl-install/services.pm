@@ -23,7 +23,7 @@ apmd => N_("apmd is used for monitoring battery status and logging it via syslog
 It can also be used for shutting down the machine when the battery is low."),
 atd => N_("Runs commands scheduled by the at command at the time specified when
 at was run, and runs batch commands when the load average is low enough."),
-'avahi-deamon' => N_("Avahi, a ZeroConf daemon which implements an mDNS stack"),
+'avahi-deamon' => N_("Avahi is a ZeroConf daemon which implements an mDNS stack"),
 cpufreq => N_("Set CPU frequency settings"),
 crond => N_("cron is a standard UNIX program that runs user-specified programs
 at periodic scheduled times. vixie cron adds a number of features to the basic
@@ -52,21 +52,21 @@ ip6tables => N_("Automates a packet filtering firewall with ip6tables"),
 iptables => N_("Automates a packet filtering firewall with iptables"),
 ipchains => N_("Launch packet filtering for Linux kernel 2.2 series, to set
 up a firewall to protect your machine from network attacks."),
-irqbalance => N_("Start and stop irqbalance daemon"),
+irqbalance => N_("Evenly distributes IRQ load across multiple CPUs for enhanced performance"),
 keytable => N_("This package loads the selected keyboard map as set in
 /etc/sysconfig/keyboard.  This can be selected using the kbdconfig utility.
 You should leave this enabled for most machines."),
 kheader => N_("Automatic regeneration of kernel header in /boot for
 /usr/include/linux/{autoconf,version}.h"),
 kudzu => N_("Automatic detection and configuration of hardware at boot."),
-'laptop-mode' => N_("Starts and stops \"laptop-mode\" - tweaks system behavior to extend battery life"),
+'laptop-mode' => N_("Tweaks system behavior to extend battery life"),
 linuxconf => N_("Linuxconf will sometimes arrange to perform various tasks
 at boot-time to maintain the system configuration."),
 lpd => N_("lpd is the print daemon required for lpr to work properly. It is
 basically a server that arbitrates print jobs to printer(s)."),
 lvs => N_("Linux Virtual Server, used to build a high-performance and highly
 available server."),
-mandi => N_("Network monitoring daemon (Interactive Firewall and wireless"),
+mandi => N_("Monitors the network (Interactive Firewall and wireless"),
 mdadm => N_("Software RAID monitoring and management"),
 messagebus => N_("DBUS is a daemon which broadcasts notifications of system events and other messages"),
 msec => N_("Enables MSEC security policy on system startup"),
@@ -94,13 +94,13 @@ it installed on machines that do not need it."),
 portmap => N_("The portmapper manages RPC connections, which are used by
 protocols such as NFS and NIS. The portmap server must be running on machines
 which act as servers for protocols which make use of the RPC mechanism."),
-portreserve => N_("portreserve is a TCP port reservation utility"),
+portreserve => N_("Reserves some TCP ports"),
 postfix => N_("Postfix is a Mail Transport Agent, which is the program that moves mail from one machine to another."),
 random => N_("Saves and restores system entropy pool for higher quality random
 number generation."),
 rawdevices => N_("Assign raw devices to block devices (such as hard drive
 partitions), for the use of applications such as Oracle or DVD players"),
-resolvconf => N_("resolvconf is a nameserver information manager"),
+resolvconf => N_("Nameserver information manager"),
 routed => N_("The routed daemon allows for automatic IP router table updated via
 the RIP protocol. While RIP is widely used on small networks, more complex
 routing protocols are needed for complex networks."),
@@ -121,7 +121,7 @@ syslog => N_("Syslog is the facility by which many daemons use to log messages
 to various system log files.  It is a good idea to always run syslog."),
 'udev-post' => N_("Moves the generated persistent udev rules to /etc/udev/rules.d"),
 usb => N_("Load the drivers for your usb devices."),
-vnStat => N_("vnStat - a lightweight network traffic monitor"),
+vnStat => N_("A lightweight network traffic monitor"),
 xfs => N_("Starts the X Font Server."),
 xinetd => N_("Starts other deamons on demand."),
     );
