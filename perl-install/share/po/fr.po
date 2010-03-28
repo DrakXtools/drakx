@@ -74,7 +74,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fr\n"
-"POT-Creation-Date: 2010-01-27 17:55+0100\n"
+"POT-Creation-Date: 2010-03-28 14:46+0200\n"
 "PO-Revision-Date: 2010-02-17 12:34+0100\n"
 "Last-Translator: Christophe Berthelé <berthy@mandriva.org>\n"
 "Language-Team: French <cooker-i18n@mandrivalinux.org>\n"
@@ -84,7 +84,7 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2;plural=(n>1);\n"
 
-#: any.pm:252 any.pm:929 diskdrake/interactive.pm:597
+#: any.pm:252 any.pm:953 diskdrake/interactive.pm:597
 #: diskdrake/interactive.pm:802 diskdrake/interactive.pm:846
 #: diskdrake/interactive.pm:950 diskdrake/interactive.pm:1204
 #: diskdrake/interactive.pm:1256 do_pkgs.pm:241 do_pkgs.pm:287
@@ -157,275 +157,280 @@ msgstr ""
 "\n"
 "Quel est le disque de démarrage ?"
 
-#: any.pm:346
-#, c-format
-msgid "First sector (MBR) of drive %s"
-msgstr "Premier secteur (MBR) du disque %s"
-
-#: any.pm:348
-#, c-format
-msgid "First sector of drive (MBR)"
-msgstr "Premier secteur du disque (MBR)"
-
-#: any.pm:350
-#, c-format
-msgid "First sector of the root partition"
-msgstr "Premier secteur de la partition racine"
-
-#: any.pm:352
-#, c-format
-msgid "On Floppy"
-msgstr "Sur disquette"
-
-#: any.pm:354 pkgs.pm:277 ugtk2.pm:526
-#, c-format
-msgid "Skip"
-msgstr "Passer"
-
-#: any.pm:358
+#: any.pm:331
 #, c-format
 msgid "Bootloader Installation"
 msgstr "Installation du programme d'amorçage"
 
-#: any.pm:362
+#: any.pm:335
 #, c-format
 msgid "Where do you want to install the bootloader?"
 msgstr "Où désirez-vous installer le programme d'amorçage ?"
 
-#: any.pm:389
+#: any.pm:359
+#, c-format
+msgid "First sector (MBR) of drive %s"
+msgstr "Premier secteur (MBR) du disque %s"
+
+#: any.pm:361
+#, c-format
+msgid "First sector of drive (MBR)"
+msgstr "Premier secteur du disque (MBR)"
+
+#: any.pm:363
+#, c-format
+msgid "First sector of the root partition"
+msgstr "Premier secteur de la partition racine"
+
+#: any.pm:365
+#, c-format
+msgid "On Floppy"
+msgstr "Sur disquette"
+
+#: any.pm:367 pkgs.pm:277 ugtk2.pm:526
+#, c-format
+msgid "Skip"
+msgstr "Passer"
+
+#: any.pm:402
 #, c-format
 msgid "Boot Style Configuration"
 msgstr "Configuration du style de démarrage"
 
-#: any.pm:399 any.pm:429 any.pm:430
+#: any.pm:412 any.pm:452 any.pm:453
 #, c-format
 msgid "Bootloader main options"
 msgstr "Principales options du programme d'amorçage"
 
-#: any.pm:403
+#: any.pm:416
 #, c-format
 msgid "Bootloader"
 msgstr "Programme d'amorçage"
 
-#: any.pm:404 any.pm:433
+#: any.pm:417 any.pm:456
 #, c-format
 msgid "Bootloader to use"
 msgstr "Programme d'amorçage à utiliser"
 
-#: any.pm:406 any.pm:435
+#: any.pm:420 any.pm:459
 #, c-format
 msgid "Boot device"
 msgstr "Périphérique d'amorçage"
 
-#: any.pm:408
+#: any.pm:423
 #, c-format
 msgid "Main options"
 msgstr "Options principales"
 
-#: any.pm:409
+#: any.pm:424
 #, c-format
 msgid "Delay before booting default image"
 msgstr "Délai avant l'activation du choix par défaut"
 
-#: any.pm:410
+#: any.pm:425
 #, c-format
 msgid "Enable ACPI"
 msgstr "Activer l'ACPI"
 
-#: any.pm:411
+#: any.pm:426
 #, c-format
 msgid "Enable SMP"
 msgstr "Activer le SMP"
 
-#: any.pm:412
+#: any.pm:427
 #, c-format
 msgid "Enable APIC"
 msgstr "Activer l'APIC"
 
-#: any.pm:413
+#: any.pm:429
 #, c-format
 msgid "Enable Local APIC"
 msgstr "Activer l'APIC local"
 
-#: any.pm:415 any.pm:867 any.pm:883 authentication.pm:250
+#: any.pm:430 security/level.pm:51
+#, c-format
+msgid "Security"
+msgstr "Sécurité"
+
+#: any.pm:431 any.pm:891 any.pm:907 authentication.pm:250
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
 msgstr "Mot de passe"
 
-#: any.pm:417 authentication.pm:261
+#: any.pm:434 authentication.pm:261
 #, c-format
 msgid "The passwords do not match"
 msgstr "Les mots de passe ne sont pas identiques"
 
-#: any.pm:417 authentication.pm:261 diskdrake/interactive.pm:1428
+#: any.pm:434 authentication.pm:261 diskdrake/interactive.pm:1428
 #, c-format
 msgid "Please try again"
 msgstr "Veuillez réessayer"
 
-#: any.pm:418
+#: any.pm:436
 #, c-format
 msgid "You can not use a password with %s"
 msgstr "Vous ne pouvez pas utiliser de mot de passe avec %s"
 
-#: any.pm:421 any.pm:869 any.pm:885 authentication.pm:251
+#: any.pm:440 any.pm:893 any.pm:909 authentication.pm:251
 #, c-format
 msgid "Password (again)"
 msgstr "Mot de passe (vérification)"
 
-#: any.pm:422
+#: any.pm:441
 #, c-format
 msgid "Restrict command line options"
 msgstr "Protéger par mot de passe les options"
 
-#: any.pm:422
+#: any.pm:442
 #, c-format
 msgid "restrict"
 msgstr "protection"
 
-#: any.pm:423
+#: any.pm:445
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 "L'option ``Restrict command line options'' est inutile sans mot de passe"
 
-#: any.pm:425
+#: any.pm:448
 #, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Vider le dossier /tmp à chaque démarrage"
 
-#: any.pm:434
+#: any.pm:458
 #, c-format
 msgid "Init Message"
 msgstr "Message de démarrage"
 
-#: any.pm:436
+#: any.pm:460
 #, c-format
 msgid "Open Firmware Delay"
 msgstr "Délai de l'Open Firmware"
 
-#: any.pm:437
+#: any.pm:461
 #, c-format
 msgid "Kernel Boot Timeout"
 msgstr "Délai d'amorçage du noyau"
 
-#: any.pm:438
+#: any.pm:462
 #, c-format
 msgid "Enable CD Boot?"
 msgstr "Autoriser le démarrage sur CD-ROM ?"
 
-#: any.pm:439
+#: any.pm:463
 #, c-format
 msgid "Enable OF Boot?"
 msgstr "Autoriser le démarrage sur l'OF ?"
 
-#: any.pm:440
+#: any.pm:464
 #, c-format
 msgid "Default OS?"
 msgstr "Système d'exploitation par défaut ?"
 
-#: any.pm:513
+#: any.pm:537
 #, c-format
 msgid "Image"
 msgstr "Image"
 
-#: any.pm:514 any.pm:527
+#: any.pm:538 any.pm:551
 #, c-format
 msgid "Root"
 msgstr "Partition racine"
 
-#: any.pm:515 any.pm:540
+#: any.pm:539 any.pm:564
 #, c-format
 msgid "Append"
 msgstr "Options passées au noyau"
 
-#: any.pm:517
+#: any.pm:541
 #, c-format
 msgid "Xen append"
 msgstr "Options Xen passées au noyau"
 
-#: any.pm:520
+#: any.pm:544
 #, c-format
 msgid "Video mode"
 msgstr "Mode vidéo"
 
-#: any.pm:522
+#: any.pm:546
 #, c-format
 msgid "Initrd"
 msgstr "Fichier RamDisk"
 
-#: any.pm:523
+#: any.pm:547
 #, c-format
 msgid "Network profile"
 msgstr "Profil réseau"
 
-#: any.pm:532 any.pm:537 any.pm:539 diskdrake/interactive.pm:407
+#: any.pm:556 any.pm:561 any.pm:563 diskdrake/interactive.pm:407
 #, c-format
 msgid "Label"
 msgstr "Label"
 
-#: any.pm:534 any.pm:542 harddrake/v4l.pm:438
+#: any.pm:558 any.pm:566 harddrake/v4l.pm:438
 #, c-format
 msgid "Default"
 msgstr "Choix par défaut"
 
-#: any.pm:541
+#: any.pm:565
 #, c-format
 msgid "NoVideo"
 msgstr "NoVideo"
 
-#: any.pm:552
+#: any.pm:576
 #, c-format
 msgid "Empty label not allowed"
 msgstr "Un label vide n'est pas autorisé"
 
-#: any.pm:553
+#: any.pm:577
 #, c-format
 msgid "You must specify a kernel image"
 msgstr "Vous devez spécifier l'image noyau désirée"
 
-#: any.pm:553
+#: any.pm:577
 #, c-format
 msgid "You must specify a root partition"
 msgstr "Vous devez spécifier une partition racine"
 
-#: any.pm:554
+#: any.pm:578
 #, c-format
 msgid "This label is already used"
 msgstr "Ce label est déjà utilisé"
 
-#: any.pm:572
+#: any.pm:596
 #, c-format
 msgid "Which type of entry do you want to add?"
 msgstr "Quel type de système souhaitez-vous ajouter ?"
 
-#: any.pm:573
+#: any.pm:597
 #, c-format
 msgid "Linux"
 msgstr "Linux"
 
-#: any.pm:573
+#: any.pm:597
 #, c-format
 msgid "Other OS (SunOS...)"
 msgstr "Autres systèmes (SunOS, etc.)"
 
-#: any.pm:574
+#: any.pm:598
 #, c-format
 msgid "Other OS (MacOS...)"
 msgstr "Autres systèmes (MacOS, etc.)"
 
-#: any.pm:574
+#: any.pm:598
 #, c-format
 msgid "Other OS (Windows...)"
 msgstr "Autres systèmes (Windows, etc.)"
 
-#: any.pm:621
+#: any.pm:645
 #, c-format
 msgid "Bootloader Configuration"
 msgstr "Configuration du programme d'amorçage"
 
-#: any.pm:622
+#: any.pm:646
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -434,47 +439,47 @@ msgstr ""
 "Voici les différentes entrées.\n"
 "Vous pouvez en ajouter de nouvelles ou modifier les entrées existantes."
 
-#: any.pm:827
+#: any.pm:851
 #, c-format
 msgid "access to X programs"
 msgstr "accès aux programmes graphiques"
 
-#: any.pm:828
+#: any.pm:852
 #, c-format
 msgid "access to rpm tools"
 msgstr "accès aux outils rpm"
 
-#: any.pm:829
+#: any.pm:853
 #, c-format
 msgid "allow \"su\""
 msgstr "autoriser « su »"
 
-#: any.pm:830
+#: any.pm:854
 #, c-format
 msgid "access to administrative files"
 msgstr "accès aux fichiers d'administration"
 
-#: any.pm:831
+#: any.pm:855
 #, c-format
 msgid "access to network tools"
 msgstr "accès aux outils réseaux"
 
-#: any.pm:832
+#: any.pm:856
 #, c-format
 msgid "access to compilation tools"
 msgstr "accès aux outils de compilation"
 
-#: any.pm:838
+#: any.pm:862
 #, c-format
 msgid "(already added %s)"
 msgstr "Utilisateur(s) existant(s) : %s"
 
-#: any.pm:844
+#: any.pm:868
 #, c-format
 msgid "Please give a user name"
 msgstr "Veuillez taper un nom d'utilisateur"
 
-#: any.pm:845
+#: any.pm:869
 #, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
@@ -483,149 +488,149 @@ msgstr ""
 "Le nom d'utilisateur doit commencer par une minuscule suivie seulement de "
 "minuscules, de nombres, de « - » et « _ »"
 
-#: any.pm:846
+#: any.pm:870
 #, c-format
 msgid "The user name is too long"
 msgstr "Ce nom d'utilisateur est trop long"
 
-#: any.pm:847
+#: any.pm:871
 #, c-format
 msgid "This user name has already been added"
 msgstr "Ce nom d'utilisateur est déjà utilisé"
 
-#: any.pm:853 any.pm:887
+#: any.pm:877 any.pm:911
 #, c-format
 msgid "User ID"
 msgstr "Id. utilisateur"
 
-#: any.pm:853 any.pm:888
+#: any.pm:877 any.pm:912
 #, c-format
 msgid "Group ID"
 msgstr "Groupe"
 
-#: any.pm:854
+#: any.pm:878
 #, c-format
 msgid "%s must be a number"
 msgstr "%s doit être un nombre"
 
-#: any.pm:855
+#: any.pm:879
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
 msgstr "%s doit être supérieur ou égal à 500. Accepter quand même?"
 
-#: any.pm:859
+#: any.pm:883
 #, c-format
 msgid "User management"
 msgstr "Gestion des utilisateurs"
 
-#: any.pm:865
+#: any.pm:889
 #, c-format
 msgid "Enable guest account"
 msgstr "Activer le compte Invité"
 
-#: any.pm:866 authentication.pm:237
+#: any.pm:890 authentication.pm:237
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "Définissez le mot de passe administrateur (root)"
 
-#: any.pm:871
+#: any.pm:895
 #, c-format
 msgid "Enter a user"
 msgstr "Tapez un nom d'utilisateur"
 
-#: any.pm:873
+#: any.pm:897
 #, c-format
 msgid "Icon"
 msgstr "Icône"
 
-#: any.pm:876
+#: any.pm:900
 #, c-format
 msgid "Real name"
 msgstr "Nom et prénom"
 
-#: any.pm:881
+#: any.pm:905
 #, c-format
 msgid "Login name"
 msgstr "Identifiant de connexion"
 
-#: any.pm:886
+#: any.pm:910
 #, c-format
 msgid "Shell"
 msgstr "Interpréteur"
 
-#: any.pm:929
+#: any.pm:953
 #, c-format
 msgid "Please wait, adding media..."
 msgstr "Veuillez patienter, ajout du média..."
 
-#: any.pm:959 security/l10n.pm:14
+#: any.pm:983 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "Connexion automatique"
 
-#: any.pm:960
+#: any.pm:984
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr ""
 "À la fin du démarrage, une session peut être ouverte automatiquement pour un "
 "utilisateur."
 
-#: any.pm:961
+#: any.pm:985
 #, c-format
 msgid "Use this feature"
 msgstr "Utiliser cette fonctionnalité"
 
-#: any.pm:962
+#: any.pm:986
 #, c-format
 msgid "Choose the default user:"
 msgstr "Choisissez l'utilisateur par défaut :"
 
-#: any.pm:963
+#: any.pm:987
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Choisissez l'environnement graphique :"
 
-#: any.pm:974 any.pm:994 any.pm:1067
+#: any.pm:998 any.pm:1018 any.pm:1091
 #, c-format
 msgid "Release Notes"
 msgstr "Notes de version"
 
-#: any.pm:1001 any.pm:1355 interactive/gtk.pm:819
+#: any.pm:1025 any.pm:1379 interactive/gtk.pm:819
 #, c-format
 msgid "Close"
 msgstr "Fermer"
 
-#: any.pm:1053
+#: any.pm:1077
 #, c-format
 msgid "License agreement"
 msgstr "Licence"
 
-#: any.pm:1055 diskdrake/dav.pm:26
+#: any.pm:1079 diskdrake/dav.pm:26
 #, c-format
 msgid "Quit"
 msgstr "Quitter"
 
-#: any.pm:1062
+#: any.pm:1086
 #, c-format
 msgid "Do you accept this license ?"
 msgstr "Acceptez-vous cette licence ?"
 
-#: any.pm:1063
+#: any.pm:1087
 #, c-format
 msgid "Accept"
 msgstr "Accepter"
 
-#: any.pm:1063
+#: any.pm:1087
 #, c-format
 msgid "Refuse"
 msgstr "Refuser"
 
-#: any.pm:1089 any.pm:1151
+#: any.pm:1113 any.pm:1175
 #, c-format
 msgid "Please choose a language to use"
 msgstr "Choisissez la langue"
 
-#: any.pm:1117
+#: any.pm:1141
 #, c-format
 msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
@@ -636,77 +641,77 @@ msgstr ""
 "Choisissez les langues que vous souhaitez installer.\n"
 "Elles seront disponibles après l'installation du système."
 
-#: any.pm:1120
+#: any.pm:1144
 #, c-format
 msgid "Multi languages"
 msgstr "Multilingue"
 
-#: any.pm:1129 any.pm:1160
+#: any.pm:1153 any.pm:1184
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr "Compatibilité encodage ancien (non UTF-8)"
 
-#: any.pm:1130
+#: any.pm:1154
 #, c-format
 msgid "All languages"
 msgstr "Toutes les langues"
 
-#: any.pm:1152
+#: any.pm:1176
 #, c-format
 msgid "Language choice"
 msgstr "Choix de la langue"
 
-#: any.pm:1206
+#: any.pm:1230
 #, c-format
 msgid "Country / Region"
 msgstr "Pays / Région"
 
-#: any.pm:1207
+#: any.pm:1231
 #, c-format
 msgid "Please choose your country"
 msgstr "Veuillez choisir votre pays"
 
-#: any.pm:1209
+#: any.pm:1233
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Voici la liste complète des pays disponibles"
 
-#: any.pm:1210
+#: any.pm:1234
 #, c-format
 msgid "Other Countries"
 msgstr "Autres Pays"
 
-#: any.pm:1210 interactive.pm:488 interactive/gtk.pm:445
+#: any.pm:1234 interactive.pm:488 interactive/gtk.pm:445
 #, c-format
 msgid "Advanced"
 msgstr "Avancé"
 
-#: any.pm:1216
+#: any.pm:1240
 #, c-format
 msgid "Input method:"
 msgstr "Méthode d'entrée :"
 
-#: any.pm:1219
+#: any.pm:1243
 #, c-format
 msgid "None"
 msgstr "Aucun"
 
-#: any.pm:1300
+#: any.pm:1324
 #, c-format
 msgid "No sharing"
 msgstr "Pas de partage"
 
-#: any.pm:1300
+#: any.pm:1324
 #, c-format
 msgid "Allow all users"
 msgstr "Autoriser tous les utilisateurs"
 
-#: any.pm:1300
+#: any.pm:1324
 #, c-format
 msgid "Custom"
 msgstr "Personnalisé"
 
-#: any.pm:1304
+#: any.pm:1328
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -722,7 +727,7 @@ msgstr ""
 "\n"
 "« Personnalisée » permet d'autoriser le partage pour certains utilisateurs.\n"
 
-#: any.pm:1316
+#: any.pm:1340
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
@@ -731,7 +736,7 @@ msgstr ""
 "NFS : le système de partage de fichiers traditionnel d'UNIX, moins supporté "
 "sur les Mac et sous Windows."
 
-#: any.pm:1319
+#: any.pm:1343
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
@@ -740,19 +745,19 @@ msgstr ""
 "SMB : un système de partage de fichiers utilisé par Windows, Mac OS X et de "
 "nombreux systèmes Linux modernes."
 
-#: any.pm:1327
+#: any.pm:1351
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
 msgstr ""
 "Souhaitez-vous partager par NFS (protocole Unix) ou SMB (protocole Windows)."
 
-#: any.pm:1355
+#: any.pm:1379
 #, c-format
 msgid "Launch userdrake"
 msgstr "Lancer Userdrake"
 
-#: any.pm:1357
+#: any.pm:1381
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -762,7 +767,7 @@ msgstr ""
 "cet utilisateur dans le groupe « fileshare ».\n"
 "Ceci peut se faire grâce au programme « Userdrake »."
 
-#: any.pm:1463
+#: any.pm:1487
 #, c-format
 msgid ""
 "You need to logout and back in again for changes to take effect. Press OK to "
@@ -771,49 +776,49 @@ msgstr ""
 "Vous devez vous déconnecter puis vous connecter à nouveau afin de prendre "
 "les changements en considération. Pressez OK pour vous déconnecter maintenant"
 
-#: any.pm:1467
+#: any.pm:1491
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr ""
 "Vous devez vous déconnecter puis vous connecter à nouveau afin de prendre "
 "les changements en considération"
 
-#: any.pm:1502
+#: any.pm:1526
 #, c-format
 msgid "Timezone"
 msgstr "Fuseau horaire"
 
-#: any.pm:1502
+#: any.pm:1526
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Quel est votre fuseau horaire ?"
 
-#: any.pm:1525 any.pm:1527
+#: any.pm:1549 any.pm:1551
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Réglages de la date, de l'heure et du fuseau horaire"
 
-#: any.pm:1528
+#: any.pm:1552
 #, c-format
 msgid "What is the best time?"
 msgstr "Quelle est l'heure correcte ?"
 
-#: any.pm:1532
+#: any.pm:1556
 #, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "%s (horloge système réglée sur le Temps Universel - UTC)"
 
-#: any.pm:1533
+#: any.pm:1557
 #, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "%s (horloge système réglée sur l'heure locale)"
 
-#: any.pm:1535
+#: any.pm:1559
 #, c-format
 msgid "NTP Server"
 msgstr "Serveur NTP"
 
-#: any.pm:1536
+#: any.pm:1560
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Synchronisation automatique de l'horloge (via NTP)"
@@ -1159,7 +1164,7 @@ msgstr "Mot de passe d'administrateur de domaine"
 # leave it in English, as it is the best for your language)
 #
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: bootloader.pm:964
+#: bootloader.pm:969
 #, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
@@ -1174,44 +1179,44 @@ msgstr ""
 "ou attendez le demarrage par defaut.\n"
 "\n"
 
-#: bootloader.pm:1141
+#: bootloader.pm:1146
 #, c-format
 msgid "LILO with text menu"
 msgstr "LILO en mode texte"
 
-#: bootloader.pm:1142
+#: bootloader.pm:1147
 #, c-format
 msgid "GRUB with graphical menu"
 msgstr "GRUB en mode graphique"
 
-#: bootloader.pm:1143
+#: bootloader.pm:1148
 #, c-format
 msgid "GRUB with text menu"
 msgstr "GRUB en mode texte"
 
-#: bootloader.pm:1144
+#: bootloader.pm:1149
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
 
-#: bootloader.pm:1145
+#: bootloader.pm:1150
 #, c-format
 msgid "SILO"
 msgstr "SILO"
 
-#: bootloader.pm:1227
+#: bootloader.pm:1232
 #, c-format
 msgid "not enough room in /boot"
 msgstr "il n'y a pas assez de place dans le dossier /boot"
 
-#: bootloader.pm:1883
+#: bootloader.pm:1923
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
 msgstr ""
 "Vous ne pouvez pas installer le programme d'amorçage\n"
 "sur une partition %s\n"
 
-#: bootloader.pm:2004
+#: bootloader.pm:2044
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1220,7 +1225,7 @@ msgstr ""
 "La configuration de votre programme d'amorçage doit être mise à jour car les "
 "partitions ont été renumérotées"
 
-#: bootloader.pm:2017
+#: bootloader.pm:2057
 #, c-format
 msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
@@ -1229,7 +1234,7 @@ msgstr ""
 "Le programme d'amorçage ne peut pas être installé. Vous devez démarrer le CD-"
 "ROM d'installation avec l'option « rescue » et choisir « %s »"
 
-#: bootloader.pm:2018
+#: bootloader.pm:2058
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Réinstaller le programme d'amorçage"
@@ -1403,7 +1408,7 @@ msgstr "Options : %s"
 #: fs/partitioning_wizard.pm:53 fs/partitioning_wizard.pm:235
 #: fs/partitioning_wizard.pm:243 fs/partitioning_wizard.pm:282
 #: fs/partitioning_wizard.pm:431 fs/partitioning_wizard.pm:495
-#: fs/partitioning_wizard.pm:568 fs/partitioning_wizard.pm:571
+#: fs/partitioning_wizard.pm:571 fs/partitioning_wizard.pm:574
 #, c-format
 msgid "Partitioning"
 msgstr "Partitionnement"
@@ -1438,7 +1443,7 @@ msgstr "Quitter"
 msgid "Continue"
 msgstr "Continuer"
 
-#: diskdrake/hd_gtk.pm:182 fs/partitioning_wizard.pm:544 interactive.pm:653
+#: diskdrake/hd_gtk.pm:182 fs/partitioning_wizard.pm:547 interactive.pm:653
 #: interactive/gtk.pm:811 interactive/gtk.pm:829 interactive/gtk.pm:850
 #: ugtk2.pm:936
 #, c-format
@@ -1506,7 +1511,7 @@ msgstr "HFS"
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:384 fs/partitioning_wizard.pm:402 services.pm:158
+#: diskdrake/hd_gtk.pm:384 fs/partitioning_wizard.pm:402 services.pm:184
 #, c-format
 msgid "Other"
 msgstr "Autre"
@@ -2770,7 +2775,7 @@ msgstr ""
 "Si vous êtes sûr de vous, cliquez sur %s."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:188 fs/partitioning_wizard.pm:548
+#: fs/partitioning_wizard.pm:188 fs/partitioning_wizard.pm:551
 #: interactive.pm:549 interactive/curses.pm:263 ugtk2.pm:519
 #, c-format
 msgid "Next"
@@ -2859,22 +2864,22 @@ msgstr ""
 msgid "Ext2/3/4"
 msgstr "Ext2/3/4"
 
-#: fs/partitioning_wizard.pm:431 fs/partitioning_wizard.pm:568
+#: fs/partitioning_wizard.pm:431 fs/partitioning_wizard.pm:571
 #, c-format
 msgid "I can not find any room for installing"
 msgstr "Pas de place disponible pour l'installation"
 
-#: fs/partitioning_wizard.pm:440 fs/partitioning_wizard.pm:575
+#: fs/partitioning_wizard.pm:440 fs/partitioning_wizard.pm:578
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "L'assistant de partitionnement a trouvé les solutions suivantes :"
 
-#: fs/partitioning_wizard.pm:509
+#: fs/partitioning_wizard.pm:511
 #, c-format
 msgid "Here is the content of your disk drive "
 msgstr "Voici le contenu de votre disque "
 
-#: fs/partitioning_wizard.pm:585
+#: fs/partitioning_wizard.pm:588
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Échec du partitionnement : %s"
@@ -3314,7 +3319,7 @@ msgstr ""
 "Vous pouvez sélectionner ici un pilote alternatif (OSS ou ALSA) pour votre "
 "carte son (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA",
+#. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
@@ -3674,1202 +3679,1202 @@ msgstr "Revalider"
 #. -PO: the string "default:LTR" can be translated *ONLY* as "default:LTR"
 #. -PO: or as "default:RTL", depending if your language is written from
 #. -PO: left to right, or from right to left; any other string is wrong.
-#: lang.pm:194
+#: lang.pm:195
 #, c-format
 msgid "default:LTR"
 msgstr "default:LTR"
 
-#: lang.pm:211
+#: lang.pm:212
 #, c-format
 msgid "Andorra"
 msgstr "Andorre"
 
-#: lang.pm:212 timezone.pm:226
+#: lang.pm:213 timezone.pm:226
 #, c-format
 msgid "United Arab Emirates"
 msgstr "Émirats Arabes Unis"
 
-#: lang.pm:213
+#: lang.pm:214
 #, c-format
 msgid "Afghanistan"
 msgstr "Afghanistan"
 
-#: lang.pm:214
+#: lang.pm:215
 #, c-format
 msgid "Antigua and Barbuda"
 msgstr "Antigua-et-Barbuda"
 
-#: lang.pm:215
+#: lang.pm:216
 #, c-format
 msgid "Anguilla"
 msgstr "Anguilla"
 
-#: lang.pm:216
+#: lang.pm:217
 #, c-format
 msgid "Albania"
 msgstr "Albanie"
 
-#: lang.pm:217
+#: lang.pm:218
 #, c-format
 msgid "Armenia"
 msgstr "Arménie"
 
-#: lang.pm:218
+#: lang.pm:219
 #, c-format
 msgid "Netherlands Antilles"
 msgstr "Antilles néerlandaises"
 
-#: lang.pm:219
+#: lang.pm:220
 #, c-format
 msgid "Angola"
 msgstr "Angola"
 
-#: lang.pm:220
+#: lang.pm:221
 #, c-format
 msgid "Antarctica"
 msgstr "Antarctique"
 
-#: lang.pm:221 timezone.pm:271
+#: lang.pm:222 timezone.pm:271
 #, c-format
 msgid "Argentina"
 msgstr "Argentine"
 
-#: lang.pm:222
+#: lang.pm:223
 #, c-format
 msgid "American Samoa"
 msgstr "Samoa Américaine"
 
-#: lang.pm:223 mirror.pm:12 timezone.pm:229
+#: lang.pm:224 mirror.pm:12 timezone.pm:229
 #, c-format
 msgid "Austria"
 msgstr "Autriche"
 
-#: lang.pm:224 mirror.pm:11 timezone.pm:267
+#: lang.pm:225 mirror.pm:11 timezone.pm:267
 #, c-format
 msgid "Australia"
 msgstr "Australie"
 
-#: lang.pm:225
+#: lang.pm:226
 #, c-format
 msgid "Aruba"
 msgstr "Aruba"
 
-#: lang.pm:226
+#: lang.pm:227
 #, c-format
 msgid "Azerbaijan"
 msgstr "Azerbaïdjan"
 
-#: lang.pm:227
+#: lang.pm:228
 #, c-format
 msgid "Bosnia and Herzegovina"
 msgstr "Bosnie Herzégovine"
 
-#: lang.pm:228
+#: lang.pm:229
 #, c-format
 msgid "Barbados"
 msgstr "Barbade"
 
-#: lang.pm:229 timezone.pm:211
+#: lang.pm:230 timezone.pm:211
 #, c-format
 msgid "Bangladesh"
 msgstr "Bangladesh"
 
-#: lang.pm:230 mirror.pm:13 timezone.pm:231
+#: lang.pm:231 mirror.pm:13 timezone.pm:231
 #, c-format
 msgid "Belgium"
 msgstr "Belgique"
 
-#: lang.pm:231
+#: lang.pm:232
 #, c-format
 msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
-#: lang.pm:232 timezone.pm:232
+#: lang.pm:233 timezone.pm:232
 #, c-format
 msgid "Bulgaria"
 msgstr "Bulgarie"
 
-#: lang.pm:233
+#: lang.pm:234
 #, c-format
 msgid "Bahrain"
 msgstr "Bahreïn"
 
-#: lang.pm:234
+#: lang.pm:235
 #, c-format
 msgid "Burundi"
 msgstr "Burundi"
 
-#: lang.pm:235
+#: lang.pm:236
 #, c-format
 msgid "Benin"
 msgstr "Bénin"
 
-#: lang.pm:236
+#: lang.pm:237
 #, c-format
 msgid "Bermuda"
 msgstr "Bermudes"
 
-#: lang.pm:237
+#: lang.pm:238
 #, c-format
 msgid "Brunei Darussalam"
 msgstr "Sultanat de Brunei"
 
-#: lang.pm:238
+#: lang.pm:239
 #, c-format
 msgid "Bolivia"
 msgstr "Bolivie"
 
-#: lang.pm:239 mirror.pm:14 timezone.pm:272
+#: lang.pm:240 mirror.pm:14 timezone.pm:272
 #, c-format
 msgid "Brazil"
 msgstr "Brésil"
 
-#: lang.pm:240
+#: lang.pm:241
 #, c-format
 msgid "Bahamas"
 msgstr "Bahamas"
 
-#: lang.pm:241
+#: lang.pm:242
 #, c-format
 msgid "Bhutan"
 msgstr "Bhoutan"
 
-#: lang.pm:242
+#: lang.pm:243
 #, c-format
 msgid "Bouvet Island"
 msgstr "Île Bouvet"
 
-#: lang.pm:243
+#: lang.pm:244
 #, c-format
 msgid "Botswana"
 msgstr "Botswana"
 
-#: lang.pm:244 timezone.pm:230
+#: lang.pm:245 timezone.pm:230
 #, c-format
 msgid "Belarus"
 msgstr "Bélarus"
 
-#: lang.pm:245
+#: lang.pm:246
 #, c-format
 msgid "Belize"
 msgstr "Belize"
 
-#: lang.pm:246 mirror.pm:15 timezone.pm:261
+#: lang.pm:247 mirror.pm:15 timezone.pm:261
 #, c-format
 msgid "Canada"
 msgstr "Canada"
 
-#: lang.pm:247
+#: lang.pm:248
 #, c-format
 msgid "Cocos (Keeling) Islands"
 msgstr "Îles Cocos"
 
-#: lang.pm:248
+#: lang.pm:249
 #, c-format
 msgid "Congo (Kinshasa)"
 msgstr "Congo (Kinshasa)"
 
-#: lang.pm:249
+#: lang.pm:250
 #, c-format
 msgid "Central African Republic"
 msgstr "République Centrafricaine"
 
-#: lang.pm:250
+#: lang.pm:251
 #, c-format
 msgid "Congo (Brazzaville)"
 msgstr "Congo (Brazzaville)"
 
-#: lang.pm:251 mirror.pm:39 timezone.pm:255
+#: lang.pm:252 mirror.pm:39 timezone.pm:255
 #, c-format
 msgid "Switzerland"
 msgstr "Suisse"
 
-#: lang.pm:252
+#: lang.pm:253
 #, c-format
 msgid "Cote d'Ivoire"
 msgstr "Côte d'Ivoire"
 
-#: lang.pm:253
+#: lang.pm:254
 #, c-format
 msgid "Cook Islands"
 msgstr "Îles Cook"
 
-#: lang.pm:254 timezone.pm:273
+#: lang.pm:255 timezone.pm:273
 #, c-format
 msgid "Chile"
 msgstr "Chili"
 
-#: lang.pm:255
+#: lang.pm:256
 #, c-format
 msgid "Cameroon"
 msgstr "Cameroun"
 
-#: lang.pm:256 timezone.pm:212
+#: lang.pm:257 timezone.pm:212
 #, c-format
 msgid "China"
 msgstr "Chine"
 
-#: lang.pm:257
+#: lang.pm:258
 #, c-format
 msgid "Colombia"
 msgstr "Colombie"
 
-#: lang.pm:258 mirror.pm:16
+#: lang.pm:259 mirror.pm:16
 #, c-format
 msgid "Costa Rica"
 msgstr "Costa Rica"
 
-#: lang.pm:259
+#: lang.pm:260
 #, c-format
 msgid "Serbia & Montenegro"
 msgstr "Serbie-Monténégro"
 
-#: lang.pm:260
+#: lang.pm:261
 #, c-format
 msgid "Cuba"
 msgstr "Cuba"
 
-#: lang.pm:261
+#: lang.pm:262
 #, c-format
 msgid "Cape Verde"
 msgstr "Cap-Vert"
 
-#: lang.pm:262
+#: lang.pm:263
 #, c-format
 msgid "Christmas Island"
 msgstr "Île Christmas"
 
-#: lang.pm:263
+#: lang.pm:264
 #, c-format
 msgid "Cyprus"
 msgstr "Chypre"
 
-#: lang.pm:264 mirror.pm:17 timezone.pm:233
+#: lang.pm:265 mirror.pm:17 timezone.pm:233
 #, c-format
 msgid "Czech Republic"
 msgstr "République Tchèque"
 
-#: lang.pm:265 mirror.pm:22 timezone.pm:238
+#: lang.pm:266 mirror.pm:22 timezone.pm:238
 #, c-format
 msgid "Germany"
 msgstr "Allemagne"
 
-#: lang.pm:266
+#: lang.pm:267
 #, c-format
 msgid "Djibouti"
 msgstr "Djibouti"
 
-#: lang.pm:267 mirror.pm:18 timezone.pm:234
+#: lang.pm:268 mirror.pm:18 timezone.pm:234
 #, c-format
 msgid "Denmark"
 msgstr "Danemark"
 
-#: lang.pm:268
+#: lang.pm:269
 #, c-format
 msgid "Dominica"
 msgstr "Dominique"
 
-#: lang.pm:269
+#: lang.pm:270
 #, c-format
 msgid "Dominican Republic"
 msgstr "Dominique"
 
-#: lang.pm:270
+#: lang.pm:271
 #, c-format
 msgid "Algeria"
 msgstr "Algérie"
 
-#: lang.pm:271
+#: lang.pm:272
 #, c-format
 msgid "Ecuador"
 msgstr "Équateur"
 
-#: lang.pm:272 mirror.pm:19 timezone.pm:235
+#: lang.pm:273 mirror.pm:19 timezone.pm:235
 #, c-format
 msgid "Estonia"
 msgstr "Estonie"
 
-#: lang.pm:273
+#: lang.pm:274
 #, c-format
 msgid "Egypt"
 msgstr "Égypte"
 
-#: lang.pm:274
+#: lang.pm:275
 #, c-format
 msgid "Western Sahara"
 msgstr "Sahara Occidental"
 
-#: lang.pm:275
+#: lang.pm:276
 #, c-format
 msgid "Eritrea"
 msgstr "Érythrée"
 
-#: lang.pm:276 mirror.pm:37 timezone.pm:253
+#: lang.pm:277 mirror.pm:37 timezone.pm:253
 #, c-format
 msgid "Spain"
 msgstr "Espagne"
 
-#: lang.pm:277
+#: lang.pm:278
 #, c-format
 msgid "Ethiopia"
 msgstr "Éthiopie"
 
-#: lang.pm:278 mirror.pm:20 timezone.pm:236
+#: lang.pm:279 mirror.pm:20 timezone.pm:236
 #, c-format
 msgid "Finland"
 msgstr "Finlande"
 
-#: lang.pm:279
+#: lang.pm:280
 #, c-format
 msgid "Fiji"
 msgstr "Fidji"
 
-#: lang.pm:280
+#: lang.pm:281
 #, c-format
 msgid "Falkland Islands (Malvinas)"
 msgstr "Îles Malouinnes"
 
-#: lang.pm:281
+#: lang.pm:282
 #, c-format
 msgid "Micronesia"
 msgstr "Micronésie"
 
-#: lang.pm:282
+#: lang.pm:283
 #, c-format
 msgid "Faroe Islands"
 msgstr "Îles Féroé"
 
-#: lang.pm:283 mirror.pm:21 timezone.pm:237
+#: lang.pm:284 mirror.pm:21 timezone.pm:237
 #, c-format
 msgid "France"
 msgstr "France"
 
-#: lang.pm:284
+#: lang.pm:285
 #, c-format
 msgid "Gabon"
 msgstr "Gabon"
 
-#: lang.pm:285 timezone.pm:257
+#: lang.pm:286 timezone.pm:257
 #, c-format
 msgid "United Kingdom"
 msgstr "Royaume-Uni"
 
-#: lang.pm:286
+#: lang.pm:287
 #, c-format
 msgid "Grenada"
 msgstr "Grenade"
 
-#: lang.pm:287
+#: lang.pm:288
 #, c-format
 msgid "Georgia"
 msgstr "Géorgie"
 
-#: lang.pm:288
+#: lang.pm:289
 #, c-format
 msgid "French Guiana"
 msgstr "Guyane Française"
 
-#: lang.pm:289
+#: lang.pm:290
 #, c-format
 msgid "Ghana"
 msgstr "Ghana"
 
-#: lang.pm:290
+#: lang.pm:291
 #, c-format
 msgid "Gibraltar"
 msgstr "Gibraltar"
 
-#: lang.pm:291
+#: lang.pm:292
 #, c-format
 msgid "Greenland"
 msgstr "Groenland"
 
-#: lang.pm:292
+#: lang.pm:293
 #, c-format
 msgid "Gambia"
 msgstr "Gambie"
 
-#: lang.pm:293
+#: lang.pm:294
 #, c-format
 msgid "Guinea"
 msgstr "Guinée"
 
-#: lang.pm:294
+#: lang.pm:295
 #, c-format
 msgid "Guadeloupe"
 msgstr "Guadeloupe"
 
-#: lang.pm:295
+#: lang.pm:296
 #, c-format
 msgid "Equatorial Guinea"
 msgstr "Guinée Équatoriale"
 
-#: lang.pm:296 mirror.pm:23 timezone.pm:239
+#: lang.pm:297 mirror.pm:23 timezone.pm:239
 #, c-format
 msgid "Greece"
 msgstr "Grèce"
 
-#: lang.pm:297
+#: lang.pm:298
 #, c-format
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Géorgie du Sud et Îles Sandwich du Sud"
 
-#: lang.pm:298 timezone.pm:262
+#: lang.pm:299 timezone.pm:262
 #, c-format
 msgid "Guatemala"
 msgstr "Guatemala"
 
-#: lang.pm:299
+#: lang.pm:300
 #, c-format
 msgid "Guam"
 msgstr "Guam"
 
-#: lang.pm:300
+#: lang.pm:301
 #, c-format
 msgid "Guinea-Bissau"
 msgstr "Guinée-Bissau"
 
-#: lang.pm:301
+#: lang.pm:302
 #, c-format
 msgid "Guyana"
 msgstr "Guyana"
 
-#: lang.pm:302
+#: lang.pm:303
 #, c-format
 msgid "Hong Kong SAR (China)"
 msgstr "Chine (Hong-Kong)"
 
-#: lang.pm:303
+#: lang.pm:304
 #, c-format
 msgid "Heard and McDonald Islands"
 msgstr "Îles Heard et McDonald"
 
-#: lang.pm:304
+#: lang.pm:305
 #, c-format
 msgid "Honduras"
 msgstr "Honduras"
 
-#: lang.pm:305
+#: lang.pm:306
 #, c-format
 msgid "Croatia"
 msgstr "Croatie"
 
-#: lang.pm:306
+#: lang.pm:307
 #, c-format
 msgid "Haiti"
 msgstr "Haïti"
 
-#: lang.pm:307 mirror.pm:24 timezone.pm:240
+#: lang.pm:308 mirror.pm:24 timezone.pm:240
 #, c-format
 msgid "Hungary"
 msgstr "Hongrie"
 
-#: lang.pm:308 timezone.pm:215
+#: lang.pm:309 timezone.pm:215
 #, c-format
 msgid "Indonesia"
 msgstr "Indonésie"
 
-#: lang.pm:309 mirror.pm:25 timezone.pm:241
+#: lang.pm:310 mirror.pm:25 timezone.pm:241
 #, c-format
 msgid "Ireland"
 msgstr "Irlande"
 
-#: lang.pm:310 mirror.pm:26 timezone.pm:217
+#: lang.pm:311 mirror.pm:26 timezone.pm:217
 #, c-format
 msgid "Israel"
 msgstr "Israël"
 
-#: lang.pm:311 timezone.pm:214
+#: lang.pm:312 timezone.pm:214
 #, c-format
 msgid "India"
 msgstr "Inde"
 
-#: lang.pm:312
+#: lang.pm:313
 #, c-format
 msgid "British Indian Ocean Territory"
 msgstr "Territoire Britannique de l'océan Indien"
 
-#: lang.pm:313
+#: lang.pm:314
 #, c-format
 msgid "Iraq"
 msgstr "Irak"
 
-#: lang.pm:314 timezone.pm:216
+#: lang.pm:315 timezone.pm:216
 #, c-format
 msgid "Iran"
 msgstr "Iran"
 
-#: lang.pm:315
+#: lang.pm:316
 #, c-format
 msgid "Iceland"
 msgstr "Islande"
 
-#: lang.pm:316 mirror.pm:27 timezone.pm:242
+#: lang.pm:317 mirror.pm:27 timezone.pm:242
 #, c-format
 msgid "Italy"
 msgstr "Italie"
 
-#: lang.pm:317
+#: lang.pm:318
 #, c-format
 msgid "Jamaica"
 msgstr "Jamaïque"
 
-#: lang.pm:318
+#: lang.pm:319
 #, c-format
 msgid "Jordan"
 msgstr "Jordanie"
 
-#: lang.pm:319 mirror.pm:28 timezone.pm:218
+#: lang.pm:320 mirror.pm:28 timezone.pm:218
 #, c-format
 msgid "Japan"
 msgstr "Japon"
 
-#: lang.pm:320
+#: lang.pm:321
 #, c-format
 msgid "Kenya"
 msgstr "Kenya"
 
-#: lang.pm:321
+#: lang.pm:322
 #, c-format
 msgid "Kyrgyzstan"
 msgstr "Kirghizistan"
 
-#: lang.pm:322
+#: lang.pm:323
 #, c-format
 msgid "Cambodia"
 msgstr "Cambodge"
 
-#: lang.pm:323
+#: lang.pm:324
 #, c-format
 msgid "Kiribati"
 msgstr "Kiribati"
 
-#: lang.pm:324
+#: lang.pm:325
 #, c-format
 msgid "Comoros"
 msgstr "Comores"
 
-#: lang.pm:325
+#: lang.pm:326
 #, c-format
 msgid "Saint Kitts and Nevis"
 msgstr "Saint-Kitts-et-Nevis"
 
-#: lang.pm:326
+#: lang.pm:327
 #, c-format
 msgid "Korea (North)"
 msgstr "Corée du Nord"
 
-#: lang.pm:327 timezone.pm:219
+#: lang.pm:328 timezone.pm:219
 #, c-format
 msgid "Korea"
 msgstr "Corée"
 
-#: lang.pm:328
+#: lang.pm:329
 #, c-format
 msgid "Kuwait"
 msgstr "Koweit"
 
-#: lang.pm:329
+#: lang.pm:330
 #, c-format
 msgid "Cayman Islands"
 msgstr "Îles Caïman"
 
-#: lang.pm:330
+#: lang.pm:331
 #, c-format
 msgid "Kazakhstan"
 msgstr "Kazakhstan"
 
-#: lang.pm:331
+#: lang.pm:332
 #, c-format
 msgid "Laos"
 msgstr "Laos"
 
-#: lang.pm:332
+#: lang.pm:333
 #, c-format
 msgid "Lebanon"
 msgstr "Liban"
 
-#: lang.pm:333
+#: lang.pm:334
 #, c-format
 msgid "Saint Lucia"
 msgstr "Sainte-Lucie"
 
-#: lang.pm:334
+#: lang.pm:335
 #, c-format
 msgid "Liechtenstein"
 msgstr "Liechtenstein"
 
-#: lang.pm:335
+#: lang.pm:336
 #, c-format
 msgid "Sri Lanka"
 msgstr "Sri Lanka"
 
-#: lang.pm:336
+#: lang.pm:337
 #, c-format
 msgid "Liberia"
 msgstr "Libéria"
 
-#: lang.pm:337
+#: lang.pm:338
 #, c-format
 msgid "Lesotho"
 msgstr "Lesotho"
 
-#: lang.pm:338 timezone.pm:243
+#: lang.pm:339 timezone.pm:243
 #, c-format
 msgid "Lithuania"
 msgstr "Lituanie"
 
-#: lang.pm:339 timezone.pm:244
+#: lang.pm:340 timezone.pm:244
 #, c-format
 msgid "Luxembourg"
 msgstr "Luxembourg"
 
-#: lang.pm:340
+#: lang.pm:341
 #, c-format
 msgid "Latvia"
 msgstr "Lettonie"
 
-#: lang.pm:341
+#: lang.pm:342
 #, c-format
 msgid "Libya"
 msgstr "Libye"
 
-#: lang.pm:342
+#: lang.pm:343
 #, c-format
 msgid "Morocco"
 msgstr "Maroc"
 
-#: lang.pm:343
+#: lang.pm:344
 #, c-format
 msgid "Monaco"
 msgstr "Monaco"
 
-#: lang.pm:344
+#: lang.pm:345
 #, c-format
 msgid "Moldova"
 msgstr "République de Moldova"
 
-#: lang.pm:345
+#: lang.pm:346
 #, c-format
 msgid "Madagascar"
 msgstr "Madagascar"
 
-#: lang.pm:346
+#: lang.pm:347
 #, c-format
 msgid "Marshall Islands"
 msgstr "Îles Marshall"
 
-#: lang.pm:347
+#: lang.pm:348
 #, c-format
 msgid "Macedonia"
 msgstr "Macédoine"
 
-#: lang.pm:348
+#: lang.pm:349
 #, c-format
 msgid "Mali"
 msgstr "Mali"
 
-#: lang.pm:349
+#: lang.pm:350
 #, c-format
 msgid "Myanmar"
 msgstr "Birmanie"
 
-#: lang.pm:350
+#: lang.pm:351
 #, c-format
 msgid "Mongolia"
 msgstr "Mongolie"
 
-#: lang.pm:351
+#: lang.pm:352
 #, c-format
 msgid "Northern Mariana Islands"
 msgstr "Îles Mariannes du Nord"
 
-#: lang.pm:352
+#: lang.pm:353
 #, c-format
 msgid "Martinique"
 msgstr "Martinique"
 
-#: lang.pm:353
+#: lang.pm:354
 #, c-format
 msgid "Mauritania"
 msgstr "Mauritanie"
 
-#: lang.pm:354
+#: lang.pm:355
 #, c-format
 msgid "Montserrat"
 msgstr "Montserrat"
 
-#: lang.pm:355
+#: lang.pm:356
 #, c-format
 msgid "Malta"
 msgstr "Malte"
 
-#: lang.pm:356
+#: lang.pm:357
 #, c-format
 msgid "Mauritius"
 msgstr "Maurice"
 
-#: lang.pm:357
+#: lang.pm:358
 #, c-format
 msgid "Maldives"
 msgstr "Maldives"
 
-#: lang.pm:358
+#: lang.pm:359
 #, c-format
 msgid "Malawi"
 msgstr "Malawi"
 
-#: lang.pm:359 timezone.pm:263
+#: lang.pm:360 timezone.pm:263
 #, c-format
 msgid "Mexico"
 msgstr "Mexique"
 
-#: lang.pm:360 timezone.pm:220
+#: lang.pm:361 timezone.pm:220
 #, c-format
 msgid "Malaysia"
 msgstr "Malaisie"
 
-#: lang.pm:361
+#: lang.pm:362
 #, c-format
 msgid "Mozambique"
 msgstr "Mozambique"
 
-#: lang.pm:362
+#: lang.pm:363
 #, c-format
 msgid "Namibia"
 msgstr "Namibie"
 
-#: lang.pm:363
+#: lang.pm:364
 #, c-format
 msgid "New Caledonia"
 msgstr "Nouvelle-Calédonie"
 
-#: lang.pm:364
+#: lang.pm:365
 #, c-format
 msgid "Niger"
 msgstr "Niger"
 
-#: lang.pm:365
+#: lang.pm:366
 #, c-format
 msgid "Norfolk Island"
 msgstr "Île Norfolk"
 
-#: lang.pm:366
+#: lang.pm:367
 #, c-format
 msgid "Nigeria"
 msgstr "Nigeria"
 
-#: lang.pm:367
+#: lang.pm:368
 #, c-format
 msgid "Nicaragua"
 msgstr "Nicaragua"
 
-#: lang.pm:368 mirror.pm:29 timezone.pm:245
+#: lang.pm:369 mirror.pm:29 timezone.pm:245
 #, c-format
 msgid "Netherlands"
 msgstr "Pays-Bas"
 
-#: lang.pm:369 mirror.pm:31 timezone.pm:246
+#: lang.pm:370 mirror.pm:31 timezone.pm:246
 #, c-format
 msgid "Norway"
 msgstr "Norvège"
 
-#: lang.pm:370
+#: lang.pm:371
 #, c-format
 msgid "Nepal"
 msgstr "Népal"
 
-#: lang.pm:371
+#: lang.pm:372
 #, c-format
 msgid "Nauru"
 msgstr "Nauru"
 
-#: lang.pm:372
+#: lang.pm:373
 #, c-format
 msgid "Niue"
 msgstr "Nioue"
 
-#: lang.pm:373 mirror.pm:30 timezone.pm:268
+#: lang.pm:374 mirror.pm:30 timezone.pm:268
 #, c-format
 msgid "New Zealand"
 msgstr "Nouvelle-Zélande"
 
-#: lang.pm:374
+#: lang.pm:375
 #, c-format
 msgid "Oman"
 msgstr "Oman"
 
-#: lang.pm:375
+#: lang.pm:376
 #, c-format
 msgid "Panama"
 msgstr "Panama"
 
-#: lang.pm:376
+#: lang.pm:377
 #, c-format
 msgid "Peru"
 msgstr "Pérou"
 
-#: lang.pm:377
+#: lang.pm:378
 #, c-format
 msgid "French Polynesia"
 msgstr "Polynésie Française"
 
-#: lang.pm:378
+#: lang.pm:379
 #, c-format
 msgid "Papua New Guinea"
 msgstr "Papouasie-Nouvelle-Guinée"
 
-#: lang.pm:379 timezone.pm:221
+#: lang.pm:380 timezone.pm:221
 #, c-format
 msgid "Philippines"
 msgstr "Philippines"
 
-#: lang.pm:380
+#: lang.pm:381
 #, c-format
 msgid "Pakistan"
 msgstr "Pakistan"
 
-#: lang.pm:381 mirror.pm:32 timezone.pm:247
+#: lang.pm:382 mirror.pm:32 timezone.pm:247
 #, c-format
 msgid "Poland"
 msgstr "Pologne"
 
-#: lang.pm:382
+#: lang.pm:383
 #, c-format
 msgid "Saint Pierre and Miquelon"
 msgstr "Saint-Pierre-et-Miquelon"
 
-#: lang.pm:383
+#: lang.pm:384
 #, c-format
 msgid "Pitcairn"
 msgstr "Pitcairn"
 
-#: lang.pm:384
+#: lang.pm:385
 #, c-format
 msgid "Puerto Rico"
 msgstr "Puerto Rico"
 
-#: lang.pm:385
+#: lang.pm:386
 #, c-format
 msgid "Palestine"
 msgstr "Palestine"
 
-#: lang.pm:386 mirror.pm:33 timezone.pm:248
+#: lang.pm:387 mirror.pm:33 timezone.pm:248
 #, c-format
 msgid "Portugal"
 msgstr "Portugal"
 
-#: lang.pm:387
+#: lang.pm:388
 #, c-format
 msgid "Paraguay"
 msgstr "Paraguay"
 
-#: lang.pm:388
+#: lang.pm:389
 #, c-format
 msgid "Palau"
 msgstr "Palaos (Les)"
 
-#: lang.pm:389
+#: lang.pm:390
 #, c-format
 msgid "Qatar"
 msgstr "Qatar"
 
-#: lang.pm:390
+#: lang.pm:391
 #, c-format
 msgid "Reunion"
 msgstr "Réunion, île de la"
 
-#: lang.pm:391 timezone.pm:249
+#: lang.pm:392 timezone.pm:249
 #, c-format
 msgid "Romania"
 msgstr "Roumanie"
 
-#: lang.pm:392 mirror.pm:34
+#: lang.pm:393 mirror.pm:34
 #, c-format
 msgid "Russia"
 msgstr "Russie"
 
-#: lang.pm:393
+#: lang.pm:394
 #, c-format
 msgid "Rwanda"
 msgstr "Rwanda"
 
-#: lang.pm:394
+#: lang.pm:395
 #, c-format
 msgid "Saudi Arabia"
 msgstr "Arabie Saoudite"
 
-#: lang.pm:395
+#: lang.pm:396
 #, c-format
 msgid "Solomon Islands"
 msgstr "Îles Salomon"
 
-#: lang.pm:396
+#: lang.pm:397
 #, c-format
 msgid "Seychelles"
 msgstr "Seychelles"
 
-#: lang.pm:397
+#: lang.pm:398
 #, c-format
 msgid "Sudan"
 msgstr "Soudan"
 
-#: lang.pm:398 mirror.pm:38 timezone.pm:254
+#: lang.pm:399 mirror.pm:38 timezone.pm:254
 #, c-format
 msgid "Sweden"
 msgstr "Suède"
 
-#: lang.pm:399 timezone.pm:222
+#: lang.pm:400 timezone.pm:222
 #, c-format
 msgid "Singapore"
 msgstr "Singapour"
 
-#: lang.pm:400
+#: lang.pm:401
 #, c-format
 msgid "Saint Helena"
 msgstr "Sainte-Hélène"
 
-#: lang.pm:401 timezone.pm:252
+#: lang.pm:402 timezone.pm:252
 #, c-format
 msgid "Slovenia"
 msgstr "Slovénie"
 
-#: lang.pm:402
+#: lang.pm:403
 #, c-format
 msgid "Svalbard and Jan Mayen Islands"
 msgstr "Îles Svalbard et Jan Mayen"
 
-#: lang.pm:403 mirror.pm:35 timezone.pm:251
+#: lang.pm:404 mirror.pm:35 timezone.pm:251
 #, c-format
 msgid "Slovakia"
 msgstr "Slovaquie"
 
-#: lang.pm:404
+#: lang.pm:405
 #, c-format
 msgid "Sierra Leone"
 msgstr "Sierra Leone"
 
-#: lang.pm:405
+#: lang.pm:406
 #, c-format
 msgid "San Marino"
 msgstr "Saint-Marin"
 
-#: lang.pm:406
+#: lang.pm:407
 #, c-format
 msgid "Senegal"
 msgstr "Sénégal"
 
-#: lang.pm:407
+#: lang.pm:408
 #, c-format
 msgid "Somalia"
 msgstr "Somalie"
 
-#: lang.pm:408
+#: lang.pm:409
 #, c-format
 msgid "Suriname"
 msgstr "Suriname"
 
-#: lang.pm:409
+#: lang.pm:410
 #, c-format
 msgid "Sao Tome and Principe"
 msgstr "Sao Tomé-et-Principe"
 
-#: lang.pm:410
+#: lang.pm:411
 #, c-format
 msgid "El Salvador"
 msgstr "El Salvador"
 
-#: lang.pm:411
+#: lang.pm:412
 #, c-format
 msgid "Syria"
 msgstr "Syrie"
 
-#: lang.pm:412
+#: lang.pm:413
 #, c-format
 msgid "Swaziland"
 msgstr "Swaziland"
 
-#: lang.pm:413
+#: lang.pm:414
 #, c-format
 msgid "Turks and Caicos Islands"
 msgstr "Îles Turques et Caïcos"
 
-#: lang.pm:414
+#: lang.pm:415
 #, c-format
 msgid "Chad"
 msgstr "Tchad"
 
-#: lang.pm:415
+#: lang.pm:416
 #, c-format
 msgid "French Southern Territories"
 msgstr "Terres Australes Françaises"
 
-#: lang.pm:416
+#: lang.pm:417
 #, c-format
 msgid "Togo"
 msgstr "Togo"
 
-#: lang.pm:417 mirror.pm:41 timezone.pm:224
+#: lang.pm:418 mirror.pm:41 timezone.pm:224
 #, c-format
 msgid "Thailand"
 msgstr "Thaïlande"
 
-#: lang.pm:418
+#: lang.pm:419
 #, c-format
 msgid "Tajikistan"
 msgstr "Tadjikistan"
 
-#: lang.pm:419
+#: lang.pm:420
 #, c-format
 msgid "Tokelau"
 msgstr "Tokelau"
 
-#: lang.pm:420
+#: lang.pm:421
 #, c-format
 msgid "East Timor"
 msgstr "Timor Oriental"
 
-#: lang.pm:421
+#: lang.pm:422
 #, c-format
 msgid "Turkmenistan"
 msgstr "Turkménistan"
 
-#: lang.pm:422
+#: lang.pm:423
 #, c-format
 msgid "Tunisia"
 msgstr "Tunisie"
 
-#: lang.pm:423
+#: lang.pm:424
 #, c-format
 msgid "Tonga"
 msgstr "Tonga"
 
-#: lang.pm:424 timezone.pm:225
+#: lang.pm:425 timezone.pm:225
 #, c-format
 msgid "Turkey"
 msgstr "Turquie"
 
-#: lang.pm:425
+#: lang.pm:426
 #, c-format
 msgid "Trinidad and Tobago"
 msgstr "Trinité-et-Tobago"
 
-#: lang.pm:426
+#: lang.pm:427
 #, c-format
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
-#: lang.pm:427 mirror.pm:40 timezone.pm:223
+#: lang.pm:428 mirror.pm:40 timezone.pm:223
 #, c-format
 msgid "Taiwan"
 msgstr "Taïwan"
 
-#: lang.pm:428 timezone.pm:208
+#: lang.pm:429 timezone.pm:208
 #, c-format
 msgid "Tanzania"
 msgstr "Tanzanie"
 
-#: lang.pm:429 timezone.pm:256
+#: lang.pm:430 timezone.pm:256
 #, c-format
 msgid "Ukraine"
 msgstr "Ukraine"
 
-#: lang.pm:430
+#: lang.pm:431
 #, c-format
 msgid "Uganda"
 msgstr "Ouganda"
 
-#: lang.pm:431
+#: lang.pm:432
 #, c-format
 msgid "United States Minor Outlying Islands"
 msgstr "Îles mineures des États-Unis d'Amérique"
 
-#: lang.pm:432 mirror.pm:42 timezone.pm:264
+#: lang.pm:433 mirror.pm:42 timezone.pm:264
 #, c-format
 msgid "United States"
 msgstr "États-Unis"
 
-#: lang.pm:433
+#: lang.pm:434
 #, c-format
 msgid "Uruguay"
 msgstr "Uruguay"
 
-#: lang.pm:434
+#: lang.pm:435
 #, c-format
 msgid "Uzbekistan"
 msgstr "Ouzbékistan"
 
-#: lang.pm:435
+#: lang.pm:436
 #, c-format
 msgid "Vatican"
 msgstr "Vatican"
 
-#: lang.pm:436
+#: lang.pm:437
 #, c-format
 msgid "Saint Vincent and the Grenadines"
 msgstr "Saint-Vincent-et-les-Grenadines"
 
-#: lang.pm:437
+#: lang.pm:438
 #, c-format
 msgid "Venezuela"
 msgstr "Venezuela"
 
-#: lang.pm:438
+#: lang.pm:439
 #, c-format
 msgid "Virgin Islands (British)"
 msgstr "Îles Vierges (Britanniques)"
 
-#: lang.pm:439
+#: lang.pm:440
 #, c-format
 msgid "Virgin Islands (U.S.)"
 msgstr "Îles Vierges (US)"
 
-#: lang.pm:440
+#: lang.pm:441
 #, c-format
 msgid "Vietnam"
 msgstr "Vietnam"
 
-#: lang.pm:441
+#: lang.pm:442
 #, c-format
 msgid "Vanuatu"
 msgstr "Vanuatu"
 
-#: lang.pm:442
+#: lang.pm:443
 #, c-format
 msgid "Wallis and Futuna"
 msgstr "Wallis et Futuna, îles"
 
-#: lang.pm:443
+#: lang.pm:444
 #, c-format
 msgid "Samoa"
 msgstr "Samoa"
 
-#: lang.pm:444
+#: lang.pm:445
 #, c-format
 msgid "Yemen"
 msgstr "Yemen"
 
-#: lang.pm:445
+#: lang.pm:446
 #, c-format
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: lang.pm:446 mirror.pm:36 timezone.pm:207
+#: lang.pm:447 mirror.pm:36 timezone.pm:207
 #, c-format
 msgid "South Africa"
 msgstr "Afrique du Sud"
 
-#: lang.pm:447
+#: lang.pm:448
 #, c-format
 msgid "Zambia"
 msgstr "Zambie"
 
-#: lang.pm:448
+#: lang.pm:449
 #, c-format
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
-#: lang.pm:1206
+#: lang.pm:1207
 #, c-format
 msgid "Welcome to %s"
 msgstr "Bienvenue sur %s"
@@ -5560,7 +5565,7 @@ msgstr ""
 "inutilisable. La seule solution est de déplacer vos partitions primaires\n"
 "de telle façon que cet espace soit placé contre les partitions étendues."
 
-#: partition_table/raw.pm:287
+#: partition_table/raw.pm:299
 #, c-format
 msgid ""
 "Something bad is happening on your drive. \n"
@@ -5618,7 +5623,7 @@ msgstr "Traductions inutilisées"
 msgid "Can not add a partition to _formatted_ RAID %s"
 msgstr "Impossible d'ajouter une partition au RAID %s formaté"
 
-#: raid.pm:161
+#: raid.pm:164
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
 msgstr "Trop peu de partitions pour du RAID de niveau %d\n"
@@ -6387,11 +6392,6 @@ msgstr ""
 
 #: security/level.pm:51
 #, c-format
-msgid "Security"
-msgstr "Sécurité"
-
-#: security/level.pm:51
-#, c-format
 msgid "DrakSec Basic Options"
 msgstr "Options de base de DrakSec"
 
@@ -6418,13 +6418,18 @@ msgstr "Nom d'utilisateur ou courriel :"
 
 #: services.pm:19
 #, c-format
+msgid "Listen and dispatch ACPI events from the kernel"
+msgstr ""
+
+#: services.pm:20
+#, c-format
 msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
 msgstr ""
 "Démarrage ou arrêt du système sonore ALSA (Advanced Linux Sound "
 "Architecture). Il charge le pilote pour votre carte son, et restaure les "
 "réglages du périphérique de mixage."
 
-#: services.pm:20
+#: services.pm:21
 #, c-format
 msgid "Anacron is a periodic command scheduler."
 msgstr ""
@@ -6434,7 +6439,7 @@ msgstr ""
 "hebdomadaire sont préconfigurées pour le système Mandriva Linux. (Plus "
 "d'informations dans « man anacron »)."
 
-#: services.pm:21
+#: services.pm:22
 #, c-format
 msgid ""
 "apmd is used for monitoring battery status and logging it via syslog.\n"
@@ -6444,7 +6449,7 @@ msgstr ""
 "(via syslog). Il peut être utilisé pour arrêter proprement la machine "
 "lorsque la batterie est très faible et après avoir averti les utilisateurs."
 
-#: services.pm:23
+#: services.pm:24
 #, c-format
 msgid ""
 "Runs commands scheduled by the at command at the time specified when\n"
@@ -6456,7 +6461,17 @@ msgstr ""
 "machine ce soir à 23h59, tapez « at 23:59 » dans une fenêtre de commandes, "
 "puis « halt » et <Ctrl-D>."
 
-#: services.pm:25
+#: services.pm:26
+#, c-format
+msgid "Avahi is a ZeroConf daemon which implements an mDNS stack"
+msgstr ""
+
+#: services.pm:27
+#, c-format
+msgid "Set CPU frequency settings"
+msgstr ""
+
+#: services.pm:28
 #, c-format
 msgid ""
 "cron is a standard UNIX program that runs user-specified programs\n"
@@ -6470,7 +6485,7 @@ msgstr ""
 "(notamment une meilleure sécurité et des options de configuration plus "
 "complètes)."
 
-#: services.pm:28
+#: services.pm:31
 #, c-format
 msgid ""
 "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
@@ -6478,12 +6493,12 @@ msgstr ""
 "Common UNIX Printing System (CUPS) est un système avancé d'impression "
 "différée"
 
-#: services.pm:29
+#: services.pm:32
 #, c-format
 msgid "Launches the graphical display manager"
 msgstr "Lance le gestionnaire d'affichage graphique"
 
-#: services.pm:30
+#: services.pm:33
 #, c-format
 msgid ""
 "FAM is a file monitoring daemon. It is used to get reports when files "
@@ -6494,7 +6509,20 @@ msgstr ""
 "fichier est modifié.\n"
 "Il est utilisé à la fois par GNOME et KDE"
 
-#: services.pm:32
+#: services.pm:35
+#, c-format
+msgid ""
+"G15Daemon allows users access to all extra keys by decoding them and \n"
+"pushing them back into the kernel via the linux UINPUT driver. This driver "
+"must be loaded \n"
+"before g15daemon can be used for keyboard access. The G15 LCD is also "
+"supported. By default, \n"
+"with no other clients active, g15daemon will display a clock. Client "
+"applications and \n"
+"scripts can access the LCD via a simple API."
+msgstr ""
+
+#: services.pm:40
 #, c-format
 msgid ""
 "GPM adds mouse support to text-based Linux applications such the\n"
@@ -6507,14 +6535,14 @@ msgstr ""
 "également d'utiliser le copier-coller et inclut le support des menus "
 "contextuels sur la console."
 
-#: services.pm:35
+#: services.pm:43
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
 msgstr ""
 "HAL est un serveur qui collecte et mémorise des informations relatives au "
 "matériel"
 
-#: services.pm:36
+#: services.pm:44
 #, c-format
 msgid ""
 "HardDrake runs a hardware probe, and optionally configures\n"
@@ -6523,7 +6551,7 @@ msgstr ""
 "HardDrake effectue une détection matérielle, et configure éventuellement le "
 "nouveau matériel."
 
-#: services.pm:38
+#: services.pm:46
 #, c-format
 msgid ""
 "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
@@ -6531,7 +6559,7 @@ msgstr ""
 "Apache est un serveur Web (HTTP). Il est utilisé pour faire fonctionner un "
 "site internet."
 
-#: services.pm:39
+#: services.pm:47
 #, c-format
 msgid ""
 "The internet superserver daemon (commonly called inetd) starts a\n"
@@ -6546,7 +6574,17 @@ msgstr ""
 "démarrage des services telnet, ftp, rsh et rlogin, etc. Le désactiver "
 "revient à désactiver tous les services qu'il gère. "
 
-#: services.pm:43
+#: services.pm:51
+#, c-format
+msgid "Automates a packet filtering firewall with ip6tables"
+msgstr ""
+
+#: services.pm:52
+#, c-format
+msgid "Automates a packet filtering firewall with iptables"
+msgstr ""
+
+#: services.pm:53
 #, c-format
 msgid ""
 "Launch packet filtering for Linux kernel 2.2 series, to set\n"
@@ -6556,7 +6594,13 @@ msgstr ""
 "afin de mettre en place un pare-feu (firewall) pour protéger votre machine "
 "des attaques réseau. "
 
-#: services.pm:45
+#: services.pm:55
+#, c-format
+msgid ""
+"Evenly distributes IRQ load across multiple CPUs for enhanced performance"
+msgstr ""
+
+#: services.pm:56
 #, c-format
 msgid ""
 "This package loads the selected keyboard map as set in\n"
@@ -6568,7 +6612,7 @@ msgstr ""
 "l'outil kbdconfig. Ce service devrait être activé sur la plupart des "
 "machines."
 
-#: services.pm:48
+#: services.pm:59
 #, c-format
 msgid ""
 "Automatic regeneration of kernel header in /boot for\n"
@@ -6577,12 +6621,17 @@ msgstr ""
 "Régénération automatique des fichiers d'en-tête pour le noyau\n"
 "dans le dossier /boot pour /usr/include/linux/{autoconf,version}.h"
 
-#: services.pm:50
+#: services.pm:61
 #, c-format
 msgid "Automatic detection and configuration of hardware at boot."
 msgstr "Détection automatique et configuration du matériel au démarrage."
 
-#: services.pm:51
+#: services.pm:62
+#, c-format
+msgid "Tweaks system behavior to extend battery life"
+msgstr ""
+
+#: services.pm:63
 #, c-format
 msgid ""
 "Linuxconf will sometimes arrange to perform various tasks\n"
@@ -6591,7 +6640,7 @@ msgstr ""
 "Linuxconf effectue certaines tâches au démarrage afin de maintenir la "
 "configuration du système."
 
-#: services.pm:53
+#: services.pm:65
 #, c-format
 msgid ""
 "lpd is the print daemon required for lpr to work properly. It is\n"
@@ -6601,7 +6650,7 @@ msgstr ""
 "commande lpr. Il permet gérer les files d'attente et les demandes "
 "d'impression."
 
-#: services.pm:55
+#: services.pm:67
 #, c-format
 msgid ""
 "Linux Virtual Server, used to build a high-performance and highly\n"
@@ -6611,7 +6660,17 @@ msgstr ""
 "utilisé pour créer un serveur virtuel haute performance et haute "
 "disponibilité, composé d'un ensemble de serveurs Linux reliés entre eux."
 
-#: services.pm:57
+#: services.pm:69
+#, c-format
+msgid "Monitors the network (Interactive Firewall and wireless"
+msgstr ""
+
+#: services.pm:70
+#, c-format
+msgid "Software RAID monitoring and management"
+msgstr ""
+
+#: services.pm:71
 #, c-format
 msgid ""
 "DBUS is a daemon which broadcasts notifications of system events and other "
@@ -6620,7 +6679,12 @@ msgstr ""
 "DBUS est un serveur qui diffuse les notifications des évènements sytème "
 "ainsi que d'autres messages"
 
-#: services.pm:58
+#: services.pm:72
+#, c-format
+msgid "Enables MSEC security policy on system startup"
+msgstr ""
+
+#: services.pm:73
 #, c-format
 msgid ""
 "named (BIND) is a Domain Name Server (DNS) that is used to resolve host "
@@ -6630,7 +6694,12 @@ msgstr ""
 "convertir les adresses internet en adresses IP. (Il est principalement mis "
 "en place par les fournisseurs d'accès)."
 
-#: services.pm:59
+#: services.pm:74
+#, c-format
+msgid "Initializes network console logging"
+msgstr ""
+
+#: services.pm:75
 #, c-format
 msgid ""
 "Mounts and unmounts all Network File System (NFS), SMB (Lan\n"
@@ -6639,7 +6708,7 @@ msgstr ""
 "Montage et démontage de tous les dossiers partagés : systèmes de fichiers\n"
 "distants (NFS), SMB (Lan Manager/Windows), et NCP (Netware)."
 
-#: services.pm:61
+#: services.pm:77
 #, c-format
 msgid ""
 "Activates/Deactivates all network interfaces configured to start\n"
@@ -6651,7 +6720,17 @@ msgstr ""
 "séparément à vos interfaces réseau grâce au « Centre de Contrôle Mandriva "
 "Linux » dans la section « Internet et réseau »."
 
-#: services.pm:63
+#: services.pm:79
+#, c-format
+msgid "Requires network to be up if enabled"
+msgstr ""
+
+#: services.pm:80
+#, c-format
+msgid "Wait for the hotplugged network to be up"
+msgstr ""
+
+#: services.pm:81
 #, c-format
 msgid ""
 "NFS is a popular protocol for file sharing across TCP/IP networks.\n"
@@ -6663,7 +6742,7 @@ msgstr ""
 "Ce service fournit un serveur NFS. Les dossiers partagés sont listés dans le "
 "fichier /etc/exports."
 
-#: services.pm:66
+#: services.pm:84
 #, c-format
 msgid ""
 "NFS is a popular protocol for file sharing across TCP/IP\n"
@@ -6673,13 +6752,13 @@ msgstr ""
 "TCP/IP.\n"
 "Ce service permet de verrouiller des fichiers sur NFS."
 
-#: services.pm:68
+#: services.pm:86
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
 msgstr ""
 "Synchronise l'heure système via le réseau en utilisant le protocole NTP"
 
-#: services.pm:69
+#: services.pm:87
 #, c-format
 msgid ""
 "Automatically switch on numlock key locker under console\n"
@@ -6688,12 +6767,17 @@ msgstr ""
 "Activation de la touche « Verr Num » du pavé numérique du clavier au "
 "démarrage."
 
-#: services.pm:71
+#: services.pm:89
 #, c-format
 msgid "Support the OKI 4w and compatible winprinters."
 msgstr "Support des imprimantes winprinter OKI 4w et compatibles."
 
-#: services.pm:72
+#: services.pm:90
+#, c-format
+msgid "Checks if a partition is close to full up"
+msgstr ""
+
+#: services.pm:91
 #, c-format
 msgid ""
 "PCMCIA support is usually to support things like ethernet and\n"
@@ -6707,7 +6791,7 @@ msgstr ""
 "activé sans danger sur des machines ne possédant pas ce type de "
 "périphériques."
 
-#: services.pm:75
+#: services.pm:94
 #, c-format
 msgid ""
 "The portmapper manages RPC connections, which are used by\n"
@@ -6719,7 +6803,12 @@ msgstr ""
 "comme NFS et NIS. Le serveur portmap doit être activé sur des machines "
 "jouant le rôle de serveur pour des protocoles utilisant le mécanisme RPC."
 
-#: services.pm:78
+#: services.pm:97
+#, c-format
+msgid "Reserves some TCP ports"
+msgstr ""
+
+#: services.pm:98
 #, c-format
 msgid ""
 "Postfix is a Mail Transport Agent, which is the program that moves mail from "
@@ -6728,7 +6817,7 @@ msgstr ""
 "Postfix est un agent de transport du courrier (Mail Transport Agent - MTA) "
 "permettant l'échange de courriers électroniques entre machines."
 
-#: services.pm:79
+#: services.pm:99
 #, c-format
 msgid ""
 "Saves and restores system entropy pool for higher quality random\n"
@@ -6738,7 +6827,7 @@ msgstr ""
 "de nombres aléatoires. (utile, par exemple, pour la création de clés de "
 "cryptographie)"
 
-#: services.pm:81
+#: services.pm:101
 #, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
@@ -6750,7 +6839,12 @@ msgstr ""
 "rawdevices, et c'est la commande « raw » qui est utilisée. Cela peut être "
 "utilisé par des programmes comme Oracle ou par des lecteurs de DVD."
 
-#: services.pm:83
+#: services.pm:103
+#, fuzzy, c-format
+msgid "Nameserver information manager"
+msgstr "Informations sur les disques durs"
+
+#: services.pm:104
 #, c-format
 msgid ""
 "The routed daemon allows for automatic IP router table updated via\n"
@@ -6762,7 +6856,7 @@ msgstr ""
 "réseaux, des protocoles de routage plus complets sont nécessaires pour les "
 "réseaux de plus grande taille. "
 
-#: services.pm:86
+#: services.pm:107
 #, c-format
 msgid ""
 "The rstat protocol allows users on a network to retrieve\n"
@@ -6771,7 +6865,17 @@ msgstr ""
 "Le protocole rstat permet aux utilisateurs sur un même réseau d'obtenir des "
 "mesures de la performance de n'importe quelle machine sur ce réseau."
 
-#: services.pm:88
+#: services.pm:109
+#, fuzzy, c-format
+msgid ""
+"Syslog is the facility by which many daemons use to log messages to various "
+"system log files.  It is a good idea to always run rsyslog."
+msgstr ""
+"Syslog est un service utilisé par beaucoup d'autres services pour "
+"enregistrer des rapports d'activité. C'est une très bonne idée de toujours "
+"l'activer."
+
+#: services.pm:110
 #, c-format
 msgid ""
 "The rusers protocol allows users on a network to identify who is\n"
@@ -6780,7 +6884,7 @@ msgstr ""
 "Le protocole rusers permet aux utilisateurs de connaître tous les "
 "utilisateurs connectés aux machines supportant ce protocole."
 
-#: services.pm:90
+#: services.pm:112
 #, c-format
 msgid ""
 "The rwho protocol lets remote users get a list of all of the users\n"
@@ -6790,14 +6894,19 @@ msgstr ""
 "utilisateurs connectés à une machine qui fait tourner le démon rwho "
 "(similaire à finger)."
 
-#: services.pm:92
+#: services.pm:114
 #, c-format
 msgid ""
 "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
 msgstr ""
 "SANE (Scanner Access Now Easy) permet l'accès aux scanners, caméras, ..."
 
-#: services.pm:93
+#: services.pm:115
+#, c-format
+msgid "Packet filtering firewall"
+msgstr ""
+
+#: services.pm:116
 #, c-format
 msgid ""
 "The SMB/CIFS protocol enables to share access to files & printers and also "
@@ -6806,12 +6915,17 @@ msgstr ""
 "Le protocole SMB/CIFS permet de partager l'accès à des fichiers et "
 "imprimantes ainsi que l'intégration dans un domaine Windows Server"
 
-#: services.pm:94
+#: services.pm:117
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "Démarrer le système de gestion du son sur votre machine."
 
-#: services.pm:95
+#: services.pm:118
+#, c-format
+msgid "layer for speech analysis"
+msgstr ""
+
+#: services.pm:119
 #, c-format
 msgid ""
 "Secure Shell is a network protocol that allows data to be exchanged over a "
@@ -6820,7 +6934,7 @@ msgstr ""
 "Secure Shell est un protocole réseau qui permet l'échange de données via un "
 "canal sécurisé entre deux ordinateurs"
 
-#: services.pm:96
+#: services.pm:120
 #, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages\n"
@@ -6830,111 +6944,121 @@ msgstr ""
 "enregistrer des rapports d'activité. C'est une très bonne idée de toujours "
 "l'activer."
 
-#: services.pm:98
+#: services.pm:122
+#, c-format
+msgid "Moves the generated persistent udev rules to /etc/udev/rules.d"
+msgstr ""
+
+#: services.pm:123
 #, c-format
 msgid "Load the drivers for your usb devices."
 msgstr "Charger les pilotes pour vos périphériques USB."
 
-#: services.pm:99
+#: services.pm:124
+#, c-format
+msgid "A lightweight network traffic monitor"
+msgstr ""
+
+#: services.pm:125
 #, c-format
 msgid "Starts the X Font Server."
 msgstr "Démarre le serveur de polices de caractères."
 
-#: services.pm:100
+#: services.pm:126
 #, c-format
 msgid "Starts other deamons on demand."
 msgstr "Démarre d'autres démons à la demande."
 
-#: services.pm:123
+#: services.pm:149
 #, c-format
 msgid "Printing"
 msgstr "Impression"
 
-#: services.pm:124
+#: services.pm:150
 #, c-format
 msgid "Internet"
 msgstr "Internet"
 
-#: services.pm:127
+#: services.pm:153
 #, c-format
 msgid "File sharing"
 msgstr "Partage de fichiers"
 
-#: services.pm:129
+#: services.pm:155
 #, c-format
 msgid "System"
 msgstr "Système"
 
-#: services.pm:134
+#: services.pm:160
 #, c-format
 msgid "Remote Administration"
 msgstr "Administration à distance"
 
-#: services.pm:142
+#: services.pm:168
 #, c-format
 msgid "Database Server"
 msgstr "Serveur de base de données"
 
-#: services.pm:153 services.pm:192
+#: services.pm:179 services.pm:218
 #, c-format
 msgid "Services"
 msgstr "Services"
 
-#: services.pm:153
+#: services.pm:179
 #, c-format
 msgid "Choose which services should be automatically started at boot time"
 msgstr ""
 "Choisissez les services à démarrer automatiquement lors du démarrage du "
 "système"
 
-#: services.pm:171
+#: services.pm:197
 #, c-format
 msgid "%d activated for %d registered"
 msgstr "%d activés sur %d enregistrés"
 
-#: services.pm:208
+#: services.pm:234
 #, c-format
 msgid "running"
 msgstr "actif"
 
-#: services.pm:208
+#: services.pm:234
 #, c-format
 msgid "stopped"
 msgstr "arrêté"
 
-#: services.pm:213
+#: services.pm:239
 #, c-format
 msgid "Services and daemons"
 msgstr "Serveurs et services"
 
-#: services.pm:219
+#: services.pm:245
 #, c-format
 msgid ""
 "No additional information\n"
 "about this service, sorry."
 msgstr "Pas d'autre information au sujet de ce service, désolé."
 
-#: services.pm:224 ugtk2.pm:924
+#: services.pm:250 ugtk2.pm:924
 #, c-format
 msgid "Info"
 msgstr "Information"
 
-#: services.pm:227
+#: services.pm:253
 #, c-format
 msgid "Start when requested"
 msgstr "Démarré si nécessaire"
 
-#: services.pm:227
+#: services.pm:253
 #, c-format
 msgid "On boot"
 msgstr "Au démarrage"
 
-#: services.pm:245
+#: services.pm:271
 #, c-format
 msgid "Start"
 msgstr "Démarrer"
 
-#: services.pm:245
+#: services.pm:271
 #, c-format
 msgid "Stop"
 msgstr "Arrêter"
