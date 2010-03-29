@@ -1,4 +1,4 @@
-# Copyright (c) 1999-2009 Mandriva
+# Copyright (c) 1999-2010 Mandriva
 #
 # Vă rugăm să nu actualizaţi fișierul, cu excepția cazului în care sînteți
 # sigur de calitatea traducerii dumneavoastră, de gramatică și de ortografie.
@@ -38,14 +38,14 @@
 # Dragos Marian BARBU <dragosb@softhome.net>, 2000.
 # Ovidiu CONSTANTIN <ovidiu.constantin@gmx.net>, 2002, 2003.
 # Harald ERSCH <harald@ersch.ro>, 2003.
-# Florin Cătălin RUSSEN <cfrussen@yahoo.co.uk>, 2008, 2009.
+# Florin Cătălin RUSSEN <cfrussen@yahoo.co.uk>, 2008, 2009, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 7.1\n"
 "Report-Msgid-Bugs-To: https://qa.mandriva.com\n"
 "POT-Creation-Date: 2010-03-28 14:46+0200\n"
-"PO-Revision-Date: 2010-02-21 14:56+0100\n"
-"Last-Translator: Cătălin Florin RUSSEN <cfrussen@yahoo.co.uk>\n"
+"PO-Revision-Date: 2010-03-29 22:26+0100\n"
+"Last-Translator: Florin Cătălin RUSSEN <cfrussen@yahoo.co.uk>\n"
 "Language-Team: Romanian <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1867,13 +1867,13 @@ msgid "Maximum size: %s MB"
 msgstr "Mărime maximă: %s Mo"
 
 #: diskdrake/interactive.pm:813 fs/partitioning_wizard.pm:212
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
 "Pentru a asigura integritatea datelor după redimensionarea\n"
-"partițiilor, o verificare de sistem de fișiere va fi lansată la viitoarea "
+"partițiilor, verificpări de sistem de fișiere vor fi lansate la următoarea "
 "demarare de Microsoft Windows®"
 
 #: diskdrake/interactive.pm:861 diskdrake/interactive.pm:1423
@@ -2671,12 +2671,12 @@ msgid "There is no existing partition to use"
 msgstr "Nu există partiții utilizabile"
 
 #: fs/partitioning_wizard.pm:128
-#, fuzzy, c-format
+#, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
 msgstr "Se calculează dimensiunea partiției Microsoft Windows®"
 
 #: fs/partitioning_wizard.pm:164
-#, fuzzy, c-format
+#, c-format
 msgid "Use the free space on a Microsoft Windows® partition"
 msgstr "Utilizează spațiul liber de pe partiția Microsoft Windows®"
 
@@ -2686,18 +2686,18 @@ msgid "Which partition do you want to resize?"
 msgstr "Care partiție doriți s-o redimensionați?"
 
 #: fs/partitioning_wizard.pm:171
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
 "computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
 "the Mandriva Linux installation."
 msgstr ""
-"Partiția Microsoft Windows® este prea fragmentată. Reporniți calculatorul în "
-"Microsoft Windows®, lansați utilitarul „defrag”', apoi reporniți instalarea "
-"Mandriva Linux."
+"Partiția voastră Microsoft Windows® este prea fragmentată. Reporniți "
+"calculatorul în Microsoft Windows®, lansați utilitarul „defrag”, apoi "
+"reporniți instalarea Mandriva Linux."
 
 #: fs/partitioning_wizard.pm:179
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "WARNING!\n"
 "\n"
@@ -2718,7 +2718,7 @@ msgstr ""
 "AVERTISMENT!\n"
 "\n"
 "\n"
-"Partiția Microsoft Windows® va fi redimensionată.\n"
+"Partiția voastră Microsoft Windows® va fi redimensionată.\n"
 "\n"
 "\n"
 "Atenție: această operație este periculoasă. Dacă nu ați făcut-o deja, "
@@ -2744,7 +2744,7 @@ msgid "Partitionning"
 msgstr "Partiționare"
 
 #: fs/partitioning_wizard.pm:194
-#, fuzzy, c-format
+#, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
 msgstr ""
 "Cît spațiu doriți să păstrați pentru Microsoft Windows® pe partiția %s?"
@@ -2755,7 +2755,7 @@ msgid "Size"
 msgstr "Mărime"
 
 #: fs/partitioning_wizard.pm:204
-#, fuzzy, c-format
+#, c-format
 msgid "Resizing Microsoft Windows® partition"
 msgstr "Se redimensionează partiția Microsoft Windows®"
 
@@ -2771,7 +2771,7 @@ msgstr ""
 "Nu se poare redimensiona nici o partiție FAT (sau spațiu liber insuficient)"
 
 #: fs/partitioning_wizard.pm:230
-#, fuzzy, c-format
+#, c-format
 msgid "Remove Microsoft Windows®"
 msgstr "Înlătură Microsoft Windows®"
 
@@ -3176,7 +3176,7 @@ msgstr "Tabletă și ecran tactil"
 #: harddrake/data.pm:497
 #, c-format
 msgid "Mouse"
-msgstr "Șoricel"
+msgstr "Maus"
 
 #: harddrake/data.pm:512
 #, c-format
@@ -3266,7 +3266,7 @@ msgstr ""
 "Aici vă puteți selecționa un pilot alternativ (OSS sau ALSA) pentru placa de "
 "sunet (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
@@ -6342,7 +6342,7 @@ msgstr "Cont utilizator sau adresă de mail:"
 #: services.pm:19
 #, c-format
 msgid "Listen and dispatch ACPI events from the kernel"
-msgstr ""
+msgstr "Urmărește și expediază evenimentele ACPI din nucleu"
 
 #: services.pm:20
 #, c-format
@@ -6383,12 +6383,12 @@ msgstr ""
 #: services.pm:26
 #, c-format
 msgid "Avahi is a ZeroConf daemon which implements an mDNS stack"
-msgstr ""
+msgstr "Avahi este un demon ZeroConf ce implementează o stivă mDNS"
 
 #: services.pm:27
 #, c-format
 msgid "Set CPU frequency settings"
-msgstr ""
+msgstr "Configurează parametrii de frecvență ai procesorului"
 
 #: services.pm:28
 #, c-format
@@ -6440,6 +6440,15 @@ msgid ""
 "applications and \n"
 "scripts can access the LCD via a simple API."
 msgstr ""
+"G15Daemon permite utilizatorilor să acceseze toate tastele suplimentare "
+"prin \n"
+"decodarea și trimiterea lor înapoi la nucleu cu ajutorul pilotului Linux "
+"UINPUT. Acest pilot trebuie \n"
+"încărcat înaite de utilizarea lui g15daemon pentru accesarea tastaturii. G15 "
+"LCD este și el suportat. \n"
+"Implicit, fără alți clienți activi, g15daemon va afișa un ceas. Aplicațiile "
+"și scripturile client \n"
+"pot accesa LCD printr-un API simplu."
 
 #: services.pm:40
 #, c-format
@@ -6449,9 +6458,9 @@ msgid ""
 "operations,\n"
 "and includes support for pop-up menus on the console."
 msgstr ""
-"GPM adaugă suport de șoricel la aplicațiile text în Linux ca Midnight "
+"GPM adaugă suport de maus la aplicațiile text în Linux ca Midnight "
 "Commander.\n"
-"De asemenea, permite operații de copiere/lipire cu șoricelul și suport\n"
+"De asemenea, permite operații de copiere/lipire cu mausul și suport\n"
 "pentru meniurile contextuale în consolă."
 
 #: services.pm:43
@@ -6495,12 +6504,12 @@ msgstr ""
 #: services.pm:51
 #, c-format
 msgid "Automates a packet filtering firewall with ip6tables"
-msgstr ""
+msgstr "Automatizați cu ip6tables un parafoc cu filtrare de pachete"
 
 #: services.pm:52
 #, c-format
 msgid "Automates a packet filtering firewall with iptables"
-msgstr ""
+msgstr "Automatizați cu iptables un parafoc cu filtrare de pachete"
 
 #: services.pm:53
 #, c-format
@@ -6516,6 +6525,8 @@ msgstr ""
 msgid ""
 "Evenly distributes IRQ load across multiple CPUs for enhanced performance"
 msgstr ""
+"Distribue în mod egal peste procesoare multiple sarcina IRQ pentru o "
+"performanță îmbunătățită"
 
 #: services.pm:56
 #, c-format
@@ -6546,7 +6557,7 @@ msgstr ""
 #: services.pm:62
 #, c-format
 msgid "Tweaks system behavior to extend battery life"
-msgstr ""
+msgstr "Ajustează comportamentul sistemului pentru a extinde viața bateriei"
 
 #: services.pm:63
 #, c-format
@@ -6578,12 +6589,12 @@ msgstr ""
 #: services.pm:69
 #, c-format
 msgid "Monitors the network (Interactive Firewall and wireless"
-msgstr ""
+msgstr "Supraveghează rețeaua (parafoc interactiv și fără-fir"
 
 #: services.pm:70
 #, c-format
 msgid "Software RAID monitoring and management"
-msgstr ""
+msgstr "Gestionare si supraveghere de RAID Software"
 
 #: services.pm:71
 #, c-format
@@ -6597,7 +6608,7 @@ msgstr ""
 #: services.pm:72
 #, c-format
 msgid "Enables MSEC security policy on system startup"
-msgstr ""
+msgstr "Activează politica de securitate MSEC la pornirea sistemului"
 
 #: services.pm:73
 #, c-format
@@ -6611,7 +6622,7 @@ msgstr ""
 #: services.pm:74
 #, c-format
 msgid "Initializes network console logging"
-msgstr ""
+msgstr "Inițializează conectarea la consolă prin rețea"
 
 #: services.pm:75
 #, c-format
@@ -6635,12 +6646,12 @@ msgstr ""
 #: services.pm:79
 #, c-format
 msgid "Requires network to be up if enabled"
-msgstr ""
+msgstr "Necesită ca rețeaua să fie disponibilă dacă este activat"
 
 #: services.pm:80
 #, c-format
 msgid "Wait for the hotplugged network to be up"
-msgstr ""
+msgstr "Așteptați ca rețeaua să fie disponibilă"
 
 #: services.pm:81
 #, c-format
@@ -6685,7 +6696,7 @@ msgstr "Suport pentru imprimante OKI 4w winprinters și compatibile."
 #: services.pm:90
 #, c-format
 msgid "Checks if a partition is close to full up"
-msgstr ""
+msgstr "Verifică dacă o partiție este aproape plină"
 
 #: services.pm:91
 #, c-format
@@ -6715,7 +6726,7 @@ msgstr ""
 #: services.pm:97
 #, c-format
 msgid "Reserves some TCP ports"
-msgstr ""
+msgstr "Rezervă cîteva porturi TCP"
 
 #: services.pm:98
 #, c-format
@@ -6746,9 +6757,9 @@ msgstr ""
 "de aplicații precum Oracle sau lectoarele de DVD"
 
 #: services.pm:103
-#, fuzzy, c-format
+#, c-format
 msgid "Nameserver information manager"
-msgstr "Informații despre discurile dure"
+msgstr "Gestionar de informații de server de nume"
 
 #: services.pm:104
 #, c-format
@@ -6772,14 +6783,14 @@ msgstr ""
 "performanțele măsurate de la orice calculator din rețea."
 
 #: services.pm:109
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages to various "
 "system log files.  It is a good idea to always run rsyslog."
 msgstr ""
-"Syslog este facilitatea pe care multe procese o folosesc pentru a scrie\n"
-"mesaje în numeroasele fișiere jurnal ale sistemului. Este o idee\n"
-"bună să porniți întotdeauna syslog."
+"Syslog este facilitatea pe care multe procese o folosesc pentru a scrie "
+"mesaje în numeroasele fișiere jurnal ale sistemului. Este o idee bună să "
+"porniți întotdeauna rsyslog."
 
 #: services.pm:110
 #, c-format
@@ -6811,7 +6822,7 @@ msgstr ""
 #: services.pm:115
 #, c-format
 msgid "Packet filtering firewall"
-msgstr ""
+msgstr "Parafoc cu filtrare de pachete"
 
 #: services.pm:116
 #, c-format
@@ -6830,7 +6841,7 @@ msgstr "Lansează sisemul de sunet pe această mașină"
 #: services.pm:118
 #, c-format
 msgid "layer for speech analysis"
-msgstr ""
+msgstr "nivel pentru analiza vorbirii"
 
 #: services.pm:119
 #, c-format
@@ -6854,7 +6865,7 @@ msgstr ""
 #: services.pm:122
 #, c-format
 msgid "Moves the generated persistent udev rules to /etc/udev/rules.d"
-msgstr ""
+msgstr "Mută regulile persistente udev generate în /etc/udev/rules.d"
 
 #: services.pm:123
 #, c-format
@@ -6864,7 +6875,7 @@ msgstr "Încarcă piloții pentru dispozitivele USB."
 #: services.pm:124
 #, c-format
 msgid "A lightweight network traffic monitor"
-msgstr ""
+msgstr "Un monitor lejer de trafic în rețea"
 
 #: services.pm:125
 #, c-format
