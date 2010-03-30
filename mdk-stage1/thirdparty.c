@@ -68,7 +68,7 @@ static enum return_type thirdparty_choose_device(char ** device, int probe_only)
 #endif
 
 	floppy_dev = floppy_device();
-	if (strstr(floppy_dev, "/dev/") == floppy_dev) {
+	if (floppy_dev && strstr(floppy_dev, "/dev/") == floppy_dev) {
 		floppy_dev = floppy_dev + 5;
 	}
 	if (floppy_dev)
@@ -132,7 +132,7 @@ static enum return_type thirdparty_choose_device(char ** device, int probe_only)
 			return results;
 	}
  
-	if (streq(*device, floppy_dev)) {
+	if (floppy_dev && streq(*device, floppy_dev)) {
 		/* a floppy is selected, don't try to list partitions */
 		return RETURN_OK;
 	}

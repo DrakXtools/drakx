@@ -357,5 +357,5 @@ char * floppy_device(void)
 	if (names && *names)
                 return asprintf_("/dev/%s", *names);
         else
-                return "/dev/fd0";
+                return NULL;
 }
