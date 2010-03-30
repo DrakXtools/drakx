@@ -1095,7 +1095,7 @@ sub computer_info() {
 	
      +{ 
 	 isLaptop => member($Chassis, 'Portable', 'Laptop', 'Notebook', 'Hand Held', 'Sub Notebook', 'Docking Station'),
-	 isServer => member($Chassis, 'Pizza Box', 'Main Server Chassis', 'Blade'),
+	 isServer => member($Chassis, 'Pizza Box', 'Main Server Chassis', 'Rack Mount Chassis', 'Blade'),
 	 if_($BIOS_Year, BIOS_Year => $BIOS_Year),
      };
 }
