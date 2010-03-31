@@ -638,10 +638,10 @@ sub Label {
 		   { label => N("Label:"), val => \$new_label } ]) or return;
 
     fs::format::check_package_is_installed_label($in->do_pkgs, $part->{fs_type}) or return;
+    $part->{prefer_device_LABEL} = to_bool($part->{device_LABEL}) && !isLVM($part);
     return if $new_label eq $part->{device_LABEL};
     $part->{device_LABEL} = $new_label;
     $part->{device_LABEL_changed} = 1;
-    $part->{prefer_device_LABEL} = to_bool($part->{device_LABEL}) && !isLVM($part);
     fs::format::clean_label($part);
     fs::format::write_label($part);
 }
