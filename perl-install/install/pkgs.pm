@@ -155,7 +155,8 @@ sub _packageRequest {
 
     #- check for medium selection, if the medium has not been
     #- selected, the package cannot be selected.
-    !packageMedium($packages, $pkg)->{ignore} or return;
+    my $medium = packageMedium($packages, $pkg);
+    $medium and !$medium->{ignore} or return;
 
     +{ $pkg->id => 1 };
 }
@@ -373,18 +374,22 @@ sub setSelectedFromCompssList {
     my ($packages, $rpmsrate_flags_chosen, $min_level, $max_size) = @_;
     $rpmsrate_flags_chosen->{TRUE} = 1; #- ensure TRUE is set
     my $nb = selectedSize($packages);
-    foreach my $p (sort { $b->rate <=> $a->rate } @{$packages->{depslist}}) {
+
+    my %pkgs = {};
+    foreach my $p (@{$packages->{depslist}}) {
 	my @flags = $p->rflags;
-	next if 
+	next if
 	  !$p->rate || $p->rate < $min_level || 
-	  any { !any { /^!(.*)/ ? !$rpmsrate_flags_chosen->{$1} : $rpmsrate_flags_chosen->{$_} } split('\|\|') } @flags;
-
-	#- determine the packages that will be selected when
-	#- selecting $p. the packages are not selected.
+	  any { !any { /^!(.*)/ ? !$rpmsrate_flags_chosen->{$1} : $rpmsrate_flags_chosen->{$_} } split('\|\|') } @flags;	
+	$pkgs{$p->rate} ||= {};
+	$pkgs{$p->rate}{$p->id} = 1 if _packageRequest($packages, $p);
+    }
+    foreach my $level (sort { $b <=> $a } keys %pkgs) {
+	#- determine the packages that will be selected
+	#- the packages are not selected.
 	my $state = $packages->{state} ||= {};
-
-	my ($l, $_error) = _resolve_requested_and_check($packages, $state, _packageRequest($packages, $p) || {});
-
+	my ($l, $_error) = _resolve_requested_and_check($packages, $state, $pkgs{$level});
+    
 	#- this enable an incremental total size.
 	my $old_nb = $nb;
 	foreach (@$l) {
@@ -392,7 +397,7 @@ sub setSelectedFromCompssList {
 	}
 	if ($max_size && $nb > $max_size) {
 	    $nb = $old_nb;
-	    $min_level = $p->rate;
+	    $min_level = $level;
 	    $packages->disable_selected($packages->{rpmdb}, $state, @$l);
 	    last;
 	}
