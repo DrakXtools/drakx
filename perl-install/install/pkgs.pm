@@ -384,11 +384,15 @@ sub setSelectedFromCompssList {
 	$pkgs{$p->rate} ||= {};
 	$pkgs{$p->rate}{$p->id} = 1 if _packageRequest($packages, $p);
     }
+    my %pkgswanted = {};
     foreach my $level (sort { $b <=> $a } keys %pkgs) {
 	#- determine the packages that will be selected
 	#- the packages are not selected.
 	my $state = $packages->{state} ||= {};
-	my ($l, $_error) = _resolve_requested_and_check($packages, $state, $pkgs{$level});
+	foreach my $p (keys %{$pkgs{$level}}) {
+	    $pkgswanted{$p} = 1;
+	}
+	my ($l, $_error) = _resolve_requested_and_check($packages, $state, \%pkgswanted);
     
 	#- this enable an incremental total size.
 	my $old_nb = $nb;
