@@ -1,4 +1,4 @@
-# translation of libDrakX-standalone.po to Italian
+# translation of it.po to Italian
 # Copyright (C) 2000, 2001 Mandriva S.A.
 #
 # Paolo Lorenzin <pasusu@tin.it>, 2000.
@@ -6,16 +6,16 @@
 # Roberto Rosselli Del Turco <rosselli@ling.unipi.it>, 2001, 2002,2003.
 # Marco De Vitis <mdv@spin.it>, 2003.
 # Giuseppe Levi <giuseppe.levi@email.it>, 2005.
-# Andrea Celli <andrea.celli@libero.it>, 2003, 2004, 2005, 2006, 2007, 2008, 2009.
+# Andrea Celli <andrea.celli@libero.it>, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010.
 # Federica De Luca <my_utopia2002@hotmail.com>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: libDrakX-standalone\n"
+"Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-28 14:49+0200\n"
-"PO-Revision-Date: 2009-10-30 15:20+0100\n"
+"PO-Revision-Date: 2010-04-03 21:04+0200\n"
 "Last-Translator: Andrea Celli <andrea.celli@libero.it>\n"
-"Language-Team: Italian <kde-i18n-it@kde.org>\n"
+"Language-Team: Italian <timl@freelists.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -286,7 +286,7 @@ msgstr "Il programma \"%s\" si è interrotto(SEGV) per questo errore:"
 #: drakbug:155
 #, c-format
 msgid "Its GDB trace is:"
-msgstr "Gdb lo ha registrato così:"
+msgstr "GDB lo ha registrato così:"
 
 #: drakbug:158
 #, c-format
@@ -868,10 +868,8 @@ msgstr " --help                - mostra questo messaggio     \n"
 
 #: drakhelp:23
 #, c-format
-msgid ""
-" --id <id_label>       - load the html help page which refers to id_label\n"
-msgstr ""
-" --id <id_label>       - carica la pagina html con informazioni su id_label\n"
+msgid " --id <id_label>       - load the html help page which refers to id_label\n"
+msgstr " --id <id_label>       - carica la pagina html con informazioni su id_label\n"
 
 #: drakhelp:24
 #, c-format
@@ -1845,10 +1843,8 @@ msgstr "Bus"
 
 #: harddrake2:33
 #, c-format
-msgid ""
-"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
-msgstr ""
-"questo è il bus fisico a cui è collegato il dispositivo (ad es. PCI, USB,...)"
+msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgstr "questo è il bus fisico a cui è collegato il dispositivo (ad es. PCI, USB,...)"
 
 #: harddrake2:35 harddrake2:150
 #, c-format
@@ -1888,8 +1884,7 @@ msgstr "Caratteristiche dell'unità"
 #: harddrake2:42
 #, c-format
 msgid "special capacities of the driver (burning ability and or DVD support)"
-msgstr ""
-"caratteristiche speciali dell'unità (masterizzazione o supporto per DVD)"
+msgstr "caratteristiche speciali dell'unità (masterizzazione o supporto per DVD)"
 
 #: harddrake2:43
 #, c-format
@@ -2175,34 +2170,34 @@ msgid "CPU flags reported by the kernel"
 msgstr "I flag della CPU rilevati dal kernel"
 
 #: harddrake2:78 harddrake2:141
-#, fuzzy, c-format
+#, c-format
 msgid "Cores"
-msgstr "Chiudi"
+msgstr "Core"
 
 #: harddrake2:78
 #, c-format
 msgid "CPU cores"
-msgstr ""
+msgstr "Core della CPU"
 
 #: harddrake2:79
-#, fuzzy, c-format
+#, c-format
 msgid "Core ID"
-msgstr "ID della marca"
+msgstr "ID del core"
 
 #: harddrake2:80
 #, c-format
 msgid "Physical ID"
-msgstr ""
+msgstr "ID fisico"
 
 #: harddrake2:81
 #, c-format
 msgid "ACPI ID"
-msgstr ""
+msgstr "ID ACPI"
 
 #: harddrake2:82
-#, fuzzy, c-format
+#, c-format
 msgid "Siblings"
-msgstr "Impostazioni"
+msgstr "Fratelli (sibling)"
 
 #: harddrake2:83
 #, c-format
@@ -2299,12 +2294,12 @@ msgstr "di solito è il numero di serie del disco"
 #: harddrake2:100
 #, c-format
 msgid "Target id number"
-msgstr ""
+msgstr "Numero identificativo target"
 
 #: harddrake2:100
 #, c-format
 msgid "the SCSI target identifier"
-msgstr ""
+msgstr "identificativo SCSI del target"
 
 #: harddrake2:101
 #, c-format
@@ -2312,15 +2307,15 @@ msgid "Logical unit number"
 msgstr "Numero dell'unità logica"
 
 #: harddrake2:101
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "the SCSI Logical Unit Number (LUN). SCSI devices connected to a host are "
 "uniquely identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
-"il numero target SCSI (LUN). I dispositivi SCSI collegati ad un PC sono "
+"il numero dell'unità logica SCSI (LUN-). I dispositivi SCSI collegati ad un PC sono "
 "identificati\n"
-"univocamente da un canale, da un target id e da un numero dell'unità logica."
+"univocamente dal numero del canale, dal target id e dal numero dell'unità logica."
 
 #. -PO: here, "size" is the size of the ram chip (eg: 128Mo, 256Mo, ...)
 #: harddrake2:110
@@ -2380,8 +2375,7 @@ msgstr "File del dispositivo"
 
 #: harddrake2:119
 #, c-format
-msgid ""
-"the device file used to communicate with the kernel driver for the mouse"
+msgid "the device file used to communicate with the kernel driver for the mouse"
 msgstr ""
 "il file di dispositivo utilizzato per comunicare con il driver del kernel "
 "per il mouse"
@@ -2577,8 +2571,7 @@ msgstr "Lancia il tool di configurazione"
 
 #: harddrake2:303
 #, c-format
-msgid ""
-"Click on a device in the left tree in order to display its information here."
+msgid "Click on a device in the left tree in order to display its information here."
 msgstr ""
 "Clicca su un dispositivo dell'albero a sinistra per vedere le relative "
 "informazioni. "
@@ -2915,8 +2908,7 @@ msgstr "e fornisci il nome (o l'IP) del server SMTP che vuoi utilizzare"
 #: logdrake:445
 #, c-format
 msgid "\"%s\" neither is a valid email nor is an existing local user!"
-msgstr ""
-"\"%s\" non è né un indirizzo email valido, né un utente locale esistente!"
+msgstr "\"%s\" non è né un indirizzo email valido, né un utente locale esistente!"
 
 #: logdrake:450
 #, c-format
@@ -2974,8 +2966,7 @@ msgstr "Interruzione di Scannerdrake."
 
 #: scannerdrake:60
 #, c-format
-msgid ""
-"Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr ""
 "Non posso installare i programmi necessari per configurare uno scanner con "
 "Scannerdrake."
@@ -3028,8 +3019,7 @@ msgstr "Configurazione scanner"
 #: scannerdrake:131
 #, c-format
 msgid "Select a scanner model (Detected model: %s, Port: %s)"
-msgstr ""
-"Seleziona il modello dello scanner (Modello individuato: %s sulla porta %s)"
+msgstr "Seleziona il modello dello scanner (Modello individuato: %s sulla porta %s)"
 
 #: scannerdrake:133
 #, c-format
@@ -3453,8 +3443,7 @@ msgstr "Nome/indirizzo IP dell'host:"
 #: scannerdrake:719 scannerdrake:869
 #, c-format
 msgid "Choose the host on which the local scanners should be made available:"
-msgstr ""
-"Scegli l'host su cui gli scanner locali dovranno essere resi disponibili:"
+msgstr "Scegli l'host su cui gli scanner locali dovranno essere resi disponibili:"
 
 #: scannerdrake:730 scannerdrake:880
 #, c-format
@@ -3502,20 +3491,17 @@ msgstr ""
 #: service_harddrake:138
 #, c-format
 msgid "The graphic card '%s' is no more supported by the '%s' driver"
-msgstr ""
-"La scheda grafica %s non è supportata da questa versione del driver %s."
+msgstr "La scheda grafica %s non è supportata da questa versione del driver %s."
 
 #: service_harddrake:167
 #, c-format
 msgid "The proprietary kernel driver was not found for '%s' X.org driver"
-msgstr ""
-"Impossibile trovare il modulo kernel proprietario per il driver X.org \"%s\"."
+msgstr "Impossibile trovare il modulo kernel proprietario per il driver X.org \"%s\"."
 
 #: service_harddrake:206
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
-msgstr ""
-"Alcuni dispositivi della categoria hardware \"%s\" sono stati rimossi:\n"
+msgstr "Alcuni dispositivi della categoria hardware \"%s\" sono stati rimossi:\n"
 
 #: service_harddrake:135
 #, c-format
@@ -3575,60 +3561,3 @@ msgstr "Configurazione di lingua e paese"
 msgid "Regional Settings"
 msgstr "Impostazioni locali"
 
-#~ msgid "Coma bug"
-#~ msgstr "Coma bug"
-
-#~ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-#~ msgstr "se la CPU presenta il \"coma bug\" dei Cyrix 6x86"
-
-#~ msgid "Fdiv bug"
-#~ msgstr "Bug FDIV"
-
-#~ msgid ""
-#~ "Early Intel Pentium chips manufactured have a bug in their floating point "
-#~ "processor which did not achieve the required precision when performing a "
-#~ "Floating point DIVision (FDIV)"
-#~ msgstr ""
-#~ "I primi chip Pentium Intel prodotti hanno un bug nel loro processore in "
-#~ "virgola mobile che impedisce di raggiungere la precisione richiesta "
-#~ "quando si effettua una divisione (Floating point DIVision o FDIV)"
-
-#~ msgid "Is FPU present"
-#~ msgstr "C'è una FPU"
-
-#~ msgid "yes means the processor has an arithmetic coprocessor"
-#~ msgstr "\"si\" significa che il processore ha un coprocessore aritmetico"
-
-#~ msgid "Whether the FPU has an irq vector"
-#~ msgstr "Se la FPU ha un vettore irq"
-
-#~ msgid ""
-#~ "yes means the arithmetic coprocessor has an exception vector attached"
-#~ msgstr ""
-#~ "\"si\" significa che il coprocessore aritmetico possiede un vettore-"
-#~ "eccezioni"
-
-#~ msgid "F00f bug"
-#~ msgstr "Bug F00F"
-
-#~ msgid ""
-#~ "early pentiums were buggy and freezed when decoding the F00F bytecode"
-#~ msgstr ""
-#~ "i primi Pentium erano difettosi e si bloccavano quando decodificavano il "
-#~ "bytecode F00F"
-
-#~ msgid "Halt bug"
-#~ msgstr "Bug di halt"
-
-#~ msgid ""
-#~ "Some of the early i486DX-100 chips cannot reliably return to operating "
-#~ "mode after the \"halt\" instruction is used"
-#~ msgstr ""
-#~ "Alcuni dei primi processori i486DX-100 non possono ritornare a funzionare "
-#~ "in modo affidabile dopo che è stata utilizzata l'istruzione \"halt\""
-
-#~ msgid "Bugs"
-#~ msgstr "Problemi"
-
-#~ msgid "FPU"
-#~ msgstr "FPU"
