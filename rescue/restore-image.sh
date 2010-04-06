@@ -93,7 +93,8 @@ do you want to continue?"
 
 function detect_root()
 {
-	inst_source_dev=$(sed '\|'$restore_media'|!d;s/[0-9] .*$//;s/^.*\///' /proc/mounts)
+	inst_source_dev=$(awk "\$2 == \"$restore_media\" { print \$1 }" /proc/mounts | sed -e 's/[0-9]$//')
+	inst_source_dev=${inst_source_dev#/dev/}
 	devices=$(grep "^ .*[^0-9]$" < /proc/partitions | grep -v ${inst_source_dev} | awk '$3 > '$MIN_DISKSIZE' { print $4,$3 }')
 
 	if [ -z "${devices}" ]; then
