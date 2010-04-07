@@ -134,14 +134,26 @@ foreach my $device (@devices) {
     # auto reconfigure x11 only on first time default driver have changed:
     my $new_key = $card_data->{Driver} . $card_data->{Driver2};
     setVarsInSh("$hw_sysconfdir/xorg", { XORG_DRV => $new_key });
-    next if $previous_xorg_config{XORG_DRV} eq $new_key;
+    if ($previous_xorg_config{XORG_DRV} ne $new_key) {
+	if (!member($current_driver, $card_data->{Driver}, $card_data->{Driver2}, 'fbdev', 'vesa')) {
+	    my $reason = N("The graphic card '%s' is no more supported by the '%s' driver",
+			   $device->{description}, $current_driver);
+	    switch_x_driver($current_driver, $card_data->{Driver}, $reason);
+	    schedule_warn_about_switch($reason) if any { $current_driver =~ $_->{xorg_driver_regexp} } @cards;
+	    # Update $current_driver with the new one
+	    $current_driver = $card_data->{Driver};
+	}
+    }
 
-    if (!member($current_driver, $card_data->{Driver}, $card_data->{Driver2}, 'fbdev', 'vesa')) {
-        my $reason = N("The graphic card '%s' is no more supported by the '%s' driver",
-                       $device->{description}, $current_driver);
-        switch_x_driver($current_driver, $card_data->{Driver}, $reason);
-        schedule_warn_about_switch($reason) if any { $current_driver =~ $_->{xorg_driver_regexp} } @cards;
-        next;
+    # nv->nouveau or non_kms_nouveau->kms_nouveau can't have "Disable dri"!
+    if ($current_driver eq "nouveau") {
+	my $raw_x = Xconfig::xfree->read;
+	if ($raw_x) {
+	    if (member("dri", $raw_x->get_disabled_modules)) {
+		$raw_x->remove_disable_module("dri");
+		$raw_x->write;
+	    }
+	}
     }
 }
 
