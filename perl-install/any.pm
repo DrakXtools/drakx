@@ -438,8 +438,7 @@ sub setupBootloader__general {
 		  $ok && $ok2;
 	      } },
             { label => N("Password (again)"), val => \$b->{password2}, hidden => 1 },
-            { text => N("Restrict command line options"), val => \$b->{restricted}, type => "bool",
-              text => N("restrict"), advanced => 1,
+            { text => N("Restrict command line options"), val => \$b->{restricted}, type => "bool", advanced => 1,
 	      validate => sub { 
                   my $ok = !$b->{restricted} || $b->{password}
                     or $in->ask_warn('', N("Option ``Restrict command line options'' is of no use without a password"));
