@@ -1448,6 +1448,7 @@ sub write_lilo {
 	    push @entry_conf, "append=" . $quotes->($append) if $append;
 	    push @entry_conf, "vga=$entry->{vga}" if $entry->{vga};
 	    push @entry_conf, grep { $entry->{$_} } qw(read-write read-only optional);
+	    push @entry_conf, "mandatory" if $entry->{lock};
 	} else {
 	    delete $entry->{unsafe} if $entry->{table}; #- we can't have both
 	    push @entry_conf, map { "$_=$entry->{$_}" } grep { $entry->{$_} } qw(table boot-as);

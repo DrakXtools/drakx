@@ -533,6 +533,7 @@ sub setupBootloader__entries {
   if_($e->{xen}, 
 { label => N("Xen append"), val => \$e->{xen_append} }
   ),
+  if_($b->{password}, { label => N("Requires password to boot"), val => \$e->{lock}, type => "bool"}),
   if_(arch() !~ /ppc|ia64/,
 { label => N("Video mode"), val => \$vga, list => [ '', Xconfig::resolution_and_depth::bios_vga_modes() ], format => \&Xconfig::resolution_and_depth::to_string, advanced => 1 },
 ),
