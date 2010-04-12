@@ -1389,9 +1389,17 @@ sub write_lilo {
 
     my @conf;
 
-    #- normalize: RESTRICTED is only valid if PASSWORD is set
-    delete $bootloader->{restricted} if !$bootloader->{password};
+    #- normalize: RESTRICTED and MANDATORY are only valid if PASSWORD is set
+    if ($bootloader->{password}) {
+	# lilo defaults to mandatory, use restricted by default to have 
+	# the same behaviour as with grub
+	$bootloader->{restricted} = 1;
+    } else {
+        delete $bootloader->{mandatory} if !$bootloader->{password};
+        delete $bootloader->{restricted} if !$bootloader->{password};
+    }
     foreach my $entry (@{$bootloader->{entries}}) {
+	delete $entry->{mandatory} if !$entry->{password} && !$bootloader->{password};
 	delete $entry->{restricted} if !$entry->{password} && !$bootloader->{password};
     }
     if (get_append_with_key($bootloader, 'console') =~ /ttyS(.*)/) {
@@ -1406,7 +1414,7 @@ sub write_lilo {
     push @conf, "# WARNING: do not forget to run lilo after modifying this file\n";
     push @conf, "default=" . make_label_lilo_compatible($bootloader->{default}) if $bootloader->{default};
     push @conf, map { $_ . '=' . $quotes_if_needed->($bootloader->{$_}) } grep { $bootloader->{$_} } qw(boot root map install serial vga keytable raid-extra-boot menu-scheme vmdefault);
-    push @conf, grep { $bootloader->{$_} } qw(linear geometric compact prompt nowarn restricted static-bios-codes large-memory);
+    push @conf, grep { $bootloader->{$_} } qw(linear geometric compact prompt mandatory nowarn restricted static-bios-codes large-memory);
     push @conf, "append=" . $quotes->($bootloader->{append}) if $bootloader->{append};
     push @conf, "password=" . $bootloader->{password} if $bootloader->{password}; #- also done by msec
     push @conf, "timeout=" . round(10 * $bootloader->{timeout}) if $bootloader->{timeout};
@@ -1460,7 +1468,7 @@ sub write_lilo {
 	    }
 	}
 	push @entry_conf, "password=$entry->{password}" if $entry->{password};
-	push @entry_conf, grep { $entry->{$_} } qw(restricted vmwarn vmdisable);
+	push @entry_conf, grep { $entry->{$_} } qw(mandatory vmwarn vmdisable);
 
 	push @conf, map { "\t$_" } @entry_conf;
     }
