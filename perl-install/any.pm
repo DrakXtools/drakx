@@ -394,6 +394,7 @@ sub setupBootloader__general {
     my $prev_enable_apic = my $enable_apic = !bootloader::get_append_simple($b, 'noapic');
     my $prev_enable_lapic = my $enable_lapic = !bootloader::get_append_simple($b, 'nolapic');
     my $prev_enable_smp = my $enable_smp = !bootloader::get_append_simple($b, 'nosmp');
+    my $prev_enable_restricted = my $enable_restricted = !bootloader::get_append_simple($b, 'restricted');
     my $prev_clean_tmp = my $clean_tmp = any { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special} ||= []};
     my $prev_boot = $b->{boot};
     my $prev_method = $b->{method};
@@ -438,7 +439,7 @@ sub setupBootloader__general {
 		  $ok && $ok2;
 	      } },
             { label => N("Password (again)"), val => \$b->{password2}, hidden => 1 },
-            { text => N("Restrict command line options"), val => \$b->{restricted}, type => "bool", advanced => 1,
+            { text => N("Restrict command line options"), val => \$enable_restricted, type => "bool", advanced => 1,
 	      validate => sub { 
                   my $ok = !$b->{restricted} || $b->{password}
                     or $in->ask_warn('', N("Option ``Restrict command line options'' is of no use without a password"));
@@ -483,6 +484,9 @@ sub setupBootloader__general {
 
     if ($prev_enable_smp != $enable_smp) {
 	($enable_smp ? \&bootloader::remove_append_simple : \&bootloader::set_append_simple)->($b, 'nosmp');
+    }
+    if ($prev_enable_restricted != $enable_restricted) {
+	($enable_restricted ? \&bootloader::remove_append_simple : \&bootloader::set_append_simple)->($b, 'restricted');
     }
 
     if ($prev_enable_apic != $enable_apic) {
