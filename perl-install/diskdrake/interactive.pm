@@ -748,6 +748,12 @@ sub Resize {
 	} elsif ($part->{fs_type} eq 'xfs' && isLVM($hd) && $::isStandalone && $part->{isMounted}) {
 	    $min = $part->{size}; #- ensure the user can only increase
 	    $nice_resize{xfs} = 1;
+	} elsif ($part->{fs_type} eq 'btrfs') {
+	    write_partitions($in, $hd) or return;
+	    if (defined(my $free = fs::df($part))) {
+	        $nice_resize{btrfs} = 1;
+		$min = max($min, $part->{size} - $free);
+	    }
 	}
 	#- make sure that even after normalizing the size to cylinder boundaries, the minimun will be saved,
 	#- this save at least a cylinder (less than 8Mb).
@@ -818,6 +824,21 @@ filesystem checks will be run on your next boot into Microsoft Windows®"));
     } elsif ($nice_resize{xfs}) {
 	#- happens only with mounted LVM, see above
 	run_program::run_or_die("xfs_growfs", $part->{mntpoint});
+    } elsif ($nice_resize{btrfs}) {
+        my $dir = "/tmp/tmp_resize_btrfs.$$";
+	if ($part->{isMounted}) {
+	    $dir = ($::prefix || '') . $part->{mntpoint};
+	} else {
+	    mkdir_p($dir);
+	    fs::mount::mount(devices::make($part->{device}), $dir, $part->{fs_type});
+	}
+	if (!run_program::run("btrfsctl", "-r", $part->{size}*512, $dir)) {
+	    $nice_resize{btrfs} = undef;
+	    if (!$part->{isMounted}) {
+		fs::mount::umount($dir);
+		unlink($dir);
+	    }
+        }
     }
 
     if (%nice_resize) {
@@ -830,6 +851,7 @@ filesystem checks will be run on your next boot into Microsoft Windows®"));
 
     $adjust->(0) if $size < $oldsize;
 }
+
 sub Format {
     my ($in, $hd, $part, $all_hds) = @_;
     format_($in, $hd, $part, $all_hds);
