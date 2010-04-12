@@ -25,6 +25,7 @@ my %cmds = (
     ntfs     => [ 'ntfsprogs', 'mkntfs', '--fast' ],
    'ntfs-3g' => [ 'ntfsprogs', 'mkntfs', '--fast' ],
     btrfs    => [ 'btrfs-progs', 'mkfs.btrfs' ],
+    nilfs2   => [ 'nilfs-utils', 'mkfs.nilfs2' ],
 );
 
 my %LABELs = ( #- option, length, handled_by_mount
@@ -42,6 +43,7 @@ my %LABELs = ( #- option, length, handled_by_mount
     ntfs     => [ '-L', 128, 0 ],
    'ntfs-3g' => [ '-L', 128, 0 ],
     btrfs    => [ '-L', 256, 1 ],
+    nilfs2   => [ '-L', 16, 1],
 );
 
 my %edit_LABEL = ( # package, command, option
@@ -61,6 +63,7 @@ my %edit_LABEL = ( # package, command, option
     ntfs     => [ 'ntfsprogs', 'ntfslabel' ],
    'ntfs-3g' => [ 'ntfsprogs', 'ntfslabel' ],
 #    btrfs
+#    nilfs2
 );
 
 sub package_needed_for_partition_type {
