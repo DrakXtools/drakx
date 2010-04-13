@@ -146,7 +146,7 @@ function detect_win32()
 	fi
 
 	# it might be needed, for safety
-	device_type=$(vol_id --type ${device})
+	device_type=$(blkid -o value -s TYPE ${device})
 	modprobe ${device_type}
 
 	# df for that partition
