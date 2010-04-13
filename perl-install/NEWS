@@ -7,6 +7,11 @@
   o use device label even if it was not changed  (#47456)
   o allow resizing btrfs
   o allow creating btrfs and nilfs2
+- drakboot
+  o remove "restricted" option from general advanced options (wasn't doing
+    anything with grub, and wasn't really useful with lilo)
+  o add per-boot-entry "lock" checkbox in advanced options to be able to 
+    protect booting these entries with a password
 
 Version 13.15 - 17 March 2010
 
