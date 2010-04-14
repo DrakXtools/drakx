@@ -25,7 +25,9 @@
 
   mkfs.reiserfs resize_reiserfs reiserfstune
   mkfs.xfs xfs_admin
- 
+
+  mkfs.btrfs btrfsctl
+
   <if ARCH="i.86|x86_64|ia64">
     mkdosfs
     dosfslabel
