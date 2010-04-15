@@ -86,7 +86,15 @@ sub max_size($) {
 sub used_size($) {
     my ($fs) = @_;
 
-    my $used_cluster_count = max(last_used($fs), min_cluster_count($fs));
+    my $last_used;
+    my $used_cluster_count;
+   
+    eval { $last_used = last_used($fs) };
+    if ($@) {
+	# Empty FAT
+	$last_used = 0;
+    }
+    $used_cluster_count = max($last_used, min_cluster_count($fs));
 
     $used_cluster_count * divide($fs->{cluster_size}, $SECTORSIZE) +
 	divide($fs->{cluster_offset}, $SECTORSIZE);
