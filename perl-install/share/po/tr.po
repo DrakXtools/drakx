@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: DrakX-tr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-28 14:46+0200\n"
-"PO-Revision-Date: 2010-03-31 18:50+0200\n"
+"PO-Revision-Date: 2010-04-15 08:39+0200\n"
 "Last-Translator: Atilla ÖNTAŞ <atilla_ontas@mandriva.org>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -6352,6 +6352,15 @@ msgid ""
 "applications and \n"
 "scripts can access the LCD via a simple API."
 msgstr ""
+"G15Daemon, kullanıcıların tüm fazladan anahtarlara onları çözerek erişmesini "
+"sağlar ve\n"
+"linux UINPUT sürücüsü kullanarak çekirdeğe geri gönderir. Bu sürücü, "
+"g15daemon klavye\n"
+"erişimi için kullanılmadan önce yüklenmelidir. G15 LCD de desteklenmektedir. "
+"Öntanımlı olarak\n"
+"diğer istemciler etkin değilken g15daemon bir saat gösterir. İstemci "
+"uygulamaları ve\n"
+"betikler LCD' ye basit bir api ile ulaşırlar."
 
 #: services.pm:40
 #, c-format
@@ -6409,12 +6418,12 @@ msgstr ""
 #: services.pm:51
 #, c-format
 msgid "Automates a packet filtering firewall with ip6tables"
-msgstr ""
+msgstr "Ip6tables ile bir paket süzmeli güvenlik duvarını otomatikleştirir."
 
 #: services.pm:52
 #, c-format
 msgid "Automates a packet filtering firewall with iptables"
-msgstr ""
+msgstr "Iptables ile bir paket süzmeli güvenlik duvarını otomatikleştirir."
 
 #: services.pm:53
 #, c-format
@@ -6430,7 +6439,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Evenly distributes IRQ load across multiple CPUs for enhanced performance"
-msgstr ""
+msgstr "IRQ yükünü birden çok işlemciye dağıtarak verimliliği arttırır."
 
 #: services.pm:56
 #, c-format
@@ -6460,7 +6469,7 @@ msgstr "Açılışta donanım algılaması ve yapılandırması."
 #: services.pm:62
 #, c-format
 msgid "Tweaks system behavior to extend battery life"
-msgstr ""
+msgstr "Sistem davranışlarını iyileştirerek batarya ömrünü uzatır."
 
 #: services.pm:63
 #, c-format
@@ -6493,12 +6502,12 @@ msgstr ""
 #: services.pm:69
 #, c-format
 msgid "Monitors the network (Interactive Firewall and wireless"
-msgstr ""
+msgstr "Ağı görüntüler (Etkileşimli güvenlik duvarı ve kablosuz)"
 
 #: services.pm:70
 #, c-format
 msgid "Software RAID monitoring and management"
-msgstr ""
+msgstr "Yazılımsal RAID izleme ve yönetimi"
 
 #: services.pm:71
 #, c-format
@@ -6511,7 +6520,7 @@ msgstr ""
 #: services.pm:72
 #, c-format
 msgid "Enables MSEC security policy on system startup"
-msgstr ""
+msgstr "Sistem başlangıcında MSEC güvenlik kurallarını etkinleştirir."
 
 #: services.pm:73
 #, c-format
@@ -6525,7 +6534,7 @@ msgstr ""
 #: services.pm:74
 #, c-format
 msgid "Initializes network console logging"
-msgstr ""
+msgstr "Ağ konsolu günlüklemeyi başlatır"
 
 #: services.pm:75
 #, c-format
@@ -6548,12 +6557,12 @@ msgstr ""
 #: services.pm:79
 #, c-format
 msgid "Requires network to be up if enabled"
-msgstr ""
+msgstr "Etkinleştirilmişse ağın çalışır durumda olmasını gerektirir."
 
 #: services.pm:80
 #, c-format
 msgid "Wait for the hotplugged network to be up"
-msgstr ""
+msgstr "Yeni bağlanmış ağın çalışmasını bekle"
 
 #: services.pm:81
 #, c-format
@@ -6597,7 +6606,7 @@ msgstr "OKI 4w ve windows uyumlu yazıcıları destekler."
 #: services.pm:90
 #, c-format
 msgid "Checks if a partition is close to full up"
-msgstr ""
+msgstr "Bir disk bölümünün dolmaya yakın olup olmadığını denetler"
 
 #: services.pm:91
 #, c-format
@@ -6628,7 +6637,7 @@ msgstr ""
 #: services.pm:97
 #, c-format
 msgid "Reserves some TCP ports"
-msgstr ""
+msgstr "Bazı TCP portlarını rezerve eder"
 
 #: services.pm:98
 #, c-format
@@ -6658,9 +6667,9 @@ msgstr ""
 "blok aygıtlarını (örn: sabit disk bölümleri) temel aygıtlarla eşleştir"
 
 #: services.pm:103
-#, fuzzy, c-format
+#, c-format
 msgid "Nameserver information manager"
-msgstr "Sabit Disk bilgisi"
+msgstr "SunucuAdı bilgi yöneticisi"
 
 #: services.pm:104
 #, c-format
@@ -6683,14 +6692,14 @@ msgstr ""
 "makine hakkında performans ölçüleri alabilmelerini sağlar."
 
 #: services.pm:109
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages to various "
 "system log files.  It is a good idea to always run rsyslog."
 msgstr ""
-"Syslog, birçok artsürecin mesajlarını çeşitli sistem kayıt dosyalarında\n"
-"tutmalarına izin verir. Syslog'un her zaman çalışır durumda olması\n"
-"akıllıca bir davranıştır."
+"Syslog, birçok artsürecin mesajlarını çeşitli sistem kayıt dosyalarında "
+"tutmalarına izin verir. Syslog'un her zaman çalışır durumda olması akıllıca "
+"bir davranıştır."
 
 #: services.pm:110
 #, c-format
@@ -6721,7 +6730,7 @@ msgstr ""
 #: services.pm:115
 #, c-format
 msgid "Packet filtering firewall"
-msgstr ""
+msgstr "Paket süzmeli güvenlik duvarı"
 
 #: services.pm:116
 #, c-format
@@ -6740,7 +6749,7 @@ msgstr "Ses sistemini Makinede uygula"
 #: services.pm:118
 #, c-format
 msgid "layer for speech analysis"
-msgstr ""
+msgstr "Konuşma çözümlemesi için katman"
 
 #: services.pm:119
 #, c-format
@@ -6764,7 +6773,7 @@ msgstr ""
 #: services.pm:122
 #, c-format
 msgid "Moves the generated persistent udev rules to /etc/udev/rules.d"
-msgstr ""
+msgstr "Üretilen sürekli udev kurallarını /etc/udev/rules.d dizinine kaydırır"
 
 #: services.pm:123
 #, c-format
@@ -6774,7 +6783,7 @@ msgstr "USB aygıtlarınız için dürücülerini yükleyiniz."
 #: services.pm:124
 #, c-format
 msgid "A lightweight network traffic monitor"
-msgstr ""
+msgstr "Hafif bir ağ trafiği izleme aracı"
 
 #: services.pm:125
 #, c-format
