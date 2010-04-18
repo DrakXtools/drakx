@@ -16,7 +16,7 @@
 # Frank Koester <frank@dueppel13.de>, 2005.Frank Koester <frank@dueppel13.de>, 2006.
 # Nicolas Bauer <rastafarii@mandrivauer.de>, 2006, 2007.
 # Nicolas Bauer <rastafarii@mandrivauser.de>, 2007.
-# Oliver Burger <oliver@mandrivauser.de>, 2008.
+# Oliver Burger <oliver@mandrivauser.de>, 2008, 2010.
 # Wolfgang Bornath <wbo@mandriva.com>, 2009.
 # Oliver Burger <oliver.burger@wizard-fire.de>, 2009.
 msgid ""
@@ -24,13 +24,13 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-28 14:46+0200\n"
-"PO-Revision-Date: 2009-04-02 11:24+0200\n"
-"Last-Translator: Oliver Burger <oliver.burger@wizard-fire.de>\n"
+"PO-Revision-Date: 2010-04-18 16:06+0200\n"
+"Last-Translator: Oliver Burger <oliver@mandrivauser.de>\n"
 "Language-Team: German <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 0.3\n"
+"X-Generator: Lokalize 1.0\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: any.pm:252 any.pm:953 diskdrake/interactive.pm:597
@@ -428,13 +428,13 @@ msgid "Please give a user name"
 msgstr "Bitte geben Sie einen Benutzernamen an"
 
 #: any.pm:869
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
 "cased letters, numbers, `-' and `_'"
 msgstr ""
-"Der Benutzername sollte nur aus Kleinbuchstaben, Ziffern, \n"
-"„-“ und „_“ bestehen"
+"Der Benutzername muss mit einem Kleinbuchstaben beginnen und sollte "
+"nur aus Kleinbuchstaben, Ziffern, „-“ und „_“ bestehen."
 
 #: any.pm:870
 #, c-format
@@ -474,7 +474,7 @@ msgstr "Benutzerverwaltung"
 #: any.pm:889
 #, c-format
 msgid "Enable guest account"
-msgstr ""
+msgstr "Den Gastzugang aktivieren"
 
 #: any.pm:890 authentication.pm:237
 #, c-format
@@ -942,9 +942,9 @@ msgid "Bind Password "
 msgstr "BIND Passwort"
 
 #: authentication.pm:125
-#, c-format
+#, fuzzy, c-format
 msgid "Advanced path for group "
-msgstr ""
+msgstr "Erweiterter Pfad zur Gruppe "
 
 #: authentication.pm:127
 #, c-format
@@ -1053,9 +1053,9 @@ msgid "Active Directory Realm "
 msgstr "Active Directory Realm "
 
 #: authentication.pm:221
-#, fuzzy, c-format
+#, c-format
 msgid "DNS Domain"
-msgstr "NIS-Domäne"
+msgstr "DNS-Domäne"
 
 #: authentication.pm:222
 #, fuzzy, c-format
@@ -1334,9 +1334,9 @@ msgid "Warning"
 msgstr "Warnung"
 
 #: diskdrake/dav.pm:106
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to delete this mountpoint?"
-msgstr "Möchten Sie diese Schaltfläche betätigen?"
+msgstr "Sind Sie sicher, dass Sie diesen Mountpunkt entfernen wollen?"
 
 #: diskdrake/dav.pm:124
 #, c-format
@@ -1432,9 +1432,9 @@ msgid "Unknown"
 msgstr "Unbekannt"
 
 #: diskdrake/hd_gtk.pm:383
-#, fuzzy, c-format
+#, c-format
 msgid "Ext4"
-msgstr "Verlassen"
+msgstr "Ext4"
 
 #: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
 #, c-format
@@ -1679,9 +1679,9 @@ msgid "Create"
 msgstr "Erzeugen"
 
 #: diskdrake/interactive.pm:453
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to mount partition"
-msgstr "Dateien auf die neue Partition verschieben"
+msgstr "Kann die Partition nicht mounten"
 
 #: diskdrake/interactive.pm:485 diskdrake/interactive.pm:487
 #, c-format
@@ -1899,19 +1899,19 @@ msgid "Choose an existing LVM to add to"
 msgstr "Wählen Sie einen vorhandenen LVM"
 
 #: diskdrake/interactive.pm:911 diskdrake/interactive.pm:920
-#, fuzzy, c-format
+#, c-format
 msgid "LVM name"
-msgstr "LVM-Name?"
+msgstr "LVM-Name"
 
 #: diskdrake/interactive.pm:912
-#, c-format
+#, fuzzy, c-format
 msgid "Enter a name for the new LVM volume group"
-msgstr ""
+msgstr "Geben Sie einen Namen für die neue LVM Laufwerksgruppe ein"
 
 #: diskdrake/interactive.pm:917
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" already exists"
-msgstr "Datei existiert bereits. Soll ich sie verwenden?"
+msgstr "\"%s\" existiert bereits."
 
 #: diskdrake/interactive.pm:948
 #, c-format
@@ -2161,14 +2161,14 @@ msgid "Encrypted"
 msgstr "Verschlüsselt"
 
 #: diskdrake/interactive.pm:1334
-#, c-format
+#, fuzzy, c-format
 msgid " (mapped on %s)"
-msgstr ""
+msgstr "(auf %s abgebildet)"
 
 #: diskdrake/interactive.pm:1335
-#, c-format
+#, fuzzy, c-format
 msgid " (to map on %s)"
-msgstr ""
+msgstr "(auf %s abbilden)"
 
 #: diskdrake/interactive.pm:1336
 #, c-format
@@ -2818,9 +2818,9 @@ msgstr ""
 "sobald Sie fertig sind."
 
 #: fs/partitioning_wizard.pm:401
-#, fuzzy, c-format
+#, c-format
 msgid "Ext2/3/4"
-msgstr "Ext3"
+msgstr "Ext2/3/4"
 
 #: fs/partitioning_wizard.pm:431 fs/partitioning_wizard.pm:571
 #, c-format
@@ -2835,7 +2835,7 @@ msgstr "Der DrakX-Partitionierungsassistent fand folgende Lösung:"
 #: fs/partitioning_wizard.pm:511
 #, c-format
 msgid "Here is the content of your disk drive "
-msgstr ""
+msgstr "Hier sehen Sie den Inhalt ihres Festplattenlaufwerkes "
 
 #: fs/partitioning_wizard.pm:588
 #, c-format
@@ -3242,7 +3242,7 @@ msgstr "Dem Benutzer das Umschalten für Audio-Anwendungen erlauben"
 #: harddrake/sound.pm:379
 #, fuzzy, c-format
 msgid "Use Glitch-Free mode"
-msgstr "Verwende den Offline-Modus"
+msgstr ""
 
 #: harddrake/sound.pm:385
 #, c-format
@@ -3282,7 +3282,7 @@ msgstr ""
 "Hier können Sie einen alternativen Treiber (entweder OSS oder ALSA) für Ihre "
 "Soundkarte (%s) auswählen"
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
@@ -5459,17 +5459,17 @@ msgstr ""
 #: mygtk2.pm:1541 mygtk2.pm:1542
 #, c-format
 msgid "Password is trivial to guess"
-msgstr ""
+msgstr "Das Passwort ist zu einfach zu erraten"
 
 #: mygtk2.pm:1543
 #, c-format
 msgid "Password should resist to basic attacks"
-msgstr ""
+msgstr "Das Passwort sollte grundlegenden Angriffen widerstehen können"
 
 #: mygtk2.pm:1544 mygtk2.pm:1545
 #, c-format
 msgid "Password seems secure"
-msgstr ""
+msgstr "Das Passwort scheint sicher zu sein"
 
 #: partition_table.pm:411
 #, c-format
@@ -6265,7 +6265,7 @@ msgstr "Standard"
 #: security/level.pm:12
 #, fuzzy, c-format
 msgid "Secure"
-msgstr "Sicherheit"
+msgstr "Sicher"
 
 #: security/level.pm:40
 #, c-format
@@ -6375,14 +6375,15 @@ msgstr ""
 "es zu, werden sog. Batch-Anwendungen gestartet."
 
 #: services.pm:26
-#, c-format
+#, fuzzy, c-format
 msgid "Avahi is a ZeroConf daemon which implements an mDNS stack"
 msgstr ""
+"Avahi ist ein ZeroConf-Systemdienst, der einen mDNS-Stack implementiert"
 
 #: services.pm:27
 #, c-format
 msgid "Set CPU frequency settings"
-msgstr ""
+msgstr "Richte die CPU-Frequenz-Einstellungen ein"
 
 #: services.pm:28
 #, c-format
@@ -6487,14 +6488,14 @@ msgstr ""
 "verwalteten Dienste mehr zugreifen."
 
 #: services.pm:51
-#, c-format
+#, fuzzy, c-format
 msgid "Automates a packet filtering firewall with ip6tables"
-msgstr ""
+msgstr "Automatisiert eine paketfilternde Firewall, die ip6tables nutzt"
 
 #: services.pm:52
-#, c-format
+#, fuzzy, c-format
 msgid "Automates a packet filtering firewall with iptables"
-msgstr ""
+msgstr "Automatisiert eine paketfilternde Firewall, die iptables nutzt"
 
 #: services.pm:53
 #, c-format
@@ -6510,6 +6511,8 @@ msgstr ""
 msgid ""
 "Evenly distributes IRQ load across multiple CPUs for enhanced performance"
 msgstr ""
+"Verteilt die IRQ-Auslastung gleichmäßig auf die CPUs, um die Leistung zu "
+"steigern"
 
 #: services.pm:56
 #, c-format
@@ -6544,6 +6547,7 @@ msgstr ""
 #, c-format
 msgid "Tweaks system behavior to extend battery life"
 msgstr ""
+"Optimiert das Verhalten des Systems, um die Batterie-Lebensdauer zu erhöhen"
 
 #: services.pm:63
 #, c-format
@@ -6576,14 +6580,14 @@ msgstr ""
 "hochperformanten Hochverfügbarkeitsserver aufzusetzen."
 
 #: services.pm:69
-#, c-format
+#, fuzzy, c-format
 msgid "Monitors the network (Interactive Firewall and wireless"
-msgstr ""
+msgstr "Überwacht das Netzwerk (Interaktive Firewall und Wireless"
 
 #: services.pm:70
 #, c-format
 msgid "Software RAID monitoring and management"
-msgstr ""
+msgstr "Software-RAID-Überwachung und -Verwaltung"
 
 #: services.pm:71
 #, c-format
@@ -6597,7 +6601,7 @@ msgstr ""
 #: services.pm:72
 #, c-format
 msgid "Enables MSEC security policy on system startup"
-msgstr ""
+msgstr "Aktiviert die MSEC-Sicherheitsregeln beim Systemstart"
 
 #: services.pm:73
 #, c-format
@@ -6612,9 +6616,9 @@ msgstr ""
 "Netz gehen, benötigen Sie diesen Dienst nicht."
 
 #: services.pm:74
-#, c-format
+#, fuzzy, c-format
 msgid "Initializes network console logging"
-msgstr ""
+msgstr "Initialisiert das Netzwerkkonsolen-Log"
 
 #: services.pm:75
 #, c-format
@@ -6639,12 +6643,12 @@ msgstr ""
 #: services.pm:79
 #, c-format
 msgid "Requires network to be up if enabled"
-msgstr ""
+msgstr "Das Netzwerk muss laufen, wenn dies aktiviert ist"
 
 #: services.pm:80
-#, c-format
+#, fuzzy, c-format
 msgid "Wait for the hotplugged network to be up"
-msgstr ""
+msgstr "Warte auf das Hotplug-Netzwerk"
 
 #: services.pm:81
 #, c-format
@@ -6694,7 +6698,7 @@ msgstr "Unterstützung für den OKI 4w und kompatible WinDrucker."
 #: services.pm:90
 #, c-format
 msgid "Checks if a partition is close to full up"
-msgstr ""
+msgstr "Überprüft, ob eine Partition beinahe voll ist"
 
 #: services.pm:91
 #, c-format
@@ -6723,9 +6727,9 @@ msgstr ""
 "aktiviert sein."
 
 #: services.pm:97
-#, c-format
+#, fuzzy, c-format
 msgid "Reserves some TCP ports"
-msgstr ""
+msgstr "Reserviert einige TCP-Ports"
 
 #: services.pm:98
 #, c-format
@@ -6760,7 +6764,7 @@ msgstr ""
 #: services.pm:103
 #, fuzzy, c-format
 msgid "Nameserver information manager"
-msgstr "Festplatten-Informationen"
+msgstr "Nameserver-Informationsverwaltung"
 
 #: services.pm:104
 #, c-format
@@ -6784,14 +6788,13 @@ msgstr ""
 "Netzwerks Preformance-Daten dieses Rechners zu erhalten."
 
 #: services.pm:109
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages to various "
 "system log files.  It is a good idea to always run rsyslog."
 msgstr ""
-"Mittels Syslog versuchen zahlreiche Dienste Verlaufsprotokolle \n"
-"in vorgesehene Dateien zu sichern. Es ist sinnvoll Syslog immer \n"
-"aktiviert zu haben."
+"Mittels Syslog sichern zahlreiche Dienste Verlaufsprotokolle in vorgesehene "
+"Dateien. Es ist sinnvoll Syslog immer aktiviert zu haben."
 
 #: services.pm:110
 #, c-format
@@ -6822,9 +6825,9 @@ msgstr ""
 "ähnliches anzusprechen"
 
 #: services.pm:115
-#, c-format
+#, fuzzy, c-format
 msgid "Packet filtering firewall"
-msgstr ""
+msgstr "Paketfilternde Firewall"
 
 #: services.pm:116
 #, c-format
@@ -6877,7 +6880,7 @@ msgstr "Lädt die Treiber für Ihre USB-Geräte."
 #: services.pm:124
 #, c-format
 msgid "A lightweight network traffic monitor"
-msgstr ""
+msgstr "Eine resourcenschonende Netzwerk-Verkehrsüberwachung"
 
 #: services.pm:125
 #, c-format
