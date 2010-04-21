@@ -481,6 +481,8 @@ sub Create {
     my $type_name = fs::type::part2type_name($part);
     my $mb_size = to_Mb($part->{size});
     my $has_startsector = ($::expert || arch() !~ /i.86/) && !isLVM($hd);
+    my $use_dmcrypt;
+    my $requested_type;
 
     $in->ask_from(N("Create a new partition"), '',
         [
@@ -502,14 +504,30 @@ sub Create {
 	   if_($::expert && isLVM($hd),
 	 { label => N("Logical volume name "), val => \$part->{lv_name}, list => [ qw(root swap usr home var), '' ], sort => 0, not_edit => 0 },
            ),
+	 { label => N("Encrypt partition"), type => 'bool', val => \$use_dmcrypt },
+	 { label => N("Encryption key "), val => \$part->{dmcrypt_key}, disabled => sub { !$use_dmcrypt }, hidden => 1, weakness_check => 1 },
+	 { label => N("Type again encryption key "), val => \$part->{dmcrypt_key2}, disabled => sub { !$use_dmcrypt }, hidden => 1 },
         ], complete => sub {
 	    $part->{size} = from_Mb($mb_size, min_partition_size($hd), $max - $part->{start}); #- need this to be able to get back the approximation of using MB
-	    put_in_hash($part, fs::type::type_name2subpart($type_name));
 	    $do_suggest_mount_point = 0 if !$part->{mntpoint};
 	    $part->{mntpoint} = '' if isNonMountable($part);
 	    $part->{mntpoint} = 'swap' if isSwap($part);
 	    fs::mount_options::set_default($part, ignore_is_removable => 1);
 
+	    # if user asked to encrypt the partition, use dm-crypt and create requested fs inside
+	    if ($use_dmcrypt) {
+		my $err;
+		$err = N("Encryption keys differ") unless ($part->{dmcrypt_key} eq $part->{dmcrypt_key2});
+		$err = N("Missing encryption key") unless ($part->{dmcrypt_key});
+		if ($err) {
+		    $in->ask_warn(N("Error"), $err);
+		    return 1;
+	        }
+		$requested_type = $type_name;
+		$type_name = 'Encrypted';
+	    }
+
+	    put_in_hash($part, fs::type::type_name2subpart($type_name));
 	    check($in, $hd, $part, $all_hds) or return 1;
 	    $migrate_files = need_migration($in, $part->{mntpoint}) or return 1;
 
@@ -533,9 +551,28 @@ First remove a primary partition and create an extended partition."));
 	},
     ) or return;
 
+    write_partitions($in, $hd) or return;
+    if ($use_dmcrypt) {
+	# Initialize it and format it
+	dmcrypt_format($in, $hd, $part, $all_hds);
+	my $p = find { $part->{dm_name} eq $_->{dmcrypt_name} } @{$all_hds->{dmcrypts}};
+	my $p2 = fs::type::type_name2subpart($requested_type);
+        $p->{fs_type} = $p2->{fs_type};
+	if ($::isStandalone) {
+	    fs::format::check_package_is_installed_format($in->do_pkgs, $p->{fs_type}) or log::l("Missing package");
+	}
+	if ($::expert && !member($p->{fs_type}, 'reiserfs', 'reiser4', 'xfs', 'hfs', 'ntfs', 'ntfs-3g')) {
+	    $p->{toFormatCheck} = $in->ask_yesorno(N("Confirmation"), N("Check bad blocks?"));
+	}
+	$p->{isFormatted} = 0; #- force format;
+	my ($_w, $wait_message) = $in->wait_message_with_progress_bar;
+	fs::format::part($all_hds, $p, $wait_message);
+    }
+
     warn_if_renumbered($in, $hd);
 
     if ($migrate_files eq 'migrate') {
+        # FIXME check encrypt case
 	format_($in, $hd, $part, $all_hds) or return;
 	migrate_files($in, $hd, $part);
 	fs::mount::part($part);
@@ -914,8 +951,6 @@ sub Add2LVM {
     my ($in, $hd, $part, $all_hds) = @_;
     my $lvms = $all_hds->{lvms};
     my @lvm_names = map { $_->{VG_name} } @$lvms;
-    use Data::Dumper;
-    print Dumper(@lvm_names);
     write_partitions($in, $_) or return foreach isRAID($part) ? @{$all_hds->{hds}} : $hd;
 
     my $lvm = $in->ask_from_listf_(N("Add to LVM"), N("Choose an existing LVM to add to"),
@@ -1058,27 +1093,6 @@ sub Options {
 		      if (($options->{usrquota} || $options->{grpquota}) && !$::isInstall) {
 			  $in->do_pkgs->ensure_binary_is_installed('quota', 'quotacheck');
 		      }
-		      if ($options->{encrypted}) {
-			  # modify $part->{options} for the check
-			  local $part->{options};
-			  fs::mount_options::pack($part, $options, $unknown);
-			  if (!check($in, $hd, $part, $all_hds)) {
-			      $options->{encrypted} = 0;
-			  } elsif (!$part->{encrypt_key} && !isSwap($part)) {
-			      if (my ($encrypt_key, $encrypt_algo) = choose_encrypt_key($in, $options, '')) {
-				  $options->{'encryption='} = $encrypt_algo;
-				  $part->{encrypt_key} = $encrypt_key;
-			      } else {
-				  $options->{encrypted} = 0;
-			      }
-			  }
-			  #- don't be sure of anything
-			  set_isFormatted($part, 0);
-			  $part->{notFormatted} = 0;
-		      } else {
-			  delete $options->{'encryption='};
-			  delete $part->{encrypt_key};
-		      }
 		  }) or return;
 
     fs::mount_options::pack($part, $options, $unknown);
@@ -1212,10 +1226,7 @@ sub write_partitions {
 sub ensure_we_have_encrypt_key_if_needed {
     my ($in, $part) = @_;
 
-    if ($part->{options} =~ /encrypted/ && !$part->{encrypt_key}) {
-	my ($options, $_unknown) = fs::mount_options::unpack($part);
-	$part->{encrypt_key} = choose_encrypt_key($in, $options, 'skip_encrypt_algo') or return;
-    } elsif (fs::type::isRawLUKS($part)) {
+    if (fs::type::isRawLUKS($part)) {
 	$part->{dmcrypt_key} ||= choose_encrypt_key($in, {}, 'skip_encrypt_algo') or return;
     }
     1;

@@ -42,7 +42,6 @@ sub unpack {
     }
 
     $non_defaults->{relatime} = 1 if isTrueLocalFS($part) || $part->{fs_type} eq 'ntfs-3g';
-    $non_defaults->{encrypted} = 1;
 
     my $defaults = { reverse %$non_defaults };
     my %options = map { $_ => '' } keys %$non_defaults;
@@ -110,8 +109,6 @@ sub pack {
 # update me on each util-linux new release:
 sub help() {
     (
-
-	'encrypted' => N("Use an encrypted file system"),
 
 	'flush' => N("Flush write cache on file close"),
 

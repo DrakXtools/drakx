@@ -185,7 +185,7 @@ if_(arch() !~ /ppc/,
 sub type_names { 
     my ($expert, $o_hd) = @_;
     my @l = @{$type_names{important}};
-    push @l, @{$type_names{non_fs_type}};
+    push @l, grep { $_ ne 'Encrypted' } @{$type_names{non_fs_type}};
     push @l, sort @{$type_names{other}} if $expert;
     if ($o_hd && !$o_hd->use_pt_type) {
 	warn "$_ => $type_name2fs_type{$_}\n" foreach @l;
