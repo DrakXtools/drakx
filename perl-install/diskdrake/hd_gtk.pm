@@ -238,6 +238,9 @@ sub per_entry_info_box {
     my $info;
     if ($entry) {
 	$info = diskdrake::interactive::format_part_info(kind2hd($kind), $entry);
+	if($entry->{dmcrypt_name}) {
+	    $info .= "\n" . N("Encrypted");
+        }
     } elsif ($kind->{type} =~ /hd|lvm/) {
 	$info = diskdrake::interactive::format_hd_info($kind->{val});
     }
@@ -254,10 +257,9 @@ sub current_kind_changed {
     my $v = $kind->{val};
     my @parts = 
       $kind->{type} eq 'raid' ? grep { $_ } @$v :
-      $kind->{type} eq 'dmcrypt' ? @$v :
       $kind->{type} eq 'loopback' ? @$v : fs::get::hds_fstab_and_holes($v);
     my $totalsectors = 
-      $kind->{type} =~ /raid|dmcrypt|loopback/ ? sum(map { $_->{size} } @parts) : $v->{totalsectors};
+      $kind->{type} =~ /raid|loopback/ ? sum(map { $_->{size} } @parts) : $v->{totalsectors};
     create_buttons4partitions($kind, $totalsectors, @parts);
 }
 
@@ -284,7 +286,6 @@ sub create_automatic_notebooks {
     $may_add->(hd2kind($_)) foreach @{$all_hds->{hds}};
     $may_add->(lvm2kind($_)) foreach @{$all_hds->{lvms}};
     $may_add->(raid2kind()) if @{$all_hds->{raids}};
-    $may_add->(dmcrypt2kind()) if @{$all_hds->{dmcrypts}};
     $may_add->(loopback2kind()) if @{$all_hds->{loopbacks}};
 
     @notebook = grep_index {
@@ -343,6 +344,10 @@ sub create_buttons4partitions {
 		last;
 	    }
 	});
+	if(fs::type::isRawLUKS($entry)) {
+	    my $p = find { $entry->{dm_name} eq $_->{dmcrypt_name} } @{$all_hds->{dmcrypts}};
+	    $entry = $p;
+	}
 	my @colorized_fs_types = qw(ext3 ext4 xfs swap vfat ntfs ntfs-3g);
 	$w->set_name("PART_" . (isEmpty($entry) ? 'empty' : 
 				$entry->{fs_type} && member($entry->{fs_type}, @colorized_fs_types) ? $entry->{fs_type} :
@@ -435,13 +440,6 @@ sub lvm2kind {
 ################################################################################
 sub raid2kind() {
     { type => 'raid', name => 'raid', val => $all_hds->{raids} };
-}
-
-################################################################################
-# loopbacks: helpers
-################################################################################
-sub dmcrypt2kind() {
-    { type => 'dmcrypt', name => 'dmcrypt', val => $all_hds->{dmcrypts} };
 }
 
 ################################################################################
