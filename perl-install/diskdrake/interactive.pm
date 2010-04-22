@@ -551,8 +551,8 @@ First remove a primary partition and create an extended partition."));
 	},
     ) or return;
 
-    write_partitions($in, $hd) or return;
     if ($use_dmcrypt) {
+	write_partitions($in, $hd) or return;
 	# Initialize it and format it
 	dmcrypt_format($in, $hd, $part, $all_hds);
 	my $p = find { $part->{dm_name} eq $_->{dmcrypt_name} } @{$all_hds->{dmcrypts}};
