@@ -238,9 +238,6 @@ sub per_entry_info_box {
     my $info;
     if ($entry) {
 	$info = diskdrake::interactive::format_part_info(kind2hd($kind), $entry);
-	if($entry->{dmcrypt_name}) {
-	    $info .= "\n" . N("Encrypted");
-        }
     } elsif ($kind->{type} =~ /hd|lvm/) {
 	$info = diskdrake::interactive::format_hd_info($kind->{val});
     }

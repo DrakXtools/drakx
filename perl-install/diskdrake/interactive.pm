@@ -1372,10 +1372,13 @@ sub format_part_info {
     $info .= N("Not formatted\n") if !$part->{isFormatted} && $part->{notFormatted};
     $info .= N("Mounted\n") if $part->{isMounted};
     $info .= N("RAID %s\n", $part->{raid}) if isPartOfRAID($part);
-    if (fs::type::isRawLUKS($part)) {
-	$info .= N("Encrypted") . ($part->{dm_active} && $part->{dm_name} ? N(" (mapped on %s)", $part->{dm_name}) :
-				     $part->{dm_name} ? N(" (to map on %s)", $part->{dm_name}) :
-				       N(" (inactive)")) . "\n";
+    if (fs::type::isRawLUKS($part) || $part->{dmcrypt_name}) {
+	$info .= N("Encrypted");
+	if (fs::type::isRawLUKS($part)) {
+	    $info .= ($part->{dm_active} && $part->{dm_name} ? N(" (mapped on %s)", $part->{dm_name}) :
+		$part->{dm_name} ? N(" (to map on %s)", $part->{dm_name}) :
+		N(" (inactive)")) . "\n";
+	}
     }
     if (isPartOfLVM($part)) {
 	$info .= sprintf "LVM %s\n", $part->{lvm};
