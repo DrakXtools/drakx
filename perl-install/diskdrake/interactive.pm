@@ -609,7 +609,11 @@ sub Type {
     my $warned;
     my $warn = sub {
 	$warned = 1;
-	ask_alldatawillbelost($in, $part, N_("After changing type of partition %s, all data on this partition will be lost"));
+	if (maybeFormatted($part)) {
+	    ask_alldatawillbelost($in, $part, N_("After changing type of partition %s, all data on this partition will be lost"));
+	} else {
+	    1;
+	}
     };
 
     #- for ext2/ext3, warn after choosing as ext2->ext3 and ext*->ext4 can be achieved without loosing any data :)
