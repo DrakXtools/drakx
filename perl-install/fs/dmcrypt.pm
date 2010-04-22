@@ -108,8 +108,11 @@ sub get_existing {
 sub _get_existing_one {
     my ($fstab, $active_dmcrypt) = @_;
 
+    my $p = fs::wild_device::to_subpart("/dev/mapper/$active_dmcrypt->{name}");
+
     my $part = { device => "mapper/$active_dmcrypt->{name}", size => $active_dmcrypt->{size}, 
-		 options => 'noatime', dmcrypt_name => $active_dmcrypt->{name} };
+		 options => 'noatime', dmcrypt_name => $active_dmcrypt->{name},
+		 major => $p->{major}, minor => $p->{minor} };
 
     if (my $raw_part = find { fs::get::is_same_hd($active_dmcrypt, $_) } @$fstab) {
 	$part->{rootDevice} = $raw_part->{device};
