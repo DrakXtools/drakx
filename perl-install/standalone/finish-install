@@ -100,6 +100,13 @@ sub ask_country() {
 sub ask_network() {
     require network::tools;
     return if network::tools::has_network_connection();
+
+    #- test again connection after waiting for network-up service
+    my $w = $in->wait_message(N("Please wait"), N("Testing your connection..."));
+    services::start('network-up');
+    undef $w;
+    return if network::tools::has_network_connection();
+
     require network::netconnect;
     my $modules_conf = modules::any_conf->read;
     network::netconnect::real_main($net, $in, $modules_conf);
