@@ -558,6 +558,7 @@ First remove a primary partition and create an extended partition."));
 	my $p = find { $part->{dm_name} eq $_->{dmcrypt_name} } @{$all_hds->{dmcrypts}};
 	my $p2 = fs::type::type_name2subpart($requested_type);
         $p->{fs_type} = $p2->{fs_type};
+	$p->{type_name} = $requested_type;
 	if ($::isStandalone) {
 	    fs::format::check_package_is_installed_format($in->do_pkgs, $p->{fs_type}) or log::l("Missing package");
 	}
@@ -566,7 +567,7 @@ First remove a primary partition and create an extended partition."));
 	}
 	$p->{isFormatted} = 0; #- force format;
 	my ($_w, $wait_message) = $in->wait_message_with_progress_bar;
-	fs::format::part($all_hds, $p, $wait_message);
+	fs::format::part($all_hds, $p, $wait_message) unless isRawLVM($p);
     }
 
     warn_if_renumbered($in, $hd);
@@ -1373,7 +1374,7 @@ sub format_part_info {
     $info .= N("Mounted\n") if $part->{isMounted};
     $info .= N("RAID %s\n", $part->{raid}) if isPartOfRAID($part);
     if (fs::type::isRawLUKS($part) || $part->{dmcrypt_name}) {
-	$info .= N("Encrypted");
+	$info .= N("Encrypted")."\n";
 	if (fs::type::isRawLUKS($part)) {
 	    $info .= ($part->{dm_active} && $part->{dm_name} ? N(" (mapped on %s)", $part->{dm_name}) :
 		$part->{dm_name} ? N(" (to map on %s)", $part->{dm_name}) :
