@@ -404,6 +404,12 @@ sub installCallback {
 
 sub installPackages {
     my ($o, $o_interactive) = @_;
+
+    my $p = fs::get::root_($o->{fstab});
+    if ($p->{dmcrypt_name}) {
+	install::pkgs::selectPackage($o->{packages}, install::pkgs::packageByName($o->{packages}, 'plymouth'));
+    }
+
     my $packages = $o->{packages};
 
     install::pkgs::remove_marked_ask_remove($packages, \&installCallback);

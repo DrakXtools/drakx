@@ -31,7 +31,7 @@ sub to_Mb {
 
 sub partition_with_diskdrake {
     my ($in, $all_hds, $fstab, $manual_fstab, $partitions, $partitioning_flags, $skip_mtab) = @_;
-    my $ok, $root;
+    my $ok;
 
     do {
 	$ok = 1;
@@ -55,11 +55,6 @@ For this, create a partition (or click on an existing one).
 Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 	}
 
-	# If / is encrypted, we need plymouth to ask for the password
-	if ($root && $root->{dmcrypt_name}) {
-	    $in->do_pkgs->ensure_binary_is_installed('plymouth', undef, 1);
-	}
-	
 	if (!any { isSwap($_) } @fstab) {
 	    $ok &&= $in->ask_okcancel('', N("You do not have a swap partition.\n\nContinue anyway?"));
 	}
