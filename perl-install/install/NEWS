@@ -1,4 +1,15 @@
-- allow resizing empty FAT (#58770)
+- diskdrake:
+  o allow resizing empty FAT (#58770)
+  o offer encryption in a more visible way when creating a partition
+  o remove cryptoloop from diskdrake interface and transparently use dm-crypt
+  o support having dm-crypt partition with non default FS
+  o do not display dm-crypt partitions in separate tab, display included
+    partition directly in-place
+  o do not warn about data loss when changing type of unformatted partition
+  o display lock icon on encrypted partitions
+  o fix loading of dmcrypt info now that /dev/mapper/* are symlinks
+  o fix creating encrypted LVM
+- install plymouth if / is encrypted, to ask for password
 
 Version 13.19 - 14 April 2010
 
