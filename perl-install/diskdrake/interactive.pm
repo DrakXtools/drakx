@@ -506,7 +506,7 @@ sub Create {
            ),
 	 { label => N("Encrypt partition"), type => 'bool', val => \$use_dmcrypt },
 	 { label => N("Encryption key "), val => \$part->{dmcrypt_key}, disabled => sub { !$use_dmcrypt }, hidden => 1, weakness_check => 1 },
-	 { label => N("Type again encryption key "), val => \$part->{dmcrypt_key2}, disabled => sub { !$use_dmcrypt }, hidden => 1 },
+	 { label => N("Encryption key (again)"), val => \$part->{dmcrypt_key2}, disabled => sub { !$use_dmcrypt }, hidden => 1 },
         ], complete => sub {
 	    $part->{size} = from_Mb($mb_size, min_partition_size($hd), $max - $part->{start}); #- need this to be able to get back the approximation of using MB
 	    $do_suggest_mount_point = 0 if !$part->{mntpoint};
@@ -517,7 +517,7 @@ sub Create {
 	    # if user asked to encrypt the partition, use dm-crypt and create requested fs inside
 	    if ($use_dmcrypt) {
 		my $err;
-		$err = N("Encryption keys differ") unless ($part->{dmcrypt_key} eq $part->{dmcrypt_key2});
+		$err = N("The encryption keys do not match") unless ($part->{dmcrypt_key} eq $part->{dmcrypt_key2});
 		$err = N("Missing encryption key") unless ($part->{dmcrypt_key});
 		if ($err) {
 		    $in->ask_warn(N("Error"), $err);
