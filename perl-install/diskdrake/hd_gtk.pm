@@ -315,7 +315,7 @@ sub create_buttons4partitions {
     };
 
     foreach my $entry (@parts) {
-	if(fs::type::isRawLUKS($entry)) {
+	if(fs::type::isRawLUKS($entry) && $entry->{dm_active}) {
 	    my $p = find { $entry->{dm_name} eq $_->{dmcrypt_name} } @{$all_hds->{dmcrypts}};
 	    $entry = $p if $p;
 	}
