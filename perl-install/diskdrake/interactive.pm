@@ -559,6 +559,8 @@ First remove a primary partition and create an extended partition."));
 	my $p2 = fs::type::type_name2subpart($requested_type);
         $p->{fs_type} = $p2->{fs_type};
 	$p->{type_name} = $requested_type;
+	$p->{mntpoint} = $part->{mntpoint};
+	$part->{mntpoint} = '';
 	if ($::isStandalone) {
 	    fs::format::check_package_is_installed_format($in->do_pkgs, $p->{fs_type}) or log::l("Missing package");
 	}
