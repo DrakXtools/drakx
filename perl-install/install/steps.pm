@@ -406,7 +406,7 @@ sub installPackages {
     my ($o, $o_interactive) = @_;
 
     my $p = fs::get::root_($o->{fstab});
-    if ($p->{dmcrypt_name}) {
+    if (isLUKS($p)) {
 	install::pkgs::selectPackage($o->{packages}, install::pkgs::packageByName($o->{packages}, 'plymouth'));
     }
 
