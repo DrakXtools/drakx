@@ -601,7 +601,7 @@ sub Delete {
 	if (arch() =~ /ppc/) {
 	    undef $partition_table::mac::bootstrap_part if isAppleBootstrap($part) && ($part->{device} = $partition_table::mac::bootstrap_part);
 	}
-	if ($part->{dmcrypt_name}) {
+	if (fs::type::isLUKS($part)) {
 	    my $p = find { $_->{dm_name} eq $part->{dmcrypt_name} } partition_table::get_normal_parts($hd);
 	    RemoveFromDm($in, $hd, $p, $all_hds);
 	    $part = $p;
@@ -1375,7 +1375,7 @@ sub format_part_info {
     $info .= N("Not formatted\n") if !$part->{isFormatted} && $part->{notFormatted};
     $info .= N("Mounted\n") if $part->{isMounted};
     $info .= N("RAID %s\n", $part->{raid}) if isPartOfRAID($part);
-    if (fs::type::isRawLUKS($part) || $part->{dmcrypt_name}) {
+    if (fs::type::isRawLUKS($part) || fs::type::isLUKS($part)) {
 	$info .= N("Encrypted")."\n";
 	if (fs::type::isRawLUKS($part)) {
 	    $info .= ($part->{dm_active} && $part->{dm_name} ? N(" (mapped on %s)", $part->{dm_name}) :

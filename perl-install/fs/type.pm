@@ -9,7 +9,7 @@ use devices;
 
 our @ISA = qw(Exporter);
 our @EXPORT = qw(
-   isEmpty isExtended isTrueLocalFS isTrueFS isDos isSwap isOtherAvailableFS isRawLVM isRawRAID isRAID isLVM isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial isApple isAppleBootstrap isWholedisk isFat_or_NTFS isRecovery
+   isEmpty isExtended isTrueLocalFS isTrueFS isDos isSwap isOtherAvailableFS isRawLVM isRawRAID isRAID isLVM isLUKS isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial isApple isAppleBootstrap isWholedisk isFat_or_NTFS isRecovery
    maybeFormatted set_isFormatted defaultFS
 );
 
@@ -356,6 +356,7 @@ sub isPartOfLoopback { defined $_[0]{loopback} }
 sub isRAID { $_[0]{device} =~ /^md/ && $_[0]{level} }
 sub isUBD { $_[0]{device} =~ /^ubd/ } #- should be always true during an $::uml_install
 sub isLVM { $_[0]{VG_name} || $_[0]{lv_name} }
+sub isLUKS { defined $_[0]{dmcrypt_name} }
 sub isLoopback { defined $_[0]{loopback_file} }
 sub isMounted { $_[0]{isMounted} }
 sub isBusy { isMounted($_[0]) || isPartOfRAID($_[0]) || isPartOfLVM($_[0]) || $_[0]{dm_active} || isPartOfLoopback($_[0]) }
