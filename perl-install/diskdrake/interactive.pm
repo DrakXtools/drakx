@@ -568,6 +568,8 @@ First remove a primary partition and create an extended partition."));
 	    $p->{toFormatCheck} = $in->ask_yesorno(N("Confirmation"), N("Check bad blocks?"));
 	}
 	$p->{isFormatted} = 0; #- force format;
+	# Wait for the newly created device to appear before formatting it
+	run_program::run('udevadm', 'settle') unless $::isInstall;
 	my ($_w, $wait_message) = $in->wait_message_with_progress_bar;
 	fs::format::part($all_hds, $p, $wait_message) unless isRawLVM($p);
     }
