@@ -756,7 +756,13 @@ sub Mount_point_raw_hd {
 sub Resize {
     my ($in, $hd, $part) = @_;
     my (%nice_resize);
-    my ($min, $max) = (min_partition_size($hd), max_partition_resize($hd, $part));
+    my $low_part = $part;
+
+    if (isLUKS($part)) {
+	$low_part = find { $_->{dm_name} eq $part->{dmcrypt_name} } partition_table::get_normal_parts($hd);
+    }
+
+    my ($min, $max) = (min_partition_size($hd), max_partition_resize($hd, $low_part));
 
     if (maybeFormatted($part)) {
 	# here we may have a non-formatted or a formatted partition
@@ -832,8 +838,8 @@ sub Resize {
     $part->{size} == $size and return;
 
     my $oldsize = $part->{size};
-    $part->{size} = $size;
-    $hd->adjustEnd($part);
+    $low_part->{size} = $part->{size} = $size;
+    $hd->adjustEnd($low_part);
 
     undef $@;
     my $_b = before_leaving { $@ and $part->{size} = $oldsize };
@@ -842,10 +848,10 @@ sub Resize {
 	my ($write_partitions) = @_;
 
 	if (isLVM($hd)) {
-	    lvm::lv_resize($part, $oldsize);
+	    lvm::lv_resize($low_part, $oldsize);
 	} else {
-	    partition_table::will_tell_kernel($hd, resize => $part);
-	    partition_table::adjust_local_extended($hd, $part);
+	    partition_table::will_tell_kernel($hd, resize => $low_part);
+	    partition_table::adjust_local_extended($hd, $low_part);
 	    partition_table::adjust_main_extended($hd);
 	    write_partitions($in, $hd) or return if $write_partitions && %nice_resize;
 	}
