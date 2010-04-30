@@ -433,13 +433,13 @@ No bootloader is able to handle this without a /boot partition.
 Please be sure to add a /boot partition") if $md_part->{level} ne '1'; # lilo handles / on RAID1
     }
 
-    if ($mntpoint eq "/" && isLUKS($part) && !fs::get::has_mntpoint("/boot", $all_hds)) {
+    if ($mntpoint eq "/" && (isLUKS($part) || isRawLUKS($part)) && !fs::get::has_mntpoint("/boot", $all_hds)) {
 	cdie N("You've selected an encrypted partition as root (/).
 No bootloader is able to handle this without a /boot partition.
 Please be sure to add a /boot partition");
     }
 
-    if ($mntpoint eq "/boot" && isLUKS($part))  {
+    if ($mntpoint eq "/boot" && (isLUKS($part) || isRawLUKS($part)))  {
 	die N("You can not use an encrypted file system for mount point %s", "/boot");
     }
 
