@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-el\n"
 "POT-Creation-Date: 2010-05-01 16:46+0200\n"
-"PO-Revision-Date: 2010-04-27 22:24+0200\n"
+"PO-Revision-Date: 2010-05-01 22:39+0200\n"
 "Last-Translator: Glentadakis Dimitrios <dglent@gmail.com>\n"
 "Language-Team: Greek <translators_team@mandrivalinux.gr>\n"
 "MIME-Version: 1.0\n"
@@ -276,7 +276,7 @@ msgstr "Xen προσθήκη"
 #: any.pm:536
 #, c-format
 msgid "Requires password to boot"
-msgstr ""
+msgstr "Απαιτείται κωδικός για την εκκίνηση"
 
 #: any.pm:538
 #, c-format
@@ -1639,7 +1639,7 @@ msgstr "Αφαίρεση από το LVM"
 #: diskdrake/interactive.pm:418
 #, c-format
 msgid "Remove from dm"
-msgstr "Αφαίρεση από dm"
+msgstr "Αφαίρεση από το dm"
 
 #: diskdrake/interactive.pm:419
 #, c-format
@@ -1692,14 +1692,14 @@ msgid "Logical volume name "
 msgstr "Το όνομα του λογικού τόμου"
 
 #: diskdrake/interactive.pm:507
-#, fuzzy, c-format
+#, c-format
 msgid "Encrypt partition"
-msgstr "Αλγόριθμος κρυπτογράφησης"
+msgstr "Κρυπτογραφημένη κατάτμηση"
 
 #: diskdrake/interactive.pm:508
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption key "
-msgstr "Κλειδί κρυπτογράφησης"
+msgstr "Κλειδί κρυπτογράφησης "
 
 #: diskdrake/interactive.pm:509 diskdrake/interactive.pm:1487
 #, c-format
@@ -1712,9 +1712,9 @@ msgid "The encryption keys do not match"
 msgstr "Τα κλειδιά κρυπτογράφησης είναι ανόμοια"
 
 #: diskdrake/interactive.pm:521
-#, fuzzy, c-format
+#, c-format
 msgid "Missing encryption key"
-msgstr "Κλειδί κρυπτογράφησης συστήματος αρχείων"
+msgstr "Λείπει το κλειδί κρυπτογράφησης"
 
 #: diskdrake/interactive.pm:541
 #, c-format
@@ -2910,17 +2910,16 @@ msgstr ""
 "Μην ξεχάσετε να προσθέσετε μια κατάτμηση /boot"
 
 #: fsedit.pm:437
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
-"Προσοχή, έχετε επιλέξει μια κατάτμηση με RAID λογισμικού ως ριζική κατάτμηση "
-"(/).\n"
-"Κανένα πρόγραμμα εκκίνησης δεν υποστηρίζει αυτή τη διαμόρφωση χωρίς "
-"ξεχωριστή κατάτμηση /boot.\n"
-"Μην ξεχάσετε να προσθέσετε μια κατάτμηση /boot"
+"Έχετε επιλέξει μια κρυπτογραφημένη κατάτμηση ως ριζική (/).\n"
+"Κανένα πρόγραμμα εκκίνησης δεν υποστηρίζει αυτή τη διαμόρφωση χωρίς μια "
+"κατάτμηση /boot.\n"
+"Παρακαλώ βεβαιωθείτε ότι έχετε προσθέσει μια κατάτμηση /boot"
 
 #: fsedit.pm:443 fsedit.pm:461
 #, c-format
@@ -3282,7 +3281,7 @@ msgstr ""
 "Εδώ μπορείτε να επιλέξετε έναν εναλλακτικό οδηγό (OSS ή ALSA) για την κάρτα "
 "ήχου σας (%s)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
