@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-tg\n"
-"POT-Creation-Date: 2010-03-28 14:46+0200\n"
+"POT-Creation-Date: 2010-05-01 16:46+0200\n"
 "PO-Revision-Date: 2005-09-17 16:03+0500\n"
 "Last-Translator: Victor Ibragimov <youth_opportunities@tajikngo.org>\n"
 "Language-Team: Tajik\n"
@@ -24,10 +24,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10\n"
 
-#: any.pm:252 any.pm:953 diskdrake/interactive.pm:597
-#: diskdrake/interactive.pm:802 diskdrake/interactive.pm:846
-#: diskdrake/interactive.pm:950 diskdrake/interactive.pm:1204
-#: diskdrake/interactive.pm:1256 do_pkgs.pm:241 do_pkgs.pm:287
+#: any.pm:252 any.pm:947 diskdrake/interactive.pm:647
+#: diskdrake/interactive.pm:864 diskdrake/interactive.pm:924
+#: diskdrake/interactive.pm:1026 diskdrake/interactive.pm:1256
+#: diskdrake/interactive.pm:1308 do_pkgs.pm:241 do_pkgs.pm:287
 #: harddrake/sound.pm:303 interactive.pm:587 pkgs.pm:281
 #, c-format
 msgid "Please wait"
@@ -138,7 +138,7 @@ msgstr "Гузарондан"
 msgid "Boot Style Configuration"
 msgstr "Танзимдарории Навъи Худборшавӣ"
 
-#: any.pm:412 any.pm:452 any.pm:453
+#: any.pm:412 any.pm:445 any.pm:446
 #, c-format
 msgid "Bootloader main options"
 msgstr "Хосиятҳои асосии корандози худборшав"
@@ -148,12 +148,12 @@ msgstr "Хосиятҳои асосии корандози худборшав"
 msgid "Bootloader"
 msgstr "Корандози худборшав"
 
-#: any.pm:417 any.pm:456
+#: any.pm:417 any.pm:449
 #, c-format
 msgid "Bootloader to use"
 msgstr "Корандози худборшав барои истифода"
 
-#: any.pm:420 any.pm:459
+#: any.pm:420 any.pm:452
 #, c-format
 msgid "Boot device"
 msgstr "Дастгоҳи худборшав"
@@ -193,7 +193,7 @@ msgstr "Даргиронидани ACPI"
 msgid "Security"
 msgstr "Амният"
 
-#: any.pm:431 any.pm:891 any.pm:907 authentication.pm:250
+#: any.pm:431 any.pm:885 any.pm:901 authentication.pm:250
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
@@ -204,7 +204,7 @@ msgstr "Гузарвожа"
 msgid "The passwords do not match"
 msgstr "Гузарвожаҳо мувофиқ нестанд"
 
-#: any.pm:434 authentication.pm:261 diskdrake/interactive.pm:1428
+#: any.pm:434 authentication.pm:261 diskdrake/interactive.pm:1483
 #, c-format
 msgid "Please try again"
 msgstr "Лутфан, аз нав кӯшиш кунед"
@@ -216,163 +216,152 @@ msgstr ""
 "Шумо файл системи рамздоштаро барои нуқтаи васли %s истифода бурда "
 "наметавонед"
 
-#: any.pm:440 any.pm:893 any.pm:909 authentication.pm:251
+#: any.pm:440 any.pm:887 any.pm:903 authentication.pm:251
 #, c-format
 msgid "Password (again)"
 msgstr "Гузарвожа (боз)"
 
 #: any.pm:441
 #, c-format
-msgid "Restrict command line options"
-msgstr "Маҳдуди хосиятҳои сатри фармон"
-
-#: any.pm:442
-#, c-format
-msgid "restrict"
-msgstr "маҳдуд"
-
-#: any.pm:445
-#, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
-msgstr "Хосият ‘’Маҳдуди хосиятҳои сатри фармон‘’ бе гузарвожа суд надорад"
-
-#: any.pm:448
-#, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Дар ҳар худборшавӣ /tmp-ро тоза кунед"
 
-#: any.pm:458
+#: any.pm:451
 #, c-format
 msgid "Init Message"
 msgstr "Пайғоми Init"
 
-#: any.pm:460
+#: any.pm:453
 #, c-format
 msgid "Open Firmware Delay"
 msgstr "Кушодани Андармони Миёнафзор"
 
-#: any.pm:461
+#: any.pm:454
 #, c-format
 msgid "Kernel Boot Timeout"
 msgstr "Танаффуси Худборшави Асосӣ"
 
-#: any.pm:462
+#: any.pm:455
 #, c-format
 msgid "Enable CD Boot?"
 msgstr "CD Худборшавро дар гиронем?"
 
-#: any.pm:463
+#: any.pm:456
 #, c-format
 msgid "Enable OF Boot?"
 msgstr "OF Худборшавро дар гиронем?"
 
-#: any.pm:464
+#: any.pm:457
 #, c-format
 msgid "Default OS?"
 msgstr "Пешфарзи OS?"
 
-#: any.pm:537
+#: any.pm:530
 #, c-format
 msgid "Image"
 msgstr "Симо"
 
-#: any.pm:538 any.pm:551
+#: any.pm:531 any.pm:545
 #, c-format
 msgid "Root"
 msgstr "Root"
 
-#: any.pm:539 any.pm:564
+#: any.pm:532 any.pm:558
 #, c-format
 msgid "Append"
 msgstr "Пайваст"
 
-#: any.pm:541
+#: any.pm:534
 #, c-format
 msgid "Xen append"
 msgstr ""
 
-#: any.pm:544
+#: any.pm:536
+#, c-format
+msgid "Requires password to boot"
+msgstr ""
+
+#: any.pm:538
 #, c-format
 msgid "Video mode"
 msgstr "Усули видео"
 
-#: any.pm:546
+#: any.pm:540
 #, c-format
 msgid "Initrd"
 msgstr "Initrd"
 
-#: any.pm:547
+#: any.pm:541
 #, c-format
 msgid "Network profile"
 msgstr "Тахассуси шабака"
 
-#: any.pm:556 any.pm:561 any.pm:563 diskdrake/interactive.pm:407
+#: any.pm:550 any.pm:555 any.pm:557 diskdrake/interactive.pm:407
 #, c-format
 msgid "Label"
 msgstr "Нишона"
 
-#: any.pm:558 any.pm:566 harddrake/v4l.pm:438
+#: any.pm:552 any.pm:560 harddrake/v4l.pm:438
 #, c-format
 msgid "Default"
 msgstr "Пешфарз"
 
-#: any.pm:565
+#: any.pm:559
 #, c-format
 msgid "NoVideo"
 msgstr "БеВидео"
 
-#: any.pm:576
+#: any.pm:570
 #, c-format
 msgid "Empty label not allowed"
 msgstr "Нишони холӣ иҷозат нест"
 
-#: any.pm:577
+#: any.pm:571
 #, c-format
 msgid "You must specify a kernel image"
 msgstr "Шумо бояд симои асосро нишон диҳед"
 
-#: any.pm:577
+#: any.pm:571
 #, c-format
 msgid "You must specify a root partition"
 msgstr "Шумо бояд қисми решагиро муайян кунед"
 
-#: any.pm:578
+#: any.pm:572
 #, c-format
 msgid "This label is already used"
 msgstr "Ин нишона аллакай истифода шудааст"
 
-#: any.pm:596
+#: any.pm:590
 #, c-format
 msgid "Which type of entry do you want to add?"
 msgstr "Кадом навъи элементро илова кардан мехоҳед?"
 
-#: any.pm:597
+#: any.pm:591
 #, c-format
 msgid "Linux"
 msgstr "Linux"
 
-#: any.pm:597
+#: any.pm:591
 #, c-format
 msgid "Other OS (SunOS...)"
 msgstr "Дигар СО (SunOS...)"
 
-#: any.pm:598
+#: any.pm:592
 #, c-format
 msgid "Other OS (MacOS...)"
 msgstr "Дигар СО (MacOS...)"
 
-#: any.pm:598
+#: any.pm:592
 #, c-format
 msgid "Other OS (Windows...)"
 msgstr "Дигар СО (Windows...)"
 
-#: any.pm:645
+#: any.pm:639
 #, fuzzy, c-format
 msgid "Bootloader Configuration"
 msgstr "Танзимдарории Навъи Худборшавӣ"
 
-#: any.pm:646
+#: any.pm:640
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -381,47 +370,47 @@ msgstr ""
 "Дар ҳамин лаҳза дар менюи худборшав элементҳои зерин ҳастанд.\n"
 "Шумо метавонед элементҳои иловагӣ офаред ё вуҷуд бударо иваз кунед."
 
-#: any.pm:851
+#: any.pm:845
 #, c-format
 msgid "access to X programs"
 msgstr "дастёбӣ ба X-барномаҳо"
 
-#: any.pm:852
+#: any.pm:846
 #, c-format
 msgid "access to rpm tools"
 msgstr "роҳ ба воситаҳои rpm"
 
-#: any.pm:853
+#: any.pm:847
 #, c-format
 msgid "allow \"su\""
 msgstr "иҷозат додани \"su\""
 
-#: any.pm:854
+#: any.pm:848
 #, c-format
 msgid "access to administrative files"
 msgstr "роҳ ба файлҳои маъмурият"
 
-#: any.pm:855
+#: any.pm:849
 #, c-format
 msgid "access to network tools"
 msgstr "роҳ ба асбобҳои шабака"
 
-#: any.pm:856
+#: any.pm:850
 #, c-format
 msgid "access to compilation tools"
 msgstr "роҳ ба асбобҳои талфифа"
 
-#: any.pm:862
+#: any.pm:856
 #, c-format
 msgid "(already added %s)"
 msgstr "(аллакай илова шуд %s)"
 
-#: any.pm:868
+#: any.pm:862
 #, c-format
 msgid "Please give a user name"
 msgstr "Илтимос ноим корвандро диҳед"
 
-#: any.pm:869
+#: any.pm:863
 #, fuzzy, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
@@ -429,151 +418,151 @@ msgid ""
 msgstr ""
 "“Номи корванд бояд фақат аз ҳарфҳои хурд, рақамҳо, `-' ва `_' иборат бошад”"
 
-#: any.pm:870
+#: any.pm:864
 #, c-format
 msgid "The user name is too long"
 msgstr "Ин номи корванд хеле дароз"
 
-#: any.pm:871
+#: any.pm:865
 #, c-format
 msgid "This user name has already been added"
 msgstr "Ин номи корванд аллакай илова шудааст"
 
-#: any.pm:877 any.pm:911
+#: any.pm:871 any.pm:905
 #, c-format
 msgid "User ID"
 msgstr "Корванди ID"
 
-#: any.pm:877 any.pm:912
+#: any.pm:871 any.pm:906
 #, c-format
 msgid "Group ID"
 msgstr "Гурӯҳи ID"
 
-#: any.pm:878
+#: any.pm:872
 #, c-format
 msgid "%s must be a number"
 msgstr "%s бояд рақам бошад"
 
-#: any.pm:879
+#: any.pm:873
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
 msgstr ""
 
-#: any.pm:883
+#: any.pm:877
 #, fuzzy, c-format
 msgid "User management"
 msgstr "Номи корванд"
 
-#: any.pm:889
+#: any.pm:883
 #, c-format
 msgid "Enable guest account"
 msgstr ""
 
-#: any.pm:890 authentication.pm:237
+#: any.pm:884 authentication.pm:237
 #, fuzzy, c-format
 msgid "Set administrator (root) password"
 msgstr "Барпои гузарвожаи решагӣ"
 
-#: any.pm:895
+#: any.pm:889
 #, fuzzy, c-format
 msgid "Enter a user"
 msgstr ""
 "“Дохил кардани корванд\n"
 "”“%s”"
 
-#: any.pm:897
+#: any.pm:891
 #, c-format
 msgid "Icon"
 msgstr "Тасвир"
 
-#: any.pm:900
+#: any.pm:894
 #, c-format
 msgid "Real name"
 msgstr "Номи ҳақиқӣ"
 
-#: any.pm:905
+#: any.pm:899
 #, c-format
 msgid "Login name"
 msgstr "Номи дохилӣ"
 
-#: any.pm:910
+#: any.pm:904
 #, c-format
 msgid "Shell"
 msgstr "Ҷилд"
 
-#: any.pm:953
+#: any.pm:947
 #, fuzzy, c-format
 msgid "Please wait, adding media..."
 msgstr "марҳамат карда таи иҷроиши ttmkfdir... мунтазир шавед"
 
-#: any.pm:983 security/l10n.pm:14
+#: any.pm:977 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "Худдохилшавӣ"
 
-#: any.pm:984
+#: any.pm:978
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr ""
 "Ман метавонам компютери шуморо чунин гузорам, ки автоматиткӣ як корванд "
 "дохил шавад."
 
-#: any.pm:985
+#: any.pm:979
 #, fuzzy, c-format
 msgid "Use this feature"
 msgstr "Шумо ин хислатро истифрда бурдан мехоҳед?"
 
-#: any.pm:986
+#: any.pm:980
 #, c-format
 msgid "Choose the default user:"
 msgstr "Корванди пешфарзро интихоб кунед:"
 
-#: any.pm:987
+#: any.pm:981
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Барои корандохтан менеҷери оинаро интихоб кунед:"
 
-#: any.pm:998 any.pm:1018 any.pm:1091
+#: any.pm:992 any.pm:1012 any.pm:1085
 #, c-format
 msgid "Release Notes"
 msgstr "Навиштаҷотҳои Барориш"
 
-#: any.pm:1025 any.pm:1379 interactive/gtk.pm:819
+#: any.pm:1019 any.pm:1373 interactive/gtk.pm:819
 #, c-format
 msgid "Close"
 msgstr "Пӯшед"
 
-#: any.pm:1077
+#: any.pm:1071
 #, c-format
 msgid "License agreement"
 msgstr "Шартномаи литсензионӣ"
 
-#: any.pm:1079 diskdrake/dav.pm:26
+#: any.pm:1073 diskdrake/dav.pm:26
 #, c-format
 msgid "Quit"
 msgstr "Баромадан"
 
-#: any.pm:1086
+#: any.pm:1080
 #, fuzzy, c-format
 msgid "Do you accept this license ?"
 msgstr "Шумо боз дигар доред?"
 
-#: any.pm:1087
+#: any.pm:1081
 #, c-format
 msgid "Accept"
 msgstr "Қабул намудан"
 
-#: any.pm:1087
+#: any.pm:1081
 #, c-format
 msgid "Refuse"
 msgstr "Рад кардан"
 
-#: any.pm:1113 any.pm:1175
+#: any.pm:1107 any.pm:1169
 #, c-format
 msgid "Please choose a language to use"
 msgstr "Илтимос, барои истифода забонро интихоб кунед"
 
-#: any.pm:1141
+#: any.pm:1135
 #, c-format
 msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
@@ -586,77 +575,77 @@ msgstr ""
 "онҳо\n"
 "дастрас мегарданд ва системи худро бозоғозӣ намоед."
 
-#: any.pm:1144
+#: any.pm:1138
 #, c-format
 msgid "Multi languages"
 msgstr ""
 
-#: any.pm:1153 any.pm:1184
+#: any.pm:1147 any.pm:1178
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr ""
 
-#: any.pm:1154
+#: any.pm:1148
 #, c-format
 msgid "All languages"
 msgstr "Ҳамаи забонҳо"
 
-#: any.pm:1176
+#: any.pm:1170
 #, c-format
 msgid "Language choice"
 msgstr "Интихоби забон"
 
-#: any.pm:1230
+#: any.pm:1224
 #, c-format
 msgid "Country / Region"
 msgstr "Мамлакат/ Минтақа"
 
-#: any.pm:1231
+#: any.pm:1225
 #, c-format
 msgid "Please choose your country"
 msgstr "Лутфан мамлакати худро интихоб кунед"
 
-#: any.pm:1233
+#: any.pm:1227
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Дар ин ҷо рӯйхати пурраи давлатҳои мавҷуда дода шудааст"
 
-#: any.pm:1234
+#: any.pm:1228
 #, c-format
 msgid "Other Countries"
 msgstr "Дигар Давлатҳо"
 
-#: any.pm:1234 interactive.pm:488 interactive/gtk.pm:445
+#: any.pm:1228 interactive.pm:488 interactive/gtk.pm:445
 #, c-format
 msgid "Advanced"
 msgstr "Беҳбудшуда"
 
-#: any.pm:1240
+#: any.pm:1234
 #, c-format
 msgid "Input method:"
 msgstr "Усули воридкунӣ:"
 
-#: any.pm:1243
+#: any.pm:1237
 #, c-format
 msgid "None"
 msgstr "Ҳеҷ"
 
-#: any.pm:1324
+#: any.pm:1318
 #, c-format
 msgid "No sharing"
 msgstr "Дастёбии муштарак нест"
 
-#: any.pm:1324
+#: any.pm:1318
 #, c-format
 msgid "Allow all users"
 msgstr "Ба ҳамаи корвандон иҷозат додан"
 
-#: any.pm:1324
+#: any.pm:1318
 #, c-format
 msgid "Custom"
 msgstr "Интихобӣ"
 
-#: any.pm:1328
+#: any.pm:1322
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -670,7 +659,7 @@ msgstr ""
 "кардан\" дар konqueror ва nautilus ангушт зананд.\n"
 "\"Интихобӣ\" ба корвандони алоҳида дастрасшавиро иҷозат медиҳад.\n"
 
-#: any.pm:1340
+#: any.pm:1334
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
@@ -679,7 +668,7 @@ msgstr ""
 "NFS: Системаи Unix барои бо ҳам дидани маълумот, бе истифода бурадани Mac ва "
 "Windows."
 
-#: any.pm:1343
+#: any.pm:1337
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
@@ -688,7 +677,7 @@ msgstr ""
 "SMB: Система барои бо ҳам дидани маълумот бо воситаи Windows, Mac OS ва "
 "Linux истифода бурда мешавад."
 
-#: any.pm:1351
+#: any.pm:1345
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
@@ -696,12 +685,12 @@ msgstr ""
 "Шумо ба воситаи NFS ё SMB содир карда метавонед. Марҳамат карда, якеро, ки "
 "истифода бурдан мехоҳед, интихоб намоед."
 
-#: any.pm:1379
+#: any.pm:1373
 #, c-format
 msgid "Launch userdrake"
 msgstr "Сардиҳии userdrake"
 
-#: any.pm:1381
+#: any.pm:1375
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -711,54 +700,54 @@ msgstr ""
 "Шумо метавонед userdrake-ро барои илова намудани корвандон ба ин гурӯҳ "
 "истифодабаред."
 
-#: any.pm:1487
+#: any.pm:1481
 #, fuzzy, c-format
 msgid ""
 "You need to logout and back in again for changes to take effect. Press OK to "
 "logout now."
 msgstr "Шумо бояд бароед ва аз нав дароед барои он ки тағиротҳо натиҷа бахшанд"
 
-#: any.pm:1491
+#: any.pm:1485
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr "Шумо бояд бароед ва аз нав дароед барои он ки тағиротҳо натиҷа бахшанд"
 
-#: any.pm:1526
+#: any.pm:1520
 #, c-format
 msgid "Timezone"
 msgstr "Минтақаи соатӣ"
 
-#: any.pm:1526
+#: any.pm:1520
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Вақти соати шумо чӣ гуна аст?"
 
-#: any.pm:1549 any.pm:1551
+#: any.pm:1543 any.pm:1545
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr ""
 
-#: any.pm:1552
+#: any.pm:1546
 #, c-format
 msgid "What is the best time?"
 msgstr ""
 
-#: any.pm:1556
+#: any.pm:1550
 #, fuzzy, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "Соати сахтафзорӣ ба GMT муқаррар гардидааст"
 
-#: any.pm:1557
+#: any.pm:1551
 #, fuzzy, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "Соати сахтафзорӣ ба GMT муқаррар гардидааст"
 
-#: any.pm:1559
+#: any.pm:1553
 #, c-format
 msgid "NTP Server"
 msgstr "NTP Хидматрасон"
 
-#: any.pm:1560
+#: any.pm:1554
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Худҳамзамонсозии вақт (бо истифодаи NTP)"
@@ -1135,12 +1124,12 @@ msgstr ""
 msgid "not enough room in /boot"
 msgstr "дар /boot ҷои кофӣ нест"
 
-#: bootloader.pm:1923
+#: bootloader.pm:1932
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
 msgstr "Шумо корандози худборшавро дар бахши %s корандохта наметавонед\n"
 
-#: bootloader.pm:2044
+#: bootloader.pm:2053
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1149,7 +1138,7 @@ msgstr ""
 "Танзимкунии боркунандаи ибтидоии шумо бояд нав карда шавад, зеро қисмҳо аз "
 "нав рақам гузошта шудаанд"
 
-#: bootloader.pm:2057
+#: bootloader.pm:2066
 #, c-format
 msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
@@ -1158,7 +1147,7 @@ msgstr ""
 "Боркунандаи ибтидоӣ дуруст коргузори карда намешавад. Шумо бояд rescue-ро "
 "бор кунед ва \"%s\"-ро интихоб намоед"
 
-#: bootloader.pm:2058
+#: bootloader.pm:2067
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Корандози Худборшавро аз нав Коргузорӣ намудан"
@@ -1244,15 +1233,15 @@ msgid "Server"
 msgstr "Хидматрасон"
 
 #: diskdrake/dav.pm:66 diskdrake/interactive.pm:404
-#: diskdrake/interactive.pm:674 diskdrake/interactive.pm:692
-#: diskdrake/interactive.pm:696 diskdrake/removable.pm:23
+#: diskdrake/interactive.pm:724 diskdrake/interactive.pm:742
+#: diskdrake/interactive.pm:746 diskdrake/removable.pm:23
 #: diskdrake/smbnfs_gtk.pm:79
 #, c-format
 msgid "Mount point"
 msgstr "Нуқтаи васл"
 
 #: diskdrake/dav.pm:67 diskdrake/interactive.pm:406
-#: diskdrake/interactive.pm:1098 diskdrake/removable.pm:24
+#: diskdrake/interactive.pm:1153 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
@@ -1269,18 +1258,18 @@ msgstr "Хориҷ"
 msgid "Done"
 msgstr "Шуд"
 
-#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:128 diskdrake/hd_gtk.pm:294
+#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:128 diskdrake/hd_gtk.pm:292
 #: diskdrake/interactive.pm:247 diskdrake/interactive.pm:260
 #: diskdrake/interactive.pm:453 diskdrake/interactive.pm:523
-#: diskdrake/interactive.pm:528 diskdrake/interactive.pm:664
-#: diskdrake/interactive.pm:917 diskdrake/interactive.pm:968
-#: diskdrake/interactive.pm:1144 diskdrake/interactive.pm:1157
-#: diskdrake/interactive.pm:1160 diskdrake/interactive.pm:1428
-#: diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23 do_pkgs.pm:28 do_pkgs.pm:44
-#: do_pkgs.pm:60 do_pkgs.pm:65 do_pkgs.pm:82 fsedit.pm:246
-#: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
-#: scanner.pm:95 scanner.pm:106 scanner.pm:113 scanner.pm:120 wizards.pm:95
-#: wizards.pm:99 wizards.pm:121
+#: diskdrake/interactive.pm:541 diskdrake/interactive.pm:546
+#: diskdrake/interactive.pm:714 diskdrake/interactive.pm:993
+#: diskdrake/interactive.pm:1044 diskdrake/interactive.pm:1199
+#: diskdrake/interactive.pm:1212 diskdrake/interactive.pm:1215
+#: diskdrake/interactive.pm:1483 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23
+#: do_pkgs.pm:28 do_pkgs.pm:44 do_pkgs.pm:60 do_pkgs.pm:65 do_pkgs.pm:82
+#: fsedit.pm:246 interactive/http.pm:117 interactive/http.pm:118
+#: modules/interactive.pm:19 scanner.pm:95 scanner.pm:106 scanner.pm:113
+#: scanner.pm:120 wizards.pm:95 wizards.pm:99 wizards.pm:121
 #, c-format
 msgid "Error"
 msgstr "Хатогӣ"
@@ -1295,12 +1284,12 @@ msgstr "Лутфан, URL-и хидматрасони WebDAV-ро дохил н�
 msgid "The URL must begin with http:// or https://"
 msgstr "URL бояд бо http:// or https:// оғоз ёбад"
 
-#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:412 diskdrake/interactive.pm:306
-#: diskdrake/interactive.pm:391 diskdrake/interactive.pm:553
-#: diskdrake/interactive.pm:755 diskdrake/interactive.pm:813
-#: diskdrake/interactive.pm:948 diskdrake/interactive.pm:990
-#: diskdrake/interactive.pm:991 diskdrake/interactive.pm:1241
-#: diskdrake/interactive.pm:1279 diskdrake/interactive.pm:1427 do_pkgs.pm:19
+#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:417 diskdrake/interactive.pm:306
+#: diskdrake/interactive.pm:391 diskdrake/interactive.pm:594
+#: diskdrake/interactive.pm:817 diskdrake/interactive.pm:875
+#: diskdrake/interactive.pm:1024 diskdrake/interactive.pm:1066
+#: diskdrake/interactive.pm:1067 diskdrake/interactive.pm:1293
+#: diskdrake/interactive.pm:1331 diskdrake/interactive.pm:1482 do_pkgs.pm:19
 #: do_pkgs.pm:39 do_pkgs.pm:57 do_pkgs.pm:77 harddrake/sound.pm:442
 #, c-format
 msgid "Warning"
@@ -1316,23 +1305,23 @@ msgstr "Шумо ба ин дагма ангушт задан мехоҳед?"
 msgid "Server: "
 msgstr "Хидматгор: "
 
-#: diskdrake/dav.pm:125 diskdrake/interactive.pm:496
-#: diskdrake/interactive.pm:1303 diskdrake/interactive.pm:1388
+#: diskdrake/dav.pm:125 diskdrake/interactive.pm:498
+#: diskdrake/interactive.pm:1355 diskdrake/interactive.pm:1443
 #, c-format
 msgid "Mount point: "
 msgstr "Нуқтаи васлкунӣ: "
 
-#: diskdrake/dav.pm:126 diskdrake/interactive.pm:1395
+#: diskdrake/dav.pm:126 diskdrake/interactive.pm:1450
 #, c-format
 msgid "Options: %s"
 msgstr "Хосиятҳо: %s "
 
 #: diskdrake/hd_gtk.pm:61 diskdrake/interactive.pm:301
 #: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:106
-#: fs/partitioning_wizard.pm:53 fs/partitioning_wizard.pm:235
-#: fs/partitioning_wizard.pm:243 fs/partitioning_wizard.pm:282
-#: fs/partitioning_wizard.pm:431 fs/partitioning_wizard.pm:495
-#: fs/partitioning_wizard.pm:571 fs/partitioning_wizard.pm:574
+#: fs/partitioning_wizard.pm:53 fs/partitioning_wizard.pm:236
+#: fs/partitioning_wizard.pm:244 fs/partitioning_wizard.pm:283
+#: fs/partitioning_wizard.pm:432 fs/partitioning_wizard.pm:496
+#: fs/partitioning_wizard.pm:572 fs/partitioning_wizard.pm:575
 #, c-format
 msgid "Partitioning"
 msgstr "Ҷузъбандӣ"
@@ -1342,8 +1331,8 @@ msgstr "Ҷузъбандӣ"
 msgid "Click on a partition, choose a filesystem type then choose an action"
 msgstr ""
 
-#: diskdrake/hd_gtk.pm:110 diskdrake/interactive.pm:1119
-#: diskdrake/interactive.pm:1129 diskdrake/interactive.pm:1182
+#: diskdrake/hd_gtk.pm:110 diskdrake/interactive.pm:1174
+#: diskdrake/interactive.pm:1184 diskdrake/interactive.pm:1237
 #, c-format
 msgid "Read carefully"
 msgstr "Оҳиста хонед"
@@ -1363,7 +1352,7 @@ msgstr "Хуруҷ"
 msgid "Continue"
 msgstr "Давом додан"
 
-#: diskdrake/hd_gtk.pm:182 fs/partitioning_wizard.pm:547 interactive.pm:653
+#: diskdrake/hd_gtk.pm:182 fs/partitioning_wizard.pm:548 interactive.pm:653
 #: interactive/gtk.pm:811 interactive/gtk.pm:829 interactive/gtk.pm:850
 #: ugtk2.pm:936
 #, c-format
@@ -1391,79 +1380,79 @@ msgstr "Лутфан дар бахш ангушт занед"
 msgid "Details"
 msgstr "Тафсилот"
 
-#: diskdrake/hd_gtk.pm:294
+#: diskdrake/hd_gtk.pm:292
 #, c-format
 msgid "No hard drives found"
 msgstr "Ягон сахтгардон ёфт нашуд"
 
-#: diskdrake/hd_gtk.pm:321
+#: diskdrake/hd_gtk.pm:323
 #, c-format
 msgid "Unknown"
 msgstr "Номаълум"
 
-#: diskdrake/hd_gtk.pm:383
+#: diskdrake/hd_gtk.pm:388
 #, fuzzy, c-format
 msgid "Ext4"
 msgstr "Хуруҷ"
 
-#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, fuzzy, c-format
 msgid "XFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "Swap"
 msgstr "Мубодила"
 
-#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "SunOS"
 msgstr "SunOS"
 
-#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "HFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:384 fs/partitioning_wizard.pm:402 services.pm:184
+#: diskdrake/hd_gtk.pm:389 fs/partitioning_wizard.pm:403 services.pm:184
 #, c-format
 msgid "Other"
 msgstr "Дигар"
 
-#: diskdrake/hd_gtk.pm:384 diskdrake/interactive.pm:1318
-#: fs/partitioning_wizard.pm:402
+#: diskdrake/hd_gtk.pm:389 diskdrake/interactive.pm:1370
+#: fs/partitioning_wizard.pm:403
 #, c-format
 msgid "Empty"
 msgstr "Холӣ"
 
-#: diskdrake/hd_gtk.pm:391
+#: diskdrake/hd_gtk.pm:396
 #, c-format
 msgid "Filesystem types:"
 msgstr "Навъҳои файлсистем:"
 
-#: diskdrake/hd_gtk.pm:412
+#: diskdrake/hd_gtk.pm:417
 #, fuzzy, c-format
 msgid "This partition is already empty"
 msgstr "Ин бахш бозандозагирифта нашаванда аст"
 
-#: diskdrake/hd_gtk.pm:421
+#: diskdrake/hd_gtk.pm:426
 #, c-format
 msgid "Use ``Unmount'' first"
 msgstr "Аввал ``Ҷудо кардан''-ро истифода баред"
 
-#: diskdrake/hd_gtk.pm:421
+#: diskdrake/hd_gtk.pm:426
 #, fuzzy, c-format
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Ба ҷояш ``%s''-ро истифода баред "
 
-#: diskdrake/hd_gtk.pm:421 diskdrake/interactive.pm:405
-#: diskdrake/interactive.pm:591 diskdrake/removable.pm:25
+#: diskdrake/hd_gtk.pm:426 diskdrake/interactive.pm:405
+#: diskdrake/interactive.pm:641 diskdrake/removable.pm:25
 #: diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
@@ -1486,7 +1475,7 @@ msgid "More"
 msgstr "Зиёдтар"
 
 #: diskdrake/interactive.pm:281 diskdrake/interactive.pm:294
-#: diskdrake/interactive.pm:1226
+#: diskdrake/interactive.pm:568 diskdrake/interactive.pm:1278
 #, fuzzy, c-format
 msgid "Confirmation"
 msgstr "Батанзимдарорӣ"
@@ -1511,7 +1500,7 @@ msgstr "Ҷадвали бахшро нанавишта бароем?"
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "Шумо /etc/fstab таъғирёбиҳоро нигоҳ доштан"
 
-#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:282
+#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:283
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
@@ -1589,7 +1578,7 @@ msgstr "Маълумоти муфассал"
 msgid "View"
 msgstr ""
 
-#: diskdrake/interactive.pm:408 diskdrake/interactive.pm:768
+#: diskdrake/interactive.pm:408 diskdrake/interactive.pm:830
 #, c-format
 msgid "Resize"
 msgstr "Бозандозагирӣ"
@@ -1599,12 +1588,12 @@ msgstr "Бозандозагирӣ"
 msgid "Format"
 msgstr "Андозакунӣ"
 
-#: diskdrake/interactive.pm:411 diskdrake/interactive.pm:878
+#: diskdrake/interactive.pm:411 diskdrake/interactive.pm:956
 #, c-format
 msgid "Add to RAID"
 msgstr "Илова ба RAID"
 
-#: diskdrake/interactive.pm:412 diskdrake/interactive.pm:899
+#: diskdrake/interactive.pm:412 diskdrake/interactive.pm:975
 #, c-format
 msgid "Add to LVM"
 msgstr "Илова ба LVM"
@@ -1654,37 +1643,62 @@ msgstr "Офаридан"
 msgid "Failed to mount partition"
 msgstr "Ғеҷонидани файлҳо ба бахши нав"
 
-#: diskdrake/interactive.pm:485 diskdrake/interactive.pm:487
+#: diskdrake/interactive.pm:487 diskdrake/interactive.pm:489
 #, c-format
 msgid "Create a new partition"
 msgstr "Офаридани бахши нав"
 
-#: diskdrake/interactive.pm:489
+#: diskdrake/interactive.pm:491
 #, c-format
 msgid "Start sector: "
 msgstr "Сектори оғоз: "
 
-#: diskdrake/interactive.pm:492 diskdrake/interactive.pm:983
+#: diskdrake/interactive.pm:494 diskdrake/interactive.pm:1059
 #, c-format
 msgid "Size in MB: "
 msgstr "Ҳаҷм дар МБ: "
 
-#: diskdrake/interactive.pm:494 diskdrake/interactive.pm:984
+#: diskdrake/interactive.pm:496 diskdrake/interactive.pm:1060
 #, c-format
 msgid "Filesystem type: "
 msgstr "Навъи файлсистемҳо: "
 
-#: diskdrake/interactive.pm:500
+#: diskdrake/interactive.pm:502
 #, c-format
 msgid "Preference: "
 msgstr "Имтиёз: "
 
-#: diskdrake/interactive.pm:503
+#: diskdrake/interactive.pm:505
 #, c-format
 msgid "Logical volume name "
 msgstr "Номи қисми мантиқӣ"
 
-#: diskdrake/interactive.pm:523
+#: diskdrake/interactive.pm:507
+#, fuzzy, c-format
+msgid "Encrypt partition"
+msgstr "Алгоритми Рамзикунонӣ"
+
+#: diskdrake/interactive.pm:508
+#, fuzzy, c-format
+msgid "Encryption key "
+msgstr "Калиди Encryption"
+
+#: diskdrake/interactive.pm:509 diskdrake/interactive.pm:1487
+#, c-format
+msgid "Encryption key (again)"
+msgstr "Калиди Encryption (боз)"
+
+#: diskdrake/interactive.pm:520 diskdrake/interactive.pm:1483
+#, c-format
+msgid "The encryption keys do not match"
+msgstr "Калидҳои рамздошта мувофиқ нестанд"
+
+#: diskdrake/interactive.pm:521
+#, fuzzy, c-format
+msgid "Missing encryption key"
+msgstr "Калиди рамздоштаи Файлсистем"
+
+#: diskdrake/interactive.pm:541
 #, c-format
 msgid ""
 "You can not create a new partition\n"
@@ -1695,68 +1709,74 @@ msgstr ""
 "(шумо миқдори зиёдтарини қисмҳои авваларо ба даст даровардаед).\n"
 "Сараввал қисми авваларо хориҷ намоед ва қисми васеъшударо тартиб диҳед."
 
-#: diskdrake/interactive.pm:553
+#: diskdrake/interactive.pm:568 diskdrake/interactive.pm:1278
+#: fs/partitioning.pm:48
+#, c-format
+msgid "Check bad blocks?"
+msgstr "Блокҳои бадро тафтиш кунам?"
+
+#: diskdrake/interactive.pm:594
 #, c-format
 msgid "Remove the loopback file?"
 msgstr "Файли loopback-ро хориҷ кунем?"
 
-#: diskdrake/interactive.pm:575
+#: diskdrake/interactive.pm:622
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr "Баъд аз ивази навъи бахши %s ҳама додаҳо дар он бахш гум хоҳад шуд"
 
-#: diskdrake/interactive.pm:588
+#: diskdrake/interactive.pm:638
 #, c-format
 msgid "Change partition type"
 msgstr "Ивази навъи бахш"
 
-#: diskdrake/interactive.pm:590 diskdrake/removable.pm:47
+#: diskdrake/interactive.pm:640 diskdrake/removable.pm:47
 #, c-format
 msgid "Which filesystem do you want?"
 msgstr "Кадом файлсистемро шумо мехоҳед?"
 
-#: diskdrake/interactive.pm:597
+#: diskdrake/interactive.pm:647
 #, fuzzy, c-format
 msgid "Switching from %s to %s"
 msgstr "Гузариш аз ext2 ба ext3"
 
-#: diskdrake/interactive.pm:632
+#: diskdrake/interactive.pm:682
 #, fuzzy, c-format
 msgid "Set volume label"
 msgstr "Баландии овоз"
 
-#: diskdrake/interactive.pm:634
+#: diskdrake/interactive.pm:684
 #, c-format
 msgid "Beware, this will be written to disk as soon as you validate!"
 msgstr ""
 
-#: diskdrake/interactive.pm:635
+#: diskdrake/interactive.pm:685
 #, c-format
 msgid "Beware, this will be written to disk only after formatting!"
 msgstr ""
 
-#: diskdrake/interactive.pm:637
+#: diskdrake/interactive.pm:687
 #, c-format
 msgid "Which volume label?"
 msgstr ""
 
-#: diskdrake/interactive.pm:638
+#: diskdrake/interactive.pm:688
 #, fuzzy, c-format
 msgid "Label:"
 msgstr "Нишона"
 
-#: diskdrake/interactive.pm:659
+#: diskdrake/interactive.pm:709
 #, c-format
 msgid "Where do you want to mount the loopback file %s?"
 msgstr "Файли loopback %s-ро дар куҷо васл кардан мехоҳед?"
 
-#: diskdrake/interactive.pm:660
+#: diskdrake/interactive.pm:710
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "Шумо дар куҷо дастгоҳи %s-ро васл кардан мехоҳед?"
 
-#: diskdrake/interactive.pm:665
+#: diskdrake/interactive.pm:715
 #, c-format
 msgid ""
 "Can not unset mount point as this partition is used for loop back.\n"
@@ -1765,58 +1785,58 @@ msgstr ""
 "Нуқтаи васлшавиро гирифта намешавад, чунки ин қисм барои loop back истифода\n"
 "мегардад. Сараввал loopback-ро хориҷ намоед"
 
-#: diskdrake/interactive.pm:695
+#: diskdrake/interactive.pm:745
 #, c-format
 msgid "Where do you want to mount %s?"
 msgstr "%s-ро дар куҷо васл кардан мехоҳед?"
 
-#: diskdrake/interactive.pm:719 diskdrake/interactive.pm:802
-#: fs/partitioning_wizard.pm:128 fs/partitioning_wizard.pm:204
+#: diskdrake/interactive.pm:775 diskdrake/interactive.pm:864
+#: fs/partitioning_wizard.pm:129 fs/partitioning_wizard.pm:205
 #, c-format
 msgid "Resizing"
 msgstr "Бозандозагириӣ"
 
-#: diskdrake/interactive.pm:719
+#: diskdrake/interactive.pm:775
 #, c-format
 msgid "Computing FAT filesystem bounds"
 msgstr "Ҳисоби ҳудуди файлсистеми FAT"
 
-#: diskdrake/interactive.pm:755
+#: diskdrake/interactive.pm:817
 #, c-format
 msgid "This partition is not resizeable"
 msgstr "Ин бахш бозандозагирифта нашаванда аст"
 
-#: diskdrake/interactive.pm:760
+#: diskdrake/interactive.pm:822
 #, c-format
 msgid "All data on this partition should be backed-up"
 msgstr "Ҳама додаҳо дар ин бахш бояд пуштибонӣ шуда бошад"
 
-#: diskdrake/interactive.pm:762
+#: diskdrake/interactive.pm:824
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr "Баъди бозандозагирии бахши %s, ҳамаи додаҳо дар ин бахш гум хоҳад шуд"
 
-#: diskdrake/interactive.pm:769
+#: diskdrake/interactive.pm:831
 #, c-format
 msgid "Choose the new size"
 msgstr "Ҳаҷми навро интихоб кунед"
 
-#: diskdrake/interactive.pm:770
+#: diskdrake/interactive.pm:832
 #, c-format
 msgid "New size in MB: "
 msgstr "Ҳаҷми нав дар МБ: "
 
-#: diskdrake/interactive.pm:771
+#: diskdrake/interactive.pm:833
 #, c-format
 msgid "Minimum size: %s MB"
 msgstr ""
 
-#: diskdrake/interactive.pm:772
+#: diskdrake/interactive.pm:834
 #, c-format
 msgid "Maximum size: %s MB"
 msgstr ""
 
-#: diskdrake/interactive.pm:813 fs/partitioning_wizard.pm:212
+#: diskdrake/interactive.pm:875 fs/partitioning_wizard.pm:213
 #, fuzzy, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
@@ -1826,175 +1846,170 @@ msgstr ""
 "санҷиши системи файлӣ ҳангоми худборшавии навбатӣ дар Windows(TM) корандозӣ "
 "хоҳад гардид"
 
-#: diskdrake/interactive.pm:861 diskdrake/interactive.pm:1423
+#: diskdrake/interactive.pm:939 diskdrake/interactive.pm:1478
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "Калиди рамздоштаи Файлсистем"
 
-#: diskdrake/interactive.pm:862
+#: diskdrake/interactive.pm:940
 #, fuzzy, c-format
 msgid "Enter your filesystem encryption key"
 msgstr "Калиди ба рамздарории системи файлии худро интихоб намоед"
 
-#: diskdrake/interactive.pm:863 diskdrake/interactive.pm:1431
+#: diskdrake/interactive.pm:941 diskdrake/interactive.pm:1486
 #, c-format
 msgid "Encryption key"
 msgstr "Калиди Encryption"
 
-#: diskdrake/interactive.pm:870
+#: diskdrake/interactive.pm:948
 #, c-format
 msgid "Invalid key"
 msgstr ""
 
-#: diskdrake/interactive.pm:878
+#: diskdrake/interactive.pm:956
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "Барои илова RAID-и вуҷуддоштаро интихоб кунед"
 
-#: diskdrake/interactive.pm:880 diskdrake/interactive.pm:901
+#: diskdrake/interactive.pm:958 diskdrake/interactive.pm:977
 #, c-format
 msgid "new"
 msgstr "нав"
 
-#: diskdrake/interactive.pm:899
+#: diskdrake/interactive.pm:975
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "Барои илова LVM-и вуҷуддоштаро интихоб кунед"
 
-#: diskdrake/interactive.pm:911 diskdrake/interactive.pm:920
+#: diskdrake/interactive.pm:987 diskdrake/interactive.pm:996
 #, fuzzy, c-format
 msgid "LVM name"
 msgstr "Номи LVM?"
 
-#: diskdrake/interactive.pm:912
+#: diskdrake/interactive.pm:988
 #, c-format
 msgid "Enter a name for the new LVM volume group"
 msgstr ""
 
-#: diskdrake/interactive.pm:917
+#: diskdrake/interactive.pm:993
 #, fuzzy, c-format
 msgid "\"%s\" already exists"
 msgstr "Файл аллакай вуҷуд дорад. Истифода барем?"
 
-#: diskdrake/interactive.pm:948
+#: diskdrake/interactive.pm:1024
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
 
-#: diskdrake/interactive.pm:950
+#: diskdrake/interactive.pm:1026
 #, c-format
 msgid "Moving physical extents"
 msgstr ""
 
-#: diskdrake/interactive.pm:968
+#: diskdrake/interactive.pm:1044
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "Ин бахш барои loopback истифода шуда наметавонад"
 
-#: diskdrake/interactive.pm:981
+#: diskdrake/interactive.pm:1057
 #, c-format
 msgid "Loopback"
 msgstr "Loopback"
 
-#: diskdrake/interactive.pm:982
+#: diskdrake/interactive.pm:1058
 #, c-format
 msgid "Loopback file name: "
 msgstr "Номи файли loopback"
 
-#: diskdrake/interactive.pm:987
+#: diskdrake/interactive.pm:1063
 #, c-format
 msgid "Give a file name"
 msgstr "Номи файлро диҳед"
 
-#: diskdrake/interactive.pm:990
+#: diskdrake/interactive.pm:1066
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr ""
 "Файл аллакай бо дигар loopback истифода шудааст, дигарашро интихоб кунед"
 
-#: diskdrake/interactive.pm:991
+#: diskdrake/interactive.pm:1067
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "Файл аллакай вуҷуд дорад. Истифода барем?"
 
-#: diskdrake/interactive.pm:1023 diskdrake/interactive.pm:1026
+#: diskdrake/interactive.pm:1099 diskdrake/interactive.pm:1102
 #, c-format
 msgid "Mount options"
 msgstr "Хосиятҳои васл"
 
-#: diskdrake/interactive.pm:1033
+#: diskdrake/interactive.pm:1109
 #, c-format
 msgid "Various"
 msgstr "Ҳаргуна"
 
-#: diskdrake/interactive.pm:1100
+#: diskdrake/interactive.pm:1155
 #, c-format
 msgid "device"
 msgstr "дастгоҳ"
 
-#: diskdrake/interactive.pm:1101
+#: diskdrake/interactive.pm:1156
 #, c-format
 msgid "level"
 msgstr "савия"
 
-#: diskdrake/interactive.pm:1102
+#: diskdrake/interactive.pm:1157
 #, c-format
 msgid "chunk size in KiB"
 msgstr "ҳаҷми пора бо KiB"
 
-#: diskdrake/interactive.pm:1120
+#: diskdrake/interactive.pm:1175
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Оҳиста: ин омил хатарнок аст."
 
-#: diskdrake/interactive.pm:1135
+#: diskdrake/interactive.pm:1190
 #, fuzzy, c-format
 msgid "Partitioning Type"
 msgstr "Ҷузъбандӣ"
 
-#: diskdrake/interactive.pm:1135
+#: diskdrake/interactive.pm:1190
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Кадом навъи ҷузъбандӣ?"
 
-#: diskdrake/interactive.pm:1173
+#: diskdrake/interactive.pm:1228
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Пеш аз ҷой гирифтани таъғирёбиҳо шумо бояд боз худбор шавед"
 
-#: diskdrake/interactive.pm:1182
+#: diskdrake/interactive.pm:1237
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk"
 msgstr "Ҷадвали бахши гардони %s дар диск навишта мешавад"
 
-#: diskdrake/interactive.pm:1204 fs/format.pm:99 fs/format.pm:106
+#: diskdrake/interactive.pm:1256 fs/format.pm:102 fs/format.pm:109
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Шаклбандии бахши %s"
 
-#: diskdrake/interactive.pm:1217
+#: diskdrake/interactive.pm:1269
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr "Баъди шаклбандии бахши  %s, ҳама додаҳо дар ин қисм гум хоҳад шуд"
 
-#: diskdrake/interactive.pm:1226 fs/partitioning.pm:48
-#, c-format
-msgid "Check bad blocks?"
-msgstr "Блокҳои бадро тафтиш кунам?"
-
-#: diskdrake/interactive.pm:1240
+#: diskdrake/interactive.pm:1292
 #, c-format
 msgid "Move files to the new partition"
 msgstr "Ғеҷонидани файлҳо ба бахши нав"
 
-#: diskdrake/interactive.pm:1240
+#: diskdrake/interactive.pm:1292
 #, c-format
 msgid "Hide files"
 msgstr "Руст кардани файлҳо"
 
-#: diskdrake/interactive.pm:1241
+#: diskdrake/interactive.pm:1293
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -2005,128 +2020,128 @@ msgid ""
 "the contents of the mounted partition)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1256
+#: diskdrake/interactive.pm:1308
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "Ғеҷонидани файлҳо ба бахши нав"
 
-#: diskdrake/interactive.pm:1260
+#: diskdrake/interactive.pm:1312
 #, c-format
 msgid "Copying %s"
 msgstr "Нусхабардории %s"
 
-#: diskdrake/interactive.pm:1264
+#: diskdrake/interactive.pm:1316
 #, c-format
 msgid "Removing %s"
 msgstr "Хориҷи %s"
 
-#: diskdrake/interactive.pm:1278
+#: diskdrake/interactive.pm:1330
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "қисми %s ҳоло ҳамчун %s маълум аст"
 
-#: diskdrake/interactive.pm:1279
+#: diskdrake/interactive.pm:1331
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr ""
 
-#: diskdrake/interactive.pm:1304 diskdrake/interactive.pm:1372
+#: diskdrake/interactive.pm:1356 diskdrake/interactive.pm:1427
 #, c-format
 msgid "Device: "
 msgstr "Дастгоҳ: "
 
-#: diskdrake/interactive.pm:1305
+#: diskdrake/interactive.pm:1357
 #, c-format
 msgid "Volume label: "
 msgstr "Баландии овоз"
 
-#: diskdrake/interactive.pm:1306
+#: diskdrake/interactive.pm:1358
 #, c-format
 msgid "UUID: "
 msgstr ""
 
-#: diskdrake/interactive.pm:1307
+#: diskdrake/interactive.pm:1359
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "Ҳарфи гардони DOS: %s ()\n"
 
-#: diskdrake/interactive.pm:1311 diskdrake/interactive.pm:1320
-#: diskdrake/interactive.pm:1391
+#: diskdrake/interactive.pm:1363 diskdrake/interactive.pm:1372
+#: diskdrake/interactive.pm:1446
 #, c-format
 msgid "Type: "
 msgstr "Навъ: "
 
-#: diskdrake/interactive.pm:1315 diskdrake/interactive.pm:1376
+#: diskdrake/interactive.pm:1367 diskdrake/interactive.pm:1431
 #, c-format
 msgid "Name: "
 msgstr "Ном: "
 
-#: diskdrake/interactive.pm:1322
+#: diskdrake/interactive.pm:1374
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Оғоз: сектор %s\n"
 
-#: diskdrake/interactive.pm:1323
+#: diskdrake/interactive.pm:1375
 #, c-format
 msgid "Size: %s"
 msgstr "Ҳаҷм: %s"
 
-#: diskdrake/interactive.pm:1325
+#: diskdrake/interactive.pm:1377
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s сектор"
 
-#: diskdrake/interactive.pm:1327
+#: diskdrake/interactive.pm:1379
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "Силиндри %d то %d\n"
 
-#: diskdrake/interactive.pm:1328
+#: diskdrake/interactive.pm:1380
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr ""
 
-#: diskdrake/interactive.pm:1329
+#: diskdrake/interactive.pm:1381
 #, c-format
 msgid "Formatted\n"
 msgstr "Шаклбаста\n"
 
-#: diskdrake/interactive.pm:1330
+#: diskdrake/interactive.pm:1382
 #, c-format
 msgid "Not formatted\n"
 msgstr "Шаклбастанашуда\n"
 
-#: diskdrake/interactive.pm:1331
+#: diskdrake/interactive.pm:1383
 #, c-format
 msgid "Mounted\n"
 msgstr "Васл шуда\n"
 
-#: diskdrake/interactive.pm:1332
+#: diskdrake/interactive.pm:1384
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1334
+#: diskdrake/interactive.pm:1386
 #, fuzzy, c-format
 msgid "Encrypted"
 msgstr "Калиди Encryption"
 
-#: diskdrake/interactive.pm:1334
+#: diskdrake/interactive.pm:1388
 #, c-format
 msgid " (mapped on %s)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1335
+#: diskdrake/interactive.pm:1389
 #, c-format
 msgid " (to map on %s)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1336
+#: diskdrake/interactive.pm:1390
 #, c-format
 msgid " (inactive)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1342
+#: diskdrake/interactive.pm:1397
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2135,7 +2150,7 @@ msgstr ""
 "файл(ҳо)и loopback:\n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1343
+#: diskdrake/interactive.pm:1398
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -2144,27 +2159,27 @@ msgstr ""
 "Бахш ба таври пешфарз худбор шуд\n"
 "    (барои MS-DOS худборшавӣ, на барои lilo)\n"
 
-#: diskdrake/interactive.pm:1345
+#: diskdrake/interactive.pm:1400
 #, c-format
 msgid "Level %s\n"
 msgstr "Савияи %s\n"
 
-#: diskdrake/interactive.pm:1346
+#: diskdrake/interactive.pm:1401
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "Ҳаҷми пора %d KiB\n"
 
-#: diskdrake/interactive.pm:1347
+#: diskdrake/interactive.pm:1402
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "RAID-дискҳои %s\n"
 
-#: diskdrake/interactive.pm:1349
+#: diskdrake/interactive.pm:1404
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Номи файли loopback: %s"
 
-#: diskdrake/interactive.pm:1352
+#: diskdrake/interactive.pm:1407
 #, c-format
 msgid ""
 "\n"
@@ -2177,7 +2192,7 @@ msgstr ""
 "бахши Гардон аст, шумо бояд\n"
 "инро ба ҳоли худ гузоред.\n"
 
-#: diskdrake/interactive.pm:1355
+#: diskdrake/interactive.pm:1410
 #, c-format
 msgid ""
 "\n"
@@ -2190,69 +2205,59 @@ msgstr ""
 "барои худборшавии дучанди\n"
 "системи шумо\n"
 
-#: diskdrake/interactive.pm:1364
+#: diskdrake/interactive.pm:1419
 #, c-format
 msgid "Free space on %s (%s)"
 msgstr ""
 
-#: diskdrake/interactive.pm:1373
+#: diskdrake/interactive.pm:1428
 #, c-format
 msgid "Read-only"
 msgstr "Танҳо барои хониш"
 
-#: diskdrake/interactive.pm:1374
+#: diskdrake/interactive.pm:1429
 #, c-format
 msgid "Size: %s\n"
 msgstr "Ҳаҷм: %s\n"
 
-#: diskdrake/interactive.pm:1375
+#: diskdrake/interactive.pm:1430
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Ҳандаса: %s силиндр, %s сар, %s сектор\n"
 
-#: diskdrake/interactive.pm:1377
+#: diskdrake/interactive.pm:1432
 #, fuzzy, c-format
 msgid "Medium type: "
 msgstr "Навъи файлсистемҳо: "
 
-#: diskdrake/interactive.pm:1378
+#: diskdrake/interactive.pm:1433
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "LVM-дискҳо %s\n"
 
-#: diskdrake/interactive.pm:1379
+#: diskdrake/interactive.pm:1434
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Навъи ҷадвали бахшҳо: %s\n"
 
-#: diskdrake/interactive.pm:1380
+#: diskdrake/interactive.pm:1435
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "дар канали %d шиносномаи %d\n"
 
-#: diskdrake/interactive.pm:1424
+#: diskdrake/interactive.pm:1479
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Калиди ба рамздарории системи файлии худро интихоб намоед"
 
-#: diskdrake/interactive.pm:1427
+#: diskdrake/interactive.pm:1482
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr ""
 "Ин калиди ба рамз дароварда шуда бениҳоят содда аст (бояд ақаллан бо "
 "аломатҳои%d дароз бошад)"
 
-#: diskdrake/interactive.pm:1428
-#, c-format
-msgid "The encryption keys do not match"
-msgstr "Калидҳои рамздошта мувофиқ нестанд"
-
-#: diskdrake/interactive.pm:1432
-#, c-format
-msgid "Encryption key (again)"
-msgstr "Калиди Encryption (боз)"
-
-#: diskdrake/interactive.pm:1434
+#: diskdrake/interactive.pm:1489
 #, c-format
 msgid "Encryption algorithm"
 msgstr "Алгоритми Рамзикунонӣ"
@@ -2361,32 +2366,32 @@ msgstr ""
 "Хатогӣ рух дод - ягон дастгоҳи аслие, барои офаридани файлсистеми нав ёфт "
 "нашуд. Барои фаҳмидани ин муаммо сахтафзорро санҷида бинед"
 
-#: fs/any.pm:75 fs/partitioning_wizard.pm:61
+#: fs/any.pm:75 fs/partitioning_wizard.pm:62
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "Шояд шумо қисми FAT-ро дошта бошед, ки дар /boot/efi васл шудааст"
 
-#: fs/format.pm:103
+#: fs/format.pm:106
 #, c-format
 msgid "Creating and formatting file %s"
 msgstr "Файли %s офарида мешавад ва шаклбандӣ мегардад"
 
-#: fs/format.pm:122
+#: fs/format.pm:125
 #, fuzzy, c-format
 msgid "I do not know how to set label on %s with type %s"
 msgstr "Ман намедонам чӣ хел %s-ро бо навъи %s шакл бандам"
 
-#: fs/format.pm:131
+#: fs/format.pm:134
 #, fuzzy, c-format
 msgid "setting label on %s failed, is it formatted?"
 msgstr "%s шаклбандии %s нагузашт"
 
-#: fs/format.pm:172
+#: fs/format.pm:175
 #, c-format
 msgid "I do not know how to format %s in type %s"
 msgstr "Ман намедонам чӣ хел %s-ро бо навъи %s шакл бандам"
 
-#: fs/format.pm:177 fs/format.pm:179
+#: fs/format.pm:180 fs/format.pm:182
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "%s шаклбандии %s нагузашт"
@@ -2421,24 +2426,17 @@ msgstr "ҷудокунии хатои %s: %s"
 msgid "Enabling swap partition %s"
 msgstr "Даргиронидани бахши swap %s"
 
-#: fs/mount_options.pm:114
-#, fuzzy, c-format
-msgid "Use an encrypted file system"
-msgstr ""
-"Шумо файл системи рамздоштаро барои нуқтаи васли %s истифода бурда "
-"наметавонед"
-
-#: fs/mount_options.pm:116
+#: fs/mount_options.pm:113
 #, c-format
 msgid "Flush write cache on file close"
 msgstr ""
 
-#: fs/mount_options.pm:118
+#: fs/mount_options.pm:115
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
 msgstr ""
 
-#: fs/mount_options.pm:120
+#: fs/mount_options.pm:117
 #, c-format
 msgid ""
 "Do not update inode access times on this file system\n"
@@ -2448,7 +2446,7 @@ msgstr ""
 "(яъне, барои ба даст даровардани роҳи тезтар ба дастгоҳи чархиши ахборот бо "
 "мақсади тезонидани кори хидматрасонҳои ахборот)."
 
-#: fs/mount_options.pm:123
+#: fs/mount_options.pm:120
 #, fuzzy, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
@@ -2458,7 +2456,7 @@ msgstr ""
 "(яъне, барои ба даст даровардани роҳи тезтар ба дастгоҳи чархиши ахборот бо "
 "мақсади тезонидани кори хидматрасонҳои ахборот)."
 
-#: fs/mount_options.pm:126
+#: fs/mount_options.pm:123
 #, c-format
 msgid ""
 "Can only be mounted explicitly (i.e.,\n"
@@ -2467,14 +2465,14 @@ msgstr ""
 "Танҳо бо роҳи саҳеҳ метавон насб намуд (яъне, интихоби а ба насби системи\n"
 "файлӣ намеорад)."
 
-#: fs/mount_options.pm:129
+#: fs/mount_options.pm:126
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
 msgstr ""
 "Дар системи файлӣ дастгоҳҳои блокии рамзнок ё ин ки махсусро маънидод "
 "накардан."
 
-#: fs/mount_options.pm:131
+#: fs/mount_options.pm:128
 #, c-format
 msgid ""
 "Do not allow execution of any binaries on the mounted\n"
@@ -2485,7 +2483,7 @@ msgstr ""
 "интихоб шояд барои корванди системҳои файлӣ дошта муфид бошад, ки он\n"
 "дуиҳои барои меъмории аз худаш фарқкунандаро дошта бошад."
 
-#: fs/mount_options.pm:135
+#: fs/mount_options.pm:132
 #, c-format
 msgid ""
 "Do not allow set-user-identifier or set-group-identifier\n"
@@ -2498,42 +2496,42 @@ msgstr ""
 "мегардад,\n"
 "агар шумо suidperl (1)-ро ба танзим дароварда бошед.)"
 
-#: fs/mount_options.pm:139
+#: fs/mount_options.pm:136
 #, c-format
 msgid "Mount the file system read-only."
 msgstr "Системаи файлиро бо усули танҳо-барои-хониш насб кунед."
 
-#: fs/mount_options.pm:141
+#: fs/mount_options.pm:138
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
 msgstr "Ҳамаи I/O барои системаи файлӣ боянд ҳамзамон иҷро гарданд."
 
-#: fs/mount_options.pm:143
+#: fs/mount_options.pm:140
 #, c-format
 msgid "Allow every user to mount and umount the file system."
 msgstr ""
 
-#: fs/mount_options.pm:145
+#: fs/mount_options.pm:142
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
 msgstr ""
 
-#: fs/mount_options.pm:147
+#: fs/mount_options.pm:144
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr ""
 
-#: fs/mount_options.pm:149
+#: fs/mount_options.pm:146
 #, c-format
 msgid "Support \"user.\" extended attributes"
 msgstr ""
 
-#: fs/mount_options.pm:151
+#: fs/mount_options.pm:148
 #, c-format
 msgid "Give write access to ordinary users"
 msgstr "Ба корванди оддӣ иҷозати навиштан диҳед"
 
-#: fs/mount_options.pm:153
+#: fs/mount_options.pm:150
 #, c-format
 msgid "Give read-only access to ordinary users"
 msgstr "Ба корванди оддӣ иҷозати навиштан диҳед"
@@ -2591,7 +2589,7 @@ msgstr ""
 "Сониян, амалиёти ``Нуқтаи васлшавӣ ва барпо сохтани онро дар `/'-ро интихоб "
 "намоед"
 
-#: fs/partitioning_wizard.pm:58
+#: fs/partitioning_wizard.pm:59
 #, c-format
 msgid ""
 "You do not have a swap partition.\n"
@@ -2602,42 +2600,42 @@ msgstr ""
 "\n"
 "Ба ҳар ҳол давом диҳем?"
 
-#: fs/partitioning_wizard.pm:92
+#: fs/partitioning_wizard.pm:93
 #, c-format
 msgid "Use free space"
 msgstr "Ҷои озодро истифод бурдан"
 
-#: fs/partitioning_wizard.pm:94
+#: fs/partitioning_wizard.pm:95
 #, c-format
 msgid "Not enough free space to allocate new partitions"
 msgstr "Барои ҷойгир намудани қисмҳои нав ҷои изофа кофӣ нест"
 
-#: fs/partitioning_wizard.pm:102
+#: fs/partitioning_wizard.pm:103
 #, c-format
 msgid "Use existing partitions"
 msgstr "Бахшбандиҳои ҳозир бударо истифода баред"
 
-#: fs/partitioning_wizard.pm:104
+#: fs/partitioning_wizard.pm:105
 #, c-format
 msgid "There is no existing partition to use"
 msgstr "Барои истифодабарӣ ягон қисми мавҷудбуда нест"
 
-#: fs/partitioning_wizard.pm:128
+#: fs/partitioning_wizard.pm:129
 #, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
 msgstr "Андозаи бахшбандии Microsoft Windows® ҳисоб шуда истодааст"
 
-#: fs/partitioning_wizard.pm:164
+#: fs/partitioning_wizard.pm:165
 #, fuzzy, c-format
 msgid "Use the free space on a Microsoft Windows® partition"
 msgstr "Фазои холиро дар бахши Windows истифода баред"
 
-#: fs/partitioning_wizard.pm:168
+#: fs/partitioning_wizard.pm:169
 #, c-format
 msgid "Which partition do you want to resize?"
 msgstr "Андозаи кадоме аз қисмҳоро шумо тағир додан мехоҳед?"
 
-#: fs/partitioning_wizard.pm:171
+#: fs/partitioning_wizard.pm:172
 #, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
@@ -2649,7 +2647,7 @@ msgstr ""
 "кор андозед ва сониян такроран коргузории Mandriva Linux-ро мавриди "
 "истифодабарӣ қарор диҳед."
 
-#: fs/partitioning_wizard.pm:179
+#: fs/partitioning_wizard.pm:180
 #, c-format
 msgid ""
 "WARNING!\n"
@@ -2686,76 +2684,76 @@ msgstr ""
 "Вақте ки боварӣ ҳосил кардед ба %s ангушт занед."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:188 fs/partitioning_wizard.pm:551
+#: fs/partitioning_wizard.pm:189 fs/partitioning_wizard.pm:552
 #: interactive.pm:549 interactive/curses.pm:263 ugtk2.pm:519
 #, c-format
 msgid "Next"
 msgstr "Навбатӣ"
 
-#: fs/partitioning_wizard.pm:194
+#: fs/partitioning_wizard.pm:195
 #, fuzzy, c-format
 msgid "Partitionning"
 msgstr "Ҷузъбандӣ"
 
-#: fs/partitioning_wizard.pm:194
+#: fs/partitioning_wizard.pm:195
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
 msgstr ""
 "Шумо кадом ҳаҷмро барои Microsoft Windows® доштан мехоҳед ҷузъбандии %s?"
 
-#: fs/partitioning_wizard.pm:195
+#: fs/partitioning_wizard.pm:196
 #, c-format
 msgid "Size"
 msgstr "Андоза"
 
-#: fs/partitioning_wizard.pm:204
+#: fs/partitioning_wizard.pm:205
 #, c-format
 msgid "Resizing Microsoft Windows® partition"
 msgstr "Андозаи қисми Microsoft Windows® тағир меёбад"
 
-#: fs/partitioning_wizard.pm:209
+#: fs/partitioning_wizard.pm:210
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr "Тағир додани андозаи FAT бемуваффақият анҷом ёфт: %s"
 
-#: fs/partitioning_wizard.pm:225
+#: fs/partitioning_wizard.pm:226
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr "Барои тағири андозаи бахши FAT мавҷуд нест (ё ки ҷои кофӣ намондааст)"
 
-#: fs/partitioning_wizard.pm:230
+#: fs/partitioning_wizard.pm:231
 #, c-format
 msgid "Remove Microsoft Windows®"
 msgstr "Microsoft Windows®-ро хориҷ намоед"
 
-#: fs/partitioning_wizard.pm:230
+#: fs/partitioning_wizard.pm:231
 #, c-format
 msgid "Erase and use entire disk"
 msgstr "Тамоми дискро тоза намоед ва истифода баред"
 
-#: fs/partitioning_wizard.pm:234
+#: fs/partitioning_wizard.pm:235
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr ""
 "Шумо зиёда аз як диски сахт доред. Дар кадоме аз онҳо шумо коргузории Linux-"
 "ро ба амал оварданӣ ҳастед?"
 
-#: fs/partitioning_wizard.pm:242 fsedit.pm:600
+#: fs/partitioning_wizard.pm:243 fsedit.pm:610
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "ҲАМАИ қисмҳои мавҷуд буда ва додаҳои онҳо дар гардони %s гум мешаванд"
 
-#: fs/partitioning_wizard.pm:252
+#: fs/partitioning_wizard.pm:253
 #, c-format
 msgid "Custom disk partitioning"
 msgstr "Ҷузъбандии дастии диск"
 
-#: fs/partitioning_wizard.pm:258
+#: fs/partitioning_wizard.pm:259
 #, c-format
 msgid "Use fdisk"
 msgstr "fdisk-ро истифода намудан"
 
-#: fs/partitioning_wizard.pm:261
+#: fs/partitioning_wizard.pm:262
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -2764,37 +2762,37 @@ msgstr ""
 "Акнун шумо метавонед %s-ро бахшбандӣ намоед.\n"
 "Баъд аз итмоми он ба воситаи истифодаи `w' нигоҳ доштанро фаромӯш накунед"
 
-#: fs/partitioning_wizard.pm:401
+#: fs/partitioning_wizard.pm:402
 #, fuzzy, c-format
 msgid "Ext2/3/4"
 msgstr "Хуруҷ"
 
-#: fs/partitioning_wizard.pm:431 fs/partitioning_wizard.pm:571
+#: fs/partitioning_wizard.pm:432 fs/partitioning_wizard.pm:572
 #, c-format
 msgid "I can not find any room for installing"
 msgstr "Ягон ҷой барои коргузорӣ пайдо карда натавониста истодаам"
 
-#: fs/partitioning_wizard.pm:440 fs/partitioning_wizard.pm:578
+#: fs/partitioning_wizard.pm:441 fs/partitioning_wizard.pm:579
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "Устози ҷузъбандии DrakX ба қарорҳои зерин омад:"
 
-#: fs/partitioning_wizard.pm:511
+#: fs/partitioning_wizard.pm:512
 #, c-format
 msgid "Here is the content of your disk drive "
 msgstr ""
 
-#: fs/partitioning_wizard.pm:588
+#: fs/partitioning_wizard.pm:589
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Ҷузъбандӣ бемувафаққият анҷом ёфт: %s"
 
-#: fs/type.pm:390
+#: fs/type.pm:393
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
 msgstr "Шумо JFS-ро барои базшҳои аз 16МБ хурд истифода бурда наметавонед"
 
-#: fs/type.pm:391
+#: fs/type.pm:394
 #, c-format
 msgid "You can not use ReiserFS for partitions smaller than 32MB"
 msgstr "Шумо ReiserFS-ро барои бахшҳои аз 32МБ хурд истифода бурда наметавонед"
@@ -2867,13 +2865,31 @@ msgstr ""
 "Барои иловаи бахши /boot эҳтиёт бошед"
 
 #: fsedit.pm:437
+#, fuzzy, c-format
+msgid ""
+"You've selected an encrypted partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"Шумо бахши нармафзори RAID-ро ҳамчун root (/) интихоб кардед.\n"
+"Ягон корандози boot инро бе бахши /boot даста карда наметевонад.\n"
+"Барои иловаи бахши /boot эҳтиёт бошед"
+
+#: fsedit.pm:443 fsedit.pm:461
+#, c-format
+msgid "You can not use an encrypted file system for mount point %s"
+msgstr ""
+"Шумо файл системи рамздоштаро барои нуқтаи васли %s истифода бурда "
+"наметавонед"
+
+#: fsedit.pm:447
 #, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr ""
 
-#: fsedit.pm:439
+#: fsedit.pm:449
 #, fuzzy, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
@@ -2885,12 +2901,12 @@ msgstr ""
 "Ягон корандози boot инро бе бахши /boot даста карда наметевонад.\n"
 "Барои иловаи бахши /boot эҳтиёт бошед"
 
-#: fsedit.pm:443 fsedit.pm:445
+#: fsedit.pm:453 fsedit.pm:455
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Ин феҳрист бояд дар дохили файлсистеми root бошад"
 
-#: fsedit.pm:447 fsedit.pm:449
+#: fsedit.pm:457 fsedit.pm:459
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/3/4, reiserfs, xfs, or jfs) for this mount "
@@ -2899,19 +2915,12 @@ msgstr ""
 "Ба Шумо файлсистеми ҳақиқии (ext2/3/4, reiserfs, xfs, or jfs) барои ин "
 "нуқтаи васл лозим аст\n"
 
-#: fsedit.pm:451
-#, c-format
-msgid "You can not use an encrypted file system for mount point %s"
-msgstr ""
-"Шумо файл системи рамздоштаро барои нуқтаи васли %s истифода бурда "
-"наметавонед"
-
-#: fsedit.pm:516
+#: fsedit.pm:526
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "Барои худ-ғунҷонӣ ҷои холии кофӣ нест"
 
-#: fsedit.pm:518
+#: fsedit.pm:528
 #, c-format
 msgid "Nothing to do"
 msgstr "Ҳеҷ чиз барои иҷроиш"
@@ -7186,6 +7195,22 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Коргузорӣ бо нокомӣ анҷомид"
+
+#~ msgid "Restrict command line options"
+#~ msgstr "Маҳдуди хосиятҳои сатри фармон"
+
+#~ msgid "restrict"
+#~ msgstr "маҳдуд"
+
+#~ msgid ""
+#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ msgstr "Хосият ‘’Маҳдуди хосиятҳои сатри фармон‘’ бе гузарвожа суд надорад"
+
+#, fuzzy
+#~ msgid "Use an encrypted file system"
+#~ msgstr ""
+#~ "Шумо файл системи рамздоштаро барои нуқтаи васли %s истифода бурда "
+#~ "наметавонед"
 
 #~ msgid ""
 #~ "To ensure data integrity after resizing the partition(s), \n"

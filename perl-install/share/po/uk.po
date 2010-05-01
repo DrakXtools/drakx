@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
-"POT-Creation-Date: 2010-03-28 14:46+0200\n"
+"POT-Creation-Date: 2010-05-01 16:46+0200\n"
 "PO-Revision-Date: 2009-10-12 08:01+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
@@ -22,10 +22,10 @@ msgstr ""
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: any.pm:252 any.pm:953 diskdrake/interactive.pm:597
-#: diskdrake/interactive.pm:802 diskdrake/interactive.pm:846
-#: diskdrake/interactive.pm:950 diskdrake/interactive.pm:1204
-#: diskdrake/interactive.pm:1256 do_pkgs.pm:241 do_pkgs.pm:287
+#: any.pm:252 any.pm:947 diskdrake/interactive.pm:647
+#: diskdrake/interactive.pm:864 diskdrake/interactive.pm:924
+#: diskdrake/interactive.pm:1026 diskdrake/interactive.pm:1256
+#: diskdrake/interactive.pm:1308 do_pkgs.pm:241 do_pkgs.pm:287
 #: harddrake/sound.pm:303 interactive.pm:587 pkgs.pm:281
 #, c-format
 msgid "Please wait"
@@ -130,7 +130,7 @@ msgstr "Пропустити"
 msgid "Boot Style Configuration"
 msgstr "Налаштування стилю завантаження"
 
-#: any.pm:412 any.pm:452 any.pm:453
+#: any.pm:412 any.pm:445 any.pm:446
 #, c-format
 msgid "Bootloader main options"
 msgstr "Основні параметри завантажувача"
@@ -140,12 +140,12 @@ msgstr "Основні параметри завантажувача"
 msgid "Bootloader"
 msgstr "Завантажувач"
 
-#: any.pm:417 any.pm:456
+#: any.pm:417 any.pm:449
 #, c-format
 msgid "Bootloader to use"
 msgstr "Використовувати завантажувач"
 
-#: any.pm:420 any.pm:459
+#: any.pm:420 any.pm:452
 #, c-format
 msgid "Boot device"
 msgstr "Пристрій завантаження"
@@ -185,7 +185,7 @@ msgstr "Увімкнути локальний APIC"
 msgid "Security"
 msgstr "Безпека"
 
-#: any.pm:431 any.pm:891 any.pm:907 authentication.pm:250
+#: any.pm:431 any.pm:885 any.pm:901 authentication.pm:250
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
@@ -196,7 +196,7 @@ msgstr "Пароль"
 msgid "The passwords do not match"
 msgstr "Паролі не збігаються"
 
-#: any.pm:434 authentication.pm:261 diskdrake/interactive.pm:1428
+#: any.pm:434 authentication.pm:261 diskdrake/interactive.pm:1483
 #, c-format
 msgid "Please try again"
 msgstr "Будь ласка, спробуйте ще раз"
@@ -206,165 +206,152 @@ msgstr "Будь ласка, спробуйте ще раз"
 msgid "You can not use a password with %s"
 msgstr "Ви не можете використовувати пароль разом з %s"
 
-#: any.pm:440 any.pm:893 any.pm:909 authentication.pm:251
+#: any.pm:440 any.pm:887 any.pm:903 authentication.pm:251
 #, c-format
 msgid "Password (again)"
 msgstr "Пароль (ще раз)"
 
 #: any.pm:441
 #, c-format
-msgid "Restrict command line options"
-msgstr "Обмежити параметри командного рядка"
-
-#: any.pm:442
-#, c-format
-msgid "restrict"
-msgstr "обмежити"
-
-#: any.pm:445
-#, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
-msgstr ""
-"Параметр \"Обмежити параметри командного рядка\" не використовується без "
-"пароля"
-
-#: any.pm:448
-#, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Очищати /tmp при кожному перезавантаженні"
 
-#: any.pm:458
+#: any.pm:451
 #, c-format
 msgid "Init Message"
 msgstr "Повідомлення започаткування"
 
-#: any.pm:460
+#: any.pm:453
 #, c-format
 msgid "Open Firmware Delay"
 msgstr "Затримка Open Firmware"
 
-#: any.pm:461
+#: any.pm:454
 #, c-format
 msgid "Kernel Boot Timeout"
 msgstr "Затримка при завантаженні ядра"
 
-#: any.pm:462
+#: any.pm:455
 #, c-format
 msgid "Enable CD Boot?"
 msgstr "Дозволити завантаження з компакт-диску?"
 
-#: any.pm:463
+#: any.pm:456
 #, c-format
 msgid "Enable OF Boot?"
 msgstr "Дозволити завантаження OF?"
 
-#: any.pm:464
+#: any.pm:457
 #, c-format
 msgid "Default OS?"
 msgstr "Основна система?"
 
-#: any.pm:537
+#: any.pm:530
 #, c-format
 msgid "Image"
 msgstr "Образ"
 
-#: any.pm:538 any.pm:551
+#: any.pm:531 any.pm:545
 #, c-format
 msgid "Root"
 msgstr "Root"
 
-#: any.pm:539 any.pm:564
+#: any.pm:532 any.pm:558
 #, c-format
 msgid "Append"
 msgstr "Приєднати"
 
-#: any.pm:541
+#: any.pm:534
 #, c-format
 msgid "Xen append"
 msgstr "Приєднання Xen"
 
-#: any.pm:544
+#: any.pm:536
+#, c-format
+msgid "Requires password to boot"
+msgstr ""
+
+#: any.pm:538
 #, c-format
 msgid "Video mode"
 msgstr "Відео-режим"
 
-#: any.pm:546
+#: any.pm:540
 #, c-format
 msgid "Initrd"
 msgstr "Initrd"
 
-#: any.pm:547
+#: any.pm:541
 #, c-format
 msgid "Network profile"
 msgstr "Мережевий профіль"
 
-#: any.pm:556 any.pm:561 any.pm:563 diskdrake/interactive.pm:407
+#: any.pm:550 any.pm:555 any.pm:557 diskdrake/interactive.pm:407
 #, c-format
 msgid "Label"
 msgstr "Мітка"
 
-#: any.pm:558 any.pm:566 harddrake/v4l.pm:438
+#: any.pm:552 any.pm:560 harddrake/v4l.pm:438
 #, c-format
 msgid "Default"
 msgstr "Основна"
 
-#: any.pm:565
+#: any.pm:559
 #, c-format
 msgid "NoVideo"
 msgstr "Без відео"
 
-#: any.pm:576
+#: any.pm:570
 #, c-format
 msgid "Empty label not allowed"
 msgstr "Не дозволяються порожні мітки"
 
-#: any.pm:577
+#: any.pm:571
 #, c-format
 msgid "You must specify a kernel image"
 msgstr "Ви повинні вказати образ ядра"
 
-#: any.pm:577
+#: any.pm:571
 #, c-format
 msgid "You must specify a root partition"
 msgstr "Ви повинні вказати кореневий розділ"
 
-#: any.pm:578
+#: any.pm:572
 #, c-format
 msgid "This label is already used"
 msgstr "Ця етикетка вже використовується"
 
-#: any.pm:596
+#: any.pm:590
 #, c-format
 msgid "Which type of entry do you want to add?"
 msgstr "Який тип вводу Ви хочете додати?"
 
-#: any.pm:597
+#: any.pm:591
 #, c-format
 msgid "Linux"
 msgstr "Лінакс"
 
-#: any.pm:597
+#: any.pm:591
 #, c-format
 msgid "Other OS (SunOS...)"
 msgstr "Інші операційні системи (SunOS...)"
 
-#: any.pm:598
+#: any.pm:592
 #, c-format
 msgid "Other OS (MacOS...)"
 msgstr "Інші системи (MacOS...)"
 
-#: any.pm:598
+#: any.pm:592
 #, c-format
 msgid "Other OS (Windows...)"
 msgstr "Інші Windows"
 
-#: any.pm:645
+#: any.pm:639
 #, c-format
 msgid "Bootloader Configuration"
 msgstr "Налаштування завантаження"
 
-#: any.pm:646
+#: any.pm:640
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -373,47 +360,47 @@ msgstr ""
 "Тут наведені пункти меню завантаження.\n"
 "Ви можете створити додаткові пункти або змінити існуючі."
 
-#: any.pm:851
+#: any.pm:845
 #, c-format
 msgid "access to X programs"
 msgstr "доступ до X програм"
 
-#: any.pm:852
+#: any.pm:846
 #, c-format
 msgid "access to rpm tools"
 msgstr "доступ до засобів rpm"
 
-#: any.pm:853
+#: any.pm:847
 #, c-format
 msgid "allow \"su\""
 msgstr "дозволити \"su\""
 
-#: any.pm:854
+#: any.pm:848
 #, c-format
 msgid "access to administrative files"
 msgstr "доступ до виконавчих файлів"
 
-#: any.pm:855
+#: any.pm:849
 #, c-format
 msgid "access to network tools"
 msgstr "доступ до мережевих засобів"
 
-#: any.pm:856
+#: any.pm:850
 #, c-format
 msgid "access to compilation tools"
 msgstr "доступ до інструментів компіляції"
 
-#: any.pm:862
+#: any.pm:856
 #, c-format
 msgid "(already added %s)"
 msgstr "(вже додано %s)"
 
-#: any.pm:868
+#: any.pm:862
 #, c-format
 msgid "Please give a user name"
 msgstr "Дайте, будь ласка, ім'я користувача"
 
-#: any.pm:869
+#: any.pm:863
 #, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
@@ -422,149 +409,149 @@ msgstr ""
 "Ім'я користувача має починатися з малої латинської літери, слідом за якою "
 "можна використовувати малі латинські літери, цифри, символи `-' та `_'"
 
-#: any.pm:870
+#: any.pm:864
 #, c-format
 msgid "The user name is too long"
 msgstr "Ім'я користувача занадто довге"
 
-#: any.pm:871
+#: any.pm:865
 #, c-format
 msgid "This user name has already been added"
 msgstr "Таке ім'я користувача вже створене раніше"
 
-#: any.pm:877 any.pm:911
+#: any.pm:871 any.pm:905
 #, c-format
 msgid "User ID"
 msgstr "Код користувача"
 
-#: any.pm:877 any.pm:912
+#: any.pm:871 any.pm:906
 #, c-format
 msgid "Group ID"
 msgstr "Код групи"
 
-#: any.pm:878
+#: any.pm:872
 #, c-format
 msgid "%s must be a number"
 msgstr "Параметр %s має бути числом!"
 
-#: any.pm:879
+#: any.pm:873
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
 msgstr "%s має бути більшим за 500. Прийняти значення?"
 
-#: any.pm:883
+#: any.pm:877
 #, c-format
 msgid "User management"
 msgstr "Керування користувачами"
 
-#: any.pm:889
+#: any.pm:883
 #, c-format
 msgid "Enable guest account"
 msgstr ""
 
-#: any.pm:890 authentication.pm:237
+#: any.pm:884 authentication.pm:237
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "Встановіть пароль користувача root"
 
-#: any.pm:895
+#: any.pm:889
 #, c-format
 msgid "Enter a user"
 msgstr "Введіть користувача"
 
-#: any.pm:897
+#: any.pm:891
 #, c-format
 msgid "Icon"
 msgstr "Піктограма"
 
-#: any.pm:900
+#: any.pm:894
 #, c-format
 msgid "Real name"
 msgstr "Дійсна назва"
 
-#: any.pm:905
+#: any.pm:899
 #, c-format
 msgid "Login name"
 msgstr "Ім'я користувача, що реєструється"
 
-#: any.pm:910
+#: any.pm:904
 #, c-format
 msgid "Shell"
 msgstr "Командна оболонка"
 
-#: any.pm:953
+#: any.pm:947
 #, c-format
 msgid "Please wait, adding media..."
 msgstr "Зачекайте, будь ласка, додається джерело..."
 
-#: any.pm:983 security/l10n.pm:14
+#: any.pm:977 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "Автореєстрація"
 
-#: any.pm:984
+#: any.pm:978
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr ""
 "Я можу налаштувати Ваш комп'ютер так, щоб автоматично реєструвався\n"
 "один користувач."
 
-#: any.pm:985
+#: any.pm:979
 #, c-format
 msgid "Use this feature"
 msgstr "Використовувати цю можливість"
 
-#: any.pm:986
+#: any.pm:980
 #, c-format
 msgid "Choose the default user:"
 msgstr "Виберіть стандартного користувача:"
 
-#: any.pm:987
+#: any.pm:981
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Виберіть менеджер вікон, яким Ви хочете користуватися:"
 
-#: any.pm:998 any.pm:1018 any.pm:1091
+#: any.pm:992 any.pm:1012 any.pm:1085
 #, c-format
 msgid "Release Notes"
 msgstr "Нотатки випуску"
 
-#: any.pm:1025 any.pm:1379 interactive/gtk.pm:819
+#: any.pm:1019 any.pm:1373 interactive/gtk.pm:819
 #, c-format
 msgid "Close"
 msgstr "Закрити"
 
-#: any.pm:1077
+#: any.pm:1071
 #, c-format
 msgid "License agreement"
 msgstr "Ліцензійна угода"
 
-#: any.pm:1079 diskdrake/dav.pm:26
+#: any.pm:1073 diskdrake/dav.pm:26
 #, c-format
 msgid "Quit"
 msgstr "Вийти"
 
-#: any.pm:1086
+#: any.pm:1080
 #, c-format
 msgid "Do you accept this license ?"
 msgstr "Чи приймаєте Ви цю ліцензію?"
 
-#: any.pm:1087
+#: any.pm:1081
 #, c-format
 msgid "Accept"
 msgstr "Прийняти"
 
-#: any.pm:1087
+#: any.pm:1081
 #, c-format
 msgid "Refuse"
 msgstr "Відкинути"
 
-#: any.pm:1113 any.pm:1175
+#: any.pm:1107 any.pm:1169
 #, c-format
 msgid "Please choose a language to use"
 msgstr "Виберіть, будь ласка, мову"
 
-#: any.pm:1141
+#: any.pm:1135
 #, c-format
 msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
@@ -575,77 +562,77 @@ msgstr ""
 "мови, які Ви хочете встановити. Вони стануть доступними\n"
 "після завершення встановлення і перезавантаження системи."
 
-#: any.pm:1144
+#: any.pm:1138
 #, c-format
 msgid "Multi languages"
 msgstr "Декілька мов"
 
-#: any.pm:1153 any.pm:1184
+#: any.pm:1147 any.pm:1178
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr "Застаріле (не-UTF-8) кодування"
 
-#: any.pm:1154
+#: any.pm:1148
 #, c-format
 msgid "All languages"
 msgstr "Всі мови"
 
-#: any.pm:1176
+#: any.pm:1170
 #, c-format
 msgid "Language choice"
 msgstr "Вибір мови"
 
-#: any.pm:1230
+#: any.pm:1224
 #, c-format
 msgid "Country / Region"
 msgstr "Країна / Регіон"
 
-#: any.pm:1231
+#: any.pm:1225
 #, c-format
 msgid "Please choose your country"
 msgstr "Будь ласка, вкажіть Вашу країну"
 
-#: any.pm:1233
+#: any.pm:1227
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Тут наведено повний список можливих країн"
 
-#: any.pm:1234
+#: any.pm:1228
 #, c-format
 msgid "Other Countries"
 msgstr "Інші країни"
 
-#: any.pm:1234 interactive.pm:488 interactive/gtk.pm:445
+#: any.pm:1228 interactive.pm:488 interactive/gtk.pm:445
 #, c-format
 msgid "Advanced"
 msgstr "Додатково"
 
-#: any.pm:1240
+#: any.pm:1234
 #, c-format
 msgid "Input method:"
 msgstr "Метод вводу:"
 
-#: any.pm:1243
+#: any.pm:1237
 #, c-format
 msgid "None"
 msgstr "Нічого"
 
-#: any.pm:1324
+#: any.pm:1318
 #, c-format
 msgid "No sharing"
 msgstr "Немає спільного доступу"
 
-#: any.pm:1324
+#: any.pm:1318
 #, c-format
 msgid "Allow all users"
 msgstr "Дозволити всіх користувачів"
 
-#: any.pm:1324
+#: any.pm:1318
 #, c-format
 msgid "Custom"
 msgstr "Спеціальний"
 
-#: any.pm:1328
+#: any.pm:1322
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -661,7 +648,7 @@ msgstr ""
 "\n"
 "\"Вибірково\" дозволяє надати доступ окремим користувачам \n"
 
-#: any.pm:1340
+#: any.pm:1334
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
@@ -670,7 +657,7 @@ msgstr ""
 "NFS: традиційна для Unix система спільного доступу до файлів з меншою "
 "підтримкою на Mac і Windows."
 
-#: any.pm:1343
+#: any.pm:1337
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
@@ -679,7 +666,7 @@ msgstr ""
 "SMB: система доступу до файлів, яка використовується Windows, Mac OS X і "
 "багатьма сучасними системами Лінакс."
 
-#: any.pm:1351
+#: any.pm:1345
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
@@ -687,12 +674,12 @@ msgstr ""
 "Ви можете експортувати з допомогою NFS або SMB. Будь ласка, вкажіть, що "
 "хочете використовувати."
 
-#: any.pm:1379
+#: any.pm:1373
 #, c-format
 msgid "Launch userdrake"
 msgstr "Запуск userdrake"
 
-#: any.pm:1381
+#: any.pm:1375
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -701,7 +688,7 @@ msgstr ""
 "Доступ для окремих користувачів здійснюється групою \"fileshare\". \n"
 "Ви можете використовувати userdrake, щоб додати користувача в цю групу."
 
-#: any.pm:1487
+#: any.pm:1481
 #, c-format
 msgid ""
 "You need to logout and back in again for changes to take effect. Press OK to "
@@ -710,47 +697,47 @@ msgstr ""
 "Ви повинні перезареєструватися, щоб задіяти зміни.Натисніть \"Гаразд\", щоб "
 "перезареєструватися."
 
-#: any.pm:1491
+#: any.pm:1485
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr "Ви повинні перезареєструватися, щоб задіяти зміни"
 
-#: any.pm:1526
+#: any.pm:1520
 #, c-format
 msgid "Timezone"
 msgstr "Часовий пояс"
 
-#: any.pm:1526
+#: any.pm:1520
 #, c-format
 msgid "Which is your timezone?"
 msgstr "В якому часовому поясі Ви знаходитесь?"
 
-#: any.pm:1549 any.pm:1551
+#: any.pm:1543 any.pm:1545
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Параметри дати, часу та часового поясу"
 
-#: any.pm:1552
+#: any.pm:1546
 #, c-format
 msgid "What is the best time?"
 msgstr "Яким є найкращий час?"
 
-#: any.pm:1556
+#: any.pm:1550
 #, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "%s (апаратний годинник налаштовано на всесвітній час)"
 
-#: any.pm:1557
+#: any.pm:1551
 #, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "%s (апаратний годинник налаштовано на місцевий час)"
 
-#: any.pm:1559
+#: any.pm:1553
 #, c-format
 msgid "NTP Server"
 msgstr "Сервер NTP"
 
-#: any.pm:1560
+#: any.pm:1554
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Автоматична синхронізація часу (із застосуванням NTP)"
@@ -1137,12 +1124,12 @@ msgstr "SILO"
 msgid "not enough room in /boot"
 msgstr "недостатньо місця в /boot"
 
-#: bootloader.pm:1923
+#: bootloader.pm:1932
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
 msgstr "Ви не можете встановити завантажувач в розділ %s\n"
 
-#: bootloader.pm:2044
+#: bootloader.pm:2053
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1151,7 +1138,7 @@ msgstr ""
 "Конфігурація Вашого завантажувача має бути поновлена, бо розділи було "
 "перенумеровано"
 
-#: bootloader.pm:2057
+#: bootloader.pm:2066
 #, c-format
 msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
@@ -1160,7 +1147,7 @@ msgstr ""
 "Завантажувач не може бути коректно встановлений. Вам необхідно завантажити "
 "rescue, і вибрати \"%s\""
 
-#: bootloader.pm:2058
+#: bootloader.pm:2067
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Перевстановити завантажувач"
@@ -1244,15 +1231,15 @@ msgid "Server"
 msgstr "Сервер"
 
 #: diskdrake/dav.pm:66 diskdrake/interactive.pm:404
-#: diskdrake/interactive.pm:674 diskdrake/interactive.pm:692
-#: diskdrake/interactive.pm:696 diskdrake/removable.pm:23
+#: diskdrake/interactive.pm:724 diskdrake/interactive.pm:742
+#: diskdrake/interactive.pm:746 diskdrake/removable.pm:23
 #: diskdrake/smbnfs_gtk.pm:79
 #, c-format
 msgid "Mount point"
 msgstr "Точка монтування"
 
 #: diskdrake/dav.pm:67 diskdrake/interactive.pm:406
-#: diskdrake/interactive.pm:1098 diskdrake/removable.pm:24
+#: diskdrake/interactive.pm:1153 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
@@ -1269,18 +1256,18 @@ msgstr "Вилучити"
 msgid "Done"
 msgstr "Виконано"
 
-#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:128 diskdrake/hd_gtk.pm:294
+#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:128 diskdrake/hd_gtk.pm:292
 #: diskdrake/interactive.pm:247 diskdrake/interactive.pm:260
 #: diskdrake/interactive.pm:453 diskdrake/interactive.pm:523
-#: diskdrake/interactive.pm:528 diskdrake/interactive.pm:664
-#: diskdrake/interactive.pm:917 diskdrake/interactive.pm:968
-#: diskdrake/interactive.pm:1144 diskdrake/interactive.pm:1157
-#: diskdrake/interactive.pm:1160 diskdrake/interactive.pm:1428
-#: diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23 do_pkgs.pm:28 do_pkgs.pm:44
-#: do_pkgs.pm:60 do_pkgs.pm:65 do_pkgs.pm:82 fsedit.pm:246
-#: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
-#: scanner.pm:95 scanner.pm:106 scanner.pm:113 scanner.pm:120 wizards.pm:95
-#: wizards.pm:99 wizards.pm:121
+#: diskdrake/interactive.pm:541 diskdrake/interactive.pm:546
+#: diskdrake/interactive.pm:714 diskdrake/interactive.pm:993
+#: diskdrake/interactive.pm:1044 diskdrake/interactive.pm:1199
+#: diskdrake/interactive.pm:1212 diskdrake/interactive.pm:1215
+#: diskdrake/interactive.pm:1483 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23
+#: do_pkgs.pm:28 do_pkgs.pm:44 do_pkgs.pm:60 do_pkgs.pm:65 do_pkgs.pm:82
+#: fsedit.pm:246 interactive/http.pm:117 interactive/http.pm:118
+#: modules/interactive.pm:19 scanner.pm:95 scanner.pm:106 scanner.pm:113
+#: scanner.pm:120 wizards.pm:95 wizards.pm:99 wizards.pm:121
 #, c-format
 msgid "Error"
 msgstr "Помилка"
@@ -1295,12 +1282,12 @@ msgstr "Будь ласка, вкажіть посилання на сервер
 msgid "The URL must begin with http:// or https://"
 msgstr "адреса повинна починатися з http:// або https://"
 
-#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:412 diskdrake/interactive.pm:306
-#: diskdrake/interactive.pm:391 diskdrake/interactive.pm:553
-#: diskdrake/interactive.pm:755 diskdrake/interactive.pm:813
-#: diskdrake/interactive.pm:948 diskdrake/interactive.pm:990
-#: diskdrake/interactive.pm:991 diskdrake/interactive.pm:1241
-#: diskdrake/interactive.pm:1279 diskdrake/interactive.pm:1427 do_pkgs.pm:19
+#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:417 diskdrake/interactive.pm:306
+#: diskdrake/interactive.pm:391 diskdrake/interactive.pm:594
+#: diskdrake/interactive.pm:817 diskdrake/interactive.pm:875
+#: diskdrake/interactive.pm:1024 diskdrake/interactive.pm:1066
+#: diskdrake/interactive.pm:1067 diskdrake/interactive.pm:1293
+#: diskdrake/interactive.pm:1331 diskdrake/interactive.pm:1482 do_pkgs.pm:19
 #: do_pkgs.pm:39 do_pkgs.pm:57 do_pkgs.pm:77 harddrake/sound.pm:442
 #, c-format
 msgid "Warning"
@@ -1316,23 +1303,23 @@ msgstr "Ви справді бажаєте вилучити цю точку мо
 msgid "Server: "
 msgstr "Сервер: "
 
-#: diskdrake/dav.pm:125 diskdrake/interactive.pm:496
-#: diskdrake/interactive.pm:1303 diskdrake/interactive.pm:1388
+#: diskdrake/dav.pm:125 diskdrake/interactive.pm:498
+#: diskdrake/interactive.pm:1355 diskdrake/interactive.pm:1443
 #, c-format
 msgid "Mount point: "
 msgstr "Точка монтування: "
 
-#: diskdrake/dav.pm:126 diskdrake/interactive.pm:1395
+#: diskdrake/dav.pm:126 diskdrake/interactive.pm:1450
 #, c-format
 msgid "Options: %s"
 msgstr "Параметри: %s"
 
 #: diskdrake/hd_gtk.pm:61 diskdrake/interactive.pm:301
 #: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:106
-#: fs/partitioning_wizard.pm:53 fs/partitioning_wizard.pm:235
-#: fs/partitioning_wizard.pm:243 fs/partitioning_wizard.pm:282
-#: fs/partitioning_wizard.pm:431 fs/partitioning_wizard.pm:495
-#: fs/partitioning_wizard.pm:571 fs/partitioning_wizard.pm:574
+#: fs/partitioning_wizard.pm:53 fs/partitioning_wizard.pm:236
+#: fs/partitioning_wizard.pm:244 fs/partitioning_wizard.pm:283
+#: fs/partitioning_wizard.pm:432 fs/partitioning_wizard.pm:496
+#: fs/partitioning_wizard.pm:572 fs/partitioning_wizard.pm:575
 #, c-format
 msgid "Partitioning"
 msgstr "Розбиття на розділи"
@@ -1342,8 +1329,8 @@ msgstr "Розбиття на розділи"
 msgid "Click on a partition, choose a filesystem type then choose an action"
 msgstr "Натисніть розділ, виберіть тип файлової системи, а потім дію"
 
-#: diskdrake/hd_gtk.pm:110 diskdrake/interactive.pm:1119
-#: diskdrake/interactive.pm:1129 diskdrake/interactive.pm:1182
+#: diskdrake/hd_gtk.pm:110 diskdrake/interactive.pm:1174
+#: diskdrake/interactive.pm:1184 diskdrake/interactive.pm:1237
 #, c-format
 msgid "Read carefully"
 msgstr "Читайте уважно"
@@ -1363,7 +1350,7 @@ msgstr "Вийти"
 msgid "Continue"
 msgstr "Продовжити"
 
-#: diskdrake/hd_gtk.pm:182 fs/partitioning_wizard.pm:547 interactive.pm:653
+#: diskdrake/hd_gtk.pm:182 fs/partitioning_wizard.pm:548 interactive.pm:653
 #: interactive/gtk.pm:811 interactive/gtk.pm:829 interactive/gtk.pm:850
 #: ugtk2.pm:936
 #, c-format
@@ -1391,79 +1378,79 @@ msgstr "Клацніть, будь ласка, на розділі"
 msgid "Details"
 msgstr "Детально"
 
-#: diskdrake/hd_gtk.pm:294
+#: diskdrake/hd_gtk.pm:292
 #, c-format
 msgid "No hard drives found"
 msgstr "Не знайдено твердих дисків"
 
-#: diskdrake/hd_gtk.pm:321
+#: diskdrake/hd_gtk.pm:323
 #, c-format
 msgid "Unknown"
 msgstr "Невідомий"
 
-#: diskdrake/hd_gtk.pm:383
+#: diskdrake/hd_gtk.pm:388
 #, fuzzy, c-format
 msgid "Ext4"
 msgstr "Вийти"
 
-#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "XFS"
 msgstr "XFS"
 
-#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "Swap"
 msgstr "Swap"
 
-#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "SunOS"
 msgstr "SunOS"
 
-#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "HFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:384 fs/partitioning_wizard.pm:402 services.pm:184
+#: diskdrake/hd_gtk.pm:389 fs/partitioning_wizard.pm:403 services.pm:184
 #, c-format
 msgid "Other"
 msgstr "Інші"
 
-#: diskdrake/hd_gtk.pm:384 diskdrake/interactive.pm:1318
-#: fs/partitioning_wizard.pm:402
+#: diskdrake/hd_gtk.pm:389 diskdrake/interactive.pm:1370
+#: fs/partitioning_wizard.pm:403
 #, c-format
 msgid "Empty"
 msgstr "Порожній"
 
-#: diskdrake/hd_gtk.pm:391
+#: diskdrake/hd_gtk.pm:396
 #, c-format
 msgid "Filesystem types:"
 msgstr "Типи файлових систем:"
 
-#: diskdrake/hd_gtk.pm:412
+#: diskdrake/hd_gtk.pm:417
 #, c-format
 msgid "This partition is already empty"
 msgstr "Цей розділ вже порожній"
 
-#: diskdrake/hd_gtk.pm:421
+#: diskdrake/hd_gtk.pm:426
 #, c-format
 msgid "Use ``Unmount'' first"
 msgstr "Спочатку скористуйтеся ``Розмонтувати''"
 
-#: diskdrake/hd_gtk.pm:421
+#: diskdrake/hd_gtk.pm:426
 #, c-format
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Замість цього скористайтеся ``%s'' (у режимі експерта)"
 
-#: diskdrake/hd_gtk.pm:421 diskdrake/interactive.pm:405
-#: diskdrake/interactive.pm:591 diskdrake/removable.pm:25
+#: diskdrake/hd_gtk.pm:426 diskdrake/interactive.pm:405
+#: diskdrake/interactive.pm:641 diskdrake/removable.pm:25
 #: diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
@@ -1486,7 +1473,7 @@ msgid "More"
 msgstr "Ще"
 
 #: diskdrake/interactive.pm:281 diskdrake/interactive.pm:294
-#: diskdrake/interactive.pm:1226
+#: diskdrake/interactive.pm:568 diskdrake/interactive.pm:1278
 #, c-format
 msgid "Confirmation"
 msgstr "Підтвердження"
@@ -1511,7 +1498,7 @@ msgstr "Вийти без запису таблиці розділів?"
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "Чи хочете Ви зберегти зміни в /etc/fstab?"
 
-#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:282
+#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:283
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
@@ -1588,7 +1575,7 @@ msgstr "Детальна інформація"
 msgid "View"
 msgstr "Перегляд"
 
-#: diskdrake/interactive.pm:408 diskdrake/interactive.pm:768
+#: diskdrake/interactive.pm:408 diskdrake/interactive.pm:830
 #, c-format
 msgid "Resize"
 msgstr "Змінити розмір"
@@ -1598,12 +1585,12 @@ msgstr "Змінити розмір"
 msgid "Format"
 msgstr "Форматувати"
 
-#: diskdrake/interactive.pm:411 diskdrake/interactive.pm:878
+#: diskdrake/interactive.pm:411 diskdrake/interactive.pm:956
 #, c-format
 msgid "Add to RAID"
 msgstr "Додати до RAID"
 
-#: diskdrake/interactive.pm:412 diskdrake/interactive.pm:899
+#: diskdrake/interactive.pm:412 diskdrake/interactive.pm:975
 #, c-format
 msgid "Add to LVM"
 msgstr "Додати до LVM"
@@ -1653,37 +1640,62 @@ msgstr "Створити"
 msgid "Failed to mount partition"
 msgstr "Не вдалося змонтувати розділ"
 
-#: diskdrake/interactive.pm:485 diskdrake/interactive.pm:487
+#: diskdrake/interactive.pm:487 diskdrake/interactive.pm:489
 #, c-format
 msgid "Create a new partition"
 msgstr "Створити новий розділ"
 
-#: diskdrake/interactive.pm:489
+#: diskdrake/interactive.pm:491
 #, c-format
 msgid "Start sector: "
 msgstr "Початковий сектор: "
 
-#: diskdrake/interactive.pm:492 diskdrake/interactive.pm:983
+#: diskdrake/interactive.pm:494 diskdrake/interactive.pm:1059
 #, c-format
 msgid "Size in MB: "
 msgstr "Розмір (Мб): "
 
-#: diskdrake/interactive.pm:494 diskdrake/interactive.pm:984
+#: diskdrake/interactive.pm:496 diskdrake/interactive.pm:1060
 #, c-format
 msgid "Filesystem type: "
 msgstr "Тип файлової системи: "
 
-#: diskdrake/interactive.pm:500
+#: diskdrake/interactive.pm:502
 #, c-format
 msgid "Preference: "
 msgstr "Перевага: "
 
-#: diskdrake/interactive.pm:503
+#: diskdrake/interactive.pm:505
 #, c-format
 msgid "Logical volume name "
 msgstr "Назва логічного диску"
 
-#: diskdrake/interactive.pm:523
+#: diskdrake/interactive.pm:507
+#, fuzzy, c-format
+msgid "Encrypt partition"
+msgstr "Алгоритм шифрування"
+
+#: diskdrake/interactive.pm:508
+#, fuzzy, c-format
+msgid "Encryption key "
+msgstr "Ключ шифрування"
+
+#: diskdrake/interactive.pm:509 diskdrake/interactive.pm:1487
+#, c-format
+msgid "Encryption key (again)"
+msgstr "Ключ шифрування (знову)"
+
+#: diskdrake/interactive.pm:520 diskdrake/interactive.pm:1483
+#, c-format
+msgid "The encryption keys do not match"
+msgstr "Ключі шифрування не збігаються"
+
+#: diskdrake/interactive.pm:521
+#, fuzzy, c-format
+msgid "Missing encryption key"
+msgstr "Ключ шифрування файлової системи"
+
+#: diskdrake/interactive.pm:541
 #, c-format
 msgid ""
 "You can not create a new partition\n"
@@ -1694,68 +1706,74 @@ msgstr ""
 "(оскільки Ви вже досягли максимальної кількості первинних розділів).\n"
 "Спочатку вилучіть первинний розділ і створіть додатковий."
 
-#: diskdrake/interactive.pm:553
+#: diskdrake/interactive.pm:568 diskdrake/interactive.pm:1278
+#: fs/partitioning.pm:48
+#, c-format
+msgid "Check bad blocks?"
+msgstr "Перевіряти збійні блоки?"
+
+#: diskdrake/interactive.pm:594
 #, c-format
 msgid "Remove the loopback file?"
 msgstr "Стерти файл зворотнього монтування?"
 
-#: diskdrake/interactive.pm:575
+#: diskdrake/interactive.pm:622
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
 msgstr "Після зміни типу розділу %s всі дані на ньому буде втрачено"
 
-#: diskdrake/interactive.pm:588
+#: diskdrake/interactive.pm:638
 #, c-format
 msgid "Change partition type"
 msgstr "Змінити тип розділу"
 
-#: diskdrake/interactive.pm:590 diskdrake/removable.pm:47
+#: diskdrake/interactive.pm:640 diskdrake/removable.pm:47
 #, c-format
 msgid "Which filesystem do you want?"
 msgstr "Яку файлову систему Ви хочете?"
 
-#: diskdrake/interactive.pm:597
+#: diskdrake/interactive.pm:647
 #, c-format
 msgid "Switching from %s to %s"
 msgstr "Перемикання з %s на %s"
 
-#: diskdrake/interactive.pm:632
+#: diskdrake/interactive.pm:682
 #, c-format
 msgid "Set volume label"
 msgstr "Задати мітку тому"
 
-#: diskdrake/interactive.pm:634
+#: diskdrake/interactive.pm:684
 #, c-format
 msgid "Beware, this will be written to disk as soon as you validate!"
 msgstr "Будьте обережні, як тільки Ви підтвердите, це буде записано на диск!"
 
-#: diskdrake/interactive.pm:635
+#: diskdrake/interactive.pm:685
 #, c-format
 msgid "Beware, this will be written to disk only after formatting!"
 msgstr "Будьте обережні, це буде записано на диск тільки після форматування!"
 
-#: diskdrake/interactive.pm:637
+#: diskdrake/interactive.pm:687
 #, c-format
 msgid "Which volume label?"
 msgstr "Якою буде мітка тому?"
 
-#: diskdrake/interactive.pm:638
+#: diskdrake/interactive.pm:688
 #, c-format
 msgid "Label:"
 msgstr "Мітка:"
 
-#: diskdrake/interactive.pm:659
+#: diskdrake/interactive.pm:709
 #, c-format
 msgid "Where do you want to mount the loopback file %s?"
 msgstr "Де Ви хочете змонтувати файл зворотнього монтування %s?"
 
-#: diskdrake/interactive.pm:660
+#: diskdrake/interactive.pm:710
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "Де Ви хочете змонтувати пристрій %s?"
 
-#: diskdrake/interactive.pm:665
+#: diskdrake/interactive.pm:715
 #, c-format
 msgid ""
 "Can not unset mount point as this partition is used for loop back.\n"
@@ -1765,58 +1783,58 @@ msgstr ""
 "використовується для зворотнього монтування. Спочатку відмініть\n"
 "зворотнє монтування."
 
-#: diskdrake/interactive.pm:695
+#: diskdrake/interactive.pm:745
 #, c-format
 msgid "Where do you want to mount %s?"
 msgstr "Де Ви хочете змонтувати пристрій %s?"
 
-#: diskdrake/interactive.pm:719 diskdrake/interactive.pm:802
-#: fs/partitioning_wizard.pm:128 fs/partitioning_wizard.pm:204
+#: diskdrake/interactive.pm:775 diskdrake/interactive.pm:864
+#: fs/partitioning_wizard.pm:129 fs/partitioning_wizard.pm:205
 #, c-format
 msgid "Resizing"
 msgstr "Зміна розміру"
 
-#: diskdrake/interactive.pm:719
+#: diskdrake/interactive.pm:775
 #, c-format
 msgid "Computing FAT filesystem bounds"
 msgstr "Обчислюю межі розділу FAT"
 
-#: diskdrake/interactive.pm:755
+#: diskdrake/interactive.pm:817
 #, c-format
 msgid "This partition is not resizeable"
 msgstr "Розмір цього розділу неможливо змінити"
 
-#: diskdrake/interactive.pm:760
+#: diskdrake/interactive.pm:822
 #, c-format
 msgid "All data on this partition should be backed-up"
 msgstr "Потрібно зробити резервну копію всіх даних на цьому розділі"
 
-#: diskdrake/interactive.pm:762
+#: diskdrake/interactive.pm:824
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr "Після зміни розміру розділу %s всі дані на ньому буде втрачено"
 
-#: diskdrake/interactive.pm:769
+#: diskdrake/interactive.pm:831
 #, c-format
 msgid "Choose the new size"
 msgstr "Виберіть новий розмір"
 
-#: diskdrake/interactive.pm:770
+#: diskdrake/interactive.pm:832
 #, c-format
 msgid "New size in MB: "
 msgstr "Новий розмір в Мб: "
 
-#: diskdrake/interactive.pm:771
+#: diskdrake/interactive.pm:833
 #, c-format
 msgid "Minimum size: %s MB"
 msgstr "Мінімальний розмір: %s МБ"
 
-#: diskdrake/interactive.pm:772
+#: diskdrake/interactive.pm:834
 #, c-format
 msgid "Maximum size: %s MB"
 msgstr "Максимальний розмір: %s МБ"
 
-#: diskdrake/interactive.pm:813 fs/partitioning_wizard.pm:212
+#: diskdrake/interactive.pm:875 fs/partitioning_wizard.pm:213
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
@@ -1826,57 +1844,57 @@ msgstr ""
 "розділу(ів), при наступному завантаженні Microsoft Windows®\n"
 "буде здійснено перевірку файлової системи"
 
-#: diskdrake/interactive.pm:861 diskdrake/interactive.pm:1423
+#: diskdrake/interactive.pm:939 diskdrake/interactive.pm:1478
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "Ключ шифрування файлової системи"
 
-#: diskdrake/interactive.pm:862
+#: diskdrake/interactive.pm:940
 #, c-format
 msgid "Enter your filesystem encryption key"
 msgstr "Введіть ключ шифрування Вашої файлової системи"
 
-#: diskdrake/interactive.pm:863 diskdrake/interactive.pm:1431
+#: diskdrake/interactive.pm:941 diskdrake/interactive.pm:1486
 #, c-format
 msgid "Encryption key"
 msgstr "Ключ шифрування"
 
-#: diskdrake/interactive.pm:870
+#: diskdrake/interactive.pm:948
 #, c-format
 msgid "Invalid key"
 msgstr "Неправильний ключ"
 
-#: diskdrake/interactive.pm:878
+#: diskdrake/interactive.pm:956
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "Виберіть існуючий RAID, до якого додати"
 
-#: diskdrake/interactive.pm:880 diskdrake/interactive.pm:901
+#: diskdrake/interactive.pm:958 diskdrake/interactive.pm:977
 #, c-format
 msgid "new"
 msgstr "новий"
 
-#: diskdrake/interactive.pm:899
+#: diskdrake/interactive.pm:975
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "Виберіть існуючий LVM, до якого додати"
 
-#: diskdrake/interactive.pm:911 diskdrake/interactive.pm:920
+#: diskdrake/interactive.pm:987 diskdrake/interactive.pm:996
 #, c-format
 msgid "LVM name"
 msgstr "Назва LVM"
 
-#: diskdrake/interactive.pm:912
+#: diskdrake/interactive.pm:988
 #, c-format
 msgid "Enter a name for the new LVM volume group"
 msgstr "Введіть назву нової групи томів LVM"
 
-#: diskdrake/interactive.pm:917
+#: diskdrake/interactive.pm:993
 #, c-format
 msgid "\"%s\" already exists"
 msgstr "«%s» вже існує"
 
-#: diskdrake/interactive.pm:948
+#: diskdrake/interactive.pm:1024
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
@@ -1885,119 +1903,114 @@ msgstr ""
 "Фізичний том %s знаходиться у користуванні.\n"
 "Бажаєте перенести використаний фізичний діапазон з цього тому на інші томи?"
 
-#: diskdrake/interactive.pm:950
+#: diskdrake/interactive.pm:1026
 #, c-format
 msgid "Moving physical extents"
 msgstr "Перенесення фізичного діапазону"
 
-#: diskdrake/interactive.pm:968
+#: diskdrake/interactive.pm:1044
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "Цей розділ не може використовуватися для зворотнього монтування"
 
-#: diskdrake/interactive.pm:981
+#: diskdrake/interactive.pm:1057
 #, c-format
 msgid "Loopback"
 msgstr "Зворотнє монтування"
 
-#: diskdrake/interactive.pm:982
+#: diskdrake/interactive.pm:1058
 #, c-format
 msgid "Loopback file name: "
 msgstr "Назва файла зворотнього монтування: "
 
-#: diskdrake/interactive.pm:987
+#: diskdrake/interactive.pm:1063
 #, c-format
 msgid "Give a file name"
 msgstr "Вкажіть назву файла"
 
-#: diskdrake/interactive.pm:990
+#: diskdrake/interactive.pm:1066
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr ""
 "Файл вже використовується іншим пристроєм зворотнього монтування, виберіть "
 "інший"
 
-#: diskdrake/interactive.pm:991
+#: diskdrake/interactive.pm:1067
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "Файл вже існує. Користуватися ним?"
 
-#: diskdrake/interactive.pm:1023 diskdrake/interactive.pm:1026
+#: diskdrake/interactive.pm:1099 diskdrake/interactive.pm:1102
 #, c-format
 msgid "Mount options"
 msgstr "Параметри монтування:"
 
-#: diskdrake/interactive.pm:1033
+#: diskdrake/interactive.pm:1109
 #, c-format
 msgid "Various"
 msgstr "Різноманітне"
 
-#: diskdrake/interactive.pm:1100
+#: diskdrake/interactive.pm:1155
 #, c-format
 msgid "device"
 msgstr "пристрій"
 
-#: diskdrake/interactive.pm:1101
+#: diskdrake/interactive.pm:1156
 #, c-format
 msgid "level"
 msgstr "рівень"
 
-#: diskdrake/interactive.pm:1102
+#: diskdrake/interactive.pm:1157
 #, c-format
 msgid "chunk size in KiB"
 msgstr "розмір ділянки в Кб"
 
-#: diskdrake/interactive.pm:1120
+#: diskdrake/interactive.pm:1175
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Обережно: ця операція небезпечна."
 
-#: diskdrake/interactive.pm:1135
+#: diskdrake/interactive.pm:1190
 #, c-format
 msgid "Partitioning Type"
 msgstr "Тип розбиття на розділи"
 
-#: diskdrake/interactive.pm:1135
+#: diskdrake/interactive.pm:1190
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Який тип розбиття на розділи?"
 
-#: diskdrake/interactive.pm:1173
+#: diskdrake/interactive.pm:1228
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Щоб зміни почали діяти, Вам слід перезавантажити комп'ютер"
 
-#: diskdrake/interactive.pm:1182
+#: diskdrake/interactive.pm:1237
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk"
 msgstr "Таблицю розділів диску %s буде записано на диск"
 
-#: diskdrake/interactive.pm:1204 fs/format.pm:99 fs/format.pm:106
+#: diskdrake/interactive.pm:1256 fs/format.pm:102 fs/format.pm:109
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Форматується розділ %s"
 
-#: diskdrake/interactive.pm:1217
+#: diskdrake/interactive.pm:1269
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr "Після форматування розділу %s всі дані на ньому буде втрачено"
 
-#: diskdrake/interactive.pm:1226 fs/partitioning.pm:48
-#, c-format
-msgid "Check bad blocks?"
-msgstr "Перевіряти збійні блоки?"
-
-#: diskdrake/interactive.pm:1240
+#: diskdrake/interactive.pm:1292
 #, c-format
 msgid "Move files to the new partition"
 msgstr "Перемістити файли в новий розділ"
 
-#: diskdrake/interactive.pm:1240
+#: diskdrake/interactive.pm:1292
 #, c-format
 msgid "Hide files"
 msgstr "Сховати файли"
 
-#: diskdrake/interactive.pm:1241
+#: diskdrake/interactive.pm:1293
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -2014,128 +2027,128 @@ msgstr ""
 "змонтовано, або залишити файли на місці (це призведе до того, що ці файли "
 "буде приховано вмістом змонтованого розділу)"
 
-#: diskdrake/interactive.pm:1256
+#: diskdrake/interactive.pm:1308
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "Переміщення файлів у новий розділ"
 
-#: diskdrake/interactive.pm:1260
+#: diskdrake/interactive.pm:1312
 #, c-format
 msgid "Copying %s"
 msgstr "Копіювання %s"
 
-#: diskdrake/interactive.pm:1264
+#: diskdrake/interactive.pm:1316
 #, c-format
 msgid "Removing %s"
 msgstr "Вилучення %s"
 
-#: diskdrake/interactive.pm:1278
+#: diskdrake/interactive.pm:1330
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "розділ %s відомий, як %s"
 
-#: diskdrake/interactive.pm:1279
+#: diskdrake/interactive.pm:1331
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr "Нумерацію розділів буде змінено: "
 
-#: diskdrake/interactive.pm:1304 diskdrake/interactive.pm:1372
+#: diskdrake/interactive.pm:1356 diskdrake/interactive.pm:1427
 #, c-format
 msgid "Device: "
 msgstr "Пристрій: "
 
-#: diskdrake/interactive.pm:1305
+#: diskdrake/interactive.pm:1357
 #, c-format
 msgid "Volume label: "
 msgstr "Мітка тому: "
 
-#: diskdrake/interactive.pm:1306
+#: diskdrake/interactive.pm:1358
 #, c-format
 msgid "UUID: "
 msgstr "UUID: "
 
-#: diskdrake/interactive.pm:1307
+#: diskdrake/interactive.pm:1359
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "Літера диску в ДОСі: %s (припущення)\n"
 
-#: diskdrake/interactive.pm:1311 diskdrake/interactive.pm:1320
-#: diskdrake/interactive.pm:1391
+#: diskdrake/interactive.pm:1363 diskdrake/interactive.pm:1372
+#: diskdrake/interactive.pm:1446
 #, c-format
 msgid "Type: "
 msgstr "Тип: "
 
-#: diskdrake/interactive.pm:1315 diskdrake/interactive.pm:1376
+#: diskdrake/interactive.pm:1367 diskdrake/interactive.pm:1431
 #, c-format
 msgid "Name: "
 msgstr "Назва: "
 
-#: diskdrake/interactive.pm:1322
+#: diskdrake/interactive.pm:1374
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Початок: сектор %s\n"
 
-#: diskdrake/interactive.pm:1323
+#: diskdrake/interactive.pm:1375
 #, c-format
 msgid "Size: %s"
 msgstr "Розмір: %s"
 
-#: diskdrake/interactive.pm:1325
+#: diskdrake/interactive.pm:1377
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s секторів"
 
-#: diskdrake/interactive.pm:1327
+#: diskdrake/interactive.pm:1379
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "Від циліндра %d до циліндра %d \n"
 
-#: diskdrake/interactive.pm:1328
+#: diskdrake/interactive.pm:1380
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr "Кількість логічних діапазонів: %d\n"
 
-#: diskdrake/interactive.pm:1329
+#: diskdrake/interactive.pm:1381
 #, c-format
 msgid "Formatted\n"
 msgstr "Форматований\n"
 
-#: diskdrake/interactive.pm:1330
+#: diskdrake/interactive.pm:1382
 #, c-format
 msgid "Not formatted\n"
 msgstr "Не форматований\n"
 
-#: diskdrake/interactive.pm:1331
+#: diskdrake/interactive.pm:1383
 #, c-format
 msgid "Mounted\n"
 msgstr "Змонтований\n"
 
-#: diskdrake/interactive.pm:1332
+#: diskdrake/interactive.pm:1384
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1334
+#: diskdrake/interactive.pm:1386
 #, c-format
 msgid "Encrypted"
 msgstr "Зашифрований"
 
-#: diskdrake/interactive.pm:1334
+#: diskdrake/interactive.pm:1388
 #, c-format
 msgid " (mapped on %s)"
 msgstr " (відображений на %s)"
 
-#: diskdrake/interactive.pm:1335
+#: diskdrake/interactive.pm:1389
 #, c-format
 msgid " (to map on %s)"
 msgstr " (відобразити на %s)"
 
-#: diskdrake/interactive.pm:1336
+#: diskdrake/interactive.pm:1390
 #, c-format
 msgid " (inactive)"
 msgstr " (неактивний)"
 
-#: diskdrake/interactive.pm:1342
+#: diskdrake/interactive.pm:1397
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2144,7 +2157,7 @@ msgstr ""
 "Файл(и) зворотнього монтування: \n"
 "  %s\n"
 
-#: diskdrake/interactive.pm:1343
+#: diskdrake/interactive.pm:1398
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -2153,27 +2166,27 @@ msgstr ""
 "Типовий розділ для завантаження системи\n"
 "     (для завантаження ДОСу, не для lilo)\n"
 
-#: diskdrake/interactive.pm:1345
+#: diskdrake/interactive.pm:1400
 #, c-format
 msgid "Level %s\n"
 msgstr "Рівень %s\n"
 
-#: diskdrake/interactive.pm:1346
+#: diskdrake/interactive.pm:1401
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "Розмір ділянки %d в Кб\n"
 
-#: diskdrake/interactive.pm:1347
+#: diskdrake/interactive.pm:1402
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "Диски RAID %s\n"
 
-#: diskdrake/interactive.pm:1349
+#: diskdrake/interactive.pm:1404
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Назви файлів зворотнього монтування: %s"
 
-#: diskdrake/interactive.pm:1352
+#: diskdrake/interactive.pm:1407
 #, c-format
 msgid ""
 "\n"
@@ -2186,7 +2199,7 @@ msgstr ""
 "Driver, Вам мабуть не потрібно\n"
 "його змінювати.\n"
 
-#: diskdrake/interactive.pm:1355
+#: diskdrake/interactive.pm:1410
 #, c-format
 msgid ""
 "\n"
@@ -2199,68 +2212,58 @@ msgstr ""
 "можливості подвійного \n"
 "завантаження системи.\n"
 
-#: diskdrake/interactive.pm:1364
+#: diskdrake/interactive.pm:1419
 #, c-format
 msgid "Free space on %s (%s)"
 msgstr "Вільне місце на %s (%s)"
 
-#: diskdrake/interactive.pm:1373
+#: diskdrake/interactive.pm:1428
 #, c-format
 msgid "Read-only"
 msgstr "Тільки для читання"
 
-#: diskdrake/interactive.pm:1374
+#: diskdrake/interactive.pm:1429
 #, c-format
 msgid "Size: %s\n"
 msgstr "Розмір: %s\n"
 
-#: diskdrake/interactive.pm:1375
+#: diskdrake/interactive.pm:1430
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Геометрія: %s циліндрів, %s головок, %s секторів\n"
 
-#: diskdrake/interactive.pm:1377
+#: diskdrake/interactive.pm:1432
 #, c-format
 msgid "Medium type: "
 msgstr "Тип носія: "
 
-#: diskdrake/interactive.pm:1378
+#: diskdrake/interactive.pm:1433
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "Диски LVM %s\n"
 
-#: diskdrake/interactive.pm:1379
+#: diskdrake/interactive.pm:1434
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Тип таблиці розділів: %s\n"
 
-#: diskdrake/interactive.pm:1380
+#: diskdrake/interactive.pm:1435
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "на каналі %d id %d\n"
 
-#: diskdrake/interactive.pm:1424
+#: diskdrake/interactive.pm:1479
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Виберіть ключ шифрування Вашої файлової системи"
 
-#: diskdrake/interactive.pm:1427
+#: diskdrake/interactive.pm:1482
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr ""
 "Цей пароль занадто простий (він повинен бути хоча б %d літер завдовжки)"
 
-#: diskdrake/interactive.pm:1428
-#, c-format
-msgid "The encryption keys do not match"
-msgstr "Ключі шифрування не збігаються"
-
-#: diskdrake/interactive.pm:1432
-#, c-format
-msgid "Encryption key (again)"
-msgstr "Ключ шифрування (знову)"
-
-#: diskdrake/interactive.pm:1434
+#: diskdrake/interactive.pm:1489
 #, c-format
 msgid "Encryption algorithm"
 msgstr "Алгоритм шифрування"
@@ -2367,32 +2370,32 @@ msgstr ""
 "файлових систем. Перевірте, будь ласка, свою систему і спробуйте відшукати "
 "причину цього."
 
-#: fs/any.pm:75 fs/partitioning_wizard.pm:61
+#: fs/any.pm:75 fs/partitioning_wizard.pm:62
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "Ви повинні мати розділ FAT, змонтований в /boot/efi"
 
-#: fs/format.pm:103
+#: fs/format.pm:106
 #, c-format
 msgid "Creating and formatting file %s"
 msgstr "Створюю та форматую файл %s"
 
-#: fs/format.pm:122
+#: fs/format.pm:125
 #, c-format
 msgid "I do not know how to set label on %s with type %s"
 msgstr "Я не знаю, як встановити мітку %s типу %s"
 
-#: fs/format.pm:131
+#: fs/format.pm:134
 #, c-format
 msgid "setting label on %s failed, is it formatted?"
 msgstr "встановлення мітки на %s невдале, його відформатовано?"
 
-#: fs/format.pm:172
+#: fs/format.pm:175
 #, c-format
 msgid "I do not know how to format %s in type %s"
 msgstr "Я не знаю, як форматувати %s типу %s"
 
-#: fs/format.pm:177 fs/format.pm:179
+#: fs/format.pm:180 fs/format.pm:182
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "%s форматування %s невдале"
@@ -2427,23 +2430,18 @@ msgstr "помилка розмонтування %s: %s"
 msgid "Enabling swap partition %s"
 msgstr "Активізується swap-розділ %s"
 
-#: fs/mount_options.pm:114
-#, c-format
-msgid "Use an encrypted file system"
-msgstr "Використовувати зашифровану файлову систему"
-
-#: fs/mount_options.pm:116
+#: fs/mount_options.pm:113
 #, c-format
 msgid "Flush write cache on file close"
 msgstr "Очищувати кеш запису по закриттю файла"
 
-#: fs/mount_options.pm:118
+#: fs/mount_options.pm:115
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
 msgstr ""
 "Увімкнути групову дискову квоту і, за бажанням, примусово вказати обмеження"
 
-#: fs/mount_options.pm:120
+#: fs/mount_options.pm:117
 #, c-format
 msgid ""
 "Do not update inode access times on this file system\n"
@@ -2452,7 +2450,7 @@ msgstr ""
 "Не поновлювати час доступу до інодів цієї файлової системи (напр., \n"
 "для прискорення серверів новин і швидшого доступу до повідомлень)."
 
-#: fs/mount_options.pm:123
+#: fs/mount_options.pm:120
 #, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
@@ -2462,7 +2460,7 @@ msgstr ""
 "(напр., \n"
 "для прискорення серверів новин і швидшого доступу до повідомлень)."
 
-#: fs/mount_options.pm:126
+#: fs/mount_options.pm:123
 #, c-format
 msgid ""
 "Can only be mounted explicitly (i.e.,\n"
@@ -2471,14 +2469,14 @@ msgstr ""
 "Може бути змонтований тільки явно (тобто параметр -a\n"
 "не монтує систему автоматично)."
 
-#: fs/mount_options.pm:129
+#: fs/mount_options.pm:126
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
 msgstr ""
 "Не інтерпретувати символ або блокувати спеціальні пристрої у файловій "
 "системі."
 
-#: fs/mount_options.pm:131
+#: fs/mount_options.pm:128
 #, c-format
 msgid ""
 "Do not allow execution of any binaries on the mounted\n"
@@ -2489,7 +2487,7 @@ msgstr ""
 "Цей параметр може використовуватися для сервера, який має файлову\n"
 "систему, який містить бінарні файли для іншої архітектури."
 
-#: fs/mount_options.pm:135
+#: fs/mount_options.pm:132
 #, c-format
 msgid ""
 "Do not allow set-user-identifier or set-group-identifier\n"
@@ -2501,45 +2499,45 @@ msgstr ""
 "(Вони здаються безпечними, але все змінюється після встановлення\n"
 "suidperl(1))."
 
-#: fs/mount_options.pm:139
+#: fs/mount_options.pm:136
 #, c-format
 msgid "Mount the file system read-only."
 msgstr "Монтувати файлову систему в режимі тільки читання."
 
-#: fs/mount_options.pm:141
+#: fs/mount_options.pm:138
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
 msgstr ""
 "Всі операції вводу/виводу файлової системи повинні виконуватися синхронно."
 
-#: fs/mount_options.pm:143
+#: fs/mount_options.pm:140
 #, c-format
 msgid "Allow every user to mount and umount the file system."
 msgstr "Дозволити всім користувачам монтувати і демонтувати файлову систему."
 
-#: fs/mount_options.pm:145
+#: fs/mount_options.pm:142
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
 msgstr "Дозволити звичайному користувачеві монтувати файлову систему."
 
-#: fs/mount_options.pm:147
+#: fs/mount_options.pm:144
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr ""
 "Увімкнути дискові квоти користувачів і, за бажання, вказати примусові "
 "обмеження"
 
-#: fs/mount_options.pm:149
+#: fs/mount_options.pm:146
 #, c-format
 msgid "Support \"user.\" extended attributes"
 msgstr "Підтримувати розширені атрибути «user.»"
 
-#: fs/mount_options.pm:151
+#: fs/mount_options.pm:148
 #, c-format
 msgid "Give write access to ordinary users"
 msgstr "Дати доступ для запису звичайним користувачам"
 
-#: fs/mount_options.pm:153
+#: fs/mount_options.pm:150
 #, c-format
 msgid "Give read-only access to ordinary users"
 msgstr "Дати доступ тільки для запису звичайним користувачам"
@@ -2596,7 +2594,7 @@ msgstr ""
 "Для цього створіть новий розділ (або клацніть на вже\n"
 "існуючому). Після цього виберіть ``Точка монтування'' і встановіть її в `/'"
 
-#: fs/partitioning_wizard.pm:58
+#: fs/partitioning_wizard.pm:59
 #, c-format
 msgid ""
 "You do not have a swap partition.\n"
@@ -2607,42 +2605,42 @@ msgstr ""
 "\n"
 "Все-таки продовжувати? "
 
-#: fs/partitioning_wizard.pm:92
+#: fs/partitioning_wizard.pm:93
 #, c-format
 msgid "Use free space"
 msgstr "Використовувати вільний простір"
 
-#: fs/partitioning_wizard.pm:94
+#: fs/partitioning_wizard.pm:95
 #, c-format
 msgid "Not enough free space to allocate new partitions"
 msgstr "Недостатньо вільного простору для розташування нових розділів"
 
-#: fs/partitioning_wizard.pm:102
+#: fs/partitioning_wizard.pm:103
 #, c-format
 msgid "Use existing partitions"
 msgstr "Користуватися існуючими розділами"
 
-#: fs/partitioning_wizard.pm:104
+#: fs/partitioning_wizard.pm:105
 #, c-format
 msgid "There is no existing partition to use"
 msgstr "Немає існуючих розділів для використання"
 
-#: fs/partitioning_wizard.pm:128
+#: fs/partitioning_wizard.pm:129
 #, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
 msgstr "Розраховується розмір розділу Віндовс"
 
-#: fs/partitioning_wizard.pm:164
+#: fs/partitioning_wizard.pm:165
 #, c-format
 msgid "Use the free space on a Microsoft Windows® partition"
 msgstr "Використовувати вільний простір на розділі Microsoft Windows®"
 
-#: fs/partitioning_wizard.pm:168
+#: fs/partitioning_wizard.pm:169
 #, c-format
 msgid "Which partition do you want to resize?"
 msgstr "Розмір якого розділу Ви хочете змінити?"
 
-#: fs/partitioning_wizard.pm:171
+#: fs/partitioning_wizard.pm:172
 #, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
@@ -2653,7 +2651,7 @@ msgstr ""
 "Будь ласка, перезавантажте свій комп'ютер під Microsoft Windows®, запустіть "
 "програму 'defrag', тоді перезапустіть встановлення Мандріва лінакса."
 
-#: fs/partitioning_wizard.pm:179
+#: fs/partitioning_wizard.pm:180
 #, c-format
 msgid ""
 "WARNING!\n"
@@ -2689,73 +2687,73 @@ msgstr ""
 "Якщо Ви впевнені - тисніть %s."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:188 fs/partitioning_wizard.pm:551
+#: fs/partitioning_wizard.pm:189 fs/partitioning_wizard.pm:552
 #: interactive.pm:549 interactive/curses.pm:263 ugtk2.pm:519
 #, c-format
 msgid "Next"
 msgstr "Далі"
 
-#: fs/partitioning_wizard.pm:194
+#: fs/partitioning_wizard.pm:195
 #, c-format
 msgid "Partitionning"
 msgstr "Розбиття на розділи"
 
-#: fs/partitioning_wizard.pm:194
+#: fs/partitioning_wizard.pm:195
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
 msgstr "Який розмір Ви хочете залишити для Microsoft Windows® розділ %s?"
 
-#: fs/partitioning_wizard.pm:195
+#: fs/partitioning_wizard.pm:196
 #, c-format
 msgid "Size"
 msgstr "Розмір"
 
-#: fs/partitioning_wizard.pm:204
+#: fs/partitioning_wizard.pm:205
 #, c-format
 msgid "Resizing Microsoft Windows® partition"
 msgstr "Зміна розміру розділу Microsoft Windows®"
 
-#: fs/partitioning_wizard.pm:209
+#: fs/partitioning_wizard.pm:210
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr "Зміна розміру FAT не відбулася: %s"
 
-#: fs/partitioning_wizard.pm:225
+#: fs/partitioning_wizard.pm:226
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr "Немає розділу FAT для зміни розміру (або не залишилося вільного місця)"
 
-#: fs/partitioning_wizard.pm:230
+#: fs/partitioning_wizard.pm:231
 #, c-format
 msgid "Remove Microsoft Windows®"
 msgstr "Стерти Microsoft Windows®"
 
-#: fs/partitioning_wizard.pm:230
+#: fs/partitioning_wizard.pm:231
 #, c-format
 msgid "Erase and use entire disk"
 msgstr "Стерти і використати весь диск"
 
-#: fs/partitioning_wizard.pm:234
+#: fs/partitioning_wizard.pm:235
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "У Вас більше одного диску. На який з них Ви хочете встановити Лінакс?"
 
-#: fs/partitioning_wizard.pm:242 fsedit.pm:600
+#: fs/partitioning_wizard.pm:243 fsedit.pm:610
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "ВСІ існуючі розділи та всі дані на диску %s будуть втрачені"
 
-#: fs/partitioning_wizard.pm:252
+#: fs/partitioning_wizard.pm:253
 #, c-format
 msgid "Custom disk partitioning"
 msgstr "Спеціальний розподіл диску"
 
-#: fs/partitioning_wizard.pm:258
+#: fs/partitioning_wizard.pm:259
 #, c-format
 msgid "Use fdisk"
 msgstr "Використовувати fdisk"
 
-#: fs/partitioning_wizard.pm:261
+#: fs/partitioning_wizard.pm:262
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -2764,37 +2762,37 @@ msgstr ""
 "Тепер Ви можете розбити диск %s на розділи.\n"
 "Після того, як закінчите, не забудьте виконати команду `w'"
 
-#: fs/partitioning_wizard.pm:401
+#: fs/partitioning_wizard.pm:402
 #, fuzzy, c-format
 msgid "Ext2/3/4"
 msgstr "Ext3"
 
-#: fs/partitioning_wizard.pm:431 fs/partitioning_wizard.pm:571
+#: fs/partitioning_wizard.pm:432 fs/partitioning_wizard.pm:572
 #, c-format
 msgid "I can not find any room for installing"
 msgstr "Не можу знайти вільного місця для встановлення"
 
-#: fs/partitioning_wizard.pm:440 fs/partitioning_wizard.pm:578
+#: fs/partitioning_wizard.pm:441 fs/partitioning_wizard.pm:579
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "Помічник розбивки на розділи DrakX знайшов такі можливі рішення:"
 
-#: fs/partitioning_wizard.pm:511
+#: fs/partitioning_wizard.pm:512
 #, fuzzy, c-format
 msgid "Here is the content of your disk drive "
 msgstr "Тут наведено вміст вашого дискового пристрою"
 
-#: fs/partitioning_wizard.pm:588
+#: fs/partitioning_wizard.pm:589
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Розбиття на розділи невдале: %s"
 
-#: fs/type.pm:390
+#: fs/type.pm:393
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
 msgstr "JFS не можна користуватися на розділах, менших за 16 Мб."
 
-#: fs/type.pm:391
+#: fs/type.pm:394
 #, c-format
 msgid "You can not use ReiserFS for partitions smaller than 32MB"
 msgstr "Ви не можете використовувати ReiserFS на розділах, менших за 32Мб."
@@ -2864,6 +2862,24 @@ msgstr ""
 "Тож, будь ласка, не забудьте додати розділ /boot."
 
 #: fsedit.pm:437
+#, fuzzy, c-format
+msgid ""
+"You've selected an encrypted partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"Як розділ для root (/) Ви вибрали програмний RAID.\n"
+"Немає завантажувачів, які могли б працювати з такими розділами без /boot.\n"
+"Тож, будь ласка, не забудьте додати розділ /boot."
+
+#: fsedit.pm:443 fsedit.pm:461
+#, c-format
+msgid "You can not use an encrypted file system for mount point %s"
+msgstr ""
+"Ви не можете використовувати зашифровану файлову систему для точки "
+"монтування %s"
+
+#: fsedit.pm:447
 #, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
@@ -2872,7 +2888,7 @@ msgstr ""
 "Для точки монтування %s не можна користуватися логічним томом LVM, оскільки "
 "він складається з декількох фізичних томів"
 
-#: fsedit.pm:439
+#: fsedit.pm:449
 #, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
@@ -2885,12 +2901,12 @@ msgstr ""
 "розбито на декілька фізичних.\n"
 "Вам слід спочатку створити розділ /boot."
 
-#: fsedit.pm:443 fsedit.pm:445
+#: fsedit.pm:453 fsedit.pm:455
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Ця тека має залишитися в корені файлової системи"
 
-#: fsedit.pm:447 fsedit.pm:449
+#: fsedit.pm:457 fsedit.pm:459
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/3/4, reiserfs, xfs, or jfs) for this mount "
@@ -2899,19 +2915,12 @@ msgstr ""
 "Для цієї точки монтування потрібна реальна файлова система (ext2/ext3,\n"
 "reiserfs, xfs, or jfs)\n"
 
-#: fsedit.pm:451
-#, c-format
-msgid "You can not use an encrypted file system for mount point %s"
-msgstr ""
-"Ви не можете використовувати зашифровану файлову систему для точки "
-"монтування %s"
-
-#: fsedit.pm:516
+#: fsedit.pm:526
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "Недостатньо вільного місця для автоматичного розподілу"
 
-#: fsedit.pm:518
+#: fsedit.pm:528
 #, c-format
 msgid "Nothing to do"
 msgstr "Нічого виконувати"
@@ -7233,6 +7242,21 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Встановлення завершилося невдало"
+
+#~ msgid "Restrict command line options"
+#~ msgstr "Обмежити параметри командного рядка"
+
+#~ msgid "restrict"
+#~ msgstr "обмежити"
+
+#~ msgid ""
+#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ msgstr ""
+#~ "Параметр \"Обмежити параметри командного рядка\" не використовується без "
+#~ "пароля"
+
+#~ msgid "Use an encrypted file system"
+#~ msgstr "Використовувати зашифровану файлову систему"
 
 #~ msgid ""
 #~ "To ensure data integrity after resizing the partition(s), \n"

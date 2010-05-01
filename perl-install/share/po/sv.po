@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-sv\n"
-"POT-Creation-Date: 2010-03-28 14:46+0200\n"
+"POT-Creation-Date: 2010-05-01 16:46+0200\n"
 "PO-Revision-Date: 2009-10-11 17:15+0300\n"
 "Last-Translator: \n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -23,10 +23,10 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: any.pm:252 any.pm:953 diskdrake/interactive.pm:597
-#: diskdrake/interactive.pm:802 diskdrake/interactive.pm:846
-#: diskdrake/interactive.pm:950 diskdrake/interactive.pm:1204
-#: diskdrake/interactive.pm:1256 do_pkgs.pm:241 do_pkgs.pm:287
+#: any.pm:252 any.pm:947 diskdrake/interactive.pm:647
+#: diskdrake/interactive.pm:864 diskdrake/interactive.pm:924
+#: diskdrake/interactive.pm:1026 diskdrake/interactive.pm:1256
+#: diskdrake/interactive.pm:1308 do_pkgs.pm:241 do_pkgs.pm:287
 #: harddrake/sound.pm:303 interactive.pm:587 pkgs.pm:281
 #, c-format
 msgid "Please wait"
@@ -131,7 +131,7 @@ msgstr "Hoppa över"
 msgid "Boot Style Configuration"
 msgstr "Anpassning av startutförande"
 
-#: any.pm:412 any.pm:452 any.pm:453
+#: any.pm:412 any.pm:445 any.pm:446
 #, c-format
 msgid "Bootloader main options"
 msgstr "Starthanterarens huvudalternativ"
@@ -141,12 +141,12 @@ msgstr "Starthanterarens huvudalternativ"
 msgid "Bootloader"
 msgstr "Starthanterare"
 
-#: any.pm:417 any.pm:456
+#: any.pm:417 any.pm:449
 #, c-format
 msgid "Bootloader to use"
 msgstr "Starthanterare som ska användas"
 
-#: any.pm:420 any.pm:459
+#: any.pm:420 any.pm:452
 #, c-format
 msgid "Boot device"
 msgstr "Startenhet"
@@ -186,7 +186,7 @@ msgstr "Aktivera Lokal APIC"
 msgid "Security"
 msgstr "Säkerhet"
 
-#: any.pm:431 any.pm:891 any.pm:907 authentication.pm:250
+#: any.pm:431 any.pm:885 any.pm:901 authentication.pm:250
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
@@ -197,7 +197,7 @@ msgstr "Lösenord"
 msgid "The passwords do not match"
 msgstr "Du angav inte samma lösenord"
 
-#: any.pm:434 authentication.pm:261 diskdrake/interactive.pm:1428
+#: any.pm:434 authentication.pm:261 diskdrake/interactive.pm:1483
 #, c-format
 msgid "Please try again"
 msgstr "Försök igen"
@@ -207,165 +207,152 @@ msgstr "Försök igen"
 msgid "You can not use a password with %s"
 msgstr "Du kan inte använda ett lösenord med %s"
 
-#: any.pm:440 any.pm:893 any.pm:909 authentication.pm:251
+#: any.pm:440 any.pm:887 any.pm:903 authentication.pm:251
 #, c-format
 msgid "Password (again)"
 msgstr "Lösenord (bekräfta)"
 
 #: any.pm:441
 #, c-format
-msgid "Restrict command line options"
-msgstr "Begränsa alternativen för kommandoraden"
-
-#: any.pm:442
-#, c-format
-msgid "restrict"
-msgstr "begränsa"
-
-#: any.pm:445
-#, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
-msgstr ""
-"Alternativet \"Begränsa alternativen för kommandoraden\" är värdelöst utan "
-"lösenord."
-
-#: any.pm:448
-#, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Rensa /tmp vid varje start"
 
-#: any.pm:458
+#: any.pm:451
 #, c-format
 msgid "Init Message"
 msgstr "Init-meddelande"
 
-#: any.pm:460
+#: any.pm:453
 #, c-format
 msgid "Open Firmware Delay"
 msgstr "Open Firmware-fördröjning"
 
-#: any.pm:461
+#: any.pm:454
 #, c-format
 msgid "Kernel Boot Timeout"
 msgstr "Tidsgräns för kärnstart"
 
-#: any.pm:462
+#: any.pm:455
 #, c-format
 msgid "Enable CD Boot?"
 msgstr "Aktivera cd-start?"
 
-#: any.pm:463
+#: any.pm:456
 #, c-format
 msgid "Enable OF Boot?"
 msgstr "Aktivera OF-start?"
 
-#: any.pm:464
+#: any.pm:457
 #, c-format
 msgid "Default OS?"
 msgstr "Standard-OS?"
 
-#: any.pm:537
+#: any.pm:530
 #, c-format
 msgid "Image"
 msgstr "Avbild"
 
-#: any.pm:538 any.pm:551
+#: any.pm:531 any.pm:545
 #, c-format
 msgid "Root"
 msgstr "Rot"
 
-#: any.pm:539 any.pm:564
+#: any.pm:532 any.pm:558
 #, c-format
 msgid "Append"
 msgstr "Lägg till"
 
-#: any.pm:541
+#: any.pm:534
 #, c-format
 msgid "Xen append"
 msgstr "Xen tillägg"
 
-#: any.pm:544
+#: any.pm:536
+#, c-format
+msgid "Requires password to boot"
+msgstr ""
+
+#: any.pm:538
 #, c-format
 msgid "Video mode"
 msgstr "Videoläge"
 
-#: any.pm:546
+#: any.pm:540
 #, c-format
 msgid "Initrd"
 msgstr "Initrd"
 
-#: any.pm:547
+#: any.pm:541
 #, c-format
 msgid "Network profile"
 msgstr "Nätverksprofil"
 
-#: any.pm:556 any.pm:561 any.pm:563 diskdrake/interactive.pm:407
+#: any.pm:550 any.pm:555 any.pm:557 diskdrake/interactive.pm:407
 #, c-format
 msgid "Label"
 msgstr "Etikett"
 
-#: any.pm:558 any.pm:566 harddrake/v4l.pm:438
+#: any.pm:552 any.pm:560 harddrake/v4l.pm:438
 #, c-format
 msgid "Default"
 msgstr "Standard"
 
-#: any.pm:565
+#: any.pm:559
 #, c-format
 msgid "NoVideo"
 msgstr "NoVideo"
 
-#: any.pm:576
+#: any.pm:570
 #, c-format
 msgid "Empty label not allowed"
 msgstr "Tom etikett tillåts inte"
 
-#: any.pm:577
+#: any.pm:571
 #, c-format
 msgid "You must specify a kernel image"
 msgstr "Du måste ange en kärnavbild"
 
-#: any.pm:577
+#: any.pm:571
 #, c-format
 msgid "You must specify a root partition"
 msgstr "Du måste ange en rotpartition"
 
-#: any.pm:578
+#: any.pm:572
 #, c-format
 msgid "This label is already used"
 msgstr "Denna etikett används redan"
 
-#: any.pm:596
+#: any.pm:590
 #, c-format
 msgid "Which type of entry do you want to add?"
 msgstr "Vilket sorts post vill du lägga till?"
 
-#: any.pm:597
+#: any.pm:591
 #, c-format
 msgid "Linux"
 msgstr "Linux"
 
-#: any.pm:597
+#: any.pm:591
 #, c-format
 msgid "Other OS (SunOS...)"
 msgstr "Annat OS (SunOS...)"
 
-#: any.pm:598
+#: any.pm:592
 #, c-format
 msgid "Other OS (MacOS...)"
 msgstr "Annat OS (MacOS...)"
 
-#: any.pm:598
+#: any.pm:592
 #, c-format
 msgid "Other OS (Windows...)"
 msgstr "Annat OS (Windows...)"
 
-#: any.pm:645
+#: any.pm:639
 #, c-format
 msgid "Bootloader Configuration"
 msgstr "Konfiguration av starthanterare"
 
-#: any.pm:646
+#: any.pm:640
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -374,47 +361,47 @@ msgstr ""
 "Följande poster finns i startmenyn.\n"
 "Du kan lägga till fler eller ändra på befintliga."
 
-#: any.pm:851
+#: any.pm:845
 #, c-format
 msgid "access to X programs"
 msgstr "åtkomst till X-program"
 
-#: any.pm:852
+#: any.pm:846
 #, c-format
 msgid "access to rpm tools"
 msgstr "åtkomst till RPM-verktyg"
 
-#: any.pm:853
+#: any.pm:847
 #, c-format
 msgid "allow \"su\""
 msgstr "tillåt \"su\""
 
-#: any.pm:854
+#: any.pm:848
 #, c-format
 msgid "access to administrative files"
 msgstr "åtkomst till administrativa filer"
 
-#: any.pm:855
+#: any.pm:849
 #, c-format
 msgid "access to network tools"
 msgstr "åtkomst till nätverksverktyg"
 
-#: any.pm:856
+#: any.pm:850
 #, c-format
 msgid "access to compilation tools"
 msgstr "åtkomst till kompileringsverktyg"
 
-#: any.pm:862
+#: any.pm:856
 #, c-format
 msgid "(already added %s)"
 msgstr "(%s finns redan)"
 
-#: any.pm:868
+#: any.pm:862
 #, c-format
 msgid "Please give a user name"
 msgstr "Ange ett användarnamn"
 
-#: any.pm:869
+#: any.pm:863
 #, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
@@ -423,147 +410,147 @@ msgstr ""
 "Användarnamnet måste starta med en liten bokstav,  följt av endast små "
 "bokstäver, siffror, `-' och `_'"
 
-#: any.pm:870
+#: any.pm:864
 #, c-format
 msgid "The user name is too long"
 msgstr "Användarnamnet är för långt"
 
-#: any.pm:871
+#: any.pm:865
 #, c-format
 msgid "This user name has already been added"
 msgstr "Det här användarnamnet finns redan"
 
-#: any.pm:877 any.pm:911
+#: any.pm:871 any.pm:905
 #, c-format
 msgid "User ID"
 msgstr "Användar-id"
 
-#: any.pm:877 any.pm:912
+#: any.pm:871 any.pm:906
 #, c-format
 msgid "Group ID"
 msgstr "Grupp-id"
 
-#: any.pm:878
+#: any.pm:872
 #, c-format
 msgid "%s must be a number"
 msgstr "%s måste vara ett nummer."
 
-#: any.pm:879
+#: any.pm:873
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
 msgstr "%s borde vara högre än 500. Godkänn i alla fall?"
 
-#: any.pm:883
+#: any.pm:877
 #, c-format
 msgid "User management"
 msgstr "Användarhantering"
 
-#: any.pm:889
+#: any.pm:883
 #, c-format
 msgid "Enable guest account"
 msgstr ""
 
-#: any.pm:890 authentication.pm:237
+#: any.pm:884 authentication.pm:237
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "Ange administratörens (roots) lösenord"
 
-#: any.pm:895
+#: any.pm:889
 #, c-format
 msgid "Enter a user"
 msgstr "Ange användare"
 
-#: any.pm:897
+#: any.pm:891
 #, c-format
 msgid "Icon"
 msgstr "Ikon"
 
-#: any.pm:900
+#: any.pm:894
 #, c-format
 msgid "Real name"
 msgstr "Fullständigt namn"
 
-#: any.pm:905
+#: any.pm:899
 #, c-format
 msgid "Login name"
 msgstr "Inloggningsnamn"
 
-#: any.pm:910
+#: any.pm:904
 #, c-format
 msgid "Shell"
 msgstr "Skal"
 
-#: any.pm:953
+#: any.pm:947
 #, c-format
 msgid "Please wait, adding media..."
 msgstr "Vänta, lägger till media..."
 
-#: any.pm:983 security/l10n.pm:14
+#: any.pm:977 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "Automatisk inloggning"
 
-#: any.pm:984
+#: any.pm:978
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr "Datorn kan ställas in så att den automatiskt loggar in en användare."
 
-#: any.pm:985
+#: any.pm:979
 #, c-format
 msgid "Use this feature"
 msgstr "Använd den här funktionen"
 
-#: any.pm:986
+#: any.pm:980
 #, c-format
 msgid "Choose the default user:"
 msgstr "Välj standardanvändare:"
 
-#: any.pm:987
+#: any.pm:981
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Välj fönsterhanteraren som ska användas:"
 
-#: any.pm:998 any.pm:1018 any.pm:1091
+#: any.pm:992 any.pm:1012 any.pm:1085
 #, c-format
 msgid "Release Notes"
 msgstr "Versionsinformation"
 
-#: any.pm:1025 any.pm:1379 interactive/gtk.pm:819
+#: any.pm:1019 any.pm:1373 interactive/gtk.pm:819
 #, c-format
 msgid "Close"
 msgstr "Stäng"
 
-#: any.pm:1077
+#: any.pm:1071
 #, c-format
 msgid "License agreement"
 msgstr "Licensavtal"
 
-#: any.pm:1079 diskdrake/dav.pm:26
+#: any.pm:1073 diskdrake/dav.pm:26
 #, c-format
 msgid "Quit"
 msgstr "Avsluta"
 
-#: any.pm:1086
+#: any.pm:1080
 #, c-format
 msgid "Do you accept this license ?"
 msgstr "Accepterar du denna licens?"
 
-#: any.pm:1087
+#: any.pm:1081
 #, c-format
 msgid "Accept"
 msgstr "Accepterar"
 
-#: any.pm:1087
+#: any.pm:1081
 #, c-format
 msgid "Refuse"
 msgstr "Accepterar inte"
 
-#: any.pm:1113 any.pm:1175
+#: any.pm:1107 any.pm:1169
 #, c-format
 msgid "Please choose a language to use"
 msgstr "Välj språket som ska användas"
 
-#: any.pm:1141
+#: any.pm:1135
 #, c-format
 msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
@@ -573,77 +560,77 @@ msgstr ""
 "Mandralinux stöder flera språk. Du kan välja ytterligare språk som ska "
 "finnas tillgängliga efter installationen."
 
-#: any.pm:1144
+#: any.pm:1138
 #, c-format
 msgid "Multi languages"
 msgstr "Många språk"
 
-#: any.pm:1153 any.pm:1184
+#: any.pm:1147 any.pm:1178
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr "Bakåtkompabilitet (ingen UTF-8) kodning"
 
-#: any.pm:1154
+#: any.pm:1148
 #, c-format
 msgid "All languages"
 msgstr "Alla språk"
 
-#: any.pm:1176
+#: any.pm:1170
 #, c-format
 msgid "Language choice"
 msgstr "Språkval"
 
-#: any.pm:1230
+#: any.pm:1224
 #, c-format
 msgid "Country / Region"
 msgstr "Land"
 
-#: any.pm:1231
+#: any.pm:1225
 #, c-format
 msgid "Please choose your country"
 msgstr "Välj ditt land"
 
-#: any.pm:1233
+#: any.pm:1227
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Här är hela listan med tillgängliga länder"
 
-#: any.pm:1234
+#: any.pm:1228
 #, c-format
 msgid "Other Countries"
 msgstr "Andra länder"
 
-#: any.pm:1234 interactive.pm:488 interactive/gtk.pm:445
+#: any.pm:1228 interactive.pm:488 interactive/gtk.pm:445
 #, c-format
 msgid "Advanced"
 msgstr "Avancerad"
 
-#: any.pm:1240
+#: any.pm:1234
 #, c-format
 msgid "Input method:"
 msgstr "Inmatningsmetod:"
 
-#: any.pm:1243
+#: any.pm:1237
 #, c-format
 msgid "None"
 msgstr "Ingen"
 
-#: any.pm:1324
+#: any.pm:1318
 #, c-format
 msgid "No sharing"
 msgstr "Ingen utdelning"
 
-#: any.pm:1324
+#: any.pm:1318
 #, c-format
 msgid "Allow all users"
 msgstr "Tillåt alla användare"
 
-#: any.pm:1324
+#: any.pm:1318
 #, c-format
 msgid "Custom"
 msgstr "Anpassad"
 
-#: any.pm:1328
+#: any.pm:1322
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -658,7 +645,7 @@ msgstr ""
 "\n"
 "\"Anpassad\" ställer in det per användare.\n"
 
-#: any.pm:1340
+#: any.pm:1334
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
@@ -667,7 +654,7 @@ msgstr ""
 "NFS: det traditionella fildelningssysteme för Unix, med sämre stöd för Mac "
 "och Windows."
 
-#: any.pm:1343
+#: any.pm:1337
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
@@ -676,18 +663,18 @@ msgstr ""
 "SMB: ett fildelningssytem som används av Windows, Mac OS X och många moderna "
 "Linux-system."
 
-#: any.pm:1351
+#: any.pm:1345
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Du kan exportera med NFS eller SMB. Vilket vill du använda?"
 
-#: any.pm:1379
+#: any.pm:1373
 #, c-format
 msgid "Launch userdrake"
 msgstr "Starta Userdrake"
 
-#: any.pm:1381
+#: any.pm:1375
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -696,7 +683,7 @@ msgstr ""
 "Utdelning per användare använder gruppen \"fileshare\". \n"
 "Använd Userdrake för att lägga till användare i denna grupp."
 
-#: any.pm:1487
+#: any.pm:1481
 #, c-format
 msgid ""
 "You need to logout and back in again for changes to take effect. Press OK to "
@@ -705,48 +692,48 @@ msgstr ""
 "Du måste logga ut och logga in igen för att ändringarna ska verkställas. "
 "Tryck OK för att logg ut nu."
 
-#: any.pm:1491
+#: any.pm:1485
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr ""
 "Du måste logga ut och logga in igen för att ändringarna ska verkställas."
 
-#: any.pm:1526
+#: any.pm:1520
 #, c-format
 msgid "Timezone"
 msgstr "Tidszon"
 
-#: any.pm:1526
+#: any.pm:1520
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Vilken är din tidszon?"
 
-#: any.pm:1549 any.pm:1551
+#: any.pm:1543 any.pm:1545
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Datum, Tid & Tidszon inställningar"
 
-#: any.pm:1552
+#: any.pm:1546
 #, c-format
 msgid "What is the best time?"
 msgstr "Vad är bästa tiden?"
 
-#: any.pm:1556
+#: any.pm:1550
 #, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "%s (hårdvaruklocka ställd till UTC)"
 
-#: any.pm:1557
+#: any.pm:1551
 #, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "%s (hårdvaruklocka ställd till lokal tid)"
 
-#: any.pm:1559
+#: any.pm:1553
 #, c-format
 msgid "NTP Server"
 msgstr "NTP-server"
 
-#: any.pm:1560
+#: any.pm:1554
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Automatisk tidsynkronisering (med NTP)"
@@ -1128,12 +1115,12 @@ msgstr "SILO"
 msgid "not enough room in /boot"
 msgstr "inte tillräckligt med utrymme på /boot"
 
-#: bootloader.pm:1923
+#: bootloader.pm:1932
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
 msgstr "Du kan inte installera starthanteraren på en %s-partition.\n"
 
-#: bootloader.pm:2044
+#: bootloader.pm:2053
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1142,7 +1129,7 @@ msgstr ""
 "Din starthanterarkonfiguration måste uppdateras eftersom partitionerna har "
 "numrerats om."
 
-#: bootloader.pm:2057
+#: bootloader.pm:2066
 #, c-format
 msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
@@ -1151,7 +1138,7 @@ msgstr ""
 "Starthanteraren kan inte installeras korrekt. Du måste starta om med \"recue"
 "\" (CD1, Diskett) och välja \"%s\""
 
-#: bootloader.pm:2058
+#: bootloader.pm:2067
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Installera om starthanterare"
@@ -1237,15 +1224,15 @@ msgid "Server"
 msgstr "Server"
 
 #: diskdrake/dav.pm:66 diskdrake/interactive.pm:404
-#: diskdrake/interactive.pm:674 diskdrake/interactive.pm:692
-#: diskdrake/interactive.pm:696 diskdrake/removable.pm:23
+#: diskdrake/interactive.pm:724 diskdrake/interactive.pm:742
+#: diskdrake/interactive.pm:746 diskdrake/removable.pm:23
 #: diskdrake/smbnfs_gtk.pm:79
 #, c-format
 msgid "Mount point"
 msgstr "Monteringspunkt"
 
 #: diskdrake/dav.pm:67 diskdrake/interactive.pm:406
-#: diskdrake/interactive.pm:1098 diskdrake/removable.pm:24
+#: diskdrake/interactive.pm:1153 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
@@ -1262,18 +1249,18 @@ msgstr "Ta bort"
 msgid "Done"
 msgstr "Klar"
 
-#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:128 diskdrake/hd_gtk.pm:294
+#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:128 diskdrake/hd_gtk.pm:292
 #: diskdrake/interactive.pm:247 diskdrake/interactive.pm:260
 #: diskdrake/interactive.pm:453 diskdrake/interactive.pm:523
-#: diskdrake/interactive.pm:528 diskdrake/interactive.pm:664
-#: diskdrake/interactive.pm:917 diskdrake/interactive.pm:968
-#: diskdrake/interactive.pm:1144 diskdrake/interactive.pm:1157
-#: diskdrake/interactive.pm:1160 diskdrake/interactive.pm:1428
-#: diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23 do_pkgs.pm:28 do_pkgs.pm:44
-#: do_pkgs.pm:60 do_pkgs.pm:65 do_pkgs.pm:82 fsedit.pm:246
-#: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
-#: scanner.pm:95 scanner.pm:106 scanner.pm:113 scanner.pm:120 wizards.pm:95
-#: wizards.pm:99 wizards.pm:121
+#: diskdrake/interactive.pm:541 diskdrake/interactive.pm:546
+#: diskdrake/interactive.pm:714 diskdrake/interactive.pm:993
+#: diskdrake/interactive.pm:1044 diskdrake/interactive.pm:1199
+#: diskdrake/interactive.pm:1212 diskdrake/interactive.pm:1215
+#: diskdrake/interactive.pm:1483 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23
+#: do_pkgs.pm:28 do_pkgs.pm:44 do_pkgs.pm:60 do_pkgs.pm:65 do_pkgs.pm:82
+#: fsedit.pm:246 interactive/http.pm:117 interactive/http.pm:118
+#: modules/interactive.pm:19 scanner.pm:95 scanner.pm:106 scanner.pm:113
+#: scanner.pm:120 wizards.pm:95 wizards.pm:99 wizards.pm:121
 #, c-format
 msgid "Error"
 msgstr "Fel"
@@ -1288,12 +1275,12 @@ msgstr "Ange webbadressen till WebDAV-servern"
 msgid "The URL must begin with http:// or https://"
 msgstr "Webbadressen måste börja med http:// eller https://"
 
-#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:412 diskdrake/interactive.pm:306
-#: diskdrake/interactive.pm:391 diskdrake/interactive.pm:553
-#: diskdrake/interactive.pm:755 diskdrake/interactive.pm:813
-#: diskdrake/interactive.pm:948 diskdrake/interactive.pm:990
-#: diskdrake/interactive.pm:991 diskdrake/interactive.pm:1241
-#: diskdrake/interactive.pm:1279 diskdrake/interactive.pm:1427 do_pkgs.pm:19
+#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:417 diskdrake/interactive.pm:306
+#: diskdrake/interactive.pm:391 diskdrake/interactive.pm:594
+#: diskdrake/interactive.pm:817 diskdrake/interactive.pm:875
+#: diskdrake/interactive.pm:1024 diskdrake/interactive.pm:1066
+#: diskdrake/interactive.pm:1067 diskdrake/interactive.pm:1293
+#: diskdrake/interactive.pm:1331 diskdrake/interactive.pm:1482 do_pkgs.pm:19
 #: do_pkgs.pm:39 do_pkgs.pm:57 do_pkgs.pm:77 harddrake/sound.pm:442
 #, c-format
 msgid "Warning"
@@ -1309,23 +1296,23 @@ msgstr "Är du säker du vill radera denna anslutnings-punkt?"
 msgid "Server: "
 msgstr "Server: "
 
-#: diskdrake/dav.pm:125 diskdrake/interactive.pm:496
-#: diskdrake/interactive.pm:1303 diskdrake/interactive.pm:1388
+#: diskdrake/dav.pm:125 diskdrake/interactive.pm:498
+#: diskdrake/interactive.pm:1355 diskdrake/interactive.pm:1443
 #, c-format
 msgid "Mount point: "
 msgstr "Monteringspunkt: "
 
-#: diskdrake/dav.pm:126 diskdrake/interactive.pm:1395
+#: diskdrake/dav.pm:126 diskdrake/interactive.pm:1450
 #, c-format
 msgid "Options: %s"
 msgstr "Alternativ: %s"
 
 #: diskdrake/hd_gtk.pm:61 diskdrake/interactive.pm:301
 #: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:106
-#: fs/partitioning_wizard.pm:53 fs/partitioning_wizard.pm:235
-#: fs/partitioning_wizard.pm:243 fs/partitioning_wizard.pm:282
-#: fs/partitioning_wizard.pm:431 fs/partitioning_wizard.pm:495
-#: fs/partitioning_wizard.pm:571 fs/partitioning_wizard.pm:574
+#: fs/partitioning_wizard.pm:53 fs/partitioning_wizard.pm:236
+#: fs/partitioning_wizard.pm:244 fs/partitioning_wizard.pm:283
+#: fs/partitioning_wizard.pm:432 fs/partitioning_wizard.pm:496
+#: fs/partitioning_wizard.pm:572 fs/partitioning_wizard.pm:575
 #, c-format
 msgid "Partitioning"
 msgstr "Partitionering"
@@ -1335,8 +1322,8 @@ msgstr "Partitionering"
 msgid "Click on a partition, choose a filesystem type then choose an action"
 msgstr "Välj en partition, välj ett filsystem, och välj en åtgärd"
 
-#: diskdrake/hd_gtk.pm:110 diskdrake/interactive.pm:1119
-#: diskdrake/interactive.pm:1129 diskdrake/interactive.pm:1182
+#: diskdrake/hd_gtk.pm:110 diskdrake/interactive.pm:1174
+#: diskdrake/interactive.pm:1184 diskdrake/interactive.pm:1237
 #, c-format
 msgid "Read carefully"
 msgstr "Läs noggrant"
@@ -1356,7 +1343,7 @@ msgstr "Avsluta"
 msgid "Continue"
 msgstr "Fortsätt"
 
-#: diskdrake/hd_gtk.pm:182 fs/partitioning_wizard.pm:547 interactive.pm:653
+#: diskdrake/hd_gtk.pm:182 fs/partitioning_wizard.pm:548 interactive.pm:653
 #: interactive/gtk.pm:811 interactive/gtk.pm:829 interactive/gtk.pm:850
 #: ugtk2.pm:936
 #, c-format
@@ -1384,79 +1371,79 @@ msgstr "Klicka på en partition"
 msgid "Details"
 msgstr "Detaljer"
 
-#: diskdrake/hd_gtk.pm:294
+#: diskdrake/hd_gtk.pm:292
 #, c-format
 msgid "No hard drives found"
 msgstr "Inga hårddiskar hittades"
 
-#: diskdrake/hd_gtk.pm:321
+#: diskdrake/hd_gtk.pm:323
 #, c-format
 msgid "Unknown"
 msgstr "Okänd"
 
-#: diskdrake/hd_gtk.pm:383
+#: diskdrake/hd_gtk.pm:388
 #, fuzzy, c-format
 msgid "Ext4"
 msgstr "Avsluta"
 
-#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "XFS"
 msgstr "XFS"
 
-#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "Swap"
 msgstr "Växlingsutrymme"
 
-#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "SunOS"
 msgstr "SunOS"
 
-#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "HFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:384 fs/partitioning_wizard.pm:402 services.pm:184
+#: diskdrake/hd_gtk.pm:389 fs/partitioning_wizard.pm:403 services.pm:184
 #, c-format
 msgid "Other"
 msgstr "Annan"
 
-#: diskdrake/hd_gtk.pm:384 diskdrake/interactive.pm:1318
-#: fs/partitioning_wizard.pm:402
+#: diskdrake/hd_gtk.pm:389 diskdrake/interactive.pm:1370
+#: fs/partitioning_wizard.pm:403
 #, c-format
 msgid "Empty"
 msgstr "Tom"
 
-#: diskdrake/hd_gtk.pm:391
+#: diskdrake/hd_gtk.pm:396
 #, c-format
 msgid "Filesystem types:"
 msgstr "Filsystemtyper:"
 
-#: diskdrake/hd_gtk.pm:412
+#: diskdrake/hd_gtk.pm:417
 #, c-format
 msgid "This partition is already empty"
 msgstr "Denna partition är redan tom"
 
-#: diskdrake/hd_gtk.pm:421
+#: diskdrake/hd_gtk.pm:426
 #, c-format
 msgid "Use ``Unmount'' first"
 msgstr "Använd \"Unmount\" först"
 
-#: diskdrake/hd_gtk.pm:421
+#: diskdrake/hd_gtk.pm:426
 #, c-format
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Använd \"%s\" i stället (i expertläge)"
 
-#: diskdrake/hd_gtk.pm:421 diskdrake/interactive.pm:405
-#: diskdrake/interactive.pm:591 diskdrake/removable.pm:25
+#: diskdrake/hd_gtk.pm:426 diskdrake/interactive.pm:405
+#: diskdrake/interactive.pm:641 diskdrake/removable.pm:25
 #: diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
@@ -1479,7 +1466,7 @@ msgid "More"
 msgstr "Mer"
 
 #: diskdrake/interactive.pm:281 diskdrake/interactive.pm:294
-#: diskdrake/interactive.pm:1226
+#: diskdrake/interactive.pm:568 diskdrake/interactive.pm:1278
 #, c-format
 msgid "Confirmation"
 msgstr "Bekräftelse"
@@ -1504,7 +1491,7 @@ msgstr "Avsluta utan att skriva partitionstabellen?"
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "Vill du spara /etc/fstab-ändringar?"
 
-#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:282
+#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:283
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
@@ -1581,7 +1568,7 @@ msgstr "Detaljerad information"
 msgid "View"
 msgstr "Visa"
 
-#: diskdrake/interactive.pm:408 diskdrake/interactive.pm:768
+#: diskdrake/interactive.pm:408 diskdrake/interactive.pm:830
 #, c-format
 msgid "Resize"
 msgstr "Ändra storlek"
@@ -1591,12 +1578,12 @@ msgstr "Ändra storlek"
 msgid "Format"
 msgstr "Formatera"
 
-#: diskdrake/interactive.pm:411 diskdrake/interactive.pm:878
+#: diskdrake/interactive.pm:411 diskdrake/interactive.pm:956
 #, c-format
 msgid "Add to RAID"
 msgstr "Addera till RAID"
 
-#: diskdrake/interactive.pm:412 diskdrake/interactive.pm:899
+#: diskdrake/interactive.pm:412 diskdrake/interactive.pm:975
 #, c-format
 msgid "Add to LVM"
 msgstr "Addera till LVM"
@@ -1646,37 +1633,62 @@ msgstr "Skapa"
 msgid "Failed to mount partition"
 msgstr "Misslyckades montera partitionen"
 
-#: diskdrake/interactive.pm:485 diskdrake/interactive.pm:487
+#: diskdrake/interactive.pm:487 diskdrake/interactive.pm:489
 #, c-format
 msgid "Create a new partition"
 msgstr "Skapa en ny partition"
 
-#: diskdrake/interactive.pm:489
+#: diskdrake/interactive.pm:491
 #, c-format
 msgid "Start sector: "
 msgstr "Startsektor: "
 
-#: diskdrake/interactive.pm:492 diskdrake/interactive.pm:983
+#: diskdrake/interactive.pm:494 diskdrake/interactive.pm:1059
 #, c-format
 msgid "Size in MB: "
 msgstr "Storlek i MB: "
 
-#: diskdrake/interactive.pm:494 diskdrake/interactive.pm:984
+#: diskdrake/interactive.pm:496 diskdrake/interactive.pm:1060
 #, c-format
 msgid "Filesystem type: "
 msgstr "Typ av filsystem: "
 
-#: diskdrake/interactive.pm:500
+#: diskdrake/interactive.pm:502
 #, c-format
 msgid "Preference: "
 msgstr "Inställning: "
 
-#: diskdrake/interactive.pm:503
+#: diskdrake/interactive.pm:505
 #, c-format
 msgid "Logical volume name "
 msgstr "Volymens logiska namn "
 
-#: diskdrake/interactive.pm:523
+#: diskdrake/interactive.pm:507
+#, fuzzy, c-format
+msgid "Encrypt partition"
+msgstr "Kryperingsalgoritm"
+
+#: diskdrake/interactive.pm:508
+#, fuzzy, c-format
+msgid "Encryption key "
+msgstr "Krypteringsnyckel"
+
+#: diskdrake/interactive.pm:509 diskdrake/interactive.pm:1487
+#, c-format
+msgid "Encryption key (again)"
+msgstr "Krypteringsnyckel (igen)"
+
+#: diskdrake/interactive.pm:520 diskdrake/interactive.pm:1483
+#, c-format
+msgid "The encryption keys do not match"
+msgstr "Krypteringsnycklarna matchar inte"
+
+#: diskdrake/interactive.pm:521
+#, fuzzy, c-format
+msgid "Missing encryption key"
+msgstr "Krypteringsnyckel för filsystem"
+
+#: diskdrake/interactive.pm:541
 #, c-format
 msgid ""
 "You can not create a new partition\n"
@@ -1687,12 +1699,18 @@ msgstr ""
 "(eftersom du har maximala antal primära partitioner).\n"
 "Ta först bort en primär partition och skapa en utökad partition."
 
-#: diskdrake/interactive.pm:553
+#: diskdrake/interactive.pm:568 diskdrake/interactive.pm:1278
+#: fs/partitioning.pm:48
+#, c-format
+msgid "Check bad blocks?"
+msgstr "Sök efter felaktiga block?"
+
+#: diskdrake/interactive.pm:594
 #, c-format
 msgid "Remove the loopback file?"
 msgstr "Ta bort loopback-filen?"
 
-#: diskdrake/interactive.pm:575
+#: diskdrake/interactive.pm:622
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
@@ -1700,57 +1718,57 @@ msgstr ""
 "Efter ändring av partitionstyp %s kommer alla data på denna partition att "
 "försvinna."
 
-#: diskdrake/interactive.pm:588
+#: diskdrake/interactive.pm:638
 #, c-format
 msgid "Change partition type"
 msgstr "Ändra partitionstyp"
 
-#: diskdrake/interactive.pm:590 diskdrake/removable.pm:47
+#: diskdrake/interactive.pm:640 diskdrake/removable.pm:47
 #, c-format
 msgid "Which filesystem do you want?"
 msgstr "Vilket filsystem vill du använda?"
 
-#: diskdrake/interactive.pm:597
+#: diskdrake/interactive.pm:647
 #, c-format
 msgid "Switching from %s to %s"
 msgstr "Byter från %s till %s"
 
-#: diskdrake/interactive.pm:632
+#: diskdrake/interactive.pm:682
 #, c-format
 msgid "Set volume label"
 msgstr "Ange volymnamn"
 
-#: diskdrake/interactive.pm:634
+#: diskdrake/interactive.pm:684
 #, c-format
 msgid "Beware, this will be written to disk as soon as you validate!"
 msgstr "Observera, detta skrivs till disken så fort du godkänner!"
 
-#: diskdrake/interactive.pm:635
+#: diskdrake/interactive.pm:685
 #, c-format
 msgid "Beware, this will be written to disk only after formatting!"
 msgstr "Observera, detta skrivs till disken först efter formatering!"
 
-#: diskdrake/interactive.pm:637
+#: diskdrake/interactive.pm:687
 #, c-format
 msgid "Which volume label?"
 msgstr "Vilket volymnamn?"
 
-#: diskdrake/interactive.pm:638
+#: diskdrake/interactive.pm:688
 #, c-format
 msgid "Label:"
 msgstr "Etikett:"
 
-#: diskdrake/interactive.pm:659
+#: diskdrake/interactive.pm:709
 #, c-format
 msgid "Where do you want to mount the loopback file %s?"
 msgstr "Var vill du montera loopback-filen %s?"
 
-#: diskdrake/interactive.pm:660
+#: diskdrake/interactive.pm:710
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "Var vill du montera enheten %s?"
 
-#: diskdrake/interactive.pm:665
+#: diskdrake/interactive.pm:715
 #, c-format
 msgid ""
 "Can not unset mount point as this partition is used for loop back.\n"
@@ -1759,60 +1777,60 @@ msgstr ""
 "Kan inte inaktivera monteringspunkten eftersom denna partition\n"
 "används för loopback. Ta bort loopback först."
 
-#: diskdrake/interactive.pm:695
+#: diskdrake/interactive.pm:745
 #, c-format
 msgid "Where do you want to mount %s?"
 msgstr "Var vill du montera %s?"
 
-#: diskdrake/interactive.pm:719 diskdrake/interactive.pm:802
-#: fs/partitioning_wizard.pm:128 fs/partitioning_wizard.pm:204
+#: diskdrake/interactive.pm:775 diskdrake/interactive.pm:864
+#: fs/partitioning_wizard.pm:129 fs/partitioning_wizard.pm:205
 #, c-format
 msgid "Resizing"
 msgstr "Ändrar storlek"
 
-#: diskdrake/interactive.pm:719
+#: diskdrake/interactive.pm:775
 #, c-format
 msgid "Computing FAT filesystem bounds"
 msgstr "Räknar ut FAT-filsystemets gränser"
 
-#: diskdrake/interactive.pm:755
+#: diskdrake/interactive.pm:817
 #, c-format
 msgid "This partition is not resizeable"
 msgstr "Denna partition kan inte ändra storlek"
 
-#: diskdrake/interactive.pm:760
+#: diskdrake/interactive.pm:822
 #, c-format
 msgid "All data on this partition should be backed-up"
 msgstr "Alla data på den här partitionen bör säkerhetskopieras."
 
-#: diskdrake/interactive.pm:762
+#: diskdrake/interactive.pm:824
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr ""
 "Efter storleksändring av partition %s, kommer alla data på den att vara "
 "borta."
 
-#: diskdrake/interactive.pm:769
+#: diskdrake/interactive.pm:831
 #, c-format
 msgid "Choose the new size"
 msgstr "Välj den nya storleken"
 
-#: diskdrake/interactive.pm:770
+#: diskdrake/interactive.pm:832
 #, c-format
 msgid "New size in MB: "
 msgstr "Ny storlek i MB: "
 
-#: diskdrake/interactive.pm:771
+#: diskdrake/interactive.pm:833
 #, c-format
 msgid "Minimum size: %s MB"
 msgstr "Minsta storlek: %s MB"
 
-#: diskdrake/interactive.pm:772
+#: diskdrake/interactive.pm:834
 #, c-format
 msgid "Maximum size: %s MB"
 msgstr "Maximal storlek: %s MB"
 
-#: diskdrake/interactive.pm:813 fs/partitioning_wizard.pm:212
+#: diskdrake/interactive.pm:875 fs/partitioning_wizard.pm:213
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
@@ -1821,57 +1839,57 @@ msgstr ""
 "För att säkerställa dataintegritet efter storleksändring av partition(er),\n"
 "kommer filsystemskontroller att köras vid nästa start av Microsoft Windows®"
 
-#: diskdrake/interactive.pm:861 diskdrake/interactive.pm:1423
+#: diskdrake/interactive.pm:939 diskdrake/interactive.pm:1478
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "Krypteringsnyckel för filsystem"
 
-#: diskdrake/interactive.pm:862
+#: diskdrake/interactive.pm:940
 #, c-format
 msgid "Enter your filesystem encryption key"
 msgstr "Ange krypteringsnyckel för filsystemet"
 
-#: diskdrake/interactive.pm:863 diskdrake/interactive.pm:1431
+#: diskdrake/interactive.pm:941 diskdrake/interactive.pm:1486
 #, c-format
 msgid "Encryption key"
 msgstr "Krypteringsnyckel"
 
-#: diskdrake/interactive.pm:870
+#: diskdrake/interactive.pm:948
 #, c-format
 msgid "Invalid key"
 msgstr "Felaktig nyckel"
 
-#: diskdrake/interactive.pm:878
+#: diskdrake/interactive.pm:956
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "Välj en existerande RAID att addera till"
 
-#: diskdrake/interactive.pm:880 diskdrake/interactive.pm:901
+#: diskdrake/interactive.pm:958 diskdrake/interactive.pm:977
 #, c-format
 msgid "new"
 msgstr "ny"
 
-#: diskdrake/interactive.pm:899
+#: diskdrake/interactive.pm:975
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "Välj en existerande LVM att addera till"
 
-#: diskdrake/interactive.pm:911 diskdrake/interactive.pm:920
+#: diskdrake/interactive.pm:987 diskdrake/interactive.pm:996
 #, c-format
 msgid "LVM name"
 msgstr "LVM namn"
 
-#: diskdrake/interactive.pm:912
+#: diskdrake/interactive.pm:988
 #, c-format
 msgid "Enter a name for the new LVM volume group"
 msgstr "Ange ett namn för den nya LVM volym-gruppen"
 
-#: diskdrake/interactive.pm:917
+#: diskdrake/interactive.pm:993
 #, c-format
 msgid "\"%s\" already exists"
 msgstr "\"%s\" existerar redan"
 
-#: diskdrake/interactive.pm:948
+#: diskdrake/interactive.pm:1024
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
@@ -1880,119 +1898,114 @@ msgstr ""
 "Fysiska volymen %s används ännu.\n"
 "Vill du flytta använda fysiska områden på denna volym till andra volymer?"
 
-#: diskdrake/interactive.pm:950
+#: diskdrake/interactive.pm:1026
 #, c-format
 msgid "Moving physical extents"
 msgstr "Flyttar fysiska områden"
 
-#: diskdrake/interactive.pm:968
+#: diskdrake/interactive.pm:1044
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "Denna partition kan inte användas för loopback."
 
-#: diskdrake/interactive.pm:981
+#: diskdrake/interactive.pm:1057
 #, c-format
 msgid "Loopback"
 msgstr "Loopback"
 
-#: diskdrake/interactive.pm:982
+#: diskdrake/interactive.pm:1058
 #, c-format
 msgid "Loopback file name: "
 msgstr "Loopback-filnamn: "
 
-#: diskdrake/interactive.pm:987
+#: diskdrake/interactive.pm:1063
 #, c-format
 msgid "Give a file name"
 msgstr "Ange ett filnamn"
 
-#: diskdrake/interactive.pm:990
+#: diskdrake/interactive.pm:1066
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "Filen används redan av en annan loopback, välj en annan."
 
-#: diskdrake/interactive.pm:991
+#: diskdrake/interactive.pm:1067
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "Filen finns redan. Använd den?"
 
-#: diskdrake/interactive.pm:1023 diskdrake/interactive.pm:1026
+#: diskdrake/interactive.pm:1099 diskdrake/interactive.pm:1102
 #, c-format
 msgid "Mount options"
 msgstr "Monteringsalternativ"
 
-#: diskdrake/interactive.pm:1033
+#: diskdrake/interactive.pm:1109
 #, c-format
 msgid "Various"
 msgstr "Diverse"
 
-#: diskdrake/interactive.pm:1100
+#: diskdrake/interactive.pm:1155
 #, c-format
 msgid "device"
 msgstr "enhet"
 
-#: diskdrake/interactive.pm:1101
+#: diskdrake/interactive.pm:1156
 #, c-format
 msgid "level"
 msgstr "nivå"
 
-#: diskdrake/interactive.pm:1102
+#: diskdrake/interactive.pm:1157
 #, c-format
 msgid "chunk size in KiB"
 msgstr "blockstorlek i KiB"
 
-#: diskdrake/interactive.pm:1120
+#: diskdrake/interactive.pm:1175
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Var försiktig: Detta moment är farligt."
 
-#: diskdrake/interactive.pm:1135
+#: diskdrake/interactive.pm:1190
 #, c-format
 msgid "Partitioning Type"
 msgstr "Partitioneringstyp"
 
-#: diskdrake/interactive.pm:1135
+#: diskdrake/interactive.pm:1190
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Vilken typ av partitionering?"
 
-#: diskdrake/interactive.pm:1173
+#: diskdrake/interactive.pm:1228
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Du behöver starta om datorn innan ändringarna kan verkställas."
 
-#: diskdrake/interactive.pm:1182
+#: diskdrake/interactive.pm:1237
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk"
 msgstr "Partitionstabellen på disk %s kommer att skrivas till disk."
 
-#: diskdrake/interactive.pm:1204 fs/format.pm:99 fs/format.pm:106
+#: diskdrake/interactive.pm:1256 fs/format.pm:102 fs/format.pm:109
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Formaterar partition %s"
 
-#: diskdrake/interactive.pm:1217
+#: diskdrake/interactive.pm:1269
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr ""
 "Efter formateringen av partition %s kommer alla data på partitionen att "
 "försvinna."
 
-#: diskdrake/interactive.pm:1226 fs/partitioning.pm:48
-#, c-format
-msgid "Check bad blocks?"
-msgstr "Sök efter felaktiga block?"
-
-#: diskdrake/interactive.pm:1240
+#: diskdrake/interactive.pm:1292
 #, c-format
 msgid "Move files to the new partition"
 msgstr "Flytta filer till den nya partitionen"
 
-#: diskdrake/interactive.pm:1240
+#: diskdrake/interactive.pm:1292
 #, c-format
 msgid "Hide files"
 msgstr "Dölj filer"
 
-#: diskdrake/interactive.pm:1241
+#: diskdrake/interactive.pm:1293
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -2009,128 +2022,128 @@ msgstr ""
 "monteras där, eller lämna dem där de är (som resulterar i att de göms av "
 "innehållet i den monterade partitionen)"
 
-#: diskdrake/interactive.pm:1256
+#: diskdrake/interactive.pm:1308
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "Flyttar filerna till den nya partitionen"
 
-#: diskdrake/interactive.pm:1260
+#: diskdrake/interactive.pm:1312
 #, c-format
 msgid "Copying %s"
 msgstr "Kopierar %s"
 
-#: diskdrake/interactive.pm:1264
+#: diskdrake/interactive.pm:1316
 #, c-format
 msgid "Removing %s"
 msgstr "Tar bort %s"
 
-#: diskdrake/interactive.pm:1278
+#: diskdrake/interactive.pm:1330
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "partitionen %s är känd som %s"
 
-#: diskdrake/interactive.pm:1279
+#: diskdrake/interactive.pm:1331
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr "Partitioner har numrerats om:"
 
-#: diskdrake/interactive.pm:1304 diskdrake/interactive.pm:1372
+#: diskdrake/interactive.pm:1356 diskdrake/interactive.pm:1427
 #, c-format
 msgid "Device: "
 msgstr "Enhet: "
 
-#: diskdrake/interactive.pm:1305
+#: diskdrake/interactive.pm:1357
 #, c-format
 msgid "Volume label: "
 msgstr "Volymetikett:"
 
-#: diskdrake/interactive.pm:1306
+#: diskdrake/interactive.pm:1358
 #, c-format
 msgid "UUID: "
 msgstr "UUID: "
 
-#: diskdrake/interactive.pm:1307
+#: diskdrake/interactive.pm:1359
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS-enhetsbokstav: %s (bara en gissning)\n"
 
-#: diskdrake/interactive.pm:1311 diskdrake/interactive.pm:1320
-#: diskdrake/interactive.pm:1391
+#: diskdrake/interactive.pm:1363 diskdrake/interactive.pm:1372
+#: diskdrake/interactive.pm:1446
 #, c-format
 msgid "Type: "
 msgstr "Typ: "
 
-#: diskdrake/interactive.pm:1315 diskdrake/interactive.pm:1376
+#: diskdrake/interactive.pm:1367 diskdrake/interactive.pm:1431
 #, c-format
 msgid "Name: "
 msgstr "Namn: "
 
-#: diskdrake/interactive.pm:1322
+#: diskdrake/interactive.pm:1374
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Start: sektor %s\n"
 
-#: diskdrake/interactive.pm:1323
+#: diskdrake/interactive.pm:1375
 #, c-format
 msgid "Size: %s"
 msgstr "Storlek: %s"
 
-#: diskdrake/interactive.pm:1325
+#: diskdrake/interactive.pm:1377
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s sektorer"
 
-#: diskdrake/interactive.pm:1327
+#: diskdrake/interactive.pm:1379
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "Cylinder %d till %d\n"
 
-#: diskdrake/interactive.pm:1328
+#: diskdrake/interactive.pm:1380
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr "Antal logiska områden: %d\n"
 
-#: diskdrake/interactive.pm:1329
+#: diskdrake/interactive.pm:1381
 #, c-format
 msgid "Formatted\n"
 msgstr "Formaterad\n"
 
-#: diskdrake/interactive.pm:1330
+#: diskdrake/interactive.pm:1382
 #, c-format
 msgid "Not formatted\n"
 msgstr "Inte formaterad\n"
 
-#: diskdrake/interactive.pm:1331
+#: diskdrake/interactive.pm:1383
 #, c-format
 msgid "Mounted\n"
 msgstr "Monterad\n"
 
-#: diskdrake/interactive.pm:1332
+#: diskdrake/interactive.pm:1384
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1334
+#: diskdrake/interactive.pm:1386
 #, c-format
 msgid "Encrypted"
 msgstr "Krypterad"
 
-#: diskdrake/interactive.pm:1334
+#: diskdrake/interactive.pm:1388
 #, c-format
 msgid " (mapped on %s)"
 msgstr " (mappad på %s)"
 
-#: diskdrake/interactive.pm:1335
+#: diskdrake/interactive.pm:1389
 #, c-format
 msgid " (to map on %s)"
 msgstr " (för map på %s)"
 
-#: diskdrake/interactive.pm:1336
+#: diskdrake/interactive.pm:1390
 #, c-format
 msgid " (inactive)"
 msgstr " (inaktiv)"
 
-#: diskdrake/interactive.pm:1342
+#: diskdrake/interactive.pm:1397
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2139,7 +2152,7 @@ msgstr ""
 "Loopback-fil(er):\n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1343
+#: diskdrake/interactive.pm:1398
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -2148,27 +2161,27 @@ msgstr ""
 "Förvald partition för start\n"
 "    (för MS-DOS-start, inte för Lilo)\n"
 
-#: diskdrake/interactive.pm:1345
+#: diskdrake/interactive.pm:1400
 #, c-format
 msgid "Level %s\n"
 msgstr "Nivå %s\n"
 
-#: diskdrake/interactive.pm:1346
+#: diskdrake/interactive.pm:1401
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "Blockstorlek %d KiB\n"
 
-#: diskdrake/interactive.pm:1347
+#: diskdrake/interactive.pm:1402
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "RAID-diskar %s\n"
 
-#: diskdrake/interactive.pm:1349
+#: diskdrake/interactive.pm:1404
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Loopback-filnamn: %s"
 
-#: diskdrake/interactive.pm:1352
+#: diskdrake/interactive.pm:1407
 #, c-format
 msgid ""
 "\n"
@@ -2181,7 +2194,7 @@ msgstr ""
 "är en drivrutinspartition. Du bör\n"
 "antagligen lämna den i fred.\n"
 
-#: diskdrake/interactive.pm:1355
+#: diskdrake/interactive.pm:1410
 #, c-format
 msgid ""
 "\n"
@@ -2194,68 +2207,58 @@ msgstr ""
 "partition är till för att\n"
 "kunna starta flera operativsystem på systemet.\n"
 
-#: diskdrake/interactive.pm:1364
+#: diskdrake/interactive.pm:1419
 #, c-format
 msgid "Free space on %s (%s)"
 msgstr "Ledigt utrymme på %s (%s)"
 
-#: diskdrake/interactive.pm:1373
+#: diskdrake/interactive.pm:1428
 #, c-format
 msgid "Read-only"
 msgstr "Skrivskyddad"
 
-#: diskdrake/interactive.pm:1374
+#: diskdrake/interactive.pm:1429
 #, c-format
 msgid "Size: %s\n"
 msgstr "Storlek: %s\n"
 
-#: diskdrake/interactive.pm:1375
+#: diskdrake/interactive.pm:1430
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Geometri: %s cylindrar, %s huvuden, %s sektorer\n"
 
-#: diskdrake/interactive.pm:1377
+#: diskdrake/interactive.pm:1432
 #, c-format
 msgid "Medium type: "
 msgstr "Media typ: "
 
-#: diskdrake/interactive.pm:1378
+#: diskdrake/interactive.pm:1433
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "LVM-diskar %s\n"
 
-#: diskdrake/interactive.pm:1379
+#: diskdrake/interactive.pm:1434
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Partitionstabellstyp: %s\n"
 
-#: diskdrake/interactive.pm:1380
+#: diskdrake/interactive.pm:1435
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "på kanal %d id %d\n"
 
-#: diskdrake/interactive.pm:1424
+#: diskdrake/interactive.pm:1479
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Välj krypteringsnyckel för filsystemet"
 
-#: diskdrake/interactive.pm:1427
+#: diskdrake/interactive.pm:1482
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr ""
 "Den här krypteringsnyckeln är för enkel (den måste vara minst %d tecken lång)"
 
-#: diskdrake/interactive.pm:1428
-#, c-format
-msgid "The encryption keys do not match"
-msgstr "Krypteringsnycklarna matchar inte"
-
-#: diskdrake/interactive.pm:1432
-#, c-format
-msgid "Encryption key (again)"
-msgstr "Krypteringsnyckel (igen)"
-
-#: diskdrake/interactive.pm:1434
+#: diskdrake/interactive.pm:1489
 #, c-format
 msgid "Encryption algorithm"
 msgstr "Kryperingsalgoritm"
@@ -2360,32 +2363,32 @@ msgstr ""
 "Ett fel har uppstått - inga giltiga enheter som kan användas för att skapa "
 "nya filsystem kunde hittas. Kontrollera hårdvaran för orsaken till problemet."
 
-#: fs/any.pm:75 fs/partitioning_wizard.pm:61
+#: fs/any.pm:75 fs/partitioning_wizard.pm:62
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "Du måste ha en FAT-partition monterad i /boot/efi."
 
-#: fs/format.pm:103
+#: fs/format.pm:106
 #, c-format
 msgid "Creating and formatting file %s"
 msgstr "Skapar och formaterar filen %s"
 
-#: fs/format.pm:122
+#: fs/format.pm:125
 #, c-format
 msgid "I do not know how to set label on %s with type %s"
 msgstr "Vet inte hur man sätter etikett på %s med typ %s"
 
-#: fs/format.pm:131
+#: fs/format.pm:134
 #, c-format
 msgid "setting label on %s failed, is it formatted?"
 msgstr "sättande av etikett på %s misslyckades, är den formaterad?"
 
-#: fs/format.pm:172
+#: fs/format.pm:175
 #, c-format
 msgid "I do not know how to format %s in type %s"
 msgstr "Vet inte hur man formaterar %s i typ %s"
 
-#: fs/format.pm:177 fs/format.pm:179
+#: fs/format.pm:180 fs/format.pm:182
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "%s formatering av %s misslyckades"
@@ -2420,24 +2423,19 @@ msgstr "fel vid avmontering %s: %s"
 msgid "Enabling swap partition %s"
 msgstr "Formaterar växlingspartition %s"
 
-#: fs/mount_options.pm:114
-#, c-format
-msgid "Use an encrypted file system"
-msgstr "Använd ett krypterat filsystem"
-
-#: fs/mount_options.pm:116
+#: fs/mount_options.pm:113
 #, c-format
 msgid "Flush write cache on file close"
 msgstr "Töm skrivcache vid filstängning"
 
-#: fs/mount_options.pm:118
+#: fs/mount_options.pm:115
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
 msgstr ""
 "Ta i bruk gruppkvoteringar på hårddiskarna och alternativt också påtvinga "
 "begränsningar"
 
-#: fs/mount_options.pm:120
+#: fs/mount_options.pm:117
 #, c-format
 msgid ""
 "Do not update inode access times on this file system\n"
@@ -2447,7 +2445,7 @@ msgstr ""
 "(ger snabbare tillgång till \"news spool\" för att snabba upp "
 "diskussionsgruppsservrar)"
 
-#: fs/mount_options.pm:123
+#: fs/mount_options.pm:120
 #, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
@@ -2457,7 +2455,7 @@ msgstr ""
 "sätt (ex. för snabbare access på news spool för att snabba upp news-\n"
 "servrar)."
 
-#: fs/mount_options.pm:126
+#: fs/mount_options.pm:123
 #, c-format
 msgid ""
 "Can only be mounted explicitly (i.e.,\n"
@@ -2466,12 +2464,12 @@ msgstr ""
 "Kan endast monteras explicit (dvs,\n"
 "alternativet -a kommer inte att montera filsystemet)."
 
-#: fs/mount_options.pm:129
+#: fs/mount_options.pm:126
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
 msgstr "Tolka inte tecken- eller block-specialenheter på filsystemet."
 
-#: fs/mount_options.pm:131
+#: fs/mount_options.pm:128
 #, c-format
 msgid ""
 "Do not allow execution of any binaries on the mounted\n"
@@ -2483,7 +2481,7 @@ msgstr ""
 "som har filsystem som innehåller binärer för annan hårdvara\n"
 "än dess egen."
 
-#: fs/mount_options.pm:135
+#: fs/mount_options.pm:132
 #, c-format
 msgid ""
 "Do not allow set-user-identifier or set-group-identifier\n"
@@ -2495,44 +2493,44 @@ msgstr ""
 "bra val ur säkerhetssynpunkt, men är i själva verket ett ganska\n"
 "osäkert alternativ om du har installerat suidperl(1).)"
 
-#: fs/mount_options.pm:139
+#: fs/mount_options.pm:136
 #, c-format
 msgid "Mount the file system read-only."
 msgstr "Montera filsystemet skrivskyddat."
 
-#: fs/mount_options.pm:141
+#: fs/mount_options.pm:138
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
 msgstr "All I/O till filsystemet sker synkroniserat."
 
-#: fs/mount_options.pm:143
+#: fs/mount_options.pm:140
 #, c-format
 msgid "Allow every user to mount and umount the file system."
 msgstr "Tillåt alla användare att montera och avmontera filsystemet."
 
-#: fs/mount_options.pm:145
+#: fs/mount_options.pm:142
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
 msgstr "Tillåt en vanlig användare att montera filsystemet."
 
-#: fs/mount_options.pm:147
+#: fs/mount_options.pm:144
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr ""
 "Ta i bruk användarkvoteringar på hårddiskarna och alternativt också påtvinga "
 "begränsningar"
 
-#: fs/mount_options.pm:149
+#: fs/mount_options.pm:146
 #, c-format
 msgid "Support \"user.\" extended attributes"
 msgstr "Stöd \"user.\" tilläggsatribut"
 
-#: fs/mount_options.pm:151
+#: fs/mount_options.pm:148
 #, c-format
 msgid "Give write access to ordinary users"
 msgstr "Ge skrivrättigheter till vanliga användare."
 
-#: fs/mount_options.pm:153
+#: fs/mount_options.pm:150
 #, c-format
 msgid "Give read-only access to ordinary users"
 msgstr "Ge läsrättigheter till vanliga användare."
@@ -2589,7 +2587,7 @@ msgstr ""
 "För detta, skapa en partition (eller klicka på en befintlig).\n"
 "Välj sedan åtgärden \"monteringspunkt\" och ange den som \"/\"."
 
-#: fs/partitioning_wizard.pm:58
+#: fs/partitioning_wizard.pm:59
 #, c-format
 msgid ""
 "You do not have a swap partition.\n"
@@ -2600,42 +2598,42 @@ msgstr ""
 "\n"
 "Fortsätta ändå?"
 
-#: fs/partitioning_wizard.pm:92
+#: fs/partitioning_wizard.pm:93
 #, c-format
 msgid "Use free space"
 msgstr "Använd ledigt utrymme"
 
-#: fs/partitioning_wizard.pm:94
+#: fs/partitioning_wizard.pm:95
 #, c-format
 msgid "Not enough free space to allocate new partitions"
 msgstr "Inte tillräckligt med utrymme för att allokera nya partitioner."
 
-#: fs/partitioning_wizard.pm:102
+#: fs/partitioning_wizard.pm:103
 #, c-format
 msgid "Use existing partitions"
 msgstr "Använd existerande partition"
 
-#: fs/partitioning_wizard.pm:104
+#: fs/partitioning_wizard.pm:105
 #, c-format
 msgid "There is no existing partition to use"
 msgstr "Det finns ingen befintlig partition att använda."
 
-#: fs/partitioning_wizard.pm:128
+#: fs/partitioning_wizard.pm:129
 #, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
 msgstr "Räknar ut storleken på Microsoft Windows®-partitionen"
 
-#: fs/partitioning_wizard.pm:164
+#: fs/partitioning_wizard.pm:165
 #, c-format
 msgid "Use the free space on a Microsoft Windows® partition"
 msgstr "Använd ledigt utrymme på en Microsoft Windows ® partition"
 
-#: fs/partitioning_wizard.pm:168
+#: fs/partitioning_wizard.pm:169
 #, c-format
 msgid "Which partition do you want to resize?"
 msgstr "Vilken partition vill du ändra storlek på?"
 
-#: fs/partitioning_wizard.pm:171
+#: fs/partitioning_wizard.pm:172
 #, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
@@ -2645,7 +2643,7 @@ msgstr ""
 "Microsoft Windows®-partitionen är för fragmenterad, kör \"Defrag\" under "
 "Microsoft Windows® först."
 
-#: fs/partitioning_wizard.pm:179
+#: fs/partitioning_wizard.pm:180
 #, c-format
 msgid ""
 "WARNING!\n"
@@ -2680,76 +2678,76 @@ msgstr ""
 "När du är säker, klicka %s."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:188 fs/partitioning_wizard.pm:551
+#: fs/partitioning_wizard.pm:189 fs/partitioning_wizard.pm:552
 #: interactive.pm:549 interactive/curses.pm:263 ugtk2.pm:519
 #, c-format
 msgid "Next"
 msgstr "Nästa"
 
-#: fs/partitioning_wizard.pm:194
+#: fs/partitioning_wizard.pm:195
 #, c-format
 msgid "Partitionning"
 msgstr "Partitionering"
 
-#: fs/partitioning_wizard.pm:194
+#: fs/partitioning_wizard.pm:195
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
 msgstr "Vilken storlek vill du behålla för Microsoft Windows® på partition %s?"
 
-#: fs/partitioning_wizard.pm:195
+#: fs/partitioning_wizard.pm:196
 #, c-format
 msgid "Size"
 msgstr "Storlek"
 
-#: fs/partitioning_wizard.pm:204
+#: fs/partitioning_wizard.pm:205
 #, c-format
 msgid "Resizing Microsoft Windows® partition"
 msgstr "Ändrar storlek på Microsoft Windows®-partition"
 
-#: fs/partitioning_wizard.pm:209
+#: fs/partitioning_wizard.pm:210
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr "FAT-storleksändring misslyckades: %s"
 
-#: fs/partitioning_wizard.pm:225
+#: fs/partitioning_wizard.pm:226
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "Det finns ingen FAT-partition att ändra storlek på (eller ej tillräckligt "
 "utrymme)"
 
-#: fs/partitioning_wizard.pm:230
+#: fs/partitioning_wizard.pm:231
 #, c-format
 msgid "Remove Microsoft Windows®"
 msgstr "Ta bort Microsoft Windows®"
 
-#: fs/partitioning_wizard.pm:230
+#: fs/partitioning_wizard.pm:231
 #, c-format
 msgid "Erase and use entire disk"
 msgstr "Radera och använd hela hårddisken"
 
-#: fs/partitioning_wizard.pm:234
+#: fs/partitioning_wizard.pm:235
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "Du har mer än en hårddisk, vilken vill du installera Linux på?"
 
-#: fs/partitioning_wizard.pm:242 fsedit.pm:600
+#: fs/partitioning_wizard.pm:243 fsedit.pm:610
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr ""
 "Alla existerande partitioner på %s och dess data kommer att gå förlorade."
 
-#: fs/partitioning_wizard.pm:252
+#: fs/partitioning_wizard.pm:253
 #, c-format
 msgid "Custom disk partitioning"
 msgstr "Anpassad diskpartitionering"
 
-#: fs/partitioning_wizard.pm:258
+#: fs/partitioning_wizard.pm:259
 #, c-format
 msgid "Use fdisk"
 msgstr "Använd fdisk"
 
-#: fs/partitioning_wizard.pm:261
+#: fs/partitioning_wizard.pm:262
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -2758,37 +2756,37 @@ msgstr ""
 "Du kan nu partitionera %s.\n"
 "Glöm inte att spara med \"w\" när du är klar."
 
-#: fs/partitioning_wizard.pm:401
+#: fs/partitioning_wizard.pm:402
 #, fuzzy, c-format
 msgid "Ext2/3/4"
 msgstr "Ext3"
 
-#: fs/partitioning_wizard.pm:431 fs/partitioning_wizard.pm:571
+#: fs/partitioning_wizard.pm:432 fs/partitioning_wizard.pm:572
 #, c-format
 msgid "I can not find any room for installing"
 msgstr "Kan inte hitta utrymme för installation."
 
-#: fs/partitioning_wizard.pm:440 fs/partitioning_wizard.pm:578
+#: fs/partitioning_wizard.pm:441 fs/partitioning_wizard.pm:579
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "DrakXs partitioneringsguide hittade följande lösningar:"
 
-#: fs/partitioning_wizard.pm:511
+#: fs/partitioning_wizard.pm:512
 #, c-format
 msgid "Here is the content of your disk drive "
 msgstr "Här är innehållet på din hårddisk"
 
-#: fs/partitioning_wizard.pm:588
+#: fs/partitioning_wizard.pm:589
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Partitionering misslyckades: %s"
 
-#: fs/type.pm:390
+#: fs/type.pm:393
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
 msgstr "Du kan inte använda JFS på partitioner mindre än 16MB."
 
-#: fs/type.pm:391
+#: fs/type.pm:394
 #, c-format
 msgid "You can not use ReiserFS for partitions smaller than 32MB"
 msgstr "Du kan inte använda ReiserFS på partitioner mindre än 32MB."
@@ -2859,6 +2857,22 @@ msgstr ""
 "en /boot-partition. Se till att lägga till en /boot-partition."
 
 #: fsedit.pm:437
+#, fuzzy, c-format
+msgid ""
+"You've selected an encrypted partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"Du har valt en mjukvaru-RAID-partition som rot (/).\n"
+"Det finns ingen starthanterare som hanterar detta utan\n"
+"en /boot-partition. Se till att lägga till en /boot-partition."
+
+#: fsedit.pm:443 fsedit.pm:461
+#, c-format
+msgid "You can not use an encrypted file system for mount point %s"
+msgstr "Du kan inte använda ett krypterat filsystem för monteringspunkten %s"
+
+#: fsedit.pm:447
 #, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
@@ -2867,7 +2881,7 @@ msgstr ""
 "Du kan inte använda LVM logisk volym för monteringspunkt %s eftersom den är "
 "spridd på flera fysiska volymer"
 
-#: fsedit.pm:439
+#: fsedit.pm:449
 #, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
@@ -2880,12 +2894,12 @@ msgstr ""
 "volymer.\n"
 "Du bör skapa en skilld /boot partition först"
 
-#: fsedit.pm:443 fsedit.pm:445
+#: fsedit.pm:453 fsedit.pm:455
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Denna katalog bör lämnas i rotfilsystemet."
 
-#: fsedit.pm:447 fsedit.pm:449
+#: fsedit.pm:457 fsedit.pm:459
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/3/4, reiserfs, xfs, or jfs) for this mount "
@@ -2894,17 +2908,12 @@ msgstr ""
 "Du behöver ett riktigt filsystem (Ext2/Ext3, ReiserFS, XFS eller JFS) för "
 "denna monteringspunkt.\n"
 
-#: fsedit.pm:451
-#, c-format
-msgid "You can not use an encrypted file system for mount point %s"
-msgstr "Du kan inte använda ett krypterat filsystem för monteringspunkten %s"
-
-#: fsedit.pm:516
+#: fsedit.pm:526
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "Inte tillräckligt med utrymme för automatisk allokering"
 
-#: fsedit.pm:518
+#: fsedit.pm:528
 #, c-format
 msgid "Nothing to do"
 msgstr "Ingenting att göra"
@@ -7200,6 +7209,21 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Installationen misslyckades"
+
+#~ msgid "Restrict command line options"
+#~ msgstr "Begränsa alternativen för kommandoraden"
+
+#~ msgid "restrict"
+#~ msgstr "begränsa"
+
+#~ msgid ""
+#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ msgstr ""
+#~ "Alternativet \"Begränsa alternativen för kommandoraden\" är värdelöst "
+#~ "utan lösenord."
+
+#~ msgid "Use an encrypted file system"
+#~ msgstr "Använd ett krypterat filsystem"
 
 #~ msgid ""
 #~ "To ensure data integrity after resizing the partition(s), \n"

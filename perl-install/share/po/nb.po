@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
-"POT-Creation-Date: 2010-03-28 14:46+0200\n"
+"POT-Creation-Date: 2010-05-01 16:46+0200\n"
 "PO-Revision-Date: 2010-04-22 01:01+0200\n"
 "Last-Translator: Olav Dahlum <odahlum@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <cooker-i18n@mandrivalinux.org>\n"
@@ -29,10 +29,10 @@ msgstr ""
 "X-Language: nb_NO\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: any.pm:252 any.pm:953 diskdrake/interactive.pm:597
-#: diskdrake/interactive.pm:802 diskdrake/interactive.pm:846
-#: diskdrake/interactive.pm:950 diskdrake/interactive.pm:1204
-#: diskdrake/interactive.pm:1256 do_pkgs.pm:241 do_pkgs.pm:287
+#: any.pm:252 any.pm:947 diskdrake/interactive.pm:647
+#: diskdrake/interactive.pm:864 diskdrake/interactive.pm:924
+#: diskdrake/interactive.pm:1026 diskdrake/interactive.pm:1256
+#: diskdrake/interactive.pm:1308 do_pkgs.pm:241 do_pkgs.pm:287
 #: harddrake/sound.pm:303 interactive.pm:587 pkgs.pm:281
 #, c-format
 msgid "Please wait"
@@ -135,7 +135,7 @@ msgstr "Hopp over"
 msgid "Boot Style Configuration"
 msgstr "Oppsettype"
 
-#: any.pm:412 any.pm:452 any.pm:453
+#: any.pm:412 any.pm:445 any.pm:446
 #, c-format
 msgid "Bootloader main options"
 msgstr "Hovedvalg for oppstartslaster"
@@ -145,12 +145,12 @@ msgstr "Hovedvalg for oppstartslaster"
 msgid "Bootloader"
 msgstr "Oppstartslaster"
 
-#: any.pm:417 any.pm:456
+#: any.pm:417 any.pm:449
 #, c-format
 msgid "Bootloader to use"
 msgstr "Oppstartslaster"
 
-#: any.pm:420 any.pm:459
+#: any.pm:420 any.pm:452
 #, c-format
 msgid "Boot device"
 msgstr "Oppstartsenhet"
@@ -190,7 +190,7 @@ msgstr "Bruk lokal APIC"
 msgid "Security"
 msgstr "Sikkerhet"
 
-#: any.pm:431 any.pm:891 any.pm:907 authentication.pm:250
+#: any.pm:431 any.pm:885 any.pm:901 authentication.pm:250
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
@@ -201,7 +201,7 @@ msgstr "Passord"
 msgid "The passwords do not match"
 msgstr "Passordene er ikke like"
 
-#: any.pm:434 authentication.pm:261 diskdrake/interactive.pm:1428
+#: any.pm:434 authentication.pm:261 diskdrake/interactive.pm:1483
 #, c-format
 msgid "Please try again"
 msgstr "Prøv igjen"
@@ -211,162 +211,152 @@ msgstr "Prøv igjen"
 msgid "You can not use a password with %s"
 msgstr "Du kan ikke bruke et passord som inneholder «%s»"
 
-#: any.pm:440 any.pm:893 any.pm:909 authentication.pm:251
+#: any.pm:440 any.pm:887 any.pm:903 authentication.pm:251
 #, c-format
 msgid "Password (again)"
 msgstr "Passord (på nytt)"
 
 #: any.pm:441
 #, c-format
-msgid "Restrict command line options"
-msgstr "Avgrens kommandolinjeval"
-
-#: any.pm:442
-#, c-format
-msgid "restrict"
-msgstr "avgrens"
-
-#: any.pm:445
-#, c-format
-msgid "Option ``Restrict command line options'' is of no use without a password"
-msgstr "Valget «Avgrens kommandolinjevalg» er ubrukelig uten passord"
-
-#: any.pm:448
-#, c-format
 msgid "Clean /tmp at each boot"
 msgstr "Tøm «/tmp» ved hver oppstart"
 
-#: any.pm:458
+#: any.pm:451
 #, c-format
 msgid "Init Message"
 msgstr "Startmelding"
 
-#: any.pm:460
+#: any.pm:453
 #, c-format
 msgid "Open Firmware Delay"
 msgstr "Pause for Open Firmware"
 
-#: any.pm:461
+#: any.pm:454
 #, c-format
 msgid "Kernel Boot Timeout"
 msgstr "Tidsgrense for kjerneoppstart"
 
-#: any.pm:462
+#: any.pm:455
 #, c-format
 msgid "Enable CD Boot?"
 msgstr "Skal det være mulig å starte opp fra CD?"
 
-#: any.pm:463
+#: any.pm:456
 #, c-format
 msgid "Enable OF Boot?"
 msgstr "Skal det være mulig å starte opp fra Open Firmware?"
 
-#: any.pm:464
+#: any.pm:457
 #, c-format
 msgid "Default OS?"
 msgstr "Standardoperativsystem?"
 
-#: any.pm:537
+#: any.pm:530
 #, c-format
 msgid "Image"
 msgstr "Bilde"
 
-#: any.pm:538 any.pm:551
+#: any.pm:531 any.pm:545
 #, c-format
 msgid "Root"
 msgstr "Rot"
 
-#: any.pm:539 any.pm:564
+#: any.pm:532 any.pm:558
 #, c-format
 msgid "Append"
 msgstr "Legg til"
 
-#: any.pm:541
+#: any.pm:534
 #, c-format
 msgid "Xen append"
 msgstr "Xen-tillegg"
 
-#: any.pm:544
+#: any.pm:536
+#, c-format
+msgid "Requires password to boot"
+msgstr ""
+
+#: any.pm:538
 #, c-format
 msgid "Video mode"
 msgstr "Videomodus"
 
-#: any.pm:546
+#: any.pm:540
 #, c-format
 msgid "Initrd"
 msgstr "Initrd"
 
-#: any.pm:547
+#: any.pm:541
 #, c-format
 msgid "Network profile"
 msgstr "Nettverksprofil"
 
-#: any.pm:556 any.pm:561 any.pm:563 diskdrake/interactive.pm:407
+#: any.pm:550 any.pm:555 any.pm:557 diskdrake/interactive.pm:407
 #, c-format
 msgid "Label"
 msgstr "Volumnamn"
 
-#: any.pm:558 any.pm:566 harddrake/v4l.pm:438
+#: any.pm:552 any.pm:560 harddrake/v4l.pm:438
 #, c-format
 msgid "Default"
 msgstr "Standard"
 
-#: any.pm:565
+#: any.pm:559
 #, c-format
 msgid "NoVideo"
 msgstr "Ingen video"
 
-#: any.pm:576
+#: any.pm:570
 #, c-format
 msgid "Empty label not allowed"
 msgstr "Kan ikke ha tomt volumnavn"
 
-#: any.pm:577
+#: any.pm:571
 #, c-format
 msgid "You must specify a kernel image"
 msgstr "Du må velge en kjerne"
 
-#: any.pm:577
+#: any.pm:571
 #, c-format
 msgid "You must specify a root partition"
 msgstr "Du må velge en rotpartisjon"
 
-#: any.pm:578
+#: any.pm:572
 #, c-format
 msgid "This label is already used"
 msgstr "Volumnavnet er alt brukt"
 
-#: any.pm:596
+#: any.pm:590
 #, c-format
 msgid "Which type of entry do you want to add?"
 msgstr "Hvilken type oppføring vil du legge til?"
 
-#: any.pm:597
+#: any.pm:591
 #, c-format
 msgid "Linux"
 msgstr "Linux"
 
-#: any.pm:597
+#: any.pm:591
 #, c-format
 msgid "Other OS (SunOS...)"
 msgstr "Annet operativsystem (SunOS …)"
 
-#: any.pm:598
+#: any.pm:592
 #, c-format
 msgid "Other OS (MacOS...)"
 msgstr "Annet operativsystem (MacOS …)"
 
-#: any.pm:598
+#: any.pm:592
 #, c-format
 msgid "Other OS (Windows...)"
 msgstr "Annet operativsystem (Windows …)"
 
-#: any.pm:645
+#: any.pm:639
 #, c-format
 msgid "Bootloader Configuration"
 msgstr "Oppsett av oppstartslaster"
 
-#: any.pm:646
+#: any.pm:640
 #, c-format
 msgid ""
 "Here are the entries on your boot menu so far.\n"
@@ -375,47 +365,47 @@ msgstr ""
 "Her er de forskjellige oppføringene på oppstartsmenyen.\n"
 "Du kan legge til flerem eller endre de som er der."
 
-#: any.pm:851
+#: any.pm:845
 #, c-format
 msgid "access to X programs"
 msgstr "tilgang til X-programmer"
 
-#: any.pm:852
+#: any.pm:846
 #, c-format
 msgid "access to rpm tools"
 msgstr "tilgang til rpm-verktøy"
 
-#: any.pm:853
+#: any.pm:847
 #, c-format
 msgid "allow \"su\""
 msgstr "godta «su»"
 
-#: any.pm:854
+#: any.pm:848
 #, c-format
 msgid "access to administrative files"
 msgstr "tilgang til administrative filer"
 
-#: any.pm:855
+#: any.pm:849
 #, c-format
 msgid "access to network tools"
 msgstr "tilgang til nettverksverktøy"
 
-#: any.pm:856
+#: any.pm:850
 #, c-format
 msgid "access to compilation tools"
 msgstr "tilgang til kompileringsverktøy"
 
-#: any.pm:862
+#: any.pm:856
 #, c-format
 msgid "(already added %s)"
 msgstr "(allerede lagt til «%s»)"
 
-#: any.pm:868
+#: any.pm:862
 #, c-format
 msgid "Please give a user name"
 msgstr "Skriv inn brukernavn"
 
-#: any.pm:869
+#: any.pm:863
 #, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
@@ -423,147 +413,147 @@ msgid ""
 msgstr ""
 "Brukernavnet kan bare inneholde små bokstaver, tallene og tegnene «-» og «_»"
 
-#: any.pm:870
+#: any.pm:864
 #, c-format
 msgid "The user name is too long"
 msgstr "Brukernavnet er for langt"
 
-#: any.pm:871
+#: any.pm:865
 #, c-format
 msgid "This user name has already been added"
 msgstr "Brukernavnet finnes allerede"
 
-#: any.pm:877 any.pm:911
+#: any.pm:871 any.pm:905
 #, c-format
 msgid "User ID"
 msgstr "Bruker-ID"
 
-#: any.pm:877 any.pm:912
+#: any.pm:871 any.pm:906
 #, c-format
 msgid "Group ID"
 msgstr "Gruppe-ID"
 
-#: any.pm:878
+#: any.pm:872
 #, c-format
 msgid "%s must be a number"
 msgstr "%s må være et tall"
 
-#: any.pm:879
+#: any.pm:873
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
 msgstr "%s må være over 500. Vil du likevel bruke dette?"
 
-#: any.pm:883
+#: any.pm:877
 #, c-format
 msgid "User management"
 msgstr "Brukerhåndtering"
 
-#: any.pm:889
+#: any.pm:883
 #, c-format
 msgid "Enable guest account"
 msgstr "Slå på gjestkonto"
 
-#: any.pm:890 authentication.pm:237
+#: any.pm:884 authentication.pm:237
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "Velg passord for systemansvarlig («root»)"
 
-#: any.pm:895
+#: any.pm:889
 #, c-format
 msgid "Enter a user"
 msgstr "Skriv inn ny bruker"
 
-#: any.pm:897
+#: any.pm:891
 #, c-format
 msgid "Icon"
 msgstr "Ikon"
 
-#: any.pm:900
+#: any.pm:894
 #, c-format
 msgid "Real name"
 msgstr "Fullt navn"
 
-#: any.pm:905
+#: any.pm:899
 #, c-format
 msgid "Login name"
 msgstr "Brukernavn:"
 
-#: any.pm:910
+#: any.pm:904
 #, c-format
 msgid "Shell"
 msgstr "Skall"
 
-#: any.pm:953
+#: any.pm:947
 #, c-format
 msgid "Please wait, adding media..."
 msgstr "Legg til medium. Vent litt ..."
 
-#: any.pm:983 security/l10n.pm:14
+#: any.pm:977 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "Automatisk innlogging"
 
-#: any.pm:984
+#: any.pm:978
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr "Du kan automatisk logge på standardbrukeren ved oppstart."
 
-#: any.pm:985
+#: any.pm:979
 #, c-format
 msgid "Use this feature"
 msgstr "Bruk denne funksjonen"
 
-#: any.pm:986
+#: any.pm:980
 #, c-format
 msgid "Choose the default user:"
 msgstr "Velg standardbruker:"
 
-#: any.pm:987
+#: any.pm:981
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Velg vindusbehandler:"
 
-#: any.pm:998 any.pm:1018 any.pm:1091
+#: any.pm:992 any.pm:1012 any.pm:1085
 #, c-format
 msgid "Release Notes"
 msgstr "Versjons-merknader"
 
-#: any.pm:1025 any.pm:1379 interactive/gtk.pm:819
+#: any.pm:1019 any.pm:1373 interactive/gtk.pm:819
 #, c-format
 msgid "Close"
 msgstr "Lukk"
 
-#: any.pm:1077
+#: any.pm:1071
 #, c-format
 msgid "License agreement"
 msgstr "Lisensavtale"
 
-#: any.pm:1079 diskdrake/dav.pm:26
+#: any.pm:1073 diskdrake/dav.pm:26
 #, c-format
 msgid "Quit"
 msgstr "Avslutt"
 
-#: any.pm:1086
+#: any.pm:1080
 #, c-format
 msgid "Do you accept this license ?"
 msgstr "Godtar du lisensvilkårene?"
 
-#: any.pm:1087
+#: any.pm:1081
 #, c-format
 msgid "Accept"
 msgstr "Godta"
 
-#: any.pm:1087
+#: any.pm:1081
 #, c-format
 msgid "Refuse"
 msgstr "Ikke godta"
 
-#: any.pm:1113 any.pm:1175
+#: any.pm:1107 any.pm:1169
 #, c-format
 msgid "Please choose a language to use"
 msgstr "Velg språk"
 
-#: any.pm:1141
+#: any.pm:1135
 #, c-format
 msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
@@ -573,77 +563,77 @@ msgstr ""
 "Mandriva Linux støtter flere språk. Her\n"
 "kan du velge hvilke språk du vil ha tilgjengelig."
 
-#: any.pm:1144
+#: any.pm:1138
 #, c-format
 msgid "Multi languages"
 msgstr "Flere språk"
 
-#: any.pm:1153 any.pm:1184
+#: any.pm:1147 any.pm:1178
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr "Gammel kompatibilitetskoding (ikke UTF-8)"
 
-#: any.pm:1154
+#: any.pm:1148
 #, c-format
 msgid "All languages"
 msgstr "Alle språk"
 
-#: any.pm:1176
+#: any.pm:1170
 #, c-format
 msgid "Language choice"
 msgstr "Spåkvalg"
 
-#: any.pm:1230
+#: any.pm:1224
 #, c-format
 msgid "Country / Region"
 msgstr "Land/område"
 
-#: any.pm:1231
+#: any.pm:1225
 #, c-format
 msgid "Please choose your country"
 msgstr "Velg land"
 
-#: any.pm:1233
+#: any.pm:1227
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Her er hele lista over land"
 
-#: any.pm:1234
+#: any.pm:1228
 #, c-format
 msgid "Other Countries"
 msgstr "Andre land"
 
-#: any.pm:1234 interactive.pm:488 interactive/gtk.pm:445
+#: any.pm:1228 interactive.pm:488 interactive/gtk.pm:445
 #, c-format
 msgid "Advanced"
 msgstr "Avansert"
 
-#: any.pm:1240
+#: any.pm:1234
 #, c-format
 msgid "Input method:"
 msgstr "Skrivemetode:"
 
-#: any.pm:1243
+#: any.pm:1237
 #, c-format
 msgid "None"
 msgstr "Ingen"
 
-#: any.pm:1324
+#: any.pm:1318
 #, c-format
 msgid "No sharing"
 msgstr "Ingen deling"
 
-#: any.pm:1324
+#: any.pm:1318
 #, c-format
 msgid "Allow all users"
 msgstr "Tillat alle brukere"
 
-#: any.pm:1324
+#: any.pm:1318
 #, c-format
 msgid "Custom"
 msgstr "Selvvalgt"
 
-#: any.pm:1328
+#: any.pm:1322
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -658,7 +648,7 @@ msgstr ""
 "\n"
 "Med «Egendefinert» kan du velge oppsett for hver bruker.\n"
 
-#: any.pm:1340
+#: any.pm:1334
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
@@ -667,7 +657,7 @@ msgstr ""
 "NFS: Det tradisjonelle Unix-fildelingssystemet, og dårlig støtta på Mac og "
 "Windows."
 
-#: any.pm:1343
+#: any.pm:1337
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
@@ -676,18 +666,18 @@ msgstr ""
 "SMB: Eit fildelingssystem brukt i Windows, Mac OS X og i flere moderne Linux-"
 "system."
 
-#: any.pm:1351
+#: any.pm:1345
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Du kan eksportere med NFS eller SMB. Velg den du ønsker å bruke."
 
-#: any.pm:1379
+#: any.pm:1373
 #, c-format
 msgid "Launch userdrake"
 msgstr "Sett opp brukere"
 
-#: any.pm:1381
+#: any.pm:1375
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -697,7 +687,7 @@ msgstr ""
 "«fileshare». Du kan bruke brukeroppsettprogrammet til\n"
 "å legge til brukere her."
 
-#: any.pm:1487
+#: any.pm:1481
 #, c-format
 msgid ""
 "You need to logout and back in again for changes to take effect. Press OK to "
@@ -706,47 +696,47 @@ msgstr ""
 "Du må logge ut og inn igjen for at endringene skal tre i kraft. Klikk «OK» "
 "for å logge ut."
 
-#: any.pm:1491
+#: any.pm:1485
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
 msgstr "Du må logge ut og inn igjen for at endringene skal tre i kraft"
 
-#: any.pm:1526
+#: any.pm:1520
 #, c-format
 msgid "Timezone"
 msgstr "Tidssone"
 
-#: any.pm:1526
+#: any.pm:1520
 #, c-format
 msgid "Which is your timezone?"
 msgstr "I hvilken tidssone er du?"
 
-#: any.pm:1549 any.pm:1551
+#: any.pm:1543 any.pm:1545
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Dato, klokkeslett og tidssone"
 
-#: any.pm:1552
+#: any.pm:1546
 #, c-format
 msgid "What is the best time?"
 msgstr "Hva er den beste tiden?"
 
-#: any.pm:1556
+#: any.pm:1550
 #, c-format
 msgid "%s (hardware clock set to UTC)"
 msgstr "%s (maskinvareklokke er satt til UTC)"
 
-#: any.pm:1557
+#: any.pm:1551
 #, c-format
 msgid "%s (hardware clock set to local time)"
 msgstr "%s (maskinvareklokke er satt til lokal tid) "
 
-#: any.pm:1559
+#: any.pm:1553
 #, c-format
 msgid "NTP Server"
 msgstr "NTP-tjener"
 
-#: any.pm:1560
+#: any.pm:1554
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Automatisk tidssynkronisering (med NTP)"
@@ -788,7 +778,8 @@ msgstr "Lokal fil:"
 
 #: authentication.pm:63
 #, c-format
-msgid "Use local for all authentication and information user tell in local file"
+msgid ""
+"Use local for all authentication and information user tell in local file"
 msgstr ""
 "Bruk lokal for all autentisering og informasjon brukere oppgir i lokal fil."
 
@@ -940,7 +931,8 @@ msgstr "Skyggebase"
 msgid ""
 "You have selected Kerberos 5 authentication. Please review the configuration "
 "options below "
-msgstr "Du har valgt Kerberos 5-autentisering. Se gjennom oppsettsvalga nedenfor."
+msgstr ""
+"Du har valgt Kerberos 5-autentisering. Se gjennom oppsettsvalga nedenfor."
 
 #: authentication.pm:146
 #, c-format
@@ -1123,19 +1115,20 @@ msgstr "SILO"
 msgid "not enough room in /boot"
 msgstr "Ikke nok plass på «/boot»"
 
-#: bootloader.pm:1923
+#: bootloader.pm:1932
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
 msgstr "Du kan ikke installere oppstartslasteren på en «%s»-partisjon\n"
 
-#: bootloader.pm:2044
+#: bootloader.pm:2053
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
 "renumbered"
-msgstr "Oppstartslasteren må oppdateres, da partisjonene har fått ny rekkefølge"
+msgstr ""
+"Oppstartslasteren må oppdateres, da partisjonene har fått ny rekkefølge"
 
-#: bootloader.pm:2057
+#: bootloader.pm:2066
 #, c-format
 msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
@@ -1144,7 +1137,7 @@ msgstr ""
 "Klarte ikke å installere oppstartslasteren. Du må kjøre redningsmodus og "
 "velge «%s»"
 
-#: bootloader.pm:2058
+#: bootloader.pm:2067
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Installer oppstartslaster på nytt"
@@ -1228,15 +1221,15 @@ msgid "Server"
 msgstr "Tjener"
 
 #: diskdrake/dav.pm:66 diskdrake/interactive.pm:404
-#: diskdrake/interactive.pm:674 diskdrake/interactive.pm:692
-#: diskdrake/interactive.pm:696 diskdrake/removable.pm:23
+#: diskdrake/interactive.pm:724 diskdrake/interactive.pm:742
+#: diskdrake/interactive.pm:746 diskdrake/removable.pm:23
 #: diskdrake/smbnfs_gtk.pm:79
 #, c-format
 msgid "Mount point"
 msgstr "Monteringspunkt"
 
 #: diskdrake/dav.pm:67 diskdrake/interactive.pm:406
-#: diskdrake/interactive.pm:1098 diskdrake/removable.pm:24
+#: diskdrake/interactive.pm:1153 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
@@ -1253,18 +1246,18 @@ msgstr "Fjern"
 msgid "Done"
 msgstr "Ferdig"
 
-#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:128 diskdrake/hd_gtk.pm:294
+#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:128 diskdrake/hd_gtk.pm:292
 #: diskdrake/interactive.pm:247 diskdrake/interactive.pm:260
 #: diskdrake/interactive.pm:453 diskdrake/interactive.pm:523
-#: diskdrake/interactive.pm:528 diskdrake/interactive.pm:664
-#: diskdrake/interactive.pm:917 diskdrake/interactive.pm:968
-#: diskdrake/interactive.pm:1144 diskdrake/interactive.pm:1157
-#: diskdrake/interactive.pm:1160 diskdrake/interactive.pm:1428
-#: diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23 do_pkgs.pm:28 do_pkgs.pm:44
-#: do_pkgs.pm:60 do_pkgs.pm:65 do_pkgs.pm:82 fsedit.pm:246
-#: interactive/http.pm:117 interactive/http.pm:118 modules/interactive.pm:19
-#: scanner.pm:95 scanner.pm:106 scanner.pm:113 scanner.pm:120 wizards.pm:95
-#: wizards.pm:99 wizards.pm:121
+#: diskdrake/interactive.pm:541 diskdrake/interactive.pm:546
+#: diskdrake/interactive.pm:714 diskdrake/interactive.pm:993
+#: diskdrake/interactive.pm:1044 diskdrake/interactive.pm:1199
+#: diskdrake/interactive.pm:1212 diskdrake/interactive.pm:1215
+#: diskdrake/interactive.pm:1483 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23
+#: do_pkgs.pm:28 do_pkgs.pm:44 do_pkgs.pm:60 do_pkgs.pm:65 do_pkgs.pm:82
+#: fsedit.pm:246 interactive/http.pm:117 interactive/http.pm:118
+#: modules/interactive.pm:19 scanner.pm:95 scanner.pm:106 scanner.pm:113
+#: scanner.pm:120 wizards.pm:95 wizards.pm:99 wizards.pm:121
 #, c-format
 msgid "Error"
 msgstr "Feil"
@@ -1279,12 +1272,12 @@ msgstr "Skriv inn WebDAV-tjeneradresse"
 msgid "The URL must begin with http:// or https://"
 msgstr "URL-en må begynne med «http://» eller «https://»"
 
-#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:412 diskdrake/interactive.pm:306
-#: diskdrake/interactive.pm:391 diskdrake/interactive.pm:553
-#: diskdrake/interactive.pm:755 diskdrake/interactive.pm:813
-#: diskdrake/interactive.pm:948 diskdrake/interactive.pm:990
-#: diskdrake/interactive.pm:991 diskdrake/interactive.pm:1241
-#: diskdrake/interactive.pm:1279 diskdrake/interactive.pm:1427 do_pkgs.pm:19
+#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:417 diskdrake/interactive.pm:306
+#: diskdrake/interactive.pm:391 diskdrake/interactive.pm:594
+#: diskdrake/interactive.pm:817 diskdrake/interactive.pm:875
+#: diskdrake/interactive.pm:1024 diskdrake/interactive.pm:1066
+#: diskdrake/interactive.pm:1067 diskdrake/interactive.pm:1293
+#: diskdrake/interactive.pm:1331 diskdrake/interactive.pm:1482 do_pkgs.pm:19
 #: do_pkgs.pm:39 do_pkgs.pm:57 do_pkgs.pm:77 harddrake/sound.pm:442
 #, c-format
 msgid "Warning"
@@ -1300,23 +1293,23 @@ msgstr "Vil du virkelig slette dette monteringspunktet?"
 msgid "Server: "
 msgstr "Tjener: "
 
-#: diskdrake/dav.pm:125 diskdrake/interactive.pm:496
-#: diskdrake/interactive.pm:1303 diskdrake/interactive.pm:1388
+#: diskdrake/dav.pm:125 diskdrake/interactive.pm:498
+#: diskdrake/interactive.pm:1355 diskdrake/interactive.pm:1443
 #, c-format
 msgid "Mount point: "
 msgstr "Monteringspunkt: "
 
-#: diskdrake/dav.pm:126 diskdrake/interactive.pm:1395
+#: diskdrake/dav.pm:126 diskdrake/interactive.pm:1450
 #, c-format
 msgid "Options: %s"
 msgstr "Valg: %s"
 
 #: diskdrake/hd_gtk.pm:61 diskdrake/interactive.pm:301
 #: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:106
-#: fs/partitioning_wizard.pm:53 fs/partitioning_wizard.pm:235
-#: fs/partitioning_wizard.pm:243 fs/partitioning_wizard.pm:282
-#: fs/partitioning_wizard.pm:431 fs/partitioning_wizard.pm:495
-#: fs/partitioning_wizard.pm:571 fs/partitioning_wizard.pm:574
+#: fs/partitioning_wizard.pm:53 fs/partitioning_wizard.pm:236
+#: fs/partitioning_wizard.pm:244 fs/partitioning_wizard.pm:283
+#: fs/partitioning_wizard.pm:432 fs/partitioning_wizard.pm:496
+#: fs/partitioning_wizard.pm:572 fs/partitioning_wizard.pm:575
 #, c-format
 msgid "Partitioning"
 msgstr "Partisjonering"
@@ -1326,8 +1319,8 @@ msgstr "Partisjonering"
 msgid "Click on a partition, choose a filesystem type then choose an action"
 msgstr "Trykk på en partisjon og velg en filsystemtype og så en handling."
 
-#: diskdrake/hd_gtk.pm:110 diskdrake/interactive.pm:1119
-#: diskdrake/interactive.pm:1129 diskdrake/interactive.pm:1182
+#: diskdrake/hd_gtk.pm:110 diskdrake/interactive.pm:1174
+#: diskdrake/interactive.pm:1184 diskdrake/interactive.pm:1237
 #, c-format
 msgid "Read carefully"
 msgstr "Les nøye"
@@ -1347,7 +1340,7 @@ msgstr "Avslutt"
 msgid "Continue"
 msgstr "Fortsett"
 
-#: diskdrake/hd_gtk.pm:182 fs/partitioning_wizard.pm:547 interactive.pm:653
+#: diskdrake/hd_gtk.pm:182 fs/partitioning_wizard.pm:548 interactive.pm:653
 #: interactive/gtk.pm:811 interactive/gtk.pm:829 interactive/gtk.pm:850
 #: ugtk2.pm:936
 #, c-format
@@ -1375,79 +1368,79 @@ msgstr "Trykk på en partisjon"
 msgid "Details"
 msgstr "Vis detaljer"
 
-#: diskdrake/hd_gtk.pm:294
+#: diskdrake/hd_gtk.pm:292
 #, c-format
 msgid "No hard drives found"
 msgstr "Fant ingen harddisker"
 
-#: diskdrake/hd_gtk.pm:321
+#: diskdrake/hd_gtk.pm:323
 #, c-format
 msgid "Unknown"
 msgstr "Ukjent"
 
-#: diskdrake/hd_gtk.pm:383
+#: diskdrake/hd_gtk.pm:388
 #, c-format
 msgid "Ext4"
 msgstr "Ext4"
 
-#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "XFS"
 msgstr "XFS"
 
-#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "Swap"
 msgstr "Vekselpartisjon"
 
-#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "SunOS"
 msgstr "SunOS"
 
-#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "HFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:383 fs/partitioning_wizard.pm:401
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:384 fs/partitioning_wizard.pm:402 services.pm:184
+#: diskdrake/hd_gtk.pm:389 fs/partitioning_wizard.pm:403 services.pm:184
 #, c-format
 msgid "Other"
 msgstr "Annet"
 
-#: diskdrake/hd_gtk.pm:384 diskdrake/interactive.pm:1318
-#: fs/partitioning_wizard.pm:402
+#: diskdrake/hd_gtk.pm:389 diskdrake/interactive.pm:1370
+#: fs/partitioning_wizard.pm:403
 #, c-format
 msgid "Empty"
 msgstr "Tom"
 
-#: diskdrake/hd_gtk.pm:391
+#: diskdrake/hd_gtk.pm:396
 #, c-format
 msgid "Filesystem types:"
 msgstr "Filsystemtyper:"
 
-#: diskdrake/hd_gtk.pm:412
+#: diskdrake/hd_gtk.pm:417
 #, c-format
 msgid "This partition is already empty"
 msgstr "Denne partisjonen er allerede tom."
 
-#: diskdrake/hd_gtk.pm:421
+#: diskdrake/hd_gtk.pm:426
 #, c-format
 msgid "Use ``Unmount'' first"
 msgstr "Bruk «Avmonter» først"
 
-#: diskdrake/hd_gtk.pm:421
+#: diskdrake/hd_gtk.pm:426
 #, c-format
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Bruk «%s» i stedet (i ekspertmodus)"
 
-#: diskdrake/hd_gtk.pm:421 diskdrake/interactive.pm:405
-#: diskdrake/interactive.pm:591 diskdrake/removable.pm:25
+#: diskdrake/hd_gtk.pm:426 diskdrake/interactive.pm:405
+#: diskdrake/interactive.pm:641 diskdrake/removable.pm:25
 #: diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
@@ -1470,7 +1463,7 @@ msgid "More"
 msgstr "Mer"
 
 #: diskdrake/interactive.pm:281 diskdrake/interactive.pm:294
-#: diskdrake/interactive.pm:1226
+#: diskdrake/interactive.pm:568 diskdrake/interactive.pm:1278
 #, c-format
 msgid "Confirmation"
 msgstr "Bekreftelse"
@@ -1495,7 +1488,7 @@ msgstr "Vil du avslutte uten å lagre partisjonstabellen?"
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "Vil du å lagre endringene i «/etc/fstab»"
 
-#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:282
+#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:283
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr "Du må starte maskinen på nytt for at endringene skal tre i kraft"
@@ -1571,7 +1564,7 @@ msgstr "Detaljert informasjon"
 msgid "View"
 msgstr "Vis"
 
-#: diskdrake/interactive.pm:408 diskdrake/interactive.pm:768
+#: diskdrake/interactive.pm:408 diskdrake/interactive.pm:830
 #, c-format
 msgid "Resize"
 msgstr "Endre størrelse"
@@ -1581,12 +1574,12 @@ msgstr "Endre størrelse"
 msgid "Format"
 msgstr "Formater"
 
-#: diskdrake/interactive.pm:411 diskdrake/interactive.pm:878
+#: diskdrake/interactive.pm:411 diskdrake/interactive.pm:956
 #, c-format
 msgid "Add to RAID"
 msgstr "Legg til i RAID"
 
-#: diskdrake/interactive.pm:412 diskdrake/interactive.pm:899
+#: diskdrake/interactive.pm:412 diskdrake/interactive.pm:975
 #, c-format
 msgid "Add to LVM"
 msgstr "Legg til i LVM"
@@ -1636,37 +1629,62 @@ msgstr "Opprett"
 msgid "Failed to mount partition"
 msgstr "Kunne ikke montere partisjonen"
 
-#: diskdrake/interactive.pm:485 diskdrake/interactive.pm:487
+#: diskdrake/interactive.pm:487 diskdrake/interactive.pm:489
 #, c-format
 msgid "Create a new partition"
 msgstr "Lag ny partisjon"
 
-#: diskdrake/interactive.pm:489
+#: diskdrake/interactive.pm:491
 #, c-format
 msgid "Start sector: "
 msgstr "Startsektor: "
 
-#: diskdrake/interactive.pm:492 diskdrake/interactive.pm:983
+#: diskdrake/interactive.pm:494 diskdrake/interactive.pm:1059
 #, c-format
 msgid "Size in MB: "
 msgstr "Størrelse i MB: "
 
-#: diskdrake/interactive.pm:494 diskdrake/interactive.pm:984
+#: diskdrake/interactive.pm:496 diskdrake/interactive.pm:1060
 #, c-format
 msgid "Filesystem type: "
 msgstr "Filsystemtype: "
 
-#: diskdrake/interactive.pm:500
+#: diskdrake/interactive.pm:502
 #, c-format
 msgid "Preference: "
 msgstr "Innstilling: "
 
-#: diskdrake/interactive.pm:503
+#: diskdrake/interactive.pm:505
 #, c-format
 msgid "Logical volume name "
 msgstr "Logisk volumnavn"
 
-#: diskdrake/interactive.pm:523
+#: diskdrake/interactive.pm:507
+#, fuzzy, c-format
+msgid "Encrypt partition"
+msgstr "Krypteringsalgoritme"
+
+#: diskdrake/interactive.pm:508
+#, fuzzy, c-format
+msgid "Encryption key "
+msgstr "Krypteringsnøkkel"
+
+#: diskdrake/interactive.pm:509 diskdrake/interactive.pm:1487
+#, c-format
+msgid "Encryption key (again)"
+msgstr "Krypteringsnøkkel (på nytt)"
+
+#: diskdrake/interactive.pm:520 diskdrake/interactive.pm:1483
+#, c-format
+msgid "The encryption keys do not match"
+msgstr "Krypteringsnøklene er ikke like"
+
+#: diskdrake/interactive.pm:521
+#, fuzzy, c-format
+msgid "Missing encryption key"
+msgstr "Krypteringsnøkkel for filsystem"
+
+#: diskdrake/interactive.pm:541
 #, c-format
 msgid ""
 "You can not create a new partition\n"
@@ -1677,12 +1695,18 @@ msgstr ""
 "(ettersom du har nådd grensa på antallet partisjoner).\n"
 "Du må først fjerne en primærpartisjon, og lage en utvida partisjon."
 
-#: diskdrake/interactive.pm:553
+#: diskdrake/interactive.pm:568 diskdrake/interactive.pm:1278
+#: fs/partitioning.pm:48
+#, c-format
+msgid "Check bad blocks?"
+msgstr "Se etter ødelagte blokker?"
+
+#: diskdrake/interactive.pm:594
 #, c-format
 msgid "Remove the loopback file?"
 msgstr "Vil du fjerne filmonteringsfila?"
 
-#: diskdrake/interactive.pm:575
+#: diskdrake/interactive.pm:622
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
@@ -1690,58 +1714,58 @@ msgstr ""
 "Når du har endra partisjonstypen til «%s» vil alle data på denne partisjonen "
 "være tapt"
 
-#: diskdrake/interactive.pm:588
+#: diskdrake/interactive.pm:638
 #, c-format
 msgid "Change partition type"
 msgstr "Endre partisjonstype"
 
-#: diskdrake/interactive.pm:590 diskdrake/removable.pm:47
+#: diskdrake/interactive.pm:640 diskdrake/removable.pm:47
 #, c-format
 msgid "Which filesystem do you want?"
 msgstr "Hvilket filsystem vil du ha?"
 
-#: diskdrake/interactive.pm:597
+#: diskdrake/interactive.pm:647
 #, c-format
 msgid "Switching from %s to %s"
 msgstr "Bytter fra «%s» til «%s»"
 
-#: diskdrake/interactive.pm:632
+#: diskdrake/interactive.pm:682
 #, c-format
 msgid "Set volume label"
 msgstr "Velg volumnavn"
 
-#: diskdrake/interactive.pm:634
+#: diskdrake/interactive.pm:684
 #, c-format
 msgid "Beware, this will be written to disk as soon as you validate!"
 msgstr "Merk at denne blir skrevet til disken med én gang."
 
-#: diskdrake/interactive.pm:635
+#: diskdrake/interactive.pm:685
 #, c-format
 msgid "Beware, this will be written to disk only after formatting!"
 msgstr ""
 "Merk at denne blir skrevet til disken bare etter at formateringa er fullført."
 
-#: diskdrake/interactive.pm:637
+#: diskdrake/interactive.pm:687
 #, c-format
 msgid "Which volume label?"
 msgstr "Hvilket volumnavn?"
 
-#: diskdrake/interactive.pm:638
+#: diskdrake/interactive.pm:688
 #, c-format
 msgid "Label:"
 msgstr "Volumnavn:"
 
-#: diskdrake/interactive.pm:659
+#: diskdrake/interactive.pm:709
 #, c-format
 msgid "Where do you want to mount the loopback file %s?"
 msgstr "Hvor vil du montere filmonteringsfila «%s»?"
 
-#: diskdrake/interactive.pm:660
+#: diskdrake/interactive.pm:710
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "Hvor vil du montere enheten «%s»?"
 
-#: diskdrake/interactive.pm:665
+#: diskdrake/interactive.pm:715
 #, c-format
 msgid ""
 "Can not unset mount point as this partition is used for loop back.\n"
@@ -1750,60 +1774,60 @@ msgstr ""
 "Klarte ikke  å fjerne monteringspunkt, da partisjonen er brukt\n"
 "til filmontering. Du må først fjerne filmonteringsfila."
 
-#: diskdrake/interactive.pm:695
+#: diskdrake/interactive.pm:745
 #, c-format
 msgid "Where do you want to mount %s?"
 msgstr "Hvor vil du montere «%s»?"
 
-#: diskdrake/interactive.pm:719 diskdrake/interactive.pm:802
-#: fs/partitioning_wizard.pm:128 fs/partitioning_wizard.pm:204
+#: diskdrake/interactive.pm:775 diskdrake/interactive.pm:864
+#: fs/partitioning_wizard.pm:129 fs/partitioning_wizard.pm:205
 #, c-format
 msgid "Resizing"
 msgstr "Endrer størrelse"
 
-#: diskdrake/interactive.pm:719
+#: diskdrake/interactive.pm:775
 #, c-format
 msgid "Computing FAT filesystem bounds"
 msgstr "Regner ut grenser for FAT-filsystem"
 
-#: diskdrake/interactive.pm:755
+#: diskdrake/interactive.pm:817
 #, c-format
 msgid "This partition is not resizeable"
 msgstr "Kan ikke endre størrelse på partisjonenen"
 
-#: diskdrake/interactive.pm:760
+#: diskdrake/interactive.pm:822
 #, c-format
 msgid "All data on this partition should be backed-up"
 msgstr "Du bør ta reservekopi av alle data på denne partisjonen"
 
-#: diskdrake/interactive.pm:762
+#: diskdrake/interactive.pm:824
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr ""
 "Etter endring av størrelse på partisjon %s vil alle data på denne "
 "partisjonen gå tapt"
 
-#: diskdrake/interactive.pm:769
+#: diskdrake/interactive.pm:831
 #, c-format
 msgid "Choose the new size"
 msgstr "Velg ny størrelse"
 
-#: diskdrake/interactive.pm:770
+#: diskdrake/interactive.pm:832
 #, c-format
 msgid "New size in MB: "
 msgstr "Ny størrelse i MiB: "
 
-#: diskdrake/interactive.pm:771
+#: diskdrake/interactive.pm:833
 #, c-format
 msgid "Minimum size: %s MB"
 msgstr "Minste størrelse: %s MB"
 
-#: diskdrake/interactive.pm:772
+#: diskdrake/interactive.pm:834
 #, c-format
 msgid "Maximum size: %s MB"
 msgstr "Største størrelse: %s MB"
 
-#: diskdrake/interactive.pm:813 fs/partitioning_wizard.pm:212
+#: diskdrake/interactive.pm:875 fs/partitioning_wizard.pm:213
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
@@ -1812,57 +1836,57 @@ msgstr ""
 "For å sikre dataintegritet på partisjonen/-ene\n"
 "vil det bli kjørt filsystemkontroll neste gang du starter Windows®"
 
-#: diskdrake/interactive.pm:861 diskdrake/interactive.pm:1423
+#: diskdrake/interactive.pm:939 diskdrake/interactive.pm:1478
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "Krypteringsnøkkel for filsystem"
 
-#: diskdrake/interactive.pm:862
+#: diskdrake/interactive.pm:940
 #, c-format
 msgid "Enter your filesystem encryption key"
 msgstr "Skriv inn krypteringsnøkkelen for filsystemet"
 
-#: diskdrake/interactive.pm:863 diskdrake/interactive.pm:1431
+#: diskdrake/interactive.pm:941 diskdrake/interactive.pm:1486
 #, c-format
 msgid "Encryption key"
 msgstr "Krypteringsnøkkel"
 
-#: diskdrake/interactive.pm:870
+#: diskdrake/interactive.pm:948
 #, c-format
 msgid "Invalid key"
 msgstr "Ugyldig nøkkel"
 
-#: diskdrake/interactive.pm:878
+#: diskdrake/interactive.pm:956
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "Velg et eksisterende RAID å legge til i"
 
-#: diskdrake/interactive.pm:880 diskdrake/interactive.pm:901
+#: diskdrake/interactive.pm:958 diskdrake/interactive.pm:977
 #, c-format
 msgid "new"
 msgstr "ny"
 
-#: diskdrake/interactive.pm:899
+#: diskdrake/interactive.pm:975
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "Velg en eksisterende LVM å legge til i"
 
-#: diskdrake/interactive.pm:911 diskdrake/interactive.pm:920
+#: diskdrake/interactive.pm:987 diskdrake/interactive.pm:996
 #, c-format
 msgid "LVM name"
 msgstr "LVM-navn"
 
-#: diskdrake/interactive.pm:912
+#: diskdrake/interactive.pm:988
 #, c-format
 msgid "Enter a name for the new LVM volume group"
 msgstr "Skriv inn et nytt navn for den nye LVM-volumgruppa"
 
-#: diskdrake/interactive.pm:917
+#: diskdrake/interactive.pm:993
 #, c-format
 msgid "\"%s\" already exists"
 msgstr "«%s» finnes allerede"
 
-#: diskdrake/interactive.pm:948
+#: diskdrake/interactive.pm:1024
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
@@ -1871,117 +1895,112 @@ msgstr ""
 "Det fysiske volumet «%s» er ennå i bruk.\n"
 "Vil du flytte brukte fysiske områder på dette volumet til andre volum?"
 
-#: diskdrake/interactive.pm:950
+#: diskdrake/interactive.pm:1026
 #, c-format
 msgid "Moving physical extents"
 msgstr "Flytting av fysiske områder"
 
-#: diskdrake/interactive.pm:968
+#: diskdrake/interactive.pm:1044
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "Partisjonen kan ikke brukes til filmontering."
 
-#: diskdrake/interactive.pm:981
+#: diskdrake/interactive.pm:1057
 #, c-format
 msgid "Loopback"
 msgstr "Filmontering"
 
-#: diskdrake/interactive.pm:982
+#: diskdrake/interactive.pm:1058
 #, c-format
 msgid "Loopback file name: "
 msgstr "Filmonteringsfil: "
 
-#: diskdrake/interactive.pm:987
+#: diskdrake/interactive.pm:1063
 #, c-format
 msgid "Give a file name"
 msgstr "Skriv inn filnavn"
 
-#: diskdrake/interactive.pm:990
+#: diskdrake/interactive.pm:1066
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "Fila er allerede brukt til filmontering. Velg en annen fil."
 
-#: diskdrake/interactive.pm:991
+#: diskdrake/interactive.pm:1067
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "Fila finnes allerede. Vil du bruke denne?"
 
-#: diskdrake/interactive.pm:1023 diskdrake/interactive.pm:1026
+#: diskdrake/interactive.pm:1099 diskdrake/interactive.pm:1102
 #, c-format
 msgid "Mount options"
 msgstr "Monteringsvalg"
 
-#: diskdrake/interactive.pm:1033
+#: diskdrake/interactive.pm:1109
 #, c-format
 msgid "Various"
 msgstr "Diverse"
 
-#: diskdrake/interactive.pm:1100
+#: diskdrake/interactive.pm:1155
 #, c-format
 msgid "device"
 msgstr "enhet"
 
-#: diskdrake/interactive.pm:1101
+#: diskdrake/interactive.pm:1156
 #, c-format
 msgid "level"
 msgstr "nivå"
 
-#: diskdrake/interactive.pm:1102
+#: diskdrake/interactive.pm:1157
 #, c-format
 msgid "chunk size in KiB"
 msgstr "blokkstørrelse i KiB"
 
-#: diskdrake/interactive.pm:1120
+#: diskdrake/interactive.pm:1175
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Advarsel: denne operasjonen er farlig."
 
-#: diskdrake/interactive.pm:1135
+#: diskdrake/interactive.pm:1190
 #, c-format
 msgid "Partitioning Type"
 msgstr "Partisjoneringsstype"
 
-#: diskdrake/interactive.pm:1135
+#: diskdrake/interactive.pm:1190
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Hva slags type partisjonering?"
 
-#: diskdrake/interactive.pm:1173
+#: diskdrake/interactive.pm:1228
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Du må starte maskinen på nytt for at endringene skal tre i kraft"
 
-#: diskdrake/interactive.pm:1182
+#: diskdrake/interactive.pm:1237
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk"
 msgstr "Partisjonstabellen til «%s» blir nå lagret"
 
-#: diskdrake/interactive.pm:1204 fs/format.pm:99 fs/format.pm:106
+#: diskdrake/interactive.pm:1256 fs/format.pm:102 fs/format.pm:109
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Formaterer partisjonen «%s»"
 
-#: diskdrake/interactive.pm:1217
+#: diskdrake/interactive.pm:1269
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr "Når du har formatert «%s» vil alle data på denne partisjonen gå tapt"
 
-#: diskdrake/interactive.pm:1226 fs/partitioning.pm:48
-#, c-format
-msgid "Check bad blocks?"
-msgstr "Se etter ødelagte blokker?"
-
-#: diskdrake/interactive.pm:1240
+#: diskdrake/interactive.pm:1292
 #, c-format
 msgid "Move files to the new partition"
 msgstr "Flytt filer til ny partisjon"
 
-#: diskdrake/interactive.pm:1240
+#: diskdrake/interactive.pm:1292
 #, c-format
 msgid "Hide files"
 msgstr "Gjem filer"
 
-#: diskdrake/interactive.pm:1241
+#: diskdrake/interactive.pm:1293
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -1998,128 +2017,128 @@ msgstr ""
 "eller la de bli der de er (resultatet er at de blir gjemt av innholdet på "
 "den monterte partisjonen)."
 
-#: diskdrake/interactive.pm:1256
+#: diskdrake/interactive.pm:1308
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "Flytt filer til ny partisjonen"
 
-#: diskdrake/interactive.pm:1260
+#: diskdrake/interactive.pm:1312
 #, c-format
 msgid "Copying %s"
 msgstr "Kopierer «%s»"
 
-#: diskdrake/interactive.pm:1264
+#: diskdrake/interactive.pm:1316
 #, c-format
 msgid "Removing %s"
 msgstr "Fjerner «%s»"
 
-#: diskdrake/interactive.pm:1278
+#: diskdrake/interactive.pm:1330
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "Partisjonen «%s» har nå navnet «%s»"
 
-#: diskdrake/interactive.pm:1279
+#: diskdrake/interactive.pm:1331
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr "Partisjonene har fått nye numre: "
 
-#: diskdrake/interactive.pm:1304 diskdrake/interactive.pm:1372
+#: diskdrake/interactive.pm:1356 diskdrake/interactive.pm:1427
 #, c-format
 msgid "Device: "
 msgstr "Enhet: "
 
-#: diskdrake/interactive.pm:1305
+#: diskdrake/interactive.pm:1357
 #, c-format
 msgid "Volume label: "
 msgstr "Volumnavn: "
 
-#: diskdrake/interactive.pm:1306
+#: diskdrake/interactive.pm:1358
 #, c-format
 msgid "UUID: "
 msgstr "UUID: "
 
-#: diskdrake/interactive.pm:1307
+#: diskdrake/interactive.pm:1359
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS-stasjonsbokstav: %s (bare gjetting)\n"
 
-#: diskdrake/interactive.pm:1311 diskdrake/interactive.pm:1320
-#: diskdrake/interactive.pm:1391
+#: diskdrake/interactive.pm:1363 diskdrake/interactive.pm:1372
+#: diskdrake/interactive.pm:1446
 #, c-format
 msgid "Type: "
 msgstr "Type: "
 
-#: diskdrake/interactive.pm:1315 diskdrake/interactive.pm:1376
+#: diskdrake/interactive.pm:1367 diskdrake/interactive.pm:1431
 #, c-format
 msgid "Name: "
 msgstr "Navn: "
 
-#: diskdrake/interactive.pm:1322
+#: diskdrake/interactive.pm:1374
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Start: sektor %s\n"
 
-#: diskdrake/interactive.pm:1323
+#: diskdrake/interactive.pm:1375
 #, c-format
 msgid "Size: %s"
 msgstr "Størrelse: %s"
 
-#: diskdrake/interactive.pm:1325
+#: diskdrake/interactive.pm:1377
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s sektorer"
 
-#: diskdrake/interactive.pm:1327
+#: diskdrake/interactive.pm:1379
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "Sylinder %d til %d\n"
 
-#: diskdrake/interactive.pm:1328
+#: diskdrake/interactive.pm:1380
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr "Antall logiske områder: %d\n"
 
-#: diskdrake/interactive.pm:1329
+#: diskdrake/interactive.pm:1381
 #, c-format
 msgid "Formatted\n"
 msgstr "Formatert\n"
 
-#: diskdrake/interactive.pm:1330
+#: diskdrake/interactive.pm:1382
 #, c-format
 msgid "Not formatted\n"
 msgstr "Ikke formatert\n"
 
-#: diskdrake/interactive.pm:1331
+#: diskdrake/interactive.pm:1383
 #, c-format
 msgid "Mounted\n"
 msgstr "Montert\n"
 
-#: diskdrake/interactive.pm:1332
+#: diskdrake/interactive.pm:1384
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1334
+#: diskdrake/interactive.pm:1386
 #, c-format
 msgid "Encrypted"
 msgstr "Kryptert"
 
-#: diskdrake/interactive.pm:1334
+#: diskdrake/interactive.pm:1388
 #, c-format
 msgid " (mapped on %s)"
 msgstr "(kobla på %s)"
 
-#: diskdrake/interactive.pm:1335
+#: diskdrake/interactive.pm:1389
 #, c-format
 msgid " (to map on %s)"
 msgstr " (til å kobles på %s)"
 
-#: diskdrake/interactive.pm:1336
+#: diskdrake/interactive.pm:1390
 #, c-format
 msgid " (inactive)"
 msgstr " (uvirksom)"
 
-#: diskdrake/interactive.pm:1342
+#: diskdrake/interactive.pm:1397
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2128,7 +2147,7 @@ msgstr ""
 "Filmonteringsfil(er):\n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1343
+#: diskdrake/interactive.pm:1398
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -2137,27 +2156,27 @@ msgstr ""
 "Partisjon startet opp som standard\n"
 "    (for MS-DOS-oppstart, ikke for lilo)\n"
 
-#: diskdrake/interactive.pm:1345
+#: diskdrake/interactive.pm:1400
 #, c-format
 msgid "Level %s\n"
 msgstr "Nivå %s\n"
 
-#: diskdrake/interactive.pm:1346
+#: diskdrake/interactive.pm:1401
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "Blokkstørrelse %d i KiB\n"
 
-#: diskdrake/interactive.pm:1347
+#: diskdrake/interactive.pm:1402
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "RAID-disker %s\n"
 
-#: diskdrake/interactive.pm:1349
+#: diskdrake/interactive.pm:1404
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Filmonteringsfil: %s"
 
-#: diskdrake/interactive.pm:1352
+#: diskdrake/interactive.pm:1407
 #, c-format
 msgid ""
 "\n"
@@ -2170,7 +2189,7 @@ msgstr ""
 "en driverpartisjon. Da bør\n"
 "du ikke røre den.\n"
 
-#: diskdrake/interactive.pm:1355
+#: diskdrake/interactive.pm:1410
 #, c-format
 msgid ""
 "\n"
@@ -2183,67 +2202,57 @@ msgstr ""
 "oppstartslasterpartisjonen\n"
 "er for flersystemoppsett.\n"
 
-#: diskdrake/interactive.pm:1364
+#: diskdrake/interactive.pm:1419
 #, c-format
 msgid "Free space on %s (%s)"
 msgstr "Ledig plass på %s (%s)"
 
-#: diskdrake/interactive.pm:1373
+#: diskdrake/interactive.pm:1428
 #, c-format
 msgid "Read-only"
 msgstr "Skrivebeskytta"
 
-#: diskdrake/interactive.pm:1374
+#: diskdrake/interactive.pm:1429
 #, c-format
 msgid "Size: %s\n"
 msgstr "Størrelse: %s\n"
 
-#: diskdrake/interactive.pm:1375
+#: diskdrake/interactive.pm:1430
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Geometri: %s sylindre – %s hoder –%s sektorer\n"
 
-#: diskdrake/interactive.pm:1377
+#: diskdrake/interactive.pm:1432
 #, c-format
 msgid "Medium type: "
 msgstr "Medietype: "
 
-#: diskdrake/interactive.pm:1378
+#: diskdrake/interactive.pm:1433
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "LVM-disker %s\n"
 
-#: diskdrake/interactive.pm:1379
+#: diskdrake/interactive.pm:1434
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Partisjonstabelltype: %s\n"
 
-#: diskdrake/interactive.pm:1380
+#: diskdrake/interactive.pm:1435
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "på kanal %d id – %d\n"
 
-#: diskdrake/interactive.pm:1424
+#: diskdrake/interactive.pm:1479
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Velg krypteringsnøkkel for filsystemet"
 
-#: diskdrake/interactive.pm:1427
+#: diskdrake/interactive.pm:1482
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr "Denne krypteringsnøkkelen er for enkel (må være minst %d tegn lang)"
 
-#: diskdrake/interactive.pm:1428
-#, c-format
-msgid "The encryption keys do not match"
-msgstr "Krypteringsnøklene er ikke like"
-
-#: diskdrake/interactive.pm:1432
-#, c-format
-msgid "Encryption key (again)"
-msgstr "Krypteringsnøkkel (på nytt)"
-
-#: diskdrake/interactive.pm:1434
+#: diskdrake/interactive.pm:1489
 #, c-format
 msgid "Encryption algorithm"
 msgstr "Krypteringsalgoritme"
@@ -2283,7 +2292,8 @@ msgstr "Enda en"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid "Please enter your username, password and domain name to access this host."
+msgid ""
+"Please enter your username, password and domain name to access this host."
 msgstr "Tast inn brukernavnet, passordet og domenenavn for verten."
 
 #: diskdrake/smbnfs_gtk.pm:180
@@ -2345,33 +2355,33 @@ msgstr ""
 "Det oppstod en feil: Fant ingen gyldige enheter for nytt filsystem. "
 "Kontroller maskinvaren."
 
-#: fs/any.pm:75 fs/partitioning_wizard.pm:61
+#: fs/any.pm:75 fs/partitioning_wizard.pm:62
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "Du må ha en FAT-partisjon montert i «/boot/efi»"
 
-#: fs/format.pm:103
+#: fs/format.pm:106
 #, c-format
 msgid "Creating and formatting file %s"
 msgstr "Lager og formaterer partisjonen «%s»"
 
-#: fs/format.pm:122
+#: fs/format.pm:125
 #, c-format
 msgid "I do not know how to set label on %s with type %s"
 msgstr "Kan ikke lagre volumnavnet på %s med typen %s"
 
-#: fs/format.pm:131
+#: fs/format.pm:134
 #, c-format
 msgid "setting label on %s failed, is it formatted?"
 msgstr ""
 "Klarte ikke å lagre volumnavn på %s. Kontroller at partisjonen er formatert."
 
-#: fs/format.pm:172
+#: fs/format.pm:175
 #, c-format
 msgid "I do not know how to format %s in type %s"
 msgstr "Kan ikke formatere «%s» som type «%s»"
 
-#: fs/format.pm:177 fs/format.pm:179
+#: fs/format.pm:180 fs/format.pm:182
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "%s formatering av %s mislykket"
@@ -2406,29 +2416,24 @@ msgstr "Feil ved avmontering av «%s»: %s"
 msgid "Enabling swap partition %s"
 msgstr "Slår på vekselpartisjonen «%s»"
 
-#: fs/mount_options.pm:114
-#, c-format
-msgid "Use an encrypted file system"
-msgstr "Bruk kryptert filsystem"
-
-#: fs/mount_options.pm:116
+#: fs/mount_options.pm:113
 #, c-format
 msgid "Flush write cache on file close"
 msgstr "Tøm mellomlager for skriving ved lukking"
 
-#: fs/mount_options.pm:118
+#: fs/mount_options.pm:115
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
 msgstr "Bruk gruppekvoter og håndhev grenser (valgfritt)."
 
-#: fs/mount_options.pm:120
+#: fs/mount_options.pm:117
 #, c-format
 msgid ""
 "Do not update inode access times on this file system\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr "Ikke oppdater tilgangstider på inoder på filsystemet."
 
-#: fs/mount_options.pm:123
+#: fs/mount_options.pm:120
 #, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
@@ -2437,7 +2442,7 @@ msgstr ""
 "Oppdater tilgangstider på inoder på filsystemet på en mer effektiv måte\n"
 "(gir for eksempel raskere tilgang til njuskøer på njustjenere)."
 
-#: fs/mount_options.pm:126
+#: fs/mount_options.pm:123
 #, c-format
 msgid ""
 "Can only be mounted explicitly (i.e.,\n"
@@ -2446,12 +2451,12 @@ msgstr ""
 "Kan bare monteres eksplisitt (for eksempel vil\n"
 "ikke «-a»-valget montere filsystemet)."
 
-#: fs/mount_options.pm:129
+#: fs/mount_options.pm:126
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
 msgstr "Ikke tolk tegn- og blokkspesialenheter på filsystemet."
 
-#: fs/mount_options.pm:131
+#: fs/mount_options.pm:128
 #, c-format
 msgid ""
 "Do not allow execution of any binaries on the mounted\n"
@@ -2462,7 +2467,7 @@ msgstr ""
 "filsystemet. Dette valget kan være nyttig for tjenere som\n"
 "har filsystemer med programfiler for andre operativsystemer."
 
-#: fs/mount_options.pm:135
+#: fs/mount_options.pm:132
 #, c-format
 msgid ""
 "Do not allow set-user-identifier or set-group-identifier\n"
@@ -2473,42 +2478,42 @@ msgstr ""
 "å ha noen virkning. (Dette er ikke trygt om du har\n"
 "suidperl(1) installert, selv om det kan virke slik.)"
 
-#: fs/mount_options.pm:139
+#: fs/mount_options.pm:136
 #, c-format
 msgid "Mount the file system read-only."
 msgstr "Monter filsystemet som skrivebeskytta."
 
-#: fs/mount_options.pm:141
+#: fs/mount_options.pm:138
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
 msgstr "All lesing og skriving til filsystemet skal gjøres synkront."
 
-#: fs/mount_options.pm:143
+#: fs/mount_options.pm:140
 #, c-format
 msgid "Allow every user to mount and umount the file system."
 msgstr "La alle brukere montere og avmontere filsystemet."
 
-#: fs/mount_options.pm:145
+#: fs/mount_options.pm:142
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
 msgstr "La en vanlig bruker montere filsystemet."
 
-#: fs/mount_options.pm:147
+#: fs/mount_options.pm:144
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr "Bruk brukerkvoter og håndhev grenser (valgfritt)."
 
-#: fs/mount_options.pm:149
+#: fs/mount_options.pm:146
 #, c-format
 msgid "Support \"user.\" extended attributes"
 msgstr "Støtt «user.»-baserte utvidet attributt."
 
-#: fs/mount_options.pm:151
+#: fs/mount_options.pm:148
 #, c-format
 msgid "Give write access to ordinary users"
 msgstr "Gi skrivetilgang til vanlige brukere."
 
-#: fs/mount_options.pm:153
+#: fs/mount_options.pm:150
 #, c-format
 msgid "Give read-only access to ordinary users"
 msgstr "Gi bare lesetilgang til vanlige brukere."
@@ -2563,7 +2568,7 @@ msgstr ""
 "Lag en ny partisjon (eller velg en gammel),\n"
 "og velg så «Monteringspunkt». Sett dette til «/»."
 
-#: fs/partitioning_wizard.pm:58
+#: fs/partitioning_wizard.pm:59
 #, c-format
 msgid ""
 "You do not have a swap partition.\n"
@@ -2574,42 +2579,42 @@ msgstr ""
 "\n"
 "Vil du likevel fortsette?"
 
-#: fs/partitioning_wizard.pm:92
+#: fs/partitioning_wizard.pm:93
 #, c-format
 msgid "Use free space"
 msgstr "Bruk ledig plass"
 
-#: fs/partitioning_wizard.pm:94
+#: fs/partitioning_wizard.pm:95
 #, c-format
 msgid "Not enough free space to allocate new partitions"
 msgstr "Ikke nok ledig plass til nye partisjoner"
 
-#: fs/partitioning_wizard.pm:102
+#: fs/partitioning_wizard.pm:103
 #, c-format
 msgid "Use existing partitions"
 msgstr "Bruk gamle partisjoner"
 
-#: fs/partitioning_wizard.pm:104
+#: fs/partitioning_wizard.pm:105
 #, c-format
 msgid "There is no existing partition to use"
 msgstr "Det finnes ingen gammel partisjon å bruke"
 
-#: fs/partitioning_wizard.pm:128
+#: fs/partitioning_wizard.pm:129
 #, c-format
 msgid "Computing the size of the Microsoft Windows® partition"
 msgstr "Beregner størrelsen på Microsoft Windows®-partisjon"
 
-#: fs/partitioning_wizard.pm:164
+#: fs/partitioning_wizard.pm:165
 #, c-format
 msgid "Use the free space on a Microsoft Windows® partition"
 msgstr "Bruk ledig plass på Microsoft Windows®-partisjonen"
 
-#: fs/partitioning_wizard.pm:168
+#: fs/partitioning_wizard.pm:169
 #, c-format
 msgid "Which partition do you want to resize?"
 msgstr "Hvilken partisjon vil du endre størrelse på?"
 
-#: fs/partitioning_wizard.pm:171
+#: fs/partitioning_wizard.pm:172
 #, c-format
 msgid ""
 "Your Microsoft Windows® partition is too fragmented. Please reboot your "
@@ -2620,7 +2625,7 @@ msgstr ""
 "Microsoft Windows®, og kjør defragmenteringsverktøyet. Prøv så å installere "
 "Mandriva Linux på nytt."
 
-#: fs/partitioning_wizard.pm:179
+#: fs/partitioning_wizard.pm:180
 #, c-format
 msgid ""
 "WARNING!\n"
@@ -2654,75 +2659,76 @@ msgstr ""
 "Trykk «%s» når du er klar."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:188 fs/partitioning_wizard.pm:551
+#: fs/partitioning_wizard.pm:189 fs/partitioning_wizard.pm:552
 #: interactive.pm:549 interactive/curses.pm:263 ugtk2.pm:519
 #, c-format
 msgid "Next"
 msgstr "Neste"
 
-#: fs/partitioning_wizard.pm:194
+#: fs/partitioning_wizard.pm:195
 #, c-format
 msgid "Partitionning"
 msgstr "Partisjonering"
 
-#: fs/partitioning_wizard.pm:194
+#: fs/partitioning_wizard.pm:195
 #, c-format
 msgid "Which size do you want to keep for Microsoft Windows® on partition %s?"
-msgstr "Hvilken størrelse vil du beholde for Microsoft Windows® på partisjon %s?"
+msgstr ""
+"Hvilken størrelse vil du beholde for Microsoft Windows® på partisjon %s?"
 
-#: fs/partitioning_wizard.pm:195
+#: fs/partitioning_wizard.pm:196
 #, c-format
 msgid "Size"
 msgstr "Størrelse"
 
-#: fs/partitioning_wizard.pm:204
+#: fs/partitioning_wizard.pm:205
 #, c-format
 msgid "Resizing Microsoft Windows® partition"
 msgstr "Endrer størrelse på Microsoft Windows®-partisjon"
 
-#: fs/partitioning_wizard.pm:209
+#: fs/partitioning_wizard.pm:210
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr "Klarte ikke krympe/øke FAT: %s"
 
-#: fs/partitioning_wizard.pm:225
+#: fs/partitioning_wizard.pm:226
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "Det finnes ingen FAT-partisjon å endre størrelsen på (eller det ikke nok "
 "ledig plass)."
 
-#: fs/partitioning_wizard.pm:230
+#: fs/partitioning_wizard.pm:231
 #, c-format
 msgid "Remove Microsoft Windows®"
 msgstr "Fjern Windows™"
 
-#: fs/partitioning_wizard.pm:230
+#: fs/partitioning_wizard.pm:231
 #, c-format
 msgid "Erase and use entire disk"
 msgstr "Slett og bruk hele disken"
 
-#: fs/partitioning_wizard.pm:234
+#: fs/partitioning_wizard.pm:235
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "Du har mer enn en harddisk. Hvilken av dem vil du installere Linux på?"
 
-#: fs/partitioning_wizard.pm:242 fsedit.pm:600
+#: fs/partitioning_wizard.pm:243 fsedit.pm:610
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "Alle eksisterende partisjoner og data går tapt på stasjon «%s»."
 
-#: fs/partitioning_wizard.pm:252
+#: fs/partitioning_wizard.pm:253
 #, c-format
 msgid "Custom disk partitioning"
 msgstr "Egendefinert partisjonering"
 
-#: fs/partitioning_wizard.pm:258
+#: fs/partitioning_wizard.pm:259
 #, c-format
 msgid "Use fdisk"
 msgstr "Bruk fdisk"
 
-#: fs/partitioning_wizard.pm:261
+#: fs/partitioning_wizard.pm:262
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -2731,37 +2737,37 @@ msgstr ""
 "Du kan nå partisjonere «%s».\n"
 "Husk å lagre med «w» når du er ferdig."
 
-#: fs/partitioning_wizard.pm:401
+#: fs/partitioning_wizard.pm:402
 #, c-format
 msgid "Ext2/3/4"
 msgstr "Ext2/3/4"
 
-#: fs/partitioning_wizard.pm:431 fs/partitioning_wizard.pm:571
+#: fs/partitioning_wizard.pm:432 fs/partitioning_wizard.pm:572
 #, c-format
 msgid "I can not find any room for installing"
 msgstr "Ikke nok plass til installasjon"
 
-#: fs/partitioning_wizard.pm:440 fs/partitioning_wizard.pm:578
+#: fs/partitioning_wizard.pm:441 fs/partitioning_wizard.pm:579
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "Partisjonsveiviseren fant følgende løsninger:"
 
-#: fs/partitioning_wizard.pm:511
+#: fs/partitioning_wizard.pm:512
 #, c-format
 msgid "Here is the content of your disk drive "
 msgstr "Her er innholdet på harddisken din "
 
-#: fs/partitioning_wizard.pm:588
+#: fs/partitioning_wizard.pm:589
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Feil ved partisjonering: %s"
 
-#: fs/type.pm:390
+#: fs/type.pm:393
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
 msgstr "Du kan ikke bruke JFS på partisjoner mindre enn 16 MiB"
 
-#: fs/type.pm:391
+#: fs/type.pm:394
 #, c-format
 msgid "You can not use ReiserFS for partitions smaller than 32MB"
 msgstr "Du kan ikke bruke ReiserFS på partisjoner mindre enn 32 MiB"
@@ -2831,6 +2837,22 @@ msgstr ""
 "Husk derfor å legge til en «/boot»-partisjon."
 
 #: fsedit.pm:437
+#, fuzzy, c-format
+msgid ""
+"You've selected an encrypted partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"Du har valgt programvare-RAID-partisjon som rot («/»).\n"
+"Ingen oppstartslastar kan bruke denne uten en «/boot»-partisjon.\n"
+"Husk derfor å legge til en «/boot»-partisjon."
+
+#: fsedit.pm:443 fsedit.pm:461
+#, c-format
+msgid "You can not use an encrypted file system for mount point %s"
+msgstr "Du kan ikke bruke et kryptert filsystem for monteringspunktet «%s»"
+
+#: fsedit.pm:447
 #, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
@@ -2839,7 +2861,7 @@ msgstr ""
 "Du kan ikke bruka et LVM-basert logisk volum for monteringspunktet «%s», da "
 "volumet dekker flere fysiske volum."
 
-#: fsedit.pm:439
+#: fsedit.pm:449
 #, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
@@ -2852,12 +2874,12 @@ msgstr ""
 "volum.\n"
 "Du bør derfor lage en «/boot»-partisjon først."
 
-#: fsedit.pm:443 fsedit.pm:445
+#: fsedit.pm:453 fsedit.pm:455
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Denne mappa bør bli værende i rotfilsystemet"
 
-#: fsedit.pm:447 fsedit.pm:449
+#: fsedit.pm:457 fsedit.pm:459
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/3/4, reiserfs, xfs, or jfs) for this mount "
@@ -2866,17 +2888,12 @@ msgstr ""
 "Du trenger et ekte filsystem(«ext2», «ext3», «reiserfs», «xfs» eller «jfs») for "
 "dette monteringspunktet\n"
 
-#: fsedit.pm:451
-#, c-format
-msgid "You can not use an encrypted file system for mount point %s"
-msgstr "Du kan ikke bruke et kryptert filsystem for monteringspunktet «%s»"
-
-#: fsedit.pm:516
+#: fsedit.pm:526
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "Ikke nok ledig plass for automatisk oppsett"
 
-#: fsedit.pm:518
+#: fsedit.pm:528
 #, c-format
 msgid "Nothing to do"
 msgstr "Ingenting å gjøre"
@@ -3184,7 +3201,7 @@ msgid ""
 msgstr ""
 "Her kan du velge en annen OSS- eller ALSA-driver for lydkortet ditt («%s»)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA",
+#. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
@@ -5487,7 +5504,8 @@ msgstr "Klarte ikke å installere pakkene for deling av skanner(e)."
 #: scanner.pm:202
 #, c-format
 msgid "Your scanner(s) will not be available for non-root users."
-msgstr "Skanneren/-ene vil ikke være tilgjengelige for andre brukere enn «root»."
+msgstr ""
+"Skanneren/-ene vil ikke være tilgjengelige for andre brukere enn «root»."
 
 #: security/help.pm:11
 #, c-format
@@ -5542,7 +5560,8 @@ msgstr "Godta direkte «root»-innlogging."
 
 #: security/help.pm:33
 #, c-format
-msgid "Allow the list of users on the system on display managers (kdm and gdm)."
+msgid ""
+"Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr "Godta visning av brukere i innloggingshåndterer (kdm og gdm)."
 
 #: security/help.pm:35
@@ -5774,7 +5793,8 @@ msgstr ""
 #: security/help.pm:117
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
-msgstr "Kontroller tilgang til filer i hjememappe til brukere hvis satt til «ja»."
+msgstr ""
+"Kontroller tilgang til filer i hjememappe til brukere hvis satt til «ja»."
 
 #: security/help.pm:118
 #, c-format
@@ -5824,7 +5844,8 @@ msgstr "Kjør «chkrootkit»-kontroller hvis satt til «ja»."
 
 #: security/help.pm:127
 #, c-format
-msgid "if set, send the mail report to this email address else send it to root."
+msgid ""
+"if set, send the mail report to this email address else send it to root."
 msgstr "Send rapport på e-post til denne adressa, eller til «root» hvis tom."
 
 #: security/help.pm:128
@@ -6262,7 +6283,8 @@ msgstr ""
 
 #: services.pm:31
 #, c-format
-msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgid ""
+"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr "Common UNIX Printing System (CUPS) er et avansert utskriftskøsystem."
 
 #: services.pm:32
@@ -6293,8 +6315,7 @@ msgid ""
 "applications and \n"
 "scripts can access the LCD via a simple API."
 msgstr ""
-"G15daemon gir brukere tilgang til alle de ekstra nøklene ved å dekode "
-"dem, \n"
+"G15daemon gir brukere tilgang til alle de ekstra nøklene ved å dekode dem, \n"
 "og så sende de tilbake til kjernen via UINPUT-driveren. Denne driveren må \n"
 "laste før du kan bruke g15daemon for tastaturtilgang. G15 LCD-en er også "
 "støttet. \n"
@@ -6330,7 +6351,8 @@ msgstr ""
 
 #: services.pm:46
 #, c-format
-msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid ""
+"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr "Apache er en vevtjener."
 
 #: services.pm:47
@@ -6369,7 +6391,8 @@ msgstr ""
 
 #: services.pm:55
 #, c-format
-msgid "Evenly distributes IRQ load across multiple CPUs for enhanced performance"
+msgid ""
+"Evenly distributes IRQ load across multiple CPUs for enhanced performance"
 msgstr "Fordeler jevnt IRQ-last over flere prosessorer for forbedret ytelse"
 
 #: services.pm:56
@@ -6571,7 +6594,8 @@ msgstr "Reserverer noen TCP-porter"
 msgid ""
 "Postfix is a Mail Transport Agent, which is the program that moves mail from "
 "one machine to another."
-msgstr "Postfix er et program for overføring av elektronisk post mellom maskiner."
+msgstr ""
+"Postfix er et program for overføring av elektronisk post mellom maskiner."
 
 #: services.pm:99
 #, c-format
@@ -7147,4 +7171,15 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Feil ved installering."
 
+#~ msgid "Restrict command line options"
+#~ msgstr "Avgrens kommandolinjeval"
 
+#~ msgid "restrict"
+#~ msgstr "avgrens"
+
+#~ msgid ""
+#~ "Option ``Restrict command line options'' is of no use without a password"
+#~ msgstr "Valget «Avgrens kommandolinjevalg» er ubrukelig uten passord"
+
+#~ msgid "Use an encrypted file system"
+#~ msgstr "Bruk kryptert filsystem"
