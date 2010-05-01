@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-05-01 16:46+0200\n"
-"PO-Revision-Date: 2010-04-30 17:12+0100\n"
+"PO-Revision-Date: 2010-05-01 22:03+0100\n"
 "Last-Translator: Zé <mmodem00@gmal.com>\n"
 "Language-Team: Portuguese <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -78,7 +78,7 @@ msgid ""
 " Then type: shut-down\n"
 "At your next boot you should see the bootloader prompt."
 msgstr ""
-"Pode precisar mudar o seu dispositivo de arranque 'Open\n"
+"Pode precisar de mudar o seu dispositivo de arranque 'Open\n"
 " Firmware' para activar o carregador de arranque.  Se não vê\n"
 " a linha de comandos do carregador de arranque ao reiniciar,\n"
 " mantenha carregado o Comando-Opção-O-F ao reiniciar e digite:\n"
@@ -280,7 +280,7 @@ msgstr "Juntar Xen"
 #: any.pm:536
 #, c-format
 msgid "Requires password to boot"
-msgstr ""
+msgstr "Requer senha para arrancar"
 
 #: any.pm:538
 #, c-format
@@ -1684,14 +1684,14 @@ msgid "Logical volume name "
 msgstr "Nome do volume lógico "
 
 #: diskdrake/interactive.pm:507
-#, fuzzy, c-format
+#, c-format
 msgid "Encrypt partition"
-msgstr "Algoritmo de encriptação"
+msgstr "Encriptar partição"
 
 #: diskdrake/interactive.pm:508
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption key "
-msgstr "Chave de encriptação"
+msgstr "Chave de encriptação "
 
 #: diskdrake/interactive.pm:509 diskdrake/interactive.pm:1487
 #, c-format
@@ -1704,9 +1704,9 @@ msgid "The encryption keys do not match"
 msgstr "As chaves de encriptação não correspondem"
 
 #: diskdrake/interactive.pm:521
-#, fuzzy, c-format
+#, c-format
 msgid "Missing encryption key"
-msgstr "Chave de encriptação do sistema de ficheiros"
+msgstr "Falta a chave de encriptação"
 
 #: diskdrake/interactive.pm:541
 #, c-format
@@ -2879,15 +2879,15 @@ msgstr ""
 "uma partição /boot. Certifique-se que adiciona uma partição /boot"
 
 #: fsedit.pm:437
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
-"Seleccionou uma partição RAID como raiz (/). Nenhum\n"
-"carregador de arranque consegue aceder a esta partição sem\n"
-"uma partição /boot. Certifique-se que adiciona uma partição /boot"
+"Seleccionou uma partição encriptada como raíz (/). "
+"Nenhum carregador de arranque consegue aceder a esta partição\n"
+"sem uma partição /boot. Certifique-se que adiciona uma partição /boot"
 
 #: fsedit.pm:443 fsedit.pm:461
 #, c-format
@@ -3245,7 +3245,7 @@ msgstr ""
 "Aqui pode seleccionar um controlador alternativo (seja OSS ou ALSA) para a "
 "sua placa de som (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
