@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-standalone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-28 14:49+0200\n"
+"POT-Creation-Date: 2010-05-01 16:52+0200\n"
 "PO-Revision-Date: 2009-10-30 08:31+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
@@ -23,12 +23,12 @@ msgstr ""
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: display_help:49 display_help:54 drakbug:186 drakperm:136
+#: display_help:50 display_help:55 drakbug:186 drakperm:136
 #, c-format
 msgid "Help"
 msgstr "Довідка"
 
-#: display_help:62 drakbug:191 drakfont:506
+#: display_help:63 drakbug:191 drakfont:506
 #, c-format
 msgid "Close"
 msgstr "Закрити"
@@ -39,20 +39,20 @@ msgid "Authentication"
 msgstr "Розпізнавання"
 
 #: drakauth:37 drakclock:111 drakclock:125 drakdvb:74 drakfont:213
-#: drakfont:226 drakfont:264 draksplash:202 finish-install:119 logdrake:170
-#: logdrake:445 logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
+#: drakfont:226 drakfont:264 finish-install:130 logdrake:170 logdrake:445
+#: logdrake:450 scannerdrake:59 scannerdrake:101 scannerdrake:142
 #: scannerdrake:200 scannerdrake:259 scannerdrake:729 scannerdrake:740
 #: scannerdrake:879 scannerdrake:890 scannerdrake:960
 #, c-format
 msgid "Error"
 msgstr "Помилка"
 
-#: drakboot:53
+#: drakboot:55
 #, c-format
 msgid "No bootloader found, creating a new configuration"
 msgstr "Завантажувач не знайдено, створюється нова конфігурація"
 
-#: drakboot:88 harddrake2:198 harddrake2:199 logdrake:71
+#: drakboot:88 harddrake2:196 harddrake2:197 logdrake:71
 #, c-format
 msgid "/_File"
 msgstr "/_Файл"
@@ -62,7 +62,7 @@ msgstr "/_Файл"
 msgid "/File/_Quit"
 msgstr "/Файл/_Вийти"
 
-#: drakboot:89 harddrake2:199 logdrake:77
+#: drakboot:89 harddrake2:197 logdrake:77
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
@@ -82,8 +82,8 @@ msgstr "Детально"
 msgid "Silent"
 msgstr "Мовчки"
 
-#: drakboot:137 drakbug:260 drakdvb:57 drakfont:682 drakperm:376 drakperm:386
-#: drakups:27 harddrake2:527 localedrake:43 notify-x11-free-driver-switch:15
+#: drakboot:137 drakbug:263 drakdvb:57 drakfont:682 drakperm:376 drakperm:386
+#: drakups:27 harddrake2:535 localedrake:45 notify-x11-free-driver-switch:18
 #: scannerdrake:51 scannerdrake:54 scannerdrake:297 scannerdrake:302
 #: scannerdrake:954
 #, c-format
@@ -125,62 +125,48 @@ msgstr "Режим графічного завантаження:"
 msgid "Theme"
 msgstr "Тема"
 
-#: drakboot:158
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-"Показувати тему\n"
-"над консоллю"
-
-#: drakboot:163 draksplash:26
-#, c-format
-msgid "Create new theme"
-msgstr "Створити нову тему"
-
-#: drakboot:195
+#: drakboot:189
 #, c-format
 msgid "Default user"
 msgstr "Типовий користувач"
 
-#: drakboot:196
+#: drakboot:190
 #, c-format
 msgid "Default desktop"
 msgstr "Типова стільниця"
 
-#: drakboot:199
+#: drakboot:193
 #, c-format
 msgid "No, I do not want autologin"
 msgstr "Ні, мені не потрібна автоматична реєстрація"
 
-#: drakboot:200
+#: drakboot:194
 #, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr ""
 "Так, я хочу автоматично реєструватися в системі з цим (іменем, стільницею)"
 
-#: drakboot:207
+#: drakboot:201
 #, c-format
 msgid "System mode"
 msgstr "Системний режим"
 
-#: drakboot:210
+#: drakboot:204
 #, c-format
 msgid "Launch the graphical environment when your system starts"
 msgstr "Запускати графічну оболонку при завантаженні системи"
 
-#: drakboot:262
+#: drakboot:259
 #, c-format
 msgid "Boot Style Configuration"
 msgstr "Налаштування стилю завантаження"
 
-#: drakboot:264 drakboot:268
+#: drakboot:261 drakboot:265
 #, c-format
 msgid "Video mode"
 msgstr "Режим відео"
 
-#: drakboot:265
+#: drakboot:262
 #, c-format
 msgid ""
 "Please choose a video mode, it will be applied to each of the boot entries "
@@ -191,7 +177,7 @@ msgstr ""
 "завантаження,\n"
 "вибраних нижче. Переконайтеся, що відеокарта підтримує цей режим."
 
-#: drakbug:65 drakbug:152
+#: drakbug:65 drakbug:153
 #, c-format
 msgid "The \"%s\" program has crashed with the following error:"
 msgstr "Програма \"%s\" завершила свою роботу аварійно з такою помилкою:"
@@ -216,7 +202,7 @@ msgstr "Помічник першого запуску"
 msgid "Synchronization tool"
 msgstr "Програма для синхронізації"
 
-#: drakbug:84 drakbug:216
+#: drakbug:84 drakbug:219
 #, c-format
 msgid "Standalone Tools"
 msgstr "Самостійні інструменти"
@@ -280,17 +266,17 @@ msgstr "Пакунок: "
 msgid "Kernel:"
 msgstr "Ядро:"
 
-#: drakbug:151
+#: drakbug:152
 #, c-format
 msgid "The \"%s\" program has segfaulted with the following error:"
 msgstr "В програмі \"%s\" сталася наступна помилка сегментації:"
 
-#: drakbug:155
+#: drakbug:156
 #, c-format
 msgid "Its GDB trace is:"
 msgstr "Трасування GDB:"
 
-#: drakbug:158
+#: drakbug:159
 #, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
@@ -301,7 +287,7 @@ msgstr ""
 "Це відкриє вікно переглядача тенет на %s,де Ви знайдете форму для "
 "заповнення. Інформацію, подану вище,буде відправлено на цей сервер."
 
-#: drakbug:160
+#: drakbug:161
 #, c-format
 msgid ""
 "It would be very useful to attach to your report the output of the following "
@@ -316,17 +302,17 @@ msgstr[1] ""
 msgstr[2] ""
 "Дуже добре, якщо Ви додасте до цього звіту вивід наступних команд: %s."
 
-#: drakbug:163
+#: drakbug:164
 #, c-format
 msgid "'%s'"
 msgstr "'%s'"
 
-#: drakbug:166
+#: drakbug:167
 #, c-format
 msgid "You should also attach the following files: %s as well as %s."
 msgstr "Також Ви можете додати наступні файли: %s, також %s."
 
-#: drakbug:173
+#: drakbug:174
 #, c-format
 msgid "Please describe what you were doing when it crashed:"
 msgstr "Опишіть свої дії на момент виникнення збою:"
@@ -341,12 +327,12 @@ msgstr "Звіт"
 msgid "Not installed"
 msgstr "Не встановлено"
 
-#: drakbug:236
+#: drakbug:239
 #, c-format
 msgid "Package not installed"
 msgstr "Пакунок не встановлено"
 
-#: drakbug:261
+#: drakbug:264
 #, c-format
 msgid ""
 "You must type in what you were doing when this bug happened in order to "
@@ -355,7 +341,7 @@ msgstr ""
 "Напишіть, що саме Ви робили, коли виникла ця помилка. Це допоможе нам "
 "відтворити обставини її виникнення і збільшити імовірність її виправлення."
 
-#: drakbug:262
+#: drakbug:265
 #, c-format
 msgid "Thanks."
 msgstr "Дякуємо."
@@ -434,7 +420,7 @@ msgstr "Введіть правильну адресу сервера NTP."
 msgid "Could not synchronize with %s."
 msgstr "Неможливо синхронізувати з %s."
 
-#: drakclock:127 drakdvb:149 draksplash:125 logdrake:175 scannerdrake:491
+#: drakclock:127 drakdvb:149 logdrake:175 scannerdrake:491
 #, c-format
 msgid "Quit"
 msgstr "Вийти"
@@ -454,7 +440,7 @@ msgstr "Скинути"
 msgid "DVB"
 msgstr "DVB"
 
-#: drakdvb:39 harddrake2:101
+#: drakdvb:39 harddrake2:98
 #, c-format
 msgid "Channel"
 msgstr "Канал"
@@ -469,9 +455,10 @@ msgstr "%s вже існує і його вміст буде втрачено"
 msgid "Could not get the list of available channels"
 msgstr "Не вдалося отримати перелік доступних каналів"
 
-#: drakdvb:80 draksec:73 drakups:99 harddrake2:381 scannerdrake:66
-#: scannerdrake:70 scannerdrake:78 scannerdrake:319 scannerdrake:368
-#: scannerdrake:504 scannerdrake:508 scannerdrake:530 service_harddrake:264
+#: drakdvb:80 draksec:73 drakups:99 finish-install:105 harddrake2:379
+#: scannerdrake:66 scannerdrake:70 scannerdrake:78 scannerdrake:319
+#: scannerdrake:368 scannerdrake:504 scannerdrake:508 scannerdrake:530
+#: service_harddrake:344
 #, c-format
 msgid "Please wait"
 msgstr "Зачекайте, будь ласка"
@@ -481,8 +468,7 @@ msgstr "Зачекайте, будь ласка"
 msgid "Detecting DVB channels, this will take a few minutes"
 msgstr "Йде пошук каналів DVB, це займе кілька хвилин"
 
-#: drakdvb:85 drakfont:572 drakfont:652 drakfont:736 draksplash:213
-#: drakups:217 logdrake:175
+#: drakdvb:85 drakfont:572 drakfont:652 drakfont:736 drakups:217 logdrake:175
 #, c-format
 msgid "Cancel"
 msgstr "Скасувати"
@@ -693,7 +679,7 @@ msgstr "Імпортувати"
 msgid "Drakfont"
 msgstr "Drakfont"
 
-#: drakfont:522 harddrake2:236
+#: drakfont:522 harddrake2:234
 #, c-format
 msgid "Copyright (C) %s by Mandriva"
 msgstr "Авторське право (C) %s Mandriva"
@@ -703,14 +689,14 @@ msgstr "Авторське право (C) %s Mandriva"
 msgid "Font installer."
 msgstr "Встановлювач шрифтів."
 
-#: drakfont:526 harddrake2:240
+#: drakfont:526 harddrake2:238
 #, c-format
 msgid "Mandriva Linux"
 msgstr "Mandriva Linux"
 
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
 #. -PO: put here name(s) and email(s) of translator(s) (eg: "John Smith <jsmith@nowhere.com>")
-#: drakfont:533 harddrake2:245
+#: drakfont:533 harddrake2:243
 #, c-format
 msgid "_: Translator(s) name(s) & email(s)\n"
 msgstr "Тарас Бойчук <btr0001@ukr.net>, 2008.\n"
@@ -740,7 +726,7 @@ msgstr "Abiword"
 msgid "Generic Printers"
 msgstr "Стандартні друкарки"
 
-#: drakfont:562 drakfont:572 draksplash:213 drakups:210
+#: drakfont:562 drakfont:572 drakups:210
 #, c-format
 msgid "Ok"
 msgstr "Гаразд"
@@ -785,12 +771,12 @@ msgstr "Встановити"
 msgid "Are you sure you want to uninstall the following fonts?"
 msgstr "Ви впевнені, що хочете вилучити наступні шрифти?"
 
-#: drakfont:688 draksec:60 harddrake2:326
+#: drakfont:688 draksec:60 harddrake2:324
 #, c-format
 msgid "Yes"
 msgstr "Так"
 
-#: drakfont:690 draksec:59 harddrake2:327
+#: drakfont:690 draksec:59 harddrake2:325
 #, c-format
 msgid "No"
 msgstr "Ні"
@@ -1373,194 +1359,6 @@ msgstr ""
 "Зауважте: якщо у Вас є звукова карта ISA PnP, Вам буде потрібно використати "
 "програму sndconfig. Просто наберіть в консолі \"alsaconf\" або \"sndconfig\"."
 
-#: draksplash:33
-#, c-format
-msgid "X coordinate of text box"
-msgstr "Координата X текстового вікна"
-
-#: draksplash:34
-#, c-format
-msgid "Y coordinate of text box"
-msgstr "Координата Y текстового вікна"
-
-#: draksplash:35
-#, c-format
-msgid "Text box width"
-msgstr "Ширина текстового вікна"
-
-#: draksplash:36
-#, c-format
-msgid "Text box height"
-msgstr "Висота текстового вікна"
-
-#: draksplash:37
-#, c-format
-msgid ""
-"The progress bar X coordinate\n"
-"of its upper left corner"
-msgstr ""
-"Координата x верхнього лівого\n"
-"кута індикатора поступу"
-
-#: draksplash:38
-#, c-format
-msgid ""
-"The progress bar Y coordinate\n"
-"of its upper left corner"
-msgstr ""
-"Координата y верхнього лівого\n"
-"кута індикатора поступу"
-
-#: draksplash:39
-#, c-format
-msgid "The width of the progress bar"
-msgstr "Ширина індикатора поступу"
-
-#: draksplash:40
-#, c-format
-msgid "The height of the progress bar"
-msgstr "Висота індикатора поступу"
-
-#: draksplash:41
-#, c-format
-msgid "X coordinate of the text"
-msgstr "Координата X тексту"
-
-#: draksplash:42
-#, c-format
-msgid "Y coordinate of the text"
-msgstr "Координата Y тексту"
-
-#: draksplash:43
-#, c-format
-msgid "Text box transparency"
-msgstr "Прозорість текстового вікна"
-
-#: draksplash:44
-#, c-format
-msgid "Progress box transparency"
-msgstr "Прозорість вікна індикатора поступу"
-
-#: draksplash:45
-#, c-format
-msgid "Text size"
-msgstr "Розмір тексту"
-
-#: draksplash:62
-#, c-format
-msgid "Progress Bar"
-msgstr "Смуга поступу"
-
-#: draksplash:65
-#, c-format
-msgid "Choose progress bar color 1"
-msgstr "Виберіть колір 1 індикатора поступу"
-
-#: draksplash:67
-#, c-format
-msgid "Choose progress bar color 2"
-msgstr "Виберіть колір 2 індикатора поступу"
-
-#: draksplash:69
-#, c-format
-msgid "Choose progress bar background"
-msgstr "Виберіть тло індикатора поступу"
-
-#: draksplash:72
-#, c-format
-msgid "Gradient type"
-msgstr "Тип градієнту"
-
-#: draksplash:78
-#, c-format
-msgid "Text"
-msgstr "Текст"
-
-#: draksplash:80
-#, c-format
-msgid "Choose text color"
-msgstr "Виберіть колір тексту"
-
-#: draksplash:83 draksplash:102
-#, c-format
-msgid "Choose picture"
-msgstr "Виберіть малюнок"
-
-#: draksplash:87
-#, c-format
-msgid "Silent bootsplash"
-msgstr "Спрощене завантаження"
-
-#: draksplash:90
-#, c-format
-msgid "Choose text zone color"
-msgstr "Виберіть колір текстової області"
-
-#: draksplash:93
-#, c-format
-msgid "Text color"
-msgstr "Колір тексту"
-
-#: draksplash:97
-#, c-format
-msgid "Background color"
-msgstr "Колір тла"
-
-#: draksplash:103
-#, c-format
-msgid "Verbose bootsplash"
-msgstr "Детальне завантаження"
-
-#: draksplash:110
-#, c-format
-msgid "Theme name"
-msgstr "Назва теми"
-
-#: draksplash:115
-#, c-format
-msgid "Final resolution"
-msgstr "Кінцева роздільна здатність"
-
-#: draksplash:119
-#, c-format
-msgid "Display logo on Console"
-msgstr "Показувати логотип в консолі"
-
-#: draksplash:124
-#, c-format
-msgid "Save theme"
-msgstr "Зберегти тему"
-
-#: draksplash:187
-#, c-format
-msgid "Please enter a theme name"
-msgstr "Введіть назву теми"
-
-#: draksplash:190
-#, c-format
-msgid "Please select a splash image"
-msgstr "Виберіть малюнок для заставки"
-
-#: draksplash:193
-#, c-format
-msgid "saving Bootsplash theme..."
-msgstr "зберігається тема Bootsplash..."
-
-#: draksplash:202
-#, c-format
-msgid "Unable to load image file %s"
-msgstr "Неможливо завантажити файл малюнку %s"
-
-#: draksplash:213
-#, c-format
-msgid "choose image"
-msgstr "виберіть малюнок"
-
-#: draksplash:228
-#, c-format
-msgid "Color selection"
-msgstr "Вибір кольору"
-
 #: drakups:71
 #, c-format
 msgid "Connected through a serial port or an usb cable"
@@ -1604,7 +1402,7 @@ msgstr ""
 msgid "Autodetection"
 msgstr "Автовизначення"
 
-#: drakups:99 harddrake2:381
+#: drakups:99 harddrake2:379
 #, c-format
 msgid "Detection in progress"
 msgstr "Триває автовизначення"
@@ -1688,18 +1486,18 @@ msgstr "Помічник успішно налаштував новий прис
 msgid "UPS devices"
 msgstr "Пристрої UPS"
 
-#: drakups:249 drakups:268 drakups:284 harddrake2:89 harddrake2:115
-#: harddrake2:122
+#: drakups:249 drakups:268 drakups:284 harddrake2:86 harddrake2:113
+#: harddrake2:120
 #, c-format
 msgid "Name"
 msgstr "Назва"
 
-#: drakups:249 harddrake2:137
+#: drakups:249 harddrake2:136
 #, c-format
 msgid "Driver"
 msgstr "Драйвер"
 
-#: drakups:249 harddrake2:55
+#: drakups:249 harddrake2:56
 #, c-format
 msgid "Port"
 msgstr "Порт"
@@ -1734,7 +1532,7 @@ msgstr "Правила"
 msgid "Action"
 msgstr "Дія"
 
-#: drakups:297 harddrake2:86
+#: drakups:297 harddrake2:83
 #, c-format
 msgid "Level"
 msgstr "Рівень"
@@ -1744,7 +1542,7 @@ msgstr "Рівень"
 msgid "ACL name"
 msgstr "Назва ACL"
 
-#: drakups:297 finish-install:179
+#: drakups:297 finish-install:195
 #, c-format
 msgid "Password"
 msgstr "Пароль"
@@ -1791,68 +1589,73 @@ msgstr ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 
-#: finish-install:56
+#: finish-install:57
 #, c-format
 msgid "Keyboard"
 msgstr "Клавіатура"
 
-#: finish-install:57
+#: finish-install:58
 #, c-format
 msgid "Please, choose your keyboard layout."
 msgstr "Будь ласка, виберіть розкладку клавіатури."
 
-#: finish-install:177 finish-install:195 finish-install:207
+#: finish-install:105
+#, c-format
+msgid "Testing your connection..."
+msgstr ""
+
+#: finish-install:193 finish-install:211 finish-install:223
 #, c-format
 msgid "Encrypted home partition"
 msgstr "Зашифрований розділ домівки"
 
-#: finish-install:177
+#: finish-install:193
 #, c-format
 msgid "Please enter a password for the %s user"
 msgstr "Введіть пароль користувача %s"
 
-#: finish-install:180
+#: finish-install:196
 #, c-format
 msgid "Password (again)"
 msgstr "Пароль (ще раз)"
 
-#: finish-install:195
+#: finish-install:211
 #, c-format
 msgid "Creating encrypted home partition"
 msgstr "Створити зашифрований розділ домівки"
 
-#: finish-install:207
+#: finish-install:223
 #, c-format
 msgid "Formatting encrypted home partition"
 msgstr "Форматування зашифрованого розділу домівки"
 
-#: harddrake2:29
+#: harddrake2:30
 #, c-format
 msgid "Alternative drivers"
 msgstr "Альтернативні драйвери"
 
-#: harddrake2:30
+#: harddrake2:31
 #, c-format
 msgid "the list of alternative drivers for this sound card"
 msgstr "список альтернативних драйверів для цієї звукової карти"
 
-#: harddrake2:32 harddrake2:124
+#: harddrake2:33 harddrake2:122
 #, c-format
 msgid "Bus"
 msgstr "Шина"
 
-#: harddrake2:33
+#: harddrake2:34
 #, c-format
 msgid ""
 "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr "це фізична шина, до якої приєднано пристрій (напр: PCI, USB, ...)"
 
-#: harddrake2:35 harddrake2:150
+#: harddrake2:36 harddrake2:148
 #, c-format
 msgid "Bus identification"
 msgstr "Ідентифікація шини"
 
-#: harddrake2:36
+#: harddrake2:37
 #, c-format
 msgid ""
 "- PCI and USB devices: this lists the vendor, device, subvendor and "
@@ -1861,12 +1664,12 @@ msgstr ""
 "- пристрої PCI і USB : тут перелічені PCI/USB ідентифікатори виробника, "
 "пристрою, вторинних виробника і пристрою"
 
-#: harddrake2:38
+#: harddrake2:39
 #, c-format
 msgid "Location on the bus"
 msgstr "Розташування на шині"
 
-#: harddrake2:39
+#: harddrake2:40
 #, c-format
 msgid ""
 "- pci devices: this gives the PCI slot, device and function of this card\n"
@@ -1877,139 +1680,139 @@ msgstr ""
 "- пристрої eide: пристрій є або вторинним, або головним\n"
 "- пристрої scsi: ідентифікатори шини і пристрою scsi"
 
-#: harddrake2:42
+#: harddrake2:43
 #, c-format
 msgid "Drive capacity"
 msgstr "Ємність пристрою"
 
-#: harddrake2:42
+#: harddrake2:43
 #, c-format
 msgid "special capacities of the driver (burning ability and or DVD support)"
 msgstr ""
 "спеціальні можливості драйвера (можливість записування і/чи підтримка DVD)"
 
-#: harddrake2:43
+#: harddrake2:44
 #, c-format
 msgid "Description"
 msgstr "Опис"
 
-#: harddrake2:43
+#: harddrake2:44
 #, c-format
 msgid "this field describes the device"
 msgstr "це поле описує пристрій"
 
-#: harddrake2:44
+#: harddrake2:45
 #, c-format
 msgid "Old device file"
 msgstr "Файл старого пристрою"
 
-#: harddrake2:45
+#: harddrake2:46
 #, c-format
 msgid "old static device name used in dev package"
 msgstr "в пакунку dev використовується назва старого статичного пристрою"
 
 #. -PO: here "module" is the "jargon term" for a kernel driver
-#: harddrake2:48
+#: harddrake2:49
 #, c-format
 msgid "Module"
 msgstr "Модуль"
 
-#: harddrake2:48
+#: harddrake2:49
 #, c-format
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "модуль в ядрі GNU/Linux, який керує пристроєм"
 
-#: harddrake2:49
+#: harddrake2:50
 #, c-format
 msgid "Extended partitions"
 msgstr "Додаткові розділи"
 
-#: harddrake2:49
+#: harddrake2:50
 #, c-format
 msgid "the number of extended partitions"
 msgstr "кількість додаткових розділів"
 
-#: harddrake2:50
+#: harddrake2:51
 #, c-format
 msgid "Geometry"
 msgstr "Геометрія"
 
-#: harddrake2:50
+#: harddrake2:51
 #, c-format
 msgid "Cylinder/head/sectors geometry of the disk"
 msgstr "Геометрія диску циліндр/головка/сектори"
 
-#: harddrake2:51
+#: harddrake2:52
 #, c-format
 msgid "Disk controller"
 msgstr "Контролер диску"
 
-#: harddrake2:51
+#: harddrake2:52
 #, c-format
 msgid "the disk controller on the host side"
 msgstr "контролер диску зі сторони машини"
 
-#: harddrake2:52
+#: harddrake2:53
 #, c-format
 msgid "Identifier"
 msgstr "Ідентифікатор"
 
-#: harddrake2:52
+#: harddrake2:53
 #, c-format
 msgid "usually the device serial number"
 msgstr "зазвичай серійний номер диску"
 
-#: harddrake2:53
+#: harddrake2:54
 #, c-format
 msgid "Media class"
 msgstr "Клас носія"
 
-#: harddrake2:53
+#: harddrake2:54
 #, c-format
 msgid "class of hardware device"
 msgstr "клас пристрою"
 
-#: harddrake2:54 harddrake2:87
+#: harddrake2:55 harddrake2:84
 #, c-format
 msgid "Model"
 msgstr "Модель"
 
-#: harddrake2:54
+#: harddrake2:55
 #, c-format
 msgid "hard disk model"
 msgstr "модель твердого диску"
 
-#: harddrake2:55
+#: harddrake2:56
 #, c-format
 msgid "network printer port"
 msgstr "мережевий порт друкарки"
 
-#: harddrake2:56
+#: harddrake2:57
 #, c-format
 msgid "Primary partitions"
 msgstr "Первинні розділи"
 
-#: harddrake2:56
+#: harddrake2:57
 #, c-format
 msgid "the number of the primary partitions"
 msgstr "кількість первинних розділів"
 
-#: harddrake2:57 harddrake2:92
+#: harddrake2:58 harddrake2:89
 #, c-format
 msgid "Vendor"
 msgstr "Виробник"
 
-#: harddrake2:57
+#: harddrake2:58
 #, c-format
 msgid "the vendor name of the device"
 msgstr "назва виробника пристрою"
 
-#: harddrake2:58
+#: harddrake2:59
 #, c-format
 msgid "PCI domain"
 msgstr "PCI-домен"
 
-#: harddrake2:58
+#: harddrake2:59 harddrake2:60
 #, c-format
 msgid "the PCI domain of the device"
 msgstr "PCI-домен пристрою"
@@ -2024,87 +1827,87 @@ msgstr "Версія PCI"
 msgid "Bus PCI #"
 msgstr "Шина PCI #"
 
-#: harddrake2:59
+#: harddrake2:61
 #, c-format
 msgid "the PCI bus on which the device is plugged"
 msgstr "шина PCI, до якої під'єднано пристрій"
 
-#: harddrake2:60
+#: harddrake2:62
 #, c-format
 msgid "PCI device #"
 msgstr "# пристрою PCI"
 
-#: harddrake2:60
+#: harddrake2:62
 #, c-format
 msgid "PCI device number"
 msgstr "номер пристрою PCI"
 
-#: harddrake2:61
+#: harddrake2:63
 #, c-format
 msgid "PCI function #"
 msgstr "# функції PCI"
 
-#: harddrake2:61
+#: harddrake2:63
 #, c-format
 msgid "PCI function number"
 msgstr "номер функції PCI"
 
-#: harddrake2:62
+#: harddrake2:64
 #, c-format
 msgid "Vendor ID"
 msgstr "ID виробника"
 
-#: harddrake2:62
+#: harddrake2:64
 #, c-format
 msgid "this is the standard numerical identifier of the vendor"
 msgstr "це стандартний номерний ідентифікатор виробника"
 
-#: harddrake2:63
+#: harddrake2:65
 #, c-format
 msgid "Device ID"
 msgstr "ID пристрою"
 
-#: harddrake2:63
+#: harddrake2:65
 #, c-format
 msgid "this is the numerical identifier of the device"
 msgstr "це номерний ідентифікатор пристрою"
 
-#: harddrake2:64
+#: harddrake2:66
 #, c-format
 msgid "Sub vendor ID"
 msgstr "додатковий ID виробника"
 
-#: harddrake2:64
+#: harddrake2:66
 #, c-format
 msgid "this is the minor numerical identifier of the vendor"
 msgstr "це додатковий номерний ідентифікатор виробника"
 
-#: harddrake2:65
+#: harddrake2:67
 #, c-format
 msgid "Sub device ID"
 msgstr "додатковий ID пристрою"
 
-#: harddrake2:65
+#: harddrake2:67
 #, c-format
 msgid "this is the minor numerical identifier of the device"
 msgstr "це додатковий номерний ідентифікатор пристрою"
 
-#: harddrake2:66
+#: harddrake2:68
 #, c-format
 msgid "Device USB ID"
 msgstr "ID пристрою USB"
 
-#: harddrake2:66
+#: harddrake2:68
 #, c-format
 msgid ".."
 msgstr ".."
 
-#: harddrake2:70
+#: harddrake2:72
 #, c-format
 msgid "Bogomips"
 msgstr "Bogomips"
 
-#: harddrake2:70
+#: harddrake2:72
 #, c-format
 msgid ""
 "the GNU/Linux kernel needs to run a calculation loop at boot time to "
@@ -2115,12 +1918,12 @@ msgstr ""
 "щоб ініціалізувати лічильник часу. Його результат зберігається як спосіб "
 "оцінки продуктивності процесора."
 
-#: harddrake2:71
+#: harddrake2:73
 #, c-format
 msgid "Cache size"
 msgstr "Розмір кешу"
 
-#: harddrake2:71
+#: harddrake2:73
 #, c-format
 msgid "size of the (second level) cpu cache"
 msgstr "розмір кешу процесора другого рівня"
@@ -2130,27 +1933,27 @@ msgstr "розмір кешу процесора другого рівня"
 msgid "Cpuid family"
 msgstr "Сімейство cpu"
 
-#: harddrake2:75
+#: harddrake2:74
 #, c-format
 msgid "family of the cpu (eg: 6 for i686 class)"
 msgstr "сімейство cpu (напр. 6 для класу i686)"
 
-#: harddrake2:76
+#: harddrake2:75
 #, c-format
 msgid "Cpuid level"
 msgstr "Рівень cpuid"
 
-#: harddrake2:76
+#: harddrake2:75
 #, c-format
 msgid "information level that can be obtained through the cpuid instruction"
 msgstr "інформаційний рівень, який може бути досягнутий інструкцією cpuid"
 
-#: harddrake2:77
+#: harddrake2:76
 #, c-format
 msgid "Frequency (MHz)"
 msgstr "Частота (МГц)"
 
-#: harddrake2:77
+#: harddrake2:76
 #, c-format
 msgid ""
 "the CPU frequency in MHz (Megahertz which in first approximation may be "
@@ -2161,12 +1964,12 @@ msgstr ""
 "наближено порівняні з числом інструкцій, які процесор може виконати за одну "
 "секунду)"
 
-#: harddrake2:78
+#: harddrake2:77
 #, c-format
 msgid "Flags"
 msgstr "Прапорці"
 
-#: harddrake2:78
+#: harddrake2:77
 #, c-format
 msgid "CPU flags reported by the kernel"
 msgstr "Прапорці CPU, повідомлені ядром"
@@ -2206,57 +2009,57 @@ msgstr "Налаштування"
 msgid "sub generation of the cpu"
 msgstr "покоління процесора"
 
-#: harddrake2:87
+#: harddrake2:84
 #, c-format
 msgid "generation of the cpu (eg: 8 for Pentium III, ...)"
 msgstr "покоління процесора (напр. 8 для Pentium III, ...)"
 
-#: harddrake2:88
+#: harddrake2:85
 #, c-format
 msgid "Model name"
 msgstr "Назва моделі"
 
-#: harddrake2:88
+#: harddrake2:85
 #, c-format
 msgid "official vendor name of the cpu"
 msgstr "офіційна назва виробника процесора"
 
-#: harddrake2:89
+#: harddrake2:86
 #, c-format
 msgid "the name of the CPU"
 msgstr "назва CPU"
 
-#: harddrake2:90
+#: harddrake2:87
 #, c-format
 msgid "Processor ID"
 msgstr "ID процесора"
 
-#: harddrake2:90
+#: harddrake2:87
 #, c-format
 msgid "the number of the processor"
 msgstr "номер процесора"
 
-#: harddrake2:91
+#: harddrake2:88
 #, c-format
 msgid "Model stepping"
 msgstr "Покращення моделі"
 
-#: harddrake2:91
+#: harddrake2:88
 #, c-format
 msgid "stepping of the cpu (sub model (generation) number)"
 msgstr "версія процесора (номер (покоління) моделі)"
 
-#: harddrake2:92
+#: harddrake2:89
 #, c-format
 msgid "the vendor name of the processor"
 msgstr "назва виробника процесора"
 
-#: harddrake2:93
+#: harddrake2:90
 #, c-format
 msgid "Write protection"
 msgstr "Захист від запису"
 
-#: harddrake2:93
+#: harddrake2:90
 #, c-format
 msgid ""
 "the WP flag in the CR0 register of the cpu enforce write protection at the "
@@ -2267,27 +2070,27 @@ msgstr ""
 "сторінки пам'яті, таким чином, процесором вмикається захист неперевіреного "
 "доступу з ядра до пам'яті користувача (отже, це захист від вад)"
 
-#: harddrake2:97
+#: harddrake2:94
 #, c-format
 msgid "Floppy format"
 msgstr "Форматувати дискету"
 
-#: harddrake2:97
+#: harddrake2:94
 #, c-format
 msgid "format of floppies supported by the drive"
 msgstr "формати дискет, які підтримуються дисководом"
 
-#: harddrake2:101
+#: harddrake2:98
 #, c-format
 msgid "EIDE/SCSI channel"
 msgstr "Канал EIDE/SCSI"
 
-#: harddrake2:102
+#: harddrake2:99
 #, c-format
 msgid "Disk identifier"
 msgstr "Ідентифікатор диску"
 
-#: harddrake2:102
+#: harddrake2:99
 #, c-format
 msgid "usually the disk serial number"
 msgstr "звичайний серійний номер диску"
@@ -2318,118 +2121,118 @@ msgstr ""
 "ідентифікуються номером каналу, ID та логічним номером модуля"
 
 #. -PO: here, "size" is the size of the ram chip (eg: 128Mo, 256Mo, ...)
-#: harddrake2:110
+#: harddrake2:108
 #, c-format
 msgid "Installed size"
 msgstr "Об'єм встановленого"
 
-#: harddrake2:110
+#: harddrake2:108
 #, c-format
 msgid "Installed size of the memory bank"
 msgstr "Об'єм встановленої мікросхеми пам'яті"
 
-#: harddrake2:111
+#: harddrake2:109
 #, c-format
 msgid "Enabled Size"
 msgstr "Доступний об'єм"
 
-#: harddrake2:111
+#: harddrake2:109
 #, c-format
 msgid "Enabled size of the memory bank"
 msgstr "Доступний об'єм мікросхеми пам'яті"
 
-#: harddrake2:112 harddrake2:121
+#: harddrake2:110 harddrake2:119
 #, c-format
 msgid "Type"
 msgstr "Тип"
 
-#: harddrake2:112
+#: harddrake2:110
 #, c-format
 msgid "type of the memory device"
 msgstr "тип мікросхеми пам'яті"
 
-#: harddrake2:113
+#: harddrake2:111
 #, c-format
 msgid "Speed"
 msgstr "Швидкодія"
 
-#: harddrake2:113
+#: harddrake2:111
 #, c-format
 msgid "Speed of the memory bank"
 msgstr "Швидкодія мікросхеми пам'яті"
 
-#: harddrake2:114
+#: harddrake2:112
 #, c-format
 msgid "Bank connections"
 msgstr "З'єднання мікросхеми"
 
-#: harddrake2:115
+#: harddrake2:113
 #, c-format
 msgid "Socket designation of the memory bank"
 msgstr "Призначення сокета для мікросхеми пам'яті"
 
-#: harddrake2:119
+#: harddrake2:117
 #, c-format
 msgid "Device file"
 msgstr "Файл пристрою"
 
-#: harddrake2:119
+#: harddrake2:117
 #, c-format
 msgid ""
 "the device file used to communicate with the kernel driver for the mouse"
 msgstr "пристрій файла використовується для зв'язку з драйвером ядра для миші"
 
-#: harddrake2:120
+#: harddrake2:118
 #, c-format
 msgid "Emulated wheel"
 msgstr "Емульоване коліщатко"
 
-#: harddrake2:120
+#: harddrake2:118
 #, c-format
 msgid "whether the wheel is emulated or not"
 msgstr "чи емулюється коліщатко, чи ні"
 
-#: harddrake2:121
+#: harddrake2:119
 #, c-format
 msgid "the type of the mouse"
 msgstr "тип миші"
 
-#: harddrake2:122
+#: harddrake2:120
 #, c-format
 msgid "the name of the mouse"
 msgstr "назва миші"
 
-#: harddrake2:123
+#: harddrake2:121
 #, c-format
 msgid "Number of buttons"
 msgstr "Кількість кнопок"
 
-#: harddrake2:123
+#: harddrake2:121
 #, c-format
 msgid "the number of buttons the mouse has"
 msgstr "кількість кнопок миші"
 
-#: harddrake2:124
+#: harddrake2:122
 #, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "тип шини, до якої під'єднано мишу"
 
-#: harddrake2:125
+#: harddrake2:123
 #, c-format
 msgid "Mouse protocol used by X11"
 msgstr "Протокол миші, що використовується X11"
 
-#: harddrake2:125
+#: harddrake2:123
 #, c-format
 msgid "the protocol that the graphical desktop use with the mouse"
 msgstr "протокол, який графічна стільниця використовує з мишею"
 
-#: harddrake2:132 harddrake2:141 harddrake2:148 harddrake2:156 harddrake2:337
+#: harddrake2:127
 #, c-format
 msgid "Identification"
 msgstr "Ідентифікація"
 
-#: harddrake2:133 harddrake2:149
+#: harddrake2:132 harddrake2:147
 #, c-format
 msgid "Connection"
 msgstr "Під'єднання"
@@ -2444,68 +2247,68 @@ msgstr "Характеристики"
 msgid "Device"
 msgstr "Пристрій: "
 
-#: harddrake2:152
+#: harddrake2:150
 #, c-format
 msgid "Partitions"
 msgstr "Розділи"
 
-#: harddrake2:157
+#: harddrake2:155
 #, c-format
 msgid "Features"
 msgstr "Можливості"
 
 #. -PO: please keep all "/" characters !!!
-#: harddrake2:180 logdrake:78
+#: harddrake2:178 logdrake:78
 #, c-format
 msgid "/_Options"
 msgstr "/Параметри"
 
-#: harddrake2:181 harddrake2:210 logdrake:80
+#: harddrake2:179 harddrake2:208 logdrake:80
 #, c-format
 msgid "/_Help"
 msgstr "/Довідка"
 
-#: harddrake2:185
+#: harddrake2:183
 #, c-format
 msgid "/Autodetect _printers"
 msgstr "/Користуватися автовизначенням друкарок"
 
-#: harddrake2:186
+#: harddrake2:184
 #, c-format
 msgid "/Autodetect _modems"
 msgstr "/Автовизначення модемів"
 
-#: harddrake2:187
+#: harddrake2:185
 #, c-format
 msgid "/Autodetect _jaz drives"
 msgstr "/Автоматично визначати драйвери jaz"
 
-#: harddrake2:188
+#: harddrake2:186
 #, c-format
 msgid "/Autodetect parallel _zip drives"
 msgstr "/Автовизначення паралельних приводів j_az"
 
-#: harddrake2:192
+#: harddrake2:190
 #, c-format
 msgid "Hardware Configuration"
 msgstr "Налаштування обладнання"
 
-#: harddrake2:199
+#: harddrake2:197
 #, c-format
 msgid "/_Quit"
 msgstr "/Вийти"
 
-#: harddrake2:212
+#: harddrake2:210
 #, c-format
 msgid "/_Fields description"
 msgstr "/Описи полів"
 
-#: harddrake2:214
+#: harddrake2:212
 #, c-format
 msgid "Harddrake help"
 msgstr "Довідка HardDrake"
 
-#: harddrake2:215
+#: harddrake2:213
 #, c-format
 msgid ""
 "Description of the fields:\n"
@@ -2514,12 +2317,12 @@ msgstr ""
 "Опис полів:\n"
 "\n"
 
-#: harddrake2:223
+#: harddrake2:221
 #, c-format
 msgid "Select a device!"
 msgstr "Виберіть пристрій !"
 
-#: harddrake2:223
+#: harddrake2:221
 #, c-format
 msgid ""
 "Once you've selected a device, you'll be able to see the device information "
@@ -2528,89 +2331,89 @@ msgstr ""
 "Після того, як Ви вибрали пристрій, зможете побачити інформацію про нього в "
 "полях, що відображаються у правому вікні (\"Інформація\")"
 
-#: harddrake2:229
+#: harddrake2:227
 #, c-format
 msgid "/_Report Bug"
 msgstr "/_R Повідомити про помилку"
 
-#: harddrake2:231
+#: harddrake2:229
 #, c-format
 msgid "/_About..."
 msgstr "/Про..."
 
-#: harddrake2:234
+#: harddrake2:232
 #, c-format
 msgid "Harddrake"
 msgstr "Harddrake"
 
-#: harddrake2:238
+#: harddrake2:236
 #, c-format
 msgid "This is HardDrake, a %s hardware configuration tool."
 msgstr "Це HardDrake - інструмент налаштування обладнання %s."
 
-#: harddrake2:271
+#: harddrake2:269
 #, c-format
 msgid "Detected hardware"
 msgstr "Знайдене обладнання"
 
-#: harddrake2:274 scannerdrake:286
+#: harddrake2:272 scannerdrake:286
 #, c-format
 msgid "Information"
 msgstr "Інформація"
 
-#: harddrake2:276
+#: harddrake2:274
 #, c-format
 msgid "Set current driver options"
 msgstr "Встановити параметри поточного драйвера"
 
-#: harddrake2:283
+#: harddrake2:281
 #, c-format
 msgid "Run config tool"
 msgstr "Запустити інструмент налаштування"
 
-#: harddrake2:303
+#: harddrake2:301
 #, c-format
 msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr ""
 "Клацніть на пристрої в лівому дереві, щоб побачити інформацію про нього."
 
-#: harddrake2:324 notify-x11-free-driver-switch:13
+#: harddrake2:322 notify-x11-free-driver-switch:13
 #, c-format
 msgid "unknown"
 msgstr "невідома"
 
-#: harddrake2:325
+#: harddrake2:323
 #, c-format
 msgid "Unknown"
 msgstr "Невідомий"
 
-#: harddrake2:345
+#: harddrake2:343
 #, c-format
 msgid "Misc"
 msgstr "Misc"
 
-#: harddrake2:429
+#: harddrake2:427
 #, c-format
 msgid "secondary"
 msgstr "вторинний"
 
-#: harddrake2:429
+#: harddrake2:427
 #, c-format
 msgid "primary"
 msgstr "первинний"
 
-#: harddrake2:433
+#: harddrake2:431
 #, c-format
 msgid "burner"
 msgstr "записувач"
 
-#: harddrake2:433
+#: harddrake2:431
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: harddrake2:531
+#: harddrake2:535
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Наступні пакунки повинні бути встановлені:\n"
@@ -2620,13 +2423,13 @@ msgstr "Наступні пакунки повинні бути встановл
 msgid "LocaleDrake"
 msgstr "LocaleDrake"
 
-#: localedrake:44
+#: localedrake:46
 #, c-format
 msgid "You should install the following packages: %s"
 msgstr "Вам потрібно встановити наступні пакунки: %s"
 
 #. -PO: the following is used to combine packages names. eg: "initscripts, harddrake, yudit"
-#: localedrake:47
+#: localedrake:49
 #, c-format
 msgid ", "
 msgstr ", "
@@ -2938,7 +2741,7 @@ msgstr "Помічник успішно вимкнув попередження 
 msgid "Save as.."
 msgstr "Зберегти як.."
 
-#: notify-x11-free-driver-switch:15
+#: notify-x11-free-driver-switch:20
 #, c-format
 msgid ""
 "The proprietary driver for your graphic card can not be found, the system is "
@@ -3494,38 +3297,38 @@ msgstr ""
 "Неможливо встановити пакунки, необхідні для організації спільного доступу до "
 "сканерів."
 
-#: service_harddrake:138
+#: service_harddrake:139
 #, c-format
 msgid "The graphic card '%s' is no more supported by the '%s' driver"
 msgstr "Графічна картка «%s» вже не підтримується драйвером «%s»"
 
-#: service_harddrake:167
+#: service_harddrake:181
 #, c-format
 msgid "The proprietary kernel driver was not found for '%s' X.org driver"
 msgstr ""
 "Для драйвера X.org «%s» не знайдено відповідного пропрієтарного драйвера ядра."
 
-#: service_harddrake:206
+#: service_harddrake:220
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Деякі пристрої в обладнанні класу \"%s\" було видалено:\n"
 
-#: service_harddrake:135
+#: service_harddrake:221
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- було видалено %s\n"
 
-#: service_harddrake:138
+#: service_harddrake:224
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "Деякі пристрої було додано: %s\n"
 
-#: service_harddrake:139
+#: service_harddrake:225
 #, c-format
 msgid "- %s was added\n"
 msgstr "- було додано- %s\n"
 
-#: service_harddrake:264
+#: service_harddrake:344
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "Відбувається визначення пристроїв"
@@ -3567,6 +3370,132 @@ msgstr "Налаштування мови і країни"
 #: ../menu/localedrake-user.desktop.in.h:2
 msgid "Regional Settings"
 msgstr "Регіональні налаштування"
+
+#~ msgid ""
+#~ "Display theme\n"
+#~ "under console"
+#~ msgstr ""
+#~ "Показувати тему\n"
+#~ "над консоллю"
+
+#~ msgid "Create new theme"
+#~ msgstr "Створити нову тему"
+
+#~ msgid "X coordinate of text box"
+#~ msgstr "Координата X текстового вікна"
+
+#~ msgid "Y coordinate of text box"
+#~ msgstr "Координата Y текстового вікна"
+
+#~ msgid "Text box width"
+#~ msgstr "Ширина текстового вікна"
+
+#~ msgid "Text box height"
+#~ msgstr "Висота текстового вікна"
+
+#~ msgid ""
+#~ "The progress bar X coordinate\n"
+#~ "of its upper left corner"
+#~ msgstr ""
+#~ "Координата x верхнього лівого\n"
+#~ "кута індикатора поступу"
+
+#~ msgid ""
+#~ "The progress bar Y coordinate\n"
+#~ "of its upper left corner"
+#~ msgstr ""
+#~ "Координата y верхнього лівого\n"
+#~ "кута індикатора поступу"
+
+#~ msgid "The width of the progress bar"
+#~ msgstr "Ширина індикатора поступу"
+
+#~ msgid "The height of the progress bar"
+#~ msgstr "Висота індикатора поступу"
+
+#~ msgid "X coordinate of the text"
+#~ msgstr "Координата X тексту"
+
+#~ msgid "Y coordinate of the text"
+#~ msgstr "Координата Y тексту"
+
+#~ msgid "Text box transparency"
+#~ msgstr "Прозорість текстового вікна"
+
+#~ msgid "Progress box transparency"
+#~ msgstr "Прозорість вікна індикатора поступу"
+
+#~ msgid "Text size"
+#~ msgstr "Розмір тексту"
+
+#~ msgid "Progress Bar"
+#~ msgstr "Смуга поступу"
+
+#~ msgid "Choose progress bar color 1"
+#~ msgstr "Виберіть колір 1 індикатора поступу"
+
+#~ msgid "Choose progress bar color 2"
+#~ msgstr "Виберіть колір 2 індикатора поступу"
+
+#~ msgid "Choose progress bar background"
+#~ msgstr "Виберіть тло індикатора поступу"
+
+#~ msgid "Gradient type"
+#~ msgstr "Тип градієнту"
+
+#~ msgid "Text"
+#~ msgstr "Текст"
+
+#~ msgid "Choose text color"
+#~ msgstr "Виберіть колір тексту"
+
+#~ msgid "Choose picture"
+#~ msgstr "Виберіть малюнок"
+
+#~ msgid "Silent bootsplash"
+#~ msgstr "Спрощене завантаження"
+
+#~ msgid "Choose text zone color"
+#~ msgstr "Виберіть колір текстової області"
+
+#~ msgid "Text color"
+#~ msgstr "Колір тексту"
+
+#~ msgid "Background color"
+#~ msgstr "Колір тла"
+
+#~ msgid "Verbose bootsplash"
+#~ msgstr "Детальне завантаження"
+
+#~ msgid "Theme name"
+#~ msgstr "Назва теми"
+
+#~ msgid "Final resolution"
+#~ msgstr "Кінцева роздільна здатність"
+
+#~ msgid "Display logo on Console"
+#~ msgstr "Показувати логотип в консолі"
+
+#~ msgid "Save theme"
+#~ msgstr "Зберегти тему"
+
+#~ msgid "Please enter a theme name"
+#~ msgstr "Введіть назву теми"
+
+#~ msgid "Please select a splash image"
+#~ msgstr "Виберіть малюнок для заставки"
+
+#~ msgid "saving Bootsplash theme..."
+#~ msgstr "зберігається тема Bootsplash..."
+
+#~ msgid "Unable to load image file %s"
+#~ msgstr "Неможливо завантажити файл малюнку %s"
+
+#~ msgid "choose image"
+#~ msgstr "виберіть малюнок"
+
+#~ msgid "Color selection"
+#~ msgstr "Вибір кольору"
 
 #~ msgid "Coma bug"
 #~ msgstr "Coma bug"
