@@ -1,4 +1,4 @@
-VERSION = 2010.0
+VERSION = 2010.1
 PRODUCT = drakx-installer-advertising
 
 THEME = pwp
