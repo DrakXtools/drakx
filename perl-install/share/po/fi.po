@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-fi\n"
 "POT-Creation-Date: 2010-05-01 16:46+0200\n"
-"PO-Revision-Date: 2010-02-18 13:39+0200\n"
+"PO-Revision-Date: 2010-05-02 08:45+0200\n"
 "Last-Translator: Jani Välimaa <wally@mandriva.org>\n"
 "Language-Team: Finnish <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -272,7 +272,7 @@ msgstr "Xen-lisäys"
 #: any.pm:536
 #, c-format
 msgid "Requires password to boot"
-msgstr ""
+msgstr "Käynnistys vaati salasanan"
 
 #: any.pm:538
 #, c-format
@@ -1686,12 +1686,12 @@ msgid "Logical volume name "
 msgstr "Loogisen taltion nimi "
 
 #: diskdrake/interactive.pm:507
-#, fuzzy, c-format
+#, c-format
 msgid "Encrypt partition"
-msgstr "Salausalgoritmi"
+msgstr "Salaa osio"
 
 #: diskdrake/interactive.pm:508
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption key "
 msgstr "Salausavain"
 
@@ -1706,9 +1706,9 @@ msgid "The encryption keys do not match"
 msgstr "Salausavaimet eivät täsmää"
 
 #: diskdrake/interactive.pm:521
-#, fuzzy, c-format
+#, c-format
 msgid "Missing encryption key"
-msgstr "Tiedostojärjestelmän salausavain"
+msgstr "Salausavain puuttuu"
 
 #: diskdrake/interactive.pm:541
 #, c-format
@@ -2885,15 +2885,15 @@ msgstr ""
 "On lisättävä /boot-osio, jotta voidaan käyttää LILO:a tai GRUB:a"
 
 #: fsedit.pm:437
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
-"Valittiin ohjelmallinen RAID-osio juuriosioksi (/).\n"
-"Käynnistyslataimet eivät osaa käsitellä tätä ilman /boot-osiota.\n"
-"On lisättävä /boot-osio, jotta voidaan käyttää LILO:a tai GRUB:a"
+"Valittiin salattu juuriosio (/). Käynnistyslataimet eivät\n"
+"osaa käsitellä salattua juuriosiota ilman /boot-osiota.\n"
+"Varmista, että käytössä on /boot-osio"
 
 #: fsedit.pm:443 fsedit.pm:461
 #, c-format
@@ -6427,7 +6427,7 @@ msgstr "Tunnus tai sähköpostiosoite:"
 #: services.pm:19
 #, c-format
 msgid "Listen and dispatch ACPI events from the kernel"
-msgstr ""
+msgstr "Kuuntelee ja ilmoittaa ytimen ACPI-tapahtumat"
 
 #: services.pm:20
 #, c-format
@@ -6437,7 +6437,7 @@ msgstr "Käynnistä ALSA-äänijärjestelmä."
 #: services.pm:21
 #, c-format
 msgid "Anacron is a periodic command scheduler."
-msgstr "Anacron on ajoitettujen komentojen ajastaja.."
+msgstr "Anacron on ajoitettujen komentojen ajastaja."
 
 #: services.pm:22
 #, c-format
@@ -6461,12 +6461,12 @@ msgstr ""
 #: services.pm:26
 #, c-format
 msgid "Avahi is a ZeroConf daemon which implements an mDNS stack"
-msgstr ""
+msgstr "Avahi on ZeroConf-taustaprosessi, joka toteuttaa mDNS-pinon"
 
 #: services.pm:27
 #, c-format
 msgid "Set CPU frequency settings"
-msgstr ""
+msgstr "Asettaa prosessorin kellotaajuuden asetukset"
 
 #: services.pm:28
 #, c-format
@@ -6517,6 +6517,7 @@ msgid ""
 "applications and \n"
 "scripts can access the LCD via a simple API."
 msgstr ""
+"G15Daemon sallii käyttäjien käyttää kaikkia näppäimistön extra-näppäimiä"
 
 #: services.pm:40
 #, c-format
@@ -6570,12 +6571,12 @@ msgstr ""
 #: services.pm:51
 #, c-format
 msgid "Automates a packet filtering firewall with ip6tables"
-msgstr ""
+msgstr "Automatisoi paketteja suodattavan palomuurin ip6tables:n avulla"
 
 #: services.pm:52
 #, c-format
 msgid "Automates a packet filtering firewall with iptables"
-msgstr ""
+msgstr "Automatisoi paketteja suodattavan palomuurin iptables:n avulla"
 
 #: services.pm:53
 #, c-format
@@ -6592,6 +6593,7 @@ msgstr ""
 msgid ""
 "Evenly distributes IRQ load across multiple CPUs for enhanced performance"
 msgstr ""
+"Jakaa IRQ-kuorman tasaisesti usean prosessorin kesken parantaen suorituskykyä"
 
 #: services.pm:56
 #, c-format
@@ -6623,7 +6625,7 @@ msgstr ""
 #: services.pm:62
 #, c-format
 msgid "Tweaks system behavior to extend battery life"
-msgstr ""
+msgstr "Muokkaa järjestelmän käyttäytymistä parantaen akun kestoa"
 
 #: services.pm:63
 #, c-format
@@ -6655,12 +6657,12 @@ msgstr ""
 #: services.pm:69
 #, c-format
 msgid "Monitors the network (Interactive Firewall and wireless"
-msgstr ""
+msgstr "Valvoo verkkoa"
 
 #: services.pm:70
 #, c-format
 msgid "Software RAID monitoring and management"
-msgstr ""
+msgstr "Softa-RAID:n valvonta ja hallinta"
 
 #: services.pm:71
 #, c-format
@@ -6674,7 +6676,7 @@ msgstr ""
 #: services.pm:72
 #, c-format
 msgid "Enables MSEC security policy on system startup"
-msgstr ""
+msgstr "Ottaa MSEC-tietoturvakäytännöt käyttöön järjestelmän käynnistyessä"
 
 #: services.pm:73
 #, c-format
@@ -6688,7 +6690,7 @@ msgstr ""
 #: services.pm:74
 #, c-format
 msgid "Initializes network console logging"
-msgstr ""
+msgstr "Käynnistää verkon yli tapahtuvan ytimen viestien kirjaamisen"
 
 #: services.pm:75
 #, c-format
@@ -6711,12 +6713,12 @@ msgstr ""
 #: services.pm:79
 #, c-format
 msgid "Requires network to be up if enabled"
-msgstr ""
+msgstr "Vaatii verkon käynnistymisen, jos verkko on otettu käyttöön"
 
 #: services.pm:80
 #, c-format
 msgid "Wait for the hotplugged network to be up"
-msgstr ""
+msgstr "Odottaa hotplug-kytketyn verkon käynnistymistä"
 
 #: services.pm:81
 #, c-format
@@ -6760,7 +6762,7 @@ msgstr "Tuki OKI 4w -yhteensopiville Windows-tulostimille."
 #: services.pm:90
 #, c-format
 msgid "Checks if a partition is close to full up"
-msgstr ""
+msgstr "Tarkistaa osioiden vapaan levytilan"
 
 #: services.pm:91
 #, c-format
@@ -6790,7 +6792,7 @@ msgstr ""
 #: services.pm:97
 #, c-format
 msgid "Reserves some TCP ports"
-msgstr ""
+msgstr "Varaa joitakin TCP-portteja"
 
 #: services.pm:98
 #, c-format
@@ -6820,9 +6822,9 @@ msgstr ""
 "tietyn tyyppisten sovellusten, kuten Oracle tai DVD-soitin, käyttöön"
 
 #: services.pm:103
-#, fuzzy, c-format
+#, c-format
 msgid "Nameserver information manager"
-msgstr "Kiintolevyn tiedot"
+msgstr "Nimipalvelintietojen hallintasovellus"
 
 #: services.pm:104
 #, c-format
@@ -6831,9 +6833,10 @@ msgid ""
 "the RIP protocol. While RIP is widely used on small networks, more complex\n"
 "routing protocols are needed for complex networks."
 msgstr ""
-"Routed-palvelin mahdollistaa automaattiset IP-reititystaulun päivitykset\n"
-"RIP-protokollalla. Vaikka RIP-protokolla on paljon käytetty pienissä\n"
-"verkoissa, monimutkaisemmat verkot vaativat parempia reititysprotokollia."
+"Routed-taustaprosessi mahdollistaa automaattiset IP-reititystaulun "
+"päivitykset\n"
+"RIP-protokollalla. Vaikka RIP-protokollaa käytetään paljon pienissä\n"
+"verkoissa, vaatii monimutkaisemmat verkot parempia reititysprotokollia."
 
 #: services.pm:107
 #, c-format
@@ -6842,16 +6845,16 @@ msgid ""
 "performance metrics for any machine on that network."
 msgstr ""
 "Rstat-protokolla mahdollistaa verkon käyttäjien hakea\n"
-"lisätietoja minkä tahansa verkon koneen suorituskyvystä."
+"lisätietoja minkä tahansa verkon laitteen suorituskyvystä."
 
 #: services.pm:109
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages to various "
 "system log files.  It is a good idea to always run rsyslog."
 msgstr ""
-"Syslog on tapa, jolla monet palvelut kirjoittavat viestinsä talteen\n"
-"useisiin lokitiedostoihin. On järkevää käyttää syslog-ohjelmaa."
+"Syslog on palvelu, jonka avulla monet taustaprosessit kirjoittavat viestit "
+"järjestelmän lokitiedostoihin. On järkevää käyttää syslog-ohjelmaa aina."
 
 #: services.pm:110
 #, c-format
@@ -6859,8 +6862,8 @@ msgid ""
 "The rusers protocol allows users on a network to identify who is\n"
 "logged in on other responding machines."
 msgstr ""
-"Rusers-protokolla antaa verkon käyttäjille mahdollisuuden\n"
-"tunnistaa, ketkä ovat kirjautuneina eri koneissa."
+"Rusers-protokolla sallii verkon käyttäjien tunnistaa muihin\n"
+"koneisiin kirjatuneet käyttäjät."
 
 #: services.pm:112
 #, c-format
@@ -6882,7 +6885,7 @@ msgstr ""
 #: services.pm:115
 #, c-format
 msgid "Packet filtering firewall"
-msgstr ""
+msgstr "Paketteja suodattava palomuuri"
 
 #: services.pm:116
 #, c-format
@@ -6896,12 +6899,12 @@ msgstr ""
 #: services.pm:117
 #, c-format
 msgid "Launch the sound system on your machine"
-msgstr "Käynnistä tietokoneen äänijärjestelmä"
+msgstr "Käynnistää tietokoneen äänijärjestelmän"
 
 #: services.pm:118
 #, c-format
 msgid "layer for speech analysis"
-msgstr ""
+msgstr "Puheentunnistus"
 
 #: services.pm:119
 #, c-format
@@ -6909,8 +6912,8 @@ msgid ""
 "Secure Shell is a network protocol that allows data to be exchanged over a "
 "secure channel between two computers"
 msgstr ""
-"SSH on verkkoprotokolla, joka sallii tiedon välittämisen\n"
-"salattuna kahden koneen välillä."
+"SSH on verkkoprotokolla, joka mahdollistaa tiedon siirtämisen salattuna "
+"kahden koneen välillä."
 
 #: services.pm:120
 #, c-format
@@ -6918,13 +6921,14 @@ msgid ""
 "Syslog is the facility by which many daemons use to log messages\n"
 "to various system log files.  It is a good idea to always run syslog."
 msgstr ""
-"Syslog on tapa, jolla monet palvelut kirjoittavat viestinsä talteen\n"
-"useisiin lokitiedostoihin. On järkevää käyttää syslog-ohjelmaa."
+"Syslog on palvelu, jonka avulla monet taustaprosessit kirjoittavat\n"
+"viestit järjestelmän lokitiedostoihin. On järkevää käyttää\n"
+"syslog-ohjelmaa aina."
 
 #: services.pm:122
 #, c-format
 msgid "Moves the generated persistent udev rules to /etc/udev/rules.d"
-msgstr ""
+msgstr "Siirtää luodut pysyvät udev-säännöt hakemistoon /etc/udev/rules.d"
 
 #: services.pm:123
 #, c-format
@@ -6934,7 +6938,7 @@ msgstr "Lataa USB-laitteiden ajurit."
 #: services.pm:124
 #, c-format
 msgid "A lightweight network traffic monitor"
-msgstr ""
+msgstr "Kevyt verkkoliikenteen tarkkailusovellus"
 
 #: services.pm:125
 #, c-format
@@ -6999,7 +7003,7 @@ msgstr "käynnissä"
 #: services.pm:234
 #, c-format
 msgid "stopped"
-msgstr "pysähtynyt"
+msgstr "pysäytetty"
 
 #: services.pm:239
 #, c-format
