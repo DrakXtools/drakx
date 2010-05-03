@@ -2,20 +2,20 @@
 # Copyright (C) 1999,2003, 2004, 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
 #
 # Radek Vybiral <Radek.Vybiral@vsb.cz>, 2000, 2001-2003.
-# Michal Bukovjan <bukm@centrum.cz>, 2002-2003, 2004, 2005, 2006, 2007, 2008, 2009.
+# Michal Bukovjan <bukm@centrum.cz>, 2002-2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "POT-Creation-Date: 2010-05-01 16:46+0200\n"
-"PO-Revision-Date: 2009-10-12 21:24+0200\n"
+"PO-Revision-Date: 2010-05-03 22:00+0200\n"
 "Last-Translator: Michal Bukovjan <bukm@centrum.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 0.3\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 1.0\n"
 
 #: any.pm:252 any.pm:947 diskdrake/interactive.pm:647
 #: diskdrake/interactive.pm:864 diskdrake/interactive.pm:924
@@ -265,7 +265,7 @@ msgstr "Připojit Xen"
 #: any.pm:536
 #, c-format
 msgid "Requires password to boot"
-msgstr ""
+msgstr "Vyžaduje pro zavedení heslo"
 
 #: any.pm:538
 #, c-format
@@ -443,7 +443,7 @@ msgstr "Správa uživatelů"
 #: any.pm:883
 #, c-format
 msgid "Enable guest account"
-msgstr ""
+msgstr "Povolit účet hosta"
 
 #: any.pm:884 authentication.pm:237
 #, c-format
@@ -1387,9 +1387,9 @@ msgid "Unknown"
 msgstr "Neznámý"
 
 #: diskdrake/hd_gtk.pm:388
-#, fuzzy, c-format
+#, c-format
 msgid "Ext4"
-msgstr "Konec"
+msgstr "Ext4"
 
 #: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
@@ -1668,14 +1668,14 @@ msgid "Logical volume name "
 msgstr "Název logického svazku "
 
 #: diskdrake/interactive.pm:507
-#, fuzzy, c-format
+#, c-format
 msgid "Encrypt partition"
-msgstr "Šifrovací algoritmus"
+msgstr "Šifrovat oddíl"
 
 #: diskdrake/interactive.pm:508
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption key "
-msgstr "Šifrovací klíč"
+msgstr "Šifrovací klíč "
 
 #: diskdrake/interactive.pm:509 diskdrake/interactive.pm:1487
 #, c-format
@@ -1688,9 +1688,9 @@ msgid "The encryption keys do not match"
 msgstr "Šifrovací klíče se neshodují"
 
 #: diskdrake/interactive.pm:521
-#, fuzzy, c-format
+#, c-format
 msgid "Missing encryption key"
-msgstr "Klíč pro šifrovaný souborový systém"
+msgstr "Chybí šifrovací klíč"
 
 #: diskdrake/interactive.pm:541
 #, c-format
@@ -2752,9 +2752,9 @@ msgstr ""
 "Až skončíte, nezapomeňte uložit změny pomocí 'w'"
 
 #: fs/partitioning_wizard.pm:402
-#, fuzzy, c-format
+#, c-format
 msgid "Ext2/3/4"
-msgstr "Ext3"
+msgstr "Ext2/3/4"
 
 #: fs/partitioning_wizard.pm:432 fs/partitioning_wizard.pm:572
 #, c-format
@@ -2852,13 +2852,13 @@ msgstr ""
 "/boot. Ujistěte se prosím, že jste tento oddíl přidali"
 
 #: fsedit.pm:437
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
-"Zvolili jste softwarový RAID oddíl jako kořenový oddíl (/).\n"
+"Zvolili jste šifrovaný oddíl jako kořenový oddíl (/).\n"
 "S tím se není schopný vypořádat žádný zaváděcí program bez použití oddílu\n"
 "/boot. Ujistěte se prosím, že jste tento oddíl přidali"
 
@@ -3217,7 +3217,7 @@ msgstr ""
 "Zde si pro vaši zvukovou (%s) kartu můžete vybrat alternativní ovladač (buď "
 "OSS nebo ALSA)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
@@ -6266,7 +6266,7 @@ msgstr "Přihlášení nebo email:"
 #: services.pm:19
 #, c-format
 msgid "Listen and dispatch ACPI events from the kernel"
-msgstr ""
+msgstr "Naslouchat a vyřizovat události ACPI z jádra"
 
 #: services.pm:20
 #, c-format
@@ -6299,12 +6299,12 @@ msgstr ""
 #: services.pm:26
 #, c-format
 msgid "Avahi is a ZeroConf daemon which implements an mDNS stack"
-msgstr ""
+msgstr "Avahi je démon ZeroConf implementující vrstvu mDNS"
 
 #: services.pm:27
 #, c-format
 msgid "Set CPU frequency settings"
-msgstr ""
+msgstr "Nastavit volby frekvence CPU"
 
 #: services.pm:28
 #, c-format
@@ -6354,6 +6354,14 @@ msgid ""
 "applications and \n"
 "scripts can access the LCD via a simple API."
 msgstr ""
+"G15Daemon umožňuje uživatelům přístup ke všem dodatečným klávesám\n"
+"tím, že je dekóduje a vrací je zpět do jádra přes ovladač UINPUT. Tento "
+"ovladač musí\n"
+"být načten dřív, než se začne používat g15daemon pro přístup ke klávesnici. "
+"Rovněž je\n"
+"podporováno G15 LCD. Pokud nejsou aktivní žádní další klienti, zobrazuje "
+"g15daemon hodiny.\n"
+"Klientské aplikace a skripty mohou přistupovat k LCD pomocí jednoduchého API."
 
 #: services.pm:40
 #, c-format
@@ -6405,12 +6413,12 @@ msgstr ""
 #: services.pm:51
 #, c-format
 msgid "Automates a packet filtering firewall with ip6tables"
-msgstr ""
+msgstr "Automatizuje firewall pro filtrování paketů pomocí ip6tables"
 
 #: services.pm:52
 #, c-format
 msgid "Automates a packet filtering firewall with iptables"
-msgstr ""
+msgstr "Automatizuje firewall pro filtrování paketů pomocí iptables"
 
 #: services.pm:53
 #, c-format
@@ -6425,7 +6433,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Evenly distributes IRQ load across multiple CPUs for enhanced performance"
-msgstr ""
+msgstr "Rovnoměrně rozděluje zátěž IRQ mezi více procesorů pro lepší výkon"
 
 #: services.pm:56
 #, c-format
@@ -6455,7 +6463,7 @@ msgstr "Automatická detekce a konfigurace hardware při spuštění."
 #: services.pm:62
 #, c-format
 msgid "Tweaks system behavior to extend battery life"
-msgstr ""
+msgstr "Upravuje chování systému pro delší životnost baterie"
 
 #: services.pm:63
 #, c-format
@@ -6487,12 +6495,12 @@ msgstr ""
 #: services.pm:69
 #, c-format
 msgid "Monitors the network (Interactive Firewall and wireless"
-msgstr ""
+msgstr "Sleduje síť (interaktivní firewall a bezdrátovou"
 
 #: services.pm:70
 #, c-format
 msgid "Software RAID monitoring and management"
-msgstr ""
+msgstr "Sledování a správa softwarového RAIDu"
 
 #: services.pm:71
 #, c-format
@@ -6505,7 +6513,7 @@ msgstr ""
 #: services.pm:72
 #, c-format
 msgid "Enables MSEC security policy on system startup"
-msgstr ""
+msgstr "Zapne bezpečnostní politiku MSEC při startu systému"
 
 #: services.pm:73
 #, c-format
@@ -6519,7 +6527,7 @@ msgstr ""
 #: services.pm:74
 #, c-format
 msgid "Initializes network console logging"
-msgstr ""
+msgstr "Inicializuje zaznamenávání síťové konzole"
 
 #: services.pm:75
 #, c-format
@@ -6543,12 +6551,12 @@ msgstr ""
 #: services.pm:79
 #, c-format
 msgid "Requires network to be up if enabled"
-msgstr ""
+msgstr "Vyžaduje běžící síť, pokud je zapnuto"
 
 #: services.pm:80
 #, c-format
 msgid "Wait for the hotplugged network to be up"
-msgstr ""
+msgstr "Čekat na automaticky zapnutou síť"
 
 #: services.pm:81
 #, c-format
@@ -6591,7 +6599,7 @@ msgstr "Podpora pro OKI 4w a kompatibilní wintiskárny."
 #: services.pm:90
 #, c-format
 msgid "Checks if a partition is close to full up"
-msgstr ""
+msgstr "Kontroluje, zda-li je oddíl blízko zaplnění"
 
 #: services.pm:91
 #, c-format
@@ -6621,7 +6629,7 @@ msgstr ""
 #: services.pm:97
 #, c-format
 msgid "Reserves some TCP ports"
-msgstr ""
+msgstr "Rezervuje některé TCP porty"
 
 #: services.pm:98
 #, c-format
@@ -6649,9 +6657,9 @@ msgstr ""
 "pro aplikace jako je Oracle nebo DVD přehrávač"
 
 #: services.pm:103
-#, fuzzy, c-format
+#, c-format
 msgid "Nameserver information manager"
-msgstr "Informace o pevném disku"
+msgstr "Správce informací o jmenných serverech"
 
 #: services.pm:104
 #, c-format
@@ -6675,14 +6683,13 @@ msgstr ""
 "strojů připojených k síti."
 
 #: services.pm:109
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages to various "
 "system log files.  It is a good idea to always run rsyslog."
 msgstr ""
-"Syslog je program pomocí něhož zaznamenává mnoho démonů správy do "
-"systémových\n"
-"log souborů. Je dobré mít spuštěný syslog."
+"Syslog je program, pomocí něhož zaznamenává mnoho démonů zprávy do "
+"různých systémových souborů se záznamy. Je dobré mít rsyslog vždy spuštěný."
 
 #: services.pm:110
 #, c-format
@@ -6714,7 +6721,7 @@ msgstr ""
 #: services.pm:115
 #, c-format
 msgid "Packet filtering firewall"
-msgstr ""
+msgstr "Firewall filtrující pakety"
 
 #: services.pm:116
 #, c-format
@@ -6733,7 +6740,7 @@ msgstr "Spustit zvukový systém při startu"
 #: services.pm:118
 #, c-format
 msgid "layer for speech analysis"
-msgstr ""
+msgstr "vrstva pro analýzu řeči"
 
 #: services.pm:119
 #, c-format
@@ -6757,7 +6764,7 @@ msgstr ""
 #: services.pm:122
 #, c-format
 msgid "Moves the generated persistent udev rules to /etc/udev/rules.d"
-msgstr ""
+msgstr "Přesunuje generovaná trvalá pravidla udev do /etc/udev/rules.d"
 
 #: services.pm:123
 #, c-format
@@ -6767,7 +6774,7 @@ msgstr "Nahrát ovladače pro usb zařízení."
 #: services.pm:124
 #, c-format
 msgid "A lightweight network traffic monitor"
-msgstr ""
+msgstr "Jednoduché sledování síťového provozu"
 
 #: services.pm:125
 #, c-format
