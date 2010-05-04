@@ -191,7 +191,7 @@ our %l = (
     loopback => [ qw(isofs loop squashfs) ],
     local => [
       if_(arch() =~ /^ppc/, qw(hfs)),
-      qw(reiserfs reiser4 jfs xfs ntfs vfat ext3 ext4 btrfs crc32c),
+      qw(reiserfs reiser4 jfs xfs ntfs vfat ext3 ext4 btrfs),
     ],
     various => [ qw(romfs ufs unionfs) ],
 
@@ -304,6 +304,8 @@ our %l = (
 
       'cryptoloop', 'aes-i586', 'aes-x86_64', 'aes_generic',
       if_(arch() =~ /sparc/, 'openprom'),
+
+      qw(crc32c crc32c-intel),
       
       qw(evdev), qw(usblp printer), 'floppy',
 
