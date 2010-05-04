@@ -176,7 +176,7 @@ sub entry {
     # Try to access directly the device
     # Now device mapper devices are links and do not appear in /proc or /sys
     unless ($type) {
-	if (-e "/dev/$_") {
+	if (-e "$::prefix/dev/$_") {
 	    my (undef,undef,$mode,undef,undef,undef,$rdev,undef) = stat("$::prefix/dev/$_");
 	    ($major, $minor) = unmakedev($rdev);
 	    $type = $mode & c::S_IFMT();
