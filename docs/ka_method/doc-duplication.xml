@@ -268,18 +268,19 @@ bin/  dev/  etc/  ka/  lib/  modules/  proc/  sbin/  squashfs-root/  tmp/  usr/ 
 </screen>
       </para>
       <para>
-	  Go in the <emphasis role="bold">/mnt/ka/ka</emphasis> directory, and see all new files available. All those files are needed to do a <emphasis role="bold">KA</emphasis> duplication process. We will explain now the rule of each of them.i You can modify all them, those files will be copied onto the directory <emphasis role="bold">/tmp/stage2</emphasis> of the client node.
+	  Go in the <emphasis role="bold">/mnt/ka/ka</emphasis> directory, and see all new files available. All those files are needed to do a <emphasis role="bold">KA</emphasis> duplication process. We will explain now the rule of each of them. You can modify all them, those files will be copied in the directory <emphasis role="bold">/tmp/stage2</emphasis> of the client node of the duplication process (second step).
       </para>
       <sect3>
 	<title>ka-d.sh</title>
 	<para>
-	  This is the master script to declare a node as a golden node. This script takes a lot of arguments.
+		This is the master script to declare a node as a golden node. This script takes a lot of arguments. This script should be run
+		on the host wich have the <emphasis role="bold">/mnt/ka</emphasis> directory.
 <screen>
     -h, --help : display this message
     -n num : specify the number of (destination) nodes
     -x dir : exclude directory
     -X sdb|sdc : exclude sdb for the replication
-    -m drive : copy the master boot record (for windows) of this drive
+    -m drive : copy the master boot record (for windows) of this drive (not really tested yet)
     -M drive file : use 'file' as master boot record (must be 446 bytes long) for the specified drive
     -D partition : also copy partition 'partition'
     -p drive pdesc : use 'pdesc' file as partition scheme (see doc) for the specified drive
@@ -292,7 +293,7 @@ bin/  dev/  etc/  ka/  lib/  modules/  proc/  sbin/  squashfs-root/  tmp/  usr/ 
       <sect3>
         <title>replication.conf</title>
 	<para>
-	  This file contain all variables needed by other scripts. It also tries to get information like IP address.
+	  This file contains all variables needed by other scripts. It also tries to get information like IP address.
 	</para>
       </sect3>
       <sect3>
@@ -302,22 +303,20 @@ bin/  dev/  etc/  ka/  lib/  modules/  proc/  sbin/  squashfs-root/  tmp/  usr/ 
 	  This file must follow some rules: one line per partition, with two fields : type of partition and size in megabytes.
 	  The  type  can be linux, swap, extended. Other types can be obtained by appending their hexadecimal number to 'type'.
 	  For example linux is the same as type83. The size is either a number of megabytes, or the keyword fill (to take all
-	  available space). The logical  partitions must have the logical keyword.
+	  available space). The logical  partitions must have the logical keyword. Do a <emphasis role="bold">man ka-d</emphasis> for more help.
 	</para>
       </sect3>
       <sect3>
 	<title>gen_modprobe_conf.pl</title>
 	<para>
-	  This script create a basic output like the content of the<emphasis role="bold">/etc/modprobe.conf</emphasis> file. Drawbacks
+	  This script creates a basic output like the content of the<emphasis role="bold">/etc/modprobe.conf</emphasis> file. Drawbacks
 	  this file must be updated for each new modules available in the kernel (based on the <emphasis role="bold">kernel/list_modules.pm</emphasis> file).
 	</para>
       </sect3>
       <sect3>
 	<title>ka-d-client</title>
 	<para>
-	  The <emphasis role="bold">ka-d-client</emphasis> binary file is used to get stage2 with the <emphasis role="bold">KA</emphasis> method, and after
-	  get the whole system. The important argument is the <emphasis role="bold">-s</emphasis> session name. A <emphasis role="bold">KA</emphasis>
-	  can only connect to a specific session (getstage2, kainstall ...). The code source is available in the ka-deploy-0.92 SRPM.
+	  The <emphasis role="bold">ka-d-client</emphasis> binary file is used to get stage2 with the <emphasis role="bold">KA</emphasis> method, and after get the whole system. The important argument is the <emphasis role="bold">-s</emphasis> session name. A <emphasis role="bold">KA</emphasis> can only connect to a specific session (getstage2, kainstall ...). The code source is available in the ka-deploy SRPM.
 	</para>
       </sect3>
       <sect3>
@@ -348,7 +347,7 @@ bin/  dev/  etc/  ka/  lib/  modules/  proc/  sbin/  squashfs-root/  tmp/  usr/ 
       <sect3>
         <title>make_initrd_grub</title>
 	<para>
-	  Restore and reload the Grub bootloader in the <emphasis role="bold">/mnt/disk</emphasis> directory. It's a very basic script, and perhaps use the <emphasis role="bold">restore_bootloader</emphasis> of the Mandriva Linux Rescue should be a better idea.	</para>
+	  Restore and reload the Grub bootloader in the <emphasis role="bold">/mnt/disk</emphasis> directory. It's a very basic script, and perhaps use the <emphasis role="bold">restore_bootloader</emphasis> of the Mandriva Linux Rescue should be a better idea.</para>
       </sect3>
       <sect3>
         <title>make_initrd_lilo</title>
@@ -428,7 +427,7 @@ Socket 5 on port 30764 on node40.guibland.com ready.
       <itemizedlist>
 	<listitem><para><emphasis role="bold">-r "grub --with=jfs --with=ata_piix"</emphasis>: use grub bootloader and <emphasis role="bold">--with=jfs --with=piix</emphasis> mkinitrd option in the chrooted system after the <emphasis role="bold">KA</emphasis> deploiement</para></listitem>
 	<listitem><para><emphasis role="bold">-n nb_nodes</emphasis>: specify how many nodes are clients</para></listitem>
-	<listitem><para><emphasis role="bold">-p sda/hda desc</emphasis>: specify if you want to duplicate SCSI or IDE storage, and the name of the hdd</para></listitem>
+	<listitem><para><emphasis role="bold">-p sda desc</emphasis>: specify the name of the hdd</para></listitem>
 	<listitem><para><emphasis role="bold">-x /tmp</emphasis>: exclude <emphasis role="bold">/tmp</emphasis> directory</para></listitem>
 	<listitem><para><emphasis role="bold">-X sdb</emphasis>: exclude <emphasis role="bold">sdb</emphasis> hdd for the duplication</para></listitem>
       </itemizedlist>
