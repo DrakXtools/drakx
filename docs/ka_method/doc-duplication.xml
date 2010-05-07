@@ -410,7 +410,6 @@ logical linux fill</screen>
     </para>
     <para>
 <programlisting><![CDATA[
-      <screen>
 [root@node40 ka]# ./ka-d.sh -n 1 -p sda /root/desc -X sdb -r "grub --with=jfs --with=ata_piix"
 takembr =
 desc = sda /root/desc
@@ -645,7 +644,6 @@ guibland.com
        valid_lft forever preferred_lft forever
 
 [root@localhost ~]# vi /etc/pxe.conf 
------------
 # which interface to use
 interface=eth0
 default_address=10.0.1.42
@@ -683,7 +681,6 @@ tftpdbase=/
 
 # domain name
 domain=guibland.com
----------------
 
 [root@localhost ~]# vi /etc/xinetd.d/tftp 
 service tftp
