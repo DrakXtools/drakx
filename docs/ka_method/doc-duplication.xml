@@ -7,7 +7,7 @@
       Goal of duplication is to easily deploy a computer over network without taking care of numbers of computer. In this documentation, we call golden node the node we want to clone.
       We can duplicate SCSI or IDE hard drive, and duplication support multiple filesystem (reiserfs, ext2, ext3, ext4, xfs, jfs).
     </para>
-    <para>WARNING: all data on client nodes will be erased ! We ducplicate partitions of HDD' golden node, and the process will do a fdisk command on the client node, so ALL YOUR DATA will be erased on client nodes.</para>
+    <para>WARNING: all data on client nodes will be ERASED ! We duplicate partitions of HDD' golden node, and the process will do an fdisk command on the client node, so ALL YOUR DATA will be erased on client nodes.</para>
     <sect2>
       <title>KA method</title>
       <para>
@@ -45,7 +45,7 @@
 	</para>
 	<para>
 	  <itemizedlist>
-	    <listitem><para><emphasis role="bold">install/stage2/rescue.sqhfs</emphasis>: this is the stage2 file with all needed files to detect and probe modules, and launch the third step of the duplication process. This file will be used on the golden node.</para></listitem>
+	    <listitem><para><emphasis role="bold">install/stage2/rescue.sqfs</emphasis>: this is the stage2 file with all needed files to detect and probe modules, and launch the third step of the duplication process. This file will be used on the golden node.</para></listitem>
 	    <listitem><para><emphasis role="bold">isolinux/alt0/vmlinuz</emphasis>: linux kernel, needed in the <emphasis role="bold">/var/lib/tftpboot/X86PC/linux/images/</emphasis> directory of the PXE server</para></listitem>
 	    <listitem><para><emphasis role="bold">isolinux/alt0/all.rdz</emphasis>: stage1 and all needed modules and tools.</para></listitem>
 	  </itemizedlist>
@@ -500,333 +500,897 @@ Socket 5 on port 30764 on node40.guibland.com ready.
     </sect2>
   </sect1>
   <sect1>
-    <title>full log of a KA duplication</title>
+	  <title>Step by step from scratch KA duplication</title>
+	  <para>We will use a PIV 3gz box as golden node, with a SATA hard drive, and an Intel 82540EM Gigabit Ethernet Controller card. This golden box will be the: PXE, DHCPD, TFTP server. Client nodes are</para>
+	  <para>
+	       <itemizedlist>
+		       <listitem><para>basic PIV 2.8gz, with a Realtek Semiconductor 8139 network card, and a IDE hard drive disk</para></listitem>
+	 	 	<listitem><para>PE2650 dual XEON 2.4gz, SCSI Hard Drive disk, and NetXtreme BCM5701 Gigabit Ethernet cards</para></listitem>
+		</itemizedlist>
+	</para>
+	<para>Both nodes are configured to boot on their network card.</para>
     <sect2>
       <title>Golden node side</title>
+    <para>
+      Prepapre the golden node, install all needed tools.
+    </para>
       <para>
 <programlisting><![CDATA[
-[root@node40 ka]# ./ka-d.sh -n 1 -p sda /root/desc -X sdb -r "grub --with=jfs --with=ata_piix"
+[root@localhost ~]# urpmi ka-deploy-source-node
+    http://192.168.1.253/cooker/i586/media/main/release/ka-deploy-source-node-0.94.1-1mdv2010.1.i586.rpm
+installing ka-deploy-source-node-0.94.1-1mdv2010.1.i586.rpm from /var/cache/urpmi/rpms                                                                   
+Preparing...                     ###############################################################################
+      1/1: ka-deploy-source-node ###############################################################################
+
+[root@localhost ~]# rpm -ql ka-deploy-source-node
+/etc/ka
+/etc/ka/replication.conf
+/usr/bin/bootable_flag.sh
+/usr/bin/fdisk_to_desc
+/usr/bin/gen_modprobe_conf.pl
+/usr/bin/ka-d-client
+/usr/bin/ka-d-server
+/usr/bin/ka-d.sh
+/usr/bin/ka_replication.sh
+/usr/bin/make_initrd_grub
+/usr/bin/make_initrd_lilo
+/usr/bin/prepare_node.sh
+/usr/bin/send_status.pl
+/usr/bin/status_node.pl
+/usr/bin/store_log.sh
+/usr/bin/udev_creation.sh
+/usr/share/ka-deploy-0.94.1
+/usr/share/man/man1/ka-d-client.1.lzma
+/usr/share/man/man1/ka-d-server.1.lzma
+/usr/share/man/man1/ka-d.1.lzma
+/usr/share/man/man1/ka-d.sh.1.lzma
+/usr/share/man/man1/ka-deploy.1.lzma
+]]></programlisting>
+	</para>
+	<para>Create the /mnt/ka directory, and put all stuff in it (this directory will be sent to all client nodes and use to finish
+		the duplication process)</para>
+	<para>
+<programlisting><![CDATA[
+[root@localhost ~]# mkdir /mnt/ka
+lftp ftp.proxad.net:~> cd pub/Distributions_Linux/MandrivaLinux/devel/cooker/i586/install/stage2/
+lftp ftp.proxad.net:/pub/Distributions_Linux/MandrivaLinux/devel/cooker/i586/install/stage2> pget rescue.sqfs 
+19132416 bytes transferred in 78 seconds (241.1K/s)                
+
+[root@localhost ~]# urpmi squashfs-tools                                                                      
+    http://192.168.1.253/cooker/i586/media/main/release/squashfs-tools-4.0-3.20091221.1mdv2010.1.i586.rpm
+installing squashfs-tools-4.0-3.20091221.1mdv2010.1.i586.rpm from /var/cache/urpmi/rpms                       
+Preparing...                     ############################################################################
+      1/1: squashfs-tools        ############################################################################
+
+[root@localhost ~]# unsquashfs rescue.sqfs 
+Parallel unsquashfs: Using 2 processors
+988 inodes (1222 blocks) to write
+[============================================================================================-] 1222/1222 100%
+created 550 files
+created 93 directories
+created 60 symlinks
+created 371 devices
+created 1 fifos
+
+[root@localhost ~]# cd squashfs-root/
+[root@localhost squashfs-root]# ls
+bin/  dev/  etc/  ka/  lib/  modules/  proc/  sbin/  tmp/  usr/  var/
+[root@localhost squashfs-root]# mv * /mnt/ka/
+]]></programlisting>
+	</para>
+	<para>Install all needed packages to be able to be a PXE, DHCPD and TFTP server</para>
+	<para>
+<programlisting><![CDATA[
+[root@localhost ka]# ka-d.sh -h
+/usr/bin/ka-d.sh : clone this machine
+Usage:
+	-h, --help : display this message
+	-n num : specify the number of (destination) nodes
+	-x 'dir|dir2' : exclude directory 
+        -X 'sdb|sdc' : exclude sdb for the replication
+        -m drive : copy the master boot record (for windows) of this drive
+	-M drive file : use 'file' as master boot record (must be 446 bytes long) for the specified drive
+	-D partition : also copy partition 'partition'
+	-p drive pdesc : use 'pdesc' file as partition scheme (see doc) for the specified drive
+	-d delay : delay beteween the release of 2 clients (1/10 second)
+	-r 'grub|lilo' : choose the bootloader (you can add mkinitrd options)
+
+	ie: ka-d.sh -n 3 -p sda /tmp/desc -X sdb -r 'grub --with=ata_piix --with=piix'
+
+[root@localhost ka]# urpmi ka-deploy-server
+To satisfy dependencies, the following packages are going to be installed:
+   Package                        Version      Release       Arch   
+(medium "Main")
+  bind-utils                     9.7.0        4mdv2010.1    i586    
+  clusterscripts-common          3.5          1mdv2010.1    noarch  
+  clusterscripts-server-conf     3.5          1mdv2010.1    noarch  
+  clusterscripts-server-pxe      3.5          1mdv2010.1    noarch  
+  dhcp-server                    4.1.1        5mdv2010.1    i586    
+  ka-deploy-server               0.94.1       1mdv2010.1    i586    
+  perl-Crypt-PasswdMD5           1.300.0      1mdv2010.1    noarch  
+  pxe                            1.4.2        19mdv2010.1   i586    
+  pxelinux                       3.83         1mdv2010.1    i586    
+  syslinux                       3.83         1mdv2010.1    i586    
+  tftp-server                    5.0          4mdv2010.1    i586    
+  xinetd                         2.3.14       11mdv2010.1   i586    
+12MB of additional disk space will be used.
+2.5MB of packages will be retrieved.
+Proceed with the installation of the 12 packages? (Y/n) 
+]]></programlisting>
+	</para>
+	<para>Configure all services</para>
+	<para>
+<programlisting><![CDATA[
+[root@localhost ~]# hostname 
+node42.guibland.com
+[root@localhost ~]# domainname 
+guibland.com
+
+[root@localhost ~]# ip addr show eth0
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 100
+    link/ether 00:17:31:19:a0:78 brd ff:ff:ff:ff:ff:ff
+    inet 10.0.1.42/24 brd 10.0.1.255 scope global eth0
+    inet6 fe80::217:31ff:fe19:a078/64 scope link 
+       valid_lft forever preferred_lft forever
+
+[root@localhost ~]# vi /etc/pxe.conf 
+-----------
+# which interface to use
+interface=eth0
+default_address=10.0.1.42
+
+# the multicast ip address to listen on
+multicast_address=224.0.1.2
+
+# mtftp info
+mtftp_address=10.0.1.42
+mtftp_client_port=1758
+mtftp_server_port=1759
+
+# the port to listen on
+listen_port=4011
+
+# enable multicast?
+use_multicast=1
+
+# enable broadcast?
+use_broadcast=0
+
+# user prompt
+prompt=Press F8 to view menu ...
+prompt_timeout=2
+
+# what services to provide, priority in ordering
+# CSA = Client System Architecture
+# service=<CSA>,<min layer>,<max layer>,<basename>,<menu entry>
+service=X86PC,0,2,linux,Mandriva Linux x86
+service=IA64PC,0,2,linux,Mandriva Linux IA64
+service=X86PC,0,0,local,Local boot
+
+# tftpd base dir
+tftpdbase=/
+
+# domain name
+domain=guibland.com
+---------------
+
+[root@localhost ~]# vi /etc/xinetd.d/tftp 
+service tftp
+{
+        disable = no
+        socket_type             = dgram
+        protocol                = udp
+        wait                    = yes
+        user                    = root
+        server                  = /usr/sbin/in.tftpd
+        server_args             = -s /var/lib/tftpboot
+        per_source              = 11
+        cps                             = 100 2
+        flags                   = IPv4
+}
+
+
+[root@localhost ~]# cp /etc/dhcpd.conf.pxe.single /etc/dhcpd.conf
+cp: overwrite `/etc/dhcpd.conf'? y
+
+[root@localhost ~]# cat /etc/resolv.conf
+nameserver 10.0.1.253
+search guibland.com
+
+[root@localhost ~]# cat /etc/dhcpd.conf
+# for explanation in french go to : http://www.delafond.org/traducmanfr/man/man5/dhcpd.conf.5.html
+ddns-update-style none;
+allow booting;
+allow bootp;
+
+# Your dhcp server is not master on your network !
+#not authoritative;
+# Your dhcpd server is master on your network !
+#authoritative;
+authoritative;
+
+#Interface where dhcpd is active
+#DHCPD_INTERFACE = "eth0";
+
+# Definition of PXE-specific options
+# Code 1: Multicast IP address of bootfile
+# Code 2: UDP port that client should monitor for MTFTP responses
+# Code 3: UDP port that MTFTP servers are using to listen for MTFTP requests
+# Code 4: Number of secondes a client must listen for activity before trying
+#         to start a new MTFTP transfer
+# Code 5: Number of secondes a client must listen before trying to restart
+#         a MTFTP transfer
+
+# define Option for the PXE class
+option space PXE;
+option PXE.mtftp-ip code 1 = ip-address;
+option PXE.mtftp-cport code 2 = unsigned integer 16;
+option PXE.mtftp-sport code 3 = unsigned integer 16;
+option PXE.mtftp-tmout code 4 = unsigned integer 8;
+option PXE.mtftp-delay code 5 = unsigned integer 8;
+option PXE.discovery-control code 6 = unsigned integer 8;
+option PXE.discovery-mcast-addr code 7 = ip-address;
+
+#Define options for pxelinux
+option space pxelinux;
+option pxelinux.magic      code 208 = string;
+option pxelinux.configfile code 209 = text;
+option pxelinux.pathprefix code 210 = text;
+option pxelinux.reboottime code 211 = unsigned integer 32;
+site-option-space "pxelinux";
+# These lines should be customized to your setup
+#option pxelinux.configfile "configs/common";
+#option pxelinux.pathprefix "/pxelinux/files/";
+#filename "/pxelinux/pxelinux.bin";
+				
+option pxelinux.magic f1:00:74:7e;
+option pxelinux.reboottime 30;
+#if exists dhcp-parameter-request-list {
+# Always send the PXELINUX options
+#	append dhcp-parameter-request-list 208, 209, 210, 211;
+#	append dhcp-parameter-request-list 208,211;
+#					}
+
+#Class that determine the options for Etherboot 5.x requests
+class "Etherboot" {
+
+#if The vendor-class-identifier equal Etherboot-5.0
+match if substring (option vendor-class-identifier, 0, 13) = "Etherboot-5.0";
+
+# filename define the file retrieve by the client, there nbgrub
+# our tftp is chrooted so is just the path to the file
+filename "/etherboot/nbgrub";
+
+#Used by etherboot to detect a valid pxe dhcp server
+option vendor-encapsulated-options 3c:09:45:74:68:65:72:62:6f:6f:74:ff;
+
+# Set the  "vendor-class-identifier" field to "PXEClient" in dhcp answer        
+# if this field is not set the pxe client will ignore the answer !
+option vendor-class-identifier "Etherboot-5.0";
+
+vendor-option-space PXE;
+option PXE.mtftp-ip 0.0.0.0;
+
+# IP of you TFTP server
+next-server 10.0.1.42;
+}
+
+
+# create the Class PXE
+class "PXE" {
+# if the "vendor-class-identifier" is set to "PXEClient" in the client dhcp request
+match if substring(option vendor-class-identifier, 0, 9) = "PXEClient";
+  
+# filename define the file retrieve by the client, there pxelinux.0
+# our tftp is chrooted so is just the path to the file
+# If you prefer use grub, use pxegrub compiled for your ethernet card.
+#filename "/PXEClient/pxegrub";
+filename "/X86PC/linux/linux.0";
+
+# Set the  "vendor-class-identifier" field to "PXEClient" in dhcp answer
+# if this field is not set the pxe client will ignore the answer !
+option vendor-class-identifier "PXEClient";
+
+				  
+vendor-option-space PXE;
+option PXE.mtftp-ip 0.0.0.0;
+
+# IP of you TFTP server
+next-server 10.0.1.42;
+}
+
+# Tags uses by dhcpnode and setup_add_nodes_to_dhcp
+# TAG: NODE_LIST_ADMIN_BEGIN
+
+# TAG: NODE_LIST_ADMIN_END
+
+# TAG: MY_ADMIN_BEGIN
+subnet 10.0.1.0 netmask 255.255.255.0 {
+  option subnet-mask 255.255.255.0;
+  option routers 10.0.1.253;
+  default-lease-time 288000;
+  max-lease-time 864000;
+  option domain-name "guibland.com";
+  option domain-name-servers  10.0.1.253; 
+  next-server 10.0.1.42;
+   
+  pool { 
+    range 10.0.1.110 10.0.1.120;
+  }
+}
+
+# TAG: MY_ADMIN_END
+
+
+[root@localhost ~]# service xinetd restart
+Stopping xinetd                                                                                [FAILED]
+Starting xinetd                                                                                [  OK  ]
+[root@localhost ~]# service pxe restart
+Stopping PXE server                                                                            [FAILED]
+Dhcp server is not running on this machine !
+Be sure that a valid PXE Dhcp server is running on your network
+Starting PXE server                                                                            [  OK  ]
+[root@localhost ~]# service dhcpd restart
+Shutting down dhcpd:                                                                           [  OK  ]
+Starting dhcpd:                                                                                [  OK  ]
+]]></programlisting>
+	</para>
+	<para>KA listen only listen on eth0, and need a FQDN. So if it is not the case, ka-d-server will try to open
+		a port on 0.0.0.0 IP address, wich cause an error. You can fix it easely setting an valid hostname in /etc/hosts file.
+	Don't forget to kill ka-d-server with crtl+C key, after testing it will open a port on a valid IP address.</para>
+	<para>
+<programlisting><![CDATA[
+[root@node42 ~]# ka-d-server 
+Compiled : May  4 2010 20:33:07
+ARGS=+ka-d-server+
+Server IP = 0.0.0.0
+command = (cd /; tar  --create --one-file-system --sparse /)
+I want 1 clients
+ka-d-server: server.c:1987: main: Assertion `socket_server >=0' failed.
+Aborted
+
+
+[root@node42 ~]# cat /etc/hosts
+127.0.0.1 localhost.localdomain localhost
+10.0.1.42	node42.guibland.com
+
+[root@node42 ~]# ka-d-server 
+Compiled : May  4 2010 20:33:07
+ARGS=+ka-d-server+
+Server IP = 10.0.1.42
+command = (cd /; tar  --create --one-file-system --sparse /)
+I want 1 clients
+Socket 3 on port 30765 on node42.guibland.com ready.
+Socket 4 on port 30764 on node42.guibland.com ready.
+[root@node42 ~]# ^C
+]]></programlisting>
+	</para>
+	<para>We need to describe the partition table of our golden node, to send it to client nodes.</para>
+	<para>
+<programlisting><![CDATA[
+[root@node42 ~]# fdisk -l
+
+Disk /dev/sda: 80.0 GB, 80026361856 bytes
+255 heads, 63 sectors/track, 9729 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0xd9b576f2
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *           1        1019     8185086   82  Linux swap / Solaris
+/dev/sda2            1020        4843    30716280   83  Linux
+/dev/sda3            4844        9729    39246795    5  Extended
+/dev/sda5            4844        9729    39246763+  83  Linux
+
+
+[root@node42 ~]# fdisk_to_desc 
+ -devices: sda1 -size en Mo: 7993 -filesystem: Linux
+Use of uninitialized value $e in concatenation (.) or string at /usr/bin/fdisk_to_desc line 50.
+ -devices: sda2 -size en Mo: 29996 -filesystem: Linux
+Use of uninitialized value $e in concatenation (.) or string at /usr/bin/fdisk_to_desc line 55.
+ -devices: sda3 -size en Mo: 38326 -filesystem: Extended
+ -devices: sda5 -size en Mo: 38326 -filesystem: Linux
+Desc file is /tmp/desc
+[root@node42 ~]# cat /tmp/d
+ddebug.log  desc        
+[root@node42 ~]# cat /tmp/desc 
+swap 7993
+linux 29996
+extended 38326
+logical linux 38326
+
+[root@node42 ~]# cat /tmp/desc 
+swap 7993
+linux 29996
+extended fill
+logical linux fill
+]]></programlisting>
+	</para>
+	<para>Set default PXE boot to kamethod</para>
+	<para>
+<programlisting><![CDATA[
+[root@node42 ~]# cat /var/lib/tftpboot/X86PC/linux/pxelinux.cfg/default 
+PROMPT 1
+DEFAULT kamethod
+DISPLAY messages
+TIMEOUT 50
+
+label local
+	LOCALBOOT 0
+
+label kamethod
+    KERNEL images/vmlinuz
+    APPEND initrd=images/all.rdz ramdisk_size=64000 vga=788 automatic=method:ka,interface:eth0,network:dhcp root=/dev/ram3 rw kamethod
+
+
+[root@node42 ~]# cd /var/lib/tftpboot/X86PC/linux/
+[root@node42 linux]# ls
+help.txt  linux.0  memdisk  messages  pxelinux.cfg/
+[root@node42 linux]# mkdir images
+
+lftp ftp.proxad.net:/pub/Distributions_Linux/MandrivaLinux/devel/cooker/i586/isolinux/alt0> ls
+-rw-r--r--    1 ftp      ftp      15613654 Apr 23 17:26 all.rdz
+-rw-r--r--    1 ftp      ftp       2279584 Apr 23 17:26 vmlinuz
+lftp ftp.proxad.net:/pub/Distributions_Linux/MandrivaLinux/devel/cooker/i586/isolinux/alt0> mget *
+17893238 bytes transferred in 77 seconds (227.9K/s)                     
+Total 2 files transferred
+lftp ftp.proxad.net:/pub/Distributions_Linux/MandrivaLinux/devel/cooker/i586/isolinux/alt0> 
+
+[root@node42 images]# pwd
+/var/lib/tftpboot/X86PC/linux/images
+[root@node42 images]# ls
+all.rdz  vmlinuz
+]]></programlisting>
+	</para>
+	<para>Now it's time to launch the duplication process</para>
+	<para>
+<programlisting><![CDATA[
+[root@node42 ka]# ka-d.sh -n 2 -p sda /tmp/desc -r grub
 takembr =
-desc = sda /root/desc
+desc = sda /tmp/desc
+`/etc/fstab' -> `/tmp/ka-d3156/pfstab.tmp'
 + Mount points :
-     /dev/sda5 / ext3
-     /dev/sda1 swap swap
+     /dev/sda2 / ext3 relatime 1 1
+     /dev/sda5 /home ext4 relatime 1 2
+     /dev/sda1 swap swap defaults 0 0
 + Hard drives :
      sda
 + Reading partition table description for sda
     Added partition 1 : type 82
+    Added partition 2 : type 83
     Added partition 5 : type 83
-+ Included mount points : /
-+ Bootloader is: grub --with=jfs --with=ata_piix
++ Included mount points : / /home
++ Bootloader is: grub
 +++ Sending Stage2 +++
-Compiled : Aug 23 2007 12:58:29
-ARGS=+ka-d-server+-s+getstage2+-n+1+-e+(cd /mnt/ka; tar --create --one-file-system --sparse  . )+
-Server IP = 10.0.1.40
+Compiled : May  4 2010 20:33:07
+ARGS=+ka-d-server+-s+getstage2+-n+2+-e+(cd /mnt/ka; tar --create --one-file-system --sparse  . )+
+Server IP = 10.0.1.42
 command = (cd /mnt/ka; tar --create --one-file-system --sparse  . )
-I want 1 clients
-Socket 4 on port 30765 on node40.guibland.com ready.
-Socket 5 on port 30764 on node40.guibland.com ready.
-got UDP packet from 10.0.1.35
+I want 2 clients
+Socket 4 on port 30765 on node42.guibland.com ready.
+Socket 5 on port 30764 on node42.guibland.com ready.
+got UDP packet from 10.0.1.111
 Session name matches
-Sending UDP reply to 10.0.1.35
-Accepting connection from 10.0.1.35
+Sending UDP reply to 10.0.1.111
+Accepting connection from 10.0.1.111
 Clients : want_data 0  / connected 0
 client says hello !
 Client sends options
 Client accepts data
-Added client 10.0.1.35, daddy = 10.0.1.40
-Accepting connection from 10.0.1.35
-checking connection auth10.0.1.40 reports 10.0.1.35 has opened data connection
-Client 10.0.1.35 reports data position : 0
-10.0.1.40 reports 10.0.1.35 has been accepted
+got UDP packet from 10.0.1.110
+Session name matches
+Sending UDP reply to 10.0.1.110
+Accepting connection from 10.0.1.110
+Clients : want_data 1  / connected 0
+client says hello !
+Client sends options
+Client accepts data
+Added client 10.0.1.110, daddy = 10.0.1.42
+Added client 10.0.1.111, daddy = 10.0.1.110
+Accepting connection from 10.0.1.110
+checking connection auth10.0.1.42 reports 10.0.1.110 has opened data connection
+Client 10.0.1.110 reports data position : 0
+10.0.1.42 reports 10.0.1.110 has been accepted
 Welcome son, you are number 1 (MAX 4)
+Client got client
+10.0.1.110 reports 10.0.1.111 has opened data connection
+Client 10.0.1.111 reports data position : 0
+sending auth for 10.0.1.111 to 10.0.1.110
+Client got client
+10.0.1.110 reports 10.0.1.111 has been accepted
 Let's go!
-Total data read = 45 Megs, BUF: 0M  FREE = 34M  startpos = 10M
+Total data read = 43 Megs, BUF: 34M  FREE = 0M  startpos = 8MM
 End of data flow
 Dropping children
-Dropping child 10.0.1.35
+Dropping child 10.0.1.110
 All children dropped
 Client says dad disconnected
 Client says he has finished
 Client has finished transfer
+Busy clients: 1 -- connected : 2
+Client says dad disconnected
+Client says he has finished
+Client has finished transfer
+Busy clients: 0 -- connected : 2
+Peer closed connection on socket 7
+close_connection(7)
 Busy clients: 0 -- connected : 1
 Peer closed connection on socket 6
 close_connection(6)
 Busy clients: 0 -- connected : 0
 All clients left, I quit
-Total data sent = 48 Megs, in 2172 packets
-Transfer time = 6.125 seconds, throughput = 7.881 Mbytes/second
-The pipeline was emptied in 0.026 seconds
+Total data sent = 44 Megs, in 1543 packets
+Transfer time = 0.858 seconds, throughput = 51.307 Mbytes/second
+The pipeline was emptied in 3.250 seconds
  - Sending partition/filesystem/mount points informations...
  +++ Running ka-deploy +++
-Compiled : Aug 23 2007 12:58:29
-ARGS=+ka-d-server+-s+kainstall1+-n+1+-e+(cd /tmp/ka-d6083 && tar c *)+
-Server IP = 10.0.1.40
-command = (cd /tmp/ka-d6083 && tar c *)
-I want 1 clients
-Socket 4 on port 30765 on node40.guibland.com ready.
-Socket 5 on port 30764 on node40.guibland.com ready.
-got UDP packet from 10.0.1.35
+Compiled : May  4 2010 20:33:07
+ARGS=+ka-d-server+-s+kainstall1+-n+2+-e+(cd /tmp/ka-d3156 && tar c *)+
+Server IP = 10.0.1.42
+command = (cd /tmp/ka-d3156 && tar c *)
+I want 2 clients
+Socket 4 on port 30765 on node42.guibland.com ready.
+Socket 5 on port 30764 on node42.guibland.com ready.
+got UDP packet from 10.0.1.110
 Session name matches
-Sending UDP reply to 10.0.1.35
-Accepting connection from 10.0.1.35
+Sending UDP reply to 10.0.1.110
+Accepting connection from 10.0.1.110
 Clients : want_data 0  / connected 0
 client says hello !
 Client sends options
 Client accepts data
-Added client 10.0.1.35, daddy = 10.0.1.40
-Accepting connection from 10.0.1.35
-checking connection auth10.0.1.40 reports 10.0.1.35 has opened data connection
-Client 10.0.1.35 reports data position : 0
-10.0.1.40 reports 10.0.1.35 has been accepted
+got UDP packet from 10.0.1.111
+Session name matches
+Sending UDP reply to 10.0.1.111
+Accepting connection from 10.0.1.111
+Clients : want_data 1  / connected 0
+client says hello !
+Client sends options
+Client accepts data
+Added client 10.0.1.110, daddy = 10.0.1.42
+Added client 10.0.1.111, daddy = 10.0.1.110
+Accepting connection from 10.0.1.110
+checking connection auth10.0.1.42 reports 10.0.1.110 has opened data connection
+Client 10.0.1.110 reports data position : 0
+10.0.1.42 reports 10.0.1.110 has been accepted
 Welcome son, you are number 1 (MAX 4)
+Client got client
+10.0.1.110 reports 10.0.1.111 has opened data connection
+Client 10.0.1.111 reports data position : 0
+sending auth for 10.0.1.111 to 10.0.1.110
+Client got client
+10.0.1.110 reports 10.0.1.111 has been accepted
 Let's go!
 Total data read = 0 Megs, BUF: 0M  FREE = 34M  startpos = 0M
 End of data flow
 Dropping children
-Dropping child 10.0.1.35
+Dropping child 10.0.1.110
 All children dropped
 Client says dad disconnected
 Client says he has finished
 Client has finished transfer
-Busy clients: 0 -- connected : 1
+Busy clients: 1 -- connected : 2
+Client says dad disconnected
+Client says he has finished
+Client has finished transfer
+Busy clients: 0 -- connected : 2
 Peer closed connection on socket 6
 close_connection(6)
+Busy clients: 0 -- connected : 1
+Peer closed connection on socket 7
+close_connection(7)
 Busy clients: 0 -- connected : 0
 All clients left, I quit
 Total data sent = 0 Megs, in 1 packets
-Transfer time = 0.016 seconds, throughput = 0.628 Mbytes/second
-The pipeline was emptied in 0.027 seconds
+Transfer time = 0.006 seconds, throughput = 1.698 Mbytes/second
+The pipeline was emptied in 0.038 seconds
  WAITING node (partition/format)
  - Sending Linux filesystem...
  +++ Running ka-deploy +++
-Compiled : Aug 23 2007 12:58:29
-ARGS=+ka-d-server+-s+kainstall2+-n+1+-e+(cd /; tar --create --one-file-system --sparse  /)+
-Server IP = 10.0.1.40
-command = (cd /; tar --create --one-file-system --sparse  /)
-I want 1 clients
-Socket 4 on port 30765 on node40.guibland.com ready.
-Socket 5 on port 30764 on node40.guibland.com ready.
-got UDP packet from 10.0.1.35
+Compiled : May  4 2010 20:33:07
+ARGS=+ka-d-server+-s+kainstall2+-n+2+-e+(cd /; tar --create --one-file-system --sparse  / /home)+
+Server IP = 10.0.1.42
+command = (cd /; tar --create --one-file-system --sparse  / /home)
+I want 2 clients
+Socket 4 on port 30765 on node42.guibland.com ready.
+Socket 5 on port 30764 on node42.guibland.com ready.
+got UDP packet from 10.0.1.110
 Session name matches
-Sending UDP reply to 10.0.1.35
-Accepting connection from 10.0.1.35
+Sending UDP reply to 10.0.1.110
+Accepting connection from 10.0.1.110
 Clients : want_data 0  / connected 0
 client says hello !
 Client sends options
 Client accepts data
-Added client 10.0.1.35, daddy = 10.0.1.40
-Accepting connection from 10.0.1.35
-checking connection auth10.0.1.40 reports 10.0.1.35 has opened data connection
-Client 10.0.1.35 reports data position : 0
-10.0.1.40 reports 10.0.1.35 has been accepted
+got UDP packet from 10.0.1.111
+Session name matches
+Sending UDP reply to 10.0.1.111
+Accepting connection from 10.0.1.111
+Clients : want_data 1  / connected 0
+client says hello !
+Client sends options
+Client accepts data
+Added client 10.0.1.110, daddy = 10.0.1.42
+Added client 10.0.1.111, daddy = 10.0.1.110
+Accepting connection from 10.0.1.110
+checking connection auth10.0.1.42 reports 10.0.1.110 has opened data connection
+Client got client
+10.0.1.110 reports 10.0.1.111 has opened data connection
+Client 10.0.1.110 reports data position : 0
+10.0.1.42 reports 10.0.1.110 has been accepted
 Welcome son, you are number 1 (MAX 4)
+Client 10.0.1.111 reports data position : 0
+sending auth for 10.0.1.111 to 10.0.1.110
+Client got client
+10.0.1.110 reports 10.0.1.111 has been accepted
 Let's go!
-Total data read = 621 Megs, BUF: 24M  FREE = 10M  startpos = 586M
+Total data read = 789 Megs, BUF: 34M  FREE = 0M  startpos = 754M
 End of data flow
 Dropping children
-Dropping child 10.0.1.35
+Dropping child 10.0.1.110
 All children dropped
 Client says dad disconnected
 Client says he has finished
 Client has finished transfer
+Busy clients: 1 -- connected : 2
+Client says dad disconnected
+Client says he has finished
+Client has finished transfer
+Busy clients: 0 -- connected : 2
+Peer closed connection on socket 7
+close_connection(7)
 Busy clients: 0 -- connected : 1
 Peer closed connection on socket 6
 close_connection(6)
 Busy clients: 0 -- connected : 0
 All clients left, I quit
-Total data sent = 627 Megs, in 34011 packets
-Transfer time = 127.140 seconds, throughput = 4.937 Mbytes/second
-The pipeline was emptied in 1.549 seconds
+Total data sent = 792 Megs, in 25445 packets
+Transfer time = 69.904 seconds, throughput = 11.343 Mbytes/second
+The pipeline was emptied in 4.002 seconds
 ]]></programlisting>
       </para>
     </sect2>
     <sect2>
       <title>KA client side</title>
       <para>
-	Just launch <emphasis role="bold">/mnt/ka/ka/status_node.pl IPADD</emphasis> to get log of the KA client.
+	To get the log of the client node, launch <emphasis role="bold">/mnt/ka/ka/status_node.pl IPADD</emphasis> on the golden node.
       </para>
 <programlisting><![CDATA[
-10.0.1.35> ------| Ka |---- Install starting...
-10.0.1.35> Current session is -s kainstall1
-10.0.1.35>  Receiving partitions information...OK
-10.0.1.35>  Cleaning hard drive...
-10.0.1.35> ==> /tmp/kacmd <==
-10.0.1.35> Starting log server..
-10.0.1.35> 
-10.0.1.35> ==> /tmp/ka_log-10.0.1.35-20071024-10h32 <==
-10.0.1.35> OK
-10.0.1.35> Device contains neither a valid DOS partition table, nor Sun, SGI or OSF disklabel
-10.0.1.35> Building a new DOS disklabel with disk identifier 0x59be1427.
-10.0.1.35> Changes will remain in memory only, until you decide to write them.
-10.0.1.35> After that, of course, the previous content won't be recoverable.
-10.0.1.35> 
-10.0.1.35> 
-10.0.1.35> The number of cylinders for this disk is set to 1116.
-10.0.1.35> There is nothing wrong with that, but this is larger than 1024,
-10.0.1.35> and could in certain setups cause problems with:
-10.0.1.35> 1) software that runs at boot time (e.g., old versions of LILO)
-10.0.1.35> 2) booting and partitioning software from other OSs
-10.0.1.35>    (e.g., DOS FDISK, OS/2 FDISK)
-10.0.1.35> Warning: invalid flag 0x0000 of partition table 4 will be corrected by w(rite)
-10.0.1.35> 
-10.0.1.35> Command (m for help): The partition table has been altered!
-10.0.1.35> 
-10.0.1.35> Calling ioctl() to re-read partition table.
-10.0.1.35> Syncing disks.
-10.0.1.35>  Writing partition table for sda using fdisk...OK
-10.0.1.35>  Formatting /dev/sda5 as ext3...OK
-10.0.1.35>  Formatting /dev/sda1 as swap...OK
-10.0.1.35> - Mounting /dev/sda5 as /mnt/disk/ ......OK
-10.0.1.35> ++++++++++++++++++++++++++
-10.0.1.35> rootfs on / type rootfs (rw)
-10.0.1.35> /proc on /proc type proc (rw)
-10.0.1.35> none on /sys type sysfs (rw)
-10.0.1.35> none on /proc/bus/usb type usbfs (rw)
-10.0.1.35> /dev/ram3 on /tmp/stage2 type ext2 (rw)
-10.0.1.35> /dev/sda5 on /mnt/disk type ext3 (rw,data=ordered)
-10.0.1.35> ++++++++++++++++++++++++++
-10.0.1.35> Linux copy is about to start 
-10.0.1.35> Server IP is 10.0.1.40
-10.0.1.35> Buffers names :pipe 
-Total data received = 620 Megs (11.222 Mbytes/sec); BUF :0M End of data flow
-10.0.1.35> Flushing buffers
-10.0.1.35> Total data received = 627 Megs, in 434960 packets
-10.0.1.35> Elapsed time = 128.482 seconds, throughput = 4.886 Mbytes/second
-10.0.1.35>  Syncing disks...OK
-10.0.1.35> Linux copy done.
-10.0.1.35> Creating excluded directories
-10.0.1.35> - bootloader is grub --with=jfs --with=ata_piix (user choice and options)
-10.0.1.35> - Removing duplicated dhcp cache
-10.0.1.35> - Writing modprobe.conf
-10.0.1.35> ********************
-10.0.1.35> install scsi_hostadapter /sbin/modprobe aic7xxx; /sbin/modprobe ata_piix; /bin/true
-10.0.1.35> alias eth0 eepro100
-10.0.1.35> alias eth1 eepro100
-10.0.1.35> ********************
-10.0.1.35> - Remove ude network rules
-10.0.1.35> removed `/mnt/disk/etc/udev/rules.d/61-net_config.rules'
-10.0.1.35> - Running mkinitrd
-10.0.1.35> Looking for default grub menu
-10.0.1.35> - erase old initrd.img link
-10.0.1.35> removed `/mnt/disk/boot/initrd.img'
-10.0.1.35>  initrd will be : /boot/initrd-2.6.22.9-desktop-1mdv.img
-10.0.1.35> running: chroot /mnt/disk /sbin/mkinitrd -v -f --with=jfs /boot/initrd-2.6.22.9-desktop-1mdv.img 2.6.22.9-desktop-1mdv
-10.0.1.35> Looking for deps of module aic7xxx
-	10.0.1.35>  scsi_transport_spi scsi_mod
-10.0.1.35> Looking for deps of module scsi_transport_spi
-	10.0.1.35>  scsi_mod
-10.0.1.35> Looking for deps of module scsi_mod
-10.0.1.35> skip dups
-10.0.1.35> Looking for deps of module sd_mod
-	10.0.1.35>  scsi_mod
-10.0.1.35> Looking for deps of module scsi_wait_scan
-	10.0.1.35>  scsi_mod
-10.0.1.35> Looking for deps of module ext3
-	10.0.1.35>  jbd
-10.0.1.35> Looking for deps of module jbd
-10.0.1.35> Looking for deps of module jfs
-10.0.1.35> Using modules:  /lib/modules/2.6.22.9-desktop-1mdv/kernel/drivers/scsi/scsi_mod.ko /lib/modules/2.6.22.9-desktop-1mdv/kernel/drivers/scsi/scsi_transport_spi.ko /lib/modules/2.6.22.9-desktop-1mdv/kernel/drivers/scsi/aic7xxx/aic7xxx.ko /lib/modules/2.6.22.9-desktop-1mdv/kernel/drivers/scsi/sd_mod.ko /lib/modules/2.6.22.9-desktop-1mdv/kernel/drivers/scsi/scsi_wait_scan.ko /lib/modules/2.6.22.9-desktop-1mdv/kernel/fs/jbd/jbd.ko /lib/modules/2.6.22.9-desktop-1mdv/kernel/fs/ext3/ext3.ko /lib/modules/2.6.22.9-desktop-1mdv/kernel/fs/jfs/jfs.ko
-10.0.1.35> Using /tmp as temporary directory.
-10.0.1.35> /sbin/nash -> /tmp/initrd.tG1408/bin/nash
-	10.0.1.35> /lib/modules/2.6.22.9-desktop-1mdv/kernel/drivers/scsi/scsi_mod.ko.gz: 60.6%
-	10.0.1.35> /lib/modules/2.6.22.9-desktop-1mdv/kernel/drivers/scsi/scsi_transport_spi.ko.gz: 63.1%
-	10.0.1.35> /lib/modules/2.6.22.9-desktop-1mdv/kernel/drivers/scsi/aic7xxx/aic7xxx.ko.gz: 61.4%
-	10.0.1.35> /lib/modules/2.6.22.9-desktop-1mdv/kernel/drivers/scsi/sd_mod.ko.gz: 60.2%
-	10.0.1.35> /lib/modules/2.6.22.9-desktop-1mdv/kernel/drivers/scsi/scsi_wait_scan.ko.gz: 77.3%
-	10.0.1.35> /lib/modules/2.6.22.9-desktop-1mdv/kernel/fs/jbd/jbd.ko.gz: 60.5%
-	10.0.1.35> /lib/modules/2.6.22.9-desktop-1mdv/kernel/fs/ext3/ext3.ko.gz: 53.9%
-	10.0.1.35> /lib/modules/2.6.22.9-desktop-1mdv/kernel/fs/jfs/jfs.ko.gz: 51.4%
-10.0.1.35> Loading module scsi_mod.ko
-10.0.1.35> Loading module scsi_transport_spi.ko
-10.0.1.35> Loading module aic7xxx.ko
-10.0.1.35> Loading module sd_mod.ko
-10.0.1.35> Loading module scsi_wait_scan.ko
-10.0.1.35> Loading module jbd.ko
-10.0.1.35> Loading module ext3.ko
-10.0.1.35> Loading module jfs.ko
-10.0.1.35> /usr/sbin/resume -> /tmp/initrd.tG1408/bin
-10.0.1.35> Contents of RCFILE:
-10.0.1.35> #!/bin/nash
-10.0.1.35> 
-10.0.1.35> echo "Loading scsi_mod.ko module"
-10.0.1.35> insmod /lib/scsi_mod.ko 
-10.0.1.35> echo "Loading scsi_transport_spi.ko module"
-10.0.1.35> insmod /lib/scsi_transport_spi.ko 
-10.0.1.35> echo "Loading aic7xxx.ko module"
-10.0.1.35> insmod /lib/aic7xxx.ko 
-10.0.1.35> echo "Loading sd_mod.ko module"
-10.0.1.35> insmod /lib/sd_mod.ko 
-10.0.1.35> echo "Loading scsi_wait_scan.ko module"
-10.0.1.35> insmod /lib/scsi_wait_scan.ko 
-10.0.1.35> echo "Loading jbd.ko module"
-10.0.1.35> insmod /lib/jbd.ko 
-10.0.1.35> echo "Loading ext3.ko module"
-10.0.1.35> insmod /lib/ext3.ko 
-10.0.1.35> echo "Loading jfs.ko module"
-10.0.1.35> insmod /lib/jfs.ko 
-10.0.1.35> echo Mounting /proc filesystem
-10.0.1.35> mount -t proc /proc /proc
-10.0.1.35> echo Mounting sysfs
-10.0.1.35> mount -t sysfs none /sys
-10.0.1.35> echo Creating device files
-10.0.1.35> mountdev size=32M,mode=0755
-10.0.1.35> mkdevices /dev
-10.0.1.35> echo Creating root device
-10.0.1.35> mkrootdev /dev/root
-10.0.1.35> resume
-10.0.1.35> echo 1 > /sys/power/suspend2/do_resume
-10.0.1.35> echo 1 > /sys/power/tuxonice/do_resume
-10.0.1.35> echo Mounting root filesystem /dev/root with flags relatime
-10.0.1.35> mount -o relatime --ro -t ext3 /dev/root /sysroot
-10.0.1.35> echo Switching to new root
-10.0.1.35> switchroot --movedev /sysroot
-10.0.1.35> echo Initrd finished
-10.0.1.35>  First drive will be: /dev/sda
-10.0.1.35> Installation finished. No error reported.
-10.0.1.35> This is the contents of the device map /boot/grub/device.map.
-10.0.1.35> Check if this is correct or not. If any of the lines is incorrect,
-10.0.1.35> fix it and re-run the script `grub-install'.
-10.0.1.35> 
-10.0.1.35> (hd0) /dev/sda
-10.0.1.35> (hd1) /dev/sdb
-10.0.1.35> umount: /mnt/disk/dev: not mounted
-10.0.1.35>  Umounting /dev/sda5...OK
-10.0.1.35> AUTH not understood
-10.0.1.35> Local directory now /tmp
-exec lsmod
-10.0.1.35> <console> 
-10.0.1.35> <console> 
-10.0.1.35> <console> exec lsmod
-10.0.1.35> Module                  Size  Used by
-10.0.1.35> aic7xxx               167992  0 
-10.0.1.35> scsi_transport_spi     22432  1 aic7xxx
-10.0.1.35> ata_piix               12228  0 
-10.0.1.35> libata                109424  1 ata_piix
-10.0.1.35> sr_mod                 15044  0 
-10.0.1.35> sd_mod                 25888  0 
-10.0.1.35> scsi_mod              124908  5 aic7xxx,scsi_transport_spi,libata,sr_mod,sd_mod
-10.0.1.35> loop                   14212  0 
-10.0.1.35> jfs                   176708  0 
-10.0.1.35> xfs                   528088  0 
-10.0.1.35> reiserfs              247908  0 
-10.0.1.35> ext3                  118824  0 
-10.0.1.35> jbd                    50184  1 ext3
-10.0.1.35> vfat                   10816  0 
-10.0.1.35> nls_iso8859_1           4672  0 
-10.0.1.35> nls_cp437               6304  0 
-10.0.1.35> fat                    45980  1 vfat
-10.0.1.35> isofs                  31452  0 
-10.0.1.35> piix                    9060  0 [permanent]
-10.0.1.35> ide_cd                 35488  0 
-10.0.1.35> ide_disk               14496  0 
-10.0.1.35> ide_core               99396  3 piix,ide_cd,ide_disk
-10.0.1.35> af_packet              17960  0 
-10.0.1.35> eepro100               28432  0 
-10.0.1.35> mii                     5376  1 eepro100
-10.0.1.35> usbkbd                  6304  0 
-10.0.1.35> uhci_hcd               22736  0 
-10.0.1.35> usbcore               113928  3 usbkbd,uhci_hcd
+[root@node42 ka]# status_node.pl 10.0.1.111
+
+ Get the status of the Ka duplication process
+ If you want to execute a command on node, just use the 'exec' prefix
+10.0.1.111> ------| Ka |---- Install starting...
+10.0.1.111> Current session is -s kainstall1
+10.0.1.111>  Receiving partitions information...OK
+10.0.1.111>  Cleaning hard drive...
+10.0.1.111> ==> /tmp/kacmd <==
+10.0.1.111> Starting log server..
+10.0.1.111> 
+10.0.1.111> ==> /tmp/ka_log-10.0.1.111-20100507-10h32 <==
+10.0.1.111> OK
+10.0.1.111> Device contains neither a valid DOS partition table, nor Sun, SGI or OSF disklabel
+10.0.1.111> Building a new DOS disklabel with disk identifier 0x59be1427.
+10.0.1.111> Changes will remain in memory only, until you decide to write them.
+10.0.1.111> After that, of course, the previous content won't be recoverable.
+10.0.1.111> 
+10.0.1.111> 
+10.0.1.111> The number of cylinders for this disk is set to 1116.
+10.0.1.111> There is nothing wrong with that, but this is larger than 1024,
+10.0.1.111> and could in certain setups cause problems with:
+10.0.1.111> 1) software that runs at boot time (e.g., old versions of LILO)
+10.0.1.111> 2) booting and partitioning software from other OSs
+10.0.1.111>    (e.g., DOS FDISK, OS/2 FDISK)
+10.0.1.111> Warning: invalid flag 0x0000 of partition table 4 will be corrected by w(rite)
+10.0.1.111> 
+10.0.1.111> Command (m for help): The partition table has been altered!
+10.0.1.111> 
+10.0.1.111> Calling ioctl() to re-read partition table.
+10.0.1.111> Syncing disks.
+10.0.1.111>  Writing partition table for sda using fdisk...OK
+10.0.1.111>  Formatting /dev/sda2 as ext3...OK
+10.0.1.111>  Formatting /dev/sda5 as ext4...OK
+10.0.1.111>  Formatting /dev/sda1 as swap...OK
+10.0.1.111> - Mounting /dev/sda2 as /mnt/disk/ ......OK
+10.0.1.111> - Mounting /dev/sda5 as /mnt/disk/home ......OK
+10.0.1.111> ++++++++++++++++++++++++++
+10.0.1.111> none on /sys type sysfs (rw,relatime)
+10.0.1.111> none on /proc/bus/usb type usbfs (rw,relatime)
+10.0.1.111> /dev/ram3 on /tmp/stage2 type ext2 (rw,relatime,errors=continue)
+10.0.1.111> /dev/sda2 on /mnt/disk type ext3 (rw,relatime,errors=continue,data=ordered)
+10.0.1.111> /dev/sda5 on /mnt/disk/home type ext4 (rw,relatime,barrier=1,data=ordered)
+10.0.1.111> ++++++++++++++++++++++++++
+10.0.1.111> Linux copy is about to start 
+10.0.1.111> Server IP is 10.0.1.42
+10.0.1.111> Buffers names :pipe 
+Total data received = 21 Megs (10.830 Mbytes/sec); BUF :0M 
+10.0.1.111> ==> /tmp/kacmd <==
+10.0.1.111> Starting log server..
+10.0.1.111> 
+10.0.1.111> ==> /tmp/ka_log-localhost-20100507-11h17 <==
+Total data received = 788 Megs (10.796 Mbytes/sec); BUF :0M End of data flow
+10.0.1.111> Flushing buffers
+10.0.1.111> Total data received = 792 Megs, in 574479 packets
+10.0.1.111> Elapsed time = 73.413 seconds, throughput = 10.801 Mbytes/second
+10.0.1.111>  Syncing disks...OK
+10.0.1.111> Linux copy done.
+10.0.1.111> Creating excluded directories
+10.0.1.111> - bootloader is grub (user choice)
+10.0.1.111> `/tmp/partfiles/pfstab' -> `/mnt/disk/etc/fstab'
+10.0.1.111> - Removing duplicated dhcp cache
+10.0.1.111> - Writing modprobe.conf
+10.0.1.111> ********************
+10.0.1.111> install scsi_hostadapter /sbin/modprobe aic7xxx; /bin/true
+10.0.1.111> install scsi_hostadapter /sbin/modprobe pata_serverworks; /bin/true
+10.0.1.111> alias eth0 tg3
+10.0.1.111> alias eth1 tg3
+10.0.1.111> ********************
+10.0.1.111> - Remove persistent udev rules
+10.0.1.111> removed `/mnt/disk/etc/udev/rules.d/70-persistent-net.rules'
+10.0.1.111> - Fix /dev in /mnt/disk
+10.0.1.111> `/ka2/udev_creation.sh' -> `/mnt/disk/sbin/udev_creation.sh'
+10.0.1.111> Starting udev:                                                          [  OK  ]
+10.0.1.111> umount: /mnt/disk/dev: device is busy.
+10.0.1.111>         (In some cases useful info about processes that use
+10.0.1.111>          the device is found by lsof(8) or fuser(1))
+10.0.1.111> - Running mkinitrd
+10.0.1.111> - Looking for default grub menu
+10.0.1.111> - erase old initrd.img link
+10.0.1.111> removed `/mnt/disk/boot/initrd.img'
+10.0.1.111>  initrd will be : /boot/initrd-2.6.33.3-desktop-1mnb.img
+10.0.1.111>  running: chroot /mnt/disk /sbin/mkinitrd -v -f  /boot/initrd-2.6.33.3-desktop-1mnb.img 2.6.33.3-desktop-1mnb
+10.0.1.111> Creating initramfs
+10.0.1.111> Looking for driver for /dev/sda2 in /sys/block/sda/sda2
+10.0.1.111> Looking for deps of module scsi:t-0x00: crc-t10dif scsi_mod sd_mod 
+10.0.1.111> Looking for deps of module pci:v00009005d000000CFsv00001028sd00000121bc01sc00i00: scsi_mod scsi_transport_spi aic7xxx 
+10.0.1.111> Looking for deps of module pci:v00008086d00000309sv00000000sd00000000bc06sc04i00: pci_hotplug shpchp 
+10.0.1.111> Looking for driver for /dev/sda1 in /sys/block/sda/sda1
+10.0.1.111> Using modules:  usbhid ehci-hcd ohci-hcd uhci-hcd ext3 crc-t10dif scsi_mod sd_mod scsi_transport_spi aic7xxx pci_hotplug shpchp pata_serverworks
+10.0.1.111> Building initrd in /tmp/initrd.uuIIkZ
+10.0.1.111> /sbin/nash -> /tmp/initrd.uuIIkZ/bin/nash
+10.0.1.111>   /usr/lib/libnash.so.6.0.93 -> /tmp/initrd.uuIIkZ/usr/lib/libnash.so.6.0.93
+10.0.1.111>     /lib/libdevmapper.so.1.02 -> /tmp/initrd.uuIIkZ/lib/libdevmapper.so.1.02
+10.0.1.111>       /lib/libreadline.so.6 -> /tmp/initrd.uuIIkZ/lib/libreadline.so.6
+10.0.1.111>         /lib/libreadline.so.6.1 -> /tmp/initrd.uuIIkZ/lib/libreadline.so.6.1
+10.0.1.111>           /lib/libncurses.so.5 -> /tmp/initrd.uuIIkZ/lib/libncurses.so.5
+10.0.1.111>             /lib/libncurses.so.5.7 -> /tmp/initrd.uuIIkZ/lib/libncurses.so.5.7
+10.0.1.111>               /lib/libc.so.6 -> /tmp/initrd.uuIIkZ/lib/libc.so.6
+10.0.1.111>                 /lib/libc-2.11.1.so -> /tmp/initrd.uuIIkZ/lib/libc-2.11.1.so
+10.0.1.111>                   /lib/ld-linux.so.2 -> /tmp/initrd.uuIIkZ/lib/ld-linux.so.2
+10.0.1.111>                     /lib/ld-2.11.1.so -> /tmp/initrd.uuIIkZ/lib/ld-2.11.1.so
+10.0.1.111>               /lib/libdl.so.2 -> /tmp/initrd.uuIIkZ/lib/libdl.so.2
+10.0.1.111>                 /lib/libdl-2.11.1.so -> /tmp/initrd.uuIIkZ/lib/libdl-2.11.1.so
+10.0.1.111>       /lib/libudev.so.0 -> /tmp/initrd.uuIIkZ/lib/libudev.so.0
+10.0.1.111>         /lib/libudev.so.0.7.0 -> /tmp/initrd.uuIIkZ/lib/libudev.so.0.7.0
+10.0.1.111>     /usr/lib/libparted.so.0 -> /tmp/initrd.uuIIkZ/usr/lib/libparted.so.0
+10.0.1.111>       /usr/lib/libparted.so.0.0.1 -> /tmp/initrd.uuIIkZ/usr/lib/libparted.so.0.0.1
+10.0.1.111>         /lib/libuuid.so.1 -> /tmp/initrd.uuIIkZ/lib/libuuid.so.1
+10.0.1.111>           /lib/libuuid.so.1.3.0 -> /tmp/initrd.uuIIkZ/lib/libuuid.so.1.3.0
+10.0.1.111>     /lib/libblkid.so.1 -> /tmp/initrd.uuIIkZ/lib/libblkid.so.1
+10.0.1.111>       /lib/libblkid.so.1.1.0 -> /tmp/initrd.uuIIkZ/lib/libblkid.so.1.1.0
+10.0.1.111>     /lib/libpopt.so.0 -> /tmp/initrd.uuIIkZ/lib/libpopt.so.0
+10.0.1.111>       /lib/libpopt.so.0.0.0 -> /tmp/initrd.uuIIkZ/lib/libpopt.so.0.0.0
+10.0.1.111>     /lib/libresolv.so.2 -> /tmp/initrd.uuIIkZ/lib/libresolv.so.2
+10.0.1.111>       /lib/libresolv-2.11.1.so -> /tmp/initrd.uuIIkZ/lib/libresolv-2.11.1.so
+10.0.1.111>     /usr/lib/libelf.so.1 -> /tmp/initrd.uuIIkZ/usr/lib/libelf.so.1
+10.0.1.111>       /usr/lib/libelf-0.146.so -> /tmp/initrd.uuIIkZ/usr/lib/libelf-0.146.so
+10.0.1.111>     /lib/libm.so.6 -> /tmp/initrd.uuIIkZ/lib/libm.so.6
+10.0.1.111>       /lib/libm-2.11.1.so -> /tmp/initrd.uuIIkZ/lib/libm-2.11.1.so
+10.0.1.111>     /lib/libgcc_s.so.1 -> /tmp/initrd.uuIIkZ/lib/libgcc_s.so.1
+10.0.1.111>       /lib/libgcc_s-4.4.3.so.1 -> /tmp/initrd.uuIIkZ/lib/libgcc_s-4.4.3.so.1
+10.0.1.111>   /usr/lib/libbdevid.so.6.0.93 -> /tmp/initrd.uuIIkZ/usr/lib/libbdevid.so.6.0.93
+10.0.1.111> /sbin/modprobe -> /tmp/initrd.uuIIkZ/bin/modprobe
+10.0.1.111>   /lib/libmodprobe.so.0 -> /tmp/initrd.uuIIkZ/lib/libmodprobe.so.0
+10.0.1.111>     /lib/libmodprobe.so.0.0.0 -> /tmp/initrd.uuIIkZ/lib/libmodprobe.so.0.0.0
+10.0.1.111>       /lib/libz.so.1 -> /tmp/initrd.uuIIkZ/lib/libz.so.1
+10.0.1.111>         /lib/libz.so.1.2.3 -> /tmp/initrd.uuIIkZ/lib/libz.so.1.2.3
+10.0.1.111> /sbin/rmmod -> /tmp/initrd.uuIIkZ/bin/rmmod
+10.0.1.111> /bin/ln -> /tmp/initrd.uuIIkZ/bin/ln
+10.0.1.111> resolving for MODULES
+10.0.1.111> and that has items of usbhid ehci-hcd ohci-hcd uhci-hcd ext3 crc-t10dif scsi_mod sd_mod scsi_transport_spi aic7xxx pci_hotplug shpchp pata_serverworks
+10.0.1.111> Looking for deps of module usbhid: usbcore hid 
+10.0.1.111> Looking for deps of module ehci-hcd: usbcore 
+10.0.1.111> Looking for deps of module ohci-hcd: usbcore 
+10.0.1.111> Looking for deps of module uhci-hcd: usbcore 
+10.0.1.111> Looking for deps of module ext3: jbd 
+10.0.1.111> Looking for deps of module crc-t10dif
+10.0.1.111> Looking for deps of module scsi_mod
+10.0.1.111> Looking for deps of module sd_mod: crc-t10dif scsi_mod 
+10.0.1.111> Looking for deps of module scsi_transport_spi: scsi_mod 
+10.0.1.111> Looking for deps of module aic7xxx: scsi_mod scsi_transport_spi 
+10.0.1.111> Looking for deps of module pci_hotplug
+10.0.1.111> Looking for deps of module shpchp: pci_hotplug 
+10.0.1.111> Looking for deps of module pata_serverworks: scsi_mod libata 
+10.0.1.111> Looking for deps of module aic7xxx: scsi_mod scsi_transport_spi 
+10.0.1.111> Looking for deps of module crc-t10dif
+10.0.1.111> Looking for deps of module ehci-hcd: usbcore 
+10.0.1.111> Looking for deps of module ext3: jbd 
+10.0.1.111> Looking for deps of module hid
+10.0.1.111> Looking for deps of module jbd
+10.0.1.111> Looking for deps of module libata: scsi_mod 
+10.0.1.111> Looking for deps of module ohci-hcd: usbcore 
+10.0.1.111> Looking for deps of module pata_serverworks: scsi_mod libata 
+10.0.1.111> Looking for deps of module pci_hotplug
+10.0.1.111> Looking for deps of module scsi_mod
+10.0.1.111> Looking for deps of module scsi_transport_spi: scsi_mod 
+10.0.1.111> Looking for deps of module sd_mod: crc-t10dif scsi_mod 
+10.0.1.111> Looking for deps of module shpchp: pci_hotplug 
+10.0.1.111> Looking for deps of module uhci-hcd: usbcore 
+10.0.1.111> Looking for deps of module usbcore
+10.0.1.111> Looking for deps of module usbhid: usbcore hid 
+10.0.1.111> resolving for availmodules
+10.0.1.111> and that has items of 
+10.0.1.111> /lib/modules/2.6.33.3-desktop-1mnb/kernel/drivers/scsi/aic7xxx/aic7xxx.ko.gz -> /tmp/initrd.uuIIkZ/lib/modules/2.6.33.3-desktop-1mnb/aic7xxx.ko.gz
+10.0.1.111> /lib/modules/2.6.33.3-desktop-1mnb/kernel/lib/crc-t10dif.ko.gz -> /tmp/initrd.uuIIkZ/lib/modules/2.6.33.3-desktop-1mnb/crc-t10dif.ko.gz
+10.0.1.111> /lib/modules/2.6.33.3-desktop-1mnb/kernel/drivers/usb/host/ehci-hcd.ko.gz -> /tmp/initrd.uuIIkZ/lib/modules/2.6.33.3-desktop-1mnb/ehci-hcd.ko.gz
+10.0.1.111> /lib/modules/2.6.33.3-desktop-1mnb/kernel/fs/ext3/ext3.ko.gz -> /tmp/initrd.uuIIkZ/lib/modules/2.6.33.3-desktop-1mnb/ext3.ko.gz
+10.0.1.111> /lib/modules/2.6.33.3-desktop-1mnb/kernel/drivers/hid/hid.ko.gz -> /tmp/initrd.uuIIkZ/lib/modules/2.6.33.3-desktop-1mnb/hid.ko.gz
+10.0.1.111> /lib/modules/2.6.33.3-desktop-1mnb/kernel/fs/jbd/jbd.ko.gz -> /tmp/initrd.uuIIkZ/lib/modules/2.6.33.3-desktop-1mnb/jbd.ko.gz
+10.0.1.111> /lib/modules/2.6.33.3-desktop-1mnb/kernel/drivers/ata/libata.ko.gz -> /tmp/initrd.uuIIkZ/lib/modules/2.6.33.3-desktop-1mnb/libata.ko.gz
+10.0.1.111> /lib/modules/2.6.33.3-desktop-1mnb/kernel/drivers/usb/host/ohci-hcd.ko.gz -> /tmp/initrd.uuIIkZ/lib/modules/2.6.33.3-desktop-1mnb/ohci-hcd.ko.gz
+10.0.1.111> /lib/modules/2.6.33.3-desktop-1mnb/kernel/drivers/ata/pata_serverworks.ko.gz -> /tmp/initrd.uuIIkZ/lib/modules/2.6.33.3-desktop-1mnb/pata_serverworks.ko.gz
+10.0.1.111> /lib/modules/2.6.33.3-desktop-1mnb/kernel/drivers/pci/hotplug/pci_hotplug.ko.gz -> /tmp/initrd.uuIIkZ/lib/modules/2.6.33.3-desktop-1mnb/pci_hotplug.ko.gz
+10.0.1.111> /lib/modules/2.6.33.3-desktop-1mnb/kernel/drivers/scsi/scsi_mod.ko.gz -> /tmp/initrd.uuIIkZ/lib/modules/2.6.33.3-desktop-1mnb/scsi_mod.ko.gz
+10.0.1.111> /lib/modules/2.6.33.3-desktop-1mnb/kernel/drivers/scsi/scsi_transport_spi.ko.gz -> /tmp/initrd.uuIIkZ/lib/modules/2.6.33.3-desktop-1mnb/scsi_transport_spi.ko.gz
+10.0.1.111> /lib/modules/2.6.33.3-desktop-1mnb/kernel/drivers/scsi/sd_mod.ko.gz -> /tmp/initrd.uuIIkZ/lib/modules/2.6.33.3-desktop-1mnb/sd_mod.ko.gz
+10.0.1.111> /lib/modules/2.6.33.3-desktop-1mnb/kernel/drivers/pci/hotplug/shpchp.ko.gz -> /tmp/initrd.uuIIkZ/lib/modules/2.6.33.3-desktop-1mnb/shpchp.ko.gz
+10.0.1.111> /lib/modules/2.6.33.3-desktop-1mnb/kernel/drivers/usb/host/uhci-hcd.ko.gz -> /tmp/initrd.uuIIkZ/lib/modules/2.6.33.3-desktop-1mnb/uhci-hcd.ko.gz
+10.0.1.111> /lib/modules/2.6.33.3-desktop-1mnb/kernel/drivers/usb/core/usbcore.ko.gz -> /tmp/initrd.uuIIkZ/lib/modules/2.6.33.3-desktop-1mnb/usbcore.ko.gz
+10.0.1.111> /lib/modules/2.6.33.3-desktop-1mnb/kernel/drivers/hid/usbhid/usbhid.ko.gz -> /tmp/initrd.uuIIkZ/lib/modules/2.6.33.3-desktop-1mnb/usbhid.ko.gz
+10.0.1.111> /etc/sysconfig/keyboard -> /tmp/initrd.uuIIkZ/etc/sysconfig/keyboard
+10.0.1.111> /bin/loadkeys -> /tmp/initrd.uuIIkZ/bin/loadkeys
+10.0.1.111> /etc/sysconfig/console/default.kmap -> /tmp/initrd.uuIIkZ/etc/sysconfig/console/default.kmap
+10.0.1.111> /etc/sysconfig/i18n -> /tmp/initrd.uuIIkZ/etc/sysconfig/i18n
+10.0.1.111> /bin/setfont -> /tmp/initrd.uuIIkZ/bin/setfont
+10.0.1.111> /usr/lib/kbd/consolefonts/lat0-16.psfu.gz -> /tmp/initrd.uuIIkZ/usr/lib/kbd/consolefonts/lat0-16.psfu.gz
+10.0.1.111> /lib/udev/console_init -> /tmp/initrd.uuIIkZ/lib/udev/console_init
+10.0.1.111> probing for drm modules for pci device /sys/bus/pci/devices/0000:00:0e.0
+10.0.1.111> Adding graphics device /sys/bus/pci/devices/0000:00:0e.0
+10.0.1.111> Looking for deps of module pci:v00001002d00004752sv00001028sd00000121bc03sc00i00
+10.0.1.111> resolving for GRAPHICSMODS
+10.0.1.111> and that has items of 
+10.0.1.111> Adding module usbhid
+10.0.1.111> Adding module ehci-hcd
+10.0.1.111> Adding module ohci-hcd
+10.0.1.111> Adding module uhci-hcd
+10.0.1.111> Adding module ext3
+10.0.1.111> Adding module crc-t10dif
+10.0.1.111> Adding module scsi_mod
+10.0.1.111> Adding module sd_mod
+10.0.1.111> Adding module scsi_transport_spi
+10.0.1.111> Adding module aic7xxx
+10.0.1.111> Adding module pci_hotplug
+10.0.1.111> Adding module shpchp
+10.0.1.111> Adding module pata_serverworks
+10.0.1.111> /usr/sbin/resume -> /tmp/initrd.uuIIkZ/bin/resume
+10.0.1.111>   /usr/lib/suspend/resume -> /tmp/initrd.uuIIkZ/usr/lib/suspend/resume
+10.0.1.111>     /usr/lib/liblzo2.so.2 -> /tmp/initrd.uuIIkZ/usr/lib/liblzo2.so.2
+10.0.1.111>       /usr/lib/liblzo2.so.2.0.0 -> /tmp/initrd.uuIIkZ/usr/lib/liblzo2.so.2.0.0
+10.0.1.111>     /lib/libpthread.so.0 -> /tmp/initrd.uuIIkZ/lib/libpthread.so.0
+10.0.1.111>       /lib/libpthread-2.11.1.so -> /tmp/initrd.uuIIkZ/lib/libpthread-2.11.1.so
+10.0.1.111>     /lib/libply.so.2 -> /tmp/initrd.uuIIkZ/lib/libply.so.2
+10.0.1.111>       /lib/libply.so.2.0.0 -> /tmp/initrd.uuIIkZ/lib/libply.so.2.0.0
+10.0.1.111>         /lib/librt.so.1 -> /tmp/initrd.uuIIkZ/lib/librt.so.1
+10.0.1.111>           /lib/librt-2.11.1.so -> /tmp/initrd.uuIIkZ/lib/librt-2.11.1.so
+10.0.1.111>     /lib/libply-splash-core.so.2 -> /tmp/initrd.uuIIkZ/lib/libply-splash-core.so.2
+10.0.1.111>       /lib/libply-splash-core.so.2.0.0 -> /tmp/initrd.uuIIkZ/lib/libply-splash-core.so.2.0.0
+10.0.1.111> /etc/suspend.conf -> /tmp/initrd.uuIIkZ/etc/suspend.conf
+10.0.1.111> This initrd uses dynamic shared objects.
+10.0.1.111> Adding dynamic linker configuration files.
+10.0.1.111> /etc/ld.so.conf -> /tmp/initrd.uuIIkZ/etc/ld.so.conf
+10.0.1.111> Running ldconfig
+10.0.1.111> Installation finished. No error reported.
+10.0.1.111> This is the contents of the device map /boot/grub/device.map.
+10.0.1.111> Check if this is correct or not. If any of the lines is incorrect,
+10.0.1.111> fix it and re-run the script `grub-install'.
+10.0.1.111> 
+10.0.1.111> (hd0) /dev/sda
+10.0.1.111>  Umounting /dev/sda5...OK
+10.0.1.111>  Umounting /dev/sda2...OK
+10.0.1.111> ftp: connect: Connection refused
+10.0.1.111> Local directory now /tmp
+10.0.1.111> Not connected.
 ]]></programlisting>
     </sect2>
   </sect1>
