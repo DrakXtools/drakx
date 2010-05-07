@@ -1,13 +1,14 @@
 <?xml version="1.0"  encoding="ISO-8859-1"?>
   <article lang="en">
-      <title>Clone a node/computer using KA method</title>
+	  <title>Clone a node/computer using KA method</title>
+	  <sect1>CLONING WILL ERASE ALL CLIENT NODES DATA !</sect1>
   <sect1>
     <title>Clone a computer over the network</title>
     <para>
-      Goal of duplication is to easily deploy a computer over network without taking care of numbers of computer. In this documentation, we call golden node the node we want to clone.
-      We can duplicate SCSI or IDE hard drive, and duplication support multiple filesystem (reiserfs, ext2, ext3, ext4, xfs, jfs).
+	    Goal of duplication is to easily deploy a computer over network without taking care of numbers of computer. In this documentation, we call golden node the node we want to clone. We can duplicate SCSI or IDE hard drive, and duplication support multiple filesystem (reiserfs, ext2, ext3, ext4, xfs, jfs).
+	    This method came from a very old project called CLIC, and was used under IGGI project, all Mandrake Clustering products, and now it is used under XtreemOS project. Now it should be available in 2010 spring, and all futur product.
     </para>
-    <para>WARNING: all data on client nodes will be ERASED ! We duplicate partitions of HDD' golden node, and the process will do an fdisk command on the client node, so ALL YOUR DATA will be erased on client nodes.</para>
+    <para>WARNING: all data on client nodes will be ERASED ! We duplicate partitions of HDD's golden node, and the process will do an fdisk command on the client node, so ALL YOUR DATA will be erased on client nodes.</para>
     <sect2>
       <title>KA method</title>
       <para>
@@ -20,8 +21,18 @@
       </para>
       <para>
 	<itemizedlist>
-	  <listitem><para>KA method doesn't support RAID software</para></listitem>
-	  <listitem><para>you can only clone Linux filesystems (if you want to duplicate another kinf of FS, it's up to you to modify the scripts)</para></listitem>
+		<listitem><para>KA method doesn't support RAID software (use dolly to do that)</para></listitem>
+		<listitem><para>all data on client nodes are erased</para></listitem>
+		<listitem><para>you need a PXE, DHDCP and TFTP server</para></listitem>
+		<listitem><para>you must re-create same partition table as the golden node (even if size can differ)</para></listitem>
+		<listitem><para>even if it has been tested, it's still an experimental method</para></listitem>
+		<listitem><para>cloning script are old, and need a full rewrite</para></listitem>
+		<listitem><para>now it's only works with the Mandriva installer (need to patch it to support a KA method)</para></listitem>
+		<listitem><para>if a node crash while doing a duplication, the duplication process stop (or became very unstable)</para></listitem>
+		<listitem><para>using fdisk to erase and re-format the HDD is not a good way to proceed</para></listitem>
+		<listitem><para>UUID support is not really done (fstab use old /dec/sdX)</para></listitem>
+		<listitem><para>you can only clone Linux filesystems (if you want to duplicate another kinf of FS, it's up to you to modify the scripts)</para></listitem>
+		<listitem><para>of course various other things !</para></listitem>
 	</itemizedlist>
       </para>
     </sect2>
@@ -34,7 +45,7 @@
 	</para>
 	<itemizedlist>
 	  <listitem><para><emphasis role="bold">PXE boot to retrieve stage1</emphasis>: the computer boot on PXE mode, retrieve <emphasis role="bold">vmlinuz</emphasis> and an <emphasis role="bold">initrd</emphasis> image. The computer is in <emphasis role="bold">stage1</emphasis> mode, and is able to get the stage2 throug KA. Network is up.</para></listitem>
-	  <listitem><para><emphasis role="bold">get stage2</emphasis>: the computer gets the stage2 with the KA method. The <emphasis role="bold">stage2</emphasis> contains all necessary tools to recognize your hardware (the most important things is to detect your HDD and your network card), and all necessary tools to finalize the cloning process.</para></listitem>
+	  <listitem><para><emphasis role="bold">get stage2</emphasis>: the computer gets the stage2 with the KA method. The <emphasis role="bold">stage2</emphasis> contains all necessary tools to recognize your hardware (the most important things is to detect your HDD and your network card), and all necessary tools/scripts to finalize the cloning process.</para></listitem>
 	  <listitem><para><emphasis role="bold">Duplication process</emphasis>: the computer auto-probes needed modules to be able to access the HDD. A basic log server is launched on the client node to be able to run command and get status of the KA duplication process. The computer reconfigure the modprobe.conf and restore the booloader (grub or lilo)</para></listitem>
 	</itemizedlist>
       </sect3>
