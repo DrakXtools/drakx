@@ -33,6 +33,10 @@ clean:
 pdf_doc:	
 	db2pdf -c ${CATALOG} -d ${DSL} ${XML_FILE} 2>&1
 
+pdf_noprint:
+	make clean
+	DSSSL_JADETEX=docbook-jadetex.dsssl make duplication.pdf DSSSL_JADETEX=docbook-jadetex.dsssl
+
 html_doc:
 	xsltproc ${XSL_FILE} ${XML_FILE}
 	mv -f index.html ${WWW_PATH}/duplication.html
