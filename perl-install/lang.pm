@@ -643,6 +643,7 @@ my %IM_config =
    },
    'scim' => {
             GTK_IM_MODULE => 'scim',
+	    QT_IM_MODULE => 'xim',
             XIM_PROGRAM => 'scim -d',
             XMODIFIERS => '@im=SCIM',
 	    packages => {
