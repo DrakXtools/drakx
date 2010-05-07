@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /><title>Clone a node/computer using KA method</title><link rel="stylesheet" href="styleguibo.css" type="text/css" /><meta name="generator" content="DocBook XSL Stylesheets V1.75.2" /><link rel="home" href="#id2243211" title="Clone a node/computer using KA method" /><link rel="next" href="#id2506023" title="1. Clone a computer over the network" /></head><body><div xml:lang="en" class="article" title="Clone a node/computer using KA method" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="id2243211"></a>Clone a node/computer using KA method</h2></div></div><hr /></div><div class="toc"><dl><dt><span class="sect1"><a href="#id2506023">1. Clone a computer over the network</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id2506044">1.1. KA method</a></span></dt><dt><span class="sect2"><a href="#id2435194">1.2. HOW it works</a></span></dt><dd><dl><dt><span class="sect3"><a href="#id2434894">1.2.1. Steps</a></span></dt><dt><span class="sect3"><a href="#id2506455">1.2.2. Needed files</a></span></dt></dl></dd><dt><span class="sect2"><a href="#id2506508">1.3. Step 1: PXE, TFTP, DHCPD services</a></span></dt><dd><dl><dt><span class="sect3"><a href="#id2506544">1.3.1. PXE parameters on server</a></span></dt><dt><span class="sect3"><a href="#id2506625">1.3.2. TFTP server</a></span></dt><dt><span class="sect3"><a href="#id2506656">1.3.3. PXE configuration</a></span></dt><dt><span class="sect3"><a href="#id2506668">1.3.4. DHCPD configuration</a></span></dt></dl></dd></dl></dd><dt><span class="sect1"><a href="#id2506821">2. Setup a node as a golden node</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id2506827">2.1. The rescue.sqfs file</a></span></dt><dd><dl><dt><span class="sect3"><a href="#id2506883">2.1.1. ka-d.sh</a></span></dt><dt><span class="sect3"><a href="#id2506929">2.1.2. replication.conf</a></span></dt><dt><span class="sect3"><a href="#id2506940">2.1.3. fdisk_to_desc</a></span></dt><dt><span class="sect3"><a href="#id2506969">2.1.4. gen_modprobe_conf.pl</a></span></dt><dt><span class="sect3"><a href="#id2506992">2.1.5. ka-d-client</a></span></dt><dt><span class="sect3"><a href="#id2507027">2.1.6. ka-d-server</a></span></dt><dt><span class="sect3"><a href="#id2507076">2.1.7. ka_replication.sh</a></span></dt><dt><span class="sect3"><a href="#id2507100">2.1.8. store_log.sh</a></span></dt><dt><span class="sect3"><a href="#id2507128">2.1.9. bootable_flag.sh</a></span></dt><dt><span class="sect3"><a href="#id2507140">2.1.10. make_initrd_grub</a></span></dt><dt><span class="sect3"><a href="#id2507163">2.1.11. make_initrd_lilo</a></span></dt><dt><span class="sect3"><a href="#id2507186">2.1.12. prepare_node.sh</a></span></dt><dt><span class="sect3"><a href="#id2507211">2.1.13. send_status.pl</a></span></dt><dt><span class="sect3"><a href="#id2507234">2.1.14. status_node.pl</a></span></dt></dl></dd></dl></dd><dt><span class="sect1"><a href="#id2507254">3. The golden node, KA server</a></span></dt><dt><span class="sect1"><a href="#id2507401">4. KA client node</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id2507406">4.1. PXE server (kamethod)</a></span></dt><dt><span class="sect2"><a href="#id2507443">4.2. Stage1 KA method, node waiting stage2 </a></span></dt><dt><span class="sect2"><a href="#id2507490">4.3. Stage2, the duplication process</a></span></dt><dt><span class="sect2"><a href="#id2507559">4.4. Prepare the node</a></span></dt><dt><span class="sect2"><a href="#id2507585">4.5. PXE server to local boot</a></span></dt></dl></dd><dt><span class="sect1"><a href="#id2507603">5. Step by step from scratch KA duplication</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id2507638">5.1. Golden node side</a></span></dt><dt><span class="sect2"><a href="#id2507781">5.2. KA client side</a></span></dt></dl></dd></dl></div><div class="sect1" title="1. Clone a computer over the network"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2506023"></a>1. Clone a computer over the network</h2></div></div></div><p>
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /><title>Clone a node/computer using KA method</title><link rel="stylesheet" href="styleguibo.css" type="text/css" /><meta name="generator" content="DocBook XSL Stylesheets V1.75.2" /><link rel="home" href="#id2243211" title="Clone a node/computer using KA method" /><link rel="next" href="#id2506023" title="1. Clone a computer over the network" /></head><body><div xml:lang="en" class="article" title="Clone a node/computer using KA method" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="id2243211"></a>Clone a node/computer using KA method</h2></div></div><hr /></div><div class="toc"><dl><dt><span class="sect1"><a href="#id2506023">1. Clone a computer over the network</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id2506044">1.1. KA method</a></span></dt><dt><span class="sect2"><a href="#id2435194">1.2. HOW it works</a></span></dt><dd><dl><dt><span class="sect3"><a href="#id2434894">1.2.1. Steps</a></span></dt><dt><span class="sect3"><a href="#id2506455">1.2.2. Needed files</a></span></dt></dl></dd><dt><span class="sect2"><a href="#id2506508">1.3. Step 1: PXE, TFTP, DHCPD services</a></span></dt><dd><dl><dt><span class="sect3"><a href="#id2506544">1.3.1. PXE parameters on server</a></span></dt><dt><span class="sect3"><a href="#id2506625">1.3.2. TFTP server</a></span></dt><dt><span class="sect3"><a href="#id2506656">1.3.3. PXE configuration</a></span></dt><dt><span class="sect3"><a href="#id2506668">1.3.4. DHCPD configuration</a></span></dt></dl></dd></dl></dd><dt><span class="sect1"><a href="#id2506821">2. Setup a node as a golden node</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id2506827">2.1. The rescue.sqfs file</a></span></dt><dd><dl><dt><span class="sect3"><a href="#id2506883">2.1.1. ka-d.sh</a></span></dt><dt><span class="sect3"><a href="#id2506929">2.1.2. replication.conf</a></span></dt><dt><span class="sect3"><a href="#id2506940">2.1.3. fdisk_to_desc</a></span></dt><dt><span class="sect3"><a href="#id2506969">2.1.4. gen_modprobe_conf.pl</a></span></dt><dt><span class="sect3"><a href="#id2506992">2.1.5. ka-d-client</a></span></dt><dt><span class="sect3"><a href="#id2507027">2.1.6. ka-d-server</a></span></dt><dt><span class="sect3"><a href="#id2507076">2.1.7. ka_replication.sh</a></span></dt><dt><span class="sect3"><a href="#id2507100">2.1.8. store_log.sh</a></span></dt><dt><span class="sect3"><a href="#id2507128">2.1.9. bootable_flag.sh</a></span></dt><dt><span class="sect3"><a href="#id2507140">2.1.10. make_initrd_grub</a></span></dt><dt><span class="sect3"><a href="#id2507163">2.1.11. make_initrd_lilo</a></span></dt><dt><span class="sect3"><a href="#id2507186">2.1.12. prepare_node.sh</a></span></dt><dt><span class="sect3"><a href="#id2507211">2.1.13. send_status.pl</a></span></dt><dt><span class="sect3"><a href="#id2507234">2.1.14. status_node.pl</a></span></dt></dl></dd></dl></dd><dt><span class="sect1"><a href="#id2507254">3. The golden node, KA server</a></span></dt><dt><span class="sect1"><a href="#id2507401">4. KA client node</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id2507406">4.1. PXE server (kamethod)</a></span></dt><dt><span class="sect2"><a href="#id2507443">4.2. Stage1 KA method, node waiting stage2 </a></span></dt><dt><span class="sect2"><a href="#id2507490">4.3. Stage2, the duplication process</a></span></dt><dt><span class="sect2"><a href="#id2507559">4.4. Prepare the node</a></span></dt><dt><span class="sect2"><a href="#id2507585">4.5. PXE server to local boot</a></span></dt></dl></dd><dt><span class="sect1"><a href="#id2507603">5. Step by step from scratch KA duplication</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id2507638">5.1. Golden node side</a></span></dt><dt><span class="sect2"><a href="#id2507781">5.2. KA client side</a></span></dt><dt><span class="sect2"><a href="#id2508568">5.3. Post duplication process</a></span></dt></dl></dd></dl></div><div class="sect1" title="1. Clone a computer over the network"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2506023"></a>1. Clone a computer over the network</h2></div></div></div><p>
       Goal of duplication is to easily deploy a computer over network without taking care of numbers of computer. In this documentation, we call golden node the node we want to clone.
       We can duplicate SCSI or IDE hard drive, and duplication support multiple filesystem (reiserfs, ext2, ext3, ext4, xfs, jfs).
     </p><p>WARNING: all data on client nodes will be ERASED ! We duplicate partitions of HDD' golden node, and the process will do an fdisk command on the client node, so ALL YOUR DATA will be erased on client nodes.</p><div class="sect2" title="1.1. KA method"><div class="titlepage"><div><div><h3 class="title"><a id="id2506044"></a>1.1. KA method</h3></div></div></div><p>
@@ -1188,4 +1188,73 @@ Total data received = 788 Megs (10.796 Mbytes/sec); BUF :0M End of data flow
 10.0.1.111&gt; ftp: connect: Connection refused
 10.0.1.111&gt; Local directory now /tmp
 10.0.1.111&gt; Not connected.
-</pre></div></div></div></body></html>
+</pre></div><div class="sect2" title="5.3. Post duplication process"><div class="titlepage"><div><div><h3 class="title"><a id="id2508568"></a>5.3. Post duplication process</h3></div></div></div><p>Now client nodes reboots, so we have to switch PXE to a local boot.</p><p>
+</p><pre class="programlisting">
+[root@node42 ka]# vi /var/lib/tftpboot/X86PC/linux/pxelinux.cfg/default 
+DEFAULT local
+</pre><p>
+	</p><p>Nodes hsould be up, we can to see their hardware.</p><p>
+		</p><pre class="programlisting">
+[root@node42 ka]# ssh render@10.0.1.110
+[render@linux ~]$ lspcidrake 
+8139too         : Realtek Semiconductor Co., Ltd.|RTL-8139/8139C/8139C+ [NETWORK_ETHERNET] (rev: 10)
+snd_intel8x0    : Intel Corporation|82801EB/ER (ICH5/ICH5R) AC'97 Audio Controller [MULTIMEDIA_AUDIO] (rev: 02)
+i2c_i801        : Intel Corporation|82801EB/ER (ICH5/ICH5R) SMBus Controller [SERIAL_SMBUS] (rev: 02)
+ata_piix        : Intel Corporation|82801EB/ER (ICH5/ICH5R) IDE Controller [STORAGE_IDE] (rev: 02)
+iTCO_wdt        : Intel Corporation|82801EB/ER (ICH5/ICH5R) LPC Interface Bridge [BRIDGE_ISA] (rev: 02)
+shpchp          : Intel Corporation|82801 PCI Bridge [BRIDGE_PCI] (rev: c2)
+ehci_hcd        : Intel Corporation|82801EB/ER (ICH5/ICH5R) USB2 EHCI Controller [SERIAL_USB] (rev: 02)
+uhci_hcd        : Intel Corporation|82801EB/ER (ICH5/ICH5R) USB UHCI Controller #4 [SERIAL_USB] (rev: 02)
+uhci_hcd        : Intel Corporation|82801EB/ER (ICH5/ICH5R) USB UHCI Controller #3 [SERIAL_USB] (rev: 02)
+uhci_hcd        : Intel Corporation|82801EB/ER (ICH5/ICH5R) USB UHCI Controller #2 [SERIAL_USB] (rev: 02)
+uhci_hcd        : Intel Corporation|82801EB/ER (ICH5/ICH5R) USB UHCI Controller #1 [SERIAL_USB] (rev: 02)
+unknown         : Intel Corporation|82865G/PE/P Processor to I/O Memory Interface [SYSTEM_OTHER] (rev: 02)
+Card:Intel 810 and later: Intel Corporation|82865G Integrated Graphics Controller [DISPLAY_VGA] (rev: 02)
+unknown         : Intel Corporation|82865G/PE/P DRAM Controller/Host-Hub Interface [BRIDGE_HOST] (rev: 02)
+hub             : Linux 2.6.33.3-desktop-1mnb uhci_hcd|UHCI Host Controller [Hub|Unused|Full speed (or root) hub]
+hub             : Linux 2.6.33.3-desktop-1mnb uhci_hcd|UHCI Host Controller [Hub|Unused|Full speed (or root) hub]
+hub             : Linux 2.6.33.3-desktop-1mnb uhci_hcd|UHCI Host Controller [Hub|Unused|Full speed (or root) hub]
+usbhid          :  |SCISSORS Keyboard [Human Interface Device|Boot Interface Subclass|Keyboard]
+hub             : Linux 2.6.33.3-desktop-1mnb uhci_hcd|UHCI Host Controller [Hub|Unused|Full speed (or root) hub]
+hub             : Linux 2.6.33.3-desktop-1mnb ehci_hcd|EHCI Host Controller [Hub|Unused|Full speed (or root) hub]
+[render@linux ~]$ cat /etc/modprobe.conf 
+install scsi_hostadapter /sbin/modprobe ata_piix; /sbin/modprobe ahci; /bin/true
+alias eth0 8139too
+install usb-interface /sbin/modprobe ehci_hcd; /sbin/modprobe uhci_hcd; /bin/true
+alias sound-slot-0 snd_intel8x0
+
+[root@node42 ka]# ssh render@10.0.1.111
+[render@localhost ~]$ lspcidrake 
+ath5k           : Atheros Communications Inc.|AR2413 802.11bg NIC [NETWORK_ETHERNET] (rev: 01)
+tg3             : Broadcom Corporation|NetXtreme BCM5701 Gigabit Ethernet [NETWORK_ETHERNET] (rev: 15)
+tg3             : Broadcom Corporation|NetXtreme BCM5701 Gigabit Ethernet [NETWORK_ETHERNET] (rev: 15)
+aic7xxx         : Adaptec|AIC-7899P U160/m [STORAGE_SCSI] (rev: 01)
+aic7xxx         : Adaptec|AIC-7899P U160/m [STORAGE_SCSI] (rev: 01)
+shpchp          : Intel Corporation|80303 I/O Processor PCI-to-PCI Bridge [BRIDGE_PCI] (rev: 01)
+unknown         : Broadcom|CIOB-X2 PCI-X I/O Bridge [BRIDGE_HOST] (rev: 03)
+unknown         : Broadcom|CIOB-X2 PCI-X I/O Bridge [BRIDGE_HOST] (rev: 03)
+unknown         : Broadcom|CIOB-X2 PCI-X I/O Bridge [BRIDGE_HOST] (rev: 03)
+unknown         : Broadcom|CIOB-X2 PCI-X I/O Bridge [BRIDGE_HOST] (rev: 03)
+unknown         : Broadcom|CSB5 LPC bridge [BRIDGE_ISA]
+ohci_hcd        : Broadcom|OSB4/CSB5 OHCI USB Controller [SERIAL_USB] (rev: 05)
+pata_serverworks: Broadcom|CSB5 IDE Controller [STORAGE_IDE] (rev: 93)
+i2c_piix4       : Broadcom|CSB5 South Bridge [BRIDGE_HOST] (rev: 93)
+Card:ATI Mach 64-based cards (no 3D acceleration): ATI Technologies Inc|Rage XL [DISPLAY_VGA] (rev: 27)
+unknown         : Dell|Embedded Remote Access: BMC/SMIC device
+unknown         : Dell|Remote Access Card III
+unknown         : Dell|Embedded Remote Access or ERA/O
+unknown         : Broadcom|CMIC-LE [BRIDGE_HOST]
+unknown         : Broadcom|CMIC-WS Host Bridge (GC-LE chipset) [BRIDGE_HOST]
+unknown         : Broadcom|CMIC-WS Host Bridge (GC-LE chipset) [BRIDGE_HOST] (rev: 13)
+hub             : Linux 2.6.33.3-desktop-1mnb ohci_hcd|OHCI Host Controller [Hub|Unused|Full speed (or root) hub]
+
+
+[render@localhost ~]$ cat /etc/modprobe.conf 
+install scsi_hostadapter /sbin/modprobe pata_serverworks; /sbin/modprobe aic7xxx; /bin/true
+alias eth0 tg3
+alias eth1 tg3
+install ide-controller /sbin/modprobe ide_generic; /bin/true
+install usb-interface /sbin/modprobe ohci_hcd; /bin/true
+alias wlan0 ath5k
+</pre><p>
+	</p></div></div></div></body></html>

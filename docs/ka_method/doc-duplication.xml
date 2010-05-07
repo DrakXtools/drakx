@@ -1393,6 +1393,82 @@ Total data received = 788 Megs (10.796 Mbytes/sec); BUF :0M End of data flow
 10.0.1.111> Not connected.
 ]]></programlisting>
     </sect2>
+    <sect2>
+      <title>Post duplication process</title>
+	    <para>Now client nodes reboots, so we have to switch PXE to a local boot.</para>
+	    <para>
+<programlisting><![CDATA[
+[root@node42 ka]# vi /var/lib/tftpboot/X86PC/linux/pxelinux.cfg/default 
+DEFAULT local
+]]></programlisting>
+	</para>
+	<para>Nodes hsould be up, we can to see their hardware.</para>
+	<para>
+		<programlisting><![CDATA[
+[root@node42 ka]# ssh render@10.0.1.110
+[render@linux ~]$ lspcidrake 
+8139too         : Realtek Semiconductor Co., Ltd.|RTL-8139/8139C/8139C+ [NETWORK_ETHERNET] (rev: 10)
+snd_intel8x0    : Intel Corporation|82801EB/ER (ICH5/ICH5R) AC'97 Audio Controller [MULTIMEDIA_AUDIO] (rev: 02)
+i2c_i801        : Intel Corporation|82801EB/ER (ICH5/ICH5R) SMBus Controller [SERIAL_SMBUS] (rev: 02)
+ata_piix        : Intel Corporation|82801EB/ER (ICH5/ICH5R) IDE Controller [STORAGE_IDE] (rev: 02)
+iTCO_wdt        : Intel Corporation|82801EB/ER (ICH5/ICH5R) LPC Interface Bridge [BRIDGE_ISA] (rev: 02)
+shpchp          : Intel Corporation|82801 PCI Bridge [BRIDGE_PCI] (rev: c2)
+ehci_hcd        : Intel Corporation|82801EB/ER (ICH5/ICH5R) USB2 EHCI Controller [SERIAL_USB] (rev: 02)
+uhci_hcd        : Intel Corporation|82801EB/ER (ICH5/ICH5R) USB UHCI Controller #4 [SERIAL_USB] (rev: 02)
+uhci_hcd        : Intel Corporation|82801EB/ER (ICH5/ICH5R) USB UHCI Controller #3 [SERIAL_USB] (rev: 02)
+uhci_hcd        : Intel Corporation|82801EB/ER (ICH5/ICH5R) USB UHCI Controller #2 [SERIAL_USB] (rev: 02)
+uhci_hcd        : Intel Corporation|82801EB/ER (ICH5/ICH5R) USB UHCI Controller #1 [SERIAL_USB] (rev: 02)
+unknown         : Intel Corporation|82865G/PE/P Processor to I/O Memory Interface [SYSTEM_OTHER] (rev: 02)
+Card:Intel 810 and later: Intel Corporation|82865G Integrated Graphics Controller [DISPLAY_VGA] (rev: 02)
+unknown         : Intel Corporation|82865G/PE/P DRAM Controller/Host-Hub Interface [BRIDGE_HOST] (rev: 02)
+hub             : Linux 2.6.33.3-desktop-1mnb uhci_hcd|UHCI Host Controller [Hub|Unused|Full speed (or root) hub]
+hub             : Linux 2.6.33.3-desktop-1mnb uhci_hcd|UHCI Host Controller [Hub|Unused|Full speed (or root) hub]
+hub             : Linux 2.6.33.3-desktop-1mnb uhci_hcd|UHCI Host Controller [Hub|Unused|Full speed (or root) hub]
+usbhid          :  |SCISSORS Keyboard [Human Interface Device|Boot Interface Subclass|Keyboard]
+hub             : Linux 2.6.33.3-desktop-1mnb uhci_hcd|UHCI Host Controller [Hub|Unused|Full speed (or root) hub]
+hub             : Linux 2.6.33.3-desktop-1mnb ehci_hcd|EHCI Host Controller [Hub|Unused|Full speed (or root) hub]
+[render@linux ~]$ cat /etc/modprobe.conf 
+install scsi_hostadapter /sbin/modprobe ata_piix; /sbin/modprobe ahci; /bin/true
+alias eth0 8139too
+install usb-interface /sbin/modprobe ehci_hcd; /sbin/modprobe uhci_hcd; /bin/true
+alias sound-slot-0 snd_intel8x0
+
+[root@node42 ka]# ssh render@10.0.1.111
+[render@localhost ~]$ lspcidrake 
+ath5k           : Atheros Communications Inc.|AR2413 802.11bg NIC [NETWORK_ETHERNET] (rev: 01)
+tg3             : Broadcom Corporation|NetXtreme BCM5701 Gigabit Ethernet [NETWORK_ETHERNET] (rev: 15)
+tg3             : Broadcom Corporation|NetXtreme BCM5701 Gigabit Ethernet [NETWORK_ETHERNET] (rev: 15)
+aic7xxx         : Adaptec|AIC-7899P U160/m [STORAGE_SCSI] (rev: 01)
+aic7xxx         : Adaptec|AIC-7899P U160/m [STORAGE_SCSI] (rev: 01)
+shpchp          : Intel Corporation|80303 I/O Processor PCI-to-PCI Bridge [BRIDGE_PCI] (rev: 01)
+unknown         : Broadcom|CIOB-X2 PCI-X I/O Bridge [BRIDGE_HOST] (rev: 03)
+unknown         : Broadcom|CIOB-X2 PCI-X I/O Bridge [BRIDGE_HOST] (rev: 03)
+unknown         : Broadcom|CIOB-X2 PCI-X I/O Bridge [BRIDGE_HOST] (rev: 03)
+unknown         : Broadcom|CIOB-X2 PCI-X I/O Bridge [BRIDGE_HOST] (rev: 03)
+unknown         : Broadcom|CSB5 LPC bridge [BRIDGE_ISA]
+ohci_hcd        : Broadcom|OSB4/CSB5 OHCI USB Controller [SERIAL_USB] (rev: 05)
+pata_serverworks: Broadcom|CSB5 IDE Controller [STORAGE_IDE] (rev: 93)
+i2c_piix4       : Broadcom|CSB5 South Bridge [BRIDGE_HOST] (rev: 93)
+Card:ATI Mach 64-based cards (no 3D acceleration): ATI Technologies Inc|Rage XL [DISPLAY_VGA] (rev: 27)
+unknown         : Dell|Embedded Remote Access: BMC/SMIC device
+unknown         : Dell|Remote Access Card III
+unknown         : Dell|Embedded Remote Access or ERA/O
+unknown         : Broadcom|CMIC-LE [BRIDGE_HOST]
+unknown         : Broadcom|CMIC-WS Host Bridge (GC-LE chipset) [BRIDGE_HOST]
+unknown         : Broadcom|CMIC-WS Host Bridge (GC-LE chipset) [BRIDGE_HOST] (rev: 13)
+hub             : Linux 2.6.33.3-desktop-1mnb ohci_hcd|OHCI Host Controller [Hub|Unused|Full speed (or root) hub]
+
+
+[render@localhost ~]$ cat /etc/modprobe.conf 
+install scsi_hostadapter /sbin/modprobe pata_serverworks; /sbin/modprobe aic7xxx; /bin/true
+alias eth0 tg3
+alias eth1 tg3
+install ide-controller /sbin/modprobe ide_generic; /bin/true
+install usb-interface /sbin/modprobe ohci_hcd; /bin/true
+alias wlan0 ath5k
+]]></programlisting>
+	</para>
+	</sect2>
   </sect1>
 </article>
 <!-- Keep this comment at the end of the file
