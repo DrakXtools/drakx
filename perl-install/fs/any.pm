@@ -97,10 +97,20 @@ sub prepare_minimal_root {
     eval { fs::mount::mount('none', "$::prefix/sys", 'sysfs') };
     eval { fs::mount::usbfs($::prefix) };
 
-    #- needed by lilo
-    if (-d '/dev/mapper' && !$::local_install) {
+    #- needed by lilo and mkinitrd
+    if (-d '/dev/mapper') {
 	my @vgs = map { $_->{VG_name} } @{$all_hds->{lvms}};
-	-e "/dev/$_" and cp_af("/dev/$_", "$::prefix/dev") foreach 'mapper', @vgs;
+	foreach my $dev ('mapper', @vgs) {
+	    -e "/dev/$dev" or next;
+	    cp_af("/dev/$dev", "$::prefix/dev");
+	    foreach (all("/dev/$dev")) {
+		-l "/dev/$dev/$_" or next;
+		my $target = readlink "$::prefix/dev/$dev/$_";
+		$target =~ /^\// or $target="/dev/$dev/$target";
+		-e "$::prefix$target" and next;
+		cp_af($target, "$::prefix$target");
+	    }
+	}
     }
 }
 

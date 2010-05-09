@@ -1,5 +1,9 @@
+Version 13.24 -  9 May 2010
+
 - devices:
   o get major/minor of device mapper correctly now that they are links
+- fix creation of device mapper devices in fs::any::prepare_minimal_root
+  (this fixes initrd creation from one if using lvm)
 
 Version 13.23 - 30 April 2010
 
