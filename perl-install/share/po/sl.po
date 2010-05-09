@@ -5,14 +5,14 @@
 # Matjaž Kaše <matjaz.kase@g-kabel.si>, 2004.
 # Aljoša Ločičnik <aljosa.locicnik@mandrakeprinas.org>, 2005.
 # Gregor Pirnaver <gregor.pirnaver@sdm-si.org>, 2002,2004,2005.
-# Jure Repinc <jlp@holodeck1.com>, 2005, 2006, 2007, 2008, 2009.
+# Jure Repinc <jlp@holodeck1.com>, 2005, 2006, 2007, 2008, 2009, 2010.
 # Matjaž Kaše <matjaz.kase@telemach.net>, 2006.
 # Matej Štrovs <matej.strovs@gmail.com>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "POT-Creation-Date: 2010-05-01 16:46+0200\n"
-"PO-Revision-Date: 2009-10-18 14:09+0200\n"
+"PO-Revision-Date: 2010-05-09 17:35+0200\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "MIME-Version: 1.0\n"
@@ -269,7 +269,7 @@ msgstr "Pripni za Xen"
 #: any.pm:536
 #, c-format
 msgid "Requires password to boot"
-msgstr ""
+msgstr "Za zagon potrebuje geslo"
 
 #: any.pm:538
 #, c-format
@@ -447,7 +447,7 @@ msgstr "Upravljanje uporabnikov"
 #: any.pm:883
 #, c-format
 msgid "Enable guest account"
-msgstr ""
+msgstr "Omogoči račun za gosta"
 
 #: any.pm:884 authentication.pm:237
 #, c-format
@@ -776,8 +776,7 @@ msgstr "Krajevna datoteka:"
 
 #: authentication.pm:63
 #, c-format
-msgid ""
-"Use local for all authentication and information user tell in local file"
+msgid "Use local for all authentication and information user tell in local file"
 msgstr "Uporabi krajevno datoteko za vse overjanje in podatke o uporabnikih"
 
 #: authentication.pm:64
@@ -1386,9 +1385,9 @@ msgid "Unknown"
 msgstr "Neznano"
 
 #: diskdrake/hd_gtk.pm:388
-#, fuzzy, c-format
+#, c-format
 msgid "Ext4"
-msgstr "Izhod"
+msgstr "Ext4"
 
 #: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
@@ -1668,14 +1667,14 @@ msgid "Logical volume name "
 msgstr "Ime logičnega pogona"
 
 #: diskdrake/interactive.pm:507
-#, fuzzy, c-format
+#, c-format
 msgid "Encrypt partition"
-msgstr "Algoritem za šifriranje"
+msgstr "Šifriraj razdelek"
 
 #: diskdrake/interactive.pm:508
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption key "
-msgstr "Šifrirni ključ"
+msgstr "Šifrirni ključ "
 
 #: diskdrake/interactive.pm:509 diskdrake/interactive.pm:1487
 #, c-format
@@ -1688,9 +1687,9 @@ msgid "The encryption keys do not match"
 msgstr "Šifrirna ključa se ne ujemata"
 
 #: diskdrake/interactive.pm:521
-#, fuzzy, c-format
+#, c-format
 msgid "Missing encryption key"
-msgstr "Šifrirni ključ datotečnega sistema: "
+msgstr "Manjka  šifrirni ključ"
 
 #: diskdrake/interactive.pm:541
 #, c-format
@@ -1997,8 +1996,7 @@ msgstr "Formatiranje razdelka %s"
 #: diskdrake/interactive.pm:1269
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
-msgstr ""
-"Po formatiranju razdelka %s bodo vsi podatki na tem razdelku izgubljeni."
+msgstr "Po formatiranju razdelka %s bodo vsi podatki na tem razdelku izgubljeni."
 
 #: diskdrake/interactive.pm:1292
 #, c-format
@@ -2303,10 +2301,8 @@ msgstr "Drugo"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
-msgstr ""
-"Vnesite svoje uporabniško ime, geslo in domeno za dostop do gostitelja."
+msgid "Please enter your username, password and domain name to access this host."
+msgstr "Vnesite svoje uporabniško ime, geslo in domeno za dostop do gostitelja."
 
 #: diskdrake/smbnfs_gtk.pm:180
 #, c-format
@@ -2471,8 +2467,7 @@ msgstr ""
 #: fs/mount_options.pm:126
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
-msgstr ""
-"Ne tolmači posebnih znakovnih ali blokovnih naprav v datotečnem sistemu."
+msgstr "Ne tolmači posebnih znakovnih ali blokovnih naprav v datotečnem sistemu."
 
 #: fs/mount_options.pm:128
 #, c-format
@@ -2758,9 +2753,9 @@ msgstr ""
 "Ko zaključite ne pozabite shraniti sprememb z ukazom 'w'"
 
 #: fs/partitioning_wizard.pm:402
-#, fuzzy, c-format
+#, c-format
 msgid "Ext2/3/4"
-msgstr "Ext3"
+msgstr "Ext2/3/4"
 
 #: fs/partitioning_wizard.pm:432 fs/partitioning_wizard.pm:572
 #, c-format
@@ -2858,15 +2853,15 @@ msgstr ""
 "Ne pozabite dodati /boot razdelka"
 
 #: fsedit.pm:437
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
-"Za korenski (/) razdelek ste izbrali programski razdelek RAID.\n"
-"Nobeden zagonski nalagalnik ne bo deloval brez /boot razdelka.\n"
-"Ne pozabite dodati /boot razdelka"
+"Za korenski (/) razdelek ste izbrali šifriran razdelek.\n"
+"Nobeden zagonski nalagalnik ne bo deloval brez razdelka /boot.\n"
+"Ne pozabite dodati razdelka /boot"
 
 #: fsedit.pm:443 fsedit.pm:461
 #, c-format
@@ -3224,7 +3219,7 @@ msgstr ""
 "Izbirate lahko med naštetimi nadomestnimi gonilniki (OSS ali ALSA) za vašo "
 "zvočno kartico (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
@@ -4804,7 +4799,7 @@ msgstr ""
 "več fizičnih nosilcev"
 
 #: messages.pm:11
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Introduction\n"
 "\n"
@@ -4930,114 +4925,6 @@ msgid ""
 "Paris - France.\n"
 "For any question on this document, please contact Mandriva S.A."
 msgstr ""
-"Uvod\n"
-"\n"
-"Operacijski sistem in druge sestavine distribucije Mandriva Linux \n"
-"bomo v nadaljnjem besedilu imenovali »Programje«.  Programje vsebuje "
-"programe, metode, pravila in dokumentacijo, \n"
-"ki se nanašajo na operacijski sistem in na različne sestavine distribucije "
-"Mandriva Linux.\n"
-"\n"
-"\n"
-"1. Licenčna pogodba\n"
-"\n"
-"Prosimo, pazljivo preberite ta dokument. To je licenčna pogodba med vami in "
-"Mandriva S.A.,ki se nanaša na programje.\n"
-"Vsaka namestitev, razmnoževanje ali uporaba programja pomeni, da izrecno "
-"sprejemate pogoje te pogodbe in da se z njimi v celoti strinjate.\n"
-"Če zavračate katerokoli pogodbeno določilo, programja ne smete namestiti,\n"
-"razmnoževati ali uporabljati.\n"
-"Vsak poskus namestitve, razmnoževanja ali uporabe programja v nasprotju z "
-"določili in pogoji\n"
-" te pogodbe, predstavlja kršitev, zaradi katere prenehajo vaše pogodbene "
-"pravice.\n"
-"V tem primeru morate nemudoma uničiti vse primerke programja,ki je v vaši "
-"posesti.\n"
-"\n"
-"\n"
-"2. Omejeno jamstvo\n"
-"\n"
-"Programje in priložena dokumentacija sta na voljo v obliki, v kakršni sta, "
-"brez jamstva,\n"
-"ki presega z zakonom določeno odgovornost.\n"
-"Mandriva S.A. v nobenem primeru, razen kadar to izrecno določa pravni red,\n"
-"ne prevzema odgovornosti za kakršnokoli naključno, posredno ali neposredno "
-"škodo,\n"
-"vključno s škodo zaradi izgube zaslužka, motenj v poslovanju, finančnih "
-"izgub, sodnih taks\n"
-"in izrečenih kazni ali drugih oblik posredne škode, ki bi nastala zaradi "
-"uporabe ali\n"
-"nezmožnosti uporabe programja, tudi če je bila Mandriva S.A. opozorjena na "
-"možnost nastanka takšne škode.\n"
-"\n"
-"\n"
-"OMEJENA ODGOVORNOST ZA POSEDOVANJE ALI UPORABO PROGRAMJA, KI JE V NEKATERIH "
-"DRŽAVAH PREPOVEDANO\n"
-"\n"
-"Mandriva S.A. v nobenem primeru, razen kadar to izrecno določa pravni red,\n"
-"ne prevzema odgovornosti za kakršnokoli naključno, posredno ali neposredno "
-"škodo,\n"
-"vključno s škodo zaradi izgube zaslužka, motenj v poslovanju, finančnih "
-"izgub, sodnih taks\n"
-"in izrečenih kazni ali drugih oblik posredne škode, ki bi nastala zaradi "
-"posedovanja\n"
-"ali uporabe programja oziroma zardi pridobivanja programja z Mandriva Linux "
-"spletnih strani,\n"
-"če je to v nasprotju z veljavnim pravnim redom države, v kateri bivate.\n"
-"Navedena omejitev odgovornosti se nanaša tudi, vendar ne izključno, na "
-"šifrirane sestavine programja.\n"
-"\n"
-"\n"
-"3. Splošno dovoljenje GNU (GPL) in sorodna dovoljenje\n"
-"\n"
-"Programje vsebuje sestavine, ki so jih ustvarili različni posamezniki in "
-"skupine.\n"
-"Večina tega programja je zaščitena s splošnim dovoljenjem GNU\n"
-" (v nadaljnjem besedilu GPL, General Public Licence) ali z vsebinsko "
-"sorodnim dovoljenjem.\n"
-"Slovensko besedilo GPL je dostopno na spletni strani  http://www.lugos.si/"
-"linux/gpl-sl.html\n"
-"Večinoma GPL in sorodna dovoljenja dovoljujejo uporabo, spreminjanje in "
-"razširjanje programja,\n"
-"ki je z njimi zaščiteno.\n"
-" Prosimo, pazljivo preberite določila in pogoje licenčne pogodbe za  vsako "
-"posamezno\n"
-" sestavino programja, preden jo uporabite.\n"
-"Obenem vas prosimo, da vsa vprašanja, ki se nanašajo na licenčne pogodbe za "
-"posamezne\n"
-"sestavine programja,naslovite na njenega avtorja in ne na Mandriva S.A.\n"
-"Vsako programje, ki ga razvije Mandriva S.A., je zaščiteno s splošnim "
-"dovoljenjem GPL.\n"
-"Dokumentacija, napisana pri Mandriva S.A., je zaščitena s posebnim "
-"dovoljenjem.\n"
-"Prosimo, da podrobnosti preberete v dokumentaciji.\n"
-"\n"
-"\n"
-"4. Pravice intelektualne lastnine\n"
-"\n"
-"Avtorske in druge pravice intelektualne lastnine, ki se nanašajo na "
-"programje, pripadaj avtorjem\n"
-" programja in so zaščitene z zakonom.\n"
-"Mandriva S.A. si pridržuje pravico do spreminjanja programja v celoti ali "
-"deloma\n"
-"v kakršnem koli smislu in za kakršen koli namen.\n"
-"»Mandriva«, »Mandriva Linux« in pripadajoči logotipi so blagovne znamke "
-"Mandriva S.A.\n"
-"\n"
-"\n"
-"5. Končne določbe\n"
-"\n"
-"V primeru, da je katero izmed določil te pogodba v nasprotju s pravnim redom "
-"države, v kateri bivate, \n"
-"se šteje, da takšno določilo ni sestavina te pogodbe.\n"
-"Ta pogodba je sestavljena v skladu s pravnim redom Republike Francije.\n"
-"V primeru spora, ki bi nastal iz te pogodbe, bosta stranki poskusili "
-"skleniti poravnavo.\n"
-"Za reševanje sporov, glede katerih se stranki ne bi uspeli poravnati,\n"
-"pa je pristojno sodišče v Parizu, Republika Francija.\n"
-"\n"
-"Prosimo, da se glede vseh nejasnosti v zvezi s to pogodbo obrnete na "
-"Mandriva S.A.\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: messages.pm:90
@@ -5517,8 +5404,7 @@ msgstr "Dovoli neposredno prijavo uporabniku root."
 
 #: security/help.pm:33
 #, c-format
-msgid ""
-"Allow the list of users on the system on display managers (kdm and gdm)."
+msgid "Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr "Dovoli prikaz seznama uporabnikov v upravitelju prikaza (kdm in gdm)."
 
 #: security/help.pm:35
@@ -5707,8 +5593,7 @@ msgstr "Za izklop nastavite zakasnitev na »max« dni."
 #: security/help.pm:104
 #, c-format
 msgid "Set the password history length to prevent password reuse."
-msgstr ""
-"Nastavi velikost zgodovine gesel, da se prepreči ponovna uporaba gesla."
+msgstr "Nastavi velikost zgodovine gesel, da se prepreči ponovna uporaba gesla."
 
 #: security/help.pm:106
 #, c-format
@@ -5808,8 +5693,7 @@ msgstr "Če je nastavljeno na »da«, poženi preverjanje chkrootkit."
 
 #: security/help.pm:127
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
+msgid "if set, send the mail report to this email address else send it to root."
 msgstr ""
 "Če je nastavljeno, pošlji e-poštno poročilo na ta e-poštni naslov, v "
 "nasprotnem primeru pošlji uporabniku »root«."
@@ -6069,8 +5953,7 @@ msgstr "Preveri kontrolno vsoto datotek suid/sgid."
 #: security/l10n.pm:53
 #, c-format
 msgid "Check additions/removals of suid root files"
-msgstr ""
-"Preveri, ali so bile dodane / odstranjene datoteke suid uporabnika root."
+msgstr "Preveri, ali so bile dodane / odstranjene datoteke suid uporabnika root."
 
 #: security/l10n.pm:54
 #, c-format
@@ -6200,7 +6083,7 @@ msgstr "Prijava ali e-pošta:"
 #: services.pm:19
 #, c-format
 msgid "Listen and dispatch ACPI events from the kernel"
-msgstr ""
+msgstr "Prisluškuje in odpošilja dogodke ACPI jedra"
 
 #: services.pm:20
 #, c-format
@@ -6233,12 +6116,12 @@ msgstr ""
 #: services.pm:26
 #, c-format
 msgid "Avahi is a ZeroConf daemon which implements an mDNS stack"
-msgstr ""
+msgstr "Avahi je pritajeni program za ZeroConf, ki implementira sklad mDNS"
 
 #: services.pm:27
 #, c-format
 msgid "Set CPU frequency settings"
-msgstr ""
+msgstr "Nastavlja hitrost procesorja"
 
 #: services.pm:28
 #, c-format
@@ -6254,8 +6137,7 @@ msgstr ""
 
 #: services.pm:31
 #, c-format
-msgid ""
-"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr "Common UNIX Printing System (CUPS) je napreden tiskalniški sistem"
 
 #: services.pm:32
@@ -6285,6 +6167,13 @@ msgid ""
 "applications and \n"
 "scripts can access the LCD via a simple API."
 msgstr ""
+"G15Daemon uporabnikom omogoča dostop do do vseh dodatnih tipk,\n"
+"tako da jih dekodira in preda nazaj jedru s pomočjo gonilnika UINPUT. Da\n"
+"bi lahko bil uporabljen za tipkovnico mora biti gonilnik naložen pred "
+"g15daemon.\n"
+"Podprt je tudi G15 LCD. Privzeto, ko ni naložen noben drug odjemalec,\n"
+"g15daemon prikazuje uro. Odjemalci in skripti lahko do LCD-ja dostopajo s\n"
+"Preprostim programskim vmesnikom."
 
 #: services.pm:40
 #, c-format
@@ -6301,8 +6190,7 @@ msgstr ""
 #: services.pm:43
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr ""
-"HAL je pritajeni program, ki zbira in vzdržuje podatke o strojni opremi"
+msgstr "HAL je pritajeni program, ki zbira in vzdržuje podatke o strojni opremi"
 
 #: services.pm:44
 #, c-format
@@ -6339,12 +6227,12 @@ msgstr ""
 #: services.pm:51
 #, c-format
 msgid "Automates a packet filtering firewall with ip6tables"
-msgstr ""
+msgstr "Avtomatizira požarni zid za filtriranje paketov z ip6tables"
 
 #: services.pm:52
 #, c-format
 msgid "Automates a packet filtering firewall with iptables"
-msgstr ""
+msgstr "Avtomatizira požarni zid za filtriranje paketov z iptables"
 
 #: services.pm:53
 #, c-format
@@ -6357,9 +6245,9 @@ msgstr ""
 
 #: services.pm:55
 #, c-format
-msgid ""
-"Evenly distributes IRQ load across multiple CPUs for enhanced performance"
+msgid "Evenly distributes IRQ load across multiple CPUs for enhanced performance"
 msgstr ""
+"Enakomerno porazdeli zahtevke IRQ med več procesorjev, kar izboljša performance"
 
 #: services.pm:56
 #, c-format
@@ -6389,7 +6277,7 @@ msgstr "Samodejna zaznava in namestitev strojne opreme ob zagonu."
 #: services.pm:62
 #, c-format
 msgid "Tweaks system behavior to extend battery life"
-msgstr ""
+msgstr "Prilagodi obnašanje sistema, da se podaljša trajanje baterije"
 
 #: services.pm:63
 #, c-format
@@ -6421,12 +6309,12 @@ msgstr ""
 #: services.pm:69
 #, c-format
 msgid "Monitors the network (Interactive Firewall and wireless"
-msgstr ""
+msgstr "Nadzoruje omrežje (interaktivni požarni zid in brezžično"
 
 #: services.pm:70
 #, c-format
 msgid "Software RAID monitoring and management"
-msgstr ""
+msgstr "Nadzorovanje in upravljanje s programskim RAID-om"
 
 #: services.pm:71
 #, c-format
@@ -6440,7 +6328,7 @@ msgstr ""
 #: services.pm:72
 #, c-format
 msgid "Enables MSEC security policy on system startup"
-msgstr ""
+msgstr "Ob zagonu sistema omogoči varnostna pravila MSEC"
 
 #: services.pm:73
 #, c-format
@@ -6454,7 +6342,7 @@ msgstr ""
 #: services.pm:74
 #, c-format
 msgid "Initializes network console logging"
-msgstr ""
+msgstr "Inicializira beleženje dnevnika konzole prek omrežja"
 
 #: services.pm:75
 #, c-format
@@ -6477,12 +6365,12 @@ msgstr ""
 #: services.pm:79
 #, c-format
 msgid "Requires network to be up if enabled"
-msgstr ""
+msgstr "Če je omogočeno, zahteva delujoče omrežje"
 
 #: services.pm:80
 #, c-format
 msgid "Wait for the hotplugged network to be up"
-msgstr ""
+msgstr "Počakaj na delujoče omrežje"
 
 #: services.pm:81
 #, c-format
@@ -6507,16 +6395,14 @@ msgstr ""
 #: services.pm:86
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
-msgstr ""
-"Usklajuje sistemski čas z uporabo protokola NTP (Network Time Protocol)"
+msgstr "Usklajuje sistemski čas z uporabo protokola NTP (Network Time Protocol)"
 
 #: services.pm:87
 #, c-format
 msgid ""
 "Automatically switch on numlock key locker under console\n"
 "and Xorg at boot."
-msgstr ""
-"Ob zagonu samodejno vklopi številčni del tipkovnice za konzolo in Xorg."
+msgstr "Ob zagonu samodejno vklopi številčni del tipkovnice za konzolo in Xorg."
 
 #: services.pm:89
 #, c-format
@@ -6526,7 +6412,7 @@ msgstr "Podpora za OKI 4w in združljive wintiskalnike."
 #: services.pm:90
 #, c-format
 msgid "Checks if a partition is close to full up"
-msgstr ""
+msgstr "Preverja ali je razdelek skoraj povsem poln"
 
 #: services.pm:91
 #, c-format
@@ -6555,7 +6441,7 @@ msgstr ""
 #: services.pm:97
 #, c-format
 msgid "Reserves some TCP ports"
-msgstr ""
+msgstr "Rezervira nekaj vrat TCP"
 
 #: services.pm:98
 #, c-format
@@ -6583,9 +6469,9 @@ msgstr ""
 "za potrebe aplikacij kot so Oracle in DVD snemalniki."
 
 #: services.pm:103
-#, fuzzy, c-format
+#, c-format
 msgid "Nameserver information manager"
-msgstr "Podatki o trdem disku"
+msgstr "Upravljalnik podatkov imenskega strežnika"
 
 #: services.pm:104
 #, c-format
@@ -6608,13 +6494,13 @@ msgstr ""
 "računalnikov priključenih v omrežje."
 
 #: services.pm:109
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages to various "
 "system log files.  It is a good idea to always run rsyslog."
 msgstr ""
 "Syslog je storitev, ki omogoča ostalim programom, da uporabljajo skupen "
-"sistem zapisovanja sporočil v dnevnike. Dobro je, da syslog storitev vedno "
+"sistem zapisovanja sporočil v dnevnike. Priporočeno je, da rsyslog vedno "
 "teče."
 
 #: services.pm:110
@@ -6646,7 +6532,7 @@ msgstr ""
 #: services.pm:115
 #, c-format
 msgid "Packet filtering firewall"
-msgstr ""
+msgstr "Požarni zid za filtriranje paketov"
 
 #: services.pm:116
 #, c-format
@@ -6665,7 +6551,7 @@ msgstr "Zažene zvočni sistem na vašem računalniku"
 #: services.pm:118
 #, c-format
 msgid "layer for speech analysis"
-msgstr ""
+msgstr "Plast za analizo govora"
 
 #: services.pm:119
 #, c-format
@@ -6689,7 +6575,7 @@ msgstr ""
 #: services.pm:122
 #, c-format
 msgid "Moves the generated persistent udev rules to /etc/udev/rules.d"
-msgstr ""
+msgstr "Premakne ustvarjena trajna pravila za udev v /etc/udev/rules.d"
 
 #: services.pm:123
 #, c-format
@@ -6699,7 +6585,7 @@ msgstr "Naloži gonilnike za naprave USB."
 #: services.pm:124
 #, c-format
 msgid "A lightweight network traffic monitor"
-msgstr ""
+msgstr "Lahek nadzorovalnik omrežnega prometa"
 
 #: services.pm:125
 #, c-format
