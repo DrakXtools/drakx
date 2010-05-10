@@ -384,11 +384,11 @@ sub tell_kernel {
 
     my $F = partition_table::raw::openit($hd);
 
+    run_program::run('udevadm', 'control', '--stop-exec-queue') unless $::isInstall;
+
     my $force_reboot = any { $_->[0] eq 'force_reboot' } @$tell_kernel;
     if (!$force_reboot) {
-	# only keep the last action on the partition number
-	# that way we do not del/add the same partition, and this helps udev :)
-	foreach (reverse(uniq_ { $_->[1] } reverse @$tell_kernel)) {
+	foreach (@$tell_kernel) {
 	    my ($action, $part_number, $o_start, $o_size) = @$_;
 	    
 	    if ($action eq 'add') {
@@ -399,7 +399,11 @@ sub tell_kernel {
 	    log::l("tell kernel $action ($hd->{device} $part_number $o_start $o_size) force_reboot=$force_reboot rebootNeeded=$hd->{rebootNeeded}");
 	}
     }
+
+    run_program::run('udevadm', 'control', '--start-exec-queue') unless $::isInstall;
+
     if ($force_reboot) {
+	# FIXME Handle LVM/dmcrypt/RAID
 	my @magic_parts = grep { $_->{isMounted} && $_->{real_mntpoint} } get_normal_parts($hd);
 	foreach (@magic_parts) {
 	    syscall_('umount', $_->{real_mntpoint}) or log::l(N("error unmounting %s: %s", $_->{real_mntpoint}, $!));
