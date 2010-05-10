@@ -851,10 +851,16 @@ sub Resize {
 	if (isLVM($hd)) {
 	    lvm::lv_resize($low_part, $oldsize);
 	} else {
+	    if ($write_partitions && isLUKS($part)) {
+		run_program::run('cryptsetup', 'luksClose', $part->{dmcrypt_name}) or die ("Failed to resize partition, maybe it is mounted");
+	    }
 	    partition_table::will_tell_kernel($hd, resize => $low_part);
 	    partition_table::adjust_local_extended($hd, $low_part);
 	    partition_table::adjust_main_extended($hd);
 	    write_partitions($in, $hd) or return if $write_partitions && %nice_resize;
+	    if ($write_partitions && isLUKS($part)) {
+		fs::dmcrypt::open_part([], $low_part);
+	    }
 	}
 	1;
     };
