@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-et\n"
 "POT-Creation-Date: 2010-05-01 16:46+0200\n"
-"PO-Revision-Date: 2010-03-31 14:13+0200\n"
+"PO-Revision-Date: 2010-05-10 13:12+0200\n"
 "Last-Translator: Marek Laane <bald@smail.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -262,7 +262,7 @@ msgstr "Xen'i lisaargument"
 #: any.pm:536
 #, c-format
 msgid "Requires password to boot"
-msgstr ""
+msgstr "Alglaadimiseks on vajalik parool"
 
 #: any.pm:538
 #, c-format
@@ -1653,14 +1653,14 @@ msgid "Logical volume name "
 msgstr "Loogilise ketta nimi "
 
 #: diskdrake/interactive.pm:507
-#, fuzzy, c-format
+#, c-format
 msgid "Encrypt partition"
-msgstr "Krüptoalgoritm"
+msgstr "Partitsiooni krüptimine"
 
 #: diskdrake/interactive.pm:508
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption key "
-msgstr "Krüptovõti"
+msgstr "Krüptovõti "
 
 #: diskdrake/interactive.pm:509 diskdrake/interactive.pm:1487
 #, c-format
@@ -1673,9 +1673,9 @@ msgid "The encryption keys do not match"
 msgstr "Krüptovõtmed ei klapi"
 
 #: diskdrake/interactive.pm:521
-#, fuzzy, c-format
+#, c-format
 msgid "Missing encryption key"
-msgstr "Failisüsteemi krüptovõti"
+msgstr "Krüptovõti puudub"
 
 #: diskdrake/interactive.pm:541
 #, c-format
@@ -2831,13 +2831,13 @@ msgstr ""
 "Lisage kindlasti /boot-partitsioon!"
 
 #: fsedit.pm:437
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
-"Olete valinud juurpartitsiooniks (/) tarkvaralise RAID-i.\n"
+"Olete valinud juurpartitsiooniks (/) krüptitud partitsiooni.\n"
 "Ilma /boot-partitsioonita ei ole võimalik sellist süsteemi laadida.\n"
 "Lisage kindlasti /boot-partitsioon!"
 
