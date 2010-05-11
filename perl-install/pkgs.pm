@@ -242,7 +242,7 @@ sub detect_unselected_locale_packages {
     my $locale = lang::read();
     my $selected_locale = $locales_prefix . lang::locale_to_main_locale($locale->{lang});
     my @available_locales = $do_pkgs->are_installed($locales_prefix . '*');
-    member($selected_locale, @available_locales) ? difference2(\@available_locales, [ $selected_locale 'locales-en' ]) : ();
+    member($selected_locale, @available_locales) ? difference2(\@available_locales, [ $selected_locale ]) : ();
 }
 
 sub remove_unused_packages {
