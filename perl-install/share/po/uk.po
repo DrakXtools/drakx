@@ -6,21 +6,21 @@
 # Taras Boychuk <btr1@torba.com>, 2003, 2004.
 # Taras Boychuk <btr1@mail.ru>, 2004, 2003.
 # Taras Boychuk <btr1@ukrpost.net>, 2004, 2005.
-# Yuri Chornoivan <yurchor@ukr.net>, 2008, 2009.
+# Yuri Chornoivan <yurchor@ukr.net>, 2008, 2009, 2010.
 # Taras Boychuk <btr0001@ukr.net>, 2008, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
 "POT-Creation-Date: 2010-05-01 16:46+0200\n"
-"PO-Revision-Date: 2009-10-12 08:01+0300\n"
+"PO-Revision-Date: 2010-05-04 16:59+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 0.3\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: any.pm:252 any.pm:947 diskdrake/interactive.pm:647
 #: diskdrake/interactive.pm:864 diskdrake/interactive.pm:924
@@ -269,7 +269,7 @@ msgstr "Приєднання Xen"
 #: any.pm:536
 #, c-format
 msgid "Requires password to boot"
-msgstr ""
+msgstr "Потребує пароля під час завантаження"
 
 #: any.pm:538
 #, c-format
@@ -447,7 +447,7 @@ msgstr "Керування користувачами"
 #: any.pm:883
 #, c-format
 msgid "Enable guest account"
-msgstr ""
+msgstr "Увімкнути гостьовий запис"
 
 #: any.pm:884 authentication.pm:237
 #, c-format
@@ -1389,9 +1389,9 @@ msgid "Unknown"
 msgstr "Невідомий"
 
 #: diskdrake/hd_gtk.pm:388
-#, fuzzy, c-format
+#, c-format
 msgid "Ext4"
-msgstr "Вийти"
+msgstr "Ext4"
 
 #: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
@@ -1671,14 +1671,14 @@ msgid "Logical volume name "
 msgstr "Назва логічного диску"
 
 #: diskdrake/interactive.pm:507
-#, fuzzy, c-format
+#, c-format
 msgid "Encrypt partition"
-msgstr "Алгоритм шифрування"
+msgstr "Зашифрувати розділ"
 
 #: diskdrake/interactive.pm:508
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption key "
-msgstr "Ключ шифрування"
+msgstr "Ключ шифрування "
 
 #: diskdrake/interactive.pm:509 diskdrake/interactive.pm:1487
 #, c-format
@@ -1691,9 +1691,9 @@ msgid "The encryption keys do not match"
 msgstr "Ключі шифрування не збігаються"
 
 #: diskdrake/interactive.pm:521
-#, fuzzy, c-format
+#, c-format
 msgid "Missing encryption key"
-msgstr "Ключ шифрування файлової системи"
+msgstr "Не вказано ключ шифрування"
 
 #: diskdrake/interactive.pm:541
 #, c-format
@@ -2763,9 +2763,9 @@ msgstr ""
 "Після того, як закінчите, не забудьте виконати команду `w'"
 
 #: fs/partitioning_wizard.pm:402
-#, fuzzy, c-format
+#, c-format
 msgid "Ext2/3/4"
-msgstr "Ext3"
+msgstr "Ext2/3/4"
 
 #: fs/partitioning_wizard.pm:432 fs/partitioning_wizard.pm:572
 #, c-format
@@ -2778,9 +2778,9 @@ msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "Помічник розбивки на розділи DrakX знайшов такі можливі рішення:"
 
 #: fs/partitioning_wizard.pm:512
-#, fuzzy, c-format
+#, c-format
 msgid "Here is the content of your disk drive "
-msgstr "Тут наведено вміст вашого дискового пристрою"
+msgstr "Тут наведено вміст вашого дискового пристрою "
 
 #: fs/partitioning_wizard.pm:589
 #, c-format
@@ -2862,13 +2862,13 @@ msgstr ""
 "Тож, будь ласка, не забудьте додати розділ /boot."
 
 #: fsedit.pm:437
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
-"Як розділ для root (/) Ви вибрали програмний RAID.\n"
+"Як розділ для root (/) Ви вибрали шифрований розділ.\n"
 "Немає завантажувачів, які могли б працювати з такими розділами без /boot.\n"
 "Тож, будь ласка, не забудьте додати розділ /boot."
 
@@ -3229,7 +3229,7 @@ msgstr ""
 "Тут Ви можете вибрати альтернативний драйвер (або OSS, або ALSA) для Вашої "
 "звукової карти (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
@@ -6281,7 +6281,7 @@ msgstr "Ім’я або адреса ел.пошти:"
 #: services.pm:19
 #, c-format
 msgid "Listen and dispatch ACPI events from the kernel"
-msgstr ""
+msgstr "Очікувати і розподіляти події ACPI від ядра"
 
 #: services.pm:20
 #, c-format
@@ -6316,12 +6316,12 @@ msgstr ""
 #: services.pm:26
 #, c-format
 msgid "Avahi is a ZeroConf daemon which implements an mDNS stack"
-msgstr ""
+msgstr "Avahi — це фонова служба ZeroConf, яка реалізує стек mDNS"
 
 #: services.pm:27
 #, c-format
 msgid "Set CPU frequency settings"
-msgstr ""
+msgstr "Встановити параметри керування частотою процесора"
 
 #: services.pm:28
 #, c-format
@@ -6372,6 +6372,15 @@ msgid ""
 "applications and \n"
 "scripts can access the LCD via a simple API."
 msgstr ""
+"За допомогою G15Daemon можна користуватися всіма додатковими клавішами \n"
+"за допомогою передавання їх розшифрованих кодів до ядра за допомогою "
+"драйвера UINPUT.\n"
+"Цей драйвер має бути завантажено до того, як ви скористаєтеся g15daemon для "
+"доступу до клавіатури. Крім того, підтримується G15 LCD.\n"
+"Типово, якщо не задіяно інші клієнтські програми, g15daemon показуватиме час "
+"годинника. Клієнтські програми і \n"
+"скрипти можуть отримувати доступ до LCD за допомогою простого програмного "
+"інтерфейсу."
 
 #: services.pm:40
 #, c-format
@@ -6428,12 +6437,12 @@ msgstr ""
 #: services.pm:51
 #, c-format
 msgid "Automates a packet filtering firewall with ip6tables"
-msgstr ""
+msgstr "Автоматизує брандмауер для фільтрування пакетів за допомогою ip6tables"
 
 #: services.pm:52
 #, c-format
 msgid "Automates a packet filtering firewall with iptables"
-msgstr ""
+msgstr "Автоматизує брандмауер для фільтрування пакетів за допомогою iptables"
 
 #: services.pm:53
 #, c-format
@@ -6450,6 +6459,8 @@ msgstr ""
 msgid ""
 "Evenly distributes IRQ load across multiple CPUs for enhanced performance"
 msgstr ""
+"Рівномірно розподіляє навантаження IRQ між декількома процесорами для "
+"покращення швидкодії"
 
 #: services.pm:56
 #, c-format
@@ -6482,7 +6493,7 @@ msgstr ""
 #: services.pm:62
 #, c-format
 msgid "Tweaks system behavior to extend battery life"
-msgstr ""
+msgstr "Налаштовує систему на економію електроенергії"
 
 #: services.pm:63
 #, c-format
@@ -6516,11 +6527,13 @@ msgstr ""
 #, c-format
 msgid "Monitors the network (Interactive Firewall and wireless"
 msgstr ""
+"Стежить за мережею (інтерактивний брандмауер та керування бездротовими "
+"мережами)"
 
 #: services.pm:70
 #, c-format
 msgid "Software RAID monitoring and management"
-msgstr ""
+msgstr "Спостереження і керування програмними масивами RAID"
 
 #: services.pm:71
 #, c-format
@@ -6534,7 +6547,7 @@ msgstr ""
 #: services.pm:72
 #, c-format
 msgid "Enables MSEC security policy on system startup"
-msgstr ""
+msgstr "Вмикає правила безпеки MSEC під час завантаження системи"
 
 #: services.pm:73
 #, c-format
@@ -6548,7 +6561,7 @@ msgstr ""
 #: services.pm:74
 #, c-format
 msgid "Initializes network console logging"
-msgstr ""
+msgstr "Ініціалізує запис журналу консолі мережі"
 
 #: services.pm:75
 #, c-format
@@ -6571,12 +6584,12 @@ msgstr ""
 #: services.pm:79
 #, c-format
 msgid "Requires network to be up if enabled"
-msgstr ""
+msgstr "У разі позначення потребує працездатності мережі"
 
 #: services.pm:80
 #, c-format
 msgid "Wait for the hotplugged network to be up"
-msgstr ""
+msgstr "Очікувати на вмикання мережі з «гарячим» з’єднанням"
 
 #: services.pm:81
 #, c-format
@@ -6621,7 +6634,7 @@ msgstr "Підтримка для OKI 4w і сумісних win-друкаро�
 #: services.pm:90
 #, c-format
 msgid "Checks if a partition is close to full up"
-msgstr ""
+msgstr "Перевіряє, чи близький розділ до заповнення"
 
 #: services.pm:91
 #, c-format
@@ -6651,7 +6664,7 @@ msgstr ""
 #: services.pm:97
 #, c-format
 msgid "Reserves some TCP ports"
-msgstr ""
+msgstr "Резервує деякі порти TCP"
 
 #: services.pm:98
 #, c-format
@@ -6682,9 +6695,9 @@ msgstr ""
 "використання в програмах типу Oracle або програвачі DVD."
 
 #: services.pm:103
-#, fuzzy, c-format
+#, c-format
 msgid "Nameserver information manager"
-msgstr "Інформація про твердий диск"
+msgstr "Керування відомостями щодо сервера назв"
 
 #: services.pm:104
 #, c-format
@@ -6709,14 +6722,14 @@ msgstr ""
 "про завантаження будь-якого комп'ютера в цій мережі."
 
 #: services.pm:109
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages to various "
 "system log files.  It is a good idea to always run rsyslog."
 msgstr ""
-"syslog - це сервіс в системі, за допомогою якого багато служб записують\n"
-"системні повідомлення у різні системні файли реєстрації повідомлень. В\n"
-"будь-якій системі непогано мати syslog."
+"syslog - це сервіс в системі, за допомогою якого багато служб записують "
+"системні повідомлення у різні системні файли реєстрації повідомлень. В "
+"будь-якій системі непогано мати rsyslog."
 
 #: services.pm:110
 #, c-format
@@ -6748,7 +6761,7 @@ msgstr ""
 #: services.pm:115
 #, c-format
 msgid "Packet filtering firewall"
-msgstr ""
+msgstr "Брандмауер для фільтрування пакетів"
 
 #: services.pm:116
 #, c-format
@@ -6767,7 +6780,7 @@ msgstr "Запустити звукову систему на Вашій маш�
 #: services.pm:118
 #, c-format
 msgid "layer for speech analysis"
-msgstr ""
+msgstr "шар для аналізу мовлення"
 
 #: services.pm:119
 #, c-format
@@ -6791,7 +6804,7 @@ msgstr ""
 #: services.pm:122
 #, c-format
 msgid "Moves the generated persistent udev rules to /etc/udev/rules.d"
-msgstr ""
+msgstr "Пересуває створені постійні правила udev до /etc/udev/rules.d"
 
 #: services.pm:123
 #, c-format
@@ -6801,7 +6814,7 @@ msgstr "Завантажити драйвери для пристроїв usb."
 #: services.pm:124
 #, c-format
 msgid "A lightweight network traffic monitor"
-msgstr ""
+msgstr "Невибаглива програма для спостереження за обміном даними мережею"
 
 #: services.pm:125
 #, c-format
