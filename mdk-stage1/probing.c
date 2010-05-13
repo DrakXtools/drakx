@@ -766,12 +766,24 @@ void find_media(enum media_bus bus)
                                         log_message("Couldn't open /proc/partitions");
                                 } else {
                                         while (fgets(buf, sizeof(buf), f)) {
-                                                char name[100];
+                                                char name[100] = "/dev/";
                                                 int major, minor, blocks;
+                                                struct stat statbuf;
+						char *ptr;
                                                 memset(name, 0, sizeof(name));
-                                                sscanf(buf, " %d %d %d %s", &major, &minor, &blocks, name);
-                                                if (streq(name, tmp_name) && tmp[count].type == DISK && ((blocks == 1048575) || (blocks == 1440)))
+                                                sscanf(buf, " %d %d %d %s", &major, &minor, &blocks, &name[5]);
+                                                if (streq(&name[5], tmp_name) && tmp[count].type == DISK && ((blocks == 1048575) || (blocks == 1440)))
                                                         tmp[count].type = FLOPPY;
+                                                /* Try to create all devices while we have major/minor */
+                                                if ((ptr = strchr(&name[5], '/'))) {
+                                                        *ptr = '\0';
+                                                        if (stat(name, &statbuf))
+                                                                mkdir(name, 0755);
+                                                        *ptr = '/';
+                                                }							
+                                                if (stat(name, &statbuf) && mknod(name, S_IFBLK | 0600, makedev(major, minor))) {
+                                                        log_perror(name);
+                                                }
                                         }
                                         fclose(f);
                                 }
