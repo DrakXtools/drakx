@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-tr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-01 16:46+0200\n"
+"POT-Creation-Date: 2010-05-13 16:52+0200\n"
 "PO-Revision-Date: 2010-05-07 23:26+0200\n"
 "Last-Translator: Atilla ÖNTAŞ <atilla_ontas@mandriva.org>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -30,19 +30,11 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 1.0\n"
 
-#: any.pm:252
-#: any.pm:947
-#: diskdrake/interactive.pm:647
-#: diskdrake/interactive.pm:864
-#: diskdrake/interactive.pm:924
-#: diskdrake/interactive.pm:1026
-#: diskdrake/interactive.pm:1256
-#: diskdrake/interactive.pm:1308
-#: do_pkgs.pm:241
-#: do_pkgs.pm:287
-#: harddrake/sound.pm:303
-#: interactive.pm:587
-#: pkgs.pm:281
+#: any.pm:252 any.pm:947 diskdrake/interactive.pm:647
+#: diskdrake/interactive.pm:870 diskdrake/interactive.pm:930
+#: diskdrake/interactive.pm:1032 diskdrake/interactive.pm:1262
+#: diskdrake/interactive.pm:1314 do_pkgs.pm:241 do_pkgs.pm:287
+#: harddrake/sound.pm:303 interactive.pm:587 pkgs.pm:281
 #, c-format
 msgid "Please wait"
 msgstr "Lütfen bekleyin"
@@ -56,13 +48,15 @@ msgstr "Önyükleyici kurulumu devam ediyor"
 #, c-format
 msgid ""
 "LILO wants to assign a new Volume ID to drive %s.  However, changing\n"
-"the Volume ID of a Windows NT, 2000, or XP boot disk is a fatal Windows error.\n"
+"the Volume ID of a Windows NT, 2000, or XP boot disk is a fatal Windows "
+"error.\n"
 "This caution does not apply to Windows 95 or 98, or to NT data disks.\n"
 "\n"
 "Assign a new Volume ID?"
 msgstr ""
 "LILO, %s bölümüne yeni bir Bölüm Kimliği vermek istiyor. Ancak, bir Windows\n"
-" NT, 2000 veya XP açılış diskinin Bölüm Kimliğini değiştirmek ölümcül bir Windows hatasına yol açar.\n"
+" NT, 2000 veya XP açılış diskinin Bölüm Kimliğini değiştirmek ölümcül bir "
+"Windows hatasına yol açar.\n"
 "Bu uyarı, Windows 95 veya 98 veya NT veri diskleri için geçerli değildir.\n"
 " Yeni bir Bölüm Kimliği vermek istiyor musunuz?"
 
@@ -83,7 +77,8 @@ msgid ""
 msgstr ""
 "Önyükleyiciyi etkinleştirmek için Gömülü Sistem önyükleme aygıtınızı\n"
 "değiştirme gereği duyabilirsiniz. Yeniden başlatma sırasında önyükleyici\n"
-"komut satırını göremiyorsanız, sistemi yeniden başlatırken Command-Option-O-F\n"
+"komut satırını göremiyorsanız, sistemi yeniden başlatırken Command-Option-O-"
+"F\n"
 "seçtikten sonra:\n"
 "  setenv boot-device %s,\\\\:tbxi\n"
 "ve ardından:   shut-down \n"
@@ -93,12 +88,14 @@ msgstr ""
 #, c-format
 msgid ""
 "You decided to install the bootloader on a partition.\n"
-"This implies you already have a bootloader on the hard drive you boot (eg: System Commander).\n"
+"This implies you already have a bootloader on the hard drive you boot (eg: "
+"System Commander).\n"
 "\n"
 "On which drive are you booting?"
 msgstr ""
 "Sistem yükleyicinizi bir disk bölümüne yüklemeye karar verdiniz.\n"
-"Bu durum sistemi boot ettiğiniz hard disk sürücüsü üzerinde bir sistem yükleyicinin olduğunu gösteriyor.(örn: System Commander)\n"
+"Bu durum sistemi boot ettiğiniz hard disk sürücüsü üzerinde bir sistem "
+"yükleyicinin olduğunu gösteriyor.(örn: System Commander)\n"
 "\n"
 "Hangi sürücüden sistemi önyükleme(boot) gerçekleştiriyorsunuz?"
 
@@ -132,9 +129,7 @@ msgstr "Kök bölümünün ilk sektörü"
 msgid "On Floppy"
 msgstr "Açılış Disketinden"
 
-#: any.pm:367
-#: pkgs.pm:277
-#: ugtk2.pm:526
+#: any.pm:367 pkgs.pm:277 ugtk2.pm:526
 #, c-format
 msgid "Skip"
 msgstr "Atla"
@@ -144,9 +139,7 @@ msgstr "Atla"
 msgid "Boot Style Configuration"
 msgstr "Önyükleme Yapılandırması"
 
-#: any.pm:412
-#: any.pm:445
-#: any.pm:446
+#: any.pm:412 any.pm:445 any.pm:446
 #, c-format
 msgid "Bootloader main options"
 msgstr "Önyükleyici ana seçenekleri"
@@ -156,14 +149,12 @@ msgstr "Önyükleyici ana seçenekleri"
 msgid "Bootloader"
 msgstr "Önyükleyici"
 
-#: any.pm:417
-#: any.pm:449
+#: any.pm:417 any.pm:449
 #, c-format
 msgid "Bootloader to use"
 msgstr "Kullanılacak önyükleyici"
 
-#: any.pm:420
-#: any.pm:452
+#: any.pm:420 any.pm:452
 #, c-format
 msgid "Boot device"
 msgstr "Önyükleme Aygıtı"
@@ -198,30 +189,23 @@ msgstr "APIC özelliğini etkinleştir"
 msgid "Enable Local APIC"
 msgstr "Yerel APIC özelliğini etkinleştir"
 
-#: any.pm:430
-#: security/level.pm:51
+#: any.pm:430 security/level.pm:51
 #, c-format
 msgid "Security"
 msgstr "Güvenlik"
 
-#: any.pm:431
-#: any.pm:885
-#: any.pm:901
-#: authentication.pm:250
+#: any.pm:431 any.pm:885 any.pm:901 authentication.pm:250
 #: diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Password"
 msgstr "Parola"
 
-#: any.pm:434
-#: authentication.pm:261
+#: any.pm:434 authentication.pm:261
 #, c-format
 msgid "The passwords do not match"
 msgstr "Parolalar uyuşmuyor"
 
-#: any.pm:434
-#: authentication.pm:261
-#: diskdrake/interactive.pm:1483
+#: any.pm:434 authentication.pm:261 diskdrake/interactive.pm:1489
 #, c-format
 msgid "Please try again"
 msgstr "Lütfen tekrar deneyin"
@@ -231,10 +215,7 @@ msgstr "Lütfen tekrar deneyin"
 msgid "You can not use a password with %s"
 msgstr "%s ile bir parola kullanamazsınız"
 
-#: any.pm:440
-#: any.pm:887
-#: any.pm:903
-#: authentication.pm:251
+#: any.pm:440 any.pm:887 any.pm:903 authentication.pm:251
 #, c-format
 msgid "Password (again)"
 msgstr "Parola (tekrar)"
@@ -279,14 +260,12 @@ msgstr "Öntanımlı İşletim Sistemi?"
 msgid "Image"
 msgstr "Görüntü"
 
-#: any.pm:531
-#: any.pm:545
+#: any.pm:531 any.pm:545
 #, c-format
 msgid "Root"
 msgstr "Kök"
 
-#: any.pm:532
-#: any.pm:558
+#: any.pm:532 any.pm:558
 #, c-format
 msgid "Append"
 msgstr "Sonuna ekle"
@@ -316,17 +295,12 @@ msgstr "Initrd"
 msgid "Network profile"
 msgstr "Ağ profili"
 
-#: any.pm:550
-#: any.pm:555
-#: any.pm:557
-#: diskdrake/interactive.pm:407
+#: any.pm:550 any.pm:555 any.pm:557 diskdrake/interactive.pm:407
 #, c-format
 msgid "Label"
 msgstr "Etiket"
 
-#: any.pm:552
-#: any.pm:560
-#: harddrake/v4l.pm:438
+#: any.pm:552 any.pm:560 harddrake/v4l.pm:438
 #, c-format
 msgid "Default"
 msgstr "Öntanımlı"
@@ -393,7 +367,8 @@ msgid ""
 "You can create additional entries or change the existing ones."
 msgstr ""
 "Bundan böyle buradakiler sizin açılış menünüzü teşkil edecek öğelerdir.\n"
-"Burada ki seçeneklere yenilerini ekleyebilir ya da mevcut olanları değiştirebilirsiniz."
+"Burada ki seçeneklere yenilerini ekleyebilir ya da mevcut olanları "
+"değiştirebilirsiniz."
 
 #: any.pm:845
 #, c-format
@@ -437,8 +412,12 @@ msgstr "Lütfen bir kullanıcı adı verin"
 
 #: any.pm:863
 #, c-format
-msgid "The user name must start with a lower case letter followed by only lower cased letters, numbers, `-' and `_'"
-msgstr "Kullanıcı adında sadece küçük harfler, sayılar, `-' ve `_' karakterleri bulunabilir"
+msgid ""
+"The user name must start with a lower case letter followed by only lower "
+"cased letters, numbers, `-' and `_'"
+msgstr ""
+"Kullanıcı adında sadece küçük harfler, sayılar, `-' ve `_' karakterleri "
+"bulunabilir"
 
 #: any.pm:864
 #, c-format
@@ -450,14 +429,12 @@ msgstr "Seçilen kullanıcı adı çok uzun"
 msgid "This user name has already been added"
 msgstr "Bu kullanıcı adı daha önce eklenmiş"
 
-#: any.pm:871
-#: any.pm:905
+#: any.pm:871 any.pm:905
 #, c-format
 msgid "User ID"
 msgstr "Kullanıcı ID"
 
-#: any.pm:871
-#: any.pm:906
+#: any.pm:871 any.pm:906
 #, c-format
 msgid "Group ID"
 msgstr "Grup ID"
@@ -482,8 +459,7 @@ msgstr "Kullanıcı yönetimi"
 msgid "Enable guest account"
 msgstr "Konuk hesabını etkinleştir"
 
-#: any.pm:884
-#: authentication.pm:237
+#: any.pm:884 authentication.pm:237
 #, c-format
 msgid "Set administrator (root) password"
 msgstr "Yönetici (kök) parolasını ayarla"
@@ -518,8 +494,7 @@ msgstr "Kabuk"
 msgid "Please wait, adding media..."
 msgstr "Kurulum kaynağı ekleniyor, lütfen bekleyiniz..."
 
-#: any.pm:977
-#: security/l10n.pm:14
+#: any.pm:977 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
 msgstr "Otomatik Giriş"
@@ -527,7 +502,9 @@ msgstr "Otomatik Giriş"
 #: any.pm:978
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
-msgstr "Bilgisayar açıldığında otomatik olarak bir kullanıcının sisteme giriş yapmasını sağlayabilirim."
+msgstr ""
+"Bilgisayar açıldığında otomatik olarak bir kullanıcının sisteme giriş "
+"yapmasını sağlayabilirim."
 
 #: any.pm:979
 #, c-format
@@ -544,16 +521,12 @@ msgstr "Öntanımlı kullanıcıyı seçiniz:"
 msgid "Choose the window manager to run:"
 msgstr "Çalıştırmak istediğiniz pencere yöneticisini seçiniz:"
 
-#: any.pm:992
-#: any.pm:1012
-#: any.pm:1085
+#: any.pm:992 any.pm:1012 any.pm:1085
 #, c-format
 msgid "Release Notes"
 msgstr "Sürüm Notları"
 
-#: any.pm:1019
-#: any.pm:1373
-#: interactive/gtk.pm:819
+#: any.pm:1019 any.pm:1373 interactive/gtk.pm:819
 #, c-format
 msgid "Close"
 msgstr "Kapat"
@@ -563,8 +536,7 @@ msgstr "Kapat"
 msgid "License agreement"
 msgstr "Lisans anlaşması"
 
-#: any.pm:1073
-#: diskdrake/dav.pm:26
+#: any.pm:1073 diskdrake/dav.pm:26
 #, c-format
 msgid "Quit"
 msgstr "Çık"
@@ -584,8 +556,7 @@ msgstr "Kabul"
 msgid "Refuse"
 msgstr "Red"
 
-#: any.pm:1107
-#: any.pm:1169
+#: any.pm:1107 any.pm:1169
 #, c-format
 msgid "Please choose a language to use"
 msgstr "Lütfen kullanacağınız dili seçiniz"
@@ -605,8 +576,7 @@ msgstr ""
 msgid "Multi languages"
 msgstr "Çoklu Dil"
 
-#: any.pm:1147
-#: any.pm:1178
+#: any.pm:1147 any.pm:1178
 #, c-format
 msgid "Old compatibility (non UTF-8) encoding"
 msgstr "Eskiye uyumlu (UTF-8 olmayan) çözümleme"
@@ -641,9 +611,7 @@ msgstr "Mevcut tüm ülkelerin listesi"
 msgid "Other Countries"
 msgstr "Diğer Ülkeler"
 
-#: any.pm:1228
-#: interactive.pm:488
-#: interactive/gtk.pm:445
+#: any.pm:1228 interactive.pm:488 interactive/gtk.pm:445
 #, c-format
 msgid "Advanced"
 msgstr "Gelişmiş"
@@ -677,29 +645,40 @@ msgstr "Özel"
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
-"Allowing this will permit users to simply click on \"Share\" in konqueror and nautilus.\n"
+"Allowing this will permit users to simply click on \"Share\" in konqueror "
+"and nautilus.\n"
 "\n"
 "\"Custom\" permit a per-user granularity.\n"
 msgstr ""
 "Kullanıcıların, bazı dizinlerini paylaşmasına izin vermek ister misiniz?\n"
-"Buna izin vermek, kullanıcıların konqueror ve nautilus' ta \"Paylaş\"ı tıklayabilmelerine olanak sağlayacaktır.\n"
+"Buna izin vermek, kullanıcıların konqueror ve nautilus' ta \"Paylaş\"ı "
+"tıklayabilmelerine olanak sağlayacaktır.\n"
 "\n"
 "\"İsteğe bağlı\" kullanıcı bazında izin tanımı sağlar.\n"
 
 #: any.pm:1334
 #, c-format
-msgid "NFS: the traditional Unix file sharing system, with less support on Mac and Windows."
-msgstr "NFS: Geleneksel Unix dosya paylaşım sistemidir. Mac ve Windows üzerinde daha  az destek sunar."
+msgid ""
+"NFS: the traditional Unix file sharing system, with less support on Mac and "
+"Windows."
+msgstr ""
+"NFS: Geleneksel Unix dosya paylaşım sistemidir. Mac ve Windows üzerinde daha  az destek sunar."
 
 #: any.pm:1337
 #, c-format
-msgid "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux systems."
-msgstr "SMB: Pek çok yeni Linux dağıtımı, Windows ve Mac OS X tarafından kullanılan bir  dosya paylaşım sistemidir."
+msgid ""
+"SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
+"systems."
+msgstr ""
+"SMB: Pek çok yeni Linux dağıtımı, Windows ve Mac OS X tarafından kullanılan "
+"bir  dosya paylaşım sistemidir."
 
 #: any.pm:1345
 #, c-format
-msgid "You can export using NFS or SMB. Please select which you would like to use."
-msgstr "NFS ya da SMB kullanarak sunabilirsiniz. Hangisini kullanmak isterseniz."
+msgid ""
+"You can export using NFS or SMB. Please select which you would like to use."
+msgstr ""
+"NFS ya da SMB kullanarak sunabilirsiniz. Hangisini kullanmak isterseniz."
 
 #: any.pm:1373
 #, c-format
@@ -717,13 +696,19 @@ msgstr ""
 
 #: any.pm:1481
 #, c-format
-msgid "You need to logout and back in again for changes to take effect. Press OK to logout now."
-msgstr "Değişikliklerin etkili olması için oturumdan çıkarak yeniden giriş yapmalısınız. Şimdi çıkmak için TAMAM tıklayın."
+msgid ""
+"You need to logout and back in again for changes to take effect. Press OK to "
+"logout now."
+msgstr ""
+"Değişikliklerin etkili olması için oturumdan çıkarak yeniden giriş "
+"yapmalısınız. Şimdi çıkmak için TAMAM tıklayın."
 
 #: any.pm:1485
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
-msgstr "Değişikliklerin etkili olması için oturumdan çıkarak yeniden giriş yapmalısınız"
+msgstr ""
+"Değişikliklerin etkili olması için oturumdan çıkarak yeniden giriş "
+"yapmalısınız"
 
 #: any.pm:1520
 #, c-format
@@ -735,8 +720,7 @@ msgstr "Zaman Dilimi"
 msgid "Which is your timezone?"
 msgstr "Bulunduğunuz zaman dilimi hangisi?"
 
-#: any.pm:1543
-#: any.pm:1545
+#: any.pm:1543 any.pm:1545
 #, c-format
 msgid "Date, Clock & Time Zone Settings"
 msgstr "Tarih, Saat & Zaman Dilimi Ayarları"
@@ -786,8 +770,7 @@ msgstr "NIS"
 msgid "Smart Card"
 msgstr "Akıllı Kart"
 
-#: authentication.pm:28
-#: authentication.pm:216
+#: authentication.pm:28 authentication.pm:216
 #, c-format
 msgid "Windows Domain"
 msgstr "Windows Etki alanı"
@@ -804,8 +787,11 @@ msgstr "Yerel Dosya:"
 
 #: authentication.pm:63
 #, c-format
-msgid "Use local for all authentication and information user tell in local file"
-msgstr "Kullanıcının yerel dosyada tanımladığı tüm kimlik doğrulama ve bilgi için yerel kullan"
+msgid ""
+"Use local for all authentication and information user tell in local file"
+msgstr ""
+"Kullanıcının yerel dosyada tanımladığı tüm kimlik doğrulama ve bilgi için "
+"yerel kullan"
 
 #: authentication.pm:64
 #, c-format
@@ -814,8 +800,12 @@ msgstr "LDAP:"
 
 #: authentication.pm:64
 #, c-format
-msgid "Tells your computer to use LDAP for some or all authentication. LDAP consolidates certain types of information within your organization."
-msgstr "Bilgisayarınıza bazı veya tüm kimlik doğrulama işlemleri için LDAP kullanmasını söyler.  LDAP, kuruluşunuz ile ilgili belirli türdeki bilgileri bir araya getirir."
+msgid ""
+"Tells your computer to use LDAP for some or all authentication. LDAP "
+"consolidates certain types of information within your organization."
+msgstr ""
+"Bilgisayarınıza bazı veya tüm kimlik doğrulama işlemleri için LDAP "
+"kullanmasını söyler.  LDAP, kuruluşunuz ile ilgili belirli türdeki bilgileri bir araya getirir."
 
 #: authentication.pm:65
 #, c-format
@@ -824,8 +814,12 @@ msgstr "NIS:"
 
 #: authentication.pm:65
 #, c-format
-msgid "Allows you to run a group of computers in the same Network Information Service domain with a common password and group file."
-msgstr "Bir grup bilgisayarı, ortak bir parola ve grup dosyası ile aynı Ağ Bilgi Hizmeti alanında  çalışmasına izin verir."
+msgid ""
+"Allows you to run a group of computers in the same Network Information "
+"Service domain with a common password and group file."
+msgstr ""
+"Bir grup bilgisayarı, ortak bir parola ve grup dosyası ile aynı Ağ Bilgi "
+"Hizmeti alanında  çalışmasına izin verir."
 
 #: authentication.pm:66
 #, c-format
@@ -834,8 +828,12 @@ msgstr "Windows Etki Alanı:"
 
 #: authentication.pm:66
 #, c-format
-msgid "Winbind allows the system to retrieve information and authenticate users in a Windows domain."
-msgstr "Winbind, bir Windows etki alanında kullanıcı kimliklerini kanıtlamayı ve sistemin bilgi  almasını sağlar."
+msgid ""
+"Winbind allows the system to retrieve information and authenticate users in "
+"a Windows domain."
+msgstr ""
+"Winbind, bir Windows etki alanında kullanıcı kimliklerini kanıtlamayı ve "
+"sistemin bilgi  almasını sağlar."
 
 #: authentication.pm:67
 #, c-format
@@ -847,20 +845,14 @@ msgstr "Kerberos 5 :"
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
 msgstr "Etkin Dizin Sunucusunda kimlik kanıtlama için Kerberos ve LDAP ile"
 
-#: authentication.pm:107
-#: authentication.pm:141
-#: authentication.pm:160
-#: authentication.pm:161
-#: authentication.pm:187
-#: authentication.pm:211
+#: authentication.pm:107 authentication.pm:141 authentication.pm:160
+#: authentication.pm:161 authentication.pm:187 authentication.pm:211
 #: authentication.pm:896
 #, c-format
 msgid " "
 msgstr " "
 
-#: authentication.pm:108
-#: authentication.pm:142
-#: authentication.pm:188
+#: authentication.pm:108 authentication.pm:142 authentication.pm:188
 #: authentication.pm:212
 #, c-format
 msgid "Welcome to the Authentication Wizard"
@@ -868,17 +860,18 @@ msgstr "Kimlik Doğrulama Sihirbazına Hoşgeldiniz"
 
 #: authentication.pm:110
 #, c-format
-msgid "You have selected LDAP authentication. Please review the configuration options below "
-msgstr "LDAP kimlik doğrulama yöntemini seçtiniz. Lütfen aşağıdaki ayarları gözden  geçirin"
+msgid ""
+"You have selected LDAP authentication. Please review the configuration "
+"options below "
+msgstr ""
+"LDAP kimlik doğrulama yöntemini seçtiniz. Lütfen aşağıdaki ayarları gözden  geçirin"
 
-#: authentication.pm:112
-#: authentication.pm:167
+#: authentication.pm:112 authentication.pm:167
 #, c-format
 msgid "LDAP Server"
 msgstr "LDAP Sunucusu"
 
-#: authentication.pm:113
-#: authentication.pm:168
+#: authentication.pm:113 authentication.pm:168
 #, c-format
 msgid "Base dn"
 msgstr "Temel dn"
@@ -888,46 +881,38 @@ msgstr "Temel dn"
 msgid "Fetch base Dn "
 msgstr "Temel Dn al"
 
-#: authentication.pm:116
-#: authentication.pm:171
+#: authentication.pm:116 authentication.pm:171
 #, c-format
 msgid "Use encrypt connection with TLS "
 msgstr "TLS ile şifreli bağlantı kullan"
 
-#: authentication.pm:117
-#: authentication.pm:172
+#: authentication.pm:117 authentication.pm:172
 #, c-format
 msgid "Download CA Certificate "
 msgstr "CA Sertifikası indir"
 
-#: authentication.pm:119
-#: authentication.pm:152
+#: authentication.pm:119 authentication.pm:152
 #, c-format
 msgid "Use Disconnect mode "
 msgstr "Çevrimdışı kipi kullan"
 
-#: authentication.pm:120
-#: authentication.pm:173
+#: authentication.pm:120 authentication.pm:173
 #, c-format
 msgid "Use anonymous BIND "
 msgstr "Anonim BIND kullan"
 
-#: authentication.pm:121
-#: authentication.pm:124
-#: authentication.pm:126
+#: authentication.pm:121 authentication.pm:124 authentication.pm:126
 #: authentication.pm:130
 #, c-format
 msgid "  "
 msgstr " "
 
-#: authentication.pm:122
-#: authentication.pm:174
+#: authentication.pm:122 authentication.pm:174
 #, c-format
 msgid "Bind DN "
 msgstr "Bind DN"
 
-#: authentication.pm:123
-#: authentication.pm:175
+#: authentication.pm:123 authentication.pm:175
 #, c-format
 msgid "Bind Password "
 msgstr "Bind Parolası"
@@ -954,8 +939,11 @@ msgstr "Gölge temeli"
 
 #: authentication.pm:144
 #, c-format
-msgid "You have selected Kerberos 5 authentication. Please review the configuration options below "
-msgstr "Kerberos 5 kimlik doğrulama yöntemini seçtiniz. Lütfen aşağıdaki ayarları  gözden geçiriniz."
+msgid ""
+"You have selected Kerberos 5 authentication. Please review the configuration "
+"options below "
+msgstr ""
+"Kerberos 5 kimlik doğrulama yöntemini seçtiniz. Lütfen aşağıdaki ayarları  gözden geçiriniz."
 
 #: authentication.pm:146
 #, c-format
@@ -989,8 +977,12 @@ msgstr "Kullanıcı bilgileri için Ldap kullan"
 
 #: authentication.pm:163
 #, c-format
-msgid "You have selected Kerberos 5 for authentication, now you must choose the type of users information "
-msgstr "Kimlik doğrulama için Kerberos 5 seçtiniz. Şimdi, kullanıcı bilgilerinin türünü  seçmelisiniz"
+msgid ""
+"You have selected Kerberos 5 for authentication, now you must choose the "
+"type of users information "
+msgstr ""
+"Kimlik doğrulama için Kerberos 5 seçtiniz. Şimdi, kullanıcı bilgilerinin "
+"türünü  seçmelisiniz"
 
 #: authentication.pm:169
 #, c-format
@@ -999,8 +991,11 @@ msgstr "Temel Dn al"
 
 #: authentication.pm:190
 #, c-format
-msgid "You have selected NIS authentication. Please review the configuration options below "
-msgstr "NIS kimlik doğrulama yöntemini seçtiniz. Lütfen aşağıdaki ayarları gözden  geçirin"
+msgid ""
+"You have selected NIS authentication. Please review the configuration "
+"options below "
+msgstr ""
+"NIS kimlik doğrulama yöntemini seçtiniz. Lütfen aşağıdaki ayarları gözden  geçirin"
 
 #: authentication.pm:192
 #, c-format
@@ -1014,8 +1009,12 @@ msgstr "NIS sunucusu"
 
 #: authentication.pm:214
 #, c-format
-msgid "You have selected Windows Domain authentication. Please review the configuration options below "
-msgstr "Kimlik doğrulama için Windows Etki Alanı seçtiniz. Lütfen aşağıdaki ayarları gözden  geçirin"
+msgid ""
+"You have selected Windows Domain authentication. Please review the "
+"configuration options below "
+msgstr ""
+"Kimlik doğrulama için Windows Etki Alanı seçtiniz. Lütfen aşağıdaki ayarları "
+"gözden  geçirin"
 
 #: authentication.pm:218
 #, c-format
@@ -1037,8 +1036,7 @@ msgstr "DNS alanı"
 msgid "DC Server"
 msgstr "DC Sunucusu"
 
-#: authentication.pm:236
-#: authentication.pm:252
+#: authentication.pm:236 authentication.pm:252
 #, c-format
 msgid "Authentication"
 msgstr "Kimlik kanıtlama"
@@ -1142,13 +1140,19 @@ msgstr "Açılış yükleyicisini %s bölümüne yükleyemezsiniz\n"
 
 #: bootloader.pm:2053
 #, c-format
-msgid "Your bootloader configuration must be updated because partition has been renumbered"
-msgstr "Bölüm yeniden numaralandığı için önyükleyici yapılandırmasının güncellenmesi  gerekli"
+msgid ""
+"Your bootloader configuration must be updated because partition has been "
+"renumbered"
+msgstr ""
+"Bölüm yeniden numaralandığı için önyükleyici yapılandırmasının güncellenmesi  gerekli"
 
 #: bootloader.pm:2066
 #, c-format
-msgid "The bootloader can not be installed correctly. You have to boot rescue and choose \"%s\""
-msgstr "Önyükleyici düzgün olarak kurulamadı. Kurtarma kipinde başlatmalı ve \"%s\"  seçeneğini seçmelisiniz"
+msgid ""
+"The bootloader can not be installed correctly. You have to boot rescue and "
+"choose \"%s\""
+msgstr ""
+"Önyükleyici düzgün olarak kurulamadı. Kurtarma kipinde başlatmalı ve \"%s\"  seçeneğini seçmelisiniz"
 
 #: bootloader.pm:2067
 #, c-format
@@ -1175,8 +1179,7 @@ msgstr "MB"
 msgid "GB"
 msgstr "GB"
 
-#: common.pm:142
-#: common.pm:151
+#: common.pm:142 common.pm:151
 #, c-format
 msgid "TB"
 msgstr "TB"
@@ -1219,16 +1222,12 @@ msgstr ""
 msgid "New"
 msgstr "Yeni"
 
-#: diskdrake/dav.pm:63
-#: diskdrake/interactive.pm:414
-#: diskdrake/smbnfs_gtk.pm:75
+#: diskdrake/dav.pm:63 diskdrake/interactive.pm:414 diskdrake/smbnfs_gtk.pm:75
 #, c-format
 msgid "Unmount"
 msgstr "Ayır"
 
-#: diskdrake/dav.pm:64
-#: diskdrake/interactive.pm:410
-#: diskdrake/smbnfs_gtk.pm:76
+#: diskdrake/dav.pm:64 diskdrake/interactive.pm:410 diskdrake/smbnfs_gtk.pm:76
 #, c-format
 msgid "Mount"
 msgstr "Bağla"
@@ -1238,76 +1237,44 @@ msgstr "Bağla"
 msgid "Server"
 msgstr "Sunucu"
 
-#: diskdrake/dav.pm:66
-#: diskdrake/interactive.pm:404
-#: diskdrake/interactive.pm:724
-#: diskdrake/interactive.pm:742
-#: diskdrake/interactive.pm:746
-#: diskdrake/removable.pm:23
+#: diskdrake/dav.pm:66 diskdrake/interactive.pm:404
+#: diskdrake/interactive.pm:724 diskdrake/interactive.pm:742
+#: diskdrake/interactive.pm:746 diskdrake/removable.pm:23
 #: diskdrake/smbnfs_gtk.pm:79
 #, c-format
 msgid "Mount point"
 msgstr "Bağlama noktası"
 
-#: diskdrake/dav.pm:67
-#: diskdrake/interactive.pm:406
-#: diskdrake/interactive.pm:1153
-#: diskdrake/removable.pm:24
+#: diskdrake/dav.pm:67 diskdrake/interactive.pm:406
+#: diskdrake/interactive.pm:1159 diskdrake/removable.pm:24
 #: diskdrake/smbnfs_gtk.pm:80
 #, c-format
 msgid "Options"
 msgstr "Seçenekler"
 
-#: diskdrake/dav.pm:68
-#: interactive.pm:387
-#: interactive/gtk.pm:453
+#: diskdrake/dav.pm:68 interactive.pm:387 interactive/gtk.pm:453
 #, c-format
 msgid "Remove"
 msgstr "Kaldır"
 
-#: diskdrake/dav.pm:69
-#: diskdrake/hd_gtk.pm:187
-#: diskdrake/removable.pm:26
-#: diskdrake/smbnfs_gtk.pm:82
-#: interactive/http.pm:151
+#: diskdrake/dav.pm:69 diskdrake/hd_gtk.pm:187 diskdrake/removable.pm:26
+#: diskdrake/smbnfs_gtk.pm:82 interactive/http.pm:151
 #, c-format
 msgid "Done"
 msgstr "Bitti"
 
-#: diskdrake/dav.pm:78
-#: diskdrake/hd_gtk.pm:128
-#: diskdrake/hd_gtk.pm:292
-#: diskdrake/interactive.pm:247
-#: diskdrake/interactive.pm:260
-#: diskdrake/interactive.pm:453
-#: diskdrake/interactive.pm:523
-#: diskdrake/interactive.pm:541
-#: diskdrake/interactive.pm:546
-#: diskdrake/interactive.pm:714
-#: diskdrake/interactive.pm:993
-#: diskdrake/interactive.pm:1044
-#: diskdrake/interactive.pm:1199
-#: diskdrake/interactive.pm:1212
-#: diskdrake/interactive.pm:1215
-#: diskdrake/interactive.pm:1483
-#: diskdrake/smbnfs_gtk.pm:42
-#: do_pkgs.pm:23
-#: do_pkgs.pm:28
-#: do_pkgs.pm:44
-#: do_pkgs.pm:60
-#: do_pkgs.pm:65
-#: do_pkgs.pm:82
-#: fsedit.pm:246
-#: interactive/http.pm:117
-#: interactive/http.pm:118
-#: modules/interactive.pm:19
-#: scanner.pm:95
-#: scanner.pm:106
-#: scanner.pm:113
-#: scanner.pm:120
-#: wizards.pm:95
-#: wizards.pm:99
-#: wizards.pm:121
+#: diskdrake/dav.pm:78 diskdrake/hd_gtk.pm:128 diskdrake/hd_gtk.pm:292
+#: diskdrake/interactive.pm:247 diskdrake/interactive.pm:260
+#: diskdrake/interactive.pm:453 diskdrake/interactive.pm:523
+#: diskdrake/interactive.pm:541 diskdrake/interactive.pm:546
+#: diskdrake/interactive.pm:714 diskdrake/interactive.pm:999
+#: diskdrake/interactive.pm:1050 diskdrake/interactive.pm:1205
+#: diskdrake/interactive.pm:1218 diskdrake/interactive.pm:1221
+#: diskdrake/interactive.pm:1489 diskdrake/smbnfs_gtk.pm:42 do_pkgs.pm:23
+#: do_pkgs.pm:28 do_pkgs.pm:44 do_pkgs.pm:60 do_pkgs.pm:65 do_pkgs.pm:82
+#: fsedit.pm:246 interactive/http.pm:117 interactive/http.pm:118
+#: modules/interactive.pm:19 scanner.pm:95 scanner.pm:106 scanner.pm:113
+#: scanner.pm:120 wizards.pm:95 wizards.pm:99 wizards.pm:121
 #, c-format
 msgid "Error"
 msgstr "Hata"
@@ -1322,24 +1289,13 @@ msgstr "Lütfen WebDAV sunucusu URL'ini giriniz"
 msgid "The URL must begin with http:// or https://"
 msgstr "URL http:// veya https:// ile başlamalıdır"
 
-#: diskdrake/dav.pm:106
-#: diskdrake/hd_gtk.pm:417
-#: diskdrake/interactive.pm:306
-#: diskdrake/interactive.pm:391
-#: diskdrake/interactive.pm:594
-#: diskdrake/interactive.pm:817
-#: diskdrake/interactive.pm:875
-#: diskdrake/interactive.pm:1024
-#: diskdrake/interactive.pm:1066
-#: diskdrake/interactive.pm:1067
-#: diskdrake/interactive.pm:1293
-#: diskdrake/interactive.pm:1331
-#: diskdrake/interactive.pm:1482
-#: do_pkgs.pm:19
-#: do_pkgs.pm:39
-#: do_pkgs.pm:57
-#: do_pkgs.pm:77
-#: harddrake/sound.pm:442
+#: diskdrake/dav.pm:106 diskdrake/hd_gtk.pm:417 diskdrake/interactive.pm:306
+#: diskdrake/interactive.pm:391 diskdrake/interactive.pm:594
+#: diskdrake/interactive.pm:817 diskdrake/interactive.pm:881
+#: diskdrake/interactive.pm:1030 diskdrake/interactive.pm:1072
+#: diskdrake/interactive.pm:1073 diskdrake/interactive.pm:1299
+#: diskdrake/interactive.pm:1337 diskdrake/interactive.pm:1488 do_pkgs.pm:19
+#: do_pkgs.pm:39 do_pkgs.pm:57 do_pkgs.pm:77 harddrake/sound.pm:442
 #, c-format
 msgid "Warning"
 msgstr "Uyarı"
@@ -1354,32 +1310,23 @@ msgstr "Bu bağlama noktasını silmek istediğinizden emin misiniz?"
 msgid "Server: "
 msgstr "Sunucu: "
 
-#: diskdrake/dav.pm:125
-#: diskdrake/interactive.pm:498
-#: diskdrake/interactive.pm:1355
-#: diskdrake/interactive.pm:1443
+#: diskdrake/dav.pm:125 diskdrake/interactive.pm:498
+#: diskdrake/interactive.pm:1361 diskdrake/interactive.pm:1449
 #, c-format
 msgid "Mount point: "
 msgstr "Bağlama noktası: "
 
-#: diskdrake/dav.pm:126
-#: diskdrake/interactive.pm:1450
+#: diskdrake/dav.pm:126 diskdrake/interactive.pm:1456
 #, c-format
 msgid "Options: %s"
 msgstr "Seçenekler: %s"
 
-#: diskdrake/hd_gtk.pm:61
-#: diskdrake/interactive.pm:301
-#: diskdrake/smbnfs_gtk.pm:22
-#: fs/mount_point.pm:106
-#: fs/partitioning_wizard.pm:53
-#: fs/partitioning_wizard.pm:236
-#: fs/partitioning_wizard.pm:244
-#: fs/partitioning_wizard.pm:283
-#: fs/partitioning_wizard.pm:432
-#: fs/partitioning_wizard.pm:496
-#: fs/partitioning_wizard.pm:572
-#: fs/partitioning_wizard.pm:575
+#: diskdrake/hd_gtk.pm:61 diskdrake/interactive.pm:301
+#: diskdrake/smbnfs_gtk.pm:22 fs/mount_point.pm:106
+#: fs/partitioning_wizard.pm:53 fs/partitioning_wizard.pm:236
+#: fs/partitioning_wizard.pm:244 fs/partitioning_wizard.pm:283
+#: fs/partitioning_wizard.pm:432 fs/partitioning_wizard.pm:496
+#: fs/partitioning_wizard.pm:572 fs/partitioning_wizard.pm:575
 #, c-format
 msgid "Partitioning"
 msgstr "Bölümlendirme"
@@ -1389,10 +1336,8 @@ msgstr "Bölümlendirme"
 msgid "Click on a partition, choose a filesystem type then choose an action"
 msgstr "Bir bölüme tıklayın, bir dosya sistemi türü seçin ve bir eylem seçin"
 
-#: diskdrake/hd_gtk.pm:110
-#: diskdrake/interactive.pm:1174
-#: diskdrake/interactive.pm:1184
-#: diskdrake/interactive.pm:1237
+#: diskdrake/hd_gtk.pm:110 diskdrake/interactive.pm:1180
+#: diskdrake/interactive.pm:1190 diskdrake/interactive.pm:1243
 #, c-format
 msgid "Read carefully"
 msgstr "Dikkatli Okuyun"
@@ -1402,8 +1347,7 @@ msgstr "Dikkatli Okuyun"
 msgid "Please make a backup of your data first"
 msgstr "Önce verinizin yedeğini alınız"
 
-#: diskdrake/hd_gtk.pm:111
-#: diskdrake/interactive.pm:240
+#: diskdrake/hd_gtk.pm:111 diskdrake/interactive.pm:240
 #, c-format
 msgid "Exit"
 msgstr "Çıkış"
@@ -1413,12 +1357,8 @@ msgstr "Çıkış"
 msgid "Continue"
 msgstr "Devam"
 
-#: diskdrake/hd_gtk.pm:182
-#: fs/partitioning_wizard.pm:548
-#: interactive.pm:653
-#: interactive/gtk.pm:811
-#: interactive/gtk.pm:829
-#: interactive/gtk.pm:850
+#: diskdrake/hd_gtk.pm:182 fs/partitioning_wizard.pm:548 interactive.pm:653
+#: interactive/gtk.pm:811 interactive/gtk.pm:829 interactive/gtk.pm:850
 #: ugtk2.pm:936
 #, c-format
 msgid "Help"
@@ -1441,8 +1381,7 @@ msgstr ""
 msgid "Please click on a partition"
 msgstr "Lütfen bir bölüm üzerine tıklayın"
 
-#: diskdrake/hd_gtk.pm:244
-#: diskdrake/smbnfs_gtk.pm:63
+#: diskdrake/hd_gtk.pm:244 diskdrake/smbnfs_gtk.pm:63
 #, c-format
 msgid "Details"
 msgstr "Ayrıntılar"
@@ -1462,45 +1401,37 @@ msgstr "Bilinmeyen"
 msgid "Ext4"
 msgstr "Ext4"
 
-#: diskdrake/hd_gtk.pm:388
-#: fs/partitioning_wizard.pm:402
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "XFS"
 msgstr "XFS"
 
-#: diskdrake/hd_gtk.pm:388
-#: fs/partitioning_wizard.pm:402
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "Swap"
 msgstr "Takas"
 
-#: diskdrake/hd_gtk.pm:388
-#: fs/partitioning_wizard.pm:402
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "SunOS"
 msgstr "SunOS"
 
-#: diskdrake/hd_gtk.pm:388
-#: fs/partitioning_wizard.pm:402
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "HFS"
 msgstr "HFS"
 
-#: diskdrake/hd_gtk.pm:388
-#: fs/partitioning_wizard.pm:402
+#: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:389
-#: fs/partitioning_wizard.pm:403
-#: services.pm:184
+#: diskdrake/hd_gtk.pm:389 fs/partitioning_wizard.pm:403 services.pm:184
 #, c-format
 msgid "Other"
 msgstr "Diğer"
 
-#: diskdrake/hd_gtk.pm:389
-#: diskdrake/interactive.pm:1370
+#: diskdrake/hd_gtk.pm:389 diskdrake/interactive.pm:1376
 #: fs/partitioning_wizard.pm:403
 #, c-format
 msgid "Empty"
@@ -1526,10 +1457,8 @@ msgstr "Önce ``Ayır''ı kullanın"
 msgid "Use ``%s'' instead (in expert mode)"
 msgstr "Yerine ``%s'' kullanın (uzman kipinde)"
 
-#: diskdrake/hd_gtk.pm:426
-#: diskdrake/interactive.pm:405
-#: diskdrake/interactive.pm:641
-#: diskdrake/removable.pm:25
+#: diskdrake/hd_gtk.pm:426 diskdrake/interactive.pm:405
+#: diskdrake/interactive.pm:641 diskdrake/removable.pm:25
 #: diskdrake/removable.pm:48
 #, c-format
 msgid "Type"
@@ -1545,17 +1474,14 @@ msgstr "Bir başka disk bölümü seçiniz"
 msgid "Choose a partition"
 msgstr "Bir disk bölümü seçiniz"
 
-#: diskdrake/interactive.pm:273
-#: diskdrake/interactive.pm:382
+#: diskdrake/interactive.pm:273 diskdrake/interactive.pm:382
 #: interactive/curses.pm:512
 #, c-format
 msgid "More"
 msgstr "Ayrıntı"
 
-#: diskdrake/interactive.pm:281
-#: diskdrake/interactive.pm:294
-#: diskdrake/interactive.pm:568
-#: diskdrake/interactive.pm:1278
+#: diskdrake/interactive.pm:281 diskdrake/interactive.pm:294
+#: diskdrake/interactive.pm:568 diskdrake/interactive.pm:1284
 #, c-format
 msgid "Confirmation"
 msgstr "Onayla"
@@ -1580,11 +1506,12 @@ msgstr "Bölümlendirme tablosunu kaydetmeden mi çıkıyorsunuz?"
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "/etc/fstab değişikliklerini kaydetmek istiyor musunuz ?"
 
-#: diskdrake/interactive.pm:301
-#: fs/partitioning_wizard.pm:283
+#: diskdrake/interactive.pm:301 fs/partitioning_wizard.pm:283
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr "Bölümlendirme tablosundaki değişikliklerin geçerli olması için makinenizi yeniden başlatmalısınız."
+msgstr ""
+"Bölümlendirme tablosundaki değişikliklerin geçerli olması için makinenizi "
+"yeniden başlatmalısınız."
 
 #: diskdrake/interactive.pm:306
 #, c-format
@@ -1634,8 +1561,11 @@ msgstr "Başka disk bölümü eklenemez"
 
 #: diskdrake/interactive.pm:373
 #, c-format
-msgid "To have more partitions, please delete one to be able to create an extended partition"
-msgstr "Daha fazla bölüm oluşturmak için, bir bölümü silip mantıksal bölüm oluşturun"
+msgid ""
+"To have more partitions, please delete one to be able to create an extended "
+"partition"
+msgstr ""
+"Daha fazla bölüm oluşturmak için, bir bölümü silip mantıksal bölüm oluşturun"
 
 #: diskdrake/interactive.pm:384
 #, c-format
@@ -1652,8 +1582,7 @@ msgstr "Ayrıntılı bilgi"
 msgid "View"
 msgstr "İzle"
 
-#: diskdrake/interactive.pm:408
-#: diskdrake/interactive.pm:830
+#: diskdrake/interactive.pm:408 diskdrake/interactive.pm:830
 #, c-format
 msgid "Resize"
 msgstr "Yeniden Boyutlandır"
@@ -1663,14 +1592,12 @@ msgstr "Yeniden Boyutlandır"
 msgid "Format"
 msgstr "Biçimlendir"
 
-#: diskdrake/interactive.pm:411
-#: diskdrake/interactive.pm:956
+#: diskdrake/interactive.pm:411 diskdrake/interactive.pm:962
 #, c-format
 msgid "Add to RAID"
 msgstr "RAID'e ekle"
 
-#: diskdrake/interactive.pm:412
-#: diskdrake/interactive.pm:975
+#: diskdrake/interactive.pm:412 diskdrake/interactive.pm:981
 #, c-format
 msgid "Add to LVM"
 msgstr "LVM'e ekle"
@@ -1720,8 +1647,7 @@ msgstr "Oluştur"
 msgid "Failed to mount partition"
 msgstr "Bölüm bağlanamadı"
 
-#: diskdrake/interactive.pm:487
-#: diskdrake/interactive.pm:489
+#: diskdrake/interactive.pm:487 diskdrake/interactive.pm:489
 #, c-format
 msgid "Create a new partition"
 msgstr "Yeni bölüm oluştur"
@@ -1731,14 +1657,12 @@ msgstr "Yeni bölüm oluştur"
 msgid "Start sector: "
 msgstr "Başlangıç sektörü: "
 
-#: diskdrake/interactive.pm:494
-#: diskdrake/interactive.pm:1059
+#: diskdrake/interactive.pm:494 diskdrake/interactive.pm:1065
 #, c-format
 msgid "Size in MB: "
 msgstr "MB cinsinden boyut: "
 
-#: diskdrake/interactive.pm:496
-#: diskdrake/interactive.pm:1060
+#: diskdrake/interactive.pm:496 diskdrake/interactive.pm:1066
 #, c-format
 msgid "Filesystem type: "
 msgstr "Dosya sistemi türü: "
@@ -1763,14 +1687,12 @@ msgstr "Disk bölümünü şifrele"
 msgid "Encryption key "
 msgstr "Şifreleme anahtarı"
 
-#: diskdrake/interactive.pm:509
-#: diskdrake/interactive.pm:1487
+#: diskdrake/interactive.pm:509 diskdrake/interactive.pm:1493
 #, c-format
 msgid "Encryption key (again)"
 msgstr "Parola (tekrar)"
 
-#: diskdrake/interactive.pm:520
-#: diskdrake/interactive.pm:1483
+#: diskdrake/interactive.pm:520 diskdrake/interactive.pm:1489
 #, c-format
 msgid "The encryption keys do not match"
 msgstr "Parolalar uyuşmuyor"
@@ -1791,8 +1713,7 @@ msgstr ""
 "(çünkü birincil bölümlerin sayı üst sınırına ulaştınız).\n"
 "Önce birincil bölümlerden birini silip uzatılmış bölüm oluşturun."
 
-#: diskdrake/interactive.pm:568
-#: diskdrake/interactive.pm:1278
+#: diskdrake/interactive.pm:568 diskdrake/interactive.pm:1284
 #: fs/partitioning.pm:48
 #, c-format
 msgid "Check bad blocks?"
@@ -1805,16 +1726,18 @@ msgstr "Loopback dosyası kaldırılsın mı ?"
 
 #: diskdrake/interactive.pm:622
 #, c-format
-msgid "After changing type of partition %s, all data on this partition will be lost"
-msgstr "%s bölümünün türü değiştirildikten sonra, üzerindeki tüm bilgiler silinecektir"
+msgid ""
+"After changing type of partition %s, all data on this partition will be lost"
+msgstr ""
+"%s bölümünün türü değiştirildikten sonra, üzerindeki tüm bilgiler "
+"silinecektir"
 
 #: diskdrake/interactive.pm:638
 #, c-format
 msgid "Change partition type"
 msgstr "Bölüm türünü değiştir"
 
-#: diskdrake/interactive.pm:640
-#: diskdrake/removable.pm:47
+#: diskdrake/interactive.pm:640 diskdrake/removable.pm:47
 #, c-format
 msgid "Which filesystem do you want?"
 msgstr "Hangi dosya sistemini istiyorsunuz?"
@@ -1873,10 +1796,8 @@ msgstr ""
 msgid "Where do you want to mount %s?"
 msgstr "%s aygıtını nereye bağlamak istersiniz?"
 
-#: diskdrake/interactive.pm:775
-#: diskdrake/interactive.pm:864
-#: fs/partitioning_wizard.pm:129
-#: fs/partitioning_wizard.pm:205
+#: diskdrake/interactive.pm:775 diskdrake/interactive.pm:870
+#: fs/partitioning_wizard.pm:129 fs/partitioning_wizard.pm:205
 #, c-format
 msgid "Resizing"
 msgstr "Yeniden boyutlandırılma"
@@ -1899,7 +1820,8 @@ msgstr "Bu bölümdeki tüm bilgiler yedeklenmelidir"
 #: diskdrake/interactive.pm:824
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
-msgstr "%s yeniden boyutlandırıldıktan sonra üzerindeki tüm bilgiler silinecektir"
+msgstr ""
+"%s yeniden boyutlandırıldıktan sonra üzerindeki tüm bilgiler silinecektir"
 
 #: diskdrake/interactive.pm:831
 #, c-format
@@ -1921,324 +1843,317 @@ msgstr "En az boyut: %s MB"
 msgid "Maximum size: %s MB"
 msgstr "En fazla boyut: %s MB"
 
-#: diskdrake/interactive.pm:875
-#: fs/partitioning_wizard.pm:213
+#: diskdrake/interactive.pm:881 fs/partitioning_wizard.pm:213
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s),\n"
 "filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
-"Bölüm(ler) yeniden boyutlandırıldıktan sonra veri doğruluğundan emin olmak için,\n"
+"Bölüm(ler) yeniden boyutlandırıldıktan sonra veri doğruluğundan emin olmak "
+"için,\n"
 "Microsoft Windows® başlangıcında dosya sistemi denetimleri çalışacaktır."
 
-#: diskdrake/interactive.pm:939
-#: diskdrake/interactive.pm:1478
+#: diskdrake/interactive.pm:945 diskdrake/interactive.pm:1484
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "Dosya sistemi şifreleme anahtarı"
 
-#: diskdrake/interactive.pm:940
+#: diskdrake/interactive.pm:946
 #, c-format
 msgid "Enter your filesystem encryption key"
 msgstr "Dosya sistemi şifreleme anahtarınızı giriniz"
 
-#: diskdrake/interactive.pm:941
-#: diskdrake/interactive.pm:1486
+#: diskdrake/interactive.pm:947 diskdrake/interactive.pm:1492
 #, c-format
 msgid "Encryption key"
 msgstr "Şifreleme anahtarı"
 
-#: diskdrake/interactive.pm:948
+#: diskdrake/interactive.pm:954
 #, c-format
 msgid "Invalid key"
 msgstr "Geçersiz anahtar"
 
-#: diskdrake/interactive.pm:956
+#: diskdrake/interactive.pm:962
 #, c-format
 msgid "Choose an existing RAID to add to"
 msgstr "Eklemek için mevcut bir RAID seçin"
 
-#: diskdrake/interactive.pm:958
-#: diskdrake/interactive.pm:977
+#: diskdrake/interactive.pm:964 diskdrake/interactive.pm:983
 #, c-format
 msgid "new"
 msgstr "yeni"
 
-#: diskdrake/interactive.pm:975
+#: diskdrake/interactive.pm:981
 #, c-format
 msgid "Choose an existing LVM to add to"
 msgstr "Eklemek için mevcut bir LVM seçin"
 
-#: diskdrake/interactive.pm:987
-#: diskdrake/interactive.pm:996
+#: diskdrake/interactive.pm:993 diskdrake/interactive.pm:1002
 #, c-format
 msgid "LVM name"
 msgstr "LVM ismi"
 
-#: diskdrake/interactive.pm:988
+#: diskdrake/interactive.pm:994
 #, c-format
 msgid "Enter a name for the new LVM volume group"
 msgstr "Yeni LVM bölüm grubuna bir isim girin"
 
-#: diskdrake/interactive.pm:993
+#: diskdrake/interactive.pm:999
 #, c-format
 msgid "\"%s\" already exists"
 msgstr "\"%s\" zaten var. "
 
-#: diskdrake/interactive.pm:1024
+#: diskdrake/interactive.pm:1030
 #, c-format
 msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
 "%s fiziki bölümü halen kullanımda.\n"
-" Bu bölümdeki kullanılan fiziki alanları bir başka bölüme taşımak istiyor musunuz?"
+" Bu bölümdeki kullanılan fiziki alanları bir başka bölüme taşımak istiyor "
+"musunuz?"
 
-#: diskdrake/interactive.pm:1026
+#: diskdrake/interactive.pm:1032
 #, c-format
 msgid "Moving physical extents"
 msgstr "Fiziki alanlar taşınıyor"
 
-#: diskdrake/interactive.pm:1044
+#: diskdrake/interactive.pm:1050
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "Bu disk bölümü loopback için kullanılamaz"
 
-#: diskdrake/interactive.pm:1057
+#: diskdrake/interactive.pm:1063
 #, c-format
 msgid "Loopback"
 msgstr "Loopback"
 
-#: diskdrake/interactive.pm:1058
+#: diskdrake/interactive.pm:1064
 #, c-format
 msgid "Loopback file name: "
 msgstr "Loopback dosya ismi: "
 
-#: diskdrake/interactive.pm:1063
+#: diskdrake/interactive.pm:1069
 #, c-format
 msgid "Give a file name"
 msgstr "Bir dosya ismi verin"
 
-#: diskdrake/interactive.pm:1066
+#: diskdrake/interactive.pm:1072
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "Dosya başka bir loopback tarafından kullanılıyor,başka bir tane seçin"
 
-#: diskdrake/interactive.pm:1067
+#: diskdrake/interactive.pm:1073
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "Dosya zaten var. Kullanılsın mı?"
 
-#: diskdrake/interactive.pm:1099
-#: diskdrake/interactive.pm:1102
+#: diskdrake/interactive.pm:1105 diskdrake/interactive.pm:1108
 #, c-format
 msgid "Mount options"
 msgstr "Bağlama seçenekleri"
 
-#: diskdrake/interactive.pm:1109
+#: diskdrake/interactive.pm:1115
 #, c-format
 msgid "Various"
 msgstr "Çeşitli"
 
-#: diskdrake/interactive.pm:1155
+#: diskdrake/interactive.pm:1161
 #, c-format
 msgid "device"
 msgstr "aygıt"
 
-#: diskdrake/interactive.pm:1156
+#: diskdrake/interactive.pm:1162
 #, c-format
 msgid "level"
 msgstr "seviye"
 
-#: diskdrake/interactive.pm:1157
+#: diskdrake/interactive.pm:1163
 #, c-format
 msgid "chunk size in KiB"
 msgstr "KiB bazında parça boyutu"
 
-#: diskdrake/interactive.pm:1175
+#: diskdrake/interactive.pm:1181
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Dikkatli olun: bu işlem tehlikelidir."
 
-#: diskdrake/interactive.pm:1190
+#: diskdrake/interactive.pm:1196
 #, c-format
 msgid "Partitioning Type"
 msgstr "Bölümlendirme Türü"
 
-#: diskdrake/interactive.pm:1190
+#: diskdrake/interactive.pm:1196
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Ne tür bir bölümleme istiyorsunuz?"
 
-#: diskdrake/interactive.pm:1228
+#: diskdrake/interactive.pm:1234
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Yeni ayarların etkinleşmesi için sistemi yeniden başlatmalısınız"
 
-#: diskdrake/interactive.pm:1237
+#: diskdrake/interactive.pm:1243
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk"
 msgstr "%s sürücüsünün bölümlendirme tablosu diske yazılacak"
 
-#: diskdrake/interactive.pm:1256
-#: fs/format.pm:102
-#: fs/format.pm:109
+#: diskdrake/interactive.pm:1262 fs/format.pm:102 fs/format.pm:109
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Biçimlendirilen bölüm: %s"
 
-#: diskdrake/interactive.pm:1269
+#: diskdrake/interactive.pm:1275
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr "%s bölümü biçimlendirilirken üzerinde ki tüm bilgiler silinecektir"
 
-#: diskdrake/interactive.pm:1292
+#: diskdrake/interactive.pm:1298
 #, c-format
 msgid "Move files to the new partition"
 msgstr "Dosyalar yeni bölüme taşınsın"
 
-#: diskdrake/interactive.pm:1292
+#: diskdrake/interactive.pm:1298
 #, c-format
 msgid "Hide files"
 msgstr "Dosyaları gizle"
 
-#: diskdrake/interactive.pm:1293
+#: diskdrake/interactive.pm:1299
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
 "(%s)\n"
 "\n"
-"You can either choose to move the files into the partition that will be mounted there or leave them where they are (which results in hiding them by the contents of the mounted partition)"
+"You can either choose to move the files into the partition that will be "
+"mounted there or leave them where they are (which results in hiding them by "
+"the contents of the mounted partition)"
 msgstr ""
 "%s dizini zaten veri içeriyor\n"
 " (%s)\n"
 " Dosyaları, oraya bağlanacak bir bölüme taşıyabilir veya bulundukları yerde  bırakabilirsiniz (bu ise, bağlı bölümün içindekilerle gizlenmesine yol açar)."
 
-#: diskdrake/interactive.pm:1308
+#: diskdrake/interactive.pm:1314
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "Dosyalar yeni bölüme taşınsın"
 
-#: diskdrake/interactive.pm:1312
+#: diskdrake/interactive.pm:1318
 #, c-format
 msgid "Copying %s"
 msgstr "%s kopyalanıyor"
 
-#: diskdrake/interactive.pm:1316
+#: diskdrake/interactive.pm:1322
 #, c-format
 msgid "Removing %s"
 msgstr "%s siliniyor"
 
-#: diskdrake/interactive.pm:1330
+#: diskdrake/interactive.pm:1336
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "%s bölümü şimdi %s olarak biliniyor"
 
-#: diskdrake/interactive.pm:1331
+#: diskdrake/interactive.pm:1337
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr "Yeniden numaralandırılan bölümler:"
 
-#: diskdrake/interactive.pm:1356
-#: diskdrake/interactive.pm:1427
+#: diskdrake/interactive.pm:1362 diskdrake/interactive.pm:1433
 #, c-format
 msgid "Device: "
 msgstr "Aygıt: "
 
-#: diskdrake/interactive.pm:1357
+#: diskdrake/interactive.pm:1363
 #, c-format
 msgid "Volume label: "
 msgstr "Bölüm etiketi:"
 
-#: diskdrake/interactive.pm:1358
+#: diskdrake/interactive.pm:1364
 #, c-format
 msgid "UUID: "
 msgstr "UUID:"
 
-#: diskdrake/interactive.pm:1359
+#: diskdrake/interactive.pm:1365
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS sürücü harfi: %s (sadece tahmin)\n"
 
-#: diskdrake/interactive.pm:1363
-#: diskdrake/interactive.pm:1372
-#: diskdrake/interactive.pm:1446
+#: diskdrake/interactive.pm:1369 diskdrake/interactive.pm:1378
+#: diskdrake/interactive.pm:1452
 #, c-format
 msgid "Type: "
 msgstr "Türü: "
 
-#: diskdrake/interactive.pm:1367
-#: diskdrake/interactive.pm:1431
+#: diskdrake/interactive.pm:1373 diskdrake/interactive.pm:1437
 #, c-format
 msgid "Name: "
 msgstr "İsim: "
 
-#: diskdrake/interactive.pm:1374
+#: diskdrake/interactive.pm:1380
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Başlangıç: sektör %s\n"
 
-#: diskdrake/interactive.pm:1375
+#: diskdrake/interactive.pm:1381
 #, c-format
 msgid "Size: %s"
 msgstr "Boyut: %s"
 
-#: diskdrake/interactive.pm:1377
+#: diskdrake/interactive.pm:1383
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s sektör"
 
-#: diskdrake/interactive.pm:1379
+#: diskdrake/interactive.pm:1385
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "%d. silindirden %d. silindire kadar\n"
 
-#: diskdrake/interactive.pm:1380
+#: diskdrake/interactive.pm:1386
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr "Mantıksal alan sayısı: %d\n"
 
-#: diskdrake/interactive.pm:1381
+#: diskdrake/interactive.pm:1387
 #, c-format
 msgid "Formatted\n"
 msgstr "Biçimlendirilmiş\n"
 
-#: diskdrake/interactive.pm:1382
+#: diskdrake/interactive.pm:1388
 #, c-format
 msgid "Not formatted\n"
 msgstr "Biçimlendirilmemiş\n"
 
-#: diskdrake/interactive.pm:1383
+#: diskdrake/interactive.pm:1389
 #, c-format
 msgid "Mounted\n"
 msgstr "Bağlandı\n"
 
-#: diskdrake/interactive.pm:1384
+#: diskdrake/interactive.pm:1390
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1386
+#: diskdrake/interactive.pm:1392
 #, c-format
 msgid "Encrypted"
 msgstr "Şifrelenmiş"
 
-#: diskdrake/interactive.pm:1388
+#: diskdrake/interactive.pm:1394
 #, c-format
 msgid " (mapped on %s)"
 msgstr " (%s üzerinde haritalanmış)"
 
-#: diskdrake/interactive.pm:1389
+#: diskdrake/interactive.pm:1395
 #, c-format
 msgid " (to map on %s)"
 msgstr " (%s üzerine haritala)"
 
-#: diskdrake/interactive.pm:1390
+#: diskdrake/interactive.pm:1396
 #, c-format
 msgid " (inactive)"
 msgstr " (etkin değil)"
 
-#: diskdrake/interactive.pm:1397
+#: diskdrake/interactive.pm:1403
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2247,7 +2162,7 @@ msgstr ""
 "Loopback dosyası:\n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1398
+#: diskdrake/interactive.pm:1404
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -2256,27 +2171,27 @@ msgstr ""
 "Öntanımlı olarak yüklenecek bölüm\n"
 "    (MS-DOS açılışı için, lilo için değil)\n"
 
-#: diskdrake/interactive.pm:1400
+#: diskdrake/interactive.pm:1406
 #, c-format
 msgid "Level %s\n"
 msgstr "Seviye %s\n"
 
-#: diskdrake/interactive.pm:1401
+#: diskdrake/interactive.pm:1407
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "Parça boyutu %d KiB\n"
 
-#: diskdrake/interactive.pm:1402
+#: diskdrake/interactive.pm:1408
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "RAID-diskleri %s\n"
 
-#: diskdrake/interactive.pm:1404
+#: diskdrake/interactive.pm:1410
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Loopback dosyası ismi: %s"
 
-#: diskdrake/interactive.pm:1407
+#: diskdrake/interactive.pm:1413
 #, c-format
 msgid ""
 "\n"
@@ -2290,7 +2205,7 @@ msgstr ""
 "ihtimalle onu bu şekilde\n"
 "bırakmalısınız.\n"
 
-#: diskdrake/interactive.pm:1410
+#: diskdrake/interactive.pm:1416
 #, c-format
 msgid ""
 "\n"
@@ -2302,57 +2217,57 @@ msgstr ""
 "Bu, çok önyüklemeli sistemler\n"
 "için özel bir önyükleme bölümüdür.\n"
 
-#: diskdrake/interactive.pm:1419
+#: diskdrake/interactive.pm:1425
 #, c-format
 msgid "Free space on %s (%s)"
 msgstr "%s üzerindeki boş alan (%s)"
 
-#: diskdrake/interactive.pm:1428
+#: diskdrake/interactive.pm:1434
 #, c-format
 msgid "Read-only"
 msgstr "Salt-Okur"
 
-#: diskdrake/interactive.pm:1429
+#: diskdrake/interactive.pm:1435
 #, c-format
 msgid "Size: %s\n"
 msgstr "Boyut: %s\n"
 
-#: diskdrake/interactive.pm:1430
+#: diskdrake/interactive.pm:1436
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Geometri: %s silindir, %s kafa, %s sektör\n"
 
-#: diskdrake/interactive.pm:1432
+#: diskdrake/interactive.pm:1438
 #, c-format
 msgid "Medium type: "
 msgstr "Ortam türü: "
 
-#: diskdrake/interactive.pm:1433
+#: diskdrake/interactive.pm:1439
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "LVM-diskleri %s\n"
 
-#: diskdrake/interactive.pm:1434
+#: diskdrake/interactive.pm:1440
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Bölümlendirme tablosu türü: %s\n"
 
-#: diskdrake/interactive.pm:1435
+#: diskdrake/interactive.pm:1441
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "veri yolu %d ve %d kimlikli\n"
 
-#: diskdrake/interactive.pm:1479
+#: diskdrake/interactive.pm:1485
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Dosya sisteminizin parolasını seçiniz"
 
-#: diskdrake/interactive.pm:1482
+#: diskdrake/interactive.pm:1488
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr "Bu parola çok basit (en az %d karakterlik olmalı)"
 
-#: diskdrake/interactive.pm:1489
+#: diskdrake/interactive.pm:1495
 #, c-format
 msgid "Encryption algorithm"
 msgstr "Şifreleme algoritması"
@@ -2362,19 +2277,10 @@ msgstr "Şifreleme algoritması"
 msgid "Change type"
 msgstr "Türünü değiştir"
 
-#: diskdrake/smbnfs_gtk.pm:81
-#: interactive.pm:129
-#: interactive.pm:550
-#: interactive/curses.pm:260
-#: interactive/http.pm:104
-#: interactive/http.pm:160
-#: interactive/stdio.pm:39
-#: interactive/stdio.pm:148
-#: mygtk2.pm:847
-#: ugtk2.pm:415
-#: ugtk2.pm:517
-#: ugtk2.pm:526
-#: ugtk2.pm:812
+#: diskdrake/smbnfs_gtk.pm:81 interactive.pm:129 interactive.pm:550
+#: interactive/curses.pm:260 interactive/http.pm:104 interactive/http.pm:160
+#: interactive/stdio.pm:39 interactive/stdio.pm:148 mygtk2.pm:847 ugtk2.pm:415
+#: ugtk2.pm:517 ugtk2.pm:526 ugtk2.pm:812
 #, c-format
 msgid "Cancel"
 msgstr "İptal"
@@ -2384,8 +2290,7 @@ msgstr "İptal"
 msgid "Can not login using username %s (bad password?)"
 msgstr "Giriş başarısız %s (hatalı şifre?)"
 
-#: diskdrake/smbnfs_gtk.pm:168
-#: diskdrake/smbnfs_gtk.pm:177
+#: diskdrake/smbnfs_gtk.pm:168 diskdrake/smbnfs_gtk.pm:177
 #, c-format
 msgid "Domain Authentication Required"
 msgstr "Etki alanı kimlik doğrulaması gerekli"
@@ -2402,8 +2307,10 @@ msgstr "Başka bir"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid "Please enter your username, password and domain name to access this host."
-msgstr "Bu makineye ulaşmak için lütfen kullanıcı adı, şifre ve etki alanı giriniz."
+msgid ""
+"Please enter your username, password and domain name to access this host."
+msgstr ""
+"Bu makineye ulaşmak için lütfen kullanıcı adı, şifre ve etki alanı giriniz."
 
 #: diskdrake/smbnfs_gtk.pm:180
 #, c-format
@@ -2425,28 +2332,22 @@ msgstr "Sunucuları ara"
 msgid "Search new servers"
 msgstr "Yeni sunucuları ara"
 
-#: do_pkgs.pm:19
-#: do_pkgs.pm:57
+#: do_pkgs.pm:19 do_pkgs.pm:57
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
 msgstr "%s paketinin kurulması gerekiyor. Kurulmasını ister misiniz?"
 
-#: do_pkgs.pm:23
-#: do_pkgs.pm:44
-#: do_pkgs.pm:60
-#: do_pkgs.pm:82
+#: do_pkgs.pm:23 do_pkgs.pm:44 do_pkgs.pm:60 do_pkgs.pm:82
 #, c-format
 msgid "Could not install the %s package!"
 msgstr "%s paketi kurulamıyor!"
 
-#: do_pkgs.pm:28
-#: do_pkgs.pm:65
+#: do_pkgs.pm:28 do_pkgs.pm:65
 #, c-format
 msgid "Mandatory package %s is missing"
 msgstr "Zorunlu %s paketi eksik"
 
-#: do_pkgs.pm:39
-#: do_pkgs.pm:77
+#: do_pkgs.pm:39 do_pkgs.pm:77
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Bu paketlerinde kurulu olması gerekiyor:\n"
@@ -2456,19 +2357,21 @@ msgstr "Bu paketlerinde kurulu olması gerekiyor:\n"
 msgid "Installing packages..."
 msgstr "Paketler kuruluyor..."
 
-#: do_pkgs.pm:287
-#: pkgs.pm:281
+#: do_pkgs.pm:287 pkgs.pm:281
 #, c-format
 msgid "Removing packages..."
 msgstr "Paketler kaldırılıyor..."
 
 #: fs/any.pm:17
 #, c-format
-msgid "An error occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem"
-msgstr "Bir hata oluştu. Yeni dosya sisteminin oluşturulacağı geçerli bir sürücü bulunamadı. Bu sorunu çözmek için donanımınızı kontrol edin"
+msgid ""
+"An error occurred - no valid devices were found on which to create new "
+"filesystems. Please check your hardware for the cause of this problem"
+msgstr ""
+"Bir hata oluştu. Yeni dosya sisteminin oluşturulacağı geçerli bir sürücü "
+"bulunamadı. Bu sorunu çözmek için donanımınızı kontrol edin"
 
-#: fs/any.pm:75
-#: fs/partitioning_wizard.pm:62
+#: fs/any.pm:75 fs/partitioning_wizard.pm:62
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "/boot/efi ye bağlanmış bir FAT bölümüne ihtiyacınız var"
@@ -2493,8 +2396,7 @@ msgstr "%s üzerinde etiket ayarlanamadı. Biçimlendirilmiş miydi?"
 msgid "I do not know how to format %s in type %s"
 msgstr "%s bölümünün %s türünde nasıl biçimlendireceğimi bilmiyorum"
 
-#: fs/format.pm:180
-#: fs/format.pm:182
+#: fs/format.pm:180 fs/format.pm:182
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "%s biçimlemesinde %s bölüm hatası"
@@ -2514,14 +2416,12 @@ msgstr "%s bölümü bağlanıyor"
 msgid "mounting partition %s in directory %s failed"
 msgstr "%2$s dizini içerisine %1$s bölümü bağlanamadı"
 
-#: fs/mount.pm:91
-#: fs/mount.pm:108
+#: fs/mount.pm:91 fs/mount.pm:108
 #, c-format
 msgid "Checking %s"
 msgstr "%s kontrol ediliyor"
 
-#: fs/mount.pm:125
-#: partition_table.pm:405
+#: fs/mount.pm:125 partition_table.pm:409
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "%s ayrılırken hata: %s"
@@ -2531,35 +2431,43 @@ msgstr "%s ayrılırken hata: %s"
 msgid "Enabling swap partition %s"
 msgstr "Takas bölümü etkinleştiriliyor: %s"
 
-#: fs/mount_options.pm:113
+#: fs/mount_options.pm:112
+#, c-format
+msgid "Enable Posix Access Control Lists"
+msgstr ""
+
+#: fs/mount_options.pm:114
 #, c-format
 msgid "Flush write cache on file close"
 msgstr "Dosya kapanışında yazım ön belleğini temizle"
 
-#: fs/mount_options.pm:115
+#: fs/mount_options.pm:116
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
-msgstr "Grup disk kota hesaplamasını ve isteğe göre zorlama sınırlarını etkinleştir"
+msgstr ""
+"Grup disk kota hesaplamasını ve isteğe göre zorlama sınırlarını etkinleştir"
 
-#: fs/mount_options.pm:117
+#: fs/mount_options.pm:118
 #, c-format
 msgid ""
 "Do not update inode access times on this file system\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
 "Bu dosya sisteminde inode erişim zamanlarını güncelleme\n"
-" (örn.: haber sunucularını hızlandırmak amacıyla haber makarasına daha hızlı erişim için)"
+" (örn.: haber sunucularını hızlandırmak amacıyla haber makarasına daha hızlı "
+"erişim için)"
 
-#: fs/mount_options.pm:120
+#: fs/mount_options.pm:121
 #, c-format
 msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
 "Bu dosya sisteminde inode erişim zamanlarını daha etkili bir yolla güncelle\n"
-" (örn.: haber sunucularını hızlandırmak amacıyla haber makarasına daha hızlı erişim için)"
+" (örn.: haber sunucularını hızlandırmak amacıyla haber makarasına daha hızlı "
+"erişim için)"
 
-#: fs/mount_options.pm:123
+#: fs/mount_options.pm:124
 #, c-format
 msgid ""
 "Can only be mounted explicitly (i.e.,\n"
@@ -2568,12 +2476,12 @@ msgstr ""
 "Sadece belirgin olarak bağlanabilir (örn.,\n"
 "-a seçeneği dosya sisteminin bağlanmasını sağlayamayacaktır)."
 
-#: fs/mount_options.pm:126
+#: fs/mount_options.pm:127
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
 msgstr "Dosya sistemindeki karakter veya blok özellikli aygıtları yorumlama."
 
-#: fs/mount_options.pm:128
+#: fs/mount_options.pm:129
 #, c-format
 msgid ""
 "Do not allow execution of any binaries on the mounted\n"
@@ -2581,10 +2489,11 @@ msgid ""
 "containing binaries for architectures other than its own."
 msgstr ""
 "Bağlı dosya sistemindeki hiç bir ikili dosyanın çalışmasına\n"
-" izin verme. Kendisi dışındaki mimariler için derlenmiş ikili dosyaları içeren\n"
+" izin verme. Kendisi dışındaki mimariler için derlenmiş ikili dosyaları "
+"içeren\n"
 " dosya sistemlerine sahip sunucularda bu seçenek yararlı olabilir."
 
-#: fs/mount_options.pm:132
+#: fs/mount_options.pm:133
 #, c-format
 msgid ""
 "Do not allow set-user-identifier or set-group-identifier\n"
@@ -2595,42 +2504,44 @@ msgstr ""
 " izin verme. (Güvenilir görünse de suidperl(1) kurulu ise aslında\n"
 " güvensizdir.)"
 
-#: fs/mount_options.pm:136
+#: fs/mount_options.pm:137
 #, c-format
 msgid "Mount the file system read-only."
 msgstr "Dosya sistemini salt okunur olarak bağla."
 
-#: fs/mount_options.pm:138
+#: fs/mount_options.pm:139
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
 msgstr "Dosya sistemine tüm I/O işlemleri eş zamanlı yapılmalıdır."
 
-#: fs/mount_options.pm:140
+#: fs/mount_options.pm:141
 #, c-format
 msgid "Allow every user to mount and umount the file system."
 msgstr "Her kullanıcının dosya sistemini bağlamasına veya ayırmasına izin ver."
 
-#: fs/mount_options.pm:142
+#: fs/mount_options.pm:143
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
 msgstr "Normal bir kullanıcının dosya sistemini bağlamasına izin ver."
 
-#: fs/mount_options.pm:144
+#: fs/mount_options.pm:145
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
-msgstr "Grup kullanıcı disk kota hesaplamasını, ve isteğe göre, zorlama sınırlarını etkinleştir"
+msgstr ""
+"Grup kullanıcı disk kota hesaplamasını, ve isteğe göre, zorlama sınırlarını "
+"etkinleştir"
 
-#: fs/mount_options.pm:146
+#: fs/mount_options.pm:147
 #, c-format
 msgid "Support \"user.\" extended attributes"
 msgstr "\"Kullanıcı\" gelişmiş özniteliklerini destekle"
 
-#: fs/mount_options.pm:148
+#: fs/mount_options.pm:149
 #, c-format
 msgid "Give write access to ordinary users"
 msgstr "Normal kullanıcılara yazma erişimi ver"
 
-#: fs/mount_options.pm:150
+#: fs/mount_options.pm:151
 #, c-format
 msgid "Give read-only access to ordinary users"
 msgstr "Normal kullanıcılara sadece okuma erişimi ver"
@@ -2662,8 +2573,12 @@ msgstr "Biçimlendirilecek disk bölümlerini seçin"
 
 #: fs/partitioning.pm:75
 #, c-format
-msgid "Failed to check filesystem %s. Do you want to repair the errors? (beware, you can lose data)"
-msgstr "%s dosya sistemi sınanamadı. Hataları onarmak istiyor musunuz? (dikkat edin, veri yitirebilirsiniz)"
+msgid ""
+"Failed to check filesystem %s. Do you want to repair the errors? (beware, "
+"you can lose data)"
+msgstr ""
+"%s dosya sistemi sınanamadı. Hataları onarmak istiyor musunuz? (dikkat edin, "
+"veri yitirebilirsiniz)"
 
 #: fs/partitioning.pm:78
 #, c-format
@@ -2733,8 +2648,13 @@ msgstr "Hangi bölümü yeniden boyutlandırmak istiyorsunuz?"
 
 #: fs/partitioning_wizard.pm:172
 #, c-format
-msgid "Your Microsoft Windows® partition is too fragmented. Please reboot your computer under Microsoft Windows®, run the ``defrag'' utility, then restart the Mandriva Linux installation."
-msgstr "Microsoft Windows® bölümünüz çok dağınık, lütfen önce \"defrag\" ile diskinizdeki dosyaları bir araya getirin"
+msgid ""
+"Your Microsoft Windows® partition is too fragmented. Please reboot your "
+"computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
+"the Mandriva Linux installation."
+msgstr ""
+"Microsoft Windows® bölümünüz çok dağınık, lütfen önce \"defrag\" ile "
+"diskinizdeki dosyaları bir araya getirin"
 
 #: fs/partitioning_wizard.pm:180
 #, c-format
@@ -2745,7 +2665,12 @@ msgid ""
 "Your Microsoft Windows® partition will be now resized.\n"
 "\n"
 "\n"
-"Be careful: this operation is dangerous. If you have not already done so, you first need to exit the installation, run \"chkdsk c:\" from a Command Prompt under Microsoft Windows® (beware, running graphical program \"scandisk\" is not enough, be sure to use \"chkdsk\" in a Command Prompt!), optionally run defrag, then restart the installation. You should also backup your data.\n"
+"Be careful: this operation is dangerous. If you have not already done so, "
+"you first need to exit the installation, run \"chkdsk c:\" from a Command "
+"Prompt under Microsoft Windows® (beware, running graphical program \"scandisk"
+"\" is not enough, be sure to use \"chkdsk\" in a Command Prompt!), "
+"optionally run defrag, then restart the installation. You should also backup "
+"your data.\n"
 "\n"
 "\n"
 "When sure, press %s."
@@ -2756,17 +2681,19 @@ msgstr ""
 "DrakX Windows bölümünüzü yeniden boyutlandıracak.\n"
 "\n"
 "\n"
-"Dikkatli olun: bu tehlikeli bir iştir. Hazır olduğunuza emin değilseniz, önce windows komut satırından \"chkdsk c:\" komutunu verin (windows altındaki grafiksel scandisk' e güvenmeyin ve bunu komut satırından yazıp yapın), ardından disk birleştirme operasyonunu yapın (defrag). Tüm bunların ardından kuruluma yeniden başlayın. Bunların dışında verilerinizi yedeklemiş olmanız tavsiye edilir.\n"
+"Dikkatli olun: bu tehlikeli bir iştir. Hazır olduğunuza emin değilseniz, "
+"önce windows komut satırından \"chkdsk c:\" komutunu verin (windows "
+"altındaki grafiksel scandisk' e güvenmeyin ve bunu komut satırından yazıp "
+"yapın), ardından disk birleştirme operasyonunu yapın (defrag). Tüm bunların "
+"ardından kuruluma yeniden başlayın. Bunların dışında verilerinizi yedeklemiş "
+"olmanız tavsiye edilir.\n"
 "\n"
 "\n"
 "Devam etmek için hazır olduğunuzda %s tuşuna basın."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: fs/partitioning_wizard.pm:189
-#: fs/partitioning_wizard.pm:552
-#: interactive.pm:549
-#: interactive/curses.pm:263
-#: ugtk2.pm:519
+#: fs/partitioning_wizard.pm:189 fs/partitioning_wizard.pm:552
+#: interactive.pm:549 interactive/curses.pm:263 ugtk2.pm:519
 #, c-format
 msgid "Next"
 msgstr "İleri"
@@ -2816,8 +2743,7 @@ msgstr "Tüm diski sil ve kullan"
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "Birden çok sabit diskiniz var, hangisine linux kurmak istiyorsunuz?"
 
-#: fs/partitioning_wizard.pm:243
-#: fsedit.pm:610
+#: fs/partitioning_wizard.pm:243 fsedit.pm:610
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr "%s diski üzerindeki TÜM bölümler ve veriler silinecektir"
@@ -2846,14 +2772,12 @@ msgstr ""
 msgid "Ext2/3/4"
 msgstr "Ext2/3/4"
 
-#: fs/partitioning_wizard.pm:432
-#: fs/partitioning_wizard.pm:572
+#: fs/partitioning_wizard.pm:432 fs/partitioning_wizard.pm:572
 #, c-format
 msgid "I can not find any room for installing"
 msgstr "Kurulum için boş yer bulunamıyor"
 
-#: fs/partitioning_wizard.pm:441
-#: fs/partitioning_wizard.pm:579
+#: fs/partitioning_wizard.pm:441 fs/partitioning_wizard.pm:579
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "DrakX Bölümlendirme sihirbazı şu çözümleri buldu:"
@@ -2901,7 +2825,8 @@ msgstr "%s disklerinde BIOS RAID yazılımı algılandı. Etkinleştirilsin mi?"
 #: fsedit.pm:247
 #, c-format
 msgid ""
-"I can not read the partition table of device %s, it's too corrupted for me :(\n"
+"I can not read the partition table of device %s, it's too corrupted for me :"
+"(\n"
 "I can try to go on, erasing over bad partitions (ALL DATA will be lost!).\n"
 "The other solution is to not allow DrakX to modify the partition table.\n"
 "(the error is %s)\n"
@@ -2953,39 +2878,45 @@ msgstr ""
 "Hiçbir önyükleyici, /boot bölümü olmadan bunu çalıştıramaz.\n"
 "Bu nedenle bir /boot bölümü eklediğinize emin olun."
 
-#: fsedit.pm:443
-#: fsedit.pm:461
+#: fsedit.pm:443 fsedit.pm:461
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
 msgstr "%s bağlama noktası için parolalı dosya sistemi kullanamazsınız"
 
 #: fsedit.pm:447
 #, c-format
-msgid "You can not use the LVM Logical Volume for mount point %s since it spans physical volumes"
-msgstr "Bir LVM Mantıksal Bölümünü, fiziki bölümleri içerdiğinden %s bağlantı noktası  olarak kullanmazsınız"
+msgid ""
+"You can not use the LVM Logical Volume for mount point %s since it spans "
+"physical volumes"
+msgstr ""
+"Bir LVM Mantıksal Bölümünü, fiziki bölümleri içerdiğinden %s bağlantı "
+"noktası  olarak kullanmazsınız"
 
 #: fsedit.pm:449
 #, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
-"The bootloader is not able to handle this when the volume spans physical volumes.\n"
+"The bootloader is not able to handle this when the volume spans physical "
+"volumes.\n"
 "You should create a /boot partition first"
 msgstr ""
 "Bir LVM Mantıksal bölümünü kök dizini (/) olarak seçtiniz.\n"
 "Önyükleyici, bölüm fiziki bölümleri kapsadığı sürece bunu kullanamaz\n"
 "Bu nedenle bir /boot bölümü eklediğinize emin olun."
 
-#: fsedit.pm:453
-#: fsedit.pm:455
+#: fsedit.pm:453 fsedit.pm:455
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Bu dizin kök dosya sistemi içinde kalmalı"
 
-#: fsedit.pm:457
-#: fsedit.pm:459
+#: fsedit.pm:457 fsedit.pm:459
 #, c-format
-msgid "You need a true filesystem (ext2/3/4, reiserfs, xfs, or jfs) for this mount point\n"
-msgstr "Bu bağlama noktası için gerçek bir dosya sistemi (ext2/3/4, reiserfs, xfs veya jfs) gerekiyor.\n"
+msgid ""
+"You need a true filesystem (ext2/3/4, reiserfs, xfs, or jfs) for this mount "
+"point\n"
+msgstr ""
+"Bu bağlama noktası için gerçek bir dosya sistemi (ext2/3/4, reiserfs, xfs "
+"veya jfs) gerekiyor.\n"
 
 #: fsedit.pm:526
 #, c-format
@@ -3280,8 +3211,12 @@ msgstr "Alternatif bir sürücü yok"
 
 #: harddrake/sound.pm:398
 #, c-format
-msgid "There's no known OSS/ALSA alternative driver for your sound card (%s) which currently uses \"%s\""
-msgstr "%s sürücüsünü kullanan Ses kartınız (%s) için, bilinen başka OSS/ALSA sürücüsü yok"
+msgid ""
+"There's no known OSS/ALSA alternative driver for your sound card (%s) which "
+"currently uses \"%s\""
+msgstr ""
+"%s sürücüsünü kullanan Ses kartınız (%s) için, bilinen başka OSS/ALSA "
+"sürücüsü yok"
 
 #: harddrake/sound.pm:405
 #, c-format
@@ -3290,10 +3225,13 @@ msgstr "Ses yapılandırması"
 
 #: harddrake/sound.pm:407
 #, c-format
-msgid "Here you can select an alternative driver (either OSS or ALSA) for your sound card (%s)."
-msgstr "Buradan ses kartınız(%s) için başka bir sürücü (OSS veya ALSA) seçebilirsiniz"
+msgid ""
+"Here you can select an alternative driver (either OSS or ALSA) for your "
+"sound card (%s)."
+msgstr ""
+"Buradan ses kartınız(%s) için başka bir sürücü (OSS veya ALSA) seçebilirsiniz"
 
-#. -PO: here the first %s is either "OSS" or "ALSA",
+#. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
@@ -3301,41 +3239,51 @@ msgstr "Buradan ses kartınız(%s) için başka bir sürücü (OSS veya ALSA) se
 msgid ""
 "\n"
 "\n"
-"Your card currently use the %s\"%s\" driver (default driver for your card is \"%s\")"
+"Your card currently use the %s\"%s\" driver (default driver for your card is "
+"\"%s\")"
 msgstr ""
 "\n"
 "\n"
-"Ses kartınız şu anda %s\"%s\" sürücüsünü kullanıyor (ses kartınız için ön tanımlısı \"%s\" sürücüsüdür)"
+"Ses kartınız şu anda %s\"%s\" sürücüsünü kullanıyor (ses kartınız için ön "
+"tanımlısı \"%s\" sürücüsüdür)"
 
 #: harddrake/sound.pm:414
 #, c-format
 msgid ""
-"OSS (Open Sound System) was the first sound API. It's an OS independent sound API (it's available on most UNIX(tm) systems) but it's a very basic and limited API.\n"
+"OSS (Open Sound System) was the first sound API. It's an OS independent "
+"sound API (it's available on most UNIX(tm) systems) but it's a very basic "
+"and limited API.\n"
 "What's more, OSS drivers all reinvent the wheel.\n"
 "\n"
-"ALSA (Advanced Linux Sound Architecture) is a modularized architecture which\n"
+"ALSA (Advanced Linux Sound Architecture) is a modularized architecture "
+"which\n"
 "supports quite a large range of ISA, USB and PCI cards.\n"
 "\n"
 "It also provides a much higher API than OSS.\n"
 "\n"
 "To use alsa, one can either use:\n"
 "- the old compatibility OSS api\n"
-"- the new ALSA api that provides many enhanced features but requires using the ALSA library.\n"
+"- the new ALSA api that provides many enhanced features but requires using "
+"the ALSA library.\n"
 msgstr ""
-"OSS (Open Sound System [Serbest Ses Sistemi]) ilk ses API dir. Bir İşletim sistemi seviyesinde bir API dir. (birçok UNIX(tm) sistemde mevcuttur) Ama çok temel ve sınırlı bir API dir.\n"
+"OSS (Open Sound System [Serbest Ses Sistemi]) ilk ses API dir. Bir İşletim "
+"sistemi seviyesinde bir API dir. (birçok UNIX(tm) sistemde mevcuttur) Ama "
+"çok temel ve sınırlı bir API dir.\n"
 "Dahası , OSS sürücüleri tekerleğin tekrar icadıdır.\n"
 "\n"
-"ALSA (Advanced Linux Sound Architecture[Gelişmiş Linux Ses Mimarisi]) modüler bir yapıya sahiptir\n"
-"ve çok geniş bir yelpazesi vardır. Hemen hemen tüm ISA, USB ve PCI kartlara destek verir.\n"
+"ALSA (Advanced Linux Sound Architecture[Gelişmiş Linux Ses Mimarisi]) "
+"modüler bir yapıya sahiptir\n"
+"ve çok geniş bir yelpazesi vardır. Hemen hemen tüm ISA, USB ve PCI kartlara "
+"destek verir.\n"
 "\n"
 "Ve OSS sisteminden kat ve kat performanslı ve güçlüdür.\n"
 "\n"
 "Alsayı kullanabilmek için 2 şarttan birine uymalısınız:\n"
 " - eski OSS uyumluluk api\n"
-"- yeni ALSA api . Çok daha gelişmiş özellikleri vardır fakat ALSA kütüphanesinin yüklü olmasını ister\n"
+"- yeni ALSA api . Çok daha gelişmiş özellikleri vardır fakat ALSA "
+"kütüphanesinin yüklü olmasını ister\n"
 
-#: harddrake/sound.pm:428
-#: harddrake/sound.pm:511
+#: harddrake/sound.pm:428 harddrake/sound.pm:511
 #, c-format
 msgid "Driver:"
 msgstr "Sürücü:"
@@ -3362,8 +3310,12 @@ msgstr "Açık kaynak sürücü yok"
 
 #: harddrake/sound.pm:451
 #, c-format
-msgid "There's no free driver for your sound card (%s), but there's a proprietary driver at \"%s\"."
-msgstr "Ses kartınız (%s) için özgür yazılım bir sürücü yok, ama \"%s\" adresinde bir  tescilli sürücü var."
+msgid ""
+"There's no free driver for your sound card (%s), but there's a proprietary "
+"driver at \"%s\"."
+msgstr ""
+"Ses kartınız (%s) için özgür yazılım bir sürücü yok, ama \"%s\" adresinde "
+"bir  tescilli sürücü var."
 
 #: harddrake/sound.pm:454
 #, c-format
@@ -3387,7 +3339,8 @@ msgid ""
 "The classic bug sound tester is to run the following commands:\n"
 "\n"
 "\n"
-"- \"lspcidrake -v | fgrep -i AUDIO\" will tell you which driver your card uses\n"
+"- \"lspcidrake -v | fgrep -i AUDIO\" will tell you which driver your card "
+"uses\n"
 "by default\n"
 "\n"
 "- \"grep sound-slot /etc/modprobe.conf\" will tell you what driver it\n"
@@ -3407,22 +3360,27 @@ msgstr ""
 "Klasik hata ses deneyicisi aşağıdaki komutları yürütecektir:\n"
 "\n"
 "\n"
-" - \"lspcidrake -v | fgrep -i AUDIO\" kartınızın ön tanımlı olarak hangi sürücüyü  kullandığını\n"
+" - \"lspcidrake -v | fgrep -i AUDIO\" kartınızın ön tanımlı olarak hangi "
+"sürücüyü  kullandığını\n"
 "söyler.\n"
 "\n"
 "- \"grep sound-slot /etc/modprobe.conf\" şu anda kullandığı sürücüyü\n"
 " söyler.\n"
 "\n"
-" \"/sbin/lsmod\" gerekli modülün (sürücü) yüklenmiş olup olmadığını denetlemenizi\n"
+" \"/sbin/lsmod\" gerekli modülün (sürücü) yüklenmiş olup olmadığını "
+"denetlemenizi\n"
 " sağlar.\n"
 "\n"
-" - \"/sbin/chkconfig --list sound\" ve \"/sbin/chkconfig --list alsa\" ses ve\n"
-" alsa hizmetlerinin initlevel 3 seviyesinde çalışmaya ayarlanıp ayarlanmadığını\n"
+" - \"/sbin/chkconfig --list sound\" ve \"/sbin/chkconfig --list alsa\" ses "
+"ve\n"
+" alsa hizmetlerinin initlevel 3 seviyesinde çalışmaya ayarlanıp "
+"ayarlanmadığını\n"
 " söyler.\n"
 "\n"
 " - \"aumix -q\" sesin kapalı veya açık olduğunu söyler.\n"
 "\n"
-"- \"/sbin/fuser -v /dev/dsp\" ses kartını hangi uygulamanın kullandığını söyler.\n"
+"- \"/sbin/fuser -v /dev/dsp\" ses kartını hangi uygulamanın kullandığını "
+"söyler.\n"
 
 #: harddrake/sound.pm:500
 #, c-format
@@ -3438,7 +3396,8 @@ msgstr "İsteğe bağlı bir sürücü seçiliyor"
 #: harddrake/sound.pm:506
 #, c-format
 msgid ""
-"If you really think that you know which driver is the right one for your card\n"
+"If you really think that you know which driver is the right one for your "
+"card\n"
 "you can pick one in the above list.\n"
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
@@ -3453,9 +3412,7 @@ msgstr ""
 msgid "Auto-detect"
 msgstr "Otomatik algıla"
 
-#: harddrake/v4l.pm:97
-#: harddrake/v4l.pm:285
-#: harddrake/v4l.pm:337
+#: harddrake/v4l.pm:97 harddrake/v4l.pm:285 harddrake/v4l.pm:337
 #, c-format
 msgid "Unknown|Generic"
 msgstr "Bilinmeyen|Genel"
@@ -3473,11 +3430,15 @@ msgstr "Bilinmeyen|CPH06X (bt878) [çok sayıda üretici]"
 #: harddrake/v4l.pm:475
 #, c-format
 msgid ""
-"For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-detect the rights parameters.\n"
-"If your card is misdetected, you can force the right tuner and card types here. Just select your tv card parameters if needed."
+"For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-"
+"detect the rights parameters.\n"
+"If your card is misdetected, you can force the right tuner and card types "
+"here. Just select your tv card parameters if needed."
 msgstr ""
-"Çoğu tv kartı için, GNU/Linux çekirdeğinde bulunan bttv modülü otomatik olarak kart için gerekli değişkenleri bulur.\n"
-"Eğer kartınız tanınmadıysa, doğru kart tipini ve tunerı buradan seçin. Gerekiyorsa sadece kartınızın değişkenlerini seçin"
+"Çoğu tv kartı için, GNU/Linux çekirdeğinde bulunan bttv modülü otomatik "
+"olarak kart için gerekli değişkenleri bulur.\n"
+"Eğer kartınız tanınmadıysa, doğru kart tipini ve tunerı buradan seçin. "
+"Gerekiyorsa sadece kartınızın değişkenlerini seçin"
 
 #: harddrake/v4l.pm:478
 #, c-format
@@ -3489,35 +3450,20 @@ msgstr "Kart modeli:"
 msgid "Tuner type:"
 msgstr "Tuner türü :"
 
-#: interactive.pm:128
-#: interactive.pm:549
-#: interactive/curses.pm:263
-#: interactive/http.pm:103
-#: interactive/http.pm:156
-#: interactive/stdio.pm:39
-#: interactive/stdio.pm:148
-#: interactive/stdio.pm:149
-#: mygtk2.pm:847
-#: ugtk2.pm:421
-#: ugtk2.pm:519
-#: ugtk2.pm:812
-#: ugtk2.pm:835
+#: interactive.pm:128 interactive.pm:549 interactive/curses.pm:263
+#: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
+#: interactive/stdio.pm:148 interactive/stdio.pm:149 mygtk2.pm:847
+#: ugtk2.pm:421 ugtk2.pm:519 ugtk2.pm:812 ugtk2.pm:835
 #, c-format
 msgid "Ok"
 msgstr "Tamam"
 
-#: interactive.pm:228
-#: modules/interactive.pm:72
-#: ugtk2.pm:811
-#: wizards.pm:156
+#: interactive.pm:228 modules/interactive.pm:72 ugtk2.pm:811 wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "Evet"
 
-#: interactive.pm:228
-#: modules/interactive.pm:72
-#: ugtk2.pm:811
-#: wizards.pm:156
+#: interactive.pm:228 modules/interactive.pm:72 ugtk2.pm:811 wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "Hayır"
@@ -3527,52 +3473,42 @@ msgstr "Hayır"
 msgid "Choose a file"
 msgstr "Bir dosya seçin"
 
-#: interactive.pm:387
-#: interactive/gtk.pm:453
+#: interactive.pm:387 interactive/gtk.pm:453
 #, c-format
 msgid "Add"
 msgstr "Ekle"
 
-#: interactive.pm:387
-#: interactive/gtk.pm:453
+#: interactive.pm:387 interactive/gtk.pm:453
 #, c-format
 msgid "Modify"
 msgstr "Değiştir"
 
-#: interactive.pm:549
-#: interactive/curses.pm:263
-#: ugtk2.pm:519
+#: interactive.pm:549 interactive/curses.pm:263 ugtk2.pm:519
 #, c-format
 msgid "Finish"
 msgstr "Bitti"
 
-#: interactive.pm:550
-#: interactive/curses.pm:260
-#: ugtk2.pm:517
+#: interactive.pm:550 interactive/curses.pm:260 ugtk2.pm:517
 #, c-format
 msgid "Previous"
 msgstr "Geri"
 
-#: interactive/curses.pm:556
-#: ugtk2.pm:872
+#: interactive/curses.pm:556 ugtk2.pm:872
 #, c-format
 msgid "No file chosen"
 msgstr "Hiç dosya seçilmedi"
 
-#: interactive/curses.pm:560
-#: ugtk2.pm:876
+#: interactive/curses.pm:560 ugtk2.pm:876
 #, c-format
 msgid "You have chosen a directory, not a file"
 msgstr "Bir dizin seçtiniz, dosya değil"
 
-#: interactive/curses.pm:562
-#: ugtk2.pm:878
+#: interactive/curses.pm:562 ugtk2.pm:878
 #, c-format
 msgid "No such directory"
 msgstr "Öyle bir dizin yok"
 
-#: interactive/curses.pm:562
-#: ugtk2.pm:878
+#: interactive/curses.pm:562 ugtk2.pm:878
 #, c-format
 msgid "No such file"
 msgstr "Böyle bir dosya yok"
@@ -3582,14 +3518,12 @@ msgstr "Böyle bir dosya yok"
 msgid "Beware, Caps Lock is enabled"
 msgstr "Dikkat, Caps Lock tuşu etkin"
 
-#: interactive/stdio.pm:29
-#: interactive/stdio.pm:154
+#: interactive/stdio.pm:29 interactive/stdio.pm:154
 #, c-format
 msgid "Bad choice, try again\n"
 msgstr "Hatalı tercih, tekrar deneyin\n"
 
-#: interactive/stdio.pm:30
-#: interactive/stdio.pm:155
+#: interactive/stdio.pm:30 interactive/stdio.pm:155
 #, c-format
 msgid "Your choice? (default %s) "
 msgstr "Seçiminiz? (%s öntanımlı) "
@@ -3671,8 +3605,7 @@ msgstr "default:LTR"
 msgid "Andorra"
 msgstr "Andora"
 
-#: lang.pm:213
-#: timezone.pm:226
+#: lang.pm:213 timezone.pm:226
 #, c-format
 msgid "United Arab Emirates"
 msgstr "Birleşik Arap Emirlikleri"
@@ -3717,8 +3650,7 @@ msgstr "Angola"
 msgid "Antarctica"
 msgstr "Antartika"
 
-#: lang.pm:222
-#: timezone.pm:271
+#: lang.pm:222 timezone.pm:271
 #, c-format
 msgid "Argentina"
 msgstr "Arjantin"
@@ -3728,16 +3660,12 @@ msgstr "Arjantin"
 msgid "American Samoa"
 msgstr "Amerikan Samoası"
 
-#: lang.pm:224
-#: mirror.pm:12
-#: timezone.pm:229
+#: lang.pm:224 mirror.pm:12 timezone.pm:229
 #, c-format
 msgid "Austria"
 msgstr "Avusturya"
 
-#: lang.pm:225
-#: mirror.pm:11
-#: timezone.pm:267
+#: lang.pm:225 mirror.pm:11 timezone.pm:267
 #, c-format
 msgid "Australia"
 msgstr "Avusturalya"
@@ -3762,15 +3690,12 @@ msgstr "Bosna-Hersek"
 msgid "Barbados"
 msgstr "Barbados"
 
-#: lang.pm:230
-#: timezone.pm:211
+#: lang.pm:230 timezone.pm:211
 #, c-format
 msgid "Bangladesh"
 msgstr "Bangladeş"
 
-#: lang.pm:231
-#: mirror.pm:13
-#: timezone.pm:231
+#: lang.pm:231 mirror.pm:13 timezone.pm:231
 #, c-format
 msgid "Belgium"
 msgstr "Belçika"
@@ -3780,8 +3705,7 @@ msgstr "Belçika"
 msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
-#: lang.pm:233
-#: timezone.pm:232
+#: lang.pm:233 timezone.pm:232
 #, c-format
 msgid "Bulgaria"
 msgstr "Bulgaristan"
@@ -3816,9 +3740,7 @@ msgstr "Bruney Darüsselam"
 msgid "Bolivia"
 msgstr "Bolivya"
 
-#: lang.pm:240
-#: mirror.pm:14
-#: timezone.pm:272
+#: lang.pm:240 mirror.pm:14 timezone.pm:272
 #, c-format
 msgid "Brazil"
 msgstr "Brezilya"
@@ -3843,8 +3765,7 @@ msgstr "Bouvet Adası"
 msgid "Botswana"
 msgstr "Botsvana"
 
-#: lang.pm:245
-#: timezone.pm:230
+#: lang.pm:245 timezone.pm:230
 #, c-format
 msgid "Belarus"
 msgstr "Belarus"
@@ -3854,9 +3775,7 @@ msgstr "Belarus"
 msgid "Belize"
 msgstr "Belize"
 
-#: lang.pm:247
-#: mirror.pm:15
-#: timezone.pm:261
+#: lang.pm:247 mirror.pm:15 timezone.pm:261
 #, c-format
 msgid "Canada"
 msgstr "Kanada"
@@ -3881,9 +3800,7 @@ msgstr "Orta Afrika Cumhuriyeti"
 msgid "Congo (Brazzaville)"
 msgstr "Congo (Brazzaville)"
 
-#: lang.pm:252
-#: mirror.pm:39
-#: timezone.pm:255
+#: lang.pm:252 mirror.pm:39 timezone.pm:255
 #, c-format
 msgid "Switzerland"
 msgstr "İsviçre"
@@ -3898,8 +3815,7 @@ msgstr "Cote d'Ivoire"
 msgid "Cook Islands"
 msgstr "Cook Adaları"
 
-#: lang.pm:255
-#: timezone.pm:273
+#: lang.pm:255 timezone.pm:273
 #, c-format
 msgid "Chile"
 msgstr "Şili"
@@ -3909,8 +3825,7 @@ msgstr "Şili"
 msgid "Cameroon"
 msgstr "Kamerun"
 
-#: lang.pm:257
-#: timezone.pm:212
+#: lang.pm:257 timezone.pm:212
 #, c-format
 msgid "China"
 msgstr "Çin"
@@ -3920,8 +3835,7 @@ msgstr "Çin"
 msgid "Colombia"
 msgstr "Kolombiya"
 
-#: lang.pm:259
-#: mirror.pm:16
+#: lang.pm:259 mirror.pm:16
 #, c-format
 msgid "Costa Rica"
 msgstr "Kosta Rika"
@@ -3951,16 +3865,12 @@ msgstr "Christmas Adası"
 msgid "Cyprus"
 msgstr "Kıbrıs"
 
-#: lang.pm:265
-#: mirror.pm:17
-#: timezone.pm:233
+#: lang.pm:265 mirror.pm:17 timezone.pm:233
 #, c-format
 msgid "Czech Republic"
 msgstr "Çek Cumhuriyeti"
 
-#: lang.pm:266
-#: mirror.pm:22
-#: timezone.pm:238
+#: lang.pm:266 mirror.pm:22 timezone.pm:238
 #, c-format
 msgid "Germany"
 msgstr "Almanya"
@@ -3970,9 +3880,7 @@ msgstr "Almanya"
 msgid "Djibouti"
 msgstr "Cibuti"
 
-#: lang.pm:268
-#: mirror.pm:18
-#: timezone.pm:234
+#: lang.pm:268 mirror.pm:18 timezone.pm:234
 #, c-format
 msgid "Denmark"
 msgstr "Danimarka"
@@ -3997,9 +3905,7 @@ msgstr "Cezayir"
 msgid "Ecuador"
 msgstr "Ekvator"
 
-#: lang.pm:273
-#: mirror.pm:19
-#: timezone.pm:235
+#: lang.pm:273 mirror.pm:19 timezone.pm:235
 #, c-format
 msgid "Estonia"
 msgstr "Estonya"
@@ -4019,9 +3925,7 @@ msgstr "Batı Sahra"
 msgid "Eritrea"
 msgstr "Eritre"
 
-#: lang.pm:277
-#: mirror.pm:37
-#: timezone.pm:253
+#: lang.pm:277 mirror.pm:37 timezone.pm:253
 #, c-format
 msgid "Spain"
 msgstr "İspanya"
@@ -4031,9 +3935,7 @@ msgstr "İspanya"
 msgid "Ethiopia"
 msgstr "Etiyopya"
 
-#: lang.pm:279
-#: mirror.pm:20
-#: timezone.pm:236
+#: lang.pm:279 mirror.pm:20 timezone.pm:236
 #, c-format
 msgid "Finland"
 msgstr "Finlandiya"
@@ -4058,9 +3960,7 @@ msgstr "Micronesia"
 msgid "Faroe Islands"
 msgstr "Faroe Adaları"
 
-#: lang.pm:284
-#: mirror.pm:21
-#: timezone.pm:237
+#: lang.pm:284 mirror.pm:21 timezone.pm:237
 #, c-format
 msgid "France"
 msgstr "Fransa"
@@ -4070,8 +3970,7 @@ msgstr "Fransa"
 msgid "Gabon"
 msgstr "Gabon"
 
-#: lang.pm:286
-#: timezone.pm:257
+#: lang.pm:286 timezone.pm:257
 #, c-format
 msgid "United Kingdom"
 msgstr "İngiltere"
@@ -4126,9 +4025,7 @@ msgstr "Guadalup"
 msgid "Equatorial Guinea"
 msgstr "Ekvatoral Gine"
 
-#: lang.pm:297
-#: mirror.pm:23
-#: timezone.pm:239
+#: lang.pm:297 mirror.pm:23 timezone.pm:239
 #, c-format
 msgid "Greece"
 msgstr "Yunanistan"
@@ -4138,8 +4035,7 @@ msgstr "Yunanistan"
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Güney Georgia ve Güney Sandwich Adasları"
 
-#: lang.pm:299
-#: timezone.pm:262
+#: lang.pm:299 timezone.pm:262
 #, c-format
 msgid "Guatemala"
 msgstr "Guetemala"
@@ -4184,35 +4080,27 @@ msgstr "Hırvatistan"
 msgid "Haiti"
 msgstr "Haiti"
 
-#: lang.pm:308
-#: mirror.pm:24
-#: timezone.pm:240
+#: lang.pm:308 mirror.pm:24 timezone.pm:240
 #, c-format
 msgid "Hungary"
 msgstr "Macaristan"
 
-#: lang.pm:309
-#: timezone.pm:215
+#: lang.pm:309 timezone.pm:215
 #, c-format
 msgid "Indonesia"
 msgstr "Endonezya"
 
-#: lang.pm:310
-#: mirror.pm:25
-#: timezone.pm:241
+#: lang.pm:310 mirror.pm:25 timezone.pm:241
 #, c-format
 msgid "Ireland"
 msgstr "İrlanda"
 
-#: lang.pm:311
-#: mirror.pm:26
-#: timezone.pm:217
+#: lang.pm:311 mirror.pm:26 timezone.pm:217
 #, c-format
 msgid "Israel"
 msgstr "İsrail"
 
-#: lang.pm:312
-#: timezone.pm:214
+#: lang.pm:312 timezone.pm:214
 #, c-format
 msgid "India"
 msgstr "Hindistan"
@@ -4227,8 +4115,7 @@ msgstr "Hint Okyanusu İngiliz Sömürgeleri"
 msgid "Iraq"
 msgstr "Irak"
 
-#: lang.pm:315
-#: timezone.pm:216
+#: lang.pm:315 timezone.pm:216
 #, c-format
 msgid "Iran"
 msgstr "İran"
@@ -4238,9 +4125,7 @@ msgstr "İran"
 msgid "Iceland"
 msgstr "İzlanda"
 
-#: lang.pm:317
-#: mirror.pm:27
-#: timezone.pm:242
+#: lang.pm:317 mirror.pm:27 timezone.pm:242
 #, c-format
 msgid "Italy"
 msgstr "İtalya"
@@ -4255,9 +4140,7 @@ msgstr "Jameyka"
 msgid "Jordan"
 msgstr "Ürdün"
 
-#: lang.pm:320
-#: mirror.pm:28
-#: timezone.pm:218
+#: lang.pm:320 mirror.pm:28 timezone.pm:218
 #, c-format
 msgid "Japan"
 msgstr "Japonya"
@@ -4297,8 +4180,7 @@ msgstr "Sen Kitts ve Nevis"
 msgid "Korea (North)"
 msgstr "Kore (Kuzey)"
 
-#: lang.pm:328
-#: timezone.pm:219
+#: lang.pm:328 timezone.pm:219
 #, c-format
 msgid "Korea"
 msgstr "Kore"
@@ -4353,14 +4235,12 @@ msgstr "Liberya"
 msgid "Lesotho"
 msgstr "Lesoto"
 
-#: lang.pm:339
-#: timezone.pm:243
+#: lang.pm:339 timezone.pm:243
 #, c-format
 msgid "Lithuania"
 msgstr "Litvanya"
 
-#: lang.pm:340
-#: timezone.pm:244
+#: lang.pm:340 timezone.pm:244
 #, c-format
 msgid "Luxembourg"
 msgstr "Lüksemburg"
@@ -4460,14 +4340,12 @@ msgstr "Maldiv Adaları"
 msgid "Malawi"
 msgstr "Malavi"
 
-#: lang.pm:360
-#: timezone.pm:263
+#: lang.pm:360 timezone.pm:263
 #, c-format
 msgid "Mexico"
 msgstr "Meksika"
 
-#: lang.pm:361
-#: timezone.pm:220
+#: lang.pm:361 timezone.pm:220
 #, c-format
 msgid "Malaysia"
 msgstr "Malezya"
@@ -4507,16 +4385,12 @@ msgstr "Nigeria"
 msgid "Nicaragua"
 msgstr "Nikaragua"
 
-#: lang.pm:369
-#: mirror.pm:29
-#: timezone.pm:245
+#: lang.pm:369 mirror.pm:29 timezone.pm:245
 #, c-format
 msgid "Netherlands"
 msgstr "Hollanda"
 
-#: lang.pm:370
-#: mirror.pm:31
-#: timezone.pm:246
+#: lang.pm:370 mirror.pm:31 timezone.pm:246
 #, c-format
 msgid "Norway"
 msgstr "Norveç"
@@ -4536,9 +4410,7 @@ msgstr "Nauru"
 msgid "Niue"
 msgstr "Nie"
 
-#: lang.pm:374
-#: mirror.pm:30
-#: timezone.pm:268
+#: lang.pm:374 mirror.pm:30 timezone.pm:268
 #, c-format
 msgid "New Zealand"
 msgstr "Yeni Zellanda"
@@ -4568,8 +4440,7 @@ msgstr "Fransız Polinezyası"
 msgid "Papua New Guinea"
 msgstr "Papua Yeni Gine"
 
-#: lang.pm:380
-#: timezone.pm:221
+#: lang.pm:380 timezone.pm:221
 #, c-format
 msgid "Philippines"
 msgstr "Filipinler"
@@ -4579,9 +4450,7 @@ msgstr "Filipinler"
 msgid "Pakistan"
 msgstr "Pakistan"
 
-#: lang.pm:382
-#: mirror.pm:32
-#: timezone.pm:247
+#: lang.pm:382 mirror.pm:32 timezone.pm:247
 #, c-format
 msgid "Poland"
 msgstr "Polonya"
@@ -4606,9 +4475,7 @@ msgstr "Porto Riko"
 msgid "Palestine"
 msgstr "Palestine"
 
-#: lang.pm:387
-#: mirror.pm:33
-#: timezone.pm:248
+#: lang.pm:387 mirror.pm:33 timezone.pm:248
 #, c-format
 msgid "Portugal"
 msgstr "Portekiz"
@@ -4633,14 +4500,12 @@ msgstr "Katar"
 msgid "Reunion"
 msgstr "Reunion"
 
-#: lang.pm:392
-#: timezone.pm:249
+#: lang.pm:392 timezone.pm:249
 #, c-format
 msgid "Romania"
 msgstr "Romanya"
 
-#: lang.pm:393
-#: mirror.pm:34
+#: lang.pm:393 mirror.pm:34
 #, c-format
 msgid "Russia"
 msgstr "Rusya"
@@ -4670,15 +4535,12 @@ msgstr "Seyşel Adaları"
 msgid "Sudan"
 msgstr "Sudan"
 
-#: lang.pm:399
-#: mirror.pm:38
-#: timezone.pm:254
+#: lang.pm:399 mirror.pm:38 timezone.pm:254
 #, c-format
 msgid "Sweden"
 msgstr "İsveç"
 
-#: lang.pm:400
-#: timezone.pm:222
+#: lang.pm:400 timezone.pm:222
 #, c-format
 msgid "Singapore"
 msgstr "Singapur"
@@ -4688,8 +4550,7 @@ msgstr "Singapur"
 msgid "Saint Helena"
 msgstr "Sen Helen"
 
-#: lang.pm:402
-#: timezone.pm:252
+#: lang.pm:402 timezone.pm:252
 #, c-format
 msgid "Slovenia"
 msgstr "Slovenya"
@@ -4699,9 +4560,7 @@ msgstr "Slovenya"
 msgid "Svalbard and Jan Mayen Islands"
 msgstr "Svalbard ve Jan Mayen Adaları"
 
-#: lang.pm:404
-#: mirror.pm:35
-#: timezone.pm:251
+#: lang.pm:404 mirror.pm:35 timezone.pm:251
 #, c-format
 msgid "Slovakia"
 msgstr "Slovakya"
@@ -4771,9 +4630,7 @@ msgstr "Güney Fransız Toprakları"
 msgid "Togo"
 msgstr "Togo"
 
-#: lang.pm:418
-#: mirror.pm:41
-#: timezone.pm:224
+#: lang.pm:418 mirror.pm:41 timezone.pm:224
 #, c-format
 msgid "Thailand"
 msgstr "Tayland"
@@ -4808,8 +4665,7 @@ msgstr "Tunus"
 msgid "Tonga"
 msgstr "Tonga"
 
-#: lang.pm:425
-#: timezone.pm:225
+#: lang.pm:425 timezone.pm:225
 #, c-format
 msgid "Turkey"
 msgstr "Türkiye"
@@ -4824,21 +4680,17 @@ msgstr "Trinidad ve Tobako"
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
-#: lang.pm:428
-#: mirror.pm:40
-#: timezone.pm:223
+#: lang.pm:428 mirror.pm:40 timezone.pm:223
 #, c-format
 msgid "Taiwan"
 msgstr "Tayvan"
 
-#: lang.pm:429
-#: timezone.pm:208
+#: lang.pm:429 timezone.pm:208
 #, c-format
 msgid "Tanzania"
 msgstr "Tanzanya"
 
-#: lang.pm:430
-#: timezone.pm:256
+#: lang.pm:430 timezone.pm:256
 #, c-format
 msgid "Ukraine"
 msgstr "Ukrayna"
@@ -4853,9 +4705,7 @@ msgstr "Uganda"
 msgid "United States Minor Outlying Islands"
 msgstr "United States Minor Outlying Islands"
 
-#: lang.pm:433
-#: mirror.pm:42
-#: timezone.pm:264
+#: lang.pm:433 mirror.pm:42 timezone.pm:264
 #, c-format
 msgid "United States"
 msgstr "ABD"
@@ -4925,9 +4775,7 @@ msgstr "Yemen"
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: lang.pm:447
-#: mirror.pm:36
-#: timezone.pm:207
+#: lang.pm:447 mirror.pm:36 timezone.pm:207
 #, c-format
 msgid "South Africa"
 msgstr "Güney Afrika"
@@ -4942,7 +4790,7 @@ msgstr "Zambiya"
 msgid "Zimbabwe"
 msgstr "Zimbabve"
 
-#: lang.pm:1207
+#: lang.pm:1208
 #, c-format
 msgid "Welcome to %s"
 msgstr "%s Hoş Geldiniz"
@@ -4950,7 +4798,8 @@ msgstr "%s Hoş Geldiniz"
 #: lvm.pm:86
 #, c-format
 msgid "Moving used physical extents to other physical volumes failed"
-msgstr "Kullanılan fiziki alanları diğer fiziki bölümlere taşıma işlemi başarısız"
+msgstr ""
+"Kullanılan fiziki alanları diğer fiziki bölümlere taşıma işlemi başarısız"
 
 #: lvm.pm:143
 #, c-format
@@ -4965,129 +4814,190 @@ msgstr "Önce mantıksal bölümleri sil\n"
 #: lvm.pm:186
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
-msgstr "Önyükleyici, birden çok fiziki bölümde bulunan /boot dizinini kullanamıyor"
+msgstr ""
+"Önyükleyici, birden çok fiziki bölümde bulunan /boot dizinini kullanamıyor"
 
 #: messages.pm:11
 #, c-format
 msgid ""
 "Introduction\n"
 "\n"
-"The operating system and the different components available in the Mandriva Linux distribution \n"
-"shall be called the \"Software Products\" hereafter. The Software Products include, but are not \n"
-"restricted to, the set of programs, methods, rules and documentation related to the operating \n"
-"system and the different components of the Mandriva Linux distribution, and any applications \n"
-"distributed with these products provided by Mandriva's licensors or suppliers.\n"
+"The operating system and the different components available in the Mandriva "
+"Linux distribution \n"
+"shall be called the \"Software Products\" hereafter. The Software Products "
+"include, but are not \n"
+"restricted to, the set of programs, methods, rules and documentation related "
+"to the operating \n"
+"system and the different components of the Mandriva Linux distribution, and "
+"any applications \n"
+"distributed with these products provided by Mandriva's licensors or "
+"suppliers.\n"
 "\n"
 "\n"
 "1. License Agreement\n"
 "\n"
-"Please read this document carefully. This document is a license agreement between you and  \n"
+"Please read this document carefully. This document is a license agreement "
+"between you and  \n"
 "Mandriva S.A. which applies to the Software Products.\n"
-"By installing, duplicating or using any of the Software Products in any manner, you explicitly \n"
-"accept and fully agree to conform to the terms and conditions of this License. \n"
-"If you disagree with any portion of the License, you are not allowed to install, duplicate or use \n"
+"By installing, duplicating or using any of the Software Products in any "
+"manner, you explicitly \n"
+"accept and fully agree to conform to the terms and conditions of this "
+"License. \n"
+"If you disagree with any portion of the License, you are not allowed to "
+"install, duplicate or use \n"
 "the Software Products. \n"
-"Any attempt to install, duplicate or use the Software Products in a manner which does not comply \n"
-"with the terms and conditions of this License is void and will terminate your rights under this \n"
-"License. Upon termination of the License,  you must immediately destroy all copies of the \n"
+"Any attempt to install, duplicate or use the Software Products in a manner "
+"which does not comply \n"
+"with the terms and conditions of this License is void and will terminate "
+"your rights under this \n"
+"License. Upon termination of the License,  you must immediately destroy all "
+"copies of the \n"
 "Software Products.\n"
 "\n"
 "\n"
 "2. Limited Warranty\n"
 "\n"
-"The Software Products and attached documentation are provided \"as is\", with no warranty, to the \n"
+"The Software Products and attached documentation are provided \"as is\", "
+"with no warranty, to the \n"
 "extent permitted by law.\n"
-"Neither Mandriva S.A. nor its licensors or suppliers will, in any circumstances and to the extent \n"
-"permitted by law, be liable for any special, incidental, direct or indirect damages whatsoever \n"
-"(including without limitation damages for loss of business, interruption of business, financial \n"
-"loss, legal fees and penalties resulting from a court judgment, or any other consequential loss) \n"
-"arising out of  the use or inability to use the Software Products, even if Mandriva S.A. or its \n"
-"licensors or suppliers have been advised of the possibility or occurrence of such damages.\n"
+"Neither Mandriva S.A. nor its licensors or suppliers will, in any "
+"circumstances and to the extent \n"
+"permitted by law, be liable for any special, incidental, direct or indirect "
+"damages whatsoever \n"
+"(including without limitation damages for loss of business, interruption of "
+"business, financial \n"
+"loss, legal fees and penalties resulting from a court judgment, or any other "
+"consequential loss) \n"
+"arising out of  the use or inability to use the Software Products, even if "
+"Mandriva S.A. or its \n"
+"licensors or suppliers have been advised of the possibility or occurrence of "
+"such damages.\n"
 "\n"
-"LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME COUNTRIES\n"
+"LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME "
+"COUNTRIES\n"
 "\n"
-"To the extent permitted by law, neither Mandriva S.A. nor its licensors, suppliers or\n"
-"distributors will, in any circumstances, be liable for any special, incidental, direct or indirect \n"
-"damages whatsoever (including without limitation damages for loss of business, interruption of \n"
-"business, financial loss, legal fees and penalties resulting from a court judgment, or any \n"
-"other consequential loss) arising out of the possession and use of software components or \n"
-"arising out of  downloading software components from one of Mandriva Linux sites which are \n"
+"To the extent permitted by law, neither Mandriva S.A. nor its licensors, "
+"suppliers or\n"
+"distributors will, in any circumstances, be liable for any special, "
+"incidental, direct or indirect \n"
+"damages whatsoever (including without limitation damages for loss of "
+"business, interruption of \n"
+"business, financial loss, legal fees and penalties resulting from a court "
+"judgment, or any \n"
+"other consequential loss) arising out of the possession and use of software "
+"components or \n"
+"arising out of  downloading software components from one of Mandriva Linux "
+"sites which are \n"
 "prohibited or restricted in some countries by local laws.\n"
-"This limited liability applies to, but is not restricted to, the strong cryptography components \n"
+"This limited liability applies to, but is not restricted to, the strong "
+"cryptography components \n"
 "included in the Software Products.\n"
-"However, because some jurisdictions do not allow the exclusion or limitation or liability for \n"
-"consequential or incidental damages, the above limitation may not apply to you.  \n"
+"However, because some jurisdictions do not allow the exclusion or limitation "
+"or liability for \n"
+"consequential or incidental damages, the above limitation may not apply to "
+"you.  \n"
 "%s\n"
 "\n"
 "3. The GPL License and Related Licenses\n"
 "\n"
-"The Software Products consist of components created by different persons or entities. %s\n"
-"Most of these licenses allow you to use, duplicate, adapt or redistribute the components which \n"
-"they cover. Please read carefully the terms and conditions of the license agreement for each component \n"
-"before using any component. Any question on a component license should be addressed to the component \n"
+"The Software Products consist of components created by different persons or "
+"entities. %s\n"
+"Most of these licenses allow you to use, duplicate, adapt or redistribute "
+"the components which \n"
+"they cover. Please read carefully the terms and conditions of the license "
+"agreement for each component \n"
+"before using any component. Any question on a component license should be "
+"addressed to the component \n"
 "licensor or supplier and not to Mandriva.\n"
-"The programs developed by Mandriva S.A. are governed by the GPL License. Documentation written \n"
-"by Mandriva S.A. is governed by a specific license. Please refer to the documentation for \n"
+"The programs developed by Mandriva S.A. are governed by the GPL License. "
+"Documentation written \n"
+"by Mandriva S.A. is governed by a specific license. Please refer to the "
+"documentation for \n"
 "further details.\n"
 "\n"
 "\n"
 "4. Intellectual Property Rights\n"
 "\n"
-"All rights to the components of the Software Products belong to their respective authors and are \n"
-"protected by intellectual property and copyright laws applicable to software programs.\n"
-"Mandriva S.A. and its suppliers and licensors reserves their rights to modify or adapt the Software \n"
+"All rights to the components of the Software Products belong to their "
+"respective authors and are \n"
+"protected by intellectual property and copyright laws applicable to software "
+"programs.\n"
+"Mandriva S.A. and its suppliers and licensors reserves their rights to "
+"modify or adapt the Software \n"
 "Products, as a whole or in parts, by all means and for all purposes.\n"
-"\"Mandriva\", \"Mandriva Linux\" and associated logos are trademarks of Mandriva S.A.  \n"
+"\"Mandriva\", \"Mandriva Linux\" and associated logos are trademarks of "
+"Mandriva S.A.  \n"
 "\n"
 "\n"
 "5. Governing Laws \n"
 "\n"
-"If any portion of this agreement is held void, illegal or inapplicable by a court judgment, this \n"
-"portion is excluded from this contract. You remain bound by the other applicable sections of the \n"
+"If any portion of this agreement is held void, illegal or inapplicable by a "
+"court judgment, this \n"
+"portion is excluded from this contract. You remain bound by the other "
+"applicable sections of the \n"
 "agreement.\n"
-"The terms and conditions of this License are governed by the Laws of France.\n"
-"All disputes on the terms of this license will preferably be settled out of court. As a last \n"
-"resort, the dispute will be referred to the appropriate Courts of Law of Paris - France.\n"
+"The terms and conditions of this License are governed by the Laws of "
+"France.\n"
+"All disputes on the terms of this license will preferably be settled out of "
+"court. As a last \n"
+"resort, the dispute will be referred to the appropriate Courts of Law of "
+"Paris - France.\n"
 "For any question on this document, please contact Mandriva S.A."
 msgstr ""
 "Giriş\n"
 "\n"
-"İşletim sistemi ve Mandriva Linux dağıtımında bulunan farklı bileşenler buradan itibaren\n"
-" \"Yazılım Ürünleri\" olarak adlandırılacaktır. Yazılım Ürünleri işletim sistemiyle ilgili program kümeleri,\n"
-"yöntemleri, kuralları ve belgeleri, Mandriva Linux'un farklı bileşenlerini ve Mandriva' nın lisans\n"
-"sağlayıcıları ve destekleyicileri tarafından dağıtılan uygulamaları içermektedir,\n"
+"İşletim sistemi ve Mandriva Linux dağıtımında bulunan farklı bileşenler "
+"buradan itibaren\n"
+" \"Yazılım Ürünleri\" olarak adlandırılacaktır. Yazılım Ürünleri işletim "
+"sistemiyle ilgili program kümeleri,\n"
+"yöntemleri, kuralları ve belgeleri, Mandriva Linux'un farklı bileşenlerini "
+"ve Mandriva' nın lisans\n"
+"sağlayıcıları ve destekleyicileri tarafından dağıtılan uygulamaları "
+"içermektedir,\n"
 "fakat bunlarla sınırlandırılmamaktadır.\n"
 "\n"
 "\n"
 "1. Lisans Sözleşmesi\n"
 "\n"
-"Lütfen bu belgeyi dikkatle okuyun. Bu belge Yazılım Ürünlerine uygulanacak Mandriva S.A. ile sizin\n"
+"Lütfen bu belgeyi dikkatle okuyun. Bu belge Yazılım Ürünlerine uygulanacak "
+"Mandriva S.A. ile sizin\n"
 "aranızdaki lisans sözleşmesidir. Yazılım Ürünlerini \n"
 "kurulum yaparak, çoğaltarak, ya da herhangi bir amaçla kullanarak\n"
-"bu lisans sözleşmesinin tüm şartlarına uyacağınızı açık ve tam olarak kabul etmiş bulunuyorsunuz.\n"
-"Bu lisans sözleşmesinin herhangi bir şartını kabul etmiyorsanız; Yazılım Ürünlerini kurma, çoğaltma veya kullanma\n"
+"bu lisans sözleşmesinin tüm şartlarına uyacağınızı açık ve tam olarak kabul "
+"etmiş bulunuyorsunuz.\n"
+"Bu lisans sözleşmesinin herhangi bir şartını kabul etmiyorsanız; Yazılım "
+"Ürünlerini kurma, çoğaltma veya kullanma\n"
 "hakkınız yoktur. \n"
-"Yazılım Ürünlerini işbu lisansın şartlarına aykırı olarak herhangi bir şekilde kurma, çoğaltma ya da\n"
-"kullanma teşebbüsü, işbu sözleşme ile size verilen hakları ortadan kaldıracaktır.\n"
+"Yazılım Ürünlerini işbu lisansın şartlarına aykırı olarak herhangi bir "
+"şekilde kurma, çoğaltma ya da\n"
+"kullanma teşebbüsü, işbu sözleşme ile size verilen hakları ortadan "
+"kaldıracaktır.\n"
 "Bu sözleşmenin ihlali durumunda, Yazılım Ürünlerinin tüm kopyalarını derhal\n"
 "yok etmeniz gerekmektedir.\n"
 "\n"
 "\n"
 "2. Sınırlı Garanti\n"
 "\n"
-"Yazılım Ürünleri ve yanlarında gelen belgeler \"oldukları gibi\", ve kanunların izin verdiği\n"
+"Yazılım Ürünleri ve yanlarında gelen belgeler \"oldukları gibi\", ve "
+"kanunların izin verdiği\n"
 "ölçüde garanti dışıdırlar.\n"
-"Ne Mandriva S.A. ne de lisans sağlayıcıları veya destekleyicileri hiçbir koşulda ve yasaların izin verdiği \n"
-"oranda, kullanıcının Yazılım Ürünlerini kullanmak konusunda yetkin olmaması nedeniyle\n"
+"Ne Mandriva S.A. ne de lisans sağlayıcıları veya destekleyicileri hiçbir "
+"koşulda ve yasaların izin verdiği \n"
+"oranda, kullanıcının Yazılım Ürünlerini kullanmak konusunda yetkin olmaması "
+"nedeniyle\n"
 "oluşan (iş kaybı, işin aksaması, maddi kayıp, hukuki cezalara çarptırılma\n"
 "vb. neden olacak) doğrudan ya da dolaylı (Mandriva S.A. bu tür zararların\n"
 "oluşabileceğini duyursa bile) hiçbir zarar nedeniyle sorumluluk taşımaz.\n"
 "\n"
-"BAZI ÜLKELERDE YASAKLANMIŞ YAZILIMA SAHİP OLMAYA YA DA ONU KULLANMAYA BAĞLI SINIRLI SORUMLULUK\n"
+"BAZI ÜLKELERDE YASAKLANMIŞ YAZILIMA SAHİP OLMAYA YA DA ONU KULLANMAYA BAĞLI "
+"SINIRLI SORUMLULUK\n"
 "\n"
-"Kanunların verdiği yetkilere göre, Mandriva S.A. ya da dağıtımcıları kullanıcının,\n"
-" bulunduğu ülkede yasak olduğu halde, yazılım ürünlerini kullanması, onlara sahip olması,\n"
-"onları Mandriva Linux sitelerinden indirmesi nedeniyle oluşan (iş kaybı, işin aksaması, maddi kayıp, hukuki cezalara \n"
+"Kanunların verdiği yetkilere göre, Mandriva S.A. ya da dağıtımcıları "
+"kullanıcının,\n"
+" bulunduğu ülkede yasak olduğu halde, yazılım ürünlerini kullanması, onlara "
+"sahip olması,\n"
+"onları Mandriva Linux sitelerinden indirmesi nedeniyle oluşan (iş kaybı, "
+"işin aksaması, maddi kayıp, hukuki cezalara \n"
 "çarptırılma vb. neden olacak) doğrudan ya da dolaylı (Mandriva S.A. bu\n"
 "tür zararların oluşabileceğini duyursa bile) hiçbir zarar nedeniyle\n"
 "sorumluluk taşımaz. Bu sınırlı sorumluluk, yazılım ürünleri içindeki güçlü\n"
@@ -5096,10 +5006,14 @@ msgstr ""
 "%s\n"
 "3. GPL Lisansı ve İlgili Lisanslar\n"
 "\n"
-"Yazılım Ürünleri farklı birçok kişi veya kuruluş tarafından oluşturulmuş bileşenlerden oluşmaktadır. %s\n"
-"Lisansların çoğu kapsadıkları bileşenlerin kullanımına,çoğaltılmasına, değiştirilmesine ya da tekrar dağıtımının yapılmasına izin\n"
-"vermektedir. Lütfen kullanımdan önce her bir yazılım ürünü için, onu ilgilendiren lisans(lar)ın\n"
-"tüm şartlarını okuyunuz. Bir yazılım ürünü lisansı hakkındaki herhangi bir soru, Mandriva'a değil, o ürünün lisans sağlayıcısına veya geliştiricisine\n"
+"Yazılım Ürünleri farklı birçok kişi veya kuruluş tarafından oluşturulmuş "
+"bileşenlerden oluşmaktadır. %s\n"
+"Lisansların çoğu kapsadıkları bileşenlerin kullanımına,çoğaltılmasına, "
+"değiştirilmesine ya da tekrar dağıtımının yapılmasına izin\n"
+"vermektedir. Lütfen kullanımdan önce her bir yazılım ürünü için, onu "
+"ilgilendiren lisans(lar)ın\n"
+"tüm şartlarını okuyunuz. Bir yazılım ürünü lisansı hakkındaki herhangi bir "
+"soru, Mandriva'a değil, o ürünün lisans sağlayıcısına veya geliştiricisine\n"
 "yöneltilmelidir. Mandriva tarafından geliştirilmiş yazılımlar GPL\n"
 "lisansıyla korunmaktadır. Mandriva tarafından hazırlanan dokümanlar da\n"
 "özel bir lisansa tabidir. Daha fazla bilgi için lütfen dokümanlara\n"
@@ -5110,7 +5024,8 @@ msgstr ""
 "\n"
 "Yazılım ürünleri üzerindeki tüm haklar bu yazılımın geliştiricisine aittir;\n"
 " yazılıma uygulanan marka ve patent yasalarıyla\n"
-"korunmaktadırlar. Mandriva S.A., sağlayıcıları ve tescil sahipleri,  yazılım ürünleri üzerinde, \n"
+"korunmaktadırlar. Mandriva S.A., sağlayıcıları ve tescil sahipleri,  yazılım "
+"ürünleri üzerinde, \n"
 "kısmen veya tamamen, her türlü değişikliği yapma \n"
 "haklarını saklı tutarlar. \"Mandriva\", ve \"Mandriva Linux\" ve ilgili\n"
 "logolar Mandriva S.A.'nın müseccel markalarıdır.\n"
@@ -5120,8 +5035,10 @@ msgstr ""
 "\n"
 "Bu lisansın herhangi bir hükmü bir mahkeme tarafından yasa dışı ya da\n"
 "uygulanamaz bulunursa, o kısım bu sözleşme haricinde bırakılacaktır.\n"
-"Diğer hükümlerle bağlı olamaya devam edeceksiniz. Bu lisans ile ilgili her türlü hukuki\n"
-"ihtilaf Fransız yasalarına göre çözümlenir. Bu lisansın şartlarına her türlü itiraz ve dava\n"
+"Diğer hükümlerle bağlı olamaya devam edeceksiniz. Bu lisans ile ilgili her "
+"türlü hukuki\n"
+"ihtilaf Fransız yasalarına göre çözümlenir. Bu lisansın şartlarına her türlü "
+"itiraz ve dava\n"
 "Paris Mahkemeleri tarafından görülecektir. Bu belge hakkında herhangi bir\n"
 "soru için lütfen Mandriva S.A'ya başvurun."
 
@@ -5129,51 +5046,76 @@ msgstr ""
 #: messages.pm:90
 #, c-format
 msgid ""
-"You agree not to (i) sell, export, re-export, transfer, divert, disclose technical data, or \n"
-"dispose of, any Software to any person, entity, or destination prohibited by US export laws \n"
-"or regulations including, without limitation, Cuba, Iran, North Korea, Sudan and Syria; or \n"
-"(ii) use any Software for any use prohibited by the laws or regulations of the United States.\n"
+"You agree not to (i) sell, export, re-export, transfer, divert, disclose "
+"technical data, or \n"
+"dispose of, any Software to any person, entity, or destination prohibited by "
+"US export laws \n"
+"or regulations including, without limitation, Cuba, Iran, North Korea, Sudan "
+"and Syria; or \n"
+"(ii) use any Software for any use prohibited by the laws or regulations of "
+"the United States.\n"
 "\n"
 "U.S. GOVERNMENT RESTRICTED RIGHTS. \n"
 "\n"
-"The Software Products and any accompanying documentation are and shall be deemed to be \n"
-"\"commercial computer software\" and \"commercial computer software documentation,\" respectively, \n"
-"as defined in DFAR 252.227-7013 and as described in FAR 12.212. Any use, modification, reproduction, \n"
-"release, performance, display or disclosure of the Software and any accompanying documentation \n"
-"by the United States Government shall be governed solely by the terms of this Agreement and any \n"
-"other applicable licence agreements and shall be prohibited except to the extent expressly permitted \n"
+"The Software Products and any accompanying documentation are and shall be "
+"deemed to be \n"
+"\"commercial computer software\" and \"commercial computer software "
+"documentation,\" respectively, \n"
+"as defined in DFAR 252.227-7013 and as described in FAR 12.212. Any use, "
+"modification, reproduction, \n"
+"release, performance, display or disclosure of the Software and any "
+"accompanying documentation \n"
+"by the United States Government shall be governed solely by the terms of "
+"this Agreement and any \n"
+"other applicable licence agreements and shall be prohibited except to the "
+"extent expressly permitted \n"
 "by the terms of this Agreement."
 msgstr ""
-"(i) A.B.D. ihracat yasaları tarafından yasaklanmış herhangi bir kişi,kurum, hedef veya bölgeye,sınırlama\n"
-"olmaksızın Küba,K.Kore,Sudan,Suriye,İran dahil, teknik veri veya Yazılımı, satmak, dağıtmak,\n"
-"ihraç etmek, açmak, yeniden ihraç etmek, aktarmak eylemlerini yapmamayı; veya\n"
-"(ii) A.B.D. yasalarınca yasaklanmış biçimde herhangi bir Yazılımı kullanmamayı kabul ediyorsunuz.\n"
+"(i) A.B.D. ihracat yasaları tarafından yasaklanmış herhangi bir kişi,kurum, "
+"hedef veya bölgeye,sınırlama\n"
+"olmaksızın Küba,K.Kore,Sudan,Suriye,İran dahil, teknik veri veya Yazılımı, "
+"satmak, dağıtmak,\n"
+"ihraç etmek, açmak, yeniden ihraç etmek, aktarmak eylemlerini yapmamayı; "
+"veya\n"
+"(ii) A.B.D. yasalarınca yasaklanmış biçimde herhangi bir Yazılımı "
+"kullanmamayı kabul ediyorsunuz.\n"
 "\n"
 "U.S. GOVERNMENT RESTRICTED RIGHTS. \n"
 "\n"
-"The Software Products and any accompanying documentation are and shall be deemed to be \n"
-"\"commercial computer software\" and \"commercial computer software documentation,\" respectively, \n"
-"as defined in DFAR 252.227-7013 and as described in FAR 12.212. Any use, modification, reproduction, \n"
-"release, performance, display or disclosure of the Software and any accompanying documentation \n"
-"by the United States Government shall be governed solely by the terms of this Agreement and any \n"
-"other applicable licence agreements and shall be prohibited except to the extent expressly permitted \n"
+"The Software Products and any accompanying documentation are and shall be "
+"deemed to be \n"
+"\"commercial computer software\" and \"commercial computer software "
+"documentation,\" respectively, \n"
+"as defined in DFAR 252.227-7013 and as described in FAR 12.212. Any use, "
+"modification, reproduction, \n"
+"release, performance, display or disclosure of the Software and any "
+"accompanying documentation \n"
+"by the United States Government shall be governed solely by the terms of "
+"this Agreement and any \n"
+"other applicable licence agreements and shall be prohibited except to the "
+"extent expressly permitted \n"
 "by the terms of this Agreement."
 
 #: messages.pm:104
 #, c-format
 msgid ""
-"Most of these components, but excluding the applications and software provided by Google Inc. or \n"
-"its subsidiaries (\"Google Software\"), are governed under the terms and conditions of the GNU \n"
+"Most of these components, but excluding the applications and software "
+"provided by Google Inc. or \n"
+"its subsidiaries (\"Google Software\"), are governed under the terms and "
+"conditions of the GNU \n"
 "General Public Licence, hereafter called \"GPL\", or of similar licenses."
 msgstr ""
-"Bu bileşenleri çoğu, Google Inc. veya yan kuruluşları tarafından sağlanan uygulama ve yazılımlar\n"
-"(\"Google Software\") hariç, GNU Genel Kamu Lisansı, bundan sonra \"GPL\" olarak adlandırılacaktır,\n"
+"Bu bileşenleri çoğu, Google Inc. veya yan kuruluşları tarafından sağlanan "
+"uygulama ve yazılımlar\n"
+"(\"Google Software\") hariç, GNU Genel Kamu Lisansı, bundan sonra \"GPL\" "
+"olarak adlandırılacaktır,\n"
 "veya benzer lisansların koşullarına tabidir."
 
 #: messages.pm:107
 #, c-format
 msgid ""
-"Most of these components are governed under the terms and conditions of the GNU \n"
+"Most of these components are governed under the terms and conditions of the "
+"GNU \n"
 "General Public Licence, hereafter called \"GPL\", or of similar licenses."
 msgstr ""
 "Bu bileşenleri çoğu, GNU Genel Kamu Lisansı, bundan sonra \"GPL\" \n"
@@ -5183,72 +5125,115 @@ msgstr ""
 #, c-format
 msgid ""
 "Warning: Free Software may not necessarily be patent free, and some Free\n"
-"Software included may be covered by patents in your country. For example, the\n"
+"Software included may be covered by patents in your country. For example, "
+"the\n"
 "MP3 decoders included may require a licence for further usage (see\n"
-"http://www.mp3licensing.com for more details). If you are unsure if a patent\n"
+"http://www.mp3licensing.com for more details). If you are unsure if a "
+"patent\n"
 "may be applicable to you, check your local laws."
 msgstr ""
 "Uyarı: Özgür Yazılım patentlerden bağımsız olmak zorunda değildir. Bazı\n"
-"Özgür Yazılımlar ülkenizde patent hakları ile korunmakta olabilir. Örneğin; MP3\n"
-"çözücüler daha ileri bir kullanım için bir lisans gerektirebilirler. (Ayrıntılı\n"
-" bilgi için: http://www.mp3licensing.com). Bir patent hakkını ihlal edip etmediğinizden emin\n"
+"Özgür Yazılımlar ülkenizde patent hakları ile korunmakta olabilir. Örneğin; "
+"MP3\n"
+"çözücüler daha ileri bir kullanım için bir lisans gerektirebilirler. "
+"(Ayrıntılı\n"
+" bilgi için: http://www.mp3licensing.com). Bir patent hakkını ihlal edip "
+"etmediğinizden emin\n"
 "değilseniz ülkeniz yasalarını araştırın."
 
 #: messages.pm:120
 #, c-format
 msgid ""
-"6. Additional provisions applicable to those Software Products provided by Google Inc. (\"Google Software\")\n"
+"6. Additional provisions applicable to those Software Products provided by "
+"Google Inc. (\"Google Software\")\n"
 "\n"
-"(a)  You acknowledge that Google or third parties own all rights, title and interest in and to the Google \n"
-"Software, portions thereof, or software provided through or in conjunction with the Google Software, including\n"
-"without limitation all Intellectual Property Rights. \"Intellectual Property Rights\" means any and all rights \n"
-"existing from time to time under patent law, copyright law, trade secret law, trademark law, unfair competition \n"
-"law, database rights and any and all other proprietary rights, and any and all applications, renewals, extensions \n"
-"and restorations thereof, now or hereafter in force and effect worldwide. You agree not to modify, adapt, \n"
-"translate, prepare derivative works from, decompile, reverse engineer, disassemble or otherwise attempt to derive \n"
-"source code from Google Software. You also agree to not remove, obscure, or alter Google's or any third party's \n"
-"copyright notice, trademarks, or other proprietary rights notices affixed to or contained within or accessed in \n"
+"(a)  You acknowledge that Google or third parties own all rights, title and "
+"interest in and to the Google \n"
+"Software, portions thereof, or software provided through or in conjunction "
+"with the Google Software, including\n"
+"without limitation all Intellectual Property Rights. \"Intellectual Property "
+"Rights\" means any and all rights \n"
+"existing from time to time under patent law, copyright law, trade secret "
+"law, trademark law, unfair competition \n"
+"law, database rights and any and all other proprietary rights, and any and "
+"all applications, renewals, extensions \n"
+"and restorations thereof, now or hereafter in force and effect worldwide. "
+"You agree not to modify, adapt, \n"
+"translate, prepare derivative works from, decompile, reverse engineer, "
+"disassemble or otherwise attempt to derive \n"
+"source code from Google Software. You also agree to not remove, obscure, or "
+"alter Google's or any third party's \n"
+"copyright notice, trademarks, or other proprietary rights notices affixed to "
+"or contained within or accessed in \n"
 "conjunction with or through the Google Software.  \n"
 "\n"
-"(b)  The Google Software is made available to you for your personal, non-commercial use only.\n"
-"You may not use the Google Software in any manner that could damage, disable, overburden, or impair Google's \n"
-"search services (e.g., you may not use the Google Software in an automated manner), nor may you use Google \n"
-"Software in any manner that could interfere with any other party's use and enjoyment of Google's search services\n"
-"or the services and products of the third party licensors of the Google Software.\n"
+"(b)  The Google Software is made available to you for your personal, non-"
+"commercial use only.\n"
+"You may not use the Google Software in any manner that could damage, "
+"disable, overburden, or impair Google's \n"
+"search services (e.g., you may not use the Google Software in an automated "
+"manner), nor may you use Google \n"
+"Software in any manner that could interfere with any other party's use and "
+"enjoyment of Google's search services\n"
+"or the services and products of the third party licensors of the Google "
+"Software.\n"
 "\n"
-"(c)  Some of the Google Software is designed to be used in conjunction with Google's search and other services.\n"
-"Accordingly, your use of such Google Software is also defined by Google's Terms of Service located at \n"
-"http://www.google.com/terms_of_service.html and Google's Toolbar Privacy Policy located at \n"
+"(c)  Some of the Google Software is designed to be used in conjunction with "
+"Google's search and other services.\n"
+"Accordingly, your use of such Google Software is also defined by Google's "
+"Terms of Service located at \n"
+"http://www.google.com/terms_of_service.html and Google's Toolbar Privacy "
+"Policy located at \n"
 "http://www.google.com/support/toolbar/bin/static.py?page=privacy.html.\n"
 "\n"
-"(d)  Google Inc. and each of its subsidiaries and affiliates are third party beneficiaries of this contract \n"
+"(d)  Google Inc. and each of its subsidiaries and affiliates are third party "
+"beneficiaries of this contract \n"
 "and may enforce its terms."
 msgstr ""
-"6. Additional provisions applicable to those Software Products provided by Google Inc. (\"Google Software\")\n"
+"6. Additional provisions applicable to those Software Products provided by "
+"Google Inc. (\"Google Software\")\n"
 "\n"
-"(a)  You acknowledge that Google or third parties own all rights, title and interest in and to the Google \n"
-"Software, portions thereof, or software provided through or in conjunction with the Google Software, including\n"
-"without limitation all Intellectual Property Rights. \"Intellectual Property Rights\" means any and all rights \n"
-"existing from time to time under patent law, copyright law, trade secret law, trademark law, unfair competition \n"
-"law, database rights and any and all other proprietary rights, and any and all applications, renewals, extensions \n"
-"and restorations thereof, now or hereafter in force and effect worldwide. You agree not to modify, adapt, \n"
-"translate, prepare derivative works from, decompile, reverse engineer, disassemble or otherwise attempt to derive \n"
-"source code from Google Software. You also agree to not remove, obscure, or alter Google's or any third party's \n"
-"copyright notice, trademarks, or other proprietary rights notices affixed to or contained within or accessed in \n"
+"(a)  You acknowledge that Google or third parties own all rights, title and "
+"interest in and to the Google \n"
+"Software, portions thereof, or software provided through or in conjunction "
+"with the Google Software, including\n"
+"without limitation all Intellectual Property Rights. \"Intellectual Property "
+"Rights\" means any and all rights \n"
+"existing from time to time under patent law, copyright law, trade secret "
+"law, trademark law, unfair competition \n"
+"law, database rights and any and all other proprietary rights, and any and "
+"all applications, renewals, extensions \n"
+"and restorations thereof, now or hereafter in force and effect worldwide. "
+"You agree not to modify, adapt, \n"
+"translate, prepare derivative works from, decompile, reverse engineer, "
+"disassemble or otherwise attempt to derive \n"
+"source code from Google Software. You also agree to not remove, obscure, or "
+"alter Google's or any third party's \n"
+"copyright notice, trademarks, or other proprietary rights notices affixed to "
+"or contained within or accessed in \n"
 "conjunction with or through the Google Software.  \n"
 "\n"
-"(b)  The Google Software is made available to you for your personal, non-commercial use only.\n"
-"You may not use the Google Software in any manner that could damage, disable, overburden, or impair Google's \n"
-"search services (e.g., you may not use the Google Software in an automated manner), nor may you use Google \n"
-"Software in any manner that could interfere with any other party's use and enjoyment of Google's search services\n"
-"or the services and products of the third party licensors of the Google Software.\n"
+"(b)  The Google Software is made available to you for your personal, non-"
+"commercial use only.\n"
+"You may not use the Google Software in any manner that could damage, "
+"disable, overburden, or impair Google's \n"
+"search services (e.g., you may not use the Google Software in an automated "
+"manner), nor may you use Google \n"
+"Software in any manner that could interfere with any other party's use and "
+"enjoyment of Google's search services\n"
+"or the services and products of the third party licensors of the Google "
+"Software.\n"
 "\n"
-"(c)  Some of the Google Software is designed to be used in conjunction with Google's search and other services.\n"
-"Accordingly, your use of such Google Software is also defined by Google's Terms of Service located at \n"
-"http://www.google.com/terms_of_service.html and Google's Toolbar Privacy Policy located at \n"
+"(c)  Some of the Google Software is designed to be used in conjunction with "
+"Google's search and other services.\n"
+"Accordingly, your use of such Google Software is also defined by Google's "
+"Terms of Service located at \n"
+"http://www.google.com/terms_of_service.html and Google's Toolbar Privacy "
+"Policy located at \n"
 "http://www.google.com/support/toolbar/bin/static.py?page=privacy.html.\n"
 "\n"
-"(d)  Google Inc. and each of its subsidiaries and affiliates are third party beneficiaries of this contract \n"
+"(d)  Google Inc. and each of its subsidiaries and affiliates are third party "
+"beneficiaries of this contract \n"
 "and may enforce its terms."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
@@ -5259,7 +5244,8 @@ msgid ""
 "Remove the boot media and press Enter to reboot.\n"
 "\n"
 "\n"
-"For information on fixes which are available for this release of Mandriva Linux,\n"
+"For information on fixes which are available for this release of Mandriva "
+"Linux,\n"
 "consult the Errata available from:\n"
 "\n"
 "\n"
@@ -5385,9 +5371,11 @@ msgstr "Hangi %s sürücüsü denensin?"
 #, c-format
 msgid ""
 "In some cases, the %s driver needs to have extra information to work\n"
-"properly, although it normally works fine without them. Would you like to specify\n"
+"properly, although it normally works fine without them. Would you like to "
+"specify\n"
 "extra options for it or allow the driver to probe your machine for the\n"
-"information it needs? Occasionally, probing will hang a computer, but it should\n"
+"information it needs? Occasionally, probing will hang a computer, but it "
+"should\n"
 "not cause any damage."
 msgstr ""
 "Bazı durumlarda, %s sürücü düzgün çalışmak için fazladan bilgi isteyebilir.\n"
@@ -5415,8 +5403,7 @@ msgstr ""
 "%s modülü yüklenemedi.\n"
 "Tekrar başka parametrelerle denemek ister misiniz?"
 
-#: mygtk2.pm:1541
-#: mygtk2.pm:1542
+#: mygtk2.pm:1541 mygtk2.pm:1542
 #, c-format
 msgid "Password is trivial to guess"
 msgstr "Parolanızın tahmin edilmesi kolay"
@@ -5426,27 +5413,27 @@ msgstr "Parolanızın tahmin edilmesi kolay"
 msgid "Password should resist to basic attacks"
 msgstr "Parolanız temel saldırılarla çözülemez"
 
-#: mygtk2.pm:1544
-#: mygtk2.pm:1545
+#: mygtk2.pm:1544 mygtk2.pm:1545
 #, c-format
 msgid "Password seems secure"
 msgstr "Parolanız güvenli"
 
-#: partition_table.pm:411
+#: partition_table.pm:415
 #, c-format
 msgid "mount failed: "
 msgstr "bağlama başarısız: "
 
-#: partition_table.pm:523
+#: partition_table.pm:527
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr "Mantıksal bölüm bu platform tarafından desteklenmiyor"
 
-#: partition_table.pm:541
+#: partition_table.pm:545
 #, c-format
 msgid ""
 "You have a hole in your partition table but I can not use it.\n"
-"The only solution is to move your primary partitions to have the hole next to the extended partitions."
+"The only solution is to move your primary partitions to have the hole next "
+"to the extended partitions."
 msgstr ""
 "Bölümlendirme tablonuzda bir boşluk var ama kullanılamaz durumda.\n"
 "Bu boşluğu, birinci bölümünüzü en yakınındaki mantıksal bölüme taşıyarak\n"
@@ -5457,15 +5444,14 @@ msgstr ""
 msgid ""
 "Something bad is happening on your drive. \n"
 "A test to check the integrity of data has failed. \n"
-"It means writing anything on the disk will end up with random, corrupted data."
+"It means writing anything on the disk will end up with random, corrupted "
+"data."
 msgstr ""
 "Diskinizde bir şeyler kötü gidiyor.\n"
 "Veri bütünlüğünün denetlenmesi başarısız oldu.\n"
 "Bu durumda diskinize yazılan verinin kaybedilmesi ihtimali vardır."
 
-#: pkgs.pm:252
-#: pkgs.pm:255
-#: pkgs.pm:264
+#: pkgs.pm:252 pkgs.pm:255 pkgs.pm:264
 #, c-format
 msgid "Unused packages removal"
 msgstr "Kullanılmayan paketler kaldırılıyor"
@@ -5482,22 +5468,24 @@ msgstr "Kullanılmayan yerelleştirme paketleri bulunuyor..."
 
 #: pkgs.pm:265
 #, c-format
-msgid "We have detected that some packages are not needed for your system configuration."
-msgstr "Bazı paketlerin sistem yapılandırmanız için gereksiz olduğunu tespit ettik"
+msgid ""
+"We have detected that some packages are not needed for your system "
+"configuration."
+msgstr ""
+"Bazı paketlerin sistem yapılandırmanız için gereksiz olduğunu tespit ettik"
 
 #: pkgs.pm:266
 #, c-format
 msgid "We will remove the following packages, unless you choose otherwise:"
-msgstr "Başka türlü bir seçim yapmadığınız takdirde aşağıdaki paketleri kaldıracağız:"
+msgstr ""
+"Başka türlü bir seçim yapmadığınız takdirde aşağıdaki paketleri kaldıracağız:"
 
-#: pkgs.pm:269
-#: pkgs.pm:270
+#: pkgs.pm:269 pkgs.pm:270
 #, c-format
 msgid "Unused hardware support"
 msgstr "Kullanılmayan donanım desteği"
 
-#: pkgs.pm:273
-#: pkgs.pm:274
+#: pkgs.pm:273 pkgs.pm:274
 #, c-format
 msgid "Unused localization"
 msgstr "Kullanılmayan yerelleştirme"
@@ -5525,7 +5513,8 @@ msgstr "/usr/share/sane/%s bağlantısı oluşturulamıyor!"
 #: scanner.pm:114
 #, c-format
 msgid "Could not copy firmware file %s to /usr/share/sane/firmware!"
-msgstr "Donanım yazılımı dosyası %s /usr/share/sane/firmware dizinine kopyalanamıyor!"
+msgstr ""
+"Donanım yazılımı dosyası %s /usr/share/sane/firmware dizinine kopyalanamıyor!"
 
 #: scanner.pm:121
 #, c-format
@@ -5545,7 +5534,8 @@ msgstr "Tarayıcı(ları)nızı paylaştırmanız için gerekli paketler yüklen
 #: scanner.pm:202
 #, c-format
 msgid "Your scanner(s) will not be available for non-root users."
-msgstr "Tarayıcı(ları)nız kök olmayan kullanıcılar tarafından kullanılamayacak."
+msgstr ""
+"Tarayıcı(ları)nız kök olmayan kullanıcılar tarafından kullanılamayacak."
 
 #: security/help.pm:11
 #, c-format
@@ -5600,8 +5590,11 @@ msgstr "Doğrudan kök girişine izin ver."
 
 #: security/help.pm:33
 #, c-format
-msgid "Allow the list of users on the system on display managers (kdm and gdm)."
-msgstr "Ekran yöneticilerinde (kdm ve gdm) sistemdeki kullanıcıların listesine izin ver."
+msgid ""
+"Allow the list of users on the system on display managers (kdm and gdm)."
+msgstr ""
+"Ekran yöneticilerinde (kdm ve gdm) sistemdeki kullanıcıların listesine izin "
+"ver."
 
 #: security/help.pm:35
 #, c-format
@@ -5650,23 +5643,27 @@ msgstr ""
 msgid ""
 "Authorize:\n"
 "\n"
-"- all services controlled by tcp_wrappers (see hosts.deny(5) man page) if set to \"ALL\",\n"
+"- all services controlled by tcp_wrappers (see hosts.deny(5) man page) if "
+"set to \"ALL\",\n"
 "\n"
 "- only local ones if set to \"Local\"\n"
 "\n"
 "- none if set to \"None\".\n"
 "\n"
-"To authorize the services you need, use /etc/hosts.allow (see hosts.allow(5))."
+"To authorize the services you need, use /etc/hosts.allow (see hosts.allow"
+"(5))."
 msgstr ""
 "Yetkilendirme:\n"
 "\n"
-"- eğer \"TÜMÜ\" ayarlıysa tüm hizmetler tcp_wrappers (hosts.deny(5) el kitabına bakın) tarafından denetlenir.\n"
+"- eğer \"TÜMÜ\" ayarlıysa tüm hizmetler tcp_wrappers (hosts.deny(5) el "
+"kitabına bakın) tarafından denetlenir.\n"
 "\n"
 "-\"Yerel\" ayarlıysa sadece yerel hizmetler\n"
 "\n"
 "-\"Yok\" ayarlıysa hiçbiri.\n"
 "\n"
-"Gereksiniminiz olan hizmetleri yetkilendirmek için, /etc/hosts.allow dosyasını (bkz:hosts.allow(5)) kullanın."
+"Gereksiniminiz olan hizmetleri yetkilendirmek için, /etc/hosts.allow "
+"dosyasını (bkz:hosts.allow(5)) kullanın."
 
 #: security/help.pm:63
 #, c-format
@@ -5699,7 +5696,8 @@ msgid ""
 msgstr ""
 "Kullanıcılar için crontab ve at etkinleştir.\n"
 "\n"
-"İzin verilen kullanıcıları /etc/cron.allow ve /etc/at.allow dosyasına yerleştir.\n"
+"İzin verilen kullanıcıları /etc/cron.allow ve /etc/at.allow dosyasına "
+"yerleştir.\n"
 "(at(1) ve crontab(1) el kitaplarına bakın)"
 
 #: security/help.pm:77
@@ -5743,8 +5741,12 @@ msgstr "Saatlik msec güvenlik denetimini etkinleştir."
 
 #: security/help.pm:90
 #, c-format
-msgid "Enable su only from members of the wheel group. If set to no, allows su from any user."
-msgstr "Su' yu sadece wheel grubu üyeleri için etkinleştir. Hayır ayarlıysa, tüm kullanıcılardan su komutuna izin verir."
+msgid ""
+"Enable su only from members of the wheel group. If set to no, allows su from "
+"any user."
+msgstr ""
+"Su' yu sadece wheel grubu üyeleri için etkinleştir. Hayır ayarlıysa, tüm "
+"kullanıcılardan su komutuna izin verir."
 
 #: security/help.pm:92
 #, c-format
@@ -5769,12 +5771,15 @@ msgstr "Tek kullanıcı seviyesinde sulogin(8) etkinleştir."
 #: security/help.pm:100
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
-msgstr "Adı bir istisna olarak msec tarafından parola zamanaşımı yönetimine ekle"
+msgstr ""
+"Adı bir istisna olarak msec tarafından parola zamanaşımı yönetimine ekle"
 
 #: security/help.pm:102
 #, c-format
 msgid "Set password aging to \"max\" days and delay to change to \"inactive\"."
-msgstr "Parola zaman aşımını \"en fazla\" gün olarak ayarla ve gecikmeyi \"etkisiz\" olarak değiştir."
+msgstr ""
+"Parola zaman aşımını \"en fazla\" gün olarak ayarla ve gecikmeyi \"etkisiz\" "
+"olarak değiştir."
 
 #: security/help.pm:104
 #, c-format
@@ -5783,8 +5788,12 @@ msgstr "Parola kullanım süresini yeniden kullanılmaması için ayarla."
 
 #: security/help.pm:106
 #, c-format
-msgid "Set the password minimum length and minimum number of digit and minimum number of capitalized letters."
-msgstr "Parolanın en az uzunluğunu, en az basamak sayısını ve en az büyük harf değerlerini ayarla."
+msgid ""
+"Set the password minimum length and minimum number of digit and minimum "
+"number of capitalized letters."
+msgstr ""
+"Parolanın en az uzunluğunu, en az basamak sayısını ve en az büyük harf "
+"değerlerini ayarla."
 
 #: security/help.pm:108
 #, c-format
@@ -5818,12 +5827,16 @@ msgstr ""
 #: security/help.pm:117
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
-msgstr "evet olarak ayarlanmışsa, kullanıcıların ev dizinlerindeki dosyaların izinleri denetler."
+msgstr ""
+"evet olarak ayarlanmışsa, kullanıcıların ev dizinlerindeki dosyaların "
+"izinleri denetler."
 
 #: security/help.pm:118
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
-msgstr "evet olarak ayarlanmışsa, ağ aygıtlarının seçici olmayan kipte olup olmadıklarını denetler."
+msgstr ""
+"evet olarak ayarlanmışsa, ağ aygıtlarının seçici olmayan kipte olup "
+"olmadıklarını denetler."
 
 #: security/help.pm:119
 #, c-format
@@ -5833,12 +5846,14 @@ msgstr "evet olarak ayarlanmışsa, günlük güvenlik denetimlerini çalıştı
 #: security/help.pm:120
 #, c-format
 msgid "if set to yes, check additions/removals of sgid files."
-msgstr "evet olarak ayarlanmışsa, sgid dosyaların eklenme/kaldırılmalarını denetler."
+msgstr ""
+"evet olarak ayarlanmışsa, sgid dosyaların eklenme/kaldırılmalarını denetler."
 
 #: security/help.pm:121
 #, c-format
 msgid "if set to yes, check empty password in /etc/shadow."
-msgstr "evet olarak ayarlanmışsa, /etc/shadow içindeki boş parolaları denetler."
+msgstr ""
+"evet olarak ayarlanmışsa, /etc/shadow içindeki boş parolaları denetler."
 
 #: security/help.pm:122
 #, c-format
@@ -5848,7 +5863,9 @@ msgstr "evet olarak ayarlanmışsa, suid/sgid dosyalarının doğruluğunu denet
 #: security/help.pm:123
 #, c-format
 msgid "if set to yes, check additions/removals of suid root files."
-msgstr "evet olarak ayarlanmışsa,  suid root dosyalarından eklenen/kaldırılanları denetle."
+msgstr ""
+"evet olarak ayarlanmışsa,  suid root dosyalarından eklenen/kaldırılanları "
+"denetle."
 
 #: security/help.pm:124
 #, c-format
@@ -5858,7 +5875,9 @@ msgstr "evet olarak ayarlanmışsa, sahipsiz dosyaları bildirir."
 #: security/help.pm:125
 #, c-format
 msgid "if set to yes, check files/directories writable by everybody."
-msgstr "evet olarak ayarlanmışsa, herkes tarafından yazılabilen dizinleri veya dosyaları denetler."
+msgstr ""
+"evet olarak ayarlanmışsa, herkes tarafından yazılabilen dizinleri veya "
+"dosyaları denetler."
 
 #: security/help.pm:126
 #, c-format
@@ -5867,8 +5886,10 @@ msgstr "evet olarak ayarlanmışsa, chkrootkit denetimlerini çalıştırır."
 
 #: security/help.pm:127
 #, c-format
-msgid "if set, send the mail report to this email address else send it to root."
-msgstr "ayarlanmışsa, bu e-posta adresine rapor gönder; aksi halde kök' e gönderir."
+msgid ""
+"if set, send the mail report to this email address else send it to root."
+msgstr ""
+"ayarlanmışsa, bu e-posta adresine rapor gönder; aksi halde kök' e gönderir."
 
 #: security/help.pm:128
 #, c-format
@@ -5883,7 +5904,8 @@ msgstr "Uyarı düzeyinde bir şey yoksa e-mektup gönderme."
 #: security/help.pm:130
 #, c-format
 msgid "if set to yes, run some checks against the rpm database."
-msgstr "evet olarak ayarlanmışsa, rpm veritabanında bazı denetimleri çalıştırır."
+msgstr ""
+"evet olarak ayarlanmışsa, rpm veritabanında bazı denetimleri çalıştırır."
 
 #: security/help.pm:131
 #, c-format
@@ -5898,7 +5920,8 @@ msgstr "evet olarak ayarlanmışsa, denetim sonucunu tty' ye bildirir."
 #: security/help.pm:134
 #, c-format
 msgid "Set shell commands history size. A value of -1 means unlimited."
-msgstr "Kabuk komutları geçmişi boyutunu ayarla. -1 değeri, sınırsız anlamına gelir."
+msgstr ""
+"Kabuk komutları geçmişi boyutunu ayarla. -1 değeri, sınırsız anlamına gelir."
 
 #: security/help.pm:136
 #, c-format
@@ -6148,7 +6171,9 @@ msgstr "Boş e-mektup raporu gönderme"
 #: security/l10n.pm:58
 #, c-format
 msgid "If set, send the mail report to this email address else send it to root"
-msgstr "Ayarlanırsa, raporlar root kullanıcısı yerine verilen posta adresine gönderilir"
+msgstr ""
+"Ayarlanırsa, raporlar root kullanıcısı yerine verilen posta adresine "
+"gönderilir"
 
 #: security/l10n.pm:59
 #, c-format
@@ -6189,27 +6214,38 @@ msgstr "Güvenli"
 #, c-format
 msgid ""
 "This level is to be used with care, as it disables all additional security\n"
-"provided by msec. Use it only when you want to take care of all aspects of system security\n"
+"provided by msec. Use it only when you want to take care of all aspects of "
+"system security\n"
 "on your own."
 msgstr ""
 "Bu seviye dikkatle kullanılmalıdır, çünkü msec tarafından sunulan tüm ek\n"
-"güvenliği devre dışı bırakır. Bunu sadece sisteminizin tüm güvenlik yönlerini kendiniz ele\n"
+"güvenliği devre dışı bırakır. Bunu sadece sisteminizin tüm güvenlik "
+"yönlerini kendiniz ele\n"
 "almak istediğinizde kullanın."
 
 #: security/level.pm:43
 #, c-format
-msgid "This is the standard security recommended for a computer that will be used to connect to the Internet as a client."
-msgstr "Internet'e bağlı bir makine için standart ve önerilen bir güvenlik seviyesidir."
+msgid ""
+"This is the standard security recommended for a computer that will be used "
+"to connect to the Internet as a client."
+msgstr ""
+"Internet'e bağlı bir makine için standart ve önerilen bir güvenlik "
+"seviyesidir."
 
 #: security/level.pm:44
 #, c-format
 msgid ""
-"With this security level, the use of this system as a server becomes possible.\n"
-"The security is now high enough to use the system as a server which can accept\n"
-"connections from many clients. Note: if your machine is only a client on the Internet, you should choose a lower level."
+"With this security level, the use of this system as a server becomes "
+"possible.\n"
+"The security is now high enough to use the system as a server which can "
+"accept\n"
+"connections from many clients. Note: if your machine is only a client on the "
+"Internet, you should choose a lower level."
 msgstr ""
 "Bu güvenlik seviyesiyle sistemin bir sunucu olarak kullanımı mümkündür.\n"
-"Güvenlik, birden fazla istemcinin bağlanmasına izin verecek şekilde artırılmıştır. Bilgi: Bu makine ile Internet'e sadece istemci olarak bağlanacaksanız daha düşük bir seviye seçmeniz önerilir."
+"Güvenlik, birden fazla istemcinin bağlanmasına izin verecek şekilde "
+"artırılmıştır. Bilgi: Bu makine ile Internet'e sadece istemci olarak "
+"bağlanacaksanız daha düşük bir seviye seçmeniz önerilir."
 
 #: security/level.pm:51
 #, c-format
@@ -6258,7 +6294,8 @@ msgid ""
 "apmd is used for monitoring battery status and logging it via syslog.\n"
 "It can also be used for shutting down the machine when the battery is low."
 msgstr ""
-"apmd pil durumunu izlemek için ve syslog aracılığıyla bunun kaydını tutmak için kullanılır.\n"
+"apmd pil durumunu izlemek için ve syslog aracılığıyla bunun kaydını tutmak "
+"için kullanılır.\n"
 "Ayrıca pil azaldığında sistemi kapatmak için de kullanılır."
 
 #: services.pm:24
@@ -6273,7 +6310,9 @@ msgstr ""
 #: services.pm:26
 #, c-format
 msgid "Avahi is a ZeroConf daemon which implements an mDNS stack"
-msgstr "Avahi, bir mDNS yığınını uygulayan bir Kablosuz Sıfır Yapılandırma artsürecidir."
+msgstr ""
+"Avahi, bir mDNS yığınını uygulayan bir Kablosuz Sıfır Yapılandırma "
+"artsürecidir."
 
 #: services.pm:27
 #, c-format
@@ -6284,7 +6323,8 @@ msgstr "CPU frekanslarını ayarla"
 #, c-format
 msgid ""
 "cron is a standard UNIX program that runs user-specified programs\n"
-"at periodic scheduled times. vixie cron adds a number of features to the basic\n"
+"at periodic scheduled times. vixie cron adds a number of features to the "
+"basic\n"
 "UNIX cron, including better security and more powerful configuration options."
 msgstr ""
 "cron, kullanıcılara özel komutları periyodik zamanlamalarla çalıştırabilen\n"
@@ -6293,8 +6333,11 @@ msgstr ""
 
 #: services.pm:31
 #, c-format
-msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
-msgstr "Ortak UNIX Yazdırma Sistemi (CUPS) gelişmiş bir yazdırma biriktirme sistemidir."
+msgid ""
+"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgstr ""
+"Ortak UNIX Yazdırma Sistemi (CUPS) gelişmiş bir yazdırma biriktirme "
+"sistemidir."
 
 #: services.pm:32
 #, c-format
@@ -6304,32 +6347,42 @@ msgstr "Grafiksel görüntü yöneticisini başlatır."
 #: services.pm:33
 #, c-format
 msgid ""
-"FAM is a file monitoring daemon. It is used to get reports when files change.\n"
+"FAM is a file monitoring daemon. It is used to get reports when files "
+"change.\n"
 "It is used by GNOME and KDE"
 msgstr ""
-"FAM bir dosya izleme art alan sürecidir. Dosyalar değiştirildiğinde rapor almak için kullanılır.\n"
+"FAM bir dosya izleme art alan sürecidir. Dosyalar değiştirildiğinde rapor "
+"almak için kullanılır.\n"
 "GNOME ve KDE tarafından kullanılmaktadır."
 
 #: services.pm:35
 #, c-format
 msgid ""
 "G15Daemon allows users access to all extra keys by decoding them and \n"
-"pushing them back into the kernel via the linux UINPUT driver. This driver must be loaded \n"
-"before g15daemon can be used for keyboard access. The G15 LCD is also supported. By default, \n"
-"with no other clients active, g15daemon will display a clock. Client applications and \n"
+"pushing them back into the kernel via the linux UINPUT driver. This driver "
+"must be loaded \n"
+"before g15daemon can be used for keyboard access. The G15 LCD is also "
+"supported. By default, \n"
+"with no other clients active, g15daemon will display a clock. Client "
+"applications and \n"
 "scripts can access the LCD via a simple API."
 msgstr ""
-"G15Daemon, kullanıcıların tüm fazladan anahtarlara onları çözerek erişmesini sağlar ve\n"
-"linux UINPUT sürücüsü kullanarak çekirdeğe geri gönderir. Bu sürücü, g15daemon klavye\n"
-"erişimi için kullanılmadan önce yüklenmelidir. G15 LCD de desteklenmektedir. Öntanımlı olarak\n"
-"diğer istemciler etkin değilken g15daemon bir saat gösterir. İstemci uygulamaları ve\n"
+"G15Daemon, kullanıcıların tüm fazladan anahtarlara onları çözerek erişmesini "
+"sağlar ve\n"
+"linux UINPUT sürücüsü kullanarak çekirdeğe geri gönderir. Bu sürücü, "
+"g15daemon klavye\n"
+"erişimi için kullanılmadan önce yüklenmelidir. G15 LCD de desteklenmektedir. "
+"Öntanımlı olarak\n"
+"diğer istemciler etkin değilken g15daemon bir saat gösterir. İstemci "
+"uygulamaları ve\n"
 "betikler LCD' ye basit bir api ile ulaşırlar."
 
 #: services.pm:40
 #, c-format
 msgid ""
 "GPM adds mouse support to text-based Linux applications such the\n"
-"Midnight Commander. It also allows mouse-based console cut-and-paste operations,\n"
+"Midnight Commander. It also allows mouse-based console cut-and-paste "
+"operations,\n"
 "and includes support for pop-up menus on the console."
 msgstr ""
 "GPM, Midnight Commander gibi metin tabanlı uygulamalara fare desteği ekler.\n"
@@ -6339,7 +6392,8 @@ msgstr ""
 #: services.pm:43
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr "HAL, donanım hakkında bilgi toplayan ve düzenleyen bir art alan sürecidir."
+msgstr ""
+"HAL, donanım hakkında bilgi toplayan ve düzenleyen bir art alan sürecidir."
 
 #: services.pm:44
 #, c-format
@@ -6352,20 +6406,28 @@ msgstr ""
 
 #: services.pm:46
 #, c-format
-msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
-msgstr "Apache bir World Wide Web sunucusudur. HTML dosyaları ve CGI sunumu için kullanılır."
+msgid ""
+"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgstr ""
+"Apache bir World Wide Web sunucusudur. HTML dosyaları ve CGI sunumu için "
+"kullanılır."
 
 #: services.pm:47
 #, c-format
 msgid ""
 "The internet superserver daemon (commonly called inetd) starts a\n"
-"variety of other internet services as needed. It is responsible for starting\n"
-"many services, including telnet, ftp, rsh, and rlogin. Disabling inetd disables\n"
+"variety of other internet services as needed. It is responsible for "
+"starting\n"
+"many services, including telnet, ftp, rsh, and rlogin. Disabling inetd "
+"disables\n"
 "all of the services it is responsible for."
 msgstr ""
 "Internet superserver daemon (çoğunlukla inetd olarak adlandırılır) birçok \n"
-"başka internet servisini gerektiğinde çalıştırır. İçinde telnet, ftp, rsh ve rlogin gibi pek çok programın bulunduğu servisleri çalıştırmakla yükümlüdür.\n"
-"inetd'yi sistemden çıkarmak, onun çalıştırmakla yükümlü olduğu bütün servisleri \n"
+"başka internet servisini gerektiğinde çalıştırır. İçinde telnet, ftp, rsh ve "
+"rlogin gibi pek çok programın bulunduğu servisleri çalıştırmakla "
+"yükümlüdür.\n"
+"inetd'yi sistemden çıkarmak, onun çalıştırmakla yükümlü olduğu bütün "
+"servisleri \n"
 "kaldırmak anlamına gelir."
 
 #: services.pm:51
@@ -6384,12 +6446,14 @@ msgid ""
 "Launch packet filtering for Linux kernel 2.2 series, to set\n"
 "up a firewall to protect your machine from network attacks."
 msgstr ""
-"Bilgisayarınızı diğer ağlardan koruma amacıyla ateş duvarı kurma uygulaması için\n"
+"Bilgisayarınızı diğer ağlardan koruma amacıyla ateş duvarı kurma uygulaması "
+"için\n"
 "Linux kernel 2.2 serisi için hazırlanmış paket filtrelemesini başlatır."
 
 #: services.pm:55
 #, c-format
-msgid "Evenly distributes IRQ load across multiple CPUs for enhanced performance"
+msgid ""
+"Evenly distributes IRQ load across multiple CPUs for enhanced performance"
 msgstr "IRQ yükünü birden çok işlemciye dağıtarak verimliliği arttırır."
 
 #: services.pm:56
@@ -6438,7 +6502,8 @@ msgid ""
 "basically a server that arbitrates print jobs to printer(s)."
 msgstr ""
 "lpd, lpr'nin düzgün olarak çalışması için gerekli yazıcı artsürecidir.\n"
-"lpd temel olarak, yazdırma görevlerini yöneten ve onları yazıcıya gönderen sunucudur."
+"lpd temel olarak, yazdırma görevlerini yöneten ve onları yazıcıya gönderen "
+"sunucudur."
 
 #: services.pm:67
 #, c-format
@@ -6461,8 +6526,11 @@ msgstr "Yazılımsal RAID izleme ve yönetimi"
 
 #: services.pm:71
 #, c-format
-msgid "DBUS is a daemon which broadcasts notifications of system events and other messages"
-msgstr "DBUS sistem olaylarını ve diğer iletileri ulaştıran bir art alan sürecidir."
+msgid ""
+"DBUS is a daemon which broadcasts notifications of system events and other "
+"messages"
+msgstr ""
+"DBUS sistem olaylarını ve diğer iletileri ulaştıran bir art alan sürecidir."
 
 #: services.pm:72
 #, c-format
@@ -6471,8 +6539,12 @@ msgstr "Sistem başlangıcında MSEC güvenlik kurallarını etkinleştirir."
 
 #: services.pm:73
 #, c-format
-msgid "named (BIND) is a Domain Name Server (DNS) that is used to resolve host names to IP addresses."
-msgstr "named (BIND) sunucu isimlerini IP adreslerine dönüştüren Alan Adı Sunucusudur (DNS)."
+msgid ""
+"named (BIND) is a Domain Name Server (DNS) that is used to resolve host "
+"names to IP addresses."
+msgstr ""
+"named (BIND) sunucu isimlerini IP adreslerine dönüştüren Alan Adı "
+"Sunucusudur (DNS)."
 
 #: services.pm:74
 #, c-format
@@ -6493,7 +6565,9 @@ msgstr ""
 msgid ""
 "Activates/Deactivates all network interfaces configured to start\n"
 "at boot time."
-msgstr "Açılış sırasında başlamak için ayarlanmış bütün ağ arayüzlerini etkinleştirir/devre dışı bırakır."
+msgstr ""
+"Açılış sırasında başlamak için ayarlanmış bütün ağ arayüzlerini "
+"etkinleştirir/devre dışı bırakır."
 
 #: services.pm:79
 #, c-format
@@ -6553,18 +6627,22 @@ msgstr "Bir disk bölümünün dolmaya yakın olup olmadığını denetler"
 #, c-format
 msgid ""
 "PCMCIA support is usually to support things like ethernet and\n"
-"modems in laptops.  It will not get started unless configured so it is safe to have\n"
+"modems in laptops.  It will not get started unless configured so it is safe "
+"to have\n"
 "it installed on machines that do not need it."
 msgstr ""
-"PCMCIA desteği, dizüstü bilgisayarlarda ethernet ve modem gibi aygıtların desteklenmesini\n"
-"sağlar. Ayarlanmadığı sürece açılışta çalışmayacaktır, çalışmasına ihtiyaç duyulmayan \n"
+"PCMCIA desteği, dizüstü bilgisayarlarda ethernet ve modem gibi aygıtların "
+"desteklenmesini\n"
+"sağlar. Ayarlanmadığı sürece açılışta çalışmayacaktır, çalışmasına ihtiyaç "
+"duyulmayan \n"
 "makinelerde kurulu olması sorun oluşturmayacaktır."
 
 #: services.pm:94
 #, c-format
 msgid ""
 "The portmapper manages RPC connections, which are used by\n"
-"protocols such as NFS and NIS. The portmap server must be running on machines\n"
+"protocols such as NFS and NIS. The portmap server must be running on "
+"machines\n"
 "which act as servers for protocols which make use of the RPC mechanism."
 msgstr ""
 "portmapper, NFS ve NIS gibi protokoller tarafından kullanılan RPC \n"
@@ -6578,8 +6656,12 @@ msgstr "Bazı TCP portlarını rezerve eder"
 
 #: services.pm:98
 #, c-format
-msgid "Postfix is a Mail Transport Agent, which is the program that moves mail from one machine to another."
-msgstr "Postfix, elektronik postaları bir makineden diğerine yollayan Elektronik Posta Aktarma Uygulamasıdır."
+msgid ""
+"Postfix is a Mail Transport Agent, which is the program that moves mail from "
+"one machine to another."
+msgstr ""
+"Postfix, elektronik postaları bir makineden diğerine yollayan Elektronik "
+"Posta Aktarma Uygulamasıdır."
 
 #: services.pm:99
 #, c-format
@@ -6626,8 +6708,13 @@ msgstr ""
 
 #: services.pm:109
 #, c-format
-msgid "Syslog is the facility by which many daemons use to log messages to various system log files.  It is a good idea to always run rsyslog."
-msgstr "Syslog, birçok artsürecin mesajlarını çeşitli sistem kayıt dosyalarında tutmalarına izin verir. Syslog'un her zaman çalışır durumda olması akıllıca bir davranıştır."
+msgid ""
+"Syslog is the facility by which many daemons use to log messages to various "
+"system log files.  It is a good idea to always run rsyslog."
+msgstr ""
+"Syslog, birçok artsürecin mesajlarını çeşitli sistem kayıt dosyalarında "
+"tutmalarına izin verir. Syslog'un her zaman çalışır durumda olması akıllıca "
+"bir davranıştır."
 
 #: services.pm:110
 #, c-format
@@ -6649,8 +6736,11 @@ msgstr ""
 
 #: services.pm:114
 #, c-format
-msgid "SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
-msgstr "SANE (Tarayıcı Erişimi Şimdi Kolay-Scanner Access Now Easy) tarayıcılara, video kameralara v.b. erişimi sağlar."
+msgid ""
+"SANE (Scanner Access Now Easy) enables to access scanners, video cameras, ..."
+msgstr ""
+"SANE (Tarayıcı Erişimi Şimdi Kolay-Scanner Access Now Easy) tarayıcılara, "
+"video kameralara v.b. erişimi sağlar."
 
 #: services.pm:115
 #, c-format
@@ -6659,8 +6749,12 @@ msgstr "Paket süzmeli güvenlik duvarı"
 
 #: services.pm:116
 #, c-format
-msgid "The SMB/CIFS protocol enables to share access to files & printers and also integrates with a Windows Server domain"
-msgstr "SMP/CIFS protokolü dosyalar & yazıcılara erişimi paylaştırmayı sağlar ve ayrıca bir Windows Sunucu alanı ile eşleştirir."
+msgid ""
+"The SMB/CIFS protocol enables to share access to files & printers and also "
+"integrates with a Windows Server domain"
+msgstr ""
+"SMP/CIFS protokolü dosyalar & yazıcılara erişimi paylaştırmayı sağlar ve "
+"ayrıca bir Windows Sunucu alanı ile eşleştirir."
 
 #: services.pm:117
 #, c-format
@@ -6674,8 +6768,12 @@ msgstr "Konuşma çözümlemesi için katman"
 
 #: services.pm:119
 #, c-format
-msgid "Secure Shell is a network protocol that allows data to be exchanged over a secure channel between two computers"
-msgstr "Güvenli Kabuk, iki bilgisayar arasında verinin güvenli bir kanal üzerinden aktarılmasını sağlayan bir ağ protokolüdür."
+msgid ""
+"Secure Shell is a network protocol that allows data to be exchanged over a "
+"secure channel between two computers"
+msgstr ""
+"Güvenli Kabuk, iki bilgisayar arasında verinin güvenli bir kanal üzerinden "
+"aktarılmasını sağlayan bir ağ protokolüdür."
 
 #: services.pm:120
 #, c-format
@@ -6742,8 +6840,7 @@ msgstr "Uzak Yönetim"
 msgid "Database Server"
 msgstr "Veritabanı Sunucusu"
 
-#: services.pm:179
-#: services.pm:218
+#: services.pm:179 services.pm:218
 #, c-format
 msgid "Services"
 msgstr "Hizmetler"
@@ -6782,8 +6879,7 @@ msgstr ""
 "Bu hizmet hakkında\n"
 "başka bilgi yok."
 
-#: services.pm:250
-#: ugtk2.pm:924
+#: services.pm:250 ugtk2.pm:924
 #, c-format
 msgid "Info"
 msgstr "Bilgi"
@@ -6823,7 +6919,8 @@ msgid ""
 "\n"
 "You should have received a copy of the GNU General Public License\n"
 "along with this program; if not, write to the Free Software\n"
-"Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n"
+"Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, "
+"USA.\n"
 msgstr ""
 "Bu program bir özgür yazılımdır. Bu yazılımı Free Software Foundation\n"
 "tarafından yayınlanmış olan GNU Genel Kamu Lisansının 2. veya daha\n"
@@ -6848,7 +6945,8 @@ msgid ""
 "--default             : save default directories.\n"
 "--debug               : show all debug messages.\n"
 "--show-conf           : list of files or directories to backup.\n"
-"--config-info         : explain configuration file options (for non-X users).\n"
+"--config-info         : explain configuration file options (for non-X "
+"users).\n"
 "--daemon              : use daemon configuration. \n"
 "--help                : show this message.\n"
 "--version             : show version number.\n"
@@ -6952,9 +7050,12 @@ msgid ""
 "--start          : start MTS\n"
 "--stop           : stop MTS\n"
 "--adduser        : add an existing system user to MTS (requires username)\n"
-"--deluser        : delete an existing system user from MTS (requires username)\n"
-"--addclient      : add a client machine to MTS (requires MAC address, IP, nbi image name)\n"
-"--delclient      : delete a client machine from MTS (requires MAC address, IP, nbi image name)"
+"--deluser        : delete an existing system user from MTS (requires "
+"username)\n"
+"--addclient      : add a client machine to MTS (requires MAC address, IP, "
+"nbi image name)\n"
+"--delclient      : delete a client machine from MTS (requires MAC address, "
+"IP, nbi image name)"
 msgstr ""
 "[SEÇENEKLER]...\n"
 " Mandriva Linux Terminal Sunucu Yapılandırıcı\n"
@@ -6962,10 +7063,14 @@ msgstr ""
 " --disable        : MTS devre dışı bırak\n"
 " --start          : MTS başlat\n"
 " --stop           : MTS durdur\n"
-" --adduser        : var olan bir sistem kullanıcısını MTSye ekle (kullanıcı adı gereklidir)\n"
-" --deluser        : var olan bir sistem kullanıcısını MTSden sil (kullanıcı adı gereklidir)\n"
-" --addclient      : MTSye bir araç makinesi ekle (MAC adresi, IP, nbi imaj adı gerekir.)\n"
-" --delclient      : MTSden bir araç makinesi kaldır (MAC adresi, IP, nbi imaj adı gerekir.)"
+" --adduser        : var olan bir sistem kullanıcısını MTSye ekle (kullanıcı "
+"adı gereklidir)\n"
+" --deluser        : var olan bir sistem kullanıcısını MTSden sil (kullanıcı "
+"adı gereklidir)\n"
+" --addclient      : MTSye bir araç makinesi ekle (MAC adresi, IP, nbi imaj "
+"adı gerekir.)\n"
+" --delclient      : MTSden bir araç makinesi kaldır (MAC adresi, IP, nbi imaj "
+"adı gerekir.)"
 
 #: standalone.pm:99
 #, c-format
@@ -7004,9 +7109,11 @@ msgstr ""
 #, c-format
 msgid ""
 "[OPTION]...\n"
-"  --no-confirmation      do not ask first confirmation question in Mandriva Update mode\n"
+"  --no-confirmation      do not ask first confirmation question in Mandriva "
+"Update mode\n"
 "  --no-verify-rpm        do not verify packages signatures\n"
-"  --changelog-first      display changelog before filelist in the description window\n"
+"  --changelog-first      display changelog before filelist in the "
+"description window\n"
 "  --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"
 msgstr ""
 "[SEÇENEK]...\n"
@@ -7018,8 +7125,12 @@ msgstr ""
 
 #: standalone.pm:116
 #, c-format
-msgid "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-usbtable] [--dynamic=dev]"
-msgstr "[--manual] [--device=dev] [--update-sane=sane_kaynak_diz] [--update-usbtable] [--dynamic=dev]"
+msgid ""
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
+msgstr ""
+"[--manual] [--device=dev] [--update-sane=sane_kaynak_diz] [--update-"
+"usbtable] [--dynamic=dev]"
 
 #: standalone.pm:117
 #, c-format
@@ -7036,13 +7147,14 @@ msgstr ""
 #, c-format
 msgid ""
 "\n"
-"Usage: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--testing] [-v|--version] "
+"Usage: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
+"testing] [-v|--version] "
 msgstr ""
 "\n"
-"Kullanımı: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--testing] [-v|--version] "
+"Kullanımı: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
+"testing] [-v|--version] "
 
-#: timezone.pm:161
-#: timezone.pm:162
+#: timezone.pm:161 timezone.pm:162
 #, c-format
 msgid "All servers"
 msgstr "Bütün sunucular"
