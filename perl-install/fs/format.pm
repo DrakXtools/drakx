@@ -271,14 +271,10 @@ sub formatMount_part {
     }
 
     #- setting user_xattr on /home (or "/" if no /home)
-    #- setting acl everywhere
-    if (!$part->{isMounted} && member($part->{fs_type}, qw(ext2 ext3 ext4))) {
-	my $default_options = 'acl';
-	if ($part->{mntpoint} eq '/home' ||
-	    (!fs::get::has_mntpoint('/home', $all_hds) && $part->{mntpoint} eq '/')) {
-	    $default_options .= ',user_xattr';
-	}
-	run_program::run('tune2fs', '-o', $default_options, devices::make($part->{real_device} || $part->{device}));
+    if (!$part->{isMounted} && member($part->{fs_type}, qw(ext3 ext4))
+	  && ($part->{mntpoint} eq '/home' ||
+		!fs::get::has_mntpoint('/home', $all_hds) && $part->{mntpoint} eq '/')) {
+	run_program::run('tune2fs', '-o', 'user_xattr', devices::make($part->{real_device} || $part->{device}));
     }
 
     fs::mount::part($part, 0, $wait_message);
