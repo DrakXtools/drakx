@@ -75,7 +75,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fr\n"
 "POT-Creation-Date: 2010-05-13 16:52+0200\n"
-"PO-Revision-Date: 2010-02-17 12:34+0100\n"
+"PO-Revision-Date: 2010-05-13 19:25+0100\n"
 "Last-Translator: Christophe Berthelé <berthy@mandriva.org>\n"
 "Language-Team: French <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -336,7 +336,7 @@ msgstr "Options Xen passées au noyau"
 #: any.pm:536
 #, c-format
 msgid "Requires password to boot"
-msgstr ""
+msgstr "Nécessite un mot de passe pour le démarrage"
 
 #: any.pm:538
 #, c-format
@@ -1753,12 +1753,12 @@ msgid "Logical volume name "
 msgstr "Nom du volume logique"
 
 #: diskdrake/interactive.pm:507
-#, fuzzy, c-format
+#, c-format
 msgid "Encrypt partition"
-msgstr "Algorithme de cryptage"
+msgstr "Chiffrer une partition"
 
 #: diskdrake/interactive.pm:508
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption key "
 msgstr "Clé de chiffrement"
 
@@ -1773,9 +1773,9 @@ msgid "The encryption keys do not match"
 msgstr "Les clés de chiffrement ne correspondent pas"
 
 #: diskdrake/interactive.pm:521
-#, fuzzy, c-format
+#, c-format
 msgid "Missing encryption key"
-msgstr "Clé de chiffrement du système de fichiers"
+msgstr "Clé de chiffrement manquante"
 
 #: diskdrake/interactive.pm:541
 #, c-format
@@ -2522,7 +2522,7 @@ msgstr "Activer la partition d'échange %s"
 #: fs/mount_options.pm:112
 #, c-format
 msgid "Enable Posix Access Control Lists"
-msgstr ""
+msgstr "Activer les listes de contrôle d'accès Posix"
 
 #: fs/mount_options.pm:114
 #, c-format
@@ -2966,14 +2966,14 @@ msgstr ""
 "Assurez-vous d'ajouter une partition /boot"
 
 #: fsedit.pm:437
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
-"Attention, vous avez choisi une partition RAID logiciel comme partition "
-"racine (/).\n"
+"Attention, vous avez choisi une partition chiffrée comme partition racine "
+"(/).\n"
 "Aucun chargeur de démarrage ne supporte cette configuration sans partition "
 "spécifique pour /boot.\n"
 "Assurez-vous d'ajouter une partition /boot"
@@ -3336,7 +3336,7 @@ msgstr ""
 "Vous pouvez sélectionner ici un pilote alternatif (OSS ou ALSA) pour votre "
 "carte son (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
@@ -6436,7 +6436,7 @@ msgstr "Nom d'utilisateur ou courriel :"
 #: services.pm:19
 #, c-format
 msgid "Listen and dispatch ACPI events from the kernel"
-msgstr ""
+msgstr "Collecter et distribuer les évènements ACPI du noyau"
 
 #: services.pm:20
 #, c-format
@@ -6481,12 +6481,12 @@ msgstr ""
 #: services.pm:26
 #, c-format
 msgid "Avahi is a ZeroConf daemon which implements an mDNS stack"
-msgstr ""
+msgstr "Avahi est un service ZeroConf qui implémente une pile mDNS"
 
 #: services.pm:27
 #, c-format
 msgid "Set CPU frequency settings"
-msgstr ""
+msgstr "Définir les paramètres de fréquence CPU"
 
 #: services.pm:28
 #, c-format
@@ -6538,6 +6538,15 @@ msgid ""
 "applications and \n"
 "scripts can access the LCD via a simple API."
 msgstr ""
+"G15Daemon permet aux utilisateurs d'accèder aux touches supplémentaires \n"
+"en les décodant avant de les renvoyer au noyau via le pilote linux UINPUT. "
+"Ce pilote \n"
+"doit être chargé avant l'utilisation de g15daemon pour l'accès clavier. Le "
+"LCD G15 est \n"
+"aussi supporté. Par défaut, en l'absence d'autre client, g15daemon affichera "
+"une horloge. \n"
+"Les application clientes et les scripts peuvent accèder au LCD par une "
+"simple API. "
 
 #: services.pm:40
 #, c-format
@@ -6594,12 +6603,12 @@ msgstr ""
 #: services.pm:51
 #, c-format
 msgid "Automates a packet filtering firewall with ip6tables"
-msgstr ""
+msgstr "Automatise un parefeu de filtrage de paquets avec ip6tables"
 
 #: services.pm:52
 #, c-format
 msgid "Automates a packet filtering firewall with iptables"
-msgstr ""
+msgstr "\"Automatise un parefeu de filtrage de paquets avec iptables"
 
 #: services.pm:53
 #, c-format
@@ -6616,6 +6625,8 @@ msgstr ""
 msgid ""
 "Evenly distributes IRQ load across multiple CPUs for enhanced performance"
 msgstr ""
+"Distribue équitablement la charge IRQ entre plusieurs CPU pour améliorer les "
+"performances"
 
 #: services.pm:56
 #, c-format
@@ -6646,7 +6657,7 @@ msgstr "Détection automatique et configuration du matériel au démarrage."
 #: services.pm:62
 #, c-format
 msgid "Tweaks system behavior to extend battery life"
-msgstr ""
+msgstr "Ajuste le comportement du système pour étendre la durée des batteries"
 
 #: services.pm:63
 #, c-format
@@ -6680,12 +6691,12 @@ msgstr ""
 #: services.pm:69
 #, c-format
 msgid "Monitors the network (Interactive Firewall and wireless"
-msgstr ""
+msgstr "Surveille le réseau (Parefeu intéractif et sans-fil)"
 
 #: services.pm:70
 #, c-format
 msgid "Software RAID monitoring and management"
-msgstr ""
+msgstr "Gestion et surveillance du RAID logiciel"
 
 #: services.pm:71
 #, c-format
@@ -6699,7 +6710,7 @@ msgstr ""
 #: services.pm:72
 #, c-format
 msgid "Enables MSEC security policy on system startup"
-msgstr ""
+msgstr "Active la politique de sécurité MSEC au démarrage du système"
 
 #: services.pm:73
 #, c-format
@@ -6714,7 +6725,7 @@ msgstr ""
 #: services.pm:74
 #, c-format
 msgid "Initializes network console logging"
-msgstr ""
+msgstr "Initialise l'affichage sur la console du journal réseau"
 
 #: services.pm:75
 #, c-format
@@ -6740,12 +6751,12 @@ msgstr ""
 #: services.pm:79
 #, c-format
 msgid "Requires network to be up if enabled"
-msgstr ""
+msgstr "Si activé nécessite que le reseau soit lancé"
 
 #: services.pm:80
 #, c-format
 msgid "Wait for the hotplugged network to be up"
-msgstr ""
+msgstr "Attendre que le réseau lancé à chaud soit actif"
 
 #: services.pm:81
 #, c-format
@@ -6792,7 +6803,7 @@ msgstr "Support des imprimantes winprinter OKI 4w et compatibles."
 #: services.pm:90
 #, c-format
 msgid "Checks if a partition is close to full up"
-msgstr ""
+msgstr "Vérifie si une partition est bientôt pleine"
 
 #: services.pm:91
 #, c-format
@@ -6823,7 +6834,7 @@ msgstr ""
 #: services.pm:97
 #, c-format
 msgid "Reserves some TCP ports"
-msgstr ""
+msgstr "Réserve des ports TCP"
 
 #: services.pm:98
 #, c-format
@@ -6857,9 +6868,9 @@ msgstr ""
 "utilisé par des programmes comme Oracle ou par des lecteurs de DVD."
 
 #: services.pm:103
-#, fuzzy, c-format
+#, c-format
 msgid "Nameserver information manager"
-msgstr "Informations sur les disques durs"
+msgstr "Gestionnaire d'informations Nameserver"
 
 #: services.pm:104
 #, c-format
@@ -6883,14 +6894,14 @@ msgstr ""
 "mesures de la performance de n'importe quelle machine sur ce réseau."
 
 #: services.pm:109
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages to various "
 "system log files.  It is a good idea to always run rsyslog."
 msgstr ""
-"Syslog est un service utilisé par beaucoup d'autres services pour "
-"enregistrer des rapports d'activité. C'est une très bonne idée de toujours "
-"l'activer."
+"Syslog est un service utilisé par beaucoup d'autres services pour la "
+"journalisation des messages dans des fichiers. C'est une très bonne idée de "
+"toujours l'activer."
 
 #: services.pm:110
 #, c-format
@@ -6921,7 +6932,7 @@ msgstr ""
 #: services.pm:115
 #, c-format
 msgid "Packet filtering firewall"
-msgstr ""
+msgstr "Parefeu de filtrage de paquets"
 
 #: services.pm:116
 #, c-format
@@ -6940,7 +6951,7 @@ msgstr "Démarrer le système de gestion du son sur votre machine."
 #: services.pm:118
 #, c-format
 msgid "layer for speech analysis"
-msgstr ""
+msgstr "Couche pour l'analyse vocale"
 
 #: services.pm:119
 #, c-format
@@ -6964,7 +6975,7 @@ msgstr ""
 #: services.pm:122
 #, c-format
 msgid "Moves the generated persistent udev rules to /etc/udev/rules.d"
-msgstr ""
+msgstr "Déplace les règles udev persistantes vers /etc/udev/rules.d"
 
 #: services.pm:123
 #, c-format
@@ -6974,7 +6985,7 @@ msgstr "Charger les pilotes pour vos périphériques USB."
 #: services.pm:124
 #, c-format
 msgid "A lightweight network traffic monitor"
-msgstr ""
+msgstr "Un analyseur de réseau léger"
 
 #: services.pm:125
 #, c-format
