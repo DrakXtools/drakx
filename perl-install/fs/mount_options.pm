@@ -12,7 +12,7 @@ sub list() {
     my %non_defaults = (
 			sync => 'async', noatime => 'atime', noauto => 'auto', ro => 'rw', 
 			user => 'nouser', nodev => 'dev', noexec => 'exec', nosuid => 'suid',
-			user_xattr => 'nouser_xattr',
+			user_xattr => 'nouser_xattr', acl => 'noacl',
 		       );
     my @user_implies = qw(noexec nodev nosuid);
     \%non_defaults, \@user_implies;
@@ -109,6 +109,7 @@ sub pack {
 # update me on each util-linux new release:
 sub help() {
     (
+	'acl' => N("Enable Posix Access Control Lists"),
 
 	'flush' => N("Flush write cache on file close"),
 
