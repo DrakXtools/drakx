@@ -121,7 +121,7 @@ sub get_lvs {
 	   if (my $type = -e "/dev/$device" && fs::type::type_subpart_from_magic($part)) {
                 put_in_hash($part, $type); 	       
 	   } else {
-	       $part->{fs_type} = 'ext2';
+	       $part->{fs_type} = defaultFS();
 	   }
 	   $part;
        } @l
