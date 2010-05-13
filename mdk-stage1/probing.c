@@ -766,11 +766,12 @@ void find_media(enum media_bus bus)
                                         log_message("Couldn't open /proc/partitions");
                                 } else {
                                         while (fgets(buf, sizeof(buf), f)) {
-                                                char name[100] = "/dev/";
+                                                char name[100];
                                                 int major, minor, blocks;
                                                 struct stat statbuf;
-						char *ptr;
+                                                char *ptr;
                                                 memset(name, 0, sizeof(name));
+                                                strcpy(name, "/dev/");
                                                 sscanf(buf, " %d %d %d %s", &major, &minor, &blocks, &name[5]);
                                                 if (streq(&name[5], tmp_name) && tmp[count].type == DISK && ((blocks == 1048575) || (blocks == 1440)))
                                                         tmp[count].type = FLOPPY;
