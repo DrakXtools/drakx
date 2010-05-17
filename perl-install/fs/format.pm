@@ -271,7 +271,7 @@ sub formatMount_part {
     }
 
     #- setting user_xattr on /home (or "/" if no /home)
-    if (!$part->{isMounted} && member($part->{fs_type}, qw(ext3 ext4))
+    if (!$part->{isMounted} && member($part->{fs_type}, qw(ext2 ext3 ext4))
 	  && ($part->{mntpoint} eq '/home' ||
 		!fs::get::has_mntpoint('/home', $all_hds) && $part->{mntpoint} eq '/')) {
 	run_program::run('tune2fs', '-o', 'user_xattr', devices::make($part->{real_device} || $part->{device}));
