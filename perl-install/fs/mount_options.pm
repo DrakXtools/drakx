@@ -239,7 +239,7 @@ sub set_default {
 	$options->{notail} = 1;
 	$options->{user_xattr} = 1;
     }
-    if (member($part->{fs_type}, qw(ext2 ext3 ext4)) {
+    if (member($part->{fs_type}, qw(ext2 ext3 ext4))) {
 	$options->{acl} = 1;
     }
     if (isLoopback($part) && !isSwap($part)) { #- no need for loop option for swap files
