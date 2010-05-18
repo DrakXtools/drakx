@@ -174,12 +174,8 @@ sub setupBootloaderBefore {
 	bootloader::set_append_simple($bootloader, 'noresume');
     } elsif (bootloader::get_append_simple($bootloader, 'noresume')) {
     } else {
-	my ($MemTotal) = cat_("/proc/meminfo") =~ /^MemTotal:\s*(\d+)/m;
 	if (my ($biggest_swap) = sort { $b->{size} <=> $a->{size} } grep { isSwap($_) } @$fstab) {
-	    log::l("MemTotal: $MemTotal < ", $biggest_swap->{size} / 2);
-	    if ($MemTotal < $biggest_swap->{size} / 2) {
-		bootloader::set_append_with_key($bootloader, resume => fs::wild_device::from_part('', $biggest_swap));
-	    }
+	    bootloader::set_append_with_key($bootloader, resume => fs::wild_device::from_part('', $biggest_swap));
 	}
     }
 
