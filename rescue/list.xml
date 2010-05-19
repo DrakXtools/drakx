@@ -88,6 +88,8 @@
   parted partimage
 
   mdadm lvm2
+  mdmon kpartx
+  dmevent_tool
   <if ARCH="i.86|x86_64|ia64">
     dmraid
   </if>
