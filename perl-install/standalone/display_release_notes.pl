@@ -18,16 +18,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-
-# so that we popup above drakx:
-BEGIN { $::isInstall = 1 }
-
 use lib qw(/usr/lib/libDrakX);
 use interactive;
 use any;
 use MDK::Common;
 
 my $in = 'interactive'->vnew('su');
+# so that we popup above drakx:
+any::set_wm_hints_if_needed($in);
+
 # not very safe but we run in a restricted environment anyway:
 my $release_notes = cat_utf8('/tmp/release_notes.html');
 any::display_release_notes($in, $release_notes);
