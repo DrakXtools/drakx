@@ -15,7 +15,7 @@ sub guess_mount_point {
 	     '/boot' => 'vmlinuz',
 	     '/tmp'  => '.X11-unix',
 	     '/usr'  => 'src',
-	     '/var'  => 'catman',
+	     '/var'  => 'spool',
 	    );
 
     my $handle = any::inspect($part, $prefix) or return;
