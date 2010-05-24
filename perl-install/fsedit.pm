@@ -427,10 +427,26 @@ sub check_mntpoint {
     fs::get::mntpoint2part($mntpoint, [ grep { $_ ne $part } fs::get::really_all_fstab($all_hds) ]) and die N("There is already a partition with mount point %s\n", $mntpoint);
 
     if ($mntpoint eq "/" && isRAID($part) && !fs::get::has_mntpoint("/boot", $all_hds)) {
-	my $md_part = fs::get::device2part($part->{raid}, $all_hds->{raids});
 	cdie N("You've selected a software RAID partition as root (/).
 No bootloader is able to handle this without a /boot partition.
-Please be sure to add a /boot partition") if $md_part->{level} ne '1'; # lilo handles / on RAID1
+Please be sure to add a /boot partition") if $part->{level} ne '1'; # lilo handles / on RAID1
+	# LILO only handles 0.90 metadata
+	if ($part->{isFormatted} && $part->{metadata} && $part->{metadata} ne '0.90') {
+	    cdie N("Metadata version unsupported for a boot partition. Please be sure to add a /boot partition.");
+	} else {
+	    $part->{metadata} = '0.90';
+	}
+    }
+
+    if ($mntpoint eq "/boot" && isRAID($part))  {
+	die N("You've selected a software RAID partition as /boot.
+No bootloader is able to handle this.") if $part->{level} ne '1'; # lilo handles /boot on RAID1
+	# LILO only handles 0.90 metadata
+	if ($part->{isFormatted} && $part->{metadata} && $part->{metadata} ne '0.90') {
+	    die N("Metadata version unsupported for a boot partition.");
+	} else {
+	    $part->{metadata} = '0.90';
+	}
     }
 
     if ($mntpoint eq "/" && (isLUKS($part) || isRawLUKS($part)) && !fs::get::has_mntpoint("/boot", $all_hds)) {

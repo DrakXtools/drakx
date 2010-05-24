@@ -1,8 +1,8 @@
 - display_release_notes.pl: don't use ::isInstall to position the release not
   window on top of everything (doesn't work on the Ones), use
   any::set_wm_hints_if_needed instead (#59155)
-- allow forcing raid metadata version
-- load raid metadata version
+- handle raid metadata version
+- force raid metadata to be 0.90 if /boot is on raid 1
 - fix detection of /var partition
 
 Version 13.28 - 19 May 2010
