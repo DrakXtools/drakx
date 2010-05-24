@@ -140,6 +140,7 @@ sub make {
 			    '--chunk=' . $part->{'chunk-size'}, 
 			    "--level=$part->{level}", 
 			    "--raid-devices=$nb",
+			    if_($part->{'metadata'}, "--metadata=$part->{'metadata'}"),
 			    map { devices::make($_->{device}) } @{$part->{disks}});
 
     if (my $raw_part = get_md_info($dev)) {
