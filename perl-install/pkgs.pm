@@ -217,8 +217,8 @@ sub detect_network_drivers {
 sub detect_hardware_packages {
     my ($do_pkgs, $o_match_all_hardware) = @_;
     my @ignore_flags = $::isInstall ? () : (
-        if_(!$do_pkgs->are_installed('task-kde4-minimal', 'task-kde3-minimal'), "CAT_KDE"),
-        if_(!$do_pkgs->is_installed('task-gnome'), "CAT_GNOME"),
+        if_(!$do_pkgs->is_installed('task-kde4-minimal'), "CAT_KDE"),
+        if_(!$do_pkgs->is_installed('task-gnome-minimal'), "CAT_GNOME"),
     );
     (
         ($::isInstall ? () : detect_rpmsrate_hardware_packages($o_match_all_hardware, \@ignore_flags)),
