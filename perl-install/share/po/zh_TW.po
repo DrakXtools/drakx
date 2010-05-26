@@ -275,7 +275,7 @@ msgstr "Xen 附加參數"
 #: any.pm:536
 #, c-format
 msgid "Requires password to boot"
-msgstr ""
+msgstr "開機需要密碼"
 
 #: any.pm:538
 #, c-format
@@ -407,11 +407,11 @@ msgid "Please give a user name"
 msgstr "請輸入使用者名稱"
 
 #: any.pm:863
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The user name must start with a lower case letter followed by only lower "
 "cased letters, numbers, `-' and `_'"
-msgstr "使用者名稱只能含有小寫英文字母、數字、`-' 與 `_'"
+msgstr "使用者名稱只能由小寫英文字母開頭，並接著小寫英文字母、數字、- 與 _"
 
 #: any.pm:864
 #, c-format
@@ -451,7 +451,7 @@ msgstr "使用者管理"
 #: any.pm:883
 #, c-format
 msgid "Enable guest account"
-msgstr ""
+msgstr "啟用訪客帳戶"
 
 #: any.pm:884 authentication.pm:237
 #, c-format
@@ -996,14 +996,14 @@ msgid "Active Directory Realm "
 msgstr ""
 
 #: authentication.pm:221
-#, fuzzy, c-format
+#, c-format
 msgid "DNS Domain"
-msgstr "NIS 網域"
+msgstr "DNS 網域"
 
 #: authentication.pm:222
-#, fuzzy, c-format
+#, c-format
 msgid "DC Server"
-msgstr "KDCs 伺服器"
+msgstr "DC 伺服器"
 
 #: authentication.pm:236 authentication.pm:252
 #, c-format
@@ -1262,9 +1262,9 @@ msgid "Warning"
 msgstr "警告"
 
 #: diskdrake/dav.pm:106
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to delete this mountpoint?"
-msgstr "您要按這個按鈕嗎？"
+msgstr "您確定要刪除這個掛載點嗎?"
 
 #: diskdrake/dav.pm:124
 #, c-format
@@ -1357,9 +1357,9 @@ msgid "Unknown"
 msgstr "未知的"
 
 #: diskdrake/hd_gtk.pm:388
-#, fuzzy, c-format
+#, c-format
 msgid "Ext4"
-msgstr "離開"
+msgstr "Ext4"
 
 #: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
@@ -1537,7 +1537,7 @@ msgstr "詳細資訊"
 #: diskdrake/interactive.pm:403
 #, c-format
 msgid "View"
-msgstr ""
+msgstr "檢視"
 
 #: diskdrake/interactive.pm:408 diskdrake/interactive.pm:830
 #, c-format
@@ -1600,9 +1600,9 @@ msgid "Create"
 msgstr "建立"
 
 #: diskdrake/interactive.pm:453
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to mount partition"
-msgstr "將檔案搬移到新的分割區"
+msgstr "掛載分割區失敗"
 
 #: diskdrake/interactive.pm:487 diskdrake/interactive.pm:489
 #, c-format
@@ -1635,12 +1635,12 @@ msgid "Logical volume name "
 msgstr "邏輯磁區名稱"
 
 #: diskdrake/interactive.pm:507
-#, fuzzy, c-format
+#, c-format
 msgid "Encrypt partition"
-msgstr "加密演算法"
+msgstr "加密分割區"
 
 #: diskdrake/interactive.pm:508
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption key "
 msgstr "加密金鑰"
 
@@ -1655,9 +1655,9 @@ msgid "The encryption keys do not match"
 msgstr "輸入的加密金鑰不符合"
 
 #: diskdrake/interactive.pm:521
-#, fuzzy, c-format
+#, c-format
 msgid "Missing encryption key"
-msgstr "檔案系統加密金鑰"
+msgstr "遺失加密金鑰"
 
 #: diskdrake/interactive.pm:541
 #, c-format
@@ -1824,7 +1824,7 @@ msgstr "加密金鑰"
 #: diskdrake/interactive.pm:948
 #, c-format
 msgid "Invalid key"
-msgstr ""
+msgstr "無效的金鑰"
 
 #: diskdrake/interactive.pm:956
 #, c-format
@@ -1842,19 +1842,19 @@ msgid "Choose an existing LVM to add to"
 msgstr "選取一個已經存在的 LVM 以加入"
 
 #: diskdrake/interactive.pm:987 diskdrake/interactive.pm:996
-#, fuzzy, c-format
+#, c-format
 msgid "LVM name"
-msgstr "LVM 名稱？"
+msgstr "LVM 名稱"
 
 #: diskdrake/interactive.pm:988
 #, c-format
 msgid "Enter a name for the new LVM volume group"
-msgstr ""
+msgstr "為新的 LVM 磁區群組輸入一個名稱"
 
 #: diskdrake/interactive.pm:993
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" already exists"
-msgstr "檔案已經存在了。要使用它嗎？"
+msgstr "\"%s\" 已經存在了"
 
 #: diskdrake/interactive.pm:1024
 #, c-format
@@ -2339,9 +2339,9 @@ msgid "I do not know how to set label on %s with type %s"
 msgstr "我不知道如何在 %s 上設定型態 %s 的標籤"
 
 #: fs/format.pm:134
-#, fuzzy, c-format
+#, c-format
 msgid "setting label on %s failed, is it formatted?"
-msgstr "無法在 %s 上設定標籤"
+msgstr "在 %s 上設定標籤失敗了，它格式化了嗎?"
 
 #: fs/format.pm:175
 #, c-format
@@ -2693,9 +2693,9 @@ msgstr ""
 "當您完成時, 別忘了使用 'w' 儲存"
 
 #: fs/partitioning_wizard.pm:402
-#, fuzzy, c-format
+#, c-format
 msgid "Ext2/3/4"
-msgstr "Ext3"
+msgstr "Ext2/3/4"
 
 #: fs/partitioning_wizard.pm:432 fs/partitioning_wizard.pm:572
 #, c-format
@@ -5135,9 +5135,9 @@ msgid "Password should resist to basic attacks"
 msgstr ""
 
 #: mygtk2.pm:1544 mygtk2.pm:1545
-#, fuzzy, c-format
+#, c-format
 msgid "Password seems secure"
-msgstr "密碼基礎"
+msgstr "密碼似乎是安全的"
 
 #: partition_table.pm:411
 #, c-format
@@ -5957,7 +5957,7 @@ msgstr ""
 #: services.pm:27
 #, c-format
 msgid "Set CPU frequency settings"
-msgstr ""
+msgstr "設定 CPU 頻率選項"
 
 #: services.pm:28
 #, c-format
