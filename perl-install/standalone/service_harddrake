@@ -99,6 +99,33 @@ sub switch_x_driver {
     Xconfig::card::libgl_config_and_more({ Driver => $new_driver });
 }
 
+sub should_reconfigure_x_driver {
+    my ($card_data, $device, $current_driver) = @_;
+    my $reason;
+    my $reconfigure;
+    my $new_key = $card_data->{Driver} . $card_data->{Driver2};
+    setVarsInSh("$hw_sysconfdir/xorg", { XORG_DRV => $new_key });
+    # auto reconfigure x11 only on first time default driver have changed:
+    if ($previous_xorg_config{XORG_DRV} ne $new_key) {
+	if (!member($current_driver, $card_data->{Driver}, $card_data->{Driver2}, 'fbdev', 'vesa')) {
+	    $reason = N("The graphic card '%s' is no more supported by the '%s' driver",
+			 $device->{description}, $current_driver);
+	    $reconfigure = 1;
+	 }
+     } elsif ((stat('/etc/X11/xorg.conf'))[9] < (stat('/etc/product.id'))[9]) {
+        # when switching to a new release (product.id is newer than xorg.conf),
+	# regenerate xorg.conf even if the driver used is vesa or fbdev, this
+	# way we handle switches like "no driver for the card in older releases
+	# but good driver in new release", see bug #53753
+	if (!member($current_driver, $card_data->{Driver}, $card_data->{Driver2})) {
+	    $reason = N("New release, reconfiguring X for %s", $device->{description});
+	    $reconfigure = 1;
+	}
+    }
+
+    ($reconfigure, $reason);
+}
+
 my @cards = (
     {
         ldetect_driver_regexp => 'Card:NVIDIA',
@@ -132,17 +159,12 @@ foreach my $device (@devices) {
     $card_data->{Driver2} =~ s/(nvidia).*/$1/;
 
     # auto reconfigure x11 only on first time default driver have changed:
-    my $new_key = $card_data->{Driver} . $card_data->{Driver2};
-    setVarsInSh("$hw_sysconfdir/xorg", { XORG_DRV => $new_key });
-    if ($previous_xorg_config{XORG_DRV} ne $new_key) {
-	if (!member($current_driver, $card_data->{Driver}, $card_data->{Driver2}, 'fbdev', 'vesa')) {
-	    my $reason = N("The graphic card '%s' is no more supported by the '%s' driver",
-			   $device->{description}, $current_driver);
+    my ($should_reconfigure, $reason) = should_reconfigure_x_driver($card_data, $device, $current_driver);
+    if ($should_reconfigure) {
 	    switch_x_driver($current_driver, $card_data->{Driver}, $reason);
 	    schedule_warn_about_switch($reason) if any { $current_driver =~ $_->{xorg_driver_regexp} } @cards;
 	    # Update $current_driver with the new one
 	    $current_driver = $card_data->{Driver};
-	}
     }
 
     # nv->nouveau or non_kms_nouveau->kms_nouveau can't have "Disable dri"!
