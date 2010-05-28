@@ -510,6 +510,7 @@ sub Create {
         ], complete => sub {
 	    $part->{size} = from_Mb($mb_size, min_partition_size($hd), $max - $part->{start}); #- need this to be able to get back the approximation of using MB
 	    $do_suggest_mount_point = 0 if !$part->{mntpoint};
+	    put_in_hash($part, fs::type::type_name2subpart($type_name));
 	    $part->{mntpoint} = '' if isNonMountable($part);
 	    $part->{mntpoint} = 'swap' if isSwap($part);
 	    fs::mount_options::set_default($part, ignore_is_removable => 1);
