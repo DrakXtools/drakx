@@ -8,15 +8,15 @@
 # Mattias Newzella <newzella@linux.nu>, 2001, 2002,2003.
 # Magnus Björklöf <bjorklof@nic.fi>, 2003.
 # Lars Westergren <lars.westergren@home.se>, 2003, 2004, 2005.
-# Thomas Backlund <tmb@mandriva.org>, 2004, 2005, 2006, 2008, 2009.
+# Thomas Backlund <tmb@mandriva.org>, 2004, 2005, 2006, 2008, 2009, 2010.
 # Kenneth Krekula <kenneth.krekula@kiruna.se>, 2005, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX-sv\n"
 "POT-Creation-Date: 2010-05-13 16:52+0200\n"
-"PO-Revision-Date: 2009-10-11 17:15+0300\n"
-"Last-Translator: \n"
-"Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2010-05-30 16:15+0300\n"
+"Last-Translator: Thomas Backlund <tmb@mandriva.org>\n"
+"Language-Team: Swedish <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -270,7 +270,7 @@ msgstr "Xen tillägg"
 #: any.pm:536
 #, c-format
 msgid "Requires password to boot"
-msgstr ""
+msgstr "Kräver lösenord för att starta"
 
 #: any.pm:538
 #, c-format
@@ -448,7 +448,7 @@ msgstr "Användarhantering"
 #: any.pm:883
 #, c-format
 msgid "Enable guest account"
-msgstr ""
+msgstr "Aktivera gästkonto"
 
 #: any.pm:884 authentication.pm:237
 #, c-format
@@ -1382,9 +1382,9 @@ msgid "Unknown"
 msgstr "Okänd"
 
 #: diskdrake/hd_gtk.pm:388
-#, fuzzy, c-format
+#, c-format
 msgid "Ext4"
-msgstr "Avsluta"
+msgstr "Ext4"
 
 #: diskdrake/hd_gtk.pm:388 fs/partitioning_wizard.pm:402
 #, c-format
@@ -1664,12 +1664,12 @@ msgid "Logical volume name "
 msgstr "Volymens logiska namn "
 
 #: diskdrake/interactive.pm:507
-#, fuzzy, c-format
+#, c-format
 msgid "Encrypt partition"
-msgstr "Kryperingsalgoritm"
+msgstr "Kryptera partition"
 
 #: diskdrake/interactive.pm:508
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption key "
 msgstr "Krypteringsnyckel"
 
@@ -1684,9 +1684,9 @@ msgid "The encryption keys do not match"
 msgstr "Krypteringsnycklarna matchar inte"
 
 #: diskdrake/interactive.pm:521
-#, fuzzy, c-format
+#, c-format
 msgid "Missing encryption key"
-msgstr "Krypteringsnyckel för filsystem"
+msgstr "Krypteringsnyckel saknas"
 
 #: diskdrake/interactive.pm:541
 #, c-format
@@ -2261,7 +2261,7 @@ msgstr ""
 #: diskdrake/interactive.pm:1495
 #, c-format
 msgid "Encryption algorithm"
-msgstr "Kryperingsalgoritm"
+msgstr "Krypteringsalgoritm"
 
 #: diskdrake/removable.pm:46
 #, c-format
@@ -2426,7 +2426,7 @@ msgstr "Formaterar växlingspartition %s"
 #: fs/mount_options.pm:112
 #, c-format
 msgid "Enable Posix Access Control Lists"
-msgstr ""
+msgstr "Aktivera Posix åtkomstlistor (ACL)"
 
 #: fs/mount_options.pm:114
 #, c-format
@@ -2762,9 +2762,9 @@ msgstr ""
 "Glöm inte att spara med \"w\" när du är klar."
 
 #: fs/partitioning_wizard.pm:402
-#, fuzzy, c-format
+#, c-format
 msgid "Ext2/3/4"
-msgstr "Ext3"
+msgstr "Ext2/3/4"
 
 #: fs/partitioning_wizard.pm:432 fs/partitioning_wizard.pm:572
 #, c-format
@@ -2862,13 +2862,13 @@ msgstr ""
 "en /boot-partition. Se till att lägga till en /boot-partition."
 
 #: fsedit.pm:437
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
-"Du har valt en mjukvaru-RAID-partition som rot (/).\n"
+"Du har valt en krypterad partition som rot (/).\n"
 "Det finns ingen starthanterare som hanterar detta utan\n"
 "en /boot-partition. Se till att lägga till en /boot-partition."
 
@@ -3227,7 +3227,7 @@ msgstr ""
 "Här kan du välja en alternativ drivrutin (antingen OSS eller Alsa) för "
 "ljudkortet (%s)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
@@ -6269,7 +6269,7 @@ msgstr "Inloggning eller epost:"
 #: services.pm:19
 #, c-format
 msgid "Listen and dispatch ACPI events from the kernel"
-msgstr ""
+msgstr "Lyssna på och utför ACPI händelser från kärnan"
 
 #: services.pm:20
 #, c-format
@@ -6304,12 +6304,12 @@ msgstr ""
 #: services.pm:26
 #, c-format
 msgid "Avahi is a ZeroConf daemon which implements an mDNS stack"
-msgstr ""
+msgstr "Avahi är en ZeroConf demon som implementerar en mDNS stack"
 
 #: services.pm:27
 #, c-format
 msgid "Set CPU frequency settings"
-msgstr ""
+msgstr "Ange CPU frekvensinställningar"
 
 #: services.pm:28
 #, c-format
@@ -6359,6 +6359,16 @@ msgid ""
 "applications and \n"
 "scripts can access the LCD via a simple API."
 msgstr ""
+"G15Daemon låter användare komma åt extra tangenter genom att avkoda dem\n"
+"och skickar dem tillbaka till kärnan via linux UINPUT drivrutinen. Denna "
+"drivrutin\n"
+"måste vara laddad innan g51daemon kan användas för åtkomst till "
+"tangentbordet.\n"
+"LCDn på G15 stöds också. Som standard, när inga andra klienter är aktiva, "
+"kommer\n"
+"g15daemon att visa en klocka. Klientapplikationer och skript kan kåmma åt "
+"LCDn via\n"
+"ett enkelt API."
 
 #: services.pm:40
 #, c-format
@@ -6411,12 +6421,12 @@ msgstr ""
 #: services.pm:51
 #, c-format
 msgid "Automates a packet filtering firewall with ip6tables"
-msgstr ""
+msgstr "Automatiserar paketfiltrerande brandvägg med ip6tables"
 
 #: services.pm:52
 #, c-format
 msgid "Automates a packet filtering firewall with iptables"
-msgstr ""
+msgstr "Automatiserar paketfiltrerande brandvägg med iptables"
 
 #: services.pm:53
 #, c-format
@@ -6431,7 +6441,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Evenly distributes IRQ load across multiple CPUs for enhanced performance"
-msgstr ""
+msgstr "Distribuerar IRQ last jämt mellan flera CPUn för bättre prestanda"
 
 #: services.pm:56
 #, c-format
@@ -6461,7 +6471,7 @@ msgstr "Automatisk identifiering och konfiguration av hårdvara vid start."
 #: services.pm:62
 #, c-format
 msgid "Tweaks system behavior to extend battery life"
-msgstr ""
+msgstr "Optimerar systemet för förlängd batteritid"
 
 #: services.pm:63
 #, c-format
@@ -6493,12 +6503,12 @@ msgstr ""
 #: services.pm:69
 #, c-format
 msgid "Monitors the network (Interactive Firewall and wireless"
-msgstr ""
+msgstr "Övervakar nätverket (Interaktiv brandvägg och trådlöst"
 
 #: services.pm:70
 #, c-format
 msgid "Software RAID monitoring and management"
-msgstr ""
+msgstr "Övervakning och hantering av mjukvaru RAID"
 
 #: services.pm:71
 #, c-format
@@ -6512,7 +6522,7 @@ msgstr ""
 #: services.pm:72
 #, c-format
 msgid "Enables MSEC security policy on system startup"
-msgstr ""
+msgstr "Aktiverar MSEC säkerhetspolicy vid systemstart"
 
 #: services.pm:73
 #, c-format
@@ -6526,7 +6536,7 @@ msgstr ""
 #: services.pm:74
 #, c-format
 msgid "Initializes network console logging"
-msgstr ""
+msgstr "Initierar nätverkskonsol loggning"
 
 #: services.pm:75
 #, c-format
@@ -6547,12 +6557,12 @@ msgstr ""
 #: services.pm:79
 #, c-format
 msgid "Requires network to be up if enabled"
-msgstr ""
+msgstr "Kräver att nätverket är uppe om aktiverat"
 
 #: services.pm:80
 #, c-format
 msgid "Wait for the hotplugged network to be up"
-msgstr ""
+msgstr "Vänta på att det hotpluggade nätverket är uppe"
 
 #: services.pm:81
 #, c-format
@@ -6596,7 +6606,7 @@ msgstr "Skapa stöd för OKI 4w- och kompatibla Windows-skrivare."
 #: services.pm:90
 #, c-format
 msgid "Checks if a partition is close to full up"
-msgstr ""
+msgstr "Kontrollerar om en partition är nära att bli full"
 
 #: services.pm:91
 #, c-format
@@ -6625,7 +6635,7 @@ msgstr ""
 #: services.pm:97
 #, c-format
 msgid "Reserves some TCP ports"
-msgstr ""
+msgstr "Reserverar vissa TCP portar"
 
 #: services.pm:98
 #, c-format
@@ -6655,9 +6665,9 @@ msgstr ""
 "för användning av program som Oracle eller dvd-spelare."
 
 #: services.pm:103
-#, fuzzy, c-format
+#, c-format
 msgid "Nameserver information manager"
-msgstr "Information om hårddisk"
+msgstr "Namnserver informationshanterare"
 
 #: services.pm:104
 #, c-format
@@ -6680,14 +6690,14 @@ msgstr ""
 "annan dator som kör en rstat-demon används."
 
 #: services.pm:109
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages to various "
 "system log files.  It is a good idea to always run rsyslog."
 msgstr ""
-"Syslog är en demon genom vilken andra demoner sköter sin\n"
-"loggning till diverse olika loggfiler. Det är en god idé\n"
-"att alltid köra syslog."
+"Syslog är en demon genom vilken andra demoner sköter sin loggning till "
+"diverse "
+"olika loggfiler. Det är en god idé att alltid köra rsyslog."
 
 #: services.pm:110
 #, c-format
@@ -6718,7 +6728,7 @@ msgstr ""
 #: services.pm:115
 #, c-format
 msgid "Packet filtering firewall"
-msgstr ""
+msgstr "Paketfiltrerande brandvägg"
 
 #: services.pm:116
 #, c-format
@@ -6737,7 +6747,7 @@ msgstr "Starta ljudsystemet på datorn"
 #: services.pm:118
 #, c-format
 msgid "layer for speech analysis"
-msgstr ""
+msgstr "lager för talanalys"
 
 #: services.pm:119
 #, c-format
@@ -6761,7 +6771,7 @@ msgstr ""
 #: services.pm:122
 #, c-format
 msgid "Moves the generated persistent udev rules to /etc/udev/rules.d"
-msgstr ""
+msgstr "Flyttar de genererade statiska udev reglerna till /etc/udev/rules.d"
 
 #: services.pm:123
 #, c-format
@@ -6771,7 +6781,7 @@ msgstr "Ladda drivrutinerna för USB-enheter."
 #: services.pm:124
 #, c-format
 msgid "A lightweight network traffic monitor"
-msgstr ""
+msgstr "En lätt trafikövervakare för nätverk"
 
 #: services.pm:125
 #, c-format
