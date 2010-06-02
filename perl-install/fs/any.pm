@@ -97,21 +97,8 @@ sub prepare_minimal_root {
     eval { fs::mount::mount('none', "$::prefix/sys", 'sysfs') };
     eval { fs::mount::usbfs($::prefix) };
 
-    #- needed by lilo and mkinitrd
-    if (-d '/dev/mapper') {
-	my @vgs = map { $_->{VG_name} } @{$all_hds->{lvms}};
-	foreach my $dev ('mapper', @vgs) {
-	    -e "/dev/$dev" or next;
-	    cp_af("/dev/$dev", "$::prefix/dev");
-	    foreach (all("/dev/$dev")) {
-		-l "/dev/$dev/$_" or next;
-		my $target = readlink "$::prefix/dev/$dev/$_";
-		$target =~ /^\// or $target="/dev/$dev/$target";
-		-e "$::prefix$target" and next;
-		cp_af($target, "$::prefix$target");
-	    }
-	}
-    }
+    # copy all needed devices, for bootloader install and mkinitrd
+    cp_af("/dev", "$::prefix");
 }
 
 sub getAvailableSpace {
