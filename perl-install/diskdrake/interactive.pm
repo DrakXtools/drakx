@@ -586,6 +586,11 @@ First remove a primary partition and create an extended partition."));
 
 sub Delete {
     my ($in, $hd, $part, $all_hds) = @_;
+    if (fs::type::isLUKS($part)) {
+	my $p = find { $_->{dm_name} eq $part->{dmcrypt_name} } partition_table::get_normal_parts($hd);
+	RemoveFromDm($in, $hd, $p, $all_hds);
+	$part = $p;
+    }
     if (isRAID($part)) {
 	raid::delete($all_hds->{raids}, $part);
     } elsif (isLVM($hd)) {
@@ -602,11 +607,6 @@ sub Delete {
     } else {
 	if (arch() =~ /ppc/) {
 	    undef $partition_table::mac::bootstrap_part if isAppleBootstrap($part) && ($part->{device} = $partition_table::mac::bootstrap_part);
-	}
-	if (fs::type::isLUKS($part)) {
-	    my $p = find { $_->{dm_name} eq $part->{dmcrypt_name} } partition_table::get_normal_parts($hd);
-	    RemoveFromDm($in, $hd, $p, $all_hds);
-	    $part = $p;
 	}
 	partition_table::remove($hd, $part);
 	warn_if_renumbered($in, $hd);
