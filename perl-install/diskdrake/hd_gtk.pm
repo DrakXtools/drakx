@@ -345,7 +345,7 @@ sub create_buttons4partitions {
 		last;
 	    }
 	});
-	if(isLUKS($entry)) {
+	if(isLUKS($entry) || isRawLUKS($entry)) {
 	    $w->set_image(gtknew("Image", file => "security-strong"));
 	}
 	my @colorized_fs_types = qw(ext3 ext4 xfs swap vfat ntfs ntfs-3g);
