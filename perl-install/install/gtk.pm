@@ -1,4 +1,3 @@
-#!/usr/bin/perl -d
 package install::gtk; # $Id$
 
 use diagnostics;
