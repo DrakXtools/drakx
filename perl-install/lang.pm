@@ -185,7 +185,7 @@ sub l2language       { exists $langs{$_[0]} && $langs{$_[0]}[5] }
 
 sub is_locale_installed {
     my ($locale) = @_;
-    my @ctypes = glob "/usr/share/locale/" . l2locale($locale) . "{,.*}/LC_CTYPE";
+    my @ctypes = glob "/usr/share/locale/" . $locale . "{,.*}/LC_CTYPE";
     foreach my $ctype (@ctypes) { -e $ctype && return 1 }
     0;
 }
@@ -193,7 +193,7 @@ sub is_locale_installed {
 sub list_langs {
     my (%options) = @_;
     my @l = keys %langs;
-    $options{exclude_non_installed} ? grep { is_locale_installed($_) } @l : @l;
+    $options{exclude_non_installed} ? grep { is_locale_installed(l2locale($_)) } @l : @l;
 }
 
 sub text_direction_rtl() {
@@ -536,7 +536,7 @@ sub countries_to_locales {
     my $may_add = sub {
 	my ($locale, $country) = @_;
 	if ($options{exclude_non_installed}) {
-	    -e "/usr/share/locale/$locale/LC_CTYPE" or return;
+	    is_locale_installed($locale) or return;
 	}
 	my $h = analyse_locale_name($locale) or internal_error();
 	push @{$country2locales{$country || $h->{country}}}, $h;
