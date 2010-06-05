@@ -7,6 +7,14 @@ BEGIN { $ENV{DISABLE_DRAKBUG} = 1 }
 
 use strict;
 use diagnostics;
+
+# fix translating reasons for 2nd stage warning
+use lang;
+BEGIN {
+    my $locale = lang::read($>);
+    lang::set($locale);
+}
+
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 use c;
 use common;
@@ -63,6 +71,8 @@ if (!member($curr_kernel, chomp_(cat_($known_kernels)))) {
     harddrake::autoconf::fix_aliases($modules_conf) if !$first_run;
     append_to_file($known_kernels, "$curr_kernel\n");
 }
+use Data::Dumper;
+output('/tmp/env.pl', Dumper(\%ENV));
 
 
 sub get_xorg_driver() {
