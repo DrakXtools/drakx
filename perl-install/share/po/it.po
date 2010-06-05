@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-06-05 23:30+0200\n"
-"PO-Revision-Date: 2010-05-13 19:22+0200\n"
+"PO-Revision-Date: 2010-06-06 00:01+0200\n"
 "Last-Translator: Andrea Celli <andrea.celli@libero.it>\n"
 "Language-Team: Italian <timl@frelists.org>\n"
 "MIME-Version: 1.0\n"
@@ -2881,30 +2881,26 @@ msgstr ""
 "Nessun bootloader può gestirla senza una partizione /boot.\n"
 "Accertarsi di aver aggiunto una partizione /boot."
 
-#: fsedit.pm:438
-#, fuzzy, c-format
+#: fsedit.pm:438, c-format
 msgid ""
 "Metadata version unsupported for a boot partition. Please be sure to add a /"
 "boot partition."
 msgstr ""
-"È stata selezionata una partizione RAID software come root (/).\n"
-"Nessun bootloader può gestirla senza una partizione /boot.\n"
+"Versione dei metadati non utilizzabile per una partizione di boot."
 "Accertarsi di aver aggiunto una partizione /boot."
 
-#: fsedit.pm:446
-#, fuzzy, c-format
+#: fsedit.pm:446, c-format
 msgid ""
 "You've selected a software RAID partition as /boot.\n"
 "No bootloader is able to handle this."
 msgstr ""
-"È stata selezionata una partizione RAID software come root (/).\n"
-"Nessun bootloader può gestirla senza una partizione /boot.\n"
-"Accertarsi di aver aggiunto una partizione /boot."
+"È stata selezionata una partizione RAID software come boot (/).\n"
+"Nessun bootloader può gestirla."
 
 #: fsedit.pm:450
 #, c-format
 msgid "Metadata version unsupported for a boot partition."
-msgstr ""
+msgstr "Versione dei metadati non utilizzabile per una partizione di boot."
 
 #: fsedit.pm:457
 #, c-format
@@ -3272,7 +3268,7 @@ msgstr ""
 "Qui è possibile scegliere un driver alternativo (OSS o ALSA) per la scheda "
 "audio (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
