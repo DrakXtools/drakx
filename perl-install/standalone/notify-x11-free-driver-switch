@@ -13,7 +13,7 @@ my $driver = eval {
 } || N("unknown");
 
 
-my $reason = cat_($ENV{LOCK});
+my $reason = cat_utf8($ENV{LOCK});
 
 $in->ask_warn(N("Warning"),
               join("\n\n",
