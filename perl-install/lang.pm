@@ -182,10 +182,18 @@ sub l2location {
 }
 sub l2charset        { exists $langs{$_[0]} && $langs{$_[0]}[4] }
 sub l2language       { exists $langs{$_[0]} && $langs{$_[0]}[5] }
+
+sub is_locale_installed {
+    my ($locale) = @_;
+    my @ctypes = glob "/usr/share/locale/" . l2locale($locale) . "{,.*}/LC_CTYPE";
+    foreach my $ctype (@ctypes) { -e $ctype && return 1 }
+    0;
+}
+
 sub list_langs {
     my (%options) = @_;
     my @l = keys %langs;
-    $options{exclude_non_installed} ? grep { -e "/usr/share/locale/" . l2locale($_) . "/LC_CTYPE" } @l : @l;
+    $options{exclude_non_installed} ? grep { is_locale_installed($_) } @l : @l;
 }
 
 sub text_direction_rtl() {
