@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
-"POT-Creation-Date: 2010-05-13 16:52+0200\n"
+"POT-Creation-Date: 2010-06-05 23:30+0200\n"
 "PO-Revision-Date: 2010-05-25 04:14+0200\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -776,7 +776,8 @@ msgstr "Krajevna datoteka:"
 
 #: authentication.pm:63
 #, c-format
-msgid "Use local for all authentication and information user tell in local file"
+msgid ""
+"Use local for all authentication and information user tell in local file"
 msgstr "Uporabi krajevno datoteko za vse overjanje in podatke o uporabnikih"
 
 #: authentication.pm:64
@@ -1996,7 +1997,8 @@ msgstr "Formatiranje razdelka %s"
 #: diskdrake/interactive.pm:1275
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
-msgstr "Po formatiranju razdelka %s bodo vsi podatki na tem razdelku izgubljeni."
+msgstr ""
+"Po formatiranju razdelka %s bodo vsi podatki na tem razdelku izgubljeni."
 
 #: diskdrake/interactive.pm:1298
 #, c-format
@@ -2301,8 +2303,10 @@ msgstr "Drugo"
 
 #: diskdrake/smbnfs_gtk.pm:178
 #, c-format
-msgid "Please enter your username, password and domain name to access this host."
-msgstr "Vnesite svoje uporabniško ime, geslo in domeno za dostop do gostitelja."
+msgid ""
+"Please enter your username, password and domain name to access this host."
+msgstr ""
+"Vnesite svoje uporabniško ime, geslo in domeno za dostop do gostitelja."
 
 #: diskdrake/smbnfs_gtk.pm:180
 #, c-format
@@ -2472,7 +2476,8 @@ msgstr ""
 #: fs/mount_options.pm:127
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
-msgstr "Ne tolmači posebnih znakovnih ali blokovnih naprav v datotečnem sistemu."
+msgstr ""
+"Ne tolmači posebnih znakovnih ali blokovnih naprav v datotečnem sistemu."
 
 #: fs/mount_options.pm:129
 #, c-format
@@ -2857,7 +2862,32 @@ msgstr ""
 "Nobeden zagonski nalagalnik ne bo deloval brez /boot razdelka.\n"
 "Ne pozabite dodati /boot razdelka"
 
-#: fsedit.pm:437
+#: fsedit.pm:438
+#, fuzzy, c-format
+msgid ""
+"Metadata version unsupported for a boot partition. Please be sure to add a /"
+"boot partition."
+msgstr ""
+"Za korenski (/) razdelek ste izbrali programski razdelek RAID.\n"
+"Nobeden zagonski nalagalnik ne bo deloval brez /boot razdelka.\n"
+"Ne pozabite dodati /boot razdelka"
+
+#: fsedit.pm:446
+#, fuzzy, c-format
+msgid ""
+"You've selected a software RAID partition as /boot.\n"
+"No bootloader is able to handle this."
+msgstr ""
+"Za korenski (/) razdelek ste izbrali programski razdelek RAID.\n"
+"Nobeden zagonski nalagalnik ne bo deloval brez /boot razdelka.\n"
+"Ne pozabite dodati /boot razdelka"
+
+#: fsedit.pm:450
+#, c-format
+msgid "Metadata version unsupported for a boot partition."
+msgstr ""
+
+#: fsedit.pm:457
 #, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
@@ -3224,7 +3254,7 @@ msgstr ""
 "Izbirate lahko med naštetimi nadomestnimi gonilniki (OSS ali ALSA) za vašo "
 "zvočno kartico (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA",
+#. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412
@@ -5409,7 +5439,8 @@ msgstr "Dovoli neposredno prijavo uporabniku root."
 
 #: security/help.pm:33
 #, c-format
-msgid "Allow the list of users on the system on display managers (kdm and gdm)."
+msgid ""
+"Allow the list of users on the system on display managers (kdm and gdm)."
 msgstr "Dovoli prikaz seznama uporabnikov v upravitelju prikaza (kdm in gdm)."
 
 #: security/help.pm:35
@@ -5598,7 +5629,8 @@ msgstr "Za izklop nastavite zakasnitev na »max« dni."
 #: security/help.pm:104
 #, c-format
 msgid "Set the password history length to prevent password reuse."
-msgstr "Nastavi velikost zgodovine gesel, da se prepreči ponovna uporaba gesla."
+msgstr ""
+"Nastavi velikost zgodovine gesel, da se prepreči ponovna uporaba gesla."
 
 #: security/help.pm:106
 #, c-format
@@ -5698,7 +5730,8 @@ msgstr "Če je nastavljeno na »da«, poženi preverjanje chkrootkit."
 
 #: security/help.pm:127
 #, c-format
-msgid "if set, send the mail report to this email address else send it to root."
+msgid ""
+"if set, send the mail report to this email address else send it to root."
 msgstr ""
 "Če je nastavljeno, pošlji e-poštno poročilo na ta e-poštni naslov, v "
 "nasprotnem primeru pošlji uporabniku »root«."
@@ -5958,7 +5991,8 @@ msgstr "Preveri kontrolno vsoto datotek suid/sgid."
 #: security/l10n.pm:53
 #, c-format
 msgid "Check additions/removals of suid root files"
-msgstr "Preveri, ali so bile dodane / odstranjene datoteke suid uporabnika root."
+msgstr ""
+"Preveri, ali so bile dodane / odstranjene datoteke suid uporabnika root."
 
 #: security/l10n.pm:54
 #, c-format
@@ -6142,7 +6176,8 @@ msgstr ""
 
 #: services.pm:31
 #, c-format
-msgid "Common UNIX Printing System (CUPS) is an advanced printer spooling system"
+msgid ""
+"Common UNIX Printing System (CUPS) is an advanced printer spooling system"
 msgstr "Common UNIX Printing System (CUPS) je napreden tiskalniški sistem"
 
 #: services.pm:32
@@ -6195,7 +6230,8 @@ msgstr ""
 #: services.pm:43
 #, c-format
 msgid "HAL is a daemon that collects and maintains information about hardware"
-msgstr "HAL je pritajeni program, ki zbira in vzdržuje podatke o strojni opremi"
+msgstr ""
+"HAL je pritajeni program, ki zbira in vzdržuje podatke o strojni opremi"
 
 #: services.pm:44
 #, c-format
@@ -6250,7 +6286,8 @@ msgstr ""
 
 #: services.pm:55
 #, c-format
-msgid "Evenly distributes IRQ load across multiple CPUs for enhanced performance"
+msgid ""
+"Evenly distributes IRQ load across multiple CPUs for enhanced performance"
 msgstr ""
 "Enakomerno porazdeli zahtevke IRQ med več procesorjev, kar izboljša "
 "performance"
@@ -6401,14 +6438,16 @@ msgstr ""
 #: services.pm:86
 #, c-format
 msgid "Synchronizes system time using the Network Time Protocol (NTP)"
-msgstr "Usklajuje sistemski čas z uporabo protokola NTP (Network Time Protocol)"
+msgstr ""
+"Usklajuje sistemski čas z uporabo protokola NTP (Network Time Protocol)"
 
 #: services.pm:87
 #, c-format
 msgid ""
 "Automatically switch on numlock key locker under console\n"
 "and Xorg at boot."
-msgstr "Ob zagonu samodejno vklopi številčni del tipkovnice za konzolo in Xorg."
+msgstr ""
+"Ob zagonu samodejno vklopi številčni del tipkovnice za konzolo in Xorg."
 
 #: services.pm:89
 #, c-format

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2010-05-13 16:52+0200\n"
+"POT-Creation-Date: 2010-06-05 23:30+0200\n"
 "PO-Revision-Date: 2004-09-15 13:33+0200\n"
 "Last-Translator: Toma Jankovic <tomaja@net.yu>\n"
 "Language-Team: Serbian <i18n@mandrake.co.yu>\n"
@@ -2794,7 +2794,32 @@ msgstr ""
 "Ниједан стартер не може да ради са тим без /boot партиције.\n"
 "Зато треба да додате /boot партицију"
 
-#: fsedit.pm:437
+#: fsedit.pm:438
+#, fuzzy, c-format
+msgid ""
+"Metadata version unsupported for a boot partition. Please be sure to add a /"
+"boot partition."
+msgstr ""
+"Изабрали сте софтверску RAID партицију као root (/).\n"
+"Ниједан стартер не може да ради са тим без /boot партиције.\n"
+"Зато треба да додате /boot партицију"
+
+#: fsedit.pm:446
+#, fuzzy, c-format
+msgid ""
+"You've selected a software RAID partition as /boot.\n"
+"No bootloader is able to handle this."
+msgstr ""
+"Изабрали сте софтверску RAID партицију као root (/).\n"
+"Ниједан стартер не може да ради са тим без /boot партиције.\n"
+"Зато треба да додате /boot партицију"
+
+#: fsedit.pm:450
+#, c-format
+msgid "Metadata version unsupported for a boot partition."
+msgstr ""
+
+#: fsedit.pm:457
 #, fuzzy, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"

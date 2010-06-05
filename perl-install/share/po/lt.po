@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2010-05-13 16:52+0200\n"
+"POT-Creation-Date: 2010-06-05 23:30+0200\n"
 "PO-Revision-Date: 2000-12-23 13:50+0200\n"
 "Last-Translator: Mykolas Norvai­as <Myka@centras.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -2747,7 +2747,32 @@ msgstr ""
 "Jokia įkrovos tvarkyklė negali su ja dirbti be /boot skirsnio.\n"
 "Taigi, nepamiršk sukurti /boot skirsnio"
 
-#: fsedit.pm:437
+#: fsedit.pm:438
+#, fuzzy, c-format
+msgid ""
+"Metadata version unsupported for a boot partition. Please be sure to add a /"
+"boot partition."
+msgstr ""
+"Tu pasirinkai programinį RAID skirsnį kaip šakninį (/).\n"
+"Jokia įkrovos tvarkyklė negali su ja dirbti be /boot skirsnio.\n"
+"Taigi, nepamiršk sukurti /boot skirsnio"
+
+#: fsedit.pm:446
+#, fuzzy, c-format
+msgid ""
+"You've selected a software RAID partition as /boot.\n"
+"No bootloader is able to handle this."
+msgstr ""
+"Tu pasirinkai programinį RAID skirsnį kaip šakninį (/).\n"
+"Jokia įkrovos tvarkyklė negali su ja dirbti be /boot skirsnio.\n"
+"Taigi, nepamiršk sukurti /boot skirsnio"
+
+#: fsedit.pm:450
+#, c-format
+msgid "Metadata version unsupported for a boot partition."
+msgstr ""
+
+#: fsedit.pm:457
 #, fuzzy, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"

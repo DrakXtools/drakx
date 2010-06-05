@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-hi\n"
-"POT-Creation-Date: 2010-05-13 16:52+0200\n"
+"POT-Creation-Date: 2010-06-05 23:30+0200\n"
 "PO-Revision-Date: 2004-04-04 21:54+0530\n"
 "Last-Translator: धनञ्जय शर्मा (Dhananjaya Sharma) <dysxhi@yahoo.co.in>\n"
 "Language-Team: हिन्दी (Hindi) <dysxhi@yahoo.co.in>\n"
@@ -2810,7 +2810,32 @@ msgstr ""
 "बिना एक /boot विभाजन के कोई बूटलोडर इसकी देखभाल करने समर्थ नहीं है।\n"
 "कृपया एक /boot विभाजन को जोड़ने को सुनिश्चित करें"
 
-#: fsedit.pm:437
+#: fsedit.pm:438
+#, fuzzy, c-format
+msgid ""
+"Metadata version unsupported for a boot partition. Please be sure to add a /"
+"boot partition."
+msgstr ""
+"आपने एक सॉफ़्टवेयर RAID विभाजन को रूट की भांति (/) चयन किया है ।\n"
+"बिना एक /boot विभाजन के कोई बूटलोडर इसकी देखभाल करने समर्थ नहीं है।\n"
+"कृपया एक /boot विभाजन को जोड़ने को सुनिश्चित करें"
+
+#: fsedit.pm:446
+#, fuzzy, c-format
+msgid ""
+"You've selected a software RAID partition as /boot.\n"
+"No bootloader is able to handle this."
+msgstr ""
+"आपने एक सॉफ़्टवेयर RAID विभाजन को रूट की भांति (/) चयन किया है ।\n"
+"बिना एक /boot विभाजन के कोई बूटलोडर इसकी देखभाल करने समर्थ नहीं है।\n"
+"कृपया एक /boot विभाजन को जोड़ने को सुनिश्चित करें"
+
+#: fsedit.pm:450
+#, c-format
+msgid "Metadata version unsupported for a boot partition."
+msgstr ""
+
+#: fsedit.pm:457
 #, fuzzy, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"

@@ -44,7 +44,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: https://qa.mandriva.com\n"
-"POT-Creation-Date: 2010-05-13 16:52+0200\n"
+"POT-Creation-Date: 2010-06-05 23:30+0200\n"
 "PO-Revision-Date: 2010-05-30 13:53+0100\n"
 "Last-Translator: Cătălin Florin RUSSEN <cfrussen@yahoo.co.uk>\n"
 "Language-Team: Romanian <cooker-i18n@mandrivalinux.org>\n"
@@ -2913,7 +2913,32 @@ msgstr ""
 "Nici un încărcător de sistem nu suportă această configurație fără\n"
 "o partiție /boot separată. Adăugați, deci, o partiție /boot"
 
-#: fsedit.pm:437
+#: fsedit.pm:438
+#, fuzzy, c-format
+msgid ""
+"Metadata version unsupported for a boot partition. Please be sure to add a /"
+"boot partition."
+msgstr ""
+"Ați selectat o partiție RAID software pentru root (/).\n"
+"Nici un încărcător de sistem nu suportă această configurație fără\n"
+"o partiție /boot separată. Adăugați, deci, o partiție /boot"
+
+#: fsedit.pm:446
+#, fuzzy, c-format
+msgid ""
+"You've selected a software RAID partition as /boot.\n"
+"No bootloader is able to handle this."
+msgstr ""
+"Ați selectat o partiție RAID software pentru root (/).\n"
+"Nici un încărcător de sistem nu suportă această configurație fără\n"
+"o partiție /boot separată. Adăugați, deci, o partiție /boot"
+
+#: fsedit.pm:450
+#, c-format
+msgid "Metadata version unsupported for a boot partition."
+msgstr ""
+
+#: fsedit.pm:457
 #, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
@@ -3280,7 +3305,7 @@ msgstr ""
 "Aici puteți selecta un pilot alternativ (OSS sau ALSA) pentru placa voastră "
 "de sunet (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA",
+#. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:412

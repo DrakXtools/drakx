@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-mk\n"
-"POT-Creation-Date: 2010-05-13 16:52+0200\n"
+"POT-Creation-Date: 2010-06-05 23:30+0200\n"
 "PO-Revision-Date: 2004-11-03 18:47+0100\n"
 "Last-Translator: Зоран Димовски <decata@mt.net.mk>\n"
 "Language-Team: Macedonian <mkde-l10n@lists.sourceforge.net>\n"
@@ -2826,7 +2826,32 @@ msgstr ""
 "Ниту еден подигач не може да се справи со ова без /boot партиција.\n"
 "Ве молиме бидете сигурни да додадете /boot партиција"
 
-#: fsedit.pm:437
+#: fsedit.pm:438
+#, fuzzy, c-format
+msgid ""
+"Metadata version unsupported for a boot partition. Please be sure to add a /"
+"boot partition."
+msgstr ""
+"Избравте софтверска RAID партиција како root-партиција (/).\n"
+"Ниту еден подигач не може да се справи со ова без /boot партиција.\n"
+"Ве молиме бидете сигурни да додадете /boot партиција"
+
+#: fsedit.pm:446
+#, fuzzy, c-format
+msgid ""
+"You've selected a software RAID partition as /boot.\n"
+"No bootloader is able to handle this."
+msgstr ""
+"Избравте софтверска RAID партиција како root-партиција (/).\n"
+"Ниту еден подигач не може да се справи со ова без /boot партиција.\n"
+"Ве молиме бидете сигурни да додадете /boot партиција"
+
+#: fsedit.pm:450
+#, c-format
+msgid "Metadata version unsupported for a boot partition."
+msgstr ""
+
+#: fsedit.pm:457
 #, fuzzy, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: zh_CN\n"
-"POT-Creation-Date: 2010-05-13 16:52+0200\n"
+"POT-Creation-Date: 2010-06-05 23:30+0200\n"
 "PO-Revision-Date: 2009-04-09 11:48+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
@@ -2787,7 +2787,32 @@ msgstr ""
 "如果没有一个 /boot 分区, 各种启动引导程序都无法处理这种情况。\n"
 "所以, 请增加一个 /boot 分区。"
 
-#: fsedit.pm:437
+#: fsedit.pm:438
+#, fuzzy, c-format
+msgid ""
+"Metadata version unsupported for a boot partition. Please be sure to add a /"
+"boot partition."
+msgstr ""
+"您选择了把软件 RAID 分区作为根(/)。\n"
+"如果没有一个 /boot 分区, 各种启动引导程序都无法处理这种情况。\n"
+"所以, 请增加一个 /boot 分区。"
+
+#: fsedit.pm:446
+#, fuzzy, c-format
+msgid ""
+"You've selected a software RAID partition as /boot.\n"
+"No bootloader is able to handle this."
+msgstr ""
+"您选择了把软件 RAID 分区作为根(/)。\n"
+"如果没有一个 /boot 分区, 各种启动引导程序都无法处理这种情况。\n"
+"所以, 请增加一个 /boot 分区。"
+
+#: fsedit.pm:450
+#, c-format
+msgid "Metadata version unsupported for a boot partition."
+msgstr ""
+
+#: fsedit.pm:457
 #, fuzzy, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"

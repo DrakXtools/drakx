@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libDrakX\n"
-"POT-Creation-Date: 2010-05-13 16:52+0200\n"
+"POT-Creation-Date: 2010-06-05 23:30+0200\n"
 "PO-Revision-Date: 2010-02-18 08:32+0100\n"
 "Last-Translator: Marek Walczak <kubdat@poczta.fm>\n"
 "Language-Team:  <pl@li.org>\n"
@@ -2887,7 +2887,32 @@ msgstr ""
 "Żaden program rozruchowy nie jest w stanie obsłużyć jej bez partycji /boot.\n"
 "Pamiętaj więc o dodaniu partycji /boot"
 
-#: fsedit.pm:437
+#: fsedit.pm:438
+#, fuzzy, c-format
+msgid ""
+"Metadata version unsupported for a boot partition. Please be sure to add a /"
+"boot partition."
+msgstr ""
+"Jako partycję root (/) wybrano programową partycję RAID.\n"
+"Żaden program rozruchowy nie jest w stanie obsłużyć jej bez partycji /boot.\n"
+"Pamiętaj więc o dodaniu partycji /boot"
+
+#: fsedit.pm:446
+#, fuzzy, c-format
+msgid ""
+"You've selected a software RAID partition as /boot.\n"
+"No bootloader is able to handle this."
+msgstr ""
+"Jako partycję root (/) wybrano programową partycję RAID.\n"
+"Żaden program rozruchowy nie jest w stanie obsłużyć jej bez partycji /boot.\n"
+"Pamiętaj więc o dodaniu partycji /boot"
+
+#: fsedit.pm:450
+#, c-format
+msgid "Metadata version unsupported for a boot partition."
+msgstr ""
+
+#: fsedit.pm:457
 #, fuzzy, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
