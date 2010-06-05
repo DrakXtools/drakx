@@ -1190,7 +1190,7 @@ sub write {
 	    my $kderc = $::prefix ? common::expand_symlinks_with_absolute_symlinks_in_prefix($::prefix, '/etc/kderc') : '/etc/kderc';
 	    log::l("reading $kderc");
 	    my %dir_defaults = read_gnomekderc($kderc, 'Directories-default');
-	    first(split(',', $dir_defaults{prefixes})) || "/etc/kde"
+	    first(split(',', $dir_defaults{prefixes})) || "/etc/kde";
 	}) . '/share/config';
 
 	-d $confdir or die 'not configuring kde config files since it is not installed/used';
