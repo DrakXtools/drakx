@@ -71,9 +71,6 @@ if (!member($curr_kernel, chomp_(cat_($known_kernels)))) {
     harddrake::autoconf::fix_aliases($modules_conf) if !$first_run;
     append_to_file($known_kernels, "$curr_kernel\n");
 }
-use Data::Dumper;
-output('/tmp/env.pl', Dumper(\%ENV));
-
 
 sub get_xorg_driver() {
     my $x = Xconfig::xfree->read;
