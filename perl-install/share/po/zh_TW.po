@@ -786,6 +786,8 @@ msgid ""
 "Tells your computer to use LDAP for some or all authentication. LDAP "
 "consolidates certain types of information within your organization."
 msgstr ""
+"告訴您的電腦使用 LDAP 處理一部份或所有的認證。LDAP 將特定型態的資訊結合到您的"
+"組織中。"
 
 #: authentication.pm:65
 #, c-format
@@ -809,7 +811,7 @@ msgstr "Windows 網域："
 msgid ""
 "Winbind allows the system to retrieve information and authenticate users in "
 "a Windows domain."
-msgstr ""
+msgstr "Winbind 讓系統認證 Windows 網域的使用者，並取得資訊。"
 
 #: authentication.pm:67
 #, c-format
@@ -849,17 +851,17 @@ msgstr "LDAP 伺服器"
 #: authentication.pm:113 authentication.pm:168
 #, c-format
 msgid "Base dn"
-msgstr ""
+msgstr "基礎 DN"
 
 #: authentication.pm:114
 #, c-format
 msgid "Fetch base Dn "
-msgstr ""
+msgstr "取得基礎 DN"
 
 #: authentication.pm:116 authentication.pm:171
 #, c-format
 msgid "Use encrypt connection with TLS "
-msgstr ""
+msgstr "使用 TLS 加密連線"
 
 #: authentication.pm:117 authentication.pm:172
 #, c-format
@@ -885,7 +887,7 @@ msgstr "  "
 #: authentication.pm:122 authentication.pm:174
 #, c-format
 msgid "Bind DN "
-msgstr ""
+msgstr "結合 DN"
 
 #: authentication.pm:123 authentication.pm:175
 #, c-format
@@ -895,7 +897,7 @@ msgstr "Bind 密碼"
 #: authentication.pm:125
 #, c-format
 msgid "Advanced path for group "
-msgstr ""
+msgstr "群組的進階路徑"
 
 #: authentication.pm:127
 #, c-format
@@ -910,7 +912,7 @@ msgstr "群組基礎"
 #: authentication.pm:129
 #, c-format
 msgid "Shadow base"
-msgstr ""
+msgstr "Shadow 基礎"
 
 #: authentication.pm:144
 #, c-format
@@ -959,7 +961,7 @@ msgstr "你已經選擇使用 Kerberos 5 進行認證，現在您必須選定使
 #: authentication.pm:169
 #, c-format
 msgid "Fecth base Dn "
-msgstr ""
+msgstr "抓取基礎 DN"
 
 #: authentication.pm:190
 #, c-format
@@ -1713,9 +1715,9 @@ msgid "Beware, this will be written to disk as soon as you validate!"
 msgstr "注意，在您確定變更之後將會被寫入磁碟！"
 
 #: diskdrake/interactive.pm:685
-#, fuzzy, c-format
+#, c-format
 msgid "Beware, this will be written to disk only after formatting!"
-msgstr "注意，在您確定變更之後將會被寫入磁碟！"
+msgstr "注意，這只會在格式化之後才寫入磁碟!"
 
 #: diskdrake/interactive.pm:687
 #, c-format
@@ -2391,7 +2393,7 @@ msgstr ""
 #: fs/mount_options.pm:114
 #, c-format
 msgid "Flush write cache on file close"
-msgstr ""
+msgstr "檔案關閉時清空寫入快取"
 
 #: fs/mount_options.pm:116
 #, c-format
@@ -2822,15 +2824,15 @@ msgid "Metadata version unsupported for a boot partition."
 msgstr ""
 
 #: fsedit.pm:457
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected an encrypted partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
-"您選擇了將一塊軟體磁碟陣列的分割區作為根目錄 (/) 的掛載點。\n"
-"但開機載入程式無法處理這種 /boot 目錄不位於實體分割區的情況。\n"
-"請確定會新增一個掛載於實體分割區的 /boot 目錄"
+"您選擇了將一塊加密過的分割區作為根目錄 (/) 的掛載點。\n"
+"但如果沒有獨立的 /boot 分割區，那麼開機載入程式將無法處理這種情況。\n"
+"請確定有加入一個獨立的 /boot 分割區"
 
 #: fsedit.pm:443 fsedit.pm:461
 #, c-format
@@ -5157,12 +5159,12 @@ msgstr ""
 #: mygtk2.pm:1541 mygtk2.pm:1542
 #, c-format
 msgid "Password is trivial to guess"
-msgstr ""
+msgstr "密碼太容易被猜到了"
 
 #: mygtk2.pm:1543
 #, c-format
 msgid "Password should resist to basic attacks"
-msgstr ""
+msgstr "密碼應該要能防止基本的攻擊"
 
 #: mygtk2.pm:1544 mygtk2.pm:1545
 #, c-format
@@ -6136,7 +6138,7 @@ msgstr "系統開機時能夠自動偵測週邊裝置的狀態並且設定。"
 #: services.pm:62
 #, c-format
 msgid "Tweaks system behavior to extend battery life"
-msgstr ""
+msgstr "調整系統行為來延長電池壽命"
 
 #: services.pm:63
 #, c-format
@@ -6169,7 +6171,7 @@ msgstr ""
 #: services.pm:70
 #, c-format
 msgid "Software RAID monitoring and management"
-msgstr ""
+msgstr "軟體 RAID 監控與管理"
 
 #: services.pm:71
 #, c-format
@@ -6181,7 +6183,7 @@ msgstr "DBUS 是負責傳遞系統事件與其他訊息的常駐服務程式。"
 #: services.pm:72
 #, c-format
 msgid "Enables MSEC security policy on system startup"
-msgstr ""
+msgstr "系統啟動時啟用 MSEC 安全性原則"
 
 #: services.pm:73
 #, c-format
@@ -6264,7 +6266,7 @@ msgstr "支援 OKI 4w 以及 WindowsPrinter 印表機。"
 #: services.pm:90
 #, c-format
 msgid "Checks if a partition is close to full up"
-msgstr ""
+msgstr "檢查磁區空間是否即將用完"
 
 #: services.pm:91
 #, c-format
@@ -6292,7 +6294,7 @@ msgstr ""
 #: services.pm:97
 #, c-format
 msgid "Reserves some TCP ports"
-msgstr ""
+msgstr "保留一些 TCP Port"
 
 #: services.pm:98
 #, c-format
@@ -6318,9 +6320,9 @@ msgstr ""
 "給 oracle 或 DVD 播放器這類程式使用。"
 
 #: services.pm:103
-#, fuzzy, c-format
+#, c-format
 msgid "Nameserver information manager"
-msgstr "硬碟資訊"
+msgstr "名稱伺服器資訊管理程式"
 
 #: services.pm:104
 #, c-format
@@ -6342,13 +6344,13 @@ msgstr ""
 "主機的運作效能資訊。"
 
 #: services.pm:109
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Syslog is the facility by which many daemons use to log messages to various "
 "system log files.  It is a good idea to always run rsyslog."
 msgstr ""
-"syslog 服務程式能夠讓系統許多服務程式用紀錄檔案來回應系統\n"
-"所發生一些事情。建議您一定要啟動 syslog 服務程式"
+"syslog 是許多服務程式用來將系統訊息記錄到系統紀錄檔的輔助程式。建議您一定要啟"
+"動 syslog 服務程式。"
 
 #: services.pm:110
 #, c-format
@@ -6402,6 +6404,7 @@ msgid ""
 "Secure Shell is a network protocol that allows data to be exchanged over a "
 "secure channel between two computers"
 msgstr ""
+"Secure Shell 是一個網路協定，用來讓兩台電腦間可以透過一個安全的通道交換資料"
 
 #: services.pm:120
 #, c-format
@@ -6425,7 +6428,7 @@ msgstr "載入 usb 裝置所需要的驅動程式"
 #: services.pm:124
 #, c-format
 msgid "A lightweight network traffic monitor"
-msgstr ""
+msgstr "一個輕量級的網路流量監控程式"
 
 #: services.pm:125
 #, c-format
@@ -6704,6 +6707,9 @@ msgid ""
 "Usage: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
 "testing] [-v|--version] "
 msgstr ""
+"\n"
+"用法：%s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
+"testing] [-v|--version] "
 
 #: timezone.pm:161 timezone.pm:162
 #, c-format
