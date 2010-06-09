@@ -873,12 +873,12 @@ sub ask_user_and_root {
         { title => N("User management"),
           interactive_help_id => 'addUser',
 	  if_($::isInstall && $superuser, cancel => ''),
-          focus_first => 1,
         }, [ 
 	      $superuser ? (
 	  { text => N("Enable guest account"), val => \$xguest, type => 'bool', advanced => 1 },
 	  { label => N("Set administrator (root) password"), title => 1 },
 	  { label => N("Password"), val => \$superuser->{password},  hidden => 1, alignment => 'right', weakness_check => 1,
+	    focus => sub { 1 },
 	    validate => sub { authentication::check_given_password($in, $superuser, 2 * $security) } },
 	  { label => N("Password (again)"), val => \$superuser->{password2}, hidden => 1, alignment => 'right' },
               ) : (),
@@ -890,7 +890,9 @@ sub ask_user_and_root {
 	  { label => N("Real name"), val => \$u->{realname}, alignment => 'right', focus_out => sub {
 		$u->{name} ||= lc(Locale::gettext::iconv($u->{realname}, "utf-8", "ascii//TRANSLIT"));
                 $u->{name} =~ s/[^a-zA-Z0-9_-]//g; # drop any charcter that would break login program
-	    } },
+	    },
+	    focus => sub { !$superuser },
+          },
 
           { label => N("Login name"), val => \$u->{name}, list => \@suggested_names, alignment => 'right',
             not_edit => 0, validate => $validate_name },
