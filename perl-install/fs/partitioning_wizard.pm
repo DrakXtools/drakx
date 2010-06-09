@@ -290,7 +290,6 @@ sub create_display_box {
     my $totalsectors = $kind->{val}{totalsectors};
 
     my $width = 540;
-    $width -= 24 if $resize || $fill_empty;
     my $minwidth = 40;
 
     my $display_box = ugtk2::gtkset_size_request(Gtk2::HBox->new(0,0), -1, 26);
@@ -457,14 +456,13 @@ sub display_choices {
             $item = Gtk2::EventBox->new;
             my $b2 = gtknew("Image", file => "small-logo");
             $item->add($b2);
-            $item->set_size_request(-1,26);
+            $item->set_size_request(540,26);
             $item->set_name("PART_new");
         } elsif ($s eq 'diskdrake') {
         } else {
             log::l($s);
             next;
         }
-        $vbox->set_size_request(1024, -1);
         ugtk2::gtkpack($vbox, 
                        gtknew('Label',
                               text => $solutions{$s}[1],
@@ -526,7 +524,14 @@ sub main {
         ugtk2::gtkpack2__($mainbox, $hdchoice);
 
         my $contentbox = Gtk2::VBox->new(0, 12);
-        $mainbox->add($contentbox);
+
+        my $scroll = Gtk2::ScrolledWindow->new;
+        $scroll->set_policy('never', 'automatic'),
+        my $vp = Gtk2::Viewport->new;
+        $vp->set_shadow_type('none');
+        $vp->add($contentbox);
+        $scroll->add($vp);
+        $mainbox->add($scroll);
 
         my $kind = @kinds[$combobox->get_active];
         my %solutions = partitionWizardSolutions($o, $all_hds, $fstab, $manual_fstab, $partitions, $partitioning_flags, $skip_mtab, diskdrake::hd_gtk::kind2hd($kind));
