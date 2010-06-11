@@ -669,9 +669,7 @@ sub get_media_cfg {
 
     urpm::media::add_distrib_media($packages, undef, $uri, ask_media => undef); #allmedia => 1
 
-    if (defined $selected_names) {
-        select_only_some_media($packages, $selected_names);
-    }
+    select_only_some_media($packages, $selected_names) if defined $selected_names;
 
     if ($deselectionAllowed && !@{$packages->{media}}) {
 	my $allow = _allow_copy_rpms_on_disk($phys_medium, $packages->{media});
