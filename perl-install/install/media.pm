@@ -475,9 +475,9 @@ sub _parse_media_cfg {
 }
 
 sub select_only_some_media {
-    my ($packages, $selected_names) = @_;
+    my ($media_list, $selected_names) = @_;
     my @names = split(',', $selected_names);
-    foreach my $m (@{$packages->{media}}) {
+    foreach my $m (@{$media_list}) {
         my $bool = !member($m->{name}, @names);
         # workaround urpmi transforming "ignore => ''" or "ignore => 0" into "ignore => 1":
         undef $bool if !$bool;
@@ -669,7 +669,7 @@ sub get_media_cfg {
 
     urpm::media::add_distrib_media($packages, undef, $uri, ask_media => undef); #allmedia => 1
 
-    select_only_some_media($packages, $selected_names) if defined $selected_names;
+    select_only_some_media($packages->{media}, $selected_names) if defined $selected_names;
 
     if ($deselectionAllowed && !@{$packages->{media}}) {
 	my $allow = _allow_copy_rpms_on_disk($phys_medium, $packages->{media});
