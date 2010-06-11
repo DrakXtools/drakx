@@ -669,15 +669,15 @@ sub get_media_cfg {
 
     urpm::media::add_distrib_media($packages, undef, $uri, ask_media => undef); #allmedia => 1
 
+    my @new_media = difference2($packages->{media}, \@media);
+    _associate_phys_media($o->{all_hds}, $phys_medium, \@new_media);
+
     select_only_some_media($packages->{media}, $selected_names) if defined $selected_names;
 
     if ($deselectionAllowed && !@{$packages->{media}}) {
 	my $allow = _allow_copy_rpms_on_disk($phys_medium, $packages->{media});
 	$o->ask_deselect_media__copy_on_disk($packages->{media}, $allow && \$o->{copy_rpms_on_disk}) if $allow || @{$packages->{media}} > 1;
     }
-
-    my @new_media = difference2($packages->{media}, \@media);
-    _associate_phys_media($o->{all_hds}, $phys_medium, \@new_media);
 
     log::l("get_media_cfg read " . int(@{$packages->{depslist}}) . " headers");
 
