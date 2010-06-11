@@ -672,7 +672,7 @@ sub get_media_cfg {
     my @new_media = difference2($packages->{media}, \@media);
     _associate_phys_media($o->{all_hds}, $phys_medium, \@new_media);
 
-    select_only_some_media($packages->{media}, $selected_names) if defined $selected_names;
+    select_only_some_media(\@new_media, $selected_names) if defined $selected_names;
 
     if ($deselectionAllowed && !@{$packages->{media}}) {
 	my $allow = _allow_copy_rpms_on_disk($phys_medium, $packages->{media});
