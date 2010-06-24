@@ -1,7 +1,5 @@
 # translation of pt.po to Português
-#
-# Latest versions of po files are at http://www.mandrivalinux.com/l10n/pt.php3
-#
+
 # Copyright (C) 2000 Mandriva
 #
 # Fernando Moreira <fmoreira@netc.pt>, 1999.
@@ -10,22 +8,18 @@
 # Jose Jorge <jjorge@free.fr>, 2003, 2004, 2005.
 # Jose Carlos D. S. Saraiva <jose.d.s.saraiva@clix.pt>, 2004.
 # Zé <mmodem00@netvisao.pt>, 2004, 2005, 2006.
-# Américo José Melo <mmodem00@netvisao.pt>, 2004, 2005, 2006.
-# Ze <mmodem00@netvisao.pt>, 2004.
 # José Melo <mmodem00@gmail.com>, 2005.
-# José Melo <mmodme00@gmail.com>, 2005.
 # Jose JORGE <jjorge@free.fr>, 2005.
 # Zé <mmodem00@gmail.com>, 2006, 2007, 2008, 2010.
-# Zé <ze@mandriva.org>, 2008.
-# Zé <mmodem00@gmal.com>, 2010.
+# Zé <ze@mandriva.org>, 2008, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-06-05 23:30+0200\n"
-"PO-Revision-Date: 2010-06-07 19:33+0100\n"
-"Last-Translator: Zé <mmodem00@gmal.com>\n"
-"Language-Team: Portuguese <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2010-06-24 03:41+0100\n"
+"Last-Translator: Zé <ze@mandriva.org>\n"
+"Language-Team: Portuguese <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2467,7 +2461,7 @@ msgid ""
 "Do not update inode access times on this file system\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
-"Não actualiza os tempos de acesso inode neste sistema de ficheiros\n"
+"Não actualizar os tempos de acesso inode neste sistema de ficheiros\n"
 "(ex. um acesso mais rápido à fila de notícias para acelerar os servidores de "
 "noticias)."
 
@@ -2477,7 +2471,7 @@ msgid ""
 "Update inode access times on this filesystem in a more efficient way\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
-"Actualiza os tempos de acesso inode neste sistema de ficheiros de uma\n"
+"Actualizar os tempos de acesso inode neste sistema de ficheiros de uma\n"
 "maneira mais eficiente (ex. um acesso mais rápido à fila de notícias para\n"
 "acelerar os servidores de noticias)."
 
@@ -2487,8 +2481,8 @@ msgid ""
 "Can only be mounted explicitly (i.e.,\n"
 "the -a option will not cause the file system to be mounted)."
 msgstr ""
-"Pode apenas ser montado explicitamente (ou seja, a opção -a\n"
-"não irá fazer com que o sistema de ficheiros seja montado)."
+"Apenas poder ser montado explicitamente (i.e.,\n"
+"a opção -a não fará com que o sistema de ficheiros seja montado)."
 
 #: fs/mount_options.pm:127
 #, c-format
@@ -2504,7 +2498,7 @@ msgid ""
 "file system. This option might be useful for a server that has file systems\n"
 "containing binaries for architectures other than its own."
 msgstr ""
-"Não permite a execução de binários no sistema de ficheiros montado.\n"
+"Não permitir a execução de binários no sistema de ficheiros montado.\n"
 "Esta opção pode ser útil para um servidor que tem um sistema de ficheiros\n"
 "que contém binários para outras arquitecturas que não a própria."
 
@@ -2515,7 +2509,7 @@ msgid ""
 "bits to take effect. (This seems safe, but is in fact rather unsafe if you\n"
 "have suidperl(1) installed.)"
 msgstr ""
-"Não permite aos bits set-user-identifier ou set-group-identifier\n"
+"Não permitir aos bits set-user-identifier ou set-group-identifier\n"
 "terem efeito. (Isto parece seguro, mas de facto é inseguro se tiver\n"
 "o suidperl(1) instalado.)"
 
@@ -2551,17 +2545,17 @@ msgstr ""
 #: fs/mount_options.pm:147
 #, c-format
 msgid "Support \"user.\" extended attributes"
-msgstr "Suportar atributos extendidos de \"utilizador.\""
+msgstr "Suportar os atributos extendidos de \"user.\""
 
 #: fs/mount_options.pm:149
 #, c-format
 msgid "Give write access to ordinary users"
-msgstr "Dar acesso de escrita a utilizadores normais"
+msgstr "Permitir acesso de escrita a utilizadores normais"
 
 #: fs/mount_options.pm:151
 #, c-format
 msgid "Give read-only access to ordinary users"
-msgstr "Dar acesso de apenas-leitura a utilizadores normais"
+msgstr "Permitir acesso de apenas-leitura a utilizadores normais"
 
 #: fs/mount_point.pm:80
 #, c-format
@@ -2581,12 +2575,12 @@ msgstr "Examinar partições para procurar pontos de montagem"
 #: fs/mount_point.pm:105
 #, c-format
 msgid "Choose the mount points"
-msgstr "Escolha os pontos de montagem"
+msgstr "Escolher os pontos de montagem"
 
 #: fs/partitioning.pm:46
 #, c-format
 msgid "Choose the partitions you want to format"
-msgstr "Escolha as partições que deseja formatar"
+msgstr "Escolher as partições que deseja formatar"
 
 #: fs/partitioning.pm:75
 #, c-format
@@ -2624,7 +2618,7 @@ msgid ""
 msgstr ""
 "Não tem uma partição swap.\n"
 "\n"
-"Continuar mesmo assim?"
+"Deseja continuar?"
 
 #: fs/partitioning_wizard.pm:93
 #, c-format
@@ -2743,7 +2737,8 @@ msgstr "Redimensionamento FAT falhado: %s"
 #: fs/partitioning_wizard.pm:226
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
-msgstr "Não há partições FAT para redimensionar (ou espaço livre suficiente)"
+msgstr ""
+"Não existem partições FAT para redimensionar (ou espaço livre suficiente)"
 
 #: fs/partitioning_wizard.pm:231
 #, c-format
@@ -2753,7 +2748,7 @@ msgstr "Remover Microsoft Windows®"
 #: fs/partitioning_wizard.pm:231
 #, c-format
 msgid "Erase and use entire disk"
-msgstr "Apagar e usar o disco todo"
+msgstr "Apagar e usar o  todo o disco"
 
 #: fs/partitioning_wizard.pm:235
 #, c-format
@@ -2764,7 +2759,8 @@ msgstr "Tem mais que um disco rígido, em que disco deseja instalar o linux?"
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr ""
-"TODAS as partições existentes e seus dados serão perdidos no dispositivo %s"
+"TODAS as partições existentes e os seus dados serão perdidos "
+"na unidade %s"
 
 #: fs/partitioning_wizard.pm:253
 #, c-format
@@ -3165,7 +3161,7 @@ msgstr "Impressora"
 #: harddrake/data.pm:455
 #, c-format
 msgid "Game port controllers"
-msgstr "Controladores de portos de jogos"
+msgstr "Controladores de portos dos jogos"
 
 #: harddrake/data.pm:464
 #, c-format
@@ -3180,7 +3176,7 @@ msgstr "Teclado"
 #: harddrake/data.pm:488
 #, c-format
 msgid "Tablet and touchscreen"
-msgstr "Tabuleiro e ecrã de toque"
+msgstr "Tabuleiro e ecrã táctil"
 
 #: harddrake/data.pm:497
 #, c-format
@@ -3225,7 +3221,7 @@ msgstr "Activar PulseAudio"
 #: harddrake/sound.pm:370
 #, c-format
 msgid "Enable 5.1 sound with Pulse Audio"
-msgstr "Activar som 5.1 com Pulse Audio"
+msgstr "Activar som 5.1 com PulseAudio"
 
 #: harddrake/sound.pm:375
 #, c-format
@@ -3258,8 +3254,8 @@ msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
 "currently uses \"%s\""
 msgstr ""
-"Não há nenhum controlador alternativo OSS/ALSA conhecido para a sua placa de "
-"som (%s) que actualmente usa \"%s\""
+"Não existe nenhum controlador alternativo OSS/ALSA conhecido para a sua "
+"placa de som (%s) que actualmente usa \"%s\""
 
 #: harddrake/sound.pm:405
 #, c-format
@@ -3367,7 +3363,7 @@ msgstr "Nenhum controlador conhecido"
 #: harddrake/sound.pm:455
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
-msgstr "Não há nenhum controlador conhecido para a sua placa de som (%s)"
+msgstr "Não existe nenhum controlador conhecido para a sua placa de som (%s)"
 
 #: harddrake/sound.pm:470
 #, c-format
@@ -3429,7 +3425,7 @@ msgstr "Deixe-me escolher qualquer controlador"
 #: harddrake/sound.pm:503
 #, c-format
 msgid "Choosing an arbitrary driver"
-msgstr "Escolher um controlador arbitrariamente"
+msgstr "Escolher um controlador arbitrário"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: harddrake/sound.pm:506
@@ -3441,8 +3437,8 @@ msgid ""
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
-"Se realmente acha que sabe que controlador é o apropriado para a sua placa\n"
-"pode escolher um da lista seguinte.\n"
+"Se realmente sabe qual é o controlador apropriado para a sua placa,\n"
+"escolha um da seguinte lista.\n"
 "\n"
 "O controlador actual para a sua placa de som \"%s\" é \"%s\" "
 
@@ -3474,10 +3470,11 @@ msgid ""
 "If your card is misdetected, you can force the right tuner and card types "
 "here. Just select your tv card parameters if needed."
 msgstr ""
-"Para a maioria das placas TV modernas, o modulo bttv do kernel GNU/Linux "
-"auto detecta os parâmetros certos.\n"
-"Se a sua placa não é detectada, aqui pode forçar os correctos sintonizadores "
-"e tipos de de placa. Escolha os seus parâmetros de placa de tv se necessário."
+"Para a maioria das placas de TV modernas, o modulo bttv do kernel GNU/Linux "
+"auto-detecta os parâmetros correctos.\n"
+"Se a sua placa não é detectada, pode aqui forçar os sintonizadores correctos "
+"e os "
+"tipos de placa. Escolha os  parâmetros da sua placa de tv se necessário."
 
 #: harddrake/v4l.pm:478
 #, c-format
@@ -3487,7 +3484,7 @@ msgstr "Modelo da placa:"
 #: harddrake/v4l.pm:479
 #, c-format
 msgid "Tuner type:"
-msgstr "Tipo de sintonisador:"
+msgstr "Tipo de sintonizador:"
 
 #: interactive.pm:128 interactive.pm:549 interactive/curses.pm:263
 #: interactive/http.pm:103 interactive/http.pm:156 interactive/stdio.pm:39
@@ -3555,7 +3552,7 @@ msgstr "Nenhum ficheiro encontrado"
 #: interactive/gtk.pm:594
 #, c-format
 msgid "Beware, Caps Lock is enabled"
-msgstr "Atenção, tem as Maiúsculas activadas"
+msgstr "Atenção, as Maiúsculas estão activadas"
 
 #: interactive/stdio.pm:29 interactive/stdio.pm:154
 #, c-format
@@ -3573,7 +3570,7 @@ msgid ""
 "Entries you'll have to fill:\n"
 "%s"
 msgstr ""
-"Entradas que irá ter que preencher:\n"
+"As entradas que terá que preencher:\n"
 "%s"
 
 #: interactive/stdio.pm:70
@@ -3604,7 +3601,7 @@ msgstr " digite `void' para uma entrada vazia"
 #: interactive/stdio.pm:128
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
-msgstr "=> Há muitas coisas a escolher de (%s).\n"
+msgstr "=> Existem muitas coisas a escolher de (%s).\n"
 
 #: interactive/stdio.pm:131
 #, c-format
@@ -4102,7 +4099,7 @@ msgstr "Hong Kong SAR (China)"
 #: lang.pm:304
 #, c-format
 msgid "Heard and McDonald Islands"
-msgstr "Ilha Heard e Ilhas McDonald"
+msgstr "Ilhas Heard e McDonald"
 
 #: lang.pm:305
 #, c-format
@@ -4192,7 +4189,7 @@ msgstr "Quénia"
 #: lang.pm:322
 #, c-format
 msgid "Kyrgyzstan"
-msgstr "Kyrgyzstan"
+msgstr "Quirguistão"
 
 #: lang.pm:323
 #, c-format
@@ -4757,7 +4754,7 @@ msgstr "Uruguai"
 #: lang.pm:435
 #, c-format
 msgid "Uzbekistan"
-msgstr "Uzebequistão"
+msgstr "Uzbequistão"
 
 #: lang.pm:436
 #, c-format
